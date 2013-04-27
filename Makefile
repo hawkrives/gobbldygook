@@ -8,7 +8,7 @@ else
 
 endif
 
-proto-game: proto-game.o
+schedule: proto-game.o
 	g++ $(OPTS) -o proto-game proto-game.o $(LIBS)
 
 proto-game.o: proto-game.cpp
