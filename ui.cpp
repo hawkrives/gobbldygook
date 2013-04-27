@@ -1,64 +1,45 @@
-#include <iostream>
-#include <sstream>
-#include <fstream>
 using namespace std;
-#ifdef MACOSX
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-#include <string.h>
-#include <math.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "network.h"
+#include "ui.h"
 
-int WIDTH = 240;  // width of the user window
-int HEIGHT = 200;  // height of the user window
-char programName[] = "proto-multiplayer";
-double defaultSize = 10;
+int WIDTH = 600;  // width of the user window
+int HEIGHT = 480;  // height of the user window
+char programName[] = "scheduler";
 
-// store position and process-id for incoming communications
-double position_x[1000], position_y[1000];
-int myPID, pid[1000];
+// button info
+vector<Button> buttons;
+vector<TextBox> textboxes;
+vector<Label> labels;
 
-// the following function draws a rectangle, given
-//   the upper left vertex and the width and height
-void drawBox(double x, double y, double width=defaultSize, double height=defaultSize) {
-	glBegin(GL_POLYGON);
-		glVertex2f(x, y);  // upper left
-		glVertex2f(x, y + height);  // lower left
-		glVertex2f(x + width, y + height);  // lower right
-		glVertex2f(x + width, y);  // upper right
-	glEnd();
-}
-
-// the following function chooses a (quasi-random) color, starting from an int
-void chooseColor(int n) {
-	float col[3];
-	int val[] = { 34972, 43982, 69202, 498056, 349082, 43958 };
-	for ( int i=0; i<3; ++i ) {
-		col[i] = ((val[i]*n + val[i+3])%256)/256.;  //  as if random 
-		if ( col[i] < .5 ) col[i] += .5;  // use just brighter colors
-	}
-	glColor3f(col[0], col[1], col[2]);  // dark gray
-}
 
 void drawWindow() {
 	// clear the buffer
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// draw a box with "my" color at the top
-	chooseColor(myPID);
-	drawBox( 0, 0, WIDTH, 5 );
-
-	// draw all the currently existing players
-	for ( int i=0; i<1000; ++i ) {
-		if ( -1 != pid[i] ) {
-			chooseColor(pid[i]);
-			drawBox( position_x[i], position_y[i] );
-		}
+	// Add hover colors after Monday
+	// if ( buttonIsPressed ) glColor3f(1., 0., 0.);  // make it red
+	// else if ( overButton ) glColor3f(.75,.75,.75);  // light gray
+	// else glColor3f(.5, .5, .5);  // gray
+	// drawBox(buttonPos);
+	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)
+	    i->draw();
+  
+	// draw the textbox
+	// glColor3f(.25, .25, .25);  // dark gray
+	// drawBox(textBox1);
+	// if ( overTextBox ) glColor3f(1,1,1);  // white
+	// else glColor3f(.75, .75, .75);  // light gray
+	// drawBox(textBox2);
+	// glColor3f(0, 0, 0);  // black
+	// if (overTextBox) { // draw with a cursor
+	// 	string withCursor(textInBox);
+	// 	withCursor += '|';
+	// 	drawText( textBox2[0]+5, textBox2[1]+textBox2[3]-10, withCursor.c_str() );
+	// } else drawText( textBox2[0]+5, textBox2[1]+textBox2[3]-10, textInBox.c_str() );
+	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
+    	i->draw();
+	}
+	for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i) {
+    	i->draw();
 	}
 
 	// tell the graphics card that we're done-- go ahead and draw!
@@ -68,86 +49,84 @@ void drawWindow() {
 
 // close the window and finish the program
 void exitAll() {
-	int win = glutGetWindow();
-	glutDestroyWindow(win);
-	exit(0);
+  int win = glutGetWindow();
+  glutDestroyWindow(win);
+  exit(0);
 }
 
 // process keyboard events
-void keyboard (unsigned char c, int x, int y) {
-	switch(c) {
-		case 'q':
-		case 'Q':
-		case 27:
-			exitAll();
-			break;
-		default:
-			break;
+void keyboard( unsigned char c, int x, int y ) {
+	for (std::vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
+		if ( i->hover() ) { // intercept keyboard press, to place in text box
+		    if ( 27==c ) exitAll();  // escape terminates the program, even in textbox
+		    if ( 13==c ) {
+		    	cout << "textBox content was: " << i->textInBox << endl;
+		    	i->textInBox = "";
+		    } else if ( '\b'==c || 127==c ) { // handle backspace
+		    	if ( i->textInBox.length() > 0 ) i->textInBox.erase(i->textInBox.end()-1);
+		    } else if ( c >= 32 && c <= 126 ) { // check for printable character
+		    	// check that we don't overflow the box
+		    	if ( i->textInBox.length() < MAX_NUM_CHARS_IN_TEXTBOX ) i->textInBox += c;
+		    }
+		} else {
+		    switch(c) {
+				case 'q':
+				case 'Q':
+				case 27:
+			        exitAll();
+			        break;
+			default:
+				break;
+		    }
+		}
+		glutPostRedisplay();
 	}
-}
-
-// process "special" keyboard events (those having to do with arrow keys)
-void specialKeyboard (int key,int x, int y) {
-	// update my current position
-	static int shape_position_x = WIDTH/2, move_x = defaultSize;
-	static int shape_position_y = HEIGHT/2, move_y = defaultSize;
-	switch (key) {
-		case GLUT_KEY_LEFT:
-			shape_position_x -= move_x;
-			break;
-		case GLUT_KEY_RIGHT:
-			shape_position_x += move_x;
-			break;
-		case GLUT_KEY_UP:
-			shape_position_y -= move_y;
-			break;
-		case GLUT_KEY_DOWN:
-			shape_position_y += move_y;
-			break;
-	}
-
-	// send my position off to whoever is listening on the network
-	ostringstream toSend;
-	toSend << myPID << ' ' << shape_position_x << ' ' << shape_position_y;
-	toSend.flush();
-	// cout << "toSend has " << toSend.str() << endl;
-	multicast(toSend.str().c_str());
-}
-
-// process multicast events
-void receiveMulticast (const char *msg) {
-	istringstream ss(msg);
-	int id, x, y;
-	ss >> id >> x >> y;
-	// cout << "got multicast " << id << ' ' << x << ' ' << y << endl;
-
-	// store this info in our global arrays
-	pid[ id%1000 ] = id;
-	position_x[ id%1000 ] = x;
-	position_y[ id%1000 ] = y;
-
-	glutPostRedisplay();
-}
-
-// the atTime function is called approximately every 60th of a second.
-//   In this case, it is critical to have an atTime function, since
-//   we want something to happen even when the user does nothing
-void atTime(int tmp) {
-	const int bufMaxLen = 1000;  // choose a max size for messages
-	char buffer[bufMaxLen];
-	listen(buffer, bufMaxLen);
-	glutTimerFunc(1000/60., atTime, 0);  // make it happen again!
 }
 
 // the reshape function handles the case where the user changes the size
 //   of the window.  We need to fix the coordinate
 //   system, so that the drawing area is still the unit square.
 void reshape(int w, int h) {
-	 glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-	 WIDTH = w;  HEIGHT = h;
-	 glMatrixMode(GL_PROJECTION);
-	 glLoadIdentity();
-	 glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
+   glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+   WIDTH = w;  HEIGHT = h;
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
+}
+
+// the mouse function is called when a mouse button is pressed down or released
+void mouse(int mouseButton, int state, int x, int y) {
+	if ( GLUT_LEFT_BUTTON == mouseButton ) {
+		if ( GLUT_DOWN == state ) {
+			for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
+			    if (i->hover())
+			    	i->active = true;
+		      	else i->active = false;
+			}
+			for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
+			    if (i->hover())
+			    	i->active = true;
+		      	else i->active = false;
+			}
+		} else {
+		  	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
+			    if (i->hover() && i->active)
+			    	cout << "Button press." << endl;
+		      	i->active = false;
+			}
+			for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
+			    if (i->hover() && i->active)
+			    	cout << "Button press." << endl;
+		      	i->active = false;
+			}
+			// for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i) {
+			   //  if (i->hover() && i->active)
+			   //  	cout << "Label press." << endl;
+		    //   	i->active = false;
+			// } // todo: click on label to focus associated textbox
+		}
+	} else if ( GLUT_RIGHT_BUTTON == mouseButton ) {}
+	glutPostRedisplay();
 }
 
 // the init function sets up the graphics card to draw properly
@@ -162,17 +141,17 @@ void init(void) {
 	glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
 
 	// welcome message
-	cout << "Welcome to " << programName << ". Try running several of these, and use the arrow keys." << endl;
+	cout << "Welcome to " << programName << endl;
 }
 
 
-// initGLWindow is the function that starts the ball rolling, in
+// initGlWindow is the function that starts the ball rolling, in
 //  terms of getting everything set up and passing control over to the
 //  glut library for event handling.  It needs to tell the glut library
 //  about all the essential functions:  what function to call if the
 //  window changes shape, what to do to redraw, handle the keyboard,
 //  etc.
-void initGLWindow() {
+void initGlWindow() {
 	char *argv[] = { programName };
 	int argc = sizeof(argv) / sizeof(argv[0]);
 	glutInit(&argc, argv);
@@ -185,15 +164,12 @@ void initGLWindow() {
 	glutDisplayFunc(drawWindow);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
-	glutSpecialFunc(specialKeyboard);
-	glutTimerFunc(1000/60., atTime, 0);
+	glutMouseFunc(mouse);
+	glutMotionFunc(mouse_motion);
+	glutPassiveMotionFunc(mouse_motion);
 	glutMainLoop();
 }
 
 int main() {
-	initNetwork(25100);
-	myPID = getpid();
-	for ( int i=0; i<1000; ++i ) pid[i] = -1;  // initialize as unused
-	specialKeyboard(-1, 0, 0);                // initialize movement
-	initGLWindow();
+  initGlWindow();
 }

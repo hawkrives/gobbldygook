@@ -1,11 +1,13 @@
 #ifndef __lab8__Rectangle__
 #define __lab8__Rectangle__
 
-#include <iostream>
-using namespace std;
-#include "Shape.h"
+#ifdef MACOSX
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
 
-class Rectangle : public Shape {
+class Rectangle {
 	double x1, y1, x2, y2;
 	double width, height;
 	Color color;

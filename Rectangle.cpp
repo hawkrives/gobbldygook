@@ -32,6 +32,7 @@ bool hover(double x, double y) {
 }
 
 void Rectangle::draw() {
+	glColor3f(color.red, color.green, color.blue);
 	sendGLColor();
 	glBegin(GL_POLYGON);
 		glVertex2f(x1, y1);  // upper left
