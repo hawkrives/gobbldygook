@@ -30,7 +30,7 @@ public:
 	}
     active = false;
   }
-  TextBox(const &TextBox c) {
+  TextBox(const TextBox &c) {
     x1 = c.x1; y1 = c.y1;
     x2 = c.x2; y2 = c.y2;
     width = c.width;
@@ -51,7 +51,7 @@ public:
     if (borderWidth) {delete border;}
   }
 
-  TextBox& operator= (const &Button c) {
+  TextBox &operator= (const Button &c) {
     if (this == &c)
       return *this;
 

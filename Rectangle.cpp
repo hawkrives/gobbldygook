@@ -4,7 +4,7 @@ Rectangle::Rectangle() {
 	width = 640;
 	height = 480;
 }
-Rectangle::Rectangle(const &Rectangle c) {
+Rectangle::Rectangle(const Rectangle &c) {
 	x1 = c.x1; x2 = c.x2;
 	y1 = c.y1; y2 = c.y2;
 	width = c.width;
@@ -27,6 +27,20 @@ Rectangle::Rectangle(double newX, double newY, double w, double h, Color color) 
 	x2 = x1 + width;
 	y2 = y1 + height;
 	color = Color;
+}
+
+Rectangle& Rectangle::operator= (const Rectangle &c) {
+	if (this == &c)
+        return *this;
+
+ 	if (color) delete color;
+	x1 = c.x1; x2 = c.x2;
+	y1 = c.y1; y2 = c.y2;
+	width = c.width;
+	height = c.height;
+	color = c.color;
+
+    return *this;
 }
 
 void Rectangle::set_width(double w) {

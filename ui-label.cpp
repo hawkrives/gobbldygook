@@ -12,14 +12,14 @@ public:
     active = false;
   }
 
-  Label(const &Label c) {
+  Label(const Label &c) {
     x = c.x;
     y = c.y;
     text = c.text;
     active = c.active;
   }
 
-  Label& operator= (const &Label c) {
+  Label &operator= (const Label &c) {
     if (this == &c)
       return *this;
 

@@ -165,8 +165,8 @@ void initGlWindow() {
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
-	glutMotionFunc(mouse_motion);
-	glutPassiveMotionFunc(mouse_motion);
+	// glutMotionFunc(mouse_motion);
+	// glutPassiveMotionFunc(mouse_motion);
 	glutMainLoop();
 }
 

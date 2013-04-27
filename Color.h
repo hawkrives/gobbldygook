@@ -9,8 +9,9 @@ struct Color {
 	Color();
 	Color(int single);
 	Color(int r, int g, int b);
-	Color(const &Color c);
+	Color(const Color &c);
 	void display();
+	Color &operator= (const Color &c);
 };
 
 ostream &operator<<(ostream &os, Color c);

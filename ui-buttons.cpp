@@ -35,7 +35,7 @@ public:
 		}
 		text = contents;
 	}
-	Button (const &Button c) {
+	Button (const Button &c) {
 		active = c.active;
 		x1 = c.x1; y1 = c.y1;
 		x2 = c.x2; y2 = c.y2;
@@ -57,7 +57,7 @@ public:
 		if (borderWidth) delete border;
 	};
 
-	Button& operator= (const &Button c) {
+	Button& operator= (const Button &c) {
 		if (this == &c)
 	        return *this;
 

@@ -11,7 +11,12 @@ Color::Color(int r, int g, int b) {
 	green = g;
 	blue = b;
 }
-Color::Color(const &Color c) {
+Color::Color(const Color &c) {
+	red = c.red;
+	green = c.green;
+	blue = c.blue;
+}
+Color& Color::operator=(const Color &c) {
 	red = c.red;
 	green = c.green;
 	blue = c.blue;
