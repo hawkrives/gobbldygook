@@ -58,7 +58,7 @@ bool Rectangle::hover(double x, double y) {
 
 void Rectangle::draw() {
 	glColor3f(color.red, color.green, color.blue);
-	sendGLColor();
+	// sendGLColor();
 	glBegin(GL_POLYGON);
 		glVertex2f(x1, y1);  // upper left
 		glVertex2f(x1, y2);  // lower left
