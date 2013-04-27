@@ -23,7 +23,7 @@ public:
 	void set_width(double w);
 	void set_height(double h);
 	
-	bool hover();
+	bool hover(double x, double y);
 	void draw();
 };
 

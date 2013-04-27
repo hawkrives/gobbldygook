@@ -50,7 +50,7 @@ void Rectangle::set_height(double h) {
 	height = h;
 }
 
-bool hover(double x, double y) {
+bool Rectangle::hover(double x, double y) {
 	return x >= x1 && y >= y1 &&
            x <= x1 + x2 &&
            y <= y1 + y2;
