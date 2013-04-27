@@ -6,6 +6,7 @@
 #else
 #include <GL/glut.h>
 #endif
+#include "Color.h"
 
 class Rectangle {
 	double x1, y1, x2, y2;
@@ -16,6 +17,7 @@ public:
 	Rectangle();
 	Rectangle(int newX, int newY, int w, int h);
 	Rectangle(int newX, int newY, int w, int h, Color color);
+	Rectangle(const &Rectangle c)''
 	
 	void set_width(int w);
 	void set_height(int h);

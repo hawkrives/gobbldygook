@@ -4,17 +4,28 @@ Rectangle::Rectangle() {
 	width = 640;
 	height = 480;
 }
+Rectangle::Rectangle(const &Rectangle c) {
+	x1 = c.x1; x2 = c.x2;
+	y1 = c.y1; y2 = c.y2;
+	width = c.width;
+	height = c.height;
+	color = c.color;
+}
 Rectangle::Rectangle(double newX, double newY, double w, double h) {
-	x = newX;
-	y = newY;
+	x1 = newX;
+	y1 = newY;
 	width = w;
 	height = h;
+	x2 = x1 + width;
+	y2 = y1 + height;
 }
 Rectangle::Rectangle(double newX, double newY, double w, double h, Color color) {
 	x = newX;
 	y = newY;
 	width = w;
 	height = h;
+	x2 = x1 + width;
+	y2 = y1 + height;
 	color = Color;
 }
 

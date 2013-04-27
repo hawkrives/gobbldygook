@@ -11,6 +11,11 @@ Color::Color(int r, int g, int b) {
 	green = g;
 	blue = b;
 }
+Color::Color(const &Color c) {
+	red = c.red;
+	green = c.green;
+	blue = c.blue;
+}
 ostream &operator<<(ostream &os, Color c) {
 	return os << c.red << " " << c.green << " " << c.blue << "  ";
 }

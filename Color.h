@@ -9,6 +9,7 @@ struct Color {
 	Color();
 	Color(int single);
 	Color(int r, int g, int b);
+	Color(const &Color c);
 	void display();
 };
 

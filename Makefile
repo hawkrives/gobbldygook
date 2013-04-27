@@ -8,11 +8,14 @@ else
 
 endif
 
-schedule: proto-game.o
-	g++ $(OPTS) -o proto-game proto-game.o $(LIBS)
+schedule: ui.o
+	g++ $(OPTS) -o schedule ui.o $(LIBS)
 
-proto-game.o: proto-game.cpp
-	g++ $(OPTS) $(MACOSX_DEFINE) -c proto-game.cpp
+ui.o: ui.cpp ui.h ui-buttons.cpp ui-label.cpp ui-textboxes.cpp
+	g++ $(OPTS) $(MACOSX_DEFINE) -c ui.cpp
+
+rectangle.o: Rectangle.cpp Rectangle.h
+	g++ $(OPTS) $(MACOSX_DEFINE) -c Rectangle.cpp
 
 clean:
 	rm -f *.o proto-game

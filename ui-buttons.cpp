@@ -20,8 +20,8 @@ public:
 		width = x2 - x1;
 		height = y2 - y1;
 
-		buttonColor = new Color(127, 127, 127);
-		borderColor = new Color(90, 90, 90);
+		buttonColor = new Color(127);
+		borderColor = new Color(90);
 
 		background = new Rectangle(x1, y1, width, height, buttonColor);
 		if (borderWidth) {
@@ -35,7 +35,52 @@ public:
 		}
 		text = contents;
 	}
-	~Button();
+	Button (const &Button c) {
+		active = c.active;
+		x1 = c.x1; y1 = c.y1;
+		x2 = c.x2; y2 = c.y2;
+		
+		width = c.width;
+		height = c.height;
+
+		buttonColor = c.buttonColor;
+		borderColor = c.borderColor;
+
+		background = c.background;
+		if (borderWidth) border = c.border;
+		text = c.text;
+	}
+	~Button() {
+		delete buttonColor;
+		delete borderColor;
+		delete background;
+		if (borderWidth) delete border;
+	};
+
+	Button& operator= (const &Button c) {
+		if (this == &c)
+	        return *this;
+
+	    active = c.active;
+		x1 = c.x1; y1 = c.y1;
+		x2 = c.x2; y2 = c.y2;
+
+		width = c.width;
+		height = c.height;
+
+		if (buttonColor) delete buttonColor;
+		if (borderColor) delete borderColor;
+		buttonColor = c.buttonColor;
+		borderColor = c.borderColor;
+
+		if (background) delete background;
+		background = c.background;
+		if (border) delete border;
+		if (borderWidth) border = c.border;
+		text = c.text;
+
+	    return *this;
+	}
 
 	bool hover(int x, int y) {
 		return x >= x1 && y >= y1 &&
@@ -43,9 +88,6 @@ public:
 	           y <= y1 + y2;
 	}
 
-	bool click() {
-
-	}
 
 	void draw() {
 		if (borderWidth)
@@ -58,6 +100,4 @@ public:
 		for (int i = 0; i < text.length(); i++)
 			glutBitmapCharacter(GLUT_BITMAP_9_BY_15, text[i]);
 	}
-
-	/* data */
 };
