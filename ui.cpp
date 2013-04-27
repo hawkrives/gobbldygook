@@ -57,7 +57,7 @@ void exitAll() {
 // process keyboard events
 void keyboard( unsigned char c, int x, int y ) {
 	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-		if ( i->hover() ) { // intercept keyboard press, to place in text box
+		if ( i->hover(x, y) ) { // intercept keyboard press, to place in text box
 		    if ( 27==c ) exitAll();  // escape terminates the program, even in textbox
 		    if ( 13==c ) {
 		    	cout << "textBox content was: " << i->textInBox << endl;
@@ -99,28 +99,28 @@ void mouse(int mouseButton, int state, int x, int y) {
 	if ( GLUT_LEFT_BUTTON == mouseButton ) {
 		if ( GLUT_DOWN == state ) {
 			for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
-			    if (i->hover())
+			    if (i->hover(x, y))
 			    	i->active = true;
 		      	else i->active = false;
 			}
 			for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-			    if (i->hover())
+			    if (i->hover(x, y))
 			    	i->active = true;
 		      	else i->active = false;
 			}
 		} else {
 		  	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
-			    if (i->hover() && i->active)
+			    if (i->hover(x, y) && i->active)
 			    	cout << "Button press." << endl;
 		      	i->active = false;
 			}
 			for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-			    if (i->hover() && i->active)
+			    if (i->hover(x, y) && i->active)
 			    	cout << "Button press." << endl;
 		      	i->active = false;
 			}
 			// for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i) {
-			   //  if (i->hover() && i->active)
+			   //  if (i->hover(x, y) && i->active)
 			   //  	cout << "Label press." << endl;
 		    //   	i->active = false;
 			// } // todo: click on label to focus associated textbox
