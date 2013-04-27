@@ -17,9 +17,13 @@ Color::Color(const Color &c) {
 	blue = c.blue;
 }
 Color& Color::operator=(const Color &c) {
+	if (this == &c)
+		return *this;
 	red = c.red;
 	green = c.green;
 	blue = c.blue;
+
+	return *this;
 }
 ostream &operator<<(ostream &os, Color c) {
 	return os << c.red << " " << c.green << " " << c.blue << "  ";
