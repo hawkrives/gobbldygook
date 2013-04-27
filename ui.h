@@ -10,3 +10,4 @@ using namespace std;
 #include <math.h>
 #include <stdlib.h>
 #include <sstream>
+#include "Rectangle.h"

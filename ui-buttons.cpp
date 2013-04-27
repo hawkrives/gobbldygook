@@ -1,4 +1,4 @@
-#import "ui.h"
+#include "ui.h"
 
 class Button {
 protected:
@@ -7,17 +7,18 @@ protected:
 	double borderWidth;
 	string text;
 
+	Color buttonColor, borderColor;
 	Rectangle background, border;
 
 public:
-	Button(double newX, newY, newX2, newY2, string contents, double borderWidth=0) {
+	Button(double newX, double newY, double newX2, double newY2, string contents, double borderWidth=0) {
 		x1 = newX;  y1 = newY;
 		x2 = newX2; y2 = newY2;
 		
 		width = x2 - x1;
 		height = y2 - y1;
 
-		background = new Rectangle(x1, y1, width, height);
+		background = new Rectangle(x1, y1, width, height, buttonColor);
 		if (borderWidth) {
 			border = new Rectangle(
 				x1-borderWidth, 
@@ -32,18 +33,21 @@ public:
 	~Button();
 
 	bool hover(int x, int y) {
-		return x >= x1  && y >= y1 &&
+		return x >= x1 && y >= y1 &&
 	           x <= x1 + x2 &&
 	           y <= y1 + y2;
 	}
 
 	void draw() {
-		glBegin(GL_POLYGON);
-			glVertex2f(x1, y1);  // upper left
-			glVertex2f(x1, y2);  // lower left
-			glVertex2f(x2, y2);  // lower right
-			glVertex2f(x2, y1);  // upper right
-		glEnd();
+		if (borderWidth)
+			border.draw();
+		background.draw();
+	}
+
+	void drawText() {
+		glRasterPos2f(x1+5, y1+(y1+y2-15)/2);
+		for (int i = 0; i < text.length(); i++)
+			glutBitmapCharacter(GLUT_BITMAP_9_BY_15, text[i]);
 	}
 
 	/* data */
