@@ -56,7 +56,7 @@ void exitAll() {
 
 // process keyboard events
 void keyboard( unsigned char c, int x, int y ) {
-	for (std::vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
+	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
 		if ( i->hover() ) { // intercept keyboard press, to place in text box
 		    if ( 27==c ) exitAll();  // escape terminates the program, even in textbox
 		    if ( 13==c ) {

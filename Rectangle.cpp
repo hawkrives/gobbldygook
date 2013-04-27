@@ -19,21 +19,21 @@ Rectangle::Rectangle(double newX, double newY, double w, double h) {
 	x2 = x1 + width;
 	y2 = y1 + height;
 }
-Rectangle::Rectangle(double newX, double newY, double w, double h, Color color) {
-	x = newX;
-	y = newY;
+Rectangle::Rectangle(double newX, double newY, double w, double h, Color newColor) {
+	x1 = newX;
+	y1 = newY;
 	width = w;
 	height = h;
 	x2 = x1 + width;
 	y2 = y1 + height;
-	color = Color;
+	color = newColor;
 }
 
 Rectangle& Rectangle::operator= (const Rectangle &c) {
 	if (this == &c)
         return *this;
 
- 	if (color) delete color;
+ 	delete &color;
 	x1 = c.x1; x2 = c.x2;
 	y1 = c.y1; y2 = c.y2;
 	width = c.width;

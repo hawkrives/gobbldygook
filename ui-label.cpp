@@ -23,6 +23,7 @@ public:
     if (this == &c)
       return *this;
 
+    delete text;
     x = c.x;
     y = c.y;
     text = c.text;

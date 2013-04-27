@@ -60,14 +60,16 @@ public:
     width = c.width;
     height = c.height;
     textInBox = c.textInBox;
-    if (buttonColor) delete buttonColor;
-    if (borderColor) delete borderColor;
+    delete buttonColor;
+    delete borderColor;
     buttonColor = c.buttonColor;
     borderColor = c.borderColor;
-    if (background) delete background;
+    delete background;
     background = c.background;
-    if (border) delete border;
-    if (borderWidth) border = c.border;
+    if (borderWidth) {
+      delete border;
+      border = c.border;
+    }
     active = c.active;
 
     return *this;

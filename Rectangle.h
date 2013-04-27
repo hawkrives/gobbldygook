@@ -15,13 +15,13 @@ class Rectangle {
 
 public:
 	Rectangle();
-	Rectangle(int newX, int newY, int w, int h);
-	Rectangle(int newX, int newY, int w, int h, Color color);
+	Rectangle(double newX, double newY, double w, double h);
+	Rectangle(double newX, double newY, double w, double h, Color newColor);
 	Rectangle(const Rectangle &c);
 	Rectangle &operator= (const Rectangle &c);
 	
-	void set_width(int w);
-	void set_height(int h);
+	void set_width(double w);
+	void set_height(double h);
 	
 	bool hover();
 	void draw();
