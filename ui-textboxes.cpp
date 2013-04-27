@@ -17,8 +17,8 @@ public:
     width = x2 - x1;
     height = y2 - y1;
     textInBox = text;
-    buttonColor = new Color(127, 127, 127);
-    borderColor = new Color(90, 90, 90);
+    buttonColor = new Color(127);
+    borderColor = new Color(90);
     background = new Rectangle(x1, y1, width, height, buttonColor);
     if (borderWidth) {
       border = new Rectangle(
@@ -30,11 +30,48 @@ public:
 	}
     active = false;
   }
+  TextBox(const &TextBox c) {
+    x1 = c.x1; y1 = c.y1;
+    x2 = c.x2; y2 = c.y2;
+    width = c.width;
+    height = c.height;
+    textInBox = c.textInBox;
+    buttonColor = c.buttonColor;
+    borderColor = c.borderColor;
+    background = c.background;
+    if (borderWidth) {
+      border = c.border;
+    active = c.active;
+  }
+
   ~TextBox() {
     delete buttonColor;
     delete borderColor;
     delete background;
     if (borderWidth) {delete border;}
+  }
+
+  TextBox& operator= (const &Button c) {
+    if (this == &c)
+      return *this;
+
+    x1 = c.x1; y1 = c.y1;
+    x2 = c.x2; y2 = c.y2;
+    width = c.width;
+    height = c.height;
+    textInBox = c.textInBox;
+    if (buttonColor) delete buttonColor;
+    if (borderColor) delete borderColor;
+    buttonColor = c.buttonColor;
+    borderColor = c.borderColor;
+    if (background) delete background;
+    background = c.background;
+    if (border) delete border;
+    if (borderWidth) border = c.border;
+    active = c.active;
+
+    return *this;
+    
   }
   bool hover(double x, double y) {
     return x >= x1 && y >= y1 &&

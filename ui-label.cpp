@@ -12,6 +12,25 @@ public:
     active = false;
   }
 
+  Label(const &Label c) {
+    x = c.x;
+    y = c.y;
+    text = c.text;
+    active = c.active;
+  }
+
+  Label& operator= (const &Label c) {
+    if (this == &c)
+      return *this;
+
+    x = c.x;
+    y = c.y;
+    text = c.text;
+    active = c.active;
+
+    return *this;
+  }  
+
   void draw() {
     glRasterPos2f( x, y );
     for (int i = 0; i < text.length; i++)
