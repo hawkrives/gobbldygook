@@ -51,10 +51,10 @@ public:
 		text = c.text;
 	}
 	~Button() {
-		delete buttonColor;
-		delete borderColor;
-		delete background;
-		if (borderWidth) delete border;
+		delete &buttonColor;
+		delete &borderColor;
+		delete &background;
+		if (borderWidth) delete &border;
 	};
 
 	Button& operator= (const Button &c) {
@@ -68,15 +68,15 @@ public:
 		width = c.width;
 		height = c.height;
 
-		delete buttonColor;
-		delete borderColor;
+		delete &buttonColor;
+		delete &borderColor;
 		buttonColor = c.buttonColor;
 		borderColor = c.borderColor;
 
-		delete background;
+		delete b&ackground;
 		background = c.background;
 		if (borderWidth) {
-			delete border;
+			delete &border;
 			border = c.border;
 		}
 		text = c.text;

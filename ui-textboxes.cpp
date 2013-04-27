@@ -45,9 +45,9 @@ public:
   }
 
   ~TextBox() {
-    delete buttonColor;
-    delete borderColor;
-    delete background;
+    delete &buttonColor;
+    delete &borderColor;
+    delete &background;
     if (borderWidth) {delete border;}
   }
 
@@ -60,14 +60,14 @@ public:
     width = c.width;
     height = c.height;
     textInBox = c.textInBox;
-    delete buttonColor;
-    delete borderColor;
+    delete &buttonColor;
+    delete &borderColor;
     buttonColor = c.buttonColor;
     borderColor = c.borderColor;
-    delete background;
+    delete &background;
     background = c.background;
     if (borderWidth) {
-      delete border;
+      delete &border;
       border = c.border;
     }
     active = c.active;
