@@ -21,7 +21,6 @@ Label::Label(double newX, double newY, string text, Color c) {
 	color = c;
 }
 
-
 Label::Label(const Label &c) {
 	x = c.x; 
 	y = c.y;

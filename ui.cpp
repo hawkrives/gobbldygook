@@ -4,7 +4,7 @@
 #include "ui-textboxes.cpp"
 using namespace std;
 
-int WIDTH = 600;  // width of the user window
+int WIDTH = 640;  // width of the user window
 int HEIGHT = 480;  // height of the user window
 char programName[] = "scheduler";
 
@@ -25,8 +25,10 @@ void drawWindow() {
 	// else glColor3f(.5, .5, .5);  // gray
 	// drawBox(buttonPos);
 	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)
-	    i->draw();
-  
+		i->draw();
+
+	Rectangle(50, 50, 10, 10, Color(0, 0, 255)).draw();
+
 	// draw the textbox
 	// glColor3f(.25, .25, .25);  // dark gray
 	// drawBox(textBox1);
@@ -40,10 +42,10 @@ void drawWindow() {
 	// 	drawText( textBox2[0]+5, textBox2[1]+textBox2[3]-10, withCursor.c_str() );
 	// } else drawText( textBox2[0]+5, textBox2[1]+textBox2[3]-10, contents.c_str() );
 	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-    	i->draw();
+		i->draw();
 	}
 	for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i) {
-    	i->draw();
+		i->draw();
 	}
 
 	// tell the graphics card that we're done-- go ahead and draw!
@@ -53,9 +55,9 @@ void drawWindow() {
 
 // close the window and finish the program
 void exitAll() {
-  int win = glutGetWindow();
-  glutDestroyWindow(win);
-  exit(0);
+	int win = glutGetWindow();
+	glutDestroyWindow(win);
+	exit(0);
 }
 
 // process keyboard events
@@ -73,15 +75,15 @@ void keyboard( unsigned char c, int x, int y ) {
 		    	if ( i->label.contents.length() < MAX_NUM_CHARS_IN_TEXTBOX ) i->label.contents += c;
 		    }
 		} else {
-		    switch(c) {
+			switch(c) {
 				case 'q':
 				case 'Q':
 				case 27:
-			        exitAll();
-			        break;
-			default:
+				exitAll();
 				break;
-		    }
+				default:
+				break;
+			}
 		}
 		glutPostRedisplay();
 	}
@@ -91,11 +93,11 @@ void keyboard( unsigned char c, int x, int y ) {
 //   of the window.  We need to fix the coordinate
 //   system, so that the drawing area is still the unit square.
 void reshape(int w, int h) {
-   glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-   WIDTH = w;  HEIGHT = h;
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
-   glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
+	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+	WIDTH = w;  HEIGHT = h;
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
 }
 
 // the mouse function is called when a mouse button is pressed down or released
@@ -103,33 +105,39 @@ void mouse(int mouseButton, int state, int x, int y) {
 	if ( GLUT_LEFT_BUTTON == mouseButton ) {
 		if ( GLUT_DOWN == state ) {
 			for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
-			    if (i->hover(x, y))
-			    	i->active = true;
-		      	else i->active = false;
+				if (i->hover(x, y))
+					i->active = true;
+				else i->active = false;
 			}
 			for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-			    if (i->hover(x, y))
-			    	i->active = true;
-		      	else i->active = false;
+				if (i->hover(x, y))
+					i->active = true;
+				else i->active = false;
 			}
 		} else {
-		  	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
-			    if (i->hover(x, y) && i->active)
-			    	cout << "Button press." << endl;
-		      	i->active = false;
+			for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
+				if (i->hover(x, y) && i->active)
+					cout << "Button press." << endl;
+				i->active = false;
 			}
 			for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-			    if (i->hover(x, y) && i->active)
-			    	cout << "Button press." << endl;
-		      	i->active = false;
+				if (i->hover(x, y) && i->active)
+					cout << "Button press." << endl;
+				i->active = false;
 			}
 			// for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i) {
-			   //  if (i->hover(x, y) && i->active)
-			   //  	cout << "Label press." << endl;
-		    //   	i->active = false;
+			//  if (i->hover(x, y) && i->active)
+			//  	cout << "Label press." << endl;
+			//   	i->active = false;
 			// } // todo: click on label to focus associated textbox
 		}
 	} else if ( GLUT_RIGHT_BUTTON == mouseButton ) {}
+	glutPostRedisplay();
+}
+void mouse_motion(int x, int y) {
+	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)
+		if (i->hover(x, y))
+			cout << "Hovering over button." << endl;
 	glutPostRedisplay();
 }
 
@@ -144,20 +152,21 @@ void init(void) {
 	glLoadIdentity();
 	glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
 
-	Button b = Button(5, 5, 50, 50, "OK");
-	buttons.push_back(b);
+	buttons.push_back(Button(50, 50, 5, 2, "OK"));
+	buttons[0].setBorderColor(Color(0,255,0));
+	cout << "After push_back()" << endl;
 
 	// welcome message
 	cout << "Welcome to " << programName << endl;
 }
 
 
-// initGlWindow is the function that starts the ball rolling, in
-//  terms of getting everything set up and passing control over to the
-//  glut library for event handling.  It needs to tell the glut library
-//  about all the essential functions:  what function to call if the
-//  window changes shape, what to do to redraw, handle the keyboard,
-//  etc.
+// initGlWindow is the function that starts the ball rolling, in  terms of
+// getting everything set up and passing control over to the glut library for
+// event handling. It needs to tell the glut library about all the essential
+// functions: what function to call if the window changes shape, what to do
+// to redraw, handle the keyboard, etc.
+
 void initGlWindow() {
 	char *argv[] = { programName };
 	int argc = sizeof(argv) / sizeof(argv[0]);
@@ -172,8 +181,8 @@ void initGlWindow() {
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
-	// glutMotionFunc(mouse_motion);
-	// glutPassiveMotionFunc(mouse_motion);
+	glutMotionFunc(mouse_motion);
+	glutPassiveMotionFunc(mouse_motion);
 	glutMainLoop();
 }
 

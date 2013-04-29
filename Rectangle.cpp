@@ -1,9 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle() {
-	width = 640;
-	height = 480;
-}
+Rectangle::Rectangle() {}
 Rectangle::Rectangle(double x, double y, double w, double h) {
 	init(x, y, w, h, Color(0));
 }
@@ -14,17 +11,28 @@ Rectangle::Rectangle(const Rectangle &c) {
 	init(c.x1, c.x2, c.width, c.height, c.color);
 }
 void Rectangle::init(double x, double y, double w, double h, Color c) {
+	cout << "+ Creating rectangle (";
+	cout << "x:" << x << ", "; 
+	cout << "y:" << y << ", ";
+	cout << "w:" << w << ", ";
+	cout << "h:" << h << ")" << endl;
+
 	width = w; height = h;
 	x1 = x; x2 = x1 + width;
 	y1 = y; y2 = y1 + height;
 	color = c;
+
+	cout << "- Created rectangle (";
+	cout << "x1:" << x1 << ", "; 
+	cout << "y1:" << y1 << ", ";
+	cout << "x2:" << x2 << ", "; 
+	cout << "y2:" << y2 << ", ";
+	cout << "w:" << width << ", ";
+	cout << "h:" << height << ")" << endl;
 }
 Rectangle& Rectangle::operator= (const Rectangle &c) {
-	if (this == &c)
-        return *this;
-
+	if (this == &c) return *this;
 	init(c.x1, c.x2, c.width, c.height, c.color);
-
     return *this;
 }
 
@@ -61,11 +69,18 @@ bool Rectangle::hover(double x, double y) {
 
 void Rectangle::draw() {
 	glColor3f(color.red, color.green, color.blue);
-	// sendGLColor();
 	glBegin(GL_POLYGON);
 		glVertex2f(x1, y1);  // upper left
 		glVertex2f(x1, y2);  // lower left
 		glVertex2f(x2, y2);  // lower right
 		glVertex2f(x2, y1);  // upper right
 	glEnd();
+	cout << "* Drew rectangle (";
+	cout << "x:" << x1 << ", "; 
+	cout << "y:" << y1 << ", ";
+	cout << "w:" << width << ", ";
+	cout << "h:" << height << ", ";
+	cout << "red: " << color.red << ", ";
+	cout << "green: " << color.green << ", ";
+	cout << "blue: " << color.blue << ")" << endl;
 }

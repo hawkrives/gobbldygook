@@ -37,7 +37,7 @@ private:
 protected:
 	double x1, y1, x2, y2;
 	double width, height;
-	double borderWidth;
+	double borderThickness;
 
 	Color backgroundColor, borderColor;
 	Rectangle background, border;

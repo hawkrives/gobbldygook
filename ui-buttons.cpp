@@ -1,18 +1,20 @@
 #include "ui-elements.h"
 
-Button::Button() {
-	UIRect::init(5, 5, 50, 20, "");
-	setBorderWidth(5);
-}
+// Button::Button() {
+// 	cout << "Inside Button()" << endl;
+// 	UIRect::init(5, 5, 50, 20, "");
+// 	setBorderWidth(5);
+// }
 
-Button::Button(double x, double y, double w, double h, string text) {
-	UIRect::init(x, y, w, h, text);
+Button::Button(double x, double y, double w, double h, string text) : UIRect(x, y, w, h, text) {
+	cout << "Was inside Button(" << x << ", " << y << ", " << w << ", " << h << ")" << endl;
 }
-Button::Button(const Button &c) {
-	UIRect::copy(c);
+Button::Button(const Button &c) : UIRect(c) {
+	cout << "Was inside Button(c)" << endl;
 }
 
 Button& Button::operator=(const Button &c) {
+	cout << "Inside Button operator=()" << endl;
 	if (this == &c)
 		return *this;
 

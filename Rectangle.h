@@ -9,11 +9,11 @@
 #include "Color.h"
 
 class Rectangle {
+public:
 	double x1, y1, x2, y2;
 	double width, height;
 	Color color;
 
-public:
 	void init(double x, double y, double w, double h, Color c);
 
 	Rectangle();
