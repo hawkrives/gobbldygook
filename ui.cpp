@@ -1,5 +1,8 @@
-using namespace std;
 #include "ui.h"
+#include "ui-buttons.cpp"
+#include "ui-label.cpp"
+#include "ui-textboxes.cpp"
+using namespace std;
 
 int WIDTH = 600;  // width of the user window
 int HEIGHT = 480;  // height of the user window
@@ -10,6 +13,7 @@ vector<Button> buttons;
 vector<TextBox> textboxes;
 vector<Label> labels;
 
+const unsigned int MAX_NUM_CHARS_IN_TEXTBOX = 20;
 
 void drawWindow() {
 	// clear the buffer
@@ -31,10 +35,10 @@ void drawWindow() {
 	// drawBox(textBox2);
 	// glColor3f(0, 0, 0);  // black
 	// if (overTextBox) { // draw with a cursor
-	// 	string withCursor(textInBox);
+	// 	string withCursor(contents);
 	// 	withCursor += '|';
 	// 	drawText( textBox2[0]+5, textBox2[1]+textBox2[3]-10, withCursor.c_str() );
-	// } else drawText( textBox2[0]+5, textBox2[1]+textBox2[3]-10, textInBox.c_str() );
+	// } else drawText( textBox2[0]+5, textBox2[1]+textBox2[3]-10, contents.c_str() );
 	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
     	i->draw();
 	}
@@ -60,13 +64,13 @@ void keyboard( unsigned char c, int x, int y ) {
 		if ( i->hover(x, y) ) { // intercept keyboard press, to place in text box
 		    if ( 27==c ) exitAll();  // escape terminates the program, even in textbox
 		    if ( 13==c ) {
-		    	cout << "textBox content was: " << i->textInBox << endl;
-		    	i->textInBox = "";
+		    	cout << "textBox content was: " << i->contents << endl;
+		    	i->contents = "";
 		    } else if ( '\b'==c || 127==c ) { // handle backspace
-		    	if ( i->textInBox.length() > 0 ) i->textInBox.erase(i->textInBox.end()-1);
+		    	if ( i->contents.length() > 0 ) i->contents.erase(i->contents.end()-1);
 		    } else if ( c >= 32 && c <= 126 ) { // check for printable character
 		    	// check that we don't overflow the box
-		    	if ( i->textInBox.length() < MAX_NUM_CHARS_IN_TEXTBOX ) i->textInBox += c;
+		    	if ( i->contents.length() < MAX_NUM_CHARS_IN_TEXTBOX ) i->contents += c;
 		    }
 		} else {
 		    switch(c) {
@@ -140,6 +144,9 @@ void init(void) {
 	glLoadIdentity();
 	glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
 
+	Button b = Button();
+	// buttons.push_back(b);
+
 	// welcome message
 	cout << "Welcome to " << programName << endl;
 }
@@ -171,5 +178,5 @@ void initGlWindow() {
 }
 
 int main() {
-  initGlWindow();
+	initGlWindow();
 }

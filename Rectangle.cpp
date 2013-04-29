@@ -4,51 +4,55 @@ Rectangle::Rectangle() {
 	width = 640;
 	height = 480;
 }
+Rectangle::Rectangle(double x, double y, double w, double h) {
+	init(x, y, w, h, Color(0));
+}
+Rectangle::Rectangle(double x, double y, double w, double h, Color c) {
+	init(x, y, w, h, c);
+}
 Rectangle::Rectangle(const Rectangle &c) {
-	x1 = c.x1; x2 = c.x2;
-	y1 = c.y1; y2 = c.y2;
-	width = c.width;
-	height = c.height;
-	color = c.color;
+	init(c.x1, c.x2, c.width, c.height, c.color);
 }
-Rectangle::Rectangle(double newX, double newY, double w, double h) {
-	x1 = newX;
-	y1 = newY;
-	width = w;
-	height = h;
-	x2 = x1 + width;
-	y2 = y1 + height;
+void Rectangle::init(double x, double y, double w, double h, Color c) {
+	width = w; height = h;
+	x1 = x; x2 = x1 + width;
+	y1 = y; y2 = y1 + height;
+	color = c;
 }
-Rectangle::Rectangle(double newX, double newY, double w, double h, Color newColor) {
-	x1 = newX;
-	y1 = newY;
-	width = w;
-	height = h;
-	x2 = x1 + width;
-	y2 = y1 + height;
-	color = newColor;
-}
-
 Rectangle& Rectangle::operator= (const Rectangle &c) {
 	if (this == &c)
         return *this;
 
  	delete &color;
-	x1 = c.x1; x2 = c.x2;
-	y1 = c.y1; y2 = c.y2;
-	width = c.width;
-	height = c.height;
-	color = c.color;
+	init(c.x1, c.x2, c.width, c.height, c.color);
 
     return *this;
 }
 
-void Rectangle::set_width(double w) {
+void Rectangle::setX(double x) {
+	x1 = x;
+	x2 = x1 + width;
+}
+void Rectangle::setY(double y) {
+	y1 = y; 
+	y2 = y1 + height;
+}
+void Rectangle::setWidth(double w) {
 	width = w;
+	x2 = x1 + width;
 }
-void Rectangle::set_height(double h) {
+void Rectangle::setHeight(double h) {
 	height = h;
+	y2 = y1 + height;
 }
+void Rectangle::setColor(Color c) {
+	color = c;
+}
+
+double Rectangle::getX() { return x1; }
+double Rectangle::getY() { return y1; }
+double Rectangle::getWidth() { return width; }
+double Rectangle::getHeight() { return height; }
 
 bool Rectangle::hover(double x, double y) {
 	return x >= x1 && y >= y1 &&

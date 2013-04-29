@@ -8,17 +8,26 @@ else
 
 endif
 
-schedule: ui.o
-	g++ $(OPTS) -o schedule ui.o $(LIBS)
+schedule: ui elements Rectangle.h Color.h
+	g++ $(OPTS) -o schedule ui.o ui-elements.o Color.o Rectangle.o $(LIBS)
 
-ui.o: ui.cpp ui.h elements.o
+
+ui: ui.cpp ui.h elements
 	g++ $(OPTS) $(MACOSX_DEFINE) -c ui.cpp
 
-elements.o: ui-buttons.cpp ui-label.cpp ui-textboxes.cpp rectangle.o
-	g++ $(OPTS) $(MACOSX_DEFINE) -c ui-buttons.cpp ui-label.cpp ui-textboxes.cpp
+# data: data.cpp data.h
+# 	g++ $(OPTS) $(MACOSX_DEFINE) -c data.cpp
 
-rectangle.o: Rectangle.cpp Rectangle.h Color.cpp Color.h
-	g++ $(OPTS) $(MACOSX_DEFINE) -c Rectangle.cpp Color.cpp
+
+elements: ui-elements.cpp ui-elements.h rectangle ui-label.cpp ui-textboxes.cpp ui-buttons.cpp
+	g++ $(OPTS) $(MACOSX_DEFINE) -c ui-elements.cpp ui-elements.h ui-label.cpp ui-textboxes.cpp ui-buttons.cpp
+
+
+rectangle: Rectangle.cpp Rectangle.h Color.h
+	g++ $(OPTS) $(MACOSX_DEFINE) -c Rectangle.cpp
+
+color: Color.cpp Color.h
+	g++ $(OPTS) $(MACOSX_DEFINE) -c Color.cpp
 
 clean:
-	rm -f *.o proto-game
+	rm -f *.o schedule

@@ -14,14 +14,24 @@ class Rectangle {
 	Color color;
 
 public:
+	void init(double x, double y, double w, double h, Color c);
+
 	Rectangle();
-	Rectangle(double newX, double newY, double w, double h);
-	Rectangle(double newX, double newY, double w, double h, Color newColor);
+	Rectangle(double x, double y, double w, double h);
+	Rectangle(double x, double y, double w, double h, Color c);
 	Rectangle(const Rectangle &c);
 	Rectangle &operator= (const Rectangle &c);
 	
-	void set_width(double w);
-	void set_height(double h);
+	void setX(double x);
+	void setY(double y);
+	void setWidth(double w);
+	void setHeight(double h);
+	void setColor(Color c);
+
+	double getX();
+	double getY();
+	double getWidth();
+	double getHeight();
 	
 	bool hover(double x, double y);
 	void draw();
