@@ -27,8 +27,4 @@ Button& Button::operator=(const Button &c) {
 
 void Button::draw() {
 	UIRect::draw();
-
-	glRasterPos2f(x1+5, y1+(y1+y2-15)/2);
-	for (unsigned int i = 0; i < contents.length(); i++)
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, contents[i]);
 }

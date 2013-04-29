@@ -11,42 +11,25 @@ UIRect::UIRect(double x, double y, double w, double h, string text) {
 }
 
 UIRect::UIRect(const UIRect &c) {
-	UIRect::init(c.x1, c.y1, c.width, c.height, c.contents);
-}
-
-UIRect::~UIRect() {
-	delete &contents;
-	delete &backgroundColor;
-	delete &borderColor;
-	delete &background;
-	if (borderWidth) delete &border;
+	UIRect::copy(c);
 }
 
 UIRect& UIRect::operator= (const UIRect &c) {
 	if (this == &c)
 		return *this;
 
-	init(c.x1, c.y1, c.width, c.height, c.contents);
-	active = c.active;
+	copy(c);
 
     return *this;
 }
 
 void UIRect::init(double x, double y, double w, double h, string text) {
-	// if (false) {
-	// 	delete &backgroundColor;
-	// 	delete &borderColor;
-	// 	delete &background;
-	// 	if (borderWidth)
-	// 		delete &border;
-	// }
-
 	active = false;
 	width = w; height = h;
 	x1 = x; x2 = x1 + width;
 	y2 = y; y2 = y1 + height;
 
-	contents = text;
+	label = Label(x1, x2, text, Color(255, 0, 0));
 
 	backgroundColor = Color(127);
 	borderColor = Color(90);
@@ -57,7 +40,7 @@ void UIRect::init(double x, double y, double w, double h, string text) {
 }
 
 void UIRect::copy(const UIRect &c) {
-	init(c.x1, c.y1, c.width, c.height, c.contents);
+	init(c.x1, c.y1, c.width, c.height, c.label.contents);
 	active = c.active;
 	backgroundColor = c.backgroundColor;
 	borderColor = c.borderColor;
@@ -72,6 +55,13 @@ void UIRect::createBorder(double size, Color color) {
 		width + (size * 2), height + (size * 2),
 		color
 	);
+}
+
+string UIRect::getLabel() {
+	return label.contents;
+}
+void UIRect::setLabel(string text) {
+	label.contents = text;
 }
 
 void UIRect::setBorderWidth(double w) {
@@ -112,4 +102,5 @@ void UIRect::draw() {
 	if (borderWidth)
 		border.draw();
 	background.draw();
+	label.draw();
 }

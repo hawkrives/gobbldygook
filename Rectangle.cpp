@@ -23,7 +23,6 @@ Rectangle& Rectangle::operator= (const Rectangle &c) {
 	if (this == &c)
         return *this;
 
- 	delete &color;
 	init(c.x1, c.x2, c.width, c.height, c.color);
 
     return *this;

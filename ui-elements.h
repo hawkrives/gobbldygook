@@ -11,6 +11,26 @@
 #include "Rectangle.h"
 using namespace std;
 
+class Label {
+protected:
+	double x, y;
+	double width, height;
+	Color color;
+public:
+	Label();
+	Label(double newX, double newY, string text);
+	Label(double newX, double newY, string text, Color c);
+	Label(const Label &c);
+	Label &operator= (const Label &c);
+
+	string contents;
+	bool active;
+
+	void setColor(Color c);
+
+	void draw();
+};
+
 class UIRect {
 private:
 	void createBorder(double size, Color color);
@@ -25,20 +45,25 @@ public:
 	UIRect();
 	UIRect(double x, double y, double w, double h, string text);
 	UIRect(const UIRect &c);
-	~UIRect();
 	UIRect& operator = (const UIRect &c);
 
-	string contents;
+	Label label;
 	bool active;
 
 	void init(double x, double y, double w, double h, string text);
 	void copy(const UIRect &c);
+
+	string getLabel();
+	void setLabel(string text);
+
 	void setX1(double x);
 	void setX2(double x);
 	void setY1(double y);
 	void setY2(double y);
+
 	void setWidth(double w);
 	void setHeight(double h);
+
 	void setBorderWidth(double w);
 	void setBorderColor(Color c);
 	void setBackgroundColor(Color c);
@@ -65,21 +90,6 @@ public:
 	TextBox(const TextBox &c);
 
 	TextBox &operator= (const TextBox &c);
-
-	void draw();
-};
-
-class Label{
-protected:
-	double x, y;
-	double width, height;
-public:
-	Label(double newX, double newY, string text);
-	Label(const Label &c);
-	// Label &operator= (const Label &c);
-
-	string contents;
-	bool active;
 
 	void draw();
 };
