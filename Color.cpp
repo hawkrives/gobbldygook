@@ -3,10 +3,10 @@
 Color::Color() {
 	red = green = blue = 0;
 }
-Color::Color(int single) {
+Color::Color(double single) {
 	red = green = blue = single;
 }
-Color::Color(int r, int g, int b) {
+Color::Color(double r, double g, double b) {
 	red = r;
 	green = g;
 	blue = b;

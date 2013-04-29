@@ -4,53 +4,193 @@
 #include "ui-textboxes.cpp"
 using namespace std;
 
-int WIDTH = 640;  // width of the user window
-int HEIGHT = 480;  // height of the user window
+int WIDTH = 1280;  // width of the user window
+int HEIGHT = 768;  // height of the user window
 char programName[] = "scheduler";
+
+bool WELCOME = true;
 
 // button info
 vector<Button> buttons;
+vector<Rectangle> boxes;
 vector<TextBox> textboxes;
 vector<Label> labels;
 
 const unsigned int MAX_NUM_CHARS_IN_TEXTBOX = 20;
 
+void create_welcome_screen() {
+	if (WELCOME) {
+		double label_x = WIDTH/5, label_y_base = 140, y_multiplier = 70;
+		labels.push_back(Label(WIDTH/2-22.5, 50, "Hello!"));
+		labels.push_back(Label(label_x, label_y_base+y_multiplier*0, "Name"));
+		labels.push_back(Label(label_x, label_y_base+y_multiplier*1, "Majors"));
+		labels.push_back(Label(label_x, label_y_base+y_multiplier*2, "Concentrations"));
+		labels.push_back(Label(label_x, label_y_base+y_multiplier*3, "Year"));
+		
+		double textbox_height = 40, textbox_width = 220;
+		double textbox_x = WIDTH/5*2.5, textbox_y_base = label_y_base-(.6*textbox_height);
+		textboxes.push_back(TextBox(textbox_x, textbox_y_base+y_multiplier*0, textbox_width, textbox_height, ""));
+		textboxes.push_back(TextBox(textbox_x, textbox_y_base+y_multiplier*1, textbox_width, textbox_height, ""));
+		textboxes.push_back(TextBox(textbox_x, textbox_y_base+y_multiplier*2, textbox_width, textbox_height, ""));
+		textboxes.push_back(TextBox(textbox_x, textbox_y_base+y_multiplier*3, textbox_width, textbox_height, ""));
+		
+		buttons.push_back(Button(WIDTH/2-100, HEIGHT-55, 100, 50, "Cancel"));
+		buttons.push_back(Button(WIDTH/2+0, HEIGHT-55, 100, 50, "OK"));
+	} else {
+		labels.clear();
+		textboxes.clear();
+		buttons.clear();
+		
+		labels.push_back(Label(190, 10, "Reqs"));
+		labels.push_back(Label(425, 10, "Math"));
+		labels.push_back(Label(525, 10, "Comp Sci"));
+		labels.push_back(Label(625, 10, "Stats"));
+		boxes.push_back(Rectangle(5, 25, 405, 736));
+		boxes.push_back(Rectangle(420, 25, 214, 184));
+		boxes.push_back(Rectangle(420, 209, 214, 184));
+		boxes.push_back(Rectangle(420, 393, 214, 184));
+		boxes.push_back(Rectangle(420, 577, 214, 184));
+		boxes.push_back(Rectangle(634, 25, 107, 184));
+		boxes.push_back(Rectangle(634, 209, 107, 184));
+		boxes.push_back(Rectangle(634, 393, 107, 184));
+		boxes.push_back(Rectangle(634, 577, 107, 184));
+		boxes.push_back(Rectangle(741, 25, 214, 184));
+		boxes.push_back(Rectangle(741, 209, 214, 184));
+		boxes.push_back(Rectangle(741, 393, 214, 184));
+		boxes.push_back(Rectangle(741, 577, 214, 184));
+		labels.push_back(Label(10, 30, "Basic Reqs"));
+		labels.push_back(Label(10, 50, "35 total course credits"));
+		labels.push_back(Label(10, 70, "18 level II/III course credits"));
+		labels.push_back(Label(10, 90, "3 interims"));
+		labels.push_back(Label(10, 120, "GEs"));
+		labels.push_back(Label(10, 140, "FYW"));
+		labels.push_back(Label(10, 160, "FOL"));
+		labels.push_back(Label(10, 180, "ORC"));
+		labels.push_back(Label(10, 200, "AQR"));
+		labels.push_back(Label(10, 220, "SPM"));
+		labels.push_back(Label(10, 240, "HWC"));
+		labels.push_back(Label(10, 260, "MCD"));
+		labels.push_back(Label(10, 280, "MCG"));
+		labels.push_back(Label(10, 300, "ALS-A"));
+		labels.push_back(Label(10, 320, "ALS-L"));
+		labels.push_back(Label(10, 340, "BTS-B"));
+		labels.push_back(Label(10, 360, "BTS-T"));
+		labels.push_back(Label(10, 380, "SED"));
+		labels.push_back(Label(10, 400, "IST"));
+		labels.push_back(Label(10, 420, "HBS"));
+		labels.push_back(Label(10, 440, "EIN"));
+		labels.push_back(Label(10, 470, "Math Reqs"));
+		labels.push_back(Label(10, 490, "Calc I"));
+		labels.push_back(Label(10, 510, "Calc II"));
+		labels.push_back(Label(10, 530, "Math 220"));
+		labels.push_back(Label(10, 550, "2 transition courses"));
+		labels.push_back(Label(10, 570, "3 perspectives"));
+		labels.push_back(Label(10, 590, "2 level III courses"));
+		labels.push_back(Label(10, 610, "sequence courses"));
+		labels.push_back(Label(10, 630, "7 courses"));
+		labels.push_back(Label(110, 100, "CS Reqs"));
+		labels.push_back(Label(110, 120, "CS1"));
+		labels.push_back(Label(110, 140, "MFC"));
+		labels.push_back(Label(110, 160, "HD"));
+		labels.push_back(Label(110, 180, "SD"));
+		labels.push_back(Label(110, 200, "ADS"));
+		labels.push_back(Label(110, 220, "ESD"));
+		labels.push_back(Label(110, 240, "PL or TC"));
+		labels.push_back(Label(110, 260, "OS or CSA"));
+		labels.push_back(Label(110, 280, "CAP"));
+		labels.push_back(Label(110, 300, "2 electives"));
+		labels.push_back(Label(110, 330, "Stats reqs"));
+		labels.push_back(Label(110, 350, "STAT 272"));
+		labels.push_back(Label(110, 370, "STAT 316"));
+		labels.push_back(Label(110, 390, "2 electives"));
+		labels.push_back(Label(423, 27, "MATH 220"));
+		labels.push_back(Label(426, 42, "Elem Linear Algebra"));
+		labels.push_back(Label(423, 57, "MUSPF 152"));
+		labels.push_back(Label(426, 72, "Voice"));
+		labels.push_back(Label(423, 87, "PSYCH 125"));
+		labels.push_back(Label(426, 102, "Principles: Psych"));
+		labels.push_back(Label(423, 117, "SPAN 231"));
+		labels.push_back(Label(426, 132, "Intermed Spanish I"));
+		labels.push_back(Label(423, 147, "WRIT 111"));
+		labels.push_back(Label(426, 162, "First-Year Writing"));
+		labels.push_back(Label(637, 27, "PHIL 127"));
+		labels.push_back(Label(640, 42, "Zen and Art of Judo"));
+		labels.push_back(Label(744, 27, "MATH 252"));
+		labels.push_back(Label(747, 42, "Abstract Algebra I"));
+		labels.push_back(Label(744, 57, "MUSPF 152"));
+		labels.push_back(Label(747, 72, "Voice"));
+		labels.push_back(Label(744, 87, "REL 121"));
+		labels.push_back(Label(747, 102, "Bible/Culture/Commun"));
+		labels.push_back(Label(744, 117, "SPAN 232"));
+		labels.push_back(Label(747, 132, "Intermed Spanish II"));
+		labels.push_back(Label(744, 147, "STAT 272"));
+		labels.push_back(Label(747, 162, "Statistical Modeling"));
+		labels.push_back(Label(423, 211, "CSCI 125"));
+		labels.push_back(Label(426, 226, "Comp Sci for Science/Math"));
+		labels.push_back(Label(423, 241, "ENGL 201"));
+		labels.push_back(Label(426, 256, "Transatlantic Anglo Lit"));
+		labels.push_back(Label(423, 271, "MUSPF 152"));
+		labels.push_back(Label(426, 286, "Voice"));
+		labels.push_back(Label(423, 301, "PHIL 118"));
+		labels.push_back(Label(426, 316, "Making of Modern Mind"));
+		labels.push_back(Label(423, 331, "REL 264"));
+		labels.push_back(Label(426, 346, "Theology and Sexuality"));
+		labels.push_back(Label(637, 211, "CHEM 124"));
+		labels.push_back(Label(640, 226, "A Matter of Environ"));
+		labels.push_back(Label(637, 241, "CHEM 124"));
+		labels.push_back(Label(640, 256, "A Matter of Environ Lab"));
+		labels.push_back(Label(744, 211, "CSCI 251"));
+		labels.push_back(Label(747, 226, "Software Design"));
+		labels.push_back(Label(744, 241, "CSCI 252"));
+		labels.push_back(Label(747, 256, "Software Design/Lab"));
+		labels.push_back(Label(744, 271, "ECON 121"));
+		labels.push_back(Label(747, 286, "Principles of Econ"));
+		labels.push_back(Label(744, 301, "MATH 244"));
+		labels.push_back(Label(747, 316, "Real Analysis I"));
+		labels.push_back(Label(744, 331, "MUSPF 152"));
+		labels.push_back(Label(747, 346, "Voice"));
+		labels.push_back(Label(423, 395, "CSCI 241"));
+		labels.push_back(Label(426, 410, "Hardware Design"));
+		labels.push_back(Label(423, 425, "CSCI 333"));
+		labels.push_back(Label(426, 440, "Theory of Computation"));
+		labels.push_back(Label(423, 455, "ESAC 108"));
+		labels.push_back(Label(426, 470, "In-Line Skating"));
+		labels.push_back(Label(423, 485, "MATH 382"));
+		labels.push_back(Label(426, 500, "Sem: Linear Algebra"));
+		labels.push_back(Label(423, 515, "MUSPF 152"));
+		labels.push_back(Label(426, 530, "Voice"));
+		labels.push_back(Label(744, 395, "CSCI 263"));
+		labels.push_back(Label(747, 410, "Ethical Issues in Software"));
+		labels.push_back(Label(744, 425, "CSCI 276"));
+		labels.push_back(Label(747, 440, "Programming Languages"));
+		labels.push_back(Label(744, 455, "MUSPF 152"));
+		labels.push_back(Label(747, 470, "Voice"));
+		labels.push_back(Label(423, 579, "CSCI 253"));
+		labels.push_back(Label(426, 594, "Algorithms and Data Structures"));
+		labels.push_back(Label(423, 609, "CSCI 390"));
+		labels.push_back(Label(426, 624, "Capstone Seminar"));
+		labels.push_back(Label(423, 639, "HIST 275"));
+		labels.push_back(Label(426, 654, "Environmental History"));
+		labels.push_back(Label(423, 669, "MUSPF 152"));
+		labels.push_back(Label(426, 684, "Voice"));
+		
+		for (vector<Rectangle>::iterator i = boxes.begin(); i != boxes.end(); ++i)
+			i->setColor(Color(0));
+	}
+}
+
 void drawWindow() {
-	// clear the buffer
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT); // clear the buffer
+	
+	if(!WELCOME)
+		create_welcome_screen();
 
-	// Add hover colors after Monday
-	// if ( buttonIsPressed ) glColor3f(1., 0., 0.);  // make it red
-	// else if ( overButton ) glColor3f(.75,.75,.75);  // light gray
-	// else glColor3f(.5, .5, .5);  // gray
-	// drawBox(buttonPos);
-	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)
-		i->draw();
+	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)      i->draw();
+	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) i->draw();
+	for (vector<Rectangle>::iterator i = boxes.begin(); i != boxes.end(); ++i)       i->draw();
+	for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i)         i->draw();
 
-	Rectangle(50, 50, 10, 10, Color(0, 0, 255)).draw();
-
-	// draw the textbox
-	// glColor3f(.25, .25, .25);  // dark gray
-	// drawBox(textBox1);
-	// if ( overTextBox ) glColor3f(1,1,1);  // white
-	// else glColor3f(.75, .75, .75);  // light gray
-	// drawBox(textBox2);
-	// glColor3f(0, 0, 0);  // black
-	// if (overTextBox) { // draw with a cursor
-	// 	string withCursor(contents);
-	// 	withCursor += '|';
-	// 	drawText( textBox2[0]+5, textBox2[1]+textBox2[3]-10, withCursor.c_str() );
-	// } else drawText( textBox2[0]+5, textBox2[1]+textBox2[3]-10, contents.c_str() );
-	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-		i->draw();
-	}
-	for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i) {
-		i->draw();
-	}
-
-	// tell the graphics card that we're done-- go ahead and draw!
-	//   (technically, we are switching between two color buffers...)
-	glutSwapBuffers();
+	glutSwapBuffers(); // tell the graphics card that we're done.
 }
 
 // close the window and finish the program
@@ -63,17 +203,23 @@ void exitAll() {
 // process keyboard events
 void keyboard( unsigned char c, int x, int y ) {
 	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-		if ( i->hover(x, y) ) { // intercept keyboard press, to place in text box
-		    if ( 27==c ) exitAll();  // escape terminates the program, even in textbox
-		    if ( 13==c ) {
-		    	cout << "textBox content was: " << i->label.contents << endl;
-		    	i->label.contents = "";
-		    } else if ( '\b'==c || 127==c ) { // handle backspace
-		    	if ( i->label.contents.length() > 0 ) i->label.contents.erase(i->label.contents.end()-1);
-		    } else if ( c >= 32 && c <= 126 ) { // check for printable character
-		    	// check that we don't overflow the box
-		    	if ( i->label.contents.length() < MAX_NUM_CHARS_IN_TEXTBOX ) i->label.contents += c;
-		    }
+		// intercept keyboard press, to place in text box
+		if ( i->hover(x, y)) {
+			// escape terminates the program, even in textbox
+		    if ( c == 27 ) exitAll();
+
+			// if enter, print the contents
+		    if ( c == 13 ) {
+		    	cout << "textbox content: " << i->label.contents << endl;
+			}
+		    else if ( c == '\b' || c == 127 ) {			// handle backspace
+		    	if ( i->label.contents.length() > 0 )
+					i->label.contents.erase(i->label.contents.end()-1);
+			}
+			else if ( c >= 32 && c <= 126 ) { 			// check for printable character and make sure that we don't overflow the box
+		    	if ( i->label.contents.length() < MAX_NUM_CHARS_IN_TEXTBOX )
+					i->label.contents.push_back(c);
+			}
 		} else {
 			switch(c) {
 				case 'q':
@@ -89,9 +235,7 @@ void keyboard( unsigned char c, int x, int y ) {
 	}
 }
 
-// the reshape function handles the case where the user changes the size
-//   of the window.  We need to fix the coordinate
-//   system, so that the drawing area is still the unit square.
+// the reshape function handles the case where the user changes the size of the window.  We need to fix the coordinate system, so that the drawing area is still the unit square.
 void reshape(int w, int h) {
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	WIDTH = w;  HEIGHT = h;
@@ -100,44 +244,63 @@ void reshape(int w, int h) {
 	glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
 }
 
-// the mouse function is called when a mouse button is pressed down or released
 void mouse(int mouseButton, int state, int x, int y) {
-	if ( GLUT_LEFT_BUTTON == mouseButton ) {
-		if ( GLUT_DOWN == state ) {
+	// the mouse function is called when a mouse button is pressed down or released
+	if ( mouseButton == GLUT_LEFT_BUTTON ) {
+		if ( state == GLUT_DOWN ) {
 			for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
-				if (i->hover(x, y))
+				if (i->hover(x, y)) {
+					i->over = true;
 					i->active = true;
-				else i->active = false;
+					if (WELCOME && i->label.contents == "OK") {
+						WELCOME = false;
+					}
+				} else {
+					i->over = false;
+					i->active = false;
+				}
 			}
 			for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-				if (i->hover(x, y))
+				if (i->over) {
 					i->active = true;
-				else i->active = false;
+				}
+				else {
+					i->active = false;
+				}
 			}
-		} else {
+		} else if (state == GLUT_UP) {
 			for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
-				if (i->hover(x, y) && i->active)
-					cout << "Button press." << endl;
-				i->active = false;
+				if (i->hover(x, y)) {
+					i->over = false;
+					i->active = false;
+				}
 			}
 			for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
-				if (i->hover(x, y) && i->active)
-					cout << "Button press." << endl;
-				i->active = false;
+				if (i->hover(x, y)) {
+					i->over = false;
+					i->active = false;
+				}
 			}
-			// for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i) {
-			//  if (i->hover(x, y) && i->active)
-			//  	cout << "Label press." << endl;
-			//   	i->active = false;
-			// } // todo: click on label to focus associated textbox
 		}
 	} else if ( GLUT_RIGHT_BUTTON == mouseButton ) {}
 	glutPostRedisplay();
 }
 void mouse_motion(int x, int y) {
-	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)
-		if (i->hover(x, y))
-			cout << "Hovering over button." << endl;
+	// mouse_motion seems to be called whenever the mouse moves within the window.
+	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i) {
+		if (i->hover(x, y)) {
+			i->over = true;
+		} else {
+			i->over = false;
+		}
+	}
+	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) {
+		if (i->hover(x, y)) {
+			i->over = true;
+		} else {
+			i->over = false;
+		}
+	}
 	glutPostRedisplay();
 }
 
@@ -152,21 +315,12 @@ void init(void) {
 	glLoadIdentity();
 	glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
 
-	buttons.push_back(Button(50, 50, 5, 2, "OK"));
-	buttons[0].setBorderColor(Color(0,255,0));
-	cout << "After push_back()" << endl;
-
 	// welcome message
 	cout << "Welcome to " << programName << endl;
 }
 
 
-// initGlWindow is the function that starts the ball rolling, in  terms of
-// getting everything set up and passing control over to the glut library for
-// event handling. It needs to tell the glut library about all the essential
-// functions: what function to call if the window changes shape, what to do
-// to redraw, handle the keyboard, etc.
-
+// initGlWindow is the function that starts the ball rolling, in  terms of getting everything set up and passing control over to the glut library for event handling. It needs to tell the glut library about all the essential functions: what function to call if the window changes shape, what to do to redraw, handle the keyboard, etc.
 void initGlWindow() {
 	char *argv[] = { programName };
 	int argc = sizeof(argv) / sizeof(argv[0]);
@@ -175,8 +329,10 @@ void initGlWindow() {
 	glutInitWindowSize(WIDTH,HEIGHT);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow(programName);
-	init();
 
+	init();
+	create_welcome_screen();
+	
 	glutDisplayFunc(drawWindow);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);

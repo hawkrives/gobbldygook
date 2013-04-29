@@ -1,8 +1,10 @@
+CC   = g++
 OPTS = -Wall -g
 LIBS = -lGL -lglut -lm
 ARCH := $(shell uname)
 ifeq ($(ARCH), Linux)
 else
+ CC = clang
  MACOSX_DEFINE = -DMACOSX -I/sw/include
  LIBS = -I/usr/common/include -I/usr/include/GL -L/System/Library/Frameworks/OpenGL.framework/Libraries -framework GLUT -framework OpenGL -lGL -lm -lobjc -lstdc++
 
@@ -23,7 +25,7 @@ elements: ui-elements.cpp ui-elements.h rectangle ui-label.cpp ui-textboxes.cpp 
 	g++ $(OPTS) $(MACOSX_DEFINE) -c ui-elements.cpp ui-elements.h ui-label.cpp ui-textboxes.cpp ui-buttons.cpp
 
 
-rectangle: Rectangle.cpp Rectangle.h Color.h
+rectangle: Rectangle.cpp Rectangle.h color
 	g++ $(OPTS) $(MACOSX_DEFINE) -c Rectangle.cpp
 
 color: Color.cpp Color.h

@@ -1,10 +1,7 @@
 #ifndef __uielements__
 #define __uielements__
-#ifdef MACOSX
-#include <GLUT/glut.h>
-#else
+
 #include <GL/glut.h>
-#endif
 #include <string.h>
 #include <sstream>
 #include <vector>
@@ -12,11 +9,10 @@
 using namespace std;
 
 class Label {
-protected:
-	double x, y;
-	double width, height;
-	Color color;
 public:
+	void init(double newX, double newY, string text, Color c);
+	void copy(const Label &c);
+	
 	Label();
 	Label(double newX, double newY, string text);
 	Label(double newX, double newY, string text, Color c);
@@ -25,6 +21,9 @@ public:
 
 	string contents;
 	bool active;
+	double x, y;
+	double width, height;
+	Color color;
 
 	void setColor(Color c);
 
@@ -48,6 +47,7 @@ public:
 	UIRect& operator = (const UIRect &c);
 
 	Label label;
+	bool over;
 	bool active;
 
 	void init(double x, double y, double w, double h, string text);
@@ -63,10 +63,15 @@ public:
 
 	void setWidth(double w);
 	void setHeight(double h);
-
 	void setBorderWidth(double w);
+
 	void setBorderColor(Color c);
+	void setBorderColor(double c);
+	void setBorderColor(double r, double g, double b);
+
 	void setBackgroundColor(Color c);
+	void setBackgroundColor(double c);
+	void setBackgroundColor(double r, double g, double b);
 
 	bool hover(int x, int y);
 	virtual void draw();

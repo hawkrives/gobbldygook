@@ -1,12 +1,13 @@
-#include<fstream>
-#include<iostream>
-using namespace std;
+#include <fstream>
+#include <iostream>
 #include "data.h"
+using namespace std;
 
 int main() {
-  ifstream g("courses-s2-1213.csv");
-  vector<Course> courses;
-  while (!g.eof()) {
-    Course incourse(g)
-    courses.push_back(incourse);
-  }
+	ifstream g("courses-s2-1213.csv");
+	std::vector<Course> courses;
+	while (!g.eof()) {
+		Course tmpCourse(g);
+		courses.push_back(tmpCourse);
+	}
+}

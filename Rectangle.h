@@ -1,11 +1,7 @@
 #ifndef __lab8__Rectangle__
 #define __lab8__Rectangle__
 
-#ifdef MACOSX
-#include <GLUT/glut.h>
-#else
 #include <GL/glut.h>
-#endif
 #include "Color.h"
 
 class Rectangle {
