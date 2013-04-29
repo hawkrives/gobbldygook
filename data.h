@@ -35,8 +35,9 @@ protected:
 
 class Course {
 protected:
-  int number;
   Department department;
+  int number;
+  char section;
   Major** majors;
   Conc** concs;
   string title;
