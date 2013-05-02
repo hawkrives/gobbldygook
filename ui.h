@@ -12,4 +12,6 @@ using namespace std;
 #include <GL/glut.h>
 #endif
 
+#include "Color.h"
+
 #endif

@@ -1,4 +1,4 @@
-#include "ui-elements.h"
+#include "ui-textboxes.h"
 
 TextBox::TextBox(double x, double y, double w, double h, string text) : UIRect(x, y, w, h, text) {}
 TextBox::TextBox(const TextBox &c) : UIRect(c) {}

@@ -1,3 +1,6 @@
+#ifndef __Data__
+#define __Data__
+
 using namespace std;
 #include <sstream>
 #include <fstream>
@@ -101,3 +104,5 @@ protected:
 	string interests;
 	double gradYear;
 };
+
+#endif

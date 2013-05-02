@@ -1,7 +1,14 @@
 #ifndef __Rectangle__
 #define __Rectangle__
 
+using namespace std;
+
+#ifdef MACOSX
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
+#endif
+
 #include "Color.h"
 
 class Rectangle {

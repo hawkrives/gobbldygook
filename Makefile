@@ -10,19 +10,30 @@ else
 
 endif
 
-schedule: ui elements Rectangle.h Color.h
-	g++ $(OPTS) -o schedule ui.o ui-elements.o Color.o Rectangle.o $(LIBS)
+schedule: ui
+	g++ $(OPTS) -o schedule schedule.o $(LIBS)
 
 
-ui: ui.cpp ui.h elements
-	g++ $(OPTS) $(MACOSX_DEFINE) -c ui.cpp
+ui: schedule.cpp elements
+	g++ $(OPTS) $(MACOSX_DEFINE) -c schedule.cpp
 
 # data: data.cpp data.h
-# 	g++ $(OPTS) $(MACOSX_DEFINE) -c data.cpp
+	# g++ $(OPTS) $(MACOSX_DEFINE) -c data.cpp
 
 
-elements: ui-elements.cpp ui-elements.h rectangle ui-label.cpp ui-textboxes.cpp ui-buttons.cpp
-	g++ $(OPTS) $(MACOSX_DEFINE) -c ui-elements.cpp ui-elements.h ui-label.cpp ui-textboxes.cpp ui-buttons.cpp
+elements: ui-rect buttons label textboxes
+
+buttons: ui-buttons.cpp ui-buttons.h ui-rect
+	g++ $(OPTS) $(MACOSX_DEFINE) -c ui-buttons.cpp
+
+textboxes: ui-textboxes.cpp ui-textboxes.h ui-rect
+	g++ $(OPTS) $(MACOSX_DEFINE) -c ui-textboxes.cpp
+
+ui-rect: ui-rect.cpp ui-rect.h ui.h label rectangle
+	g++ $(OPTS) $(MACOSX_DEFINE) -c ui-rect.cpp
+
+label: ui-label.cpp ui-label.h ui.h
+	g++ $(OPTS) $(MACOSX_DEFINE) -c ui-label.cpp
 
 
 rectangle: Rectangle.cpp Rectangle.h color

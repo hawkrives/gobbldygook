@@ -1,4 +1,4 @@
-#include "ui-elements.h"
+#include "ui-label.h"
 
 void Label::init(double newX, double newY, string text, Color c) {
 	x = newX; y = newY;
