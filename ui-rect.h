@@ -1,34 +1,11 @@
-#ifndef __uielements__
-#define __uielements__
+#ifndef __UIRect__
+#define __UIRect__
 
-#include <GL/glut.h>
-#include <string.h>
-#include <sstream>
-#include <vector>
-#include "Rectangle.h"
 using namespace std;
 
-class Label {
-public:
-	void init(double newX, double newY, string text, Color c);
-	void copy(const Label &c);
-	
-	Label();
-	Label(double newX, double newY, string text);
-	Label(double newX, double newY, string text, Color c);
-	Label(const Label &c);
-	Label &operator= (const Label &c);
-
-	string contents;
-	bool active;
-	double x, y;
-	double width, height;
-	Color color;
-
-	void setColor(Color c);
-
-	void draw();
-};
+#include "ui.h"
+#include "Rectangle.h"
+#include "ui-label.h"
 
 class UIRect {
 private:
@@ -75,28 +52,6 @@ public:
 
 	bool hover(int x, int y);
 	virtual void draw();
-};
-
-class Button : public UIRect {
-public:
-	Button();
-	Button(double x, double y, double w, double h, string text);
-	Button(const Button &c);
-
-	Button& operator= (const Button &c);
-
-	void draw();
-};
-
-class TextBox : public UIRect {
-public:
-	TextBox();
-	TextBox(double x, double y, double w, double h, string text);
-	TextBox(const TextBox &c);
-
-	TextBox &operator= (const TextBox &c);
-
-	void draw();
 };
 
 #endif

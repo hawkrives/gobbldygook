@@ -1,5 +1,6 @@
 using namespace std;
 #include <sstream>
+#include <fstream>
 #include <vector>
 
 enum gened {

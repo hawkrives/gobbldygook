@@ -1,5 +1,5 @@
-#ifndef __lab8__Rectangle__
-#define __lab8__Rectangle__
+#ifndef __Rectangle__
+#define __Rectangle__
 
 #include <GL/glut.h>
 #include "Color.h"
@@ -33,4 +33,4 @@ public:
 	void draw();
 };
 
-#endif /* defined(__lab8__Rectangle__) */
+#endif /* defined(__Rectangle__) */
