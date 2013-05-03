@@ -1,8 +1,8 @@
 #ifndef __TextBox__
 #define __TextBox__
 
+#include "ui-rect.hpp"
 using namespace std;
-#include "ui-rect.h"
 
 class TextBox : public UIRect {
 public:
@@ -11,8 +11,17 @@ public:
 	TextBox(const TextBox &c);
 
 	TextBox &operator= (const TextBox &c);
+};
 
-	void draw();
+class FilterBox : public TextBox {
+public:
+	FilterBox();
+	FilterBox(double x, double y, double w, double h, string text);
+	FilterBox(const FilterBox &c);
+	
+	FilterBox &operator= (const FilterBox &c);
+	
+//	void draw();
 };
 
 #endif

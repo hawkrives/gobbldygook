@@ -1,15 +1,10 @@
 #ifndef __Rectangle__
 #define __Rectangle__
 
+#include "opengl-include.hpp"
+#include "color.hpp"
+
 using namespace std;
-
-#ifdef MACOSX
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
-#include "Color.h"
 
 class Rectangle {
 public:
@@ -40,4 +35,4 @@ public:
 	void draw();
 };
 
-#endif /* defined(__Rectangle__) */
+#endif

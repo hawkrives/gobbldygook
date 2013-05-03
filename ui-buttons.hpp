@@ -1,8 +1,8 @@
 #ifndef __Button__
 #define __Button__
 
+#include "ui-rect.hpp"
 using namespace std;
-#include "ui-rect.h"
 
 class Button : public UIRect {
 public:
@@ -12,7 +12,6 @@ public:
 
 	Button& operator= (const Button &c);
 
-	void draw();
+//	void draw();
 };
-
 #endif

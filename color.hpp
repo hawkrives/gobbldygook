@@ -1,10 +1,11 @@
-#ifndef __gobbldygook_Color__
-#define __gobbldygook_Color__
+#ifndef __Color__
+#define __Color__
 
 #include <iostream>
 using namespace std;
 
-struct Color {
+class Color {
+public:
 	double red, green, blue;
 	Color();
 	Color(double single);
@@ -16,4 +17,4 @@ struct Color {
 
 ostream &operator<<(ostream &os, Color c);
 
-#endif /* defined(__gobbldygook_Color__) */
+#endif

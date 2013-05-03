@@ -1,4 +1,9 @@
-#include "ui-label.h"
+#include "ui-label.hpp"
+
+/*
+ * Label
+ *
+ */
 
 void Label::init(double newX, double newY, string text, Color c) {
 	x = newX; y = newY;
@@ -44,4 +49,63 @@ void Label::draw() {
 	for (unsigned int i = 0; i < contents.length(); i++)
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, contents[i]);
 	glEnd();
+}
+
+/* 
+ * Heading
+ *
+ */
+
+Heading::Heading(double newX, double newY, string text) : Label(newX, newY, text) {};
+Heading::Heading(double newX, double newY, string text, Color color) : Label(newX, newY, text, color) {};
+Heading::Heading(const Heading &c) : Label(c) {};
+Heading &Heading::operator=(const Heading &c) {
+	if (this == &c) return *this;
+	Label::copy(c);
+	return *this;
+}
+
+/*
+ * CollapsibleHeading
+ *
+ */
+
+CollapsibleHeading::CollapsibleHeading(double newX, double newY, string text) : Heading(newX, newY, text) {};
+CollapsibleHeading::CollapsibleHeading(double newX, double newY, string text, Color color) : Heading(newX, newY, text, color) {};
+CollapsibleHeading::CollapsibleHeading(const CollapsibleHeading &c) : Heading(c) {
+	collapsed = c.collapsed;
+};
+CollapsibleHeading &CollapsibleHeading::operator=(const CollapsibleHeading &c) {
+	if (this == &c) return *this;
+	Label::copy(c);
+	collapsed = c.collapsed;
+	return *this;
+}
+
+/*
+ * CourseID
+ *
+ */
+
+CourseID::CourseID(double newX, double newY, string text) : Label(newX, newY, text) {};
+CourseID::CourseID(double newX, double newY, string text, Color color) : Label(newX, newY, text, color) {};
+CourseID::CourseID(const CourseID &c) : Label(c) {};
+CourseID &CourseID::operator=(const CourseID &c) {
+	if (this == &c) return *this;
+	Label::copy(c);
+	return *this;
+}
+
+/*
+ * CourseName
+ *
+ */
+
+CourseName::CourseName(double newX, double newY, string text) : Label(newX, newY, text) {};
+CourseName::CourseName(double newX, double newY, string text, Color color) : Label(newX, newY, text, color) {};
+CourseName::CourseName(const CourseName &c) : Label(c) {};
+CourseName &CourseName::operator=(const CourseName &c) {
+	if (this == &c) return *this;
+	Label::copy(c);
+	return *this;
 }

@@ -1,4 +1,4 @@
-#include "ui-buttons.h"
+#include "ui-buttons.hpp"
 
 Button::Button(double x, double y, double w, double h, string text) : UIRect(x, y, w, h, text) {}
 Button::Button(const Button &c) : UIRect(c) {}
@@ -9,6 +9,6 @@ Button& Button::operator=(const Button &c) {
 	return *this;
 }
 
-void Button::draw() {
-	UIRect::draw();
-}
+//void Button::draw() {
+//	UIRect::draw();
+//}

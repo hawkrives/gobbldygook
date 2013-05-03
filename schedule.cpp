@@ -1,7 +1,14 @@
-#include "ui.h"
-#include "ui-buttons.cpp"
-#include "ui-label.cpp"
-#include "ui-textboxes.cpp"
+#include "color.hpp"
+
+#include "ui.hpp"
+
+#include "ui-buttons.hpp"
+#include "ui-label.hpp"
+#include "ui-textboxes.hpp"
+#include "ui-toggle.hpp"
+
+// #include "data.hpp"
+
 using namespace std;
 
 int WIDTH = 1280;  // width of the user window
@@ -14,6 +21,7 @@ bool WELCOME = true;
 vector<Button> buttons;
 vector<Rectangle> boxes;
 vector<TextBox> textboxes;
+vector<Toggle> toggles;
 vector<Label> labels;
 
 const unsigned int MAX_NUM_CHARS_IN_TEXTBOX = 20;

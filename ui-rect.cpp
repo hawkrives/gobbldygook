@@ -1,4 +1,4 @@
-#include "ui-rect.h"
+#include "ui-rect.hpp"
 
 UIRect::UIRect(double x, double y, double w, double h, string text) {
 	UIRect::init(x, y, w, h, text);

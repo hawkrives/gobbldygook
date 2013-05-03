@@ -1,4 +1,4 @@
-#include "Color.h"
+#include "color.hpp"
 
 Color::Color() {
 	red = green = blue = 0;

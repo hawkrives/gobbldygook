@@ -1,11 +1,11 @@
 #ifndef __UIRect__
 #define __UIRect__
 
-using namespace std;
+#include "ui.hpp"
+#include "rectangle.hpp"
+#include "ui-label.hpp"
 
-#include "ui.h"
-#include "Rectangle.h"
-#include "ui-label.h"
+using namespace std;
 
 class UIRect {
 private:

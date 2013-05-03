@@ -1,6 +1,6 @@
 #include <fstream>
 #include <iostream>
-#include "data.h"
+#include "data.hpp"
 using namespace std;
 
 int main() {

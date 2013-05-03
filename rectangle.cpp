@@ -1,4 +1,4 @@
-#include "Rectangle.h"
+#include "rectangle.hpp"
 
 Rectangle::Rectangle() {}
 Rectangle::Rectangle(double x, double y, double w, double h) {
