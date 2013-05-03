@@ -11,7 +11,5 @@ public:
 	Button(const Button &c);
 
 	Button& operator= (const Button &c);
-
-//	void draw();
 };
 #endif

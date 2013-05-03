@@ -20,8 +20,8 @@ all: schedule.cpp $(objects)
 	$(CC) $(OPTS) -o schedule schedule.cpp $(objects) $(INCLUDES)
 
 
-# data: data.cpp data.hpp
-	# $(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c data.cpp
+data: data.cpp data.hpp
+	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c data.cpp
 
 ui-toggle.o: ui-toggle.cpp ui-toggle.hpp ui-rect.o opengl
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-toggle.cpp
