@@ -14,14 +14,23 @@ LIBS = $(INCLUDES) \
 	-framework GLUT -framework OpenGL -lGL -lm -lobjc -lstdc++
 endif
 
-objects = ui-rect.o ui-toggle.o ui-buttons.o ui-textboxes.o ui-label.o rectangle.o color.o
+UI_OBJ = ui-rect.o ui-toggle.o ui-buttons.o ui-textboxes.o ui-label.o rectangle.o color.o
+DATA_OBJ = data.o
+OBJECTS = $(UI_OBJ) $(DATA_OBJ)
 
-all: schedule.cpp $(objects)
-	$(CC) $(OPTS) -o schedule schedule.cpp $(objects) $(INCLUDES)
+all: schedule.cpp $(OBJECTS)
+	$(CC) $(OPTS) -o schedule schedule.cpp $(OBJECTS) $(INCLUDES)
+
+data-test: $(DATA_OBJ) templates.h
+	$(CC) $(OPTS) -o data-test data.cpp $(INCLUDES)
+
+ui-test: $(UI_OBJ)
+	$(CC) $(OPTS) -o ui-test ui-test.cpp $(INCLUDES)
 
 
-data: data.cpp data.hpp
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c data.cpp
+data.o: data.cpp data.hpp
+	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) data.cpp
+
 
 ui-toggle.o: ui-toggle.cpp ui-toggle.hpp ui-rect.o opengl
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-toggle.cpp
