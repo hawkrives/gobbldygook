@@ -1,8 +1,12 @@
-template<class InputIterator, class Function>
-Function for_each(InputIterator first, InputIterator last, Function fn) {
-	while (first!=last) {
-		fn (*first);
-		++first;
-	}
-	return fn;      // or, since C++11: return move(fn);
+#include <iostream>     // std::cout
+#include <algorithm>    // std::for_each
+#include <vector>       // std::vector
+
+template<typename Target, typename Source>
+Target lexical_cast(Source arg) {
+	std::stringstream interpreter;
+	Target result;
+	if(!(interpreter << arg) || !(interpreter >> result) || !(interpreter >> std::ws).eof())
+		throw bad_lexical_cast();
+	return result;
 }
