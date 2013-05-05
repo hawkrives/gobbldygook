@@ -24,10 +24,14 @@ const unsigned int MAX_NUM_CHARS_IN_TEXTBOX = 20;
 void drawWindow() {
 	glClear(GL_COLOR_BUFFER_BIT); // clear the buffer
 	
-	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)      i->draw();
-	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) i->draw();
-	for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i)         i->draw();
-	for (vector<Toggle>::iterator i = toggles.begin(); i != toggles.end(); ++i)       i->draw();
+	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)
+		i->draw();
+	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) 
+		i->draw();
+	for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i)
+		i->draw();
+	for (vector<Toggle>::iterator i = toggles.begin(); i != toggles.end(); ++i)
+		i->draw();
 	
 	glutSwapBuffers(); // tell the graphics card that we're done.
 }
