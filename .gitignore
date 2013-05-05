@@ -1,6 +1,7 @@
-*
-!*.*
 .DS_Store
 *.xcodeproj/*
 *.o
 *.dSYM/*
+
+# Binaries
+data-test
