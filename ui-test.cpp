@@ -2,12 +2,12 @@
 
 #include "ui.hpp"
 
-#include "ui-buttons.hpp"
-#include "ui-label.hpp"
-#include "ui-textboxes.hpp"
-#include "ui-toggle.hpp"
+//#include "ui-buttons.hpp"
+//#include "ui-label.hpp"
+//#include "ui-textboxes.hpp"
+//#include "ui-toggle.hpp"
 
-// #include "data.hpp"
+//#include "glui/GL/glui.h"
 
 using namespace std;
 
@@ -22,13 +22,15 @@ char programName[] = "scheduler";
 //vector<Toggle> toggles;
 //vector<Label> labels;
 
+const unsigned int MAX_NUM_CHARS_IN_TEXTBOX = 20;
+
 void drawWindow() {
 	glClear(GL_COLOR_BUFFER_BIT); // clear the buffer
 	
-	//for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)      i->draw();
-	//for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) i->draw();
-	//for (vector<Rectangle>::iterator i = boxes.begin(); i != boxes.end(); ++i)       i->draw();
-	//for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i)         i->draw();
+//	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)      i->draw();
+//	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) i->draw();
+//	for (vector<Rectangle>::iterator i = boxes.begin(); i != boxes.end(); ++i)       i->draw();
+//	for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i)         i->draw();
 	
 	glutSwapBuffers(); // tell the graphics card that we're done.
 }
@@ -49,7 +51,9 @@ void reshape(int w, int h) {
 	glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
 }
 
+
 // initGlWindow is the function that starts the ball rolling, in  terms of getting everything set up and passing control over to the glut library for event handling. It needs to tell the glut library about all the essential functions: what function to call if the window changes shape, what to do to redraw, handle the keyboard, etc.
+
 int main() {
 	char *argv[] = { programName };
 	int argc = sizeof(argv) / sizeof(argv[0]);
@@ -73,9 +77,6 @@ int main() {
 	
 	glutDisplayFunc(drawWindow);
 	glutReshapeFunc(reshape);
-	glutKeyboardFunc(keyboard);
-	glutMouseFunc(mouse);
-	glutMotionFunc(mouse_motion);
-	glutPassiveMotionFunc(mouse_motion);
 	glutMainLoop();
 }
+
