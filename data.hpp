@@ -85,7 +85,6 @@ enum GenEd {
 	EIN    // Ethical Issues and Normative Perspectives
 };
 
-
 struct Instructor {
 	string name;
 	string specialty;
@@ -223,7 +222,7 @@ public:
 	vector<Concentration> concentrations;
 	vector<Conversation> conversations;
 	vector<Instructor> favInstructors;
-	
+
 	string interests;
 	double gradYear;
 	
@@ -235,11 +234,25 @@ public:
 		
 		for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i)
 			os << i->name << " ";
-		
+
 		return os;
 	}
 	void display();
 };
+
+ostream &operator<<(ostream &os, Student &item) { return item.getData(os); }
+void Student::display() { cout << *this << endl; }
+
+Course spit(Course n) {
+	return n;
+}
+
+int stringToInt(string s){
+	int thevalue;
+	istringstream ss(s);
+	ss >> thevalue;
+	return thevalue;
+}
 
 #endif
 

@@ -13,7 +13,7 @@ int main() {
 		incourse.display();
 		i++; cout << i << endl;
 	}
-	
+
 	for_each(courses.begin(), courses.end(), spit);
 }
 

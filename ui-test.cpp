@@ -51,7 +51,6 @@ void reshape(int w, int h) {
 	glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
 }
 
-
 // initGlWindow is the function that starts the ball rolling, in  terms of getting everything set up and passing control over to the glut library for event handling. It needs to tell the glut library about all the essential functions: what function to call if the window changes shape, what to do to redraw, handle the keyboard, etc.
 
 int main() {
@@ -62,7 +61,7 @@ int main() {
 	glutInitWindowSize(WIDTH,HEIGHT);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow(programName);
-	
+
 	// clear the window to black
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);

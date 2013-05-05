@@ -21,6 +21,7 @@ OBJECTS = $(UI_OBJ) $(DATA_OBJ)
 all: schedule.cpp $(OBJECTS)
 	$(CC) $(OPTS) -o schedule schedule.cpp $(OBJECTS) $(INCLUDES)
 
+
 data-test: $(DATA_OBJ)
 	$(CC) $(OPTS) -o data-test data.cpp $(INCLUDES)
 
