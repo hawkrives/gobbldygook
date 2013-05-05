@@ -36,13 +36,6 @@ void drawWindow() {
 	glutSwapBuffers(); // tell the graphics card that we're done.
 }
 
-// close the window and finish the program
-void exitAll() {
-	int win = glutGetWindow();
-	glutDestroyWindow(win);
-	exit(0);
-}
-
 // the reshape function handles the case where the user changes the size of the window.  We need to fix the coordinate system, so that the drawing area is still the unit square.
 void reshape(int w, int h) {
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
