@@ -21,15 +21,21 @@ all: schedule.cpp $(OBJECTS)
 	$(CC) $(OPTS) -o schedule schedule.cpp $(OBJECTS) $(LIBS)
 
 data-test: $(DATA_OBJ)
-	$(CC) $(OPTS) -o data-test data.cpp $(LIBS)
+	$(CC) $(OPTS) -o data-test data.o $(DATA_OBJ) $(LIBS)
 
 ui-test: $(UI_OBJ)
-	$(CC) $(OPTS) -o ui-test ui-test.cpp $(LIBS)
+	$(CC) $(OPTS) -o ui-test ui-test.o $(UI_OBJ) $(LIBS)
 
+
+data-test.o: $(DATA_OBJ)
+	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c data.cpp
 
 data.o: data.cpp data.hpp
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c data.cpp
 
+
+ui-test.o: $(UI_OBJ)
+	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-test.cpp
 
 ui-toggle.o: ui-toggle.cpp ui-toggle.hpp ui-rect.o
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-toggle.cpp
