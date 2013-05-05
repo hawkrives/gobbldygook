@@ -2,6 +2,7 @@
 *.xcodeproj/*
 *.o
 *.dSYM/*
+*~
 
 # Binaries
 data-test
