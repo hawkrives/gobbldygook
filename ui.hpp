@@ -5,7 +5,12 @@
 #include <iostream>
 #include <vector>
 
-#include "opengl-include.hpp"
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
 #include "color.hpp"
 
 using namespace std;
