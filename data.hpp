@@ -45,20 +45,10 @@ vector<string> split(const string &s, char delim) {
     return elems;
 }
 
-// void removeAllQuotes(char *str) {
-// 	// originally taken from http://stackoverflow.com/a/7144045
-// 	int len = strlen(str);
-// 	char lineWithoutQuotes[len];
-// 	int i, j;
-// 	if (str[0] != '"')
-// 		lineWithoutQuotes[0] = str[0];
-// 	for (i = j = 1; i < strlen(str); i++){
-// 		if (str[i] == '"' && str[i-1] != '\\')
-// 			continue;
-// 		lineWithoutQuotes[j++] = str[i];
-// 	}
-// 	strcpy(str, lineWithoutQuotes);
-// }
+string removeAllQuotes(string s) {
+  s.erase(remove(s.begin(), s.end(), '\"'), s.end());
+  return s;
+}
 
 enum GenEd {
 	// Foundation Studies
@@ -141,6 +131,8 @@ public:
 		string tmpLine;
 		getline(is, tmpLine);
 		vector<string> record = split(tmpLine, ',');
+		for (vector<string>::iterator i=record.begin(); i != record.end(); ++i)
+		  *i=removeAllQuotes(*i);
 		
 		// Ignore the first column;
 		record.at(0);
