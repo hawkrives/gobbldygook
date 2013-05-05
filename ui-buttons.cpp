@@ -10,7 +10,3 @@ Button& Button::operator=(const Button &c) {
 	UIRect::copy(c);
 	return *this;
 }
-
-void Button::draw() {
-	UIRect::draw();
-}
