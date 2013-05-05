@@ -7,6 +7,7 @@ int main() {
 	int i = 0;
 	string dummyLine;
 	getline(g, dummyLine);
+
 	while (!g.eof()) {
 		Course incourse(g);
 		courses.push_back(incourse);
@@ -16,4 +17,3 @@ int main() {
 	
 	//for_each(courses.begin(), courses.end(), spit);
 }
-

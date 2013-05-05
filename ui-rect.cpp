@@ -20,6 +20,7 @@ void UIRect::init(double x, double y, double w, double h, string text) {
 	x1 = x; x2 = x1 + width;
 	y1 = y; y2 = y1 + height;
 
+	labelAlignment = 0;
 	label = Label(x1+2, y2-(y2-y1-7.5)/2, text, Color(1, 0, 0));
 
 	backgroundColor = Color(1);
@@ -105,6 +106,13 @@ void UIRect::setWidth(double w) {
 void UIRect::setHeight(double h) { 
 	height = h;
 	y2 = y1 + height; 
+}
+
+void UIRect::setAlignment(int place) {
+	if (place == 0 || place == 1 || place == 2)
+		labelAlignment = place;
+	else
+		return;
 }
 
 bool UIRect::hover(int x, int y) {

@@ -2,12 +2,10 @@
 
 #include "ui.hpp"
 
-//#include "ui-buttons.hpp"
-//#include "ui-label.hpp"
-//#include "ui-textboxes.hpp"
-//#include "ui-toggle.hpp"
-
-//#include "glui/GL/glui.h"
+#include "ui-buttons.hpp"
+#include "ui-label.hpp"
+#include "ui-textboxes.hpp"
+#include "ui-toggle.hpp"
 
 using namespace std;
 
@@ -16,21 +14,20 @@ int HEIGHT = 768;  // height of the user window
 char programName[] = "scheduler";
 
 // button info
-//vector<Button> buttons;
-//vector<Rectangle> boxes;
-//vector<TextBox> textboxes;
-//vector<Toggle> toggles;
-//vector<Label> labels;
+vector<Button> buttons;
+vector<TextBox> textboxes;
+vector<Toggle> toggles;
+vector<Label> labels;
 
 const unsigned int MAX_NUM_CHARS_IN_TEXTBOX = 20;
 
 void drawWindow() {
 	glClear(GL_COLOR_BUFFER_BIT); // clear the buffer
 	
-//	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)      i->draw();
-//	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) i->draw();
-//	for (vector<Rectangle>::iterator i = boxes.begin(); i != boxes.end(); ++i)       i->draw();
-//	for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i)         i->draw();
+	for (vector<Button>::iterator i = buttons.begin(); i != buttons.end(); ++i)      i->draw();
+	for (vector<TextBox>::iterator i = textboxes.begin(); i != textboxes.end(); ++i) i->draw();
+	for (vector<Label>::iterator i = labels.begin(); i != labels.end(); ++i)         i->draw();
+	for (vector<Toggle>::iterator i = toggles.begin(); i != toggles.end(); ++i)       i->draw();
 	
 	glutSwapBuffers(); // tell the graphics card that we're done.
 }

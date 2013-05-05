@@ -8,7 +8,7 @@ else
 CC = clang++
 #CC = ~/Projects/emscripten/emcc
 MACOSX_DEFINE = -DMACOSX -I/sw/include
-INCLUDES = -I/usr/common/include -I/usr/include/GL
+INCLUDES = -I/usr/common/include -I/usr/include/GL 
 LIBS = $(INCLUDES) \
 	-L/System/Library/Frameworks/OpenGL.framework/Libraries \
 	-framework GLUT -framework OpenGL -lGL -lm -lobjc -lstdc++
@@ -19,13 +19,13 @@ DATA_OBJ = data.o
 OBJECTS = $(UI_OBJ) $(DATA_OBJ)
 
 all: schedule.cpp $(OBJECTS)
-	$(CC) $(OPTS) -o schedule schedule.cpp $(OBJECTS) $(INCLUDES)
+	$(CC) $(OPTS) -o schedule schedule.cpp $(OBJECTS) $(LIBS)
 
 data-test: $(DATA_OBJ)
-	$(CC) $(OPTS) -o data-test data.cpp $(INCLUDES)
+	$(CC) $(OPTS) -o data-test data.cpp $(LIBS)
 
 ui-test: $(UI_OBJ)
-	$(CC) $(OPTS) -o ui-test ui-test.cpp $(INCLUDES)
+	$(CC) $(OPTS) -o ui-test ui-test.cpp $(LIBS)
 
 
 data.o: data.cpp data.hpp
@@ -49,11 +49,10 @@ ui-label.o: ui-label.cpp ui-label.hpp ui.hpp
 
 
 rectangle.o: rectangle.cpp rectangle.hpp color.o
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(LIBS) -c rectangle.cpp
+	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c rectangle.cpp
 
 color.o: color.cpp color.hpp
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(LIBS) -c color.cpp
+	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c color.cpp
 
 clean:
 	rm -f *.o schedule
-

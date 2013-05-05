@@ -45,7 +45,7 @@ void Label::setColor(Color c) {
 
 void Label::draw() {
 	glColor3f(color.red, color.green, color.blue);
-	glRasterPos2f( x, y );
+	glRasterPos2f(x, y);
 	for (unsigned int i = 0; i < contents.length(); i++)
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, contents[i]);
 	glEnd();
