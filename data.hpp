@@ -128,7 +128,7 @@ protected:
 	float time[7];
 public:
 	Course(istream &is) {
-		if (is == 0) return;
+		if (!is) return;
 		string tmpLine;
 		getline(is, tmpLine);
 		vector<string> record = split(tmpLine, ',');
