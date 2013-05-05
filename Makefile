@@ -56,3 +56,4 @@ color.o: color.cpp color.hpp
 
 clean:
 	rm -f *.o schedule
+
