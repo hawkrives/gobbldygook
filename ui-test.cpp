@@ -1,7 +1,6 @@
 #include "color.hpp"
 
 #include "ui.hpp"
-
 #include "ui-buttons.hpp"
 #include "ui-label.hpp"
 #include "ui-textboxes.hpp"
@@ -33,10 +32,9 @@ void drawWindow() {
 	for (vector<Toggle>::iterator i = toggles.begin(); i != toggles.end(); ++i)
 		i->draw();
 	
-	glutSwapBuffers(); // tell the graphics card that we're done.
+	glutSwapBuffers();
 }
 
-// the reshape function handles the case where the user changes the size of the window.  We need to fix the coordinate system, so that the drawing area is still the unit square.
 void reshape(int w, int h) {
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	WIDTH = w;  HEIGHT = h;
@@ -45,14 +43,11 @@ void reshape(int w, int h) {
 	glOrtho(0., WIDTH-1, HEIGHT-1, 0., -1.0, 1.0);
 }
 
-
-// initGlWindow is the function that starts the ball rolling, in  terms of getting everything set up and passing control over to the glut library for event handling. It needs to tell the glut library about all the essential functions: what function to call if the window changes shape, what to do to redraw, handle the keyboard, etc.
-
 int main() {
 	char *argv[] = { programName };
 	int argc = sizeof(argv) / sizeof(argv[0]);
 	glutInit(&argc, argv);
-	glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE );
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 	glutInitWindowSize(WIDTH,HEIGHT);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow(programName);
@@ -68,6 +63,8 @@ int main() {
 	
 	// welcome message
 	cout << "Welcome to " << programName << endl;
+	buttons.push_back(Button(10, 10, 100, 40, "Hi"));
+
 	
 	glutDisplayFunc(drawWindow);
 	glutReshapeFunc(reshape);
