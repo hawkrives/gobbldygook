@@ -16,38 +16,38 @@ string tostring(int i) {
 }
 
 int stringToInt(string const& str) {
-  istringstream i(str);
-  int x;
-  i >> x;
-  return x;
+	istringstream i(str);
+	int x;
+	i >> x;
+	return x;
 }
 
 float stringToFloat(string const& str) {
-  istringstream i(str);
-  float x;
-  i >> x;
-  return x;
+	istringstream i(str);
+	float x;
+	i >> x;
+	return x;
 }
 
 vector<string> &split(const string &s, char delim, vector<string> &elems) {
-    stringstream ss(s);
-    string item;
-    while (getline(ss, item, delim)) {
-        elems.push_back(item);
-    }
-    return elems;
+	stringstream ss(s);
+	string item;
+	while (getline(ss, item, delim)) {
+		elems.push_back(item);
+	}
+	return elems;
 }
 
 vector<string> split(const string &s, char delim) {
 	// taken from http://stackoverflow.com/a/236803
-    vector<string> elems;
-    split(s, delim, elems);
-    return elems;
+	vector<string> elems;
+	split(s, delim, elems);
+	return elems;
 }
 
 string removeAllQuotes(string s) {
-  s.erase(remove(s.begin(), s.end(), '\"'), s.end());
-  return s;
+	s.erase(remove(s.begin(), s.end(), '\"'), s.end());
+	return s;
 }
 
 
@@ -133,7 +133,7 @@ public:
 		getline(is, tmpLine);
 		vector<string> record = split(tmpLine, ',');
 		for (vector<string>::iterator i=record.begin(); i != record.end(); ++i)
-		  *i=removeAllQuotes(*i);
+			*i=removeAllQuotes(*i);
 		
 		// Ignore the first column;
 		record.at(0);
@@ -180,13 +180,14 @@ public:
 		// and Twelve knows who teaches.
 		// Instructors = record.at(12);
 	}
-  /*void parseID(char* str) {
+	/* void parseID(char* str) {
 		string tmp = str;
 		ID = tmp;
 		// TODO: do this.
-		}*/
-        int parseID(string s) {
-	   return stringToInt(s.substr(s.find(' ')+1,3));}
+	}*/
+	int parseID(string s) {
+		return stringToInt(s.substr(s.find(' ')+1,3));
+	}
 
 	void updateID() {
 		ID = department.shorthand + tostring(number) + section;
@@ -194,17 +195,17 @@ public:
 	string getID() {
 		return ID;
 	}
-	
-        ostream& getData(ostream &os) {
-	        os << ID << section << " " << number << " ";
+
+	ostream& getData(ostream &os) {
+		os << ID << section << " " << number << " ";
 		os << title << "/";
 		/*for (vector<Instructor>::iterator i = professor.begin(); i != professor.end(); ++i) {
-			os << i->name << " ";
-			}*/
+		os << i->name << " ";
+		}*/
 		return os;
 	}
 	void display();
-};
+};	
 
 ostream &operator<<(ostream &os, Course &item) { return item.getData(os); }
 void Course::display() { cout << *this << endl; }
@@ -221,19 +222,19 @@ public:
 	vector<Concentration> concentrations;
 	vector<Conversation> conversations;
 	vector<Instructor> favInstructors;
-	
+
 	string interests;
 	double gradYear;
-	
+
 	ostream& getData(ostream &os) {
 		os << name << " ";
-		
+
 		for (vector<Course>::iterator i = takenCourses.begin(); i != takenCourses.end(); ++i)
 			os << i->getID() << " ";
-		
+
 		for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i)
 			os << i->name << " ";
-		
+
 		return os;
 	}
 	void display();
