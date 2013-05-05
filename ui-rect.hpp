@@ -15,6 +15,7 @@ protected:
 	double width, height;
 	double borderThickness;
 
+	int labelAlignment;
 	Color backgroundColor, borderColor;
 	Rectangle background, border;
 public:
@@ -49,6 +50,8 @@ public:
 	void setBackgroundColor(Color c);
 	void setBackgroundColor(double c);
 	void setBackgroundColor(double r, double g, double b);
+
+	void setAlignment(int place);
 
 	bool hover(int x, int y);
 	virtual void draw();
