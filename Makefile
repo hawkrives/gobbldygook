@@ -6,7 +6,6 @@ ARCH := $(shell uname)
 ifeq ($(ARCH), Linux)
 else
 CC = clang++
-#CC = ~/Projects/emscripten/emcc
 MACOSX_DEFINE = -DMACOSX -I/sw/include
 INCLUDES = -I/usr/common/include -I/usr/include/GL 
 LIBS = $(INCLUDES) \
@@ -41,15 +40,18 @@ ui-buttons.o: ui-buttons.cpp ui-buttons.hpp ui-rect.o
 ui-textboxes.o: ui-textboxes.cpp ui-textboxes.hpp ui-rect.o
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-textboxes.cpp
 
-ui-rect.o: ui-rect.cpp ui-rect.hpp ui.hpp ui-label.o rectangle.o
+
+ui-rect.o: ui-rect.cpp ui-rect.hpp ui-label.o rectangle.o ui-general
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-rect.cpp
 
-ui-label.o: ui-label.cpp ui-label.hpp ui.hpp
+ui-label.o: ui-label.cpp ui-label.hpp ui-general
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-label.cpp
 
 
-rectangle.o: rectangle.cpp rectangle.hpp color.o
+rectangle.o: rectangle.cpp rectangle.hpp ui-general
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c rectangle.cpp
+
+ui-general: ui.hpp color.o
 
 color.o: color.cpp color.hpp
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c color.cpp
