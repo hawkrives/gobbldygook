@@ -197,7 +197,7 @@ public:
 	}
 
 	ostream& getData(ostream &os) {
-		os << ID << section << " " << number << " ";
+		os << ID << section << " ";
 		os << title << "/";
 		/*for (vector<Instructor>::iterator i = professor.begin(); i != professor.end(); ++i) {
 		os << i->name << " ";
@@ -208,7 +208,7 @@ public:
 };	
 
 ostream &operator<<(ostream &os, Course &item) { return item.getData(os); }
-void Course::display() { cout << *this << endl; }
+void Course::display() { if(this==0) cout << *this << endl; }
 
 void spit(Course n) {
 	n.display();
