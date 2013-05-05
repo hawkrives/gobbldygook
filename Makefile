@@ -23,7 +23,7 @@ all: schedule.cpp $(OBJECTS)
 data-test: $(DATA_OBJ)
 	$(CC) $(OPTS) -o data-test data.o $(DATA_OBJ) $(LIBS)
 
-ui-test: $(UI_OBJ)
+ui-test: ui-test.o
 	$(CC) $(OPTS) -o ui-test ui-test.o $(UI_OBJ) $(LIBS)
 
 
