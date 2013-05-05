@@ -50,6 +50,7 @@ string removeAllQuotes(string s) {
   return s;
 }
 
+
 enum GenEd {
 	// Foundation Studies
 	FYW,   // First-Year Writing 
@@ -138,7 +139,9 @@ public:
 		record.at(0);
 
 		// Second column has the course ID,
-		number = stringToInt(record.at(1));
+		//number = stringToInt(record.at(1));
+		ID = record.at(1);
+		number = parseID(ID);
 
 		// Third column has the section,
 		section = record.at(2)[0];
@@ -177,11 +180,14 @@ public:
 		// and Twelve knows who teaches.
 		// Instructors = record.at(12);
 	}
-	void parseID(char* str) {
+  /*void parseID(char* str) {
 		string tmp = str;
 		ID = tmp;
 		// TODO: do this.
-	}
+		}*/
+        int parseID(string s) {
+	   return stringToInt(s.substr(s.find(' ')+1,3));}
+
 	void updateID() {
 		ID = department.shorthand + tostring(number) + section;
 	}
@@ -189,12 +195,12 @@ public:
 		return ID;
 	}
 	
-	ostream& getData(ostream &os) {
-		os << ID << " ";
+        ostream& getData(ostream &os) {
+	        os << ID << section << " " << number << " ";
 		os << title << "/";
-		for (vector<Instructor>::iterator i = professor.begin(); i != professor.end(); ++i) {
+		/*for (vector<Instructor>::iterator i = professor.begin(); i != professor.end(); ++i) {
 			os << i->name << " ";
-		}
+			}*/
 		return os;
 	}
 	void display();
