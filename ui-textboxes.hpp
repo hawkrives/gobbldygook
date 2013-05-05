@@ -7,6 +7,7 @@ using namespace std;
 class TextBox : public UIRect {
 public:
 	TextBox();
+	TextBox(double x, double y, double w, double h);
 	TextBox(double x, double y, double w, double h, string text);
 	TextBox(const TextBox &c);
 
