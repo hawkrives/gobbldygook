@@ -24,8 +24,6 @@ public:
 	UIRect(const UIRect &c);
 	UIRect& operator = (const UIRect &c);
 
-	virtual ~UIRect();
-
 	Label label;
 	bool over;
 	bool active;
