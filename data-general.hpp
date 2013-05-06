@@ -34,12 +34,6 @@ enum GenEd {
 	EIN    // Ethical Issues and Normative Perspectives
 };
 
-
-struct Instructor {
-	string name;
-	string specialty;
-};
-
 struct Department {
 	string name;
 	string shorthand;
