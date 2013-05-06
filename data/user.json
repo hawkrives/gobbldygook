@@ -1,0 +1,80 @@
+{
+    "name": "Xandra Best",
+    "majors": [
+        "CSCI",
+        "MATH"
+    ],
+    "concentrations": [
+        "STAT",
+        "MUSIC"
+    ],
+
+    "11_12": {
+        "fall": [
+            "course1",
+            "course2",
+            "course3",
+            "course4"
+        ],
+        "interim": [
+            "course1"
+        ],
+        "spring": [
+            "course1",
+            "course2",
+            "course3",
+            "course4"
+        ]
+    },
+    "12_13": {
+        "fall": [
+            "course1",
+            "course2",
+            "course3",
+            "course4"
+        ],
+        "interim": [
+            "course1"
+        ],
+        "spring": [
+            "course1",
+            "course2",
+            "course3",
+            "course4"
+        ]
+    },
+    "13_14": {
+        "fall": [
+            "course1",
+            "course2",
+            "course3",
+            "course4"
+        ],
+        "interim": [
+            "course1"
+        ],
+        "spring": [
+            "course1",
+            "course2",
+            "course3",
+            "course4"
+        ]
+    },
+    "14_15": {
+        "fall": [
+            "course1",
+            "course2",
+            "course3",
+            "course4"
+        ],
+        "interim": [
+            "course1"
+        ],
+        "spring": [
+            "course1",
+            "course2",
+            "course3",
+            "course4"
+        ]
+    }
+}
