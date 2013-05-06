@@ -1,8 +1,13 @@
 #ifndef __Data_student__
 #define __Data_student__
 
-//data-student.hpp
 #include "data-general.hpp"
+#include "data-concentration.hpp"
+#include "data-conversation.hpp"
+#include "data-department.hpp"
+#include "data-instructor.hpp"
+#include "data-major.hpp"
+#include "data-course.hpp"
 
 class Student {
 public:

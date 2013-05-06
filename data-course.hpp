@@ -1,8 +1,12 @@
 #ifndef __Data_course__
 #define __Data_course__
 
-//data-course.hpp
 #include "data-general.hpp"
+#include "data-concentration.hpp"
+#include "data-conversation.hpp"
+#include "data-department.hpp"
+#include "data-instructor.hpp"
+#include "data-major.hpp"
 
 class Course {
 protected:
@@ -108,6 +112,9 @@ public:
 	}
 	void display();
 };	
+
+ostream &operator<<(ostream &os, Course &item) { return item.getData(os); }
+void Course::display() { if(this==0) cout << *this << endl; }
 
 #endif
 

@@ -1,4 +1,11 @@
 #include "data-general.hpp"
+#include "data-concentration.hpp"
+#include "data-conversation.hpp"
+#include "data-course.hpp"
+#include "data-department.hpp"
+#include "data-instructor.hpp"
+#include "data-major.hpp"
+#include "data-student.hpp"
 
 int main() {
 	ifstream g("data/2012-13-s2.csv");
@@ -12,6 +19,4 @@ int main() {
 		courses.push_back(incourse);
 		cout << incourse << endl;
 	}
-	
-	//for_each(courses.begin(), courses.end(), spit);
 }
