@@ -3,6 +3,9 @@
 *.o
 *.dSYM/*
 *~
+#*
+.#*
+*#
 
 # Binaries
 data-test
