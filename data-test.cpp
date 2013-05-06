@@ -6,7 +6,7 @@
 #include "data-instructor.hpp"
 #include "data-major.hpp"
 #include "data-student.hpp"
-#include "JsonBox/JsonBox.h"
+
 
 int main() {
 	ifstream g("data/2012-13-s2.csv");
