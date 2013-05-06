@@ -63,8 +63,11 @@ int main() {
 	
 	// welcome message
 	cout << "Welcome to " << programName << endl;
-	buttons.push_back(Button(10, 10, 100, 40, "Hi"));
-
+	buttons.push_back(Button(10, 010, 100, 40, "Hi"));
+	textboxes.push_back(TextBox(10, 100, 100, 40));
+	toggles.push_back(Toggle(10, 200, 100, 40, "Check Me"));
+	toggles.push_back(Toggle(150, 200, 100, 40, "Small Toggle"));
+	labels.push_back(Label(10, 300, "Label"));
 	
 	glutDisplayFunc(drawWindow);
 	glutReshapeFunc(reshape);
