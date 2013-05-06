@@ -1,3 +1,6 @@
+#ifndef __Data_course__
+#define __Data_course__
+
 //data-course.hpp
 #include "data-general.hpp"
 
@@ -105,3 +108,6 @@ public:
 	}
 	void display();
 };	
+
+#endif
+

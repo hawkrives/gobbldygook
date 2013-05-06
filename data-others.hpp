@@ -1,3 +1,6 @@
+#ifndef __Data_others__
+#define __Data_others__
+
 //data-others.hpp
 #include "data-general.hpp"
 
@@ -48,3 +51,5 @@ void Course::display() { if(this==0) cout << *this << endl; }
 void spit(Course n) {
 	n.display();
 }
+
+#endif
