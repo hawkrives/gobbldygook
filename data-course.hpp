@@ -3,6 +3,7 @@
 
 #include "data-general.hpp"
 #include "data-major.hpp"
+using namespace std;
 
 class Course {
 protected:

@@ -2,6 +2,7 @@
 #include "data-course.hpp"
 #include "data-major.hpp"
 #include "data-student.hpp"
+using namespace std;
 
 int main() {
 	ifstream g("data/2012-13-s2.csv");

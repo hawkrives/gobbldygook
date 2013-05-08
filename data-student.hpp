@@ -4,6 +4,7 @@
 #include "data-general.hpp"
 #include "data-major.hpp"
 #include "data-course.hpp"
+using namespace std;
 
 class Student {
 public:
