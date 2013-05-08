@@ -3,6 +3,7 @@
 
 #include "data-general.hpp"
 #include "data-major.hpp"
+#include "data-department.hpp"
 using namespace std;
 
 class Course {
@@ -14,10 +15,10 @@ protected:
 	char section;
 	
 	vector<Major> majors;
-        Department* department;
-	vector<Concentration> concentrations;
-	vector<Conversation> conversations;
-	vector<Instructor> professor;
+	Department* department;
+	string concentrations;
+	string conversations;
+	string professor;
 
 	int half_semester;
 	bool pass_fail;
@@ -81,102 +82,93 @@ public:
 		location = record.at(11);
 
 		// and Twelve knows who teaches.
-		// Instructors = record.at(12);
+		professor = record.at(12);
 	}
-	/* void parseID(char* str) {
-		string tmp = str;
-		ID = tmp;
-		// TODO: do this.
-	}*/
+
 	int parseID(string s) {
-		return stringToInt(s.substr(s.find(' ')+1,3));
-		string tempDept, tempDept0, tempDept1;
-		unsigned found = tempDept.find('/');
+		// return stringToInt(s.substr(s.find(' ')+1,3)); // Xandra, what is this?
+		string tempDept;
+		unsigned int found = tempDept.find('/');
 		tempDept = s.substr(0,s.find(' ')-1);
-		if (found!=std::string::npos) {
-		  department = new Department[2];
-		  tempDept0 = tempDept.substr(0,2);
-		  tempDept1 = tempDept.substr(3,2);
-		  switch (tempDept0) {
-		  case 'AS': department[0] = ASIAN; break;
-		  case 'BI': department[0] = BIO; break;
-		  case 'CH': department[0] = CHEM; break;
-		  case 'ES': department[0] = ENVST; break;
-		  case 'HI': department[0] = HIST; break;
-		  case 'RE': department[0] = REL; break;
-		  }
-		  switch (tempDept1) {
-		  case 'AS': department[1] = ASIAN; break;
-		  case 'BI': department[1] = BIO; break;
-		  case 'CH': department[1] = CHEM; break;
-		  case 'ES': department[1] = ENVST; break;
-		  case 'HI': department[1] = HIST; break;
-		  case 'RE': department[1] = REL; break;
-		  }
+		if (found != s.npos) {
+			department = new Department[2];
+			string tmp = tempDept.substr(0,2);
+
+			     if ( tmp == "AS" ) department[0] = ASIAN;
+			else if ( tmp == "BI" ) department[0] = BIO;
+			else if ( tmp == "CH" ) department[0] = CHEM;
+			else if ( tmp == "ES" ) department[0] = ENVST;
+			else if ( tmp == "HI" ) department[0] = HIST;
+			else if ( tmp == "RE" ) department[0] = REL;
+
+			tmp = tempDept.substr(3,2);
+			     if ( tmp == "AS" ) department[1] = ASIAN;
+			else if ( tmp == "BI" ) department[1] = BIO;
+			else if ( tmp == "CH" ) department[1] = CHEM;
+			else if ( tmp == "ES" ) department[1] = ENVST;
+			else if ( tmp == "HI" ) department[1] = HIST;
+			else if ( tmp == "RE" ) department[1] = REL;
 		}
 		else {
-		  department = new Department[1];
-		  switch (tempDept) {
-		  case 'AFAM': department[0] = AFAM; break;
-		  case 'ALSO': department[0] = ALSO; break;
-		  case 'AMCON': department[0] = AMCON; break;
-		  case 'AMST': department[0] = AMST; break;
-		  case 'ARMS': department[0] = ARMS; break;
-		  case 'ART': department[0] = ART; break;
-		  case 'ASIAN': department[0] = ASIAN; break;
-		  case 'BIO': department[0] = BIO; break;
-		  case 'BMOLS': department[0] = BMOLS; break;
-		  case 'CHEM': department[0] = CHEM; break;
-		  case 'CHIN': department[0] = CHIN; break;
-		  case 'CLASS': department[0] = CLASS; break;
-		  case 'CSCI': department[0] = CSCI; break;
-		  case 'DANCE': department[0] = DANCE; break;
-		  case 'ECON': department[0] = ECON; break;
-		  case 'EDUC': department[0] = EDUC; break;
-		  case 'ENGL': department[0] = ENGL; break;
-		  case 'ENVST': department[0] = ENVST; break;
-		  case 'ESAC': department[0] = ESAC; break;
-		  case 'ESTH': department[0] = ESTH; break;
-		  case 'FAMST': department[0] = FAMST; break;
-		  case 'FILM': department[0] = FILM; break;
-		  case 'FREN': department[0] = FREN; break;
-		  case 'GCON': department[0] = GCON; break;
-		  case 'GERM': department[0] = GERM; break;
-		  case 'GREEK': department[0] = GREEK; break;
-		  case 'HIST': department[0] = HIST; break;
-		  case 'HSPST': department[0] = HSPST; break;
-		  case 'ID': department[0] = ID; break;
-		  case 'IDFA': department[0] = IDFA; break;
-		  case 'INTD': department[0] = INTD; break;
-		  case 'IS': department[0] = IS; break;
-		  case 'JAPAN': department[0] = JAPAN; break;
-		  case 'LATIN': department[0] = LATIN; break;
-		  case 'MATH': department[0] = MATH; break;
-		  case 'MEDIA': department[0] = MEDIA; break;
-		  case 'MEDVL': department[0] = MEDVL; break;
-		  case 'MGMT': department[0] = MGMT; break;
-		  case 'MUSIC': department[0] = MUSIC; break;
-		  case 'MUSPF': department[0] = MUSPF; break;
-		  case 'NEURO': department[0] = NEURO; break;
-		  case 'NORW': department[0] = NORW; break;
-		  case 'NURS': department[0] = NURS; break;
-		  case 'PHIL': department[0] = PHIL; break;
-		  case 'PHYS': department[0] = PHYS; break;
-		  case 'PSCI': department[0] = PSCI; break;
-		  case 'PSYCH': department[0] = PSYCH; break;
-		  case 'REL': department[0] = REL; break;
-		  case 'RUSSN': department[0] = RUSSN; break;
-		  case 'SCICN': department[0] = SCICN; break;
-		  case 'SOAN': department[0] = SOAN; break;
-		  case 'SPAN': department[0] = SPAN; break;
-		  case 'STAT': department[0] = STAT; break;
-		  case 'SWRK': department[0] = SWRK; break;
-		  case 'THEAT': department[0] = THEAT; break;
-		  case 'WMGST': department[0] = WMGST; break;
-		  case 'WRIT': department[0] = WRIT; break;
-		  }
+			     if ( tempDept == "AFAM"  ) department = AFAM;
+			else if ( tempDept == "ALSO"  ) department = ALSO;
+			else if ( tempDept == "AMCON" ) department = AMCON;
+			else if ( tempDept == "AMST"  ) department = AMST;
+			else if ( tempDept == "ARMS"  ) department = ARMS;
+			else if ( tempDept == "ART"   ) department = ART;
+			else if ( tempDept == "ASIAN" ) department = ASIAN;
+			else if ( tempDept == "BIO"   ) department = BIO;
+			else if ( tempDept == "BMOLS" ) department = BMOLS;
+			else if ( tempDept == "CHEM"  ) department = CHEM;
+			else if ( tempDept == "CHIN"  ) department = CHIN;
+			else if ( tempDept == "CLASS" ) department = CLASS;
+			else if ( tempDept == "CSCI"  ) department = CSCI;
+			else if ( tempDept == "DANCE" ) department = DANCE;
+			else if ( tempDept == "ECON"  ) department = ECON;
+			else if ( tempDept == "EDUC"  ) department = EDUC;
+			else if ( tempDept == "ENGL"  ) department = ENGL;
+			else if ( tempDept == "ENVST" ) department = ENVST;
+			else if ( tempDept == "ESAC"  ) department = ESAC;
+			else if ( tempDept == "ESTH"  ) department = ESTH;
+			else if ( tempDept == "FAMST" ) department = FAMST;
+			else if ( tempDept == "FILM"  ) department = FILM;
+			else if ( tempDept == "FREN"  ) department = FREN;
+			else if ( tempDept == "GCON"  ) department = GCON;
+			else if ( tempDept == "GERM"  ) department = GERM;
+			else if ( tempDept == "GREEK" ) department = GREEK;
+			else if ( tempDept == "HIST"  ) department = HIST;
+			else if ( tempDept == "HSPST" ) department = HSPST;
+			else if ( tempDept == "ID"    ) department = ID;
+			else if ( tempDept == "IDFA"  ) department = IDFA;
+			else if ( tempDept == "INTD"  ) department = INTD;
+			else if ( tempDept == "IS"    ) department = IS;
+			else if ( tempDept == "JAPAN" ) department = JAPAN;
+			else if ( tempDept == "LATIN" ) department = LATIN;
+			else if ( tempDept == "MATH"  ) department = MATH;
+			else if ( tempDept == "MEDIA" ) department = MEDIA;
+			else if ( tempDept == "MEDVL" ) department = MEDVL;
+			else if ( tempDept == "MGMT"  ) department = MGMT;
+			else if ( tempDept == "MUSIC" ) department = MUSIC;
+			else if ( tempDept == "MUSPF" ) department = MUSPF;
+			else if ( tempDept == "NEURO" ) department = NEURO;
+			else if ( tempDept == "NORW"  ) department = NORW;
+			else if ( tempDept == "NURS"  ) department = NURS;
+			else if ( tempDept == "PHIL"  ) department = PHIL;
+			else if ( tempDept == "PHYS"  ) department = PHYS;
+			else if ( tempDept == "PSCI"  ) department = PSCI;
+			else if ( tempDept == "PSYCH" ) department = PSYCH;
+			else if ( tempDept == "REL"   ) department = REL;
+			else if ( tempDept == "RUSSN" ) department = RUSSN;
+			else if ( tempDept == "SCICN" ) department = SCICN;
+			else if ( tempDept == "SOAN"  ) department = SOAN;
+			else if ( tempDept == "SPAN"  ) department = SPAN;
+			else if ( tempDept == "STAT"  ) department = STAT;
+			else if ( tempDept == "SWRK"  ) department = SWRK;
+			else if ( tempDept == "THEAT" ) department = THEAT;
+			else if ( tempDept == "WMGST" ) department = WMGST;
+			else if ( tempDept == "WRIT"  ) department = WRIT;
 		}
-		}
+	}
 
 	void updateID() {
 		ID = department.shorthand + tostring(number) + section;
