@@ -30,43 +30,15 @@ ui-test: ui-test.o
 data-test.o: $(DATA_OBJ)
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c data-test.cpp
 
-data-concentration.o: data-concentration.hpp data-general.o
-data-conversation.o: data-conversation.hpp data-general.o
+# data-concentration.o: data-concentration.hpp data-general.o
+# data-conversation.o: data-conversation.hpp data-general.o
 data-course.o: data-course.hpp data-major.o data-department.o data-conversation.o data-concentration.o data-instructor.o data-general.o
-data-department.o: data-department.hpp data-general.o
-data-instructor.o: data-instructor.hpp data-general.o
+# data-department.o: data-department.hpp data-general.o
+# data-instructor.o: data-instructor.hpp data-general.o
 data-major.o: data-major.hpp data-general.o
 data-student.o: data-student.hpp data-course.o data-major.o data-conversation.o data-concentration.o data-instructor.o data-general.o
 
 data-general.o: data-general.hpp
-
-ui-test.o: $(UI_OBJ)
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-test.cpp
-
-ui-toggle.o: ui-toggle.cpp ui-toggle.hpp ui-rect.o
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-toggle.cpp
-
-ui-buttons.o: ui-buttons.cpp ui-buttons.hpp ui-rect.o
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-buttons.cpp
-
-ui-textboxes.o: ui-textboxes.cpp ui-textboxes.hpp ui-rect.o
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-textboxes.cpp
-
-
-ui-rect.o: ui-rect.cpp ui-rect.hpp ui-label.o rectangle.o ui-general
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-rect.cpp
-
-ui-label.o: ui-label.cpp ui-label.hpp ui-general
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c ui-label.cpp
-
-
-rectangle.o: rectangle.cpp rectangle.hpp ui-general
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c rectangle.cpp
-
-ui-general: ui.hpp color.o
-
-color.o: color.cpp color.hpp
-	$(CC) $(OPTS) $(MACOSX_DEFINE) $(INCLUDES) -c color.cpp
 
 clean:
 	rm -f *.o schedule
