@@ -7,24 +7,18 @@ ifeq ($(ARCH), Linux)
 else
 CC = clang++
 MACOSX_DEFINE = -DMACOSX -I/sw/include
-INCLUDES = -I/usr/common/include -I/usr/include/GL 
+INCLUDES = -I/usr/common/include
 LIBS = $(INCLUDES) \
-	-L/System/Library/Frameworks/OpenGL.framework/Libraries \
-	-framework GLUT -framework OpenGL -lGL -lm -lobjc -lstdc++
+	-lm -lobjc -lstdc++
 endif
 
-UI_OBJ = ui-rect.o ui-toggle.o ui-buttons.o ui-textboxes.o ui-label.o rectangle.o color.o
 DATA_OBJ = data-conversation.o data-concentration.o data-course.o data-department.o data-general.o data-instructor.o data-major.o data-student.o
-OBJECTS = $(UI_OBJ) $(DATA_OBJ)
+OBJECTS = $(DATA_OBJ)
 
-all: schedule.cpp $(OBJECTS)
-	$(CC) $(OPTS) -o schedule schedule.cpp $(OBJECTS) $(LIBS)
+all: data-test
 
 data-test: data-test.o
 	$(CC) $(OPTS) -o data-test data-test.o $(LIBS)
-
-ui-test: ui-test.o
-	$(CC) $(OPTS) -o ui-test ui-test.o $(UI_OBJ) $(LIBS)
 
 
 data-test.o: $(DATA_OBJ)
