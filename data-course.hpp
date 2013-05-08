@@ -2,10 +2,6 @@
 #define __Data_course__
 
 #include "data-general.hpp"
-#include "data-concentration.hpp"
-#include "data-conversation.hpp"
-#include "data-department.hpp"
-#include "data-instructor.hpp"
 #include "data-major.hpp"
 
 class Course {
