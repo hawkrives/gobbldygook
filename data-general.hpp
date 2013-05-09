@@ -146,5 +146,15 @@ string removeTrailingText(string s, string toRemove) {
 		s.erase(s.find(toRemove));
 	return s;
 }
+string removeStartingText(string s, string toRemove) {
+	if (s.find(toRemove) != s.npos)
+		s.erase(s.find_first_of(toRemove), s.find_first_of(toRemove)+toRemove.length());
+	return s;
+}
+
+string deDoubleString(string s) {
+	// Todo: write this.
+	return s;
+}
 
 #endif
