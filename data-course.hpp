@@ -171,7 +171,10 @@ public:
 	}
 
 	void updateID() {
-		ID = department.shorthand + tostring(number) + section;
+		string dept;
+		for (std::vector<Department>::iterator i = department.begin(); i != department.end(); ++i)
+			dept += i->getName();
+		ID = dept + tostring(number) + section;
 	}
 	string getID() {
 		return ID;
