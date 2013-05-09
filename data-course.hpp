@@ -35,7 +35,8 @@ public:
 		if (!is) return;
 
 		string tmpLine;
-		getline(is, tmpLine);
+		getline(is, tmpLine); // remove the extra data of course status
+
 		vector<string> record = split(tmpLine, ',');
 		for (vector<string>::iterator i=record.begin(); i != record.end(); ++i)
 			*i=removeAllQuotes(*i);
