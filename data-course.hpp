@@ -15,7 +15,7 @@ protected:
 	char section;
 	
 	vector<Major> majors;
-	Department* department;
+	vector<Department> department;
 	string concentrations;
 	string conversations;
 	string professor;
