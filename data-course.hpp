@@ -47,7 +47,7 @@ public:
 		// Second column has the course ID,
 		//number = stringToInt(record.at(1));
 		ID = record.at(1);
-		number = parseID(ID);
+		parseID(ID);
 
 		// Third column has the section,
 		section = record.at(2)[0];
