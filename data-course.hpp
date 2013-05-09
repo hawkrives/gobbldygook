@@ -44,46 +44,45 @@ public:
 		// Ignore the first column;
 		record.at(0);
 
-		// Second column has the course ID,
-		//number = stringToInt(record.at(1));
+		// so, the *first* column (that we care about) has the course ID,
 		ID = record.at(1);
 		parseID(ID);
 
-		// Third column has the section,
+		// Second column has the section,
 		section = record.at(2)[0];
 
-		// Fourth holds the lab boolean,
+		// Third holds the lab boolean,
 		if (record.at(3).empty())
 			lab = false;
 		else
 			lab = true;
 
-		// while Fifth contains the title of the course;
+		// while Fourth contains the title of the course;
 		title = record.at(4);
 
-		// Sixth hands over the length (half semester or not)
+		// Fifth hands over the length (half semester or not)
 		// it's actually an int that tells us how many times the course is offered per semester.
 		half_semester = stringToInt(record.at(5));
 
-		// Seventh tells us the number of credits,
+		// Sixth tells us the number of credits,
 		credits = stringToFloat(record.at(6));
 
-		// Eighth shows us if it can be taken pass/no-pass, 
+		// Seventh shows us if it can be taken pass/no-pass, 
 		if (record.at(7) == "Y")
 			pass_fail = true;
 		else
 			pass_fail = false;
 
-		// while Nine gives us the GEs of the course,
-		// GEreqs = record.at(9);
+		// while Eighth gives us the GEs of the course,
+		// GEreqs = record.at(8);
 
-		// and Ten spits out the days and times;
-		// Times = record.at(10);
+		// and Nine spits out the days and times;
+		// Times = record.at(9);
 
-		// Eleven holds the location,
-		location = record.at(11);
+		// Ten holds the location,
+		location = record.at(10);
 
-		// and Twelve knows who teaches.
+		// and Eleven knows who teaches.
 		// professor = record.at(12);
 		professor = record.at(11);
 		// This has a SIGABRT error.
