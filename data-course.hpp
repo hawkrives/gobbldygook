@@ -103,6 +103,8 @@ public:
 		// Fifth hands over the length (half semester or not)
 		// it's actually an int that tells us how many times the course is offered per semester.
 		half_semester = stringToInt(record.at(5));
+		if (half_semester != 0 && half_semester != 1 && half_semester != 2)
+			half_semester = 0;
 
 		// Sixth tells us the number of credits,
 		credits = stringToFloat(record.at(6));
