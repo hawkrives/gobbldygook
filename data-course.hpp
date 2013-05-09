@@ -59,19 +59,44 @@ public:
 
 		// while Fourth contains the title of the course;
 		title = record.at(4);
-		vector<string> badEndings;
+		vector<string> badEndings, badBeginnings;
 		badEndings.push_back("Prerequisite");
+		badEndings.push_back("Prerequsiite");
 		badEndings.push_back("This course has class");
 		badEndings.push_back("This course is open to ");
 		badEndings.push_back("First-Year Students may register only");
 		badEndings.push_back("Open to ");
 		badEndings.push_back("Especially for ");
 		badEndings.push_back("Registration by permission of instructor only.");
+		badEndings.push_back("Permission of instructor required.");
 		badEndings.push_back("Not open to first-year students.");
+		badEndings.push_back("Film screenings");
+		badEndings.push_back("Open only to ");
+		badEndings.push_back("This course has been canceled.");
+		badEndings.push_back("This course has been cancelled.");
+		badEndings.push_back("Open only to seniors");
+		badEndings.push_back("Closed during web registration.");
+		badEndings.push_back("During course submission process");
+		badEndings.push_back("Taught in English.");
+		badEndings.push_back("Closed to First-Year Students.");
+		badEndings.push_back("Closed to first-year students.");
+		badEndings.push_back("New course");
+		badEndings.push_back("This course does");
+		badEndings.push_back("This course open to seniors only.");
+		badEndings.push_back("This lab has been canceled.");
+		badEndings.push_back("Permission of the instructor");
+		badEndings.push_back("Registration restricted");
+		// badEndings.push_back("");
 		badEndings.push_back("Students in " + department[0].getFullName() + " " + tostring(number));
+		badBeginnings.push_back("Top: ");
+		badBeginnings.push_back("Sem: ");
+		badBeginnings.push_back("Res: ");
 
 		for (vector<string>::iterator i=badEndings.begin(); i != badEndings.end(); ++i) {
 			title = removeTrailingText(title, *i);
+		}
+		for (vector<string>::iterator i=badBeginnings.begin(); i != badBeginnings.end(); ++i) {
+			title = removeStartingText(title, *i);
 		}
 		
 
