@@ -84,7 +84,9 @@ public:
 		location = record.at(11);
 
 		// and Twelve knows who teaches.
-		professor = record.at(12);
+		// professor = record.at(12);
+		professor = record.at(11);
+		// This has a SIGABRT error.
 	}
 
 	void parseID(string str) {
