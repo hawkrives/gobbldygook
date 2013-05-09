@@ -14,6 +14,7 @@ int main() {
 	while (infile.peek() != -1){
 		Course incourse(infile);
 		courses.push_back(incourse);
-		cout << incourse << endl;
+		// cout << incourse << endl;
+		incourse.showAll();
 	}
 }
