@@ -143,6 +143,19 @@ public:
 	void display();
 };	
 
+	void showAll() {
+		cout << ID << section << endl;
+		cout << "Title: " << title << endl;
+		cout << "Professor: " << professor << endl;
+		cout << "Lab? " << lab << endl;
+		cout << "Half-semester? " << half_semester << endl;
+		cout << "Credits: " << credits << endl;
+		cout << "Pass/Fail? " << pass_fail << endl;
+		cout << "Location: " << location << endl;
+		cout << endl;
+	}
+};
+
 ostream &operator<<(ostream &os, Course &item) { return item.getData(os); }
 void Course::display() { if(this==0) cout << *this << endl; }
 
