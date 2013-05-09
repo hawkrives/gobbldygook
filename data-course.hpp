@@ -126,14 +126,19 @@ public:
 		location = deDoubleString(location);
 
 		// and Eleven knows who teaches.
-		// professor = record.at(12);
-		professor = record.at(11);
-		// This has a SIGABRT error.
 		if (record.size() == 13) {
-			string profLastName = professor;
+			string profLastName = record.at(11);
 			string profFirstName = record.at(12);
-			cout << profFirstName << " " << profLastName << endl;
-			professor = profFirstName + " " + profLastName;
+			profFirstName = removeStartingText(" ", profFirstName);
+			profLastName = removeStartingText(" ", profLastName);
+			profFirstName = removeTrailingText(" ", profFirstName);
+			profLastName = removeTrailingText(" ", profLastName);
+			professor = profFirstName + profLastName;
+		}
+		else {
+			professor = record.at(11);
+			// professor = removeStartingText(" ", professor);
+			// professor = removeTrailingText(" ", professor);
 		}
 	}
 
@@ -165,11 +170,11 @@ public:
 	ostream& getData(ostream &os) {
 		os << ID << section << " - ";
 		os << title << " | ";
-		// os << professor;
+		if (professor.length() > 0 && professor != " ")
+			os << professor;
 		return os;
 	}
 	void display();
-};	
 
 	void showAll() {
 		cout << ID << section << endl;
