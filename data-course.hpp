@@ -1,8 +1,10 @@
 #ifndef __Data_course__
 #define __Data_course__
 
-//data-course.hpp
 #include "data-general.hpp"
+#include "data-major.hpp"
+#include "data-department.hpp"
+using namespace std;
 
 class Course {
 protected:
@@ -13,10 +15,10 @@ protected:
 	char section;
 	
 	vector<Major> majors;
-	Department department;
-	vector<Concentration> concentrations;
-	vector<Conversation> conversations;
-	vector<Instructor> professor;
+	vector<Department> department;
+	string concentrations;
+	string conversations;
+	string professor;
 
 	int half_semester;
 	bool pass_fail;
@@ -31,8 +33,10 @@ protected:
 public:
 	Course(istream &is) {
 		if (!is) return;
+
 		string tmpLine;
-		getline(is, tmpLine);
+		getline(is, tmpLine); // remove the extra data of course status
+
 		vector<string> record = split(tmpLine, ',');
 		for (vector<string>::iterator i=record.begin(); i != record.end(); ++i)
 			*i=removeAllQuotes(*i);
@@ -40,74 +44,87 @@ public:
 		// Ignore the first column;
 		record.at(0);
 
-		// Second column has the course ID,
-		//number = stringToInt(record.at(1));
+		// so, the *first* column (that we care about) has the course ID,
 		ID = record.at(1);
-		number = parseID(ID);
+		parseID(ID);
 
-		// Third column has the section,
+		// Second column has the section,
 		section = record.at(2)[0];
 
-		// Fourth holds the lab boolean,
+		// Third holds the lab boolean,
 		if (record.at(3).empty())
 			lab = false;
 		else
 			lab = true;
 
-		// while Fifth contains the title of the course;
+		// while Fourth contains the title of the course;
 		title = record.at(4);
 
-		// Sixth hands over the length (half semester or not)
+		// Fifth hands over the length (half semester or not)
 		// it's actually an int that tells us how many times the course is offered per semester.
 		half_semester = stringToInt(record.at(5));
 
-		// Seventh tells us the number of credits,
+		// Sixth tells us the number of credits,
 		credits = stringToFloat(record.at(6));
 
-		// Eighth shows us if it can be taken pass/no-pass, 
+		// Seventh shows us if it can be taken pass/no-pass, 
 		if (record.at(7) == "Y")
 			pass_fail = true;
 		else
 			pass_fail = false;
 
-		// while Nine gives us the GEs of the course,
-		// GEreqs = record.at(9);
+		// while Eighth gives us the GEs of the course,
+		// GEreqs = record.at(8);
 
-		// and Ten spits out the days and times;
-		// Times = record.at(10);
+		// and Nine spits out the days and times;
+		// Times = record.at(9);
 
-		// Eleven holds the location,
-		location = record.at(11);
+		// Ten holds the location,
+		location = record.at(10);
 
-		// and Twelve knows who teaches.
-		// Instructors = record.at(12);
+		// and Eleven knows who teaches.
+		// professor = record.at(12);
+		professor = record.at(11);
+		// This has a SIGABRT error.
 	}
-	/* void parseID(char* str) {
-		string tmp = str;
-		ID = tmp;
-		// TODO: do this.
-	}*/
-	int parseID(string s) {
-		return stringToInt(s.substr(s.find(' ')+1,3));
+
+	void parseID(string str) {
+		unsigned int foundLoc = str.find('/');
+		string tempDept = str.substr(0,str.find(' ')-1);
+
+		if (foundLoc != str.npos) {
+			string dept1 = tempDept.substr(0,2);
+			department.push_back(Department(dept1));
+
+			string dept2 = tempDept.substr(2,2);
+			department.push_back(Department(dept2));
+		}
+		else {
+			department.push_back(Department(tempDept));
+		}
 	}
 
 	void updateID() {
-		ID = department.shorthand + tostring(number) + section;
+		string dept;
+		for (std::vector<Department>::iterator i = department.begin(); i != department.end(); ++i)
+			dept += i->getName();
+		ID = dept + tostring(number) + section;
 	}
 	string getID() {
 		return ID;
 	}
 
 	ostream& getData(ostream &os) {
-		os << ID << section << " ";
-		os << title << "/";
-		/*for (vector<Instructor>::iterator i = professor.begin(); i != professor.end(); ++i) {
-		os << i->name << " ";
-		}*/
+		os << ID << section << " - ";
+		os << title << " | ";
+		// os << professor << endl;
 		return os;
 	}
 	void display();
 };	
+
+ostream &operator<<(ostream &os, Course &item) { return item.getData(os); }
+void Course::display() { if(this==0) cout << *this << endl; }
 
 #endif
 
