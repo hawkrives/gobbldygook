@@ -114,11 +114,9 @@ public:
 	}
 
 	ostream& getData(ostream &os) {
-		os << ID << section << " ";
-		os << title << "/";
-		/*for (vector<Instructor>::iterator i = professor.begin(); i != professor.end(); ++i) {
-		os << i->name << " ";
-		}*/
+		os << ID << section << " - ";
+		os << title << " | ";
+		// os << professor << endl;
 		return os;
 	}
 	void display();
