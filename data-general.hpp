@@ -137,5 +137,14 @@ string removeAllQuotes(string s) {
 	s.erase(remove(s.begin(), s.end(), '\"'), s.end());
 	return s;
 }
+string removeTrailingSlashes(string s) {
+	s.erase(remove(s.begin(), s.end(), '/'), s.end());
+	return s;
+}
+string removeTrailingText(string s, string toRemove) {
+	if (s.find(toRemove) != s.npos)
+		s.erase(s.find(toRemove));
+	return s;
+}
 
 #endif

@@ -38,8 +38,10 @@ public:
 		getline(is, tmpLine); // remove the extra data of course status
 
 		vector<string> record = split(tmpLine, ',');
-		for (vector<string>::iterator i=record.begin(); i != record.end(); ++i)
-			*i=removeAllQuotes(*i);
+		for (vector<string>::iterator i=record.begin(); i != record.end(); ++i) {
+			*i = removeAllQuotes(*i);
+			*i = removeTrailingSlashes(*i);
+		}
 		
 		// Ignore the first column;
 		record.at(0);
@@ -52,13 +54,26 @@ public:
 		section = record.at(2)[0];
 
 		// Third holds the lab boolean,
-		if (record.at(3).empty())
-			lab = false;
-		else
-			lab = true;
+		if (record.at(3).empty()) lab = false;
+		else                      lab = true;
 
 		// while Fourth contains the title of the course;
 		title = record.at(4);
+		vector<string> badEndings;
+		badEndings.push_back("Prerequisite");
+		badEndings.push_back("This course has class");
+		badEndings.push_back("This course is open to ");
+		badEndings.push_back("First-Year Students may register only");
+		badEndings.push_back("Open to ");
+		badEndings.push_back("Especially for ");
+		badEndings.push_back("Registration by permission of instructor only.");
+		badEndings.push_back("Not open to first-year students.");
+		badEndings.push_back("Students in " + department[0].getFullName() + " " + tostring(number));
+
+		for (vector<string>::iterator i=badEndings.begin(); i != badEndings.end(); ++i) {
+			title = removeTrailingText(title, *i);
+		}
+		
 
 		// Fifth hands over the length (half semester or not)
 		// it's actually an int that tells us how many times the course is offered per semester.
@@ -86,6 +101,12 @@ public:
 		// professor = record.at(12);
 		professor = record.at(11);
 		// This has a SIGABRT error.
+		if (record.size() == 13) {
+			string profLastName = professor;
+			string profFirstName = record.at(12);
+			cout << profFirstName << " " << profLastName << endl;
+			professor = profFirstName + " " + profLastName;
+		}
 	}
 
 	void parseID(string str) {
@@ -103,12 +124,11 @@ public:
 			department.push_back(Department(tempDept));
 		}
 	}
-
 	void updateID() {
 		string dept;
 		for (std::vector<Department>::iterator i = department.begin(); i != department.end(); ++i)
 			dept += i->getName();
-		ID = dept + tostring(number) + section;
+		ID = dept + " " + tostring(number) + section;
 	}
 	string getID() {
 		return ID;
@@ -117,7 +137,7 @@ public:
 	ostream& getData(ostream &os) {
 		os << ID << section << " - ";
 		os << title << " | ";
-		// os << professor << endl;
+		// os << professor;
 		return os;
 	}
 	void display();
