@@ -123,6 +123,7 @@ public:
 
 		// Ten holds the location,
 		location = record.at(10);
+		location = deDoubleString(location);
 
 		// and Eleven knows who teaches.
 		// professor = record.at(12);
