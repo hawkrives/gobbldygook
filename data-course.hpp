@@ -33,6 +33,7 @@ protected:
 public:
 	Course(istream &is) {
 		if (!is) return;
+
 		string tmpLine;
 		getline(is, tmpLine);
 		vector<string> record = split(tmpLine, ',');
