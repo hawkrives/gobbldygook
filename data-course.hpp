@@ -213,6 +213,7 @@ public:
 		else {
 			department.push_back(Department(dept));
 		}
+		updateID();
 	}
 
 	void updateID() {
@@ -229,7 +230,6 @@ public:
 	}
 
 	ostream& getData(ostream &os) {
-		updateID();
 		os << id << " - ";
 		os << title << " | ";
 		if (professor.length() > 0 && professor != " ")
