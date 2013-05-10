@@ -8,6 +8,12 @@
 using namespace std;
 
 class Course {
+private:
+	void init(string dept, int num) {
+		string identifier = dept + tostring(num);
+		parseID(identifier);
+		lookupCourse(id);
+	}
 	void copy(const Course& c) {
 		id = c.id;
 		number = c.number;
@@ -146,6 +152,10 @@ public:
 		else {
 			professor = record.at(11);
 		}
+	}
+
+	Course* lookupCourse(string identifier)  {
+		return this;	
 	}
 
 	void cleanTitle() {
