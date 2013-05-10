@@ -47,7 +47,7 @@ private:
 public:
 	string name;
 	int startingYear, gradutationYear;
-	
+
 	vector<Major> majors;
 
 	vector<Semester> year1;//(3);
@@ -63,9 +63,12 @@ public:
 		infile.open(fn.c_str());
 	}
 
+	bool hasTakenCourse() {
+		return false;
+	}
+
 	ostream& getData(ostream &os) {
 		os << name << " ";
-
 		return os;
 	}
 	void display();

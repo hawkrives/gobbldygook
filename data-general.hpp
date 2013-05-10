@@ -97,6 +97,11 @@ enum dept_t {
 };
 
 
+Course* lookupCourse(string identifier)  {
+	return this;	
+}
+
+
 string tostring(int i) {
 	ostringstream tmp;
 	tmp << i;
@@ -137,15 +142,19 @@ string removeAllQuotes(string s) {
 	s.erase(remove(s.begin(), s.end(), '\"'), s.end());
 	return s;
 }
+
 string removeTrailingSlashes(string s) {
-	s.erase(remove(s.begin(), s.end(), '/'), s.end());
+	if (s[s.length()-1] == '/')
+		s.erase(s.length()-1, s.length());
 	return s;
 }
+
 string removeTrailingText(string s, string toRemove) {
 	if (s.find(toRemove) != s.npos)
 		s.erase(s.find(toRemove));
 	return s;
 }
+
 string removeStartingText(string s, string toRemove) {
 	if (s.find(toRemove) != s.npos)
 		s.erase(s.find_first_of(toRemove), s.find_first_of(toRemove)+toRemove.length());
