@@ -17,7 +17,6 @@ all: data-test
 data-test: data-test.o
 	$(CC) $(OPTS) -o data-test data-test.o $(LIBS)
 
-
 data-test.o: $(DATA_OBJ)
 	$(CC) $(OPTS) $(MACOSX_DEFINE) $(LIBS) -c data-test.cpp
 
