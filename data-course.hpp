@@ -8,6 +8,31 @@
 using namespace std;
 
 class Course {
+	void copy(const Course& c) {
+		id = c.id;
+		number = c.number;
+		title = c.title;
+		description = c.description;
+		section = c.section;
+		majors = c.majors;
+		department = c.department;
+		concentrations = c.concentrations;
+		conversations = c.conversations;
+		professor = c.professor;
+
+		half_semester = c.half_semester;
+		pass_fail = c.pass_fail;
+		credits = c.credits;
+		location = c.location;
+
+		lab = c.lab;
+		geneds = c.geneds;
+
+		for (int i = 0; i < 7; ++i){
+			days[i] = c.days[i];
+			time[i] = c.time[i];
+		}
+	}
 protected:
 	string id;
 	int number;
@@ -32,6 +57,12 @@ protected:
 	bool days[7];
 	float time[7];
 public:
+	Course() {
+
+	}
+	Course(const Course& c) {
+		copy(c);
+	}
 	Course(istream &is) {
 		if (!is) return;
 
