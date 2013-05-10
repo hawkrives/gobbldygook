@@ -196,17 +196,82 @@ private:
 		else if ( dept == WRIT  ) return "WRIT";
 		else return "NONE";
 	}
+	string deptToLongName(dept_t dept) {
+		     if ( dept == ALSO  ) return "Africa and the Americas";
+		else if ( dept == ALSO  ) return "Alternate Language Study Option";
+		else if ( dept == AMCON ) return "American Conversation";
+		else if ( dept == AMST  ) return "American Studies";
+		else if ( dept == ARMS  ) return "American Racial and Multicultural Studies";
+		else if ( dept == ART   ) return "Art and Art History";
+		else if ( dept == ASIAN ) return "Asian Studies ";
+		else if ( dept == BIO   ) return "Biology";
+		else if ( dept == BMOLS ) return "Biomolecular Science";
+		else if ( dept == CHEM  ) return "Chemistry";
+		else if ( dept == CHIN  ) return "Chinese";
+		else if ( dept == CLASS ) return "Classics";
+		else if ( dept == CSCI  ) return "Computer Science";
+		else if ( dept == DANCE ) return "Dance";
+		else if ( dept == ECON  ) return "Economics";
+		else if ( dept == EDUC  ) return "Education";
+		else if ( dept == ENGL  ) return "English";
+		else if ( dept == ENVST ) return "Environmental Studies";
+		else if ( dept == ESAC  ) return "Exercise Science Activity";
+		else if ( dept == ESTH  ) return "Exercise Science Theory";
+		else if ( dept == FAMST ) return "Family Studies";
+		else if ( dept == FILM  ) return "Film Studies";
+		else if ( dept == FREN  ) return "French";
+		else if ( dept == GCON  ) return "Great Conversation";
+		else if ( dept == GERM  ) return "German";
+		else if ( dept == GREEK ) return "Greek";
+		else if ( dept == HIST  ) return "History";
+		else if ( dept == HSPST ) return "Hispanic Studies";
+		else if ( dept == IDFA  ) return "Unknown (IDFA)";
+		else if ( dept == INTD  ) return "Interdepartmental";
+		else if ( dept == INTER ) return "Interdisciplinary";
+		else if ( dept == IS    ) return "Integrative Studies";
+		else if ( dept == JAPAN ) return "Japanese";
+		else if ( dept == LATIN ) return "Latin";
+		else if ( dept == MATH  ) return "Mathematics";
+		else if ( dept == MEDIA ) return "Media Studies";
+		else if ( dept == MEDVL ) return "Medieval Studies";
+		else if ( dept == MGMT  ) return "Management Studies";
+		else if ( dept == MUSIC ) return "Music";
+		else if ( dept == MUSPF ) return "Music Performance";
+		else if ( dept == NEURO ) return "Neuroscience";
+		else if ( dept == NORW  ) return "Norwegian";
+		else if ( dept == NURS  ) return "Nursing";
+		else if ( dept == PHIL  ) return "Philosphy";
+		else if ( dept == PHYS  ) return "Physics";
+		else if ( dept == PSCI  ) return "Political Science";
+		else if ( dept == PSYCH ) return "Psychology";
+		else if ( dept == REL   ) return "Religion";
+		else if ( dept == RUSSN ) return "Russian";
+		else if ( dept == SCICN ) return "Science Conversation";
+		else if ( dept == SOAN  ) return "Sociology and Anthropology";
+		else if ( dept == SPAN  ) return "Spanish";
+		else if ( dept == STAT  ) return "Statistics";
+		else if ( dept == SWRK  ) return "Social Work";
+		else if ( dept == THEAT ) return "Theater";
+		else if ( dept == WMGST ) return "Women's & Gender Studies";
+		else if ( dept == WRIT  ) return "Writing";
+		else return "Unknown (NONE)";
+	}
 public:
 	Department() {
+		cout << "Called Department constructor with nothing." << endl;
 		id = NONE;
 	}
 	Department(int i) {
+		cout << "Called Department constructor with integer." << endl;
 		id = intToDept(i);
 	}
 	Department(dept_t department) {
+		cout << "Called Department constructor with dept_t." << endl;
 		id = department;
 	}
 	Department(string str) {
+		// cout << "Called Department constructor with string." << endl;
+		// cout << "String was: " << str << endl;
 		if (str.length() == 2)
 			id = shortStringToDept(str);
 		else
@@ -219,6 +284,19 @@ public:
 	string getName() {
 		return deptToString(id);
 	}
+	string getFullName() {
+		// cout << id << endl;
+		return deptToLongName(id);
+	}
+
+	ostream& getData(ostream &os) {
+		os << "ID: " << getID() << endl;
+		os << "Name: " << getName() << endl;
+		os << "Full: " << getFullName() << endl;
+		return os;
+	}
 };
+
+ostream &operator<<(ostream &os, Department &item) { return item.getData(os); }
 
 #endif
