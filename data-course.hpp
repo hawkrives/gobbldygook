@@ -104,7 +104,7 @@ public:
 
 		// so, the *first* column (that we care about) has the course id,
 		id = record.at(1);
-		parseid(id);
+		parseID(id);
 
 		// Second column has the section,
 		section = record.at(2)[0];
@@ -200,7 +200,7 @@ public:
 			title = removeStartingText(title, *i);
 	}
 
-	void parseid(string str) {
+	void parseID(string str) {
 		// Get the number of the course, aka the last three slots.
 		stringstream(str.substr(str.size() - 3)) >> number;
 
