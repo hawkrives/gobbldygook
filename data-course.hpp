@@ -208,7 +208,7 @@ public:
 
 		if (str.find('/') != string::npos) {
 			department.push_back(Department(dept.substr(0,2)));
-			department.push_back(Department(dept.substr(2,2)));
+			department.push_back(Department(dept.substr(3,2)));
 		}
 		else {
 			department.push_back(Department(dept));
