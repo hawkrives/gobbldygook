@@ -12,7 +12,7 @@ private:
 	void init(string dept, int num) {
 		string identifier = dept + tostring(num);
 		parseID(identifier);
-		lookupCourse(id);
+		// lookupCourse(id);
 	}
 	void copy(const Course& c) {
 		id = c.id;
@@ -66,7 +66,13 @@ public:
 	Course() {
 
 	}
+	Course(string str) {
+
+	}
 	Course(const Course& c) {
+		copy(c);
+	}
+	Course& operator = (const Course &c) {
 		copy(c);
 	}
 	Course(istream &is) {
@@ -106,6 +112,9 @@ public:
 		parseID(id);
 
 		// Second column has the section,
+		// note that this breaks if it is a string.
+			// it breaks after PHYS 125 lab.
+			// it also doesn't output on anything.
 		section = record.at(2)[0];
 
 		// Third holds the lab boolean,
@@ -151,10 +160,6 @@ public:
 		else {
 			professor = record.at(11);
 		}
-	}
-
-	Course* lookupCourse(string identifier)  {
-		return this;	
 	}
 
 	void cleanTitle() {
@@ -208,7 +213,7 @@ public:
 
 		if (str.find('/') != string::npos) {
 			department.push_back(Department(dept.substr(0,2)));
-			department.push_back(Department(dept.substr(2,2)));
+			department.push_back(Department(dept.substr(3,2)));
 		}
 		else {
 			department.push_back(Department(dept));

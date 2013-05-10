@@ -128,7 +128,8 @@ private:
 		else return NONE;
 	}
 	dept_t shortStringToDept(string str) {
-		     if ( str == "AS" ) return ASIAN;
+		     if ( str == "AR" ) return ART;
+		else if ( str == "AS" ) return ASIAN;
 		else if ( str == "BI" ) return BIO;
 		else if ( str == "CH" ) return CHEM;
 		else if ( str == "ES" ) return ENVST;
@@ -298,5 +299,25 @@ public:
 };
 
 ostream &operator<<(ostream &os, Department &item) { return item.getData(os); }
+
+int parseID_num(string str) {
+	int number;
+	stringstream(str.substr(str.size() - 3)) >> number;
+	return number;
+}
+
+vector<Department> parseID_dept(string str) {
+	vector<Department> department;
+	string dept = str.substr(0,str.size()-3);
+
+	if (str.find('/') != string::npos) {
+		department.push_back(Department(dept.substr(0,2)));
+		department.push_back(Department(dept.substr(3,2)));
+	}
+	else {
+		department.push_back(Department(dept));
+	}
+	return department;
+}
 
 #endif
