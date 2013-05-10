@@ -128,7 +128,8 @@ private:
 		else return NONE;
 	}
 	dept_t shortStringToDept(string str) {
-		     if ( str == "AS" ) return ASIAN;
+		     if ( str == "AR" ) return ART;
+		else if ( str == "AS" ) return ASIAN;
 		else if ( str == "BI" ) return BIO;
 		else if ( str == "CH" ) return CHEM;
 		else if ( str == "ES" ) return ENVST;
