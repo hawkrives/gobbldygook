@@ -156,10 +156,6 @@ public:
 		}
 	}
 
-	Course* lookupCourse(string identifier)  {
-		return this;	
-	}
-
 	void cleanTitle() {
 		vector<string> badEndings, badBeginnings;
 		badEndings.push_back("Prerequisite");
