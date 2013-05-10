@@ -96,12 +96,6 @@ enum dept_t {
 	NONE,
 };
 
-
-Course* lookupCourse(string identifier)  {
-	return this;	
-}
-
-
 string tostring(int i) {
 	ostringstream tmp;
 	tmp << i;

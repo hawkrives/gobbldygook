@@ -300,4 +300,24 @@ public:
 
 ostream &operator<<(ostream &os, Department &item) { return item.getData(os); }
 
+int parseID_num(string str) {
+	int number;
+	stringstream(str.substr(str.size() - 3)) >> number;
+	return number;
+}
+
+vector<Department> parseID_dept(string str) {
+	vector<Department> department;
+	string dept = str.substr(0,str.size()-3);
+
+	if (str.find('/') != string::npos) {
+		department.push_back(Department(dept.substr(0,2)));
+		department.push_back(Department(dept.substr(3,2)));
+	}
+	else {
+		department.push_back(Department(dept));
+	}
+	return department;
+}
+
 #endif
