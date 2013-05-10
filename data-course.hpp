@@ -12,7 +12,7 @@ private:
 	void init(string dept, int num) {
 		string identifier = dept + tostring(num);
 		parseID(identifier);
-		lookupCourse(id);
+		// lookupCourse(id);
 	}
 	void copy(const Course& c) {
 		id = c.id;
@@ -66,7 +66,13 @@ public:
 	Course() {
 
 	}
+	Course(string str) {
+
+	}
 	Course(const Course& c) {
+		copy(c);
+	}
+	Course& operator = (const Course &c) {
 		copy(c);
 	}
 	Course(istream &is) {
