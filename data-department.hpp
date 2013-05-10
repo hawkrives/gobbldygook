@@ -258,15 +258,20 @@ private:
 	}
 public:
 	Department() {
+		cout << "Called Department constructor with nothing." << endl;
 		id = NONE;
 	}
 	Department(int i) {
+		cout << "Called Department constructor with integer." << endl;
 		id = intToDept(i);
 	}
 	Department(dept_t department) {
+		cout << "Called Department constructor with dept_t." << endl;
 		id = department;
 	}
 	Department(string str) {
+		// cout << "Called Department constructor with string." << endl;
+		// cout << "String was: " << str << endl;
 		if (str.length() == 2)
 			id = shortStringToDept(str);
 		else
@@ -280,8 +285,18 @@ public:
 		return deptToString(id);
 	}
 	string getFullName() {
+		// cout << id << endl;
 		return deptToLongName(id);
 	}
+
+	ostream& getData(ostream &os) {
+		os << "ID: " << getID() << endl;
+		os << "Name: " << getName() << endl;
+		os << "Full: " << getFullName() << endl;
+		return os;
+	}
 };
+
+ostream &operator<<(ostream &os, Department &item) { return item.getData(os); }
 
 #endif

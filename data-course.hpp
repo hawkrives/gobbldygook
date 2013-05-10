@@ -150,7 +150,8 @@ public:
 		badBeginnings.push_back("Res: ");
 		
 		badEndings.push_back("Students in " + department[0].getFullName() + " " + tostring(number));
-		cout << badEndings.back() << endl;
+		badEndings.push_back("Students in " + department[0].getName() + " " + tostring(number));
+		// cout << badEndings.back() << endl;
 
 		for (vector<string>::iterator i=badEndings.begin(); i != badEndings.end(); ++i)
 			title = removeTrailingText(title, *i);
@@ -163,33 +164,33 @@ public:
 		stringstream(str.substr(str.size() - 3)) >> number;
 
 		// Check if it's one of those dastardly "split courses".
-		unsigned int foundLoc = str.find('/');
-		string tempDept = str.substr(0,str.find(' ')-1);
+		string dept = str.substr(0,str.size()-3);
 
-		if (foundLoc != str.npos) {
-			string dept1 = tempDept.substr(0,2);
-			department.push_back(Department(dept1));
-
-			string dept2 = tempDept.substr(2,2);
-			department.push_back(Department(dept2));
+		if (str.find('/') != string::npos) {
+			department.push_back(Department(dept.substr(0,2)));
+			department.push_back(Department(dept.substr(2,2)));
 		}
 		else {
-			department.push_back(Department(tempDept));
+			department.push_back(Department(dept));
 		}
 	}
 
-	void updateid() {
+	void updateID() {
 		string dept;
-		for (std::vector<Department>::iterator i = department.begin(); i != department.end(); ++i)
-			dept += i->getName() + "/";
+		for (std::vector<Department>::iterator i = department.begin(); i != department.end(); ++i) {
+			dept += i->getName();
+			if (department.size() > 1)
+				dept += "/";
+		}
 		id = dept + " " + tostring(number) + section;
 	}
-	string getid() {
+	string getID() {
 		return id;
 	}
 
 	ostream& getData(ostream &os) {
-		os << id << section << " - ";
+		updateID();
+		os << id << " - ";
 		os << title << " | ";
 		if (professor.length() > 0 && professor != " ")
 			os << professor;
