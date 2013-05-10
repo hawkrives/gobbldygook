@@ -4,7 +4,8 @@
 #include "data-general.hpp"
 using namespace std;
 
-struct Major {
+class Major {
+private:
 	string name;
 	int difficulty;
 };
