@@ -4,13 +4,13 @@
 #include "data-student.hpp"
 using namespace std;
 
-vector<Course> courses;
+vector<Course> all_courses;
 
 void loadCourses() {
 	ifstream infile("data/2012-13-s2-csv.csv");
 	while (infile.peek() != -1){
 		Course incourse(infile);
-		courses.push_back(incourse);
+		all_courses.push_back(incourse);
 		cout << incourse << endl;
 		// incourse.showAll();
 	}
