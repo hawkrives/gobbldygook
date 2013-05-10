@@ -100,7 +100,7 @@ public:
 		*/
 		
 		// Ignore the first column;
-		record.at(0);
+		// record.at(0);
 
 		// so, the *first* column (that we care about) has the course id,
 		id = record.at(1);
