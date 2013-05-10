@@ -9,7 +9,7 @@ using namespace std;
 
 class Course {
 protected:
-	string ID;
+	string id;
 	int number;
 	string title;
 	string description;
@@ -65,9 +65,9 @@ public:
 		// Ignore the first column;
 		record.at(0);
 
-		// so, the *first* column (that we care about) has the course ID,
-		ID = record.at(1);
-		parseID(ID);
+		// so, the *first* column (that we care about) has the course id,
+		id = record.at(1);
+		parseid(id);
 
 		// Second column has the section,
 		section = record.at(2)[0];
@@ -158,9 +158,9 @@ public:
 			title = removeStartingText(title, *i);
 	}
 
-	void parseID(string str) {
+	void parseid(string str) {
 		// Get the number of the course, aka the last three slots.
-		number = str.substr(str.size() - 3);
+		stringstream(str.substr(str.size() - 3)) >> number;
 
 		// Check if it's one of those dastardly "split courses".
 		unsigned int foundLoc = str.find('/');
@@ -178,18 +178,18 @@ public:
 		}
 	}
 
-	void updateID() {
+	void updateid() {
 		string dept;
 		for (std::vector<Department>::iterator i = department.begin(); i != department.end(); ++i)
-			dept += i->getName();
-		ID = dept + " " + tostring(number) + section;
+			dept += i->getName() + "/";
+		id = dept + " " + tostring(number) + section;
 	}
-	string getID() {
-		return ID;
+	string getid() {
+		return id;
 	}
 
 	ostream& getData(ostream &os) {
-		os << ID << section << " - ";
+		os << id << section << " - ";
 		os << title << " | ";
 		if (professor.length() > 0 && professor != " ")
 			os << professor;
@@ -198,7 +198,7 @@ public:
 	void display();
 
 	void showAll() {
-		cout << ID << section << endl;
+		cout << id << section << endl;
 		cout << "Title: " << title << endl;
 		cout << "Professor: " << professor << endl;
 		cout << "Lab? " << lab << endl;
