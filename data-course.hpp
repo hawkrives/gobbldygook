@@ -106,6 +106,9 @@ public:
 		parseID(id);
 
 		// Second column has the section,
+		// note that this breaks if it is a string.
+			// it breaks after PHYS 125 lab.
+			// it also doesn't output on anything.
 		section = record.at(2)[0];
 
 		// Third holds the lab boolean,
