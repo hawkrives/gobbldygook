@@ -73,8 +73,7 @@ public:
 		if (!is) return;
 
 		string tmpLine;
-		getline(is, tmpLine); // do this twice: once to not break the program,
-		getline(is, tmpLine); // and once to remove the extra data of course status.
+		getline(is, tmpLine); // read in so we can do things with it.
 
 		vector<string> record = split(tmpLine, ',');
 		for (vector<string>::iterator i=record.begin(); i != record.end(); ++i) {
