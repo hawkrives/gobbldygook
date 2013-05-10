@@ -8,6 +8,8 @@ vector<Course> all_courses;
 
 void loadCourses() {
 	ifstream infile("data/2012-13-s2-csv.csv");
+	string str; // read in the header line
+	getline(infile, str);
 	while (infile.peek() != -1){
 		Course incourse(infile);
 		all_courses.push_back(incourse);
