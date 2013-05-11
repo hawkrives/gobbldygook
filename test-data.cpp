@@ -5,6 +5,7 @@
 using namespace std;
 
 vector<Course> all_courses;
+Student user;
 
 void loadCourses() {
 	ifstream infile("data/2012-13-s2-csv.csv");
@@ -33,15 +34,35 @@ void whatDidICallThisWith(int argc, const char *argv[]) {
 }
 
 void welcome() {
-	cout << "Welcome!" << endl;
-	cout << "What is your name?";
-	// cin 
+	string name, yearS, yearE, majors;
+	// cout << "Welcome!" << endl;
+	// cout << "What is your name? ";
+	// getline(cin, name);
+	name = "Xandra Best";
+	// cout << "What year do you graduate? ";
+	// cin >> yearE;
+	// cout << "What are your majors (ex. CSCI, ASIAN) ";
+	// getline(cin, majors);
+	majors = "CSCI, STAT, ASIAN";
+	user = Student(name, "", "", majors);
+}
+
+void getCourses() {
+	string courses;
+	// cout << "What are some courses that you have taken? (ex. CSCI125, STAT 110)" << endl;
+	// cout << "> ";
+	// getline(cin, courses);
+	courses = "CSCI 215, stat 110, THEAT398, writ211";
+	user.addCourses(courses);
 }
 
 int main(int argc, const char *argv[]) {
 	loadCourses();
-	Course c = getCourse("CSCI 251");
-	cout << c << endl;
+	// Course c("BIO 126");
+	// cout << c << endl;
+	welcome();
+	getCourses();
+	cout << user << endl;
 	// if (argc == 2)
 	// 	Student person(argv[1]);
 	// else
