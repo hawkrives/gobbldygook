@@ -36,7 +36,7 @@ Course::Course() {
 
 }
 Course::Course(string str) {
-
+	init(str);
 }
 Course::Course(const Course& c) {
 	copy(c);
