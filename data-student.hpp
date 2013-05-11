@@ -10,40 +10,15 @@ class Semester {
 private:
 	int period;
 public:
-	Semester() {
-		period = 0;
-	}
-	Semester(int p) {
-		period = p;
-	}
+	Semester();
+	Semester(int p);
 
 	vector<Course> courses;
 };
 
 class Student {
 private:
-	void init(string n, int s, int g, string m) {
-		name = n;
-		startingYear = s;
-		gradutationYear = g;
-		// parseMajors(m);
-
-		year1.push_back(Semester(1));
-		year1.push_back(Semester(2));
-		year1.push_back(Semester(3));
-
-		year2.push_back(Semester(1));
-		year2.push_back(Semester(2));
-		year2.push_back(Semester(3));
-		
-		year3.push_back(Semester(1));
-		year3.push_back(Semester(2));
-		year3.push_back(Semester(3));
-		
-		year4.push_back(Semester(1));
-		year4.push_back(Semester(2));
-		year4.push_back(Semester(3));
-	}
+	void init(string n, int s, int g, string m);
 public:
 	string name;
 	int startingYear, gradutationYear;
@@ -55,22 +30,13 @@ public:
 	vector<Semester> year3;//(3);
 	vector<Semester> year4;//(3);
 
-	Student() {
-		init("", 2000, 2004, "");
-	}
-	Student(string fn) {
-		ifstream infile;
-		infile.open(fn.c_str());
-	}
+	Student();
+	Student(string fn);
 
-	bool hasTakenCourse() {
-		return false;
-	}
+	bool hasTakenCourse();
+	void addCourse(const Course& c, const Semester& s);
 
-	ostream& getData(ostream &os) {
-		os << name << " ";
-		return os;
-	}
+	ostream& getData(ostream &os);
 	void display();
 };
 

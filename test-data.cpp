@@ -13,8 +13,7 @@ void loadCourses() {
 	while (infile.peek() != -1){
 		Course incourse(infile);
 		all_courses.push_back(incourse);
-		cout << incourse << endl;
-		// incourse.showAll();
+		// cout << incourse << endl;
 	}
 }
 
@@ -33,12 +32,20 @@ void whatDidICallThisWith(int argc, const char *argv[]) {
 	}
 }
 
+void welcome() {
+	cout << "Welcome!" << endl;
+	cout << "What is your name?";
+	// cin 
+}
+
 int main(int argc, const char *argv[]) {
 	loadCourses();
-	if (argc == 2)
-		Student person(argv[1]);
-	else
-		Student person("data/user.json");
+	Course c = getCourse("CSCI 251");
+	cout << c << endl;
+	// if (argc == 2)
+	// 	Student person(argv[1]);
+	// else
+	// 	Student person("data/user.json");
 
 	return 0;
 }
