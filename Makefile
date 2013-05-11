@@ -19,13 +19,13 @@ OBJECTS = data-general.o \
 # $@ takes the label of the rule
 # $< takes the thing to the right of the label
 
-data-test: data-test.o
+main: test-data.o
 	$(CC) $(CFLAGS) -o $@ $< $(OBJECTS) $(LIBS)
 
 ## # # # # # # ##
 
-data-test.o: $(OBJECTS)
-	$(CC) $(CFLAGS) $(MACOSX_DEFINE) $(LIBS) -c data-test.cpp
+test-data.o: $(OBJECTS)
+	$(CC) $(CFLAGS) $(MACOSX_DEFINE) $(LIBS) -c test-data.cpp
 
 ## # # # # # # ##
 
