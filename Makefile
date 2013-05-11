@@ -29,8 +29,6 @@ data-course.o: data-course.hpp data-major.o data-general.o
 data-student.o: data-student.hpp data-course.o data-major.o data-general.o jsmn.o
 data-requirement.o: data-requirement.hpp data-course.hpp data-general.o
 
-jsmn.o: jsmn/jsmn.cpp jsmn/jsmn.h
-	$(CC) -c jsmn/jsmn.cpp
 
 data-general.o: data-general.hpp
 
