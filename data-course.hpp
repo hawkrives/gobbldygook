@@ -9,7 +9,7 @@ using namespace std;
 
 class Course {
 private:
-	void init(string dept, int num);
+	void init(string identifier);
 	void copy(const Course& c);
 protected:
 	string id;
