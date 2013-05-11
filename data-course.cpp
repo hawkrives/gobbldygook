@@ -201,7 +201,8 @@ void Course::updateID() {
 		if (department.size() > 1)
 			dept += "/";
 	}
-	id = dept + " " + tostring(number) + section;
+	// ignore section until we get it assigning properly in the constructor
+	id = dept + " " + tostring(number);// + section;
 }
 string Course::getID() {
 	return id;
