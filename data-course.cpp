@@ -42,6 +42,7 @@ Course::Course(const Course& c) {
 	copy(c);
 }
 Course& Course::operator = (const Course &c) {
+	if (this == &c) return *this;
 	copy(c);
 	return *this;
 }
