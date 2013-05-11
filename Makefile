@@ -33,4 +33,4 @@ test-data.o: $(OBJECTS) test-data.cpp
 	$(CC) $(CFLAGS) $(MACOSX_DEFINE) $(LIBS) -c $<
 
 clean:
-	rm -f *.o schedule
+	rm -f *.o main
