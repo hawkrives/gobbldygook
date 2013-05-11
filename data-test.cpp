@@ -14,7 +14,6 @@ void loadCourses() {
 		Course incourse(infile);
 		all_courses.push_back(incourse);
 		cout << incourse << endl;
-		// incourse.showAll();
 	}
 }
 
@@ -34,11 +33,11 @@ void whatDidICallThisWith(int argc, const char *argv[]) {
 }
 
 int main(int argc, const char *argv[]) {
-	loadCourses();
-	if (argc == 2)
-		Student person(argv[1]);
-	else
-		Student person("data/user.json");
+	// loadCourses();
+	// if (argc == 2)
+	// 	Student person(argv[1]);
+	// else
+	// 	Student person("data/user.json");
 
 	return 0;
 }
