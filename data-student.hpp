@@ -36,4 +36,6 @@ public:
 	void display();
 };
 
+ostream& operator<<(ostream& os, Student& item);
+
 #endif
