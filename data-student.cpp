@@ -14,22 +14,6 @@ void Student::init(string n, int s, int g, string m) {
 	startingYear = s;
 	gradutationYear = g;
 	// parseMajors(m);
-
-	year1.push_back(Semester(1));
-	year1.push_back(Semester(2));
-	year1.push_back(Semester(3));
-
-	year2.push_back(Semester(1));
-	year2.push_back(Semester(2));
-	year2.push_back(Semester(3));
-	
-	year3.push_back(Semester(1));
-	year3.push_back(Semester(2));
-	year3.push_back(Semester(3));
-	
-	year4.push_back(Semester(1));
-	year4.push_back(Semester(2));
-	year4.push_back(Semester(3));
 }
 
 Student::Student() {
