@@ -32,6 +32,12 @@ void whatDidICallThisWith(int argc, const char *argv[]) {
 	}
 }
 
+void welcome() {
+	cout << "Welcome!" << endl;
+	cout << "What is your name?";
+	// cin 
+}
+
 int main(int argc, const char *argv[]) {
 	loadCourses();
 	Course c = getCourse("CSCI 251");
