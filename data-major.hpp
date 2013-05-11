@@ -8,7 +8,7 @@ class Major {
 private:
 	string name;
 	int difficulty;
-  vector<MajorRequirement> requirements;
+	vector<MajorRequirement> requirements;
 };
 
 #endif
