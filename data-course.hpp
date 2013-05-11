@@ -4,7 +4,6 @@
 #include "data-general.hpp"
 #include "data-major.hpp"
 #include "data-department.hpp"
-
 using namespace std;
 
 class Course {
@@ -38,7 +37,7 @@ public:
 	Course();
 	Course(string str);
 	Course(const Course& c);
-	Course& operator = (const Course &c);
+	Course& operator= (const Course &c);
 	Course(istream &is);
 
 	void cleanTitle();
@@ -47,12 +46,11 @@ public:
 	void updateID();
 	string getID();
 
-	ostream& getData(ostream &os);
+	ostream& getData(ostream& os);
 	void display();
 	void showAll();
 };
 
-ostream &operator<<(ostream &os, Course &item);
 extern vector<Course> all_courses;
 
 ostream& operator<<(ostream& os, Course& item);
