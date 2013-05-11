@@ -24,7 +24,7 @@ main: test-data.o
 
 ## # # # # # # ##
 
-test-data.o: $(OBJECTS)
+test-data.o: $(OBJECTS) test-data.cpp
 	$(CC) $(CFLAGS) $(MACOSX_DEFINE) $(LIBS) -c test-data.cpp
 
 ## # # # # # # ##
