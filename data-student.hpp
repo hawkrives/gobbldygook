@@ -67,6 +67,10 @@ public:
 		return false;
 	}
 
+	void addCourse(const Course& c, const Semester& s) {
+		// s.push_back();
+	}
+
 	ostream& getData(ostream &os) {
 		os << name << " ";
 		return os;
