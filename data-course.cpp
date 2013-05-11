@@ -1,10 +1,9 @@
 #include "data-course.hpp"
 using namespace std;
 
-void Course::init(string dept, int num) {
-	string identifier = dept + tostring(num);
-	parseID(identifier);
-	// lookupCourse(id);
+
+void Course::init(string identifier) {
+	copy(getCourse(identifier));
 }
 void Course::copy(const Course& c) {
 	id = c.id;
