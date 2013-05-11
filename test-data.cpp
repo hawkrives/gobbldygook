@@ -13,7 +13,7 @@ void loadCourses() {
 	while (infile.peek() != -1){
 		Course incourse(infile);
 		all_courses.push_back(incourse);
-		cout << incourse << endl;
+		// cout << incourse << endl;
 	}
 }
 
@@ -33,7 +33,9 @@ void whatDidICallThisWith(int argc, const char *argv[]) {
 }
 
 int main(int argc, const char *argv[]) {
-	// loadCourses();
+	loadCourses();
+	Course c = getCourse("CSCI 251");
+	cout << c << endl;
 	// if (argc == 2)
 	// 	Student person(argv[1]);
 	// else

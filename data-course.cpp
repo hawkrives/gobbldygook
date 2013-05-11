@@ -235,3 +235,12 @@ void Course::display() {
 	if (this == 0) 
 		cout << *this << endl; 
 }
+
+Course getCourse(string id) {
+	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i) {
+		if (i->getID() == id) {
+			return *i;
+		}
+	}
+	return Course();
+}
