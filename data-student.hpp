@@ -25,10 +25,6 @@ public:
 
 	vector<Major> majors;
 
-	vector<Semester> year1;//(3);
-	vector<Semester> year2;//(3);
-	vector<Semester> year3;//(3);
-	vector<Semester> year4;//(3);
 
 	Student();
 	Student(string fn);
