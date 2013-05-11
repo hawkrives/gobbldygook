@@ -33,9 +33,21 @@ void Student::addCourse(const Course& c, const Semester& s) {
 }
 
 ostream& Student::getData(ostream &os) {
-	os << name << " ";
+	os << name << ", ";
+	os << "majoring in ";
+	for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i)
+		os << *i << ", ";
+	os << " and taking:" << endl;
+	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i){
+		os << *i << endl;
+	}
 	return os;
 }
 void Student::display() {
-
+	if (this == 0)
+		cout << *this << endl;
 };
+ostream& operator<<(ostream& os, Student& item) {
+	os << item.getData(os);
+	return os;
+}
