@@ -2,26 +2,18 @@
 #define __Data_majorRequirement__
 
 #include "data-general.hpp"
+// #include "data-course.hpp"
 using namespace std;
 
 class MajorRequirement {
 private:
-	int needed;
+	// int needed;
 	int has;
-	bool satisfied;
-	vector<Course> validCourses;
+	// bool satisfied;
+	// vector<Course> validCourses;
 public:
-	bool fulfillsRequirement(const Course& c) {
-		for (vector<Course>::iterator i=validCourses.begin(); i!=validCourses.end(); ++i) {
-			if (*i==c)
-				return true;
-		}
-		return false;
-	}
-
-	void incrementHas() {
-		++has;
-	}
+	// bool fulfillsRequirement(const Course& c);
+	void incrementHas();
 };
 
 #endif

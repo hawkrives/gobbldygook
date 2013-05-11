@@ -2,12 +2,13 @@
 #define __Data_major__
 
 #include "data-general.hpp"
+#include "data-majorRequirement.hpp"
 using namespace std;
 
 class Major {
 private:
 	string name;
-	int difficulty;
+	// int difficulty;
 	vector<MajorRequirement> requirements;
 };
 
