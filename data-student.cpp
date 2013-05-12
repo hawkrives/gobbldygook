@@ -20,14 +20,27 @@ Student::Student(string fn) {
 	infile.open(fn.c_str());
 }
 
-void Student::parseMajors(string str) {
-	vector<string> record = split(str, ',');
-	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
-		string s = removeStartingText(*i, " ");
-		std::transform(s.begin(), s.end(), s.begin(), ::toupper);
-		Major m = Major(s);
-		majors.push_back(m);
 	}
+}
+
+void Student::addMajor(const Major& m) {
+	majors.push_back(m);
+}
+
+void Student::addMajors(string str) {
+	vector<string> record = split(str, ',');
+	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i)
+		addMajor(*i);
+}
+
+void Student::addCourse(const Course& c) {
+	courses.push_back(c);
+}
+
+void Student::addCourses(string str) {
+	vector<string> record = split(str, ',');
+	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i)
+		addCourse(Course(*i));
 }
 
 bool Student::hasTakenCourse(string str) {
@@ -37,17 +50,6 @@ bool Student::hasTakenCourse(string str) {
 		if (*i == checkAgainst)
 			userHasTaken = true;
 	return userHasTaken;
-}
-
-void Student::addCourse(const Course& c) {
-	courses.push_back(c);
-}
-
-void Student::addCourses(string str) {
-	vector<string> record = split(str, ',');
-	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
-		addCourse(Course(*i));
-	}
 }
 
 ostream& Student::getData(ostream &os) {

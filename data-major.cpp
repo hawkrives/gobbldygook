@@ -9,6 +9,8 @@ Major::Major() {
 
 Major::Major(string str) {
 	// cout << "Called Major constructor with string '" << str << "'" << endl;
+	string s = removeStartingText(str, " ");
+	std::transform(s.begin(), s.end(), s.begin(), ::toupper);
 	department = Department(str);
 	name = department.getFullName();
 }

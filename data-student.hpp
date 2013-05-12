@@ -25,7 +25,8 @@ public:
 	void addCourse(const Course& c);
 	void addCourses(string str);
 
-	void parseMajors(string str);
+	void addMajor(const Major& m);
+	void addMajors(string str);
 
 	ostream& getData(ostream &os);
 	void display();
