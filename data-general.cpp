@@ -64,3 +64,13 @@ string deDoubleString(string s) {
 	// Todo: write this.
 	return s;
 }
+
+void printEntireRecord(vector<string> record) {
+	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
+		cout << *i;
+		if (i!=record.end()-1)
+			cout << ", ";
+		else
+			cout << endl;
+	}
+}

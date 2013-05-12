@@ -73,23 +73,8 @@ Course::Course(istream &is) {
 		*i = removeTrailingSlashes(*i);
 	}
 
-	/*
-		cout << record.at(0) << ", ";
-		cout << record.at(1) << ", ";
-		cout << record.at(2) << ", ";
-		cout << record.at(3) << ", ";
-		cout << record.at(4) << ", ";
-		cout << record.at(5) << ", ";
-		cout << record.at(6) << ", ";
-		cout << record.at(7) << ", ";
-		cout << record.at(8) << ", ";
-		cout << record.at(9) << ", ";
-		cout << record.at(10) << ", ";
-		cout << record.at(11) << ", ";
-		if (record.size() == 13)
-			cout << record.at(12) << endl;
-	*/
-	
+	printEntireRecord(record);
+
 	// Ignore the first column;
 	// record.at(0);
 
