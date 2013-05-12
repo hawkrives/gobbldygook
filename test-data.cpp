@@ -42,12 +42,21 @@ void getCourses() {
 
 int main(int argc, const char *argv[]) {
 	loadCourses();
+	
+	// Method 1: Dynamic.
 	// welcome();
 	// getCourses();
-	Student user("data/user.txt");
+
+	// Method 2: Hard-coded file path.
+	// Student user("data/user.txt");
+	
+	// Method 3: File path as an argument.
+	Student user(argv[1]);
+	
 	user.display();
 
-	cout << "Question: Has the user taken CSCI 251? " << user.hasTakenCourse("CSCI251") << endl;
+	cout << "Question: Has the user taken CSCI 251? ";
+	cout << user.hasTakenCourse("CSCI251") << endl;
 
 	return 0;
 }
