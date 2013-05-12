@@ -31,7 +31,7 @@ public:
 	Student(string n, string s, string e, string m);
 	Student(string fn);
 
-	bool hasTakenCourse();
+	bool hasTakenCourse(string str);
 	void addCourse(const Course& c);
 	void addCourses(string str);
 

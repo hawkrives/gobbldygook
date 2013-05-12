@@ -38,8 +38,13 @@ void Student::parseMajors(string str) {
 	}
 }
 
-bool Student::hasTakenCourse() {
-	return false;
+bool Student::hasTakenCourse(string str) {
+	bool userHasTaken = false;
+	Course checkAgainst = getCourse(str);
+	for (std::vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i)
+		if (*i == checkAgainst)
+			userHasTaken = true;
+	return userHasTaken;
 }
 
 void Student::addCourse(const Course& c) {
