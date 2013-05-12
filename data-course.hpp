@@ -40,7 +40,7 @@ public:
 	Course& operator= (const Course &c);
 	Course(istream &is);
 
-	void cleanTitle();
+	string cleanTitle(string title);
 
 	void parseID(string str);
 	void updateID();

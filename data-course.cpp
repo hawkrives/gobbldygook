@@ -91,7 +91,6 @@ Course::Course(istream &is) {
 
 	// while Fourth contains the title of the course;
 	title = record.at(4);
-	cleanTitle();
 
 	// Fifth hands over the length (half semester or not)
 	// it's actually an int that tells us how many times the course is offered per semester.
@@ -130,12 +129,11 @@ Course::Course(istream &is) {
 	}
 
 	updateID();
+	title = cleanTitle(title);
 	record.clear();
 }
 
-
-void Course::cleanTitle() {
-	// TODO: Refactor this to work on strings.
+string Course::cleanTitle(string title) {
 	vector<string> badEndings, badBeginnings;
 
 	badEndings.push_back("Closed during web registration.");
@@ -164,8 +162,11 @@ void Course::cleanTitle() {
 	badEndings.push_back("This course is open to ");
 	badEndings.push_back("This course open to seniors only.");
 	badEndings.push_back("This lab has been canceled.");
-	badEndings.push_back("Students in " + department[0].getFullName() + " " + tostring(number));
-	badEndings.push_back("Students in " + department[0].getName() + " " + tostring(number));
+
+	string shortDeptName = department.at(0).getName();
+	string longDeptName = department.at(0).getFullName();
+	badEndings.push_back("Students in " + shortDeptName);
+	badEndings.push_back("Students in " + longDeptName);
 
 	badBeginnings.push_back("Top: ");
 	badBeginnings.push_back("Sem: ");
@@ -175,6 +176,8 @@ void Course::cleanTitle() {
 		title = removeTrailingText(title, *i);
 	for (vector<string>::iterator i=badBeginnings.begin(); i != badBeginnings.end(); ++i)
 		title = removeStartingText(title, *i);
+
+	return title;
 }
 
 void Course::parseID(string str) {
