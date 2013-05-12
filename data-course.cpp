@@ -165,6 +165,10 @@ string Course::cleanTitle(string title) {
 	return title;
 }
 
+string Course::getProfessor() {
+	return professor;
+}
+
 void Course::parseID(string str) {
 	// Get the number of the course, aka the last three slots.
 	stringstream(str.substr(str.size() - 3)) >> number;

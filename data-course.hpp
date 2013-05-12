@@ -44,6 +44,8 @@ public:
 
 	void parseID(string str);
 	void updateID();
+
+	string getProfessor();
 	string getID();
 
 	ostream& getData(ostream& os);
