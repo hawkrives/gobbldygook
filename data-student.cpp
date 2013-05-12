@@ -5,7 +5,7 @@ void Student::init(string n, int s, int g, string m) {
 	name = n;
 	startingYear = s;
 	gradutationYear = g;
-	parseMajors(m);
+	addMajors(m);
 }
 
 Student::Student() {
