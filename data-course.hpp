@@ -48,6 +48,7 @@ public:
 
 	ostream& getData(ostream& os);
 	void display();
+	void displayMany();
 	void showAll();
 };
 
