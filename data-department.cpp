@@ -6,7 +6,7 @@ using namespace std;
 /////
 
 Department::Department() {
-	cout << "Called Department constructor with nothing." << endl;
+	// cout << "Called Department constructor with nothing." << endl;
 	id = NONE;
 }
 Department::Department(int i) {
@@ -18,8 +18,7 @@ Department::Department(dept_t department) {
 	id = department;
 }
 Department::Department(string str) {
-	// cout << "Called Department constructor with string." << endl;
-	// cout << "String was: " << str << endl;
+	// cout << "Called Department constructor with string '" << str << "'" << endl;
 	// make sure the string is uppercase
 	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 	if (str.length() == 2)
@@ -27,7 +26,6 @@ Department::Department(string str) {
 	else
 		id = stringToDept(str);
 }
-
 
 dept_t Department::intToDept(int i) {
 	     if ( i == 0  ) return AFAM;
