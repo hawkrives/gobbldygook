@@ -777,8 +777,8 @@ C,PHIL233,,,Kierkegaard,,1.00,N,HWC WRI,MWF 1150-1245PM,RNS 150,"Marino, Gordon 
 C,PHIL236,,,Modern Philosophy,,1.00,N,HWC WRI,MWF 1045-1140,HH 516,"Grenberg, Jeanine"
 C,PHIL240,,,Formal Logic,,1.00,N,,MWF 0905-1000,HH 403,"Cunningham, Arthur"
 C,PHIL244,,,Philosophy of Science,,1.00,N,IST WRI,T 1145-0110PM Th 1245-0205PM,RNS 208 RNS 208,"Cunningham, Arthur"
-C,PHIL251,A,,"Science, Ethics, Religion Prerequisite: completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration. New course",,1.00,N,EIN,T 1145-0110PM Th 1245-0205PM,OM 310 OM 310,"Marsh, Jason"
-O,PHIL251,B,,"Science, Ethics, Religion Prerequisite: completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration. New course",,1.00,N,EIN,T 0120-0245PM Th 0215-0335PM,OM 310 OM 310,"Marsh, Jason"
+C,PHIL251,A,,"Science/Ethics/Religion Prerequisite: completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration. New course",,1.00,N,EIN,T 1145-0110PM Th 1245-0205PM,OM 310 OM 310,"Marsh, Jason"
+O,PHIL251,B,,"Science/Ethics/Religion Prerequisite: completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration. New course",,1.00,N,EIN,T 0120-0245PM Th 0215-0335PM,OM 310 OM 310,"Marsh, Jason"
 C,PHIL253,,,Democra:Rule of Ignorant? Prerequisite: completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.,,1.00,N,EIN WRI,MWF 0200-0255PM,HH 516,"Fuerstein, Michael"
 C,PHIL254,A,,"Law, Politics, Morality Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.",,1.00,N,EIN,MWF 0905-1000,HH 317,"Fuerstein, Michael"
 C,PHIL254,B,,"Law, Politics, Morality Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.",,1.00,N,EIN,MWF 1255-0150PM,HH 403,"Fuerstein, Michael"
@@ -938,8 +938,8 @@ O,REL227,B,,Jews & Christians/Aft New course,,1.00,N,BTS-T,T 1145-0110PM Th 1245
 O,REL248,,,Judaism,,1.00,N,HWC,T 0935-1100 Th 0930-1050,OM 30 OM 30,"Benjamin, Mara H."
 O,REL285,,,What is Religion? Open only to juniors and sophomores.,,1.00,N,WRI,MWF 0200-0255PM,OM 140,"Alexander, Torin D."
 C,REL294,,,Academic Internship,,1.00,Y,,,,Staff
-C,REL296,A,,"Love, Justice, Soc Rel Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration. Juniors may add on a space- available basis during the drop/add period.",,1.00,N,EIN WRI,T 1145-0110PM Th 1245-0205PM,OM 340 OM 340,"Schuurman, Douglas"
-C,REL296,B,,"Love, Justice, Soc Rel Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration. Juniors may add on a space- available basis during the drop/add period.",,1.00,N,EIN WRI,T 0120-0245PM Th 0215-0335PM,OM 340 OM 340,"Schuurman, Douglas"
+C,REL296,A,,"Love/Justice/Soc Rel Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration. Juniors may add on a space- available basis during the drop/add period.",,1.00,N,EIN WRI,T 1145-0110PM Th 1245-0205PM,OM 340 OM 340,"Schuurman, Douglas"
+C,REL296,B,,"Love/Justice/Soc Rel Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration. Juniors may add on a space- available basis during the drop/add period.",,1.00,N,EIN WRI,T 0120-0245PM Th 0215-0335PM,OM 340 OM 340,"Schuurman, Douglas"
 O,REL298,,,IS/,,1.00,N,,,,Staff
 C,REL298,A,,IS/A Modern Frankenstein,,1.00,N,,,,"Ripley, Jason J."
 C,REL298,B,,IS/Biblical Hebrew I,,1.00,N,,,,"Odell, Margaret"
@@ -1016,7 +1016,7 @@ O,SPAN312,,T,Voices: Spanish America,,1.00,N,,T 1145-0110PM Th 1245-0205PM,TOH 1
 C,SPAN313,,T,Lit/Soc/Spain: 1939-2009,,1.00,N,ALS-L,T 0935-1100 Th 0930-1050,TOH 108 TOH 108,"Barnes-Karol, Gwendolyn"
 C,SPAN394,,,Academic Internship,,1.00,Y,,,,Staff
 O,SPAN398,,,IR/,,1.00,N,,,,Staff
-C,STAT110,,,"Prin of Statistics This course has class year limits. Students in Stat 110 must also register for one lab 110 AL, BL, or CL.",,1.00,N,AQR,T 0800-0925 Th 0800-0920,RNS 150 RNS 150,"Lane-Getaz, Sharon"
+C,STAT110,,,"Prin of Statistics This course has class year limits. Students in Stat 110 must also register for one lab 110 AL BL or CL.",,1.00,N,AQR,T 0800-0925 Th 0800-0920,RNS 150 RNS 150,"Lane-Getaz, Sharon"
 C,STAT110,A,L,Prin of Statistics Lab,,0.00,N,,F 0800-0855,RML 115,"Lane-Getaz, Sharon"
 C,STAT110,B,L,Prin of Statistics Lab,,0.00,N,,F 0905-1000,RML 115,"Lane-Getaz, Sharon"
 C,STAT110,C,L,Prin of Statistics Lab,,0.00,N,,F 1045-1140,RML 115,"Lane-Getaz, Sharon"
