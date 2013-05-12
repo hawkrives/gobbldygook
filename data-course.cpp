@@ -191,6 +191,7 @@ void Course::updateID() {
 			dept += "/";
 	}
 	id = dept + " " + tostring(number) + section;
+	if (lab) id += "L";
 }
 
 string Course::getID() {
