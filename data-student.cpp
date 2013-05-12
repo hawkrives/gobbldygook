@@ -81,14 +81,15 @@ void Student::addCourses(string str) {
 }
 
 ostream& Student::getData(ostream &os) {
-	os << name << ", ";
-	os << "you are majoring in ";
+	os << name << ", you are majoring in ";
+	
 	for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i){
 		if (majors.size() == 2) {
+			os << *i;
 			if (i != majors.end()-1)
-				os << *i << " and ";
+				os << " and ";
 			else
-				os << *i << " ";
+				os << " ";
 		}
 		else {
 			if (i != majors.end()-1)
@@ -97,9 +98,11 @@ ostream& Student::getData(ostream &os) {
 				os << "and " << *i << ", ";
 		}
 	}
+
 	os << "while taking:" << endl;
 	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i)
 		os << *i << endl;
+
 	return os;
 }
 
