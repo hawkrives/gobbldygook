@@ -66,12 +66,20 @@ ostream& Student::getData(ostream &os) {
 	os << name << ", ";
 	os << "you are majoring in ";
 	for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i){
-		if (i!=majors.end()-1)
-			os << *i << ", ";
-		else 
-			os << "and "<< *i;
+		if (majors.size() == 2) {
+			if (i != majors.end()-1)
+				os << *i << " and ";
+			else
+				os << *i << " ";
+		}
+		else {
+			if (i != majors.end()-1)
+				os << *i << ", ";
+			else 
+				os << "and " << *i << ", ";
+		}
 	}
-	os << ", while taking:" << endl;
+	os << "while taking:" << endl;
 	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i)
 		os << *i << endl;
 	return os;
