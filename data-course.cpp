@@ -207,9 +207,8 @@ string Course::getID() {
 }
 
 ostream& Course::getData(ostream &os) {
-	if (lab)
-		os << "(Lab) ";
 	os << id;
+	if (lab) os << " L";
 	os << " - ";
 	os << title << " | ";
 	if (professor.length() > 0 && professor != " ")
