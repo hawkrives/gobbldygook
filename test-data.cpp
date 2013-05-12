@@ -14,8 +14,10 @@ void loadCourses() {
 		Course incourse(infile);
 		all_courses.push_back(incourse);
 	}
-	for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c)
-		c->displayMany();
+	// for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c)
+	// 	if (c->getProfessor()[1] == ' ')
+	// 		if (c->getProfessor()[2] == '0' || c->getProfessor()[2] == '1')
+	// 			c->displayMany();
 }
 
 void whatDidICallThisWith(int argc, const char *argv[]) {
@@ -47,7 +49,8 @@ void getCourses() {
 	// cout << "What are some courses that you have taken? (ex. CSCI125, STAT 110)" << endl;
 	// cout << "> ";
 	// getline(cin, courses);
-	courses = "CSCI 251, stat 110, THEAT398, writ211";
+	courses = "PHIL 251A,PHIL 251B, REL 296A, REL 296B, STAT 110";
+	// courses = "CSCI 251, stat 110, THEAT398, writ211";
 	user.addCourses(courses);
 }
 
@@ -59,6 +62,7 @@ int main(int argc, const char *argv[]) {
 	welcome();
 	getCourses();
 	user.display();
+
 	
 	return 0;
 }
