@@ -167,6 +167,8 @@ dept_t Department::shortStringToDept(string str) {
 	else if ( str == "CH" ) return CHEM;
 	else if ( str == "ES" ) return ENVST;
 	else if ( str == "HI" ) return HIST;
+	else if ( str == "IS" ) return IS;
+	else if ( str == "ID" ) return INTER;
 	else if ( str == "RE" ) return REL;
 	else return NONE;
 }
