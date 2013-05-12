@@ -41,21 +41,24 @@ void Course::copy(const Course& c) {
 	}
 }	
 
-
 Course::Course() {
 
 }
+
 Course::Course(string str) {
 	init(str);
 }
+
 Course::Course(const Course& c) {
 	copy(c);
 }
+
 Course& Course::operator = (const Course &c) {
 	if (this == &c) return *this;
 	copy(c);
 	return *this;
 }
+
 Course::Course(istream &is) {
 	if (!is) return;
 
