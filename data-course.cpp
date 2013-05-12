@@ -252,7 +252,7 @@ Course getCourse(string identifier) {
 
 	// add a space into the course id, if there isn't one already
 	// find the first digit in the string
-	int firstDigit = identifier.find_first_of("0123456789");
+	long firstDigit = identifier.find_first_of("0123456789");
 
 	if (identifier.find(" ") == string::npos)
 			identifier.insert(firstDigit, 1, ' ');
