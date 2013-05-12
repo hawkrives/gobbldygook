@@ -237,7 +237,7 @@ string Department::deptToLongName(dept_t dept) {
 	else if ( dept == AMST  ) return "American Studies";
 	else if ( dept == ARMS  ) return "American Racial and Multicultural Studies";
 	else if ( dept == ART   ) return "Art and Art History";
-	else if ( dept == ASIAN ) return "Asian Studies ";
+	else if ( dept == ASIAN ) return "Asian Studies";
 	else if ( dept == BIO   ) return "Biology";
 	else if ( dept == BMOLS ) return "Biomolecular Science";
 	else if ( dept == CHEM  ) return "Chemistry";
