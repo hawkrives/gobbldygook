@@ -180,7 +180,7 @@ void Course::updateID() {
 	string dept;
 	for (std::vector<Department>::iterator i = department.begin(); i != department.end(); ++i) {
 		dept += i->getName();
-		if (i!=department.end()-1)
+		if (i != department.end()-1)
 			dept += "/";
 	}
 	id = dept + " " + tostring(number) + section;
