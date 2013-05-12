@@ -14,7 +14,6 @@ public:
 	int startingYear, gradutationYear;
 
 	vector<Major> majors;
-
 	vector<Course> courses;
 
 	Student();
