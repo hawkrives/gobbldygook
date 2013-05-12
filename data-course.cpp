@@ -183,7 +183,7 @@ void Course::updateID() {
 		if (i!=department.end()-1)
 			dept += "/";
 	}
-	id = dept + " " + tostring(number);
+	id = dept + " " + tostring(number) + section;
 }
 
 string Course::getID() {
@@ -191,7 +191,7 @@ string Course::getID() {
 }
 
 ostream& Course::getData(ostream &os) {
-	os << id << section;
+	os << id;
 	if (lab) os << " L";
 	os << " - ";
 	os << title << " | ";
@@ -239,16 +239,13 @@ Course getCourse(string identifier) {
 	if (identifier[0] == ' ')
 		identifier.erase(0, 1);
 
-	// Remove the section specifier, if given
-	if (!(identifier[identifier.length()-1] < 65))
-		identifier = identifier.substr(0, identifier.length()-1);
-
 	// add a space into the course id, if there isn't one already
-	int shouldBeSpaceIndex = identifier.length()-4;
-	if (identifier[shouldBeSpaceIndex] != ' ')
-		identifier.insert(shouldBeSpaceIndex+1, 1, ' ');
+	int spaceIndex_noID = identifier.length()-4;
+	int spaceIndex_withID = identifier.length()-5;
+	if (!(identifier[spaceIndex_noID] == ' ') || !(spaceIndex_withID == ' '))
+		if (!(identifier[spaceIndex_noID] < 65))
+			identifier.insert(spaceIndex_noID+1, 1, ' ');
 
-	// cout << "After cleanup: " << identifier << endl;
 
 	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
 		if (i->getID() == identifier)
