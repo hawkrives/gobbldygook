@@ -246,6 +246,7 @@ Course getCourse(string identifier) {
 		if (!(identifier[spaceIndex_noID] < 65))
 			identifier.insert(spaceIndex_noID+1, 1, ' ');
 
+	// cout << "After cleanup: " << identifier << endl;
 
 	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
 		if (i->getID() == identifier)
