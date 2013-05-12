@@ -239,6 +239,9 @@ void Course::displayMany() {
 }
 
 Course getCourse(string identifier) {
+	// TODO: Merge the two ways of parsing IDs
+	// TODO: Add lab support.
+
 	// cout << "Before cleanup: " << identifier << endl;
 	// Make sure everything is uppercase
 	std::transform(identifier.begin(), identifier.end(), identifier.begin(), ::toupper);
