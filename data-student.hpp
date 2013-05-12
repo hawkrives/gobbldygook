@@ -6,16 +6,6 @@
 #include "data-course.hpp"
 using namespace std;
 
-class Semester {
-private:
-	int period;
-public:
-	Semester();
-	Semester(int p);
-
-	vector<Course> courses;
-};
-
 class Student {
 private:
 	void init(string n, int s, int g, string m);
