@@ -13,7 +13,7 @@ void Student::init(string n, int s, int g, string m) {
 	name = n;
 	startingYear = s;
 	gradutationYear = g;
-	// parseMajors(m);
+	parseMajors(m);
 }
 
 Student::Student() {
@@ -22,6 +22,15 @@ Student::Student() {
 Student::Student(string fn) {
 	ifstream infile;
 	infile.open(fn.c_str());
+}
+
+void Student::parseMajors(string str) {
+	vector<string> record = split(str, ',');
+	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
+		string str = removeStartingText(*i, " ");
+		Major m = Major(str);
+		majors.push_back(m);
+	}
 }
 
 bool Student::hasTakenCourse() {
