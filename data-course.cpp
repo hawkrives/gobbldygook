@@ -194,6 +194,7 @@ void Course::updateID() {
 	}
 	id = dept + " " + tostring(number) + section;
 }
+
 string Course::getID() {
 	return id;
 }
@@ -240,9 +241,9 @@ void Course::displayMany() {
 
 Course getCourse(string id) {
 	std::transform(id.begin(), id.end(), id.begin(), ::toupper);
-	Course c;
 	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
 		if (i->getID() == id)
 			return *i;
+	Course c;
 	return c;
 }
