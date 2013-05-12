@@ -58,8 +58,7 @@ void Student::addCourses(string str) {
 	vector<string> record = split(str, ',');
 	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
 		// cout << *i << endl;
-		Course c = Course(*i);
-		addCourse(c);
+		addCourse(Course(*i));
 	}
 }
 
