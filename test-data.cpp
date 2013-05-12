@@ -44,7 +44,7 @@ int main(int argc, const char *argv[]) {
 	loadCourses();
 	// welcome();
 	// getCourses();
-	Student user("data/user.json");
+	Student user("data/user.txt");
 	user.display();
 
 	cout << "Question: Has the user taken CSCI 251? " << user.hasTakenCourse("CSCI251") << endl;
