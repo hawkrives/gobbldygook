@@ -183,7 +183,7 @@ void Course::updateID() {
 		if (i!=department.end()-1)
 			dept += "/";
 	}
-	id = dept + " " + tostring(number) + section;
+	id = dept + " " + tostring(number);
 }
 
 string Course::getID() {
@@ -191,7 +191,7 @@ string Course::getID() {
 }
 
 ostream& Course::getData(ostream &os) {
-	os << id;
+	os << id << section;
 	if (lab) os << " L";
 	os << " - ";
 	os << title << " | ";
