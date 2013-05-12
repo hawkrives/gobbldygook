@@ -60,7 +60,9 @@ Course& Course::operator = (const Course &c) {
 }
 
 Course::Course(istream &is) {
+	// cout << "Now indise Course()" << endl;
 	if (!is) return;
+	// cout << "Now inside Course(after return)" << endl;
 
 	string tmpLine;
 	getline(is, tmpLine); // read in so we can do things with it.
