@@ -40,6 +40,9 @@ public:
 	Course& operator= (const Course &c);
 	Course(istream &is);
 
+	friend bool operator== (Course &c1, Course &c2);
+    friend bool operator!= (Course &c1, Course &c2);
+
 	string cleanTitle(string title);
 
 	void parseID(string str);
