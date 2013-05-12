@@ -136,9 +136,7 @@ Course::Course(istream &is) {
 string Course::cleanTitle(string title) {
 	vector<string> badEndings, badBeginnings;
 
-	badEndings.push_back(" Closed during web registration.");
-	badEndings.push_back(" Closed to First-Year Students.");
-	badEndings.push_back(" Closed to first-year students.");
+	badEndings.push_back(" Closed");
 	badEndings.push_back(" During course submission process");
 	badEndings.push_back(" Especially for ");
 	badEndings.push_back(" Film screenings");
@@ -146,21 +144,12 @@ string Course::cleanTitle(string title) {
 	badEndings.push_back(" New course");
 	badEndings.push_back(" Not open to first-year students.");
 	badEndings.push_back(" Open only to ");
-	badEndings.push_back(" Open only to seniors");
 	badEndings.push_back(" Open to ");
-	badEndings.push_back(" Permission of instructor required.");
-	badEndings.push_back(" Permission of the instructor");
-	badEndings.push_back(" Prerequisite");
-	badEndings.push_back(" Prerequsiite");
-	badEndings.push_back(" Registration by permission of instructor only.");
-	badEndings.push_back(" Registration restricted");
+	badEndings.push_back(" Permission of ");
+	badEndings.push_back(" Prereq");
+	badEndings.push_back(" Registration");
 	badEndings.push_back(" Taught in English.");
-	badEndings.push_back(" This course does");
-	badEndings.push_back(" This course has been canceled.");
-	badEndings.push_back(" This course has been cancelled.");
-	badEndings.push_back(" This course has class");
-	badEndings.push_back(" This course is open to ");
-	badEndings.push_back(" This course open to seniors only.");
+	badEndings.push_back(" This course");
 	badEndings.push_back(" This lab has been canceled.");
 	badEndings.push_back(" Students in ");
 
