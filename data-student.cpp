@@ -77,9 +77,11 @@ ostream& Student::getData(ostream &os) {
 		os << *i << endl;
 	return os;
 }
+
 void Student::display() {
 	cout << *this << endl;
 };
+
 ostream& operator<<(ostream& os, Student& item) {
 	os << item.getData(os);
 	return os;

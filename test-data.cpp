@@ -64,5 +64,7 @@ int main(int argc, const char *argv[]) {
 	getCourses();
 	user.display();
 
+	cout << "Question: Has the user taken CSCI 251? " << user.hasTakenCourse("CSCI251") << endl;
+
 	return 0;
 }
