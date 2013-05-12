@@ -5,7 +5,6 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
-#include <algorithm>    // has the for_each
 
 using namespace std;
 
