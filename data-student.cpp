@@ -19,6 +19,10 @@ void Student::init(string n, int s, int g, string m) {
 Student::Student() {
 	init("", 2000, 2004, "");
 }
+Student::Student(string n, string s, string e, string m) {
+	int startYear = stringToInt(s), endYear = stringToInt(e);
+	init(n, startYear, endYear, m);
+}
 Student::Student(string fn) {
 	ifstream infile;
 	infile.open(fn.c_str());

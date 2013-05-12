@@ -25,12 +25,17 @@ public:
 
 	vector<Major> majors;
 
+	vector<Course> courses;
 
 	Student();
+	Student(string n, string s, string e, string m);
 	Student(string fn);
 
 	bool hasTakenCourse();
-	void addCourse(const Course& c, const Semester& s);
+	void addCourse(const Course& c);
+	void addCourses(string str);
+
+	void parseMajors(string str);
 
 	ostream& getData(ostream &os);
 	void display();
