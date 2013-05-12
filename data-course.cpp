@@ -243,7 +243,7 @@ Course getCourse(string identifier) {
 	if (identifier[shouldBeSpaceIndex] != ' ')
 		identifier.insert(shouldBeSpaceIndex+1, 1, ' ');
 
-	// Remove the seciton speficier, if given
+	// Remove the section specifier, if given
 	if (identifier[identifier.length()-1] < 65)
 		identifier = identifier.substr(0, identifier.length()-1);
 
