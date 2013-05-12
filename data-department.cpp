@@ -26,6 +26,19 @@ Department::Department(string str) {
 	else
 		id = stringToDept(str);
 }
+Department::Department(const Department &c) {
+	// cout << "Used the Department copy constructor." << endl;
+	copy(c);
+}
+Department& Department::operator= (const Department &c) {
+	// cout << "Used the Department = override." << endl;
+	if (this == &c) return *this;
+	copy(c);
+	return *this;
+}
+void Department::copy(const Department& c) {
+	id = c.id;
+}
 
 dept_t Department::intToDept(int i) {
 	     if ( i == 0  ) return AFAM;
