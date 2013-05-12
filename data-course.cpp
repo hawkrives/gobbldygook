@@ -73,7 +73,7 @@ Course::Course(istream &is) {
 		*i = removeTrailingSlashes(*i);
 	}
 
-	printEntireRecord(record);
+	// printEntireRecord(record);
 
 	// Ignore the first column;
 	// record.at(0);
@@ -208,7 +208,10 @@ string Course::getID() {
 }
 
 ostream& Course::getData(ostream &os) {
-	os << id << " - ";
+	if (lab)
+		os << "(Lab) ";
+	os << id;
+	os << " - ";
 	os << title << " | ";
 	if (professor.length() > 0 && professor != " ")
 		os << professor;
