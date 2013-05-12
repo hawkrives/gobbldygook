@@ -52,7 +52,7 @@ void getCourses() {
 	// cout << "What are some courses that you have taken? (ex. CSCI125, STAT 110)" << endl;
 	// cout << "> ";
 	// getline(cin, courses);
-	courses = "CSCI 215, stat 110, THEAT398, writ211";
+	courses = "CSCI 251, stat 110, THEAT398, writ211";
 	user.addCourses(courses);
 }
 
