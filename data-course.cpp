@@ -247,8 +247,7 @@ ostream &operator<<(ostream &os, Course &item) {
 }
 
 void Course::display() { 
-	if (this == 0) 
-		cout << *this << endl; 
+	cout << *this << endl; 
 }
 
 Course getCourse(string id) {
