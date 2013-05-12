@@ -290,13 +290,16 @@ string Department::getFullName() {
 }
 
 ostream& Department::getData(ostream &os) {
-	os << "ID: " << getID() << endl;
-	os << "Name: " << getName() << endl;
-	os << "Full: " << getFullName() << endl;
+	// os << "ID: " << getID() << endl;
+	// os << "Name: " << getName() << endl;
+	// os << "Full: " << getFullName() << endl;
+	os << getFullName();
 	return os;
 }
 
-ostream &operator<<(ostream &os, Department &item) { return item.getData(os); }
+ostream &operator<<(ostream &os, Department &item) { 
+	return item.getData(os); 
+}
 
 int parseID_num(string str) {
 	int number;
