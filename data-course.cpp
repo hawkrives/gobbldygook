@@ -124,6 +124,14 @@ Course::Course(istream &is) {
 	record.clear();
 }
 
+bool operator== (Course &c1, Course &c2) {
+    return (c1.id == c2.id);
+}
+ 
+bool operator!= (Course &c1, Course &c2) {
+    return !(c1 == c2);
+}
+
 string Course::cleanTitle(string title) {
 	vector<string> badEndings, badBeginnings;
 
