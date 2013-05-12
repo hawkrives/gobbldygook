@@ -248,11 +248,11 @@ Course getCourse(string identifier) {
 		identifier.erase(0, 1);
 
 	// add a space into the course id, if there isn't one already
-	int spaceIndex_noID = identifier.length()-4;
+	int endOfDept_noSpace = identifier.length()-4;
 	int spaceIndex_withID = identifier.length()-5;
-	if (!(identifier[spaceIndex_noID] == ' ') || !(spaceIndex_withID == ' '))
-		if (!(identifier[spaceIndex_noID] < 65))
-			identifier.insert(spaceIndex_noID+1, 1, ' ');
+	if (identifier[endOfDept_noSpace] != ' ' || identifier[spaceIndex_withID] != ' ')
+		if (identifier[endOfDept_noSpace] >= 65)
+			identifier.insert(endOfDept_noSpace+1, 1, ' ');
 
 	// cout << "After cleanup: " << identifier << endl;
 
