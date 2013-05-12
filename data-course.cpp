@@ -3,15 +3,6 @@ using namespace std;
 
 
 void Course::init(string identifier) {
-	// Remove a possible space at the front
-	if (identifier[0] == ' ')
-		identifier.erase(0, 1);
-
-	// add a space into the course id, if there isn't one already
-	int shouldBeSpaceIndex = identifier.length()-4;
-	if (identifier[shouldBeSpaceIndex] != ' ')
-		identifier.insert(shouldBeSpaceIndex+1, 1, ' ');
-	
 	// cout << identifier << endl;
 	copy(getCourse(identifier));
 }
@@ -239,11 +230,28 @@ void Course::displayMany() {
 	cout << endl;
 }
 
-Course getCourse(string id) {
-	std::transform(id.begin(), id.end(), id.begin(), ::toupper);
+Course getCourse(string identifier) {
+	// Make sure everything is uppercase
+	std::transform(identifier.begin(), identifier.end(), identifier.begin(), ::toupper);
+
+	// Remove a possible space at the front
+	if (identifier[0] == ' ')
+		identifier.erase(0, 1);
+
+	// add a space into the course id, if there isn't one already
+	int shouldBeSpaceIndex = identifier.length()-4;
+	if (identifier[shouldBeSpaceIndex] != ' ')
+		identifier.insert(shouldBeSpaceIndex+1, 1, ' ');
+
+	// Remove the seciton speficier, if given
+	if (identifier[identifier.length()-1] < 65)
+		identifier = identifier.substr(0, identifier.length()-1);
+
 	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
-		if (i->getID() == id)
+		if (i->getID() == identifier)
 			return *i;
+
+	// If no match, return a blanck course.
 	Course c;
 	return c;
 }
