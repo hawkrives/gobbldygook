@@ -68,8 +68,7 @@ ostream& Student::getData(ostream &os) {
 	return os;
 }
 void Student::display() {
-	if (this == 0)
-		cout << *this << endl;
+	cout << *this << endl;
 };
 ostream& operator<<(ostream& os, Student& item) {
 	os << item.getData(os);
