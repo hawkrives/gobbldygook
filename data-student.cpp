@@ -41,8 +41,19 @@ bool Student::hasTakenCourse() {
 	return false;
 }
 
-void Student::addCourse(const Course& c, const Semester& s) {
-	// s.push_back();
+void Student::addCourse(const Course& c) {
+	// cout << "Hi! I'm addCourse (not courses!!)!" << endl;
+	courses.push_back(c);
+	// cout << courses.at(courses.size()-1) << endl;
+}
+
+void Student::addCourses(string str) {
+	// cout << "Hi! I'm addCourses!" << endl;
+	vector<string> record = split(str, ',');
+	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
+		Course c = Course(*i);
+		addCourse(c);
+	}
 }
 
 ostream& Student::getData(ostream &os) {
