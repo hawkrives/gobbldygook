@@ -109,5 +109,6 @@ string removeTrailingText(string s, string toRemove);
 string removeStartingText(string s, string toRemove);
 
 string deDoubleString(string s);
+void printEntireRecord(vector<string> record);
 
 #endif
