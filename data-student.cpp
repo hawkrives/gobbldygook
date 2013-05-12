@@ -58,13 +58,16 @@ void Student::addCourses(string str) {
 
 ostream& Student::getData(ostream &os) {
 	os << name << ", ";
-	os << "majoring in ";
-	for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i)
-		os << *i << ", ";
-	os << " and taking:" << endl;
-	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i){
-		os << *i << endl;
+	os << "you are majoring in ";
+	for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i){
+		if (i!=majors.end()-1)
+			os << *i << ", ";
+		else 
+			os << "and "<< *i;
 	}
+	os << ", while taking:" << endl;
+	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i)
+		os << *i << endl;
 	return os;
 }
 void Student::display() {
