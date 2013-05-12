@@ -1,14 +1,6 @@
 #include "data-student.hpp"
 using namespace std;
 
-
-Semester::Semester() {
-	period = 0;
-}
-Semester::Semester(int p) {
-	period = p;
-}
-
 void Student::init(string n, int s, int g, string m) {
 	name = n;
 	startingYear = s;
