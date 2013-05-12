@@ -231,6 +231,7 @@ void Course::displayMany() {
 }
 
 Course getCourse(string identifier) {
+	// cout << "Before cleanup: " << identifier << endl;
 	// Make sure everything is uppercase
 	std::transform(identifier.begin(), identifier.end(), identifier.begin(), ::toupper);
 
@@ -238,14 +239,16 @@ Course getCourse(string identifier) {
 	if (identifier[0] == ' ')
 		identifier.erase(0, 1);
 
+	// Remove the section specifier, if given
+	if (!(identifier[identifier.length()-1] < 65))
+		identifier = identifier.substr(0, identifier.length()-1);
+
 	// add a space into the course id, if there isn't one already
 	int shouldBeSpaceIndex = identifier.length()-4;
 	if (identifier[shouldBeSpaceIndex] != ' ')
 		identifier.insert(shouldBeSpaceIndex+1, 1, ' ');
 
-	// Remove the section specifier, if given
-	if (identifier[identifier.length()-1] < 65)
-		identifier = identifier.substr(0, identifier.length()-1);
+	// cout << "After cleanup: " << identifier << endl;
 
 	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
 		if (i->getID() == identifier)
