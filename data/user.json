@@ -1,80 +1,23 @@
-{
-    "name": "Xandra Best",
-    "majors": [
-        "CSCI",
-        "MATH"
-    ],
-    "concentrations": [
-        "STAT",
-        "MUSIC"
-    ],
+# NAME
+Xandra Best
 
-    "11_12": {
-        "fall": [
-            "course1",
-            "course2",
-            "course3",
-            "course4"
-        ],
-        "interim": [
-            "course1"
-        ],
-        "spring": [
-            "course1",
-            "course2",
-            "course3",
-            "course4"
-        ]
-    },
-    "12_13": {
-        "fall": [
-            "course1",
-            "course2",
-            "course3",
-            "course4"
-        ],
-        "interim": [
-            "course1"
-        ],
-        "spring": [
-            "course1",
-            "course2",
-            "course3",
-            "course4"
-        ]
-    },
-    "13_14": {
-        "fall": [
-            "course1",
-            "course2",
-            "course3",
-            "course4"
-        ],
-        "interim": [
-            "course1"
-        ],
-        "spring": [
-            "course1",
-            "course2",
-            "course3",
-            "course4"
-        ]
-    },
-    "14_15": {
-        "fall": [
-            "course1",
-            "course2",
-            "course3",
-            "course4"
-        ],
-        "interim": [
-            "course1"
-        ],
-        "spring": [
-            "course1",
-            "course2",
-            "course3",
-            "course4"
-        ]
-    }
-}
+# MAJORS
+CSCI
+MATH
+
+# CONCENTRATIONS
+STAT
+MUSIC
+
+# COURSES
+PHIL251A
+REL296A
+rel 296b
+
+CSCI251
+stat 110
+
+THEAT398
+
+writ211
+writ111q
