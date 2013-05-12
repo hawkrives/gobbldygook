@@ -96,10 +96,7 @@ Course::Course(istream &is) {
 	parseID(id);
 
 	// Second column has the section,
-	// note that this breaks if it is a string.
-		// it breaks after PHYS 125 lab.
-		// it also doesn't output on anything.
-	section = record.at(2)[0];
+	section = record.at(2);
 
 	// Third holds the lab boolean,
 	if (record.at(3).empty()) lab = false;
@@ -144,6 +141,9 @@ Course::Course(istream &is) {
 	else {
 		professor = record.at(11);
 	}
+
+	updateID();
+	record.clear();
 }
 
 
@@ -204,7 +204,6 @@ void Course::parseID(string str) {
 	else {
 		department.push_back(Department(dept));
 	}
-	updateID();
 }
 
 void Course::updateID() {
@@ -213,9 +212,9 @@ void Course::updateID() {
 		dept += i->getName();
 		if (department.size() > 1)
 			dept += "/";
-	}
+	}	
 	// ignore section until we get it assigning properly in the constructor
-	id = dept + " " + tostring(number);// + section;
+	id = dept + " " + tostring(number) + section;
 }
 string Course::getID() {
 	return id;

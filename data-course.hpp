@@ -15,7 +15,7 @@ protected:
 	int number;
 	string title;
 	string description;
-	char section;
+	string section;
 	
 	vector<Major> majors;
 	vector<Department> department;
