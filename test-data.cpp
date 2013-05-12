@@ -33,7 +33,7 @@ void welcome() {
 	user = Student(name, yearS, yearE, majors);
 }
 
-void getCourses() {
+void requestCourses() {
 	string courses;
 	cout << "What are some courses that you have taken? (ex. CSCI125, STAT 110)" << endl;
 	getline(cin, courses);
@@ -45,7 +45,7 @@ int main(int argc, const char *argv[]) {
 	
 	// Method 1: Dynamic.
 	// welcome();
-	// getCourses();
+	// requestCourses();
 
 	// Method 2: Hard-coded file path.
 	Student user("data/user.txt");
