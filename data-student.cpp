@@ -105,6 +105,5 @@ void Student::display() {
 };
 
 ostream& operator<<(ostream& os, Student& item) {
-	os << item.getData(os);
-	return os;
+	return item.getData(os);
 }
