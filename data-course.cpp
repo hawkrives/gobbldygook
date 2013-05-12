@@ -260,7 +260,7 @@ Course getCourse(string identifier) {
 		if (i->getID() == identifier)
 			return *i;
 
-	// If no match, return a blanck course.
+	// If no match, return a blank course.
 	Course c;
 	return c;
 }
