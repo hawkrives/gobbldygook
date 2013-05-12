@@ -15,11 +15,37 @@ Student::Student(string n, string s, string e, string m) {
 	int startYear = stringToInt(s), endYear = stringToInt(e);
 	init(n, startYear, endYear, m);
 }
-Student::Student(string fn) {
-	ifstream infile;
-	infile.open(fn.c_str());
-}
 
+Student::Student(string fn) {
+	string n, yearS, yearE, m, conc, c;
+	ifstream infile(fn.c_str());
+	string nextLine;
+	vector<string> lines;
+
+	// load the entire file
+	while (infile.peek() != -1) {
+		getline(infile, nextLine);
+		lines.push_back(nextLine);
+	}
+
+	string previousHeading;
+	for (vector<string>::iterator i = lines.begin(); i != lines.end(); ++i) {
+		string str = *i;
+		if (str[0] == '#') {
+			previousHeading = *i;
+			continue;
+		}
+
+		if (str != "") {
+			if (previousHeading == "# NAME")
+				n = str;
+			else if (previousHeading == "# MAJORS")
+				addMajor(Major(str));
+			else if (previousHeading == "# CONCENTRATIONS")
+				addMajor(Major(str));
+			else if (previousHeading == "# COURSES")
+				addCourse(Course(str));
+		}
 	}
 }
 
