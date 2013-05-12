@@ -248,11 +248,11 @@ Course getCourse(string identifier) {
 		identifier.erase(0, 1);
 
 	// add a space into the course id, if there isn't one already
-	int endOfDept_noSpace = identifier.length()-4;
-	int spaceIndex_withID = identifier.length()-5;
-	if (identifier[endOfDept_noSpace] != ' ' || identifier[spaceIndex_withID] != ' ')
-		if (identifier[endOfDept_noSpace] >= 65)
-			identifier.insert(endOfDept_noSpace+1, 1, ' ');
+	// find the first digit in the string
+	int firstDigit = identifier.find_first_of("0123456789");
+
+	if (identifier.find(" ") == string::npos)
+			identifier.insert(firstDigit, 1, ' ');
 
 	// cout << "After cleanup: " << identifier << endl;
 
