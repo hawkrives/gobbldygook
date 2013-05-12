@@ -179,9 +179,8 @@ void Course::parseID(string str) {
 		department.push_back(Department(dept.substr(0,2)));
 		department.push_back(Department(dept.substr(3,2)));
 	}
-	else {
+	else
 		department.push_back(Department(dept));
-	}
 }
 
 void Course::updateID() {
