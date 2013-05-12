@@ -44,7 +44,7 @@ string removeAllQuotes(string s) {
 
 string removeTrailingSlashes(string s) {
 	if (s[s.length()-1] == '/')
-		s.erase(s.length()-1, s.length());
+		s = s.substr(0, s.length()-1);
 	return s;
 }
 
