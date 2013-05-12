@@ -239,6 +239,16 @@ void Course::display() {
 	cout << *this << endl; 
 }
 
+void Course::displayMany() { 
+	cout << id;
+	if (lab) cout << " L";
+	cout << "\t- ";
+	cout << title << " | ";
+	if (professor.length() > 0 && professor != " ")
+		cout << professor;
+	cout << endl;
+}
+
 Course getCourse(string id) {
 	std::transform(id.begin(), id.end(), id.begin(), ::toupper);
 	Course c;
