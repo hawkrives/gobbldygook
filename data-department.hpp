@@ -13,6 +13,7 @@ private: // methods
 	dept_t intToDept(int i);
 	dept_t stringToDept(string str);
 	dept_t shortStringToDept(string str);
+	dept_t longStringToDept(string str);
 	string deptToString(dept_t dept);
 	string deptToLongName(dept_t dept);
 public: // constructors

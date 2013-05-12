@@ -8,9 +8,8 @@ Major::Major() {
 }
 
 Major::Major(string str) {
-	// TODO: Allow lookup of majors by full name.
-	// This means that I'll need to expose the data in Department in some way.
 	// cout << "Called Major constructor with string '" << str << "'" << endl;
+	string s = removeStartingText(str, " ");
 	department = Department(str);
 	name = department.getFullName();
 }

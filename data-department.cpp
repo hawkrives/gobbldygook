@@ -18,13 +18,16 @@ Department::Department(dept_t department) {
 	id = department;
 }
 Department::Department(string str) {
-	// cout << "Called Department constructor with string '" << str << "'" << endl;
+	// cout << "Called Department constructor with string '" << str << "'";
 	// make sure the string is uppercase
 	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
-	if (str.length() == 2)
+	if (str.length() > 5)
+		id = longStringToDept(str);
+	else if (str.length() == 2)
 		id = shortStringToDept(str);
 	else
 		id = stringToDept(str);
+	// cout << ", which ended up as '" << str << "'" << endl;
 }
 Department::Department(const Department &c) {
 	// cout << "Used the Department copy constructor." << endl;
@@ -170,6 +173,67 @@ dept_t Department::shortStringToDept(string str) {
 	else if ( str == "IS" ) return IS;
 	else if ( str == "ID" ) return INTER;
 	else if ( str == "RE" ) return REL;
+	else return NONE;
+}
+dept_t Department::longStringToDept(string str) {
+	cout << "Called longStringToDept with string '" << str << "'" << endl;
+	     if ( str == "AFRICA AND THE AMERICAS"                   ) return ALSO;
+	else if ( str == "ALTERNATE LANGUAGE STUDY OPTION"           ) return ALSO;
+	else if ( str == "AMERICAN CONVERSATION"                     ) return AMCON;
+	else if ( str == "AMERICAN STUDIES"                          ) return AMST;
+	else if ( str == "AMERICAN RACIAL AND MULTICULTURAL STUDIES" ) return ARMS;
+	else if ( str == "ART AND ART HISTORY"                       ) return ART;
+	else if ( str == "ASIAN STUDIES"                             ) return ASIAN;
+	else if ( str == "BIOLOGY"                                   ) return BIO;
+	else if ( str == "BIOMOLECULAR SCIENCE"                      ) return BMOLS;
+	else if ( str == "CHEMISTRY"                                 ) return CHEM;
+	else if ( str == "CHINESE"                                   ) return CHIN;
+	else if ( str == "CLASSICS"                                  ) return CLASS;
+	else if ( str == "COMPUTER SCIENCE"                          ) return CSCI;
+	else if ( str == "DANCE"                                     ) return DANCE;
+	else if ( str == "ECONOMICS"                                 ) return ECON;
+	else if ( str == "EDUCATION"                                 ) return EDUC;
+	else if ( str == "ENGLISH"                                   ) return ENGL;
+	else if ( str == "ENVIRONMENTAL STUDIES"                     ) return ENVST;
+	else if ( str == "EXERCISE SCIENCE ACTIVITY"                 ) return ESAC;
+	else if ( str == "EXERCISE SCIENCE THEORY"                   ) return ESTH;
+	else if ( str == "FAMILY STUDIES"                            ) return FAMST;
+	else if ( str == "FILM STUDIES"                              ) return FILM;
+	else if ( str == "FRENCH"                                    ) return FREN;
+	else if ( str == "GREAT CONVERSATION"                        ) return GCON;
+	else if ( str == "GERMAN"                                    ) return GERM;
+	else if ( str == "GREEK"                                     ) return GREEK;
+	else if ( str == "HISTORY"                                   ) return HIST;
+	else if ( str == "HISPANIC STUDIES"                          ) return HSPST;
+	else if ( str == "UNKNOWN (IDFA)"                            ) return IDFA;
+	else if ( str == "INTERDEPARTMENTAL"                         ) return INTD;
+	else if ( str == "INTERDISCIPLINARY"                         ) return INTER;
+	else if ( str == "INTEGRATIVE STUDIES"                       ) return IS;
+	else if ( str == "JAPANESE"                                  ) return JAPAN;
+	else if ( str == "LATIN"                                     ) return LATIN;
+	else if ( str == "MATHEMATICS"                               ) return MATH;
+	else if ( str == "MEDIA STUDIES"                             ) return MEDIA;
+	else if ( str == "MEDIEVAL STUDIES"                          ) return MEDVL;
+	else if ( str == "MANAGEMENT STUDIES"                        ) return MGMT;
+	else if ( str == "MUSIC"                                     ) return MUSIC;
+	else if ( str == "MUSIC PERFORMANCE"                         ) return MUSPF;
+	else if ( str == "NEUROSCIENCE"                              ) return NEURO;
+	else if ( str == "NORWEGIAN"                                 ) return NORW;
+	else if ( str == "NURSING"                                   ) return NURS;
+	else if ( str == "PHILOSPHY"                                 ) return PHIL;
+	else if ( str == "PHYSICS"                                   ) return PHYS;
+	else if ( str == "POLITICAL SCIENCE"                         ) return PSCI;
+	else if ( str == "PSYCHOLOGY"                                ) return PSYCH;
+	else if ( str == "RELIGION"                                  ) return REL;
+	else if ( str == "RUSSIAN"                                   ) return RUSSN;
+	else if ( str == "SCIENCE CONVERSATION"                      ) return SCICN;
+	else if ( str == "SOCIOLOGY AND ANTHROPOLOGY"                ) return SOAN;
+	else if ( str == "SPANISH"                                   ) return SPAN;
+	else if ( str == "STATISTICS"                                ) return STAT;
+	else if ( str == "SOCIAL WORK"                               ) return SWRK;
+	else if ( str == "THEATER"                                   ) return THEAT;
+	else if ( str == "WOMEN'S & GENDER STUDIES"                  ) return WMGST;
+	else if ( str == "WRITING"                                   ) return WRIT;
 	else return NONE;
 }
 string Department::deptToString(dept_t dept) {
