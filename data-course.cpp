@@ -3,6 +3,16 @@ using namespace std;
 
 
 void Course::init(string identifier) {
+	// Remove a possible space at the front
+	if (identifier[0] == ' ')
+		identifier.erase(0, 1);
+
+	// add a space into the course id, if there isn't one already
+	int shouldBeSpaceIndex = identifier.length()-4;
+	if (identifier[shouldBeSpaceIndex] != ' ')
+		identifier.insert(shouldBeSpaceIndex+1, 1, ' ');
+	
+	// cout << identifier << endl;
 	copy(getCourse(identifier));
 }
 void Course::copy(const Course& c) {
