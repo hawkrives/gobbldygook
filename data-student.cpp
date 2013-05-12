@@ -17,7 +17,7 @@ Student::Student(string n, string s, string e, string m) {
 }
 
 Student::Student(string fn) {
-	string n, yearS, yearE, m, conc, c;
+	string yearS, yearE;
 	ifstream infile(fn.c_str());
 	string nextLine;
 	vector<string> lines;
@@ -35,10 +35,9 @@ Student::Student(string fn) {
 			previousHeading = *i;
 			continue;
 		}
-
-		if (str != "") {
+		else if (str != "") {
 			if (previousHeading == "# NAME")
-				n = str;
+				name = str;
 			else if (previousHeading == "# MAJORS")
 				addMajor(Major(str));
 			else if (previousHeading == "# CONCENTRATIONS")
