@@ -1,6 +1,5 @@
 #include "data-general.hpp"
 #include "data-course.hpp"
-#include "data-major.hpp"
 #include "data-student.hpp"
 using namespace std;
 
@@ -14,27 +13,22 @@ void loadCourses() {
 	while (infile.peek() != -1){
 		Course incourse(infile);
 		all_courses.push_back(incourse);
-		// cout << incourse << endl;
+		cout << incourse << endl;
 	}
 }
 
 void whatDidICallThisWith(int argc, const char *argv[]) {
-	int count;
-
 	printf ("This program was called with \"%s\".\n",argv[0]);
 
-	if (argc > 1) {
-		for (count = 1; count < argc; count++) {
+	if (argc > 1)
+		for (int count = 1; count < argc; count++)
 			printf("argv[%d] = %s\n", count, argv[count]);
-		}
-	}
-	else {
+	else
 		printf("The command had no other arguments.\n");
-	}
 }
 
 void welcome() {
-	string name, yearS, yearE, majors;
+	string name, yearS = "", yearE = "", majors;
 	// cout << "Welcome!" << endl;
 	// cout << "What is your name? ";
 	// getline(cin, name);
@@ -44,7 +38,7 @@ void welcome() {
 	// cout << "What are your majors (ex. CSCI, ASIAN) ";
 	// getline(cin, majors);
 	majors = "CSCI, STAT, ASIAN";
-	user = Student(name, "", "", majors);
+	user = Student(name, yearS, yearE, majors);
 }
 
 void getCourses() {
@@ -58,15 +52,12 @@ void getCourses() {
 
 int main(int argc, const char *argv[]) {
 	loadCourses();
+	// cout << getCourse("STAT 10") << endl;
 	// Course c("BIO 126");
 	// cout << c << endl;
 	welcome();
 	getCourses();
-	cout << user << endl;
-	// if (argc == 2)
-	// 	Student person(argv[1]);
-	// else
-	// 	Student person("data/user.json");
-
+	user.display();
+	
 	return 0;
 }
