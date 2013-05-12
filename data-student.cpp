@@ -31,8 +31,9 @@ Student::Student(string fn) {
 void Student::parseMajors(string str) {
 	vector<string> record = split(str, ',');
 	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
-		string str = removeStartingText(*i, " ");
-		Major m = Major(str);
+		string s = removeStartingText(*i, " ");
+		std::transform(s.begin(), s.end(), s.begin(), ::toupper);
+		Major m = Major(s);
 		majors.push_back(m);
 	}
 }
