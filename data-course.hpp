@@ -57,6 +57,6 @@ public:
 extern vector<Course> all_courses;
 
 ostream& operator<<(ostream& os, Course& item);
-Course getCourse(string id);
+Course getCourse(string identifier);
 
 #endif
