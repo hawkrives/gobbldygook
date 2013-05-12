@@ -13,8 +13,9 @@ void loadCourses() {
 	while (infile.peek() != -1){
 		Course incourse(infile);
 		all_courses.push_back(incourse);
-		cout << incourse << endl;
 	}
+	for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c)
+		c->displayMany();
 }
 
 void whatDidICallThisWith(int argc, const char *argv[]) {
