@@ -248,6 +248,7 @@ void Course::display() {
 }
 
 Course getCourse(string id) {
+	std::transform(id.begin(), id.end(), id.begin(), ::toupper);
 	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i) {
 		if (i->getID() == id) {
 			return *i;

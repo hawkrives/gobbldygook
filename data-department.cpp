@@ -20,6 +20,8 @@ Department::Department(dept_t department) {
 Department::Department(string str) {
 	// cout << "Called Department constructor with string." << endl;
 	// cout << "String was: " << str << endl;
+	// make sure the string is uppercase
+	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 	if (str.length() == 2)
 		id = shortStringToDept(str);
 	else
