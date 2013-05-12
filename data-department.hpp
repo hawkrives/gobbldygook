@@ -5,19 +5,25 @@
 using namespace std;
 
 class Department {
-private:
+private: // constructory things
+	void copy(const Department &c);
+private: // variables
 	dept_t id;
+private: // methods
 	dept_t intToDept(int i);
 	dept_t stringToDept(string str);
 	dept_t shortStringToDept(string str);
 	string deptToString(dept_t dept);
 	string deptToLongName(dept_t dept);
-public:
+public: // constructors
 	Department();
 	Department(int i);
 	Department(dept_t department);
 	Department(string str);
+	Department(const Department& c);
+	Department& operator= (const Department &c);
 
+public: // methods
 	dept_t getID();
 	string getName();
 	string getFullName();
