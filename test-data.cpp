@@ -41,7 +41,7 @@ void welcome() {
 	// cin >> yearE;
 	// cout << "What are your majors (ex. CSCI, ASIAN) ";
 	// getline(cin, majors);
-	majors = "CSCI, STAT, ASIAN";
+	majors = "CSCI, STAT, AsIaN, math";
 	user = Student(name, yearS, yearE, majors);
 }
 
@@ -50,8 +50,8 @@ void getCourses() {
 	// cout << "What are some courses that you have taken? (ex. CSCI125, STAT 110)" << endl;
 	// cout << "> ";
 	// getline(cin, courses);
-	courses = "PHIL 251A,PHIL 251B, REL 296A, REL 296B, STAT 110";
-	// courses = "CSCI 251, stat 110, THEAT398, writ211";
+	courses = "PHIL 251A,REL296A,rel 296b, STAT 110,";
+	courses += "CSCI251, stat 110, THEAT398, writ211";
 	user.addCourses(courses);
 }
 
