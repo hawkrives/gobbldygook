@@ -36,7 +36,9 @@ Student::Student(string fn) {
 			continue;
 		}
 		else if (str != "") {
-			if (previousHeading == "# NAME")
+			if (str.substr(0, 2) == "//")
+				// it's a comment
+			else if (previousHeading == "# NAME")
 				name = str;
 			else if (previousHeading == "# MAJORS")
 				addMajor(Major(str));
