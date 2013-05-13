@@ -18,7 +18,7 @@ Department::Department(int i) {
 }
 
 Department::Department(dept_t department) {
-	cout << "Called Department constructor with dept_t." << endl;
+//	cout << "Called Department constructor with dept_t." << endl;
 	id = department;
 }
 
@@ -379,7 +379,7 @@ string Department::deptToLongName(dept_t dept) {
 ///////////
 //////////
 
-dept_t Department::getID() {
+dept_t Department::getDept_t() {
 	return id;
 }
 string Department::getName() {

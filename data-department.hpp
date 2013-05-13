@@ -29,7 +29,7 @@ public: // constructors
 	friend bool operator== (Department &c1, Department &c2);
 	friend bool operator!= (Department &c1, Department &c2);
 
-	dept_t getID();
+	dept_t getDept_t();
 	string getName();
 	string getFullName();
 	ostream& getData(ostream &os);
