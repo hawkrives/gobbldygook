@@ -82,7 +82,9 @@ Course::Course(istream &is) {
 
 	// so, the *first* column (that we care about) has the course id,
 	// and the second column has the section,
-	id = ID(record.at(1), record.at(2));
+	string str = record.at(1) + record.at(2);
+	id = ID(str);
+	cout << str << endl;
 
 	// Third holds the lab boolean,
 	     if (record.at(3) == "L") courseType = LAB;
