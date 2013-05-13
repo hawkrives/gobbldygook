@@ -56,7 +56,8 @@ public:
 	void showAll();
 };
 
-extern vector<Course> all_courses;
+// extern vector<Course> all_courses;
+extern map<ID, Course> mapped_courses;
 
 ostream& operator<<(ostream& os, Course& item);
 Course getCourse(string identifier);

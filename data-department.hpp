@@ -26,8 +26,9 @@ public: // constructors
 	Department(const Department& c);
 	Department& operator= (const Department &c);
 	
-	friend bool operator== (Department &c1, Department &c2);
-	friend bool operator!= (Department &c1, Department &c2);
+	friend bool operator== (Department &d1, Department &d2);
+	friend bool operator!= (Department &d1, Department &d2);
+	friend bool operator<  (const Department &d1, const Department &d2);
 
 	dept_t getDept_t();
 	string getName();
