@@ -90,43 +90,59 @@ bool Student::hasTakenCourse(string str) {
 }
 
 ostream& Student::getData(ostream &os) {
-	os << name << ", you are majoring in ";
+	os << name << ", ";
 	
-	for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i){
-		if (majors.size() == 2) {
-			os << *i;
-			if (i != majors.end()-1)
-				os << " and ";
-			else
-				os << " ";
-		}
-		else {
-			if (i != majors.end()-1)
-				os << *i << ", ";
-			else 
-				os << "and " << *i << ", ";
+	if (majors.size()) {
+		os << "you are majoring in ";
+		
+		for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i){
+			if (majors.size() == 1) {
+				os << *i << " ";
+			}
+			else if (majors.size() == 2) {
+				os << *i;
+				if (i != majors.end()-1)
+					os << " and ";
+				else
+					os << " ";
+			}
+			else {
+				if (i != majors.end()-1)
+					os << *i << ", ";
+				else 
+					os << "and " << *i << ", ";
+			}
 		}
 	}
 	
-	os << "with concentrations in ";
-	
-	for (vector<Concentration>::iterator i = concentrations.begin(); i != concentrations.end(); ++i) {
-		if (concentrations.size() == 2) {
-			os << *i;
-			if (i != concentrations.end()-1)
-				os << " and ";
-			else
-				os << " ";
-		}
-		else {
-			if (i != concentrations.end()-1)
-				os << *i << ", ";
-			else
-				os << "and " << *i << ", ";
+	if (concentrations.size()) {
+		os << "with concentrations in ";
+		
+		for (vector<Concentration>::iterator i = concentrations.begin(); i != concentrations.end(); ++i) {
+			if (concentrations.size() == 1) {
+				os << *i << " ";
+			}
+			if (concentrations.size() == 2) {
+				os << *i;
+				if (i != concentrations.end()-1)
+					os << " and ";
+				else
+					os << " ";
+			}
+			else {
+				if (i != concentrations.end()-1)
+					os << *i << ", ";
+				else
+					os << "and " << *i << ", ";
+			}
 		}
 	}
+	
+	if (!majors.size())
+		os << "you are taking: " << endl;
+	else
+		os << "while taking:" << endl;
 
-	os << "while taking:" << endl;
 	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i)
 		os << *i << endl;
 
