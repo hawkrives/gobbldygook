@@ -3,7 +3,7 @@
 #include "data-student.hpp"
 using namespace std;
 
-vector<Course> all_courses;
+// vector<Course> all_courses;
 map<ID, Course> mapped_courses;
 Student user;
 
@@ -13,7 +13,7 @@ void loadCourses() {
 	getline(infile, str);
 	while (infile.peek() != -1){
 		Course incourse(infile);
-		all_courses.push_back(incourse);
+		// all_courses.push_back(incourse);
 		mapped_courses.insert(pair<ID, Course>(incourse.getID(), incourse));
 		// cout << incourse << endl;
 	}

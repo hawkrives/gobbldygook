@@ -9,9 +9,9 @@ using namespace std;
 //////////
 
 void Course::init(string identifier) {
-	// cout << identifier << endl;
 	copy(getCourse(identifier));
 }
+
 void Course::copy(const Course& c) {
 	id = c.id;
 	title = c.title;
@@ -62,9 +62,7 @@ Course& Course::operator = (const Course &c) {
 }
 
 Course::Course(istream &is) {
-	// cout << "Now indise Course()" << endl;
 	if (!is) return;
-	// cout << "Now inside Course(after return)" << endl;
 
 	string tmpLine;
 	getline(is, tmpLine); // read in so we can do things with it.
@@ -259,17 +257,7 @@ void Course::display() {
 //////////
 
 Course getCourse(string identifier) {
-//	cout << "called getCourse with '" << identifier << "'" << endl;
+	// cout << "called getCourse with '" << identifier << "'" << endl;
 	ID id(identifier);
-	// cout << id << endl;
-	// TODO: Add lab support.
-
-	// for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
-		// if (i->id == id)
-			// return *i;
-
-
-	// If no match, return a blank course.
-	// Course c;
 	return mapped_courses[id];
 }
