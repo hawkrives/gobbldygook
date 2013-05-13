@@ -48,11 +48,11 @@ int main(int argc, const char *argv[]) {
 	// requestCourses();
 
 	// Method 2: Hard-coded file path.
-	Student user("data/user.txt");
+	// Student user("data/user.txt");
 	
 	// Method 3: File path as an argument.
-	// Student user(argv[1]);
-	
+	Student user(argv[1]);
+
 	user.display();
 
 	cout << "Question: Has the user taken CSCI 251? ";

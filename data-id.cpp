@@ -56,11 +56,11 @@ ID::ID(string str) {
 	if (lastChar > lastDigit) // there is a section
 		s = str[lastChar];
 
-	cout << "Parsed '" << str << "' to get '";
-	cout << d << " ";
-	if (!d1.empty() && !d2.empty())
-		cout << "(" << d1 << " " << d2 << ") ";
-	cout << n << s << "'." << endl;
+//	cout << "Parsed '" << str << "' to get '";
+//	cout << d << " ";
+//	if (!d1.empty() && !d2.empty())
+//		cout << "(" << d1 << " " << d2 << ") ";
+//	cout << n << s << "'." << endl;
 	
 	init(Department(d), num, s);
 	if (!d1.empty() && !d2.empty()) {
@@ -68,7 +68,7 @@ ID::ID(string str) {
 		departments.push_back(Department(d1));
 		departments.push_back(Department(d2));
 	}
-	cout << *this << endl;
+//	cout << *this << endl;
 }
 ID::ID(string dn, string s) {
 	ID(dn+s);
