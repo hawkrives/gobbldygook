@@ -84,7 +84,6 @@ Course::Course(istream &is) {
 	// and the second column has the section,
 	string str = record.at(1) + record.at(2);
 	id = ID(str);
-	cout << str << endl;
 
 	// Third holds the lab boolean,
 	     if (record.at(3) == "L") courseType = LAB;
@@ -118,7 +117,7 @@ Course::Course(istream &is) {
 
 	// Ten holds the location,
 	location = record.at(10);
-//	location = deDoubleString(location);
+	// location = deDoubleString(location);
 
 	// and Eleven knows who teaches.
 	if (record.size() == 13) {
