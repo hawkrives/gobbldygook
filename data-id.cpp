@@ -13,7 +13,7 @@ ID& ID::operator= (const ID &c) {
 }
 
 ID::ID(string str) {
-	cout << "Called ID::ID() with string '" << str << "'" << endl;
+//	cout << "Called ID::ID() with string '" << str << "'" << endl;
 
 	// Make sure everything is uppercase
 	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
@@ -68,6 +68,7 @@ ID::ID(string str) {
 		departments.push_back(Department(d1));
 		departments.push_back(Department(d2));
 	}
+	cout << *this << endl;
 }
 ID::ID(string dn, string s) {
 	ID(dn+s);

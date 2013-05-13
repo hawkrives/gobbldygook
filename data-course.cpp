@@ -116,7 +116,7 @@ Course::Course(istream &is) {
 
 	// Ten holds the location,
 	location = record.at(10);
-	location = deDoubleString(location);
+//	location = deDoubleString(location);
 
 	// and Eleven knows who teaches.
 	if (record.size() == 13) {
@@ -172,7 +172,7 @@ string Course::cleanTitle(string title) {
 //////////
 
 string Course::getType() {
-	if (courseType == LAB    ) return "Lab";
+	     if (courseType == LAB    ) return "Lab";
 	else if (courseType == SEMINAR) return "Seminar";
 	else if (courseType == TOPIC  ) return "Topic";
 	else                            return "Course";
@@ -214,9 +214,9 @@ bool operator!= (Course &c1, Course &c2) {
 }
 
 ostream& Course::getData(ostream &os) {
-	os << getType() << ":\t";
+	os << getType() << ": ";
 	os << id;
-	os << "\t- ";
+	os << " - ";
 	os << title << " | ";
 	if (professor.length() > 0 && professor != " ")
 		os << professor;
@@ -258,11 +258,13 @@ void Course::display() {
 //////////
 
 Course getCourse(string identifier) {
+	cout << "called getCourse with '" << identifier << "'" << endl;
 	ID id(identifier);
 	// TODO: Add lab support.
 
 	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
 		if (i->id == id)
+//			i->display();
 			return *i;
 
 	// If no match, return a blank course.
