@@ -3,6 +3,7 @@
 
 #include "data-general.hpp"
 #include "data-major.hpp"
+#include "data-concentration.hpp"
 #include "data-course.hpp"
 using namespace std;
 
@@ -14,6 +15,7 @@ public:
 	int startingYear, gradutationYear;
 
 	vector<Major> majors;
+	vector<Concentration> concentrations;
 	vector<Course> courses;
 
 	Student();
@@ -23,9 +25,13 @@ public:
 	bool hasTakenCourse(string str);
 	void addCourse(const Course& c);
 	void addCourses(string str);
+	void addLab(const Course& c);
+	void addLabs(string str);
 
+	void addMajor(const Major& m);
 	void addMajors(string str);
-	void addMajor(const Major &m);
+	void addConcentration(const Concentration& m);
+	void addConcentrations(string str);
 
 	ostream& getData(ostream &os);
 	void display();

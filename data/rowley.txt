@@ -1,0 +1,18 @@
+# NAME
+Connor
+
+# MAJORS
+CSCI
+MATH
+Physics
+# CONCENTRATIONS
+
+
+# COURSES
+Writing 111I 
+Physics 131b
+Math 226a
+CSCI 251
+# LABS
+PHYS 131b
+CSCI 251A

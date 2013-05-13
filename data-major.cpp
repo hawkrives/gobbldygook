@@ -1,6 +1,12 @@
 #include "data-major.hpp"
 using namespace std;
 
+void Major::copy(const Major &c) {
+	name = c.name;
+	department = c.department;
+	requirements = c.requirements;
+}
+
 Major::Major() {
 	cout << "Called Major constructor with nothing." << endl;
 	name = "None";
@@ -24,11 +30,7 @@ Major& Major::operator= (const Major &c) {
 	return *this;
 }
 
-void Major::copy(const Major &c) {
-	name = c.name;
-	department = c.department;
-	requirements = c.requirements;
-}
+
 
 ostream& Major::getData(ostream &os) {
 	os << name;

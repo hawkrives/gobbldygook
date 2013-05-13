@@ -2,16 +2,20 @@
 using namespace std;
 
 
+//////////////
+/////////////
+// Constructor helper methods
+///////////
+//////////
+
 void Course::init(string identifier) {
 	// cout << identifier << endl;
 	copy(getCourse(identifier));
 }
 void Course::copy(const Course& c) {
 	id = c.id;
-	number = c.number;
 	title = c.title;
 	description = c.description;
-	section = c.section;
 	majors = c.majors;
 	department = c.department;
 	concentrations = c.concentrations;
@@ -23,14 +27,21 @@ void Course::copy(const Course& c) {
 	credits = c.credits;
 	location = c.location;
 
-	lab = c.lab;
+	courseType = c.courseType;
 	geneds = c.geneds;
 
 	for (int i = 0; i < 7; ++i){
 		days[i] = c.days[i];
 		time[i] = c.time[i];
 	}
-}	
+}
+
+
+//////////////
+/////////////
+// Constructors
+///////////
+//////////
 
 Course::Course() {
 
@@ -70,15 +81,15 @@ Course::Course(istream &is) {
 	// record.at(0);
 
 	// so, the *first* column (that we care about) has the course id,
-	id = record.at(1);
-	parseID(id);
-
-	// Second column has the section,
-	section = record.at(2);
+	// and the second column has the section,
+	string str = record.at(1) + record.at(2);
+	id = ID(str);
 
 	// Third holds the lab boolean,
-	if (record.at(3).empty()) lab = false;
-	else                      lab = true;
+	     if (record.at(3) == "L") courseType = LAB;
+	else if (record.at(3) == "S") courseType = SEMINAR;
+	else if (record.at(3) == "T") courseType = TOPIC;
+	else                          courseType = COURSE;
 
 	// while Fourth contains the title of the course;
 	title = record.at(4);
@@ -106,7 +117,7 @@ Course::Course(istream &is) {
 
 	// Ten holds the location,
 	location = record.at(10);
-	location = deDoubleString(location);
+	// location = deDoubleString(location);
 
 	// and Eleven knows who teaches.
 	if (record.size() == 13) {
@@ -115,21 +126,11 @@ Course::Course(istream &is) {
 		profFirstName.erase(0, 1); // remove the extra space from the start of the name
 		professor = profFirstName + " " + profLastName;
 	}
-	else {
+	else
 		professor = record.at(11);
-	}
 
-	updateID();
 	title = cleanTitle(title);
 	record.clear();
-}
-
-bool operator== (Course &c1, Course &c2) {
-    return (c1.id == c2.id);
-}
- 
-bool operator!= (Course &c1, Course &c2) {
-    return !(c1 == c2);
 }
 
 string Course::cleanTitle(string title) {
@@ -164,43 +165,57 @@ string Course::cleanTitle(string title) {
 	return title;
 }
 
+
+//////////////
+/////////////
+// Getters
+///////////
+//////////
+string Course::getType() {
+	     if (courseType == LAB    ) return "Lab";
+	else if (courseType == SEMINAR) return "Seminar";
+	else if (courseType == TOPIC  ) return "Topic";
+	else                            return "Course";
+}
+
 string Course::getProfessor() {
 	return professor;
 }
 
-void Course::parseID(string str) {
-	// Get the number of the course, aka the last three slots.
-	stringstream(str.substr(str.size() - 3)) >> number;
-
-	// Check if it's one of those dastardly "split courses".
-	string dept = str.substr(0,str.size()-3);
-
-	if (str.find('/') != string::npos) {
-		department.push_back(Department(dept.substr(0,2)));
-		department.push_back(Department(dept.substr(3,2)));
-	}
-	else {
-		department.push_back(Department(dept));
-	}
-}
-
-void Course::updateID() {
-	string dept;
-	for (std::vector<Department>::iterator i = department.begin(); i != department.end(); ++i) {
-		dept += i->getName();
-		if (i != department.end()-1)
-			dept += "/";
-	}
-	id = dept + " " + tostring(number) + section;
-}
-
-string Course::getID() {
+ID Course::getID() {
 	return id;
 }
 
+Department Course::getDepartment(int i = 0) {
+	return department[i];
+}
+
+int Course::getNumber() {
+	return id.getNumber();
+}
+
+string Course::getSection() {
+	return id.getSection();
+}
+
+
+//////////////
+/////////////
+/// Operator overrides and supporting tools
+///////////
+//////////
+
+bool operator== (Course &c1, Course &c2) {
+    return (c1.id == c2.id);
+}
+
+bool operator!= (Course &c1, Course &c2) {
+    return !(c1 == c2);
+}
+
 ostream& Course::getData(ostream &os) {
+	os << getType() << ": ";
 	os << id;
-	if (lab) os << " L";
 	os << " - ";
 	os << title << " | ";
 	if (professor.length() > 0 && professor != " ")
@@ -208,11 +223,22 @@ ostream& Course::getData(ostream &os) {
 	return os;
 }
 
+ostream &operator<<(ostream &os, Course &item) {
+	return item.getData(os);
+}
+
+
+//////////////
+/////////////
+/// Methods of displaying the class
+///////////
+//////////
+
 void Course::showAll() {
-	cout << id << section << endl;
+	cout << id << endl;
 	cout << "Title: " << title << endl;
 	cout << "Professor: " << professor << endl;
-	cout << "Lab? " << lab << endl;
+	cout << "Type: " << courseType << endl;
 	cout << "Half-semester? " << half_semester << endl;
 	cout << "Credits: " << credits << endl;
 	cout << "Pass/Fail? " << pass_fail << endl;
@@ -220,47 +246,25 @@ void Course::showAll() {
 	cout << endl;
 }
 
-ostream &operator<<(ostream &os, Course &item) { 
-	return item.getData(os); 
-}
-
 void Course::display() { 
 	cout << *this << endl; 
 }
 
-void Course::displayMany() { 
-	cout << id;
-	if (lab) cout << " L";
-	cout << "\t- ";
-	cout << title << " | ";
-	if (professor.length() > 0 && professor != " ")
-		cout << professor;
-	cout << endl;
-}
+
+//////////////
+/////////////
+/// The all-important getCourse
+///////////
+//////////
 
 Course getCourse(string identifier) {
-	// TODO: Merge the two ways of parsing IDs
+//	cout << "called getCourse with '" << identifier << "'" << endl;
+	ID id(identifier);
+	// cout << id << endl;
 	// TODO: Add lab support.
 
-	// cout << "Before cleanup: " << identifier << endl;
-	// Make sure everything is uppercase
-	std::transform(identifier.begin(), identifier.end(), identifier.begin(), ::toupper);
-
-	// Remove a possible space at the front
-	if (identifier[0] == ' ')
-		identifier.erase(0, 1);
-
-	// add a space into the course id, if there isn't one already
-	// find the first digit in the string
-	long firstDigit = identifier.find_first_of("0123456789");
-
-	if (identifier.find(" ") == string::npos)
-			identifier.insert(firstDigit, 1, ' ');
-
-	// cout << "After cleanup: " << identifier << endl;
-
 	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
-		if (i->getID() == identifier)
+		if (i->id == id)
 			return *i;
 
 	// If no match, return a blank course.

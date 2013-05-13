@@ -3,36 +3,34 @@
 
 #include "data-general.hpp"
 #include "data-major.hpp"
-#include "data-department.hpp"
+#include "data-id.hpp"
 using namespace std;
 
 class Course {
-private:
-	void init(string identifier);
-	void copy(const Course& c);
-protected:
-	string id;
-	int number;
+private: // variables
+	ID id;
 	string title;
 	string description;
-	string section;
 	
 	vector<Major> majors;
 	vector<Department> department;
 	string concentrations;
 	string conversations;
 	string professor;
-
+	
 	int half_semester;
 	bool pass_fail;
 	float credits;
 	string location;
-
-	bool lab;
+	
+	course_type_t courseType;
 	GenEd* geneds;
-
+	
 	bool days[7];
 	float time[7];
+private: // methods
+	void init(string identifier);
+	void copy(const Course& c);
 public:
 	Course();
 	Course(string str);
@@ -42,18 +40,19 @@ public:
 
 	friend bool operator== (Course &c1, Course &c2);
     friend bool operator!= (Course &c1, Course &c2);
+	friend Course getCourse(string identifier);
 
 	string cleanTitle(string title);
 
-	void parseID(string str);
-	void updateID();
-
+	Department getDepartment(int i);
 	string getProfessor();
-	string getID();
+	ID getID();
+	string getType();
+	int getNumber();
+	string getSection();
 
 	ostream& getData(ostream& os);
 	void display();
-	void displayMany();
 	void showAll();
 };
 

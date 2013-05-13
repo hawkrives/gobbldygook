@@ -1,26 +1,39 @@
 #include "data-department.hpp"
 using namespace std;
 
-///////
+//////////////
+/////////////
 // Constructors
-/////
+///////////
+//////////
 
 Department::Department() {
 	// cout << "Called Department constructor with nothing." << endl;
 	id = NONE;
 }
+
 Department::Department(int i) {
 	cout << "Called Department constructor with integer." << endl;
 	id = intToDept(i);
 }
+
 Department::Department(dept_t department) {
-	cout << "Called Department constructor with dept_t." << endl;
+//	cout << "Called Department constructor with dept_t." << endl;
 	id = department;
 }
+
 Department::Department(string str) {
-	// cout << "Called Department constructor with string '" << str << "'";
+//	cout << "Called Department constructor with string '" << str << "'" << endl;
 	// make sure the string is uppercase
 	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+	
+	// Remove extraneous spaces
+	if (str.at(0) == ' ')
+		str.erase(0, 1);
+	if (str.at(str.length()-1) == ' ')
+		str = str.substr(0, str.length()-1);
+
+//	cout << "Called Department constructor with string '" << str << "'" << endl;
 	if (str.length() > 5)
 		id = longStringToDept(str);
 	else if (str.length() == 2)
@@ -29,16 +42,26 @@ Department::Department(string str) {
 		id = stringToDept(str);
 	// cout << ", which ended up as '" << str << "'" << endl;
 }
+
 Department::Department(const Department &c) {
 	// cout << "Used the Department copy constructor." << endl;
 	copy(c);
 }
+
 Department& Department::operator= (const Department &c) {
 	// cout << "Used the Department = override." << endl;
 	if (this == &c) return *this;
 	copy(c);
 	return *this;
 }
+
+
+//////////////
+/////////////
+// Constructor helper methods
+///////////
+//////////
+
 void Department::copy(const Department& c) {
 	id = c.id;
 }
@@ -176,7 +199,7 @@ dept_t Department::shortStringToDept(string str) {
 	else return NONE;
 }
 dept_t Department::longStringToDept(string str) {
-	cout << "Called longStringToDept with string '" << str << "'" << endl;
+	// cout << "Called longStringToDept with string '" << str << "'" << endl;
 	     if ( str == "AFRICA AND THE AMERICAS"                   ) return ALSO;
 	else if ( str == "ALTERNATE LANGUAGE STUDY OPTION"           ) return ALSO;
 	else if ( str == "AMERICAN CONVERSATION"                     ) return AMCON;
@@ -357,7 +380,14 @@ string Department::deptToLongName(dept_t dept) {
 	else return "Unknown (NONE)";
 }
 
-dept_t Department::getID() {
+
+//////////////
+/////////////
+// Getters
+///////////
+//////////
+
+dept_t Department::getDept_t() {
 	return id;
 }
 string Department::getName() {
@@ -368,10 +398,14 @@ string Department::getFullName() {
 	return deptToLongName(id);
 }
 
+
+//////////////
+/////////////
+// Overrides
+///////////
+//////////
+
 ostream& Department::getData(ostream &os) {
-	// os << "ID: " << getID() << endl;
-	// os << "Name: " << getName() << endl;
-	// os << "Full: " << getFullName() << endl;
 	os << getFullName();
 	return os;
 }
@@ -380,22 +414,10 @@ ostream &operator<<(ostream &os, Department &item) {
 	return item.getData(os); 
 }
 
-int parseID_num(string str) {
-	int number;
-	stringstream(str.substr(str.size() - 3)) >> number;
-	return number;
+bool operator== (Department &d1, Department &d2) {
+    return (d1.id == d2.id);
 }
 
-vector<Department> parseID_dept(string str) {
-	vector<Department> department;
-	string dept = str.substr(0,str.size()-3);
-
-	if (str.find('/') != string::npos) {
-		department.push_back(Department(dept.substr(0,2)));
-		department.push_back(Department(dept.substr(3,2)));
-	}
-	else {
-		department.push_back(Department(dept));
-	}
-	return department;
+bool operator!= (Department &d1, Department &d2) {
+    return !(d1 == d2);
 }

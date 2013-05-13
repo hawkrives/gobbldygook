@@ -9,13 +9,15 @@ private: // constructory things
 	void copy(const Department &c);
 private: // variables
 	dept_t id;
-private: // methods
+
+protected: // methods
 	dept_t intToDept(int i);
 	dept_t stringToDept(string str);
 	dept_t shortStringToDept(string str);
 	dept_t longStringToDept(string str);
 	string deptToString(dept_t dept);
 	string deptToLongName(dept_t dept);
+
 public: // constructors
 	Department();
 	Department(int i);
@@ -23,12 +25,13 @@ public: // constructors
 	Department(string str);
 	Department(const Department& c);
 	Department& operator= (const Department &c);
+	
+	friend bool operator== (Department &c1, Department &c2);
+	friend bool operator!= (Department &c1, Department &c2);
 
-public: // methods
-	dept_t getID();
+	dept_t getDept_t();
 	string getName();
 	string getFullName();
-
 	ostream& getData(ostream &os);
 };
 
