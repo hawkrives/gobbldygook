@@ -43,9 +43,7 @@ void Course::copy(const Course& c) {
 ///////////
 //////////
 
-Course::Course() {
-
-}
+Course::Course() {}
 
 Course::Course(string str) {
 	init(str);
