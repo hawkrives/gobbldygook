@@ -250,16 +250,6 @@ void Course::display() {
 	cout << *this << endl; 
 }
 
-void Course::displayMany() { 
-	cout << id;
-	if (courseType == LAB) cout << " L";
-	cout << "\t- ";
-	cout << title << " | ";
-	if (professor.length() > 0 && professor != " ")
-		cout << professor;
-	cout << endl;
-}
-
 
 //////////////
 /////////////
