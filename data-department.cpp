@@ -23,9 +23,17 @@ Department::Department(dept_t department) {
 }
 
 Department::Department(string str) {
-	cout << "Called Department constructor with string '" << str << "'" << endl;
+//	cout << "Called Department constructor with string '" << str << "'" << endl;
 	// make sure the string is uppercase
 	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+	
+	// Remove extraneous spaces
+	if (str.at(0) == ' ')
+		str.erase(0, 1);
+	if (str.at(str.length()-1) == ' ')
+		str = str.substr(0, str.length()-1);
+	
+	cout << "Called Department constructor with string '" << str << "'" << endl;
 	if (str.length() > 5)
 		id = longStringToDept(str);
 	else if (str.length() == 2)
