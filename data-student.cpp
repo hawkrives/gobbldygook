@@ -38,8 +38,9 @@ Student::Student(string fn) {
 			continue;
 		}
 		else if (str != "") {
-			if (str.substr(0, 2) == "//")
+			if (str.substr(0, 2) == "//") {
 				// it's a comment
+			}
 			else if (previousHeading == "# NAME")
 				name = str;
 			else if (previousHeading == "# MAJORS")
