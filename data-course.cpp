@@ -14,10 +14,8 @@ void Course::init(string identifier) {
 }
 void Course::copy(const Course& c) {
 	id = c.id;
-	number = c.number;
 	title = c.title;
 	description = c.description;
-	section = c.section;
 	majors = c.majors;
 	department = c.department;
 	concentrations = c.concentrations;
@@ -83,11 +81,8 @@ Course::Course(istream &is) {
 	// record.at(0);
 
 	// so, the *first* column (that we care about) has the course id,
-	id = record.at(1);
-	parseID(id);
-
-	// Second column has the section,
-	section = record.at(2);
+	// and the second column has the section,
+	id = ID(record.at(1), record.at(2));
 
 	// Third holds the lab boolean,
 	     if (record.at(3) == "L") courseType = LAB;
@@ -130,11 +125,9 @@ Course::Course(istream &is) {
 		profFirstName.erase(0, 1); // remove the extra space from the start of the name
 		professor = profFirstName + " " + profLastName;
 	}
-	else {
+	else
 		professor = record.at(11);
-	}
 
-	updateID();
 	title = cleanTitle(title);
 	record.clear();
 }
@@ -189,42 +182,22 @@ string Course::getProfessor() {
 	return professor;
 }
 
-string Course::getID() {
+ID Course::getID() {
 	return id;
 }
 
-
-//////////////
-/////////////
-// ID parsing and management methods
-///////////
-//////////
-
-void Course::parseID(string str) {
-	// Get the number of the course, aka the last three slots.
-	stringstream(str.substr(str.size() - 3)) >> number;
-
-	// Check if it's one of those dastardly "split courses".
-	string dept = str.substr(0,str.size()-3);
-
-	if (str.find('/') != string::npos) {
-		department.push_back(Department(dept.substr(0,2)));
-		department.push_back(Department(dept.substr(3,2)));
-	}
-	else
-		department.push_back(Department(dept));
+Department Course::getDepartment(int i = 0) {
+	return department[i];
 }
 
-void Course::updateID() {
-	string dept;
-	for (std::vector<Department>::iterator i = department.begin(); i != department.end(); ++i) {
-		dept += i->getName();
-		if (i != department.end()-1)
-			dept += "/";
-	}
-	id = dept + " " + tostring(number) + section;
-	if (courseType == LAB) id += "L";
+int Course::getNumber() {
+	return id.getNumber();
 }
+
+string Course::getSection() {
+	return id.getSection();
+}
+
 
 //////////////
 /////////////
@@ -262,7 +235,7 @@ ostream &operator<<(ostream &os, Course &item) {
 //////////
 
 void Course::showAll() {
-	cout << id << section << endl;
+	cout << id << endl;
 	cout << "Title: " << title << endl;
 	cout << "Professor: " << professor << endl;
 	cout << "Type: " << courseType << endl;
@@ -295,28 +268,11 @@ void Course::displayMany() {
 //////////
 
 Course getCourse(string identifier) {
-	// TODO: Merge the two ways of parsing IDs
+	ID id(identifier);
 	// TODO: Add lab support.
 
-	// cout << "Before cleanup: " << identifier << endl;
-	// Make sure everything is uppercase
-	std::transform(identifier.begin(), identifier.end(), identifier.begin(), ::toupper);
-
-	// Remove a possible space at the front
-	if (identifier[0] == ' ')
-		identifier.erase(0, 1);
-
-	// add a space into the course id, if there isn't one already
-	// find the first digit in the string
-	long firstDigit = identifier.find_first_of("0123456789");
-
-	if (identifier.find(" ") == string::npos)
-			identifier.insert(firstDigit, 1, ' ');
-
-	// cout << "After cleanup: " << identifier << endl;
-
 	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
-		if (i->getID() == identifier)
+		if (i->id == id)
 			return *i;
 
 	// If no match, return a blank course.

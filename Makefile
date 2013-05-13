@@ -13,6 +13,7 @@ OBJECTS = data-general.o \
 	data-concentration.o \
 	data-course.o \
 	data-department.o \
+	data-id.o \
 	data-major.o \
 	data-majorRequirement.o \
 	data-student.o

@@ -11,16 +11,19 @@ Department::Department() {
 	// cout << "Called Department constructor with nothing." << endl;
 	id = NONE;
 }
+
 Department::Department(int i) {
 	cout << "Called Department constructor with integer." << endl;
 	id = intToDept(i);
 }
+
 Department::Department(dept_t department) {
 	cout << "Called Department constructor with dept_t." << endl;
 	id = department;
 }
+
 Department::Department(string str) {
-	// cout << "Called Department constructor with string '" << str << "'";
+	cout << "Called Department constructor with string '" << str << "'" << endl;
 	// make sure the string is uppercase
 	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 	if (str.length() > 5)
@@ -31,10 +34,12 @@ Department::Department(string str) {
 		id = stringToDept(str);
 	// cout << ", which ended up as '" << str << "'" << endl;
 }
+
 Department::Department(const Department &c) {
 	// cout << "Used the Department copy constructor." << endl;
 	copy(c);
 }
+
 Department& Department::operator= (const Department &c) {
 	// cout << "Used the Department = override." << endl;
 	if (this == &c) return *this;
@@ -393,13 +398,18 @@ string Department::getFullName() {
 //////////
 
 ostream& Department::getData(ostream &os) {
-	// os << "ID: " << getID() << endl;
-	// os << "Name: " << getName() << endl;
-	// os << "Full: " << getFullName() << endl;
 	os << getFullName();
 	return os;
 }
 
 ostream &operator<<(ostream &os, Department &item) { 
 	return item.getData(os); 
+}
+
+bool operator== (Department &d1, Department &d2) {
+    return (d1.id == d2.id);
+}
+
+bool operator!= (Department &d1, Department &d2) {
+    return !(d1 == d2);
 }

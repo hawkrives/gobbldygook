@@ -25,6 +25,9 @@ public: // constructors
 	Department(string str);
 	Department(const Department& c);
 	Department& operator= (const Department &c);
+	
+	friend bool operator== (Department &c1, Department &c2);
+	friend bool operator!= (Department &c1, Department &c2);
 
 	dept_t getID();
 	string getName();
