@@ -31,6 +31,8 @@ Student::Student(string fn) {
 	string previousHeading;
 	for (vector<string>::iterator i = lines.begin(); i != lines.end(); ++i) {
 		string str = *i;
+		if (previousHeading.empty())
+			previousHeading = "# NAME";
 		if (str[0] == '#') {
 			previousHeading = *i;
 			continue;
