@@ -4,6 +4,7 @@
 using namespace std;
 
 vector<Course> all_courses;
+map<ID, Course> mapped_courses;
 Student user;
 
 void loadCourses() {
@@ -13,6 +14,7 @@ void loadCourses() {
 	while (infile.peek() != -1){
 		Course incourse(infile);
 		all_courses.push_back(incourse);
+		mapped_courses.insert(pair<ID, Course>(incourse.getID(), incourse));
 		// cout << incourse << endl;
 	}
 	// for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c)

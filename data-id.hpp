@@ -22,11 +22,13 @@ public:
 	ID& operator= (const ID &c);
 	
 	Department getDepartment(int i);
+	const Department getDepartment_const(int i);
 	int getNumber();
 	string getSection();
 	
 	friend bool operator== (ID &i1, ID &i2);
     friend bool operator!= (ID &i1, ID &i2);
+	friend bool operator<  (const ID &i1, const ID &i2);
 	
 	ostream& getData(ostream& os);
 	void display();

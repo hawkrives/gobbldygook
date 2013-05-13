@@ -264,11 +264,12 @@ Course getCourse(string identifier) {
 	// cout << id << endl;
 	// TODO: Add lab support.
 
-	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
-		if (i->id == id)
-			return *i;
+	// for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
+		// if (i->id == id)
+			// return *i;
+
 
 	// If no match, return a blank course.
-	Course c;
-	return c;
+	// Course c;
+	return mapped_courses[id];
 }

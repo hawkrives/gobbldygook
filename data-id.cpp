@@ -14,7 +14,8 @@ ID& ID::operator= (const ID &c) {
 
 ID::ID(string str) {
 	string d, d1, d2, n, s;
-	long num, firstSpace, firstDigit, lastDigit, lastChar;
+	int num;
+	long firstSpace, firstDigit, lastDigit, lastChar;
 	// cout << "Called ID::ID() with string '" << str << "'" << endl;
 
 	// Make sure everything is uppercase
@@ -94,7 +95,11 @@ void ID::copy(const ID& c) {
 }
 
 Department ID::getDepartment(int i = 0) {
-	return departments[i];
+	return departments.at(i);
+}
+
+const Department ID::getDepartment_const(int i = 0) {
+	return departments.at(i);
 }
 
 int ID::getNumber() {
@@ -114,6 +119,10 @@ bool operator== (ID &i1, ID &i2) {
 
 bool operator!= (ID &i1, ID &i2) {
     return !(i1 == i2);
+}
+
+bool operator< (const ID &i1, const ID &i2) {
+	return (i1.departments.at(0) < i2.departments.at(0));
 }
 
 ostream& ID::getData(ostream& os) {
