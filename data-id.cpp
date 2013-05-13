@@ -127,7 +127,8 @@ ostream& ID::getData(ostream& os) {
 	}
 	os << " ";
 	os << number;
-	os << section;
+	if (!section.empty())
+		os << "[" << section << "]";
 	return os;
 }
 
