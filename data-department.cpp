@@ -1,9 +1,11 @@
 #include "data-department.hpp"
 using namespace std;
 
-///////
+//////////////
+/////////////
 // Constructors
-/////
+///////////
+//////////
 
 Department::Department() {
 	// cout << "Called Department constructor with nothing." << endl;
@@ -39,6 +41,14 @@ Department& Department::operator= (const Department &c) {
 	copy(c);
 	return *this;
 }
+
+
+//////////////
+/////////////
+// Constructor helper methods
+///////////
+//////////
+
 void Department::copy(const Department& c) {
 	id = c.id;
 }
@@ -357,6 +367,13 @@ string Department::deptToLongName(dept_t dept) {
 	else return "Unknown (NONE)";
 }
 
+
+//////////////
+/////////////
+// Getters
+///////////
+//////////
+
 dept_t Department::getID() {
 	return id;
 }
@@ -368,6 +385,13 @@ string Department::getFullName() {
 	return deptToLongName(id);
 }
 
+
+//////////////
+/////////////
+// Overrides
+///////////
+//////////
+
 ostream& Department::getData(ostream &os) {
 	// os << "ID: " << getID() << endl;
 	// os << "Name: " << getName() << endl;
@@ -378,24 +402,4 @@ ostream& Department::getData(ostream &os) {
 
 ostream &operator<<(ostream &os, Department &item) { 
 	return item.getData(os); 
-}
-
-int parseID_num(string str) {
-	int number;
-	stringstream(str.substr(str.size() - 3)) >> number;
-	return number;
-}
-
-vector<Department> parseID_dept(string str) {
-	vector<Department> department;
-	string dept = str.substr(0,str.size()-3);
-
-	if (str.find('/') != string::npos) {
-		department.push_back(Department(dept.substr(0,2)));
-		department.push_back(Department(dept.substr(3,2)));
-	}
-	else {
-		department.push_back(Department(dept));
-	}
-	return department;
 }

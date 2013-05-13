@@ -9,13 +9,15 @@ private: // constructory things
 	void copy(const Department &c);
 private: // variables
 	dept_t id;
-private: // methods
+
+protected: // methods
 	dept_t intToDept(int i);
 	dept_t stringToDept(string str);
 	dept_t shortStringToDept(string str);
 	dept_t longStringToDept(string str);
 	string deptToString(dept_t dept);
 	string deptToLongName(dept_t dept);
+
 public: // constructors
 	Department();
 	Department(int i);
@@ -24,11 +26,9 @@ public: // constructors
 	Department(const Department& c);
 	Department& operator= (const Department &c);
 
-public: // methods
 	dept_t getID();
 	string getName();
 	string getFullName();
-
 	ostream& getData(ostream &os);
 };
 

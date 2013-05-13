@@ -7,10 +7,7 @@
 using namespace std;
 
 class Course {
-private:
-	void init(string identifier);
-	void copy(const Course& c);
-protected:
+private: // variables
 	string id;
 	int number;
 	string title;
@@ -22,17 +19,20 @@ protected:
 	string concentrations;
 	string conversations;
 	string professor;
-
+	
 	int half_semester;
 	bool pass_fail;
 	float credits;
 	string location;
-
+	
 	course_type_t courseType;
 	GenEd* geneds;
-
+	
 	bool days[7];
 	float time[7];
+private: // methods
+	void init(string identifier);
+	void copy(const Course& c);
 public:
 	Course();
 	Course(string str);

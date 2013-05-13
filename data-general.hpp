@@ -106,8 +106,8 @@ string tostring(int i);
 int stringToInt(string const& str);
 float stringToFloat(string const& str);
 
-vector<string> &split(const string &s, char delim, vector<string> &elems);
-vector<string> split(const string &s, char delim);
+vector<string>& split(const string &s, char delim, vector<string> &elems);
+vector<string>  split(const string &s, char delim);
 
 string removeAllQuotes(string s);
 string removeTrailingSlashes(string s);

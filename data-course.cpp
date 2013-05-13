@@ -2,6 +2,12 @@
 using namespace std;
 
 
+//////////////
+/////////////
+// Constructor helper methods
+///////////
+//////////
+
 void Course::init(string identifier) {
 	// cout << identifier << endl;
 	copy(getCourse(identifier));
@@ -30,7 +36,14 @@ void Course::copy(const Course& c) {
 		days[i] = c.days[i];
 		time[i] = c.time[i];
 	}
-}	
+}
+
+
+//////////////
+/////////////
+// Constructors
+///////////
+//////////
 
 Course::Course() {
 
@@ -126,21 +139,6 @@ Course::Course(istream &is) {
 	record.clear();
 }
 
-bool operator== (Course &c1, Course &c2) {
-    return (c1.id == c2.id);
-}
- 
-bool operator!= (Course &c1, Course &c2) {
-    return !(c1 == c2);
-}
-
-string Course::getType() {
-		 if (courseType == LAB    ) return "Lab";
-	else if (courseType == SEMINAR) return "Seminar";
-	else if (courseType == TOPIC  ) return "Topic";
-	else                            return "Course";
-}
-
 string Course::cleanTitle(string title) {
 	vector<string> badEndings, badBeginnings;
 
@@ -173,9 +171,34 @@ string Course::cleanTitle(string title) {
 	return title;
 }
 
+
+//////////////
+/////////////
+// Getters
+///////////
+//////////
+
+string Course::getType() {
+	if (courseType == LAB    ) return "Lab";
+	else if (courseType == SEMINAR) return "Seminar";
+	else if (courseType == TOPIC  ) return "Topic";
+	else                            return "Course";
+}
+
 string Course::getProfessor() {
 	return professor;
 }
+
+string Course::getID() {
+	return id;
+}
+
+
+//////////////
+/////////////
+// ID parsing and management methods
+///////////
+//////////
 
 void Course::parseID(string str) {
 	// Get the number of the course, aka the last three slots.
@@ -203,8 +226,18 @@ void Course::updateID() {
 	if (courseType == LAB) id += "L";
 }
 
-string Course::getID() {
-	return id;
+//////////////
+/////////////
+/// Operator overrides and supporting tools
+///////////
+//////////
+
+bool operator== (Course &c1, Course &c2) {
+    return (c1.id == c2.id);
+}
+
+bool operator!= (Course &c1, Course &c2) {
+    return !(c1 == c2);
 }
 
 ostream& Course::getData(ostream &os) {
@@ -217,6 +250,17 @@ ostream& Course::getData(ostream &os) {
 	return os;
 }
 
+ostream &operator<<(ostream &os, Course &item) {
+	return item.getData(os);
+}
+
+
+//////////////
+/////////////
+/// Methods of displaying the class
+///////////
+//////////
+
 void Course::showAll() {
 	cout << id << section << endl;
 	cout << "Title: " << title << endl;
@@ -227,10 +271,6 @@ void Course::showAll() {
 	cout << "Pass/Fail? " << pass_fail << endl;
 	cout << "Location: " << location << endl;
 	cout << endl;
-}
-
-ostream &operator<<(ostream &os, Course &item) { 
-	return item.getData(os); 
 }
 
 void Course::display() { 
@@ -246,6 +286,13 @@ void Course::displayMany() {
 		cout << professor;
 	cout << endl;
 }
+
+
+//////////////
+/////////////
+/// The all-important getCourse
+///////////
+//////////
 
 Course getCourse(string identifier) {
 	// TODO: Merge the two ways of parsing IDs
