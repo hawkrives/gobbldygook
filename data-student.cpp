@@ -31,12 +31,16 @@ Student::Student(string fn) {
 	string previousHeading;
 	for (vector<string>::iterator i = lines.begin(); i != lines.end(); ++i) {
 		string str = *i;
+		if (previousHeading.empty())
+			previousHeading = "# NAME";
 		if (str[0] == '#') {
 			previousHeading = *i;
 			continue;
 		}
 		else if (str != "") {
-			if (previousHeading == "# NAME")
+			if (str.substr(0, 2) == "//")
+				// it's a comment
+			else if (previousHeading == "# NAME")
 				name = str;
 			else if (previousHeading == "# MAJORS")
 				addMajor(Major(str));
