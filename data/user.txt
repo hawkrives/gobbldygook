@@ -1,17 +1,20 @@
 # NAME
 Xandra Best
 
+
 # MAJORS
-CSCI
+// CSCI
 MATH
+
 
 # CONCENTRATIONS
 STAT
-MUSIC
+// MUSIC
 Physics
 
+
 # COURSES
-PHIL251A
+// PHIL251A
 REL296A
 rel 296b
 
@@ -26,6 +29,7 @@ THEAT398
 writ211
 writ111q
 nnnn000
+
 
 # LABS
 PHYS131C
