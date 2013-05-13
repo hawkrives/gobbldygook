@@ -13,6 +13,8 @@ ID& ID::operator= (const ID &c) {
 }
 
 ID::ID(string str) {
+	string d, d1, d2, n, s;
+	long num, firstSpace, firstDigit, lastDigit, lastChar;
 	// cout << "Called ID::ID() with string '" << str << "'" << endl;
 
 	// Make sure everything is uppercase
@@ -24,15 +26,14 @@ ID::ID(string str) {
 	if (str.at(str.length()-1) == ' ')
 		str = str.substr(0, str.length()-1);
 	
-	long firstSpace = str.find_first_of(" ");
+	firstSpace = str.find_first_of(" ");
 
-	long firstDigit = str.find_first_of("0123456789");
-	long lastDigit  =  str.find_last_of("0123456789");
+	firstDigit = str.find_first_of("0123456789");
+	lastDigit  =  str.find_last_of("0123456789");
 
-	long lastChar   =  str.find_last_of("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	lastChar   =  str.find_last_of("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 	// Split into Department, Number, and Section
-	string d, d1, d2, n, s;
 
 	// pull out the department string
 	if (firstSpace == string::npos) // if there is no space
@@ -51,7 +52,7 @@ ID::ID(string str) {
 	if (!isdigit(n[n.length()-1]))
 		n = str.substr(firstDigit, n.length()-1);
 
-	int num = stringToInt(n);
+	num = stringToInt(n);
 
 	if (lastChar > lastDigit) // there is a section
 		s = str[lastChar];
