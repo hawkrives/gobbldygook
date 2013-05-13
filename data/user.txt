@@ -19,6 +19,7 @@ Religion 121L
 
 CSCI251
 stat 110
+AS/RE256
 
 THEAT398
 
