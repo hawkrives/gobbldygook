@@ -115,8 +115,16 @@ bool operator!= (ID &i1, ID &i2) {
 }
 
 ostream& ID::getData(ostream& os) {
-	for (vector<Department>::iterator i = departments.begin(); i != departments.end(); ++i)
-		os << i->getName();
+	for (vector<Department>::iterator i = departments.begin(); i != departments.end(); ++i) {
+		if (departments.size() == 1)
+			os << i->getName();
+		else {
+			os << i->getName();
+			if (i != departments.end()-1)
+				os << "/";
+		}
+	}
+	os << " ";
 	os << number;
 	os << section;
 	return os;
