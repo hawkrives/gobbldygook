@@ -23,7 +23,7 @@ void Course::copy(const Course& c) {
 	credits = c.credits;
 	location = c.location;
 
-	lab = c.lab;
+	courseType = c.courseType;
 	geneds = c.geneds;
 
 	for (int i = 0; i < 7; ++i){
@@ -77,8 +77,10 @@ Course::Course(istream &is) {
 	section = record.at(2);
 
 	// Third holds the lab boolean,
-	if (record.at(3).empty()) lab = false;
-	else                      lab = true;
+	     if (record.at(3) == "L") courseType = LAB;
+	else if (record.at(3) == "S") courseType = SEMINAR;
+	else if (record.at(3) == "T") courseType = TOPIC;
+	else                          courseType = COURSE;
 
 	// while Fourth contains the title of the course;
 	title = record.at(4);
@@ -130,6 +132,13 @@ bool operator== (Course &c1, Course &c2) {
  
 bool operator!= (Course &c1, Course &c2) {
     return !(c1 == c2);
+}
+
+string Course::getType() {
+		 if (courseType == LAB    ) return "Lab";
+	else if (courseType == SEMINAR) return "Seminar";
+	else if (courseType == TOPIC  ) return "Topic";
+	else                            return "Course";
 }
 
 string Course::cleanTitle(string title) {
@@ -191,7 +200,7 @@ void Course::updateID() {
 			dept += "/";
 	}
 	id = dept + " " + tostring(number) + section;
-	if (lab) id += "L";
+	if (courseType == LAB) id += "L";
 }
 
 string Course::getID() {
@@ -199,9 +208,9 @@ string Course::getID() {
 }
 
 ostream& Course::getData(ostream &os) {
+	os << getType() << ":\t";
 	os << id;
-	if (lab) os << " L";
-	os << " - ";
+	os << "\t- ";
 	os << title << " | ";
 	if (professor.length() > 0 && professor != " ")
 		os << professor;
@@ -212,7 +221,7 @@ void Course::showAll() {
 	cout << id << section << endl;
 	cout << "Title: " << title << endl;
 	cout << "Professor: " << professor << endl;
-	cout << "Lab? " << lab << endl;
+	cout << "Type: " << courseType << endl;
 	cout << "Half-semester? " << half_semester << endl;
 	cout << "Credits: " << credits << endl;
 	cout << "Pass/Fail? " << pass_fail << endl;
@@ -230,7 +239,7 @@ void Course::display() {
 
 void Course::displayMany() { 
 	cout << id;
-	if (lab) cout << " L";
+	if (courseType == LAB) cout << " L";
 	cout << "\t- ";
 	cout << title << " | ";
 	if (professor.length() > 0 && professor != " ")

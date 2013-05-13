@@ -33,6 +33,13 @@ enum GenEd {
 	EIN    // Ethical Issues and Normative Perspectives
 };
 
+enum course_type_t {
+	LAB,
+	SEMINAR,
+	TOPIC,
+	COURSE
+};
+
 enum dept_t {
 	AFAM,  //0 Africa and the Americas
 	ALSO,  //1 Alternate Language Study Option

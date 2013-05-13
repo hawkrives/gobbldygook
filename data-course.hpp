@@ -28,7 +28,7 @@ protected:
 	float credits;
 	string location;
 
-	bool lab;
+	course_type_t courseType;
 	GenEd* geneds;
 
 	bool days[7];
@@ -50,6 +50,7 @@ public:
 
 	string getProfessor();
 	string getID();
+	string getType();
 
 	ostream& getData(ostream& os);
 	void display();

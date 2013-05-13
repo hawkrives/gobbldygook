@@ -176,7 +176,7 @@ dept_t Department::shortStringToDept(string str) {
 	else return NONE;
 }
 dept_t Department::longStringToDept(string str) {
-	cout << "Called longStringToDept with string '" << str << "'" << endl;
+	// cout << "Called longStringToDept with string '" << str << "'" << endl;
 	     if ( str == "AFRICA AND THE AMERICAS"                   ) return ALSO;
 	else if ( str == "ALTERNATE LANGUAGE STUDY OPTION"           ) return ALSO;
 	else if ( str == "AMERICAN CONVERSATION"                     ) return AMCON;
