@@ -10,6 +10,7 @@ LIBS = -I/usr/common/include
 endif
 
 OBJECTS = data-general.o \
+	data-concentration.o \
 	data-course.o \
 	data-department.o \
 	data-major.o \

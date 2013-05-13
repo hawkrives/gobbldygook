@@ -41,8 +41,10 @@ Student::Student(string fn) {
 			else if (previousHeading == "# MAJORS")
 				addMajor(Major(str));
 			else if (previousHeading == "# CONCENTRATIONS")
-				addMajor(Major(str));
+				addConcentration(Concentration(str));
 			else if (previousHeading == "# COURSES")
+				addCourse(Course(str));
+			else if (previousHeading == "# LABS")
 				addCourse(Course(str));
 		}
 	}
@@ -55,7 +57,17 @@ void Student::addMajor(const Major& m) {
 void Student::addMajors(string str) {
 	vector<string> record = split(str, ',');
 	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i)
-		addMajor(*i);
+		addMajor(Major(*i));
+}
+
+void Student::addConcentration(const Concentration& m) {
+	concentrations.push_back(m);
+}
+
+void Student::addConcentrations(string str) {
+	vector<string> record = split(str, ',');
+	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i)
+		addConcentration(Concentration(*i));
 }
 
 void Student::addCourse(const Course& c) {
@@ -92,6 +104,24 @@ ostream& Student::getData(ostream &os) {
 			if (i != majors.end()-1)
 				os << *i << ", ";
 			else 
+				os << "and " << *i << ", ";
+		}
+	}
+	
+	os << "with concentrations in ";
+	
+	for (vector<Concentration>::iterator i = concentrations.begin(); i != concentrations.end(); ++i) {
+		if (concentrations.size() == 2) {
+			os << *i;
+			if (i != concentrations.end()-1)
+				os << " and ";
+			else
+				os << " ";
+		}
+		else {
+			if (i != concentrations.end()-1)
+				os << *i << ", ";
+			else
 				os << "and " << *i << ", ";
 		}
 	}

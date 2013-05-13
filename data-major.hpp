@@ -20,6 +20,8 @@ public:
 
 	ostream& getData(ostream &os);
 	void display();
+	
+	friend class Concentration;
 };
 
 ostream &operator<<(ostream &os, Major &item);
