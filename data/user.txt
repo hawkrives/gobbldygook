@@ -27,3 +27,4 @@ writ111q
 
 # LABS
 PHYS131C
+CSCI 251A
