@@ -35,7 +35,7 @@ ID::ID(string str) {
 	string d, d1, d2, n, s;
 
 	// pull out the department string
-	if (s[firstSpace] != string::npos) // if there is no space
+	if (firstSpace == string::npos) // if there is no space
 		d = str.substr(0, firstDigit);
 	else
 		d = str.substr(0, firstSpace); // there is a space
