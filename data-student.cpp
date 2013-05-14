@@ -88,7 +88,7 @@ void Student::addCourses(string str) {
 
 bool Student::hasTakenCourse(string str) {
 	bool userHasTaken = false;
-	Course checkAgainst = getCourse(str);
+	const Course checkAgainst = getCourse(str);
 	for (std::vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i)
 		if (*i == checkAgainst)
 			userHasTaken = true;
@@ -161,7 +161,7 @@ ostream& Student::getData(ostream &os) {
 
 void Student::display() {
 	cout << *this << endl;
-};
+}
 
 ostream& operator<<(ostream& os, Student& item) {
 	return item.getData(os);
