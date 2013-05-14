@@ -47,7 +47,7 @@ int main(int argc, const char *argv[]) {
 	// requestCourses();
 
 	// Method 2: Hard-coded file path.
-	Student user("data/user.txt");
+	user = Student("data/user.txt");
 	
 	// Method 3: File path as an argument.
 	// Student user(argv[1]);

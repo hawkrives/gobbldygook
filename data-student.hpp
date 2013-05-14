@@ -37,6 +37,8 @@ public:
 	void display();
 };
 
+extern Student user;
+
 ostream& operator<<(ostream& os, Student& item);
 
 #endif
