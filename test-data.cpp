@@ -58,7 +58,7 @@ int main(int argc, const char *argv[]) {
 	cout << i << endl;
 
 	cout << "Question: Has the user taken CSCI 251? ";
-	cout << user.hasTakenCourse("CSCI251") << endl;
+	cout << user.hasTakenCourse("csci251") << endl;
 
 	return 0;
 }
