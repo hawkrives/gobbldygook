@@ -1,7 +1,7 @@
 #include "data-id.hpp"
 
 ID::ID() {
-	init(Department(NONE), 0, "");
+	init(Department(), 0, "");
 }
 ID::ID(const ID& c) {
 	copy(c);
