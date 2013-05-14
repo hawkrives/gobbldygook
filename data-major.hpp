@@ -3,6 +3,7 @@
 
 #include "data-general.hpp"
 #include "data-majorRequirement.hpp"
+#include "data-specialRequirement.hpp"
 #include "data-department.hpp"
 using namespace std;
 
@@ -10,7 +11,8 @@ class Major {
 private:
 	string name;
 	Department department;
-	vector<MajorRequirement> requirements;
+  map<string, MajorRequirement> requirements;
+  map<string, MajorSpecialRequirement> specialRequirements;
 	void copy(const Major &c);
 public:
 	Major();

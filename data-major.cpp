@@ -5,6 +5,7 @@ void Major::copy(const Major &c) {
 	name = c.name;
 	department = c.department;
 	requirements = c.requirements;
+	specialRequirements = c.specialRequirements;
 }
 
 Major::Major() {
