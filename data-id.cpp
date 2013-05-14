@@ -16,6 +16,7 @@ ID::ID(string str) {
 	string d, d1, d2, n, s;
 	int num;
 	long firstSpace, firstDigit, lastDigit, lastChar;
+	// cout << "Parsed '" << str << "' to get '";
 	// cout << "Called ID::ID() with string '" << str << "'" << endl;
 
 	// Make sure everything is uppercase
