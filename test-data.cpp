@@ -53,6 +53,9 @@ int main(int argc, const char *argv[]) {
 	// Student user(argv[1]);
 
 	user.display();
+	
+	bool i = ID("CSCI251") == ID("CSCI 251");
+	cout << i << endl;
 
 	cout << "Question: Has the user taken CSCI 251? ";
 	cout << user.hasTakenCourse("CSCI251") << endl;
