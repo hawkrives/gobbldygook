@@ -42,7 +42,7 @@ public:
     friend bool operator!= (Course &c1, Course &c2);
 	friend Course getCourse(string identifier);
 
-	string cleanTitle(string title);
+	void cleanTitle();
 
 	Department getDepartment(int i);
 	string getProfessor();
