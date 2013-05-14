@@ -110,11 +110,8 @@ string ID::getSection() {
 	return section;
 }
 
-bool operator== (ID &i1, ID &i2) {
-	bool dept = (i1.departments[0] == i2.departments[0]);
-	bool num  = (i1.number == i2.number);
-	bool sec  = (i1.section == i2.section);
-    return (dept && num && sec);
+bool operator== (const ID &i1, const ID &i2) {
+    return ((i1.departments[0] == i2.departments[0]) && (i1.number == i2.number) && (i1.section == i2.section));
 }
 
 bool operator!= (ID &i1, ID &i2) {

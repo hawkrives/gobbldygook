@@ -200,7 +200,7 @@ string Course::getSection() {
 ///////////
 //////////
 
-bool operator== (Course &c1, Course &c2) {
+bool operator== (const Course &c1, const Course &c2) {
     return (c1.id == c2.id);
 }
 

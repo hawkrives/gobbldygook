@@ -38,7 +38,7 @@ public:
 	Course& operator= (const Course &c);
 	Course(istream &is);
 
-	friend bool operator== (Course &c1, Course &c2);
+	friend bool operator== (const Course &c1, const Course &c2);
     friend bool operator!= (Course &c1, Course &c2);
 	friend Course getCourse(string identifier);
 

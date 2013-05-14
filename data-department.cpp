@@ -414,7 +414,7 @@ ostream &operator<<(ostream &os, Department &item) {
 	return item.getData(os); 
 }
 
-bool operator== (Department &d1, Department &d2) {
+bool operator== (const Department &d1, const Department &d2) {
     return (d1.id == d2.id);
 }
 
