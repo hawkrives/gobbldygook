@@ -1,0 +1,71 @@
+Name = Math
+Department = Math
+#Requirements
+##CalcI
+needed = 1
+validCourses = MATH 120
+##CalcII
+needed = 1
+validCourses = MATH 126, 128
+##LinearAlgebra
+needed = 1
+validCourses = MATH 220
+##Transitions
+needed = 2
+validCourses = MATH 242, MATH 244, MATH 252
+##Electives
+needed = 7
+validCourses = CHEM 371, CSCI 231, CSCI 315, CSCI 333, ECON 385, MATH 226, MATH 230, MATH 232, MATH 236, MATH 238, MATH 239, MATH 262, MATH 266, MATH 330, MATH 340, MATH 344, MATH 348, MATH 352, MATH 356, MATH 364, MATH 382, MATH 384, MATH 390, MATH 396, MATH 398, PHYS 374, PHYS 375, PHYS 376, STAT 212, STAT 272, STAT 316, STAT 322
+##MathElectives
+needed = 5
+validCourses = MATH 226, MATH 230, MATH 232, MATH 236, MATH 238, MATH 239, MATH 262, MATH 266, MATH 330, MATH 340, MATH 344, MATH 348, MATH 352, MATH 356, MATH 364, MATH 382, MATH 384, MATH 390, MATH 396, MATH 398
+##LevelIII
+needed = 2
+validCourses = CSCI 315, CSCI 333, MATH 330, MATH 340, MATH 344, MATH 348, MATH 352, MATH 356, MATH 364, MATH 382, MATH 384, MATH 390, MATH 396, MATH 398, STAT 322
+##MathLevelIII
+needed = 1
+validCourses = MATH 330, MATH 340, MATH 344, MATH 348, MATH 352, MATH 356, MATH 364, MATH 382, MATH 384, MATH 396, MATH 398
+#Special
+##Perspectives
+needed = 3
+validSets = A, C, D, M
+##Sequence
+needed = 1
+validSets = seq1, seq2, seq3, seq4, seq5, seq6, seq7, seq8
+#Sets
+##A
+needed = 1
+validCourses = MATH 252, MATH 348, MATH 352, MATH 356
+##C
+needed = 1
+validCourses = MATH 226, MATH 230, MATH 244, MATH 262, MATH 340, MATH 344
+##D
+needed = 1
+validCourses = CSCI 231, MATH 232, MATH 238, MATH 239, MATH 262, MATH 330
+##M
+needed = 1
+validCourses = MATH 230, MATH 236, MATH 242, MATH 262, MATH 266, STAT 212, STAT 272, STAT 316
+##seq1
+needed = 2
+validCourses = MATH 230, MATH 330
+##seq2
+needed = 2
+validCourses = MATH 226, MATH 340
+##seq3
+needed = 2
+validCourses = MATH 244, MATH 344
+##seq4
+needed = 2
+validCourses = MATH 244, MATH 348
+##seq5
+needed = 2
+validCourses = MATH 252, MATH 352
+##seq6
+needed = 2
+validCourses = MATH 220, MATH 356
+##seq7
+needed = 2
+validCourses = MATH 232, MATH 364
+##seq8
+needed = 2
+validCourses = MATH 262, STAT 262
