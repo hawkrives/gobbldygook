@@ -2,17 +2,18 @@
 #define __Data_majorRequirement__
 
 #include "data-general.hpp"
-// #include "data-course.hpp"
+#include "data-id.hpp"
 using namespace std;
 
 class MajorRequirement {
 private:
-	// int needed;
+  string name;
+	int needed;
 	int has;
-	// bool satisfied;
-	// vector<Course> validCourses;
+	bool satisfied;
+	vector<ID> validCourses;
 public:
-	// bool fulfillsRequirement(const Course& c);
+	bool fulfillsRequirement(const ID& c);
 	void incrementHas();
 };
 
