@@ -1,0 +1,24 @@
+Name = Philosophy
+Department = PHIL
+
+
+#Requirements
+##AncientWesternPhilosophy
+needed = 1
+validCourses = PHIL 235
+
+##HistoryOfModernPhilosophy
+needed = 1
+validCourses = PHIL 236
+
+##FormalLogic
+needed = 1
+validCourses = PHIL 240
+
+##LevelIIISem
+needed = 3
+validCourses = PHIL 371, PHIL 372, PHIL 373, PHIL 374, PHIL 375, PHIL 398, PHIL 399
+
+##Electives
+needed = 6
+validCourses = PHIL 118, PHIL 119, PHIL 120, PHIL 127, PHIL 147, PHIL 231, PHIL 233, PHIL 241, PHIL 243, PHIL 244, PHIL 245, PHIL 246, PHIL 247, PHIL 250, PHIL 252, PHIL 253, PHIL 254, PHIL 256, PHIL 257, PHIL 259, PHIL 260, PHIL 261, PHIL 278, PHIL 294, PHIL 298, PHIL 371, PHIL 372, PHIL 373, PHIL 374, PHIL 375, PHIL 394, PHIL 396, PHIL 398, PHIL 399
