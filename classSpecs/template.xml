@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE spec SYSTEM "http://www.cs.stolaf.edu/lib/SpecML/SpecML.dtd">
+<?xml-stylesheet
+   href="http://www.cs.stolaf.edu/lib/SpecML/SpecMLToHTML.xsl"
+   type="text/xsl"?>
+
+<spec>
+<title>&sto:ENTRY;</title>
+<header>&sto:ENTRY;</header>
+<credits>&sto:ENTRY;</credits>
+
+<class name="&sto:ENTRY;">
+
+<nosuperclass/>
+
+<variables>
+<var name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</var>
+&sto:ENTRY;<var name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</var>
+</variables>
+
+<constructors-list>
+
+<constructor>
+<desc>&sto:ENTRY;</desc>
+<arguments>
+<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+</arguments>
+<statechange>&sto:ENTRY;</statechange>
+</constructor>
+
+&sto:ENTRY;<constructor>
+<desc>&sto:ENTRY;</desc>
+<arguments>
+<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+</arguments>
+<statechange>&sto:ENTRY;</statechange>
+</constructor>
+
+</constructors-list>
+
+<destructor>
+<desc>&sto:ENTRY;</desc>
+<statechange>&sto:ENTRY;</statechange>
+</destructor>
+
+<methods-list>
+
+<method name="&sto:ENTRY;" returntype="&sto:ENTRY;">
+<desc>&sto:ENTRY;</desc>
+<arguments>
+<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+</arguments>
+<statechange>&sto:ENTRY;</statechange>
+<return>&sto:ENTRY;</return>
+</method>
+
+&sto:ENTRY;<method name="&sto:ENTRY;" returntype="&sto:ENTRY;">
+<desc>&sto:ENTRY;</desc>
+<arguments>
+<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+</arguments>
+<statechange>&sto:ENTRY;</statechange>
+<return>&sto:ENTRY;</return>
+</method>
+
+</methods-list>
+
+</class>
+
+</spec>
