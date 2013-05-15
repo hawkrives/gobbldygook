@@ -3,7 +3,7 @@
 #include "student.hpp"
 using namespace std;
 
-map<ID, Course> mapped_courses;
+vector<Course> all_courses;
 Student user;
 
 void loadCourses() {
@@ -12,12 +12,13 @@ void loadCourses() {
 	getline(infile, str);
 	while (infile.peek() != -1){
 		Course incourse(infile);
-		mapped_courses.insert(pair<ID, Course>(incourse.getID(), incourse));
+		all_courses.push_back(incourse);
+		cout << incourse << endl;
 	}
-	for (map<ID, Course>::iterator c = mapped_courses.begin(); c != mapped_courses.end(); ++c)
-		if (c->second.getProfessor()[1] == ' ')
-			if (c->second.getProfessor()[2] == '0' || c->second.getProfessor()[2] == '1')
-				cout << c->second << endl;
+	for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c)
+		if (c->getProfessor()[1] == ' ')
+			if (c->getProfessor()[2] == '0' || c->getProfessor()[2] == '1')
+				cout << *c << endl;
 }
 
 void welcome() {

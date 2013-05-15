@@ -254,5 +254,14 @@ void Course::display() {
 Course getCourse(string identifier) {
 	// cout << "called getCourse with '" << identifier << "'" << endl;
 	ID id(identifier);
-	return mapped_courses[id];
+	// cout << id << endl;
+	// TODO: Add lab support.
+	
+	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
+		if (i->id == id)
+			return *i;
+	
+	// If no match, return a blank course.
+	Course c;
+	return c;
 }
