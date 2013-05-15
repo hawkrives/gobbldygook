@@ -31,9 +31,9 @@ ID::ID(string str) {
 	firstSpace = str.find_first_of(" ");
 
 	firstDigit = str.find_first_of("0123456789");
-	lastDigit  =  str.find_last_of("0123456789");
+	lastDigit  = str.find_last_of("0123456789");
 
-	lastChar   =  str.find_last_of("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	lastChar   = str.find_last_of("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 	// Split into Department, Number, and Section
 

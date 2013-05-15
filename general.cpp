@@ -76,7 +76,6 @@ void printEntireRecord(vector<string> record) {
 }
 
 string getFileContents(string fn) {
-	cout << fn << endl;
 	ifstream in(fn.c_str(), ios::in | ios::binary);
 	if (in) {
 		string contents;

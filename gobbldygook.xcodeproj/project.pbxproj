@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; };
-		00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B32174321C2000F5AF9 /* concentration.cpp */; };
-		00707B3B174321C2000F5AF9 /* course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B34174321C2000F5AF9 /* course.cpp */; };
-		00707B3C174321C2000F5AF9 /* department.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B36174321C2000F5AF9 /* department.cpp */; };
-		00707B3D174321C2000F5AF9 /* general.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B38174321C2000F5AF9 /* general.cpp */; };
-		00707B48174321D1000F5AF9 /* id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B3E174321D1000F5AF9 /* id.cpp */; };
-		00707B49174321D1000F5AF9 /* major.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B40174321D1000F5AF9 /* major.cpp */; };
-		00707B4A174321D1000F5AF9 /* majorRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B42174321D1000F5AF9 /* majorRequirement.cpp */; };
-		00707B4B174321D1000F5AF9 /* specialRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B44174321D1000F5AF9 /* specialRequirement.cpp */; };
-		00707B4C174321D1000F5AF9 /* student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B46174321D1000F5AF9 /* student.cpp */; };
-		00707B4F174323C8000F5AF9 /* requirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B4D174323C1000F5AF9 /* requirement.cpp */; };
+		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B32174321C2000F5AF9 /* concentration.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B3B174321C2000F5AF9 /* course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B34174321C2000F5AF9 /* course.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B3C174321C2000F5AF9 /* department.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B36174321C2000F5AF9 /* department.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B3D174321C2000F5AF9 /* general.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B38174321C2000F5AF9 /* general.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B48174321D1000F5AF9 /* id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B3E174321D1000F5AF9 /* id.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B49174321D1000F5AF9 /* major.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B40174321D1000F5AF9 /* major.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B4A174321D1000F5AF9 /* majorRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B42174321D1000F5AF9 /* majorRequirement.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B4B174321D1000F5AF9 /* specialRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B44174321D1000F5AF9 /* specialRequirement.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B4C174321D1000F5AF9 /* student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B46174321D1000F5AF9 /* student.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B4F174323C8000F5AF9 /* requirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B4D174323C1000F5AF9 /* requirement.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,10 +45,7 @@
 		00707B1417431D4F000F5AF9 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		00707B1517431D4F000F5AF9 /* test-data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-data.cpp"; sourceTree = "<group>"; };
 		00707B1A17431D5A000F5AF9 /* nomake */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nomake; sourceTree = BUILT_PRODUCTS_DIR; };
-		00707B2E17432094000F5AF9 /* AsianStudies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AsianStudies.txt; sourceTree = "<group>"; };
 		00707B2F17432094000F5AF9 /* Bio.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bio.txt; sourceTree = "<group>"; };
-		00707B3017432094000F5AF9 /* CompSci.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CompSci.txt; sourceTree = "<group>"; };
-		00707B3117432094000F5AF9 /* Stats.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Stats.txt; sourceTree = "<group>"; };
 		00707B32174321C2000F5AF9 /* concentration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = concentration.cpp; sourceTree = "<group>"; };
 		00707B33174321C2000F5AF9 /* concentration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = concentration.hpp; sourceTree = "<group>"; };
 		00707B34174321C2000F5AF9 /* course.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = course.cpp; sourceTree = "<group>"; };
@@ -69,6 +66,12 @@
 		00707B47174321D1000F5AF9 /* student.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = student.hpp; sourceTree = "<group>"; };
 		00707B4D174323C1000F5AF9 /* requirement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = requirement.cpp; sourceTree = "<group>"; };
 		00707B4E174323C1000F5AF9 /* requirement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = requirement.hpp; sourceTree = "<group>"; };
+		00707B5017434002000F5AF9 /* ASIAN.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ASIAN.txt; sourceTree = "<group>"; };
+		00707B5117434002000F5AF9 /* CHEM.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHEM.txt; sourceTree = "<group>"; };
+		00707B5217434002000F5AF9 /* CSCI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CSCI.txt; sourceTree = "<group>"; };
+		00707B5317434002000F5AF9 /* PHYS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PHYS.txt; sourceTree = "<group>"; };
+		00707B5417434002000F5AF9 /* PSYCH.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PSYCH.txt; sourceTree = "<group>"; };
+		00707B5517434002000F5AF9 /* STAT.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = STAT.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,10 +134,13 @@
 		00707B1217431D4F000F5AF9 /* majors */ = {
 			isa = PBXGroup;
 			children = (
-				00707B2E17432094000F5AF9 /* AsianStudies.txt */,
+				00707B5017434002000F5AF9 /* ASIAN.txt */,
+				00707B5117434002000F5AF9 /* CHEM.txt */,
+				00707B5217434002000F5AF9 /* CSCI.txt */,
+				00707B5317434002000F5AF9 /* PHYS.txt */,
+				00707B5417434002000F5AF9 /* PSYCH.txt */,
+				00707B5517434002000F5AF9 /* STAT.txt */,
 				00707B2F17432094000F5AF9 /* Bio.txt */,
-				00707B3017432094000F5AF9 /* CompSci.txt */,
-				00707B3117432094000F5AF9 /* Stats.txt */,
 				00707B1317431D4F000F5AF9 /* math.txt */,
 			);
 			path = majors;
@@ -314,6 +320,7 @@
 		00707B2217431D5A000F5AF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -321,6 +328,7 @@
 		00707B2317431D5A000F5AF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

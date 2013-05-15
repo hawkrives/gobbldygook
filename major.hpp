@@ -11,8 +11,9 @@ class Major {
 private:
 	string name;
 	Department department;
-	map<string, MajorRequirement> requirements;
-	map<string, SpecialRequirement> specialRequirements;
+	vector<MajorRequirement> requirements;
+	vector<SpecialRequirement> specialRequirements;
+	vector<MajorRequirement> setRequirements;
 	void copy(const Major &c);
 public:
 	Major();
@@ -24,6 +25,9 @@ public:
 	void display();
 	
 	friend class Concentration;
+	SpecialRequirement* getSpecialRequirement(string str);
+	MajorRequirement* getMajorRequirement(string str);
+	MajorRequirement* getSetRequirement(string str);
 };
 
 ostream &operator<<(ostream &os, Major &item);

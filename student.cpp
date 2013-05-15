@@ -18,15 +18,9 @@ Student::Student(string n, string s, string e, string m) {
 
 Student::Student(string fn) {
 	string yearS, yearE;
-	ifstream infile(fn.c_str());
-	string nextLine;
-	vector<string> lines;
-
-	// load the entire file
-	while (infile.peek() != -1) {
-		getline(infile, nextLine);
-		lines.push_back(nextLine);
-	}
+	
+	string contentsOfFile = getFileContents(fn);
+	vector<string> lines = split(contentsOfFile, '\n');
 
 	string previousHeading;
 	for (vector<string>::iterator i = lines.begin(); i != lines.end(); ++i) {
@@ -35,7 +29,7 @@ Student::Student(string fn) {
 			previousHeading = "# NAME";
 		if (str[0] == '#') {
 			std::transform(str.begin(), str.end(), str.begin(), ::toupper);
-			previousHeading = *i;
+			previousHeading = str;
 			continue;
 		}
 		else if (str != "") {

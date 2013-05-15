@@ -104,7 +104,7 @@ enum dept_t {
 	THEAT, //54 Theater
 	WMGST, //55 Women's & Gender Studies
 	WRIT,  //56 Writing
-	NONE,
+	NONE
 };
 
 string tostring(int i);
