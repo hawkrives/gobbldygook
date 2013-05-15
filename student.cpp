@@ -4,7 +4,7 @@ using namespace std;
 void Student::init(string n, int s, int g, string m) {
 	name = n;
 	startingYear = s;
-	gradutationYear = g;
+	graduationYear = g;
 	addMajors(m);
 }
 
