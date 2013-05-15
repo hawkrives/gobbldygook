@@ -24,8 +24,8 @@ public:
 	void display();
 	
 	friend class Concentration;
-	SpecialRequirement* getSpecialRequirement(vector<SpecialRequirement> reqs, string name);
-	MajorRequirement* getMajorRequirement(vector<MajorRequirement> reqs, string name);
+	SpecialRequirement* getSpecialRequirement(string str);
+	MajorRequirement* getMajorRequirement(string str);
 };
 
 ostream &operator<<(ostream &os, Major &item);

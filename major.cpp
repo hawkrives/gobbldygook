@@ -14,9 +14,9 @@ Major::Major() {
 	department = Department("NONE");
 }
 
-Major::Major(string str) {
+Major::Major(string s) {
 	// cout << "Called Major constructor with string '" << str << "'" << endl;
-	string s = removeStartingText(str, " ");
+	string str = removeStartingText(s, " ");
 	department = Department(str);
 	name = department.getFullName();
 	
@@ -25,8 +25,9 @@ Major::Major(string str) {
 
 	string activeHeading;
 	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
-		string str = *i, leftSide, rightSide;
-		int found;
+		str = *i;
+		string leftSide, rightSide;
+		long found;
 		if (activeHeading.empty())
 			activeHeading = "NAME";
 		found = str.find_first_of("#");
@@ -55,7 +56,7 @@ Major::Major(string str) {
 			}
 			else if (activeHeading == "SETS") {
 				if (str.at(0) == '#' && str.at(1) == '#')
-					getSpecialRequirement(specialRequirements, str)->validSets.push_back(MajorRequirement(str));
+					getSpecialRequirement(str)->validSets.push_back(MajorRequirement(str));
 			}
 		}
 	}
@@ -73,22 +74,22 @@ Major& Major::operator= (const Major &c) {
 	return *this;
 }
 
-MajorRequirement* Major::getMajorRequirement(vector<MajorRequirement> reqs, string name) {
-	cout << "called getSpecialRequirement with '" << name << "'" << endl;
+MajorRequirement* Major::getMajorRequirement(string str) {
+	cout << "called getSpecialRequirement with '" << str << "'" << endl;
 	
-	for (vector<MajorRequirement>::iterator i = reqs.begin(); i != reqs.end(); ++i) {
-		if (i->getName() == name)
+	for (vector<MajorRequirement>::iterator i = requirements.begin(); i != requirements.end(); ++i) {
+		if (i->getName() == str)
 			return &*i;
 	}
 	
 	return 0;
 }
 
-SpecialRequirement* Major::getSpecialRequirement(vector<SpecialRequirement> reqs, string name) {
-	cout << "called getSpecialRequirement with '" << name << "'" << endl;
+SpecialRequirement* Major::getSpecialRequirement(string str) {
+	cout << "called getSpecialRequirement with '" << str << "'" << endl;
 	
-	for (vector<SpecialRequirement>::iterator i = reqs.begin(); i != reqs.end(); ++i) {
-		if (i->getName() == name)
+	for (vector<SpecialRequirement>::iterator i = specialRequirements.begin(); i != specialRequirements.end(); ++i) {
+		if (i->getName() == str)
 			return &*i;
 	}
 	
