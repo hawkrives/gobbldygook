@@ -23,9 +23,16 @@ Major::Major(string s) {
 	string contentsOfFile = getFileContents("majors/" + department.getName() + ".txt");
 	vector<string> record = split(contentsOfFile, '\n');
 
+	init(record);
+
+	name = department.getFullName();
+	record.clear();
+}
+
+void Major::init(vector<string> record) {
 	string activeHeading, activeRequirement;
 	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
-		str = *i;
+		string str = *i;
 		std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 		string leftSide, rightSide;
 		long found;
@@ -38,7 +45,7 @@ Major::Major(string s) {
 			continue;
 		}
 		if (activeHeading == "SPECIAL") {
-		
+			
 		};
 		found = str.find_first_of("=");
 		if (found != string::npos) {
@@ -57,7 +64,7 @@ Major::Major(string s) {
 				else if (activeHeading == "SETS")
 					getSetRequirement(activeRequirement)->setNeeded(x);
 			}
-
+			
 			else if (leftSide == "VALIDCOURSES") {
 				vector<string> validCourseList = split(rightSide, ',');
 				for (vector<string>::iterator idx = validCourseList.begin(); idx != validCourseList.end(); ++idx) {
@@ -71,7 +78,7 @@ Major::Major(string s) {
 					}
 				}
 			}
-
+			
 			else if (leftSide == "VALIDSETS") {
 				SpecialRequirement* sp = getSpecialRequirement(activeRequirement);
 				vector<string> validSetList = split(rightSide, ',');
@@ -104,10 +111,6 @@ Major::Major(string s) {
 			}
 		}
 	}
-
-	name = department.getFullName();
-
-	record.clear();
 }
 
 Major::Major(const Major &c) {
