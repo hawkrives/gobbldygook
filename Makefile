@@ -19,6 +19,7 @@ OBJECTS = data-general.o \
 	data-id.o \
 	data-major.o \
 	data-majorRequirement.o \
+	data-majorSpecialRequirement.o \
 	data-student.o
 
 # $@ takes the label of the rule
