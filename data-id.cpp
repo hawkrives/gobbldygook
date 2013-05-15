@@ -1,7 +1,7 @@
 #include "data-id.hpp"
 
 ID::ID() {
-	init(Department(NONE), 0, "");
+	init(Department(), 0, "");
 }
 ID::ID(const ID& c) {
 	copy(c);
@@ -16,6 +16,7 @@ ID::ID(string str) {
 	string d, d1, d2, n, s;
 	int num;
 	long firstSpace, firstDigit, lastDigit, lastChar;
+	// cout << "Parsed '" << str << "' to get '";
 	// cout << "Called ID::ID() with string '" << str << "'" << endl;
 
 	// Make sure everything is uppercase
@@ -110,11 +111,8 @@ string ID::getSection() {
 	return section;
 }
 
-bool operator== (ID &i1, ID &i2) {
-	bool dept = (i1.departments[0] == i2.departments[0]);
-	bool num  = (i1.number == i2.number);
-	bool sec  = (i1.section == i2.section);
-    return (dept && num && sec);
+bool operator== (const ID &i1, const ID &i2) {
+    return ((i1.departments[0] == i2.departments[0]) && (i1.number == i2.number) && (i1.section == i2.section));
 }
 
 bool operator!= (ID &i1, ID &i2) {

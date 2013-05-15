@@ -34,6 +34,7 @@ Student::Student(string fn) {
 		if (previousHeading.empty())
 			previousHeading = "# NAME";
 		if (str[0] == '#') {
+			std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 			previousHeading = *i;
 			continue;
 		}
@@ -87,7 +88,7 @@ void Student::addCourses(string str) {
 
 bool Student::hasTakenCourse(string str) {
 	bool userHasTaken = false;
-	Course checkAgainst = getCourse(str);
+	const Course checkAgainst = getCourse(str);
 	for (std::vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i)
 		if (*i == checkAgainst)
 			userHasTaken = true;
@@ -148,15 +149,19 @@ ostream& Student::getData(ostream &os) {
 	else
 		os << "while taking:" << endl;
 
-	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i)
-		os << *i << endl;
+	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i) {
+		if (i != courses.end()-1)
+			os << *i << endl;
+		else
+			os << *i;
+	}
 
 	return os;
 }
 
 void Student::display() {
 	cout << *this << endl;
-};
+}
 
 ostream& operator<<(ostream& os, Student& item) {
 	return item.getData(os);

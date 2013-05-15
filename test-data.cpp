@@ -3,7 +3,6 @@
 #include "data-student.hpp"
 using namespace std;
 
-// vector<Course> all_courses;
 map<ID, Course> mapped_courses;
 Student user;
 
@@ -13,14 +12,12 @@ void loadCourses() {
 	getline(infile, str);
 	while (infile.peek() != -1){
 		Course incourse(infile);
-		// all_courses.push_back(incourse);
 		mapped_courses.insert(pair<ID, Course>(incourse.getID(), incourse));
-		// cout << incourse << endl;
 	}
-	// for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c)
-	// 	if (c->getProfessor()[1] == ' ')
-	// 		if (c->getProfessor()[2] == '0' || c->getProfessor()[2] == '1')
-	// 			c->displayMany();
+	for (map<ID, Course>::iterator c = mapped_courses.begin(); c != mapped_courses.end(); ++c)
+		if (c->second.getProfessor()[1] == ' ')
+			if (c->second.getProfessor()[2] == '0' || c->second.getProfessor()[2] == '1')
+				cout << c->second << endl;
 }
 
 void welcome() {
@@ -50,17 +47,18 @@ int main(int argc, const char *argv[]) {
 	// requestCourses();
 
 	// Method 2: Hard-coded file path.
-	Student user("data/user.txt");
+	user = Student("data/user.txt");
 	
 	// Method 3: File path as an argument.
 	// Student user(argv[1]);
 
 	user.display();
+	
+	bool i = ID("CSCI251") == ID("CSCI 251");
+	cout << i << endl;
 
 	cout << "Question: Has the user taken CSCI 251? ";
-	cout << user.hasTakenCourse("CSCI251") << endl;
+	cout << user.hasTakenCourse("csci251") << endl;
 
 	return 0;
 }
-
-// TODO: Add concentrations to Student

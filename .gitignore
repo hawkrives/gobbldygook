@@ -1,5 +1,4 @@
 .DS_Store
-*.xcodeproj/*
 *.o
 *.dSYM/*
 *~
@@ -10,3 +9,5 @@
 # Binaries
 main
 *.tar.gz
+
+*.xcuserstate

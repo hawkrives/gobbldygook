@@ -26,7 +26,7 @@ public:
 	int getNumber();
 	string getSection();
 	
-	friend bool operator== (ID &i1, ID &i2);
+	friend bool operator== (const ID &i1, const ID &i2);
     friend bool operator!= (ID &i1, ID &i2);
 	friend bool operator<  (const ID &i1, const ID &i2);
 	

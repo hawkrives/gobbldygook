@@ -43,9 +43,7 @@ void Course::copy(const Course& c) {
 ///////////
 //////////
 
-Course::Course() {
-
-}
+Course::Course() {}
 
 Course::Course(string str) {
 	init(str);
@@ -127,11 +125,11 @@ Course::Course(istream &is) {
 	else
 		professor = record.at(11);
 
-	title = cleanTitle(title);
+	cleanTitle();
 	record.clear();
 }
 
-string Course::cleanTitle(string title) {
+void Course::cleanTitle() {
 	vector<string> badEndings, badBeginnings;
 
 	badEndings.push_back(" Closed");
@@ -159,8 +157,6 @@ string Course::cleanTitle(string title) {
 		title = removeTrailingText(title, *i);
 	for (vector<string>::iterator i=badBeginnings.begin(); i != badBeginnings.end(); ++i)
 		title = removeStartingText(title, *i);
-
-	return title;
 }
 
 
@@ -203,7 +199,7 @@ string Course::getSection() {
 ///////////
 //////////
 
-bool operator== (Course &c1, Course &c2) {
+bool operator== (const Course &c1, const Course &c2) {
     return (c1.id == c2.id);
 }
 
