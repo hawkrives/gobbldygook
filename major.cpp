@@ -19,6 +19,17 @@ Major::Major(string str) {
 	string s = removeStartingText(str, " ");
 	department = Department(str);
 	name = department.getFullName();
+	
+	
+	string contentsOfFile = getFileContents("majors/" + department.getName() + ".txt");
+	vector<string> record = split(contentsOfFile, '\n');
+	for (vector<string>::iterator i=record.begin(); i != record.end(); ++i) {
+//		*i = removeAllQuotes(*i);
+//		*i = removeTrailingSlashes(*i);
+		cout << *i << endl;
+	}
+		
+	record.clear();
 }
 
 Major::Major(const Major &c) {
