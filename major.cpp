@@ -20,12 +20,12 @@ Major::Major(string str) {
 	department = Department(str);
 	name = department.getFullName();
 	
-	
 	string contentsOfFile = getFileContents("majors/" + department.getName() + ".txt");
 	vector<string> record = split(contentsOfFile, '\n');
 	for (vector<string>::iterator i=record.begin(); i != record.end(); ++i) {
 		cout << *i << endl;
 	}
+	
 		
 	record.clear();
 }

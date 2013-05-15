@@ -7,13 +7,12 @@ vector<Course> all_courses;
 Student user;
 
 void loadCourses() {
-	ifstream infile("data/2012-13-s2-csv.csv");
-	string str; // read in the header line
-	getline(infile, str);
-	while (infile.peek() != -1){
-		Course incourse(infile);
+	string contentsOfFile = getFileContents("data/2012-13-s2-csv.csv");
+	vector<string> record = split(contentsOfFile, '\n');
+	record.erase(record.begin()); // delete the header line
+	for (vector<string>::iterator i=record.begin(); i != record.end(); ++i) {
+		Course incourse(*i);
 		all_courses.push_back(incourse);
-		cout << incourse << endl;
 	}
 	for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c)
 		if (c->getProfessor()[1] == ' ')
