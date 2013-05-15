@@ -37,6 +37,9 @@ Major::Major(string s) {
 			activeHeading = removeStartingText(str, " ");
 			continue;
 		}
+		if (activeHeading == "SPECIAL") {
+		
+		};
 		found = str.find_first_of("=");
 		if (found != string::npos) {
 			leftSide = str.substr(0, found-1);
@@ -56,10 +59,17 @@ Major::Major(string s) {
 			}
 
 			else if (leftSide == "VALIDCOURSES") {
-				MajorRequirement* mr = getMajorRequirement(activeRequirement);
 				vector<string> validCourseList = split(rightSide, ',');
-				for (vector<string>::iterator idx = validCourseList.begin(); idx != validCourseList.end(); ++idx)
-					mr->addCourse(ID(*idx));
+				for (vector<string>::iterator idx = validCourseList.begin(); idx != validCourseList.end(); ++idx) {
+					if (activeHeading == "REQUIREMENTS") {
+						MajorRequirement* mr = getMajorRequirement(activeRequirement);
+						mr->addCourse(ID(*idx));
+					}
+					else if (activeHeading == "SETS") {
+						MajorRequirement* mr = getSetRequirement(activeRequirement);
+						mr->addCourse(ID(*idx));
+					}
+				}
 			}
 
 			else if (leftSide == "VALIDSETS") {
@@ -111,7 +121,7 @@ Major& Major::operator= (const Major &c) {
 
 MajorRequirement* Major::getMajorRequirement(string str) {
 //	cout << "called getMajorRequirement with '" << str << "'" << endl;
-	
+	str = removeStartingText(str, " ");
 	for (vector<MajorRequirement>::iterator i = requirements.begin(); i != requirements.end(); ++i)
 		if (i->getName() == str) {
 			cout << *i << endl;
@@ -123,7 +133,7 @@ MajorRequirement* Major::getMajorRequirement(string str) {
 
 SpecialRequirement* Major::getSpecialRequirement(string str) {
 //	cout << "called getSpecialRequirement with '" << str << "'" << endl;
-	
+	str = removeStartingText(str, " ");
 	for (vector<SpecialRequirement>::iterator i = specialRequirements.begin(); i != specialRequirements.end(); ++i)
 		if (i->getName() == str) {
 			cout << *i << endl;
@@ -135,7 +145,7 @@ SpecialRequirement* Major::getSpecialRequirement(string str) {
 
 MajorRequirement* Major::getSetRequirement(string str) {
 //	cout << "called getSetRequirement with '" << str << "'" << endl;
-
+	str = removeStartingText(str, " ");
 	for (vector<MajorRequirement>::iterator i = setRequirements.begin(); i != setRequirements.end(); ++i)
 		if (i->getName() == str) {
 			cout << *i << endl;
