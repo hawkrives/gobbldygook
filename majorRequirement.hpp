@@ -2,7 +2,7 @@
 #define __Data_majorRequirement__
 
 #include "general.hpp"
-#include "id.hpp"
+#include "requirement.hpp"
 using namespace std;
 
 class MajorRequirement {
