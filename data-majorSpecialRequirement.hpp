@@ -7,7 +7,7 @@ using namespace std;
 
 class MajorSpecialRequirement {
 private:
-  string name;
+	string name;
 	int needed;
 	int has;
 	bool satisfied;
@@ -15,6 +15,9 @@ private:
 public:
 	bool fulfillsRequirement(const MajorRequirement& c);
 	void incrementHas();
+	
+	friend bool operator== (const MajorSpecialRequirement &d1, const MajorSpecialRequirement &d2);
+	friend bool operator!= (MajorSpecialRequirement &d1, MajorSpecialRequirement &d2);
 };
 
 #endif

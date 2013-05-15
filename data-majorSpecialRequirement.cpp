@@ -16,3 +16,11 @@ void MajorSpecialRequirement::incrementHas() {
 	else
 	  satisfied = false;
 }
+
+bool operator== (const MajorSpecialRequirement &msr1, const MajorSpecialRequirement &msr2) {
+    return (msr1.name == msr2.name);
+}
+
+bool operator!= (MajorSpecialRequirement &msr1, MajorSpecialRequirement &msr2) {
+    return !(msr1 == msr2);
+}
