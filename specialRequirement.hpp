@@ -2,6 +2,7 @@
 #define __Data_majorSpecialRequirement__
 
 #include "general.hpp"
+#include "requirement.hpp"
 #include "majorRequirement.hpp"
 using namespace std;
 
