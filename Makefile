@@ -12,15 +12,16 @@ MACOSX_DEFINE = -DMACOSX -I/sw/include
 LIBS = -I/usr/common/include
 endif
 
-OBJECTS = data-general.o \
-	data-concentration.o \
-	data-course.o \
-	data-department.o \
-	data-id.o \
-	data-major.o \
-	data-majorRequirement.o \
-	data-majorSpecialRequirement.o \
-	data-student.o
+OBJECTS = general.o \
+	concentration.o \
+	course.o \
+	department.o \
+	id.o \
+	major.o \
+	majorRequirement.o \
+	requirement.o \
+	specialRequirement.o \
+	student.o
 
 # $@ takes the label of the rule
 # $< takes the thing to the right of the label
