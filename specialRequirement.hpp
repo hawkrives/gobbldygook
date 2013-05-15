@@ -7,7 +7,7 @@
 using namespace std;
 
 class SpecialRequirement : public Requirement {
-private:
+public: // todo: make private
 	void init(string n);
 	void copy(const SpecialRequirement &c);
 	vector<MajorRequirement> validSets;

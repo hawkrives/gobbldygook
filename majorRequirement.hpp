@@ -6,7 +6,7 @@
 using namespace std;
 
 class MajorRequirement : public Requirement {
-private:
+public: //todo: make private
 	void init(string n);
 	void copy(const MajorRequirement &c);
 	vector<ID> validCourses;
@@ -19,6 +19,7 @@ public:
 	
 	bool fulfillsRequirement(const ID& c);
 	void addCourse(const ID& c);
+	bool checkCourseValidity(const ID& c);
 	
 	friend bool operator== (const MajorRequirement &l, const MajorRequirement&r);
 	friend bool operator!= (const MajorRequirement &l, const MajorRequirement &r);

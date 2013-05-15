@@ -6,7 +6,7 @@
 using namespace std;
 
 class Requirement {
-protected:
+public: //toto make protected
 	string name;
 	int needed;
 	int has;

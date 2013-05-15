@@ -22,6 +22,7 @@ public:
 	Student(string n, string s, string e, string m);
 	Student(string fn);
 
+	void updateStanding();
 	bool hasTakenCourse(string str);
 	void addCourse(const Course& c);
 	void addCourses(string str);

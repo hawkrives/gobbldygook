@@ -30,6 +30,14 @@ bool MajorRequirement::fulfillsRequirement(const ID& c) {
  	return false;
 }
 
+
+bool MajorRequirement::checkCourseValidity(const ID& c) {
+	for (vector<ID>::iterator i = validCourses.begin(); i != validCourses.end(); ++i) {
+		if (*i == c)
+			return true;
+	}
+	return false;
+}
 void MajorRequirement::addCourse(const ID& c) {
 	validCourses.push_back(c);
 }
