@@ -62,6 +62,10 @@
 		00707B1417431D4F000F5AF9 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		00707B1517431D4F000F5AF9 /* test-data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-data.cpp"; sourceTree = "<group>"; };
 		00707B1A17431D5A000F5AF9 /* nomake */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nomake; sourceTree = BUILT_PRODUCTS_DIR; };
+		00707B2E17432094000F5AF9 /* AsianStudies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AsianStudies.txt; sourceTree = "<group>"; };
+		00707B2F17432094000F5AF9 /* Bio.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bio.txt; sourceTree = "<group>"; };
+		00707B3017432094000F5AF9 /* CompSci.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CompSci.txt; sourceTree = "<group>"; };
+		00707B3117432094000F5AF9 /* Stats.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Stats.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,10 @@
 		00707B1217431D4F000F5AF9 /* majors */ = {
 			isa = PBXGroup;
 			children = (
+				00707B2E17432094000F5AF9 /* AsianStudies.txt */,
+				00707B2F17432094000F5AF9 /* Bio.txt */,
+				00707B3017432094000F5AF9 /* CompSci.txt */,
+				00707B3117432094000F5AF9 /* Stats.txt */,
 				00707B1317431D4F000F5AF9 /* math.txt */,
 			);
 			path = majors;
