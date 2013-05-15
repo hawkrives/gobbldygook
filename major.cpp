@@ -9,7 +9,7 @@ void Major::copy(const Major &c) {
 }
 
 Major::Major() {
-	cout << "Called Major constructor with nothing." << endl;
+	// cout << "Called Major constructor with nothing." << endl;
 	name = "None";
 	department = Department("NONE");
 }
@@ -127,11 +127,8 @@ MajorRequirement* Major::getMajorRequirement(string str) {
 //	cout << "called getMajorRequirement with '" << str << "'" << endl;
 	str = removeStartingText(str, " ");
 	for (vector<MajorRequirement>::iterator i = requirements.begin(); i != requirements.end(); ++i)
-		if (i->getName() == str) {
-			cout << *i << endl;
+		if (i->getName() == str)
 			return &*i;
-		}
-	
 	return 0;
 }
 
@@ -139,11 +136,8 @@ SpecialRequirement* Major::getSpecialRequirement(string str) {
 //	cout << "called getSpecialRequirement with '" << str << "'" << endl;
 	str = removeStartingText(str, " ");
 	for (vector<SpecialRequirement>::iterator i = specialRequirements.begin(); i != specialRequirements.end(); ++i)
-		if (i->getName() == str) {
-			cout << *i << endl;
+		if (i->getName() == str)
 			return &*i;
-		}
-	
 	return 0;
 }
 
@@ -151,11 +145,8 @@ MajorRequirement* Major::getSetRequirement(string str) {
 //	cout << "called getSetRequirement with '" << str << "'" << endl;
 	str = removeStartingText(str, " ");
 	for (vector<MajorRequirement>::iterator i = setRequirements.begin(); i != setRequirements.end(); ++i)
-		if (i->getName() == str) {
-			cout << *i << endl;
+		if (i->getName() == str)
 			return &*i;
-		}
-
 	return 0;
 }
 
