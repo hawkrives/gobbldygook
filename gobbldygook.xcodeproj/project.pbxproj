@@ -6,6 +6,18 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		00707B2417431DC8000F5AF9 /* data-majorSpecialRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0E17431D4F000F5AF9 /* data-majorSpecialRequirement.cpp */; };
+		00707B2517431DCC000F5AF9 /* data-majorRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0C17431D4F000F5AF9 /* data-majorRequirement.cpp */; };
+		00707B2617431DD0000F5AF9 /* data-major.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0A17431D4F000F5AF9 /* data-major.cpp */; };
+		00707B2717431DD3000F5AF9 /* data-id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0817431D4F000F5AF9 /* data-id.cpp */; };
+		00707B2817431DDB000F5AF9 /* data-general.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0617431D4F000F5AF9 /* data-general.cpp */; };
+		00707B2917431DDF000F5AF9 /* data-department.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0417431D4F000F5AF9 /* data-department.cpp */; };
+		00707B2A17431DE2000F5AF9 /* data-concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0017431D4F000F5AF9 /* data-concentration.cpp */; };
+		00707B2B17431DE2000F5AF9 /* data-course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0217431D4F000F5AF9 /* data-course.cpp */; };
+		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		00707B1817431D5A000F5AF9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -190,6 +202,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00707B2417431DC8000F5AF9 /* data-majorSpecialRequirement.cpp in Sources */,
+				00707B2517431DCC000F5AF9 /* data-majorRequirement.cpp in Sources */,
+				00707B2617431DD0000F5AF9 /* data-major.cpp in Sources */,
+				00707B2717431DD3000F5AF9 /* data-id.cpp in Sources */,
+				00707B2817431DDB000F5AF9 /* data-general.cpp in Sources */,
+				00707B2917431DDF000F5AF9 /* data-department.cpp in Sources */,
+				00707B2A17431DE2000F5AF9 /* data-concentration.cpp in Sources */,
+				00707B2B17431DE2000F5AF9 /* data-course.cpp in Sources */,
+				00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +337,7 @@
 				00707B2317431D5A000F5AF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
