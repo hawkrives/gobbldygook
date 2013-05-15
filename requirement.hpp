@@ -21,6 +21,8 @@ public:
 	Requirement operator= (const Requirement &c);
 	
 	void incrementHas();
+	
+	string getName();
 
 	friend bool operator== (const Requirement &l, const Requirement &r);
 	friend bool operator!= (Requirement &l, Requirement &r);

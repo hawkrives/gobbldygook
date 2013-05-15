@@ -12,16 +12,18 @@ private:
 	void copy(const SpecialRequirement &c);
 	vector<MajorRequirement> validSets;
 public:
-//	SpecialRequirement();
-//	SpecialRequirement(const SpecialRequirement &c);
-//	SpecialRequirement operator= (const SpecialRequirement &c);
+	SpecialRequirement();
+	SpecialRequirement(string str);
+	SpecialRequirement(const SpecialRequirement &c);
+	SpecialRequirement operator= (const SpecialRequirement &c);
 	bool fulfillsRequirement(const MajorRequirement& c);
 	
 	friend bool operator== (const SpecialRequirement &l, const SpecialRequirement &r);
 	friend bool operator!= (const SpecialRequirement &l, const SpecialRequirement &r);
 	friend bool operator== (const SpecialRequirement &l, const Requirement &r);
 	friend bool operator!= (const SpecialRequirement &l, const Requirement &r);
-
+	
+	friend class Major;
 };
 
 #endif

@@ -1,6 +1,13 @@
 #include "specialRequirement.hpp"
 using namespace std;
 
+SpecialRequirement::SpecialRequirement() {}
+SpecialRequirement::SpecialRequirement(string str) {}
+SpecialRequirement::SpecialRequirement(const SpecialRequirement &c) {}
+SpecialRequirement SpecialRequirement::operator= (const SpecialRequirement &c) {
+	return *this;
+}
+
 bool SpecialRequirement::fulfillsRequirement(const MajorRequirement& c) {
  	for (vector<MajorRequirement>::iterator i=validSets.begin(); i!=validSets.end(); ++i) {
  		if (*i == c)
@@ -26,3 +33,4 @@ bool operator== (const SpecialRequirement &l, const Requirement &r) {
 bool operator!= (const SpecialRequirement &l, const Requirement &r) {
 	return !(l == r);
 }
+

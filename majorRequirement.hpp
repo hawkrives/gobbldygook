@@ -11,9 +11,10 @@ private:
 	void copy(const MajorRequirement &c);
 	vector<ID> validCourses;
 public:
-//	MajorRequirement();
-//	MajorRequirement(const MajorRequirement &c);
-//	MajorRequirement operator= (const MajorRequirement &c);
+	MajorRequirement();
+	MajorRequirement(string str);
+	MajorRequirement(const MajorRequirement &c);
+	MajorRequirement operator= (const MajorRequirement &c);
 	
 	bool fulfillsRequirement(const ID& c);
 	

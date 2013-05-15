@@ -1,5 +1,6 @@
 #include "requirement.hpp"
 
+Requirement::Requirement() {}
 
 Requirement::Requirement(const Requirement &c) {
 	copy(c);
@@ -31,6 +32,10 @@ void Requirement::incrementHas() {
 		satisfied = true;
 	else
 		satisfied = false;
+}
+
+string Requirement::getName() {
+	return name;
 }
 
 bool operator== (const Requirement &l, const Requirement &r) {

@@ -1,6 +1,18 @@
 #include "majorRequirement.hpp"
 using namespace std;
 
+void MajorRequirement::init() {}
+
+MajorRequirement::MajorRequirement() {
+	init();
+}
+MajorRequirement::MajorRequirement(string str) {
+}
+MajorRequirement::MajorRequirement(const MajorRequirement &c) {}
+MajorRequirement MajorRequirement::operator= (const MajorRequirement &c) {
+	return *this;
+}
+
 bool MajorRequirement::fulfillsRequirement(const ID& c) {
  	for (vector<ID>::iterator i=validCourses.begin(); i!=validCourses.end(); ++i) {
  		if (*i==c)
