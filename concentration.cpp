@@ -96,6 +96,8 @@ Concentration::Concentration(string s) : Major() {
 		}
 	}
 	
+	name = department.getFullName();
+	
 	record.clear();
 }
 
