@@ -52,7 +52,7 @@ int main(int argc, const char *argv[]) {
 	// Method 3: File path as an argument.
 	// Student user(argv[1]);
 
-//	user.display();
+	user.display();
 //	Major m("MATH");
 //	ID id("Math 120");
 //	ID xd = id;
