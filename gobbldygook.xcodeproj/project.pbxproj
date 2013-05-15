@@ -16,6 +16,7 @@
 		00707B2A17431DE2000F5AF9 /* data-concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0017431D4F000F5AF9 /* data-concentration.cpp */; };
 		00707B2B17431DE2000F5AF9 /* data-course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0217431D4F000F5AF9 /* data-course.cpp */; };
 		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; };
+		00707B2D17431FAD000F5AF9 /* data-student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1017431D4F000F5AF9 /* data-student.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -211,6 +212,7 @@
 				00707B2A17431DE2000F5AF9 /* data-concentration.cpp in Sources */,
 				00707B2B17431DE2000F5AF9 /* data-course.cpp in Sources */,
 				00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */,
+				00707B2D17431FAD000F5AF9 /* data-student.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
