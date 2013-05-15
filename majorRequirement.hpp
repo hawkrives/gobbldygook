@@ -5,16 +5,22 @@
 #include "requirement.hpp"
 using namespace std;
 
-class MajorRequirement {
+class MajorRequirement : public Requirement {
 private:
-  string name;
-	int needed;
-	int has;
-	bool satisfied;
+	void init();
+	void copy(const MajorRequirement &c);
 	vector<ID> validCourses;
 public:
+//	MajorRequirement();
+//	MajorRequirement(const MajorRequirement &c);
+//	MajorRequirement operator= (const MajorRequirement &c);
+	
 	bool fulfillsRequirement(const ID& c);
-	void incrementHas();
+	
+	friend bool operator== (const MajorRequirement &l, const MajorRequirement&r);
+	friend bool operator!= (const MajorRequirement &l, const MajorRequirement &r);
+	friend bool operator== (const MajorRequirement &l, const Requirement &r);
+	friend bool operator!= (const MajorRequirement &l, const Requirement &r);
 };
 
 #endif
