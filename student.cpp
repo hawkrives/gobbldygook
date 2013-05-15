@@ -122,7 +122,7 @@ ostream& Student::getData(ostream &os) {
 			if (concentrations.size() == 1) {
 				os << *i << " ";
 			}
-			if (concentrations.size() == 2) {
+			else if (concentrations.size() == 2) {
 				os << *i;
 				if (i != concentrations.end()-1)
 					os << " and ";
