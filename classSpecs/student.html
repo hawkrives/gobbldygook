@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+   This document was automatically created using an XSLT stylesheet by Aubrey Barnard.
+   See www.stolaf.edu/people/barnard/xml/xml.html for additional information.
+   -->
+<html xmlns="http://www.w3.org/TR/xhtml1/strict">
+<head>
+<title>The Student Class Specification</title>
+</head>
+<body bgcolor="white">
+<div class="specification">
+<center>
+<p>
+<big>
+<big>
+<big>
+<big>The Student Class Specification</big>
+</big>
+</big>
+</big>
+</p>
+</center>
+<center>
+<p>
+<big>
+<big>
+<big>This class models a student at St Olaf College</big>
+</big>
+</big>
+</p>
+</center>
+<center>
+<p>Xandra Best. Wednesday, May 15, 2013</p>
+</center>
+<br/>
+<hr/>
+<br/>
+<br/>
+
+<dl class="class-spec">
+<p>
+<dt>
+<big>
+<strong>CLASS <code> Student</code>
+</strong>
+</big>
+</dt>
+<dd>
+
+<dl class="inheritance">
+<p>
+<dt>
+<strong>No superclass.</strong>
+</dt>
+<dd/>
+</p>
+</dl>
+
+<dl class="variables">
+<p>
+<dt>
+<strong>State variables:</strong>
+</dt>
+<dd>
+<dl>
+<p>
+<dt class="var">
+<code>  vector of Major majors</code>
+</dt>
+<dd>The student's majors.</dd>
+</p>
+<p>
+<dt class="var">
+<code>  vector of Concentration concentrations</code>
+</dt>
+<dd>The student's concentrations.</dd>
+</p>
+<p>
+<dt class="var">
+<code>  vector of Course courses</code>
+</dt>
+<dd>The courses taken by a student.</dd>
+</p>
+
+</dl>
+</dd>
+</p>
+</dl>
+
+<dl class="constructors-list">
+<p>
+<dt>
+<strong>Constructors:</strong>
+</dt>
+<dd>
+<dl>
+
+<p>
+<dt class="constructor">
+<code> Student</code>
+</dt>
+<dd>
+<dl>
+Default constructor.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>This instance of Student is initialized by calling init, where n="", s=2000, g=2004, m="".</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="constructor">
+<code> Student</code>
+</dt>
+<dd>
+<dl>
+Manual constructor.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string n</code>
+</dt>
+<dd>The name of the student.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>int s</code>
+</dt>
+<dd>The starting year of the student.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>int e</code>
+</dt>
+<dd>The graduating year of the student.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>string m</code>
+</dt>
+<dd>The majors of the student</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>This instance of Student is initialized by calling init, where n=n, s=s, g=e, m=m.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="constructor">
+<code> Student</code>
+</dt>
+<dd>
+<dl>
+Read-in constructor.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string fn</code>
+</dt>
+<dd>File name.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>This instance of Student using data from file.</dd>
+</p>
+</dl>
+</dd>
+</p>
+</dl>
+</dd>
+</p>
+</dl>
+
+<dl class="methods-list">
+<p>
+<dt>
+<strong>Methods:</strong>
+</dt>
+<dd>
+<dl>
+
+<p>
+<dt class="method">
+<code>private  init</code>
+</dt>
+<dd>
+<dl>
+Initializes Student object.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string n</code>
+</dt>
+<dd>The name of the student.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>int s</code>
+</dt>
+<dd>The starting year of the student.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>int g</code>
+</dt>
+<dd>The graduation year of the student.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>string m</code>
+</dt>
+<dd>The majors of the student.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Student object is initialized with name=n, startingYear=s, graduationYear=g, and majors is filled in with m. </dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> bool hasTakenCourse</code>
+</dt>
+<dd>
+<dl>
+Checks to see if student has taken a given course
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>The course to be checked.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Bool representing whether the student has taken the course.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  addCourse</code>
+</dt>
+<dd>
+<dl>
+Add a course to courses student has taken.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Course c</code>
+</dt>
+<dd>A reference to a course.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>The given course is added to state variable courses.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  addCourses</code>
+</dt>
+<dd>
+<dl>
+Adds multiple courses to courses student has taken.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>Comma separated list of courses.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>The given courses are added to state variable courses.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  addMajor</code>
+</dt>
+<dd>
+<dl>
+Add a major to student's majors
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Major m</code>
+</dt>
+<dd>A reference to a major.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>The given major is added to state variable majors.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  addMajors</code>
+</dt>
+<dd>
+<dl>
+Adds multiple majors to student's majors.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>Comma separated list of majors.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>The given majors are added to state variable majors.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  addConcentration</code>
+</dt>
+<dd>
+<dl>
+Add a concentration to student's concentrations
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Concentration m</code>
+</dt>
+<dd>A reference to a concentration.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>The given concentration is added to state variable concentrations.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  addConcentrations</code>
+</dt>
+<dd>
+<dl>
+Adds multiple concentration to student's concentrations.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>Comma separated list of concentrations.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>The given concentrations are added to state variable concentrations.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> ostream getData</code>
+</dt>
+<dd>
+<dl>
+Relays data about students.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>ostream os</code>
+</dt>
+<dd>reference to ostream.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Reference to ostream detailing student's majors, concentrations, and courses.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  display</code>
+</dt>
+<dd>
+<dl>
+displays data about students.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>displays student's majors, concentrations, and courses.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+</dl>
+</dd>
+</p>
+</dl>
+
+</dd>
+<dt>
+<hr/>
+</dt>
+<dd/>
+</p>
+</dl>
+
+</div>
+</body>
+</html>
