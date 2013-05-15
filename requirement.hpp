@@ -6,7 +6,7 @@
 using namespace std;
 
 class Requirement {
-private:
+protected:
 	string name;
 	int needed;
 	int has;
@@ -34,6 +34,11 @@ public:
 
 	friend bool operator== (const Requirement &l, const Requirement &r);
 	friend bool operator!= (Requirement &l, Requirement &r);
+	
+	virtual ostream& getData(ostream &os);
+	virtual void display();
 };
+
+ostream &operator<<(ostream &os, Requirement &item);
 
 #endif /* defined(__gobbldygook__requirement__) */

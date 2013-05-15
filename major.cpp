@@ -45,14 +45,28 @@ Major::Major(string s) {
 				name = rightSide;
 			else if (leftSide == "DEPARTMENT")
 				department = Department(rightSide);
-			else if (leftSide == "NEEDED")
-				getMajorRequirement(activeRequirement)->setNeeded(stringToInt(rightSide));
+			else if (leftSide == "NEEDED") {
+				int x = stringToInt(rightSide);
+				if (activeHeading == "REQUIREMENTS")
+					getMajorRequirement(activeRequirement)->setNeeded(x);
+				else if (activeHeading == "SPECIAL")
+					getSpecialRequirement(activeRequirement)->setNeeded(x);
+				else if (activeHeading == "SETS")
+					getSetRequirement(activeRequirement)->setNeeded(x);
+			}
+
 			else if (leftSide == "VALIDCOURSES") {
 				MajorRequirement* mr = getMajorRequirement(activeRequirement);
-
 				vector<string> validCourseList = split(rightSide, ',');
 				for (vector<string>::iterator idx = validCourseList.begin(); idx != validCourseList.end(); ++idx)
 					mr->addCourse(ID(*idx));
+			}
+
+			else if (leftSide == "VALIDSETS") {
+				SpecialRequirement* sp = getSpecialRequirement(activeRequirement);
+				vector<string> validSetList = split(rightSide, ',');
+				for (vector<string>::iterator idx = validSetList.begin(); idx != validSetList.end(); ++idx)
+					sp->addSet(*getSetRequirement(*idx));
 			}
 		}
 		else if (str != "") {
@@ -67,21 +81,21 @@ Major::Major(string s) {
 					requirements.push_back(m);
 					activeRequirement = str;
 				}
-				else if (activeHeading == "SPECIAL") {
-					specialRequirements.push_back(SpecialRequirement(str));
-					activeRequirement = str;
-				}
 				else if (activeHeading == "SETS") {
-					getSpecialRequirement(str)->validSets.push_back(MajorRequirement(str));
+					MajorRequirement m = MajorRequirement(str);
+					setRequirements.push_back(m);
 					activeRequirement = str;
 				}
-			}
-			else if (str.find("=")) {
-				
+				else if (activeHeading == "SPECIAL") {
+					SpecialRequirement special = SpecialRequirement(str);
+					specialRequirements.push_back(special);
+					activeRequirement = str;
+				}
 			}
 		}
 	}
-		
+	getMajorRequirement("CALCI")->incrementHas();
+	cout << getMajorRequirement("CALCI") << endl;
 	record.clear();
 }
 
@@ -96,24 +110,38 @@ Major& Major::operator= (const Major &c) {
 }
 
 MajorRequirement* Major::getMajorRequirement(string str) {
-	cout << "called getSpecialRequirement with '" << str << "'" << endl;
+//	cout << "called getMajorRequirement with '" << str << "'" << endl;
 	
-	for (vector<MajorRequirement>::iterator i = requirements.begin(); i != requirements.end(); ++i) {
-		if (i->getName() == str)
+	for (vector<MajorRequirement>::iterator i = requirements.begin(); i != requirements.end(); ++i)
+		if (i->getName() == str) {
+			cout << *i << endl;
 			return &*i;
-	}
+		}
 	
 	return 0;
 }
 
 SpecialRequirement* Major::getSpecialRequirement(string str) {
-	cout << "called getSpecialRequirement with '" << str << "'" << endl;
+//	cout << "called getSpecialRequirement with '" << str << "'" << endl;
 	
-	for (vector<SpecialRequirement>::iterator i = specialRequirements.begin(); i != specialRequirements.end(); ++i) {
-		if (i->getName() == str)
+	for (vector<SpecialRequirement>::iterator i = specialRequirements.begin(); i != specialRequirements.end(); ++i)
+		if (i->getName() == str) {
+			cout << *i << endl;
 			return &*i;
-	}
+		}
 	
+	return 0;
+}
+
+MajorRequirement* Major::getSetRequirement(string str) {
+//	cout << "called getSetRequirement with '" << str << "'" << endl;
+
+	for (vector<MajorRequirement>::iterator i = setRequirements.begin(); i != setRequirements.end(); ++i)
+		if (i->getName() == str) {
+			cout << *i << endl;
+			return &*i;
+		}
+
 	return 0;
 }
 

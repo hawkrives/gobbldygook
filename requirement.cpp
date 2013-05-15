@@ -89,3 +89,23 @@ bool operator== (const Requirement &l, const Requirement &r) {
 bool operator!= (Requirement &l, Requirement &r) {
     return !(l == r);
 }
+
+ostream& Requirement::getData(ostream &os) {
+	os << name;
+	os << " needs " << needed;
+	os << ", but has " << has;
+	os << ", therefore it is ";
+	if (satisfied)
+		os << "satisfied.";
+	else
+		os << "not satisfied.";
+	return os;
+}
+
+ostream &operator<<(ostream &os, Requirement &item) {
+	return item.getData(os);
+}
+
+void Requirement::display() {
+	cout << *this << endl;
+}

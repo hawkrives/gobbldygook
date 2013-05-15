@@ -24,6 +24,11 @@ public:
 	friend bool operator!= (const MajorRequirement &l, const MajorRequirement &r);
 	friend bool operator== (const MajorRequirement &l, const Requirement &r);
 	friend bool operator!= (const MajorRequirement &l, const Requirement &r);
+
+	ostream& getData(ostream &os);
+	void display();
 };
+
+ostream &operator<<(ostream &os, MajorRequirement &item);
 
 #endif

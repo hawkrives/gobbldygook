@@ -13,6 +13,7 @@ private:
 	Department department;
 	vector<MajorRequirement> requirements;
 	vector<SpecialRequirement> specialRequirements;
+	vector<MajorRequirement> setRequirements;
 	void copy(const Major &c);
 public:
 	Major();
@@ -26,6 +27,7 @@ public:
 	friend class Concentration;
 	SpecialRequirement* getSpecialRequirement(string str);
 	MajorRequirement* getMajorRequirement(string str);
+	MajorRequirement* getSetRequirement(string str);
 };
 
 ostream &operator<<(ostream &os, Major &item);
