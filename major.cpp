@@ -1,4 +1,4 @@
-#include "data-major.hpp"
+#include "major.hpp"
 using namespace std;
 
 void Major::copy(const Major &c) {

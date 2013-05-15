@@ -1,9 +1,9 @@
 #ifndef __Data_course__
 #define __Data_course__
 
-#include "data-general.hpp"
-#include "data-major.hpp"
-#include "data-id.hpp"
+#include "general.hpp"
+#include "major.hpp"
+#include "id.hpp"
 using namespace std;
 
 class Course {

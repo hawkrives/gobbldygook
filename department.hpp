@@ -1,7 +1,7 @@
 #ifndef __Data_department__
 #define __Data_department__
 
-#include "data-general.hpp"
+#include "general.hpp"
 using namespace std;
 
 class Department {

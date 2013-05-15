@@ -1,4 +1,4 @@
-#include "data-concentration.hpp"
+#include "concentration.hpp"
 using namespace std;
 
 Concentration::Concentration() : Major() {

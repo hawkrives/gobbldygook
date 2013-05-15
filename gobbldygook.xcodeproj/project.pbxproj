@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00707B2417431DC8000F5AF9 /* data-majorSpecialRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0E17431D4F000F5AF9 /* data-majorSpecialRequirement.cpp */; };
-		00707B2517431DCC000F5AF9 /* data-majorRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0C17431D4F000F5AF9 /* data-majorRequirement.cpp */; };
-		00707B2617431DD0000F5AF9 /* data-major.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0A17431D4F000F5AF9 /* data-major.cpp */; };
-		00707B2717431DD3000F5AF9 /* data-id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0817431D4F000F5AF9 /* data-id.cpp */; };
-		00707B2817431DDB000F5AF9 /* data-general.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0617431D4F000F5AF9 /* data-general.cpp */; };
-		00707B2917431DDF000F5AF9 /* data-department.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0417431D4F000F5AF9 /* data-department.cpp */; };
-		00707B2A17431DE2000F5AF9 /* data-concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0017431D4F000F5AF9 /* data-concentration.cpp */; };
-		00707B2B17431DE2000F5AF9 /* data-course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B0217431D4F000F5AF9 /* data-course.cpp */; };
 		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; };
-		00707B2D17431FAD000F5AF9 /* data-student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1017431D4F000F5AF9 /* data-student.cpp */; };
+		00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B32174321C2000F5AF9 /* concentration.cpp */; };
+		00707B3B174321C2000F5AF9 /* course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B34174321C2000F5AF9 /* course.cpp */; };
+		00707B3C174321C2000F5AF9 /* department.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B36174321C2000F5AF9 /* department.cpp */; };
+		00707B3D174321C2000F5AF9 /* general.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B38174321C2000F5AF9 /* general.cpp */; };
+		00707B48174321D1000F5AF9 /* id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B3E174321D1000F5AF9 /* id.cpp */; };
+		00707B49174321D1000F5AF9 /* major.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B40174321D1000F5AF9 /* major.cpp */; };
+		00707B4A174321D1000F5AF9 /* majorRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B42174321D1000F5AF9 /* majorRequirement.cpp */; };
+		00707B4B174321D1000F5AF9 /* specialRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B44174321D1000F5AF9 /* specialRequirement.cpp */; };
+		00707B4C174321D1000F5AF9 /* student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B46174321D1000F5AF9 /* student.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,24 +40,6 @@
 		00707AFD17431D4F000F5AF9 /* nygren.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nygren.txt; sourceTree = "<group>"; };
 		00707AFE17431D4F000F5AF9 /* rowley.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rowley.txt; sourceTree = "<group>"; };
 		00707AFF17431D4F000F5AF9 /* user.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = user.txt; sourceTree = "<group>"; };
-		00707B0017431D4F000F5AF9 /* data-concentration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-concentration.cpp"; sourceTree = "<group>"; };
-		00707B0117431D4F000F5AF9 /* data-concentration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "data-concentration.hpp"; sourceTree = "<group>"; };
-		00707B0217431D4F000F5AF9 /* data-course.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-course.cpp"; sourceTree = "<group>"; };
-		00707B0317431D4F000F5AF9 /* data-course.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "data-course.hpp"; sourceTree = "<group>"; };
-		00707B0417431D4F000F5AF9 /* data-department.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-department.cpp"; sourceTree = "<group>"; };
-		00707B0517431D4F000F5AF9 /* data-department.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "data-department.hpp"; sourceTree = "<group>"; };
-		00707B0617431D4F000F5AF9 /* data-general.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-general.cpp"; sourceTree = "<group>"; };
-		00707B0717431D4F000F5AF9 /* data-general.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "data-general.hpp"; sourceTree = "<group>"; };
-		00707B0817431D4F000F5AF9 /* data-id.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-id.cpp"; sourceTree = "<group>"; };
-		00707B0917431D4F000F5AF9 /* data-id.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "data-id.hpp"; sourceTree = "<group>"; };
-		00707B0A17431D4F000F5AF9 /* data-major.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-major.cpp"; sourceTree = "<group>"; };
-		00707B0B17431D4F000F5AF9 /* data-major.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "data-major.hpp"; sourceTree = "<group>"; };
-		00707B0C17431D4F000F5AF9 /* data-majorRequirement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-majorRequirement.cpp"; sourceTree = "<group>"; };
-		00707B0D17431D4F000F5AF9 /* data-majorRequirement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "data-majorRequirement.hpp"; sourceTree = "<group>"; };
-		00707B0E17431D4F000F5AF9 /* data-majorSpecialRequirement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-majorSpecialRequirement.cpp"; sourceTree = "<group>"; };
-		00707B0F17431D4F000F5AF9 /* data-majorSpecialRequirement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "data-majorSpecialRequirement.hpp"; sourceTree = "<group>"; };
-		00707B1017431D4F000F5AF9 /* data-student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-student.cpp"; sourceTree = "<group>"; };
-		00707B1117431D4F000F5AF9 /* data-student.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "data-student.hpp"; sourceTree = "<group>"; };
 		00707B1317431D4F000F5AF9 /* math.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = math.txt; sourceTree = "<group>"; };
 		00707B1417431D4F000F5AF9 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		00707B1517431D4F000F5AF9 /* test-data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-data.cpp"; sourceTree = "<group>"; };
@@ -66,6 +48,24 @@
 		00707B2F17432094000F5AF9 /* Bio.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bio.txt; sourceTree = "<group>"; };
 		00707B3017432094000F5AF9 /* CompSci.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CompSci.txt; sourceTree = "<group>"; };
 		00707B3117432094000F5AF9 /* Stats.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Stats.txt; sourceTree = "<group>"; };
+		00707B32174321C2000F5AF9 /* concentration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = concentration.cpp; sourceTree = "<group>"; };
+		00707B33174321C2000F5AF9 /* concentration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = concentration.hpp; sourceTree = "<group>"; };
+		00707B34174321C2000F5AF9 /* course.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = course.cpp; sourceTree = "<group>"; };
+		00707B35174321C2000F5AF9 /* course.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = course.hpp; sourceTree = "<group>"; };
+		00707B36174321C2000F5AF9 /* department.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = department.cpp; sourceTree = "<group>"; };
+		00707B37174321C2000F5AF9 /* department.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = department.hpp; sourceTree = "<group>"; };
+		00707B38174321C2000F5AF9 /* general.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = general.cpp; sourceTree = "<group>"; };
+		00707B39174321C2000F5AF9 /* general.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = general.hpp; sourceTree = "<group>"; };
+		00707B3E174321D1000F5AF9 /* id.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = id.cpp; sourceTree = "<group>"; };
+		00707B3F174321D1000F5AF9 /* id.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = id.hpp; sourceTree = "<group>"; };
+		00707B40174321D1000F5AF9 /* major.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = major.cpp; sourceTree = "<group>"; };
+		00707B41174321D1000F5AF9 /* major.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = major.hpp; sourceTree = "<group>"; };
+		00707B42174321D1000F5AF9 /* majorRequirement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = majorRequirement.cpp; sourceTree = "<group>"; };
+		00707B43174321D1000F5AF9 /* majorRequirement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = majorRequirement.hpp; sourceTree = "<group>"; };
+		00707B44174321D1000F5AF9 /* specialRequirement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = specialRequirement.cpp; sourceTree = "<group>"; };
+		00707B45174321D1000F5AF9 /* specialRequirement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = specialRequirement.hpp; sourceTree = "<group>"; };
+		00707B46174321D1000F5AF9 /* student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = student.cpp; sourceTree = "<group>"; };
+		00707B47174321D1000F5AF9 /* student.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = student.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,25 +82,25 @@
 		002F5D6817431CDE00A4D0A0 = {
 			isa = PBXGroup;
 			children = (
+				00707B3E174321D1000F5AF9 /* id.cpp */,
+				00707B3F174321D1000F5AF9 /* id.hpp */,
+				00707B40174321D1000F5AF9 /* major.cpp */,
+				00707B41174321D1000F5AF9 /* major.hpp */,
+				00707B42174321D1000F5AF9 /* majorRequirement.cpp */,
+				00707B43174321D1000F5AF9 /* majorRequirement.hpp */,
+				00707B44174321D1000F5AF9 /* specialRequirement.cpp */,
+				00707B45174321D1000F5AF9 /* specialRequirement.hpp */,
+				00707B46174321D1000F5AF9 /* student.cpp */,
+				00707B47174321D1000F5AF9 /* student.hpp */,
+				00707B32174321C2000F5AF9 /* concentration.cpp */,
+				00707B33174321C2000F5AF9 /* concentration.hpp */,
+				00707B34174321C2000F5AF9 /* course.cpp */,
+				00707B35174321C2000F5AF9 /* course.hpp */,
+				00707B36174321C2000F5AF9 /* department.cpp */,
+				00707B37174321C2000F5AF9 /* department.hpp */,
+				00707B38174321C2000F5AF9 /* general.cpp */,
+				00707B39174321C2000F5AF9 /* general.hpp */,
 				00707AF717431D4F000F5AF9 /* data */,
-				00707B0017431D4F000F5AF9 /* data-concentration.cpp */,
-				00707B0117431D4F000F5AF9 /* data-concentration.hpp */,
-				00707B0217431D4F000F5AF9 /* data-course.cpp */,
-				00707B0317431D4F000F5AF9 /* data-course.hpp */,
-				00707B0417431D4F000F5AF9 /* data-department.cpp */,
-				00707B0517431D4F000F5AF9 /* data-department.hpp */,
-				00707B0617431D4F000F5AF9 /* data-general.cpp */,
-				00707B0717431D4F000F5AF9 /* data-general.hpp */,
-				00707B0817431D4F000F5AF9 /* data-id.cpp */,
-				00707B0917431D4F000F5AF9 /* data-id.hpp */,
-				00707B0A17431D4F000F5AF9 /* data-major.cpp */,
-				00707B0B17431D4F000F5AF9 /* data-major.hpp */,
-				00707B0C17431D4F000F5AF9 /* data-majorRequirement.cpp */,
-				00707B0D17431D4F000F5AF9 /* data-majorRequirement.hpp */,
-				00707B0E17431D4F000F5AF9 /* data-majorSpecialRequirement.cpp */,
-				00707B0F17431D4F000F5AF9 /* data-majorSpecialRequirement.hpp */,
-				00707B1017431D4F000F5AF9 /* data-student.cpp */,
-				00707B1117431D4F000F5AF9 /* data-student.hpp */,
 				00707B1217431D4F000F5AF9 /* majors */,
 				00707B1417431D4F000F5AF9 /* Makefile */,
 				00707B1517431D4F000F5AF9 /* test-data.cpp */,
@@ -211,16 +211,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00707B2417431DC8000F5AF9 /* data-majorSpecialRequirement.cpp in Sources */,
-				00707B2517431DCC000F5AF9 /* data-majorRequirement.cpp in Sources */,
-				00707B2617431DD0000F5AF9 /* data-major.cpp in Sources */,
-				00707B2717431DD3000F5AF9 /* data-id.cpp in Sources */,
-				00707B2817431DDB000F5AF9 /* data-general.cpp in Sources */,
-				00707B2917431DDF000F5AF9 /* data-department.cpp in Sources */,
-				00707B2A17431DE2000F5AF9 /* data-concentration.cpp in Sources */,
-				00707B2B17431DE2000F5AF9 /* data-course.cpp in Sources */,
 				00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */,
-				00707B2D17431FAD000F5AF9 /* data-student.cpp in Sources */,
+				00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */,
+				00707B3B174321C2000F5AF9 /* course.cpp in Sources */,
+				00707B3C174321C2000F5AF9 /* department.cpp in Sources */,
+				00707B3D174321C2000F5AF9 /* general.cpp in Sources */,
+				00707B48174321D1000F5AF9 /* id.cpp in Sources */,
+				00707B49174321D1000F5AF9 /* major.cpp in Sources */,
+				00707B4A174321D1000F5AF9 /* majorRequirement.cpp in Sources */,
+				00707B4B174321D1000F5AF9 /* specialRequirement.cpp in Sources */,
+				00707B4C174321D1000F5AF9 /* student.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
