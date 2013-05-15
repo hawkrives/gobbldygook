@@ -1,5 +1,5 @@
-Name = Math
-Department = MATH
+Name = American and Multicultural Studies
+Department = ARMS
 
 
 #Requirements
