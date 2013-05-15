@@ -5,12 +5,13 @@ Xandra Best
 # MAJORS
 // CSCI
 MATH
+Physics
+Bio
 
 
 # CONCENTRATIONS
 STAT
 // MUSIC
-Physics
 
 
 # COURSES

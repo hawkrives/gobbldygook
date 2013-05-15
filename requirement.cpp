@@ -1,8 +1,6 @@
 #include "requirement.hpp"
 
-Requirement::Requirement(const Requirement &c) {
-	copy(c);
-};
+
 Requirement::Requirement() {
 	init("", 0);
 }
