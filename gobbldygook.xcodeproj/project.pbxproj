@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; };
-		00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B32174321C2000F5AF9 /* concentration.cpp */; };
-		00707B3B174321C2000F5AF9 /* course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B34174321C2000F5AF9 /* course.cpp */; };
-		00707B3C174321C2000F5AF9 /* department.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B36174321C2000F5AF9 /* department.cpp */; };
-		00707B3D174321C2000F5AF9 /* general.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B38174321C2000F5AF9 /* general.cpp */; };
-		00707B48174321D1000F5AF9 /* id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B3E174321D1000F5AF9 /* id.cpp */; };
-		00707B49174321D1000F5AF9 /* major.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B40174321D1000F5AF9 /* major.cpp */; };
-		00707B4A174321D1000F5AF9 /* majorRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B42174321D1000F5AF9 /* majorRequirement.cpp */; };
-		00707B4B174321D1000F5AF9 /* specialRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B44174321D1000F5AF9 /* specialRequirement.cpp */; };
-		00707B4C174321D1000F5AF9 /* student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B46174321D1000F5AF9 /* student.cpp */; };
-		00707B4F174323C8000F5AF9 /* requirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B4D174323C1000F5AF9 /* requirement.cpp */; };
+		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B32174321C2000F5AF9 /* concentration.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B3B174321C2000F5AF9 /* course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B34174321C2000F5AF9 /* course.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B3C174321C2000F5AF9 /* department.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B36174321C2000F5AF9 /* department.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B3D174321C2000F5AF9 /* general.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B38174321C2000F5AF9 /* general.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B48174321D1000F5AF9 /* id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B3E174321D1000F5AF9 /* id.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B49174321D1000F5AF9 /* major.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B40174321D1000F5AF9 /* major.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B4A174321D1000F5AF9 /* majorRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B42174321D1000F5AF9 /* majorRequirement.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B4B174321D1000F5AF9 /* specialRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B44174321D1000F5AF9 /* specialRequirement.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B4C174321D1000F5AF9 /* student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B46174321D1000F5AF9 /* student.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B4F174323C8000F5AF9 /* requirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B4D174323C1000F5AF9 /* requirement.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -320,6 +320,7 @@
 		00707B2217431D5A000F5AF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -327,6 +328,7 @@
 		00707B2317431D5A000F5AF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
