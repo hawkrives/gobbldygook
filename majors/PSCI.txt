@@ -1,0 +1,43 @@
+Name = PoliticalScience
+Department = PSCI
+
+
+#Requirements
+##Electives
+needed = 9
+validCourses = PSCI 
+
+##ElectivesStrict
+needed = 6
+validCourses = 
+
+##LevelII
+needed = 2
+validCourses = 
+
+##ResearchMethods
+needed = 1
+validCourses = PSCI 220
+
+#Sets
+##AmericanPoliticsAndPublicPolicy
+needed = 1
+validCourses = PSCI 111, PSCI 211, PSCI 244, PSCI 246, PSCI 255, PSCI 272, PSCI 311, ENVST/PSCI 276
+
+##ComparativePolitics
+needed = 1
+validCourses = PSCI 112, PSCI 117, PSCI 240, PSCI 252, PSCI 264, PSCI 282, PSCI 283, PSCI 350, PSCI 367, PSCI 370, PSCI 382, PSCI 385, ASIAN/PSCI 245, ASIAN/PSCI 250, ASIAN/PSCI 254
+
+##InternationalRelations
+needed = 1
+validCourses = PSCI 115, PSCI 119, PSCI 121, PSCI 234, PSCI 257, PSCI 258, PSCI 285, PSCI 321, ASIAN/PSCI 245, ENVST/PSCI 201
+
+##PolicyTheory
+needed = 1
+validCourses = PSCI 113, PSCI 119, PSCI 232, PSCI 260, PSCI 278, PSCI 284, PSCI 384, ENVST/PSCI 225
+
+
+#Special
+##Perspectives
+needed = 4
+validSets = AmericanPoliticsAndPublicPolicy, ComparativePolitics, InternationalRelations, PolicyTheory
