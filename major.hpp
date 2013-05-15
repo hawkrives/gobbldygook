@@ -8,7 +8,7 @@
 using namespace std;
 
 class Major {
-private:
+protected:
 	string name;
 	Department department;
 	vector<MajorRequirement> requirements;

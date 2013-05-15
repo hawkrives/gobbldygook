@@ -104,8 +104,6 @@ Major::Major(string s) {
 			}
 		}
 	}
-	getMajorRequirement("CALCI")->incrementHas();
-	cout << getMajorRequirement("CALCI") << endl;
 
 	record.clear();
 }
