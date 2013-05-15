@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <map>
 #include <functional>
+#include <string>
+#include <cerrno>
 
 using namespace std;
 
@@ -119,5 +121,7 @@ string removeStartingText(string s, string toRemove);
 
 string deDoubleString(string s);
 void printEntireRecord(vector<string> record);
+
+string getFileContents(string fn);
 
 #endif
