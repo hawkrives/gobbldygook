@@ -1,11 +1,25 @@
 #include "specialRequirement.hpp"
 using namespace std;
 
+void SpecialRequirement::init(string n) {
+	Requirement::init(n, 0);
+}
 
-SpecialRequirement::SpecialRequirement() {}
-SpecialRequirement::SpecialRequirement(string str) {}
-SpecialRequirement::SpecialRequirement(const SpecialRequirement &c) {}
+void SpecialRequirement::copy(const SpecialRequirement &c) {
+	Requirement::copy(c);
+	validSets = c.validSets;
+}
+
+SpecialRequirement::SpecialRequirement() : Requirement() {}
+SpecialRequirement::SpecialRequirement(string str) : Requirement(str) {}
+SpecialRequirement::SpecialRequirement(string str, int n) : Requirement(str, n) {}
+SpecialRequirement::SpecialRequirement(const SpecialRequirement &c) {
+	copy(c);
+}
+
 SpecialRequirement SpecialRequirement::operator= (const SpecialRequirement &c) {
+	if (this == &c) return *this;
+	copy(c);
 	return *this;
 }
 

@@ -8,12 +8,13 @@ using namespace std;
 
 class SpecialRequirement : public Requirement {
 private:
-	void init();
+	void init(string n);
 	void copy(const SpecialRequirement &c);
 	vector<MajorRequirement> validSets;
 public:
 	SpecialRequirement();
 	SpecialRequirement(string str);
+	SpecialRequirement(string str, int n);
 	SpecialRequirement(const SpecialRequirement &c);
 	SpecialRequirement operator= (const SpecialRequirement &c);
 	bool fulfillsRequirement(const MajorRequirement& c);
