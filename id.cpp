@@ -112,9 +112,9 @@ string ID::getSection() {
 }
 
 bool operator== (const ID &i1, const ID &i2) {
-	bool dept = (i1.departments.at(0) < i2.departments.at(0));
-	bool num = (i1.number < i2.number);
-	bool sec = (i1.section < i2.section);
+	bool dept = (i1.departments.at(0) == i2.departments.at(0));
+	bool num = (i1.number == i2.number);
+	bool sec = (i1.section == i2.section);
     return (dept && num && sec);
 }
 
