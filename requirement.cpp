@@ -1,11 +1,8 @@
 #include "requirement.hpp"
 
-<<<<<<< HEAD
-
 Requirement::Requirement(const Requirement &c) {
 	copy(c);
 };
-=======
 Requirement::Requirement() {
 	init("", 0);
 }
@@ -21,39 +18,26 @@ Requirement::Requirement(string str, int n) {
 Requirement::Requirement(const Requirement &c) {
 	copy(c);
 }
->>>>>>> master
 
 Requirement Requirement::operator= (const Requirement &c) {
 	if (this == &c) return *this;
 	copy(c);
 	return *this;
-<<<<<<< HEAD
-};
-=======
 }
->>>>>>> master
 
 void Requirement::init(string n, int need) {
 	name = n;
 	needed = need;
 	has = 0;
 	satisfied = false;
-<<<<<<< HEAD
-};
-=======
 }
->>>>>>> master
 
 void Requirement::copy(const Requirement &c) {
 	name = c.name;
 	needed = c.needed;
 	has = c.has;
 	satisfied = c.satisfied;
-<<<<<<< HEAD
-};
-=======
 }
->>>>>>> master
 
 void Requirement::incrementHas() {
 	++has;
@@ -62,8 +46,7 @@ void Requirement::incrementHas() {
 	else
 		satisfied = false;
 }
-<<<<<<< HEAD
-=======
+
 void Requirement::decrementHas() {
 	--has;
 	if (has >= needed)
@@ -98,7 +81,6 @@ void Requirement::setName(string str) {
 void Requirement::setNeeded(int n) {
 	needed = n;
 }
->>>>>>> master
 
 bool operator== (const Requirement &l, const Requirement &r) {
 	bool name = (l.name == r.name);
@@ -111,8 +93,6 @@ bool operator== (const Requirement &l, const Requirement &r) {
 bool operator!= (Requirement &l, Requirement &r) {
     return !(l == r);
 }
-<<<<<<< HEAD
-=======
 
 ostream& Requirement::getData(ostream &os) {
 	os << name;
@@ -133,4 +113,3 @@ ostream &operator<<(ostream &os, Requirement &item) {
 void Requirement::display() {
 	cout << *this << endl;
 }
->>>>>>> master

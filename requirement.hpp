@@ -6,32 +6,12 @@
 using namespace std;
 
 class Requirement {
-<<<<<<< HEAD
-private:
-	void init(string n, int need);
-	void copy(const Requirement &c);
-=======
 protected:
->>>>>>> master
 	string name;
 	int needed;
 	int has;
 	bool satisfied;
 public:
-<<<<<<< HEAD
-	Requirement();
-	Requirement(istream &is);
-	Requirement(string fn);
-	Requirement(const Requirement &c);
-	Requirement operator= (const Requirement &c);
-	
-	void incrementHas();
-
-	friend bool operator== (const Requirement &l, const Requirement &r);
-	friend bool operator!= (Requirement &l, Requirement &r);
-};
-
-=======
 	void init(string n, int need);
 	void copy(const Requirement &c);
 	Requirement();
@@ -61,5 +41,4 @@ public:
 
 ostream &operator<<(ostream &os, Requirement &item);
 
->>>>>>> master
 #endif /* defined(__gobbldygook__requirement__) */
