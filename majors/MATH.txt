@@ -6,7 +6,7 @@ needed = 1
 validCourses = MATH 120
 ##CalcII
 needed = 1
-validCourses = MATH 126, 128
+validCourses = MATH 126, MATH 128
 ##LinearAlgebra
 needed = 1
 validCourses = MATH 220

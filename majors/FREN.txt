@@ -1,0 +1,28 @@
+Name = French
+Department = FREN
+
+
+#Requirements
+##BasicLanguage
+needed = 4
+validCourses = FREN 111, FREN 112, FREN 231, FREN 232
+
+##Level250
+needed = 2
+validCourses = FREN 250, FREN 251, FREN 253
+
+##Level270
+needed = 2
+validCourses = FREN 271, FREN 272, FREN 273, FREN 275
+
+##LevelIII
+needed = 2
+validCourses = FREN 372, FREN 373, FREN 396, FREN 398, FREN 399
+
+##Electives
+needed = 8
+validCourses = FREN 235, FREN 250, FREN 251, FREN 253, FREN 271, FREN 272, FREN 273, FREN 275, FREN 294, FREN 298, FREN 372, FREN 373, FREN 394, FREN 396, FREN 398, FREN 399
+
+##History
+needed = 1
+validCourses = HIST 226, HIST 227
