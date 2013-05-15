@@ -1,0 +1,24 @@
+Name = Physics
+Department = PHYS
+#Requirements
+##MathPrerequisites
+needed = 4
+validCourses = MATH 126, MATH 128, MATH 220, MATH 226, MATH 230
+##AnalyticalPhysics
+needed = 3
+validCourses = PHYS 130, PHYS 131, PHYS 132
+##ModernPhysics
+needed = 1
+validCourses = PHYS 244
+##ClassicalMechanics
+needed = 1
+validCourses = PHYS 374
+##MaxwellsEquations
+needed = 1
+validCourses = PHYS 375
+##QuantumMechanics
+needed = 2
+validCourses = PHYS 376, PHYS 386
+##Elective
+needed = 1
+validCourses = PHYS 123, PHYS 124, PHYS 125, PHYS 154, PHYS 245, PHYS 246, PHYS 252, PHYS 294, PHYS 298, PHYS 379, PHYS 390, PHYS 392, PHYS 394, PHYS 396, PHYS 398, PHYS 399
