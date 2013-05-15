@@ -1,6 +1,6 @@
-#include "data-general.hpp"
-#include "data-course.hpp"
-#include "data-student.hpp"
+#include "general.hpp"
+#include "course.hpp"
+#include "student.hpp"
 using namespace std;
 
 map<ID, Course> mapped_courses;

@@ -1,18 +1,18 @@
 #ifndef __Data_major__
 #define __Data_major__
 
-#include "data-general.hpp"
-#include "data-majorRequirement.hpp"
-#include "data-specialRequirement.hpp"
-#include "data-department.hpp"
+#include "general.hpp"
+#include "majorRequirement.hpp"
+#include "specialRequirement.hpp"
+#include "department.hpp"
 using namespace std;
 
 class Major {
 private:
 	string name;
 	Department department;
-  map<string, MajorRequirement> requirements;
-  map<string, MajorSpecialRequirement> specialRequirements;
+	map<string, MajorRequirement> requirements;
+	map<string, SpecialRequirement> specialRequirements;
 	void copy(const Major &c);
 public:
 	Major();

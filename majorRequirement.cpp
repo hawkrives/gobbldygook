@@ -1,4 +1,4 @@
-#include "data-majorRequirement.hpp"
+#include "majorRequirement.hpp"
 using namespace std;
 
 bool MajorRequirement::fulfillsRequirement(const ID& c) {

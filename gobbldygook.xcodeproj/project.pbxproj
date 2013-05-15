@@ -15,7 +15,7 @@
 		00707B48174321D1000F5AF9 /* id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B3E174321D1000F5AF9 /* id.cpp */; };
 		00707B49174321D1000F5AF9 /* major.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B40174321D1000F5AF9 /* major.cpp */; };
 		00707B4A174321D1000F5AF9 /* majorRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B42174321D1000F5AF9 /* majorRequirement.cpp */; };
-		00707B4B174321D1000F5AF9 /* majorSpecialRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B44174321D1000F5AF9 /* majorSpecialRequirement.cpp */; };
+		00707B4B174321D1000F5AF9 /* specialRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B44174321D1000F5AF9 /* specialRequirement.cpp */; };
 		00707B4C174321D1000F5AF9 /* student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B46174321D1000F5AF9 /* student.cpp */; };
 /* End PBXBuildFile section */
 
@@ -62,8 +62,8 @@
 		00707B41174321D1000F5AF9 /* major.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = major.hpp; sourceTree = "<group>"; };
 		00707B42174321D1000F5AF9 /* majorRequirement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = majorRequirement.cpp; sourceTree = "<group>"; };
 		00707B43174321D1000F5AF9 /* majorRequirement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = majorRequirement.hpp; sourceTree = "<group>"; };
-		00707B44174321D1000F5AF9 /* majorSpecialRequirement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = majorSpecialRequirement.cpp; sourceTree = "<group>"; };
-		00707B45174321D1000F5AF9 /* majorSpecialRequirement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = majorSpecialRequirement.hpp; sourceTree = "<group>"; };
+		00707B44174321D1000F5AF9 /* specialRequirement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = specialRequirement.cpp; sourceTree = "<group>"; };
+		00707B45174321D1000F5AF9 /* specialRequirement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = specialRequirement.hpp; sourceTree = "<group>"; };
 		00707B46174321D1000F5AF9 /* student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = student.cpp; sourceTree = "<group>"; };
 		00707B47174321D1000F5AF9 /* student.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = student.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,8 +88,8 @@
 				00707B41174321D1000F5AF9 /* major.hpp */,
 				00707B42174321D1000F5AF9 /* majorRequirement.cpp */,
 				00707B43174321D1000F5AF9 /* majorRequirement.hpp */,
-				00707B44174321D1000F5AF9 /* majorSpecialRequirement.cpp */,
-				00707B45174321D1000F5AF9 /* majorSpecialRequirement.hpp */,
+				00707B44174321D1000F5AF9 /* specialRequirement.cpp */,
+				00707B45174321D1000F5AF9 /* specialRequirement.hpp */,
 				00707B46174321D1000F5AF9 /* student.cpp */,
 				00707B47174321D1000F5AF9 /* student.hpp */,
 				00707B32174321C2000F5AF9 /* concentration.cpp */,
@@ -219,7 +219,7 @@
 				00707B48174321D1000F5AF9 /* id.cpp in Sources */,
 				00707B49174321D1000F5AF9 /* major.cpp in Sources */,
 				00707B4A174321D1000F5AF9 /* majorRequirement.cpp in Sources */,
-				00707B4B174321D1000F5AF9 /* majorSpecialRequirement.cpp in Sources */,
+				00707B4B174321D1000F5AF9 /* specialRequirement.cpp in Sources */,
 				00707B4C174321D1000F5AF9 /* student.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

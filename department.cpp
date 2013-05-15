@@ -1,4 +1,4 @@
-#include "data-department.hpp"
+#include "department.hpp"
 using namespace std;
 
 //////////////

@@ -1,10 +1,10 @@
 #ifndef __Data_student__
 #define __Data_student__
 
-#include "data-general.hpp"
-#include "data-major.hpp"
-#include "data-concentration.hpp"
-#include "data-course.hpp"
+#include "general.hpp"
+#include "major.hpp"
+#include "concentration.hpp"
+#include "course.hpp"
 using namespace std;
 
 class Student {

@@ -1,4 +1,4 @@
-#include "data-majorSpecialRequirement.hpp"
+#include "specialRequirement.hpp"
 using namespace std;
 
 MajorSpecialRequirement::MajorSpecialRequirement() {

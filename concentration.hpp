@@ -1,8 +1,8 @@
 #ifndef __Gobbldygook__concentration__
 #define __Gobbldygook__concentration__
 
-#include "data-general.hpp"
-#include "data-major.hpp"
+#include "general.hpp"
+#include "major.hpp"
 using namespace std;
 
 class Concentration : public Major {	

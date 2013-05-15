@@ -1,4 +1,4 @@
-#include "data-student.hpp"
+#include "student.hpp"
 using namespace std;
 
 void Student::init(string n, int s, int g, string m) {

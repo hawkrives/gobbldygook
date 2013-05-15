@@ -1,8 +1,8 @@
 #ifndef __Gobbldygook__id__
 #define __Gobbldygook__id__
 
-#include "data-general.hpp"
-#include "data-department.hpp"
+#include "general.hpp"
+#include "department.hpp"
 
 class ID {
 private:

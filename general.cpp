@@ -1,4 +1,4 @@
-#include "data-general.hpp"
+#include "general.hpp"
 using namespace std;
 
 string tostring(int i) {

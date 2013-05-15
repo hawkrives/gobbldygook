@@ -1,8 +1,8 @@
 #ifndef __Data_majorRequirement__
 #define __Data_majorRequirement__
 
-#include "data-general.hpp"
-#include "data-id.hpp"
+#include "general.hpp"
+#include "id.hpp"
 using namespace std;
 
 class MajorRequirement {
