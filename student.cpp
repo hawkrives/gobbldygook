@@ -144,10 +144,32 @@ ostream& Student::getData(ostream &os) {
 		os << "while taking:" << endl;
 
 	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i) {
-		if (i != courses.end()-1)
-			os << *i << endl;
-		else
-			os << *i;
+		os << *i << endl;
+	}
+
+	for (vector<Major>::iterator m = majors.begin(); m != majors.end(); ++m) {
+		for (vector<Course>::iterator c = courses.begin(); c != courses.end(); ++c) {
+			for (vector<MajorRequirement>::iterator req = m->requirements.begin(); req != m->requirements.end(); ++req) {
+				cout << *req << endl;
+			}
+			for (vector<SpecialRequirement>::iterator set = m->specialRequirements.begin(); set != m->specialRequirements.end(); ++set) {
+				for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
+					cout << *req << endl;
+				}
+			}
+		}
+	}
+	for (vector<Concentration>::iterator conc = concentrations.begin(); conc != concentrations.end(); ++conc) {
+		for (vector<Course>::iterator c = courses.begin(); c != courses.end(); ++c) {
+			for (vector<MajorRequirement>::iterator req = conc->requirements.begin(); req != conc->requirements.end(); ++req) {
+				cout << *req << endl;
+			}
+			for (vector<SpecialRequirement>::iterator set = conc->specialRequirements.begin(); set != conc->specialRequirements.end(); ++set) {
+				for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
+					cout << *req << endl;
+				}
+			}
+		}
 	}
 
 	return os;
