@@ -112,7 +112,10 @@ string ID::getSection() {
 }
 
 bool operator== (const ID &i1, const ID &i2) {
-    return ((i1.departments[0] == i2.departments[0]) && (i1.number == i2.number) && (i1.section == i2.section));
+	bool dept = (i1.departments.at(0) < i2.departments.at(0));
+	bool num = (i1.number < i2.number);
+	bool sec = (i1.section < i2.section);
+    return (dept && num && sec);
 }
 
 bool operator!= (ID &i1, ID &i2) {
@@ -120,7 +123,10 @@ bool operator!= (ID &i1, ID &i2) {
 }
 
 bool operator< (const ID &i1, const ID &i2) {
-	return (i1.departments.at(0) < i2.departments.at(0));
+	bool dept = (i1.departments.at(0) < i2.departments.at(0));
+	bool num = (i1.number < i2.number);
+	bool sec = (i1.section < i2.section);
+	return (dept && num && sec);
 }
 
 ostream& ID::getData(ostream& os) {
