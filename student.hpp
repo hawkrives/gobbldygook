@@ -25,8 +25,6 @@ public:
 	bool hasTakenCourse(string str);
 	void addCourse(const Course& c);
 	void addCourses(string str);
-	void addLab(const Course& c);
-	void addLabs(string str);
 
 	void addMajor(const Major& m);
 	void addMajors(string str);
