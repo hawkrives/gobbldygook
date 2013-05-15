@@ -29,7 +29,7 @@ Student::Student(string fn) {
 			previousHeading = "# NAME";
 		if (str[0] == '#') {
 			std::transform(str.begin(), str.end(), str.begin(), ::toupper);
-			previousHeading = *i;
+			previousHeading = str;
 			continue;
 		}
 		else if (str != "") {
