@@ -1,6 +1,16 @@
 #include "requirement.hpp"
 
-Requirement::Requirement() {}
+Requirement::Requirement() {
+	init("", 0);
+}
+
+Requirement::Requirement(string str) {
+	init(str, 0);
+}
+
+Requirement::Requirement(string str, int n) {
+	init(str, n);
+}
 
 Requirement::Requirement(const Requirement &c) {
 	copy(c);
@@ -33,9 +43,39 @@ void Requirement::incrementHas() {
 	else
 		satisfied = false;
 }
+void Requirement::decrementHas() {
+	--has;
+	if (has >= needed)
+		satisfied = true;
+	else
+		satisfied = false;
+}
+Requirement& Requirement::operator++() {
+	Requirement::incrementHas();
+	return *this;
+}
+Requirement& Requirement::operator--() {
+	Requirement::decrementHas();
+	return *this;
+}
 
 string Requirement::getName() {
 	return name;
+}
+int Requirement::getNeeded() {
+	return needed;
+}
+int Requirement::getHas() {
+	return has;
+}
+bool Requirement::getSatisfied() {
+	return satisfied;
+}
+void Requirement::setName(string str) {
+	name = str;
+}
+void Requirement::setNeeded(int n) {
+	needed = n;
 }
 
 bool operator== (const Requirement &l, const Requirement &r) {

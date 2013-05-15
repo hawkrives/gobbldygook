@@ -23,40 +23,61 @@ Major::Major(string s) {
 	string contentsOfFile = getFileContents("majors/" + department.getName() + ".txt");
 	vector<string> record = split(contentsOfFile, '\n');
 
-	string activeHeading;
+	string activeHeading, activeRequirement;
 	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
 		str = *i;
+		std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 		string leftSide, rightSide;
 		long found;
 		if (activeHeading.empty())
 			activeHeading = "NAME";
 		found = str.find_first_of("#");
-		if (found == 0) {
-			std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+		if (found == 0 && (str.substr(0, 2) != "##")) {
 			str = str.substr(found+1, str.size()-found);
 			activeHeading = removeStartingText(str, " ");
 			continue;
 		}
 		found = str.find_first_of("=");
-		if (found == string::npos) {
-			leftSide = str.substr(0, found);
-			rightSide = str.substr(found+1, str.size()-found);
+		if (found != string::npos) {
+			leftSide = str.substr(0, found-1);
+			rightSide = str.substr(found+2, str.size()-found);
+			if (leftSide == "NAME")
+				name = rightSide;
+			else if (leftSide == "DEPARTMENT")
+				department = Department(rightSide);
+			else if (leftSide == "NEEDED")
+				getMajorRequirement(activeRequirement)->setNeeded(stringToInt(rightSide));
+			else if (leftSide == "VALIDCOURSES") {
+				MajorRequirement* mr = getMajorRequirement(activeRequirement);
+
+				vector<string> validCourseList = split(rightSide, ',');
+				for (vector<string>::iterator idx = validCourseList.begin(); idx != validCourseList.end(); ++idx)
+					mr->addCourse(ID(*idx));
+			}
 		}
 		else if (str != "") {
 			if (str.substr(0, 2) == "//") {
 				// it's a comment
 			}
-			else if (activeHeading == "REQUIREMENTS") {
-				if (str.at(0) == '#' && str.at(1) == '#')
-					requirements.push_back(MajorRequirement(str));
-			}
-			else if (activeHeading == "SPECIAL") {
-				if (str.at(0) == '#' && str.at(1) == '#')
+			else if (str.substr(0, 2) == "##") {
+				str = str.substr(2, str.length()-2);
+				str = removeStartingText(str, " ");
+				if (activeHeading == "REQUIREMENTS") {
+					MajorRequirement m = MajorRequirement(str);
+					requirements.push_back(m);
+					activeRequirement = str;
+				}
+				else if (activeHeading == "SPECIAL") {
 					specialRequirements.push_back(SpecialRequirement(str));
-			}
-			else if (activeHeading == "SETS") {
-				if (str.at(0) == '#' && str.at(1) == '#')
+					activeRequirement = str;
+				}
+				else if (activeHeading == "SETS") {
 					getSpecialRequirement(str)->validSets.push_back(MajorRequirement(str));
+					activeRequirement = str;
+				}
+			}
+			else if (str.find("=")) {
+				
 			}
 		}
 	}

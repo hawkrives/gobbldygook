@@ -7,16 +7,18 @@ using namespace std;
 
 class MajorRequirement : public Requirement {
 private:
-	void init();
+	void init(string n);
 	void copy(const MajorRequirement &c);
 	vector<ID> validCourses;
 public:
 	MajorRequirement();
 	MajorRequirement(string str);
+	MajorRequirement(string str, int n);
 	MajorRequirement(const MajorRequirement &c);
 	MajorRequirement operator= (const MajorRequirement &c);
 	
 	bool fulfillsRequirement(const ID& c);
+	void addCourse(const ID& c);
 	
 	friend bool operator== (const MajorRequirement &l, const MajorRequirement&r);
 	friend bool operator!= (const MajorRequirement &l, const MajorRequirement &r);

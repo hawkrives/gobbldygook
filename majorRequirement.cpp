@@ -1,15 +1,24 @@
 #include "majorRequirement.hpp"
 using namespace std;
 
-void MajorRequirement::init() {}
+void MajorRequirement::init(string n) {
+	Requirement::init(n, 0);
+}
 
-MajorRequirement::MajorRequirement() {
-	init();
+void MajorRequirement::copy(const MajorRequirement &c) {
+	Requirement::copy(c);
+	validCourses = c.validCourses;
 }
-MajorRequirement::MajorRequirement(string str) {
+
+MajorRequirement::MajorRequirement() : Requirement() {}
+MajorRequirement::MajorRequirement(string str) : Requirement(str) {}
+MajorRequirement::MajorRequirement(string str, int n) : Requirement(str, n) {}
+MajorRequirement::MajorRequirement(const MajorRequirement &c) {
+	copy(c);
 }
-MajorRequirement::MajorRequirement(const MajorRequirement &c) {}
 MajorRequirement MajorRequirement::operator= (const MajorRequirement &c) {
+	if (this == &c) return *this;
+	copy(c);
 	return *this;
 }
 
@@ -19,6 +28,10 @@ bool MajorRequirement::fulfillsRequirement(const ID& c) {
  			return true;
  	}
  	return false;
+}
+
+void MajorRequirement::addCourse(const ID& c) {
+	validCourses.push_back(c);
 }
 
 bool operator== (const MajorRequirement &l, const MajorRequirement &r) {
