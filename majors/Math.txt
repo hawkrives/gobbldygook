@@ -1,5 +1,5 @@
 Name = Math
-Department = Math
+Department = MATH
 #Requirements
 ##CalcI
 needed = 1
