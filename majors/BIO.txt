@@ -1,38 +1,48 @@
 Name = Biology
 Department = BIO
+
+
 #Requirements
 ##Electives
 needed = 8
 validCourses = BIO 123, BIO 124, BIO 125, BIO 126, BIO 128, BIO 135, BIO 143, BIO 150, BIO 227, BIO 228, BIO 231, BIO 233, BIO 242, BIO 243, BIO 247, BIO 248, BIO 251, BIO 252, BIO 261, BIO 266, BIO 275, BIO 281, BIO 284, BIO 286, BIO 287, BIO 288, BIO 291, BIO 298, BIO 315, BIO 341, BIO 364, BIO 371, BIO 372, BIO 382, BIO 383, BIO 385, BIO 386, BIO 391, BIO 396, BIO 398, CHEM/BIO 125, CHEM/BIO 126, CHEM/BIO 127, CHEM 379, BIO/ENVST 226, BIO/ENVST 228, NEURO 239, ESTH 375, PSYCH 385
+
 ##ElectivesStrict
 needed = 7
 validCourses = BIO 123, BIO 124, BIO 125, BIO 126, BIO 128, BIO 135, BIO 143, BIO 150, BIO 227, BIO 228, BIO 231, BIO 233, BIO 242, BIO 243, BIO 247, BIO 248, BIO 251, BIO 252, BIO 261, BIO 266, BIO 275, BIO 281, BIO 284, BIO 286, BIO 287, BIO 288, BIO 291, BIO 315, BIO 341, BIO 364, BIO 371, BIO 372, BIO 382, BIO 383, BIO 385, BIO 386, BIO 391, CHEM/BIO 125, CHEM/BIO 126, CHEM/BIO 127, CHEM 379, BIO/ENVST 226, BIO/ENVST 228, NEURO 239, ESTH 375, PSYCH 385
+
 ##BiodiversityAndEvolution
 needed = 1
 validCourses = BIO 126
+
 ##Genetics
 needed = 1
 validCourses = BIO 233
+
 ##Ecology
 needed = 1
 validCourses = BIO 261
+
 ##MulticellularOrganisms
 needed = 1
 validCourses = BIO 242, BIO 247, BIO 248, BIO 251, BIO 252, BIO 266, BIO 275
+
 ##LevelIII
 needed = 2
 validCourses = BIO 315, BIO 341, BIO 364, BIO 371, BIO 372, BIO 382, BIO 383, BIO 385, BIO 386, BIO 391
-##MathLevelIII
-needed = 1
-validCourses = MATH 330, MATH 340, MATH 344, MATH 348, MATH 352, MATH 356, MATH 364, MATH 382, MATH 384, MATH 396, MATH 398
-#Special
-##CellMolecularBiology
-needed = 1
-validSets = Bio, ChBi
+
+
 #Sets
 ##Bio
 needed = 1
 validCourses = BIO 125
+
 ##ChBi
 needed = 3
 validCourses = CHEM/BIO 125, CHEM/BIO 126, CHEM/BIO 127
+
+
+#Special
+##CellMolecularBiology
+needed = 1
+validSets = Bio, ChBi
