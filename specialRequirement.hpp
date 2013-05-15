@@ -6,26 +6,22 @@
 #include "majorRequirement.hpp"
 using namespace std;
 
-class MajorSpecialRequirement {
+class SpecialRequirement : public Requirement {
 private:
 	void init();
-	void copy(const MajorSpecialRequirement &c);
-	string name;
-	int needed;
-	int has;
-	bool satisfied;
+	void copy(const SpecialRequirement &c);
 	vector<MajorRequirement> validSets;
 public:
-	MajorSpecialRequirement();
-	MajorSpecialRequirement(istream &is);
-	MajorSpecialRequirement(string fn);
-	MajorSpecialRequirement(const MajorSpecialRequirement &c);
-	MajorSpecialRequirement operator= (const MajorSpecialRequirement &c);
+//	SpecialRequirement();
+//	SpecialRequirement(const SpecialRequirement &c);
+//	SpecialRequirement operator= (const SpecialRequirement &c);
 	bool fulfillsRequirement(const MajorRequirement& c);
-	void incrementHas();
 	
-	friend bool operator== (const MajorSpecialRequirement &msr1, const MajorSpecialRequirement &msr2);
-	friend bool operator!= (MajorSpecialRequirement &msr1, MajorSpecialRequirement &msr2);
+	friend bool operator== (const SpecialRequirement &l, const SpecialRequirement &r);
+	friend bool operator!= (const SpecialRequirement &l, const SpecialRequirement &r);
+	friend bool operator== (const SpecialRequirement &l, const Requirement &r);
+	friend bool operator!= (const SpecialRequirement &l, const Requirement &r);
+
 };
 
 #endif
