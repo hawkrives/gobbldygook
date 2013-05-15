@@ -105,6 +105,8 @@ Major::Major(string s) {
 		}
 	}
 
+	name = department.getFullName();
+
 	record.clear();
 }
 
