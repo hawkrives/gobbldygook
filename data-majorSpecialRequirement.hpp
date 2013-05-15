@@ -17,6 +17,7 @@ private:
 public:
 	MajorSpecialRequirement();
 	MajorSpecialRequirement(istream &is);
+	MajorSpecialRequirement(string fn);
 	MajorSpecialRequirement(const MajorSpecialRequirement &c);
 	MajorSpecialRequirement operator= (const MajorSpecialRequirement &c);
 	bool fulfillsRequirement(const MajorRequirement& c);
