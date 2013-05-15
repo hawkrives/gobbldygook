@@ -20,12 +20,6 @@ needed = 1
 validCourses = HIST 201, HIST 202, HIST 203, HIST 204
 
 
-#Special
-##FocusLanguage
-needed = 1
-validSets = Latin, Greek
-
-
 #Sets
 ##Latin
 needed = 6
@@ -34,3 +28,9 @@ validCourses = LATIN 111, LATIN 112, LATIN 231, LATIN 235, LATIN 252, LATIN 298,
 ##Greek
 needed = 6
 validCourses = GREEK 111, GREEK 112, GREEK 231, GREEK 253, GREEK 298, GREEK 370, GREEK 372, GREEK 373, GREEK 374, GREEK 375, GREEK 398
+
+
+#Special
+##FocusLanguage
+needed = 1
+validSets = Latin, Greek

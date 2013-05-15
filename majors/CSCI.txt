@@ -1,33 +1,44 @@
 Name = Computer Science
 Department = CSCI
+
+
 #Requirements
 ##CS
 needed = 1
 validCourses = CSCI 121, CSCI 125, CSCI 225
+
 ##MFC
 needed = 1
 validCourses = CSCI 231, MATH 232, MATH 252
+
 ##HD
 needed = 1
 validCourses = CSCI 241
+
 ##SD
 needed = 1
 validCourses = CSCI 225, CSCI 251
+
 ##ADS
 needed = 1
 validCourses = CSCI 253
+
 ##ESD
 needed = 1
 validCourses = CSCI 263
+
 ##Languages
 needed = 1
 validCourses = CSCI 276, CSCI 333
+
 ##Systems
 needed = 1
 validCourses = CSCI 273, CSCI 284
+
 ##CAP
 needed = 1
 validCourses = CSCI 390
+
 ##Electives
 needed = 6
 validCourses = CSCI 273, CSCI 276, CSCI 284, CSCI 300, CSCI 315, CSCI 333, CSCI 336, CSCI 350

@@ -28,12 +28,6 @@ needed = 2
 validCourses = ECON 371, ECON 374, ECON 376, ECON 382, ECON 385
 
 
-#Special
-##Statistics
-needed = 1
-validSets = stat1, stat2
-
-
 #Sets
 ##stat1
 needed = 1
@@ -42,3 +36,9 @@ validCourses = STAT 263
 ##stat2
 needed = 2
 validCourses = STAT 272, ECON 385
+
+
+#Special
+##Statistics
+needed = 1
+validSets = stat1, stat2
