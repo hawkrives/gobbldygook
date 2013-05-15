@@ -33,6 +33,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		002B9E191743763400033628 /* ARMS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ARMS.txt; sourceTree = "<group>"; };
+		002B9E1A1743763400033628 /* CLASS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CLASS.txt; sourceTree = "<group>"; };
+		002B9E1B1743763400033628 /* ECON.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ECON.txt; sourceTree = "<group>"; };
+		002B9E1C1743763400033628 /* FREN.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FREN.txt; sourceTree = "<group>"; };
+		002B9E1D1743763400033628 /* GERM.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GERM.txt; sourceTree = "<group>"; };
+		002B9E1E1743763400033628 /* NORW.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NORW.txt; sourceTree = "<group>"; };
+		002B9E1F1743763400033628 /* PHIL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PHIL.txt; sourceTree = "<group>"; };
+		002B9E201743763400033628 /* PSCI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PSCI.txt; sourceTree = "<group>"; };
+		002B9E211743763400033628 /* SPAN.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SPAN.txt; sourceTree = "<group>"; };
+		002B9E231743763E00033628 /* STAT.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = STAT.txt; sourceTree = "<group>"; };
 		00707AF817431D4F000F5AF9 /* 2012-13-s2-csv.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-s2-csv.csv"; sourceTree = "<group>"; };
 		00707AF917431D4F000F5AF9 /* b-r.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "b-r.txt"; sourceTree = "<group>"; };
 		00707AFA17431D4F000F5AF9 /* finn.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = finn.txt; sourceTree = "<group>"; };
@@ -71,7 +81,6 @@
 		00707B5217434002000F5AF9 /* CSCI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CSCI.txt; sourceTree = "<group>"; };
 		00707B5317434002000F5AF9 /* PHYS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PHYS.txt; sourceTree = "<group>"; };
 		00707B5417434002000F5AF9 /* PSYCH.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PSYCH.txt; sourceTree = "<group>"; };
-		00707B5517434002000F5AF9 /* STAT.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = STAT.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +94,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		002B9E221743763E00033628 /* concentrations */ = {
+			isa = PBXGroup;
+			children = (
+				002B9E231743763E00033628 /* STAT.txt */,
+			);
+			path = concentrations;
+			sourceTree = "<group>";
+		};
 		002F5D6817431CDE00A4D0A0 = {
 			isa = PBXGroup;
 			children = (
+				002B9E221743763E00033628 /* concentrations */,
 				00707B32174321C2000F5AF9 /* concentration.cpp */,
 				00707B33174321C2000F5AF9 /* concentration.hpp */,
 				00707B34174321C2000F5AF9 /* course.cpp */,
@@ -134,12 +152,20 @@
 		00707B1217431D4F000F5AF9 /* majors */ = {
 			isa = PBXGroup;
 			children = (
+				002B9E191743763400033628 /* ARMS.txt */,
+				002B9E1A1743763400033628 /* CLASS.txt */,
+				002B9E1B1743763400033628 /* ECON.txt */,
+				002B9E1C1743763400033628 /* FREN.txt */,
+				002B9E1D1743763400033628 /* GERM.txt */,
+				002B9E1E1743763400033628 /* NORW.txt */,
+				002B9E1F1743763400033628 /* PHIL.txt */,
+				002B9E201743763400033628 /* PSCI.txt */,
+				002B9E211743763400033628 /* SPAN.txt */,
 				00707B5017434002000F5AF9 /* ASIAN.txt */,
 				00707B5117434002000F5AF9 /* CHEM.txt */,
 				00707B5217434002000F5AF9 /* CSCI.txt */,
 				00707B5317434002000F5AF9 /* PHYS.txt */,
 				00707B5417434002000F5AF9 /* PSYCH.txt */,
-				00707B5517434002000F5AF9 /* STAT.txt */,
 				00707B2F17432094000F5AF9 /* Bio.txt */,
 				00707B1317431D4F000F5AF9 /* math.txt */,
 			);
