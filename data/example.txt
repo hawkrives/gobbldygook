@@ -2,23 +2,10 @@
 Xandra Best
 
 # MAJORS
-// ARMS
+// These need to be the shortened abbreviation of the major.
+
 ASIAN
-// BIO
-// CHEM
-// CLASS
-// CSCI
-// ECON
-// ESTH
-// FREN
-// GERM
-// MATH
-// NORW
-// PHIL
-// PHYS
-// PSCI
-// PSYCH
-// SPAN
+CSCI
 
 # CONCENTRATIONS
 // STAT

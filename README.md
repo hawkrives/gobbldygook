@@ -6,6 +6,7 @@ Our initial concept was a program that, when presented with a list of majors, co
 
 ## What It Does
 
+
 ## Prerequisites
 - A relatively modern C++ compiler, such as GCC 4.7 or Clang 4.2.
 - ~5MB of free disk space
@@ -15,11 +16,18 @@ Our initial concept was a program that, when presented with a list of majors, co
 
 ## How To Use
 
+The input file needs four sections: 
+
+### \# NAME
+Xandra Best
+
+### \# MAJORS
+CSCI
+
+### \# CONCENTRATIONS
+### \# COURSES
+
 ## F.A.Q.
 
 Why does my course show up as "NONE (Unknown)"?
 : That happens when the system cannot locate a course with the same ID as the one requested. It most commonly occurs when you either forget to inculde the section, or you include a section where there is not one. For example, `AmCon 201` is not a valid course, because there are two sections of AmCon. You would need to enter `AmCon 201A` to allow it to recognize the proper course.
-
-Do I need to format the input file in any way?
-: Kinda?
-: Course IDs can be in the form `CSCI 251`, `Computer Science 251`, `Csci 251`, or `cScI 251`. 

@@ -66,22 +66,13 @@ int main(int argc, const char *argv[]) {
 	// requestCourses();
 
 	// Method 2: Hard-coded file path.
-	user = Student("data/user.txt");
+	user = Student("data/example.txt");
 	
 	// Method 3: File path as an argument.
 	// Student user(argv[1]);
 
 	user.updateStanding();
 	user.display();
-//	Major m("MATH");
-//	ID id("Math 120");
-//	ID xd = id;
-	
-//	bool i = ID("CSCI251") == ID("CSCI 251");
-//	cout << i << endl;
-
-//	cout << "Question: Has the user taken CSCI 251? ";
-//	cout << user.hasTakenCourse("csci251") << endl;
 
 	return 0;
 }
