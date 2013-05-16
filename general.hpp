@@ -40,6 +40,7 @@ enum GenEd {
 
 enum course_type_t {
 	LAB,
+	DISCUSSION,
 	SEMINAR,
 	TOPIC,
 	COURSE

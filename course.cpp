@@ -84,6 +84,7 @@ Course::Course(istream &is) {
 	// Third holds the lab boolean,
 	     if (record.at(3) == "L") courseType = LAB;
 	else if (record.at(3) == "S") courseType = SEMINAR;
+	else if (record.at(3) == "D") courseType = DISCUSSION;
 	else if (record.at(3) == "T") courseType = TOPIC;
 	else                          courseType = COURSE;
 
@@ -141,6 +142,7 @@ void Course::cleanTitle() {
 	badEndings.push_back(" Not open to first-year students.");
 	badEndings.push_back(" Open only to ");
 	badEndings.push_back(" Open to ");
+	badEndings.push_back(" Discuss");
 	badEndings.push_back(" Permission of ");
 	badEndings.push_back(" Prereq");
 	badEndings.push_back(" Registration");
@@ -166,10 +168,11 @@ void Course::cleanTitle() {
 ///////////
 //////////
 string Course::getType() {
-	     if (courseType == LAB    ) return "Lab";
-	else if (courseType == SEMINAR) return "Seminar";
-	else if (courseType == TOPIC  ) return "Topic";
-	else                            return "Course";
+	     if (courseType == LAB    )    return "Lab";
+	else if (courseType == SEMINAR)    return "Seminar";
+	else if (courseType == DISCUSSION) return "Discussion";
+	else if (courseType == TOPIC  )    return "Topic";
+	else                               return "Course";
 }
 
 string Course::getProfessor() {
