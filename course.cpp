@@ -140,10 +140,11 @@ void Course::cleanTitle() {
 	badEndings.push_back(" First-Year Students may register only");
 	badEndings.push_back(" New course");
 	badEndings.push_back(" Not open to first-year students.");
-	badEndings.push_back(" Open only to ");
+	badEndings.push_back(" Open only ");
 	badEndings.push_back(" Open to ");
 	badEndings.push_back(" Discuss");
 	badEndings.push_back(" Permission of ");
+	badEndings.push_back(" Please note ");
 	badEndings.push_back(" Prereq");
 	badEndings.push_back(" Registration");
 	badEndings.push_back(" Taught in English.");
