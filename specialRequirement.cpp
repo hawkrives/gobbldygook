@@ -53,17 +53,17 @@ bool operator!= (const SpecialRequirement &l, const Requirement &r) {
 	return !(l == r);
 }
 
-ostream& SpecialRequirement::getData(ostream &os) {
-	os << name;
-	os << " needs " << needed;
-	os << ", but has " << has;
-	os << ", therefore it is ";
-	if (satisfied)
-		os << "satisfied.";
-	else
-		os << "not satisfied.";
-	return os;
-}
+//ostream& SpecialRequirement::getData(ostream &os) {
+//	os << name;
+//	os << " needs " << needed;
+//	os << ", but has " << has;
+//	os << ", therefore it is ";
+//	if (satisfied)
+//		os << "satisfied.";
+//	else
+//		os << "not satisfied.";
+//	return os;
+//}
 
 ostream &operator<<(ostream &os, SpecialRequirement &item) {
 	return item.getData(os);

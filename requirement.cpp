@@ -95,7 +95,10 @@ bool operator!= (Requirement &l, Requirement &r) {
 ostream& Requirement::getData(ostream &os) {
 	os << name;
 	os << " needs " << needed;
-	os << ", but has " << has;
+	if (satisfied)
+		os << ", and has " << has;
+	else
+		os << ", but has " << has;
 	os << ", therefore it is ";
 	if (satisfied)
 		os << "satisfied.";

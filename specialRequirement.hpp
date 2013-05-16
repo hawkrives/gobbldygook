@@ -28,7 +28,7 @@ public:
 	
 	friend class Major;
 
-	ostream& getData(ostream &os);
+//	ostream& getData(ostream &os);
 	void display();
 };
 

@@ -26,7 +26,7 @@ public:
 	friend bool operator== (const MajorRequirement &l, const Requirement &r);
 	friend bool operator!= (const MajorRequirement &l, const Requirement &r);
 
-	ostream& getData(ostream &os);
+//	ostream& getData(ostream &os);
 	void display();
 };
 

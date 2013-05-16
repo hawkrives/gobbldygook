@@ -60,17 +60,17 @@ bool operator!= (const MajorRequirement &l, const Requirement &r) {
 	return !(l == r);
 }
 
-ostream& MajorRequirement::getData(ostream &os) {
-	os << name;
-	os << " needs " << needed;
-	os << ", but has " << has;
-	os << ", therefore it is ";
-	if (satisfied)
-		os << "satisfied.";
-	else
-		os << "not satisfied.";
-	return os;
-}
+//ostream& MajorRequirement::getData(ostream &os) {
+//	os << name;
+//	os << " needs " << needed;
+//	os << ", but has " << has;
+//	os << ", therefore it is ";
+//	if (satisfied)
+//		os << "satisfied.";
+//	else
+//		os << "not satisfied.";
+//	return os;
+//}
 
 ostream &operator<<(ostream &os, MajorRequirement &item) {
 	return item.getData(os);
