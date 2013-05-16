@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000B425017441562002F1EBD /* gened.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000B424E17441562002F1EBD /* gened.cpp */; };
 		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
 		00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B32174321C2000F5AF9 /* concentration.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
 		00707B3B174321C2000F5AF9 /* course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B34174321C2000F5AF9 /* course.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
@@ -33,6 +34,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		000B424E17441562002F1EBD /* gened.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gened.cpp; sourceTree = "<group>"; };
+		000B424F17441562002F1EBD /* gened.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gened.hpp; sourceTree = "<group>"; };
+		000B4251174482D2002F1EBD /* 2010-11-interim.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2010-11-interim.csv"; sourceTree = "<group>"; };
+		000B4252174482D2002F1EBD /* 2010-11-s1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2010-11-s1.csv"; sourceTree = "<group>"; };
+		000B4253174482D2002F1EBD /* 2010-11-s2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2010-11-s2.csv"; sourceTree = "<group>"; };
+		000B4254174482D2002F1EBD /* 2012-13-interim.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-interim.csv"; sourceTree = "<group>"; };
+		000B4255174482D2002F1EBD /* 2012-13-s1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-s1.csv"; sourceTree = "<group>"; };
+		000B4256174482D2002F1EBD /* 2012-13-s2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-s2.csv"; sourceTree = "<group>"; };
+		000B4257174482D2002F1EBD /* best.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = best.txt; sourceTree = "<group>"; };
 		002B9E191743763400033628 /* ARMS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ARMS.txt; sourceTree = "<group>"; };
 		002B9E1A1743763400033628 /* CLASS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CLASS.txt; sourceTree = "<group>"; };
 		002B9E1B1743763400033628 /* ECON.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ECON.txt; sourceTree = "<group>"; };
@@ -43,7 +53,9 @@
 		002B9E201743763400033628 /* PSCI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PSCI.txt; sourceTree = "<group>"; };
 		002B9E211743763400033628 /* SPAN.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SPAN.txt; sourceTree = "<group>"; };
 		002B9E231743763E00033628 /* STAT.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = STAT.txt; sourceTree = "<group>"; };
-		00707AF817431D4F000F5AF9 /* 2012-13-s2-csv.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-s2-csv.csv"; sourceTree = "<group>"; };
+		0031BD34174483E5001888F5 /* 2011-12-interim.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2011-12-interim.csv"; sourceTree = "<group>"; };
+		0031BD35174483E5001888F5 /* 2011-12-s1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2011-12-s1.csv"; sourceTree = "<group>"; };
+		0031BD36174483E5001888F5 /* 2011-12-s2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2011-12-s2.csv"; sourceTree = "<group>"; };
 		00707AF917431D4F000F5AF9 /* b-r.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "b-r.txt"; sourceTree = "<group>"; };
 		00707AFA17431D4F000F5AF9 /* finn.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = finn.txt; sourceTree = "<group>"; };
 		00707AFB17431D4F000F5AF9 /* glewwe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = glewwe.txt; sourceTree = "<group>"; };
@@ -105,6 +117,8 @@
 		002F5D6817431CDE00A4D0A0 = {
 			isa = PBXGroup;
 			children = (
+				000B424E17441562002F1EBD /* gened.cpp */,
+				000B424F17441562002F1EBD /* gened.hpp */,
 				002B9E221743763E00033628 /* concentrations */,
 				00707B32174321C2000F5AF9 /* concentration.cpp */,
 				00707B33174321C2000F5AF9 /* concentration.hpp */,
@@ -137,7 +151,16 @@
 		00707AF717431D4F000F5AF9 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				00707AF817431D4F000F5AF9 /* 2012-13-s2-csv.csv */,
+				0031BD34174483E5001888F5 /* 2011-12-interim.csv */,
+				0031BD35174483E5001888F5 /* 2011-12-s1.csv */,
+				0031BD36174483E5001888F5 /* 2011-12-s2.csv */,
+				000B4251174482D2002F1EBD /* 2010-11-interim.csv */,
+				000B4252174482D2002F1EBD /* 2010-11-s1.csv */,
+				000B4253174482D2002F1EBD /* 2010-11-s2.csv */,
+				000B4254174482D2002F1EBD /* 2012-13-interim.csv */,
+				000B4255174482D2002F1EBD /* 2012-13-s1.csv */,
+				000B4256174482D2002F1EBD /* 2012-13-s2.csv */,
+				000B4257174482D2002F1EBD /* best.txt */,
 				00707AF917431D4F000F5AF9 /* b-r.txt */,
 				00707AFA17431D4F000F5AF9 /* finn.txt */,
 				00707AFB17431D4F000F5AF9 /* glewwe.txt */,
@@ -259,6 +282,7 @@
 				00707B4B174321D1000F5AF9 /* specialRequirement.cpp in Sources */,
 				00707B4C174321D1000F5AF9 /* student.cpp in Sources */,
 				00707B4F174323C8000F5AF9 /* requirement.cpp in Sources */,
+				000B425017441562002F1EBD /* gened.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
