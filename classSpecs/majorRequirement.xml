@@ -5,49 +5,83 @@
    type="text/xsl"?>
 
 <spec>
-<title>&sto:ENTRY;</title>
-<header>&sto:ENTRY;</header>
-<credits>&sto:ENTRY;</credits>
+<title>The MajorRequirement Class Specification</title>
+<header>This class models a simple major requirement.</header>
+<credits>Xandra Best. Wednesday, May 15, 2013</credits>
 
-<class name="&sto:ENTRY;">
+<class name="MajorRequirement">
 
-<nosuperclass/>
+<superclass name="Requirement" visibility="public">
 
 <variables>
-<var name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</var>
-&sto:ENTRY;<var name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</var>
+<var name="validCourses" type="vector of ID">Vector of courses that fulfill this requirement.</var>
 </variables>
 
 <constructors-list>
 
 <constructor>
-<desc>&sto:ENTRY;</desc>
-<arguments>
-<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-</arguments>
-<statechange>&sto:ENTRY;</statechange>
+<desc>Default constructor.</desc>
+<noarguments/>
+<statechange>MajorRequirement object is initialized by calling Requirement default constructor.</statechange>
 </constructor>
 
-&sto:ENTRY;<constructor>
-<desc>&sto:ENTRY;</desc>
+<constructor>
+<desc>Partial constructor.</desc>
 <arguments>
-<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+<arg name="str" type="string">Represents name of requirement.</arg>
 </arguments>
-<statechange>&sto:ENTRY;</statechange>
+<statechange>MajorRequirement object is initialized by calling Requirement partial constructor.</statechange>
+</constructor>
+
+<constructor>
+<desc>Regular constructor./desc>
+<arguments>
+<arg name="str" type="string">Represents name of requirement.</arg>
+<arg name="n" type="int">Represents number of courses needed to fulfill this requirement.</arg>
+</arguments>
+<statechange>MajorRequirement object is initialized by calling Requirement regular constructor.</statechange>
+</constructor>
+
+<constructor>
+<desc>Copy constructor</desc>
+<arguments>
+<arg name="c" type="const MajorRequirement">Reference to a MajorRequirement.</arg>
+</arguments>
+<statechange>MajorRequirement object is initialized by calling Requirement copy constructor.</statechange>
 </constructor>
 
 </constructors-list>
 
-<destructor>
-<desc>&sto:ENTRY;</desc>
-<statechange>&sto:ENTRY;</statechange>
-</destructor>
-
 <methods-list>
 
-<method name="&sto:ENTRY;" returntype="&sto:ENTRY;">
+<method name="init">
+<desc>Initializes instances of MajorRequirement.</desc>
+<arguments>
+<arg name="n" type="string">Name of requirement.</arg>
+</arguments>
+<statechange>Initializes instance of MajorRequirement by calling Requirement init(n,0).</statechange>
+<return>No return value.</return>
+</method>
+
+<method name="copy">
+<desc>Changes all state variables to equal those of another MajorRequirement.</desc>
+<arguments>
+<arg name="c" type="const MajorRequirement.">Reference to a MajorRequirement.</arg>
+</arguments>
+<statechange>Copies over state variables by calling Requirement copy.</statechange>
+<return>No return value.</return>
+</method>
+
+<method name="=" returntype="MajorRequirement.">
+<desc>Assignment operator.</desc>
+<arguments>
+<arg name="c" type="const MajorRequirement">Reference to a MajorRequirement.</arg>
+</arguments>
+<statechange>Changes state variables to equal those of c.</statechange>
+<return>Returns that MajorRequirement.</return>
+</method>
+
+<method name="==" returntype="&sto:ENTRY;">
 <desc>&sto:ENTRY;</desc>
 <arguments>
 <arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
@@ -57,7 +91,7 @@
 <return>&sto:ENTRY;</return>
 </method>
 
-&sto:ENTRY;<method name="&sto:ENTRY;" returntype="&sto:ENTRY;">
+<method name="!=" returntype="&sto:ENTRY;">
 <desc>&sto:ENTRY;</desc>
 <arguments>
 <arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
@@ -65,6 +99,47 @@
 </arguments>
 <statechange>&sto:ENTRY;</statechange>
 <return>&sto:ENTRY;</return>
+</method>
+
+<method name="==" returntype="&sto:ENTRY;">
+<desc>&sto:ENTRY;</desc>
+<arguments>
+<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+</arguments>
+<statechange>&sto:ENTRY;</statechange>
+<return>&sto:ENTRY;</return>
+</method>
+
+<method name="!=" returntype="&sto:ENTRY;">
+<desc>&sto:ENTRY;</desc>
+<arguments>
+<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+</arguments>
+<statechange>&sto:ENTRY;</statechange>
+<return>&sto:ENTRY;</return>
+</method>
+
+<method name="getData" returntype="&sto:ENTRY;">
+<desc>&sto:ENTRY;</desc>
+<arguments>
+<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+</arguments>
+<statechange>&sto:ENTRY;</statechange>
+<return>&sto:ENTRY;</return>
+</method>
+
+<method name="display" returntype="&sto:ENTRY;">
+<desc>&sto:ENTRY;</desc>
+<arguments>
+<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
+</arguments>
+<statechange>&sto:ENTRY;</statechange>
+<return>&sto:ENTRY;</return>
+</return>
 </method>
 
 </methods-list>

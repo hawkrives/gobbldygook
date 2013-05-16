@@ -130,8 +130,8 @@
 <arguments>
 <arg name="os" type="ostream">reference to ostream.</arg>
 </arguments>
-<statechange>No state change.</statechange>
-<return>Reference to ostream detailing student's majors, concentrations, and courses.</return>
+<statechange>Data about student's majors, concentrations, and courses read out to ostream.</statechange>
+<return>Reference to ostream.</return>
 </method>
 
 <method name="display">
