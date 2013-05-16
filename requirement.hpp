@@ -19,8 +19,6 @@ public:
 	Requirement(string str, int n);
 	Requirement(const Requirement &c);
 	Requirement operator= (const Requirement &c);
-	Requirement& operator++();
-    Requirement& operator--();
 	
 	void incrementHas();
 	void decrementHas();

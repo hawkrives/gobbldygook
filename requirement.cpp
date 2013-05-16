@@ -52,14 +52,6 @@ void Requirement::decrementHas() {
 	else
 		satisfied = false;
 }
-Requirement& Requirement::operator++() {
-	Requirement::incrementHas();
-	return *this;
-}
-Requirement& Requirement::operator--() {
-	Requirement::decrementHas();
-	return *this;
-}
 
 string Requirement::getName() {
 	return name;
