@@ -15,6 +15,7 @@ Our initial concept was a program that, when presented with a list of majors, co
 - A terminal. We have not tested with anything besides Terminal.app and gnome-terminal, but most others should work. We have no interest in supporting Windows' `cmd` at this time.
 
 ## How To Use
+To make it, just run `make` in a terminal that is pointed at the directory containing the files. It looks for a file called `example.txt` in `./data/`.
 
 The input file needs four sections: 
 
@@ -25,7 +26,11 @@ Xandra Best
 CSCI
 
 ### \# CONCENTRATIONS
+STAT
+
 ### \# COURSES
+CSCI 251
+
 
 ## F.A.Q.
 
