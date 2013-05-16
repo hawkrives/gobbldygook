@@ -148,26 +148,22 @@ ostream& Student::getData(ostream &os) {
 	}
 
 	for (vector<Major>::iterator m = majors.begin(); m != majors.end(); ++m) {
-		for (vector<Course>::iterator c = courses.begin(); c != courses.end(); ++c) {
-			for (vector<MajorRequirement>::iterator req = m->requirements.begin(); req != m->requirements.end(); ++req) {
+		for (vector<MajorRequirement>::iterator req = m->requirements.begin(); req != m->requirements.end(); ++req) {
+			cout << *req << endl;
+		}
+		for (vector<SpecialRequirement>::iterator set = m->specialRequirements.begin(); set != m->specialRequirements.end(); ++set) {
+			for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
 				cout << *req << endl;
-			}
-			for (vector<SpecialRequirement>::iterator set = m->specialRequirements.begin(); set != m->specialRequirements.end(); ++set) {
-				for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
-					cout << *req << endl;
-				}
 			}
 		}
 	}
 	for (vector<Concentration>::iterator conc = concentrations.begin(); conc != concentrations.end(); ++conc) {
-		for (vector<Course>::iterator c = courses.begin(); c != courses.end(); ++c) {
-			for (vector<MajorRequirement>::iterator req = conc->requirements.begin(); req != conc->requirements.end(); ++req) {
+		for (vector<MajorRequirement>::iterator req = conc->requirements.begin(); req != conc->requirements.end(); ++req) {
+			cout << *req << endl;
+		}
+		for (vector<SpecialRequirement>::iterator set = conc->specialRequirements.begin(); set != conc->specialRequirements.end(); ++set) {
+			for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
 				cout << *req << endl;
-			}
-			for (vector<SpecialRequirement>::iterator set = conc->specialRequirements.begin(); set != conc->specialRequirements.end(); ++set) {
-				for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
-					cout << *req << endl;
-				}
 			}
 		}
 	}
@@ -179,16 +175,14 @@ void Student::updateStanding() {
 	for (vector<Major>::iterator m = majors.begin(); m != majors.end(); ++m) {
 		for (vector<Course>::iterator c = courses.begin(); c != courses.end(); ++c) {
 			for (vector<MajorRequirement>::iterator req = m->requirements.begin(); req != m->requirements.end(); ++req) {
-				// if (c->id in *req.validCourses) {
 				if (req->checkCourseValidity(c->getID())) {
-					*req++;
+					req->incrementHas();
 				}
 			}
 			for (vector<SpecialRequirement>::iterator set = m->specialRequirements.begin(); set != m->specialRequirements.end(); ++set) {
 				for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
-					// if (c->id in *req.validCourses) {
 					if (req->checkCourseValidity(c->getID())) {
-						*req++;
+						req->incrementHas();
 					}
 				}
 			}
@@ -197,16 +191,14 @@ void Student::updateStanding() {
 	for (vector<Concentration>::iterator conc = concentrations.begin(); conc != concentrations.end(); ++conc) {
 		for (vector<Course>::iterator c = courses.begin(); c != courses.end(); ++c) {
 			for (vector<MajorRequirement>::iterator req = conc->requirements.begin(); req != conc->requirements.end(); ++req) {
-				// if (c->id in *req.validCourses) {
 				if (req->checkCourseValidity(c->getID())) {
-					*req++;
+					req->incrementHas();
 				}
 			}
 			for (vector<SpecialRequirement>::iterator set = conc->specialRequirements.begin(); set != conc->specialRequirements.end(); ++set) {
 				for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
-					// if (c->id in *req.validCourses) {
 					if (req->checkCourseValidity(c->getID())) {
-						*req++;
+						req->incrementHas();
 					}
 				}
 			}
