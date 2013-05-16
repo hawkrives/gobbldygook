@@ -6,8 +6,8 @@ using namespace std;
 vector<Course> all_courses;
 Student user;
 
-void loadCourses() {
-	ifstream infile("data/2012-13-s2-csv.csv");
+void loadCourses(string filename) {
+	ifstream infile(filename.c_str());
 	string str; // read in the header line
 	getline(infile, str);
 	while (infile.peek() != -1){
@@ -19,6 +19,11 @@ void loadCourses() {
 		if (c->getProfessor()[1] == ' ')
 			if (c->getProfessor()[2] == '0' || c->getProfessor()[2] == '1')
 				cout << *c << endl;
+}
+
+void readData() {
+	loadCourses("data/2012-13-s1.csv");
+	loadCourses("data/2012-13-s2.csv");
 }
 
 void welcome() {
@@ -41,7 +46,7 @@ void requestCourses() {
 }
 
 int main(int argc, const char *argv[]) {
-	loadCourses();
+	readData();
 	
 	// Method 1: Dynamic.
 	// welcome();
