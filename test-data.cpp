@@ -22,8 +22,17 @@ void loadCourses(string filename) {
 }
 
 void readData() {
-	loadCourses("data/2012-13-s1.csv");
 	loadCourses("data/2012-13-s2.csv");
+	loadCourses("data/2012-13-s1.csv");
+	loadCourses("data/2012-13-s1.csv");
+
+	loadCourses("data/2011-12-s1.csv");
+	loadCourses("data/2011-12-s1.csv");
+	loadCourses("data/2011-12-s1.csv");
+
+	loadCourses("data/2010-11-s1.csv");
+	loadCourses("data/2010-11-s1.csv");
+	loadCourses("data/2010-11-s1.csv");
 }
 
 void welcome() {
