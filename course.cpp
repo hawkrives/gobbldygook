@@ -183,8 +183,8 @@ ID Course::getID() {
 	return id;
 }
 
-Department Course::getDepartment(int i = 0) {
-	return department[i];
+Department Course::getDepartment(int i) {
+	return id.getDepartment(i);
 }
 
 int Course::getNumber() {

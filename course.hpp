@@ -44,7 +44,7 @@ public:
 
 	void cleanTitle();
 
-	Department getDepartment(int i);
+	Department getDepartment(int i = 0);
 	string getProfessor();
 	ID getID();
 	string getType();
