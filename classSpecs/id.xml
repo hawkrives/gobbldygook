@@ -1,74 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE spec SYSTEM "http://www.cs.stolaf.edu/lib/SpecML/SpecML.dtd">
 <?xml-stylesheet
-   href="http://www.cs.stolaf.edu/lib/SpecML/SpecMLToHTML.xsl"
-   type="text/xsl"?>
+href="http://www.cs.stolaf.edu/lib/SpecML/SpecMLToHTML.xsl"
+type="text/xsl"?>
 
 <spec>
-<title>&sto:ENTRY;</title>
-<header>&sto:ENTRY;</header>
-<credits>&sto:ENTRY;</credits>
+	<title>The ID Class Specification</title>
+	<header>This class models a way to identifify a single course.</header>
+	<credits>Hawken Rives. Thursday, May 16, 2013</credits>
 
-<class name="&sto:ENTRY;">
+	<class name="ID">
 
-<nosuperclass/>
+		<nosuperclass/>
 
-<variables>
-<var name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</var>
-&sto:ENTRY;<var name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</var>
-</variables>
+		<variables>
+			<var name="departments" type="vector&lt;Department&rt;">Vector of departments, used essentially to store the various names of departments.</var>
+			<var name="number" type="int">The number associated with a course.</var>
+			<var name="section" type="string">The section associated with a course.</var>
+		</variables>
 
-<constructors-list>
+		<constructors-list>
 
-<constructor>
-<desc>&sto:ENTRY;</desc>
-<arguments>
-<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-</arguments>
-<statechange>&sto:ENTRY;</statechange>
-</constructor>
+			<constructor>
+				<desc>Default constructor.</desc>
+				<arguments>
+					<noarguments/>
+				</arguments>
+				<statechange>ID object is initialized by calling ID::init with a blank department, a zero for the section, and an empty string for the section.</statechange>
+			</constructor>
 
-&sto:ENTRY;<constructor>
-<desc>&sto:ENTRY;</desc>
-<arguments>
-<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-</arguments>
-<statechange>&sto:ENTRY;</statechange>
-</constructor>
+			<constructor>
+				<desc>Copy constructor.</desc>
+				<arguments>
+					<arg name="c" type="const ID&amp;">The object to copy.</arg>
+				</arguments>
+				<statechange>Calls ID::copy and passes c along.</statechange>
+			</constructor>
 
-</constructors-list>
+			<constructor>
+				<desc>Regular constructor.</desc>
+				<arguments>
+					<arg name="str" type="string">A string containing the ID to parse.</arg>
+				</arguments>
+				<statechange>Parses a string and assigns various parts to various variables.</statechange>
+			</constructor>
 
-<destructor>
-<desc>&sto:ENTRY;</desc>
-<statechange>&sto:ENTRY;</statechange>
-</destructor>
+			<constructor>
+				<desc>Regular constructor.</desc>
+				<arguments>
+					<arg name="dn" type="string">A string containing part of the ID to parse, namely the department and number.</arg>
+					<arg name="s" type="string">A string containing part of the ID to parse, namely the section.</arg>
+				</arguments>
+				<statechange>Passes the concatenated result of (dn + s) to the single string constuctor.</statechange>
+			</constructor>
 
-<methods-list>
+			<constructor>
+				<desc>Regular constructor.</desc>
+				<arguments>
+					<arg name="s1" type="string">A string containing part of the ID to parse, namely the department.</arg>
+					<arg name="s2" type="string">A string containing part of the ID to parse, namely the number.</arg>
+					<arg name="s3" type="string">A string containing part of the ID to parse, namely the section.</arg>
+				</arguments>
+				<statechange>Passes the concatenated result of (d + n + s) to the single string constuctor.</statechange>
+			</constructor>
 
-<method name="&sto:ENTRY;" returntype="&sto:ENTRY;">
-<desc>&sto:ENTRY;</desc>
-<arguments>
-<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-</arguments>
-<statechange>&sto:ENTRY;</statechange>
-<return>&sto:ENTRY;</return>
-</method>
+			<constructor>
+				<desc>Regular constructor.</desc>
+				<arguments>
+					<arg name="d" type="Department">A Department containing the department for the identifier.</arg>
+					<arg name="n" type="int">An integer containing a number for the identifier.</arg>
+					<arg name="s" type="string">A string containing the section for the identifier.</arg>
+				</arguments>
+				<statechange>Calls ID::init and passes along d, n, and s.</statechange>
+			</constructor>
 
-&sto:ENTRY;<method name="&sto:ENTRY;" returntype="&sto:ENTRY;">
-<desc>&sto:ENTRY;</desc>
-<arguments>
-<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-&sto:ENTRY;<arg name="&sto:ENTRY;" type="&sto:ENTRY;">&sto:ENTRY;</arg>
-</arguments>
-<statechange>&sto:ENTRY;</statechange>
-<return>&sto:ENTRY;</return>
-</method>
+		</constructors-list>
 
-</methods-list>
+		<methods-list>
 
-</class>
+			<method name="init" returntype="void">
+				<desc>Assigns things to their proper places within the class.</desc>
+				<arguments>
+					<arg name="d" type="Department">The department of the ID.</arg>
+					<arg name="n" type="int">The number of the ID.</arg>
+					<arg name="s" type="string">The section of the ID.</arg>
+				</arguments>
+				<statechange>Creates the ID.</statechange>
+				<return>No return value.</return>
+			</method>
+
+			<method name="copy" returntype="void">
+				<desc>Copies things to their proper places within the class.</desc>
+				<arguments>
+					<arg name="c" type="const ID&amp;">The ID object to copy from.</arg>
+				</arguments>
+				<statechange>Creates a copy of c.</statechange>
+				<return>No return value.</return>
+			</method>
+
+			<method name="getDepartment" returntype="Department">
+				<desc>Returns the department.</desc>
+				<arguments>
+					<arg name="i" type="int">The index of Department, in case there are two.</arg>
+				</arguments>
+				<statechange>No state change.</statechange>
+				<return>Department</return>
+			</method>
+
+			<method name="getDepartment_const" returntype="const Department">
+				<desc>Returns the department.</desc>
+				<arguments>
+					<arg name="i" type="int">The index of Department, in case there are two.</arg>
+				</arguments>
+				<statechange>No state change.</statechange>
+				<return>const Department</return>
+			</method>
+
+			<method name="getNumber" returntype="int">
+				<desc>Returns the number.</desc>
+				<noarguments/>
+				<statechange>No state change.</statechange>
+				<return>int</return>
+			</method>
+
+			<method name="getSection" returntype="string">
+				<desc>Returns the section.</desc>
+				<noarguments/>
+				<statechange>No state change.</statechange>
+				<return>string</return>
+			</method>
+
+		</methods-list>
+
+	</class>
 
 </spec>
