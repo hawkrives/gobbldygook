@@ -61,7 +61,7 @@ C,ASIAN 397,,,Human Rights/AsianContext Prerequisite: Completion of BTS-T or per
 O,ASIAN 398,,,IR/,,1.00,N,,,,Staff
 C,BI/ES 226,,,Conservation Biology Prerequisite: one natural science course.,,1.00,N,IST,T 0935-1100 Th 0930-1050,RNS 435 RNS 435,"Angell, Diane K."
 C,BIO 110,,,Suppl Inst Cell Biol Registration by invitation only.,,0.25,Y,,MWF 1150-1245PM,RNS 226,"Walter, Anne"
-C,BIO 123,,,"Human Biology Students in Bio 123 must also register for one lab Bio 123 AL, BL, or CL.",,1.00,N,IST SED,T 1145-0110PM Th 1245-0205PM,RNS 210 RNS 210,"Van Wylen, David"
+C,BIO 123,,,"Human Biology Students in Bio 123 must also register for one lab Bio 123 AL/BL/CL.",,1.00,N,IST SED,T 1145-0110PM Th 1245-0205PM,RNS 210 RNS 210,"Van Wylen, David"
 C,BIO 123,A,L,Human Biology Lab,,0.00,N,,W 0200-0400PM,RNS 254,"Van Wylen, David"
 C,BIO 123,B,L,Human Biology Lab,,0.00,N,,Th 0900-1100,RNS 254,"Van Wylen, David"
 C,BIO 123,C,L,Human Biology Lab,,0.00,N,,Th 0215-0415PM,RNS 254,"Van Wylen, David"
@@ -932,7 +932,7 @@ C,SPAN 311,,T,Language in Society,,1.00,N,,T 0120-0245PM Th 0215-0335PM,TOH 316 
 O,SPAN 314,,T,Lit & Soc Latin America,,1.00,N,ALS-L,T 1145-0110PM Th 1245-0205PM,TOH 112 TOH 112,"Villate-Isaza, Alberto"
 C,SPAN 394,,,Academic Internship,,1.00,Y,,,,Staff
 O,SPAN 398,,,IR/,,1.00,N,,,,Staff
-C,STAT 110,,,"Prin of Statistics Students in Stat 110 must also register for one lab section Stat 110 AL, BL, or CL.",,1.00,N,AQR,T 0800-0925 Th 0800-0920,RNS 150 RNS 150,"Lane-Getaz, Sharon"
+C,STAT 110,,,"Prin of Statistics Students in Stat 110 must also register for one lab section Stat 110 AL/BL/CL.",,1.00,N,AQR,T 0800-0925 Th 0800-0920,RNS 150 RNS 150,"Lane-Getaz, Sharon"
 C,STAT 110,A,L,Prin of Statistics Lab,,0.00,N,,F 0800-0855,RML 115,"Lane-Getaz, Sharon"
 C,STAT 110,B,L,Prin of Statistics Lab,,0.00,N,,F 0905-1000,RML 115,"Lane-Getaz, Sharon"
 C,STAT 110,C,L,Prin of Statistics Lab,,0.00,N,,F 1045-1140,RML 115,"Lane-Getaz, Sharon"
