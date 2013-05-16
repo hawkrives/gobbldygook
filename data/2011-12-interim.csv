@@ -43,11 +43,11 @@ O,ASIAN 398,,,IR/,,1.00 ,N,,,,Staff
 C,BI/ES 286,,,Tropical Ecology This is an off-campus course.,,1.00 ,N,,,,"Shea, Kathleen L."
 O,BIO 124,,,The Biology of Women This course has class year limits.,,1.00 ,N,IST,MTThF 1040-1200PM MTThF 0100-0300PM,RNS 210 RNS 210,"Resnick, Tamar"
 C,BIO 125,,,Cell Bio & Genetics Students in Bio 125 must also register for lab Bio 125 L.,,1.00 ,N,IST SED,M-F 0100-0300PM,RNS 390,"Fruehling, Sara E."
-C,BIO 125,,L,    Cell Bio & Genetics Lab,,0.00 ,N,,M-F 0800-1000 M-F 1040-1200PM,RNS 394 RNS 394,"Fruehling, Sara E."
+C,BIO 125,,L,Cell Bio & Genetics Lab,,0.00 ,N,,M-F 0800-1000 M-F 1040-1200PM,RNS 394 RNS 394,"Fruehling, Sara E."
 O,BIO 128,,,"Water:Prec, Precar, &Prob This course has class-year limits.",,1.00 ,N,IST,M-F 0900-1000 M-F 1040-1200PM,RNS 190 RNS 190,"Van Wylen, David"
 C,BIO 130,,,Bodies and Biomes Arizona This is an off-campus course.,,1.00 ,N,IST SED SPM,,,"Porterfield, Jean C. Stromayer, Judith"
 C,BIO 135,,,Thinking & Doing Bio Students in Bio 135 must also register for lab Bio 135 L. This course has class-year limits.,,1.00 ,N,IST SED,M-F 0900-1000,RNS 455,"Giannini, John"
-C,BIO 135,,L,    Thinking & Doing Bio Lab,,0.00 ,N,,M-F 1040-0100PM,RNS 455,"Giannini, John"
+C,BIO 135,,L,Thinking & Doing Bio Lab,,0.00 ,N,,M-F 1040-0100PM,RNS 455,"Giannini, John"
 C,BIO 282,,,Desert Biology This is an off-campus course.,,1.00 ,N,,,,"Freedberg, Steven"
 C,BIO 284,,,Peruvian Medical Exp This is an off-campus course.,,1.00 ,N,,,,"Johnson, Theodore"
 C,BIO 294,,,Academic Internship,,1.00 ,Y,,,,"Porterfield, Jean C."
@@ -70,18 +70,18 @@ O,BMOLS 298,,,IS/,,1.00 ,N,,,,Staff
 C,BMOLS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
 O,BMOLS 398,,,IR/GC/MS Lipid Analysis,,1.00 ,N,,,,"Muth, Gregory W."
 O,CH/BI 126,,,Integrated Chem/Bio II Students in CH/BI 126 must also register for lab CH/BI 126 AL or BL. Open only to those students who have completed CH/BI 125.,,1.00 ,N,,M-F 0800-1000 M-F 1040-1240PM,RNS 310 RNS 310,"Schwinefus, Jeffrey J. Listenberger, Laura"
-C,CH/BI 126,A,L,    Integrate Chem/Bio II Lab,,0.00 ,N,,M-Th 1230-0300PM,RNS 355,"Schwinefus, Jeffrey J. Listenberger, Laura"
-O,CH/BI 126,B,L,    Integrate Chem/Bio II Lab,,0.00 ,N,,M-Th 1230-0300PM,RNS 350,"Schwinefus, Jeffrey J. Listenberger, Laura"
+C,CH/BI 126,A,L,Integrate Chem/Bio II Lab,,0.00 ,N,,M-Th 1230-0300PM,RNS 355,"Schwinefus, Jeffrey J. Listenberger, Laura"
+O,CH/BI 126,B,L,Integrate Chem/Bio II Lab,,0.00 ,N,,M-Th 1230-0300PM,RNS 350,"Schwinefus, Jeffrey J. Listenberger, Laura"
 C,CHEM 123,A,,Atom/Molec Structure,,1.00 ,N,,M-F 0800-1000,RNS 390,"Marlier, Elodie"
 O,CHEM 123,B,,Atom/Molec Structure,,1.00 ,N,,M-F 1040-1240PM,RNS 390,"Pearson, Wesley"
 C,CHEM 124,,,A Matter of Environ Students in Chemistry 124 must also register for lab Chemistry 124 L.,,1.00 ,N,IST SED,M-F 0800-1000,RNS 410,"Muth, Gregory W."
-C,CHEM 124,,L,    A Matter of Environ Lab,,0.00 ,N,,TWTh 1230-0330PM,RNS 454,"Muth, Gregory W."
+C,CHEM 124,,L,A Matter of Environ Lab,,0.00 ,N,,TWTh 1230-0330PM,RNS 454,"Muth, Gregory W."
 C,CHEM 252,,,Organometallic Chem,,1.00 ,N,WRI,M-F 0100-0300PM,RNS 435,"Kalyani, Dipannita"
 C,CHEM 260,,,Med Chem in Jamaica This is an off-campus course.,,1.00 ,N,,,,"Hanson, Robert"
 C,CHEM 294,,,Academic Internship,,1.00 ,Y,,,,"Beussman, Douglas J."
 O,CHEM 298,,,IS/,,1.00 ,N,,,,Staff
 O,CHEM 380,,,Organic Analys/Theory Lab time to be arranged. Students in Chemistry 380 must also register for lab Chemistry 380 L.,,1.00 ,N,,M-F 1040-1240PM,RNS 435,"Gittins, Peter J."
-O,CHEM 380,,L,    Organic Analys/Theory Lab,,0.00 ,N,,,,"Gittins, Peter J."
+O,CHEM 380,,L,Organic Analys/Theory Lab,,0.00 ,N,,,,"Gittins, Peter J."
 C,CHEM 394,,,Academic Internship,,1.00 ,Y,,,,Staff
 O,CHEM 398,,,IR/GS-MS of Human Scent,,1.00 ,N,,,,"Beussman, Douglas J."
 O,CHEM 398,A,,IR/Organomet Synthesis,,1.00 ,N,,,,"Beussman, Douglas J."
@@ -296,7 +296,7 @@ O,PHIL 298,,,IS/,,1.00 ,N,,,,Staff
 C,PHIL 394,,,Academic Internship,,1.00 ,Y,,,,Staff
 O,PHIL 398,,,IR/,,1.00 ,N,,,,Staff
 C,PHYS 252,,,Musical Acoustics Students in Physics 252 must also register for lab Physics 252 L. Closed to First-Year Students during web registration.,,1.00 ,N,IST SED,M-F 0830-1000,RNS 210,"Nitz, David"
-C,PHYS 252,,L,    Musical Acoustics Lab,,0.00 ,N,,M-F 0100-0330PM,RNS 292,"Martsberger, Carolyn M."
+C,PHYS 252,,L,Musical Acoustics Lab,,0.00 ,N,,M-F 0100-0330PM,RNS 292,"Martsberger, Carolyn M."
 C,PHYS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
 O,PHYS 298,,,IS/,,1.00 ,N,,,,Staff
 C,PHYS 298,A,,IS/Elect Circuits Wash U,,1.00 ,N,,,,"Dahl, David"
