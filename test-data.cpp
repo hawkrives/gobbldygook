@@ -16,10 +16,13 @@ void loadCourses(string filename) {
 		// cout << incourse << endl;
 	}
 
-	for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c)
+	for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c) {
 		if (c->getProfessor()[1] == ' ')
 			if (c->getProfessor()[2] == '0' || c->getProfessor()[2] == '1')
 				cout << *c << endl;
+		if (c->getDepartment(0) == NONE)
+			cout << *c << endl;
+	}
 }
 
 void readData() {
