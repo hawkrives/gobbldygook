@@ -176,6 +176,7 @@ dept_t Department::stringToDept(string str) {
 	else if ( str == "PSYCH" ) return PSYCH;
 	else if ( str == "REL"   ) return REL;
 	else if ( str == "RUSSN" ) return RUSSN;
+	else if ( str == "RUSST" ) return RUSSN;
 	else if ( str == "SCICN" ) return SCICN;
 	else if ( str == "SOAN"  ) return SOAN;
 	else if ( str == "SPAN"  ) return SPAN;
@@ -183,6 +184,7 @@ dept_t Department::stringToDept(string str) {
 	else if ( str == "SWRK"  ) return SWRK;
 	else if ( str == "THEAT" ) return THEAT;
 	else if ( str == "WMGST" ) return WMGST;
+	else if ( str == "WMNST" ) return WMGST;
 	else if ( str == "WRIT"  ) return WRIT;
 	else return NONE;
 }
@@ -196,6 +198,7 @@ dept_t Department::shortStringToDept(string str) {
 	else if ( str == "IS" ) return IS;
 	else if ( str == "ID" ) return INTER;
 	else if ( str == "RE" ) return REL;
+	else if ( str == "PH" ) return PHIL;
 	else return NONE;
 }
 dept_t Department::longStringToDept(string str) {
@@ -248,6 +251,8 @@ dept_t Department::longStringToDept(string str) {
 	else if ( str == "POLITICAL SCIENCE"                         ) return PSCI;
 	else if ( str == "PSYCHOLOGY"                                ) return PSYCH;
 	else if ( str == "RELIGION"                                  ) return REL;
+	// todo: this should be russt
+	else if ( str == "RUSSIAN STUDIES"                           ) return RUSSN;
 	else if ( str == "RUSSIAN"                                   ) return RUSSN;
 	else if ( str == "SCIENCE CONVERSATION"                      ) return SCICN;
 	else if ( str == "SOCIOLOGY AND ANTHROPOLOGY"                ) return SOAN;
@@ -255,6 +260,7 @@ dept_t Department::longStringToDept(string str) {
 	else if ( str == "STATISTICS"                                ) return STAT;
 	else if ( str == "SOCIAL WORK"                               ) return SWRK;
 	else if ( str == "THEATER"                                   ) return THEAT;
+	else if ( str == "WOMEN'S STUDIES"                           ) return WMGST;
 	else if ( str == "WOMEN'S & GENDER STUDIES"                  ) return WMGST;
 	else if ( str == "WRITING"                                   ) return WRIT;
 	else return NONE;
