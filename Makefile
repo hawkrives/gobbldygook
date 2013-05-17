@@ -5,11 +5,9 @@ ARCH := $(shell uname)
 ifeq ($(ARCH), Linux)
 else
 CC = clang++
-CLANG_WARNINGS = -Weverything -Wshadow
+CLANG_WARNINGS_ON = -Wshadow
 CLANG_WARNINGS_OFF = -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-non-virtual-dtor
-CFLAGS = -g $(CLANG_WARNINGS) $(CLANG_WARNINGS_OFF)
-MACOSX_DEFINE = -DMACOSX -I/sw/include
-LIBS = -I/usr/common/include
+CFLAGS = -g -Weverything $(CLANG_WARNINGS_ON) $(CLANG_WARNINGS_OFF)
 endif
 
 OBJECTS = general.o \
@@ -27,17 +25,17 @@ OBJECTS = general.o \
 # $< takes the thing to the right of the label
 
 main: test-data.o
-	$(CC) $(CFLAGS) -o $@ $< $(OBJECTS) $(LIBS)
+	$(CC) $(CFLAGS) -o $@ $< $(OBJECTS)
 
 ## # # # # # # ##
 
 test-data.o: $(OBJECTS) test-data.cpp
-	$(CC) $(CFLAGS) $(MACOSX_DEFINE) $(LIBS) -c test-data.cpp
+	$(CC) $(CFLAGS) -c test-data.cpp
 
 ## # # # # # # ##
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) $(MACOSX_DEFINE) $(LIBS) -c $<
+	$(CC) $(CFLAGS) -c $<
 
 clean:
 	rm -f *.o main
