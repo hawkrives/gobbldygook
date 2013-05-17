@@ -147,25 +147,22 @@ ostream& Student::getData(ostream &os) {
 		os << *i << endl;
 	}
 
+	// TODO: don't cout an extra line at the end of the output.
+
 	for (vector<Major>::iterator m = majors.begin(); m != majors.end(); ++m) {
-		for (vector<MajorRequirement>::iterator req = m->requirements.begin(); req != m->requirements.end(); ++req) {
+		for (vector<MajorRequirement>::iterator req = m->requirements.begin(); req != m->requirements.end(); ++req)
 			cout << *req << endl;
-		}
-		for (vector<SpecialRequirement>::iterator set = m->specialRequirements.begin(); set != m->specialRequirements.end(); ++set) {
-			for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
+		for (vector<SpecialRequirement>::iterator set = m->specialRequirements.begin(); set != m->specialRequirements.end(); ++set)
+			for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req)
 				cout << *req << endl;
-			}
-		}
 	}
+
 	for (vector<Concentration>::iterator conc = concentrations.begin(); conc != concentrations.end(); ++conc) {
-		for (vector<MajorRequirement>::iterator req = conc->requirements.begin(); req != conc->requirements.end(); ++req) {
+		for (vector<MajorRequirement>::iterator req = conc->requirements.begin(); req != conc->requirements.end(); ++req)
 			cout << *req << endl;
-		}
-		for (vector<SpecialRequirement>::iterator set = conc->specialRequirements.begin(); set != conc->specialRequirements.end(); ++set) {
-			for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
+		for (vector<SpecialRequirement>::iterator set = conc->specialRequirements.begin(); set != conc->specialRequirements.end(); ++set)
+			for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req)
 				cout << *req << endl;
-			}
-		}
 	}
 
 	return os;
