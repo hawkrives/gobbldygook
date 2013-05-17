@@ -147,6 +147,8 @@ ostream& Student::getData(ostream &os) {
 		os << *i << endl;
 	}
 
+	os << endl;
+
 	// TODO: don't cout an extra line at the end of the output.
 
 	for (vector<Major>::iterator m = majors.begin(); m != majors.end(); ++m) {
