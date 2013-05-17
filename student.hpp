@@ -12,7 +12,7 @@ private:
 	void init(string n, int s, int g, string m);
 public:
 	string name;
-	int startingYear, gradutationYear;
+	int startingYear, graduationYear;
 
 	vector<Major> majors;
 	vector<Concentration> concentrations;
