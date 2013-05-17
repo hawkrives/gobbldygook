@@ -86,20 +86,17 @@ bool operator!= (Requirement &l, Requirement &r) {
 
 ostream& Requirement::getData(ostream &os) {
 	if (satisfied)
-		cout << "✅  ";
+		cout << "✅";
 	else
-		cout << "❌  ";
+		cout << "❌";
+	os << "  ";
 	os << name;
 	os << " needs " << needed;
 	if (satisfied)
-		os << ", and has " << has;
+		os << ", and has ";
 	else
-		os << ", but has " << has;
-	os << ", therefore it is ";
-	if (satisfied)
-		os << "satisfied.";
-	else
-		os << "not satisfied.";
+		os << ", but has ";
+	os << has << ".";
 	return os;
 }
 
