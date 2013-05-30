@@ -42,6 +42,12 @@
       <PathRunnable
          FilePath = "/Users/hawken/Projects/gobbldygook/main">
       </PathRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "--load &quot;data/user.txt&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
