@@ -14,6 +14,7 @@ OBJECTS = general.o \
 	concentration.o \
 	course.o \
 	department.o \
+	gened.o \
 	id.o \
 	major.o \
 	majorRequirement.o \

@@ -5,7 +5,6 @@ void GenEd::init(string n) {
 }
 
 GenEd::GenEd() {
-	init("", 0);
+	init("");
 }
 
-GenEd::GenEd(string str) {};
