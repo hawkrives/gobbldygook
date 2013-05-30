@@ -13,7 +13,7 @@
 
 using namespace std;
 
-enum GenEd {
+enum gened_t {
 	// Foundation Studies
 	FYW,   // First-Year Writing 
 	WRI,   // Writing in Context

@@ -24,7 +24,7 @@ private: // variables
 	string location;
 	
 	course_type_t courseType;
-	GenEd* geneds;
+	gened_t* geneds;
 	
 	bool days[7];
 	float time[7];
