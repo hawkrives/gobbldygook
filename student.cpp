@@ -90,6 +90,7 @@ bool Student::hasTakenCourse(string str) {
 }
 
 ostream& Student::getData(ostream &os) {
+	updateStanding();
 	os << name << ", ";
 	
 	if (majors.size()) {
