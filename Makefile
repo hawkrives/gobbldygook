@@ -1,6 +1,6 @@
 SHELL= /bin/sh
 CC   = g++
-CFLAGS = -Wall -g
+CFLAGS = -g
 
 ARCH := $(shell uname)
 ifeq ($(ARCH), Linux)
@@ -8,8 +8,8 @@ ifeq ($(ARCH), Linux)
 else
 CC = clang++
 CLANG_WARNINGS_ON = -Weverything -Wshadow
-CFLAGS = -g
 CLANG_WARNINGS_OFF = -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-non-virtual-dtor -Wno-c++98-compat
+CFLAGS += -std=c++11
 endif
 
 OBJECTS = general.o \
