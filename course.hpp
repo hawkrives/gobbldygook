@@ -4,6 +4,7 @@
 #include "general.hpp"
 #include "major.hpp"
 #include "id.hpp"
+#include "gened.hpp"
 using namespace std;
 
 class Course {
