@@ -19,7 +19,6 @@ public:
 	ID(string dn, string s) : ID(dn + s) {}
 	ID(string d, string n, string s) : ID(d + n + s) {}
 	ID(Department d, int n, string s);
-	ID& operator= (const ID &c);
 	
 	Department getDepartment(int i);
 	const Department getDepartment_const(int i);
