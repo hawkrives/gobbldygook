@@ -7,29 +7,25 @@
 using namespace std;
 
 class SpecialRequirement : public Requirement {
-public: // todo: make private
-	void init(string n);
-	void copy(const SpecialRequirement &c);
-	vector<MajorRequirement> validSets;
+protected:
+	vector<MajorRequirement *> validSets;
+
 public:
-	SpecialRequirement();
-	SpecialRequirement(string str);
-	SpecialRequirement(string str, int n);
-	SpecialRequirement(const SpecialRequirement &c);
-	SpecialRequirement operator= (const SpecialRequirement &c);
+	SpecialRequirement() : SpecialRequirement("", 0) {}
+	SpecialRequirement(string str) : SpecialRequirement(str, 0) {}
+	SpecialRequirement(string str, int n) : Requirement(str, n) {}
+
 	bool fulfillsRequirement(const MajorRequirement& c);
-	
-	void addSet(const MajorRequirement& mr);
-	
+
+	void addSet(MajorRequirement mr);
+	const vector<MajorRequirement *> getValidSets() const;
+
 	friend bool operator== (const SpecialRequirement &l, const SpecialRequirement &r);
 	friend bool operator!= (const SpecialRequirement &l, const SpecialRequirement &r);
 	friend bool operator== (const SpecialRequirement &l, const Requirement &r);
 	friend bool operator!= (const SpecialRequirement &l, const Requirement &r);
-	
-	friend class Major;
 
-//	ostream& getData(ostream &os);
-	void display();
+	friend class Major;
 };
 
 ostream &operator<<(ostream &os, SpecialRequirement &item);
