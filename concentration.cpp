@@ -9,7 +9,7 @@ Concentration::Concentration(string s) : Major() {
 	string contentsOfFile = getFileContents("concentrations/" + department.getName() + ".txt");
 	vector<string> record = split(contentsOfFile, '\n');
 	
-	Major::init(record);
+	Major::parse(record);
 	
 	name = department.getFullName();
 	record.clear();

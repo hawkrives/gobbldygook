@@ -9,6 +9,8 @@ using namespace std;
 
 class Major {
 public: //todo make private
+protected:
+	void parse(vector<string> record);
 	string name;
 	Department department;
 	vector<MajorRequirement> requirements;
@@ -16,7 +18,6 @@ public: //todo make private
 	vector<MajorRequirement> setRequirements;
 	void copy(const Major &c);
 public:
-	void init(vector<string> record);
 	Major();
 	Major(string str);
 	Major(const Major& c);

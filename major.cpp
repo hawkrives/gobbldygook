@@ -22,13 +22,13 @@ Major::Major(string s) {
 	string contentsOfFile = getFileContents("majors/" + department.getName() + ".txt");
 	vector<string> record = split(contentsOfFile, '\n');
 
-	init(record);
+	parse(record);
 
 	name = department.getFullName();
 	record.clear();
 }
 
-void Major::init(vector<string> record) {
+void Major::parse(vector<string> record) {
 	string activeHeading, activeRequirement;
 	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
 		string str = *i;
