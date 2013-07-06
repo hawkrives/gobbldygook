@@ -426,7 +426,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -450,6 +450,22 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				WARNING_CFLAGS = (
+					"-Wno-header-hygiene",
+					"-Wno-c++11-extensions",
+					"-Wno-padded",
+					"-Wno-global-constructors",
+					"-Wno-exit-time-destructors",
+					"-Wno-missing-prototypes",
+					"-Wno-unused-parameter",
+					"-Wno-sign-conversion",
+					"-Wno-sign-compare",
+					"-Wno-shorten-64-to-32",
+					"-Wno-non-virtual-dtor",
+					"-Weverything",
+					"-Wshadow",
+					"-Wno-c++98-compat",
+				);
 			};
 			name = Debug;
 		};
@@ -458,7 +474,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -475,6 +491,22 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
+				WARNING_CFLAGS = (
+					"-Wno-header-hygiene",
+					"-Wno-c++11-extensions",
+					"-Wno-padded",
+					"-Wno-global-constructors",
+					"-Wno-exit-time-destructors",
+					"-Wno-missing-prototypes",
+					"-Wno-unused-parameter",
+					"-Wno-sign-conversion",
+					"-Wno-sign-compare",
+					"-Wno-shorten-64-to-32",
+					"-Wno-non-virtual-dtor",
+					"-Weverything",
+					"-Wshadow",
+					"-Wno-c++98-compat",
+				);
 			};
 			name = Release;
 		};
