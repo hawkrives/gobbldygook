@@ -47,6 +47,7 @@ int main(int argc, const char *argv[]) {
 	
 	if (arguments.size() > 0) {
 		string arg0 = arguments.at(0);
+
 		if (arg0 == "--find" || arg0 == "-f") {
 			if (arguments.size() == 2) {
 				Course c = Course(arguments.at(1));
@@ -54,10 +55,26 @@ int main(int argc, const char *argv[]) {
 			}
 		}
 
+		else if (arg0 == "--help" || arg0 == "-h") {
+			cerr << "usage: ";
+			cerr << "gobbldygook ";
+			cerr << "[-f course_id] | ";
+			cerr << "[-h] | ";
+			cerr << "[-l  course_id] | ";
+			cerr << "[-f course_id] | ";
+			cerr << "[-f course_id] | ";
+			cerr << "[-f course_id] | ";
+			cerr << "[-f course_id] | ";
+			cerr << endl;
+		}
+
 		else if (arg0 == "--load" || arg0 == "-l") {
 			if (arguments.size() == 2) {
 				user = Student(arguments.at(1));
 				user.display();
+			}
+			else {
+				cerr << "The program can only operate on one user at a time. Please try again, this time only passing _one_ user — perhaps " << arguments.at(1) << "?" << endl;
 			}
 		}
 
@@ -71,7 +88,7 @@ int main(int argc, const char *argv[]) {
 			user.display();
 		}
 		
-		else if (arg0 == "--debug") {
+		else if (arg0 == "--debug" || arg0 == "-d") {
 			for (vector<Course>::iterator c = all_courses.begin(); c != all_courses.end(); ++c) {
 				if (c->getProfessor()[1] == ' ')
 					if (c->getProfessor()[2] == '0' || c->getProfessor()[2] == '1')
@@ -84,12 +101,16 @@ int main(int argc, const char *argv[]) {
 		else if (arg0 == "--interactive" || arg0 == "-i") {
 			string name, yearS = "", yearE = "", majors;
 			cout << "Welcome!" << endl;
+
 			cout << "What is your name? ";
 			getline(cin, name);
+
 			cout << "What year do you graduate? ";
 			getline(cin, yearE);
+
 			cout << "What are your majors (ex. CSCI, ASIAN) ";
 			getline(cin, majors);
+
 			user = Student(name, yearS, yearE, majors);
 			
 			string courses;
@@ -101,8 +122,9 @@ int main(int argc, const char *argv[]) {
 		}
 	}
 	else {
-		cout << "This program works best if you give it some data ;)" << endl;
-		cout << "However, we have some example stuff to show you anyway." << endl;
+		cerr << "This program works best if you give it some data ;)" << endl;
+		cerr << "However, we have some example stuff to show you anyway." << endl;
+		cerr << endl; // add an extra, blank, line - for readability reasons.
 		user = Student("users/example.txt");
 		user.display();
 	}
