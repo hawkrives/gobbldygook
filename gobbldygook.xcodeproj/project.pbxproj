@@ -8,6 +8,44 @@
 
 /* Begin PBXBuildFile section */
 		000B425017441562002F1EBD /* gened.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000B424E17441562002F1EBD /* gened.cpp */; };
+		006D45A81787AE6B00AB3978 /* 2011-12-interim.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0031BD34174483E5001888F5 /* 2011-12-interim.csv */; };
+		006D45A91787AE6B00AB3978 /* 2011-12-s1.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0031BD35174483E5001888F5 /* 2011-12-s1.csv */; };
+		006D45AA1787AE6B00AB3978 /* 2011-12-s2.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0031BD36174483E5001888F5 /* 2011-12-s2.csv */; };
+		006D45AB1787AE6B00AB3978 /* 2010-11-interim.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 000B4251174482D2002F1EBD /* 2010-11-interim.csv */; };
+		006D45AC1787AE6B00AB3978 /* 2010-11-s1.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 000B4252174482D2002F1EBD /* 2010-11-s1.csv */; };
+		006D45AD1787AE6B00AB3978 /* 2010-11-s2.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 000B4253174482D2002F1EBD /* 2010-11-s2.csv */; };
+		006D45AE1787AE6B00AB3978 /* 2012-13-interim.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 000B4254174482D2002F1EBD /* 2012-13-interim.csv */; };
+		006D45AF1787AE6B00AB3978 /* 2012-13-s1.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 000B4255174482D2002F1EBD /* 2012-13-s1.csv */; };
+		006D45B01787AE6B00AB3978 /* 2012-13-s2.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 000B4256174482D2002F1EBD /* 2012-13-s2.csv */; };
+		006D45B21787AE8200AB3978 /* b-r.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D459D1787ADF500AB3978 /* b-r.txt */; };
+		006D45B31787AE8200AB3978 /* best.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D459E1787ADF500AB3978 /* best.txt */; };
+		006D45B41787AE8200AB3978 /* example.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D459F1787ADF500AB3978 /* example.txt */; };
+		006D45B51787AE8200AB3978 /* finn.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45A01787ADF500AB3978 /* finn.txt */; };
+		006D45B61787AE8200AB3978 /* glewwe.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45A11787ADF500AB3978 /* glewwe.txt */; };
+		006D45B71787AE8200AB3978 /* manzoni.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45A21787ADF500AB3978 /* manzoni.txt */; };
+		006D45B81787AE8200AB3978 /* mclain.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45A31787ADF500AB3978 /* mclain.txt */; };
+		006D45B91787AE8200AB3978 /* moua.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45A41787ADF500AB3978 /* moua.txt */; };
+		006D45BA1787AE8200AB3978 /* nygren.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45A51787ADF500AB3978 /* nygren.txt */; };
+		006D45BB1787AE8200AB3978 /* rowley.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45A61787ADF500AB3978 /* rowley.txt */; };
+		006D45BC1787AE8200AB3978 /* user.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45A71787ADF500AB3978 /* user.txt */; };
+		006D45BE1787AE8C00AB3978 /* ARMS.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E191743763400033628 /* ARMS.txt */; };
+		006D45BF1787AE8C00AB3978 /* CLASS.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E1A1743763400033628 /* CLASS.txt */; };
+		006D45C01787AE8C00AB3978 /* ECON.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E1B1743763400033628 /* ECON.txt */; };
+		006D45C11787AE8C00AB3978 /* FREN.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E1C1743763400033628 /* FREN.txt */; };
+		006D45C21787AE8C00AB3978 /* GERM.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E1D1743763400033628 /* GERM.txt */; };
+		006D45C31787AE8C00AB3978 /* NORW.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E1E1743763400033628 /* NORW.txt */; };
+		006D45C41787AE8C00AB3978 /* PHIL.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E1F1743763400033628 /* PHIL.txt */; };
+		006D45C51787AE8C00AB3978 /* PSCI.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E201743763400033628 /* PSCI.txt */; };
+		006D45C61787AE8C00AB3978 /* SPAN.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E211743763400033628 /* SPAN.txt */; };
+		006D45C71787AE8C00AB3978 /* CHEM.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00707B5117434002000F5AF9 /* CHEM.txt */; };
+		006D45C81787AE8C00AB3978 /* CSCI.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00707B5217434002000F5AF9 /* CSCI.txt */; };
+		006D45C91787AE8C00AB3978 /* PHYS.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00707B5317434002000F5AF9 /* PHYS.txt */; };
+		006D45CA1787AE8C00AB3978 /* PSYCH.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00707B5417434002000F5AF9 /* PSYCH.txt */; };
+		006D45CB1787AE8C00AB3978 /* Bio.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00707B2F17432094000F5AF9 /* Bio.txt */; };
+		006D45CC1787AE8C00AB3978 /* math.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00707B1317431D4F000F5AF9 /* math.txt */; };
+		006D45CF1787AE9C00AB3978 /* STAT.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E231743763E00033628 /* STAT.txt */; };
+		006D45D11787AEE300AB3978 /* ASIAN.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45D01787AED500AB3978 /* ASIAN.txt */; };
+		006D45D21787AEE700AB3978 /* ASIAN.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00707B5017434002000F5AF9 /* ASIAN.txt */; };
 		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
 		00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B32174321C2000F5AF9 /* concentration.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
 		00707B3B174321C2000F5AF9 /* course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B34174321C2000F5AF9 /* course.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
@@ -22,14 +60,79 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		00707B1817431D5A000F5AF9 /* CopyFiles */ = {
+		006D45B11787AE7500AB3978 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = users;
+			dstSubfolderSpec = 16;
 			files = (
+				006D45B21787AE8200AB3978 /* b-r.txt in CopyFiles */,
+				006D45B31787AE8200AB3978 /* best.txt in CopyFiles */,
+				006D45B41787AE8200AB3978 /* example.txt in CopyFiles */,
+				006D45B51787AE8200AB3978 /* finn.txt in CopyFiles */,
+				006D45B61787AE8200AB3978 /* glewwe.txt in CopyFiles */,
+				006D45B71787AE8200AB3978 /* manzoni.txt in CopyFiles */,
+				006D45B81787AE8200AB3978 /* mclain.txt in CopyFiles */,
+				006D45B91787AE8200AB3978 /* moua.txt in CopyFiles */,
+				006D45BA1787AE8200AB3978 /* nygren.txt in CopyFiles */,
+				006D45BB1787AE8200AB3978 /* rowley.txt in CopyFiles */,
+				006D45BC1787AE8200AB3978 /* user.txt in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006D45BD1787AE8600AB3978 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = majors;
+			dstSubfolderSpec = 16;
+			files = (
+				006D45D21787AEE700AB3978 /* ASIAN.txt in CopyFiles */,
+				006D45BE1787AE8C00AB3978 /* ARMS.txt in CopyFiles */,
+				006D45BF1787AE8C00AB3978 /* CLASS.txt in CopyFiles */,
+				006D45C01787AE8C00AB3978 /* ECON.txt in CopyFiles */,
+				006D45C11787AE8C00AB3978 /* FREN.txt in CopyFiles */,
+				006D45C21787AE8C00AB3978 /* GERM.txt in CopyFiles */,
+				006D45C31787AE8C00AB3978 /* NORW.txt in CopyFiles */,
+				006D45C41787AE8C00AB3978 /* PHIL.txt in CopyFiles */,
+				006D45C51787AE8C00AB3978 /* PSCI.txt in CopyFiles */,
+				006D45C61787AE8C00AB3978 /* SPAN.txt in CopyFiles */,
+				006D45C71787AE8C00AB3978 /* CHEM.txt in CopyFiles */,
+				006D45C81787AE8C00AB3978 /* CSCI.txt in CopyFiles */,
+				006D45C91787AE8C00AB3978 /* PHYS.txt in CopyFiles */,
+				006D45CA1787AE8C00AB3978 /* PSYCH.txt in CopyFiles */,
+				006D45CB1787AE8C00AB3978 /* Bio.txt in CopyFiles */,
+				006D45CC1787AE8C00AB3978 /* math.txt in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006D45CD1787AE9600AB3978 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = concentrations;
+			dstSubfolderSpec = 16;
+			files = (
+				006D45D11787AEE300AB3978 /* ASIAN.txt in CopyFiles */,
+				006D45CF1787AE9C00AB3978 /* STAT.txt in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00707B1817431D5A000F5AF9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = data;
+			dstSubfolderSpec = 16;
+			files = (
+				006D45A81787AE6B00AB3978 /* 2011-12-interim.csv in CopyFiles */,
+				006D45A91787AE6B00AB3978 /* 2011-12-s1.csv in CopyFiles */,
+				006D45AA1787AE6B00AB3978 /* 2011-12-s2.csv in CopyFiles */,
+				006D45AB1787AE6B00AB3978 /* 2010-11-interim.csv in CopyFiles */,
+				006D45AC1787AE6B00AB3978 /* 2010-11-s1.csv in CopyFiles */,
+				006D45AD1787AE6B00AB3978 /* 2010-11-s2.csv in CopyFiles */,
+				006D45AE1787AE6B00AB3978 /* 2012-13-interim.csv in CopyFiles */,
+				006D45AF1787AE6B00AB3978 /* 2012-13-s1.csv in CopyFiles */,
+				006D45B01787AE6B00AB3978 /* 2012-13-s2.csv in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -42,7 +145,6 @@
 		000B4254174482D2002F1EBD /* 2012-13-interim.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-interim.csv"; sourceTree = "<group>"; };
 		000B4255174482D2002F1EBD /* 2012-13-s1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-s1.csv"; sourceTree = "<group>"; };
 		000B4256174482D2002F1EBD /* 2012-13-s2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-s2.csv"; sourceTree = "<group>"; };
-		000B4257174482D2002F1EBD /* best.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = best.txt; sourceTree = "<group>"; };
 		002B9E191743763400033628 /* ARMS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ARMS.txt; sourceTree = "<group>"; };
 		002B9E1A1743763400033628 /* CLASS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CLASS.txt; sourceTree = "<group>"; };
 		002B9E1B1743763400033628 /* ECON.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ECON.txt; sourceTree = "<group>"; };
@@ -56,13 +158,19 @@
 		0031BD34174483E5001888F5 /* 2011-12-interim.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2011-12-interim.csv"; sourceTree = "<group>"; };
 		0031BD35174483E5001888F5 /* 2011-12-s1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2011-12-s1.csv"; sourceTree = "<group>"; };
 		0031BD36174483E5001888F5 /* 2011-12-s2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2011-12-s2.csv"; sourceTree = "<group>"; };
-		00707AF917431D4F000F5AF9 /* b-r.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "b-r.txt"; sourceTree = "<group>"; };
-		00707AFA17431D4F000F5AF9 /* finn.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = finn.txt; sourceTree = "<group>"; };
-		00707AFB17431D4F000F5AF9 /* glewwe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = glewwe.txt; sourceTree = "<group>"; };
-		00707AFC17431D4F000F5AF9 /* mclain.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mclain.txt; sourceTree = "<group>"; };
-		00707AFD17431D4F000F5AF9 /* nygren.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nygren.txt; sourceTree = "<group>"; };
-		00707AFE17431D4F000F5AF9 /* rowley.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rowley.txt; sourceTree = "<group>"; };
-		00707AFF17431D4F000F5AF9 /* user.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = user.txt; sourceTree = "<group>"; };
+		006D45991787AD2400AB3978 /* TODO.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.md; sourceTree = "<group>"; };
+		006D459D1787ADF500AB3978 /* b-r.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "b-r.txt"; path = "users/b-r.txt"; sourceTree = "<group>"; };
+		006D459E1787ADF500AB3978 /* best.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = best.txt; path = users/best.txt; sourceTree = "<group>"; };
+		006D459F1787ADF500AB3978 /* example.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = example.txt; path = users/example.txt; sourceTree = "<group>"; };
+		006D45A01787ADF500AB3978 /* finn.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = finn.txt; path = users/finn.txt; sourceTree = "<group>"; };
+		006D45A11787ADF500AB3978 /* glewwe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = glewwe.txt; path = users/glewwe.txt; sourceTree = "<group>"; };
+		006D45A21787ADF500AB3978 /* manzoni.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = manzoni.txt; path = users/manzoni.txt; sourceTree = "<group>"; };
+		006D45A31787ADF500AB3978 /* mclain.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mclain.txt; path = users/mclain.txt; sourceTree = "<group>"; };
+		006D45A41787ADF500AB3978 /* moua.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = moua.txt; path = users/moua.txt; sourceTree = "<group>"; };
+		006D45A51787ADF500AB3978 /* nygren.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = nygren.txt; path = users/nygren.txt; sourceTree = "<group>"; };
+		006D45A61787ADF500AB3978 /* rowley.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rowley.txt; path = users/rowley.txt; sourceTree = "<group>"; };
+		006D45A71787ADF500AB3978 /* user.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = user.txt; path = users/user.txt; sourceTree = "<group>"; };
+		006D45D01787AED500AB3978 /* ASIAN.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ASIAN.txt; sourceTree = "<group>"; };
 		00707B1317431D4F000F5AF9 /* math.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = math.txt; sourceTree = "<group>"; };
 		00707B1417431D4F000F5AF9 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		00707B1517431D4F000F5AF9 /* test-data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-data.cpp"; sourceTree = "<group>"; };
@@ -109,6 +217,7 @@
 		002B9E221743763E00033628 /* concentrations */ = {
 			isa = PBXGroup;
 			children = (
+				006D45D01787AED500AB3978 /* ASIAN.txt */,
 				002B9E231743763E00033628 /* STAT.txt */,
 			);
 			path = concentrations;
@@ -117,15 +226,17 @@
 		002F5D6817431CDE00A4D0A0 = {
 			isa = PBXGroup;
 			children = (
-				000B424E17441562002F1EBD /* gened.cpp */,
-				000B424F17441562002F1EBD /* gened.hpp */,
-				002B9E221743763E00033628 /* concentrations */,
+				006D459B1787ADC400AB3978 /* Data */,
+				006D45991787AD2400AB3978 /* TODO.md */,
+				00707B1417431D4F000F5AF9 /* Makefile */,
 				00707B32174321C2000F5AF9 /* concentration.cpp */,
 				00707B33174321C2000F5AF9 /* concentration.hpp */,
 				00707B34174321C2000F5AF9 /* course.cpp */,
 				00707B35174321C2000F5AF9 /* course.hpp */,
 				00707B36174321C2000F5AF9 /* department.cpp */,
 				00707B37174321C2000F5AF9 /* department.hpp */,
+				000B424E17441562002F1EBD /* gened.cpp */,
+				000B424F17441562002F1EBD /* gened.hpp */,
 				00707B38174321C2000F5AF9 /* general.cpp */,
 				00707B39174321C2000F5AF9 /* general.hpp */,
 				00707B3E174321D1000F5AF9 /* id.cpp */,
@@ -134,18 +245,44 @@
 				00707B41174321D1000F5AF9 /* major.hpp */,
 				00707B42174321D1000F5AF9 /* majorRequirement.cpp */,
 				00707B43174321D1000F5AF9 /* majorRequirement.hpp */,
-				00707B44174321D1000F5AF9 /* specialRequirement.cpp */,
-				00707B45174321D1000F5AF9 /* specialRequirement.hpp */,
 				00707B4D174323C1000F5AF9 /* requirement.cpp */,
 				00707B4E174323C1000F5AF9 /* requirement.hpp */,
+				00707B44174321D1000F5AF9 /* specialRequirement.cpp */,
+				00707B45174321D1000F5AF9 /* specialRequirement.hpp */,
 				00707B46174321D1000F5AF9 /* student.cpp */,
 				00707B47174321D1000F5AF9 /* student.hpp */,
-				00707AF717431D4F000F5AF9 /* data */,
-				00707B1217431D4F000F5AF9 /* majors */,
-				00707B1417431D4F000F5AF9 /* Makefile */,
 				00707B1517431D4F000F5AF9 /* test-data.cpp */,
 				00707B1B17431D5A000F5AF9 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		006D459B1787ADC400AB3978 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				00707B1217431D4F000F5AF9 /* majors */,
+				006D459C1787ADD000AB3978 /* users */,
+				00707AF717431D4F000F5AF9 /* data */,
+				002B9E221743763E00033628 /* concentrations */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		006D459C1787ADD000AB3978 /* users */ = {
+			isa = PBXGroup;
+			children = (
+				006D459D1787ADF500AB3978 /* b-r.txt */,
+				006D459E1787ADF500AB3978 /* best.txt */,
+				006D459F1787ADF500AB3978 /* example.txt */,
+				006D45A01787ADF500AB3978 /* finn.txt */,
+				006D45A11787ADF500AB3978 /* glewwe.txt */,
+				006D45A21787ADF500AB3978 /* manzoni.txt */,
+				006D45A31787ADF500AB3978 /* mclain.txt */,
+				006D45A41787ADF500AB3978 /* moua.txt */,
+				006D45A51787ADF500AB3978 /* nygren.txt */,
+				006D45A61787ADF500AB3978 /* rowley.txt */,
+				006D45A71787ADF500AB3978 /* user.txt */,
+			);
+			name = users;
 			sourceTree = "<group>";
 		};
 		00707AF717431D4F000F5AF9 /* data */ = {
@@ -160,14 +297,6 @@
 				000B4254174482D2002F1EBD /* 2012-13-interim.csv */,
 				000B4255174482D2002F1EBD /* 2012-13-s1.csv */,
 				000B4256174482D2002F1EBD /* 2012-13-s2.csv */,
-				000B4257174482D2002F1EBD /* best.txt */,
-				00707AF917431D4F000F5AF9 /* b-r.txt */,
-				00707AFA17431D4F000F5AF9 /* finn.txt */,
-				00707AFB17431D4F000F5AF9 /* glewwe.txt */,
-				00707AFC17431D4F000F5AF9 /* mclain.txt */,
-				00707AFD17431D4F000F5AF9 /* nygren.txt */,
-				00707AFE17431D4F000F5AF9 /* rowley.txt */,
-				00707AFF17431D4F000F5AF9 /* user.txt */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -175,6 +304,7 @@
 		00707B1217431D4F000F5AF9 /* majors */ = {
 			isa = PBXGroup;
 			children = (
+				00707B5017434002000F5AF9 /* ASIAN.txt */,
 				002B9E191743763400033628 /* ARMS.txt */,
 				002B9E1A1743763400033628 /* CLASS.txt */,
 				002B9E1B1743763400033628 /* ECON.txt */,
@@ -184,7 +314,6 @@
 				002B9E1F1743763400033628 /* PHIL.txt */,
 				002B9E201743763400033628 /* PSCI.txt */,
 				002B9E211743763400033628 /* SPAN.txt */,
-				00707B5017434002000F5AF9 /* ASIAN.txt */,
 				00707B5117434002000F5AF9 /* CHEM.txt */,
 				00707B5217434002000F5AF9 /* CSCI.txt */,
 				00707B5317434002000F5AF9 /* PHYS.txt */,
@@ -229,6 +358,9 @@
 				00707B1617431D5A000F5AF9 /* Sources */,
 				00707B1717431D5A000F5AF9 /* Frameworks */,
 				00707B1817431D5A000F5AF9 /* CopyFiles */,
+				006D45B11787AE7500AB3978 /* CopyFiles */,
+				006D45BD1787AE8600AB3978 /* CopyFiles */,
+				006D45CD1787AE9600AB3978 /* CopyFiles */,
 			);
 			buildRules = (
 			);
