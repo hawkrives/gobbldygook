@@ -103,7 +103,7 @@ int main(int argc, const char *argv[]) {
 	else {
 		cout << "This program works best if you give it some data ;)" << endl;
 		cout << "However, we have some example stuff to show you anyway." << endl;
-		user = Student("data/example.txt");
+		user = Student("users/example.txt");
 		user.display();
 	}
 
