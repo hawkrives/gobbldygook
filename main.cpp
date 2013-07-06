@@ -93,7 +93,7 @@ int main(int argc, const char *argv[]) {
 				if (c->getProfessor()[1] == ' ')
 					if (c->getProfessor()[2] == '0' || c->getProfessor()[2] == '1')
 						cout << *c << endl;
-				if (c->getDepartment(0) == NONE)
+				if (c->getDepartment(0) == dept_t::NONE)
 					cout << *c << endl;
 			}
 		}

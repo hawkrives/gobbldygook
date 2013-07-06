@@ -13,7 +13,7 @@
 
 using namespace std;
 
-enum gened_t {
+enum class gened_t {
 	// Foundation Studies
 	FYW,   // First-Year Writing 
 	WRI,   // Writing in Context
@@ -38,7 +38,7 @@ enum gened_t {
 	EIN    // Ethical Issues and Normative Perspectives
 };
 
-enum course_type_t {
+enum class course_type_t {
 	LAB,
 	DISCUSSION,
 	SEMINAR,
@@ -46,7 +46,7 @@ enum course_type_t {
 	COURSE
 };
 
-enum dept_t {
+enum class dept_t {
 	AFAM,  //0 Africa and the Americas
 	ALSO,  //1 Alternate Language Study Option
 	AMCON, //2 American Conversation

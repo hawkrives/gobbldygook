@@ -78,11 +78,11 @@ Course::Course(istream &is) {
 	id = ID(str);
 
 	// Third holds the lab boolean,
-	     if (record.at(3) == "L") courseType = LAB;
-	else if (record.at(3) == "S") courseType = SEMINAR;
-	else if (record.at(3) == "D") courseType = DISCUSSION;
-	else if (record.at(3) == "T") courseType = TOPIC;
-	else                          courseType = COURSE;
+	     if (record.at(3) == "L") courseType = course_type_t::LAB;
+	else if (record.at(3) == "S") courseType = course_type_t::SEMINAR;
+	else if (record.at(3) == "D") courseType = course_type_t::DISCUSSION;
+	else if (record.at(3) == "T") courseType = course_type_t::TOPIC;
+	else                          courseType = course_type_t::COURSE;
 
 	// while Fourth contains the title of the course;
 	title = record.at(4);
@@ -165,10 +165,10 @@ void Course::cleanTitle() {
 ///////////
 //////////
 string Course::getType() {
-	     if (courseType == LAB    )    return "Lab";
-	else if (courseType == SEMINAR)    return "Seminar";
-	else if (courseType == DISCUSSION) return "Discussion";
-	else if (courseType == TOPIC  )    return "Topic";
+	     if (courseType == course_type_t::LAB    )    return "Lab";
+	else if (courseType == course_type_t::SEMINAR)    return "Seminar";
+	else if (courseType == course_type_t::DISCUSSION) return "Discussion";
+	else if (courseType == course_type_t::TOPIC  )    return "Topic";
 	else                               return "Course";
 }
 
@@ -232,7 +232,7 @@ void Course::showAll() {
 	cout << id << endl;
 	cout << "Title: " << title << endl;
 	cout << "Professor: " << professor << endl;
-	cout << "Type: " << courseType << endl;
+	cout << "Type: " << getType() << endl;
 	cout << "Half-semester? " << half_semester << endl;
 	cout << "Credits: " << credits << endl;
 	cout << "Pass/Fail? " << pass_fail << endl;
