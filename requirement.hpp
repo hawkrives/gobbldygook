@@ -6,35 +6,33 @@
 using namespace std;
 
 class Requirement {
-public: //toto make protected
-	string name;
-	int needed;
-	int has;
-	bool satisfied;
+protected: // todo make protected
+	string name = "";
+	int needed = 0;
+	int has = 0;
+	bool satisfied = false;
+
 public:
-	void init(string n, int need);
-	void copy(const Requirement &c);
-	Requirement();
-	Requirement(string str);
+	Requirement() : Requirement("", 0) {}
+	Requirement(string str) : Requirement(str, 0) {}
 	Requirement(string str, int n);
-	Requirement(const Requirement &c);
-	Requirement operator= (const Requirement &c);
-	
+
 	void incrementHas();
 	void decrementHas();
-	
+
 	string getName();
 	int getNeeded();
 	int getHas();
 	bool getSatisfied();
+
 	void setName(string str);
 	void setNeeded(int n);
 
 	friend bool operator== (const Requirement &l, const Requirement &r);
 	friend bool operator!= (Requirement &l, Requirement &r);
-	
-	virtual ostream& getData(ostream &os);
-	virtual void display();
+
+	ostream& getData(ostream &os);
+	void display();
 };
 
 ostream &operator<<(ostream &os, Requirement &item);
