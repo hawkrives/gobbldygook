@@ -86,5 +86,8 @@ string getFileContents(string fn) {
 		in.close();
 		return(contents);
 	}
-	throw(errno);
+	else {
+		cout << "Could not open file: " << fn << endl;
+		throw(errno);
+	}
 }
