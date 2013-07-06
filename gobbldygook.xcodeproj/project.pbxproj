@@ -46,7 +46,7 @@
 		006D45CF1787AE9C00AB3978 /* STAT.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 002B9E231743763E00033628 /* STAT.txt */; };
 		006D45D11787AEE300AB3978 /* ASIAN.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006D45D01787AED500AB3978 /* ASIAN.txt */; };
 		006D45D21787AEE700AB3978 /* ASIAN.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00707B5017434002000F5AF9 /* ASIAN.txt */; };
-		00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* test-data.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
+		00707B2C17431DEA000F5AF9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B1517431D4F000F5AF9 /* main.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
 		00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B32174321C2000F5AF9 /* concentration.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
 		00707B3B174321C2000F5AF9 /* course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B34174321C2000F5AF9 /* course.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
 		00707B3C174321C2000F5AF9 /* department.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00707B36174321C2000F5AF9 /* department.cpp */; settings = {COMPILER_FLAGS = "-Weverything -Wshadow -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare"; }; };
@@ -173,7 +173,7 @@
 		006D45D01787AED500AB3978 /* ASIAN.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ASIAN.txt; sourceTree = "<group>"; };
 		00707B1317431D4F000F5AF9 /* math.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = math.txt; sourceTree = "<group>"; };
 		00707B1417431D4F000F5AF9 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		00707B1517431D4F000F5AF9 /* test-data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-data.cpp"; sourceTree = "<group>"; };
+		00707B1517431D4F000F5AF9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		00707B1A17431D5A000F5AF9 /* nomake */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nomake; sourceTree = BUILT_PRODUCTS_DIR; };
 		00707B2F17432094000F5AF9 /* Bio.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bio.txt; sourceTree = "<group>"; };
 		00707B32174321C2000F5AF9 /* concentration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = concentration.cpp; sourceTree = "<group>"; };
@@ -229,6 +229,7 @@
 				006D459B1787ADC400AB3978 /* Data */,
 				006D45991787AD2400AB3978 /* TODO.md */,
 				00707B1417431D4F000F5AF9 /* Makefile */,
+				00707B1517431D4F000F5AF9 /* main.cpp */,
 				00707B32174321C2000F5AF9 /* concentration.cpp */,
 				00707B33174321C2000F5AF9 /* concentration.hpp */,
 				00707B34174321C2000F5AF9 /* course.cpp */,
@@ -251,7 +252,6 @@
 				00707B45174321D1000F5AF9 /* specialRequirement.hpp */,
 				00707B46174321D1000F5AF9 /* student.cpp */,
 				00707B47174321D1000F5AF9 /* student.hpp */,
-				00707B1517431D4F000F5AF9 /* test-data.cpp */,
 				00707B1B17431D5A000F5AF9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -403,7 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00707B2C17431DEA000F5AF9 /* test-data.cpp in Sources */,
+				00707B2C17431DEA000F5AF9 /* main.cpp in Sources */,
 				00707B3A174321C2000F5AF9 /* concentration.cpp in Sources */,
 				00707B3B174321C2000F5AF9 /* course.cpp in Sources */,
 				00707B3C174321C2000F5AF9 /* department.cpp in Sources */,
