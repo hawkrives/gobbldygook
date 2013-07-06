@@ -7,9 +7,8 @@
 *#
 
 # Binaries
-main
+gobbldygook
 *.tar.gz
 
 *.xcuserstate
-
 *.xcbkptlist
