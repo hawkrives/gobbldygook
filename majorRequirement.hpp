@@ -6,30 +6,31 @@
 using namespace std;
 
 class MajorRequirement : public Requirement {
-public: //todo: make private
-	void init(string n);
-	void copy(const MajorRequirement &c);
+protected:
 	vector<ID> validCourses;
+
 public:
-	MajorRequirement();
-	MajorRequirement(string str);
-	MajorRequirement(string str, int n);
-	MajorRequirement(const MajorRequirement &c);
-	MajorRequirement operator= (const MajorRequirement &c);
-	
-	bool fulfillsRequirement(const ID& c);
+	MajorRequirement() : MajorRequirement("", 0) {}
+	MajorRequirement(string str) : MajorRequirement(str, 0) {}
+	MajorRequirement(string str, int n) : Requirement(str, n) {}
+
 	void addCourse(const ID& c);
-	bool checkCourseValidity(const ID& c);
-	
+	bool fulfillsRequirement(const ID& c) const;
+
 	friend bool operator== (const MajorRequirement &l, const MajorRequirement&r);
 	friend bool operator!= (const MajorRequirement &l, const MajorRequirement &r);
-	friend bool operator== (const MajorRequirement &l, const Requirement &r);
-	friend bool operator!= (const MajorRequirement &l, const Requirement &r);
-
-//	ostream& getData(ostream &os);
-	void display();
 };
 
 ostream &operator<<(ostream &os, MajorRequirement &item);
+
+inline bool operator== (const MajorRequirement &l, const MajorRequirement &r) {
+	bool parent = (l == r);
+	bool valid = (l.validCourses == r.validCourses);
+	return (parent && valid);
+}
+
+inline bool operator!= (const MajorRequirement &l, const MajorRequirement &r) {
+	return !(l == r);
+}
 
 #endif
