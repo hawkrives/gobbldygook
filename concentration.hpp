@@ -27,4 +27,4 @@ inline bool operator!= (Concentration &l, Concentration &r) {
     return !(l == r);
 }
 
-#endif
+#endif // defined __Gobbldygook__concentration__

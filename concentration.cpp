@@ -1,7 +1,6 @@
 #include "concentration.hpp"
 
 Concentration::Concentration(string s) : Major() {
-	// cout << "Called Concentration constructor with string '" << str << "'" << endl;
 	string str = removeStartingText(s, " ");
 	department = Department(str);
 	name = department.getFullName();
