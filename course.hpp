@@ -25,7 +25,7 @@ private: // variables
 	string location;
 	
 	course_type_t courseType;
-	gened_t* geneds;
+	vector<GenEd> geneds;
 	
 	bool days[7];
 	float time[7];
