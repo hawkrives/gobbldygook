@@ -32,13 +32,14 @@ protected: // variables
 
 protected: // methods
 	void init(string identifier);
-	void copy(const Course& c);
+	void duplicate(const Course& c);
+
 public:
-	Course();
+	Course() {}
 	Course(string str);
-	Course(const Course& c);
-	Course& operator= (const Course &c);
 	Course(istream &is);
+	Course(const Course &c);
+	Course& operator= (const Course &c);
 
 	friend bool operator== (const Course &c1, const Course &c2);
     friend bool operator!= (Course &c1, Course &c2);

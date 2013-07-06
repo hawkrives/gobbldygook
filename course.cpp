@@ -7,10 +7,10 @@
 //////////
 
 void Course::init(string identifier) {
-	copy(getCourse(identifier));
+	duplicate(getCourse(identifier));
 }
 
-void Course::copy(const Course& c) {
+void Course::duplicate(const Course& c) {
 	id = c.id;
 	title = c.title;
 	description = c.description;
@@ -41,19 +41,17 @@ void Course::copy(const Course& c) {
 ///////////
 //////////
 
-Course::Course() {}
-
 Course::Course(string str) {
 	init(str);
 }
 
 Course::Course(const Course& c) {
-	copy(c);
+	duplicate(c);
 }
 
 Course& Course::operator = (const Course &c) {
 	if (this == &c) return *this;
-	copy(c);
+	duplicate(c);
 	return *this;
 }
 
