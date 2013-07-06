@@ -13,10 +13,10 @@ protected:
 	void parse(vector<string> record);
 	string name;
 	Department department;
-	vector<MajorRequirement> requirements;
-	vector<SpecialRequirement> specialRequirements;
-	vector<MajorRequirement> setRequirements;
 	void copy(const Major &c);
+	vector<MajorRequirement *> requirements;
+	vector<SpecialRequirement *> specialRequirements;
+	vector<MajorRequirement *> setRequirements;
 public:
 	Major();
 	Major(string str);
