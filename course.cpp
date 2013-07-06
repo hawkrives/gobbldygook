@@ -252,15 +252,13 @@ void Course::display() {
 //////////
 
 Course getCourse(string identifier) {
-	// cout << "called getCourse with '" << identifier << "'" << endl;
 	ID id(identifier);
-	// cout << id << endl;
 	// TODO: Add lab support.
-	
-	for (vector<Course>::iterator i = all_courses.begin(); i != all_courses.end(); ++i)
-		if (i->id == id)
-			return *i;
-	
+
+	for (Course c : all_courses)
+		if (c.id == id)
+			return c;
+
 	// If no match, return a blank course.
 	Course c;
 	return c;
