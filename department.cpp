@@ -1,5 +1,4 @@
 #include "department.hpp"
-using namespace std;
 
 //////////////
 /////////////

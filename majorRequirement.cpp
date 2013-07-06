@@ -1,5 +1,4 @@
 #include "majorRequirement.hpp"
-using namespace std;
 
 void MajorRequirement::init(string n) {
 	Requirement::init(n, 0);

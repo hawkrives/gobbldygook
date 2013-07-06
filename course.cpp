@@ -1,6 +1,4 @@
 #include "course.hpp"
-using namespace std;
-
 
 //////////////
 /////////////

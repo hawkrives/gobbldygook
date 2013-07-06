@@ -1,5 +1,4 @@
 #include "general.hpp"
-using namespace std;
 
 string tostring(int i) {
 	ostringstream tmp;

@@ -1,5 +1,4 @@
 #include "concentration.hpp"
-using namespace std;
 
 Concentration::Concentration() : Major() {
 	cout << "Called Concentration constructor with nothing." << endl;

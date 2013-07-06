@@ -1,5 +1,4 @@
 #include "specialRequirement.hpp"
-using namespace std;
 
 void SpecialRequirement::init(string n) {
 	Requirement::init(n, 0);
