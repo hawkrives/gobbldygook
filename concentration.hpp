@@ -17,7 +17,7 @@ public:
 	friend bool operator!= (Concentration &l, Concentration &r);
 };
 
-ostream &operator<<(ostream &os, Major &item);
+ostream &operator<<(ostream &os, Concentration &item);
 
 inline bool operator== (const Concentration &l, const Concentration &r) {
     return (l == r);
