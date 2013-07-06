@@ -93,111 +93,111 @@ ostream& Student::getData(ostream &os) {
 	updateStanding();
 	os << name << ", ";
 	
-	if (majors.size()) {
+	if (!majors.empty()) {
 		os << "you are majoring in ";
 		
-		for (vector<Major>::iterator i = majors.begin(); i != majors.end(); ++i){
+		for (Major m : majors) {
 			if (majors.size() == 1) {
-				os << *i << " ";
+				os << m << " ";
 			}
 			else if (majors.size() == 2) {
-				os << *i;
-				if (i != majors.end()-1)
+				os << m;
+				if (m != *(majors.end()-1))
 					os << " and ";
 				else
 					os << " ";
 			}
 			else {
-				if (i != majors.end()-1)
-					os << *i << ", ";
+				if (m != *(majors.end()-1))
+					os << m << ", ";
 				else 
-					os << "and " << *i << ", ";
+					os << "and " << m << ", ";
 			}
 		}
 	}
 	
-	if (concentrations.size()) {
+	if (!concentrations.empty()) {
 		os << "with concentrations in ";
 		
-		for (vector<Concentration>::iterator i = concentrations.begin(); i != concentrations.end(); ++i) {
+		for (Concentration conc : concentrations) {
 			if (concentrations.size() == 1) {
-				os << *i << " ";
+				os << conc << " ";
 			}
 			else if (concentrations.size() == 2) {
-				os << *i;
-				if (i != concentrations.end()-1)
+				os << conc;
+				if (conc != *(concentrations.end()-1))
 					os << " and ";
 				else
 					os << " ";
 			}
 			else {
-				if (i != concentrations.end()-1)
-					os << *i << ", ";
+				if (conc != *(concentrations.end()-1))
+					os << conc << ", ";
 				else
-					os << "and " << *i << ", ";
+					os << "and " << conc << ", ";
 			}
 		}
 	}
 	
-	if (!majors.size())
+	if (majors.empty())
 		os << "you are taking: " << endl;
 	else
 		os << "while taking:" << endl;
 
-	for (vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i) {
-		os << *i << endl;
+	for (Course c : courses) {
+		os << c << endl;
 	}
 
 	os << endl;
 
 	// TODO: don't cout an extra line at the end of the output.
 
-	for (vector<Major>::iterator m = majors.begin(); m != majors.end(); ++m) {
-		for (vector<MajorRequirement>::iterator req = m->requirements.begin(); req != m->requirements.end(); ++req)
-			cout << *req << endl;
-		for (vector<SpecialRequirement>::iterator set = m->specialRequirements.begin(); set != m->specialRequirements.end(); ++set)
-			for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req)
-				cout << *req << endl;
+	for (Major m : majors) {
+		for (MajorRequirement* req: *m.getRequirements())
+			cout << req << endl;
+		for (SpecialRequirement* set : *m.getSpecialRequirements())
+			for (MajorRequirement* req : set->getValidSets())
+				cout << req << endl;
 	}
 
-	for (vector<Concentration>::iterator conc = concentrations.begin(); conc != concentrations.end(); ++conc) {
-		for (vector<MajorRequirement>::iterator req = conc->requirements.begin(); req != conc->requirements.end(); ++req)
-			cout << *req << endl;
-		for (vector<SpecialRequirement>::iterator set = conc->specialRequirements.begin(); set != conc->specialRequirements.end(); ++set)
-			for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req)
-				cout << *req << endl;
+	for (Concentration conc : concentrations) {
+		for (MajorRequirement* req : *conc.getRequirements())
+			cout << req << endl;
+		for (SpecialRequirement* set : *conc.getSpecialRequirements())
+			for (MajorRequirement* req : set->getValidSets())
+				cout << req << endl;
 	}
 
 	return os;
 }
 
 void Student::updateStanding() {
-	for (vector<Major>::iterator m = majors.begin(); m != majors.end(); ++m) {
-		for (vector<Course>::iterator c = courses.begin(); c != courses.end(); ++c) {
-			for (vector<MajorRequirement>::iterator req = m->requirements.begin(); req != m->requirements.end(); ++req) {
-				if (req->checkCourseValidity(c->getID())) {
+	for (Major m : majors) {
+		for (Course c : courses) {
+			for (MajorRequirement* req : *m.getRequirements()) {
+				if (req->fulfillsRequirement(c.getID())) {
 					req->incrementHas();
 				}
 			}
-			for (vector<SpecialRequirement>::iterator set = m->specialRequirements.begin(); set != m->specialRequirements.end(); ++set) {
-				for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
-					if (req->checkCourseValidity(c->getID())) {
+			for (SpecialRequirement* set : *m.getSpecialRequirements()) {
+				for (MajorRequirement* req : set->getValidSets()) {
+					if (req->fulfillsRequirement(c.getID())) {
 						req->incrementHas();
 					}
 				}
 			}
 		}
 	}
-	for (vector<Concentration>::iterator conc = concentrations.begin(); conc != concentrations.end(); ++conc) {
-		for (vector<Course>::iterator c = courses.begin(); c != courses.end(); ++c) {
-			for (vector<MajorRequirement>::iterator req = conc->requirements.begin(); req != conc->requirements.end(); ++req) {
-				if (req->checkCourseValidity(c->getID())) {
+	for (Concentration conc : concentrations) {
+		for (Course c : courses) {
+			for (MajorRequirement* req : *conc.getRequirements()) {
+				if (req->fulfillsRequirement(c.getID())) {
 					req->incrementHas();
 				}
 			}
-			for (vector<SpecialRequirement>::iterator set = conc->specialRequirements.begin(); set != conc->specialRequirements.end(); ++set) {
-				for (vector<MajorRequirement>::iterator req = set->validSets.begin(); req != set->validSets.end(); ++req) {
-					if (req->checkCourseValidity(c->getID())) {
+			for (SpecialRequirement* set : *conc.getSpecialRequirements()) {
+				for (MajorRequirement* req : set->getValidSets()) {
+					if (req->fulfillsRequirement(c.getID())) {
 						req->incrementHas();
 					}
 				}
