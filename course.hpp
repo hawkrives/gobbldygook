@@ -8,7 +8,7 @@
 using namespace std;
 
 class Course {
-private: // variables
+protected: // variables
 	ID id;
 	string title;
 	string description;
@@ -29,7 +29,8 @@ private: // variables
 	
 	bool days[7];
 	float time[7];
-private: // methods
+
+protected: // methods
 	void init(string identifier);
 	void copy(const Course& c);
 public:
