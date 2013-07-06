@@ -5,25 +5,19 @@
 #include "requirement.hpp"
 
 class GenEd : public Requirement {
-public: //todo: make private
-	void init(string n);
-//	void copy(const GenEd &c);
 public:
-	GenEd();
-//	GenEd(string str);
-//	GenEd(string str, int n);
-//	GenEd(const GenEd &c);
-//	GenEd operator= (const GenEd &c);
-	
+	GenEd() : GenEd("", 0) {}
+	GenEd(string str) : GenEd(str, 0) {}
+	GenEd(string str, int n) : Requirement(str, n) {}
+
 //	bool fulfillsRequirement(const ID& c);
 //	void addCourse(const ID& c);
-//	bool checkCourseValidity(const ID& c);
-	
+
 //	friend bool operator== (const GenEd &l, const GenEd&r);
 //	friend bool operator!= (const GenEd &l, const GenEd &r);
 //	friend bool operator== (const GenEd &l, const Requirement &r);
 //	friend bool operator!= (const GenEd &l, const Requirement &r);
-	
+
 //	ostream& getData(ostream &os);
 //	void display();
 };
