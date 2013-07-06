@@ -5,3 +5,4 @@
 - [ ] Update to use more nifty C11 features.
 - [ ] Incorporate more courses into the dataset.
 	- [ ] Summer Sessions, namely.
+- [ ] Update the terminal help text.
