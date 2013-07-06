@@ -8,8 +8,8 @@ ifeq ($(ARCH), Linux)
 else
 CC = clang++
 CLANG_WARNINGS_ON = -Weverything -Wshadow
-CLANG_WARNINGS_OFF = -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-non-virtual-dtor
 CFLAGS = -g
+CLANG_WARNINGS_OFF = -Wno-header-hygiene -Wno-c++11-extensions -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-unused-parameter -Wno-sign-conversion -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-non-virtual-dtor -Wno-c++98-compat
 endif
 
 OBJECTS = general.o \
