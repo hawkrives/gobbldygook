@@ -1,9 +1,5 @@
 #include "concentration.hpp"
 
-Concentration::Concentration() : Major() {
-	cout << "Called Concentration constructor with nothing." << endl;
-}
-
 Concentration::Concentration(string s) : Major() {
 	// cout << "Called Concentration constructor with string '" << str << "'" << endl;
 	string str = removeStartingText(s, " ");
@@ -17,16 +13,6 @@ Concentration::Concentration(string s) : Major() {
 	
 	name = department.getFullName();
 	record.clear();
-}
-
-Concentration::Concentration(const Concentration &c) {
-	copy(c);
-}
-
-Concentration& Concentration::operator= (const Concentration &c) {
-	if (this == &c) return *this;
-	copy(c);
-	return *this;
 }
 
 ostream& Concentration::getData(ostream &os) {

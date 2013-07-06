@@ -7,10 +7,8 @@ using namespace std;
 
 class Concentration : public Major {	
 public:
-	Concentration();
+	Concentration() : Major() {}
 	Concentration(string s);
-	Concentration(const Concentration& c);
-	Concentration& operator= (const Concentration &c);
 	
 	ostream& getData(ostream &os);
 	void display();
