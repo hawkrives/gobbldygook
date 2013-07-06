@@ -124,7 +124,7 @@ MajorRequirement* Major::getSetRequirement(string str) {
 }
 
 
-vector<MajorRequirement*>* Major::getMajorRequirements() {
+vector<MajorRequirement*>* Major::getRequirements() {
 	return &requirements;
 }
 

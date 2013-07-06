@@ -26,7 +26,7 @@ public:
 	ostream& getData(ostream &os);
 	void display();
 
-	vector<MajorRequirement *>* getMajorRequirements();
+	vector<MajorRequirement *>* getRequirements();
 	vector<SpecialRequirement *>* getSpecialRequirements();
 	vector<MajorRequirement *>* getSetRequirements();
 
