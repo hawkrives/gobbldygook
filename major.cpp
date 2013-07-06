@@ -1,20 +1,6 @@
 #include "major.hpp"
 
-void Major::copy(const Major &c) {
-	name = c.name;
-	department = c.department;
-	requirements = c.requirements;
-	specialRequirements = c.specialRequirements;
-}
-
-Major::Major() {
-	// cout << "Called Major constructor with nothing." << endl;
-	name = "None";
-	department = Department("NONE");
-}
-
 Major::Major(string s) {
-	// cout << "Called Major constructor with string '" << str << "'" << endl;
 	string str = removeStartingText(s, " ");
 	department = Department(str);
 	name = department.getFullName();
@@ -44,7 +30,7 @@ void Major::parse(vector<string> record) {
 			continue;
 		}
 		if (activeHeading == "SPECIAL") {
-			
+			// why was this blank?
 		};
 		found = str.find_first_of("=");
 		if (found != string::npos) {
@@ -85,7 +71,8 @@ void Major::parse(vector<string> record) {
 					sp->addSet(*getSetRequirement(*idx));
 			}
 		}
-		else if (str != "") {
+//		else if (str != "") {
+		else if (!str.empty()) {
 			if (str.substr(0, 2) == "//") {
 				// it's a comment
 			}
@@ -94,17 +81,17 @@ void Major::parse(vector<string> record) {
 				str = removeStartingText(str, " ");
 				if (activeHeading == "REQUIREMENTS") {
 					MajorRequirement m = MajorRequirement(str);
-					requirements.push_back(m);
+					requirements.push_back(&m);
 					activeRequirement = str;
 				}
 				else if (activeHeading == "SETS") {
 					MajorRequirement m = MajorRequirement(str);
-					setRequirements.push_back(m);
+					setRequirements.push_back(&m);
 					activeRequirement = str;
 				}
 				else if (activeHeading == "SPECIAL") {
 					SpecialRequirement special = SpecialRequirement(str);
-					specialRequirements.push_back(special);
+					specialRequirements.push_back(&special);
 					activeRequirement = str;
 				}
 			}
@@ -112,41 +99,41 @@ void Major::parse(vector<string> record) {
 	}
 }
 
-Major::Major(const Major &c) {
-	copy(c);
-}
-
-Major& Major::operator= (const Major &c) {
-	if (this == &c) return *this;
-	copy(c);
-	return *this;
-}
-
 MajorRequirement* Major::getMajorRequirement(string str) {
-//	cout << "called getMajorRequirement with '" << str << "'" << endl;
 	str = removeStartingText(str, " ");
-	for (vector<MajorRequirement>::iterator i = requirements.begin(); i != requirements.end(); ++i)
-		if (i->getName() == str)
-			return &*i;
-	return 0;
+	for (MajorRequirement *m : requirements)
+		if (m->getName() == str)
+			return m;
+	return nullptr;
 }
 
 SpecialRequirement* Major::getSpecialRequirement(string str) {
-//	cout << "called getSpecialRequirement with '" << str << "'" << endl;
 	str = removeStartingText(str, " ");
-	for (vector<SpecialRequirement>::iterator i = specialRequirements.begin(); i != specialRequirements.end(); ++i)
-		if (i->getName() == str)
-			return &*i;
-	return 0;
+	for (SpecialRequirement *s : specialRequirements)
+		if (s->getName() == str)
+			return s;
+	return nullptr;
 }
 
 MajorRequirement* Major::getSetRequirement(string str) {
-//	cout << "called getSetRequirement with '" << str << "'" << endl;
 	str = removeStartingText(str, " ");
-	for (vector<MajorRequirement>::iterator i = setRequirements.begin(); i != setRequirements.end(); ++i)
+	for (MajorRequirement *i : setRequirements)
 		if (i->getName() == str)
-			return &*i;
-	return 0;
+			return i;
+	return nullptr;
+}
+
+
+vector<MajorRequirement*>* Major::getMajorRequirements() {
+	return &requirements;
+}
+
+vector<SpecialRequirement*>* Major::getSpecialRequirements() {
+	return &specialRequirements;
+}
+
+vector<MajorRequirement*>* Major::getSetRequirements() {
+	return &setRequirements;
 }
 
 
