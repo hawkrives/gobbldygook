@@ -1,0 +1,7 @@
+- [ ] If no section is specified, fall back and assume the first located section.
+- [ ] Add dates to each Course.
+	- [ ] If no date is specified, assume the latest version.
+	- [ ] Accept dates in the input files.
+- [ ] Update to use more nifty C11 features.
+- [ ] Incorporate more courses into the dataset.
+	- [ ] Summer Sessions, namely.
