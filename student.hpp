@@ -5,6 +5,8 @@
 #include "major.hpp"
 #include "concentration.hpp"
 #include "course.hpp"
+#include "gened.hpp"
+#include "graduationRequirement.hpp"
 using namespace std;
 
 class Student {
@@ -13,6 +15,7 @@ private:
 public:
 	string name;
 	int startingYear, graduationYear;
+	GraduationRequirement graduate;
 
 	vector<Major> majors;
 	vector<Concentration> concentrations;

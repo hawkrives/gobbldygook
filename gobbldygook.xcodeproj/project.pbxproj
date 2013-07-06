@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		000B425017441562002F1EBD /* gened.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000B424E17441562002F1EBD /* gened.cpp */; };
+		000E830A17886D7C00654137 /* graduationRequirement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000E830817886D7C00654137 /* graduationRequirement.cpp */; };
 		006D45A81787AE6B00AB3978 /* 2011-12-interim.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0031BD34174483E5001888F5 /* 2011-12-interim.csv */; };
 		006D45A91787AE6B00AB3978 /* 2011-12-s1.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0031BD35174483E5001888F5 /* 2011-12-s1.csv */; };
 		006D45AA1787AE6B00AB3978 /* 2011-12-s2.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0031BD36174483E5001888F5 /* 2011-12-s2.csv */; };
@@ -145,6 +146,8 @@
 		000B4254174482D2002F1EBD /* 2012-13-interim.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-interim.csv"; sourceTree = "<group>"; };
 		000B4255174482D2002F1EBD /* 2012-13-s1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-s1.csv"; sourceTree = "<group>"; };
 		000B4256174482D2002F1EBD /* 2012-13-s2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2012-13-s2.csv"; sourceTree = "<group>"; };
+		000E830817886D7C00654137 /* graduationRequirement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graduationRequirement.cpp; sourceTree = "<group>"; };
+		000E830917886D7C00654137 /* graduationRequirement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = graduationRequirement.hpp; sourceTree = "<group>"; };
 		002B9E191743763400033628 /* ARMS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ARMS.txt; sourceTree = "<group>"; };
 		002B9E1A1743763400033628 /* CLASS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CLASS.txt; sourceTree = "<group>"; };
 		002B9E1B1743763400033628 /* ECON.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ECON.txt; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				000B424F17441562002F1EBD /* gened.hpp */,
 				00707B38174321C2000F5AF9 /* general.cpp */,
 				00707B39174321C2000F5AF9 /* general.hpp */,
+				000E830817886D7C00654137 /* graduationRequirement.cpp */,
+				000E830917886D7C00654137 /* graduationRequirement.hpp */,
 				00707B3E174321D1000F5AF9 /* id.cpp */,
 				00707B3F174321D1000F5AF9 /* id.hpp */,
 				00707B40174321D1000F5AF9 /* major.cpp */,
@@ -415,6 +420,7 @@
 				00707B4C174321D1000F5AF9 /* student.cpp in Sources */,
 				00707B4F174323C8000F5AF9 /* requirement.cpp in Sources */,
 				000B425017441562002F1EBD /* gened.cpp in Sources */,
+				000E830A17886D7C00654137 /* graduationRequirement.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
