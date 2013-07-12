@@ -12,3 +12,5 @@ gobbldygook
 
 *.xcuserstate
 *.xcbkptlist
+
+*.xccheckout
