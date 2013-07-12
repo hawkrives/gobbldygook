@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0460"
+   LastUpgradeVersion = "0500"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "002F5D6D17431CDE00A4D0A0"
                BuildableName = "gobbldygook"
-               BlueprintName = "gobbldygook"
+               BlueprintName = "Makefile"
                ReferencedContainer = "container:gobbldygook.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

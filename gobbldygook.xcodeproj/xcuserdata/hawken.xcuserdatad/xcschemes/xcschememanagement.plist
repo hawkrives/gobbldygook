@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>gobbldygook.xcscheme</key>
+		<key>Makefile.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>nomake.xcscheme</key>
+		<key>Xcode.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>

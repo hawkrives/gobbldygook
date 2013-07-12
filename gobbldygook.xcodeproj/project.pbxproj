@@ -340,25 +340,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
-		002F5D6D17431CDE00A4D0A0 /* gobbldygook */ = {
+		002F5D6D17431CDE00A4D0A0 /* Makefile */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = 002F5D7017431CDE00A4D0A0 /* Build configuration list for PBXLegacyTarget "gobbldygook" */;
+			buildConfigurationList = 002F5D7017431CDE00A4D0A0 /* Build configuration list for PBXLegacyTarget "Makefile" */;
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
 			dependencies = (
 			);
-			name = gobbldygook;
+			name = Makefile;
 			passBuildSettingsInEnvironment = 1;
 			productName = gobbldygook;
 		};
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
-		00707B1917431D5A000F5AF9 /* nomake */ = {
+		00707B1917431D5A000F5AF9 /* Xcode */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00707B2117431D5A000F5AF9 /* Build configuration list for PBXNativeTarget "nomake" */;
+			buildConfigurationList = 00707B2117431D5A000F5AF9 /* Build configuration list for PBXNativeTarget "Xcode" */;
 			buildPhases = (
 				00707B1617431D5A000F5AF9 /* Sources */,
 				00707B1717431D5A000F5AF9 /* Frameworks */,
@@ -371,7 +371,7 @@
 			);
 			dependencies = (
 			);
-			name = nomake;
+			name = Xcode;
 			productName = nomake;
 			productReference = 00707B1A17431D5A000F5AF9 /* nomake */;
 			productType = "com.apple.product-type.tool";
@@ -382,7 +382,7 @@
 		002F5D6917431CDE00A4D0A0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Hawken Rives";
 			};
 			buildConfigurationList = 002F5D6C17431CDE00A4D0A0 /* Build configuration list for PBXProject "gobbldygook" */;
@@ -397,8 +397,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				002F5D6D17431CDE00A4D0A0 /* gobbldygook */,
-				00707B1917431D5A000F5AF9 /* nomake */,
+				002F5D6D17431CDE00A4D0A0 /* Makefile */,
+				00707B1917431D5A000F5AF9 /* Xcode */,
 			);
 		};
 /* End PBXProject section */
@@ -431,7 +431,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -479,7 +478,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -565,7 +563,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		002F5D7017431CDE00A4D0A0 /* Build configuration list for PBXLegacyTarget "gobbldygook" */ = {
+		002F5D7017431CDE00A4D0A0 /* Build configuration list for PBXLegacyTarget "Makefile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				002F5D7117431CDE00A4D0A0 /* Debug */,
@@ -574,7 +572,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		00707B2117431D5A000F5AF9 /* Build configuration list for PBXNativeTarget "nomake" */ = {
+		00707B2117431D5A000F5AF9 /* Build configuration list for PBXNativeTarget "Xcode" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00707B2217431D5A000F5AF9 /* Debug */,
