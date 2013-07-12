@@ -15,7 +15,7 @@ protected: // todo make protected
 public:
 	Requirement() : Requirement("", 0) {}
 	Requirement(string str) : Requirement(str, 0) {}
-	Requirement(string str, int n);
+	Requirement(string str, int need);
 
 	void incrementHas();
 	void decrementHas();
