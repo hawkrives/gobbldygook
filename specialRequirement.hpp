@@ -8,7 +8,7 @@ using namespace std;
 
 class SpecialRequirement : public Requirement {
 protected:
-	vector<MajorRequirement *> validSets;
+	vector<MajorRequirement> validSets;
 
 public:
 	SpecialRequirement() : SpecialRequirement("", 0) {}
@@ -18,7 +18,7 @@ public:
 	bool fulfillsRequirement(const MajorRequirement& c);
 
 	void addSet(MajorRequirement mr);
-	const vector<MajorRequirement *> getValidSets() const;
+	const vector<MajorRequirement> getValidSets() const;
 
 	friend bool operator== (const SpecialRequirement &l, const SpecialRequirement &r);
 	friend bool operator!= (const SpecialRequirement &l, const SpecialRequirement &r);

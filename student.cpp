@@ -153,18 +153,18 @@ ostream& Student::getData(ostream &os) {
 	// TODO: don't cout an extra line at the end of the output.
 
 	for (Major m : majors) {
-		for (MajorRequirement* req: *m.getRequirements())
+		for (MajorRequirement req: *m.getRequirements())
 			cout << req << endl;
-		for (SpecialRequirement* set : *m.getSpecialRequirements())
-			for (MajorRequirement* req : set->getValidSets())
+		for (SpecialRequirement set : *m.getSpecialRequirements())
+			for (MajorRequirement req : set.getValidSets())
 				cout << req << endl;
 	}
 
 	for (Concentration conc : concentrations) {
-		for (MajorRequirement* req : *conc.getRequirements())
+		for (MajorRequirement req : *conc.getRequirements())
 			cout << req << endl;
-		for (SpecialRequirement* set : *conc.getSpecialRequirements())
-			for (MajorRequirement* req : set->getValidSets())
+		for (SpecialRequirement set : *conc.getSpecialRequirements())
+			for (MajorRequirement req : set.getValidSets())
 				cout << req << endl;
 	}
 
@@ -174,15 +174,15 @@ ostream& Student::getData(ostream &os) {
 void Student::updateStanding() {
 	for (Major m : majors) {
 		for (Course c : courses) {
-			for (MajorRequirement* req : *m.getRequirements()) {
-				if (req->fulfillsRequirement(c.getID())) {
-					req->incrementHas();
+			for (MajorRequirement req : *m.getRequirements()) {
+				if (req.fulfillsRequirement(c.getID())) {
+					req.incrementHas();
 				}
 			}
-			for (SpecialRequirement* set : *m.getSpecialRequirements()) {
-				for (MajorRequirement* req : set->getValidSets()) {
-					if (req->fulfillsRequirement(c.getID())) {
-						req->incrementHas();
+			for (SpecialRequirement set : *m.getSpecialRequirements()) {
+				for (MajorRequirement req : set.getValidSets()) {
+					if (req.fulfillsRequirement(c.getID())) {
+						req.incrementHas();
 					}
 				}
 			}
@@ -190,15 +190,15 @@ void Student::updateStanding() {
 	}
 	for (Concentration conc : concentrations) {
 		for (Course c : courses) {
-			for (MajorRequirement* req : *conc.getRequirements()) {
-				if (req->fulfillsRequirement(c.getID())) {
-					req->incrementHas();
+			for (MajorRequirement req : *conc.getRequirements()) {
+				if (req.fulfillsRequirement(c.getID())) {
+					req.incrementHas();
 				}
 			}
-			for (SpecialRequirement* set : *conc.getSpecialRequirements()) {
-				for (MajorRequirement* req : set->getValidSets()) {
-					if (req->fulfillsRequirement(c.getID())) {
-						req->incrementHas();
+			for (SpecialRequirement set : *conc.getSpecialRequirements()) {
+				for (MajorRequirement req : set.getValidSets()) {
+					if (req.fulfillsRequirement(c.getID())) {
+						req.incrementHas();
 					}
 				}
 			}

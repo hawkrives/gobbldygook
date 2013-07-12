@@ -14,9 +14,9 @@ protected:
 protected:
 	string name;
 	Department department;
-	vector<MajorRequirement *> requirements;
-	vector<SpecialRequirement *> specialRequirements;
-	vector<MajorRequirement *> setRequirements;
+	vector<MajorRequirement> requirements;
+	vector<SpecialRequirement> specialRequirements;
+	vector<MajorRequirement> setRequirements;
 
 public:
 	friend class Concentration;
@@ -26,9 +26,9 @@ public:
 	ostream& getData(ostream &os);
 	void display();
 
-	vector<MajorRequirement *>* getRequirements();
-	vector<SpecialRequirement *>* getSpecialRequirements();
-	vector<MajorRequirement *>* getSetRequirements();
+	vector<MajorRequirement>* getRequirements();
+	vector<SpecialRequirement>* getSpecialRequirements();
+	vector<MajorRequirement>* getSetRequirements();
 
 	SpecialRequirement* getSpecialRequirement(string str);
 	MajorRequirement* getMajorRequirement(string str);

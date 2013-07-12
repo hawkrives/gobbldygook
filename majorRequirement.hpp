@@ -19,18 +19,35 @@ public:
 
 	friend bool operator== (const MajorRequirement &l, const MajorRequirement&r);
 	friend bool operator!= (const MajorRequirement &l, const MajorRequirement &r);
+	friend bool operator== (const MajorRequirement &l, const Requirement &r);
+	friend bool operator!= (const MajorRequirement &l, const Requirement &r);
+	friend bool operator== (const Requirement &l, const MajorRequirement &r);
+	friend bool operator!= (const Requirement &l, const MajorRequirement &r);
 };
 
 ostream &operator<<(ostream &os, MajorRequirement &item);
 
 inline bool operator== (const MajorRequirement &l, const MajorRequirement &r) {
-	bool parent = (l == r);
+//	bool parent = (l == r);
 	bool valid = (l.validCourses == r.validCourses);
-	return (parent && valid);
+	return (valid);
 }
 
 inline bool operator!= (const MajorRequirement &l, const MajorRequirement &r) {
 	return !(l == r);
+}
+
+inline bool operator== (const MajorRequirement &l, const Requirement &r) {
+	return false;
+}
+inline bool operator!= (const MajorRequirement &l, const Requirement &r) {
+	return !(l == r);
+}
+inline bool operator== (const Requirement &l, const MajorRequirement &r) {
+	return (r == l);
+}
+inline bool operator!= (const Requirement &l, const MajorRequirement &r) {
+	return !(r == l);
 }
 
 #endif
