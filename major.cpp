@@ -11,7 +11,6 @@ Major::Major(string s) {
 	parse(record);
 
 	name = department.getFullName();
-	record.clear();
 }
 
 void Major::parse(vector<string> record) {
