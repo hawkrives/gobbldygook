@@ -96,25 +96,25 @@ void Major::parse(vector<string> record) {
 
 MajorRequirement* Major::getMajorRequirement(string str) {
 	str = removeStartingText(str, " ");
-	for (MajorRequirement *m : requirements)
-		if (m->getName() == str)
-			return m;
+	for (int i = 0; i < requirements.size(); i++)
+		if (requirements[i].getName() == str)
+			return &requirements[i];
 	return nullptr;
 }
 
 SpecialRequirement* Major::getSpecialRequirement(string str) {
 	str = removeStartingText(str, " ");
-	for (SpecialRequirement *s : specialRequirements)
-		if (s->getName() == str)
-			return s;
+	for (int i = 0; i < specialRequirements.size(); i++)
+		if (specialRequirements[i].getName() == str)
+			return &specialRequirements[i];
 	return nullptr;
 }
 
 MajorRequirement* Major::getSetRequirement(string str) {
 	str = removeStartingText(str, " ");
-	for (MajorRequirement *i : setRequirements)
-		if (i->getName() == str)
-			return i;
+	for (int i = 0; i < setRequirements.size(); i++)
+		if (setRequirements[i].getName() == str)
+			return &setRequirements[i];
 	return nullptr;
 }
 
