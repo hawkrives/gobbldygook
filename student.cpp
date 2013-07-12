@@ -23,8 +23,7 @@ Student::Student(string fn) {
 	vector<string> lines = split(contentsOfFile, '\n');
 
 	string previousHeading;
-	for (vector<string>::iterator i = lines.begin(); i != lines.end(); ++i) {
-		string str = *i;
+	for (auto &str : lines) {
 		if (previousHeading.empty())
 			previousHeading = "# NAME";
 		if (str[0] == '#') {
@@ -56,8 +55,8 @@ void Student::addMajor(const Major& m) {
 
 void Student::addMajors(string str) {
 	vector<string> record = split(str, ',');
-	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i)
-		addMajor(Major(*i));
+	for (auto &m : record)
+		addMajor(Major(m));
 }
 
 void Student::addConcentration(const Concentration& m) {
@@ -66,8 +65,8 @@ void Student::addConcentration(const Concentration& m) {
 
 void Student::addConcentrations(string str) {
 	vector<string> record = split(str, ',');
-	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i)
-		addConcentration(Concentration(*i));
+	for (auto &c : record)
+		addConcentration(Concentration(c));
 }
 
 void Student::addCourse(const Course& c) {
@@ -83,8 +82,8 @@ void Student::addCourses(string str) {
 bool Student::hasTakenCourse(string str) {
 	bool userHasTaken = false;
 	const Course checkAgainst = getCourse(str);
-	for (std::vector<Course>::iterator i = courses.begin(); i != courses.end(); ++i)
-		if (*i == checkAgainst)
+	for (const auto &course : courses)
+		if (course == checkAgainst)
 			userHasTaken = true;
 	return userHasTaken;
 }
@@ -152,19 +151,19 @@ ostream& Student::getData(ostream &os) {
 
 	// TODO: don't cout an extra line at the end of the output.
 
-	for (Major m : majors) {
-		for (MajorRequirement req: *m.getRequirements())
+	for (Major &m : majors) {
+		for (MajorRequirement &req: *m.getRequirements())
 			cout << req << endl;
-		for (SpecialRequirement set : *m.getSpecialRequirements())
-			for (MajorRequirement req : set.getValidSets())
+		for (SpecialRequirement &set : *m.getSpecialRequirements())
+			for (MajorRequirement &req : *set.getValidSets())
 				cout << req << endl;
 	}
 
-	for (Concentration conc : concentrations) {
-		for (MajorRequirement req : *conc.getRequirements())
+	for (Concentration &conc : concentrations) {
+		for (MajorRequirement &req : *conc.getRequirements())
 			cout << req << endl;
-		for (SpecialRequirement set : *conc.getSpecialRequirements())
-			for (MajorRequirement req : set.getValidSets())
+		for (SpecialRequirement &set : *conc.getSpecialRequirements())
+			for (MajorRequirement &req : *set.getValidSets())
 				cout << req << endl;
 	}
 
@@ -172,15 +171,15 @@ ostream& Student::getData(ostream &os) {
 }
 
 void Student::updateStanding() {
-	for (Major m : majors) {
-		for (Course c : courses) {
-			for (MajorRequirement req : *m.getRequirements()) {
+	for (Major &m : majors) {
+		for (Course &c : courses) {
+			for (MajorRequirement &req : *m.getRequirements()) {
 				if (req.fulfillsRequirement(c.getID())) {
 					req.incrementHas();
 				}
 			}
-			for (SpecialRequirement set : *m.getSpecialRequirements()) {
-				for (MajorRequirement req : set.getValidSets()) {
+			for (SpecialRequirement &set : *m.getSpecialRequirements()) {
+				for (MajorRequirement &req : *set.getValidSets()) {
 					if (req.fulfillsRequirement(c.getID())) {
 						req.incrementHas();
 					}
@@ -188,15 +187,15 @@ void Student::updateStanding() {
 			}
 		}
 	}
-	for (Concentration conc : concentrations) {
-		for (Course c : courses) {
-			for (MajorRequirement req : *conc.getRequirements()) {
+	for (Concentration &conc : concentrations) {
+		for (Course &c : courses) {
+			for (MajorRequirement &req : *conc.getRequirements()) {
 				if (req.fulfillsRequirement(c.getID())) {
 					req.incrementHas();
 				}
 			}
-			for (SpecialRequirement set : *conc.getSpecialRequirements()) {
-				for (MajorRequirement req : set.getValidSets()) {
+			for (SpecialRequirement &set : *conc.getSpecialRequirements()) {
+				for (MajorRequirement &req : *set.getValidSets()) {
 					if (req.fulfillsRequirement(c.getID())) {
 						req.incrementHas();
 					}
