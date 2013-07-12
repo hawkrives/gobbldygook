@@ -22,14 +22,17 @@ void Major::parse(vector<string> record) {
 		if (activeHeading.empty())
 			activeHeading = "NAME";
 		found = str.find_first_of("#");
+		
 		if (found == 0 && (str.substr(0, 2) != "##")) {
 			str = str.substr(found+1, str.size()-found);
 			activeHeading = removeStartingText(str, " ");
 			continue;
 		}
+
 		if (activeHeading == "SPECIAL") {
 			// why was this blank?
-		};
+		}
+
 		found = str.find_first_of("=");
 		if (found != string::npos) {
 			leftSide = str.substr(0, found-1);
@@ -69,11 +72,12 @@ void Major::parse(vector<string> record) {
 					sp->addSet(*getSetRequirement(*idx));
 			}
 		}
-//		else if (str != "") {
+
 		else if (!str.empty()) {
 			if (str.substr(0, 2) == "//") {
 				// it's a comment
 			}
+
 			else if (str.substr(0, 2) == "##") {
 				str = str.substr(2, str.length()-2);
 				str = removeStartingText(str, " ");
