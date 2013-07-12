@@ -78,18 +78,15 @@ void Major::parse(vector<string> record) {
 				str = str.substr(2, str.length()-2);
 				str = removeStartingText(str, " ");
 				if (activeHeading == "REQUIREMENTS") {
-					MajorRequirement m = MajorRequirement(str);
-					requirements.push_back(&m);
+					requirements.push_back(MajorRequirement(str));
 					activeRequirement = str;
 				}
 				else if (activeHeading == "SETS") {
-					MajorRequirement m = MajorRequirement(str);
-					setRequirements.push_back(&m);
+					setRequirements.push_back(MajorRequirement(str));
 					activeRequirement = str;
 				}
 				else if (activeHeading == "SPECIAL") {
-					SpecialRequirement special = SpecialRequirement(str);
-					specialRequirements.push_back(&special);
+					specialRequirements.push_back(SpecialRequirement(str));
 					activeRequirement = str;
 				}
 			}
