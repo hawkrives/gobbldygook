@@ -125,4 +125,6 @@ void printEntireRecord(vector<string> record);
 
 string getFileContents(string fn);
 
+ostream &operator<<(ostream &os, pair<string, string> &item);
+
 #endif

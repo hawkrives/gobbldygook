@@ -6,6 +6,13 @@ string tostring(int i) {
 	return tmp.str();
 }
 
+ostream &operator<<(ostream &os, pair<string, string> &item) {
+	os << "pair<'";
+	os << item.first << "', '";
+	os << item.second << "'>";
+	return os;
+}
+
 int stringToInt(string const& str) {
 	istringstream i(str);
 	int x;
