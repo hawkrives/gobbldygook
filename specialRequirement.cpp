@@ -12,8 +12,8 @@ void SpecialRequirement::addSet(MajorRequirement mr) {
 	validSets.push_back(mr);
 }
 
-const vector<MajorRequirement> SpecialRequirement::getValidSets() const {
-	return validSets;
+vector<MajorRequirement>* SpecialRequirement::getValidSets() {
+	return &validSets;
 }
 
 bool operator== (const SpecialRequirement &l, const SpecialRequirement &r) {

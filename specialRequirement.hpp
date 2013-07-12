@@ -18,7 +18,7 @@ public:
 	bool fulfillsRequirement(const MajorRequirement& c);
 
 	void addSet(MajorRequirement mr);
-	const vector<MajorRequirement> getValidSets() const;
+	vector<MajorRequirement>* getValidSets();
 
 	friend bool operator== (const SpecialRequirement &l, const SpecialRequirement &r);
 	friend bool operator!= (const SpecialRequirement &l, const SpecialRequirement &r);
