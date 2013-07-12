@@ -15,8 +15,7 @@ Major::Major(string s) {
 
 void Major::parse(vector<string> record) {
 	string activeHeading, activeRequirement;
-	for (vector<string>::iterator i = record.begin(); i != record.end(); ++i) {
-		string str = *i;
+	for (string str : record) {
 		std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 		string leftSide, rightSide;
 		long found;
