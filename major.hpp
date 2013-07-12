@@ -1,6 +1,7 @@
 #ifndef __Data_major__
 #define __Data_major__
 
+#include <utility>
 #include "general.hpp"
 #include "majorRequirement.hpp"
 #include "specialRequirement.hpp"
@@ -11,6 +12,19 @@ using namespace std;
 class Major {
 protected:
 	void parse(vector<string> record);
+
+	// Helpers for parsing
+	bool checkIfContent(const string *str);
+	
+	bool checkIfComment(const string *str);
+	bool checkIfHeading(const string *str);
+	bool checkIfSubHeading(const string *str);
+
+	void parseContent(const string *str, const string *currentRequirement, const string *currentHeading);
+	pair<string, string> parseContentLine(const string *str);
+	string parseHeading(const string *str);
+	string parseSubHeading(const string *str, const string *currentHeading);
+
 protected:
 	string name;
 	Department department;
@@ -25,6 +39,10 @@ public:
 
 	ostream& getData(ostream &os);
 	void display();
+
+	void addMajorRequirement(MajorRequirement req);
+	void addSpecialRequirement(SpecialRequirement req);
+	void addSetRequirement(MajorRequirement req);
 
 	vector<MajorRequirement>* getRequirements();
 	vector<SpecialRequirement>* getSpecialRequirements();
