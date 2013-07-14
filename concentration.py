@@ -6,7 +6,7 @@ class Concentration(Major):
 
 if __name__ == '__main__':
 	tmp = [
-		Major(dept="Asian")
+		Concentration(dept="Asian")
 	]
 	for i in tmp:
 		print(i)
