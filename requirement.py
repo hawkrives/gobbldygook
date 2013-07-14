@@ -79,7 +79,11 @@ if __name__ == '__main__':
 		Requirement("Semester in Asia"),
 		Requirement("Semester in Japan", 1),
 		MajorRequirement("Major Req", 1),
-		SpecialRequirement("Special Req")
+		SpecialRequirement("Special Req"),
+		Requirement("Semester in Asia"),
 	]
 	for i in tmp:
 		print (i)
+
+	if tmp[0] == tmp[4]:
+		print("success")
