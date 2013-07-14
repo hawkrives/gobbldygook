@@ -4,7 +4,6 @@ from course import Course
 from ID import ID
 # import student
 
-all_courses = {}
 def argument_parse():
 	parser = argparse.ArgumentParser(description="This program works best if you give it some data. However, we have some example stuff to show you anyway.)")
 	parser.add_argument('-l', "--load")
@@ -15,6 +14,7 @@ def argument_parse():
 	return parser
 
 
+all_courses = {}
 
 def getCourse(identifier):
 	courseID = ID(combined=identifier)
@@ -56,8 +56,10 @@ def main():
 	# args = parser.parse_args()
 
 	readData()
+
 	print(getCourse("WMNST 298"))
 	print(getCourse("JAPAN 112"))
+
 	# for course in all_courses:
 		# print(all_courses[course])
 
