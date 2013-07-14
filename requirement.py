@@ -1,7 +1,7 @@
 class Requirement:
-	def __init__(self, title="", need=0):
-		self.name = title
-		self.needed = need
+	def __init__(self, name="", needed=0):
+		self.name = name
+		self.needed = needed
 		self.has = 0
 		self.satisfied = false
 		self.checkSatisfied()
