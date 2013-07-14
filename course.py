@@ -59,6 +59,20 @@ class Course:
 		# and Eleven knows who teaches.
 		self.professor = data[11]
 
+	def __eq__(self, other):
+		return (
+			self.id == other.id and
+			self.courseType == other.courseType and
+			self.title == other.title and
+			self.half_semester == other.half_semester and
+			self.credits == other.credits and
+			self.pass_fail == other.pass_fail and
+			self.geneds == other.geneds and
+			self.times == other.times and
+			self.location == other.location and
+			self.professor == other.professor
+		)
+
 
 	def cleanTitle(self, string):
 		badEndings = [

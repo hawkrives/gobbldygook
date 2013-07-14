@@ -22,6 +22,13 @@ class ID:
 		# return self.section
 
 
+	def __eq__(self, other):
+		return (
+				self.department == other.department and
+				self.number == other.number #and
+				# self.section == other.section
+			)
+
 if __name__ == '__main__':
 	ids = [
 		ID("AS/RE", 121, 'A'),
