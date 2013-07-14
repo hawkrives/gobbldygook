@@ -3,7 +3,7 @@ class Requirement:
 		self.name = name
 		self.needed = needed
 		self.has = 0
-		self.satisfied = false
+		self.satisfied = False
 		self.checkSatisfied()
 
 	def checkSatisfied(self):
