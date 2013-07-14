@@ -29,6 +29,10 @@ class ID:
 				# self.section == other.section
 			)
 
+	def __hash__(self):
+		return hash(str(self.department) + " " + str(self.number))
+
+
 if __name__ == '__main__':
 	ids = [
 		ID("AS/RE", 121, 'A'),

@@ -73,6 +73,20 @@ class Course:
 			self.professor == other.professor
 		)
 
+	def __hash__(self):
+		return hash(
+			self.id and
+			self.courseType and
+			self.title and
+			self.half_semester and
+			self.credits and
+			self.pass_fail and
+			self.geneds and
+			self.times and
+			self.location and
+			self.professor
+		)
+
 
 	def cleanTitle(self, string):
 		badEndings = [

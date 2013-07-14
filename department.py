@@ -109,6 +109,9 @@ class Department(collections.MutableSequence):
 	def __eq__(self, other):
 		return self.list == other.list
 
+	def __hash__(self):
+		return hash(self.list)
+
 	def __str__(self):
 		if len(self.list) is 1:
 			return self.abbr(0)
