@@ -106,6 +106,9 @@ class Department(collections.MutableSequence):
 	def insert(self, i, v):
 		self.list.insert(i, v)
 
+	def __eq__(self, other):
+		return self.list == other.list
+
 	def __str__(self):
 		if len(self.list) is 1:
 			return self.abbr(0)
