@@ -45,30 +45,33 @@ class Requirement:
 			self.satisfied == other.satisfied
 		)
 
-class MajorRequirement(Requirement):
-	validCourses = []
 
-	def __init__(self, title="", need=0):
-		super().__init__(title, need)
+class RequirementWithValididty(Requirement):
+	def __init__(self, name="", needed=0):
+		super().__init__(name, needed)
+		self.valid = []
 
-	def addCourse(course):
-		self.validCourses.append(course)
-
-	def fulfillsRequirement(course):
-		return course in self.validCourses
-
-
-class SpecialRequirement(Requirement):
-	validSets = []
-
-	def __init__(self, title="", need=0):
-		super().__init__(title, need)
+	def __eq__(self, other):
+		return (
+			super().__eq__(other) and
+			self.valid == other.valid
+		)
 
 	def addCourse(course):
-		self.validSets.append(course)
+		self.valid.append(course)
 
 	def fulfillsRequirement(course):
-		return course in self.validSets
+		return course in self.valid
+
+
+class MajorRequirement(RequirementWithValididty):
+	def __init__(self, name="", needed=0):
+		super().__init__(name, needed)
+
+
+class SpecialRequirement(RequirementWithValididty):
+	def __init__(self, name="", needed=0):
+		super().__init__(name, needed)
 
 
 if __name__ == '__main__':
