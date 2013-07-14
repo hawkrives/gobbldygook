@@ -5,6 +5,15 @@ from ID import ID
 # import student
 
 all_courses = {}
+def argument_parse():
+	parser = argparse.ArgumentParser(description="This program works best if you give it some data. However, we have some example stuff to show you anyway.)")
+	parser.add_argument('-l', "--load")
+	parser.add_argument('-f', "--find")
+	parser.add_argument("--demo")
+	parser.add_argument("--stress")
+	parser.add_argument("--debug")
+	return parser
+
 
 
 def getCourse(identifier):
@@ -14,14 +23,6 @@ def getCourse(identifier):
 		return all_courses[courseID]
 	else:
 		return None
-
-
-parser = argparse.ArgumentParser(description="This program works best if you give it some data. However, we have some example stuff to show you anyway.)")
-parser.add_argument('-l', "--load")
-parser.add_argument('-f', "--find")
-parser.add_argument("--demo")
-parser.add_argument("--stress")
-parser.add_argument("--debug")
 
 
 def loadCourses(filename):
@@ -51,7 +52,9 @@ def readData():
 
 
 def main():
-	args = parser.parse_args()
+	# parser = argument_parse()
+	# args = parser.parse_args()
+
 	readData()
 	print(getCourse("WMNST 298"))
 	print(getCourse("JAPAN 112"))
