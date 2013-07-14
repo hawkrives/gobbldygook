@@ -45,6 +45,11 @@ class Requirement:
 			self.satisfied == other.satisfied
 		)
 
+	def __hash__(self):
+		return hash(
+			self.name and self.needed and self.has and self.satisfied 
+		)
+
 
 class RequirementWithValididty(Requirement):
 	def __init__(self, name="", needed=0):
