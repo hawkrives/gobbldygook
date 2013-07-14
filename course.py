@@ -90,13 +90,23 @@ class Course:
 
 	def cleanTitle(self, string):
 		badEndings = [
+			" Admission by",
+			" Class will",
 			" Closed",
 			" During course submission process",
 			" Especially for ",
+			" Enrollment by",
 			" Film screenings",
-			" First-Year Students may register only",
+			" First-years "
+			" First-Year Students",
+			" Focuses on",
+			" Lab times to be arranged.",
+			" Limited to",
 			" New course",
 			" Not open to first-year students.",
+			" Note:",
+			" No prerequisite",
+			" Nursing ",
 			" Only open ",
 			" Open only ",
 			" Open to ",
@@ -106,9 +116,13 @@ class Course:
 			" Prereq",
 			" Registration",
 			" Taught in English.",
+			" The focus of this course",
+			" Thyis is an",
+			" This is an",
 			" This course",
 			" This lab has been canceled.",
-			" Students in "
+			" Students in ",
+			" You may "
 		]
 
 		badBeginnings = [
