@@ -64,6 +64,9 @@ class RequirementWithValididty(Requirement):
 			self.valid == other.valid
 		)
 
+	def __iter__(self):
+		return self.valid.__iter__()
+
 	def addCourse(self, identifier):
 		if not isinstance(identifier, ID):
 			identifier = ID(combined=identifier)
