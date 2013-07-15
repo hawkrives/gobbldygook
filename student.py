@@ -15,57 +15,47 @@ class Student:
 	courses = []
 	standing = Standing()
 
-	def __init__(self, name="", start_year=0, end_year=0, majors=[], concentrations=[], filename=""):
-		if not filename:
-			self.name = name
-			self.start_year = int(start_year)
-			self.end_year = int(end_year)
+	def __init__(self, filename=""):
+		heading = ""
+		with open(filename) as infile:
+			for line in infile:
+				line = line.rstrip()
+				if not line:
+					continue
 
-			for major in majors:
-				self.addMajor(major)
-			for concentration in concentrations:
-				self.addConcentration(concentration)
+				if not heading:
+					heading = "NAME"
 
-		else:
-			heading = ""
-			with open(filename) as infile:
-				for line in infile:
-					line = line.rstrip()
-					if not line:
-						continue
+				elif line[0] == '#':
+					line = line.upper()
+					heading = line[2:]
+					continue
 
-					if not heading:
-						heading = "NAME"
+				elif line:
+					if line[0:2] == "//":
+						# it's a comment
+						pass
 
-					elif line[0] == '#':
-						line = line.upper()
-						heading = line[2:]
-						continue
+					elif heading == "NAME":
+						self.name = line
 
-					elif line:
-						if line[0:2] == "//":
-							# it's a comment
-							pass
+					elif heading == "MAJORS":
+						self.addMajor(line)
 
-						elif heading == "NAME":
-							self.name = line
+					elif heading == "CONCENTRATIONS":
+						self.addConcentration(line)
 
-						elif heading == "MAJORS":
-							self.addMajor(line)
+					elif heading == "COURSES":
+						print(line)
+						course = getCourse(line)
+						# print(course)
+						self.standing.increment(course.credits)
+						self.addCourse(line)
 
-						elif heading == "CONCENTRATIONS":
-							self.addConcentration(line)
-
-						elif heading == "COURSES":
-							# print(line)
-							course = getCourse(line)
-							self.standing.increment(course.credits)
-							self.addCourse(line)
-
-						elif heading == "LABS":
-							course = getCourse(line)
-							self.standing.increment(course.credits)
-							self.addCourse(course)
+					elif heading == "LABS":
+						course = getCourse(line)
+						self.standing.increment(course.credits)
+						self.addCourse(course)
 
 
 	def __eq__(self, other):
