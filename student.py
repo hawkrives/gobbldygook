@@ -73,10 +73,15 @@ class Student:
 							self.addConcentration(line)
 
 						elif heading == "COURSES":
+							# print(line)
+							course = getCourse(line)
+							self.standing.increment(course.credits)
 							self.addCourse(line)
 
-							self.addCourse(line)
 						elif heading == "LABS":
+							course = getCourse(line)
+							self.standing.increment(course.credits)
+							self.addCourse(course)
 
 
 	def __eq__(self, other):
