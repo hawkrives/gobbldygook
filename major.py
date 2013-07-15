@@ -77,29 +77,30 @@ class Major:
 
 			elif sides[0] == "NEEDED":
 				if currentHeading == "REQUIREMENTS":
-					self.getMajorRequirement(currentRequirement).setNeeded(int(sides[1]))
+					self.requirements[currentRequirement].setNeeded(int(sides[1]))
 				elif currentHeading == "SPECIAL":
-					self.getSpecialRequirement(currentRequirement).setNeeded(int(sides[1]))
+					self.specialRequirements[currentRequirement].setNeeded(int(sides[1]))
 				elif currentRequcurrentHeadingirement == "SETS":
-					self.getSetRequirement(currentRequirement).setNeeded(int(sides[1]))
+					self.setRequirements[currentRequirement].setNeeded(int(sides[1]))
+
 
 			elif sides[0] == "VALIDCOURSES":
 				validCourseList = sides[1].split(',')
 
 				for courseID in validCourseList:
 					if currentHeading == "REQUIREMENTS":
-						self.getMajorRequirement(currentRequirement).addCourse(ID(courseID))
+						self.requirements[currentRequirement].addCourse(ID(courseID))
 
 					elif currentHeading == "SETS":
-						self.getSetRequirement(currentRequirement).addCourse(ID(courseID))
+						self.setRequirements[currentRequirement].addCourse(ID(courseID))
 
 
 			elif sides[0] == "VALIDSETS":
 				validSetList = sides[1].split(',')
-				sp = self.getSpecialRequirement(currentRequirement)
+				# specialReq = self.specialRequirements[currentRequirement]
 
 				for setID in validSetList:
-					sp.addSet(self.getSetRequirement(setID))
+					self.specialRequirements[currentRequirement].addSet(self.setRequirements[setID])
 
 
 	def parseContentLine(self, string):
