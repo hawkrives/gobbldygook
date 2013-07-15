@@ -168,13 +168,15 @@ class Student:
 
 	def addCourse(self, course):
 		if not isinstance(course, Course):
-			course = Course(course)
+			course = getCourse(course)
 		self.courses.append(course)
+
 
 	def addMajor(self, major):
 		if not isinstance(major, Major):
 			major = Major(major)
 		self.majors.append(major)
+
 
 	def addConcentration(self, concentration):
 		if not isinstance(concentration, Concentration):
