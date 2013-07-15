@@ -89,16 +89,19 @@ class Student:
 
 	def __str__(self):
 		self.updateStanding()
-		output = ""
-		output += self.name + ", "
+		output = self.name + ", "
 		
 		if self.majors:
 			output += "you are majoring in "
-			print_entire_list_as_english(self.majors)
+			output += get_list_as_english(self.majors)
 		
 		if self.concentrations:
-			output += "with concentrations in "
-			print_entire_list_as_english(self.concentrations)
+			if len(self.concentrations) is 1:
+				output += ", with a concentration in "
+			else:
+				output += ", with concentrations in "
+			output += get_list_as_english(self.concentrations)
+			output += ", "
 
 
 		if self.majors:
@@ -108,7 +111,7 @@ class Student:
 
 
 		for course in self.courses:
-			output += c + '\n'
+			output += str(course) + '\n'
 
 		output += '\n'
 
@@ -118,19 +121,21 @@ class Student:
 
 		for major in self.majors:
 			for requirement in major.requirements:
-				output += requirement + '\n'
+				output += str(requirement) + '\n'
 
 			for requirement_set in major.specialRequirements:
 				for requirement in requirement_set.valid:
-					output += req + '\n'
+					output += str(requirement) + '\n'
 
 		for concentration in self.concentrations:
 			for requirement in concentration.requirements:
-				output += requirement + '\n'
+				output += str(requirement) + '\n'
 
 			for requirement_set in concentration.specialRequirements:
 				for requirement in requirement_set.valid:
-					output += req + '\n'
+					output += str(requirement) + '\n'
+
+		output += '\n' + str(self.standing)
 
 		return output
 
