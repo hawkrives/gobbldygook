@@ -1,0 +1,30 @@
+# NAME
+Hawken Rives
+
+# MAJORS
+CSCI
+
+# CONCENTRATIONS
+ASIAN
+
+# COURSES
+// 2012, Fall
+Rel 121 C
+CSCI 121
+Japan 111 A
+AmCon 101 A
+
+// 2013, Interim
+Asian 130
+
+// 2013, Spring
+Asian 268
+AmCon 102 A
+Japan 112 A
+CSCI 251
+
+// 2014, Fall
+AmCon 201 A
+CSCI 241
+Asian 210
+Japan 231
