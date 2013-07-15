@@ -1,9 +1,8 @@
 from major import Major
 from concentration import Concentration
 
-from course import Course
-#include "gened.hpp"
-#include "graduationRequirement.hpp"
+from course import Course, getCourse
+from standing import Standing
 
 def print_entire_list_as_english(passed_list):
 	for i, item in enumerate(passed_list):
