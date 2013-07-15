@@ -46,7 +46,7 @@ class Course:
 		self.half_semester = 0
 		if data[5]:
 			self.half_semester = int(data[5])
-		if (self.half_semester is not 0) and (self.half_semester is not 1) and (self.half_semester is not 2):
+		if (self.half_semester != 0) and (self.half_semester != 1) and (self.half_semester != 2):
 			self.half_semester = 0
 
 		# Sixth tells us the number of credits,
