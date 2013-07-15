@@ -46,15 +46,15 @@ class Student:
 				self.addConcentration(concentration)
 
 		else:
-			previousHeading = ""
+			heading = ""
 			with open(filename) as infile:
 				for line in infile:
-					if not previousHeading:
-						previousHeading = "# NAME"
+					if not heading:
+						heading = "NAME"
 
 					if line[0] == '#':
 						line = line.upper()
-						previousHeading = line
+						heading = line[2:]
 						continue
 
 					elif line:
@@ -62,20 +62,20 @@ class Student:
 							# it's a comment
 							pass
 
-						elif previousHeading == "# NAME":
+						elif heading == "NAME":
 							self.name = line
 
-						elif previousHeading == "# MAJORS":
+						elif heading == "MAJORS":
 							self.addMajor(line)
 
-						elif previousHeading == "# CONCENTRATIONS":
+						elif heading == "CONCENTRATIONS":
 							self.addConcentration(line)
 
-						elif previousHeading == "# COURSES":
+						elif heading == "COURSES":
 							self.addCourse(line)
 
-						elif previousHeading == "# LABS":
 							self.addCourse(line)
+						elif heading == "LABS":
 
 
 	def __eq__(self, other):
