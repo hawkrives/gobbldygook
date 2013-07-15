@@ -34,11 +34,16 @@ class ID:
 
 if __name__ == '__main__':
 	ids = [
-		ID("AS/RE", 121, 'A'),
-		ID(combined="AS/HI121", sec='B'),
-		ID("AS/RE", 121, 'A')
+		ID(dept="AS/RE", number=121, section='A'),
+		ID(combined="AS/HI121B"),
+		ID(dept="AS/RE", number=121, section='A'),
+		ID("AS/HI121B"),
+		ID("AS/HI 121B"),
+		ID("AS/HI 121 B")
 	]
+
 	for i in ids:
 		print(i)
+
 	if ids[0] == ids[2]:
 		print("success")
