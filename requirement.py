@@ -104,6 +104,21 @@ gened_t = {
 	"EIN": "Ethical Issues and Normative Perspectives"
 }
 
+
+class GenEd(Requirement):
+	def __init__(self, name="", needed=0):
+		super().__init__(name, needed)
+
+	def __eq__(self, other):
+		if isinstance(other, str):
+			return (self.name.upper() == other.upper())
+		else:
+			return (self.name == other.name)
+
+	def hash(self):
+		return hash(self.name)
+
+
 if __name__ == '__main__':
 	tmp = [
 		Requirement("Semester in Asia"),
