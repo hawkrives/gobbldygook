@@ -182,4 +182,9 @@ class Course:
 		output += self.title + " | "
 		if (len(self.professor) and (self.professor != " ")):
 			output += self.professor
+
+		if self.geneds:
+			output += " [ "
+			output += get_readable_list(self.geneds)
+			output += " ]"
 		return output
