@@ -50,6 +50,9 @@ class Student:
 			with open(filename) as infile:
 				for line in infile:
 					line = line.rstrip()
+					if not line:
+						continue
+
 					if not heading:
 						heading = "NAME"
 
