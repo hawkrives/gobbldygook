@@ -6,9 +6,9 @@ class Major:
 		self.department = Department(dept)
 		self.name = self.department.name()
 
-		self.requirements = []
-		self.specialRequirements = []
-		self.setRequirements = []
+		self.requirements = {}
+		self.specialRequirements = {}
+		self.setRequirements = {}
 
 		self.parse(path)
 
@@ -50,11 +50,11 @@ class Major:
 
 
 	def addMajorRequirement(self, req):
-		self.requirements.append(req)
+		self.requirements[req.name] = req
 	def addSpecialRequirement(self, req):
-		self.specialRequirements.append(req)
+		self.specialRequirements[req.name] = req
 	def addSetRequirement(self, req):
-		self.setRequirements.append(req)
+		self.setRequirements[req.name] = req
 
 	def getMajorRequirement(self, string):
 		return self.requirements[string]
