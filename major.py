@@ -72,8 +72,10 @@ class Major:
 			if sides[0] == "NAME":
 				name = sides[1]
 
+
 			elif sides[0] == "DEPARTMENT":
 				department = Department(sides[1])
+
 
 			elif sides[0] == "NEEDED":
 				if currentHeading == "REQUIREMENTS":
