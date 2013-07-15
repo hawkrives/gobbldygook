@@ -1,3 +1,5 @@
+from ID import ID
+
 class Requirement:
 	def __init__(self, name="", needed=0):
 		self.name = name
@@ -63,6 +65,8 @@ class RequirementWithValididty(Requirement):
 		)
 
 	def addCourse(self, identifier):
+		if not isinstance(identifier, ID):
+			identifier = ID(combined=identifier)
 		self.valid.append(identifier)
 
 	def fulfillsRequirement(self, identifier):
