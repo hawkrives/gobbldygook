@@ -169,7 +169,7 @@ class Course:
 	def getType(self):
 		return self.course_type
 
-	def getDepartment():
+	def getDepartment(self):
 		return self.id.department
 	def getNumber(self):
 		return self.id.number
