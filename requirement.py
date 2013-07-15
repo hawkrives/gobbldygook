@@ -125,6 +125,9 @@ class GenEd(Requirement):
 	def __hash__(self):
 		return hash(self.name)
 
+	def __str__(self):
+		return super().__str__() + '\t(' + self.description + ')'
+
 
 if __name__ == '__main__':
 	tmp = [
