@@ -40,9 +40,11 @@ class Student:
 			self.start_year = int(start_year)
 			self.end_year = int(end_year)
 
+			for major in majors:
+				self.addMajor(major)
+			for concentration in concentrations:
+				self.addConcentration(concentration)
 
-			self.addMajors(majors)
-			self.addConcentrations(concentrations)
 		else:
 			previousHeading = ""
 			with open(filename) as infile:
