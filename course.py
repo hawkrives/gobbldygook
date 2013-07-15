@@ -33,11 +33,11 @@ class Course:
 		self.id = ID(combined=data[1], section=data[2])
 
 		# Third holds the lab boolean,
-		if   data[3] == "L": self.courseType = course_t["LAB"]
-		elif data[3] == "S": self.courseType = course_t["SEMINAR"]
-		elif data[3] == "D": self.courseType = course_t["DISCUSSION"]
-		elif data[3] == "T": self.courseType = course_t["TOPIC"]
-		else:                self.courseType = course_t["COURSE"]
+		if   data[3] == "L": self.course_type = course_t["LAB"]
+		elif data[3] == "S": self.course_type = course_t["SEMINAR"]
+		elif data[3] == "D": self.course_type = course_t["DISCUSSION"]
+		elif data[3] == "T": self.course_type = course_t["TOPIC"]
+		else:                self.course_type = course_t["COURSE"]
 
 		# while Fourth contains the title of the course
 		self.title = self.cleanTitle(data[4])
@@ -78,7 +78,7 @@ class Course:
 	def __eq__(self, other):
 		return (
 			self.id == other.id and
-			self.courseType == other.courseType and
+			self.course_type == other.course_type and
 			self.title == other.title and
 			self.half_semester == other.half_semester and
 			self.credits == other.credits and
@@ -92,7 +92,7 @@ class Course:
 	def __hash__(self):
 		return hash(
 			self.id and
-			self.courseType and
+			self.course_type and
 			self.title and
 			self.half_semester and
 			self.credits and
@@ -167,7 +167,7 @@ class Course:
 	def getID(self):
 		return self.id
 	def getType(self):
-		return self.courseType
+		return self.course_type
 
 	def getDepartment():
 		return self.id.department
