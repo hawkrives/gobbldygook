@@ -8,6 +8,7 @@ class ID:
 			self.number = int(number)
 			self.section = section
 		else:
+			combined = combined.upper()
 			regex = "(?P<dept>([a-z]*)(?=/)(/)([a-z]*)|[a-z]*) *(?P<num>[0-9]*) *(?P<sec>[a-z]*)"
 			match = re.search(regex, combined, re.I | re.S)
 			result = match.groupdict()
