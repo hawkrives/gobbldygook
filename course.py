@@ -2,6 +2,17 @@ from major import Major
 from ID import ID
 # from gened import GenEd
 
+all_courses = {}
+
+def getCourse(identifier):
+	courseID = ID(combined=identifier)
+
+	if courseID in all_courses:
+		return all_courses[courseID]
+	else:
+		return None
+
+
 course_t = {
 	"LAB": "Lab",
 	"DISCUSSION": "Discussion",
