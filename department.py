@@ -78,12 +78,26 @@ dept_t = {
 class Department(collections.MutableSequence):
 	def __init__(self, name):
 		self.list = list()
-		name = name.upper()
-		if '/' in name:
-			self.list.append((name[0:2], dept_t[name[0:2]]))
-			self.list.append((name[3:5], dept_t[name[3:5]]))
-		else:
+
+		if len(name) is 2:
+			# if name != "IS" or name != "ID":
+				# print(name)
 			self.list.append((name, dept_t[name]))
+
+		elif name not in dept_t and '/' not in name:
+			name = name.title()
+			pairs = dict(zip(dept_t.values(), dept_t.keys()))
+			print(pairs[name])
+			self.list.append((pairs[name], name))
+
+		else:
+			name = name.upper()
+			if '/' in name:
+				self.list.append((name[0:2], dept_t[name[0:2]]))
+				self.list.append((name[3:5], dept_t[name[3:5]]))
+			else:
+				self.list.append((name, dept_t[name]))
+
 
 	def name(self, i=0):
 		return self.list[i][1]
