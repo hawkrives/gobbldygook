@@ -2,7 +2,7 @@ import argparse, csv
 
 from course import Course, getCourse, all_courses
 from ID import ID
-# import student
+from student import Student
 
 def argument_parse():
 	parser = argparse.ArgumentParser(description="This program works best if you give it some data. However, we have some example stuff to show you anyway.)")
@@ -44,8 +44,12 @@ def main():
 
 	readData()
 
-	print(getCourse("WMNST 298"))
-	print(getCourse("JAPAN 112"))
+	# print(getCourse("WMNST 298"))
+	# print(getCourse("JAPAN 112"))
+
+	user = Student(filename="users/rives.txt")
+
+	print(user)
 
 
 if __name__ == '__main__':
