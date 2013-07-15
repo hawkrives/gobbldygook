@@ -4,23 +4,25 @@ from concentration import Concentration
 from course import Course, getCourse
 from standing import Standing
 
-def print_entire_list_as_english(passed_list):
+def get_list_as_english(passed_list):
+	output = ""
 	for i, item in enumerate(passed_list):
-		if len(self.passed_list) is 1:
-			output += item + " "
+		if len(passed_list) is 1:
+			output += str(item)
 
-		elif len(self.passed_list) is 2:
-			output += item
-			if i is not (len(self.passed_list) - 1):
+		elif len(passed_list) is 2:
+			output += str(item)
+			if i is not (len(passed_list) - 1):
 				output += " and "
 			else:
-				output += " "
+				output += ""
 
 		else:
-			if i is not (len(self.passed_list) - 1):
-				output += item + ", "
+			if i is not (len(passed_list) - 1):
+				output += str(item) + ", "
 			else:
-				output += "and " + item + ", "
+				output += "and " + str(item) + ", "
+	return output
 
 class Student:
 	name = ""
