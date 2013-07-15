@@ -12,11 +12,11 @@ class Requirement:
 		else:
 			self.satisfied = False
 
-	def incrementHas(self):
+	def increment(self):
 		self.has += 1
 		self.checkSatisfied()
 
-	def decrementHas(self):
+	def decrement(self):
 		self.has -= 1
 		self.checkSatisfied()
 

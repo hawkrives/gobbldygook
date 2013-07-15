@@ -137,23 +137,23 @@ class Student:
 			for course in self.courses:
 				for requirement in major.requirements:
 					if requirement.fulfillsRequirement(course.id):
-						requirement.incrementHas()
+						requirement.increment()
 
 				for requirement_set in major.specialRequirements:
 					for requirement in requirement_set.valid:
 						if requirement.fulfillsRequirement(course.id):
-							requirement.incrementHas()
+							requirement.increment()
 
 		for concentration in self.concentrations:
 			for course in self.courses:
 				for requirement in major.requirements:
 					if requirement.fulfillsRequirement(course.id):
-						requirement.incrementHas()
+						requirement.increment()
 
 				for requirement_set in major.specialRequirements:
 					for requirement in requirement_set.valid:
 						if requirement.fulfillsRequirement(course.id):
-							requirement.incrementHas()
+							requirement.increment()
 
 
 	def hasTakenCourse(self, identifier):
