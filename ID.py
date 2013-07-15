@@ -2,14 +2,12 @@ from department import Department
 import re
 
 class ID:
-	def __init__(self, dept='', num=0, sec='', combined=''):
+	def __init__(self, combined='', dept='', number=0, section=''):
 		if not combined:
 			self.department = Department(dept)
-			self.number = int(num)
+			self.number = int(number)
+			self.section = section
 		else:
-
-		self.section = sec
-
 			regex = "(?P<dept>([a-z]*)(?=/)(/)([a-z]*)|[a-z]*) *(?P<num>[0-9]*) *(?P<sec>[a-z]*)"
 			match = re.search(regex, combined, re.I | re.S)
 			result = match.groupdict()
@@ -17,11 +15,11 @@ class ID:
 			self.number = int(result["num"])
 			if not section:
 				self.section = result["sec"]
+			else:
+				self.section = section
 
 	def __str__(self):
 		return str(self.department) + " " + str(self.number) + self.section
-		# return self.section
-
 
 	def __eq__(self, other):
 		return (

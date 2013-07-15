@@ -43,7 +43,7 @@ class Course:
 
 		# so, the *first* column (that we care about) has the course id,
 		# and the second column has the section,
-		self.id = ID(combined=data[1], sec=data[2])
+		self.id = ID(combined=data[1], section=data[2])
 
 		# Third holds the lab boolean,
 		if   data[3] == "L": self.courseType = course_t["LAB"]
