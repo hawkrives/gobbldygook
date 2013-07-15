@@ -160,11 +160,10 @@ class Student:
 
 
 	def hasTakenCourse(self, identifier):
-		courseID = ID(combined=identifier)
-		if courseID in self.courses:
-			return self.courses[courseID]
+		if ID(identifier) in self.courses:
+			return True
 		else:
-			return None
+			return False
 
 
 	def addCourse(self, course):
