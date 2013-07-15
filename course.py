@@ -1,6 +1,5 @@
 from major import Major
 from ID import ID
-# from gened import GenEd
 from helpers import get_readable_list
 
 
@@ -41,7 +40,6 @@ class Course:
 
 		# while Fourth contains the title of the course
 		self.title = self.cleanTitle(data[4])
-		# self.title = data[4]
 
 		# Fifth hands over the length (half semester or not)
 		# It is actually an int that tells us how many times the course is offered per semester.
@@ -153,9 +151,6 @@ class Course:
 		for beginning in badBeginnings:
 			if beginning in string:
 				string = string.split(beginning)[1]
-
-		# if (str(self.id.department) + " " + str(self.id.number)) in string:
-			# print(string.split(str(self.id.department) + " " + str(self.id.number)))
 
 		string.strip()
 
