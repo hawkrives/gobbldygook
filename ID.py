@@ -23,9 +23,9 @@ class ID:
 
 	def __eq__(self, other):
 		return (
-				self.department == other.department and
-				self.number == other.number #and
-				# self.section == other.section
+				self.department == other.department
+				and self.number == other.number 
+				and self.section == other.section
 			)
 
 	def __hash__(self):
