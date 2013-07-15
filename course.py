@@ -1,21 +1,8 @@
 from major import Major
 from ID import ID
 # from gened import GenEd
+from helpers import get_readable_list
 
-
-def get_readable_list(passed_list):
-	output = ""
-	for i, item in enumerate(passed_list):
-		if len(passed_list) is 1:
-			output += str(item)
-
-		else:
-			if i is not (len(passed_list) - 1):
-				output += str(item) + ", "
-			else:
-				output += str(item)
-
-	return output
 
 all_courses = {}
 
