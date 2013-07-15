@@ -23,20 +23,24 @@ def print_entire_list_as_english(passed_list):
 				output += "and " + item + ", "
 
 class Student:
+	name = ""
+	start_year = 0
+	end_year = 0
+
+	majors = []
+	concentrations = []
+	courses = []
+	standing = Standing()
+
 	def __init__(self, name="", start_year=0, end_year=0, majors=[], concentrations=[], filename=""):
 		if not filename:
 			self.name = name
 			self.start_year = int(start_year)
 			self.end_year = int(end_year)
 
-			self.majors = []
-			self.concentrations = []
-			self.courses = {}
 
 			self.addMajors(majors)
 			self.addConcentrations(concentrations)
-
-			# self.standing = GraduationRequirement()
 		else:
 			previousHeading = ""
 			with open(filename) as infile:
