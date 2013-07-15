@@ -59,7 +59,10 @@ class Course:
 			self.pass_fail = False
 
 		# while Eighth gives us the GEs of the course,
-		self.geneds = data[8]
+		if data[8]:
+			self.geneds = data[8].split(sep=' ')
+		else:
+			self.geneds = []
 
 		# and Nine spits out the days and times
 		self.times = data[9]
@@ -172,10 +175,11 @@ class Course:
 		return self.id.section
 
 	def __str__(self):
-		ostream = self.getType() + ": "
-		ostream += str(self.id.department) + " " + str(self.id.number) + self.id.section
-		ostream += " - "
-		ostream += self.title + " | "
+		output = str(self.credits) + " | "
+		output += self.getType() + ": "
+		output += str(self.id.department) + " " + str(self.id.number) + self.id.section
+		output += " - "
+		output += self.title + " | "
 		if (len(self.professor) and (self.professor != " ")):
-			ostream += self.professor
-		return ostream
+			output += self.professor
+		return output
