@@ -62,11 +62,11 @@ class RequirementWithValididty(Requirement):
 			self.valid == other.valid
 		)
 
-	def addCourse(course):
-		self.valid.append(course)
+	def addCourse(self, identifier):
+		self.valid.append(identifier)
 
-	def fulfillsRequirement(course):
-		return course in self.valid
+	def fulfillsRequirement(self, identifier):
+		return identifier in self.valid
 
 
 class MajorRequirement(RequirementWithValididty):
