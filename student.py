@@ -56,7 +56,7 @@ class Student:
 					if not heading:
 						heading = "NAME"
 
-					if line[0] == '#':
+					elif line[0] == '#':
 						line = line.upper()
 						heading = line[2:]
 						continue
