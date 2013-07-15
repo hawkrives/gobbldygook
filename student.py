@@ -89,14 +89,13 @@ class Student:
 
 	def __eq__(self, other):
 		return (
-			self.name == other.name and
-			self.start_year == other.start_year and
-			self.end_year == other.end_year and
-			self.majors == other.majors and
-			self.concentrations == other.concentrations and
-			self.courses == other.courses 
-			# and
-			# self.standing == other.standing
+			self.name == other.name 
+			and self.start_year == other.start_year
+			and self.end_year == other.end_year
+			and self.majors == other.majors
+			and self.concentrations == other.concentrations
+			and self.courses == other.courses
+			and self.standing == other.standing
 		)
 
 
