@@ -122,7 +122,7 @@ class GenEd(Requirement):
 		else:
 			return (self.name == other.name)
 
-	def hash(self):
+	def __hash__(self):
 		return hash(self.name)
 
 
