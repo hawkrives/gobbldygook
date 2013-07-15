@@ -23,8 +23,8 @@ course_t = {
 }
 
 class Course:
-	def __init__(self, data=[]):
-		# Ignore the first column, because all it contains is whether the cours is open or closed.
+	def __init__(self, data):
+		# Ignore the first column, because all it contains is whether the course is open or closed.
 		# data[0]
 
 		# so, the *first* column (that we care about) has the course id,
