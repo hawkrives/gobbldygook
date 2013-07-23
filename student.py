@@ -165,7 +165,7 @@ class Student:
 			for course in self.courses:
 				for requirement in major.requirements:
 					if requirement.fulfillsRequirement(course.id):
-						requirement.increment()
+							requirement.increment()
 
 				for requirement_set in major.specialRequirements:
 					for requirement in requirement_set.valid:
@@ -176,7 +176,7 @@ class Student:
 			for course in self.courses:
 				for requirement in concentration.requirements:
 					if requirement.fulfillsRequirement(course.id):
-						requirement.increment()
+							requirement.increment()
 
 				for requirement_set in concentration.specialRequirements:
 					for requirement in requirement_set.valid:
