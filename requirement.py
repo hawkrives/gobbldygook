@@ -135,9 +135,11 @@ class GenEd(Requirement):
 
 	def __eq__(self, other):
 		if isinstance(other, str):
-			return (self.name.upper() == other.upper())
+			return self.name.upper() == other.upper()
+		elif isinstance(other, Requirement):
+			return self.name == other.name
 		else:
-			return (self.name == other.name)
+			return False
 
 	def __hash__(self):
 		return hash(self.name)
