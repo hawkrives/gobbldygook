@@ -1,4 +1,4 @@
-import collections
+import collections, re
 
 dept = {
 	"AFAM":  "Africa and the Americas",
@@ -158,9 +158,13 @@ class Department(collections.MutableSequence):
 
 		# If the name is *just right*
 		else:
-			if '/' in name:
+			if '/' in name and len(name) == 5:
 				self.list.append((dept_short[name[0:2]], dept[dept_short[name[0:2]]]))
 				self.list.append((dept_short[name[3:5]], dept[dept_short[name[3:5]]]))
+			elif '/' in name:
+				result = re.match(r"(.*)/(.*)", name).groups()
+				self.list.append((result[0], dept[result[0]]))
+				self.list.append((result[1], dept[result[1]]))
 			else:
 				self.list.append((name, dept[name]))
 
