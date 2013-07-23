@@ -1,4 +1,5 @@
 import argparse, csv
+#!/usr/local/bin/python3
 
 from course import Course, all_courses
 from student import Student
