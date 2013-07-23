@@ -206,7 +206,8 @@ class Department(collections.MutableSequence):
 if __name__ == '__main__':
 	tmp = (
 		Department("AS/RE"),
-		Department("ASIAN")
+		Department("ASIAN"),
+		Department("RE")
 	)
 	for i in tmp:
-		print(i)
+		print(i.name())
