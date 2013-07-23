@@ -7,7 +7,7 @@
 *#
 
 # Binaries
-gobbldygook
+.idea/
 *.tar.gz
 
 *.xcuserstate
@@ -16,3 +16,7 @@ gobbldygook
 *.xccheckout
 
 *.pyc
+
+.pydevproject
+
+.project
