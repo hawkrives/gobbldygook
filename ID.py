@@ -29,6 +29,8 @@ class ID:
 					and self.number == other.number 
 					and self.section == other.section
 				)
+		elif isinstance(other, str):
+			return self.__str__() == other
 		else:
 			return False
 
