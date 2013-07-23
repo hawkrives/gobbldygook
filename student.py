@@ -145,15 +145,18 @@ class Student:
 			output += "For " + str(major.name) + ": " + '\n'
 			output += get_readable_list(major.requirements, sep='\n', end='\n')
 
-			for requirement_set in major.setRequirements:
-				output += get_readable_list(requirement_set, sep='\n', end='\n')
+			if major.specialRequirements:
+				output += get_readable_list(major.specialRequirements, sep='\n', end='\n')
+			output += '\n'
 
 		for concentration in self.concentrations:
 			output += "For " + str(concentration.name) + ": " + '\n'
 			output += get_readable_list(concentration.requirements, sep='\n', end='\n')
 
-			for requirement_set in concentration.setRequirements:
-				output += get_readable_list(requirement_set, sep='\n', end='\n')
+			if concentration.specialRequirements:
+				output += get_readable_list(concentration.specialRequirements, sep='\n', end='\n')
+
+			output += '\n'
 
 		output += str(self.standing)
 
