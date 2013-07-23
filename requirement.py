@@ -58,7 +58,7 @@ class Requirement:
 		)
 
 
-class RequirementWithValididty(Requirement):
+class MajorRequirement(Requirement):
 	def __init__(self, name="", needed=0, valid=[]):
 		super().__init__(name, needed)
 		self.valid = valid
@@ -80,26 +80,33 @@ class RequirementWithValididty(Requirement):
 			identifier = ID(combined=identifier)
 		self.valid.append(identifier)
 
-	def fulfillsRequirement(self, identifier):
-		return identifier in self.valid
+	def checkRequirement(self, identifier):
+		if identifier in self.valid:
+			self.increment()
 
 
-class MajorRequirement(RequirementWithValididty):
+class SetRequirement(MajorRequirement):
 	def __init__(self, name="", needed=0, valid=[]):
 		super().__init__(name, needed, valid)
 
 
-class SetRequirement(RequirementWithValididty):
-	def __init__(self, name="", needed=0, valid=[]):
-		super().__init__(name, needed, valid)
-
-
-class SpecialRequirement(RequirementWithValididty):
-	def __init__(self, name="", needed=0, valid=[]):
-		super().__init__(name, needed, valid)
+class SpecialRequirement(Requirement):
+	def __init__(self, name="", needed=0, requirements=[]):
+		super().__init__(name, needed)
+		self.requirements = []
+		for set_req in requirements:
+			self.requirements.append(SetRequirement(set_req['description'], set_req['needed'], set_req['valid']))
 
 	def addSet(self, identifier):
-		self.valid.append(identifier)
+		self.requirements.append(identifier)
+
+	def checkRequirement(self, identifier):
+		for requirement in self.requirements:
+			if identifier in requirement.valid:
+				requirement.increment()
+			if requirement.checkSatisfied():
+				self.increment()
+			print(requirement)
 
 
 
