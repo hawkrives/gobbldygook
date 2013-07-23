@@ -60,9 +60,9 @@ class Requirement:
 
 
 class RequirementWithValididty(Requirement):
-	def __init__(self, name="", needed=0):
+	def __init__(self, name="", needed=0, valid=[]):
 		super().__init__(name, needed)
-		self.valid = []
+		self.valid = valid
 
 	def __eq__(self, other):
 		return (
@@ -83,13 +83,18 @@ class RequirementWithValididty(Requirement):
 
 
 class MajorRequirement(RequirementWithValididty):
-	def __init__(self, name="", needed=0):
-		super().__init__(name, needed)
+	def __init__(self, name="", needed=0, valid=[]):
+		super().__init__(name, needed, valid)
+
 
 
 class SpecialRequirement(RequirementWithValididty):
-	def __init__(self, name="", needed=0):
-		super().__init__(name, needed)
+	def __init__(self, name="", needed=0, valid=[]):
+		super().__init__(name, needed, valid)
+
+	def addSet(self, identifier):
+		self.valid.append(identifier)
+
 
 
 gened_t = {
