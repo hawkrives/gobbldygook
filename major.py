@@ -13,9 +13,9 @@ class Major:
 		self.department = Department(dept)
 		self.name = self.department.name()
 
-		self.requirements = {}
-		self.specialRequirements = {}
-		self.setRequirements = {}
+		self.requirements = []
+		self.specialRequirements = []
+		self.setRequirements = []
 		filepath = (
 			path + self.department.abbr() + ".yaml",
 			path + self.department.abbr() + ".txt"
