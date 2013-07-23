@@ -172,13 +172,6 @@ class Course:
 		return string
 
 
-	def getProfessor(self):
-		return self.professor
-	def getID(self):
-		return self.id
-	def getType(self):
-		return self.course_type
-
 	def getDepartment(self):
 		return self.id.department
 	def getNumber(self):
