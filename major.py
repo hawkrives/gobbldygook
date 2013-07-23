@@ -84,6 +84,7 @@ class Major:
 			for line in infile:
 				# Make sure that the string is uppercase
 				line = line.upper()
+				# print(line)
 
 				if not line:  # Skip the rest of this iteration of the loop because the line is blank
 					continue
@@ -101,40 +102,67 @@ class Major:
 
 
 	def addMajorRequirement(self, req):
-		self.requirements[req.name] = req
+		if not isinstance(req, MajorRequirement):
+			req = MajorRequirement(req)
+		self.requirements.append(req)
+		# self.requirements[req.name] = req
+
 	def addSpecialRequirement(self, req):
-		self.specialRequirements[req.name] = req
+		if not isinstance(req, SpecialRequirement):
+			req = SpecialRequirement(req)
+		self.specialRequirements.append(req)
+
 	def addSetRequirement(self, req):
-		self.setRequirements[req.name] = req
+		if not isinstance(req, MajorRequirement):
+			req = MajorRequirement(req)
+		self.setRequirements.append(req)
+
+
+	def getRequirement(self, req, passed_list):
+		if req in passed_list:
+			idx = passed_list.index(req)
+			return passed_list[idx]
+		else:
+			return None
 
 	def getMajorRequirement(self, string):
-		return self.requirements[string]
+		req = MajorRequirement(string)
+		return self.getRequirement(req, self.requirements)
+
 	def getSpecialRequirement(self, string):
-		return self.specialRequirements[string]
+		req = SpecialRequirement(string)
+		return self.getRequirement(req, self.specialRequirements)
+
 	def getSetRequirement(self, string):
-		return self.setRequirements[string]
+		req = MajorRequirement(string)
+		return self.getRequirement(req, self.setRequirements)
 
 
 	def parseContent(self, string, currentRequirement, currentHeading):
 		if '=' in string:
-			sides = self.parseContentLine(str)
+			sides = self.parseContentLine(string)
 			# print(sides)
 
 			if sides[0] == "NAME":
-				name = sides[1]
+				self.name = sides[1]
 
 
 			elif sides[0] == "DEPARTMENT":
-				department = Department(sides[1])
+				self.department = Department(sides[1])
 
 
-			elif sides[0] == "NEEDED":
+			elif "NEEDED" in sides[0]:
 				if currentHeading == "REQUIREMENTS":
-					self.requirements[currentRequirement].setNeeded(int(sides[1]))
+					self.getMajorRequirement(currentRequirement).needed = int(sides[1])
+					# print(self.getMajorRequirement(currentRequirement))
+
 				elif currentHeading == "SPECIAL":
-					self.specialRequirements[currentRequirement].setNeeded(int(sides[1]))
-				elif currentRequcurrentHeadingirement == "SETS":
-					self.setRequirements[currentRequirement].setNeeded(int(sides[1]))
+					self.getSetRequirement(currentRequirement).needed = int(sides[1])
+					# print(self.getSetRequirement(currentRequirement))
+
+				elif currentHeading == "SETS":
+					self.getSpecialRequirement(currentRequirement).needed = int(sides[1])
+					# print(self.getSpecialRequirement(currentRequirement))
 
 
 			elif sides[0] == "VALIDCOURSES":
@@ -142,18 +170,19 @@ class Major:
 
 				for courseID in validCourseList:
 					if currentHeading == "REQUIREMENTS":
-						self.requirements[currentRequirement].addCourse(ID(courseID))
+						self.getMajorRequirement(currentRequirement).addCourse(courseID)
 
 					elif currentHeading == "SETS":
-						self.setRequirements[currentRequirement].addCourse(ID(courseID))
+						self.getSetRequirement(currentRequirement).addCourse(courseID)
 
 
 			elif sides[0] == "VALIDSETS":
+				# print("validsets")
 				validSetList = sides[1].split(',')
-				# specialReq = self.specialRequirements[currentRequirement]
+				specialReq = self.getSpecialRequirement(currentRequirement)
 
 				for setID in validSetList:
-					self.specialRequirements[currentRequirement].addSet(self.setRequirements[setID])
+					specialReq.addSet(self.setRequirements[setID])
 
 
 	def parseContentLine(self, string):
