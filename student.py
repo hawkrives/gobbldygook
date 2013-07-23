@@ -165,6 +165,13 @@ class Student:
 
 	def updateStanding(self):
 		for major in self.majors:
+			major.requirements.sort(key=lambda m: m.name)
+			major.specialRequirements.sort(key=lambda m: m.name)
+
+		for conc in self.majors:
+			conc.requirements.sort(key=lambda c: c.name)
+			conc.specialRequirements.sort(key=lambda c: c.name)
+
 		for course in self.courses:
 			for major in self.majors:
 				for requirement in major.requirements:
