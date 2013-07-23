@@ -213,11 +213,3 @@ class Student:
 		if not isinstance(concentration, Concentration):
 			concentration = Concentration(concentration)
 		self.concentrations.append(concentration)
-
-
-if __name__ == '__main__':
-	tmp = Student(name="Hawken", data="")
-	other = tmp = Student(name="Hawken", data="")
-	print(tmp)
-	if tmp == other:
-		print("equality success")
