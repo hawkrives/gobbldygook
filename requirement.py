@@ -40,7 +40,6 @@ class Requirement:
 
 
 	def __eq__(self, other):
-			self.name == other.name and
 		if isinstance(other, Requirement):
 			return (
 				self.name == other.name
@@ -64,10 +63,13 @@ class RequirementWithValididty(Requirement):
 		self.valid = valid
 
 	def __eq__(self, other):
-		return (
-			super().__eq__(other) and
-			self.valid == other.valid
-		)
+		if isinstance(other, RequirementWithValididty):
+			return (
+				super().__eq__(other)
+				and self.valid == other.valid
+			)
+		else:
+			return False
 
 	def __iter__(self):
 		return self.valid.__iter__()
