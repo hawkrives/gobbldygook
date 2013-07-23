@@ -53,26 +53,17 @@ class Major:
 			if 'dept' in data:
 				self.department = Department(data['dept'])
 
-
-			# print(data)
-
 			if 'requirements' in data:
 				for requirement_title in data['requirements']:
 					req = data['requirements'][requirement_title]
-					tmp = MajorRequirement(req['description'], req['needed'], req['valid'])
-					# print(req['valid'])
-					# print(tmp.valid)
-					self.requirements.append(tmp)
+					major_req = MajorRequirement(req['description'], req['needed'], req['valid'])
+					self.requirements.append(major_req)
 
 			if 'special' in data:
 				for requirement_title in data['special']:
 					req = data['special'][requirement_title]
-					print(req)
-					tmp = SpecialRequirement(req['description'], req['needed'])
-					for set_requirement in req['valid']:
-						tmp.valid.append(SetRequirement(req['description'], req['needed'], req['valid']))
-					print(tmp.valid)
-					self.specialRequirements.append(tmp)
+					special_req = SpecialRequirement(req['description'], req['needed'], req['valid'])
+					self.specialRequirements.append(special_req)
 
 
 
