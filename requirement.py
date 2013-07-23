@@ -25,6 +25,8 @@ class Requirement:
 
 		if self.satisfied:
 			ostream = "\u2705"
+		elif self.has > 0:
+			ostream = "\u2B55"
 		else:
 			ostream = "\u274C"
 
