@@ -7,7 +7,7 @@ from student import Student
 
 def argument_parse():
 	parser = argparse.ArgumentParser(description="This program works best if you give it some data. However, we have some example stuff to show you anyway.)")
-	parser.add_argument('-l', "--load", default='users/example.txt')
+	parser.add_argument('-l', "--load", default='users/example.yaml')
 	parser.add_argument('-f', "--find")
 	parser.add_argument("--demo")
 	parser.add_argument("--stress")
@@ -54,7 +54,6 @@ def read_data():
 def main():
 	parser = argument_parse()
 	args = parser.parse_args()
-	print(args.load)
 
 	read_data()
 
