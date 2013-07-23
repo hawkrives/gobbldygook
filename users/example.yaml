@@ -3,13 +3,13 @@ start: 2010
 end: 2014
 
 majors:
-    # - ARMS
-    # - Computer Science
+    - ARMS
+    - Computer Science
     - Bio
 
 concentrations:
-    # - Statistics
-    # - Asian Studies
+    - Statistics
+    - Asian Studies
 
 courses:
     # 2010: 
@@ -38,6 +38,15 @@ courses:
             - writ211
             - writ111q
             - ART151
+            - DANCE 246
             - ART151A
             - ART151B
             - BIO 125
+            - JAPAN 112A
+            - JAPAN 111A
+            - JAPAN 231
+            - JAPAN 232
+            - Biology 126
+            - CHEM/BIO 125
+            - CHEM/BIO 126
+            - CHEM/BIO 127
