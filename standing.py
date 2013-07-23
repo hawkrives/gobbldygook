@@ -33,7 +33,7 @@ class Standing:
 		self.credits_taken += i
 
 	def checkStanding(self):
-		return (self.credits_taken >= self.credits_needed)
+		return self.credits_taken >= self.credits_needed
 
 	def __str__(self):
 		self.checkStanding()
@@ -41,7 +41,7 @@ class Standing:
 		output += "out of " + str(self.credits_needed) + " credits needed."
 		output += '\n'
 
-		output += get_readable_list(self.list, sep='\n')
+		output += get_readable_list(self.list, sep='\n', end='')
 		return output
 
 
