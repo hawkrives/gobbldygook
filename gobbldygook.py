@@ -1,7 +1,8 @@
 #!/usr/local/bin/python3
 
-from course import Course, all_courses
 import argparse, csv, os
+
+from course import Course, all_courses, getCourse
 from student import Student
 
 def argument_parse():
