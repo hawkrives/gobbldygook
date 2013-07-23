@@ -179,14 +179,13 @@ class Course:
 	def getSection(self):
 		return self.id.section
 
+
 	def __str__(self):
-		output = str(self.credits) + " | "
-		output += self.getType() + ": "
-		output += str(self.id.department) + " " + str(self.id.number) + self.id.section
-		output += " - "
+		output = str(self.credits).ljust(4) + " | "
+		output += self.course_type + ": "
+		output += str(self.id) + " - "
 		output += self.title + " | "
-		if (len(self.professor) and (self.professor != " ")):
-			output += self.professor
+		output += self.professor
 
 		if self.geneds:
 			output += " [ "
