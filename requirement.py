@@ -12,6 +12,7 @@ class Requirement:
 			self.satisfied = True
 		else:
 			self.satisfied = False
+		return self.satisfied
 
 	def increment(self):
 		self.has += 1
