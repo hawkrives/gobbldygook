@@ -6,7 +6,6 @@ class Requirement:
 		self.needed = needed
 		self.has = 0
 		self.satisfied = False
-		self.checkSatisfied()
 
 	def checkSatisfied(self):
 		if self.has >= self.needed:
@@ -16,13 +15,13 @@ class Requirement:
 
 	def increment(self):
 		self.has += 1
-		self.checkSatisfied()
 
 	def decrement(self):
 		self.has -= 1
-		self.checkSatisfied()
 
 	def __str__(self):
+		self.checkSatisfied()
+
 		if self.satisfied:
 			ostream = "\u2705"
 		else:
