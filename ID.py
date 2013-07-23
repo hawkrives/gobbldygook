@@ -23,11 +23,14 @@ class ID:
 		return str(self.department) + " " + str(self.number) + self.section
 
 	def __eq__(self, other):
-		return (
-				self.department == other.department
-				and self.number == other.number 
-				and self.section == other.section
-			)
+		if isinstance(other, ID):
+			return (
+					self.department == other.department
+					and self.number == other.number 
+					and self.section == other.section
+				)
+		else:
+			return False
 
 	def __hash__(self):
 		return hash(str(self.department) + " " + str(self.number))

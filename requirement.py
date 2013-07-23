@@ -39,13 +39,19 @@ class Requirement:
 
 		return ostream
 
+
 	def __eq__(self, other):
-		return (
 			self.name == other.name and
-			self.needed == other.needed and
-			self.has == other.has and
-			self.satisfied == other.satisfied
-		)
+		if isinstance(other, Requirement):
+			return (
+				self.name == other.name
+				and self.needed == other.needed
+				and self.has == other.has
+				and self.satisfied == other.satisfied
+			)
+		else:
+			return False
+
 
 	def __hash__(self):
 		return hash(

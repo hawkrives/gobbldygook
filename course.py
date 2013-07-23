@@ -86,6 +86,21 @@ class Course:
 			self.location == other.location and
 			self.professor == other.professor
 		)
+		if isinstance(other, Course):
+			return (
+				self.id == other.id
+				and self.course_type == other.course_type
+				and self.title == other.title
+				and self.half_semester == other.half_semester
+				and self.credits == other.credits
+				and self.pass_fail == other.pass_fail
+				and self.geneds == other.geneds
+				and self.times == other.times
+				and self.location == other.location
+				and self.professor == other.professor
+			)
+		else:
+			return False
 
 	def __hash__(self):
 		return hash(

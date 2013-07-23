@@ -121,7 +121,10 @@ class Department(collections.MutableSequence):
 		self.list.insert(i, v)
 
 	def __eq__(self, other):
-		return self.list == other.list
+		if isinstance(other, Department):
+			return self.list == other.list
+		else:
+			return False
 
 	def __str__(self):
 		if len(self.list) is 1:

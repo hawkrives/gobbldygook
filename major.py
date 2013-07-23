@@ -16,13 +16,16 @@ class Major:
 		return self.name
 
 	def __eq__(self, other):
-		return (
-			self.department == other.department and
-			self.name == other.name and
-			self.requirements == other.requirements and
-			self.specialRequirements == other.specialRequirements and
-			self.setRequirements == other.setRequirements
-		)
+		if isinstance(other, Major):
+			return (
+				self.department == other.department 
+				and self.name == other.name
+				and self.requirements == other.requirements
+				and self.specialRequirements == other.specialRequirements
+				and self.setRequirements == other.setRequirements
+			)
+		else:
+			return False
 
 
 	def parse(self, path):
