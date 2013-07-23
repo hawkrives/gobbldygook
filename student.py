@@ -146,6 +146,12 @@ class Student:
 						if requirement.fulfillsRequirement(course.id):
 							requirement.increment()
 
+		for course in self.courses:
+			for req in self.standing.list:
+				if req in course.geneds:
+					req.increment()
+
+
 
 	def hasTakenCourse(self, identifier):
 		if ID(identifier) in self.courses:
