@@ -1,7 +1,7 @@
-import argparse, csv
 #!/usr/local/bin/python3
 
 from course import Course, all_courses
+import argparse, csv, os
 from student import Student
 
 def argument_parse():
@@ -24,18 +24,14 @@ def loadCourses(filename):
 			# print(tmp)
 
 
-def readData():
-	loadCourses("data/2012-13-s2.csv")
-	loadCourses("data/2012-13-interim.csv")
-	loadCourses("data/2012-13-s1.csv")
 
-	loadCourses("data/2011-12-s2.csv")
-	loadCourses("data/2011-12-interim.csv")
-	loadCourses("data/2011-12-s1.csv")
 
-	loadCourses("data/2010-11-s2.csv")
-	loadCourses("data/2010-11-interim.csv")
-	loadCourses("data/2010-11-s1.csv")
+def read_data():
+	path = 'data/'
+	for filename in os.listdir(path):
+		if filename[0] is not '.':
+			# print(filename)
+			load_data(path + filename)
 
 
 def main():
@@ -43,7 +39,7 @@ def main():
 	args = parser.parse_args()
 	print(args.load)
 
-	readData()
+	read_data()
 
 	user = Student(filename=args.load)
 
