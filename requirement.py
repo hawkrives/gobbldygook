@@ -113,11 +113,17 @@ class SpecialRequirement(Requirement):
 
 	def checkRequirement(self, identifier):
 		for requirement in self.requirements:
+			# There was a problem where, once a requirement was completed, the SpecialRequirement would be incremented every iteration of the loop afterwards. Taking the initial status of the requirement and checking against it at the end solves that.
+
+			# Take the initial status of a requirement
+			initial_status = requirement.checkSatisfied()
+
 			if identifier in requirement.valid:
 				requirement.increment()
-			if requirement.checkSatisfied():
+
+			# Check against the initial status of the requirement
+			if requirement.checkSatisfied() != initial_status:
 				self.increment()
-			print(requirement)
 
 
 
