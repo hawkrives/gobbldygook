@@ -27,7 +27,7 @@ class Requirement:
 		else:
 			ostream = "\u274C"
 
-		ostream += "  " + self.name + " needs " + str(self.needed)
+		ostream += "  '" + self.name + "' needs " + str(self.needed)
 
 		if self.satisfied:
 			ostream += ", and has "
