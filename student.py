@@ -77,8 +77,7 @@ class Student:
 
 				elif line:
 					if line[0:2] == "//":
-						# it's a comment
-						pass
+						pass  # it's a comment
 
 					elif heading == "NAME":
 						self.name = line
@@ -90,9 +89,7 @@ class Student:
 						self.addConcentration(line)
 
 					elif heading == "COURSES":
-						print(line)
 						course = getCourse(line)
-						# print(course)
 						self.standing.increment(course.credits)
 						self.addCourse(line)
 
