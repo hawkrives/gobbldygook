@@ -1,6 +1,6 @@
 import collections
 
-dept_t = {
+dept = {
 	"AFAM":  "Africa and the Americas",
 	"ALSO":  "Alternate Language Study Option",
 	"AMCON": "American Conversation",
@@ -143,25 +143,26 @@ dept_short = {
 class Department(collections.MutableSequence):
 	def __init__(self, name):
 		self.list = list()
+		name = name.upper()
 
-		if len(name) is 2:
-			# if name != "IS" or name != "ID":
-				# print(name)
-			self.list.append((name, dept_t[name]))
+		# If the name is short
+		if len(name) is 2 and name != "ID" and name != "IS":
+			self.list.append((dept_short[name], dept[dept_short[name]]))
 
-		elif name not in dept_t and '/' not in name:
+
+		# If the name is long
+		elif name not in dept and '/' not in name:
 			name = name.title()
-			pairs = dict(zip(dept_t.values(), dept_t.keys()))
-			print(pairs[name])
-			self.list.append((pairs[name], name))
+			self.list.append((dept_reversed[name], name))
 
+
+		# If the name is *just right*
 		else:
-			name = name.upper()
 			if '/' in name:
-				self.list.append((name[0:2], dept_t[name[0:2]]))
-				self.list.append((name[3:5], dept_t[name[3:5]]))
+				self.list.append((dept_short[name[0:2]], dept[dept_short[name[0:2]]]))
+				self.list.append((dept_short[name[3:5]], dept[dept_short[name[3:5]]]))
 			else:
-				self.list.append((name, dept_t[name]))
+				self.list.append((name, dept[name]))
 
 
 	def name(self, i=0):
