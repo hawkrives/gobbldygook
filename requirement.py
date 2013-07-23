@@ -99,6 +99,15 @@ class SpecialRequirement(Requirement):
 		for set_req in requirements:
 			self.requirements.append(SetRequirement(set_req['description'], set_req['needed'], set_req['valid']))
 
+	def __eq__(self, other):
+		if isinstance(other, SpecialRequirement):
+			return (
+				super().__eq__(other)
+				and self.requirements == other.requirements
+			)
+		else:
+			return False
+
 	def addSet(self, identifier):
 		self.requirements.append(identifier)
 
