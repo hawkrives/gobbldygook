@@ -43,11 +43,15 @@ if __name__ == '__main__':
 		ID(dept="AS/RE", number=121, section='A'),
 		ID("AS/HI121B"),
 		ID("AS/HI 121B"),
-		ID("AS/HI 121 B")
+		ID("AS/HI 121 B"),
+		ID("Religion 121L"),
+		ID("Religion121L"),
+		ID("RE121L"),
+		ID("Rel121L")
 	]
 
 	for i in ids:
-		print(i)
+		print(i.department.name())
 
-	if ids[0] == ids[2]:
-		print("success")
+	if ID("Religion 121L") == ID("REL 121L"):
+		print("they matched")
