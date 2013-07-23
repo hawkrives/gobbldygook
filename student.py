@@ -23,6 +23,43 @@ class Student:
 	standing = Standing()
 
 	def __init__(self, filename=""):
+		self.create_student_from_yaml(filename)
+		# self.create_student_from_file(filename)
+
+	def create_student_from_yaml(self, filename):
+		with open(filename) as infile:
+			data = load(infile, Loader=Loader)
+
+			if 'name' in data:
+				self.name = data['name']
+
+			if 'start' in data:
+				self.start_year = data['start']
+			if 'end' in data:
+				self.end_year = data['end']
+
+			if 'majors' in data:
+				for major_name in data['majors']:
+					self.addMajor(major_name)
+
+			if 'concentrations' in data:
+				if not data['concentrations']:
+					print("You don't have any concentrations?")
+				else:
+					for concentration_name in data['concentrations']:
+						self.addConcentration(concentration_name)
+
+			if 'courses' in data:
+				if not data['courses']:
+					print("You don't have any courses?")
+				else:
+					for course_name in data['courses']:
+						course = getCourse(course_name)
+						self.standing.increment(course.credits)
+						self.addCourse(course)
+
+
+	def create_student_from_file(self, filename):
 		heading = ""
 		with open(filename) as infile:
 			for line in infile:
