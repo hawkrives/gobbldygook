@@ -165,28 +165,21 @@ class Student:
 
 	def updateStanding(self):
 		for major in self.majors:
-			for course in self.courses:
+		for course in self.courses:
+			for major in self.majors:
 				for requirement in major.requirements:
-					if requirement.fulfillsRequirement(course.id):
-							requirement.increment()
+					requirement.checkRequirement(course.id)
 
 				for requirement_set in major.specialRequirements:
-					for requirement in requirement_set.valid:
-						if requirement.fulfillsRequirement(course.id):
-							requirement.increment()
+					requirement_set.checkRequirement(course.id)
 
-		for concentration in self.concentrations:
-			for course in self.courses:
+			for concentration in self.concentrations:
 				for requirement in concentration.requirements:
-					if requirement.fulfillsRequirement(course.id):
-							requirement.increment()
+					requirement.checkRequirement(course.id)
 
 				for requirement_set in concentration.specialRequirements:
-					for requirement in requirement_set.valid:
-						if requirement.fulfillsRequirement(course.id):
-							requirement.increment()
+					requirement_set.checkRequirement(course.id)
 
-		for course in self.courses:
 			for req in self.standing.list:
 				if req in course.geneds:
 					req.increment()
