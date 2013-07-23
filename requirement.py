@@ -66,7 +66,7 @@ class MajorRequirement(Requirement):
 		self.valid = valid
 
 	def __eq__(self, other):
-		if isinstance(other, RequirementWithValididty):
+		if isinstance(other, MajorRequirement):
 			return (
 				super().__eq__(other)
 				and self.valid == other.valid
