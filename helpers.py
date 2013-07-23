@@ -36,7 +36,7 @@ def get_list_as_english(passed_list):
 			if i is not (len(passed_list) - 1):
 				output += " and "
 			else:
-				output += " "
+				output += ""
 
 		else:
 			if i is not (len(passed_list) - 1):

@@ -121,9 +121,9 @@ class Student:
 		
 		if self.concentrations:
 			if len(self.concentrations) is 1:
-				output += ", with a concentration in "
+				output += "with a concentration in "
 			else:
-				output += ", with concentrations in "
+				output += "with concentrations in "
 			output += get_list_as_english(self.concentrations)
 			output += ", "
 
