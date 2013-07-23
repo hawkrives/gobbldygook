@@ -15,16 +15,32 @@ def argument_parse():
 	return parser
 
 
-def loadCourses(filename):
+def parse_filename(fname):
+	filename = fname.name
+	filename = filename.split('.')[0] # Remove the extension
+	filename = filename.split('/')[1] # Remove the path seperator
+
+	start_year, end_year, semester = filename.split(sep='-')
+
+	return int(filename[0:4]), semester
+
+
+def load_data(filename):
 	with open(filename) as infile:
-		infile.readline()
+		year, semester = parse_filename(infile)
+
+		if year not in all_courses:
+			all_courses[year] = {}
+		if semester not in all_courses[year]:
+			all_courses[year][semester] = {}
+
+		infile.readline() # Remove the csv header line
 		csvfile = csv.reader(infile)
-		for i, row in enumerate(csvfile):
+		for row in csvfile:
 			tmp = Course(data=row)
 			all_courses[tmp.id] = tmp
-			# print(tmp)
-
-
+			all_courses[year][tmp.id] = tmp
+			all_courses[year][semester][tmp.id] = tmp
 
 
 def read_data():
@@ -42,9 +58,9 @@ def main():
 
 	read_data()
 
-	user = Student(filename=args.load)
 	# print(getCourse("Religion 121L"))
 
+	user = Student(filename=args.load)
 	print(user)
 
 

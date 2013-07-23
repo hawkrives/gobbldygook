@@ -5,10 +5,22 @@ from helpers import get_readable_list
 
 all_courses = {}
 
-def getCourse(identifier):
+def getCourse(identifier, year=None, semester=None):
 	courseID = ID(combined=identifier)
 
-	if courseID in all_courses:
+	if year and year in all_courses:
+		if semester and semester in all_courses:
+			if courseID in all_courses[year][semester]:
+				return all_courses[year][semester][courseID]
+			else:
+				return None
+
+		elif courseID in all_courses[year]:
+			return all_courses[year][courseID]
+		else:
+			return None
+
+	elif courseID in all_courses:
 		return all_courses[courseID]
 	else:
 		return None
