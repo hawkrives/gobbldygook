@@ -139,27 +139,23 @@ class Student:
 
 		output += '\n'
 
-		# TODO: don't cout an extra line at the end of the output.
-
 		output += "As such, you must fulfill these requirements to graduate: " + '\n'
 
 		for major in self.majors:
-			for requirement in major.requirements:
-				output += str(requirement) + '\n'
+			output += "For " + str(major.name) + ": " + '\n'
+			output += get_readable_list(major.requirements, sep='\n', end='\n')
 
-			for requirement_set in major.specialRequirements:
-				for requirement in requirement_set.valid:
-					output += str(requirement) + '\n'
+			for requirement_set in major.setRequirements:
+				output += get_readable_list(requirement_set, sep='\n', end='\n')
 
 		for concentration in self.concentrations:
-			for requirement in concentration.requirements:
-				output += str(requirement) + '\n'
+			output += "For " + str(concentration.name) + ": " + '\n'
+			output += get_readable_list(concentration.requirements, sep='\n', end='\n')
 
-			for requirement_set in concentration.specialRequirements:
-				for requirement in requirement_set.valid:
-					output += str(requirement) + '\n'
+			for requirement_set in concentration.setRequirements:
+				output += get_readable_list(requirement_set, sep='\n', end='\n')
 
-		output += '\n' + str(self.standing)
+		output += str(self.standing)
 
 		return output
 
