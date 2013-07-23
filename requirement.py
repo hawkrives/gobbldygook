@@ -115,10 +115,10 @@ gened_t = {
 	"HWC": "Historical Studies in Western Culture",
 	"MCD": "Multicultural Studies: Domestic",
 	"MCG": "Multicultural Studies: Global",
-	"ALSA": "Artistic and Literary Studies: Artistic Studies",
-	"ALSL": "Artistic and Literary Studies: Literary Studies",
-	"BTSB": "Biblical and Theological Studies: Bible",
-	"BTST": "Biblical and Theological Studies: Theology",
+	"ALS-A": "Artistic and Literary Studies: Artistic Studies",
+	"ALS-L": "Artistic and Literary Studies: Literary Studies",
+	"BTS-B": "Biblical and Theological Studies: Bible",
+	"BTS-T": "Biblical and Theological Studies: Theology",
 	"SED": "Studies in Natural Science: Scientific Exploration and Discovery",
 	"IST": "Studies in Natural Science: Integrated Scientific Topics",
 	"HBS": "Studies in Human Behavior and Society",
@@ -131,6 +131,7 @@ gened_t = {
 class GenEd(Requirement):
 	def __init__(self, name="", needed=0):
 		super().__init__(name, needed)
+		self.description = gened_t[name]
 
 	def __eq__(self, other):
 		if isinstance(other, str):
