@@ -2,6 +2,13 @@ from major import Major
 from concentration import Concentration
 from course import Course, getCourse
 from standing import Standing
+from ID import ID
+
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
 
 from helpers import get_list_as_english, get_readable_list
 
