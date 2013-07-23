@@ -1,0 +1,43 @@
+name: Xandra Best
+start: 2010
+end: 2014
+
+majors:
+    # - ARMS
+    # - Computer Science
+    - Bio
+
+concentrations:
+    # - Statistics
+    # - Asian Studies
+
+courses:
+    # 2010: 
+        # fall:
+            - AMCON101A
+            - PHIL251A
+            - REL296A
+            - rel 296b
+        # interim:
+            - ASIAN 215
+        # spring:
+            - ASIAN 275
+            - JAPAN 232
+            - JAPAN 300
+            - CSCI 251
+    # 2011:
+        # fall:
+            - CSCI 125A
+            - Religion 121L
+            - CSCI251
+            - stat 110
+        # interim:
+            - THEAT398
+        # spring:
+            - AS/RE256
+            - writ211
+            - writ111q
+            - ART151
+            - ART151A
+            - ART151B
+            - BIO 125

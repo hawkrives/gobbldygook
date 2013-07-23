@@ -1,0 +1,61 @@
+%YAML 1.1   # Biology Major
+---
+name: Biology
+dept: BIO
+
+requirements:
+    electives:
+        description: Electives
+        needed: 8
+        valid: [BIO 123, BIO 124, BIO 125, BIO 126, BIO 128, BIO 135, BIO 143, BIO 150, BIO 227, BIO 228, BIO 231, BIO 233, BIO 242, BIO 243, BIO 247, BIO 248, BIO 251, BIO 252, BIO 261, BIO 266, BIO 275, BIO 281, BIO 284, BIO 286, BIO 287, BIO 288, BIO 291, BIO 298, BIO 315, BIO 341, BIO 364, BIO 371, BIO 372, BIO 382, BIO 383, BIO 385, BIO 386, BIO 391, BIO 396, BIO 398, CHEM/BIO 125, CHEM/BIO 126, CHEM/BIO 127, CHEM 379, BIO/ENVST 226, BIO/ENVST 228, NEURO 239, ESTH 375, PSYCH 385]
+
+    strict:
+        description: Strict
+        needed: 7
+        valid: [BIO 123, BIO 124, BIO 125, BIO 126, BIO 128, BIO 135, BIO 143, BIO 150, BIO 227, BIO 228, BIO 231, BIO 233, BIO 242, BIO 243, BIO 247, BIO 248, BIO 251, BIO 252, BIO 261, BIO 266, BIO 275, BIO 281, BIO 284, BIO 286, BIO 287, BIO 288, BIO 291, BIO 315, BIO 341, BIO 364, BIO 371, BIO 372, BIO 382, BIO 383, BIO 385, BIO 386, BIO 391, CHEM/BIO 125, CHEM/BIO 126, CHEM/BIO 127, CHEM 379, BIO/ENVST 226, BIO/ENVST 228, NEURO 239, ESTH 375, PSYCH 385]
+
+    biodiversity:
+        description: Biodiversity and Evolution
+        needed: 1
+        valid: [BIO 126]
+
+    genetics:
+        description: Genetics
+        needed: 1
+        valid: [BIO 233]
+
+    ecology:
+        description: Ecology
+        needed: 1
+        valid: [BIO 261]
+
+    multicellularorganisms:
+        description: Multicellular Organisms
+        needed: 1
+        valid: [BIO 242, BIO 247, BIO 248, BIO 251, BIO 252, BIO 266, BIO 275]
+
+    leveliii:
+        description: Level III
+        needed: 2
+        valid: [BIO 315, BIO 341, BIO 364, BIO 371, BIO 372, BIO 382, BIO 383, BIO 385, BIO 386, BIO 391]
+
+
+sets:
+    intro: &intro
+        description: Introduction to Biology
+        needed: 1
+        valid: [BIO 125]
+
+    chbi: &chbi
+        description: Integrated Chem/Bio
+        needed: 3
+        valid: [CHEM/BIO 125, CHEM/BIO 126, CHEM/BIO 127]
+
+
+special:
+    cellmolecularbiology:
+        description: Cell Molecular Biology
+        needed: 1
+        valid: 
+            - *intro
+            - *chbi
