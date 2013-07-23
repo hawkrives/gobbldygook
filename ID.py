@@ -9,7 +9,7 @@ class ID:
 			self.section = section
 		else:
 			combined = combined.upper()
-			regex = "(?P<dept>([a-z]*)(?=/)(/)([a-z]*)|[a-z]*) *(?P<num>[0-9]*) *(?P<sec>[a-z]*)"
+			regex = r"(?P<dept>([a-z]*)(?=/)(/)([a-z]*)|[a-z]*) *(?P<num>[0-9]*) *(?P<sec>[a-z]*)"
 			match = re.search(regex, combined, re.I | re.S)
 			result = match.groupdict()
 			self.department = Department(result["dept"])
