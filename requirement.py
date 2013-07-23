@@ -86,6 +86,10 @@ class MajorRequirement(RequirementWithValididty):
 		super().__init__(name, needed, valid)
 
 
+class SetRequirement(RequirementWithValididty):
+	def __init__(self, name="", needed=0, valid=[]):
+		super().__init__(name, needed, valid)
+
 
 class SpecialRequirement(RequirementWithValididty):
 	def __init__(self, name="", needed=0, valid=[]):
