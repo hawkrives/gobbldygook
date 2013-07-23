@@ -1,6 +1,13 @@
 from department import Department
 from requirement import MajorRequirement, SpecialRequirement
 
+import os
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
+
 class Major:
 	def __init__(self, dept="NONE", path="majors/"):
 		self.department = Department(dept)
@@ -9,8 +16,15 @@ class Major:
 		self.requirements = {}
 		self.specialRequirements = {}
 		self.setRequirements = {}
+		filepath = (
+			path + self.department.abbr() + ".yaml",
+			path + self.department.abbr() + ".txt"
+		)
 
-		self.parse(path)
+		if os.path.isfile(filepath[0]):
+			self.parseYAML(filepath[0])
+		else:
+			self.parseTXT(filepath[1])
 
 	def __str__(self):
 		return self.name
@@ -28,11 +42,17 @@ class Major:
 			return False
 
 
-	def parse(self, path):
+	def parseYAML(self, path):
+		with open(path) as infile:
+			data = load(infile, Loader=Loader)
+
+
+
+	def parseTXT(self, path):
 		currentHeading = ""
 		currentRequirement = ""
 		
-		with open(path + self.department.abbr() + ".txt") as infile:
+		with open(path) as infile:
 			for line in infile:
 				# Make sure that the string is uppercase
 				line = line.upper()
