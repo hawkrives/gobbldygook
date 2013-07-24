@@ -144,7 +144,6 @@ class Student:
 				output += "" + str(semester).title() + " of " + str(year) + ": \n"
 				output += get_readable_list(self.courses[year][semester], sep='\n', end='\n')
 			output += '\n'
-				
 
 
 		output += "As such, you must fulfill these requirements to graduate: " + '\n'
@@ -165,6 +164,7 @@ class Student:
 				output += get_readable_list(concentration.specialRequirements, sep='\n', end='\n')
 
 			output += '\n'
+
 
 		output += str(self.standing)
 
