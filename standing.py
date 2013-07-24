@@ -38,7 +38,7 @@ class Standing:
 	def __str__(self):
 		self.checkStanding()
 		output = "You have " + str(self.credits_taken) + " credits "
-		output += "out of " + str(self.credits_needed) + " credits needed."
+		output += "out of " + str(self.credits_needed) + " credits needed to graduate."
 		output += '\n'
 
 		output += get_readable_list(self.list, sep='\n', end='')
