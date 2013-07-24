@@ -1,4 +1,5 @@
 from ID import ID
+from helpers import tidy_float
 
 class Requirement:
 	def __init__(self, name="", needed=0):
@@ -37,7 +38,7 @@ class Requirement:
 		else:
 			ostream += ", but has "
 
-		ostream += str(self.has) + "."
+		ostream += str(tidy_float(self.has)) + "."
 
 		return ostream
 
