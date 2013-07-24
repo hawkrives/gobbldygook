@@ -57,8 +57,6 @@ def main():
 
 	read_data()
 
-	# print(getCourse("Religion 121L"))
-
 	user = Student(filename=args.load)
 	print(user)
 
