@@ -1,7 +1,7 @@
 from major import Major
 from ID import ID
 from helpers import get_readable_list
-
+from professor import process_professor
 
 all_courses = {}
 
@@ -87,6 +87,7 @@ class Course:
 		self.location = data[10]
 
 		# and Eleven knows who teaches.
+		# self.professor = process_professor(data[11])
 		self.professor = data[11]
 
 	def __eq__(self, other):
