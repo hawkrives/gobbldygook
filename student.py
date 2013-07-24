@@ -19,7 +19,7 @@ class Student:
 
 	majors = []
 	concentrations = []
-	courses = []
+	courses = {}
 	standing = Standing()
 
 	def __init__(self, filename=""):
@@ -53,10 +53,15 @@ class Student:
 				if not data['courses']:
 					print("You don't have any courses?")
 				else:
-					for course_name in data['courses']:
-						course = getCourse(course_name)
-						self.standing.increment(course.credits)
-						self.addCourse(course)
+					for year in data['courses']:
+						for semester in data['courses'][year]:
+							for course_name in data['courses'][year][semester]:
+								course = getCourse(course_name)
+								if not course:
+									print("A bad course identifier was passed.")
+									break
+								self.standing.increment(course.credits)
+								self.addCourse(course, year, semester)
 
 
 	def create_student_from_file(self, filename):
@@ -134,10 +139,13 @@ class Student:
 			output += "you are taking: " + '\n'
 
 
-		for course in self.courses:
-			output += str(course) + '\n'
+		for year in self.courses:
+			for semester in self.courses[year]:
+				output += "" + str(semester).title() + " of " + str(year) + ": \n"
+				output += get_readable_list(self.courses[year][semester], sep='\n', end='\n')
+			output += '\n'
+				
 
-		output += '\n'
 
 		output += "As such, you must fulfill these requirements to graduate: " + '\n'
 
@@ -172,24 +180,26 @@ class Student:
 			conc.requirements.sort(key=lambda c: c.name)
 			conc.specialRequirements.sort(key=lambda c: c.name)
 
-		for course in self.courses:
-			for major in self.majors:
-				for requirement in major.requirements:
-					requirement.checkRequirement(course.id)
+		for year in self.courses.values():
+			for semester in year.values():
+				for course in semester:
+					for major in self.majors:
+						for requirement in major.requirements:
+							requirement.checkRequirement(course.id)
 
-				for requirement_set in major.specialRequirements:
-					requirement_set.checkRequirement(course.id)
+						for requirement_set in major.specialRequirements:
+							requirement_set.checkRequirement(course.id)
 
-			for concentration in self.concentrations:
-				for requirement in concentration.requirements:
-					requirement.checkRequirement(course.id)
+					for concentration in self.concentrations:
+						for requirement in concentration.requirements:
+							requirement.checkRequirement(course.id)
 
-				for requirement_set in concentration.specialRequirements:
-					requirement_set.checkRequirement(course.id)
+						for requirement_set in concentration.specialRequirements:
+							requirement_set.checkRequirement(course.id)
 
-			for req in self.standing.list:
-				if req in course.geneds:
-					req.increment()
+					for req in self.standing.list:
+						if req in course.geneds:
+							req.increment()
 
 
 
@@ -200,10 +210,15 @@ class Student:
 			return False
 
 
-	def addCourse(self, course):
+	def addCourse(self, course, year, semester):
 		if not isinstance(course, Course):
 			course = getCourse(course)
-		self.courses.append(course)
+
+		if not year in self.courses:
+			self.courses[year] = {semester: []}
+		elif not semester in self.courses[year]:
+			self.courses[year][semester] = []
+		self.courses[year][semester].append(course)
 
 
 	def addMajor(self, major):
