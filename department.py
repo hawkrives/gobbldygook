@@ -153,7 +153,7 @@ class Department(collections.MutableSequence):
 
 
 		# If the name is long
-		elif name not in dept and '/' not in name:
+		elif name not in dept and (len(name) > 5 or '/' not in name):
 			name = name.title()
 			self.list.append((dept_reversed[name], name))
 
