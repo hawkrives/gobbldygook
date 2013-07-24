@@ -15,8 +15,8 @@ class Requirement:
 			self.satisfied = False
 		return self.satisfied
 
-	def increment(self):
-		self.has += 1
+	def increment(self, by=1):
+		self.has += by
 
 	def decrement(self):
 		self.has -= 1
