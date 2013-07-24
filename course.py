@@ -6,7 +6,11 @@ from helpers import get_readable_list
 all_courses = {}
 
 def getCourse(identifier, year=None, semester=None):
-	courseID = ID(combined=identifier)
+	try:
+		courseID = ID(combined=identifier)
+	except Exception:
+		print("The course '" + str(identifier) + "' cannot exist.")
+		return None
 
 	if year and year in all_courses:
 		if semester and semester in all_courses:
