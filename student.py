@@ -199,8 +199,10 @@ class Student:
 
 					for req in self.standing.list:
 						if req in course.geneds:
-							req.increment()
-
+							if req != "SPM":
+								req.increment(course.credits)
+							else:
+								req.increment()
 
 
 	def hasTakenCourse(self, identifier):
