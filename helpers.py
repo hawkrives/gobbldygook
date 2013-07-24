@@ -1,6 +1,6 @@
 def get_readable_list(passed_list, sep=', ', end=''):
 	output = ""
-	if isinstance(passed_list, list):
+	if isinstance(passed_list, list) or isinstance(passed_list, tuple):
 		for i, item in enumerate(passed_list):
 			if len(passed_list) is 1:
 				output += str(item)
@@ -10,6 +10,7 @@ def get_readable_list(passed_list, sep=', ', end=''):
 					output += str(item) + sep
 				else:
 					output += str(item)
+
 
 	elif isinstance(passed_list, dict):
 		for i, item in enumerate(passed_list.values()):
