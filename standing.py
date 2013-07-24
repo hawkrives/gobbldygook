@@ -6,14 +6,31 @@ class Standing:
 		self.credits_needed = credits_needed
 		self.credits_taken = credits_taken
 
+		# Students must satisfactorily complete the fourth college semester
+		# course (numbered 232 or higher) taught in the French [FOL-F], German
+		# [FOL-G], or Spanish [FOL-S] languages; or the third college semester
+		# course (numbered 231 or higher) taught in the Chinese [FOL-C], Greek
+		# [FOL-K], Latin [FOL-L], Japanese [FOL-J], Norwegian [FOL-N], or
+		# Russian [FOL-R] languages, or demonstrate equivalent proficiency.
+
 		self.list = [
 			GenEd("FYW", 1),
 			GenEd("WRI", 4),
 			# TODO: Support requirements that have a variable number of courses needed.
 			GenEd("FOL", 4),
+			GenEd("FOL-F", 4),
+			GenEd("FOL-G", 4),
+			GenEd("FOL-S", 4),
+			GenEd("FOL-C", 3),
+			GenEd("FOL-K", 3),
+			GenEd("FOL-L", 3),
+			GenEd("FOL-J", 3),
+			GenEd("FOL-N", 3),
+			GenEd("FOL-R", 3),
 			GenEd("ORC", 1),
 			GenEd("AQR", 1),
 			# TODO: support using 'number of courses' instead of 'number of credits'
+			# I think this one is solved — antually, the situation might be reversed...
 			GenEd("SPM", 2),
 			GenEd("HWC", 1),
 			# TODO: support requiring that courses be from different departments
@@ -29,7 +46,7 @@ class Standing:
 			GenEd("EIN", 1)
 		]
 
-	def increment(self, i=1.0):
+	def increment(self, i=1):
 		self.credits_taken += i
 
 	def checkStanding(self):
