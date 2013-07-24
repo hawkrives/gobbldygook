@@ -4,6 +4,7 @@ from helpers import get_readable_list
 from professor import process_professor
 
 all_courses = {}
+all_labs = {}
 
 def getCourse(identifier, year=None, semester=None):
 	try:

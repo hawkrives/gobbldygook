@@ -2,7 +2,7 @@
 
 import argparse, csv, os
 
-from course import Course, all_courses, getCourse
+from course import Course, all_courses, all_labs, getCourse
 from student import Student
 
 def argument_parse():
@@ -38,9 +38,12 @@ def load_data(filename):
 		csvfile = csv.reader(infile)
 		for row in csvfile:
 			tmp = Course(data=row)
-			all_courses[tmp.id] = tmp
-			all_courses[year][tmp.id] = tmp
-			all_courses[year][semester][tmp.id] = tmp
+			if tmp.course_type == "Lab":
+				all_labs[tmp.id] = tmp
+			else:
+				all_courses[tmp.id] = tmp
+				all_courses[year][tmp.id] = tmp
+				all_courses[year][semester][tmp.id] = tmp
 
 
 def read_data():
