@@ -12,41 +12,47 @@ concentrations:
     - Asian Studies
 
 courses:
-    # 2010: 
-        # fall:
+    2010: 
+        fall:
             - AMCON101A
             - PHIL251A
             - REL296A
             - rel 296b
-        # interim:
+            - Asian Studies 210
+        interim:
             - ASIAN 215
-        # spring:
+        spring:
+            - ASIAN 220
             - ASIAN 275
             - JAPAN 232
             - JAPAN 300
             - CSCI 251
-    # 2011:
-        # fall:
+    2011:
+        fall:
             - CSCI 125A
             - Religion 121L
             - CSCI251
             - stat 110
-        # interim:
+        interim:
             - THEAT398
-        # spring:
+        spring:
             - AS/RE256
             - writ211
             - writ111q
             - ART151
+    2012:
+        fall:
             - DANCE 246
             - ART151A
             - ART151B
             - BIO 125
+            - CHEM/BIO 125
+        interim:
             - JAPAN 112A
+            - CHEM/BIO 126
+        spring:
             - JAPAN 111A
             - JAPAN 231
             - JAPAN 232
             - Biology 126
-            - CHEM/BIO 125
-            - CHEM/BIO 126
             - CHEM/BIO 127
