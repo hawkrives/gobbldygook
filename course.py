@@ -186,7 +186,8 @@ class Course:
 
 
 	def __str__(self):
-		output = str(self.credits).ljust(4) + " | "
+		output = ""
+		output += "    " + str(self.credits).ljust(4) + " | "
 		output += self.course_type + ": "
 		output += str(self.id) + " - "
 		output += self.title + " | "
@@ -196,4 +197,5 @@ class Course:
 			output += " [ "
 			output += get_readable_list(self.geneds)
 			output += " ]"
+
 		return output
