@@ -25,11 +25,11 @@ class Requirement:
 		self.checkSatisfied()
 
 		if self.satisfied:
-			ostream = "\u2705"
+			ostream = '\u2705'
 		elif self.has > 0:
-			ostream = "\u2B55"
+			ostream = '\u2B55'
 		else:
-			ostream = "\u274C"
+			ostream = '\u274C'
 
 		ostream += "  '" + self.name + "' needs " + str(self.needed)
 
