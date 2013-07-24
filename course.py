@@ -172,7 +172,7 @@ class Course:
 			if beginning in string:
 				string = string.split(beginning)[1]
 
-		string.strip()
+		string = string.strip()
 
 		return string
 
