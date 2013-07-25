@@ -4,6 +4,7 @@ from course import Course, getCourse
 from standing import Standing
 from ID import ID
 
+from collections import OrderedDict
 from yaml import load, dump
 try:
     from yaml import CLoader as Loader, CDumper as Dumper
