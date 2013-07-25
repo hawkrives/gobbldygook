@@ -38,7 +38,9 @@ def load_data(filename):
 		csvfile = csv.reader(infile)
 		for row in csvfile:
 			tmp = Course(data=row)
-			if tmp.course_type == "Lab":
+			if tmp.course_status == 'X':
+				pass
+			elif tmp.course_type == "Lab":
 				all_labs[tmp.id] = tmp
 			else:
 				all_courses[tmp.id] = tmp
