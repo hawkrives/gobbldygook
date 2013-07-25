@@ -25,7 +25,6 @@ class Student:
 
 	def __init__(self, filename=""):
 		self.create_student_from_yaml(filename)
-		# self.create_student_from_file(filename)
 
 	def create_student_from_yaml(self, filename):
 		with open(filename) as infile:
@@ -87,46 +86,6 @@ class Student:
 			self.courses[year] = (OrderedDict(sorted(self.courses[year].items(), key=lambda t: t[0])))
 			# for key, value in self.courses[year].items():
 				# print(key, value[0])
-
-
-	def create_student_from_file(self, filename):
-		heading = ""
-		with open(filename) as infile:
-			for line in infile:
-				line = line.rstrip()
-				if not line:
-					continue
-
-				if not heading:
-					heading = "NAME"
-
-				elif line[0] == '#':
-					line = line.upper()
-					heading = line[2:]
-					continue
-
-				elif line:
-					if line[0:2] == "//":
-						pass  # it's a comment
-
-					elif heading == "NAME":
-						self.name = line
-
-					elif heading == "MAJORS":
-						self.addMajor(line)
-
-					elif heading == "CONCENTRATIONS":
-						self.addConcentration(line)
-
-					elif heading == "COURSES":
-						course = getCourse(line)
-						self.standing.increment(course.credits)
-						self.addCourse(line)
-
-					elif heading == "LABS":
-						course = getCourse(line)
-						self.standing.increment(course.credits)
-						self.addCourse(course)
 
 
 	def __eq__(self, other):
