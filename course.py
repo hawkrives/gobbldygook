@@ -13,8 +13,11 @@ def getCourse(identifier, year=None, semester=None):
 		print("The course '" + str(identifier) + "' cannot exist.")
 		return None
 
+	year = int(year)
+	semester = semester.lower()
+
 	if year and year in all_courses:
-		if semester and semester in all_courses:
+		if semester and semester in all_courses[year]:
 			if courseID in all_courses[year][semester]:
 				return all_courses[year][semester][courseID]
 			else:
@@ -22,6 +25,7 @@ def getCourse(identifier, year=None, semester=None):
 
 		elif courseID in all_courses[year]:
 			return all_courses[year][courseID]
+
 		else:
 			return None
 
