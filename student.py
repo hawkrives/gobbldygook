@@ -54,14 +54,15 @@ class Student:
 					print("You don't have any courses?")
 				else:
 					for year in data['courses']:
+						shortyear = int(year[:4])
 						for semester in data['courses'][year]:
 							for course_name in data['courses'][year][semester]:
-								course = getCourse(course_name)
+								course = getCourse(course_name, shortyear, semester)
 								if not course:
 									print("A bad course identifier was passed.")
 									break
 								self.standing.increment(course.credits)
-								self.addCourse(course, year, semester)
+								self.addCourse(course, shortyear, semester)
 
 
 	def create_student_from_file(self, filename):
