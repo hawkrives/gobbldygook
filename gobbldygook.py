@@ -1,0 +1,68 @@
+#!/usr/local/bin/python3
+
+import argparse, csv, os
+
+from course import Course, all_courses, all_labs, getCourse
+from student import Student
+
+def argument_parse():
+	parser = argparse.ArgumentParser(description="This program works best if you give it some data. However, we have some example stuff to show you anyway.)")
+	parser.add_argument('-l', "--load", default='users/example.yaml')
+	parser.add_argument('-f', "--find")
+	parser.add_argument("--demo")
+	parser.add_argument("--stress")
+	parser.add_argument("--debug")
+	return parser
+
+
+def parse_filename(fname):
+	filename = fname.name
+	filename = filename.split('.')[0] # Remove the extension
+	filename = filename.split('/')[1] # Remove the path seperator
+
+	start_year, end_year, semester = filename.split(sep='-')
+
+	return int(filename[0:4]), semester
+
+
+def load_data(filename):
+	with open(filename) as infile:
+		year, semester = parse_filename(infile)
+
+		if year not in all_courses:
+			all_courses[year] = {}
+		if semester not in all_courses[year]:
+			all_courses[year][semester] = {}
+
+		infile.readline() # Remove the csv header line
+		csvfile = csv.reader(infile)
+		for row in csvfile:
+			tmp = Course(data=row)
+			if tmp.course_type == "Lab":
+				all_labs[tmp.id] = tmp
+			else:
+				all_courses[tmp.id] = tmp
+				all_courses[year][tmp.id] = tmp
+				all_courses[year][semester][tmp.id] = tmp
+
+
+def read_data():
+	path = 'data/'
+	for filename in os.listdir(path):
+		if filename[0] is not '.':
+			# print(filename)
+			load_data(path + filename)
+
+
+def main():
+	parser = argument_parse()
+	args = parser.parse_args()
+
+	read_data()
+
+	user = Student(filename=args.load)
+	print(user)
+
+
+if __name__ == '__main__':
+	main()

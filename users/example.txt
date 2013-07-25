@@ -4,11 +4,12 @@ Xandra Best
 # MAJORS
 // These need to be the shortened abbreviation of the major.
 
-ASIAN
+ARMS
 CSCI
 
 # CONCENTRATIONS
 // STAT
+ASIAN
 
 # COURSES
 AMCON101A

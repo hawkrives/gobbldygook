@@ -11,7 +11,7 @@ validCourses = ASIAN 275
 needed = 1
 validCourses = ASIAN 397
 
-## SemAsia
+## Semester in Asia
 needed = 1
 validCourses = ASIAN 399
 
