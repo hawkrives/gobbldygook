@@ -52,7 +52,6 @@ def read_data():
 	path = 'data/'
 	for filename in os.listdir(path):
 		if filename[0] is not '.':
-			# print(filename)
 			load_data(path + filename)
 
 
