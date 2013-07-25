@@ -106,7 +106,7 @@ class Student:
 
 	def __eq__(self, other):
 		return (
-			self.name == other.name 
+			self.name == other.name
 			and self.start_year == other.start_year
 			and self.end_year == other.end_year
 			and self.majors == other.majors
@@ -119,24 +119,24 @@ class Student:
 	def __str__(self):
 		self.updateStanding()
 		output = self.name + ", "
-		
+
 		if self.majors:
 			output += "you are majoring in "
 			output += get_list_as_english(self.majors)
-		
+
 		if self.concentrations:
 			if len(self.concentrations) is 1:
 				output += "with a concentration in "
 			else:
 				output += "with concentrations in "
 			output += get_list_as_english(self.concentrations)
-			output += ", "
+			output += ","
 
 
 		if self.majors:
-			output += "while taking:" + '\n'
+			output += " while taking:" + '\n'
 		else:
-			output += "you are taking: " + '\n'
+			output += " you are taking: " + '\n'
 
 
 		for year in self.courses:
@@ -201,6 +201,8 @@ class Student:
 						if req in course.geneds:
 							if req != "SPM":
 								req.increment(course.credits)
+							elif req.name[:3] == "FOL":
+								self.standing.list[3].increment()
 							else:
 								req.increment()
 

@@ -30,7 +30,7 @@ class Standing:
 			GenEd("ORC", 1),
 			GenEd("AQR", 1),
 			# TODO: support using 'number of courses' instead of 'number of credits'
-			# I think this one is solved — antually, the situation might be reversed...
+			# I think this one is solved - actually, the situation might be reversed...
 			GenEd("SPM", 2),
 			GenEd("HWC", 1),
 			# TODO: support requiring that courses be from different departments

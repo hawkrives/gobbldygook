@@ -57,7 +57,7 @@ class Requirement:
 
 	def __hash__(self):
 		return hash(
-			self.name and self.needed and self.has and self.satisfied 
+			self.name and self.needed and self.has and self.satisfied
 		)
 
 
