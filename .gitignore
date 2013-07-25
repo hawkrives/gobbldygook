@@ -1,22 +1,3 @@
 .DS_Store
-*.o
-*.dSYM/*
-*~
-#*
-.#*
-*#
-
-# Binaries
-.idea/
 *.tar.gz
-
-*.xcuserstate
-*.xcbkptlist
-
-*.xccheckout
-
 *.pyc
-
-.pydevproject
-
-.project
