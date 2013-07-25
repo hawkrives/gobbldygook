@@ -22,6 +22,15 @@ def parse_filename(fname):
 
 	start_year, end_year, semester = filename.split(sep='-')
 
+	if semester == 's1':
+		semester = "fall"
+	elif semester == 's2':
+		semester = "spring"
+	elif semester == 'ss1':
+		semester = "summer session 1"
+	elif semester == 'ss2':
+		semester = "summer session 2"
+
 	return int(filename[0:4]), semester
 
 

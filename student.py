@@ -53,16 +53,39 @@ class Student:
 				if not data['courses']:
 					print("You don't have any courses?")
 				else:
+					self.set_up_courses(data['courses'])
 					for year in data['courses']:
 						shortyear = int(year[:4])
 						for semester in data['courses'][year]:
+							semester = self.check_semester_name(semester)
 							for course_name in data['courses'][year][semester]:
 								course = getCourse(course_name, shortyear, semester)
 								if not course:
+									print(course_name)
 									print("A bad course identifier was passed.")
 									break
 								self.standing.increment(course.credits)
 								self.addCourse(course, shortyear, semester)
+					self.sort_courses()
+
+
+	def set_up_courses(self, data):
+		for year in data:
+			shortyear = int(year[:4])
+			self.courses[shortyear] = OrderedDict()
+			for semester in data[year]:
+				self.courses[shortyear][semester] = []
+
+	def check_semester_name(self, name):
+		# print(name)
+		# print(self.courses)
+		return name
+
+	def sort_courses(self):
+		for year in self.courses:
+			self.courses[year] = (OrderedDict(sorted(self.courses[year].items(), key=lambda t: t[0])))
+			# for key, value in self.courses[year].items():
+				# print(key, value[0])
 
 
 	def create_student_from_file(self, filename):
@@ -209,6 +232,7 @@ class Student:
 
 
 	def hasTakenCourse(self, identifier):
+		# TODO: Check to see if this needs updating.
 		if ID(identifier) in self.courses:
 			return True
 		else:
@@ -217,12 +241,8 @@ class Student:
 
 	def addCourse(self, course, year, semester):
 		if not isinstance(course, Course):
-			course = getCourse(course)
+			course = getCourse(course, year, semester)
 
-		if not year in self.courses:
-			self.courses[year] = {semester: []}
-		elif not semester in self.courses[year]:
-			self.courses[year][semester] = []
 		self.courses[year][semester].append(course)
 
 
