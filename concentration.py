@@ -2,7 +2,7 @@ from major import Major
 
 class Concentration(Major):
 	def __init__(self, dept="NONE"):
-		super().__init__(dept, path="concentrations/")
+		super().__init__(dept, folder="concentrations/")
 
 	def getConcentrationRequirement(self, string):
 		return self.requirements[string]
