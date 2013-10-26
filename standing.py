@@ -1,5 +1,5 @@
 from requirement import GenEd
-from helpers import get_readable_list
+from helpers import get_readable_list, tidy_float
 
 class Standing:
 	def __init__(self, credits_needed=35, credits_taken=0.0):
@@ -54,7 +54,7 @@ class Standing:
 
 	def __str__(self):
 		self.checkStanding()
-		output = "You have " + str(self.credits_taken) + " credits "
+		output = "You have " + str(tidy_float(self.credits_taken)) + " credits "
 		output += "out of " + str(self.credits_needed) + " credits needed to graduate."
 		output += '\n'
 
