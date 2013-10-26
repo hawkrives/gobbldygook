@@ -58,11 +58,12 @@ class Student:
 							semester = self.check_semester_name(semester)
 							for course_name in data['courses'][year][semester]:
 								course = getCourse(course_name, shortyear, semester)
-								if not course:
+								if course:
+									self.standing.increment(course.credits)
+									self.addCourse(course, shortyear, semester)
+								else:
 									print("A bad course identifier was passed:", course_name)
-									break
-								self.standing.increment(course.credits)
-								self.addCourse(course, shortyear, semester)
+									# break
 					self.sort_courses()
 
 			if 'geneds' in data:
