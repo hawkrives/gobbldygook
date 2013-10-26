@@ -69,6 +69,10 @@ class Student:
 								self.addCourse(course, shortyear, semester)
 					self.sort_courses()
 
+			if 'geneds' in data:
+				for req in data['geneds']:
+					self.standing.list[req].increment()
+
 			if 'credits' in data:
 				for credit in data['credits']:
 					self.standing.increment(credit)
