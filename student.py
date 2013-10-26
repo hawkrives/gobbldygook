@@ -69,6 +69,11 @@ class Student:
 								self.addCourse(course, shortyear, semester)
 					self.sort_courses()
 
+			if 'credits' in data:
+				for credit in data['credits']:
+					self.standing.increment(credit)
+
+
 
 	def set_up_courses(self, data):
 		for year in data:
