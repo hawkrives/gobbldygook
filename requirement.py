@@ -1,5 +1,5 @@
 from ID import ID
-from helpers import tidy_float
+from helpers import tidy_float, get_readable_list
 
 class Requirement:
 	def __init__(self, name="", needed=0):
@@ -7,6 +7,7 @@ class Requirement:
 		self.needed = needed
 		self.has = 0
 		self.satisfied = False
+		self.satisfiedBy = []
 
 	def checkSatisfied(self):
 		if self.has >= self.needed:
@@ -39,6 +40,9 @@ class Requirement:
 			output += ", but has "
 
 		output += str(tidy_float(self.has)) + "."
+
+		if (not self.satisfied) and self.satisfiedBy:
+			output += get_readable_list(self.satisfiedBy)
 
 		return output
 
