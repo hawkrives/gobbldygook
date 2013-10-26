@@ -59,8 +59,7 @@ class Student:
 							for course_name in data['courses'][year][semester]:
 								course = getCourse(course_name, shortyear, semester)
 								if not course:
-									print(course_name)
-									print("A bad course identifier was passed.")
+									print("A bad course identifier was passed:", course_name)
 									break
 								self.standing.increment(course.credits)
 								self.addCourse(course, shortyear, semester)
