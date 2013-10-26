@@ -167,6 +167,19 @@ gened_t = {
 	"FOL-R": "Foreign Language: Russian"
 }
 
+fol_t = {
+	# Foreign Languages
+	"FOL-F": "Foreign Language: French",
+	"FOL-G": "Foreign Language: German",
+	"FOL-S": "Foreign Language: Spanish",
+	"FOL-C": "Foreign Language: Chinese",
+	"FOL-K": "Foreign Language: Greek",
+	"FOL-L": "Foreign Language: Latin",
+	"FOL-J": "Foreign Language: Japanese",
+	"FOL-N": "Foreign Language: Norwegian",
+	"FOL-R": "Foreign Language: Russian"
+}
+
 
 class GenEd(Requirement):
 	def __init__(self, name="", needed=0):
