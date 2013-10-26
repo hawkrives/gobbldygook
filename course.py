@@ -10,7 +10,7 @@ def getCourse(identifier, year=None, semester=None):
 	try:
 		courseID = ID(combined=identifier)
 	except Exception:
-		print("The course '" + str(identifier) + "' cannot exist.")
+		print("The course '" + str(identifier) + "' does not (or cannot) exist.")
 		return None
 
 	year = int(year)
