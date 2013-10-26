@@ -135,7 +135,7 @@ class Student:
 
 		for year in self.courses:
 			for semester in self.courses[year]:
-				output += "" + str(semester).title() + " of " + str(year) + ": \n"
+				output += "" + str(semester).title() + " of " + str(year) + "-" + str(year+1) + ": \n"
 				output += get_readable_list(self.courses[year][semester], sep='\n', end='\n')
 			output += '\n'
 
