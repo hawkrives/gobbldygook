@@ -13,38 +13,29 @@ class Standing:
 		# [FOL-K], Latin [FOL-L], Japanese [FOL-J], Norwegian [FOL-N], or
 		# Russian [FOL-R] languages, or demonstrate equivalent proficiency.
 
-		self.list = [
-			GenEd("FYW", 1),
-			GenEd("WRI", 4),
+		self.list = {
+			"FYW": GenEd("FYW", 1),
+			"WRI": GenEd("WRI", 4),
 			# TODO: Support requirements that have a variable number of courses needed.
-			GenEd("FOL", 4),
-			GenEd("FOL-F", 4),
-			GenEd("FOL-G", 4),
-			GenEd("FOL-S", 4),
-			GenEd("FOL-C", 3),
-			GenEd("FOL-K", 3),
-			GenEd("FOL-L", 3),
-			GenEd("FOL-J", 3),
-			GenEd("FOL-N", 3),
-			GenEd("FOL-R", 3),
-			GenEd("ORC", 1),
-			GenEd("AQR", 1),
+			"FOL": GenEd("FOL", 1),
+			"ORC": GenEd("ORC", 1),
+			"AQR": GenEd("AQR", 1),
 			# TODO: support using 'number of courses' instead of 'number of credits'
 			# I think this one is solved - actually, the situation might be reversed...
-			GenEd("SPM", 2),
-			GenEd("HWC", 1),
+			"SPM": GenEd("SPM", 2),
+			"HWC": GenEd("HWC", 1),
 			# TODO: support requiring that courses be from different departments
-			GenEd("MCG", 1),
-			GenEd("MCD", 1),
-			GenEd("ALS-A", 1),
-			GenEd("ALS-L", 1),
-			GenEd("BTS-B", 1),
-			GenEd("BTS-T", 1),
-			GenEd("SED", 1),
-			GenEd("IST", 1),
-			GenEd("HBS", 1),
-			GenEd("EIN", 1)
-		]
+			"MCG": GenEd("MCG", 1),
+			"MCD": GenEd("MCD", 1),
+			"ALS-A": GenEd("ALS-A", 1),
+			"ALS-L": GenEd("ALS-L", 1),
+			"BTS-B": GenEd("BTS-B", 1),
+			"BTS-T": GenEd("BTS-T", 1),
+			"SED": GenEd("SED", 1),
+			"IST": GenEd("IST", 1),
+			"HBS": GenEd("HBS", 1),
+			"EIN": GenEd("EIN", 1)
+		}
 
 	def increment(self, i=1):
 		self.credits_taken += i

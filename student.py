@@ -3,6 +3,7 @@ from concentration import Concentration
 from course import Course, getCourse
 from standing import Standing
 from ID import ID
+from requirement import fol_t
 
 from collections import OrderedDict
 from yaml import load, dump
@@ -184,14 +185,17 @@ class Student:
 						for requirement_set in concentration.specialRequirements:
 							requirement_set.checkRequirement(course.id)
 
-					for req in self.standing.list:
+					for req in self.standing.list.values():
 						if req in course.geneds:
-							if req != "SPM":
-								req.increment(course.credits)
-							elif req.name[:3] == "FOL":
-								self.standing.list[3].increment()
-							else:
+							if req == "SPM":
 								req.increment()
+							else:
+								req.increment(course.credits)
+
+					for req in fol_t: # check for FOL-J, FOL-N, etc.
+					 	if req in course.geneds:
+					 		self.standing.list["FOL"].increment()
+
 
 
 	def hasTakenCourse(self, identifier):
