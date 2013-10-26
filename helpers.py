@@ -13,7 +13,7 @@ def get_readable_list(passed_list, sep=', ', end=''):
 
 
 	elif isinstance(passed_list, dict):
-		for i, item in enumerate(passed_list.values()):
+		for i, item in enumerate(sorted(passed_list.values())):
 			if len(passed_list) is 1:
 				output += str(item)
 
