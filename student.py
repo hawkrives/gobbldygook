@@ -196,10 +196,7 @@ class Student:
 
 					for req in self.standing.list.values():
 						if req in course.geneds:
-							if req == "SPM":
-								req.increment()
-							else:
-								req.increment(course.credits)
+							req.increment()
 
 					for req in fol_t: # check for FOL-J, FOL-N, etc.
 					 	if req in course.geneds:
