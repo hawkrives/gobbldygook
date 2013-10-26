@@ -183,14 +183,6 @@ class Course:
 		return string
 
 
-	def getDepartment(self):
-		return self.id.department
-	def getNumber(self):
-		return self.id.number
-	def getSection(self):
-		return self.id.section
-
-
 	def __str__(self):
 		output = ""
 		output += "    " + str(self.credits).ljust(4) + " | "
