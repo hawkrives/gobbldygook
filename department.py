@@ -151,12 +151,10 @@ class Department(collections.MutableSequence):
 		if len(name) is 2 and name != "ID" and name != "IS":
 			self.list.append((dept_short[name], dept[dept_short[name]]))
 
-
 		# If the name is long
 		elif name not in dept and (len(name) > 5 or '/' not in name):
 			name = name.title()
 			self.list.append((dept_reversed[name], name))
-
 
 		# If the name is *just right*
 		else:
