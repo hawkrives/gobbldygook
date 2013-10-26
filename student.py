@@ -52,7 +52,7 @@ class Student:
 
 			if 'courses' in data:
 				if not data['courses']:
-					print("You don't have any courses?")
+					print("You haven't taken any courses?")
 				else:
 					self.set_up_courses(data['courses'])
 					for year in data['courses']:
