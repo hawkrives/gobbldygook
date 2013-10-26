@@ -161,6 +161,7 @@ class Course:
 			" This course",
 			" This lab has been canceled.",
 			" Students in ",
+			" Students registering for ",
 			" You may "
 		]
 
