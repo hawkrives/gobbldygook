@@ -30,7 +30,7 @@ class ID:
 					and self.section == other.section
 				)
 		elif isinstance(other, str):
-			return self.__str__() == other
+			return str(self.department) + " " + str(self.number) == other
 		else:
 			return False
 
@@ -49,11 +49,15 @@ if __name__ == '__main__':
 		ID("Religion 121L"),
 		ID("Religion121L"),
 		ID("RE121L"),
-		ID("Rel121L")
+		ID("Rel121L"),
+		ID("REL121")
 	]
 
 	for i in ids:
-		print(i.department.name())
+		print(i)
+
+	if ID("REL121L") == "REL 121":
+		print('yes')
 
 	if ID("Religion 121L") == ID("REL 121L"):
 		print("they matched")
