@@ -37,8 +37,8 @@ class Standing:
 			"EIN": GenEd("EIN", 1)
 		}
 
-	def increment(self, i=1):
-		self.credits_taken += i
+	def increment(self, by=1):
+		self.credits_taken += by
 
 	def checkStanding(self):
 		return self.credits_taken >= self.credits_needed
