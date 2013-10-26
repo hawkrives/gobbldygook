@@ -9,6 +9,7 @@ dept = {
 	"ART":   "Art and Art History",
 	"ASIAN": "Asian Studies",
 	"BIO":   "Biology",
+	"BMED":  "Biomedical Studies",
 	"BMOLS": "Biomolecular Science",
 	"CHEM":  "Chemistry",
 	"CHIN":  "Chinese",
