@@ -25,9 +25,6 @@ class Student:
 	standing = Standing()
 
 	def __init__(self, filename=""):
-		self.create_student_from_yaml(filename)
-
-	def create_student_from_yaml(self, filename):
 		with open(filename) as infile:
 			data = load(infile, Loader=Loader)
 
