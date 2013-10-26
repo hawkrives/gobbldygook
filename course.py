@@ -20,6 +20,7 @@ def getCourse(identifier, year=None, semester=None):
 		if semester and semester in all_courses[year]:
 			if courseID in all_courses[year][semester]:
 				return all_courses[year][semester][courseID]
+
 			else:
 				return None
 
@@ -31,6 +32,7 @@ def getCourse(identifier, year=None, semester=None):
 
 	elif courseID in all_courses:
 		return all_courses[courseID]
+
 	else:
 		return None
 
