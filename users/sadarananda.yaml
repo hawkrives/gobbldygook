@@ -5,6 +5,9 @@ end: 2016
 majors:
     - Biology
 
+concentrations:
+    - Biomedical Studies
+
 geneds:
     - SED
 
@@ -32,3 +35,16 @@ courses:
             - CHEM 247B
             - GCON 217A
             - JAPAN 231
+        interim:
+            - REL 222
+        spring:
+            - BIO 243    # Anatomy and Physiology, taken because of BIOMED
+            - CHEM 248   # Organic Chemistry II
+            - PSYCH 125  # Principles of Psychology
+            - GCON 218   # GreatCon: Dissenters and Defenders
+
+    2014-2015:
+        fall:
+            - DANCE 201  # taken because of BIOMED
+            - PHIL 250   # taken because of BIOMED
+            - PSYCH 241  # taken because of BIOMED
