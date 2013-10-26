@@ -122,7 +122,7 @@ class Student:
 				output += "with a concentration in "
 			else:
 				output += "with concentrations in "
-			output += get_list_as_english(self.concentrations)
+			output += get_list_as_english(self.concentrations)[:-1]
 			output += ","
 
 
