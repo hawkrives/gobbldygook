@@ -25,22 +25,22 @@ class Requirement:
 		self.checkSatisfied()
 
 		if self.satisfied:
-			ostream = '\u2705'
+			output = '\u2705'
 		elif self.has > 0:
-			ostream = '\u2B55'
+			output = '\u2B55'
 		else:
-			ostream = '\u274C'
+			output = '\u274C'
 
-		ostream += "  '" + self.name + "' needs " + str(self.needed)
+		output += "  '" + self.name + "' needs " + str(self.needed)
 
 		if self.satisfied:
-			ostream += ", and has "
+			output += ", and has "
 		else:
-			ostream += ", but has "
+			output += ", but has "
 
-		ostream += str(tidy_float(self.has)) + "."
+		output += str(tidy_float(self.has)) + "."
 
-		return ostream
+		return output
 
 
 	def __eq__(self, other):
