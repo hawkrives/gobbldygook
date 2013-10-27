@@ -13,9 +13,12 @@ requirements:
         description: Electives
         needed: 6
         valid: [
-            ART 259, ASIAN 121, ASIAN 156,
+            ART 259, ASIAN 121, ASIAN 130, ASIAN 156,
+            ASIAN 210, ASIAN 215, ASIAN 220,
             ASIAN 235, ASIAN 268, ASIAN 270,
-            ASIAN 310, ECON 238, HIST 250,
+            ASIAN 310,
+            AS/RE 254,
+            ECON 238, HIST 250,
             HIST 251, HIST 252, HIST 345
         ]
 
@@ -39,6 +42,7 @@ sets:
         description: Semester about Asia
         needed: 1
         valid: [ASIAN 399]
+
 
 special:
     seminar:
