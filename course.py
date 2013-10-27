@@ -193,8 +193,8 @@ class Course:
 		output += self.professor
 
 		if self.geneds:
-			output += " [ "
+			output += " ["
 			output += get_readable_list(self.geneds)
-			output += " ]"
+			output += "]"
 
 		return output
