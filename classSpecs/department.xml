@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE spec SYSTEM "http://www.cs.stolaf.edu/lib/SpecML/SpecML.dtd">
 <?xml-stylesheet
    href="http://www.cs.stolaf.edu/lib/SpecML/SpecMLToHTML.xsl"
    type="text/xsl"?>
+<!DOCTYPE spec SYSTEM "http://www.cs.stolaf.edu/lib/SpecML/SpecML.dtd">
 
 <spec>
 <title>The Department Class Specification.</title>
