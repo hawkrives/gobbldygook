@@ -13,7 +13,7 @@ class Standing:
 		# [FOL-K], Latin [FOL-L], Japanese [FOL-J], Norwegian [FOL-N], or
 		# Russian [FOL-R] languages, or demonstrate equivalent proficiency.
 
-		self.list = {
+		self.geneds = {
 			"FYW": GenEd("FYW", 1),
 			"WRI": GenEd("WRI", 4),
 			"FOL": GenEd("FOL", 1),
@@ -46,7 +46,7 @@ class Standing:
 		output += "out of " + str(self.credits_needed) + " credits needed to graduate."
 		output += '\n'
 
-		output += get_readable_list(self.list, sep='\n', end='')
+		output += get_readable_list(self.geneds, sep='\n', end='')
 		return output
 
 
@@ -57,5 +57,5 @@ if __name__ == '__main__':
 	for i in tmp:
 		print(i)
 
-	if "FYW" in tmp[0].list:
+	if "FYW" in tmp[0].geneds:
 		print("success")

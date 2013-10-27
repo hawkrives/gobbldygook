@@ -68,7 +68,7 @@ class Student:
 
 			if 'geneds' in data:
 				for req in data['geneds']:
-					self.standing.list[req].increment()
+					self.standing.geneds[req].increment()
 
 			if 'credits' in data:
 				for credit in data['credits']:
@@ -191,7 +191,7 @@ class Student:
 						for requirement_set in concentration.special_requirements:
 							requirement_set.check_requirement(course.id)
 
-					for req in self.standing.list.values():
+					for req in self.standing.geneds.values():
 						if req in course.geneds:
 							if req == "SPM":
 								req.increment()
@@ -200,7 +200,7 @@ class Student:
 
 					for req in fol_t: # check for FOL-J, FOL-N, etc.
 						if req in course.geneds:
-							self.standing.list["FOL"].increment()
+							self.standing.geneds["FOL"].increment()
 
 
 
