@@ -60,9 +60,7 @@ class Requirement:
 
 
 	def __hash__(self):
-		return hash(
-			self.name and self.needed and self.has and self.satisfied
-		)
+		return hash(self.name and self.needed and self.has and self.satisfied)
 
 
 class MajorRequirement(Requirement):
