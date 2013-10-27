@@ -170,7 +170,7 @@ class Student:
 			major.requirements.sort(key=lambda m: m.name)
 			major.special_requirements.sort(key=lambda m: m.name)
 
-		for conc in self.majors:
+		for conc in self.concentrations:
 			conc.requirements.sort(key=lambda c: c.name)
 			conc.special_requirements.sort(key=lambda c: c.name)
 
