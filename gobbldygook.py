@@ -2,12 +2,12 @@
 
 import argparse, csv, os
 
-from course import Course, all_courses, all_labs, getCourse
+from course import Course, all_courses, all_labs
 from student import Student
 
 def argument_parse():
 	parser = argparse.ArgumentParser(description="This program works best if you give it some data. However, we have some example stuff to show you anyway.)")
-	parser.add_argument('-l', "--load", default='example')
+	parser.add_argument('-l', "--load", default='rives')
 	parser.add_argument('-f', "--find")
 	parser.add_argument("--demo")
 	parser.add_argument("--stress")

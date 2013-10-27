@@ -4,7 +4,7 @@ class Concentration(Major):
 	def __init__(self, dept="NONE"):
 		super().__init__(dept, folder="concentrations/")
 
-	def getConcentrationRequirement(self, string):
+	def get_concentration_requirement(self, string):
 		return self.requirements[string]
 
 if __name__ == '__main__':

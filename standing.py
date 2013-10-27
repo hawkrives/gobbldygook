@@ -16,12 +16,9 @@ class Standing:
 		self.list = {
 			"FYW": GenEd("FYW", 1),
 			"WRI": GenEd("WRI", 4),
-			# TODO: Support requirements that have a variable number of courses needed.
 			"FOL": GenEd("FOL", 1),
 			"ORC": GenEd("ORC", 1),
 			"AQR": GenEd("AQR", 1),
-			# TODO: support using 'number of courses' instead of 'number of credits'
-			# I think this one is solved - actually, the situation might be reversed...
 			"SPM": GenEd("SPM", 2),
 			"HWC": GenEd("HWC", 1),
 			# TODO: support requiring that courses be from different departments
@@ -40,11 +37,11 @@ class Standing:
 	def increment(self, by=1):
 		self.credits_taken += by
 
-	def checkStanding(self):
+	def check_standing(self):
 		return self.credits_taken >= self.credits_needed
 
 	def __str__(self):
-		self.checkStanding()
+		self.check_standing()
 		output = "You have " + str(tidy_float(self.credits_taken)) + " credits "
 		output += "out of " + str(self.credits_needed) + " credits needed to graduate."
 		output += '\n'

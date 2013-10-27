@@ -1,16 +1,16 @@
 from major import Major
 from concentration import Concentration
-from course import Course, getCourse
+from course import Course, get_course
 from standing import Standing
 from ID import ID
 from requirement import fol_t
 
 from collections import OrderedDict
-from yaml import load, dump
+from yaml import load
 try:
-    from yaml import CLoader as Loader, CDumper as Dumper
+	from yaml import CLoader as Loader, CDumper as Dumper
 except ImportError:
-    from yaml import Loader, Dumper
+	from yaml import Loader, Dumper
 
 from helpers import get_list_as_english, get_readable_list
 
@@ -38,14 +38,14 @@ class Student:
 
 			if 'majors' in data:
 				for major_name in data['majors']:
-					self.addMajor(major_name)
+					self.add_major(major_name)
 
 			if 'concentrations' in data:
 				if not data['concentrations']:
 					print("You don't have any concentrations?")
 				else:
 					for concentration_name in data['concentrations']:
-						self.addConcentration(concentration_name)
+						self.add_concentration(concentration_name)
 
 			if 'courses' in data:
 				if not data['courses']:
@@ -57,10 +57,10 @@ class Student:
 						for semester in data['courses'][year]:
 							semester = self.check_semester_name(semester)
 							for course_name in data['courses'][year][semester]:
-								course = getCourse(course_name, shortyear, semester)
+								course = get_course(course_name, shortyear, semester)
 								if course:
 									self.standing.increment(course.credits)
-									self.addCourse(course, shortyear, semester)
+									self.add_course(course, shortyear, semester)
 								else:
 									print("A bad course identifier was passed:", course_name)
 									# break
@@ -111,7 +111,7 @@ class Student:
 
 
 	def __str__(self):
-		self.updateStanding()
+		self.update_standing()
 		output = self.name + ", "
 
 		if self.majors:
@@ -146,16 +146,16 @@ class Student:
 			output += "For " + str(major.name) + ": " + '\n'
 			output += get_readable_list(major.requirements, sep='\n', end='\n')
 
-			if major.specialRequirements:
-				output += get_readable_list(major.specialRequirements, sep='\n', end='\n')
+			if major.special_requirements:
+				output += get_readable_list(major.special_requirements, sep='\n', end='\n')
 			output += '\n'
 
 		for concentration in self.concentrations:
 			output += "For " + str(concentration.name) + ": " + '\n'
 			output += get_readable_list(concentration.requirements, sep='\n', end='\n')
 
-			if concentration.specialRequirements:
-				output += get_readable_list(concentration.specialRequirements, sep='\n', end='\n')
+			if concentration.special_requirements:
+				output += get_readable_list(concentration.special_requirements, sep='\n', end='\n')
 
 			output += '\n'
 
@@ -165,31 +165,31 @@ class Student:
 		return output
 
 
-	def updateStanding(self):
+	def update_standing(self):
 		for major in self.majors:
 			major.requirements.sort(key=lambda m: m.name)
-			major.specialRequirements.sort(key=lambda m: m.name)
+			major.special_requirements.sort(key=lambda m: m.name)
 
 		for conc in self.majors:
 			conc.requirements.sort(key=lambda c: c.name)
-			conc.specialRequirements.sort(key=lambda c: c.name)
+			conc.special_requirements.sort(key=lambda c: c.name)
 
 		for year in self.courses.values():
 			for semester in year.values():
 				for course in semester:
 					for major in self.majors:
 						for requirement in major.requirements:
-							requirement.checkRequirement(course.id)
+							requirement.check_requirement(course.id)
 
-						for requirement_set in major.specialRequirements:
-							requirement_set.checkRequirement(course.id)
+						for requirement_set in major.special_requirements:
+							requirement_set.check_requirement(course.id)
 
 					for concentration in self.concentrations:
 						for requirement in concentration.requirements:
-							requirement.checkRequirement(course.id)
+							requirement.check_requirement(course.id)
 
-						for requirement_set in concentration.specialRequirements:
-							requirement_set.checkRequirement(course.id)
+						for requirement_set in concentration.special_requirements:
+							requirement_set.check_requirement(course.id)
 
 					for req in self.standing.list.values():
 						if req in course.geneds:
@@ -199,12 +199,12 @@ class Student:
 								req.increment(course.credits)
 
 					for req in fol_t: # check for FOL-J, FOL-N, etc.
-					 	if req in course.geneds:
-					 		self.standing.list["FOL"].increment()
+						if req in course.geneds:
+							self.standing.list["FOL"].increment()
 
 
 
-	def hasTakenCourse(self, identifier):
+	def has_taken_course(self, identifier):
 		# TODO: Check to see if this needs updating.
 		if ID(identifier) in self.courses:
 			return True
@@ -212,20 +212,20 @@ class Student:
 			return False
 
 
-	def addCourse(self, course, year, semester):
+	def add_course(self, course, year, semester):
 		if not isinstance(course, Course):
-			course = getCourse(course, year, semester)
+			course = get_course(course, year, semester)
 
 		self.courses[year][semester].append(course)
 
 
-	def addMajor(self, major):
+	def add_major(self, major):
 		if not isinstance(major, Major):
 			major = Major(major)
 		self.majors.append(major)
 
 
-	def addConcentration(self, concentration):
+	def add_concentration(self, concentration):
 		if not isinstance(concentration, Concentration):
 			concentration = Concentration(concentration)
 		self.concentrations.append(concentration)

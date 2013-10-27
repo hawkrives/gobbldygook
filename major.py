@@ -1,12 +1,12 @@
 from department import Department
-from requirement import MajorRequirement, SpecialRequirement, SetRequirement
+from requirement import MajorRequirement, SpecialRequirement
 
 import os
-from yaml import load, dump
+from yaml import load
 try:
-    from yaml import CLoader as Loader, CDumper as Dumper
+	from yaml import CLoader as Loader, CDumper as Dumper
 except ImportError:
-    from yaml import Loader, Dumper
+	from yaml import Loader, Dumper
 
 class Major:
 	def __init__(self, dept="NONE", folder="majors/"):
@@ -14,13 +14,13 @@ class Major:
 		self.name = self.department.name()
 
 		self.requirements = []
-		self.specialRequirements = []
-		self.setRequirements = []
+		self.special_requirements = []
+		self.set_requirements = []
 
 		filepath = folder + self.department.abbr() + ".yaml"
 
 		if os.path.isfile(filepath):
-			self.parseYAML(filepath)
+			self.parse_yaml(filepath)
 		else:
 			print("Could not find major", dept)
 
@@ -33,14 +33,14 @@ class Major:
 				self.department == other.department 
 				and self.name == other.name
 				and self.requirements == other.requirements
-				and self.specialRequirements == other.specialRequirements
-				and self.setRequirements == other.setRequirements
+				and self.special_requirements == other.special_requirements
+				and self.set_requirements == other.set_requirements
 			)
 		else:
 			return False
 
 
-	def parseYAML(self, path):
+	def parse_yaml(self, path):
 		with open(path) as infile:
 			data = load(infile, Loader=Loader)
 
@@ -60,7 +60,7 @@ class Major:
 				for requirement_title in data['special']:
 					req = data['special'][requirement_title]
 					special_req = SpecialRequirement(req['description'], req['needed'], req['valid'])
-					self.specialRequirements.append(special_req)
+					self.special_requirements.append(special_req)
 
 
 if __name__ == '__main__':

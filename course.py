@@ -1,12 +1,11 @@
 from major import Major
 from ID import ID
 from helpers import get_readable_list
-from professor import process_professor
 
 all_courses = {}
 all_labs = {}
 
-def getCourse(identifier, year=None, semester=None):
+def get_course(identifier, year=None, semester=None):
 	try:
 		courseID = ID(combined=identifier)
 	except Exception:
@@ -62,7 +61,7 @@ class Course:
 		else:                self.course_type = course_t["COURSE"]
 
 		# while Fourth contains the title of the course
-		self.title = self.cleanTitle(data[4])
+		self.title = self.clean_title(data[4])
 
 		# Fifth hands over the length (half semester or not)
 		# It is actually an int that tells us how many times the course is offered per semester.
@@ -128,9 +127,8 @@ class Course:
 			self.professor
 		)
 
-
-	def cleanTitle(self, string):
-		badEndings = [
+	def clean_title(self, string):
+		bad_endings = [
 			" Admission by",
 			" Class will",
 			" Closed",
@@ -167,16 +165,16 @@ class Course:
 			" You may "
 		]
 
-		badBeginnings = [
+		bad_beginnings = [
 			"Top: ",
 			"Sem: ",
 			"Res: "
 		]
 
-		for ending in badEndings:
+		for ending in bad_endings:
 			string = string.split(ending)[0]
 
-		for beginning in badBeginnings:
+		for beginning in bad_beginnings:
 			if beginning in string:
 				string = string.split(beginning)[1]
 

@@ -7,9 +7,9 @@ class Requirement:
 		self.needed = needed
 		self.has = 0
 		self.satisfied = False
-		self.satisfiedBy = []
+		self.satisfied_by = []
 
-	def checkSatisfied(self):
+	def check_satisfied(self):
 		if self.has >= self.needed:
 			self.satisfied = True
 		else:
@@ -23,7 +23,7 @@ class Requirement:
 		self.has -= 1
 
 	def __str__(self):
-		self.checkSatisfied()
+		self.check_satisfied()
 
 		if self.satisfied:
 			output = '\u2705'
@@ -41,8 +41,8 @@ class Requirement:
 
 		output += str(tidy_float(self.has)) + "."
 
-		if (not self.satisfied) and self.satisfiedBy:
-			output += get_readable_list(self.satisfiedBy)
+		if (not self.satisfied) and self.satisfied_by:
+			output += get_readable_list(self.satisfied_by)
 
 		return output
 
@@ -85,12 +85,12 @@ class MajorRequirement(Requirement):
 	def __iter__(self):
 		return self.valid.__iter__()
 
-	def addCourse(self, identifier):
+	def add_course(self, identifier):
 		if not isinstance(identifier, ID):
 			identifier = ID(combined=identifier)
 		self.valid.append(identifier)
 
-	def checkRequirement(self, identifier):
+	def check_requirement(self, identifier):
 		if identifier in self.valid:
 			self.increment()
 
@@ -116,21 +116,21 @@ class SpecialRequirement(Requirement):
 		else:
 			return False
 
-	def addSet(self, identifier):
+	def add_set(self, identifier):
 		self.requirements.append(identifier)
 
-	def checkRequirement(self, identifier):
+	def check_requirement(self, identifier):
 		for requirement in self.requirements:
 			# There was a problem where, once a requirement was completed, the SpecialRequirement would be incremented every iteration of the loop afterwards. Taking the initial status of the requirement and checking against it at the end solves that.
 
 			# Take the initial status of a requirement
-			initial_status = requirement.checkSatisfied()
+			initial_status = requirement.check_satisfied()
 
 			if identifier in requirement.valid:
 				requirement.increment()
 
 			# Check against the initial status of the requirement
-			if requirement.checkSatisfied() != initial_status:
+			if requirement.check_satisfied() != initial_status:
 				self.increment()
 
 
