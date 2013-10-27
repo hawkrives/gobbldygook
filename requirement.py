@@ -16,10 +16,11 @@ class Requirement:
 			self.satisfied = False
 		return self.satisfied
 
-	def increment(self, by=1):
+	def increment(self, by, course_id):
 		self.has += by
+		self.satisfied_by.append(course_id)
 
-	def __str__(self):
+	def __str__(self, append=""):
 		self.check_satisfied()
 
 		if self.satisfied:
@@ -38,8 +39,7 @@ class Requirement:
 
 		output += str(tidy_float(self.has)) + "."
 
-		if (not self.satisfied) and self.satisfied_by:
-			output += get_readable_list(self.satisfied_by)
+		output += append
 
 		return output
 
@@ -82,6 +82,15 @@ class MajorRequirement(Requirement):
 	def __iter__(self):
 		return self.valid.__iter__()
 
+	def __str__(self):
+		output = ""
+		if self.satisfied_by and not self.check_satisfied():
+			output += ' ['
+			output += get_readable_list(self.satisfied_by)
+			output += ']'
+		output = super().__str__(output)
+		return output
+
 	def add_course(self, identifier):
 		if not isinstance(identifier, ID):
 			identifier = ID(combined=identifier)
@@ -89,7 +98,7 @@ class MajorRequirement(Requirement):
 
 	def check_requirement(self, identifier):
 		if identifier in self.valid:
-			self.increment()
+			self.increment(1.0, identifier)
 
 
 class SetRequirement(MajorRequirement):
@@ -124,11 +133,11 @@ class SpecialRequirement(Requirement):
 			initial_status = requirement.check_satisfied()
 
 			if identifier in requirement.valid:
-				requirement.increment()
+				requirement.increment(1.0, identifier)
 
 			# Check against the initial status of the requirement
 			if requirement.check_satisfied() != initial_status:
-				self.increment()
+				self.increment(1.0, identifier)
 
 
 

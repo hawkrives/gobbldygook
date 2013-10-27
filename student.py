@@ -194,13 +194,13 @@ class Student:
 					for req in self.standing.geneds.values():
 						if req in course.geneds:
 							if req == "SPM": # SPM requires two _courses_, rather than `n` _credits_.
-								req.increment()
+								req.increment(1.0, course.id)
 							else:
-								req.increment(course.credits)
+								req.increment(course.credits, course.id)
 
 					for req in fol_t: # check for FOL-J, FOL-N, etc.
 						if req in course.geneds:
-							self.standing.geneds["FOL"].increment()
+							self.standing.geneds["FOL"].increment(1.0, course.id)
 
 
 
