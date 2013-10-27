@@ -19,9 +19,6 @@ class Requirement:
 	def increment(self, by=1):
 		self.has += by
 
-	def decrement(self):
-		self.has -= 1
-
 	def __str__(self):
 		self.check_satisfied()
 
