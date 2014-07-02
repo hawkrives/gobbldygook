@@ -2,7 +2,7 @@
   "name": "gobbldygook",
   "version": "2.0.0",
   "description": "A course scheduling app for St. Olaf College",
-  "main": "index.html",
+  "main": "app/index.html",
   "scripts": {
     "test": "browserify test/index.js | tape-run | tap-spec"
   },
@@ -15,13 +15,43 @@
   "bugs": {
     "url": "https://github.com/hawkrives/gobbldygook/issues"
   },
-  "homepage": "https://github.com/hawkrives/gobbldygook",
+  "homepage": "https://hawkrives.github.io/gobbldygook",
   "devDependencies": {
     "browserify": "^4.2.0",
     "run-browser": "^1.3.1",
     "tape-run": "^0.1.1"
   },
   "dependencies": {
-    "lodash": "^2.4.1"
+    "ampersand-form-view": "^1.0.0",
+    "ampersand-input-view": "^1.2.3",
+    "ampersand-model": "^3.0.1",
+    "ampersand-rest-collection": "^1.1.0",
+    "ampersand-router": "^1.0.1",
+    "ampersand-view": "6.0.3",
+    "ampersand-view-switcher": "^1.0.2",
+    "andlog": "^1.0.0",
+    "async": "^0.9.0",
+    "clientconfig": "^1.0.0",
+    "domready": "^1.0.5",
+    "favicon-setter": "^0.1.1",
+    "getconfig": "^0.3.0",
+    "hapi": "6.x.x",
+    "lodash": "^2.4.1",
+    "moonboots_hapi": "2.x.x",
+    "stylizer": "^0.7.0",
+    "templatizer": "^0.3.5",
+    "underscore": "^1.6.0"
+  },
+  "jshintConfig": {
+    "asi": true,
+    "browser": true,
+    "curly": false,
+    "expr": true,
+    "indent": 4,
+    "loopfunc": true,
+    "node": false,
+    "trailing": true,
+    "undef": true,
+    "white": true
   }
 }

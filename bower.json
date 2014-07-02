@@ -1,0 +1,25 @@
+{
+  "name": "gobbldygook",
+  "version": "2",
+  "homepage": "https://github.com/hawkrives/gobbldygook",
+  "authors": [
+    "Hawken Rives <hawkrives@gmail.com>"
+  ],
+  "description": "A course scheduling app for St. Olaf College",
+  "main": "app/index.html",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "zepto": "~1.1.3"
+  }
+}
