@@ -1,5 +1,5 @@
 /*global app, me, $*/
-var _ = require('underscore');
+var _ = require('lodash');
 var logger = require('andlog');
 var config = require('clientconfig');
 
