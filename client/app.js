@@ -14,7 +14,7 @@ var loadStats = require('loading-stats');
 
 module.exports = {
     // this is the the whole app initter
-    blastoff: function () {
+    blastoff: function() {
         var self = window.app = this;
         window.times = {start: Date.now()};
 
@@ -50,7 +50,7 @@ module.exports = {
     // all the <a> tags in the app.
     // it expects a url without a leading slash.
     // for example: "costello/settings".
-    navigate: function (page) {
+    navigate: function(page) {
         var url = (page.charAt(0) === '/') ? page.slice(1) : page;
         this.router.history.navigate(url, {trigger: true});
     }
