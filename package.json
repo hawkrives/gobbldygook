@@ -40,6 +40,7 @@
     "lodash": "^2.4.1",
     "moonboots_hapi": "2.x.x",
     "stylizer": "^0.7.0",
+    "system-requirements": "0.0.2",
     "templatizer": "^0.3.5",
     "underscore": "^1.6.0"
   },
