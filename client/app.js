@@ -6,8 +6,7 @@ var config = require('clientconfig');
 var Router = require('./router');
 var tracking = require('./helpers/metrics');
 var MainView = require('./views/main');
-var Me = require('./models/me');
-var People = require('./models/person-collection');
+var Students = require('./models/student-collection');
 var domReady = require('domready');
 var loadStats = require('loading-stats');
 
@@ -18,9 +17,9 @@ module.exports = {
         var self = window.app = this;
         window.times = {start: Date.now()};
 
-        // create our global 'me' object and an empty collection for our people models.
-        window.me = new Me();
-        this.people = new People();
+        // create an empty collection for our students.
+        this.people = new Students();
+        window.me = _.find(this.people, 'active')
 
         // init our URL handlers and the history tracker
         this.router = new Router();
@@ -30,7 +29,7 @@ module.exports = {
         domReady(function () {
             // init our main view
             var mainView = self.view = new MainView({
-                model: me,
+                model: _.find(this.people, 'active'),
                 el: document.body
             });
 
@@ -45,11 +44,11 @@ module.exports = {
         });
     },
 
-    // This is how you navigate around the app.
-    // this gets called by a global click handler that handles
-    // all the <a> tags in the app.
-    // it expects a url without a leading slash.
+    // This is how you navigate around the app. this gets called by a global
+    // click handler that handles all the <a> tags in the app. it expects a
+    // url without a leading slash.
     // for example: "costello/settings".
+
     navigate: function(page) {
         var url = (page.charAt(0) === '/') ? page.slice(1) : page;
         this.router.history.navigate(url, {trigger: true});
