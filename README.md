@@ -1,23 +1,15 @@
 # Gobbldygook
 
-This app was generated with the [ampersand cli tool](http://ampersandjs.com/learn/quick-start-guide).
+This app is a course scheduler for students at St. Olaf College. You give it your areas of study (majors, concentrations, degrees), the course you have taken and are planning on taking, and it tells you if you can graduate or not.
 
 ## How to run it
 
-1. download/install [node.js](http://nodejs.org/)
-1. install dependencies: `npm i`
-1. run it: `npm start`
-1. open http://localhost:3000 in a browser
-
-## How it's structured
-
-See docs: http://ampersandjs.com/
-Curated modules: http://tools.ampersandjs.com/
+1. go to <hawken.riv.es/gobbldygook>
+2. add data
+3. rinse and repeat
 
 ## Credits
+- Initial concept from @xandrasings
+- Final project for Software Design, @hawkrives and @xandrasings
+- &yet, famo.us, and the internet at large for helping me along with this
 
-Built by folks at [&yet](http://andyet.com).
-
-## Want a deeper understanding?
-
-Get the book: http://humanjavascript.com
