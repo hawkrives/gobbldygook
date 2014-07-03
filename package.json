@@ -36,6 +36,7 @@
     "favicon-setter": "^0.1.1",
     "getconfig": "^0.3.0",
     "hapi": "6.x.x",
+    "loading-stats": "0.0.2",
     "lodash": "^2.4.1",
     "moonboots_hapi": "2.x.x",
     "stylizer": "^0.7.0",

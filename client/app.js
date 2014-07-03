@@ -9,12 +9,14 @@ var MainView = require('./views/main');
 var Me = require('./models/me');
 var People = require('./models/person-collection');
 var domReady = require('domready');
+var loadStats = require('loading-stats');
 
 
 module.exports = {
     // this is the the whole app initter
     blastoff: function () {
         var self = window.app = this;
+        window.times = {start: Date.now()};
 
         // create our global 'me' object and an empty collection for our people models.
         window.me = new Me();
