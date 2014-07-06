@@ -10,6 +10,8 @@ var CourseTable = React.createClass({
 		var years = _.map(_.groupBy(this.props.courses, 'year'), function(coursesByYear, year) {
 			var terms = _.map(_.groupBy(coursesByYear, 'term'), function(coursesByTerm, term) {
 				return Semester( {key:term, name:term, courses:coursesByTerm} );
+		console.log('course-table render')
+		console.log('course-table schedules', this.props.schedules)
 			});
 			return React.DOM.div( {className:"year", key:year}, 
 					React.DOM.header(null, React.DOM.h1(null, year)),
@@ -18,7 +20,7 @@ var CourseTable = React.createClass({
 					)
 				)
 		}, this);
-		console.log(years);
+		console.log('years', years);
 		return React.DOM.div( {className:"course-table"}, years );
 	}
 });

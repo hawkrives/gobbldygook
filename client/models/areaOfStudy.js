@@ -5,6 +5,7 @@ var RequirementSet = require("./requirementSet");
 
 var AreaOfStudy = React.createClass({
 	render: function() {
+		console.log('area-of-study render')
 		var areaDetails = []//getAreaOfStudy(this.props.name, this.props.type);
 		var requirementSets = _.map(areaDetails.sets, function(reqset) {
 			return RequirementSet( {key:reqset.description,

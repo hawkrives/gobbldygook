@@ -5,6 +5,7 @@ var Requirement = require('./requirement')
 
 var RequirementSet = React.createClass({
 	render: function() {
+		console.log('requirement-set render')
 		var requirements = _.map(this.props.requirements, function(req) {
 			return Requirement( {key:req.title,
 				name:req.title, needs:req.needs,

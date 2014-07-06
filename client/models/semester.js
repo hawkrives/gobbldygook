@@ -5,6 +5,8 @@ var Course = require('./course')
 
 var Semester = React.createClass({
 	render: function() {
+		console.log('semester render')
+
 		var semesterName = 'Unknown (' + this.props.name + ')';
 
 		if (this.props.name === '1') {

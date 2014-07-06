@@ -19,13 +19,12 @@ var RequirementGroup = React.createClass({
 
 var Requirement = React.createClass({
 	render: function() {
-		return (
-			React.DOM.li( {className:"requirement"}, 
-				React.DOM.progress( {value:this.props.has, max:this.props.needs}),
-				this.props.name,
-				React.DOM.br(null),
-				this.props.query,this.props.validCourses
-			)
+		console.log('requirement render')
+		return React.DOM.li( {className:"requirement"}, 
+			React.DOM.progress( {value:this.props.has, max:this.props.needs}),
+			this.props.name,
+			React.DOM.br(null),
+			this.props.query,this.props.validCourses
 		)
 	}
 })
