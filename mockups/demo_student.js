@@ -1,4 +1,6 @@
-{
+var _ = require('lodash')
+
+module.exports = {
 	name: 'Hawken MacKay Rives',
 	enrolled: 2012,
 	graduation: 2016,
@@ -60,18 +62,18 @@
 	],
 
 	// derived
-	get degrees: function() {
-        return _.filter(this.studies, {kind: 'degree'});
-    },
-    get majors: function() {
-        return _.filter(this.studies, {kind: 'major'});
-    },
-    get concentrations: function() {
-        return _.filter(this.studies, {kind: 'concentration'});
-    },
-    get clbids: function() {
-        var chosenSchedules = _.filter(this.schedules, 'chosen')
-        var courses = _.pluck(chosenSchedules, 'clbids')
-        return _.flatten(courses)
-    }
+	degrees: function() {
+		return _.filter(this.studies, {kind: 'degree'});
+	},
+	majors: function() {
+		return _.filter(this.studies, {kind: 'major'});
+	},
+	concentrations: function() {
+		return _.filter(this.studies, {kind: 'concentration'});
+	},
+	clbids: function() {
+		var activeSchedules = _.filter(this.schedules, 'active')
+		var clbids = _.pluck(activeSchedules, 'clbids')
+		return _.flatten(clbids)
+	}
 }

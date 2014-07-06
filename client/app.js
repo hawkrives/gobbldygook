@@ -7,6 +7,7 @@ var React = require('react')
 var tracking = require('./helpers/metrics')
 var Student = require('./models/student')
 var loadStats = require('loading-stats')
+var demoStudent = require('../mockups/demo_student')
 
 module.exports = {
 	// this is the the whole app initter
@@ -15,20 +16,20 @@ module.exports = {
 		window.times = {start: Date.now()};
 
 		// create an empty collection for our students.
-		window.me = {}
+		window.me = demoStudent
 
 		// init our URL handlers and the history tracker
 		// this.router = new Router();
 
 		// wait for document ready to render our main view
 		// this ensures the document has a body, etc.
-		document.addEventListener( "DOMContentLoaded", function(){
+		document.addEventListener( "DOMContentLoaded", function() {
 			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
 
 			// init our main view
 			React.renderComponent(
 				Student({
-					moniker: me.moniker,
+					moniker: me.name,
 					studies: me.studies,
 					schedules: me.schedules
 				}),
