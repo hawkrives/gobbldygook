@@ -15,10 +15,7 @@
 	line-height: $size; 
 	font-size: $size/2;
 
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-	cursor: default;
+	@extend %no-select;
 
 	border-radius: $size;
 
