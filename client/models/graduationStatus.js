@@ -2,6 +2,7 @@ var _ = require('lodash');
 var React = require('react');
 
 var AreaOfStudy = require('./areaOfStudy')
+var StudentSummary = require('./studentSummary')
 
 var makeCourseObjects = require('../helpers/makeCourseObjects')
 
@@ -25,9 +26,9 @@ var GraduationStatus = React.createClass({
 		})
 
 		return React.DOM.section( {className:"graduation-status"},
+			StudentSummary( _.merge(this.props, {courses: courses}) ),
 			React.DOM.section( {id:"degrees"},
 				React.DOM.h1(null, "Degrees"),
-				React.DOM.p(null, this.props.name,"! You have ", React.DOM.output(null, "X"), " of ", React.DOM.output(null, "Y"), " credits!"),
 				areasOfStudy.degree
 			),
 			React.DOM.section( {id:"majors"},
