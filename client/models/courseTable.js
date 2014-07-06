@@ -22,7 +22,7 @@ var CourseTable = React.createClass({
 					)
 				),
 				terms,
-				React.DOM.button({className: "add-semester"}, "+")
+				React.DOM.button({className: "add-semester", title: "Add Semester", disabled: _.size(terms) <= 5 ? false : true}, "+")
 			)
 		}, this);
 

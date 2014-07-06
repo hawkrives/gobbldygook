@@ -171,6 +171,9 @@ body {
   cursor: pointer;
   font-size: 1.25em; }
 
+.add-semester[disabled] {
+  cursor: not-allowed; }
+
 #student-summary {
   padding: 5px; }
 
