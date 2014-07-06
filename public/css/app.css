@@ -32,6 +32,11 @@ body {
   .graduation-status .area-of-study p:last-child, #student-summary p:last-child {
     margin-bottom: 0; }
 
+.area-of-study h1 {
+  font-size: inherit;
+  font-weight: 300;
+  margin: 0; }
+
 .course-table {
   -webkit-flex: 1;
   flex: 1; }
