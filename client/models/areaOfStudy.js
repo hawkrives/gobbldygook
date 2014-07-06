@@ -7,15 +7,17 @@ var AreaOfStudy = React.createClass({
 	render: function() {
 		console.log('area-of-study render')
 
-		var areaDetails = []//getAreaOfStudy(this.props.name, this.props.type);
+		var areaDetails = this.props;//getAreaOfStudy(this.props.name, this.props.type);
 
 		var requirementSets = _.map(areaDetails.sets, function(reqset) {
-			return RequirementSet( {key:reqset.description,
+			return RequirementSet({
+				key:reqset.description,
 				name: reqset.description,
 				needs: reqset.needs,
 				count: reqset.count,
 				requirements: reqset.reqs,
-				courses: this.props.courses});
+				courses: this.props.courses
+			});
 		}, this);
 
 		return React.DOM.article( {id:areaDetails.id, className:"area-of-study"},
