@@ -3,6 +3,8 @@ var React = require('react');
 
 var RequirementSet = require("./requirementSet");
 
+var getRandomInt = require('../helpers/getRandomInt')
+
 var AreaOfStudy = React.createClass({
 	render: function() {
 		console.log('area-of-study render')
@@ -22,7 +24,10 @@ var AreaOfStudy = React.createClass({
 
 		return React.DOM.article( {id:areaDetails.id, className:"area-of-study"},
 			React.DOM.details(null,
-				React.DOM.summary(null, React.DOM.h1(null, areaDetails.title)),
+				React.DOM.summary(null, 
+					React.DOM.h1(null, areaDetails.title),
+					React.DOM.progress({value: getRandomInt(0, 100), max: 100})
+				),
 				requirementSets
 			)
 		);
