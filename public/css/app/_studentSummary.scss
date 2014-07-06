@@ -1,10 +1,16 @@
 #student-summary {
 	@extend %block-small;
+
+	font-size: 14px;
 }
 
 #student-summary {
 	-webkit-hyphens: auto;
 	hyphens: auto;
+
+	p {
+		margin: $block-edge-padding 0;
+	}
 }
 
 #student-letter {

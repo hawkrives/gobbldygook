@@ -48,8 +48,13 @@ body {
   text-transform: uppercase; }
 
 #student-summary {
+  font-size: 14px; }
+
+#student-summary {
   -webkit-hyphens: auto;
   hyphens: auto; }
+  #student-summary p {
+    margin: 5px 0; }
 
 #student-letter {
   position: relative;
