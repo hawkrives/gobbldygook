@@ -13,11 +13,15 @@ var CourseTable = React.createClass({
 			var terms = _.map(_.groupBy(schedulesByYear, 'semester'), function(schedulesBySemester, semester) {
 				return Semester( {key:semester, name:semester, schedules:schedulesBySemester} );
 			});
-			return React.DOM.div( {className:"year", key:year}, 
-				React.DOM.header(null, React.DOM.h1(null, year)),
-				React.DOM.div( {className:"semester-list"}, 
-					terms
-				)
+			return React.DOM.div( {className:"year", key:year},
+				React.DOM.header({className: "year-title"},
+					React.DOM.h1(null,
+						React.DOM.span({className: "year-start"}, year),
+						React.DOM.span({className: "year-divider"}, "+"),
+						React.DOM.span({className: "year-end"}, parseInt(year, 10) + 1)
+					)
+				),
+				terms
 			)
 		}, this);
 		console.log('years', years);
