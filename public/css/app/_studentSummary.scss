@@ -11,6 +11,13 @@
 	p {
 		margin: $block-edge-padding 0;
 	}
+
+	&.cannot-graduate .graduation-message {
+		color: $orange;
+	}
+	&.can-graduate .graduation-message {
+		color: $green;
+	}
 }
 
 #student-letter {
@@ -19,6 +26,9 @@
 	margin-right: $block-edge-padding;
 
 	.cannot-graduate & {
-		color: pink;
+		color: $orange;
+	}
+	.can-graduate & {
+		color: $green;
 	}
 }

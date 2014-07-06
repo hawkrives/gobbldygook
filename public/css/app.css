@@ -93,6 +93,10 @@ body {
   hyphens: auto; }
   #student-summary p {
     margin: 5px 0; }
+  #student-summary.cannot-graduate .graduation-message {
+    color: #ff851b; }
+  #student-summary.can-graduate .graduation-message {
+    color: #2ecc40; }
 
 #student-letter {
   position: relative;
@@ -121,7 +125,9 @@ body {
     transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: 0px 1px 1.5px transparent, 0px 3px 3px rgba(0, 0, 0, 0.16), 0px 10px 10px transparent, 0px 14px 14px transparent, 0px 19px 19px transparent; }
   .cannot-graduate #student-letter {
-    color: pink; }
+    color: #ff851b; }
+  .can-graduate #student-letter {
+    color: #2ecc40; }
 
 .student {
   display: -webkit-flex;
