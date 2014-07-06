@@ -2,6 +2,7 @@ var _ = require('lodash');
 var React = require('react');
 
 var add = require('../helpers/add')
+var humanize = require('humanize-plus')
 var checkElegibilityForGraduation = require('../helpers/checkElegibilityForGraduation')
 
 var StudentSummary = React.createClass({
