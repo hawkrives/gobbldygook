@@ -1,10 +1,6 @@
 var _ = require('lodash')
 var add = require('./add')
-var count = require('./count')
-
-function countCredits(courses) {
-	return _.reduce(_.pluck(courses, 'credits'), add)
-}
+var countCredits = require('./countCredits')
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a

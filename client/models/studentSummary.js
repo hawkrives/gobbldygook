@@ -2,6 +2,7 @@ var _ = require('lodash');
 var React = require('react');
 
 var add = require('../helpers/add')
+var countCredits = require('../helpers/countCredits')
 var humanize = require('humanize-plus')
 var checkElegibilityForGraduation = require('../helpers/checkElegibilityForGraduation')
 
@@ -9,7 +10,7 @@ var StudentSummary = React.createClass({
 	render: function() {
 		console.log('student-summary render')
 
-		var creditsTaken = _.reduce(_.pluck(this.props.courses, 'credits'), add)
+		var creditsTaken = countCredits(this.props.courses)
 		var creditsNeeded = this.props.creditsNeeded
 
 		var degrees = _.reduce(_.pluck(_.filter(this.props.studies, 'degrees'), 'abbr'), 
