@@ -9,9 +9,7 @@ var Student = React.createClass({
         console.log('student render')
         return (
             React.DOM.div( {className:"student"}, 
-                GraduationStatus( {name:this.props.name,
-                    schedules:this.props.schedules,
-                    studies:this.props.studies}),
+                GraduationStatus(this.props),
                 CourseTable( {schedules:this.props.schedules})
             )
             // <CourseQuery />
