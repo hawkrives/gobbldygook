@@ -223,6 +223,42 @@ function artsMajor(studies, courses) {
 	return _.size(majors) >= 1 && _.every(majors, atLeastEightCredits(courses))
 }
 
+function dedicatedMusicMajor(studies, courses) {
+	// B.M. candidates must choose from the five majors offered. Please
+	// consult the Music Department listing in this catalog for specific major
+	// requirements. These constitute the final authority on degree
+	// requirements.  Entrance to all B.M. majors is by audition and/or
+	// application only. Once approved, students should declare their major
+	// formally as soon as possible by submitting a completed declaration of
+	// major form to the Music Department office. Subsequent changes are
+	// allowed, but students are encouraged to keep their records current,
+	// documenting any changes with re-submissions of the same form. 
+
+	// Other regulations are:
+
+	// Of the credits counting toward the minimum requirements for a major, a
+	// total of six (6.00) must be completed with a grade of C or higher.
+	// NOTE: Ignored, because we don't store grades.
+
+	// No courses explicitly required for a B.M Music major may be taken S/U.
+	// NOTE: Ignored, because we don't store s/u status.
+
+	// At least 50 percent of the minimum major must be taken through St.
+	// Olaf. Students should consult the registrar and the department chair or
+	// program director about counting toward a major courses taken at other
+	// colleges. In addition to the registrar, the chair must sign the
+	// student’s transfer of credit form (available from the Office of the
+	// Registrar and Academic Advising) if work from other institutions is
+	// accepted in advance. Likewise, courses taken through St. Olaf off-
+	// campus programs must be approved by the chair or director and the off-
+	// campus program advisor in advance if credit toward a major is sought.
+	// (See TRANSFER OF CREDIT TO ST. OLAF )
+	// NOTE: Ignored, because this doesn't know about major requirements.
+
+	var majors = _.filter(studies, {type: 'major'})
+
+	return _.size(majors) >= 1 && _.every(majors, atLeastEightCredits(courses))
+}
 
 var twentyOneCreditsAndBeyond = _.curry(function(courses, major) {
 	// Takes the courses *outside* of the major department, and counts them.
@@ -370,19 +406,61 @@ function artsAndMusicDoubleMajor(student) {
 	return true
 }
 
-module.exports = function(student) {
+function checkBachelorOfArtsRequirements(student) {
 	// Requirements taken from
 	// http://www.stolaf.edu/catalog/1314/academiclife/ba-gen-grad-requirements.html
-	var requirements = {
+
+	var bachelorOfArtsRequirements = {
 		courses: courses(student.courses, student.creditsNeeded),
 		residency: residency(student),
 		interim: interim(student.courses),
 		gpa: gpa(student),
 		courseLevel: courseLevel(student.courses),
 		gradedCourses: gradedCourses(student),
-		major: major(student.studies, student.courses),
+		major: artsMajor(student.studies, student.courses),
 		beyondTheMajor: beyondTheMajor(student.studies, student.courses),
 		artsAndMusicDoubleMajor: artsAndMusicDoubleMajor(student)
 	}
-	return _.every(requirements)
+
+	return _.every(bachelorOfArtsRequirements)
+}
+
+function checkBachelorOfMusicRequirements(student) {
+	// Requirements taken from 
+	// http://www.stolaf.edu/catalog/1314/academiclife/bm-gen-grad-requirements.html
+
+	var bachelorOfMusicRequirements = {
+		courses: courses(student.courses, student.creditsNeeded),
+		residency: residency(student),
+		interim: interim(student.courses),
+		gpa: gpa(student),
+		courseLevel: courseLevel(student.courses),
+		gradedCourses: gradedCourses(student),
+		major: dedicatedMusicMajor(student.studies, student.courses),
+		artsAndMusicDoubleMajor: artsAndMusicDoubleMajor(student)
+	}
+
+	return _.every(bachelorOfMusicRequirements)
+}
+
+function checkBachelorOfBothRequirements(student) {
+	return checkBachelorOfArtsRequirements(student) && checkBachelorOfMusicRequirements(student)
+}
+
+module.exports = function(student) {
+	if (isBachelorOfBoth(student)) {
+		return checkBachelorOfBothRequirements(student)
+	}
+
+	else if (isBachelorOfArt(student)) {
+		return checkBachelorOfArtsRequirements(student)
+	}
+
+	else if (isBachelorOfMusic(student)) {
+		return checkBachelorOfMusicRequirements(student)
+	}
+
+	else {
+		return false
+	}
 }
