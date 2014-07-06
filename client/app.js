@@ -6,52 +6,52 @@ var React = require('react')
 
 var tracking = require('./helpers/metrics')
 var Student = require('./models/student')
-var domReady = require('domready')
 var loadStats = require('loading-stats')
 
 module.exports = {
-    // this is the the whole app initter
-    blastoff: function() {
-        var self = window.app = this;
-        window.times = {start: Date.now()};
+	// this is the the whole app initter
+	blastoff: function() {
+		var self = window.app = this;
+		window.times = {start: Date.now()};
 
-        // create an empty collection for our students.
-        window.me = {}
+		// create an empty collection for our students.
+		window.me = {}
 
-        // init our URL handlers and the history tracker
-        // this.router = new Router();
+		// init our URL handlers and the history tracker
+		// this.router = new Router();
 
-        // wait for document ready to render our main view
-        // this ensures the document has a body, etc.
-        document.addEventListener( "DOMContentLoaded", function(){
-            document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
-            // init our main view
-            React.renderComponent(
-                Student({
-                    moniker: me.moniker,
-                    studies: me.studies,
-                    schedules: me.schedules
-                }),
-                document.body
-            )
+		// wait for document ready to render our main view
+		// this ensures the document has a body, etc.
+		document.addEventListener( "DOMContentLoaded", function(){
+			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
 
-            // listen for new pages from the router
-            // self.router.on('newPage', mainView.setPage, mainView);
+			// init our main view
+			React.renderComponent(
+				Student({
+					moniker: me.moniker,
+					studies: me.studies,
+					schedules: me.schedules
+				}),
+				document.body
+			)
 
-            // we have what we need, we can now start our router and show the appropriate page
-            // self.router.history.start({pushState: true, root: '/'});
-        }, false );
-    },
+			// listen for new pages from the router
+			// self.router.on('newPage', mainView.setPage, mainView);
 
-    // This is how you navigate around the app. this gets called by a global
-    // click handler that handles all the <a> tags in the app. it expects a
-    // url without a leading slash.
-    // for example: "costello/settings".
+			// we have what we need, we can now start our router and show the appropriate page
+			// self.router.history.start({pushState: true, root: '/'});
+		}, false );
+	},
 
-    // navigate: function(page) {
-    //     var url = (page.charAt(0) === '/') ? page.slice(1) : page;
-    //     this.router.history.navigate(url, {trigger: true});
-    // }
+	// This is how you navigate around the app. this gets called by a global
+	// click handler that handles all the <a> tags in the app. it expects a
+	// url without a leading slash.
+	// for example: "costello/settings".
+
+	// navigate: function(page) {
+	//     var url = (page.charAt(0) === '/') ? page.slice(1) : page;
+	//     this.router.history.navigate(url, {trigger: true});
+	// }
 };
 
 // run it
