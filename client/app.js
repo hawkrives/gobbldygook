@@ -28,11 +28,7 @@ module.exports = {
 
 			// init our main view
 			React.renderComponent(
-				Student({
-					name: me.name,
-					studies: me.studies,
-					schedules: me.schedules
-				}),
+				Student(me),
 				document.body
 			)
 
