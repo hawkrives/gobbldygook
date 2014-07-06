@@ -35,6 +35,7 @@ module.exports = {
         // order you provide them.
         libraries: [
             appDir + '/libraries/zepto/zepto.js',
+            appDir + '/libraries/Element.details/__COMPILE/Element.details.js',
         ],
 
         // Specify the stylesheets we want to bundle
