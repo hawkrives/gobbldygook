@@ -29,7 +29,7 @@ module.exports = {
 			// init our main view
 			React.renderComponent(
 				Student({
-					moniker: me.name,
+					name: me.name,
 					studies: me.studies,
 					schedules: me.schedules
 				}),

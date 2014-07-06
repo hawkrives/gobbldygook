@@ -25,9 +25,9 @@ var GraduationStatus = React.createClass({
 		})
 
 		return React.DOM.section( {className:"graduation-status"},
-				React.DOM.p(null, this.props.moniker,"! You have ", React.DOM.output(null, "X"), " of ", React.DOM.output(null, "Y"), " credits!"),
 			React.DOM.section( {id:"degrees"},
 				React.DOM.h1(null, "Degrees"),
+				React.DOM.p(null, this.props.name,"! You have ", React.DOM.output(null, "X"), " of ", React.DOM.output(null, "Y"), " credits!"),
 				areasOfStudy.degree
 			),
 			React.DOM.section( {id:"majors"}, 
