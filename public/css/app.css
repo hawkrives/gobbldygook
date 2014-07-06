@@ -70,7 +70,8 @@ body {
 .graduation-status {
   -webkit-flex-basis: 300px;
   flex-basis: 300px;
-  margin-right: 15px; }
+  margin-right: 15px;
+  font-size: 14px; }
 
 .graduation-status .area-type-heading {
   font-size: 1em;
@@ -84,9 +85,6 @@ body {
   flex: 1;
   padding: 2.5px 5px;
   border-left: solid 1px #c4c4c4; }
-
-#student-summary {
-  font-size: 14px; }
 
 #student-summary {
   -webkit-hyphens: auto;
