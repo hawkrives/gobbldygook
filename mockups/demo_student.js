@@ -49,9 +49,11 @@ module.exports = {
 			clbids: [123456, 123459, 123460, 123458]
 		},
 	],
+
 	overrides: [
 		{
-
+			what: 'credits',
+			with: 1
 		}
 	],
 
