@@ -6,5 +6,65 @@
 		font-size: inherit;
 		font-weight: 300;
 		margin: 0;
+		z-index: 1;
+		position: relative;
+
+		// blink/webkit suddenly started making the <summary>s extra tall
+		// margin-top: -22px;
+	}
+
+	details {
+		position: relative;
+	}
+
+	$progress-bar-bg: transparent;
+	$progress-bar-color: $olaf-gold;
+	progress {
+		display: block;
+		position: absolute;
+		top: 0;  bottom: 0;
+		left: 0; right: 0;
+
+		width: 100%;
+		height: 100%;
+
+		margin: 0;
+
+		vertical-align: middle;
+		border: 0;
+
+		color: $progress-bar-color;
+		background: $progress-bar-bg;
+
+		border-radius: 3px;
+		overflow: hidden;
+	}
+
+	progress::-moz-progress-bar      { background: $progress-bar-color; }
+	progress::-webkit-progress-value { background: $progress-bar-color; }
+	progress::-webkit-progress-bar   { background: $progress-bar-bg; }
+
+	summary::-webkit-details-marker { display: none; }
+	summary::-moz-details-marker    { display: none; }
+	summary::-ms-details-marker     { display: none; }
+	summary::details-marker         { display: none; }
+
+	summary:focus { outline: 2px solid $black; }
+
+	& > details {
+		summary::after {
+			content: "";
+			position: absolute;
+			top: calc(50% - 6px);
+			right: 8px;
+			@include arrow-down(10px);
+		}
+	}
+
+	& > details[open] {
+		summary::after {
+			content: "";
+			@include arrow-up(10px);
+		}
 	}
 }
