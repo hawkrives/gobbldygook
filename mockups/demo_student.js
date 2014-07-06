@@ -6,34 +6,28 @@ module.exports = {
 	graduation: 2016,
 	studies: [
 		{
-			id: 'ba',
-			type: 'degree',
-			title: 'Bachelor of Arts',
+			id: 'ba', type: 'degree',
+			abbr: 'B.A.', title: 'Bachelor of Arts',
 		},
 		{
-			id: 'bm',
-			type: 'degree',
-			title: 'Bachelor of Music',
+			id: 'bm', type: 'degree',
+			abbr: 'B.M.', title: 'Bachelor of Music',
 		},
 		{
-			id: 'csci',
-			type: 'major',
-			title: 'Computer Science',
+			id: 'csci', type: 'major',
+			abbr: 'CSCI', title: 'Computer Science',
 		},
 		{
-			id: 'asian',
-			type: 'major',
-			title: 'Asian Studies',
+			id: 'asian', type: 'major',
+			abbr: 'ASIAN', title: 'Asian Studies',
 		},
 		{
-			id: 'japan',
-			type: 'concentration',
-			title: 'Japan Studies',
+			id: 'japan', type: 'concentration',
+			abbr: 'JAPAN', title: 'Japan Studies',
 		},
 		{
-			id: 'math',
-			type: 'concentration',
-			title: 'Mathematics',
+			id: 'math', type: 'concentration',
+			abbr: 'MATH', title: 'Mathematics',
 		},
 	],
 	schedules: [
