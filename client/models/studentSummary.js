@@ -41,7 +41,7 @@ var StudentSummary = React.createClass({
 				" in ",
 				React.DOM.span({className: 'area-of-study-list'}, concentrations),
 				"."),
-			React.DOM.p(null, 
+			React.DOM.p({className: 'graduation-message'}, 
 				canGraduate 
 				? "It looks like you'll make it! Just follow the plan, and double-check my output with your advisor a few times." 
 				: "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."),
