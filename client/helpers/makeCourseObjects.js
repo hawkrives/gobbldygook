@@ -8,7 +8,7 @@ function makeCourseObjects(clbids) {
 	return _.map(clbids, function(clbid) {
 		var course;
 
-		return {clbid: clbid}
+		return {clbid: clbid, credits: 1}
 		// getCourse(clbid).then(
 		// 	function(data) { 
 		// 		course = data
