@@ -27,7 +27,8 @@ var StudentSummary = React.createClass({
 
 		var canGraduate = checkElegibilityForGraduation(this.props)
 
-		return React.DOM.article( {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
+		return React.DOM.section( {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
+			React.DOM.div( {id: 'student-letter' }, this.props.name[0] ),
 			React.DOM.p(null, "Hi, ", this.props.name, "!"),
 			React.DOM.p(null, 
 				"You are planning on ", 
