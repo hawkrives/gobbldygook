@@ -23,16 +23,20 @@ var Semester = React.createClass({
 			semesterName = 'Late Summer';
 		}
 
-		var courses = _.map(this.props.courses, function(c) {
+		var activeSchedules = _.filter(this.props.schedules, 'active')
+		var clbids = _.pluck(activeSchedules, 'clbids')
+		var courses = makeCourseObjects(_.uniq(_.flatten(clbids)))
+
+		var courseElements = _.map(courses, function(c) {
 			return Course( {key:c.clbid, info:c} );
 		})
 
-		return (
-			React.DOM.div( {className:"term"}, 
-				React.DOM.header(null, React.DOM.h1(null, semesterName)),
-				React.DOM.div( {className:"course-list"}, 
-					courses
-				)
+		console.log('courses', courseElements)
+
+		return React.DOM.div( {className:"term"}, 
+			React.DOM.header(null, React.DOM.h1(null, semesterName)),
+			React.DOM.div( {className:"course-list"}, 
+				courseElements
 			)
 		);
 	}
