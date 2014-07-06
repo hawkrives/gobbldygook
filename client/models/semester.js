@@ -33,7 +33,7 @@ var Semester = React.createClass({
 
 		console.log('courses', courseElements)
 
-		return React.DOM.div( {className:"term"}, 
+		return React.DOM.div( {className:"semester"}, 
 			React.DOM.header(null, React.DOM.h1(null, semesterName)),
 			React.DOM.div( {className:"course-list"}, 
 				courseElements

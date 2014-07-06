@@ -15,7 +15,7 @@ var CourseTable = React.createClass({
 			});
 			return React.DOM.div( {className:"year", key:year}, 
 				React.DOM.header(null, React.DOM.h1(null, year)),
-				React.DOM.div( {className:"term-list"}, 
+				React.DOM.div( {className:"semester-list"}, 
 					terms
 				)
 			)
