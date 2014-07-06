@@ -15,13 +15,14 @@ body {
   min-height: 100vh;
   margin: 15px; }
 
-.area-of-study, #student-summary, .course-table .year {
+.area-of-study, #student-summary, .add-year, .course-table .year, .add-area-of-study {
   background-color: white;
   -webkit-transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
   transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
   box-shadow: 0px 1px 1.5px rgba(0, 0, 0, 0.12), 0px 3px 3px transparent, 0px 10px 10px transparent, 0px 14px 14px transparent, 0px 19px 19px transparent;
-  border-radius: 3px; }
-  .area-of-study:hover, #student-summary:hover, .course-table .year:hover {
+  border-radius: 3px;
+  border: 0; }
+  .area-of-study:hover, #student-summary:hover, .add-year:hover, .course-table .year:hover, .add-area-of-study:hover {
     -webkit-transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
     transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: 0px 1px 1.5px transparent, 0px 3px 3px rgba(0, 0, 0, 0.16), 0px 10px 10px transparent, 0px 14px 14px transparent, 0px 19px 19px transparent; }
@@ -96,6 +97,12 @@ body {
   -webkit-flex: 1;
   flex: 1; }
 
+.add-year {
+  width: 100%;
+  font-weight: 100;
+  font-size: 1.25em;
+  cursor: pointer; }
+
 .course-table .year {
   margin-bottom: 15px;
   display: -webkit-flex;
@@ -121,8 +128,6 @@ body {
   text-align: center;
   font-weight: 200;
   font-size: 0.9em; }
-  .course-table .year-title .year-start, .course-table .year-title .year-end {
-    display: block; }
   .course-table .year-title .year-divider {
     display: inline-block;
     padding: 0.25em 0; }
@@ -139,12 +144,30 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   text-transform: uppercase; }
+  .graduation-status .area-type-heading h1, .graduation-status .area-type-heading h2, .graduation-status .area-type-heading h3, .graduation-status .area-type-heading h4, .graduation-status .area-type-heading h5, .graduation-status .area-type-heading h6 {
+    font-weight: inherit;
+    font-size: inherit;
+    margin: 0;
+    display: inline-block;
+    padding: 5px 0 3px; }
+
+.add-area-of-study {
+  margin-left: 1em;
+  cursor: pointer; }
 
 .semester {
   -webkit-flex: 1;
   flex: 1;
   padding: 2.5px 5px;
   border-left: solid 1px #c4c4c4; }
+
+.add-semester {
+  background: transparent;
+  border: none;
+  border-left: solid 1px #c4c4c4;
+  width: 32px;
+  cursor: pointer;
+  font-size: 1.25em; }
 
 #student-summary {
   padding: 5px; }

@@ -28,15 +28,24 @@ var GraduationStatus = React.createClass({
 		return React.DOM.section( {className:"graduation-status"},
 			StudentSummary( _.merge(this.props, {courses: courses}) ),
 			React.DOM.section( {id:"degrees"},
-				React.DOM.h1({className: 'area-type-heading'}, "Degrees"),
+				React.DOM.header({className: 'area-type-heading'},
+					React.DOM.h1(null, "Degrees"),
+					React.DOM.button({className: "add-area-of-study"}, "+")
+				),
 				areasOfStudy.degree
 			),
 			React.DOM.section( {id:"majors"},
-				React.DOM.h1({className: 'area-type-heading'}, "Majors"),
+				React.DOM.header({className: 'area-type-heading'},
+					React.DOM.h1(null, "Majors"),
+					React.DOM.button({className: "add-area-of-study"}, "+")
+				),
 				areasOfStudy.major
 			),
 			React.DOM.section( {id:"concentrations"},
-				React.DOM.h1({className: 'area-type-heading'}, "Concentrations"),
+				React.DOM.header({className: 'area-type-heading'},
+					React.DOM.h1(null, "Concentrations"),
+					React.DOM.button({className: "add-area-of-study"}, "+")
+				),
 				areasOfStudy.concentration
 			)
 		)

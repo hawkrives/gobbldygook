@@ -13,5 +13,19 @@
 	margin-top: 0;
 	margin-bottom: 0;
 	text-transform: uppercase;
+
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: inherit;
+		font-size: inherit;
+		margin: 0;
+		display: inline-block;
+
+		padding: 5px 0 3px;
+	}
 }
 
+.add-area-of-study {
+	@extend %block;
+	margin-left: 1em;
+	cursor: pointer;
+}

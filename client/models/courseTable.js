@@ -21,11 +21,15 @@ var CourseTable = React.createClass({
 						React.DOM.span({className: "year-end"}, parseInt(year, 10) + 1)
 					)
 				),
-				terms
+				terms,
+				React.DOM.button({className: "add-semester"}, "+")
 			)
 		}, this);
-		console.log('years', years);
-		return React.DOM.div( {className:"course-table"}, years );
+
+		return React.DOM.div( {className:"course-table"}, 
+			years,
+			React.DOM.button({className: "add-year"}, "+")
+		);
 	}
 });
 
