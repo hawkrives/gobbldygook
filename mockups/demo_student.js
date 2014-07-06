@@ -136,6 +136,6 @@ module.exports = {
 	clbids: function() {
 		var activeSchedules = _.filter(this.schedules, 'active')
 		var clbids = _.pluck(activeSchedules, 'clbids')
-		return _.flatten(clbids)
+		return _.uniq(_.flatten(clbids))
 	}
 }
