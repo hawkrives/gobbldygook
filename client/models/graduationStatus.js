@@ -21,7 +21,7 @@ var GraduationStatus = React.createClass({
 				area.key = area.title
 				area.courses = courses
 				return AreaOfStudy(area)
-			}) 
+			})
 		})
 
 		return React.DOM.section( {className:"graduation-status"},
@@ -30,11 +30,11 @@ var GraduationStatus = React.createClass({
 				React.DOM.p(null, this.props.name,"! You have ", React.DOM.output(null, "X"), " of ", React.DOM.output(null, "Y"), " credits!"),
 				areasOfStudy.degree
 			),
-			React.DOM.section( {id:"majors"}, 
+			React.DOM.section( {id:"majors"},
 				React.DOM.h1(null, "Majors"),
 				areasOfStudy.major
 			),
-			React.DOM.section( {id:"concentrations"}, 
+			React.DOM.section( {id:"concentrations"},
 				React.DOM.h1(null, "Concentrations"),
 				areasOfStudy.concentration
 			)
