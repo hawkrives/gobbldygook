@@ -232,7 +232,7 @@ function dedicatedMusicMajor(studies, courses) {
 	// formally as soon as possible by submitting a completed declaration of
 	// major form to the Music Department office. Subsequent changes are
 	// allowed, but students are encouraged to keep their records current,
-	// documenting any changes with re-submissions of the same form. 
+	// documenting any changes with re-submissions of the same form.
 
 	// Other regulations are:
 
@@ -310,8 +310,6 @@ function finalTwoYearsInResidence(student) {
 
 	return false
 }
-
-
 
 function seventeenOlafCourses(student) {
 	// "17 of the last 20 full-course credits must be earned through St. Olaf."
@@ -426,7 +424,7 @@ function checkBachelorOfArtsRequirements(student) {
 }
 
 function checkBachelorOfMusicRequirements(student) {
-	// Requirements taken from 
+	// Requirements taken from
 	// http://www.stolaf.edu/catalog/1314/academiclife/bm-gen-grad-requirements.html
 
 	var bachelorOfMusicRequirements = {
