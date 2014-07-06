@@ -19,8 +19,10 @@ var AreaOfStudy = React.createClass({
 		}, this);
 
 		return React.DOM.article( {id:areaDetails.id, className:"area-of-study"},
-			React.DOM.h1(null, areaDetails.title, ", " , areaDetails.type),
-			requirementSets
+			React.DOM.details(null,
+				React.DOM.summary(null, React.DOM.h1(null, areaDetails.title)),
+				requirementSets
+			)
 		);
 	}
 });
