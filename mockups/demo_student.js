@@ -17,6 +17,10 @@ module.exports = {
 			abbr: 'B.M.', title: 'Bachelor of Music',
 		},
 		{
+			id: 'chmus', type: 'major',
+			abbr: 'CHMUS', title: 'Church Music',
+		},
+		{
 			id: 'csci', type: 'major',
 			abbr: 'CSCI', title: 'Computer Science',
 		},
