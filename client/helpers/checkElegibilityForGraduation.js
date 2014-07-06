@@ -201,6 +201,34 @@ function beyondTheMajor(studies, courses) {
 	return _.every(_.filter(studies, {type: 'major'}), twentyOneCreditsAndBeyond(courses))
 }
 
+function onlyFullCreditCourses(course) {
+	return course.credits >= 1.0
+}
+
+function seventeenOlafCourses(student) {
+	// "17 of the last 20 full-course credits must be earned through St. Olaf."
+	if (_.size(student.courses) < 20) {
+		return false
+	}
+
+	var fullCreditCourses = _.filter(student.courses, onlyFullCreditCourses)
+
+	// Put the most recent courses at the front
+	var sortedFullCreditCourses = _.sortBy(fullCreditCourses, 'term').reverse()
+
+	// Get just the most recent 20 courses
+	var lastTwentyFullCreditCourses = _.first(sortedFullCreditCourses, 20)
+
+	// Reject all of the fabricated courses
+	var notFabricatedFullCreditCourses = _.reject(lastTwentyFullCreditCourses, { alteration: 'fabricated' })
+
+	if (_.size(notFabricatedFullCreditCourses) < 17) {
+		return false
+	}
+
+	return true
+}
+
 function artsAndMusicDoubleMajor(student) {
 	// 	Students must meet the application requirements for both the Bachelor
 	// 	of Arts and Bachelor of Music degree programs.
@@ -262,20 +290,8 @@ function artsAndMusicDoubleMajor(student) {
 		return false
 	}
 
-	var fullCreditCourses = _.filter(student.courses, function(course) {
-		return course.credits >= 1.0
-	})
-
-	// Put the most recent courses at the front
-	var sortedFullCreditCourses = _.sortBy(fullCreditCourses, 'term').reverse()
-
-	// Get just the most recent 20 courses
-	var lastTwentyFullCreditCourses = _.first(sortedFullCreditCourses, 20)
-
-	// Reject all of the fabricated courses
-	var notFabricatedFullCreditCourses = _.reject(lastTwentyFullCreditCourses, { alteration: 'fabricated' })
-
-	if (_.size(notFabricatedFullCreditCourses) < 17) {
+	// "17 of the last 20 full-course credits must be earned through St. Olaf."
+	if (!seventeenOlafCourses(student)) {
 		return false
 	}
 
