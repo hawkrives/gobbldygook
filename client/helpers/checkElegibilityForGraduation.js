@@ -168,7 +168,18 @@ function gradedCourses(student) {
 	return _.size(student.courses) - _.size(student.fabrications) >= 24
 }
 
-function major(studies, courses) {
+var hasDepartment = _.curry(function(dept, course) {
+	// _.curry allows the function to be called with arguments multiple times.
+	return _.contains(course.depts, dept)
+})
+
+var atLeastEightCredits = _.curry(function(major, courses) {
+	var withinMajorCourses = _.filter(courses, hasDepartment(major.abbr))
+	var fullCreditBeyondMajorCourses = _.filter(withinMajorCourses, onlyFullCreditCourses)
+	return countCredits(fullCreditCourses) >= 8
+})
+
+function artsMajor(studies, courses) {
 	// One completed major is required for graduation. Depending on the
 	// department or interdisciplinary program, the number of courses required
 	// for a major ranges from eight to twelve courses, with some departments
@@ -207,20 +218,21 @@ function major(studies, courses) {
 	// is sought.
 	// NOTE: Ignored, because this doesn't know about major requirements.
 
-	return _.size(_.filter(studies, {type: 'major'}) >= 1
+	var majors = _.filter(studies, {type: 'major'})
+
+	return _.size(majors) >= 1 && _.every(majors, atLeastEightCredits(courses))
 }
 
-var hasDepartment = _.curry(function(dept, course) {
-	// _.curry allows the function to be called with arguments multiple times.
-	return _.contains(course.depts, dept)
-})
 
 var twentyOneCreditsAndBeyond = _.curry(function(courses, major) {
 	// Takes the courses *outside* of the major department, and counts them.
 
 	// _.curry allows the function to be called with arguments multiple times.
 	// also, remember: reject !== filter.
-	return _.size(_.reject(courses, hasDepartment(major.abbr))) >= 21
+
+	var beyondMajorCourses = _.reject(courses, hasDepartment(major.abbr))
+	var fullCreditBeyondMajorCourses = _.filter(beyondMajorCourses, onlyFullCreditCourses)
+	return countCredits(fullCreditCourses) >= 21
 })
 
 function beyondTheMajor(studies, courses) {
