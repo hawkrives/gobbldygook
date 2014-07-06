@@ -10,7 +10,6 @@
 
 %block-small {
 	@extend %block;
-	padding: $block-edge-padding;
 	margin-bottom: $block-edge-padding * 2;
 
 	p:last-child {

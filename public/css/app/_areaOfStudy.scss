@@ -2,6 +2,7 @@
 	@extend %block-small;
 
 	h1 {
+		padding: $block-edge-padding;
 		font-size: inherit;
 		font-weight: 300;
 		margin: 0;
