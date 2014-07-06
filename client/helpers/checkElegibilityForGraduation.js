@@ -205,7 +205,7 @@ function finalTwoYearsInResidence(student) {
 	// "The final two years of coursework in pursuit of the degrees must be
 	// spent in residence."
 
-	var years = _.pluck(student.fabrications, 'year')
+	var years = _.uniq(_.pluck(student.fabrications, 'year'))
 
 	if (_.size(years) >= 2) {
 		var sortedYears = _.sortBy(years).reverse()
