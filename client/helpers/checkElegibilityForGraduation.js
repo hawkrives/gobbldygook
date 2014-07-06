@@ -2,6 +2,10 @@ var _ = require('lodash')
 var add = require('./add')
 var count = require('./count')
 
+function countCredits(courses) {
+	return _.reduce(_.pluck(courses, 'credits'), add)
+}
+
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a
 	// combination of full-credit and fractional-credit courses.
@@ -10,7 +14,7 @@ function courses(coursesTaken, creditsNeeded) {
 	// course credit, as distinguished from fractional course credits, unless
 	// otherwise noted.
 
-	var creditsTaken = _.reduce(_.pluck(coursesTaken, 'credits'), add)
+	var creditsTaken = countCredits(coursesTaken, 'credits')
 
 	return creditsTaken >= creditsNeeded
 }
@@ -25,7 +29,7 @@ function ensureLimitedOffCampusCoursesDuringFinalYear(student) {
 
 	return (
 		_.isEmpty(finalYearFabrications) ||
-		_.reduce(finalYearFabrications, 'credits') <= 3
+		countCredits(finalYearFabrications) <= 3
 	)
 }
 
