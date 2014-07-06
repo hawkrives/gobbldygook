@@ -53,6 +53,22 @@ function residency(student) {
 	)
 }
 
+function onlyFullCreditCourses(course) {
+	return course.credits >= 1.0
+}
+
+function onlyFullCreditInterimCourses(course) {
+	return (course.semester === 2 && onlyFullCreditCourses(course))
+}
+
+function onlySummerSessionCourses(course) {
+	return course.semester === 4 || course.semester === 5
+}
+
+function onlyFullCreditSummerSessionCourses(course) {
+	return (onlySummerSessionCourses(course) && onlyFullCreditCourses(course))
+}
+
 function interim(courses) {
 	// At least three of the required 35 St. Olaf credits must be earned in
 	// three separate January full-credit (1.0) Interims. An Interim may be
@@ -64,7 +80,24 @@ function interim(courses) {
 	// requirement by means of a summer course taken during a St. Olaf summer
 	// session after the commencement in which the student participates.
 
-	return _.size(_.filter(courses, {term: 2})) >= 3
+	var interimCourses = _.filter(courses, onlyFullCreditInterimCourses)
+	var interimCourseCount = _.size(interimCourses)
+
+	// "After having successfully completed two Interims, senior participators
+	// may satisfy the third Interim requirement by means of a summer course
+	// taken during a St. Olaf summer session after the commencement in which
+	// the student participates."
+	var years = _.uniq(_.pluck(student.fabrications, 'year'))
+	var finalYear = _.max(years)
+
+	var summerSessionCourses = _.filter(courses, onlyFullCreditSummerSessionCourses)
+	var finalSummerSessionCourses = _.filter(summerSessionCourses, {year: finalYear})
+	var finalSummerSessionCourseCount = _.size(finalSummerSessionCourses)
+
+	return (
+		interimCourseCount >= 3 ||
+		(interimCourseCount >= 2 && finalSummerSessionCourseCount >= 1)
+	)
 }
 
 function gpa(student) {
@@ -226,9 +259,7 @@ function finalTwoYearsInResidence(student) {
 	return false
 }
 
-function onlyFullCreditCourses(course) {
-	return course.credits >= 1.0
-}
+
 
 function seventeenOlafCourses(student) {
 	// "17 of the last 20 full-course credits must be earned through St. Olaf."
