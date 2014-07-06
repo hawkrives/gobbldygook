@@ -1,0 +1,14 @@
+{
+    "asi": true,
+    "browser": true,
+    "curly": false,
+    "devel": true,
+    "expr": true,
+    "indent": 4,
+    "loopfunc": true,
+    "node": false,
+    "trailing": true,
+    "undef": true,
+    "white": true,
+    "predef": ["require", "module"]
+}

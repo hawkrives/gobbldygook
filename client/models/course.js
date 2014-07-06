@@ -1,20 +1,10 @@
 var _ = require('lodash')
-var AmpersandModel = require('ampersand-model')
+var React = require('react')
 
-
-module.exports = AmpersandModel.extend({
-	props: {
-		clbid: ['number', true, 0],
-		yearTaken: ['number', true, 1874],
-		semesterTaken: ['number', true, 0]
-	},
-	derived: {
-		details: {
-			deps: ['clbid'],
-			cache: true,
-			fn: function() {
-				return getCourse(this.clbid)
-			}
-		}
+var Course = React.createClass({
+	render: function() {
+		return React.DOM.div(null, this.props.info.clbid);
 	}
 })
+
+module.exports = Course

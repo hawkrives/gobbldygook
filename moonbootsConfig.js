@@ -1,6 +1,6 @@
 var config = require('getconfig');
 var stylizer = require('stylizer');
-var templatizer = require('templatizer');
+// var templatizer = require('templatizer');
 
 // for reuse
 var appDir = __dirname + '/client';
@@ -19,17 +19,22 @@ module.exports = {
     moonboots: {
         // The base name of the javascript file served in the <script src="the_name.*.js">
         jsFileName: 'gobbldygook',
+        
         // The base name of the javascript file served in the <link rel="stylesheet" src="the_name.*.js">
         cssFileName: 'gobbldygook',
+        
         main: appDir + '/app.js',
         developmentMode: config.isDev,
+
         // Specify any non-commonjs libraries we wish to include.
         // You can think of this as your list of <script> tags in your HTML.
         // These will simply be included before any of your application code in the
         // order you provide them. So for example, if you're using jQuery make sure
         // you list any plugins after jQuery itself.
         libraries: [
-            appDir + '/libraries/zepto/zepto.js'
+            appDir + '/libraries/zepto/zepto.js',
+            // appDir + '/libraries/react/JSXTransformer.js',
+            // appDir + '/libraries/react/react.js',
         ],
         // Specify the stylesheets we want to bundle
         stylesheets: [
@@ -41,7 +46,7 @@ module.exports = {
             // js file is requested. Which means you can seamlessly change jade and
             // refresh in your browser to get new templates.
             if (config.isDev) {
-                templatizer(__dirname + '/templates', appDir + '/templates.js');
+                // templatizer(__dirname + '/templates', appDir + '/templates.js');
             }
         },
         beforeBuildCSS: function (done) {

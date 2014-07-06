@@ -22,16 +22,10 @@
     "tape-run": "^0.1.1"
   },
   "dependencies": {
-    "ampersand-form-view": "^1.0.0",
-    "ampersand-input-view": "^1.2.3",
-    "ampersand-model": "^3.0.1",
-    "ampersand-rest-collection": "^1.1.0",
-    "ampersand-router": "^1.0.1",
-    "ampersand-view": "6.0.3",
-    "ampersand-view-switcher": "^1.0.2",
     "andlog": "^1.0.0",
     "async": "^0.9.0",
     "clientconfig": "^1.0.0",
+    "cortex": "^5.3.1",
     "domready": "^1.0.5",
     "envify": "^1.2.1",
     "favicon-setter": "^0.1.1",
@@ -40,22 +34,11 @@
     "loading-stats": "0.0.2",
     "lodash": "^2.4.1",
     "moonboots_hapi": "2.x.x",
+    "mori": "^0.2.6",
     "react": "^0.10.0",
     "stylizer": "^0.7.0",
     "system-requirements": "0.0.2",
     "templatizer": "^0.3.5",
     "underscore": "^1.6.0"
-  },
-  "jshintConfig": {
-    "asi": true,
-    "browser": true,
-    "curly": false,
-    "expr": true,
-    "indent": 4,
-    "loopfunc": true,
-    "node": false,
-    "trailing": true,
-    "undef": true,
-    "white": true
   }
 }
