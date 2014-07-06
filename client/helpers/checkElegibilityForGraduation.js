@@ -201,6 +201,31 @@ function beyondTheMajor(studies, courses) {
 	return _.every(_.filter(studies, {type: 'major'}), twentyOneCreditsAndBeyond(courses))
 }
 
+function finalTwoYearsInResidence(student) {
+	// "The final two years of coursework in pursuit of the degrees must be
+	// spent in residence."
+
+	var years = _.pluck(student.fabrications, 'year')
+
+	if (_.size(years) >= 2) {
+		var sortedYears = _.sortBy(years).reverse()
+		var finalYear = years[0]
+		var secondFinalYear = years[1]
+		var finalYearFabrications = _.filter(student.fabrications, {year: finalYear})
+		var secondFinalYearFabrications = _.filter(student.fabrications, {year: finalYear})
+
+		if ( !_.every(
+			[_.isEmpty(finalYearFabrications), _.isEmpty(secondFinalYearFabrications)]
+		) ) {
+			return false
+		}
+
+		return true
+	}
+
+	return false
+}
+
 function onlyFullCreditCourses(course) {
 	return course.credits >= 1.0
 }
@@ -269,24 +294,7 @@ function artsAndMusicDoubleMajor(student) {
 
 	// "The final two years of coursework in pursuit of the degrees must be
 	// spent in residence."
-	var years = _.pluck(student.fabrications, 'year')
-	if (_.size(years) >= 2) {
-		var sortedYears = _.sortBy(years).reverse()
-		var finalYear = years[0]
-		var secondFinalYear = years[1]
-		var finalYearFabrications = _.filter(student.fabrications, {year: finalYear})
-		var secondFinalYearFabrications = _.filter(student.fabrications, {year: finalYear})
-
-		if ( !_.every([
-			_.isEmpty(finalYearFabrications),
-			_.isEmpty(secondFinalYearFabrications)])
-		) {
-			return false
-		}
-	}
-
-	// "17 of the last 20 full-course credits must be earned through St. Olaf."
-	if (_.size(student.courses) < 20) {
+	if (!finalTwoYearsInResidence(student)) {
 		return false
 	}
 
