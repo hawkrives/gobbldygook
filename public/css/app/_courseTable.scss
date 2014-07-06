@@ -1,0 +1,18 @@
+.course-table {
+	-webkit-flex: 1;
+	flex: 1;
+}
+
+.course-table .year {
+	@extend %block;
+}
+
+.course-table .year > header, .course-table .semester > header {
+	display: inline-block;
+	h1, h2, h3, h4, h5, h6 {
+		font-size: 1em;
+		font-weight: normal;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}

@@ -1,0 +1,14 @@
+#student-summary {
+	@extend %block-small;
+}
+
+#student-summary {
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
+#student-letter {
+	@include avatar-letter(48px);
+	float: left;
+	margin-right: 5px;
+}

@@ -1,2 +1,91 @@
+* {
+  box-sizing: border-box; }
+
 body {
-  background: white; }
+  font-family: "Fira Sans", "Open Sans", "Helvetica", "Verdana", sans-serif;
+  background-image: -webkit-linear-gradient(top, #e8e8e8, #e3e3e3);
+  background-image: linear-gradient(top, #e8e8e8, #e3e3e3); }
+
+.graduation-status .area-of-study, #student-summary, .course-table .year {
+  background-color: white;
+  -webkit-transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 1px 1.5px rgba(0, 0, 0, 0.12), 0px 3px 3px transparent, 0px 10px 10px transparent, 0px 14px 14px transparent, 0px 19px 19px transparent;
+  border-radius: 3px; }
+  .graduation-status .area-of-study:hover, #student-summary:hover, .course-table .year:hover {
+    -webkit-transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 1px 1.5px transparent, 0px 3px 3px rgba(0, 0, 0, 0.16), 0px 10px 10px transparent, 0px 14px 14px transparent, 0px 19px 19px transparent; }
+
+.graduation-status .area-of-study, #student-summary {
+  padding: 5px;
+  margin-bottom: 10px; }
+  .graduation-status .area-of-study p:last-child, #student-summary p:last-child {
+    margin-bottom: 0; }
+
+.course-table {
+  -webkit-flex: 1;
+  flex: 1; }
+
+.course-table .year > header, .course-table .semester > header {
+  display: inline-block; }
+  .course-table .year > header h1, .course-table .year > header h2, .course-table .year > header h3, .course-table .year > header h4, .course-table .year > header h5, .course-table .year > header h6, .course-table .semester > header h1, .course-table .semester > header h2, .course-table .semester > header h3, .course-table .semester > header h4, .course-table .semester > header h5, .course-table .semester > header h6 {
+    font-size: 1em;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 0; }
+
+.graduation-status {
+  -webkit-flex-basis: 300px;
+  flex-basis: 300px;
+  margin-right: 15px; }
+
+.graduation-status > section h1 {
+  font-size: 1em;
+  font-weight: normal;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-transform: uppercase; }
+
+#student-summary {
+  -webkit-hyphens: auto;
+  hyphens: auto; }
+
+#student-letter {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  font-size: 24px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: default;
+  border-radius: 48px;
+  -webkit-transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 1px 1.5px rgba(0, 0, 0, 0.12), 0px 3px 3px transparent, 0px 10px 10px transparent, 0px 14px 14px transparent, 0px 19px 19px transparent;
+  color: #c3931e;
+  float: left;
+  margin-right: 5px; }
+  #student-letter:hover {
+    -webkit-transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 1px 1.5px transparent, 0px 3px 3px rgba(0, 0, 0, 0.16), 0px 10px 10px transparent, 0px 14px 14px transparent, 0px 19px 19px transparent; }
+
+.student {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between; }

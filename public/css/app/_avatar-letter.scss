@@ -1,0 +1,29 @@
+@mixin avatar-letter($size) {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	font-style: normal;
+	font-weight: normal;
+	text-align: center;
+	text-transform: uppercase;
+	margin: 0;
+	padding: 0;
+
+	width: $size; 
+	height: $size;  
+	line-height: $size; 
+	font-size: $size/2;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	cursor: default;
+
+	border-radius: $size;
+
+	@include material-shadow(1);
+	&:hover  { @include material-shadow(2); }
+
+	color: $olaf-gold;
+}

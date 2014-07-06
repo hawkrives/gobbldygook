@@ -1,6 +1,11 @@
-// app/layout.styl
+@import "_molecules";
 
-// your styles here:
-body {
-	background: white;
-}
+@import "_areaOfStudy";
+@import "_course";
+@import "_courseTable";
+@import "_graduationStatus";
+@import "_requirement";
+@import "_requirementSet";
+@import "_semester";
+@import "_studentSummary";
+@import "_student";

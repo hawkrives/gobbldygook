@@ -1,0 +1,19 @@
+@import "_z-shadow";
+@import "_avatar-letter";
+
+%block {
+	background-color: white;
+	@include material-shadow(1);
+    &:hover  { @include material-shadow(2); }
+	border-radius: 3px;
+}
+
+%block-small {
+	@extend %block;
+	padding: 5px;
+	margin-bottom: 10px;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
