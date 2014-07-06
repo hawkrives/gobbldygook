@@ -1,4 +1,6 @@
 .area-of-study {
+	@extend %block-small;
+
 	h1 {
 		font-size: inherit;
 		font-weight: 300;
