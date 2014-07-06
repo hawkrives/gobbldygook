@@ -3,6 +3,8 @@ var React = require('react')
 
 var Course = require('./course')
 
+var makeCourseObjects = require('../helpers/makeCourseObjects')
+
 var Semester = React.createClass({
 	render: function() {
 		console.log('semester render')

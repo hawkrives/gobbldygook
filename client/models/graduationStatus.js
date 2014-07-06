@@ -3,21 +3,7 @@ var React = require('react');
 
 var AreaOfStudy = require('./areaOfStudy');
 
-function makeCourseObjects(clbids) {
-	// Takes a list of clbids, and returns a list of the course objects for 
-	// those clbids.
-	return _.map(clbids, function(clbid) {
-		var course;
-
-        getCourse(clbid).then(
-        	function(data) { 
-        		course = data
-        	}
-        )
-
-        return course;
-	})
-}
+var makeCourseObjects = require('../helpers/makeCourseObjects')
 
 var GraduationStatus = React.createClass({
     getInitialState: function() {
