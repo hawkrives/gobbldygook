@@ -301,6 +301,23 @@ function seventeenOlafCourses(student) {
 	return true
 }
 
+function checkStudentDegreesFor(student, desiredDegreeAbbreviation) {
+	var degrees = _.filter(student.studies, {type: 'degree'})
+	return _.size(_.find(degrees, {abbr: desiredDegreeAbbreviation})) >= 1 ? true : false
+}
+
+function isBachelorOfMusic(student) {
+	return checkStudentDegreesFor('B.M.')
+}
+
+function isBachelorOfArt(student) {
+	return checkStudentDegreesFor('B.A.')
+}
+
+function isBachelorOfBoth(student) {
+	return isBachelorOfMusic(student) && isBachelorOfArt(student)
+}
+
 function artsAndMusicDoubleMajor(student) {
 	// 	Students must meet the application requirements for both the Bachelor
 	// 	of Arts and Bachelor of Music degree programs.
@@ -327,14 +344,14 @@ function artsAndMusicDoubleMajor(student) {
 	// graduation major within that degree before the diploma for that degree will
 	// be awarded.
 
-	var degrees = _.filter(studies, {type: 'degree'})
+	var degrees = _.filter(student.studies, {type: 'degree'})
 	if (_.size(degrees) === 1) {
 		// there's only one degree, so we don't care.
 		return true
 	}
 
-	var majors = _.filter(studies, {type: 'major'})
-	if (_.find(degrees, {abbr: 'B.A.'}) && _.find(majors, {abbr: 'MUSIC'})) {
+	var majors = _.filter(student.studies, {type: 'major'})
+	if (isBachelorOfBoth(student) && _.find(majors, {abbr: 'MUSIC'})) {
 		// there's a double-ba-bm trying to major in Music -- no.
 		return false
 	}
