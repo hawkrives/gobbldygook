@@ -4,6 +4,9 @@ module.exports = {
 	name: 'Hawken MacKay Rives',
 	enrolled: 2012,
 	graduation: 2016,
+
+	creditsNeeded: 35,
+
 	studies: [
 		{
 			id: 'ba', type: 'degree',
@@ -30,6 +33,7 @@ module.exports = {
 			abbr: 'MATH', title: 'Mathematics',
 		},
 	],
+
 	schedules: [
 		{
 			id: 1, year: 2012, semester: 1,
