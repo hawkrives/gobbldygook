@@ -5,14 +5,48 @@
 
 .course-table .year {
 	@extend %block;
+
+	margin-bottom: $page-edge-padding;
+
+	display: -webkit-flex;
+	-webkit-flex-flow: row nowrap;
+	display: flex;
+	flex-flow: row nowrap;
 }
 
-.course-table .year > header, .course-table .semester > header {
-	display: inline-block;
+.course-table .year-title, .course-table .semester-title {
 	h1, h2, h3, h4, h5, h6 {
-		font-size: 1em;
-		font-weight: normal;
+		font-size: inherit;
+		font-weight: inherit;
 		margin-top: 0;
 		margin-bottom: 0;
+	}
+}
+
+.course-table .year-title {
+	width: 2em;
+	padding: 0.5em 0.75em;
+
+	@extend %no-select;
+	
+	-webkit-font-feature-settings: "tnum";
+	-moz-font-feature-settings: "tnum";
+	font-feature-settings: "tnum";
+	
+	line-height: 1.15em;
+	letter-spacing: 1em;
+	word-wrap: break-word;
+	text-align: center;
+
+	font-weight: 200;
+	font-size: 0.9em;
+
+	.year-start, .year-end {
+		display: block;
+	}
+
+	.year-divider {
+		display: inline-block;
+		padding: 0.25em 0; 
 	}
 }

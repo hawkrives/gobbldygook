@@ -17,4 +17,8 @@
 	@include avatar-letter(48px);
 	float: left;
 	margin-right: $block-edge-padding;
+
+	.cannot-graduate & {
+		color: pink;
+	}
 }

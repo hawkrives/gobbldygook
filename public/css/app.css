@@ -1,10 +1,19 @@
+.course-table .year-title, #student-letter {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: default; }
+
 * {
   box-sizing: border-box; }
 
 body {
   font-family: "Fira Sans", "Open Sans", "Helvetica", "Verdana", sans-serif;
   background-image: -webkit-linear-gradient(top, #e8e8e8, #e3e3e3);
-  background-image: linear-gradient(top, #e8e8e8, #e3e3e3); }
+  background-image: linear-gradient(top, #e8e8e8, #e3e3e3);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 15px; }
 
 .graduation-status .area-of-study, #student-summary, .course-table .year {
   background-color: white;
@@ -27,13 +36,36 @@ body {
   -webkit-flex: 1;
   flex: 1; }
 
-.course-table .year > header, .course-table .semester > header {
-  display: inline-block; }
-  .course-table .year > header h1, .course-table .year > header h2, .course-table .year > header h3, .course-table .year > header h4, .course-table .year > header h5, .course-table .year > header h6, .course-table .semester > header h1, .course-table .semester > header h2, .course-table .semester > header h3, .course-table .semester > header h4, .course-table .semester > header h5, .course-table .semester > header h6 {
-    font-size: 1em;
-    font-weight: normal;
-    margin-top: 0;
-    margin-bottom: 0; }
+.course-table .year {
+  margin-bottom: 15px;
+  display: -webkit-flex;
+  -webkit-flex-flow: row nowrap;
+  display: flex;
+  flex-flow: row nowrap; }
+
+.course-table .year-title h1, .course-table .year-title h2, .course-table .year-title h3, .course-table .year-title h4, .course-table .year-title h5, .course-table .year-title h6, .course-table .semester-title h1, .course-table .semester-title h2, .course-table .semester-title h3, .course-table .semester-title h4, .course-table .semester-title h5, .course-table .semester-title h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin-top: 0;
+  margin-bottom: 0; }
+
+.course-table .year-title {
+  width: 2em;
+  padding: 0.5em 0.75em;
+  -webkit-font-feature-settings: "tnum";
+  -moz-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
+  line-height: 1.15em;
+  letter-spacing: 1em;
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: 200;
+  font-size: 0.9em; }
+  .course-table .year-title .year-start, .course-table .year-title .year-end {
+    display: block; }
+  .course-table .year-title .year-divider {
+    display: inline-block;
+    padding: 0.25em 0; }
 
 .graduation-status {
   -webkit-flex-basis: 300px;
@@ -46,6 +78,12 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   text-transform: uppercase; }
+
+.semester {
+  -webkit-flex: 1;
+  flex: 1;
+  padding: 2.5px 5px;
+  border-left: solid 1px #c4c4c4; }
 
 #student-summary {
   font-size: 14px; }
@@ -71,10 +109,6 @@ body {
   height: 48px;
   line-height: 48px;
   font-size: 24px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  cursor: default;
   border-radius: 48px;
   -webkit-transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
   transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
@@ -86,6 +120,8 @@ body {
     -webkit-transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
     transition: box-shadow 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: 0px 1px 1.5px transparent, 0px 3px 3px rgba(0, 0, 0, 0.16), 0px 10px 10px transparent, 0px 14px 14px transparent, 0px 19px 19px transparent; }
+  .cannot-graduate #student-letter {
+    color: pink; }
 
 .student {
   display: -webkit-flex;

@@ -4,7 +4,7 @@
 %block {
 	background-color: white;
 	@include material-shadow(1);
-    &:hover  { @include material-shadow(2); }
+	&:hover { @include material-shadow(2); }
 	border-radius: 3px;
 }
 
