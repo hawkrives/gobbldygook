@@ -223,6 +223,16 @@ function artsMajor(studies, courses) {
 	return _.size(majors) >= 1 && _.every(majors, atLeastEightCredits(courses))
 }
 
+function onlyMusicMajors(major) {
+	return _.any([
+		major.title === "Performance",
+		major.title === "Church Music",
+		major.title === "Theory-Composition",
+		major.title === "Music Education",
+		major.title === "Elective Studies"
+	])
+}
+
 function dedicatedMusicMajor(studies, courses) {
 	// B.M. candidates must choose from the five majors offered. Please
 	// consult the Music Department listing in this catalog for specific major
@@ -257,7 +267,9 @@ function dedicatedMusicMajor(studies, courses) {
 
 	var majors = _.filter(studies, {type: 'major'})
 
-	return _.size(majors) >= 1 && _.every(majors, atLeastEightCredits(courses))
+	var musicMajors = _.filter(majors, onlyMusicMajors)
+
+	return _.size(musicMajors) >= 1 && _.every(musicMajors, atLeastEightCredits(courses))
 }
 
 var twentyOneCreditsAndBeyond = _.curry(function(courses, major) {
