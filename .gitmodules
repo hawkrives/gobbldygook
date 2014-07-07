@@ -1,0 +1,3 @@
+[submodule "public/data/courses"]
+	path = public/data/courses
+	url = git@github.com:hawkrives/gobbldygook-data.git
