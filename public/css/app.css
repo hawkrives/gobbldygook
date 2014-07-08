@@ -74,24 +74,11 @@ body {
 .area-of-study summary:focus {
   outline: 2px solid #111111; }
 .area-of-study > details summary::after {
-  content: "";
   position: absolute;
   top: calc(50% - 6px);
-  right: 8px;
-  width: 0;
-  height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-bottom-width: 0;
-  border-top: 10px solid black; }
+  right: 8px; }
 .area-of-study > details[open] summary::after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top-width: 0;
-  border-bottom: 10px solid black; }
+  content: "\f153"; }
 
 .course-table {
   -webkit-flex: 1;

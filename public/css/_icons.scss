@@ -1,0 +1,16 @@
+@import '../../client/libraries/ionicons/scss/ionicons-variables';
+$ionicons-font-path: '../../client/libraries/iconicons/font';
+@import '../../client/libraries/ionicons/scss/ionicons-font';
+
+// Ionicons Icons
+// --------------------------
+
+@mixin ionicon($name) {
+	@extend .ion;
+	content: $name;
+}
+
+.#{$ionicons-prefix}alert:before {
+  @extend .ion;
+}
+.#{$ionicons-prefix}alert:before { content: $ionicon-var-alert; }

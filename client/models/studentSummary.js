@@ -44,7 +44,7 @@ var StudentSummary = React.createClass({
 			React.DOM.p({className: 'graduation-message'}, 
 				canGraduate 
 				? "It looks like you'll make it! Just follow the plan, and double-check my output with your advisor a few times." 
-				: "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."),
+				: "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in.", React.DOM.span({className: 'ion ion-alert'})),
 			React.DOM.p(null, "You have planned for ", React.DOM.output(null, creditsTaken), " of ", React.DOM.output(null, creditsNeeded), " credits.")
 		)
 	}

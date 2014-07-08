@@ -1,5 +1,7 @@
-@import '_variables';
-@import '_functions';
-@import '_mixins';
-@import 'app/_base';
-@import 'app/_main';
+@import 'variables';
+@import 'functions';
+@import 'mixins';
+// @import 'icons';
+
+@import 'app/base';
+@import 'app/main';
