@@ -3,7 +3,7 @@ var config = require('getconfig')
 // for reuse
 var appDir = __dirname + '/client';
 var cssDir = __dirname + '/public/css';
-
+var bowerDir = appDir + '/libraries'
 
 module.exports = {
     // Tell the Hapi server what URLs the application should be served from.
@@ -40,7 +40,7 @@ module.exports = {
 
         // Specify the stylesheets we want to bundle
         stylesheets: [
-            cssDir + '/app.css'
+            cssDir + '/app.css',
         ],
     }
 };

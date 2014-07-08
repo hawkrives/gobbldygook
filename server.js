@@ -2,7 +2,7 @@ var Hapi = require('hapi');
 var config = require('getconfig');
 var server = new Hapi.Server('localhost', config.http.port);
 var moonbootsConfig = require('./moonbootsConfig');
-var fakeApi = require('./fakeApi');
+var electricfenceConfig =  require('./electricfenceConfig');
 var internals = {};
 
 // set clientconfig cookie
@@ -14,6 +14,7 @@ internals.configStateConfig = {
 server.state('config', internals.configStateConfig);
 internals.clientConfig = JSON.stringify(config.client);
 server.ext('onPreResponse', function(request, reply) {
+    console.log('path:', request.path)
     if (!request.state.config) {
         var response = request.response;
         return reply(response.state('config', encodeURIComponent(internals.clientConfig)));
@@ -23,16 +24,21 @@ server.ext('onPreResponse', function(request, reply) {
     }
 });
 
-
-// require moonboots_hapi plugin
-server.pack.register({plugin: require('moonboots_hapi'), options: moonbootsConfig}, function (err) {
-    if (err) throw err;
-    server.pack.register(fakeApi, function (err) {
+// require plugins: moonboots_hapi, lout for route docs, and electricfence for static files
+server.pack.register([
+        {plugin: require('moonboots_hapi'), options: moonbootsConfig},
+        {plugin: require('lout')},
+        {plugin: require('electricfence'), option: {electricfence: electricfenceConfig}}
+    ],
+    function (err) {
         if (err) throw err;
-        // If everything loaded correctly, start the server:
-        server.start(function (err) {
+        
+        server.start(function(err) {
             if (err) throw err;
-            console.log("Gobbldygook is running at: http://localhost:" + config.http.port + "\nYep. That\'s pretty awesome.");
-        });
-    });
-});
+
+            console.log('Gobbldygook is running @ ' + server.info.uri)
+            console.log('lout docs initialized @ /docs')
+            console.log('Electricfence public routes set.')
+        })
+    }
+)

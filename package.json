@@ -29,6 +29,7 @@
     "async": "^0.9.0",
     "clientconfig": "^1.0.0",
     "cortex": "^5.3.1",
+    "electricfence": "^1.0.0",
     "envify": "^1.2.1",
     "favicon-setter": "^0.1.1",
     "getconfig": "^0.3.0",
