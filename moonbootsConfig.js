@@ -3,7 +3,7 @@ var config = require('getconfig')
 // for reuse
 var appDir = __dirname + '/client';
 var cssDir = __dirname + '/public/css';
-var bowerDir = appDir + '/libraries'
+var bowerDir = __dirname + '/public/libraries'
 
 module.exports = {
     // Tell the Hapi server what URLs the application should be served from.
@@ -34,8 +34,8 @@ module.exports = {
         // will simply be included before any of your application code in the
         // order you provide them.
         libraries: [
-            appDir + '/libraries/zepto/zepto.js',
-            appDir + '/libraries/Element.details/__COMPILE/Element.details.js',
+            bowerDir + '/zepto/zepto.js',
+            bowerDir + '/Element.details/__COMPILE/Element.details.js',
         ],
 
         // Specify the stylesheets we want to bundle

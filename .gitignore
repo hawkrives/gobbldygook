@@ -1,4 +1,4 @@
-node_modules/
-client/libraries/
+node_modules
 .sass-cache
 *.log
+public/libraries
