@@ -1,8 +1,22 @@
+@import "mixins/_material-shadow";
+@import "mixins/_avatar-letter";
+
 %no-select {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
 	cursor: default;
+}
+
+%add-button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	color: $text-color;
+
+	&[disabled] {
+		cursor: not-allowed;
+	}
 }
 
 %block-base {
@@ -23,6 +37,20 @@
 
 	p:last-child {
 		margin-bottom: 0;
+	}
+}
+
+%block-flat {
+	@extend %block-base;
+
+	@include material-shadow(0);
+	&:hover, &:focus {
+		@include material-shadow(2);
+		background-color: white;
+	}
+	&:active {
+		@include material-shadow(1);
+		background-color: white;
 	}
 }
 

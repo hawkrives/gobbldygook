@@ -25,8 +25,9 @@
 }
 
 .add-area-of-study {
-	@extend %block;
-	margin-left: 1em;
+	@extend %add-button;
+	@extend %block-flat;
+
 	cursor: pointer;
 	position: relative; top: -1px;
 }

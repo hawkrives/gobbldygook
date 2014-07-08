@@ -5,10 +5,10 @@
 
 .add-year {
 	width: 100%;
-	font-weight: 100;
 	font-size: 1.25em;
-	cursor: pointer;
+
 	@extend %block;
+	@extend %add-button;
 }
 
 .course-table .year {
