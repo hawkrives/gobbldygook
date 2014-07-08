@@ -4,6 +4,25 @@
   user-select: none;
   cursor: default; }
 
+@font-face {
+  font-family: "Ionicons";
+  src: url("/libraries/ionicons/fonts/ionicons.eot?v=1.5.2");
+  src: url("/libraries/ionicons/fonts/ionicons.eot?v=1.5.2#iefix") format("embedded-opentype"), url("/libraries/ionicons/fonts/ionicons.ttf?v=1.5.2") format("truetype"), url("/libraries/ionicons/fonts/ionicons.woff?v=1.5.2") format("woff"), url("/libraries/ionicons/fonts/ionicons.svg?v=1.5.2#Ionicons") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+.ion, .area-of-study > details summary::after, .area-of-study > details[open] summary::after {
+  display: inline-block;
+  font-family: "Ionicons";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
 * {
   box-sizing: border-box; }
 
@@ -74,6 +93,7 @@ body {
 .area-of-study summary:focus {
   outline: 2px solid #111111; }
 .area-of-study > details summary::after {
+  content: "\f151";
   position: absolute;
   top: calc(50% - 6px);
   right: 8px; }

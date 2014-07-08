@@ -53,19 +53,17 @@
 
 	& > details {
 		summary::after {
-			// @include ionicon($ionicon-var-ios7-arrow-down);
+			@include ionicon($ionicon-var-ios7-arrow-down);
 
 			position: absolute;
 			top: calc(50% - 6px);
 			right: 8px;
-			// @include arrow-down(10px);
 		}
 	}
 
 	& > details[open] {
 		summary::after {
-			content: "\f153";
-			// @include arrow-up(10px);
+			@include ionicon($ionicon-var-ios7-arrow-left);
 		}
 	}
 }
