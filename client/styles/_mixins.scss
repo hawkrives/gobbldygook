@@ -5,6 +5,27 @@
 	cursor: default;
 }
 
+%block-base {
+	border-radius: 3px;
+	border: 0;
+}
+
+%block {
+	@extend %block-base;
+	background-color: white;
+	@include material-shadow(1);
+	&:hover { @include material-shadow(2); }
+}
+
+%block-small {
+	@extend %block;
+	margin-bottom: $block-edge-padding * 2;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+
 @mixin arrow-up($size, $color: black) {
 	width: 0; 
 	height: 0; 
