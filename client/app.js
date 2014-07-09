@@ -15,7 +15,7 @@ var db = require('db.js')
 
 function setupDatabase() {
 	window.server = undefined;
-	db.open({
+	return db.open({
 		server: 'gobbldygook',
 		version: 1,
 		schema: {
@@ -53,10 +53,6 @@ function setupDatabase() {
 }
 
 module.exports = {
-	bootstrap: function() {
-		loadData()
-	},
-
 	// this is the the whole app initter
 	blastoff: function() {
 		var self = window.app = this;
@@ -64,9 +60,7 @@ module.exports = {
 
 		// load in the demo student — for now
 		window.me = demoStudent
-		setupDatabase()
-		console.log(window.server)
-		loadData()
+		setupDatabase().then(loadData)
 
 		// wait for document ready to render our main view
 		// this ensures the document has a body, etc.
