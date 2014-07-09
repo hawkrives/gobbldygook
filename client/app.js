@@ -9,17 +9,64 @@ var Student = require('./models/student')
 var loadStats = require('loading-stats')
 var demoStudent = require('../mockups/demo_student')
 
+// var db = require('')
+var loadData = require('./helpers/loadData')
+var db = require('db.js')
+
+function setupDatabase() {
+	window.server = undefined;
+	db.open({
+		server: 'gobbldygook',
+		version: 1,
+		schema: {
+			courses: {
+				key: { keyPath: 'clbid', autoIncrement: false },
+				indexes: {
+					profs:  { multiEntry: true },
+					depts:  { multiEntry: true },
+					places: { multiEntry: true },
+					times:  { multiEntry: true },
+					gereqs: { multiEntry: true },
+					sourcePath: { multiEntry: true }
+				}
+			},
+			sources: {
+				key: { autoIncrement: true },
+				indexes: {
+					path: { unique: true }
+				}
+			},
+			students: {
+				key: { autoIncrement: true }
+			},
+			areas: {
+				key: { autoIncrement: true },
+				indexes: {
+					type: { multiEntry: true },
+					sourcePath: { multiEntry: true }
+				}
+			}
+		}
+	}).done(function(s) {
+		window.server = s
+	})
+}
+
 module.exports = {
+	bootstrap: function() {
+		loadData()
+	},
+
 	// this is the the whole app initter
 	blastoff: function() {
 		var self = window.app = this;
 		window.times = {start: Date.now()};
 
-		// create an empty collection for our students.
+		// load in the demo student — for now
 		window.me = demoStudent
-
-		// init our URL handlers and the history tracker
-		// this.router = new Router();
+		setupDatabase()
+		console.log(window.server)
+		loadData()
 
 		// wait for document ready to render our main view
 		// this ensures the document has a body, etc.
@@ -31,24 +78,8 @@ module.exports = {
 				Student(me),
 				document.body
 			)
-
-			// listen for new pages from the router
-			// self.router.on('newPage', mainView.setPage, mainView);
-
-			// we have what we need, we can now start our router and show the appropriate page
-			// self.router.history.start({pushState: true, root: '/'});
 		}, false );
 	},
-
-	// This is how you navigate around the app. this gets called by a global
-	// click handler that handles all the <a> tags in the app. it expects a
-	// url without a leading slash.
-	// for example: "costello/settings".
-
-	// navigate: function(page) {
-	//     var url = (page.charAt(0) === '/') ? page.slice(1) : page;
-	//     this.router.history.navigate(url, {trigger: true});
-	// }
 };
 
 // run it
