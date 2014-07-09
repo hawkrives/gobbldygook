@@ -32,12 +32,12 @@
   "dependencies": {
     "andlog": "^1.0.0",
     "async": "^0.9.0",
+    "bluebird": "^2.2.1",
     "cortex": "^5.3.1",
     "db.js": "git://github.com/aaronpowell/db.js#master",
     "humanize-plus": "^1.4.2",
     "loading-stats": "0.0.2",
     "lodash": "^2.4.1",
-    "q": "^2.0.2",
     "react": "^0.10.0",
     "system-requirements": "0.0.2",
     "underscore": "^1.6.0"
