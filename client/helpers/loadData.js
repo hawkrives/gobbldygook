@@ -18,7 +18,6 @@ function deleteItems(items) {
 }
 
 function storeItem(item) {
-	console.log('storeItem', item)
 	if (item.type === 'courses') {
 		_.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
@@ -30,7 +29,7 @@ function storeItem(item) {
 	}
 	if (item.type === 'areas') {
 		item.data.info.sourcePath = item.meta.path
-		return window.server.areas.add.apply(window.server, item.data.info).done(function(results) {
+		return window.server.areas.add(item.data.info).done(function(results) {
 			console.log('an area has been added')
 		})
 	}
@@ -54,15 +53,8 @@ function cleanPriorData(item) {
 			.done(deleteItems)
 
 		// ... and the paths themselves.
-		window.server.sources.query('path')
-			.only(path)
-			.execute()
-			.done(function(results) {
-				// console.log(results)
-				// window.server.sources.remove.apply()
-			})
-
-		window.server.sources.add(item.meta).done()
+		localStorage.removeItem(path)
+		localStorage.setItem(path, hash)
 
 		resolve(item)
 	})
@@ -83,27 +75,25 @@ function getInfoFromDb(sourcePath) {
 	})
 }
 
-function updateDatabase(itemType, infoFromJson) {
-	infoFromJson.path = '/data/' + itemType + '/' + infoFromJson.path
-	return getInfoFromDb(infoFromJson.path).then(function(infoFromDb) {
-		if (_.contains(infoFromDb, 'hash') && infoFromJson.hash === infoFromDb.hash) {
-			console.log('bypassed adding', infoFromDb.path)
-			return;
-		} else {
-			console.log('have to add', infoFromJson.path)
-			return readJson(infoFromJson.path)
-				.then(function(data) {
-					return { data: data, meta: infoFromJson, type: itemType }
-				})
+function updateDatabase(itemType, infoFromServer) {
+	infoFromServer.path = '/data/' + itemType + '/' + infoFromServer.path
+	var oldHash = localStorage.getItem(infoFromServer.path)
+	var newHash = infoFromServer.hash
+	var itemPath = infoFromServer.path
+	return new Promise(function(resolve, reject) {
+		if (newHash !== oldHash) {
+			console.log('have to add', itemPath)
+			readJson(itemPath)
+				.then(function(data) {return {data: data, meta: infoFromServer, type: itemType}})
 				.then(cleanPriorData)
 				.then(storeItem)
 				.catch(function(err) {
-					console.error('adding error', err)
+					reject('adding error')
 				})
-				.done()
+				.done(function(){resolve('had to add ' + itemPath)})
+		} else {
+			resolve('bypassed adding ' + itemPath)
 		}
-	}).catch(function(err) {
-		console.error('updataDatabase error', err)
 	})
 }
 
