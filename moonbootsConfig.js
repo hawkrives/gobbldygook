@@ -36,6 +36,7 @@ module.exports = {
         libraries: [
             bowerDir + '/zepto/zepto.js',
             bowerDir + '/Element.details/__COMPILE/Element.details.js',
+            bowerDir + '/IndexedDBShim/dist/IndexedDBShim.js',
         ],
 
         // Specify the stylesheets we want to bundle
