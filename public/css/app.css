@@ -97,14 +97,14 @@ body {
   margin: 0;
   vertical-align: middle;
   border: 0;
-  color: #c3931e;
+  color: linear-gradient(to bottom, #e49f31, #c88926);
   background: transparent;
   border-radius: 3px;
   overflow: hidden; }
 .area-of-study progress::-moz-progress-bar {
-  background: #c3931e; }
+  background: linear-gradient(to bottom, #e49f31, #c88926); }
 .area-of-study progress::-webkit-progress-value {
-  background: #c3931e; }
+  background: linear-gradient(to bottom, #e49f31, #c88926); }
 .area-of-study progress::-webkit-progress-bar {
   background: transparent; }
 .area-of-study summary::-webkit-details-marker {

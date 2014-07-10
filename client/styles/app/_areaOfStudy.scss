@@ -18,7 +18,12 @@
 	}
 
 	$progress-bar-bg: transparent;
-	$progress-bar-color: $olaf-gold;
+	// $progress-bar-color: $olaf-gold;
+	$progress-bar-color: linear-gradient(
+		to bottom, 
+		$olaf-gradient-start, 
+		$olaf-gradient-end
+	);
 	progress {
 		display: block;
 		position: absolute;
