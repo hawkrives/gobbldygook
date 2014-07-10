@@ -13,7 +13,10 @@ var _ = require('lodash')
 var pathPrefix = '/data/'
 
 function deleteItems(items) {
-	// console.log('items to delete', items)
+	if (_.size(items) > 0) {
+		console.log('items to delete', items)
+	}
+
 	// TODO: Delete items.
 }
 
@@ -21,7 +24,6 @@ function storeItem(item) {
 	if (item.type === 'courses') {
 		_.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
-			// window.server.courses.add(course).done(function(){console.log('a course has been added')})
 		})
 		window.server.courses.add.apply(window.server, item.data.courses).done(function() {
 			console.log('courses have been added')
@@ -36,43 +38,26 @@ function storeItem(item) {
 }
 
 function cleanPriorData(item) {
-	return new Promise(function(resolve, reject) {
-		var path = item.meta.path
-		var hash = item.meta.hash
+	var path = item.meta.path
+	var hash = item.meta.hash
 
-		// Clear out old courses ...
-		window.server.courses.query('sourcePath')
+	return new Promise.all([
+		// get rid of old items
+		// and only query the appropriate type
+		window.server[item.type].query('sourcePath')
 			.only(path)
 			.execute()
-			.done(deleteItems)
+			.then(deleteItems)
+			.done()
+		,
 
-		// ... areas of study ...
-		window.server.areas.query('sourcePath')
-			.only(path)
-			.execute()
-			.done(deleteItems)
-
-		// ... and the paths themselves.
-		localStorage.removeItem(path)
-		localStorage.setItem(path, hash)
-
-		resolve(item)
-	})
-}
-
-function getInfoFromDb(sourcePath) {
-	// console.log('getItemFromDb', sourcePath)
-	return new Promise(function(resolve, reject) {
-		window.server.sources.query('path')
-			.only(sourcePath)
-			.execute()
-			.done(function(data) {
-				if (data.length > 0)
-					resolve(data[0])
-				else
-					resolve()
-			})
-	})
+		new Promise(function(resolve, reject) {
+			// ... and the paths themselves.
+			localStorage.removeItem(path)
+			localStorage.setItem(path, hash)
+			resolve()
+		})
+	])
 }
 
 function updateDatabase(itemType, infoFromServer) {
@@ -81,16 +66,18 @@ function updateDatabase(itemType, infoFromServer) {
 	var newHash = infoFromServer.hash
 	var itemPath = infoFromServer.path
 	return new Promise(function(resolve, reject) {
-		if (newHash !== oldHash) {
+		if (newHash !== oldHash) {// || itemType === 'areas') {
 			console.log('have to add', itemPath)
 			readJson(itemPath)
 				.then(function(data) {return {data: data, meta: infoFromServer, type: itemType}})
 				.then(cleanPriorData)
 				.then(storeItem)
 				.catch(function(err) {
-					reject('adding error')
+					reject(err.stack)
 				})
-				.done(function(){resolve('had to add ' + itemPath)})
+				.done(function() {
+					resolve('had to add ' + itemPath)
+				})
 		} else {
 			resolve('bypassed adding ' + itemPath)
 		}
@@ -101,7 +88,6 @@ function loadDataFiles(info) {
 	console.log('loadDataFiles', info)
 	return new Promise.all(_.map(info.info, function(files) {
 		return new Promise.all(_.map(files, function(file) {
-			// console.log('loadDataFiles.Q.all', file)
 			return updateDatabase(info.type, file)
 		}))
 	}))
