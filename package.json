@@ -37,6 +37,7 @@
     "db.js": "git://github.com/aaronpowell/db.js#master",
     "humanize-plus": "^1.4.2",
     "loading-stats": "0.0.2",
+    "localforage": "git://github.com/hawkrives/localForage#master",
     "lodash": "^2.4.1",
     "react": "^0.10.0",
     "system-requirements": "0.0.2",
