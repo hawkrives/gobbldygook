@@ -22,12 +22,12 @@ function makeCourseObjects(clbids) {
 	return new Promise.all(_.map(clbids, function(clbid) {
 		var course;
 
-		// return {clbid: clbid, credits: 1}
-		getCourse(clbid).then(
-			function(data) {
-				course = data
-			}
-		)
+		course = {clbid: clbid, credits: 1}
+		// getCourse(clbid).then(
+		// 	function(data) {
+		// 		course = data
+		// 	}
+		// )
 
 		return course;
 	}))
