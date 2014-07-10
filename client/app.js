@@ -1,23 +1,28 @@
 /*global app, me, $*/
 var _ = require('lodash')
-var logger = require('andlog')
 var config = require('clientconfig')
+var db = require('db.js')
+var loadStats = require('loading-stats')
+var logger = require('andlog')
+var Promise = require("bluebird")
 var React = require('react')
 
 var tracking = require('./helpers/metrics')
 var Student = require('./models/student')
-var loadStats = require('loading-stats')
-var demoStudent = require('../mockups/demo_student')
 
-// var db = require('')
+var demoStudent = require('../mockups/demo_student')
 var loadData = require('./helpers/loadData')
-var db = require('db.js')
+
+
+function initializeLibraries() {
+	Promise.longStackTraces();
+}
 
 function setupDatabase() {
 	window.server = undefined;
 	return db.open({
 		server: 'gobbldygook',
-		version: 1,
+		version: 2,
 		schema: {
 			courses: {
 				key: { keyPath: 'clbid', autoIncrement: false },
@@ -30,20 +35,14 @@ function setupDatabase() {
 					sourcePath: { multiEntry: true }
 				}
 			},
-			sources: {
-				key: { autoIncrement: true },
-				indexes: {
-					path: { unique: true }
-				}
-			},
 			students: {
 				key: { autoIncrement: true }
 			},
 			areas: {
-				key: { autoIncrement: true },
+				key: { keyPath: 'sourcePath', autoIncrement: false },
 				indexes: {
-					type: { multiEntry: true },
-					sourcePath: { multiEntry: true }
+					type: { multiEntry: false },
+					sourcePath: { multiEntry: false }
 				}
 			}
 		}
@@ -57,6 +56,9 @@ module.exports = {
 	blastoff: function() {
 		var self = window.app = this;
 		window.times = {start: Date.now()};
+
+		// set up some libraries
+		initializeLibraries()
 
 		// load in the demo student — for now
 		window.me = demoStudent
