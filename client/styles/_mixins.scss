@@ -54,6 +54,12 @@
 	}
 }
 
+@mixin font-feature-settings($var) {
+	-webkit-font-feature-settings: $var;
+	-moz-font-feature-settings: $var;
+	font-feature-settings: $var;
+}
+
 @mixin arrow-up($size, $color: black) {
 	width: 0; 
 	height: 0; 

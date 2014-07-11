@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .course-table .year-title, #student-letter {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -68,7 +69,7 @@
   box-sizing: border-box; }
 
 body {
-  font-family: "Fira Sans", "Open Sans", "Helvetica", "Verdana", sans-serif;
+  font-family: "Open Sans", "Helvetica", "Verdana", sans-serif;
   color: #2c281f;
   background-image: -webkit-linear-gradient(top, #e8e8e8, #e3e3e3);
   background-image: linear-gradient(to bottom, #e8e8e8, #e3e3e3);
@@ -220,7 +221,10 @@ body {
 
 #student-summary {
   -webkit-hyphens: auto;
-  hyphens: auto; }
+  hyphens: auto;
+  -webkit-font-feature-settings: "onum";
+  -moz-font-feature-settings: "onum";
+  font-feature-settings: "onum"; }
   #student-summary p {
     margin: 5px 0; }
   #student-summary.cannot-graduate .graduation-message {
