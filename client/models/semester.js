@@ -1,6 +1,7 @@
 var _ = require('lodash')
 var React = require('react')
 
+var CourseList = require('./courseList')
 var Course = require('./course')
 
 var makeCourseObjects = require('../helpers/makeCourseObjects')
@@ -25,21 +26,14 @@ var Semester = React.createClass({
 
 		var activeSchedules = _.filter(this.props.schedules, 'active')
 		var clbids = _.pluck(activeSchedules, 'clbids')
-		var courses = makeCourseObjects(_.uniq(_.flatten(clbids)))
-
-		var courseElements = _.map(courses, function(c) {
-			return Course( {key:c.clbid, info:c} );
-		})
-
-		console.log('courses', courseElements)
+		var courseObjects = makeCourseObjects(_.uniq(_.flatten(this.props.clbids)))
 
 		return React.DOM.div( {className:"semester"}, 
-			React.DOM.header({className: "semester-title"}, React.DOM.h1(null, semesterName)),
-			React.DOM.div( {className:"course-list"}, 
-				courseElements
-			)
-		);
+			React.DOM.header({className: "semester-title"}, 
+				React.DOM.h1(null, semesterName)),
+			CourseList( {courses: courseObjects} )
+		)
 	}
-});
+})
 
 module.exports = Semester
