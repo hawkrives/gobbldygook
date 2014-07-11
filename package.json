@@ -4,7 +4,8 @@
   "description": "A course scheduling app for St. Olaf College",
   "main": "app/index.html",
   "scripts": {
-    "test": "browserify test/index.js | tape-run | tap-spec"
+    "test": "browserify test/index.js | tape-run | tap-spec",
+    "style": "scss --watch client/styles/app.scss:public/css/app.css"
   },
   "repository": {
     "type": "git",
