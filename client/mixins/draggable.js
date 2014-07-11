@@ -1,3 +1,5 @@
+var React = require('react')
+
 var DraggableMixin = {
 	getDefaultProps: function () {
 		return {
@@ -89,11 +91,13 @@ var DraggableDiv = React.createClass({
 	}
 })
 
+module.exports = Draggable
+
 // React.renderComponent(Draggable({
 // 	initialPos: {x: 50, y: 100},
 // 	className: 'my-draggable',
 // 	style: {
-// 		//border: '2px solid #aa5',
-// 		padding: '10px'
+//		// border: '2px solid #aa5',
+//		// padding: '10px'
 // 	}
 // }, 'Drag Me! See how children are passed through to the div!'), document.body)
