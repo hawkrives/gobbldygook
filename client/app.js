@@ -15,7 +15,8 @@ var loadData = require('./helpers/loadData')
 
 
 function initializeLibraries() {
-	Promise.longStackTraces();
+	Promise.longStackTraces()
+	React.initializeTouchEvents(true)
 }
 
 function setupDatabase() {
