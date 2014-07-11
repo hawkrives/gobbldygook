@@ -1,14 +1,15 @@
 var _ = require('lodash')
 var React = require('react')
 
+var DraggableMixin = require('../mixins/draggable')
+
 var Course = React.createClass({
+	mixins: [DraggableMixin]
 	getInitialState: function() {
 	},
 	componentDidMount: function() {
-
 	},
 	componentWillUnmount: function() {
-
 	},
 	render: function() {
 		return React.DOM.article({className: 'course'},
