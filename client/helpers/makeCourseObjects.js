@@ -19,7 +19,8 @@ function makeCourseObjects(clbids) {
 	// those clbids.
 
 	console.log('called makeCourseObjects with', clbids)
-	return new Promise.all(_.map(clbids, function(clbid) {
+	// return new Promise.all(_.map(clbids, function(clbid) {
+	return _.map(clbids, function(clbid) {
 		var course;
 
 		course = {clbid: clbid, credits: 1}
@@ -30,7 +31,8 @@ function makeCourseObjects(clbids) {
 		// )
 
 		return course;
-	}))
+	// }))
+	})
 }
 
 module.exports = makeCourseObjects
