@@ -125,6 +125,17 @@ body {
 .area-of-study > details[open] summary::after {
   content: "\f153"; }
 
+.course .title {
+  margin: 0 0 -0.85ex;
+  padding: 0;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: "Fira Sans"; }
+.course .details {
+  font-size: 0.9em; }
+.course .identifier::after {
+  content: " · "; }
+
 .course-table {
   -webkit-flex: 1;
   flex: 1; }
