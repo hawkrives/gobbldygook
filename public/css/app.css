@@ -201,7 +201,14 @@ body {
   -webkit-flex: 1;
   flex: 1;
   padding: 2.5px 5px;
-  border-left: solid 1px #c4c4c4; }
+  border-left: solid 1px #c4c4c4;
+  -webkit-transition: 0.75s all;
+  -moz-transition: 0.75s all;
+  -ms-transition: 0.75s all;
+  transition: 0.75s all; }
+  .semester:hover, .semester:active, .semester:focus {
+    -webkit-flex: 1.1;
+    flex: 1.1; }
 
 .add-semester {
   border-left: solid 1px #c4c4c4;
