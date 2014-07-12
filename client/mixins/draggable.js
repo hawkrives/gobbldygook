@@ -91,7 +91,7 @@ var DraggableDiv = React.createClass({
 	}
 })
 
-module.exports = Draggable
+module.exports = DraggableMixin
 
 // React.renderComponent(Draggable({
 // 	initialPos: {x: 50, y: 100},

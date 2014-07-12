@@ -4,7 +4,7 @@ var React = require('react')
 var DraggableMixin = require('../mixins/draggable')
 
 var Course = React.createClass({
-	mixins: [DraggableMixin]
+	mixins: [DraggableMixin],
 	getInitialState: function() {
 	},
 	componentDidMount: function() {
