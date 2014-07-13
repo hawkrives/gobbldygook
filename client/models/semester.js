@@ -7,6 +7,11 @@ var Course = require('./course')
 var makeCourseObjects = require('../helpers/makeCourseObjects')
 
 var Semester = React.createClass({
+	removeSemester: function() {
+		console.log('deleting', String(this.props.year) + '.' + String(this.props.semester))
+		console.log(this.props.schedule)
+		this.props.schedule.remove()
+	},
 	render: function() {
 		console.log('semester render')
 

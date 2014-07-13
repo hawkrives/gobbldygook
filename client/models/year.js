@@ -22,6 +22,12 @@ var Year = React.createClass({
 			clbids: [], active: true,
 		})
 	},
+	removeYear: function() {
+		// console.log('year React object', this.refs)
+		_.each(this.refs, function(ref) {
+			ref.removeSemester()
+		})
+	},
 	render: function() {
 		var schedules = _.filter(this.props.schedules.val(), {year: this.props.year})
 
@@ -47,8 +53,13 @@ var Year = React.createClass({
 				React.DOM.h1(null,
 					React.DOM.span({className: "year-start"}, this.props.year),
 					React.DOM.span({className: "year-divider"}, "+"),
-				)
 					React.DOM.span({className: "year-end"}, this.props.year + 1)
+				),
+				React.DOM.button({
+					className: "remove-year",
+					title: "Remove the " + this.props.year + " year.",
+					onClick: this.removeYear,
+				})
 			),
 			terms,
 			React.DOM.button({
