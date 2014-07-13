@@ -24,9 +24,7 @@ var Semester = React.createClass({
 			semesterName = 'Late Summer';
 		}
 
-		var activeSchedules = _.filter(this.props.schedules, 'active')
-		var clbids = _.pluck(activeSchedules, 'clbids')
-		var courseObjects = makeCourseObjects(_.uniq(_.flatten(this.props.clbids)))
+		var courseObjects = makeCourseObjects(_.uniq(this.props.schedule.clbids))
 
 		return React.DOM.div( {className:"semester"},
 			React.DOM.header({className: "semester-title"},

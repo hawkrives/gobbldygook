@@ -26,8 +26,21 @@ var Year = React.createClass({
 		var schedules = _.filter(this.props.schedules.val(), {year: this.props.year})
 
 		var terms = _.map(_.groupBy(schedules, 'semester'), function(schedule, semester) {
-			var clbids = _.pluck(_.filter(schedule, 'active'), 'clbids')
-			return Semester( {key:semester, name:semester, clbids:clbids } );
+			semester = parseInt(semester, 10)
+			var possible = this.props.schedules.filter(function(schedule) {
+				return (schedule.year.val() === this.props.year && schedule.semester.val() === semester)
+			}, this)
+			var active = possible.find(function(schedule) {
+				return schedule.active.val() === true
+			})
+			// console.log(possible, active)
+			return Semester({
+				key: semester,
+				ref: semester,
+				semester: parseInt(semester, 10),
+				year: this.props.year,
+				schedule: active.val()
+			})
 		}, this)
 
 		return React.DOM.div( {className:"year"},
