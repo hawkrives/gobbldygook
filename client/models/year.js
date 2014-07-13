@@ -42,8 +42,8 @@ var Year = React.createClass({
 			terms,
 			React.DOM.button(
 				{
-					className: "add-semester", 
-					title: "Add Semester", 
+					className: "add-semester",
+					title: "Add Semester",
 					disabled: !this.canAddSemester(),
 					onClick: this.addSemester,
 				},

@@ -28,8 +28,8 @@ var Semester = React.createClass({
 		var clbids = _.pluck(activeSchedules, 'clbids')
 		var courseObjects = makeCourseObjects(_.uniq(_.flatten(this.props.clbids)))
 
-		return React.DOM.div( {className:"semester"}, 
-			React.DOM.header({className: "semester-title"}, 
+		return React.DOM.div( {className:"semester"},
+			React.DOM.header({className: "semester-title"},
 				React.DOM.h1(null, semesterName)),
 			CourseList( {courses: courseObjects} )
 		)

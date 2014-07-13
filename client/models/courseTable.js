@@ -24,14 +24,14 @@ var CourseTable = React.createClass({
 			return Year( {schedules: this.props.schedules, year: parseInt(year, 10), key:year} )
 		}, this)
 
-		return React.DOM.div( {className:"course-table"}, 
+		return React.DOM.div( {className:"course-table"},
 			years,
 			React.DOM.button(
 				{
-					className: "add-year", 
+					className: "add-year",
 					title: "Add Year",
 					onClick: this.addYear,
-				}, 
+				},
 				"+")
 		)
 	}

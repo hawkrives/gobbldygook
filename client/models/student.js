@@ -8,7 +8,7 @@ var Student = React.createClass({
     render: function() {
         console.log('student render')
         return (
-            React.DOM.div( {className:"student"}, 
+            React.DOM.div( {className:"student"},
                 GraduationStatus(this.props),
                 CourseTable( {schedules:this.props.schedules})
             )
