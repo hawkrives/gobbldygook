@@ -24,7 +24,7 @@ var Semester = React.createClass({
 			semesterName = 'Late Summer';
 		}
 
-		var courseObjects = makeCourseObjects(_.uniq(this.props.schedule.clbids))
+		var courseObjects = makeCourseObjects(_.uniq(this.props.schedule.val().clbids))
 
 		return React.DOM.div( {className:"semester"},
 			React.DOM.header({className: "semester-title"},

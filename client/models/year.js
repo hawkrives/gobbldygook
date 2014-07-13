@@ -33,13 +33,12 @@ var Year = React.createClass({
 			var active = possible.find(function(schedule) {
 				return schedule.active.val() === true
 			})
-			// console.log(possible, active)
 			return Semester({
 				key: semester,
 				ref: semester,
 				semester: parseInt(semester, 10),
 				year: this.props.year,
-				schedule: active.val()
+				schedule: active
 			})
 		}, this)
 
