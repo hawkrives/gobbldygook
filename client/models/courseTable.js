@@ -11,21 +11,17 @@ var CourseTable = React.createClass({
 		var schedules = this.props.schedules.val()
 		var nextAvailableYear = findFirstAvailableYear(schedules)
 		var nextId = calculateNextScheduleId(schedules)
-		console.log('nextAvailableYear', nextAvailableYear)
-		console.log('nextId', nextId)
 		this.props.schedules.push({
 			id: nextId, year: nextAvailableYear, semester: 1,
 			title: "Schedule 1", sequence: 1,
 			clbids: [], active: true,
 		})
-
 	},
 	render: function() {
 		console.log('course-table render')
-		console.log('course-table schedules', this.props.schedules.val())
 
-		var years = _.map(_.groupBy(this.props.schedules.val(), 'year'), function(schedulesByYear, year) {
-			return Year( {schedules: schedulesByYear, year: year, key:year} )
+		var years = _.map(_.groupBy(this.props.schedules.val(), 'year'), function(schedules, year) {
+			return Year( {schedules: this.props.schedules, year: parseInt(year, 10), key:year} )
 		}, this)
 
 		return React.DOM.div( {className:"course-table"}, 
