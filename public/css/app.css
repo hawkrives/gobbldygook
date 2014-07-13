@@ -207,9 +207,6 @@ body {
   -moz-transition: 0.75s all;
   -ms-transition: 0.75s all;
   transition: 0.75s all; }
-  .semester:hover, .semester:active, .semester:focus {
-    -webkit-flex: 1.1;
-    flex: 1.1; }
 
 .add-semester {
   border-left: solid 1px #c4c4c4;
