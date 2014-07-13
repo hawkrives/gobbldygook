@@ -14,8 +14,25 @@
 	cursor: pointer;
 	color: $text-color;
 
+	&:hover::after {
+		@include ionicon($ionicon-var-plus-circled);
+	}
+
+	&::after {
+		@include ionicon($ionicon-var-plus);
+	}
+
 	&[disabled] {
 		cursor: not-allowed;
+		color: rgba($text-color, 0.5);
+
+		&:hover::after {
+			color: rgba($text-color, 0.75);
+			@include ionicon($ionicon-var-checkmark-circled);
+		}
+		&::after {
+			@include ionicon($ionicon-var-checkmark);
+		}
 	}
 }
 
@@ -58,24 +75,4 @@
 	-webkit-font-feature-settings: $var;
 	-moz-font-feature-settings: $var;
 	font-feature-settings: $var;
-}
-
-@mixin arrow-up($size, $color: black) {
-	width: 0; 
-	height: 0; 
-	border-left: $size * 0.7 solid transparent;
-	border-right: $size * 0.7 solid transparent;
-	border-top-width: 0;
-
-	border-bottom: $size solid $color;
-}
-
-@mixin arrow-down($size, $color: black) {
-	width: 0; 
-	height: 0; 
-	border-left: $size * 0.7 solid transparent;
-	border-right: $size * 0.7 solid transparent;
-	border-bottom-width: 0;
-	
-	border-top: $size solid $color;
 }

@@ -9,7 +9,6 @@ var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
 
 var Year = React.createClass({
 	canAddSemester: function() {
-		console.log('canAddSemester', findFirstAvailableSemester(this.props.schedules.val(), this.props.year) <= 5)
 		return !(findFirstAvailableSemester(this.props.schedules.val(), this.props.year) > 5)
 	},
 	addSemester: function() {
@@ -40,14 +39,12 @@ var Year = React.createClass({
 				)
 			),
 			terms,
-			React.DOM.button(
-				{
-					className: "add-semester",
-					title: "Add Semester",
-					disabled: !this.canAddSemester(),
-					onClick: this.addSemester,
-				},
-				"+")
+			React.DOM.button({
+				className: "add-semester",
+				title: "Add Semester",
+				disabled: !this.canAddSemester(),
+				onClick: this.addSemester,
+			})
 		)
 	}
 })

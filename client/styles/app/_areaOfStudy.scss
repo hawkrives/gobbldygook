@@ -8,9 +8,6 @@
 		margin: 0;
 		z-index: 1;
 		position: relative;
-
-		// blink/webkit suddenly started making the <summary>s extra tall
-		// margin-top: -22px;
 	}
 
 	details {

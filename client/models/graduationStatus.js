@@ -40,21 +40,21 @@ var GraduationStatus = React.createClass({
 			React.DOM.section( {id:"degrees"},
 				React.DOM.header({className: 'area-type-heading'},
 					React.DOM.h1(null, "Degrees"),
-					React.DOM.button({className: "add-area-of-study", title: "Add Degree"}, "+")
+					React.DOM.button({className: "add-area-of-study", title: "Add Degree"})
 				),
 				areasOfStudy.degree
 			),
 			React.DOM.section( {id:"majors"},
 				React.DOM.header({className: 'area-type-heading'},
 					React.DOM.h1(null, "Majors"),
-					React.DOM.button({className: "add-area-of-study", title: "Add Major"}, "+")
+					React.DOM.button({className: "add-area-of-study", title: "Add Major"})
 				),
 				areasOfStudy.major
 			),
 			React.DOM.section( {id:"concentrations"},
 				React.DOM.header({className: 'area-type-heading'},
 					React.DOM.h1(null, "Concentrations"),
-					React.DOM.button({className: "add-area-of-study", title: "Add Concentration"}, "+")
+					React.DOM.button({className: "add-area-of-study", title: "Add Concentration"})
 				),
 				areasOfStudy.concentration
 			)

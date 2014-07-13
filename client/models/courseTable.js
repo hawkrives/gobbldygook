@@ -26,13 +26,11 @@ var CourseTable = React.createClass({
 
 		return React.DOM.div( {className:"course-table"},
 			years,
-			React.DOM.button(
-				{
-					className: "add-year",
-					title: "Add Year",
-					onClick: this.addYear,
-				},
-				"+")
+			React.DOM.button({
+				className: "add-year",
+				title: "Add Year",
+				onClick: this.addYear,
+			})
 		)
 	}
 })
