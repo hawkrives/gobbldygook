@@ -149,8 +149,10 @@ body {
   margin-bottom: 15px;
   display: -webkit-flex;
   -webkit-flex-flow: row nowrap;
+  -webkit-justify-content: space-between;
   display: flex;
-  flex-flow: row nowrap; }
+  flex-flow: row nowrap;
+  justify-content: space-between; }
 
 .course-table .year-title h1, .course-table .year-title h2, .course-table .year-title h3, .course-table .year-title h4, .course-table .year-title h5, .course-table .year-title h6, .course-table .semester-title h1, .course-table .semester-title h2, .course-table .semester-title h3, .course-table .semester-title h4, .course-table .semester-title h5, .course-table .semester-title h6 {
   font-size: inherit;

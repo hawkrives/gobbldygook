@@ -18,8 +18,10 @@
 
 	display: -webkit-flex;
 	-webkit-flex-flow: row nowrap;
+	-webkit-justify-content: space-between;
 	display: flex;
 	flex-flow: row nowrap;
+	justify-content: space-between;
 }
 
 .course-table .year-title, .course-table .semester-title {
