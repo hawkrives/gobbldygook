@@ -13,9 +13,9 @@ var StudentSummary = React.createClass({
 		var creditsTaken = countCredits(this.props.courses)
 		var creditsNeeded = this.props.creditsNeeded.val()
 
-		var degreeObjects = _.filter(this.props.studies, {type: 'degree'})
-		var majorObjects = _.filter(this.props.studies, {type: 'major'})
-		var concentrationObjects = _.filter(this.props.studies, {type: 'concentration'})
+		var degreeObjects = _.filter(this.props.studies.val(), {type: 'degree'})
+		var majorObjects = _.filter(this.props.studies.val(), {type: 'major'})
+		var concentrationObjects = _.filter(this.props.studies.val(), {type: 'concentration'})
 
 		var degrees = humanize.oxford(_.pluck(degreeObjects, 'title'))
 		var majors = humanize.oxford(_.pluck(majorObjects, 'title'))
@@ -28,8 +28,8 @@ var StudentSummary = React.createClass({
 		var canGraduate = checkElegibilityForGraduation(this.props)
 
 		return React.DOM.article( {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
-			React.DOM.div( {id: 'student-letter' }, this.props.name[0] ),
-			React.DOM.p(null, "Hi, ", this.props.name, "!"),
+			React.DOM.div( {id: 'student-letter' }, this.props.name.val()[0] ),
+			React.DOM.p(null, "Hi, ", this.props.name.val(), "!"),
 			React.DOM.p(null,
 				"You are planning on ",
 				_.size(degreeObjects === 1) ? "a " : "",
