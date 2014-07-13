@@ -5,7 +5,7 @@
   src: url("/libraries/ionicons/fonts/ionicons.eot?v=1.5.2#iefix") format("embedded-opentype"), url("/libraries/ionicons/fonts/ionicons.ttf?v=1.5.2") format("truetype"), url("/libraries/ionicons/fonts/ionicons.woff?v=1.5.2") format("woff"), url("/libraries/ionicons/fonts/ionicons.svg?v=1.5.2#Ionicons") format("svg");
   font-weight: normal;
   font-style: normal; }
-.ion, .add-year:hover::after, .add-area-of-study:hover::after, .add-semester:hover::after, .add-year::after, .add-area-of-study::after, .add-semester::after, [disabled].add-year:hover::after, [disabled].add-area-of-study:hover::after, [disabled].add-semester:hover::after, [disabled].add-year::after, [disabled].add-area-of-study::after, [disabled].add-semester::after, .area-of-study > details summary::after, .area-of-study > details[open] summary::after {
+.ion, .add-year:hover::after, .add-area-of-study:hover::after, .add-semester:hover::after, .add-year::after, .add-area-of-study::after, .add-semester::after, [disabled].add-year:hover::after, [disabled].add-area-of-study:hover::after, [disabled].add-semester:hover::after, [disabled].add-year::after, [disabled].add-area-of-study::after, [disabled].add-semester::after, .remove-year:hover::after, .remove-semester:hover::after, .remove-year::after, .remove-semester::after, .area-of-study > details summary::after, .area-of-study > details[open] summary::after {
   display: inline-block;
   font-family: "Ionicons";
   speak: none;
@@ -24,23 +24,30 @@
   user-select: none;
   cursor: default; }
 
-.add-year, .add-area-of-study, .add-semester {
+.add-year, .add-area-of-study, .add-semester, .remove-year, .remove-semester {
   background: transparent;
   border: none;
   cursor: pointer;
   color: #2c281f; }
-  .add-year:hover::after, .add-area-of-study:hover::after, .add-semester:hover::after {
-    content: "\f216"; }
-  .add-year::after, .add-area-of-study::after, .add-semester::after {
-    content: "\f218"; }
-  [disabled].add-year, [disabled].add-area-of-study, [disabled].add-semester {
+  [disabled].add-year, [disabled].add-area-of-study, [disabled].add-semester, [disabled].remove-year, [disabled].remove-semester {
     cursor: not-allowed;
     color: rgba(44, 40, 31, 0.5); }
-    [disabled].add-year:hover::after, [disabled].add-area-of-study:hover::after, [disabled].add-semester:hover::after {
-      color: rgba(44, 40, 31, 0.75);
-      content: "\f120"; }
-    [disabled].add-year::after, [disabled].add-area-of-study::after, [disabled].add-semester::after {
-      content: "\f122"; }
+    [disabled].add-year:hover::after, [disabled].add-area-of-study:hover::after, [disabled].add-semester:hover::after, [disabled].remove-year:hover::after, [disabled].remove-semester:hover::after {
+      color: rgba(44, 40, 31, 0.75); }
+
+.add-year:hover::after, .add-area-of-study:hover::after, .add-semester:hover::after {
+  content: "\f216"; }
+.add-year::after, .add-area-of-study::after, .add-semester::after {
+  content: "\f218"; }
+[disabled].add-year:hover::after, [disabled].add-area-of-study:hover::after, [disabled].add-semester:hover::after {
+  content: "\f120"; }
+[disabled].add-year::after, [disabled].add-area-of-study::after, [disabled].add-semester::after {
+  content: "\f122"; }
+
+.remove-year:hover::after, .remove-semester:hover::after {
+  content: "\f128"; }
+.remove-year::after, .remove-semester::after {
+  content: "\f12a"; }
 
 .area-of-study, #student-summary, .add-year, .course-table .year, .add-area-of-study {
   border-radius: 3px;
@@ -48,13 +55,11 @@
 
 .area-of-study, #student-summary, .add-year, .course-table .year {
   background-color: white;
-  -webkit-transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-  transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-  box-shadow: 0px 1px 1.5px rgba(60, 54, 42, 0.12); }
+  transition: border 0.5s ease-in-out;
+  border: solid 1px #e8e8e8;
+  border-bottom-color: rgba(60, 54, 42, 0.25); }
   .area-of-study:hover, #student-summary:hover, .add-year:hover, .course-table .year:hover {
-    -webkit-transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-    transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-    box-shadow: 0px 3px 3px rgba(60, 54, 42, 0.16); }
+    border-color: rgba(60, 54, 42, 0.5); }
 
 .area-of-study, #student-summary {
   margin-bottom: 10px; }
@@ -155,6 +160,10 @@ body {
   width: 100%;
   font-size: 1.25em; }
 
+.remove-year {
+  display: none;
+  align-self: center; }
+
 .course-table .year {
   margin-bottom: 15px;
   display: -webkit-flex;
@@ -163,6 +172,8 @@ body {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between; }
+  .course-table .year:hover .remove-year {
+    display: block; }
 
 .course-table .year-title h1, .course-table .year-title h2, .course-table .year-title h3, .course-table .year-title h4, .course-table .year-title h5, .course-table .year-title h6, .course-table .semester-title h1, .course-table .semester-title h2, .course-table .semester-title h3, .course-table .semester-title h4, .course-table .semester-title h5, .course-table .semester-title h6 {
   font-size: inherit;
@@ -181,7 +192,13 @@ body {
   word-wrap: break-word;
   text-align: center;
   font-weight: 200;
-  font-size: 0.9em; }
+  font-size: 0.9em;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  -webkit-justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
   .course-table .year-title .year-divider {
     display: inline-block;
     padding: 0.25em 0; }
@@ -219,11 +236,21 @@ body {
   -moz-transition: 0.75s all;
   -ms-transition: 0.75s all;
   transition: 0.75s all; }
+  .semester .semester-title {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between; }
+  .semester:hover .remove-semester {
+    display: inline-block; }
 
 .add-semester {
   border-left: solid 1px #c4c4c4;
   width: 32px;
   font-size: 1.25em; }
+
+.remove-semester {
+  display: none; }
 
 #student-summary {
   padding: 5px 10px; }

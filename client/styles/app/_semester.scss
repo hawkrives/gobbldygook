@@ -15,6 +15,19 @@
 	// 	-webkit-flex: 1.1;
 	// 	flex: 1.1;
 	// }
+
+	.semester-title {
+		display: -webkit-flex;
+		display: flex;
+		-webkit-justify-content: space-between;
+		justify-content: space-between;
+	}
+
+	&:hover {
+		.remove-semester {
+			display: inline-block;
+		}
+	}
 }
 
 .add-semester {
@@ -23,4 +36,9 @@
 
 	width: 32px;
 	font-size: 1.25em;
+}
+
+.remove-semester {
+	@extend %remove-button;
+	display: none;
 }

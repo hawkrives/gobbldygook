@@ -8,11 +8,24 @@
 	cursor: default;
 }
 
-%add-button {
+%button {
 	background: transparent;
 	border: none;
 	cursor: pointer;
 	color: $text-color;
+
+	&[disabled] {
+		cursor: not-allowed;
+		color: rgba($text-color, 0.5);
+
+		&:hover::after {
+			color: rgba($text-color, 0.75);
+		}
+	}
+}
+
+%add-button {
+	@extend %button;
 
 	&:hover::after {
 		@include ionicon($ionicon-var-plus-circled);
@@ -23,16 +36,24 @@
 	}
 
 	&[disabled] {
-		cursor: not-allowed;
-		color: rgba($text-color, 0.5);
-
 		&:hover::after {
-			color: rgba($text-color, 0.75);
 			@include ionicon($ionicon-var-checkmark-circled);
 		}
 		&::after {
 			@include ionicon($ionicon-var-checkmark);
 		}
+	}
+}
+
+%remove-button {
+	@extend %button;
+
+	&:hover::after {
+		@include ionicon($ionicon-var-close-circled);
+	}
+
+	&::after {
+		@include ionicon($ionicon-var-close);
 	}
 }
 
