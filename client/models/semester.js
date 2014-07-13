@@ -24,9 +24,13 @@ var Semester = React.createClass({
 		return activeSchedules || this.props.schedules[0]
 	},
 	removeSemester: function() {
-		console.log('deleting', String(this.props.year) + '.' + String(this.props.semester))
-		console.log(this.props.schedule)
-		this.props.schedule.remove()
+		console.log(this.props.schedules)
+		this.props.schedules.forEach(function(schedule, scheduleIndex, scheduleArray) {
+			console.log('deleting', String(this.props.year) + '.' + String(this.props.semester) + '#' + schedule.title.val())
+			console.log('to delete:', schedule, scheduleIndex, scheduleArray)
+			schedule.remove()
+			console.log('deleted', String(this.props.year) + '.' + String(this.props.semester) + '#' + schedule.title.val())
+		}, this)
 	},
 	render: function() {
 		console.log('semester render')
