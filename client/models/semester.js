@@ -44,7 +44,7 @@ var Semester = React.createClass({
 				React.DOM.h1(null, semesterName, ' (' + _.size(this.props.schedules) + ')'),
 				React.DOM.button({
 					className: "remove-semester",
-					title: "Remove " + String(this.props.year) + ' ' + this.props.semesterName,
+					title: "Remove " + String(this.props.year) + ' ' + semesterName,
 					onClick: this.removeSemester,
 				})
 			),
