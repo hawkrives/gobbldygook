@@ -10,17 +10,17 @@ var Semester = React.createClass({
 	render: function() {
 		console.log('semester render')
 
-		var semesterName = 'Unknown (' + this.props.name + ')';
+		var semesterName = 'Unknown (' + this.props.semester + ')';
 
-		if (this.props.name === '1') {
+		if (this.props.semester === 1) {
 			semesterName = 'Fall';
-		} else if (this.props.name === '2') {
+		} else if (this.props.semester === 2) {
 			semesterName = 'Interim';
-		} else if (this.props.name === '3') {
+		} else if (this.props.semester === 3) {
 			semesterName = 'Spring';
-		} else if (this.props.name === '4') {
+		} else if (this.props.semester === 4) {
 			semesterName = 'Early Summer';
-		} else if (this.props.name === '5') {
+		} else if (this.props.semester === 5) {
 			semesterName = 'Late Summer';
 		}
 
