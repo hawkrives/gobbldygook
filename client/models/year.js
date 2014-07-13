@@ -4,13 +4,30 @@ var React = require('react')
 var Course = require('./course')
 var Semester = require('./semester')
 
+var findFirstAvailableSemester = require('../helpers/findFirstAvailableSemester')
+var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
+
 var Year = React.createClass({
+	canAddSemester: function() {
+		console.log('canAddSemester', findFirstAvailableSemester(this.props.schedules.val(), this.props.year) <= 5)
+		return !(findFirstAvailableSemester(this.props.schedules.val(), this.props.year) > 5)
+	},
 	addSemester: function() {
-		console.log('addSemester', arguments)
+		var schedules = this.props.schedules.val()
+		var nextAvailableSemester = findFirstAvailableSemester(schedules, this.props.year)
+		var nextId = calculateNextScheduleId(schedules)
+
+		this.props.schedules.push({
+			id: nextId, year: this.props.year, semester: nextAvailableSemester,
+			title: "Schedule 1", sequence: 1,
+			clbids: [], active: true,
+		})
 	},
 	render: function() {
-		var terms = _.map(_.groupBy(this.props.schedules, 'semester'), function(schedulesBySemester, semester) {
-			var clbids = _.pluck(_.filter(schedulesBySemester, 'active'), 'clbids')
+		var schedules = _.filter(this.props.schedules.val(), {year: this.props.year})
+
+		var terms = _.map(_.groupBy(schedules, 'semester'), function(schedule, semester) {
+			var clbids = _.pluck(_.filter(schedule, 'active'), 'clbids')
 			return Semester( {key:semester, name:semester, clbids:clbids } );
 		}, this)
 
@@ -27,7 +44,7 @@ var Year = React.createClass({
 				{
 					className: "add-semester", 
 					title: "Add Semester", 
-					disabled: _.size(terms) <= 5 ? false : true,
+					disabled: !this.canAddSemester(),
 					onClick: this.addSemester,
 				},
 				"+")
