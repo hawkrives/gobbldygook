@@ -6,6 +6,7 @@ var loadStats = require('loading-stats')
 var logger = require('andlog')
 var Promise = require("bluebird")
 var React = require('react')
+var Cortex = require('cortexjs')
 
 var tracking = require('./helpers/metrics')
 var Student = require('./models/student')
@@ -62,8 +63,9 @@ module.exports = {
 		initializeLibraries()
 
 		// load in the demo student — for now
-		window.me = demoStudent
+		window.me = new Cortex(demoStudent)
 		setupDatabase().then(loadData)
+
 
 		// wait for document ready to render our main view
 		// this ensures the document has a body, etc.
@@ -71,10 +73,16 @@ module.exports = {
 			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
 
 			// init our main view
-			React.renderComponent(
-				Student(me),
+			var studentComponent = React.renderComponent(
+				Student(window.me),
 				document.body
 			)
+
+			window.me.on('update', function(updatedStudent) {
+				console.log('updated student', updatedStudent)
+				studentComponent.setProps(updatedStudent)
+			})
+
 		}, false );
 	},
 };

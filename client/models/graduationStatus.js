@@ -6,17 +6,27 @@ var StudentSummary = require('./studentSummary')
 
 var makeCourseObjects = require('../helpers/makeCourseObjects')
 
+var pluckCurried = _.curry(function(key, data) {
+	// console.log(data)
+	return data[key].val()
+})
+
+var log = function(summat) {
+	console.log(summat)
+}
+
 var GraduationStatus = React.createClass({
 	render: function() {
 		console.log('graduation-status render')
 
 		// Get course objects
-		var activeSchedules = _.filter(this.props.schedules, 'active')
+		// console.log('grad-status props', this.props)
+		var activeSchedules = _.filter(this.props.schedules.val(), 'active')
 		var clbids = _.pluck(activeSchedules, 'clbids')
 		var courses = makeCourseObjects(_.uniq(_.flatten(clbids)))
 
 		// Get areas of study
-		var areasOfStudy = _.groupBy(this.props.studies, 'type')
+		var areasOfStudy = _.groupBy(this.props.studies.val(), 'type')
 		areasOfStudy = _.mapValues(areasOfStudy, function(areas) {
 			return _.map(areas, function(area) {
 				area.key = area.id
