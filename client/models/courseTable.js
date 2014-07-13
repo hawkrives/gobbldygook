@@ -1,37 +1,44 @@
 var _ = require('lodash')
 var React = require('react')
 
-var Course = require('./course')
-var Semester = require('./semester')
+var Year = require('./year')
+
+var findFirstAvailableYear = require('../helpers/findFirstAvailableYear')
+var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
 
 var CourseTable = React.createClass({
+	addYear: function(ev) {
+		var schedules = this.props.schedules.val()
+		var nextAvailableYear = findFirstAvailableYear(schedules)
+		var nextId = calculateNextScheduleId(schedules)
+		console.log('nextAvailableYear', nextAvailableYear)
+		console.log('nextId', nextId)
+		this.props.schedules.push({
+			id: nextId, year: nextAvailableYear, semester: 1,
+			title: "Schedule 1", sequence: 1,
+			clbids: [], active: true,
+		})
+
+	},
 	render: function() {
 		console.log('course-table render')
-		console.log('course-table schedules', this.props.schedules)
+		console.log('course-table schedules', this.props.schedules.val())
 
-		var years = _.map(_.groupBy(this.props.schedules, 'year'), function(schedulesByYear, year) {
-			var terms = _.map(_.groupBy(schedulesByYear, 'semester'), function(schedulesBySemester, semester) {
-				var clbids = _.pluck(_.filter(schedulesBySemester, 'active'), 'clbids')
-				return Semester( {key:semester, name:semester, clbids:clbids } );
-			});
-			return React.DOM.div( {className:"year", key:year},
-				React.DOM.header({className: "year-title"},
-					React.DOM.h1(null,
-						React.DOM.span({className: "year-start"}, year),
-						React.DOM.span({className: "year-divider"}, "+"),
-						React.DOM.span({className: "year-end"}, parseInt(year, 10) + 1)
-					)
-				),
-				terms,
-				React.DOM.button({className: "add-semester", title: "Add Semester", disabled: _.size(terms) <= 5 ? false : true}, "+")
-			)
-		}, this);
+		var years = _.map(_.groupBy(this.props.schedules.val(), 'year'), function(schedulesByYear, year) {
+			return Year( {schedules: schedulesByYear, year: year, key:year} )
+		}, this)
 
 		return React.DOM.div( {className:"course-table"}, 
 			years,
-			React.DOM.button({className: "add-year", title: "Add Year"}, "+")
-		);
+			React.DOM.button(
+				{
+					className: "add-year", 
+					title: "Add Year",
+					onClick: this.addYear,
+				}, 
+				"+")
+		)
 	}
-});
+})
 
 module.exports = CourseTable
