@@ -15,6 +15,8 @@ var demoStudent = require('../mockups/demo_student')
 var loadData = require('./helpers/loadData')
 
 
+window._ = _
+
 function initializeLibraries() {
 	Promise.longStackTraces()
 	React.initializeTouchEvents(true)
