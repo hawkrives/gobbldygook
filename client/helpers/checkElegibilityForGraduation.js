@@ -1,6 +1,8 @@
 var _ = require('lodash')
 var add = require('./add')
+
 var countCredits = require('./countCredits')
+var hasDepartment = require('./hasDepartment')
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a
@@ -163,11 +165,6 @@ function gradedCourses(student) {
 
 	return _.size(student.courses) - _.size(student.fabrications) >= 24
 }
-
-var hasDepartment = _.curry(function(dept, course) {
-	// _.curry allows the function to be called with arguments multiple times.
-	return _.contains(course.depts, dept)
-})
 
 var atLeastEightCredits = _.curry(function(major, courses) {
 	var withinMajorCourses = _.filter(courses, hasDepartment(major.abbr))
