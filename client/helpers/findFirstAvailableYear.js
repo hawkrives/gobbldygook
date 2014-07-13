@@ -14,8 +14,6 @@ function findFirstAvailableYear(schedules) {
 			.uniq()
 			.value()
 
-	console.log(years)
-
 	var missingNo = findMissingNumberBinarySearch(years)
 	if (missingNo != -1) {
 		return missingNo
