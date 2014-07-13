@@ -11,7 +11,8 @@ var CourseTable = React.createClass({
 
 		var years = _.map(_.groupBy(this.props.schedules, 'year'), function(schedulesByYear, year) {
 			var terms = _.map(_.groupBy(schedulesByYear, 'semester'), function(schedulesBySemester, semester) {
-				return Semester( {key:semester, name:semester, schedules:schedulesBySemester} );
+				var clbids = _.pluck(_.filter(schedulesBySemester, 'active'), 'clbids')
+				return Semester( {key:semester, name:semester, clbids:clbids } );
 			});
 			return React.DOM.div( {className:"year", key:year},
 				React.DOM.header({className: "year-title"},
