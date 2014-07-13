@@ -36,15 +36,12 @@ var Year = React.createClass({
 			var possible = this.props.schedules.filter(function(schedule) {
 				return (schedule.year.val() === this.props.year && schedule.semester.val() === semester)
 			}, this)
-			var active = possible.find(function(schedule) {
-				return schedule.active.val() === true
-			})
 			return Semester({
 				key: semester,
 				ref: semester,
 				semester: parseInt(semester, 10),
 				year: this.props.year,
-				schedule: active
+				schedules: possible
 			})
 		}, this)
 

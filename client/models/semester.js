@@ -16,6 +16,13 @@ var Semester = React.createClass({
 
 		return 'Unknown (' + this.props.semester + ')';
 	},
+	findActiveSchedules: function() {
+		var activeSchedules = this.props.schedules.find(function(schedule) {
+			if (schedule.active)
+				return schedule.active.val() === true
+		})
+		return activeSchedules || this.props.schedules[0]
+	},
 	removeSemester: function() {
 		console.log('deleting', String(this.props.year) + '.' + String(this.props.semester))
 		console.log(this.props.schedule)
@@ -24,9 +31,9 @@ var Semester = React.createClass({
 	render: function() {
 		console.log('semester render')
 
-
-		var courseObjects = makeCourseObjects(_.uniq(this.props.schedule.val().clbids))
 		var semesterName = this.makeSemesterName()
+		var active = this.findActiveSchedules()
+		var courseObjects = makeCourseObjects(_.uniq(active.val().clbids))
 
 		return React.DOM.div( {className:"semester"},
 			React.DOM.header({className: "semester-title"},
