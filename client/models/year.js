@@ -35,8 +35,8 @@ var Year = React.createClass({
 				React.DOM.h1(null,
 					React.DOM.span({className: "year-start"}, this.props.year),
 					React.DOM.span({className: "year-divider"}, "+"),
-					React.DOM.span({className: "year-end"}, parseInt(this.props.year, 10) + 1)
 				)
+					React.DOM.span({className: "year-end"}, this.props.year + 1)
 			),
 			terms,
 			React.DOM.button({
