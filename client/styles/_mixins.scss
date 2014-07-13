@@ -44,8 +44,13 @@
 %block {
 	@extend %block-base;
 	background-color: white;
-	@include material-shadow(1);
-	&:hover { @include material-shadow(2); }
+	transition: border 0.5s ease-in-out;
+
+	border: solid 1px $background-start-color;
+	border-bottom-color: rgba(60, 54, 42, 0.25);
+	&:hover {
+		border-color: rgba(60, 54, 42, 0.5);
+	}
 }
 
 %block-small {
