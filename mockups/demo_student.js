@@ -89,7 +89,7 @@ module.exports = {
 		},
 		{
 			id: 9, year: 2014, semester: 2,
-			title: "Schedule 2", sequence: 1,
+			title: "Schedule 2", sequence: 2,
 			clbids: [97174],
 			active: false,
 		},
