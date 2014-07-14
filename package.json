@@ -34,7 +34,7 @@
     "andlog": "^1.0.0",
     "async": "^0.9.0",
     "bluebird": "^2.2.1",
-    "cortexjs": "git://github.com/hawkrives/cortex#updateVersionsInManifests",
+    "cortexjs": "git://github.com/hawkrives/cortex#master",
     "db.js": "git://github.com/aaronpowell/db.js#master",
     "humanize-plus": "^1.4.2",
     "loading-stats": "0.0.2",
