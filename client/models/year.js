@@ -33,15 +33,12 @@ var Year = React.createClass({
 
 		var terms = _.map(_.groupBy(schedules, 'semester'), function(schedule, semester) {
 			semester = parseInt(semester, 10)
-			var possible = this.props.schedules.filter(function(schedule) {
-				return (schedule.year.val() === this.props.year && schedule.semester.val() === semester)
-			}, this)
 			return Semester({
 				key: semester,
 				ref: semester,
 				semester: parseInt(semester, 10),
 				year: this.props.year,
-				schedules: possible
+				schedules: this.props.schedules
 			})
 		}, this)
 
