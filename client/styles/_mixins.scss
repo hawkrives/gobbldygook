@@ -48,8 +48,12 @@
 %remove-button {
 	@extend %button;
 
-	&:hover::after {
-		@include ionicon($ionicon-var-close-circled);
+	background-color: white;
+	color: $red;
+
+	&:hover {
+		background-color: $red;
+		color: white;
 	}
 
 	&::after {

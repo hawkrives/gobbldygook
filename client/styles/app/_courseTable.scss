@@ -14,7 +14,14 @@
 .remove-year {
 	@extend %remove-button;
 	display: none;
-	align-self: center;
+
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	width: 100%;
+	height: 28px;
 }
 
 .course-table .year {
@@ -29,11 +36,7 @@
 	flex-flow: row nowrap;
 	justify-content: space-between;
 
-	&:hover {
-		.remove-year {
-			display: block;
-		}
-	}
+	overflow: hidden;
 }
 
 .course-table .year-title, .course-table .semester-title {
@@ -63,12 +66,13 @@
 	font-weight: 200;
 	font-size: 0.9em;
 
-	display: -webkit-flex;
-	-webkit-flex-direction: column;
-	-webkit-justify-content: space-between;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	position: relative;
+
+	&:hover {
+		.remove-year {
+			display: block;
+		}
+	}
 
 	.year-divider {
 		display: inline-block;

@@ -41,4 +41,6 @@
 .remove-semester {
 	@extend %remove-button;
 	display: none;
+
+	border-radius: 50px;
 }
