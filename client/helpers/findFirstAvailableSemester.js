@@ -7,8 +7,6 @@ var findMissingNumberBinarySearch = require('./findMissingNumberBinarySearch')
 // will return 2016. Etc.
 
 function findFirstAvailableSemester(schedules, forYear) {
-	var lastSemester = 5
-
 	var semesters =
 		_(schedules)
 			.filter({year: forYear})
@@ -16,6 +14,9 @@ function findFirstAvailableSemester(schedules, forYear) {
 			.pluck('semester')
 			.uniq()
 			.value()
+
+	// stick a 0 at the front so findBinary will start from 1
+	semesters.unshift(0)
 
 	var missingNo = findMissingNumberBinarySearch(semesters)
 	if (missingNo != -1) {
