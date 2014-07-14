@@ -6,6 +6,10 @@ var Course = require('./course')
 
 var makeCourseObjects = require('../helpers/makeCourseObjects')
 
+var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
+	return (schedule.year.val() === year && schedule.semester.val() === semester)
+})
+
 var Semester = React.createClass({
 	makeSemesterName: function() {
 		if      (this.props.semester === 1) return 'Fall';
@@ -23,16 +27,13 @@ var Semester = React.createClass({
 				return schedule.active.val() === true
 			}
 		})
-		return activeSchedules || this.props.schedules[0]
+		return activeSchedules
 	},
 	removeSemester: function() {
-		console.log(this.props.schedules)
-		this.props.schedules.forEach(function(schedule, scheduleIndex, scheduleArray) {
-			console.log('deleting', String(this.props.year) + '.' + String(this.props.semester) + '#' + schedule.title.val())
-			console.log('to delete:', schedule, scheduleIndex, scheduleArray)
-			schedule.remove()
-			console.log('deleted', String(this.props.year) + '.' + String(this.props.semester) + '#' + schedule.title.val())
-		}, this)
+		console.log('called removeSemester')
+		var indices = this.props.schedules.findIndices(isCurrentTermSchedule(this.props.year, this.props.semester))
+		console.log('indices to delete', indices)
+		this.props.schedules.removeSeveral(indices)
 	},
 	render: function() {
 		console.log('semester render')
