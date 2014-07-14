@@ -7,6 +7,10 @@ var Semester = require('./semester')
 var findFirstAvailableSemester = require('../helpers/findFirstAvailableSemester')
 var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
 
+var isCurrentYearSchedule = _.curry(function(year, schedule) {
+	return (schedule.year.val() === year)
+})
+
 var Year = React.createClass({
 	canAddSemester: function() {
 		return !(findFirstAvailableSemester(this.props.schedules.val(), this.props.year) > 5)
@@ -23,10 +27,10 @@ var Year = React.createClass({
 		})
 	},
 	removeYear: function() {
-		// console.log('year React object', this.refs)
-		_.each(this.refs, function(ref) {
-			ref.removeSemester()
-		})
+		console.log('called removeYear')
+		var indices = this.props.schedules.findIndices(isCurrentYearSchedule(this.props.year))
+		console.log('indices to delete', indices)
+		this.props.schedules.removeSeveral(indices)
 	},
 	render: function() {
 		var schedules = _.filter(this.props.schedules.val(), {year: this.props.year})
