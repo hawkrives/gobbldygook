@@ -15,7 +15,7 @@
 	}
 
 	$progress-bar-bg: transparent;
-	// $progress-bar-color: $olaf-gold;
+	$progress-bar-solid-color: $olaf-gold;
 	$progress-bar-color: linear-gradient(
 		to bottom, 
 		$olaf-gradient-start, 
@@ -35,7 +35,7 @@
 		vertical-align: middle;
 		border: 0;
 
-		color: $progress-bar-color;
+		color: $progress-bar-solid-color;
 		background: $progress-bar-bg;
 
 		border-radius: 3px;
