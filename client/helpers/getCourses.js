@@ -4,13 +4,14 @@ var Promise = require("bluebird")
 function getCourse(clbid) {
 	return new Promise(function(resolve, reject) {
 		window.server.courses.get(clbid)
-			.execute()
-			.done(function(results) {
-				console.log('courses retrieved:', results)
-				if (results.length)
-					resolve(results[0])
-				else
-					reject(results)
+			.then(function(course) {
+				if (course) {
+					console.log('course retrieved:', course)
+					resolve(course)
+				} else {
+					console.error('course retrieval failed for: ' + clbid)
+					reject(new Error('course retrieval failed for: ' + clbid))
+				}
 			})
 	})
 }
