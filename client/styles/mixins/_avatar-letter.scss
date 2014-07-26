@@ -1,4 +1,6 @@
 @mixin avatar-letter($size) {
+	@extend %no-select;
+
 	position: relative;
 	top: 1px;
 	display: inline-block;
@@ -14,8 +16,6 @@
 	height: $size;  
 	line-height: $size; 
 	font-size: $size/2;
-
-	@extend %no-select;
 
 	border-radius: $size;
 
