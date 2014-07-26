@@ -71,11 +71,10 @@
 	background-color: white;
 	transition: border 0.5s ease-in-out;
 
-	border: solid 1px $background-start-color;
-	border-bottom-color: rgba(60, 54, 42, 0.25);
-	&:hover {
-		border-color: rgba(60, 54, 42, 0.5);
-	}
+	background: #fff;
+	border: 1px solid;
+	border-color: $border-colors;
+	border-radius: 3px;
 }
 
 %block-small {

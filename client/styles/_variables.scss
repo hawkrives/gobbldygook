@@ -13,6 +13,11 @@ $near-black: #2C281F;
 
 $text-color: $near-black;
 
+$border-top-color: #e5e6e9;
+$border-side-color: #dfe0e4;
+$border-bottom-color: #d0d1d5;
+$border-colors: $border-top-color $border-side-color $border-bottom-color;
+
 // fonts
 $sans-font-stack: 'Open Sans', 'Helvetica', 'Verdana', sans-serif;
 $body-font-stack: $sans-font-stack;
