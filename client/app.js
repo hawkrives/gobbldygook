@@ -89,17 +89,24 @@ module.exports = {
 		initializeLibraries()
 
 		// load in the demo student — for now
-		window.me = loadStudent()
+		var studentPromise = loadStudent()
+			.then(function(student) {
+				window.me = student
+			})
 
 		// Load data into the database
 		var databasePromise = setupDatabase()
-		console.log(databasePromise)
+		databasePromise.then(function() {
+			console.log('database ready')
+		})
+
 		var dataLoadedPromise = databasePromise.then(loadData)
-		dataLoadedPromise.then(function() { console.log('data loaded') })
-		console.log(dataLoadedPromise)
+		dataLoadedPromise.then(function() {
+			console.log('data loaded')
+		})
 
 		// Wait for document.ready, the database, and the student.
-		Promise.all([window.server, dataLoadedPromise, document.ready, window.me]).then(function() {
+		Promise.all([databasePromise, dataLoadedPromise, document.ready, studentPromise]).then(function() {
 			console.log('3. 2.. 1... Blastoff!')
 
 			// init our main view
