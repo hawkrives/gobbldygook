@@ -87,15 +87,12 @@
 
 %block-flat {
 	@extend %block-base;
+	border: 1px solid transparent;
 
-	@include material-shadow(0);
-	&:hover, &:focus {
-		@include material-shadow(2);
-		background-color: white;
-	}
-	&:active {
-		@include material-shadow(1);
-		background-color: white;
+	&:hover, &:focus, &:active {
+		background: #fff;
+		border-color: $border-colors;
+		border-radius: 3px;
 	}
 }
 
