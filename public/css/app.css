@@ -5,7 +5,7 @@
   src: url("/libraries/ionicons/fonts/ionicons.eot?v=1.5.2#iefix") format("embedded-opentype"), url("/libraries/ionicons/fonts/ionicons.ttf?v=1.5.2") format("truetype"), url("/libraries/ionicons/fonts/ionicons.woff?v=1.5.2") format("woff"), url("/libraries/ionicons/fonts/ionicons.svg?v=1.5.2#Ionicons") format("svg");
   font-weight: normal;
   font-style: normal; }
-.ion, .add-year:hover::after, .add-area-of-study:hover::after, .add-semester:hover::after, .add-year::after, .add-area-of-study::after, .add-semester::after, [disabled].add-year:hover::after, [disabled].add-area-of-study:hover::after, [disabled].add-semester:hover::after, [disabled].add-year::after, [disabled].add-area-of-study::after, [disabled].add-semester::after, .remove-year::after, .remove-semester::after, .area-of-study > details summary::after, .area-of-study > details[open] summary::after {
+.ion, .add-year::after, .add-area-of-study::after, .add-semester::after, [disabled].add-year::after, [disabled].add-area-of-study::after, [disabled].add-semester::after, .remove-year::after, .remove-semester::after, .area-of-study > details summary::after, .area-of-study > details[open] summary::after {
   display: inline-block;
   font-family: "Ionicons";
   speak: none;
@@ -35,12 +35,8 @@
     [disabled].add-year:hover::after, [disabled].add-area-of-study:hover::after, [disabled].add-semester:hover::after, [disabled].remove-year:hover::after, [disabled].remove-semester:hover::after {
       color: rgba(44, 40, 31, 0.75); }
 
-.add-year:hover::after, .add-area-of-study:hover::after, .add-semester:hover::after {
-  content: "\f216"; }
 .add-year::after, .add-area-of-study::after, .add-semester::after {
   content: "\f218"; }
-[disabled].add-year:hover::after, [disabled].add-area-of-study:hover::after, [disabled].add-semester:hover::after {
-  content: "\f120"; }
 [disabled].add-year::after, [disabled].add-area-of-study::after, [disabled].add-semester::after {
   content: "\f122"; }
 
@@ -60,10 +56,10 @@
 .area-of-study, #student-summary, .add-year, .course-table .year {
   background-color: white;
   transition: border 0.5s ease-in-out;
-  border: solid 1px #e8e8e8;
-  border-bottom-color: rgba(60, 54, 42, 0.25); }
-  .area-of-study:hover, #student-summary:hover, .add-year:hover, .course-table .year:hover {
-    border-color: rgba(60, 54, 42, 0.5); }
+  background: #fff;
+  border: 1px solid;
+  border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+  border-radius: 3px; }
 
 .area-of-study, #student-summary {
   margin-bottom: 10px; }
@@ -71,18 +67,11 @@
     margin-bottom: 0; }
 
 .add-area-of-study {
-  -webkit-transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-  transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1); }
-  .add-area-of-study:hover, .add-area-of-study:focus {
-    -webkit-transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-    transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-    box-shadow: 0px 3px 3px rgba(60, 54, 42, 0.16);
-    background-color: white; }
-  .add-area-of-study:active {
-    -webkit-transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-    transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-    box-shadow: 0px 1px 1.5px rgba(60, 54, 42, 0.12);
-    background-color: white; }
+  border: 1px solid transparent; }
+  .add-area-of-study:hover, .add-area-of-study:focus, .add-area-of-study:active {
+    background: #fff;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    border-radius: 3px; }
 
 * {
   box-sizing: border-box; }
@@ -99,7 +88,7 @@ body {
 .area-of-study h1 {
   padding: 5px;
   font-size: inherit;
-  font-weight: 300;
+  font-weight: 400;
   margin: 0;
   z-index: 1;
   position: relative; }
@@ -117,7 +106,7 @@ body {
   margin: 0;
   vertical-align: middle;
   border: 0;
-  color: linear-gradient(to bottom, #e49f31, #c88926);
+  color: #c3931e;
   background: transparent;
   border-radius: 3px;
   overflow: hidden; }
@@ -215,11 +204,10 @@ body {
   font-size: 14px; }
 
 .graduation-status .area-type-heading {
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: normal;
   margin-top: 0;
-  margin-bottom: 0;
-  text-transform: uppercase; }
+  margin-bottom: 0; }
   .graduation-status .area-type-heading h1, .graduation-status .area-type-heading h2, .graduation-status .area-type-heading h3, .graduation-status .area-type-heading h4, .graduation-status .area-type-heading h5, .graduation-status .area-type-heading h6 {
     font-weight: inherit;
     font-size: inherit;
@@ -236,7 +224,7 @@ body {
   -webkit-flex: 1;
   flex: 1;
   padding: 2.5px 5px;
-  border-left: solid 1px #c4c4c4;
+  border-left: solid 1px #d0d1d5;
   -webkit-transition: 0.75s all;
   -moz-transition: 0.75s all;
   -ms-transition: 0.75s all;
@@ -250,9 +238,11 @@ body {
     display: inline-block; }
 
 .add-semester {
-  border-left: solid 1px #c4c4c4;
+  border-left: solid 1px #d0d1d5;
   width: 32px;
-  font-size: 1.25em; }
+  font-size: 1.25em;
+  margin-top: 0;
+  margin-bottom: 0; }
 
 .remove-semester {
   display: none;
@@ -289,17 +279,9 @@ body {
   height: 48px;
   line-height: 48px;
   font-size: 24px;
-  border-radius: 48px;
-  -webkit-transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-  transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-  box-shadow: 0px 1px 1.5px rgba(60, 54, 42, 0.12);
   color: #c3931e;
   float: left;
   margin-right: 5px; }
-  #student-letter:hover {
-    -webkit-transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-    transition: 0.7s 0.01s cubic-bezier(0.19, 1, 0.22, 1);
-    box-shadow: 0px 3px 3px rgba(60, 54, 42, 0.16); }
   .cannot-graduate #student-letter {
     color: #ff851b; }
   .can-graduate #student-letter {
