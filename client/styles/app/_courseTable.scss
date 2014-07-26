@@ -36,7 +36,8 @@
 	flex-flow: row nowrap;
 	justify-content: space-between;
 
-	overflow: hidden;
+	overflow-y: hidden;
+	overflow-x: scroll;
 }
 
 .course-table .year-title, .course-table .semester-title {

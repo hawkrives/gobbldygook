@@ -3,6 +3,7 @@ $semester-divider: solid 1px $border-bottom-color;
 .semester {
 	-webkit-flex: 1;
 	flex: 1;
+	min-width: 200px;
 
 	padding: $block-edge-padding/2 $block-edge-padding;
 
