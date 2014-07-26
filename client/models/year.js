@@ -31,6 +31,11 @@ var Year = React.createClass({
 		var indices = this.props.schedules.findIndices(isCurrentYearSchedule(this.props.year))
 		console.log('indices to delete', indices)
 		this.props.schedules.removeSeveral(indices)
+		// this.props.schedules.forEach(function(schedule, index) {
+		// 	if (isCurrentYearSchedule(this.props.year, schedule)) {
+		// 		this.props.schedules.removeAt(index)
+		// 	}
+		// })
 	},
 	render: function() {
 		var schedules = _.filter(this.props.schedules.val(), {year: this.props.year})

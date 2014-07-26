@@ -34,6 +34,12 @@ var Semester = React.createClass({
 		var indices = this.props.schedules.findIndices(isCurrentTermSchedule(this.props.year, this.props.semester))
 		console.log('indices to delete', indices)
 		this.props.schedules.removeSeveral(indices)
+		// var year = this.props.year, semester = this.props.semester
+		// this.props.schedules.forEach(function(schedule, index, schedules) {
+		// 	if (isCurrentTermSchedule(year, semester, schedule)) {
+		// 		schedules.removeAt(index)
+		// 	}
+		// })
 	},
 	render: function() {
 		console.log('semester render')
