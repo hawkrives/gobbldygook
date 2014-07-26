@@ -1,32 +1,58 @@
 var _ = require('lodash')
 var React = require('react')
+var humanize = require('humanize-plus')
+var getCourse = require('../helpers/getCourses').getCourse
 
 var DraggableMixin = require('../mixins/draggable')
 
 var Course = React.createClass({
 	mixins: [DraggableMixin],
 	getInitialState: function() {
+		return {
+			clbid: undefined,
+			credits: 0,
+			crsid: undefined,
+			depts: [],
+			desc: undefined,
+			gereqs: [],
+			level: undefined,
+			num: undefined,
+			pf: undefined,
+			places: [],
+			profs: [],
+			sect: undefined,
+			sem: undefined,
+			term: undefined,
+			times: [],
+			title: undefined,
+			type: undefined,
+			year: undefined
+		}
 	},
 	componentDidMount: function() {
-	},
-	componentWillUnmount: function() {
+		var self = this
+		// this.props.info.then(function(info) {
+		// 	if (self.isMounted()) {
+		// 		self.setState(info)
+		// 	}
+		// })
+		getCourse(this.props.clbid).then(function(info) {
+			if (self.isMounted()) {
+				self.setState(info)
+			}
+		})
 	},
 	render: function() {
 		return React.DOM.article({className: 'course'},
-			React.DOM.h1({className: 'title'}, this.props.info.clbid),
+			React.DOM.h1({className: 'title'}, this.state.clbid),
 			React.DOM.span({className: 'details'},
 				React.DOM.span({className: 'identifier'}, 
-					React.DOM.span({className: 'department'}, new String(this.props.info.clbid).substr(0, 3)),
+					React.DOM.span({className: 'department'}, this.state.depts.join('/')),
 					' ',
-					React.DOM.span({className: 'number'}, new String(this.props.info.clbid).slice(-3)),
-					this.props.info.sect ? React.DOM.span({className: 'section'}, this.props.info.clbid) : ''
+					React.DOM.span({className: 'number'}, this.state.num),
+					this.state.sect ? React.DOM.span({className: 'section'}, this.state.sect) : ''
 				),
-				React.DOM.span({className: 'professors'}, 
-					Math.random() > 0.5 ? 'Mr.' : 'Ms.', ' ',
-					this.props.info.clbid,
-					' ',
-					this.props.info.clbid
-				)
+				React.DOM.span({className: 'professors'}, humanize.oxford(this.state.profs))
 			)
 		)
 	}

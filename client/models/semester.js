@@ -4,7 +4,7 @@ var React = require('react')
 var CourseList = require('./courseList')
 var Course = require('./course')
 
-var makeCourseObjects = require('../helpers/makeCourseObjects')
+// var makeCourseObjects = require('../helpers/makeCourseObjects')
 
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 	return (schedule.year.val() === year && schedule.semester.val() === semester)
@@ -46,7 +46,7 @@ var Semester = React.createClass({
 
 		var semesterName = this.makeSemesterName()
 		var active = this.findActiveSchedules()
-		var courseObjects = makeCourseObjects(_.uniq(active.val().clbids))
+		// var courseObjects = makeCourseObjects(_.uniq(active.val().clbids))
 
 		return React.DOM.div( {className:"semester"},
 			React.DOM.header({className: "semester-title"},
@@ -57,7 +57,7 @@ var Semester = React.createClass({
 					onClick: this.removeSemester,
 				})
 			),
-			CourseList( {courses: courseObjects} )
+			CourseList( {courses: active.val().clbids} )
 		)
 	}
 })
