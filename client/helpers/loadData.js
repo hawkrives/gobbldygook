@@ -106,10 +106,12 @@ function updateDatabase(itemType, infoFromServer) {
 					reject(err.stack)
 				})
 				.done(function() {
-					resolve('had to add ' + itemPath)
+					console.log('had to add ' + itemPath)
+					resolve()
 				})
 		} else {
-			resolve('bypassed adding ' + itemPath)
+			console.log('bypassed adding ' + itemPath)
+			resolve()
 		}
 	})
 }
