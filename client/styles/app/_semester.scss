@@ -1,10 +1,12 @@
+$semester-divider: solid 1px $border-bottom-color;
+
 .semester {
 	-webkit-flex: 1;
 	flex: 1;
 
 	padding: $block-edge-padding/2 $block-edge-padding;
 
-	border-left: solid 1px #c4c4c4;
+	border-left: $semester-divider;
 
 	-webkit-transition: 0.75s all;
 	-moz-transition: 0.75s all;
@@ -32,7 +34,7 @@
 
 .add-semester {
 	@extend %add-button;
-	border-left: solid 1px #c4c4c4;
+	border-left: $semester-divider;
 
 	width: 32px;
 	font-size: 1.25em;
