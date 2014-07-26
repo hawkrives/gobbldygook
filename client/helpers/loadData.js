@@ -86,8 +86,6 @@ function updateDatabase(itemType, infoFromServer) {
 
 function loadDataFiles(info) {
 	console.log('loadDataFiles', info)
-	return new Promise.all(_.map(info.info, function(files) {
-		return new Promise.all(_.map(files, function(file) {
 			return updateDatabase(info.type, file)
 		}))
 	}))
@@ -105,7 +103,7 @@ function loadData() {
 		'/data/areas/info.json',
 		'/data/courses/info.json',
 	]
-	return new Promise.all(_.map(infoFiles, loadInfoFile))
+	return Promise.all(_.map(infoFiles, loadInfoFile))
 }
 
 module.exports = loadData
