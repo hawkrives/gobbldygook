@@ -75,7 +75,6 @@ function cleanPriorData(item) {
 
 	deleteItemsPromise.then(function() {
 		localStorage.removeItem(path)
-		localStorage.setItem(path, hash)
 	})
 
 	return deleteItemsPromise
@@ -100,6 +99,8 @@ function updateDatabase(itemType, infoFromServer) {
 					}
 					cleanPriorData(item).then(function() {
 						storeItem(item)
+					}).then(function() {
+						localStorage.setItem(item.meta.path, item.meta.hash)
 					})
 				})
 				.catch(function(err) {
