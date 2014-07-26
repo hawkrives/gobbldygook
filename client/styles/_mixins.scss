@@ -27,20 +27,19 @@
 %add-button {
 	@extend %button;
 
-	&:hover::after {
-		@include ionicon($ionicon-var-plus-circled);
-	}
-
 	&::after {
 		@include ionicon($ionicon-var-plus);
 	}
+	&:hover::after {
+		// @include ionicon($ionicon-var-plus-circled);
+	}
 
 	&[disabled] {
-		&:hover::after {
-			@include ionicon($ionicon-var-checkmark-circled);
-		}
 		&::after {
 			@include ionicon($ionicon-var-checkmark);
+		}
+		&:hover::after {
+			// @include ionicon($ionicon-var-checkmark-circled);
 		}
 	}
 }
