@@ -44,7 +44,7 @@ var Course = React.createClass({
 	},
 	render: function() {
 		return React.DOM.article({className: 'course'},
-			React.DOM.h1({className: 'title'}, this.state.clbid),
+			React.DOM.h1({className: 'title'}, this.state.title),
 			React.DOM.span({className: 'details'},
 				React.DOM.span({className: 'identifier'}, 
 					React.DOM.span({className: 'department'}, this.state.depts.join('/')),
