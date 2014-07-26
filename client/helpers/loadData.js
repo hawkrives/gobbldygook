@@ -25,14 +25,19 @@ function storeItem(item) {
 		_.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
 		})
-		window.server.courses.add.apply(window.server, item.data.courses).done(function() {
-			console.log('courses have been added')
-		})
+		window.server.courses
+			.add.apply(window.server, item.data.courses)
+			.done(function() {
+				console.log(_.size(item.data.courses) + ' courses have been added')
+			})
 	}
-	if (item.type === 'areas') {
+
+	else if (item.type === 'areas') {
 		item.data.info.sourcePath = item.meta.path
-		return window.server.areas.add(item.data.info).done(function(results) {
-			console.log('an area has been added')
+		window.server.areas
+			.add(item.data.info)
+			.done(function(results) {
+				console.log('an area has been added')
 		})
 	}
 }
