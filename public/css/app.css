@@ -134,6 +134,10 @@ body {
 .area-of-study > details[open] summary::after {
   content: "\f153"; }
 
+.course .title, .course .details {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
 .course .title {
   margin: 0 0 -0.85ex;
   padding: 0;
@@ -141,6 +145,7 @@ body {
   font-weight: 500;
   font-family: "Fira Sans"; }
 .course .details {
+  display: block;
   font-size: 0.9em; }
 .course .identifier::after {
   content: " · "; }

@@ -1,4 +1,10 @@
 .course {
+	.title, .details {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
 	.title {
 		margin: 0 0 -0.85ex;
 		padding: 0;
@@ -6,9 +12,12 @@
 		font-weight: 500;
 		font-family: $heading-font-stack;
 	}
+
 	.details {
+		display: block;
 		font-size: 0.9em;
 	}
+
 	.identifier {
 		&::after {
 			content: " · ";
