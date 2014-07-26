@@ -106,7 +106,9 @@ function updateDatabase(itemType, infoFromServer) {
 }
 
 function loadDataFiles(info) {
-	console.log('loadDataFiles', info)
+	console.log('load data files', info)
+	return Promise.all(_.map(info.info, function(files) {
+		return Promise.all(_.map(files, function(file) {
 			return updateDatabase(info.type, file)
 		}))
 	}))
