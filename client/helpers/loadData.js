@@ -10,16 +10,6 @@ var _ = require('lodash')
 			// delete the pervious data.
 			// and store the new data in the database
 
-var pathPrefix = '/data/'
-
-function deleteItems(items) {
-	if (_.size(items) > 0) {
-		console.log('items to delete', items)
-	}
-
-	// TODO: Delete items.
-}
-
 function storeItem(item) {
 	if (item.type === 'courses') {
 		_.map(item.data.courses, function(course) {
@@ -42,27 +32,53 @@ function storeItem(item) {
 	}
 }
 
+function deleteItems(type, path, key) {
+	console.log('deleting ' + type + ' from ' + path)
+
+	var itemsToDelete = window.server[type]
+		.query('sourcePath')
+		.only(path)
+		.execute()
+		.done()
+
+	itemsToDelete.then(function(items) {
+		var keysToDelete = _.pluck(items, key)
+		var numberToDelete = _.size(keysToDelete)
+		if (numberToDelete) {
+			_.each(keysToDelete, function(key) {
+				window.server[type]
+					.remove(key)
+					.done()
+			})
+		}
+		console.log(numberToDelete + ' ' + type + ' have been removed')
+	})
+
+	return new Promise(function(resolve, reject) {
+		itemsToDelete.then(resolve)
+	})
+}
+
 function cleanPriorData(item) {
 	var path = item.meta.path
 	var hash = item.meta.hash
 
-	return new Promise.all([
-		// get rid of old items
-		// and only query the appropriate type
-		window.server[item.type].query('sourcePath')
-			.only(path)
-			.execute()
-			.then(deleteItems)
-			.done()
-		,
+	// get rid of old items
+	var deleteItemsPromise;
+	if (item.type === 'areas') {
+		deleteItemsPromise = deleteItems('areas', path, 'sourcePath')
+	} else if (item.type === 'courses') {
+		deleteItemsPromise = deleteItems('courses', path, 'clbid')
+	} else {
+		deleteItemsPromise = Promise.reject(new Error('Unknown item type' + item.type))
+	}
 
-		new Promise(function(resolve, reject) {
-			// ... and the paths themselves.
-			localStorage.removeItem(path)
-			localStorage.setItem(path, hash)
-			resolve()
-		})
-	])
+	deleteItemsPromise.then(function() {
+		localStorage.removeItem(path)
+		localStorage.setItem(path, hash)
+	})
+
+	return deleteItemsPromise
 }
 
 function updateDatabase(itemType, infoFromServer) {
