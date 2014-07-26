@@ -31,11 +31,6 @@ var Course = React.createClass({
 	},
 	componentDidMount: function() {
 		var self = this
-		// this.props.info.then(function(info) {
-		// 	if (self.isMounted()) {
-		// 		self.setState(info)
-		// 	}
-		// })
 		getCourse(this.props.clbid).then(function(info) {
 			if (self.isMounted()) {
 				self.setState(info)
