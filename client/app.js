@@ -1,10 +1,10 @@
 /*global app, me, $*/
 var _ = require('lodash')
 var config = require('clientconfig')
-var db = require('db.js')
+var Promise = require("bluebird")
+var db = Promise.promisifyAll(require('db.js'))
 var loadStats = require('loading-stats')
 var logger = require('andlog')
-var Promise = require("bluebird")
 var React = require('react')
 var Cortex = require('cortexjs')
 
