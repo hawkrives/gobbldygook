@@ -17,10 +17,5 @@
 	line-height: $size;
 	font-size: $size/2;
 
-	border-radius: $size;
-
-	@include material-shadow(1);
-	&:hover  { @include material-shadow(2); }
-
 	color: $olaf-gold;
 }
