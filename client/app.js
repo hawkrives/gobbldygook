@@ -24,7 +24,7 @@ function initializeLibraries() {
 
 function setupDatabase() {
 	window.server = undefined;
-	return db.open({
+	var dbOpenPromise = Promise.resolve(db.open({
 		server: 'gobbldygook',
 		version: 2,
 		schema: {
@@ -50,29 +50,57 @@ function setupDatabase() {
 				}
 			}
 		}
-	}).done(function(s) {
+	}))
+
+	dbOpenPromise.then(function(s) {
 		window.server = s
 	})
+
+	return dbOpenPromise
 }
+
+function loadStudent() {
+	console.log('loading student')
+	return new Promise(function(resolve, reject) {
+		resolve(new Cortex(demoStudent))
+	})
+}
+
+document.ready = new Promise(function(resolve) {
+	if (document.readyState === 'complete') {
+		resolve();
+	} else {
+		function onReady() {
+			resolve();
+			document.removeEventListener('DOMContentLoaded', onReady, true);
+			window.removeEventListener('load', onReady, true);
+		}
+		document.addEventListener('DOMContentLoaded', onReady, true);
+		window.addEventListener('load', onReady, true);
+	}
+})
 
 module.exports = {
 	// this is the the whole app initter
 	blastoff: function() {
-		var self = window.app = this;
-		window.times = {start: Date.now()};
+		window.times = {start: Date.now()}
 
 		// set up some libraries
 		initializeLibraries()
 
 		// load in the demo student — for now
-		window.me = new Cortex(demoStudent)
-		setupDatabase().then(loadData)
+		window.me = loadStudent()
 
+		// Load data into the database
+		var databasePromise = setupDatabase()
+		console.log(databasePromise)
+		var dataLoadedPromise = databasePromise.then(loadData)
+		dataLoadedPromise.then(function() { console.log('data loaded') })
+		console.log(dataLoadedPromise)
 
-		// wait for document ready to render our main view
-		// this ensures the document has a body, etc.
-		document.addEventListener( "DOMContentLoaded", function() {
-			document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
+		// Wait for document.ready, the database, and the student.
+		Promise.all([window.server, dataLoadedPromise, document.ready, window.me]).then(function() {
+			console.log('3. 2.. 1... Blastoff!')
 
 			// init our main view
 			var studentComponent = React.renderComponent(
@@ -84,8 +112,8 @@ module.exports = {
 				console.log('updated student', updatedStudent)
 				studentComponent.setProps(updatedStudent)
 			})
+		})
 
-		}, false );
 	},
 };
 
