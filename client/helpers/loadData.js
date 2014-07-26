@@ -86,13 +86,22 @@ function updateDatabase(itemType, infoFromServer) {
 	var oldHash = localStorage.getItem(infoFromServer.path)
 	var newHash = infoFromServer.hash
 	var itemPath = infoFromServer.path
+
 	return new Promise(function(resolve, reject) {
-		if (newHash !== oldHash) {// || itemType === 'areas') {
+		if (newHash !== oldHash) {
 			console.log('have to add', itemPath)
 			readJson(itemPath)
-				.then(function(data) {return {data: data, meta: infoFromServer, type: itemType}})
-				.then(cleanPriorData)
-				.then(storeItem)
+				.then(function(data) {
+					console.log('read', itemPath)
+					var item = {
+						data: data,
+						meta: infoFromServer,
+						type: itemType
+					}
+					cleanPriorData(item).then(function() {
+						storeItem(item)
+					})
+				})
 				.catch(function(err) {
 					reject(err.stack)
 				})
