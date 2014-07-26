@@ -60,7 +60,7 @@ var Year = React.createClass({
 				),
 				React.DOM.button({
 					className: "remove-year",
-					title: "Remove the " + this.props.year + " year.",
+					title: "Remove the year " + this.props.year,
 					onClick: this.removeYear,
 				})
 			),
