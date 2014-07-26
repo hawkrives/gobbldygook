@@ -89,10 +89,10 @@ function updateDatabase(itemType, infoFromServer) {
 
 	return new Promise(function(resolve, reject) {
 		if (newHash !== oldHash) {
-			console.log('have to add', itemPath)
+			console.log('adding ' + itemPath)
 			readJson(itemPath)
 				.then(function(data) {
-					console.log('read', itemPath)
+					console.log('read ' + itemPath)
 					var item = {
 						data: data,
 						meta: infoFromServer,
@@ -106,30 +106,29 @@ function updateDatabase(itemType, infoFromServer) {
 					reject(err.stack)
 				})
 				.done(function() {
-					console.log('had to add ' + itemPath)
+					console.log('added ' + itemPath)
 					resolve()
 				})
 		} else {
-			console.log('bypassed adding ' + itemPath)
+			console.log('skipped ' + itemPath)
 			resolve()
 		}
 	})
 }
 
-function loadDataFiles(info) {
-	console.log('load data files', info)
-	return Promise.all(_.map(info.info, function(files) {
+function loadDataFiles(infoFile) {
+	console.log('load data files', infoFile)
+	return Promise.all(_.map(infoFile.info, function(files) {
 		return Promise.all(_.map(files, function(file) {
-			return updateDatabase(info.type, file)
+			return updateDatabase(infoFile.type, file)
 		}))
 	}))
 }
 
 function loadInfoFile(url) {
 	console.log('loading', url)
-	readJson(url)
+	return readJson(url)
 		.then(loadDataFiles)
-		.done()
 }
 
 function loadData() {
@@ -137,7 +136,9 @@ function loadData() {
 		'/data/areas/info.json',
 		'/data/courses/info.json',
 	]
-	return Promise.all(_.map(infoFiles, loadInfoFile))
+	return new Promise(function(resolve, reject) {
+		Promise.all(_.map(infoFiles, loadInfoFile)).then(resolve)
+	})
 }
 
 module.exports = loadData
