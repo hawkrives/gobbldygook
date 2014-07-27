@@ -4,14 +4,37 @@ var React = require('react')
 var CourseList = require('./courseList')
 var Course = require('./course')
 
-// var makeCourseObjects = require('../helpers/makeCourseObjects')
+var getCourses = require('../helpers/getCourses').getCourses
 
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 	return (schedule.year.val() === year && schedule.semester.val() === semester)
 })
 
 var Semester = React.createClass({
-	makeSemesterName: function() {
+	putActiveCoursesIntoState: function() {
+		var active = this.findActiveSchedules()
+		var clbids = _.uniq(active.val().clbids)
+
+		var self = this
+		getCourses(clbids).then(function(courses) {
+			console.log('retrieved ' + courses.length + ' courses for semester')
+			self.setState({
+				courses: courses
+			})
+		})
+	},
+	getInitialState: function() {
+		return {
+			courses: []
+		}
+	},
+	componentWillReceiveProps: function() {
+		this.putActiveCoursesIntoState()
+	},
+	componentDidMount: function() {
+		this.putActiveCoursesIntoState()
+	},
+	semesterName: function() {
 		if      (this.props.semester === 1) return 'Fall';
 		else if (this.props.semester === 2) return 'Interim';
 		else if (this.props.semester === 3) return 'Spring';
@@ -44,20 +67,16 @@ var Semester = React.createClass({
 	render: function() {
 		console.log('semester render')
 
-		var semesterName = this.makeSemesterName()
-		var active = this.findActiveSchedules()
-		// var courseObjects = makeCourseObjects(_.uniq(active.val().clbids))
-
 		return React.DOM.div( {className:"semester"},
 			React.DOM.header({className: "semester-title"},
-				React.DOM.h1(null, semesterName),
+				React.DOM.h1(null, this.semesterName()),
 				React.DOM.button({
 					className: "remove-semester",
-					title: "Remove " + String(this.props.year) + ' ' + semesterName,
+					title: "Remove " + String(this.props.year) + ' ' + this.semesterName(),
 					onClick: this.removeSemester,
 				})
 			),
-			CourseList( {courses: active.val().clbids} )
+			CourseList( {courses: this.state.courses} )
 		)
 	}
 })
