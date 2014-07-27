@@ -3,10 +3,11 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
+		max-width: 22.5em;
 	}
 
 	.title {
-		margin: 0 0 -0.85ex;
+		margin: 0 0 -0.65ex;
 		padding: 0;
 		font-size: 1em;
 		font-weight: 500;

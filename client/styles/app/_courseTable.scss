@@ -25,23 +25,24 @@
 }
 
 .course-table .year {
-	@extend %block;
-
 	margin-bottom: $page-edge-padding;
 
 	display: -webkit-flex;
 	-webkit-flex-flow: row nowrap;
-	-webkit-justify-content: space-between;
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: space-between;
+}
 
-	overflow-y: hidden;
-	overflow-x: scroll;
+.course-table .semester-list {
+	flex: 1;
+	display: -webkit-flex;
+	-webkit-flex-flow: row wrap;
+	display: flex;
+	flex-flow: row wrap;
 }
 
 .course-table .year-title, .course-table .semester-title {
-	h1, h2, h3, h4, h5, h6 {
+	h1, h2 {
 		font-size: inherit;
 		font-weight: inherit;
 		margin-top: 0;
@@ -50,19 +51,21 @@
 }
 
 .course-table .year-title {
+	@extend %no-select;
+
 	width: 2em;
 	padding: 0.5em 0.75em;
 
-	@extend %no-select;
+	h1 {
+		transform: rotate(90deg);// translateY(-1px);
+		white-space: nowrap;
+	}
 
 	-webkit-font-feature-settings: "tnum";
 	-moz-font-feature-settings: "tnum";
 	font-feature-settings: "tnum";
 
-	line-height: 1.15em;
-	letter-spacing: 1em;
-	word-wrap: break-word;
-	text-align: center;
+	line-height: 1em;
 
 	font-weight: 200;
 	font-size: 0.9em;
@@ -73,10 +76,5 @@
 		.remove-year {
 			display: block;
 		}
-	}
-
-	.year-divider {
-		display: inline-block;
-		padding: 0.25em 0;
 	}
 }

@@ -51,20 +51,16 @@ var Year = React.createClass({
 			})
 		}, this)
 
-		return React.DOM.div( {className:"year"},
+		return React.DOM.div({className:"year"},
 			React.DOM.header({className: "year-title"},
-				React.DOM.h1(null,
-					React.DOM.span({className: "year-start"}, this.props.year),
-					React.DOM.span({className: "year-divider"}, "+"),
-					React.DOM.span({className: "year-end"}, this.props.year + 1)
-				),
+				React.DOM.h1(null, this.props.year + " + " + (this.props.year + 1)),
 				React.DOM.button({
 					className: "remove-year",
 					title: "Remove the year " + this.props.year,
 					onClick: this.removeYear,
 				})
 			),
-			terms,
+			React.DOM.div({className: "semester-list"}, terms),
 			React.DOM.button({
 				className: "add-semester",
 				title: "Add Semester",

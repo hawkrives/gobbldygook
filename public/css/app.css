@@ -49,11 +49,11 @@
   .remove-year::after, .remove-semester::after {
     content: "\f12a"; }
 
-.area-of-study, #student-summary, .add-year, .course-table .year, .add-area-of-study {
+.area-of-study, #student-summary, .add-year, .semester, .add-area-of-study {
   border-radius: 3px;
   border: 0; }
 
-.area-of-study, #student-summary, .add-year, .course-table .year {
+.area-of-study, #student-summary, .add-year, .semester {
   background-color: white;
   transition: border 0.5s ease-in-out;
   background: #fff;
@@ -137,9 +137,10 @@ body {
 .course .title, .course .details {
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden; }
+  overflow: hidden;
+  max-width: 22.5em; }
 .course .title {
-  margin: 0 0 -0.85ex;
+  margin: 0 0 -0.65ex;
   padding: 0;
   font-size: 1em;
   font-weight: 500;
@@ -171,14 +172,17 @@ body {
   margin-bottom: 15px;
   display: -webkit-flex;
   -webkit-flex-flow: row nowrap;
-  -webkit-justify-content: space-between;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  overflow-y: hidden;
-  overflow-x: scroll; }
+  flex-flow: row nowrap; }
 
-.course-table .year-title h1, .course-table .year-title h2, .course-table .year-title h3, .course-table .year-title h4, .course-table .year-title h5, .course-table .year-title h6, .course-table .semester-title h1, .course-table .semester-title h2, .course-table .semester-title h3, .course-table .semester-title h4, .course-table .semester-title h5, .course-table .semester-title h6 {
+.course-table .semester-list {
+  flex: 1;
+  display: -webkit-flex;
+  -webkit-flex-flow: row wrap;
+  display: flex;
+  flex-flow: row wrap; }
+
+.course-table .year-title h1, .course-table .year-title h2, .course-table .semester-title h1, .course-table .semester-title h2 {
   font-size: inherit;
   font-weight: inherit;
   margin-top: 0;
@@ -190,18 +194,15 @@ body {
   -webkit-font-feature-settings: "tnum";
   -moz-font-feature-settings: "tnum";
   font-feature-settings: "tnum";
-  line-height: 1.15em;
-  letter-spacing: 1em;
-  word-wrap: break-word;
-  text-align: center;
+  line-height: 1em;
   font-weight: 200;
   font-size: 0.9em;
   position: relative; }
+  .course-table .year-title h1 {
+    transform: rotate(90deg);
+    white-space: nowrap; }
   .course-table .year-title:hover .remove-year {
     display: block; }
-  .course-table .year-title .year-divider {
-    display: inline-block;
-    padding: 0.25em 0; }
 
 .graduation-status {
   -webkit-flex-basis: 300px;
@@ -227,13 +228,11 @@ body {
   top: -1px; }
 
 .semester {
-  -webkit-flex: 1;
-  flex: 1;
-  min-width: 200px;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  margin: 2px;
   padding: 2.5px 5px;
-  border-left: solid 1px #d0d1d5;
   -webkit-transition: 0.75s all;
-  -moz-transition: 0.75s all;
   -ms-transition: 0.75s all;
   transition: 0.75s all; }
   .semester .semester-title {
@@ -245,7 +244,6 @@ body {
     display: inline-block; }
 
 .add-semester {
-  border-left: solid 1px #d0d1d5;
   width: 32px;
   font-size: 1.25em;
   margin-top: 0;
@@ -254,6 +252,10 @@ body {
 .remove-semester {
   display: none;
   border-radius: 50px; }
+
+.course-list {
+  min-height: 40px;
+  padding-bottom: 10px; }
 
 #student-summary {
   padding: 5px 10px; }

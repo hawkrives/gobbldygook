@@ -1,16 +1,14 @@
 $semester-divider: solid 1px $border-bottom-color;
 
 .semester {
-	-webkit-flex: 1;
-	flex: 1;
-	min-width: 200px;
+	@extend %block;
+	-webkit-flex: 1 1 auto;
+	flex: 1 1 auto;
+	margin: 2px;
 
 	padding: $block-edge-padding/2 $block-edge-padding;
 
-	border-left: $semester-divider;
-
 	-webkit-transition: 0.75s all;
-	-moz-transition: 0.75s all;
 	-ms-transition: 0.75s all;
 	transition: 0.75s all;
 
@@ -30,7 +28,6 @@ $semester-divider: solid 1px $border-bottom-color;
 
 .add-semester {
 	@extend %add-button;
-	border-left: $semester-divider;
 
 	width: 32px;
 	font-size: 1.25em;
@@ -41,6 +38,10 @@ $semester-divider: solid 1px $border-bottom-color;
 .remove-semester {
 	@extend %remove-button;
 	display: none;
-
 	border-radius: 50px;
+}
+
+.course-list {
+	min-height: 40px;
+	padding-bottom:10px;
 }
