@@ -51,7 +51,7 @@
 	summary::-ms-details-marker     { display: none; }
 	summary::details-marker         { display: none; }
 
-	summary:focus { outline: 2px solid $black; }
+	// summary:focus { outline: 2px solid $black; }
 
 	& > details {
 		summary::after {
