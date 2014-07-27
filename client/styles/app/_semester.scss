@@ -2,8 +2,8 @@ $semester-divider: solid 1px $border-bottom-color;
 
 .semester {
 	@extend %block;
-	-webkit-flex: 1 1 auto;
-	flex: 1 1 auto;
+	-webkit-flex: 1 1 20em;
+	flex: 1 1 20em;
 	margin: 2px;
 
 	padding: $block-edge-padding/2 $block-edge-padding;
@@ -12,18 +12,20 @@ $semester-divider: solid 1px $border-bottom-color;
 	-ms-transition: 0.75s all;
 	transition: 0.75s all;
 
-	.semester-title {
-		display: -webkit-flex;
-		display: flex;
-		-webkit-justify-content: space-between;
-		justify-content: space-between;
-	}
 
 	&:hover {
 		.remove-semester {
 			display: inline-block;
 		}
 	}
+}
+
+.semester-title {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	margin-bottom: 0.5em;
 }
 
 .add-semester {
@@ -42,6 +44,5 @@ $semester-divider: solid 1px $border-bottom-color;
 }
 
 .course-list {
-	min-height: 40px;
-	padding-bottom:10px;
+	min-height: 30px;
 }

@@ -134,22 +134,24 @@ body {
 .area-of-study > details[open] summary::after {
   content: "\f153"; }
 
-.course .title, .course .details {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 22.5em; }
-.course .title {
-  margin: 0 0 -0.65ex;
-  padding: 0;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: "Fira Sans"; }
-.course .details {
-  display: block;
-  font-size: 0.9em; }
-.course .identifier::after {
-  content: " · "; }
+.course {
+  margin-bottom: 0.35em; }
+  .course .title, .course .details {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; }
+  .course .title {
+    margin: 0 0 -0.25ex;
+    line-height: 1;
+    padding: 0;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: "Fira Sans"; }
+  .course .details {
+    display: block;
+    font-size: 0.9em; }
+  .course .identifier::after {
+    content: " · "; }
 
 .course-table {
   -webkit-flex: 1;
@@ -228,20 +230,22 @@ body {
   top: -1px; }
 
 .semester {
-  -webkit-flex: 1 1 auto;
-  flex: 1 1 auto;
+  -webkit-flex: 1 1 20em;
+  flex: 1 1 20em;
   margin: 2px;
   padding: 2.5px 5px;
   -webkit-transition: 0.75s all;
   -ms-transition: 0.75s all;
   transition: 0.75s all; }
-  .semester .semester-title {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: space-between;
-    justify-content: space-between; }
   .semester:hover .remove-semester {
     display: inline-block; }
+
+.semester-title {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 0.5em; }
 
 .add-semester {
   width: 32px;
@@ -254,8 +258,7 @@ body {
   border-radius: 50px; }
 
 .course-list {
-  min-height: 40px;
-  padding-bottom: 10px; }
+  min-height: 30px; }
 
 #student-summary {
   padding: 5px 10px; }

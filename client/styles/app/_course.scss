@@ -1,13 +1,15 @@
 .course {
+	margin-bottom: 0.35em;
+
 	.title, .details {
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
-		max-width: 22.5em;
 	}
 
 	.title {
-		margin: 0 0 -0.65ex;
+		margin: 0 0 -0.25ex;
+		line-height: 1;
 		padding: 0;
 		font-size: 1em;
 		font-weight: 500;
