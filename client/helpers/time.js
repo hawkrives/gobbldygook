@@ -1,3 +1,5 @@
+var _ = require('lodash')
+
 function findDays(daystring) {
 	var expandedDays = {
 		'M':  "Mo",
@@ -111,7 +113,7 @@ function convertTimeStringsToOfferings(course) {
 	return course
 }
 
-function checkTimeConflicts(mainCourse, altCourse) {
+function checkCourseTimeConflicts(mainCourse, altCourse) {
 	var conflict = false
 	_.each(mainCourse.offerings, function(mainOffer) {
 		_.each(altCourse.offerings, function(altOffer) {
@@ -137,6 +139,42 @@ function checkTimeConflicts(mainCourse, altCourse) {
 	return conflict
 }
 
+function checkScheduleTimeConflicts(schedule) {
+	// results = {
+	// 		c1: {
+	// 			c2: false,
+	// 			c3: true
+	// 		},
+	// 		c2: {
+	// 			c1: false,
+	// 			c3: false
+	// 		},
+	// 		c3: {
+	// 			c1: true,
+	// 			c2: false,
+	// 		}
+	// }
+	// true = conflict, false = no conflict 
+
+	var results = {}
+	_.each(schedule, function(c1, c1idx) {
+		var c1name = 'c' + c1idx
+		results[c1name] = {}
+		_.each(schedule, function(c2, c2idx) {
+			var c2name = 'c' + c2idx
+
+			if (c1 === c2) {
+				return;
+			} else if ( checkCourseTimeConflicts(c1, c2) ) {
+				results[c1name][c2name] = true
+			} else {
+				results[c1name][c2name] = false
+			}
+		})
+	})
+	return results
+}
+
 
 function testCourseTimes() {
 	var coursesWithTimes = [
@@ -150,22 +188,20 @@ function testCourseTimes() {
 	]
 
 	_.map(coursesWithTimes, convertTimeStringsToOfferings)
+	var results = checkScheduleTimeConflicts(coursesWithTimes)
 
-	_.each(coursesWithTimes, function(c1, c1idx) {
-		var c1name = 'c' + String(c1idx)
-		_.each(coursesWithTimes, function(c2, c2idx) {
-			var c2name = 'c' + String(c2idx)
-
-			if (c1 === c2) {
-				console.log(c1name + ' is ' + c2name)
-			} else if ( checkTimeConflicts(c1, c2) ) {
-				console.log(c1name + ' conflicts with ' + c2name)
+	_.each(results, function(value, compareOne) {
+		_.each(value, function(result, withTwo) {
+			if ( result ) {
+				console.log(compareOne + ' conflicts with ' + withTwo)
 			} else {
-				console.log(c1name + ' does not conflict with ' + c2name)
+				console.log(compareOne + ' does not conflict with ' + withTwo)
 			}
 		})
 	})
 }
 
 module.exports.convertTimeStringsToOfferings = convertTimeStringsToOfferings
-module.exports.checkTimeConflicts = checkTimeConflicts
+module.exports.checkCourseTimeConflicts = checkCourseTimeConflicts
+module.exports.checkScheduleTimeConflicts = checkScheduleTimeConflicts
+module.exports.testCourseTimes = testCourseTimes
