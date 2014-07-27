@@ -1,7 +1,7 @@
 var _ = require('lodash')
 var Promise = require("bluebird")
 
-var time = require('../helpers/time')
+var convertTimeStringsToOfferings = require('./time').convertTimeStringsToOfferings
 
 window.courseCache = {}
 
@@ -14,7 +14,7 @@ function getCourse(clbid) {
 			window.server.courses.get(clbid)
 				.then(function(course) {
 					if (course) {
-						course = time.convertTimeStringsToOfferings(course)
+						course = convertTimeStringsToOfferings(course)
 						console.log('course retrieved:', course)
 						window.courseCache[clbid] = course
 						resolve(course)
