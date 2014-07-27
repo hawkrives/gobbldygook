@@ -11,7 +11,7 @@ var CourseList = React.createClass({
 			return Course( {key:clbid, clbid:clbid} )
 		})
 
-		console.log('courses', courseElements)
+		// console.log('courses', courseElements)
 
 		return React.DOM.div( {className:"course-list"}, 
 			courseElements
