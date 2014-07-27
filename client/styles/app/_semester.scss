@@ -4,7 +4,7 @@ $semester-divider: solid 1px $border-bottom-color;
 	@extend %block;
 	-webkit-flex: 1 1 15em;
 	flex: 1 1 15em;
-	margin: 0 2px;
+	margin: 2px;
 
 	padding: $block-edge-padding/2 $block-edge-padding;
 
