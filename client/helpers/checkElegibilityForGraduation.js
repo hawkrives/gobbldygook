@@ -349,12 +349,12 @@ function isBachelorOfMusic(student) {
 	return checkStudentDegreesFor('B.M.')
 }
 
-function isBachelorOfArt(student) {
+function isBachelorOfArts(student) {
 	return checkStudentDegreesFor('B.A.')
 }
 
 function isBachelorOfBoth(student) {
-	return isBachelorOfMusic(student) && isBachelorOfArt(student)
+	return isBachelorOfMusic(student) && isBachelorOfArts(student)
 }
 
 function artsAndMusicDoubleMajor(student) {
@@ -455,7 +455,7 @@ module.exports = function(student) {
 		return checkBachelorOfBothRequirements(student)
 	}
 
-	else if (isBachelorOfArt(student)) {
+	else if (isBachelorOfArts(student)) {
 		return checkBachelorOfArtsRequirements(student)
 	}
 
