@@ -10,7 +10,7 @@ var StudentSummary = React.createClass({
 	render: function() {
 		console.log('student-summary render')
 
-		var creditsTaken = countCredits(this.props.courses)
+		var creditsTaken = countCredits(this.props.courses) || 0;
 		var creditsNeeded = this.props.creditsNeeded.val()
 
 		var degreeObjects = _.filter(this.props.studies.val(), {type: 'degree'})
