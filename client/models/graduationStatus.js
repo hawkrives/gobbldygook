@@ -7,14 +7,27 @@ var StudentSummary = require('./studentSummary')
 var getCourses = require('../helpers/getCourses').getCourses
 
 var GraduationStatus = React.createClass({
-	render: function() {
-		console.log('graduation-status render')
-
+	putActiveCoursesIntoState: function() {
 		// Get course objects
-		// console.log('grad-status props', this.props)
 		var activeSchedules = _.filter(this.props.schedules.val(), 'active')
 		var clbids = _.pluck(activeSchedules, 'clbids')
-		var courses = getCourses(_.uniq(_.flatten(clbids)))
+		var coursePromise = getCourses(_.uniq(_.flatten(clbids)))
+
+		var self = this
+		coursePromise.then(function(courses) {
+			console.log('retrieved ' + courses.length + ' courses for graduation-status')
+			self.setState({
+				courses: courses
+			})
+		})
+	},
+	getInitialState: function() {
+		return {
+			courses: []
+		}
+	},
+	render: function() {
+		console.log('graduation-status render')
 
 		// Get areas of study
 		var areasOfStudy = _.groupBy(this.props.studies.val(), 'type')
