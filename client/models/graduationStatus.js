@@ -26,6 +26,12 @@ var GraduationStatus = React.createClass({
 			courses: []
 		}
 	},
+	componentWillReceiveProps: function() {
+		this.putActiveCoursesIntoState()
+	},
+	componentDidMount: function() {
+		this.putActiveCoursesIntoState()
+	},
 	render: function() {
 		console.log('graduation-status render')
 
