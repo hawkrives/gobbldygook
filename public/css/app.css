@@ -250,6 +250,8 @@ body {
   -webkit-transition: 0.75s all;
   -ms-transition: 0.75s all;
   transition: 0.75s all; }
+  .semester:hover .remove-semester {
+    display: inline-block; }
 
 .semester-title {
   margin-bottom: 0.5em;
@@ -258,8 +260,6 @@ body {
     display: inline-block; }
   .semester-title > * {
     vertical-align: top; }
-  .semester-title:hover .remove-semester {
-    display: inline-block; }
 
 .bar li {
   -webkit-font-feature-settings: "onum";
@@ -281,7 +281,8 @@ body {
 .remove-semester {
   display: none;
   border-radius: 50px;
-  margin: 0; }
+  margin: 0;
+  float: right; }
 
 .course-list {
   min-height: 30px; }

@@ -29,12 +29,6 @@ $semester-divider: solid 1px $border-bottom-color;
 	& > * {
 		vertical-align: top;
 	}
-
-	&:hover {
-		.remove-semester {
-			display: inline-block;
-		}
-	}
 }
 
 .bar {
@@ -72,6 +66,8 @@ $semester-divider: solid 1px $border-bottom-color;
 	display: none;
 	border-radius: 50px;
 	margin: 0;
+
+	float: right;
 }
 
 .course-list {
