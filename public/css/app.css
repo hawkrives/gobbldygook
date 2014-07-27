@@ -24,6 +24,15 @@
   user-select: none;
   cursor: default; }
 
+.bar {
+  display: inline-block;
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0; }
+  .bar > li {
+    display: inline-block; }
+
 .add-year, .add-area-of-study, .add-semester, .remove-year, .remove-semester {
   background: transparent;
   border: none;
@@ -243,13 +252,25 @@ body {
   transition: 0.75s all; }
 
 .semester-title {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  margin-bottom: 0.5em; }
+  margin-bottom: 0.5em;
+  font-size: 0.85em; }
+  .semester-title h1 {
+    display: inline-block; }
+  .semester-title > * {
+    vertical-align: top; }
   .semester-title:hover .remove-semester {
     display: inline-block; }
+
+.bar li {
+  -webkit-font-feature-settings: "onum";
+  -moz-font-feature-settings: "onum";
+  font-feature-settings: "onum";
+  border-radius: 3px;
+  color: #aaaaaa;
+  padding-left: 0.25em;
+  padding-right: 0.25em; }
+  .bar li::before {
+    content: " – "; }
 
 .add-semester {
   width: 32px;

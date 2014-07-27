@@ -14,17 +14,42 @@ $semester-divider: solid 1px $border-bottom-color;
 }
 
 .semester-title {
-	display: -webkit-flex;
-	display: flex;
-	-webkit-justify-content: space-between;
-	justify-content: space-between;
 	margin-bottom: 0.5em;
+	font-size: 0.85em;
+
+	h1 {
+		display: inline-block;
+	}
+	& > * {
+		vertical-align: top;
+	}
 
 	&:hover {
 		.remove-semester {
 			display: inline-block;
 		}
 	}
+}
+
+.bar {
+	@extend %list-inline;
+
+	li {
+		&::before { content: " – "; }
+
+		@include font-feature-settings('onum');
+
+		border-radius: 3px;
+
+		color: $gray;
+
+		padding-left: 0.25em;
+		padding-right: 0.25em;
+	}
+}
+
+.semester-course-count {
+
 }
 
 .add-semester {
