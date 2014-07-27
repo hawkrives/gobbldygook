@@ -10,7 +10,7 @@ body {
 	background-image: linear-gradient(to bottom, $background-start-color, $background-end-color);
 
 	background-repeat: no-repeat;
-	min-height: 100vh;
 
+	height: 100vh;
 	margin: $page-edge-padding;
 }
