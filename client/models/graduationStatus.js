@@ -6,15 +6,6 @@ var StudentSummary = require('./studentSummary')
 
 var getCourses = require('../helpers/getCourses').getCourses
 
-var pluckCurried = _.curry(function(key, data) {
-	// console.log(data)
-	return data[key].val()
-})
-
-var log = function(summat) {
-	console.log(summat)
-}
-
 var GraduationStatus = React.createClass({
 	render: function() {
 		console.log('graduation-status render')
