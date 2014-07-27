@@ -11,13 +11,6 @@ $semester-divider: solid 1px $border-bottom-color;
 	-webkit-transition: 0.75s all;
 	-ms-transition: 0.75s all;
 	transition: 0.75s all;
-
-
-	&:hover {
-		.remove-semester {
-			display: inline-block;
-		}
-	}
 }
 
 .semester-title {
@@ -26,6 +19,12 @@ $semester-divider: solid 1px $border-bottom-color;
 	-webkit-justify-content: space-between;
 	justify-content: space-between;
 	margin-bottom: 0.5em;
+
+	&:hover {
+		.remove-semester {
+			display: inline-block;
+		}
+	}
 }
 
 .add-semester {

@@ -241,8 +241,6 @@ body {
   -webkit-transition: 0.75s all;
   -ms-transition: 0.75s all;
   transition: 0.75s all; }
-  .semester:hover .remove-semester {
-    display: inline-block; }
 
 .semester-title {
   display: -webkit-flex;
@@ -250,6 +248,8 @@ body {
   -webkit-justify-content: space-between;
   justify-content: space-between;
   margin-bottom: 0.5em; }
+  .semester-title:hover .remove-semester {
+    display: inline-block; }
 
 .add-semester {
   width: 32px;
