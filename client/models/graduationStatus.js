@@ -1,5 +1,5 @@
-var _ = require('lodash');
-var React = require('react');
+var _ = require('lodash')
+var React = require('react')
 
 var AreaOfStudy = require('./areaOfStudy')
 var StudentSummary = require('./studentSummary')
