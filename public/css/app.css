@@ -245,7 +245,7 @@ body {
 .semester {
   -webkit-flex: 1 1 15em;
   flex: 1 1 15em;
-  margin: 2px;
+  margin: 0 2px;
   padding: 2.5px 5px;
   -webkit-transition: 0.75s all;
   -ms-transition: 0.75s all;
