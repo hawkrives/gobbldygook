@@ -1,18 +1,26 @@
 var _ = require('lodash')
 var Promise = require("bluebird")
 
+window.courseCache = {}
+
 function getCourse(clbid) {
 	return new Promise(function(resolve, reject) {
-		window.server.courses.get(clbid)
-			.then(function(course) {
-				if (course) {
-					console.log('course retrieved:', course)
-					resolve(course)
-				} else {
-					console.error('course retrieval failed for: ' + clbid)
-					reject(new Error('course retrieval failed for: ' + clbid))
-				}
-			})
+		if (_.contains(courseCache, clbid)) {
+			console.log('course cached:', clbid)
+			resolve(window.courseCache[clbid])
+		} else {
+			window.server.courses.get(clbid)
+				.then(function(course) {
+					if (course) {
+						console.log('course retrieved:', course)
+						window.courseCache[clbid] = course
+						resolve(course)
+					} else {
+						console.error('course retrieval failed for: ' + clbid)
+						reject(new Error('course retrieval failed for: ' + clbid))
+					}
+				})
+		}
 	})
 }
 
