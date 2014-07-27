@@ -36,7 +36,9 @@ function setupDatabase() {
 					places: { multiEntry: true },
 					times:  { multiEntry: true },
 					gereqs: { multiEntry: true },
-					sourcePath: { multiEntry: true }
+					sourcePath: {multiEntry: true},
+					crsid:      {multiEntry: false},
+					deptnum:    {multiEntry: false},
 				}
 			},
 			students: {

@@ -2,6 +2,8 @@ var readJson = require('./readJson')
 var Promise = require("bluebird")
 var _ = require('lodash')
 
+var buildDeptNum = require('./deptNum')
+
 // get info.json
 // for each list in file['info'],
 	// check ['hash'] against the db's hash
@@ -14,6 +16,7 @@ function storeItem(item) {
 	if (item.type === 'courses') {
 		_.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
+			course.deptnum = buildDeptNum(course.depts.join('/') + ' ' + course.num + course.sect)
 		})
 		window.server.courses
 			.add.apply(window.server, item.data.courses)
