@@ -21,18 +21,7 @@ function getCourses(clbids) {
 	// those clbids.
 
 	console.log('called getCourses with', clbids)
-	return Promise.all(_.map(clbids, function(clbid) {
-		return new Promise(function(resolve, reject) {})
-		var course;
-
-		getCourse(clbid).then(
-			function(data) {
-				course = data
-			}
-		)
-
-		return course;
-	}))
+	return Promise.all(_.map(clbids, getCourse))
 }
 
 module.exports.getCourses = getCourses
