@@ -4,6 +4,9 @@ var add = require('./add')
 var countCredits = require('./countCredits')
 var hasDepartment = require('./hasDepartment')
 
+var coursesAtLevel = require('./courseLevels').coursesAtLevel
+var coursesAtOrAboveLevel = require('./courseLevels').coursesAtOrAboveLevel
+
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a
 	// combination of full-credit and fractional-credit courses.
@@ -113,9 +116,7 @@ function gpa(student) {
 }
 
 function onlyTwoHundredLevelCourses(courses) {
-	return _.filter(courses, function(course) {
-		return course.level >= 200
-	})
+	return _.filter(courses, coursesAtOrAboveLevel(200))
 }
 
 function courseLevel(courses) {
