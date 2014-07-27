@@ -1,5 +1,5 @@
 var readJson = require('./readJson')
-var Promise = require("bluebird")
+var Promise = require('bluebird')
 var _ = require('lodash')
 
 var buildDeptNum = require('./deptNum')
@@ -31,7 +31,7 @@ function storeItem(item) {
 			.add(item.data.info)
 			.done(function(results) {
 				console.log('an area has been added')
-		})
+			})
 	}
 }
 

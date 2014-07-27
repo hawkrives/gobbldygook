@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var React = require('react');
 
-var RequirementSet = require("./requirementSet");
+var RequirementSet = require('./requirementSet');
 
 var getRandomInt = require('../helpers/getRandomInt')
 
@@ -13,7 +13,7 @@ var AreaOfStudy = React.createClass({
 
 		var requirementSets = _.map(areaDetails.sets, function(reqset) {
 			return RequirementSet({
-				key:reqset.description,
+				key: reqset.description,
 				name: reqset.description,
 				needs: reqset.needs,
 				count: reqset.count,
@@ -22,9 +22,9 @@ var AreaOfStudy = React.createClass({
 			});
 		}, this);
 
-		return React.DOM.article( {id:areaDetails.id, className:"area-of-study"},
+		return React.DOM.article({id: areaDetails.id, className: 'area-of-study'},
 			React.DOM.details(null,
-				React.DOM.summary(null, 
+				React.DOM.summary(null,
 					React.DOM.h1(null, areaDetails.title),
 					React.DOM.progress({value: getRandomInt(0, 100), max: 100})
 				),

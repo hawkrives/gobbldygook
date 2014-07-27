@@ -1,7 +1,7 @@
 /*global app, me, $*/
 var _ = require('lodash')
 var config = require('clientconfig')
-var Promise = require("bluebird")
+var Promise = require('bluebird')
 var db = Promise.promisifyAll(require('db.js'))
 var loadStats = require('loading-stats')
 var logger = require('andlog')
@@ -14,7 +14,6 @@ var Student = require('./models/student')
 var demoStudent = require('../mockups/demo_student')
 var loadData = require('./helpers/loadData')
 
-
 window._ = _
 
 function initializeLibraries() {
@@ -26,29 +25,29 @@ function setupDatabase() {
 	window.server = undefined;
 	var dbOpenPromise = Promise.resolve(db.open({
 		server: 'gobbldygook',
-		version: 2,
+		version: 3,
 		schema: {
 			courses: {
-				key: { keyPath: 'clbid', autoIncrement: false },
+				key: {keyPath: 'clbid', autoIncrement: false},
 				indexes: {
-					profs:  { multiEntry: true },
-					depts:  { multiEntry: true },
-					places: { multiEntry: true },
-					times:  { multiEntry: true },
-					gereqs: { multiEntry: true },
+					profs:  {multiEntry: true},
+					depts:  {multiEntry: true},
+					places: {multiEntry: true},
+					times:  {multiEntry: true},
+					gereqs: {multiEntry: true},
 					sourcePath: {multiEntry: true},
 					crsid:      {multiEntry: false},
 					deptnum:    {multiEntry: false},
 				}
 			},
 			students: {
-				key: { autoIncrement: true }
+				key: {autoIncrement: true}
 			},
 			areas: {
-				key: { keyPath: 'sourcePath', autoIncrement: false },
+				key: {keyPath: 'sourcePath', autoIncrement: false},
 				indexes: {
-					type: { multiEntry: false },
-					sourcePath: { multiEntry: false }
+					type: {multiEntry: false},
+					sourcePath: {multiEntry: false}
 				}
 			}
 		}
@@ -108,7 +107,12 @@ module.exports = {
 		})
 
 		// Wait for document.ready, the database, and the student.
-		Promise.all([databasePromise, dataLoadedPromise, document.ready, studentPromise]).then(function() {
+		Promise.all([
+			databasePromise,
+			dataLoadedPromise,
+			document.ready,
+			studentPromise
+		]).then(function() {
 			console.log('3. 2.. 1... Blastoff!')
 
 			// init our main view

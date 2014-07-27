@@ -2,24 +2,27 @@ var _ = require('lodash')
 
 function findDays(daystring) {
 	var expandedDays = {
-		'M':  "Mo",
-		'T':  "Tu",
-		'W':  "We",
-		'Th': "Th",
-		'F':  "Fr"
+		'M':  'Mo',
+		'T':  'Tu',
+		'W':  'We',
+		'Th': 'Th',
+		'F':  'Fr'
 	}
 
 	var listOfDays = [];
 
-	if ( _.contains(daystring, '-') ) {
+	if (_.contains(daystring, '-')) {
 		// M-F, M-Th, T-F
-		var sequence = ["M", "T", "W", "Th", "F"]
+		var sequence = ['M', 'T', 'W', 'Th', 'F']
 		var startDay = daystring.split('-')[0]
 		var endDay = daystring.split('-')[1]
-		listOfDays = sequence.slice( sequence.indexOf(startDay), sequence.indexOf(endDay)+1 )
+		listOfDays = sequence.slice(
+			sequence.indexOf(startDay),
+			sequence.indexOf(endDay) + 1
+		)
 	} else {
 		// MTThFW
-		var spacedOutDays = daystring.replace(/([a-z]*)([A-Z])/g, "$1 $2")
+		var spacedOutDays = daystring.replace(/([a-z]*)([A-Z])/g, '$1 $2')
 		// The regex sticks an extra space at the front. trim() it.
 		spacedOutDays = spacedOutDays.trim()
 		listOfDays = spacedOutDays.split(' ')
@@ -32,7 +35,7 @@ function findDays(daystring) {
 }
 
 function findTimes(timestring) {
-	if ( _.contains(timestring, ':') ) {
+	if (_.contains(timestring, ':')) {
 		// 8:00-9:25
 		timestring = timestring.replace(/:/g, '')
 	}
@@ -41,7 +44,7 @@ function findTimes(timestring) {
 	var end = timestring.split('-')[1]
 	var endsInPM = false
 
-	if ( _.contains(end, 'PM') ) {
+	if (_.contains(end, 'PM')) {
 		endsInPM = true
 		end = end.substring(0, end.indexOf('PM'))
 	}
@@ -68,7 +71,7 @@ function findTimes(timestring) {
 		startTime += 1200
 	}
 
-	if ( (endTime - startTime) > 1000 ) {
+	if ((endTime - startTime) > 1000) {
 		// There are no courses that take this long.
 		// There are some 6-hour ones in interim, though.
 		startTime += 1200
@@ -91,7 +94,7 @@ function convertTimeStringsToOfferings(course) {
 		var days = findDays(dayString)
 
 		_.each(days, function(day) {
-			if ( !offerings[day] ) {
+			if (!offerings[day]) {
 				offerings[day] = {}
 			}
 
@@ -125,7 +128,7 @@ function checkCourseTimeConflicts(mainCourse, altCourse) {
 					_.each(altOffer.times, function(altTime) {
 
 						if ((altTime.start >= mainTime.start && altTime.start <= mainTime.end) ||
-						    (altTime.end   >= mainTime.start && altTime.end   <= mainTime.end)) {
+							(altTime.end   >= mainTime.start && altTime.end   <= mainTime.end)) {
 							conflict = true
 						}
 
@@ -154,7 +157,7 @@ function checkScheduleTimeConflicts(schedule) {
 	// 			c2: false,
 	// 		}
 	// }
-	// true = conflict, false = no conflict 
+	// true = conflict, false = no conflict
 
 	var results = {}
 	_.each(schedule, function(c1, c1idx) {
@@ -165,7 +168,7 @@ function checkScheduleTimeConflicts(schedule) {
 
 			if (c1 === c2) {
 				return;
-			} else if ( checkCourseTimeConflicts(c1, c2) ) {
+			} else if (checkCourseTimeConflicts(c1, c2)) {
 				results[c1name][c2name] = true
 			} else {
 				results[c1name][c2name] = false
@@ -175,16 +178,16 @@ function checkScheduleTimeConflicts(schedule) {
 	return results
 }
 
-
 function testCourseTimes() {
 	var coursesWithTimes = [
-		/*0*/ { times: ['F 0800-0855', 'F 0905-1000', 'F 1045-1140'] },
-		/*1*/ { times: ['M 0700-1000PM', 'MWF 0200-0255PM'] },
-		/*2*/ { times: ['M 0700-1000PM', 'MWF 1045-1140'] },
-		/*3*/ { times: ['M-F 0800-1000', 'M-F 0100-0300PM'] },
-		/*4*/ { times: ['MWF 0800-1000', 'MWF 1150-0150PM', 'Th 0800-0925', 'Th 0935-1050', 'Th 1245-0205PM'] },
-		/*5*/ { times: ['M-F 0800-1000', 'MTThFW 1040-1240PM', 'M-F 0100-0300PM'] },
-		/*6*/ { times: ['Th 0700-0800'] },
+		{times: ['F 0800-0855', 'F 0905-1000', 'F 1045-1140']},
+		{times: ['M 0700-1000PM', 'MWF 0200-0255PM']},
+		{times: ['M 0700-1000PM', 'MWF 1045-1140']},
+		{times: ['M-F 0800-1000', 'M-F 0100-0300PM']},
+		{times: ['MWF 0800-1000', 'MWF 1150-0150PM', 'Th 0800-0925',
+			'Th 0935-1050', 'Th 1245-0205PM']},
+		{times: ['M-F 0800-1000', 'MTThFW 1040-1240PM', 'M-F 0100-0300PM']},
+		{times: ['Th 0700-0800']},
 	]
 
 	_.map(coursesWithTimes, convertTimeStringsToOfferings)
@@ -192,7 +195,7 @@ function testCourseTimes() {
 
 	_.each(results, function(value, compareOne) {
 		_.each(value, function(result, withTwo) {
-			if ( result ) {
+			if (result) {
 				console.log(compareOne + ' conflicts with ' + withTwo)
 			} else {
 				console.log(compareOne + ' does not conflict with ' + withTwo)

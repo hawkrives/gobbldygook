@@ -219,11 +219,11 @@ function artsMajor(studies, courses) {
 
 function onlyMusicMajors(major) {
 	return _.any([
-		major.title === "Performance",
-		major.title === "Church Music",
-		major.title === "Theory-Composition",
-		major.title === "Music Education",
-		major.title === "Elective Studies"
+		major.title === 'Performance',
+		major.title === 'Church Music',
+		major.title === 'Theory-Composition',
+		major.title === 'Music Education',
+		major.title === 'Elective Studies'
 	])
 }
 
@@ -305,9 +305,9 @@ function finalTwoYearsInResidence(student) {
 		var finalYearFabrications = _.filter(student.fabrications, {year: finalYear})
 		var secondFinalYearFabrications = _.filter(student.fabrications, {year: finalYear})
 
-		if ( !_.every(
+		if (!_.every(
 			[_.isEmpty(finalYearFabrications), _.isEmpty(secondFinalYearFabrications)]
-		) ) {
+		)) {
 			return false
 		}
 
@@ -332,7 +332,7 @@ function seventeenOlafCourses(student) {
 	var lastTwentyFullCreditCourses = _.first(sortedFullCreditCourses, 20)
 
 	// Reject all of the fabricated courses
-	var notFabricatedFullCreditCourses = _.reject(lastTwentyFullCreditCourses, { alteration: 'fabricated' })
+	var notFabricatedFullCreditCourses = _.reject(lastTwentyFullCreditCourses, {alteration: 'fabricated'})
 
 	if (_.size(notFabricatedFullCreditCourses) < 17) {
 		return false
@@ -452,6 +452,8 @@ function checkBachelorOfBothRequirements(student) {
 }
 
 module.exports = function(student) {
+	console.log('checkElegibilityForGraduation', student)
+
 	if (isBachelorOfBoth(student)) {
 		return checkBachelorOfBothRequirements(student)
 	}

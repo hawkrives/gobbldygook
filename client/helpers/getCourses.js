@@ -1,5 +1,5 @@
 var _ = require('lodash')
-var Promise = require("bluebird")
+var Promise = require('bluebird')
 
 var convertTimeStringsToOfferings = require('./time').convertTimeStringsToOfferings
 
@@ -28,7 +28,7 @@ function getCourse(clbid) {
 }
 
 function getCourses(clbids) {
-	// Takes a list of clbids, and returns a list of the course objects for 
+	// Takes a list of clbids, and returns a list of the course objects for
 	// those clbids.
 
 	console.log('called getCourses with', clbids)
