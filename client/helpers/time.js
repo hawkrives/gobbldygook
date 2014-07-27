@@ -167,3 +167,5 @@ function testCourseTimes() {
 	})
 }
 
+module.exports.convertTimeStringsToOfferings = convertTimeStringsToOfferings
+module.exports.checkTimeConflicts = checkTimeConflicts
