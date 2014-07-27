@@ -4,7 +4,37 @@ var React = require('react')
 var AreaOfStudy = require('./areaOfStudy')
 var StudentSummary = require('./studentSummary')
 
+var asianStudies = require('../../mockups/demo_major')
 var getCourses = require('../helpers/getCourses').getCourses
+
+var AsianStudies = React.createClass({
+	load: function() {
+		var self = this
+		asianStudies(this.props).then(function(result) {
+			console.log('calculated asian studies graduation possibility', result)
+			self.setState({
+				result: JSON.stringify(result, undefined, 2)
+			})
+		})
+	},
+	getInitialState: function() {
+		return {
+			status: {}
+		}
+	},
+	componentWillReceiveProps: function() {
+		this.load()
+	},
+	componentDidMount: function() {
+		this.load()
+	},
+	render: function() {
+		return React.DOM.article(
+			{className: 'area-of-study'},
+			React.DOM.pre(null, this.state.result)
+		)
+	}
+})
 
 var GraduationStatus = React.createClass({
 	putActiveCoursesIntoState: function() {
@@ -69,6 +99,12 @@ var GraduationStatus = React.createClass({
 					React.DOM.button({className: 'add-area-of-study', title: 'Add Concentration'})
 				),
 				areasOfStudy.concentration
+			),
+			React.DOM.section({id: 'asian'},
+				React.DOM.header({className: 'area-type-heading'},
+					React.DOM.h1(null, 'Asian Studies')
+				),
+				AsianStudies(_.merge(this.props, {courses: this.state.courses}))
 			)
 		)
 	}
