@@ -64,6 +64,11 @@
 	}
 
 	& > details[open] {
+		progress {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+			opacity: 0.5;
+		}
 		summary::after {
 			@include ionicon($ionicon-var-ios7-arrow-left);
 		}
