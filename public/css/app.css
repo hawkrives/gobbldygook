@@ -82,6 +82,7 @@ body {
   background-image: -webkit-linear-gradient(top, #e8e8e8, #e3e3e3);
   background-image: linear-gradient(to bottom, #e8e8e8, #e3e3e3);
   background-repeat: no-repeat;
+  min-height: 100vh;
   margin: 15px; }
 
 .area-of-study h1 {
