@@ -92,7 +92,7 @@ body {
   margin: 0;
   z-index: 1;
   position: relative; }
-.area-of-study details {
+.area-of-study summary {
   position: relative; }
 .area-of-study progress {
   display: block;
@@ -124,13 +124,15 @@ body {
   display: none; }
 .area-of-study summary::details-marker {
   display: none; }
-.area-of-study summary:focus {
-  outline: 2px solid #111111; }
 .area-of-study > details summary::after {
   content: "\f151";
   position: absolute;
   top: calc(50% - 6px);
   right: 8px; }
+.area-of-study > details[open] progress {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  opacity: 0.5; }
 .area-of-study > details[open] summary::after {
   content: "\f153"; }
 
@@ -178,6 +180,7 @@ body {
   flex-flow: row nowrap; }
 
 .course-table .semester-list {
+  -webkit-flex: 1;
   flex: 1;
   display: -webkit-flex;
   -webkit-flex-flow: row wrap;
@@ -201,6 +204,7 @@ body {
   font-size: 0.9em;
   position: relative; }
   .course-table .year-title h1 {
+    -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     white-space: nowrap; }
   .course-table .year-title:hover .remove-year {
@@ -230,8 +234,8 @@ body {
   top: -1px; }
 
 .semester {
-  -webkit-flex: 1 1 20em;
-  flex: 1 1 20em;
+  -webkit-flex: 1 1 15em;
+  flex: 1 1 15em;
   margin: 2px;
   padding: 2.5px 5px;
   -webkit-transition: 0.75s all;
