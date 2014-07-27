@@ -34,6 +34,7 @@
 }
 
 .course-table .semester-list {
+	-webkit-flex: 1;
 	flex: 1;
 	display: -webkit-flex;
 	-webkit-flex-flow: row wrap;
@@ -57,7 +58,8 @@
 	padding: 0.5em 0.75em;
 
 	h1 {
-		transform: rotate(90deg);// translateY(-1px);
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg);
 		white-space: nowrap;
 	}
 
