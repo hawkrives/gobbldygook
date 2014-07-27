@@ -45,7 +45,7 @@
       color: rgba(44, 40, 31, 0.75); }
 
 .add-year::after, .add-area-of-study::after, .add-semester::after {
-  content: "\f218"; }
+  content: "\f1c9"; }
 [disabled].add-year::after, [disabled].add-area-of-study::after, [disabled].add-semester::after {
   content: "\f122"; }
 
@@ -134,16 +134,16 @@ body {
 .area-of-study summary::details-marker {
   display: none; }
 .area-of-study > details summary::after {
-  content: "\f151";
+  content: "\f1c9";
   position: absolute;
-  top: calc(50% - 6px);
+  top: 25%;
   right: 8px; }
 .area-of-study > details[open] progress {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   opacity: 0.5; }
 .area-of-study > details[open] summary::after {
-  content: "\f153"; }
+  content: "\f1ac"; }
 
 .course {
   margin-bottom: 0.35em; }
@@ -280,7 +280,8 @@ body {
 
 .remove-semester {
   display: none;
-  border-radius: 50px; }
+  border-radius: 50px;
+  margin: 0; }
 
 .course-list {
   min-height: 30px; }

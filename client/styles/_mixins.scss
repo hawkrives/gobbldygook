@@ -44,7 +44,7 @@
 	@extend %button;
 
 	&::after {
-		@include ionicon($ionicon-var-plus);
+		@include ionicon($ionicon-var-ios7-plus-empty);
 	}
 	&:hover::after {
 		// @include ionicon($ionicon-var-plus-circled);

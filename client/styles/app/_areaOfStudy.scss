@@ -55,10 +55,10 @@
 
 	& > details {
 		summary::after {
-			@include ionicon($ionicon-var-ios7-arrow-down);
+			@include ionicon($ionicon-var-ios7-plus-empty);
 
 			position: absolute;
-			top: calc(50% - 6px);
+			top: 25%;
 			right: 8px;
 		}
 	}
@@ -70,7 +70,7 @@
 			opacity: 0.5;
 		}
 		summary::after {
-			@include ionicon($ionicon-var-ios7-arrow-left);
+			@include ionicon($ionicon-var-ios7-minus-empty);
 		}
 	}
 }
