@@ -7,7 +7,7 @@ window.courseCache = {}
 
 function getCourse(clbid) {
 	return new Promise(function(resolve, reject) {
-		if (_.contains(courseCache, clbid)) {
+		if (_.contains(_.keys(window.courseCache), String(clbid))) {
 			console.log('course cached:', clbid)
 			resolve(window.courseCache[clbid])
 		} else {
