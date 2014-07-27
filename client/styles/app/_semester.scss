@@ -2,8 +2,8 @@ $semester-divider: solid 1px $border-bottom-color;
 
 .semester {
 	@extend %block;
-	-webkit-flex: 1 1 20em;
-	flex: 1 1 20em;
+	-webkit-flex: 1 1 15em;
+	flex: 1 1 15em;
 	margin: 2px;
 
 	padding: $block-edge-padding/2 $block-edge-padding;
