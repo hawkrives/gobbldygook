@@ -8,13 +8,15 @@ var getCourses = require('../helpers/getCourses').getCourses
 
 var GraduationStatus = React.createClass({
 	putActiveCoursesIntoState: function() {
-		// Get course objects
-		var activeSchedules = _.filter(this.props.schedules.val(), 'active')
-		var clbids = _.pluck(activeSchedules, 'clbids')
-		var coursePromise = getCourses(_.uniq(_.flatten(clbids)))
+		var clbids = _.chain(this.props.schedules.val())
+			.filter('active')
+			.pluck('clbids')
+			.flatten()
+			.uniq()
+			.value()
 
 		var self = this
-		coursePromise.then(function(courses) {
+		getCourses(clbids).then(function(courses) {
 			console.log('retrieved ' + courses.length + ' courses for graduation-status')
 			self.setState({
 				courses: courses
