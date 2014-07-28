@@ -2,7 +2,13 @@
   "name": "gobbldygook",
   "version": "2.0.0",
   "description": "A course scheduling app for St. Olaf College",
-  "main": "app/index.html",
+  "main": "build/app.js",
+  "browser": "build/index.html",
+  "browserify": {
+    "transform": [
+      "debowerify"
+    ]
+  },
   "scripts": {
     "test": "browserify test/index.js | tape-run | tap-spec",
     "style": "scss --watch client/styles/app.scss:public/css/app.css"
@@ -22,6 +28,7 @@
     "browserify": "^5.9.1",
     "clientconfig": "^1.0.0",
     "colors.css": "^1.0.0",
+    "debowerify": "^0.8.1",
     "electricfence": "^1.0.0",
     "envify": "^1.2.1",
     "getconfig": "^0.3.0",
