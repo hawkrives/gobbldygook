@@ -14,14 +14,14 @@
 		position: relative;
 	}
 
-	$progress-bar-bg: transparent;
-	$progress-bar-solid-color: $olaf-gold;
-	$progress-bar-color: linear-gradient(
-		to bottom, 
-		$olaf-gradient-start, 
-		$olaf-gradient-end
-	);
-	progress {
+	@include progress-bar(
+		$bg: transparent,
+		$color: $olaf-gold,
+		$gradient: linear-gradient(
+			to bottom,
+			$olaf-gradient-start,
+			$olaf-gradient-end
+	)) {
 		display: block;
 		position: absolute;
 		top: 0;  bottom: 0;
@@ -35,16 +35,9 @@
 		vertical-align: middle;
 		border: 0;
 
-		color: $progress-bar-solid-color;
-		background: $progress-bar-bg;
-
 		border-radius: 3px;
 		overflow: hidden;
 	}
-
-	progress::-moz-progress-bar      { background: $progress-bar-color; }
-	progress::-webkit-progress-value { background: $progress-bar-color; }
-	progress::-webkit-progress-bar   { background: $progress-bar-bg; }
 
 	summary::-webkit-details-marker { display: none; }
 	summary::-moz-details-marker    { display: none; }

@@ -15,6 +15,8 @@ var Student = require('./models/student')
 var demoStudent = require('../mockups/demo_student')
 var loadData = require('./helpers/loadData')
 
+var NotificationContainer = require('./models/toast').NotificationContainer
+
 window._ = _
 
 function initializeLibraries() {
@@ -96,6 +98,8 @@ module.exports = {
 				window.me = student
 			})
 
+		window.notifications = new Cortex([])
+
 		// Load data into the database
 		var databasePromise = setupDatabase()
 		databasePromise.then(function() {
@@ -126,8 +130,21 @@ module.exports = {
 				console.log('updated student', updatedStudent)
 				studentComponent.setProps(updatedStudent)
 			})
-		})
 
+			var notificationsElement = document.createElement('div')
+			notificationsElement.id = 'notifications'
+			document.body.appendChild(notificationsElement)
+
+			var notifications = React.renderComponent(
+				NotificationContainer(window.notifications),
+				document.getElementById('notifications')
+			)
+
+			window.notifications.on('update', function(updatedNotifications) {
+				console.log('updated notifications', updatedNotifications.val())
+				notifications.setProps({notifications: updatedNotifications})
+			})
+		})
 	},
 };
 

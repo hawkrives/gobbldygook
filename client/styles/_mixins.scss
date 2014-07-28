@@ -19,6 +19,21 @@
 	}
 }
 
+@mixin progress-bar($bg, $color, $gradient: null) {
+	@if $gradient == null {
+		$gradient: $color;
+	}
+	progress {
+		color: $color;
+		background: $bg;
+
+		@content;
+	}
+	progress::-moz-progress-bar      { background: $gradient; }
+	progress::-webkit-progress-value { background: $gradient; }
+	progress::-webkit-progress-bar   { background: $bg; }
+}
+
 @mixin square($size) {
 	width: $size;
 	height: $size;
