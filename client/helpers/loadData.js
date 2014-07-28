@@ -1,38 +1,43 @@
 var readJson = require('./readJson')
 var Promise = require('bluebird')
 var _ = require('lodash')
+var add = require('./add')
 
-var buildDeptNum = require('./deptNum')
+var buildDeptNum = require('./deptNum').buildDeptNum
 
-// get info.json
-// for each list in file['info'],
-	// check ['hash'] against the db's hash
-		// if it matches, return.
-		// else, request the file from ['path'],
-			// delete the pervious data.
-			// and store the new data in the database
-
-function storeItem(item) {
-	if (item.type === 'courses') {
+function storeCourses(item) {
+	return new Promise(function(resolve, reject) {
+		console.log(item.meta.path, 'called storeCourses')
 		_.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
 			course.deptnum = buildDeptNum(course.depts.join('/') + ' ' + course.num + course.sect)
+			console.log(item.meta.path, 'is processing courses')
 		})
+		console.log(item.meta.path, 'has processed courses')
 		window.server.courses
 			.add.apply(window.server, item.data.courses)
-			.done(function() {
-				console.log(_.size(item.data.courses) + ' courses have been added')
-			})
-	}
+			.done(function() {console.log(item.meta.path, 'has stored courses'); resolve(item)})
+	})
+}
 
-	else if (item.type === 'areas') {
+function storeArea(item) {
+	return new Promise(function(resolve, reject) {
+		console.log(item.meta.path, 'called storeArea')
 		item.data.info.sourcePath = item.meta.path
 		window.server.areas
 			.add(item.data.info)
-			.done(function(results) {
-				console.log('an area has been added')
-			})
-	}
+			.done(function() {resolve(item)})
+	})
+}
+
+function storeItem(item) {
+	return new Promise(function(resolve, reject) {
+		if (item.type === 'courses') {
+			return storeCourses(item)
+		} else if (item.type === 'areas') {
+			return storeArea(item)
+		}
+	})
 }
 
 function deleteItems(type, path, key) {
@@ -54,33 +59,43 @@ function deleteItems(type, path, key) {
 					.done()
 			})
 		}
-		console.log(numberToDelete + ' ' + type + ' have been removed')
+		console.log(numberToDelete + ' ' + type + ' have been removed from ' + path)
 	})
 
 	return new Promise(function(resolve, reject) {
-		itemsToDelete.then(resolve)
+		itemsToDelete.then(function() {
+			resolve()
+		})
 	})
 }
 
 function cleanPriorData(item) {
-	var path = item.meta.path
-	var hash = item.meta.hash
+	return new Promise(function(resolve, reject) {
+		var path = item.meta.path
+		var hash = item.meta.hash
 
-	// get rid of old items
-	var deleteItemsPromise;
-	if (item.type === 'areas') {
-		deleteItemsPromise = deleteItems('areas', path, 'sourcePath')
-	} else if (item.type === 'courses') {
-		deleteItemsPromise = deleteItems('courses', path, 'clbid')
-	} else {
-		deleteItemsPromise = Promise.reject(new Error('Unknown item type' + item.type))
-	}
+		// get rid of old items
+		var deleteItemsPromise;
+		if (item.type === 'courses') {
+			deleteItemsPromise = deleteItems('courses', path, 'clbid')
+		} else if (item.type === 'areas') {
+			deleteItemsPromise = deleteItems('areas', path, 'sourcePath')
+		} else {
+			deleteItemsPromise = Promise.reject(new Error('Unknown item type ' + item.type))
+		}
 
-	deleteItemsPromise.then(function() {
-		localStorage.removeItem(path)
+		deleteItemsPromise.then(function() {
+			console.log('deleteItemsPromise is done')
+			localStorage.removeItem(path)
+			resolve(item)
+		})
 	})
+}
 
-	return deleteItemsPromise
+function cacheItemHash(item) {
+	console.log(item.meta.path + ' called cacheItemHash')
+	localStorage.setItem(item.meta.path, item.meta.hash)
+	return Promise.resolve(item)
 }
 
 function updateDatabase(itemType, infoFromServer) {
@@ -91,41 +106,59 @@ function updateDatabase(itemType, infoFromServer) {
 
 	return new Promise(function(resolve, reject) {
 		if (newHash !== oldHash) {
-			console.log('adding ' + itemPath)
+			console.log('need to add ' + itemPath)
 			readJson(itemPath)
 				.then(function(data) {
-					console.log('read ' + itemPath)
-					var item = {
+					return {
 						data: data,
 						meta: infoFromServer,
 						type: itemType
 					}
-					cleanPriorData(item).then(function() {
-						storeItem(item)
-					}).then(function() {
-						localStorage.setItem(item.meta.path, item.meta.hash)
-					})
 				})
+				.then(cleanPriorData)
+				.then(storeItem)
+				.then(cacheItemHash)
 				.catch(function(err) {
 					reject(err.stack)
 				})
 				.done(function() {
-					console.log('added ' + itemPath)
-					resolve()
+					console.log('added ' + itemPath + ' (' + _.size(item) + ' ' + itemType + ')')
+					resolve(true)
 				})
 		} else {
 			console.log('skipped ' + itemPath)
-			resolve()
+			resolve(false)
 		}
 	})
 }
 
 function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
+
+	var progress = 0;
+	var notification = new Cortex({
+		message: 'Updating ' + infoFile.type,
+		hasProgress: true,
+		progressValue: progress,
+		maxProgressValue: _.chain(infoFile.info).mapValues(_.size).reduce(add).value(),
+		ident: infoFile.type
+	})
+	window.notifications.push(notification.val())
+
 	return Promise.all(_.map(infoFile.info, function(files) {
-		return Promise.all(_.map(files, function(file) {
-			return updateDatabase(infoFile.type, file)
+		var allFilesLoadedPromise = Promise.all(_.map(files, function(file) {
+			var dbUpdatedPromise = updateDatabase(infoFile.type, file)
+			dbUpdatedPromise.then(function() {
+				notification.progressValue.set(progress += 1)
+			})
+			return dbUpdatedPromise
 		}))
+
+		allFilesLoadedPromise.then(function() {
+			setTimeout(notification.remove, 200)
+		})
+
+		return allFilesLoadedPromise
 	}))
 }
 
