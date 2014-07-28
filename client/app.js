@@ -1,4 +1,8 @@
 /*global app, me, $*/
+var dbShim = require('../public/libraries/IndexedDBShim/dist/IndexedDBShim')
+var detailsPolyfill = require('./helpers/details.polyfill')
+console.log(dbShim)
+
 var _ = require('lodash')
 var config = require('clientconfig')
 var Promise = require('bluebird')
