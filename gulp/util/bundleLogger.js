@@ -5,7 +5,7 @@
 
 var gutil        = require('gulp-util')
 var prettyHrtime = require('pretty-hrtime')
-var startTime
+var notify       = require('gulp-notify')
 
 module.exports = function bundleLogger() {
 	var startTime = undefined
@@ -19,6 +19,7 @@ module.exports = function bundleLogger() {
 		var taskTime = process.hrtime(startTime)
 		var prettyTime = prettyHrtime(taskTime)
 		gutil.log('Finished', gutil.colors.green('"bundle"'), 'in', gutil.colors.magenta(prettyTime))
+		notify({message: 'Finished "bundle" in ' + prettyTime, activate: 'com.apple.Terminal'})
 	}
 
 	return {start: start, end: end}

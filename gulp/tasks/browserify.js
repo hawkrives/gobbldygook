@@ -12,7 +12,6 @@ var gulp         = require('gulp')
 var handleErrors = require('../util/handleErrors')
 var jscs         = require('gulp-jscs')
 var source       = require('vinyl-source-stream')
-var todo         = require('gulp-todo')
 var watchify     = require('watchify')
 
 gulp.task('browserify', function() {
@@ -42,19 +41,15 @@ gulp.task('browserify', function() {
 			// Specifiy the desired output filename here.
 			.pipe(source('app.js'))
 			// Lint the code
-			.pipe(jscs())
-			// Save any todos to TODO.md
-			.pipe(todo())
+			// .pipe(jscs())
 			// Specify the output destination
 			.pipe(gulp.dest('./build/'))
 			// Log when bundling completes!
 			.on('end', time.end)
 	}
 
-	if (global.isWatching) {
-		// Rebundle with watchify on changes.
-		bundler.on('update', bundle)
-	}
+	// Rebundle with watchify on changes.
+	bundler.on('update', bundle)
 
 	return bundle()
 })
