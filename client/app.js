@@ -120,10 +120,14 @@ module.exports = {
 		]).then(function() {
 			console.log('3. 2.. 1... Blastoff!')
 
+			var studentElement = document.createElement('div')
+			studentElement.id = 'student'
+			document.body.appendChild(studentElement)
+
 			// init our main view
 			var studentComponent = React.renderComponent(
 				Student(window.me),
-				document.body
+				document.getElementById('student')
 			)
 
 			window.me.on('update', function(updatedStudent) {
