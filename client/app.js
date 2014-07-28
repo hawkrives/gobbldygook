@@ -114,7 +114,6 @@ module.exports = {
 		// Wait for document.ready, the database, and the student.
 		Promise.all([
 			databasePromise,
-			dataLoadedPromise,
 			document.ready,
 			studentPromise
 		]).then(function() {
