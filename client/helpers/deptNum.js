@@ -22,7 +22,12 @@ function buildDeptNum(deptNumString) {
 
 function getCourseFromDeptNum(deptNumString) {
 	var deptNum = buildDeptNum(deptNumString)
-	return queryCourses(deptNum)
+	return new Promise(function(resolve, reject) {
+		window.server.courses.query('deptnum')
+			.only('deptnum', deptNumString)
+			.execute()
+			.done(resolve)
+	})
 }
 
 function checkCoursesForDeptNum(deptNumString, courses) {
