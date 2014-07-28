@@ -1,70 +1,22 @@
 /*global app, me, $*/
-var dbShim = require('../public/libraries/IndexedDBShim/dist/IndexedDBShim')
-var detailsPolyfill = require('./helpers/details.polyfill')
-console.log(dbShim)
-
 var _ = require('lodash')
-var config = require('clientconfig')
 var Promise = require('bluebird')
+var db = require('./helpers/db')
 
-var db = Promise.promisifyAll(require('db.js'))
-var loadStats = require('loading-stats')
-var logger = require('andlog')
 var React = require('react')
 var Cortex = require('cortexjs')
 
-var tracking = require('./helpers/metrics')
 var Student = require('./models/student')
+var NotificationContainer = require('./models/toast').NotificationContainer
 
 var demoStudent = require('../mockups/demo_student')
 var loadData = require('./helpers/loadData')
-
-var NotificationContainer = require('./models/toast').NotificationContainer
 
 window._ = _
 
 function initializeLibraries() {
 	Promise.longStackTraces()
 	React.initializeTouchEvents(true)
-}
-
-function setupDatabase() {
-	window.server = undefined;
-	var dbOpenPromise = Promise.resolve(db.open({
-		server: 'gobbldygook',
-		version: 3,
-		schema: {
-			courses: {
-				key: {keyPath: 'clbid', autoIncrement: false},
-				indexes: {
-					profs:  {multiEntry: true},
-					depts:  {multiEntry: true},
-					places: {multiEntry: true},
-					times:  {multiEntry: true},
-					gereqs: {multiEntry: true},
-					sourcePath: {multiEntry: true},
-					crsid:      {multiEntry: false},
-					deptnum:    {multiEntry: false},
-				}
-			},
-			students: {
-				key: {autoIncrement: true}
-			},
-			areas: {
-				key: {keyPath: 'sourcePath', autoIncrement: false},
-				indexes: {
-					type: {multiEntry: false},
-					sourcePath: {multiEntry: false}
-				}
-			}
-		}
-	}))
-
-	dbOpenPromise.then(function(s) {
-		window.server = s
-	})
-
-	return dbOpenPromise
 }
 
 function loadStudent() {
@@ -105,7 +57,7 @@ module.exports = {
 		window.notifications = new Cortex([])
 
 		// Load data into the database
-		var databasePromise = setupDatabase()
+		var databasePromise = db.isReady
 		databasePromise.then(function() {
 			console.log('database ready')
 		})

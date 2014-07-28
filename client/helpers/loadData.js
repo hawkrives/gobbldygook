@@ -2,21 +2,25 @@ var readJson = require('./readJson')
 var Promise = require('bluebird')
 var _ = require('lodash')
 var add = require('./add')
+var db = require('./db')
 
 var buildDeptNum = require('./deptNum').buildDeptNum
 
 function storeCourses(item) {
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeCourses')
-		_.map(item.data.courses, function(course) {
+		var batchOfCourses = _.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
 			course.deptnum = buildDeptNum(course.depts.join('/') + ' ' + course.num + course.sect)
-			console.log(item.meta.path, 'is processing courses')
+			return {type: 'put', key: course.clbid, value: course}
 		})
-		console.log(item.meta.path, 'has processed courses')
-		window.server.courses
-			.add.apply(window.server, item.data.courses)
-			.done(function() {console.log(item.meta.path, 'has stored courses'); resolve(item)})
+		db.courses.batch(batchOfCourses, function(err) {
+			if (err) {
+				reject(err)
+			}
+			console.log(item.meta.path, 'has stored courses')
+			resolve(item)
+		})
 	})
 }
 
@@ -24,9 +28,12 @@ function storeArea(item) {
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeArea')
 		item.data.info.sourcePath = item.meta.path
-		window.server.areas
-			.add(item.data.info)
-			.done(function() {resolve(item)})
+		db.areas.put(item.data.info.sourcePath, item.data.info, function(err) {
+			if (err) {
+				reject(err)
+			}
+			resolve(item)
+		})
 	})
 }
 
@@ -40,32 +47,26 @@ function storeItem(item) {
 	})
 }
 
-function deleteItems(type, path, key) {
-	console.log('deleting ' + type + ' from ' + path)
-
-	var itemsToDelete = window.server[type]
-		.query('sourcePath')
-		.only(path)
-		.execute()
-		.done()
-
-	itemsToDelete.then(function(items) {
-		var keysToDelete = _.pluck(items, key)
-		var numberToDelete = _.size(keysToDelete)
-		if (numberToDelete) {
-			_.each(keysToDelete, function(key) {
-				window.server[type]
-					.remove(key)
-					.done()
-			})
-		}
-		console.log(numberToDelete + ' ' + type + ' have been removed from ' + path)
-	})
-
+function deleteItems(type, path, keyName) {
 	return new Promise(function(resolve, reject) {
-		itemsToDelete.then(function() {
-			resolve()
-		})
+		console.log('deleting ' + type + ' from ' + path)
+
+		var itemsToDelete = db[type].query('sourcePath', path)
+			.on('data', function(items) {
+				var keysToDelete = _.pluck(items, keyName)
+				var numberToDelete = _.size(keysToDelete)
+				console.log('keysToDelete', keysToDelete)
+				if (numberToDelete) {
+					var batchOfDeletions = _.map(keysToDelete, function(key) {
+						return {type: 'del', key: key}
+					})
+					console.log('batchOfDeletions', batchOfDeletions)
+					console.log(type + ' have been removed from ' + path)
+					resolve(db[type].batch(batchOfDeletions))
+				} else {
+					resolve(true)
+				}
+			})
 	})
 }
 
@@ -84,10 +85,14 @@ function cleanPriorData(item) {
 			deleteItemsPromise = Promise.reject(new Error('Unknown item type ' + item.type))
 		}
 
+		console.log('deleteItemsPromise', deleteItemsPromise)
+
 		deleteItemsPromise.then(function() {
 			console.log('deleteItemsPromise is done')
 			localStorage.removeItem(path)
 			resolve(item)
+		}).catch(function(err) {
+			reject(err)
 		})
 	})
 }
@@ -121,7 +126,7 @@ function updateDatabase(itemType, infoFromServer) {
 				.catch(function(err) {
 					reject(err.stack)
 				})
-				.done(function() {
+				.done(function(item) {
 					console.log('added ' + itemPath + ' (' + _.size(item) + ' ' + itemType + ')')
 					resolve(true)
 				})
