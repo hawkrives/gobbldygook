@@ -1,4 +1,3 @@
-var compass      = require('gulp-compass')
 var csscomb      = require('gulp-csscomb')
 var gulp         = require('gulp')
 var handleErrors = require('../util/handleErrors')
