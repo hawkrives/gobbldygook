@@ -19,7 +19,6 @@ var Semester = React.createClass({
 
 		var self = this
 		return getCourses(clbids).then(function(courses) {
-			console.log('retrieved ' + courses.length + ' courses for semester')
 			self.setState({
 				courses: courses
 			})
@@ -39,11 +38,11 @@ var Semester = React.createClass({
 		this.putActiveCoursesIntoState().then(this.validateSchedule)
 	},
 	semesterName: function() {
-		if      (this.props.semester === 1) return 'Fall';
-		else if (this.props.semester === 2) return 'Interim';
-		else if (this.props.semester === 3) return 'Spring';
-		else if (this.props.semester === 4) return 'Early Summer';
-		else if (this.props.semester === 5) return 'Late Summer';
+		if      (this.props.semester === 1) {return 'Fall'}
+		else if (this.props.semester === 2) {return 'Interim'}
+		else if (this.props.semester === 3) {return 'Spring'}
+		else if (this.props.semester === 4) {return 'Early Summer'}
+		else if (this.props.semester === 5) {return 'Late Summer'}
 
 		return 'Unknown (' + this.props.semester + ')';
 	},

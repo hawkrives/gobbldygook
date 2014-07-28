@@ -15,8 +15,6 @@ function buildDeptNum(deptNumString) {
 		result.sect = {values: [match[5]]}
 	}
 
-	console.log('built deptNum', result)
-
 	return result
 }
 
@@ -32,7 +30,7 @@ function getCourseFromDeptNum(deptNumString) {
 
 function checkCoursesForDeptNum(deptNumString, courses) {
 	return new Promise(function(resolve, reject) {
-		console.log('checkCoursesForDeptNum', 'deptNum', deptNumString, 'courses', courses)
+		// console.log('checkCoursesForDeptNum', 'deptNum', deptNumString, 'courses', courses)
 		var crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
 
 		getCourseFromDeptNum(deptNumString).then(function(crsidToCheckFor) {

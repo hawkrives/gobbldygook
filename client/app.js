@@ -2,6 +2,7 @@
 var _ = require('lodash')
 var config = require('clientconfig')
 var Promise = require('bluebird')
+
 var db = Promise.promisifyAll(require('db.js'))
 var loadStats = require('loading-stats')
 var logger = require('andlog')

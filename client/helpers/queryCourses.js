@@ -1,5 +1,5 @@
 var _ = require('lodash')
-var Promise = require("bluebird")
+var Promise = require('bluebird')
 
 // query = {
 // 		'title': {values: ['Chinese'], flags: ['caseInsensitive', 'partialMatch']},
