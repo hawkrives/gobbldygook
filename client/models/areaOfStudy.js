@@ -5,6 +5,21 @@ var RequirementSet = require('./requirementSet');
 
 var getRandomInt = require('../helpers/getRandomInt')
 
+var areas = {
+	major: {
+		'Computer Science': require('../../mockups/demo_csci_major'),
+		'Asian Studies': require('../../mockups/demo_major')
+	},
+	degree: {
+		'Bachelor of Arts': require('../helpers/checkElegibilityForGraduation'),
+		'Bachelor of Music': require('../helpers/checkElegibilityForGraduation')
+	},
+	concentration: {
+		'Computer Science': require('../../mockups/demo_csci_major'),
+		'Asian Studies': require('../../mockups/demo_major')
+	}
+}
+
 var AreaOfStudy = React.createClass({
 	render: function() {
 
