@@ -54,7 +54,7 @@ module.exports = {
 		{
 			id: 3, year: 2012, semester: 3,
 			title: "Schedule 1", sequence: 1,
-			clbids: [84512, 84461, 84378, 85991],
+			clbids: [84512, 84461, 84378, 85991, 90802],
 			active: true,
 		},
 		{
