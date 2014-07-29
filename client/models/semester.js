@@ -86,7 +86,9 @@ var Semester = React.createClass({
 			conflicts: conflicts
 		})
 
-		console.log('schedule conflicts', conflicts, hasConflict)
+		if (hasConflict) {
+			console.log('schedule conflicts', conflicts, hasConflict)
+		}
 
 		return _.any([hasConflict])
 	},

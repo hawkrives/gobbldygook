@@ -13,7 +13,7 @@ var CourseTable = React.createClass({
 		var nextId = calculateNextScheduleId(schedules)
 		this.props.schedules.push({
 			id: nextId, year: nextAvailableYear, semester: 1,
-			title: "Schedule 1", sequence: 1,
+			title: 'Schedule 1', sequence: 1,
 			clbids: [], active: true,
 		})
 	},
@@ -21,14 +21,14 @@ var CourseTable = React.createClass({
 		// console.log('course-table render')
 
 		var years = _.map(_.groupBy(this.props.schedules.val(), 'year'), function(schedules, year) {
-			return Year( {schedules: this.props.schedules, year: parseInt(year, 10), key:year} )
+			return Year({schedules: this.props.schedules, year: parseInt(year, 10), key: year})
 		}, this)
 
-		return React.DOM.div( {className:"course-table"},
+		return React.DOM.div({className: 'course-table'},
 			years,
 			React.DOM.button({
-				className: "add-year",
-				title: "Add Year",
+				className: 'add-year',
+				title: 'Add Year',
 				onClick: this.addYear,
 			})
 		)

@@ -22,7 +22,7 @@ var Year = React.createClass({
 
 		this.props.schedules.push({
 			id: nextId, year: this.props.year, semester: nextAvailableSemester,
-			title: "Schedule 1", sequence: 1,
+			title: 'Schedule 1', sequence: 1,
 			clbids: [], active: true,
 		})
 	},
@@ -51,19 +51,19 @@ var Year = React.createClass({
 			})
 		}, this)
 
-		return React.DOM.div({className:"year"},
-			React.DOM.header({className: "year-title"},
-				React.DOM.h1(null, this.props.year + " + " + (this.props.year + 1)),
+		return React.DOM.div({className: 'year'},
+			React.DOM.header({className: 'year-title'},
+				React.DOM.h1(null, this.props.year + ' + ' + (this.props.year + 1)),
 				React.DOM.button({
-					className: "remove-year",
-					title: "Remove the year " + this.props.year,
+					className: 'remove-year',
+					title: 'Remove the year ' + this.props.year,
 					onClick: this.removeYear,
 				})
 			),
-			React.DOM.div({className: "semester-list"}, terms),
+			React.DOM.div({className: 'semester-list'}, terms),
 			React.DOM.button({
-				className: "add-semester",
-				title: "Add Semester",
+				className: 'add-semester',
+				title: 'Add Semester',
 				disabled: !this.canAddSemester(),
 				onClick: this.addSemester,
 			})

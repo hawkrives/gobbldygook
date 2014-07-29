@@ -8,12 +8,12 @@ var CourseList = React.createClass({
 	mixins: [DraggableContainerMixin],
 	render: function() {
 		var courseElements = _.map(this.props.courses, function(course) {
-			return Course( {key:course.clbid, info:course} )
+			return Course({key: course.clbid, info: course})
 		})
 
 		// console.log('courses', courseElements)
 
-		return React.DOM.div( {className:"course-list"}, 
+		return React.DOM.div({className: 'course-list'},
 			courseElements
 		)
 	}

@@ -24,7 +24,7 @@ var Requirement = React.createClass({
 			React.DOM.progress({value: this.props.has, max: this.props.needs}),
 			this.props.name,
 			React.DOM.br(null),
-			this.props.query,this.props.validCourses
+			this.props.query, this.props.validCourses
 		)
 	}
 })
