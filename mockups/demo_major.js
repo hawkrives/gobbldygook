@@ -16,7 +16,7 @@ function interdisciplinaryApproachesToAsia(courses) {
 function lowerLevelLanguageCourses(course) {
 	// If all of these match, it is a lower-level language course, and will be
 	// rejected by the `reject` method.
-	return Promise.resolve(
+	return (
 		(
 			hasDepartment('ASIAN', course) ||
 			hasDepartment('CHINA', course) ||
