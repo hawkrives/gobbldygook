@@ -127,19 +127,19 @@ var GraduationStatus = React.createClass({
 					React.DOM.button({className: 'add-area-of-study', title: 'Add Concentration'})
 				),
 				areasOfStudy.concentration
-			),
-			React.DOM.section({id: 'asian'},
-				React.DOM.header({className: 'area-type-heading'},
-					React.DOM.h1(null, 'Asian Studies')
-				),
-				AsianStudies(_.merge(this.props, {courses: this.state.courses}))
-			),
-			React.DOM.section({id: 'csci'},
-				React.DOM.header({className: 'area-type-heading'},
-					React.DOM.h1(null, 'Computer Science')
-				),
-				ComputerScience(_.merge(this.props, {courses: this.state.courses}))
-			)
+			)//,
+			// React.DOM.section({id: 'asian'},
+			// 	React.DOM.header({className: 'area-type-heading'},
+			// 		React.DOM.h1(null, 'Asian Studies')
+			// 	),
+			// 	AsianStudies(student)
+			// ),
+			// React.DOM.section({id: 'csci'},
+			// 	React.DOM.header({className: 'area-type-heading'},
+			// 		React.DOM.h1(null, 'Computer Science')
+			// 	),
+			// 	ComputerScience(student)
+			// )
 		)
 	}
 });
