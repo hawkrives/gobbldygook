@@ -10,14 +10,13 @@ var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCourse
 
 function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
-	console.log('checkCoursesForDeptNum', checkCoursesForDeptNum('ASIAN 275', courses))
-	return checkCoursesForDeptNum('ASIAN 275', courses)
+	return Promise.resolve(checkCoursesForDeptNum('ASIAN 275', courses))
 }
 
 function lowerLevelLanguageCourses(course) {
 	// If all of these match, it is a lower-level language course, and will be
 	// rejected by the `reject` method.
-	return (
+	return Promise.resolve(
 		(
 			hasDepartment('ASIAN', course) ||
 			hasDepartment('CHINA', course) ||
@@ -53,13 +52,20 @@ function electives(courses) {
 
 	// Req. #4 was embedded at the beginning, when we reject any lower-level
 	// languages. That way, we can't count them.
-	return _.all([levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized])
+	return Promise.resolve(_.all([levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized]))
 }
 
 function seniorSeminar(courses) {
-	// Senior Seminar: Asian Studies 397: Human Rights/Asian Context or Asian
-	// Studies 399: Asian Studies Seminar
-	return (checkCoursesForDeptNum('ASIAN 397', courses) || checkCoursesForDeptNum('ASIAN 399', courses))
+	// Senior Seminar: One of:
+	// - Asian Studies 397: Human Rights/Asian Context, or
+	// - Asian Studies 399: Asian Studies Seminar
+	var humanRights = checkCoursesForDeptNum('ASIAN 397', courses)
+	var otherSeminar = checkCoursesForDeptNum('ASIAN 399', courses)
+	return Promise.all([humanRights, otherSeminar]).then(function(seminars) {
+		var hasTakenSeminar = _.any(seminars)
+		console.log('hasTakenSeminar', hasTakenSeminar, seminars)
+		return hasTakenSeminar
+	})
 }
 
 function language(courses) {
@@ -68,7 +74,9 @@ function language(courses) {
 	// "'CHIN' IN depts AND level >= 200 AND (('Intermediate' OR 'Advanced') AND 'Chinese') IN title"
 	var subsetOfCourses = _.chain(courses)
 		.filter(coursesAtOrAboveLevel(200))
-		.filter(function(course) {return partialTitle('Intermediate', course) || partialTitle('Advanced', course)})
+		.filter(function(course) {
+			return partialTitle('Intermediate', course) || partialTitle('Advanced', course)
+		})
 		.value()
 
 	var japaneseLanguage = _.chain(subsetOfCourses)
@@ -81,7 +89,7 @@ function language(courses) {
 		.filter(partialTitle('Chinese'))
 		.size().value() >= 2
 
-	return (japaneseLanguage || chineseLanguage)
+	return Promise.resolve(japaneseLanguage || chineseLanguage)
 }
 
 function checkAsianStudiesMajor(student) {
@@ -95,7 +103,10 @@ function checkAsianStudiesMajor(student) {
 		language: language(student.courses)
 	})
 
-	return Promise.props({result: asianStudiesMajorRequirements.then(_.all), details: asianStudiesMajorRequirements})
+	return Promise.props({
+		result: asianStudiesMajorRequirements.then(_.all),
+		details: asianStudiesMajorRequirements
+	})
 }
 
 module.exports = checkAsianStudiesMajor
