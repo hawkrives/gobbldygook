@@ -3,104 +3,78 @@ var Promise = require('bluebird')
 var _ = require('lodash')
 var add = require('./add')
 var db = require('./db')
-
 var buildDeptNum = require('./deptNum').buildDeptNum
 
 function storeCourses(item) {
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeCourses')
-		var batchOfCourses = _.map(item.data.courses, function(course) {
+
+		var courses = _.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
-			course.deptnum = buildDeptNum(course.depts.join('/') + ' ' + course.num + course.sect)
-			return {type: 'put', key: course.clbid, value: course}
+			course.deptnum = buildDeptNum(course)
+			return course
 		})
-		db.courses.batch(batchOfCourses, function(err) {
-			if (err) {
+
+		window.db.add('courses', courses)
+			.then(function(results) {
+				resolve(item)
+			}).catch(function (records, err) {
 				reject(err)
-			}
-			console.log(item.meta.path, 'has stored courses')
-			resolve(item)
-		})
+			})
 	})
 }
 
 function storeArea(item) {
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeArea')
-		item.data.info.sourcePath = item.meta.path
-		db.areas.put(item.data.info.sourcePath, item.data.info, function(err) {
-			if (err) {
+		var area = item.data.info
+
+		area.sourcePath = item.meta.path
+
+		window.db.add('areas', area)
+			.then(function(results) {
+				resolve(item)
+			}).catch(function(records, err) {
 				reject(err)
-			}
-			resolve(item)
-		})
-	})
-}
-
-function storeItem(item) {
-	return new Promise(function(resolve, reject) {
-		if (item.type === 'courses') {
-			return storeCourses(item)
-		} else if (item.type === 'areas') {
-			return storeArea(item)
-		}
-	})
-}
-
-function deleteItems(type, path, keyName) {
-	return new Promise(function(resolve, reject) {
-		console.log('deleting ' + type + ' from ' + path)
-
-		var itemsToDelete = db[type].query('sourcePath', path)
-			.on('data', function(items) {
-				var keysToDelete = _.pluck(items, keyName)
-				var numberToDelete = _.size(keysToDelete)
-				console.log('keysToDelete', keysToDelete)
-				if (numberToDelete) {
-					var batchOfDeletions = _.map(keysToDelete, function(key) {
-						return {type: 'del', key: key}
-					})
-					console.log('batchOfDeletions', batchOfDeletions)
-					console.log(type + ' have been removed from ' + path)
-					resolve(db[type].batch(batchOfDeletions))
-				} else {
-					resolve(true)
-				}
 			})
 	})
 }
 
+function storeItem(item) {
+	if (item.type === 'courses') {
+		return storeCourses(item)
+	} else if (item.type === 'areas') {
+		return storeArea(item)
+	}
+}
+
 function cleanPriorData(item) {
-	return new Promise(function(resolve, reject) {
+	return new Promise(function (resolve, reject) {
 		var path = item.meta.path
 		var hash = item.meta.hash
+		console.log('deleting ' + item.type + ' from ' + path)
 
-		// get rid of old items
-		var deleteItemsPromise;
-		if (item.type === 'courses') {
-			deleteItemsPromise = deleteItems('courses', path, 'clbid')
-		} else if (item.type === 'areas') {
-			deleteItemsPromise = deleteItems('areas', path, 'sourcePath')
-		} else {
-			deleteItemsPromise = Promise.reject(new Error('Unknown item type ' + item.type))
-		}
+		var deleteItemsPromise = window.db.query(item.type, 'sourcePath')
+			.only(path)
+			.remove()
+			.execute()
 
-		console.log('deleteItemsPromise', deleteItemsPromise)
-
-		deleteItemsPromise.then(function() {
-			console.log('deleteItemsPromise is done')
-			localStorage.removeItem(path)
-			resolve(item)
-		}).catch(function(err) {
-			reject(err)
-		})
+		deleteItemsPromise
+			.then(function() {
+				localStorage.removeItem(path)
+				resolve(item)
+			}).catch(function(err) {
+				reject(err)
+			})
 	})
 }
 
 function cacheItemHash(item) {
-	console.log(item.meta.path + ' called cacheItemHash')
-	localStorage.setItem(item.meta.path, item.meta.hash)
-	return Promise.resolve(item)
+	return new Promise(function(resolve, reject) {
+		console.log(item.meta.path + ' called cacheItemHash')
+		localStorage.setItem(item.meta.path, item.meta.hash)
+		resolve(item)
+	})
 }
 
 function updateDatabase(itemType, infoFromServer) {
@@ -109,34 +83,48 @@ function updateDatabase(itemType, infoFromServer) {
 	var newHash = infoFromServer.hash
 	var itemPath = infoFromServer.path
 
-	return new Promise(function(resolve, reject) {
-		if (newHash !== oldHash) {
-			console.log('need to add ' + itemPath)
-			readJson(itemPath)
-				.then(function(data) {
-					return {
-						data: data,
-						meta: infoFromServer,
-						type: itemType
-					}
-				})
-				.then(cleanPriorData)
-				.then(storeItem)
-				.then(cacheItemHash)
-				.catch(function(err) {
-					reject(err.stack)
-				})
-				.done(function(item) {
-					console.log('added ' + itemPath + ' (' + _.size(item) + ' ' + itemType + ')')
-					resolve(true)
-				})
-		} else {
-			console.log('skipped ' + itemPath)
-			resolve(false)
-		}
-	})
+	if (newHash === oldHash) {
+		console.log('skipped ' + itemPath)
+		return Promise.resolve(false)
+	}
+
+	console.log('need to add ' + itemPath)
+	var lookup = {
+		'courses': 'courses',
+		'areas': 'info'
+	}
+	return readJson(itemPath)
+		.then(function(data) {
+			return {
+				data: data,
+				meta: infoFromServer,
+				type: itemType,
+				count: _.size(data['courses']) || 1,
+			}
+		})
+		.then(cleanPriorData)
+		.then(storeItem)
+		.then(cacheItemHash)
+		.catch(function(err) {
+			return Promise.reject(err.stack)
+		})
+		.done(function(item) {
+			console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
+			return Promise.resolve(true)
+		})
 }
 
+function loadDataFiles(infoFile) {
+	console.log('load data files', infoFile)
+
+	return Promise.all(_.map(infoFile.info, function(files) {
+		return Promise.all(_.map(files, function(file) {
+			return updateDatabase(infoFile.type, file)
+		}))
+	}))
+}
+
+/*
 function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
@@ -166,11 +154,11 @@ function loadDataFiles(infoFile) {
 		return allFilesLoadedPromise
 	}))
 }
+*/
 
 function loadInfoFile(url) {
 	console.log('loading', url)
-	return readJson(url)
-		.then(loadDataFiles)
+	return readJson(url).then(loadDataFiles)
 }
 
 function loadData() {
@@ -178,9 +166,8 @@ function loadData() {
 		'/data/areas/info.json',
 		'/data/courses/info.json',
 	]
-	return new Promise(function(resolve, reject) {
-		Promise.all(_.map(infoFiles, loadInfoFile)).then(resolve)
-	})
+	return Promise.all(_.map(infoFiles, loadInfoFile))
 }
 
 module.exports = loadData
+window.loadData = module.exports

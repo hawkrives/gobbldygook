@@ -1,29 +1,24 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
-var courses = require('../helpers/db').courses
+var db = require('./db')
 
 var convertTimeStringsToOfferings = require('./time').convertTimeStringsToOfferings
 
 // window.courseCache = {}
 
 function getCourse(clbid) {
-	return new Promise(function(resolve, reject) {
-		courses.get(clbid, function(err, course) {
-			if (err) {
-				console.warn('course retrieval failed for: ' + clbid)
-				reject(new Error('course retrieval (v1) failed for: ' + clbid))
-			}
-
-			if (course) {
-				course = convertTimeStringsToOfferings(course)
-				window.courseCache[clbid] = course
-				resolve(course)
-			}
-			else {
-				reject(new Error('course retrieval (v2) failed for: ' + clbid))
-			}
+	return window.db.courses
+		.query('clbid')
+		.only(clbid)
+		.limit(1)
+		.execute()
+		.then(function(courses) {
+			var course = courses[0]
+			course = convertTimeStringsToOfferings(course)
+			return course
+		}).catch(function(records, err) {
+			console.warn('course retrieval failed for: ' + clbid, arguments)
 		})
-	}).done()
 }
 
 function getCourses(clbids) {

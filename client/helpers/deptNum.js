@@ -1,6 +1,5 @@
 var _ = require('lodash')
-
-var queryCourses = require('./queryCourses')
+var courses = require('./db').courses
 
 function splitDeptNum(deptNumString) {
 	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
