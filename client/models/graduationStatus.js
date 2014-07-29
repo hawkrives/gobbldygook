@@ -9,10 +9,9 @@ var getCourses = require('../helpers/getCourses').getCourses
 
 var AsianStudies = React.createClass({
 	load: function() {
-		var self = this
-		asianStudies(this.props).then(function(result) {
+		asianStudies(this.props).bind(this).then(function(result) {
 			console.log('calculated asian studies graduation possibility', result)
-			self.setState({
+			this.setState({
 				result: JSON.stringify(result, undefined, 2)
 			})
 		})
