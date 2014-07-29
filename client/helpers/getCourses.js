@@ -50,15 +50,15 @@ function logResult(result) {
 	console.log(result)
 }
 
-function checkCoursesForDeptNum(deptNumString, courses) {
+function checkCoursesForDeptNum(courses, deptNumString) {
 	var crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
 
 	return deptNumToCrsid(deptNumString)
 		.then(function(crsid) {
-			console.log(
+			/*console.log(
 				'checkCoursesForDeptNum',
 				'checking for', crsid, 'in', crsidsToCheckAgainst,
-				'result', _.contains(crsidsToCheckAgainst, crsid))
+				'result', _.contains(crsidsToCheckAgainst, crsid))*/
 			return _.contains(crsidsToCheckAgainst, crsid)
 		}).catch(function(err) {
 			console.error('checkCoursesForDeptNum error', err.stack)

@@ -10,7 +10,7 @@ var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCourse
 
 function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
-	return Promise.resolve(checkCoursesForDeptNum('ASIAN 275', courses))
+	return checkCoursesForDeptNum(courses, 'ASIAN 275')
 }
 
 function lowerLevelLanguageCourses(course) {
@@ -68,8 +68,8 @@ function seniorSeminar(courses) {
 	// Senior Seminar: One of:
 	// - Asian Studies 397: Human Rights/Asian Context, or
 	// - Asian Studies 399: Asian Studies Seminar
-	var humanRights = checkCoursesForDeptNum('ASIAN 397', courses)
-	var asiaSeminar = checkCoursesForDeptNum('ASIAN 399', courses)
+	var humanRights = checkCoursesForDeptNum(courses, 'ASIAN 397')
+	var asiaSeminar = checkCoursesForDeptNum(courses, 'ASIAN 399')
 	return Promise.props({
 		humanRights: humanRights,
 		asiaSeminar: asiaSeminar
