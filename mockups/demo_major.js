@@ -52,7 +52,16 @@ function electives(courses) {
 
 	// Req. #4 was embedded at the beginning, when we reject any lower-level
 	// languages. That way, we can't count them.
-	return Promise.resolve(_.all([levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized]))
+	return Promise.props({
+		levelsTwoOrThree: levelsTwoOrThree,
+		onlyTwoAtLevelOne: onlyTwoAtLevelOne,
+		notTooSpecialized: notTooSpecialized
+	}).then(function(details) {
+		return {
+			result: _.all(details),
+			details: details
+		}
+	})
 }
 
 function seniorSeminar(courses) {
@@ -60,11 +69,15 @@ function seniorSeminar(courses) {
 	// - Asian Studies 397: Human Rights/Asian Context, or
 	// - Asian Studies 399: Asian Studies Seminar
 	var humanRights = checkCoursesForDeptNum('ASIAN 397', courses)
-	var otherSeminar = checkCoursesForDeptNum('ASIAN 399', courses)
-	return Promise.all([humanRights, otherSeminar]).then(function(seminars) {
-		var hasTakenSeminar = _.any(seminars)
-		console.log('hasTakenSeminar', hasTakenSeminar, seminars)
-		return hasTakenSeminar
+	var asiaSeminar = checkCoursesForDeptNum('ASIAN 399', courses)
+	return Promise.props({
+		humanRights: humanRights,
+		asiaSeminar: asiaSeminar
+	}).then(function(seminars) {
+		return {
+			result: _.any(seminars),
+			details: seminars
+		}
 	})
 }
 
@@ -89,7 +102,13 @@ function language(courses) {
 		.filter(partialTitle('Chinese'))
 		.size().value() >= 2
 
-	return Promise.resolve(japaneseLanguage || chineseLanguage)
+	return Promise.resolve({
+		result: (japaneseLanguage || chineseLanguage),
+		details: {
+			japanese: japaneseLanguage,
+			chinese: chineseLanguage
+		}
+	})
 }
 
 function checkAsianStudiesMajor(student) {
@@ -97,14 +116,39 @@ function checkAsianStudiesMajor(student) {
 	console.log('checkAsianStudiesMajor', student)
 
 	var asianStudiesMajorRequirements = Promise.props({
-		interdisciplinaryApproachesToAsia: interdisciplinaryApproachesToAsia(student.courses),
-		electives: electives(student.courses),
-		seniorSeminar: seniorSeminar(student.courses),
-		language: language(student.courses)
+		interdisciplinaryResults: interdisciplinaryApproachesToAsia(student.courses),
+		electivesResults: electives(student.courses),
+		seminarResults: seniorSeminar(student.courses),
+		languageResults: language(student.courses),
+	}).then(function(results) {
+		console.log('checkAsianStudiesMajor results', results)
+		return [
+			{
+				title: 'Interdisciplinary Approaches to Asia',
+				result: results.interdisciplinaryResults,
+			},
+			{
+				title: 'Electives',
+				result: results.electivesResults.result,
+				details: results.electivesResults.details,
+			},
+			{
+				title: 'Senior Seminar',
+				result: results.seminarResults.result,
+				details: results.seminarResults.details,
+			},
+			{
+				title: 'Asian Language',
+				result: results.languageResults.result,
+				details: results.languageResults.details,
+			}
+		]
 	})
 
 	return Promise.props({
-		result: asianStudiesMajorRequirements.then(_.all),
+		result: asianStudiesMajorRequirements.then(function(results) {
+			return _.all(results, 'result')
+		}),
 		details: asianStudiesMajorRequirements
 	})
 }
