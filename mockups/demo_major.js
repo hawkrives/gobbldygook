@@ -1,7 +1,6 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
 
-var helpers = '../client/helpers'
 var hasDepartment = require('../client/helpers/hasDepartment')
 var partialTitle = require('../client/helpers/partialTitle')
 var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
@@ -112,9 +111,7 @@ function language(courses) {
 }
 
 function checkAsianStudiesMajor(student) {
-	// shuck off cortex for a while
-	console.log('checkAsianStudiesMajor', student)
-
+	// NOTE: Turn off cortex for any object that needs the values.
 	var asianStudiesMajorRequirements = Promise.props({
 		interdisciplinaryResults: interdisciplinaryApproachesToAsia(student.courses),
 		electivesResults: electives(student.courses),
