@@ -93,7 +93,7 @@ var GraduationStatus = React.createClass({
 		this.putActiveCoursesIntoState()
 	},
 	render: function() {
-		console.log('graduation-status render')
+		// console.log('graduation-status render')
 
 		// Get areas of study
 		var areasOfStudy = _.groupBy(this.props.studies.val(), 'type')

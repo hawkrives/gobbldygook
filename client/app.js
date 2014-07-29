@@ -48,7 +48,6 @@ function createEl(tag, attrs) {
 
 function logDatabaseReady(server) {
 	console.log('database ready')
-	console.log(server)
 }
 function logDataLoaded() {
 	console.log('data loaded')

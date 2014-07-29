@@ -6,7 +6,7 @@ var CourseTable = require('./courseTable');
 
 var Student = React.createClass({
 	render: function() {
-		console.log('student render')
+		// console.log('student render')
 		return (
 			React.DOM.div({className: 'student'},
 				GraduationStatus(this.props),

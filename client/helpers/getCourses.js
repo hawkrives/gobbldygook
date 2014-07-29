@@ -25,7 +25,7 @@ function getCourses(clbids) {
 	// Takes a list of clbids, and returns a list of the course objects for
 	// those clbids.
 
-	console.log('called getCourses with', clbids)
+	// console.log('called getCourses with', clbids)
 	return Promise.all(_.map(clbids, getCourse))
 }
 

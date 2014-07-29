@@ -91,8 +91,6 @@ var Semester = React.createClass({
 		return _.any([hasConflict])
 	},
 	render: function() {
-		console.log('semester render')
-
 		return React.DOM.div({className: 'semester'},
 			React.DOM.header({className: 'semester-title'},
 				React.DOM.h1(null, this.semesterName()),

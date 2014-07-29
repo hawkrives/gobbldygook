@@ -7,9 +7,9 @@ var getRandomInt = require('../helpers/getRandomInt')
 
 var AreaOfStudy = React.createClass({
 	render: function() {
-		console.log('area-of-study render')
 
 		var areaDetails = this.props;//getAreaOfStudy(this.props.name, this.props.type);
+		// console.log('area-of-study render')
 
 		var requirementSets = _.map(areaDetails.sets, function(reqset) {
 			return RequirementSet({
