@@ -29,31 +29,37 @@ function getCourses(clbids) {
 	return Promise.all(_.map(clbids, getCourse))
 }
 
-function getCourseFromDeptNum(deptNumString) {
-	// Filter to only those with matching dept strings
-	return window.db.courses
-		.query('deptnum')
-		.only(deptNumString)
-		.filter('type', 'Research')
-		.limit(1)
-		.execute()
-		.then(function(courses) {
-			return courses[0]
-		})
+function deptNumToCrsid(deptNumString) {
+	return new Promise(function(resolve, reject) {
+		// Filter to only those with matching dept strings
+		window.db.courses
+			.query('deptnum')
+			.only(deptNumString)
+			.limit(1)
+			.execute()
+			.then(function(courses) {
+				if (_.size(courses)) {
+					resolve(courses[0].crsid)
+				}
+				reject(new Error('Course ' + deptNumString + ' was not found'))
+			})
+	})
+}
+
+function logResult(result) {
+	console.log(result)
 }
 
 function checkCoursesForDeptNum(deptNumString, courses) {
 	var crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
 
-	return getCourseFromDeptNum(deptNumString)
-		.then(function(course) {
-			if (course) {
-				console.log(
-					'checkCoursesForDeptNum',
-					'checking for', course.crsid, 'in', crsidsToCheckAgainst,
-					'result', _.contains(crsidsToCheckAgainst, course.crsid))
-				return _.contains(crsidsToCheckAgainst, course.crsid)
-			}
+	return deptNumToCrsid(deptNumString)
+		.then(function(crsid) {
+			console.log(
+				'checkCoursesForDeptNum',
+				'checking for', crsid, 'in', crsidsToCheckAgainst,
+				'result', _.contains(crsidsToCheckAgainst, crsid))
+			return _.contains(crsidsToCheckAgainst, crsid)
 		}).catch(function(err) {
 			console.error('checkCoursesForDeptNum error', err.stack)
 		})
@@ -61,8 +67,9 @@ function checkCoursesForDeptNum(deptNumString, courses) {
 
 module.exports.getCourses = getCourses
 module.exports.getCourse = getCourse
+module.exports.logResult = logResult
 
-module.exports.getCourseFromDeptNum = getCourseFromDeptNum
+module.exports.deptNumToCrsid = deptNumToCrsid
 module.exports.checkCoursesForDeptNum = checkCoursesForDeptNum
 
 window.getCourses = module.exports
