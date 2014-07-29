@@ -95,18 +95,20 @@ var GraduationStatus = React.createClass({
 	render: function() {
 		// console.log('graduation-status render')
 
+		var student = _.merge(this.props, {courses: this.state.courses})
+
 		// Get areas of study
 		var areasOfStudy = _.groupBy(this.props.studies.val(), 'type')
 		areasOfStudy = _.mapValues(areasOfStudy, function(areas) {
 			return _.map(areas, function(area) {
 				area.key = area.id
-				area.courses = this.state.courses
+				area.student = student
 				return AreaOfStudy(area)
 			}, this)
 		}, this)
 
 		return React.DOM.section({className: 'graduation-status'},
-			StudentSummary(_.merge(this.props, {courses: this.state.courses})),
+			StudentSummary(student),
 			React.DOM.section({id: 'degrees'},
 				React.DOM.header({className: 'area-type-heading'},
 					React.DOM.h1(null, 'Degrees'),
