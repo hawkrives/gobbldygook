@@ -93,8 +93,8 @@ var Semester = React.createClass({
 	render: function() {
 		console.log('semester render')
 
-		return React.DOM.div( {className:"semester"},
-			React.DOM.header({className: "semester-title"},
+		return React.DOM.div({className: 'semester'},
+			React.DOM.header({className: 'semester-title'},
 				React.DOM.h1(null, this.semesterName()),
 				React.DOM.ul({className: 'bar'},
 					React.DOM.li(
@@ -107,12 +107,12 @@ var Semester = React.createClass({
 					)
 				),
 				React.DOM.button({
-					className: "remove-semester",
-					title: "Remove " + String(this.props.year) + ' ' + this.semesterName(),
+					className: 'remove-semester',
+					title: 'Remove ' + String(this.props.year) + ' ' + this.semesterName(),
 					onClick: this.removeSemester,
 				})
 			),
-			CourseList( {courses: this.state.courses} )
+			CourseList({courses: this.state.courses})
 		)
 	}
 })
