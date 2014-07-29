@@ -6,7 +6,7 @@ var hasDepartment = require('../client/helpers/hasDepartment')
 var partialTitle = require('../client/helpers/partialTitle')
 var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
 var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
-var checkCoursesForDeptNum = require('../client/helpers/deptNum').checkCoursesForDeptNum
+var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
 
 function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
