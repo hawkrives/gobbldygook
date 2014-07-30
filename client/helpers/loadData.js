@@ -5,6 +5,8 @@ var add = require('./add')
 var db = require('./db')
 var buildDeptNum = require('./deptNum').buildDeptNum
 
+var logDataLoading = false
+
 function storeCourses(item) {
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeCourses')
@@ -84,11 +86,16 @@ function updateDatabase(itemType, infoFromServer) {
 	var itemPath = infoFromServer.path
 
 	if (newHash === oldHash) {
-		console.log('skipped ' + itemPath)
+		if (logDataLoading) {
+			console.log('skipped ' + itemPath)
+		}
 		return Promise.resolve(false)
 	}
 
-	console.log('need to add ' + itemPath)
+	if (logDataLoading) {
+		console.log('need to add ' + itemPath)
+	}
+
 	var lookup = {
 		'courses': 'courses',
 		'areas': 'info'
@@ -109,7 +116,9 @@ function updateDatabase(itemType, infoFromServer) {
 			return Promise.reject(err.stack)
 		})
 		.done(function(item) {
-			console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
+			if (logDataLoading) {
+				console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
+			}
 			return Promise.resolve(true)
 		})
 }
