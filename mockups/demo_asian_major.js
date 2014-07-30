@@ -53,18 +53,27 @@ function electives(courses) {
 		_.chain(asianStudiesCourses).filter(partialTitle('Japan')).size().value() <= 4,
 	])
 
+	var matchingElectives = _.union(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
+
+	var matching = _.size(matchingElectives)
+	var needs = 6
+
 	// Req. #4 was embedded at the beginning, when we reject any lower-level
 	// languages. That way, we can't count them.
-	return Promise.props({
-		levelsTwoOrThree: levelsTwoOrThree,
-		onlyTwoAtLevelOne: onlyTwoAtLevelOne,
-		notTooSpecialized: notTooSpecialized
-	}).then(function(details) {
+	return Promise.all([
+		levelsTwoOrThree,
+		onlyTwoAtLevelOne,
+		notTooSpecialized
+	]).then(function(details) {
 		return {
 			title: 'Electives',
 			description: 'Six electives, with stipulations: 1. At least two at level II or level III, taken on campus; 2. No more than two at level I; 3. No more than four elective courses about any one country; 4. No level I or level II language courses may count.',
-			result: _.all(details),
-			details: details
+			result: matching >= needs,
+			details: {
+				has: matching,
+				needs: needs,
+				matches: matchingElectives
+			}
 		}
 	})
 }
@@ -108,16 +117,24 @@ function language(courses) {
 
 	var chineseLanguage = _.chain(subsetOfCourses)
 		.filter(hasDepartment('CHIN'))
-		.filter(partialTitle('Chinese'))
-		.size().value() >= 2
+		.filter(partialNameOrTitle('Chinese'))
+		.value()
+
+	var fulfilledLanguages = _.filter([japaneseLanguage, chineseLanguage], function(courses) {
+		return _.size(courses) > 2
+	})
+
+	var numberFulfilled = _.size(fulfilledLanguages)
+	var numberNeeded = 1
 
 	return Promise.resolve({
 		title: 'Language',
 		description: 'Two courses in Chinese or Japanese above 112 or its equivalent',
-		result: (japaneseLanguage || chineseLanguage),
+		result: numberFulfilled >= numberNeeded,
 		details: {
-			japanese: japaneseLanguage,
-			chinese: chineseLanguage
+			has: numberFulfilled,
+			needs: numberNeeded,
+			matches: fulfilledLanguages,
 		}
 	})
 }
