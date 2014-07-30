@@ -1,6 +1,7 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
 
+var countCredits = require('../client/helpers/countCredits')
 var common = require('./demo_common_graduation_requirements')
 var hasDepartment = require('../client/helpers/hasDepartment')
 
@@ -85,21 +86,24 @@ function checkBachelorOfArtsDegree(student) {
 	// http://www.stolaf.edu/catalog/1314/academiclife/ba-gen-grad-requirements.html
 
 	// TODO: Turn off cortex.
+	var studies = student.studies
+	var courses = student.courses
+	var fabrications = []
+	var creditsNeeded = student.creditsNeeded
+
 	var requirements = [
-		common.courses(student.courses, student.creditsNeeded),
-		common.residency(student.courses, student.fabrications),
-		common.interim(student.courses),
-		common.gpa(student.courses),
-		common.courseLevel(student.courses),
-		common.gradedCourses(student.courses, student.fabrications),
-		artsMajor(student.studies, student.courses),
-		beyondTheMajor(student.studies, student.courses),
+		common.courses(courses, creditsNeeded),
+		common.residency(courses, fabrications),
+		common.interim(courses),
+		common.gpa(courses),
+		common.courseLevel(courses),
+		common.gradedCourses(courses, fabrications),
+		artsMajor(studies, courses),
+		beyondTheMajor(studies, courses),
 	]
 
-	if (common.isBachelorOfBoth(student)) {
-		requirements.push(common.artsAndMusicDoubleMajor(
-			student.courses, student.studies, student.fabrications
-		))
+	if (common.isBachelorOfBoth(studies)) {
+		requirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
 	}
 
 	var bachelorOfArtsRequirements = Promise.all(requirements).then(function(results) {

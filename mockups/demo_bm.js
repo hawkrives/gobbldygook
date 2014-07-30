@@ -60,21 +60,23 @@ function checkBachelorOfMusicDegree(student) {
 	// http://www.stolaf.edu/catalog/1314/academiclife/bm-gen-grad-requirements.html
 
 	// TODO: Turn off cortex.
+	var studies = student.studies
+	var courses = student.courses
+	var fabrications = []
+	var creditsNeeded = student.creditsNeeded
 
 	var requirements = [
-		common.courses(student.courses, student.creditsNeeded),
-		common.residency(student.courses, student.fabrications),
-		common.interim(student.courses),
-		common.gpa(student.courses),
-		common.courseLevel(student.courses),
-		common.gradedCourses(student.courses, student.fabrications),
-		dedicatedMusicMajor(student.studies, student.courses),
+		common.courses(courses, creditsNeeded),
+		common.residency(courses, fabrications),
+		common.interim(courses),
+		common.gpa(courses),
+		common.courseLevel(courses),
+		common.gradedCourses(courses, fabrications),
+		dedicatedMusicMajor(studies, courses),
 	]
 
-	if (common.isBachelorOfBoth(student)) {
-		requirements.push(common.artsAndMusicDoubleMajor(
-			student.courses, student.studies, student.fabrications
-		))
+	if (common.isBachelorOfBoth(studies)) {
+		requirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
 	}
 
 	var bachelorOfMusicRequirements = Promise.all(requirements).then(function(results) {

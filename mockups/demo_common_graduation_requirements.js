@@ -274,16 +274,16 @@ function checkStudentDegreesFor(studies, desiredDegreeAbbreviation) {
 	return _.size(_.find(degrees, {abbr: desiredDegreeAbbreviation})) >= 1 ? true : false
 }
 
-function isBachelorOfMusic(student) {
-	return checkStudentDegreesFor(student.studies, 'B.M.')
+function isBachelorOfMusic(studies) {
+	return checkStudentDegreesFor(studies, 'B.M.')
 }
 
-function isBachelorOfArts(student) {
-	return checkStudentDegreesFor(student.studies, 'B.A.')
+function isBachelorOfArts(studies) {
+	return checkStudentDegreesFor(studies, 'B.A.')
 }
 
-function isBachelorOfBoth(student) {
-	return isBachelorOfMusic(student) && isBachelorOfArts(student)
+function isBachelorOfBoth(studies) {
+	return _.all([isBachelorOfMusic(studies), isBachelorOfArts(studies)])
 }
 
 module.exports.isBachelorOfBoth = isBachelorOfBoth

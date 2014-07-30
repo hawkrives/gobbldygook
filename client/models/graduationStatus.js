@@ -38,6 +38,12 @@ var GraduationStatus = React.createClass({
 		// console.log('graduation-status render')
 
 		var student = _.merge(this.props, {courses: this.state.courses})
+		student = _.mapValues(student, function(prop) {
+			if (_.isFunction(prop.val)) {
+				return prop.val()
+			}
+			return prop
+		})
 
 		// Get areas of study
 		var areasOfStudy = _.groupBy(this.props.studies.val(), 'type')
