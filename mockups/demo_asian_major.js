@@ -7,6 +7,16 @@ var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
 var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
 var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
 
+var utilities = require('./demo_common_major_utilities')
+
+var asianDeptRequiredCourses = [
+	{deptnum: 'ASIAN 275'},
+
+	{deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
+]
+
+var isRequiredAsianStudiesCourse = _.curry(utilities.isRequiredCourse)(asianDeptRequiredCourses)
+
 function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
 	return Promise.props({
@@ -40,6 +50,7 @@ function electives(courses) {
 	var asianStudiesCourses = _.chain(courses)
 		.filter(hasDepartment('ASIAN'))
 		.reject(lowerLevelLanguageCourses)
+		.reject(isRequiredAsianStudiesCourse)
 		.value()
 
 	var levelsTwoOrThree = _.chain(asianStudiesCourses)
