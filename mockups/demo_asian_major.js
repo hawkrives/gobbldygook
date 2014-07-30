@@ -2,7 +2,7 @@ var _ = require('lodash')
 var Promise = require('bluebird')
 
 var hasDepartment = require('../client/helpers/hasDepartment')
-var partialTitle = require('../client/helpers/partialTitle').partialTitle
+var partialNameOrTitle = require('../client/helpers/partialTitle').partialNameOrTitle
 var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
 var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
 var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
@@ -25,7 +25,7 @@ function lowerLevelLanguageCourses(course) {
 			hasDepartment('CHINA', course) ||
 			hasDepartment('JAPAN', course)
 		) &&
-		(partialTitle('Beginner', course) || partialTitle('Intermediate', course)) &&
+		(partialNameOrTitle('Beginner', course) || partialNameOrTitle('Intermediate', course)) &&
 		(course.level < 300)
 	)
 }
@@ -49,8 +49,8 @@ function electives(courses) {
 		.filter(coursesAtLevel(100)).size().value() <= 2
 
 	var notTooSpecialized = _.any([
-		_.chain(asianStudiesCourses).filter(partialTitle('China')).size().value() <= 4,
-		_.chain(asianStudiesCourses).filter(partialTitle('Japan')).size().value() <= 4,
+		_.chain(asianStudiesCourses).filter(partialNameOrTitle('China')).size().value() <= 4,
+		_.chain(asianStudiesCourses).filter(partialNameOrTitle('Japan')).size().value() <= 4,
 	])
 
 	var matchingElectives = _.union(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
@@ -104,16 +104,15 @@ function language(courses) {
 	var subsetOfCourses = _.chain(courses)
 		.filter(coursesAtOrAboveLevel(200))
 		.filter(function(course) {
-			return partialTitle('Intermediate', course) || partialTitle('Advanced', course)
-		})
-		.value()
+			return partialNameOrTitle('Intermediate', course) || partialNameOrTitle('Advanced', course)
+		}).value()
 
 	var japaneseLanguage = _.chain(subsetOfCourses)
 		.filter(hasDepartment('JAPAN'))
-		.filter(partialTitle('Japanese'))
-		.size().value() >= 2
 
 	console.log('japaneseLanguage', japaneseLanguage, subsetOfCourses)
+		.filter(partialNameOrTitle('Japanese'))
+		.value()
 
 	var chineseLanguage = _.chain(subsetOfCourses)
 		.filter(hasDepartment('CHIN'))
