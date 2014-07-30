@@ -130,7 +130,7 @@ function checkAsianStudiesMajor(student) {
 		seniorSeminar(student.courses),
 		language(student.courses),
 	]).then(function(results) {
-		console.log('checkAsianStudiesMajor results', results)
+		// console.log('checkAsianStudiesMajor results', results)
 		return results
 	})
 

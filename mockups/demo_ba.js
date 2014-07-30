@@ -107,7 +107,7 @@ function checkBachelorOfArtsDegree(student) {
 	}
 
 	var bachelorOfArtsRequirements = Promise.all(requirements).then(function(results) {
-		console.log('checkBachelorOfArtsDegree', 'results', results)
+		// console.log('checkBachelorOfArtsDegree', 'results', results)
 		return results
 	})
 

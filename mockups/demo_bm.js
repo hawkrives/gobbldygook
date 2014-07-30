@@ -80,7 +80,7 @@ function checkBachelorOfMusicDegree(student) {
 	}
 
 	var bachelorOfMusicRequirements = Promise.all(requirements).then(function(results) {
-		console.log('checkBachelorOfMusicDegree', 'results', results)
+		// console.log('checkBachelorOfMusicDegree', 'results', results)
 		return results
 	})
 

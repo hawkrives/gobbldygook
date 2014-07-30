@@ -143,7 +143,7 @@ function checkComputerScienceMajor(student) {
 		electiveCourses(student.courses),
 		capstoneCourse(student.courses),
 	]).then(function(results) {
-		console.log('checkComputerScienceMajor', 'results', results)
+		// console.log('checkComputerScienceMajor', 'results', results)
 		return results
 	})
 
