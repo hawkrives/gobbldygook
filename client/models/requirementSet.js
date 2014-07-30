@@ -19,7 +19,10 @@ var RequirementSet = React.createClass({
 
 		return (
 			React.DOM.div({className: 'requirement-set'},
-				React.DOM.h2(null, this.props.title)//,
+				React.DOM.h2(
+					{title: this.props.description},
+					this.props.title
+				)//,
 				// React.DOM.ul({className: 'requirement-list'},
 				// 	requirements
 				// )
