@@ -61,6 +61,7 @@
 			border-bottom-left-radius: 0;
 			border-bottom-right-radius: 0;
 			opacity: 0.5;
+			height: 5px;
 		}
 		summary::after {
 			@include ionicon($ionicon-var-ios7-minus-empty);
