@@ -17,12 +17,62 @@ var RequirementSet = React.createClass({
 
 		// if (this.props.type === )
 
+		var details = undefined
+
+		if (this.props.type === 'array') {
+			details = undefined
+		} else if (this.props.type === 'boolean') {
+			details = React.DOM.div(
+				{
+					className: 'requirement-result requirement-result-boolean' +
+					(this.props.result ? ' completed' : ' incomplete')
+				},
+				React.DOM.span(null, this.props.result ? 'Completed' : 'Incomplete')
+			)
+		} else if (this.props.type === 'object/boolean') {
+			details = React.DOM.div(
+				{className: 'requirement-result requirement-result-object-boolean'},
+				React.DOM.ul(
+					{className: 'requirement-detail-list'},
+					_.map(this.props.details, function(result, requirement) {
+						return React.DOM.li(
+							{
+								key: requirement,
+								className: result ? 'completed' : 'incomplete',
+								title: requirement + ': ' + (result ? 'Completed.' : 'Incomplete!')
+							},
+							requirement
+						)
+					})
+				)
+			)
+		} else if (this.props.type === 'object/number') {
+			details = React.DOM.div(
+				{className: 'requirement-result requirement-result-object-number'},
+				React.DOM.span(
+					{className: this.props.result ? 'completed' : 'incomplete'},
+					this.props.details.has, ' of ', this.props.details.needs
+				),
+				React.DOM.ul(
+					{className: 'requirement-detail-list'},
+					_.map(this.props.details.matches, function(match) {
+						return React.DOM.li({key: match}, match)
+					})
+				)
+			)
+		}
+
 		return (
-			React.DOM.div({className: 'requirement-set'},
+			React.DOM.div(
+				{className: 'requirement-set'},
 				React.DOM.h2(
-					{title: this.props.description},
+					{
+						className: this.props.result ? 'completed' : 'incomplete',
+						title: this.props.description,
+					},
 					this.props.title
-				)//,
+				),
+				details
 				// React.DOM.ul({className: 'requirement-list'},
 				// 	requirements
 				// )
