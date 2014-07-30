@@ -210,7 +210,7 @@ module.exports.gradedCourses = gradedCourses
 var atLeastEightCredits = _.curry(function(major, courses) {
 	var withinMajorCourses = _.filter(courses, hasDepartment(major.abbr))
 	var fullCreditBeyondMajorCourses = _.filter(withinMajorCourses, onlyFullCreditCourses)
-	return countCredits(fullCreditCourses) >= 8
+	return countCredits(fullCreditBeyondMajorCourses) >= 8
 })
 
 module.exports.atLeastEightCredits = atLeastEightCredits
