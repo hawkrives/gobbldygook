@@ -15,8 +15,6 @@ var RequirementSet = React.createClass({
 		// 	})
 		// }, this);
 
-		// if (this.props.type === )
-
 		var details = undefined
 
 		if (this.props.type === 'array') {
@@ -73,9 +71,6 @@ var RequirementSet = React.createClass({
 					this.props.title
 				),
 				details
-				// React.DOM.ul({className: 'requirement-list'},
-				// 	requirements
-				// )
 			)
 		)
 	}

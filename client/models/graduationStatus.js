@@ -36,7 +36,6 @@ var GraduationStatus = React.createClass({
 	},
 	render: function() {
 		// console.log('graduation-status render')
-
 		var student = _.merge(this.props.student, {courses: this.state.courses})
 
 		// Get areas of study
@@ -71,19 +70,7 @@ var GraduationStatus = React.createClass({
 					React.DOM.button({className: 'add-area-of-study', title: 'Add Concentration'})
 				),
 				areasOfStudy.concentration
-			)//,
-			// React.DOM.section({id: 'asian'},
-			// 	React.DOM.header({className: 'area-type-heading'},
-			// 		React.DOM.h1(null, 'Asian Studies')
-			// 	),
-			// 	AsianStudies(student)
-			// ),
-			// React.DOM.section({id: 'csci'},
-			// 	React.DOM.header({className: 'area-type-heading'},
-			// 		React.DOM.h1(null, 'Computer Science')
-			// 	),
-			// 	ComputerScience(student)
-			// )
+			)
 		)
 	}
 });

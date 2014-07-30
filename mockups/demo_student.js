@@ -129,21 +129,5 @@ module.exports = {
 			what: 'credits',
 			with: 1
 		}
-	],
-
-	// derived
-	degrees: function() {
-		return _.filter(this.studies, {kind: 'degree'});
-	},
-	majors: function() {
-		return _.filter(this.studies, {kind: 'major'});
-	},
-	concentrations: function() {
-		return _.filter(this.studies, {kind: 'concentration'});
-	},
-	clbids: function() {
-		var activeSchedules = _.filter(this.schedules, 'active')
-		var clbids = _.pluck(activeSchedules, 'clbids')
-		return _.uniq(_.flatten(clbids))
-	}
+	]
 }
