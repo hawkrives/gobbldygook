@@ -85,16 +85,15 @@ var AreaOfStudy = React.createClass({
 	render: function() {
 		// console.log('area-of-study render')
 
-		// var requirementSets = _.map(areaDetails.sets, function(reqset) {
-		// 	return RequirementSet({
-		// 		key: reqset.description,
-		// 		name: reqset.description,
-		// 		needs: reqset.needs,
-		// 		count: reqset.count,
-		// 		requirements: reqset.reqs,
-		// 		courses: this.props.courses
-		// 	});
-		// }, this);
+		var requirementSets = _.map(this.state.result.details, function(reqset) {
+			return RequirementSet({
+				key: reqset.title,
+				title: reqset.title,
+				description: reqset.description,
+				type: findType(reqset.result, reqset.details),
+				details: reqset.details || null
+			});
+		}, this);
 
 		return React.DOM.article({id: this.props.id, className: 'area-of-study'},
 			React.DOM.details(null,
