@@ -54,7 +54,7 @@ function cleanPriorData(item) {
 	return new Promise(function (resolve, reject) {
 		var path = item.meta.path
 		var hash = item.meta.hash
-		console.log('deleting ' + item.type + ' from ' + path)
+		console.info('deleting ' + item.type + ' from ' + path)
 
 		var deleteItemsPromise = window.db.query(item.type, 'sourcePath')
 			.only(path)
@@ -73,7 +73,7 @@ function cleanPriorData(item) {
 
 function cacheItemHash(item) {
 	return new Promise(function(resolve, reject) {
-		console.log(item.meta.path + ' called cacheItemHash')
+		console.info(item.meta.path + ' called cacheItemHash')
 		localStorage.setItem(item.meta.path, item.meta.hash)
 		resolve(item)
 	})
