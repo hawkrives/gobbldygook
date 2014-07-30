@@ -8,15 +8,15 @@ var getRandomInt = require('../helpers/getRandomInt')
 var areas = {
 	major: {
 		'Computer Science': require('../../mockups/demo_csci_major'),
-		'Asian Studies': require('../../mockups/demo_major')
+		'Asian Studies': require('../../mockups/demo_asian_major')
 	},
 	degree: {
-		'Bachelor of Arts': require('../helpers/checkElegibilityForGraduation'),
-		'Bachelor of Music': require('../helpers/checkElegibilityForGraduation')
+		'Bachelor of Arts': require('../../mockups/demo_ba'),
+		'Bachelor of Music': require('../../mockups/demo_bm')
 	},
 	concentration: {
 		'Computer Science': require('../../mockups/demo_csci_major'),
-		'Asian Studies': require('../../mockups/demo_major')
+		'Asian Studies': require('../../mockups/demo_asian_major')
 	}
 }
 

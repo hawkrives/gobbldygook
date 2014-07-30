@@ -2,14 +2,18 @@ var _ = require('lodash')
 var Promise = require('bluebird')
 
 var hasDepartment = require('../client/helpers/hasDepartment')
-var partialTitle = require('../client/helpers/partialTitle')
+var partialTitle = require('../client/helpers/partialTitle').partialTitle
 var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
 var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
 var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
 
 function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
-	return checkCoursesForDeptNum(courses, 'ASIAN 275')
+	return Promise.props({
+		title: 'Interdisciplinary Approaches to Asia',
+		description: 'Asian Studies 275: Interdisciplinary Approaches to Asia',
+		result: checkCoursesForDeptNum(courses, 'ASIAN 275')
+	})
 }
 
 function lowerLevelLanguageCourses(course) {
@@ -57,6 +61,8 @@ function electives(courses) {
 		notTooSpecialized: notTooSpecialized
 	}).then(function(details) {
 		return {
+			title: 'Electives',
+			description: 'Six electives, with stipulations: 1. At least two at level II or level III, taken on campus; 2. No more than two at level I; 3. No more than four elective courses about any one country; 4. No level I or level II language courses may count.',
 			result: _.all(details),
 			details: details
 		}
@@ -74,6 +80,8 @@ function seniorSeminar(courses) {
 		asiaSeminar: asiaSeminar
 	}).then(function(seminars) {
 		return {
+			title: 'Senior Seminar',
+			description: 'Senior Seminar: One of Asian Studies 397: Human Rights/Asian Context, or Asian Studies 399: Asian Studies Seminar',
 			result: _.any(seminars),
 			details: seminars
 		}
@@ -96,12 +104,16 @@ function language(courses) {
 		.filter(partialTitle('Japanese'))
 		.size().value() >= 2
 
+	console.log('japaneseLanguage', japaneseLanguage, subsetOfCourses)
+
 	var chineseLanguage = _.chain(subsetOfCourses)
 		.filter(hasDepartment('CHIN'))
 		.filter(partialTitle('Chinese'))
 		.size().value() >= 2
 
 	return Promise.resolve({
+		title: 'Language',
+		description: 'Two courses in Chinese or Japanese above 112 or its equivalent',
 		result: (japaneseLanguage || chineseLanguage),
 		details: {
 			japanese: japaneseLanguage,
@@ -111,35 +123,15 @@ function language(courses) {
 }
 
 function checkAsianStudiesMajor(student) {
-	// NOTE: Turn off cortex for any object that needs the values.
-	var asianStudiesMajorRequirements = Promise.props({
-		interdisciplinaryResults: interdisciplinaryApproachesToAsia(student.courses),
-		electivesResults: electives(student.courses),
-		seminarResults: seniorSeminar(student.courses),
-		languageResults: language(student.courses),
-	}).then(function(results) {
+	// TODO: Turn off cortex.
+	var asianStudiesMajorRequirements = Promise.all([
+		interdisciplinaryApproachesToAsia(student.courses),
+		electives(student.courses),
+		seniorSeminar(student.courses),
+		language(student.courses),
+	]).then(function(results) {
 		console.log('checkAsianStudiesMajor results', results)
-		return [
-			{
-				title: 'Interdisciplinary Approaches to Asia',
-				result: results.interdisciplinaryResults,
-			},
-			{
-				title: 'Electives',
-				result: results.electivesResults.result,
-				details: results.electivesResults.details,
-			},
-			{
-				title: 'Senior Seminar',
-				result: results.seminarResults.result,
-				details: results.seminarResults.details,
-			},
-			{
-				title: 'Asian Language',
-				result: results.languageResults.result,
-				details: results.languageResults.details,
-			}
-		]
+		return results
 	})
 
 	return Promise.props({

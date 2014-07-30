@@ -2,7 +2,7 @@ var _ = require('lodash')
 var Promise = require('bluebird')
 
 var hasDepartment = require('../client/helpers/hasDepartment')
-var partialTitle = require('../client/helpers/partialTitle')
+var partialTitle = require('../client/helpers/partialTitle').partialTitle
 var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
 var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
 var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
@@ -19,7 +19,6 @@ var csDeptRequiredCourses = [
 ]
 
 function isRequiredCourse(requiredCourses, course) {
-	console.log(arguments)
 	var match = _.filter(requiredCourses, {deptnum: course.deptnum})
 	var results = [match ? true : false]
 
@@ -66,8 +65,10 @@ function foundationCourses(courses) {
 		mfc: mfc
 	}).then(function(requirements) {
 		return {
+			title: 'Foundation',
+			description: 'one of Computer Science 121 or 125; Computer Science 241, 251, and 252; one of Computer Science 231 or Math 232 or Math 252.',
 			result: _.all(requirements),
-			details: requirements
+			details: requirements,
 		}
 	})
 }
@@ -108,6 +109,8 @@ function coreCourses(courses) {
 		options: options
 	}).then(function(requirements) {
 		return {
+			title: 'Core',
+			description: 'Computer Science 253; Computer Science 263; either Computer Science 276 or 333; and either Computer Science 273, 284, or 300 with parallel and distributed computing.',
 			result: _.all(requirements),
 			details: requirements,
 		}
@@ -123,6 +126,8 @@ function electiveCourses(courses) {
 		.value()
 
 	return Promise.resolve({
+		title: 'Electives',
+		description: 'Two approved electives.',
 		result: _.size(validCourses) >= 2,
 		details: _.size(validCourses)
 	})
@@ -130,40 +135,23 @@ function electiveCourses(courses) {
 
 function capstoneCourse(courses) {
 	// Capstone: Computer Science 390
-	return checkCoursesForDeptNum(courses, 'CSCI 390')
+	return Promise.resolve({
+		title: 'Capstone',
+		description: 'Capstone',
+		result: checkCoursesForDeptNum(courses, 'CSCI 390'),
+	})
 }
 
 function checkComputerScienceMajor(student) {
-	// Turn off cortex for any object that needs values other than `courses`.
-
-	var computerScienceMajorRequirements = Promise.props({
-		foundationResults: foundationCourses(student.courses),
-		coreResults: coreCourses(student.courses),
-		electivesResults: electiveCourses(student.courses),
-		capstoneResults: capstoneCourse(student.courses),
-	}).then(function(results) {
-		console.log('checkComputerScienceMajor results', results)
-		return [
-			{
-				title: 'Foundation',
-				result: results.foundationResults.result,
-				details: results.foundationResults.details,
-			},
-			{
-				title: 'Core',
-				result: results.coreResults.result,
-				details: results.coreResults.details,
-			},
-			{
-				title: 'Electives',
-				result: results.electivesResults.result,
-				details: results.electivesResults.details,
-			},
-			{
-				title: 'Capstone',
-				result: results.capstoneResults
-			}
-		]
+	// TODO: Turn off cortex.
+	var computerScienceMajorRequirements = Promise.all([
+		foundationCourses(student.courses),
+		coreCourses(student.courses),
+		electiveCourses(student.courses),
+		capstoneCourse(student.courses),
+	]).then(function(results) {
+		console.log('checkComputerScienceMajor', 'results', results)
+		return results
 	})
 
 	return Promise.props({
