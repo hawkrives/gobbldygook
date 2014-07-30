@@ -50,7 +50,10 @@ var AreaOfStudy = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			result: {}
+			result: {
+				result: false,
+				details: []
+			}
 		}
 	},
 	componentWillReceiveProps: function() {
