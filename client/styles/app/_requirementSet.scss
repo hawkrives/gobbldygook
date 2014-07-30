@@ -1,11 +1,10 @@
+$border-color: rgba(50, 50, 50, 0.25);
 .requirement-set {
 	h2 {
-		$border-color: rgba(50, 50, 50, 0.25);
 		border-top: 1px solid $border-color;
-		border-bottom: 1px solid $border-color;
 
-		margin: 0;// auto;
-		padding-bottom: -0.1em;
+		margin: 0;
+		padding-top: 2px;
 
 		background-color: rgb(240, 240, 240);
 		text-transform: uppercase;
@@ -15,9 +14,44 @@
 		font-weight: 300;
 
 		text-align: center;
+	}
 
-		// width: 90%;
+	h2.incomplete {
+		background-color: lighten(desaturate($red, 50%), 30%);
 	}
 
 	margin-bottom: 0.35em;
+
+	.incomplete {
+		background-color: lighten(desaturate($red, 50%), 30%);
+	}
+	.completed {
+		background-color: lighten(desaturate($green, 50%), 10%);
+	}
+}
+
+.requirement-result {
+	border-bottom: 1px solid $border-color;
+	text-align: center;
+}
+
+.requirement-result > span {
+	padding: 2px 5px;
+	display: block;
+}
+
+.requirement-detail-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	display: flex;
+	flex-flow: row wrap;
+	
+	li {
+		padding: 2px 5px;
+		flex: 1 0 33%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 }
