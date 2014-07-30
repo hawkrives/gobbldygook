@@ -95,15 +95,18 @@ function seniorSeminar(courses) {
 	// - Asian Studies 399: Asian Studies Seminar
 	var humanRights = checkCoursesForDeptNum(courses, 'ASIAN 397')
 	var asiaSeminar = checkCoursesForDeptNum(courses, 'ASIAN 399')
-	return Promise.props({
-		humanRights: humanRights,
-		asiaSeminar: asiaSeminar
-	}).then(function(seminars) {
+
+	return Promise.all([
+		humanRights,
+		asiaSeminar
+	]).then(function(seminars) {
+		var seminarCount = _.size(_.compact(seminars))
+		var seminarsNeeded = 1
+
 		return {
 			title: 'Senior Seminar',
 			description: 'Senior Seminar: One of Asian Studies 397: Human Rights/Asian Context, or Asian Studies 399: Asian Studies Seminar',
-			result: _.any(seminars),
-			details: seminars
+			result: seminarCount >= seminarsNeeded
 		}
 	})
 }
