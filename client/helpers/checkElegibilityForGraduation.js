@@ -450,29 +450,63 @@ function checkBachelorOfMusicRequirements(student) {
 			student.courses, student.studies, student.fabrications)
 	})
 
-	return _.every(bachelorOfMusicRequirements)
+	return bachelorOfMusicRequirements.then(function(results) {
+		return _.every(bachelorOfMusicRequirements)
+	})
 }
 
 function checkBachelorOfBothRequirements(student) {
-	return checkBachelorOfArtsRequirements(student) && checkBachelorOfMusicRequirements(student)
+	return Promise.all([
+		checkBachelorOfArtsRequirements(student),
+		checkBachelorOfMusicRequirements(student)
+	]).then(function(results) {
+		return _.all(results)
+	})
 }
 
-module.exports = function(student) {
-	console.log('checkElegibilityForGraduation', student)
+function checkDegreeStatus(student) {
+	return new Promise(function(resolve, reject) {
+		// console.log('checkElegibilityForGraduation', student)
 
-	if (isBachelorOfBoth(student)) {
-		return checkBachelorOfBothRequirements(student)
-	}
+		var result;
 
-	else if (isBachelorOfArts(student)) {
-		return checkBachelorOfArtsRequirements(student)
-	}
+		if (isBachelorOfBoth(student)) {
+			result = Promise.props({
+				result: checkBachelorOfBothRequirements(student),
+				details: checkBachelorOfBothRequirements(student)
+			})
+		}
 
-	else if (isBachelorOfMusic(student)) {
-		return checkBachelorOfMusicRequirements(student)
-	}
+		else if (isBachelorOfArts(student)) {
+			result = Promise.props({
+				title: 'Bachelor of Arts',
+				result: checkBachelorOfArtsRequirements(student),
+				details: checkBachelorOfArtsRequirements(student)
+			})
+		}
 
-	else {
-		return false
-	}
+		else if (isBachelorOfMusic(student)) {
+			result = Promise.props({
+				title: 'Bachelor of Music',
+				result: checkBachelorOfMusicRequirements(student),
+				details: checkBachelorOfMusicRequirements(student)
+			})
+		}
+
+		else {
+			result = Promise.props({
+				result: Promise.resolve(false),
+				details: [
+					{
+						title: 'Unknown Degree',
+						description: 'Unknown Degree ' + degree.type
+					}
+				]
+			})
+		}
+
+		resolve(result)
+	})
 }
+
+module.exports = checkDegreeStatus
