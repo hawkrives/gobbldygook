@@ -292,18 +292,18 @@ function beyondTheMajor(studies, courses) {
 	return _.every(_.filter(studies, {type: 'major'}), twentyOneCreditsAndBeyond(courses))
 }
 
-function finalTwoYearsInResidence(student) {
+function finalTwoYearsInResidence(fabrications) {
 	// "The final two years of coursework in pursuit of the degrees must be
 	// spent in residence."
 
-	var years = _.uniq(_.pluck(student.fabrications, 'year'))
+	var years = _.uniq(_.pluck(fabrications, 'year'))
 
 	if (_.size(years) >= 2) {
 		var sortedYears = _.sortBy(years).reverse()
 		var finalYear = years[0]
 		var secondFinalYear = years[1]
-		var finalYearFabrications = _.filter(student.fabrications, {year: finalYear})
-		var secondFinalYearFabrications = _.filter(student.fabrications, {year: finalYear})
+		var finalYearFabrications = _.filter(fabrications, {year: finalYear})
+		var secondFinalYearFabrications = _.filter(fabrications, {year: finalYear})
 
 		if (!_.every(
 			[_.isEmpty(finalYearFabrications), _.isEmpty(secondFinalYearFabrications)]
@@ -317,13 +317,13 @@ function finalTwoYearsInResidence(student) {
 	return false
 }
 
-function seventeenOlafCourses(student) {
+function seventeenOlafCourses(courses) {
 	// "17 of the last 20 full-course credits must be earned through St. Olaf."
-	if (_.size(student.courses) < 20) {
+	if (_.size(courses) < 20) {
 		return false
 	}
 
-	var fullCreditCourses = _.filter(student.courses, onlyFullCreditCourses)
+	var fullCreditCourses = _.filter(courses, onlyFullCreditCourses)
 
 	// Put the most recent courses at the front
 	var sortedFullCreditCourses = _.sortBy(fullCreditCourses, 'term').reverse()
@@ -332,7 +332,9 @@ function seventeenOlafCourses(student) {
 	var lastTwentyFullCreditCourses = _.first(sortedFullCreditCourses, 20)
 
 	// Reject all of the fabricated courses
-	var notFabricatedFullCreditCourses = _.reject(lastTwentyFullCreditCourses, {alteration: 'fabricated'})
+	var notFabricatedFullCreditCourses = _.reject(
+		lastTwentyFullCreditCourses, {alteration: 'fabricated'}
+	)
 
 	if (_.size(notFabricatedFullCreditCourses) < 17) {
 		return false
@@ -341,24 +343,24 @@ function seventeenOlafCourses(student) {
 	return true
 }
 
-function checkStudentDegreesFor(student, desiredDegreeAbbreviation) {
-	var degrees = _.filter(student.studies, {type: 'degree'})
+function checkStudentDegreesFor(studies, desiredDegreeAbbreviation) {
+	var degrees = _.filter(studies, {type: 'degree'})
 	return _.size(_.find(degrees, {abbr: desiredDegreeAbbreviation})) >= 1 ? true : false
 }
 
-function isBachelorOfMusic(student) {
-	return checkStudentDegreesFor('B.M.')
+function isBachelorOfMusic(studies) {
+	return checkStudentDegreesFor(studies, 'B.M.')
 }
 
-function isBachelorOfArts(student) {
-	return checkStudentDegreesFor('B.A.')
+function isBachelorOfArts(studies) {
+	return checkStudentDegreesFor(studies, 'B.A.')
 }
 
 function isBachelorOfBoth(student) {
 	return isBachelorOfMusic(student) && isBachelorOfArts(student)
 }
 
-function artsAndMusicDoubleMajor(student) {
+function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 	// 	Students must meet the application requirements for both the Bachelor
 	// 	of Arts and Bachelor of Music degree programs.
 
@@ -384,26 +386,26 @@ function artsAndMusicDoubleMajor(student) {
 	// graduation major within that degree before the diploma for that degree will
 	// be awarded.
 
-	var degrees = _.filter(student.studies, {type: 'degree'})
+	var degrees = _.filter(studies, {type: 'degree'})
 	if (_.size(degrees) === 1) {
 		// there's only one degree, so we don't care.
 		return true
 	}
 
-	var majors = _.filter(student.studies, {type: 'major'})
-	if (isBachelorOfBoth(student) && _.find(majors, {abbr: 'MUSIC'})) {
+	var majors = _.filter(studies, {type: 'major'})
+	if (isBachelorOfBoth(studies) && _.find(majors, {abbr: 'MUSIC'})) {
 		// there's a double-ba-bm trying to major in Music -- no.
 		return false
 	}
 
 	// "The final two years of coursework in pursuit of the degrees must be
 	// spent in residence."
-	if (!finalTwoYearsInResidence(student)) {
+	if (!finalTwoYearsInResidence(fabrications)) {
 		return false
 	}
 
 	// "17 of the last 20 full-course credits must be earned through St. Olaf."
-	if (!seventeenOlafCourses(student)) {
+	if (!seventeenOlafCourses(courses)) {
 		return false
 	}
 
@@ -414,7 +416,7 @@ function checkBachelorOfArtsRequirements(student) {
 	// Requirements taken from
 	// http://www.stolaf.edu/catalog/1314/academiclife/ba-gen-grad-requirements.html
 
-	var bachelorOfArtsRequirements = {
+	var bachelorOfArtsRequirements = Promise.props({
 		courses: courses(student.courses, student.creditsNeeded),
 		residency: residency(student),
 		interim: interim(student.courses),
@@ -423,17 +425,20 @@ function checkBachelorOfArtsRequirements(student) {
 		gradedCourses: gradedCourses(student),
 		major: artsMajor(student.studies, student.courses),
 		beyondTheMajor: beyondTheMajor(student.studies, student.courses),
-		artsAndMusicDoubleMajor: artsAndMusicDoubleMajor(student)
-	}
+		artsAndMusicDoubleMajor: artsAndMusicDoubleMajor(
+			student.courses, student.studies, student.fabrications)
+	})
 
-	return _.every(bachelorOfArtsRequirements)
+	return bachelorOfArtsRequirements.then(function(results) {
+		return _.every(bachelorOfArtsRequirements)
+	})
 }
 
 function checkBachelorOfMusicRequirements(student) {
 	// Requirements taken from
 	// http://www.stolaf.edu/catalog/1314/academiclife/bm-gen-grad-requirements.html
 
-	var bachelorOfMusicRequirements = {
+	var bachelorOfMusicRequirements = Promise.props({
 		courses: courses(student.courses, student.creditsNeeded),
 		residency: residency(student),
 		interim: interim(student.courses),
@@ -441,8 +446,9 @@ function checkBachelorOfMusicRequirements(student) {
 		courseLevel: courseLevel(student.courses),
 		gradedCourses: gradedCourses(student),
 		major: dedicatedMusicMajor(student.studies, student.courses),
-		artsAndMusicDoubleMajor: artsAndMusicDoubleMajor(student)
-	}
+		artsAndMusicDoubleMajor: artsAndMusicDoubleMajor(
+			student.courses, student.studies, student.fabrications)
+	})
 
 	return _.every(bachelorOfMusicRequirements)
 }
