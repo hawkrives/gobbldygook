@@ -21,29 +21,66 @@ var areas = {
 }
 
 var AreaOfStudy = React.createClass({
-	render: function() {
+	load: function() {
+		var type = this.props.type
+		var title = this.props.title
 
-		var areaDetails = this.props;//getAreaOfStudy(this.props.name, this.props.type);
+		var area = areas[type][title]
+
+		if (typeof area === 'function') {
+			area(this.props).bind(this)
+				.then(function(results) {
+					console.log('calculated ' + this.props.abbr + ' graduation possibility', results)
+					this.setState({
+						result: results
+					})
+				})
+		} else {
+			this.setState({
+				result: {
+					result: false,
+					details: [{
+						title: this.props.type + ' not found!',
+						description: 'This ' + this.props.type + 'could not be found.',
+						result: false
+					}]
+				}
+			})
+		}
+	},
+	getInitialState: function() {
+		return {
+			result: {}
+		}
+	},
+	componentWillReceiveProps: function() {
+		this.load()
+	},
+	componentDidMount: function() {
+		this.load()
+	},
+	render: function() {
 		// console.log('area-of-study render')
 
-		var requirementSets = _.map(areaDetails.sets, function(reqset) {
-			return RequirementSet({
-				key: reqset.description,
-				name: reqset.description,
-				needs: reqset.needs,
-				count: reqset.count,
-				requirements: reqset.reqs,
-				courses: this.props.courses
-			});
-		}, this);
+		// var requirementSets = _.map(areaDetails.sets, function(reqset) {
+		// 	return RequirementSet({
+		// 		key: reqset.description,
+		// 		name: reqset.description,
+		// 		needs: reqset.needs,
+		// 		count: reqset.count,
+		// 		requirements: reqset.reqs,
+		// 		courses: this.props.courses
+		// 	});
+		// }, this);
 
-		return React.DOM.article({id: areaDetails.id, className: 'area-of-study'},
+		return React.DOM.article({id: this.props.id, className: 'area-of-study'},
 			React.DOM.details(null,
 				React.DOM.summary(null,
-					React.DOM.h1(null, areaDetails.title),
-					React.DOM.progress({value: getRandomInt(0, 100), max: 100})
+					React.DOM.h1(null, this.props.title),
+					React.DOM.progress({value: this.state.result.result, max: 1})
 				),
-				requirementSets
+				// requirementSets
+				this.state.result
 			)
 		);
 	}
