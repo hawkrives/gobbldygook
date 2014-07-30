@@ -8,7 +8,7 @@ var getCourses = require('../helpers/getCourses').getCourses
 
 var GraduationStatus = React.createClass({
 	putActiveCoursesIntoState: function() {
-		var clbids = _.chain(this.props.schedules.val())
+		var clbids = _.chain(this.props.schedules)
 			.filter('active')
 			.pluck('clbids')
 			.flatten()
@@ -37,16 +37,10 @@ var GraduationStatus = React.createClass({
 	render: function() {
 		// console.log('graduation-status render')
 
-		var student = _.merge(this.props, {courses: this.state.courses})
-		student = _.mapValues(student, function(prop) {
-			if (_.isFunction(prop.val)) {
-				return prop.val()
-			}
-			return prop
-		})
+		var student = _.merge(this.props.student, {courses: this.state.courses})
 
 		// Get areas of study
-		var areasOfStudy = _.groupBy(this.props.studies.val(), 'type')
+		var areasOfStudy = _.groupBy(student.studies, 'type')
 		areasOfStudy = _.mapValues(areasOfStudy, function(areas) {
 			return _.map(areas, function(area) {
 				area = _.merge(student, area)

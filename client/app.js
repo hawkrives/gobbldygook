@@ -93,7 +93,7 @@ module.exports = {
 
 			document.body.appendChild(createEl('div', {id: 'student'}))
 			var studentComponent = React.renderComponent(
-				Student(window.me),
+				Student({student: window.me}),
 				document.getElementById('student'))
 
 			window.me.on('update', function(updatedStudent) {
