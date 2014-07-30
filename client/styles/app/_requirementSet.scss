@@ -16,18 +16,8 @@ $border-color: rgba(50, 50, 50, 0.25);
 		text-align: center;
 	}
 
-	h2.incomplete {
-		background-color: lighten(desaturate($red, 50%), 30%);
-	}
-
 	margin-bottom: 0.35em;
 
-	.incomplete {
-		background-color: lighten(desaturate($red, 50%), 30%);
-	}
-	.completed {
-		background-color: lighten(desaturate($green, 50%), 10%);
-	}
 }
 
 .requirement-result {
