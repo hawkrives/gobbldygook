@@ -22,10 +22,11 @@ var RequirementSet = React.createClass({
 		} else if (this.props.type === 'boolean') {
 			details = React.DOM.div(
 				{
-					className: 'requirement-result requirement-result-boolean' +
-					(this.props.result ? ' completed' : ' incomplete')
+					className: 'requirement-result requirement-result-boolean'
 				},
-				React.DOM.span(null, this.props.result ? 'Completed' : 'Incomplete')
+				React.DOM.span(
+					{className: this.props.result ? ' completed' : ' incomplete'},
+					this.props.result ? 'Completed' : 'Incomplete')
 			)
 		} else if (this.props.type === 'object/boolean') {
 			details = React.DOM.div(
