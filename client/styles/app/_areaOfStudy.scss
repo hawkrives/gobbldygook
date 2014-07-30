@@ -63,8 +63,8 @@
 		progress {
 			border-bottom-left-radius: 0;
 			border-bottom-right-radius: 0;
-			opacity: 0.5;
-			height: 5px;
+			opacity: 0.75;
+			height: 3px;
 		}
 		summary::after {
 			@include ionicon($ionicon-var-ios7-minus-empty);
