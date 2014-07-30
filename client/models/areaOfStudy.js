@@ -91,15 +91,27 @@ var AreaOfStudy = React.createClass({
 				title: reqset.title,
 				description: reqset.description,
 				type: findType(reqset.result, reqset.details),
+				result: reqset.result,
 				details: reqset.details || null
 			});
 		}, this);
+
+		var results = _.chain(this.state.result.details)
+			.flatten()
+			.toArray()
+			.pluck('result')
+			.value()
+
+		// TODO: Use the number of requirements, instead of the number of sections.
+
+		var currentProgress = _.size(_.compact(results))
+		var maxProgress = _.size(results)
 
 		return React.DOM.article({id: this.props.id, className: 'area-of-study'},
 			React.DOM.details(null,
 				React.DOM.summary(null,
 					React.DOM.h1(null, this.props.title),
-					React.DOM.progress({value: this.state.result.result, max: 1})
+					React.DOM.progress({value: currentProgress, max: maxProgress})
 				),
 				requirementSets
 			)
