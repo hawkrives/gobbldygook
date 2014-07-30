@@ -128,10 +128,13 @@ function electiveCourses(courses) {
 
 function capstoneCourse(courses) {
 	// Capstone: Computer Science 390
-	return Promise.resolve({
-		title: 'Capstone',
-		description: 'Capstone',
-		result: checkCoursesForDeptNum(courses, 'CSCI 390'),
+	var hasTakenCapstone = checkCoursesForDeptNum(courses, 'CSCI 390')
+	return hasTakenCapstone.then(function(result) {
+		return {
+			title: 'Capstone',
+			description: 'Capstone',
+			result: result
+		}
 	})
 }
 
