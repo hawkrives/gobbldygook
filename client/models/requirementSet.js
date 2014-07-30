@@ -54,7 +54,7 @@ var RequirementSet = React.createClass({
 				React.DOM.ul(
 					{className: 'requirement-detail-list'},
 					_.map(this.props.details.matches, function(match) {
-						return React.DOM.li({key: match}, match)
+						return React.DOM.li({key: match.deptnum}, match.deptnum)
 					})
 				)
 			)
