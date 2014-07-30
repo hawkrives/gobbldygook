@@ -7,6 +7,8 @@ var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
 var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
 var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
 
+var utilities = require('./demo_common_major_utilities')
+
 var csDeptRequiredCourses = [
 	{deptnum: 'CSCI 121'}, {deptnum: 'CSCI 125'}, {deptnum: 'CSCI 241'}, {deptnum: 'CSCI 251'},
 	{deptnum: 'CSCI 251'}, {deptnum: 'CSCI 231'}, {deptnum: 'CSCI 253'}, {deptnum: 'CSCI 263'},
@@ -18,22 +20,7 @@ var csDeptRequiredCourses = [
 	{deptnum: 'MATH 232'}, {deptnum: 'MATH 252'},
 ]
 
-function isRequiredCourse(requiredCourses, course) {
-	var match = _.filter(requiredCourses, {deptnum: course.deptnum})
-	var results = [match ? true : false]
-
-	if (match.name) {
-		results.push(_.contains(course.name, match.name))
-	}
-
-	if (match.title) {
-		results.push(_.contains(course.title, match.title))
-	}
-
-	return _.all(results)
-}
-
-var isRequiredCompSciCourse = _.curry(isRequiredCourse)(csDeptRequiredCourses)
+var isRequiredCompSciCourse = _.curry(utilities.isRequiredCourse)(csDeptRequiredCourses)
 
 function foundationCourses(courses) {
 	/* Foundation courses:
