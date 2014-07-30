@@ -47,9 +47,9 @@ function foundationCourses(courses) {
 	])
 
 	return Promise.props({
-		cs1: cs1,
-		design: design.then(_.all),
-		mfc: mfc
+		'CS1': cs1,
+		'Design': design.then(_.all),
+		'MFC': mfc
 	}).then(function(requirements) {
 		return {
 			title: 'Foundation',
@@ -90,10 +90,10 @@ function coreCourses(courses) {
 	])
 
 	return Promise.props({
-		algorithms: algorithms,
-		ethics: ethics,
-		theory: theory,
-		options: options
+		'Algorithms': algorithms,
+		'Ethics': ethics,
+		'Theory': theory,
+		'Options': options
 	}).then(function(requirements) {
 		return {
 			title: 'Core',
