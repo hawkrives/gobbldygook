@@ -31,6 +31,9 @@
 	-webkit-flex-flow: row nowrap;
 	display: flex;
 	flex-flow: row nowrap;
+
+	// Make sure to give the year title breathing room
+	min-height: 105px;
 }
 
 .course-table .semester-list {
