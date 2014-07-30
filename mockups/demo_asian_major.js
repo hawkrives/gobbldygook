@@ -151,7 +151,6 @@ function language(courses) {
 }
 
 function checkAsianStudiesMajor(student) {
-	// TODO: Turn off cortex.
 	var asianStudiesMajorRequirements = Promise.all([
 		interdisciplinaryApproachesToAsia(student.courses),
 		electives(student.courses),

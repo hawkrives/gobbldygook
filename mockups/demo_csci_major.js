@@ -139,7 +139,6 @@ function capstoneCourse(courses) {
 }
 
 function checkComputerScienceMajor(student) {
-	// TODO: Turn off cortex.
 	var computerScienceMajorRequirements = Promise.all([
 		foundationCourses(student.courses),
 		coreCourses(student.courses),

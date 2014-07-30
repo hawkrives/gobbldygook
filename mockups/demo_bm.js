@@ -59,11 +59,12 @@ function checkBachelorOfMusicDegree(student) {
 	// Requirements taken from
 	// http://www.stolaf.edu/catalog/1314/academiclife/bm-gen-grad-requirements.html
 
-	// TODO: Turn off cortex.
 	var studies = student.studies
 	var courses = student.courses
 	var fabrications = []
 	var creditsNeeded = student.creditsNeeded
+
+	// console.log('student, bm', student)
 
 	var requirements = [
 		common.courses(courses, creditsNeeded),
