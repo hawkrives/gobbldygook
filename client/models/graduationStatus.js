@@ -8,7 +8,7 @@ var getCourses = require('../helpers/getCourses').getCourses
 
 var GraduationStatus = React.createClass({
 	putActiveCoursesIntoState: function() {
-		var clbids = _.chain(this.props.schedules)
+		var clbids = _.chain(this.props.student.schedules)
 			.filter('active')
 			.pluck('clbids')
 			.flatten()
