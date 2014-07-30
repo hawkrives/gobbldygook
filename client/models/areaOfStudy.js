@@ -101,8 +101,7 @@ var AreaOfStudy = React.createClass({
 					React.DOM.h1(null, this.props.title),
 					React.DOM.progress({value: this.state.result.result, max: 1})
 				),
-				// requirementSets
-				this.state.result
+				requirementSets
 			)
 		);
 	}
