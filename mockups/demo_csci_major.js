@@ -112,14 +112,15 @@ function electiveCourses(courses) {
 		.reject(isRequiredCompSciCourse)
 		.value()
 
+	var numberTaken = _.size(validCourses)
 	var numberNeeded = 2
 
 	return Promise.resolve({
 		title: 'Electives',
 		description: 'Two approved electives.',
-		result: _.size(validCourses) >= numberNeeded,
+		result: numberTaken >= numberNeeded,
 		details: {
-			has: _.size(validCourses),
+			has: numberTaken,
 			needs: numberNeeded,
 			matches: validCourses,
 		}
