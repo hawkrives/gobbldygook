@@ -23,8 +23,8 @@
 		$color: $olaf-gold,
 		$gradient: linear-gradient(
 			to bottom,
-			$olaf-gradient-start,
-			$olaf-gradient-end
+			lighten($olaf-gradient-start, 10%),
+			lighten($olaf-gradient-end, 10%)
 	)) {
 		display: block;
 		position: absolute;
