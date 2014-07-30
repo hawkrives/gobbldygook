@@ -120,8 +120,6 @@ function language(courses) {
 
 	var japaneseLanguage = _.chain(subsetOfCourses)
 		.filter(hasDepartment('JAPAN'))
-
-	console.log('japaneseLanguage', japaneseLanguage, subsetOfCourses)
 		.filter(partialNameOrTitle('Japanese'))
 		.value()
 
