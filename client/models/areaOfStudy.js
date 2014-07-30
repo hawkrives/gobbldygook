@@ -20,6 +20,26 @@ var areas = {
 	}
 }
 
+function findType(result, details) {
+	if (_.isArray(details)) {
+		return 'array'
+	}
+	else if (_.isUndefined(details) && _.isBoolean(result)) {
+		return 'boolean'
+	}
+	else if (_.isPlainObject(details)) {
+		if (_.every(details, _.isBoolean)) {
+			return 'object/boolean'
+		}
+		else if (_.some(details, _.isNumber)) {
+			return 'object/number'
+		}
+	}
+	else {
+		return null
+	}
+}
+
 var AreaOfStudy = React.createClass({
 	load: function() {
 		var type = this.props.type
