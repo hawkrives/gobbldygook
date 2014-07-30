@@ -2,6 +2,7 @@ $border-color: rgba(50, 50, 50, 0.25);
 .requirement-set {
 	h2 {
 		border-top: 1px solid $border-color;
+		border-bottom: 1px solid $border-color;
 
 		margin: 0;
 		padding-top: 2px;
@@ -21,13 +22,16 @@ $border-color: rgba(50, 50, 50, 0.25);
 }
 
 .requirement-result {
-	border-bottom: 1px solid $border-color;
 	text-align: center;
 }
 
 .requirement-result > span {
 	padding: 2px 5px;
 	display: block;
+}
+
+span + .requirement-detail-list {
+	border-top: 1px solid $border-color;
 }
 
 .requirement-detail-list {
