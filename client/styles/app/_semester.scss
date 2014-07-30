@@ -23,6 +23,9 @@ $semester-divider: solid 1px $border-bottom-color;
 	margin-bottom: 0.5em;
 	font-size: 0.85em;
 
+	cursor: move;
+	@extend %no-select;
+
 	h1 {
 		display: inline-block;
 	}
