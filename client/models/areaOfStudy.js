@@ -61,7 +61,7 @@ var AreaOfStudy = React.createClass({
 					result: false,
 					details: [{
 						title: this.props.type + ' not found!',
-						description: 'This ' + this.props.type + 'could not be found.',
+						description: 'This ' + this.props.type + ' could not be found.',
 						result: false
 					}]
 				}
