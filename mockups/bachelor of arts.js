@@ -5,6 +5,8 @@ var countCredits = require('../client/helpers/countCredits')
 var common = require('./common graduation requirements')
 var utilities = require('./common graduation utilities')
 var hasDepartment = require('../client/helpers/hasDepartment')
+var isMajoringIn = utilities.isMajoringIn
+var educ = require('./common education requirements')
 
 function artsMajor(studies, courses) {
 	// One completed major is required for graduation. Depending on the
@@ -119,14 +121,14 @@ function checkBachelorOfArtsDegree(student) {
 	// http://www.stolaf.edu/catalog/1314/academiclife/ba-gen-grad-requirements.html
 
 	var studies = student.studies
-	var courses = student.courses
+	var courses = _.filter(student.courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
 	var fabrications = []
 	var creditsNeeded = student.creditsNeeded
 
-	var requirements = [
+	var graduationRequirements = [
 		common.courses(courses, creditsNeeded),
 		common.residency(courses, fabrications),
-		common.interim(courses),
+		common.interim(courses, fabrications),
 		common.gpa(courses),
 		common.courseLevel(courses),
 		common.gradedCourses(courses, fabrications),
@@ -134,19 +136,72 @@ function checkBachelorOfArtsDegree(student) {
 		beyondTheMajor(studies, courses),
 	]
 
-	if (common.isBachelorOfBoth(studies)) {
-		requirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
+	if (utilities.isBachelorOfBoth(studies)) {
+		graduationRequirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
 	}
 
-	var bachelorOfArtsRequirements = Promise.all(requirements).then(function(results) {
-		// console.log('checkBachelorOfArtsDegree', 'results', results)
-		return results
-	})
+	var educationRequirements = {
+		foundation: [
+			educ.firstYearWriting(courses),
+			educ.writingInContext(courses),
+			educ.foreignLanguage(courses),
+			educ.oralCommunication(courses),
+			educ.abstractAndQuantitativeReasoning(courses),
+			educ.studiesInPhysicalMovement(courses),
+		],
+		core: [
+			educ.historicalStudiesInWesternCulture(courses),
+			educ.multiculturalDomesticStudies(courses),
+			educ.multiculturalGlobalStudies(courses),
+			educ.artisticStudies(courses),
+			educ.literaryStudies(courses),
+			educ.biblicalStudies(courses),
+			educ.theologicalStudies(courses),
+			educ.scientificExplorationAndDiscovery(courses),
+			educ.integratedScientificTopics(courses),
+			educ.studiesInHumanBehaviorAndSociety(courses),
+		],
+		integrative: [
+			educ.ethicalIssuesAndNormativePerspectives(courses)
+		]
+	}
+
+	var educationRequirementsResults = [
+		{
+			title: 'Foundation',
+			result: _.all(educationRequirements.foundation, 'result'),
+			details: educationRequirements.foundation,
+		},
+		{
+			title: 'Core',
+			result: _.all(educationRequirements.core, 'result'),
+			details: educationRequirements.core
+		},
+		{
+			title: 'Integrative',
+			result: _.all(educationRequirements.integrative, 'result'),
+			details: educationRequirements.integrative
+		},
+	]
+
+	var requirements = [
+		{
+			title: 'Graduation',
+			result: _.all(graduationRequirements, 'result'),
+			details: graduationRequirements
+		},
+		{
+			title: 'Education',
+			result: _.all(educationRequirementsResults, 'result'),
+			details: educationRequirementsResults
+		}
+	]
+
+	var bachelorOfArtsRequirements = requirements
+	console.log('checkBachelorOfArtsDegree', 'results', bachelorOfArtsRequirements)
 
 	return Promise.props({
-		result: bachelorOfArtsRequirements.then(function(results) {
-			return _.all(results, 'result')
-		}),
+		result: _.all(bachelorOfArtsRequirements, 'result'),
 		details: bachelorOfArtsRequirements
 	})
 }
