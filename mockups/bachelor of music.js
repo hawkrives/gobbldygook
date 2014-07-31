@@ -61,7 +61,7 @@ function checkBachelorOfMusicDegree(student) {
 	// http://www.stolaf.edu/catalog/1314/academiclife/bm-gen-grad-requirements.html
 
 	var studies = student.studies
-	var courses = student.courses
+	var courses = _.filter(student.courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
 	var fabrications = []
 	var creditsNeeded = student.creditsNeeded
 
@@ -70,14 +70,14 @@ function checkBachelorOfMusicDegree(student) {
 	var requirements = [
 		common.courses(courses, creditsNeeded),
 		common.residency(courses, fabrications),
-		common.interim(courses),
+		common.interim(courses, fabrications),
 		common.gpa(courses),
 		common.courseLevel(courses),
 		common.gradedCourses(courses, fabrications),
 		dedicatedMusicMajor(studies, courses),
 	]
 
-	if (common.isBachelorOfBoth(studies)) {
+	if (utilities.isBachelorOfBoth(studies)) {
 		requirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
 	}
 
