@@ -131,7 +131,7 @@ function courseLevel(courses) {
 
 	return {
 		title: 'Course Level',
-		result: _.size(utilities.onlyCoursesAtOrAboveLevel(200, courses)) >= 18
+		result: _.size(onlyCoursesAtOrAboveLevel(200, courses)) >= 18
 	}
 }
 
@@ -272,7 +272,7 @@ function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 	}
 
 	var majors = _.filter(studies, {type: 'major'})
-	if (utilities.isBachelorOfBoth(studies) && isMajoringIn('Music', studies)) {
+	if (utilities.isBachelorOfBoth(studies) && utilities.isMajoringIn('Music', studies)) {
 		// there's a double-ba/bm trying to major in Music -- no.
 		return {title: title, result: false}
 	}
