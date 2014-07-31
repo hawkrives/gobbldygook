@@ -11,8 +11,8 @@ var areas = {
 		'Asian Studies': require('../../mockups/asian studies')
 	},
 	degree: {
-		'Bachelor of Arts': require('../../mockups/demo_ba'),
-		'Bachelor of Music': require('../../mockups/demo_bm')
+		'Bachelor of Arts': require('../../mockups/bachelor of music'),
+		'Bachelor of Music': require('../../mockups/bachelor of arts')
 	},
 	concentration: {
 		'Computer Science': require('../../mockups/csci'),
