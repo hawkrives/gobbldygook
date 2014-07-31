@@ -1,5 +1,4 @@
 var _ = require('lodash')
-var Promise = require('bluebird')
 
 var countCredits = require('../client/helpers/countCredits')
 var onlyCoursesAtOrAboveLevel = require('../client/helpers/courseLevels').onlyCoursesAtOrAboveLevel
