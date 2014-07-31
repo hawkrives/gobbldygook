@@ -2,7 +2,8 @@ var _ = require('lodash')
 var Promise = require('bluebird')
 
 var countCredits = require('../client/helpers/countCredits')
-var common = require('./demo_common_graduation_requirements')
+var common = require('./common graduation requirements')
+var utilities = require('./common graduation utilities')
 var hasDepartment = require('../client/helpers/hasDepartment')
 
 function artsMajor(studies, courses) {
@@ -48,7 +49,7 @@ function artsMajor(studies, courses) {
 
 	return {
 		title: 'Major',
-		result: _.size(majors) >= 1 && _.every(majors, common.creditsBeyondTheArea(courses, 8))
+		result: _.size(majors) >= 1 && _.every(majors, utilities.creditsBeyondTheArea(courses, 8))
 	}
 }
 
@@ -88,7 +89,7 @@ function beyondTheMajor(studies, courses) {
 		// Check the two majors agains the 18-course requirement
 		artMajorAndBeyond = _.chain(majors)
 			.filter(onlyTheTwoArtMajors)
-			.every(creditsBeyondTheArea(courses, 18))
+			.every(utilities.creditsBeyondTheArea(courses, 18))
 			.value()
 
 		// Remove the two majors, so they aren't checked against the 21-course
@@ -100,7 +101,7 @@ function beyondTheMajor(studies, courses) {
 	}
 
 	// Ensure that each major has 21 credits beyond its scope.
-	var mainstream = _.every(majors, creditsBeyondTheArea(courses, 21))
+	var mainstream = _.every(majors, utilities.creditsBeyondTheArea(courses, 21))
 
 	var result = mainstream
 	if (isDedicatedArtist) {
@@ -117,7 +118,6 @@ function checkBachelorOfArtsDegree(student) {
 	// Requirements taken from
 	// http://www.stolaf.edu/catalog/1314/academiclife/ba-gen-grad-requirements.html
 
-	// TODO: Turn off cortex.
 	var studies = student.studies
 	var courses = student.courses
 	var fabrications = []

@@ -1,7 +1,8 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
 
-var common = require('./demo_common_graduation_requirements')
+var common = require('./common graduation requirements')
+var utilities = require('./common graduation utilities')
 
 function onlyMusicMajors(major) {
 	return _.any([
@@ -51,7 +52,7 @@ function dedicatedMusicMajor(studies, courses) {
 
 	return {
 		title: 'Dedicated Music Major',
-		result: _.size(musicMajors) >= 1 && _.every(musicMajors, common.creditsBeyondTheArea(courses, 8))
+		result: _.size(musicMajors) >= 1 && _.every(musicMajors, utilities.creditsBeyondTheArea(courses, 8))
 	}
 }
 
