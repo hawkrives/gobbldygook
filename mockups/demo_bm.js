@@ -51,7 +51,7 @@ function dedicatedMusicMajor(studies, courses) {
 
 	return {
 		title: 'Dedicated Music Major',
-		result: _.size(musicMajors) >= 1 && _.every(musicMajors, common.atLeastEightCredits(courses))
+		result: _.size(musicMajors) >= 1 && _.every(musicMajors, common.creditsBeyondTheArea(courses, 8))
 	}
 }
 

@@ -206,14 +206,19 @@ function gradedCourses(courses, fabrications) {
 }
 
 module.exports.gradedCourses = gradedCourses
+var creditsBeyondTheArea = _.curry(function(courses, creditCount, area) {
+	// Takes the courses *outside* of the major department, and counts them.
+	var deptAbbr = area.dept
 
-var atLeastEightCredits = _.curry(function(major, courses) {
-	var withinMajorCourses = _.filter(courses, hasDepartment(major.abbr))
-	var fullCreditBeyondMajorCourses = _.filter(withinMajorCourses, onlyFullCreditCourses)
-	return countCredits(fullCreditBeyondMajorCourses) >= 8
+	// Leave only those outside of the department code
+	var matchingCourses = _.reject(courses, hasDepartment(deptAbbr))
+
+	// Grab the number of credits taken
+	var matchingCourseCredits = common.countCredits(matchingCourses)
+
+	// See if there are more than the required number.
+	return (matchingCourseCredits >= creditCount)
 })
-
-module.exports.atLeastEightCredits = atLeastEightCredits
 
 function finalTwoYearsInResidence(fabrications) {
 	// "The final two years of coursework in pursuit of the degrees must be

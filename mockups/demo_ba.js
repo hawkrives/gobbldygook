@@ -48,7 +48,7 @@ function artsMajor(studies, courses) {
 
 	return {
 		title: 'Major',
-		result: _.size(majors) >= 1 && _.every(majors, common.atLeastEightCredits(courses))
+		result: _.size(majors) >= 1 && _.every(majors, common.creditsBeyondTheArea(courses, 8))
 	}
 }
 
