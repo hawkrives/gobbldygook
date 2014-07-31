@@ -1,23 +1,37 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
 
-function isRequiredCourse(requiredCourses, lookingFor) {
-	var matchedCourse = _.find(requiredCourses, {deptnum: lookingFor.deptnum})
+var isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
+	// Takes in a list of required course info, as objects that only have the
+	// info needed to match.
+
+	// Find if the current course exists in requiredCourses
+	var matchedCourse = _.find(requiredCourses, {deptnum: checkAgainst.deptnum})
+
+	// Begin the array of results!
 	var results = [matchedCourse ? true : false]
 
 	if (!matchedCourse) {
 		return false
 	}
 
-	if (lookingFor.name) {
-		results.push(_.contains(lookingFor.name, matchedCourse.name))
+	if (matchedCourse.name) {
+		results.push(_.contains(checkAgainst.name, matchedCourse.name))
 	}
 
-	if (lookingFor.title) {
-		results.push(_.contains(lookingFor.title, matchedCourse.title))
+	if (matchedCourse.title) {
+		results.push(_.contains(checkAgainst.title, matchedCourse.title))
 	}
 
+	/*console.log('isRequiredCourse',
+		'requiredCourses', requiredCourses,
+		'checkAgainst', checkAgainst,
+		'match', matchedCourse,
+		'results', results,
+		'result', _.all(results))*/
+
+	// Only return true if *all* of the checks returned true.
 	return _.all(results)
-}
+})
 
 module.exports.isRequiredCourse = isRequiredCourse
