@@ -37,9 +37,9 @@ function ensureLimitedOffCampusCoursesDuringFinalYear(courses, fabrications) {
 	// Used by the residency checker to ensure that only the allowed amount of
 	// off-campus courses are taken during the final year
 
-	var finalYear = _.max(student.fabrications, 'year')
-	var finalYearFabrications = _.filter(student.fabrications, {year: finalYear})
-	var finalYearCourses = _.filter(student.courses, {year: finalYear})
+	var finalYear = _.max(fabrications, 'year')
+	var finalYearFabrications = _.filter(fabrications, {year: finalYear})
+	var finalYearCourses = _.filter(courses, {year: finalYear})
 
 	return (
 		_.isEmpty(finalYearFabrications) ||
