@@ -15,7 +15,7 @@ var asianDeptRequiredCourses = [
 	{deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
 ]
 
-var isRequiredAsianStudiesCourse = _.curry(utilities.isRequiredCourse)(asianDeptRequiredCourses)
+var isRequiredAsianStudiesCourse = _.curry(utilities.isRequiredCourse(asianDeptRequiredCourses))
 
 function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
@@ -47,26 +47,27 @@ function electives(courses) {
 	// 3. No more than four elective courses about any one country;
 	// 4. No level I or level II language courses may count.
 
-	var asianStudiesCourses = _.chain(courses)
+	var asianStudiesElectives = _.chain(courses)
 		.filter(hasDepartment('ASIAN'))
 		.reject(lowerLevelLanguageCourses)
 		.reject(isRequiredAsianStudiesCourse)
 		.value()
 
-	var levelsTwoOrThree = _.chain(asianStudiesCourses)
+	var levelsTwoOrThree = _.chain(asianStudiesElectives)
 		.filter(coursesAtOrAboveLevel(200)).size().value() >= 2
 
-	var onlyTwoAtLevelOne = _.chain(asianStudiesCourses)
+	var onlyTwoAtLevelOne = _.chain(asianStudiesElectives)
 		.filter(coursesAtLevel(100)).size().value() <= 2
 
 	var notTooSpecialized = _.any([
-		_.chain(asianStudiesCourses).filter(partialNameOrTitle('China')).size().value() <= 4,
-		_.chain(asianStudiesCourses).filter(partialNameOrTitle('Japan')).size().value() <= 4,
+		_.chain(asianStudiesElectives).filter(partialNameOrTitle('China')).size().value() <= 4,
+		_.chain(asianStudiesElectives).filter(partialNameOrTitle('Japan')).size().value() <= 4,
 	])
 
-	var matchingElectives = _.union(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
+	var electivesAreGood = _.all(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
+	console.log('asianStudiesElectives', asianStudiesElectives)
 
-	var matching = _.size(matchingElectives)
+	var matching = _.size(asianStudiesElectives)
 	var needs = 6
 
 	// Req. #4 was embedded at the beginning, when we reject any lower-level
@@ -79,11 +80,11 @@ function electives(courses) {
 		return {
 			title: 'Electives',
 			description: 'Six electives, with stipulations: 1. At least two at level II or level III, taken on campus; 2. No more than two at level I; 3. No more than four elective courses about any one country; 4. No level I or level II language courses may count.',
-			result: matching >= needs,
+			result: (matching >= needs) && electivesAreGood,
 			details: {
 				has: matching,
 				needs: needs,
-				matches: matchingElectives
+				matches: asianStudiesElectives
 			}
 		}
 	})
