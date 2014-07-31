@@ -273,6 +273,9 @@ function checkStudentDegreesFor(desiredDegreeAbbreviation, studies) {
 function isMajoringIn(desiredMajorAbbr, studies) {
 	return checkStudentStudiesFor('major', desiredMajorAbbr, studies)
 }
+
+function isConcentrationgOn(desiredConcentrationAbbr, studies) {
+	return checkStudentStudiesFor('concentration', desiredConcentrationAbbr, studies)
 }
 
 function isBachelorOfMusic(studies) {
@@ -362,3 +365,4 @@ module.exports.isBachelorOfBoth = isBachelorOfBoth
 module.exports.checkStudentStudiesFor = checkStudentStudiesFor
 module.exports.checkStudentDegreesFor = checkStudentDegreesFor
 module.exports.isMajoringIn = isMajoringIn
+module.exports.isConcentrationgOn = isConcentrationgOn
