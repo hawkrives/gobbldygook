@@ -6,8 +6,7 @@ var add = require('../client/helpers/add')
 var countCredits = require('../client/helpers/countCredits')
 var hasDepartment = require('../client/helpers/hasDepartment')
 
-var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
-var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
+var onlyCoursesAtOrAboveLevel = require('../client/helpers/courseLevels').onlyCoursesAtOrAboveLevel
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a
@@ -133,17 +132,13 @@ function gpa(courses) {
 	}
 }
 
-function onlyTwoHundredLevelCourses(courses) {
-	return _.filter(courses, coursesAtOrAboveLevel(200))
-}
-
 function courseLevel(courses) {
 	// Satisfactory completion of 18 credits above level I, courses numbered
 	// 200 and higher.
 
 	return {
 		title: 'Course Level',
-		result: _.size(onlyTwoHundredLevelCourses(courses)) >= 18
+		result: _.size(onlyCoursesAtOrAboveLevel(200, courses)) >= 18
 	}
 }
 
