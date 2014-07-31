@@ -20,26 +20,6 @@ var areas = {
 	}
 }
 
-function findType(result, details) {
-	if (_.isArray(details)) {
-		return 'array'
-	}
-	else if (_.isUndefined(details) && _.isBoolean(result)) {
-		return 'boolean'
-	}
-	else if (_.isPlainObject(details)) {
-		if (_.every(details, _.isBoolean)) {
-			return 'object/boolean'
-		}
-		else if (_.some(details, _.isNumber)) {
-			return 'object/number'
-		}
-	}
-	else {
-		return null
-	}
-}
-
 var AreaOfStudy = React.createClass({
 	load: function() {
 		var type = this.props.type
@@ -90,7 +70,6 @@ var AreaOfStudy = React.createClass({
 				key: reqset.title,
 				title: reqset.title,
 				description: reqset.description,
-				type: findType(reqset.result, reqset.details),
 				result: reqset.result,
 				details: reqset.details || null
 			});
@@ -101,6 +80,9 @@ var AreaOfStudy = React.createClass({
 			.toArray()
 			.pluck('result')
 			.value()
+		// go through everything.
+		// grab the value, if the key is not 'result'.
+		// if the key is result, and details is undefined, grab it.
 
 		// TODO: Use the number of requirements, instead of the number of sections.
 
