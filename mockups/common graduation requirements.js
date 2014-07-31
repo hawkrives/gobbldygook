@@ -1,5 +1,6 @@
 var _ = require('lodash')
 
+var hasDeptNumBetween = require('../client/helpers/deptNum').hasDeptNumBetween
 var countCredits = require('../client/helpers/countCredits')
 var onlyCoursesAtOrAboveLevel = require('../client/helpers/courseLevels').onlyCoursesAtOrAboveLevel
 var utilities = require('./common graduation utilities')
@@ -12,7 +13,19 @@ function courses(coursesTaken, creditsNeeded) {
 	// course credit, as distinguished from fractional course credits, unless
 	// otherwise noted.
 
-	var creditsTaken = countCredits(coursesTaken, 'credits')
+	// "An intercollegiate SPM (.25) credit cannot be used as an elective for
+	// the purpose of earning a credit toward the 35 full-credit course
+	// requirement for graduation." (from the SPM requirement)
+
+	// The intercollegiate SPM credits are determined by courses Exercise
+	// Science 171-194. (from the SPM requirement)
+
+	var noIntercollegiateSports = _.reject(
+		coursesTaken,
+		hasDeptNumBetween({dept: 'ESTH', start: 171, end: 194})
+	)
+
+	var creditsTaken = countCredits(noIntercollegiateSports, 'credits')
 
 	return {
 		title: 'Courses',
