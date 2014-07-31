@@ -25,8 +25,6 @@ function courses(coursesTaken, creditsNeeded) {
 	}
 }
 
-module.exports.courses = courses
-
 function ensureLimitedOffCampusCoursesDuringFinalYear(courses, fabrications) {
 	// Used by the residency checker to ensure that only the allowed amount of
 	// off-campus courses are taken during the final year
@@ -40,8 +38,6 @@ function ensureLimitedOffCampusCoursesDuringFinalYear(courses, fabrications) {
 		countCredits(finalYearFabrications) <= 3
 	)
 }
-
-module.exports.ensureLimitedOffCampusCoursesDuringFinalYear = ensureLimitedOffCampusCoursesDuringFinalYear
 
 function residency(courses, fabrications) {
 	// Seventeen of the 35 St. Olaf credits required for graduation must be
@@ -72,13 +68,9 @@ function residency(courses, fabrications) {
 	}
 }
 
-module.exports.residency = residency
-
 function onlyFullCreditCourses(course) {
 	return course.credits >= 1.0
 }
-
-module.exports.onlyFullCreditCourses = onlyFullCreditCourses
 
 function onlyFullCreditInterimCourses(course) {
 	return (course.semester === 2 && onlyFullCreditCourses(course))
@@ -128,8 +120,6 @@ function interim(courses) {
 	}
 }
 
-module.exports.interim = interim
-
 function gpa(courses) {
 	// An average grade of C (2.00 on a 4.00 system) for all courses taken for
 	// the usual letter grades. See GRADE POINT AVERAGE for details.
@@ -142,8 +132,6 @@ function gpa(courses) {
 		result: true
 	}
 }
-
-module.exports.gpa = gpa
 
 function onlyTwoHundredLevelCourses(courses) {
 	return _.filter(courses, coursesAtOrAboveLevel(200))
@@ -158,8 +146,6 @@ function courseLevel(courses) {
 		result: _.size(onlyTwoHundredLevelCourses(courses)) >= 18
 	}
 }
-
-module.exports.courseLevel = courseLevel
 
 function gradedCourses(courses, fabrications) {
 	// A minimum of 24 credits out of 35 must be taken graded through courses
@@ -205,7 +191,6 @@ function gradedCourses(courses, fabrications) {
 	}
 }
 
-module.exports.gradedCourses = gradedCourses
 var creditsBeyondTheArea = _.curry(function(courses, creditCount, area) {
 	// Takes the courses *outside* of the major department, and counts them.
 	var deptAbbr = area.dept
@@ -302,8 +287,6 @@ function isBachelorOfBoth(studies) {
 	return _.all([isBachelorOfMusic(studies), isBachelorOfArts(studies)])
 }
 
-module.exports.isBachelorOfBoth = isBachelorOfBoth
-
 function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 	// 	Students must meet the application requirements for both the Bachelor
 	// 	of Arts and Bachelor of Music degree programs.
@@ -358,7 +341,24 @@ function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 	return {title: title, result: true}
 }
 
+// Requirements
+module.exports.courses = courses
+module.exports.ensureLimitedOffCampusCoursesDuringFinalYear = ensureLimitedOffCampusCoursesDuringFinalYear
+module.exports.residency = residency
+module.exports.interim = interim
+module.exports.gpa = gpa
+module.exports.courseLevel = courseLevel
+module.exports.gradedCourses = gradedCourses
 module.exports.artsAndMusicDoubleMajor = artsAndMusicDoubleMajor
+
+// Helpers
+module.exports.onlyFullCreditCourses = onlyFullCreditCourses
+module.exports.creditsBeyondTheArea = creditsBeyondTheArea
+
+module.exports.isBachelorOfMusic = isBachelorOfMusic
+module.exports.isBachelorOfArts = isBachelorOfArts
+module.exports.isBachelorOfBoth = isBachelorOfBoth
+
 module.exports.checkStudentStudiesFor = checkStudentStudiesFor
 module.exports.checkStudentDegreesFor = checkStudentDegreesFor
 module.exports.isMajoringIn = isMajoringIn
