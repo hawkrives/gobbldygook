@@ -65,7 +65,7 @@ function beyondTheMajor(studies, courses) {
 	// must be taken outside of the SIS "department" code of each of those
 	// majors as well. If a student has a double major, courses taken in one
 	// major count toward the 21 credits outside of the other major. Credits
-	// outside the major department or program include full- (1.00) credit
+	// outside the major department or program include full (1.00) credit
 	// courses plus partial - (.25, .50, .75) credit courses.
 
 	// 2014/15: Students who double-major in studio art and art history are
