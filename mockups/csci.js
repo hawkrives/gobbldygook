@@ -20,7 +20,7 @@ var csDeptRequiredCourses = [
 	{deptnum: 'MATH 232'}, {deptnum: 'MATH 252'},
 ]
 
-var isRequiredCompSciCourse = _.curry(utilities.isRequiredCourse)(csDeptRequiredCourses)
+var isRequiredCompSciCourse = _.curry(utilities.isRequiredCourse(csDeptRequiredCourses))
 
 function foundationCourses(courses) {
 	/* Foundation courses:
