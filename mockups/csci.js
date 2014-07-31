@@ -7,7 +7,7 @@ var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
 var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
 var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
 
-var utilities = require('./demo_common_major_utilities')
+var utilities = require('./common major utilities')
 
 var csDeptRequiredCourses = [
 	{deptnum: 'CSCI 121'}, {deptnum: 'CSCI 125'}, {deptnum: 'CSCI 241'}, {deptnum: 'CSCI 251'},
