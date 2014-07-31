@@ -274,17 +274,28 @@ function seventeenOlafCourses(courses) {
 	return true
 }
 
-function checkStudentDegreesFor(studies, desiredDegreeAbbreviation) {
-	var degrees = _.filter(studies, {type: 'degree'})
-	return _.size(_.find(degrees, {abbr: desiredDegreeAbbreviation})) >= 1 ? true : false
+function checkStudentStudiesFor(desiredType, desiredAbbr, studies) {
+	// Filter down to just the type of study (degree, major, concentration)
+	var typeMatches = _.filter(studies, {type: desiredType})
+	// then check for any matches of the abbreviation.
+	return _.any(typeMatches, {abbr: desiredAbbr})
+}
+
+function checkStudentDegreesFor(desiredDegreeAbbreviation, studies) {
+	return checkStudentStudiesFor('degree', desiredDegreeAbbreviation, studies)
+}
+
+function isMajoringIn(desiredMajorAbbr, studies) {
+	return checkStudentStudiesFor('major', desiredMajorAbbr, studies)
+}
 }
 
 function isBachelorOfMusic(studies) {
-	return checkStudentDegreesFor(studies, 'B.M.')
+	return checkStudentDegreesFor('B.M.', studies)
 }
 
 function isBachelorOfArts(studies) {
-	return checkStudentDegreesFor(studies, 'B.A.')
+	return checkStudentDegreesFor('B.A.', studies)
 }
 
 function isBachelorOfBoth(studies) {
@@ -348,3 +359,6 @@ function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 }
 
 module.exports.artsAndMusicDoubleMajor = artsAndMusicDoubleMajor
+module.exports.checkStudentStudiesFor = checkStudentStudiesFor
+module.exports.checkStudentDegreesFor = checkStudentDegreesFor
+module.exports.isMajoringIn = isMajoringIn

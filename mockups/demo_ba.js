@@ -52,16 +52,9 @@ function artsMajor(studies, courses) {
 	}
 }
 
-var twentyOneCreditsAndBeyond = _.curry(function(courses, major) {
-	// Takes the courses *outside* of the major department, and counts them.
-
-	// _.curry allows the function to be called with arguments multiple times.
-	// also, remember: reject !== filter.
-
-	var beyondMajorCourses = _.reject(courses, hasDepartment(major.abbr))
-	var fullCreditBeyondMajorCourses = _.filter(beyondMajorCourses, common.onlyFullCreditCourses)
-	return countCredits(fullCreditBeyondMajorCourses) >= 21
-})
+function onlyTheTwoArtMajors(major) {
+	return (major.title === 'Studio Art' || major.title === 'Art History')
+}
 
 function beyondTheMajor(studies, courses) {
 	// While the maximum course credits counting toward a major in any one
@@ -75,9 +68,48 @@ function beyondTheMajor(studies, courses) {
 	// outside the major department or program include full- (1.00) credit
 	// courses plus partial - (.25, .50, .75) credit courses.
 
+	// 2014/15: Students who double-major in studio art and art history are
+	// required to complete at least 18 full-course credits outside the SIS
+	// "ART" department designation.
+
+	var majors = _.filter(studies, {type: 'major'})
+
+	// If double-majorsing in ART HISTORY and STUDIO ART, ensure that they
+	// have 18 credits outside of the ART dept. Accomplished by setting both
+	// ART and STUDIO ART's dept to ART.
+	var isDedicatedArtist = _.all([
+		// Only returns true if majoring in both Studio Art and Art History.
+		isMajoringIn('Studio Art', studies),
+		isMajoringIn('Art History', studies),
+	])
+
+	var artMajorAndBeyond = undefined
+	if (isDedicatedArtist) {
+		// Check the two majors agains the 18-course requirement
+		artMajorAndBeyond = _.chain(majors)
+			.filter(onlyTheTwoArtMajors)
+			.every(creditsBeyondTheArea(courses, 18))
+			.value()
+
+		// Remove the two majors, so they aren't checked against the 21-course
+		// requirement.
+		majors = _.chain(majors)
+			.reject({title: 'Studio Art'})
+			.reject({title: 'Art History'})
+			.value()
+	}
+
+	// Ensure that each major has 21 credits beyond its scope.
+	var mainstream = _.every(majors, creditsBeyondTheArea(courses, 21))
+
+	var result = mainstream
+	if (isDedicatedArtist) {
+		result = _.all([mainstream, artMajorAndBeyond])
+	}
+
 	return {
 		title: 'Beyond the Major',
-		result: _.every(_.filter(studies, {type: 'major'}), twentyOneCreditsAndBeyond(courses))
+		result: result
 	}
 }
 
