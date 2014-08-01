@@ -1,5 +1,6 @@
 var _ = require('lodash')
 var React = require('react')
+var humanize = require('humanize-plus')
 
 var AreaOfStudy = require('./areaOfStudy')
 var StudentSummary = require('./studentSummary')
@@ -40,7 +41,7 @@ var GraduationStatus = React.createClass({
 
 		// Get areas of study
 		var areasOfStudy = _.groupBy(student.studies, 'type')
-		areasOfStudy = _.mapValues(areasOfStudy, function(areas) {
+		var areasOfStudyElements = _.mapValues(areasOfStudy, function(areas) {
 			return _.map(areas, function(area) {
 				area = _.merge(student, area)
 				area.key = area.id
@@ -48,29 +49,20 @@ var GraduationStatus = React.createClass({
 			}, this)
 		}, this)
 
+		var sections = _.map(_.keys(areasOfStudy), function(areaType) {
+			var pluralType = humanize.pluralize(2, areaType)
+			return React.DOM.section({id: pluralType, key: areaType},
+				React.DOM.header({className: 'area-type-heading'},
+					React.DOM.h1(null, humanize.capitalize(pluralType)),
+					React.DOM.button({className: 'add-area-of-study', title: 'Add ' + humanize.capitalize(areaType)})
+				),
+				areasOfStudyElements[areaType]
+			)
+		})
+
 		return React.DOM.section({className: 'graduation-status'},
 			StudentSummary(student),
-			React.DOM.section({id: 'degrees'},
-				React.DOM.header({className: 'area-type-heading'},
-					React.DOM.h1(null, 'Degrees'),
-					React.DOM.button({className: 'add-area-of-study', title: 'Add Degree'})
-				),
-				areasOfStudy.degree
-			),
-			React.DOM.section({id: 'majors'},
-				React.DOM.header({className: 'area-type-heading'},
-					React.DOM.h1(null, 'Majors'),
-					React.DOM.button({className: 'add-area-of-study', title: 'Add Major'})
-				),
-				areasOfStudy.major
-			),
-			React.DOM.section({id: 'concentrations'},
-				React.DOM.header({className: 'area-type-heading'},
-					React.DOM.h1(null, 'Concentrations'),
-					React.DOM.button({className: 'add-area-of-study', title: 'Add Concentration'})
-				),
-				areasOfStudy.concentration
-			)
+			sections
 		)
 	}
 });
