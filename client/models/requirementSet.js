@@ -85,18 +85,12 @@ var RequirementSet = React.createClass({
 		// console.log('requirement-set render', this.props)
 
 		var details = undefined
-		var type = findType(this.props.result, this.props.details)
+		var type = this.props.type || findType(this.props.result, this.props.details, this.props.title)
+		console.log('reqSetType', this.props.title, type, this.props.type)
 
-		if (type === 'array') {
+		if (type === 'array/requirementSet') {
 			details = _.map(this.props.details, function(requirement, index) {
-				// console.log('map', requirement, index)
-				return RequirementSet({
-					key: index,
-					title: requirement.title,
-					description: requirement.description,
-					result: requirement.result,
-					details: requirement.details
-				})
+				return RequirementSet(_.merge({key: index}, requirement))
 			})
 		}
 
@@ -106,8 +100,8 @@ var RequirementSet = React.createClass({
 			})
 		}
 
-		else if (type === 'object/boolean') {
-			details = BooleanObjectRequirement({details: this.props.details})
+		else if (type === 'boolean') {
+			details = BooleanRequirement({result: this.props.result})
 		}
 
 		else if (type === 'object/number') {
@@ -118,7 +112,7 @@ var RequirementSet = React.createClass({
 			React.DOM.div(
 				{
 					className: 'requirement-set',
-					'data-type': type || 'weird',
+					'data-type': type,
 				},
 				React.DOM.h2(
 					{
