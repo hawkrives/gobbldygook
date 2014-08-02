@@ -7,35 +7,35 @@ module.exports = {
 
 	studies: [
 		{
-			id: 'ba', type: 'degree',
+			id: 'd-ba', type: 'degree',
 			abbr: 'B.A.', title: 'Bachelor of Arts',
 		},
 		{
-			id: 'bm', type: 'degree',
+			id: 'd-bm', type: 'degree',
 			abbr: 'B.M.', title: 'Bachelor of Music',
 		},
 		{
-			id: 'chmus', type: 'major',
+			id: 'm-chmus', type: 'major',
 			abbr: 'CHMUS', title: 'Church Music',
 		},
 		{
-			id: 'csci', type: 'major',
+			id: 'm-csci', type: 'major',
 			abbr: 'CSCI', title: 'Computer Science',
 		},
 		{
-			id: 'asian', type: 'major',
+			id: 'm-asian', type: 'major',
 			abbr: 'ASIAN', title: 'Asian Studies',
 		},
 		{
-			id: 'japan', type: 'concentration',
+			id: 'm-japan', type: 'concentration',
 			abbr: 'JAPAN', title: 'Japan Studies',
 		},
 		{
-			id: 'math', type: 'concentration',
+			id: 'm-math', type: 'concentration',
 			abbr: 'MATH', title: 'Mathematics',
 		},
 		{
-			id: 'management', type: 'emphasis',
+			id: 'm-management', type: 'emphasis',
 			abbr: 'MGMT', title: 'Management',
 		}
 	],

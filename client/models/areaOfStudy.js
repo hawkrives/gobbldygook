@@ -6,28 +6,25 @@ var RequirementSet = require('./requirementSet');
 var getRandomInt = require('../helpers/getRandomInt')
 
 var areas = {
-	major: {
-		'Computer Science': require('../../mockups/csci'),
-		'Asian Studies': require('../../mockups/asian studies')
-	},
-	degree: {
-		'Bachelor of Arts': require('../../mockups/bachelor of arts'),
-		'Bachelor of Music': require('../../mockups/bachelor of music')
-	},
-	concentration: {},
-	emphasis: {},
+	// Degrees
+	'd-ba': require('../../mockups/bachelor of arts'),
+	'd-bm': require('../../mockups/bachelor of music'),
+	// Majors
+	'm-csci': require('../../mockups/csci'),
+	'm-asian': require('../../mockups/asian studies'),
+	// Concentrations
+	// Emphases
 }
 
-function getArea(type, title) {
-	return areas[type][title]
+function getArea(id) {
+	return areas[id]
 }
 
 var AreaOfStudy = React.createClass({
 	load: function() {
-		var type = this.props.type
-		var title = this.props.title
+		var id = this.props.id
 
-		var area = getArea(type, title)
+		var area = getArea(id)
 
 		if (typeof area === 'function') {
 			area(this.props).bind(this)
