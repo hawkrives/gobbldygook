@@ -34,12 +34,13 @@ var StudentStore = Fluxy.createStore({
 
 		[StudentConstants.STUDENT_UPDATE, function(id, newStudent) {
 			this.set(['students', id], function(oldStudent) {
-				return $.assoc(
+				var moriNewStudent = $.hash_map(
 					'name', newStudent.name,
 					'enrollment', newStudent.enrollment,
 					'graduation', newStudent.graduation,
 					'creditsNeeded', newStudent.creditsNeeded
 				)
+				return $.merge(oldStudent, moriNewStudent)
 			})
 		}],
 
