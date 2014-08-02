@@ -9,11 +9,11 @@ var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
 
 var CourseTable = React.createClass({
 	addYear: function(ev) {
-		var schedules = this.props.schedules.val()
+		var schedules = this.props.schedules
 		var nextAvailableYear = findFirstAvailableYear(schedules)
 		var nextId = calculateNextScheduleId(schedules)
-		this.props.schedules.push({
-			id: nextId, year: nextAvailableYear, semester: 1,
+		ScheduleActions.create({
+			year: nextAvailableYear, semester: 1,
 			title: 'Schedule 1', sequence: 1,
 			clbids: [], active: true,
 		})
