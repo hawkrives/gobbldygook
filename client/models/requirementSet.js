@@ -3,27 +3,28 @@ var React = require('react')
 
 var Requirement = require('./requirement')
 
-function findType(result, details) {
-	if (_.isArray(details) && findType(details.result, details.details) === 'object/boolean') {
-		return 'array/requirementSet'
+function findType(result, details, title) {
+	var type = 'null'
+
+	if (_.isArray(details)) {
+		type = 'array/requirementSet'
 	}
 
-	else if (_.isUndefined(details) && _.isBoolean(result)) {
-		return 'boolean'
+	else if (!details && _.isBoolean(result)) {
+		type = 'boolean'
 	}
 
 	else if (_.isPlainObject(details)) {
 		if (_.every(details, _.isBoolean)) {
-			return 'object/boolean'
+			type = 'object/boolean'
 		}
 		else if (_.some(details, _.isNumber)) {
-			return 'object/number'
+			type = 'object/number'
 		}
 	}
 
-	else {
-		return null
-	}
+	// console.log('findType', title, result, details, type)
+	return type
 }
 
 var BooleanRequirement = React.createClass({
