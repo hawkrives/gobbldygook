@@ -80,7 +80,6 @@ var StudentStore = Fluxy.createStore({
 			console.log('SCHEDULE_DESTROY_MULTIPLE', studentId, scheduleIds)
 			this.set(['students', studentId, 'schedules'], function(schedules) {
 				return $.remove(function(schedule) {
-					console.log(scheduleIds, $.get(schedule, 'id'))
 					return _.contains(scheduleIds, $.get(schedule, 'id'))
 				}, schedules)
 			})

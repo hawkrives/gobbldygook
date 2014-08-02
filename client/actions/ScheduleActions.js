@@ -26,13 +26,13 @@ var ScheduleActions = Fluxy.createActions({
 			})
 		}],
 		destroy: [ScheduleConstants.SCHEDULE_DESTROY, function(studentId, schedule) {
-			console.log('ScheduleActions SCHEDULE_DESTROY', studentId, schedule)
+			// console.log('ScheduleActions SCHEDULE_DESTROY', studentId, schedule)
 			return Promise.resolve(
 				this.dispatchAction(ScheduleConstants.SCHEDULE_DESTROY, studentId, schedule)
 			)
 		}],
 		destroyMultiple: [ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, function(studentId, scheduleIds) {
-			console.log('ScheduleActions SCHEDULE_DESTROY_MULTIPLE', studentId, scheduleIds)
+			// console.log('ScheduleActions SCHEDULE_DESTROY_MULTIPLE', studentId, scheduleIds)
 			return Promise.resolve(
 				this.dispatchAction(ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, studentId, scheduleIds)
 			)
