@@ -7,7 +7,7 @@ var ScheduleStore = require('../stores/ScheduleStore')
 var StudyStore = require('../stores/StudyStore')
 
 function isActive(student) {
-	return student.active
+	return $.get(student, 'active')
 }
 
 var StudentStore = Fluxy.createStore({
@@ -57,8 +57,13 @@ var StudentStore = Fluxy.createStore({
 			// this.undo()
 		}],
 	],
-	activeStudent: function() {
-		return $.first($.filter(isActive, this.get('students')))
+	getActiveStudent: function() {
+		// console.log('called getActiveStudent')
+		var activeStudents = $.filter(isActive, $.vals(this.get('students')))
+		// console.log('getActiveStudent activeStudents', $.clj_to_js(activeStudents))
+		var activeStudent = $.first(activeStudents)
+		// console.log('getActiveStudent activeStudent', $.clj_to_js(activeStudent))
+		return activeStudent
 	},
 })
 
