@@ -26,16 +26,19 @@ var StudentStore = Fluxy.createStore({
 		}],
 
 		[StudentConstants.STUDENT_CREATE_FAILED, function(student) {
+			console.log('STUDENT_CREATE_FAILED')
 			console.error('Student Creation Failed!', student)
 		}],
 
 		[StudentConstants.STUDENT_DESTROY, function(id) {
+			console.log('STUDENT_DESTROY')
 			this.set(['students'], function(students) {
 				return $.dissoc(students, id)
 			})
 		}],
 
 		[StudentConstants.STUDENT_UPDATE, function(id, newStudent) {
+			console.log('STUDENT_UPDATE')
 			this.set(['students', id], function(oldStudent) {
 				var moriNewStudent = $.hash_map(
 					'name', newStudent.name,
@@ -48,16 +51,19 @@ var StudentStore = Fluxy.createStore({
 		}],
 
 		[StudentConstants.STUDENT_TOGGLE_ACTIVE, function(id) {
+			console.log('STUDENT_TOGGLE_ACTIVE')
 			this.set(['students', id, 'active'], function(active) {
 				return !active
 			})
 		}],
 
 		[StudentConstants.STUDENT_UNDO, function() {
+			console.log('STUDENT_UNDO')
 			this.undo()
 		}],
 
 		[StudentConstants.STUDENT_SAVE, function() {
+			console.log('STUDENT_SAVE')
 			// this.undo()
 		}],
 
