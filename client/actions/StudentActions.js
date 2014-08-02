@@ -20,7 +20,7 @@ var StudentActions = Fluxy.createActions({
 	},
 	save: function() {
 		this.dispatchAction(StudentConstants.STUDENT_SAVE, {});
-	}
+	},
 	messages: ['STUDENT_CHANGED'],
 })
 
