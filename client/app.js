@@ -22,7 +22,7 @@ function initializeLibraries() {
 function loadStudent() {
 	console.log('loading student')
 	return new Promise(function(resolve, reject) {
-		resolve(new Cortex(demoStudent))
+		resolve(new Cortex(_.clone(demoStudent, true)))
 	})
 }
 
