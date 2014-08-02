@@ -25,6 +25,12 @@ var ScheduleActions = Fluxy.createActions({
 				}))
 			})
 		}],
+		destroy: [ScheduleConstants.SCHEDULE_DESTROY, function(studentId, schedule) {
+			console.log('ScheduleActions SCHEDULE_DESTROY', studentId, schedule)
+			return Promise.resolve(
+				this.dispatchAction(ScheduleConstants.SCHEDULE_DESTROY, studentId, schedule)
+			)
+		}],
 		}]
 	},
 	undo: function() {

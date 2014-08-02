@@ -2,6 +2,7 @@ var Fluxy = require('fluxy')
 var $ = Fluxy.$
 
 var StudentConstants = require('../constants/StudentConstants')
+var ScheduleConstants = require('../constants/ScheduleConstants')
 
 var ScheduleStore = require('../stores/ScheduleStore')
 var StudyStore = require('../stores/StudyStore')
@@ -58,6 +59,16 @@ var StudentStore = Fluxy.createStore({
 		[StudentConstants.STUDENT_SAVE, function() {
 			// this.undo()
 		}],
+
+		[ScheduleConstants.SCHEDULE_DESTROY, function(studentId, scheduleToDelete) {
+			console.log('SCHEDULE_DESTROY', studentId, scheduleToDelete)
+			this.set(['students', studentId, 'schedules'], function(schedules) {
+				return $.remove(function(schedule) {
+					return $.get(schedule, 'id') === scheduleToDelete.id
+				}, schedules)
+			})
+		}],
+
 	],
 	getActiveStudent: function() {
 		// console.log('called getActiveStudent')

@@ -18,9 +18,9 @@ var ScheduleStore = Fluxy.createStore({
 			console.error('Schedule Creation Failed!', schedule)
 		}],
 
-		[ScheduleConstants.SCHEDULE_DESTROY, function(id) {
+		[ScheduleConstants.SCHEDULE_DESTROY, function(schedule) {
 			this.set(['schedules'], function(schedules) {
-				return $.dissoc(schedules, id)
+				return $.dissoc(schedules, schedule.id)
 			})
 		}],
 
