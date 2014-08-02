@@ -1,5 +1,3 @@
-var _ = require('lodash')
-
 module.exports = {
 	name: 'Hawken MacKay Rives',
 	enrolled: 2012,
