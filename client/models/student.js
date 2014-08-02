@@ -7,9 +7,10 @@ var CourseTable = require('./courseTable');
 var Student = React.createClass({
 	render: function() {
 		// console.log('student render')
+		var student = _.clone(this.props.student.val(), true)
 		return (
 			React.DOM.div({className: 'student'},
-				GraduationStatus({student: this.props.student.val()}),
+				GraduationStatus({student: student}),
 				CourseTable(
 					{schedules: this.props.student.schedules}
 				)
