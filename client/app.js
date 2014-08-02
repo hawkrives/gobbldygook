@@ -8,6 +8,8 @@ var documentReady = require('./helpers/document-ready')
 var Gobbldygook = require('./models/gobbldygookApp')
 var loadData = require('./helpers/loadData')
 var demoStudent = require('../mockups/demo_student')
+var StudentActions = require('./actions/StudentActions')
+window.demoStudent = demoStudent
 
 module.exports = {
 	init: function() {
@@ -30,11 +32,18 @@ module.exports = {
 			.filter()
 			.execute()
 			.then(function(results) {
-				if (results) {
-					Fluxy.start({StudentStore: {students: results}})
+				var students = []
+				if (results.length > 0) {
+					console.log('results!', results)
+					students = results
 				} else {
-					Fluxy.start({StudentStore: {students: [demoStudent]}})
+					console.log('no results!', demoStudent)
+					students = [demoStudent]
 				}
+				Fluxy.start()
+				_.each(students, function(student) {
+					StudentActions.create(student)
+				})
 			})
 	},
 	blastoff: function() {
