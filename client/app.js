@@ -67,6 +67,7 @@ module.exports = {
 		}).done()
 
 		window.notifications = new Cortex([])
+		window.deptNumToCrsid = {}
 
 		// Prepare the database
 		db.then(logDatabaseReady)
