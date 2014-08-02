@@ -86,7 +86,7 @@ var RequirementSet = React.createClass({
 
 		var details = undefined
 		var type = this.props.type || findType(this.props.result, this.props.details, this.props.title)
-		console.log('reqSetType', this.props.title, type, this.props.type)
+		// console.log('reqSetType', this.props.title, type, this.props.type)
 
 		if (type === 'array/requirementSet') {
 			details = _.map(this.props.details, function(requirement, index) {
