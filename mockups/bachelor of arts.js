@@ -169,16 +169,19 @@ function checkBachelorOfArtsDegree(student) {
 	var educationRequirementsResults = [
 		{
 			title: 'Foundation',
+			type: 'array/boolean',
 			result: _.all(educationRequirements.foundation, 'result'),
 			details: educationRequirements.foundation,
 		},
 		{
 			title: 'Core',
+			type: 'array/boolean',
 			result: _.all(educationRequirements.core, 'result'),
 			details: educationRequirements.core
 		},
 		{
 			title: 'Integrative',
+			type: 'array/boolean',
 			result: _.all(educationRequirements.integrative, 'result'),
 			details: educationRequirements.integrative
 		},
@@ -187,11 +190,13 @@ function checkBachelorOfArtsDegree(student) {
 	var requirements = [
 		{
 			title: 'Graduation',
+			type: 'array/boolean',
 			result: _.all(graduationRequirements, 'result'),
 			details: graduationRequirements
 		},
 		{
 			title: 'Education',
+			type: 'array/requirementSet',
 			result: _.all(educationRequirementsResults, 'result'),
 			details: educationRequirementsResults
 		}
