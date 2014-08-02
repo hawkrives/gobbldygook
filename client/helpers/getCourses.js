@@ -31,18 +31,23 @@ function getCourses(clbids) {
 
 function deptNumToCrsid(deptNumString) {
 	return new Promise(function(resolve, reject) {
-		// Filter to only those with matching dept strings
-		window.db.courses
-			.query('deptnum')
-			.only(deptNumString)
-			.limit(1)
-			.execute()
-			.then(function(courses) {
-				if (_.size(courses)) {
-					resolve(courses[0].crsid)
-				}
-				reject(new Error('Course ' + deptNumString + ' was not found'))
-			})
+		var crsid = window.deptNumToCrsid[deptNumString]
+		if (crsid) {
+			resolve(crsid)
+		} else {
+			// Filter to only those with matching dept strings
+			window.db.courses
+				.query('deptnum')
+				.only(deptNumString)
+				.limit(1)
+				.execute()
+				.then(function(courses) {
+					if (_.size(courses)) {
+						resolve(courses[0].crsid)
+					}
+					reject(new Error('Course ' + deptNumString + ' was not found'))
+				})
+		}
 	})
 }
 

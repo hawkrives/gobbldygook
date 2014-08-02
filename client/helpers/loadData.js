@@ -14,6 +14,7 @@ function storeCourses(item) {
 		var courses = _.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
 			course.deptnum = buildDeptNum(course)
+			window.deptNumToCrsid[course.deptnum] = course.crsid
 			return course
 		})
 
