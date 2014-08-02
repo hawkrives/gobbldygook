@@ -1,9 +1,12 @@
 module.exports = {
+	id: '3AE9E7EE-DA8F-4014-B987-8D88814BB848',
+
 	name: 'Hawken MacKay Rives',
-	enrolled: 2012,
+	enrollment: 2012,
 	graduation: 2016,
 
 	creditsNeeded: 35,
+	active: true,
 
 	studies: [
 		{
