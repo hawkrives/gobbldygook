@@ -17,8 +17,8 @@ var StudentService = {
 				enrollment: student.enrollment || 0,
 				graduation: student.graduation || 0,
 				creditsNeeded: student.creditsNeeded || 0,
-				studies: student.studies.length > 0 ? mori.vector(student.studies) : mori.vector(),
-				schedules: student.schedules.length > 0 ? mori.vector(student.schedules) : mori.vector(),
+				studies: student.studies.length > 0 ? mori.hash_map(student.studies) : mori.hash_map(),
+				schedules: student.schedules.length > 0 ? mori.hash_map(student.schedules) : mori.hash_map(),
 				// overrides: new OverrideStore(),
 				// fabrications: new FabricationStore(),
 			}
