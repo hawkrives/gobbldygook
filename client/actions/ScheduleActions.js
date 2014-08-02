@@ -40,7 +40,7 @@ var ScheduleActions = Fluxy.createActions({
 	},
 	undo: function() {
 		this.dispatchAction(ScheduleConstants.SCHEDULE_UNDO, {});
-	}
+	},
 	messages: ['SCHEDULE_CHANGED'],
 })
 
