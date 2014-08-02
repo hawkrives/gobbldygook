@@ -1,5 +1,8 @@
 var Fluxy = require('fluxy')
 
+var ScheduleConstants = require('../constants/ScheduleConstants')
+var ScheduleService = require('../services/ScheduleService')
+
 var ScheduleActions = Fluxy.createActions({
 	serviceActions: {
 		create: [ScheduleConstants.SCHEDULE_CREATE, function(schedule) {
