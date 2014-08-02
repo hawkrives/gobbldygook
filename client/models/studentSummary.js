@@ -41,15 +41,15 @@ var StudentSummary = React.createClass({
 		var emphasisEmphasizer = has.emphasis > 0 && has.emphasis < 2 ? 'an ' : ''
 
 		return React.DOM.article({id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
-			React.DOM.div({id: 'student-letter'}, this.props.name[0]),
-			React.DOM.p(null, 'Hi, ', this.props.name, '!'),
-			React.DOM.p(null,
+			React.DOM.div({id: 'student-letter'}, name[0]),
+			React.DOM.p({key: 'hi'}, 'Hi, ', name, '!'),
+			React.DOM.p({key: 'overview'},
 				'You are planning on ', _.size(degreeObjects === 1) ? 'a ' : '', degreePhrase,
 				' ', degreeWord, ', with ', majorWord, ' in ', majorPhrase,
 				has.concentration > 0 ? [', and ', concentrationWord, ' in ', concentrationPhrase] : '',
-				has.emphasis > 0 ? [{key: 0}, ', not to mention ', emphasisEmphasizer, emphasisWord, ' in ', emphasisPhrase] : '',
+				has.emphasis > 0 ? [', not to mention ', emphasisEmphasizer, emphasisWord, ' in ', emphasisPhrase] : '',
 				'.'),
-			React.DOM.p({className: 'graduation-message'},
+			React.DOM.p({key: 'message', className: 'graduation-message'},
 				canGraduate ?
 				'It looks like you\'ll make it! Just follow the plan, and go over my output with your advisor a few times.' :
 				'You haven\'t planned everything out yet. Ask your advisor if you need help fitting everything in.')
