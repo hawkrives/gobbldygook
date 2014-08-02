@@ -40,21 +40,21 @@ var BooleanRequirement = React.createClass({
 	}
 })
 
-var BooleanObjectRequirement = React.createClass({
+var BooleanArrayRequirement = React.createClass({
 	render: function() {
 		// console.log('BooleanObjectRequirement', this.props)
 		return React.DOM.div(
 			{className: 'requirement-result requirement-result-object-boolean'},
 			React.DOM.ul(
 				{className: 'requirement-detail-list'},
-				_.map(this.props.details, function(result, requirement) {
+				_.map(this.props.details, function(req) {
 					return React.DOM.li(
 						{
-							key: requirement,
-							className: result ? 'completed' : 'incomplete',
-							title: requirement + ': ' + (result ? 'Completed.' : 'Incomplete!')
+							key: req.title,
+							className: req.result ? 'completed' : 'incomplete',
+							title: req.title + ': ' + (req.result ? 'Completed.' : 'Incomplete!')
 						},
-						requirement
+						req
 					)
 				})
 			)
@@ -100,8 +100,10 @@ var RequirementSet = React.createClass({
 			})
 		}
 
-		else if (type === 'boolean') {
-			details = BooleanRequirement({result: this.props.result})
+		else if (type === 'array/boolean') {
+			details = _.map(this.props.details, function(requirement, index) {
+				return BooleanArrayRequirement(_.merge({key: index}, requirement))
+			})
 		}
 
 		else if (type === 'object/boolean') {

@@ -46,11 +46,20 @@ function foundationCourses(courses) {
 		checkCoursesForDeptNum(courses, 'MATH 252'),
 	])
 
-	return Promise.props({
-		'CS1': cs1,
-		'Design': design.then(_.all),
-		'MFC': mfc
-	}).then(function(requirements) {
+	return Promise.all([
+		Promise.props({
+			title: 'CS1',
+			result: cs1,
+		}),
+		Promise.props({
+			title: 'Design',
+			result: design.then(_.all),
+		}),
+		Promise.props({
+			title: 'MFC',
+			result: mfc,
+		}),
+	]).then(function(requirements) {
 		return {
 			title: 'Foundation',
 			description: 'one of Computer Science 121 or 125; Computer Science 241, 251, and 252; one of Computer Science 231 or Math 232 or Math 252.',
@@ -89,12 +98,24 @@ function coreCourses(courses) {
 		Promise.resolve(parallelDistributedComputing)
 	])
 
-	return Promise.props({
-		'Algorithms': algorithms,
-		'Ethics': ethics,
-		'Theory': theory,
-		'Options': options
-	}).then(function(requirements) {
+	return Promise.all([
+		Promise.props({
+			title: 'Algorithms',
+			result: algorithms,
+		}),
+		Promise.props({
+			title: 'Ethics',
+			result: ethics,
+		}),
+		Promise.props({
+			title: 'Theory',
+			result: theory,
+		}),
+		Promise.props({
+			title: 'Options',
+			result: options
+		}),
+	]).then(function(requirements) {
 		return {
 			title: 'Core',
 			description: 'Computer Science 253; Computer Science 263; either Computer Science 276 or 333; and either Computer Science 273, 284, or 300 with parallel and distributed computing.',
