@@ -135,6 +135,7 @@ function language(courses) {
 	var fulfilledLanguages = _.filter([japaneseLanguage, chineseLanguage], function(courses) {
 		return _.size(courses) >= 2
 	})
+	var fulfilledLanguageCourses = _.flatten(fulfilledLanguages)
 
 	var numberFulfilled = _.size(fulfilledLanguages)
 	var numberNeeded = 1
@@ -146,7 +147,7 @@ function language(courses) {
 		details: {
 			has: numberFulfilled,
 			needs: numberNeeded,
-			matches: fulfilledLanguages,
+			matches: fulfilledLanguageCourses,
 		}
 	})
 }
