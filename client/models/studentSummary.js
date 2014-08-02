@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var React = require('react');
+var mori = require('mori')
 
 var add = require('../helpers/add')
 var countCredits = require('../helpers/countCredits')
@@ -8,13 +9,16 @@ var humanize = require('humanize-plus')
 var StudentSummary = React.createClass({
 	render: function() {
 		// console.log('student-summary render')
+		var student = mori.clj_to_js(this.props)
+		var studies = student.studies
+		var name = student.name
 
-		var degreeObjects = _.filter(this.props.studies, {type: 'degree'})
-		var majorObjects = _.filter(this.props.studies, {type: 'major'})
-		var concentrationObjects = _.filter(this.props.studies, {type: 'concentration'})
-		var emphasisObjects = _.filter(this.props.studies, {type: 'emphasis'})
+		var degreeObjects = _.filter(studies, {type: 'degree'})
+		var majorObjects = _.filter(studies, {type: 'major'})
+		var concentrationObjects = _.filter(studies, {type: 'concentration'})
+		var emphasisObjects = _.filter(studies, {type: 'emphasis'})
 
-		var has = _.mapValues(_.groupBy(this.props.studies, 'type'), _.size)
+		var has = _.mapValues(_.groupBy(studies, 'type'), _.size)
 
 		var degrees = humanize.oxford(_.pluck(degreeObjects, 'title'))
 		var majors = humanize.oxford(_.pluck(majorObjects, 'title'))

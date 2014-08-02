@@ -11,7 +11,7 @@ var StudentConstants = require('../constants/StudentConstants')
 function getStudentData() {
 	return {
 		allStudents: StudentStore.get('students'),
-		currentStudent: StudentStore.get('currentStudent')
+		currentStudent: StudentStore.getActiveStudent()
 	}
 }
 

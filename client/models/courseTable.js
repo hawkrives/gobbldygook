@@ -1,5 +1,6 @@
 var _ = require('lodash')
 var React = require('react')
+var mori = require('mori')
 
 var Year = require('./year')
 
@@ -20,7 +21,7 @@ var CourseTable = React.createClass({
 	render: function() {
 		// console.log('course-table render')
 
-		var years = _.map(_.groupBy(this.props.schedules.val(), 'year'), function(schedules, year) {
+		var years = _.map(_.groupBy(mori.clj_to_js(this.props.schedules), 'year'), function(schedules, year) {
 			return Year({schedules: this.props.schedules, year: parseInt(year, 10), key: year})
 		}, this)
 

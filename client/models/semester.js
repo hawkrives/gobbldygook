@@ -9,12 +9,12 @@ var getCourses = require('../helpers/getCourses').getCourses
 var checkScheduleTimeConflicts = require('../helpers/time').checkScheduleTimeConflicts
 
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
-	return (schedule.year.val() === year && schedule.semester.val() === semester)
+	return (schedule.year === year && schedule.semester === semester)
 })
 
 var Semester = React.createClass({
 	putActiveCoursesIntoState: function() {
-		var active = this.findActiveSchedules().val()
+		var active = this.findActiveSchedules()
 		var clbids = _.uniq(active.clbids)
 
 		var self = this
@@ -50,7 +50,7 @@ var Semester = React.createClass({
 		var possible = this.props.schedules.filter(isCurrentTermSchedule(this.props.year, this.props.semester))
 		var activeSchedules = _.find(possible, function(schedule) {
 			if (schedule.active) {
-				return schedule.active.val() === true
+				return schedule.active === true
 			}
 		})
 		return activeSchedules
