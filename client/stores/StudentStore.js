@@ -11,6 +11,7 @@ function isActive(student) {
 }
 
 var StudentStore = Fluxy.createStore({
+	name: 'StudentStore',
 	getInitialState: function() {
 		return {
 			students: {},
