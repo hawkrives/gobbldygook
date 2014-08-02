@@ -43,8 +43,7 @@ var AreaOfStudy = React.createClass({
 					result: false,
 					details: [{
 						title: this.props.type + ' not found!',
-						description: 'This ' + this.props.type + ' could not be found.',
-						result: false
+						description: 'This ' + this.props.type + ' could not be found.'
 					}]
 				}
 			})
@@ -68,13 +67,7 @@ var AreaOfStudy = React.createClass({
 		// console.log('area-of-study render')
 
 		var requirementSets = _.map(this.state.result.details, function(reqset) {
-			return RequirementSet({
-				key: reqset.title,
-				title: reqset.title,
-				description: reqset.description,
-				result: reqset.result,
-				details: reqset.details || null
-			});
+			return RequirementSet(_.merge({key: reqset.title}, reqset));
 		}, this);
 
 		var results = _.chain(this.state.result.details)
@@ -82,11 +75,12 @@ var AreaOfStudy = React.createClass({
 			.toArray()
 			.pluck('result')
 			.value()
+
+		// TODO: Use the number of requirements, instead of the number of sections.
 		// go through everything.
 		// grab the value, if the key is not 'result'.
 		// if the key is result, and details is undefined, grab it.
-
-		// TODO: Use the number of requirements, instead of the number of sections.
+		// Theoretically, of course.
 
 		var currentProgress = _.size(_.compact(results))
 		var maxProgress = _.size(results)
