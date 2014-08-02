@@ -14,10 +14,12 @@ var areas = {
 		'Bachelor of Arts': require('../../mockups/bachelor of arts'),
 		'Bachelor of Music': require('../../mockups/bachelor of music')
 	},
-	concentration: {
-		'Computer Science': require('../../mockups/csci'),
-		'Asian Studies': require('../../mockups/asian studies')
-	}
+	concentration: {},
+	emphasis: {},
+}
+
+function getArea(type, title) {
+	return areas[type][title]
 }
 
 var AreaOfStudy = React.createClass({
@@ -25,7 +27,7 @@ var AreaOfStudy = React.createClass({
 		var type = this.props.type
 		var title = this.props.title
 
-		var area = areas[type][title]
+		var area = getArea(type, title)
 
 		if (typeof area === 'function') {
 			area(this.props).bind(this)
