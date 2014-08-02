@@ -22,7 +22,14 @@ var CourseTable = React.createClass({
 		// console.log('course-table render')
 
 		var years = _.map(_.groupBy(mori.clj_to_js(this.props.schedules), 'year'), function(schedules, year) {
-			return Year({schedules: this.props.schedules, year: parseInt(year, 10), key: year})
+			return Year(
+				{
+					schedules: this.props.schedules,
+					year: parseInt(year, 10),
+					key: year,
+					studentId: this.props.studentId,
+				}
+			)
 		}, this)
 
 		return React.DOM.div({className: 'course-table'},

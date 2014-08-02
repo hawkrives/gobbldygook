@@ -39,7 +39,7 @@ var Student = React.createClass({
 			React.DOM.div(
 				{className: 'student'},
 				GraduationStatus({student: student}),
-				CourseTable({schedules: student.schedules})
+				CourseTable({schedules: student.schedules, studentId: student.id})
 			)
 		)
 	},

@@ -47,7 +47,8 @@ var Year = React.createClass({
 				ref: semester,
 				semester: parseInt(semester, 10),
 				year: this.props.year,
-				schedules: this.props.schedules
+				schedules: this.props.schedules,
+				studentId: this.props.studentId,
 			})
 		}, this)
 
