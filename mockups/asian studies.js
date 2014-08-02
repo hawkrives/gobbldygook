@@ -133,7 +133,7 @@ function language(courses) {
 		.value()
 
 	var fulfilledLanguages = _.filter([japaneseLanguage, chineseLanguage], function(courses) {
-		return _.size(courses) > 2
+		return _.size(courses) >= 2
 	})
 
 	var numberFulfilled = _.size(fulfilledLanguages)
