@@ -1,4 +1,5 @@
 var Fluxy = require('fluxy')
+var _ = require('lodash')
 var $ = Fluxy.$
 
 var StudentConstants = require('../constants/StudentConstants')
@@ -69,6 +70,15 @@ var StudentStore = Fluxy.createStore({
 			})
 		}],
 
+		[ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, function(studentId, scheduleIds) {
+			console.log('SCHEDULE_DESTROY_MULTIPLE', studentId, scheduleIds)
+			this.set(['students', studentId, 'schedules'], function(schedules) {
+				return $.remove(function(schedule) {
+					console.log(scheduleIds, $.get(schedule, 'id'))
+					return _.contains(scheduleIds, $.get(schedule, 'id'))
+				}, schedules)
+			})
+		}],
 	],
 	getActiveStudent: function() {
 		// console.log('called getActiveStudent')

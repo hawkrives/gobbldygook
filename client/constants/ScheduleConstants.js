@@ -4,6 +4,7 @@ var ScheduleConstants = Fluxy.createConstants({
 	serviceMessages: [
 		'SCHEDULE_CREATE',
 		'SCHEDULE_DESTROY',
+		'SCHEDULE_DESTROY_MULTIPLE',
 		'SCHEDULE_RENAME',
 		'SCHEDULE_MOVE',
 		'SCHEDULE_REORDER',
