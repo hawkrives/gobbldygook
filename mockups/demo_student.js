@@ -34,6 +34,10 @@ module.exports = {
 			id: 'math', type: 'concentration',
 			abbr: 'MATH', title: 'Mathematics',
 		},
+		{
+			id: 'management', type: 'emphasis',
+			abbr: 'MGMT', title: 'Management',
+		}
 	],
 
 	schedules: [
