@@ -4,6 +4,8 @@ var React = require('react')
 var Course = require('./course')
 var Semester = require('./semester')
 
+var ScheduleActions = require('../actions/ScheduleActions')
+
 var findFirstAvailableSemester = require('../helpers/findFirstAvailableSemester')
 var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
 
@@ -27,15 +29,11 @@ var Year = React.createClass({
 		})
 	},
 	removeYear: function() {
-		console.log('called removeYear')
-		var indices = this.props.schedules.findIndices(isCurrentYearSchedule(this.props.year))
-		console.log('indices to delete', indices)
-		this.props.schedules.removeSeveral(indices)
-		// this.props.schedules.forEach(function(schedule, index) {
-		// 	if (isCurrentYearSchedule(this.props.year, schedule)) {
-		// 		this.props.schedules.removeAt(index)
-		// 	}
-		// })
+		var currentYearSchedules = _.filter(this.props.schedules, isCurrentYearSchedule(this.props.year))
+		console.log('called removeYear', currentYearSchedules)
+		var scheduleIds = _.pluck(currentYearSchedules, 'id')
+		console.log('removing', scheduleIds, 'from', this.props.studentId)
+		ScheduleActions.destroyMultiple(this.props.studentId, scheduleIds)
 	},
 	render: function() {
 		var schedules = _.filter(this.props.schedules, {year: this.props.year})
