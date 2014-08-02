@@ -19,6 +19,7 @@ var StudentStore = Fluxy.createStore({
 	},
 	actions: [
 		[StudentConstants.STUDENT_CREATE, function(student) {
+			console.log('STUDENT_CREATE')
 			this.set(['students', student.id], $.js_to_clj(student))
 		}],
 
