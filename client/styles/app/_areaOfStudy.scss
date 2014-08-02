@@ -16,6 +16,7 @@
 	summary {
 		position: relative;
 		cursor: pointer;
+		display: block;
 	}
 
 	@include progress-bar(
