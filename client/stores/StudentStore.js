@@ -1,10 +1,10 @@
 var Fluxy = require('fluxy')
 var $ = Fluxy.$
 
-var StudentConstants = require('../constants/StudentConstants');
+var StudentConstants = require('../constants/StudentConstants')
 
-var ScheduleStore = require('../stores/ScheduleStore');
-var StudyStore = require('../stores/StudyStore');
+var ScheduleStore = require('../stores/ScheduleStore')
+var StudyStore = require('../stores/StudyStore')
 
 function isActive(student) {
 	return student.active
