@@ -14,8 +14,7 @@ var StudentStore = Fluxy.createStore({
 	name: 'StudentStore',
 	getInitialState: function() {
 		return {
-			students: {},
-			currentStudent: {}
+			students: $.hash_map()
 		}
 	},
 	actions: [
