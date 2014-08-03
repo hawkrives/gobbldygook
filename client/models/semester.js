@@ -93,17 +93,20 @@ var Semester = React.createClass({
 		return _.any([hasConflict])
 	},
 	render: function() {
-		return React.DOM.div({className: 'semester'},
+		return React.DOM.div({className: 'semester' + (this.state.isValid ? '' : ' invalid')},
 			React.DOM.header({className: 'semester-title'},
 				React.DOM.h1(null, this.semesterName()),
-				React.DOM.ul({className: 'bar'},
+				React.DOM.ul({className: 'info-bar'},
 					React.DOM.li(
 						{className: 'semester-course-count'},
 						_.size(this.state.courses) + ' ' + humanize.pluralize(_.size(this.state.courses), 'course')
 					),
 					this.state.isValid ? null : React.DOM.li(
-						{className: 'semester-status'},
-						this.state.conflicts
+						{
+							className: 'semester-status',
+							title: JSON.stringify(this.state.conflicts, null, 2)
+						},
+						React.DOM.i({className: 'ion-alert-circled'})
 					)
 				),
 				React.DOM.button({

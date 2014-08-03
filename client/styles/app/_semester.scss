@@ -2,14 +2,11 @@ $semester-divider: solid 1px $border-bottom-color;
 
 .semester {
 	@extend %block;
-	-webkit-flex: 1 1 15em;
 	flex: 1 1 15em;
 	margin: 2px;
 
 	padding: $block-edge-padding/2 $block-edge-padding;
 
-	-webkit-transition: 0.75s all;
-	-ms-transition: 0.75s all;
 	transition: 0.75s all;
 
 	&:hover {
@@ -34,7 +31,7 @@ $semester-divider: solid 1px $border-bottom-color;
 	}
 }
 
-.bar {
+.info-bar {
 	@extend %list-inline;
 
 	li {
@@ -51,8 +48,15 @@ $semester-divider: solid 1px $border-bottom-color;
 	}
 }
 
-.semester-course-count {
+.semester-course-count {}
 
+.semester.invalid .semester-title {
+	color: $orange;
+}
+
+.semester.invalid .info-bar i {
+	color: $orange;
+	opacity: 0.9;
 }
 
 .add-semester {
