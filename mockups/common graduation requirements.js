@@ -29,6 +29,7 @@ function courses(coursesTaken, creditsNeeded) {
 
 	return {
 		title: 'Courses',
+		type: 'boolean',
 		result: creditsTaken >= creditsNeeded
 	}
 }
@@ -72,6 +73,7 @@ function residency(courses, fabrications) {
 
 	return {
 		title: 'Residency',
+		type: 'boolean',
 		result: residency
 	}
 }
@@ -108,6 +110,7 @@ function interim(courses, fabrications) {
 
 	return {
 		title: 'Interim',
+		type: 'boolean',
 		result: interimRequirement
 	}
 }
@@ -121,6 +124,7 @@ function gpa(courses) {
 
 	return {
 		title: 'GPA',
+		type: 'boolean',
 		result: true
 	}
 }
@@ -131,6 +135,7 @@ function courseLevel(courses) {
 
 	return {
 		title: 'Course Level',
+		type: 'boolean',
 		result: _.size(onlyCoursesAtOrAboveLevel(200, courses)) >= 18
 	}
 }
@@ -175,6 +180,7 @@ function gradedCourses(courses, fabrications) {
 
 	return {
 		title: 'Graded Courses',
+		type: 'boolean',
 		result: _.size(courses) - _.size(fabrications) >= 24
 	}
 }
@@ -263,32 +269,36 @@ function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 	// graduation major within that degree before the diploma for that degree will
 	// be awarded.
 
-	var title = 'Arts and Music'
+	var baseResult = {
+		title: 'Arts and Music',
+		type: 'boolean',
+		prose: '',
+	}
 
 	var degrees = _.filter(studies, {type: 'degree'})
 	if (_.size(degrees) === 1) {
 		// there's only one degree, so we don't care.
-		return {title: title, result: true}
+		return _.merge(baseResult, {result: true})
 	}
 
 	var majors = _.filter(studies, {type: 'major'})
 	if (utilities.isBachelorOfBoth(studies) && utilities.isMajoringIn('Music', studies)) {
 		// there's a double-ba/bm trying to major in Music -- no.
-		return {title: title, result: false}
+		return _.merge(baseResult, {result: false})
 	}
 
 	// "The final two years of coursework in pursuit of the degrees must be
 	// spent in residence."
 	if (!finalTwoYearsInResidence(courses, fabrications)) {
-		return {title: title, result: false}
+		return _.merge(baseResult, {result: false})
 	}
 
 	// "17 of the last 20 full-course credits must be earned through St. Olaf."
 	if (!seventeenOlafCourses(courses)) {
-		return {title: title, result: false}
+		return _.merge(baseResult, {result: false})
 	}
 
-	return {title: title, result: true}
+	return _.merge(baseResult, {result: true})
 }
 
 // Requirements

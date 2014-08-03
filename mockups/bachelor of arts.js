@@ -51,6 +51,7 @@ function artsMajor(studies, courses) {
 
 	return {
 		title: 'Major',
+		type: 'boolean',
 		result: _.size(majors) >= 1 && _.every(majors, utilities.creditsBeyondTheArea(courses, 8))
 	}
 }
@@ -112,6 +113,7 @@ function beyondTheMajor(studies, courses) {
 
 	return {
 		title: 'Beyond the Major',
+		type: 'boolean',
 		result: result
 	}
 }

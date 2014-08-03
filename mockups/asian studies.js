@@ -21,6 +21,7 @@ function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
 	return Promise.props({
 		title: 'Interdisciplinary Approaches to Asia',
+		type: 'boolean',
 		description: 'Asian Studies 275: Interdisciplinary Approaches to Asia',
 		result: checkCoursesForDeptNum(courses, 'ASIAN 275')
 	})
@@ -79,6 +80,7 @@ function electives(courses) {
 	]).then(function(details) {
 		return {
 			title: 'Electives',
+			type: 'object/number',
 			description: 'Six electives, with stipulations: 1. At least two at level II or level III, taken on campus; 2. No more than two at level I; 3. No more than four elective courses about any one country; 4. No level I or level II language courses may count.',
 			result: (matching >= needs) && electivesAreGood,
 			details: {
@@ -106,6 +108,7 @@ function seniorSeminar(courses) {
 
 		return {
 			title: 'Senior Seminar',
+			type: 'boolean',
 			description: 'Senior Seminar: One of Asian Studies 397: Human Rights/Asian Context, or Asian Studies 399: Asian Studies Seminar',
 			result: seminarCount >= seminarsNeeded
 		}
@@ -142,6 +145,7 @@ function language(courses) {
 
 	return Promise.resolve({
 		title: 'Language',
+		type: 'object/number',
 		description: 'Two courses in Chinese or Japanese above 112 or its equivalent',
 		result: numberFulfilled >= numberNeeded,
 		details: {
