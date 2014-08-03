@@ -27,11 +27,11 @@ function getArea(id) {
 
 var AreaOfStudy = React.createClass({
 	load: function() {
-		var area = getArea(this.props.id)
+		var area = getArea(this.props.area.id)
 
 		if (typeof area === 'function') {
-			area(this.props).bind(this).then(function(results) {
-				console.log('calculated ' + this.props.abbr + ' graduation possibility', results)
+			area(this.props.student).bind(this).then(function(results) {
+				console.log('calculated ' + this.props.area.abbr + ' graduation possibility', results)
 				this.setState({
 					result: results
 				})
@@ -41,8 +41,8 @@ var AreaOfStudy = React.createClass({
 				result: {
 					result: false,
 					details: [{
-						title: this.props.type + ' not found!',
-						description: 'This ' + this.props.type + ' could not be found.'
+						title: this.props.area.type + ' not found!',
+						description: 'This ' + this.props.area.type + ' could not be found.'
 					}]
 				}
 			})
@@ -84,10 +84,10 @@ var AreaOfStudy = React.createClass({
 		var currentProgress = _.size(_.compact(results))
 		var maxProgress = _.size(results)
 
-		return React.DOM.article({id: this.props.id, className: 'area-of-study'},
+		return React.DOM.article({id: this.props.area.id, className: 'area-of-study'},
 			React.DOM.details(null,
 				React.DOM.summary(null,
-					React.DOM.h1(null, this.props.title),
+					React.DOM.h1(null, this.props.area.title),
 					React.DOM.progress({value: currentProgress, max: maxProgress})
 				),
 				requirementSets

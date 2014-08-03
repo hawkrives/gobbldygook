@@ -47,9 +47,11 @@ var GraduationStatus = React.createClass({
 		var areasOfStudy = _.groupBy(student.studies, 'type')
 		var areasOfStudyElements = _.mapValues(areasOfStudy, function(areas) {
 			return _.map(areas, function(area) {
-				var areaObject = _.merge(student, area)
-				areaObject.key = area.id
-				return AreaOfStudy(areaObject)
+				return AreaOfStudy({
+					key: area.id,
+					student: student,
+					area: area
+				})
 			}, this)
 		}, this)
 
