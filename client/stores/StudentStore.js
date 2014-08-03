@@ -87,7 +87,6 @@ var StudentStore = Fluxxor.createStore({
 			enrollment: 1874,
 			graduation: 2016,
 			creditsNeeded: 35,
-			active: false,
 			studies: {},
 			schedules: {},
 			overrides: {},
