@@ -17,7 +17,7 @@ var isCurrentYearSchedule = _.curry(function(year, schedule) {
 
 var Year = React.createClass({
 	canAddSemester: function() {
-		return !(findFirstAvailableSemester(this.props.schedules, this.props.year) > 5)
+		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
 	},
 	addSemester: function() {
 		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
