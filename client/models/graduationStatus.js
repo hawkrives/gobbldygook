@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash')
 var React = require('react')
 var humanize = require('humanize-plus')

@@ -1,3 +1,5 @@
+'use strict';
+
 var Fluxy = require('fluxy')
 var Promise = require('bluebird')
 var uuid = require('node-uuid')

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	id: '3AE9E7EE-DA8F-4014-B987-8D88814BB848',
 

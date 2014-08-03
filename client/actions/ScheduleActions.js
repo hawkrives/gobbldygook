@@ -1,3 +1,5 @@
+'use strict';
+
 var Fluxy = require('fluxy')
 var uuid = require('node-uuid')
 var mori = require('mori')

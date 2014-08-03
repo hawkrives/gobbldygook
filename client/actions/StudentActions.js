@@ -1,3 +1,5 @@
+'use strict';
+
 var Fluxy = require('fluxy')
 
 var StudentConstants = require('../constants/StudentConstants')
