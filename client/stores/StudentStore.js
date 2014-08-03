@@ -137,7 +137,7 @@ var StudentStore = Fluxxor.createStore({
 	handleStudentSave: function() {},
 
 	// Schedule Actions
-	handleScheduleCreate: function(student, schedule) {
+	handleScheduleCreate: function(studentId, schedule) {
 		console.log('StudentStore.createSchedule')
 		var genericSchedule = {
 			id: uuid.v4(),
@@ -152,7 +152,7 @@ var StudentStore = Fluxxor.createStore({
 		schedule.active = false
 
 		var joinedSchedule = _.merge(genericSchedule, schedule)
-		this.students = this.students.updateIn([student.id, 'schedules', schedule.id], joinedSchedule)
+		this.students = this.students.updateIn([studentId, 'schedules', schedule.id], joinedSchedule)
 		this.emit('change')
 	},
 
