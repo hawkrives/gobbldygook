@@ -8,6 +8,8 @@ var buildDeptNum = require('./deptNum').buildDeptNum
 var logDataLoading = false
 
 function storeCourses(item) {
+	window.courseCache = {}
+
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeCourses')
 
