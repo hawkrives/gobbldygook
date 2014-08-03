@@ -14,17 +14,20 @@ function randomChar() {
 
 var ScheduleActions = Fluxy.createActions({
 	serviceActions: {
-		create: [ScheduleConstants.SCHEDULE_CREATE, function(schedule) {
+		create: [ScheduleConstants.SCHEDULE_CREATE, function(studentId, schedule) {
 			return new Promise(function(resolve, reject) {
-				resolve(mori.js_to_clj({
+				var newSchedule = {
 					id: uuid.v4(),
 					year: schedule.year,
 					semester: schedule.semester,
 					title: schedule.title || 'Schedule ' + randomChar(),
 					index: schedule.index || 1,
-					clbids: mori.set(),
+					clbids: schedule.clbids || [],
 					active: schedule.active || false,
-				}))
+				}
+				console.log('ScheduleActions SCHEDULE_CREATE', studentId, newSchedule)
+				var moriSchedule = mori.js_to_clj(newSchedule)
+				resolve(moriSchedule)
 			})
 		}],
 		destroy: [ScheduleConstants.SCHEDULE_DESTROY, function(studentId, schedule) {
