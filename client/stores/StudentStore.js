@@ -146,10 +146,9 @@ var StudentStore = Fluxxor.createStore({
 			title: 'Schedule ' + randomChar(),
 			index: 1,
 			clbids: [],
-			active: false,
 		}
 
-		schedule.active = false
+		schedule.active = _.size(this.students.get(studentId).schedules) > 0 ? false : true
 
 		var joinedSchedule = _.merge(genericSchedule, schedule)
 		this.students = this.students.updateIn([studentId, 'schedules', schedule.id], joinedSchedule)
