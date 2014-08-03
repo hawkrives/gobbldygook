@@ -3,6 +3,9 @@ var Promise = require('bluebird')
 
 var common = require('./common graduation requirements')
 var utilities = require('./common graduation utilities')
+var educ = require('./common education requirements')
+var eduUtilities = require('./common education utilities')
+var countGeneds = eduUtilities.countGeneds
 
 function onlyMusicMajors(major) {
 	return _.any([
@@ -12,6 +15,105 @@ function onlyMusicMajors(major) {
 		major.title === 'Music Education',
 		major.title === 'Elective Studies'
 	])
+}
+
+function foreignLanguage(courses) {
+	// Foreign Language [FOL] -- 0-2 courses
+	// Vocal Performance: 0-2 courses in each of 2 languages; one must be French or German)
+	return {
+		title: 'Foreign Language',
+		abbr: 'FOL',
+		result: true,
+	}
+}
+
+function abstractAndQuantitativeReasoning(courses) {
+	// AQR or SED or IST
+	var which = _.groupBy([
+		{
+			title: 'Abstract and Quantitative Reasoning',
+			abbr: 'AQR',
+			result: countGeneds(courses, 'AQR') >= 1,
+		},
+		{
+			title: 'Studies in Natural Science: Scientific Exploration and Discovery',
+			abbr: 'SED',
+			result: countGeneds(courses, 'SED') >= 1,
+		},
+		{
+			title: 'Integrated Scientific Topics',
+			abbr: 'IST',
+			result: countGeneds(courses, 'IST') >= 1,
+		},
+	], 'result')
+
+	var generic = {
+		title: 'Abstract and Quantitative Reasoning OR Studies in Natural Science: Scientific Exploration and Discovery OR Integrated Scientific Topics',
+		abbr: 'AQR/SED/IST',
+		result: false,
+	}
+
+	if (true in which) {
+		return which[true]
+	} else {
+		return generic
+	}
+}
+
+function historicalOrLiteraryStudies(courses) {
+	// ALS-L or HWC - 1 course
+	var which = _.groupBy([
+		{
+			title: 'Historical Studies in Western Culture',
+			abbr: 'HWC',
+			result: countGeneds(courses, 'HWC') >= 1,
+		},
+		{
+			title: 'Literary Studies',
+			abbr: 'ALS-L',
+			result: countGeneds(courses, 'ALS-L') >= 1,
+		},
+	], 'result')
+
+	var generic = {
+		title: 'Historical Studies in Western Culture OR Literary Studies',
+		abbr: 'HWC/ALS-L',
+		result: false,
+	}
+
+	if (true in which) {
+		return which[true]
+	} else {
+		return generic
+	}
+}
+
+function multiculturalStudies(courses) {
+	// MCD or MCG - 1 course
+	var which = _.groupBy([
+		{
+			title: 'Multicultural Studies - Domestic',
+			abbr: 'MCD',
+			result: countGeneds(courses, 'MCD') >= 1,
+		},
+		{
+			title: 'Multicultural Studies - Global',
+			abbr: 'MCG',
+			result: countGeneds(courses, 'MCG') >= 1,
+		},
+	], 'result')
+
+	var generic = {
+		title: 'Multicultural Studies',
+		abbr: 'MCD/MCG',
+		result: false,
+	}
+
+	if (true in which) {
+		return which[true]
+	} else {
+		return generic
+	}
 }
 
 function dedicatedMusicMajor(studies, courses) {
@@ -51,7 +153,8 @@ function dedicatedMusicMajor(studies, courses) {
 	var musicMajors = _.filter(majors, onlyMusicMajors)
 
 	return {
-		title: 'Dedicated Music Major',
+		title: 'Music Major',
+		type: 'boolean',
 		result: _.size(musicMajors) >= 1 && _.every(musicMajors, utilities.creditsBeyondTheArea(courses, 8))
 	}
 }
@@ -65,9 +168,7 @@ function checkBachelorOfMusicDegree(student) {
 	var fabrications = []
 	var creditsNeeded = student.creditsNeeded
 
-	// console.log('student, bm', student)
-
-	var requirements = [
+	var graduationRequirements = [
 		common.courses(courses, creditsNeeded),
 		common.residency(courses, fabrications),
 		common.interim(courses, fabrications),
@@ -78,18 +179,70 @@ function checkBachelorOfMusicDegree(student) {
 	]
 
 	if (utilities.isBachelorOfBoth(studies)) {
-		requirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
+		graduationRequirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
 	}
 
-	var bachelorOfMusicRequirements = Promise.all(requirements).then(function(results) {
-		// console.log('checkBachelorOfMusicDegree', 'results', results)
-		return results
-	})
+	var educationRequirements = {
+		foundation: [
+			educ.firstYearWriting(courses),
+			educ.writingInContext(courses),
+			foreignLanguage(courses),
+			educ.oralCommunication(courses),
+			abstractAndQuantitativeReasoning(courses),
+			educ.studiesInPhysicalMovement(courses),
+		],
+		core: [
+			historicalOrLiteraryStudies(courses),
+			multiculturalStudies(courses),
+			educ.biblicalStudies(courses),
+			educ.theologicalStudies(courses),
+			educ.studiesInHumanBehaviorAndSociety(courses),
+		],
+		integrative: [
+			educ.ethicalIssuesAndNormativePerspectives(courses),
+		],
+	}
+
+	var educationRequirementsResults = [
+		{
+			title: 'Foundation',
+			type: 'array/boolean',
+			result: _.all(educationRequirements.foundation, 'result'),
+			details: educationRequirements.foundation,
+		},
+		{
+			title: 'Core',
+			type: 'array/boolean',
+			result: _.all(educationRequirements.core, 'result'),
+			details: educationRequirements.core
+		},
+		{
+			title: 'Integrative',
+			type: 'array/boolean',
+			result: _.all(educationRequirements.integrative, 'result'),
+			details: educationRequirements.integrative
+		},
+	]
+
+	var bachelorOfMusicRequirements = [
+		{
+			title: 'Graduation',
+			type: 'array/boolean',
+			result: _.all(graduationRequirements, 'result'),
+			details: graduationRequirements
+		},
+		{
+			title: 'Education',
+			type: 'array/requirementSet',
+			result: _.all(educationRequirementsResults, 'result'),
+			details: educationRequirementsResults
+		}
+	]
+
+	// console.log('checkBachelorOfMusicDegree', 'results', results)
 
 	return Promise.props({
-		result: bachelorOfMusicRequirements.then(function(results) {
-			return _.all(results, 'result')
-		}),
+		result: _.all(bachelorOfMusicRequirements, 'result'),
 		details: bachelorOfMusicRequirements
 	})
 }
