@@ -189,7 +189,7 @@ function checkBachelorOfArtsDegree(student) {
 		},
 	]
 
-	var requirements = [
+	var bachelorOfArtsRequirements = [
 		{
 			title: 'Graduation',
 			type: 'array/boolean',
@@ -204,7 +204,6 @@ function checkBachelorOfArtsDegree(student) {
 		}
 	]
 
-	var bachelorOfArtsRequirements = requirements
 	// console.log('checkBachelorOfArtsDegree', 'results', bachelorOfArtsRequirements)
 
 	return Promise.props({
