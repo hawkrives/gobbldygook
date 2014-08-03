@@ -11,10 +11,13 @@ var areas = {
 	// Degrees
 	'd-ba': require('../../mockups/bachelor of arts'),
 	'd-bm': require('../../mockups/bachelor of music'),
+
 	// Majors
 	'm-csci': require('../../mockups/computer science'),
 	'm-asian': require('../../mockups/asian studies'),
+
 	// Concentrations
+
 	// Emphases
 }
 
