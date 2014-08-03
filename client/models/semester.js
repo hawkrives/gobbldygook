@@ -51,7 +51,7 @@ var Semester = React.createClass({
 		return 'Unknown (' + this.props.semester + ')';
 	},
 	findActiveSchedules: function() {
-		var possible = this.props.schedules.filter(isCurrentTermSchedule(this.props.year, this.props.semester))
+		var possible = _.filter(this.props.schedules, isCurrentTermSchedule(this.props.year, this.props.semester))
 		var activeSchedules = _.find(possible, function(schedule) {
 			if (schedule.active) {
 				return schedule.active === true

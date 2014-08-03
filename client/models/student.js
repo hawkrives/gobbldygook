@@ -2,6 +2,7 @@
 
 var _ = require('lodash')
 var React = require('react')
+var mori = require('mori')
 
 var GraduationStatus = require('./graduationStatus')
 var CourseTable = require('./courseTable')
@@ -35,14 +36,15 @@ var Student = React.createClass({
 	},
 
 	render: function() {
-		// console.log('student render')
-		var student = StudentStore.toJS(this.state.currentStudent)
-		return (
-			React.DOM.div(
-				{className: 'student'},
-				GraduationStatus({student: student}),
-				CourseTable({schedules: student.schedules, studentId: student.id})
-			)
+		var student = this.state.currentStudent
+		console.info('student render', mori.clj_to_js(student))
+		return React.DOM.div(
+			{className: 'student'},
+			GraduationStatus({student: student}),
+			CourseTable({
+				schedules: mori.clj_to_js(mori.get(student, 'schedules')),
+				studentId: mori.get(student, 'id')
+			})
 		)
 	},
 

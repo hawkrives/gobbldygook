@@ -24,18 +24,15 @@ function getArea(id) {
 
 var AreaOfStudy = React.createClass({
 	load: function() {
-		var id = this.props.id
-
-		var area = getArea(id)
+		var area = getArea(this.props.id)
 
 		if (typeof area === 'function') {
-			area(this.props).bind(this)
-				.then(function(results) {
-					console.log('calculated ' + this.props.abbr + ' graduation possibility', results)
-					this.setState({
-						result: results
-					})
+			area(this.props).bind(this).then(function(results) {
+				console.log('calculated ' + this.props.abbr + ' graduation possibility', results)
+				this.setState({
+					result: results
 				})
+			})
 		} else {
 			this.setState({
 				result: {
