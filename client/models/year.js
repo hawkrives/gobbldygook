@@ -2,11 +2,11 @@
 
 var _ = require('lodash')
 var React = require('react')
+var Fluxxor = require('fluxxor')
+var FluxChildMixin = Fluxxor.FluxChildMixin(React)
 
 var Course = require('./course')
 var Semester = require('./semester')
-
-var ScheduleActions = require('../actions/ScheduleActions')
 
 var findFirstAvailableSemester = require('../helpers/findFirstAvailableSemester')
 var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
@@ -16,13 +16,14 @@ var isCurrentYearSchedule = _.curry(function(year, schedule) {
 })
 
 var Year = React.createClass({
+	mixins: [FluxChildMixin],
 	canAddSemester: function() {
 		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
 	},
 	addSemester: function() {
 		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
 
-		ScheduleActions.create(this.props.studentId, {
+		this.getFlux().actions.createSchedule(this.props.studentId, {
 			year: this.props.year, semester: nextAvailableSemester,
 			sequence: 1, active: true,
 		})
@@ -32,7 +33,7 @@ var Year = React.createClass({
 		console.log('called removeYear', currentYearSchedules)
 		var scheduleIds = _.pluck(currentYearSchedules, 'id')
 		console.log('removing', scheduleIds, 'from', this.props.studentId)
-		ScheduleActions.destroyMultiple(this.props.studentId, scheduleIds)
+		this.getFlux().actions.destroyMultipleSchedules(this.props.studentId, scheduleIds)
 	},
 	render: function() {
 		var schedules = _.filter(this.props.schedules, {year: this.props.year})

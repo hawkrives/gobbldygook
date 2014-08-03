@@ -2,19 +2,20 @@
 
 var _ = require('lodash')
 var React = require('react')
-var mori = require('mori')
-
-var Year = require('./year')
-var ScheduleActions = require('../actions/ScheduleActions')
+var Fluxxor = require('fluxxor')
+var FluxChildMixin = Fluxxor.FluxChildMixin(React)
 
 var findFirstAvailableYear = require('../helpers/findFirstAvailableYear')
 var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
 
+var Year = require('./year')
+
 var CourseTable = React.createClass({
+	mixins: [FluxChildMixin],
 	addYear: function(ev) {
 		var nextAvailableYear = findFirstAvailableYear(this.props.schedules)
 
-		ScheduleActions.create(this.props.studentId, {
+		this.getFlux().actions.createSchedule(this.props.studentId, {
 			year: nextAvailableYear, semester: 1,
 			sequence: 1, active: true,
 		})

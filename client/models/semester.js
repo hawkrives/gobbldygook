@@ -3,6 +3,8 @@
 var _ = require('lodash')
 var React = require('react')
 var humanize = require('humanize-plus')
+var Fluxxor = require('fluxxor')
+var FluxChildMixin = Fluxxor.FluxChildMixin(React)
 
 var CourseList = require('./courseList')
 var Course = require('./course')
@@ -10,13 +12,12 @@ var Course = require('./course')
 var getCourses = require('../helpers/getCourses').getCourses
 var checkScheduleTimeConflicts = require('../helpers/time').checkScheduleTimeConflicts
 
-var ScheduleActions = require('../actions/ScheduleActions')
-
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 	return (schedule.year === year && schedule.semester === semester)
 })
 
 var Semester = React.createClass({
+	mixins: [FluxChildMixin],
 	putActiveCoursesIntoState: function() {
 		var active = this.findActiveSchedules()
 		var clbids = _.uniq(active.clbids)
@@ -64,7 +65,7 @@ var Semester = React.createClass({
 		console.log('called removeSemester', currentTermSchedules)
 		var scheduleIds = _.pluck(currentTermSchedules, 'id')
 		console.log('removing', scheduleIds, 'from', this.props.studentId)
-		ScheduleActions.destroyMultiple(this.props.studentId, scheduleIds)
+		this.getFlux().actions.destroyMultipleSchedules(this.props.studentId, scheduleIds)
 	},
 	validateSchedule: function() {
 		// Checks to see if the schedule is valid
