@@ -17,9 +17,11 @@ var isCurrentYearSchedule = _.curry(function(year, schedule) {
 
 var Year = React.createClass({
 	mixins: [FluxChildMixin],
+
 	canAddSemester: function() {
 		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
 	},
+
 	addSemester: function() {
 		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
 
@@ -28,6 +30,7 @@ var Year = React.createClass({
 			sequence: 1, active: true,
 		})
 	},
+
 	removeYear: function() {
 		var currentYearSchedules = _.filter(this.props.schedules, isCurrentYearSchedule(this.props.year))
 		console.log('called removeYear', currentYearSchedules)
@@ -35,6 +38,7 @@ var Year = React.createClass({
 		console.log('removing', scheduleIds, 'from', this.props.studentId)
 		this.getFlux().actions.destroyMultipleSchedules(this.props.studentId, scheduleIds)
 	},
+
 	render: function() {
 		var schedules = _.filter(this.props.schedules, {year: this.props.year})
 
