@@ -1,13 +1,9 @@
-var Fluxy = require('fluxy')
+'use strict';
 
-var StudyConstants = Fluxy.createConstants({
-	serviceMessages: [
-		'STUDY_ADD',
-		'STUDY_REMOVE',
-		'STUDY_REORDER',
-		'STUDY_UNDO',
-		'STUDY_TOGGLE_OPEN',
-	]
-})
-
-module.exports = StudyConstants
+module.exports = {
+	STUDY_ADD: 'STUDY_ADD',
+	STUDY_REMOVE: 'STUDY_REMOVE',
+	STUDY_REORDER: 'STUDY_REORDER',
+	STUDY_UNDO: 'STUDY_UNDO',
+	STUDY_TOGGLE_OPEN: 'STUDY_TOGGLE_OPEN',
+}

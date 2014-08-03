@@ -1,8 +1,7 @@
 'use strict';
 
-var Fluxy = require('fluxy')
 var uuid = require('node-uuid')
-var mori = require('mori')
+var Immutable = require('immutable')
 var Promise = require('bluebird')
 
 var ScheduleConstants = require('../constants/ScheduleConstants')
@@ -12,41 +11,31 @@ function randomChar() {
 	return Math.random().toString(36).slice(2, 3)
 }
 
-var ScheduleActions = Fluxy.createActions({
-	serviceActions: {
-		create: [ScheduleConstants.SCHEDULE_CREATE, function(studentId, schedule) {
-			return new Promise(function(resolve, reject) {
-				var newSchedule = {
-					id: uuid.v4(),
-					year: schedule.year,
-					semester: schedule.semester,
-					title: schedule.title || 'Schedule ' + randomChar(),
-					index: schedule.index || 1,
-					clbids: schedule.clbids || [],
-					active: schedule.active || false,
-				}
-				console.log('ScheduleActions SCHEDULE_CREATE', studentId, newSchedule)
-				var moriSchedule = mori.js_to_clj(newSchedule)
-				resolve(moriSchedule)
+module.exports = {
+	create: function(studentId, schedule) {
+		return new Promise(function(resolve, reject) {
+			var immutableSchedule = Immutable.Map({
+				id: uuid.v4(),
+				year: schedule.year,
+				semester: schedule.semester,
+				title: schedule.title || 'Schedule ' + randomChar(),
+				index: schedule.index || 1,
+				clbids: schedule.clbids || [],
+				active: schedule.active || false,
 			})
-		}],
-		destroy: [ScheduleConstants.SCHEDULE_DESTROY, function(studentId, schedule) {
-			// console.log('ScheduleActions SCHEDULE_DESTROY', studentId, schedule)
-			return Promise.resolve(
-				this.dispatchAction(ScheduleConstants.SCHEDULE_DESTROY, studentId, schedule)
-			)
-		}],
-		destroyMultiple: [ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, function(studentId, scheduleIds) {
-			// console.log('ScheduleActions SCHEDULE_DESTROY_MULTIPLE', studentId, scheduleIds)
-			return Promise.resolve(
-				this.dispatchAction(ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, studentId, scheduleIds)
-			)
-		}]
+			resolve(this.dispatch(ScheduleConstants.SCHEDULE_CREATE, studentId, immutableSchedule))
+		})
+	},
+	destroy: function(studentId, schedule) {
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY, studentId, schedule))
+	},
+	destroyMultiple: function(studentId, scheduleIds) {
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, studentId, scheduleIds))
 	},
 	undo: function() {
-		this.dispatchAction(ScheduleConstants.SCHEDULE_UNDO, {});
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_UNDO, {}))
 	},
-	messages: ['SCHEDULE_CHANGED'],
-})
-
-module.exports = ScheduleActions
+	scheduleChanged: function() {
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_CHANGED, {}))
+	},
+}

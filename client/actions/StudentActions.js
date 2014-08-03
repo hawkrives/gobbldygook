@@ -1,29 +1,46 @@
 'use strict';
 
-var Fluxy = require('fluxy')
+var uuid = require('node-uuid')
+var Immutable = require('immutable')
+var Promise = require('bluebird')
 
 var StudentConstants = require('../constants/StudentConstants')
-var StudentService = require('../services/StudentService')
 
-var StudentActions = Fluxy.createActions({
-	serviceActions: {
-		create: [StudentConstants.STUDENT_CREATE, function(student) {
-			return StudentService.create(student)
-		}],
-		encode: [StudentConstants.STUDENT_ENCODE, function(student) {
-			return StudentService.encode(student)
-		}],
-		decode: [StudentConstants.STUDENT_DECODE, function(student) {
-			return StudentService.decode(student)
-		}],
+module.exports = {
+	create: function(student) {
+		return new Promise(function(resolve, reject) {
+			var immutableStudent = Immutable.map({
+				id: student.id || uuid.v4(),
+				name: student.name || '',
+				active: student.active || false,
+				enrollment: student.enrollment || 0,
+				graduation: student.graduation || 0,
+				creditsNeeded: student.creditsNeeded || 0,
+				studies: student.studies.length > 0 ? Immutable.vector(student.studies) : Immutable.vector(),
+				schedules: student.schedules.length > 0 ? Immutable.vector(student.schedules) : Immutable.vector(),
+				// overrides: new OverrideStore(),
+				// fabrications: new FabricationStore(),
+			})
+			this.dispatch(StudentConstants.STUDENT_CREATE, student)
+		})
+	},
+	encode: function(student) {
+		return new Promise(function(resolve, reject) {
+			this.dispatch(StudentConstants.STUDENT_ENCODE, student)
+		})
+	},
+	decode: function(student) {
+		return new Promise(function(resolve, reject) {
+			this.dispatch(StudentConstants.STUDENT_DECODE, student)
+		})
 	},
 	undo: function() {
-		this.dispatchAction(StudentConstants.STUDENT_UNDO, {});
+		return Promise.resolve(this.dispatch(StudentConstants.STUDENT_UNDO, {}))
 	},
 	save: function() {
-		this.dispatchAction(StudentConstants.STUDENT_SAVE, {});
+		return Promise.resolve(this.dispatch(StudentConstants.STUDENT_SAVE, {}))
 	},
-	messages: ['STUDENT_CHANGED'],
-})
-
-module.exports = StudentActions
+	studentChanged: function() {
+		return Promise.resolve(this.dispatch(StudentConstants.STUDENT_CHANGED, {}))
+	},
+}
