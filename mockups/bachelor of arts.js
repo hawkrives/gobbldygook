@@ -164,7 +164,7 @@ function checkBachelorOfArtsDegree(student) {
 			educ.studiesInHumanBehaviorAndSociety(courses),
 		],
 		integrative: [
-			educ.ethicalIssuesAndNormativePerspectives(courses)
+			educ.ethicalIssuesAndNormativePerspectives(courses),
 		]
 	}
 
