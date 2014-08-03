@@ -203,7 +203,7 @@ function checkBachelorOfArtsDegree(student) {
 	]
 
 	var bachelorOfArtsRequirements = requirements
-	console.log('checkBachelorOfArtsDegree', 'results', bachelorOfArtsRequirements)
+	// console.log('checkBachelorOfArtsDegree', 'results', bachelorOfArtsRequirements)
 
 	return Promise.props({
 		result: _.all(bachelorOfArtsRequirements, 'result'),

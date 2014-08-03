@@ -65,7 +65,7 @@ function electives(courses) {
 	])
 
 	var electivesAreGood = _.all(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
-	console.log('asianStudiesElectives', asianStudiesElectives)
+	// console.log('asianStudiesElectives', asianStudiesElectives)
 
 	var matching = _.size(asianStudiesElectives)
 	var needs = 6
