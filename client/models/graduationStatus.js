@@ -40,7 +40,8 @@ var GraduationStatus = React.createClass({
 		this.findActiveCourses()
 	},
 	render: function() {
-		var student = _.merge(mori.clj_to_js(this.props.student), {courses: this.state.courses})
+		var student = _.clone(this.props.student, true)
+		student.courses = this.state.courses
 		console.info('graduation-status render', student)
 
 		// Get areas of study
