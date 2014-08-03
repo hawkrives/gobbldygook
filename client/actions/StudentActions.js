@@ -1,46 +1,51 @@
 'use strict';
 
-var uuid = require('node-uuid')
-var Immutable = require('immutable')
 var Promise = require('bluebird')
 
 var StudentConstants = require('../constants/StudentConstants')
+var ScheduleConstants = require('../constants/ScheduleConstants')
+var StudyConstants = require('../constants/StudyConstants')
 
 module.exports = {
-	create: function(student) {
-		return new Promise(function(resolve, reject) {
-			var immutableStudent = Immutable.map({
-				id: student.id || uuid.v4(),
-				name: student.name || '',
-				active: student.active || false,
-				enrollment: student.enrollment || 0,
-				graduation: student.graduation || 0,
-				creditsNeeded: student.creditsNeeded || 0,
-				studies: student.studies.length > 0 ? Immutable.vector(student.studies) : Immutable.vector(),
-				schedules: student.schedules.length > 0 ? Immutable.vector(student.schedules) : Immutable.vector(),
-				// overrides: new OverrideStore(),
-				// fabrications: new FabricationStore(),
-			})
-			this.dispatch(StudentConstants.STUDENT_CREATE, student)
-		})
+	// Student actions
+	createStudent: function(student) {
+		return Promise.resolve(this.dispatch(StudentConstants.STUDENT_CREATE, student))
 	},
-	encode: function(student) {
-		return new Promise(function(resolve, reject) {
-			this.dispatch(StudentConstants.STUDENT_ENCODE, student)
-		})
+	encodeStudent: function(student) {
+		return Promise.resolve(this.dispatch(StudentConstants.STUDENT_ENCODE, student))
 	},
-	decode: function(student) {
-		return new Promise(function(resolve, reject) {
-			this.dispatch(StudentConstants.STUDENT_DECODE, student)
-		})
+	decodeStudent: function(student) {
+		return Promise.resolve(this.dispatch(StudentConstants.STUDENT_DECODE, student))
 	},
-	undo: function() {
+	undoStudent: function() {
 		return Promise.resolve(this.dispatch(StudentConstants.STUDENT_UNDO, {}))
 	},
-	save: function() {
+	saveStudent: function() {
 		return Promise.resolve(this.dispatch(StudentConstants.STUDENT_SAVE, {}))
 	},
 	studentChanged: function() {
 		return Promise.resolve(this.dispatch(StudentConstants.STUDENT_CHANGED, {}))
 	},
+
+	// Schedule actions
+	createSchedule: function(studentId, schedule) {
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_CREATE, studentId, schedule))
+	},
+	destroySchedule: function(studentId, schedule) {
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY, studentId, schedule))
+	},
+	destroyMultipleSchedules: function(studentId, scheduleIds) {
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, studentId, scheduleIds))
+	},
+	undoSchedule: function() {
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_UNDO, {}))
+	},
+	scheduleChanged: function() {
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_CHANGED, {}))
+	},
+
+	// Area of Study actions
+	undoAreaOfStudy: function() {
+		Promise.resolve(this.dispatch(StudyConstants.STUDY_UNDO, {}))
+	}
 }

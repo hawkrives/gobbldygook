@@ -2,7 +2,9 @@
 
 var _ = require('lodash')
 var React = require('react')
-var mori = require('mori')
+var Fluxxor = require('fluxxor')
+var FluxMixin = Fluxxor.FluxMixin(React)
+var StoreWatchMixin = Fluxxor.StoreWatchMixin
 
 var GraduationStatus = require('./graduationStatus')
 var CourseTable = require('./courseTable')
@@ -10,47 +12,32 @@ var CourseTable = require('./courseTable')
 var StudentStore = require('../stores/StudentStore')
 var StudentConstants = require('../constants/StudentConstants')
 
-// Retrieve the current student data from the StudentStore
-function getStudentData() {
-	return {
-		allStudents: StudentStore.get('students'),
-		currentStudent: StudentStore.getActiveStudent()
-	}
-}
-
 var Student = React.createClass({
-	getInitialState: function() {
-		return getStudentData()
+	mixins: [FluxMixin, StoreWatchMixin('StudentStore')],
+
+	getStateFromFlux: function() {
+		var flux = this.getFlux()
+		console.log(flux.store('StudentStore').getState())
+		return flux.store('StudentStore').getState()
 	},
 
-	componentDidMount: function() {
-		StudentStore.addWatch(this._onChange)
-	},
-
-	componentWillUnmount: function() {
-		StudentStore.removeWatch(this._onChange)
-	},
-
-	shouldComponentUpdate: function(nextProps, nextState) {
-		return !StudentStore.$equals(this.state.currentStudent, nextState.currentStudent)
-	},
+	// shouldComponentUpdate: function(nextProps, nextState) {
+		// return !StudentStore.$equals(this.state.currentStudent, nextState.currentStudent)
+		// return true
+	// },
 
 	render: function() {
-		var student = this.state.currentStudent
-		console.info('student render', mori.clj_to_js(student))
+		var student = this.state.active
+		console.info('student render', student)
 		return React.DOM.div(
 			{className: 'student'},
 			GraduationStatus({student: student}),
 			CourseTable({
-				schedules: mori.clj_to_js(mori.get(student, 'schedules')),
-				studentId: mori.get(student, 'id')
+				schedules: student.schedules,
+				studentId: student.id,
 			})
 		)
 	},
-
-	_onChange: function(keys, oldState, newState) {
-		this.setState(getStudentData())
-	}
 })
 
 module.exports = Student

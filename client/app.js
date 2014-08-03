@@ -4,19 +4,23 @@ var _ = require('lodash')
 var Promise = require('bluebird')
 var db = require('./helpers/db')
 var React = require('react')
-var Fluxy = require('fluxy')
+var Fluxxor = require('fluxxor')
 var documentReady = require('./helpers/document-ready')
 
 var Gobbldygook = require('./models/gobbldygookApp')
 var loadData = require('./helpers/loadData')
 var demoStudent = require('../mockups/demo_student')
-var StudentActions = require('./actions/StudentActions')
-window.demoStudent = demoStudent
+
+var actions = require('./actions/StudentActions')
+var StudentStore = require('./stores/StudentStore')
 
 module.exports = {
 	init: function() {
 		// Just for use in the browser console, I swear.
 		window._ = _
+
+		// Put the demo student where it can be seen
+		window.demoStudent = demoStudent
 
 		// Create the deptnum/crsid cache
 		window.deptNumToCrsid = {}
@@ -24,11 +28,14 @@ module.exports = {
 		// Put a promise on document.ready
 		document.ready = documentReady
 
+		// Stick React where I can see it
+		window.React = React
+
 		// Initialize some library options
 		Promise.longStackTraces()
 		React.initializeTouchEvents(true)
 	},
-	fluxy: function() {
+	flux: function() {
 		return window.db.students
 			.query()
 			.filter()
@@ -42,10 +49,11 @@ module.exports = {
 					console.log('no results!', demoStudent)
 					students = [demoStudent]
 				}
-				Fluxy.start()
-				_.each(students, function(student) {
-					StudentActions.create(student)
-				})
+
+				var stores = {StudentStore: new StudentStore({students: students})}
+				var flux = new Fluxxor.Flux(stores, actions)
+
+				window.flux = flux
 			})
 	},
 	blastoff: function() {
@@ -59,12 +67,12 @@ module.exports = {
 			// Load data into the database
 			loadData()
 
-			// Set up Fluxy
-			return this.fluxy()
+			// Set up Fluxxor
+			return this.flux()
 		}).then(function() {
 			// Render the app
 			var studentComponent = React.renderComponent(
-				Gobbldygook(),
+				Gobbldygook({flux: window.flux}),
 				document.body)
 		}).done()
 	},

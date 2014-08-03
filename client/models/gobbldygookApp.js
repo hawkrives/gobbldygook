@@ -8,8 +8,8 @@ var Gobbldygook = React.createClass({
 	render: function() {
 		return React.DOM.div(
 			null,
-			// NotificationCenter(),
-			Student()
+			// NotificationCenter({flux: this.props.flux}),
+			Student({flux: this.props.flux})
 		)
 	}
 })
