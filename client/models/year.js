@@ -20,14 +20,11 @@ var Year = React.createClass({
 		return !(findFirstAvailableSemester(this.props.schedules, this.props.year) > 5)
 	},
 	addSemester: function() {
-		var schedules = this.props.schedules.val()
-		var nextAvailableSemester = findFirstAvailableSemester(schedules, this.props.year)
-		var nextId = calculateNextScheduleId(schedules)
+		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
 
-		this.props.schedules.push({
-			id: nextId, year: this.props.year, semester: nextAvailableSemester,
-			title: 'Schedule 1', sequence: 1,
-			clbids: [], active: true,
+		ScheduleActions.create(this.props.studentId, {
+			year: this.props.year, semester: nextAvailableSemester,
+			sequence: 1, active: true,
 		})
 	},
 	removeYear: function() {

@@ -5,19 +5,18 @@ var React = require('react')
 var mori = require('mori')
 
 var Year = require('./year')
+var ScheduleActions = require('../actions/ScheduleActions')
 
 var findFirstAvailableYear = require('../helpers/findFirstAvailableYear')
 var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
 
 var CourseTable = React.createClass({
 	addYear: function(ev) {
-		var schedules = this.props.schedules
-		var nextAvailableYear = findFirstAvailableYear(schedules)
-		var nextId = calculateNextScheduleId(schedules)
-		ScheduleActions.create({
+		var nextAvailableYear = findFirstAvailableYear(this.props.schedules)
+
+		ScheduleActions.create(this.props.studentId, {
 			year: nextAvailableYear, semester: 1,
-			title: 'Schedule 1', sequence: 1,
-			clbids: [], active: true,
+			sequence: 1, active: true,
 		})
 	},
 	render: function() {
