@@ -2,7 +2,6 @@
 
 var _ = require('lodash')
 var React = require('react')
-var mori = require('mori')
 var humanize = require('humanize-plus')
 
 var AreaOfStudy = require('./areaOfStudy')
@@ -12,14 +11,14 @@ var getCourses = require('../helpers/getCourses').getCourses
 
 var GraduationStatus = React.createClass({
 	findActiveCourses: function() {
-		var clbids = _.chain(mori.clj_to_js(mori.get(this.props.student, 'schedules')))
+		var clbids = _.chain(this.props.student.schedules)
 			.filter('active')
 			.pluck('clbids')
 			.flatten()
 			.uniq()
 			.value()
 
-		console.log('GraduationStatus\'s schedules', mori.clj_to_js(mori.get(this.props.student, 'schedules')))
+		console.log('GraduationStatus\'s schedules', this.props.student.schedules)
 		console.log('GraduationStatus\'s clbids', clbids)
 
 		getCourses(clbids).bind(this).then(function(courses) {
