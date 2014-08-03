@@ -1,107 +1,74 @@
-/*global app, me, $*/
+'use strict';
+
 var _ = require('lodash')
 var Promise = require('bluebird')
 var db = require('./helpers/db')
 var React = require('react')
-var Cortex = require('cortexjs')
+var Fluxy = require('fluxy')
+var documentReady = require('./helpers/document-ready')
 
-var Student = require('./models/student')
-var NotificationContainer = require('./models/toast').NotificationContainer
-
+var Gobbldygook = require('./models/gobbldygookApp')
 var loadData = require('./helpers/loadData')
-
 var demoStudent = require('../mockups/demo_student')
-
-window._ = _
-
-function initializeLibraries() {
-	Promise.longStackTraces()
-	React.initializeTouchEvents(true)
-}
-
-function loadStudent() {
-	console.log('loading student')
-	return new Promise(function(resolve, reject) {
-		resolve(new Cortex(demoStudent))
-	})
-}
-
-document.ready = new Promise(function(resolve) {
-	if (document.readyState === 'complete') {
-		resolve()
-	} else {
-		function onReady() {
-			resolve()
-			document.removeEventListener('DOMContentLoaded', onReady, true)
-			window.removeEventListener('load', onReady, true)
-		}
-		document.addEventListener('DOMContentLoaded', onReady, true)
-		window.addEventListener('load', onReady, true)
-	}
-})
-
-function createEl(tag, attrs) {
-	var element = document.createElement(tag)
-	element.id = attrs.id
-	return element
-}
-
-function logDatabaseReady(server) {
-	console.log('database ready')
-}
-function logDataLoaded() {
-	console.log('data loaded')
-}
+var StudentActions = require('./actions/StudentActions')
+window.demoStudent = demoStudent
 
 module.exports = {
-	// this is the the whole app initter
+	init: function() {
+		// Just for use in the browser console, I swear.
+		window._ = _
+
+		// Create the deptnum/crsid cache
+		window.deptNumToCrsid = {}
+
+		// Put a promise on document.ready
+		document.ready = documentReady
+
+		// Initialize some library options
+		Promise.longStackTraces()
+		React.initializeTouchEvents(true)
+	},
+	fluxy: function() {
+		return window.db.students
+			.query()
+			.filter()
+			.execute()
+			.then(function(results) {
+				var students = []
+				if (results.length > 0) {
+					console.log('results!', results)
+					students = results
+				} else {
+					console.log('no results!', demoStudent)
+					students = [demoStudent]
+				}
+				Fluxy.start()
+				_.each(students, function(student) {
+					StudentActions.create(student)
+				})
+			})
+	},
 	blastoff: function() {
-		window.times = {start: Date.now()}
+		// Load up some global variables
+		this.init()
 
-		// set up some libraries
-		initializeLibraries()
-
-		// load in the demo student — for now
-		var studentPromise = loadStudent().then(function(student) {
-			window.me = student
-		}).done()
-
-		window.notifications = new Cortex([])
-
-		// Prepare the database
-		db.then(logDatabaseReady)
-
-		// Load data into the database
-		db.then(loadData).then(logDataLoaded).done()
-
-		document.ready.then(function() {
-			document.body.appendChild(createEl('div', {id: 'notifications'}))
-			document.body.appendChild(createEl('div', {id: 'student'}))
-		})
-
-		// Wait for document.ready, the database, and the student.
-		Promise.all([db, document.ready, studentPromise]).then(function() {
+		// Wait for document.ready and the database.
+		Promise.all([db, document.ready]).bind(this).then(function() {
 			console.log('3. 2.. 1... Blastoff!')
 
-			var notifications = React.renderComponent(
-				NotificationContainer(window.notifications),
-				document.getElementById('notifications'))
+			// Load data into the database
+			loadData()
 
-			window.notifications.on('update', function(updatedNotifications) {
-				notifications.setProps({notifications: updatedNotifications})
-			})
-
-			document.body.appendChild(createEl('div', {id: 'student'}))
+			// Set up Fluxy
+			return this.fluxy()
+		}).then(function() {
+			// Render the app
 			var studentComponent = React.renderComponent(
-				Student({student: window.me}),
-				document.getElementById('student'))
-
-			window.me.on('update', function(updatedStudent) {
-				studentComponent.setProps(updatedStudent)
-			})
+				Gobbldygook(),
+				document.body)
 		}).done()
 	},
-};
+}
 
 // run it
-module.exports.blastoff();
+module.exports.blastoff()

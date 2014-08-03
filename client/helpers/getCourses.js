@@ -1,24 +1,33 @@
+'use strict';
+
 var _ = require('lodash')
 var Promise = require('bluebird')
 var db = require('./db')
 
 var convertTimeStringsToOfferings = require('./time').convertTimeStringsToOfferings
 
-// window.courseCache = {}
+window.courseCache = {}
 
 function getCourse(clbid) {
-	return window.db.courses
-		.query('clbid')
-		.only(clbid)
-		.limit(1)
-		.execute()
-		.then(function(courses) {
-			var course = courses[0]
-			course = convertTimeStringsToOfferings(course)
-			return course
-		}).catch(function(records, err) {
-			console.warn('course retrieval failed for: ' + clbid, arguments)
-		})
+	if (window.courseCache[clbid]) {
+		console.log('using course cache')
+		return Promise.resolve(window.courseCache[clbid])
+	} else {
+		console.log('using course database')
+		return window.db.courses
+			.query('clbid')
+			.only(clbid)
+			.limit(1)
+			.execute()
+			.then(function(courses) {
+				var course = courses[0]
+				course = convertTimeStringsToOfferings(course)
+				window.courseCache[clbid] = course
+				return course
+			}).catch(function(records, err) {
+				console.warn('course retrieval failed for: ' + clbid, arguments)
+			})
+	}
 }
 
 function getCourses(clbids) {
@@ -31,18 +40,23 @@ function getCourses(clbids) {
 
 function deptNumToCrsid(deptNumString) {
 	return new Promise(function(resolve, reject) {
-		// Filter to only those with matching dept strings
-		window.db.courses
-			.query('deptnum')
-			.only(deptNumString)
-			.limit(1)
-			.execute()
-			.then(function(courses) {
-				if (_.size(courses)) {
-					resolve(courses[0].crsid)
-				}
-				reject(new Error('Course ' + deptNumString + ' was not found'))
-			})
+		var crsid = window.deptNumToCrsid[deptNumString]
+		if (crsid) {
+			resolve(crsid)
+		} else {
+			// Filter to only those with matching dept strings
+			window.db.courses
+				.query('deptnum')
+				.only(deptNumString)
+				.limit(1)
+				.execute()
+				.then(function(courses) {
+					if (_.size(courses)) {
+						resolve(courses[0].crsid)
+					}
+					reject(new Error('Course ' + deptNumString + ' was not found'))
+				})
+		}
 	})
 }
 

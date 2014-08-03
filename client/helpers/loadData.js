@@ -8,12 +8,15 @@ var buildDeptNum = require('./deptNum').buildDeptNum
 var logDataLoading = false
 
 function storeCourses(item) {
+	window.courseCache = {}
+
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeCourses')
 
 		var courses = _.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
 			course.deptnum = buildDeptNum(course)
+			window.deptNumToCrsid[course.deptnum] = course.crsid
 			return course
 		})
 

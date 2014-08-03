@@ -1,44 +1,41 @@
+'use strict';
+
 var _ = require('lodash')
 var React = require('react')
 
 var Course = require('./course')
 var Semester = require('./semester')
 
+var ScheduleActions = require('../actions/ScheduleActions')
+
 var findFirstAvailableSemester = require('../helpers/findFirstAvailableSemester')
 var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
 
 var isCurrentYearSchedule = _.curry(function(year, schedule) {
-	return (schedule.year.val() === year)
+	return (schedule.year === year)
 })
 
 var Year = React.createClass({
 	canAddSemester: function() {
-		return !(findFirstAvailableSemester(this.props.schedules.val(), this.props.year) > 5)
+		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
 	},
 	addSemester: function() {
-		var schedules = this.props.schedules.val()
-		var nextAvailableSemester = findFirstAvailableSemester(schedules, this.props.year)
-		var nextId = calculateNextScheduleId(schedules)
+		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
 
-		this.props.schedules.push({
-			id: nextId, year: this.props.year, semester: nextAvailableSemester,
-			title: 'Schedule 1', sequence: 1,
-			clbids: [], active: true,
+		ScheduleActions.create(this.props.studentId, {
+			year: this.props.year, semester: nextAvailableSemester,
+			sequence: 1, active: true,
 		})
 	},
 	removeYear: function() {
-		console.log('called removeYear')
-		var indices = this.props.schedules.findIndices(isCurrentYearSchedule(this.props.year))
-		console.log('indices to delete', indices)
-		this.props.schedules.removeSeveral(indices)
-		// this.props.schedules.forEach(function(schedule, index) {
-		// 	if (isCurrentYearSchedule(this.props.year, schedule)) {
-		// 		this.props.schedules.removeAt(index)
-		// 	}
-		// })
+		var currentYearSchedules = _.filter(this.props.schedules, isCurrentYearSchedule(this.props.year))
+		console.log('called removeYear', currentYearSchedules)
+		var scheduleIds = _.pluck(currentYearSchedules, 'id')
+		console.log('removing', scheduleIds, 'from', this.props.studentId)
+		ScheduleActions.destroyMultiple(this.props.studentId, scheduleIds)
 	},
 	render: function() {
-		var schedules = _.filter(this.props.schedules.val(), {year: this.props.year})
+		var schedules = _.filter(this.props.schedules, {year: this.props.year})
 
 		var terms = _.map(_.groupBy(schedules, 'semester'), function(schedule, semester) {
 			semester = parseInt(semester, 10)
@@ -47,7 +44,8 @@ var Year = React.createClass({
 				ref: semester,
 				semester: parseInt(semester, 10),
 				year: this.props.year,
-				schedules: this.props.schedules
+				schedules: this.props.schedules,
+				studentId: this.props.studentId,
 			})
 		}, this)
 

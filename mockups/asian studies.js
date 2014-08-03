@@ -7,7 +7,7 @@ var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
 var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
 var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
 
-var utilities = require('./demo_common_major_utilities')
+var utilities = require('./common major utilities')
 
 var asianDeptRequiredCourses = [
 	{deptnum: 'ASIAN 275'},
@@ -15,12 +15,13 @@ var asianDeptRequiredCourses = [
 	{deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
 ]
 
-var isRequiredAsianStudiesCourse = _.curry(utilities.isRequiredCourse)(asianDeptRequiredCourses)
+var isRequiredAsianStudiesCourse = _.curry(utilities.isRequiredCourse(asianDeptRequiredCourses))
 
 function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
 	return Promise.props({
 		title: 'Interdisciplinary Approaches to Asia',
+		type: 'boolean',
 		description: 'Asian Studies 275: Interdisciplinary Approaches to Asia',
 		result: checkCoursesForDeptNum(courses, 'ASIAN 275')
 	})
@@ -47,26 +48,27 @@ function electives(courses) {
 	// 3. No more than four elective courses about any one country;
 	// 4. No level I or level II language courses may count.
 
-	var asianStudiesCourses = _.chain(courses)
+	var asianStudiesElectives = _.chain(courses)
 		.filter(hasDepartment('ASIAN'))
 		.reject(lowerLevelLanguageCourses)
 		.reject(isRequiredAsianStudiesCourse)
 		.value()
 
-	var levelsTwoOrThree = _.chain(asianStudiesCourses)
+	var levelsTwoOrThree = _.chain(asianStudiesElectives)
 		.filter(coursesAtOrAboveLevel(200)).size().value() >= 2
 
-	var onlyTwoAtLevelOne = _.chain(asianStudiesCourses)
+	var onlyTwoAtLevelOne = _.chain(asianStudiesElectives)
 		.filter(coursesAtLevel(100)).size().value() <= 2
 
 	var notTooSpecialized = _.any([
-		_.chain(asianStudiesCourses).filter(partialNameOrTitle('China')).size().value() <= 4,
-		_.chain(asianStudiesCourses).filter(partialNameOrTitle('Japan')).size().value() <= 4,
+		_.chain(asianStudiesElectives).filter(partialNameOrTitle('China')).size().value() <= 4,
+		_.chain(asianStudiesElectives).filter(partialNameOrTitle('Japan')).size().value() <= 4,
 	])
 
-	var matchingElectives = _.union(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
+	var electivesAreGood = _.all(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
+	// console.log('asianStudiesElectives', asianStudiesElectives)
 
-	var matching = _.size(matchingElectives)
+	var matching = _.size(asianStudiesElectives)
 	var needs = 6
 
 	// Req. #4 was embedded at the beginning, when we reject any lower-level
@@ -78,12 +80,13 @@ function electives(courses) {
 	]).then(function(details) {
 		return {
 			title: 'Electives',
+			type: 'object/number',
 			description: 'Six electives, with stipulations: 1. At least two at level II or level III, taken on campus; 2. No more than two at level I; 3. No more than four elective courses about any one country; 4. No level I or level II language courses may count.',
-			result: matching >= needs,
+			result: (matching >= needs) && electivesAreGood,
 			details: {
 				has: matching,
 				needs: needs,
-				matches: matchingElectives
+				matches: asianStudiesElectives
 			}
 		}
 	})
@@ -105,6 +108,7 @@ function seniorSeminar(courses) {
 
 		return {
 			title: 'Senior Seminar',
+			type: 'boolean',
 			description: 'Senior Seminar: One of Asian Studies 397: Human Rights/Asian Context, or Asian Studies 399: Asian Studies Seminar',
 			result: seminarCount >= seminarsNeeded
 		}
@@ -132,20 +136,22 @@ function language(courses) {
 		.value()
 
 	var fulfilledLanguages = _.filter([japaneseLanguage, chineseLanguage], function(courses) {
-		return _.size(courses) > 2
+		return _.size(courses) >= 2
 	})
+	var fulfilledLanguageCourses = _.flatten(fulfilledLanguages)
 
 	var numberFulfilled = _.size(fulfilledLanguages)
 	var numberNeeded = 1
 
 	return Promise.resolve({
 		title: 'Language',
+		type: 'object/number',
 		description: 'Two courses in Chinese or Japanese above 112 or its equivalent',
 		result: numberFulfilled >= numberNeeded,
 		details: {
 			has: numberFulfilled,
 			needs: numberNeeded,
-			matches: fulfilledLanguages,
+			matches: fulfilledLanguageCourses,
 		}
 	})
 }

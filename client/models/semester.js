@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash')
 var React = require('react')
 var humanize = require('humanize-plus')
@@ -8,13 +10,15 @@ var Course = require('./course')
 var getCourses = require('../helpers/getCourses').getCourses
 var checkScheduleTimeConflicts = require('../helpers/time').checkScheduleTimeConflicts
 
+var ScheduleActions = require('../actions/ScheduleActions')
+
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
-	return (schedule.year.val() === year && schedule.semester.val() === semester)
+	return (schedule.year === year && schedule.semester === semester)
 })
 
 var Semester = React.createClass({
 	putActiveCoursesIntoState: function() {
-		var active = this.findActiveSchedules().val()
+		var active = this.findActiveSchedules()
 		var clbids = _.uniq(active.clbids)
 
 		var self = this
@@ -47,25 +51,20 @@ var Semester = React.createClass({
 		return 'Unknown (' + this.props.semester + ')';
 	},
 	findActiveSchedules: function() {
-		var possible = this.props.schedules.filter(isCurrentTermSchedule(this.props.year, this.props.semester))
+		var possible = _.filter(this.props.schedules, isCurrentTermSchedule(this.props.year, this.props.semester))
 		var activeSchedules = _.find(possible, function(schedule) {
 			if (schedule.active) {
-				return schedule.active.val() === true
+				return schedule.active === true
 			}
 		})
 		return activeSchedules
 	},
 	removeSemester: function() {
-		console.log('called removeSemester')
-		var indices = this.props.schedules.findIndices(isCurrentTermSchedule(this.props.year, this.props.semester))
-		console.log('indices to delete', indices)
-		this.props.schedules.removeSeveral(indices)
-		// var year = this.props.year, semester = this.props.semester
-		// this.props.schedules.forEach(function(schedule, index, schedules) {
-		// 	if (isCurrentTermSchedule(year, semester, schedule)) {
-		// 		schedules.removeAt(index)
-		// 	}
-		// })
+		var currentTermSchedules = _.filter(this.props.schedules, isCurrentTermSchedule(this.props.year, this.props.semester))
+		console.log('called removeSemester', currentTermSchedules)
+		var scheduleIds = _.pluck(currentTermSchedules, 'id')
+		console.log('removing', scheduleIds, 'from', this.props.studentId)
+		ScheduleActions.destroyMultiple(this.props.studentId, scheduleIds)
 	},
 	validateSchedule: function() {
 		// Checks to see if the schedule is valid

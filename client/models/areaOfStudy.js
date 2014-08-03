@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash');
 var React = require('react');
 
@@ -6,63 +8,38 @@ var RequirementSet = require('./requirementSet');
 var getRandomInt = require('../helpers/getRandomInt')
 
 var areas = {
-	major: {
-		'Computer Science': require('../../mockups/demo_csci_major'),
-		'Asian Studies': require('../../mockups/demo_asian_major')
-	},
-	degree: {
-		'Bachelor of Arts': require('../../mockups/demo_ba'),
-		'Bachelor of Music': require('../../mockups/demo_bm')
-	},
-	concentration: {
-		'Computer Science': require('../../mockups/demo_csci_major'),
-		'Asian Studies': require('../../mockups/demo_asian_major')
-	}
+	// Degrees
+	'd-ba': require('../../mockups/bachelor of arts'),
+	'd-bm': require('../../mockups/bachelor of music'),
+	// Majors
+	'm-csci': require('../../mockups/computer science'),
+	'm-asian': require('../../mockups/asian studies'),
+	// Concentrations
+	// Emphases
 }
 
-function findType(result, details) {
-	if (_.isArray(details)) {
-		return 'array'
-	}
-	else if (_.isUndefined(details) && _.isBoolean(result)) {
-		return 'boolean'
-	}
-	else if (_.isPlainObject(details)) {
-		if (_.every(details, _.isBoolean)) {
-			return 'object/boolean'
-		}
-		else if (_.some(details, _.isNumber)) {
-			return 'object/number'
-		}
-	}
-	else {
-		return null
-	}
+function getArea(id) {
+	return areas[id]
 }
 
 var AreaOfStudy = React.createClass({
 	load: function() {
-		var type = this.props.type
-		var title = this.props.title
-
-		var area = areas[type][title]
+		var area = getArea(this.props.id)
 
 		if (typeof area === 'function') {
-			area(this.props).bind(this)
-				.then(function(results) {
-					console.log('calculated ' + this.props.abbr + ' graduation possibility', results)
-					this.setState({
-						result: results
-					})
+			area(this.props).bind(this).then(function(results) {
+				console.log('calculated ' + this.props.abbr + ' graduation possibility', results)
+				this.setState({
+					result: results
 				})
+			})
 		} else {
 			this.setState({
 				result: {
 					result: false,
 					details: [{
 						title: this.props.type + ' not found!',
-						description: 'This ' + this.props.type + ' could not be found.',
-						result: false
+						description: 'This ' + this.props.type + ' could not be found.'
 					}]
 				}
 			})
@@ -86,14 +63,7 @@ var AreaOfStudy = React.createClass({
 		// console.log('area-of-study render')
 
 		var requirementSets = _.map(this.state.result.details, function(reqset) {
-			return RequirementSet({
-				key: reqset.title,
-				title: reqset.title,
-				description: reqset.description,
-				type: findType(reqset.result, reqset.details),
-				result: reqset.result,
-				details: reqset.details || null
-			});
+			return RequirementSet(_.merge({key: reqset.title}, reqset));
 		}, this);
 
 		var results = _.chain(this.state.result.details)
@@ -103,6 +73,10 @@ var AreaOfStudy = React.createClass({
 			.value()
 
 		// TODO: Use the number of requirements, instead of the number of sections.
+		// go through everything.
+		// grab the value, if the key is not 'result'.
+		// if the key is result, and details is undefined, grab it.
+		// Theoretically, of course.
 
 		var currentProgress = _.size(_.compact(results))
 		var maxProgress = _.size(results)

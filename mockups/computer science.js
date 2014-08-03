@@ -7,11 +7,11 @@ var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
 var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
 var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
 
-var utilities = require('./demo_common_major_utilities')
+var utilities = require('./common major utilities')
 
 var csDeptRequiredCourses = [
 	{deptnum: 'CSCI 121'}, {deptnum: 'CSCI 125'}, {deptnum: 'CSCI 241'}, {deptnum: 'CSCI 251'},
-	{deptnum: 'CSCI 251'}, {deptnum: 'CSCI 231'}, {deptnum: 'CSCI 253'}, {deptnum: 'CSCI 263'},
+	{deptnum: 'CSCI 252'}, {deptnum: 'CSCI 231'}, {deptnum: 'CSCI 253'}, {deptnum: 'CSCI 263'},
 	{deptnum: 'CSCI 276'}, {deptnum: 'CSCI 333'}, {deptnum: 'CSCI 273'}, {deptnum: 'CSCI 284'},
 	{deptnum: 'CSCI 390'},
 
@@ -20,7 +20,7 @@ var csDeptRequiredCourses = [
 	{deptnum: 'MATH 232'}, {deptnum: 'MATH 252'},
 ]
 
-var isRequiredCompSciCourse = _.curry(utilities.isRequiredCourse)(csDeptRequiredCourses)
+var isRequiredCompSciCourse = _.curry(utilities.isRequiredCourse(csDeptRequiredCourses))
 
 function foundationCourses(courses) {
 	/* Foundation courses:
@@ -46,15 +46,25 @@ function foundationCourses(courses) {
 		checkCoursesForDeptNum(courses, 'MATH 252'),
 	])
 
-	return Promise.props({
-		'CS1': cs1,
-		'Design': design.then(_.all),
-		'MFC': mfc
-	}).then(function(requirements) {
+	return Promise.all([
+		Promise.props({
+			title: 'CS1',
+			result: cs1,
+		}),
+		Promise.props({
+			title: 'Design',
+			result: design.then(_.all),
+		}),
+		Promise.props({
+			title: 'MFC',
+			result: mfc,
+		}),
+	]).then(function(requirements) {
 		return {
 			title: 'Foundation',
 			description: 'one of Computer Science 121 or 125; Computer Science 241, 251, and 252; one of Computer Science 231 or Math 232 or Math 252.',
 			result: _.all(requirements),
+			type: 'array/boolean',
 			details: requirements,
 		}
 	})
@@ -89,14 +99,27 @@ function coreCourses(courses) {
 		Promise.resolve(parallelDistributedComputing)
 	])
 
-	return Promise.props({
-		'Algorithms': algorithms,
-		'Ethics': ethics,
-		'Theory': theory,
-		'Options': options
-	}).then(function(requirements) {
+	return Promise.all([
+		Promise.props({
+			title: 'Algorithms',
+			result: algorithms,
+		}),
+		Promise.props({
+			title: 'Ethics',
+			result: ethics,
+		}),
+		Promise.props({
+			title: 'Theory',
+			result: theory,
+		}),
+		Promise.props({
+			title: 'Options',
+			result: options
+		}),
+	]).then(function(requirements) {
 		return {
 			title: 'Core',
+			type: 'array/boolean',
 			description: 'Computer Science 253; Computer Science 263; either Computer Science 276 or 333; and either Computer Science 273, 284, or 300 with parallel and distributed computing.',
 			result: _.all(requirements),
 			details: requirements,
@@ -117,6 +140,7 @@ function electiveCourses(courses) {
 
 	return Promise.resolve({
 		title: 'Electives',
+		type: 'object/number',
 		description: 'Two approved electives.',
 		result: numberTaken >= numberNeeded,
 		details: {
@@ -133,6 +157,7 @@ function capstoneCourse(courses) {
 	return hasTakenCapstone.then(function(result) {
 		return {
 			title: 'Capstone',
+			type: 'boolean',
 			description: 'Capstone',
 			result: result
 		}

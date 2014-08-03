@@ -3,6 +3,7 @@
 
 	h1 {
 		padding: $block-edge-padding;
+		padding-left: $block-edge-padding * 1.5;
 		font-size: inherit;
 		font-weight: 400;
 		margin: 0;
@@ -15,6 +16,7 @@
 	summary {
 		position: relative;
 		cursor: pointer;
+		display: block;
 	}
 
 	@include progress-bar(
@@ -22,8 +24,8 @@
 		$color: $olaf-gold,
 		$gradient: linear-gradient(
 			to bottom,
-			$olaf-gradient-start,
-			$olaf-gradient-end
+			lighten($olaf-gradient-start, 10%),
+			lighten($olaf-gradient-end, 10%)
 	)) {
 		display: block;
 		position: absolute;

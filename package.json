@@ -42,7 +42,9 @@
   "dependencies": {
     "bluebird": "^2.2.1",
     "cortexjs": "git://github.com/hawkrives/cortex#master",
+    "crypto-browserify": "^3.0.1",
     "db.js": "git://github.com/aaronpowell/db.js#master",
+    "fluxy": "^0.4.1",
     "fulltext-engine": "^1.1.1",
     "humanize-plus": "^1.4.2",
     "jsonquery-engine": "^1.0.1",
@@ -51,6 +53,8 @@
     "level-queryengine": "^3.0.1",
     "localforage": "git://github.com/hawkrives/localForage#master",
     "lodash": "^2.4.1",
+    "mori": "^0.2.9",
+    "node-uuid": "git://github.com/broofa/node-uuid#master",
     "react": "^0.11.0"
   }
 }

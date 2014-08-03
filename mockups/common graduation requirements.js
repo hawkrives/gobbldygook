@@ -1,13 +1,9 @@
 var _ = require('lodash')
-var Promise = require('bluebird')
 
-var add = require('../client/helpers/add')
-
+var hasDeptNumBetween = require('../client/helpers/deptNum').hasDeptNumBetween
 var countCredits = require('../client/helpers/countCredits')
-var hasDepartment = require('../client/helpers/hasDepartment')
-
-var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
-var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
+var onlyCoursesAtOrAboveLevel = require('../client/helpers/courseLevels').onlyCoursesAtOrAboveLevel
+var utilities = require('./common graduation utilities')
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a
@@ -17,31 +13,40 @@ function courses(coursesTaken, creditsNeeded) {
 	// course credit, as distinguished from fractional course credits, unless
 	// otherwise noted.
 
-	var creditsTaken = countCredits(coursesTaken, 'credits')
+	// "An intercollegiate SPM (.25) credit cannot be used as an elective for
+	// the purpose of earning a credit toward the 35 full-credit course
+	// requirement for graduation." (from the SPM requirement)
+
+	// The intercollegiate SPM credits are determined by courses Exercise
+	// Science 171-194. (from the SPM requirement)
+
+	var noIntercollegiateSports = _.reject(
+		coursesTaken,
+		hasDeptNumBetween({dept: 'ESTH', start: 171, end: 194})
+	)
+
+	var creditsTaken = countCredits(noIntercollegiateSports, 'credits')
 
 	return {
 		title: 'Courses',
+		type: 'boolean',
 		result: creditsTaken >= creditsNeeded
 	}
 }
-
-module.exports.courses = courses
 
 function ensureLimitedOffCampusCoursesDuringFinalYear(courses, fabrications) {
 	// Used by the residency checker to ensure that only the allowed amount of
 	// off-campus courses are taken during the final year
 
-	var finalYear = _.max(student.fabrications, 'year')
-	var finalYearFabrications = _.filter(student.fabrications, {year: finalYear})
-	var finalYearCourses = _.filter(student.courses, {year: finalYear})
+	var finalYear = _.max(fabrications, 'year')
+	var finalYearFabrications = _.filter(fabrications, {year: finalYear})
+	var finalYearCourses = _.filter(courses, {year: finalYear})
 
 	return (
 		_.isEmpty(finalYearFabrications) ||
 		countCredits(finalYearFabrications) <= 3
 	)
 }
-
-module.exports.ensureLimitedOffCampusCoursesDuringFinalYear = ensureLimitedOffCampusCoursesDuringFinalYear
 
 function residency(courses, fabrications) {
 	// Seventeen of the 35 St. Olaf credits required for graduation must be
@@ -68,31 +73,12 @@ function residency(courses, fabrications) {
 
 	return {
 		title: 'Residency',
+		type: 'boolean',
 		result: residency
 	}
 }
 
-module.exports.residency = residency
-
-function onlyFullCreditCourses(course) {
-	return course.credits >= 1.0
-}
-
-module.exports.onlyFullCreditCourses = onlyFullCreditCourses
-
-function onlyFullCreditInterimCourses(course) {
-	return (course.semester === 2 && onlyFullCreditCourses(course))
-}
-
-function onlySummerSessionCourses(course) {
-	return course.semester === 4 || course.semester === 5
-}
-
-function onlyFullCreditSummerSessionCourses(course) {
-	return (onlySummerSessionCourses(course) && onlyFullCreditCourses(course))
-}
-
-function interim(courses) {
+function interim(courses, fabrications) {
 	// At least three of the required 35 St. Olaf credits must be earned in
 	// three separate January full-credit (1.0) Interims. An Interim may be
 	// taken on campus, through a St. Olaf off-campus Interim program, or
@@ -103,17 +89,17 @@ function interim(courses) {
 	// requirement by means of a summer course taken during a St. Olaf summer
 	// session after the commencement in which the student participates.
 
-	var interimCourses = _.filter(courses, onlyFullCreditInterimCourses)
+	var interimCourses = _.filter(courses, utilities.onlyFullCreditInterimCourses)
 	var interimCourseCount = _.size(interimCourses)
 
 	// "After having successfully completed two Interims, senior participators
 	// may satisfy the third Interim requirement by means of a summer course
 	// taken during a St. Olaf summer session after the commencement in which
 	// the student participates."
-	var years = _.uniq(_.pluck(student.fabrications, 'year'))
+	var years = _.uniq(_.pluck(fabrications, 'year'))
 	var finalYear = _.max(years)
 
-	var summerSessionCourses = _.filter(courses, onlyFullCreditSummerSessionCourses)
+	var summerSessionCourses = _.filter(courses, utilities.onlyFullCreditSummerSessionCourses)
 	var finalSummerSessionCourses = _.filter(summerSessionCourses, {year: finalYear})
 	var finalSummerSessionCourseCount = _.size(finalSummerSessionCourses)
 
@@ -124,11 +110,10 @@ function interim(courses) {
 
 	return {
 		title: 'Interim',
+		type: 'boolean',
 		result: interimRequirement
 	}
 }
-
-module.exports.interim = interim
 
 function gpa(courses) {
 	// An average grade of C (2.00 on a 4.00 system) for all courses taken for
@@ -139,14 +124,9 @@ function gpa(courses) {
 
 	return {
 		title: 'GPA',
+		type: 'boolean',
 		result: true
 	}
-}
-
-module.exports.gpa = gpa
-
-function onlyTwoHundredLevelCourses(courses) {
-	return _.filter(courses, coursesAtOrAboveLevel(200))
 }
 
 function courseLevel(courses) {
@@ -155,11 +135,10 @@ function courseLevel(courses) {
 
 	return {
 		title: 'Course Level',
-		result: _.size(onlyTwoHundredLevelCourses(courses)) >= 18
+		type: 'boolean',
+		result: _.size(onlyCoursesAtOrAboveLevel(200, courses)) >= 18
 	}
 }
-
-module.exports.courseLevel = courseLevel
 
 function gradedCourses(courses, fabrications) {
 	// A minimum of 24 credits out of 35 must be taken graded through courses
@@ -201,25 +180,20 @@ function gradedCourses(courses, fabrications) {
 
 	return {
 		title: 'Graded Courses',
+		type: 'boolean',
 		result: _.size(courses) - _.size(fabrications) >= 24
 	}
 }
 
-module.exports.gradedCourses = gradedCourses
-
-var atLeastEightCredits = _.curry(function(major, courses) {
-	var withinMajorCourses = _.filter(courses, hasDepartment(major.abbr))
-	var fullCreditBeyondMajorCourses = _.filter(withinMajorCourses, onlyFullCreditCourses)
-	return countCredits(fullCreditBeyondMajorCourses) >= 8
-})
-
-module.exports.atLeastEightCredits = atLeastEightCredits
-
-function finalTwoYearsInResidence(fabrications) {
+function finalTwoYearsInResidence(courses, fabrications) {
 	// "The final two years of coursework in pursuit of the degrees must be
 	// spent in residence."
 
-	var years = _.uniq(_.pluck(fabrications, 'year'))
+	// I'm solving this by assuming that off-campus courses will be manually
+	// entered, so they'll be in fabrications. Therefore, if there aren't any
+	// fabrications in the last two years, it passes.
+
+	var years = _.uniq(_.pluck(courses, 'year'))
 
 	if (_.size(years) >= 2) {
 		var sortedYears = _.sortBy(years).reverse()
@@ -249,7 +223,7 @@ function seventeenOlafCourses(courses) {
 		return false
 	}
 
-	var fullCreditCourses = _.filter(courses, onlyFullCreditCourses)
+	var fullCreditCourses = _.filter(courses, utilities.onlyFullCreditCourses)
 
 	// Put the most recent courses at the front
 	var sortedFullCreditCourses = _.sortBy(fullCreditCourses, 'term').reverse()
@@ -268,25 +242,6 @@ function seventeenOlafCourses(courses) {
 
 	return true
 }
-
-function checkStudentDegreesFor(studies, desiredDegreeAbbreviation) {
-	var degrees = _.filter(studies, {type: 'degree'})
-	return _.size(_.find(degrees, {abbr: desiredDegreeAbbreviation})) >= 1 ? true : false
-}
-
-function isBachelorOfMusic(studies) {
-	return checkStudentDegreesFor(studies, 'B.M.')
-}
-
-function isBachelorOfArts(studies) {
-	return checkStudentDegreesFor(studies, 'B.A.')
-}
-
-function isBachelorOfBoth(studies) {
-	return _.all([isBachelorOfMusic(studies), isBachelorOfArts(studies)])
-}
-
-module.exports.isBachelorOfBoth = isBachelorOfBoth
 
 function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 	// 	Students must meet the application requirements for both the Bachelor
@@ -314,32 +269,44 @@ function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 	// graduation major within that degree before the diploma for that degree will
 	// be awarded.
 
-	var title = 'Arts and Music'
+	var baseResult = {
+		title: 'Arts and Music',
+		type: 'boolean',
+		prose: '',
+	}
 
 	var degrees = _.filter(studies, {type: 'degree'})
 	if (_.size(degrees) === 1) {
 		// there's only one degree, so we don't care.
-		return {title: title, result: true}
+		return _.merge(baseResult, {result: true})
 	}
 
 	var majors = _.filter(studies, {type: 'major'})
-	if (isBachelorOfBoth(studies) && _.find(majors, {abbr: 'MUSIC'})) {
-		// there's a double-ba-bm trying to major in Music -- no.
-		return {title: title, result: false}
+	if (utilities.isBachelorOfBoth(studies) && utilities.isMajoringIn('Music', studies)) {
+		// there's a double-ba/bm trying to major in Music -- no.
+		return _.merge(baseResult, {result: false})
 	}
 
 	// "The final two years of coursework in pursuit of the degrees must be
 	// spent in residence."
-	if (!finalTwoYearsInResidence(fabrications)) {
-		return {title: title, result: false}
+	if (!finalTwoYearsInResidence(courses, fabrications)) {
+		return _.merge(baseResult, {result: false})
 	}
 
 	// "17 of the last 20 full-course credits must be earned through St. Olaf."
 	if (!seventeenOlafCourses(courses)) {
-		return {title: title, result: false}
+		return _.merge(baseResult, {result: false})
 	}
 
-	return {title: title, result: true}
+	return _.merge(baseResult, {result: true})
 }
 
+// Requirements
+module.exports.courses = courses
+module.exports.ensureLimitedOffCampusCoursesDuringFinalYear = ensureLimitedOffCampusCoursesDuringFinalYear
+module.exports.residency = residency
+module.exports.interim = interim
+module.exports.gpa = gpa
+module.exports.courseLevel = courseLevel
+module.exports.gradedCourses = gradedCourses
 module.exports.artsAndMusicDoubleMajor = artsAndMusicDoubleMajor
