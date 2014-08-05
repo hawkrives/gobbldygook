@@ -110,7 +110,7 @@ function updateDatabase(itemType, infoFromServer) {
 				data: data,
 				meta: infoFromServer,
 				type: itemType,
-				count: _.size(data['courses']) || 1,
+				count: _.size(data[lookup[itemType]]) || 1,
 			}
 		})
 		.then(cleanPriorData)
