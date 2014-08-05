@@ -1,3 +1,5 @@
+'use strict';
+
 var readJson = require('./readJson')
 var Promise = require('bluebird')
 var _ = require('lodash')

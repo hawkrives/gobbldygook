@@ -1,3 +1,5 @@
+'use strict';
+
 var read = require('./read')
 
 function readJson(url) {

@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash')
 
 var hasDepartment = _.curry(function(dept, course) {

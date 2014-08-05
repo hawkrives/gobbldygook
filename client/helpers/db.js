@@ -1,3 +1,5 @@
+'use strict';
+
 var Promise = require('bluebird')
 var db = require('../../../db.js/src/db.js')
 

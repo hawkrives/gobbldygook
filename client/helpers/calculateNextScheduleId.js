@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash')
 
 // Takes a list of schedules and finds the next id number.

@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash')
 
 var coursesAtOrAboveLevel = _.curry(function(level, course) {
