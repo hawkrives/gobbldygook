@@ -5,7 +5,6 @@ var React = require('react');
 var mori = require('mori')
 
 var add = require('../helpers/add')
-var countCredits = require('../helpers/countCredits')
 var humanize = require('humanize-plus')
 
 var StudentSummary = React.createClass({
