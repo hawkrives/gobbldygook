@@ -58,7 +58,6 @@ function storeItem(item) {
 function cleanPriorData(item) {
 	return new Promise(function (resolve, reject) {
 		var path = item.meta.path
-		var hash = item.meta.hash
 		console.info('deleting ' + item.type + ' from ' + path)
 
 		var deleteItemsPromise = window.db.query(item.type, 'sourcePath')
