@@ -1,5 +1,4 @@
 .course-table {
-	-webkit-flex: 1;
 	flex: 1;
 }
 
@@ -29,8 +28,6 @@
 .course-table .year {
 	margin-bottom: $page-edge-padding;
 
-	display: -webkit-flex;
-	-webkit-flex-flow: row nowrap;
 	display: flex;
 	flex-flow: row nowrap;
 
@@ -39,10 +36,7 @@
 }
 
 .course-table .semester-list {
-	-webkit-flex: 1;
 	flex: 1;
-	display: -webkit-flex;
-	-webkit-flex-flow: row wrap;
 	display: flex;
 	flex-flow: row wrap;
 }
@@ -63,7 +57,6 @@
 	padding: 0.5em 0.75em;
 
 	h1 {
-		-webkit-transform: rotate(90deg);
 		transform: rotate(90deg);
 		white-space: nowrap;
 	}
