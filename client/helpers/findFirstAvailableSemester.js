@@ -21,7 +21,7 @@ function findFirstAvailableSemester(schedules, forYear) {
 	semesters.unshift(0)
 
 	var missingNo = findMissingNumberBinarySearch(semesters)
-	if (missingNo != -1) {
+	if (missingNo !== -1) {
 		return missingNo
 	}
 

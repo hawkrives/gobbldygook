@@ -9,17 +9,17 @@ function findMissingNumberBinarySearch(arr) {
 	var middle = Math.floor((first + last) / 2)
 
 	while ( first < last ) {
-		if ( (arr[middle] - arr[first]) != (middle - first) ) {
+		if ( (arr[middle] - arr[first]) !== (middle - first) ) {
 			// there is a hole in the first half
-			if ( (middle - first) == 1 && (arr[middle] - arr[first] > 1) ) {
+			if ( (middle - first) === 1 && (arr[middle] - arr[first] > 1) ) {
 				return ( arr[middle] - 1 )
 			}
 			last = middle
 		}
 
-		else if ( (arr[last] - arr[middle]) != (last - middle) ) {
+		else if ( (arr[last] - arr[middle]) !== (last - middle) ) {
 			// there is a hole in the second half
-			if ( (last - middle) == 1 && (arr[last] - arr[middle] > 1) ) {
+			if ( (last - middle) === 1 && (arr[last] - arr[middle] > 1) ) {
 				return ( arr[middle] + 1 )
 			}
 			first = middle
