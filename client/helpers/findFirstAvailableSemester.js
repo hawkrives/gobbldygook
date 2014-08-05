@@ -10,7 +10,7 @@ var findMissingNumberBinarySearch = require('./findMissingNumberBinarySearch')
 
 function findFirstAvailableSemester(schedules, forYear) {
 	var semesters =
-		_(schedules)
+		_.chain(schedules)
 			.filter({year: forYear})
 			.sortBy('semester')
 			.pluck('semester')

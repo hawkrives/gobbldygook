@@ -6,7 +6,7 @@ var _ = require('lodash')
 
 function calculateNextScheduleId(schedules) {
 	var ids =
-		_(schedules)
+		_.chain(schedules)
 			.sortBy('id')
 			.pluck('id')
 			.value()
