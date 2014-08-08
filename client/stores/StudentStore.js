@@ -21,7 +21,7 @@ var StudentStore = Fluxxor.createStore({
 		this.active = {}
 
 		if (options.students) {
-			_.each(options.students, this.handleStudentCreate)
+			_.each(options.students, this.handleStudentCreation)
 		}
 
 		this.bindActions(
@@ -29,16 +29,16 @@ var StudentStore = Fluxxor.createStore({
 			StudentConstants.STUDENT_ENCODE,        this.handleStudentEncode,
 			StudentConstants.STUDENT_DECODE,        this.handleStudentDecode,
 			StudentConstants.STUDENT_UPDATE,        this.handleStudentUpdate,
-			StudentConstants.STUDENT_CREATE,        this.handleStudentCreate,
+			StudentConstants.STUDENT_CREATE,        this.handleStudentCreation,
 			StudentConstants.STUDENT_DESTROY,       this.handleStudentDestroy,
 			StudentConstants.STUDENT_UNDO,          this.handleStudentUndo,
 			StudentConstants.STUDENT_TOGGLE_ACTIVE, this.handleStudentToggleActive,
 			StudentConstants.STUDENT_SAVE,          this.handleStudentSave,
 
 			// Schedule Constants
-			ScheduleConstants.SCHEDULE_CREATE,           this.handleScheduleCreate,
-			ScheduleConstants.SCHEDULE_DESTROY,          this.handleScheduleDestroy,
-			ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, this.handleScheduleDestroyMultiple,
+			ScheduleConstants.SCHEDULE_CREATE,           this.handleScheduleCreation,
+			ScheduleConstants.SCHEDULE_DESTROY,          this.handleScheduleDestruction,
+			ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, this.handleMultipleScheduleDestruction,
 			ScheduleConstants.SCHEDULE_RENAME,           this.handleScheduleRename,
 			ScheduleConstants.SCHEDULE_MOVE,             this.handleScheduleMove,
 			ScheduleConstants.SCHEDULE_REORDER,          this.handleScheduleReorder,
@@ -79,7 +79,7 @@ var StudentStore = Fluxxor.createStore({
 
 	handleStudentUpdate: function(student) {},
 
-	handleStudentCreate: function(student) {
+	handleStudentCreation: function(student) {
 		console.log('StudentStore.createStudent')
 		var genericStudent = {
 			id: uuid.v4(),
@@ -93,12 +93,20 @@ var StudentStore = Fluxxor.createStore({
 			fabrications: {},
 		}
 
+		var joinedStudent = _.merge(genericStudent, student)
+
 		if (this.students.length > 0) {
-			student.active = false
+			joinedStudent.active = false
 		}
 
-		var joinedStudent = _.merge(genericStudent, student)
-		this.students = this.students.set(joinedStudent.id, joinedStudent)
+		joinedStudent.studies = Immutable.OrderedMap(joinedStudent.studies)
+		joinedStudent.schedules = Immutable.OrderedMap(joinedStudent.schedules)
+		joinedStudent.overrides = Immutable.Map(joinedStudent.overrides)
+		joinedStudent.fabrications = Immutable.Map(joinedStudent.fabrications)
+
+		var immutableStudent = Immutable.fromJS(joinedStudent)
+
+		this.students = this.students.set(joinedStudent.id, immutableStudent)
 
 		this.findActiveStudent()
 
@@ -112,7 +120,7 @@ var StudentStore = Fluxxor.createStore({
 		if (this.students.length > 0) {
 			this.findActiveStudent()
 		} else {
-			this.handleStudentCreate()
+			this.handleStudentCreation()
 		}
 
 		this.emit('change')
@@ -137,12 +145,17 @@ var StudentStore = Fluxxor.createStore({
 	handleStudentSave: function() {},
 
 	// Schedule Actions
-	handleScheduleCreate: function(studentId, schedule) {
+	handleScheduleCreation: function(args) {
 		console.log('StudentStore.createSchedule')
+
+		// args: {studentId, schedule}
+		var studentId = args.studentId
+		var schedule = args.schedule
+
 		var genericSchedule = {
 			id: uuid.v4(),
-			year: schedule.year,
-			semester: schedule.semester,
+			year: 0,
+			semester: 0,
 			title: 'Schedule ' + randomChar(),
 			index: 1,
 			clbids: [],
@@ -151,12 +164,22 @@ var StudentStore = Fluxxor.createStore({
 		schedule.active = _.size(this.students.get(studentId).schedules) > 0 ? false : true
 
 		var joinedSchedule = _.merge(genericSchedule, schedule)
-		this.students = this.students.updateIn([studentId, 'schedules', schedule.id], joinedSchedule)
+		var immutableSchedule = Immutable.fromJS(joinedSchedule)
+		this.students = this.students.updateIn([studentId, 'schedules'], function(schedules) {
+			return schedules.set(joinedSchedule.id, immutableSchedule)
+		})
+
+		console.log(this.students.getIn([studentId, 'schedules', joinedSchedule.id]))
 		this.emit('change')
 	},
 
-	handleScheduleDestroy: function(studentId, schedule, emitChange) {
+	handleScheduleDestruction: function(args, emitChange) {
 		console.log('StudentStore.destroySchedule')
+
+		// args: {studentId, schedule}
+		var studentId = args.studentId
+		var scheduleToDelete = args.schedule
+
 		this.students = this.students.updateIn([studentId, 'schedules'], function(schedules) {
 			return schedules.delete(scheduleToDelete.id)
 		})
@@ -165,10 +188,18 @@ var StudentStore = Fluxxor.createStore({
 		}
 	},
 
-	handleScheduleDestroyMultiple: function(studentId, scheduleIds) {
+	handleMultipleScheduleDestruction: function(args) {
 		console.log('StudentStore.destroyMultipleSchedules')
+
+		// args: {studentId, schedule}
+		var studentId = args.studentId
+		var scheduleIds = args.scheduleIds
+
 		_.each(scheduleIds, function(scheduleId) {
-			this.handleScheduleDestroy(studentId, scheduleId, false)
+			this.handleScheduleDestruction(
+				{studentId: studentId, scheduleId: scheduleId},
+				false
+			)
 		})
 		this.emit('change')
 	},
@@ -209,12 +240,12 @@ var StudentStore = Fluxxor.createStore({
 
 		// try to find active student
 		var activeStudentId = this.students.findKey(function(student) {
-			return student.active
+			return student.get('active')
 		})
 
 		// if there is an active student, put it in active
 		if (activeStudentId) {
-			this.active = this.students.get(activeStudentId)
+			this.active = this.students.get(activeStudentId).toJS()
 		}
 
 		// otherwise, make the next one active
@@ -224,7 +255,7 @@ var StudentStore = Fluxxor.createStore({
 
 		// otherwise, make a student
 		else {
-			this.handleStudentCreate()
+			this.handleStudentCreation()
 		}
 	},
 })

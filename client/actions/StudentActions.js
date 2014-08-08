@@ -29,13 +29,13 @@ module.exports = {
 
 	// Schedule actions
 	createSchedule: function(studentId, schedule) {
-		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_CREATE, studentId, schedule))
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_CREATE, {studentId: studentId, schedule: schedule}))
 	},
 	destroySchedule: function(studentId, schedule, emitChange) {
-		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY, studentId, schedule, emitChange))
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY, {studentId: studentId, schedule: schedule}))
 	},
 	destroyMultipleSchedules: function(studentId, scheduleIds) {
-		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, studentId, scheduleIds))
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, {studentId: studentId, scheduleIds: scheduleIds}))
 	},
 	undoSchedule: function() {
 		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_UNDO, {}))
