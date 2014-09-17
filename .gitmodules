@@ -1,6 +1,6 @@
 [submodule "public/data/courses"]
 	path = public/data/courses
-	url = https://github.com/hawkrives/gobbldygook-data.git
+url=https://github.com/hawkrives/gobbldygook-course-data.git
 [submodule "public/data/areas"]
 	path = public/data/areas
-	url = https://github.com/hawkrives/gobbldygook-administration-data.git
+url=https://github.com/hawkrives/gobbldygook-area-data.git
