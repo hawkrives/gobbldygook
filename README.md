@@ -11,3 +11,5 @@ This app is a course scheduler for students at St. Olaf College. You give it you
 - Final project for Software Design, @hawkrives and @xandrasings
 - &yet, famo.us, and the internet at large for helping me along with this
 
+## Screenshot
+![Screenshot!](./screenshot.png)
