@@ -1,6 +1,8 @@
-node_modules
-.sass-cache
 *.log
-public/libraries
-build
+.DS_Store
 .idea
+.sass-cache
+.tmp
+bower_components
+node_modules
+test/bower_components
