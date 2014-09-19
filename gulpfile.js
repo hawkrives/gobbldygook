@@ -2,6 +2,9 @@
 'use strict';
 
 var gulp = require('gulp');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var vinylSourceStream = require('vinyl-source-stream')
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -14,11 +17,37 @@ gulp.task('styles', function () {
         .pipe($.size());
 });
 
-gulp.task('scripts', function () {
-    return gulp.src('app/**/*.js')
-        .pipe($.jshint())
-        .pipe($.jshint.reporter(require('jshint-stylish')))
-        .pipe($.size());
+gulp.task('scripts', function (watch) {
+    watch = watch === undefined ? false : watch;
+
+    var bundler = browserify({
+		cache: {},
+		packageCache: {},
+		fullPaths: true,
+		// Specify the entry point of your app
+		entries: ['./app/app.js'],
+		// Enable source maps!
+		debug: true,
+	})
+
+    if (watch) {
+        bundler = watchify(bundler);
+    }
+
+    var bundle = function() {
+		return bundler.bundle()
+			// Use vinyl-source-stream to make the stream gulp compatible.
+			// Specifiy the desired output filename here.
+			.pipe(vinylSourceStream('app.js'))
+			.pipe($.jshint())
+            .pipe($.jshint.reporter(require('jshint-stylish')))
+            .pipe($.size());
+	}
+
+    // Rebundle with watchify on changes.
+	bundler.on('update', bundle)
+
+	return bundle()
 });
 
 gulp.task('html', ['styles', 'scripts'], function () {
