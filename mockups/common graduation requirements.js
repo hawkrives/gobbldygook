@@ -1,8 +1,8 @@
 var _ = require('lodash')
 
-var hasDeptNumBetween = require('../client/helpers/deptNum').hasDeptNumBetween
-var countCredits = require('../client/helpers/countCredits')
-var onlyCoursesAtOrAboveLevel = require('../client/helpers/courseLevels').onlyCoursesAtOrAboveLevel
+var hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
+var countCredits = require('../app/helpers/countCredits')
+var onlyCoursesAtOrAboveLevel = require('../app/helpers/courseLevels').onlyCoursesAtOrAboveLevel
 var utilities = require('./common graduation utilities')
 
 function courses(coursesTaken, creditsNeeded) {

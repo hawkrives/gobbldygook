@@ -1,10 +1,10 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
 
-var countCredits = require('../client/helpers/countCredits')
+var countCredits = require('../app/helpers/countCredits')
 var common = require('./common graduation requirements')
 var utilities = require('./common graduation utilities')
-var hasDepartment = require('../client/helpers/hasDepartment')
+var hasDepartment = require('../app/helpers/hasDepartment')
 var isMajoringIn = utilities.isMajoringIn
 var educ = require('./common education requirements')
 

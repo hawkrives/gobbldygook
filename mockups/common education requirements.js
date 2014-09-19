@@ -1,7 +1,7 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
 
-var hasDeptNumBetween = require('../client/helpers/deptNum').hasDeptNumBetween
+var hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
 
 var utilities = require('./common education utilities')
 var onlyQuarterCreditCoursesCanBePassFail = utilities.onlyQuarterCreditCoursesCanBePassFail
