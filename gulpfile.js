@@ -39,14 +39,6 @@ gulp.task('html', function () {
 	return gulp.src('app/index.html').pipe(gulp.dest('dist'));
 });
 
-gulp.task('fonts', function () {
-	// Copy fonts to dist
-	return gulp.src(['app/fonts/**/*.woff', 'bower_components/**/*.woff'])
-		.pipe(flatten())
-		.pipe(gulp.dest('dist/fonts'))
-		.pipe(size());
-});
-
 gulp.task('link', function() {
 	gulp.src('public/data').pipe(symlink('dist'))
 	gulp.src('bower_components').pipe(symlink('dist'))
