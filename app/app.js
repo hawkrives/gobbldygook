@@ -28,7 +28,7 @@ module.exports = {
 		// Put a promise on document.ready
 		document.ready = documentReady
 
-		// Stick React where I can see it
+		// Stick React where I (and the Chrome devtools) can see it
 		window.React = React
 
 		// Initialize some library options
