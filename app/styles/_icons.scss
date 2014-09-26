@@ -1,7 +1,7 @@
-@import '../../public/libraries/ionicons/scss/ionicons-variables';
-@import '../../public/libraries/ionicons/scss/ionicons-icons';
-$ionicons-font-path: '/libraries/ionicons/fonts';
-// @import '../../public/libraries/ionicons/scss/ionicons-font';
+@import '../../bower_components/ionicons/scss/ionicons-variables';
+@import '../../bower_components/ionicons/scss/ionicons-icons';
+$ionicons-font-path: '/ionicons/fonts';
+// @import '../../bower_components/ionicons/scss/ionicons-font';
 
 @font-face {
 	font-family: $ionicons-font-family;
