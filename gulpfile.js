@@ -2,28 +2,31 @@
 'use strict';
 
 var autoprefixer = require('gulp-autoprefixer');
-var browserify = require('browserify');
-var cache = require('gulp-cache');
-var clean = require('gulp-clean');
-var connect = require('connect');
-var filter = require('gulp-filter');
-var flatten = require('gulp-flatten');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var http = require('http');
-var jshint = require('gulp-jshint');
-var less = require('gulp-less');
-var livereload = require('gulp-livereload');
-var opn = require('opn');
-var size = require('gulp-size');
-var sourcemaps = require('gulp-sourcemaps');
-var subtree = require('gulp-subtree');
-var uglify = require('gulp-uglify');
-var useref = require('gulp-useref');
-var vinylSourceStream = require('vinyl-source-stream');
-var watchify = require('watchify');
-var watchify = require('watchify');
-var wiredep = require('wiredep');
+var browserify   = require('browserify');
+var cache        = require('gulp-cache');
+var clean        = require('gulp-clean');
+var connect      = require('connect');
+var debowerify   = require('debowerify');
+var filter       = require('gulp-filter');
+var flatten      = require('gulp-flatten');
+var gulp         = require('gulp');
+var gutil        = require('gulp-util');
+var http         = require('http');
+var jshint       = require('gulp-jshint');
+var livereload   = require('gulp-livereload');
+var opn          = require('opn');
+var plumber      = require('gulp-plumber');
+var prettyTime   = require('pretty-hrtime');
+var sass         = require('gulp-ruby-sass');
+var size         = require('gulp-size');
+var sourcemaps   = require('gulp-sourcemaps');
+var sourceStream = require('vinyl-source-stream');
+var subtree      = require('gulp-subtree');
+var streamify    = require('gulp-streamify');
+var uglify       = require('gulp-uglify');
+var useref       = require('gulp-useref');
+var watchify     = require('watchify');
+var wiredep      = require('wiredep');
 
 connect.livereload = require('connect-livereload');
 jshint.stylish = require('jshint-stylish');
@@ -31,8 +34,12 @@ jshint.stylish = require('jshint-stylish');
 /////////
 
 gulp.task('styles', function () {
-	return gulp.src('app/styles/app.less')
-		.pipe(less())
+	return gulp.src('app/styles/app.scss')
+	    .pipe(plumber())
+	    .pipe(sass({
+			style: 'expanded',
+			precision: 10
+	    }))
 		.pipe(autoprefixer('last 1 version'))
 		.pipe(gulp.dest('dist'))
 		.pipe(size());
@@ -45,6 +52,7 @@ function buildScripts(watch) {
 		cache: {}, packageCache: {}, fullPaths: true,
 		entries: ['./app/app.js'],
 		debug: true,
+		transforms: [debowerify],
 	});
 
 	if (useWatch) {
@@ -52,11 +60,25 @@ function buildScripts(watch) {
 	}
 
 	var bundle = function() {
+		var start = process.hrtime();
+
 		// Use vinyl-source-stream to make the stream gulp compatible.
 		return bundler.bundle()
-			.pipe(vinylSourceStream('app.js')) // Specifiy the desired output filename here.
-			// .pipe(jshint())
-			// .pipe(jshint.reporter(require('jshint-stylish')))
+			.on('error', function(e) {
+				gutil.log('Browserify Error', e);
+			})
+			.on('end', function() {
+				gutil.log(
+					'Finished \'' +
+					gutil.colors.cyan('browserify-bundle') + '\' after ' +
+					gutil.colors.magenta(prettyTime(process.hrtime(start))));
+			})
+			.on('log', function(msg) {
+				gutil.log(msg);
+			})
+			.pipe(sourceStream('app.js')) // Specifiy the desired output filename here.
+			.pipe(jshint())
+			.pipe(jshint.reporter(jshint.stylish))
 			.pipe(gulp.dest('dist'));
 	}
 
@@ -70,35 +92,28 @@ gulp.task('scripts', function() {
 	return buildScripts(false);
 })
 
-gulp.task('watchScripts', function() {
+gulp.task('watch-scripts', function() {
 	return buildScripts(true);
 })
 
 gulp.task('html', function () {
-	return gulp.src('app/*.html')
-		.pipe(gulp.dest('dist'))
-		.pipe(size());
+	// Copy index.html to dist
+	return gulp.src('app/index.html').pipe(gulp.dest('dist'));
 });
 
 gulp.task('fonts', function () {
-	return gulp.src('app/fonts/**/*')
-		.pipe(filter('**/*.{eot,svg,ttf,woff}'))
+	// Copy fonts to dist
+	return gulp.src(['app/fonts/**/*.woff', 'bower_components/**/*.woff'])
 		.pipe(flatten())
 		.pipe(gulp.dest('dist/fonts'))
 		.pipe(size());
 });
 
-gulp.task('extras', function () {
-	return gulp.src(['app/*.*', '!app/*.html'], { dot: true })
-		.pipe(gulp.dest('dist'));
-});
-
 gulp.task('clean', function () {
-	return gulp.src(['.tmp', 'dist'], { read: false })
-		.pipe(clean());
+	return gulp.src(['.tmp', 'dist'], { read: false }).pipe(clean());
 });
 
-gulp.task('build', ['html', 'fonts', 'extras']);
+gulp.task('build', ['html', 'scripts', 'styles', 'fonts']);
 
 gulp.task('default', function () {
 	console.log('gulp build');
@@ -115,12 +130,12 @@ gulp.task('connect', function () {
 
 	http.createServer(app)
 		.listen(9000)
-		.on('listening', function () {
+		.on('listening', function() {
 			console.log('Started connect web server on http://localhost:9000');
 		});
 });
 
-gulp.task('serve', ['connect', 'html', 'styles', 'watchScripts'], function () {
+gulp.task('serve', ['connect', 'html', 'styles', 'watch-scripts'], function () {
 	opn('http://localhost:9000');
 });
 
@@ -135,7 +150,7 @@ gulp.task('watch', ['serve'], function () {
 
 	// watch for changes
 	gulp.watch([
-		'app/*.html',
+		'app/index.html',
 		'app/images/**/*',
 		'dist/**/*.css',
 		'dist/**/*.js',
@@ -143,5 +158,5 @@ gulp.task('watch', ['serve'], function () {
 		server.changed(file.path);
 	});
 
-	gulp.watch('app/styles/**/*.less', ['styles']);
+	gulp.watch('app/styles/**/*.scss', ['styles']);
 });
