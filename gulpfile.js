@@ -1,9 +1,7 @@
-// generated on 2014-09-19 using generator-gulp-webapp 0.1.0
 'use strict';
 
 var autoprefixer = require('gulp-autoprefixer');
 var clean        = require('gulp-clean');
-var flatten      = require('gulp-flatten');
 var gulp         = require('gulp');
 var gutil        = require('gulp-util');
 var jshint       = require('gulp-jshint');
@@ -12,10 +10,8 @@ var plumber      = require('gulp-plumber');
 var sass         = require('gulp-ruby-sass');
 var server       = require("webpack-dev-server");
 var size         = require('gulp-size');
-var streamify    = require('gulp-streamify');
 var subtree      = require('gulp-subtree');
 var symlink      = require('gulp-symlink');
-var uglify       = require('gulp-uglify');
 var webpack      = require('webpack');
 
 jshint.stylish = require('jshint-stylish');
@@ -63,7 +59,7 @@ gulp.task("build-dev", ["webpack:build-dev"], function() {
 // Production build
 gulp.task("build", ["webpack:build"]);
 
-gulp.task("prepare-build", ['html', 'styles', 'fonts', 'link'])
+gulp.task("prepare-build", ['html', 'styles', 'link'])
 
 gulp.task("webpack:build", ['prepare-build'], function(callback) {
 	// modify some webpack config options
