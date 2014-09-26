@@ -8,7 +8,7 @@
 				".sass-cache",
 				"libraries",
 				"public/data",
-				"build"
+				"dist"
 			]
 		},
 		{
