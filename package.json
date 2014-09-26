@@ -60,6 +60,7 @@
     "humanize-plus": "^1.4.2",
     "immutable": "^2.0.3",
     "lodash": "^2.4.1",
+    "mori": "^0.2.9",
     "node-uuid": "git://github.com/broofa/node-uuid#master",
     "react": "^0.11.0"
   }
