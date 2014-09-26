@@ -6,6 +6,7 @@ var gulp         = require('gulp');
 var gutil        = require('gulp-util');
 var jshint       = require('gulp-jshint');
 var opn          = require('opn');
+var path         = require("path");
 var plumber      = require('gulp-plumber');
 var sass         = require('gulp-ruby-sass');
 var server       = require("webpack-dev-server");
@@ -42,7 +43,21 @@ gulp.task('link', function() {
 
 //////////
 
-var webpackConfig = require("./webpack.config.js");
+var webpackConfig = {
+	cache: true,
+	entry: {
+		app: "./app/app.js"
+	},
+	output: {
+		contentBase: path.join(__dirname, "dist/"),
+		path: path.join(__dirname, "dist/"),
+		publicPath: "dist/",
+		filename: "[name].js",
+		chunkFilename: "[chunkhash].js"
+	},
+	plugins: []
+};
+
 
 // The development server (the recommended option for development)
 gulp.task("default", ["webpack-dev-server"]);
