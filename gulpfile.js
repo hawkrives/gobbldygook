@@ -2,33 +2,22 @@
 'use strict';
 
 var autoprefixer = require('gulp-autoprefixer');
-var browserify   = require('browserify');
-var cache        = require('gulp-cache');
 var clean        = require('gulp-clean');
-var connect      = require('connect');
-var debowerify   = require('debowerify');
-var filter       = require('gulp-filter');
 var flatten      = require('gulp-flatten');
 var gulp         = require('gulp');
 var gutil        = require('gulp-util');
-var http         = require('http');
 var jshint       = require('gulp-jshint');
-var livereload   = require('gulp-livereload');
 var opn          = require('opn');
 var plumber      = require('gulp-plumber');
-var prettyTime   = require('pretty-hrtime');
 var sass         = require('gulp-ruby-sass');
+var server       = require("webpack-dev-server");
 var size         = require('gulp-size');
-var sourcemaps   = require('gulp-sourcemaps');
-var sourceStream = require('vinyl-source-stream');
-var subtree      = require('gulp-subtree');
 var streamify    = require('gulp-streamify');
+var subtree      = require('gulp-subtree');
+var symlink      = require('gulp-symlink');
 var uglify       = require('gulp-uglify');
-var useref       = require('gulp-useref');
-var watchify     = require('watchify');
-var wiredep      = require('wiredep');
+var webpack      = require('webpack');
 
-connect.livereload = require('connect-livereload');
 jshint.stylish = require('jshint-stylish');
 
 /////////
@@ -45,57 +34,6 @@ gulp.task('styles', function () {
 		.pipe(size());
 });
 
-function buildScripts(watch) {
-	var useWatch = watch === undefined ? false : watch;
-
-	var bundler = browserify({
-		cache: {}, packageCache: {}, fullPaths: true,
-		entries: ['./app/app.js'],
-		debug: true,
-		transforms: [debowerify],
-	});
-
-	if (useWatch) {
-		bundler = watchify(bundler);
-	}
-
-	var bundle = function() {
-		var start = process.hrtime();
-
-		// Use vinyl-source-stream to make the stream gulp compatible.
-		return bundler.bundle()
-			.on('error', function(e) {
-				gutil.log('Browserify Error', e);
-			})
-			.on('end', function() {
-				gutil.log(
-					'Finished \'' +
-					gutil.colors.cyan('browserify-bundle') + '\' after ' +
-					gutil.colors.magenta(prettyTime(process.hrtime(start))));
-			})
-			.on('log', function(msg) {
-				gutil.log(msg);
-			})
-			.pipe(sourceStream('app.js')) // Specifiy the desired output filename here.
-			.pipe(jshint())
-			.pipe(jshint.reporter(jshint.stylish))
-			.pipe(gulp.dest('dist'));
-	}
-
-	// Rebundle with watchify on changes.
-	bundler.on('update', bundle);
-
-	return bundle();
-}
-
-gulp.task('scripts', function() {
-	return buildScripts(false);
-})
-
-gulp.task('watch-scripts', function() {
-	return buildScripts(true);
-})
-
 gulp.task('html', function () {
 	// Copy index.html to dist
 	return gulp.src('app/index.html').pipe(gulp.dest('dist'));
@@ -109,35 +47,100 @@ gulp.task('fonts', function () {
 		.pipe(size());
 });
 
-gulp.task('clean', function () {
-	return gulp.src(['.tmp', 'dist'], { read: false }).pipe(clean());
+gulp.task('link', function() {
+	gulp.src('public/data').pipe(symlink('dist'))
+	gulp.src('bower_components').pipe(symlink('dist'))
+})
+
+//////////
+
+var webpackConfig = require("./webpack.config.js");
+
+// The development server (the recommended option for development)
+gulp.task("default", ["webpack-dev-server"]);
+gulp.task("serve", ["webpack-dev-server"]);
+
+// Build and watch cycle (another option for development)
+//// Advantage: No server required, can run app from filesystem
+//// Disadvantage: Requests are not blocked until bundle is available,
+////   can serve an old app on refresh
+gulp.task("build-dev", ["webpack:build-dev"], function() {
+	gulp.watch(["app/**/*"], ["webpack:build-dev"]);
 });
 
-gulp.task('build', ['html', 'scripts', 'styles', 'fonts']);
+// Production build
+gulp.task("build", ["webpack:build"]);
 
-gulp.task('default', function () {
-	console.log('gulp build');
-	console.log('gulp watch');
-	console.log('gulp deploy');
+gulp.task("prepare-build", ['html', 'styles', 'fonts', 'link'])
+
+gulp.task("webpack:build", ['prepare-build'], function(callback) {
+	// modify some webpack config options
+	var myConfig = Object.create(webpackConfig);
+	myConfig.plugins = myConfig.plugins.concat(
+		new webpack.DefinePlugin({
+			"process.env": {
+				// This has effect on the react lib size
+				"NODE_ENV": JSON.stringify("production")
+			}
+		}),
+		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.UglifyJsPlugin()
+	);
+
+	// run webpack
+	webpack(myConfig, function(err, stats) {
+		if(err) throw new gutil.PluginError("webpack:build", err);
+		gutil.log("[webpack:build]", stats.toString({
+			colors: true
+		}));
+		callback();
+	});
 });
 
-gulp.task('connect', function () {
-	var app = connect()
-		.use(connect.livereload({ port: 35729 }))
-		.use(connect.static('public'))
-		.use(connect.static('dist'))
-		.use(connect.directory('dist'));
+// modify some webpack config options
+var myDevConfig = Object.create(webpackConfig);
+myDevConfig.devtool = "source-map";
+myDevConfig.debug = true;
 
-	http.createServer(app)
-		.listen(9000)
-		.on('listening', function() {
-			console.log('Started connect web server on http://localhost:9000');
-		});
+// create a single instance of the compiler to allow caching
+var devCompiler = webpack(myDevConfig);
+
+gulp.task("webpack:build-dev", ['prepare-build'], function(callback) {
+	// run webpack
+	devCompiler.run(function(err, stats) {
+		if(err) throw new gutil.PluginError("webpack:build-dev", err);
+		gutil.log("[webpack:build-dev]", stats.toString({
+			colors: true
+		}));
+		callback();
+	});
 });
 
-gulp.task('serve', ['connect', 'html', 'styles', 'watch-scripts'], function () {
-	opn('http://localhost:9000');
+gulp.task("webpack-dev-server", ['prepare-build'], function(callback) {
+	gulp.watch('app/styles/**/*.scss', ['styles']);
+
+	// modify some webpack config options
+	var myConfig = Object.create(webpackConfig);
+	myConfig.devtool = "source-map";
+	myConfig.debug = true;
+
+	// Start a webpack-dev-server
+	new server(webpack(myConfig), {
+		contentBase: myConfig.output.contentBase,
+		path: myConfig.output.path,
+		publicPath: "/" + myConfig.output.publicPath,
+		stats: {
+			colors: true
+		}
+	}).listen(8080, "localhost", function(err) {
+		if(err) throw new gutil.PluginError("webpack-dev-server", err);
+		var url = "http://localhost:8080/webpack-dev-server/index.html";
+		gutil.log("[webpack-dev-server]", url);
+		opn(url);
+	});
 });
+
+//////////
 
 gulp.task('deploy', ['build'], function () {
 	return gulp.src('dist')
@@ -145,18 +148,12 @@ gulp.task('deploy', ['build'], function () {
 		.pipe(clean());
 });
 
-gulp.task('watch', ['serve'], function () {
-	var server = livereload();
-
-	// watch for changes
-	gulp.watch([
-		'app/index.html',
-		'app/images/**/*',
-		'dist/**/*.css',
-		'dist/**/*.js',
-	]).on('change', function (file) {
-		server.changed(file.path);
-	});
-
-	gulp.watch('app/styles/**/*.scss', ['styles']);
+gulp.task('clean', function () {
+	return gulp.src(['.tmp', 'dist'], { read: false }).pipe(clean());
 });
+
+// gulp.task('default', function () {
+// 	console.log('gulp build');
+// 	console.log('gulp watch');
+// 	console.log('gulp deploy');
+// });
