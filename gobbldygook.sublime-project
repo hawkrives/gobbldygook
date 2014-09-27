@@ -5,9 +5,10 @@
 			"path": ".",
 			"folder_exclude_patterns": [
 				"node_modules",
+				"bower_components",
 				".sass-cache",
-				"libraries",
-				"public/data"
+				"public/data",
+				"dist"
 			]
 		},
 		{
