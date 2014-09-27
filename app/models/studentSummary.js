@@ -2,7 +2,6 @@
 
 var _ = require('lodash')
 var React = require('react')
-var mori = require('mori')
 
 var add = require('../helpers/add')
 var humanize = require('humanize-plus')
@@ -10,7 +9,7 @@ var humanize = require('humanize-plus')
 var StudentSummary = React.createClass({
 	render: function() {
 		// console.log('student-summary render')
-		var student = mori.clj_to_js(this.props)
+		var student = this.props
 		var studies = student.studies
 		var name = student.name
 
