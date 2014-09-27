@@ -22,7 +22,7 @@ function storeCourses(item) {
 			return course
 		})
 
-		window.db.add('courses', courses)
+		db.store('courses').batch(courses)
 			.then(function(results) {
 				resolve(item)
 			}).catch(function (records, err) {
@@ -34,11 +34,11 @@ function storeCourses(item) {
 function storeArea(item) {
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeArea')
-		var area = item.data.info
 
+		var area = item.data.info
 		area.sourcePath = item.meta.path
 
-		window.db.add('areas', area)
+		db.store('areas').put(area)
 			.then(function(results) {
 				resolve(item)
 			}).catch(function(records, err) {
@@ -60,10 +60,7 @@ function cleanPriorData(item) {
 		var path = item.meta.path
 		console.info('deleting ' + item.type + ' from ' + path)
 
-		var deleteItemsPromise = window.db.query(item.type, 'sourcePath')
-			.only(path)
-			.remove()
-			.execute()
+		var deleteItemsPromise = db.store(item.type).del(path)
 
 		deleteItemsPromise
 			.then(function() {
@@ -182,5 +179,4 @@ function loadData() {
 	return Promise.all(_.map(infoFiles, loadInfoFile))
 }
 
-module.exports = loadData
-window.loadData = module.exports
+module.exports = window.loadData = loadData
