@@ -9,7 +9,7 @@ var documentReady = require('./helpers/document-ready')
 
 var Gobbldygook = require('./models/gobbldygookApp')
 var loadData = require('./helpers/loadData')
-var demoStudent = require('../mockups/demo_student')
+var demoStudent = require('../mockups/demo_student.json')
 
 var actions = require('./actions/StudentActions')
 var StudentStore = require('./stores/StudentStore')

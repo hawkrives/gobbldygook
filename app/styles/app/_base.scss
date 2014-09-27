@@ -1,5 +1,7 @@
-* {
-	box-sizing: border-box;
+@charset "UTF-8";
+
+*, *::before, *::after {
+	box-sizing: inherit;
 }
 
 html {
@@ -7,6 +9,7 @@ html {
 	color: $text-color;
 
 	min-height: 100vh;
+	box-sizing: border-box;
 
 	background-image: -webkit-linear-gradient(top, $background-start-color, $background-end-color);
 	background-image: linear-gradient(to bottom, $background-start-color, $background-end-color);
