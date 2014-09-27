@@ -8,7 +8,7 @@
 		@return abs($a);
 	}
 }
- 
+
 @function pow($base, $exponent, $prec: 12) {
 	// Handles decimal exponents by trying to convert them into a fraction and then use a nthRoot-algorithm for parts of the calculation
 	@if (floor($exponent) != $exponent) {
@@ -17,7 +17,7 @@
 		$denominator: gcd($exponent, $prec2);
 		@return nthRoot(pow($base, $exponent / $denominator), $prec2 / $denominator, $prec);
 	}
- 
+
 	$value: $base;
 	@if $exponent > 1 {
 		@for $i from 2 through $exponent {
@@ -28,22 +28,22 @@
 			$value: $value / $base;
 		}
 	}
- 
+
 	@return $value;
 }
- 
+
 @function nthRoot($num, $n: 2, $prec: 12) {
 	// From: http://rosettacode.org/wiki/Nth_root#JavaScript
 	$x: 1;
- 
+
 	@for $i from 0 through $prec {
 		$x: 1 / $n * (($n - 1) * $x + ($num / pow($x, $n - 1)));
 	}
- 
+
 	@return $x;
 }
 
-@function luma($color){  
+@function luma($color){
 	// Thanks voxpelli for a very concise implementation of luminance measure in sass
 	// Adapted from: https://gist.github.com/voxpelli/6304812
 	$rgba: red($color), green($color), blue($color);
@@ -63,7 +63,7 @@
 	$ratio: $luma1 / $luma2;
 	@if $luma1 < $luma2 {
 		$ratio: 1 / $ratio;
-	} 
+	}
 	@return $ratio;
 }
 
