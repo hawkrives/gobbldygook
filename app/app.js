@@ -19,19 +19,19 @@ module.exports = {
 		// Just for use in the browser console, I swear.
 		window._ = _
 
-		// Put the demo student where it can be seen
+		// Put the demo student where it can be seen.
 		window.demoStudent = demoStudent
 
-		// Create the deptnum/crsid cache
+		// Create the deptnum/crsid cache.
 		window.deptNumToCrsid = {}
 
-		// Put a promise on document.ready
+		// Put a promise on document.ready.
 		document.ready = documentReady
 
-		// Stick React where I can see it
+		// Stick React where I (and the Chrome devtools) can see it.
 		window.React = React
 
-		// Initialize some library options
+		// Initialize some library options.
 		Promise.longStackTraces()
 		React.initializeTouchEvents(true)
 	},

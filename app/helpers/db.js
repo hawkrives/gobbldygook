@@ -1,7 +1,7 @@
 'use strict';
 
 var Promise = require('bluebird')
-var db = require('../../../db.js/src/db.js')
+var db = require('../../node_modules/db.js/src/db.js')
 
 var settings = {
 	server: 'gobbldygook',

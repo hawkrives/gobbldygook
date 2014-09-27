@@ -1,11 +1,11 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
 
-var hasDepartment = require('../client/helpers/hasDepartment')
-var partialTitle = require('../client/helpers/partialTitle').partialTitle
-var coursesAtLevel = require('../client/helpers/courseLevels').coursesAtLevel
-var coursesAtOrAboveLevel = require('../client/helpers/courseLevels').coursesAtOrAboveLevel
-var checkCoursesForDeptNum = require('../client/helpers/getCourses').checkCoursesForDeptNum
+var hasDepartment = require('../app/helpers/hasDepartment')
+var partialTitle = require('../app/helpers/partialTitle').partialTitle
+var coursesAtLevel = require('../app/helpers/courseLevels').coursesAtLevel
+var coursesAtOrAboveLevel = require('../app/helpers/courseLevels').coursesAtOrAboveLevel
+var checkCoursesForDeptNum = require('../app/helpers/getCourses').checkCoursesForDeptNum
 
 var utilities = require('./common major utilities')
 

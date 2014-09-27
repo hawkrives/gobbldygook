@@ -1,8 +1,8 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
 
-var countCredits = require('../client/helpers/countCredits')
-var hasDepartment = require('../client/helpers/hasDepartment')
+var countCredits = require('../app/helpers/countCredits')
+var hasDepartment = require('../app/helpers/hasDepartment')
 
 function onlyFullCreditCourses(course) {
 	return course.credits >= 1.0

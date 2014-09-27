@@ -7,8 +7,7 @@
 				"node_modules",
 				".sass-cache",
 				"libraries",
-				"public/data",
-				"build"
+				"public/data"
 			]
 		},
 		{
