@@ -96,7 +96,6 @@ var lookup = {
 	'areas': 'info'
 }
 
-
 function updateDatabase(itemType, infoFromServer) {
 	infoFromServer.path = '/data/' + itemType + '/' + infoFromServer.path
 	var oldHash = localStorage.getItem(infoFromServer.path)
