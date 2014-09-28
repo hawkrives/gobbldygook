@@ -25,6 +25,34 @@ function getArea(id) {
 	return areas[id]
 }
 
+function findResults(obj) {
+	if (_.isArray(obj)) {
+		return _.chain(obj)
+			.map(function(val, idx, coll) {
+				return findResults(val)
+			})
+			.flatten()
+			.reject(_.isUndefined)
+			.value()
+	}
+	else if (_.isObject(obj)) {
+		return _.chain(obj)
+			.map(function(val, key, coll) {
+				if (key === 'result' && !coll.hasOwnProperty('details')) {
+					return val
+				} else {
+					return findResults(val)
+				}
+			})
+			.flatten()
+			.reject(_.isUndefined)
+			.value()
+	}
+	else if (_.isBoolean(obj)) {
+		return obj // not an obj, don't process me
+	}
+}
+
 var AreaOfStudy = React.createClass({
 	load: function() {
 		var area = getArea(this.props.area.id)
@@ -69,18 +97,8 @@ var AreaOfStudy = React.createClass({
 			return RequirementSet(_.merge({key: reqset.title}, reqset));
 		}, this);
 
-		var results = _.chain(this.state.result.details)
-			.flatten()
-			.toArray()
-			.pluck('result')
-			.value()
-
-		// TODO: Use the number of requirements, instead of the number of sections.
-		// go through everything.
-		// grab the value, if the key is not 'result'.
-		// if the key is result, and details is undefined, grab it.
-		// Theoretically, of course.
-
+		var results = findResults(this.state.result.details)
+		console.log(this.props.area.title, results)
 		var currentProgress = _.size(_.compact(results))
 		var maxProgress = _.size(results)
 
