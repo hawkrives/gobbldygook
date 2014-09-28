@@ -79,6 +79,12 @@ function cacheItemHash(item) {
 	})
 }
 
+var lookup = {
+	'courses': 'courses',
+	'areas': 'info'
+}
+
+
 function updateDatabase(itemType, infoFromServer) {
 	infoFromServer.path = '/data/' + itemType + '/' + infoFromServer.path
 	var oldHash = localStorage.getItem(infoFromServer.path)
@@ -96,10 +102,6 @@ function updateDatabase(itemType, infoFromServer) {
 		console.log('need to add ' + itemPath)
 	}
 
-	var lookup = {
-		'courses': 'courses',
-		'areas': 'info'
-	}
 	return readJson(itemPath)
 		.then(function(data) {
 			return {
