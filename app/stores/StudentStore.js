@@ -178,15 +178,17 @@ var StudentStore = Fluxxor.createStore({
 
 	handleScheduleDestruction: function(args, emitChange) {
 		console.log('StudentStore.destroySchedule')
+		emitChange = emitChange || false
 
-		// args: {studentId, schedule}
+		// args: {studentId, scheduleId}
 		var studentId = args.studentId
-		var scheduleToDelete = args.schedule
+		var scheduleId = args.scheduleId
 
 		this.students = this.students.updateIn([studentId, 'schedules'], function(schedules) {
-			return schedules.delete(scheduleToDelete.id)
+			return schedules.delete(scheduleId)
 		})
-		if (!_.isUndefined(emitChange) && emitChange) {
+
+		if (emitChange) {
 			this.emit('change')
 		}
 	},
@@ -199,11 +201,8 @@ var StudentStore = Fluxxor.createStore({
 		var scheduleIds = args.scheduleIds
 
 		_.each(scheduleIds, function(scheduleId) {
-			this.handleScheduleDestruction(
-				{studentId: studentId, scheduleId: scheduleId},
-				false
-			)
-		})
+			this.handleScheduleDestruction({studentId: studentId, scheduleId: scheduleId}, false)
+		}, this)
 		this.emit('change')
 	},
 
