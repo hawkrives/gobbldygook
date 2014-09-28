@@ -179,7 +179,7 @@ function loadDataFiles(infoFile) {
 */
 
 function loadInfoFile(url) {
-	console.log('loading', url)
+	console.log('loading' + url)
 	return readJson(url).then(loadDataFiles)
 }
 
