@@ -26,3 +26,11 @@ var db = treo('gobbldygook', schema)
 	.use(treoPromise())
 
 module.exports = window.database = db
+
+window.eraseDatabase = function() {
+	window.database.drop().then(function() {
+		console.log('Database dropped')
+		localStorage.clear()
+		console.log('localStorage cleared')
+	})
+}
