@@ -27,17 +27,21 @@ window.log = function(thing){console.log(_.isUndefined(thing) ? arguments : thin
 Promise.longStackTraces()
 React.initializeTouchEvents(true)
 
+function addDemoStudent() {
+	return db.store('students').put(demoStudent);
+}
+
 module.exports = {
 	flux: function() {
 		return db.store('students').all()
 			.then(function(results) {
-				var students = [demoStudent]
+				var students = (results.length > 0) ? results : [demoStudent]
 
 				if (results.length > 0) {
-					console.log('results!', results)
-					students = results
+					console.log('results!', students)
 				} else {
-					console.log('no results!', demoStudent)
+					console.log('no results!', students)
+					addDemoStudent()
 				}
 
 				var stores = {StudentStore: new StudentStore({students: students})}
