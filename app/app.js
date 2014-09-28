@@ -17,9 +17,6 @@ var StudentStore = require('./stores/StudentStore')
 // Just for use in the browser console, I swear.
 window.lodash = _
 
-// Create the deptnum/crsid cache.
-window.deptNumToCrsid = {}
-
 // Stick React where I (and the Chrome devtools) can see it.
 window.React = React
 

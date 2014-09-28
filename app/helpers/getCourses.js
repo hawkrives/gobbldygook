@@ -6,7 +6,7 @@ var db = require('./db')
 
 var convertTimeStringsToOfferings = require('./time').convertTimeStringsToOfferings
 
-window.courseCache = {}
+var deptNumToCrsidCache = {}
 
 function getCourse(clbid) {
 	if (window.courseCache[clbid]) {
@@ -40,9 +40,8 @@ function getCourses(clbids) {
 
 function deptNumToCrsid(deptNumString) {
 	return new Promise(function(resolve, reject) {
-		var crsid = window.deptNumToCrsid[deptNumString]
-		if (crsid) {
-			resolve(crsid)
+		if (deptNumToCrsidCache[deptNumString]) {
+			resolve(deptNumToCrsidCache[deptNumString])
 		} else {
 			// Filter to only those with matching dept strings
 			window.db.courses
@@ -83,6 +82,7 @@ module.exports.getCourses = getCourses
 module.exports.getCourse = getCourse
 module.exports.logResult = logResult
 
+module.exports.deptNumToCrsidCache = deptNumToCrsidCache
 module.exports.deptNumToCrsid = deptNumToCrsid
 module.exports.checkCoursesForDeptNum = checkCoursesForDeptNum
 
