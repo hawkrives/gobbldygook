@@ -9,25 +9,14 @@ var convertTimeStringsToOfferings = require('./time').convertTimeStringsToOfferi
 var deptNumToCrsidCache = {}
 
 function getCourse(clbid) {
-	if (window.courseCache[clbid]) {
-		console.log('using course cache')
-		return Promise.resolve(window.courseCache[clbid])
-	} else {
-		console.log('using course database')
-		return window.db.courses
-			.query('clbid')
-			.only(clbid)
-			.limit(1)
-			.execute()
-			.then(function(courses) {
-				var course = courses[0]
-				course = convertTimeStringsToOfferings(course)
-				window.courseCache[clbid] = course
-				return course
-			}).catch(function(records, err) {
-				console.warn('course retrieval failed for: ' + clbid, arguments)
-			})
-	}
+	return db.store('courses')
+		.get(clbid)
+		.then(function(course) {
+			course = convertTimeStringsToOfferings(course)
+			return course
+		}).catch(function(records, err) {
+			console.warn('course retrieval failed for: ' + clbid, arguments)
+		})
 }
 
 function getCourses(clbids) {
@@ -44,13 +33,11 @@ function deptNumToCrsid(deptNumString) {
 			resolve(deptNumToCrsidCache[deptNumString])
 		} else {
 			// Filter to only those with matching dept strings
-			window.db.courses
-				.query('deptnum')
-				.only(deptNumString)
-				.limit(1)
-				.execute()
+			db.store('courses')
+				.index('deptnum')
+				.get(deptNumString)
 				.then(function(courses) {
-					if (_.size(courses)) {
+					if (_.size(courses) > 0) {
 						resolve(courses[0].crsid)
 					}
 					reject(new Error('Course ' + deptNumString + ' was not found'))
