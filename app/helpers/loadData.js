@@ -119,7 +119,7 @@ function updateDatabase(itemType, infoFromServer) {
 		})
 		.done(function(item) {
 			if (logDataLoading) {
-				console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
+				console.log('added '+item.meta.path+' ('+item.count+' '+item.type+')')
 			}
 			return Promise.resolve(true)
 		})
