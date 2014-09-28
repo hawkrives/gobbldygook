@@ -7,20 +7,20 @@
 				"node_modules",
 				"bower_components",
 				".sass-cache",
-				"public/data",
+				"data",
 				"dist"
 			]
 		},
 		{
 			"follow_symlinks": true,
-			"path": "../gobbldygook-administration-data",
+			"path": "../gobbldygook-area-data",
 			"folder_exclude_patterns": [
 				"__pycache__"
 			]
 		},
 		{
 			"follow_symlinks": true,
-			"path": "../gobbldygook-data",
+			"path": "../gobbldygook-course-data",
 			"folder_exclude_patterns": [
 				"__pycache__"
 			]

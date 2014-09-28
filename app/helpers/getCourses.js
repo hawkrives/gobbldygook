@@ -6,28 +6,17 @@ var db = require('./db')
 
 var convertTimeStringsToOfferings = require('./time').convertTimeStringsToOfferings
 
-window.courseCache = {}
+var deptNumToCrsidCache = {}
 
 function getCourse(clbid) {
-	if (window.courseCache[clbid]) {
-		console.log('using course cache')
-		return Promise.resolve(window.courseCache[clbid])
-	} else {
-		console.log('using course database')
-		return window.db.courses
-			.query('clbid')
-			.only(clbid)
-			.limit(1)
-			.execute()
-			.then(function(courses) {
-				var course = courses[0]
-				course = convertTimeStringsToOfferings(course)
-				window.courseCache[clbid] = course
-				return course
-			}).catch(function(records, err) {
-				console.warn('course retrieval failed for: ' + clbid, arguments)
-			})
-	}
+	return db.store('courses')
+		.get(clbid)
+		.then(function(course) {
+			course = convertTimeStringsToOfferings(course)
+			return course
+		}).catch(function(records, err) {
+			console.warn('course retrieval failed for: ' + clbid, arguments)
+		})
 }
 
 function getCourses(clbids) {
@@ -40,18 +29,15 @@ function getCourses(clbids) {
 
 function deptNumToCrsid(deptNumString) {
 	return new Promise(function(resolve, reject) {
-		var crsid = window.deptNumToCrsid[deptNumString]
-		if (crsid) {
-			resolve(crsid)
+		if (deptNumToCrsidCache[deptNumString]) {
+			resolve(deptNumToCrsidCache[deptNumString])
 		} else {
 			// Filter to only those with matching dept strings
-			window.db.courses
-				.query('deptnum')
-				.only(deptNumString)
-				.limit(1)
-				.execute()
+			db.store('courses')
+				.index('deptnum')
+				.get(deptNumString)
 				.then(function(courses) {
-					if (_.size(courses)) {
+					if (_.size(courses) > 0) {
 						resolve(courses[0].crsid)
 					}
 					reject(new Error('Course ' + deptNumString + ' was not found'))
@@ -60,19 +46,11 @@ function deptNumToCrsid(deptNumString) {
 	})
 }
 
-function logResult(result) {
-	console.log(result)
-}
-
 function checkCoursesForDeptNum(courses, deptNumString) {
 	var crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
 
 	return deptNumToCrsid(deptNumString)
 		.then(function(crsid) {
-			/*console.log(
-				'checkCoursesForDeptNum',
-				'checking for', crsid, 'in', crsidsToCheckAgainst,
-				'result', _.contains(crsidsToCheckAgainst, crsid))*/
 			return _.contains(crsidsToCheckAgainst, crsid)
 		}).catch(function(err) {
 			console.error('checkCoursesForDeptNum error', err.stack)
@@ -81,8 +59,8 @@ function checkCoursesForDeptNum(courses, deptNumString) {
 
 module.exports.getCourses = getCourses
 module.exports.getCourse = getCourse
-module.exports.logResult = logResult
 
+module.exports.deptNumToCrsidCache = deptNumToCrsidCache
 module.exports.deptNumToCrsid = deptNumToCrsid
 module.exports.checkCoursesForDeptNum = checkCoursesForDeptNum
 

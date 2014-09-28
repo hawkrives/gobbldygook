@@ -18,8 +18,8 @@ var GraduationStatus = React.createClass({
 			.uniq()
 			.value()
 
-		console.log('GraduationStatus\'s schedules', this.props.student.schedules)
-		console.log('GraduationStatus\'s clbids', clbids)
+		// console.log('GraduationStatus\'s schedules', this.props.student.schedules)
+		// console.log('GraduationStatus\'s clbids', clbids)
 
 		getCourses(clbids).bind(this).then(function(courses) {
 			console.log('retrieved ' + courses.length + ' courses for graduation-status')

@@ -2,7 +2,7 @@
 
 var Promise = require('bluebird')
 
-module.exports = new Promise(function(resolve) {
+module.exports = document.ready = new Promise(function(resolve) {
 	function onReady() {
 		resolve()
 		document.removeEventListener('DOMContentLoaded', onReady, true)

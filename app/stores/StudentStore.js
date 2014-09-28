@@ -2,7 +2,7 @@
 
 var Fluxxor = require('fluxxor')
 var _ = require('lodash')
-var uuid = require('node-uuid')
+var uuid = require('../helpers/uuid')
 var Immutable = require('immutable')
 
 var StudentConstants = require('../constants/StudentConstants')
@@ -82,9 +82,10 @@ var StudentStore = Fluxxor.createStore({
 	handleStudentCreation: function(student) {
 		console.log('StudentStore.createStudent')
 		var genericStudent = {
-			id: uuid.v4(),
+			id: uuid(),
 			name: 'Student ' + randomChar(),
-			enrollment: 1874,
+			active: false,
+			matriculation: 1874,
 			graduation: 2016,
 			creditsNeeded: 35,
 			studies: {},
@@ -99,9 +100,9 @@ var StudentStore = Fluxxor.createStore({
 			joinedStudent.active = false
 		}
 
-		joinedStudent.studies = Immutable.OrderedMap(joinedStudent.studies)
-		joinedStudent.schedules = Immutable.OrderedMap(joinedStudent.schedules)
-		joinedStudent.overrides = Immutable.Map(joinedStudent.overrides)
+		joinedStudent.studies      = Immutable.OrderedMap(joinedStudent.studies)
+		joinedStudent.schedules    = Immutable.OrderedMap(joinedStudent.schedules)
+		joinedStudent.overrides    = Immutable.Map(joinedStudent.overrides)
 		joinedStudent.fabrications = Immutable.Map(joinedStudent.fabrications)
 
 		var immutableStudent = Immutable.fromJS(joinedStudent)
@@ -132,10 +133,12 @@ var StudentStore = Fluxxor.createStore({
 
 	handleStudentToggleActive: function(student) {
 		console.log('StudentStore.toggleStudentActive')
-		var changedStudent = this.students.get(student.id).withMutations(function(student) {
-			student.set('active', !student.get('active'))
-		})
-		this.students.set(student.id, changedStudent)
+		// is there a possibility of a student being passed in that isn't an immutable object?
+		var changedStudent = this.students.get(student.get('id'))
+			.withMutations(function(student) {
+				return student.set('active', !student.get('active'))
+			})
+		this.students = this.students.set(student.get('id'), changedStudent)
 
 		this.findActiveStudent()
 
@@ -153,7 +156,7 @@ var StudentStore = Fluxxor.createStore({
 		var schedule = args.schedule
 
 		var genericSchedule = {
-			id: uuid.v4(),
+			id: uuid(),
 			year: 0,
 			semester: 0,
 			title: 'Schedule ' + randomChar(),
@@ -175,15 +178,17 @@ var StudentStore = Fluxxor.createStore({
 
 	handleScheduleDestruction: function(args, emitChange) {
 		console.log('StudentStore.destroySchedule')
+		emitChange = emitChange || false
 
-		// args: {studentId, schedule}
+		// args: {studentId, scheduleId}
 		var studentId = args.studentId
-		var scheduleToDelete = args.schedule
+		var scheduleId = args.scheduleId
 
 		this.students = this.students.updateIn([studentId, 'schedules'], function(schedules) {
-			return schedules.delete(scheduleToDelete.id)
+			return schedules.delete(scheduleId)
 		})
-		if (!_.isUndefined(emitChange) && emitChange) {
+
+		if (emitChange) {
 			this.emit('change')
 		}
 	},
@@ -196,11 +201,8 @@ var StudentStore = Fluxxor.createStore({
 		var scheduleIds = args.scheduleIds
 
 		_.each(scheduleIds, function(scheduleId) {
-			this.handleScheduleDestruction(
-				{studentId: studentId, scheduleId: scheduleId},
-				false
-			)
-		})
+			this.handleScheduleDestruction({studentId: studentId, scheduleId: scheduleId}, false)
+		}, this)
 		this.emit('change')
 	},
 

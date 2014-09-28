@@ -31,8 +31,8 @@ module.exports = {
 	createSchedule: function(studentId, schedule) {
 		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_CREATE, {studentId: studentId, schedule: schedule}))
 	},
-	destroySchedule: function(studentId, schedule, emitChange) {
-		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY, {studentId: studentId, schedule: schedule}))
+	destroySchedule: function(studentId, scheduleId, emitChange) {
+		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY, {studentId: studentId, scheduleId: scheduleId}))
 	},
 	destroyMultipleSchedules: function(studentId, scheduleIds) {
 		return Promise.resolve(this.dispatch(ScheduleConstants.SCHEDULE_DESTROY_MULTIPLE, {studentId: studentId, scheduleIds: scheduleIds}))

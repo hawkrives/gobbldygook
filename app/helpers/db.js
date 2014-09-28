@@ -1,41 +1,36 @@
 'use strict';
 
 var Promise = require('bluebird')
-var db = require('../../node_modules/db.js/src/db.js')
+var treo = require('treo')
+var treoPromise = require('treo/plugins/treo-promise')
 
-var settings = {
-	server: 'gobbldygook',
-	version: 2,
-	schema: {
-		courses: {
-			key: {autoIncrement: true},
-			indexes: {
-				profs:      {multiEntry: true},
-				depts:      {multiEntry: true},
-				places:     {multiEntry: true},
-				times:      {multiEntry: true},
-				gereqs:     {multiEntry: true},
-				sourcePath: {multiEntry: false},
-				crsid:      {multiEntry: false},
-				clbid:      {multiEntry: false},
-				deptnum:    {multiEntry: false},
-			}
-		},
-		areas: {
-			key: {autoIncrement: true, keyPath: 'sourcePath'},
-			indexes: {
-				type: {},
-				sourcePath: {}
-			}
-		},
-		students: {
-			key: {autoIncrement: true}
-		}
-	}
+var schema = treo.schema()
+	.version(1)
+		.addStore('courses', { key: 'clbid' })
+			.addIndex('profs',      'profs',      {multi: true})
+			.addIndex('depts',      'depts',      {multi: true})
+			.addIndex('places',     'places',     {multi: true})
+			.addIndex('times',      'times',      {multi: true})
+			.addIndex('gereqs',     'gereqs',     {multi: true})
+			.addIndex('sourcePath', 'sourcePath', {multi: false})
+			.addIndex('crsid',      'crsid',      {multi: false})
+			.addIndex('clbid',      'clbid',      {multi: false})
+			.addIndex('deptnum',    'deptnum',    {multi: false})
+		.addStore('areas', { key: 'sourcePath' })
+			.addIndex('type',       'type',       {multi: true})
+			.addIndex('sourcePath', 'sourcePath', {multi: false})
+	.version(2)
+		.addStore('students', { key: 'id'   })
+
+var db = treo('gobbldygook', schema)
+	.use(treoPromise())
+
+module.exports = window.database = db
+
+window.eraseDatabase = function() {
+	window.database.drop().then(function() {
+		console.log('Database dropped')
+		localStorage.clear()
+		console.log('localStorage cleared')
+	})
 }
-
-module.exports = new Promise(function(resolve, reject) {
-	db.open(settings)
-		.then(function(server) { window.db = server; resolve(server); })
-		.catch(function(err)   { reject(err); })
-})

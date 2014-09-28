@@ -6,23 +6,23 @@ var _ = require('lodash')
 var add = require('./add')
 var db = require('./db')
 var buildDeptNum = require('./deptNum').buildDeptNum
+var deptNumToCrsidCache = require('./getCourses').deptNumToCrsidCache
 
 var logDataLoading = false
+// var logDataLoading = true
 
 function storeCourses(item) {
-	window.courseCache = {}
-
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeCourses')
 
 		var courses = _.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
 			course.deptnum = buildDeptNum(course)
-			window.deptNumToCrsid[course.deptnum] = course.crsid
+			deptNumToCrsidCache[course.deptnum] = course.crsid
 			return course
 		})
 
-		window.db.add('courses', courses)
+		db.store('courses').batch(courses)
 			.then(function(results) {
 				resolve(item)
 			}).catch(function (records, err) {
@@ -34,14 +34,15 @@ function storeCourses(item) {
 function storeArea(item) {
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeArea')
-		var area = item.data.info
 
+		var area = item.data.info
 		area.sourcePath = item.meta.path
 
-		window.db.add('areas', area)
+		db.store('areas').put(area)
 			.then(function(results) {
 				resolve(item)
-			}).catch(function(records, err) {
+			})
+			.catch(function(records, err) {
 				reject(err)
 			})
 	})
@@ -60,16 +61,24 @@ function cleanPriorData(item) {
 		var path = item.meta.path
 		console.info('deleting ' + item.type + ' from ' + path)
 
-		var deleteItemsPromise = window.db.query(item.type, 'sourcePath')
-			.only(path)
-			.remove()
-			.execute()
-
-		deleteItemsPromise
-			.then(function() {
+		db.store(item.type)
+			.index('sourcePath')
+			.get(path)
+			.then(function(items) {
+				return _.map(items, function(item) {
+					var result = Object.create(null)
+					result[item.clbid] = null
+					return result
+				})
+			})
+			.then(function(items) {
+				return db.store(item.type).batch(items)
+			})
+			.then(function(items) {
 				localStorage.removeItem(path)
 				resolve(item)
-			}).catch(function(err) {
+			})
+			.catch(function(err) {
 				reject(err)
 			})
 	})
@@ -81,6 +90,11 @@ function cacheItemHash(item) {
 		localStorage.setItem(item.meta.path, item.meta.hash)
 		resolve(item)
 	})
+}
+
+var lookup = {
+	'courses': 'courses',
+	'areas': 'info'
 }
 
 function updateDatabase(itemType, infoFromServer) {
@@ -100,10 +114,6 @@ function updateDatabase(itemType, infoFromServer) {
 		console.log('need to add ' + itemPath)
 	}
 
-	var lookup = {
-		'courses': 'courses',
-		'areas': 'info'
-	}
 	return readJson(itemPath)
 		.then(function(data) {
 			return {
@@ -121,7 +131,7 @@ function updateDatabase(itemType, infoFromServer) {
 		})
 		.done(function(item) {
 			if (logDataLoading) {
-				console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
+				console.log('added '+item.meta.path+' ('+item.count+' '+item.type+')')
 			}
 			return Promise.resolve(true)
 		})
@@ -170,7 +180,7 @@ function loadDataFiles(infoFile) {
 */
 
 function loadInfoFile(url) {
-	console.log('loading', url)
+	console.log('loading' + url)
 	return readJson(url).then(loadDataFiles)
 }
 
@@ -182,5 +192,4 @@ function loadData() {
 	return Promise.all(_.map(infoFiles, loadInfoFile))
 }
 
-module.exports = loadData
-window.loadData = module.exports
+module.exports = window.loadData = loadData

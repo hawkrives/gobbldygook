@@ -28,14 +28,13 @@
     "watchify": "^1.0.6"
   },
   "dependencies": {
-    "bluebird": "^2.2.1",
-    "crypto-browserify": "^3.0.1",
-    "db.js": "git://github.com/aaronpowell/db.js#master",
+    "bluebird": "^2.3.4",
+    "crypto-browserify": "^3.2.5",
     "fluxxor": "^1.4.1",
-    "humanize-plus": "^1.4.2",
-    "immutable": "^2.0.3",
+    "humanize-plus": "^1.5.0",
+    "immutable": "^2.0.17",
     "lodash": "^2.4.1",
-    "node-uuid": "git://github.com/broofa/node-uuid#master",
-    "react": "^0.11.0"
+    "react": "^0.11.2",
+    "treo": "^0.3.0"
   }
 }
