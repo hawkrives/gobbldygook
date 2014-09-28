@@ -13,7 +13,7 @@ all: build
 setup:
 	mkdir -p dist
 	ln -Fs ../data dist/data
-	ln -Fs ../bower_components dist/components
+	ln -Fs ../bower_components dist/bower_components
 	cp app/index.html dist/index.html
 
 script: setup
