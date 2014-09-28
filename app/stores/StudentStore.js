@@ -2,7 +2,7 @@
 
 var Fluxxor = require('fluxxor')
 var _ = require('lodash')
-var uuid = require('node-uuid')
+var uuid = require('../helpers/uuid')
 var Immutable = require('immutable')
 
 var StudentConstants = require('../constants/StudentConstants')
@@ -82,7 +82,7 @@ var StudentStore = Fluxxor.createStore({
 	handleStudentCreation: function(student) {
 		console.log('StudentStore.createStudent')
 		var genericStudent = {
-			id: uuid.v4(),
+			id: uuid(),
 			name: 'Student ' + randomChar(),
 			enrollment: 1874,
 			graduation: 2016,
@@ -153,7 +153,7 @@ var StudentStore = Fluxxor.createStore({
 		var schedule = args.schedule
 
 		var genericSchedule = {
-			id: uuid.v4(),
+			id: uuid(),
 			year: 0,
 			semester: 0,
 			title: 'Schedule ' + randomChar(),
