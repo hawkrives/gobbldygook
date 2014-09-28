@@ -7,7 +7,7 @@
 				"node_modules",
 				"bower_components",
 				".sass-cache",
-				"public/data",
+				"data",
 				"dist"
 			]
 		},
