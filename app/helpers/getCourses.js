@@ -46,19 +46,11 @@ function deptNumToCrsid(deptNumString) {
 	})
 }
 
-function logResult(result) {
-	console.log(result)
-}
-
 function checkCoursesForDeptNum(courses, deptNumString) {
 	var crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
 
 	return deptNumToCrsid(deptNumString)
 		.then(function(crsid) {
-			/*console.log(
-				'checkCoursesForDeptNum',
-				'checking for', crsid, 'in', crsidsToCheckAgainst,
-				'result', _.contains(crsidsToCheckAgainst, crsid))*/
 			return _.contains(crsidsToCheckAgainst, crsid)
 		}).catch(function(err) {
 			console.error('checkCoursesForDeptNum error', err.stack)
@@ -67,7 +59,6 @@ function checkCoursesForDeptNum(courses, deptNumString) {
 
 module.exports.getCourses = getCourses
 module.exports.getCourse = getCourse
-module.exports.logResult = logResult
 
 module.exports.deptNumToCrsidCache = deptNumToCrsidCache
 module.exports.deptNumToCrsid = deptNumToCrsid
