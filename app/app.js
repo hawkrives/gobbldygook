@@ -23,7 +23,8 @@ window.deptNumToCrsid = {}
 // Stick React where I (and the Chrome devtools) can see it.
 window.React = React
 
-window.log = function(thing){console.log(thing)}
+// Handy debugging function
+window.log = function(thing){console.log(_.isUndefined(thing) ? arguments : thing)}
 
 // Initialize some library options.
 Promise.longStackTraces()
