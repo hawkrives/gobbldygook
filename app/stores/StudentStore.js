@@ -182,10 +182,10 @@ var StudentStore = Fluxxor.createStore({
 
 		// args: {studentId, scheduleId}
 		var studentId = args.studentId
-		var scheduleId = args.scheduleId
+		var scheduleId = args.scheduleId.toString()
 
 		this.students = this.students.updateIn([studentId, 'schedules'], function(schedules) {
-			return schedules.delete(scheduleId)
+			return schedules.remove(scheduleId)
 		})
 
 		if (emitChange) {
