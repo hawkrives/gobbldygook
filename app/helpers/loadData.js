@@ -40,7 +40,8 @@ function storeArea(item) {
 		db.store('areas').put(area)
 			.then(function(results) {
 				resolve(item)
-			}).catch(function(records, err) {
+			})
+			.catch(function(records, err) {
 				reject(err)
 			})
 	})
@@ -65,7 +66,8 @@ function cleanPriorData(item) {
 			.then(function() {
 				localStorage.removeItem(path)
 				resolve(item)
-			}).catch(function(err) {
+			})
+			.catch(function(err) {
 				reject(err)
 			})
 	})
