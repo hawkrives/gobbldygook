@@ -133,10 +133,12 @@ var StudentStore = Fluxxor.createStore({
 
 	handleStudentToggleActive: function(student) {
 		console.log('StudentStore.toggleStudentActive')
-		var changedStudent = this.students.get(student.id).withMutations(function(student) {
-			student.set('active', !student.get('active'))
-		})
-		this.students.set(student.id, changedStudent)
+		// is there a possibility of a student being passed in that isn't an immutable object?
+		var changedStudent = this.students.get(student.get('id'))
+			.withMutations(function(student) {
+				return student.set('active', !student.get('active'))
+			})
+		this.students = this.students.set(student.get('id'), changedStudent)
 
 		this.findActiveStudent()
 
