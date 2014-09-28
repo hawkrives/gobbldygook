@@ -84,7 +84,7 @@ var StudentStore = Fluxxor.createStore({
 		var genericStudent = {
 			id: uuid(),
 			name: 'Student ' + randomChar(),
-			enrollment: 1874,
+			matriculation: 1874,
 			graduation: 2016,
 			creditsNeeded: 35,
 			studies: {},
