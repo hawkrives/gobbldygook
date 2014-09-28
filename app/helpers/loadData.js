@@ -8,6 +8,7 @@ var db = require('./db')
 var buildDeptNum = require('./deptNum').buildDeptNum
 var deptNumToCrsidCache = require('./getCourses').deptNumToCrsidCache
 
+var logDataLoading = false
 // var logDataLoading = true
 
 function storeCourses(item) {
