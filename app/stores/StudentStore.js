@@ -100,9 +100,9 @@ var StudentStore = Fluxxor.createStore({
 			joinedStudent.active = false
 		}
 
-		joinedStudent.studies = Immutable.OrderedMap(joinedStudent.studies)
-		joinedStudent.schedules = Immutable.OrderedMap(joinedStudent.schedules)
-		joinedStudent.overrides = Immutable.Map(joinedStudent.overrides)
+		joinedStudent.studies      = Immutable.OrderedMap(joinedStudent.studies)
+		joinedStudent.schedules    = Immutable.OrderedMap(joinedStudent.schedules)
+		joinedStudent.overrides    = Immutable.Map(joinedStudent.overrides)
 		joinedStudent.fabrications = Immutable.Map(joinedStudent.fabrications)
 
 		var immutableStudent = Immutable.fromJS(joinedStudent)
