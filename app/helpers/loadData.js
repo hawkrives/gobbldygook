@@ -60,10 +60,20 @@ function cleanPriorData(item) {
 		var path = item.meta.path
 		console.info('deleting ' + item.type + ' from ' + path)
 
-		var deleteItemsPromise = db.store(item.type).del(path)
-
-		deleteItemsPromise
-			.then(function() {
+		db.store(item.type)
+			.index('sourcePath')
+			.get(path)
+			.then(function(items) {
+				return _.map(items, function(item) {
+					var result = Object.create(null)
+					result[item.clbid] = null
+					return result
+				})
+			})
+			.then(function(items) {
+				return db.store(item.type).batch(items)
+			})
+			.then(function(items) {
 				localStorage.removeItem(path)
 				resolve(item)
 			})
