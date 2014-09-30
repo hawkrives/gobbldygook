@@ -1,9 +1,8 @@
 @charset "UTF-8";
 
-@import '../../bower_components/ionicons/scss/ionicons-variables';
-@import '../../bower_components/ionicons/scss/ionicons-icons';
-$ionicons-font-path: 'bower_components/ionicons/fonts';
-// @import '../../bower_components/ionicons/scss/ionicons-font';
+@import './ionicons/scss/ionicons-variables';
+@import './ionicons/scss/ionicons-icons';
+$ionicons-font-path: '/ionicons';
 
 @font-face {
 	font-family: $ionicons-font-family;
