@@ -11,7 +11,7 @@ This app is a course scheduler for students at St. Olaf College. You give it you
   - cd: `cd gobbldygook` 
 2. submodule: `git submodule init && git submodule update`
 3. `npm`: `npm install`
-4. SCSS: `gem install scss`
+4. SCSS: `gem install sass`
 5. build: `make` (or, to run a server: [currently needs three terminals: `make script`, `make style`, and `make serve`)
 
 ## Credits
