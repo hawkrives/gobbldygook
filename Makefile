@@ -1,6 +1,6 @@
 BROWSERIFY_OPTS = --debug
 
-sass         = sass
+sass         = node node_modules/node-sass/bin/node-sass
 browserify   = node node_modules/browserify/bin/cmd.js
 watchify     = node node_modules/watchify/bin/cmd.js
 http-server  = node node_modules/http-server/bin/http-server
@@ -23,15 +23,15 @@ script: setup
 	# jscs(?)
 
 style: setup
-	$(sass) --watch app/styles/app.scss:dist/app.css
+	$(sass) --watch app/styles/app.scss -o dist/app.css
 	# $(autoprefixer) -m dist/app.css
 
 serve:
 	$(http-server) ./dist -o
 
-build: setup
+build:
 	$(browserify) $(BROWSERIFY_OPTS) app/app.js -o dist/app.js
-	$(sass) app/styles/app.scss:dist/app.css
+	$(sass) app/styles/app.scss -o dist/app.css
 	$(autoprefixer) -m dist/app.css
 	# cssshrink
 	# colorguard
