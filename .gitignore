@@ -3,7 +3,6 @@
 .idea
 .sass-cache
 .tmp
-bower_components
 node_modules
 test/bower_components
 *.sublime-workspace

@@ -13,7 +13,8 @@ all: build
 setup:
 	mkdir -p dist
 	ln -Fs ../data dist/data
-	ln -Fs ../bower_components dist/bower_components
+	ln -Fs ../app/styles/fonts dist/fonts
+	ln -Fs ../app/styles/ionicons/fonts dist/ionicons
 	cp app/index.html dist/index.html
 
 script: setup
