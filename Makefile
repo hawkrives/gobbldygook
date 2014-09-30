@@ -10,6 +10,9 @@ all: build
 
 .PHONY: clean script style serve
 
+bower:
+	node node_modules/bower/bin/bower install
+
 setup:
 	mkdir -p dist
 	ln -Fs ../data dist/data
