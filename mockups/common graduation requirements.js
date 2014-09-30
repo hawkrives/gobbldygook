@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash')
 
 var hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
@@ -66,7 +68,7 @@ function residency(courses, fabrications) {
 	// entered, and which did not come from the course catalog. I'm using it
 	// as a list of off-campus courses.
 
-	var residency = (
+	var residencyReq = (
 		_.size(courses) - _.size(fabrications) >= 17 &&
 		ensureLimitedOffCampusCoursesDuringFinalYear(courses, fabrications)
 	)
@@ -74,7 +76,7 @@ function residency(courses, fabrications) {
 	return {
 		title: 'Residency',
 		type: 'boolean',
-		result: residency
+		result: residencyReq
 	}
 }
 

@@ -8,11 +8,10 @@ This app is a course scheduler for students at St. Olaf College. You give it you
 
 ## How to build (for a dev)
 1. clone: `git clone https://github.com/hawkrives/gobbldygook.git`
-  - cd: `cd gobbldygook` 
+  - cd: `cd gobbldygook`
 2. submodule: `git submodule init && git submodule update`
 3. `npm`: `npm install`
-4. SCSS: `gem install sass` (you might need to run it with `sudo`)
-5. build: `make` (or, to run a server: [currently needs three terminals: `make script`, `make style`, and `make serve`)
+4. build: `make` (or, to run a server: [currently needs three terminals: `make script`, `make style`, and `make serve`)
 
 ## Credits
 - Initial concept from @xandrasings
