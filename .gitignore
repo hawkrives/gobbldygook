@@ -1,10 +1,20 @@
+# Files to ignore
 *.log
 .DS_Store
 .idea
+*.sublime-workspace
+
+# Temp folders
 .sass-cache
 .tmp
+
+# Node stuff
 node_modules
-test/bower_components
-*.sublime-workspace
+
+# The build results
 dist
+
+# Symlinks that should never actually be created
 data/data
+app/styles/fonts/fonts
+app/styles/ionicons/fonts/fonts
