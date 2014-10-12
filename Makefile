@@ -1,4 +1,5 @@
-BROWSERIFY_OPTS = --debug
+BROWSERIFY_TRANSFORMS = -t 6to5-browserify
+BROWSERIFY_OPTS = --debug $(BROWSERIFY_TRANSFORMS)
 
 sass         = node node_modules/node-sass/bin/node-sass
 browserify   = node node_modules/browserify/bin/cmd.js
