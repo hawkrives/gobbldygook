@@ -21,19 +21,20 @@
   },
   "homepage": "https://hawkrives.github.io/gobbldygook",
   "devDependencies": {
+    "6to5-browserify": "0.0.10",
     "autoprefixer": "^3.1.0",
-    "browserify": "^5.12.1",
+    "browserify": "^6.0.3",
     "colors.css": "^1.0.0",
-    "http-server": "^0.7.1",
-    "node-sass": "^0.9.5-rc1",
-    "watchify": "^1.0.6"
+    "http-server": "^0.7.2",
+    "node-sass": "^0.9.6",
+    "watchify": "^2.0.0"
   },
   "dependencies": {
-    "bluebird": "^2.3.4",
-    "crypto-browserify": "^3.2.5",
-    "fluxxor": "^1.4.1",
+    "bluebird": "^2.3.5",
+    "crypto-browserify": "^3.2.7",
+    "fluxxor": "^1.4.2",
     "humanize-plus": "^1.5.0",
-    "immutable": "^2.0.17",
+    "immutable": "^2.3.0",
     "lodash": "^2.4.1",
     "react": "^0.11.2",
     "treo": "^0.3.0"
