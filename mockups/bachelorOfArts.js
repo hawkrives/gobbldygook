@@ -4,11 +4,11 @@ var _ = require('lodash')
 var Promise = require('bluebird')
 
 var countCredits = require('../app/helpers/countCredits')
-var common = require('./common graduation requirements')
-var utilities = require('./common graduation utilities')
+var common = require('./commonGraduationRequirements')
+var utilities = require('./commonGraduationUtilities')
 var hasDepartment = require('../app/helpers/hasDepartment')
 var isMajoringIn = utilities.isMajoringIn
-var educ = require('./common education requirements')
+var educ = require('./commonEducationRequirements')
 
 function artsMajor(studies, courses) {
 	// One completed major is required for graduation. Depending on the

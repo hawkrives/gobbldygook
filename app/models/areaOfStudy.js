@@ -9,12 +9,12 @@ var getRandomInt = require('../helpers/getRandomInt')
 
 var areas = {
 	// Degrees
-	'd-ba': require('../../mockups/bachelor of arts'),
-	'd-bm': require('../../mockups/bachelor of music'),
+	'd-ba': require('../../mockups/bachelorOfArts'),
+	'd-bm': require('../../mockups/bachelorOfMusic'),
 
 	// Majors
-	'm-csci': require('../../mockups/computer science'),
-	'm-asian': require('../../mockups/asian studies'),
+	'm-csci': require('../../mockups/computerScience'),
+	'm-asian': require('../../mockups/asianStudies'),
 
 	// Concentrations
 

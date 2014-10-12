@@ -1,15 +1,15 @@
-var _ = require('lodash')
-var Promise = require('bluebird')
+'use strict';
+
+let _ = require('lodash')
+let Promise = require('bluebird')
 
 var hasDepartment = require('../app/helpers/hasDepartment')
 var partialTitle = require('../app/helpers/partialTitle').partialTitle
-var coursesAtLevel = require('../app/helpers/courseLevels').coursesAtLevel
-var coursesAtOrAboveLevel = require('../app/helpers/courseLevels').coursesAtOrAboveLevel
-var checkCoursesForDeptNum = require('../app/helpers/getCourses').checkCoursesForDeptNum
+let checkCoursesForDeptNum = require('../app/helpers/getCourses').checkCoursesForDeptNum
 
-var utilities = require('./common major utilities')
+let utilities = require('./commonMajorUtilities')
 
-var csDeptRequiredCourses = [
+const csDeptRequiredCourses = [
 	{deptnum: 'CSCI 121'}, {deptnum: 'CSCI 125'}, {deptnum: 'CSCI 241'}, {deptnum: 'CSCI 251'},
 	{deptnum: 'CSCI 252'}, {deptnum: 'CSCI 231'}, {deptnum: 'CSCI 253'}, {deptnum: 'CSCI 263'},
 	{deptnum: 'CSCI 276'}, {deptnum: 'CSCI 333'}, {deptnum: 'CSCI 273'}, {deptnum: 'CSCI 284'},
@@ -20,7 +20,7 @@ var csDeptRequiredCourses = [
 	{deptnum: 'MATH 232'}, {deptnum: 'MATH 252'},
 ]
 
-var isRequiredCompSciCourse = _.curry(utilities.isRequiredCourse(csDeptRequiredCourses))
+let isRequiredCompSciCourse = _.curry(utilities.isRequiredCourse(csDeptRequiredCourses))
 
 function foundationCourses(courses) {
 	/* Foundation courses:

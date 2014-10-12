@@ -3,7 +3,7 @@ var Promise = require('bluebird')
 
 var hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
 
-var utilities = require('./common education utilities')
+var utilities = require('./commonEducationUtilities')
 var onlyQuarterCreditCoursesCanBePassFail = utilities.onlyQuarterCreditCoursesCanBePassFail
 var hasGenEd = utilities.hasGenEd
 var countGeneds = utilities.countGeneds

@@ -5,7 +5,7 @@ var _ = require('lodash')
 var hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
 var countCredits = require('../app/helpers/countCredits')
 var onlyCoursesAtOrAboveLevel = require('../app/helpers/courseLevels').onlyCoursesAtOrAboveLevel
-var utilities = require('./common graduation utilities')
+var utilities = require('./commonGraduationUtilities')
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a

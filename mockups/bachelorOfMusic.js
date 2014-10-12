@@ -1,10 +1,10 @@
 var _ = require('lodash')
 var Promise = require('bluebird')
 
-var common = require('./common graduation requirements')
-var utilities = require('./common graduation utilities')
-var educ = require('./common education requirements')
-var eduUtilities = require('./common education utilities')
+var common = require('./commonGraduationRequirements')
+var utilities = require('./commonGraduationUtilities')
+var educ = require('./commonEducationRequirements')
+var eduUtilities = require('./commonEducationUtilities')
 var countGeneds = eduUtilities.countGeneds
 
 function onlyMusicMajors(major) {
