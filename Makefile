@@ -23,6 +23,9 @@ script: setup
 	# jshint
 	# jscs(?)
 
+script-once:
+	$(browserify) $(BROWSERIFY_OPTS) app/app.js -o dist/app.js
+
 style: setup
 	$(sass) --watch app/styles/app.scss -o dist/app.css
 	# $(autoprefixer) -m dist/app.css
