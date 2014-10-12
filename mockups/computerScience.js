@@ -3,8 +3,8 @@
 let _ = require('lodash')
 let Promise = require('bluebird')
 
-var hasDepartment = require('../app/helpers/hasDepartment')
-var partialTitle = require('../app/helpers/partialTitle').partialTitle
+let hasDepartment = require('../app/helpers/hasDepartment')
+let partialTitle = require('../app/helpers/partialTitle').partialTitle
 let checkCoursesForDeptNum = require('../app/helpers/getCourses').checkCoursesForDeptNum
 
 let utilities = require('./commonMajorUtilities')

@@ -1,11 +1,11 @@
 'use strict';
 
-var _ = require('lodash')
+let _ = require('lodash')
 
-var hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
-var countCredits = require('../app/helpers/countCredits')
-var onlyCoursesAtOrAboveLevel = require('../app/helpers/courseLevels').onlyCoursesAtOrAboveLevel
-var utilities = require('./commonGraduationUtilities')
+let hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
+let countCredits = require('../app/helpers/countCredits')
+let onlyCoursesAtOrAboveLevel = require('../app/helpers/courseLevels').onlyCoursesAtOrAboveLevel
+let utilities = require('./commonGraduationUtilities')
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a
