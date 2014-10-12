@@ -87,7 +87,7 @@ function beyondTheMajor(studies, courses) {
 		isMajoringIn('Art History', studies),
 	])
 
-	var artMajorAndBeyond = undefined
+	var artMajorAndBeyond = null
 	if (isDedicatedArtist) {
 		// Check the two majors agains the 18-course requirement
 		artMajorAndBeyond = _.chain(majors)
