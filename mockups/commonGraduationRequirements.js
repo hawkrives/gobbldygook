@@ -199,8 +199,8 @@ function finalTwoYearsInResidence(courses, fabrications) {
 
 	if (_.size(years) >= 2) {
 		var sortedYears = _.sortBy(years).reverse()
-		var finalYear = years[0]
-		var secondFinalYear = years[1]
+		var finalYear = sortedYears[0]
+		var secondFinalYear = sortedYears[1]
 		var finalYearFabrications = _.filter(fabrications, {year: finalYear})
 		var secondFinalYearFabrications = _.filter(fabrications, {year: finalYear})
 
