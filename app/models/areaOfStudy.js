@@ -15,6 +15,7 @@ var areas = {
 	// Majors
 	'm-csci': require('../../mockups/computerScience'),
 	'm-asian': require('../../mockups/asianStudies'),
+	'm-chem': require('../../mockups/chemistry'),
 
 	// Concentrations
 
