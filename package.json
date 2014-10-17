@@ -5,8 +5,8 @@
   "main": "build/app.js",
   "browser": "build/index.html",
   "scripts": {
-   "test": "jest"
- },
+    "test": "jest"
+  },
   "engines": {
     "node": ">=0.10.0"
   },
