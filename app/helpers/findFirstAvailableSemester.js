@@ -3,10 +3,10 @@
 var _ = require('lodash')
 var findMissingNumberBinarySearch = require('./findMissingNumberBinarySearch')
 
-// Takes a list of schedules and finds the first open year.
-// If they go [2012, 2013, 2015] findFirstAvailableYear will
-// return 2014. If it goes [2013, 2014, 2015] findFirstAvailableYear
-// will return 2016. Etc.
+// Takes a list of schedules and finds the first open semester.
+// If they go [1, 2, 4] findFirstAvailableYear will
+// return 3. If it goes [1, 2, 3] findFirstAvailableSemester
+// will return 4. Etc.
 
 function findFirstAvailableSemester(schedules, forYear) {
 	var semesters =
