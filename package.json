@@ -4,6 +4,9 @@
   "description": "A course scheduling app for St. Olaf College",
   "main": "build/app.js",
   "browser": "build/index.html",
+  "scripts": {
+   "test": "jest"
+ },
   "engines": {
     "node": ">=0.10.0"
   },
@@ -23,6 +26,7 @@
     "browserify": "^6.0.3",
     "colors.css": "^1.0.0",
     "http-server": "^0.7.2",
+    "jest-cli": "^0.1.18",
     "node-sass": "^0.9.6",
     "watchify": "^2.0.0"
   },
