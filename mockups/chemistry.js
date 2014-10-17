@@ -8,38 +8,46 @@ let partialNameOrTitle = require('../app/helpers/partialTitle').partialNameOrTit
 let coursesAtLevel = require('../app/helpers/courseLevels').coursesAtLevel
 let coursesAtOrAboveLevel = require('../app/helpers/courseLevels').coursesAtOrAboveLevel
 let checkCoursesForDeptNum = require('../app/helpers/getCourses').checkCoursesForDeptNum
+// let checkCoursesForDeptNum = require('../test/helpers/getCourses').checkCoursesForDeptNum
 
 let utilities = require('./commonMajorUtilities')
 
 const chemDeptRequiredCourses = [
 	{deptnum: 'CHEM 121'}, {deptnum: 'CHEM 123'}, {deptnum: 'CHEM 126'},
+	{deptnum: 'CHEM 125'}, {deptnum: 'CHEM 126'},
+	{deptnum: 'CHEM/BIO 125'}, {deptnum: 'CHEM/BIO 126'}, {deptnum: 'CHEM/BIO 227'},
 
-	{deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
+	{deptnum: 'CHEM 247'}, {deptnum: 'CHEM 248'}, {deptnum: 'CHEM 255'}, {deptnum: 'CHEM 371'},
+	{deptnum: 'CHEM 253'}, {deptnum: 'CHEM 254'}, {deptnum: 'CHEM 256'}, {deptnum: 'CHEM 357'},
 ]
 
-var isRequiredAsianStudiesCourse = _.curry(utilities.isRequiredCourse(chemDeptRequiredCourses))
+var isRequiredChemistryCourse = _.curry(utilities.isRequiredCourse(chemDeptRequiredCourses))
 
 function introductorySequence(courses) {
 	// Complete one of the introductory sequences (Chemistry
-	// 121/123/126, Chemistry 125/126, or CH/BI 125/126/227).
+	// 121/123/126, Chemistry 125/126, or CHEM/BI0 125/126/227).
 
 	let sequences = [
 		['CHEM 121', 'CHEM 123', 'CHEM 126'],
 		['CHEM 125', 'CHEM 126'],
-		['CH/BI 125', 'CH/BI 126', 'CH/BI 227'],
+		['CHEM/BIO 125', 'CHEM/BIO 126', 'CHEM/BIO 227'],
 	]
 
-	return Promise.all([
-	]).then(function(details) {
+	let checkedSequences = _.map(sequences, function(sequence) {
+		return Promise.all(_.map(sequence, deptnum => checkCoursesForDeptNum(courses, deptnum)))
+	})
+
+	return Promise.all(checkedSequences).then(function(details) {
+		console.log(details)
 		return {
 			title: 'Introductory Sequence',
 			type: 'object/number',
 			description: 'Complete one of the introductory sequences: Chemistry 121/123/126, Chemistry 125/126, or CH/BI 125/126/227',
-			result: (matching >= needs) && electivesAreGood,
+			result: _.any(details, sequence => _.all(sequence)),
 			details: {
-				has: matching,
-				needs: needs,
-				matches: asianStudiesElectives
+				// hasDepartment: matching,
+				// needs: needs,
+				// matches: asianStudiesElectives
 			}
 		}
 	})
@@ -131,10 +139,10 @@ function beyondChemistry(courses) {
 function checkChemistryMajor(student) {
 	var chemistryMajorRequirements = Promise.all([
 		introductorySequence(student.courses),
-		required(student.courses),
-		laboratory(student.courses),
-		electives(student.courses),
-		beyondChemistry(student.courses),
+		// required(student.courses),
+		// laboratory(student.courses),
+		// electives(student.courses),
+		// beyondChemistry(student.courses),
 	]).then(function(results) {
 		// console.log('checkChemistryMajor results', results)
 		return results
