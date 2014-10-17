@@ -9,7 +9,7 @@ autoprefixer = node node_modules/autoprefixer/autoprefixer
 
 all: build
 
-.PHONY: clean script style serve
+.PHONY: clean script style serve test
 
 setup:
 	mkdir -p dist
@@ -22,6 +22,9 @@ script: setup
 	$(watchify) $(BROWSERIFY_OPTS) app/app.js -o dist/app.js
 	# jshint
 	# jscs(?)
+
+test:
+	$(browserify) $(BROWSERIFY_OPTS) test/testChemistryMajor.js -o test/testChemistryMajor.es5.js
 
 script-once:
 	$(browserify) $(BROWSERIFY_OPTS) app/app.js -o dist/app.js
