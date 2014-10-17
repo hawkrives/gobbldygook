@@ -11,7 +11,7 @@ function splitDeptNum(deptNumString) {
 	var matches = regex.exec(combined)
 
 	return {
-		dept: _.contains(matches[1], '/') ? [matches[2], matches[3]] : [matches[1]],
+		depts: _.contains(matches[1], '/') ? [matches[2], matches[3]] : [matches[1]],
 		num: parseInt(matches[4], 10)
 	}
 }
@@ -30,9 +30,9 @@ function hasDeptNumBetween(args, course) {
 	}
 
 	return _.all([
-		hasDepartment(course, dept),
-		dept.num >= start,
-		dept.num <= end
+		hasDepartment(dept, course),
+		course.num >= start,
+		course.num <= end
 	])
 }
 
