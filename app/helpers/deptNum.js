@@ -1,8 +1,6 @@
 'use strict';
 
 var _ = require('lodash')
-var courses = require('./db').courses
-
 var hasDepartment = require('./hasDepartment')
 
 function splitDeptNum(deptNumString) {
