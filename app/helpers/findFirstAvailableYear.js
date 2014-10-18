@@ -21,7 +21,7 @@ function findFirstAvailableYear(schedules) {
 			.value()
 
 	var missingNo = findMissingNumberBinarySearch(years)
-	if (missingNo !== -1) {
+	if (!_.isNull(missingNo)) {
 		return missingNo
 	}
 
