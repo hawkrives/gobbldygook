@@ -504,5 +504,38 @@ describe('time', function() {
 
 		expect(findTimes('1:00-3:00PM')).toEqual({start: 1300, end: 1500});
 		expect(findTimes('8:00-9:25')).toEqual({start: 800, end: 925});
-	})
+	});
+
+	it('turns the timestrings into semi-usable objects', function() {
+		var convertTimeStringsToOfferings = time.convertTimeStringsToOfferings;
+		var courses = [
+			{times: ['MT 0100-0400PM','MF 0905-1000']},
+			{times: ['M-Th 0100-0200PM','MF 0905-1000']}
+		];
+
+		expect(convertTimeStringsToOfferings(courses[0]).offerings)
+			.toEqual([
+				{day: 'Mo', times: [
+					{end: 1600, start: 1300},
+					{end: 1000, start: 905}
+				]},
+				{day: 'Tu', times: [{end: 1600, start: 1300}]},
+				{day: 'Fr', times: [{end: 1000, start: 905}]}
+			])
+		expect(convertTimeStringsToOfferings(courses[1]).offerings)
+			.toEqual([
+				{day: 'Mo', times: [
+					{end: 1400, start: 1300},
+					{end: 1000, start: 905}
+				]},
+				{day: 'Tu', times: [
+					{end: 1400, start: 1300}]},
+				{day: 'We', times: [
+					{end: 1400, start: 1300}]},
+				{day: 'Th', times: [
+					{end: 1400, start: 1300}]},
+				{day: 'Fr', times: [
+					{end: 1000, start: 905}]}
+			])
+	});
 });
