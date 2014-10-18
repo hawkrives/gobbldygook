@@ -515,27 +515,17 @@ describe('time', function() {
 
 		expect(convertTimeStringsToOfferings(courses[0]).offerings)
 			.toEqual([
-				{day: 'Mo', times: [
-					{end: 1600, start: 1300},
-					{end: 1000, start: 905}
-				]},
-				{day: 'Tu', times: [{end: 1600, start: 1300}]},
-				{day: 'Fr', times: [{end: 1000, start: 905}]}
-			])
+				{day: 'Mo', times:[{start:1300,end:1600},{start:905,end:1000}]},
+				{day: 'Tu', times:[{start:1300,end:1600}]},
+				{day: 'Fr', times:[{start:905,end:1000}]}
+			]);
 		expect(convertTimeStringsToOfferings(courses[1]).offerings)
 			.toEqual([
-				{day: 'Mo', times: [
-					{end: 1400, start: 1300},
-					{end: 1000, start: 905}
-				]},
-				{day: 'Tu', times: [
-					{end: 1400, start: 1300}]},
-				{day: 'We', times: [
-					{end: 1400, start: 1300}]},
-				{day: 'Th', times: [
-					{end: 1400, start: 1300}]},
-				{day: 'Fr', times: [
-					{end: 1000, start: 905}]}
+				{day: 'Mo', times:[{start:1300,end:1400},{start:905,end:1000}]},
+				{day: 'Tu', times:[{start:1300,end:1400}]},
+				{day: 'We', times:[{start:1300,end:1400}]},
+				{day: 'Th', times:[{start:1300,end:1400}]},
+				{day: 'Fr', times:[{start:905,end:1000}]}
 			])
 	});
 });
