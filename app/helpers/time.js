@@ -58,7 +58,7 @@ function findTimes(timestring) {
 	var startTime = parseInt(start, 10)
 	var endTime = parseInt(end, 10)
 
-	if (endTime < 700) {
+	if (endTime <= 800) {
 		// 'M 0100-0400'
 		endsInPM = true
 	}
