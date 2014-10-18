@@ -46,6 +46,10 @@ function findTimes(timestring) {
 	var end = timestring.split('-')[1]
 	var endsInPM = false
 
+	if (start === '00' && end === '00') {
+		return {start: 0, end: 2359}
+	}
+
 	if (_.contains(end, 'PM')) {
 		endsInPM = true
 		end = end.substring(0, end.indexOf('PM'))
