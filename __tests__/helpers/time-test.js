@@ -528,4 +528,31 @@ describe('time', function() {
 				{day: 'Fr', times:[{start:905,end:1000}]}
 			])
 	});
+
+	it('turns the timestrings into semi-usable objects', function() {
+		var checkCourseTimeConflicts = time.checkCourseTimeConflicts;
+
+		var courses = [
+			{offerings: [
+				{day: 'Mo', times:[{start:1300,end:1600},{start:905,end:1000}]},
+				{day: 'Tu', times:[{start:1300,end:1600}]},
+				{day: 'Fr', times:[{start:905,end:1000}]}
+			]},
+			{offerings: [
+				{day: 'Mo', times:[{start:1300,end:1400},{start:905,end:1000}]},
+				{day: 'Tu', times:[{start:1300,end:1400}]},
+				{day: 'We', times:[{start:1300,end:1400}]},
+				{day: 'Th', times:[{start:1300,end:1400}]},
+				{day: 'Fr', times:[{start:905,end:1000}]}
+			]},
+			{offerings: [
+				{day: 'Mo', times:[{start:400,end:600}]}
+			]},
+		];
+
+		expect(checkCourseTimeConflicts(courses[0], courses[1])).toBe(true)
+
+		expect(checkCourseTimeConflicts(courses[0], courses[2])).toBe(false)
+		expect(checkCourseTimeConflicts(courses[1], courses[2])).toBe(false)
+	});
 });
