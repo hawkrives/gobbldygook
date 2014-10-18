@@ -206,7 +206,12 @@ function testCourseTimes() {
 	})
 }
 
+module.exports.findDays = findDays
+module.exports.findTimes = findTimes
+
 module.exports.convertTimeStringsToOfferings = convertTimeStringsToOfferings
+
 module.exports.checkCourseTimeConflicts = checkCourseTimeConflicts
 module.exports.checkScheduleTimeConflicts = checkScheduleTimeConflicts
+
 module.exports.testCourseTimes = testCourseTimes
