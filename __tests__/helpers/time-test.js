@@ -123,7 +123,7 @@ describe('time', function() {
 		expect(findTimes('0130-0430PM')).toEqual({start: 1330, end: 1630});
 		expect(findTimes('0130-0530PM')).toEqual({start: 1330, end: 1730});
 
-		expect(findTimes('0140-0440PM')).toEqual({start: 1340, end: 1440});
+		expect(findTimes('0140-0440PM')).toEqual({start: 1340, end: 1640});
 
 		expect(findTimes('0145-0245PM')).toEqual({start: 1345, end: 1445});
 		expect(findTimes('0145-0300PM')).toEqual({start: 1345, end: 1500});
