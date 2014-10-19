@@ -1,6 +1,6 @@
 'use strict';
 
-var Promise = require("bluebird")
+var Promise = require('bluebird')
 
 function xhrSuccess(req) {
 	return (req.status === 200 || (req.status === 0 && req.responseText));
@@ -9,7 +9,7 @@ function xhrSuccess(req) {
 function read(url) {
 	return new Promise(function(resolve, reject) {
 		var request = new XMLHttpRequest();
-		
+
 		function onload() {
 			if (xhrSuccess(request)) {
 				resolve(request.responseText);
@@ -19,11 +19,11 @@ function read(url) {
 		}
 
 		function onerror() {
-			reject("Can't XHR " + JSON.stringify(url));
+			reject('Can\'t XHR ' + JSON.stringify(url));
 		}
 
 		try {
-			request.open("GET", url, true);
+			request.open('GET', url, true);
 			request.onreadystatechange = function () {
 				if (request.readyState === 4) {
 					onload();
