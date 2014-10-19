@@ -2,27 +2,28 @@ gulp = node node_modules/gulp/bin/gulp.js
 
 all: serve
 
-.PHONY: clean script style serve test watch
+.PHONY: build clean scripts scripts-nowatch styles serve test cloc
 
 build:
 	$(gulp) default
 
 scripts:
 	$(gulp) scripts
+	# uglifyjs
 
 scripts-nowatch:
 	$(gulp) scripts-nowatch
 
 styles:
 	$(gulp) styles
+	# cssshrink
+	# colorguard
 
 serve:
 	$(gulp) serve
 
-# build:
-# 	# cssshrink
-# 	# colorguard
-# 	# uglifyjs
+test:
+	npm test
 
 cloc:
 	cloc . --exclude-dir=data,node_modules,dist,.idea,test --by-file-by-lang
