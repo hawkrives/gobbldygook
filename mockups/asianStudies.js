@@ -1,15 +1,17 @@
-var _ = require('lodash')
-var Promise = require('bluebird')
+'use strict';
 
-var hasDepartment = require('../app/helpers/hasDepartment')
-var partialNameOrTitle = require('../app/helpers/partialTitle').partialNameOrTitle
-var coursesAtLevel = require('../app/helpers/courseLevels').coursesAtLevel
-var coursesAtOrAboveLevel = require('../app/helpers/courseLevels').coursesAtOrAboveLevel
-var checkCoursesForDeptNum = require('../app/helpers/getCourses').checkCoursesForDeptNum
+let _ = require('lodash')
+let Promise = require('bluebird')
 
-var utilities = require('./common major utilities')
+let hasDepartment = require('../app/helpers/hasDepartment')
+let partialNameOrTitle = require('../app/helpers/partialTitle').partialNameOrTitle
+let coursesAtLevel = require('../app/helpers/courseLevels').coursesAtLevel
+let coursesAtOrAboveLevel = require('../app/helpers/courseLevels').coursesAtOrAboveLevel
+let checkCoursesForDeptNum = require('../app/helpers/getCourses').checkCoursesForDeptNum
 
-var asianDeptRequiredCourses = [
+let utilities = require('./commonMajorUtilities')
+
+const asianDeptRequiredCourses = [
 	{deptnum: 'ASIAN 275'},
 
 	{deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},

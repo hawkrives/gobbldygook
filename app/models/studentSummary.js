@@ -1,13 +1,13 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
+import * as _ from 'lodash'
+import * as React from 'react'
+import * as humanize from 'humanize-plus'
 
-var add = require('../helpers/add')
-var humanize = require('humanize-plus')
+import add from '../helpers/add'
 
 var StudentSummary = React.createClass({
-	render: function() {
+	render() {
 		// console.log('student-summary render')
 		var student = this.props
 		var studies = student.studies
@@ -57,4 +57,4 @@ var StudentSummary = React.createClass({
 	}
 })
 
-module.exports = StudentSummary
+export default StudentSummary

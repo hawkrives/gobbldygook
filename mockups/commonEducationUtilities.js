@@ -1,5 +1,7 @@
-var _ = require('lodash')
-var Promise = require('bluebird')
+'use strict';
+
+let _ = require('lodash')
+let Promise = require('bluebird')
 
 function onlyQuarterCreditCoursesCanBePassFail(course) {
 	// NOTE: Because we can't check this (don't know p/f data), we return true

@@ -1,11 +1,11 @@
 'use strict';
 
-var _ = require('lodash')
+let _ = require('lodash')
 
-var hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
-var countCredits = require('../app/helpers/countCredits')
-var onlyCoursesAtOrAboveLevel = require('../app/helpers/courseLevels').onlyCoursesAtOrAboveLevel
-var utilities = require('./common graduation utilities')
+let hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
+let countCredits = require('../app/helpers/countCredits')
+let onlyCoursesAtOrAboveLevel = require('../app/helpers/courseLevels').onlyCoursesAtOrAboveLevel
+let utilities = require('./commonGraduationUtilities')
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a
@@ -199,8 +199,8 @@ function finalTwoYearsInResidence(courses, fabrications) {
 
 	if (_.size(years) >= 2) {
 		var sortedYears = _.sortBy(years).reverse()
-		var finalYear = years[0]
-		var secondFinalYear = years[1]
+		var finalYear = sortedYears[0]
+		var secondFinalYear = sortedYears[1]
 		var finalYearFabrications = _.filter(fabrications, {year: finalYear})
 		var secondFinalYearFabrications = _.filter(fabrications, {year: finalYear})
 

@@ -1,5 +1,7 @@
-var _ = require('lodash')
-var Promise = require('bluebird')
+'use strict';
+
+let _ = require('lodash')
+let Promise = require('bluebird')
 
 var isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
 	// Takes in a list of required course info, as objects that only have the

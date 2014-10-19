@@ -1,17 +1,17 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react/addons')
+import * as _ from 'lodash'
+import * as React from 'react/addons'
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
 var Toast = React.createClass({
-	onClick: function() {
+	onClick() {
 		this.remove()
 	},
-	remove: function() {
+	remove() {
 		this.props.notification.remove()
 	},
-	render: function() {
+	render() {
 		var textProgress = null
 		var progressBar = null
 
@@ -55,7 +55,7 @@ var Toast = React.createClass({
 })
 
 var NotificationContainer = React.createClass({
-	render: function() {
+	render() {
 		var notifications = this.props.notifications ? this.props.notifications : []
 		var notificationComponents = notifications.map(function(notification, index) {
 			return Toast({key: index, notification: notification})
@@ -73,5 +73,5 @@ var NotificationContainer = React.createClass({
 	}
 })
 
-module.exports.NotificationContainer = NotificationContainer
-module.exports.Toast = Toast
+export {NotificationContainer}
+export default Toast

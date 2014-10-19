@@ -21,7 +21,7 @@ window.lodash = _
 window.React = React
 
 // Handy debugging function
-window.log = function(thing) { console.log(_.isUndefined(thing) ? arguments : thing) }
+window.log = (thing) => console.log(_.isUndefined(thing) ? arguments : thing)
 
 // Initialize some library options.
 Promise.longStackTraces()
@@ -47,26 +47,26 @@ function setupStudents() {
 		})
 }
 
-module.exports = {
-	blastoff: function() {
-		// Wait for document.ready and the database.
-		Promise.all([db, document.ready]).then(function() {
-			console.log('3. 2.. 1... Blastoff!')
+function blastoff() {
+	// Wait for document.ready and the database.
+	Promise.all([db, document.ready]).then(function() {
+		console.log('3. 2.. 1... Blastoff!')
 
-			// Load data into the database
-			loadData()
+		// Load data into the database
+		loadData()
 
-			// Set up Fluxxor
-			return setupStudents()
-		}).then(function(fluxxor) {
-			// Render the app
-			var studentComponent = React.renderComponent(
-				Gobbldygook({flux: fluxxor}),
-				document.body
-			)
-		}).done()
-	},
+		// Set up Fluxxor
+		return setupStudents()
+	}).then(function(fluxxor) {
+		// Render the app
+		var studentComponent = React.renderComponent(
+			Gobbldygook({flux: fluxxor}),
+			document.body
+		)
+	}).done()
 }
 
 // run it
-module.exports.blastoff()
+blastoff()
+
+export default blastoff

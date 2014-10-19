@@ -7,6 +7,7 @@
 # Temp folders
 .sass-cache
 .tmp
+test
 
 # Node stuff
 node_modules
@@ -14,7 +15,7 @@ node_modules
 # The build results
 dist
 
-# Symlinks that should never actually be created
+# Symlinks that should never actually be created, but are (were?)
 data/data
 app/styles/fonts/fonts
 app/styles/ionicons/fonts/fonts

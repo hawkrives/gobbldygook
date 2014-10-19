@@ -1,12 +1,12 @@
 'use strict';
 
-var _ = require('lodash')
-var findMissingNumberBinarySearch = require('./findMissingNumberBinarySearch')
+import * as _ from 'lodash'
+import findMissingNumberBinarySearch from './findMissingNumberBinarySearch'
 
-// Takes a list of schedules and finds the first open year.
-// If they go [2012, 2013, 2015] findFirstAvailableYear will
-// return 2014. If it goes [2013, 2014, 2015] findFirstAvailableYear
-// will return 2016. Etc.
+// Takes a list of schedules and finds the first open semester.
+// If they go [1, 2, 4] findFirstAvailableYear will
+// return 3. If it goes [1, 2, 3] findFirstAvailableSemester
+// will return 4. Etc.
 
 function findFirstAvailableSemester(schedules, forYear) {
 	var semesters =
@@ -21,11 +21,11 @@ function findFirstAvailableSemester(schedules, forYear) {
 	semesters.unshift(0)
 
 	var missingNo = findMissingNumberBinarySearch(semesters)
-	if (missingNo !== -1) {
+	if (!_.isNull(missingNo)) {
 		return missingNo
 	}
 
 	return _.max(semesters) + 1
 }
 
-module.exports = findFirstAvailableSemester
+export default findFirstAvailableSemester

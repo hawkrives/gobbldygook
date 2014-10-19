@@ -1,12 +1,13 @@
-var _ = require('lodash')
-var Promise = require('bluebird')
+'use strict';
 
-var hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
+let _ = require('lodash')
+let Promise = require('bluebird')
 
-var utilities = require('./common education utilities')
-var onlyQuarterCreditCoursesCanBePassFail = utilities.onlyQuarterCreditCoursesCanBePassFail
-var hasGenEd = utilities.hasGenEd
-var countGeneds = utilities.countGeneds
+let hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
+
+let utilities = require('./commonEducationUtilities')
+let hasGenEd = utilities.hasGenEd
+let countGeneds = utilities.countGeneds
 
 // TODO: Consider returning matches from these functions, in addition to the boolean.
 

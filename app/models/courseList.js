@@ -1,17 +1,16 @@
 'use strict';
 
-var React = require('react')
-var _ = require('lodash')
+import * as _ from 'lodash'
+import * as React from 'react'
 
-var DraggableContainerMixin = require('../mixins/draggableContainer')
-var Course = require('./course')
+import DraggableContainerMixin from '../mixins/draggableContainer'
+import Course from './course'
 
 var CourseList = React.createClass({
 	mixins: [DraggableContainerMixin],
-	render: function() {
-		var courseElements = _.map(this.props.courses, function(course) {
-			return Course({key: course.clbid, info: course})
-		})
+	render() {
+		var courseElements = _.map(this.props.courses,
+			(course) => Course({key: course.clbid, info: course}))
 
 		// console.log('courses', courseElements)
 
@@ -21,4 +20,4 @@ var CourseList = React.createClass({
 	}
 })
 
-module.exports = CourseList
+export default CourseList

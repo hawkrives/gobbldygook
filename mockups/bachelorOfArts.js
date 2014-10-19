@@ -1,14 +1,12 @@
 'use strict';
 
-var _ = require('lodash')
-var Promise = require('bluebird')
+let _ = require('lodash')
+let Promise = require('bluebird')
 
-var countCredits = require('../app/helpers/countCredits')
-var common = require('./common graduation requirements')
-var utilities = require('./common graduation utilities')
-var hasDepartment = require('../app/helpers/hasDepartment')
-var isMajoringIn = utilities.isMajoringIn
-var educ = require('./common education requirements')
+let common = require('./commonGraduationRequirements')
+let utilities = require('./commonGraduationUtilities')
+let isMajoringIn = utilities.isMajoringIn
+let educ = require('./commonEducationRequirements')
 
 function artsMajor(studies, courses) {
 	// One completed major is required for graduation. Depending on the
@@ -89,7 +87,7 @@ function beyondTheMajor(studies, courses) {
 		isMajoringIn('Art History', studies),
 	])
 
-	var artMajorAndBeyond = undefined
+	var artMajorAndBeyond = null
 	if (isDedicatedArtist) {
 		// Check the two majors agains the 18-course requirement
 		artMajorAndBeyond = _.chain(majors)

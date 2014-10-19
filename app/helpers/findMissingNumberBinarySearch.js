@@ -26,14 +26,14 @@ function findMissingNumberBinarySearch(arr) {
 		}
 
 		else {
-			return -1
+			return null
 		}
 
 		middle = Math.floor((first + last) / 2)
 	}
 
 	// there is no hole
-	return -1
+	return null
 }
 
-module.exports = findMissingNumberBinarySearch
+export default findMissingNumberBinarySearch
