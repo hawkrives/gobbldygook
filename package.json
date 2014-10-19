@@ -11,6 +11,8 @@
     "node": ">=0.10.0"
   },
   "jest": {
+    "testPathIgnorePatterns": ["node_modules", "data"],
+    "unmockedModulePathPatterns": ["lodash"],
     "scriptPreprocessor": "preprocess-for-jest"
   },
   "jshintConfig": {
