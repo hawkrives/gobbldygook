@@ -5,8 +5,8 @@ jest.dontMock('lodash');
 
 describe('countCredits', function() {
 	it('counts the number of credits in a list of courses', function() {
-		var countCredits = require('../../app/helpers/countCredits');
 		var _ = require('lodash');
+		var countCredits = require('../../app/helpers/countCredits').default;
 		var courses = [
 			{credits: 1},
 			{credits: 0.25},
