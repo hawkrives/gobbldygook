@@ -1,4 +1,3 @@
-/* global require:false, console:false */
 'use strict';
 
 // Include gulp and tools
@@ -39,7 +38,7 @@ gulp.task('watchify', function(){
 	var bundler = browserify('./app/app.js');
 	if (watch) {
 		bundler = watchify(bundler, {
-			basedir: './app', // (roots __dirname)
+			basedir: './app',
 			debug: true
 		});
 	}
@@ -52,7 +51,6 @@ gulp.task('watchify', function(){
 				message: 'watchify error: <%= error.message %>'
 			}))
 			.pipe(source('app.js'))
-			// destination changes when `dist` is set to true
 			.pipe(gulp.dest('dist'))
 			.pipe(reload({stream: true, once: true}));
 	};
