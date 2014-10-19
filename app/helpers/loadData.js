@@ -11,6 +11,15 @@ var deptNumToCrsidCache = require('./getCourses').deptNumToCrsidCache
 var logDataLoading = false
 // var logDataLoading = true
 
+function cacheCourses() {
+	_.each(_.range(2012, 2014+1), function(year) {
+		var courses = db.store('courses').index('year').get(year);
+		_.each(courses, function(c) {
+			window.courses[c.clbid] = c;
+		})
+	})
+}
+
 function storeCourses(item) {
 	return new Promise(function(resolve, reject) {
 		console.log(item.meta.path, 'called storeCourses')
