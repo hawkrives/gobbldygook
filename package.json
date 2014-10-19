@@ -74,6 +74,7 @@
     "jshint-stylish": "^1.0.0",
     "run-sequence": "^1.0.1",
     "vinyl-source-stream": "^1.0.0",
+    "reflux": "^0.1.13",
     "watchify": "^2.0.0"
   },
   "dependencies": {
