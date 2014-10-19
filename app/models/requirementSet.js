@@ -59,7 +59,7 @@ var RequirementSet = React.createClass({
 	render() {
 		// console.log('requirement-set render', this.props)
 
-		var details = undefined
+		var details;
 		var type = this.props.type
 
 		if (type === 'array/requirementSet') {
