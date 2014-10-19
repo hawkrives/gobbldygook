@@ -13,9 +13,9 @@ all: build
 
 setup:
 	mkdir -p dist
-	ln -Fs ../data dist/data
-	ln -Fs ../app/styles/fonts dist/fonts
-	ln -Fs ../app/styles/ionicons/fonts dist/ionicons
+	ln -Ffs ../data ./dist/data
+	ln -Ffs ../app/styles/fonts ./dist/fonts
+	ln -Ffs ../app/styles/ionicons/fonts ./dist/ionicons
 	cp app/index.html dist/index.html
 
 script: setup
