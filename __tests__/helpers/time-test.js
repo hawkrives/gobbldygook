@@ -353,154 +353,154 @@ describe('time', function() {
 		expect(findTimes('0955-1050')).toEqual({start: 955, end: 1050});
 
 
-		// expect(findTimes('1000-1055')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1000-1130')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1000-1200')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1000-1200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1000-1230PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1000-1055')).toEqual({start: 1000, end: 1055});
+		expect(findTimes('1000-1130')).toEqual({start: 1000, end: 1130});
+		expect(findTimes('1000-1200')).toEqual({start: 1000, end: 1200});
+		expect(findTimes('1000-1200PM')).toEqual({start: 1000, end: 1200});
+		expect(findTimes('1000-1230PM')).toEqual({start: 1000, end: 1230});
 
-		// expect(findTimes('1005-1100')).toEqual({start: 00, end: 00});
+		expect(findTimes('1005-1100')).toEqual({start: 1005, end: 1100});
 
-		// expect(findTimes('1010-1100')).toEqual({start: 00, end: 00});
+		expect(findTimes('1010-1100')).toEqual({start: 1010, end: 1100});
 
-		// expect(findTimes('1030-1145')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1030-1200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1030-1230PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1030-1145')).toEqual({start: 1030, end: 1145});
+		expect(findTimes('1030-1200PM')).toEqual({start: 1030, end: 1200});
+		expect(findTimes('1030-1230PM')).toEqual({start: 1030, end: 1230});
 
-		// expect(findTimes('1040-0100PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-0110PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-0200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-0300PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-0330PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-0500PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1130')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1135')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1140')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1150')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1200')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1210PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1215PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1220PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1230PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1040-1240PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1040-0100PM')).toEqual({start: 1040, end: 1300});
+		expect(findTimes('1040-0110PM')).toEqual({start: 1040, end: 1310});
+		expect(findTimes('1040-0200PM')).toEqual({start: 1040, end: 1400});
+		expect(findTimes('1040-0300PM')).toEqual({start: 1040, end: 1500});
+		expect(findTimes('1040-0330PM')).toEqual({start: 1040, end: 1530});
+		expect(findTimes('1040-0500PM')).toEqual({start: 1040, end: 1700});
+		expect(findTimes('1040-1130')).toEqual({start: 1040, end: 1130});
+		expect(findTimes('1040-1135')).toEqual({start: 1040, end: 1135});
+		expect(findTimes('1040-1140')).toEqual({start: 1040, end: 1140});
+		expect(findTimes('1040-1150')).toEqual({start: 1040, end: 1150});
+		expect(findTimes('1040-1200')).toEqual({start: 1040, end: 1200});
+		expect(findTimes('1040-1200PM')).toEqual({start: 1040, end: 1200});
+		expect(findTimes('1040-1210PM')).toEqual({start: 1040, end: 1210});
+		expect(findTimes('1040-1215PM')).toEqual({start: 1040, end: 1215});
+		expect(findTimes('1040-1220PM')).toEqual({start: 1040, end: 1220});
+		expect(findTimes('1040-1230PM')).toEqual({start: 1040, end: 1230});
+		expect(findTimes('1040-1240PM')).toEqual({start: 1040, end: 1240});
 
-		// expect(findTimes('1045-0100PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-0115PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-0145PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-1135')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-1140')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-1145')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-1150')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-1200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-1215PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-1230PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-1245PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1045-1345PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1045-0100PM')).toEqual({start: 1045, end: 1300});
+		expect(findTimes('1045-0115PM')).toEqual({start: 1045, end: 1315});
+		expect(findTimes('1045-0145PM')).toEqual({start: 1045, end: 1345});
+		expect(findTimes('1045-1135')).toEqual({start: 1045, end: 1135});
+		expect(findTimes('1045-1140')).toEqual({start: 1045, end: 1140});
+		expect(findTimes('1045-1145')).toEqual({start: 1045, end: 1145});
+		expect(findTimes('1045-1150')).toEqual({start: 1045, end: 1150});
+		expect(findTimes('1045-1200PM')).toEqual({start: 1045, end: 1200});
+		expect(findTimes('1045-1215PM')).toEqual({start: 1045, end: 1215});
+		expect(findTimes('1045-1230PM')).toEqual({start: 1045, end: 1230});
+		expect(findTimes('1045-1245PM')).toEqual({start: 1045, end: 1245});
+		expect(findTimes('1045-1345PM')).toEqual({start: 1045, end: 1345});
 
-		// expect(findTimes('1050-1220PM')).toEqual({start: 00, end: 00});
-
-
-		// expect(findTimes('1100-0130PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1100-0200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1100-1200PM')).toEqual({start: 00, end: 00});
-
-		// expect(findTimes('1110-1240PM')).toEqual({start: 00, end: 00});
-
-		// expect(findTimes('1125-0245PM')).toEqual({start: 00, end: 00});
-
-		// expect(findTimes('1130-0130PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1130-0200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1130-0230PM')).toEqual({start: 00, end: 00});
-
-		// expect(findTimes('1140-1230PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1140-1240PM')).toEqual({start: 00, end: 00});
-
-		// expect(findTimes('1145-0100PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-0110PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-0115PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-0120PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-0145PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-0200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-0215PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-0245')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-0245PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-0345PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-1240')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-1240PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-1245PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1145-1250PM')).toEqual({start: 00, end: 00});
-
-		// expect(findTimes('1150-0110PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1150-0150PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1150-0220PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1150-0250PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1150-0255PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1150-0350PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1150-1240PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1150-1245PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1150-1255PM')).toEqual({start: 00, end: 00});
-
-		// expect(findTimes('1155-1250PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1050-1220PM')).toEqual({start: 1050, end: 1220});
 
 
-		// expect(findTimes('1200-0100PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1200-0150PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1200-0200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1200-0230PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1200-0300PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1200-0400PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1100-0130PM')).toEqual({start: 1100, end: 1330});
+		expect(findTimes('1100-0200PM')).toEqual({start: 1100, end: 1400});
+		expect(findTimes('1100-1200PM')).toEqual({start: 1100, end: 1200});
 
-		// expect(findTimes('1215-0245PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1110-1240PM')).toEqual({start: 1110, end: 1240});
 
-		// expect(findTimes('1220-0150PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1220-0250PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1125-0245PM')).toEqual({start: 1125, end: 1445});
 
-		// expect(findTimes('1230-0100PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1230-0200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1230-0230PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1230-0300PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1230-0330PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1230-0400PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1230-0430PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1130-0130PM')).toEqual({start: 1130, end: 1330});
+		expect(findTimes('1130-0200PM')).toEqual({start: 1130, end: 1400});
+		expect(findTimes('1130-0230PM')).toEqual({start: 1130, end: 1430});
 
-		// expect(findTimes('1235-0235PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1140-1230PM')).toEqual({start: 1140, end: 1230});
+		expect(findTimes('1140-1240PM')).toEqual({start: 1140, end: 1240});
 
-		// expect(findTimes('1240-0330PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1240-0340PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1145-0100PM')).toEqual({start: 1145, end: 1300});
+		expect(findTimes('1145-0110PM')).toEqual({start: 1145, end: 1310});
+		expect(findTimes('1145-0115PM')).toEqual({start: 1145, end: 1315});
+		expect(findTimes('1145-0120PM')).toEqual({start: 1145, end: 1320});
+		expect(findTimes('1145-0145PM')).toEqual({start: 1145, end: 1345});
+		expect(findTimes('1145-0200PM')).toEqual({start: 1145, end: 1400});
+		expect(findTimes('1145-0215PM')).toEqual({start: 1145, end: 1415});
+		expect(findTimes('1145-0245')).toEqual({start: 1145, end: 1445});
+		expect(findTimes('1145-0245PM')).toEqual({start: 1145, end: 1445});
+		expect(findTimes('1145-0345PM')).toEqual({start: 1145, end: 1545});
+		expect(findTimes('1145-1240')).toEqual({start: 1145, end: 1240});
+		expect(findTimes('1145-1240PM')).toEqual({start: 1145, end: 1240});
+		expect(findTimes('1145-1245PM')).toEqual({start: 1145, end: 1245});
+		expect(findTimes('1145-1250PM')).toEqual({start: 1145, end: 1250});
 
-		// expect(findTimes('1245-0105PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0140PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0145PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0205PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0215PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0230PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0245PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0300PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0315PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0335PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-0345PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1245-1545PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1150-0110PM')).toEqual({start: 1150, end: 1310});
+		expect(findTimes('1150-0150PM')).toEqual({start: 1150, end: 1350});
+		expect(findTimes('1150-0220PM')).toEqual({start: 1150, end: 1420});
+		expect(findTimes('1150-0250PM')).toEqual({start: 1150, end: 1450});
+		expect(findTimes('1150-0255PM')).toEqual({start: 1150, end: 1455});
+		expect(findTimes('1150-0350PM')).toEqual({start: 1150, end: 1550});
+		expect(findTimes('1150-1240PM')).toEqual({start: 1150, end: 1240});
+		expect(findTimes('1150-1245PM')).toEqual({start: 1150, end: 1245});
+		expect(findTimes('1150-1255PM')).toEqual({start: 1150, end: 1255});
 
-		// expect(findTimes('1250-0320PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1250-0350PM')).toEqual({start: 00, end: 00});
+		expect(findTimes('1155-1250PM')).toEqual({start: 1155, end: 1250});
 
-		// expect(findTimes('1255-0110PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0140PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0145PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0150PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0155PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0200PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0230PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0235PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0255PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0300PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0325PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0355PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-0500PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-1350PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-1355PM')).toEqual({start: 00, end: 00});
-		// expect(findTimes('1255-1555PM')).toEqual({start: 00, end: 00});
+
+		expect(findTimes('1200-0100PM')).toEqual({start: 1200, end: 1300});
+		expect(findTimes('1200-0150PM')).toEqual({start: 1200, end: 1350});
+		expect(findTimes('1200-0200PM')).toEqual({start: 1200, end: 1400});
+		expect(findTimes('1200-0230PM')).toEqual({start: 1200, end: 1430});
+		expect(findTimes('1200-0300PM')).toEqual({start: 1200, end: 1500});
+		expect(findTimes('1200-0400PM')).toEqual({start: 1200, end: 1600});
+
+		expect(findTimes('1215-0245PM')).toEqual({start: 1215, end: 1445});
+
+		expect(findTimes('1220-0150PM')).toEqual({start: 1220, end: 1350});
+		expect(findTimes('1220-0250PM')).toEqual({start: 1220, end: 1450});
+
+		expect(findTimes('1230-0100PM')).toEqual({start: 1230, end: 1300});
+		expect(findTimes('1230-0200PM')).toEqual({start: 1230, end: 1400});
+		expect(findTimes('1230-0230PM')).toEqual({start: 1230, end: 1430});
+		expect(findTimes('1230-0300PM')).toEqual({start: 1230, end: 1500});
+		expect(findTimes('1230-0330PM')).toEqual({start: 1230, end: 1530});
+		expect(findTimes('1230-0400PM')).toEqual({start: 1230, end: 1600});
+		expect(findTimes('1230-0430PM')).toEqual({start: 1230, end: 1630});
+
+		expect(findTimes('1235-0235PM')).toEqual({start: 1235, end: 1435});
+
+		expect(findTimes('1240-0330PM')).toEqual({start: 1240, end: 1530});
+		expect(findTimes('1240-0340PM')).toEqual({start: 1240, end: 1540});
+
+		expect(findTimes('1245-0105PM')).toEqual({start: 1245, end: 1305});
+		expect(findTimes('1245-0140PM')).toEqual({start: 1245, end: 1340});
+		expect(findTimes('1245-0145PM')).toEqual({start: 1245, end: 1345});
+		expect(findTimes('1245-0205PM')).toEqual({start: 1245, end: 1405});
+		expect(findTimes('1245-0215PM')).toEqual({start: 1245, end: 1415});
+		expect(findTimes('1245-0230PM')).toEqual({start: 1245, end: 1430});
+		expect(findTimes('1245-0245PM')).toEqual({start: 1245, end: 1445});
+		expect(findTimes('1245-0300PM')).toEqual({start: 1245, end: 1500});
+		expect(findTimes('1245-0315PM')).toEqual({start: 1245, end: 1515});
+		expect(findTimes('1245-0335PM')).toEqual({start: 1245, end: 1535});
+		expect(findTimes('1245-0345PM')).toEqual({start: 1245, end: 1545});
+		expect(findTimes('1245-1545PM')).toEqual({start: 1245, end: 1545});
+
+		expect(findTimes('1250-0320PM')).toEqual({start: 1250, end: 1520});
+		expect(findTimes('1250-0350PM')).toEqual({start: 1250, end: 1550});
+
+		expect(findTimes('1255-0110PM')).toEqual({start: 1255, end: 1310});
+		expect(findTimes('1255-0140PM')).toEqual({start: 1255, end: 1340});
+		expect(findTimes('1255-0145PM')).toEqual({start: 1255, end: 1345});
+		expect(findTimes('1255-0150PM')).toEqual({start: 1255, end: 1350});
+		expect(findTimes('1255-0155PM')).toEqual({start: 1255, end: 1355});
+		expect(findTimes('1255-0200PM')).toEqual({start: 1255, end: 1400});
+		expect(findTimes('1255-0230PM')).toEqual({start: 1255, end: 1430});
+		expect(findTimes('1255-0235PM')).toEqual({start: 1255, end: 1435});
+		expect(findTimes('1255-0255PM')).toEqual({start: 1255, end: 1455});
+		expect(findTimes('1255-0300PM')).toEqual({start: 1255, end: 1500});
+		expect(findTimes('1255-0325PM')).toEqual({start: 1255, end: 1525});
+		expect(findTimes('1255-0355PM')).toEqual({start: 1255, end: 1555});
+		expect(findTimes('1255-0500PM')).toEqual({start: 1255, end: 1700});
+		expect(findTimes('1255-1350PM')).toEqual({start: 1255, end: 1350});
+		expect(findTimes('1255-1355PM')).toEqual({start: 1255, end: 1355});
+		expect(findTimes('1255-1555PM')).toEqual({start: 1255, end: 1555});
 
 		expect(findTimes('1:00-3:00PM')).toEqual({start: 1300, end: 1500});
 		expect(findTimes('8:00-9:25')).toEqual({start: 800, end: 925});
