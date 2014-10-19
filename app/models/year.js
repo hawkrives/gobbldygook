@@ -1,15 +1,15 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var Fluxxor = require('fluxxor')
+import _ from 'lodash'
+import React from 'react'
+import Fluxxor from 'fluxxor'
 var FluxChildMixin = Fluxxor.FluxChildMixin(React)
 
-var Course = require('./course')
-var Semester = require('./semester')
+import Course from './course'
+import Semester from './semester'
 
-var findFirstAvailableSemester = require('../helpers/findFirstAvailableSemester')
-var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
+import findFirstAvailableSemester from '../helpers/findFirstAvailableSemester'
+import calculateNextScheduleId from '../helpers/calculateNextScheduleId'
 
 var isCurrentYearSchedule = _.curry(function(year, schedule) {
 	return (schedule.year === year)
@@ -18,11 +18,11 @@ var isCurrentYearSchedule = _.curry(function(year, schedule) {
 var Year = React.createClass({
 	mixins: [FluxChildMixin],
 
-	canAddSemester: function() {
+	canAddSemester() {
 		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
 	},
 
-	addSemester: function() {
+	addSemester() {
 		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
 
 		this.getFlux().actions.createSchedule(this.props.studentId, {
@@ -31,7 +31,7 @@ var Year = React.createClass({
 		})
 	},
 
-	removeYear: function() {
+	removeYear() {
 		var currentYearSchedules = _.filter(this.props.schedules, isCurrentYearSchedule(this.props.year))
 		console.log('called removeYear', currentYearSchedules)
 		var scheduleIds = _.pluck(currentYearSchedules, 'id')
@@ -39,7 +39,7 @@ var Year = React.createClass({
 		this.getFlux().actions.destroyMultipleSchedules(this.props.studentId, scheduleIds)
 	},
 
-	render: function() {
+	render() {
 		var schedules = _.filter(this.props.schedules, {year: this.props.year})
 
 		var terms = _.map(_.groupBy(schedules, 'semester'), function(schedule, semester) {
@@ -74,4 +74,4 @@ var Year = React.createClass({
 	}
 })
 
-module.exports = Year
+export default Year

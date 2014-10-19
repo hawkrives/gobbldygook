@@ -1,12 +1,12 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
+import _ from 'lodash'
+import React from 'react'
 
-var Requirement = require('./requirement')
+import Requirement from './requirement'
 
 var BooleanRequirement = React.createClass({
-	render: function() {
+	render() {
 		return React.DOM.div(
 			{className: 'requirement-result requirement-result-boolean'},
 			React.DOM.span(
@@ -17,7 +17,7 @@ var BooleanRequirement = React.createClass({
 })
 
 var BooleanArrayRequirement = React.createClass({
-	render: function() {
+	render() {
 		return React.DOM.div(
 			{className: 'requirement-result requirement-result-boolean-array'},
 			React.DOM.ul(
@@ -38,7 +38,7 @@ var BooleanArrayRequirement = React.createClass({
 })
 
 var NumberObjectRequirement = React.createClass({
-	render: function() {
+	render() {
 		return React.DOM.div(
 			{className: 'requirement-result requirement-result-object-number'},
 			React.DOM.span(
@@ -56,7 +56,7 @@ var NumberObjectRequirement = React.createClass({
 })
 
 var RequirementSet = React.createClass({
-	render: function() {
+	render() {
 		// console.log('requirement-set render', this.props)
 
 		var details = undefined
@@ -99,4 +99,4 @@ var RequirementSet = React.createClass({
 	}
 })
 
-module.exports = RequirementSet
+export default RequirementSet

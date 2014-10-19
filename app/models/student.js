@@ -1,32 +1,32 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var Fluxxor = require('fluxxor')
+import _ from 'lodash'
+import React from 'react'
+import Fluxxor from 'fluxxor'
 var FluxMixin = Fluxxor.FluxMixin(React)
 var StoreWatchMixin = Fluxxor.StoreWatchMixin
 
-var GraduationStatus = require('./graduationStatus')
-var CourseTable = require('./courseTable')
+import GraduationStatus from './graduationStatus'
+import CourseTable from './courseTable'
 
-var StudentStore = require('../stores/StudentStore')
-var StudentConstants = require('../constants/StudentConstants')
+import StudentStore from '../stores/StudentStore'
+import StudentConstants from '../constants/StudentConstants'
 
 var Student = React.createClass({
 	mixins: [FluxMixin, StoreWatchMixin('StudentStore')],
 
-	getStateFromFlux: function() {
+	getStateFromFlux() {
 		var flux = this.getFlux()
 		console.log(flux.store('StudentStore').getState())
 		return flux.store('StudentStore').getState()
 	},
 
-	// shouldComponentUpdate: function(nextProps, nextState) {
+	// shouldComponentUpdate(nextProps, nextState) {
 		// return !StudentStore.$equals(this.state.currentStudent, nextState.currentStudent)
 		// return true
 	// },
 
-	render: function() {
+	render() {
 		var student = this.state.active
 		console.info('student render', student)
 		return React.DOM.div(
@@ -40,4 +40,4 @@ var Student = React.createClass({
 	},
 })
 
-module.exports = Student
+export default Student
