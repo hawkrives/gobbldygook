@@ -28,6 +28,7 @@
     "http-server": "^0.7.2",
     "jest-cli": "^0.1.18",
     "node-sass": "^0.9.6",
+    "reflux": "^0.1.13",
     "watchify": "^2.0.0"
   },
   "dependencies": {
