@@ -1,6 +1,6 @@
 'use strict';
 
-var Promise = require('bluebird')
+import * as Promise from 'bluebird'
 
 function xhrSuccess(req) {
 	return (req.status === 200 || (req.status === 0 && req.responseText));
@@ -39,4 +39,4 @@ function read(url) {
 	})
 }
 
-module.exports = read
+export default read

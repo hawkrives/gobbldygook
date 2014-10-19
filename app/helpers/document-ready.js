@@ -1,8 +1,8 @@
 'use strict';
 
-var Promise = require('bluebird')
+import * as Promise from 'bluebird'
 
-module.exports = document.ready = new Promise(function(resolve) {
+let documentReady = new Promise(function(resolve) {
 	function onReady() {
 		resolve()
 		document.removeEventListener('DOMContentLoaded', onReady, true)
@@ -16,3 +16,6 @@ module.exports = document.ready = new Promise(function(resolve) {
 		window.addEventListener('load', onReady, true)
 	}
 })
+
+document.ready = documentReady
+export default documentReady

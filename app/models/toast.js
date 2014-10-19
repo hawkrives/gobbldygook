@@ -1,7 +1,7 @@
 'use strict';
 
-import _ from 'lodash'
-import React from 'react/addons'
+import * as _ from 'lodash'
+import * as React from 'react/addons'
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
 var Toast = React.createClass({

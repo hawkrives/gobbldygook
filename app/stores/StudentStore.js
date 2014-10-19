@@ -1,10 +1,10 @@
 'use strict';
 
-import _ from 'lodash'
-import Fluxxor from 'fluxxor'
+import * as _ from 'lodash'
+import * as Fluxxor from 'fluxxor'
 
 import uuid from '../helpers/uuid'
-import Immutable from 'immutable'
+import * as Immutable from 'immutable'
 
 import StudentConstants from '../constants/StudentConstants'
 import ScheduleConstants from '../constants/ScheduleConstants'

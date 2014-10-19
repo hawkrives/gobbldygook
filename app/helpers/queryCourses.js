@@ -1,7 +1,7 @@
 'use strict';
 
-var _ = require('lodash')
-var Promise = require('bluebird')
+import * as _ from 'lodash'
+import * as Promise from 'bluebird'
 
 // query = {
 // 		'title': {values: ['Chinese'], flags: ['caseInsensitive', 'partialMatch']},
@@ -44,4 +44,4 @@ function queryCourses(query) {
 }
 
 window.queryCourses = queryCourses
-module.exports = queryCourses
+export default queryCourses

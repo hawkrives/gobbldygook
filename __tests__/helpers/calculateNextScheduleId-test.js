@@ -3,7 +3,7 @@ jest.dontMock('../../app/helpers/calculateNextScheduleId');
 
 describe('calculateNextScheduleId', function() {
  it('calculates the next available schedule id', function() {
-   var calculateNextScheduleId = require('../../app/helpers/calculateNextScheduleId');
+   var calculateNextScheduleId = require('../../app/helpers/calculateNextScheduleId').default;
    var schedules = {
 		"1": {"id": 1},
 		"2": {"id": 2},
