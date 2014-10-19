@@ -44,5 +44,8 @@ build:
 	# colorguard
 	# uglifyjs
 
+cloc:
+	cloc . --exclude-dir=data,node_modules,dist,.idea,test --by-file-by-lang
+
 clean:
 	rm -rf .sass_cache .tmp ./dist
