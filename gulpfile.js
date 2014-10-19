@@ -1,19 +1,25 @@
 /* global require:false, console:false */
 'use strict';
 
-// Include Gulp & Tools We'll Use
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-var del = require('del');
-var runSequence = require('run-sequence');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
-var source = require('vinyl-source-stream');
+// Include gulp and tools
+var autoprefixer = require('gulp-autoprefixer');
 var browserify = require('browserify');
-var watchify = require('watchify');
+var browserSync = require('browser-sync');
+var changed = require('gulp-changed');
+var del = require('del');
+var gulp = require('gulp');
+var jshint = require('gulp-jshint');
+var notify = require('gulp-notify');
+var runSequence = require('run-sequence');
+var sass = require('gulp-sass');
+var size = require('gulp-size');
+var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
-
 var to5 = require("6to5-browserify");
+var watchify = require('watchify');
+
+gulp.if = require('gulp-if');
+var reload = browserSync.reload;
 
 var AUTOPREFIXER_BROWSERS = [
 	'ie >= 10',
@@ -42,7 +48,7 @@ gulp.task('watchify', function(){
 
 	var rebundle = function() {
 		return bundler.bundle()
-			.on('error', $.notify.onError({
+			.on('error', notify.onError({
 				message: 'watchify error: <%= error.message %>'
 			}))
 			.pipe(source('app.js'))
@@ -70,30 +76,30 @@ gulp.task('scripts-nowatch', function() {
 // Lint JavaScript
 gulp.task('jshint', function () {
 	return gulp.src('app/scripts/**/*.js')
-		.pipe($.jshint())
-		.pipe($.jshint.reporter('jshint-stylish'))
-		.pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
+		.pipe(gulp.if(!browserSync.active, jshint.reporter('fail')));
 });
 
 // Copy all files in /app
 gulp.task('copy', function () {
 	// return gulp.src(['app/*','!app/*.html'], {dot: true})
 		// .pipe(gulp.dest('dist'))
-		// .pipe($.size({title: 'copy'}));
+		// .pipe(size({title: 'copy'}));
 });
 
 // Copy Web Fonts To Dist
 gulp.task('fonts:woff', function () {
 	return gulp.src(['app/styles/fonts/**'])
 		.pipe(gulp.dest('dist/fonts'))
-		.pipe($.size({title: 'fonts'}));
+		.pipe(size({title: 'fonts'}));
 });
 
 // Copy Icons To Dist
 gulp.task('fonts:ionicons', function () {
 	return gulp.src(['app/styles/ionicons/font/*.woff'])
 		.pipe(gulp.dest('dist/ionicons'))
-		.pipe($.size({title: 'ionicons'}));
+		.pipe(size({title: 'ionicons'}));
 });
 
 gulp.task('fonts', ['fonts:woff', 'fonts:ionicons'])
@@ -102,24 +108,24 @@ gulp.task('fonts', ['fonts:woff', 'fonts:ionicons'])
 // Automatically Prefix CSS
 gulp.task('styles:css', function () {
 	return gulp.src('app/styles/**/*.css')
-		.pipe($.changed('app/styles'))
-		.pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
+		.pipe(changed('app/styles'))
+		.pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
 		.pipe(gulp.dest('dist'))
-		.pipe($.size({title: 'styles:css'}));
+		.pipe(size({title: 'styles:css'}));
 });
 
 // Compile Any Other Sass Files You Added (app/styles)
 gulp.task('styles:scss', function () {
 	return gulp.src(['app/styles/**/*.scss'])
 		// .pipe(sourcemaps.init())
-		.pipe($.sass())
+		.pipe(sass())
 		// .pipe(sourcemaps.write())
-		.on('error', $.notify.onError({
+		.on('error', notify.onError({
 			message: 'styles:scss error: <%= error.message %>'
 		}))
-		.pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
+		.pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
 		.pipe(gulp.dest('dist'))
-		.pipe($.size({title: 'styles:scss'}));
+		.pipe(size({title: 'styles:scss'}));
 });
 
 // Output Final CSS Styles
@@ -129,7 +135,7 @@ gulp.task('styles', ['styles:scss', 'styles:css']);
 gulp.task('html', function () {
 	return gulp.src('app/index.html')
 		.pipe(gulp.dest('dist'))
-		.pipe($.size({title: 'html'}));
+		.pipe(size({title: 'html'}));
 });
 
 // Clean Output Directory
