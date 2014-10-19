@@ -73,7 +73,7 @@ function findTimes(timestring) {
 		endTime += 1200
 	}
 
-	if (endsInPM && startTime < 730) {
+	if (endsInPM && startTime < 700) {
 		startTime += 1200
 	}
 
