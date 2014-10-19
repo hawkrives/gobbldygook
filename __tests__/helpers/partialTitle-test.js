@@ -1,10 +1,9 @@
 // __tests__/partialTitle-test.js
 jest.dontMock('../../app/helpers/partialTitle');
-jest.dontMock('lodash');
 
 describe('partialTitle', function() {
-	var _ = require('lodash');
 	var courses = [];
+	var _ = require('lodash');
 
 	beforeEach(function() {
 		courses = [

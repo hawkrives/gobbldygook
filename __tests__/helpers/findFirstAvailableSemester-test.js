@@ -1,11 +1,8 @@
 // __tests__/findFirstAvailableSemester-test.js
 jest.dontMock('../../app/helpers/findFirstAvailableSemester');
 jest.dontMock('../../app/helpers/findMissingNumberBinarySearch');
-jest.dontMock('lodash');
 
 describe('findFirstAvailableSemester', function() {
-	var _ = require('lodash');
-
 	it('takes a list of schedules and finds the first open semester', function() {
 		var findFirstAvailableSemester = require('../../app/helpers/findFirstAvailableSemester');
 		var schedules = {

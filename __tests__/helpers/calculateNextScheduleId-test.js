@@ -1,6 +1,5 @@
 // __tests__/calculateNextScheduleId-test.js
 jest.dontMock('../../app/helpers/calculateNextScheduleId');
-jest.dontMock('lodash');
 
 describe('calculateNextScheduleId', function() {
  it('calculates the next available schedule id', function() {

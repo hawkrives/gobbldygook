@@ -1,11 +1,8 @@
 // __tests__/findFirstAvailableYear-test.js
 jest.dontMock('../../app/helpers/findFirstAvailableYear');
 jest.dontMock('../../app/helpers/findMissingNumberBinarySearch');
-jest.dontMock('lodash');
 
 describe('findFirstAvailableYear', function() {
-	var _ = require('lodash');
-
 	it('takes a list of schedules and finds the first open year', function() {
 		var findFirstAvailableYear = require('../../app/helpers/findFirstAvailableYear');
 		var schedules = {

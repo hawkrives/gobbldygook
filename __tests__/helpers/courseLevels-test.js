@@ -1,9 +1,7 @@
 // __tests__/courseLevels-test.js
 jest.dontMock('../../app/helpers/courseLevels');
-jest.dontMock('lodash');
 
 describe('courseLevels', function() {
-	var _ = require('lodash');
 	var courseLevels = require('../../app/helpers/courseLevels');
 	var courses = [];
 
