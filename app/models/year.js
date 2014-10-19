@@ -1,8 +1,8 @@
 'use strict';
 
-import _ from 'lodash'
-import React from 'react'
-import Fluxxor from 'fluxxor'
+import * as _ from 'lodash'
+import * as React from 'react'
+import * as Fluxxor from 'fluxxor'
 var FluxChildMixin = Fluxxor.FluxChildMixin(React)
 
 import Course from './course'

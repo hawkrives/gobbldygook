@@ -1,7 +1,7 @@
 'use strict';
 
-var _ = require('lodash')
-var hasDepartment = require('./hasDepartment')
+import * as _ from 'lodash'
+import hasDepartment from './hasDepartment'
 
 function splitDeptNum(deptNumString) {
 	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
@@ -36,6 +36,8 @@ function hasDeptNumBetween(args, course) {
 	])
 }
 
-module.exports.splitDeptNum = splitDeptNum
-module.exports.buildDeptNum = buildDeptNum
-module.exports.hasDeptNumBetween = hasDeptNumBetween
+export {
+	splitDeptNum,
+	buildDeptNum,
+	hasDeptNumBetween
+}

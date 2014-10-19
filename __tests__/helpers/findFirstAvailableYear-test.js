@@ -4,7 +4,7 @@ jest.dontMock('../../app/helpers/findMissingNumberBinarySearch');
 
 describe('findFirstAvailableYear', function() {
 	it('takes a list of schedules and finds the first open year', function() {
-		var findFirstAvailableYear = require('../../app/helpers/findFirstAvailableYear');
+		var findFirstAvailableYear = require('../../app/helpers/findFirstAvailableYear').default;
 		var schedules = {
 			"3": {"id": 3, "year": 2012},
 			"6": {"id": 6, "year": 2013},
