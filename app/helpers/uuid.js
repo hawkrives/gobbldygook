@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function b(
+function b(
 	a                  // placeholder
 ) {
 	return a           // if the placeholder was passed, return
@@ -21,3 +21,5 @@ module.exports = function b(
 				b            // random hex digits
 			)
 }
+
+export default b

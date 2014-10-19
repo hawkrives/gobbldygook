@@ -141,7 +141,8 @@ gulp.task('serve', ['watchify', 'html', 'styles', 'fonts', 'copy'], function () 
 	watch = true;
 
 	browserSync({
-		notify: false,
+		notify: true,
+		minify: false,
 		server: {
 			baseDir: ['dist', './']
 		}

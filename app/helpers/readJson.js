@@ -1,6 +1,6 @@
 'use strict';
 
-var read = require('./read')
+import read from './read'
 
 function readJson(url) {
 	return read(url)
@@ -11,4 +11,4 @@ function readJson(url) {
 	)
 }
 
-module.exports = readJson
+export default readJson

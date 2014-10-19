@@ -1,13 +1,10 @@
 // __tests__/findMissingNumberBinarySearch-test.js
 jest.dontMock('../../app/helpers/findMissingNumberBinarySearch');
 jest.dontMock('../../app/helpers/findMissingNumberBinarySearch');
-jest.dontMock('lodash');
 
 describe('findMissingNumberBinarySearch', function() {
-	var _ = require('lodash');
-
 	it('takes a list of numbers and finds the first gap', function() {
-		var findMissingNumberBinarySearch = require('../../app/helpers/findMissingNumberBinarySearch');
+		var findMissingNumberBinarySearch = require('../../app/helpers/findMissingNumberBinarySearch').default;
 		var nums = [
 			[1,2,3],
 			[0,1,2],

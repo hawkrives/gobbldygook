@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('lodash')
+import * as _ from 'lodash'
 
 function findDays(daystring) {
 	var expandedDays = {
@@ -210,12 +210,14 @@ function testCourseTimes() {
 	})
 }
 
-module.exports.findDays = findDays
-module.exports.findTimes = findTimes
+export {
+	findDays,
+	findTimes,
 
-module.exports.convertTimeStringsToOfferings = convertTimeStringsToOfferings
+	convertTimeStringsToOfferings,
 
-module.exports.checkCourseTimeConflicts = checkCourseTimeConflicts
-module.exports.checkScheduleTimeConflicts = checkScheduleTimeConflicts
+	checkCourseTimeConflicts,
+	checkScheduleTimeConflicts,
 
-module.exports.testCourseTimes = testCourseTimes
+	testCourseTimes
+}

@@ -1,28 +1,9 @@
 // __tests__/partialTitle-test.js
 jest.dontMock('../../app/helpers/time');
-jest.dontMock('lodash');
 
 describe('time', function() {
-	var _ = require('lodash');
-	var timestrings = [];
-	var time = require('../../app/helpers/time');
-
-	beforeEach(function() {
-		time = require('../../app/helpers/time');
-		timestrings = [
-			{times: ['F 0800-0855', 'F 0905-1000', 'F 1045-1140']},
-			{times: ['M 0700-1000PM', 'MWF 0200-0255PM']},
-			{times: ['M 0700-1000PM', 'MWF 1045-1140']},
-			{times: ['M-F 0800-1000', 'M-F 0100-0300PM']},
-			{times: ['MWF 0800-1000', 'MWF 1150-0150PM', 'Th 0800-0925',
-				'Th 0935-1050', 'Th 1245-0205PM']},
-			{times: ['M-F 0800-1000', 'MTThFW 1040-1240PM', 'M-F 0100-0300PM']},
-			{times: ['Th 0700-0800']},
-		];
-	});
-
 	it('turns the day abbreviations into a list of unambiguous days', function() {
-		var findDays = time.findDays;
+		var findDays = require('../../app/helpers/time').findDays;
 
 		expect(findDays('M')).toEqual(['Mo']);
 		expect(findDays('T')).toEqual(['Tu']);
@@ -73,7 +54,7 @@ describe('time', function() {
 	});
 
 	it('turns the absurd time shorthand into unambiguous 24-hour time', function() {
-		var findTimes = time.findTimes;
+		var findTimes = require('../../app/helpers/time').findTimes;
 
 		expect(findTimes('5:00-9:00')).toEqual({start: 500, end: 900});
 		expect(findTimes('7:00-9:00')).toEqual({start: 700, end: 900});
@@ -507,7 +488,7 @@ describe('time', function() {
 	});
 
 	it('turns the timestrings into semi-usable objects', function() {
-		var convertTimeStringsToOfferings = time.convertTimeStringsToOfferings;
+		var convertTimeStringsToOfferings = require('../../app/helpers/time').convertTimeStringsToOfferings;
 		var courses = [
 			{times: ['MT 0100-0400PM','MF 0905-1000']},
 			{times: ['M-Th 0100-0200PM','MF 0905-1000']}
@@ -530,7 +511,7 @@ describe('time', function() {
 	});
 
 	it('turns the timestrings into semi-usable objects', function() {
-		var checkCourseTimeConflicts = time.checkCourseTimeConflicts;
+		var checkCourseTimeConflicts = require('../../app/helpers/time').checkCourseTimeConflicts;
 
 		var courses = [
 			{offerings: [

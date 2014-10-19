@@ -1,16 +1,16 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var humanize = require('humanize-plus')
+import * as _ from 'lodash'
+import * as React from 'react'
+import * as humanize from 'humanize-plus'
 
-var AreaOfStudy = require('./areaOfStudy')
-var StudentSummary = require('./studentSummary')
+import AreaOfStudy from './areaOfStudy'
+import StudentSummary from './studentSummary'
 
-var getCourses = require('../helpers/getCourses').getCourses
+import {getCourses} from '../helpers/getCourses'
 
 var GraduationStatus = React.createClass({
-	findActiveCourses: function() {
+	findActiveCourses() {
 		var clbids = _.chain(this.props.student.schedules)
 			.filter('active')
 			.pluck('clbids')
@@ -28,18 +28,18 @@ var GraduationStatus = React.createClass({
 			})
 		})
 	},
-	getInitialState: function() {
+	getInitialState() {
 		return {
 			courses: []
 		}
 	},
-	componentWillReceiveProps: function() {
+	componentWillReceiveProps() {
 		this.findActiveCourses()
 	},
-	componentDidMount: function() {
+	componentDidMount() {
 		this.findActiveCourses()
 	},
-	render: function() {
+	render() {
 		var student = _.clone(this.props.student, true)
 		student.courses = this.state.courses
 		console.info('graduation-status render', student)
@@ -77,4 +77,4 @@ var GraduationStatus = React.createClass({
 	}
 });
 
-module.exports = GraduationStatus
+export default GraduationStatus

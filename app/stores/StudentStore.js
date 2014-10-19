@@ -1,13 +1,14 @@
 'use strict';
 
-var Fluxxor = require('fluxxor')
-var _ = require('lodash')
-var uuid = require('../helpers/uuid')
-var Immutable = require('immutable')
+import * as _ from 'lodash'
+import * as Fluxxor from 'fluxxor'
 
-var StudentConstants = require('../constants/StudentConstants')
-var ScheduleConstants = require('../constants/ScheduleConstants')
-var StudyConstants = require('../constants/StudyConstants')
+import uuid from '../helpers/uuid'
+import * as Immutable from 'immutable'
+
+import StudentConstants from '../constants/StudentConstants'
+import ScheduleConstants from '../constants/ScheduleConstants'
+import StudyConstants from '../constants/StudyConstants'
 
 function randomChar() {
 	// modified from http://stackoverflow.com/questions/10726909/random-alpha-numeric-string-in-javascript

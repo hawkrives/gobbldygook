@@ -1,3 +1,2 @@
-module.exports = function(a, b) {
-	return a + b
-}
+'use strict';
+export default (a, b) => a + b

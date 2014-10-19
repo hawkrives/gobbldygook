@@ -10,6 +10,39 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "data"
+    ],
+    "unmockedModulePathPatterns": [
+      "lodash"
+    ],
+    "scriptPreprocessor": "preprocess-for-jest"
+  },
+  "jshintConfig": {
+    "asi": true,
+    "browser": true,
+    "curly": false,
+    "devel": true,
+    "expr": true,
+    "eqeqeq": true,
+    "esnext": true,
+    "globalstrict": true,
+    "indent": 4,
+    "loopfunc": true,
+    "node": false,
+    "trailing": true,
+    "newcap": false,
+    "quotmark": "single",
+    "strict": true,
+    "undef": true,
+    "white": true,
+    "predef": [
+      "require",
+      "module"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:hawkrives/gobbldygook.git"
@@ -21,6 +54,7 @@
   },
   "homepage": "https://hawkrives.github.io/gobbldygook",
   "devDependencies": {
+    "6to5": "^1.9.9",
     "6to5-browserify": "0.0.10",
     "autoprefixer": "^3.1.0",
     "browser-sync": "^1.5.8",

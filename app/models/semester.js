@@ -1,16 +1,16 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var humanize = require('humanize-plus')
-var Fluxxor = require('fluxxor')
+import * as _ from 'lodash'
+import * as React from 'react'
+import * as humanize from 'humanize-plus'
+import * as Fluxxor from 'fluxxor'
 var FluxChildMixin = Fluxxor.FluxChildMixin(React)
 
-var CourseList = require('./courseList')
-var Course = require('./course')
+import CourseList from './courseList'
+import Course from './course'
 
-var getCourses = require('../helpers/getCourses').getCourses
-var checkScheduleTimeConflicts = require('../helpers/time').checkScheduleTimeConflicts
+import {getCourses} from '../helpers/getCourses'
+import {checkScheduleTimeConflicts} from '../helpers/time'
 
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 	return (schedule.year === year && schedule.semester === semester)
@@ -18,7 +18,7 @@ var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 
 var Semester = React.createClass({
 	mixins: [FluxChildMixin],
-	putActiveCoursesIntoState: function() {
+	putActiveCoursesIntoState() {
 		var active = this.findActiveSchedules()
 		var clbids = _.uniq(active.clbids)
 
@@ -29,20 +29,20 @@ var Semester = React.createClass({
 			})
 		})
 	},
-	getInitialState: function() {
+	getInitialState() {
 		return {
 			courses: [],
 			isValid: true,
 			conflicts: []
 		}
 	},
-	componentWillReceiveProps: function() {
+	componentWillReceiveProps() {
 		this.putActiveCoursesIntoState().then(this.validateSchedule)
 	},
-	componentDidMount: function() {
+	componentDidMount() {
 		this.putActiveCoursesIntoState().then(this.validateSchedule)
 	},
-	semesterName: function() {
+	semesterName() {
 		if      (this.props.semester === 1) {return 'Fall'}
 		else if (this.props.semester === 2) {return 'Interim'}
 		else if (this.props.semester === 3) {return 'Spring'}
@@ -51,7 +51,7 @@ var Semester = React.createClass({
 
 		return 'Unknown (' + this.props.semester + ')';
 	},
-	findActiveSchedules: function() {
+	findActiveSchedules() {
 		var possible = _.filter(this.props.schedules, isCurrentTermSchedule(this.props.year, this.props.semester))
 		var activeSchedules = _.find(possible, function(schedule) {
 			if (schedule.active) {
@@ -60,14 +60,14 @@ var Semester = React.createClass({
 		})
 		return activeSchedules
 	},
-	removeSemester: function() {
+	removeSemester() {
 		var currentTermSchedules = _.filter(this.props.schedules, isCurrentTermSchedule(this.props.year, this.props.semester))
 		console.log('called removeSemester', currentTermSchedules)
 		var scheduleIds = _.pluck(currentTermSchedules, 'id')
 		console.log('removing', scheduleIds, 'from', this.props.studentId)
 		this.getFlux().actions.destroyMultipleSchedules(this.props.studentId, scheduleIds)
 	},
-	validateSchedule: function() {
+	validateSchedule() {
 		// Checks to see if the schedule is valid
 
 		// Step one: do any times conflict?
@@ -92,7 +92,7 @@ var Semester = React.createClass({
 
 		return _.any([hasConflict])
 	},
-	render: function() {
+	render() {
 		return React.DOM.div({className: 'semester' + (this.state.isValid ? '' : ' invalid')},
 			React.DOM.header({className: 'semester-title'},
 				React.DOM.h1(null, this.semesterName()),
@@ -120,4 +120,4 @@ var Semester = React.createClass({
 	}
 })
 
-module.exports = Semester
+export default Semester

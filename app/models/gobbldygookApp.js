@@ -1,13 +1,13 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
+import * as _ from 'lodash'
+import * as React from 'react'
 
-var Student = require('./student')
-// var NotificationCenter = require('./toast').NotificationContainer
+import Student from './student'
+// import {NotificationCenter} from './toast'
 
 var Gobbldygook = React.createClass({
-	render: function() {
+	render() {
 		return React.DOM.div(
 			null,
 			// NotificationCenter({flux: this.props.flux}),
@@ -16,4 +16,4 @@ var Gobbldygook = React.createClass({
 	}
 })
 
-module.exports = Gobbldygook
+export default Gobbldygook

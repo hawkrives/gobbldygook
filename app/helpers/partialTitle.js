@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('lodash')
+import * as _ from 'lodash'
 
 var partialTitle = _.curry(function(partial, course) {
 	return _.contains(course.title, partial)
@@ -14,6 +14,8 @@ var partialNameOrTitle = _.curry(function(partial, course) {
 	return (partialTitle(partial, course) || partialName(partial, course))
 })
 
-module.exports.partialTitle = partialTitle
-module.exports.partialName = partialName
-module.exports.partialNameOrTitle = partialNameOrTitle
+export {
+	partialTitle,
+	partialName,
+	partialNameOrTitle
+}

@@ -1,12 +1,9 @@
 // __tests__/hasDepartment-test.js
 jest.dontMock('../../app/helpers/hasDepartment');
-jest.dontMock('lodash');
 
 describe('hasDepartment', function() {
-	var _ = require('lodash');
-
 	it('checks if a course is in a department', function() {
-		var hasDepartment = require('../../app/helpers/hasDepartment');
+		var hasDepartment = require('../../app/helpers/hasDepartment').default;
 		var courses = [
 			{depts: ['ASIAN', 'REL'], num: 230},
 			{depts: ['BIO', 'CHEM'], num: 125},

@@ -1,10 +1,8 @@
 // __tests__/deptNum-test.js
 jest.dontMock('../../app/helpers/deptNum');
 jest.dontMock('../../app/helpers/hasDepartment');
-jest.dontMock('lodash');
 
 describe('deptNum', function() {
-	var _ = require('lodash');
 	var deptNum = require('../../app/helpers/deptNum')
 
 	it('splits a deptnum into components', function() {

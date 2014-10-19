@@ -1,11 +1,11 @@
 'use strict';
 
-var _ = require('lodash');
-var React = require('react');
+import * as _ from 'lodash'
+import * as React from 'react'
 
-var RequirementSet = require('./requirementSet');
+import RequirementSet from './requirementSet'
 
-var getRandomInt = require('../helpers/getRandomInt')
+import getRandomInt from '../helpers/getRandomInt'
 
 var areas = {
 	// Degrees
@@ -22,9 +22,7 @@ var areas = {
 	// Emphases
 }
 
-function getArea(id) {
-	return areas[id]
-}
+var getArea = (id) => areas[id]
 
 function findResults(obj) {
 	if (_.isArray(obj)) {
@@ -55,7 +53,7 @@ function findResults(obj) {
 }
 
 var AreaOfStudy = React.createClass({
-	load: function() {
+	load() {
 		var area = getArea(this.props.area.id)
 
 		if (typeof area === 'function') {
@@ -77,7 +75,7 @@ var AreaOfStudy = React.createClass({
 			})
 		}
 	},
-	getInitialState: function() {
+	getInitialState() {
 		return {
 			result: {
 				result: false,
@@ -85,13 +83,13 @@ var AreaOfStudy = React.createClass({
 			}
 		}
 	},
-	componentWillReceiveProps: function() {
+	componentWillReceiveProps() {
 		this.load()
 	},
-	componentDidMount: function() {
+	componentDidMount() {
 		this.load()
 	},
-	render: function() {
+	render() {
 		// console.log('area-of-study render')
 
 		var requirementSets = _.map(this.state.result.details, function(reqset) {
@@ -115,4 +113,4 @@ var AreaOfStudy = React.createClass({
 	}
 });
 
-module.exports = AreaOfStudy
+export default AreaOfStudy

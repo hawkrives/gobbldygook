@@ -1,10 +1,10 @@
 'use strict';
 
-var _ = require('lodash')
-var Promise = require('bluebird')
-var db = require('./db')
+import * as _ from 'lodash'
+import * as Promise from 'bluebird'
+import db from './db'
 
-var convertTimeStringsToOfferings = require('./time').convertTimeStringsToOfferings
+import {convertTimeStringsToOfferings} from './time'
 
 var deptNumToCrsidCache = {}
 
@@ -57,11 +57,20 @@ function checkCoursesForDeptNum(courses, deptNumString) {
 		})
 }
 
-module.exports.getCourses = getCourses
-module.exports.getCourse = getCourse
+export {
+	getCourses,
+	getCourse,
 
-module.exports.deptNumToCrsidCache = deptNumToCrsidCache
-module.exports.deptNumToCrsid = deptNumToCrsid
-module.exports.checkCoursesForDeptNum = checkCoursesForDeptNum
+	deptNumToCrsidCache,
+	deptNumToCrsid,
+	checkCoursesForDeptNum
+}
 
-window.getCourses = module.exports
+window.getCourses = {
+	getCourses: getCourses,
+	getCourse: getCourse,
+
+	deptNumToCrsidCache: deptNumToCrsidCache,
+	deptNumToCrsid: deptNumToCrsid,
+	checkCoursesForDeptNum: checkCoursesForDeptNum,
+}

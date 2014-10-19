@@ -1,12 +1,12 @@
 'use strict';
 
-var readJson = require('./readJson')
-var Promise = require('bluebird')
-var _ = require('lodash')
-var add = require('./add')
-var db = require('./db')
-var buildDeptNum = require('./deptNum').buildDeptNum
-var deptNumToCrsidCache = require('./getCourses').deptNumToCrsidCache
+import readJson from './readJson'
+import * as Promise from 'bluebird'
+import * as _ from 'lodash'
+import add from './add'
+import db from './db'
+import {buildDeptNum} from './deptNum'
+import {deptNumToCrsidCache} from './getCourses'
 
 var logDataLoading = false
 // var logDataLoading = true
@@ -201,4 +201,5 @@ function loadData() {
 	return Promise.all(_.map(infoFiles, loadInfoFile))
 }
 
-module.exports = window.loadData = loadData
+window.loadData = loadData
+export default loadData

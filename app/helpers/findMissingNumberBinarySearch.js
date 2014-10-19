@@ -36,4 +36,4 @@ function findMissingNumberBinarySearch(arr) {
 	return null
 }
 
-module.exports = findMissingNumberBinarySearch
+export default findMissingNumberBinarySearch
