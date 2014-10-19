@@ -1,10 +1,10 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
+import _ from 'lodash'
+import React from 'react'
 
 var SingleRequirement = React.createClass({
-	render: function() {
+	render() {
 		return (
 			React.DOM.div(null)
 		)
@@ -12,7 +12,7 @@ var SingleRequirement = React.createClass({
 })
 
 var RequirementGroup = React.createClass({
-	render: function() {
+	render() {
 		return (
 			React.DOM.div(null)
 		)
@@ -20,7 +20,7 @@ var RequirementGroup = React.createClass({
 })
 
 var Requirement = React.createClass({
-	render: function() {
+	render() {
 		// console.log('requirement render')
 		return React.DOM.li({className: 'requirement'},
 			React.DOM.progress({value: this.props.has, max: this.props.needs}),
@@ -31,4 +31,4 @@ var Requirement = React.createClass({
 	}
 })
 
-module.exports = Requirement
+export default Requirement

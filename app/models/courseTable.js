@@ -1,18 +1,18 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var Fluxxor = require('fluxxor')
+import _ from 'lodash'
+import React from 'react'
+import Fluxxor from 'fluxxor'
 var FluxChildMixin = Fluxxor.FluxChildMixin(React)
 
-var findFirstAvailableYear = require('../helpers/findFirstAvailableYear')
-var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
+import findFirstAvailableYear from '../helpers/findFirstAvailableYear'
+import calculateNextScheduleId from '../helpers/calculateNextScheduleId'
 
-var Year = require('./year')
+import Year from './year'
 
 var CourseTable = React.createClass({
 	mixins: [FluxChildMixin],
-	addYear: function(ev) {
+	addYear(ev) {
 		var nextAvailableYear = findFirstAvailableYear(this.props.schedules)
 
 		this.getFlux().actions.createSchedule(this.props.studentId, {
@@ -20,18 +20,16 @@ var CourseTable = React.createClass({
 			sequence: 1, active: true,
 		})
 	},
-	render: function() {
+	render() {
 		// console.log('course-table render', this.props.schedules)
 
 		var years = _.map(_.groupBy(this.props.schedules, 'year'), function(schedules, year) {
-			return Year(
-				{
-					schedules: this.props.schedules,
-					year: parseInt(year, 10),
-					key: year,
-					studentId: this.props.studentId,
-				}
-			)
+			return Year({
+				schedules: this.props.schedules,
+				year: parseInt(year, 10),
+				key: year,
+				studentId: this.props.studentId,
+			})
 		}, this)
 
 		return React.DOM.div({className: 'course-table'},
@@ -45,4 +43,4 @@ var CourseTable = React.createClass({
 	}
 })
 
-module.exports = CourseTable
+export default CourseTable
