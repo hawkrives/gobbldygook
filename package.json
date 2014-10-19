@@ -10,6 +10,26 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "jshintConfig": {
+      "asi": true,
+      "browser": true,
+      "curly": false,
+      "devel": true,
+      "expr": true,
+      "eqeqeq": true,
+      "esnext": true,
+      "globalstrict": true,
+      "indent": 4,
+      "loopfunc": true,
+      "node": false,
+      "trailing": true,
+      "newcap": false,
+      "quotmark": "single",
+      "strict": true,
+      "undef": true,
+      "white": true,
+      "predef": ["require", "module"]
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:hawkrives/gobbldygook.git"
