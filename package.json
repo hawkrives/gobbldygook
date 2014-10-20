@@ -74,17 +74,16 @@
     "jshint-stylish": "^1.0.0",
     "run-sequence": "^1.0.1",
     "vinyl-source-stream": "^1.0.0",
-    "reflux": "^0.1.13",
     "watchify": "^2.0.0"
   },
   "dependencies": {
     "bluebird": "^2.3.5",
     "crypto-browserify": "^3.2.7",
-    "reflux": "^0.1.13",
     "humanize-plus": "^1.5.0",
     "immutable": "^2.3.0",
     "lodash": "^2.4.1",
     "react": "^0.11.2",
+    "reflux": "^0.1.13",
     "treo": "^0.3.0"
   }
 }
