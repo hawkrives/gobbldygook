@@ -71,10 +71,10 @@ var StudentStore = Reflux.createStore({
 			matriculation: 1874,
 			graduation: 2016,
 			creditsNeeded: 35,
-			studies: {},
-			schedules: {},
-			overrides: {},
-			fabrications: {},
+			studies: [],
+			schedules: [],
+			overrides: [],
+			fabrications: [],
 		}
 
 		var joinedStudent = _.merge(genericStudent, student)
