@@ -5,13 +5,14 @@ import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
 import add from '../helpers/add'
+import randomChar from '../helpers/randomChar'
 
 var StudentSummary = React.createClass({
 	render() {
 		// console.log('student-summary render')
 		var student = this.props
 		var studies = student.studies
-		var name = student.name
+		var name = student.name || randomChar()
 
 		var degreeObjects = _.filter(studies, {type: 'degree'})
 		var majorObjects = _.filter(studies, {type: 'major'})

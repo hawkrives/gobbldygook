@@ -2,41 +2,34 @@
 
 import * as _ from 'lodash'
 import * as React from 'react'
-import * as Fluxxor from 'fluxxor'
-var FluxMixin = Fluxxor.FluxMixin(React)
-var StoreWatchMixin = Fluxxor.StoreWatchMixin
+import * as Reflux from 'reflux'
 
 import GraduationStatus from './graduationStatus'
 import CourseTable from './courseTable'
 
-import StudentStore from '../stores/StudentStore'
-import StudentConstants from '../constants/StudentConstants'
+import studentStore from '../stores/studentStore.reflux'
+
+studentStore.listen(function(status) {
+	console.log('student status: ', status);
+});
 
 var Student = React.createClass({
-	mixins: [FluxMixin, StoreWatchMixin('StudentStore')],
+	mixins: [Reflux.connect(studentStore, 'activeStudent')],
 
-	getStateFromFlux() {
-		var flux = this.getFlux()
-		console.log(flux.store('StudentStore').getState())
-		return flux.store('StudentStore').getState()
+	getInitialState() {
+		return {
+			activeStudent: {
+				schedules: []
+			}
+		}
 	},
 
-	// shouldComponentUpdate(nextProps, nextState) {
-		// return !StudentStore.$equals(this.state.currentStudent, nextState.currentStudent)
-		// return true
-	// },
-
 	render() {
-		var student = this.state.active
+		var student = this.state.activeStudent
 		console.info('student render', student)
-		return React.DOM.div(
-			{className: 'student'},
+		return React.DOM.div({className: 'student'},
 			GraduationStatus({student: student}),
-			CourseTable({
-				schedules: student.schedules,
-				studentId: student.id,
-			})
-		)
+			CourseTable({student: student}))
 	},
 })
 

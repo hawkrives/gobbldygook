@@ -3,12 +3,11 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
-import * as Fluxxor from 'fluxxor'
-var FluxChildMixin = Fluxxor.FluxChildMixin(React)
 
 import CourseList from './courseList'
 import Course from './course'
 
+import {Schedule as scheduleActions} from '../actions/Actions.reflux'
 import {getCourses} from '../helpers/getCourses'
 import {checkScheduleTimeConflicts} from '../helpers/time'
 
@@ -17,7 +16,6 @@ var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 })
 
 var Semester = React.createClass({
-	mixins: [FluxChildMixin],
 	putActiveCoursesIntoState() {
 		var active = this.findActiveSchedules()
 		var clbids = _.uniq(active.clbids)
@@ -65,7 +63,7 @@ var Semester = React.createClass({
 		console.log('called removeSemester', currentTermSchedules)
 		var scheduleIds = _.pluck(currentTermSchedules, 'id')
 		console.log('removing', scheduleIds, 'from', this.props.studentId)
-		this.getFlux().actions.destroyMultipleSchedules(this.props.studentId, scheduleIds)
+		scheduleActions.destroyMultiple({studentId: this.props.studentId, scheduleIds: scheduleIds})
 	},
 	validateSchedule() {
 		// Checks to see if the schedule is valid

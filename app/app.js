@@ -1,18 +1,15 @@
 'use strict';
 
-var _ = require('lodash')
-var Promise = require('bluebird')
-var db = require('./helpers/db')
-var React = require('react')
-var Fluxxor = require('fluxxor')
-var documentReady = require('./helpers/document-ready')
+import * as _ from 'lodash'
+import * as Promise from 'bluebird'
+import * as React from 'react'
+import * as Reflux from 'fluxxor'
+import db from './helpers/db'
+import documentReady from './helpers/document-ready'
 
-var Gobbldygook = require('./models/gobbldygookApp')
-var loadData = require('./helpers/loadData')
-var demoStudent = require('../mockups/demo_student.json')
-
-var actions = require('./actions/StudentActions')
-var StudentStore = require('./stores/StudentStore')
+import Gobbldygook from './models/gobbldygookApp'
+import loadData from './helpers/loadData'
+import * as demoStudent from '../mockups/demo_student.json'
 
 // Just for use in the browser console, I swear.
 window.lodash = _
@@ -31,21 +28,21 @@ function addDemoStudent() {
 	return db.store('students').put(demoStudent);
 }
 
-function setupStudents() {
-	return db.store('students').all()
-		.then(function(results) {
-			if (results.length > 0) {
-				console.log('results!', results)
-			} else {
-				console.log('no results!')
-				addDemoStudent()
-			}
+// function setupStudents() {
+// 	return db.store('students').all()
+// 		.then(function(results) {
+// 			if (results.length > 0) {
+// 				console.log('results!', results)
+// 			} else {
+// 				console.log('no results!')
+// 				addDemoStudent()
+// 			}
 
-			var students = (results.length > 0) ? results : [demoStudent]
-			var stores = {StudentStore: new StudentStore({students: students})}
-			return new Fluxxor.Flux(stores, actions)
-		})
-}
+// 			var students = (results.length > 0) ? results : [demoStudent]
+// 			var stores = {StudentStore: new StudentStore({students: students})}
+// 			return new Fluxxor.Flux(stores, actions)
+// 		})
+// }
 
 function blastoff() {
 	// Wait for document.ready and the database.
@@ -53,14 +50,15 @@ function blastoff() {
 		console.log('3. 2.. 1... Blastoff!')
 
 		// Load data into the database
-		loadData()
+		// loadData()
 
+		return Promise.resolve(true);
 		// Set up Fluxxor
-		return setupStudents()
-	}).then(function(fluxxor) {
+		// return setupStudents()
+	}).then(function() {
 		// Render the app
 		var studentComponent = React.renderComponent(
-			Gobbldygook({flux: fluxxor}),
+			Gobbldygook(),
 			document.body
 		)
 	}).done()
