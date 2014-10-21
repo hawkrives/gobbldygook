@@ -1,8 +1,8 @@
 'use strict';
 
-var Promise = require('bluebird')
-var treo = require('treo')
-var treoPromise = require('treo/plugins/treo-promise')
+import * as Promise from 'bluebird'
+import * as treo from 'treo'
+import * as treoPromise from 'treo/plugins/treo-promise'
 
 var schema = treo.schema()
 	.version(1)
@@ -16,16 +16,15 @@ var schema = treo.schema()
 			.addIndex('crsid',      'crsid',      {multi: false})
 			.addIndex('clbid',      'clbid',      {multi: false})
 			.addIndex('deptnum',    'deptnum',    {multi: false})
+			.addIndex('year',       'year',       {multi: false})
 		.addStore('areas', { key: 'sourcePath' })
 			.addIndex('type',       'type',       {multi: true})
 			.addIndex('sourcePath', 'sourcePath', {multi: false})
 	.version(2)
-		.addStore('students', { key: 'id'   })
+		.addStore('students', { key: 'id' })
 
 var db = treo('gobbldygook', schema)
 	.use(treoPromise())
-
-module.exports = window.database = db
 
 window.eraseDatabase = function() {
 	window.database.drop().then(function() {
@@ -34,3 +33,8 @@ window.eraseDatabase = function() {
 		console.log('localStorage cleared')
 	})
 }
+
+let courseCache = {}
+window.courseCache = courseCache
+window.database = db
+export {db, courseCache}

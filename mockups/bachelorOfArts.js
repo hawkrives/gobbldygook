@@ -1,14 +1,11 @@
 'use strict';
 
-var _ = require('lodash')
-var Promise = require('bluebird')
+import * as _ from 'lodash'
 
-var countCredits = require('../app/helpers/countCredits')
-var common = require('./common graduation requirements')
-var utilities = require('./common graduation utilities')
-var hasDepartment = require('../app/helpers/hasDepartment')
-var isMajoringIn = utilities.isMajoringIn
-var educ = require('./common education requirements')
+import * as common from './commonGraduationRequirements'
+import * as utilities from './commonGraduationUtilities'
+import * as educ from './commonEducationRequirements'
+let isMajoringIn = utilities.isMajoringIn
 
 function artsMajor(studies, courses) {
 	// One completed major is required for graduation. Depending on the
@@ -89,7 +86,7 @@ function beyondTheMajor(studies, courses) {
 		isMajoringIn('Art History', studies),
 	])
 
-	var artMajorAndBeyond = undefined
+	var artMajorAndBeyond = null
 	if (isDedicatedArtist) {
 		// Check the two majors agains the 18-course requirement
 		artMajorAndBeyond = _.chain(majors)
@@ -126,13 +123,13 @@ function checkBachelorOfArtsDegree(student) {
 
 	var studies = student.studies
 	var courses = _.filter(student.courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
-	var fabrications = []
+	var fabrications = student.fabrications
 	var creditsNeeded = student.creditsNeeded
 
 	var graduationRequirements = [
 		common.courses(courses, creditsNeeded),
 		common.residency(courses, fabrications),
-		common.interim(courses, fabrications),
+		common.interim(courses, fabrications, student.graduation),
 		common.gpa(courses),
 		common.courseLevel(courses),
 		common.gradedCourses(courses, fabrications),
@@ -146,7 +143,7 @@ function checkBachelorOfArtsDegree(student) {
 
 	var educationRequirements = {
 		foundation: [
-			educ.firstYearWriting(courses),
+			educ.firstYearWriting(courses, student.matriculation),
 			educ.writingInContext(courses),
 			educ.foreignLanguage(courses),
 			educ.oralCommunication(courses),
@@ -159,7 +156,7 @@ function checkBachelorOfArtsDegree(student) {
 			educ.multiculturalGlobalStudies(courses),
 			educ.artisticStudies(courses),
 			educ.literaryStudies(courses),
-			educ.biblicalStudies(courses),
+			educ.biblicalStudies(courses, student.matriculation),
 			educ.theologicalStudies(courses),
 			educ.scientificExplorationAndDiscovery(courses),
 			educ.integratedScientificTopics(courses),
@@ -208,10 +205,10 @@ function checkBachelorOfArtsDegree(student) {
 
 	// console.log('checkBachelorOfArtsDegree', 'results', bachelorOfArtsRequirements)
 
-	return Promise.props({
+	return {
 		result: _.all(bachelorOfArtsRequirements, 'result'),
 		details: bachelorOfArtsRequirements
-	})
+	}
 }
 
-module.exports = checkBachelorOfArtsDegree
+export default checkBachelorOfArtsDegree

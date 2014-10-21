@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('lodash')
+import * as _ from 'lodash'
 
 function findDays(daystring) {
 	var expandedDays = {
@@ -46,6 +46,10 @@ function findTimes(timestring) {
 	var end = timestring.split('-')[1]
 	var endsInPM = false
 
+	if (start === '00' && end === '00') {
+		return {start: 0, end: 2359}
+	}
+
 	if (_.contains(end, 'PM')) {
 		endsInPM = true
 		end = end.substring(0, end.indexOf('PM'))
@@ -54,7 +58,7 @@ function findTimes(timestring) {
 	var startTime = parseInt(start, 10)
 	var endTime = parseInt(end, 10)
 
-	if (endTime < 700) {
+	if (endTime <= 800) {
 		// 'M 0100-0400'
 		endsInPM = true
 	}
@@ -69,7 +73,7 @@ function findTimes(timestring) {
 		endTime += 1200
 	}
 
-	if (endsInPM && startTime < 730) {
+	if (endsInPM && startTime < 700) {
 		startTime += 1200
 	}
 
@@ -206,7 +210,14 @@ function testCourseTimes() {
 	})
 }
 
-module.exports.convertTimeStringsToOfferings = convertTimeStringsToOfferings
-module.exports.checkCourseTimeConflicts = checkCourseTimeConflicts
-module.exports.checkScheduleTimeConflicts = checkScheduleTimeConflicts
-module.exports.testCourseTimes = testCourseTimes
+export {
+	findDays,
+	findTimes,
+
+	convertTimeStringsToOfferings,
+
+	checkCourseTimeConflicts,
+	checkScheduleTimeConflicts,
+
+	testCourseTimes
+}

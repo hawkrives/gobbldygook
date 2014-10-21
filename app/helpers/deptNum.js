@@ -1,9 +1,7 @@
 'use strict';
 
-var _ = require('lodash')
-var courses = require('./db').courses
-
-var hasDepartment = require('./hasDepartment')
+import * as _ from 'lodash'
+import hasDepartment from './hasDepartment'
 
 function splitDeptNum(deptNumString) {
 	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
@@ -13,16 +11,20 @@ function splitDeptNum(deptNumString) {
 	var matches = regex.exec(combined)
 
 	return {
-		dept: _.contains(matches[1], '/') ? [matches[2], matches[3]] : [matches[1]],
+		depts: _.contains(matches[1], '/') ? [matches[2], matches[3]] : [matches[1]],
 		num: parseInt(matches[4], 10)
 	}
+}
+
+function buildDept(course) {
+	return course.depts.join('/')
 }
 
 function buildDeptNum(course) {
 	return course.depts.join('/') + ' ' + course.num
 }
 
-function hasDeptNumBetween(args, course) {
+let hasDeptNumBetween = _.curry(function(args, course) {
 	var dept = args.dept
 	var start = args.start
 	var end = args.end
@@ -32,12 +34,15 @@ function hasDeptNumBetween(args, course) {
 	}
 
 	return _.all([
-		hasDepartment(course, dept),
-		dept.num >= start,
-		dept.num <= end
+		hasDepartment(dept, course),
+		course.num >= start,
+		course.num <= end
 	])
-}
+})
 
-module.exports.splitDeptNum = splitDeptNum
-module.exports.buildDeptNum = buildDeptNum
-module.exports.hasDeptNumBetween = hasDeptNumBetween
+export {
+	splitDeptNum,
+	buildDept,
+	buildDeptNum,
+	hasDeptNumBetween
+}

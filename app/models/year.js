@@ -1,56 +1,51 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var Fluxxor = require('fluxxor')
-var FluxChildMixin = Fluxxor.FluxChildMixin(React)
+import * as _ from 'lodash'
+import * as React from 'react'
 
-var Course = require('./course')
-var Semester = require('./semester')
+import Course from './course'
+import Semester from './semester'
 
-var findFirstAvailableSemester = require('../helpers/findFirstAvailableSemester')
-var calculateNextScheduleId = require('../helpers/calculateNextScheduleId')
+import findFirstAvailableSemester from '../helpers/findFirstAvailableSemester'
+import calculateNextScheduleId from '../helpers/calculateNextScheduleId'
 
 var isCurrentYearSchedule = _.curry(function(year, schedule) {
 	return (schedule.year === year)
 })
 
 var Year = React.createClass({
-	mixins: [FluxChildMixin],
-
-	canAddSemester: function() {
+	canAddSemester() {
 		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
 	},
 
-	addSemester: function() {
+	addSemester() {
 		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
 
-		this.getFlux().actions.createSchedule(this.props.studentId, {
+		this.props.schedules.create({
 			year: this.props.year, semester: nextAvailableSemester,
 			sequence: 1, active: true,
 		})
 	},
 
-	removeYear: function() {
+	removeYear() {
 		var currentYearSchedules = _.filter(this.props.schedules, isCurrentYearSchedule(this.props.year))
-		console.log('called removeYear', currentYearSchedules)
 		var scheduleIds = _.pluck(currentYearSchedules, 'id')
-		console.log('removing', scheduleIds, 'from', this.props.studentId)
-		this.getFlux().actions.destroyMultipleSchedules(this.props.studentId, scheduleIds)
+
+		this.props.schedules.destroyMultiple(scheduleIds)
 	},
 
-	render: function() {
-		var schedules = _.filter(this.props.schedules, {year: this.props.year})
+	render() {
+		var schedules = this.props.schedules.byYear[this.props.year]
+		// console.log('Year render', schedules)
 
 		var terms = _.map(_.groupBy(schedules, 'semester'), function(schedule, semester) {
 			semester = parseInt(semester, 10)
 			return Semester({
 				key: semester,
 				ref: semester,
-				semester: parseInt(semester, 10),
+				semester: semester,
 				year: this.props.year,
 				schedules: this.props.schedules,
-				studentId: this.props.studentId,
 			})
 		}, this)
 
@@ -74,4 +69,4 @@ var Year = React.createClass({
 	}
 })
 
-module.exports = Year
+export default Year

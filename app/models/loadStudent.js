@@ -1,11 +1,11 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var Dialog = require('../models/dialog')
+import * as _ from 'lodash'
+import * as React from 'react'
+import Dialog from '../models/dialog'
 
 var LoadStudent = React.createClass({
-	render: function() {
+	render() {
 		var students = ItemGrid({data: studentFiles})
 		return Dialog(
 			{

@@ -38,13 +38,13 @@
 	// find the first /real/ node
 	function firstNode(source) {
 		var node = null;
-		if (source.firstChild.nodeName != '#text') {
+		if (source.firstChild.nodeName !== '#text') {
 			return source.firstChild;
 		} else {
 			source = source.firstChild;
 			do {
 				source = source.nextSibling;
-			} while (source && source.nodeName == '#text');
+			} while (source && source.nodeName === '#text');
 
 			return source || null;
 		}
@@ -52,9 +52,9 @@
 
 	function isSummary(el) {
 		var nn = el.nodeName.toUpperCase();
-		if (nn == 'DETAILS') {
+		if (nn === 'DETAILS') {
 			return false;
-		} else if (nn == 'SUMMARY') {
+		} else if (nn === 'SUMMARY') {
 			return true;
 		} else {
 			return isSummary(el.parentNode);
@@ -63,13 +63,13 @@
 
 	function toggleDetails(event) {
 		// more sigh - need to check the clicked object
-		var keypress = event.type == 'keypress';
+		var keypress = event.type === 'keypress';
 		var target = event.target || event.srcElement;
 		if (keypress || isSummary(target)) {
 			if (keypress) {
 				// if it's a keypress, make sure it was enter or space
 				keypress = event.which || event.keyCode;
-				if (keypress == 32 || keypress == 13) {
+				if (keypress === 32 || keypress === 13) {
 					// all's good, go ahead and toggle
 				} else {
 					return;
@@ -127,7 +127,7 @@
 	while (i--) {
 		first = firstNode(details[i]);
 
-		if (first != null && first.nodeName.toUpperCase() == 'SUMMARY') {
+		if (first !== null && first.nodeName.toUpperCase() === 'SUMMARY') {
 			// we've found that there's a details label already
 		} else {
 			// first = label.cloneNode(true); // cloned nodes weren't picking up styles in IE - random

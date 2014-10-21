@@ -1,13 +1,13 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var humanize = require('humanize-plus')
+import * as _ from 'lodash'
+import * as React from 'react'
+import * as humanize from 'humanize-plus'
 
-var DraggableMixin = require('../mixins/draggable')
+import DraggableMixin from '../mixins/draggable'
 
 var Course = React.createClass({
-	render: function() {
+	render() {
 		return React.DOM.article({className: 'course'},
 			React.DOM.h1({className: 'title'}, this.props.info.title),
 			React.DOM.span({className: 'details'},
@@ -23,4 +23,4 @@ var Course = React.createClass({
 	}
 })
 
-module.exports = Course
+export default Course

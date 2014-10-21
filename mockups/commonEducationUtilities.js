@@ -1,5 +1,6 @@
-var _ = require('lodash')
-var Promise = require('bluebird')
+'use strict';
+
+import * as _ from 'lodash'
 
 function onlyQuarterCreditCoursesCanBePassFail(course) {
 	// NOTE: Because we can't check this (don't know p/f data), we return true
@@ -8,13 +9,15 @@ function onlyQuarterCreditCoursesCanBePassFail(course) {
 }
 
 var hasGenEd = _.curry(function(gened, course) {
-	return _.contains(course.geneds, gened)
+	return _.contains(course.gereqs, gened)
 })
 
 function countGeneds(courses, gened) {
 	return _.size(_.filter(courses, hasGenEd(gened)))
 }
 
-module.exports.onlyQuarterCreditCoursesCanBePassFail = onlyQuarterCreditCoursesCanBePassFail
-module.exports.hasGenEd = hasGenEd
-module.exports.countGeneds = countGeneds
+export {
+	onlyQuarterCreditCoursesCanBePassFail,
+	hasGenEd,
+	countGeneds
+}

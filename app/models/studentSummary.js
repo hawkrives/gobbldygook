@@ -1,17 +1,17 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
+import * as _ from 'lodash'
+import * as React from 'react'
+import * as humanize from 'humanize-plus'
 
-var add = require('../helpers/add')
-var humanize = require('humanize-plus')
+import add from '../helpers/add'
+import randomChar from '../helpers/randomChar'
 
 var StudentSummary = React.createClass({
-	render: function() {
-		// console.log('student-summary render')
-		var student = this.props
+	render() {
+		var student = this.props.student
 		var studies = student.studies
-		var name = student.name
+		var name = student.name || randomChar()
 
 		var degreeObjects = _.filter(studies, {type: 'degree'})
 		var majorObjects = _.filter(studies, {type: 'major'})
@@ -57,4 +57,4 @@ var StudentSummary = React.createClass({
 	}
 })
 
-module.exports = StudentSummary
+export default StudentSummary

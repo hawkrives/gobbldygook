@@ -1,123 +1,64 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var humanize = require('humanize-plus')
-var Fluxxor = require('fluxxor')
-var FluxChildMixin = Fluxxor.FluxChildMixin(React)
+import * as _ from 'lodash'
+import * as React from 'react'
+import * as humanize from 'humanize-plus'
 
-var CourseList = require('./courseList')
-var Course = require('./course')
-
-var getCourses = require('../helpers/getCourses').getCourses
-var checkScheduleTimeConflicts = require('../helpers/time').checkScheduleTimeConflicts
+import CourseList from './courseList'
 
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 	return (schedule.year === year && schedule.semester === semester)
 })
 
+let semesterName = (semester) => {
+	let semesters = {
+		1: 'Fall',
+		2: 'Interim',
+		3: 'Spring',
+		4: 'Early Summer',
+		5: 'Late Summer',
+	}
+	return semesters[semester] || 'Unknown (' + semester + ')'
+}
+
 var Semester = React.createClass({
-	mixins: [FluxChildMixin],
-	putActiveCoursesIntoState: function() {
-		var active = this.findActiveSchedules()
-		var clbids = _.uniq(active.clbids)
+	removeSemester() {
+		var currentTermSchedules = _.filter(this.props.schedules,
+			isCurrentTermSchedule(this.props.year, this.props.semester))
 
-		var self = this
-		return getCourses(clbids).then(function(courses) {
-			self.setState({
-				courses: courses
-			})
-		})
-	},
-	getInitialState: function() {
-		return {
-			courses: [],
-			isValid: true,
-			conflicts: []
-		}
-	},
-	componentWillReceiveProps: function() {
-		this.putActiveCoursesIntoState().then(this.validateSchedule)
-	},
-	componentDidMount: function() {
-		this.putActiveCoursesIntoState().then(this.validateSchedule)
-	},
-	semesterName: function() {
-		if      (this.props.semester === 1) {return 'Fall'}
-		else if (this.props.semester === 2) {return 'Interim'}
-		else if (this.props.semester === 3) {return 'Spring'}
-		else if (this.props.semester === 4) {return 'Early Summer'}
-		else if (this.props.semester === 5) {return 'Late Summer'}
-
-		return 'Unknown (' + this.props.semester + ')';
-	},
-	findActiveSchedules: function() {
-		var possible = _.filter(this.props.schedules, isCurrentTermSchedule(this.props.year, this.props.semester))
-		var activeSchedules = _.find(possible, function(schedule) {
-			if (schedule.active) {
-				return schedule.active === true
-			}
-		})
-		return activeSchedules
-	},
-	removeSemester: function() {
-		var currentTermSchedules = _.filter(this.props.schedules, isCurrentTermSchedule(this.props.year, this.props.semester))
-		console.log('called removeSemester', currentTermSchedules)
 		var scheduleIds = _.pluck(currentTermSchedules, 'id')
-		console.log('removing', scheduleIds, 'from', this.props.studentId)
-		this.getFlux().actions.destroyMultipleSchedules(this.props.studentId, scheduleIds)
+
+		this.props.schedules.destroyMultiple(scheduleIds)
 	},
-	validateSchedule: function() {
-		// Checks to see if the schedule is valid
+	render() {
+		let schedule = _.find(this.props.schedules.activeSchedules,
+			{year: this.props.year, semester: this.props.semester})
 
-		// Step one: do any times conflict?
-		var courses = this.state.courses
-		var conflicts = checkScheduleTimeConflicts(courses)
+		let courseCount = _.size(schedule.courses)
 
-		var hasConflict = _.chain(conflicts)
-			.toArray()      // turn the object into an array
-			.map(_.toArray) // and each of the nested objects, too
-			.flatten()      // flatten the nested arrays
-			.any()          // and see if any of the resulting values are true
-			.value()
-
-		this.setState({
-			isValid: !hasConflict,
-			conflicts: conflicts
-		})
-
-		if (hasConflict) {
-			console.log('schedule conflicts', conflicts, hasConflict)
-		}
-
-		return _.any([hasConflict])
-	},
-	render: function() {
-		return React.DOM.div({className: 'semester' + (this.state.isValid ? '' : ' invalid')},
+		return React.DOM.div({className: 'semester' + (schedule.isValid ? '' : ' invalid')},
 			React.DOM.header({className: 'semester-title'},
-				React.DOM.h1(null, this.semesterName()),
+				React.DOM.h1(null, semesterName(this.props.semester)),
 				React.DOM.ul({className: 'info-bar'},
 					React.DOM.li(
 						{className: 'semester-course-count'},
-						_.size(this.state.courses) + ' ' + humanize.pluralize(_.size(this.state.courses), 'course')
+						courseCount + ' ' + humanize.pluralize(courseCount, 'course')
 					),
-					this.state.isValid ? null : React.DOM.li(
-						{
+					schedule.isValid ? null :
+						React.DOM.li({
 							className: 'semester-status',
-							title: JSON.stringify(this.state.conflicts, null, 2)
-						},
-						React.DOM.i({className: 'ion-alert-circled'})
-					)
+							title: JSON.stringify(schedule.conflicts, null, 2)},
+							React.DOM.i({className: 'ion-alert-circled'}))
 				),
 				React.DOM.button({
 					className: 'remove-semester',
-					title: 'Remove ' + String(this.props.year) + ' ' + this.semesterName(),
+					title: 'Remove ' + String(this.props.year) + ' ' + semesterName(this.props.semester),
 					onClick: this.removeSemester,
 				})
 			),
-			CourseList({courses: this.state.courses})
+			CourseList({courses: schedule.courses})
 		)
 	}
 })
 
-module.exports = Semester
+export default Semester

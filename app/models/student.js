@@ -1,43 +1,18 @@
 'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var Fluxxor = require('fluxxor')
-var FluxMixin = Fluxxor.FluxMixin(React)
-var StoreWatchMixin = Fluxxor.StoreWatchMixin
+import * as _ from 'lodash'
+import * as React from 'react'
 
-var GraduationStatus = require('./graduationStatus')
-var CourseTable = require('./courseTable')
-
-var StudentStore = require('../stores/StudentStore')
-var StudentConstants = require('../constants/StudentConstants')
+import GraduationStatus from './graduationStatus'
+import CourseTable from './courseTable'
 
 var Student = React.createClass({
-	mixins: [FluxMixin, StoreWatchMixin('StudentStore')],
-
-	getStateFromFlux: function() {
-		var flux = this.getFlux()
-		console.log(flux.store('StudentStore').getState())
-		return flux.store('StudentStore').getState()
-	},
-
-	// shouldComponentUpdate: function(nextProps, nextState) {
-		// return !StudentStore.$equals(this.state.currentStudent, nextState.currentStudent)
-		// return true
-	// },
-
-	render: function() {
-		var student = this.state.active
-		console.info('student render', student)
-		return React.DOM.div(
-			{className: 'student'},
-			GraduationStatus({student: student}),
-			CourseTable({
-				schedules: student.schedules,
-				studentId: student.id,
-			})
-		)
+	render() {
+		console.info('student render', this.props.student)
+		return React.DOM.div({className: 'student'},
+			GraduationStatus({student: this.props.student}),
+			CourseTable({schedules: this.props.student.schedules}))
 	},
 })
 
-module.exports = Student
+export default Student
