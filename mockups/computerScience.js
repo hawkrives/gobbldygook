@@ -1,13 +1,12 @@
 'use strict';
 
-let _ = require('lodash')
-let Promise = require('bluebird')
+import * as _ from 'lodash'
 
-let hasDepartment = require('../app/helpers/hasDepartment')
-let partialTitle = require('../app/helpers/partialTitle').partialTitle
-let checkCoursesForDeptNum = require('../app/helpers/getCourses').checkCoursesForDeptNum
+import hasDepartment from '../app/helpers/hasDepartment'
+import {partialTitle} from '../app/helpers/partialTitle'
+import {checkCoursesFor} from '../app/helpers/getCourses'
 
-let utilities = require('./commonMajorUtilities')
+import {isRequiredCourse} from './commonMajorUtilities'
 
 const csDeptRequiredCourses = [
 	{deptnum: 'CSCI 121'}, {deptnum: 'CSCI 125'}, {deptnum: 'CSCI 241'}, {deptnum: 'CSCI 251'},
@@ -20,7 +19,7 @@ const csDeptRequiredCourses = [
 	{deptnum: 'MATH 232'}, {deptnum: 'MATH 252'},
 ]
 
-let isRequiredCompSciCourse = _.curry(utilities.isRequiredCourse(csDeptRequiredCourses))
+let isRequiredCompSciCourse = _.curry(isRequiredCourse(csDeptRequiredCourses))
 
 function foundationCourses(courses) {
 	/* Foundation courses:
@@ -29,45 +28,45 @@ function foundationCourses(courses) {
 		- one of Computer Science 231 or Math 232 or Math 252.
 	*/
 
-	var cs1 = Promise.any([
-		checkCoursesForDeptNum(courses, 'CSCI 121'),
-		checkCoursesForDeptNum(courses, 'CSCI 125'),
+	var cs1 = _.any([
+		checkCoursesFor(courses, {dept:'CSCI', num:121}),
+		checkCoursesFor(courses, {dept:'CSCI', num:125}),
 	])
 
-	var design = Promise.all([
-		checkCoursesForDeptNum(courses, 'CSCI 241'),
-		checkCoursesForDeptNum(courses, 'CSCI 251'),
-		checkCoursesForDeptNum(courses, 'CSCI 252'),
+	var design = _.all([
+		checkCoursesFor(courses, {dept:'CSCI', num:241}),
+		checkCoursesFor(courses, {dept:'CSCI', num:251}),
+		checkCoursesFor(courses, {dept:'CSCI', num:252}),
 	])
 
-	var mfc = Promise.any([
-		checkCoursesForDeptNum(courses, 'CSCI 231'),
-		checkCoursesForDeptNum(courses, 'MATH 232'),
-		checkCoursesForDeptNum(courses, 'MATH 252'),
+	var mfc = _.any([
+		checkCoursesFor(courses, {dept:'CSCI', num:231}),
+		checkCoursesFor(courses, {dept:'MATH', num:232}),
+		checkCoursesFor(courses, {dept:'MATH', num:252}),
 	])
 
-	return Promise.all([
-		Promise.props({
+	let requirements = [
+		{
 			title: 'CS1',
 			result: cs1,
-		}),
-		Promise.props({
+		},
+		{
 			title: 'Design',
-			result: design.then(_.all),
-		}),
-		Promise.props({
+			result: design,
+		},
+		{
 			title: 'MFC',
 			result: mfc,
-		}),
-	]).then(function(requirements) {
-		return {
-			title: 'Foundation',
-			description: 'one of Computer Science 121 or 125; Computer Science 241, 251, and 252; one of Computer Science 231 or Math 232 or Math 252.',
-			result: _.all(requirements),
-			type: 'array/boolean',
-			details: requirements,
-		}
-	})
+		},
+	]
+
+	return {
+		title: 'Foundation',
+		description: 'one of Computer Science 121 or 125; Computer Science 241, 251, and 252; one of Computer Science 231 or Math 232 or Math 252.',
+		result: _.all(requirements),
+		type: 'array/boolean',
+		details: requirements,
+	}
 }
 
 function coreCourses(courses) {
@@ -78,53 +77,52 @@ function coreCourses(courses) {
 		- and either Computer Science 273, 284, or 300 with parallel and distributed computing.
 	*/
 
-	var algorithms = checkCoursesForDeptNum(courses, 'CSCI 253')
+	var algorithms = checkCoursesFor(courses, {dept:'CSCI', num:253})
 
-	var ethics = checkCoursesForDeptNum(courses, 'CSCI 263')
+	var ethics = checkCoursesFor(courses, {dept:'CSCI', num:263})
 
-	var theory = Promise.any([
-		checkCoursesForDeptNum(courses, 'CSCI 276'),
-		checkCoursesForDeptNum(courses, 'CSCI 333')
+	var theory = _.any([
+		checkCoursesFor(courses, {dept:'CSCI', num:276}),
+		checkCoursesFor(courses, {dept:'CSCI', num:333})
 	])
 
 	var parallelDistributedComputing = _.chain(courses)
-		.filter(hasDepartment('CSCI'))
-		.filter({num: 300})
+		.filter({dept: 'CSCI', num: 300})
 		.filter(partialTitle('Parallel'))
 		.size().value() >= 1
 
-	var options = Promise.any([
-		checkCoursesForDeptNum(courses, 'CSCI 273'),
-		checkCoursesForDeptNum(courses, 'CSCI 284'),
-		Promise.resolve(parallelDistributedComputing)
+	var options = _.any([
+		checkCoursesFor(courses, {dept:'CSCI', num:273}),
+		checkCoursesFor(courses, {dept:'CSCI', num:284}),
+		parallelDistributedComputing
 	])
 
-	return Promise.all([
-		Promise.props({
+	let requirements = [
+		{
 			title: 'Algorithms',
 			result: algorithms,
-		}),
-		Promise.props({
+		},
+		{
 			title: 'Ethics',
 			result: ethics,
-		}),
-		Promise.props({
+		},
+		{
 			title: 'Theory',
 			result: theory,
-		}),
-		Promise.props({
+		},
+		{
 			title: 'Options',
 			result: options
-		}),
-	]).then(function(requirements) {
-		return {
-			title: 'Core',
-			type: 'array/boolean',
-			description: 'Computer Science 253; Computer Science 263; either Computer Science 276 or 333; and either Computer Science 273, 284, or 300 with parallel and distributed computing.',
-			result: _.all(requirements),
-			details: requirements,
-		}
-	})
+		},
+	]
+
+	return {
+		title: 'Core',
+		type: 'array/boolean',
+		description: 'Computer Science 253; Computer Science 263; either Computer Science 276 or 333; and either Computer Science 273, 284, or 300 with parallel and distributed computing.',
+		result: _.all(requirements),
+		details: requirements,
+	}
 }
 
 function electiveCourses(courses) {
@@ -138,7 +136,7 @@ function electiveCourses(courses) {
 	var numberTaken = _.size(validCourses)
 	var numberNeeded = 2
 
-	return Promise.resolve({
+	return {
 		title: 'Electives',
 		type: 'object/number',
 		description: 'Two approved electives.',
@@ -148,39 +146,33 @@ function electiveCourses(courses) {
 			needs: numberNeeded,
 			matches: validCourses,
 		}
-	})
+	}
 }
 
 function capstoneCourse(courses) {
 	// Capstone: Computer Science 390
-	var hasTakenCapstone = checkCoursesForDeptNum(courses, 'CSCI 390')
-	return hasTakenCapstone.then(function(result) {
-		return {
-			title: 'Capstone',
-			type: 'boolean',
-			description: 'Capstone',
-			result: result
-		}
-	})
+	var hasTakenCapstone = checkCoursesFor(courses, {dept:'CSCI', num:390})
+
+	return {
+		title: 'Capstone',
+		type: 'boolean',
+		description: 'Capstone',
+		result: hasTakenCapstone
+	}
 }
 
 function checkComputerScienceMajor(student) {
-	var computerScienceMajorRequirements = Promise.all([
+	var computerScienceMajorRequirements = [
 		foundationCourses(student.courses),
 		coreCourses(student.courses),
 		electiveCourses(student.courses),
 		capstoneCourse(student.courses),
-	]).then(function(results) {
-		// console.log('checkComputerScienceMajor', 'results', results)
-		return results
-	})
+	]
 
-	return Promise.props({
-		result: computerScienceMajorRequirements.then(function(results) {
-			return _.all(results, 'result')
-		}),
-		details: computerScienceMajorRequirements
-	})
+	return {
+		result: _.all(computerScienceMajorRequirements, 'result'),
+		details: computerScienceMajorRequirements,
+	}
 }
 
-module.exports = checkComputerScienceMajor
+export default checkComputerScienceMajor

@@ -1,12 +1,11 @@
 'use strict';
 
-let _ = require('lodash')
-let Promise = require('bluebird')
+import * as _ from 'lodash'
 
-let common = require('./commonGraduationRequirements')
-let utilities = require('./commonGraduationUtilities')
-let educ = require('./commonEducationRequirements')
-let eduUtilities = require('./commonEducationUtilities')
+import * as common from './commonGraduationRequirements'
+import * as utilities from './commonGraduationUtilities'
+import * as educ from './commonEducationRequirements'
+import * as eduUtilities from './commonEducationUtilities'
 let countGeneds = eduUtilities.countGeneds
 
 function onlyMusicMajors(major) {
@@ -243,10 +242,10 @@ function checkBachelorOfMusicDegree(student) {
 
 	// console.log('checkBachelorOfMusicDegree', 'results', results)
 
-	return Promise.props({
+	return {
 		result: _.all(bachelorOfMusicRequirements, 'result'),
 		details: bachelorOfMusicRequirements
-	})
+	}
 }
 
-module.exports = checkBachelorOfMusicDegree
+export default checkBachelorOfMusicDegree

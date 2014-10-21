@@ -1,11 +1,11 @@
 'use strict';
 
-let _ = require('lodash')
+import * as _ from 'lodash'
 
-let hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
-let countCredits = require('../app/helpers/countCredits')
-let onlyCoursesAtOrAboveLevel = require('../app/helpers/courseLevels').onlyCoursesAtOrAboveLevel
-let utilities = require('./commonGraduationUtilities')
+import {hasDeptNumBetween} from '../app/helpers/deptNum'
+import countCredits from '../app/helpers/countCredits'
+import {onlyCoursesAtOrAboveLevel} from '../app/helpers/courseLevels'
+import * as utilities from './commonGraduationUtilities'
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a
@@ -304,11 +304,13 @@ function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 }
 
 // Requirements
-module.exports.courses = courses
-module.exports.ensureLimitedOffCampusCoursesDuringFinalYear = ensureLimitedOffCampusCoursesDuringFinalYear
-module.exports.residency = residency
-module.exports.interim = interim
-module.exports.gpa = gpa
-module.exports.courseLevel = courseLevel
-module.exports.gradedCourses = gradedCourses
-module.exports.artsAndMusicDoubleMajor = artsAndMusicDoubleMajor
+export {
+	courses,
+	ensureLimitedOffCampusCoursesDuringFinalYear,
+	residency,
+	interim,
+	gpa,
+	courseLevel,
+	gradedCourses,
+	artsAndMusicDoubleMajor
+}

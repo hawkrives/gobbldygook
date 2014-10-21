@@ -1,113 +1,102 @@
 'use strict';
 
-let _ = require('lodash')
-let Promise = require('bluebird')
+import * as _ from 'lodash'
 
-let hasDepartment = require('../app/helpers/hasDepartment')
-let partialNameOrTitle = require('../app/helpers/partialTitle').partialNameOrTitle
-let coursesAtLevel = require('../app/helpers/courseLevels').coursesAtLevel
-let coursesAtOrAboveLevel = require('../app/helpers/courseLevels').coursesAtOrAboveLevel
-let checkCoursesForDeptNum = require('../app/helpers/getCourses').checkCoursesForDeptNum
-// let checkCoursesForDeptNum = require('../test/helpers/getCourses').checkCoursesForDeptNum
+import hasDepartment from '../app/helpers/hasDepartment'
+import {partialNameOrTitle} from '../app/helpers/partialTitle'
+import {coursesAtLevel} from '../app/helpers/courseLevels'
+import {coursesAtOrAboveLevel} from '../app/helpers/courseLevels'
+import {checkCoursesFor} from '../app/helpers/getCourses'
 
-let utilities = require('./commonMajorUtilities')
+import {isRequiredCourse} from './commonMajorUtilities'
 
 const chemDeptRequiredCourses = [
-	{deptnum: 'CHEM 121'}, {deptnum: 'CHEM 123'}, {deptnum: 'CHEM 126'},
-	{deptnum: 'CHEM 125'}, {deptnum: 'CHEM 126'},
-	{deptnum: 'CHEM/BIO 125'}, {deptnum: 'CHEM/BIO 126'}, {deptnum: 'CHEM/BIO 227'},
+	{dept:'CHEM',num:121}, {dept:'CHEM',num:123}, {dept:'CHEM',num:126},
+	{dept:'CHEM',num:125}, {dept:'CHEM',num:126},
+	{dept:'CHEM/BIO',num:125}, {dept:'CHEM/BIO',num:126}, {dept:'CHEM/BIO',num:227},
 
-	{deptnum: 'CHEM 247'}, {deptnum: 'CHEM 248'}, {deptnum: 'CHEM 255'}, {deptnum: 'CHEM 371'},
-	{deptnum: 'CHEM 253'}, {deptnum: 'CHEM 254'}, {deptnum: 'CHEM 256'}, {deptnum: 'CHEM 357'},
+	{dept:'CHEM',num:247}, {dept:'CHEM',num:248}, {dept:'CHEM',num:255}, {dept:'CHEM',num:371},
+	{dept:'CHEM',num:253}, {dept:'CHEM',num:254}, {dept:'CHEM',num:256}, {dept:'CHEM',num:357},
 ]
 
-var isRequiredChemistryCourse = _.curry(utilities.isRequiredCourse(chemDeptRequiredCourses))
+var isRequiredChemistryCourse = _.curry(isRequiredCourse(chemDeptRequiredCourses))
 
 function introductorySequence(courses) {
 	// Complete one of the introductory sequences (Chemistry
 	// 121/123/126, Chemistry 125/126, or CHEM/BI0 125/126/227).
 
 	let sequences = [
-		['CHEM 121', 'CHEM 123', 'CHEM 126'],
-		['CHEM 125', 'CHEM 126'],
-		['CHEM/BIO 125', 'CHEM/BIO 126', 'CHEM/BIO 227'],
+		[{dept:'CHEM',num:121}, {dept:'CHEM',num:123}, {dept:'CHEM',num:126}],
+		[{dept:'CHEM',num:125}, {dept:'CHEM',num:126}],
+		[{dept:'CHEM/BIO',num:125}, {dept:'CHEM/BIO',num:126}, {dept:'CHEM/BIO',num:227}],
 	]
 
 	let checkedSequences = _.map(sequences, function(sequence) {
-		return Promise.all(_.map(sequence, deptnum => checkCoursesForDeptNum(courses, deptnum)))
+		return _.map(sequence, filter => checkCoursesFor(courses, filter))
 	})
 
-	return Promise.all(checkedSequences).then(function(details) {
-		console.log(details)
-		return {
-			title: 'Introductory Sequence',
-			type: 'object/number',
-			description: 'Complete one of the introductory sequences: Chemistry 121/123/126, Chemistry 125/126, or CH/BI 125/126/227',
-			result: _.any(details, sequence => _.all(sequence)),
-			details: {
-				// hasDepartment: matching,
-				// needs: needs,
-				// matches: asianStudiesElectives
-			}
+	return {
+		title: 'Introductory Sequence',
+		type: 'object/number',
+		description: 'Complete one of the introductory sequences: Chemistry 121/123/126, Chemistry 125/126, or CH/BI 125/126/227',
+		result: _.any(checkedSequences, sequence => _.all(sequence)),
+		details: {
+			// hasDepartment: matching,
+			// needs: needs,
+			// matches: asianStudiesElectives
 		}
-	})
+	}
 }
 
 function required(courses) {
 	// Additional required courses include 247, 248, 255, 371
+	let details = []
 
-	return Promise.all([
-	]).then(function(details) {
-		return {
-			title: 'Required',
-			type: 'object/number',
-			description: 'Additional required courses include 247, 248, 255, 371',
-			result: (matching >= needs) && electivesAreGood,
-			details: {
-				has: matching,
-				needs: needs,
-				matches: asianStudiesElectives
-			}
+	return {
+		title: 'Required',
+		type: 'object/number',
+		description: 'Additional required courses include 247, 248, 255, 371',
+		result: (matching >= needs) && electivesAreGood,
+		details: {
+			has: matching,
+			needs: needs,
+			matches: asianStudiesElectives
 		}
-	})
+	}
 }
 
 function laboratory(courses) {
 	// laboratory courses 253, 254, 256, 357
+	let details = []
 
-	return Promise.all([
-	]).then(function(details) {
-		return {
-			title: 'Laboratory',
-			type: 'object/number',
-			description: 'laboratory courses 253, 254, 256, 357',
-			result: (matching >= needs) && electivesAreGood,
-			details: {
-				has: matching,
-				needs: needs,
-				matches: asianStudiesElectives
-			}
+	return {
+		title: 'Laboratory',
+		type: 'object/number',
+		description: 'laboratory courses 253, 254, 256, 357',
+		result: (matching >= needs) && electivesAreGood,
+		details: {
+			has: matching,
+			needs: needs,
+			matches: asianStudiesElectives
 		}
-	})
+	}
 }
 
 function electives(courses) {
 	// and at least one additional course from 252, 260, 298, 379, 380, 382, 384, 386, 388, 391 or 398.
+	let details = []
 
-	return Promise.all([
-	]).then(function(details) {
-		return {
-			title: 'Electives',
-			type: 'object/number',
-			description: 'at least one additional course from 252, 260, 298, 379, 380, 382, 384, 386, 388, 391 or 398',
-			result: (matching >= needs) && electivesAreGood,
-			details: {
-				has: matching,
-				needs: needs,
-				matches: chemistryElectives
-			}
+	return {
+		title: 'Electives',
+		type: 'object/number',
+		description: 'at least one additional course from 252, 260, 298, 379, 380, 382, 384, 386, 388, 391 or 398',
+		result: (matching >= needs) && electivesAreGood,
+		details: {
+			has: matching,
+			needs: needs,
+			matches: chemistryElectives
 		}
-	})
+	}
 }
 
 function beyondChemistry(courses) {
@@ -118,42 +107,37 @@ function beyondChemistry(courses) {
 	let physics = []
 	let mathematics = []
 
-	return Promise.all([
+	let details = [
 		physics,
 		mathematics
-	]).then(function(details) {
-		return {
-			title: 'Beyond Chemistry',
-			type: 'array',
-			description: 'In addition, students majoring in chemistry must take physics through 125 or 232; mathematics through 126 or 128; and attend a total of 12 Chemistry Department seminars during their junior and senior years.',
-			result: (matching >= needs) && electivesAreGood,
-			details: {
-				has: matching,
-				needs: needs,
-				matches: asianStudiesElectives
-			}
+	]
+
+	return {
+		title: 'Beyond Chemistry',
+		type: 'array',
+		description: 'In addition, students majoring in chemistry must take physics through 125 or 232; mathematics through 126 or 128; and attend a total of 12 Chemistry Department seminars during their junior and senior years.',
+		result: (matching >= needs) && electivesAreGood,
+		details: {
+			has: matching,
+			needs: needs,
+			matches: asianStudiesElectives
 		}
-	})
+	}
 }
 
 function checkChemistryMajor(student) {
-	var chemistryMajorRequirements = Promise.all([
+	var chemistryMajorRequirements = [
 		introductorySequence(student.courses),
 		// required(student.courses),
 		// laboratory(student.courses),
 		// electives(student.courses),
 		// beyondChemistry(student.courses),
-	]).then(function(results) {
-		// console.log('checkChemistryMajor results', results)
-		return results
-	})
+	]
 
-	return Promise.props({
-		result: chemistryMajorRequirements.then(function(results) {
-			return _.all(results, 'result')
-		}),
+	return {
+		result: _.all(chemistryMajorRequirements, 'result'),
 		details: chemistryMajorRequirements
-	})
+	}
 }
 
-module.exports = checkChemistryMajor
+export default checkChemistryMajor

@@ -1,12 +1,11 @@
 'use strict';
 
-let _ = require('lodash')
-let Promise = require('bluebird')
+import * as _ from 'lodash'
 
-let common = require('./commonGraduationRequirements')
-let utilities = require('./commonGraduationUtilities')
+import * as common from './commonGraduationRequirements'
+import * as utilities from './commonGraduationUtilities'
+import * as educ from './commonEducationRequirements'
 let isMajoringIn = utilities.isMajoringIn
-let educ = require('./commonEducationRequirements')
 
 function artsMajor(studies, courses) {
 	// One completed major is required for graduation. Depending on the
@@ -206,10 +205,10 @@ function checkBachelorOfArtsDegree(student) {
 
 	// console.log('checkBachelorOfArtsDegree', 'results', bachelorOfArtsRequirements)
 
-	return Promise.props({
+	return {
 		result: _.all(bachelorOfArtsRequirements, 'result'),
 		details: bachelorOfArtsRequirements
-	})
+	}
 }
 
-module.exports = checkBachelorOfArtsDegree
+export default checkBachelorOfArtsDegree

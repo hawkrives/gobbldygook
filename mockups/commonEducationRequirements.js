@@ -1,13 +1,10 @@
 'use strict';
 
-let _ = require('lodash')
-let Promise = require('bluebird')
+import * as _ from 'lodash'
 
-let hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
+import {hasDeptNumBetween} from '../app/helpers/deptNum'
 
-let utilities = require('./commonEducationUtilities')
-let hasGenEd = utilities.hasGenEd
-let countGeneds = utilities.countGeneds
+import {hasGenEd, countGeneds} from './commonEducationUtilities'
 
 // TODO: Consider returning matches from these functions, in addition to the boolean.
 
@@ -328,36 +325,38 @@ function ethicalIssuesAndNormativePerspectives(courses) {
 }
 
 function integrativeCourses(courses) {
-	return Promise.all([
+	let results = [
 		ethicalIssuesAndNormativePerspectives(courses),
-	]).then(function(results) {
-		return {
-			title: 'Integrative',
-			result: _.all(results),
-			details: results
-		}
-	})
+	]
+
+	return {
+		title: 'Integrative',
+		result: _.all(results),
+		details: results
+	}
 }
 
-// Foundation
-module.exports.firstYearWriting = firstYearWriting
-module.exports.writingInContext = writingInContext
-module.exports.foreignLanguage = foreignLanguage
-module.exports.oralCommunication = oralCommunication
-module.exports.abstractAndQuantitativeReasoning = abstractAndQuantitativeReasoning
-module.exports.studiesInPhysicalMovement = studiesInPhysicalMovement
+export {
+	// Foundation
+	firstYearWriting,
+	writingInContext,
+	foreignLanguage,
+	oralCommunication,
+	abstractAndQuantitativeReasoning,
+	studiesInPhysicalMovement,
 
-// Core
-module.exports.historicalStudiesInWesternCulture = historicalStudiesInWesternCulture
-module.exports.multiculturalDomesticStudies = multiculturalDomesticStudies
-module.exports.multiculturalGlobalStudies = multiculturalGlobalStudies
-module.exports.artisticStudies = artisticStudies
-module.exports.literaryStudies = literaryStudies
-module.exports.biblicalStudies = biblicalStudies
-module.exports.theologicalStudies = theologicalStudies
-module.exports.scientificExplorationAndDiscovery = scientificExplorationAndDiscovery
-module.exports.integratedScientificTopics = integratedScientificTopics
-module.exports.studiesInHumanBehaviorAndSociety = studiesInHumanBehaviorAndSociety
+	// Core
+	historicalStudiesInWesternCulture,
+	multiculturalDomesticStudies,
+	multiculturalGlobalStudies,
+	artisticStudies,
+	literaryStudies,
+	biblicalStudies,
+	theologicalStudies,
+	scientificExplorationAndDiscovery,
+	integratedScientificTopics,
+	studiesInHumanBehaviorAndSociety,
 
-// Integrative
-module.exports.ethicalIssuesAndNormativePerspectives = ethicalIssuesAndNormativePerspectives
+	// Integrative
+	ethicalIssuesAndNormativePerspectives
+}
