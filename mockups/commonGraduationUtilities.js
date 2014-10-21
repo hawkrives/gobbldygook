@@ -10,7 +10,7 @@ function onlyFullCreditCourses(course) {
 }
 
 function onlyInterimCourses(course) {
-	return course.semester === 2
+	return course.sem === 2
 }
 
 function onlyFullCreditInterimCourses(course) {
@@ -18,7 +18,7 @@ function onlyFullCreditInterimCourses(course) {
 }
 
 function onlySummerSessionCourses(course) {
-	return (course.semester === 4 || course.semester === 5)
+	return (course.sem === 4 || course.sem === 5)
 }
 
 function onlyFullCreditSummerSessionCourses(course) {
