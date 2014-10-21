@@ -12,10 +12,8 @@ window.student = student
 
 var Gobbldygook = React.createClass({
 	render() {
-		return React.DOM.div(
-			null,
-			Student({student: student})
-		)
+		return React.DOM.div(null,
+			Student({student: student}))
 	}
 })
 
