@@ -9,17 +9,22 @@ import {db, courseCache} from './db'
 import {buildDeptNum, buildDept} from './deptNum'
 import {discoverRecentYears} from './recentTime'
 
+//import initialLoadProgress from './initialLoadProgress'
+
 var logDataLoading = false
 // var logDataLoading = true
 
+
 function primeCourseCache() {
-	return Promise.all(_.map(discoverRecentYears(), function(year) {
+	let recentYears = discoverRecentYears()
+	return Promise.all(_.map(recentYears, function(year) {
 		console.log('Priming course cache', year)
 		return db.store('courses').index('year').get(year).then(function(courses) {
 			_.map(courses, c => {
 				c.dept = buildDept(c)
 				courseCache[c.clbid] = c
 			})
+			//initialLoadProgress.update((100 / recentYears.length) * _.findIndex(recentYears, year))
 		})
 	}))
 }
