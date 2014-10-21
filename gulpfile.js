@@ -32,7 +32,7 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 // Build JS for the browser
-var watch = false; // set to true when `default` task is run
+var watch = true; // set to true when `default` task is run
 gulp.task('watchify', function(){
 	var bundler = browserify('./app/app.js');
 	if (watch) {
