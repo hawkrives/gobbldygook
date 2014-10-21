@@ -42,6 +42,7 @@ let hasDeptNumBetween = _.curry(function(args, course) {
 
 export {
 	splitDeptNum,
+	buildDept,
 	buildDeptNum,
 	hasDeptNumBetween
 }
