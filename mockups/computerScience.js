@@ -3,7 +3,7 @@
 import * as _ from 'lodash'
 
 import hasDepartment from '../app/helpers/hasDepartment'
-import {partialTitle} from '../app/helpers/partialTitle'
+import {partialNameOrTitle} from '../app/helpers/partialTitle'
 import {checkCoursesFor} from '../app/helpers/getCourses'
 
 import {isRequiredCourse} from './commonMajorUtilities'
@@ -39,9 +39,9 @@ function foundationCourses(courses) {
 		checkCoursesFor(courses, {dept:'CSCI', num:252}),
 	])
 
-	var mfc = _.any([
-		checkCoursesFor(courses, {dept:'CSCI', num:231}),
-		checkCoursesFor(courses, {dept:'MATH', num:232}),
+	var proofWriting = _.any([
+		checkCoursesFor(courses, {dept:'MATH', num:282, term:20141}),
+		checkCoursesFor(courses, {dept:'MATH', num:244}),
 		checkCoursesFor(courses, {dept:'MATH', num:252}),
 	])
 
@@ -55,8 +55,8 @@ function foundationCourses(courses) {
 			result: design,
 		},
 		{
-			title: 'MFC',
-			result: mfc,
+			title: 'Proof Writing',
+			result: proofWriting,
 		},
 	]
 
@@ -88,7 +88,7 @@ function coreCourses(courses) {
 
 	var parallelDistributedComputing = _.chain(courses)
 		.filter({dept: 'CSCI', num: 300})
-		.filter(partialTitle('Parallel'))
+		.filter(partialNameOrTitle('Parallel'))
 		.size().value() >= 1
 
 	var options = _.any([
