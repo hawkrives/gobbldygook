@@ -80,7 +80,7 @@ function residency(courses, fabrications) {
 	}
 }
 
-function interim(courses, fabrications) {
+function interim(courses, fabrications, graduation) {
 	// At least three of the required 35 St. Olaf credits must be earned in
 	// three separate January full-credit (1.0) Interims. An Interim may be
 	// taken on campus, through a St. Olaf off-campus Interim program, or
@@ -98,11 +98,8 @@ function interim(courses, fabrications) {
 	// may satisfy the third Interim requirement by means of a summer course
 	// taken during a St. Olaf summer session after the commencement in which
 	// the student participates."
-	var years = _.uniq(_.pluck(fabrications, 'year'))
-	var finalYear = _.max(years)
-
 	var summerSessionCourses = _.filter(courses, utilities.onlyFullCreditSummerSessionCourses)
-	var finalSummerSessionCourses = _.filter(summerSessionCourses, {year: finalYear})
+	var finalSummerSessionCourses = _.filter(summerSessionCourses, {year: graduation})
 	var finalSummerSessionCourseCount = _.size(finalSummerSessionCourses)
 
 	var interimRequirement = (

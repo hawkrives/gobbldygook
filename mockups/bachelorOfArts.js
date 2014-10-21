@@ -129,7 +129,7 @@ function checkBachelorOfArtsDegree(student) {
 	var graduationRequirements = [
 		common.courses(courses, creditsNeeded),
 		common.residency(courses, fabrications),
-		common.interim(courses, fabrications),
+		common.interim(courses, fabrications, student.graduation),
 		common.gpa(courses),
 		common.courseLevel(courses),
 		common.gradedCourses(courses, fabrications),
