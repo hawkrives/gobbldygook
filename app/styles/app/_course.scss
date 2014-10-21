@@ -10,9 +10,11 @@
 	}
 
 	.title {
-		margin: 0 0 -0.25ex;
+		margin-top: 0;
+		margin-bottom: 0;
 		line-height: 1;
 		padding: 0;
+		padding-bottom: 0.25ex;
 		font-size: 1em;
 		font-weight: 500;
 		font-family: $heading-font-stack;
@@ -26,6 +28,34 @@
 	.identifier {
 		&::after {
 			content: " · ";
+		}
+	}
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+
+	.info-rows {
+		flex: 1;
+	}
+
+	.info-button {
+		text-align: center;
+		opacity: 0;
+		width: 0px;
+		cursor: pointer;
+		transition: 0.25s;
+	}
+
+	&:hover .info-button {
+		width: 24px;
+		opacity: 1;
+		&::after {
+			@include ionicon($ionicon-var-ios7-information-outline);
+		}
+		&:hover::after {
+			@include ionicon($ionicon-var-ios7-information);
 		}
 	}
 }
