@@ -11,7 +11,7 @@ This app is a course scheduler for students at St. Olaf College. You give it you
   - cd: `cd gobbldygook`
 2. submodule: `git submodule init && git submodule update`
 3. `npm`: `npm install`
-4. build: `make` (or, to run a server: [currently needs three terminals: `make script`, `make style`, and `make serve`)
+4. build: `make build` (or, to run a server: `make serve`, or just `make`)
 
 ## Credits
 - Initial concept from @xandrasings
