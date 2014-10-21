@@ -16,11 +16,15 @@ function splitDeptNum(deptNumString) {
 	}
 }
 
+function buildDept(course) {
+	return course.depts.join('/')
+}
+
 function buildDeptNum(course) {
 	return course.depts.join('/') + ' ' + course.num
 }
 
-function hasDeptNumBetween(args, course) {
+let hasDeptNumBetween = _.curry(function(args, course) {
 	var dept = args.dept
 	var start = args.start
 	var end = args.end
@@ -34,7 +38,7 @@ function hasDeptNumBetween(args, course) {
 		course.num >= start,
 		course.num <= end
 	])
-}
+})
 
 export {
 	splitDeptNum,
