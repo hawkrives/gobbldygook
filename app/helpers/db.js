@@ -21,7 +21,7 @@ var schema = treo.schema()
 			.addIndex('type',       'type',       {multi: true})
 			.addIndex('sourcePath', 'sourcePath', {multi: false})
 	.version(2)
-		.addStore('students', { key: 'id'   })
+		.addStore('students', { key: 'id' })
 
 var db = treo('gobbldygook', schema)
 	.use(treoPromise())
