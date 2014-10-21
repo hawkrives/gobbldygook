@@ -5,8 +5,7 @@ import * as Promise from 'bluebird'
 
 import readJson from './readJson'
 import add from './add'
-import db from './db'
-import {courseCache} from './db'
+import {db, courseCache} from './db'
 import {buildDeptNum, buildDept} from './deptNum'
 import {discoverRecentYears} from './recentTime'
 
