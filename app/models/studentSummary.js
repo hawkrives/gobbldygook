@@ -9,8 +9,7 @@ import randomChar from '../helpers/randomChar'
 
 var StudentSummary = React.createClass({
 	render() {
-		// console.log('student-summary render')
-		var student = this.props
+		var student = this.props.student
 		var studies = student.studies
 		var name = student.name || randomChar()
 

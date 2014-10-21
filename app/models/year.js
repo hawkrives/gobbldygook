@@ -2,7 +2,6 @@
 
 import * as _ from 'lodash'
 import * as React from 'react'
-import {Schedule as scheduleActions} from '../actions/Actions.reflux'
 
 import Course from './course'
 import Semester from './semester'
@@ -22,32 +21,32 @@ var Year = React.createClass({
 	addSemester() {
 		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
 
-		scheduleActions.create({studentId: this.props.studentId, schedule: {
+		this.props.schedules.create({
 			year: this.props.year, semester: nextAvailableSemester,
 			sequence: 1, active: true,
-		}})
+		})
 	},
 
 	removeYear() {
 		var currentYearSchedules = _.filter(this.props.schedules, isCurrentYearSchedule(this.props.year))
-		console.log('called removeYear', currentYearSchedules)
 		var scheduleIds = _.pluck(currentYearSchedules, 'id')
-		console.log('removing', scheduleIds, 'from', this.props.studentId)
-		scheduleActions.destroyMultiple({studentId: this.props.studentId, scheduleIds: scheduleIds})
+
+		console.log('removing', currentYearSchedules)
+		this.props.schedules.destroyMultiple(scheduleIds)
 	},
 
 	render() {
-		var schedules = _.filter(this.props.schedules, {year: this.props.year})
+		var schedules = this.props.schedules.byYear[this.props.year]
+		console.log('Year render', schedules)
 
 		var terms = _.map(_.groupBy(schedules, 'semester'), function(schedule, semester) {
 			semester = parseInt(semester, 10)
 			return Semester({
 				key: semester,
 				ref: semester,
-				semester: parseInt(semester, 10),
+				semester: semester,
 				year: this.props.year,
 				schedules: this.props.schedules,
-				studentId: this.props.studentId,
 			})
 		}, this)
 
