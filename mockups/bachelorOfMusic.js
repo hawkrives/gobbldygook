@@ -30,7 +30,7 @@ function foreignLanguage(courses) {
 
 function abstractAndQuantitativeReasoning(courses) {
 	// AQR or SED or IST
-	var which = _.groupBy([
+	var which = _.find([
 		{
 			title: 'Abstract and Quantitative Reasoning',
 			abbr: 'AQR',
@@ -54,8 +54,8 @@ function abstractAndQuantitativeReasoning(courses) {
 		result: false,
 	}
 
-	if (true in which) {
-		return which[true]
+	if (which) {
+		return which
 	} else {
 		return generic
 	}
@@ -63,7 +63,7 @@ function abstractAndQuantitativeReasoning(courses) {
 
 function historicalOrLiteraryStudies(courses) {
 	// ALS-L or HWC - 1 course
-	var which = _.groupBy([
+	var which = _.find([
 		{
 			title: 'Historical Studies in Western Culture',
 			abbr: 'HWC',
@@ -82,8 +82,8 @@ function historicalOrLiteraryStudies(courses) {
 		result: false,
 	}
 
-	if (true in which) {
-		return which[true]
+	if (which) {
+		return which
 	} else {
 		return generic
 	}
@@ -91,7 +91,7 @@ function historicalOrLiteraryStudies(courses) {
 
 function multiculturalStudies(courses) {
 	// MCD or MCG - 1 course
-	var which = _.groupBy([
+	var which = _.find([
 		{
 			title: 'Multicultural Studies - Domestic',
 			abbr: 'MCD',
@@ -110,8 +110,8 @@ function multiculturalStudies(courses) {
 		result: false,
 	}
 
-	if (true in which) {
-		return which[true]
+	if (which) {
+		return which
 	} else {
 		return generic
 	}
