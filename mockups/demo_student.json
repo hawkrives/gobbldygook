@@ -86,14 +86,14 @@
 		{
 			"id": 8, "year": 2014, "semester": 2,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [97261],
-			"active": true
+			"clbids": [],
+			"active": false
 		},
 		{
 			"id": 9, "year": 2014, "semester": 2,
 			"title": "Schedule 2", "index": 2,
 			"clbids": [97174],
-			"active": false
+			"active": true
 		},
 		{
 			"id": 10, "year": 2014, "semester": 3,
