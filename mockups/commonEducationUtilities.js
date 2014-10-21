@@ -9,7 +9,7 @@ function onlyQuarterCreditCoursesCanBePassFail(course) {
 }
 
 var hasGenEd = _.curry(function(gened, course) {
-	return _.contains(course.geneds, gened)
+	return _.contains(course.gereqs, gened)
 })
 
 function countGeneds(courses, gened) {
