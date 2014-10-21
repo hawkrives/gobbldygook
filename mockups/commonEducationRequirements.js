@@ -8,14 +8,13 @@ import {hasGenEd, countGeneds} from './commonEducationUtilities'
 
 // TODO: Consider returning matches from these functions, in addition to the boolean.
 
-function firstYearWriting(courses) {
+function firstYearWriting(courses, matriculation) {
 	// First-year students are required to complete First-Year Writing (FYW),
 	// with two exceptions:
 	// NOTE: These two exceptions don't apply to Gobbldygook.
 
 	// The course must be taken in the first year.
-	var firstYear = _.min(courses, 'year')
-	var firstYearCourses = _.filter(courses, {year: firstYear})
+	var firstYearCourses = _.filter(courses, {year: matriculation})
 
 	return {
 		title: 'First Year Writing',
@@ -217,13 +216,12 @@ function literaryStudies(courses) {
 	}
 }
 
-function biblicalStudies(courses) {
+function biblicalStudies(courses, matriculation) {
 	// BTS-B - 1 course
 
 	// We're going to continue under the assumption that the BTS-B must be
 	// taken in the first year at Olaf.
-	var firstYear = _.min(courses, 'year')
-	var firstYearCourses = _.filter(courses, {year: firstYear})
+	var firstYearCourses = _.filter(courses, {year: matriculation})
 
 	return {
 		title: 'Biblical and Theological Studies - Bible',

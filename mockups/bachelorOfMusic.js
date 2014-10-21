@@ -185,7 +185,7 @@ function checkBachelorOfMusicDegree(student) {
 
 	var educationRequirements = {
 		foundation: [
-			educ.firstYearWriting(courses),
+			educ.firstYearWriting(courses, student.matriculation),
 			educ.writingInContext(courses),
 			foreignLanguage(courses),
 			educ.oralCommunication(courses),
@@ -195,7 +195,7 @@ function checkBachelorOfMusicDegree(student) {
 		core: [
 			historicalOrLiteraryStudies(courses),
 			multiculturalStudies(courses),
-			educ.biblicalStudies(courses),
+			educ.biblicalStudies(courses, student.matriculation),
 			educ.theologicalStudies(courses),
 			educ.studiesInHumanBehaviorAndSociety(courses),
 		],

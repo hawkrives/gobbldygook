@@ -143,7 +143,7 @@ function checkBachelorOfArtsDegree(student) {
 
 	var educationRequirements = {
 		foundation: [
-			educ.firstYearWriting(courses),
+			educ.firstYearWriting(courses, student.matriculation),
 			educ.writingInContext(courses),
 			educ.foreignLanguage(courses),
 			educ.oralCommunication(courses),
@@ -156,7 +156,7 @@ function checkBachelorOfArtsDegree(student) {
 			educ.multiculturalGlobalStudies(courses),
 			educ.artisticStudies(courses),
 			educ.literaryStudies(courses),
-			educ.biblicalStudies(courses),
+			educ.biblicalStudies(courses, student.matriculation),
 			educ.theologicalStudies(courses),
 			educ.scientificExplorationAndDiscovery(courses),
 			educ.integratedScientificTopics(courses),
