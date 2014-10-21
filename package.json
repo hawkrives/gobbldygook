@@ -80,10 +80,8 @@
     "bluebird": "^2.3.5",
     "crypto-browserify": "^3.2.7",
     "humanize-plus": "^1.5.0",
-    "immutable": "^2.3.0",
     "lodash": "^2.4.1",
     "react": "^0.11.2",
-    "reflux": "^0.1.13",
     "treo": "^0.3.0"
   }
 }
