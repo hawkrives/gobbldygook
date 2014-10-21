@@ -28,7 +28,6 @@ var Semester = React.createClass({
 
 		var scheduleIds = _.pluck(currentTermSchedules, 'id')
 
-		console.log('removing', currentTermSchedules)
 		this.props.schedules.destroyMultiple(scheduleIds)
 	},
 	render() {

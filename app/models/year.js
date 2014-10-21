@@ -31,13 +31,12 @@ var Year = React.createClass({
 		var currentYearSchedules = _.filter(this.props.schedules, isCurrentYearSchedule(this.props.year))
 		var scheduleIds = _.pluck(currentYearSchedules, 'id')
 
-		console.log('removing', currentYearSchedules)
 		this.props.schedules.destroyMultiple(scheduleIds)
 	},
 
 	render() {
 		var schedules = this.props.schedules.byYear[this.props.year]
-		console.log('Year render', schedules)
+		// console.log('Year render', schedules)
 
 		var terms = _.map(_.groupBy(schedules, 'semester'), function(schedule, semester) {
 			semester = parseInt(semester, 10)

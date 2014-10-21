@@ -5,7 +5,7 @@ import Schedule from './scheduleModel'
 
 let ScheduleSet = (scheduleData) => {
 	let schedules = {}
-	
+
 	Object.defineProperty(schedules, 'byYear', { get() {
 		return _.groupBy(schedules, 'year')
 	}})
@@ -18,17 +18,19 @@ let ScheduleSet = (scheduleData) => {
 	}})
 
 	Object.defineProperty(schedules, 'create', { value(schedule) {
+		console.log('creating', schedule)
 		let sched = new Schedule(schedule)
 		schedules[sched.id] = sched
 	}})
 
 	Object.defineProperty(schedules, 'destroy', { value(id) {
+		console.log('removing', id)
 		delete schedules[id]
 	}})
 	Object.defineProperty(schedules, 'destroyMultiple', { value(ids) {
 		_.each(ids, schedules.destroy)
 	}})
-	
+
 	_.each(scheduleData, schedules.create)
 
 	return schedules;
