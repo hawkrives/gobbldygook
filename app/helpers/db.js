@@ -34,5 +34,7 @@ window.eraseDatabase = function() {
 	})
 }
 
+let courseCache = {}
+window.courseCache = courseCache
 window.database = db
-export default db
+export {db, courseCache}
