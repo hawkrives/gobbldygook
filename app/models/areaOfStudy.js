@@ -9,13 +9,13 @@ import getRandomInt from '../helpers/getRandomInt'
 
 var areas = {
 	// Degrees
-	'd-ba': require('../../mockups/bachelorOfArts'),
-	'd-bm': require('../../mockups/bachelorOfMusic'),
+	'd-ba': require('../../mockups/bachelorOfArts').default,
+	'd-bm': require('../../mockups/bachelorOfMusic').default,
 
 	// Majors
-	'm-csci': require('../../mockups/computerScience'),
-	'm-asian': require('../../mockups/asianStudies'),
-	'm-chem': require('../../mockups/chemistry'),
+	'm-csci': require('../../mockups/computerScience').default,
+	'm-asian': require('../../mockups/asianStudies').default,
+	'm-chem': require('../../mockups/chemistry').default,
 
 	// Concentrations
 
