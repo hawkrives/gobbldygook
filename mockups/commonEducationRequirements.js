@@ -148,28 +148,12 @@ function checkCoursesAcrossTwoDepartments(courses, geneds, genedToCheck) {
 	])
 }
 
-function multiCulturalDomesticAndGlobalStudies(courses, gened) {
-	// MCG,MCD - 2 courses, from different departments
-
-	var mcdCourses = _.filter(courses, hasGenEd('MCD'))
-	var mcgCourses = _.filter(courses, hasGenEd('MCG'))
-
-	var mcdAndMcgCourses = _.uniq(_.merge(mcdCourses, mcgCourses), 'crsid')
-	var coversTwoDepartments = acrossAtLeastTwoDepartments(mcdAndMcgCourses)
-
-	return _.all([
-		countGeneds(courses, gened) >= 1,
-		_.size(mcdAndMcgCourses) >= 2,
-		coversTwoDepartments
-	])
-}
-
 function multiculturalDomesticStudies(courses) {
 	// MCG,MCD - 2 courses, from different departments
 	return {
 		title: 'Multicultural Studies - Domestic',
 		abbr: 'MCD',
-		result: multiCulturalDomesticAndGlobalStudies(courses, 'MCD'),
+		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'MCD'),
 	}
 }
 
@@ -178,24 +162,8 @@ function multiculturalGlobalStudies(courses) {
 	return {
 		title: 'Multicultural Studies - Global',
 		abbr: 'MCG',
-		result: multiCulturalDomesticAndGlobalStudies(courses, 'MCG'),
+		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'MCG'),
 	}
-}
-
-function artisticAndLiteraryStudies(courses, gened) {
-	// ALS-A,ALS-L - 2 courses, from different departments
-
-	var artisticCourses = _.filter(courses, hasGenEd('ALS-A'))
-	var literaryCourses = _.filter(courses, hasGenEd('ALS-L'))
-
-	var artisticAndLiteraryCourses = _.uniq(_.merge(artisticCourses, literaryCourses), 'crsid')
-	var coversTwoDepartments = acrossAtLeastTwoDepartments(artisticAndLiteraryCourses)
-
-	return _.all([
-		countGeneds(courses, gened) >= 1,
-		_.size(artisticAndLiteraryCourses) >= 2,
-		coversTwoDepartments
-	])
 }
 
 function artisticStudies(courses) {
@@ -203,7 +171,7 @@ function artisticStudies(courses) {
 	return {
 		title: 'Artistic Studies',
 		abbr: 'ALS-A',
-		result: artisticAndLiteraryStudies(courses, 'ALS-A'),
+		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'ALS-A'),
 	}
 }
 
@@ -212,7 +180,7 @@ function literaryStudies(courses) {
 	return {
 		title: 'Literary Studies',
 		abbr: 'ALS-L',
-		result: artisticAndLiteraryStudies(courses, 'ALS-L'),
+		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'ALS-L'),
 	}
 }
 
