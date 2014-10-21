@@ -13,9 +13,8 @@ var logDataLoading = false
 // var logDataLoading = true
 
 function primeCourseCache() {
-	console.log('Priming course cache')
 	return Promise.all(_.map(discoverRecentYears(), function(year) {
-		console.log(year, courseCache)
+		console.log('Priming course cache', year)
 		return db.store('courses').index('year').get(year).then(function(courses) {
 			_.map(courses, c => {
 				c.dept = buildDept(c)
