@@ -1,23 +1,27 @@
 'use strict';
 
-import readJson from './readJson'
-import * as Promise from 'bluebird'
 import * as _ from 'lodash'
+import * as Promise from 'bluebird'
+
+import readJson from './readJson'
 import add from './add'
-import db from './db'
-import {buildDeptNum} from './deptNum'
-import {deptNumToCrsidCache} from './getCourses'
+import {db, courseCache} from './db'
+import {buildDeptNum, buildDept} from './deptNum'
+import {discoverRecentYears} from './recentTime'
 
 var logDataLoading = false
 // var logDataLoading = true
 
-function cacheCourses() {
-	_.each(_.range(2012, 2014+1), function(year) {
-		var courses = db.store('courses').index('year').get(year);
-		_.each(courses, function(c) {
-			window.courses[c.clbid] = c;
+function primeCourseCache() {
+	return Promise.all(_.map(discoverRecentYears(), function(year) {
+		console.log('Priming course cache', year)
+		return db.store('courses').index('year').get(year).then(function(courses) {
+			_.map(courses, c => {
+				c.dept = buildDept(c)
+				courseCache[c.clbid] = c
+			})
 		})
-	})
+	}))
 }
 
 function storeCourses(item) {
@@ -27,7 +31,7 @@ function storeCourses(item) {
 		var courses = _.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
 			course.deptnum = buildDeptNum(course)
-			deptNumToCrsidCache[course.deptnum] = course.crsid
+			course.dept = buildDept(course)
 			return course
 		})
 
@@ -113,15 +117,11 @@ function updateDatabase(itemType, infoFromServer) {
 	var itemPath = infoFromServer.path
 
 	if (newHash === oldHash) {
-		if (logDataLoading) {
-			console.log('skipped ' + itemPath)
-		}
+		if (logDataLoading)  console.log('skipped ' + itemPath)
 		return Promise.resolve(false)
 	}
 
-	if (logDataLoading) {
-		console.log('need to add ' + itemPath)
-	}
+	if (logDataLoading)  console.log('need to add ' + itemPath)
 
 	return readJson(itemPath)
 		.then(function(data) {
@@ -139,9 +139,8 @@ function updateDatabase(itemType, infoFromServer) {
 			return Promise.reject(err.stack)
 		})
 		.done(function(item) {
-			if (logDataLoading) {
-				console.log('added '+item.meta.path+' ('+item.count+' '+item.type+')')
-			}
+			if (logDataLoading)
+				console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
 			return Promise.resolve(true)
 		})
 }
@@ -156,38 +155,6 @@ function loadDataFiles(infoFile) {
 	}))
 }
 
-/*
-function loadDataFiles(infoFile) {
-	console.log('load data files', infoFile)
-
-	var progress = 0;
-	var notification = new Cortex({
-		message: 'Updating ' + infoFile.type,
-		hasProgress: true,
-		progressValue: progress,
-		maxProgressValue: _.chain(infoFile.info).mapValues(_.size).reduce(add).value(),
-		ident: infoFile.type
-	})
-	window.notifications.push(notification.val())
-
-	return Promise.all(_.map(infoFile.info, function(files) {
-		var allFilesLoadedPromise = Promise.all(_.map(files, function(file) {
-			var dbUpdatedPromise = updateDatabase(infoFile.type, file)
-			dbUpdatedPromise.then(function() {
-				notification.progressValue.set(progress += 1)
-			})
-			return dbUpdatedPromise
-		}))
-
-		allFilesLoadedPromise.then(function() {
-			setTimeout(notification.remove, 200)
-		})
-
-		return allFilesLoadedPromise
-	}))
-}
-*/
-
 function loadInfoFile(url) {
 	console.log('loading' + url)
 	return readJson(url).then(loadDataFiles)
@@ -198,7 +165,7 @@ function loadData() {
 		'/data/areas/info.json',
 		'/data/courses/info.json',
 	]
-	return Promise.all(_.map(infoFiles, loadInfoFile))
+	return Promise.all(_.map(infoFiles, loadInfoFile)).then(primeCourseCache)
 }
 
 window.loadData = loadData

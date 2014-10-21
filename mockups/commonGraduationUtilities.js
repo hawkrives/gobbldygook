@@ -1,17 +1,16 @@
 'use strict';
 
-let _ = require('lodash')
-let Promise = require('bluebird')
+import * as _ from 'lodash'
 
-let countCredits = require('../app/helpers/countCredits')
-let hasDepartment = require('../app/helpers/hasDepartment')
+import countCredits from '../app/helpers/countCredits'
+import hasDepartment from '../app/helpers/hasDepartment'
 
 function onlyFullCreditCourses(course) {
 	return course.credits >= 1.0
 }
 
 function onlyInterimCourses(course) {
-	return course.semester === 2
+	return course.sem === 2
 }
 
 function onlyFullCreditInterimCourses(course) {
@@ -19,7 +18,7 @@ function onlyFullCreditInterimCourses(course) {
 }
 
 function onlySummerSessionCourses(course) {
-	return (course.semester === 4 || course.semester === 5)
+	return (course.sem === 4 || course.sem === 5)
 }
 
 function onlyFullCreditSummerSessionCourses(course) {
@@ -72,23 +71,25 @@ function isBachelorOfBoth(studies) {
 }
 
 // Helpers
-module.exports.onlyFullCreditCourses = onlyFullCreditCourses
-module.exports.onlyInterimCourses = onlyInterimCourses
-module.exports.onlyFullCreditInterimCourses = onlyFullCreditInterimCourses
-module.exports.onlySummerSessionCourses = onlySummerSessionCourses
-module.exports.onlyFullCreditSummerSessionCourses = onlyFullCreditSummerSessionCourses
+export {
+	onlyFullCreditCourses,
+	onlyInterimCourses,
+	onlyFullCreditInterimCourses,
+	onlySummerSessionCourses,
+	onlyFullCreditSummerSessionCourses,
 
-module.exports.creditsBeyondTheArea = creditsBeyondTheArea
+	creditsBeyondTheArea,
 
-module.exports.isBachelorOfMusic = isBachelorOfMusic
-module.exports.isBachelorOfArts = isBachelorOfArts
-module.exports.isBachelorOfBoth = isBachelorOfBoth
+	isBachelorOfMusic,
+	isBachelorOfArts,
+	isBachelorOfBoth,
 
-module.exports.checkStudentStudiesFor = checkStudentStudiesFor
-module.exports.checkStudentDegreesFor = checkStudentDegreesFor
-module.exports.isMajoringIn = isMajoringIn
-module.exports.isConcentrationgOn = isConcentrationgOn
+	checkStudentStudiesFor,
+	checkStudentDegreesFor,
+	isMajoringIn,
+	isConcentrationgOn,
 
-module.exports.isBachelorOfMusic = isBachelorOfMusic
-module.exports.isBachelorOfArts = isBachelorOfArts
-module.exports.isBachelorOfBoth = isBachelorOfBoth
+	isBachelorOfMusic,
+	isBachelorOfArts,
+	isBachelorOfBoth
+}

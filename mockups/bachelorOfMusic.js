@@ -1,12 +1,11 @@
 'use strict';
 
-let _ = require('lodash')
-let Promise = require('bluebird')
+import * as _ from 'lodash'
 
-let common = require('./commonGraduationRequirements')
-let utilities = require('./commonGraduationUtilities')
-let educ = require('./commonEducationRequirements')
-let eduUtilities = require('./commonEducationUtilities')
+import * as common from './commonGraduationRequirements'
+import * as utilities from './commonGraduationUtilities'
+import * as educ from './commonEducationRequirements'
+import * as eduUtilities from './commonEducationUtilities'
 let countGeneds = eduUtilities.countGeneds
 
 function onlyMusicMajors(major) {
@@ -31,7 +30,7 @@ function foreignLanguage(courses) {
 
 function abstractAndQuantitativeReasoning(courses) {
 	// AQR or SED or IST
-	var which = _.groupBy([
+	var which = _.find([
 		{
 			title: 'Abstract and Quantitative Reasoning',
 			abbr: 'AQR',
@@ -55,8 +54,8 @@ function abstractAndQuantitativeReasoning(courses) {
 		result: false,
 	}
 
-	if (true in which) {
-		return which[true]
+	if (which) {
+		return which
 	} else {
 		return generic
 	}
@@ -64,7 +63,7 @@ function abstractAndQuantitativeReasoning(courses) {
 
 function historicalOrLiteraryStudies(courses) {
 	// ALS-L or HWC - 1 course
-	var which = _.groupBy([
+	var which = _.find([
 		{
 			title: 'Historical Studies in Western Culture',
 			abbr: 'HWC',
@@ -83,8 +82,8 @@ function historicalOrLiteraryStudies(courses) {
 		result: false,
 	}
 
-	if (true in which) {
-		return which[true]
+	if (which) {
+		return which
 	} else {
 		return generic
 	}
@@ -92,7 +91,7 @@ function historicalOrLiteraryStudies(courses) {
 
 function multiculturalStudies(courses) {
 	// MCD or MCG - 1 course
-	var which = _.groupBy([
+	var which = _.find([
 		{
 			title: 'Multicultural Studies - Domestic',
 			abbr: 'MCD',
@@ -111,8 +110,8 @@ function multiculturalStudies(courses) {
 		result: false,
 	}
 
-	if (true in which) {
-		return which[true]
+	if (which) {
+		return which
 	} else {
 		return generic
 	}
@@ -167,13 +166,13 @@ function checkBachelorOfMusicDegree(student) {
 
 	var studies = student.studies
 	var courses = _.filter(student.courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
-	var fabrications = []
+	var fabrications = student.fabrications
 	var creditsNeeded = student.creditsNeeded
 
 	var graduationRequirements = [
 		common.courses(courses, creditsNeeded),
 		common.residency(courses, fabrications),
-		common.interim(courses, fabrications),
+		common.interim(courses, fabrications, student.graduation),
 		common.gpa(courses),
 		common.courseLevel(courses),
 		common.gradedCourses(courses, fabrications),
@@ -186,7 +185,7 @@ function checkBachelorOfMusicDegree(student) {
 
 	var educationRequirements = {
 		foundation: [
-			educ.firstYearWriting(courses),
+			educ.firstYearWriting(courses, student.matriculation),
 			educ.writingInContext(courses),
 			foreignLanguage(courses),
 			educ.oralCommunication(courses),
@@ -196,7 +195,7 @@ function checkBachelorOfMusicDegree(student) {
 		core: [
 			historicalOrLiteraryStudies(courses),
 			multiculturalStudies(courses),
-			educ.biblicalStudies(courses),
+			educ.biblicalStudies(courses, student.matriculation),
 			educ.theologicalStudies(courses),
 			educ.studiesInHumanBehaviorAndSociety(courses),
 		],
@@ -243,10 +242,10 @@ function checkBachelorOfMusicDegree(student) {
 
 	// console.log('checkBachelorOfMusicDegree', 'results', results)
 
-	return Promise.props({
+	return {
 		result: _.all(bachelorOfMusicRequirements, 'result'),
 		details: bachelorOfMusicRequirements
-	})
+	}
 }
 
-module.exports = checkBachelorOfMusicDegree
+export default checkBachelorOfMusicDegree

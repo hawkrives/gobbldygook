@@ -1,24 +1,20 @@
 'use strict';
 
-let _ = require('lodash')
-let Promise = require('bluebird')
+import * as _ from 'lodash'
 
-let hasDeptNumBetween = require('../app/helpers/deptNum').hasDeptNumBetween
+import {hasDeptNumBetween} from '../app/helpers/deptNum'
 
-let utilities = require('./commonEducationUtilities')
-let hasGenEd = utilities.hasGenEd
-let countGeneds = utilities.countGeneds
+import {hasGenEd, countGeneds} from './commonEducationUtilities'
 
 // TODO: Consider returning matches from these functions, in addition to the boolean.
 
-function firstYearWriting(courses) {
+function firstYearWriting(courses, matriculation) {
 	// First-year students are required to complete First-Year Writing (FYW),
 	// with two exceptions:
 	// NOTE: These two exceptions don't apply to Gobbldygook.
 
 	// The course must be taken in the first year.
-	var firstYear = _.min(courses, 'year')
-	var firstYearCourses = _.filter(courses, {year: firstYear})
+	var firstYearCourses = _.filter(courses, {year: matriculation})
 
 	return {
 		title: 'First Year Writing',
@@ -152,28 +148,12 @@ function checkCoursesAcrossTwoDepartments(courses, geneds, genedToCheck) {
 	])
 }
 
-function multiCulturalDomesticAndGlobalStudies(courses, gened) {
-	// MCG,MCD - 2 courses, from different departments
-
-	var mcdCourses = _.filter(courses, hasGenEd('MCD'))
-	var mcgCourses = _.filter(courses, hasGenEd('MCG'))
-
-	var mcdAndMcgCourses = _.uniq(_.merge(mcdCourses, mcgCourses), 'crsid')
-	var coversTwoDepartments = acrossAtLeastTwoDepartments(mcdAndMcgCourses)
-
-	return _.all([
-		countGeneds(courses, gened) >= 1,
-		_.size(mcdAndMcgCourses) >= 2,
-		coversTwoDepartments
-	])
-}
-
 function multiculturalDomesticStudies(courses) {
 	// MCG,MCD - 2 courses, from different departments
 	return {
 		title: 'Multicultural Studies - Domestic',
 		abbr: 'MCD',
-		result: multiCulturalDomesticAndGlobalStudies(courses, 'MCD'),
+		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'MCD'),
 	}
 }
 
@@ -182,24 +162,8 @@ function multiculturalGlobalStudies(courses) {
 	return {
 		title: 'Multicultural Studies - Global',
 		abbr: 'MCG',
-		result: multiCulturalDomesticAndGlobalStudies(courses, 'MCG'),
+		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'MCG'),
 	}
-}
-
-function artisticAndLiteraryStudies(courses, gened) {
-	// ALS-A,ALS-L - 2 courses, from different departments
-
-	var artisticCourses = _.filter(courses, hasGenEd('ALS-A'))
-	var literaryCourses = _.filter(courses, hasGenEd('ALS-L'))
-
-	var artisticAndLiteraryCourses = _.uniq(_.merge(artisticCourses, literaryCourses), 'crsid')
-	var coversTwoDepartments = acrossAtLeastTwoDepartments(artisticAndLiteraryCourses)
-
-	return _.all([
-		countGeneds(courses, gened) >= 1,
-		_.size(artisticAndLiteraryCourses) >= 2,
-		coversTwoDepartments
-	])
 }
 
 function artisticStudies(courses) {
@@ -207,7 +171,7 @@ function artisticStudies(courses) {
 	return {
 		title: 'Artistic Studies',
 		abbr: 'ALS-A',
-		result: artisticAndLiteraryStudies(courses, 'ALS-A'),
+		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'ALS-A'),
 	}
 }
 
@@ -216,17 +180,16 @@ function literaryStudies(courses) {
 	return {
 		title: 'Literary Studies',
 		abbr: 'ALS-L',
-		result: artisticAndLiteraryStudies(courses, 'ALS-L'),
+		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'ALS-L'),
 	}
 }
 
-function biblicalStudies(courses) {
+function biblicalStudies(courses, matriculation) {
 	// BTS-B - 1 course
 
 	// We're going to continue under the assumption that the BTS-B must be
 	// taken in the first year at Olaf.
-	var firstYear = _.min(courses, 'year')
-	var firstYearCourses = _.filter(courses, {year: firstYear})
+	var firstYearCourses = _.filter(courses, {year: matriculation})
 
 	return {
 		title: 'Biblical and Theological Studies - Bible',
@@ -328,36 +291,38 @@ function ethicalIssuesAndNormativePerspectives(courses) {
 }
 
 function integrativeCourses(courses) {
-	return Promise.all([
+	let results = [
 		ethicalIssuesAndNormativePerspectives(courses),
-	]).then(function(results) {
-		return {
-			title: 'Integrative',
-			result: _.all(results),
-			details: results
-		}
-	})
+	]
+
+	return {
+		title: 'Integrative',
+		result: _.all(results),
+		details: results
+	}
 }
 
-// Foundation
-module.exports.firstYearWriting = firstYearWriting
-module.exports.writingInContext = writingInContext
-module.exports.foreignLanguage = foreignLanguage
-module.exports.oralCommunication = oralCommunication
-module.exports.abstractAndQuantitativeReasoning = abstractAndQuantitativeReasoning
-module.exports.studiesInPhysicalMovement = studiesInPhysicalMovement
+export {
+	// Foundation
+	firstYearWriting,
+	writingInContext,
+	foreignLanguage,
+	oralCommunication,
+	abstractAndQuantitativeReasoning,
+	studiesInPhysicalMovement,
 
-// Core
-module.exports.historicalStudiesInWesternCulture = historicalStudiesInWesternCulture
-module.exports.multiculturalDomesticStudies = multiculturalDomesticStudies
-module.exports.multiculturalGlobalStudies = multiculturalGlobalStudies
-module.exports.artisticStudies = artisticStudies
-module.exports.literaryStudies = literaryStudies
-module.exports.biblicalStudies = biblicalStudies
-module.exports.theologicalStudies = theologicalStudies
-module.exports.scientificExplorationAndDiscovery = scientificExplorationAndDiscovery
-module.exports.integratedScientificTopics = integratedScientificTopics
-module.exports.studiesInHumanBehaviorAndSociety = studiesInHumanBehaviorAndSociety
+	// Core
+	historicalStudiesInWesternCulture,
+	multiculturalDomesticStudies,
+	multiculturalGlobalStudies,
+	artisticStudies,
+	literaryStudies,
+	biblicalStudies,
+	theologicalStudies,
+	scientificExplorationAndDiscovery,
+	integratedScientificTopics,
+	studiesInHumanBehaviorAndSociety,
 
-// Integrative
-module.exports.ethicalIssuesAndNormativePerspectives = ethicalIssuesAndNormativePerspectives
+	// Integrative
+	ethicalIssuesAndNormativePerspectives
+}

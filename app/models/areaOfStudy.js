@@ -9,13 +9,13 @@ import getRandomInt from '../helpers/getRandomInt'
 
 var areas = {
 	// Degrees
-	'd-ba': require('../../mockups/bachelorOfArts'),
-	'd-bm': require('../../mockups/bachelorOfMusic'),
+	'd-ba': require('../../mockups/bachelorOfArts').default,
+	'd-bm': require('../../mockups/bachelorOfMusic').default,
 
 	// Majors
-	'm-csci': require('../../mockups/computerScience'),
-	'm-asian': require('../../mockups/asianStudies'),
-	'm-chem': require('../../mockups/chemistry'),
+	'm-csci': require('../../mockups/computerScience').default,
+	'm-asian': require('../../mockups/asianStudies').default,
+	'm-chem': require('../../mockups/chemistry').default,
 
 	// Concentrations
 
@@ -57,13 +57,13 @@ var AreaOfStudy = React.createClass({
 		var area = getArea(this.props.area.id)
 
 		if (typeof area === 'function') {
-			area(this.props.student).bind(this).then(function(results) {
-				console.log('calculated ' + this.props.area.abbr + ' graduation possibility', results)
-				this.setState({
-					result: results
-				})
+			let results = area(this.props.student)
+			console.log('calculated ' + this.props.area.abbr + ' graduation possibility', results)
+			this.setState({
+				result: results
 			})
-		} else {
+		}
+		else {
 			this.setState({
 				result: {
 					result: false,

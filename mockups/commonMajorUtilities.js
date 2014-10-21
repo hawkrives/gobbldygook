@@ -1,7 +1,6 @@
 'use strict';
 
-let _ = require('lodash')
-let Promise = require('bluebird')
+import * as _ from 'lodash'
 
 var isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
 	// Takes in a list of required course info, as objects that only have the
@@ -36,4 +35,4 @@ var isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
 	return _.all(results)
 })
 
-module.exports.isRequiredCourse = isRequiredCourse
+export {isRequiredCourse}

@@ -16,11 +16,12 @@ var schema = treo.schema()
 			.addIndex('crsid',      'crsid',      {multi: false})
 			.addIndex('clbid',      'clbid',      {multi: false})
 			.addIndex('deptnum',    'deptnum',    {multi: false})
+			.addIndex('year',       'year',       {multi: false})
 		.addStore('areas', { key: 'sourcePath' })
 			.addIndex('type',       'type',       {multi: true})
 			.addIndex('sourcePath', 'sourcePath', {multi: false})
 	.version(2)
-		.addStore('students', { key: 'id'   })
+		.addStore('students', { key: 'id' })
 
 var db = treo('gobbldygook', schema)
 	.use(treoPromise())
@@ -33,5 +34,7 @@ window.eraseDatabase = function() {
 	})
 }
 
+let courseCache = {}
+window.courseCache = courseCache
 window.database = db
-export default db
+export {db, courseCache}
