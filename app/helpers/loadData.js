@@ -44,7 +44,7 @@ function primeCourseCache() {
 			})
 			//initialLoadProgress.update((100 / recentYears.length) * _.findIndex(recentYears, year))
 		})
-	}))
+	})).then(() => courseCache = Object.freeze(courseCache))
 }
 
 function storeCourses(item) {
