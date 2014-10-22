@@ -8,6 +8,7 @@ import add from './add'
 import {db, courseCache} from './db'
 import {buildDeptNum, buildDept} from './deptNum'
 import {discoverRecentYears} from './recentTime'
+import {convertTimeStringsToOfferings} from './time'
 
 //import initialLoadProgress from './initialLoadProgress'
 
@@ -22,6 +23,7 @@ function primeCourseCache() {
 		return db.store('courses').index('year').get(year).then(function(courses) {
 			_.map(courses, c => {
 				c.dept = buildDept(c)
+				c.offerings = convertTimeStringsToOfferings(c)
 				courseCache[c.clbid] = c
 			})
 			//initialLoadProgress.update((100 / recentYears.length) * _.findIndex(recentYears, year))

@@ -4,8 +4,6 @@ import * as _ from 'lodash'
 import * as Promise from 'bluebird'
 import {courseCache} from './db'
 
-import {convertTimeStringsToOfferings} from './time'
-
 function getCourse(clbid) {
 	let course = courseCache[clbid]
 
@@ -13,7 +11,6 @@ function getCourse(clbid) {
 		console.warn('course retrieval failed for: ' + clbid)
 	}
 
-	course = convertTimeStringsToOfferings(course)
 	return course
 }
 
