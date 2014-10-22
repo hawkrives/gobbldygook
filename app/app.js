@@ -10,6 +10,8 @@ import documentReady from './helpers/document-ready'
 import Gobbldygook from './models/gobbldygookApp'
 import loadData from './helpers/loadData'
 
+import 'es6-shim'
+
 // Just for use in the browser console, I swear.
 window.lodash = _
 

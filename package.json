@@ -81,6 +81,7 @@
   "dependencies": {
     "bluebird": "^2.3.5",
     "crypto-browserify": "^3.2.7",
+    "es6-shim": "^0.19.1",
     "humanize-plus": "^1.5.0",
     "lodash": "^2.4.1",
     "react": "^0.11.2",
