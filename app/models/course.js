@@ -4,11 +4,30 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
+import {DragDropMixin} from '../../node_modules/react-dnd/dist/ReactDND.min'
+import itemTypes from '../objects/itemTypes'
+
 var Course = React.createClass({
+	mixins: [DragDropMixin],
+	
+	configureDragDrop(registerType) {
+		registerType(itemTypes.COURSE, {
+			dragSource: {
+				beginDrag() {
+					return {
+						item: {clbid: this.props.info.clbid}
+					}
+				}
+			}
+		})
+	},
+	
 	render() {
 		let title = this.props.info.type === 'Topic' ? this.props.info.name : this.props.info.title;
 
-		let summary = React.DOM.article({className: 'course'},
+		let summary = React.DOM.article(
+			Object.assign({className: 'course'}, this.dragSourceFor(itemTypes.COURSE)),
+
 			React.DOM.div({className: 'info-rows'},
 				React.DOM.h1({className: 'title'}, title),
 				React.DOM.span({className: 'details'},
