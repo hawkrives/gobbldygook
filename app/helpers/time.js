@@ -90,7 +90,7 @@ function findTimes(timestring) {
 }
 
 function convertTimeStringsToOfferings(course) {
-	var offerings = {}
+	let offerings = {}
 
 	_.each(course.times, function(time) {
 		var dayString = time.split(' ')[0]
@@ -117,9 +117,7 @@ function convertTimeStringsToOfferings(course) {
 		})
 	})
 
-	course.offerings = _.toArray(offerings)
-
-	return course
+	return _.toArray(offerings)
 }
 
 function checkCourseTimeConflicts(mainCourse, altCourse) {
