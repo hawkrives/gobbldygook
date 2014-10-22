@@ -35,10 +35,10 @@ var Year = React.createClass({
 	},
 
 	render() {
-		var schedules = this.props.schedules.byYear[this.props.year]
-		// console.log('Year render', schedules)
+		var thisYearSchedules = this.props.schedules.byYear[this.props.year]
+		let schedules = _.chain(thisYearSchedules).filter('active').groupBy('semester').value()
 
-		var terms = _.map(_.groupBy(schedules, 'semester'), function(schedule, semester) {
+		var terms = _.map(schedules, function(schedule, semester) {
 			semester = parseInt(semester, 10)
 			return Semester({
 				key: semester,
