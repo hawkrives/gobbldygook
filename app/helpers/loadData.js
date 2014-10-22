@@ -29,6 +29,13 @@ function deepFreeze(o) {
 		deepFreeze(prop); // Recursively call deepFreeze.
 	}
 }
+
+function prepareAndFreezeCourse(course) {
+	course.dept = course.dept || buildDept(course)
+	course.deptnum = course.deptnum || buildDeptNum(course)
+	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
+	deepFreeze(course)
+	return course
 }
 
 function primeCourseCache() {
@@ -37,12 +44,8 @@ function primeCourseCache() {
 		console.log('Priming course cache', year)
 		return db.store('courses').index('year').get(year).then(function(courses) {
 			_.map(courses, c => {
-				c.dept = buildDept(c)
-				c.offerings = convertTimeStringsToOfferings(c)
-				deepFreeze(c)
-				courseCache[c.clbid] = c
+				courseCache[c.clbid] = prepareAndFreezeCourse(c)
 			})
-			//initialLoadProgress.update((100 / recentYears.length) * _.findIndex(recentYears, year))
 		})
 	})).then(() => courseCache = Object.freeze(courseCache))
 }
@@ -53,9 +56,7 @@ function storeCourses(item) {
 
 		var courses = _.map(item.data.courses, function(course) {
 			course.sourcePath = item.meta.path
-			course.deptnum = buildDeptNum(course)
-			course.dept = buildDept(course)
-			return course
+			return prepareAndFreezeCourse(course)
 		})
 
 		db.store('courses').batch(courses)
