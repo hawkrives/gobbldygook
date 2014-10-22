@@ -33,6 +33,7 @@ var Semester = React.createClass({
 	render() {
 		let schedule = _.find(this.props.schedules.activeSchedules,
 			{year: this.props.year, semester: this.props.semester})
+		console.log('semester render', schedule)
 
 		let courseCount = _.size(schedule.courses)
 
