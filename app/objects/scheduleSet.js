@@ -1,6 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
+import emitter from './emitter'
 import Schedule from './scheduleModel'
 
 let ScheduleSet = (scheduleData) => {
@@ -21,11 +22,21 @@ let ScheduleSet = (scheduleData) => {
 		console.log('creating', schedule)
 		let sched = new Schedule(schedule)
 		schedules[sched.id] = sched
+		emitter.emit('change')
 	}})
 
 	Object.defineProperty(schedules, 'destroy', { value(id) {
-		console.log('removing', id)
+		console.log('removing schedule', id)
+		
+		let deadSched = schedules[id]
 		delete schedules[id]
+		
+		if (deadSched.active) {
+			let otherSched = _.find(schedules, {year: deadSched.year, semester: deadSched.semester});
+			if (otherSched)
+				otherSched.active = true
+		}
+		emitter.emit('change')
 	}})
 	Object.defineProperty(schedules, 'destroyMultiple', { value(ids) {
 		_.each(ids, schedules.destroy)
