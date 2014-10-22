@@ -1,7 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
-import {emitter} from './studentModel'
+import emitter from '../helpers/emitter'
 
 import uuid from '../helpers/uuid'
 import randomChar from '../helpers/randomChar'
