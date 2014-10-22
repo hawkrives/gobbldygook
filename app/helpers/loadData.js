@@ -39,6 +39,7 @@ function primeCourseCache() {
 			_.map(courses, c => {
 				c.dept = buildDept(c)
 				c.offerings = convertTimeStringsToOfferings(c)
+				deepFreeze(c)
 				courseCache[c.clbid] = c
 			})
 			//initialLoadProgress.update((100 / recentYears.length) * _.findIndex(recentYears, year))
