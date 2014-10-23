@@ -93,27 +93,19 @@ function convertTimeStringsToOfferings(course) {
 	let offerings = {}
 
 	_.each(course.times, function(time) {
-		var dayString = time.split(' ')[0]
-		var timeString = time.split(' ')[1]
+		let dayString = time.split(' ')[0]
+		let timeString = time.split(' ')[1]
 
-		var times = findTimes(timeString)
-		var days = findDays(dayString)
+		let days = findDays(dayString)
+		let times = findTimes(timeString)
 
 		_.each(days, function(day) {
 			if (!offerings[day]) {
 				offerings[day] = {}
 			}
 
-			_.merge(
-				offerings[day],
-				{
-					day: day,
-					times: [times]
-				},
-				function(a, b) {
-					return _.isArray(a) ? a.concat(b) : undefined
-				}
-			);
+			_.merge(offerings[day], {day: day, times: [times]},
+				(a, b) => _.isArray(a) ? a.concat(b) : undefined);
 		})
 	})
 
