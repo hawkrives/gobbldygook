@@ -17,6 +17,16 @@ var Course = React.createClass({
 					return {
 						item: {clbid: this.props.info.clbid}
 					}
+				},
+				endDrag(didDrop) {
+					if (didDrop) {
+						if (this.props.schedule) {
+							console.log(
+								'removing course', this.props.info.clbid, 
+								'from', this.props.schedule.id)
+							this.props.schedule.removeCourse(this.props.info.clbid)
+						}
+					}
 				}
 			}
 		})
