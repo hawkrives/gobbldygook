@@ -31,6 +31,7 @@ var Semester = React.createClass({
 			dropTarget: {
 				acceptDrop(courseIdentifier) {
 					console.log('dropped courseIdentifier', courseIdentifier)
+					this.schedule.addCourse(courseIdentifier.clbid)
 				}
 			}
 		})
