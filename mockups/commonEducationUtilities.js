@@ -39,7 +39,7 @@ function checkThatNCoursesSpanTwoDepartments(courses, geneds, genedToCheck, n=2)
 	var coursesOne = _.filter(courses, hasGenEd(geneds[0]))
 	var coursesTwo = _.filter(courses, hasGenEd(geneds[1]))
 
-	var allCourses = _.uniq(_.merge(coursesOne, coursesTwo), 'crsid')
+	var allCourses = _.uniq(coursesOne.concat(coursesTwo), 'crsid')
 	var coversTwoDepartments = acrossAtLeastTwoDepartments(allCourses)
 
 	return _.all([
