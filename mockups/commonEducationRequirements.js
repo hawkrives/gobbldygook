@@ -4,7 +4,11 @@ import * as _ from 'lodash'
 
 import {hasDeptNumBetween} from '../app/helpers/deptNum'
 
-import {hasGenEd, countGeneds} from './commonEducationUtilities'
+import {
+	hasGenEd,
+	countGeneds,
+	acrossAtLeastTwoDepartments,
+	checkThatNCoursesSpanTwoDepartments} from './commonEducationUtilities'
 
 // TODO: Consider returning matches from these functions, in addition to the boolean.
 
@@ -123,37 +127,12 @@ function historicalStudiesInWesternCulture(courses) {
 	}
 }
 
-function getDepartments(courses) {
-	return _.chain(courses).pluck('depts').flatten().uniq().value()
-}
-
-function acrossAtLeastTwoDepartments(courses) {
-	var depts = getDepartments(courses)
-
-	return _.size(depts) >= 2
-}
-
-function checkCoursesAcrossTwoDepartments(courses, geneds, genedToCheck) {
-	// XXX,YYY - 2 courses, from different departments
-	var coursesOne = _.filter(courses, hasGenEd(geneds[0]))
-	var coursesTwo = _.filter(courses, hasGenEd(geneds[1]))
-
-	var allCourses = _.uniq(_.merge(coursesOne, coursesTwo), 'crsid')
-	var coversTwoDepartments = acrossAtLeastTwoDepartments(allCourses)
-
-	return _.all([
-		countGeneds(courses, genedToCheck) >= 1,
-		_.size(allCourses) >= 2,
-		coversTwoDepartments
-	])
-}
-
 function multiculturalDomesticStudies(courses) {
 	// MCG,MCD - 2 courses, from different departments
 	return {
 		title: 'Multicultural Studies - Domestic',
 		abbr: 'MCD',
-		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'MCD'),
+		result: checkThatNCoursesSpanTwoDepartments(courses, ['MCD', 'MCG'], 'MCD'),
 	}
 }
 
@@ -162,7 +141,7 @@ function multiculturalGlobalStudies(courses) {
 	return {
 		title: 'Multicultural Studies - Global',
 		abbr: 'MCG',
-		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'MCG'),
+		result: checkThatNCoursesSpanTwoDepartments(courses, ['MCD', 'MCG'], 'MCG'),
 	}
 }
 
@@ -171,7 +150,7 @@ function artisticStudies(courses) {
 	return {
 		title: 'Artistic Studies',
 		abbr: 'ALS-A',
-		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'ALS-A'),
+		result: checkThatNCoursesSpanTwoDepartments(courses, ['ALS-L', 'ALS-A'], 'ALS-A'),
 	}
 }
 
@@ -180,7 +159,7 @@ function literaryStudies(courses) {
 	return {
 		title: 'Literary Studies',
 		abbr: 'ALS-L',
-		result: checkCoursesAcrossTwoDepartments(courses, ['MCD', 'MCG'], 'ALS-L'),
+		result: checkThatNCoursesSpanTwoDepartments(courses, ['ALS-L', 'ALS-A'], 'ALS-L'),
 	}
 }
 
@@ -207,28 +186,12 @@ function theologicalStudies(courses) {
 	}
 }
 
-function studiesInNaturalScience(courses, gened) {
-	// SED,IST - 2 courses, from different departments/programs
-
-	var sedCourses = _.filter(courses, hasGenEd('SED'))
-	var istCourses = _.filter(courses, hasGenEd('IST'))
-
-	var naturalScienceCourses = _.uniq(_.merge(sedCourses, istCourses), 'crsid')
-	var coversTwoDepartments = acrossAtLeastTwoDepartments(naturalScienceCourses)
-
-	return _.all([
-		countGeneds(courses, gened) >= 1,
-		_.size(naturalScienceCourses) >= 2,
-		coversTwoDepartments
-	])
-}
-
 function scientificExplorationAndDiscovery(courses) {
 	// SED,IST - 2 courses, from different departments/programs
 	return {
 		title: 'Scientific Exploration and Discovery',
 		abbr: 'SED',
-		result: studiesInNaturalScience(courses, 'SED'),
+		result: checkThatNCoursesSpanTwoDepartments(courses, ['SED', 'IST'], 'SED'),
 	}
 }
 
@@ -237,7 +200,7 @@ function integratedScientificTopics(courses) {
 	return {
 		title: 'Integrated Scientific Topics',
 		abbr: 'IST',
-		result: studiesInNaturalScience(courses, 'IST'),
+		result: checkThatNCoursesSpanTwoDepartments(courses, ['SED', 'IST'], 'IST'),
 	}
 }
 
@@ -256,7 +219,7 @@ function studiesInHumanBehaviorAndSociety(courses) {
 	return {
 		title: 'Studies in Human Behavior and Society',
 		abbr: 'HBS',
-		result: result,
+		result: checkThatNCoursesSpanTwoDepartments(courses, ['HBS'], 'HBS', 1),
 	}
 }
 
