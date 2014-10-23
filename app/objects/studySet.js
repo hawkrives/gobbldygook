@@ -1,6 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
+import emitter from '../helpers/emitter'
 import Study from './studyModel'
 
 let StudySet = (studyData) => {

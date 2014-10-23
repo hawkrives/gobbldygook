@@ -7,52 +7,60 @@ import * as humanize from 'humanize-plus'
 import add from '../helpers/add'
 import randomChar from '../helpers/randomChar'
 
+let goodGraduationMessage = 'It looks like you\'ll make it! Just follow the plan, and go over my output with your advisor a few times.'
+let badGraduationMessage = 'You haven\'t planned everything out yet. Ask your advisor if you need help fitting everything in.'
+
 var StudentSummary = React.createClass({
 	render() {
 		var student = this.props.student
 		var studies = student.studies
 		var name = student.name || randomChar()
-
-		var degreeObjects = _.filter(studies, {type: 'degree'})
-		var majorObjects = _.filter(studies, {type: 'major'})
-		var concentrationObjects = _.filter(studies, {type: 'concentration'})
-		var emphasisObjects = _.filter(studies, {type: 'emphasis'})
-
 		var has = _.mapValues(_.groupBy(studies, 'type'), _.size)
 
-		var degrees = humanize.oxford(_.pluck(degreeObjects, 'title'))
-		var majors = humanize.oxford(_.pluck(majorObjects, 'title'))
-		var concentrations = humanize.oxford(_.pluck(concentrationObjects, 'title'))
-		var emphases = humanize.oxford(_.pluck(emphasisObjects, 'title'))
+		let objects = {
+			degree: _.filter(studies, {type: 'degree'}),
+			major: _.filter(studies, {type: 'major'}),
+			concentration: _.filter(studies, {type: 'concentration'}),
+			emphasis: _.filter(studies, {type: 'emphasis'}),
+		}
 
-		var degreeWord = humanize.pluralize(_.size(degreeObjects), 'degree')
-		var majorWord = humanize.pluralize(_.size(majorObjects), 'major')
-		var concentrationWord = humanize.pluralize(_.size(concentrationObjects), 'concentration')
-		var emphasisWord = humanize.pluralize(_.size(emphasisObjects), 'emphasis', 'emphases')
+		let titles = {
+			degree: humanize.oxford(_.pluck(objects.degree, 'title')),
+			major: humanize.oxford(_.pluck(objects.major, 'title')),
+			concentration: humanize.oxford(_.pluck(objects.concentration, 'title')),
+			emphasis: humanize.oxford(_.pluck(objects.emphasis, 'title')),
+		}
+
+		let words = {
+			degree: humanize.pluralize(_.size(objects.degree), 'degree'),
+			major: humanize.pluralize(_.size(objects.major), 'major'),
+			concentration: humanize.pluralize(_.size(objects.concentration), 'concentration'),
+			emphasis: humanize.pluralize(_.size(objects.emphasis), 'emphasis', 'emphases'),
+		}
 
 		// var canGraduate = checkElegibilityForGraduation(this.props)
 		var canGraduate = false
 
-		var degreePhrase = React.DOM.span({className: 'area-of-study-list'}, degrees)
-		var majorPhrase = React.DOM.span({className: 'area-of-study-list'}, majors)
-		var concentrationPhrase = React.DOM.span({className: 'area-of-study-list'}, concentrations)
-		var emphasisPhrase = React.DOM.span({className: 'area-of-study-list'}, emphases)
+		let phrases = {
+			degree: React.DOM.span({className: 'area-of-study-list'}, titles.degree),
+			major: React.DOM.span({className: 'area-of-study-list'}, titles.major),
+			concentration: React.DOM.span({className: 'area-of-study-list'}, titles.concentration),
+			emphasis: React.DOM.span({className: 'area-of-study-list'}, titles.emphasis),
+		}
 
 		var emphasisEmphasizer = has.emphasis > 0 && has.emphasis < 2 ? 'an ' : ''
 
 		return React.DOM.article({id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
-			React.DOM.div({id: 'student-letter'}, name[0]),
+			React.DOM.div({key: 'letter', id: 'student-letter'}, name[0]),
 			React.DOM.p({key: 'hi'}, 'Hi, ', name, '!'),
 			React.DOM.p({key: 'overview'},
-				'You are planning on ', _.size(degreeObjects === 1) ? 'a ' : '', degreePhrase,
-				' ', degreeWord, ', with ', majorWord, ' in ', majorPhrase,
-				has.concentration > 0 ? [', and ', concentrationWord, ' in ', concentrationPhrase] : '',
-				has.emphasis > 0 ? [', not to mention ', emphasisEmphasizer, emphasisWord, ' in ', emphasisPhrase] : '',
+				'You are planning on ', _.size(objects.degree === 1) ? 'a ' : '', phrases.degree,
+				' ', words.degree, ', with ', words.major, ' in ', phrases.major,
+				has.concentration > 0 ? [', and ', words.concentration, ' in ', phrases.concentration] : '',
+				has.emphasis > 0 ? [', not to mention ', emphasisEmphasizer, words.emphasis, ' in ', phrases.emphasis] : '',
 				'.'),
 			React.DOM.p({key: 'message', className: 'graduation-message'},
-				canGraduate ?
-				'It looks like you\'ll make it! Just follow the plan, and go over my output with your advisor a few times.' :
-				'You haven\'t planned everything out yet. Ask your advisor if you need help fitting everything in.')
+				canGraduate ? goodGraduationMessage : badGraduationMessage)
 		)
 	}
 })

@@ -61,6 +61,7 @@
     "browserify": "^6.0.3",
     "colors.css": "^1.0.0",
     "del": "^0.1.3",
+    "eventemitter3": "^0.1.5",
     "gulp": "^3.8.8",
     "gulp-autoprefixer": "^1.0.1",
     "gulp-changed": "^1.0.0",
@@ -73,6 +74,7 @@
     "jest-cli": "^0.1.18",
     "jshint-stylish": "^1.0.0",
     "progress-svg": "^0.1.1",
+    "react-dnd": "^0.1.7",
     "run-sequence": "^1.0.1",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.0.0"
@@ -80,6 +82,7 @@
   "dependencies": {
     "bluebird": "^2.3.5",
     "crypto-browserify": "^3.2.7",
+    "es6-shim": "^0.19.1",
     "humanize-plus": "^1.5.0",
     "lodash": "^2.4.1",
     "react": "^0.11.2",

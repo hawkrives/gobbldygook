@@ -1,6 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
+import emitter from '../helpers/emitter'
 
 import uuid from '../helpers/uuid'
 import randomChar from '../helpers/randomChar'
@@ -22,26 +23,32 @@ let Schedule = (scheduleData) => {
 	Object.defineProperty(schedule, 'move', { value(year, semester) {
 		if (year)      schedule.year = year
 		if (semester)  schedule.semester = semester
+		emitter.emit('change')
 	}})
 	Object.defineProperty(schedule, 'reorder', { value(newIndex) {
 		schedule.index = newIndex
+		emitter.emit('change')
 	}})
 	Object.defineProperty(schedule, 'rename', { value(newTitle) {
 		schedule.title = newTitle
+		emitter.emit('change')
 	}})
 
 	Object.defineProperty(schedule, 'reorderCourse', { value(clbid, newIndex) {
 		let oldIndex = _.findIndex(schedule.clbids, (id) => id === clbid)
 		schedule.clbids.splice(oldIndex, 1)
 		schedule.clbids.splice(newIndex, 0, clbid)
+		emitter.emit('change')
 	}})
 	Object.defineProperty(schedule, 'addCourse', { value(clbid, index) {
 		index = index || schedule.clbids.length - 1
 		schedule.clbids.splice(index, 0, clbid)
+		emitter.emit('change')
 	}})
 	Object.defineProperty(schedule, 'removeCourse', { value(clbid) {
 		let index = _.findIndex(schedule.clbids, (id) => id === clbid)
 		schedule.clbids.splice(index, 1)
+		emitter.emit('change')
 	}})
 
 	Object.defineProperty(schedule, 'validate', { value() {
