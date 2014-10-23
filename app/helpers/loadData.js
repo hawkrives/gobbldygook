@@ -39,15 +39,21 @@ function prepareAndFreezeCourse(course) {
 }
 
 function primeCourseCache() {
+	let start = performance.now()
 	let recentYears = discoverRecentYears()
+	let setOfCourses = []
+	let courses = db.store('courses').index('year')
+	console.log('Priming course cache...')
 	return Promise.all(_.map(recentYears, function(year) {
-		console.log('Priming course cache', year)
-		return db.store('courses').index('year').get(year).then(function(courses) {
-			_.map(courses, c => {
-				courseCache[c.clbid] = prepareAndFreezeCourse(c)
-			})
-		})
-	})).then(() => courseCache = Object.freeze(courseCache))
+		return courses.get(year)
+			.then((courses) =>
+				setOfCourses.push.apply(setOfCourses, courses))
+	})).then(() => {
+		_.each(setOfCourses, c => courseCache[c.clbid] = prepareAndFreezeCourse(c))
+		courseCache = Object.freeze(courseCache)
+		let end = performance.now()
+		console.log('Cached courses in', (end - start) + 'ms.')
+	})
 }
 
 function storeCourses(item) {
