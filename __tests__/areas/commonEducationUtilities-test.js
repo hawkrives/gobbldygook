@@ -104,17 +104,17 @@ describe('checkThatNCoursesSpanTwoDepartments', function() {
 		var checkThatNCoursesSpanTwoDepartments = require('../../mockups/commonEducationUtilities').checkThatNCoursesSpanTwoDepartments;
 
 		var courses = [
-			{depts: ['AMCON'], gereqs: ['HBS', 'ALS-A']},
-			{depts: ['ASIAN'], gereqs: ['HBS', 'MCG']},
-			{depts: ['AMCON', 'ASIAN'], gereqs: ['ALS-L']},
-			{depts: ['CSCI', 'MATH'], gereqs: ['MCD', 'ALS-L']},
-			{depts: ['BIO'], gereqs: ['IST']},
-			{depts: ['CHEM'], gereqs: ['SED']},
+			{crsid: 1, depts: ['AMCON'], gereqs: ['HBS', 'ALS-A']},
+			{crsid: 2, depts: ['ASIAN'], gereqs: ['HBS', 'MCG']},
+			{crsid: 3, depts: ['AMCON', 'ASIAN'], gereqs: ['ALS-L']},
+			{crsid: 4, depts: ['CSCI', 'MATH'], gereqs: ['MCD', 'ALS-L']},
+			{crsid: 5, depts: ['BIO'], gereqs: ['IST']},
+			{crsid: 6, depts: ['CHEM'], gereqs: ['SED']},
 		]
 
 		var failure = [
-			{depts: ['AMCON', 'ASIAN'], gereqs: ['ALS-L']},
-			{depts: ['BIO', 'CHEM'], gereqs: ['IST', 'SED']},
+			{crsid: 1, depts: ['AMCON', 'ASIAN'], gereqs: ['ALS-L']},
+			{crsid: 2, depts: ['BIO', 'CHEM'], gereqs: ['IST', 'SED']},
 		]
 
 		expect(checkThatNCoursesSpanTwoDepartments(courses, ['MCD', 'MCG'], 'MCD')).toBe(true);
