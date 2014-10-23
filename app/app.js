@@ -9,6 +9,7 @@ import documentReady from './helpers/document-ready'
 
 import Gobbldygook from './models/gobbldygookApp'
 import loadData from './helpers/loadData'
+import emitter from './helpers/emitter'
 
 import 'es6-shim'
 
@@ -33,7 +34,10 @@ let blastoff = () => {
 		console.log('3. 2.. 1... Blastoff!')
 
 		 // Load data into the database, then render the app
-		loadData().then(render)
+		loadData().then(() => {
+			render()
+			emitter.on('change', render)
+		})
 	}).done()
 }
 
