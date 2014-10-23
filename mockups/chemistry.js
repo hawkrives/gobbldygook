@@ -106,10 +106,12 @@ function beyondChemistry(courses) {
 
 	let physics = []
 	let mathematics = []
+	let seminars = true
 
 	let details = [
 		physics,
-		mathematics
+		mathematics,
+		seminars
 	]
 
 	return {
