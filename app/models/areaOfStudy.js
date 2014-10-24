@@ -58,7 +58,7 @@ var AreaOfStudy = React.createClass({
 
 		if (typeof area === 'function') {
 			let results = area(this.props.student)
-			console.log('calculated ' + this.props.area.abbr + ' graduation possibility', results)
+			// console.log('calculated ' + this.props.area.abbr + ' graduation possibility', results)
 			this.setState({
 				result: results
 			})
@@ -97,7 +97,7 @@ var AreaOfStudy = React.createClass({
 		}, this);
 
 		var results = findResults(this.state.result.details)
-		console.log(this.props.area.title, results)
+		// console.log(this.props.area.title, results)
 		var currentProgress = _.size(_.compact(results))
 		var maxProgress = _.size(results)
 

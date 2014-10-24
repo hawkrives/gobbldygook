@@ -49,7 +49,7 @@ var Semester = React.createClass({
 		this.schedule = _.find(activeSchedules,
 				{year: this.props.year, semester: this.props.semester})
 		let schedule = this.schedule;
-		console.log('semester render', schedule)
+		// console.log('semester render', schedule)
 
 		let infoBar = null;
 		if (schedule) {
