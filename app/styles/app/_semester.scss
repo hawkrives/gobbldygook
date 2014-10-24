@@ -73,8 +73,6 @@ $semester-divider: solid 1px $border-bottom-color;
 
 .remove-semester {
 	@extend %remove-button;
-	display: none;
-	border-radius: 50px;
 	margin: 0;
 
 	float: right;

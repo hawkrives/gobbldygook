@@ -91,12 +91,13 @@
 %remove-button {
 	@extend %button;
 
-	background-color: white;
-	color: $red;
+	color: $gray;
+	opacity: 0.15;
+	transition: 0.15s;
 
 	&:hover {
-		background-color: $red;
-		color: white;
+		color: $red;
+		opacity: 1;
 	}
 
 	&::after {
