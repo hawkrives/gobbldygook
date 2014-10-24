@@ -42,10 +42,10 @@ var StudentSummary = React.createClass({
 		var canGraduate = false
 
 		let phrases = {
-			degree: React.DOM.span({className: 'area-of-study-list'}, titles.degree),
-			major: React.DOM.span({className: 'area-of-study-list'}, titles.major),
-			concentration: React.DOM.span({className: 'area-of-study-list'}, titles.concentration),
-			emphasis: React.DOM.span({className: 'area-of-study-list'}, titles.emphasis),
+			degree: React.DOM.span({className: 'area-of-study-list', key:'degree'}, titles.degree),
+			major: React.DOM.span({className: 'area-of-study-list', key:'major'}, titles.major),
+			concentration: React.DOM.span({className: 'area-of-study-list', key:'concentration'}, titles.concentration),
+			emphasis: React.DOM.span({className: 'area-of-study-list', key:'emphasis'}, titles.emphasis),
 		}
 
 		var emphasisEmphasizer = has.emphasis > 0 && has.emphasis < 2 ? 'an ' : ''
