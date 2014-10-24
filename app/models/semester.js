@@ -4,6 +4,7 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
+import add from '../helpers/add'
 import semesterName from '../helpers/semesterName'
 import Course from './course'
 import {EmptyCourseSlot} from './course'
@@ -42,20 +43,30 @@ var Semester = React.createClass({
 		let schedule = this.schedule;
 		// console.log('semester render', schedule)
 
-		let infoBar = null;
+		let infoIcons = []
 		if (schedule) {
 			let courseCount = _.size(schedule.courses)
-			infoBar = React.DOM.ul({className: 'info-bar'},
-				React.DOM.li(
-					{className: 'semester-course-count'},
-					courseCount + ' ' + humanize.pluralize(courseCount, 'course')
-				),
-				schedule.isValid ? null :
-					React.DOM.li({
-						className: 'semester-status',
-						title: JSON.stringify(schedule.conflicts, null, 2)},
-						React.DOM.i({className: 'ion-alert-circled'})));
+			infoIcons.push(React.DOM.li({
+				className: 'semester-course-count', key: 'course-count'},
+				courseCount + ' ' + humanize.pluralize(courseCount, 'course')))
+
+			if (!schedule.isValid) {
+				let conflicts = JSON.stringify(schedule.conflicts, null, 2)
+				infoIcons.push(React.DOM.li({
+					className: 'semester-status',
+					key: 'semester-status',
+					title: conflicts},
+					React.DOM.i({className: 'ion-alert-circled'})))
+			}
+
+			let credits = _.reduce(_.pluck(schedule.courses, 'credits'), add) || 0
+			if (credits) {
+				infoIcons.push(React.DOM.li({
+					className: 'semester-credit-count', key: 'credit-count'},
+					credits + ' ' + humanize.pluralize(credits, 'credit')))
+			}
 		}
+		let infoBar = React.DOM.ul({className: 'info-bar'}, infoIcons);
 
 		let courseList = null;
 		if (schedule) {
