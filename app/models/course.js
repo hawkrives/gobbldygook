@@ -50,15 +50,16 @@ var Course = React.createClass({
 	},
 
 	render() {
-		let title = this.props.info.type === 'Topic' ? this.props.info.name : this.props.info.title;
+		let course = this.props.info;
+		let title = course.type === 'Topic' ? course.name : course.title;
 
 		let titleEl = React.DOM.h1({className: 'title'}, title)
 
-		let department = React.DOM.span({className: 'department'}, this.props.info.dept)
-		let number = React.DOM.span({className: 'number'}, this.props.info.num)
-		let section = React.DOM.span({className: 'section'}, this.props.info.sect)
+		let department = React.DOM.span({className: 'department'}, course.dept)
+		let number = React.DOM.span({className: 'number'}, course.num)
+		let section = React.DOM.span({className: 'section'}, course.sect)
 		let identifier = React.DOM.span({className: 'identifier'}, department, ' ', number, section)
-		let professors = React.DOM.span({className: 'professors'}, humanize.oxford(this.props.info.profs))
+		let professors = React.DOM.span({className: 'professors'}, humanize.oxford(course.profs))
 
 		let details;
 		if (this.state.showTools) {
