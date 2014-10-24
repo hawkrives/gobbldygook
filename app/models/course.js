@@ -79,8 +79,23 @@ var Course = React.createClass({
 				onClick: this.showTools,
 			}, this.dragSourceFor(itemTypes.COURSE)),
 
+			React.DOM.div({className: 'info-rows'}, titleEl, details),
+			React.DOM.div({className: 'warnings'}, warningEls)
+		);
+	}
+})
+
+var EmptyCourseSlot = React.createClass({
+	render() {
+		let title = 'Empty Slot ' + this.props.index
+
+		let titleEl = React.DOM.h1({className: 'title'}, title)
+		let details = React.DOM.span({className: 'details'}, 'no details')
+
+		return React.DOM.article({className: 'course empty'},
 			React.DOM.div({className: 'info-rows'}, titleEl, details));
 	}
 })
 
 export default Course
+export {EmptyCourseSlot}
