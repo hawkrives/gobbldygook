@@ -9,7 +9,7 @@ import itemTypes from '../objects/itemTypes'
 
 var Course = React.createClass({
 	mixins: [DragDropMixin],
-	
+
 	configureDragDrop(registerType) {
 		registerType(itemTypes.COURSE, {
 			dragSource: {
@@ -22,7 +22,7 @@ var Course = React.createClass({
 					if (didDrop) {
 						if (this.props.schedule) {
 							console.log(
-								'removing course', this.props.info.clbid, 
+								'removing course', this.props.info.clbid,
 								'from', this.props.schedule.id)
 							this.props.schedule.removeCourse(this.props.info.clbid)
 						}
@@ -31,7 +31,7 @@ var Course = React.createClass({
 			}
 		})
 	},
-	
+
 	render() {
 		let title = this.props.info.type === 'Topic' ? this.props.info.name : this.props.info.title;
 
