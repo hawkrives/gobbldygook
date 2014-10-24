@@ -11,7 +11,7 @@ import {getCourses} from '../helpers/getCourses'
 
 var GraduationStatus = React.createClass({
 	render() {
-		console.info('graduation-status render', this.props.student)
+		// console.info('graduation-status render', this.props.student)
 
 		// Get areas of study
 		var areasOfStudy = _.mapValues(this.props.student.studies.byType, function(areas) {

@@ -18,7 +18,7 @@ var CourseTable = React.createClass({
 	},
 
 	render() {
-		console.log('course-table render', this.props)
+		// console.log('course-table render', this.props)
 		var years = _.map(this.props.schedules.byYear, function(schedules, year) {
 			return Year({
 				schedules: this.props.schedules,
