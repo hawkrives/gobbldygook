@@ -6,6 +6,9 @@ import * as humanize from 'humanize-plus'
 
 import {DragDropMixin} from '../../node_modules/react-dnd/dist/ReactDND.min'
 import itemTypes from '../objects/itemTypes'
+import semesterName from '../helpers/semesterName'
+
+let thisYear = new Date().getYear()
 
 var Course = React.createClass({
 	mixins: [DragDropMixin],
@@ -71,6 +74,21 @@ var Course = React.createClass({
 			details = React.DOM.span({className: 'details'}, tools)
 		} else {
 			details = React.DOM.span({className: 'details'}, identifier, professors)
+		}
+
+		let warnings = []
+		if (course.year !== this.props.schedule.year && this.props.schedule.year <= thisYear) {
+			warnings.push('This course (from ' + course.year + ') is not offered in this year.')
+		}
+		if (course.sem !== this.props.schedule.semester) {
+			warnings.push('This course (from ' + semesterName(course.sem) + ') is not offered in this semester.')
+		}
+		let warningEls;
+		if (warnings.length) {
+			// console.log(warnings, course.title, course.year, this.props.schedule.year,course.semester, this.props.schedule.semester)
+			warningEls = React.DOM.span({
+				title: _.map(warnings, (w) => '- ' + w + '\n')},
+				React.DOM.i({className: 'ion-alert-circled'}))
 		}
 
 		return React.DOM.article(
