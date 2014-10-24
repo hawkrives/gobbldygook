@@ -45,7 +45,8 @@ var Semester = React.createClass({
 		this.props.schedules.destroyMultiple(scheduleIds)
 	},
 	render() {
-		this.schedule = _.find(this.props.schedules.activeSchedules,
+		let activeSchedules = this.props.schedules.activeSchedules
+		this.schedule = _.find(activeSchedules,
 				{year: this.props.year, semester: this.props.semester})
 		let schedule = this.schedule;
 		console.log('semester render', schedule)
@@ -69,7 +70,12 @@ var Semester = React.createClass({
 		if (schedule) {
 			courseList = React.DOM.div({className: 'course-list'},
 				_.map(schedule.courses,
-					course => Course({key: course.clbid, info: course, schedule: schedule})));
+					course => Course({
+						key: course.clbid,
+						info: course,
+						schedule: schedule,
+						semesters: activeSchedules
+					})));
 		}
 
 		return React.DOM.div(
