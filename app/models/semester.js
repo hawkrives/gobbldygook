@@ -4,6 +4,7 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
+import semesterName from '../helpers/semesterName'
 import Course from './course'
 
 import {DragDropMixin} from '../../node_modules/react-dnd/dist/ReactDND.min'
@@ -12,17 +13,6 @@ import itemTypes from '../objects/itemTypes'
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 	return (schedule.year === year && schedule.semester === semester)
 })
-
-let semesterName = (semester) => {
-	let semesters = {
-		1: 'Fall',
-		2: 'Interim',
-		3: 'Spring',
-		4: 'Early Summer',
-		5: 'Late Summer',
-	}
-	return semesters[semester] || 'Unknown (' + semester + ')'
-}
 
 var Semester = React.createClass({
 	mixins: [DragDropMixin],
