@@ -6,6 +6,7 @@ import * as humanize from 'humanize-plus'
 
 import semesterName from '../helpers/semesterName'
 import Course from './course'
+import {EmptyCourseSlot} from './course'
 
 import {DragDropMixin} from '../../node_modules/react-dnd/dist/ReactDND.min'
 import itemTypes from '../objects/itemTypes'
@@ -58,14 +59,20 @@ var Semester = React.createClass({
 
 		let courseList = null;
 		if (schedule) {
-			courseList = React.DOM.div({className: 'course-list'},
-				_.map(schedule.courses,
-					course => Course({
-						key: course.clbid,
-						info: course,
-						schedule: schedule,
-						semesters: activeSchedules
-					})));
+			let courseObjects = _.map(schedule.courses,
+				course => Course({
+					key: course.clbid,
+					info: course,
+					schedule: schedule,
+					semesters: activeSchedules
+				}))
+			if ((schedule.semester === 1 || schedule.semester === 3) && courseObjects.length < 4) {
+				_(_.range(4 - courseObjects.length)).each((i) => courseObjects.push(EmptyCourseSlot({
+					key: 'empty'+i,
+					index: i
+				})))
+			}
+			courseList = React.DOM.div({className: 'course-list'}, courseObjects);
 		}
 
 		return React.DOM.div(
