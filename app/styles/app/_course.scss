@@ -3,6 +3,10 @@
 .course {
 	margin-bottom: 0.35em;
 
+	&.empty {
+		opacity: 0.5;
+	}
+
 	.title, .details {
 		text-overflow: ellipsis;
 		white-space: nowrap;
