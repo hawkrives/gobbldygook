@@ -11,6 +11,7 @@ import semesterName from '../helpers/semesterName'
 let thisYear = new Date().getYear()
 
 var Course = React.createClass({
+	displayName: 'Course',
 	mixins: [DragDropMixin],
 
 	configureDragDrop(registerType) {
@@ -104,6 +105,7 @@ var Course = React.createClass({
 })
 
 var EmptyCourseSlot = React.createClass({
+	displayName: 'EmptyCourseSlot',
 	render() {
 		let title = 'Empty Slot ' + this.props.index
 

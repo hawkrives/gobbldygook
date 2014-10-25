@@ -20,6 +20,7 @@ var RequirementGroup = React.createClass({
 })
 
 var Requirement = React.createClass({
+	displayName: 'Requirement',
 	render() {
 		// console.log('requirement render')
 		return React.DOM.li({className: 'requirement'},

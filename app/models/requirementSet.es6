@@ -6,6 +6,7 @@ import * as React from 'react'
 import Requirement from './requirement'
 
 var BooleanRequirement = React.createClass({
+	displayName: 'BooleanRequirement',
 	render() {
 		return React.DOM.div(
 			{className: 'requirement-result requirement-result-boolean'},
@@ -17,6 +18,7 @@ var BooleanRequirement = React.createClass({
 })
 
 var BooleanArrayRequirement = React.createClass({
+	displayName: 'BooleanArrayRequirement',
 	render() {
 		return React.DOM.div(
 			{className: 'requirement-result requirement-result-boolean-array'},
@@ -38,6 +40,7 @@ var BooleanArrayRequirement = React.createClass({
 })
 
 var NumberObjectRequirement = React.createClass({
+	displayName: 'NumberObjectRequirement',
 	render() {
 		return React.DOM.div(
 			{className: 'requirement-result requirement-result-object-number'},
@@ -56,6 +59,7 @@ var NumberObjectRequirement = React.createClass({
 })
 
 var RequirementSet = React.createClass({
+	displayName: 'RequirementSet',
 	render() {
 		// console.log('requirement-set render', this.props)
 
