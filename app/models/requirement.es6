@@ -3,22 +3,6 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 
-var SingleRequirement = React.createClass({
-	render() {
-		return (
-			React.DOM.div(null)
-		)
-	}
-})
-
-var RequirementGroup = React.createClass({
-	render() {
-		return (
-			React.DOM.div(null)
-		)
-	}
-})
-
 var Requirement = React.createClass({
 	displayName: 'Requirement',
 	render() {
