@@ -9,7 +9,7 @@ import * as Promise from 'bluebird'
 import {db} from './helpers/db'
 import documentReady from './helpers/document-ready'
 
-import Gobbldygook from './models/gobbldygookApp'
+import Gobbldygook from './elements/gobbldygookApp'
 import loadData from './helpers/loadData'
 import emitter from './helpers/emitter'
 

@@ -5,7 +5,7 @@ import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
 import {DragDropMixin} from '../../node_modules/react-dnd/dist/ReactDND.min'
-import itemTypes from '../objects/itemTypes'
+import itemTypes from '../models/itemTypes'
 import semesterName from '../helpers/semesterName'
 
 let thisYear = new Date().getYear()
