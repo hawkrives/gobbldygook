@@ -8,6 +8,9 @@
 				".idea",
 				".sass-cache",
 				"data"
+			],
+			"file_exclude_patterns": [
+				"*.woff"
 			]
 		},
 		{
