@@ -7,7 +7,7 @@ var config = {
 	devtool: 'source-map',
 	entry: [
 		"webpack-dev-server/client?http://localhost:"+port,
-		"webpack/hot/dev-server",
+		// "webpack/hot/dev-server",
 		"./app/app.es6",
 	],
 	plugins: [
@@ -39,7 +39,7 @@ var server = new WebpackDevServer(webpack(config), {
 	// to the content. Use "webpack/hot/dev-server" as additional module in
 	// your entry point
 
-	hot: true,
+	// hot: true,
 
 	// webpack-dev-middleware options
 	publicPath: config.publicPath,
