@@ -27,7 +27,7 @@ var config = {
 		loaders: [
 			{test: /\.es6$/,  loaders: ["6to5-loader", "react-hot"]},
 			{test: /\.json$/, loader: "json-loader"},
-			{test: /\.scss$/, loader: "style!css!sass?outputStyle=expanded"}
+			{test: /\.scss$/, loader: "style!css!sass?outputStyle=expanded"},
 		]
 	},
 }
