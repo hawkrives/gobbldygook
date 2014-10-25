@@ -25,25 +25,25 @@ let Student = (encodedStudent) => {
 		overrides: [],
 		fabrications: [],
 	}
-	
+
 	Object.defineProperty(student, 'courses', { get() {
 		return student.schedules.activeCourses
 	}})
 
 	student.id = encodedStudent.id || student.id
 	student.name = encodedStudent.name || student.name
-	
+
 	if (encodedStudent.credits)
 		student.credits.needed = encodedStudent.credits.needed || student.credits.needed
-	
+
 	student.matriculation = encodedStudent.matriculation || student.matriculation
 	student.graduation = encodedStudent.graduation || student.graduation
-	
+
 	student.studies   = new StudySet(encodedStudent.studies || student.studies)
 	student.schedules = new ScheduleSet(encodedStudent.schedules || student.schedules)
 	student.overrides = encodedStudent.overrides || student.overrides
 	student.fabrications = encodedStudent.fabrications || student.fabrications
-	
+
 	return student
 }
 

@@ -15,7 +15,7 @@ function findTerms(startYear, endYear) {
 	const mostYears    = [for (year of _.range(start, currentYear)) year];
 	const allTerms     = [1, 2, 3, 4, 5];
 	const limitedTerms = [1, 2, 3];
-	
+
 	const baseUrl = "/data/courses/";
 	const filetype = "json";
 	const extension = "." + filetype;
