@@ -66,6 +66,6 @@ export {
 	countGeneds,
 	getDepartments,
 	acrossAtLeastTwoDepartments,
-	checkThatNCoursesSpanTwoDepartments
+	checkThatNCoursesSpanTwoDepartments,
 	isIntercollegiateSport
 }
