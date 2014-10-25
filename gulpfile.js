@@ -2,23 +2,22 @@
 
 // Include gulp and tools
 var autoprefixer = require('gulp-autoprefixer');
-var browserify = require('browserify');
 var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 var del = require('del');
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var notify = require('gulp-notify');
-var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var size = require('gulp-size');
-var source = require('vinyl-source-stream');
+var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
-var to5 = require("6to5-browserify");
-var watchify = require('watchify');
+var webpack = require('webpack');
 
-gulp.if = require('gulp-if');
+var config = require('./webpack-config');
 var reload = browserSync.reload;
+var compiler = webpack(config);
 
 var AUTOPREFIXER_BROWSERS = [
 	'ie >= 11',
@@ -28,73 +27,42 @@ var AUTOPREFIXER_BROWSERS = [
 	'safari >= 8',
 	'opera >= 23',
 	'ios >= 8',
-	'android >= 4.4'
+	'android >= 4.4',
 ];
 
+
 // Build JS for the browser
-var watch = true; // set to true when `default` task is run
-gulp.task('watchify', function(){
-	var bundler = browserify('./app/app.js');
-	if (watch) {
-		bundler = watchify(bundler, {
-			basedir: './app',
-			debug: true
-		});
-	}
-
-	bundler.transform(to5);
-
-	var rebundle = function() {
-		return bundler.bundle()
-			.on('error', notify.onError({
-				message: 'watchify error: <%= error.message %>'
-			}))
-			.pipe(source('app.js'))
-			.pipe(gulp.dest('dist'))
-			.pipe(reload({stream: true, once: true}));
-	};
-
-	// rebundle on change
-	bundler.on('update', rebundle);
-
-	return rebundle();
+gulp.task('webpack', function(callback){
+	compiler.run(function(err, stats) {
+		if (err) {
+			 notify.onError({
+				message: 'webpack error: <%= err.message %>'
+			})
+		}
+		callback();
+	})
 });
 
-gulp.task('scripts', function() {
-	watch = true;
-	runSequence('watchify');
-})
-
-gulp.task('scripts-nowatch', function() {
-	watch = false;
-	runSequence('watchify');
-})
+gulp.task('scripts', ['webpack']);
 
 // Lint JavaScript
 gulp.task('jshint', function () {
-	return gulp.src('app/scripts/**/*.js')
+	return gulp.src('app/scripts/**/*.{js,es6}')
 		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(gulp.if(!browserSync.active, jshint.reporter('fail')));
+		.pipe(jshint.reporter('jshint-stylish'));
 });
 
-// Copy all files in /app
-gulp.task('copy', function () {
-	// return gulp.src(['app/*','!app/*.html'], {dot: true})
-		// .pipe(gulp.dest('dist'))
-		// .pipe(size({title: 'copy'}));
-});
 
 // Copy Web Fonts To Dist
 gulp.task('fonts:woff', function () {
-	return gulp.src(['app/styles/fonts/**'])
+	return gulp.src('app/styles/fonts/**')
 		.pipe(gulp.dest('dist/fonts'))
 		.pipe(size({title: 'fonts'}));
 });
 
 // Copy Icons To Dist
 gulp.task('fonts:ionicons', function () {
-	return gulp.src(['app/styles/ionicons/font/*.woff'])
+	return gulp.src('app/styles/ionicons/font/*.woff')
 		.pipe(gulp.dest('dist/ionicons'))
 		.pipe(size({title: 'ionicons'}));
 });
@@ -113,10 +81,10 @@ gulp.task('styles:css', function () {
 
 // Compile Any Other Sass Files You Added (app/styles)
 gulp.task('styles:scss', function () {
-	return gulp.src(['app/styles/**/*.scss'])
-		// .pipe(sourcemaps.init())
+	return gulp.src('app/styles/**/*.scss')
+		.pipe(sourcemaps.init())
 		.pipe(sass())
-		// .pipe(sourcemaps.write())
+		.pipe(sourcemaps.write())
 		.on('error', notify.onError({
 			message: 'styles:scss error: <%= error.message %>'
 		}))
@@ -139,10 +107,7 @@ gulp.task('html', function () {
 gulp.task('clean', del.bind(null, ['dist']));
 
 // Watch Files For Changes & Reload
-// Add: `watchify` task dependency
-gulp.task('serve', ['watchify', 'html', 'styles', 'fonts', 'copy'], function () {
-	watch = true;
-
+gulp.task('serve', ['webpack', 'html', 'styles', 'fonts'], function () {
 	browserSync({
 		notify: true,
 		minify: false,
@@ -151,13 +116,12 @@ gulp.task('serve', ['watchify', 'html', 'styles', 'fonts', 'copy'], function () 
 		}
 	});
 
-	gulp.watch(['app/**/*.html'], reload);
+	gulp.watch(['app/scripts/**/*.{js,es6}'], ['webpack', reload]);
 	gulp.watch(['app/styles/**/*.scss'], ['styles:scss']);
-	gulp.watch(['{dist,app/styles}/**/*.css'], ['styles:css', reload]);
+	gulp.watch(['dist/**/*.css'], ['styles:css', reload]);
 	gulp.watch(['app/scripts/**/*.js'], ['jshint']);
 });
 
 gulp.task('default', ['clean'], function(cb) {
-	watch = false; // changes Watchify's build destination
-	runSequence('styles', ['jshint', 'watchify', 'html', 'fonts', 'copy'], cb);
+	runSequence('styles', ['jshint', 'webpack', 'html', 'fonts'], cb);
 });
