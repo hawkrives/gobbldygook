@@ -7,7 +7,7 @@ module.exports = {
 	debug: true,
 	port: port,
 	entry: [
-		"webpack-dev-server/client?http://localhost:"+port,
+		// "webpack-dev-server/client?http://localhost:"+port,
 		// "webpack/hot/dev-server",
 		"./app/app.es6",
 	],
@@ -20,8 +20,7 @@ module.exports = {
 	],
 	output: {
 		path: './dist',
-		filename: 'app.js',
-		publicPath: '/app'
+		filename: 'app.js'
 	},
 	resolve: {
 	    // Allow to omit extensions when requiring these files
