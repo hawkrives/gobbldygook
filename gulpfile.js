@@ -5,6 +5,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 var del = require('del');
+var filter = require('gulp-filter');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
