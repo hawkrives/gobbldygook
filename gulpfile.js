@@ -126,10 +126,8 @@ gulp.task('serve', ['webpack', 'html', 'styles', 'fonts'], function () {
 		}
 	});
 
-	gulp.watch(['app/scripts/**/*.{js,es6}'], ['webpack', reload]);
+	gulp.watch(['app/**/*.{js,es6}'], ['webpack', 'jshint', reload]);
 	gulp.watch(['app/styles/**/*.scss'], ['styles:scss']);
-	gulp.watch(['dist/**/*.css'], ['styles:css', reload]);
-	gulp.watch(['app/scripts/**/*.js'], ['jshint']);
 });
 
 gulp.task('default', ['clean'], function(cb) {
