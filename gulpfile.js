@@ -64,7 +64,7 @@ gulp.task('fonts:woff', function () {
 gulp.task('fonts:ionicons', function () {
 	return gulp.src('app/styles/ionicons/font/*.woff')
 		.pipe(gulp.dest('dist/ionicons'))
-		.pipe(size({title: 'ionicons'}));
+		.pipe(size({title: 'ionicons'}))
 });
 
 gulp.task('fonts', ['fonts:woff', 'fonts:ionicons'])
@@ -76,7 +76,7 @@ gulp.task('styles:css', function () {
 		.pipe(changed('app/styles'))
 		.pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
 		.pipe(gulp.dest('dist'))
-		.pipe(size({title: 'styles:css'}));
+		.pipe(size({title: 'styles:css'}))
 });
 
 // Compile Any Other Sass Files You Added (app/styles)
@@ -90,7 +90,7 @@ gulp.task('styles:scss', function () {
 		}))
 		.pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
 		.pipe(gulp.dest('dist'))
-		.pipe(size({title: 'styles:scss'}));
+		.pipe(size({title: 'styles:scss'}))
 });
 
 // Output Final CSS Styles
