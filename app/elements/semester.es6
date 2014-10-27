@@ -80,7 +80,7 @@ var Semester = React.createClass({
 					conflicts: schedule.conflicts,
 				}))
 			if ((schedule.semester === 1 || schedule.semester === 3) && courseObjects.length < 4) {
-				_(_.range(4 - courseObjects.length)).each((i) => courseObjects.push(EmptyCourseSlot({
+				_(_.range(courseObjects.length+1, 4+1)).each((i) => courseObjects.push(EmptyCourseSlot({
 					key: 'empty'+i,
 					index: i
 				})))
