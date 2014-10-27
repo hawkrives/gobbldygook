@@ -79,17 +79,20 @@ var Course = React.createClass({
 
 		let warnings = []
 		if (course.year !== this.props.schedule.year && this.props.schedule.year <= thisYear) {
-			warnings.push('This course (from ' + course.year + ') is not offered in this year.')
+			warnings.push({msg: 'This course (from ' + course.year + ') is not offered in this year.'})
 		}
 		if (course.sem !== this.props.schedule.semester) {
-			warnings.push('This course (from ' + semesterName(course.sem) + ') is not offered in this semester.')
+			warnings.push({msg: 'This course (from ' + semesterName(course.sem) + ') is not offered in this semester.'})
 		}
 		let warningEls;
 		if (warnings.length) {
 			// console.log(warnings, course.title, course.year, this.props.schedule.year,course.semester, this.props.schedule.semester)
 			warningEls = React.DOM.span({
-				title: _.map(warnings, (w) => '- ' + w + '\n')},
-				React.DOM.i({className: 'ion-alert-circled'}))
+				title: _.map(warnings, w => '- ' + w.msg + '\n')},
+				_.map(warnings, w => {
+					let icon = w.icon ? w.icon : 'alert-circled';
+					return React.DOM.i({className: 'ion-' + icon})
+				}))
 		}
 
 		return React.DOM.article(
