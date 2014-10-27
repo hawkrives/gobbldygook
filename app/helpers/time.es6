@@ -155,20 +155,19 @@ function checkScheduleTimeConflicts(schedule) {
 	// }
 	// true = conflict, false = no conflict
 
-	var results = {}
+	var results = []
 	_.each(schedule, function(c1, c1idx) {
-		var c1name = 'c' + c1idx
-		results[c1name] = {}
+		results[c1idx] = []
 		_.each(schedule, function(c2, c2idx) {
-			var c2name = 'c' + c2idx
-
+			var result;
 			if (c1 === c2) {
-				return;
+				result = null
 			} else if (checkCourseTimeConflicts(c1, c2)) {
-				results[c1name][c2name] = true
+				result = true
 			} else {
-				results[c1name][c2name] = false
+				result = false
 			}
+			results[c1idx][c2idx] = result;
 		})
 	})
 	return results
