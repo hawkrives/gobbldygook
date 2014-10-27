@@ -126,7 +126,7 @@ gulp.task('serve', ['webpack', 'html', 'styles', 'fonts'], function () {
 		}
 	});
 
-	gulp.watch(['app/**/*.{js,es6}'], ['webpack', 'jshint', reload]);
+	gulp.watch(['{app,mockups}/**/*.{js,es6}'], ['webpack', 'jshint', reload]);
 	gulp.watch(['app/styles/**/*.scss'], ['styles:scss']);
 });
 
