@@ -22,6 +22,11 @@
 
 	width: 100%;
 	height: 28px;
+
+	display: none;
+}
+.year:hover .remove-year {
+	display: block;
 }
 
 .course-table .year {

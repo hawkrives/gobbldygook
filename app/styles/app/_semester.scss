@@ -71,6 +71,12 @@ $semester-divider: solid 1px $border-bottom-color;
 	@extend %remove-button;
 	margin: 0;
 	padding: 0 2px 0 0;
+
+	display: none;
+}
+
+.semester:hover .remove-semester {
+	display: block;
 }
 
 .course-list {
