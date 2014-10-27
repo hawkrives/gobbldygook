@@ -114,9 +114,10 @@ gulp.task('clean', del.bind(null, ['dist']));
 
 // Watch Files For Changes & Reload
 gulp.task('serve', ['webpack', 'html', 'styles', 'fonts'], function () {
-	browserSync({
+	browserSync.init({
 		notify: true,
 		minify: false,
+		browser: "google chrome",
 		server: {
 			baseDir: ['dist', './']
 		}
