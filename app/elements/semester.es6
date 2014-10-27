@@ -71,11 +71,13 @@ var Semester = React.createClass({
 		let courseList = null;
 		if (schedule) {
 			let courseObjects = _.map(schedule.courses,
-				course => Course({
+				(course, i) => Course({
 					key: course.clbid,
 					info: course,
 					schedule: schedule,
-					semesters: activeSchedules
+					semesters: activeSchedules,
+					index: i,
+					conflicts: schedule.conflicts,
 				}))
 			if ((schedule.semester === 1 || schedule.semester === 3) && courseObjects.length < 4) {
 				_(_.range(4 - courseObjects.length)).each((i) => courseObjects.push(EmptyCourseSlot({
