@@ -110,7 +110,7 @@
 		{
 			"id": 12, "year": 2015, "semester": 2,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [],
+			"clbids": [95369, 95370],
 			"active": true
 		},
 		{
