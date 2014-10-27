@@ -82,6 +82,7 @@ gulp.task('styles:css', function () {
 		.pipe(changed('app/styles'))
 		.pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
 		.pipe(gulp.dest('dist'))
+		.pipe(reload({stream: true}))
 		.pipe(size({title: 'styles:css'}))
 });
 
@@ -96,6 +97,8 @@ gulp.task('styles:scss', function () {
 		}))
 		.pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
 		.pipe(gulp.dest('dist'))
+		.pipe(filter('**/*.css'))
+		.pipe(reload({stream: true}))
 		.pipe(size({title: 'styles:scss'}))
 });
 
