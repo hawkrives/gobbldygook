@@ -7,8 +7,6 @@ import * as humanize from 'humanize-plus'
 import AreaOfStudy from './areaOfStudy'
 import StudentSummary from './studentSummary'
 
-import {getCourses} from '../helpers/getCourses'
-
 var GraduationStatus = React.createClass({
 	render() {
 		// console.info('graduation-status render', this.props.student)
