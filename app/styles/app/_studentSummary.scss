@@ -21,17 +21,30 @@
 	&.can-graduate .graduation-message {
 		color: $green;
 	}
+
+	p + p {
+		clear: left;
+	}
 }
 
 #student-letter {
 	@include avatar-letter(48px);
+	box-shadow: 0 0 2px #999;
+	background-color: inherit;
 	float: left;
-	margin-right: $block-edge-padding;
+	margin-right: $block-edge-padding*2;
+	margin-bottom: $block-edge-padding;
+	margin-top: -14px;
+	margin-left: -20px;
 
 	.cannot-graduate & {
 		color: $orange;
 	}
 	.can-graduate & {
 		color: $green;
+	}
+
+	& + p {
+		font-style: italic;
 	}
 }
