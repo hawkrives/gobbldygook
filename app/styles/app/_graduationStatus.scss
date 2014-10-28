@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .graduation-status {
-	flex-basis: 300px;
+	flex-basis: 270px;
 
 	margin-right: $page-edge-padding;
 	font-size: 14px;
@@ -12,6 +12,7 @@
 	font-weight: normal;
 	margin-top: 0;
 	margin-bottom: 0;
+	@include font-feature-settings('smcp');
 
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: inherit;
