@@ -8,14 +8,6 @@ $semester-divider: solid 1px $border-bottom-color;
 	margin: 2px;
 
 	padding: $block-edge-padding/2 $block-edge-padding;
-
-	transition: 0.75s all;
-
-	&:hover {
-		.remove-semester {
-			display: inline-block;
-		}
-	}
 }
 
 .semester-title {
@@ -24,6 +16,11 @@ $semester-divider: solid 1px $border-bottom-color;
 
 	cursor: move;
 	@extend %no-select;
+
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: flex-start;
+	@include font-feature-settings('smcp');
 
 	h1 {
 		display: inline-block;
@@ -35,13 +32,12 @@ $semester-divider: solid 1px $border-bottom-color;
 
 .info-bar {
 	@extend %list-inline;
+	flex: 1;
 
 	li {
 		&::before { content: " – "; }
 
 		@include font-feature-settings('onum');
-
-		border-radius: 3px;
 
 		color: $gray;
 
@@ -73,11 +69,14 @@ $semester-divider: solid 1px $border-bottom-color;
 
 .remove-semester {
 	@extend %remove-button;
-	display: none;
-	border-radius: 50px;
 	margin: 0;
+	padding: 0 2px 0 0;
 
-	float: right;
+	display: none;
+}
+
+.semester:hover .remove-semester {
+	display: block;
 }
 
 .course-list {

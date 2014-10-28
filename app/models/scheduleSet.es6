@@ -27,10 +27,10 @@ let ScheduleSet = (scheduleData) => {
 
 	Object.defineProperty(schedules, 'destroy', { value(id) {
 		console.log('removing schedule', id)
-		
+
 		let deadSched = schedules[id]
 		delete schedules[id]
-		
+
 		if (deadSched.active) {
 			let otherSched = _.find(schedules, {year: deadSched.year, semester: deadSched.semester});
 			if (otherSched)

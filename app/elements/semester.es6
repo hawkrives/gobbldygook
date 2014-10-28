@@ -4,25 +4,17 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
+import add from '../helpers/add'
+import semesterName from '../helpers/semesterName'
 import Course from './course'
+import {EmptyCourseSlot} from './course'
 
 import {DragDropMixin} from '../../node_modules/react-dnd/dist/ReactDND.min'
-import itemTypes from '../objects/itemTypes'
+import itemTypes from '../models/itemTypes'
 
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 	return (schedule.year === year && schedule.semester === semester)
 })
-
-let semesterName = (semester) => {
-	let semesters = {
-		1: 'Fall',
-		2: 'Interim',
-		3: 'Spring',
-		4: 'Early Summer',
-		5: 'Late Summer',
-	}
-	return semesters[semester] || 'Unknown (' + semester + ')'
-}
 
 var Semester = React.createClass({
 	mixins: [DragDropMixin],
@@ -45,31 +37,55 @@ var Semester = React.createClass({
 		this.props.schedules.destroyMultiple(scheduleIds)
 	},
 	render() {
-		this.schedule = _.find(this.props.schedules.activeSchedules,
+		let activeSchedules = this.props.schedules.activeSchedules
+		this.schedule = _.find(activeSchedules,
 				{year: this.props.year, semester: this.props.semester})
 		let schedule = this.schedule;
-		console.log('semester render', schedule)
+		// console.log('semester render', schedule)
 
-		let infoBar = null;
+		let infoIcons = []
 		if (schedule) {
 			let courseCount = _.size(schedule.courses)
-			infoBar = React.DOM.ul({className: 'info-bar'},
-				React.DOM.li(
-					{className: 'semester-course-count'},
-					courseCount + ' ' + humanize.pluralize(courseCount, 'course')
-				),
-				schedule.isValid ? null :
-					React.DOM.li({
-						className: 'semester-status',
-						title: JSON.stringify(schedule.conflicts, null, 2)},
-						React.DOM.i({className: 'ion-alert-circled'})));
+			infoIcons.push(React.DOM.li({
+				className: 'semester-course-count', key: 'course-count'},
+				courseCount + ' ' + humanize.pluralize(courseCount, 'course')))
+
+			if (!schedule.isValid) {
+				let conflicts = JSON.stringify(schedule.conflicts, null, 2)
+				infoIcons.push(React.DOM.li({
+					className: 'semester-status',
+					key: 'semester-status',
+					title: conflicts},
+					React.DOM.i({className: 'ion-alert-circled'})))
+			}
+
+			let credits = _.reduce(_.pluck(schedule.courses, 'credits'), add) || 0
+			if (credits) {
+				infoIcons.push(React.DOM.li({
+					className: 'semester-credit-count', key: 'credit-count'},
+					credits + ' ' + humanize.pluralize(credits, 'credit')))
+			}
 		}
+		let infoBar = React.DOM.ul({className: 'info-bar'}, infoIcons);
 
 		let courseList = null;
 		if (schedule) {
-			courseList = React.DOM.div({className: 'course-list'},
-				_.map(schedule.courses,
-					course => Course({key: course.clbid, info: course, schedule: schedule})));
+			let courseObjects = _.map(schedule.courses,
+				(course, i) => Course({
+					key: course.clbid,
+					info: course,
+					schedule: schedule,
+					semesters: activeSchedules,
+					index: i,
+					conflicts: schedule.conflicts,
+				}))
+			if ((schedule.semester === 1 || schedule.semester === 3) && courseObjects.length < 4) {
+				_(_.range(courseObjects.length+1, 4+1)).each((i) => courseObjects.push(EmptyCourseSlot({
+					key: 'empty'+i,
+					index: i
+				})))
+			}
+			courseList = React.DOM.div({className: 'course-list'}, courseObjects);
 		}
 
 		return React.DOM.div(

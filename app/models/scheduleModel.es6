@@ -59,8 +59,6 @@ let Schedule = (scheduleData) => {
 		var conflicts = checkScheduleTimeConflicts(courses)
 
 		var hasConflict = _.chain(conflicts)
-			.toArray()      // turn the object into an array
-			.map(_.toArray) // and each of the nested objects, too
 			.flatten()      // flatten the nested arrays
 			.any()          // and see if any of the resulting values are true
 			.value()

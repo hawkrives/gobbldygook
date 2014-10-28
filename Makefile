@@ -7,17 +7,15 @@ all: serve
 build:
 	$(gulp) default
 
+dist:
+	$(gulp) build-dist
+
 scripts:
 	$(gulp) scripts
-	# uglifyjs
-
-scripts-nowatch:
-	$(gulp) scripts-nowatch
 
 styles:
 	$(gulp) styles
 	# cssshrink
-	# colorguard
 
 serve:
 	$(gulp) serve

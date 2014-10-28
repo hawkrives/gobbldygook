@@ -80,43 +80,43 @@
 		{
 			"id": 7, "year": 2014, "semester": 1,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [97217, 97120, 97119, 97125, 94208],
+			"clbids": [97217, 97120, 97119, 97125],
 			"active": true
 		},
 		{
 			"id": 8, "year": 2014, "semester": 2,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [],
-			"active": false
+			"clbids": [95203],
+			"active": true
 		},
 		{
 			"id": 9, "year": 2014, "semester": 2,
 			"title": "Schedule 2", "index": 2,
 			"clbids": [97174],
-			"active": true
+			"active": false
 		},
 		{
 			"id": 10, "year": 2014, "semester": 3,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [95594, 95842],
+			"clbids": [95594, 95842, 97333, 90592, 94753, 91883],
 			"active": true
 		},
 		{
 			"id": 11, "year": 2015, "semester": 1,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [92908, 97122],
+			"clbids": [92908, 97122, /*94243,*/ 94691],
 			"active": true
 		},
 		{
 			"id": 12, "year": 2015, "semester": 2,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [],
+			"clbids": [95369, 95370],
 			"active": true
 		},
 		{
 			"id": 13, "year": 2015, "semester": 3,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [91746, 96980],
+			"clbids": [91746, 94847],
 			"active": true
 		},
 		{

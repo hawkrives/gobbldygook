@@ -18,9 +18,10 @@ var hasFOL = function(course) {
 }
 
 function countGeneds(courses, gened) {
+	let uniqed = _.uniq(courses, 'crsid');
 	if (gened === 'FOL')
-		return _.size(_.filter(courses, hasFOL))
-	return _.size(_.filter(courses, hasGenEd(gened)))
+		return _.size(_.filter(uniqed, hasFOL))
+	return _.size(_.filter(uniqed, hasGenEd(gened)))
 }
 
 function getDepartments(courses) {
@@ -49,6 +50,15 @@ function checkThatNCoursesSpanTwoDepartments(courses, geneds, genedToCheck, n=2)
 	])
 }
 
+function isIntercollegiateSport(course) {
+	// Only one SPM course credit may be earned by students as a result of
+	// participation in an approved intercollegiate sport. This credit must be
+	// entered as Exercise Science 171-194 at the registration preceding the
+	// sport/participation term.
+	let result = hasDeptNumBetween({dept: 'ESTH', start: 171, end: 194}, course)
+	return result
+}
+
 export {
 	onlyQuarterCreditCoursesCanBePassFail,
 	hasGenEd,
@@ -56,5 +66,6 @@ export {
 	countGeneds,
 	getDepartments,
 	acrossAtLeastTwoDepartments,
-	checkThatNCoursesSpanTwoDepartments
+	checkThatNCoursesSpanTwoDepartments,
+	isIntercollegiateSport
 }
