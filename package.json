@@ -19,7 +19,7 @@
     "unmockedModulePathPatterns": [
       "lodash"
     ],
-    "scriptPreprocessor": "preprocess-for-jest"
+    "testDirectoryName": "testing/__tests__"
   },
   "jshintConfig": {
     "asi": true,
