@@ -17,7 +17,7 @@ let Schedule = (scheduleData) => {
 	}
 
 	Object.defineProperty(schedule, 'courses', { get() {
-		return _.map(schedule.clbids, getCourse)
+		return _.map(schedule.clbids, id => _.cloneDeep(getCourse(id)))
 	}})
 
 	Object.defineProperty(schedule, 'move', { value(year, semester) {

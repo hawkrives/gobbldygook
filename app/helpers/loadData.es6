@@ -34,7 +34,7 @@ function prepareAndFreezeCourse(course) {
 	course.dept = course.dept || buildDept(course)
 	course.deptnum = course.deptnum || buildDeptNum(course)
 	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
-	deepFreeze(course)
+	// deepFreeze(course)
 	return course
 }
 
@@ -47,10 +47,11 @@ function primeCourseCache() {
 	return Promise.all(_.map(recentYears, function(year) {
 		return courses.get(year)
 			.then((courses) =>
-				setOfCourses.push.apply(setOfCourses, courses))
+				_.each(courses, c => courseCache[c.clbid] = prepareAndFreezeCourse(c)))
+				// setOfCourses.push.apply(setOfCourses, courses))
 	})).then(() => {
-		_.each(setOfCourses, c => courseCache[c.clbid] = prepareAndFreezeCourse(c))
-		courseCache = Object.freeze(courseCache)
+		// _.each(setOfCourses, c => courseCache[c.clbid] = prepareAndFreezeCourse(c))
+		// Object.freeze(courseCache)
 		let end = performance.now()
 		console.log('Cached courses in', (end - start) + 'ms.')
 	})
