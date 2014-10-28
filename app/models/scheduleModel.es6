@@ -63,7 +63,7 @@ let Schedule = (scheduleData) => {
 			.any()          // and see if any of the resulting values are true
 			.value()
 
-		if (hasConflict) {
+		if (hasConflict.length) {
 			console.log('schedule conflicts', conflicts, hasConflict)
 		}
 
