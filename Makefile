@@ -1,4 +1,4 @@
-gulp = node node_modules/gulp/bin/gulp.js
+gulp = node node_modules/.bin/gulp
 
 all: serve
 
@@ -21,6 +21,7 @@ serve:
 	$(gulp) serve
 
 test:
+	./prepare-test.sh
 	npm test
 
 cloc:
