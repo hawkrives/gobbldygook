@@ -4,7 +4,7 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as Promise from 'bluebird'
 
-import {db} from './helpers/db'
+import db from './helpers/db'
 import documentReady from './helpers/document-ready'
 
 import Gobbldygook from './elements/gobbldygookApp'
