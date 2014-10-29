@@ -98,13 +98,13 @@
 		{
 			"id": 10, "year": 2014, "semester": 3,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [95594, 95842, 97333, 90592, 94753, 91883],
+			"clbids": [95594, 95842, 97333, 94753],
 			"active": true
 		},
 		{
 			"id": 11, "year": 2015, "semester": 1,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [92908, 97122, /*94243,*/ 94691],
+			"clbids": [92908, 97122, 94691],
 			"active": true
 		},
 		{
@@ -116,7 +116,7 @@
 		{
 			"id": 13, "year": 2015, "semester": 3,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [91746, 94847],
+			"clbids": [91746, 94847, 90592, 91883],
 			"active": true
 		},
 		{
