@@ -1,32 +1,34 @@
 {
-	"folders": [
+	"folders":
+	[
 		{
-			"follow_symlinks": true,
-			"path": ".",
-			"folder_exclude_patterns": [
+			"file_exclude_patterns":
+			[
+				"*.woff"
+			],
+			"folder_exclude_patterns":
+			[
 				"node_modules",
 				".idea",
 				".sass-cache",
 				"data",
 				"testing"
 			],
-			"file_exclude_patterns": [
-				"*.woff"
-			]
+			"path": "."
 		},
 		{
-			"follow_symlinks": true,
-			"path": "../gobbldygook-area-data",
-			"folder_exclude_patterns": [
+			"folder_exclude_patterns":
+			[
 				"__pycache__"
-			]
+			],
+			"path": "/Users/hawken/Code/gobbldygook-area-data"
 		},
 		{
-			"follow_symlinks": true,
-			"path": "../gobbldygook-course-data",
-			"folder_exclude_patterns": [
+			"folder_exclude_patterns":
+			[
 				"__pycache__"
-			]
+			],
+			"path": "/Users/hawken/Code/gobbldygook-course-data"
 		}
 	]
 }
