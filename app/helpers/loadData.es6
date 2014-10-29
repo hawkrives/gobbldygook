@@ -10,8 +10,6 @@ import {buildDeptNum, buildDept} from './deptNum'
 import {discoverRecentYears} from './recentTime'
 import {convertTimeStringsToOfferings} from './time'
 
-import emitter from './emitter'
-
 var logDataLoading = false
 // var logDataLoading = true
 
