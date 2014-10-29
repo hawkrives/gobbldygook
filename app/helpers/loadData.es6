@@ -13,7 +13,7 @@ import {convertTimeStringsToOfferings} from './time'
 var logDataLoading = false
 // var logDataLoading = true
 
-function prepareAndFreezeCourse(course) {
+function prepareCourse(course) {
 	course.dept = course.dept || buildDept(course)
 	course.deptnum = course.deptnum || buildDeptNum(course)
 	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
@@ -21,53 +21,51 @@ function prepareAndFreezeCourse(course) {
 }
 
 function primeCourseCache() {
+	console.log('Priming course cache...')
+
 	let start = performance.now()
 	let recentYears = discoverRecentYears()
 	let setOfCourses = []
 	let courses = db.store('courses').index('year')
-	console.log('Priming course cache...')
-	return Promise.all(_.map(recentYears, function(year) {
-		return courses.get(year).then((courses) =>
-			_.each(courses, c => courseCache[c.clbid] = prepareAndFreezeCourse(c)))
-	})).then(() => {
+
+	return Promise.all(
+		_.map(recentYears, (year) =>
+			courses.get(year).then((courses) => _.each(courses, c => courseCache[c.clbid] = prepareCourse(c)))
+	)).then(() => {
 		let end = performance.now()
 		console.log('Cached courses in', (end - start) + 'ms.')
 	})
 }
 
 function storeCourses(item) {
-	return new Promise(function(resolve, reject) {
-		console.log(item.meta.path, 'called storeCourses')
+	console.log(item.meta.path, 'called storeCourses')
 
-		var courses = _.map(item.data.courses, function(course) {
-			course.sourcePath = item.meta.path
-			return prepareAndFreezeCourse(course)
-		})
-
-		db.store('courses').batch(courses)
-			.then(function(results) {
-				resolve(item)
-			}).catch(function (records, err) {
-				reject(err)
-			})
+	var courses = _.map(item.data.courses, function(course) {
+		course.sourcePath = item.meta.path
+		return prepareCourse(course)
 	})
+
+	return db.store('courses').batch(courses)
+		.then(function(results) {
+			return item
+		}).catch(function (records, err) {
+			throw err
+		})
 }
 
 function storeArea(item) {
-	return new Promise(function(resolve, reject) {
-		console.log(item.meta.path, 'called storeArea')
+	console.log(item.meta.path, 'called storeArea')
 
-		var area = item.data.info
-		area.sourcePath = item.meta.path
+	var area = item.data.info
+	area.sourcePath = item.meta.path
 
-		db.store('areas').put(area)
-			.then(function(results) {
-				resolve(item)
-			})
-			.catch(function(records, err) {
-				reject(err)
-			})
-	})
+	return db.store('areas').put(area)
+		.then(function(results) {
+			return item
+		})
+		.catch(function(records, err) {
+			throw err
+		})
 }
 
 function storeItem(item) {
@@ -79,31 +77,28 @@ function storeItem(item) {
 }
 
 function cleanPriorData(item) {
-	return new Promise(function (resolve, reject) {
-		var path = item.meta.path
-		console.info('deleting ' + item.type + ' from ' + path)
+	var path = item.meta.path
+	console.info('deleting ' + item.type + ' from ' + path)
 
-		db.store(item.type)
-			.index('sourcePath')
-			.get(path)
-			.then(function(items) {
-				return _.map(items, function(item) {
-					var result = Object.create(null)
-					result[item.clbid] = null
-					return result
-				})
+	return db.store(item.type)
+		.index('sourcePath').get(path)
+		.then(function(items) {
+			return _.map(items, function(item) {
+				var result = Object.create(null)
+				result[item.clbid] = null
+				return result
 			})
-			.then(function(items) {
-				return db.store(item.type).batch(items)
-			})
-			.then(function(items) {
-				localStorage.removeItem(path)
-				resolve(item)
-			})
-			.catch(function(err) {
-				reject(err)
-			})
-	})
+		})
+		.then(function(items) {
+			return db.store(item.type).batch(items)
+		})
+		.then(function(items) {
+			localStorage.removeItem(path)
+			return item
+		})
+		.catch(function(err) {
+			throw err
+		})
 }
 
 function cacheItemHash(item) {
