@@ -30,15 +30,16 @@ let render = () => React.renderComponent(Gobbldygook(), document.body)
 
 let blastoff = () => {
 	// Wait for document.ready and the database.
-	Promise.all([db, documentReady]).then(function() {
+	Promise.all([db, documentReady]).then(() => {
 		console.log('3. 2.. 1... Blastoff!')
 
-		 // Load data into the database, then render the app
+		// Load data into the database, then render the app
 		loadData().then(() => {
 			render()
 			emitter.on('change', render)
+			console.log('done')
 		})
-	}).done()
+	})
 }
 
 // run it
