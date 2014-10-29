@@ -3,6 +3,11 @@
 .course {
 	margin-bottom: 0.35em;
 
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+
 	&.empty {
 		opacity: 0.5;
 	}
@@ -34,11 +39,6 @@
 			content: " · ";
 		}
 	}
-
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-	align-items: center;
 
 	.info-rows {
 		flex: 1;
