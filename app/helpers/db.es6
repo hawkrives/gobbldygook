@@ -38,3 +38,4 @@ let courseCache = {}
 window.courseCache = courseCache
 window.database = db
 export {db, courseCache}
+export default db
