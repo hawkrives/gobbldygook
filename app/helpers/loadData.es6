@@ -37,17 +37,32 @@ function primeCourseCache() {
 	})
 }
 
-function storeCourses(item) {
-	console.log(item.meta.path, 'called storeCourses')
+var coursesToStore = [];
 
-	var courses = _.map(item.data.courses, function(course) {
+function gatherCourses(item) {
+	console.log(item.meta.path, 'called storeCourses')
+	var start = performance.now()
+
+	_.map(item.data.courses, function(course) {
 		course.sourcePath = item.meta.path
-		return prepareCourse(course)
+		var prepared = prepareCourse(course)
+		coursesToStore.push(prepared)
 	})
 
-	return db.store('courses').batch(courses)
+	var end = performance.now()
+	console.log('Gathered', item.meta.path, 'in', (end - start) + 'ms.')
+
+	return item
+}
+
+function storeCourses() {
+	console.log('storing courses')
+	var start = performance.now()
+
+	return db.store('courses').batch(coursesToStore)
 		.then(function(results) {
-			return item
+			var end = performance.now()
+			console.log('Stored courses in', (end - start) + 'ms.')
 		}).catch(function (records, err) {
 			throw err
 		})
@@ -70,7 +85,7 @@ function storeArea(item) {
 
 function storeItem(item) {
 	if (item.type === 'courses') {
-		return storeCourses(item)
+		return gatherCourses(item)
 	} else if (item.type === 'areas') {
 		return storeArea(item)
 	}
@@ -159,6 +174,11 @@ function loadDataFiles(infoFile) {
 		.value()
 
 	return Promise.all(files)
+		.then(() => {
+			if (infoFile.type === 'courses')
+				return storeCourses()
+			return Promise.resolve(true)
+		})
 }
 
 function loadInfoFile(url) {
