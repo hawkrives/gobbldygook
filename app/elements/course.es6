@@ -99,7 +99,7 @@ var Course = React.createClass({
 				title: _.map(warnings, w => '- ' + w.msg + '\n')},
 				_.map(warnings, w => {
 					let icon = w.icon ? w.icon : 'alert-circled';
-					return React.DOM.i({className: 'ion-' + icon})
+					return React.DOM.i({className: 'ion-' + icon, key: icon})
 				}))
 		}
 
