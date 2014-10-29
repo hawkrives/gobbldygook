@@ -156,11 +156,14 @@ function updateDatabase(itemType, infoFromServer) {
 function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
-	return Promise.all(_.map(infoFile.info, function(files) {
-		return Promise.all(_.map(files, function(file) {
-			return updateDatabase(infoFile.type, file)
-		}))
-	}))
+	var files = _.chain(infoFile.info)
+		.map((files) =>
+			_.map(files, (file) =>
+				updateDatabase(infoFile.type, file)))
+		.flatten()
+		.value()
+
+	return Promise.all(files)
 }
 
 function loadInfoFile(url) {
