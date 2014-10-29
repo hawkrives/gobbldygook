@@ -147,7 +147,6 @@ function updateDatabase(itemType, infoFromServer) {
 		.then(function(item) {
 			if (logDataLoading)
 				console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
-			// return Promise.resolve(true)
 		})
 		.catch(function(err) {
 			return Promise.reject(err.stack)
