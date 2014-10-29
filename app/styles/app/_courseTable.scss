@@ -23,10 +23,11 @@
 	width: 100%;
 	height: 28px;
 
-	display: none;
+	opacity: 0;
 }
+
 .year:hover .remove-year {
-	display: block;
+	opacity: 0.15;
 }
 
 .course-table .year {
