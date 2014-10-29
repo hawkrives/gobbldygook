@@ -40,16 +40,11 @@ var AUTOPREFIXER_BROWSERS = [
 // Build JS for the browser
 gulp.task('webpack', function(callback){
 	compiler.run(function(err, stats) {
-		if (err) {
-			 notify.onError({
-				message: 'webpack error: <%= err.message %>'
-			})
-		}
+		if (err)
+			notify.onError({message: 'webpack error'})
 		callback();
 	})
 });
-
-gulp.task('scripts', ['webpack']);
 
 // Lint JavaScript
 gulp.task('jshint', function () {
@@ -58,6 +53,7 @@ gulp.task('jshint', function () {
 		.pipe(jshint.reporter('jshint-stylish'));
 });
 
+gulp.task('scripts', ['webpack', 'jshint']);
 
 // Copy Web Fonts To Dist
 gulp.task('fonts:woff', function () {
