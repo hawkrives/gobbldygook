@@ -29,7 +29,7 @@
 
 #student-letter {
 	@include avatar-letter(48px);
-	box-shadow: 0 0 2px #999;
+	border: 1px solid;
 	background-color: inherit;
 	float: left;
 	margin-right: $block-edge-padding*2;
