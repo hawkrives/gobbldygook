@@ -164,13 +164,13 @@ function updateDatabase(itemType, infoFromServer) {
 		.then(cleanPriorData)
 		.then(storeItem)
 		.then(cacheItemHash)
-		.catch(function(err) {
-			return Promise.reject(err.stack)
-		})
-		.done(function(item) {
+		.then(function(item) {
 			if (logDataLoading)
 				console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
-			return Promise.resolve(true)
+			// return Promise.resolve(true)
+		})
+		.catch(function(err) {
+			return Promise.reject(err.stack)
 		})
 }
 
