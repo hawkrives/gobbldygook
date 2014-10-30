@@ -19,3 +19,11 @@ html {
 body {
 	margin: $page-edge-padding;
 }
+
+body.loading {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
