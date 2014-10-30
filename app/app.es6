@@ -10,6 +10,7 @@ import documentReady from './helpers/document-ready'
 import Gobbldygook from './elements/gobbldygookApp'
 import loadData from './helpers/loadData'
 import emitter from './helpers/emitter'
+import svgSpinner from './svg-spinner'
 
 import 'es6-shim'
 
@@ -33,7 +34,7 @@ let blastoff = () => {
 	Promise.all([db, documentReady]).then(() => {
 		console.log('3. 2.. 1... Blastoff!')
 
-		document.body.innerHTML = "<div class='loading ion-loading-c'></div>"
+		document.body.innerHTML = "<div class='loading'>"+ svgSpinner + "</div>"
 
 		// Load data into the database, then render the app
 		loadData().then(() => {
