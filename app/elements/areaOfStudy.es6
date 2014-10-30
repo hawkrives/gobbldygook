@@ -16,6 +16,7 @@ var areas = {
 	'm-csci': require('../../mockups/computerScience').default,
 	'm-asian': require('../../mockups/asianStudies').default,
 	'm-chem': require('../../mockups/chemistry').default,
+	'm-phys': require('../../mockups/physics').default,
 
 	// Concentrations
 
