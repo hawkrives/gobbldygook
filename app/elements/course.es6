@@ -4,7 +4,7 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
-import {DragDropMixin} from '../../node_modules/react-dnd/dist/ReactDND.min'
+import {DragDropMixin} from 'react-dnd'
 import itemTypes from '../models/itemTypes'
 import semesterName from '../helpers/semesterName'
 
@@ -67,29 +67,33 @@ var Course = React.createClass({
 
 		let details;
 		if (this.state.showTools) {
-			let semesterList = React.DOM.select({className: 'semester-select'}, _.map(this.props.semesters, s => {
-				return React.DOM.option({value: s.id, key: s.id}, s.year + '-' + s.semester)
-			}))
+			let tools = []
+			if (this.props.schedule) {
+				let semesterList = React.DOM.select({className: 'semester-select'}, _.map(this.props.semesters, s => {
+					return React.DOM.option({value: s.id, key: s.id}, s.year + '-' + s.semester)
+				}))
+				tools.push(semesterList)
+			}
 			let deleteButton = React.DOM.button({className: 'remove-course', onClick: this.removeFromSemester}, 'Remove Course')
-			let tools = React.DOM.span(null, semesterList, deleteButton)
-			details = React.DOM.span({className: 'details'}, tools)
+			tools.push(deleteButton)
+			details = React.DOM.span({className: 'details'}, React.DOM.span(null, tools))
 		} else {
 			details = React.DOM.span({className: 'details'}, identifier, professors)
 		}
 
 		let warnings = []
-		if (course.year !== this.props.schedule.year && this.props.schedule.year <= thisYear) {
+		if (this.props.schedule && course.year !== this.props.schedule.year && this.props.schedule.year <= thisYear) {
 			warnings.push({msg: 'This course (from ' + course.year + ') is not offered in this year.'})
 		}
-		if (course.sem !== this.props.schedule.semester) {
-			warnings.push({msg: 'This course (from ' + semesterName(course.sem) + ') is not offered in this semester.'})
+		if (this.props.schedule && course.sem !== this.props.schedule.semester) {
+			warnings.push({msg: 'This course (from ' + semesterName(course.sem) + ') is not offered in this semester.', icon: 'ios7-calendar-outline'})
 		}
-		if (this.props.conflicts && this.props.index) {
+		if (this.props.conflicts && !_.isUndefined(this.props.index)) {
 			let i = this.props.index;
 			if (_.any(this.props.conflicts[i])) {
 				let conflictIndex = _.findIndex(this.props.conflicts[i], item => item === true)
 				conflictIndex = conflictIndex + 1; // because humans don't 0-index lists
-				warnings.push({msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.', icon: 'clock'})
+				warnings.push({msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.', icon: 'ios7-clock-outline'})
 			}
 		}
 		let warningEls;
@@ -99,7 +103,7 @@ var Course = React.createClass({
 				title: _.map(warnings, w => '- ' + w.msg + '\n')},
 				_.map(warnings, w => {
 					let icon = w.icon ? w.icon : 'alert-circled';
-					return React.DOM.i({className: 'ion-' + icon})
+					return React.DOM.i({className: 'ion-' + icon, key: icon})
 				}))
 		}
 

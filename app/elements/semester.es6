@@ -9,7 +9,7 @@ import semesterName from '../helpers/semesterName'
 import Course from './course'
 import {EmptyCourseSlot} from './course'
 
-import {DragDropMixin} from '../../node_modules/react-dnd/dist/ReactDND.min'
+import {DragDropMixin} from 'react-dnd'
 import itemTypes from '../models/itemTypes'
 
 var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {

@@ -19,3 +19,16 @@ html {
 body {
 	margin: $page-edge-padding;
 }
+
+.loading {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	height: 90vh;
+}
+
+.loading-spinner {
+	// iconic's loading fonts get off-balance when scaled up
+	// font-size: 2em;
+}

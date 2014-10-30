@@ -14,6 +14,9 @@ const csDeptRequiredCourses = [
 	{deptnum: 'CSCI 276'}, {deptnum: 'CSCI 333'}, {deptnum: 'CSCI 273'}, {deptnum: 'CSCI 284'},
 	{deptnum: 'CSCI 390'},
 
+	// IR/IS
+	{deptnum: 'CSCI 298'}, {deptnum: 'CSCI 398'},
+
 	{deptnum: 'CSCI 300', name: 'Parallel'},
 
 	{deptnum: 'MATH 232'}, {deptnum: 'MATH 252'},

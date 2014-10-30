@@ -2,6 +2,7 @@
 
 import * as _ from 'lodash'
 import * as Promise from 'bluebird'
+import {courseCache} from './db'
 
 // query = {
 // 		'title': {values: ['Chinese'], flags: ['caseInsensitive', 'partialMatch']},
@@ -35,12 +36,12 @@ var checkAgainstQuery = _.curry(function(queryObject, course) {
 })
 
 function queryCourses(query) {
-	return new Promise(function(resolve, reject) {
-		window.server.courses.query()
-			.filter(checkAgainstQuery(query))
-			.execute()
-			.done(resolve)
-	})
+	var results = _.chain(courseCache)
+		.filter(course => _.contains(course.title, query))
+		.sortBy('title')
+		.groupBy('term')
+		.value()
+	return results
 }
 
 window.queryCourses = queryCourses

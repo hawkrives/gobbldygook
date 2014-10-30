@@ -10,122 +10,110 @@ import {buildDeptNum, buildDept} from './deptNum'
 import {discoverRecentYears} from './recentTime'
 import {convertTimeStringsToOfferings} from './time'
 
-import emitter from './emitter'
-
 var logDataLoading = false
 // var logDataLoading = true
 
-function deepFreeze(o) {
-	Object.freeze(o); // First freeze the object.
-	for (let propKey in o) {
-		let prop = o[propKey];
-		if (!o.hasOwnProperty(propKey) || !(typeof prop === 'object') || Object.isFrozen(prop)) {
-			// If the object is on the prototype, not an object, or is already frozen,
-			// skip it. Note that this might leave an unfrozen reference somewhere in the
-			// object if there is an already frozen object containing an unfrozen object.
-			continue;
-		}
-
-		deepFreeze(prop); // Recursively call deepFreeze.
-	}
-}
-
-function prepareAndFreezeCourse(course) {
+function prepareCourse(course) {
 	course.dept = course.dept || buildDept(course)
 	course.deptnum = course.deptnum || buildDeptNum(course)
 	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
-	// deepFreeze(course)
 	return course
 }
 
 function primeCourseCache() {
+	console.log('Priming course cache...')
+
 	let start = performance.now()
 	let recentYears = discoverRecentYears()
 	let setOfCourses = []
 	let courses = db.store('courses').index('year')
-	console.log('Priming course cache...')
-	return Promise.all(_.map(recentYears, function(year) {
-		return courses.get(year)
-			.then((courses) =>
-				_.each(courses, c => courseCache[c.clbid] = prepareAndFreezeCourse(c)))
-				// setOfCourses.push.apply(setOfCourses, courses))
-	})).then(() => {
-		// _.each(setOfCourses, c => courseCache[c.clbid] = prepareAndFreezeCourse(c))
-		// Object.freeze(courseCache)
+
+	return Promise.all(
+		_.map(recentYears, (year) =>
+			courses.get(year).then((courses) => _.each(courses, c => courseCache[c.clbid] = prepareCourse(c)))
+	)).then(() => {
 		let end = performance.now()
 		console.log('Cached courses in', (end - start) + 'ms.')
 	})
 }
 
-function storeCourses(item) {
-	return new Promise(function(resolve, reject) {
-		console.log(item.meta.path, 'called storeCourses')
+var coursesToStore = [];
 
-		var courses = _.map(item.data.courses, function(course) {
-			course.sourcePath = item.meta.path
-			return prepareAndFreezeCourse(course)
-		})
+function gatherCourses(item) {
+	console.log(item.meta.path, 'called storeCourses')
+	var start = performance.now()
 
-		db.store('courses').batch(courses)
-			.then(function(results) {
-				resolve(item)
-			}).catch(function (records, err) {
-				reject(err)
-			})
+	_.map(item.data.courses, function(course) {
+		course.sourcePath = item.meta.path
+		var prepared = prepareCourse(course)
+		coursesToStore.push(prepared)
 	})
+
+	var end = performance.now()
+	console.log('Gathered', item.meta.path, 'in', (end - start) + 'ms.')
+
+	return item
+}
+
+function storeCourses() {
+	console.log('storing courses')
+	var start = performance.now()
+
+	return db.store('courses').batch(coursesToStore)
+		.then(function(results) {
+			var end = performance.now()
+			console.log('Stored courses in', (end - start) + 'ms.')
+		}).catch(function (records, err) {
+			throw err
+		})
 }
 
 function storeArea(item) {
-	return new Promise(function(resolve, reject) {
-		console.log(item.meta.path, 'called storeArea')
+	console.log(item.meta.path, 'called storeArea')
 
-		var area = item.data.info
-		area.sourcePath = item.meta.path
+	var area = item.data.info
+	area.sourcePath = item.meta.path
 
-		db.store('areas').put(area)
-			.then(function(results) {
-				resolve(item)
-			})
-			.catch(function(records, err) {
-				reject(err)
-			})
-	})
+	return db.store('areas').put(area)
+		.then(function(results) {
+			return item
+		})
+		.catch(function(records, err) {
+			throw err
+		})
 }
 
 function storeItem(item) {
 	if (item.type === 'courses') {
-		return storeCourses(item)
+		return gatherCourses(item)
 	} else if (item.type === 'areas') {
 		return storeArea(item)
 	}
 }
 
 function cleanPriorData(item) {
-	return new Promise(function (resolve, reject) {
-		var path = item.meta.path
-		console.info('deleting ' + item.type + ' from ' + path)
+	var path = item.meta.path
+	console.info('deleting ' + item.type + ' from ' + path)
 
-		db.store(item.type)
-			.index('sourcePath')
-			.get(path)
-			.then(function(items) {
-				return _.map(items, function(item) {
-					var result = Object.create(null)
-					result[item.clbid] = null
-					return result
-				})
+	return db.store(item.type)
+		.index('sourcePath').get(path)
+		.then(function(items) {
+			return _.map(items, function(item) {
+				var result = Object.create(null)
+				result[item.clbid] = null
+				return result
 			})
-			.then(function(items) {
-				return db.store(item.type).batch(items)
-			})
-			.then(function(items) {
-				localStorage.removeItem(path)
-				resolve(item)
-			})
-			.catch(function(err) {
-				reject(err)
-			})
-	})
+		})
+		.then(function(items) {
+			return db.store(item.type).batch(items)
+		})
+		.then(function(items) {
+			localStorage.removeItem(path)
+			return item
+		})
+		.catch(function(err) {
+			throw err
+		})
 }
 
 function cacheItemHash(item) {
@@ -142,7 +130,7 @@ var lookup = {
 }
 
 function updateDatabase(itemType, infoFromServer) {
-	infoFromServer.path = '/data/' + itemType + '/' + infoFromServer.path
+	infoFromServer.path = './data/' + itemType + '/' + infoFromServer.path
 	var oldHash = localStorage.getItem(infoFromServer.path)
 	var newHash = infoFromServer.hash
 	var itemPath = infoFromServer.path
@@ -166,24 +154,31 @@ function updateDatabase(itemType, infoFromServer) {
 		.then(cleanPriorData)
 		.then(storeItem)
 		.then(cacheItemHash)
-		.catch(function(err) {
-			return Promise.reject(err.stack)
-		})
-		.done(function(item) {
+		.then(function(item) {
 			if (logDataLoading)
 				console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
-			return Promise.resolve(true)
+		})
+		.catch(function(err) {
+			return Promise.reject(err.stack)
 		})
 }
 
 function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
-	return Promise.all(_.map(infoFile.info, function(files) {
-		return Promise.all(_.map(files, function(file) {
-			return updateDatabase(infoFile.type, file)
-		}))
-	}))
+	var files = _.chain(infoFile.info)
+		.map((files) =>
+			_.map(files, (file) =>
+				updateDatabase(infoFile.type, file)))
+		.flatten()
+		.value()
+
+	return Promise.all(files)
+		.then(() => {
+			if (infoFile.type === 'courses')
+				return storeCourses()
+			return Promise.resolve(true)
+		})
 }
 
 function loadInfoFile(url) {
@@ -193,8 +188,8 @@ function loadInfoFile(url) {
 
 function loadData() {
 	var infoFiles = [
-		'/data/areas/info.json',
-		'/data/courses/info.json',
+		'./data/areas/info.json',
+		'./data/courses/info.json',
 	]
 	return Promise.all(_.map(infoFiles, loadInfoFile)).then(primeCourseCache)
 }

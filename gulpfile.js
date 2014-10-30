@@ -11,6 +11,7 @@ var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
+var symlink = require('gulp-symlink');
 var size = require('gulp-size');
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
@@ -40,16 +41,11 @@ var AUTOPREFIXER_BROWSERS = [
 // Build JS for the browser
 gulp.task('webpack', function(callback){
 	compiler.run(function(err, stats) {
-		if (err) {
-			 notify.onError({
-				message: 'webpack error: <%= err.message %>'
-			})
-		}
+		if (err)
+			notify.onError({message: 'webpack error'})
 		callback();
 	})
 });
-
-gulp.task('scripts', ['webpack']);
 
 // Lint JavaScript
 gulp.task('jshint', function () {
@@ -58,6 +54,7 @@ gulp.task('jshint', function () {
 		.pipe(jshint.reporter('jshint-stylish'));
 });
 
+gulp.task('scripts', ['webpack', 'jshint']);
 
 // Copy Web Fonts To Dist
 gulp.task('fonts:woff', function () {
@@ -115,14 +112,19 @@ gulp.task('html', function () {
 // Clean Output Directory
 gulp.task('clean', del.bind(null, ['dist']));
 
+gulp.task('link', function() {
+	return gulp.src('data')
+		.pipe(symlink('dist/data', {force: true}))
+});
+
 // Watch Files For Changes & Reload
-gulp.task('serve', ['webpack', 'html', 'styles', 'fonts'], function () {
+gulp.task('serve', ['webpack', 'html', 'styles', 'fonts', 'link'], function () {
 	browserSync.init({
 		notify: true,
 		minify: false,
 		browser: "google chrome",
 		server: {
-			baseDir: ['dist', './']
+			baseDir: ['dist']
 		}
 	});
 
@@ -131,5 +133,5 @@ gulp.task('serve', ['webpack', 'html', 'styles', 'fonts'], function () {
 });
 
 gulp.task('default', ['clean'], function(cb) {
-	runSequence('styles', ['jshint', 'webpack', 'html', 'fonts'], cb);
+	runSequence('styles', ['jshint', 'webpack', 'html', 'fonts', 'link'], cb);
 });

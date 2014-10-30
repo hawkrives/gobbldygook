@@ -1,8 +1,12 @@
 gulp = node node_modules/.bin/gulp
+webpack = node node_modules/.bin/webpack
 
 all: serve
 
 .PHONY: build clean scripts scripts-nowatch styles serve test cloc
+
+webpack:
+	$(webpack) --config webpack-config.js -d --progress
 
 build:
 	$(gulp) default
