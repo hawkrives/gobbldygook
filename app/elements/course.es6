@@ -47,6 +47,16 @@ var Course = React.createClass({
 		this.setState({
 			showTools: true
 		})
+		// FIXME: Fix this. It won't stay open long enough for someone to select something from the dropdown.
+		// TODO: Replace this with a real solution for hiding the tools *after an action*
+		setTimeout(this.hideTools, 1500)
+	},
+
+	hideTools() {
+		console.log('show tools')
+		this.setState({
+			showTools: false
+		})
 	},
 
 	removeFromSemester() {
