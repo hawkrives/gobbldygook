@@ -12,12 +12,13 @@ import SearchButton from './searchButton'
 let student = new StudentModel(demoStudent)
 window.student = student
 
-var Gobbldygook = React.createClass({
+var GobbldygookApp = React.createClass({
+	displayName: 'GobbldygookApp',
 	render() {
-		return React.DOM.div(null,
-			Student({student: student}),
-			SearchButton())
+		return React.createElement('div', null,
+			React.createElement(Student, {student: student}),
+			React.createElement(SearchButton, null))
 	}
 })
 
-export default Gobbldygook
+export default GobbldygookApp

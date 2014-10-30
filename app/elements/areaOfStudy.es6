@@ -53,6 +53,7 @@ function findResults(obj) {
 }
 
 var AreaOfStudy = React.createClass({
+	displayName: 'AreaOfStudy',
 	load() {
 		var area = getArea(this.props.area.id)
 
@@ -93,7 +94,7 @@ var AreaOfStudy = React.createClass({
 		// console.log('area-of-study render')
 
 		var requirementSets = _.map(this.state.result.details, function(reqset) {
-			return RequirementSet(_.merge({key: reqset.title}, reqset));
+			return React.createElement(RequirementSet, _.merge({key: reqset.title}, reqset));
 		}, this);
 
 		var results = findResults(this.state.result.details)
@@ -101,11 +102,11 @@ var AreaOfStudy = React.createClass({
 		var currentProgress = _.size(_.compact(results))
 		var maxProgress = _.size(results)
 
-		return React.DOM.article({id: this.props.area.id, className: 'area-of-study'},
-			React.DOM.details(null,
-				React.DOM.summary(null,
-					React.DOM.h1(null, this.props.area.title),
-					React.DOM.progress({value: currentProgress, max: maxProgress})
+		return React.createElement('article', {id: this.props.area.id, className: 'area-of-study'},
+			React.createElement('details', null,
+				React.createElement('summary', null,
+					React.createElement('h1', null, this.props.area.title),
+					React.createElement('progress', {value: currentProgress, max: maxProgress})
 				),
 				requirementSets
 			)

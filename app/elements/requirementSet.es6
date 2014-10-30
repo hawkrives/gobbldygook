@@ -3,14 +3,12 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 
-import Requirement from './requirement'
-
 var BooleanRequirement = React.createClass({
 	displayName: 'BooleanRequirement',
 	render() {
-		return React.DOM.div(
+		return React.createElement('div',
 			{className: 'requirement-result requirement-result-boolean'},
-			React.DOM.span(
+			React.createElement('span',
 				{className: this.props.result ? ' completed' : ' incomplete'},
 				this.props.result ? 'Completed' : 'Incomplete')
 		)
@@ -20,12 +18,12 @@ var BooleanRequirement = React.createClass({
 var BooleanArrayRequirement = React.createClass({
 	displayName: 'BooleanArrayRequirement',
 	render() {
-		return React.DOM.div(
+		return React.createElement('div',
 			{className: 'requirement-result requirement-result-boolean-array'},
-			React.DOM.ul(
+			React.createElement('ul',
 				{className: 'requirement-detail-list'},
 				_.map(this.props.details, function(req) {
-					return React.DOM.li(
+					return React.createElement('li',
 						{
 							key: req.title,
 							className: req.result ? 'completed' : 'incomplete',
@@ -42,16 +40,16 @@ var BooleanArrayRequirement = React.createClass({
 var NumberObjectRequirement = React.createClass({
 	displayName: 'NumberObjectRequirement',
 	render() {
-		return React.DOM.div(
+		return React.createElement('div',
 			{className: 'requirement-result requirement-result-object-number'},
-			React.DOM.span(
+			React.createElement('span',
 				{className: this.props.result ? 'completed' : 'incomplete'},
 				this.props.details.has, ' of ', this.props.details.needs
 			),
-			React.DOM.ul(
+			React.createElement('ul',
 				{className: 'requirement-detail-list'},
 				_.map(this.props.details.matches, function(match) {
-					return React.DOM.li({key: match.deptnum}, match.deptnum)
+					return React.createElement('li',{key: match.clbid}, match.deptnum)
 				})
 			)
 		)
@@ -68,38 +66,31 @@ var RequirementSet = React.createClass({
 
 		if (type === 'array/requirementSet') {
 			details = _.map(this.props.details, function(requirement, index) {
-				return RequirementSet(_.merge({key: index}, requirement))
+				return React.createElement(RequirementSet, _.merge({key: index}, requirement))
 			})
 		}
 
 		else if (type === 'array/boolean') {
-			details = BooleanArrayRequirement({details: this.props.details})
+			details = React.createElement(BooleanArrayRequirement, {details: this.props.details})
 		}
 
 		else if (type === 'boolean') {
-			details = BooleanRequirement({result: this.props.result})
+			details = React.createElement(BooleanRequirement, {result: this.props.result})
 		}
 
 		else if (type === 'object/number') {
-			details = NumberObjectRequirement({result: this.props.result, details: this.props.details})
+			details = React.createElement(NumberObjectRequirement, {result: this.props.result, details: this.props.details})
 		}
 
-		return (
-			React.DOM.div(
+		return React.createElement('div', {className: 'requirement-set', 'data-type': type},
+			React.createElement('h2',
 				{
-					className: 'requirement-set',
-					'data-type': type,
+					className: this.props.result ? 'completed' : 'incomplete',
+					title: this.props.description,
 				},
-				React.DOM.h2(
-					{
-						className: this.props.result ? 'completed' : 'incomplete',
-						title: this.props.description,
-					},
-					this.props.title
-				),
-				details
-			)
-		)
+				this.props.title
+			),
+			details)
 	}
 })
 

@@ -22,6 +22,7 @@ var schema = treo.schema()
 			.addIndex('sourcePath', 'sourcePath', {multi: false})
 	.version(2)
 		.addStore('students', { key: 'id' })
+			.addIndex('active',      'active',    {multi: false, unique: true})
 
 var db = treo('gobbldygook', schema)
 	.use(treoPromise())

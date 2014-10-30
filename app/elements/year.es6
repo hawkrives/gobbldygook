@@ -14,6 +14,7 @@ var isCurrentYearSchedule = _.curry(function(year, schedule) {
 })
 
 var Year = React.createClass({
+	displayName: 'Year',
 	canAddSemester() {
 		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
 	},
@@ -40,7 +41,7 @@ var Year = React.createClass({
 
 		var terms = _.map(schedules, function(schedule, semester) {
 			semester = parseInt(semester, 10)
-			return Semester({
+			return React.createElement(Semester, {
 				key: semester,
 				ref: semester,
 				semester: semester,
@@ -49,17 +50,17 @@ var Year = React.createClass({
 			})
 		}, this)
 
-		return React.DOM.div({className: 'year'},
-			React.DOM.header({className: 'year-title'},
-				React.DOM.h1(null, this.props.year + ' + ' + (this.props.year + 1)),
-				React.DOM.button({
+		return React.createElement('div', {className: 'year'},
+			React.createElement('header', {className: 'year-title'},
+				React.createElement('h1', null, this.props.year + ' + ' + (this.props.year + 1)),
+				React.createElement('button', {
 					className: 'remove-year',
 					title: 'Remove the year ' + this.props.year,
 					onClick: this.removeYear,
 				})
 			),
-			React.DOM.div({className: 'semester-list'}, terms),
-			React.DOM.button({
+			React.createElement('div', {className: 'semester-list'}, terms),
+			React.createElement('button', {
 				className: 'add-semester',
 				title: 'Add Semester',
 				disabled: !this.canAddSemester(),

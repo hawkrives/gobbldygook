@@ -27,7 +27,7 @@ window.log = (thing) => console.log(_.isUndefined(thing) ? arguments : thing)
 React.initializeTouchEvents(true)
 Promise.longStackTraces()
 
-let render = () => React.renderComponent(Gobbldygook(), document.body)
+let render = () => React.render(React.createElement(Gobbldygook, null), document.body)
 
 let blastoff = () => {
 	document.title = 'Gobbldygook Schedule Playground'

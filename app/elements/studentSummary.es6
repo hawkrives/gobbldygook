@@ -11,6 +11,7 @@ let goodGraduationMessage = 'It looks like you\'ll make it! Just follow the plan
 let badGraduationMessage = 'You haven\'t planned everything out yet. Ask your advisor if you need help fitting everything in.'
 
 var StudentSummary = React.createClass({
+	displayName: 'StudentSummary',
 	render() {
 		var student = this.props.student
 		var studies = student.studies
@@ -42,24 +43,24 @@ var StudentSummary = React.createClass({
 		var canGraduate = false
 
 		let phrases = {
-			degree: React.DOM.span({className: 'area-of-study-list', key:'degree'}, titles.degree),
-			major: React.DOM.span({className: 'area-of-study-list', key:'major'}, titles.major),
-			concentration: React.DOM.span({className: 'area-of-study-list', key:'concentration'}, titles.concentration),
-			emphasis: React.DOM.span({className: 'area-of-study-list', key:'emphasis'}, titles.emphasis),
+			degree: React.createElement('span', {className: 'area-of-study-list', key:'degree'}, titles.degree),
+			major: React.createElement('span', {className: 'area-of-study-list', key:'major'}, titles.major),
+			concentration: React.createElement('span', {className: 'area-of-study-list', key:'concentration'}, titles.concentration),
+			emphasis: React.createElement('span', {className: 'area-of-study-list', key:'emphasis'}, titles.emphasis),
 		}
 
 		var emphasisEmphasizer = has.emphasis > 0 && has.emphasis < 2 ? 'an ' : ''
 
-		return React.DOM.article({id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
-			React.DOM.div({key: 'letter', id: 'student-letter'}, name[0]),
-			React.DOM.p({key: 'hi'}, 'Hi, ', name, '!'),
-			React.DOM.p({key: 'overview'},
+		return React.createElement('article', {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
+			React.createElement('div', {key: 'letter', id: 'student-letter'}, name[0]),
+			React.createElement('p', {key: 'hi'}, 'Hi, ', name, '!'),
+			React.createElement('p', {key: 'overview'},
 				'You are planning on ', _.size(objects.degree === 1) ? 'a ' : '',
 				phrases.degree, ' ', words.degree, ', with ', words.major, ' in ', phrases.major,
 				has.concentration > 0 ? [', and ', words.concentration, ' in ', phrases.concentration] : '',
 				has.emphasis > 0 ? [', not to mention ', emphasisEmphasizer, words.emphasis, ' in ', phrases.emphasis] : '',
 				'.'),
-			React.DOM.p({key: 'message', className: 'graduation-message'},
+			React.createElement('p', {key: 'message', className: 'graduation-message'},
 				canGraduate ? goodGraduationMessage : badGraduationMessage)
 		)
 	}
