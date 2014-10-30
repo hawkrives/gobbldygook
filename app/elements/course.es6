@@ -67,21 +67,25 @@ var Course = React.createClass({
 
 		let details;
 		if (this.state.showTools) {
-			let semesterList = React.DOM.select({className: 'semester-select'}, _.map(this.props.semesters, s => {
-				return React.DOM.option({value: s.id, key: s.id}, s.year + '-' + s.semester)
-			}))
+			let tools = []
+			if (this.props.schedule) {
+				let semesterList = React.DOM.select({className: 'semester-select'}, _.map(this.props.semesters, s => {
+					return React.DOM.option({value: s.id, key: s.id}, s.year + '-' + s.semester)
+				}))
+				tools.push(semesterList)
+			}
 			let deleteButton = React.DOM.button({className: 'remove-course', onClick: this.removeFromSemester}, 'Remove Course')
-			let tools = React.DOM.span(null, semesterList, deleteButton)
-			details = React.DOM.span({className: 'details'}, tools)
+			tools.push(deleteButton)
+			details = React.DOM.span({className: 'details'}, React.DOM.span(null, tools))
 		} else {
 			details = React.DOM.span({className: 'details'}, identifier, professors)
 		}
 
 		let warnings = []
-		if (course.year !== this.props.schedule.year && this.props.schedule.year <= thisYear) {
+		if (this.props.schedule && course.year !== this.props.schedule.year && this.props.schedule.year <= thisYear) {
 			warnings.push({msg: 'This course (from ' + course.year + ') is not offered in this year.'})
 		}
-		if (course.sem !== this.props.schedule.semester) {
+		if (this.props.schedule && course.sem !== this.props.schedule.semester) {
 			warnings.push({msg: 'This course (from ' + semesterName(course.sem) + ') is not offered in this semester.', icon: 'ios7-calendar-outline'})
 		}
 		if (this.props.conflicts && !_.isUndefined(this.props.index)) {
