@@ -30,6 +30,8 @@ Promise.longStackTraces()
 let render = () => React.renderComponent(Gobbldygook(), document.body)
 
 let blastoff = () => {
+	document.title = 'Gobbldygook Schedule Playground'
+
 	// Wait for document.ready and the database.
 	Promise.all([db, documentReady]).then(() => {
 		console.log('3. 2.. 1... Blastoff!')
