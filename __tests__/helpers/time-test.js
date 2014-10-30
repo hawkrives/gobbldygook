@@ -510,8 +510,9 @@ describe('time', function() {
 			])
 	});
 
-	it('turns the timestrings into semi-usable objects', function() {
+	it('checks for course time conflicts', function() {
 		var checkCourseTimeConflicts = require('../../app/helpers/time').checkCourseTimeConflicts;
+		var convertTimeStringsToOfferings = require('../../app/helpers/time').convertTimeStringsToOfferings;
 
 		var courses = [
 			{offerings: [
@@ -535,5 +536,13 @@ describe('time', function() {
 
 		expect(checkCourseTimeConflicts(courses[0], courses[2])).toBe(false)
 		expect(checkCourseTimeConflicts(courses[1], courses[2])).toBe(false)
+
+		var testing = [
+			{offerings: convertTimeStringsToOfferings({times: ['M 1255-0325PM']})},
+			{offerings: convertTimeStringsToOfferings({times: ['MWF 0200-0255PM']})},
+		];
+
+		expect(checkCourseTimeConflicts(testing[0], testing[1])).toBe(true)
+		expect(checkCourseTimeConflicts(testing[1], testing[0])).toBe(true)
 	});
 });

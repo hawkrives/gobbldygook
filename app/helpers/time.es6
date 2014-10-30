@@ -122,10 +122,13 @@ function checkCourseTimeConflicts(mainCourse, altCourse) {
 
 				_.each(mainOffer.times, function(mainTime) {
 					_.each(altOffer.times, function(altTime) {
+						// var altStartsAfterMain      = altTime.start >= mainTime.start
+						var altStartsBeforeMainEnds = altTime.start <= mainTime.end
+						var altEndsAfterMainStarts  = altTime.end >= mainTime.start
+						// var altEndsBeforeMainEnds   = altTime.end <= mainTime.end
 
-						if ((altTime.start >= mainTime.start && altTime.start <= mainTime.end) ||
-							(altTime.end   >= mainTime.start && altTime.end   <= mainTime.end)) {
-							conflict = true
+						if (altStartsBeforeMainEnds && altEndsAfterMainStarts) {
+							conflict = true;
 						}
 
 					})
