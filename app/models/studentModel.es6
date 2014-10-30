@@ -40,6 +40,7 @@ let Student = (encodedStudent) => {
 		return db.store('students').put(student)
 	}})
 
+	emitter.on('save', () => db.store('students').put(student))
 	// emitter.on('change', student.save)
 
 	student.id = encodedStudent.id || student.id
