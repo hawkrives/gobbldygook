@@ -70,6 +70,7 @@
     "gulp-jshint": "^1.8.5",
     "gulp-notify": "^2.0.0",
     "gulp-sass": "^1.2.0",
+    "gulp-shell": "^0.2.10",
     "gulp-size": "^1.1.0",
     "gulp-sourcemaps": "^1.2.4",
     "gulp-util": "^3.0.1",
