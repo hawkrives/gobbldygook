@@ -20,7 +20,7 @@ body {
 	margin: $page-edge-padding;
 }
 
-body.loading {
+.loading {
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
@@ -29,5 +29,6 @@ body.loading {
 }
 
 .loading-spinner {
-	font-size: 2em;
+	// iconic's loading fonts get off-balance when scaled up
+	// font-size: 2em;
 }
