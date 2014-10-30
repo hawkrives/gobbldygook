@@ -130,7 +130,7 @@ var lookup = {
 }
 
 function updateDatabase(itemType, infoFromServer) {
-	infoFromServer.path = '/data/' + itemType + '/' + infoFromServer.path
+	infoFromServer.path = './data/' + itemType + '/' + infoFromServer.path
 	var oldHash = localStorage.getItem(infoFromServer.path)
 	var newHash = infoFromServer.hash
 	var itemPath = infoFromServer.path
@@ -188,8 +188,8 @@ function loadInfoFile(url) {
 
 function loadData() {
 	var infoFiles = [
-		'/data/areas/info.json',
-		'/data/courses/info.json',
+		'./data/areas/info.json',
+		'./data/courses/info.json',
 	]
 	return Promise.all(_.map(infoFiles, loadInfoFile)).then(primeCourseCache)
 }
