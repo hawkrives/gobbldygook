@@ -39,7 +39,7 @@ function findResults(obj) {
 			.map(function(val, key, coll) {
 				if (key === 'result' && !coll.hasOwnProperty('details')) {
 					return val
-				} else {
+				} else if (!(key === 'matches')) {
 					return findResults(val)
 				}
 			})
@@ -97,7 +97,7 @@ var AreaOfStudy = React.createClass({
 		}, this);
 
 		var results = findResults(this.state.result.details)
-		// console.log(this.props.area.title, results)
+		// console.log(this.props.area.title, results, this.state.result.details)
 		var currentProgress = _.size(_.compact(results))
 		var maxProgress = _.size(results)
 
