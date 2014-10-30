@@ -49,7 +49,7 @@ var NumberObjectRequirement = React.createClass({
 			React.createElement('ul',
 				{className: 'requirement-detail-list'},
 				_.map(this.props.details.matches, function(match) {
-					return React.createElement('li',{key: match.deptnum}, match.deptnum)
+					return React.createElement('li',{key: match.clbid}, match.deptnum)
 				})
 			)
 		)
