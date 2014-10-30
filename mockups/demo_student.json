@@ -98,7 +98,7 @@
 		{
 			"id": 10, "year": 2014, "semester": 3,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [95594, 95842, 97333, 94753],
+			"clbids": [95842, 96198, 97495, 96402],
 			"active": true
 		},
 		{
@@ -116,7 +116,7 @@
 		{
 			"id": 13, "year": 2015, "semester": 3,
 			"title": "Schedule 1", "index": 1,
-			"clbids": [91746, 94847, 90592, 91883],
+			"clbids": [91746, 90592, 96980, 96514],
 			"active": true
 		},
 		{

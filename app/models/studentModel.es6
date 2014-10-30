@@ -5,6 +5,7 @@ import * as _ from 'lodash'
 import uuid from '../helpers/uuid'
 import randomChar from '../helpers/randomChar'
 import emitter from '../helpers/emitter'
+import db from '../helpers/db'
 
 import ScheduleSet from './scheduleSet'
 import StudySet from './studySet'
@@ -29,6 +30,17 @@ let Student = (encodedStudent) => {
 	Object.defineProperty(student, 'courses', { get() {
 		return student.schedules.activeCourses
 	}})
+
+	Object.defineProperty(student, 'encode', { value() {
+		return JSON.stringify(student)
+	}})
+
+	Object.defineProperty(student, 'save', { value() {
+		console.log('saving student', student.name)
+		return db.store('students').put(student)
+	}})
+
+	// emitter.on('change', student.save)
 
 	student.id = encodedStudent.id || student.id
 	student.name = encodedStudent.name || student.name
