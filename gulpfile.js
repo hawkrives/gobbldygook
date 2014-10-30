@@ -11,6 +11,7 @@ var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
+var symlink = require('gulp-symlink');
 var size = require('gulp-size');
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
@@ -111,8 +112,13 @@ gulp.task('html', function () {
 // Clean Output Directory
 gulp.task('clean', del.bind(null, ['dist']));
 
+gulp.task('link', function() {
+	return gulp.src('data')
+		.pipe(symlink('dist/data', {force: true}))
+});
+
 // Watch Files For Changes & Reload
-gulp.task('serve', ['webpack', 'html', 'styles', 'fonts'], function () {
+gulp.task('serve', ['webpack', 'html', 'styles', 'fonts', 'link'], function () {
 	browserSync.init({
 		notify: true,
 		minify: false,
@@ -127,5 +133,5 @@ gulp.task('serve', ['webpack', 'html', 'styles', 'fonts'], function () {
 });
 
 gulp.task('default', ['clean'], function(cb) {
-	runSequence('styles', ['jshint', 'webpack', 'html', 'fonts'], cb);
+	runSequence('styles', ['jshint', 'webpack', 'html', 'fonts', 'link'], cb);
 });
