@@ -23,7 +23,7 @@ var GraduationStatus = React.createClass({
 		}, this)
 
 		var areaOfStudySections = _.map(_.keys(areasOfStudy), function(areaType) {
-			var pluralType = humanize.pluralize(2, areaType)
+			var pluralType = humanize.pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 			return React.DOM.section({id: pluralType, key: areaType},
 				React.DOM.header({className: 'area-type-heading'},
 					React.DOM.h1(null, humanize.capitalize(pluralType)),
