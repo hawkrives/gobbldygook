@@ -27,6 +27,10 @@
 			"abbr": "ASIAN", "title": "Asian Studies"
 		},
 		{
+			"id": "m-phys", "type": "major",
+			"abbr": "PHYS", "title": "Physics"
+		},
+		{
 			"id": "m-japan", "type": "concentration",
 			"abbr": "JAPAN", "title": "Japan Studies"
 		},
