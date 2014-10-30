@@ -19,7 +19,7 @@ module.exports = {
 		// new webpack.optimize.OccurenceOrderPlugin(),
 	],
 	output: {
-		path: './dist',
+		path: 'dist',
 		filename: 'app.js'
 	},
 	resolve: {
