@@ -25,5 +25,9 @@ body.loading {
 	flex-flow: row nowrap;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: 90vh;
+}
+
+.loading-spinner {
+	font-size: 2em;
 }
