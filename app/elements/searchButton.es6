@@ -14,6 +14,7 @@ function toPrettyTerm(term) {
 }
 
 var SearchButton = React.createClass({
+	displayName: 'SearchButton',
 	getInitialState() {
 		return {
 			open: false,
@@ -52,10 +53,10 @@ var SearchButton = React.createClass({
 
 		var results = queryCourses(searchQuery);
 		let courseObjects = _.map(results, function(grouping, key) {
-			return React.DOM.li({className: 'course-group'}, toPrettyTerm(key),
-				React.DOM.ul(null,
+			return React.createElement('li', {className: 'course-group'}, toPrettyTerm(key),
+				React.createElement('ul', null,
 					_.map(grouping, function(course) {
-						return React.DOM.li({key: course.clbid}, Course({info: course}))
+						return React.createElement('li', {key: course.clbid}, Course({info: course}))
 					})
 				)
 			)
@@ -66,20 +67,20 @@ var SearchButton = React.createClass({
 		})
 	},
 	render() {
-		return React.DOM.div(null,
-			React.DOM.button({className: 'search-button', onClick: this.toggleSidebar}),
-			this.state.open ? React.DOM.div({className: 'search-sidebar'},
-				React.DOM.header({className: 'sidebar-heading'},
-					React.DOM.h1(null, 'Search for Courses'),
-					React.DOM.button({className: 'close-sidebar', onClick: this.closeSidebar, title: 'Close Sidebar'})),
-				React.DOM.input({
+		return React.createElement('div', null,
+			React.createElement('button', {className: 'search-button', onClick: this.toggleSidebar}),
+			this.state.open ? React.createElement('div', {className: 'search-sidebar'},
+				React.createElement('header', {className: 'sidebar-heading'},
+					React.createElement('h1', null, 'Search for Courses'),
+					React.createElement('button', {className: 'close-sidebar', onClick: this.closeSidebar, title: 'Close Sidebar'})),
+				React.createElement('input', {
 					type: 'search',
 					placeholder: 'Search Course Titles',
 					defaultValue: this.state.query,
 					onChange: this.searchForCourses,
 					className: 'search-box',
 				}),
-				React.DOM.ul({className: 'course-list'}, this.state.courseObjects)
+				React.createElement('ul', {className: 'course-list'}, this.state.courseObjects)
 			) : null
 		)
 	}

@@ -57,28 +57,28 @@ var Course = React.createClass({
 		let course = this.props.info;
 		let title = course.type === 'Topic' ? course.name : course.title;
 
-		let titleEl = React.DOM.h1({className: 'title'}, title)
+		let titleEl = React.createElement('h1', {className: 'title'}, title)
 
-		let department = React.DOM.span({className: 'department'}, course.dept)
-		let number = React.DOM.span({className: 'number'}, course.num)
-		let section = React.DOM.span({className: 'section'}, course.sect)
-		let identifier = React.DOM.span({className: 'identifier'}, department, ' ', number, section)
-		let professors = React.DOM.span({className: 'professors'}, humanize.oxford(course.profs))
+		let department = React.createElement('span', {className: 'department'}, course.dept)
+		let number = React.createElement('span', {className: 'number'}, course.num)
+		let section = React.createElement('span', {className: 'section'}, course.sect)
+		let identifier = React.createElement('span', {className: 'identifier'}, department, ' ', number, section)
+		let professors = React.createElement('span', {className: 'professors'}, humanize.oxford(course.profs))
 
 		let details;
 		if (this.state.showTools) {
 			let tools = []
 			if (this.props.schedule) {
-				let semesterList = React.DOM.select({className: 'semester-select'}, _.map(this.props.semesters, s => {
-					return React.DOM.option({value: s.id, key: s.id}, s.year + '-' + s.semester)
+				let semesterList = React.createElement('select', {className: 'semester-select'}, _.map(this.props.semesters, s => {
+					return React.createElement('option', {value: s.id, key: s.id}, s.year + '-' + s.semester)
 				}))
 				tools.push(semesterList)
 			}
-			let deleteButton = React.DOM.button({className: 'remove-course', onClick: this.removeFromSemester}, 'Remove Course')
+			let deleteButton = React.createElement('button', {className: 'remove-course', onClick: this.removeFromSemester}, 'Remove Course')
 			tools.push(deleteButton)
-			details = React.DOM.span({className: 'details'}, React.DOM.span(null, tools))
+			details = React.createElement('span', {className: 'details'}, React.createElement('span', null, tools))
 		} else {
-			details = React.DOM.span({className: 'details'}, identifier, professors)
+			details = React.createElement('span', {className: 'details'}, identifier, professors)
 		}
 
 		let warnings = []
@@ -99,22 +99,22 @@ var Course = React.createClass({
 		let warningEls;
 		if (warnings.length) {
 			// console.log(warnings, course.title, course.year, this.props.schedule.year,course.semester, this.props.schedule.semester)
-			warningEls = React.DOM.span({
+			warningEls = React.createElement('span', {
 				title: _.map(warnings, w => '- ' + w.msg + '\n')},
 				_.map(warnings, w => {
 					let icon = w.icon ? w.icon : 'alert-circled';
-					return React.DOM.i({className: 'ion-' + icon, key: icon})
+					return React.createElement('i', {className: 'ion-' + icon, key: icon})
 				}))
 		}
 
-		return React.DOM.article(
+		return React.createElement('article',
 			Object.assign({
 				className: 'course',
 				onClick: this.showTools,
 			}, this.dragSourceFor(itemTypes.COURSE)),
 
-			React.DOM.div({className: 'info-rows'}, titleEl, details),
-			React.DOM.div({className: 'warnings'}, warningEls)
+			React.createElement('div', {className: 'info-rows'}, titleEl, details),
+			React.createElement('div', {className: 'warnings'}, warningEls)
 		);
 	}
 })
@@ -124,11 +124,11 @@ var EmptyCourseSlot = React.createClass({
 	render() {
 		let title = 'Empty Slot ' + this.props.index
 
-		let titleEl = React.DOM.h1({className: 'title'}, title)
-		let details = React.DOM.span({className: 'details'}, 'no details')
+		let titleEl = React.createElement('h1', {className: 'title'}, title)
+		let details = React.createElement('span', {className: 'details'}, 'no details')
 
-		return React.DOM.article({className: 'course empty'},
-			React.DOM.div({className: 'info-rows'}, titleEl, details));
+		return React.createElement('article', {className: 'course empty'},
+			React.createElement('div', {className: 'info-rows'}, titleEl, details));
 	}
 })
 

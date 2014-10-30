@@ -17,6 +17,7 @@ var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
 })
 
 var Semester = React.createClass({
+	displayName: 'Semester',
 	mixins: [DragDropMixin],
 	configureDragDrop(registerType) {
 		registerType(itemTypes.COURSE, {
@@ -46,32 +47,32 @@ var Semester = React.createClass({
 		let infoIcons = []
 		if (schedule) {
 			let courseCount = _.size(schedule.courses)
-			infoIcons.push(React.DOM.li({
+			infoIcons.push(React.createElement('li', {
 				className: 'semester-course-count', key: 'course-count'},
 				courseCount + ' ' + humanize.pluralize(courseCount, 'course')))
 
 			if (!schedule.isValid) {
 				let conflicts = JSON.stringify(schedule.conflicts, null, 2)
-				infoIcons.push(React.DOM.li({
+				infoIcons.push(React.createElement('li', {
 					className: 'semester-status',
 					key: 'semester-status',
 					title: conflicts},
-					React.DOM.i({className: 'ion-alert-circled'})))
+					React.createElement('i', {className: 'ion-alert-circled'})))
 			}
 
 			let credits = _.reduce(_.pluck(schedule.courses, 'credits'), add) || 0
 			if (credits) {
-				infoIcons.push(React.DOM.li({
+				infoIcons.push(React.createElement('li', {
 					className: 'semester-credit-count', key: 'credit-count'},
 					credits + ' ' + humanize.pluralize(credits, 'credit')))
 			}
 		}
-		let infoBar = React.DOM.ul({className: 'info-bar'}, infoIcons);
+		let infoBar = React.createElement('ul', {className: 'info-bar'}, infoIcons);
 
 		let courseList = null;
 		if (schedule) {
 			let courseObjects = _.map(schedule.courses,
-				(course, i) => Course({
+				(course, i) => React.createElement(Course, {
 					key: course.clbid,
 					info: course,
 					schedule: schedule,
@@ -80,22 +81,21 @@ var Semester = React.createClass({
 					conflicts: schedule.conflicts,
 				}))
 			if ((schedule.semester === 1 || schedule.semester === 3) && courseObjects.length < 4) {
-				_(_.range(courseObjects.length+1, 4+1)).each((i) => courseObjects.push(EmptyCourseSlot({
-					key: 'empty'+i,
-					index: i
-				})))
+				_.chain(_.range(courseObjects.length+1, 4+1)).each((i) => courseObjects.push(
+					React.createElement(EmptyCourseSlot, {key: 'empty'+i, index: i})
+				))
 			}
-			courseList = React.DOM.div({className: 'course-list'}, courseObjects);
+			courseList = React.createElement('div', {className: 'course-list'}, courseObjects);
 		}
 
-		return React.DOM.div(
+		return React.createElement('div',
 			Object.assign(
 				{className: 'semester' + ((schedule && schedule.isValid) ? '' : ' invalid')},
 				this.dropTargetFor(itemTypes.COURSE)),
-			React.DOM.header({className: 'semester-title'},
-				React.DOM.h1(null, semesterName(this.props.semester)),
+			React.createElement('header', {className: 'semester-title'},
+				React.createElement('h1', null, semesterName(this.props.semester)),
 				infoBar,
-				React.DOM.button({
+				React.createElement('button', {
 					className: 'remove-semester',
 					title: 'Remove ' + String(this.props.year) + ' ' + semesterName(this.props.semester),
 					onClick: this.removeSemester,

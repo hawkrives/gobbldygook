@@ -7,10 +7,10 @@ var Requirement = React.createClass({
 	displayName: 'Requirement',
 	render() {
 		// console.log('requirement render')
-		return React.DOM.li({className: 'requirement'},
-			React.DOM.progress({value: this.props.has, max: this.props.needs}),
+		return React.createElement('li', {className: 'requirement'},
+			React.createElement('progress', {value: this.props.has, max: this.props.needs}),
 			this.props.name,
-			React.DOM.br(null),
+			React.createElement('br', null),
 			this.props.query, this.props.validCourses
 		)
 	}

@@ -8,6 +8,7 @@ import findFirstAvailableYear from '../helpers/findFirstAvailableYear'
 import Year from './year'
 
 var CourseTable = React.createClass({
+	displayName: 'CourseTable',
 	addYear(ev) {
 		var nextAvailableYear = findFirstAvailableYear(this.props.schedules)
 
@@ -20,16 +21,16 @@ var CourseTable = React.createClass({
 	render() {
 		// console.log('course-table render', this.props)
 		var years = _.map(this.props.schedules.byYear, function(schedules, year) {
-			return Year({
+			return React.createElement(Year, {
 				schedules: this.props.schedules,
 				year: parseInt(year, 10),
 				key: year,
 			})
 		}, this)
 
-		return React.DOM.div({className: 'course-table'},
+		return React.createElement('div', {className: 'course-table'},
 			years,
-			React.DOM.button({
+			React.createElement('button', {
 				className: 'add-year',
 				title: 'Add Year',
 				onClick: this.addYear,
