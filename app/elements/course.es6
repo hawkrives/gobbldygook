@@ -82,14 +82,14 @@ var Course = React.createClass({
 			warnings.push({msg: 'This course (from ' + course.year + ') is not offered in this year.'})
 		}
 		if (course.sem !== this.props.schedule.semester) {
-			warnings.push({msg: 'This course (from ' + semesterName(course.sem) + ') is not offered in this semester.'})
+			warnings.push({msg: 'This course (from ' + semesterName(course.sem) + ') is not offered in this semester.', icon: 'ios7-calendar-outline'})
 		}
 		if (this.props.conflicts && !_.isUndefined(this.props.index)) {
 			let i = this.props.index;
 			if (_.any(this.props.conflicts[i])) {
 				let conflictIndex = _.findIndex(this.props.conflicts[i], item => item === true)
 				conflictIndex = conflictIndex + 1; // because humans don't 0-index lists
-				warnings.push({msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.', icon: 'clock'})
+				warnings.push({msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.', icon: 'ios7-clock-outline'})
 			}
 		}
 		let warningEls;
