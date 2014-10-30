@@ -124,7 +124,7 @@ gulp.task('serve', ['webpack', 'html', 'styles', 'fonts', 'link'], function () {
 		minify: false,
 		browser: "google chrome",
 		server: {
-			baseDir: ['dist', './']
+			baseDir: ['dist']
 		}
 	});
 
