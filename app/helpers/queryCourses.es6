@@ -38,8 +38,8 @@ var checkAgainstQuery = _.curry(function(queryObject, course) {
 function queryCourses(query) {
 	var results = _.chain(courseCache)
 		.filter(course => _.contains(course.title, query))
-		.sortBy('term')
-		.reverse()
+		.sortBy('title')
+		.groupBy('term')
 		.value()
 	return results
 }

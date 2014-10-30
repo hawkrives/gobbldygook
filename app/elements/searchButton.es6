@@ -3,6 +3,15 @@
 import * as React from 'react'
 import queryCourses from '../helpers/queryCourses'
 import Course from './course'
+import semesterName from '../helpers/semesterName'
+
+function toPrettyTerm(term) {
+	term = String(term)
+	var year = term.substr(0, 4)
+	var sem = parseInt(term.substr(4, 1), 10)
+
+	return semesterName(sem) + ' ' + year
+}
 
 var SearchButton = React.createClass({
 	getInitialState() {
@@ -28,11 +37,32 @@ var SearchButton = React.createClass({
 		})
 	},
 	searchForCourses(event) {
-		var results = queryCourses(event.target.value);
-		let courseObjects = _.map(results, (course) => React.DOM.li({key: course.clbid}, Course({info: course})))
+		var time = Date.now()
+		var searchQuery = event.target.value
+
+		clearTimeout(this.timeout)
+		this.timeout = setTimeout(() => {
+			this.query(searchQuery)
+		}, 400)
+	},
+	query(searchQuery) {
+		if (searchQuery.length < 1) {
+			return;
+		}
+
+		var results = queryCourses(searchQuery);
+		let courseObjects = _.map(results, function(grouping, key) {
+			return React.DOM.li({className: 'course-group'}, toPrettyTerm(key),
+				React.DOM.ul(null,
+					_.map(grouping, function(course) {
+						return React.DOM.li({key: course.clbid}, Course({info: course}))
+					})
+				)
+			)
+		})
 		this.setState({
-			query: event.target.value,
-			courseObjects: courseObjects,
+			query: searchQuery,
+			courseObjects: courseObjects.reverse(),
 		})
 	},
 	render() {

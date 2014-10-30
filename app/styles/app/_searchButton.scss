@@ -60,17 +60,24 @@
 		margin-bottom: 0.5rem;
 	}
 
-	.course-list {
+	.course-list, .course-list ul {
 		margin: 0;
 		padding: 0;
 		list-style: none;
 	}
 
+	.course-group > span {
+		font-weight: bold;
+		text-align: center;
+		display: block;
+
+		margin-top: 1rem;
+		margin-bottom:0.5rem;
+	}
+
 	.course-list {
 		flex: 1;
 		overflow-y: scroll;
-		// padding-bottom: 1rem;
-		// height: 100%;
 	}
 }
 
