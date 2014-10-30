@@ -4,7 +4,7 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
-import {DragDropMixin} from '../../node_modules/react-dnd/dist/ReactDND.min'
+import {DragDropMixin} from 'react-dnd'
 import itemTypes from '../models/itemTypes'
 import semesterName from '../helpers/semesterName'
 

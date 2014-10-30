@@ -29,6 +29,7 @@ module.exports = {
 	module: {
 		loaders: [
 			{test: /\.es6$/,  loader: "6to5-loader"},
+			{test: /react-dnd/, loader: "6to5-loader"},
 			{test: /\.json$/, loader: "json-loader"},
 		]
 	},
