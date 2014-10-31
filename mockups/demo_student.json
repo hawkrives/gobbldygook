@@ -15,10 +15,6 @@
 			"abbr": "B.M.", "title": "Bachelor of Music"
 		},
 		{
-			"id": "m-chmus", "type": "major",
-			"abbr": "CHMUS", "title": "Church Music"
-		},
-		{
 			"id": "m-csci", "type": "major",
 			"abbr": "CSCI", "title": "Computer Science"
 		},
@@ -31,15 +27,19 @@
 			"abbr": "PHYS", "title": "Physics"
 		},
 		{
-			"id": "m-japan", "type": "concentration",
+			"id": "c-stat", "type": "concentration",
+			"abbr": "STAT", "title": "Statistics"
+		},
+		{
+			"id": "c-japan", "type": "concentration",
 			"abbr": "JAPAN", "title": "Japan Studies"
 		},
 		{
-			"id": "m-math", "type": "concentration",
+			"id": "c-math", "type": "concentration",
 			"abbr": "MATH", "title": "Mathematics"
 		},
 		{
-			"id": "m-management", "type": "emphasis",
+			"id": "e-management", "type": "emphasis",
 			"abbr": "MGMT", "title": "Management"
 		}
 	],
