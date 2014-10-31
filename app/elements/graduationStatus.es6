@@ -18,6 +18,9 @@ var GraduationStatus = React.createClass({
 	load() {
 		console.log('load student')
 	},
+	parse() {
+		console.log('load student')
+	},
 	demo() {
 		console.log('load demo data')
 	},
@@ -52,6 +55,7 @@ var GraduationStatus = React.createClass({
 
 		var studentButtons = React.createElement('menu', {className: 'student-buttons'},
 			React.createElement('button', {className: 'load-student', onClick: this.load}, 'Load'),
+			React.createElement('button', {className: 'demo-student', onClick: this.parse}, 'Parse'),
 			React.createElement('button', {className: 'save-student', onClick: this.save}, 'Save'),
 			React.createElement('button', {className: 'demo-student', onClick: this.demo}, 'Demo'))
 
