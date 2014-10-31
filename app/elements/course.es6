@@ -118,7 +118,7 @@ var Course = React.createClass({
 		}
 
 		return React.createElement('article',
-			Object.assign({
+			_.extend({
 				className: 'course',
 				onClick: this.showTools,
 			}, this.dragSourceFor(itemTypes.COURSE)),
