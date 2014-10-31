@@ -35,7 +35,7 @@ $border-color: rgba(50, 50, 50, 0.25);
 .requirement-result {
 	.incomplete, .completed {
 		&::after {
-			margin-left: 0.3em;
+			margin-left: 0.5em;
 		}
 	}
 	.incomplete::after {
