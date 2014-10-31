@@ -52,15 +52,15 @@
 	summary::-ms-details-marker     { display: none; }
 	summary::details-marker         { display: none; }
 
-	// summary:focus { outline: 2px solid $black; }
-
 	& > details {
 		summary::after {
-			@include ionicon($ionicon-var-ios7-plus-empty);
+			@include ionicon($ionicon-var-ios7-more);
 
 			position: absolute;
-			top: 25%;
+			top: 1px;
 			right: 12px;
+			z-index: 1;
+			font-size: 2em;
 		}
 	}
 
@@ -72,7 +72,7 @@
 			height: 3px;
 		}
 		summary::after {
-			@include ionicon($ionicon-var-ios7-minus-empty);
+			@include ionicon($ionicon-var-ios7-more-outline);
 		}
 	}
 }
