@@ -10,7 +10,7 @@ import Year from './year'
 var CourseTable = React.createClass({
 	displayName: 'CourseTable',
 	addYear(ev) {
-		var nextAvailableYear = findFirstAvailableYear(this.props.schedules)
+		var nextAvailableYear = findFirstAvailableYear(this.props.schedules, this.props.matriculation)
 
 		this.props.schedules.create({
 			year: nextAvailableYear, semester: 1,

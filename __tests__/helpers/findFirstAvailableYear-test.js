@@ -13,5 +13,15 @@ describe('findFirstAvailableYear', function() {
 
 		expect(findFirstAvailableYear(schedules)).toEqual(2014);
 		expect(findFirstAvailableYear(schedules)).not.toEqual(2016);
+
+
+		var altScheds = {
+			"3": {"id": 3, "year": 2014},
+			"6": {"id": 6, "year": 2013},
+			"1": {"id": 1, "year": 2015},
+		}
+		var altMatriculation = 2012;
+
+		expect(findFirstAvailableYear(schedules, altMatriculation)).toEqual(2012);
 	});
 });
