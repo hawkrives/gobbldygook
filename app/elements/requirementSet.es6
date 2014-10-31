@@ -15,6 +15,29 @@ var BooleanRequirement = React.createClass({
 	}
 })
 
+var SomeArrayRequirement = React.createClass({
+	displayName: 'SomeArrayRequirement',
+	render() {
+		return React.createElement('div', {className: 'requirement-result requirement-result-some-array'},
+			(this.props.details.has || this.props.details.needs || this.props.details.word) ?
+				React.createElement('span', null,
+					this.props.details.has,
+					this.props.details.word ? this.props.details.word : ' of ',
+					this.props.details.needs) : null,
+			React.createElement('ul',
+				{className: 'requirement-detail-list'},
+				_.map(this.props.details.from, function(req) {
+					return React.createElement('li', {
+						key: req.title, title: req.title,
+						className: req.result ? 'completed' : 'nope'},
+						(req.abbr || req.title)
+					)
+				})
+			)
+		)
+	}
+})
+
 var BooleanArrayRequirement = React.createClass({
 	displayName: 'BooleanArrayRequirement',
 	render() {
@@ -23,12 +46,9 @@ var BooleanArrayRequirement = React.createClass({
 			React.createElement('ul',
 				{className: 'requirement-detail-list'},
 				_.map(this.props.details, function(req) {
-					return React.createElement('li',
-						{
-							key: req.title,
-							className: req.result ? 'completed' : 'incomplete',
-							title: req.title + ': ' + (req.result ? 'Completed.' : 'Incomplete!')
-						},
+					return React.createElement('li', {
+						key: req.title, title: req.title + ': ' + (req.result ? 'Completed.' : 'Incomplete!'),
+						className: req.result ? 'completed' : 'incomplete'},
 						(req.abbr || req.title)
 					)
 				})
@@ -46,10 +66,9 @@ var NumberObjectRequirement = React.createClass({
 				{className: this.props.result ? 'completed' : 'incomplete'},
 				this.props.details.has, ' of ', this.props.details.needs
 			),
-			React.createElement('ul',
-				{className: 'requirement-detail-list'},
+			React.createElement('ul', {className: 'requirement-detail-list'},
 				_.map(this.props.details.matches, function(match) {
-					return React.createElement('li',{key: match.clbid}, match.deptnum)
+					return React.createElement('li', {key: match.clbid}, match.deptnum)
 				})
 			)
 		)
@@ -68,6 +87,10 @@ var RequirementSet = React.createClass({
 			details = _.map(this.props.details, function(requirement, index) {
 				return React.createElement(RequirementSet, _.merge({key: index}, requirement))
 			})
+		}
+
+		else if (type === 'array/some') {
+			details = React.createElement(SomeArrayRequirement, {details: this.props.details})
 		}
 
 		else if (type === 'array/boolean') {
