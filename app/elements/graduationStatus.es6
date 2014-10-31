@@ -13,16 +13,18 @@ var GraduationStatus = React.createClass({
 
 	save() {
 		console.log('save student')
-		emitter.emit('save')
+		emitter.emit('saveStudent')
 	},
 	load() {
 		console.log('load student')
+		emitter.emit('loadStudent')
 	},
 	parse() {
 		console.log('load student')
 	},
 	demo() {
 		console.log('load demo data')
+		emitter.emit('revertStudentToDemo')
 	},
 
 	render() {

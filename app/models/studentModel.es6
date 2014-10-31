@@ -10,7 +10,11 @@ import db from '../helpers/db'
 import ScheduleSet from './scheduleSet'
 import StudySet from './studySet'
 
+import * as demoStudent from '../../mockups/demo_student.json'
+
 let Student = (encodedStudent) => {
+	encodedStudent = encodedStudent || {}
+
 	let student = {
 		id: uuid(),
 		name: 'Student ' + randomChar(),
@@ -37,11 +41,11 @@ let Student = (encodedStudent) => {
 
 	Object.defineProperty(student, 'save', { value() {
 		console.log('saving student', student.name)
-		return db.store('students').put(student)
+		localStorage.setItem(student.id, JSON.stringify(student))
+		// return db.store('students').put(student)
 	}})
 
-	emitter.on('save', () => db.store('students').put(student))
-	// emitter.on('change', student.save)
+	emitter.on('saveStudent', student.save)
 
 	student.id = encodedStudent.id || student.id
 	student.name = encodedStudent.name || student.name
@@ -57,7 +61,37 @@ let Student = (encodedStudent) => {
 	student.overrides = encodedStudent.overrides || student.overrides
 	student.fabrications = encodedStudent.fabrications || student.fabrications
 
+	// todo: remove me when we have something more than tape.
+	// for one thing, i'm pretty sure that all these emitters are causing some
+	// level of a memory leak.
+	emitter.on('change', student.save)
+
 	return student
 }
 
+function loadStudentFromDb(forceDemo) {
+	forceDemo = forceDemo || false
+
+	let rawStudent;
+	if (!forceDemo) {
+		rawStudent = localStorage.getItem('3AE9E7EE-DA8F-4014-B987-8D88814BB848')
+		// again, ick. reassignment.
+		rawStudent = JSON.parse(rawStudent)
+	}
+	if (!rawStudent)
+		rawStudent = demoStudent
+
+	let student = new Student(rawStudent)
+	window.student = student
+
+	emitter.emit('loadedStudent', student)
+	return student
+}
+
+emitter.on('revertStudentToDemo', () => loadStudentFromDb(true))
+
+emitter.on('loadStudent', loadStudentFromDb)
+window.loadStudentFromDb = loadStudentFromDb
+
 export default Student
+export {loadStudentFromDb, Student}
