@@ -23,7 +23,7 @@ function interdisciplinaryApproachesToAsia(courses) {
 		title: 'Interdisciplinary Approaches to Asia',
 		type: 'boolean',
 		description: 'Asian Studies 275: Interdisciplinary Approaches to Asia',
-		result: checkCoursesFor(courses, {dept:'ASIAN 275'})
+		result: checkCoursesFor(courses, {deptnum:'ASIAN 275'})
 	}
 }
 
