@@ -14,10 +14,10 @@ function foundationCourses(courses) {
 	*/
 
 	var requirements = [
-		{title: 'STAT 110', result: checkCoursesFor(courses, {dept:'STAT', num:110})},
-		{title: 'STAT 212', result: checkCoursesFor(courses, {dept:'STAT', num:212})},
-		{title: 'STAT 214', result: checkCoursesFor(courses, {dept:'STAT', num:214})},
-		{title: 'STAT 263', result: checkCoursesFor(courses, {dept:'STAT', num:263})},
+		{title: 'STAT 110', result: checkCoursesFor(courses, {dept:'STAT 110'})},
+		{title: 'STAT 212', result: checkCoursesFor(courses, {dept:'STAT 212'})},
+		{title: 'STAT 214', result: checkCoursesFor(courses, {dept:'STAT 214'})},
+		{title: 'STAT 263', result: checkCoursesFor(courses, {dept:'STAT 263'})},
 	]
 
 	return {
@@ -39,8 +39,8 @@ function coreCourses(courses) {
 		- Statistics 316: Advanced Statistical Modeling
 	*/
 
-	var statisticalModeling = checkCoursesFor(courses, {dept:'STAT', num:272})
-	var advancedModeling = checkCoursesFor(courses, {dept:'STAT', num:316})
+	var statisticalModeling = checkCoursesFor(courses, {dept:'STAT 272'})
+	var advancedModeling = checkCoursesFor(courses, {dept:'STAT 316'})
 
 	let requirements = [
 		{
@@ -66,14 +66,14 @@ function electiveCourses(courses) {
 	// Electives: Two approved electives.
 
 	var validElectives = [
-		{title: 'CSCI 125', result: checkCoursesFor(courses, {dept:'CSCI', num:125})},
-		{title: 'ECON 385', result: checkCoursesFor(courses, {dept:'ECON', num:385})},
-		{title: 'MATH 262', result: checkCoursesFor(courses, {dept:'MATH', num:262})},
-		{title: 'PSYCH 230', result: checkCoursesFor(courses, {dept:'PSYCH', num:230})},
-		{title: 'SOAN 371', result: checkCoursesFor(courses, {dept:'SOAN', num:371})},
-		{title: 'STAT 270', result: checkCoursesFor(courses, {dept:'STAT', num:270})},
-		{title: 'STAT 282', result: checkCoursesFor(courses, {dept:'STAT', num:282})},
-		{title: 'STAT 322', result: checkCoursesFor(courses, {dept:'STAT', num:322})},
+		{title: 'CSCI 125', result: checkCoursesFor(courses, {dept:'CSCI 125'})},
+		{title: 'ECON 385', result: checkCoursesFor(courses, {dept:'ECON 385'})},
+		{title: 'MATH 262', result: checkCoursesFor(courses, {dept:'MATH 262'})},
+		{title: 'PSYCH 230', result: checkCoursesFor(courses, {dept:'PSYCH 230'})},
+		{title: 'SOAN 371', result: checkCoursesFor(courses, {dept:'SOAN 371'})},
+		{title: 'STAT 270', result: checkCoursesFor(courses, {dept:'STAT 270'})},
+		{title: 'STAT 282', result: checkCoursesFor(courses, {dept:'STAT 282'})},
+		{title: 'STAT 322', result: checkCoursesFor(courses, {dept:'STAT 322'})},
 	]
 
 	var numberTaken = _.chain(validElectives)

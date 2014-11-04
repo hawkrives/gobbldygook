@@ -24,12 +24,9 @@ let isRequiredPhysicsCourse = _.curry(isRequiredCourse(physDeptRequiredCourses))
 
 function analyticsCourses(courses) {
 	var requirements = [
-		{title: 'PHYS 130',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:130})},
-		{title: 'PHYS 131',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:131})},
-		{title: 'PHYS 232',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:232})},
+		{title: 'PHYS 130', result: checkCoursesFor(courses, {dept:'PHYS 130'})},
+		{title: 'PHYS 131', result: checkCoursesFor(courses, {dept:'PHYS 131'})},
+		{title: 'PHYS 232', result: checkCoursesFor(courses, {dept:'PHYS 232'})},
 	]
 
 	return {
@@ -43,10 +40,8 @@ function analyticsCourses(courses) {
 
 function transitionsCourses(courses) {
 	var requirements = [
-		{title: 'PHYS 244',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:244})},
-		{title: 'PHYS 245',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:245})},
+		{title: 'PHYS 244', result: checkCoursesFor(courses, {deptnum:'PHYS 244'})},
+		{title: 'PHYS 245', result: checkCoursesFor(courses, {deptnum:'PHYS 245'})},
 	]
 
 	return {
@@ -60,16 +55,11 @@ function transitionsCourses(courses) {
 
 function upperLevelCourses(courses) {
 	var requirements = [
-		{title: 'PHYS 374',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:374})},
-		{title: 'PHYS 375',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:375})},
-		{title: 'PHYS 385',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:385})},
-		{title: 'PHYS 376',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:376})},
-		{title: 'PHYS 386',
-			result: checkCoursesFor(courses, {dept:'PHYS', num:386})},
+		{title: 'PHYS 374', result: checkCoursesFor(courses, {deptnum: 'PHYS 374'})},
+		{title: 'PHYS 375', result: checkCoursesFor(courses, {deptnum: 'PHYS 375'})},
+		{title: 'PHYS 385', result: checkCoursesFor(courses, {deptnum: 'PHYS 385'})},
+		{title: 'PHYS 376', result: checkCoursesFor(courses, {deptnum: 'PHYS 376'})},
+		{title: 'PHYS 386', result: checkCoursesFor(courses, {deptnum: 'PHYS 386'})},
 	]
 
 	return {

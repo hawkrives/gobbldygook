@@ -32,20 +32,20 @@ function foundationCourses(courses) {
 	*/
 
 	var cs1 = _.any([
-		checkCoursesFor(courses, {dept:'CSCI', num:121}),
-		checkCoursesFor(courses, {dept:'CSCI', num:125}),
+		checkCoursesFor(courses, {deptnum:'CSCI 121'}),
+		checkCoursesFor(courses, {deptnum:'CSCI 125'}),
 	])
 
 	var design = _.all([
-		checkCoursesFor(courses, {dept:'CSCI', num:241}),
-		checkCoursesFor(courses, {dept:'CSCI', num:251}),
-		checkCoursesFor(courses, {dept:'CSCI', num:252}),
+		checkCoursesFor(courses, {deptnum:'CSCI 241'}),
+		checkCoursesFor(courses, {deptnum:'CSCI 251'}),
+		checkCoursesFor(courses, {deptnum:'CSCI 252'}),
 	])
 
 	var proofWriting = _.any([
-		checkCoursesFor(courses, {dept:'MATH', num:282, term:20141}),
-		checkCoursesFor(courses, {dept:'MATH', num:244}),
-		checkCoursesFor(courses, {dept:'MATH', num:252}),
+		checkCoursesFor(courses, {deptnum:'MATH 282', term:20141}),
+		checkCoursesFor(courses, {deptnum:'MATH 244'}),
+		checkCoursesFor(courses, {deptnum:'MATH 252'}),
 	])
 
 	let requirements = [
@@ -80,23 +80,23 @@ function coreCourses(courses) {
 		- and either Computer Science 273, 284, or 300 with parallel and distributed computing.
 	*/
 
-	var algorithms = checkCoursesFor(courses, {dept:'CSCI', num:253})
+	var algorithms = checkCoursesFor(courses, {deptnum:'CSCI 253'})
 
-	var ethics = checkCoursesFor(courses, {dept:'CSCI', num:263})
+	var ethics = checkCoursesFor(courses, {deptnum:'CSCI 263'})
 
 	var theory = _.any([
-		checkCoursesFor(courses, {dept:'CSCI', num:276}),
-		checkCoursesFor(courses, {dept:'CSCI', num:333})
+		checkCoursesFor(courses, {deptnum:'CSCI 276'}),
+		checkCoursesFor(courses, {deptnum:'CSCI 333'})
 	])
 
 	var parallelDistributedComputing = _.chain(courses)
-		.filter({dept: 'CSCI', num: 300})
+		.filter({deptnum:'CSCI 300'})
 		.filter(partialNameOrTitle('Parallel'))
 		.size().value() >= 1
 
 	var options = _.any([
-		checkCoursesFor(courses, {dept:'CSCI', num:273}),
-		checkCoursesFor(courses, {dept:'CSCI', num:284}),
+		checkCoursesFor(courses, {deptnum:'CSCI 273'}),
+		checkCoursesFor(courses, {deptnum:'CSCI 284'}),
 		parallelDistributedComputing
 	])
 
