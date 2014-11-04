@@ -2,9 +2,14 @@
 
 import * as _ from 'lodash'
 
-var hasDepartment = _.curry(function(dept, course) {
-	// _.curry allows the function to be called with arguments multiple times.
+var checkIfHasDepartment = (dept, course) => {
 	return _.contains(course.depts, dept)
+}
+
+var hasDepartment = _.curry((dept, course) => {
+	if (_.isArray(dept))
+		return _.any(dept, (d) => checkIfHasDepartment(d, course))
+	return checkIfHasDepartment(dept, course)
 })
 
 export default hasDepartment
