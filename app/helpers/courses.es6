@@ -1,7 +1,6 @@
 'use strict';
 
 import * as _ from 'lodash'
-import * as Promise from 'bluebird'
 import {courseCache} from './db'
 
 function getCourse(clbid) {
@@ -40,20 +39,45 @@ function checkCoursesFor(courses, filter) {
 	return _.any(courses, filter)
 }
 
+////
+// from queryCourses
+
+
+'use strict';
+
+// query = {
+// 		'title': {values: ['Chinese'], flags: ['caseInsensitive', 'partialMatch']},
+// 		'year': {values: [2009, 2010], bool: 'OR'},
+// 		'level': {values: [200], flags: ['>=']},
+// 		'type': {values: ['Lab', 'Research', 'Topic'], bool: 'NOT', flags: ['caseInsensitive']}
+// }
+
+function queryCourses(query) {
+	query = query.toLowerCase()
+	var results = _.chain(courseCache)
+		.filter(course => _.contains(course.title.toLowerCase(), query))
+		.sortBy('title')
+		.groupBy('term')
+		.value()
+	return results
+}
+
+
 export {
 	getCourse,
 	getCourses,
+	queryCourses,
 
 	deptNumToCrsid,
 	checkCoursesForDeptNum,
 	checkCoursesFor
 }
 
-window.getCourses = {
-	getCourse: getCourse,
-	getCourses: getCourses,
+window.courses = {
+	getCourse, getCourses,
+	queryCourses,
 
-	deptNumToCrsid: deptNumToCrsid,
-	checkCoursesForDeptNum: checkCoursesForDeptNum,
-	checkCoursesFor: checkCoursesFor,
+	deptNumToCrsid,
+	checkCoursesForDeptNum,
+	checkCoursesFor,
 }

@@ -3,7 +3,7 @@
 import * as _ from 'lodash'
 
 import hasDepartment from '../app/helpers/hasDepartment'
-import {checkCoursesFor} from '../app/helpers/getCourses'
+import {checkCoursesFor} from '../app/helpers/courses'
 
 import {isRequiredCourse} from './commonMajorUtilities'
 

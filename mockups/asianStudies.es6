@@ -4,9 +4,8 @@ import * as _ from 'lodash'
 
 import hasDepartment from '../app/helpers/hasDepartment'
 import {partialNameOrTitle} from '../app/helpers/partialTitle'
-import {coursesAtLevel} from '../app/helpers/courseLevels'
-import {coursesAtOrAboveLevel} from '../app/helpers/courseLevels'
-import {checkCoursesFor} from '../app/helpers/getCourses'
+import {coursesAtLevel, coursesAtOrAboveLevel} from '../app/helpers/courseLevels'
+import {checkCoursesFor} from '../app/helpers/courses'
 
 import {isRequiredCourse} from './commonMajorUtilities'
 

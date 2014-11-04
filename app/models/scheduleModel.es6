@@ -6,7 +6,7 @@ import emitter from '../helpers/emitter'
 import uuid from '../helpers/uuid'
 import randomChar from '../helpers/randomChar'
 import {checkScheduleTimeConflicts} from '../helpers/time'
-import {getCourse} from '../helpers/getCourses'
+import {getCourse} from '../helpers/courses'
 
 let Schedule = (scheduleData) => {
 	let schedule = {
