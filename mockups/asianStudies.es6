@@ -32,7 +32,7 @@ function lowerLevelLanguageCourses(course) {
 	// rejected by the `reject` method.
 	return _.all([
 		hasDepartment(['ASIAN', 'CHINA', 'JAPAN'], course),
-		partialNameOrTitle(['Beginner', 'Intermediate'], course)),
+		partialNameOrTitle(['Beginner', 'Intermediate'], course),
 		(course.level < 300),
 	])
 }
