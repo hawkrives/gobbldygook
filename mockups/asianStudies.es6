@@ -30,16 +30,11 @@ function interdisciplinaryApproachesToAsia(courses) {
 function lowerLevelLanguageCourses(course) {
 	// If all of these match, it is a lower-level language course, and will be
 	// rejected by the `reject` method.
-	return (
-		(
-			hasDepartment('ASIAN', course) ||
-			hasDepartment('CHINA', course) ||
-			hasDepartment('JAPAN', course))
-		&&
-		(partialNameOrTitle('Beginner', course) || partialNameOrTitle('Intermediate', course))
-		&&
-		(course.level < 300)
-	)
+	return _.all([
+		hasDepartment(['ASIAN', 'CHINA', 'JAPAN'], course),
+		partialNameOrTitle(['Beginner', 'Intermediate'], course)),
+		(course.level < 300),
+	])
 }
 
 function electives(courses) {
@@ -122,7 +117,7 @@ function language(courses) {
 	var subsetOfCourses = _.chain(courses)
 		.filter(coursesAtOrAboveLevel(200))
 		.filter(function(course) {
-			return partialNameOrTitle('Intermediate', course) || partialNameOrTitle('Advanced', course)
+			return partialNameOrTitle(['Intermediate', 'Advanced'], course)
 		}).value()
 
 	var japaneseLanguage = _.chain(subsetOfCourses)
