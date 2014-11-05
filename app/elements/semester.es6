@@ -5,6 +5,7 @@ import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
 import add from '../helpers/add'
+import countCredits from '../helpers/countCredits'
 import semesterName from '../helpers/semesterName'
 import Course from './course'
 import {EmptyCourseSlot} from './course'
@@ -71,7 +72,8 @@ var Semester = React.createClass({
 
 		let courseList = null;
 		if (schedule) {
-			let courseObjects = _.map(schedule.courses,
+			let courses = schedule.courses;
+			let courseObjects = _.map(courses,
 				(course, i) => React.createElement(Course, {
 					key: course.clbid,
 					info: course,
@@ -80,11 +82,10 @@ var Semester = React.createClass({
 					index: i,
 					conflicts: schedule.conflicts,
 				}))
-			if ((schedule.semester === 1 || schedule.semester === 3) && courseObjects.length < 4) {
-				_.chain(_.range(courseObjects.length+1, 4+1)).each((i) => courseObjects.push(
-					React.createElement(EmptyCourseSlot, {key: 'empty'+i, index: i})
-				))
-			}
+			let maxCredits = (schedule.semester === 1 || schedule.semester === 3) ? 4 : 1;
+			_.each(_.range(Math.floor(countCredits(courses)), maxCredits), (i) => courseObjects.push(
+				React.createElement(EmptyCourseSlot, {key: 'empty'+i})
+			))
 			courseList = React.createElement('div', {className: 'course-list'}, courseObjects);
 		}
 
