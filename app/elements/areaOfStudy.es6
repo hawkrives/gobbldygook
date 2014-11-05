@@ -19,7 +19,10 @@ var areas = {
 	'm-phys': require('../../mockups/physics').default,
 
 	// Concentrations
+	'c-asian': require('../../mockups/asianStudiesConcentration').default,
 	'c-stat': require('../../mockups/statisticsConcentration').default,
+	'c-chin': require('../../mockups/chineseStudiesConcentration').default,
+	'c-japan': require('../../mockups/japaneseStudiesConcentration').default,
 
 	// Emphases
 }
