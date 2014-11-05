@@ -78,6 +78,7 @@ var SearchButton = React.createClass({
 					defaultValue: this.state.query,
 					onChange: this.searchForCourses,
 					className: 'search-box',
+					autoFocus: true,
 				}),
 				React.createElement('ul', {className: 'course-list'}, this.state.courseObjects)
 			) : null
