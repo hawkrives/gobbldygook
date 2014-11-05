@@ -24,9 +24,9 @@ let isRequiredPhysicsCourse = _.curry(isRequiredCourse(physDeptRequiredCourses))
 
 function analyticsCourses(courses) {
 	var requirements = [
-		{title: 'PHYS 130', result: checkCoursesFor(courses, {dept:'PHYS 130'})},
-		{title: 'PHYS 131', result: checkCoursesFor(courses, {dept:'PHYS 131'})},
-		{title: 'PHYS 232', result: checkCoursesFor(courses, {dept:'PHYS 232'})},
+		{title: 'PHYS 130', result: checkCoursesFor(courses, {deptnum:'PHYS 130'})},
+		{title: 'PHYS 131', result: checkCoursesFor(courses, {deptnum:'PHYS 131'})},
+		{title: 'PHYS 232', result: checkCoursesFor(courses, {deptnum:'PHYS 232'})},
 	]
 
 	return {
