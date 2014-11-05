@@ -4,6 +4,8 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
+import ContentEditable from './contentEditable'
+
 import add from '../helpers/add'
 import randomChar from '../helpers/randomChar'
 
@@ -12,10 +14,20 @@ let badGraduationMessage = 'You haven\'t planned everything out yet. Ask your ad
 
 var StudentSummary = React.createClass({
 	displayName: 'StudentSummary',
+
+	updateStudentName(ev) {
+		var newName = ev.target.value;
+		this.props.student.name = newName;
+	},
+
 	render() {
 		var student = this.props.student
 		var studies = student.studies
 		var name = student.name || randomChar()
+		var nameEl = React.createElement(ContentEditable, {
+			html: name,
+			onChange: this.updateStudentName
+		})
 		var has = _.mapValues(_.groupBy(studies, 'type'), _.size)
 
 		let objects = {
@@ -53,7 +65,7 @@ var StudentSummary = React.createClass({
 
 		return React.createElement('article', {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
 			React.createElement('div', {key: 'letter', id: 'student-letter'}, name[0]),
-			React.createElement('p', {key: 'hi'}, 'Hi, ', name, '!'),
+			React.createElement('p', {key: 'hi'}, 'Hi, ', nameEl, '!'),
 			React.createElement('p', {key: 'overview'},
 				'You are planning on ', _.size(objects.degree === 1) ? 'a ' : '',
 				phrases.degree, ' ', words.degree, ', with ', words.major, ' in ', phrases.major,
