@@ -71,11 +71,11 @@ let Student = (encodedStudent) => {
 	return student
 }
 
-function loadStudentFromDb(forceDemo) {
-	forceDemo = forceDemo || false
+function loadStudentFromDb(opts) {
+	opts = opts || {}
 
 	let rawStudent;
-	if (!forceDemo) {
+	if (!opts.fromDb) {
 		rawStudent = localStorage.getItem('3AE9E7EE-DA8F-4014-B987-8D88814BB848')
 		// again, ick. reassignment.
 		rawStudent = JSON.parse(rawStudent)
@@ -90,7 +90,7 @@ function loadStudentFromDb(forceDemo) {
 	return student
 }
 
-emitter.on('revertStudentToDemo', () => loadStudentFromDb(true))
+emitter.on('revertStudentToDemo', () => loadStudentFromDb({fromDb: true}))
 
 emitter.on('loadStudent', loadStudentFromDb)
 window.loadStudentFromDb = loadStudentFromDb
