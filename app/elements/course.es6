@@ -19,6 +19,10 @@ function findSemesterList() {
 var ExpandedCourse = React.createClass({
 	displayName: 'ExpandedCourse',
 
+	removeFromSemester() {
+		this.props.schedule.removeCourse(this.props.info.clbid)
+	},
+
 	render() {
 		let course = this.props.info;
 		let tools = [];
