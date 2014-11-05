@@ -1,7 +1,7 @@
 'use strict';
 
 import * as React from 'react'
-import queryCourses from '../helpers/courses'
+import {queryCourses} from '../helpers/courses'
 import Course from './course'
 import semesterName from '../helpers/semesterName'
 
