@@ -38,7 +38,6 @@ var SearchButton = React.createClass({
 		})
 	},
 	searchForCourses(event) {
-		var time = Date.now()
 		var searchQuery = event.target.value
 
 		clearTimeout(this.timeout)
