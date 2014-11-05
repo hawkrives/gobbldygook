@@ -19,7 +19,7 @@ var areas = {
 	'm-phys': require('../../mockups/physics').default,
 
 	// Concentrations
-	'c-stat': require('../../mockups/statistics').default,
+	'c-stat': require('../../mockups/statisticsConcentration').default,
 
 	// Emphases
 }
