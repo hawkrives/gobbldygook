@@ -69,10 +69,7 @@ var Course = React.createClass({
 
 		let titleEl = React.createElement('h1', {className: 'title'}, title)
 
-		let department = React.createElement('span', {className: 'department'}, course.dept)
-		let number = React.createElement('span', {className: 'number'}, course.num)
-		let section = React.createElement('span', {className: 'section'}, course.sect)
-		let identifier = React.createElement('span', {className: 'identifier'}, department, ' ', number, section)
+		let identifier = React.createElement('span', {className: 'identifier'}, course.dept, ' ', course.num, course.sect)
 		let professors = React.createElement('span', {className: 'professors'}, humanize.oxford(course.profs))
 
 		let details;
