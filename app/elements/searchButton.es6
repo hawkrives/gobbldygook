@@ -10,7 +10,7 @@ function toPrettyTerm(term) {
 	var year = term.substr(0, 4)
 	var sem = parseInt(term.substr(4, 1), 10)
 
-	return semesterName(sem) + ' ' + year
+	return semesterName(sem) + ' ' + year + '-' + (parseInt(year.substr(2, 2), 10) + 1)
 }
 
 var SearchButton = React.createClass({
