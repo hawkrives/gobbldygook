@@ -52,7 +52,7 @@ let Student = (encodedStudent) => {
 	}})
 
 	Object.defineProperty(student, 'encode', { value() {
-		return JSON.stringify(student)
+		return encodeURIComponent(JSON.stringify(student))
 	}})
 
 	Object.defineProperty(student, 'save', { value() {
