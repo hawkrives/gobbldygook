@@ -8,6 +8,118 @@ import {DragDropMixin} from 'react-dnd'
 import itemTypes from '../models/itemTypes'
 import semesterName from '../helpers/semesterName'
 
+function findSemesterList() {
+	return [
+		{id: 1, title: 'Fall 2012-13'},
+		{id: 2, title: 'Interim 2012-13'},
+		{id: 3, title: 'Spring 2012-13'},
+	];
+}
+
+var ExpandedCourse = React.createClass({
+	displayName: 'ExpandedCourse',
+
+	render() {
+		let course = this.props.info;
+		let tools = [];
+
+		///////
+
+		let titleText = course.type === 'Topic' ? course.name : course.title;
+		let title = React.createElement('h1', {className: 'title'}, titleText)
+
+		let identifier = React.createElement('span',
+			{className: 'identifier'},
+			course.dept, ' ', course.num, course.sect);
+
+		let professors = React.createElement('span',
+			{className: 'professors'},
+			humanize.oxford(course.profs));
+
+		let summary = React.createElement('p',
+			{className: 'summary'},
+			identifier, professors);
+
+		///////
+
+		let offerings = React.createElement('p',
+			{className: 'offerings'},
+			course.times)
+
+		let gereqs = React.createElement('ul',
+			{className: 'gereqs'},
+			_.map(course.gereqs, ge => React.createElement('li',
+				{key: ge}, ge)))
+
+		let description = React.createElement('p',
+			{className: 'description'},
+			course.desc)
+
+		let credits = React.createElement('span',
+			{className: 'credits'},
+			course.credits + ' ' + humanize.pluralize(course.credits, 'credit'))
+
+		let classInstanceOffered = React.createElement('span',
+			{className: 'instance'},
+			semesterName(course.sem) + ' ' + course.year)
+
+		let info = React.createElement('p',
+			{className: 'info'},
+			credits, classInstanceOffered)
+
+		let details = React.createElement('div',
+			{className: 'details'},
+			offerings, gereqs, description, info)
+
+		///////
+
+		let semesterList = React.createElement('select',
+			{className: 'semester-select'},
+			_.map(findSemesterList(), (s =>
+				React.createElement('option', {value: s.id, key: s.id}, s.title))))
+		tools.push(semesterList)
+
+		let deleteButton = React.createElement('button',
+			{className: 'remove-course', onClick: this.removeFromSemester},
+			'Remove Course');
+		tools.push(deleteButton)
+
+		let toolsEls = React.createElement('div',
+			{className: 'tools', onClick: function(ev) {ev.stopPropagation()}},
+			tools)
+
+		///////
+
+		return React.createElement('div', {className: 'info-rows'}, summary, title, details, toolsEls)
+	}
+})
+
+
+var CollapsedCourse = React.createClass({
+	displayName: 'CollapsedCourse',
+
+	render() {
+		let course = this.props.info;
+
+		let titleText = course.type === 'Topic' ? course.name : course.title;
+		let title = React.createElement('h1', {className: 'title'}, titleText)
+
+		let identifier = React.createElement('span',
+			{className: 'identifier'},
+			course.dept, ' ', course.num, course.sect);
+
+		let professors = React.createElement('span',
+			{className: 'professors'},
+			humanize.oxford(course.profs));
+
+		let summary = React.createElement('p',
+			{className: 'summary'},
+			identifier, professors);
+
+		return React.createElement('div', {className: 'info-rows'}, title, summary)
+	}
+})
+
 var Course = React.createClass({
 	displayName: 'Course',
 	mixins: [DragDropMixin],
@@ -36,24 +148,14 @@ var Course = React.createClass({
 
 	getInitialState() {
 		return {
-			showTools: false
+			isOpen: false
 		}
 	},
 
-	showTools() {
-		console.log('show tools')
+	toggle() {
+		console.log(this.state.isOpen ? 'collapse' : 'expand')
 		this.setState({
-			showTools: true
-		})
-		// FIXME: Fix this. It won't stay open long enough for someone to select something from the dropdown.
-		// TODO: Replace this with a real solution for hiding the tools *after an action*
-		setTimeout(this.hideTools, 1500)
-	},
-
-	hideTools() {
-		console.log('show tools')
-		this.setState({
-			showTools: false
+			isOpen: !this.state.isOpen
 		})
 	},
 
@@ -63,16 +165,14 @@ var Course = React.createClass({
 
 	findWarnings() {
 		let thisYear = new Date().getFullYear();
-		let course = this.props.info;
-
-		console.log(course.deptnum, 'courseYear', course.year, 'schedYear', this.props.schedule.year, 'thisYear', thisYear);
-
 		let warnings = [];
-		if (this.props.schedule && (course.year !== this.props.schedule.year) && this.props.schedule.year <= thisYear) {
-			warnings.push({msg: 'This course (from ' + course.year + ') is not offered in this year.'})
+
+		if (this.props.schedule && (this.props.info.year !== this.props.schedule.year) && this.props.schedule.year <= thisYear) {
+			warnings.push({msg: 'This course (from ' + this.props.info.year + ') is not offered in this year (' + this.props.schedule.year + ').'})
 		}
-		if (this.props.schedule && course.sem !== this.props.schedule.semester) {
-			warnings.push({msg: 'This course (from ' + semesterName(course.sem) + ') is not offered in this semester.', icon: 'ios7-calendar-outline'})
+
+		if (this.props.schedule && this.props.info.sem !== this.props.schedule.semester) {
+			warnings.push({msg: 'This course (from ' + semesterName(this.props.info.sem) + ') is not offered in this semester.', icon: 'ios7-calendar-outline'})
 		}
 
 		if (this.props.conflicts && !_.isUndefined(this.props.index)) {
@@ -84,7 +184,6 @@ var Course = React.createClass({
 			}
 		}
 
-		// console.log(warnings, course.title, course.year, this.props.schedule.year,course.semester, this.props.schedule.semester)
 		let warningEls = React.createElement('span',
 			{title: _.map(warnings, w => '- ' + w.msg + '\n')},
 			_.map(warnings, w => {
@@ -92,44 +191,29 @@ var Course = React.createClass({
 				return React.createElement('i', {className: 'ion-' + icon, key: icon})
 			}))
 
-		return warnings.length ? warningEls : null;
+		return React.createElement('div',
+			{className: 'warnings'},
+			warnings.length ? warningEls : null)
 	},
 
 	render() {
 		let course = this.props.info;
-		let title = course.type === 'Topic' ? course.name : course.title;
 
-		let titleEl = React.createElement('h1', {className: 'title'}, title)
-
-		let identifier = React.createElement('span', {className: 'identifier'}, course.dept, ' ', course.num, course.sect)
-		let professors = React.createElement('span', {className: 'professors'}, humanize.oxford(course.profs))
-
-		let details;
-		if (this.state.showTools) {
-			let tools = []
-			if (this.props.schedule) {
-				let semesterList = React.createElement('select', {className: 'semester-select'}, _.map(this.props.semesters, s => {
-					return React.createElement('option', {value: s.id, key: s.id}, s.year + '-' + s.semester)
-				}))
-				tools.push(semesterList)
-			}
-			let deleteButton = React.createElement('button', {className: 'remove-course', onClick: this.removeFromSemester}, 'Remove Course')
-			tools.push(deleteButton)
-			details = React.createElement('span', {className: 'details'}, React.createElement('span', null, tools))
-		} else {
-			details = React.createElement('span', {className: 'details'}, identifier, professors)
-		}
+		let courseInfo = this.state.isOpen ?
+			React.createElement(ExpandedCourse, _.extend({}, this.props)) :
+			React.createElement(CollapsedCourse, _.extend({}, this.props));
 
 		let warnings = this.findWarnings();
 
 		return React.createElement('article',
-			_.extend({
-				className: 'course',
-				onClick: this.showTools,
-			}, this.dragSourceFor(itemTypes.COURSE)),
+			_.extend(
+				{
+					className: 'course ' + (this.state.isOpen ? 'expanded' : 'collapsed'),
+					onClick: this.toggle
+				},
+				this.dragSourceFor(itemTypes.COURSE)),
 
-			React.createElement('div', {className: 'info-rows'}, titleEl, details),
-			React.createElement('div', {className: 'warnings'}, warnings)
+			courseInfo, warnings
 		);
 	}
 })

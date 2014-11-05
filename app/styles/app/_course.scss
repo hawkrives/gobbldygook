@@ -8,11 +8,7 @@
 	justify-content: space-between;
 	align-items: center;
 
-	&.empty {
-		opacity: 0.5;
-	}
-
-	.title, .details {
+	.title, .summary {
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
@@ -31,12 +27,11 @@
 		cursor: move;
 	}
 
-	.details {
-		display: block;
+	.summary, .details {
 		font-size: 0.75em;
 	}
 
-	.identifier {
+	.identifier, .credits {
 		&::after {
 			content: " · ";
 		}
@@ -46,22 +41,63 @@
 		flex: 1;
 	}
 
-	.info-button {
-		text-align: center;
-		opacity: 0;
-		width: 0px;
-		cursor: pointer;
-		transition: 0.25s;
+	p, ul {
+		margin: 0;
 	}
 
-	&:hover .info-button {
-		width: 24px;
-		opacity: 1;
-		&::after {
-			@include ionicon($ionicon-var-ios7-information-outline);
-		}
-		&:hover::after {
-			@include ionicon($ionicon-var-ios7-information);
+	.offerings > span {
+		display: block;
+	}
+
+	.gereqs {
+		padding: 0;
+		list-style: none;
+		li {
+			background-color: hsl(0, 0%, 90%);
+			border-radius: 3px;
+			display: inline-block;
+			padding: 0 0.25em;
+
+			& + li {
+				margin-left: 0.25em;
+			}
 		}
 	}
+
+	.tools {
+		border-top: 1px solid hsl(0, 0%, 90%);
+		margin-top: 0.25em;
+		padding-top: 0.25em;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+	}
+	.remove-course {
+		font-size: 0.85em;
+	}
+
+	.offerings, .gereqs, .description {
+		margin-bottom: 0.5em;
+	}
+}
+
+.course.expanded {
+	font-size: 1.25em;
+	width: calc(100% + 2em);
+	z-index: 100;
+	transform: translate(-1em, 0);
+	background-color: white;
+	box-shadow: 0 0 4px hsl(0, 0%, 50%);
+	border-radius: 5px;
+	padding: 0.25em 0.5em;
+	margin-bottom: 1em;
+	margin-top: 0.5em;
+
+	.title {
+		padding-top: 0.25ex;
+	}
+}
+
+.course.empty {
+	opacity: 0.5;
 }
