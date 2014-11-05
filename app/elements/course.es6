@@ -8,8 +8,6 @@ import {DragDropMixin} from 'react-dnd'
 import itemTypes from '../models/itemTypes'
 import semesterName from '../helpers/semesterName'
 
-let thisYear = new Date().getYear()
-
 var Course = React.createClass({
 	displayName: 'Course',
 	mixins: [DragDropMixin],
@@ -63,6 +61,40 @@ var Course = React.createClass({
 		this.props.schedule.removeCourse(this.props.info.clbid)
 	},
 
+	findWarnings() {
+		let thisYear = new Date().getFullYear();
+		let course = this.props.info;
+
+		console.log(course.deptnum, 'courseYear', course.year, 'schedYear', this.props.schedule.year, 'thisYear', thisYear);
+
+		let warnings = [];
+		if (this.props.schedule && (course.year !== this.props.schedule.year) && this.props.schedule.year <= thisYear) {
+			warnings.push({msg: 'This course (from ' + course.year + ') is not offered in this year.'})
+		}
+		if (this.props.schedule && course.sem !== this.props.schedule.semester) {
+			warnings.push({msg: 'This course (from ' + semesterName(course.sem) + ') is not offered in this semester.', icon: 'ios7-calendar-outline'})
+		}
+
+		if (this.props.conflicts && !_.isUndefined(this.props.index)) {
+			let i = this.props.index;
+			if (_.any(this.props.conflicts[i])) {
+				let conflictIndex = _.findIndex(this.props.conflicts[i], item => item === true)
+				conflictIndex = conflictIndex + 1; // because humans don't 0-index lists
+				warnings.push({msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.', icon: 'ios7-clock-outline'})
+			}
+		}
+
+		// console.log(warnings, course.title, course.year, this.props.schedule.year,course.semester, this.props.schedule.semester)
+		let warningEls = React.createElement('span',
+			{title: _.map(warnings, w => '- ' + w.msg + '\n')},
+			_.map(warnings, w => {
+				let icon = w.icon ? w.icon : 'alert-circled';
+				return React.createElement('i', {className: 'ion-' + icon, key: icon})
+			}))
+
+		return warnings.length ? warningEls : null;
+	},
+
 	render() {
 		let course = this.props.info;
 		let title = course.type === 'Topic' ? course.name : course.title;
@@ -88,31 +120,7 @@ var Course = React.createClass({
 			details = React.createElement('span', {className: 'details'}, identifier, professors)
 		}
 
-		let warnings = []
-		if (this.props.schedule && course.year !== this.props.schedule.year && this.props.schedule.year <= thisYear) {
-			warnings.push({msg: 'This course (from ' + course.year + ') is not offered in this year.'})
-		}
-		if (this.props.schedule && course.sem !== this.props.schedule.semester) {
-			warnings.push({msg: 'This course (from ' + semesterName(course.sem) + ') is not offered in this semester.', icon: 'ios7-calendar-outline'})
-		}
-		if (this.props.conflicts && !_.isUndefined(this.props.index)) {
-			let i = this.props.index;
-			if (_.any(this.props.conflicts[i])) {
-				let conflictIndex = _.findIndex(this.props.conflicts[i], item => item === true)
-				conflictIndex = conflictIndex + 1; // because humans don't 0-index lists
-				warnings.push({msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.', icon: 'ios7-clock-outline'})
-			}
-		}
-		let warningEls;
-		if (warnings.length) {
-			// console.log(warnings, course.title, course.year, this.props.schedule.year,course.semester, this.props.schedule.semester)
-			warningEls = React.createElement('span', {
-				title: _.map(warnings, w => '- ' + w.msg + '\n')},
-				_.map(warnings, w => {
-					let icon = w.icon ? w.icon : 'alert-circled';
-					return React.createElement('i', {className: 'ion-' + icon, key: icon})
-				}))
-		}
+		let warnings = this.findWarnings();
 
 		return React.createElement('article',
 			_.extend({
@@ -121,7 +129,7 @@ var Course = React.createClass({
 			}, this.dragSourceFor(itemTypes.COURSE)),
 
 			React.createElement('div', {className: 'info-rows'}, titleEl, details),
-			React.createElement('div', {className: 'warnings'}, warningEls)
+			React.createElement('div', {className: 'warnings'}, warnings)
 		);
 	}
 })
