@@ -12,10 +12,6 @@
 			"abbr": "B.A.", "title": "Bachelor of Arts"
 		},
 		{
-			"id": "d-bm", "type": "degree",
-			"abbr": "B.M.", "title": "Bachelor of Music"
-		},
-		{
 			"id": "m-csci", "type": "major",
 			"abbr": "CSCI", "title": "Computer Science"
 		},
@@ -36,7 +32,7 @@
 			"abbr": "JAPAN", "title": "Japan Studies"
 		},
 		{
-			"id": "c-math", "type": "concentration",
+			"id": "m-math", "type": "major",
 			"abbr": "MATH", "title": "Mathematics"
 		},
 		{
