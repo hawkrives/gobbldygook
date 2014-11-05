@@ -30,6 +30,10 @@
 		{
 			"id": "m-math", "type": "major",
 			"abbr": "MATH", "title": "Mathematics"
+		},
+		{
+			"id": "c-stat", "type": "concentration",
+			"abbr": "STAT", "title": "Statistics"
 		}
 	],
 
