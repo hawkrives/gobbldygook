@@ -83,10 +83,12 @@ var ExpandedCourse = React.createClass({
 				React.createElement('option', {value: s.id, key: s.id}, s.title))))
 		tools.push(semesterList)
 
-		let deleteButton = React.createElement('button',
-			{className: 'remove-course', onClick: this.removeFromSemester},
-			'Remove Course');
-		tools.push(deleteButton)
+		let deleteButton = this.props.schedule ?
+			React.createElement('button',
+				{className: 'remove-course', onClick: this.removeFromSemester},
+				'Remove Course') :
+			null;
+		tools.push(deleteButton);
 
 		let toolsEls = React.createElement('div',
 			{className: 'tools', onClick: function(ev) {ev.stopPropagation()}},
