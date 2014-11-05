@@ -247,7 +247,7 @@ var Course = React.createClass({
 var EmptyCourseSlot = React.createClass({
 	displayName: 'EmptyCourseSlot',
 	render() {
-		let title = 'Empty Slot ' + this.props.index
+		let title = 'Empty Slot'
 
 		let titleEl = React.createElement('h1', {className: 'title'}, title)
 		let details = React.createElement('span', {className: 'details'}, 'no details')
