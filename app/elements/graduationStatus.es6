@@ -20,7 +20,7 @@ var GraduationStatus = React.createClass({
 		emitter.emit('loadStudent')
 	},
 	parse() {
-		console.log('load student')
+		console.log('parse student')
 	},
 	demo() {
 		console.log('load demo data')
