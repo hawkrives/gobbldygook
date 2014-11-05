@@ -45,6 +45,8 @@ let Student = (encodedStudent) => {
 	student.overrides = encodedStudent.overrides || student.overrides
 	student.fabrications = encodedStudent.fabrications || student.fabrications
 
+	Object.observe(student, (changes) => emitter.emit('change'))
+
 	Object.defineProperty(student, 'courses', { get() {
 		return student.schedules.activeCourses
 	}})
