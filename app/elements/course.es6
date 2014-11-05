@@ -30,7 +30,11 @@ var ExpandedCourse = React.createClass({
 		///////
 
 		let titleText = course.type === 'Topic' ? course.name : course.title;
-		let title = React.createElement('h1', {className: 'title'}, titleText)
+		let courseType = React.createElement('span', {className: 'type'}, this.props.info.type)
+		let title = React.createElement('h1',
+			{className: 'title'},
+			this.props.info.type === 'Research' ? null : courseType,
+			titleText)
 
 		let identifier = React.createElement('span',
 			{className: 'identifier'},
@@ -108,7 +112,11 @@ var CollapsedCourse = React.createClass({
 		let course = this.props.info;
 
 		let titleText = course.type === 'Topic' ? course.name : course.title;
-		let title = React.createElement('h1', {className: 'title'}, titleText)
+		let courseType = React.createElement('span', {className: 'type'}, this.props.info.type)
+		let title = React.createElement('h1',
+			{className: 'title'},
+			this.props.info.type === 'Research' ? null : courseType,
+			titleText)
 
 		let identifier = React.createElement('span',
 			{className: 'identifier'},
