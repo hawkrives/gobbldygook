@@ -16,6 +16,28 @@ function findSemesterList() {
 	];
 }
 
+
+let CourseTitle = React.createClass({
+	displayName: 'CourseTitle',
+	render() {
+		let course = this.props.info;
+
+		///////
+		let titleText = course.title;
+		if (course.type === 'Topic')
+			titleText = course.name.substr(5, course.name.length - 1);
+
+		let courseType = React.createElement('span', {className: 'type'}, this.props.info.type)
+		let title = React.createElement('h1',
+			{className: 'title'},
+			this.props.info.type === 'Research' ? null : courseType,
+			titleText)
+
+		return title;
+	}
+})
+
+
 var ExpandedCourse = React.createClass({
 	displayName: 'ExpandedCourse',
 
@@ -29,12 +51,7 @@ var ExpandedCourse = React.createClass({
 
 		///////
 
-		let titleText = course.type === 'Topic' ? course.name : course.title;
-		let courseType = React.createElement('span', {className: 'type'}, this.props.info.type)
-		let title = React.createElement('h1',
-			{className: 'title'},
-			this.props.info.type === 'Research' ? null : courseType,
-			titleText)
+		let title = React.createElement(CourseTitle, _.extend({}, this.props));
 
 		let identifier = React.createElement('span',
 			{className: 'identifier'},
@@ -111,12 +128,7 @@ var CollapsedCourse = React.createClass({
 	render() {
 		let course = this.props.info;
 
-		let titleText = course.type === 'Topic' ? course.name : course.title;
-		let courseType = React.createElement('span', {className: 'type'}, this.props.info.type)
-		let title = React.createElement('h1',
-			{className: 'title'},
-			this.props.info.type === 'Research' ? null : courseType,
-			titleText)
+		let title = React.createElement(CourseTitle, _.extend({}, this.props));
 
 		let identifier = React.createElement('span',
 			{className: 'identifier'},
