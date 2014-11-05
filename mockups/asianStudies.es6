@@ -15,7 +15,7 @@ const asianDeptRequiredCourses = [
 	{deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
 ]
 
-var isRequiredAsianStudiesCourse = _.curry(isRequiredCourse(asianDeptRequiredCourses))
+var isRequiredAsianStudiesCourse = isRequiredCourse(asianDeptRequiredCourses)
 
 function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
