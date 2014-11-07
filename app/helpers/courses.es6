@@ -10,7 +10,7 @@ function getCourse(clbid) {
 		console.warn('course retrieval failed for: ' + clbid)
 	}
 
-	return course
+	return _.cloneDeep(course)
 }
 
 function getCourses(clbids) {
