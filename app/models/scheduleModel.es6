@@ -17,7 +17,7 @@ let Schedule = (scheduleData) => {
 	}
 
 	Object.defineProperty(schedule, 'courses', { get() {
-		return _.map(schedule.clbids, id => _.cloneDeep(getCourse(id)))
+		return _.map(this.clbids, (id) => getCourse(id))
 	}})
 
 	Object.defineProperty(schedule, 'move', { value(year, semester) {
@@ -55,7 +55,7 @@ let Schedule = (scheduleData) => {
 		// Checks to see if the schedule is valid
 
 		// Step one: do any times conflict?
-		var courses = schedule.courses
+		var courses = this.courses
 		var conflicts = checkScheduleTimeConflicts(courses)
 
 		var hasConflict = _.chain(conflicts)
@@ -74,14 +74,14 @@ let Schedule = (scheduleData) => {
 	}})
 
 	Object.defineProperty(schedule, 'isValid', { get() {
-		return !schedule.validate().hasConflict
+		return !this.validate().hasConflict
 	}})
 	Object.defineProperty(schedule, 'conflicts', { get() {
-		return schedule.validate().conflicts
+		return this.validate().conflicts
 	}})
 
 	Object.defineProperty(schedule, 'status', { get() {
-		return schedule.validate()
+		return this.validate()
 	}})
 
 	schedule.id = scheduleData.id || schedule.id

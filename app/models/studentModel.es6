@@ -49,17 +49,17 @@ let Student = (encodedStudent) => {
 	Object.observe(student, (changes) => emitter.emit('change'))
 
 	Object.defineProperty(student, 'courses', { get() {
-		return student.schedules.activeCourses
+		return this.schedules.activeCourses
 	}})
 
 	Object.defineProperty(student, 'encode', { value() {
-		return encodeURIComponent(JSON.stringify(student))
+		return encodeURIComponent(JSON.stringify(this))
 	}})
 
 	Object.defineProperty(student, 'save', { value() {
-		console.log('saving student', student.name)
-		localStorage.setItem(student.id, JSON.stringify(student))
-		// return db.store('students').put(student)
+		console.log('saving student', this.name)
+		localStorage.setItem(this.id, JSON.stringify(this))
+		// return db.store('students').put(this)
 	}})
 
 	emitter.on('saveStudent', student.save)
