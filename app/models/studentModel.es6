@@ -33,6 +33,7 @@ let Student = (encodedStudent) => {
 
 	student.id = encodedStudent.id || student.id
 	student.name = encodedStudent.name || student.name
+	student.active = encodedStudent.active || student.active
 
 	if (encodedStudent.credits)
 		student.credits.needed = encodedStudent.credits.needed || student.credits.needed
