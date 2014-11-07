@@ -4,6 +4,7 @@ import * as _ from 'lodash'
 
 import {hasDeptNumBetween} from '../app/helpers/deptNum'
 import countCredits from '../app/helpers/countCredits'
+import hasDepartment from '../app/helpers/hasDepartment'
 import {onlyCoursesAtOrAboveLevel} from '../app/helpers/courseLevels'
 import * as utilities from './commonGraduationUtilities'
 
@@ -40,8 +41,14 @@ function ensureLimitedOffCampusCoursesDuringFinalYear(courses, fabrications) {
 	// Used by the residency checker to ensure that only the allowed amount of
 	// off-campus courses are taken during the final year
 
+	// TOOD: Music lessons don't count.
+
 	var finalYear = _.max(fabrications, 'year')
-	var finalYearFabrications = _.filter(fabrications, {year: finalYear})
+	var finalYearFabrications = _.chain(fabrications)
+		.filter({year: finalYear})
+		.reject(hasDepartment('MUSPF')) // this might do it
+		.value()
+
 	var finalYearCourses = _.filter(courses, {year: finalYear})
 
 	return (
