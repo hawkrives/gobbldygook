@@ -9,8 +9,7 @@ import findMissingNumberBinarySearch from './findMissingNumberBinarySearch'
 // will return 4. Etc.
 
 function findFirstAvailableSemester(schedules, forYear) {
-	var semesters =
-		_.chain(schedules)
+	var semesters = _(schedules)
 			.filter({year: forYear})
 			.sortBy('semester')
 			.pluck('semester')

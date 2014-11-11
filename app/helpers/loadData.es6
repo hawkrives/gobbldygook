@@ -166,7 +166,7 @@ function updateDatabase(itemType, infoFromServer) {
 function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
-	var files = _.chain(infoFile.info)
+	var files = _(infoFile.info)
 		.map((files) =>
 			_.map(files, (file) =>
 				updateDatabase(infoFile.type, file)))

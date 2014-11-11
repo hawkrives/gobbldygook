@@ -13,8 +13,7 @@ function findFirstAvailableYear(schedules, matriculation) {
 		return new Date().getFullYear()
 	}
 
-	var years =
-		_.chain(schedules)
+	var years = _(schedules)
 			.sortBy('year')
 			.pluck('year')
 			.uniq()

@@ -58,10 +58,9 @@ let Schedule = (scheduleData) => {
 		var courses = this.courses
 		var conflicts = checkScheduleTimeConflicts(courses)
 
-		var hasConflict = _.chain(conflicts)
+		var hasConflict = _(conflicts)
 			.flatten()      // flatten the nested arrays
 			.any()          // and see if any of the resulting values are true
-			.value()
 
 		if (hasConflict.length) {
 			console.log('schedule conflicts', conflicts, hasConflict)

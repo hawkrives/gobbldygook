@@ -4,7 +4,7 @@ import * as _ from 'lodash'
 import add from './add'
 
 var countCredits = function(courses) {
-	return _.chain(courses).pluck('credits').reduce(add).value()
+	return _(courses).pluck('credits').reduce(add)
 }
 
 export default countCredits
