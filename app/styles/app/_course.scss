@@ -96,12 +96,7 @@
 }
 
 .course.expanded {
-	font-size: 1.25em;
-	width: calc(100% + 2em);
-	z-index: 100;
-	transform: translate(-1em, 0);
-	background-color: white;
-	box-shadow: 0 0 4px hsl(0, 0%, 50%);
+	background-color: hsl(0, 0%, 98%);
 	border-radius: 5px;
 	padding: 0.25em 0.5em;
 	margin-bottom: 1em;
@@ -109,9 +104,17 @@
 
 	.title {
 		padding-top: 0.25ex;
+		overflow: visible;
+		white-space: normal;
+		line-height: 1.2;
 	}
 }
 
 .course.empty {
 	opacity: 0.5;
+	user-select: none;
+
+	&, .title {
+		cursor: default;
+	}
 }
