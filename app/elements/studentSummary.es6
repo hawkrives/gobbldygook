@@ -61,15 +61,17 @@ var StudentSummary = React.createClass({
 			emphasis: React.createElement('span', {className: 'area-of-study-list', key:'emphasis'}, titles.emphasis),
 		}
 
-		var emphasisEmphasizer = has.emphasis > 0 && has.emphasis < 2 ? 'an ' : ''
+		var majorEmphasizer = has.major === 1 ? 'a ' : ''
+		var concentrationEmphasizer = has.concentration === 1 ? 'a ' : ''
+		var emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
 
 		return React.createElement('article', {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
 			React.createElement('div', {key: 'letter', id: 'student-letter'}, name[0]),
 			React.createElement('p', {key: 'hi'}, 'Hi, ', nameEl, '!'),
 			React.createElement('p', {key: 'overview'},
 				'You are planning on ', _.size(objects.degree === 1) ? 'a ' : '',
-				phrases.degree, ' ', words.degree, ', with ', words.major, ' in ', phrases.major,
-				has.concentration > 0 ? [', and ', words.concentration, ' in ', phrases.concentration] : '',
+				phrases.degree, ' ', words.degree, ', with ', majorEmphasizer, words.major, ' in ', phrases.major,
+				has.concentration > 0 ? [', and ' + concentrationEmphasizer + words.concentration + ' in ', phrases.concentration] : '',
 				has.emphasis > 0 ? [', not to mention ', emphasisEmphasizer, words.emphasis, ' in ', phrases.emphasis] : '',
 				'.'),
 			React.createElement('p', {key: 'message', className: 'graduation-message'},
