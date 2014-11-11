@@ -69,45 +69,43 @@ function checkCoursesFor(courses, filter) {
 
 function queryCourses(queryString) {
 	let query = buildQueryFromString(queryString)
+	console.log('query:', query)
 	var results = _(courseCache)
 		.filter(course => {
-			let matches = _.map(queryString, (val, key) => {
-				let matches = [];
-
+			let matches = _.map(query, (values, key) => {
 				let AND = false;
 				let OR = false;
 				let substring = false;
 
-				// val is either:
+				// values is either:
 				// - a 1-long array
 				// - an $AND query
 				// - an $OR query
 				// - one of the above, but substring
 
-				if (val.length === 1) {
-					matches.push(course[key] === val[0])
-				} else if (val[0] === '$OR') {
+				if (values[0] === '$OR') {
 					OR = true
-				} else if (val[0] === '$AND') {
+				} else if (values[0] === '$AND') {
 					AND = true
+				}
+
+				if (AND || OR) {
+					values = _.tail(values);
 				}
 
 				if (_.contains(['title', 'name', 'description', 'notes'], key)) {
 					substring = true;
 				}
 
-				let values = _.tail(val);
-
-				matches = matches.concat(_.map(values, (v) => {
+				let internalMatches = _.map(values, (v) => {
 					// dept, gereqs, etc.
-					if (_.isArray(course[key])) {
+					if (_.isArray(course[key]) || substring) {
 						return _.contains(course[key], v)
 					}
 					return course[key] === v;
-				}))
+				})
 
-				if (OR)  return _.some(matches)
-				return _.all(matches)
+				return OR ? _.some(internalMatches) : _.all(internalMatches)
 			})
 			return _.all(matches)
 		})
