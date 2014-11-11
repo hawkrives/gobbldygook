@@ -247,7 +247,7 @@ var EmptyCourseSlot = React.createClass({
 		let title = 'Empty Slot'
 
 		let titleEl = React.createElement('h1', {className: 'title'}, title)
-		let details = React.createElement('span', {className: 'details'}, 'no details')
+		let details = React.createElement('p', {className: 'summary'}, 'no details')
 
 		return React.createElement('article', {className: 'course empty'},
 			React.createElement('div', {className: 'info-rows'}, titleEl, details));
