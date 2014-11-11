@@ -13,7 +13,7 @@ import {EmptyCourseSlot} from './course'
 import {DragDropMixin} from 'react-dnd'
 import itemTypes from '../models/itemTypes'
 
-var isCurrentTermSchedule = _.curry(function(year, semester, schedule) {
+var isCurrentTermSchedule = _.curry((year, semester, schedule) => {
 	return (schedule.year === year && schedule.semester === semester)
 })
 

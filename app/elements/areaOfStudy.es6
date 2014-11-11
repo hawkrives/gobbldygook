@@ -98,9 +98,9 @@ var AreaOfStudy = React.createClass({
 	render() {
 		// console.log('area-of-study render')
 
-		var requirementSets = _.map(this.state.result.details, function(reqset) {
+		var requirementSets = _.map(this.state.result.details, (reqset) => {
 			return React.createElement(RequirementSet, _.merge({key: reqset.title}, reqset));
-		}, this);
+		});
 
 		var results = findResults(this.state.result.details)
 		// console.log(this.props.area.title, results, this.state.result.details)

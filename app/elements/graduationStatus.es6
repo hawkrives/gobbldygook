@@ -35,17 +35,17 @@ var GraduationStatus = React.createClass({
 		// console.info('graduation-status render', this.props.student)
 
 		// Get areas of study
-		var areasOfStudy = _.mapValues(this.props.student.studies.byType, function(areas) {
-			return _.map(areas, function(area) {
+		var areasOfStudy = _.mapValues(this.props.student.studies.byType, (areas) => {
+			return _.map(areas, (area) => {
 				return React.createElement(AreaOfStudy, {
 					key: area.id,
 					student: this.props.student,
 					area: area
 				})
-			}, this)
-		}, this)
+			})
+		})
 
-		var areaOfStudySections = _.map(_.keys(areasOfStudy), function(areaType) {
+		var areaOfStudySections = _.map(_.keys(areasOfStudy), (areaType) => {
 			var pluralType = humanize.pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 			return React.createElement('section', {id: pluralType, key: areaType},
 				React.createElement('header', {className: 'area-type-heading'},

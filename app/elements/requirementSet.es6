@@ -26,7 +26,7 @@ var SomeArrayRequirement = React.createClass({
 					this.props.details.needs) : null,
 			React.createElement('ul',
 				{className: 'requirement-detail-list'},
-				_.map(this.props.details.from, function(req) {
+				_.map(this.props.details.from, (req) => {
 					return React.createElement('li', {
 						key: req.title, title: req.title,
 						className: req.result ? 'completed' : 'nope'},
@@ -45,7 +45,7 @@ var BooleanArrayRequirement = React.createClass({
 			{className: 'requirement-result requirement-result-boolean-array'},
 			React.createElement('ul',
 				{className: 'requirement-detail-list'},
-				_.map(this.props.details, function(req) {
+				_.map(this.props.details, (req) => {
 					return React.createElement('li', {
 						key: req.title, title: req.title + ': ' + (req.result ? 'Completed.' : 'Incomplete!'),
 						className: req.result ? 'completed' : 'incomplete'},
@@ -67,7 +67,7 @@ var NumberObjectRequirement = React.createClass({
 				this.props.details.has, ' of ', this.props.details.needs
 			),
 			React.createElement('ul', {className: 'requirement-detail-list'},
-				_.map(this.props.details.matches, function(match) {
+				_.map(this.props.details.matches, (match) => {
 					return React.createElement('li', {key: match.clbid}, match.deptnum)
 				})
 			)
@@ -84,7 +84,7 @@ var RequirementSet = React.createClass({
 		var type = this.props.type
 
 		if (type === 'array/requirementSet') {
-			details = _.map(this.props.details, function(requirement, index) {
+			details = _.map(this.props.details, (requirement, index) => {
 				return React.createElement(RequirementSet, _.merge({key: index}, requirement))
 			})
 		}

@@ -9,7 +9,7 @@ import Semester from './semester'
 import findFirstAvailableSemester from '../helpers/findFirstAvailableSemester'
 import calculateNextScheduleId from '../helpers/calculateNextScheduleId'
 
-var isCurrentYearSchedule = _.curry(function(year, schedule) {
+var isCurrentYearSchedule = _.curry((year, schedule) => {
 	return (schedule.year === year)
 })
 
