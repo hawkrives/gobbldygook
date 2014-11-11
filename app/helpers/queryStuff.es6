@@ -113,8 +113,14 @@ var zipToObjectWithArrays = (keys, vals) => {
 	}, {});
 }
 
-function process(queryString) {
+function buildQueryFromString(queryString) {
 	var rex = /(\b\w*?\b):/g
+
+	// The {index} object is there to emulate the one property I expect from a RegExp.
+	// If the regex fails, we grab the string through the end and build the object from what we assume to be the title.
+	let rexTested = rex.exec(queryString) || {index: queryString.length}
+	let stringThing = queryString.substr(0, rexTested.index)
+	queryString = queryString.substring(rexTested.index)
 
 	// Split apart the string into an array
 	var matches = queryString.split(rex)
@@ -125,9 +131,15 @@ function process(queryString) {
 		.filter(notEmptyString)
 		.value()
 
+
 	// Grab the keys and values from the lists
-	var values = _.filter(cleaned, oddIndex)
 	var keys = _.filter(cleaned, evenIndex)
+	var values = _.filter(cleaned, oddIndex)
+
+	if (stringThing) {
+		keys.push('title')
+		values.push(stringThing.trim())
+	}
 
 	// Process the keys, to clean them up somewhat
 	keys = _.map(keys, (key) => {
@@ -183,15 +195,28 @@ function process(queryString) {
 	return grouped
 }
 
-var s1 = 'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
 
-var s2 = 'dept: ASIAN  Dept: Religion  title: "Japan*"  LEVEL: 200  year: 2014  semester: $OR  semester: 3  semester: 1'
+function test() {
+	var s1 = 'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
 
-var s3 = 'department: American Conversations  name: Independence  year: 2014  time: Tuesdays after 12'
+	var s2 = 'dept: ASIAN  Dept: Religion  title: "Japan*"  LEVEL: 200  year: 2014  semester: $OR  semester: 3  semester: 1'
 
-var s4 = 'ges: $AND  geneds: history of western culture gened: HBS  semester: Spring  year: 2014'
+	var s3 = 'department: American Conversations  name: Independence  year: 2014  time: Tuesdays after 12'
 
-console.log(process(s1))
-console.log(process(s2))
-console.log(process(s3))
-console.log(process(s4))
+	var s4 = 'ges: $AND  geneds: history of western culture gened: HBS  semester: Spring  year: 2014'
+
+	var s5 = 'History of Asia'
+
+
+	// console.log(buildQueryFromString(s1))
+	// console.log(buildQueryFromString(s2))
+	// console.log(buildQueryFromString(s3))
+	console.log(buildQueryFromString(s4))
+	console.log(buildQueryFromString(s5))
+}
+
+test()
+
+// window.buildQueryFromString = buildQueryFromString;
+
+export default buildQueryFromString
