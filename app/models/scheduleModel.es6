@@ -21,33 +21,33 @@ let Schedule = (scheduleData) => {
 	}})
 
 	Object.defineProperty(schedule, 'move', { value(year, semester) {
-		if (year)      schedule.year = year
-		if (semester)  schedule.semester = semester
+		if (year)      this.year = year
+		if (semester)  this.semester = semester
 		emitter.emit('change')
 	}})
 	Object.defineProperty(schedule, 'reorder', { value(newIndex) {
-		schedule.index = newIndex
+		this.index = newIndex
 		emitter.emit('change')
 	}})
 	Object.defineProperty(schedule, 'rename', { value(newTitle) {
-		schedule.title = newTitle
+		this.title = newTitle
 		emitter.emit('change')
 	}})
 
 	Object.defineProperty(schedule, 'reorderCourse', { value(clbid, newIndex) {
-		let oldIndex = _.findIndex(schedule.clbids, (id) => id === clbid)
-		schedule.clbids.splice(oldIndex, 1)
-		schedule.clbids.splice(newIndex, 0, clbid)
+		let oldIndex = _.findIndex(this.clbids, (id) => id === clbid)
+		this.clbids.splice(oldIndex, 1)
+		this.clbids.splice(newIndex, 0, clbid)
 		emitter.emit('change')
 	}})
 	Object.defineProperty(schedule, 'addCourse', { value(clbid, index) {
-		index = index || schedule.clbids.length - 1
-		schedule.clbids.splice(index, 0, clbid)
+		index = index || this.clbids.length - 1
+		this.clbids.splice(index, 0, clbid)
 		emitter.emit('change')
 	}})
 	Object.defineProperty(schedule, 'removeCourse', { value(clbid) {
-		let index = _.findIndex(schedule.clbids, (id) => id === clbid)
-		schedule.clbids.splice(index, 1)
+		let index = _.findIndex(this.clbids, (id) => id === clbid)
+		this.clbids.splice(index, 1)
 		emitter.emit('change')
 	}})
 
