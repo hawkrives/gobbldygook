@@ -11,14 +11,6 @@ import StudentSummary from './studentSummary'
 var GraduationStatus = React.createClass({
 	displayName: 'GraduationStatus',
 
-	save() {
-		console.log('save student')
-		emitter.emit('saveStudent')
-	},
-	load() {
-		console.log('load student')
-		emitter.emit('loadStudent')
-	},
 	parse() {
 		console.log('parse student')
 	},
@@ -60,9 +52,7 @@ var GraduationStatus = React.createClass({
 		})
 
 		var studentButtons = React.createElement('menu', {className: 'student-buttons'},
-			React.createElement('button', {className: 'load-student', onClick: this.load}, 'Load'),
 			// React.createElement('button', {className: 'demo-student', onClick: this.parse}, 'Parse'),
-			React.createElement('button', {className: 'save-student', onClick: this.save}, 'Save'),
 			React.createElement('button', {className: 'demo-student', onClick: this.demo}, 'Demo'),
 			React.createElement('button', {className: 'download-student'},
 				React.createElement('a', {href: this.download(), download: this.props.student.name + '.gb-student.json'}, 'Download')))
