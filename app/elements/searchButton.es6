@@ -37,19 +37,18 @@ var SearchButton = React.createClass({
 			open: false,
 		})
 	},
-	searchForCourses(event) {
-		var searchQuery = event.target.value
-
-		clearTimeout(this.timeout)
-		this.timeout = setTimeout(() => {
-			this.query(searchQuery)
-		}, 400)
+	onSubmit: function() {
+		this.query(this.state.query)
+	},
+	onChange: function(evt) {
+		this.setState({query: evt.target.value});
+	},
+	onKeyDown: function(evt) {
+		if (evt.keyCode == 13) {
+			return this.onSubmit();
+		}
 	},
 	query(searchQuery) {
-		if (searchQuery.length < 3) {
-			return;
-		}
-
 		var startQueryTime = performance.now()
 		var results = queryCourses(searchQuery);
 		var endQueryTime = performance.now()
@@ -65,7 +64,6 @@ var SearchButton = React.createClass({
 		console.info('query object creation took an additional ' + (endTime - startTime) + 'ms.')
 
 		this.setState({
-			query: searchQuery,
 			courseObjects: courseObjects.reverse(),
 		})
 	},
@@ -80,7 +78,8 @@ var SearchButton = React.createClass({
 					type: 'search',
 					placeholder: 'Search Course Titles',
 					defaultValue: this.state.query,
-					onChange: this.searchForCourses,
+					onChange: this.onChange,
+					onKeyDown: this.onKeyDown,
 					className: 'search-box',
 					autoFocus: true,
 				}),
