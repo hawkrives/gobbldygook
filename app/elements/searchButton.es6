@@ -51,24 +51,23 @@ var SearchButton = React.createClass({
 		}
 
 		var startQueryTime = performance.now()
-
 		var results = queryCourses(searchQuery);
+		var endQueryTime = performance.now()
+		console.info('query took ' + (endQueryTime - startQueryTime) + 'ms.')
+
+		var startTime = performance.now()
 		let courseObjects = _.map(results, (grouping, key) => {
-			return React.createElement('li', {className: 'course-group'}, toPrettyTerm(key),
-				React.createElement('ul', null,
-					_.map(grouping, (course) => {
-						return React.createElement('li', {key: course.clbid}, Course({info: course}))
-					})))
-		})
+			return React.createElement('li', {key: key, className: 'course-group'}, toPrettyTerm(key),
+ 				React.createElement('ul', null,
+					_.map(grouping, (course) => React.createElement('li', {key: course.clbid}, Course({info: course})))))})
+
+		var endTime = performance.now()
+		console.info('query object creation took an additional ' + (endTime - startTime) + 'ms.')
 
 		this.setState({
 			query: searchQuery,
 			courseObjects: courseObjects.reverse(),
 		})
-
-		var endTime = performance.now()
-
-		console.info('query object creation took an additional ' + (endTime - startTime) + 'ms.')
 	},
 	render() {
 		return React.createElement('div', null,
