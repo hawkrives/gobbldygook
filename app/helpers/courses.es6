@@ -97,12 +97,12 @@ function queryCourses(queryString) {
 					substring = true;
 				}
 
-				let internalMatches = _.map(values, (v) => {
+				let internalMatches = _.map(values, (val) => {
 					// dept, gereqs, etc.
 					if (_.isArray(course[key]) || substring) {
-						return _.contains(course[key], v)
+						return _.contains(course[key], val)
 					}
-					return course[key] === v;
+					return course[key] === val;
 				})
 
 				return OR ? _.some(internalMatches) : _.all(internalMatches)
