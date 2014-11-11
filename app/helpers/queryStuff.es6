@@ -50,13 +50,14 @@ var keyword_mappings = {
 	'departments': 'depts',
 	'department': 'depts',
 	'dept': 'depts',
-	'sem': 'semester',
-	'num': 'number',
+	'semester': 'sem',
+	'number': 'num',
 	'name': 'title',
-	'gereq': 'geneds',
-	'gereqs': 'geneds',
-	'ges': 'geneds',
-	'gened': 'geneds'
+	'ge': 'gereqs',
+	'gereq': 'gereqs',
+	'ges': 'gereqs',
+	'gened': 'gereqs',
+	'geneds': 'gereqs',
 }
 
 var gereq_mapping = {
@@ -163,12 +164,16 @@ function buildQueryFromString(queryString) {
 				val = department_mapping[val] || val.toUpperCase();
 			}
 
-			else if (key === 'geneds') {
+			else if (key === 'gereqs') {
 				val = val.toLowerCase()
 				val = gereq_mapping[val] || val.toUpperCase()
 			}
 
-			else if (key === 'semester') {
+			else if (key === 'deptnum') {
+				val = val.toUpperCase()
+			}
+
+			else if (key === 'sem') {
 				val = val.toLowerCase()
 				val = semesters[val] || parseInt(val, 10);
 			}
@@ -179,7 +184,7 @@ function buildQueryFromString(queryString) {
 				val = parseInt(val, 10)
 			else if (key === 'level')
 				val = parseInt(val, 10)
-			else if (key === 'number')
+			else if (key === 'num')
 				val = parseInt(val, 10)
 
 			return val;
