@@ -186,10 +186,6 @@ var Course = React.createClass({
 		})
 	},
 
-	removeFromSemester() {
-		this.props.schedule.removeCourse(this.props.info.clbid)
-	},
-
 	findWarnings() {
 		let thisYear = new Date().getFullYear();
 		let warnings = [];
