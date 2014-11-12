@@ -100,7 +100,7 @@ function queryCourses(queryString) {
 				let internalMatches = _.map(values, (val) => {
 					// dept, gereqs, etc.
 					if (_.isArray(course[key]) || substring) {
-						return _.contains(course[key], val)
+						return _.contains(course[key].toLowerCase(), val.toLowerCase())
 					}
 					return course[key] === val;
 				})
