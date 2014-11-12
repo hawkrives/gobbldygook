@@ -171,6 +171,7 @@
     "react-dnd": "^0.5.0",
     "react-layers": "^0.3.1",
     "react-router": "^0.10.2",
+    "require-dir": "^0.1.0",
     "run-sequence": "^1.0.1",
     "treo": "^0.3.0",
     "vinyl-source-stream": "^1.0.0",
