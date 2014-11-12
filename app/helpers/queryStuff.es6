@@ -182,7 +182,7 @@ function buildQueryFromString(queryString) {
 				val = semesters[val] || parseInt(val, 10);
 			}
 
-			else if (_.contains(['year', 'term', 'level', 'num'], val)) {
+			else if (_.contains(['year', 'term', 'level', 'num'], key)) {
 				val = parseInt(val, 10)
 			}
 
