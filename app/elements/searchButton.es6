@@ -1,6 +1,7 @@
 'use strict';
 
 import * as React from 'react'
+import * as _ from 'lodash'
 import {queryCourses} from '../helpers/courses.es6'
 import Course from './course.es6'
 import semesterName from '../helpers/semesterName.es6'
