@@ -1,5 +1,5 @@
 gulp = node node_modules/.bin/gulp
-webpack = node node_modules/.bin/webpack
+uglifyjs = node node_modules/.bin/uglifyjs
 
 all:
 	echo "make build"
@@ -9,9 +9,10 @@ all:
 	echo "make scripts"
 	echo "make styles"
 	echo "make test"
-	echo "make webpack"
+	echo "make uglify"
 
-.PHONY: build clean cloc dist scripts serve styles test webpack
+
+.PHONY: build clean cloc dist scripts serve styles test uglify
 
 build:
 	$(gulp) default
@@ -39,5 +40,5 @@ test:
 	./prepare-test.sh
 	npm test
 
-webpack:
-	$(webpack) --config webpack-config.js -d --progress
+uglify:
+	$(uglifyjs) dist/app.js --in-source-map dist/app.js.map --source-map dist/app.js.ug.map --screw-ie8 -c --stats -o dist/app.min.js

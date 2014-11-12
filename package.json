@@ -175,6 +175,7 @@
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.1",
     "treo": "^0.3.0",
+    "uglify-js": "^2.4.15",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.1"
   }
