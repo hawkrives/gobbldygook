@@ -8,6 +8,7 @@ var del = require('del');
 var filter = require('gulp-filter');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
@@ -20,6 +21,10 @@ var webpack = require('webpack');
 var config = require('./webpack-config');
 var reload = browserSync.reload;
 var compiler = webpack(config);
+
+var packageJSON  = require('./package.json');
+var jshintConfig = packageJSON.jshintConfig;
+jshintConfig.lookup = false;
 
 var AUTOPREFIXER_BROWSERS = [
 	'ie >= 11',
@@ -48,10 +53,14 @@ gulp.task('webpack', function(callback){
 });
 
 // Lint JavaScript
-gulp.task('jshint', function () {
-	return gulp.src('app/scripts/**/*.{js,es6}')
-		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'));
+gulp.task('jshint', function() {
+	// When we update to JSCS 1.8, add these rules back in:
+	// "requireSpaceBeforeKeywords": true,
+	// "requireTrailingComma": {"ignoreSingleValue": true,"ignoreSingleLine": true},
+	return gulp.src('app/**/*.{js,es6}')
+		// .pipe(jshint(jshintConfig))
+		// .pipe(jshint.reporter('jshint-stylish'))
+		.pipe(jscs({configPath: './package.json'}));
 });
 
 gulp.task('scripts', ['webpack', 'jshint']);
