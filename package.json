@@ -59,7 +59,12 @@
       "node_modules/jscs-jsdoc/lib/rules/*.js"
     ],
     "disallowEmptyBlocks": true,
-    "disallowImplicitTypeConversion": ["numeric", "boolean", "binary", "string"],
+    "disallowImplicitTypeConversion": [
+      "numeric",
+      "boolean",
+      "binary",
+      "string"
+    ],
     "disallowMixedSpacesAndTabs": "smart",
     "disallowMultipleLineStrings": true,
     "disallowMultipleVarDecl": true,
@@ -81,7 +86,8 @@
     "requireOperatorBeforeLineBreak": true,
     "requireParenthesesAroundIIFE": true,
     "requireSpaceAfterBinaryOperators": true,
-    "requireSpaceAfterKeywords": ["do",
+    "requireSpaceAfterKeywords": [
+      "do",
       "for",
       "if",
       "else",
@@ -99,11 +105,16 @@
     "requireSpaceBeforeBinaryOperators": true,
     "requireSpaceBeforeBlockStatements": true,
     "requireSpacesInConditionalExpression": true,
-    "safeContextKeyword": ["self"],
+    "safeContextKeyword": [
+      "self"
+    ],
     "validateIndentation": "\t",
     "validateLineBreaks": "LF",
     "validateParameterSeparator": ", ",
-    "validateQuoteMarks": {"mark": "'","escape": true},
+    "validateQuoteMarks": {
+      "mark": "'",
+      "escape": true
+    },
     "jsDoc": {
       "checkParamNames": true,
       "requireParamTypes": true,
