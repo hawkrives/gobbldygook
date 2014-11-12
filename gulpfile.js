@@ -2,6 +2,7 @@
 
 // Include gulp and tools
 var autoprefixer = require('gulp-autoprefixer');
+var browserify = require('browserify');
 var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 var del = require('del');
@@ -15,12 +16,11 @@ var sass = require('gulp-sass');
 var symlink = require('gulp-symlink');
 var size = require('gulp-size');
 var runSequence = require('run-sequence');
+var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
-var webpack = require('webpack');
+var watchify = require('watchify');
 
-var config = require('./webpack-config');
 var reload = browserSync.reload;
-var compiler = webpack(config);
 
 var packageJSON  = require('./package.json');
 var jshintConfig = packageJSON.jshintConfig;
@@ -37,6 +37,39 @@ var AUTOPREFIXER_BROWSERS = [
 	'android >= 4.4',
 ];
 
+var isWatching = false;
+
+var handleErrors = function() {
+
+  var args = Array.prototype.slice.call(arguments);
+
+  // Send error to notification center with gulp-notify
+  notify.onError({
+    title: "Compile Error",
+    message: "<%= error.message %>"
+  }).apply(this, args);
+
+  // Keep gulp from hanging on this task
+  this.emit('end');
+};
+
+var gutil        = require('gulp-util');
+var prettyHrtime = require('pretty-hrtime');
+var startTime;
+
+var bundleLogger = {
+  start: function(filepath) {
+    startTime = process.hrtime();
+    gutil.log('Bundling', gutil.colors.green(filepath) + '...');
+  },
+
+  end: function(filepath) {
+    var taskTime = process.hrtime(startTime);
+    var prettyTime = prettyHrtime(taskTime);
+    gutil.log('Bundled', gutil.colors.green(filepath), 'in', gutil.colors.magenta(prettyTime));
+  }
+};
+
 
 ////
 // JavaScript
@@ -44,12 +77,48 @@ var AUTOPREFIXER_BROWSERS = [
 
 
 // Build JS for the browser
-gulp.task('webpack', function(callback){
-	compiler.run(function(err, stats) {
-		if (err)
-			notify.onError({message: 'webpack error'})
-		callback();
-	})
+gulp.task('browserify', function(callback) {
+	var bundler = browserify({
+		// Required watchify args
+		cache: {}, packageCache: {}, fullPaths: true,
+		// Specify the entry point of your app
+		entries: './app/app.es6',
+		// Enable source maps!
+		debug: true,
+	});
+
+	bundler.transform('6to5-browserify');
+
+	var bundle = function() {
+		// Log when bundling starts
+		bundleLogger.start('app.js');
+
+		return bundler
+			.bundle()
+			// Report compile errors
+			.on('error', handleErrors)
+			// Use vinyl-source-stream to make the
+			// stream gulp compatible. Specifiy the
+			// desired output filename here.
+			.pipe(source('app.js'))
+			// Specify the output destination
+			.pipe(gulp.dest('./dist'))
+			.on('end', reportFinished);
+	};
+
+	if (isWatching) {
+		// Wrap with watchify and rebundle on changes
+		bundler = watchify(bundler);
+		// Rebundle on update
+		bundler.on('update', bundle);
+	}
+
+	var reportFinished = function() {
+		// Log when bundling completes
+		bundleLogger.end('app.js')
+	}
+
+	return bundle();
 });
 
 // Lint JavaScript
@@ -63,7 +132,7 @@ gulp.task('lint', function() {
 		.pipe(jscs({configPath: './package.json'}));
 });
 
-gulp.task('scripts', ['webpack', 'lint']);
+gulp.task('scripts', ['browserify', 'lint']);
 
 // Copy Web Fonts To Dist
 gulp.task('fonts:woff', function () {
@@ -95,16 +164,15 @@ gulp.task('styles:css', function () {
 // Compile Any Other Sass Files You Added (app/styles)
 gulp.task('styles:scss', function () {
 	return gulp.src('app/styles/**/*.scss')
-		.pipe(sourcemaps.init())
-		.pipe(sass())
-		.pipe(sourcemaps.write())
+		.pipe(sass({
+			sourcemap: true,
+			sourcemapPath: '../sass'
+		}))
 		.on('error', notify.onError({
 			message: 'styles:scss error: <%= error.message %>'
 		}))
 		.pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
 		.pipe(gulp.dest('dist'))
-		.pipe(filter('**/*.css'))
-		.pipe(reload({stream: true}))
 		.pipe(size({title: 'styles:scss'}))
 });
 
@@ -126,21 +194,31 @@ gulp.task('link', function() {
 		.pipe(symlink('dist/data', {force: true}))
 });
 
+gulp.task('setWatch', function() {
+	isWatching = true;
+	return isWatching;
+});
+
 // Watch Files For Changes & Reload
-gulp.task('serve', ['webpack', 'html', 'styles', 'fonts', 'link'], function () {
+gulp.task('serve', ['setWatch', 'browserify', 'html', 'styles', 'fonts', 'link'], function () {
 	browserSync.init({
 		notify: true,
 		minify: false,
 		browser: "google chrome",
 		server: {
 			baseDir: ['dist']
-		}
+		},
+		files: [
+			"dist/**",
+			// Exclude Map files
+			"!/dist/**.map",
+		]
 	});
 
-	gulp.watch(['{app,mockups}/**/*.{js,es6}'], ['webpack', 'lint', reload]);
+	gulp.watch(['{app,mockups}/**/*.{js,es6}'], ['browserify', 'lint', reload]);
 	gulp.watch(['app/styles/**/*.scss'], ['styles:scss']);
 });
 
 gulp.task('default', ['clean'], function(cb) {
-	runSequence('styles', ['lint', 'webpack', 'html', 'fonts', 'link'], cb);
+	runSequence('styles', ['lint', 'browserify', 'html', 'fonts', 'link'], cb);
 });
