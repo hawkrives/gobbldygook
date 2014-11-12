@@ -82,6 +82,7 @@ function queryCourses(queryString) {
 
 				let hasBool = _.indexOf(values[0], '$') === 0;
 				let OR = values[0] === '$OR';
+				let NOR = values[0] === '$NOR';
 				let AND = values[0] === '$AND';
 				let NOT = values[0] === '$NOT';
 				let XOR = values[0] === '$XOR';
@@ -111,8 +112,9 @@ function queryCourses(queryString) {
 				let result = false;
 
 				if (OR)   result = _.some(internalMatches);
+				if (NOR)  result = !_.some(internalMatches);
 				if (AND)  result = _.all(internalMatches);
-				if (NOT)  result = _.map(internalMatches, (bool) => !bool);
+				if (NOT)  result = !_.all(internalMatches);
 				if (XOR)  result = _.compact(internalMatches).length === 1;
 
 				return result
