@@ -23,19 +23,13 @@ var SearchButton = React.createClass({
 		}
 	},
 	toggleSidebar() {
-		this.setState({
-			open: !this.state.open,
-		})
+		this.setState({open: !this.state.open,})
 	},
 	openSidebar() {
-		this.setState({
-			open: true,
-		})
+		this.setState({open: true})
 	},
 	closeSidebar() {
-		this.setState({
-			open: false,
-		})
+		this.setState({open: false,})
 	},
 	onSubmit: function() {
 		this.query(this.state.query)
