@@ -6,6 +6,7 @@ import uuid from '../helpers/uuid.es6'
 import randomChar from '../helpers/randomChar.es6'
 import emitter from '../helpers/emitter.es6'
 import db from '../helpers/db.es6'
+import countCredits from '../helpers/countCredits.es6'
 
 import ScheduleSet from './scheduleSet.es6'
 import StudySet from './studySet.es6'
@@ -20,7 +21,7 @@ let Student = (encodedStudent) => {
 		name: encodedStudent.name || 'Student ' + randomChar(),
 		active: encodedStudent.active || false,
 
-		credits: { needed: 35, has: 0 },
+		credits: { needed: 35 },
 
 		matriculation: encodedStudent.matriculation || 1894,
 		graduation: encodedStudent.graduation || 1898,
@@ -38,6 +39,10 @@ let Student = (encodedStudent) => {
 
 	Object.defineProperty(student, 'courses', { get() {
 		return this.schedules.activeCourses
+	}})
+
+	Object.defineProperty(student.credits, 'has', { get() {
+		return countCredits(student.courses)
 	}})
 
 	Object.defineProperty(student, 'encode', { value() {
