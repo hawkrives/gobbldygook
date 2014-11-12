@@ -58,7 +58,7 @@ let Student = (encodedStudent) => {
 
 	Object.defineProperty(student, 'save', { value() {
 		console.log('saving student', this.name)
-		localStorage.setItem(this.id, JSON.stringify(this))
+		localStorage.setItem(this.id, JSON.stringify(student))
 		// return db.store('students').put(this)
 	}})
 
