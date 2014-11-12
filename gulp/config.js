@@ -63,6 +63,7 @@ module.exports = {
 			entries: src + '/app.es6',
 			dest: dest,
 			outputName: 'app.js',
+			mapfile: dest + '/app.js.map',
 			transforms: ['6to5-browserify'],
 		}]
 	}

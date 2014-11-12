@@ -14,6 +14,7 @@ var bundleLogger = require('../util/bundleLogger');
 var gulp = require('gulp');
 var handleErrors = require('../util/handleErrors');
 var source = require('vinyl-source-stream');
+var exorcist = require('exorcist')
 var config = require('../config').browserify;
 
 gulp.task('browserify', function(callback) {
@@ -41,6 +42,8 @@ gulp.task('browserify', function(callback) {
 				.bundle()
 				// Report compile errors
 				.on('error', handleErrors)
+				// Use exorcist to remove the map file
+				.pipe(exorcist(bundleConfig.mapfile))
 				// Use vinyl-source-stream to make the
 				// stream gulp compatible. Specifiy the
 				// desired output filename here.
