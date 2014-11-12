@@ -60,7 +60,7 @@ var SearchButton = React.createClass({
 				toPrettyTerm(key),
 				React.createElement('ul', null,
 					_.map(grouping, (course) => {
-						React.createElement('li', {key: course.clbid},
+						return React.createElement('li', {key: course.clbid},
 							React.createElement(Course, {info: course})
 						)
 					})
