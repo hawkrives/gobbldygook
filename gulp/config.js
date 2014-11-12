@@ -18,7 +18,7 @@ module.exports = {
 	},
 	lint: {
 		src: [
-			src + '**/*.{js,es6}',
+			src + '/**/*.{js,es6}',
 			'./gulp/**/*.js',
 		],
 	},
