@@ -67,7 +67,9 @@ function checkCoursesFor(courses, filter) {
 
 function queryCourses(queryString) {
 	let query = buildQueryFromString(queryString)
+
 	console.log('query:', query)
+
 	var results = _(courseCache)
 		.filter(course => {
 			let matches = _.map(query, (values, key) => {
@@ -121,6 +123,7 @@ function queryCourses(queryString) {
 		})
 		.map(_.cloneDeep)
 		.value()
+
 	return results
 }
 
