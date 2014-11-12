@@ -120,8 +120,6 @@ function queryCourses(queryString) {
 			return _.all(matches)
 		})
 		.map(_.cloneDeep)
-		.sortBy('title')
-		.groupBy('term')
 		.value()
 	return results
 }

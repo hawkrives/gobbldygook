@@ -44,7 +44,12 @@ var SearchButton = React.createClass({
 	},
 	query(searchQuery) {
 		var startQueryTime = performance.now()
-		var results = queryCourses(searchQuery);
+		var results = _(queryCourses(searchQuery))
+			.sortBy('deptnum')
+			.groupBy('term')
+			.value();
+
+			console.log(results)
 		var endQueryTime = performance.now()
 		console.info('query took ' + (endQueryTime - startQueryTime) + 'ms.')
 
