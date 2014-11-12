@@ -73,39 +73,49 @@ function queryCourses(queryString) {
 	var results = _(courseCache)
 		.filter(course => {
 			let matches = _.map(query, (values, key) => {
-				let AND = false;
-				let OR = false;
 				let substring = false;
 
 				// values is either:
 				// - a 1-long array
-				// - an $AND query
-				// - an $OR query
+				// - an $AND, $OR, $NOT, or $XOR query
 				// - one of the above, but substring
 
-				if (values[0] === '$OR') {
-					OR = true
-				} else if (values[0] === '$AND') {
-					AND = true
+				let hasBool = _.indexOf(values[0], '$') === 0;
+				let OR = values[0] === '$OR';
+				let AND = values[0] === '$AND';
+				let NOT = values[0] === '$NOT';
+				let XOR = values[0] === '$XOR';
+
+				if (hasBool) {
+					// remove the first value from the array
+					values = _.tail(values, 1);
 				}
 
-				if (AND || OR) {
-					values = _.tail(values);
-				}
-
-				if (_.contains(['title', 'name', 'description', 'notes'], key)) {
+				if (_(['title', 'name', 'description', 'notes']).contains(key)) {
 					substring = true;
 				}
 
 				let internalMatches = _.map(values, (val) => {
 					// dept, gereqs, etc.
-					if (_.isArray(course[key]) || substring) {
+					if (_.isArray(course[key])) {
+						return _.contains(course[key], val)
+					} else if (substring) {
 						return _.contains(course[key].toLowerCase(), val.toLowerCase())
 					}
 					return course[key] === val;
 				})
 
-				return OR ? _.some(internalMatches) : _.all(internalMatches)
+				if (!hasBool)
+					return _.all(internalMatches);
+
+				let result = false;
+
+				if (OR)   result = _.some(internalMatches);
+				if (AND)  result = _.all(internalMatches);
+				if (NOT)  result = _.map(internalMatches, (bool) => !bool);
+				if (XOR)  result = _.compact(internalMatches).length === 1;
+
+				return result
 			})
 			return _.all(matches)
 		})
