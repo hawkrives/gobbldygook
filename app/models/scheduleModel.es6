@@ -46,6 +46,7 @@ let Schedule = (scheduleData) => {
 		emitter.emit('change')
 	}})
 	Object.defineProperty(schedule, 'removeCourse', { value(clbid) {
+		console.log('removing course', clbid)
 		let index = _.findIndex(this.clbids, (id) => id === clbid)
 		this.clbids.splice(index, 1)
 		emitter.emit('change')
