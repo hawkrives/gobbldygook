@@ -5,10 +5,10 @@ import emitter from '../helpers/emitter.es6'
 
 let Study = (studyData) => {
 	let study = {
-		id: "",
-		type: "",
-		abbr: "",
-		title: "",
+		id: '',
+		type: '',
+		abbr: '',
+		title: '',
 		index: 0,
 	}
 

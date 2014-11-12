@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import * as _ from 'lodash'
 
@@ -16,9 +16,9 @@ function findTerms(startYear, endYear) {
 	const allTerms     = [1, 2, 3, 4, 5];
 	const limitedTerms = [1, 2, 3];
 
-	const baseUrl = "/data/courses/";
-	const filetype = "json";
-	const extension = "." + filetype;
+	const baseUrl = '/data/courses/';
+	const filetype = 'json';
+	const extension = '.' + filetype;
 
 	// Create a list of numbers like 20081 by concatenating the year and term
 	// from 2008 to the year before this one.
@@ -27,10 +27,8 @@ function findTerms(startYear, endYear) {
 	// St. Olaf publishes initial Fall, Interim, and Spring data in April of each year.
 	// Full data is published by August.
 	if (start !== currentYear || start === endYear) {
-		if (currentMonth <= 3) {
-			// do nothing
-		}
-		else if (currentMonth >= 4 && currentMonth <= 7) {
+		// do nothing if the current month is <= 3
+		if (currentMonth >= 4 && currentMonth <= 7) {
 			termList.concat([for (term of limitedTerms) yearPlusTerm(currentYear, term)]);
 		}
 		else if (currentMonth >= 8) {
@@ -61,7 +59,7 @@ let discoverRecentYears = () => {
 	const start        = now.getFullYear() - 4
 	const currentYear  = now.getFullYear()
 
-	return _.range(start, currentYear+1)
+	return _.range(start, currentYear + 1)
 }
 
 export {

@@ -36,7 +36,7 @@ let blastoff = () => {
 	Promise.all([db, documentReady]).then(() => {
 		console.log('3. 2.. 1... Blastoff!')
 
-		document.body.innerHTML = "<div class='loading'>"+ svgSpinner + "</div>"
+		document.body.innerHTML = '<div class="loading">' + svgSpinner + '</div>'
 
 		// Load data into the database, then render the app
 		loadData().then(() => {

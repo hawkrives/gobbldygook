@@ -40,8 +40,6 @@ function checkCoursesFor(courses, filter) {
 	return _.any(courses, filter)
 }
 
-////
-// from queryCourses
 
 // 'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
 // { depts: [ '$AND', 'CSCI', 'ASIAN' ],

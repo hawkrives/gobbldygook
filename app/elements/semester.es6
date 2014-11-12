@@ -84,7 +84,7 @@ var Semester = React.createClass({
 				}))
 			let maxCredits = (schedule.semester === 1 || schedule.semester === 3) ? 4 : 1;
 			_.each(_.range(Math.floor(countCredits(courses)), maxCredits), (i) => courseObjects.push(
-				React.createElement(EmptyCourseSlot, {key: 'empty'+i})
+				React.createElement(EmptyCourseSlot, {key: 'empty' + i})
 			))
 			courseList = React.createElement('div', {className: 'course-list'}, courseObjects);
 		}

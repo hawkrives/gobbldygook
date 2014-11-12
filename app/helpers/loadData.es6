@@ -125,8 +125,8 @@ function cacheItemHash(item) {
 }
 
 var lookup = {
-	'courses': 'courses',
-	'areas': 'info'
+	courses: 'courses',
+	areas: 'info'
 }
 
 function updateDatabase(itemType, infoFromServer) {
