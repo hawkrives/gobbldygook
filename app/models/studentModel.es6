@@ -16,35 +16,23 @@ let Student = (encodedStudent) => {
 	encodedStudent = encodedStudent || {}
 
 	let student = {
-		id: uuid(),
-		name: 'Student ' + randomChar(),
-		active: false,
+		id: encodedStudent.id || uuid(),
+		name: encodedStudent.name || 'Student ' + randomChar(),
+		active: encodedStudent.active || false,
 
 		credits: { needed: 35, has: 0 },
 
-		matriculation: 1894,
-		graduation: 1898,
+		matriculation: encodedStudent.matriculation || 1894,
+		graduation: encodedStudent.graduation || 1898,
 
-		studies: {},
-		schedules: {},
-		overrides: [],
-		fabrications: [],
+		studies: new StudySet(encodedStudent.studies || {}),
+		schedules: new ScheduleSet(encodedStudent.schedules || {}),
+		overrides: encodedStudent.overrides || [],
+		fabrications: encodedStudent.fabrications || [],
 	}
-
-	student.id = encodedStudent.id || student.id
-	student.name = encodedStudent.name || student.name
-	student.active = encodedStudent.active || student.active
 
 	if (encodedStudent.credits)
 		student.credits.needed = encodedStudent.credits.needed || student.credits.needed
-
-	student.matriculation = encodedStudent.matriculation || student.matriculation
-	student.graduation = encodedStudent.graduation || student.graduation
-
-	student.studies   = new StudySet(encodedStudent.studies || student.studies)
-	student.schedules = new ScheduleSet(encodedStudent.schedules || student.schedules)
-	student.overrides = encodedStudent.overrides || student.overrides
-	student.fabrications = encodedStudent.fabrications || student.fabrications
 
 	Object.observe(student, (changes) => emitter.emit('change'))
 
@@ -57,7 +45,7 @@ let Student = (encodedStudent) => {
 	}})
 
 	Object.defineProperty(student, 'save', { value() {
-		console.log('saving student', this.name)
+		console.log('saving student', student.name)
 		localStorage.setItem(this.id, JSON.stringify(student))
 		// return db.store('students').put(this)
 	}})
