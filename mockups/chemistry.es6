@@ -2,12 +2,12 @@
 
 import * as _ from 'lodash'
 
-import hasDepartment from '../app/helpers/hasDepartment'
-import {partialNameOrTitle} from '../app/helpers/partialTitle'
-import {checkCoursesFor} from '../app/helpers/courses'
-import {coursesAtLevel, coursesAtOrAboveLevel} from '../app/helpers/courseLevels'
+import hasDepartment from '../app/helpers/hasDepartment.es6'
+import {partialNameOrTitle} from '../app/helpers/partialTitle.es6'
+import {checkCoursesFor} from '../app/helpers/courses.es6'
+import {coursesAtLevel, coursesAtOrAboveLevel} from '../app/helpers/courseLevels.es6'
 
-import {isRequiredCourse} from './commonMajorUtilities'
+import {isRequiredCourse} from './commonMajorUtilities.es6'
 
 const chemDeptRequiredCourses = [
 	{dept:'CHEM',num:121}, {dept:'CHEM',num:123}, {dept:'CHEM',num:126},

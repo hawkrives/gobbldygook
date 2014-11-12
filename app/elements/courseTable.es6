@@ -3,9 +3,9 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 
-import findFirstAvailableYear from '../helpers/findFirstAvailableYear'
+import findFirstAvailableYear from '../helpers/findFirstAvailableYear.es6'
 
-import Year from './year'
+import Year from './year.es6'
 
 var CourseTable = React.createClass({
 	displayName: 'CourseTable',

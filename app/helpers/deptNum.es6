@@ -1,7 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
-import hasDepartment from './hasDepartment'
+import hasDepartment from './hasDepartment.es6'
 
 function splitDeptNum(deptNumString) {
 	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]

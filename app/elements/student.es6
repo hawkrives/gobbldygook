@@ -3,8 +3,8 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 
-import GraduationStatus from './graduationStatus'
-import CourseTable from './courseTable'
+import GraduationStatus from './graduationStatus.es6'
+import CourseTable from './courseTable.es6'
 
 var Student = React.createClass({
 	displayName: 'Student',

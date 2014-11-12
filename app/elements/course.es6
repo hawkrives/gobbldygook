@@ -5,8 +5,8 @@ import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
 import {DragDropMixin} from 'react-dnd'
-import itemTypes from '../models/itemTypes'
-import semesterName from '../helpers/semesterName'
+import itemTypes from '../models/itemTypes.es6'
+import semesterName from '../helpers/semesterName.es6'
 
 function findSemesterList() {
 	return [

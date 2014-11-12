@@ -3,11 +3,11 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 
-import Course from './course'
-import Semester from './semester'
+import Course from './course.es6'
+import Semester from './semester.es6'
 
-import findFirstAvailableSemester from '../helpers/findFirstAvailableSemester'
-import calculateNextScheduleId from '../helpers/calculateNextScheduleId'
+import findFirstAvailableSemester from '../helpers/findFirstAvailableSemester.es6'
+import calculateNextScheduleId from '../helpers/calculateNextScheduleId.es6'
 
 var isCurrentYearSchedule = _.curry((year, schedule) => {
 	return (schedule.year === year)

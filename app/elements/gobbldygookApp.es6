@@ -3,13 +3,13 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 
-import emitter from '../helpers/emitter'
+import emitter from '../helpers/emitter.es6'
 
-import Student from './student'
-import StudentModel from '../models/studentModel'
-import {loadStudentFromDb} from '../models/studentModel'
+import Student from './student.es6'
+import StudentModel from '../models/studentModel.es6'
+import {loadStudentFromDb} from '../models/studentModel.es6'
 
-import SearchButton from './searchButton'
+import SearchButton from './searchButton.es6'
 
 let student = loadStudentFromDb()
 

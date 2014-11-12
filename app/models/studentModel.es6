@@ -2,13 +2,13 @@
 
 import * as _ from 'lodash'
 
-import uuid from '../helpers/uuid'
-import randomChar from '../helpers/randomChar'
-import emitter from '../helpers/emitter'
-import db from '../helpers/db'
+import uuid from '../helpers/uuid.es6'
+import randomChar from '../helpers/randomChar.es6'
+import emitter from '../helpers/emitter.es6'
+import db from '../helpers/db.es6'
 
-import ScheduleSet from './scheduleSet'
-import StudySet from './studySet'
+import ScheduleSet from './scheduleSet.es6'
+import StudySet from './studySet.es6'
 
 import * as demoStudent from '../../mockups/demo_student.json'
 

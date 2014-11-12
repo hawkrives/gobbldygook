@@ -4,14 +4,14 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
-import add from '../helpers/add'
-import countCredits from '../helpers/countCredits'
-import semesterName from '../helpers/semesterName'
-import Course from './course'
-import {EmptyCourseSlot} from './course'
+import add from '../helpers/add.es6'
+import countCredits from '../helpers/countCredits.es6'
+import semesterName from '../helpers/semesterName.es6'
+import Course from './course.es6'
+import {EmptyCourseSlot} from './course.es6'
 
 import {DragDropMixin} from 'react-dnd'
-import itemTypes from '../models/itemTypes'
+import itemTypes from '../models/itemTypes.es6'
 
 var isCurrentTermSchedule = _.curry((year, semester, schedule) => {
 	return (schedule.year === year && schedule.semester === semester)

@@ -3,12 +3,12 @@
 import * as _ from 'lodash'
 import * as Promise from 'bluebird'
 
-import readJson from './readJson'
-import add from './add'
-import {db, courseCache} from './db'
-import {buildDeptNum, buildDept} from './deptNum'
-import {discoverRecentYears} from './recentTime'
-import {convertTimeStringsToOfferings} from './time'
+import readJson from './readJson.es6'
+import add from './add.es6'
+import {db, courseCache} from './db.es6'
+import {buildDeptNum, buildDept} from './deptNum.es6'
+import {discoverRecentYears} from './recentTime.es6'
+import {convertTimeStringsToOfferings} from './time.es6'
 
 var logDataLoading = false
 // var logDataLoading = true

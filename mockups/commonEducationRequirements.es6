@@ -2,13 +2,13 @@
 
 import * as _ from 'lodash'
 
-import {hasDeptNumBetween} from '../app/helpers/deptNum'
+import {hasDeptNumBetween} from '../app/helpers/deptNum.es6'
 
 import {
 	hasGenEd,
 	countGeneds,
 	acrossAtLeastTwoDepartments,
-	checkThatNCoursesSpanTwoDepartments} from './commonEducationUtilities'
+	checkThatNCoursesSpanTwoDepartments} from './commonEducationUtilities.es6'
 
 // TODO: Consider returning matches from these functions, in addition to the boolean.
 

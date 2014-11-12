@@ -2,11 +2,11 @@
 
 import * as _ from 'lodash'
 
-import hasDepartment from '../app/helpers/hasDepartment'
-import {partialNameOrTitle} from '../app/helpers/partialTitle'
-import {checkCoursesFor} from '../app/helpers/courses'
+import hasDepartment from '../app/helpers/hasDepartment.es6'
+import {partialNameOrTitle} from '../app/helpers/partialTitle.es6'
+import {checkCoursesFor} from '../app/helpers/courses.es6'
 
-import {isRequiredCourse} from './commonMajorUtilities'
+import {isRequiredCourse} from './commonMajorUtilities.es6'
 
 const csDeptRequiredCourses = [
 	{deptnum: 'CSCI 121'}, {deptnum: 'CSCI 125'}, {deptnum: 'CSCI 241'}, {deptnum: 'CSCI 251'},

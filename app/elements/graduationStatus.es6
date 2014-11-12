@@ -3,10 +3,10 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
-import emitter from '../helpers/emitter'
+import emitter from '../helpers/emitter.es6'
 
-import AreaOfStudy from './areaOfStudy'
-import StudentSummary from './studentSummary'
+import AreaOfStudy from './areaOfStudy.es6'
+import StudentSummary from './studentSummary.es6'
 
 var GraduationStatus = React.createClass({
 	displayName: 'GraduationStatus',

@@ -1,8 +1,8 @@
 'use strict';
 
 import * as _ from 'lodash'
-import emitter from '../helpers/emitter'
-import Schedule from './scheduleModel'
+import emitter from '../helpers/emitter.es6'
+import Schedule from './scheduleModel.es6'
 
 let ScheduleSet = (scheduleData) => {
 	let schedules = {}

@@ -4,13 +4,13 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as Promise from 'bluebird'
 
-import db from './helpers/db'
-import documentReady from './helpers/document-ready'
+import db from './helpers/db.es6'
+import documentReady from './helpers/document-ready.es6'
 
-import Gobbldygook from './elements/gobbldygookApp'
-import loadData from './helpers/loadData'
-import emitter from './helpers/emitter'
-import svgSpinner from './svg-spinner'
+import Gobbldygook from './elements/gobbldygookApp.es6'
+import loadData from './helpers/loadData.es6'
+import emitter from './helpers/emitter.es6'
+import svgSpinner from './svg-spinner.es6'
 
 import 'es6-shim'
 

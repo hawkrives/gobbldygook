@@ -1,12 +1,12 @@
 'use strict';
 
 import * as _ from 'lodash'
-import emitter from '../helpers/emitter'
+import emitter from '../helpers/emitter.es6'
 
-import uuid from '../helpers/uuid'
-import randomChar from '../helpers/randomChar'
-import {checkScheduleTimeConflicts} from '../helpers/time'
-import {getCourse} from '../helpers/courses'
+import uuid from '../helpers/uuid.es6'
+import randomChar from '../helpers/randomChar.es6'
+import {checkScheduleTimeConflicts} from '../helpers/time.es6'
+import {getCourse} from '../helpers/courses.es6'
 
 let Schedule = (scheduleData) => {
 	let schedule = {
