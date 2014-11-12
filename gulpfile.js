@@ -53,7 +53,7 @@ gulp.task('webpack', function(callback){
 });
 
 // Lint JavaScript
-gulp.task('jshint', function() {
+gulp.task('lint', function() {
 	// When we update to JSCS 1.8, add these rules back in:
 	// "requireSpaceBeforeKeywords": true,
 	// "requireTrailingComma": {"ignoreSingleValue": true,"ignoreSingleLine": true},
@@ -63,7 +63,7 @@ gulp.task('jshint', function() {
 		.pipe(jscs({configPath: './package.json'}));
 });
 
-gulp.task('scripts', ['webpack', 'jshint']);
+gulp.task('scripts', ['webpack', 'lint']);
 
 // Copy Web Fonts To Dist
 gulp.task('fonts:woff', function () {
@@ -137,10 +137,10 @@ gulp.task('serve', ['webpack', 'html', 'styles', 'fonts', 'link'], function () {
 		}
 	});
 
-	gulp.watch(['{app,mockups}/**/*.{js,es6}'], ['webpack', 'jshint', reload]);
+	gulp.watch(['{app,mockups}/**/*.{js,es6}'], ['webpack', 'lint', reload]);
 	gulp.watch(['app/styles/**/*.scss'], ['styles:scss']);
 });
 
 gulp.task('default', ['clean'], function(cb) {
-	runSequence('styles', ['jshint', 'webpack', 'html', 'fonts', 'link'], cb);
+	runSequence('styles', ['lint', 'webpack', 'html', 'fonts', 'link'], cb);
 });
