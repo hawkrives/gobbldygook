@@ -58,6 +58,10 @@ var keyword_mappings = {
 	'ges': 'gereqs',
 	'gened': 'gereqs',
 	'geneds': 'gereqs',
+	'prof': 'profs',
+	'instructor': 'profs',
+	'instructors': 'profs',
+	'inst': 'profs',
 }
 
 var gereq_mapping = {
