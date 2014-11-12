@@ -220,7 +220,7 @@ function test() {
 	console.log(buildQueryFromString(s5))
 }
 
-test()
+// test()
 
 // window.buildQueryFromString = buildQueryFromString;
 
