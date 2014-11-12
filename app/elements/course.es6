@@ -70,12 +70,13 @@ var ExpandedCourse = React.createClass({
 
 		let offerings = React.createElement('p',
 			{className: 'offerings'},
-			course.times)
+			_.map(course.times,
+				time => React.createElement('span', {key: time}, time)))
 
 		let gereqs = React.createElement('ul',
 			{className: 'gereqs'},
-			_.map(course.gereqs, ge => React.createElement('li',
-				{key: ge}, ge)))
+			_.map(course.gereqs,
+				ge => React.createElement('li', {key: ge}, ge)))
 
 		let description = React.createElement('p',
 			{className: 'description'},
@@ -100,14 +101,14 @@ var ExpandedCourse = React.createClass({
 		///////
 
 		let semesterList = React.createElement('select',
-			{className: 'semester-select'},
+			{className: 'semester-select', key: 'semester-select'},
 			_.map(findSemesterList(), (s =>
 				React.createElement('option', {value: s.id, key: s.id}, s.title))))
 		tools.push(semesterList)
 
 		let deleteButton = this.props.schedule ?
 			React.createElement('button',
-				{className: 'remove-course', onClick: this.removeFromSemester},
+				{className: 'remove-course', onClick: this.removeFromSemester, key: 'remove-course'},
 				'Remove Course') :
 			null;
 		tools.push(deleteButton);
