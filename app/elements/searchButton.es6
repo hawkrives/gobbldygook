@@ -52,7 +52,7 @@ var SearchButton = React.createClass({
 		let courseObjects = _.map(results, (grouping, key) => {
 			return React.createElement('li', {key: key, className: 'course-group'}, toPrettyTerm(key),
  				React.createElement('ul', null,
-					_.map(grouping, (course) => React.createElement('li', {key: course.clbid}, Course({info: course})))))})
+					_.map(grouping, (course) => React.createElement('li', {key: course.clbid}, React.createElement(Course, {info: course})))))})
 
 		var endTime = performance.now()
 		console.info('query object creation took an additional ' + (endTime - startTime) + 'ms.')
