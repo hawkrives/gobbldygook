@@ -36,10 +36,10 @@ module.exports = {
 		AUTOPREFIXER_BROWSERS: [
 			'ie >= 11',
 			'ie_mob >= 11',
-			'ff >= 30',
-			'chrome >= 34',
+			'ff >= 33',
+			'chrome >= 37',
 			'safari >= 8',
-			'opera >= 23',
+			'opera >= 25',
 			'ios >= 8',
 			'android >= 4.4',
 		],
