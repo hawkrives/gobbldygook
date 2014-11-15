@@ -139,8 +139,8 @@
   },
   "homepage": "https://hawkrives.github.io/gobbldygook",
   "dependencies": {
-    "6to5": "^1.12.4",
-    "6to5-browserify": "^1.0.0",
+    "6to5": "^1.12.15",
+    "6to5-browserify": "^1.2.0",
     "autoprefixer": "^3.1.0",
     "bluebird": "^2.3.10",
     "browser-sync": "^1.6.3",
