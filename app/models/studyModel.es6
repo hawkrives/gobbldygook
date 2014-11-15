@@ -1,28 +1,44 @@
 'use strict';
 
-import * as _ from 'lodash'
-import emitter from '../helpers/emitter.es6'
+import {Emitter} from 'event-kit'
+import events from '../helpers/events.es6'
 
-let Study = (studyData) => {
-	let study = {
-		id: '',
-		type: '',
-		abbr: '',
-		title: '',
-		index: 0,
+class Study {
+	constructor(areaOfStudy={}) {
+		this.id = areaOfStudy.id || ''
+		this.type = areaOfStudy.type || ''
+		this.abbr = areaOfStudy.abbr || ''
+		this.title = areaOfStudy.title || ''
+		this.index = areaOfStudy.index || 0
+
+		this._emitter = new Emitter;
 	}
 
-	Object.defineProperty(study, 'reorder', { value(newIndex) {
-		study.index = newIndex
-	}})
 
-	study.id = studyData.id || study.id
-	study.type = studyData.type || study.type
-	study.abbr = studyData.abbr || study.abbr
-	study.title = studyData.title || study.title
-	study.index = studyData.index || study.index
+	// EventEmitter helpers
 
-	return study
+	_emitChange() {
+		this._emitter.emit(events.didChange)
+	}
+
+	onDidChange(callback) {
+		return this._emitter.on(events.didChange, callback)
+	}
+
+
+	// Lifecycle Functions
+
+	destroy() {
+		this._emitter.dispose()
+	}
+
+
+	// AreaOfStudy Maintenance
+
+	reorder(newIndex) {
+		this.index = newIndex
+		this._emitChange()
+	}
 }
 
 export default Study

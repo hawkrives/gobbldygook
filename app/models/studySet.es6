@@ -1,32 +1,60 @@
 'use strict';
 
 import * as _ from 'lodash'
-import emitter from '../helpers/emitter.es6'
+import {Emitter} from 'event-kit'
+import events from '../helpers/events.es6'
 import Study from './studyModel.es6'
 
-let StudySet = (studyData) => {
-	let studies = {}
+class StudySet {
+	constructor(studyData=[]) {
+		this.data = [];
+		this._emitter = new Emitter;
 
-	Object.defineProperty(studies, 'byType', { get() {
-		return _.groupBy(studies, 'type')
-	}})
+		_.each(studyData, this.add, this)
+	}
 
-	Object.defineProperty(studies, 'create', { value(study) {
-		let sched = new Study(study)
-		studies[sched.id] = sched
-	}})
 
-	Object.defineProperty(studies, 'destroy', { value(id) {
-		delete studies[id]
-	}})
+	// EventEmitter helpers
 
-	Object.defineProperty(studies, 'destroyMultiple', { value(ids) {
-		_.each(ids, studies.destroy)
-	}})
+	_emitChange() {
+		this._emitter.emit(events.didChange)
+	}
 
-	_.each(studyData, studies.create)
+	onDidChange(callback) {
+		return this._emitter.on(events.didChange, callback)
+	}
 
-	return studies;
+
+	// Getters
+
+	get byType() {
+		return _.groupBy(this.data, 'type')
+	}
+
+
+	// Functions
+
+	add(areaOfStudy) {
+		let study = new Study(areaOfStudy)
+
+		study.onDidChange(this._emitChange)
+		this.data.push(study)
+
+		this._emitChange()
+	}
+
+	remove(id) {
+		let removed = _.find(this.data, {id: id})
+		removed.destroy()
+
+		_.remove(this.data, {id: id})
+
+		this._emitChange()
+	}
+
+	removeMultiple(ids) {
+		_.each(ids, this.remove, this)
+	}
 }
 
 export default StudySet
