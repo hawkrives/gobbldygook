@@ -124,7 +124,7 @@ function checkBachelorOfArtsDegree(student) {
 	var studies = student.studies
 	var courses = _.filter(student.courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
 	var fabrications = student.fabrications
-	var creditsNeeded = student.credits.needed
+	var creditsNeeded = student.creditsNeeded
 
 	var graduationRequirements = [
 		common.courses(courses, creditsNeeded),
