@@ -76,7 +76,7 @@ class ScheduleSet {
 	}
 
 	destroyMultiple(ids) {
-		_.each(ids, this.destroy)
+		_.each(ids, this.destroy, this)
 	}
 }
 
