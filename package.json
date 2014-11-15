@@ -4,6 +4,7 @@
   "description": "A course scheduling app for St. Olaf College",
   "main": "build/app.js",
   "browser": "build/index.html",
+  "private": true,
   "scripts": {
     "test": "jest",
     "start": "node webpack.js"
