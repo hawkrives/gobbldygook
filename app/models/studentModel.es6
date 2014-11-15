@@ -31,7 +31,7 @@ class Student {
 		this._name = encodedStudent._name || encodedStudent.name || 'Student ' + randomChar()
 		this._active = encodedStudent._active || encodedStudent.active || false
 
-		this._creditsNeeded = encodedStudent._creditsNeeded || encodedStudent.creditsNeeded
+		this._creditsNeeded = encodedStudent._creditsNeeded || encodedStudent.creditsNeeded || (encodedStudent.credits ? encodedStudent.credits.needed : undefined)
 		if (this._creditsNeeded === undefined)
 			this._creditsNeeded = 35
 
