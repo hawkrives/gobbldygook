@@ -10,6 +10,7 @@ class StudySet {
 		this.data = [];
 		this._emitter = new Emitter;
 
+		studyData = studyData.data || studyData
 		_.each(studyData, this.add, this)
 	}
 

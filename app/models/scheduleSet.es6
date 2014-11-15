@@ -10,6 +10,7 @@ class ScheduleSet {
 		this.data = [];
 		this._emitter = new Emitter;
 
+		scheduleData = scheduleData.data || scheduleData
 		_.each(scheduleData, this.create, this)
 	}
 
