@@ -37,7 +37,7 @@ class StudySet {
 	add(areaOfStudy) {
 		let study = new Study(areaOfStudy)
 
-		study.onDidChange(this._emitChange)
+		study.onDidChange(this._emitChange.bind(this))
 		this.data.push(study)
 
 		this._emitChange()

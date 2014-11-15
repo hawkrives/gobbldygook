@@ -18,10 +18,10 @@ import * as demoStudent from '../../mockups/demo_student.json'
 class Student {
 	constructor(encodedStudent={}) {
 		this._emitter = new Emitter
-		this.onDidChange(this.save)
+		this.onDidChange(this.save.bind(this))
 
 		this.isLoaded =  Promise.pending();
-		this.isLoaded.promise.then(() => console.log('isLoaded'))
+		this.isLoaded.promise.then(() => console.log('Student.isLoaded => done!'))
 
 		this._init(encodedStudent)
 	}
@@ -43,8 +43,8 @@ class Student {
 		this._overrides = encodedStudent._overrides || encodedStudent.overrides || []
 		this._fabrications = encodedStudent._fabrications || encodedStudent.fabrications || []
 
-		this._studies.onDidChange(this._emitChange)
-		this._schedules.onDidChange(this._emitChange)
+		this._studies.onDidChange(this._emitChange.bind(this))
+		this._schedules.onDidChange(this._emitChange.bind(this))
 
 		this.isLoaded.fulfill()
 	}

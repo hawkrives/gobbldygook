@@ -49,7 +49,7 @@ class ScheduleSet {
 		console.log('creating schedule', schedule)
 		let sched = new Schedule(schedule)
 
-		sched.onDidChange(this._emitChange)
+		sched.onDidChange(this._emitChange.bind(this))
 
 		this.data.push(sched)
 
