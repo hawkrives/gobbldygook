@@ -17,7 +17,7 @@ var GobbldygookApp = React.createClass({
 		}
 	},
 	render() {
-		student.onDidChange(this.forceUpdate)
+		student.onDidChange(this.forceUpdate.bind(this))
 
 		return React.createElement('div', null,
 			React.createElement(Student, {student: this.state.student}),
