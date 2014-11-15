@@ -3,7 +3,7 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
-import emitter from '../helpers/emitter.es6'
+import {revertStudentToDemo} from '../models/studentModel.es6'
 
 import AreaOfStudy from './areaOfStudy.es6'
 import StudentSummary from './studentSummary.es6'
@@ -16,7 +16,7 @@ var GraduationStatus = React.createClass({
 	},
 	demo() {
 		console.log('load demo data')
-		emitter.emit('revertStudentToDemo')
+		revertStudentToDemo()
 	},
 	download() {
 		console.log('start student download')
@@ -52,10 +52,14 @@ var GraduationStatus = React.createClass({
 		})
 
 		var studentButtons = React.createElement('menu', {className: 'student-buttons'},
-			// React.createElement('button', {className: 'demo-student', onClick: this.parse}, 'Parse'),
+			// React.createElement('button', {className: 'parse-student', onClick: this.parse}, 'Parse'),
 			React.createElement('button', {className: 'demo-student', onClick: this.demo}, 'Demo'),
 			React.createElement('button', {className: 'download-student'},
-				React.createElement('a', {href: this.download(), download: this.props.student.name + '.gb-student.json'}, 'Download')))
+				React.createElement('a',
+					{
+						href: this.download(),
+						download: this.props.student.name + '.gb-student.json'
+					}, 'Download')))
 
 		return React.createElement('section', {className: 'graduation-status'},
 			studentButtons,
