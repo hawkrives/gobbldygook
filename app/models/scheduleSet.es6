@@ -66,7 +66,7 @@ class ScheduleSet {
 		deadSched.destroy()
 
 		if (deadSched.active) {
-			let otherSched = _.find(this,
+			let otherSched = _.find(this.data,
 				{year: deadSched.year, semester: deadSched.semester});
 			if (otherSched)
 				otherSched.active = true
