@@ -78,7 +78,6 @@ var Semester = React.createClass({
 					key: course.clbid,
 					info: course,
 					schedule: schedule,
-					semesters: activeSchedules,
 					index: i,
 					conflicts: schedule.conflicts,
 				}))
