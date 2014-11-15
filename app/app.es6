@@ -2,7 +2,9 @@
 
 import * as _ from 'lodash'
 import * as React from 'react'
+React.initializeTouchEvents(true)
 import * as Promise from 'bluebird'
+Promise.longStackTraces()
 
 import db from './helpers/db.es6'
 import documentReady from './helpers/document-ready.es6'
@@ -23,9 +25,6 @@ window.React = React
 
 // Handy debugging function
 window.log = (thing) => console.log(_.isUndefined(thing) ? arguments : thing)
-
-React.initializeTouchEvents(true)
-Promise.longStackTraces()
 
 let render = () => React.render(React.createElement(Gobbldygook, null), document.body)
 
