@@ -16,11 +16,11 @@ var isCurrentYearSchedule = _.curry((year, schedule) => {
 var Year = React.createClass({
 	displayName: 'Year',
 	canAddSemester() {
-		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
+		return findFirstAvailableSemester(this.props.schedules.data, this.props.year) <= 5
 	},
 
 	addSemester() {
-		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
+		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules.data, this.props.year)
 
 		this.props.schedules.create({
 			year: this.props.year, semester: nextAvailableSemester,
@@ -29,7 +29,7 @@ var Year = React.createClass({
 	},
 
 	removeYear() {
-		var currentYearSchedules = _.filter(this.props.schedules, isCurrentYearSchedule(this.props.year))
+		var currentYearSchedules = _.filter(this.props.schedules.data, isCurrentYearSchedule(this.props.year))
 		var scheduleIds = _.pluck(currentYearSchedules, 'id')
 
 		this.props.schedules.destroyMultiple(scheduleIds)
