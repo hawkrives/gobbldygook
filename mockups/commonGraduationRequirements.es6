@@ -2,11 +2,11 @@
 
 import * as _ from 'lodash'
 
-import {hasDeptNumBetween} from '../app/helpers/deptNum'
-import countCredits from '../app/helpers/countCredits'
-import hasDepartment from '../app/helpers/hasDepartment'
-import {onlyCoursesAtOrAboveLevel} from '../app/helpers/courseLevels'
-import * as utilities from './commonGraduationUtilities'
+import {hasDeptNumBetween} from '../app/helpers/deptNum.es6'
+import countCredits from '../app/helpers/countCredits.es6'
+import hasDepartment from '../app/helpers/hasDepartment.es6'
+import {onlyCoursesAtOrAboveLevel} from '../app/helpers/courseLevels.es6'
+import * as utilities from './commonGraduationUtilities.es6'
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a

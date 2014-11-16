@@ -4,11 +4,11 @@ import * as _ from 'lodash'
 
 function findDays(daystring) {
 	var expandedDays = {
-		'M':  'Mo',
-		'T':  'Tu',
-		'W':  'We',
-		'Th': 'Th',
-		'F':  'Fr'
+		M:  'Mo',
+		T:  'Tu',
+		W:  'We',
+		Th: 'Th',
+		F:  'Fr'
 	}
 
 	var listOfDays = [];
@@ -116,10 +116,8 @@ function checkCourseTimeConflicts(mainCourse, altCourse) {
 	var conflict = false
 	_.each(mainCourse.offerings, function(mainOffer) {
 		_.each(altCourse.offerings, function(altOffer) {
-
 			// Cannot conflict if on different days.
 			if (mainOffer.day === altOffer.day) {
-
 				_.each(mainOffer.times, function(mainTime) {
 					_.each(altOffer.times, function(altTime) {
 						// var altStartsAfterMain      = altTime.start >= mainTime.start
@@ -130,12 +128,9 @@ function checkCourseTimeConflicts(mainCourse, altCourse) {
 						if (altStartsBeforeMainEnds && altEndsAfterMainStarts) {
 							conflict = true;
 						}
-
 					})
 				})
-
 			}
-
 		})
 	})
 	return conflict

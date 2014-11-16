@@ -30,7 +30,7 @@
     "eqeqeq": true,
     "esnext": true,
     "globalstrict": true,
-    "indent": 4,
+    "indent": "\t",
     "loopfunc": true,
     "node": false,
     "trailing": true,
@@ -44,6 +44,89 @@
       "module"
     ]
   },
+  "jscsConfig": {
+    "esnext": true,
+    "fileExtensions": [
+      ".js",
+      ".es6"
+    ],
+    "excludeFiles": [
+      "node_modules/**",
+      "app/helpers/uuid.es6",
+      "app/helpers/details.polyfill.es6"
+    ],
+    "additionalRules": [
+      "node_modules/jscs-jsdoc/lib/rules/*.js"
+    ],
+    "disallowEmptyBlocks": true,
+    "disallowImplicitTypeConversion": [
+      "numeric",
+      "boolean",
+      "binary",
+      "string"
+    ],
+    "disallowMixedSpacesAndTabs": "smart",
+    "disallowMultipleLineStrings": true,
+    "disallowMultipleVarDecl": true,
+    "disallowNewlineBeforeBlockStatements": true,
+    "disallowPaddingNewlinesInBlocks": true,
+    "disallowQuotedKeysInObjects": "allButReserved",
+    "disallowSpaceAfterObjectKeys": true,
+    "disallowSpaceAfterPrefixUnaryOperators": true,
+    "disallowSpaceBeforePostfixUnaryOperators": true,
+    "disallowSpacesInCallExpression": true,
+    "disallowSpacesInsideArrayBrackets": "nested",
+    "disallowTrailingWhitespace": true,
+    "disallowYodaConditions": true,
+    "requireBlocksOnNewline": 1,
+    "requireCamelCaseOrUpperCaseIdentifiers": true,
+    "requireCommaBeforeLineBreak": true,
+    "requireDotNotation": true,
+    "requireLineFeedAtFileEnd": true,
+    "requireOperatorBeforeLineBreak": true,
+    "requireParenthesesAroundIIFE": true,
+    "requireSpaceAfterBinaryOperators": true,
+    "requireSpaceAfterKeywords": [
+      "do",
+      "for",
+      "if",
+      "else",
+      "switch",
+      "case",
+      "try",
+      "catch",
+      "void",
+      "while",
+      "with",
+      "return",
+      "typeof"
+    ],
+    "requireSpaceAfterLineComment": true,
+    "requireSpaceBeforeBinaryOperators": true,
+    "requireSpaceBeforeBlockStatements": true,
+    "requireSpacesInConditionalExpression": true,
+    "safeContextKeyword": [
+      "self"
+    ],
+    "validateIndentation": "\t",
+    "validateLineBreaks": "LF",
+    "validateParameterSeparator": ", ",
+    "validateQuoteMarks": {
+      "mark": "'",
+      "escape": true
+    },
+    "jsDoc": {
+      "checkParamNames": true,
+      "requireParamTypes": true,
+      "checkRedundantParams": true,
+      "checkReturnTypes": true,
+      "checkRedundantReturns": true,
+      "requireReturnTypes": true,
+      "checkTypes": true,
+      "checkRedundantAccess": true,
+      "leadingUnderscoreAccess": true
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:hawkrives/gobbldygook.git"
@@ -55,22 +138,22 @@
   },
   "homepage": "https://hawkrives.github.io/gobbldygook",
   "dependencies": {
-    "6to5": "^1.10.10",
+    "6to5": "^1.12.4",
     "6to5-browserify": "^1.0.0",
-    "6to5-loader": "^0.2.3",
     "autoprefixer": "^3.1.0",
     "bluebird": "^2.3.10",
     "browser-sync": "^1.6.3",
     "colors.css": "^2.0.3",
     "crypto-browserify": "^3.3.0",
-    "css-loader": "^0.9.0",
     "del": "^0.1.3",
     "es6-shim": "^0.20.2",
     "eventemitter3": "^0.1.5",
+    "exorcist": "^0.1.6",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^1.0.1",
     "gulp-changed": "^1.0.0",
     "gulp-filter": "^1.0.2",
+    "gulp-jscs": "^1.3.0",
     "gulp-jshint": "^1.9.0",
     "gulp-notify": "^2.0.0",
     "gulp-sass": "^1.2.2",
@@ -80,19 +163,20 @@
     "gulp-util": "^3.0.1",
     "humanize-plus": "^1.5.0",
     "jest-cli": "^0.1.18",
+    "jscs": "^1.7.3",
+    "jscs-jsdoc": "0.0.23",
     "jshint-stylish": "^1.0.0",
-    "json-loader": "^0.5.1",
     "lodash": "^2.4.1",
+    "pretty-hrtime": "^0.2.2",
     "react": "^0.12.0",
-    "react-dnd": "^0.5.0",
+    "react-dnd": "^0.6.0",
     "react-layers": "^0.3.1",
     "react-router": "^0.10.2",
+    "require-dir": "^0.1.0",
     "run-sequence": "^1.0.1",
-    "sass-loader": "^0.3.0",
-    "style-loader": "^0.8.2",
-    "transform-loader": "^0.2.1",
     "treo": "^0.3.0",
-    "webpack": "^1.4.12",
-    "webpack-dev-server": "^1.6.5"
+    "uglify-js": "^2.4.15",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.1.1"
   }
 }

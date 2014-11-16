@@ -4,67 +4,67 @@ import * as _ from 'lodash'
 // Like, 'these are the valid departments' and 'these are the valid professors'
 
 var semesters = {
-	'fall': 1,
-	'interim': 2,
+	fall: 1,
+	interim: 2,
 	'j-term': 2,
-	'jterm': 2,
-	'j': 2,
-	'spring': 3,
+	jterm: 2,
+	j: 2,
+	spring: 3,
 	'summer 1': 4,
-	'summer1': 4,
-	'early': 4,
+	summer1: 4,
+	early: 4,
 	'early summer': 4,
 	'summer session 1': 4,
 	'summer session 2': 5,
-	'late': 5,
+	late: 5,
 	'late summer': 5,
-	'summer2': 5,
+	summer2: 5,
 	'summer 2': 5,
-	'summers': ['$OR', 4, 5],
+	summers: ['$OR', 4, 5],
 }
 
-var department_mapping = {
+var departmentMapping = {
 	'american conversation': 'AMCON',
 	'american conversations': 'AMCON',
 	'asian studies': 'ASIAN',
 	'computer science': 'CSCI',
-	'cs': 'CSCI',
-	'physics': 'PHYS',
-	'religion': 'REL',
-	'ar': 'ART',
-	'as': 'ASIAN',
-	'bi': 'BIO',
-	'ch': 'CHEM',
-	'ec': 'ECON',
-	'es': 'ENVST',
-	'hi': 'HIST',
-	'mu': 'MUSIC',
-	'ph': 'PHIL',
-	'ps': 'PSCI',
-	're': 'REL',
-	'sa': 'SOAN',
-	'compsci': 'CSCI',
+	cs: 'CSCI',
+	physics: 'PHYS',
+	religion: 'REL',
+	ar: 'ART',
+	as: 'ASIAN',
+	bi: 'BIO',
+	ch: 'CHEM',
+	ec: 'ECON',
+	es: 'ENVST',
+	hi: 'HIST',
+	mu: 'MUSIC',
+	ph: 'PHIL',
+	ps: 'PSCI',
+	re: 'REL',
+	sa: 'SOAN',
+	compsci: 'CSCI',
 }
 
-var keyword_mappings = {
-	'departments': 'depts',
-	'department': 'depts',
-	'dept': 'depts',
-	'semester': 'sem',
-	'number': 'num',
-	'name': 'title',
-	'ge': 'gereqs',
-	'gereq': 'gereqs',
-	'ges': 'gereqs',
-	'gened': 'gereqs',
-	'geneds': 'gereqs',
-	'prof': 'profs',
-	'instructor': 'profs',
-	'instructors': 'profs',
-	'inst': 'profs',
+var keywordMappings = {
+	departments: 'depts',
+	department: 'depts',
+	dept: 'depts',
+	semester: 'sem',
+	number: 'num',
+	name: 'title',
+	ge: 'gereqs',
+	gereq: 'gereqs',
+	ges: 'gereqs',
+	gened: 'gereqs',
+	geneds: 'gereqs',
+	prof: 'profs',
+	instructor: 'profs',
+	instructors: 'profs',
+	inst: 'profs',
 }
 
-var gereq_mapping = {
+var gereqMapping = {
 	'history of western culture': 'HWC',
 	'historical studies in western culture': 'HWC',
 	'artistic studies': 'ALS-A',
@@ -77,13 +77,13 @@ var gereq_mapping = {
 	'scientific exploration and discovery': 'SED',
 	'first-year writing': 'FYW',
 	'writing in context': 'WRI',
-	'writing': 'WRI',
-	'bible': 'BTS-B',
-	'biblical': 'BTS-B',
+	writing: 'WRI',
+	bible: 'BTS-B',
+	biblical: 'BTS-B',
 	'bible studies': 'BTS-T',
 	'biblical studies': 'BTS-T',
-	'theology': 'BTS-T',
-	'theological': 'BTS-T',
+	theology: 'BTS-T',
+	theological: 'BTS-T',
 	'theology studies': 'BTS-T',
 	'theological studies': 'BTS-T',
 	'biblical and theological studies - bible': 'BTS-B',
@@ -94,11 +94,11 @@ var gereq_mapping = {
 	'oral communication': 'ORC',
 	'abstract and quantitative reasoning': 'AQR',
 	'studies in physical movement': 'SPM',
-	'gym': 'SPM',
+	gym: 'SPM',
 	'studies in human behavior and society': 'HBS',
 	'ethical issues and normative perspectives': 'EIN',
 	'ethical issues': 'EIN',
-	'ethics': 'EIN',
+	ethics: 'EIN',
 }
 
 var evenIndex = (value, index) => index % 2 === 0;
@@ -150,7 +150,7 @@ function buildQueryFromString(queryString) {
 	keys = _.map(keys, (key) => {
 		key = key.toLowerCase()
 		if (key.indexOf('_') !== 0)
-			key = keyword_mappings[key] || key;
+			key = keywordMappings[key] || key;
 		return key;
 	})
 
@@ -165,12 +165,12 @@ function buildQueryFromString(queryString) {
 
 			if (key === 'depts') {
 				val = val.toLowerCase()
-				val = department_mapping[val] || val.toUpperCase();
+				val = departmentMapping[val] || val.toUpperCase();
 			}
 
 			else if (key === 'gereqs') {
 				val = val.toLowerCase()
-				val = gereq_mapping[val] || val.toUpperCase()
+				val = gereqMapping[val] || val.toUpperCase()
 			}
 
 			else if (key === 'deptnum') {
@@ -182,14 +182,9 @@ function buildQueryFromString(queryString) {
 				val = semesters[val] || parseInt(val, 10);
 			}
 
-			else if (key === 'year')
+			else if (_.contains(['year', 'term', 'level', 'num'], key)) {
 				val = parseInt(val, 10)
-			else if (key === 'term')
-				val = parseInt(val, 10)
-			else if (key === 'level')
-				val = parseInt(val, 10)
-			else if (key === 'num')
-				val = parseInt(val, 10)
+			}
 
 			return val;
 		})

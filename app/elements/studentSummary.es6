@@ -4,10 +4,10 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
-import ContentEditable from './contentEditable'
+import ContentEditable from './contentEditable.es6'
 
-import add from '../helpers/add'
-import randomChar from '../helpers/randomChar'
+import add from '../helpers/add.es6'
+import randomChar from '../helpers/randomChar.es6'
 
 let goodGraduationMessage = 'It looks like you\'ll make it! Just follow the plan, and go over my output with your advisor a few times.'
 let badGraduationMessage = 'You haven\'t planned everything out yet. Ask your advisor if you need help fitting everything in.'

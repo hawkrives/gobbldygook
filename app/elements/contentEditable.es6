@@ -11,7 +11,7 @@ var ContentEditable = React.createClass({
 			contentEditable: true,
 			dangerouslySetInnerHTML: {__html: this.props.html}})
 	},
-	shouldComponentUpdate(nextProps){
+	shouldComponentUpdate(nextProps) {
 		return nextProps.html !== this.getDOMNode().innerHTML;
 	},
 	componentWillUpdate(nextProps) {
@@ -19,7 +19,7 @@ var ContentEditable = React.createClass({
 			this.getDOMNode().innerHTML = nextProps.html;
 		}
 	},
-	emitChange(){
+	emitChange() {
 		var html = this.getDOMNode().innerHTML;
 		if (this.props.onChange && html !== this.lastHtml) {
 			this.props.onChange({
@@ -27,22 +27,6 @@ var ContentEditable = React.createClass({
 			});
 		}
 		this.lastHtml = html;
-	},
-});
-
-var App = React.createClass({
-	getInitialState: function(){
-		return {html: "this is <em>an</em> example"};
-	},
-	handleChange(ev) {
-		this.setState({html: ev.target.value});
-		console.log(ev.target.value)
-	},
-	render: function(){
-		return React.createElement(ContentEditable, {
-			html: this.state.html,
-			onChange: this.handleChange
-		})
 	},
 });
 

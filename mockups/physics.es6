@@ -2,10 +2,10 @@
 
 import * as _ from 'lodash'
 
-import hasDepartment from '../app/helpers/hasDepartment'
-import {checkCoursesFor} from '../app/helpers/courses'
+import hasDepartment from '../app/helpers/hasDepartment.es6'
+import {checkCoursesFor} from '../app/helpers/courses.es6'
 
-import {isRequiredCourse} from './commonMajorUtilities'
+import {isRequiredCourse} from './commonMajorUtilities.es6'
 
 const physDeptRequiredCourses = [
 	{deptnum:'PHYS 130'},

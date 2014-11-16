@@ -2,9 +2,9 @@
 
 import * as _ from 'lodash'
 
-import * as common from './commonGraduationRequirements'
-import * as utilities from './commonGraduationUtilities'
-import * as educ from './commonEducationRequirements'
+import * as common from './commonGraduationRequirements.es6'
+import * as utilities from './commonGraduationUtilities.es6'
+import * as educ from './commonEducationRequirements.es6'
 let isMajoringIn = utilities.isMajoringIn
 
 function artsMajor(studies, courses) {
@@ -124,7 +124,7 @@ function checkBachelorOfArtsDegree(student) {
 	var studies = student.studies
 	var courses = _.filter(student.courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
 	var fabrications = student.fabrications
-	var creditsNeeded = student.creditsNeeded
+	var creditsNeeded = student.credits.needed
 
 	var graduationRequirements = [
 		common.courses(courses, creditsNeeded),

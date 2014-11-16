@@ -4,9 +4,9 @@ import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
-import {DragDropMixin} from 'react-dnd'
-import itemTypes from '../models/itemTypes'
-import semesterName from '../helpers/semesterName'
+import {DragDropMixin} from 'react-dnd/dist/ReactDND.min'
+import itemTypes from '../models/itemTypes.es6'
+import semesterName from '../helpers/semesterName.es6'
 
 function findSemesterList() {
 	return [
@@ -22,7 +22,7 @@ let CourseTitle = React.createClass({
 	render() {
 		let course = this.props.info;
 
-		///////
+		// /////
 		let titleText = course.title;
 		let courseName = course.name || course.title;
 		if (course.type === 'Topic')
@@ -50,7 +50,7 @@ var ExpandedCourse = React.createClass({
 		let course = this.props.info;
 		let tools = [];
 
-		///////
+		// /////
 
 		let title = React.createElement(CourseTitle, _.extend({}, this.props));
 
@@ -66,7 +66,7 @@ var ExpandedCourse = React.createClass({
 			{className: 'summary'},
 			identifier, professors);
 
-		///////
+		// /////
 
 		let offerings = React.createElement('p',
 			{className: 'offerings'},
@@ -98,7 +98,7 @@ var ExpandedCourse = React.createClass({
 			{className: 'details'},
 			offerings, gereqs, description, info)
 
-		///////
+		// /////
 
 		let semesterList = React.createElement('select',
 			{className: 'semester-select', key: 'semester-select'},
@@ -117,7 +117,7 @@ var ExpandedCourse = React.createClass({
 			{className: 'tools', onClick: function(ev) {ev.stopPropagation()}},
 			tools)
 
-		///////
+		// /////
 
 		return React.createElement('div', {className: 'info-rows'}, summary, title, details, toolsEls)
 	}

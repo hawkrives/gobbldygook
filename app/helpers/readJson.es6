@@ -1,6 +1,6 @@
 'use strict';
 
-import read from './read'
+import read from './read.es6'
 
 function readJson(url) {
 	return read(url)

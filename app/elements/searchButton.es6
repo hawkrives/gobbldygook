@@ -1,9 +1,10 @@
 'use strict';
 
 import * as React from 'react'
-import {queryCourses} from '../helpers/courses'
-import Course from './course'
-import semesterName from '../helpers/semesterName'
+import * as _ from 'lodash'
+import {queryCourses} from '../helpers/courses.es6'
+import Course from './course.es6'
+import semesterName from '../helpers/semesterName.es6'
 
 function toPrettyTerm(term) {
 	term = String(term)
@@ -23,13 +24,13 @@ var SearchButton = React.createClass({
 		}
 	},
 	toggleSidebar() {
-		this.setState({open: !this.state.open,})
+		this.setState({open: !this.state.open})
 	},
 	openSidebar() {
 		this.setState({open: true})
 	},
 	closeSidebar() {
-		this.setState({open: false,})
+		this.setState({open: false})
 	},
 	onSubmit: function() {
 		this.query(this.state.query)
@@ -49,15 +50,23 @@ var SearchButton = React.createClass({
 			.groupBy('term')
 			.value();
 
-			console.log(results)
+		console.log(results)
 		var endQueryTime = performance.now()
 		console.info('query took ' + (endQueryTime - startQueryTime) + 'ms.')
 
 		var startTime = performance.now()
 		let courseObjects = _.map(results, (grouping, key) => {
-			return React.createElement('li', {key: key, className: 'course-group'}, toPrettyTerm(key),
- 				React.createElement('ul', null,
-					_.map(grouping, (course) => React.createElement('li', {key: course.clbid}, React.createElement(Course, {info: course})))))})
+			return React.createElement('li', {key: key, className: 'course-group'},
+				toPrettyTerm(key),
+				React.createElement('ul', null,
+					_.map(grouping, (course) => {
+						return React.createElement('li', {key: course.clbid},
+							React.createElement(Course, {info: course})
+						)
+					})
+				)
+			)
+		})
 
 		var endTime = performance.now()
 		console.info('query object creation took an additional ' + (endTime - startTime) + 'ms.')

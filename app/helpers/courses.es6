@@ -1,8 +1,8 @@
 'use strict';
 
 import * as _ from 'lodash'
-import {courseCache} from './db'
-import buildQueryFromString from './queryStuff'
+import {courseCache} from './db.es6'
+import buildQueryFromString from './queryStuff.es6'
 
 function getCourse(clbid) {
 	let course = courseCache[clbid]
@@ -40,8 +40,6 @@ function checkCoursesFor(courses, filter) {
 	return _.any(courses, filter)
 }
 
-////
-// from queryCourses
 
 // 'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
 // { depts: [ '$AND', 'CSCI', 'ASIAN' ],
@@ -69,7 +67,9 @@ function checkCoursesFor(courses, filter) {
 
 function queryCourses(queryString) {
 	let query = buildQueryFromString(queryString)
+
 	console.log('query:', query)
+
 	var results = _(courseCache)
 		.filter(course => {
 			let matches = _.map(query, (values, key) => {
@@ -123,6 +123,7 @@ function queryCourses(queryString) {
 		})
 		.map(_.cloneDeep)
 		.value()
+
 	return results
 }
 

@@ -3,26 +3,26 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 
-import RequirementSet from './requirementSet'
+import RequirementSet from './requirementSet.es6'
 
-import getRandomInt from '../helpers/getRandomInt'
+import getRandomInt from '../helpers/getRandomInt.es6'
 
 var areas = {
 	// Degrees
-	'd-ba': require('../../mockups/bachelorOfArts').default,
-	'd-bm': require('../../mockups/bachelorOfMusic').default,
+	'd-ba': require('../../mockups/bachelorOfArts.es6').default,
+	'd-bm': require('../../mockups/bachelorOfMusic.es6').default,
 
 	// Majors
-	'm-csci': require('../../mockups/computerScience').default,
-	'm-asian': require('../../mockups/asianStudies').default,
-	'm-chem': require('../../mockups/chemistry').default,
-	'm-phys': require('../../mockups/physics').default,
+	'm-csci': require('../../mockups/computerScience.es6').default,
+	'm-asian': require('../../mockups/asianStudies.es6').default,
+	'm-chem': require('../../mockups/chemistry.es6').default,
+	'm-phys': require('../../mockups/physics.es6').default,
 
 	// Concentrations
-	'c-asian': require('../../mockups/asianStudiesConcentration').default,
-	'c-stat': require('../../mockups/statisticsConcentration').default,
-	'c-chin': require('../../mockups/chineseStudiesConcentration').default,
-	'c-japan': require('../../mockups/japaneseStudiesConcentration').default,
+	'c-asian': require('../../mockups/asianStudiesConcentration.es6').default,
+	'c-stat': require('../../mockups/statisticsConcentration.es6').default,
+	'c-chin': require('../../mockups/chineseStudiesConcentration.es6').default,
+	'c-japan': require('../../mockups/japaneseStudiesConcentration.es6').default,
 
 	// Emphases
 }

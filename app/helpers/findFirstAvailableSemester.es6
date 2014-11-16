@@ -1,7 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
-import findMissingNumberBinarySearch from './findMissingNumberBinarySearch'
+import findMissingNumberBinarySearch from './findMissingNumberBinarySearch.es6'
 
 // Takes a list of schedules and finds the first open semester.
 // If they go [1, 2, 4] findFirstAvailableYear will
