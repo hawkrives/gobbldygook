@@ -31,20 +31,19 @@ var getArea = (id) => areas[id]
 
 function findResults(obj) {
 	if (_.isArray(obj)) {
-		return _.chain(obj)
-			.map(function(val, idx, coll) {
-				return findResults(val)
-			})
+		return _(obj)
+			.map((val) => findResults(val))
 			.flatten()
 			.reject(_.isUndefined)
 			.value()
 	}
 	else if (_.isObject(obj)) {
-		return _.chain(obj)
-			.map(function(val, key, coll) {
+		return _(obj)
+			.map((val, key, coll) => {
 				if (key === 'result' && !coll.hasOwnProperty('details')) {
 					return val
-				} else if (!(key === 'matches')) {
+				}
+				else if (!(key === 'matches')) {
 					return findResults(val)
 				}
 			})
