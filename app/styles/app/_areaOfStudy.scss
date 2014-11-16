@@ -36,6 +36,17 @@
 
 		border: 0;
 
+		&.hundred { @include progress-bar($color: $green); }
+		&.ninety { @include progress-bar($color: $orange); }
+		&.eighty { @include progress-bar($color: $orange); }
+		&.seventy { @include progress-bar($color: $orange); }
+		&.sixty { @include progress-bar($color: $orange); }
+		&.fifty { @include progress-bar($color: $orange); }
+		&.forty { @include progress-bar($color: $yellow); }
+		&.thirty { @include progress-bar($color: $yellow); }
+		&.twenty { @include progress-bar($color: $red); }
+		&.ten { @include progress-bar($color: $red); }
+		&.zero { @include progress-bar($color: $red); }
 	}
 
 	summary::-webkit-details-marker { display: none; }
