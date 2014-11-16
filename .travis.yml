@@ -1,4 +1,12 @@
 language: node_js
+
+env:
+  SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=false
+
 node_js:
    - "0.10"
-script: make build && make test
+
+before_script:
+   - make build
+
+script: make test
