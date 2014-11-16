@@ -32,19 +32,22 @@
 	border: 0;
 }
 
-@mixin progress-bar($bg, $color, $gradient: null) {
+@mixin progress-bar($color, $bg: null, $gradient: null) {
 	@if $gradient == null {
 		$gradient: $color;
 	}
-	progress {
+	@if $bg == null {
+		$bg: transparent;
+	}
+	& {
 		color: $color;
 		background: $bg;
 
 		@content;
 	}
-	progress::-moz-progress-bar      { background: $gradient; }
-	progress::-webkit-progress-value { background: $gradient; }
-	progress::-webkit-progress-bar   { background: $bg; }
+	&::-moz-progress-bar      { background: $gradient; }
+	&::-webkit-progress-value { background: $gradient; }
+	&::-webkit-progress-bar   { background: $bg; }
 }
 
 @mixin square($size) {
