@@ -1,5 +1,6 @@
 gulp = node node_modules/.bin/gulp
 uglifyjs = node node_modules/.bin/uglifyjs
+cssshrink = node node_modules/.bin/cssshrink
 
 all:
 	@echo "You can run these commands via make:"
@@ -24,11 +25,12 @@ clean:
 cloc:
 	cloc . --exclude-dir=data,node_modules,dist,.idea,test --by-file-by-lang
 
-dist: build uglify
+dist: | clean build uglify
+	# can't use cssshrink b/c it joins the progress bar selectors
+	# $(cssshrink) dist/app.css > dist/app.min.css
 
 sass:
 	$(gulp) sass
-	# cssshrink
 
 scripts:
 	$(gulp) browserify
