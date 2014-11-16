@@ -56,6 +56,32 @@ function findResults(obj) {
 	}
 }
 
+let findWordForProgress = (maxProgress, currentProgress) => {
+	let progress = currentProgress / maxProgress
+	if (progress >= 1)
+		return 'hundred'
+	else if (progress >= 0.9)
+		return 'ninety'
+	else if (progress >= 0.8)
+		return 'eighty'
+	else if (progress >= 0.7)
+		return 'seventy'
+	else if (progress >= 0.6)
+		return 'sixty'
+	else if (progress >= 0.5)
+		return 'fifty'
+	else if (progress >= 0.4)
+		return 'forty'
+	else if (progress >= 0.3)
+		return 'thirty'
+	else if (progress >= 0.2)
+		return 'twenty'
+	else if (progress >= 0.1)
+		return 'ten'
+	else
+		return 'zero'
+}
+
 var AreaOfStudy = React.createClass({
 	displayName: 'AreaOfStudy',
 	load() {
@@ -106,11 +132,17 @@ var AreaOfStudy = React.createClass({
 		var currentProgress = _.size(_.compact(results))
 		var maxProgress = _.size(results)
 
+		var progressName = findWordForProgress(maxProgress, currentProgress)
+
 		return React.createElement('article', {id: this.props.area.id, className: 'area-of-study'},
 			React.createElement('details', null,
 				React.createElement('summary', null,
 					React.createElement('h1', null, this.props.area.title),
-					React.createElement('progress', {value: currentProgress, max: maxProgress})
+					React.createElement('progress', {
+						value: currentProgress,
+						max: maxProgress,
+						className: progressName,
+					})
 				),
 				requirementSets
 			)
