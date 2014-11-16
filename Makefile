@@ -7,7 +7,7 @@ all:
 	@echo "make build:    Run the build process"
 	@echo "make clean:    Clean the dist/ dir (by deleting it)"
 	@echo "make cloc:     If you have cloc installed, will count lines of code"
-	@echo "make dist:     Build, then uglify"
+	@echo "make dist:     Build, then uglify, minify, and compress"
 	@echo "make scripts:  Just builds the scripts"
 	@echo "make sass:     Just builds the stylesheets"
 	@echo "make test:     Prepares and runs the tests"
