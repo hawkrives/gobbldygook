@@ -134,6 +134,7 @@
     "autoprefixer": "^3.1.0",
     "bluebird": "^2.3.10",
     "browser-sync": "^1.6.3",
+    "browserify": "^6.3.2",
     "colors.css": "^2.0.3",
     "crypto-browserify": "^3.3.0",
     "del": "^0.1.3",
