@@ -46,7 +46,12 @@ test:
 	npm test
 
 uglify:
-	$(uglifyjs) dist/app.js --in-source-map dist/app.js.map --source-map dist/app.js.ug.map --screw-ie8 -c --stats -o dist/app.min.js
+	$(uglifyjs) dist/app.js \
+		--screw-ie8 -c --stats \
+		--in-source-map dist/app.js.map \
+		--source-map app.js.min.map \
+		-o dist/app.min.js
+	mv app.js.min.map dist/
 
 watch:
 	$(gulp) watch
