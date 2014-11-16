@@ -22,15 +22,9 @@
 		display: block;
 	}
 
-	@include progress-bar(
-		$bg: transparent,
-		$color: $olaf-gold,
-		$gradient: linear-gradient(
-			to bottom,
-			lighten($olaf-gradient-start, 10%),
-			lighten($olaf-gradient-end, 10%)
-	)) {
-		display: block;
+	progress {
+		@include progress-bar($color: lighten($orange, 10%));
+
 		position: absolute;
 		top: 0;
 

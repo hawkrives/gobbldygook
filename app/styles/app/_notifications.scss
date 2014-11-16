@@ -58,7 +58,7 @@
 }
 
 .toast {
-	@include progress-bar($bg: transparentize(#f1f1f1, 0.85), $color: #f1f1f1) {
+	@include progress-bar($color: #f1f1f1, $bg: transparentize(#f1f1f1, 0.85)) {
 		width: 100%;
 		vertical-align: baseline;
 		-webkit-appearance: none;
