@@ -1,58 +1,105 @@
 'use strict';
 
 import * as _ from 'lodash'
-import emitter from '../helpers/emitter.es6'
+import {Emitter} from 'event-kit'
+import events from '../helpers/events.es6'
 
 import uuid from '../helpers/uuid.es6'
 import randomChar from '../helpers/randomChar.es6'
 import {checkScheduleTimeConflicts} from '../helpers/time.es6'
 import {getCourse} from '../helpers/courses.es6'
 
-let Schedule = (scheduleData) => {
-	let schedule = {
-		id: uuid(), active: false,
-		year: 0, semester: 0, index: 1,
-		title: 'Schedule ' + randomChar().toUpperCase(),
-		clbids: [],
+class Schedule {
+	constructor(scheduleData={}) {
+		this._emitter = new Emitter;
+
+		this.id = scheduleData.id || uuid()
+		this.active = scheduleData.active !== undefined ?
+			scheduleData.active : false
+
+		this.year = scheduleData.year !== undefined ?
+			scheduleData.year : 0
+		this.semester = scheduleData.semester !== undefined ?
+			scheduleData.semester : 0
+		this.index = scheduleData.index !== undefined ?
+			scheduleData.index : 1
+
+		this.title = scheduleData.title || 'Schedule ' + randomChar().toUpperCase()
+
+		this.clbids = scheduleData.clbids || []
 	}
 
-	Object.defineProperty(schedule, 'courses', { get() {
+
+	// EventEmitter helpers
+
+	_emitChange() {
+		this._emitter.emit(events.didChange)
+	}
+
+	onDidChange(callback) {
+		return this._emitter.on(events.didChange, callback)
+	}
+
+
+	// Getters
+
+	get courses() {
 		return _.map(this.clbids, (id) => getCourse(id))
-	}})
+	}
 
-	Object.defineProperty(schedule, 'move', { value(year, semester) {
-		if (year)      this.year = year
-		if (semester)  this.semester = semester
-		emitter.emit('change')
-	}})
-	Object.defineProperty(schedule, 'reorder', { value(newIndex) {
+
+	// Lifecycle Fuctions
+
+	destroy() {
+		this._emitter.dispose()
+	}
+
+
+	// Schedule Maintenance
+
+	move(to={}) {
+		// `to` is an object: {year, semester}
+		if (to.year)
+			this.year = to.year
+		if (to.semester)
+			this.semester = to.semester
+
+		this._emitChange()
+	}
+	reorder(newIndex) {
 		this.index = newIndex
-		emitter.emit('change')
-	}})
-	Object.defineProperty(schedule, 'rename', { value(newTitle) {
+		this._emitChange()
+	}
+	rename(newTitle) {
 		this.title = newTitle
-		emitter.emit('change')
-	}})
+		this._emitChange()
+	}
 
-	Object.defineProperty(schedule, 'reorderCourse', { value(clbid, newIndex) {
+
+	// Course Maintenance
+
+	reorderCourse(clbid, newIndex) {
 		let oldIndex = _.findIndex(this.clbids, (id) => id === clbid)
 		this.clbids.splice(oldIndex, 1)
 		this.clbids.splice(newIndex, 0, clbid)
-		emitter.emit('change')
-	}})
-	Object.defineProperty(schedule, 'addCourse', { value(clbid, index) {
+		this._emitChange()
+	}
+	addCourse(clbid, index) {
 		index = index || this.clbids.length - 1
 		this.clbids.splice(index, 0, clbid)
-		emitter.emit('change')
-	}})
-	Object.defineProperty(schedule, 'removeCourse', { value(clbid) {
+		this._emitChange()
+	}
+	removeCourse(clbid) {
 		console.log('removing course', clbid)
 		let index = _.findIndex(this.clbids, (id) => id === clbid)
 		this.clbids.splice(index, 1)
-		emitter.emit('change')
-	}})
+		this._emitChange()
+	}
 
-	Object.defineProperty(schedule, 'validate', { value() {
+
+	// Schedule Validation
+
+	validate() {
 		// Checks to see if the schedule is valid
 
 		// Step one: do any times conflict?
@@ -71,28 +118,14 @@ let Schedule = (scheduleData) => {
 			hasConflict: hasConflict,
 			conflicts: conflicts
 		}
-	}})
+	}
 
-	Object.defineProperty(schedule, 'isValid', { get() {
+	get isValid() {
 		return !this.validate().hasConflict
-	}})
-	Object.defineProperty(schedule, 'conflicts', { get() {
+	}
+	get conflicts() {
 		return this.validate().conflicts
-	}})
-
-	Object.defineProperty(schedule, 'status', { get() {
-		return this.validate()
-	}})
-
-	schedule.id = scheduleData.id || schedule.id
-	schedule.active = scheduleData.active || schedule.active
-	schedule.year = scheduleData.year || schedule.year
-	schedule.semester = scheduleData.semester || schedule.semester
-	schedule.index = scheduleData.index || schedule.index
-	schedule.title = scheduleData.title || schedule.title
-	schedule.clbids = scheduleData.clbids || schedule.clbids
-
-	return schedule
+	}
 }
 
 export default Schedule

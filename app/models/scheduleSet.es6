@@ -1,50 +1,83 @@
 'use strict';
 
 import * as _ from 'lodash'
-import emitter from '../helpers/emitter.es6'
+import {Emitter} from 'event-kit'
+import events from '../helpers/events.es6'
 import Schedule from './scheduleModel.es6'
 
-let ScheduleSet = (scheduleData) => {
-	let schedules = {}
+class ScheduleSet {
+	constructor(scheduleData=[]) {
+		this.data = [];
+		this._emitter = new Emitter;
 
-	Object.defineProperty(schedules, 'byYear', { get() {
-		return _.groupBy(schedules, 'year')
-	}})
+		scheduleData = scheduleData.data || scheduleData
+		_.each(scheduleData, this.create, this)
+	}
 
-	Object.defineProperty(schedules, 'activeSchedules', { get() {
-		return _.filter(schedules, {active: true})
-	}})
-	Object.defineProperty(schedules, 'activeCourses', { get() {
-		return _(schedules.activeSchedules).map((schedule) => schedule.courses).flatten().value()
-	}})
 
-	Object.defineProperty(schedules, 'create', { value(schedule) {
-		console.log('creating', schedule)
+	// EventEmitter helpers
+
+	_emitChange() {
+		this._emitter.emit(events.didChange)
+	}
+
+	onDidChange(callback) {
+		return this._emitter.on(events.didChange, callback)
+	}
+
+
+	// Getters
+
+	get byYear() {
+		return _.groupBy(this.data, 'year')
+	}
+
+	get activeSchedules() {
+		return _.filter(this.data, {active: true})
+	}
+
+	get activeCourses() {
+		return _(this.activeSchedules)
+			.map((schedule) => schedule.courses)
+			.flatten()
+			.value()
+	}
+
+
+	// Functions
+
+	create(schedule) {
+		console.log('creating schedule', schedule)
 		let sched = new Schedule(schedule)
-		schedules[sched.id] = sched
-		emitter.emit('change')
-	}})
 
-	Object.defineProperty(schedules, 'destroy', { value(id) {
+		sched.onDidChange(this._emitChange.bind(this))
+
+		this.data.push(sched)
+
+		this._emitChange()
+	}
+
+	destroy(id) {
 		console.log('removing schedule', id)
 
-		let deadSched = schedules[id]
-		delete schedules[id]
+		let deadSched = _.find(this.data, {id: id})
+
+		_.remove(this.data, {id: id})
+		deadSched.destroy()
 
 		if (deadSched.active) {
-			let otherSched = _.find(schedules, {year: deadSched.year, semester: deadSched.semester});
+			let otherSched = _.find(this.data,
+				{year: deadSched.year, semester: deadSched.semester});
 			if (otherSched)
 				otherSched.active = true
 		}
-		emitter.emit('change')
-	}})
-	Object.defineProperty(schedules, 'destroyMultiple', { value(ids) {
-		_.each(ids, schedules.destroy)
-	}})
 
-	_.each(scheduleData, schedules.create)
+		this._emitChange()
+	}
 
-	return schedules;
+	destroyMultiple(ids) {
+		_.each(ids, this.destroy, this)
+	}
 }
 
 export default ScheduleSet

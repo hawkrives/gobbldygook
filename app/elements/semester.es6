@@ -30,14 +30,16 @@ var Semester = React.createClass({
 			}
 		})
 	},
+
 	removeSemester() {
-		var currentTermSchedules = _.filter(this.props.schedules,
+		var currentTermSchedules = _.filter(this.props.schedules.data,
 			isCurrentTermSchedule(this.props.year, this.props.semester))
 
 		var scheduleIds = _.pluck(currentTermSchedules, 'id')
 
 		this.props.schedules.destroyMultiple(scheduleIds)
 	},
+
 	render() {
 		let activeSchedules = this.props.schedules.activeSchedules
 		this.schedule = _.find(activeSchedules,
@@ -78,7 +80,6 @@ var Semester = React.createClass({
 					key: course.clbid,
 					info: course,
 					schedule: schedule,
-					semesters: activeSchedules,
 					index: i,
 					conflicts: schedule.conflicts,
 				}))

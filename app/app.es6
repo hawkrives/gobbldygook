@@ -2,14 +2,15 @@
 
 import * as _ from 'lodash'
 import * as React from 'react'
+React.initializeTouchEvents(true)
 import * as Promise from 'bluebird'
+Promise.longStackTraces()
 
 import db from './helpers/db.es6'
 import documentReady from './helpers/document-ready.es6'
 
 import Gobbldygook from './elements/gobbldygookApp.es6'
 import loadData from './helpers/loadData.es6'
-import emitter from './helpers/emitter.es6'
 import svgSpinner from './svg-spinner.es6'
 
 import 'es6-shim'
@@ -23,9 +24,6 @@ window.React = React
 
 // Handy debugging function
 window.log = (thing) => console.log(_.isUndefined(thing) ? arguments : thing)
-
-React.initializeTouchEvents(true)
-Promise.longStackTraces()
 
 let render = () => React.render(React.createElement(Gobbldygook, null), document.body)
 
@@ -41,7 +39,6 @@ let blastoff = () => {
 		// Load data into the database, then render the app
 		loadData().then(() => {
 			render()
-			emitter.on('change', render)
 			console.log('done')
 		})
 	})

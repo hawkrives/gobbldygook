@@ -119,7 +119,7 @@ var ExpandedCourse = React.createClass({
 
 		// /////
 
-		return React.createElement('div', {className: 'info-rows'}, summary, title, details, toolsEls)
+		return React.createElement('div', {className: 'info-rows'}, title, summary, details, toolsEls)
 	}
 })
 
