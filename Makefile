@@ -14,7 +14,7 @@ all:
 	@echo "make uglify:   uglify app.js -> app.min.js"
 
 
-.PHONY: build clean cloc dist sass scripts serve test uglify watch
+.PHONY: build clean cloc dist sass scripts serve shrink-node test uglify watch
 
 build:
 	$(gulp) build
@@ -37,6 +37,10 @@ scripts:
 
 serve:
 	$(gulp) watch
+
+shrink-node:
+	npm dedupe
+	dmn clean -list
 
 test:
 	npm test
