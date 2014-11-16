@@ -1,8 +1,8 @@
-// __tests__/courseLevels-test.js
-jest.dontMock('../../app/helpers/courseLevels');
+// tests/courseLevels-test.js
+var should = require('should');
 
 describe('courseLevels', function() {
-	var courseLevels = require('../../app/helpers/courseLevels');
+	var courseLevels = require('../app/helpers/courseLevels.es6');
 	var courses = [];
 
 	beforeEach(function() {
@@ -18,28 +18,28 @@ describe('courseLevels', function() {
 	it('checks if a course is at or above a certain level', function() {
 		var coursesAtOrAboveLevel = courseLevels.coursesAtOrAboveLevel;
 
-		expect(coursesAtOrAboveLevel(200, courses[0])).toBe(true);
-		expect(coursesAtOrAboveLevel(200, courses[1])).toBe(true);
-		expect(coursesAtOrAboveLevel(200, courses[2])).toBe(false);
+		coursesAtOrAboveLevel(200, courses[0]).should.be.true;
+		coursesAtOrAboveLevel(200, courses[1]).should.be.true;
+		coursesAtOrAboveLevel(200, courses[2]).should.be.false;
 	});
 
 	it('filters a list of courses to only those with a level at or above "x"', function() {
 		var onlyCoursesAtOrAboveLevel = courseLevels.onlyCoursesAtOrAboveLevel;
 
-		expect(onlyCoursesAtOrAboveLevel(200, courses).length).toEqual(4);
+		onlyCoursesAtOrAboveLevel(200, courses).should.have.length(4);
 	});
 
 	it('checks if a course is at a certain level', function() {
 		var coursesAtLevel = courseLevels.coursesAtLevel;
 
-		expect(coursesAtLevel(200, courses[0])).toBe(false);
-		expect(coursesAtLevel(200, courses[1])).toBe(true);
-		expect(coursesAtLevel(200, courses[2])).toBe(false);
+		coursesAtLevel(200, courses[0]).should.be.false;
+		coursesAtLevel(200, courses[1]).should.be.true;
+		coursesAtLevel(200, courses[2]).should.be.false;
 	});
 
 	it('filters a list of courses to only those with a level at "x"', function() {
 		var onlyCoursesAtLevel = courseLevels.onlyCoursesAtLevel;
 
-		expect(onlyCoursesAtLevel(200, courses).length).toEqual(1);
+		onlyCoursesAtLevel(200, courses).should.have.length(1);
 	});
 });

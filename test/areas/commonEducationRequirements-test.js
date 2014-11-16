@@ -1,8 +1,4 @@
-// __tests__/areas/common-education-requirements-test.js
-jest.dontMock('../../mockups/commonEducationRequirements');
-jest.dontMock('../../mockups/commonEducationUtilities');
-jest.dontMock('../../app/helpers/deptNum');
-jest.dontMock('../../app/helpers/hasDepartment');
+// tests/areas/common-education-requirements-test.js
 
 // todo: the [across two depts] requirements need to validate when there's
 // only one course.
