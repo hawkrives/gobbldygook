@@ -4,6 +4,7 @@ import * as _ from 'lodash'
 import * as Promise from 'bluebird'
 import {Emitter} from 'event-kit'
 import events from '../helpers/events.es6'
+import {fileFormatVersion} from '../helpers/versions.es6'
 
 import uuid from '../helpers/uuid.es6'
 import randomChar from '../helpers/randomChar.es6'
@@ -30,6 +31,7 @@ class Student {
 		this._id = encodedStudent._id || encodedStudent.id || uuid()
 		this._name = encodedStudent._name || encodedStudent.name || 'Student ' + randomChar()
 		this._active = encodedStudent._active || encodedStudent.active || false
+		this._version = encodedStudent._version || encodedStudent.version || fileFormatVersion
 
 		this._creditsNeeded = encodedStudent._creditsNeeded || encodedStudent.creditsNeeded || (encodedStudent.credits ? encodedStudent.credits.needed : undefined)
 		if (this._creditsNeeded === undefined)
