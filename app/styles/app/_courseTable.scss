@@ -27,7 +27,9 @@
 }
 
 .year:hover .remove-year {
-	opacity: 0.15;
+	opacity: 0.5;
+
+	&:hover {opacity: 1;}
 }
 
 .course-table .year {

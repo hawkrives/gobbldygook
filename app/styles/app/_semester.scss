@@ -76,7 +76,9 @@ $semester-divider: solid 1px $border-bottom-color;
 }
 
 .semester:hover .remove-semester {
-	opacity: 0.15;
+	opacity: 0.5;
+
+	&:hover {opacity: 1;}
 }
 
 .course-list {
