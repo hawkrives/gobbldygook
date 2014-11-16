@@ -138,12 +138,22 @@ function loadStudentFromDb(opts) {
 	let rawStudent;
 
 	if (!opts.fromDb) {
-		let localStudent = localStorage.getItem('3AE9E7EE-DA8F-4014-B987-8D88814BB848')
-		rawStudent = JSON.parse(localStudent)
+		let demoStudentId = '3AE9E7EE-DA8F-4014-B987-8D88814BB848'
+		let currentVersionString = 'student-v3.0a6'
+		let localStudent = localStorage.getItem(demoStudentId)
+		localStudent = localStudent || localStorage.getItem(currentVersionString)
+
+		try { rawStudent = JSON.parse(localStudent) }
+		catch (e) {}
+
+		localStorage.removeItem(demoStudentId)
 	}
 
 	if (!rawStudent)
 		rawStudent = demoStudent
+
+	rawStudent.id = currentVersionString
+	localStorage.setItem(currentVersionString, JSON.stringify(rawStudent))
 
 	let student = new Student(rawStudent)
 	window.student = student
