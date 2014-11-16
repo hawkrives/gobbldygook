@@ -1,21 +1,36 @@
 # Gobbldygook
-This app is a course scheduler for students at St. Olaf College. You give it your areas of study (majors, concentrations, degrees), the course you have taken and are planning on taking, and it tells you if you can graduate or not.
+This is a course scheduler for students at St. Olaf College. You give it your areas of study (majors, concentrations, degrees), the course you *have* taken and are *planning* on taking, and it tells you if you can graduate or not.
 
-## How to run it (as a user)
-1. go to https://hawkrives.github.io/gobbldygook (not working yet)
-2. input your data
-3. play
 
-## How to build (for a dev)
-1. clone: `git clone https://github.com/hawkrives/gobbldygook.git`
-  - cd: `cd gobbldygook`
-2. submodule: `git submodule init && git submodule update`
-3. `npm`: `npm install`
-4. build: `make build` (or, to run a server: `make serve`, or just `make`)
+## Playing
+1. Go to <http://www.cs.stolaf.edu/users/rives/g/>
+2. Input your data
+3. ???
+4. Profit!
+
+
+## Hacking
+Copy/paste for setup:
+```bash
+git clone https://github.com/hawkrives/gobbldygook.git
+cd gobbldygook
+git submodule init && git submodule update
+npm install
+make serve
+```
+
+In short: clone, prepare submodules, install dependencies, and build.
+
+`make` will list the available commands.
+
 
 ## Credits
 - Initial concept from @xandrasings
 - Final project for Software Design, @hawkrives and @xandrasings
+- So much of the internet.
+- Teammate for January 2015: @drewvolz
+- Professor Hanson, for agreeing to be our advisor over Interim
+
 
 ## Screenshot
 ![Screenshot!](./screenshot.png)
