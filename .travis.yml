@@ -1,8 +1,5 @@
 language: node_js
 
-env:
-	SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=false
-
 node_js:
 	- "0.10"
 
