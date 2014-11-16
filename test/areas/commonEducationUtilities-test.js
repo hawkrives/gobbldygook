@@ -1,4 +1,4 @@
-// __tests__/areas/common-education-utilities-test.js
+// tests/areas/common-education-utilities-test.js
 jest.dontMock('../../mockups/commonEducationUtilities');
 
 describe('onlyQuarterCreditCoursesCanBePassFail', function() {

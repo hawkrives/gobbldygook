@@ -1,9 +1,8 @@
-// __tests__/deptNum-test.js
-jest.dontMock('../../app/helpers/deptNum');
-jest.dontMock('../../app/helpers/hasDepartment');
+// tests/deptNum-test.js
+var should = require('should');
 
 describe('deptNum', function() {
-	var deptNum = require('../../app/helpers/deptNum')
+	var deptNum = require('../app/helpers/deptNum.es6')
 
 	it('splits a deptnum into components', function() {
 		var splitDeptNum = deptNum.splitDeptNum;
@@ -13,9 +12,9 @@ describe('deptNum', function() {
 			'ASIAN 275',
 		];
 
-		expect(splitDeptNum(deptnums[0])).toEqual({depts: ['AS','RE'], num: 250});
-		expect(splitDeptNum(deptnums[1])).toEqual({depts: ['ASIAN','REL'], num: 250});
-		expect(splitDeptNum(deptnums[2])).toEqual({depts: ['ASIAN'], num: 275});
+		splitDeptNum(deptnums[0]).should.eql({depts: ['AS','RE'], num: 250});
+		splitDeptNum(deptnums[1]).should.eql({depts: ['ASIAN','REL'], num: 250});
+		splitDeptNum(deptnums[2]).should.eql({depts: ['ASIAN'], num: 275});
 	});
 
 	it('builds a consistent deptnum from depts and num', function() {
@@ -27,10 +26,10 @@ describe('deptNum', function() {
 			'ASIAN': {depts: ['ASIAN'], num: 175},
 		};
 
-		expect(buildDeptNum(courses['AS/RE'])).toEqual('ASIAN/REL 230');
-		expect(buildDeptNum(courses['BI/CH'])).toEqual('BIO/CHEM 125');
-		expect(buildDeptNum(courses['CH/BI'])).toEqual('CHEM/BIO 125');
-		expect(buildDeptNum(courses['ASIAN'])).toEqual('ASIAN 175');
+		buildDeptNum(courses['AS/RE']).should.equal('ASIAN/REL 230');
+		buildDeptNum(courses['BI/CH']).should.equal('BIO/CHEM 125');
+		buildDeptNum(courses['CH/BI']).should.equal('CHEM/BIO 125');
+		buildDeptNum(courses['ASIAN']).should.equal('ASIAN 175');
 	});
 
 	it('checks if a course\'s dept and num are between the parameters', function() {
@@ -45,6 +44,6 @@ describe('deptNum', function() {
 			{depts: ['BIO'], num: 175},
 		];
 
-		expect(hasDeptNumBetween(options[0], courses[0])).toBe(true);
+		hasDeptNumBetween(options[0], courses[0]).should.be.true;
 	});
 });

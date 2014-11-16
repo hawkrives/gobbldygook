@@ -37,7 +37,6 @@ serve:
 	$(gulp) watch
 
 test:
-	./prepare-test.sh
 	npm test
 
 uglify:

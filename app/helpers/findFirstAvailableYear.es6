@@ -14,10 +14,10 @@ function findFirstAvailableYear(schedules, matriculation) {
 	}
 
 	var years = _(schedules)
-			.sortBy('year')
-			.pluck('year')
-			.uniq()
-			.value()
+		.sortBy('year')
+		.pluck('year')
+		.uniq()
+		.value()
 
 	// put the matriculation year at the front to give a starting point
 	if (!(_.isUndefined(matriculation)))
