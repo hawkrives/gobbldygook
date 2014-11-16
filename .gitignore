@@ -7,7 +7,6 @@
 # Temp folders
 .sass-cache
 .tmp
-test
 
 # Node stuff
 node_modules

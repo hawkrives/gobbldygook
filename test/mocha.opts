@@ -1,0 +1,4 @@
+--require 6to5/register
+--reporter dot
+--ui bdd
+--growl
