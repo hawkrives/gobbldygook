@@ -4,15 +4,7 @@ import * as React from 'react'
 import * as _ from 'lodash'
 import {queryCourses} from '../helpers/courses.es6'
 import Course from './course.es6'
-import semesterName from '../helpers/semesterName.es6'
-
-function toPrettyTerm(term) {
-	term = String(term)
-	var year = term.substr(0, 4)
-	var sem = parseInt(term.substr(4, 1), 10)
-
-	return semesterName(sem) + ' ' + year + '-' + (parseInt(year.substr(2, 2), 10) + 1)
-}
+import {toPrettyTerm} from '../helpers/semesterName.es6'
 
 var SearchButton = React.createClass({
 	displayName: 'SearchButton',
