@@ -52,9 +52,10 @@ var SearchButton = React.createClass({
 		var startTime = performance.now()
 		let courseObjects = _.map(results, (courseOrTerm) => {
 			if (!(_.isObject(courseOrTerm))) {
+				var prettyTerm = toPrettyTerm(courseOrTerm)
 				return React.createElement('li',
-					{key: toPrettyTerm(courseOrTerm), className: 'course-group'},
-					toPrettyTerm(courseOrTerm))
+					{key: prettyTerm, className: 'course-group'},
+					prettyTerm)
 			}
 			return React.createElement('li',
 				{key: courseOrTerm.clbid},
