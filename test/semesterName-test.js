@@ -2,7 +2,7 @@
 var assert = require('assert');
 
 describe('semesterName', function() {
-	it('converts a semester number to a semester name ', function() {
+	it('converts a semester number to a semester name', function() {
 		var semesterName = require('../app/helpers/semesterName.es6').default;
 
 		assert.equal(semesterName(0), 'Unknown (0)');
