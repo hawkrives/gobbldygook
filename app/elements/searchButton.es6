@@ -41,6 +41,9 @@ var SearchButton = React.createClass({
 			.sortBy('deptnum') // Sort the results
 			.groupBy('term') // Group them by term
 			.pairs() // Turn the object into an array of pairs
+			// Sort the result arrays by the first element, the term,
+			// because Firefox seems to sort object keys weirdly.
+			.sortBy(group => group[0])
 			.reverse() // reverse it, so the most recent is at the top
 			.flatten() // then flatten so that it's all one flat list
 			.value();
