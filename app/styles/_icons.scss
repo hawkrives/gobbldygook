@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
-@import './ionicons/scss/ionicons-variables';
-// @import './ionicons/scss/ionicons-animation';
-// @import './ionicons/scss/ionicons-icons';
+@import '../icons/scss/ionicons-variables';
+// @import '../icons/scss/ionicons-animation';
+// @import '../icons/scss/ionicons-icons';
 $ionicons-font-path: './fonts';
 
 @font-face {
 	font-family: $ionicons-font-family;
-	src: url("#{$ionicons-font-path}/ionicons.woff?v=#{$ionicons-version}") format("woff");
+	src: url($ionicons-font-path + "/ionicons.woff") format("woff");
 	font-weight: normal;
 	font-style: normal;
 }

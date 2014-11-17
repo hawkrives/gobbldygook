@@ -45,7 +45,7 @@ module.exports = {
 		],
 	},
 	fonts: {
-		src: [src + '/styles/fonts/**', src + '/styles/ionicons/font/*.woff'],
+		src: [src + '/fonts/*.woff', src + '/icons/font/*.woff'],
 		dest: dest + '/fonts'
 	},
 	markup: {
