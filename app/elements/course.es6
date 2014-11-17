@@ -26,7 +26,7 @@ let CourseTitle = React.createClass({
 		let titleText = course.title;
 		let courseName = course.name || course.title;
 		if (course.type === 'Topic')
-			titleText = courseName.replace(/top.*:/gi, '');
+			titleText = courseName.replace(/top.*: */gi, '');
 
 		let courseType = React.createElement('span', {className: 'type'}, this.props.info.type)
 		let title = React.createElement('h1',
