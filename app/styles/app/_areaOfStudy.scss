@@ -16,7 +16,7 @@
 		font-family: $heading-font-stack;
 	}
 
-	summary {
+	& > summary {
 		position: relative;
 		cursor: pointer;
 		display: block;
@@ -54,21 +54,17 @@
 	summary::-ms-details-marker     { display: none; }
 	summary::details-marker         { display: none; }
 
-	& > details {
-		summary::after {
-			@include ionicon($ionicon-var-ios7-more);
+	& > summary::after {
+		@include ionicon($ionicon-var-ios7-more);
 
-			position: absolute;
-			top: 1px;
-			right: 12px;
-			z-index: 1;
-			font-size: 2em;
-		}
+		position: absolute;
+		top: 1px;
+		right: 12px;
+		z-index: 1;
+		font-size: 2em;
 	}
 
-	& > details[open] {
-		summary::after {
-			@include ionicon($ionicon-var-ios7-more-outline);
-		}
+	&[open] > summary::after {
+		@include ionicon($ionicon-var-ios7-more-outline);
 	}
 }

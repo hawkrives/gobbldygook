@@ -134,18 +134,16 @@ var AreaOfStudy = React.createClass({
 
 		var progressName = findWordForProgress(maxProgress, currentProgress)
 
-		return React.createElement('article', {id: this.props.area.id, className: 'area-of-study'},
-			React.createElement('details', null,
-				React.createElement('summary', null,
-					React.createElement('h1', null, this.props.area.title),
-					React.createElement('progress', {
-						value: currentProgress,
-						max: maxProgress,
-						className: progressName,
-					})
-				),
-				requirementSets
-			)
+		return React.createElement('details', {id: this.props.area.id, className: 'area-of-study'},
+			React.createElement('summary', null,
+				React.createElement('h1', null, this.props.area.title),
+				React.createElement('progress', {
+					value: currentProgress,
+					max: maxProgress,
+					className: progressName,
+				})
+			),
+			requirementSets
 		);
 	}
 });
