@@ -13,3 +13,16 @@ describe('semesterName', function() {
 		assert.equal(semesterName(5), 'Late Summer');
 	});
 });
+
+describe('toPrettyTerm', function() {
+	it('converts a term id to a year and semester', function() {
+		var toPrettyTerm = require('../app/helpers/semesterName.es6').toPrettyTerm;
+
+		assert.equal(toPrettyTerm(20141), 'Fall 2014-15');
+		assert.equal(toPrettyTerm(20103), 'Spring 2010-11');
+		assert.equal(toPrettyTerm(20135), 'Late Summer 2013-14');
+		assert.equal(toPrettyTerm(20111), 'Fall 2011-12');
+		assert.equal(toPrettyTerm(20316), 'Unknown (6) 2031-32');
+		assert.equal(toPrettyTerm(20134), 'Early Summer 2013-14');
+	});
+});
