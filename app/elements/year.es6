@@ -6,6 +6,7 @@ import * as React from 'react'
 import Course from './course.es6'
 import Semester from './semester.es6'
 
+import {expandYear} from '../helpers/semesterName.es6'
 import findFirstAvailableSemester from '../helpers/findFirstAvailableSemester.es6'
 import calculateNextScheduleId from '../helpers/calculateNextScheduleId.es6'
 
@@ -52,7 +53,7 @@ var Year = React.createClass({
 
 		return React.createElement('div', {className: 'year'},
 			React.createElement('header', {className: 'year-title'},
-				React.createElement('h1', null, this.props.year + ' + ' + (this.props.year + 1)),
+				React.createElement('h1', null, expandYear(this.props.year)),
 				React.createElement('button', {
 					className: 'remove-year',
 					title: 'Remove the year ' + this.props.year,
