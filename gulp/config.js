@@ -7,9 +7,7 @@ module.exports = {
 		minify: false,
 		browser: 'google chrome',
 		server: {
-			// We're serving the src folder as well,
-			// for sass sourcemap linking
-			baseDir: [dest, src]
+			baseDir: dest
 		},
 		files: [
 			dest + '/**',
