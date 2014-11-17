@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var jscs = require('gulp-jscs');
-var jshint = require('gulp-jshint');
 var config = require('../config').lint;
 
 gulp.task('lint', function() {
@@ -8,7 +7,5 @@ gulp.task('lint', function() {
 	// "requireSpaceBeforeKeywords": true,
 	// "requireTrailingComma": {"ignoreSingleValue": true,"ignoreSingleLine": true},
 	return gulp.src(config.src)
-		// .pipe(jshint(jshintConfig))
-		// .pipe(jshint.reporter('jshint-stylish'))
 		.pipe(jscs({configPath: './package.json'}));
 });
