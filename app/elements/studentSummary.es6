@@ -22,7 +22,7 @@ var StudentSummary = React.createClass({
 
 	render() {
 		var student = this.props.student
-		var studies = student.studies
+		var studies = student.studies.data
 		var name = student.name || randomChar()
 		var nameEl = React.createElement(ContentEditable, {
 			html: name,
