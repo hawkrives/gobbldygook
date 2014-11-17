@@ -38,33 +38,34 @@ var SearchButton = React.createClass({
 	query(searchQuery) {
 		var startQueryTime = performance.now()
 		var results = _(queryCourses(searchQuery))
-			.sortBy('deptnum')
-			.groupBy('term')
+			.sortBy('deptnum') // Sort the results
+			.groupBy('term') // Group them by term
+			.pairs() // Turn the object into an array of pairs
+			.reverse() // reverse it, so the most recent is at the top
+			.flatten() // then flatten so that it's all one flat list
 			.value();
 
-		console.log(results)
+		console.log('search results', results)
 		var endQueryTime = performance.now()
 		console.info('query took ' + (endQueryTime - startQueryTime) + 'ms.')
 
 		var startTime = performance.now()
-		let courseObjects = _.map(results, (grouping, key) => {
-			return React.createElement('li', {key: key, className: 'course-group'},
-				toPrettyTerm(key),
-				React.createElement('ul', null,
-					_.map(grouping, (course) => {
-						return React.createElement('li', {key: course.clbid},
-							React.createElement(Course, {info: course})
-						)
-					})
-				)
-			)
+		let courseObjects = _.map(results, (courseOrTerm) => {
+			if (!(_.isObject(courseOrTerm))) {
+				return React.createElement('li',
+					{key: toPrettyTerm(courseOrTerm), className: 'course-group'},
+					toPrettyTerm(courseOrTerm))
+			}
+			return React.createElement('li',
+				{key: courseOrTerm.clbid},
+				React.createElement(Course, {info: courseOrTerm}))
 		})
 
 		var endTime = performance.now()
-		console.info('query object creation took an additional ' + (endTime - startTime) + 'ms.')
+		console.info('react element creation took an additional ' + (endTime - startTime) + 'ms.')
 
 		this.setState({
-			courseObjects: courseObjects.reverse(),
+			courseObjects: courseObjects,
 		})
 	},
 	render() {
