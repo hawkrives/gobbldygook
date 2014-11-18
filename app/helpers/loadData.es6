@@ -167,9 +167,10 @@ function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
 	var files = _(infoFile.info)
-		.map((files) =>
-			_.map(files, (file) =>
-				updateDatabase(infoFile.type, file)))
+		.map((files) => _(files)
+			.filter((file) => parseInt(file.year, 10) > new Date().getFullYear() - 5)
+			.map((file) => updateDatabase(infoFile.type, file))
+			.value())
 		.flatten()
 		.value()
 
