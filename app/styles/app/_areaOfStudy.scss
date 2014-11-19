@@ -16,7 +16,7 @@
 		font-family: $heading-font-stack;
 	}
 
-	& > summary {
+	& > .summary {
 		position: relative;
 		cursor: pointer;
 		display: block;
@@ -49,12 +49,7 @@
 		&.zero    { @include progress-bar($color: $red); }
 	}
 
-	summary::-webkit-details-marker { display: none; }
-	summary::-moz-details-marker    { display: none; }
-	summary::-ms-details-marker     { display: none; }
-	summary::details-marker         { display: none; }
-
-	& > summary::after {
+	& > .summary::after {
 		@include ionicon($ionicon-var-ios7-more);
 
 		position: absolute;
@@ -64,7 +59,7 @@
 		font-size: 2em;
 	}
 
-	&[open] > summary::after {
+	&.open > .summary::after {
 		@include ionicon($ionicon-var-ios7-more-outline);
 	}
 }

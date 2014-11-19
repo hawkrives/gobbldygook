@@ -1,7 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
-import * as React from 'react'
+import * as React from 'react/addons'
 
 import RequirementSet from './requirementSet.es6'
 
@@ -111,7 +111,8 @@ var AreaOfStudy = React.createClass({
 			result: {
 				result: false,
 				details: []
-			}
+			},
+			open: false
 		}
 	},
 	componentWillReceiveProps() {
@@ -119,6 +120,9 @@ var AreaOfStudy = React.createClass({
 	},
 	componentDidMount() {
 		this.load()
+	},
+	toggle() {
+		this.setState({open: !this.state.open});
 	},
 	render() {
 		// console.log('area-of-study render')
@@ -134,8 +138,15 @@ var AreaOfStudy = React.createClass({
 
 		var progressName = findWordForProgress(maxProgress, currentProgress)
 
-		return React.createElement('details', {id: this.props.area.id, className: 'area-of-study'},
-			React.createElement('summary', null,
+		var classes = React.addons.classSet({
+			'area-of-study': true,
+			open: this.state.open,
+		})
+
+		return React.createElement('div',
+			{id: this.props.area.id, className: classes},
+			React.createElement('div',
+				{className: 'summary', onClick: this.toggle},
 				React.createElement('h1', null, this.props.area.title),
 				React.createElement('progress', {
 					value: currentProgress,
@@ -143,7 +154,7 @@ var AreaOfStudy = React.createClass({
 					className: progressName,
 				})
 			),
-			requirementSets
+			this.state.open ? requirementSets : null
 		);
 	}
 });
