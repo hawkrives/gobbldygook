@@ -130,19 +130,20 @@ var lookup = {
 }
 
 function updateDatabase(itemType, infoFromServer) {
-	infoFromServer.path = './data/' + itemType + '/' + infoFromServer.path
 	var oldHash = localStorage.getItem(infoFromServer.path)
 	var newHash = infoFromServer.hash
-	var itemPath = infoFromServer.path
+
+	var itemUrl = _.template('./data/${type}/${path}?v=${hash}',
+		{type: itemType, path: infoFromServer.path, hash: newHash})
 
 	if (newHash === oldHash) {
-		if (logDataLoading)  console.log('skipped ' + itemPath)
+		if (logDataLoading)  console.log('skipped ' + itemUrl)
 		return Promise.resolve(false)
 	}
 
-	if (logDataLoading)  console.log('need to add ' + itemPath)
+	if (logDataLoading)  console.log('need to add ' + itemUrl)
 
-	return readJson(itemPath)
+	return readJson(itemUrl)
 		.then(function(data) {
 			return {
 				data: data,
