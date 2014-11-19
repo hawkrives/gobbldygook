@@ -71,6 +71,12 @@ var keywordMappings = {
 	instructor: 'profs',
 	instructors: 'profs',
 	inst: 'profs',
+	time: 'times',
+	day: 'times',
+	days: 'times',
+	location: 'places',
+	locations: 'places',
+	place: 'places',
 }
 
 var gereqMapping = {
@@ -189,6 +195,14 @@ function buildQueryFromString(queryString) {
 			else if (key === 'sem') {
 				val = val.toLowerCase()
 				val = semesters[val] || parseInt(val, 10);
+			}
+
+			else if (key === 'profs') {
+				val = val.toUpperCase()
+			}
+
+			else if (key === 'times' || key === 'places') {
+				val = val.toLowerCase()
 			}
 
 			else if (_.contains(['year', 'term', 'level', 'num'], key)) {

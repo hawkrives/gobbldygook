@@ -95,7 +95,7 @@ function queryCourses(queryString) {
 					values = _.tail(values, 1);
 				}
 
-				if (_(['title', 'name', 'description', 'notes', 'profs']).contains(key)) {
+				if (_(['title', 'name', 'description', 'notes', 'profs', 'times', 'places']).contains(key)) {
 					substring = true;
 				}
 
