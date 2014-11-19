@@ -24,10 +24,18 @@ var semesters = {
 }
 
 var departmentMapping = {
+	'american con': 'AMCON',
 	'american conversation': 'AMCON',
 	'american conversations': 'AMCON',
 	'asian studies': 'ASIAN',
 	'computer science': 'CSCI',
+	'biomolecular studies': 'BMOLS',
+	bmol: 'BMOLS',
+	grcon: 'GCON',
+	greatcon: 'GCON',
+	'great con': 'GCON',
+	'great conversation': 'GCON',
+	'great conversations': 'GCON',
 	cs: 'CSCI',
 	physics: 'PHYS',
 	religion: 'REL',
@@ -43,6 +51,7 @@ var departmentMapping = {
 	ps: 'PSCI',
 	re: 'REL',
 	sa: 'SOAN',
+	wri: 'WRIT',
 	compsci: 'CSCI',
 }
 
