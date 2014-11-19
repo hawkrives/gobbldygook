@@ -73,6 +73,9 @@ function queryCourses(queryString) {
 	var results = _(courseCache)
 		.filter(course => {
 			let matches = _.map(query, (values, key) => {
+				if (!_.has(course, key))
+					return false;
+
 				let substring = false;
 
 				// values is either:
