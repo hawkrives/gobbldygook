@@ -92,15 +92,19 @@ function queryCourses(queryString) {
 					values = _.tail(values, 1);
 				}
 
-				if (_(['title', 'name', 'description', 'notes']).contains(key)) {
+				if (_(['title', 'name', 'description', 'notes', 'profs']).contains(key)) {
 					substring = true;
 				}
 
 				let internalMatches = _.map(values, (val) => {
 					// dept, gereqs, etc.
-					if (_.isArray(course[key])) {
-						return _.contains(course[key], val)
-					} else if (substring) {
+					if (_.isArray(course[key]) && !substring) {
+						return _(course[key]).contains(val)
+					}
+					else if (_.isArray(course[key]) && substring) {
+						return _(course[key]).map(item => _.contains(item.toLowerCase(), val.toLowerCase())).any()
+					}
+					else if (substring) {
 						return _.contains(course[key].toLowerCase(), val.toLowerCase())
 					}
 					return course[key] === val;
