@@ -32,14 +32,13 @@ $border-color: rgba(50, 50, 50, 0.25);
 	padding-top: 4px;
 }
 
-.requirement-result {
-	.incomplete, .completed, .nope {
 		&::after {
 			margin-left: 0.5em;
 		}
+.requirement {
 	}
 
-	.nope {
+	&.nope {
 		opacity: 0.5;
 		&::after {
 			opacity: 0.15;
@@ -47,28 +46,29 @@ $border-color: rgba(50, 50, 50, 0.25);
 		}
 	}
 
-	.incomplete::after {
+	&.incomplete::after {
 		@include ionicon($ionicon-var-close-circled);
 		color: $red;
 	}
-	.completed::after {
+	&.completed::after {
 		@include ionicon($ionicon-var-checkmark-circled);
 		color: darken($green, 10%);
 	}
+}
 
+.requirement-result-object-number, .requirement-result-boolean {
 	text-align: center;
 }
 
-.requirement-result > span {
+.requirement-result > .requirement {
 	padding: 2px 5px;
 	display: block;
 }
 
-span + .requirement-detail-list {
+.requirement + .requirement-detail-list {
 	border-top: 1px solid $border-color;
-	&:empty {
-		border-top: 0;
-	}
+
+	&:empty { border-top: 0; }
 }
 
 .requirement-detail-list {
@@ -80,16 +80,14 @@ span + .requirement-detail-list {
 	flex-flow: row wrap;
 
 	align-items: stretch;
-	align-content: center;
 
-	li {
+	.match, .requirement {
 		position: relative;
 
 		flex: 1 0 33%;
 		overflow: hidden;
 		text-overflow: ellipsis;
 
-		margin: 2px 7px;
-		justify-content: center;
+		padding: 2px 7px;
 	}
 }
