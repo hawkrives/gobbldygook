@@ -173,8 +173,8 @@ function checkBachelorOfMusicDegree(student) {
 		common.courses(courses, creditsNeeded),
 		common.residency(courses, fabrications),
 		common.interim(courses, fabrications, student.graduation),
-		common.gpa(courses),
 		common.courseLevel(courses),
+		common.gpa(courses),
 		common.gradedCourses(courses, fabrications),
 		dedicatedMusicMajor(studies, courses),
 	]

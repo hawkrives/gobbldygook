@@ -130,8 +130,8 @@ function checkBachelorOfArtsDegree(student) {
 		common.courses(courses, creditsNeeded),
 		common.residency(courses, fabrications),
 		common.interim(courses, fabrications, student.graduation),
-		common.gpa(courses),
 		common.courseLevel(courses),
+		common.gpa(courses),
 		common.gradedCourses(courses, fabrications),
 		artsMajor(studies, courses),
 		beyondTheMajor(studies, courses),
@@ -152,6 +152,7 @@ function checkBachelorOfArtsDegree(student) {
 		],
 		core: [
 			educ.historicalStudiesInWesternCulture(courses),
+			educ.studiesInHumanBehaviorAndSociety(courses),
 			educ.multiculturalDomesticStudies(courses),
 			educ.multiculturalGlobalStudies(courses),
 			educ.artisticStudies(courses),
@@ -160,7 +161,6 @@ function checkBachelorOfArtsDegree(student) {
 			educ.theologicalStudies(courses),
 			educ.scientificExplorationAndDiscovery(courses),
 			educ.integratedScientificTopics(courses),
-			educ.studiesInHumanBehaviorAndSociety(courses),
 		],
 		integrative: [
 			educ.ethicalIssuesAndNormativePerspectives(courses),

@@ -1,7 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
-import * as React from 'react'
+import * as React from 'react/addons'
 
 var BooleanRequirement = React.createClass({
 	displayName: 'BooleanRequirement',
@@ -9,7 +9,13 @@ var BooleanRequirement = React.createClass({
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-boolean'},
 			React.createElement('span',
-				{className: this.props.result ? ' completed' : ' incomplete'},
+				{
+					className: React.addons.classSet({
+						requirement: true,
+						completed: this.props.result,
+						incomplete: !this.props.result,
+					})
+				},
 				this.props.result ? 'Completed' : 'Incomplete')
 		)
 	}
@@ -18,18 +24,33 @@ var BooleanRequirement = React.createClass({
 var SomeArrayRequirement = React.createClass({
 	displayName: 'SomeArrayRequirement',
 	render() {
-		return React.createElement('div', {className: 'requirement-result requirement-result-some-array'},
+		return React.createElement('div',
+			{className: 'requirement-result requirement-result-some-array'},
 			(this.props.details.has || this.props.details.needs || this.props.details.word) ?
-				React.createElement('span', null,
+				React.createElement('span',
+					{
+						className: React.addons.classSet({
+							requirement: true,
+							completed: this.props.result,
+							incomplete: !this.props.result,
+						})
+					},
 					this.props.details.has,
 					this.props.details.word ? this.props.details.word : ' of ',
 					this.props.details.needs) : null,
 			React.createElement('ul',
 				{className: 'requirement-detail-list'},
 				_.map(this.props.details.from, (req) => {
-					return React.createElement('li', {
-						key: req.title, title: req.title,
-						className: req.result ? 'completed' : 'nope'},
+					return React.createElement('li',
+						{
+							key: req.title,
+							title: req.title,
+							className: React.addons.classSet({
+								requirement: true,
+								completed: req.result,
+								nope: !req.result,
+							})
+						},
 						(req.abbr || req.title)
 					)
 				})
@@ -46,9 +67,16 @@ var BooleanArrayRequirement = React.createClass({
 			React.createElement('ul',
 				{className: 'requirement-detail-list'},
 				_.map(this.props.details, (req) => {
-					return React.createElement('li', {
-						key: req.title, title: req.title + ': ' + (req.result ? 'Completed.' : 'Incomplete!'),
-						className: req.result ? 'completed' : 'incomplete'},
+					return React.createElement('li',
+						{
+							key: req.title,
+							title: req.title + ': ' + (req.result ? 'Completed.' : 'Incomplete!'),
+							className: React.addons.classSet({
+								requirement: true,
+								completed: req.result,
+								incomplete: !req.result,
+							})
+						},
 						(req.abbr || req.title)
 					)
 				})
@@ -63,12 +91,18 @@ var NumberObjectRequirement = React.createClass({
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-object-number'},
 			React.createElement('span',
-				{className: this.props.result ? 'completed' : 'incomplete'},
+				{
+					className: React.addons.classSet({
+						requirement: true,
+						completed: this.props.result,
+						incomplete: !this.props.result,
+					})
+				},
 				this.props.details.has, ' of ', this.props.details.needs
 			),
 			React.createElement('ul', {className: 'requirement-detail-list'},
 				_.map(this.props.details.matches, (match) => {
-					return React.createElement('li', {key: match.clbid}, match.deptnum)
+					return React.createElement('li', {key: match.clbid, className: 'match'}, match.deptnum)
 				})
 			)
 		)
