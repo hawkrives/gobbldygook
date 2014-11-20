@@ -18,7 +18,8 @@ var BooleanRequirement = React.createClass({
 var SomeArrayRequirement = React.createClass({
 	displayName: 'SomeArrayRequirement',
 	render() {
-		return React.createElement('div', {className: 'requirement-result requirement-result-some-array'},
+		return React.createElement('div',
+			{className: 'requirement-result requirement-result-some-array'},
 			(this.props.details.has || this.props.details.needs || this.props.details.word) ?
 				React.createElement('span', null,
 					this.props.details.has,
@@ -28,7 +29,8 @@ var SomeArrayRequirement = React.createClass({
 				{className: 'requirement-detail-list'},
 				_.map(this.props.details.from, (req) => {
 					return React.createElement('li', {
-						key: req.title, title: req.title,
+						key: req.title,
+						title: req.title,
 						className: req.result ? 'completed' : 'nope'},
 						(req.abbr || req.title)
 					)
@@ -47,7 +49,8 @@ var BooleanArrayRequirement = React.createClass({
 				{className: 'requirement-detail-list'},
 				_.map(this.props.details, (req) => {
 					return React.createElement('li', {
-						key: req.title, title: req.title + ': ' + (req.result ? 'Completed.' : 'Incomplete!'),
+						key: req.title,
+						title: req.title + ': ' + (req.result ? 'Completed.' : 'Incomplete!'),
 						className: req.result ? 'completed' : 'incomplete'},
 						(req.abbr || req.title)
 					)
