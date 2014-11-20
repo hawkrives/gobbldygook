@@ -31,7 +31,7 @@ describe('buildQueryFromString', function() {
 				depts: ['AMCON'],
 				title: ['Independence'],
 				year: [2014],
-				time: ['Tuesdays after 12'],
+				times: ['Tuesdays after 12'],
 			},
 			{
 				gereqs: ['$AND', 'HWC', 'HBS'],
