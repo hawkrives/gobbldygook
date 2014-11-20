@@ -27,7 +27,14 @@ var SomeArrayRequirement = React.createClass({
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-some-array'},
 			(this.props.details.has || this.props.details.needs || this.props.details.word) ?
-				React.createElement('span', null,
+				React.createElement('span',
+					{
+						className: React.addons.classSet({
+							requirement: true,
+							completed: this.props.result,
+							incomplete: !this.props.result,
+						})
+					},
 					this.props.details.has,
 					this.props.details.word ? this.props.details.word : ' of ',
 					this.props.details.needs) : null,
