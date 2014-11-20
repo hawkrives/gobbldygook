@@ -59,7 +59,9 @@ $border-color: rgba(50, 50, 50, 0.25);
 	}
 }
 
-.requirement-result-object-number, .requirement-result-boolean {
+.requirement-result-object-number,
+.requirement-result-some-array,
+.requirement-result-boolean {
 	text-align: center;
 }
 
@@ -82,15 +84,14 @@ $border-color: rgba(50, 50, 50, 0.25);
 	display: flex;
 	flex-flow: row wrap;
 
-	align-items: stretch;
+	justify-content: space-around;
 
 	.match, .requirement {
-		position: relative;
-
-		flex: 1 0 33%;
 		overflow: hidden;
 		text-overflow: ellipsis;
 
-		padding: 2px 7px;
+		padding: 2px 2px;
+		min-width: 35%;
+		text-align: center;
 	}
 }
