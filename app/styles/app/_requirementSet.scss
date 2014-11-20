@@ -32,25 +32,28 @@ $border-color: rgba(50, 50, 50, 0.25);
 	padding-top: 4px;
 }
 
-		&::after {
-			margin-left: 0.5em;
-		}
 .requirement {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+
+	&::before {
+		margin-right: 0.5em;
 	}
 
 	&.nope {
 		opacity: 0.5;
-		&::after {
+		&::before {
 			opacity: 0.15;
 			@include ionicon($ionicon-var-record);
 		}
 	}
 
-	&.incomplete::after {
+	&.incomplete::before {
 		@include ionicon($ionicon-var-close-circled);
 		color: $red;
 	}
-	&.completed::after {
+	&.completed::before {
 		@include ionicon($ionicon-var-checkmark-circled);
 		color: darken($green, 10%);
 	}
