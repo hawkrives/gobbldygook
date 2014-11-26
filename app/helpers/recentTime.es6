@@ -55,9 +55,9 @@ function findTerms(startYear, endYear) {
 }
 
 let discoverRecentYears = () => {
-	const now          = new Date()
-	const start        = now.getFullYear() - 4
-	const currentYear  = now.getFullYear()
+	let now          = new Date()
+	let start        = now.getFullYear() - 4
+	let currentYear  = now.getFullYear()
 
 	return _.range(start, currentYear + 1)
 }
