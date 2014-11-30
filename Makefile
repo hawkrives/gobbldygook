@@ -1,6 +1,7 @@
 gulp = node node_modules/.bin/gulp
 uglifyjs = node node_modules/.bin/uglifyjs
 cssshrink = node node_modules/.bin/cssshrink
+npm-check-updates = node node_modules/.bin/npm-check-updates
 
 all:
 	@echo "You can run these commands via make:"
@@ -44,6 +45,9 @@ shrink-node:
 
 test:
 	npm test
+
+check-updates:
+	$(npm-check-updates)
 
 uglify:
 	$(uglifyjs) dist/app.js \
