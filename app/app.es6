@@ -1,4 +1,5 @@
 'use strict';
+import '6to5/polyfill';
 
 import * as _ from 'lodash'
 import * as React from 'react'
@@ -13,7 +14,6 @@ import Gobbldygook from './elements/gobbldygookApp.es6'
 import loadData from './helpers/loadData.es6'
 import svgSpinner from './svg-spinner.es6'
 
-import 'es6-shim'
 
 // Just for use in the browser console, I swear.
 window.lodash = _
