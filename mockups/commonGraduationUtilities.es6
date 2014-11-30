@@ -25,7 +25,7 @@ function onlyFullCreditSummerSessionCourses(course) {
 	return (onlySummerSessionCourses(course) && onlyFullCreditCourses(course))
 }
 
-var creditsBeyondTheArea = _.curry(function(courses, creditCount, area) {
+var creditsBeyondTheArea = _.curry((courses, creditCount, area) => {
 	// Takes the courses *outside* of the major department, and counts them.
 	var deptAbbr = area.dept
 
