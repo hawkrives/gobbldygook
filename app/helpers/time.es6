@@ -2,16 +2,16 @@
 
 import * as _ from 'lodash'
 
-function findDays(daystring) {
-	var expandedDays = {
-		M:  'Mo',
-		T:  'Tu',
-		W:  'We',
-		Th: 'Th',
-		F:  'Fr'
-	}
+const DAYS = {
+	M:  'Mo',
+	T:  'Tu',
+	W:  'We',
+	Th: 'Th',
+	F:  'Fr',
+}
 
-	var listOfDays = [];
+function findDays(daystring) {
+	let listOfDays = [];
 
 	if (_.contains(daystring, '-')) {
 		// M-F, M-Th, T-F
@@ -30,10 +30,8 @@ function findDays(daystring) {
 		listOfDays = spacedOutDays.split(' ')
 	}
 
-	return _.map(listOfDays, function(day) {
-		// 'M' => 'Mo'
-		return expandedDays[day]
-	})
+	// 'M' => 'Mo'
+	return _.map(listOfDays, (day) => DAYS[day])
 }
 
 function findTimes(timestring) {
