@@ -7,8 +7,7 @@ var gulp  = require('gulp');
 var runSequence = require('run-sequence');
 var config = require('../config');
 
-gulp.task('watch', function() {
-	runSequence('clean', 'link', 'setWatch', 'build', 'browserSync');
+gulp.task('watch', ['setWatch', 'build', 'browserSync'], function() {
 	gulp.watch(config.lint.src, ['lint']);
 	gulp.watch(config.sass.src, ['sass']);
 	gulp.watch(config.fonts.src, ['fonts']);
