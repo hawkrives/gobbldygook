@@ -42,8 +42,8 @@ function findTimes(timestring) {
 		timestring = timestring.replace(/:/g, '')
 	}
 
-	var start = timestring.split('-')[0]
-	var end = timestring.split('-')[1]
+	var start = timestring.split('-')[0].toUpperCase()
+	var end = timestring.split('-')[1].toUpperCase()
 	var endsInPM = false
 
 	if (start === '00' && end === '00') {
