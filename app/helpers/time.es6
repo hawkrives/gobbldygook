@@ -55,14 +55,18 @@ function findTimes(timestring) {
 		return {start: 0, end: 2359}
 	}
 
-	if (_.contains(start, 'AM')) {
+	let amPmRegex = /([AP])\.?M\.?/i
+	let am = amPmRegex.exec(start)
+	let pm = amPmRegex.exec(end)
+
+	if (am) {
 		startsInAM = true
-		start = start.substring(0, start.indexOf('AM'))
+		start = start.substring(0, am.index)
 	}
 
-	if (_.contains(end, 'PM')) {
+	if (pm) {
 		endsInPM = true
-		end = end.substring(0, end.indexOf('PM'))
+		end = end.substring(0, pm.index)
 	}
 
 	let startTime = parseInt(start, 10)
