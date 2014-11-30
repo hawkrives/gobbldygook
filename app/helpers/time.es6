@@ -98,11 +98,11 @@ function convertTimeStringsToOfferings(course) {
 	let offerings = {}
 
 	_.each(course.times, function(time) {
-		let dayString = time.split(' ')[0]
-		let timeString = time.split(' ')[1]
+		let daystring = time.split(' ')[0]
+		let timestring = time.split(' ')[1]
 
-		let days = findDays(dayString)
-		let times = findTimes(timeString)
+		let days = findDays(daystring)
+		let times = findTimes(timestring)
 
 		_.each(days, function(day) {
 			if (!offerings[day]) {
