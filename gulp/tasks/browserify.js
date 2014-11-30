@@ -9,7 +9,7 @@
 */
 
 var browserify = require('browserify');
-var to5Browserify = require("6to5-browserify");
+var to5Browserify = require('6to5-browserify');
 var watchify = require('watchify');
 var bundleLogger = require('../util/bundleLogger');
 var gulp = require('gulp');
@@ -34,7 +34,7 @@ gulp.task('browserify', function(callback) {
 		});
 
 		bundler.transform(to5Browserify.configure({
-			blacklist: ["generators"],
+			blacklist: ['generators'],
 		}));
 
 		var bundle = function() {

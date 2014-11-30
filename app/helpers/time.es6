@@ -27,7 +27,7 @@ function findDays(daystring) {
 		// MTThFW or M/T/Th/F/W
 		let spacedOutDays = daystring.replace(/([A-Z][a-z]?)\/?/g, '$1 ')
 		// The regex sticks an extra space at the end. Remove it.
-		spacedOutDays = spacedOutDays.substr(0, spacedOutDays.length-1)
+		spacedOutDays = spacedOutDays.substr(0, spacedOutDays.length - 1)
 		listOfDays = spacedOutDays.split(' ')
 	}
 
@@ -45,7 +45,7 @@ function findTimes(timestring) {
 	timestring = timestring.replace(/:/g, '') // 8:00-9:25 => 800-925
 
 	let endsInPM = false
-    let startsInAM = false
+	let startsInAM = false
 
 	let split = timestring.split('-')
 	let start = cleanTimestringSegment(split[0])
