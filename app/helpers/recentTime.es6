@@ -7,49 +7,47 @@ let yearPlusTerm = (year, term) => {
 }
 
 function findTerms(startYear, endYear) {
-	const now          = new Date();
-	const start        = startYear || now.getFullYear() - 4;
-	const currentYear  = endYear || now.getFullYear();
-	const currentMonth = now.getMonth();
+	let now          = new Date();
+	let start        = startYear || now.getFullYear() - 4;
+	let currentYear  = endYear || now.getFullYear();
+	let currentMonth = now.getMonth();
 
-	const mostYears    = [for (year of _.range(start, currentYear)) year];
-	const allTerms     = [1, 2, 3, 4, 5];
-	const limitedTerms = [1, 2, 3];
+	let mostYears    = _.range(start, currentYear);
+	let allTerms     = [1, 2, 3, 4, 5];
+	let limitedTerms = [1, 2, 3];
 
-	const baseUrl = '/data/courses/';
-	const filetype = 'json';
-	const extension = '.' + filetype;
+	let baseUrl = '/data/courses/';
+	let extension = '.json';
 
 	// Create a list of numbers like 20081 by concatenating the year and term
 	// from 2008 to the year before this one.
-	let termList = [for (year of mostYears) for (term of allTerms) yearPlusTerm(year, term)];
+	let termList = _.map(mostYears, (year) => _.map(allTerms, (term) => yearPlusTerm(year, term)));
 
 	// St. Olaf publishes initial Fall, Interim, and Spring data in April of each year.
 	// Full data is published by August.
 	if (start !== currentYear || start === endYear) {
 		// do nothing if the current month is <= 3
 		if (currentMonth >= 4 && currentMonth <= 7) {
-			termList.concat([for (term of limitedTerms) yearPlusTerm(currentYear, term)]);
+			termList.concat(_.map(limitedTerms, (term) => yearPlusTerm(currentYear, term)));
 		}
 		else if (currentMonth >= 8) {
-			termList.concat([for (term of allTerms) yearPlusTerm(currentYear, term)]);
+			termList.concat(_.map(allTerms, (term) => yearPlusTerm(currentYear, term)));
 		}
 	}
 	else {
-		termList.concat([for (term of allTerms) yearPlusTerm(currentYear, term)]);
+		termList.concat(_.map(allTerms, (term) => yearPlusTerm(currentYear, term)));
 	}
 
 	// Sort the list of terms to 20081, 20082, 20091 (instead of 20081, 20091, 20082)
 	termList = termList.sort();
 
 	let termObj = {};
-	for (let termName of termList) {
-		let details = {
+	_.each(termList, (termName) => {
+		termObj[termName] = {
 			term: termName,
 			url: baseUrl + String(termName) + extension,
 		}
-		termObj[termName] = details;
-	}
+	})
 
 	return termObj;
 }
