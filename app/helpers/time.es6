@@ -44,8 +44,9 @@ function cleanTimestringSegment(segment) {
 function findTimes(timestring) {
 	timestring = timestring.replace(/:/g, '') // 8:00-9:25 => 800-925
 
-	var endsInPM = false
-    var startsInAM = false
+	let endsInPM = false
+    let startsInAM = false
+
 	let split = timestring.split('-')
 	let start = cleanTimestringSegment(split[0])
 	let end = cleanTimestringSegment(split[1])
@@ -64,8 +65,8 @@ function findTimes(timestring) {
 		end = end.substring(0, end.indexOf('PM'))
 	}
 
-	var startTime = parseInt(start, 10)
-	var endTime = parseInt(end, 10)
+	let startTime = parseInt(start, 10)
+	let endTime = parseInt(end, 10)
 
 	if (endTime <= 800) {
 		// 'M 0100-0400'
@@ -122,17 +123,17 @@ function convertTimeStringsToOfferings(course) {
 }
 
 function checkCourseTimeConflicts(mainCourse, altCourse) {
-	var conflict = false
+	let conflict = false
 	_.each(mainCourse.offerings, function(mainOffer) {
 		_.each(altCourse.offerings, function(altOffer) {
 			// Cannot conflict if on different days.
 			if (mainOffer.day === altOffer.day) {
 				_.each(mainOffer.times, function(mainTime) {
 					_.each(altOffer.times, function(altTime) {
-						// var altStartsAfterMain      = altTime.start >= mainTime.start
-						var altStartsBeforeMainEnds = altTime.start <= mainTime.end
-						var altEndsAfterMainStarts  = altTime.end >= mainTime.start
-						// var altEndsBeforeMainEnds   = altTime.end <= mainTime.end
+						// let altStartsAfterMain      = altTime.start >= mainTime.start
+						let altStartsBeforeMainEnds = altTime.start <= mainTime.end
+						let altEndsAfterMainStarts  = altTime.end >= mainTime.start
+						// let altEndsBeforeMainEnds   = altTime.end <= mainTime.end
 
 						if (altStartsBeforeMainEnds && altEndsAfterMainStarts) {
 							conflict = true;
