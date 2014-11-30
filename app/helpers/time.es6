@@ -36,10 +36,7 @@ function findDays(daystring) {
 }
 
 function findTimes(timestring) {
-	if (_.contains(timestring, ':')) {
-		// 8:00-9:25
-		timestring = timestring.replace(/:/g, '')
-	}
+	timestring = timestring.replace(/:/g, '') // 8:00-9:25 => 800-925
 
 	var start = timestring.split('-')[0].toUpperCase()
 	var end = timestring.split('-')[1].toUpperCase()
