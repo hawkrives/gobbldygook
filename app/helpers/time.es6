@@ -90,7 +90,7 @@ function findTimes(timestring) {
 
 	return {
 		start: startTime,
-		end: endTime
+		end: endTime,
 	}
 }
 
