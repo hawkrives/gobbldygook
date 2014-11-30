@@ -35,13 +35,20 @@ function findDays(daystring) {
 	return _.map(listOfDays, (day) => DAYS[day])
 }
 
+function cleanTimestringSegment(segment) {
+	let uppercased = segment.toUpperCase()
+	let trimmed = uppercased.trim()
+	return trimmed
+}
+
 function findTimes(timestring) {
 	timestring = timestring.replace(/:/g, '') // 8:00-9:25 => 800-925
 
-	var start = timestring.split('-')[0].toUpperCase()
-	var end = timestring.split('-')[1].toUpperCase()
 	var endsInPM = false
     var startsInAM = false
+	let split = timestring.split('-')
+	let start = cleanTimestringSegment(split[0])
+	let end = cleanTimestringSegment(split[1])
 
 	if (start === '00' && end === '00') {
 		return {start: 0, end: 2359}
