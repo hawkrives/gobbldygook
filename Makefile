@@ -27,8 +27,6 @@ cloc:
 	cloc . --exclude-dir=data,node_modules,dist,.idea,test --by-file-by-lang --force-lang="Javascript",es6
 
 dist: | clean build uglify
-	# can't use cssshrink b/c it joins the progress bar selectors
-	# $(cssshrink) dist/app.css > dist/app.min.css
 
 sass:
 	$(gulp) sass
