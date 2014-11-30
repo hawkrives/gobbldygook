@@ -22,12 +22,12 @@ function findDays(daystring) {
 			sequence.indexOf(startDay),
 			sequence.indexOf(endDay) + 1
 		)
-		// MTThFW
-		var spacedOutDays = daystring.replace(/([a-z]*)([A-Z])/g, '$1 $2')
-		// The regex sticks an extra space at the front. trim() it.
-		spacedOutDays = spacedOutDays.trim()
 	}
 	else {
+		// MTThFW or M/T/Th/F/W
+		let spacedOutDays = daystring.replace(/([A-Z][a-z]?)\/?/g, '$1 ')
+		// The regex sticks an extra space at the end. Remove it.
+		spacedOutDays = spacedOutDays.substr(0, spacedOutDays.length-1)
 		listOfDays = spacedOutDays.split(' ')
 	}
 
