@@ -45,9 +45,15 @@ function findTimes(timestring) {
 	var start = timestring.split('-')[0].toUpperCase()
 	var end = timestring.split('-')[1].toUpperCase()
 	var endsInPM = false
+    var startsInAM = false
 
 	if (start === '00' && end === '00') {
 		return {start: 0, end: 2359}
+	}
+
+	if (_.contains(start, 'AM')) {
+		startsInAM = true
+		start = start.substring(0, start.indexOf('AM'))
 	}
 
 	if (_.contains(end, 'PM')) {
@@ -73,11 +79,11 @@ function findTimes(timestring) {
 		endTime += 1200
 	}
 
-	if (endsInPM && startTime < 700) {
+	if (endsInPM && startTime < 700 && !startsInAM) {
 		startTime += 1200
 	}
 
-	if ((endTime - startTime) > 1000) {
+	if ((endTime - startTime) > 1000 && !startsInAM) {
 		// There are no courses that take this long.
 		// There are some 6-hour ones in interim, though.
 		startTime += 1200
