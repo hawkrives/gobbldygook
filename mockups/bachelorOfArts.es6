@@ -121,7 +121,7 @@ function checkBachelorOfArtsDegree(student) {
 	// Requirements taken from
 	// http://www.stolaf.edu/catalog/1314/academiclife/ba-gen-grad-requirements.html
 
-	var studies = student.studies
+	var studies = student.studies.data
 	var courses = _.filter(student.courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
 	var fabrications = student.fabrications
 	var creditsNeeded = student.creditsNeeded
