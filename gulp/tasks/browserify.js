@@ -9,6 +9,7 @@
 */
 
 var browserify = require('browserify');
+var to5Browserify = require("6to5-browserify");
 var watchify = require('watchify');
 var bundleLogger = require('../util/bundleLogger');
 var gulp = require('gulp');
@@ -32,7 +33,9 @@ gulp.task('browserify', function(callback) {
 			debug: config.debug
 		});
 
-		bundler.transform('6to5-browserify');
+		bundler.transform(to5Browserify.configure({
+			blacklist: ["generators"],
+		}));
 
 		var bundle = function() {
 			// Log when bundling starts
@@ -44,9 +47,8 @@ gulp.task('browserify', function(callback) {
 				.on('error', handleErrors)
 				// Use exorcist to remove the map file
 				.pipe(exorcist(bundleConfig.mapfile))
-				// Use vinyl-source-stream to make the
-				// stream gulp compatible. Specifiy the
-				// desired output filename here.
+				// Use vinyl-source-stream to make the stream gulp compatible.
+				// Specifiy the desired output filename here.
 				.pipe(source(bundleConfig.outputName))
 				// Specify the output destination
 				.pipe(gulp.dest(bundleConfig.dest))
