@@ -14,10 +14,10 @@ function foundationCourses(courses) {
 	*/
 
 	var requirements = [
-		{title: 'STAT 110', result: checkCoursesFor(courses, {dept:'STAT 110'})},
-		{title: 'STAT 212', result: checkCoursesFor(courses, {dept:'STAT 212'})},
-		{title: 'STAT 214', result: checkCoursesFor(courses, {dept:'STAT 214'})},
-		{title: 'STAT 263', result: checkCoursesFor(courses, {dept:'STAT 263'})},
+		{title: 'STAT 110', result: checkCoursesFor(courses, {deptnum:'STAT 110'})},
+		{title: 'STAT 212', result: checkCoursesFor(courses, {deptnum:'STAT 212'})},
+		{title: 'STAT 214', result: checkCoursesFor(courses, {deptnum:'STAT 214'})},
+		{title: 'STAT 263', result: checkCoursesFor(courses, {deptnum:'STAT 263'})},
 	]
 
 	return {
