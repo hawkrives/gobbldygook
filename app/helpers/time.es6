@@ -177,32 +177,6 @@ function checkScheduleTimeConflicts(schedule) {
 	return results
 }
 
-function testCourseTimes() {
-	var coursesWithTimes = [
-		{times: ['F 0800-0855', 'F 0905-1000', 'F 1045-1140']},
-		{times: ['M 0700-1000PM', 'MWF 0200-0255PM']},
-		{times: ['M 0700-1000PM', 'MWF 1045-1140']},
-		{times: ['M-F 0800-1000', 'M-F 0100-0300PM']},
-		{times: ['MWF 0800-1000', 'MWF 1150-0150PM', 'Th 0800-0925',
-			'Th 0935-1050', 'Th 1245-0205PM']},
-		{times: ['M-F 0800-1000', 'MTThFW 1040-1240PM', 'M-F 0100-0300PM']},
-		{times: ['Th 0700-0800']},
-	]
-
-	_.map(coursesWithTimes, convertTimeStringsToOfferings)
-	var results = checkScheduleTimeConflicts(coursesWithTimes)
-
-	_.each(results, function(value, compareOne) {
-		_.each(value, function(result, withTwo) {
-			if (result) {
-				console.log(compareOne + ' conflicts with ' + withTwo)
-			} else {
-				console.log(compareOne + ' does not conflict with ' + withTwo)
-			}
-		})
-	})
-}
-
 export {
 	findDays,
 	findTimes,
@@ -210,7 +184,5 @@ export {
 	convertTimeStringsToOfferings,
 
 	checkCourseTimeConflicts,
-	checkScheduleTimeConflicts,
-
-	testCourseTimes
+	checkScheduleTimeConflicts
 }
