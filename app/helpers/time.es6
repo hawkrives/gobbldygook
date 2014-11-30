@@ -15,9 +15,9 @@ function findDays(daystring) {
 
 	if (_.contains(daystring, '-')) {
 		// M-F, M-Th, T-F
-		var sequence = ['M', 'T', 'W', 'Th', 'F']
-		var startDay = daystring.split('-')[0]
-		var endDay = daystring.split('-')[1]
+		let sequence = ['M', 'T', 'W', 'Th', 'F']
+		let startDay = daystring.split('-')[0]
+		let endDay = daystring.split('-')[1]
 		listOfDays = sequence.slice(
 			sequence.indexOf(startDay),
 			sequence.indexOf(endDay) + 1
