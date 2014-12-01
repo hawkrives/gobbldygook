@@ -21,8 +21,8 @@ module.exports = {
 		],
 	},
 	link: {
-		src: 'data',
-		dest: dest + '/data',
+		src: 'node_modules/sto-courses',
+		dest: dest + '/data/courses',
 		opts: {force: true},
 	},
 	del: {
