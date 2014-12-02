@@ -201,11 +201,16 @@ var Course = React.createClass({
 		let warnings = [];
 
 		if (this.props.schedule && (this.props.info.year !== this.props.schedule.year) && this.props.schedule.year <= thisYear) {
-			warnings.push({msg: 'This course (from ' + this.props.info.year + ') is not offered in this year (' + this.props.schedule.year + ').'})
+			warnings.push({
+				msg: 'This course (from ' + this.props.info.year + ') is not offered in this year (' + this.props.schedule.year + ').'
+			})
 		}
 
 		if (this.props.schedule && this.props.info.sem !== this.props.schedule.semester) {
-			warnings.push({msg: 'This course (from ' + semesterName(this.props.info.sem) + ') is not offered in this semester.', icon: 'ios7-calendar-outline'})
+			warnings.push({
+				msg: 'This course (from ' + semesterName(this.props.info.sem) + ') is not offered in this semester.',
+				className: 'course-invalid-semester'
+			})
 		}
 
 		if (this.props.conflicts && !_.isUndefined(this.props.index)) {
@@ -213,15 +218,18 @@ var Course = React.createClass({
 			if (_.any(this.props.conflicts[i])) {
 				let conflictIndex = _.findIndex(this.props.conflicts[i], item => item === true)
 				conflictIndex = conflictIndex + 1; // because humans don't 0-index lists
-				warnings.push({msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.', icon: 'ios7-clock-outline'})
+				warnings.push({
+					msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.',
+					className: 'course-time-conflict'
+				})
 			}
 		}
 
 		let warningEls = React.createElement('span',
 			{title: _.map(warnings, w => '- ' + w.msg + '\n')},
-			_.map(warnings, (w) => {
-				let icon = w.icon ? w.icon : 'alert-circled';
-				return React.createElement('i', {className: 'ion-' + icon, key: icon})
+			_.map(warnings, (w, index) => {
+				let className = w.className || 'course-alert';
+				return React.createElement('i', {className: className, key: className + index})
 			}))
 
 		return React.createElement('div',

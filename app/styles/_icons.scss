@@ -33,3 +33,8 @@ $ionicons-font-path: './fonts';
 	@extend .ion;
 	content: $name;
 }
+
+.course-alert::before { @include ionicon($ionicon-var-alert-circled);}
+.semester-alert::before { @include ionicon($ionicon-var-alert-circled);}
+.course-invalid-semester::before { @include ionicon($ionicon-var-ios7-calendar-outline);}
+.course-time-conflict::before { @include ionicon($ionicon-var-ios7-clock-outline);}

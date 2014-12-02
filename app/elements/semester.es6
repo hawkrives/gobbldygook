@@ -60,7 +60,7 @@ var Semester = React.createClass({
 					className: 'semester-status',
 					key: 'semester-status',
 					title: conflicts},
-					React.createElement('i', {className: 'ion-alert-circled'})))
+					React.createElement('i', {className: 'semester-alert'})))
 			}
 
 			let credits = _.reduce(_.pluck(schedule.courses, 'credits'), add) || 0
