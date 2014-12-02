@@ -3,8 +3,6 @@ var src = './app/';
 
 module.exports = {
 	browserSync: {
-		notify: true,
-		minify: false,
 		browser: 'google chrome',
 		server: {
 			baseDir: dest
