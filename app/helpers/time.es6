@@ -150,7 +150,7 @@ function checkCourseTimeConflicts(mainCourse, altCourse) {
 	return conflict
 }
 
-function checkScheduleTimeConflicts(schedule) {
+function checkScheduleTimeConflicts(courses) {
 	// results = {
 	// 		c1: {
 	// 			c1: null,
@@ -171,9 +171,9 @@ function checkScheduleTimeConflicts(schedule) {
 	// true = conflict, false = no conflict, null = same course
 
 	var results = []
-	_.each(schedule, function(c1, c1idx) {
+	_.each(courses, function(c1, c1idx) {
 		results[c1idx] = []
-		_.each(schedule, function(c2, c2idx) {
+		_.each(courses, function(c2, c2idx) {
 			var result;
 			if (c1 === c2) {
 				result = null
