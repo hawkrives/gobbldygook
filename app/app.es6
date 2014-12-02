@@ -1,5 +1,6 @@
 'use strict';
 import '6to5/polyfill';
+import 'fetch'
 
 import * as _ from 'lodash'
 import * as React from 'react'
