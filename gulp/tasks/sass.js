@@ -16,12 +16,16 @@ var processors = [
 
 gulp.task('sass', ['fonts'], function() {
 	return gulp.src(config.src)
+		// run the stylesheets through node-sass
 		.pipe(sass())
 		.on('error', handleErrors)
+		// prepare to handle sourcemaps
 		.pipe(sourcemaps.init())
+		// run the css through the postcss processors
 		.pipe(postcss(processors))
+		// and map the sourcemaps to the same directory they came in with
 		.pipe(sourcemaps.write('.'))
+		// write out the compiled styles
 		.pipe(gulp.dest(config.dest))
 		.pipe(size({title: 'sass'}))
 });
-
