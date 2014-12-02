@@ -1,23 +1,28 @@
 'use strict';
 
 import * as _ from 'lodash'
-import {courseCache} from './db.es6'
+import {courseCache, db} from './db.es6'
 import buildQueryFromString from './queryStuff.es6'
 
 function getCourse(clbid) {
-	let course = courseCache[clbid]
+	// let course = courseCache[clbid]
+	return db.store('courses').get(clbid)
+		.then(_.cloneDeep)
+		.catch(() => console.warn('course retrieval failed for: ' + clbid))
 
-	if (!course) {
-		console.warn('course retrieval failed for: ' + clbid)
-	}
+	// if (!course) {
+	// 	console.warn('course retrieval failed for: ' + clbid)
+	// }
 
-	return _.cloneDeep(course)
+	// return _.cloneDeep(course)
 }
 
 function getCourses(clbids) {
 	// Takes a list of clbids, and returns a list of the course objects for
 	// those clbids.
-	return _.map(clbids, getCourse)
+
+	console.log('called getCourses', clbids)
+	return Promise.all(_.map(clbids, getCourse))
 }
 
 function deptNumToCrsid(deptNumString) {
