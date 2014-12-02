@@ -22,7 +22,10 @@ clean:
 	rm -rf dist/
 
 cloc:
-	cloc . --exclude-dir=data,node_modules,dist,.idea,test --by-file-by-lang --force-lang="Javascript",es6
+	cloc . \
+		--exclude-dir=data,node_modules,dist,test,playground,gulp \
+		--by-file-by-lang \
+		--force-lang="Javascript",es6
 
 dist: | clean build uglify
 
