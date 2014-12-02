@@ -1,6 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
+import * as Promise from 'bluebird'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
@@ -20,14 +21,45 @@ var isCurrentTermSchedule = _.curry((year, semester, schedule) => {
 var Semester = React.createClass({
 	displayName: 'Semester',
 	mixins: [DragDropMixin],
+
 	configureDragDrop(registerType) {
 		registerType(itemTypes.COURSE, {
 			dropTarget: {
 				acceptDrop(courseIdentifier) {
 					console.log('dropped courseIdentifier', courseIdentifier)
-					this.schedule.addCourse(courseIdentifier.clbid)
+					this.state.schedule.addCourse(courseIdentifier.clbid)
 				}
 			}
+		})
+	},
+
+	getInitialState() {
+		return {
+			courses: [],
+			schedule: {},
+			validation: {},
+		}
+	},
+
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
+	},
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.semester === 2 && nextProps.year === 2012)
+			console.log('called componentWillReceiveProps')
+		let schedule = _.find(nextProps.schedules.activeSchedules,
+				{year: nextProps.year, semester: nextProps.semester})
+
+		Promise.all([schedule.courses, schedule.validate()]).then((results) => {
+			let [courses, validation] = results;
+			if (nextProps.semester === 2 && nextProps.year === 2012)
+				console.log('next courses', courses)
+			this.setState({
+				schedule,
+				courses,
+				validation,
+			})
 		})
 	},
 
@@ -41,21 +73,17 @@ var Semester = React.createClass({
 	},
 
 	render() {
-		let activeSchedules = this.props.schedules.activeSchedules
-		this.schedule = _.find(activeSchedules,
-				{year: this.props.year, semester: this.props.semester})
-		let schedule = this.schedule;
 		// console.log('semester render', schedule)
 
 		let infoIcons = []
-		if (schedule) {
-			let courseCount = _.size(schedule.courses)
+		if (this.state.schedule) {
+			let courseCount = _.size(this.state.courses)
 			infoIcons.push(React.createElement('li', {
 				className: 'semester-course-count', key: 'course-count'},
 				courseCount + ' ' + humanize.pluralize(courseCount, 'course')))
 
-			if (!schedule.isValid) {
-				let conflicts = JSON.stringify(schedule.conflicts, null, 2)
+			if (this.state.validation.hasConflict) {
+				let conflicts = JSON.stringify(this.state.validation.conflicts, null, 2)
 				infoIcons.push(React.createElement('li', {
 					className: 'semester-status',
 					key: 'semester-status',
@@ -63,7 +91,7 @@ var Semester = React.createClass({
 					React.createElement('i', {className: 'semester-alert'})))
 			}
 
-			let credits = _.reduce(_.pluck(schedule.courses, 'credits'), add) || 0
+			let credits = _(this.state.courses).pluck('credits').reduce(add)
 			if (credits) {
 				infoIcons.push(React.createElement('li', {
 					className: 'semester-credit-count', key: 'credit-count'},
@@ -73,18 +101,18 @@ var Semester = React.createClass({
 		let infoBar = React.createElement('ul', {className: 'info-bar'}, infoIcons);
 
 		let courseList = null;
-		if (schedule) {
-			let courses = schedule.courses;
-			let courseObjects = _.map(courses,
+		if (this.state.schedule) {
+			let courseObjects = _.map(this.state.courses,
 				(course, i) => React.createElement(Course, {
 					key: course.clbid,
 					info: course,
-					schedule: schedule,
+					schedule: this.state.schedule,
 					index: i,
-					conflicts: schedule.conflicts,
+					conflicts: this.state.validation.conflicts,
 				}))
-			let maxCredits = (schedule.semester === 1 || schedule.semester === 3) ? 4 : 1;
-			_.each(_.range(Math.floor(countCredits(courses)), maxCredits), (i) => courseObjects.push(
+			let semester = this.props.semester
+			let maxCredits = (semester === 1 || semester === 3) ? 4 : 1
+			_.each(_.range(Math.floor(countCredits(this.state.courses)), maxCredits), (i) => courseObjects.push(
 				React.createElement(EmptyCourseSlot, {key: 'empty' + i})
 			))
 			courseList = React.createElement('div', {className: 'course-list'}, courseObjects);
@@ -92,7 +120,7 @@ var Semester = React.createClass({
 
 		return React.createElement('div',
 			Object.assign(
-				{className: 'semester' + ((schedule && schedule.isValid) ? '' : ' invalid')},
+				{className: 'semester'},
 				this.dropTargetFor(itemTypes.COURSE)),
 			React.createElement('header', {className: 'semester-title'},
 				React.createElement('h1', null, semesterName(this.props.semester)),
