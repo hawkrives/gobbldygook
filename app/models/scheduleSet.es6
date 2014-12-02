@@ -47,7 +47,7 @@ class ScheduleSet {
 	// Functions
 
 	create(schedule) {
-		console.log('creating schedule', schedule)
+		// console.log('creating schedule', schedule)
 		let sched = new Schedule(schedule)
 
 		sched.onDidChange(this._emitChange.bind(this))
