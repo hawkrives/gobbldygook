@@ -16,11 +16,11 @@ all:
 
 .PHONY: build clean cloc dist sass scripts serve shrink-node test uglify watch
 
-build:
+build: clean
 	$(gulp) build
 
 clean:
-	$(gulp) clean
+	rm -rf dist/
 
 cloc:
 	cloc . --exclude-dir=data,node_modules,dist,.idea,test --by-file-by-lang --force-lang="Javascript",es6
@@ -33,7 +33,7 @@ sass:
 scripts:
 	$(gulp) browserify
 
-serve:
+serve: clean
 	$(gulp) watch
 
 shrink-node:
@@ -54,5 +54,5 @@ uglify:
 		-o dist/app.min.js
 	mv app.js.min.map dist/
 
-watch:
+watch: clean
 	$(gulp) watch

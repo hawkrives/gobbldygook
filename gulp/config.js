@@ -25,9 +25,6 @@ module.exports = {
 		dest: dest + '/data/courses',
 		opts: {force: true},
 	},
-	del: {
-		dest: dest,
-	},
 	sass: {
 		src: src + 'styles/**/*.scss',
 		dest: dest,
