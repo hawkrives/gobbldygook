@@ -3,8 +3,8 @@
 import * as _ from 'lodash'
 import * as Promise from 'bluebird'
 
-import readJson from './readJson.es6'
 import add from './add.es6'
+import {status, json} from './fetch.es6'
 import {db, courseCache} from './db.es6'
 import {buildDeptNum, buildDept} from './deptNum.es6'
 import {discoverRecentYears} from './recentTime.es6'
@@ -143,8 +143,10 @@ function updateDatabase(itemType, infoFromServer) {
 
 	if (logDataLoading)  console.log('need to add ' + itemUrl)
 
-	return readJson(itemUrl)
-		.then(function(data) {
+	return fetch(itemUrl)
+		.then(status)
+		.then(json)
+		.then((data) => {
 			return {
 				data: data,
 				meta: infoFromServer,
@@ -185,7 +187,10 @@ function loadDataFiles(infoFile) {
 
 function loadInfoFile(url) {
 	console.log('loading ' + url)
-	return readJson(url).then(loadDataFiles)
+	return fetch(url)
+		.then(status)
+		.then(json)
+		.then(loadDataFiles)
 }
 
 function loadData() {

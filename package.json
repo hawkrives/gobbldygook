@@ -132,6 +132,7 @@
     "bluebird": "^2.3.11",
     "colors.css": "^2.0.3",
     "event-kit": "^0.8.0",
+    "fetch": "git://github.com/github/fetch",
     "humanize-plus": "^1.5.0",
     "lodash": "^2.4.1",
     "react": "^0.12.1",
