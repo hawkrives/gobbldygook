@@ -19,8 +19,8 @@ module.exports = {
 		],
 	},
 	link: {
-		src: 'node_modules/sto-courses',
-		dest: dest + '/data/courses',
+		src: ['./node_modules/sto-courses', './data/areas'],
+		dest: [dest + 'data/courses', dest + 'data/areas'],
 		opts: {force: true},
 	},
 	sass: {
