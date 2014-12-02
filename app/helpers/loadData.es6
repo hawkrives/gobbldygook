@@ -42,7 +42,7 @@ function gatherCourses(item) {
 	console.log(item.meta.path, 'called storeCourses')
 	var start = performance.now()
 
-	_.map(item.data.courses, function(course) {
+	_.map(item.data.courses, (course) => {
 		course.sourcePath = item.meta.path
 		var prepared = prepareCourse(course)
 		coursesToStore.push(prepared)
@@ -59,10 +59,11 @@ function storeCourses() {
 	var start = performance.now()
 
 	return db.store('courses').batch(coursesToStore)
-		.then(function(results) {
+		.then((results) => {
 			var end = performance.now()
 			console.log('Stored courses in', (end - start) + 'ms.')
-		}).catch(function (records, err) {
+		})
+		.catch((records, err) => {
 			throw err
 		})
 }
@@ -74,10 +75,10 @@ function storeArea(item) {
 	area.sourcePath = item.meta.path
 
 	return db.store('areas').put(area)
-		.then(function(results) {
+		.then((results) => {
 			return item
 		})
-		.catch(function(records, err) {
+		.catch((records, err) => {
 			throw err
 		})
 }
@@ -95,28 +96,27 @@ function cleanPriorData(item) {
 	console.info('deleting ' + item.type + ' from ' + path)
 
 	return db.store(item.type)
-		.index('sourcePath').get(path)
-		.then(function(items) {
-			return _.map(items, function(item) {
+		.index('sourcePath')
+		.get(path)
+		.then((items) => {
+			return _.map(items, (item) => {
 				var result = Object.create(null)
 				result[item.clbid] = null
 				return result
 			})
 		})
-		.then(function(items) {
-			return db.store(item.type).batch(items)
-		})
-		.then(function(items) {
+		.then((items) => db.store(item.type).batch(items))
+		.then((items) => {
 			localStorage.removeItem(path)
 			return item
 		})
-		.catch(function(err) {
+		.catch((err) => {
 			throw err
 		})
 }
 
 function cacheItemHash(item) {
-	return new Promise(function(resolve, reject) {
+	return new Promise((resolve, reject) => {
 		console.info(item.meta.path + ' called cacheItemHash')
 		localStorage.setItem(item.meta.path, item.meta.hash)
 		resolve(item)
@@ -125,7 +125,7 @@ function cacheItemHash(item) {
 
 var lookup = {
 	courses: 'courses',
-	areas: 'info'
+	areas: 'info',
 }
 
 function updateDatabase(itemType, infoFromServer) {
@@ -156,11 +156,11 @@ function updateDatabase(itemType, infoFromServer) {
 		.then(cleanPriorData)
 		.then(storeItem)
 		.then(cacheItemHash)
-		.then(function(item) {
+		.then((item) => {
 			if (logDataLoading)
 				console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
 		})
-		.catch(function(err) {
+		.catch((err) => {
 			return Promise.reject(err.stack)
 		})
 }
