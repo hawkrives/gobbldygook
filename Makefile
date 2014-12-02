@@ -1,6 +1,5 @@
 gulp = node node_modules/.bin/gulp
 uglifyjs = node node_modules/.bin/uglifyjs
-cssshrink = node node_modules/.bin/cssshrink
 
 all:
 	@echo "You can run these commands via make:"
