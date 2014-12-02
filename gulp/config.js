@@ -1,5 +1,5 @@
-var dest = './dist';
-var src = './app';
+var dest = './dist/';
+var src = './app/';
 
 module.exports = {
 	browserSync: {
@@ -10,13 +10,13 @@ module.exports = {
 			baseDir: dest
 		},
 		files: [
-			dest + '/**',
-			'!' + dest + '/**.map', // Exclude Map files
+			dest + '**/*',
+			'!' + dest + '**.map', // Exclude Map files
 		]
 	},
 	lint: {
 		src: [
-			src + '/**/*.{js,es6}',
+			src + '**/*.{js,es6}',
 			'./gulp/**/*.js',
 		],
 	},
@@ -29,7 +29,7 @@ module.exports = {
 		dest: dest,
 	},
 	sass: {
-		src: src + '/styles/**/*.scss',
+		src: src + 'styles/**/*.scss',
 		dest: dest,
 		AUTOPREFIXER_BROWSERS: [
 			'ie >= 11',
@@ -43,11 +43,11 @@ module.exports = {
 		],
 	},
 	fonts: {
-		src: [src + '/fonts/*.woff', src + '/icons/font/*.woff'],
-		dest: dest + '/fonts'
+		src: [src + 'fonts/*.woff', src + 'icons/font/*.woff'],
+		dest: dest + 'fonts'
 	},
 	markup: {
-		src: src + '/index.html',
+		src: src + 'index.html',
 		dest: dest
 	},
 	browserify: {
@@ -58,11 +58,11 @@ module.exports = {
 		// A separate bundle will be generated for each
 		// bundle config in the list below
 		bundleConfigs: [{
-			entries: src + '/app.es6',
+			entries: src + 'app.es6',
 			dest: dest,
 			outputName: 'app.js',
-			mapfile: dest + '/app.js.map',
 			transforms: ['6to5-browserify'],
+			mapfile: dest + 'app.js.map',
 		}]
 	}
 };
