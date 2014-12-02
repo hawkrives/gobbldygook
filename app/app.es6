@@ -1,5 +1,5 @@
 'use strict';
-import '6to5/polyfill';
+import '6to5/polyfill'
 import 'fetch'
 
 import * as _ from 'lodash'
@@ -29,8 +29,6 @@ window.log = (thing) => console.log(_.isUndefined(thing) ? arguments : thing)
 let render = () => React.render(React.createElement(Gobbldygook, null), document.body)
 
 let blastoff = () => {
-	document.title = 'Gobbldygook Schedule Playground'
-
 	// Wait for document.ready and the database.
 	Promise.all([db, documentReady]).then(() => {
 		console.log('3. 2.. 1... Blastoff!')
