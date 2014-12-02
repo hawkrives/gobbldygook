@@ -42,8 +42,8 @@ module.exports = {
 		dest: dest + 'fonts'
 	},
 	markup: {
-		src: src + 'index.html',
-		dest: dest
+		src: [src + 'index.html', src + '.htaccess'],
+		dest: [dest, dest]
 	},
 	browserify: {
 		// Enable source maps
