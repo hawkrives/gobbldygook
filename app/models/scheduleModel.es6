@@ -110,30 +110,23 @@ class Schedule {
 
 	validate() {
 		// Checks to see if the schedule is valid
+		return this.courses
+			// Step one: do any times conflict?
+			.then(checkScheduleTimeConflicts)
+			.then((conflicts) => {
+				var hasConflict = _(conflicts)
+					.flatten()      // flatten the nested arrays
+					.any()          // and see if any of the resulting values are true
 
-		// Step one: do any times conflict?
-		var courses = this.courses
-		var conflicts = checkScheduleTimeConflicts(courses)
+				if (hasConflict.length) {
+					console.log('schedule conflicts', conflicts, hasConflict)
+				}
 
-		var hasConflict = _(conflicts)
-			.flatten()      // flatten the nested arrays
-			.any()          // and see if any of the resulting values are true
-
-		if (hasConflict.length) {
-			console.log('schedule conflicts', conflicts, hasConflict)
-		}
-
-		return {
-			hasConflict: hasConflict,
-			conflicts: conflicts
-		}
-	}
-
-	get isValid() {
-		return !this.validate().hasConflict
-	}
-	get conflicts() {
-		return this.validate().conflicts
+				return {
+					hasConflict: hasConflict,
+					conflicts: conflicts
+				}
+			})
 	}
 }
 
