@@ -3,7 +3,6 @@
 import * as _ from 'lodash'
 import * as Promise from 'bluebird'
 
-import add from './add.es6'
 import {status, json} from './fetch.es6'
 import {db, courseCache} from './db.es6'
 import {buildDeptNum, buildDept} from './deptNum.es6'
