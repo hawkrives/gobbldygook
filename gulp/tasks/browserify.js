@@ -9,13 +9,13 @@
 */
 
 var browserify = require('browserify');
-var to5Browserify = require('6to5-browserify');
-var watchify = require('watchify');
 var bundleLogger = require('../util/bundleLogger');
+var exorcist = require('exorcist')
 var gulp = require('gulp');
 var handleErrors = require('../util/handleErrors');
 var source = require('vinyl-source-stream');
-var exorcist = require('exorcist')
+var to5Browserify = require('6to5-browserify');
+var watchify = require('watchify');
 var config = require('../config').browserify;
 
 gulp.task('browserify', function(callback) {

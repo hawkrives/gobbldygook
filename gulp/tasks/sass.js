@@ -1,11 +1,11 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
 var handleErrors = require('../util/handleErrors');
+var postcss = require('gulp-postcss');
+var sass = require('gulp-sass');
 var size = require('gulp-size');
+var sourcemaps = require('gulp-sourcemaps');
 var config = require('../config').sass;
 
-var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var csswring = require('csswring');
 
