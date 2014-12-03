@@ -1,6 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash'
+import * as Promise from 'bluebird'
 import {Emitter} from 'event-kit'
 import events from '../helpers/events.es6'
 import Schedule from './scheduleModel.es6'
@@ -37,10 +38,9 @@ class ScheduleSet {
 	}
 
 	get activeCourses() {
-		return _(this.activeSchedules)
-			.map((schedule) => schedule.courses)
-			.flatten()
-			.value()
+		let scheduleCoursePromises = Promise.all(_.pluck(this.activeSchedules, 'courses'))
+		return scheduleCoursePromises
+			.then((courses) => _.flatten(courses))
 	}
 
 
