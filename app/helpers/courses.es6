@@ -7,7 +7,7 @@ import buildQueryFromString from './queryStuff.es6'
 function getCourse(clbid) {
 	return db.store('courses').get(clbid)
 		.then(_.cloneDeep)
-		.catch(() => console.warn('course retrieval failed for: ' + clbid))
+		.catch(() => new Error('course retrieval failed for: ' + clbid))
 }
 
 function getCourses(clbids) {
