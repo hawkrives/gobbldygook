@@ -118,97 +118,112 @@ function beyondTheMajor(studies, courses) {
 }
 
 function checkBachelorOfArtsDegree(student) {
-	// Requirements taken from
-	// http://www.stolaf.edu/catalog/1314/academiclife/ba-gen-grad-requirements.html
+	return Promise.all([
+		student.courses,
+		student.fabrications,
+		student.studies.data,
+		student.creditsNeeded,
+		student.graduation,
+		student.matriculation,
+	]).then((studentPieces) => {
+		let [
+			courses,
+			fabrications,
+			studies,
+			creditsNeeded,
+			graduation,
+			matriculation,
+		] = studentPieces
 
-	var studies = student.studies.data
-	var courses = _.filter(student.courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
-	var fabrications = student.fabrications
-	var creditsNeeded = student.creditsNeeded
+		courses = _.filter(courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
 
-	var graduationRequirements = [
-		common.courses(courses, creditsNeeded),
-		common.residency(courses, fabrications),
-		common.interim(courses, fabrications, student.graduation),
-		common.courseLevel(courses),
-		common.gpa(courses),
-		common.gradedCourses(courses, fabrications),
-		artsMajor(studies, courses),
-		beyondTheMajor(studies, courses),
-	]
+		// Requirements taken from
+		// http://www.stolaf.edu/catalog/1314/academiclife/ba-gen-grad-requirements.html
 
-	if (utilities.isBachelorOfBoth(studies)) {
-		graduationRequirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
-	}
-
-	var educationRequirements = {
-		foundation: [
-			educ.firstYearWriting(courses, student.matriculation),
-			educ.writingInContext(courses),
-			educ.foreignLanguage(courses),
-			educ.oralCommunication(courses),
-			educ.abstractAndQuantitativeReasoning(courses),
-			educ.studiesInPhysicalMovement(courses),
-		],
-		core: [
-			educ.historicalStudiesInWesternCulture(courses),
-			educ.studiesInHumanBehaviorAndSociety(courses),
-			educ.multiculturalDomesticStudies(courses),
-			educ.multiculturalGlobalStudies(courses),
-			educ.artisticStudies(courses),
-			educ.literaryStudies(courses),
-			educ.biblicalStudies(courses, student.matriculation),
-			educ.theologicalStudies(courses),
-			educ.scientificExplorationAndDiscovery(courses),
-			educ.integratedScientificTopics(courses),
-		],
-		integrative: [
-			educ.ethicalIssuesAndNormativePerspectives(courses),
+		var graduationRequirements = [
+			common.courses(courses, creditsNeeded),
+			common.residency(courses, fabrications),
+			common.interim(courses, fabrications, graduation),
+			common.courseLevel(courses),
+			common.gpa(courses),
+			common.gradedCourses(courses, fabrications),
+			artsMajor(studies, courses),
+			beyondTheMajor(studies, courses),
 		]
-	}
 
-	var educationRequirementsResults = [
-		{
-			title: 'Foundation',
-			type: 'array/boolean',
-			result: _.all(educationRequirements.foundation, 'result'),
-			details: educationRequirements.foundation,
-		},
-		{
-			title: 'Core',
-			type: 'array/boolean',
-			result: _.all(educationRequirements.core, 'result'),
-			details: educationRequirements.core
-		},
-		{
-			title: 'Integrative',
-			type: 'array/boolean',
-			result: _.all(educationRequirements.integrative, 'result'),
-			details: educationRequirements.integrative
-		},
-	]
-
-	var bachelorOfArtsRequirements = [
-		{
-			title: 'Graduation',
-			type: 'array/boolean',
-			result: _.all(graduationRequirements, 'result'),
-			details: graduationRequirements
-		},
-		{
-			title: 'Education',
-			type: 'array/requirementSet',
-			result: _.all(educationRequirementsResults, 'result'),
-			details: educationRequirementsResults
+		if (utilities.isBachelorOfBoth(studies)) {
+			graduationRequirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
 		}
-	]
 
-	// console.log('checkBachelorOfArtsDegree', 'results', bachelorOfArtsRequirements)
+		var educationRequirements = {
+			foundation: [
+				educ.firstYearWriting(courses, matriculation),
+				educ.writingInContext(courses),
+				educ.foreignLanguage(courses),
+				educ.oralCommunication(courses),
+				educ.abstractAndQuantitativeReasoning(courses),
+				educ.studiesInPhysicalMovement(courses),
+			],
+			core: [
+				educ.historicalStudiesInWesternCulture(courses),
+				educ.studiesInHumanBehaviorAndSociety(courses),
+				educ.multiculturalDomesticStudies(courses),
+				educ.multiculturalGlobalStudies(courses),
+				educ.artisticStudies(courses),
+				educ.literaryStudies(courses),
+				educ.biblicalStudies(courses, matriculation),
+				educ.theologicalStudies(courses),
+				educ.scientificExplorationAndDiscovery(courses),
+				educ.integratedScientificTopics(courses),
+			],
+			integrative: [
+				educ.ethicalIssuesAndNormativePerspectives(courses),
+			]
+		}
 
-	return {
-		result: _.all(bachelorOfArtsRequirements, 'result'),
-		details: bachelorOfArtsRequirements
-	}
+		var educationRequirementsResults = [
+			{
+				title: 'Foundation',
+				type: 'array/boolean',
+				result: _.all(educationRequirements.foundation, 'result'),
+				details: educationRequirements.foundation,
+			},
+			{
+				title: 'Core',
+				type: 'array/boolean',
+				result: _.all(educationRequirements.core, 'result'),
+				details: educationRequirements.core
+			},
+			{
+				title: 'Integrative',
+				type: 'array/boolean',
+				result: _.all(educationRequirements.integrative, 'result'),
+				details: educationRequirements.integrative
+			},
+		]
+
+		var bachelorOfArtsRequirements = [
+			{
+				title: 'Graduation',
+				type: 'array/boolean',
+				result: _.all(graduationRequirements, 'result'),
+				details: graduationRequirements
+			},
+			{
+				title: 'Education',
+				type: 'array/requirementSet',
+				result: _.all(educationRequirementsResults, 'result'),
+				details: educationRequirementsResults
+			}
+		]
+
+		// console.log('checkBachelorOfArtsDegree', 'results', bachelorOfArtsRequirements)
+
+		return {
+			result: _.all(bachelorOfArtsRequirements, 'result'),
+			details: bachelorOfArtsRequirements
+		}
+	})
 }
 
 export default checkBachelorOfArtsDegree

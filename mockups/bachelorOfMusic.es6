@@ -161,91 +161,106 @@ function dedicatedMusicMajor(studies, courses) {
 }
 
 function checkBachelorOfMusicDegree(student) {
-	// Requirements taken from
-	// http://www.stolaf.edu/catalog/1314/academiclife/bm-gen-grad-requirements.html
+	return Promise.all([
+		student.courses,
+		student.fabrications,
+		student.studies.data,
+		student.creditsNeeded,
+		student.graduation,
+		student.matriculation,
+	]).then((studentPieces) => {
+		let [
+			courses,
+			fabrications,
+			studies,
+			creditsNeeded,
+			graduation,
+			matriculation,
+		] = studentPieces
 
-	var studies = student.studies
-	var courses = _.filter(student.courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
-	var fabrications = student.fabrications
-	var creditsNeeded = student.creditsNeeded
+		courses = _.filter(courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
 
-	var graduationRequirements = [
-		common.courses(courses, creditsNeeded),
-		common.residency(courses, fabrications),
-		common.interim(courses, fabrications, student.graduation),
-		common.courseLevel(courses),
-		common.gpa(courses),
-		common.gradedCourses(courses, fabrications),
-		dedicatedMusicMajor(studies, courses),
-	]
+		// Requirements taken from
+		// http://www.stolaf.edu/catalog/1314/academiclife/bm-gen-grad-requirements.html
 
-	if (utilities.isBachelorOfBoth(studies)) {
-		graduationRequirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
-	}
+		var graduationRequirements = [
+			common.courses(courses, creditsNeeded),
+			common.residency(courses, fabrications),
+			common.interim(courses, fabrications, graduation),
+			common.courseLevel(courses),
+			common.gpa(courses),
+			common.gradedCourses(courses, fabrications),
+			dedicatedMusicMajor(studies, courses),
+		]
 
-	var educationRequirements = {
-		foundation: [
-			educ.firstYearWriting(courses, student.matriculation),
-			educ.writingInContext(courses),
-			foreignLanguage(courses),
-			educ.oralCommunication(courses),
-			abstractAndQuantitativeReasoning(courses),
-			educ.studiesInPhysicalMovement(courses),
-		],
-		core: [
-			historicalOrLiteraryStudies(courses),
-			multiculturalStudies(courses),
-			educ.biblicalStudies(courses, student.matriculation),
-			educ.theologicalStudies(courses),
-			educ.studiesInHumanBehaviorAndSociety(courses),
-		],
-		integrative: [
-			educ.ethicalIssuesAndNormativePerspectives(courses),
-		],
-	}
-
-	var educationRequirementsResults = [
-		{
-			title: 'Foundation',
-			type: 'array/boolean',
-			result: _.all(educationRequirements.foundation, 'result'),
-			details: educationRequirements.foundation,
-		},
-		{
-			title: 'Core',
-			type: 'array/boolean',
-			result: _.all(educationRequirements.core, 'result'),
-			details: educationRequirements.core
-		},
-		{
-			title: 'Integrative',
-			type: 'array/boolean',
-			result: _.all(educationRequirements.integrative, 'result'),
-			details: educationRequirements.integrative
-		},
-	]
-
-	var bachelorOfMusicRequirements = [
-		{
-			title: 'Graduation',
-			type: 'array/boolean',
-			result: _.all(graduationRequirements, 'result'),
-			details: graduationRequirements
-		},
-		{
-			title: 'Education',
-			type: 'array/requirementSet',
-			result: _.all(educationRequirementsResults, 'result'),
-			details: educationRequirementsResults
+		if (utilities.isBachelorOfBoth(studies)) {
+			graduationRequirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
 		}
-	]
 
-	// console.log('checkBachelorOfMusicDegree', 'results', results)
+		var educationRequirements = {
+			foundation: [
+				educ.firstYearWriting(courses, matriculation),
+				educ.writingInContext(courses),
+				foreignLanguage(courses),
+				educ.oralCommunication(courses),
+				abstractAndQuantitativeReasoning(courses),
+				educ.studiesInPhysicalMovement(courses),
+			],
+			core: [
+				historicalOrLiteraryStudies(courses),
+				multiculturalStudies(courses),
+				educ.biblicalStudies(courses, matriculation),
+				educ.theologicalStudies(courses),
+				educ.studiesInHumanBehaviorAndSociety(courses),
+			],
+			integrative: [
+				educ.ethicalIssuesAndNormativePerspectives(courses),
+			],
+		}
 
-	return {
-		result: _.all(bachelorOfMusicRequirements, 'result'),
-		details: bachelorOfMusicRequirements
-	}
+		var educationRequirementsResults = [
+			{
+				title: 'Foundation',
+				type: 'array/boolean',
+				result: _.all(educationRequirements.foundation, 'result'),
+				details: educationRequirements.foundation,
+			},
+			{
+				title: 'Core',
+				type: 'array/boolean',
+				result: _.all(educationRequirements.core, 'result'),
+				details: educationRequirements.core
+			},
+			{
+				title: 'Integrative',
+				type: 'array/boolean',
+				result: _.all(educationRequirements.integrative, 'result'),
+				details: educationRequirements.integrative
+			},
+		]
+
+		var bachelorOfMusicRequirements = [
+			{
+				title: 'Graduation',
+				type: 'array/boolean',
+				result: _.all(graduationRequirements, 'result'),
+				details: graduationRequirements
+			},
+			{
+				title: 'Education',
+				type: 'array/requirementSet',
+				result: _.all(educationRequirementsResults, 'result'),
+				details: educationRequirementsResults
+			}
+		]
+
+		// console.log('checkBachelorOfMusicDegree', 'results', results)
+
+		return {
+			result: _.all(bachelorOfMusicRequirements, 'result'),
+			details: bachelorOfMusicRequirements
+		}
+	})
 }
 
 export default checkBachelorOfMusicDegree
