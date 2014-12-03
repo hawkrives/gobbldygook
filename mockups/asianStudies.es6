@@ -9,13 +9,13 @@ import {checkCoursesFor} from '../app/helpers/courses.es6'
 
 import {isRequiredCourse} from './commonMajorUtilities.es6'
 
-const asianDeptRequiredCourses = [
+const ASIAN_REQUIRED_COURSES = [
 	{deptnum: 'ASIAN 275'},
 
 	{deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
 ]
 
-var isRequiredAsianStudiesCourse = isRequiredCourse(asianDeptRequiredCourses)
+let isRequiredAsianStudiesCourse = isRequiredCourse(ASIAN_REQUIRED_COURSES)
 
 function interdisciplinaryApproachesToAsia(courses) {
 	// Asian Studies 275: Interdisciplinary Approaches to Asia (.25 credit)
@@ -43,28 +43,28 @@ function electives(courses) {
 	// 3. No more than four elective courses about any one country;
 	// 4. No level I or level II language courses may count.
 
-	var asianStudiesElectives = _.chain(courses)
+	let asianStudiesElectives = _.chain(courses)
 		.filter(hasDepartment('ASIAN'))
 		.reject(lowerLevelLanguageCourses)
 		.reject(isRequiredAsianStudiesCourse)
 		.value()
 
-	var levelsTwoOrThree = _.chain(asianStudiesElectives)
+	let levelsTwoOrThree = _.chain(asianStudiesElectives)
 		.filter(coursesAtOrAboveLevel(200)).size().value() >= 2
 
-	var onlyTwoAtLevelOne = _.chain(asianStudiesElectives)
+	let onlyTwoAtLevelOne = _.chain(asianStudiesElectives)
 		.filter(coursesAtLevel(100)).size().value() <= 2
 
-	var notTooSpecialized = _.any([
+	let notTooSpecialized = _.any([
 		_.chain(asianStudiesElectives).filter(partialNameOrTitle('China')).size().value() <= 4,
 		_.chain(asianStudiesElectives).filter(partialNameOrTitle('Japan')).size().value() <= 4,
 	])
 
-	var electivesAreGood = _.all(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
+	let electivesAreGood = _.all(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
 	// console.log('asianStudiesElectives', asianStudiesElectives)
 
-	var matching = _.size(asianStudiesElectives)
-	var needs = 6
+	let matching = _.size(asianStudiesElectives)
+	let needs = 6
 
 	// Req. #4 was embedded at the beginning, when we reject any lower-level
 	// languages. That way, we can't count them.
@@ -90,16 +90,16 @@ function seniorSeminar(courses) {
 	// Senior Seminar: One of:
 	// - Asian Studies 397: Human Rights/Asian Context, or
 	// - Asian Studies 399: Asian Studies Seminar
-	var humanRights = checkCoursesFor(courses, {dept:'ASIAN', num:397})
-	var asiaSeminar = checkCoursesFor(courses, {dept:'ASIAN', num:399})
+	let humanRights = checkCoursesFor(courses, {dept:'ASIAN', num:397})
+	let asiaSeminar = checkCoursesFor(courses, {dept:'ASIAN', num:399})
 
 	let seminars = [
 		humanRights,
 		asiaSeminar
 	]
 
-	var seminarCount = _.size(_.compact(seminars))
-	var seminarsNeeded = 1
+	let seminarCount = _.size(_.compact(seminars))
+	let seminarsNeeded = 1
 
 	return {
 		title: 'Senior Seminar',
@@ -113,29 +113,29 @@ function language(courses) {
 	// Two courses in Chinese or Japanese above 112 or its equivalent
 	// "'JAPAN' IN depts AND level >= 200 AND (('Intermediate' OR 'Advanced') AND 'Japanese') IN title"
 	// "'CHIN' IN depts AND level >= 200 AND (('Intermediate' OR 'Advanced') AND 'Chinese') IN title"
-	var subsetOfCourses = _.chain(courses)
+	let subsetOfCourses = _.chain(courses)
 		.filter(coursesAtOrAboveLevel(200))
 		.filter(function(course) {
 			return partialNameOrTitle(['Intermediate', 'Advanced'], course)
 		}).value()
 
-	var japaneseLanguage = _.chain(subsetOfCourses)
+	let japaneseLanguage = _.chain(subsetOfCourses)
 		.filter(hasDepartment('JAPAN'))
 		.filter(partialNameOrTitle('Japanese'))
 		.value()
 
-	var chineseLanguage = _.chain(subsetOfCourses)
+	let chineseLanguage = _.chain(subsetOfCourses)
 		.filter(hasDepartment('CHIN'))
 		.filter(partialNameOrTitle('Chinese'))
 		.value()
 
-	var fulfilledLanguages = _.filter([japaneseLanguage, chineseLanguage], function(courses) {
+	let fulfilledLanguages = _.filter([japaneseLanguage, chineseLanguage], function(courses) {
 		return _.size(courses) >= 2
 	})
-	var fulfilledLanguageCourses = _.flatten(fulfilledLanguages)
+	let fulfilledLanguageCourses = _.flatten(fulfilledLanguages)
 
-	var numberFulfilled = _.size(fulfilledLanguages)
-	var numberNeeded = 1
+	let numberFulfilled = _.size(fulfilledLanguages)
+	let numberNeeded = 1
 
 	return {
 		title: 'Language',
