@@ -19,19 +19,17 @@ function getCourses(clbids) {
 }
 
 function deptNumToCrsid(deptNumString) {
-	let result = _.find(courseCache.courses, {deptnum: deptNumString})
-	if (result) {
-		return result.crsid
-	} else {
-		console.warn(`Course ${deptNumString} was not found`)
-	}
+	return db.store('courses').index('deptnum').get(deptNumString)
+		.catch((err) => new Error(`Course ${deptNumString} was not found`, err))
 }
 
 function checkCoursesForDeptNum(courses, deptNumString) {
 	let crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
 
-	let crsid = deptNumToCrsid(deptNumString)
-	return _.contains(crsidsToCheckAgainst, crsid)
+	return deptNumToCrsid(deptNumString)
+		.then((crsid) => {
+			return _.contains(crsidsToCheckAgainst, crsid)
+		})
 }
 
 function checkCoursesFor(courses, filter) {
