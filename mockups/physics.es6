@@ -94,17 +94,22 @@ function electiveCourses(courses) {
 }
 
 function checkPhysicsMajor(student) {
-	var physicsMajorRequirements = [
-		analyticsCourses(student.courses),
-		transitionsCourses(student.courses),
-		upperLevelCourses(student.courses),
-		electiveCourses(student.courses),
-	]
+	return Promise.all([student.courses])
+		.then((studentPieces) => {
+			let [courses] = studentPieces
 
-	return {
-		result: _.all(physicsMajorRequirements, 'result'),
-		details: physicsMajorRequirements,
-	}
+			var physicsMajorRequirements = [
+				analyticsCourses(courses),
+				transitionsCourses(courses),
+				upperLevelCourses(courses),
+				electiveCourses(courses),
+			]
+
+			return {
+				result: _.all(physicsMajorRequirements, 'result'),
+				details: physicsMajorRequirements,
+			}
+		})
 }
 
 export default checkPhysicsMajor

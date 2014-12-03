@@ -94,16 +94,21 @@ function electiveCourses(courses) {
 }
 
 function checkStatisticsConcentration(student) {
-	var statisticsConcentrationRequirements = [
-		foundationCourses(student.courses),
-		coreCourses(student.courses),
-		electiveCourses(student.courses),
-	]
+	return Promise.all([student.courses])
+		.then((studentPieces) => {
+			let [courses] = studentPieces
 
-	return {
-		result: _.all(statisticsConcentrationRequirements, 'result'),
-		details: statisticsConcentrationRequirements,
-	}
+			var statisticsConcentrationRequirements = [
+				foundationCourses(courses),
+				coreCourses(courses),
+				electiveCourses(courses),
+			]
+
+			return {
+				result: _.all(statisticsConcentrationRequirements, 'result'),
+				details: statisticsConcentrationRequirements,
+			}
+		})
 }
 
 export default checkStatisticsConcentration
