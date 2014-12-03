@@ -21,7 +21,7 @@ function buildDept(course) {
 }
 
 function buildDeptNum(course) {
-	return course.depts.join('/') + ' ' + course.num
+	return `${course.depts.join('/')} ${course.num}`
 }
 
 let hasDeptNumBetween = _.curry(function(args, course) {

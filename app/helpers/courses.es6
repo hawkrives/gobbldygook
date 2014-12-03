@@ -7,7 +7,7 @@ import buildQueryFromString from './queryStuff.es6'
 function getCourse(clbid) {
 	return db.store('courses').get(clbid)
 		.then(_.cloneDeep)
-		.catch(() => new Error('course retrieval failed for: ' + clbid))
+		.catch((err) => new Error(`course retrieval failed for ${clbid}`, err))
 }
 
 function getCourses(clbids) {
@@ -23,7 +23,7 @@ function deptNumToCrsid(deptNumString) {
 	if (result) {
 		return result.crsid
 	} else {
-		console.warn('Course ' + deptNumString + ' was not found')
+		console.warn(`Course ${deptNumString} was not found`)
 	}
 }
 
