@@ -28,7 +28,7 @@ function deptNumToCrsid(deptNumString) {
 }
 
 function checkCoursesForDeptNum(courses, deptNumString) {
-	var crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
+	let crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
 
 	let crsid = deptNumToCrsid(deptNumString)
 	return _.contains(crsidsToCheckAgainst, crsid)
@@ -68,7 +68,7 @@ function queryCourses(queryString) {
 
 	console.log('query:', query)
 
-	var results = _(courseCache)
+	let results = _(courseCache)
 		.filter(course => {
 			let matches = _.map(query, (values, key) => {
 				if (!_.has(course, key))
