@@ -84,8 +84,8 @@ let findWordForProgress = (maxProgress, currentProgress) => {
 
 var AreaOfStudy = React.createClass({
 	displayName: 'AreaOfStudy',
-	load() {
-		var area = getArea(this.props.area.id)
+	load(props) {
+		let area = getArea(props.area.id)
 
 		if (typeof area === 'function') {
 			let results = area(this.props.student)
@@ -115,11 +115,11 @@ var AreaOfStudy = React.createClass({
 			open: false
 		}
 	},
-	componentWillReceiveProps() {
-		this.load()
+	componentWillReceiveProps(nextProps) {
+		this.load(nextProps)
 	},
 	componentDidMount() {
-		this.load()
+		this.load(this.props)
 	},
 	toggle() {
 		this.setState({open: !this.state.open});
