@@ -19,49 +19,20 @@ function prepareCourse(course) {
 	return course
 }
 
-function primeCourseCache() {
-	console.log('Priming course cache...')
-
-	let start = performance.now()
-	let recentYears = discoverRecentYears()
-	let setOfCourses = []
-	let courses = db.store('courses').index('year')
-
-	return Promise.all(
-		_.map(recentYears, (year) =>
-			courses.get(year).then((courses) => _.each(courses, c => courseCache[c.clbid] = prepareCourse(c)))
-	)).then(() => {
-		let end = performance.now()
-		console.log('Cached courses in', (end - start) + 'ms.')
-	})
-}
-
-var coursesToStore = [];
-
-function gatherCourses(item) {
-	console.log(item.meta.path, 'called storeCourses')
-	var start = performance.now()
-
-	_.map(item.data.courses, (course) => {
-		course.sourcePath = item.meta.path
-		var prepared = prepareCourse(course)
-		coursesToStore.push(prepared)
-	})
-
-	var end = performance.now()
-	console.log('Gathered', item.meta.path, 'in', (end - start) + 'ms.')
-
-	return item
-}
-
-function storeCourses() {
+function storeCourses(item) {
 	console.log('storing courses')
 	var start = performance.now()
+
+	var coursesToStore = _.map(item.data.courses, (course) => {
+		course.sourcePath = item.meta.path
+		return prepareCourse(course)
+	})
 
 	return db.store('courses').batch(coursesToStore)
 		.then((results) => {
 			var end = performance.now()
 			console.log('Stored courses in', (end - start) + 'ms.')
+			return item
 		})
 		.catch((records, err) => {
 			throw err
@@ -85,7 +56,7 @@ function storeArea(item) {
 
 function storeItem(item) {
 	if (item.type === 'courses') {
-		return gatherCourses(item)
+		return storeCourses(item)
 	} else if (item.type === 'areas') {
 		return storeArea(item)
 	}
@@ -106,7 +77,7 @@ function cleanPriorData(item) {
 			})
 		})
 		.then((items) => db.store(item.type).batch(items))
-		.then((items) => {
+		.then(() => {
 			localStorage.removeItem(path)
 			return item
 		})
@@ -169,19 +140,15 @@ function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
 	var files = _(infoFile.info)
-		.map((files) => _(files)
-			.filter((file) => parseInt(file.year, 10) > new Date().getFullYear() - 5)
-			.map((file) => updateDatabase(infoFile.type, file))
-			.value())
+		.map((files) =>
+			_(files)
+				.filter((file) => parseInt(file.year, 10) > new Date().getFullYear() - 5)
+				.map((file) => updateDatabase(infoFile.type, file))
+				.value())
 		.flatten()
 		.value()
 
-	return Promise.all(files)
-		.then(() => {
-			if (infoFile.type === 'courses')
-				return storeCourses()
-			return Promise.resolve(true)
-		})
+	return Promise.all(files).then(() => Promise.resolve(true))
 }
 
 function loadInfoFile(url) {
