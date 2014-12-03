@@ -151,17 +151,22 @@ function language(courses) {
 }
 
 function checkAsianStudiesMajor(student) {
-	var asianStudiesMajorRequirements = [
-		interdisciplinaryApproachesToAsia(student.courses),
-		electives(student.courses),
-		seniorSeminar(student.courses),
-		language(student.courses),
-	]
+	return Promise.all([student.courses])
+		.then((studentPieces) => {
+			let [courses] = studentPieces
 
-	return {
-		result: _.all(asianStudiesMajorRequirements, 'result'),
-		details: asianStudiesMajorRequirements
-	}
+			let asianStudiesMajorRequirements = [
+				interdisciplinaryApproachesToAsia(courses),
+				electives(courses),
+				seniorSeminar(courses),
+				language(courses),
+			]
+
+			return {
+				result: _.all(asianStudiesMajorRequirements, 'result'),
+				details: asianStudiesMajorRequirements
+			}
+		})
 }
 
 export default checkAsianStudiesMajor
