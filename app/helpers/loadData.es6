@@ -9,14 +9,15 @@ import {buildDeptNum, buildDept} from './deptNum.es6'
 import {discoverRecentYears} from './recentTime.es6'
 import {convertTimeStringsToOfferings} from './time.es6'
 
+let logDataLoading = false
+// let logDataLoading = true
+
 function prepareCourse(course) {
 	course.dept = course.dept || buildDept(course)
 	course.deptnum = course.deptnum || buildDeptNum(course)
 	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
 	return course
 }
-let logDataLoading = false
-// let logDataLoading = true
 
 function storeCourses(item) {
 	console.log('storing courses')
