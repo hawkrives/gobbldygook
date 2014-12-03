@@ -19,7 +19,7 @@ function getCourses(clbids) {
 }
 
 function deptNumToCrsid(deptNumString) {
-	return db.store('courses').index('deptnum').get(deptNumString)
+	return db.store('courses').index('deptnum').get(deptNumString).then(_.cloneDeep)
 		.catch((err) => new Error(`Course ${deptNumString} was not found`, err))
 }
 
