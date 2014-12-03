@@ -61,14 +61,19 @@ function electives(courses) {
 }
 
 function checkAsianStudiesConcentration(student) {
-	var asianStudiesConcentrationRequirements = [
-		electives(student.courses),
-	]
+	return Promise.all([student.courses])
+		.then((studentPieces) => {
+			let [courses] = studentPieces
 
-	return {
-		result: _.all(asianStudiesConcentrationRequirements, 'result'),
-		details: asianStudiesConcentrationRequirements
-	}
+			var asianStudiesConcentrationRequirements = [
+				electives(courses),
+			]
+
+			return {
+				result: _.all(asianStudiesConcentrationRequirements, 'result'),
+				details: asianStudiesConcentrationRequirements
+			}
+		})
 }
 
 export default checkAsianStudiesConcentration
