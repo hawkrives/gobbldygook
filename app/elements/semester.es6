@@ -46,15 +46,11 @@ var Semester = React.createClass({
 	},
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.semester === 2 && nextProps.year === 2012)
-			console.log('called componentWillReceiveProps')
 		let schedule = _.find(nextProps.schedules.activeSchedules,
 				{year: nextProps.year, semester: nextProps.semester})
 
 		Promise.all([schedule.courses, schedule.validate()]).then((results) => {
 			let [courses, validation] = results;
-			if (nextProps.semester === 2 && nextProps.year === 2012)
-				console.log('next courses', courses)
 			this.setState({
 				schedule,
 				courses,

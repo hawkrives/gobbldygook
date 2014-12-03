@@ -5,16 +5,9 @@ import {courseCache, db} from './db.es6'
 import buildQueryFromString from './queryStuff.es6'
 
 function getCourse(clbid) {
-	// let course = courseCache[clbid]
 	return db.store('courses').get(clbid)
 		.then(_.cloneDeep)
 		.catch(() => console.warn('course retrieval failed for: ' + clbid))
-
-	// if (!course) {
-	// 	console.warn('course retrieval failed for: ' + clbid)
-	// }
-
-	// return _.cloneDeep(course)
 }
 
 function getCourses(clbids) {
