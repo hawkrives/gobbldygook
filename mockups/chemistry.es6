@@ -127,23 +127,24 @@ function beyondChemistry(courses) {
 }
 
 function checkChemistryMajor(student) {
-	return Promise.all([student.courses])
-		.then((studentPieces) => {
-			let [courses] = studentPieces
+	return Promise.all([
+		student.courses
+	]).then((studentPieces) => {
+		let [courses] = studentPieces
 
-			var chemistryMajorRequirements = [
-				introductorySequence(courses),
-				// required(courses),
-				// laboratory(courses),
-				// electives(courses),
-				// beyondChemistry(courses),
-			]
+		var chemistryMajorRequirements = [
+			introductorySequence(courses),
+			// required(courses),
+			// laboratory(courses),
+			// electives(courses),
+			// beyondChemistry(courses),
+		]
 
-			return {
-				result: _.all(chemistryMajorRequirements, 'result'),
-				details: chemistryMajorRequirements
-			}
-		})
+		return {
+			result: _.all(chemistryMajorRequirements, 'result'),
+			details: chemistryMajorRequirements
+		}
+	})
 }
 
 export default checkChemistryMajor

@@ -165,22 +165,23 @@ function capstoneCourse(courses) {
 }
 
 function checkComputerScienceMajor(student) {
-	return Promise.all([student.courses])
-		.then((studentPieces) => {
-			let [courses] = studentPieces
+	return Promise.all([
+		student.courses
+	]).then((studentPieces) => {
+		let [courses] = studentPieces
 
-			var computerScienceMajorRequirements = [
-				foundationCourses(courses),
-				coreCourses(courses),
-				electiveCourses(courses),
-				capstoneCourse(courses),
-			]
+		var computerScienceMajorRequirements = [
+			foundationCourses(courses),
+			coreCourses(courses),
+			electiveCourses(courses),
+			capstoneCourse(courses),
+		]
 
-			return {
-				result: _.all(computerScienceMajorRequirements, 'result'),
-				details: computerScienceMajorRequirements,
-			}
-		})
+		return {
+			result: _.all(computerScienceMajorRequirements, 'result'),
+			details: computerScienceMajorRequirements,
+		}
+	})
 }
 
 export default checkComputerScienceMajor
