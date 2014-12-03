@@ -82,6 +82,18 @@ let findWordForProgress = (maxProgress, currentProgress) => {
 		return 'zero'
 }
 
+let noResult = (type) => {
+	return {
+		result: {
+			result: false,
+			details: [{
+				title: type + ' not found!',
+				description: 'This ' + type + ' could not be found.'
+			}]
+		}
+	}
+}
+
 var AreaOfStudy = React.createClass({
 	displayName: 'AreaOfStudy',
 	load(props) {
@@ -95,15 +107,7 @@ var AreaOfStudy = React.createClass({
 			})
 		}
 		else {
-			this.setState({
-				result: {
-					result: false,
-					details: [{
-						title: this.props.area.type + ' not found!',
-						description: 'This ' + this.props.area.type + ' could not be found.'
-					}]
-				}
-			})
+			this.setState(noResult(props.area.type))
 		}
 	},
 	getInitialState() {
