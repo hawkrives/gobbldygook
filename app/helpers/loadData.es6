@@ -62,6 +62,7 @@ function storeCourses() {
 		.then((results) => {
 			var end = performance.now()
 			console.log('Stored courses in', (end - start) + 'ms.')
+			return item
 		})
 		.catch((records, err) => {
 			throw err
@@ -106,7 +107,7 @@ function cleanPriorData(item) {
 			})
 		})
 		.then((items) => db.store(item.type).batch(items))
-		.then((items) => {
+		.then(() => {
 			localStorage.removeItem(path)
 			return item
 		})
@@ -169,19 +170,15 @@ function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
 	var files = _(infoFile.info)
-		.map((files) => _(files)
-			.filter((file) => parseInt(file.year, 10) > new Date().getFullYear() - 5)
-			.map((file) => updateDatabase(infoFile.type, file))
-			.value())
+		.map((files) =>
+			_(files)
+				.filter((file) => parseInt(file.year, 10) > new Date().getFullYear() - 5)
+				.map((file) => updateDatabase(infoFile.type, file))
+				.value())
 		.flatten()
 		.value()
 
-	return Promise.all(files)
-		.then(() => {
-			if (infoFile.type === 'courses')
-				return storeCourses()
-			return Promise.resolve(true)
-		})
+	return Promise.all(files).then(() => Promise.resolve(true))
 }
 
 function loadInfoFile(url) {
