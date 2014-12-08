@@ -1,0 +1,89 @@
+{
+  "esnext": true,
+  "fileExtensions": [
+    ".js",
+    ".es6"
+  ],
+  "excludeFiles": [
+    "node_modules/**",
+    "app/helpers/uuid.es6"
+  ],
+  "additionalRules": [
+    "node_modules/jscs-jsdoc/lib/rules/*.js"
+  ],
+  "disallowEmptyBlocks": true,
+  "disallowImplicitTypeConversion": [
+    "numeric",
+    "boolean",
+    "binary",
+    "string"
+  ],
+  "disallowMixedSpacesAndTabs": "smart",
+  "disallowMultipleLineStrings": true,
+  "disallowMultipleVarDecl": "exceptUndefined",
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowPaddingNewlinesInBlocks": true,
+  "disallowQuotedKeysInObjects": true,
+  "disallowSpaceAfterObjectKeys": true,
+  "disallowSpaceAfterPrefixUnaryOperators": true,
+  "disallowSpaceBeforePostfixUnaryOperators": true,
+  "disallowSpacesInCallExpression": true,
+  "disallowSpacesInsideArrayBrackets": "nested",
+  "disallowTrailingWhitespace": true,
+  "disallowYodaConditions": true,
+  "requireBlocksOnNewline": 1,
+  "requireCapitalizedConstructors": true,
+  "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "requireCommaBeforeLineBreak": true,
+  "requireDotNotation": true,
+  "requireKeywordsOnNewLine": ["else"],
+  "requireLineFeedAtFileEnd": true,
+  "requireOperatorBeforeLineBreak": true,
+  "requireParenthesesAroundIIFE": true,
+  "requireSpaceAfterBinaryOperators": true,
+  "requireSpaceAfterKeywords": [
+    "do",
+    "for",
+    "if",
+    "else",
+    "switch",
+    "case",
+    "try",
+    "catch",
+    "void",
+    "while",
+    "with",
+    "return",
+    "typeof"
+  ],
+  "requireSpaceAfterLineComment": true,
+  "requireSpaceBeforeBinaryOperators": true,
+  "requireSpaceBeforeBlockStatements": true,
+  "requireSpaceBeforeKeywords": true,
+  "requireSpacesInConditionalExpression": true,
+  "requireTrailingComma": {
+    "ignoreSingleValue": true,
+    "ignoreSingleLine": true
+  },
+  "safeContextKeyword": [
+    "self"
+  ],
+  "validateIndentation": "\t",
+  "validateLineBreaks": "LF",
+  "validateParameterSeparator": ", ",
+  "validateQuoteMarks": {
+    "mark": "'",
+    "escape": true
+  },
+  "jsDoc": {
+    "checkParamNames": true,
+    "requireParamTypes": true,
+    "checkRedundantParams": true,
+    "checkReturnTypes": true,
+    "checkRedundantReturns": true,
+    "requireReturnTypes": true,
+    "checkTypes": true,
+    "checkRedundantAccess": true,
+    "leadingUnderscoreAccess": true
+  }
+}
