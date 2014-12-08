@@ -1,6 +1,3 @@
-[submodule "course-data"]
-	path = data/courses
-	url = https://github.com/hawkrives/gobbldygook-course-data.git
 [submodule "area-data"]
 	path = data/areas
 	url = https://github.com/hawkrives/gobbldygook-area-data.git
