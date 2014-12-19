@@ -1,13 +1,11 @@
-'use strict';
-
 import * as _ from 'lodash'
 import * as Promise from 'bluebird'
 
-import {status, json} from './fetch.es6'
-import {db, courseCache} from './db.es6'
-import {buildDeptNum, buildDept} from './deptNum.es6'
-import {discoverRecentYears} from './recentTime.es6'
-import {convertTimeStringsToOfferings} from './time.es6'
+import {status, json} from 'helpers/fetch'
+import {db, courseCache} from 'helpers/db'
+import {buildDeptNum, buildDept} from 'helpers/deptNum'
+import {discoverRecentYears} from 'helpers/recentTime'
+import {convertTimeStringsToOfferings} from 'helpers/time'
 
 var logDataLoading = false
 // var logDataLoading = true

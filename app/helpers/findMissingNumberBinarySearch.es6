@@ -1,5 +1,3 @@
-'use strict';
-
 function findMissingNumberBinarySearch(arr) {
 	// via http://stackoverflow.com/questions/11385896/find-the-first-missing-number-in-a-sorted-list
 	var len = arr.length

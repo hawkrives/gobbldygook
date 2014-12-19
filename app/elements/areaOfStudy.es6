@@ -1,11 +1,8 @@
-'use strict';
-
 import * as _ from 'lodash'
 import * as React from 'react/addons'
 
-import RequirementSet from './requirementSet.es6'
-
-import getRandomInt from '../helpers/getRandomInt.es6'
+import RequirementSet from 'elements/requirementSet'
+import getRandomInt from 'helpers/getRandomInt'
 
 var areas = {
 	// Degrees
@@ -83,7 +80,6 @@ let findWordForProgress = (maxProgress, currentProgress) => {
 }
 
 var AreaOfStudy = React.createClass({
-	displayName: 'AreaOfStudy',
 	load() {
 		var area = getArea(this.props.area.id)
 

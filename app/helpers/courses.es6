@@ -1,8 +1,6 @@
-'use strict';
-
 import * as _ from 'lodash'
-import {courseCache} from './db.es6'
-import buildQueryFromString from './queryStuff.es6'
+import {courseCache} from 'helpers/db'
+import buildQueryFromString from 'helpers/queryStuff'
 
 function getCourse(clbid) {
 	let course = courseCache[clbid]

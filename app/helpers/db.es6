@@ -1,10 +1,8 @@
-'use strict';
-
 import * as Promise from 'bluebird'
 import * as treo from 'treo'
 import * as treoPromise from 'treo/plugins/treo-promise'
 
-var schema = treo.schema()
+let schema = treo.schema()
 	.version(1)
 		.addStore('courses', { key: 'clbid' })
 			.addIndex('profs',      'profs',      {multi: true})
@@ -22,9 +20,9 @@ var schema = treo.schema()
 			.addIndex('sourcePath', 'sourcePath', {multi: false})
 	.version(2)
 		.addStore('students', { key: 'id' })
-			.addIndex('active',      'active',    {multi: false, unique: true})
+			.addIndex('active', 'active', {multi: false, unique: true})
 
-var db = treo('gobbldygook', schema)
+let db = treo('gobbldygook', schema)
 	.use(treoPromise())
 
 window.eraseDatabase = function() {
@@ -35,8 +33,5 @@ window.eraseDatabase = function() {
 	})
 }
 
-let courseCache = {}
-window.courseCache = courseCache
 window.database = db
-export {db, courseCache}
 export default db

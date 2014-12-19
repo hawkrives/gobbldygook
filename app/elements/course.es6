@@ -1,12 +1,10 @@
-'use strict';
-
 import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
 
 import {DragDropMixin} from 'react-dnd'
-import itemTypes from '../models/itemTypes.es6'
-import semesterName from '../helpers/semesterName.es6'
+import itemTypes from 'models/itemTypes'
+import semesterName from 'helpers/semesterName'
 
 function findSemesterList() {
 	return [
@@ -18,7 +16,6 @@ function findSemesterList() {
 
 
 let CourseTitle = React.createClass({
-	displayName: 'CourseTitle',
 	render() {
 		let course = this.props.info;
 
@@ -49,7 +46,6 @@ let CourseTitle = React.createClass({
 
 
 var ExpandedCourse = React.createClass({
-	displayName: 'ExpandedCourse',
 
 	removeFromSemester() {
 		this.props.schedule.removeCourse(this.props.info.clbid)
@@ -134,7 +130,6 @@ var ExpandedCourse = React.createClass({
 
 
 var CollapsedCourse = React.createClass({
-	displayName: 'CollapsedCourse',
 
 	render() {
 		let course = this.props.info;
@@ -158,7 +153,6 @@ var CollapsedCourse = React.createClass({
 })
 
 var Course = React.createClass({
-	displayName: 'Course',
 	mixins: [DragDropMixin],
 
 	configureDragDrop(registerType) {
@@ -260,7 +254,6 @@ var Course = React.createClass({
 })
 
 var EmptyCourseSlot = React.createClass({
-	displayName: 'EmptyCourseSlot',
 	render() {
 		let title = 'Empty Slot'
 

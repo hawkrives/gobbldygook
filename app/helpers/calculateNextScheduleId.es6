@@ -1,5 +1,3 @@
-'use strict';
-
 import * as _ from 'lodash'
 
 // Takes a list of schedules and finds the next id number.

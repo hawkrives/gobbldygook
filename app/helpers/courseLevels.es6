@@ -1,5 +1,3 @@
-'use strict';
-
 import * as _ from 'lodash'
 
 var coursesAtOrAboveLevel = _.curry(function(level, course) {

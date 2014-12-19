@@ -49,7 +49,7 @@ module.exports = {
 		// Enable source maps
 		debug: true,
 		// Additional file extentions to make optional
-		// extensions: ['.es6'],
+		extensions: ['.es6'],
 		// A separate bundle will be generated for each
 		// bundle config in the list below
 		bundleConfigs: [{
@@ -57,6 +57,7 @@ module.exports = {
 			dest: dest,
 			outputName: 'app.js',
 			mapfile: dest + 'app.js.map',
+			paths: [src, './node_modules'],
 		}]
 	}
 };

@@ -1,7 +1,5 @@
-'use strict';
-
 import * as _ from 'lodash'
-import add from './add.es6'
+import add from 'helpers/add'
 
 var countCredits = function(courses) {
 	return _(courses).pluck('credits').reduce(add)

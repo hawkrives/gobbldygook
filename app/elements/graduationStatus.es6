@@ -1,22 +1,17 @@
-'use strict';
-
 import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
-import {revertStudentToDemo} from '../models/studentModel.es6'
 
-import AreaOfStudy from './areaOfStudy.es6'
-import StudentSummary from './studentSummary.es6'
+import AreaOfStudy from 'elements/areaOfStudy'
+import StudentSummary from 'elements/studentSummary'
 
 var GraduationStatus = React.createClass({
-	displayName: 'GraduationStatus',
-
 	parse() {
 		console.log('parse student')
 	},
 	demo() {
 		console.log('load demo data')
-		revertStudentToDemo()
+		// revertStudentToDemo()
 	},
 	download() {
 		console.log('start student download')

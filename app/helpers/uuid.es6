@@ -1,5 +1,3 @@
-'use strict';
-
 function b(
 	a                  // placeholder
 ) {

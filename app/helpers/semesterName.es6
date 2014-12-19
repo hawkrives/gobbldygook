@@ -1,5 +1,3 @@
-'use strict'
-
 let semesterName = (semester) => {
 	let semesters = {
 		1: 'Fall',

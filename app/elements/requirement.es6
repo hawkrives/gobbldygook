@@ -1,10 +1,6 @@
-'use strict';
-
-import * as _ from 'lodash'
 import * as React from 'react'
 
 var Requirement = React.createClass({
-	displayName: 'Requirement',
 	render() {
 		// console.log('requirement render')
 		return React.createElement('li', {className: 'requirement'},

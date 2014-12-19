@@ -1,14 +1,11 @@
-'use strict';
-
 import * as _ from 'lodash'
 import * as React from 'react'
 
-import findFirstAvailableYear from '../helpers/findFirstAvailableYear.es6'
+import findFirstAvailableYear from 'helpers/findFirstAvailableYear'
 
-import Year from './year.es6'
+import Year from 'elements/year'
 
 var CourseTable = React.createClass({
-	displayName: 'CourseTable',
 	addYear(ev) {
 		var nextAvailableYear = findFirstAvailableYear(this.props.schedules.data, this.props.matriculation)
 

@@ -1,13 +1,10 @@
-'use strict';
-
 import * as React from 'react'
 import * as _ from 'lodash'
-import {queryCourses} from '../helpers/courses.es6'
-import Course from './course.es6'
-import {toPrettyTerm} from '../helpers/semesterName.es6'
+import {queryCourses} from 'helpers/courses'
+import Course from 'elements/course'
+import {toPrettyTerm} from 'helpers/semesterName'
 
 var SearchButton = React.createClass({
-	displayName: 'SearchButton',
 	getInitialState() {
 		return {
 			open: false,

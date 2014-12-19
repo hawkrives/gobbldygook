@@ -1,13 +1,10 @@
-'use strict';
-
-import * as _ from 'lodash'
 import * as React from 'react'
+import {State, RouteHandler} from 'react-router'
 
-import GraduationStatus from './graduationStatus.es6'
-import CourseTable from './courseTable.es6'
+import GraduationStatus from 'elements/graduationStatus'
+import CourseTable from 'elements/courseTable'
 
 var Student = React.createClass({
-	displayName: 'Student',
 	render() {
 		// console.info('student render', this.props.student)
 		return React.createElement('div', {className: 'student'},

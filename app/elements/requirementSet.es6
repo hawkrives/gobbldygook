@@ -1,10 +1,7 @@
-'use strict';
-
 import * as _ from 'lodash'
 import * as React from 'react/addons'
 
 var BooleanRequirement = React.createClass({
-	displayName: 'BooleanRequirement',
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-boolean'},
@@ -22,7 +19,6 @@ var BooleanRequirement = React.createClass({
 })
 
 var SomeArrayRequirement = React.createClass({
-	displayName: 'SomeArrayRequirement',
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-some-array'},
@@ -60,7 +56,6 @@ var SomeArrayRequirement = React.createClass({
 })
 
 var BooleanArrayRequirement = React.createClass({
-	displayName: 'BooleanArrayRequirement',
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-boolean-array'},
@@ -86,7 +81,6 @@ var BooleanArrayRequirement = React.createClass({
 })
 
 var NumberObjectRequirement = React.createClass({
-	displayName: 'NumberObjectRequirement',
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-object-number'},
@@ -110,7 +104,6 @@ var NumberObjectRequirement = React.createClass({
 })
 
 var RequirementSet = React.createClass({
-	displayName: 'RequirementSet',
 	render() {
 		// console.log('requirement-set render', this.props)
 
