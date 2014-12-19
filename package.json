@@ -1,6 +1,6 @@
 {
   "name": "gobbldygook",
-  "version": "3.0.0alpha7",
+  "version": "3.0.0alpha8",
   "description": "A course scheduling app for St. Olaf College",
   "main": "build/app.js",
   "browser": "build/index.html",
@@ -51,6 +51,7 @@
     "event-kit": "^0.8.0",
     "fetch": "git://github.com/github/fetch",
     "humanize-plus": "^1.5.0",
+    "immutable": "^3.4.1",
     "lodash": "^2.4.1",
     "react": "^0.12.1",
     "react-dnd": "^0.6.1",
