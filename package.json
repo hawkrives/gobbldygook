@@ -60,10 +60,10 @@
     "treo": "^0.3.0"
   },
   "devDependencies": {
-    "autoprefixer": "^4.0.0",
     "browser-sync": "^1.7.2",
     "browserify": "^6.3.3",
     "6to5ify": "^2.0.0",
+    "autoprefixer-core": "4.0.2",
     "csswring": "^2.0.0",
     "exorcist": "^0.1.6",
     "gulp": "^3.8.10",

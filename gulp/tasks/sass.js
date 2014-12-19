@@ -6,7 +6,7 @@ var size = require('gulp-size');
 var sourcemaps = require('gulp-sourcemaps');
 var config = require('../config').sass;
 
-var autoprefixer = require('autoprefixer');
+var autoprefixer = require('autoprefixer-core');
 var csswring = require('csswring');
 
 var processors = [
