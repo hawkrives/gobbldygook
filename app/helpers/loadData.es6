@@ -191,7 +191,7 @@ function loadInfoFile(url) {
 
 function loadData() {
 	var infoFiles = [
-		'./data/areas/info.json',
+		// './data/areas/info.json',
 		'./data/courses/info.json',
 	]
 	return Promise.all(_.map(infoFiles, loadInfoFile)).then(primeCourseCache)
