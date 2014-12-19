@@ -48,7 +48,7 @@ gulp.task('browserify', function(callback) {
 				// Report compile errors
 				.on('error', handleErrors)
 				// Use exorcist to remove the map file
-				.pipe(exorcist(bundleConfig.mapfile))
+				.pipe(exorcist(bundleConfig.mapFile))
 				// Use vinyl-source-stream to make the stream gulp compatible.
 				// Specifiy the desired output filename here.
 				.pipe(source(bundleConfig.outputName))
