@@ -59,7 +59,7 @@ module.exports = {
 		// A separate bundle will be generated for each
 		// bundle config in the list below
 		bundleConfigs: [{
-			entries: src + 'app.es6',
+			entries: src + 'index.es6',
 			dest: dest,
 			outputName: 'app.js',
 			paths: [src, './node_modules'],
