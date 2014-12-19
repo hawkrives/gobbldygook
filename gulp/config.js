@@ -12,17 +12,20 @@ module.exports = {
 			'!' + dest + '**.map', // Exclude Map files
 		]
 	},
+
 	lint: {
 		src: [
 			src + '**/*.{js,es6}',
 			'./gulp/**/*.js',
 		],
 	},
+
 	link: {
 		src: ['./node_modules/sto-courses', './data/areas'],
 		dest: [dest + 'data/courses', dest + 'data/areas'],
 		opts: {force: true},
 	},
+
 	sass: {
 		src: src + 'styles/**/*.scss',
 		dest: dest,
@@ -37,14 +40,17 @@ module.exports = {
 			'android >= 4.4',
 		],
 	},
+
 	fonts: {
 		src: [src + 'fonts/*.woff', src + 'icons/font/*.woff'],
 		dest: dest + 'fonts'
 	},
+
 	markup: {
 		src: [src + 'index.html', src + '.htaccess'],
 		dest: [dest, dest]
 	},
+
 	browserify: {
 		// Enable source maps
 		debug: true,
