@@ -1,11 +1,11 @@
 /* browserify task
-	 ---------------
-	 Bundle javascripty things with browserify!
+   ---------------
+   Bundle javascripty things with browserify!
 
-	 This task is set up to generate multiple separate bundles, from
-	 different sources, and to use Watchify when run from the default task.
+   This task is set up to generate multiple separate bundles, from different
+   sources, and to use Watchify when run from the default task.
 
-	 See browserify.bundleConfigs in gulp/config.js
+   See browserify.bundleConfigs in gulp/config.js
 */
 
 var browserify = require('browserify');
@@ -14,7 +14,7 @@ var exorcist = require('exorcist')
 var gulp = require('gulp');
 var handleErrors = require('../util/handleErrors');
 var source = require('vinyl-source-stream');
-var to5Browserify = require('6to5-browserify');
+var to5ify = require('6to5ify');
 var watchify = require('watchify');
 var config = require('../config').browserify;
 
@@ -35,9 +35,7 @@ gulp.task('browserify', function(callback) {
 			paths: bundleConfig.paths,
 		});
 
-		bundler.transform(to5Browserify.configure({
-			blacklist: ['generators'],
-		}));
+		bundler.transform(to5ify.configure({blacklist: ['generators']}));
 
 		var bundle = function() {
 			// Log when bundling starts
