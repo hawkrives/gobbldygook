@@ -1,8 +1,6 @@
-'use strict';
-
 import * as _ from 'lodash'
 
-import {hasDeptNumBetween} from '../app/helpers/deptNum.es6'
+import {hasDeptNumBetween} from 'helpers/deptNum'
 
 import {
 	hasGenEd,

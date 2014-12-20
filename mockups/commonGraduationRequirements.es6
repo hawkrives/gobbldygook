@@ -1,11 +1,9 @@
-'use strict';
-
 import * as _ from 'lodash'
 
-import {hasDeptNumBetween} from '../app/helpers/deptNum.es6'
-import countCredits from '../app/helpers/countCredits.es6'
-import hasDepartment from '../app/helpers/hasDepartment.es6'
-import {onlyCoursesAtOrAboveLevel} from '../app/helpers/courseLevels.es6'
+import {hasDeptNumBetween} from 'helpers/deptNum'
+import countCredits from 'helpers/countCredits'
+import hasDepartment from 'helpers/hasDepartment'
+import {onlyCoursesAtOrAboveLevel} from 'helpers/courseLevels'
 import * as utilities from './commonGraduationUtilities.es6'
 
 function courses(coursesTaken, creditsNeeded) {

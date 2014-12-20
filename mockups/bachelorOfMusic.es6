@@ -1,5 +1,3 @@
-'use strict';
-
 import * as _ from 'lodash'
 
 import * as common from './commonGraduationRequirements.es6'

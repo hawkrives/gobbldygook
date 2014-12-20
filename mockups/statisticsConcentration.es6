@@ -1,10 +1,8 @@
-'use strict';
-
 import * as _ from 'lodash'
 
-import hasDepartment from '../app/helpers/hasDepartment.es6'
-import {partialNameOrTitle} from '../app/helpers/partialTitle.es6'
-import {checkCoursesFor} from '../app/helpers/courses.es6'
+import hasDepartment from 'helpers/hasDepartment'
+import {partialNameOrTitle} from 'helpers/partialTitle'
+import {checkCoursesFor} from 'helpers/courses'
 
 function foundationCourses(courses) {
 	/* Foundation courses:

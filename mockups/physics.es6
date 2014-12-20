@@ -1,9 +1,7 @@
-'use strict';
-
 import * as _ from 'lodash'
 
-import hasDepartment from '../app/helpers/hasDepartment.es6'
-import {checkCoursesFor} from '../app/helpers/courses.es6'
+import hasDepartment from 'helpers/hasDepartment'
+import {checkCoursesFor} from 'helpers/courses'
 
 import {isRequiredCourse} from './commonMajorUtilities.es6'
 

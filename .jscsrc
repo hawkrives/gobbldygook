@@ -6,7 +6,7 @@
   ],
   "excludeFiles": [
     "node_modules/**",
-    "app/helpers/uuid.es6"
+    "app/helpers/uuid.js"
   ],
   "additionalRules": [
     "node_modules/jscs-jsdoc/lib/rules/*.js"

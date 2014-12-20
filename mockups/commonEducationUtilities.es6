@@ -1,5 +1,3 @@
-'use strict';
-
 import * as _ from 'lodash'
 
 function onlyQuarterCreditCoursesCanBePassFail(course) {

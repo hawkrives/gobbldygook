@@ -1,5 +1,3 @@
-'use strict';
-
 import * as _ from 'lodash'
 
 var isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
