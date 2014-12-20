@@ -88,7 +88,7 @@ class Schedule extends ScheduleRecord {
 			.then((conflicts) => {
 				var hasConflict = Immutable.fromJS(conflicts)
 					// flatten the nested arrays
-					.flatten()
+					.flatten(true)
 					// and see if any of the resulting values are true
 					.some((value) => value === true)
 

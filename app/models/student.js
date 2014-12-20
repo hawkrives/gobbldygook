@@ -162,7 +162,7 @@ class Student extends StudentRecord {
 	get courses() {
 		let courses = this.activeSchedules.map((schedule) => schedule.courses)
 		let scheduleCoursePromises = Promise.all(courses)
-		return scheduleCoursePromises.then((courses) => courses.flatten())
+		return scheduleCoursePromises.then((courses) => courses.flatten(true))
 	}
 
 	get creditCount() {
