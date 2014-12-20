@@ -44,7 +44,7 @@ var Year = React.createClass({
 					student: this.props.student,
 				})
 			})
-			.toOrderedSet()
+			.toList()
 
 		return React.createElement('div', {className: 'year'},
 			React.createElement('header', {className: 'year-title'},
