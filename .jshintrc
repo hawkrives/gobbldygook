@@ -1,0 +1,23 @@
+{
+    "asi": true,
+    "browser": true,
+    "curly": false,
+    "devel": true,
+    "expr": true,
+    "eqeqeq": true,
+    "esnext": true,
+    "globalstrict": true,
+    "indent": "\t",
+    "loopfunc": true,
+    "node": false,
+    "trailing": true,
+    "newcap": false,
+    "quotmark": "single",
+    "strict": true,
+    "undef": true,
+    "white": true,
+    "predef": [
+        "require",
+        "module"
+    ]
+}
