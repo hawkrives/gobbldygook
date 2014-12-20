@@ -23,7 +23,7 @@ let CourseTable = React.createClass({
 		let years = this.props.student.schedulesByYear.map((schedules, year) => {
 			return React.createElement(Year, {
 				student: this.props.student,
-				year: parseInt(year, 10),
+				year: year,
 				key: year,
 			})
 		})
