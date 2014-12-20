@@ -1,4 +1,5 @@
 import * as _ from 'lodash'
+import * as Promise from 'bluebird'
 import db from 'helpers/db'
 import buildQueryFromString from 'helpers/queryStuff'
 
