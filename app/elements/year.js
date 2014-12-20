@@ -31,18 +31,20 @@ var Year = React.createClass({
 
 	render() {
 		var thisYearSchedules = this.props.student.schedulesByYear.get(this.props.year)
-		let schedules = thisYearSchedules.filter((s) => s.active).groupBy((s) => s.semester)
+		let schedules = thisYearSchedules.filter(s => s.active)
 
-		var terms = schedules.map((schedule, semester) => {
-			semester = parseInt(semester, 10)
-			return React.createElement(Semester, {
-				key: semester,
-				ref: semester,
-				semester: semester,
-				year: this.props.year,
-				student: this.props.student,
+		let terms = schedules
+			.sortBy(schedule => schedule.semester)
+			.map((schedule) => {
+				return React.createElement(Semester, {
+					key: schedule.semester,
+					ref: schedule.semester,
+					semester: schedule.semester,
+					year: this.props.year,
+					student: this.props.student,
+				})
 			})
-		}).toList()
+			.toOrderedSet()
 
 		return React.createElement('div', {className: 'year'},
 			React.createElement('header', {className: 'year-title'},
