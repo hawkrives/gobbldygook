@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import * as Immutable from 'immutable'
 import findMissingNumberBinarySearch from 'helpers/findMissingNumberBinarySearch'
 
 // Takes a list of schedules and finds the first open year. If they go [2012,
@@ -11,22 +11,22 @@ function findFirstAvailableYear(schedules, matriculation) {
 		return new Date().getFullYear()
 	}
 
-	var years = _(schedules)
-		.sortBy('year')
-		.pluck('year')
-		.uniq()
-		.value()
+	let years = schedules
+		.sortBy(sch => sch.year)
+		.map(sch => sch.year)
+		.toSet()
+		.toList()
 
 	// put the matriculation year at the front to give a starting point
-	if (!(_.isUndefined(matriculation)))
-		years.unshift(matriculation - 1)
+	if (matriculation !== undefined)
+		years = years.unshift(matriculation - 1)
 
 	var missingNo = findMissingNumberBinarySearch(years)
-	if (!_.isNull(missingNo)) {
+	if (missingNo !== null) {
 		return missingNo
 	}
 
-	return _.max(years) + 1
+	return years.max() + 1
 }
 
 export default findFirstAvailableYear

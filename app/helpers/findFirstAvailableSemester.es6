@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import * as Immutable from 'immutable'
 import findMissingNumberBinarySearch from 'helpers/findMissingNumberBinarySearch'
 
 // Takes a list of schedules and finds the first open semester.
@@ -7,22 +7,22 @@ import findMissingNumberBinarySearch from 'helpers/findMissingNumberBinarySearch
 // will return 4. Etc.
 
 function findFirstAvailableSemester(schedules, forYear) {
-	var semesters = _(schedules)
-			.filter({year: forYear})
-			.sortBy('semester')
-			.pluck('semester')
-			.uniq()
-			.value()
+	let semesters = schedules
+			.filter(sch => sch.year === forYear)
+			.sortBy(sch => sch.semester)
+			.map(sch => sch.semester)
+			.toSet()
+			.toList()
 
 	// stick a 0 at the front so findBinary will start from 1
-	semesters.unshift(0)
+	semesters = semesters.unshift(0)
 
-	var missingNo = findMissingNumberBinarySearch(semesters)
-	if (!_.isNull(missingNo)) {
+	var missingNo = findMissingNumberBinarySearch(semesters.toJS())
+	if (missingNo !== null) {
 		return missingNo
 	}
 
-	return _.max(semesters) + 1
+	return semesters.max() + 1
 }
 
 export default findFirstAvailableSemester

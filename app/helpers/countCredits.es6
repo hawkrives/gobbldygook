@@ -1,8 +1,9 @@
-import * as _ from 'lodash'
+import {Seq} from 'immutable'
 import add from 'helpers/add'
 
-var countCredits = function(courses) {
-	return _(courses).pluck('credits').reduce(add)
-}
+let countCredits = (courses) => Seq(courses)
+	.filter(c => c)
+	.map(c => c.credits)
+	.reduce(add, 0)
 
 export default countCredits
