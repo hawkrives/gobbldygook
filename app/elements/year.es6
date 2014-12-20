@@ -11,7 +11,7 @@ import calculateNextScheduleId from 'helpers/calculateNextScheduleId'
 
 var Year = React.createClass({
 	canAddSemester() {
-		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
+		return findFirstAvailableSemester(this.props.student.schedules, this.props.year) <= 5
 	},
 
 	addSemester() {
