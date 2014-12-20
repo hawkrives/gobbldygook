@@ -83,17 +83,19 @@ class Schedule extends ScheduleRecord {
 			// Step one: do any times conflict?
 			.then(checkScheduleTimeConflicts)
 			.then((conflicts) => {
-				var hasConflict = _(conflicts)
-					.flatten()      // flatten the nested arrays
-					.any()          // and see if any of the resulting values are true
+				var hasConflict = Immutable.fromJS(conflicts)
+					// flatten the nested arrays
+					.flatten()
+					// and see if any of the resulting values are true
+					.some((value) => value === true)
 
-				if (hasConflict.length) {
+				if (hasConflict) {
 					console.log('schedule conflicts', conflicts, hasConflict)
 				}
 
 				return {
 					hasConflict: hasConflict,
-					conflicts: conflicts
+					conflicts: conflicts,
 				}
 			})
 	}
