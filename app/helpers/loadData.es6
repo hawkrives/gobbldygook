@@ -7,8 +7,8 @@ import {buildDeptNum, buildDept} from 'helpers/deptNum'
 import {discoverRecentYears} from 'helpers/recentTime'
 import {convertTimeStringsToOfferings} from 'helpers/time'
 
-var logDataLoading = false
-// var logDataLoading = true
+let logDataLoading = false
+// let logDataLoading = true
 
 function prepareCourse(course) {
 	course.dept = course.dept || buildDept(course)
@@ -17,48 +17,18 @@ function prepareCourse(course) {
 	return course
 }
 
-function primeCourseCache() {
-	console.log('Priming course cache...')
-
-	let start = performance.now()
-	let recentYears = discoverRecentYears()
-	let setOfCourses = []
-	let courses = db.store('courses').index('year')
-
-	return Promise.all(
-		_.map(recentYears, (year) =>
-			courses.get(year).then((courses) => _.each(courses, c => courseCache[c.clbid] = prepareCourse(c)))
-	)).then(() => {
-		let end = performance.now()
-		console.log('Cached courses in', (end - start) + 'ms.')
-	})
-}
-
-var coursesToStore = [];
-
-function gatherCourses(item) {
-	console.log(item.meta.path, 'called storeCourses')
-	var start = performance.now()
-
-	_.map(item.data.courses, (course) => {
-		course.sourcePath = item.meta.path
-		var prepared = prepareCourse(course)
-		coursesToStore.push(prepared)
-	})
-
-	var end = performance.now()
-	console.log('Gathered', item.meta.path, 'in', (end - start) + 'ms.')
-
-	return item
-}
-
-function storeCourses() {
+function storeCourses(item) {
 	console.log('storing courses')
-	var start = performance.now()
+	let start = performance.now()
+
+	let coursesToStore = _.map(item.data.courses, (course) => {
+		course.sourcePath = item.meta.path
+		return prepareCourse(course)
+	})
 
 	return db.store('courses').batch(coursesToStore)
 		.then((results) => {
-			var end = performance.now()
+			let end = performance.now()
 			console.log('Stored courses in', (end - start) + 'ms.')
 			return item
 		})
@@ -70,7 +40,7 @@ function storeCourses() {
 function storeArea(item) {
 	console.log(item.meta.path, 'called storeArea')
 
-	var area = item.data.info
+	let area = item.data.info
 	area.sourcePath = item.meta.path
 
 	return db.store('areas').put(area)
@@ -84,7 +54,7 @@ function storeArea(item) {
 
 function storeItem(item) {
 	if (item.type === 'courses') {
-		return gatherCourses(item)
+		return storeCourses(item)
 	}
 	else if (item.type === 'areas') {
 		return storeArea(item)
@@ -92,7 +62,7 @@ function storeItem(item) {
 }
 
 function cleanPriorData(item) {
-	var path = item.meta.path
+	let path = item.meta.path
 	console.info('deleting ' + item.type + ' from ' + path)
 
 	return db.store(item.type)
@@ -100,7 +70,7 @@ function cleanPriorData(item) {
 		.get(path)
 		.then((items) => {
 			return _.map(items, (item) => {
-				var result = Object.create(null)
+				let result = Object.create(null)
 				result[item.clbid] = null
 				return result
 			})
@@ -123,16 +93,16 @@ function cacheItemHash(item) {
 	})
 }
 
-var lookup = {
+let lookup = {
 	courses: 'courses',
 	areas: 'info',
 }
 
 function updateDatabase(itemType, infoFromServer) {
-	var oldHash = localStorage.getItem(infoFromServer.path)
-	var newHash = infoFromServer.hash
+	let oldHash = localStorage.getItem(infoFromServer.path)
+	let newHash = infoFromServer.hash
 
-	var itemUrl = _.template('./data/${type}/${path}?v=${hash}',
+	let itemUrl = _.template('./data/${type}/${path}?v=${hash}',
 		{type: itemType, path: infoFromServer.path, hash: newHash})
 
 	if (newHash === oldHash) {
@@ -168,7 +138,7 @@ function updateDatabase(itemType, infoFromServer) {
 function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
-	var files = _(infoFile.info)
+	let files = _(infoFile.info)
 		.map((files) =>
 			_(files)
 				.filter((file) => parseInt(file.year, 10) > new Date().getFullYear() - 5)
@@ -190,10 +160,10 @@ function loadInfoFile(url) {
 
 function loadData() {
 	var infoFiles = [
-		// './data/areas/info.json',
+		'./data/areas/info.json',
 		'./data/courses/info.json',
 	]
-	return Promise.all(_.map(infoFiles, loadInfoFile)).then(primeCourseCache)
+	return Promise.all(_.map(infoFiles, loadInfoFile))
 }
 
 window.loadData = loadData

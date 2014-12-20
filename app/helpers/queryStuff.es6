@@ -3,7 +3,7 @@ import * as _ from 'lodash'
 // We should build lists of valid inputs!
 // Like, 'these are the valid departments' and 'these are the valid professors'
 
-var semesters = {
+let semesters = {
 	fall: 1,
 	interim: 2,
 	'j-term': 2,
@@ -23,7 +23,7 @@ var semesters = {
 	summers: ['$OR', 4, 5],
 }
 
-var departmentMapping = {
+let departmentMapping = {
 	'american con': 'AMCON',
 	'american conversation': 'AMCON',
 	'american conversations': 'AMCON',
@@ -55,7 +55,7 @@ var departmentMapping = {
 	compsci: 'CSCI',
 }
 
-var keywordMappings = {
+let keywordMappings = {
 	departments: 'depts',
 	department: 'depts',
 	dept: 'depts',
@@ -79,7 +79,7 @@ var keywordMappings = {
 	place: 'places',
 }
 
-var gereqMapping = {
+let gereqMapping = {
 	'history of western culture': 'HWC',
 	'historical studies in western culture': 'HWC',
 	'artistic studies': 'ALS-A',
@@ -116,12 +116,12 @@ var gereqMapping = {
 	ethics: 'EIN',
 }
 
-var evenIndex = (value, index) => index % 2 === 0;
-var oddIndex  = (value, index) => index % 2 === 1;
-var notEmptyString = (value) => value.length > 0;
+let evenIndex = (value, index) => index % 2 === 0;
+let oddIndex  = (value, index) => index % 2 === 1;
+let notEmptyString = (value) => value.length > 0;
 
 
-var zipToObjectWithArrays = (keys, vals) => {
+let zipToObjectWithArrays = (keys, vals) => {
 	let arr = _.zip(keys, vals)
 	return _(arr).reduce((obj, propKey) => {
 		if (_.has(obj, propKey[0]))
@@ -134,7 +134,7 @@ var zipToObjectWithArrays = (keys, vals) => {
 }
 
 function buildQueryFromString(queryString) {
-	var rex = /(\b\w*?\b):/g
+	let rex = /(\b\w*?\b):/g
 
 	// The {index} object is there to emulate the one property I expect from a RegExp.
 	// If the regex fails, we grab the string through the end and build the object from what we assume to be the title.
@@ -143,18 +143,18 @@ function buildQueryFromString(queryString) {
 	queryString = queryString.substring(rexTested.index)
 
 	// Split apart the string into an array
-	var matches = queryString.split(rex)
+	let matches = queryString.split(rex)
 
 	// Remove extra whitespace and remove empty strings
-	var cleaned = _(matches)
+	let cleaned = _(matches)
 		.map((m) => m.trim())
 		.filter(notEmptyString)
 		.value()
 
 
 	// Grab the keys and values from the lists
-	var keys = _.filter(cleaned, evenIndex)
-	var values = _.filter(cleaned, oddIndex)
+	let keys = _.filter(cleaned, evenIndex)
+	let values = _.filter(cleaned, oddIndex)
 
 	if (stringThing) {
 		keys.push('title')
@@ -170,10 +170,10 @@ function buildQueryFromString(queryString) {
 	})
 
 	// Group the [keys, vals] into an object, with arrays for each value
-	var zipped = zipToObjectWithArrays(keys, values)
+	let zipped = zipToObjectWithArrays(keys, values)
 
 	// Perform initial cleaning of the values, dependent on the keys
-	var grouped = _.mapValues(zipped, (vals, key) => {
+	let grouped = _.mapValues(zipped, (vals, key) => {
 		let organized = _.map(vals, (val) => {
 			if (val.indexOf('$') === 0)
 				return val.toUpperCase()

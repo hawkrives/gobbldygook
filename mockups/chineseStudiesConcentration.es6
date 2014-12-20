@@ -87,15 +87,21 @@ function electives(courses) {
 }
 
 function checkChineseStudiesConcentration(student) {
-	let chineseStudiesConcentrationRequirements = [
-		language(student.courses),
-		electives(student.courses),
-	]
+	return Promise.all([
+		student.courses
+	]).then((studentPieces) => {
+		let [courses] = studentPieces
 
-	return {
-		result: _.all(chineseStudiesConcentrationRequirements, 'result'),
-		details: chineseStudiesConcentrationRequirements
-	}
+		let chineseStudiesConcentrationRequirements = [
+			language(courses),
+			electives(courses),
+		]
+
+		return {
+			result: _.all(chineseStudiesConcentrationRequirements, 'result'),
+			details: chineseStudiesConcentrationRequirements
+		}
+	})
 }
 
 export default checkChineseStudiesConcentration

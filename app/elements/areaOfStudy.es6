@@ -79,27 +79,32 @@ let findWordForProgress = (maxProgress, currentProgress) => {
 		return 'zero'
 }
 
-var AreaOfStudy = React.createClass({
-	load() {
-		var area = getArea(this.props.area.id)
+let noResult = (type) => {
+	return {
+		result: {
+			result: false,
+			details: [{
+				title: type + ' not found!',
+				description: 'This ' + type + ' could not be found.'
+			}]
+		}
+	}
+}
 
-		if ( typeof area === 'function') {
-			let results = area(this.props.student)
-			// console.log('calculated ' + this.props.area.abbr + ' graduation possibility', results)
-			this.setState({
-				result: results
-			})
+var AreaOfStudy = React.createClass({
+	displayName: 'AreaOfStudy',
+	load(props) {
+		let area = getArea(props.area.id)
+
+		if (typeof area === 'function') {
+			area(props.student)
+				.then((result) => {
+					this.setState({result})
+					// console.log(`calculated ${this.props.area.abbr} graduation possibility:`, result)
+				})
 		}
 		else {
-			this.setState({
-				result: {
-					result: false,
-					details: [{
-						title: this.props.area.type + ' not found!',
-						description: `This ${this.props.area.type} could not be found.`,
-					}],
-				}
-			})
+			this.setState(noResult(props.area.type))
 		}
 	},
 	getInitialState() {
@@ -111,11 +116,11 @@ var AreaOfStudy = React.createClass({
 			open: false,
 		}
 	},
-	componentWillReceiveProps() {
-		this.load()
+	componentWillReceiveProps(nextProps) {
+		this.load(nextProps)
 	},
 	componentDidMount() {
-		this.load()
+		this.load(this.props)
 	},
 	toggle() {
 		this.setState({open: !this.state.open});

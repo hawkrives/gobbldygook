@@ -1,38 +1,33 @@
 import * as _ from 'lodash'
-import {courseCache} from 'helpers/db'
-import buildQueryFromString from 'helpers/queryStuff'
+import {db} from 'helpers/db'
+import buildQueryFromString from './queryStuff.es6'
 
 function getCourse(clbid) {
-	let course = courseCache[clbid]
-
-	if (!course) {
-		console.warn('course retrieval failed for: ' + clbid)
-	}
-
-	return _.cloneDeep(course)
+	return db.store('courses').get(clbid)
+		.then(_.cloneDeep)
+		.catch((err) => new Error(`course retrieval failed for ${clbid}`, err))
 }
 
 function getCourses(clbids) {
 	// Takes a list of clbids, and returns a list of the course objects for
 	// those clbids.
-	return _.map(clbids, getCourse)
+
+	console.log('called getCourses', clbids)
+	return Promise.all(clbids.map(getCourse))
 }
 
 function deptNumToCrsid(deptNumString) {
-	let result = _.find(courseCache.courses, {deptnum: deptNumString})
-	if (result) {
-		return result.crsid
-	}
-	else {
-		console.warn('Course ' + deptNumString + ' was not found')
-	}
+	return db.store('courses').index('deptnum').get(deptNumString).then(_.cloneDeep)
+		.catch((err) => new Error(`Course ${deptNumString} was not found`, err))
 }
 
 function checkCoursesForDeptNum(courses, deptNumString) {
-	var crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
+	let crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
 
-	let crsid = deptNumToCrsid(deptNumString)
-	return _.contains(crsidsToCheckAgainst, crsid)
+	return deptNumToCrsid(deptNumString)
+		.then((crsid) => {
+			return _.contains(crsidsToCheckAgainst, crsid)
+		})
 }
 
 function checkCoursesFor(courses, filter) {
@@ -69,7 +64,7 @@ function queryCourses(queryString) {
 
 	console.log('query:', query)
 
-	var results = _(courseCache)
+	let results = _(courseCache)
 		.filter(course => {
 			let matches = _.map(query, (values, key) => {
 				if (!_.has(course, key))
