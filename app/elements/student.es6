@@ -12,6 +12,13 @@ var Student = React.createClass({
 
 		window.stu = student
 
+		if (!student)
+			return React.createElement('img', {
+				className: 'loading',
+				src: 'images/loading.svg',
+				alt: 'Gobbldygook is Loading',
+			})
+
 		return React.createElement('div',
 			{className: 'student'},
 			React.createElement(Sidebar, {student}),
