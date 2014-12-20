@@ -30,7 +30,7 @@ var Semester = React.createClass({
 	getInitialState() {
 		return {
 			courses: [],
-			schedule: {},
+			schedule: null,
 			validation: {},
 		}
 	},
@@ -67,7 +67,7 @@ var Semester = React.createClass({
 
 		let infoIcons = []
 		if (this.state.schedule) {
-			let courseCount = schedule.courses.size
+			let courseCount = this.state.schedule.clbids.size
 			infoIcons.push(React.createElement('li',
 				{className: 'semester-course-count', key: 'course-count'},
 				courseCount + ' ' + humanize.pluralize(courseCount, 'course')))
