@@ -42,7 +42,7 @@ var Year = React.createClass({
 				year: this.props.year,
 				student: this.props.student,
 			})
-		}, this)
+		}).toList()
 
 		return React.createElement('div', {className: 'year'},
 			React.createElement('header', {className: 'year-title'},
@@ -53,7 +53,7 @@ var Year = React.createClass({
 					onClick: this.removeYear,
 				})
 			),
-			React.createElement('div', {className: 'semester-list'}, terms),
+			React.createElement('div', {className: 'semester-list'}, terms.toJS()),
 			React.createElement('button', {
 				className: 'add-semester',
 				title: 'Add Semester',
