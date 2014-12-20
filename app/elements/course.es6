@@ -46,7 +46,6 @@ let CourseTitle = React.createClass({
 
 
 var ExpandedCourse = React.createClass({
-
 	removeFromSemester() {
 		this.props.schedule.removeCourse(this.props.info.clbid)
 	},
@@ -125,7 +124,7 @@ var ExpandedCourse = React.createClass({
 		// /////
 
 		return React.createElement('div', {className: 'info-rows'}, title, summary, details, toolsEls)
-	}
+	},
 })
 
 
@@ -172,7 +171,7 @@ var Course = React.createClass({
 							this.props.schedule.removeCourse(this.props.info.clbid)
 						}
 					}
-				}
+				},
 			}
 		})
 	},
@@ -203,7 +202,7 @@ var Course = React.createClass({
 		if (this.props.schedule && this.props.info.sem !== this.props.schedule.semester) {
 			warnings.push({
 				msg: 'This course (from ' + semesterName(this.props.info.sem) + ') is not offered in this semester.',
-				className: 'course-invalid-semester'
+				className: 'course-invalid-semester',
 			})
 		}
 
@@ -214,7 +213,7 @@ var Course = React.createClass({
 				conflictIndex = conflictIndex + 1; // because humans don't 0-index lists
 				warnings.push({
 					msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.',
-					className: 'course-time-conflict'
+					className: 'course-time-conflict',
 				})
 			}
 		}
@@ -244,13 +243,13 @@ var Course = React.createClass({
 			_.extend(
 				{
 					className: 'course ' + (this.state.isOpen ? 'expanded' : 'collapsed'),
-					onClick: this.toggle
+					onClick: this.toggle,
 				},
 				this.dragSourceFor(itemTypes.COURSE)),
 
 			courseInfo, warnings
 		);
-	}
+	},
 })
 
 var EmptyCourseSlot = React.createClass({

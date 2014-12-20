@@ -22,9 +22,7 @@ body {
 }
 
 .loading {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: center;
-	height: 90vh;
+	margin: 20vh auto 0;
+	display: block;
+	height: 15em;
 }

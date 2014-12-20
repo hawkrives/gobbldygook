@@ -88,7 +88,7 @@ var SearchButton = React.createClass({
 				React.createElement('ul', {className: 'course-list'}, this.state.courseObjects)
 			) : null
 		)
-	}
+	},
 })
 
 export default SearchButton

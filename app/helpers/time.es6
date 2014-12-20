@@ -175,9 +175,11 @@ function checkScheduleTimeConflicts(schedule) {
 			var result;
 			if (c1 === c2) {
 				result = null
-			} else if (checkCourseTimeConflicts(c1, c2)) {
+			}
+			else if (checkCourseTimeConflicts(c1, c2)) {
 				result = true
-			} else {
+			}
+			else {
 				result = false
 			}
 			results[c1idx][c2idx] = result;

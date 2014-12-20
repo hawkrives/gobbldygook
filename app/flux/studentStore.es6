@@ -1,18 +1,17 @@
 import * as Reflux from 'reflux'
 import * as Immutable from 'immutable'
 import studentActions from 'flux/studentActions'
+import Student from 'models/student'
 
 let studentStore = Reflux.createStore({
-	init() {
-		this.listenTo(studentActions)
+	listenables: studentActions,
 
+	init() {
 		this.students = Immutable.List()
 		this.history = Immutable.Stack()
 		this.future = Immutable.Stack()
 
 		this._loadData()
-
-		this.trigger(this.students)
 	},
 
 	undo() {
@@ -28,11 +27,12 @@ let studentStore = Reflux.createStore({
 	},
 
 	_loadData(opts={}) {
+		console.log('studentStore._loadData, with', opts)
 		let rawStudent;
 		let studentId = localStorage.getItem('activeStudentId')
 		let demoStudentId = '3AE9E7EE-DA8F-4014-B987-8D88814BB848'
 
-		let localStudent = localStorage.getItem(studentId || demoStudentId) || localStorage.getItem(`student-${currentVersionString}`)
+		let localStudent = localStorage.getItem(studentId || demoStudentId) || localStorage.getItem('student-v3.0a6')
 
 		try {
 			rawStudent = JSON.parse(localStudent)
@@ -44,20 +44,17 @@ let studentStore = Reflux.createStore({
 			rawStudent.id = null
 		}
 
-		if (opts.demo) {
-			console.log('reverting to demo student')
-			rawStudent = demoStudent
-			rawStudent.active = true
-			rawStudent.id = null
-		}
-
 		let student = new Student(rawStudent)
-		window.student_data = student
+		window.studentData = student
 
 		student.save()
 
+		console.log(student.toJS())
+
 		this._preChange()
 		this.students = this.students.push(student)
+		console.log('done with _loadData', this.students.toJS())
+		this._postChange()
 	},
 
 	_preChange() {
@@ -65,6 +62,7 @@ let studentStore = Reflux.createStore({
 	},
 
 	_postChange() {
+		console.log('studentStore._postChange')
 		this.trigger(this.students)
 	},
 
@@ -176,5 +174,7 @@ let studentStore = Reflux.createStore({
 		this._postChange()
 	},
 })
+
+window.store = studentStore
 
 export default studentStore

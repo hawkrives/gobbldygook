@@ -5,7 +5,7 @@ import * as humanize from 'humanize-plus'
 import AreaOfStudy from 'elements/areaOfStudy'
 import StudentSummary from 'elements/studentSummary'
 
-var GraduationStatus = React.createClass({
+let GraduationStatus = React.createClass({
 	parse() {
 		console.log('parse student')
 	},
@@ -20,48 +20,51 @@ var GraduationStatus = React.createClass({
 
 	render() {
 		// console.info('graduation-status render', this.props.student)
+		if (!this.props.student)
+			return null
 
 		// Get areas of study
-		var areasOfStudy = _.mapValues(this.props.student.studies.byType, (areas) => {
-			return _.map(areas, (area) => {
+		let areasOfStudy = this.props.student.studies.byType.map((areas) => {
+			return areas.map((area) => {
 				return React.createElement(AreaOfStudy, {
 					key: area.id,
 					student: this.props.student,
-					area: area
+					area: area,
 				})
 			})
 		})
 
-		var areaOfStudySections = _.map(_.keys(areasOfStudy), (areaType) => {
-			var pluralType = humanize.pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
+		let areaOfStudySections = areasOfStudy.keys().map((areaType) => {
+			let pluralType = humanize.pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 			return React.createElement('section', {id: pluralType, key: areaType},
 				React.createElement('header', {className: 'area-type-heading'},
 					React.createElement('h1', null, humanize.capitalize(pluralType)),
 					React.createElement('button', {
 						className: 'add-area-of-study',
-						title: 'Add ' + humanize.capitalize(areaType)
+						title: `Add ${humanize.capitalize(areaType)}`,
 					})
 				),
-				areasOfStudy[areaType]
+				areasOfStudy.get(areaType)
 			)
 		})
 
-		var studentButtons = React.createElement('menu', {className: 'student-buttons'},
+		let studentButtons = React.createElement('menu', {className: 'student-buttons'},
 			// React.createElement('button', {className: 'parse-student', onClick: this.parse}, 'Parse'),
 			React.createElement('button', {className: 'demo-student', onClick: this.demo}, 'Demo'),
 			React.createElement('button', {className: 'download-student'},
 				React.createElement('a',
 					{
 						href: this.download(),
-						download: this.props.student.name + '.gb-student.json'
-					}, 'Download')))
+						download: `${this.props.student.name}.gb-student.json`,
+					},
+					'Download')))
 
 		return React.createElement('section', {className: 'graduation-status'},
 			studentButtons,
 			React.createElement(StudentSummary, {student: this.props.student}),
 			areaOfStudySections
 		)
-	}
-});
+	},
+})
 
 export default GraduationStatus

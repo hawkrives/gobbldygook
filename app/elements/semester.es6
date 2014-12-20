@@ -8,12 +8,9 @@ import semesterName from 'helpers/semesterName'
 import Course from 'elements/course'
 import {EmptyCourseSlot} from 'elements/course'
 
+import studentActions from 'flux/studentActions'
 import {DragDropMixin} from 'react-dnd'
 import itemTypes from 'models/itemTypes'
-
-var isCurrentTermSchedule = _.curry((year, semester, schedule) => {
-	return (schedule.year === year && schedule.semester === semester)
-})
 
 var Semester = React.createClass({
 	mixins: [DragDropMixin],
@@ -22,48 +19,49 @@ var Semester = React.createClass({
 			dropTarget: {
 				acceptDrop(courseIdentifier) {
 					console.log('dropped courseIdentifier', courseIdentifier)
-					this.schedule.addCourse(courseIdentifier.clbid)
+					studentActions.addCourse(this.props.student.id, this.schedule.id, courseIdentifier.clbid)
 				}
 			}
 		})
 	},
 
 	removeSemester() {
-		var currentTermSchedules = _.filter(this.props.schedules.data,
-			isCurrentTermSchedule(this.props.year, this.props.semester))
+		var currentTermSchedules = this.props.schedules.filter((s) =>
+			s.year === this.props.year && s.semester === this.props.semester)
 
-		var scheduleIds = _.pluck(currentTermSchedules, 'id')
+		var scheduleIds = currentTermSchedules.map((s) => s.id)
 
-		this.props.schedules.destroyMultiple(scheduleIds)
+		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},
 
 	render() {
 		let activeSchedules = this.props.schedules.activeSchedules
-		this.schedule = _.find(activeSchedules,
-				{year: this.props.year, semester: this.props.semester})
+		this.schedule = activeSchedules.find((s) => s.year === this.props.year && s.semester === this.props.semester)
 		let schedule = this.schedule;
 		// console.log('semester render', schedule)
 
 		let infoIcons = []
 		if (schedule) {
-			let courseCount = _.size(schedule.courses)
-			infoIcons.push(React.createElement('li', {
-				className: 'semester-course-count', key: 'course-count'},
+			let courseCount = schedule.courses.size
+			infoIcons.push(React.createElement('li',
+				{className: 'semester-course-count', key: 'course-count'},
 				courseCount + ' ' + humanize.pluralize(courseCount, 'course')))
 
 			if (!schedule.isValid) {
 				let conflicts = JSON.stringify(schedule.conflicts, null, 2)
-				infoIcons.push(React.createElement('li', {
-					className: 'semester-status',
-					key: 'semester-status',
-					title: conflicts},
+				infoIcons.push(React.createElement('li',
+					{
+						className: 'semester-status',
+						key: 'semester-status',
+						title: conflicts,
+					},
 					React.createElement('i', {className: 'semester-alert'})))
 			}
 
-			let credits = _.reduce(_.pluck(schedule.courses, 'credits'), add) || 0
+			let credits = schedule.courses.map((c) => c.credits).reduce(add, 0)
 			if (credits) {
-				infoIcons.push(React.createElement('li', {
-					className: 'semester-credit-count', key: 'credit-count'},
+				infoIcons.push(React.createElement('li',
+					{className: 'semester-credit-count', key: 'credit-count'},
 					credits + ' ' + humanize.pluralize(credits, 'credit')))
 			}
 		}
@@ -72,8 +70,8 @@ var Semester = React.createClass({
 		let courseList = null;
 		if (schedule) {
 			let courses = schedule.courses;
-			let courseObjects = _.map(courses,
-				(course, i) => React.createElement(Course, {
+			let courseObjects = courses.map((course, i) =>
+				React.createElement(Course, {
 					key: course.clbid,
 					info: course,
 					schedule: schedule,
@@ -81,9 +79,9 @@ var Semester = React.createClass({
 					conflicts: schedule.conflicts,
 				}))
 			let maxCredits = (schedule.semester === 1 || schedule.semester === 3) ? 4 : 1;
-			_.each(_.range(Math.floor(countCredits(courses)), maxCredits), (i) => courseObjects.push(
-				React.createElement(EmptyCourseSlot, {key: 'empty' + i})
-			))
+			Immutable.Range(Math.floor(countCredits(courses)), maxCredits).forEach((i) => {
+				courseObjects = courseObjects.push(React.createElement(EmptyCourseSlot, {key: 'empty' + i}))
+			})
 			courseList = React.createElement('div', {className: 'course-list'}, courseObjects);
 		}
 
@@ -96,11 +94,11 @@ var Semester = React.createClass({
 				infoBar,
 				React.createElement('button', {
 					className: 'remove-semester',
-					title: 'Remove ' + String(this.props.year) + ' ' + semesterName(this.props.semester),
+					title: `Remove ${this.props.year} ${semesterName(this.props.semester)}`,
 					onClick: this.removeSemester,
 				})),
 			courseList);
-	}
+	},
 })
 
 export default Semester

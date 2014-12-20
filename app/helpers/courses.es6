@@ -22,7 +22,8 @@ function deptNumToCrsid(deptNumString) {
 	let result = _.find(courseCache.courses, {deptnum: deptNumString})
 	if (result) {
 		return result.crsid
-	} else {
+	}
+	else {
 		console.warn('Course ' + deptNumString + ' was not found')
 	}
 }

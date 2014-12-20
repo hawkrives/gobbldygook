@@ -24,42 +24,42 @@ class Schedule extends ScheduleRecord {
 	// Schedule Maintenance
 	move(to={}) {
 		// `to` is an object: {year, semester}
-        return this.withMutations((sched) => {
-            if (to.year)
-                sched = sched.set('year', to.year)
-            if (to.semester)
-                sched = sched.set('semester', to.semester)
-        })
+		return this.withMutations((sched) => {
+			if (to.year)
+				sched = sched.set('year', to.year)
+			if (to.semester)
+				sched = sched.set('semester', to.semester)
+		})
 	}
 
 	reorder(newIndex) {
-        return this.set('index', newIndex)
+		return this.set('index', newIndex)
 	}
 
 	rename(newTitle) {
-        return this.set('title', newTitle)
+		return this.set('title', newTitle)
 	}
 
 
 	// Course Maintenance
 
 	reorderCourse(clbid, newIndex) {
-        let oldIndex = this.clbids.findIndex((id) => id === clbid)
-        return this.withMutations((sched) => {
-            sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
-            sched = sched.set('clbids', sched.clbids.splice(newIndex, 0, clbid))
-        })
+		let oldIndex = this.clbids.findIndex((id) => id === clbid)
+		return this.withMutations((sched) => {
+			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
+			sched = sched.set('clbids', sched.clbids.splice(newIndex, 0, clbid))
+		})
 	}
 
 	addCourse(clbid, index) {
 		index = (index >= 0) ? index : this.clbids.size - 1;
-        return this.set('clbids', this.clbids.splice(index, 0, clbid))
+		return this.set('clbids', this.clbids.splice(index, 0, clbid))
 	}
 
 	removeCourse(clbid) {
 		console.log(`removing course with clbid: ${clbid}`)
 		let index = this.clbids.findIndex((id) => id === clbid)
-        return this.set('clbids', this.clbids.splice(index, 1))
+		return this.set('clbids', this.clbids.splice(index, 1))
 	}
 
 
@@ -81,7 +81,7 @@ class Schedule extends ScheduleRecord {
 
 		return {
 			hasConflict: hasConflict,
-			conflicts: conflicts
+			conflicts: conflicts,
 		}
 	}
 }

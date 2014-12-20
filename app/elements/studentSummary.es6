@@ -22,7 +22,7 @@ var StudentSummary = React.createClass({
 		var name = student.name || randomChar()
 		var nameEl = React.createElement(ContentEditable, {
 			html: name,
-			onChange: this.updateStudentName
+			onChange: this.updateStudentName,
 		})
 		var has = _.mapValues(_.groupBy(studies, 'type'), _.size)
 
@@ -73,7 +73,7 @@ var StudentSummary = React.createClass({
 			React.createElement('p', {key: 'message', className: 'graduation-message'},
 				canGraduate ? goodGraduationMessage : badGraduationMessage)
 		)
-	}
+	},
 })
 
 export default StudentSummary

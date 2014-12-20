@@ -1,12 +1,12 @@
 import * as Promise from 'bluebird'
 import * as Immutable from 'immutable'
 
-import uuid from '../helpers/uuid.es6'
-import randomChar from '../helpers/randomChar.es6'
-import countCredits from '../helpers/countCredits.es6'
+import uuid from 'helpers/uuid'
+import randomChar from 'helpers/randomChar'
+import countCredits from 'helpers/countCredits'
 
-import ScheduleSet from './scheduleSet.es6'
-import StudySet from './studySet.es6'
+import Schedule from 'models/schedule'
+import Study from 'models/study'
 
 import * as demoStudent from '../../mockups/demo_student.json'
 
@@ -31,13 +31,18 @@ let StudentRecord = Immutable.Record({
 
 class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
+		super(encodedStudent)
 		this.isLoaded =  Promise.pending();
 		this.isLoaded.promise.then(() => console.log('Student.isLoaded => done!'))
 
-		Immutable.Seq(encodedStudent.studies || []).forEach(this.addArea, this)
-		Immutable.Seq(encodedStudent.schedules || []).forEach(this.addSchedule, this)
-		Immutable.Seq(encodedStudent.overrides || []).forEach(this.addOverride, this)
-		Immutable.Seq(encodedStudent.fabrications || []).forEach(this.addFabrication, this)
+		console.log(encodedStudent)
+
+		// if (encodedStudent) {
+		// 	Immutable.Seq(encodedStudent.studies || []).forEach(this.addArea, this)
+		// 	Immutable.Seq(encodedStudent.schedules || []).forEach(this.addSchedule, this)
+		// 	Immutable.Seq(encodedStudent.overrides || []).forEach(this.addOverride, this)
+		// 	Immutable.Seq(encodedStudent.fabrications || []).forEach(this.addFabrication, this)
+		// }
 
 		this.isLoaded.fulfill()
 	}
@@ -74,7 +79,7 @@ class Student extends StudentRecord {
 	}
 
 	addSchedule(newSchedule) {
-		let sched = new Schedule(schedule)
+		let sched = new Schedule(newSchedule)
 		return this.set('schedules', this.schedules.push(sched))
 	}
 
@@ -84,14 +89,17 @@ class Student extends StudentRecord {
 		let deadSched = this.schedules.find((sched) => sched.scheduleId === scheduleId)
 		let deadSchedIndex = this.schedules.findIndex((sched) => sched.scheduleId === scheduleId)
 
-		this.schedules = this.schedules.delete(deadSchedIndex)
+		let scheduleIsNoMore = this.set('schedules', this.schedules.delete(deadSchedIndex))
 
 		if (deadSched.active) {
 			let otherSchedIndex = this.schedules.findIndex((sched) => {
 				return sched.year === deadSched.year && sched.semester === deadSched.semester
 			})
 			if (otherSchedIndex)
-				this.schedules = this.schedules.setIn([otherSchedIndex, 'active'], true)
+				return scheduleIsNoMore.set('schedules', scheduleIsNoMore.setIn([otherSchedIndex, 'active'], true))
+		}
+		else {
+			return scheduleIsNoMore
 		}
 	}
 
@@ -107,17 +115,22 @@ class Student extends StudentRecord {
 
 	addArea(areaOfStudy) {
 		let study = new Study(areaOfStudy)
-		this.studies = this.studies.push(study)
+		return this.set('studies', this.studies.push(study))
 	}
 
 	removeArea(id) {
 		let removedIndex = this.studies.findIndex((study) => study.id === id)
-		this.studies = this.studies.delete(removedIndex)
+		return this.set('studies', this.studies.delete(removedIndex))
 	}
 
 	removeMultipleAreas(ids) {
 		Seq(ids).forEach(this.removeArea, this)
 	}
+
+	// misc
+
+	addOverride(override) {}
+	addFabrication(fabrication) {}
 
 
 	// getters
@@ -140,57 +153,20 @@ class Student extends StudentRecord {
 	}
 
 	toString() {
-		return JSON.stringify(this)
+		return JSON.stringify(this.toJS())
 	}
 
 	toJSON() {
-		return JSON.stringify(this.data)
+		return JSON.stringify(this.toJS())
 	}
 
 	save() {
 		console.log('saving student', this.name, '(' + this.id + ')')
-		localStorage.setItem(this.id, this)
+		localStorage.setItem(this.id, this.toJSON())
 
-		if (this.data.get('active'))
-			localStorage.setItem('activeStudentId', this.data.id)
+		if (this.active)
+			localStorage.setItem('activeStudentId', this.id)
 	}
 }
-
-function loadStudentFromDb(opts) {
-	opts = opts || {}
-
-	let rawStudent;
-	let studentId = localStorage.getItem('activeStudentId')
-	let demoStudentId = '3AE9E7EE-DA8F-4014-B987-8D88814BB848'
-
-	let localStudent = localStorage.getItem(studentId || demoStudentId) || localStorage.getItem(`student-${currentVersionString}`)
-
-	try {
-		rawStudent = JSON.parse(localStudent)
-	}
-	catch (e) {
-		console.info('using demo student')
-		rawStudent = demoStudent
-		rawStudent.active = true
-		rawStudent.id = null
-	}
-
-	if (opts.demo) {
-		console.log('reverting to demo student')
-		rawStudent = demoStudent
-		rawStudent.active = true
-		rawStudent.id = null
-	}
-
-	let student = new Student(rawStudent)
-	window.student_data = student
-
-	student.save()
-
-	return student
-}
-
-let revertStudentToDemo = () => loadStudentFromDb({demo: true})
 
 export default Student
-export {Student, loadStudentFromDb, revertStudentToDemo}

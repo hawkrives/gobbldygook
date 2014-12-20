@@ -123,7 +123,7 @@ var notEmptyString = (value) => value.length > 0;
 
 var zipToObjectWithArrays = (keys, vals) => {
 	let arr = _.zip(keys, vals)
-	return _(arr).reduce(function(obj, propKey) {
+	return _(arr).reduce((obj, propKey) => {
 		if (_.has(obj, propKey[0]))
 			obj[propKey[0]].push(propKey[1]);
 		else

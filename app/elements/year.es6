@@ -4,40 +4,37 @@ import * as React from 'react'
 import Course from 'elements/course'
 import Semester from 'elements/semester'
 
+import studentActions from 'flux/studentActions'
 import {expandYear} from 'helpers/semesterName'
 import findFirstAvailableSemester from 'helpers/findFirstAvailableSemester'
 import calculateNextScheduleId from 'helpers/calculateNextScheduleId'
 
-var isCurrentYearSchedule = _.curry((year, schedule) => {
-	return (schedule.year === year)
-})
-
 var Year = React.createClass({
 	canAddSemester() {
-		return findFirstAvailableSemester(this.props.schedules.data, this.props.year) <= 5
+		return findFirstAvailableSemester(this.props.schedules, this.props.year) <= 5
 	},
 
 	addSemester() {
-		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules.data, this.props.year)
+		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
 
-		this.props.schedules.create({
+		studentActions.addSchedule(this.props.student.id, {
 			year: this.props.year, semester: nextAvailableSemester,
 			sequence: 1, active: true,
 		})
 	},
 
 	removeYear() {
-		var currentYearSchedules = _.filter(this.props.schedules.data, isCurrentYearSchedule(this.props.year))
-		var scheduleIds = _.pluck(currentYearSchedules, 'id')
+		var currentYearSchedules = this.props.schedules.filter((s) => s.year === this.props.year)
+		var scheduleIds = currentYearSchedules.map((s) => s.id)
 
-		this.props.schedules.destroyMultiple(scheduleIds)
+		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},
 
 	render() {
-		var thisYearSchedules = this.props.schedules.byYear[this.props.year]
-		let schedules = _.chain(thisYearSchedules).filter('active').groupBy('semester').value()
+		var thisYearSchedules = this.props.schedules.byYear.get(this.props.year)
+		let schedules = thisYearSchedules.filter((s) => s.active).groupBy((s) => s.semester)
 
-		var terms = _.map(schedules, function(schedule, semester) {
+		var terms = schedules.map((schedule, semester) => {
 			semester = parseInt(semester, 10)
 			return React.createElement(Semester, {
 				key: semester,
@@ -65,7 +62,7 @@ var Year = React.createClass({
 				onClick: this.addSemester,
 			})
 		)
-	}
+	},
 })
 
 export default Year

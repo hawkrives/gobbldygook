@@ -85,7 +85,8 @@ function storeArea(item) {
 function storeItem(item) {
 	if (item.type === 'courses') {
 		return gatherCourses(item)
-	} else if (item.type === 'areas') {
+	}
+	else if (item.type === 'areas') {
 		return storeArea(item)
 	}
 }

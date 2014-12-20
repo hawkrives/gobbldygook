@@ -83,7 +83,7 @@ var AreaOfStudy = React.createClass({
 	load() {
 		var area = getArea(this.props.area.id)
 
-		if (typeof area === 'function') {
+		if ( typeof area === 'function') {
 			let results = area(this.props.student)
 			// console.log('calculated ' + this.props.area.abbr + ' graduation possibility', results)
 			this.setState({
@@ -96,8 +96,8 @@ var AreaOfStudy = React.createClass({
 					result: false,
 					details: [{
 						title: this.props.area.type + ' not found!',
-						description: 'This ' + this.props.area.type + ' could not be found.'
-					}]
+						description: `This ${this.props.area.type} could not be found.`,
+					}],
 				}
 			})
 		}
@@ -106,9 +106,9 @@ var AreaOfStudy = React.createClass({
 		return {
 			result: {
 				result: false,
-				details: []
+				details: [],
 			},
-			open: false
+			open: false,
 		}
 	},
 	componentWillReceiveProps() {
@@ -152,7 +152,7 @@ var AreaOfStudy = React.createClass({
 			),
 			this.state.open ? requirementSets : null
 		);
-	}
+	},
 });
 
 export default AreaOfStudy

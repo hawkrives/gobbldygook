@@ -9,8 +9,8 @@ module.exports = {
 		},
 		files: [
 			dest + '**/*',
-			'!' + dest + '**.map', // Exclude Map files
-		]
+			'!' + dest + '**.map', // Exclude sourcemaps
+		],
 	},
 
 	lint: {
@@ -21,8 +21,10 @@ module.exports = {
 	},
 
 	link: {
-		src: ['./node_modules/sto-courses', './data/areas'],
-		dest: [dest + 'data/courses', dest + 'data/areas'],
+		// src: ['./node_modules/sto-courses', './data/areas'],
+		// dest: [dest + 'data/courses', dest + 'data/areas'],
+		src: ['./data/areas'],
+		dest: [dest + 'data/areas'],
 		opts: {force: true},
 	},
 
@@ -43,12 +45,12 @@ module.exports = {
 
 	fonts: {
 		src: [src + 'fonts/*.woff', src + 'icons/font/*.woff'],
-		dest: dest + 'fonts'
+		dest: dest + 'fonts',
 	},
 
 	markup: {
-		src: [src + 'index.html', src + '.htaccess'],
-		dest: [dest, dest]
+		src: [src + 'index.html', src + '.htaccess', src + 'images/loading.svg'],
+		dest: [dest, dest, dest + 'images'],
 	},
 
 	browserify: {
@@ -64,6 +66,6 @@ module.exports = {
 			outputName: 'app.js',
 			paths: [src, './node_modules'],
 			mapFile: dest + 'app.js.map',
-		}]
-	}
+		}],
+	},
 };

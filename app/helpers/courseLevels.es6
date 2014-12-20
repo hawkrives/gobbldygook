@@ -1,26 +1,26 @@
 import * as _ from 'lodash'
 
-var coursesAtOrAboveLevel = _.curry(function(level, course) {
+var coursesAtOrAboveLevel = _.curry((level, course) => {
 	return course.level >= level
 })
 
-var onlyCoursesAtOrAboveLevel = _.curry(function(level, courses) {
+var onlyCoursesAtOrAboveLevel = _.curry((level, courses) => {
 	return _.filter(courses, coursesAtOrAboveLevel(level))
 })
 
-var coursesAtLevel = _.curry(function(level, course) {
+var coursesAtLevel = _.curry((level, course) => {
 	return course.level === level
 })
 
-var onlyCoursesAtLevel = _.curry(function(level, courses) {
+var onlyCoursesAtLevel = _.curry((level, courses) => {
 	return _.filter(courses, coursesAtLevel(level))
 })
 
-var coursesAboveNumber = _.curry(function(number, course) {
+var coursesAboveNumber = _.curry((number, course) => {
 	return course.num > number
 })
 
-var onlyCoursesAboveNumber = _.curry(function(level, courses) {
+var onlyCoursesAboveNumber = _.curry((level, courses) => {
 	return _.filter(courses, coursesAboveNumber(level))
 })
 

@@ -6,11 +6,11 @@ var StudentList = React.createClass({
 		let students = this.props.students.map((student) =>
 			React.createElement(Link, {to: 'student', params: {id: student.id}}, React.createElement('li', null, student.name)))
 
-		return React.createElement(div,
+		return React.createElement('div',
 			{className: 'student-list'},
 			React.createElement('ul', null, students)
 		)
 	}
 })
 
-export default GobbldygookApp
+export default StudentList

@@ -10,7 +10,7 @@ function splitDeptNum(deptNumString) {
 
 	return {
 		depts: _.contains(matches[1], '/') ? [matches[2], matches[3]] : [matches[1]],
-		num: parseInt(matches[4], 10)
+		num: parseInt(matches[4], 10),
 	}
 }
 
@@ -22,7 +22,7 @@ function buildDeptNum(course) {
 	return course.depts.join('/') + ' ' + course.num
 }
 
-let hasDeptNumBetween = _.curry(function(args, course) {
+let hasDeptNumBetween = _.curry((args, course) => {
 	var dept = args.dept
 	var start = args.start
 	var end = args.end
@@ -34,7 +34,7 @@ let hasDeptNumBetween = _.curry(function(args, course) {
 	return _.all([
 		hasDepartment(dept, course),
 		course.num >= start,
-		course.num <= end
+		course.num <= end,
 	])
 })
 

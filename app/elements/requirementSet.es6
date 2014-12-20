@@ -45,7 +45,7 @@ var SomeArrayRequirement = React.createClass({
 								requirement: true,
 								completed: req.result,
 								nope: !req.result,
-							})
+							}),
 						},
 						(req.abbr || req.title)
 					)
@@ -70,7 +70,7 @@ var BooleanArrayRequirement = React.createClass({
 								requirement: true,
 								completed: req.result,
 								incomplete: !req.result,
-							})
+							}),
 						},
 						(req.abbr || req.title)
 					)
@@ -141,7 +141,7 @@ var RequirementSet = React.createClass({
 				this.props.title
 			),
 			details)
-	}
+	},
 })
 
 export default RequirementSet

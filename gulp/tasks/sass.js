@@ -11,7 +11,7 @@ var csswring = require('csswring');
 
 var processors = [
     autoprefixer({browsers: config.AUTOPREFIXER_BROWSERS}),
-    csswring
+    csswring,
 ]
 
 gulp.task('sass', ['fonts'], function() {

@@ -5,7 +5,7 @@ const itemTypes = {
 	AREA: 'area',
 	YEAR: 'year',
 	SEMESTER: 'semester',
-	SCHEDULE: 'schedule'
+	SCHEDULE: 'schedule',
 }
 
 export default itemTypes
