@@ -140,8 +140,9 @@ export {
 	checkCoursesFor
 }
 
-window.courses = {
-	getCourse, getCourses,
+window.courseStuff = {
+	getCourse,
+	getCourses,
 	queryCourses,
 
 	deptNumToCrsid,
