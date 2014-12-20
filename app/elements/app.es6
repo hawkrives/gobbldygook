@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as Reflux from 'reflux'
+import * as Immutable from 'immutable'
 import studentStore from 'flux/studentStore'
 import {RouteHandler} from 'react-router'
 
@@ -15,7 +16,7 @@ var GobbldygookApp = React.createClass({
 
 	getInitialState() {
 		return {
-			students: [],
+			students: Immutable.Map(),
 			studentsInitialized: false,
 		}
 	},
