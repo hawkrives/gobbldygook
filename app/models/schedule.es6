@@ -1,9 +1,9 @@
 import * as Immutable from 'immutable'
 
-import uuid from '../helpers/uuid.es6'
-import randomChar from '../helpers/randomChar.es6'
-import {checkScheduleTimeConflicts} from '../helpers/time.es6'
-import {getCourse} from '../helpers/courses.es6'
+import uuid from 'helpers/uuid'
+import randomChar from 'helpers/randomChar'
+import {checkScheduleTimeConflicts} from 'helpers/time'
+import {getCourses} from 'helpers/courses'
 
 let ScheduleRecord = Immutable.Record({
 	id: uuid(),
