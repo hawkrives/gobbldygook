@@ -8,7 +8,7 @@ var Student = React.createClass({
 	render() {
 		console.info('student render', this.props.students.toJS())
 		let queryId = this.getParams().id
-		let student = this.props.students.find((student) => student.id === queryId)
+		let student = this.props.students.get(queryId)
 
 		window.stu = student
 
