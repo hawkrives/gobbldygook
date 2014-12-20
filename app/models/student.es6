@@ -23,10 +23,10 @@ let StudentRecord = Immutable.Record({
 	matriculation: 1894,
 	graduation: 1898,
 
-	studies: Immutable.List(),
-	schedules: Immutable.List(),
-	overrides: Immutable.List(),
-	fabrications: Immutable.List(),
+	studies: Immutable.Map(),
+	schedules: Immutable.Map(),
+	overrides: Immutable.Map(),
+	fabrications: Immutable.Map(),
 })
 
 class Student extends StudentRecord {
@@ -35,7 +35,7 @@ class Student extends StudentRecord {
 			.filter((val, key) => ['studies', 'schedules', 'overrides', 'fabrications'].indexOf(key) === -1)
 
 		super(filtered.toJS())
-		console.log(encodedStudent, filtered.toJS())
+		// console.log(encodedStudent, filtered.toJS())
 
 		if (encodedStudent) {
 			return this.withMutations((student) => {
@@ -88,32 +88,28 @@ class Student extends StudentRecord {
 	// schedule methods
 
 	get schedulesByYear() {
-		return this.schedules.groupBy((sched) => sched.year)
+		return this.schedules.groupBy(sched => sched.year)
 	}
 
 	get activeSchedules() {
-		return this.schedules.filter((sched) => sched.active === true)
+		return this.schedules.filter(sched => sched.active).sortBy(sched => sched.semester)
 	}
 
 	addSchedule(newSchedule) {
 		let sched = new Schedule(newSchedule)
-		return this.set('schedules', this.schedules.push(sched))
+		return this.setIn(['schedules', sched.id], sched)
 	}
 
 	destroySchedule(scheduleId) {
 		console.log(`removing schedule ${scheduleId}`)
 
-		let deadSched = this.schedules.find((sched) => sched.scheduleId === scheduleId)
-		let deadSchedIndex = this.schedules.findIndex((sched) => sched.scheduleId === scheduleId)
+		let deadSched = this.getIn(['schedules', scheduleId])
+		let scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
 
-		let scheduleIsNoMore = this.set('schedules', this.schedules.delete(deadSchedIndex))
-
-		if (deadSched.active) {
-			let otherSchedIndex = this.schedules.findIndex((sched) => {
-				return sched.year === deadSched.year && sched.semester === deadSched.semester
-			})
-			if (otherSchedIndex)
-				return scheduleIsNoMore.set('schedules', scheduleIsNoMore.setIn([otherSchedIndex, 'active'], true))
+		if (deadSched && deadSched.active) {
+			let otherSchedKey = this.schedules.findKey((sched) => sched.year === deadSched.year && sched.semester === deadSched.semester)
+			if (otherSchedKey)
+				return scheduleIsNoMore.setIn(['schedules', otherSchedKey, 'active'], true)
 		}
 		else {
 			return scheduleIsNoMore
@@ -121,7 +117,13 @@ class Student extends StudentRecord {
 	}
 
 	destroyMultipleSchedules(ids) {
-		Seq(ids).forEach(this.destroySchedule, this)
+		return this.withMutations((student) => {
+			Immutable.Seq(ids)
+				.forEach((id) => {
+					student = student.destroySchedule(id)
+				})
+			return student
+		})
 	}
 
 	// area-of-study methods
@@ -132,7 +134,7 @@ class Student extends StudentRecord {
 
 	addArea(areaOfStudy) {
 		let study = new Study(areaOfStudy)
-		return this.set('studies', this.studies.push(study))
+		return this.setIn(['studies', study.id], study)
 	}
 
 	removeArea(id) {
@@ -158,13 +160,13 @@ class Student extends StudentRecord {
 	// getters
 
 	get courses() {
-		let scheduleCoursePromises = Promise.all(this.activeSchedules.map((schedule) => schedule.courses))
-		return scheduleCoursePromises
-			.then((courses) => courses.flatten())
+		let courses = this.activeSchedules.map((schedule) => schedule.courses)
+		let scheduleCoursePromises = Promise.all(courses)
+		return scheduleCoursePromises.then((courses) => courses.flatten())
 	}
 
 	get creditCount() {
-		return countCredits(this.courses)
+		return this.courses.then(countCredits)
 	}
 
 
