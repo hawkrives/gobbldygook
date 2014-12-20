@@ -13,7 +13,7 @@ import studentActions from 'flux/studentActions'
 import {DragDropMixin} from 'react-dnd'
 import itemTypes from 'models/itemTypes'
 
-var Semester = React.createClass({
+let Semester = React.createClass({
 	mixins: [DragDropMixin],
 
 	configureDragDrop(registerType) {
@@ -54,10 +54,10 @@ var Semester = React.createClass({
 	},
 
 	removeSemester() {
-		var currentTermSchedules = this.props.student.schedules.filter((s) =>
+		let currentTermSchedules = this.props.student.schedules.filter((s) =>
 			s.year === this.props.year && s.semester === this.props.semester)
 
-		var scheduleIds = currentTermSchedules.map((s) => s.id)
+		let scheduleIds = currentTermSchedules.map((s) => s.id)
 
 		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},
