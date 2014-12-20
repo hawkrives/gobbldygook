@@ -4,7 +4,9 @@ import db from 'helpers/db'
 import buildQueryFromString from 'helpers/queryStuff'
 
 function getCourse(clbid) {
-	return db.store('courses').get(clbid)
+	// console.log('called getCourse', clbid)
+	return db.store('courses')
+		.get(clbid)
 		.then(_.cloneDeep)
 		.catch((err) => new Error(`course retrieval failed for ${clbid}`, err))
 }
@@ -18,17 +20,18 @@ function getCourses(clbids) {
 }
 
 function deptNumToCrsid(deptNumString) {
-	return db.store('courses').index('deptnum').get(deptNumString).then(_.cloneDeep)
+	return db.store('courses')
+		.index('deptnum')
+		.get(deptNumString)
+		.then(_.cloneDeep)
 		.catch((err) => new Error(`Course ${deptNumString} was not found`, err))
 }
 
 function checkCoursesForDeptNum(courses, deptNumString) {
-	let crsidsToCheckAgainst = _.chain(courses).pluck('crsid').uniq().value()
+	let crsidsToCheckAgainst = _(courses).pluck('crsid').uniq().value()
 
 	return deptNumToCrsid(deptNumString)
-		.then((crsid) => {
-			return _.contains(crsidsToCheckAgainst, crsid)
-		})
+		.then((crsid) => _.contains(crsidsToCheckAgainst, crsid))
 }
 
 function checkCoursesFor(courses, filter) {
