@@ -264,5 +264,17 @@ var EmptyCourseSlot = React.createClass({
 	}
 })
 
+var MissingCourse = React.createClass({
+	render() {
+		let title = `Missing Course`
+
+		let titleEl = React.createElement('h1', {className: 'title'}, title)
+		let details = React.createElement('p', {className: 'summary'}, 'no details')
+
+		return React.createElement('article', {className: 'course missing'},
+			React.createElement('div', {className: 'info-rows'}, titleEl, details));
+	}
+})
+
 export default Course
-export {EmptyCourseSlot}
+export {Course, MissingCourse, EmptyCourseSlot}
