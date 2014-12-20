@@ -44,8 +44,8 @@ let routes = (
 	Route({handler: Gobbldygook, name: 'gobbldygook', path: '/'},
 		DefaultRoute({handler: StudentList}),
 		Route({handler: Student, name: 'student', path: 's/:id'},
-			DefaultRoute({handler: CourseTable, path: 'overview'}),
-			Route({handler: SemesterDetail, name: 'Semester', path: 'sem/:year/:semester'}))
+			DefaultRoute({handler: CourseTable}),
+			Route({handler: SemesterDetail, name: 'SemesterDetail', path: 'sem/:year/:semester'}))
 	)
 )
 
