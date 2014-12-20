@@ -85,8 +85,8 @@ let noResult = (type) => {
 			result: false,
 			details: [{
 				title: type + ' not found!',
-				description: 'This ' + type + ' could not be found.'
-			}]
+				description: `This ${type} could not be found.`,
+			}],
 		}
 	}
 }
@@ -96,7 +96,7 @@ var AreaOfStudy = React.createClass({
 	load(props) {
 		let area = getArea(props.area.id)
 
-		if (typeof area === 'function') {
+		if ( typeof area === 'function') {
 			area(props.student)
 				.then((result) => {
 					this.setState({result})
