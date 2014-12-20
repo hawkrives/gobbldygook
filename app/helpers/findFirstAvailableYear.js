@@ -7,7 +7,7 @@ import findMissingNumberBinarySearch from 'helpers/findMissingNumberBinarySearch
 // it will return the current year.
 
 function findFirstAvailableYear(schedules, matriculation) {
-	if (_.isEmpty(schedules) && _.isUndefined(matriculation)) {
+	if (schedules && schedules.size === 0 && matriculation === undefined) {
 		return new Date().getFullYear()
 	}
 
