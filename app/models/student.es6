@@ -31,20 +31,37 @@ let StudentRecord = Immutable.Record({
 
 class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
-		super(encodedStudent)
-		this.isLoaded =  Promise.pending();
-		this.isLoaded.promise.then(() => console.log('Student.isLoaded => done!'))
+		let filtered = Immutable.fromJS(encodedStudent)
+			.filter((val, key) => ['studies', 'schedules', 'overrides', 'fabrications'].indexOf(key) === -1)
 
-		console.log(encodedStudent)
+		super(filtered.toJS())
+		console.log(encodedStudent, filtered.toJS())
 
-		// if (encodedStudent) {
-		// 	Immutable.Seq(encodedStudent.studies || []).forEach(this.addArea, this)
-		// 	Immutable.Seq(encodedStudent.schedules || []).forEach(this.addSchedule, this)
-		// 	Immutable.Seq(encodedStudent.overrides || []).forEach(this.addOverride, this)
-		// 	Immutable.Seq(encodedStudent.fabrications || []).forEach(this.addFabrication, this)
-		// }
+		if (encodedStudent) {
+			return this.withMutations((student) => {
+				Immutable.Seq(encodedStudent.studies || [])
+					.forEach((study) => {
+						student = student.addArea(study)
+					})
 
-		this.isLoaded.fulfill()
+				Immutable.Seq(encodedStudent.schedules || [])
+					.forEach((schedule) => {
+						student = student.addSchedule(schedule)
+					})
+
+				Immutable.Seq(encodedStudent.overrides || [])
+					.forEach((override) => {
+						student = student.addOverride(override)
+					})
+
+				Immutable.Seq(encodedStudent.fabrications || [])
+					.forEach((fabrication) => {
+						student = student.addFabrication(fabrication)
+					})
+
+				return student
+			})
+		}
 	}
 
 	rename(newName) {
@@ -129,8 +146,13 @@ class Student extends StudentRecord {
 
 	// misc
 
-	addOverride(override) {}
-	addFabrication(fabrication) {}
+	addOverride(override) {
+		return this
+	}
+
+	addFabrication(fabrication) {
+		return this
+	}
 
 
 	// getters
