@@ -1,5 +1,5 @@
 import * as _ from 'lodash'
-import {db} from 'helpers/db'
+import db from 'helpers/db'
 import buildQueryFromString from './queryStuff.es6'
 
 function getCourse(clbid) {
