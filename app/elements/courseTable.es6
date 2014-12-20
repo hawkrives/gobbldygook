@@ -26,10 +26,10 @@ let CourseTable = React.createClass({
 				year: year,
 				key: year,
 			})
-		})
+		}).toList()
 
 		return React.createElement('div', {className: 'course-table'},
-			years,
+			years.toJS(),
 			React.createElement('button', {
 				className: 'add-year',
 				title: 'Add Year',
