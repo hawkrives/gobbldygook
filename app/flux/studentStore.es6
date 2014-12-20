@@ -14,6 +14,10 @@ let studentStore = Reflux.createStore({
 		this._loadData()
 	},
 
+	getInitialState() {
+		return this.students
+	},
+
 	undo() {
 		this.future = this.future.unshift(this.history.first())
 		this.students = this.history.shift()
