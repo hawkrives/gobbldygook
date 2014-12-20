@@ -51,10 +51,6 @@ let studentStore = Reflux.createStore({
 		let student = new Student(rawStudent)
 		window.studentData = student
 
-		student.save()
-
-		console.log(student.toJS())
-
 		this._preChange()
 		this.students = this.students.set(student.id, student)
 		this._postChange()
@@ -65,7 +61,8 @@ let studentStore = Reflux.createStore({
 	},
 
 	_postChange() {
-		console.log('studentStore._postChange')
+		console.log('studentStore._postChange', this.students)
+		this.students.forEach(student => student.save())
 		this.trigger(this.students)
 	},
 
