@@ -24,7 +24,7 @@ let GraduationStatus = React.createClass({
 			return null
 
 		// Get areas of study
-		let areasOfStudy = this.props.student.studies.byType.map((areas) => {
+		let areasOfStudy = this.props.student.areasByType.map((areas) => {
 			return areas.map((area) => {
 				return React.createElement(AreaOfStudy, {
 					key: area.id,
@@ -34,7 +34,9 @@ let GraduationStatus = React.createClass({
 			})
 		})
 
-		let areaOfStudySections = areasOfStudy.keys().map((areaType) => {
+		console.log(areasOfStudy)
+
+		let areaOfStudySections = areasOfStudy.keySeq().map((areaType) => {
 			let pluralType = humanize.pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 			return React.createElement('section', {id: pluralType, key: areaType},
 				React.createElement('header', {className: 'area-type-heading'},

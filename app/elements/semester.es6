@@ -26,7 +26,7 @@ var Semester = React.createClass({
 	},
 
 	removeSemester() {
-		var currentTermSchedules = this.props.schedules.filter((s) =>
+		var currentTermSchedules = this.props.student.schedules.filter((s) =>
 			s.year === this.props.year && s.semester === this.props.semester)
 
 		var scheduleIds = currentTermSchedules.map((s) => s.id)
@@ -35,7 +35,7 @@ var Semester = React.createClass({
 	},
 
 	render() {
-		let activeSchedules = this.props.schedules.activeSchedules
+		let activeSchedules = this.props.student.activeSchedules
 		this.schedule = activeSchedules.find((s) => s.year === this.props.year && s.semester === this.props.semester)
 		let schedule = this.schedule;
 		// console.log('semester render', schedule)

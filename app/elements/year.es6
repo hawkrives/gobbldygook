@@ -15,7 +15,7 @@ var Year = React.createClass({
 	},
 
 	addSemester() {
-		var nextAvailableSemester = findFirstAvailableSemester(this.props.schedules, this.props.year)
+		var nextAvailableSemester = findFirstAvailableSemester(this.props.student.schedules, this.props.year)
 
 		studentActions.addSchedule(this.props.student.id, {
 			year: this.props.year, semester: nextAvailableSemester,
@@ -31,7 +31,7 @@ var Year = React.createClass({
 	},
 
 	render() {
-		var thisYearSchedules = this.props.schedules.byYear.get(this.props.year)
+		var thisYearSchedules = this.props.student.schedulesByYear.get(this.props.year)
 		let schedules = thisYearSchedules.filter((s) => s.active).groupBy((s) => s.semester)
 
 		var terms = schedules.map((schedule, semester) => {
@@ -41,7 +41,7 @@ var Year = React.createClass({
 				ref: semester,
 				semester: semester,
 				year: this.props.year,
-				schedules: this.props.schedules,
+				student: this.props.student,
 			})
 		}, this)
 
