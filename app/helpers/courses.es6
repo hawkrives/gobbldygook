@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 import db from 'helpers/db'
-import buildQueryFromString from './queryStuff.es6'
+import buildQueryFromString from 'helpers/queryStuff'
 
 function getCourse(clbid) {
 	return db.store('courses').get(clbid)
