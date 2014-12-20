@@ -1,5 +1,7 @@
 import * as _ from 'lodash'
 import * as Promise from 'bluebird'
+import * as Immutable from 'immutable'
+
 import db from 'helpers/db'
 import buildQueryFromString from 'helpers/queryStuff'
 
@@ -8,6 +10,14 @@ function getCourse(clbid) {
 	return db.store('courses')
 		.get(clbid)
 		.then(_.cloneDeep)
+		// .then(c => {
+		// 	if (!c) {
+		// 		log(c, clbid);
+		// 		throw new Error(`course ${clbid} was undefined`)
+		// 	}
+		// 	else
+		// 		return c
+		// })
 		.catch((err) => new Error(`course retrieval failed for ${clbid}`, err))
 }
 
