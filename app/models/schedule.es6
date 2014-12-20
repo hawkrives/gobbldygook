@@ -19,6 +19,7 @@ class Schedule extends ScheduleRecord {
 	constructor(data) {
 		super(data)
 		this._coursesAreDirty = true
+		this._courseData = Immutable.List()
 	}
 
 	// Getters
@@ -80,6 +81,8 @@ class Schedule extends ScheduleRecord {
 	validate() {
 		// Checks to see if the schedule is valid
 		return this.courses
+			 // only check the courses that have data
+			.then(courses => courses.filter(c => c))
 			// Step one: do any times conflict?
 			.then(checkScheduleTimeConflicts)
 			.then((conflicts) => {
