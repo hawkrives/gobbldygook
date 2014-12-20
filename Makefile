@@ -35,8 +35,7 @@ sass:
 scripts:
 	$(gulp) browserify
 
-serve: clean
-	$(gulp) watch
+serve: watch
 
 shrink-node:
 	npm dedupe
@@ -48,7 +47,7 @@ test:
 check-updates:
 	npm outdated --depth 0
 
-uglify:
+uglify: build
 	$(uglifyjs) dist/app.js \
 		--screw-ie8 -c --stats \
 		--in-source-map dist/app.js.map \
