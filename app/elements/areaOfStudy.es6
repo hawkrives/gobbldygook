@@ -92,7 +92,6 @@ let noResult = (type) => {
 }
 
 var AreaOfStudy = React.createClass({
-	displayName: 'AreaOfStudy',
 	load(props) {
 		let area = getArea(props.area.id)
 
@@ -107,6 +106,7 @@ var AreaOfStudy = React.createClass({
 			this.setState(noResult(props.area.type))
 		}
 	},
+
 	getInitialState() {
 		return {
 			result: {
@@ -116,17 +116,21 @@ var AreaOfStudy = React.createClass({
 			open: false,
 		}
 	},
+
 	componentWillReceiveProps(nextProps) {
 		this.load(nextProps)
 	},
+
 	componentDidMount() {
 		this.load(this.props)
 	},
+
 	toggle() {
 		this.setState({open: !this.state.open});
 	},
+
 	render() {
-		// console.log('area-of-study render')
+		console.log('area-of-study render', this.props)
 
 		var requirementSets = _.map(this.state.result.details, (reqset) => {
 			return React.createElement(RequirementSet, _.merge({key: reqset.title}, reqset));
