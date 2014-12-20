@@ -25,7 +25,7 @@ window.lodash = _
 window.React = React
 
 // Handy debugging function
-window.log = (...args) => console.log(args)
+window.log = (...args) => console.log(...args)
 
 
 import Gobbldygook from 'elements/app'
