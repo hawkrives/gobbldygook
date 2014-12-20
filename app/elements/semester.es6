@@ -1,13 +1,14 @@
 import * as _ from 'lodash'
+import {isUndefined} from 'lodash'
 import * as Promise from 'bluebird'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
+import * as Immutable from 'immutable'
 
 import add from 'helpers/add'
 import countCredits from 'helpers/countCredits'
 import semesterName from 'helpers/semesterName'
-import Course from 'elements/course'
-import {EmptyCourseSlot} from 'elements/course'
+import {Course, MissingCourse, EmptyCourseSlot} from 'elements/course'
 
 import studentActions from 'flux/studentActions'
 import {DragDropMixin} from 'react-dnd'
@@ -21,7 +22,7 @@ let Semester = React.createClass({
 			dropTarget: {
 				acceptDrop(courseIdentifier) {
 					console.log('dropped courseIdentifier', courseIdentifier)
-					studentActions.addCourse(this.props.student.id, this.schedule.id, courseIdentifier.clbid)
+					studentActions.addCourse(this.props.student.id, this.state.schedule.id, courseIdentifier.clbid)
 				}
 			}
 		})
@@ -29,7 +30,7 @@ let Semester = React.createClass({
 
 	getInitialState() {
 		return {
-			courses: [],
+			courses: Immutable.List(),
 			schedule: null,
 			validation: {},
 		}
@@ -47,7 +48,7 @@ let Semester = React.createClass({
 			let [courses, validation] = results;
 			this.setState({
 				schedule,
-				courses,
+				courses: Immutable.List(courses),
 				validation,
 			})
 		})
@@ -67,10 +68,10 @@ let Semester = React.createClass({
 
 		let infoIcons = []
 		if (this.state.schedule) {
-			let courseCount = this.state.schedule.clbids.size
+			let courseCount = this.state.courses.size
 			infoIcons.push(React.createElement('li',
 				{className: 'semester-course-count', key: 'course-count'},
-				courseCount + ' ' + humanize.pluralize(courseCount, 'course')))
+				`${courseCount} ${humanize.pluralize(courseCount, 'course')}`))
 
 			if (this.state.validation.hasConflict) {
 				let conflicts = JSON.stringify(this.state.validation.conflicts, null, 2)
@@ -83,39 +84,55 @@ let Semester = React.createClass({
 					React.createElement('i', {className: 'semester-alert'})))
 			}
 
-			let credits = this.state.schedule.courses.map((c) => c.credits).reduce(add, 0)
+			let credits = this.state.courses
+				.filterNot(isUndefined) // remove any undefined items
+				.map(c => c.credits)
+				.reduce(add)
 
 			if (credits) {
 				infoIcons.push(React.createElement('li',
 					{className: 'semester-credit-count', key: 'credit-count'},
-					credits + ' ' + humanize.pluralize(credits, 'credit')))
+					`${credits} ${humanize.pluralize(credits, 'credit')}`))
 			}
 		}
 		let infoBar = React.createElement('ul', {className: 'info-bar'}, infoIcons);
 
 		let courseList = null;
 		if (this.state.schedule) {
-			let courseObjects = this.state.courses.map((course, i) =>
-				React.createElement(Course, {
-					key: course.clbid,
-					info: course,
-					schedule: this.state.schedule,
-					index: i,
-					conflicts: this.state.validation.conflicts,
-				}))
+			let courseObjects = this.state.courses
+				.filterNot(isUndefined)
+				.map((course, i) =>
+					React.createElement(Course, {
+						key: `${course.clbid}-${i}`,
+						info: course,
+						schedule: this.state.schedule,
+						index: i,
+						conflicts: this.state.validation.conflicts,
+					}))
 
-			let semester = this.props.semester
-			let maxCredits = (semester === 1 || semester === 3) ? 4 : 1
-			Immutable.Range(Math.floor(countCredits(courses)), maxCredits).forEach((i) => {
-				courseObjects = courseObjects.push(React.createElement(EmptyCourseSlot, {key: 'empty' + i}))
-			})
-			courseList = React.createElement('div', {className: 'course-list'}, courseObjects);
+			let couldntFindSlots = this.state.courses
+				.filter(isUndefined) // only keep the undefined items
+				.map((c, i) => React.createElement(MissingCourse, {key: i}))
+
+			// maxCredits is 4 for fall/spring and 1 for everything else
+			let maxCredits = ([1, 3].indexOf(this.props.semester) !== -1) ? 4 : 1
+			let emptySlotList = Immutable.Range(Math.floor(countCredits(this.state.courses)), maxCredits)
+			let emptySlots = emptySlotList
+				.skip(couldntFindSlots.size)
+				.map((i) => React.createElement(EmptyCourseSlot, {key: `empty-${i}`}))
+
+			let courseBlocks = courseObjects
+				.concat(couldntFindSlots)
+				.concat(emptySlots)
+				.toJS()
+
+			courseList = React.createElement('div',
+				{className: 'course-list'},
+				courseBlocks)
 		}
 
 		return React.createElement('div',
-			Object.assign(
-				{className: 'semester'},
-				this.dropTargetFor(itemTypes.COURSE)),
+			_.extend({className: 'semester'}, this.dropTargetFor(itemTypes.COURSE)),
 			React.createElement('header', {className: 'semester-title'},
 				React.createElement('h1', null, semesterName(this.props.semester)),
 				infoBar,
