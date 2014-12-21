@@ -1,8 +1,9 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 import * as humanize from 'humanize-plus'
-
 import {DragDropMixin} from 'react-dnd'
+
+import studentActions from 'flux/studentActions'
 import itemTypes from 'models/itemTypes'
 import semesterName from 'helpers/semesterName'
 
@@ -47,7 +48,7 @@ let CourseTitle = React.createClass({
 
 var ExpandedCourse = React.createClass({
 	removeFromSemester() {
-		this.props.schedule.removeCourse(this.props.info.clbid)
+		studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.info.clbid)
 	},
 
 	render() {
@@ -129,7 +130,6 @@ var ExpandedCourse = React.createClass({
 
 
 var CollapsedCourse = React.createClass({
-
 	render() {
 		let course = this.props.info;
 
@@ -164,11 +164,8 @@ var Course = React.createClass({
 				},
 				endDrag(didDrop) {
 					if (didDrop) {
-						if (this.props.schedule) {
-							console.log(
-								'removing course', this.props.info.clbid,
-								'from', this.props.schedule.id)
-							this.props.schedule.removeCourse(this.props.info.clbid)
+						if (this.props.student) {
+							studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.info.clbid)
 						}
 					}
 				},
