@@ -58,7 +58,7 @@ let Semester = React.createClass({
 		let currentTermSchedules = this.props.student.schedules.filter((s) =>
 			s.year === this.props.year && s.semester === this.props.semester)
 
-		let scheduleIds = currentTermSchedules.map((s) => s.id)
+		let scheduleIds = currentTermSchedules.map(s => s.id)
 
 		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},
