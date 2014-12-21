@@ -21,13 +21,12 @@ let CourseTable = React.createClass({
 			return null;
 
 		let years = this.props.student.schedulesByYear
-			.map((schedules, year) => {
-				return React.createElement(Year, {
+			.map((schedules, year) =>
+				React.createElement(Year, {
 					student: this.props.student,
 					year: year,
 					key: year,
-				})
-			})
+				}))
 			.toList()
 
 		return React.createElement('div', {className: 'course-table'},
