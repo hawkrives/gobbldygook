@@ -1,7 +1,5 @@
 import * as _ from 'lodash'
-
-// We should build lists of valid inputs!
-// Like, 'these are the valid departments' and 'these are the valid professors'
+import * as courseRelatedData from 'sto-courses'
 
 let semesters = {
 	fall: 1,
@@ -23,37 +21,8 @@ let semesters = {
 	summers: ['$OR', 4, 5],
 }
 
-let departmentMapping = {
-	'american con': 'AMCON',
-	'american conversation': 'AMCON',
-	'american conversations': 'AMCON',
-	'asian studies': 'ASIAN',
-	'computer science': 'CSCI',
-	'biomolecular studies': 'BMOLS',
-	bmol: 'BMOLS',
-	grcon: 'GCON',
-	greatcon: 'GCON',
-	'great con': 'GCON',
-	'great conversation': 'GCON',
-	'great conversations': 'GCON',
-	cs: 'CSCI',
-	physics: 'PHYS',
-	religion: 'REL',
-	ar: 'ART',
-	as: 'ASIAN',
-	bi: 'BIO',
-	ch: 'CHEM',
-	ec: 'ECON',
-	es: 'ENVST',
-	hi: 'HIST',
-	mu: 'MUSIC',
-	ph: 'PHIL',
-	ps: 'PSCI',
-	re: 'REL',
-	sa: 'SOAN',
-	wri: 'WRIT',
-	compsci: 'CSCI',
-}
+let departmentMapping = courseRelatedData.departmentNameToAbbr
+let gereqMapping = courseRelatedData.gereqTitleToAbbr
 
 let keywordMappings = {
 	departments: 'depts',
@@ -77,43 +46,6 @@ let keywordMappings = {
 	location: 'places',
 	locations: 'places',
 	place: 'places',
-}
-
-let gereqMapping = {
-	'history of western culture': 'HWC',
-	'historical studies in western culture': 'HWC',
-	'artistic studies': 'ALS-A',
-	'artistic and literary studies - art': 'ALS-A',
-	'literary studies': 'ALS-L',
-	'artistic and literary studies - literature': 'ALS-L',
-	'multicultural domestic studies': 'MCD',
-	'multicultural global studies': 'MCG',
-	'integrated scientific topics': 'IST',
-	'scientific exploration and discovery': 'SED',
-	'first-year writing': 'FYW',
-	'writing in context': 'WRI',
-	writing: 'WRI',
-	bible: 'BTS-B',
-	biblical: 'BTS-B',
-	'bible studies': 'BTS-T',
-	'biblical studies': 'BTS-T',
-	theology: 'BTS-T',
-	theological: 'BTS-T',
-	'theology studies': 'BTS-T',
-	'theological studies': 'BTS-T',
-	'biblical and theological studies - bible': 'BTS-B',
-	'biblical and theological studies - biblical': 'BTS-B',
-	'biblical and theological studies - theology': 'BTS-T',
-	'biblical and theological studies - theological': 'BTS-T',
-	'foreign language': 'FOL',
-	'oral communication': 'ORC',
-	'abstract and quantitative reasoning': 'AQR',
-	'studies in physical movement': 'SPM',
-	gym: 'SPM',
-	'studies in human behavior and society': 'HBS',
-	'ethical issues and normative perspectives': 'EIN',
-	'ethical issues': 'EIN',
-	ethics: 'EIN',
 }
 
 let evenIndex = (value, index) => index % 2 === 0;
