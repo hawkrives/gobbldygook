@@ -7,7 +7,8 @@ var Requirement = React.createClass({
 			React.createElement('progress', {value: this.props.has, max: this.props.needs}),
 			this.props.name,
 			React.createElement('br', null),
-			this.props.query, this.props.validCourses
+			this.props.query,
+			this.props.validCourses
 		)
 	}
 })
