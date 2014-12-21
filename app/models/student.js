@@ -117,10 +117,10 @@ class Student extends StudentRecord {
 
 	destroyMultipleSchedules(ids) {
 		return this.withMutations((student) => {
-			Immutable.Seq(ids)
-				.forEach((id) => {
-					student = student.destroySchedule(id)
-				})
+			Immutable.Seq(ids).forEach((id) => {
+				console.log('destroyMultipleSchedules', id)
+				student = student.destroySchedule(id)
+			})
 			return student
 		})
 	}
