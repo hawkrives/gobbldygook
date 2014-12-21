@@ -1,5 +1,6 @@
 import * as Immutable from 'immutable'
 import {isUndefined} from 'lodash'
+import * as Promise from 'bluebird'
 
 import uuid from 'helpers/uuid'
 import randomChar from 'helpers/randomChar'
@@ -14,6 +15,7 @@ let ScheduleRecord = Immutable.Record({
 	index: 1,
 	title: 'Schedule ' + randomChar().toUpperCase(),
 	clbids: Immutable.List(),
+	_courseData: Promise.resolve(Immutable.List()),
 })
 
 class Schedule extends ScheduleRecord {
@@ -22,17 +24,14 @@ class Schedule extends ScheduleRecord {
 		return this.withMutations((sched) => {
 			sched = sched.set('id', uuid())
 			sched = sched.set('clbids', Immutable.fromJS(data.clbids))
+			sched = sched.set('_courseData', getCourses(this.clbids))
 			return sched
 		})
 	}
 
 	// Getters
 	get courses() {
-		// if (this._coursesAreDirty) {
-		// 	this._courseData = getCourses(this.clbids)
-		// 	this._coursesAreDirty = false
-		// }
-		return getCourses(this.clbids)
+		return this._courseData
 	}
 
 	// Schedule Maintenance
@@ -64,22 +63,30 @@ class Schedule extends ScheduleRecord {
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
 			sched = sched.set('clbids', sched.clbids.splice(newIndex, 0, clbid))
+			sched = sched.set('_courseData', getCourses(this.clbids))
 			return sched
 		})
 	}
 
-	addCourse(clbid, index) {
-		console.log(`adding clbid ${clbid} at index ${index} to schedule ${this.id}`)
-		index = (index >= 0) ? index : this.clbids.size - 1;
+	addCourse(clbid) {
+		console.log(`adding clbid ${clbid} to schedule ${this.id} (${this.year}-${this.semester}.${this.index})`)
 
-		return this.set('clbids', this.clbids.splice(index, 0, clbid))
+		return this.withMutations((sched) => {
+			sched = sched.set('clbids', sched.clbids.push(clbid))
+			sched = sched.set('_courseData', getCourses(this.clbids))
+			return sched
+		})
 	}
 
 	removeCourse(clbid) {
-		console.log(`removing clbid ${clbid} from schedule ${this.id}`)
+		console.log(`removing clbid ${clbid} from schedule ${this.id} (${this.year}-${this.semester}.${this.index})`)
 
 		let index = this.clbids.findIndex((id) => id === clbid)
-		return this.set('clbids', this.clbids.splice(index, 1))
+		return this.withMutations((sched) => {
+			sched = sched.set('clbids', sched.clbids.delete(index))
+			sched = sched.set('_courseData', getCourses(this.clbids))
+			return sched
+		})
 	}
 
 
