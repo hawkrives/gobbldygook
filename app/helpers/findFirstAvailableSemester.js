@@ -8,9 +8,9 @@ import findMissingNumberBinarySearch from 'helpers/findMissingNumberBinarySearch
 
 function findFirstAvailableSemester(schedules, forYear) {
 	let semesters = schedules
-			.filter(sch => sch.year === forYear)
-			.map(sch => sch.semester)
-			.toSet()
+		.filter(sch => sch.year === forYear)
+		.map(sch => sch.semester)
+		.toSet()
 
 	// stick a 0 at the front so findBinary will start from 1
 	semesters = semesters.add(0)
