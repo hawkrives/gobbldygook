@@ -168,6 +168,9 @@ function checkScheduleTimeConflicts(courses) {
 	// }
 	// true = conflict, false = no conflict, null = same course
 
+	if (courses.toArray)
+		courses = courses.toArray()
+
 	var results = []
 	_.each(courses, function(c1, c1idx) {
 		results[c1idx] = []
