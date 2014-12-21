@@ -20,7 +20,9 @@ let CourseTable = React.createClass({
 		if (!this.props.student)
 			return null;
 
-		let years = this.props.student.schedulesByYear
+		let years = this.props.student.schedules
+			.sortBy(schedule => schedule.year)
+			.groupBy(schedule => schedule.year)
 			.map((schedules, year) =>
 				React.createElement(Year, {
 					student: this.props.student,
