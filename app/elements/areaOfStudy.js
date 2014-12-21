@@ -84,7 +84,7 @@ let noResult = (type) => {
 		result: {
 			result: false,
 			details: [{
-				title: type + ' not found!',
+				title: `${type} not found!`,
 				description: `This ${type} could not be found.`,
 			}],
 		}
@@ -132,9 +132,8 @@ var AreaOfStudy = React.createClass({
 	render() {
 		console.log('area-of-study render', this.props)
 
-		var requirementSets = _.map(this.state.result.details, (reqset) => {
-			return React.createElement(RequirementSet, _.merge({key: reqset.title}, reqset));
-		});
+		var requirementSets = _.map(this.state.result.details, (reqset) =>
+			React.createElement(RequirementSet, _.merge({key: reqset.title}, reqset)));
 
 		var results = findResults(this.state.result.details)
 		// console.log(this.props.area.title, results, this.state.result.details)

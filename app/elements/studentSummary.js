@@ -18,33 +18,33 @@ var StudentSummary = React.createClass({
 
 	render() {
 		var student = this.props.student
-		var studies = student.studies.data
+		var studies = student.studies
 		var name = student.name || randomChar()
 		var nameEl = React.createElement(ContentEditable, {
 			html: name,
 			onChange: this.updateStudentName,
 		})
-		var has = _.mapValues(_.groupBy(studies, 'type'), _.size)
+		let has = studies.groupBy(s => s.type).map(s => s.size).toObject()
 
 		let objects = {
-			degree: _.filter(studies, {type: 'degree'}),
-			major: _.filter(studies, {type: 'major'}),
-			concentration: _.filter(studies, {type: 'concentration'}),
-			emphasis: _.filter(studies, {type: 'emphasis'}),
+			degree: studies.filter(s => s.type === 'degree'),
+			major: studies.filter(s => s.type === 'major'),
+			concentration: studies.filter(s => s.type === 'concentration'),
+			emphasis: studies.filter(s => s.type === 'emphasis'),
 		}
 
 		let titles = {
-			degree: humanize.oxford(_.pluck(objects.degree, 'title')),
-			major: humanize.oxford(_.pluck(objects.major, 'title')),
-			concentration: humanize.oxford(_.pluck(objects.concentration, 'title')),
-			emphasis: humanize.oxford(_.pluck(objects.emphasis, 'title')),
+			degree: humanize.oxford(objects.degree.map(s => s.title).toArray()),
+			major: humanize.oxford(objects.major.map(s => s.title).toArray()),
+			concentration: humanize.oxford(objects.concentration.map(s => s.title).toArray()),
+			emphasis: humanize.oxford(objects.emphasis.map(s => s.title).toArray()),
 		}
 
 		let words = {
-			degree: humanize.pluralize(_.size(objects.degree), 'degree'),
-			major: humanize.pluralize(_.size(objects.major), 'major'),
-			concentration: humanize.pluralize(_.size(objects.concentration), 'concentration'),
-			emphasis: humanize.pluralize(_.size(objects.emphasis), 'emphasis', 'emphases'),
+			degree: humanize.pluralize(objects.degree.size, 'degree'),
+			major: humanize.pluralize(objects.major.size, 'major'),
+			concentration: humanize.pluralize(objects.concentration.size, 'concentration'),
+			emphasis: humanize.pluralize(objects.emphasis.size, 'emphasis', 'emphases'),
 		}
 
 		// var canGraduate = checkElegibilityForGraduation(this.props)
@@ -57,6 +57,7 @@ var StudentSummary = React.createClass({
 			emphasis: React.createElement('span', {className: 'area-of-study-list', key:'emphasis'}, titles.emphasis),
 		}
 
+		let degreeEmphasizer = has.degree === 1 ? 'a ' : ''
 		var majorEmphasizer = has.major === 1 ? 'a ' : ''
 		var concentrationEmphasizer = has.concentration === 1 ? 'a ' : ''
 		var emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
@@ -65,10 +66,10 @@ var StudentSummary = React.createClass({
 			React.createElement('div', {key: 'letter', id: 'student-letter'}, name[0]),
 			React.createElement('p', {key: 'hi'}, 'Hi, ', nameEl, '!'),
 			React.createElement('p', {key: 'overview'},
-				'You are planning on ', _.size(objects.degree === 1) ? 'a ' : '',
+				'You are planning on ', degreeEmphasizer,
 				phrases.degree, ' ', words.degree, ', with ', majorEmphasizer, words.major, ' in ', phrases.major,
-				has.concentration > 0 ? [', and ' + concentrationEmphasizer + words.concentration + ' in ', phrases.concentration] : '',
-				has.emphasis > 0 ? [', not to mention ', emphasisEmphasizer, words.emphasis, ' in ', phrases.emphasis] : '',
+				(has.concentration > 0) ? [', and ' + concentrationEmphasizer, words.concentration, ' in ', phrases.concentration] : '',
+				(has.emphasis > 0) ? [', not to mention ', emphasisEmphasizer, words.emphasis, ' in ', phrases.emphasis] : '',
 				'.'),
 			React.createElement('p', {key: 'message', className: 'graduation-message'},
 				canGraduate ? goodGraduationMessage : badGraduationMessage)

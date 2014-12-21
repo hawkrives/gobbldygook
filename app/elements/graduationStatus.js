@@ -14,7 +14,7 @@ let GraduationStatus = React.createClass({
 		// revertStudentToDemo()
 	},
 	download() {
-		console.log('start student download')
+		// console.log('start student download')
 		return 'data:text/json;charset=utf-8,' + this.props.student.encode();
 	},
 
@@ -24,31 +24,34 @@ let GraduationStatus = React.createClass({
 			return null
 
 		// Get areas of study
-		let areasOfStudy = this.props.student.areasByType.map((areas) => {
-			return areas.map((area) => {
-				return React.createElement(AreaOfStudy, {
-					key: area.id,
-					student: this.props.student,
-					area: area,
-				})
-			})
-		})
-
-		console.log(areasOfStudy)
-
-		let areaOfStudySections = areasOfStudy.keySeq().map((areaType) => {
-			let pluralType = humanize.pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
-			return React.createElement('section', {id: pluralType, key: areaType},
-				React.createElement('header', {className: 'area-type-heading'},
-					React.createElement('h1', null, humanize.capitalize(pluralType)),
-					React.createElement('button', {
-						className: 'add-area-of-study',
-						title: `Add ${humanize.capitalize(areaType)}`,
+		let areasOfStudy = this.props.student.areasByType
+			.map((areas) =>
+				areas.map((area) =>
+					React.createElement(AreaOfStudy, {
+						key: area.id,
+						student: this.props.student,
+						area: area,
 					})
-				),
-				areasOfStudy.get(areaType)
-			)
-		})
+				))
+
+
+		// console.log(areasOfStudy)
+
+		let areaOfStudySections = areasOfStudy.keySeq()
+			.map((areaType) => {
+				let pluralType = humanize.pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
+				return React.createElement('section', {id: pluralType, key: areaType},
+					React.createElement('header', {className: 'area-type-heading'},
+						React.createElement('h1', null, humanize.capitalize(pluralType)),
+						React.createElement('button', {
+							className: 'add-area-of-study',
+							title: `Add ${humanize.capitalize(areaType)}`,
+						})
+					),
+					areasOfStudy.get(areaType).toJS()
+				)
+			})
+			.toJS()
 
 		let studentButtons = React.createElement('menu', {className: 'student-buttons'},
 			// React.createElement('button', {className: 'parse-student', onClick: this.parse}, 'Parse'),
