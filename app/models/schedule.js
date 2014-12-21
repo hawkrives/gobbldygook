@@ -19,17 +19,16 @@ let ScheduleRecord = Immutable.Record({
 class Schedule extends ScheduleRecord {
 	constructor(data) {
 		super(data)
-		this._coursesAreDirty = true
-		this._courseData = Immutable.List()
+		return this.set('id', uuid())
 	}
 
 	// Getters
 	get courses() {
-		if (this._coursesAreDirty) {
-			this._courseData = getCourses(this.clbids)
-			this._coursesAreDirty = false
-		}
-		return this._courseData
+		// if (this._coursesAreDirty) {
+		// 	this._courseData = getCourses(this.clbids)
+		// 	this._coursesAreDirty = false
+		// }
+		return getCourses(this.clbids)
 	}
 
 	// Schedule Maintenance
@@ -56,7 +55,7 @@ class Schedule extends ScheduleRecord {
 
 	reorderCourse(clbid, newIndex) {
 		let oldIndex = this.clbids.findIndex((id) => id === clbid)
-		this._coursesAreDirty = true
+
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
 			sched = sched.set('clbids', sched.clbids.splice(newIndex, 0, clbid))
@@ -65,14 +64,14 @@ class Schedule extends ScheduleRecord {
 
 	addCourse(clbid, index) {
 		index = (index >= 0) ? index : this.clbids.size - 1;
-		this._coursesAreDirty = true
+
 		return this.set('clbids', this.clbids.splice(index, 0, clbid))
 	}
 
 	removeCourse(clbid) {
 		console.log(`removing course with clbid: ${clbid}`)
+
 		let index = this.clbids.findIndex((id) => id === clbid)
-		this._coursesAreDirty = true
 		return this.set('clbids', this.clbids.splice(index, 1))
 	}
 
@@ -80,6 +79,7 @@ class Schedule extends ScheduleRecord {
 	// Schedule Validation
 
 	validate() {
+		console.log('schedule', this)
 		// Checks to see if the schedule is valid
 		return this.courses
 			 // only check the courses that have data
@@ -87,7 +87,7 @@ class Schedule extends ScheduleRecord {
 			// Step one: do any times conflict?
 			.then(checkScheduleTimeConflicts)
 			.then((conflicts) => {
-				var hasConflict = Immutable.fromJS(conflicts)
+				var hasConflict = Immutable.Seq(conflicts)
 					// flatten the nested arrays
 					.flatten(true)
 					// and see if any of the resulting values are true
