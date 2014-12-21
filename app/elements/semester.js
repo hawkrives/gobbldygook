@@ -105,6 +105,7 @@ let Semester = React.createClass({
 					React.createElement(Course, {
 						key: `${course.clbid}-${i}`,
 						info: course,
+						student: this.props.student,
 						schedule: this.state.schedule,
 						index: i,
 						conflicts: this.state.validation.conflicts,
