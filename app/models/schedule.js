@@ -39,6 +39,7 @@ class Schedule extends ScheduleRecord {
 				sched = sched.set('year', to.year)
 			if (to.semester)
 				sched = sched.set('semester', to.semester)
+			return sched
 		})
 	}
 
@@ -59,6 +60,7 @@ class Schedule extends ScheduleRecord {
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
 			sched = sched.set('clbids', sched.clbids.splice(newIndex, 0, clbid))
+			return sched
 		})
 	}
 
