@@ -136,43 +136,43 @@ let studentStore = Reflux.createStore({
 
 	renameSchedule(studentId, scheduleId, newTitle) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.getIn([studentId, 'schedules', scheduleId]).renameSchedule(newTitle))
+		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).renameSchedule(newTitle))
 		this._postChange()
 	},
 
 	reorderSchedule(studentId, scheduleId, newIndex) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.getIn([studentId, 'schedules', scheduleId]).reorderSchedule(newIndex))
+		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).reorderSchedule(newIndex))
 		this._postChange()
 	},
 
 	moveSchedule(studentId, scheduleId, to) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.getIn([studentId, 'schedules', scheduleId]).moveSchedule(to))
+		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).moveSchedule(to))
 		this._postChange()
 	},
 
 	addCourse(studentId, scheduleId, clbid) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.getIn([studentId, 'schedules', scheduleId]).addCourse(clbid))
+		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).addCourse(clbid))
 		this._postChange()
 	},
 
 	removeCourse(studentId, scheduleId, clbid) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.getIn([studentId, 'schedules', scheduleId]).removeCourse(clbid))
+		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).removeCourse(clbid))
 		this._postChange()
 	},
 
 	reorderCourse(studentId, scheduleId, clbid, newIndex) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.getIn([studentId, 'schedules', scheduleId]).reorderCourse(clbid, newIndex))
+		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).reorderCourse(clbid, newIndex))
 		this._postChange()
 	},
 
 	reorderArea(studentId, areaId, newIndex) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.getIn([studentId, 'studies']).reorderArea(newIndex))
+		this.students = this.students.setIn([studentId, 'studies'], this.students.getIn([studentId, 'studies']).reorderArea(newIndex))
 		this._postChange()
 	},
 })
