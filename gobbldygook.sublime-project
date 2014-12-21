@@ -8,7 +8,6 @@
 			],
 			"folder_exclude_patterns":
 			[
-				"node_modules",
 				".idea",
 				".sass-cache",
 				"data",
