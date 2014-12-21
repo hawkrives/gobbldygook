@@ -12,16 +12,16 @@ function findFirstAvailableYear(schedules, matriculation) {
 	}
 
 	let years = schedules
-		.sortBy(sch => sch.year)
 		.map(sch => sch.year)
 		.toSet()
-		.toList()
 
 	// put the matriculation year at the front to give a starting point
 	if (matriculation !== undefined)
-		years = years.unshift(matriculation - 1)
+		years = years.add(matriculation - 1)
 
-	var missingNo = findMissingNumberBinarySearch(years)
+	years = years.sort()
+
+	var missingNo = findMissingNumberBinarySearch(years.toJS())
 	if (missingNo !== null) {
 		return missingNo
 	}
