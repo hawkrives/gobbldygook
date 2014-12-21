@@ -19,7 +19,11 @@ let ScheduleRecord = Immutable.Record({
 class Schedule extends ScheduleRecord {
 	constructor(data) {
 		super(data)
-		return this.set('id', uuid())
+		return this.withMutations((sched) => {
+			sched = sched.set('id', uuid())
+			sched = sched.set('clbids', Immutable.fromJS(data.clbids))
+			return sched
+		})
 	}
 
 	// Getters
