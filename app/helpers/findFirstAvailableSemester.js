@@ -9,13 +9,13 @@ import findMissingNumberBinarySearch from 'helpers/findMissingNumberBinarySearch
 function findFirstAvailableSemester(schedules, forYear) {
 	let semesters = schedules
 			.filter(sch => sch.year === forYear)
-			.sortBy(sch => sch.semester)
 			.map(sch => sch.semester)
 			.toSet()
-			.toList()
 
 	// stick a 0 at the front so findBinary will start from 1
-	semesters = semesters.unshift(0)
+	semesters = semesters.add(0)
+
+	semesters = semesters.sort()
 
 	var missingNo = findMissingNumberBinarySearch(semesters.toJS())
 	if (missingNo !== null) {
