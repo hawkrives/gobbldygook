@@ -130,7 +130,7 @@ var AreaOfStudy = React.createClass({
 	},
 
 	render() {
-		console.log('area-of-study render', this.props)
+		// console.log(`render areaOfStudy for ${this.props.area.id}`)
 
 		var requirementSets = _.map(this.state.result.details, (reqset) =>
 			React.createElement(RequirementSet, _.merge({key: reqset.title}, reqset)));

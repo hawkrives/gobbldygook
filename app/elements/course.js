@@ -183,7 +183,7 @@ var Course = React.createClass({
 	},
 
 	toggle() {
-		console.log(this.state.isOpen ? 'collapse' : 'expand')
+		// console.log(this.state.isOpen ? 'collapse' : 'expand')
 		this.setState({
 			isOpen: !this.state.isOpen
 		})
