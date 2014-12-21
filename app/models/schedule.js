@@ -1,4 +1,5 @@
 import * as Immutable from 'immutable'
+import {isUndefined} from 'lodash'
 
 import uuid from 'helpers/uuid'
 import randomChar from 'helpers/randomChar'
@@ -82,7 +83,7 @@ class Schedule extends ScheduleRecord {
 		// Checks to see if the schedule is valid
 		return this.courses
 			 // only check the courses that have data
-			.then(courses => courses.filter(c => c))
+			.then(courses => Immutable.Seq(courses).filterNot(isUndefined))
 			// Step one: do any times conflict?
 			.then(checkScheduleTimeConflicts)
 			.then((conflicts) => {
