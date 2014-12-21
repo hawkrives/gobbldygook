@@ -107,7 +107,9 @@ class Student extends StudentRecord {
 		let scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
 
 		if (deadSched && deadSched.active) {
-			let otherSchedKey = this.schedules.findKey((sched) => sched.year === deadSched.year && sched.semester === deadSched.semester)
+			let otherSchedKey = this.schedules.findKey((sched) =>
+				sched.year === deadSched.year && sched.semester === deadSched.semester)
+
 			if (otherSchedKey) {
 				return scheduleIsNoMore.setIn(['schedules', otherSchedKey, 'active'], true)
 			}
