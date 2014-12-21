@@ -27,6 +27,8 @@ window.React = React
 // Handy debugging function
 window.log = (...args) => console.log(...args)
 
+import loadData from 'helpers/loadData'
+loadData()
 
 import Gobbldygook from 'elements/app'
 import StudentList from 'elements/studentList'
@@ -55,4 +57,5 @@ let routes = (
 
 // run it
 console.log('3. 2.. 1... Blastoff!')
+
 Router.run(routes, (Handler) => React.render(React.createElement(Handler), document.body))

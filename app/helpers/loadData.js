@@ -138,12 +138,9 @@ function updateDatabase(itemType, infoFromServer) {
 function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
-	let files = _(infoFile.info)
-		.map((files) =>
-			_(files)
-				.filter((file) => parseInt(file.year, 10) > new Date().getFullYear() - 5)
-				.map((file) => updateDatabase(infoFile.type, file))
-				.value())
+	let files = _(infoFile.files)
+		.filter((file) => parseInt(file.year, 10) > new Date().getFullYear() - 5)
+		.map((file) => updateDatabase(infoFile.type, file))
 		.flatten()
 		.value()
 
@@ -166,5 +163,4 @@ function loadData() {
 	return Promise.all(_.map(infoFiles, loadInfoFile))
 }
 
-window.loadData = loadData
 export default loadData

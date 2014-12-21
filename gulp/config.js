@@ -21,10 +21,10 @@ module.exports = {
 	},
 
 	link: {
-		// src: ['./node_modules/sto-courses', './data/areas'],
-		// dest: [dest + 'data/courses', dest + 'data/areas'],
-		src: ['./data/areas'],
-		dest: [dest + 'data/areas'],
+		src: ['./node_modules/sto-courses', './data/areas'],
+		dest: [dest + 'data/courses', dest + 'data/areas'],
+		// src: ['./data/areas'],
+		// dest: [dest + 'data/areas'],
 		opts: {force: true},
 	},
 
