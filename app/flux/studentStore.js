@@ -61,8 +61,10 @@ let studentStore = Reflux.createStore({
 	},
 
 	_postChange() {
+		console.groupCollapsed('studentStore._postChange')
 		console.log('studentStore._postChange', this.students)
 		this.students.forEach(student => student.save())
+		console.groupEnd('studentStore._postChange')
 		this.trigger(this.students)
 	},
 

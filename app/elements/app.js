@@ -10,7 +10,7 @@ var GobbldygookApp = React.createClass({
 	mixins: [Reflux.listenTo(studentStore, 'onStudentsChanged', 'onStudentsChanged')],
 
 	onStudentsChanged(students) {
-		console.log('app.onStudentsChanged', students)
+		// console.log('app.onStudentsChanged', students)
 		this.setState({students, studentsInitialized: true})
 	},
 
@@ -22,7 +22,7 @@ var GobbldygookApp = React.createClass({
 	},
 
 	render() {
-		console.log('rendering GobbldygookApp', this.state.studentsInitialized)
+		// console.log('rendering GobbldygookApp', this.state.studentsInitialized)
 		if (!this.state.studentsInitialized)
 			return React.createElement('img', {
 				className: 'loading',

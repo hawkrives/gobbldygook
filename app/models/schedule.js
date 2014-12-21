@@ -63,13 +63,14 @@ class Schedule extends ScheduleRecord {
 	}
 
 	addCourse(clbid, index) {
+		console.log(`adding clbid ${clbid} at index ${index} to schedule ${this.id}`)
 		index = (index >= 0) ? index : this.clbids.size - 1;
 
 		return this.set('clbids', this.clbids.splice(index, 0, clbid))
 	}
 
 	removeCourse(clbid) {
-		console.log(`removing course with clbid: ${clbid}`)
+		console.log(`removing clbid ${clbid} from schedule ${this.id}`)
 
 		let index = this.clbids.findIndex((id) => id === clbid)
 		return this.set('clbids', this.clbids.splice(index, 1))
@@ -79,7 +80,6 @@ class Schedule extends ScheduleRecord {
 	// Schedule Validation
 
 	validate() {
-		console.log('schedule', this)
 		// Checks to see if the schedule is valid
 		return this.courses
 			 // only check the courses that have data
