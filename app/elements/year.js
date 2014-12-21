@@ -23,8 +23,8 @@ var Year = React.createClass({
 	},
 
 	removeYear() {
-		var currentYearSchedules = this.props.schedules.filter((s) => s.year === this.props.year)
-		var scheduleIds = currentYearSchedules.map((s) => s.id)
+		var currentYearSchedules = this.props.student.schedules.filter((s) => s.year === this.props.year)
+		var scheduleIds = currentYearSchedules.map(s => s.id)
 
 		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},
@@ -35,15 +35,13 @@ var Year = React.createClass({
 
 		let terms = schedules
 			.sortBy(schedule => schedule.semester)
-			.map((schedule) => {
-				return React.createElement(Semester, {
+			.map((schedule) =>
+				React.createElement(Semester, {
 					key: schedule.semester,
-					ref: schedule.semester,
+					student: this.props.student,
 					semester: schedule.semester,
 					year: this.props.year,
-					student: this.props.student,
-				})
-			})
+				}))
 			.toList()
 
 		return React.createElement('div', {className: 'year'},
@@ -51,11 +49,14 @@ var Year = React.createClass({
 				React.createElement('h1', null, expandYear(this.props.year)),
 				React.createElement('button', {
 					className: 'remove-year',
-					title: 'Remove the year ' + this.props.year,
+					title: `Remove the year ${this.props.year}`,
 					onClick: this.removeYear,
 				})
 			),
-			React.createElement('div', {className: 'semester-list'}, terms.toJS()),
+			React.createElement('div',
+				{className: 'semester-list'},
+				terms.toJS()
+			),
 			React.createElement('button', {
 				className: 'add-semester',
 				title: 'Add Semester',
