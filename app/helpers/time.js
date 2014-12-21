@@ -1,4 +1,5 @@
 import * as _ from 'lodash'
+import {Seq} from 'immutable'
 
 const DAYS = {
 	M:  'Mo',
@@ -171,24 +172,18 @@ function checkScheduleTimeConflicts(courses) {
 	if (courses.toArray)
 		courses = courses.toArray()
 
-	var results = []
-	_.each(courses, function(c1, c1idx) {
-		results[c1idx] = []
-		_.each(courses, function(c2, c2idx) {
-			var result;
-			if (c1 === c2) {
+	let results = Seq(courses).map((c1, c1idx) => {
+		return Seq(courses).map((c2, c2idx) => {
+			let result = false;
+			if (c1 === c2)
 				result = null
-			}
-			else if (checkCourseTimeConflicts(c1, c2)) {
+			else if (checkCourseTimeConflicts(c1, c2))
 				result = true
-			}
-			else {
-				result = false
-			}
-			results[c1idx][c2idx] = result;
+			return result
 		})
 	})
-	return results
+
+	return results.toJS()
 }
 
 export {
