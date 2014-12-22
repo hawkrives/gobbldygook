@@ -5,14 +5,32 @@ import Sidebar from 'elements/sidebar'
 
 var Student = React.createClass({
 	mixins: [State],
-	render() {
-		// console.info('student render', this.props.students.toJS())
+
+	getInitialState: function() {
+		return { student: null }
+	},
+
+	componentWillReceiveProps: function(nextProps) {
 		let queryId = this.getParams().id
-		let student = this.props.students.get(queryId)
+		let student = nextProps.students.get(queryId)
+		console.info('student\'s student: ', student.toJS())
 
 		window.stu = student
+		this.setState({student})
+	},
 
-		if (!student)
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
+	},
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextState.student !== this.state.student
+	},
+
+	render() {
+		console.info('student render', this.props.students.toJS())
+
+		if (!this.state.student)
 			return React.createElement('img', {
 				className: 'loading',
 				src: 'images/loading.svg',
@@ -21,8 +39,8 @@ var Student = React.createClass({
 
 		return React.createElement('div',
 			{className: 'student'},
-			React.createElement(Sidebar, {student}),
-			React.createElement(RouteHandler, {student}))
+			React.createElement(Sidebar, {student: this.state.student}),
+			React.createElement(RouteHandler, {student: this.state.student}))
 	},
 })
 

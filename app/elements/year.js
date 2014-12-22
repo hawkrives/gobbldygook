@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as Immutable from 'immutable'
 
 import Course from 'elements/course'
 import Semester from 'elements/semester'
@@ -29,11 +30,28 @@ var Year = React.createClass({
 		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},
 
-	render() {
-		var thisYearSchedules = this.props.student.schedulesByYear.get(this.props.year)
-		let schedules = thisYearSchedules.filter(s => s.active)
+	getInitialState() {
+		return {
+			schedules: Immutable.List()
+		}
+	},
 
-		let terms = schedules
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
+	},
+
+	componentWillReceiveProps(nextProps) {
+		let thisYearSchedules = nextProps.student.schedulesByYear.get(nextProps.year)
+		let schedules = thisYearSchedules.filter(s => s.active)
+		this.setState({schedules})
+	},
+
+	shouldComponentUpdate: function(nextProps, nextState) {
+		return nextState.schedules !== this.state.schedules
+	},
+
+	render() {
+		let terms = this.state.schedules
 			.sortBy(schedule => schedule.semester)
 			.map((schedule) =>
 				React.createElement(Semester, {

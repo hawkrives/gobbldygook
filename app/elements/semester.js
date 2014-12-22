@@ -54,6 +54,10 @@ let Semester = React.createClass({
 		})
 	},
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextState.schedule !== this.state.schedule
+	},
+
 	removeSemester() {
 		let currentTermSchedules = this.props.student.schedules.filter((s) =>
 			s.year === this.props.year && s.semester === this.props.semester)
