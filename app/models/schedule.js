@@ -84,7 +84,7 @@ class Schedule extends ScheduleRecord {
 		let start = performance.now()
 		console.log(`removing clbid ${clbid} from schedule ${this.id} (${this.year}-${this.semester}.${this.index})`)
 
-		let index = this.clbids.findIndex((id) => id === clbid)
+		let index = this.clbids.indexOf(clbid)
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.delete(index))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
