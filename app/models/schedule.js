@@ -20,6 +20,7 @@ let ScheduleRecord = Immutable.Record({
 
 class Schedule extends ScheduleRecord {
 	constructor(data) {
+		log('schedule constructor')
 		super(data)
 		return this.withMutations((sched) => {
 			sched = sched.set('id', data.id || uuid())
