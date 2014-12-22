@@ -61,8 +61,7 @@ class Schedule extends ScheduleRecord {
 		let oldIndex = this.clbids.findIndex((id) => id === clbid)
 
 		return this.withMutations((sched) => {
-			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
-			sched = sched.set('clbids', sched.clbids.splice(newIndex, 0, clbid))
+			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1, clbid))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
 			return sched
 		})
