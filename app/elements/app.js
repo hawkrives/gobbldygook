@@ -1,10 +1,9 @@
 import * as React from 'react'
 import * as Reflux from 'reflux'
 import * as Immutable from 'immutable'
-import studentStore from 'flux/studentStore'
 import {RouteHandler} from 'react-router'
 
-window.ref = Reflux
+import studentStore from 'flux/studentStore'
 
 var GobbldygookApp = React.createClass({
 	mixins: [Reflux.listenTo(studentStore, 'onStudentsChanged', 'onStudentsChanged')],
