@@ -63,7 +63,7 @@ class Schedule extends ScheduleRecord {
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
 			sched = sched.set('clbids', sched.clbids.splice(newIndex, 0, clbid))
-			sched = sched.set('_courseData', getCourses(this.clbids))
+			sched = sched.set('_courseData', getCourses(sched.clbids))
 			return sched
 		})
 	}
@@ -73,7 +73,7 @@ class Schedule extends ScheduleRecord {
 
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.push(clbid))
-			sched = sched.set('_courseData', getCourses(this.clbids))
+			sched = sched.set('_courseData', getCourses(sched.clbids))
 			return sched
 		})
 	}
@@ -84,7 +84,7 @@ class Schedule extends ScheduleRecord {
 		let index = this.clbids.findIndex((id) => id === clbid)
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.delete(index))
-			sched = sched.set('_courseData', getCourses(this.clbids))
+			sched = sched.set('_courseData', getCourses(sched.clbids))
 			return sched
 		})
 	}
