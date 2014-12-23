@@ -7,7 +7,7 @@
 	-webkit-hyphens: auto;
 	hyphens: auto;
 
-	@include font-feature-settings('onum');
+	font-feature-settings: 'onum';
 
 	p {
 		margin: $block-edge-padding 0;

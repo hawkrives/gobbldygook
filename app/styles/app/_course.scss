@@ -26,7 +26,7 @@
 	}
 
 	.type {
-		@include font-feature-settings('smcp');
+		font-feature-settings: 'smcp';
 		font-size: 0.8em;
 		background-color: hsl(0, 0%, 90%);
 		border-radius: 5px;

@@ -9,7 +9,7 @@
 		margin: 0;
 		z-index: 1;
 		position: relative;
-		@include font-feature-settings('smcp');
+		font-feature-settings: 'smcp';
 
 		font-family: $heading-font-stack;
 	}

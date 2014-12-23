@@ -24,7 +24,7 @@ $semester-divider: solid 1px $border-bottom-color;
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: flex-start;
-	@include font-feature-settings('smcp');
+	font-feature-settings: 'smcp';
 
 	h1 {
 		display: inline-block;
@@ -42,7 +42,7 @@ $semester-divider: solid 1px $border-bottom-color;
 	li {
 		&::before { content: " – "; }
 
-		@include font-feature-settings('onum');
+		font-feature-settings: 'onum';
 
 		color: $gray;
 
