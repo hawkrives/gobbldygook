@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 import {isUndefined} from 'lodash'
 import * as Promise from 'bluebird'
-import * as React from 'react'
+import * as React from 'react/addons'
 import * as humanize from 'humanize-plus'
 import * as Immutable from 'immutable'
 
@@ -13,6 +13,8 @@ import {Course, MissingCourse, EmptyCourseSlot} from 'elements/course'
 import studentActions from 'flux/studentActions'
 import {DragDropMixin} from 'react-dnd'
 import itemTypes from 'models/itemTypes'
+
+let cx = React.addons.classSet
 
 let Semester = React.createClass({
 	mixins: [DragDropMixin],
@@ -54,9 +56,9 @@ let Semester = React.createClass({
 		})
 	},
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextState.schedule !== this.state.schedule
-	},
+	// shouldComponentUpdate(nextProps, nextState) {
+		// return nextState.schedule !== this.state.schedule
+	// },
 
 	removeSemester() {
 		let currentTermSchedules = this.props.student.schedules.filter((s) =>
@@ -136,8 +138,19 @@ let Semester = React.createClass({
 				courseBlocks)
 		}
 
+		let droppableIsMoving = this.getDropState(itemTypes.COURSE).isDragging
+		let droppableIsOver = this.getDropState(itemTypes.COURSE).isHovering
+
+		let semesterProps = {
+			className: cx({
+				semester: true,
+				'can-drop': droppableIsMoving,
+				'is-over': droppableIsOver,
+			})
+		}
+
 		return React.createElement('div',
-			_.extend({className: 'semester'}, this.dropTargetFor(itemTypes.COURSE)),
+			_.extend(semesterProps, this.dropTargetFor(itemTypes.COURSE)),
 			React.createElement('header', {className: 'semester-title'},
 				React.createElement('h1', null, semesterName(this.props.semester)),
 				infoBar,

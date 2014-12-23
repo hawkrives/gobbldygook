@@ -1,11 +1,13 @@
 import * as _ from 'lodash'
-import * as React from 'react'
+import * as React from 'react/addons'
 import * as humanize from 'humanize-plus'
 import {DragDropMixin} from 'react-dnd'
 
 import studentActions from 'flux/studentActions'
 import itemTypes from 'models/itemTypes'
 import semesterName from 'helpers/semesterName'
+
+let cx = React.addons.classSet;
 
 function findSemesterList() {
 	return [
@@ -230,6 +232,8 @@ var Course = React.createClass({
 	render() {
 		let course = this.props.info;
 
+		let isDragging = this.getDragState(itemTypes.COURSE).isDragging;
+
 		let courseInfo = this.state.isOpen ?
 			React.createElement(ExpandedCourse, _.extend({}, this.props)) :
 			React.createElement(CollapsedCourse, _.extend({}, this.props));
@@ -239,7 +243,11 @@ var Course = React.createClass({
 		return React.createElement('article',
 			_.extend(
 				{
-					className: 'course ' + (this.state.isOpen ? 'expanded' : 'collapsed'),
+					className: cx({
+						course: true,
+						expanded: this.state.isOpen,
+						'is-dragging': isDragging,
+					}),
 					onClick: this.toggle,
 				},
 				this.dragSourceFor(itemTypes.COURSE)),

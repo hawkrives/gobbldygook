@@ -14,6 +14,13 @@ $semester-divider: solid 1px $border-bottom-color;
 	padding: $block-edge-padding/2 $block-edge-padding;
 }
 
+.semester.can-drop {
+	box-shadow: 0 0 0 1px rgba($gray, 0.5);
+}
+.semester.is-over {
+	box-shadow: 0 0 0 2px $green;
+}
+
 .semester-title {
 	margin-bottom: 0.5em;
 	font-size: 0.85em;
