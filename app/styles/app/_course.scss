@@ -117,8 +117,9 @@
 .course.empty {
 	opacity: 0.5;
 	user-select: none;
+	cursor: default;
 
-	&, .title {
+	& .title {
 		cursor: default;
 	}
 }
