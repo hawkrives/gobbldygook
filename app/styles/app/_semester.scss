@@ -78,12 +78,12 @@ $semester-divider: solid 1px $border-bottom-color;
 	padding: 0 2px 0 0;
 
 	opacity: 0;
-}
 
-.semester:hover .remove-semester {
-	opacity: 0.5;
+	.semester:hover & {
+		opacity: 1;
 
-	&:hover {opacity: 1;}
+		&:hover {opacity: 1;}
+	}
 }
 
 .course-list {
