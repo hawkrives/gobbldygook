@@ -1,5 +1,5 @@
 #student-summary {
-	@extend %block-small;
+	@include block-small;
 	padding: $block-edge-padding $block-edge-padding*2 $block-edge-padding*2;
 }
 

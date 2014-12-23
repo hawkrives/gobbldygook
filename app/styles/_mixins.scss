@@ -1,22 +1,26 @@
 @import "mixins/_material-shadow";
 @import "mixins/_avatar-letter";
 
-%no-select {
-	-webkit-user-select: none;
-	-moz-user-select: none;
+@mixin no-select {
 	user-select: none;
 	cursor: default;
 }
 
-%list-inline {
+@mixin list-inline {
 	display: inline-block;
 	list-style: none;
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-left: 0;
+
 	& > li {
 		display: inline-block;
 	}
+}
+
+@mixin link-undecorated {
+	text-decoration: none;
+	color: inherit;
 }
 
 @mixin sr-only {
@@ -30,19 +34,18 @@
 	border: 0;
 }
 
-@mixin progress-bar($color, $bg: null, $gradient: null) {
+@mixin progress-bar($color, $bg: transparent, $gradient: null) {
 	@if $gradient == null {
 		$gradient: $color;
 	}
-	@if $bg == null {
-		$bg: transparent;
-	}
+
 	& {
 		color: $color;
 		background: $bg;
 
 		@content;
 	}
+
 	&::-moz-progress-bar      { background: $gradient; }
 	&::-webkit-progress-value { background: $gradient; }
 	&::-webkit-progress-bar   { background: $bg; }
@@ -53,7 +56,7 @@
 	height: $size;
 }
 
-%button {
+@mixin button {
 	background: transparent;
 	border: none;
 	cursor: pointer;
@@ -69,30 +72,21 @@
 	}
 }
 
-%add-button {
-	@extend %button;
+@mixin add-button {
+	@include button;
 
 	&::after {
 		@include ionicon($ionicon-var-ios7-plus-empty);
 	}
-	&:hover::after {
-		// @include ionicon($ionicon-var-plus-circled);
-	}
 
-	&[disabled] {
-		&::after {
-			@include ionicon($ionicon-var-checkmark);
-		}
-		&:hover::after {
-			// @include ionicon($ionicon-var-checkmark-circled);
-		}
+	&[disabled]::after {
+		@include ionicon($ionicon-var-checkmark);
 	}
 }
 
-%remove-button {
-	@extend %button;
+@mixin remove-button {
+	@include button;
 
-	color: $gray;
 	opacity: 0.5;
 	transition: 0.15s;
 
@@ -106,23 +100,22 @@
 	}
 }
 
-%block-base {
-	// border-radius: 3px;
+@mixin block-base {
+	border-radius: 3px;
 	border: 0;
 }
 
-%block {
-	@extend %block-base;
+@mixin block {
+	@include block-base;
 	transition: border 0.5s ease-in-out;
 
 	background: #fff;
 	border: 1px solid;
 	border-color: $border-colors;
-	// border-radius: 3px;
 }
 
-%block-small {
-	@extend %block;
+@mixin block-small {
+	@include block;
 	margin-bottom: $block-edge-padding * 2;
 
 	p:last-child {
@@ -130,8 +123,8 @@
 	}
 }
 
-%block-flat {
-	@extend %block-base;
+@mixin block-flat {
+	@include block-base;
 	border: 1px solid transparent;
 
 	&:hover, &:focus, &:active {

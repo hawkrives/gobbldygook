@@ -80,7 +80,7 @@
 }
 
 .close-sidebar {
-	@extend %button;
+	@include button;
 
 	color: $gray;
 	transition: 0.15s;

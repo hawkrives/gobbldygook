@@ -7,7 +7,7 @@ $semester-divider: solid 1px $border-bottom-color;
 }
 
 .semester {
-	@extend %block;
+	@include block;
 	flex: 1 1 15em;
 	margin: 2px;
 
@@ -19,7 +19,7 @@ $semester-divider: solid 1px $border-bottom-color;
 	font-size: 0.85em;
 
 	// cursor: move;
-	// @extend %no-select;
+	// @include no-select;
 
 	display: flex;
 	flex-flow: row nowrap;
@@ -36,7 +36,7 @@ $semester-divider: solid 1px $border-bottom-color;
 }
 
 .info-bar {
-	@extend %list-inline;
+	@include list-inline;
 	flex: 1;
 
 	li {
@@ -63,8 +63,8 @@ $semester-divider: solid 1px $border-bottom-color;
 }
 
 .add-semester {
-	@extend %add-button;
-	@extend %block;
+	@include add-button;
+	@include block;
 
 	width: 32px;
 	font-size: 1.25em;
@@ -73,7 +73,7 @@ $semester-divider: solid 1px $border-bottom-color;
 }
 
 .remove-semester {
-	@extend %remove-button;
+	@include remove-button;
 	margin: 0;
 	padding: 0 2px 0 0;
 

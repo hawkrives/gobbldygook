@@ -1,5 +1,5 @@
 @mixin avatar-letter($size) {
-	@extend %no-select;
+	@include no-select;
 
 	position: relative;
 	top: 1px;

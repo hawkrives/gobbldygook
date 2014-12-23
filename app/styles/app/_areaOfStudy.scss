@@ -1,5 +1,5 @@
 .area-of-study {
-	@extend %block-small;
+	@include block-small;
 
 	h1 {
 		padding: $block-edge-padding;
