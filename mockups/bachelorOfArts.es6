@@ -118,8 +118,8 @@ function beyondTheMajor(studies, courses) {
 function checkBachelorOfArtsDegree(student) {
 	return Promise.all([
 		student.courses,
-		student.fabrications,
-		student.studies.data,
+		student.fabrications.toArray(),
+		student.studies.toArray(),
 		student.creditsNeeded,
 		student.graduation,
 		student.matriculation,

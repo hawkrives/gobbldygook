@@ -163,9 +163,9 @@ class Student extends StudentRecord {
 	// getters
 
 	get courses() {
-		let courses = this.activeSchedules.map((schedule) => schedule.courses)
-		let scheduleCoursePromises = Promise.all(courses)
-		return scheduleCoursePromises.then((courses) => courses.flatten(true))
+		let allCourses = this.activeSchedules.map((schedule) => schedule.courses).toArray()
+		let scheduleCoursePromises = Promise.all(allCourses)
+		return scheduleCoursePromises.then((results) => Immutable.Seq(results).flatten(true).toArray())
 	}
 
 	get creditCount() {
