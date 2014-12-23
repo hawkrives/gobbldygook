@@ -25,6 +25,10 @@
 		cursor: move;
 	}
 
+	.title, .description {
+		font-feature-settings: 'onum';
+	}
+
 	.type {
 		font-feature-settings: 'smcp';
 		font-size: 0.8em;
@@ -36,6 +40,10 @@
 
 	.summary, .details {
 		font-size: 0.75em;
+	}
+
+	.identifier {
+		font-feature-settings: 'tnum';
 	}
 
 	.identifier, .credits {
