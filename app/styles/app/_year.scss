@@ -1,10 +1,13 @@
-.add-year {
-	width: calc(100% - 1.5em);
-	font-size: 1.25em;
-	float: right;
+$year-title-size: 2em;
+$year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75.
 
-	@include block;
+.add-year {
 	@include add-button;
+	@include block;
+
+	width: calc(100% - #{$year-title-width});
+	font-size: 1.25em;
+	margin-left: $year-title-width;
 }
 
 .remove-year {
@@ -39,23 +42,20 @@
 .year-title {
 	@include no-select;
 
-	width: 2em;
-	padding: 0.5em 0.75em;
+	position: relative;
 
 	h1 {
 		@include heading-neutral;
-		transform: rotate(90deg);
+		width: $year-title-size;
+		transform: translateY(1em) rotate(90deg);
 		white-space: nowrap;
 	}
 
 	font-feature-settings: "tnum";
 
 	line-height: 1em;
-
 	font-weight: 200;
 	font-size: 0.9em;
-
-	position: relative;
 
 	&:hover .remove-year {
 		opacity: 1;
