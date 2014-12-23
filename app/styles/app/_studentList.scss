@@ -1,0 +1,26 @@
+.student-list {
+	@include list-inline;
+}
+
+.student-list--student {
+	@include block;
+
+	a {
+		@include link-undecorated;
+	}
+
+	& + & {
+		margin-left: 1em;
+	}
+
+	padding: 0.5em 1em;
+	transform-origin: 50% 50%;
+	transition: 0.15s;
+
+	&:hover a {
+		text-decoration: underline;
+	}
+
+	&:nth-child(odd):hover  { transform: rotate(-2deg); }
+	&:nth-child(even):hover { transform: rotate(2deg);  }
+}
