@@ -1,0 +1,63 @@
+.add-year {
+	width: calc(100% - 1.5em);
+	font-size: 1.25em;
+	float: right;
+
+	@include block;
+	@include add-button;
+}
+
+.remove-year {
+	@include remove-button;
+
+	position: absolute;
+	left: 0;
+	bottom: 2px;
+
+	width: 100%;
+	height: 28px;
+
+	opacity: 0;
+}
+
+.year:hover .remove-year {
+	opacity: 0.5;
+
+	&:hover {opacity: 1;}
+}
+
+.year {
+	margin-bottom: $page-edge-padding;
+
+	display: flex;
+	flex-flow: row nowrap;
+
+	// Make sure to give the year title breathing room
+	min-height: 105px;
+}
+
+.year-title {
+	@include no-select;
+
+	width: 2em;
+	padding: 0.5em 0.75em;
+
+	h1 {
+		@include heading-neutral;
+		transform: rotate(90deg);
+		white-space: nowrap;
+	}
+
+	font-feature-settings: "tnum";
+
+	line-height: 1em;
+
+	font-weight: 200;
+	font-size: 0.9em;
+
+	position: relative;
+
+	&:hover .remove-year {
+		opacity: 1;
+	}
+}

@@ -1,5 +1,11 @@
 $semester-divider: solid 1px $border-bottom-color;
 
+.semester-list {
+	flex: 1;
+	display: flex;
+	flex-flow: row wrap;
+}
+
 .semester {
 	@extend %block;
 	flex: 1 1 15em;
@@ -22,6 +28,7 @@ $semester-divider: solid 1px $border-bottom-color;
 
 	h1 {
 		display: inline-block;
+		@include heading-neutral;
 	}
 	& > * {
 		vertical-align: top;

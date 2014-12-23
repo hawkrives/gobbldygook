@@ -141,8 +141,9 @@
 	}
 }
 
-@mixin font-feature-settings($var) {
-	-webkit-font-feature-settings: $var;
-	-moz-font-feature-settings: $var;
-	font-feature-settings: $var;
+@mixin heading-neutral {
+	font-size: inherit;
+	font-weight: inherit;
+	margin-top: 0;
+	margin-bottom: 0;
 }
