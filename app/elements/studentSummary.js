@@ -47,8 +47,7 @@ var StudentSummary = React.createClass({
 			emphasis: humanize.pluralize(objects.emphasis.size, 'emphasis', 'emphases'),
 		}
 
-		// var canGraduate = checkElegibilityForGraduation(this.props)
-		var canGraduate = false
+		var canGraduate = this.props.graduatability
 
 		let phrases = {
 			degree: React.createElement('span', {className: 'area-of-study-list', key:'degree'}, titles.degree),
