@@ -19,7 +19,7 @@ let RequirementSet = React.createClass({
 		}
 
 		else if (type === 'array/some') {
-			details = React.createElement(SomeArrayRequirement, {details: this.props.details})
+			details = React.createElement(SomeArrayRequirement, {result: this.props.result, details: this.props.details})
 		}
 
 		else if (type === 'array/boolean') {
