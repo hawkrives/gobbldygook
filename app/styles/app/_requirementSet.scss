@@ -1,19 +1,35 @@
 $border-color: rgba(50, 50, 50, 0.25);
 .requirement-set {
-	h2 {
+	header {
 		border-top: 1px solid $border-color;
 		border-bottom: 1px solid $border-color;
 
 		margin: 0;
 		padding-top: 2px;
+		padding-left: 1em;
+		padding-right: 1em;
 
 		background-color: rgb(245, 245, 245);
-		text-transform: uppercase;
-		text-align: center;
 
 		font-size: 0.85em;
 		font-family: $heading-font-stack;
 		font-weight: 300;
+	}
+
+	h2 {
+		@include heading-neutral;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	.description > * {
+		margin-top: 0.25em;
+		margin-bottom: 0.25em;
+		// white-space: pre-line;
+	}
+	.description > ul, .description > ol {
+		padding-left: 0;
+		margin-left: 1.5em;
 	}
 
 	margin-bottom: 0.35em;
@@ -48,11 +64,11 @@ $border-color: rgba(50, 50, 50, 0.25);
 	}
 
 	&.incomplete::before {
-		@include ionicon($ionicon-var-close-circled);
+		@include ionicon($ionicon-var-close);
 		color: $red;
 	}
 	&.completed::before {
-		@include ionicon($ionicon-var-checkmark-circled);
+		@include ionicon($ionicon-var-checkmark);
 		color: darken($green, 10%);
 	}
 }

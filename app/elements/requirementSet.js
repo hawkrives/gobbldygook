@@ -1,13 +1,43 @@
 import * as _ from 'lodash'
 import * as React from 'react'
+import * as marked from 'marked'
 
 import {
 	BooleanRequirement, SomeArrayRequirement, BooleanArrayRequirement, NumberObjectRequirement
 } from 'elements/requirement'
 
 let RequirementSet = React.createClass({
+	toggleDescription() {
+		this.setState({showDescription: !this.state.showDescription})
+	},
+
+	getInitialState() {
+		return {
+			showDescription: false
+		}
+	},
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({descriptionHTML: marked(nextProps.description)})
+	},
+
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
+	},
+
 	render() {
 		// console.log('requirement-set render', this.props)
+
+		let title = React.createElement('h2', {
+			className: this.props.result ? 'completed' : 'incomplete',
+			title: this.props.description,
+		}, this.props.title)
+
+		let description = null;
+		if (this.state.showDescription && this.props.description)
+			description = React.createElement('div', {className: 'description', dangerouslySetInnerHTML: {__html: this.state.descriptionHTML}})
+
+		let titlebar = React.createElement('header', {onClick: this.toggleDescription}, title, description)
 
 		let details;
 		let type = this.props.type
@@ -35,13 +65,7 @@ let RequirementSet = React.createClass({
 		}
 
 		return React.createElement('div', {className: 'requirement-set', 'data-type': type},
-			React.createElement('h2',
-				{
-					className: this.props.result ? 'completed' : 'incomplete',
-					title: this.props.description,
-				},
-				this.props.title
-			),
+			titlebar,
 			details)
 	},
 })
