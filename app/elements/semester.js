@@ -60,7 +60,7 @@ let Semester = React.createClass({
 		// console.log('semester render', this.state.schedule)
 
 		let infoIcons = []
-		if (this.state.schedule) {
+		if (this.state.schedule && this.state.courses.size) {
 			let courseCount = this.state.courses.size
 			infoIcons.push(React.createElement('li',
 				{className: 'semester-course-count', key: 'course-count'},
@@ -91,7 +91,7 @@ let Semester = React.createClass({
 		let infoBar = React.createElement('ul', {className: 'info-bar'}, infoIcons);
 
 		let courseList = null;
-		if (this.state.schedule) {
+		if (this.state.schedule && this.state.courses) {
 			let courseObjects = this.state.courses
 				.filterNot(isUndefined)
 				.map((course, i) =>
@@ -123,6 +123,9 @@ let Semester = React.createClass({
 			courseList = React.createElement('div',
 				{className: 'course-list'},
 				courseBlocks)
+		}
+		else if (this.state.schedule) {
+			courseList = React.createElement('div', {className: 'loading'}, 'Loading Courses')
 		}
 
 		let droppableIsMoving = this.getDropState(itemTypes.COURSE).isDragging
