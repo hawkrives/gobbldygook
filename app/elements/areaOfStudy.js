@@ -19,7 +19,7 @@ let AreaOfStudy = React.createClass({
 
 		let requirementSets = null;
 		if (this.state.open)
-			requirementSets = _.map(this.props.area.result.details, (reqset) =>
+			requirementSets = _.map(this.props.area.details, (reqset) =>
 				React.createElement(RequirementSet, _.extend({key: reqset.title}, reqset)));
 
 		let header = React.createElement('header',
@@ -36,7 +36,10 @@ let AreaOfStudy = React.createClass({
 			open: this.state.open,
 		})
 
-		return React.createElement('div', {key: this.props.area.id, className: classes}, header, requirementSets)
+		return React.createElement('div',
+			{key: this.props.area.id, className: classes},
+			header,
+			requirementSets)
 	},
 })
 
