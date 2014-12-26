@@ -16,12 +16,9 @@
 	margin-bottom: 0;
 	font-feature-settings: 'smcp';
 
-	h1, h2, h3, h4, h5, h6 {
-		font-weight: inherit;
-		font-size: inherit;
-		margin: 0;
+	h1, h2 {
+		@include heading-neutral;
 		display: inline-block;
-
 		padding: 5px 0 3px;
 	}
 }
