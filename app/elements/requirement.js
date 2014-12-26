@@ -3,6 +3,9 @@ import * as React from 'react/addons'
 let cx = React.addons.classSet
 
 let BooleanRequirement = React.createClass({
+	propTypes: {
+		result: React.PropTypes.bool.isRequired,
+	},
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-boolean'},
@@ -20,6 +23,22 @@ let BooleanRequirement = React.createClass({
 })
 
 let SomeArrayRequirement = React.createClass({
+	propTypes: {
+		result: React.PropTypes.bool.isRequired,
+		details: React.PropTypes.shape({
+			has: React.PropTypes.number.isRequired,
+			needs: React.PropTypes.oneOfType([
+				React.PropTypes.number,
+				React.PropTypes.string,
+			]).isRequired,
+			word: React.PropTypes.string,
+			from: React.PropTypes.arrayOf(React.PropTypes.shape({
+				title: React.PropTypes.string.isRequired,
+				result: React.PropTypes.bool.isRequired,
+				abbr: React.PropTypes.string,
+			})).isRequired,
+		})
+	},
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-some-array'},
@@ -53,7 +72,7 @@ let SomeArrayRequirement = React.createClass({
 				})
 			)
 		)
-	}
+	},
 })
 
 let BooleanArrayRequirement = React.createClass({
