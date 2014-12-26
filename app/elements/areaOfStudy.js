@@ -5,7 +5,7 @@ import RequirementSet from 'elements/requirementSet'
 
 let cx = React.addons.classSet
 
-var AreaOfStudy = React.createClass({
+let AreaOfStudy = React.createClass({
 	toggle() {
 		this.setState({open: !this.state.open});
 	},

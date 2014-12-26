@@ -5,12 +5,12 @@ import {
 	BooleanRequirement, SomeArrayRequirement, BooleanArrayRequirement, NumberObjectRequirement
 } from 'elements/requirement'
 
-var RequirementSet = React.createClass({
+let RequirementSet = React.createClass({
 	render() {
 		// console.log('requirement-set render', this.props)
 
-		var details;
-		var type = this.props.type
+		let details;
+		let type = this.props.type
 
 		if (type === 'array/requirementSet') {
 			details = _.map(this.props.details, (requirement, index) => {

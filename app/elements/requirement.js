@@ -2,7 +2,7 @@ import * as _ from 'lodash'
 import * as React from 'react/addons'
 let cx = React.addons.classSet
 
-var BooleanRequirement = React.createClass({
+let BooleanRequirement = React.createClass({
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-boolean'},
@@ -19,7 +19,7 @@ var BooleanRequirement = React.createClass({
 	}
 })
 
-var SomeArrayRequirement = React.createClass({
+let SomeArrayRequirement = React.createClass({
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-some-array'},
@@ -56,7 +56,7 @@ var SomeArrayRequirement = React.createClass({
 	}
 })
 
-var BooleanArrayRequirement = React.createClass({
+let BooleanArrayRequirement = React.createClass({
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-boolean-array'},
@@ -81,7 +81,7 @@ var BooleanArrayRequirement = React.createClass({
 	}
 })
 
-var NumberObjectRequirement = React.createClass({
+let NumberObjectRequirement = React.createClass({
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-object-number'},
