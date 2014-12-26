@@ -9,18 +9,6 @@ import StudentSummary from 'elements/studentSummary'
 import checkStudentGraduatability from 'helpers/checkStudentGraduatability'
 
 let GraduationStatus = React.createClass({
-	parse() {
-		console.log('parse student')
-	},
-	demo() {
-		console.log('load demo data')
-		// revertStudentToDemo()
-	},
-	download() {
-		// console.log('start student download')
-		return 'data:text/json;charset=utf-8,' + this.props.student.encode();
-	},
-
 	componentWillReceiveProps(nextProps) {
 		let graduatabilityPromise = checkStudentGraduatability(nextProps.student)
 		graduatabilityPromise.then((graduationStatus) => {
@@ -79,6 +67,18 @@ let GraduationStatus = React.createClass({
 
 		return React.createElement('section', {className: 'graduation-status'},
 			studentButtons, summary, sections)
+	},
+
+	parse() {
+		console.log('parse student')
+	},
+	demo() {
+		console.log('load demo data')
+		// revertStudentToDemo()
+	},
+	download() {
+		// console.log('start student download')
+		return 'data:text/json;charset=utf-8,' + this.props.student.encode();
 	},
 })
 
