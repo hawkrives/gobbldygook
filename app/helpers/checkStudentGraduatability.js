@@ -31,13 +31,10 @@ let noResult = (type, title, id) => {
 		result: false,
 		progress: {at: 0, of: 1, word: 'zero'},
 		type: type,
-		details: {
-			result: false,
-			details: [{
-				title: `${type} not found!`,
-				description: `This ${type} could not be found.`,
-			}],
-		},
+		details: [{
+			title: `${type} not found!`,
+			description: `This ${type} could not be found.`,
+		}],
 	}
 }
 
