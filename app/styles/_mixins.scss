@@ -77,6 +77,7 @@
 
 	&::after {
 		@include ionicon($ionicon-var-ios7-plus-empty);
+		@content;
 	}
 
 	&[disabled]::after {

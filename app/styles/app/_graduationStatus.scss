@@ -27,10 +27,15 @@
 }
 
 .add-area-of-study {
-	@include add-button;
-	@include block-flat;
+	@include add-button {
+		margin-left: 0.5em;
+	}
+	@include block-small;
 
-	margin-left: 3px;
-	cursor: pointer;
-	position: relative; top: -1px;
+	width: 100%;
+	text-align: left;
+	text-transform: lowercase;
+	font-feature-settings: 'smcp';
+	padding-left: $block-edge-padding * 1.5;
+	font-size: 0.75em;
 }

@@ -38,23 +38,26 @@ let GraduationStatus = React.createClass({
 			.groupBy(area => area.type)
 			.map((areas, areaType) => {
 				let pluralType = humanize.pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
+
 				let areaTypeHeading = React.createElement('header', {className: 'area-type-heading'},
-					React.createElement('h1', null, humanize.capitalize(pluralType)),
-					React.createElement('button', {
-						className: 'add-area-of-study',
-						title: `Add ${humanize.capitalize(areaType)}`,
-					}))
+					React.createElement('h1', null, humanize.capitalize(pluralType)))
+
+				let areaElements = areas.map((area) => {
+					return React.createElement(AreaOfStudy, {
+						key: area.id,
+						student: this.props.student,
+						area: area,
+					})
+				}).toJS()
+
+				areaElements.push(React.createElement('button',
+					{key: 'add-button', className: 'add-area-of-study'},
+					`Add ${humanize.capitalize(areaType)}`))
 
 				return React.createElement('section',
 					{id: pluralType, key: areaType},
 					areaTypeHeading,
-					areas.map((area) => {
-						return React.createElement(AreaOfStudy, {
-							key: area.id,
-							student: this.props.student,
-							area: area,
-						})
-					}).toJS())
+					areaElements)
 			}).toJS()
 
 		let studentButtons = React.createElement('menu', {className: 'student-buttons'},
