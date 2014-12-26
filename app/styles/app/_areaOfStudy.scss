@@ -1,6 +1,8 @@
 .area-of-study {
 	@include block-small;
 
+	overflow: hidden;
+
 	h1 {
 		padding: $block-edge-padding;
 		padding-left: $block-edge-padding * 1.5;
@@ -25,9 +27,6 @@
 
 		position: absolute;
 		top: 0;
-
-		border-top-left-radius: 3px;
-		border-top-right-radius: 3px;
 
 		width: 100%;
 		height: 2px;
