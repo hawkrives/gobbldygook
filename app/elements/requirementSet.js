@@ -18,7 +18,8 @@ let RequirementSet = React.createClass({
 	},
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({descriptionHTML: marked(nextProps.description)})
+		if (nextProps.description)
+			this.setState({descriptionHTML: marked(nextProps.description)})
 	},
 
 	componentWillMount() {
@@ -34,7 +35,7 @@ let RequirementSet = React.createClass({
 		}, this.props.title)
 
 		let description = null;
-		if (this.state.showDescription && this.props.description)
+		if (this.state.showDescription && this.state.descriptionHTML)
 			description = React.createElement('div', {className: 'description', dangerouslySetInnerHTML: {__html: this.state.descriptionHTML}})
 
 		let titlebar = React.createElement('header', {onClick: this.toggleDescription}, title, description)
