@@ -55,9 +55,13 @@
 		right: 12px;
 		z-index: 1;
 		font-size: 2em;
+
+		transition: 0.05s;
 	}
 
 	&.open > .summary::after {
 		@include ionicon($ionicon-var-ios7-more-outline);
+
+		transform: rotate(90deg) scale(0.8);
 	}
 }
