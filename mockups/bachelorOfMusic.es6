@@ -159,22 +159,15 @@ function dedicatedMusicMajor(studies, courses) {
 }
 
 function checkBachelorOfMusicDegree(student) {
-	return Promise.all([
-		student.courses,
-		student.fabrications,
-		student.studies.data,
-		student.creditsNeeded,
-		student.graduation,
-		student.matriculation,
-	]).then((studentPieces) => {
-		let [
+	return student.data().then((studentPieces) => {
+		let {
 			courses,
 			fabrications,
 			studies,
 			creditsNeeded,
 			graduation,
 			matriculation,
-		] = studentPieces
+		} = studentPieces
 
 		courses = _.filter(courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
 

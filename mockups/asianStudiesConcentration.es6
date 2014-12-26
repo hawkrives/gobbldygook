@@ -59,10 +59,8 @@ function electives(courses) {
 }
 
 function checkAsianStudiesConcentration(student) {
-	return Promise.all([
-		student.courses
-	]).then((studentPieces) => {
-		let [courses] = studentPieces
+	return student.data().then((studentPieces) => {
+		let {courses} = studentPieces
 
 		var asianStudiesConcentrationRequirements = [
 			electives(courses),

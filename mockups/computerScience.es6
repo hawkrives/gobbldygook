@@ -163,10 +163,8 @@ function capstoneCourse(courses) {
 }
 
 function checkComputerScienceMajor(student) {
-	return Promise.all([
-		student.courses
-	]).then((studentPieces) => {
-		let [courses] = studentPieces
+	return student.data().then((studentPieces) => {
+		let {courses} = studentPieces
 
 		var computerScienceMajorRequirements = [
 			foundationCourses(courses),
