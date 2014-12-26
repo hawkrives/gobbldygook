@@ -63,7 +63,7 @@ function foundationCourses(courses) {
 
 	return {
 		title: 'Foundation',
-		description: 'one of Computer Science 121 or 125; Computer Science 241, 251, and 252; one of Computer Science 231 or Math 232 or Math 252.',
+		description: '- one of Computer Science 121 or 125;\n- Computer Science 241, 251, and 252;\n- one of Computer Science 231 or Math 232 or Math 252.',
 		result: _.all(requirements, 'result'),
 		type: 'array/boolean',
 		details: requirements,
@@ -120,7 +120,7 @@ function coreCourses(courses) {
 	return {
 		title: 'Core',
 		type: 'array/boolean',
-		description: 'Computer Science 253; Computer Science 263; either Computer Science 276 or 333; and either Computer Science 273, 284, or 300 with parallel and distributed computing.',
+		description: '- Computer Science 253;\n- Computer Science 263;\n- either Computer Science 276 or 333;\n- and either Computer Science 273, 284, or 300 with parallel and distributed computing.',
 		result: _.all(requirements, 'result'),
 		details: requirements,
 	}
@@ -157,7 +157,7 @@ function capstoneCourse(courses) {
 	return {
 		title: 'Capstone',
 		type: 'boolean',
-		description: 'Capstone',
+		description: 'The Computer Science Capstone Course',
 		result: hasTakenCapstone
 	}
 }
