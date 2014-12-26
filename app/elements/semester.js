@@ -30,14 +30,6 @@ let Semester = React.createClass({
 		})
 	},
 
-	getInitialState() {
-		return {
-			courses: Immutable.List(),
-			schedule: null,
-			validation: {},
-		}
-	},
-
 	componentWillMount() {
 		this.componentWillReceiveProps(this.props)
 	},
@@ -56,17 +48,12 @@ let Semester = React.createClass({
 		})
 	},
 
-	// shouldComponentUpdate(nextProps, nextState) {
-		// return nextState.schedule !== this.state.schedule
-	// },
-
-	removeSemester() {
-		let currentTermSchedules = this.props.student.schedules.filter((s) =>
-			s.year === this.props.year && s.semester === this.props.semester)
-
-		let scheduleIds = currentTermSchedules.map(s => s.id)
-
-		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
+	getInitialState() {
+		return {
+			courses: Immutable.List(),
+			schedule: null,
+			validation: {},
+		}
 	},
 
 	render() {
@@ -160,6 +147,15 @@ let Semester = React.createClass({
 					onClick: this.removeSemester,
 				})),
 			courseList);
+	},
+
+	removeSemester() {
+		let currentTermSchedules = this.props.student.schedules.filter((s) =>
+			s.year === this.props.year && s.semester === this.props.semester)
+
+		let scheduleIds = currentTermSchedules.map(s => s.id)
+
+		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},
 })
 
