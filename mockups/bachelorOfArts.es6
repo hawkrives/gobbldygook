@@ -116,22 +116,15 @@ function beyondTheMajor(studies, courses) {
 }
 
 function checkBachelorOfArtsDegree(student) {
-	return Promise.all([
-		student.courses,
-		student.fabrications.toArray(),
-		student.studies.toArray(),
-		student.creditsNeeded,
-		student.graduation,
-		student.matriculation,
-	]).then((studentPieces) => {
-		let [
+	return student.data().then((studentPieces) => {
+		let {
 			courses,
 			fabrications,
 			studies,
 			creditsNeeded,
 			graduation,
 			matriculation,
-		] = studentPieces
+		} = studentPieces
 
 		courses = _.filter(courses, utilities.onlyQuarterCreditCoursesCanBePassFail)
 

@@ -149,10 +149,8 @@ function language(courses) {
 }
 
 function checkAsianStudiesMajor(student) {
-	return Promise.all([
-		student.courses
-	]).then((studentPieces) => {
-		let [courses] = studentPieces
+	return student.data().then((studentPieces) => {
+		let {courses} = studentPieces
 
 		let asianStudiesMajorRequirements = [
 			interdisciplinaryApproachesToAsia(courses),
