@@ -37,7 +37,7 @@ let noResult = (type, title, id) => {
 				title: `${type} not found!`,
 				description: `This ${type} could not be found.`,
 			}],
-		}
+		},
 	}
 }
 
