@@ -1,12 +1,8 @@
 #student-summary {
 	@include block-small;
 	padding: $block-edge-padding $block-edge-padding*2 $block-edge-padding*2;
-}
 
-#student-summary {
-	-webkit-hyphens: auto;
 	hyphens: auto;
-
 	font-feature-settings: 'onum';
 
 	p {
@@ -22,6 +18,10 @@
 
 	p + p {
 		clear: left;
+	}
+
+	p:last-child {
+		margin-bottom: 0;
 	}
 }
 

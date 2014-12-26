@@ -117,10 +117,6 @@
 @mixin block-small {
 	@include block;
 	margin-bottom: $block-edge-padding * 2;
-
-	p:last-child {
-		margin-bottom: 0;
-	}
 }
 
 @mixin block-flat {
