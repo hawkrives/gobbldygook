@@ -120,7 +120,7 @@ function coreCourses(courses) {
 	return {
 		title: 'Core',
 		type: 'array/boolean',
-		description: '- Computer Science 253;\n- Computer Science 263;\n- either Computer Science 276 or 333;\n- and either Computer Science 273, 284, or 300 with parallel and distributed computing.',
+		description: '- **Algorithms:** Computer Science 253 *(Algorithms and Data Structures)*;\n- **Ethics:** Computer Science 263 *(Ethical Issues in Software Design)*;\n- **Theory:** either Computer Science 276 *(Programming Languages)* or 333 *(Theory of Computation)*;\n- **Options:** and either Computer Science 273 *(Operating Systems)*, 284 *(Mobile Computing Applications)*, or 300 *(Topics)* with parallel and distributed computing.',
 		result: _.all(requirements, 'result'),
 		details: requirements,
 	}
