@@ -57,7 +57,7 @@ function checkStudentAgainstArea(student, area) {
 		.then((studentResults) => {
 			let listOfResults = findResults(studentResults.details)
 
-			let currentProgress = Immutable.List.of(listOfResults).filterNot(isUndefined).filter(isTrue).size
+			let currentProgress = Immutable.List(listOfResults).filterNot(isUndefined).filter(isTrue).size
 			let maxProgress = listOfResults.length
 			let progressName = findWordForProgress(maxProgress, currentProgress)
 
