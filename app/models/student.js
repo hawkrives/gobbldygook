@@ -1,5 +1,6 @@
 import * as Promise from 'bluebird'
 import * as Immutable from 'immutable'
+import * as _ from 'lodash'
 
 import uuid from 'helpers/uuid'
 import randomChar from 'helpers/randomChar'
@@ -177,7 +178,7 @@ class Student extends StudentRecord {
 	get courses() {
 		let allCourses = this.activeSchedules.map((schedule) => schedule.courses).toArray()
 		let scheduleCoursePromises = Promise.all(allCourses)
-		return scheduleCoursePromises.then((results) => Immutable.Seq(results).flatten(true).toArray())
+		return scheduleCoursePromises.then((results) => _.flatten(results))
 	}
 
 	get creditCount() {
