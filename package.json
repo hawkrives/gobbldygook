@@ -26,6 +26,7 @@
     "humanize-plus": "^1.5.0",
     "immutable": "^3.4.1",
     "lodash": "^2.4.1",
+    "marked": "0.3.2",
     "react": "^0.12.2",
     "react-dnd": "^0.6.2",
     "react-router": "^0.11.6",
