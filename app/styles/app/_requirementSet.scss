@@ -27,6 +27,9 @@ $border-color: rgba(50, 50, 50, 0.25);
 		margin-bottom: 0.25em;
 		// white-space: pre-line;
 	}
+	.description strong {
+		font-weight: 500;
+	}
 	.description > ul, .description > ol {
 		padding-left: 0;
 		margin-left: 1.5em;
