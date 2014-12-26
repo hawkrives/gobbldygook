@@ -1,15 +1,17 @@
 $border-color: rgba(50, 50, 50, 0.25);
 .requirement-set {
 	header {
-		border-top: 1px solid $border-color;
-		border-bottom: 1px solid $border-color;
+		// border-bottom: 1px solid $border-color;
 
 		margin: 0;
 		padding-top: 2px;
 		padding-left: 1em;
 		padding-right: 1em;
+		padding-top: 4px;
+		padding-bottom: 4px;
 
 		background-color: rgb(245, 245, 245);
+		border-radius: 3px;
 
 		font-size: 0.85em;
 		font-family: $heading-font-stack;
@@ -25,7 +27,6 @@ $border-color: rgba(50, 50, 50, 0.25);
 	.description > * {
 		margin-top: 0.25em;
 		margin-bottom: 0.25em;
-		// white-space: pre-line;
 	}
 	.description strong {
 		font-weight: 500;
@@ -35,24 +36,37 @@ $border-color: rgba(50, 50, 50, 0.25);
 		margin-left: 1.5em;
 	}
 
+	border: 1px solid $border-color;
+	border-radius: 3px;
+	margin-left: 0.35em;
+	margin-right: 0.35em;
 	margin-bottom: 0.35em;
 }
 
-.requirement-set .requirement-set:nth-child(2) {
-	margin-top: 2px;
+.requirement-set .requirement-set {
+	margin-top: 0.35em;
+	border: 0;
 }
 
-.requirement-set .requirement-set > h2 {
-	border-top: 0;
-	background-color: white;
-
-	padding-top: 4px;
+.requirement-set .requirement-set header {
+	// border-top: 0;
+	// background-color: white;
 }
 
 .requirement {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+
+	// &.incomplete {
+	// 	background-color: $red;
+	// 	color: white;
+	// }
+	// &.completed {
+	// 	background-color: darken($green, 10%);
+	// 	color: white;
+	// }
+	// border-radius: 3px;
 
 	&::before {
 		margin-right: 0.5em;

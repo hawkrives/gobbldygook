@@ -111,8 +111,9 @@
 	transition: border 0.5s ease-in-out;
 
 	background: #fff;
-	border: 1px solid;
-	border-color: $border-colors;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+	// border: 1px solid;
+	// border-color: $border-colors;
 }
 
 @mixin block-small {
@@ -126,7 +127,8 @@
 
 	&:hover, &:focus, &:active {
 		background: #fff;
-		border-color: $border-colors;
+		// border-color: $border-colors;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
 		border-radius: 3px;
 	}
 }
