@@ -2,6 +2,19 @@ import * as _ from 'lodash'
 import * as React from 'react/addons'
 let cx = React.addons.classSet
 
+let Requirement = React.createClass({
+	getDefaultProps() {
+		return {
+			el: 'span'
+		}
+	},
+	render() {
+		React.createElement(this.props.el,
+		{}
+		)
+	},
+})
+
 let BooleanRequirement = React.createClass({
 	propTypes: {
 		result: React.PropTypes.bool.isRequired,
@@ -19,7 +32,7 @@ let BooleanRequirement = React.createClass({
 				},
 				this.props.result ? 'Completed' : 'Incomplete')
 		)
-	}
+	},
 })
 
 let SomeArrayRequirement = React.createClass({
@@ -37,7 +50,7 @@ let SomeArrayRequirement = React.createClass({
 				result: React.PropTypes.bool.isRequired,
 				abbr: React.PropTypes.string,
 			})).isRequired,
-		})
+		}),
 	},
 	render() {
 		return React.createElement('div',
