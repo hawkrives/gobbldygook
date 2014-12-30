@@ -9,7 +9,9 @@
 .tmp
 
 # Node stuff
-node_modules
+node_modules/*
+!node_modules/app
+!node_modules/sto-areas
 
 # The build results
 dist
