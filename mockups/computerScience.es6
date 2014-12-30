@@ -102,6 +102,7 @@ function coreCourses(courses) {
 		{
 			title: 'Algorithms',
 			result: algorithms,
+			description: '**Algorithms:** Computer Science 253 *(Algorithms and Data Structures)*',
 		},
 		{
 			title: 'Ethics',
