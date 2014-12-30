@@ -2,7 +2,7 @@
   "name": "gobbldygook",
   "version": "3.0.0alpha8",
   "description": "A course scheduling app for St. Olaf College",
-  "main": "dist/index.js",
+  "main": "dist/app.js",
   "browser": "dist/index.html",
   "private": true,
   "scripts": {
