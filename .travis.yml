@@ -1,5 +1,8 @@
 # NOTE: This file must use spaces. Travis won't read it otherwise.
 
+# Opt-in to the new Travis infrastructure
+sudo: false
+
 language: node_js
 
 node_js:
