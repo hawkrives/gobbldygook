@@ -71,23 +71,20 @@ var SearchButton = React.createClass({
 		})
 	},
 	render() {
-		return React.createElement('div', null,
-			React.createElement('button', {className: 'search-button', onClick: this.toggleSidebar}),
-			this.state.open ? React.createElement('div', {className: 'search-sidebar'},
-				React.createElement('header', {className: 'sidebar-heading'},
-					React.createElement('h1', null, 'Search for Courses'),
-					React.createElement('button', {className: 'close-sidebar', onClick: this.closeSidebar, title: 'Close Sidebar'})),
-				React.createElement('input', {
-					type: 'search',
-					placeholder: 'Search Course Titles',
-					defaultValue: this.state.query,
-					onChange: this.onChange,
-					onKeyDown: this.onKeyDown,
-					className: 'search-box',
-					autoFocus: true,
-				}),
-				React.createElement('ul', {className: 'course-list'}, this.state.courseObjects)
-			) : null
+		return React.createElement('div', {className: 'search-sidebar'},
+			React.createElement('header', {className: 'sidebar-heading'},
+				React.createElement('h1', null, 'Search for Courses'),
+				React.createElement('button', {className: 'close-sidebar', onClick: this.closeSidebar, title: 'Close Sidebar'})),
+			React.createElement('input', {
+				type: 'search',
+				placeholder: 'Search Courses',
+				defaultValue: this.state.query,
+				onChange: this.onChange,
+				onKeyDown: this.onKeyDown,
+				className: 'search-box',
+				autoFocus: true,
+			}),
+			React.createElement('ul', {className: 'course-list'}, this.state.courseObjects)
 		)
 	},
 })
