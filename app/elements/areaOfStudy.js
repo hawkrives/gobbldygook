@@ -44,7 +44,7 @@ let AreaOfStudy = React.createClass({
 			delete query.sections
 		}
 
-		this.transitionTo('student', {id: this.getParams().id}, query)
+		this.transitionTo('student', this.getParams(), query)
 	},
 
 	componentWillReceiveProps(nextProps) {
