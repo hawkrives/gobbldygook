@@ -6,8 +6,15 @@
   "browser": "dist/index.html",
   "private": true,
   "scripts": {
+    "build": "gulp build",
+    "cloc": "cloc . --exclude-dir=data,node_modules,dist,test,playground,gulp --by-file-by-lang",
+    "clean": "rm -rf dist/",
+    "check": "npm outdated --depth 0",
+    "shrink": "npm dedupe && dmn clean -list",
     "test": "mocha",
-    "start": "gulp watch"
+    "start": "gulp watch",
+    "watch": "gulp watch",
+    "serve": "gulp watch",
   },
   "repository": {
     "type": "git",
