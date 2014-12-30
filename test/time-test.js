@@ -2,7 +2,7 @@
 var should = require('should');
 
 describe('time', function() {
-	var time = require('../app/helpers/time.es6');
+	var time = require('../app/helpers/time');
 
 	it('turns the day abbreviations into a list of unambiguous days', function() {
 		var findDays = time.findDays;

@@ -3,7 +3,7 @@ var should = require('should');
 
 describe('findFirstAvailableYear', function() {
 	it('takes a list of schedules and finds the first open year', function() {
-		var findFirstAvailableYear = require('../app/helpers/findFirstAvailableYear.es6').default;
+		var findFirstAvailableYear = require('../app/helpers/findFirstAvailableYear');
 		var schedules = [
 			{"id": 3, "year": 2012},
 			{"id": 6, "year": 2013},

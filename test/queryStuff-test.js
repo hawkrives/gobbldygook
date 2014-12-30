@@ -3,7 +3,7 @@ var should = require('should');
 
 describe('buildQueryFromString', function() {
 	it('interprets a query string into a query object', function() {
-		var buildQueryFromString = require('../app/helpers/queryStuff.es6').default;
+		var buildQueryFromString = require('../app/helpers/queryStuff');
 
 		var queryStrings = [
 			'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014',

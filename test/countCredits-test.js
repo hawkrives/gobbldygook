@@ -3,7 +3,7 @@ var should = require('should');
 
 describe('countCredits', function() {
 	it('counts the number of credits in a list of courses', function() {
-		var countCredits = require('../app/helpers/countCredits.es6').default;
+		var countCredits = require('../app/helpers/countCredits');
 		var courses = [
 			{credits: 1},
 			{credits: 0.25},

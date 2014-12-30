@@ -3,7 +3,7 @@ var should = require('should');
 
 describe('calculateNextScheduleId', function() {
 	it('calculates the next available schedule id', function() {
-		var calculateNextScheduleId = require('../app/helpers/calculateNextScheduleId.es6').default;
+		var calculateNextScheduleId = require('../app/helpers/calculateNextScheduleId');
 		var schedules = {
 			"1": {"id": 1},
 			"2": {"id": 2},

@@ -3,7 +3,7 @@ var assert = require('assert');
 
 describe('semesterName', function() {
 	it('converts a semester number to a semester name', function() {
-		var semesterName = require('../app/helpers/semesterName.es6').default;
+		var semesterName = require('../app/helpers/semesterName');
 
 		assert.equal(semesterName(0), 'Unknown (0)');
 		assert.equal(semesterName(1), 'Fall');
@@ -16,7 +16,7 @@ describe('semesterName', function() {
 
 describe('toPrettyTerm', function() {
 	it('converts a term id to a year and semester', function() {
-		var toPrettyTerm = require('../app/helpers/semesterName.es6').toPrettyTerm;
+		var toPrettyTerm = require('../app/helpers/semesterName').toPrettyTerm;
 
 		assert.equal(toPrettyTerm(20141), 'Fall 2014—2015');
 		assert.equal(toPrettyTerm(20103), 'Spring 2010—2011');
@@ -29,7 +29,7 @@ describe('toPrettyTerm', function() {
 
 describe('expandYear', function() {
 	it('expands a year to year-(year+1)', function() {
-		var expandYear = require('../app/helpers/semesterName.es6').expandYear;
+		var expandYear = require('../app/helpers/semesterName').expandYear;
 
 		assert.equal(expandYear(2014), '2014—2015');
 		assert.equal(expandYear(2010), '2010—2011');

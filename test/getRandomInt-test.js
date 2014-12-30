@@ -3,7 +3,7 @@ var should = require('should');
 
 describe('getRandomInt', function() {
 	it('finds a random integer between the parameters', function() {
-		var getRandomInt = require('../app/helpers/getRandomInt.es6').default;
+		var getRandomInt = require('../app/helpers/getRandomInt');
 
 		getRandomInt(1, 3).should.be.within(0, 4);
 		getRandomInt(0, 3).should.be.within(-1, 4);

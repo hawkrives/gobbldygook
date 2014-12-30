@@ -2,7 +2,7 @@
 var should = require('should');
 
 describe('deptNum', function() {
-	var deptNum = require('../app/helpers/deptNum.es6')
+	var deptNum = require('../app/helpers/deptNum')
 
 	it('splits a deptnum into components', function() {
 		var splitDeptNum = deptNum.splitDeptNum;

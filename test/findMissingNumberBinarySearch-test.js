@@ -3,7 +3,7 @@ var should = require('should');
 
 describe('findMissingNumberBinarySearch', function() {
 	it('takes a list of numbers and finds the first gap', function() {
-		var findMissingNumberBinarySearch = require('../app/helpers/findMissingNumberBinarySearch.es6').default;
+		var findMissingNumberBinarySearch = require('../app/helpers/findMissingNumberBinarySearch');
 		var nums = [
 			[1,2,3],
 			[0,1,2],

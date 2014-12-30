@@ -2,7 +2,7 @@
 var should = require('should');
 
 describe('courseLevels', function() {
-	var courseLevels = require('../app/helpers/courseLevels.es6');
+	var courseLevels = require('../app/helpers/courseLevels');
 	var courses = [];
 
 	beforeEach(function() {

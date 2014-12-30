@@ -3,7 +3,7 @@ var should = require('should');
 
 describe('hasDepartment', function() {
 	it('checks if a course is in a department', function() {
-		var hasDepartment = require('../app/helpers/hasDepartment.es6').default;
+		var hasDepartment = require('../app/helpers/hasDepartment');
 		var courses = [
 			{depts: ['ASIAN', 'REL'], num: 230},
 			{depts: ['BIO', 'CHEM'], num: 125},

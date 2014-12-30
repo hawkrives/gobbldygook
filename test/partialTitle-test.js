@@ -4,7 +4,7 @@ var should = require('should');
 describe('partialTitle', function() {
 	var courses = [];
 	var _ = require('lodash');
-	var partial = require('../app/helpers/partialTitle.es6');
+	var partial = require('../app/helpers/partialTitle');
 
 	beforeEach(function() {
 		courses = [
