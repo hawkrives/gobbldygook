@@ -12,7 +12,7 @@ React.initializeTouchEvents(true)
 
 import * as _ from 'lodash'
 
-import './helpers/db'
+import 'app/helpers/db'
 
 import * as Immutable from 'immutable'
 window.imm = Immutable
@@ -28,14 +28,14 @@ window.React = React
 // Handy debugging function
 window.log = (...args) => console.log(...args)
 
-import loadData from './helpers/loadData'
+import loadData from 'app/helpers/loadData'
 loadData()
 
-import Gobbldygook from './elements/app'
-import StudentList from './elements/studentList'
-import Student from './elements/student'
-import CourseTable from './elements/courseTable'
-import SemesterDetail from './elements/semesterDetail'
+import Gobbldygook from 'app/elements/app'
+import StudentList from 'app/elements/studentList'
+import Student from 'app/elements/student'
+import CourseTable from 'app/elements/courseTable'
+import SemesterDetail from 'app/elements/semesterDetail'
 
 let Route = React.createFactory(Router.Route)
 let DefaultRoute = React.createFactory(Router.DefaultRoute)

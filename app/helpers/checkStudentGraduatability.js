@@ -2,25 +2,26 @@ import * as Promise from 'bluebird'
 import * as Immutable from 'immutable'
 import {isUndefined} from 'lodash'
 
-import findResults from '../helpers/findResults'
-import findWordForProgress from '../helpers/findWordForProgress'
+import findResults from 'app/helpers/findResults'
+import findWordForProgress from 'app/helpers/findWordForProgress'
+import * as stoAreas from 'sto-areas'
 
 let areas = Immutable.Map({
 	// Degrees
-	'd-ba': require('../../mockups/bachelorOfArts.es6').default,
-	// 'd-bm': require('../../mockups/bachelorOfMusic.es6').default,
+	'd-ba': stoAreas.degree.bachelorOfArts,
+	// 'd-bm': stoAreas.degree.bachelorOfMusic,
 
 	// Majors
-	'm-csci':  require('../../mockups/computerScience.es6').default,
-	'm-asian': require('../../mockups/asianStudies.es6').default,
-	'm-chem':  require('../../mockups/chemistry.es6').default,
-	'm-phys':  require('../../mockups/physics.es6').default,
+	'm-csci':  stoAreas.major.computerScience,
+	'm-asian': stoAreas.major.asianStudies,
+	'm-chem':  stoAreas.major.chemistry,
+	'm-phys':  stoAreas.major.physics,
 
 	// Concentrations
-	'c-asian': require('../../mockups/asianStudiesConcentration.es6').default,
-	'c-stat':  require('../../mockups/statisticsConcentration.es6').default,
-	'c-chin':  require('../../mockups/chineseStudiesConcentration.es6').default,
-	'c-japan': require('../../mockups/japaneseStudiesConcentration.es6').default,
+	'c-asian': stoAreas.concentration.asianStudies,
+	'c-stat':  stoAreas.concentration.statistics,
+	'c-chin':  stoAreas.concentration.chineseStudies,
+	'c-japan': stoAreas.concentration.japaneseStudies,
 
 	// Emphases
 })

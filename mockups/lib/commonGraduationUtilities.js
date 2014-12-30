@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 
-import countCredits from 'helpers/countCredits'
-import hasDepartment from 'helpers/hasDepartment'
+import countCredits from 'app/helpers/countCredits'
+import hasDepartment from 'app/helpers/hasDepartment'
 
 function onlyFullCreditCourses(course) {
 	return course.credits >= 1.0

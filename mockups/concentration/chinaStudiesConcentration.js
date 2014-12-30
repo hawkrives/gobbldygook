@@ -1,17 +1,17 @@
 import * as _ from 'lodash'
 
-import hasDepartment from 'helpers/hasDepartment'
-import {partialNameOrTitle} from 'helpers/partialTitle'
-import {coursesAboveNumber} from 'helpers/courseLevels'
-import {checkCoursesFor} from 'helpers/courses'
+import hasDepartment from 'app/helpers/hasDepartment'
+import {partialNameOrTitle} from 'app/helpers/partialTitle'
+import {coursesAboveNumber} from 'app/helpers/courseLevels'
+import {checkCoursesFor} from 'app/helpers/courses'
 
-import {isRequiredCourse} from './commonMajorUtilities.es6'
+import {isRequiredCourse} from 'sto-areas/lib/commonMajorUtilities'
 
 const chineseStudiesRequiredCourses = [
 	{deptnum: 'ASIAN 275'}, {deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
 ]
 
-let isRequiredChineseStudiesCourse = isRequiredCourse(chineseStudiesRequiredCourses)
+let isRequiredChinaStudiesCourse = isRequiredCourse(chineseStudiesRequiredCourses)
 
 function lowerLevelLanguageCourses(course) {
 	return _.all([
@@ -55,7 +55,7 @@ function electives(courses) {
 		]))
 		.value()
 
-	let chineseElectives = _.chain(courses)
+	let chinaElectives = _.chain(courses)
 		// Only things in the Asian Studies or Chinese departments...
 		.filter(hasDepartment(['ASIAN', 'CHIN']))
 		// that have the stems Chinese or China in their names...
@@ -63,12 +63,12 @@ function electives(courses) {
 		// ignoring the language courses under 300 level...
 		.reject(lowerLevelLanguageCourses)
 		// and rejecting the required chinese studies courses,
-		.reject(isRequiredChineseStudiesCourse)
+		.reject(isRequiredChinaStudiesCourse)
 		// then adding in AsianCon.
 		.concat(asianCon)
 		.value()
 
-	let matching = _.size(chineseElectives)
+	let matching = _.size(chinaElectives)
 	let needs = 2
 
 	return {
@@ -79,25 +79,25 @@ function electives(courses) {
 		details: {
 			has: matching,
 			needs: needs,
-			matches: chineseElectives
+			matches: chinaElectives
 		}
 	}
 }
 
-function checkChineseStudiesConcentration(student) {
+function checkChinaStudiesConcentration(student) {
 	return student.data().then((studentPieces) => {
 		let {courses} = studentPieces
 
-		let chineseStudiesConcentrationRequirements = [
+		let chinaStudiesConcentrationRequirements = [
 			language(courses),
 			electives(courses),
 		]
 
 		return {
-			result: _.all(chineseStudiesConcentrationRequirements, 'result'),
-			details: chineseStudiesConcentrationRequirements
+			result: _.all(chinaStudiesConcentrationRequirements, 'result'),
+			details: chinaStudiesConcentrationRequirements
 		}
 	})
 }
 
-export default checkChineseStudiesConcentration
+export default checkChinaStudiesConcentration

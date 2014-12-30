@@ -1,8 +1,8 @@
 import * as _ from 'lodash'
 
-import hasDepartment from 'helpers/hasDepartment'
-import {partialNameOrTitle} from 'helpers/partialTitle'
-import {checkCoursesFor} from 'helpers/courses'
+import hasDepartment from 'app/helpers/hasDepartment'
+import {partialNameOrTitle} from 'app/helpers/partialTitle'
+import {checkCoursesFor} from 'app/helpers/courses'
 
 function foundationCourses(courses) {
 	/* Foundation courses:

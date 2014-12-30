@@ -1,7 +1,7 @@
 import * as Reflux from 'reflux'
 import * as Immutable from 'immutable'
-import studentActions from '../flux/studentActions'
-import Student from '../models/student'
+import studentActions from 'app/flux/studentActions'
+import Student from 'app/models/student'
 
 let studentStore = Reflux.createStore({
 	listenables: studentActions,

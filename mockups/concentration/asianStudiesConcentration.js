@@ -5,7 +5,7 @@ import {partialNameOrTitle} from 'app/helpers/partialTitle'
 import {coursesAtLevel, coursesAtOrAboveLevel} from 'app/helpers/courseLevels'
 import {checkCoursesFor} from 'app/helpers/courses'
 
-import {isRequiredCourse} from 'sto-areas/commonMajorUtilities.es6'
+import {isRequiredCourse} from 'sto-areas/lib/commonMajorUtilities'
 
 const asianDeptRequiredCourses = [
 	{deptnum: 'ASIAN 275'}, {deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},

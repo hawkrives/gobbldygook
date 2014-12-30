@@ -1,9 +1,9 @@
 import * as _ from 'lodash'
 import * as React from 'react'
 
-import studentActions from '../flux/studentActions'
-import findFirstAvailableYear from '../helpers/findFirstAvailableYear'
-import Year from '../elements/year'
+import studentActions from 'app/flux/studentActions'
+import findFirstAvailableYear from 'app/helpers/findFirstAvailableYear'
+import Year from 'app/elements/year'
 
 let CourseTable = React.createClass({
 	addYear() {

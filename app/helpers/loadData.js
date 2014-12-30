@@ -1,11 +1,11 @@
 import * as _ from 'lodash'
 import * as Promise from 'bluebird'
 
-import {status, json} from '../helpers/fetch'
-import db from '../helpers/db'
-import {buildDeptNum, buildDept} from '../helpers/deptNum'
-import {discoverRecentYears} from '../helpers/recentTime'
-import {convertTimeStringsToOfferings} from '../helpers/time'
+import {status, json} from 'app/helpers/fetch'
+import db from 'app/helpers/db'
+import {buildDeptNum, buildDept} from 'app/helpers/deptNum'
+import {discoverRecentYears} from 'app/helpers/recentTime'
+import {convertTimeStringsToOfferings} from 'app/helpers/time'
 
 let logDataLoading = false
 // let logDataLoading = true

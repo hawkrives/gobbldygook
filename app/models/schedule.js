@@ -2,10 +2,10 @@ import * as Immutable from 'immutable'
 import {isUndefined} from 'lodash'
 import * as Promise from 'bluebird'
 
-import uuid from '../helpers/uuid'
-import randomChar from '../helpers/randomChar'
-import {checkScheduleTimeConflicts} from '../helpers/time'
-import {getCourses} from '../helpers/courses'
+import uuid from 'app/helpers/uuid'
+import randomChar from 'app/helpers/randomChar'
+import {checkScheduleTimeConflicts} from 'app/helpers/time'
+import {getCourses} from 'app/helpers/courses'
 
 let ScheduleRecord = Immutable.Record({
 	id: uuid(),

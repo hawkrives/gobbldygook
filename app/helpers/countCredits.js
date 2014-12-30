@@ -1,5 +1,5 @@
 import {Seq} from 'immutable'
-import add from '../helpers/add'
+import add from 'app/helpers/add'
 
 let countCredits = (courses) => Seq(courses)
 	.filter(c => c)

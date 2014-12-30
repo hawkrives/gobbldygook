@@ -1,11 +1,11 @@
 import * as _ from 'lodash'
 
-import hasDepartment from 'helpers/hasDepartment'
-import {partialNameOrTitle} from 'helpers/partialTitle'
-import {checkCoursesFor} from 'helpers/courses'
-import {coursesAtLevel, coursesAtOrAboveLevel} from 'helpers/courseLevels'
+import hasDepartment from 'app/helpers/hasDepartment'
+import {partialNameOrTitle} from 'app/helpers/partialTitle'
+import {checkCoursesFor} from 'app/helpers/courses'
+import {coursesAtLevel, coursesAtOrAboveLevel} from 'app/helpers/courseLevels'
 
-import {isRequiredCourse} from './commonMajorUtilities.es6'
+import {isRequiredCourse} from 'sto-areas/lib/commonMajorUtilities'
 
 const chemDeptRequiredCourses = [
 	{dept:'CHEM',num:121}, {dept:'CHEM',num:123}, {dept:'CHEM',num:126},

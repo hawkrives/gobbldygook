@@ -1,5 +1,5 @@
 import * as _ from 'lodash'
-import hasDepartment from '../helpers/hasDepartment'
+import hasDepartment from 'app/helpers/hasDepartment'
 
 function splitDeptNum(deptNumString) {
 	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]

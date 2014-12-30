@@ -5,12 +5,12 @@ import * as React from 'react/addons'
 import * as humanize from 'humanize-plus'
 import * as Immutable from 'immutable'
 
-import add from '../helpers/add'
-import countCredits from '../helpers/countCredits'
-import semesterName from '../helpers/semesterName'
-import {Course, MissingCourse, EmptyCourseSlot} from 'elements/course'
-import studentActions from '../flux/studentActions'
-import itemTypes from '../models/itemTypes'
+import add from 'app/helpers/add'
+import countCredits from 'app/helpers/countCredits'
+import semesterName from 'app/helpers/semesterName'
+import {Course, MissingCourse, EmptyCourseSlot} from 'app/elements/course'
+import studentActions from 'app/flux/studentActions'
+import itemTypes from 'app/models/itemTypes'
 
 let cx = React.addons.classSet
 

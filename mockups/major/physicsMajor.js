@@ -1,9 +1,9 @@
 import * as _ from 'lodash'
 
-import hasDepartment from 'helpers/hasDepartment'
-import {checkCoursesFor} from 'helpers/courses'
+import hasDepartment from 'app/helpers/hasDepartment'
+import {checkCoursesFor} from 'app/helpers/courses'
 
-import {isRequiredCourse} from './commonMajorUtilities.es6'
+import {isRequiredCourse} from 'sto-areas/lib/commonMajorUtilities'
 
 const physDeptRequiredCourses = [
 	{deptnum:'PHYS 130'},

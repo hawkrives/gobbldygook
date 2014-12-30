@@ -1,8 +1,8 @@
 import * as _ from 'lodash'
 
-import * as common from './commonGraduationRequirements.es6'
-import * as utilities from './commonGraduationUtilities.es6'
-import * as educ from './commonEducationRequirements.es6'
+import * as common from 'sto-areas/lib/commonGraduationRequirements'
+import * as utilities from 'sto-areas/lib/commonGraduationUtilities'
+import * as educ from 'sto-areas/lib/commonEducationRequirements'
 let isMajoringIn = utilities.isMajoringIn
 
 function artsMajor(studies, courses) {

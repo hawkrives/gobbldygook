@@ -1,12 +1,13 @@
 import * as _ from 'lodash'
 
-import {hasDeptNumBetween} from 'helpers/deptNum'
+import {hasDeptNumBetween} from 'app/helpers/deptNum'
 
 import {
 	hasGenEd,
 	countGeneds,
 	acrossAtLeastTwoDepartments,
-	checkThatNCoursesSpanTwoDepartments} from './commonEducationUtilities.es6'
+	checkThatNCoursesSpanTwoDepartments
+} from 'sto-areas/lib/commonEducationUtilities'
 
 // TODO: Consider returning matches from these functions, in addition to the boolean.
 
