@@ -44,14 +44,14 @@ let DefaultRoute = React.createFactory(Router.DefaultRoute)
 // /s/122932
 // /s/122932?sections=d-ba,m-csci
 // /s/122932?search
-// /s/122932/sem/2014/fall?search=dept:NOT+dept:AMCON+dept:GCON+gened:HBS
+// /s/122932/semester/2014/fall?search=dept:NOT+dept:AMCON+dept:GCON+gened:HBS
 
 let routes = (
 	Route({handler: Gobbldygook, name: 'gobbldygook', path: '/'},
 		DefaultRoute({handler: StudentList}),
-		Route({handler: Student, name: 'student', path: 's/:id/?'},
+		Route({handler: Student, name: 'student', path: 's/:id/'},
 			DefaultRoute({handler: CourseTable}),
-			Route({handler: SemesterDetail, name: 'semester', path: 'sem/:year/:semester/?'}))
+			Route({handler: SemesterDetail, name: 'semester', path: 'semester/:year/:semester/'}))
 	)
 )
 
