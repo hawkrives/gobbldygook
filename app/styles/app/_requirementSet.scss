@@ -1,8 +1,6 @@
-$border-color: rgba(50, 50, 50, 0.25);
+$border-color: rgb(203, 203, 203);
 .requirement-set {
 	header {
-		// border-bottom: 1px solid $border-color;
-
 		margin: 0;
 		padding-top: 2px;
 		padding-left: 1em;
@@ -11,7 +9,6 @@ $border-color: rgba(50, 50, 50, 0.25);
 		padding-bottom: 4px;
 
 		background-color: rgb(245, 245, 245);
-		border-radius: 3px;
 
 		font-size: 0.85em;
 		font-family: $heading-font-stack;
@@ -24,23 +21,13 @@ $border-color: rgba(50, 50, 50, 0.25);
 		text-transform: uppercase;
 	}
 
-	.description > * {
-		margin-top: 0.25em;
-		margin-bottom: 0.25em;
-	}
-	.description strong {
-		font-weight: 500;
-	}
-	.description > ul, .description > ol {
-		padding-left: 0;
-		margin-left: 1.5em;
-	}
-
 	border: 1px solid $border-color;
+	overflow: hidden;
 	border-radius: 3px;
-	margin-left: 0.35em;
-	margin-right: 0.35em;
-	margin-bottom: 0.35em;
+	margin: 0 0.35em 0.35em;
+	// margin-left: 0.35em;
+	// margin-right: 0.35em;
+	// margin-bottom: 0.35em;
 }
 
 .requirement-set .requirement-set {
@@ -49,8 +36,23 @@ $border-color: rgba(50, 50, 50, 0.25);
 }
 
 .requirement-set .requirement-set header {
-	// border-top: 0;
-	// background-color: white;
+	border-radius: 3px;
+}
+
+.requirement-set .description {
+	& > * {
+		margin-top: 0.25em;
+		margin-bottom: 0.25em;
+	}
+
+	strong {
+		font-weight: 500;
+	}
+
+	& > ul, & > ol {
+		padding-left: 0;
+		margin-left: 1.5em;
+	}
 }
 
 .requirement {
@@ -109,7 +111,7 @@ $border-color: rgba(50, 50, 50, 0.25);
 
 .requirement-detail-list {
 	margin: 0;
-	padding: 0;
+	padding: 2px;
 	list-style: none;
 
 	display: flex;
@@ -118,10 +120,12 @@ $border-color: rgba(50, 50, 50, 0.25);
 	justify-content: space-around;
 
 	.match, .requirement {
-		overflow: hidden;
-		text-overflow: ellipsis;
+		// overflow: hidden;
+		// text-overflow: ellipsis;
 
 		padding: 2px 2px;
+		// flex: 1 0 35%;
+		// flex-basis: 35%;
 		min-width: 35%;
 		text-align: center;
 	}
