@@ -1,11 +1,11 @@
 import * as _ from 'lodash'
 
-import hasDepartment from 'helpers/hasDepartment'
-import {partialNameOrTitle} from 'helpers/partialTitle'
-import {coursesAtLevel, coursesAtOrAboveLevel} from 'helpers/courseLevels'
-import {checkCoursesFor} from 'helpers/courses'
+import hasDepartment from 'app/helpers/hasDepartment'
+import {partialNameOrTitle} from 'app/helpers/partialTitle'
+import {coursesAtLevel, coursesAtOrAboveLevel} from 'app/helpers/courseLevels'
+import {checkCoursesFor} from 'app/helpers/courses'
 
-import {isRequiredCourse} from './commonMajorUtilities.es6'
+import {isRequiredCourse} from 'sto-areas/commonMajorUtilities.es6'
 
 const asianDeptRequiredCourses = [
 	{deptnum: 'ASIAN 275'}, {deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
