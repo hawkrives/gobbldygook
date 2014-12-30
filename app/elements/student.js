@@ -23,9 +23,9 @@ var Student = React.createClass({
 		this.componentWillReceiveProps(this.props)
 	},
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextState.student !== this.state.student
-	},
+	// shouldComponentUpdate(nextProps, nextState) {
+		// return nextState.student !== this.state.student
+	// },
 
 	render() {
 		console.info('student render', this.props.students.toJS())
