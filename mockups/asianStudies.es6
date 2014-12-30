@@ -155,8 +155,8 @@ function checkAsianStudiesMajor(student) {
 		let asianStudiesMajorRequirements = [
 			interdisciplinaryApproachesToAsia(courses),
 			electives(courses),
-			seniorSeminar(courses),
 			language(courses),
+			seniorSeminar(courses),
 		]
 
 		return {
