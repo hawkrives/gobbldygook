@@ -64,7 +64,6 @@ module.exports = {
 			entries: src + 'index.js',
 			dest: dest,
 			outputName: 'app.js',
-			paths: [src, './node_modules'],
 			mapFile: dest + 'app.js.map',
 		}],
 	},

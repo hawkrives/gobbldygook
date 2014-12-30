@@ -31,8 +31,6 @@ gulp.task('browserify', function(callback) {
 			extensions: config.extensions,
 			// Enable source maps!
 			debug: config.debug,
-			// Allow requiring of code without relative paths
-			paths: bundleConfig.paths,
 		});
 
 		bundler.transform(to5ify.configure({blacklist: ['generators']}));
