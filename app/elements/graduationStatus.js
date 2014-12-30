@@ -27,6 +27,12 @@ let GraduationStatus = React.createClass({
 		}
 	},
 
+	getDefaultProps: function() {
+		return {
+			sections: []
+		}
+	},
+
 	render() {
 		// console.info('graduation-status render', this.props.student)
 		if (!this.props.student)
@@ -47,6 +53,7 @@ let GraduationStatus = React.createClass({
 						key: area.id,
 						student: this.props.student,
 						area: area,
+						initialExpansion: this.props.sections.indexOf(area.id) >= 0
 					})
 				}).toJS()
 

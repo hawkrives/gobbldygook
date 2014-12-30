@@ -1,24 +1,55 @@
 import * as _ from 'lodash'
+import * as Immutable from 'immutable'
 import * as React from 'react/addons'
+import {State, Navigation} from 'react-router'
 
 import RequirementSet from 'elements/requirementSet'
 
 let cx = React.addons.classSet
 
 let AreaOfStudy = React.createClass({
+	mixins: [State, Navigation],
+
 	toggle() {
-		this.setState({open: !this.state.open});
+		this.setState({expanded: !this.state.expanded})
+
+		let query = this.getQuery()
+		let sections = Immutable.Set(query.sections ? query.sections.split(',') : [])
+
+		if (this.state.expanded) {
+			sections = sections.delete(this.props.area.id)
+		}
+		else {
+			sections = sections.add(this.props.area.id)
+		}
+
+		query.sections = sections.join(',')
+
+		if (!query.sections.length) {
+			delete query.sections
+		}
+
+		this.transitionTo('student', {id: this.getParams().id}, query)
+	},
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.initialExpansion !== undefined)
+			this.setState({expanded: nextProps.initialExpansion})
 	},
 
 	getInitialState() {
-		return { open: false }
+		return { expanded: this.props.initialExpansion }
+	},
+
+	getDefaultProps() {
+		return { initialExpansion: false }
 	},
 
 	render() {
 		// console.log(`render areaOfStudy for ${this.props.area.id}`)
 
 		let requirementSets = null;
-		if (this.state.open)
+		if (this.state.expanded)
 			requirementSets = _.map(this.props.area.details, (reqset) =>
 				React.createElement(RequirementSet, _.extend({key: reqset.title}, reqset)));
 
@@ -33,7 +64,7 @@ let AreaOfStudy = React.createClass({
 
 		let classes = cx({
 			'area-of-study': true,
-			open: this.state.open,
+			open: this.state.expanded,
 		})
 
 		return React.createElement('div',
