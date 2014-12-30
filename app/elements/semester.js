@@ -2,6 +2,7 @@ import {isUndefined, extend} from 'lodash'
 import {DragDropMixin} from 'react-dnd'
 import * as Promise from 'bluebird'
 import * as React from 'react/addons'
+import {Link} from 'react-router'
 import * as humanize from 'humanize-plus'
 import * as Immutable from 'immutable'
 
@@ -146,7 +147,16 @@ let Semester = React.createClass({
 		return React.createElement('div',
 			extend(semesterProps, this.dropTargetFor(itemTypes.COURSE)),
 			React.createElement('header', {className: 'semester-title'},
-				React.createElement('h1', null, semesterName(this.props.semester)),
+				React.createElement('h1', null, React.createElement(Link,
+					{
+						to: 'semester',
+						params: {
+							id: this.props.student.id,
+							year: this.props.year,
+							semester: this.props.semester,
+						},
+					},
+					semesterName(this.props.semester))),
 				infoBar,
 				React.createElement('button', {
 					className: 'remove-semester',
