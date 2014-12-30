@@ -34,17 +34,12 @@
 }
 
 .search-sidebar {
-	width: 280px;
-	position: fixed;
-	top: 0.5rem;
-	left: 0.5rem;
-	bottom: 0.5rem;
+	@include block;
+
+	max-height: 100vh;
+
 	background: white;
 	border-radius: .25em;
-
-	box-shadow: 0 1px 4px #444;
-
-	z-index: $z-sidebar;
 
 	padding: 0.5rem;
 

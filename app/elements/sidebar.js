@@ -12,7 +12,7 @@ let Sidebar = React.createClass({
 			React.createElement(SearchButton, {search: isSearching}) :
 			React.createElement(GraduationStatus, {student: this.props.student, sections: this.getQuery().sections})
 
-		return sidebar
+		return React.createElement('aside', {className: 'sidebar'}, sidebar)
 	},
 })
 

@@ -21,3 +21,8 @@ body {
 	display: block;
 	height: 15em;
 }
+
+.sidebar {
+	flex-basis: 270px;
+	margin-right: $page-edge-padding;
+}
