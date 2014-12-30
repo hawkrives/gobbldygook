@@ -46,7 +46,7 @@ var Year = React.createClass({
 		this.setState({schedules})
 	},
 
-	shouldComponentUpdate: function(nextProps, nextState) {
+	shouldComponentUpdate(nextProps, nextState) {
 		return nextState.schedules !== this.state.schedules
 	},
 
@@ -62,12 +62,14 @@ var Year = React.createClass({
 				}))
 			.toList()
 
+		let niceYear = expandYear(this.props.year)
+
 		return React.createElement('div', {className: 'year'},
 			React.createElement('header', {className: 'year-title'},
-				React.createElement('h1', null, expandYear(this.props.year)),
+				React.createElement('h1', null, niceYear),
 				React.createElement('button', {
 					className: 'remove-year',
-					title: `Remove the year ${this.props.year}`,
+					title: `Remove the year ${niceYear}`,
 					onClick: this.removeYear,
 				})
 			),

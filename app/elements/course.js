@@ -22,7 +22,6 @@ let CourseTitle = React.createClass({
 	render() {
 		let course = this.props.info;
 
-		// /////
 		let titleText = course.title;
 		let type = this.props.info.type;
 		let courseName = course.name || course.title;

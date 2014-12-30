@@ -43,8 +43,8 @@ let DefaultRoute = React.createFactory(Router.DefaultRoute)
 // /
 // /s/122932
 // /s/122932?sections=d-ba,m-csci
-// /s/122932/search
-// /s/122932/sem/2014/fall/search?dept=NOT&dept=AMCON&dept=GCON&gened=HBS
+// /s/122932?search
+// /s/122932/sem/2014/fall?search=dept:NOT+dept:AMCON+dept:GCON+gened:HBS
 
 let routes = (
 	Route({handler: Gobbldygook, name: 'gobbldygook', path: '/'},

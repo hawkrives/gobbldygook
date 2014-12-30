@@ -49,31 +49,30 @@ let RequirementSet = React.createClass({
 		let titlebar = React.createElement('header', {onClick: this.toggleDescription}, title, description)
 
 		let details;
-		let type = this.props.type
 
-		if (type === 'array/requirementSet') {
+		if (this.props.type === 'array/requirementSet') {
 			details = _.map(this.props.details, (requirement, index) => {
 				return React.createElement(RequirementSet, _.merge({key: index}, requirement))
 			})
 		}
 
-		else if (type === 'array/some') {
+		else if (this.props.type === 'array/some') {
 			details = React.createElement(SomeArrayRequirement, {result: this.props.result, details: this.props.details})
 		}
 
-		else if (type === 'array/boolean') {
+		else if (this.props.type === 'array/boolean') {
 			details = React.createElement(BooleanArrayRequirement, {details: this.props.details})
 		}
 
-		else if (type === 'boolean') {
+		else if (this.props.type === 'boolean') {
 			details = React.createElement(BooleanRequirement, {result: this.props.result})
 		}
 
-		else if (type === 'object/number') {
+		else if (this.props.type === 'object/number') {
 			details = React.createElement(NumberObjectRequirement, {result: this.props.result, details: this.props.details})
 		}
 
-		return React.createElement('div', {className: 'requirement-set', 'data-type': type},
+		return React.createElement('div', {className: 'requirement-set', 'data-type': this.props.type},
 			titlebar,
 			details)
 	},
