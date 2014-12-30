@@ -65,7 +65,7 @@ var ExpandedCourse = React.createClass({
 
 		// /////
 
-		let title = React.createElement(CourseTitle, _.extend({}, this.props));
+		let title = React.createElement(CourseTitle, this.props);
 
 		let identifier = React.createElement('span',
 			{className: 'identifier'},
@@ -141,7 +141,7 @@ var CollapsedCourse = React.createClass({
 	render() {
 		let course = this.props.info;
 
-		let title = React.createElement(CourseTitle, _.extend({}, this.props));
+		let title = React.createElement(CourseTitle, this.props);
 
 		let identifier = React.createElement('span',
 			{className: 'identifier'},
@@ -241,8 +241,8 @@ var Course = React.createClass({
 		let isDragging = this.getDragState(itemTypes.COURSE).isDragging;
 
 		let courseInfo = this.state.isOpen ?
-			React.createElement(ExpandedCourse, _.extend({}, this.props)) :
-			React.createElement(CollapsedCourse, _.extend({}, this.props));
+			React.createElement(ExpandedCourse, this.props) :
+			React.createElement(CollapsedCourse, this.props);
 
 		let warnings = this.findWarnings();
 
