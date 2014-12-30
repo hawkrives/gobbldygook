@@ -2,6 +2,10 @@ import * as React from 'react'
 
 var ContentEditable = React.createClass({
 	// from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
+	propTypes: {
+		onChange: React.PropTypes.func,
+		html: React.PropTypes.string,
+	},
 	render() {
 		return React.createElement('span', {
 			onInput: this.emitChange,
@@ -28,4 +32,3 @@ var ContentEditable = React.createClass({
 });
 
 export default ContentEditable
-

@@ -49,6 +49,12 @@ let CourseTitle = React.createClass({
 
 
 var ExpandedCourse = React.createClass({
+	propTypes: {
+		info: React.PropTypes.object,
+		student: React.PropTypes.object,
+		schedule: React.PropTypes.object,
+	},
+
 	removeFromSemester() {
 		studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.info.clbid)
 	},

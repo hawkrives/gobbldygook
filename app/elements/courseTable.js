@@ -6,6 +6,11 @@ import findFirstAvailableYear from 'app/helpers/findFirstAvailableYear'
 import Year from 'app/elements/year'
 
 let CourseTable = React.createClass({
+	propTypes: {
+		student: React.PropTypes.object.isRequired,
+
+	},
+
 	addYear() {
 		let nextAvailableYear = findFirstAvailableYear(this.props.student.schedules, this.props.student.matriculation)
 

@@ -9,6 +9,10 @@ import StudentSummary from 'app/elements/studentSummary'
 import checkStudentGraduatability from 'app/helpers/checkStudentGraduatability'
 
 let GraduationStatus = React.createClass({
+	propTypes: {
+		student: React.PropTypes.object.isRequired,
+	},
+
 	componentWillReceiveProps(nextProps) {
 		let graduatabilityPromise = checkStudentGraduatability(nextProps.student)
 		graduatabilityPromise.then((graduationStatus) => {

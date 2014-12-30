@@ -10,6 +10,21 @@ let cx = React.addons.classSet
 let AreaOfStudy = React.createClass({
 	mixins: [State, Navigation],
 
+	propTypes: {
+		area: React.PropTypes.shape({
+			id: React.PropTypes.string.isRequired,
+			title: React.PropTypes.string.isRequired,
+			result: React.PropTypes.bool.isRequired,
+			progress: React.PropTypes.shape({
+				at: React.PropTypes.number.isRequired,
+				of: React.PropTypes.number.isRequired,
+				word: React.PropTypes.string,
+			}).isRequired,
+			type: React.PropTypes.string,
+			details: React.PropTypes.arrayOf(React.PropTypes.object),
+		})
+	},
+
 	toggle() {
 		this.setState({expanded: !this.state.expanded})
 

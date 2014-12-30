@@ -17,6 +17,12 @@ let cx = React.addons.classSet
 let Semester = React.createClass({
 	mixins: [DragDropMixin],
 
+	propTypes: {
+		student: React.PropTypes.object.isRequired,
+		year: React.PropTypes.number.isRequired,
+		semester: React.PropTypes.number.isRequired,
+	},
+
 	configureDragDrop(registerType) {
 		registerType(itemTypes.COURSE, {
 			dropTarget: {

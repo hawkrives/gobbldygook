@@ -7,6 +7,14 @@ import {
 } from 'app/elements/requirement'
 
 let RequirementSet = React.createClass({
+	propTypes: {
+		description: React.PropTypes.string,
+		result: React.PropTypes.bool.isRequired,
+		title: React.PropTypes.string.isRequired,
+		type: React.PropTypes.string.isRequired,
+		details: React.PropTypes.array,
+	},
+
 	toggleDescription() {
 		this.setState({showDescription: !this.state.showDescription})
 	},
