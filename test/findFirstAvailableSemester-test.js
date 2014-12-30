@@ -1,10 +1,11 @@
 // tests/findFirstAvailableSemester-test.js
 var should = require('should');
+var Immutable = require('immutable');
 
 describe('findFirstAvailableSemester', function() {
 	it('takes a list of schedules and finds the first open semester', function() {
 		var findFirstAvailableSemester = require('../app/helpers/findFirstAvailableSemester');
-		var schedules = [
+		var schedules = Immutable.List([
 			{"id": 14, "year": 2012, "semester": 1},
 			{"id": 1, "year": 2012, "semester": 1},
 			{"id": 2, "year": 2012, "semester": 2},
@@ -21,7 +22,7 @@ describe('findFirstAvailableSemester', function() {
 			{"id": 12, "year": 2015, "semester": 2},
 			{"id": 13, "year": 2015, "semester": 3},
 			{"id": 11, "year": 2015, "semester": 4},
-		];
+		]);
 
 		findFirstAvailableSemester(schedules, 2012).should.equal(4);
 		findFirstAvailableSemester(schedules, 2013).should.equal(3);

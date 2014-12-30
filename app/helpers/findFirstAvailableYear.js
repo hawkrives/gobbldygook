@@ -11,7 +11,7 @@ function findFirstAvailableYear(schedules, matriculation) {
 		return new Date().getFullYear()
 	}
 
-	let years = Immutable.List(schedules)
+	let years = schedules
 		.map(sch => sch.year)
 		.toSet()
 

@@ -7,7 +7,7 @@ import findMissingNumberBinarySearch from 'app/helpers/findMissingNumberBinarySe
 // will return 4. Etc.
 
 function findFirstAvailableSemester(schedules, forYear) {
-	let semesters = Immutable.List(schedules)
+	let semesters = schedules
 		.filter(sch => sch.year === forYear)
 		.map(sch => sch.semester)
 		.toSet()
