@@ -55,7 +55,7 @@ var Year = React.createClass({
 			.sortBy(schedule => schedule.semester)
 			.map((schedule) =>
 				React.createElement(Semester, {
-					key: schedule.semester,
+					key: `${schedule.year}-${schedule.semester}-${schedule.id}`,
 					student: this.props.student,
 					semester: schedule.semester,
 					year: this.props.year,
