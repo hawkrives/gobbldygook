@@ -13,9 +13,8 @@
 	margin-bottom: 0;
 	font-feature-settings: 'smcp';
 
-	h1, h2 {
+	h1 {
 		@include heading-neutral;
-		display: inline-block;
 		padding: 5px 0 3px;
 	}
 }
