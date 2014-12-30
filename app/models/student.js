@@ -2,12 +2,12 @@ import * as Promise from 'bluebird'
 import * as Immutable from 'immutable'
 import * as _ from 'lodash'
 
-import uuid from 'helpers/uuid'
-import randomChar from 'helpers/randomChar'
-import countCredits from 'helpers/countCredits'
+import uuid from '../helpers/uuid'
+import randomChar from '../helpers/randomChar'
+import countCredits from '../helpers/countCredits'
 
-import Schedule from 'models/schedule'
-import Study from 'models/study'
+import Schedule from '../models/schedule'
+import Study from '../models/study'
 
 import * as demoStudent from '../../mockups/demo_student.json'
 

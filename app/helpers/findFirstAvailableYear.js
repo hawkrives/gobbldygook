@@ -1,5 +1,5 @@
 import * as Immutable from 'immutable'
-import findMissingNumberBinarySearch from 'helpers/findMissingNumberBinarySearch'
+import findMissingNumberBinarySearch from '../helpers/findMissingNumberBinarySearch'
 
 // Takes a list of schedules and finds the first open year. If they go [2012,
 // 2013, 2015] findFirstAvailableYear will return 2014. If it goes [2013,

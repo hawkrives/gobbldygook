@@ -2,8 +2,8 @@ import * as _ from 'lodash'
 import * as Promise from 'bluebird'
 import * as Immutable from 'immutable'
 
-import db from 'helpers/db'
-import buildQueryFromString from 'helpers/queryStuff'
+import db from '../helpers/db'
+import buildQueryFromString from '../helpers/queryStuff'
 
 function getCourse(clbid) {
 	// console.log('called getCourse', clbid)

@@ -1,8 +1,9 @@
 import * as Promise from 'bluebird'
 import * as Immutable from 'immutable'
 import {isUndefined} from 'lodash'
-import findResults from 'helpers/findResults'
-import findWordForProgress from 'helpers/findWordForProgress'
+
+import findResults from '../helpers/findResults'
+import findWordForProgress from '../helpers/findWordForProgress'
 
 let areas = Immutable.Map({
 	// Degrees

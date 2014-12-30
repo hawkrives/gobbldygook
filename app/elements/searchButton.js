@@ -1,8 +1,9 @@
 import * as React from 'react'
 import * as _ from 'lodash'
-import {queryCourses} from 'helpers/courses'
-import Course from 'elements/course'
-import {toPrettyTerm} from 'helpers/semesterName'
+
+import {queryCourses} from '../helpers/courses'
+import {toPrettyTerm} from '../helpers/semesterName'
+import Course from '../elements/course'
 
 var SearchButton = React.createClass({
 	getInitialState() {

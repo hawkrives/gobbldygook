@@ -12,7 +12,7 @@ React.initializeTouchEvents(true)
 
 import * as _ from 'lodash'
 
-import 'helpers/db'
+import './helpers/db'
 
 import * as Immutable from 'immutable'
 window.imm = Immutable
@@ -28,14 +28,14 @@ window.React = React
 // Handy debugging function
 window.log = (...args) => console.log(...args)
 
-import loadData from 'helpers/loadData'
+import loadData from './helpers/loadData'
 loadData()
 
-import Gobbldygook from 'elements/app'
-import StudentList from 'elements/studentList'
-import Student from 'elements/student'
-import CourseTable from 'elements/courseTable'
-import SemesterDetail from 'elements/semesterDetail'
+import Gobbldygook from './elements/app'
+import StudentList from './elements/studentList'
+import Student from './elements/student'
+import CourseTable from './elements/courseTable'
+import SemesterDetail from './elements/semesterDetail'
 
 let Route = React.createFactory(Router.Route)
 let DefaultRoute = React.createFactory(Router.DefaultRoute)
@@ -43,8 +43,8 @@ let DefaultRoute = React.createFactory(Router.DefaultRoute)
 // /
 // /s/122932
 // /s/122932?sections=d-ba,m-csci
-// /s/122932/overview?search
-// /s/122932/sem/2014/fall?search=dept: AMCON
+// /s/122932/search
+// /s/122932/sem/2014/fall/search?dept=NOT&dept=AMCON&dept=GCON&gened=HBS
 
 let routes = (
 	Route({handler: Gobbldygook, name: 'gobbldygook', path: '/'},

@@ -1,18 +1,16 @@
-import * as _ from 'lodash'
-import {isUndefined} from 'lodash'
+import {isUndefined, extend} from 'lodash'
+import {DragDropMixin} from 'react-dnd'
 import * as Promise from 'bluebird'
 import * as React from 'react/addons'
 import * as humanize from 'humanize-plus'
 import * as Immutable from 'immutable'
 
-import add from 'helpers/add'
-import countCredits from 'helpers/countCredits'
-import semesterName from 'helpers/semesterName'
+import add from '../helpers/add'
+import countCredits from '../helpers/countCredits'
+import semesterName from '../helpers/semesterName'
 import {Course, MissingCourse, EmptyCourseSlot} from 'elements/course'
-
-import studentActions from 'flux/studentActions'
-import {DragDropMixin} from 'react-dnd'
-import itemTypes from 'models/itemTypes'
+import studentActions from '../flux/studentActions'
+import itemTypes from '../models/itemTypes'
 
 let cx = React.addons.classSet
 
@@ -140,7 +138,7 @@ let Semester = React.createClass({
 		}
 
 		return React.createElement('div',
-			_.extend(semesterProps, this.dropTargetFor(itemTypes.COURSE)),
+			extend(semesterProps, this.dropTargetFor(itemTypes.COURSE)),
 			React.createElement('header', {className: 'semester-title'},
 				React.createElement('h1', null, semesterName(this.props.semester)),
 				infoBar,

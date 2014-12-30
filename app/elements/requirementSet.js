@@ -4,7 +4,7 @@ import * as marked from 'marked'
 
 import {
 	BooleanRequirement, SomeArrayRequirement, BooleanArrayRequirement, NumberObjectRequirement
-} from 'elements/requirement'
+} from '../elements/requirement'
 
 let RequirementSet = React.createClass({
 	toggleDescription() {

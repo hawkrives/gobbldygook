@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {State, RouteHandler} from 'react-router'
 
-import Sidebar from 'elements/sidebar'
+import Sidebar from '../elements/sidebar'
 
 var Student = React.createClass({
 	mixins: [State],

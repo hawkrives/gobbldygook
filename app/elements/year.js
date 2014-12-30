@@ -1,13 +1,13 @@
 import * as React from 'react'
 import * as Immutable from 'immutable'
 
-import Course from 'elements/course'
-import Semester from 'elements/semester'
+import Course from '../elements/course'
+import Semester from '../elements/semester'
 
-import studentActions from 'flux/studentActions'
-import {expandYear} from 'helpers/semesterName'
-import findFirstAvailableSemester from 'helpers/findFirstAvailableSemester'
-import calculateNextScheduleId from 'helpers/calculateNextScheduleId'
+import studentActions from '../flux/studentActions'
+import {expandYear} from '../helpers/semesterName'
+import findFirstAvailableSemester from '../helpers/findFirstAvailableSemester'
+import calculateNextScheduleId from '../helpers/calculateNextScheduleId'
 
 var Year = React.createClass({
 	canAddSemester() {

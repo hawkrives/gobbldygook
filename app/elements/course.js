@@ -3,9 +3,9 @@ import * as React from 'react/addons'
 import * as humanize from 'humanize-plus'
 import {DragDropMixin} from 'react-dnd'
 
-import studentActions from 'flux/studentActions'
-import itemTypes from 'models/itemTypes'
-import semesterName from 'helpers/semesterName'
+import studentActions from '../flux/studentActions'
+import itemTypes from '../models/itemTypes'
+import semesterName from '../helpers/semesterName'
 
 let cx = React.addons.classSet;
 

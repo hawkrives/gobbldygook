@@ -3,10 +3,10 @@ import * as React from 'react'
 import * as humanize from 'humanize-plus'
 import * as Immutable from 'immutable'
 
-import AreaOfStudy from 'elements/areaOfStudy'
-import StudentSummary from 'elements/studentSummary'
+import AreaOfStudy from '../elements/areaOfStudy'
+import StudentSummary from '../elements/studentSummary'
 
-import checkStudentGraduatability from 'helpers/checkStudentGraduatability'
+import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
 let GraduationStatus = React.createClass({
 	componentWillReceiveProps(nextProps) {

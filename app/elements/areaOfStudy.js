@@ -3,7 +3,7 @@ import * as Immutable from 'immutable'
 import * as React from 'react/addons'
 import {State, Navigation} from 'react-router'
 
-import RequirementSet from 'elements/requirementSet'
+import RequirementSet from '../elements/requirementSet'
 
 let cx = React.addons.classSet
 
