@@ -127,7 +127,7 @@ var ExpandedCourse = React.createClass({
 		tools.push(deleteButton);
 
 		let toolsEls = React.createElement('div',
-			{className: 'tools', onClick: function(ev) {ev.stopPropagation()}},
+			{className: 'tools', onClick: (ev) => {ev.stopPropagation()}},
 			tools)
 
 		// /////
