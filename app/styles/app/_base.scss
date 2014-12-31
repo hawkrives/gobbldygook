@@ -24,5 +24,6 @@ body {
 
 .sidebar {
 	flex-basis: 270px;
+	min-width: 270px;
 	margin-right: $page-edge-padding;
 }
