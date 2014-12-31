@@ -9,6 +9,7 @@ import * as Immutable from 'immutable'
 import add from 'app/helpers/add'
 import countCredits from 'app/helpers/countCredits'
 import semesterName from 'app/helpers/semesterName'
+import {isCurrentSemester} from 'app/helpers/isCurrent'
 import {Course, MissingCourse, EmptyCourseSlot} from 'app/elements/course'
 import studentActions from 'app/flux/studentActions'
 import itemTypes from 'app/models/itemTypes'
@@ -167,8 +168,8 @@ let Semester = React.createClass({
 	},
 
 	removeSemester() {
-		let currentTermSchedules = this.props.student.schedules.filter((s) =>
-			s.year === this.props.year && s.semester === this.props.semester)
+		let {year, semester} = this.props
+		let currentTermSchedules = this.props.student.schedules.filter(isCurrentSemester(year, semester))
 
 		let scheduleIds = currentTermSchedules.map(s => s.id)
 

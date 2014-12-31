@@ -5,6 +5,7 @@ import Course from 'app/elements/course'
 import Semester from 'app/elements/semester'
 
 import studentActions from 'app/flux/studentActions'
+import {isCurrentYear} from 'app/helpers/isCurrent'
 import {expandYear} from 'app/helpers/semesterName'
 import findFirstAvailableSemester from 'app/helpers/findFirstAvailableSemester'
 import calculateNextScheduleId from 'app/helpers/calculateNextScheduleId'
@@ -24,7 +25,7 @@ var Year = React.createClass({
 	},
 
 	removeYear() {
-		var currentYearSchedules = this.props.student.schedules.filter((s) => s.year === this.props.year)
+		var currentYearSchedules = this.props.student.schedules.filter(isCurrentYear(this.props.year))
 		var scheduleIds = currentYearSchedules.map(s => s.id)
 
 		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
