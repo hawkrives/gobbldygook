@@ -10,7 +10,7 @@ let SemesterDetail = React.createClass({
 		student: React.PropTypes.object.isRequired,
 	},
 
-	getInitialState: function() {
+	getInitialState() {
 		return {
 			year: null,
 			semester: null,
