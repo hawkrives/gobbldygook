@@ -68,113 +68,40 @@ let studentStore = Reflux.createStore({
 		this.trigger(this.students)
 	},
 
-	changeName(studentId, newName) {
+	_change(studentId, method, ...args) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).rename(newName))
+		this.students = this.students.set(studentId, this.students.get(studentId)[method](...args))
 		this._postChange()
 	},
 
-	changeActive(studentId, isActive) {
+	_alter(pathToData, method, ...args) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).changeActive(isActive))
+		this.students = this.students.setIn(pathToData, this.students.getIn(pathToData)[method](...args))
 		this._postChange()
 	},
 
-	changeCreditsNeeded(studentId, newCreditsNeeded) {
-		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).changeCreditsNeeded(newCreditsNeeded))
-		this._postChange()
-	},
+	changeName(studentId, ...args)               { this._change(studentId, 'rename',                   ...args) },
+	changeActive(studentId, ...args)             { this._change(studentId, 'changeActive',             ...args) },
+	changeCreditsNeeded(studentId, ...args)      { this._change(studentId, 'changeCreditsNeeded',      ...args) },
+	changeMatriculation(studentId, ...args)      { this._change(studentId, 'changeMatriculation',      ...args) },
+	changeGraduation(studentId, ...args)         { this._change(studentId, 'changeGraduation',         ...args) },
+	changeSetting(studentId, key, value)         { this._change(studentId, 'changeSetting',            key, value) },
+	addArea(studentId, ...args)                  { this._change(studentId, 'addArea',                  ...args) },
+	addSchedule(studentId, ...args)              { this._change(studentId, 'addSchedule',              ...args) },
+	addFabrication(studentId, ...args)           { this._change(studentId, 'addArea',                  ...args) },
+	addOverride(studentId, ...args)              { this._change(studentId, 'addSchedule',              ...args) },
+	removeArea(studentId, ...args)               { this._change(studentId, 'removeArea',               ...args) },
+	removeMultipleAreas(studentId, ...args)      { this._change(studentId, 'removeMultipleArea',       ...args) },
+	destroySchedule(studentId, ...args)          { this._change(studentId, 'destroySchedule',          ...args) },
+	destroyMultipleSchedules(studentId, ...args) { this._change(studentId, 'destroyMultipleSchedules', ...args) },
 
-	changeMatriculation(studentId, newMatriculation) {
-		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).changeMatriculation(newMatriculation))
-		this._postChange()
-	},
-
-	changeGraduation(studentId, newGraduation) {
-		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).changeGraduation(newGraduation))
-		this._postChange()
-	},
-
-	addArea(studentId, newArea) {
-		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).addArea(newArea))
-		this._postChange()
-	},
-
-	addSchedule(studentId, newSchedule) {
-		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).addSchedule(newSchedule))
-		this._postChange()
-	},
-
-	removeArea(studentId, areaId) {
-		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).removeArea(areaId))
-		this._postChange()
-	},
-
-	removeMultipleAreas(studentId, ids) {
-		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).removeMultipleArea(ids))
-		this._postChange()
-	},
-
-	destroySchedule(studentId, scheduleId) {
-		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).destroySchedule(scheduleId))
-		this._postChange()
-	},
-
-	destroyMultipleSchedules(studentId, ids) {
-		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId).destroyMultipleSchedules(ids))
-		this._postChange()
-	},
-
-	renameSchedule(studentId, scheduleId, newTitle) {
-		this._preChange()
-		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).renameSchedule(newTitle))
-		this._postChange()
-	},
-
-	reorderSchedule(studentId, scheduleId, newIndex) {
-		this._preChange()
-		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).reorderSchedule(newIndex))
-		this._postChange()
-	},
-
-	moveSchedule(studentId, scheduleId, to) {
-		this._preChange()
-		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).moveSchedule(to))
-		this._postChange()
-	},
-
-	addCourse(studentId, scheduleId, clbid) {
-		this._preChange()
-		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).addCourse(clbid))
-		this._postChange()
-	},
-
-	removeCourse(studentId, scheduleId, clbid) {
-		this._preChange()
-		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).removeCourse(clbid))
-		this._postChange()
-	},
-
-	reorderCourse(studentId, scheduleId, clbid, newIndex) {
-		this._preChange()
-		this.students = this.students.setIn([studentId, 'schedules', scheduleId], this.students.getIn([studentId, 'schedules', scheduleId]).reorderCourse(clbid, newIndex))
-		this._postChange()
-	},
-
-	reorderArea(studentId, areaId, newIndex) {
-		this._preChange()
-		this.students = this.students.setIn([studentId, 'studies'], this.students.getIn([studentId, 'studies']).reorderArea(newIndex))
-		this._postChange()
-	},
+	renameSchedule(studentId, scheduleId, ...args)  { this._alter([studentId, 'schedules', scheduleId], 'rename',        ...args) },
+	reorderSchedule(studentId, scheduleId, ...args) { this._alter([studentId, 'schedules', scheduleId], 'reorder',       ...args) },
+	moveSchedule(studentId, scheduleId, ...args)    { this._alter([studentId, 'schedules', scheduleId], 'move',          ...args) },
+	addCourse(studentId, scheduleId, ...args)       { this._alter([studentId, 'schedules', scheduleId], 'addCourse',     ...args) },
+	removeCourse(studentId, scheduleId, ...args)    { this._alter([studentId, 'schedules', scheduleId], 'removeCourse',  ...args) },
+	reorderCourse(studentId, scheduleId, ...args)   { this._alter([studentId, 'schedules', scheduleId], 'reorderCourse', ...args) },
+	reorderArea(studentId, areaId, ...args)         { this._alter([studentId, 'studies', areaId],       'reorder',       ...args) },
 })
 
 window.store = studentStore
