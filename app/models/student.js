@@ -191,9 +191,9 @@ class Student extends StudentRecord {
 	data() {
 		return Promise.props({
 			courses: this.courses,
-			fabrications: this.fabrications.toArray(),
-			overrides: this.overrides.toArray(),
-			studies: this.studies.toArray(),
+			fabrications: this.fabrications.toList().toJS(),
+			overrides: this.overrides.toList().toJS(),
+			studies: this.studies.toList().toJS(),
 			creditsNeeded: this.creditsNeeded,
 			graduation: this.graduation,
 			matriculation: this.matriculation,
