@@ -1,10 +1,10 @@
 function findMissingNumberBinarySearch(arr) {
 	// via http://stackoverflow.com/questions/11385896/find-the-first-missing-number-in-a-sorted-list
-	var len = arr.length
+	let len = arr.length
 
-	var first = 0
-	var last = len - 1
-	var middle = Math.floor((first + last) / 2)
+	let first = 0
+	let last = len - 1
+	let middle = Math.floor((first + last) / 2)
 
 	while ( first < last ) {
 		if ( (arr[middle] - arr[first]) !== (middle - first) ) {

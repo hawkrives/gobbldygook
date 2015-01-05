@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-var ContentEditable = React.createClass({
+let ContentEditable = React.createClass({
 	// from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 	propTypes: {
 		onChange: React.PropTypes.func,
@@ -23,7 +23,7 @@ var ContentEditable = React.createClass({
 		}
 	},
 	emitChange() {
-		var html = this.getDOMNode().innerHTML;
+		let html = this.getDOMNode().innerHTML;
 		if (this.props.onChange && html !== this.lastHtml) {
 			this.props.onChange({target: {value: html}});
 		}

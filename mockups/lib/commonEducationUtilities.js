@@ -6,11 +6,11 @@ function onlyQuarterCreditCoursesCanBePassFail(course) {
 	return true
 }
 
-var hasGenEd = _.curry(function(gened, course) {
+let hasGenEd = _.curry(function(gened, course) {
 	return _.contains(course.gereqs, gened)
 })
 
-var hasFOL = function(course) {
+let hasFOL = function(course) {
 	return _.any(course.gereqs,
 		req => req.substr(0,3) === 'FOL')
 }
@@ -27,7 +27,7 @@ function getDepartments(courses) {
 }
 
 function acrossAtLeastTwoDepartments(courses) {
-	var depts = getDepartments(courses)
+	let depts = getDepartments(courses)
 
 	return _.size(depts) >= 2
 }
@@ -35,11 +35,11 @@ function acrossAtLeastTwoDepartments(courses) {
 function checkThatNCoursesSpanTwoDepartments(courses, geneds, genedToCheck, n=2) {
 	// Input: courses-array of courses. geneds-['ALS-A', 'ALS-L']. genedToCheck-'ALS-A'
 	// XXX,YYY - N courses, from different departments
-	var coursesOne = _.filter(courses, hasGenEd(geneds[0]))
-	var coursesTwo = _.filter(courses, hasGenEd(geneds[1]))
+	let coursesOne = _.filter(courses, hasGenEd(geneds[0]))
+	let coursesTwo = _.filter(courses, hasGenEd(geneds[1]))
 
-	var allCourses = _.uniq(coursesOne.concat(coursesTwo), 'crsid')
-	var coversTwoDepartments = acrossAtLeastTwoDepartments(allCourses)
+	let allCourses = _.uniq(coursesOne.concat(coursesTwo), 'crsid')
+	let coversTwoDepartments = acrossAtLeastTwoDepartments(allCourses)
 
 	return _.all([
 		countGeneds(courses, genedToCheck) >= 1,

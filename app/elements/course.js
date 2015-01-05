@@ -29,7 +29,7 @@ let CourseTitle = React.createClass({
 		if (course.type === 'Topic')
 			titleText = courseName.replace(/top.*: */gi, '');
 
-		var isIndependent = /^I[RS]/.test(courseName)
+		let isIndependent = /^I[RS]/.test(courseName)
 		if (isIndependent) {
 			type = courseName.substr(0, 3)
 			if (courseName.length > 3)
@@ -47,7 +47,7 @@ let CourseTitle = React.createClass({
 })
 
 
-var ExpandedCourse = React.createClass({
+let ExpandedCourse = React.createClass({
 	propTypes: {
 		info: React.PropTypes.object,
 		student: React.PropTypes.object,
@@ -134,7 +134,7 @@ var ExpandedCourse = React.createClass({
 })
 
 
-var CollapsedCourse = React.createClass({
+let CollapsedCourse = React.createClass({
 	render() {
 		let course = this.props.info;
 
@@ -156,7 +156,7 @@ var CollapsedCourse = React.createClass({
 	}
 })
 
-var Course = React.createClass({
+let Course = React.createClass({
 	mixins: [DragDropMixin],
 
 	configureDragDrop(registerType) {
@@ -258,7 +258,7 @@ var Course = React.createClass({
 	},
 })
 
-var EmptyCourseSlot = React.createClass({
+let EmptyCourseSlot = React.createClass({
 	render() {
 		let title = 'Empty Slot'
 
@@ -270,7 +270,7 @@ var EmptyCourseSlot = React.createClass({
 	}
 })
 
-var MissingCourse = React.createClass({
+let MissingCourse = React.createClass({
 	render() {
 		let title = `Missing Course`
 

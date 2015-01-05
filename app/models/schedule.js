@@ -104,7 +104,7 @@ class Schedule extends ScheduleRecord {
 			// Step one: do any times conflict?
 			.then(checkScheduleTimeConflicts)
 			.then((conflicts) => {
-				var hasConflict = Immutable.Seq(conflicts)
+				let hasConflict = Immutable.Seq(conflicts)
 					// flatten the nested arrays
 					.flatten(true)
 					// and see if any of the resulting values are true

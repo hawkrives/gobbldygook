@@ -5,7 +5,7 @@ import {RouteHandler} from 'react-router'
 
 import studentStore from 'app/flux/studentStore'
 
-var GobbldygookApp = React.createClass({
+let GobbldygookApp = React.createClass({
 	mixins: [Reflux.listenTo(studentStore, 'onStudentsChanged', 'onStudentsChanged')],
 
 	onStudentsChanged(students) {

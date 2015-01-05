@@ -21,12 +21,12 @@ function courses(coursesTaken, creditsNeeded) {
 	// The intercollegiate SPM credits are determined by courses Exercise
 	// Science 171-194. (from the SPM requirement)
 
-	var noIntercollegiateSports = _.reject(
+	let noIntercollegiateSports = _.reject(
 		coursesTaken,
 		hasDeptNumBetween({dept: 'ESTH', start: 171, end: 194})
 	)
 
-	var creditsTaken = countCredits(noIntercollegiateSports, 'credits')
+	let creditsTaken = countCredits(noIntercollegiateSports, 'credits')
 
 	return {
 		title: 'Courses',
@@ -41,13 +41,13 @@ function ensureLimitedOffCampusCoursesDuringFinalYear(courses, fabrications) {
 
 	// TOOD: Music lessons don't count.
 
-	var finalYear = _.max(fabrications, 'year')
-	var finalYearFabrications = _.chain(fabrications)
+	let finalYear = _.max(fabrications, 'year')
+	let finalYearFabrications = _.chain(fabrications)
 		.filter({year: finalYear})
 		.reject(hasDepartment('MUSPF')) // this might do it
 		.value()
 
-	var finalYearCourses = _.filter(courses, {year: finalYear})
+	let finalYearCourses = _.filter(courses, {year: finalYear})
 
 	return (
 		_.isEmpty(finalYearFabrications) ||
@@ -73,7 +73,7 @@ function residency(courses, fabrications) {
 	// entered, and which did not come from the course catalog. I'm using it
 	// as a list of off-campus courses.
 
-	var residencyReq = (
+	let residencyReq = (
 		_.size(courses) - _.size(fabrications) >= 17 &&
 		ensureLimitedOffCampusCoursesDuringFinalYear(courses, fabrications)
 	)
@@ -96,18 +96,18 @@ function interim(courses, fabrications, graduation) {
 	// requirement by means of a summer course taken during a St. Olaf summer
 	// session after the commencement in which the student participates.
 
-	var interimCourses = _.filter(courses, utilities.onlyFullCreditInterimCourses)
-	var interimCourseCount = _.size(interimCourses)
+	let interimCourses = _.filter(courses, utilities.onlyFullCreditInterimCourses)
+	let interimCourseCount = _.size(interimCourses)
 
 	// "After having successfully completed two Interims, senior participators
 	// may satisfy the third Interim requirement by means of a summer course
 	// taken during a St. Olaf summer session after the commencement in which
 	// the student participates."
-	var summerSessionCourses = _.filter(courses, utilities.onlyFullCreditSummerSessionCourses)
-	var finalSummerSessionCourses = _.filter(summerSessionCourses, {year: graduation})
-	var finalSummerSessionCourseCount = _.size(finalSummerSessionCourses)
+	let summerSessionCourses = _.filter(courses, utilities.onlyFullCreditSummerSessionCourses)
+	let finalSummerSessionCourses = _.filter(summerSessionCourses, {year: graduation})
+	let finalSummerSessionCourseCount = _.size(finalSummerSessionCourses)
 
-	var interimRequirement = (
+	let interimRequirement = (
 		interimCourseCount >= 3 ||
 		(interimCourseCount >= 2 && finalSummerSessionCourseCount >= 1)
 	)
@@ -197,16 +197,16 @@ function finalTwoYearsInResidence(courses, fabrications) {
 	// entered, so they'll be in fabrications. Therefore, if there aren't any
 	// fabrications in the last two years, it passes.
 
-	var years = _.uniq(_.pluck(courses, 'year'))
+	let years = _.uniq(_.pluck(courses, 'year'))
 
 	if (_.size(years) >= 2) {
-		var sortedYears = _.sortBy(years).reverse()
-		var finalYear = sortedYears[0]
-		var secondFinalYear = sortedYears[1]
-		var finalYearFabrications = _.filter(fabrications, {year: finalYear})
-		var secondFinalYearFabrications = _.filter(fabrications, {year: finalYear})
+		let sortedYears = _.sortBy(years).reverse()
+		let finalYear = sortedYears[0]
+		let secondFinalYear = sortedYears[1]
+		let finalYearFabrications = _.filter(fabrications, {year: finalYear})
+		let secondFinalYearFabrications = _.filter(fabrications, {year: finalYear})
 
-		var hasFabricationsInFinalYears = _.every([
+		let hasFabricationsInFinalYears = _.every([
 			_.isEmpty(finalYearFabrications),
 			_.isEmpty(secondFinalYearFabrications)
 		])
@@ -227,16 +227,16 @@ function seventeenOlafCourses(courses) {
 		return false
 	}
 
-	var fullCreditCourses = _.filter(courses, utilities.onlyFullCreditCourses)
+	let fullCreditCourses = _.filter(courses, utilities.onlyFullCreditCourses)
 
 	// Put the most recent courses at the front
-	var sortedFullCreditCourses = _.sortBy(fullCreditCourses, 'term').reverse()
+	let sortedFullCreditCourses = _.sortBy(fullCreditCourses, 'term').reverse()
 
 	// Get just the most recent 20 courses
-	var lastTwentyFullCreditCourses = _.first(sortedFullCreditCourses, 20)
+	let lastTwentyFullCreditCourses = _.first(sortedFullCreditCourses, 20)
 
 	// Reject all of the fabricated courses
-	var notFabricatedFullCreditCourses = _.reject(
+	let notFabricatedFullCreditCourses = _.reject(
 		lastTwentyFullCreditCourses, {alteration: 'fabricated'}
 	)
 
@@ -273,19 +273,19 @@ function artsAndMusicDoubleMajor(courses, studies, fabrications) {
 	// graduation major within that degree before the diploma for that degree will
 	// be awarded.
 
-	var baseResult = {
+	let baseResult = {
 		title: 'Arts and Music',
 		type: 'boolean',
 		prose: '',
 	}
 
-	var degrees = _.filter(studies, {type: 'degree'})
+	let degrees = _.filter(studies, {type: 'degree'})
 	if (_.size(degrees) === 1) {
 		// there's only one degree, so we don't care.
 		return _.merge(baseResult, {result: true})
 	}
 
-	var majors = _.filter(studies, {type: 'major'})
+	let majors = _.filter(studies, {type: 'major'})
 	if (utilities.isBachelorOfBoth(studies) && utilities.isMajoringIn('Music', studies)) {
 		// there's a double-ba/bm trying to major in Music -- no.
 		return _.merge(baseResult, {result: false})

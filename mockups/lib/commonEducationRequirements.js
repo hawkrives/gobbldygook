@@ -17,7 +17,7 @@ function firstYearWriting(courses, matriculation) {
 	// NOTE: These two exceptions don't apply to Gobbldygook.
 
 	// The course must be taken in the first year.
-	var firstYearCourses = _.filter(courses, {year: matriculation})
+	let firstYearCourses = _.filter(courses, {year: matriculation})
 
 	return {
 		title: 'First Year Writing',
@@ -96,19 +96,19 @@ function studiesInPhysicalMovement(courses) {
 	// - Each specific exercise science activity course may only be taken a
 	// maximum of four times (the first time plus three repeats).
 
-	var spmCourses = _.filter(courses, hasGenEd('SPM'))
-	var distinctSpmCourses = _.uniq(spmCourses, 'crsid')
-	var numberOfSpmCourses = _.size(distinctSpmCourses)
+	let spmCourses = _.filter(courses, hasGenEd('SPM'))
+	let distinctSpmCourses = _.uniq(spmCourses, 'crsid')
+	let numberOfSpmCourses = _.size(distinctSpmCourses)
 
-	var sportsCourses = _.filter(courses, hasDeptNumBetween({dept: 'ESTH', start: 171, end: 194}))
-	var distinctSports = _.uniq(sportsCourses, 'crsid')
-	var hasSportsCredit = _.size(distinctSports) >= 1
+	let sportsCourses = _.filter(courses, hasDeptNumBetween({dept: 'ESTH', start: 171, end: 194}))
+	let distinctSports = _.uniq(sportsCourses, 'crsid')
+	let hasSportsCredit = _.size(distinctSports) >= 1
 
 	if (numberOfSpmCourses < 2 && hasSportsCredit) {
 		numberOfSpmCourses += 1
 	}
 
-	var result = (numberOfSpmCourses >= 2)
+	let result = (numberOfSpmCourses >= 2)
 
 	return {
 		title: 'Studies in Physical Movement',
@@ -167,7 +167,7 @@ function biblicalStudies(courses, matriculation) {
 
 	// We're going to continue under the assumption that the BTS-B must be
 	// taken in the first year at Olaf.
-	var firstYearCourses = _.filter(courses, {year: matriculation})
+	let firstYearCourses = _.filter(courses, {year: matriculation})
 
 	return {
 		title: 'Biblical and Theological Studies - Bible',
@@ -205,12 +205,12 @@ function integratedScientificTopics(courses) {
 
 function studiesInHumanBehaviorAndSociety(courses) {
 	// HBS - 2 courses, from different departments/programs
-	var hbsCourses = _.filter(courses, hasGenEd('HBS'))
+	let hbsCourses = _.filter(courses, hasGenEd('HBS'))
 
-	var matchingCourses = _.uniq(hbsCourses, 'crsid')
-	var coversTwoDepartments = acrossAtLeastTwoDepartments(matchingCourses)
+	let matchingCourses = _.uniq(hbsCourses, 'crsid')
+	let coversTwoDepartments = acrossAtLeastTwoDepartments(matchingCourses)
 
-	var result = _.all([
+	let result = _.all([
 		countGeneds(courses, 'HBS') >= 2,
 		coversTwoDepartments
 	])
@@ -228,19 +228,19 @@ function ethicalIssuesAndNormativePerspectives(courses) {
 	// Prerequisite for all EIN courses: completion of the BTS-T requirement
 	// or permission of the instructor.
 
-	var termOfFirstBtsT = _.chain(courses)
+	let termOfFirstBtsT = _.chain(courses)
 		.filter(hasGenEd('BTS-T'))
 		.pluck('term')
 		.min()
 		.value()
 
-	var termOfFirstEin = _.chain(courses)
+	let termOfFirstEin = _.chain(courses)
 		.filter(hasGenEd('EIN'))
 		.pluck('term')
 		.min()
 		.value()
 
-	var result = _.all([
+	let result = _.all([
 		termOfFirstBtsT <= termOfFirstEin,
 		countGeneds(courses, 'EIN') >= 1,
 	])

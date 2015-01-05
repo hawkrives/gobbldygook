@@ -16,7 +16,7 @@ const chemDeptRequiredCourses = [
 	{dept:'CHEM',num:253}, {dept:'CHEM',num:254}, {dept:'CHEM',num:256}, {dept:'CHEM',num:357},
 ]
 
-var isRequiredChemistryCourse = _.curry(isRequiredCourse(chemDeptRequiredCourses))
+let isRequiredChemistryCourse = _.curry(isRequiredCourse(chemDeptRequiredCourses))
 
 function introductorySequence(courses) {
 	// Complete one of the introductory sequences (Chemistry
@@ -128,7 +128,7 @@ function checkChemistryMajor(student) {
 	return student.data().then((studentPieces) => {
 		let {courses} = studentPieces
 
-		var chemistryMajorRequirements = [
+		let chemistryMajorRequirements = [
 			introductorySequence(courses),
 			// required(courses),
 			// laboratory(courses),

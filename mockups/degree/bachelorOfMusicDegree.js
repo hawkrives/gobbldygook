@@ -28,7 +28,7 @@ function foreignLanguage(courses) {
 
 function abstractAndQuantitativeReasoning(courses) {
 	// AQR or SED or IST
-	var which = _.find([
+	let which = _.find([
 		{
 			title: 'Abstract and Quantitative Reasoning',
 			abbr: 'AQR',
@@ -46,7 +46,7 @@ function abstractAndQuantitativeReasoning(courses) {
 		},
 	], 'result')
 
-	var generic = {
+	let generic = {
 		title: 'Abstract and Quantitative Reasoning OR Studies in Natural Science: Scientific Exploration and Discovery OR Integrated Scientific Topics',
 		abbr: 'AQR/SED/IST',
 		result: false,
@@ -61,7 +61,7 @@ function abstractAndQuantitativeReasoning(courses) {
 
 function historicalOrLiteraryStudies(courses) {
 	// ALS-L or HWC - 1 course
-	var which = _.find([
+	let which = _.find([
 		{
 			title: 'Historical Studies in Western Culture',
 			abbr: 'HWC',
@@ -74,7 +74,7 @@ function historicalOrLiteraryStudies(courses) {
 		},
 	], 'result')
 
-	var generic = {
+	let generic = {
 		title: 'Historical Studies in Western Culture OR Literary Studies',
 		abbr: 'HWC/ALS-L',
 		result: false,
@@ -89,7 +89,7 @@ function historicalOrLiteraryStudies(courses) {
 
 function multiculturalStudies(courses) {
 	// MCD or MCG - 1 course
-	var which = _.find([
+	let which = _.find([
 		{
 			title: 'Multicultural Studies - Domestic',
 			abbr: 'MCD',
@@ -102,7 +102,7 @@ function multiculturalStudies(courses) {
 		},
 	], 'result')
 
-	var generic = {
+	let generic = {
 		title: 'Multicultural Studies',
 		abbr: 'MCD/MCG',
 		result: false,
@@ -147,9 +147,9 @@ function dedicatedMusicMajor(studies, courses) {
 	// (See TRANSFER OF CREDIT TO ST. OLAF )
 	// NOTE: Ignored, because this doesn't know about major requirements.
 
-	var majors = _.filter(studies, {type: 'major'})
+	let majors = _.filter(studies, {type: 'major'})
 
-	var musicMajors = _.filter(majors, onlyMusicMajors)
+	let musicMajors = _.filter(majors, onlyMusicMajors)
 
 	return {
 		title: 'Music Major',
@@ -174,7 +174,7 @@ function checkBachelorOfMusicDegree(student) {
 		// Requirements taken from
 		// http://www.stolaf.edu/catalog/1314/academiclife/bm-gen-grad-requirements.html
 
-		var graduationRequirements = [
+		let graduationRequirements = [
 			common.courses(courses, creditsNeeded),
 			common.residency(courses, fabrications),
 			common.interim(courses, fabrications, graduation),
@@ -188,7 +188,7 @@ function checkBachelorOfMusicDegree(student) {
 			graduationRequirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
 		}
 
-		var educationRequirements = {
+		let educationRequirements = {
 			foundation: [
 				educ.firstYearWriting(courses, matriculation),
 				educ.writingInContext(courses),
@@ -209,7 +209,7 @@ function checkBachelorOfMusicDegree(student) {
 			],
 		}
 
-		var educationRequirementsResults = [
+		let educationRequirementsResults = [
 			{
 				title: 'Foundation',
 				type: 'array/boolean',
@@ -230,7 +230,7 @@ function checkBachelorOfMusicDegree(student) {
 			},
 		]
 
-		var bachelorOfMusicRequirements = [
+		let bachelorOfMusicRequirements = [
 			{
 				title: 'Graduation',
 				type: 'array/boolean',

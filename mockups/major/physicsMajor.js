@@ -21,7 +21,7 @@ const physDeptRequiredCourses = [
 let isRequiredPhysicsCourse = _.curry(isRequiredCourse(physDeptRequiredCourses))
 
 function analyticsCourses(courses) {
-	var requirements = [
+	let requirements = [
 		{title: 'PHYS 130', result: checkCoursesFor(courses, {deptnum:'PHYS 130'})},
 		{title: 'PHYS 131', result: checkCoursesFor(courses, {deptnum:'PHYS 131'})},
 		{title: 'PHYS 232', result: checkCoursesFor(courses, {deptnum:'PHYS 232'})},
@@ -37,7 +37,7 @@ function analyticsCourses(courses) {
 }
 
 function transitionsCourses(courses) {
-	var requirements = [
+	let requirements = [
 		{title: 'PHYS 244', result: checkCoursesFor(courses, {deptnum:'PHYS 244'})},
 		{title: 'PHYS 245', result: checkCoursesFor(courses, {deptnum:'PHYS 245'})},
 	]
@@ -52,7 +52,7 @@ function transitionsCourses(courses) {
 }
 
 function upperLevelCourses(courses) {
-	var requirements = [
+	let requirements = [
 		{title: 'PHYS 374', result: checkCoursesFor(courses, {deptnum: 'PHYS 374'})},
 		{title: 'PHYS 375', result: checkCoursesFor(courses, {deptnum: 'PHYS 375'})},
 		{title: 'PHYS 385', result: checkCoursesFor(courses, {deptnum: 'PHYS 385'})},
@@ -70,13 +70,13 @@ function upperLevelCourses(courses) {
 }
 
 function electiveCourses(courses) {
-	var validCourses = _.chain(courses)
+	let validCourses = _.chain(courses)
 		.filter(hasDepartment('PHYS'))
 		.reject(isRequiredPhysicsCourse)
 		.value()
 
-	var numberTaken = _.size(validCourses)
-	var numberNeeded = 1
+	let numberTaken = _.size(validCourses)
+	let numberNeeded = 1
 
 	return {
 		title: 'Electives',
@@ -95,7 +95,7 @@ function checkPhysicsMajor(student) {
 	return student.data().then((studentPieces) => {
 		let {courses} = studentPieces
 
-		var physicsMajorRequirements = [
+		let physicsMajorRequirements = [
 			analyticsCourses(courses),
 			transitionsCourses(courses),
 			upperLevelCourses(courses),

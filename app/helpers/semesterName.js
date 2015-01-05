@@ -18,8 +18,8 @@ function expandYear(year) {
 
 function toPrettyTerm(term) {
 	term = String(term)
-	var year = term.substr(0, 4)
-	var sem = parseInt(term.substr(4, 1), 10)
+	let year = term.substr(0, 4)
+	let sem = parseInt(term.substr(4, 1), 10)
 
 	return semesterName(sem) + ' ' + expandYear(year)
 }

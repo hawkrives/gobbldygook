@@ -10,13 +10,13 @@ import {expandYear} from 'app/helpers/semesterName'
 import findFirstAvailableSemester from 'app/helpers/findFirstAvailableSemester'
 import calculateNextScheduleId from 'app/helpers/calculateNextScheduleId'
 
-var Year = React.createClass({
+let Year = React.createClass({
 	canAddSemester() {
 		return findFirstAvailableSemester(this.props.student.schedules, this.props.year) <= 5
 	},
 
 	addSemester() {
-		var nextAvailableSemester = findFirstAvailableSemester(this.props.student.schedules, this.props.year)
+		let nextAvailableSemester = findFirstAvailableSemester(this.props.student.schedules, this.props.year)
 
 		studentActions.addSchedule(this.props.student.id, {
 			year: this.props.year, semester: nextAvailableSemester,
@@ -25,8 +25,8 @@ var Year = React.createClass({
 	},
 
 	removeYear() {
-		var currentYearSchedules = this.props.student.schedules.filter(isCurrentYear(this.props.year))
-		var scheduleIds = currentYearSchedules.map(s => s.id)
+		let currentYearSchedules = this.props.student.schedules.filter(isCurrentYear(this.props.year))
+		let scheduleIds = currentYearSchedules.map(s => s.id)
 
 		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},

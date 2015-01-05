@@ -5,7 +5,7 @@ import {queryCourses} from 'app/helpers/courses'
 import {toPrettyTerm} from 'app/helpers/semesterName'
 import Course from 'app/elements/course'
 
-var SearchButton = React.createClass({
+let SearchButton = React.createClass({
 	getInitialState() {
 		return {
 			open: false,
@@ -34,8 +34,8 @@ var SearchButton = React.createClass({
 		}
 	},
 	query(searchQuery) {
-		var startQueryTime = performance.now()
-		var results = _(queryCourses(searchQuery))
+		let startQueryTime = performance.now()
+		let results = _(queryCourses(searchQuery))
 			.sortBy(c => c.deptnum + (c.sect || '')) // Sort the results
 			.groupBy('term') // Group them by term
 			.pairs() // Turn the object into an array of pairs
@@ -47,13 +47,13 @@ var SearchButton = React.createClass({
 			.value();
 
 		console.log('search results', results)
-		var endQueryTime = performance.now()
+		let endQueryTime = performance.now()
 		console.info('query took ' + (endQueryTime - startQueryTime) + 'ms.')
 
-		var startTime = performance.now()
+		let startTime = performance.now()
 		let courseObjects = _.map(results, (courseOrTerm) => {
 			if (!(_.isObject(courseOrTerm))) {
-				var prettyTerm = toPrettyTerm(courseOrTerm)
+				let prettyTerm = toPrettyTerm(courseOrTerm)
 				return React.createElement('li',
 					{key: prettyTerm, className: 'course-group'},
 					prettyTerm)
@@ -63,7 +63,7 @@ var SearchButton = React.createClass({
 				React.createElement(Course, {info: courseOrTerm}))
 		})
 
-		var endTime = performance.now()
+		let endTime = performance.now()
 		console.info('react element creation took an additional ' + (endTime - startTime) + 'ms.')
 
 		this.setState({

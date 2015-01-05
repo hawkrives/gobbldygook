@@ -3,7 +3,7 @@ import {State, RouteHandler} from 'react-router'
 
 import Sidebar from 'app/elements/sidebar'
 
-var Student = React.createClass({
+let Student = React.createClass({
 	mixins: [State],
 
 	getInitialState: function() {

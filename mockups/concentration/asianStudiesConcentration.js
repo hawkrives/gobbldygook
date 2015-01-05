@@ -11,7 +11,7 @@ const asianDeptRequiredCourses = [
 	{deptnum: 'ASIAN 275'}, {deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
 ]
 
-var isRequiredAsianStudiesCourse = isRequiredCourse(asianDeptRequiredCourses)
+let isRequiredAsianStudiesCourse = isRequiredCourse(asianDeptRequiredCourses)
 
 function languageCourses(course) {
 	// If all of these match, it is a lower-level language course, and will be
@@ -62,7 +62,7 @@ function checkAsianStudiesConcentration(student) {
 	return student.data().then((studentPieces) => {
 		let {courses} = studentPieces
 
-		var asianStudiesConcentrationRequirements = [
+		let asianStudiesConcentrationRequirements = [
 			electives(courses),
 		]
 

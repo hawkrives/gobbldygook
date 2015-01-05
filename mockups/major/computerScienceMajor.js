@@ -29,18 +29,18 @@ function foundationCourses(courses) {
 		- one of Computer Science 231 or Math 232 or Math 252.
 	*/
 
-	var cs1 = _.any([
+	let cs1 = _.any([
 		checkCoursesFor(courses, {deptnum:'CSCI 121'}),
 		checkCoursesFor(courses, {deptnum:'CSCI 125'}),
 	])
 
-	var design = _.all([
+	let design = _.all([
 		checkCoursesFor(courses, {deptnum:'CSCI 241'}),
 		checkCoursesFor(courses, {deptnum:'CSCI 251'}),
 		checkCoursesFor(courses, {deptnum:'CSCI 252'}),
 	])
 
-	var proofWriting = _.any([
+	let proofWriting = _.any([
 		checkCoursesFor(courses, {deptnum:'MATH 282', term:20141}),
 		checkCoursesFor(courses, {deptnum:'MATH 244'}),
 		checkCoursesFor(courses, {deptnum:'MATH 252'}),
@@ -78,21 +78,21 @@ function coreCourses(courses) {
 		- and either Computer Science 273, 284, or 300 with parallel and distributed computing.
 	*/
 
-	var algorithms = checkCoursesFor(courses, {deptnum:'CSCI 253'})
+	let algorithms = checkCoursesFor(courses, {deptnum:'CSCI 253'})
 
-	var ethics = checkCoursesFor(courses, {deptnum:'CSCI 263'})
+	let ethics = checkCoursesFor(courses, {deptnum:'CSCI 263'})
 
-	var theory = _.any([
+	let theory = _.any([
 		checkCoursesFor(courses, {deptnum:'CSCI 276'}),
 		checkCoursesFor(courses, {deptnum:'CSCI 333'})
 	])
 
-	var parallelDistributedComputing = _.chain(courses)
+	let parallelDistributedComputing = _.chain(courses)
 		.filter({deptnum:'CSCI 300'})
 		.filter(partialNameOrTitle('Parallel'))
 		.size().value() >= 1
 
-	var options = _.any([
+	let options = _.any([
 		checkCoursesFor(courses, {deptnum:'CSCI 273'}),
 		checkCoursesFor(courses, {deptnum:'CSCI 284'}),
 		parallelDistributedComputing
@@ -130,13 +130,13 @@ function coreCourses(courses) {
 function electiveCourses(courses) {
 	// Electives: Two approved electives.
 
-	var validCourses = _.chain(courses)
+	let validCourses = _.chain(courses)
 		.filter(hasDepartment('CSCI'))
 		.reject(isRequiredCompSciCourse)
 		.value()
 
-	var numberTaken = _.size(validCourses)
-	var numberNeeded = 2
+	let numberTaken = _.size(validCourses)
+	let numberNeeded = 2
 
 	return {
 		title: 'Electives',
@@ -153,7 +153,7 @@ function electiveCourses(courses) {
 
 function capstoneCourse(courses) {
 	// Capstone: Computer Science 390
-	var hasTakenCapstone = checkCoursesFor(courses, {dept:'CSCI', num:390})
+	let hasTakenCapstone = checkCoursesFor(courses, {dept:'CSCI', num:390})
 
 	return {
 		title: 'Capstone',
@@ -167,7 +167,7 @@ function checkComputerScienceMajor(student) {
 	return student.data().then((studentPieces) => {
 		let {courses} = studentPieces
 
-		var computerScienceMajorRequirements = [
+		let computerScienceMajorRequirements = [
 			foundationCourses(courses),
 			coreCourses(courses),
 			electiveCourses(courses),

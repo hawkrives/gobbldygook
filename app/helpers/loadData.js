@@ -156,7 +156,7 @@ function loadInfoFile(url) {
 }
 
 function loadData() {
-	var infoFiles = [
+	let infoFiles = [
 		'./data/areas/info.json',
 		'./data/courses/info.json',
 	]

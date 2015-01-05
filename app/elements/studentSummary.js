@@ -10,17 +10,17 @@ import randomChar from 'app/helpers/randomChar'
 let goodGraduationMessage = 'It looks like you\'ll make it! Just follow the plan, and go over my output with your advisor a few times.'
 let badGraduationMessage = 'You haven\'t planned everything out yet. Ask your advisor if you need help fitting everything in.'
 
-var StudentSummary = React.createClass({
+let StudentSummary = React.createClass({
 	updateStudentName(ev) {
-		var newName = ev.target.value;
+		let newName = ev.target.value;
 		this.props.student.name = newName;
 	},
 
 	render() {
-		var student = this.props.student
-		var studies = student.studies
-		var name = student.name || randomChar()
-		var nameEl = React.createElement(ContentEditable, {
+		let student = this.props.student
+		let studies = student.studies
+		let name = student.name || randomChar()
+		let nameEl = React.createElement(ContentEditable, {
 			html: name,
 			onChange: this.updateStudentName,
 		})
@@ -47,7 +47,7 @@ var StudentSummary = React.createClass({
 			emphasis: humanize.pluralize(objects.emphasis.size, 'emphasis', 'emphases'),
 		}
 
-		var canGraduate = this.props.graduatability
+		let canGraduate = this.props.graduatability
 
 		let phrases = {
 			degree: React.createElement('span', {className: 'area-of-study-list', key:'degree'}, titles.degree),
@@ -57,9 +57,9 @@ var StudentSummary = React.createClass({
 		}
 
 		let degreeEmphasizer = has.degree === 1 ? 'a ' : ''
-		var majorEmphasizer = has.major === 1 ? 'a ' : ''
-		var concentrationEmphasizer = has.concentration === 1 ? 'a ' : ''
-		var emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
+		let majorEmphasizer = has.major === 1 ? 'a ' : ''
+		let concentrationEmphasizer = has.concentration === 1 ? 'a ' : ''
+		let emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
 
 		return React.createElement('article', {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
 			React.createElement('div', {key: 'letter', id: 'student-letter'}, name[0]),

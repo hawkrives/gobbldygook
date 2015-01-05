@@ -17,7 +17,7 @@ function findFirstAvailableSemester(schedules, forYear) {
 
 	semesters = semesters.sort()
 
-	var missingNo = findMissingNumberBinarySearch(semesters.toJS())
+	let missingNo = findMissingNumberBinarySearch(semesters.toJS())
 	if (missingNo !== null) {
 		return missingNo
 	}

@@ -1,14 +1,14 @@
 import * as _ from 'lodash'
 
-var isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
+let isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
 	// Takes in a list of required course info, as objects that only have the
 	// info needed to match.
 
 	// Find if the current course exists in requiredCourses
-	var matchedCourse = _.find(requiredCourses, {deptnum: checkAgainst.deptnum})
+	let matchedCourse = _.find(requiredCourses, {deptnum: checkAgainst.deptnum})
 
 	// Begin the array of results!
-	var results = [matchedCourse ? true : false]
+	let results = [matchedCourse ? true : false]
 
 	if (!matchedCourse) {
 		return false

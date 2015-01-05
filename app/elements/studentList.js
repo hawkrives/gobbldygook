@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Link} from 'react-router'
 
-var StudentList = React.createClass({
+let StudentList = React.createClass({
 	shouldComponentUpdate(nextProps, nextState) {
 		return nextProps.students !== this.props.students
 	},

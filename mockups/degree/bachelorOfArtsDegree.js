@@ -44,7 +44,7 @@ function artsMajor(studies, courses) {
 	// is sought.
 	// NOTE: Ignored, because this doesn't know about major requirements.
 
-	var majors = _.filter(studies, {type: 'major'})
+	let majors = _.filter(studies, {type: 'major'})
 
 	return {
 		title: 'Major',
@@ -73,18 +73,18 @@ function beyondTheMajor(studies, courses) {
 	// required to complete at least 18 full-course credits outside the SIS
 	// "ART" department designation.
 
-	var majors = _.filter(studies, {type: 'major'})
+	let majors = _.filter(studies, {type: 'major'})
 
 	// If double-majorsing in ART HISTORY and STUDIO ART, ensure that they
 	// have 18 credits outside of the ART dept. Accomplished by setting both
 	// ART and STUDIO ART's dept to ART.
-	var isDedicatedArtist = _.all([
+	let isDedicatedArtist = _.all([
 		// Only returns true if majoring in both Studio Art and Art History.
 		isMajoringIn('Studio Art', studies),
 		isMajoringIn('Art History', studies),
 	])
 
-	var artMajorAndBeyond = null
+	let artMajorAndBeyond = null
 	if (isDedicatedArtist) {
 		// Check the two majors agains the 18-course requirement
 		artMajorAndBeyond = _.chain(majors)
@@ -101,9 +101,9 @@ function beyondTheMajor(studies, courses) {
 	}
 
 	// Ensure that each major has 21 credits beyond its scope.
-	var mainstream = _.every(majors, utilities.creditsBeyondTheArea(courses, 21))
+	let mainstream = _.every(majors, utilities.creditsBeyondTheArea(courses, 21))
 
-	var result = mainstream
+	let result = mainstream
 	if (isDedicatedArtist) {
 		result = _.all([mainstream, artMajorAndBeyond])
 	}
@@ -131,7 +131,7 @@ function checkBachelorOfArtsDegree(student) {
 		// Requirements taken from
 		// http://www.stolaf.edu/catalog/1314/academiclife/ba-gen-grad-requirements.html
 
-		var graduationRequirements = [
+		let graduationRequirements = [
 			common.courses(courses, creditsNeeded),
 			common.residency(courses, fabrications),
 			common.interim(courses, fabrications, graduation),
@@ -146,7 +146,7 @@ function checkBachelorOfArtsDegree(student) {
 			graduationRequirements.push(common.artsAndMusicDoubleMajor(courses, studies, fabrications))
 		}
 
-		var educationRequirements = {
+		let educationRequirements = {
 			foundation: [
 				educ.firstYearWriting(courses, matriculation),
 				educ.writingInContext(courses),
@@ -172,7 +172,7 @@ function checkBachelorOfArtsDegree(student) {
 			]
 		}
 
-		var educationRequirementsResults = [
+		let educationRequirementsResults = [
 			{
 				title: 'Foundation',
 				type: 'array/boolean',
@@ -193,7 +193,7 @@ function checkBachelorOfArtsDegree(student) {
 			},
 		]
 
-		var bachelorOfArtsRequirements = [
+		let bachelorOfArtsRequirements = [
 			{
 				title: 'Graduation',
 				type: 'array/boolean',

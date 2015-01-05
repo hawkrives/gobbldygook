@@ -23,15 +23,15 @@ function onlyFullCreditSummerSessionCourses(course) {
 	return (onlySummerSessionCourses(course) && onlyFullCreditCourses(course))
 }
 
-var creditsBeyondTheArea = _.curry((courses, creditCount, area) => {
+let creditsBeyondTheArea = _.curry((courses, creditCount, area) => {
 	// Takes the courses *outside* of the major department, and counts them.
-	var deptAbbr = area.dept
+	let deptAbbr = area.dept
 
 	// Leave only those outside of the department code
-	var matchingCourses = _.reject(courses, hasDepartment(deptAbbr))
+	let matchingCourses = _.reject(courses, hasDepartment(deptAbbr))
 
 	// Grab the number of credits taken
-	var matchingCourseCredits = countCredits(matchingCourses)
+	let matchingCourseCredits = countCredits(matchingCourses)
 
 	// See if there are more than the required number.
 	return (matchingCourseCredits >= creditCount)
@@ -39,7 +39,7 @@ var creditsBeyondTheArea = _.curry((courses, creditCount, area) => {
 
 function checkStudentStudiesFor(desiredType, desiredAbbr, studies) {
 	// Filter down to just the type of study (degree, major, concentration)
-	var typeMatches = _.filter(studies, {type: desiredType})
+	let typeMatches = _.filter(studies, {type: desiredType})
 	// then check for any matches of the abbreviation.
 	return _.any(typeMatches, {abbr: desiredAbbr})
 }

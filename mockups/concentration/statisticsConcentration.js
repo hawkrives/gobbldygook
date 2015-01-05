@@ -11,7 +11,7 @@ function foundationCourses(courses) {
 		- one of Computer Science 231 or Math 232 or Math 252.
 	*/
 
-	var requirements = [
+	let requirements = [
 		{title: 'STAT 110', result: checkCoursesFor(courses, {deptnum:'STAT 110'})},
 		{title: 'STAT 212', result: checkCoursesFor(courses, {deptnum:'STAT 212'})},
 		{title: 'STAT 214', result: checkCoursesFor(courses, {deptnum:'STAT 214'})},
@@ -37,8 +37,8 @@ function coreCourses(courses) {
 		- Statistics 316: Advanced Statistical Modeling
 	*/
 
-	var statisticalModeling = checkCoursesFor(courses, {dept:'STAT 272'})
-	var advancedModeling = checkCoursesFor(courses, {dept:'STAT 316'})
+	let statisticalModeling = checkCoursesFor(courses, {dept:'STAT 272'})
+	let advancedModeling = checkCoursesFor(courses, {dept:'STAT 316'})
 
 	let requirements = [
 		{
@@ -63,7 +63,7 @@ function coreCourses(courses) {
 function electiveCourses(courses) {
 	// Electives: Two approved electives.
 
-	var validElectives = [
+	let validElectives = [
 		{title: 'CSCI 125', result: checkCoursesFor(courses, {dept:'CSCI 125'})},
 		{title: 'ECON 385', result: checkCoursesFor(courses, {dept:'ECON 385'})},
 		{title: 'MATH 262', result: checkCoursesFor(courses, {dept:'MATH 262'})},
@@ -74,9 +74,9 @@ function electiveCourses(courses) {
 		{title: 'STAT 322', result: checkCoursesFor(courses, {dept:'STAT 322'})},
 	]
 
-	var numberTaken = _.chain(validElectives)
+	let numberTaken = _.chain(validElectives)
 		.pluck('result').compact().size().value()
-	var numberNeeded = 2
+	let numberNeeded = 2
 
 	return {
 		title: 'Electives',
@@ -95,7 +95,7 @@ function checkStatisticsConcentration(student) {
 	return student.data().then((studentPieces) => {
 		let {courses} = studentPieces
 
-		var statisticsConcentrationRequirements = [
+		let statisticsConcentrationRequirements = [
 			foundationCourses(courses),
 			coreCourses(courses),
 			electiveCourses(courses),
