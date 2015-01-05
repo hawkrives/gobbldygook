@@ -67,6 +67,7 @@
 	.gereqs {
 		padding: 0;
 		list-style: none;
+
 		li {
 			background-color: hsl(0, 0%, 90%);
 			border-radius: 3px;
@@ -96,6 +97,10 @@
 
 	.offerings, .gereqs, .description {
 		margin-bottom: 0.5em;
+	}
+
+	.warnings span + span {
+		margin-left: 0.25em;
 	}
 }
 
