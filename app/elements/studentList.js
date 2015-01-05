@@ -8,9 +8,9 @@ var StudentList = React.createClass({
 
 	render() {
 		let students = this.props.students.map((student) =>
-			React.createElement('li', {key: student.id, className: 'student-list--student'},
+			React.createElement('li', {key: student.id},
 				React.createElement(Link,
-					{to: 'student', params: {id: student.id}},
+					{className: 'student-list--student', to: 'student', params: {id: student.id}},
 					student.name)))
 
 		return React.createElement('ul', {className: 'student-list'}, students.toJS())

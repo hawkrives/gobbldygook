@@ -2,25 +2,25 @@
 	@include list-inline;
 }
 
+.student-list > li {
+	transform-origin: 50% 50%;
+	transition: 0.15s;
+
+	&:nth-child(odd):hover  { transform: rotate(-2deg); }
+	&:nth-child(even):hover { transform: rotate(2deg);  }
+}
+
 .student-list--student {
 	@include block;
-
-	a {
-		@include link-undecorated;
-	}
+	@include link-undecorated;
 
 	& + & {
 		margin-left: 1em;
 	}
 
 	padding: 0.5em 1em;
-	transform-origin: 50% 50%;
-	transition: 0.15s;
 
-	&:hover a {
+	&:hover {
 		text-decoration: underline;
 	}
-
-	&:nth-child(odd):hover  { transform: rotate(-2deg); }
-	&:nth-child(even):hover { transform: rotate(2deg);  }
 }
