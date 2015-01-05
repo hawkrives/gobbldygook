@@ -16,12 +16,13 @@ let areas = Immutable.Map({
 	'm-asian': stoAreas.major.asianStudies,
 	'm-chem':  stoAreas.major.chemistry,
 	'm-phys':  stoAreas.major.physics,
+	'm-math':  stoAreas.major.mathematics,
 
 	// Concentrations
 	'c-asian': stoAreas.concentration.asianStudies,
 	'c-stat':  stoAreas.concentration.statistics,
-	'c-chin':  stoAreas.concentration.chineseStudies,
-	'c-japan': stoAreas.concentration.japaneseStudies,
+	'c-chin':  stoAreas.concentration.chinaStudies,
+	'c-japan': stoAreas.concentration.japanStudies,
 
 	// Emphases
 })
