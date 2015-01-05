@@ -10,5 +10,5 @@ gulp.task('watch', ['setWatch', 'browserSync'], function() {
 	gulp.watch(config.lint, ['lint']);
 	gulp.watch(config.sass.src, ['sass']);
 	gulp.watch(config.fonts.src, ['fonts']);
-	gulp.watch(config.copy, ['markup']);
+	gulp.watch(config.copy, ['copy']);
 });
