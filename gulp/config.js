@@ -5,12 +5,8 @@ module.exports = {
 	browserSync: {
 		browser: 'google chrome',
 		server: {
-			baseDir: dest
+			baseDir: dest,
 		},
-		files: [
-			dest + '**/*',
-			'!' + dest + '**.map', // Exclude sourcemaps
-		],
 	},
 
 	lint: [
@@ -42,17 +38,21 @@ module.exports = {
 	],
 
 	browserify: {
-		// Enable source maps
-		debug: true,
-		// Additional file extentions to make optional
-		// extensions: ['.es6'],
 		// A separate bundle will be generated for each
 		// bundle config in the list below
 		bundleConfigs: [{
 			entries: src + 'index.js',
 			dest: dest,
+			// Additional file extentions to make optional
+			// extensions: ['.es6'],
 			outputName: 'app.js',
 			mapFile: dest + 'app.js.map',
 		}],
+	},
+
+	production: {
+		css: dest + '*.css',
+		js: dest + '*.js',
+		dest: dest,
 	},
 };

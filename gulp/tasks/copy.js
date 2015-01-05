@@ -1,3 +1,4 @@
+var browserSync  = require('browser-sync');
 var gulp = require('gulp');
 var size = require('gulp-size');
 var config = require('../config').copy;
@@ -10,7 +11,8 @@ gulp.task('copy', function() {
 
 		return gulp.src(sourcePath)
 			.pipe(gulp.dest(destPath))
-			.pipe(size({title: 'copy:' + title}));
+			.pipe(size({title: 'copy:' + title}))
+			.pipe(browserSync.reload({ stream: true }));
 	}
 
 	config.forEach(copyFile);
