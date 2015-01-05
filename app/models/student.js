@@ -96,18 +96,6 @@ class Student extends StudentRecord {
 		return this.schedules.filter(sched => sched.active).sortBy(sched => sched.semester)
 	}
 
-	data() {
-		return Promise.props({
-			courses: this.courses,
-			fabrications: this.fabrications.toArray(),
-			overrides: this.overrides.toArray(),
-			studies: this.studies.toArray(),
-			creditsNeeded: this.creditsNeeded,
-			graduation: this.graduation,
-			matriculation: this.matriculation,
-		})
-	}
-
 	addSchedule(newSchedule) {
 		let sched = new Schedule(newSchedule)
 		return this.setIn(['schedules', sched.id], sched)
@@ -187,6 +175,18 @@ class Student extends StudentRecord {
 
 
 	// helpers
+
+	data() {
+		return Promise.props({
+			courses: this.courses,
+			fabrications: this.fabrications.toArray(),
+			overrides: this.overrides.toArray(),
+			studies: this.studies.toArray(),
+			creditsNeeded: this.creditsNeeded,
+			graduation: this.graduation,
+			matriculation: this.matriculation,
+		})
+	}
 
 	encode() {
 		return encodeURIComponent(this)
