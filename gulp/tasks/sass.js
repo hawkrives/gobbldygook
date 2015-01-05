@@ -10,7 +10,7 @@ var autoprefixer = require('autoprefixer-core');
 var csswring = require('csswring');
 
 var processors = [
-    autoprefixer({browsers: config.AUTOPREFIXER_BROWSERS}),
+    autoprefixer(),
     csswring,
 ]
 

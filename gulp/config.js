@@ -31,16 +31,6 @@ module.exports = {
 	sass: {
 		src: src + 'styles/**/*.scss',
 		dest: dest,
-		AUTOPREFIXER_BROWSERS: [
-			'ie >= 11',
-			'ie_mob >= 11',
-			'ff >= 33',
-			'chrome >= 37',
-			'safari >= 8',
-			'opera >= 25',
-			'ios >= 8',
-			'android >= 4.4',
-		],
 	},
 
 	fonts: {
