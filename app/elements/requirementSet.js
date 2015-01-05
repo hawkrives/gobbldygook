@@ -12,7 +12,14 @@ let RequirementSet = React.createClass({
 		result: React.PropTypes.bool.isRequired,
 		title: React.PropTypes.string.isRequired,
 		type: React.PropTypes.string.isRequired,
-		details: React.PropTypes.array,
+		details: React.PropTypes.oneOfType([
+			React.PropTypes.array,
+			React.PropTypes.shape({
+				has: React.PropTypes.number,
+				matches: React.PropTypes.arrayOf(React.PropTypes.object),
+				needs: React.PropTypes.number,
+			}),
+		]),
 	},
 
 	toggleDescription() {
