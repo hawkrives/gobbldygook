@@ -38,7 +38,7 @@
 		margin-right: 5px;
 	}
 
-	.summary, .details {
+	.summary {
 		font-size: 0.75em;
 	}
 
@@ -111,6 +111,10 @@
 		overflow: visible;
 		white-space: normal;
 		line-height: 1.2;
+	}
+
+	.summary, .details {
+		font-size: 0.9em;
 	}
 }
 
