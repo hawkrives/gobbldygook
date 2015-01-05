@@ -34,12 +34,14 @@ let StudentRecord = Immutable.Record({
 
 class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
-		let filtered = Immutable.fromJS(encodedStudent)
-			.filter((val, key) => ['studies', 'schedules', 'overrides', 'fabrications'].indexOf(key) === -1)
+		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
+		// instead of our custom Studies, Schedules, and such.
+		let toRemove = Immutable.Set(['studies', 'schedules', 'overrides', 'fabrications'])
+		let filtered = Immutable.fromJS(encodedStudent).filterNot((val, key) => toRemove.has(key))
 
-		super(filtered.toJS())
-		// console.log(encodedStudent, filtered.toJS())
+		super(filtered)
 
+		// Then add them manually.
 		if (encodedStudent) {
 			return this.withMutations((student) => {
 				Immutable.Seq(encodedStudent.studies || [])
