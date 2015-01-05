@@ -12,6 +12,10 @@ let goodGraduationMessage = "It looks like you'll make it! Just follow the plan,
 let badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
 let StudentSummary = React.createClass({
+	propTypes: {
+		student: React.PropTypes.object.isRequired,
+	},
+
 	updateStudentName(ev) {
 		let newName = ev.target.value;
 		studentActions.changeName(this.props.student.id, newName)
