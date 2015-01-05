@@ -113,9 +113,8 @@ function language(courses) {
 	// "'CHIN' IN depts AND level >= 200 AND (('Intermediate' OR 'Advanced') AND 'Chinese') IN title"
 	let subsetOfCourses = _.chain(courses)
 		.filter(coursesAtOrAboveLevel(200))
-		.filter(function(course) {
-			return partialNameOrTitle(['Intermediate', 'Advanced'], course)
-		}).value()
+		.filter((course) => partialNameOrTitle(['Intermediate', 'Advanced'], course))
+		.value()
 
 	let japaneseLanguage = _.chain(subsetOfCourses)
 		.filter(hasDepartment('JAPAN'))
@@ -127,9 +126,7 @@ function language(courses) {
 		.filter(partialNameOrTitle('Chinese'))
 		.value()
 
-	let fulfilledLanguages = _.filter([japaneseLanguage, chineseLanguage], function(courses) {
-		return _.size(courses) >= 2
-	})
+	let fulfilledLanguages = _.filter([japaneseLanguage, chineseLanguage], (courses) => _.size(courses) >= 2)
 	let fulfilledLanguageCourses = _.flatten(fulfilledLanguages)
 
 	let numberFulfilled = _.size(fulfilledLanguages)
