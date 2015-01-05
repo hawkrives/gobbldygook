@@ -14,7 +14,7 @@ var processors = [
     csswring,
 ]
 
-gulp.task('sass', ['fonts'], function() {
+gulp.task('sass', function() {
 	return gulp.src(config.src)
 		// run the stylesheets through node-sass
 		.pipe(sass())

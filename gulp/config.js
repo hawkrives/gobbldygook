@@ -33,15 +33,12 @@ module.exports = {
 		dest: dest,
 	},
 
-	fonts: {
-		src: [src + 'fonts/*.woff', src + 'icons/font/*.woff'],
-		dest: dest + 'fonts',
-	},
-
 	copy: [
-		[src + 'index.html', dest],
-		[src + '.htaccess', dest],
-		[src + 'images/loading.svg', dest + 'images'],
+		[src + 'index.html', dest, 'markup'],
+		[src + '.htaccess', dest, 'htaccess'],
+		[src + 'images/loading.svg', dest + 'images', 'images'],
+		[src + 'fonts/*.woff', dest + 'fonts', 'fonts'],
+		[src + 'icons/font/*.woff', dest + 'fonts', 'icons'],
 	],
 
 	browserify: {
