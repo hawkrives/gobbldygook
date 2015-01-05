@@ -10,14 +10,6 @@ function getCourse(clbid) {
 	return db.store('courses')
 		.get(clbid)
 		.then(_.cloneDeep)
-		// .then(c => {
-		// 	if (!c) {
-		// 		log(c, clbid);
-		// 		throw new Error(`course ${clbid} was undefined`)
-		// 	}
-		// 	else
-		// 		return c
-		// })
 		.catch((err) => new Error(`course retrieval failed for ${clbid}`, err))
 }
 
@@ -28,6 +20,7 @@ function getCourses(clbids) {
 	// console.log('called getCourses', clbids)
 	if (Immutable.List.isList(clbids))
 		clbids = clbids.toJS()
+
 	return Promise.all(clbids.map(getCourse))
 }
 

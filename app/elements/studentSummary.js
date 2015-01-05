@@ -30,7 +30,11 @@ let StudentSummary = React.createClass({
 			html: name,
 			onChange: this.updateStudentName,
 		})
-		let has = studies.groupBy(s => s.type).map(s => s.size).toObject()
+
+		let has = studies
+			.groupBy(s => s.type)
+			.map(s => s.size)
+			.toObject()
 
 		let objects = {
 			degree: studies.filter(s => s.type === 'degree'),
