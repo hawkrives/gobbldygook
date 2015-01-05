@@ -13,6 +13,7 @@ var bundleLogger = require('../util/bundleLogger');
 var exorcist = require('exorcist');
 var gulp = require('gulp');
 var handleErrors = require('../util/handleErrors');
+var mold = require('mold-source-map');
 var source = require('vinyl-source-stream');
 var to5ify = require('6to5ify');
 var watchify = require('watchify');
@@ -45,6 +46,8 @@ gulp.task('browserify', function(callback) {
 				.bundle()
 				// Report compile errors
 				.on('error', handleErrors)
+				// Make the sourcemap relative
+				.pipe(mold.transformSourcesRelativeTo('.'))
 				// Use exorcist to remove the map file
 				.pipe(exorcist(bundleConfig.mapFile))
 				// Use vinyl-source-stream to make the stream gulp compatible.
