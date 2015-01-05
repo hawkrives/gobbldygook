@@ -3,6 +3,7 @@ import * as Immutable from 'immutable'
 import * as React from 'react/addons'
 import {State, Navigation} from 'react-router'
 
+import studentActions from 'app/flux/studentActions'
 import RequirementSet from 'app/elements/requirementSet'
 
 let cx = React.addons.classSet
@@ -28,9 +29,7 @@ let AreaOfStudy = React.createClass({
 	toggle() {
 		this.setState({expanded: !this.state.expanded})
 
-		let query = this.getQuery()
-		let sections = Immutable.Set(query.sections ? query.sections.split(',') : [])
-
+		let sections = Immutable.Set(this.props.student.settings.get('expanded-sections') || [])
 		if (this.state.expanded) {
 			sections = sections.delete(this.props.area.id)
 		}
@@ -38,11 +37,8 @@ let AreaOfStudy = React.createClass({
 			sections = sections.add(this.props.area.id)
 		}
 
-		query.sections = sections.join(',')
-
-		if (!query.sections.length) {
-			delete query.sections
-		}
+		studentActions.changeSetting(this.props.student.id, 'expanded-sections', sections.toArray())
+	},
 
 		this.transitionTo('student', this.getParams(), query)
 	},

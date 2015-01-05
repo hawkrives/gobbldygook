@@ -28,6 +28,8 @@ let StudentRecord = Immutable.Record({
 	schedules: Immutable.Map(),
 	overrides: Immutable.Map(),
 	fabrications: Immutable.Map(),
+
+	settings: Immutable.Map(),
 })
 
 class Student extends StudentRecord {
@@ -83,6 +85,10 @@ class Student extends StudentRecord {
 
 	changeGraduation(newGraduation) {
 		return this.set('graduation', newGraduation)
+	}
+
+	changeSetting(key, value) {
+		return this.setIn(['settings', key], value)
 	}
 
 

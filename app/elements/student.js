@@ -39,8 +39,8 @@ var Student = React.createClass({
 
 		return React.createElement('div',
 			{className: 'student'},
-			React.createElement(Sidebar, {student: this.state.student}),
-			React.createElement(RouteHandler, {student: this.state.student}))
+			React.createElement(Sidebar, {student: this.state.student, settings: this.props.settings}),
+			React.createElement(RouteHandler, {student: this.state.student, settings: this.props.settings}))
 	},
 })
 
