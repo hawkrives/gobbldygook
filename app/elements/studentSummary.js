@@ -6,6 +6,7 @@ import ContentEditable from 'app/elements/contentEditable'
 
 import add from 'app/helpers/add'
 import randomChar from 'app/helpers/randomChar'
+import studentActions from 'app/flux/studentActions'
 
 let goodGraduationMessage = 'It looks like you\'ll make it! Just follow the plan, and go over my output with your advisor a few times.'
 let badGraduationMessage = 'You haven\'t planned everything out yet. Ask your advisor if you need help fitting everything in.'
@@ -13,7 +14,7 @@ let badGraduationMessage = 'You haven\'t planned everything out yet. Ask your ad
 let StudentSummary = React.createClass({
 	updateStudentName(ev) {
 		let newName = ev.target.value;
-		this.props.student.name = newName;
+		studentActions.changeName(this.props.student.id, newName)
 	},
 
 	render() {
