@@ -7,8 +7,8 @@ var gulp  = require('gulp');
 var config = require('../config');
 
 gulp.task('watch', ['setWatch', 'browserSync'], function() {
-	gulp.watch(config.lint.src, ['lint']);
+	gulp.watch(config.lint, ['lint']);
 	gulp.watch(config.sass.src, ['sass']);
 	gulp.watch(config.fonts.src, ['fonts']);
-	gulp.watch(config.markup.src, ['markup']);
+	gulp.watch(config.copy, ['markup']);
 });

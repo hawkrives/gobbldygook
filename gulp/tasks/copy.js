@@ -1,8 +1,7 @@
-var _ = require('lodash');
 var gulp = require('gulp');
-var config = require('../config').markup
+var config = require('../config').copy
 
-gulp.task('markup', function() {
+gulp.task('copy', function() {
 	var copyFile = function(paths) {
 		var sourcePath = paths[0];
 		var destPath = paths[1];
@@ -11,5 +10,5 @@ gulp.task('markup', function() {
 			.pipe(gulp.dest(destPath))
 	}
 
-	_.zip(config.src, config.dest).forEach(copyFile);
+	config.forEach(copyFile);
 });

@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var gulp = require('gulp');
 var symlink = require('gulp-symlink');
 var config = require('../config').link;
@@ -12,5 +11,5 @@ gulp.task('link', function() {
 			.pipe(symlink(destPath, config.opts))
 	}
 
-	_.zip(config.src, config.dest).forEach(linkFolder);
+	config.paths.forEach(linkFolder);
 });

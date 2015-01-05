@@ -10,7 +10,7 @@
 
 var browserify = require('browserify');
 var bundleLogger = require('../util/bundleLogger');
-var exorcist = require('exorcist')
+var exorcist = require('exorcist');
 var gulp = require('gulp');
 var handleErrors = require('../util/handleErrors');
 var source = require('vinyl-source-stream');
@@ -33,7 +33,9 @@ gulp.task('browserify', function(callback) {
 			debug: config.debug,
 		});
 
-		bundler.transform(to5ify.configure({blacklist: ['generators']}));
+		bundler.transform(to5ify.configure({
+			blacklist: ['generators'],
+		}));
 
 		var bundle = function() {
 			// Log when bundling starts
