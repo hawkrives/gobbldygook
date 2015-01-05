@@ -40,20 +40,23 @@ let AreaOfStudy = React.createClass({
 		studentActions.changeSetting(this.props.student.id, 'expanded-sections', sections.toArray())
 	},
 
-		this.transitionTo('student', this.getParams(), query)
+	checkForExpansion(props) {
+		let sections = props.student.settings.get('expanded-sections')
+		if (sections)
+			return sections.indexOf(this.props.area.id) >= 0
+		return false
 	},
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.initialExpansion !== undefined)
-			this.setState({expanded: nextProps.initialExpansion})
+		this.setState({ expanded: this.checkForExpansion(this.props) })
+	},
+
+	componentWillMount() {
+		this.setState({ expanded: this.checkForExpansion(this.props) })
 	},
 
 	getInitialState() {
-		return { expanded: this.props.initialExpansion }
-	},
-
-	getDefaultProps() {
-		return { initialExpansion: false }
+		return { expanded: this.checkForExpansion(this.props) }
 	},
 
 	render() {

@@ -57,7 +57,6 @@ let GraduationStatus = React.createClass({
 						key: area.id,
 						student: this.props.student,
 						area: area,
-						initialExpansion: this.props.sections.indexOf(area.id) >= 0,
 					})
 				}).toJS()
 
@@ -71,7 +70,7 @@ let GraduationStatus = React.createClass({
 					areaElements)
 			}).toJS()
 
-		let studentButtons = React.createElement('menu', {className: 'student-buttons'},
+		let studentButtons = React.createElement('menu', {className: 'button-list student-buttons'},
 			// React.createElement('button', {className: 'parse-student', onClick: this.parse}, 'Parse'),
 			React.createElement('button', {className: 'demo-student', onClick: this.demo}, 'Demo'),
 			React.createElement('button', {className: 'download-student'},
