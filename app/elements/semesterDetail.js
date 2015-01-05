@@ -35,8 +35,9 @@ let SemesterDetail = React.createClass({
 	render() {
 		return React.createElement('div',
 			{className: 'semester-detail'},
-			JSON.stringify(this.getPath()),
-			JSON.stringify(this.state.schedules.toJS()))
+			React.createElement('pre', null,
+				this.getPath(), '\n',
+				JSON.stringify(this.state.schedules.toJS(), null, 2)))
 	},
 })
 
