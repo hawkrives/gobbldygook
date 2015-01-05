@@ -45,24 +45,16 @@ class Student extends StudentRecord {
 		if (encodedStudent) {
 			return this.withMutations((student) => {
 				Immutable.Seq(encodedStudent.studies || [])
-					.forEach((study) => {
-						student = student.addArea(study)
-					})
+					.forEach(study => { student = student.addArea(study) })
 
 				Immutable.Seq(encodedStudent.schedules || [])
-					.forEach((schedule) => {
-						student = student.addSchedule(schedule)
-					})
+					.forEach(schedule => { student = student.addSchedule(schedule) })
 
 				Immutable.Seq(encodedStudent.overrides || [])
-					.forEach((override) => {
-						student = student.addOverride(override)
-					})
+					.forEach(override => { student = student.addOverride(override) })
 
 				Immutable.Seq(encodedStudent.fabrications || [])
-					.forEach((fabrication) => {
-						student = student.addFabrication(fabrication)
-					})
+					.forEach(fabrication => { student = student.addFabrication(fabrication) })
 
 				return student
 			})
