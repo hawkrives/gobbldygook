@@ -18,12 +18,12 @@ git clone https://github.com/hawkrives/gobbldygook.git
 cd gobbldygook
 git submodule init && git submodule update
 npm install
-make serve
+npm run serve
 ```
 
 In short: clone, prepare submodules, install dependencies, and build.
 
-`make` will list the available commands.
+Available commands are in `package.json` under the `scripts` key.
 
 
 ## Credits
