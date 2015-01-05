@@ -1,5 +1,4 @@
 import '6to5/polyfill'
-import 'es6-shim'
 import 'fetch'
 
 import * as Promise from 'bluebird'
