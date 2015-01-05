@@ -108,7 +108,7 @@
 
 @mixin block {
 	@include block-base;
-	transition: border 0.5s ease-in-out;
+	// transition: border 0.5s ease-in-out;
 
 	background: #fff;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
