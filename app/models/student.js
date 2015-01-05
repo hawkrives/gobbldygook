@@ -130,6 +130,7 @@ class Student extends StudentRecord {
 		})
 	}
 
+
 	// area-of-study methods
 
 	get areasByType() {
@@ -142,22 +143,33 @@ class Student extends StudentRecord {
 	}
 
 	removeArea(id) {
-		let removedIndex = this.studies.findIndex((study) => study.id === id)
-		return this.set('studies', this.studies.delete(removedIndex))
+		return this.set('studies', this.studies.delete(id))
 	}
 
 	removeMultipleAreas(ids) {
 		Seq(ids).forEach(this.removeArea, this)
 	}
 
-	// misc
+
+	// override methods
 
 	addOverride(override) {
-		return this
+		return this.setIn(['overrides', override.id], override)
 	}
 
+	removeOverride(overrideId) {
+		return this.set('overrides', this.overrides.delete(overrideId))
+	}
+
+
+	// fabrication methods
+
 	addFabrication(fabrication) {
-		return this
+		return this.setIn(['fabrications', fabrication.id], fabrication)
+	}
+
+	removeFabrication(fabricationId) {
+		return this.set('fabrications', this.fabrications.delete(fabricationId))
 	}
 
 
@@ -189,7 +201,7 @@ class Student extends StudentRecord {
 	}
 
 	encode() {
-		return encodeURIComponent(this)
+		return encodeURIComponent(this.toJS())
 	}
 
 	toString() {
@@ -201,7 +213,7 @@ class Student extends StudentRecord {
 	}
 
 	save() {
-		console.log('saving student', this.name, '(' + this.id + ')')
+		console.log(`saving student ${this.name} (${this.id})`)
 		localStorage.setItem(this.id, this.toJSON())
 
 		if (this.active)
