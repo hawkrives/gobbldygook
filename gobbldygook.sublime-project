@@ -10,8 +10,7 @@
 			[
 				".idea",
 				".sass-cache",
-				"data",
-				"testing"
+				"dist/data"
 			],
 			"path": "."
 		},
