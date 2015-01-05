@@ -21,12 +21,14 @@ let studentStore = Reflux.createStore({
 	undo() {
 		this.future = this.future.unshift(this.history.first())
 		this.students = this.history.shift()
+		this._postChange()
 	},
 
 	redo() {
 		if (this.future.size) {
 			this.history = this.future
 			this.students = this.future.shift()
+			this._postChange()
 		}
 	},
 
