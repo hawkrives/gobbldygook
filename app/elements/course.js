@@ -197,13 +197,13 @@ var Course = React.createClass({
 
 		if (this.props.schedule && (this.props.info.year !== this.props.schedule.year) && this.props.schedule.year <= thisYear) {
 			warnings.push({
-				msg: 'This course (from ' + this.props.info.year + ') is not offered in this year (' + this.props.schedule.year + ').'
+				msg: `This course (from ${this.props.info.year}) is not offered in this year (${this.props.schedule.year}).`
 			})
 		}
 
 		if (this.props.schedule && this.props.info.sem !== this.props.schedule.semester) {
 			warnings.push({
-				msg: 'This course (from ' + semesterName(this.props.info.sem) + ') is not offered in this semester.',
+				msg: `This course (from ${semesterName(this.props.info.sem)}) is not offered in this semester.`,
 				className: 'course-invalid-semester',
 			})
 		}
@@ -214,22 +214,20 @@ var Course = React.createClass({
 				let conflictIndex = _.findIndex(this.props.conflicts[i], item => item === true)
 				conflictIndex = conflictIndex + 1; // because humans don't 0-index lists
 				warnings.push({
-					msg: 'This course has a time conflict with the ' + humanize.ordinal(conflictIndex) + ' course.',
+					msg: `This course has a time conflict with the ${humanize.ordinal(conflictIndex)} course.`,
 					className: 'course-time-conflict',
 				})
 			}
 		}
 
-		let warningEls = React.createElement('span',
-			{title: _.map(warnings, w => '- ' + w.msg + '\n')},
-			_.map(warnings, (w, index) => {
-				let className = w.className || 'course-alert';
-				return React.createElement('i', {className: className, key: className + index})
-			}))
+		let warningEls = _.map(warnings, (w, index) => {
+			let className = w.className || 'course-alert';
+			return React.createElement('span', {className, title: w.msg, key: className + index})
+		})
 
 		return React.createElement('div',
 			{className: 'warnings'},
-			warnings.length ? warningEls : null)
+			warningEls)
 	},
 
 	render() {
