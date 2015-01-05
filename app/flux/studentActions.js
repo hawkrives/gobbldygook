@@ -11,9 +11,10 @@ let studentActions = Reflux.createActions([
 	'changeGraduation',
 	'changeSetting',
 	'addArea',
-	'addSchedule',
 	'removeArea',
 	'removeMultipleAreas',
+	'reorderArea',
+	'addSchedule',
 	'destroySchedule',
 	'destroyMultipleSchedules',
 	'renameSchedule',
@@ -22,7 +23,10 @@ let studentActions = Reflux.createActions([
 	'addCourse',
 	'removeCourse',
 	'reorderCourse',
-	'reorderArea',
+	'addOverride',
+	'removeOverride',
+	'addFabrication',
+	'removeFabrication',
 ])
 
 export default studentActions
