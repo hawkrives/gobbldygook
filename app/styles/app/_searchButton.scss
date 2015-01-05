@@ -29,7 +29,7 @@
 	border: 0;
 
 	&::after {
-		@include ionicon($ionicon-var-ios7-search);
+		@include ionicon($ionicon-ios7-search);
 	}
 }
 
@@ -85,7 +85,7 @@
 	}
 
 	&::after {
-		@include ionicon($ionicon-var-close);
+		@include ionicon($ionicon-close);
 	}
 
 	align-items: center;

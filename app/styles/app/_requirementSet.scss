@@ -78,16 +78,16 @@ $border-color: rgb(203, 203, 203);
 		opacity: 0.5;
 		&::before {
 			opacity: 0.15;
-			@include ionicon($ionicon-var-record);
+			@include ionicon($ionicon-record);
 		}
 	}
 
 	&.incomplete::before {
-		@include ionicon($ionicon-var-close);
+		@include ionicon($ionicon-close);
 		color: $red;
 	}
 	&.completed::before {
-		@include ionicon($ionicon-var-checkmark);
+		@include ionicon($ionicon-checkmark);
 		color: darken($green, 10%);
 	}
 }

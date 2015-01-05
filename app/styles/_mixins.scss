@@ -76,12 +76,12 @@
 	@include button;
 
 	&::after {
-		@include ionicon($ionicon-var-ios7-plus-empty);
+		@include ionicon($ionicon-ios7-plus-empty);
 		@content;
 	}
 
 	&[disabled]::after {
-		@include ionicon($ionicon-var-checkmark);
+		@include ionicon($ionicon-checkmark);
 	}
 }
 
@@ -97,7 +97,7 @@
 	}
 
 	&::after {
-		@include ionicon($ionicon-var-close);
+		@include ionicon($ionicon-close);
 	}
 }
 

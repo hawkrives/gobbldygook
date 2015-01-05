@@ -47,7 +47,7 @@
 	}
 
 	& > .summary::after {
-		@include ionicon($ionicon-var-ios7-more);
+		@include ionicon($ionicon-ios7-more);
 
 		position: absolute;
 		top: 1px;
@@ -59,7 +59,7 @@
 	}
 
 	&.open > .summary::after {
-		@include ionicon($ionicon-var-ios7-more-outline);
+		@include ionicon($ionicon-ios7-more-outline);
 
 		transform: rotate(90deg) scale(0.8);
 	}
