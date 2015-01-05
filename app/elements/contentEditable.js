@@ -6,14 +6,6 @@ let ContentEditable = React.createClass({
 		onChange: React.PropTypes.func,
 		html: React.PropTypes.string,
 	},
-	render() {
-		return React.createElement('span', {
-			onInput: this.emitChange,
-			onBlur: this.emitChange,
-			contentEditable: true,
-			dangerouslySetInnerHTML: {__html: this.props.html},
-		})
-	},
 	shouldComponentUpdate(nextProps) {
 		return nextProps.html !== this.getDOMNode().innerHTML;
 	},
@@ -28,6 +20,15 @@ let ContentEditable = React.createClass({
 			this.props.onChange({target: {value: html}});
 		}
 		this.lastHtml = html;
+	},
+	render() {
+		return React.createElement('span', {
+			className: 'contenteditable',
+			onInput: this.emitChange,
+			onBlur: this.emitChange,
+			contentEditable: true,
+			dangerouslySetInnerHTML: {__html: this.props.html},
+		})
 	},
 });
 
