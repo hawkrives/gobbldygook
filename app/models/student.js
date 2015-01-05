@@ -61,7 +61,7 @@ class Student extends StudentRecord {
 		}
 	}
 
-	rename(newName) {
+	changeName(newName) {
 		return this.set('name', newName)
 	}
 
