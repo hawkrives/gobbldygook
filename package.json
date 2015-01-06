@@ -69,7 +69,6 @@
     "matcha": "^0.6.0",
     "mocha": "^2.1.0",
     "mold-source-map": "^0.3.0",
-    "node-uuid": "^1.4.2",
     "pretty-hrtime": "^1.0.0",
     "require-dir": "^0.1.0",
     "should": "^4.4.2",
