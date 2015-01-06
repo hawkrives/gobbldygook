@@ -1,9 +1,9 @@
 // tests/queryStuff-test.js
-var should = require('should');
+import 'should'
 
-describe('buildQueryFromString', function() {
-	it('interprets a query string into a query object', function() {
-		var buildQueryFromString = require('../app/helpers/queryStuff');
+describe('buildQueryFromString', () => {
+	it('interprets a query string into a query object', () => {
+		import buildQueryFromString from 'app/helpers/queryStuff'
 
 		var queryStrings = [
 			'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014',
@@ -11,7 +11,7 @@ describe('buildQueryFromString', function() {
 			'department: American Conversations  name: Independence  year: 2014  time: Tuesdays after 12',
 			'ges: $AND  geneds: history of western culture gened: HBS  semester: Spring  year: 2014',
 			'History of Asia',
-		];
+		]
 
 		var expectedResults = [
 			{
@@ -41,12 +41,12 @@ describe('buildQueryFromString', function() {
 			{
 				title: ['History of Asia'],
 			},
-		];
+		]
 
-		buildQueryFromString(queryStrings[0]).should.eql(expectedResults[0]);
-		buildQueryFromString(queryStrings[1]).should.eql(expectedResults[1]);
-		buildQueryFromString(queryStrings[2]).should.eql(expectedResults[2]);
-		buildQueryFromString(queryStrings[3]).should.eql(expectedResults[3]);
-		buildQueryFromString(queryStrings[4]).should.eql(expectedResults[4]);
+		buildQueryFromString(queryStrings[0]).should.eql(expectedResults[0])
+		buildQueryFromString(queryStrings[1]).should.eql(expectedResults[1])
+		buildQueryFromString(queryStrings[2]).should.eql(expectedResults[2])
+		buildQueryFromString(queryStrings[3]).should.eql(expectedResults[3])
+		buildQueryFromString(queryStrings[4]).should.eql(expectedResults[4])
 	})
 })

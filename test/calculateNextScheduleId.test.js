@@ -1,10 +1,10 @@
 // tests/calculateNextScheduleId-test.js
-var should = require('should');
+import 'should'
 
-describe('calculateNextScheduleId', function() {
-	it('calculates the next available schedule id', function() {
-		var calculateNextScheduleId = require('../app/helpers/calculateNextScheduleId');
-		var schedules = {
+describe('calculateNextScheduleId', () => {
+	it('calculates the next available schedule id', () => {
+		import calculateNextScheduleId from 'app/helpers/calculateNextScheduleId'
+		let schedules = {
 			"1": {"id": 1},
 			"2": {"id": 2},
 			"3": {"id": 3},
@@ -19,8 +19,8 @@ describe('calculateNextScheduleId', function() {
 			"12": {"id": 12},
 			"13": {"id": 13},
 			"14": {"id": 14}
-		};
+		}
 
-		calculateNextScheduleId(schedules).should.equal(15);
-	});
-});
+		calculateNextScheduleId(schedules).should.equal(15)
+	})
+})

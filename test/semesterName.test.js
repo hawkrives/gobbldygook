@@ -1,41 +1,41 @@
 // tests/countCredits-test.js
-var assert = require('assert');
+import 'should'
 
-describe('semesterName', function() {
-	it('converts a semester number to a semester name', function() {
-		var semesterName = require('../app/helpers/semesterName');
+describe('semesterName', () => {
+	it('converts a semester number to a semester name', () => {
+		import {semesterName} from 'app/helpers/semesterName'
 
-		assert.equal(semesterName(0), 'Unknown (0)');
-		assert.equal(semesterName(1), 'Fall');
-		assert.equal(semesterName(2), 'Interim');
-		assert.equal(semesterName(3), 'Spring');
-		assert.equal(semesterName(4), 'Early Summer');
-		assert.equal(semesterName(5), 'Late Summer');
-	});
-});
+		semesterName(0).should.equal('Unknown (0)')
+		semesterName(1).should.equal('Fall')
+		semesterName(2).should.equal('Interim')
+		semesterName(3).should.equal('Spring')
+		semesterName(4).should.equal('Early Summer')
+		semesterName(5).should.equal('Late Summer')
+	})
+})
 
-describe('toPrettyTerm', function() {
-	it('converts a term id to a year and semester', function() {
-		var toPrettyTerm = require('../app/helpers/semesterName').toPrettyTerm;
+describe('toPrettyTerm', () => {
+	it('converts a term id to a year and semester', () => {
+		import {toPrettyTerm} from 'app/helpers/semesterName'
 
-		assert.equal(toPrettyTerm(20141), 'Fall 2014—2015');
-		assert.equal(toPrettyTerm(20103), 'Spring 2010—2011');
-		assert.equal(toPrettyTerm(20135), 'Late Summer 2013—2014');
-		assert.equal(toPrettyTerm(20111), 'Fall 2011—2012');
-		assert.equal(toPrettyTerm(20316), 'Unknown (6) 2031—2032');
-		assert.equal(toPrettyTerm(20134), 'Early Summer 2013—2014');
-	});
-});
+		toPrettyTerm(20141).should.equal('Fall 2014—2015')
+		toPrettyTerm(20103).should.equal('Spring 2010—2011')
+		toPrettyTerm(20135).should.equal('Late Summer 2013—2014')
+		toPrettyTerm(20111).should.equal('Fall 2011—2012')
+		toPrettyTerm(20316).should.equal('Unknown (6) 2031—2032')
+		toPrettyTerm(20134).should.equal('Early Summer 2013—2014')
+	})
+})
 
-describe('expandYear', function() {
-	it('expands a year to year-(year+1)', function() {
-		var expandYear = require('../app/helpers/semesterName').expandYear;
+describe('expandYear', () => {
+	it('expands a year to year-(year+1)', () => {
+		import {expandYear} from 'app/helpers/semesterName'
 
-		assert.equal(expandYear(2014), '2014—2015');
-		assert.equal(expandYear(2010), '2010—2011');
-		assert.equal(expandYear(2013), '2013—2014');
-		assert.equal(expandYear(2011), '2011—2012');
-		assert.equal(expandYear(2031), '2031—2032');
-		assert.equal(expandYear(2013), '2013—2014');
-	});
-});
+		expandYear(2014).should.equal('2014—2015')
+		expandYear(2010).should.equal('2010—2011')
+		expandYear(2013).should.equal('2013—2014')
+		expandYear(2011).should.equal('2011—2012')
+		expandYear(2031).should.equal('2031—2032')
+		expandYear(2013).should.equal('2013—2014')
+	})
+})
