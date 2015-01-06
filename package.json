@@ -11,6 +11,7 @@
     "check": "npm outdated --depth 0",
     "clean": "rm -rf dist/ && rm -f node_modules/app && rm -f node_modules/sto-areas",
     "cloc": "cloc . --exclude-dir=data,node_modules,dist,test,playground,gulp --by-file-by-lang",
+    "lint": "jscs ./app/**/*.js ./mockups/**/*.js ./gulp/**/*.js",
     "gulp": "gulp",
     "serve": "npm run clean && gulp watch",
     "stat": "npm run gulp lint && npm run benchmark && npm run test",

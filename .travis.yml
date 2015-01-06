@@ -13,4 +13,4 @@ language: node_js
 node_js:
   - "0.10"
 
-script: npm run build && npm run gulp lint && npm test
+script: npm run build && npm run lint && npm test
