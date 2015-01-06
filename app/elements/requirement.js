@@ -76,6 +76,13 @@ let SomeArrayRequirement = React.createClass({
 })
 
 let BooleanArrayRequirement = React.createClass({
+	propTypes: {
+		details: React.PropTypes.arrayOf(React.PropTypes.shape({
+			result: React.PropTypes.bool.isRequired,
+			title: React.PropTypes.string.isRequired,
+			abbr: React.PropTypes.string,
+		})).isRequired,
+	},
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-boolean-array'},
@@ -97,10 +104,24 @@ let BooleanArrayRequirement = React.createClass({
 				})
 			)
 		)
-	}
+	},
 })
 
 let NumberObjectRequirement = React.createClass({
+	propTypes: {
+		result: React.PropTypes.bool.isRequired,
+		details: React.PropTypes.shape({
+			has: React.PropTypes.number.isRequired,
+			needs: React.PropTypes.oneOfType([
+				React.PropTypes.number,
+				React.PropTypes.string,
+			]).isRequired,
+			matches: React.PropTypes.arrayOf(React.PropTypes.shape({
+				clbid: React.PropTypes.number.isRequired,
+				deptnum: React.PropTypes.string.isRequired,
+			})).isRequired,
+		}).isRequired,
+	},
 	render() {
 		return React.createElement('div',
 			{className: 'requirement-result requirement-result-object-number'},
@@ -120,7 +141,7 @@ let NumberObjectRequirement = React.createClass({
 				})
 			)
 		)
-	}
+	},
 })
 
 export {
