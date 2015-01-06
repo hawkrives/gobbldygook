@@ -1,4 +1,4 @@
-let semesterName = (semester) => {
+function semesterName(semester) {
 	let semesters = {
 		1: 'Fall',
 		2: 'Interim',
