@@ -1,13 +1,8 @@
 import * as _ from 'lodash'
 
-import {hasDeptNumBetween} from 'app/helpers/deptNum'
-
-import {
-	hasGenEd,
-	countGeneds,
-	acrossAtLeastTwoDepartments
-} from 'sto-areas/lib/commonEducationUtilities'
-
+import hasGenEd from 'sto-areas/lib/hasGenEd'
+import countGeneds from 'sto-areas/lib/countGeneds'
+import acrossAtLeastTwoDepartments from 'sto-areas/lib/acrossAtLeastTwoDepartments'
 import isIntercollegiateSport from 'sto-areas/lib/isIntercollegiateSport'
 import checkThatCoursesSpanDepartmentsAndGeneds from 'sto-areas/lib/checkThatCoursesSpanDepartmentsAndGeneds'
 
