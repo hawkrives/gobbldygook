@@ -26,7 +26,7 @@ function browserifyTask(callback, devMode) {
 	var bundleQueue = config.bundleConfigs.length
 
 	var browserifyThis = function(bundleConfig) {
-		 if (devMode) {
+		if (devMode) {
 			// Add watchify args and debug (sourcemaps) option
 			_.extend(bundleConfig, watchify.args, { debug: true })
 			// A watchify require/external bug that prevents proper recompiling,
