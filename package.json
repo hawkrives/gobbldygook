@@ -6,14 +6,14 @@
   "browser": "dist/index.html",
   "private": true,
   "scripts": {
-    "build": "gulp build",
-    "cloc": "cloc . --exclude-dir=data,node_modules,dist,test,playground,gulp --by-file-by-lang",
-    "clean": "rm -rf dist/ && rm -f node_modules/app && rm -f node_modules/sto-areas",
+    "build": "npm run clean && gulp build",
     "check": "npm outdated --depth 0",
+    "clean": "rm -rf dist/ && rm -f node_modules/app && rm -f node_modules/sto-areas",
+    "cloc": "cloc . --exclude-dir=data,node_modules,dist,test,playground,gulp --by-file-by-lang",
+    "gulp": "gulp",
+    "serve": "npm run clean && gulp watch",
     "test": "mocha",
-    "start": "gulp watch",
-    "watch": "gulp watch",
-    "serve": "gulp watch"
+    "watch": "npm run clean && gulp watch"
   },
   "repository": {
     "type": "git",
