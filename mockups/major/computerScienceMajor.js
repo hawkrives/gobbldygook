@@ -153,7 +153,7 @@ function electiveCourses(courses) {
 
 function capstoneCourse(courses) {
 	// Capstone: Computer Science 390
-	let hasTakenCapstone = checkCoursesFor(courses, {dept:'CSCI', num:390})
+	let hasTakenCapstone = checkCoursesFor(courses, {deptnum:'CSCI 390'})
 
 	return {
 		title: 'Capstone',

@@ -8,12 +8,12 @@ import {coursesAtLevel, coursesAtOrAboveLevel} from 'app/helpers/courseLevels'
 import isRequiredCourse from 'sto-areas/lib/isRequiredCourse'
 
 const chemDeptRequiredCourses = [
-	{dept:'CHEM',num:121}, {dept:'CHEM',num:123}, {dept:'CHEM',num:126},
-	{dept:'CHEM',num:125}, {dept:'CHEM',num:126},
-	{dept:'CHEM/BIO',num:125}, {dept:'CHEM/BIO',num:126}, {dept:'CHEM/BIO',num:227},
+	{deptnum:'CHEM 121'}, {deptnum:'CHEM 123'}, {deptnum:'CHEM 126'},
+	{deptnum:'CHEM 125'}, {deptnum:'CHEM 126'},
+	{deptnum:'CHEM/BIO 125'}, {deptnum:'CHEM/BIO 126'}, {deptnum:'CHEM/BIO 227'},
 
-	{dept:'CHEM',num:247}, {dept:'CHEM',num:248}, {dept:'CHEM',num:255}, {dept:'CHEM',num:371},
-	{dept:'CHEM',num:253}, {dept:'CHEM',num:254}, {dept:'CHEM',num:256}, {dept:'CHEM',num:357},
+	{deptnum:'CHEM 247'}, {deptnum:'CHEM 248'}, {deptnum:'CHEM 255'}, {deptnum:'CHEM 371'},
+	{deptnum:'CHEM 253'}, {deptnum:'CHEM 254'}, {deptnum:'CHEM 256'}, {deptnum:'CHEM 357'},
 ]
 
 let isRequiredChemistryCourse = _.curry(isRequiredCourse(chemDeptRequiredCourses))
@@ -23,9 +23,9 @@ function introductorySequence(courses) {
 	// 121/123/126, Chemistry 125/126, or CHEM/BI0 125/126/227).
 
 	let sequences = [
-		[{dept:'CHEM',num:121}, {dept:'CHEM',num:123}, {dept:'CHEM',num:126}],
-		[{dept:'CHEM',num:125}, {dept:'CHEM',num:126}],
-		[{dept:'CHEM/BIO',num:125}, {dept:'CHEM/BIO',num:126}, {dept:'CHEM/BIO',num:227}],
+		[{deptnum:'CHEM 121'}, {deptnum:'CHEM 123'}, {deptnum:'CHEM 126'}],
+		[{deptnum:'CHEM 125'}, {deptnum:'CHEM 126'}],
+		[{deptnum:'CHEM/BIO 125'}, {deptnum:'CHEM/BIO 126'}, {deptnum:'CHEM/BIO 227'}],
 	]
 
 	let checkedSequences = _.map(sequences, function(sequence) {

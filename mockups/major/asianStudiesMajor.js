@@ -90,8 +90,8 @@ function seniorSeminar(courses) {
 	// Senior Seminar: One of:
 	// - Asian Studies 397: Human Rights/Asian Context, or
 	// - Asian Studies 399: Asian Studies Seminar
-	let humanRights = checkCoursesFor(courses, {dept:'ASIAN', num:397})
-	let asiaSeminar = checkCoursesFor(courses, {dept:'ASIAN', num:399})
+	let humanRights = checkCoursesFor(courses, {deptnum:'ASIAN 397'})
+	let asiaSeminar = checkCoursesFor(courses, {deptnum:'ASIAN 399'})
 
 	let seminars = [
 		humanRights,
