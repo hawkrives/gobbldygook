@@ -95,12 +95,15 @@ describe('studiesInPhysicalMovement', function() {
 		]
 
 		let badCourseLoads = [
+			// Bad because the second course doesn't fulfill an SPM requirement
 			[{crsid: 1, depts: ['ESAC'], gereqs: ['SPM'], credits: 1.00},
 			 {crsid: 2, depts: ['ESTH'], credits: 0.25}],
 
+			// Bad because it's using two intercollegiate sports to try and fulfill the requirement
 			[{crsid: 1, depts: ['ESTH'], num: 178, gereqs: ['SPM'], credits: 1.00},
 			 {crsid: 2, depts: ['ESTH'], num: 172, gereqs: ['SPM'], credits: 0.25}],
 
+			// Bad because ... um, IDK. But it's bad!
 			[{crsid: 1, depts: ['ESAC'], gereqs: ['SPM'], credits: 1.00},
 			 {crsid: 1, depts: ['ESAC'], gereqs: ['SPM'], credits: 0.25}],
 		]
