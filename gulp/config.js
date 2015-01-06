@@ -51,8 +51,7 @@ module.exports = {
 	},
 
 	production: {
-		css: dest + '*.css',
-		js: dest + '*.js',
+		js: dest + 'app.js',
 		dest: dest,
 	},
 }
