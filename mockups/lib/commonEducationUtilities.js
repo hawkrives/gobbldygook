@@ -11,8 +11,7 @@ let hasGenEd = _.curry(function(gened, course) {
 })
 
 let hasFOL = function(course) {
-	return _.any(course.gereqs,
-		req => req.substr(0,3) === 'FOL')
+	return _.any(course.gereqs, (req) => req.substr(0, 3) === 'FOL')
 }
 
 function countGeneds(courses, gened) {
