@@ -60,7 +60,7 @@ function electives(courses) {
 		_(asianStudiesElectives).filter(partialNameOrTitle('Japan')).size() <= 4,
 	])
 
-	let electivesAreGood = _.all(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
+	let electivesAreGood = _.all([levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized])
 	// console.log('asianStudiesElectives', asianStudiesElectives)
 
 	let matching = _.size(asianStudiesElectives)
