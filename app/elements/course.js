@@ -7,27 +7,27 @@ import studentActions from 'app/flux/studentActions'
 import itemTypes from 'app/models/itemTypes'
 import semesterName from 'app/helpers/semesterName'
 
-let cx = React.addons.classSet;
+let cx = React.addons.classSet
 
 function findSemesterList() {
 	return [
 		{id: 1, title: 'Fall 2012-13'},
 		{id: 2, title: 'Interim 2012-13'},
 		{id: 3, title: 'Spring 2012-13'},
-	];
+	]
 }
 
 
 let CourseTitle = React.createClass({
 	render() {
-		let course = this.props.info;
+		let course = this.props.info
 
-		let titleText = course.title;
-		let type = this.props.info.type;
-		let courseName = course.name || course.title;
+		let titleText = course.title
+		let type = this.props.info.type
+		let courseName = course.name || course.title
 
 		if (course.type === 'Topic')
-			titleText = courseName.replace(/top.*: */gi, '');
+			titleText = courseName.replace(/top.*: */gi, '')
 
 		let isIndependent = /^I[RS]/.test(courseName)
 		if (isIndependent) {
@@ -42,7 +42,7 @@ let CourseTitle = React.createClass({
 			(this.props.info.type === 'Research' && !isIndependent) ? null : courseType,
 			titleText)
 
-		return title;
+		return title
 	}
 })
 
@@ -59,24 +59,24 @@ let ExpandedCourse = React.createClass({
 	},
 
 	render() {
-		let course = this.props.info;
-		let tools = [];
+		let course = this.props.info
+		let tools = []
 
 		// /////
 
-		let title = React.createElement(CourseTitle, this.props);
+		let title = React.createElement(CourseTitle, this.props)
 
 		let identifier = React.createElement('span',
 			{className: 'identifier'},
-			course.dept, ' ', course.num, course.sect);
+			course.dept, ' ', course.num, course.sect)
 
 		let professors = React.createElement('span',
 			{className: 'professors'},
-			humanize.oxford(course.profs));
+			humanize.oxford(course.profs))
 
 		let summary = React.createElement('p',
 			{className: 'summary'},
-			identifier, professors);
+			identifier, professors)
 
 		// /////
 
@@ -118,9 +118,9 @@ let ExpandedCourse = React.createClass({
 				React.createElement('option', {value: s.id, key: s.id}, s.title))))
 		tools.push(semesterList)
 
-		let deleteButton = React.createElement('button', {className: 'remove-course', onClick: this.removeFromSemester, key: 'remove-course'}, 'Remove Course');
+		let deleteButton = React.createElement('button', {className: 'remove-course', onClick: this.removeFromSemester, key: 'remove-course'}, 'Remove Course')
 		if (this.props.schedule) {
-			tools.push(deleteButton);
+			tools.push(deleteButton)
 		}
 
 		let toolsEls = React.createElement('div',
@@ -136,21 +136,21 @@ let ExpandedCourse = React.createClass({
 
 let CollapsedCourse = React.createClass({
 	render() {
-		let course = this.props.info;
+		let course = this.props.info
 
-		let title = React.createElement(CourseTitle, this.props);
+		let title = React.createElement(CourseTitle, this.props)
 
 		let identifier = React.createElement('span',
 			{className: 'identifier'},
-			course.dept, ' ', course.num, course.sect);
+			course.dept, ' ', course.num, course.sect)
 
 		let professors = React.createElement('span',
 			{className: 'professors'},
-			humanize.oxford(course.profs));
+			humanize.oxford(course.profs))
 
 		let summary = React.createElement('p',
 			{className: 'summary'},
-			identifier, professors);
+			identifier, professors)
 
 		return React.createElement('div', {className: 'info-rows'}, title, summary)
 	}
@@ -192,8 +192,8 @@ let Course = React.createClass({
 	},
 
 	findWarnings() {
-		let thisYear = new Date().getFullYear();
-		let warnings = [];
+		let thisYear = new Date().getFullYear()
+		let warnings = []
 
 		if (this.props.schedule && (this.props.info.year !== this.props.schedule.year) && this.props.schedule.year <= thisYear) {
 			warnings.push({
@@ -209,10 +209,10 @@ let Course = React.createClass({
 		}
 
 		if (this.props.conflicts && !_.isUndefined(this.props.index)) {
-			let i = this.props.index;
+			let i = this.props.index
 			if (_.any(this.props.conflicts[i])) {
 				let conflictIndex = _.findIndex(this.props.conflicts[i], item => item === true)
-				conflictIndex = conflictIndex + 1; // because humans don't 0-index lists
+				conflictIndex = conflictIndex + 1 // because humans don't 0-index lists
 				warnings.push({
 					msg: `This course has a time conflict with the ${humanize.ordinal(conflictIndex)} course.`,
 					className: 'course-time-conflict',
@@ -221,7 +221,7 @@ let Course = React.createClass({
 		}
 
 		let warningEls = _.map(warnings, (w, index) => {
-			let className = w.className || 'course-alert';
+			let className = w.className || 'course-alert'
 			return React.createElement('span', {className, title: w.msg, key: className + index})
 		})
 
@@ -231,15 +231,15 @@ let Course = React.createClass({
 	},
 
 	render() {
-		let course = this.props.info;
+		let course = this.props.info
 
-		let isDragging = this.getDragState(itemTypes.COURSE).isDragging;
+		let isDragging = this.getDragState(itemTypes.COURSE).isDragging
 
 		let courseInfo = this.state.isOpen ?
 			React.createElement(ExpandedCourse, this.props) :
-			React.createElement(CollapsedCourse, this.props);
+			React.createElement(CollapsedCourse, this.props)
 
-		let warnings = this.findWarnings();
+		let warnings = this.findWarnings()
 
 		return React.createElement('article',
 			_.extend(
@@ -254,7 +254,7 @@ let Course = React.createClass({
 				this.dragSourceFor(itemTypes.COURSE)),
 
 			courseInfo, warnings
-		);
+		)
 	},
 })
 
@@ -266,7 +266,7 @@ let EmptyCourseSlot = React.createClass({
 		let details = React.createElement('p', {className: 'summary'}, 'no details')
 
 		return React.createElement('article', {className: 'course empty'},
-			React.createElement('div', {className: 'info-rows'}, titleEl, details));
+			React.createElement('div', {className: 'info-rows'}, titleEl, details))
 	}
 })
 
@@ -278,7 +278,7 @@ let MissingCourse = React.createClass({
 		let details = React.createElement('p', {className: 'summary'}, 'no details')
 
 		return React.createElement('article', {className: 'course missing'},
-			React.createElement('div', {className: 'info-rows'}, titleEl, details));
+			React.createElement('div', {className: 'info-rows'}, titleEl, details))
 	}
 })
 

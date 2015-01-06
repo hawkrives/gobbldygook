@@ -45,7 +45,7 @@ let Semester = React.createClass({
 		let schedule = activeSchedules.find((s) => s.year === this.props.year && s.semester === this.props.semester)
 
 		Promise.all([schedule.courses, schedule.validate()]).then((results) => {
-			let [courses, validation] = results;
+			let [courses, validation] = results
 			this.setState({
 				schedule,
 				courses: Immutable.List(courses),
@@ -94,9 +94,9 @@ let Semester = React.createClass({
 					`${credits} ${humanize.pluralize(credits, 'credit')}`))
 			}
 		}
-		let infoBar = React.createElement('ul', {className: 'info-bar'}, infoIcons);
+		let infoBar = React.createElement('ul', {className: 'info-bar'}, infoIcons)
 
-		let courseList = null;
+		let courseList = null
 		if (this.state.schedule && this.state.courses) {
 			let courseObjects = this.state.courses
 				.filterNot(isUndefined)
@@ -164,7 +164,7 @@ let Semester = React.createClass({
 					title: `Remove ${this.props.year} ${semesterName(this.props.semester)}`,
 					onClick: this.removeSemester,
 				})),
-			courseList);
+			courseList)
 	},
 
 	removeSemester() {

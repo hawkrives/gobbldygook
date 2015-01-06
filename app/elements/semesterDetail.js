@@ -15,7 +15,7 @@ let SemesterDetail = React.createClass({
 			year: null,
 			semester: null,
 			schedules: Immutable.List(),
-		};
+		}
 	},
 
 	componentWillReceiveProps(nextProps) {

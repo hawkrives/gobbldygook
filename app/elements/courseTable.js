@@ -8,7 +8,6 @@ import Year from 'app/elements/year'
 let CourseTable = React.createClass({
 	propTypes: {
 		student: React.PropTypes.object.isRequired,
-
 	},
 
 	addYear() {
@@ -23,7 +22,7 @@ let CourseTable = React.createClass({
 	render() {
 		// console.log('course-table render', this.props)
 		if (!this.props.student)
-			return null;
+			return null
 
 		let years = this.props.student.schedules
 			.sortBy(schedule => schedule.year)

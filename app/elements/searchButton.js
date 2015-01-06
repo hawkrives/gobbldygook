@@ -26,11 +26,11 @@ let SearchButton = React.createClass({
 		this.query(this.state.query)
 	},
 	onChange: function(evt) {
-		this.setState({query: evt.target.value});
+		this.setState({query: evt.target.value})
 	},
 	onKeyDown: function(evt) {
 		if (evt.keyCode == 13) {
-			return this.onSubmit();
+			return this.onSubmit()
 		}
 	},
 	query(searchQuery) {
@@ -44,7 +44,7 @@ let SearchButton = React.createClass({
 			.sortBy(group => group[0])
 			.reverse() // reverse it, so the most recent is at the top
 			.flatten() // then flatten so that it's all one flat list
-			.value();
+			.value()
 
 		console.log('search results', results)
 		let endQueryTime = performance.now()

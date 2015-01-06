@@ -17,8 +17,8 @@ let StudentSummary = React.createClass({
 	},
 
 	updateStudentName(ev) {
-		let newName = ev.target.value;
-		newName = newName.trim();
+		let newName = ev.target.value
+		newName = newName.trim()
 		studentActions.changeName(this.props.student.id, newName)
 	},
 

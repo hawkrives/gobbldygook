@@ -7,19 +7,19 @@ let ContentEditable = React.createClass({
 		html: React.PropTypes.string,
 	},
 	shouldComponentUpdate(nextProps) {
-		return nextProps.html !== this.getDOMNode().innerHTML;
+		return nextProps.html !== this.getDOMNode().innerHTML
 	},
 	componentWillUpdate(nextProps) {
 		if (nextProps.html !== this.getDOMNode().innerHTML) {
-			this.getDOMNode().innerHTML = nextProps.html;
+			this.getDOMNode().innerHTML = nextProps.html
 		}
 	},
 	emitChange() {
-		let html = this.getDOMNode().innerHTML;
+		let html = this.getDOMNode().innerHTML
 		if (this.props.onChange && html !== this.lastHtml) {
-			this.props.onChange({target: {value: html}});
+			this.props.onChange({target: {value: html}})
 		}
-		this.lastHtml = html;
+		this.lastHtml = html
 	},
 	render() {
 		return React.createElement('span', {
@@ -30,6 +30,6 @@ let ContentEditable = React.createClass({
 			dangerouslySetInnerHTML: {__html: this.props.html},
 		})
 	},
-});
+})
 
 export default ContentEditable

@@ -62,10 +62,10 @@ let AreaOfStudy = React.createClass({
 	render() {
 		// console.log(`render areaOfStudy for ${this.props.area.id}`)
 
-		let requirementSets = null;
+		let requirementSets = null
 		if (this.state.expanded)
 			requirementSets = _.map(this.props.area.details, (reqset) =>
-				React.createElement(RequirementSet, _.extend({key: reqset.title}, reqset)));
+				React.createElement(RequirementSet, _.extend({key: reqset.title}, reqset)))
 
 		let header = React.createElement('header',
 			{className: 'summary', onClick: this.toggle},
@@ -74,7 +74,7 @@ let AreaOfStudy = React.createClass({
 				value: this.props.area.progress.at,
 				max: this.props.area.progress.of,
 				className: this.props.area.progress.word,
-			}));
+			}))
 
 		let classes = cx({
 			'area-of-study': true,

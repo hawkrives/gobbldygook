@@ -49,13 +49,13 @@ let RequirementSet = React.createClass({
 			title: this.props.description,
 		}, this.props.title)
 
-		let description = null;
+		let description = null
 		if (this.state.showDescription && this.state.descriptionHTML)
 			description = React.createElement('div', {className: 'description', dangerouslySetInnerHTML: {__html: this.state.descriptionHTML}})
 
 		let titlebar = React.createElement('header', {onClick: this.toggleDescription}, title, description)
 
-		let details;
+		let details = null
 
 		if (this.props.type === 'array/requirementSet') {
 			details = _.map(this.props.details, (requirement, index) => {

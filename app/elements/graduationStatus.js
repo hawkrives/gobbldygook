@@ -91,7 +91,7 @@ let GraduationStatus = React.createClass({
 	},
 	download() {
 		// console.log('start student download')
-		return 'data:text/json;charset=utf-8,' + this.props.student.encode();
+		return `data:text/json;charset=utf-8,${this.props.student.encode()}`
 	},
 })
 
