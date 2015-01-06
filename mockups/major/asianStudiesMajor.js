@@ -41,21 +41,23 @@ function electives(courses) {
 	// 3. No more than four elective courses about any one country;
 	// 4. No level I or level II language courses may count.
 
-	let asianStudiesElectives = _.chain(courses)
+	let asianStudiesElectives = _(courses)
 		.filter(hasDepartment('ASIAN'))
 		.reject(lowerLevelLanguageCourses)
 		.reject(isRequiredAsianStudiesCourse)
 		.value()
 
-	let levelsTwoOrThree = _.chain(asianStudiesElectives)
-		.filter(coursesAtOrAboveLevel(200)).size().value() >= 2
+	let levelsTwoOrThree = _(asianStudiesElectives)
+		.filter(coursesAtOrAboveLevel(200))
+		.size() >= 2
 
-	let onlyTwoAtLevelOne = _.chain(asianStudiesElectives)
-		.filter(coursesAtLevel(100)).size().value() <= 2
+	let onlyTwoAtLevelOne = _(asianStudiesElectives)
+		.filter(coursesAtLevel(100))
+		.size() <= 2
 
 	let notTooSpecialized = _.any([
-		_.chain(asianStudiesElectives).filter(partialNameOrTitle('China')).size().value() <= 4,
-		_.chain(asianStudiesElectives).filter(partialNameOrTitle('Japan')).size().value() <= 4,
+		_(asianStudiesElectives).filter(partialNameOrTitle('China')).size() <= 4,
+		_(asianStudiesElectives).filter(partialNameOrTitle('Japan')).size() <= 4,
 	])
 
 	let electivesAreGood = _.all(levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized)
@@ -96,7 +98,7 @@ function seniorSeminar(courses) {
 		asiaSeminar,
 	]
 
-	let seminarCount = _.size(_.compact(seminars))
+	let seminarCount = _(seminars).compact().size()
 	let seminarsNeeded = 1
 
 	return {
@@ -111,17 +113,17 @@ function language(courses) {
 	// Two courses in Chinese or Japanese above 112 or its equivalent
 	// "'JAPAN' IN depts AND level >= 200 AND (('Intermediate' OR 'Advanced') AND 'Japanese') IN title"
 	// "'CHIN' IN depts AND level >= 200 AND (('Intermediate' OR 'Advanced') AND 'Chinese') IN title"
-	let subsetOfCourses = _.chain(courses)
+	let subsetOfCourses = _(courses)
 		.filter(coursesAtOrAboveLevel(200))
 		.filter((course) => partialNameOrTitle(['Intermediate', 'Advanced'], course))
 		.value()
 
-	let japaneseLanguage = _.chain(subsetOfCourses)
+	let japaneseLanguage = _(subsetOfCourses)
 		.filter(hasDepartment('JAPAN'))
 		.filter(partialNameOrTitle('Japanese'))
 		.value()
 
-	let chineseLanguage = _.chain(subsetOfCourses)
+	let chineseLanguage = _(subsetOfCourses)
 		.filter(hasDepartment('CHIN'))
 		.filter(partialNameOrTitle('Chinese'))
 		.value()

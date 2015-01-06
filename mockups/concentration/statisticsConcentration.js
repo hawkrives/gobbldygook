@@ -24,7 +24,7 @@ function foundationCourses(courses) {
 		type: 'array/some',
 		details: {
 			from: requirements,
-			has: _.chain(requirements).pluck('result').compact().size().value(),
+			has: _(requirements).pluck('result').compact().size(),
 			needs: 'any number',
 		},
 	}
@@ -73,8 +73,10 @@ function electiveCourses(courses) {
 		{title: 'STAT 322', result: checkCoursesFor(courses, {dept:'STAT 322'})},
 	]
 
-	let numberTaken = _.chain(validElectives)
-		.pluck('result').compact().size().value()
+	let numberTaken = _(validElectives)
+		.pluck('result')
+		.compact()
+		.size()
 	let numberNeeded = 2
 
 	return {

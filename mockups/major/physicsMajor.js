@@ -70,7 +70,7 @@ function upperLevelCourses(courses) {
 }
 
 function electiveCourses(courses) {
-	let validCourses = _.chain(courses)
+	let validCourses = _(courses)
 		.filter(hasDepartment('PHYS'))
 		.reject(isRequiredPhysicsCourse)
 		.value()

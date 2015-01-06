@@ -87,10 +87,10 @@ function coreCourses(courses) {
 		checkCoursesFor(courses, {deptnum:'CSCI 333'}),
 	])
 
-	let parallelDistributedComputing = _.chain(courses)
+	let parallelDistributedComputing = _(courses)
 		.filter({deptnum:'CSCI 300'})
 		.filter(partialNameOrTitle('Parallel'))
-		.size().value() >= 1
+		.size() >= 1
 
 	let options = _.any([
 		checkCoursesFor(courses, {deptnum:'CSCI 273'}),

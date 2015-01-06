@@ -87,14 +87,14 @@ function beyondTheMajor(studies, courses) {
 	let artMajorAndBeyond = null
 	if (isDedicatedArtist) {
 		// Check the two majors agains the 18-course requirement
-		artMajorAndBeyond = _.chain(majors)
+		artMajorAndBeyond = _(majors)
 			.filter(onlyTheTwoArtMajors)
 			.every(utilities.creditsBeyondTheArea(courses, 18))
 			.value()
 
 		// Remove the two majors, so they aren't checked against the 21-course
 		// requirement.
-		majors = _.chain(majors)
+		majors = _(majors)
 			.reject({title: 'Studio Art'})
 			.reject({title: 'Art History'})
 			.value()

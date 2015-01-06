@@ -20,13 +20,13 @@ function electives(courses) {
 	// - At least two of the six courses must be taken on campus
 	// - No language courses may count toward this concentration
 
-	let asianStudiesElectives = _.chain(courses)
+	let asianStudiesElectives = _(courses)
 		.filter(hasDepartment('ASIAN'))
 		.reject(asianLanguageCourses)
 		.reject(isRequiredAsianStudiesCourse)
 		.value()
 
-	let asianStudiesElectivesOnCampus = _.chain(asianStudiesElectives)
+	let asianStudiesElectivesOnCampus = _(asianStudiesElectives)
 		.reject({kind: 'fabrication'})
 		.value()
 

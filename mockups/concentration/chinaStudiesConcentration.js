@@ -23,7 +23,7 @@ function lowerLevelLanguageCourses(course) {
 
 function language(courses) {
 	// Four Chinese language courses above Chinese 112;
-	let chineseLanguage = _.chain(courses)
+	let chineseLanguage = _(courses)
 		.filter(hasDepartment('CHIN'))
 		.filter(coursesAboveNumber(112))
 		.value()
@@ -51,7 +51,7 @@ function electives(courses) {
 
 	let asianCon = _.filter(courses, isAsianCon)
 
-	let chinaElectives = _.chain(courses)
+	let chinaElectives = _(courses)
 		// Only things in the Asian Studies or Chinese departments...
 		.filter(hasDepartment(['ASIAN', 'CHIN']))
 		// that have the stems Chinese or China in their names...
