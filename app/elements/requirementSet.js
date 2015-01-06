@@ -13,12 +13,8 @@ let RequirementSet = React.createClass({
 		title: React.PropTypes.string.isRequired,
 		type: React.PropTypes.string.isRequired,
 		details: React.PropTypes.oneOfType([
-			React.PropTypes.array,
-			React.PropTypes.shape({
-				has: React.PropTypes.number,
-				matches: React.PropTypes.arrayOf(React.PropTypes.object),
-				needs: React.PropTypes.number,
-			}),
+			React.PropTypes.object, // for the sub-types
+			React.PropTypes.array,  // otherwise it's an array of reqsets
 		]),
 	},
 
