@@ -1,27 +1,12 @@
 import * as _ from 'lodash'
 
-
-function checkThatNCoursesSpanTwoDepartments(courses, geneds, genedToCheck, n=2) {
-	// Input: courses-array of courses. geneds-['ALS-A', 'ALS-L']. genedToCheck-'ALS-A'
-	// XXX,YYY - N courses, from different departments
-	let coursesOne = _.filter(courses, hasGenEd(geneds[0]))
-	let coursesTwo = _.filter(courses, hasGenEd(geneds[1]))
-
-	let allCourses = _.uniq(coursesOne.concat(coursesTwo), 'crsid')
-	let coversTwoDepartments = acrossAtLeastTwoDepartments(allCourses)
-
-	return _.all([
-		countGeneds(courses, genedToCheck) >= 1,
-		_.size(allCourses) >= n,
-		coversTwoDepartments,
-	])
-}
 import onlyQuarterCreditCoursesCanBePassFail from './onlyQuarterCreditCoursesCanBePassFail'
 import hasFOL from './hasFOL'
 import hasGenEd from './hasGenEd'
 import countGeneds from './countGeneds'
 import getDepartments from './getDepartments'
 import acrossAtLeastTwoDepartments from './acrossAtLeastTwoDepartments'
+import checkThatCoursesSpanDepartmentsAndGeneds from './checkThatCoursesSpanDepartmentsAndGeneds'
 
 function isIntercollegiateSport(course) {
 	// Only one SPM course credit may be earned by students as a result of
@@ -39,6 +24,6 @@ export {
 	countGeneds,
 	getDepartments,
 	acrossAtLeastTwoDepartments,
-	checkThatNCoursesSpanTwoDepartments,
+	checkThatCoursesSpanDepartmentsAndGeneds,
 	isIntercollegiateSport
 }

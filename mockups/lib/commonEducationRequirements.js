@@ -5,9 +5,10 @@ import {hasDeptNumBetween} from 'app/helpers/deptNum'
 import {
 	hasGenEd,
 	countGeneds,
-	acrossAtLeastTwoDepartments,
-	checkThatNCoursesSpanTwoDepartments
+	acrossAtLeastTwoDepartments
 } from 'sto-areas/lib/commonEducationUtilities'
+
+import checkThatCoursesSpanDepartmentsAndGeneds from 'sto-areas/lib/checkThatCoursesSpanDepartmentsAndGeneds'
 
 // TODO: Consider returning matches from these functions, in addition to the boolean.
 
@@ -131,7 +132,7 @@ function multiculturalDomesticStudies(courses) {
 	return {
 		title: 'Multicultural Studies - Domestic',
 		abbr: 'MCD',
-		result: checkThatNCoursesSpanTwoDepartments(courses, ['MCD', 'MCG'], 'MCD'),
+		result: checkThatCoursesSpanDepartmentsAndGeneds(courses, ['MCD', 'MCG'], {gened: 'MCD'}),
 	}
 }
 
@@ -140,7 +141,7 @@ function multiculturalGlobalStudies(courses) {
 	return {
 		title: 'Multicultural Studies - Global',
 		abbr: 'MCG',
-		result: checkThatNCoursesSpanTwoDepartments(courses, ['MCD', 'MCG'], 'MCG'),
+		result: checkThatCoursesSpanDepartmentsAndGeneds(courses, ['MCD', 'MCG'], {gened: 'MCG'}),
 	}
 }
 
@@ -149,7 +150,7 @@ function artisticStudies(courses) {
 	return {
 		title: 'Artistic Studies',
 		abbr: 'ALS-A',
-		result: checkThatNCoursesSpanTwoDepartments(courses, ['ALS-L', 'ALS-A'], 'ALS-A'),
+		result: checkThatCoursesSpanDepartmentsAndGeneds(courses, ['ALS-L', 'ALS-A'], {gened: 'ALS-A'}),
 	}
 }
 
@@ -158,7 +159,7 @@ function literaryStudies(courses) {
 	return {
 		title: 'Literary Studies',
 		abbr: 'ALS-L',
-		result: checkThatNCoursesSpanTwoDepartments(courses, ['ALS-L', 'ALS-A'], 'ALS-L'),
+		result: checkThatCoursesSpanDepartmentsAndGeneds(courses, ['ALS-L', 'ALS-A'], {gened: 'ALS-L'}),
 	}
 }
 
@@ -190,7 +191,7 @@ function scientificExplorationAndDiscovery(courses) {
 	return {
 		title: 'Scientific Exploration and Discovery',
 		abbr: 'SED',
-		result: checkThatNCoursesSpanTwoDepartments(courses, ['SED', 'IST'], 'SED'),
+		result: checkThatCoursesSpanDepartmentsAndGeneds(courses, ['SED', 'IST'], {gened: 'SED'}),
 	}
 }
 
@@ -199,7 +200,7 @@ function integratedScientificTopics(courses) {
 	return {
 		title: 'Integrated Scientific Topics',
 		abbr: 'IST',
-		result: checkThatNCoursesSpanTwoDepartments(courses, ['SED', 'IST'], 'IST'),
+		result: checkThatCoursesSpanDepartmentsAndGeneds(courses, ['SED', 'IST'], {gened: 'IST'}),
 	}
 }
 
@@ -218,7 +219,7 @@ function studiesInHumanBehaviorAndSociety(courses) {
 	return {
 		title: 'Studies in Human Behavior and Society',
 		abbr: 'HBS',
-		result: checkThatNCoursesSpanTwoDepartments(courses, ['HBS'], 'HBS', 1),
+		result: checkThatCoursesSpanDepartmentsAndGeneds(courses, ['HBS'], {courseCount: 1}),
 	}
 }
 
