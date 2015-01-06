@@ -1,12 +1,12 @@
-import * as _ from 'lodash'
+import {curry, contains, any, isArray} from 'lodash'
 
 let checkIfHasDepartment = (dept, course) => {
-	return _.contains(course.depts, dept)
+	return contains(course.depts, dept)
 }
 
-let hasDepartment = _.curry((dept, course) => {
-	if (_.isArray(dept))
-		return _.any(dept, (d) => checkIfHasDepartment(d, course))
+let hasDepartment = curry((dept, course) => {
+	if (isArray(dept))
+		return any(dept, (d) => checkIfHasDepartment(d, course))
 	return checkIfHasDepartment(dept, course)
 })
 
