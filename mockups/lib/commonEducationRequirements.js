@@ -73,7 +73,7 @@ function studiesInPhysicalMovement(courses) {
 	// Two different courses, of any credit value, that expand students'
 	// experiences in and understanding of movement and promote lifelong
 	// health and wellness of the whole person. Students are encouraged to
-	// expland their horizons and focus on different activities or modes of
+	// expand their horizons and focus on different activities or modes of
 	// movement in order to fulfill the requirements.
 
 	// Only one SPM course credit may be earned by students as a result of
