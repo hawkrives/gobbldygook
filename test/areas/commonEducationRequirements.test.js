@@ -1,12 +1,14 @@
 // tests/areas/common-education-requirements-test.js
+import 'should'
+
+import * as reqs from 'sto-areas/lib/commonEducationRequirements'
 
 // todo: the [across two depts] requirements need to validate when there's
 // only one course.
 // f.ex: if there's only a course with the ALS-L, then the ALS-L should be true.
 // but if there are both -L and -A, they must be in different departments.
 
-const reqs = require('../../mockups/commonEducationRequirements')
-const student = {
+let student = {
 	matriculation: 2012,
 	graduation: 2016,
 	courses: [
@@ -36,53 +38,53 @@ let makeResults = (title, abbr) => {
 
 describe('firstYearWriting', function() {
 	it('checks if a list of courses fulfills the FYW requirement', function() {
-		const firstYearWriting = reqs.firstYearWriting;
-		const [goodResult, badResult] = makeResults('First Year Writing', 'FYW')
+		let firstYearWriting = reqs.firstYearWriting
+		let [goodResult, badResult] = makeResults('First Year Writing', 'FYW')
 
-		expect(firstYearWriting(student.courses, student.matriculation)).toEqual(goodResult);
+		firstYearWriting(student.courses, student.matriculation).should.eql(goodResult)
 	})
 })
 
 describe('writingInContext', function() {
 	it('checks if a list of courses fulfills the WRI requirement', function() {
-		const writingInContext = reqs.writingInContext;
-		const [goodResult, badResult] = makeResults('Writing in Context', 'WRI')
+		let writingInContext = reqs.writingInContext
+		let [goodResult, badResult] = makeResults('Writing in Context', 'WRI')
 
-		expect(writingInContext(student.courses)).toEqual(goodResult);
+		writingInContext(student.courses).should.eql(goodResult)
 	})
 })
 
 describe('foreignLanguage', function() {
 	it('checks if a list of courses fulfills the FOL requirement', function() {
-		const foreignLanguage = reqs.foreignLanguage;
-		const [goodResult, badResult] = makeResults('Foreign Language', 'FOL')
+		let foreignLanguage = reqs.foreignLanguage
+		let [goodResult, badResult] = makeResults('Foreign Language', 'FOL')
 
-		expect(foreignLanguage(student.courses)).toEqual(goodResult);
+		foreignLanguage(student.courses).should.eql(goodResult)
 	})
 })
 
 describe('oralCommunication', function() {
 	it('checks if a list of courses fulfills the ORC requirement', function() {
-		const oralCommunication = reqs.oralCommunication;
-		const [goodResult, badResult] = makeResults('Oral Communication', 'ORC')
+		let oralCommunication = reqs.oralCommunication
+		let [goodResult, badResult] = makeResults('Oral Communication', 'ORC')
 
-		expect(oralCommunication(student.courses)).toEqual(goodResult);
+		oralCommunication(student.courses).should.eql(goodResult)
 	})
 })
 
 describe('abstractAndQuantitativeReasoning', function() {
 	it('checks if a list of courses fulfills the AQR requirement', function() {
-		const abstractAndQuantitativeReasoning = reqs.abstractAndQuantitativeReasoning;
-		const [goodResult, badResult] = makeResults('Abstract and Quantitative Reasoning', 'AQR')
+		let abstractAndQuantitativeReasoning = reqs.abstractAndQuantitativeReasoning
+		let [goodResult, badResult] = makeResults('Abstract and Quantitative Reasoning', 'AQR')
 
-		expect(abstractAndQuantitativeReasoning(student.courses)).toEqual(goodResult);
+		abstractAndQuantitativeReasoning(student.courses).should.eql(goodResult)
 	})
 })
 
 describe('studiesInPhysicalMovement', function() {
 	it('checks if a list of courses fulfills the SPM requirement', function() {
-		const studiesInPhysicalMovement = reqs.studiesInPhysicalMovement;
-		const [goodResult, badResult] = makeResults('Studies in Physical Movement', 'SPM')
+		let studiesInPhysicalMovement = reqs.studiesInPhysicalMovement
+		let [goodResult, badResult] = makeResults('Studies in Physical Movement', 'SPM')
 
 		let goodCourseLoads = [
 			[{crsid: 1, depts: ['ESAC'], gereqs: ['SPM'], credits: 1.00},
@@ -103,120 +105,120 @@ describe('studiesInPhysicalMovement', function() {
 			 {crsid: 1, depts: ['ESAC'], gereqs: ['SPM'], credits: 0.25}],
 		]
 
-		expect(studiesInPhysicalMovement(goodCourseLoads[0])).toEqual(goodResult);
-		expect(studiesInPhysicalMovement(goodCourseLoads[1])).toEqual(goodResult);
+		studiesInPhysicalMovement(goodCourseLoads[0]).should.eql(goodResult)
+		studiesInPhysicalMovement(goodCourseLoads[1]).should.eql(goodResult)
 
-		expect(studiesInPhysicalMovement(badCourseLoads[0])).toEqual(badResult);
-		expect(studiesInPhysicalMovement(badCourseLoads[1])).toEqual(badResult);
-		expect(studiesInPhysicalMovement(badCourseLoads[2])).toEqual(badResult);
+		studiesInPhysicalMovement(badCourseLoads[0]).should.eql(badResult)
+		studiesInPhysicalMovement(badCourseLoads[1]).should.eql(badResult)
+		studiesInPhysicalMovement(badCourseLoads[2]).should.eql(badResult)
 	})
 })
 
 describe('historicalStudiesInWesternCulture', function() {
 	it('checks if a list of courses fulfills the HWC requirement', function() {
-		const historicalStudiesInWesternCulture = reqs.historicalStudiesInWesternCulture;
-		const [goodResult, badResult] = makeResults('Historical Studies in Western Culture', 'HWC')
+		let historicalStudiesInWesternCulture = reqs.historicalStudiesInWesternCulture
+		let [goodResult, badResult] = makeResults('Historical Studies in Western Culture', 'HWC')
 
-		expect(historicalStudiesInWesternCulture(student.courses)).toEqual(goodResult);
+		historicalStudiesInWesternCulture(student.courses).should.eql(goodResult)
 	})
 })
 
 describe('multiculturalGlobalStudies', function() {
 	it('checks if a list of courses fulfills the MCG requirement', function() {
-		const multiculturalGlobalStudies = reqs.multiculturalGlobalStudies;
-		const [goodResult, badResult] = makeResults('Multicultural Studies - Global', 'MCG')
+		let multiculturalGlobalStudies = reqs.multiculturalGlobalStudies
+		let [goodResult, badResult] = makeResults('Multicultural Studies - Global', 'MCG')
 
-		expect(multiculturalGlobalStudies(student.courses)).toEqual(goodResult);
+		multiculturalGlobalStudies(student.courses).should.eql(goodResult)
 	})
 })
 
 describe('multiculturalDomesticStudies', function() {
 	it('checks if a list of courses fulfills the MCD requirement', function() {
-		const multiculturalDomesticStudies = reqs.multiculturalDomesticStudies;
-		const [goodResult, badResult] = makeResults('Multicultural Studies - Domestic', 'MCD')
+		let multiculturalDomesticStudies = reqs.multiculturalDomesticStudies
+		let [goodResult, badResult] = makeResults('Multicultural Studies - Domestic', 'MCD')
 
-		expect(multiculturalDomesticStudies(student.courses)).toEqual(goodResult);
+		multiculturalDomesticStudies(student.courses).should.eql(goodResult)
 	})
 })
 
 describe('artisticStudies', function() {
 	it('checks if a list of courses fulfills the ALS-A requirement', function() {
-		const artisticStudies = reqs.artisticStudies;
-		const [goodResult, badResult] = makeResults('Artistic Studies', 'ALS-A');
+		let artisticStudies = reqs.artisticStudies
+		let [goodResult, badResult] = makeResults('Artistic Studies', 'ALS-A')
 
 		let validCourses = [{crsid: 3, depts: ['AMCON'], gereqs: ['ALS-A']}]
 		let invalidCourses = [{crsid: 3, depts: ['AMCON', 'ASIAN'], gereqs: ['ALS-A', 'ALS-L']}]
 
-		expect(artisticStudies(student.courses)).toEqual(goodResult);
-		expect(artisticStudies(validCourses)).toEqual(goodResult);
-		expect(artisticStudies(invalidCourses)).toEqual(badResult);
+		artisticStudies(student.courses).should.eql(goodResult)
+		artisticStudies(validCourses).should.eql(goodResult)
+		artisticStudies(invalidCourses).should.eql(badResult)
 	})
 })
 
 describe('literaryStudies', function() {
 	it('checks if a list of courses fulfills the ALS-L requirement', function() {
-		const literaryStudies = reqs.literaryStudies;
-		const [goodResult, badResult] = makeResults('Literary Studies', 'ALS-L')
+		let literaryStudies = reqs.literaryStudies
+		let [goodResult, badResult] = makeResults('Literary Studies', 'ALS-L')
 
 		let validCourses = [{crsid: 3, year: 2014, depts: ['AMCON'], gereqs: ['ALS-L']}]
 		let invalidCourses = [{crsid: 3, year: 2014, depts: ['AMCON', 'ASIAN'], gereqs: ['ALS-L', 'ALS-A']}]
 
-		expect(literaryStudies(student.courses)).toEqual(goodResult);
-		expect(literaryStudies(validCourses)).toEqual(goodResult);
-		expect(literaryStudies(invalidCourses)).toEqual(badResult);
+		literaryStudies(student.courses).should.eql(goodResult)
+		literaryStudies(validCourses).should.eql(goodResult)
+		literaryStudies(invalidCourses).should.eql(badResult)
 	})
 })
 
 describe('biblicalStudies', function() {
 	it('checks if a list of courses fulfills the BTS-B requirement', function() {
-		const biblicalStudies = reqs.biblicalStudies;
-		const [goodResult, badResult] = makeResults('Biblical and Theological Studies - Bible', 'BTS-B')
+		let biblicalStudies = reqs.biblicalStudies
+		let [goodResult, badResult] = makeResults('Biblical and Theological Studies - Bible', 'BTS-B')
 
-		expect(biblicalStudies(student.courses, student.matriculation)).toEqual(goodResult);
+		biblicalStudies(student.courses, student.matriculation).should.eql(goodResult)
 	})
 })
 
 describe('theologicalStudies', function() {
 	it('checks if a list of courses fulfills the BTS-T requirement', function() {
-		const theologicalStudies = reqs.theologicalStudies;
-		const [goodResult, badResult] = makeResults('Biblical and Theological Studies - Theology', 'BTS-T')
+		let theologicalStudies = reqs.theologicalStudies
+		let [goodResult, badResult] = makeResults('Biblical and Theological Studies - Theology', 'BTS-T')
 
-		expect(theologicalStudies(student.courses)).toEqual(goodResult);
+		theologicalStudies(student.courses).should.eql(goodResult)
 	})
 })
 
 describe('scientificExplorationAndDiscovery', function() {
 	it('checks if a list of courses fulfills the SED requirement', function() {
-		const scientificExplorationAndDiscovery = reqs.scientificExplorationAndDiscovery;
-		const [goodResult, badResult] = makeResults('Scientific Exploration and Discovery', 'SED')
+		let scientificExplorationAndDiscovery = reqs.scientificExplorationAndDiscovery
+		let [goodResult, badResult] = makeResults('Scientific Exploration and Discovery', 'SED')
 
 		let validCourses = [{crsid: 3, depts: ['AMCON'], gereqs: ['SED']}]
 		let invalidCourses = [{crsid: 3, depts: ['AMCON', 'ASIAN'], gereqs: ['SED', 'IST']}]
 
-		expect(scientificExplorationAndDiscovery(student.courses)).toEqual(goodResult);
-		expect(scientificExplorationAndDiscovery(validCourses)).toEqual(goodResult);
-		expect(scientificExplorationAndDiscovery(invalidCourses)).toEqual(badResult);
+		scientificExplorationAndDiscovery(student.courses).should.eql(goodResult)
+		scientificExplorationAndDiscovery(validCourses).should.eql(goodResult)
+		scientificExplorationAndDiscovery(invalidCourses).should.eql(badResult)
 	})
 })
 
 describe('integratedScientificTopics', function() {
 	it('checks if a list of courses fulfills the IST requirement', function() {
-		const integratedScientificTopics = reqs.integratedScientificTopics;
-		const [goodResult, badResult] = makeResults('Integrated Scientific Topics', 'IST')
+		let integratedScientificTopics = reqs.integratedScientificTopics
+		let [goodResult, badResult] = makeResults('Integrated Scientific Topics', 'IST')
 
 		let validCourses = [{crsid: 3, depts: ['AMCON'], gereqs: ['IST']}]
 		let invalidCourses = [{crsid: 3, depts: ['AMCON', 'ASIAN'], gereqs: ['IST', 'SED']}]
 
-		expect(integratedScientificTopics(student.courses)).toEqual(goodResult);
-		expect(integratedScientificTopics(validCourses)).toEqual(goodResult);
-		expect(integratedScientificTopics(invalidCourses)).toEqual(badResult);
+		integratedScientificTopics(student.courses).should.eql(goodResult)
+		integratedScientificTopics(validCourses).should.eql(goodResult)
+		integratedScientificTopics(invalidCourses).should.eql(badResult)
 	})
 })
 
 describe('studiesInHumanBehaviorAndSociety', function() {
 	it('checks if a list of courses fulfills the HBS requirement', function() {
-		const studiesInHumanBehaviorAndSociety = reqs.studiesInHumanBehaviorAndSociety;
-		const [goodResult, badResult] = makeResults('Studies in Human Behavior and Society', 'HBS')
+		let studiesInHumanBehaviorAndSociety = reqs.studiesInHumanBehaviorAndSociety
+		let [goodResult, badResult] = makeResults('Studies in Human Behavior and Society', 'HBS')
 
 		let validCourses = [
 			{crsid: 3, depts: ['AMCON'], gereqs: ['HBS']},
@@ -224,17 +226,17 @@ describe('studiesInHumanBehaviorAndSociety', function() {
 		]
 		let invalidCourses = [{crsid: 1, depts: ['AMCON', 'ASIAN'], gereqs: ['HBS']}]
 
-		expect(studiesInHumanBehaviorAndSociety(student.courses)).toEqual(goodResult);
-		expect(studiesInHumanBehaviorAndSociety(validCourses)).toEqual(goodResult);
-		expect(studiesInHumanBehaviorAndSociety(invalidCourses)).toEqual(badResult);
+		studiesInHumanBehaviorAndSociety(student.courses).should.eql(goodResult)
+		studiesInHumanBehaviorAndSociety(validCourses).should.eql(goodResult)
+		studiesInHumanBehaviorAndSociety(invalidCourses).should.eql(badResult)
 	})
 })
 
 describe('ethicalIssuesAndNormativePerspectives', function() {
 	it('checks if a list of courses fulfills the EIN requirement', function() {
-		const ethicalIssuesAndNormativePerspectives = reqs.ethicalIssuesAndNormativePerspectives;
-		const [goodResult, badResult] = makeResults('Ethical Issues and Normative Perspectives', 'EIN')
+		let ethicalIssuesAndNormativePerspectives = reqs.ethicalIssuesAndNormativePerspectives
+		let [goodResult, badResult] = makeResults('Ethical Issues and Normative Perspectives', 'EIN')
 
-		expect(ethicalIssuesAndNormativePerspectives(student.courses)).toEqual(goodResult);
+		ethicalIssuesAndNormativePerspectives(student.courses).should.eql(goodResult)
 	})
 })
