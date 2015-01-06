@@ -8,6 +8,7 @@ import {
 	acrossAtLeastTwoDepartments
 } from 'sto-areas/lib/commonEducationUtilities'
 
+import isIntercollegiateSport from 'sto-areas/lib/isIntercollegiateSport'
 import checkThatCoursesSpanDepartmentsAndGeneds from 'sto-areas/lib/checkThatCoursesSpanDepartmentsAndGeneds'
 
 // TODO: Consider returning matches from these functions, in addition to the boolean.
@@ -101,7 +102,7 @@ function studiesInPhysicalMovement(courses) {
 	let distinctSpmCourses = _.uniq(spmCourses, 'crsid')
 	let numberOfSpmCourses = _.size(distinctSpmCourses)
 
-	let sportsCourses = _.filter(courses, hasDeptNumBetween({dept: 'ESTH', start: 171, end: 194}))
+	let sportsCourses = _.filter(courses, isIntercollegiateSport)
 	let distinctSports = _.uniq(sportsCourses, 'crsid')
 	let hasSportsCredit = _.size(distinctSports) >= 1
 
