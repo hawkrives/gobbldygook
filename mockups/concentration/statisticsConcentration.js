@@ -36,8 +36,8 @@ function coreCourses(courses) {
 		- Statistics 316: Advanced Statistical Modeling
 	*/
 
-	let statisticalModeling = checkCoursesFor(courses, {dept:'STAT 272'})
-	let advancedModeling = checkCoursesFor(courses, {dept:'STAT 316'})
+	let statisticalModeling = checkCoursesFor(courses, {deptnum:'STAT 272'})
+	let advancedModeling = checkCoursesFor(courses, {deptnum:'STAT 316'})
 
 	let requirements = [
 		{
@@ -63,14 +63,14 @@ function electiveCourses(courses) {
 	// Electives: Two approved electives.
 
 	let validElectives = [
-		{title: 'CSCI 125', result: checkCoursesFor(courses, {dept:'CSCI 125'})},
-		{title: 'ECON 385', result: checkCoursesFor(courses, {dept:'ECON 385'})},
-		{title: 'MATH 262', result: checkCoursesFor(courses, {dept:'MATH 262'})},
-		{title: 'PSYCH 230', result: checkCoursesFor(courses, {dept:'PSYCH 230'})},
-		{title: 'SOAN 371', result: checkCoursesFor(courses, {dept:'SOAN 371'})},
-		{title: 'STAT 270', result: checkCoursesFor(courses, {dept:'STAT 270'})},
-		{title: 'STAT 282', result: checkCoursesFor(courses, {dept:'STAT 282'})},
-		{title: 'STAT 322', result: checkCoursesFor(courses, {dept:'STAT 322'})},
+		{title: 'CSCI 125', result: checkCoursesFor(courses, {deptnum:'CSCI 125'})},
+		{title: 'ECON 385', result: checkCoursesFor(courses, {deptnum:'ECON 385'})},
+		{title: 'MATH 262', result: checkCoursesFor(courses, {deptnum:'MATH 262'})},
+		{title: 'PSYCH 230', result: checkCoursesFor(courses, {deptnum:'PSYCH 230'})},
+		{title: 'SOAN 371', result: checkCoursesFor(courses, {deptnum:'SOAN 371'})},
+		{title: 'STAT 270', result: checkCoursesFor(courses, {deptnum:'STAT 270'})},
+		{title: 'STAT 282', result: checkCoursesFor(courses, {deptnum:'STAT 282'})},
+		{title: 'STAT 322', result: checkCoursesFor(courses, {deptnum:'STAT 322'})},
 	]
 
 	let numberTaken = _(validElectives)
