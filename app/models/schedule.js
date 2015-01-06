@@ -1,8 +1,8 @@
 import * as Immutable from 'immutable'
 import {isUndefined} from 'lodash'
 import * as Promise from 'bluebird'
+import {v4 as uuid} from 'node-uuid'
 
-import uuid from 'app/helpers/uuid'
 import randomChar from 'app/helpers/randomChar'
 import {checkScheduleTimeConflicts} from 'app/helpers/time'
 import {getCourses} from 'app/helpers/courses'

@@ -2,7 +2,7 @@ import * as Promise from 'bluebird'
 import * as Immutable from 'immutable'
 import * as _ from 'lodash'
 
-import uuid from 'app/helpers/uuid'
+import {v4 as uuid} from 'node-uuid'
 import randomChar from 'app/helpers/randomChar'
 import countCredits from 'app/helpers/countCredits'
 
