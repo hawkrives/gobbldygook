@@ -35,7 +35,7 @@ function introductorySequence(courses) {
 		title: 'Introductory Sequence',
 		type: 'object/number',
 		description: 'Complete one of the introductory sequences: Chemistry 121/123/126, Chemistry 125/126, or CH/BI 125/126/227',
-		result: _.any(checkedSequences, sequence => _.all(sequence)),
+		result: _.any(checkedSequences, (sequence) => _.all(sequence)),
 		details: {
 			// hasDepartment: matching,
 			// needs: needs,
