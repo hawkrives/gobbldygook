@@ -49,10 +49,10 @@ function ensureLimitedOffCampusCoursesDuringFinalYear(courses, fabrications) {
 
 	let finalYearCourses = _.filter(courses, {year: finalYear})
 
-	return (
-		_.isEmpty(finalYearFabrications) ||
-		countCredits(finalYearFabrications) <= 3
-	)
+	return _.any([
+		_.isEmpty(finalYearFabrications),
+		countCredits(finalYearFabrications) <= 3,
+	])
 }
 
 function residency(courses, fabrications) {
@@ -107,10 +107,10 @@ function interim(courses, fabrications, graduation) {
 	let finalSummerSessionCourses = _.filter(summerSessionCourses, {year: graduation})
 	let finalSummerSessionCourseCount = _.size(finalSummerSessionCourses)
 
-	let interimRequirement = (
-		interimCourseCount >= 3 ||
-		(interimCourseCount >= 2 && finalSummerSessionCourseCount >= 1)
-	)
+	let interimRequirement = _.any([
+		interimCourseCount >= 3,
+		(interimCourseCount >= 2 && finalSummerSessionCourseCount >= 1),
+	])
 
 	return {
 		title: 'Interim',
