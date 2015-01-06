@@ -1,5 +1,5 @@
-var dest = './dist/';
-var src = './app/';
+var dest = './dist/'
+var src = './app/'
 
 module.exports = {
 	browserSync: {
@@ -55,4 +55,4 @@ module.exports = {
 		js: dest + '*.js',
 		dest: dest,
 	},
-};
+}

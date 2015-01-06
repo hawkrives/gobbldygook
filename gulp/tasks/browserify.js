@@ -8,22 +8,22 @@
    See browserify.bundleConfigs in gulp/config.js
 */
 
-var _ = require('lodash');
-var browserify = require('browserify');
-var browserSync  = require('browser-sync');
-var bundleLogger = require('../util/bundleLogger');
-var exorcist = require('exorcist');
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var handleErrors = require('../util/handleErrors');
-var mold = require('mold-source-map');
-var source = require('vinyl-source-stream');
-var to5ify = require('6to5ify');
-var watchify = require('watchify');
-var config = require('../config').browserify;
+var _ = require('lodash')
+var browserify = require('browserify')
+var browserSync  = require('browser-sync')
+var bundleLogger = require('../util/bundleLogger')
+var exorcist = require('exorcist')
+var gulp = require('gulp')
+var gulpif = require('gulp-if')
+var handleErrors = require('../util/handleErrors')
+var mold = require('mold-source-map')
+var source = require('vinyl-source-stream')
+var to5ify = require('6to5ify')
+var watchify = require('watchify')
+var config = require('../config').browserify
 
 function browserifyTask(callback, devMode) {
-	var bundleQueue = config.bundleConfigs.length;
+	var bundleQueue = config.bundleConfigs.length
 
 	var browserifyThis = function(bundleConfig) {
 		 if (devMode) {
@@ -34,15 +34,15 @@ function browserifyTask(callback, devMode) {
 			bundleConfig = _.omit(bundleConfig, ['external', 'require'])
 		}
 
-		var b = browserify(bundleConfig);
+		var b = browserify(bundleConfig)
 
 		b.transform(to5ify.configure({
 			blacklist: ['generators'],
-		}));
+		}))
 
 		var bundle = function() {
 			// Log when bundling starts
-			bundleLogger.start(bundleConfig.outputName);
+			bundleLogger.start(bundleConfig.outputName)
 
 			return b
 				.bundle()
@@ -58,14 +58,14 @@ function browserifyTask(callback, devMode) {
 				// Specify the output destination
 				.pipe(gulp.dest(bundleConfig.dest))
 				.on('end', reportFinished)
-				.pipe(browserSync.reload({ stream: true }));
-		};
+				.pipe(browserSync.reload({ stream: true }))
+		}
 
 		if (devMode) {
 			// Wrap with watchify and rebundle on changes
-			b = watchify(b);
+			b = watchify(b)
 			// Rebundle on update
-			b.on('update', bundle);
+			b.on('update', bundle)
 			bundleLogger.watch(bundleConfig.outputName)
 		}
 		else {
@@ -86,23 +86,23 @@ function browserifyTask(callback, devMode) {
 			bundleLogger.end(bundleConfig.outputName)
 
 			if (bundleQueue) {
-				bundleQueue--;
+				bundleQueue -= 1
 				if (bundleQueue === 0) {
 					// If queue is empty, tell gulp the task is complete.
 					// https://github.com/gulpjs/gulp/blob/master/docs/API.md#accept-a-callback
-					callback();
+					callback()
 				}
 			}
-		};
+		}
 
-		return bundle();
+		return bundle()
 	}
 
 	// Start bundling with Browserify for each bundleConfig specified
-	config.bundleConfigs.forEach(browserifyThis);
+	config.bundleConfigs.forEach(browserifyThis)
 }
 
-gulp.task('browserify', browserifyTask);
+gulp.task('browserify', browserifyTask)
 
 // Exporting the task so we can call it directly in our watch task, with the 'devMode' option
 module.exports = browserifyTask
