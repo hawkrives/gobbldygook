@@ -5,6 +5,7 @@ import {partialNameOrTitle} from 'app/helpers/partialTitle'
 import {coursesAboveNumber} from 'app/helpers/courseLevels'
 import {checkCoursesFor} from 'app/helpers/courses'
 
+import {isAsianCon} from 'sto-areas/lib/isAsianCon'
 import isRequiredCourse from 'sto-areas/lib/isRequiredCourse'
 
 const chineseStudiesRequiredCourses = [
@@ -48,12 +49,7 @@ function electives(courses) {
 	// Two other courses on China;
 	// no level I or II language courses may count in this category
 
-	let asianCon = _.chain(courses)
-		.filter(c => _.all([
-			hasDepartment('ASIAN', c),
-			_.contains([210, 215, 216, 220], c.num)
-		]))
-		.value()
+	let asianCon = _.filter(courses, isAsianCon)
 
 	let chinaElectives = _.chain(courses)
 		// Only things in the Asian Studies or Chinese departments...
