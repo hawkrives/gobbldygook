@@ -28,8 +28,8 @@ function language(courses) {
 		.value()
 
 	let numberNeeded = 4
-	let numberFulfilled = _.size(japaneseLanguage)
-	let hasEnoughChinese = _.size(chineseLanguage) >= numberNeeded
+	let numberFulfilled = _.size(chineseLanguage)
+	let hasEnoughChinese = numberFulfilled >= numberNeeded
 
 	return {
 		title: 'Language',
