@@ -2,6 +2,7 @@ import * as Promise from 'bluebird'
 import * as Immutable from 'immutable'
 import {isUndefined} from 'lodash'
 
+import {isTrue} from 'app/helpers/is'
 import findResults from 'app/helpers/findResults'
 import findWordForProgress from 'app/helpers/findWordForProgress'
 import * as stoAreas from 'sto-areas'
@@ -48,8 +49,6 @@ let noResult = (type, title, id) => {
 		}],
 	}
 }
-
-let isTrue = (val) => val === true
 
 /**
  * Checks a student object against an area of study.
