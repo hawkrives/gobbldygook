@@ -42,28 +42,6 @@ function getCourses(clbids) {
 
 
 /**
- * Gets a course from the database by way of the deptnum string.
- *
- * @param {String} deptNumString - a deptnum string, like AS230.
- * @promise TreoDatabasePromise
- * @fulfill {Object} - the course object.
- * @reject {Error} - a message about retrieval failing.
- */
-function deptNumToCrsid(deptNumString) {
-	return db.store('courses')
-		.index('deptnum')
-		.get(deptNumString)
-		.catch((err) => new Error(`Course ${deptNumString} was not found`, err))
-}
-
-function checkCoursesForDeptNum(courses, deptNumString) {
-	let crsidsToCheckAgainst = _(courses).pluck('crsid').uniq().value()
-
-	return deptNumToCrsid(deptNumString)
-		.then((crsid) => _.contains(crsidsToCheckAgainst, crsid))
-}
-
-/**
  * Checks if any courses in a list of courses pass a given lodash filter.
  *
  * @param {Array} courses
@@ -182,8 +160,6 @@ export {
 	getCourses,
 	queryCourses,
 
-	deptNumToCrsid,
-	checkCoursesForDeptNum,
 	checkCoursesFor
 }
 
@@ -192,7 +168,5 @@ window.courseStuff = {
 	getCourses,
 	queryCourses,
 
-	deptNumToCrsid,
-	checkCoursesForDeptNum,
 	checkCoursesFor,
 }
