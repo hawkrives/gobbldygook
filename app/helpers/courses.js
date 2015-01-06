@@ -18,7 +18,6 @@ function getCourse(clbid) {
 	// console.log('called getCourse', clbid)
 	return db.store('courses')
 		.get(clbid)
-		.then(_.cloneDeep)
 		.catch((err) => new Error(`course retrieval failed for ${clbid}`, err))
 }
 
@@ -54,7 +53,6 @@ function deptNumToCrsid(deptNumString) {
 	return db.store('courses')
 		.index('deptnum')
 		.get(deptNumString)
-		.then(_.cloneDeep)
 		.catch((err) => new Error(`Course ${deptNumString} was not found`, err))
 }
 
