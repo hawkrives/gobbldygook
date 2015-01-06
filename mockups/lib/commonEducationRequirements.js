@@ -90,16 +90,24 @@ function studiesInPhysicalMovement(courses) {
 
 	// - The SPM requirement is completed with two different courses.
 
+	// NOTE: Not currently checked. Should it be?
 	// - Each specific exercise science activity course may only be taken a
 	// maximum of four times (the first time plus three repeats).
 
-	let spmCourses = _.filter(courses, hasGenEd('SPM'))
-	let distinctSpmCourses = _.uniq(spmCourses, 'crsid')
-	let numberOfSpmCourses = _.size(distinctSpmCourses)
+	let uniqueCourses = _.uniq(courses, 'crsid')
 
-	let sportsCourses = _.filter(courses, isIntercollegiateSport)
-	let distinctSports = _.uniq(sportsCourses, 'crsid')
-	let hasSportsCredit = _.size(distinctSports) >= 1
+	let numberOfSpmCourses = _(uniqueCourses)
+		.filter(hasGenEd('SPM')) // just the SPM courses
+		.reject(isIntercollegiateSport) // remove the sports
+		.size() // and we only care about the number
+
+
+	let distinctSportsCount = _(uniqueCourses)
+		.filter(isIntercollegiateSport) // only the sports
+		.size() // and we only care about if there is more than one
+
+	let hasSportsCredit = distinctSportsCount >= 1
+
 
 	if (numberOfSpmCourses < 2 && hasSportsCredit) {
 		numberOfSpmCourses += 1
