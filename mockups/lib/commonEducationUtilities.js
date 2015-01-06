@@ -13,7 +13,7 @@ function isIntercollegiateSport(course) {
 	// participation in an approved intercollegiate sport. This credit must be
 	// entered as Exercise Science 171-194 at the registration preceding the
 	// sport/participation term.
-	let result = hasDeptNumBetween({dept: 'ESTH', start: 171, end: 194}, course)
+	const result = hasDeptNumBetween({dept: 'ESTH', start: 171, end: 194}, course)
 	return result
 }
 
