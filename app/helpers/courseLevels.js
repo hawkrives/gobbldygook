@@ -1,5 +1,6 @@
 import {curry, filter} from 'lodash'
 
+
 /**
  * Checks if a course is at or above a given level.
  *
@@ -10,6 +11,7 @@ import {curry, filter} from 'lodash'
 let coursesAtOrAboveLevel = curry((level, course) => {
 	return course.level >= level
 })
+
 
 /**
  * Looks for courses at or above a given level.
@@ -22,6 +24,7 @@ let onlyCoursesAtOrAboveLevel = curry((level, courses) => {
 	return filter(courses, coursesAtOrAboveLevel(level))
 })
 
+
 /**
  * Checks if a course is at a given level.
  *
@@ -32,6 +35,7 @@ let onlyCoursesAtOrAboveLevel = curry((level, courses) => {
 let coursesAtLevel = curry((level, course) => {
 	return course.level === level
 })
+
 
 /**
  * Looks for courses at a given level.
@@ -44,6 +48,7 @@ let onlyCoursesAtLevel = curry((level, courses) => {
 	return filter(courses, coursesAtLevel(level))
 })
 
+
 /**
  * Checks if a course is above a given level.
  *
@@ -55,6 +60,7 @@ let coursesAboveNumber = curry((number, course) => {
 	return course.num > number
 })
 
+
 /**
  * Looks for courses above a given level.
  *
@@ -65,6 +71,7 @@ let coursesAboveNumber = curry((number, course) => {
 let onlyCoursesAboveNumber = curry((level, courses) => {
 	return filter(courses, coursesAboveNumber(level))
 })
+
 
 export {
 	coursesAtOrAboveLevel,

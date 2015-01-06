@@ -28,6 +28,7 @@ let areas = Immutable.Map({
 	// Emphases
 })
 
+
 /**
  * Controls the 'no result' result from areas of study.
  *
@@ -49,6 +50,7 @@ let noResult = (type, title, id) => {
 		}],
 	}
 }
+
 
 /**
  * Checks a student object against an area of study.
@@ -84,6 +86,7 @@ function checkStudentAgainstArea(student, area) {
 			return {id, title, type, progress, result, details}
 		})
 }
+
 
 /**
  * Checks a student objects graduation possibilities against all of its areas of study.
