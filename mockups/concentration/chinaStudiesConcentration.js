@@ -8,11 +8,11 @@ import {checkCoursesFor} from 'app/helpers/courses'
 import {isAsianCon} from 'sto-areas/lib/isAsianCon'
 import isRequiredCourse from 'sto-areas/lib/isRequiredCourse'
 
-const chineseStudiesRequiredCourses = [
+const chinaStudiesRequiredCourses = [
 	{deptnum: 'ASIAN 275'}, {deptnum: 'ASIAN 397'}, {deptnum: 'ASIAN 399'},
 ]
 
-let isRequiredChinaStudiesCourse = isRequiredCourse(chineseStudiesRequiredCourses)
+let isRequiredChinaStudiesCourse = isRequiredCourse(chinaStudiesRequiredCourses)
 
 function lowerLevelLanguageCourses(course) {
 	return _.all([
