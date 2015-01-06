@@ -154,10 +154,12 @@ function dedicatedMusicMajor(studies, courses) {
 
 	let musicMajors = _.filter(majors, onlyMusicMajors)
 
+	let everyMusicMajorHasEnoughExtraCredits = _.every(musicMajors, utilities.creditsBeyondTheArea(courses, 8))
+
 	return {
 		title: 'Music Major',
 		type: 'boolean',
-		result: _.size(musicMajors) >= 1 && _.every(musicMajors, utilities.creditsBeyondTheArea(courses, 8))
+		result: _.size(musicMajors) >= 1 && everyMusicMajorHasEnoughExtraCredits,
 	}
 }
 
