@@ -13,10 +13,10 @@
     "cloc": "cloc . --exclude-dir=data,node_modules,dist,test,playground,gulp --by-file-by-lang",
     "lint": "jscs ./app/**/*.js ./mockups/**/*.js ./gulp/**/*.js",
     "gulp": "gulp",
-    "serve": "npm run clean && gulp watch",
+    "serve": "gulp watch",
     "stat": "npm run gulp lint && npm run benchmark && npm run test",
     "test": "mocha",
-    "watch": "npm run clean && gulp watch"
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
