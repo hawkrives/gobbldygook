@@ -23,7 +23,7 @@ let SemesterDetail = React.createClass({
 		let {year, semester} = params
 
 		let schedules = nextProps.student.schedules.filter(isCurrentSemester(year, semester))
-		console.log('semester.componentWillReceiveProps', year, semester, nextProps.student.schedules.toJS())
+		// console.log('semesterDetail.componentWillReceiveProps', year, semester, nextProps.student.schedules.toJS())
 
 		this.setState({year, semester, schedules})
 	},
