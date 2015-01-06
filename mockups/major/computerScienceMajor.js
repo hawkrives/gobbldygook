@@ -84,7 +84,7 @@ function coreCourses(courses) {
 
 	let theory = _.any([
 		checkCoursesFor(courses, {deptnum:'CSCI 276'}),
-		checkCoursesFor(courses, {deptnum:'CSCI 333'})
+		checkCoursesFor(courses, {deptnum:'CSCI 333'}),
 	])
 
 	let parallelDistributedComputing = _.chain(courses)
@@ -95,7 +95,7 @@ function coreCourses(courses) {
 	let options = _.any([
 		checkCoursesFor(courses, {deptnum:'CSCI 273'}),
 		checkCoursesFor(courses, {deptnum:'CSCI 284'}),
-		parallelDistributedComputing
+		parallelDistributedComputing,
 	])
 
 	let requirements = [
@@ -114,7 +114,7 @@ function coreCourses(courses) {
 		},
 		{
 			title: 'Options',
-			result: options
+			result: options,
 		},
 	]
 
@@ -147,7 +147,7 @@ function electiveCourses(courses) {
 			has: numberTaken,
 			needs: numberNeeded,
 			matches: validCourses,
-		}
+		},
 	}
 }
 
@@ -159,7 +159,7 @@ function capstoneCourse(courses) {
 		title: 'Capstone',
 		type: 'boolean',
 		description: 'The Computer Science Capstone Course',
-		result: hasTakenCapstone
+		result: hasTakenCapstone,
 	}
 }
 

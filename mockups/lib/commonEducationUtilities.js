@@ -44,7 +44,7 @@ function checkThatNCoursesSpanTwoDepartments(courses, geneds, genedToCheck, n=2)
 	return _.all([
 		countGeneds(courses, genedToCheck) >= 1,
 		_.size(allCourses) >= n,
-		coversTwoDepartments
+		coversTwoDepartments,
 	])
 }
 

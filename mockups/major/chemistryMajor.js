@@ -41,7 +41,7 @@ function introductorySequence(courses) {
 			// hasDepartment: matching,
 			// needs: needs,
 			// matches: asianStudiesElectives
-		}
+		},
 	}
 }
 
@@ -57,8 +57,8 @@ function required(courses) {
 		details: {
 			has: matching,
 			needs: needs,
-			matches: asianStudiesElectives
-		}
+			matches: asianStudiesElectives,
+		},
 	}
 }
 
@@ -74,8 +74,8 @@ function laboratory(courses) {
 		details: {
 			has: matching,
 			needs: needs,
-			matches: asianStudiesElectives
-		}
+			matches: asianStudiesElectives,
+		},
 	}
 }
 
@@ -91,8 +91,8 @@ function electives(courses) {
 		details: {
 			has: matching,
 			needs: needs,
-			matches: chemistryElectives
-		}
+			matches: chemistryElectives,
+		},
 	}
 }
 
@@ -108,7 +108,7 @@ function beyondChemistry(courses) {
 	let details = [
 		physics,
 		mathematics,
-		seminars
+		seminars,
 	]
 
 	return {
@@ -119,8 +119,8 @@ function beyondChemistry(courses) {
 		details: {
 			has: matching,
 			needs: needs,
-			matches: asianStudiesElectives
-		}
+			matches: asianStudiesElectives,
+		},
 	}
 }
 
@@ -138,7 +138,7 @@ function checkChemistryMajor(student) {
 
 		return {
 			result: _.all(chemistryMajorRequirements, 'result'),
-			details: chemistryMajorRequirements
+			details: chemistryMajorRequirements,
 		}
 	})
 }

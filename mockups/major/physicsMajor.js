@@ -87,7 +87,7 @@ function electiveCourses(courses) {
 			has: numberTaken,
 			needs: numberNeeded,
 			matches: validCourses,
-		}
+		},
 	}
 }
 

@@ -21,7 +21,7 @@ function interdisciplinaryApproachesToAsia(courses) {
 		title: 'Interdisciplinary Approaches to Asia',
 		type: 'boolean',
 		description: 'Asian Studies 275: Interdisciplinary Approaches to Asia',
-		result: checkCoursesFor(courses, {deptnum:'ASIAN 275'})
+		result: checkCoursesFor(courses, {deptnum:'ASIAN 275'}),
 	}
 }
 
@@ -69,7 +69,7 @@ function electives(courses) {
 	let details = [
 		levelsTwoOrThree,
 		onlyTwoAtLevelOne,
-		notTooSpecialized
+		notTooSpecialized,
 	]
 	return {
 		title: 'Electives',
@@ -79,8 +79,8 @@ function electives(courses) {
 		details: {
 			has: matching,
 			needs: needs,
-			matches: asianStudiesElectives
-		}
+			matches: asianStudiesElectives,
+		},
 	}
 }
 
@@ -93,7 +93,7 @@ function seniorSeminar(courses) {
 
 	let seminars = [
 		humanRights,
-		asiaSeminar
+		asiaSeminar,
 	]
 
 	let seminarCount = _.size(_.compact(seminars))
@@ -103,7 +103,7 @@ function seniorSeminar(courses) {
 		title: 'Senior Seminar',
 		type: 'boolean',
 		description: 'Senior Seminar: One of Asian Studies 397: Human Rights/Asian Context, or Asian Studies 399: Asian Studies Seminar',
-		result: seminarCount >= seminarsNeeded
+		result: seminarCount >= seminarsNeeded,
 	}
 }
 
@@ -141,7 +141,7 @@ function language(courses) {
 			has: numberFulfilled,
 			needs: numberNeeded,
 			matches: fulfilledLanguageCourses,
-		}
+		},
 	}
 }
 
@@ -158,7 +158,7 @@ function checkAsianStudiesMajor(student) {
 
 		return {
 			result: _.all(asianStudiesMajorRequirements, 'result'),
-			details: asianStudiesMajorRequirements
+			details: asianStudiesMajorRequirements,
 		}
 	})
 }

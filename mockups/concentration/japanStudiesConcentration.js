@@ -41,7 +41,7 @@ function language(courses) {
 			has: numberFulfilled,
 			needs: numberNeeded,
 			matches: japaneseLanguage,
-		}
+		},
 	}
 }
 
@@ -75,8 +75,8 @@ function electives(courses) {
 		details: {
 			has: matching,
 			needs: needs,
-			matches: japanElectives
-		}
+			matches: japanElectives,
+		},
 	}
 }
 
@@ -91,7 +91,7 @@ function checkJapanStudiesConcentration(student) {
 
 		return {
 			result: _.all(japanStudiesConcentrationRequirements, 'result'),
-			details: japanStudiesConcentrationRequirements
+			details: japanStudiesConcentrationRequirements,
 		}
 	})
 }

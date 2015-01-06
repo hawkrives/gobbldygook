@@ -12,7 +12,7 @@ function onlyMusicMajors(major) {
 		major.title === 'Church Music',
 		major.title === 'Theory-Composition',
 		major.title === 'Music Education',
-		major.title === 'Elective Studies'
+		major.title === 'Elective Studies',
 	])
 }
 
@@ -220,13 +220,13 @@ function checkBachelorOfMusicDegree(student) {
 				title: 'Core',
 				type: 'array/boolean',
 				result: _.all(educationRequirements.core, 'result'),
-				details: educationRequirements.core
+				details: educationRequirements.core,
 			},
 			{
 				title: 'Integrative',
 				type: 'array/boolean',
 				result: _.all(educationRequirements.integrative, 'result'),
-				details: educationRequirements.integrative
+				details: educationRequirements.integrative,
 			},
 		]
 
@@ -235,21 +235,21 @@ function checkBachelorOfMusicDegree(student) {
 				title: 'Graduation',
 				type: 'array/boolean',
 				result: _.all(graduationRequirements, 'result'),
-				details: graduationRequirements
+				details: graduationRequirements,
 			},
 			{
 				title: 'Education',
 				type: 'array/requirementSet',
 				result: _.all(educationRequirementsResults, 'result'),
-				details: educationRequirementsResults
-			}
+				details: educationRequirementsResults,
+			},
 		]
 
 		// console.log('checkBachelorOfMusicDegree', 'results', results)
 
 		return {
 			result: _.all(bachelorOfMusicRequirements, 'result'),
-			details: bachelorOfMusicRequirements
+			details: bachelorOfMusicRequirements,
 		}
 	})
 }

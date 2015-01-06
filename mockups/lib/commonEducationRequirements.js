@@ -172,7 +172,7 @@ function biblicalStudies(courses, matriculation) {
 	return {
 		title: 'Biblical and Theological Studies - Bible',
 		abbr: 'BTS-B',
-		result: countGeneds(firstYearCourses, 'BTS-B') >= 1
+		result: countGeneds(firstYearCourses, 'BTS-B') >= 1,
 	}
 }
 
@@ -212,7 +212,7 @@ function studiesInHumanBehaviorAndSociety(courses) {
 
 	let result = _.all([
 		countGeneds(courses, 'HBS') >= 2,
-		coversTwoDepartments
+		coversTwoDepartments,
 	])
 
 	return {
@@ -260,7 +260,7 @@ function integrativeCourses(courses) {
 	return {
 		title: 'Integrative',
 		result: _.all(results),
-		details: results
+		details: results,
 	}
 }
 

@@ -31,7 +31,7 @@ function courses(coursesTaken, creditsNeeded) {
 	return {
 		title: 'Courses',
 		type: 'boolean',
-		result: creditsTaken >= creditsNeeded
+		result: creditsTaken >= creditsNeeded,
 	}
 }
 
@@ -81,7 +81,7 @@ function residency(courses, fabrications) {
 	return {
 		title: 'Residency',
 		type: 'boolean',
-		result: residencyReq
+		result: residencyReq,
 	}
 }
 
@@ -115,7 +115,7 @@ function interim(courses, fabrications, graduation) {
 	return {
 		title: 'Interim',
 		type: 'boolean',
-		result: interimRequirement
+		result: interimRequirement,
 	}
 }
 
@@ -129,7 +129,7 @@ function gpa(courses) {
 	return {
 		title: 'GPA',
 		type: 'boolean',
-		result: true
+		result: true,
 	}
 }
 
@@ -140,7 +140,7 @@ function courseLevel(courses) {
 	return {
 		title: 'Course Level',
 		type: 'boolean',
-		result: _.size(onlyCoursesAtOrAboveLevel(200, courses)) >= 18
+		result: _.size(onlyCoursesAtOrAboveLevel(200, courses)) >= 18,
 	}
 }
 
@@ -185,7 +185,7 @@ function gradedCourses(courses, fabrications) {
 	return {
 		title: 'Graded Courses',
 		type: 'boolean',
-		result: _.size(courses) - _.size(fabrications) >= 24
+		result: _.size(courses) - _.size(fabrications) >= 24,
 	}
 }
 
@@ -208,7 +208,7 @@ function finalTwoYearsInResidence(courses, fabrications) {
 
 		let hasFabricationsInFinalYears = _.every([
 			_.isEmpty(finalYearFabrications),
-			_.isEmpty(secondFinalYearFabrications)
+			_.isEmpty(secondFinalYearFabrications),
 		])
 
 		if (hasFabricationsInFinalYears) {

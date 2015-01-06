@@ -49,7 +49,7 @@ function artsMajor(studies, courses) {
 	return {
 		title: 'Major',
 		type: 'boolean',
-		result: _.size(majors) >= 1 && _.every(majors, utilities.creditsBeyondTheArea(courses, 8))
+		result: _.size(majors) >= 1 && _.every(majors, utilities.creditsBeyondTheArea(courses, 8)),
 	}
 }
 
@@ -111,7 +111,7 @@ function beyondTheMajor(studies, courses) {
 	return {
 		title: 'Beyond the Major',
 		type: 'boolean',
-		result: result
+		result: result,
 	}
 }
 
@@ -169,7 +169,7 @@ function checkBachelorOfArtsDegree(student) {
 			],
 			integrative: [
 				educ.ethicalIssuesAndNormativePerspectives(courses),
-			]
+			],
 		}
 
 		let educationRequirementsResults = [
@@ -183,13 +183,13 @@ function checkBachelorOfArtsDegree(student) {
 				title: 'Core',
 				type: 'array/boolean',
 				result: _.all(educationRequirements.core, 'result'),
-				details: educationRequirements.core
+				details: educationRequirements.core,
 			},
 			{
 				title: 'Integrative',
 				type: 'array/boolean',
 				result: _.all(educationRequirements.integrative, 'result'),
-				details: educationRequirements.integrative
+				details: educationRequirements.integrative,
 			},
 		]
 
@@ -198,21 +198,21 @@ function checkBachelorOfArtsDegree(student) {
 				title: 'Graduation',
 				type: 'array/boolean',
 				result: _.all(graduationRequirements, 'result'),
-				details: graduationRequirements
+				details: graduationRequirements,
 			},
 			{
 				title: 'Education',
 				type: 'array/requirementSet',
 				result: _.all(educationRequirementsResults, 'result'),
-				details: educationRequirementsResults
-			}
+				details: educationRequirementsResults,
+			},
 		]
 
 		// console.log('checkBachelorOfArtsDegree', 'results', bachelorOfArtsRequirements)
 
 		return {
 			result: _.all(bachelorOfArtsRequirements, 'result'),
-			details: bachelorOfArtsRequirements
+			details: bachelorOfArtsRequirements,
 		}
 	})
 }

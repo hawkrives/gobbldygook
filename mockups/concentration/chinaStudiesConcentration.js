@@ -41,7 +41,7 @@ function language(courses) {
 			has: numberFulfilled,
 			needs: numberNeeded,
 			matches: chineseLanguage,
-		}
+		},
 	}
 }
 
@@ -75,8 +75,8 @@ function electives(courses) {
 		details: {
 			has: matching,
 			needs: needs,
-			matches: chinaElectives
-		}
+			matches: chinaElectives,
+		},
 	}
 }
 
@@ -91,7 +91,7 @@ function checkChinaStudiesConcentration(student) {
 
 		return {
 			result: _.all(chinaStudiesConcentrationRequirements, 'result'),
-			details: chinaStudiesConcentrationRequirements
+			details: chinaStudiesConcentrationRequirements,
 		}
 	})
 }

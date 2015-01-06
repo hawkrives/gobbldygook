@@ -49,8 +49,8 @@ function electives(courses) {
 		details: {
 			has: totalTaken,
 			needs: needs,
-			matches: asianStudiesElectives
-		}
+			matches: asianStudiesElectives,
+		},
 	}
 }
 
@@ -64,7 +64,7 @@ function checkAsianStudiesConcentration(student) {
 
 		return {
 			result: _.all(asianStudiesConcentrationRequirements, 'result'),
-			details: asianStudiesConcentrationRequirements
+			details: asianStudiesConcentrationRequirements,
 		}
 	})
 }
