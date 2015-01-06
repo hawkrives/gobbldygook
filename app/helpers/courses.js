@@ -5,6 +5,15 @@ import * as Immutable from 'immutable'
 import db from 'app/helpers/db'
 import buildQueryFromString from 'app/helpers/queryStuff'
 
+
+/**
+ * Gets a course from the database.
+ *
+ * @param {Number} clbid - a class/lab ID
+ * @promise TreoDatabasePromise
+ * @fulfill {Object} - the course object.
+ * @reject {Error} - a message about retrieval failing.
+ */
 function getCourse(clbid) {
 	// console.log('called getCourse', clbid)
 	return db.store('courses')
@@ -13,6 +22,14 @@ function getCourse(clbid) {
 		.catch((err) => new Error(`course retrieval failed for ${clbid}`, err))
 }
 
+
+/**
+ * Gets a list of course ids from the database.
+ *
+ * @param {Array|Immutable.List} clbids - a list of class/lab IDs
+ * @promise BluebirdPromiseArray
+ * @fulfill {Array} - the courses.
+ */
 function getCourses(clbids) {
 	// Takes a list of clbids, and returns a list of the course objects for
 	// those clbids.
@@ -24,6 +41,15 @@ function getCourses(clbids) {
 	return Promise.all(clbids.map(getCourse))
 }
 
+
+/**
+ * Gets a course from the database by way of the deptnum string.
+ *
+ * @param {String} deptNumString - a deptnum string, like AS230.
+ * @promise TreoDatabasePromise
+ * @fulfill {Object} - the course object.
+ * @reject {Error} - a message about retrieval failing.
+ */
 function deptNumToCrsid(deptNumString) {
 	return db.store('courses')
 		.index('deptnum')
@@ -39,36 +65,51 @@ function checkCoursesForDeptNum(courses, deptNumString) {
 		.then((crsid) => _.contains(crsidsToCheckAgainst, crsid))
 }
 
+/**
+ * Checks if any courses in a list of courses pass a given lodash filter.
+ *
+ * @param {Array} courses
+ * @param {String|Object|Function} filter - any valid lodash filter
+ * @returns {Boolean} - from _.any
+ */
 function checkCoursesFor(courses, filter) {
 	return _.any(courses, filter)
 }
 
 
-// 'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
-// { depts: [ '$AND', 'CSCI', 'ASIAN' ],
-//   title: [ 'Parallel' ],
-//   level: [ 300 ],
-//   year: [ '$OR', 2013, 2014 ] }
-
-// 'dept: ASIAN  Dept: Religion  title: "Japan*"  LEVEL: 200  year: 2014  semester: $OR  semester: 3  semester: 1'
-// { depts: [ '$AND', 'ASIAN', 'REL' ],
-//   title: [ '"Japan*"' ],
-//   level: [ 200 ],
-//   year: [ 2014 ],
-//   semester: [ '$OR', 3, 1 ] }
-
-// 'department: American Conversations  name: Independence  year: 2014  time: Tuesdays after 12'
-// { depts: [ 'AMCON' ],
-//   title: [ 'Independence' ],
-//   year: [ 2014 ],
-//   time: [ 'Tuesdays after 12' ] }
-
-// 'ges: $AND  geneds: history of western culture gened: HBS  semester: Spring  year: 2014'
-// { geneds: [ '$AND', 'HWC', 'HBS' ],
-//   semester: [ 3 ],
-//   year: [ 2014 ] }
-
+/**
+ * Queries the database for courses.
+ *
+ * @param {String} queryString
+ * @returns {Array|Boolean}
+ */
 function queryCourses(queryString) {
+	// Examples:
+
+	// 'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
+	// { depts: [ '$AND', 'CSCI', 'ASIAN' ],
+	//   title: [ 'Parallel' ],
+	//   level: [ 300 ],
+	//   year: [ '$OR', 2013, 2014 ] }
+
+	// 'dept: ASIAN  Dept: Religion  title: "Japan*"  LEVEL: 200  year: 2014  semester: $OR  semester: 3  semester: 1'
+	// { depts: [ '$AND', 'ASIAN', 'REL' ],
+	//   title: [ '"Japan*"' ],
+	//   level: [ 200 ],
+	//   year: [ 2014 ],
+	//   semester: [ '$OR', 3, 1 ] }
+
+	// 'department: American Conversations  name: Independence  year: 2014  time: Tuesdays after 12'
+	// { depts: [ 'AMCON' ],
+	//   title: [ 'Independence' ],
+	//   year: [ 2014 ],
+	//   time: [ 'Tuesdays after 12' ] }
+
+	// 'ges: $AND  geneds: history of western culture gened: HBS  semester: Spring  year: 2014'
+	// { geneds: [ '$AND', 'HWC', 'HBS' ],
+	//   semester: [ 3 ],
+	//   year: [ 2014 ] }
+
 	let query = buildQueryFromString(queryString)
 
 	console.log('query:', query)

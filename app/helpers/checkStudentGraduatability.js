@@ -27,6 +27,14 @@ let areas = Immutable.Map({
 	// Emphases
 })
 
+/**
+ * Controls the 'no result' result from areas of study.
+ *
+ * @param {String} type
+ * @param {String} title
+ * @param {String} id
+ * @returns {Object}
+ */
 let noResult = (type, title, id) => {
 	return {
 		id: id,
@@ -43,6 +51,14 @@ let noResult = (type, title, id) => {
 
 let isTrue = (val) => val === true
 
+/**
+ * Checks a student object against an area of study.
+ *
+ * @param {Object} student
+ * @param {Object} area
+ * @promise ResultsPromise
+ * @fulfill {Object} - The details of the area check.
+ */
 function checkStudentAgainstArea(student, area) {
 	let title = area.title
 	let type = area.type
@@ -70,6 +86,13 @@ function checkStudentAgainstArea(student, area) {
 		})
 }
 
+/**
+ * Checks a student objects graduation possibilities against all of its areas of study.
+ *
+ * @param {Student} student
+ * @promise GraduatabilityPromise
+ * @fulfill {Object} - The details of the students graduation prospects.
+ */
 function checkStudentGraduatability(student) {
 	let areaResults = student.studies.map((area) => checkStudentAgainstArea(student, area)).toArray()
 	// console.log('areaResults', student.studies.toArray(), areaResults)
