@@ -34,7 +34,7 @@ let studentStore = Reflux.createStore({
 
 	_loadData(opts={}) {
 		console.log('studentStore._loadData, with', opts)
-		let rawStudent;
+		let rawStudent = null
 		let studentId = localStorage.getItem('activeStudentId')
 		let demoStudentId = '3AE9E7EE-DA8F-4014-B987-8D88814BB848'
 
