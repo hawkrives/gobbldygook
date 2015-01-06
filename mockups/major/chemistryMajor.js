@@ -28,9 +28,8 @@ function introductorySequence(courses) {
 		[{deptnum:'CHEM/BIO 125'}, {deptnum:'CHEM/BIO 126'}, {deptnum:'CHEM/BIO 227'}],
 	]
 
-	let checkedSequences = _.map(sequences, function(sequence) {
-		return _.map(sequence, filter => checkCoursesFor(courses, filter))
-	})
+	let checkedSequences = _.map(sequences, (sequence) =>
+		_.map(sequence, (filter) => checkCoursesFor(courses, filter)))
 
 	return {
 		title: 'Introductory Sequence',
