@@ -54,7 +54,8 @@ function abstractAndQuantitativeReasoning(courses) {
 
 	if (which) {
 		return which
-	} else {
+	}
+	else {
 		return generic
 	}
 }
@@ -82,7 +83,8 @@ function historicalOrLiteraryStudies(courses) {
 
 	if (which) {
 		return which
-	} else {
+	}
+	else {
 		return generic
 	}
 }
@@ -110,7 +112,8 @@ function multiculturalStudies(courses) {
 
 	if (which) {
 		return which
-	} else {
+	}
+	else {
 		return generic
 	}
 }
