@@ -46,7 +46,7 @@ function language(courses) {
 }
 
 function electives(courses) {
-	// Two other courses on China;
+	// Two other courses on Japan;
 	// no level I or II language courses may count in this category
 
 	let asianCon = _.filter(courses, isAsianCon)
