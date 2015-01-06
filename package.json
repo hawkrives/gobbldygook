@@ -6,12 +6,14 @@
   "browser": "dist/index.html",
   "private": true,
   "scripts": {
+    "benchmark": "matcha",
     "build": "npm run clean && gulp build",
     "check": "npm outdated --depth 0",
     "clean": "rm -rf dist/ && rm -f node_modules/app && rm -f node_modules/sto-areas",
     "cloc": "cloc . --exclude-dir=data,node_modules,dist,test,playground,gulp --by-file-by-lang",
     "gulp": "gulp",
     "serve": "npm run clean && gulp watch",
+    "stat": "npm run gulp lint && npm run benchmark && npm run test",
     "test": "mocha",
     "watch": "npm run clean && gulp watch"
   },
@@ -63,6 +65,7 @@
     "gulp-util": "^3.0.1",
     "jscs": "^1.9.0",
     "jscs-jsdoc": "^0.4.0",
+    "matcha": "^0.6.0",
     "mocha": "^2.1.0",
     "mold-source-map": "^0.3.0",
     "pretty-hrtime": "^1.0.0",
