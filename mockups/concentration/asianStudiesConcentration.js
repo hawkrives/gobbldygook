@@ -9,8 +9,8 @@ const asianDeptRequiredCourses = [
 
 let isRequiredAsianStudiesCourse = isRequiredCourse(asianDeptRequiredCourses)
 
-function languageCourses(course) {
-	// If all of these match, it is a lower-level language course, and will be
+function asianLanguageCourses(course) {
+	// If all of these match, it is a language course, and will be
 	// rejected by the `reject` method.
 	return hasDepartment(['CHINA', 'JAPAN'], course)
 }
@@ -22,7 +22,7 @@ function electives(courses) {
 
 	let asianStudiesElectives = _.chain(courses)
 		.filter(hasDepartment('ASIAN'))
-		.reject(lowerLevelLanguageCourses)
+		.reject(asianLanguageCourses)
 		.reject(isRequiredAsianStudiesCourse)
 		.value()
 
