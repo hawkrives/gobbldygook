@@ -1,47 +1,46 @@
 // tests/partialTitle-test.js
-var should = require('should');
+import 'should'
 
-describe('partialTitle', function() {
-	var courses = [];
-	var _ = require('lodash');
-	var partial = require('../app/helpers/partialTitle');
+describe('partialTitle', () => {
+	import * as partial from 'app/helpers/partialTitle'
+	let courses = []
 
-	beforeEach(function() {
+	beforeEach(() => {
 		courses = [
 			{title: 'AsianCon3: Interpreting Asia'},
 			{title: 'Introduction to Modern Dance'},
 			{title: 'Hello world!'},
 			{title: 'Fubar.'},
 			{title: 'Modern Japanese Literature'},
-		];
-		courses = _.map(courses, function(c) {
-			c.name = c.title;
-			return c;
+		]
+		courses = courses.map((c) => {
+			c.name = c.title
+			return c
 		})
-	});
+	})
 
-	it('checks if a course has a matching string in the title', function() {
-		var partialTitle = partial.partialTitle;
+	it('checks if a course has a matching string in the title', () => {
+		let partialTitle = partial.partialTitle
 
-		partialTitle('Asia', courses[0]).should.be.true;
-		partialTitle('Dance', courses[1]).should.be.true;
-		partialTitle('Japanese', courses[4]).should.be.true;
-	});
+		partialTitle('Asia', courses[0]).should.be.true
+		partialTitle('Dance', courses[1]).should.be.true
+		partialTitle('Japanese', courses[4]).should.be.true
+	})
 
-	it('checks if a course has a matching string in the name', function() {
-		var partialName = partial.partialName;
+	it('checks if a course has a matching string in the name', () => {
+		let partialName = partial.partialName
 
-		partialName('Asia', courses[0]).should.be.true;
-		partialName('Dance', courses[1]).should.be.true;
-		partialName('Japanese', courses[4]).should.be.true;
-	});
+		partialName('Asia', courses[0]).should.be.true
+		partialName('Dance', courses[1]).should.be.true
+		partialName('Japanese', courses[4]).should.be.true
+	})
 
-	it('checks if a course has a matching string in either the title or the name', function() {
-		var partialNameOrTitle = partial.partialNameOrTitle;
+	it('checks if a course has a matching string in either the title or the name', () => {
+		let partialNameOrTitle = partial.partialNameOrTitle
 
-		partialNameOrTitle('Asia', courses[0]).should.be.true;
-		partialNameOrTitle('Dance', courses[1]).should.be.true;
-		partialNameOrTitle('Japanese', courses[4]).should.be.true;
-		partialNameOrTitle('China', courses[4]).should.be.false;
-	});
-});
+		partialNameOrTitle('Asia', courses[0]).should.be.true
+		partialNameOrTitle('Dance', courses[1]).should.be.true
+		partialNameOrTitle('Japanese', courses[4]).should.be.true
+		partialNameOrTitle('China', courses[4]).should.be.false
+	})
+})
