@@ -116,7 +116,7 @@ let Semester = React.createClass({
 
 			// maxCredits is 4 for fall/spring and 1 for everything else
 			let maxCredits = ([1, 3].indexOf(this.props.semester) !== -1) ? 4 : 1
-			let emptySlotList = Immutable.Range(Math.floor(countCredits(this.state.courses)), maxCredits)
+			let emptySlotList = Immutable.Range(Math.floor(countCredits(this.state.courses.toArray())), maxCredits)
 			let emptySlots = emptySlotList
 				.skip(couldntFindSlots.size)
 				.map((i) => React.createElement(EmptyCourseSlot, {key: `empty-${i}`}))
