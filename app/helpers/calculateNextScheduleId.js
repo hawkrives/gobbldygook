@@ -6,12 +6,12 @@ import * as _ from 'lodash'
  * @returns {Number} - the largest ID in the list.
  */
 function calculateNextScheduleId(schedules) {
-	let ids = _(schedules)
-			.sortBy('id')
-			.pluck('id')
-			.value()
+	let maxId = _(schedules)
+		.pluck('id')
+		.max()
+		.value()
 
-	return _.max(ids) + 1
+	return maxId + 1
 }
 
 export default calculateNextScheduleId
