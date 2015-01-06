@@ -48,21 +48,21 @@ let keywordMappings = {
 	place: 'places',
 }
 
-let evenIndex = (value, index) => index % 2 === 0;
-let oddIndex  = (value, index) => index % 2 === 1;
-let notEmptyString = (value) => value.length > 0;
+let evenIndex = (value, index) => index % 2 === 0
+let oddIndex  = (value, index) => index % 2 === 1
+let notEmptyString = (value) => value.length > 0
 
 
 let zipToObjectWithArrays = (keys, vals) => {
 	let arr = _.zip(keys, vals)
 	return _(arr).reduce((obj, propKey) => {
 		if (_.has(obj, propKey[0]))
-			obj[propKey[0]].push(propKey[1]);
+			obj[propKey[0]].push(propKey[1])
 		else
-			obj[propKey[0]] = [propKey[1]];
+			obj[propKey[0]] = [propKey[1]]
 
-		return obj;
-	}, {});
+		return obj
+	}, {})
 }
 
 function buildQueryFromString(queryString) {
@@ -97,8 +97,8 @@ function buildQueryFromString(queryString) {
 	keys = _.map(keys, (key) => {
 		key = key.toLowerCase()
 		if (key.indexOf('_') !== 0)
-			key = keywordMappings[key] || key;
-		return key;
+			key = keywordMappings[key] || key
+		return key
 	})
 
 	// Group the [keys, vals] into an object, with arrays for each value
@@ -112,7 +112,7 @@ function buildQueryFromString(queryString) {
 
 			if (key === 'depts') {
 				val = val.toLowerCase()
-				val = departmentMapping[val] || val.toUpperCase();
+				val = departmentMapping[val] || val.toUpperCase()
 			}
 
 			else if (key === 'gereqs') {
@@ -126,7 +126,7 @@ function buildQueryFromString(queryString) {
 
 			else if (key === 'sem') {
 				val = val.toLowerCase()
-				val = semesters[val] || parseInt(val, 10);
+				val = semesters[val] || parseInt(val, 10)
 			}
 
 			else if (key === 'profs') {
@@ -141,7 +141,7 @@ function buildQueryFromString(queryString) {
 				val = parseInt(val, 10)
 			}
 
-			return val;
+			return val
 		})
 
 		if (organized.length > 1 && organized[0].indexOf('$') !== 0) {

@@ -77,29 +77,29 @@ function queryCourses(queryString) {
 		.filter(course => {
 			let matches = _.map(query, (values, key) => {
 				if (!_.has(course, key))
-					return false;
+					return false
 
-				let substring = false;
+				let substring = false
 
 				// values is either:
 				// - a 1-long array
 				// - an $AND, $OR, $NOT, or $XOR query
 				// - one of the above, but substring
 
-				let hasBool = _.indexOf(values[0], '$') === 0;
-				let OR = values[0] === '$OR';
-				let NOR = values[0] === '$NOR';
-				let AND = values[0] === '$AND';
-				let NOT = values[0] === '$NOT';
-				let XOR = values[0] === '$XOR';
+				let hasBool = _.indexOf(values[0], '$') === 0
+				let OR = values[0] === '$OR'
+				let NOR = values[0] === '$NOR'
+				let AND = values[0] === '$AND'
+				let NOT = values[0] === '$NOT'
+				let XOR = values[0] === '$XOR'
 
 				if (hasBool) {
 					// remove the first value from the array
-					values = _.tail(values, 1);
+					values = _.tail(values, 1)
 				}
 
 				if (_(['title', 'name', 'description', 'notes', 'profs', 'times', 'places']).contains(key)) {
-					substring = true;
+					substring = true
 				}
 
 				let internalMatches = _.map(values, (val) => {
@@ -113,19 +113,19 @@ function queryCourses(queryString) {
 					else if (substring) {
 						return _.contains(course[key].toLowerCase(), val.toLowerCase())
 					}
-					return course[key] === val;
+					return course[key] === val
 				})
 
 				if (!hasBool)
-					return _.all(internalMatches);
+					return _.all(internalMatches)
 
-				let result = false;
+				let result = false
 
-				if (OR)   result = _.some(internalMatches);
-				if (NOR)  result = !_.some(internalMatches);
-				if (AND)  result = _.all(internalMatches);
-				if (NOT)  result = !_.all(internalMatches);
-				if (XOR)  result = _.compact(internalMatches).length === 1;
+				if (OR)   result = _.some(internalMatches)
+				if (NOR)  result = !_.some(internalMatches)
+				if (AND)  result = _.all(internalMatches)
+				if (NOT)  result = !_.all(internalMatches)
+				if (XOR)  result = _.compact(internalMatches).length === 1
 
 				return result
 			})

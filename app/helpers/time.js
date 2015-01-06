@@ -10,7 +10,7 @@ const DAYS = {
 }
 
 function findDays(daystring) {
-	let listOfDays = [];
+	let listOfDays = []
 
 	if (_.contains(daystring, '-')) {
 		// M-F, M-Th, T-F
@@ -118,7 +118,7 @@ function convertTimeStringsToOfferings(course) {
 			}
 
 			_.merge(offerings[day], {day: day, times: [times]},
-				(a, b) => _.isArray(a) ? a.concat(b) : undefined);
+				(a, b) => _.isArray(a) ? a.concat(b) : undefined)
 		})
 	})
 
@@ -139,7 +139,7 @@ function checkCourseTimeConflicts(mainCourse, altCourse) {
 						// let altEndsBeforeMainEnds   = altTime.end <= mainTime.end
 
 						if (altStartsBeforeMainEnds && altEndsAfterMainStarts) {
-							conflict = true;
+							conflict = true
 						}
 					})
 				})
@@ -174,7 +174,7 @@ function checkScheduleTimeConflicts(courses) {
 
 	let results = Seq(courses).map((c1, c1idx) => {
 		return Seq(courses).map((c2, c2idx) => {
-			let result = false;
+			let result = false
 			if (c1 === c2)
 				result = null
 			else if (checkCourseTimeConflicts(c1, c2))
