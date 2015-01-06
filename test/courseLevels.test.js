@@ -3,7 +3,7 @@ import 'should'
 
 describe('courseLevels', () => {
 	import * as courseLevels from '../app/helpers/courseLevels'
-	var courses = []
+	let courses = []
 
 	beforeEach(() => {
 		courses = [

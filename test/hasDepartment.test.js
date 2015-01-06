@@ -4,7 +4,7 @@ import 'should'
 describe('hasDepartment', () => {
 	it('checks if a course is in a department', () => {
 		import hasDepartment from 'app/helpers/hasDepartment'
-		var courses = [
+		let courses = [
 			{depts: ['ASIAN', 'REL'], num: 230},
 			{depts: ['BIO', 'CHEM'], num: 125},
 			{depts: ['CHEM', 'BIO'], num: 125},

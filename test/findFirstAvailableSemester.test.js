@@ -5,7 +5,7 @@ import * as Immutable from 'immutable'
 describe('findFirstAvailableSemester', () => {
 	it('takes a list of schedules and finds the first open semester', () => {
 		import findFirstAvailableSemester from 'app/helpers/findFirstAvailableSemester'
-		var schedules = Immutable.List([
+		let schedules = Immutable.List([
 			{"id": 14, "year": 2012, "semester": 1},
 			{"id": 1, "year": 2012, "semester": 1},
 			{"id": 2, "year": 2012, "semester": 2},

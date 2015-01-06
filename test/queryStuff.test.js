@@ -5,7 +5,7 @@ describe('buildQueryFromString', () => {
 	it('interprets a query string into a query object', () => {
 		import buildQueryFromString from 'app/helpers/queryStuff'
 
-		var queryStrings = [
+		let queryStrings = [
 			'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014',
 			'dept: ASIAN  Dept: Religion  title: "Japan*"  LEVEL: 200  year: 2014  semester: $OR  semester: 3  semester: 1',
 			'department: American Conversations  name: Independence  year: 2014  time: Tuesdays after 12',
@@ -13,7 +13,7 @@ describe('buildQueryFromString', () => {
 			'History of Asia',
 		]
 
-		var expectedResults = [
+		let expectedResults = [
 			{
 				depts: ['$AND', 'CSCI', 'ASIAN'],
 				title: ['Parallel'],
