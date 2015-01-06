@@ -33,4 +33,4 @@ let isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
 	return _.all(results)
 })
 
-export {isRequiredCourse}
+export default isRequiredCourse

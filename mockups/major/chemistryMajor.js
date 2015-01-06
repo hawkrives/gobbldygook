@@ -5,7 +5,7 @@ import {partialNameOrTitle} from 'app/helpers/partialTitle'
 import {checkCoursesFor} from 'app/helpers/courses'
 import {coursesAtLevel, coursesAtOrAboveLevel} from 'app/helpers/courseLevels'
 
-import {isRequiredCourse} from 'sto-areas/lib/commonMajorUtilities'
+import isRequiredCourse from 'sto-areas/lib/isRequiredCourse'
 
 const chemDeptRequiredCourses = [
 	{dept:'CHEM',num:121}, {dept:'CHEM',num:123}, {dept:'CHEM',num:126},

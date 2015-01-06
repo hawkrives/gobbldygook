@@ -4,7 +4,7 @@ import hasDepartment from 'app/helpers/hasDepartment'
 import {partialNameOrTitle} from 'app/helpers/partialTitle'
 import {checkCoursesFor} from 'app/helpers/courses'
 
-import {isRequiredCourse} from 'sto-areas/lib/commonMajorUtilities'
+import isRequiredCourse from 'sto-areas/lib/isRequiredCourse'
 
 const csDeptRequiredCourses = [
 	{deptnum: 'CSCI 121'}, {deptnum: 'CSCI 125'}, {deptnum: 'CSCI 241'}, {deptnum: 'CSCI 251'},
