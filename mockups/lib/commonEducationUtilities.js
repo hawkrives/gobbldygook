@@ -1,37 +1,5 @@
 import * as _ from 'lodash'
 
-function onlyQuarterCreditCoursesCanBePassFail(course) {
-	// NOTE: Because we can't check this (don't know p/f data), we return true
-	// for everything.
-	return true
-}
-
-let hasGenEd = _.curry(function(gened, course) {
-	return _.contains(course.gereqs, gened)
-})
-
-let hasFOL = function(course) {
-	return _.any(course.gereqs, (req) => req.substr(0, 3) === 'FOL')
-}
-
-function countGeneds(courses, gened) {
-	let uniqed = _.uniq(courses, 'crsid')
-
-	if (gened === 'FOL')
-		return _.size(_.filter(uniqed, hasFOL))
-
-	return _.size(_.filter(uniqed, hasGenEd(gened)))
-}
-
-function getDepartments(courses) {
-	return _.chain(courses).pluck('depts').flatten().uniq().value()
-}
-
-function acrossAtLeastTwoDepartments(courses) {
-	let depts = getDepartments(courses)
-
-	return _.size(depts) >= 2
-}
 
 function checkThatNCoursesSpanTwoDepartments(courses, geneds, genedToCheck, n=2) {
 	// Input: courses-array of courses. geneds-['ALS-A', 'ALS-L']. genedToCheck-'ALS-A'
@@ -48,6 +16,12 @@ function checkThatNCoursesSpanTwoDepartments(courses, geneds, genedToCheck, n=2)
 		coversTwoDepartments,
 	])
 }
+import onlyQuarterCreditCoursesCanBePassFail from './onlyQuarterCreditCoursesCanBePassFail'
+import hasFOL from './hasFOL'
+import hasGenEd from './hasGenEd'
+import countGeneds from './countGeneds'
+import getDepartments from './getDepartments'
+import acrossAtLeastTwoDepartments from './acrossAtLeastTwoDepartments'
 
 function isIntercollegiateSport(course) {
 	// Only one SPM course credit may be earned by students as a result of
