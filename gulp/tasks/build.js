@@ -1,3 +1,4 @@
 var gulp = require('gulp')
 
-gulp.task('build', ['link', 'copy', 'browserify', 'sass'])
+gulp.task('prepare-build', ['link', 'copy'])
+gulp.task('build', ['prepare-build', 'browserify', 'sass'])

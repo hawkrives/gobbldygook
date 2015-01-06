@@ -7,7 +7,7 @@ var _ = require('lodash')
 var gulp  = require('gulp')
 var config = require('../config')
 
-gulp.task('watch', ['watchify', 'browserSync'], function() {
+gulp.task('watch', ['prepare-build', 'sass', 'watchify', 'browserSync'], function() {
 	gulp.watch(config.lint, ['lint'])
 	gulp.watch(config.sass.src, ['sass'])
 	gulp.watch(config.copy.map(_.first), ['copy'])
