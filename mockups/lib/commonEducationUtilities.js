@@ -16,7 +16,7 @@ let hasFOL = function(course) {
 }
 
 function countGeneds(courses, gened) {
-	let uniqed = _.uniq(courses, 'crsid');
+	let uniqed = _.uniq(courses, 'crsid')
 	if (gened === 'FOL')
 		return _.size(_.filter(uniqed, hasFOL))
 	return _.size(_.filter(uniqed, hasGenEd(gened)))
