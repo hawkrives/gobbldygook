@@ -1,4 +1,4 @@
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
 
 let StudyRecord = Immutable.Record({
 	id: '',

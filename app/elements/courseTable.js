@@ -1,5 +1,5 @@
-import * as _ from 'lodash'
-import * as React from 'react'
+import _ from 'lodash'
+import React from 'react'
 
 import studentActions from 'app/flux/studentActions'
 import findFirstAvailableYear from 'app/helpers/findFirstAvailableYear'

@@ -1,11 +1,11 @@
-import * as Promise from 'bluebird'
-import * as Immutable from 'immutable'
+import Promise from 'bluebird'
+import Immutable from 'immutable'
 import {isUndefined} from 'lodash'
 
 import {isTrue} from 'app/helpers/is'
 import findResults from 'app/helpers/findResults'
 import findWordForProgress from 'app/helpers/findWordForProgress'
-import * as stoAreas from 'sto-areas'
+import stoAreas from 'sto-areas'
 
 let areas = Immutable.Map({
 	// Degrees

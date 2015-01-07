@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 
 import countCredits from 'app/helpers/countCredits'
 import hasDepartment from 'app/helpers/hasDepartment'

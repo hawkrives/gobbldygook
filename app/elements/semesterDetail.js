@@ -1,5 +1,5 @@
-import * as React from 'react'
-import * as Immutable from 'immutable'
+import React from 'react'
+import Immutable from 'immutable'
 import {State} from 'react-router'
 import {isCurrentSemester} from 'app/helpers/isCurrent'
 

@@ -1,6 +1,6 @@
-import * as _ from 'lodash'
-import * as Immutable from 'immutable'
-import * as React from 'react/addons'
+import _ from 'lodash'
+import Immutable from 'immutable'
+import React from 'react/addons'
 import {State, Navigation} from 'react-router'
 
 import studentActions from 'app/flux/studentActions'

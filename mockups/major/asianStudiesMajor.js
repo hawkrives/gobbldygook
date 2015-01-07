@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 
 import hasDepartment from 'app/helpers/hasDepartment'
 import {partialNameOrTitle} from 'app/helpers/partialTitle'

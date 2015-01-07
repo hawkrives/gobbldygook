@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 
 let yearPlusTerm = (year, term) => {
 	parseInt(String(year) + String(term), 10)

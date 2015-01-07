@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 
 let isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
 	// Takes in a list of required course info, as objects that only have the

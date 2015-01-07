@@ -1,5 +1,5 @@
-import * as _ from 'lodash'
-import * as React from 'react/addons'
+import _ from 'lodash'
+import React from 'react/addons'
 let cx = React.addons.classSet
 
 let BooleanRequirement = React.createClass({

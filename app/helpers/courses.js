@@ -1,6 +1,6 @@
-import * as _ from 'lodash'
-import * as Promise from 'bluebird'
-import * as Immutable from 'immutable'
+import _ from 'lodash'
+import Promise from 'bluebird'
+import Immutable from 'immutable'
 
 import db from 'app/helpers/db'
 import buildQueryFromString from 'app/helpers/queryStuff'

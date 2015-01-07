@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 import hasGenEd from './hasGenEd'
 import hasFOL from './hasFOL'
 

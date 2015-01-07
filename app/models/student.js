@@ -1,6 +1,6 @@
-import * as Promise from 'bluebird'
-import * as Immutable from 'immutable'
-import * as _ from 'lodash'
+import Promise from 'bluebird'
+import Immutable from 'immutable'
+import _ from 'lodash'
 
 import {v4 as uuid} from 'node-uuid'
 import randomChar from 'app/helpers/randomChar'
@@ -9,7 +9,7 @@ import countCredits from 'app/helpers/countCredits'
 import Schedule from 'app/models/schedule'
 import Study from 'app/models/study'
 
-import * as demoStudent from 'sto-areas/demo_student.json'
+import demoStudent from 'sto-areas/demo_student.json'
 
 let currentVersionString = '3.0.0alpha8'
 

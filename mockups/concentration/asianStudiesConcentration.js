@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 
 import hasDepartment from 'app/helpers/hasDepartment'
 import isRequiredCourse from 'sto-areas/lib/isRequiredCourse'

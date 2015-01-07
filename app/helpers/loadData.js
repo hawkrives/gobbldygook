@@ -1,5 +1,5 @@
-import * as _ from 'lodash'
-import * as Promise from 'bluebird'
+import _ from 'lodash'
+import Promise from 'bluebird'
 
 import {status, json} from 'app/helpers/fetch'
 import db from 'app/helpers/db'

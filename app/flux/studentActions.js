@@ -1,4 +1,4 @@
-import * as Reflux from 'reflux'
+import Reflux from 'reflux'
 
 let studentActions = Reflux.createActions([
 	'_loadData',

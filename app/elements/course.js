@@ -1,6 +1,6 @@
-import * as _ from 'lodash'
-import * as React from 'react/addons'
-import * as humanize from 'humanize-plus'
+import _ from 'lodash'
+import React from 'react/addons'
+import humanize from 'humanize-plus'
 import {DragDropMixin} from 'react-dnd'
 
 import studentActions from 'app/flux/studentActions'

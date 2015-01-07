@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 
 import hasGenEd from 'sto-areas/lib/hasGenEd'
 import countGeneds from 'sto-areas/lib/countGeneds'

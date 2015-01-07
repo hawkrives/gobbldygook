@@ -1,4 +1,4 @@
-import * as Immutable from 'immutable'
+import _ from 'lodash'
 import findMissingNumberBinarySearch from 'app/helpers/findMissingNumberBinarySearch'
 
 // Takes a list of schedules and finds the first open semester.

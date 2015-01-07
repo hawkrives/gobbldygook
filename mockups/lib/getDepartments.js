@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 
 function getDepartments(courses) {
 	return _(courses).pluck('depts').flatten().uniq().value()
