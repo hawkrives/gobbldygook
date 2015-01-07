@@ -1,11 +1,16 @@
 import _ from 'lodash'
 import findMissingNumberBinarySearch from 'app/helpers/findMissingNumberBinarySearch'
 
-// Takes a list of schedules and finds the first open semester.
-// If they go [1, 2, 4] findFirstAvailableYear will
-// return 3. If it goes [1, 2, 3] findFirstAvailableSemester
-// will return 4. Etc.
-
+/**
+ * Takes a list of schedules and finds the first open semester.
+ * If they go [1, 2, 4] findFirstAvailableSemester will
+ * return 3. If it goes [1, 2, 3] findFirstAvailableSemester
+ * will return 4. Etc.
+ *
+ * @param {Array|Immutable.List} schedules - the list of schedules
+ * @param {Number} forYear - the year to look within
+ * @returns {Number} - the first available semester slot
+ */
 function findFirstAvailableSemester(schedules, forYear) {
 	let semesters = schedules
 		.filter(sch => sch.year === forYear)

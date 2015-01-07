@@ -1,11 +1,17 @@
 import Immutable from 'immutable'
 import findMissingNumberBinarySearch from 'app/helpers/findMissingNumberBinarySearch'
 
-// Takes a list of schedules and finds the first open year. If they go [2012,
-// 2013, 2015] findFirstAvailableYear will return 2014. If it goes [2013,
-// 2014, 2015] findFirstAvailableYear will return 2016. If schedules is empty,
-// it will return the current year.
-
+/**
+ * Takes a list of schedules and finds the first open year.
+ * If they go [2012, 2013, 2015] findFirstAvailableYear will
+ * return 2014. If it goes [2013, 2014, 2015] findFirstAvailableYear
+ * will return 2016. If schedules is empty, it will return the
+ * current year.
+ *
+ * @param {Array|Immutable.List} schedules - the list of schedules
+ * @param {Number} matriculation - the year of matriculated
+ * @returns {Number} - the first available semester slot
+ */
 function findFirstAvailableYear(schedules, matriculation) {
 	if (schedules && schedules.size === 0 && matriculation === undefined) {
 		return new Date().getFullYear()
