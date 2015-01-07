@@ -1,9 +1,8 @@
 // tests/getRandomInt-test.js
-import 'should'
+import getRandomInt from 'app/helpers/getRandomInt'
 
 describe('getRandomInt', () => {
 	it('finds a random integer between the parameters', () => {
-		import getRandomInt from 'app/helpers/getRandomInt'
 
 		getRandomInt(1, 3).should.be.within(0, 4);
 		getRandomInt(0, 3).should.be.within(-1, 4);

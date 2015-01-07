@@ -1,10 +1,9 @@
 // tests/findFirstAvailableYear-test.js
-import 'should'
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
+import findFirstAvailableYear from 'app/helpers/findFirstAvailableYear'
 
 describe('findFirstAvailableYear', () => {
 	it('takes a list of schedules and finds the first open year', () => {
-		import findFirstAvailableYear from '../app/helpers/findFirstAvailableYear'
 
 		let schedules = Immutable.List([
 			{"id": 3, "year": 2012},

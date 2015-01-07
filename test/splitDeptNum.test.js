@@ -1,5 +1,4 @@
 // tests/splitDeptNum.test.js
-import 'should'
 import splitDeptNum from 'app/helpers/splitDeptNum'
 
 describe('splitDeptNum', () => {

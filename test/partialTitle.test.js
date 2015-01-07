@@ -1,8 +1,10 @@
 // tests/partialTitle-test.js
-import 'should'
+import {
+	partialTitle,
+	partialName,
+	partialNameOrTitle} from 'app/helpers/partialTitle'
 
 describe('partialTitle', () => {
-	import * as partial from 'app/helpers/partialTitle'
 	let courses = []
 
 	beforeEach(() => {
@@ -20,24 +22,18 @@ describe('partialTitle', () => {
 	})
 
 	it('checks if a course has a matching string in the title', () => {
-		let partialTitle = partial.partialTitle
-
 		partialTitle('Asia', courses[0]).should.be.true
 		partialTitle('Dance', courses[1]).should.be.true
 		partialTitle('Japanese', courses[4]).should.be.true
 	})
 
 	it('checks if a course has a matching string in the name', () => {
-		let partialName = partial.partialName
-
 		partialName('Asia', courses[0]).should.be.true
 		partialName('Dance', courses[1]).should.be.true
 		partialName('Japanese', courses[4]).should.be.true
 	})
 
 	it('checks if a course has a matching string in either the title or the name', () => {
-		let partialNameOrTitle = partial.partialNameOrTitle
-
 		partialNameOrTitle('Asia', courses[0]).should.be.true
 		partialNameOrTitle('Dance', courses[1]).should.be.true
 		partialNameOrTitle('Japanese', courses[4]).should.be.true

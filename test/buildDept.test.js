@@ -1,5 +1,4 @@
 // test/buildDept.test.js
-import 'should'
 
 import buildDept from 'app/helpers/buildDept'
 describe('buildDept', () => {

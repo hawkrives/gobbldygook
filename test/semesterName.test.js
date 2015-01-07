@@ -1,10 +1,8 @@
-// tests/countCredits-test.js
-import 'should'
+// tests/semesterName.test.js
+import {semesterName} from 'app/helpers/semesterName'
 
 describe('semesterName', () => {
 	it('converts a semester number to a semester name', () => {
-		import {semesterName} from 'app/helpers/semesterName'
-
 		semesterName(0).should.equal('Unknown (0)')
 		semesterName(1).should.equal('Fall')
 		semesterName(2).should.equal('Interim')
@@ -14,10 +12,9 @@ describe('semesterName', () => {
 	})
 })
 
+import {toPrettyTerm} from 'app/helpers/semesterName'
 describe('toPrettyTerm', () => {
 	it('converts a term id to a year and semester', () => {
-		import {toPrettyTerm} from 'app/helpers/semesterName'
-
 		toPrettyTerm(20141).should.equal('Fall 2014—2015')
 		toPrettyTerm(20103).should.equal('Spring 2010—2011')
 		toPrettyTerm(20135).should.equal('Late Summer 2013—2014')
@@ -27,10 +24,9 @@ describe('toPrettyTerm', () => {
 	})
 })
 
+import {expandYear} from 'app/helpers/semesterName'
 describe('expandYear', () => {
 	it('expands a year to year-(year+1)', () => {
-		import {expandYear} from 'app/helpers/semesterName'
-
 		expandYear(2014).should.equal('2014—2015')
 		expandYear(2010).should.equal('2010—2011')
 		expandYear(2013).should.equal('2013—2014')

@@ -1,6 +1,6 @@
 // tests/findFirstAvailableSemester-test.js
-import 'should'
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
+import findFirstAvailableSemester from 'app/helpers/findFirstAvailableSemester'
 
 describe('findFirstAvailableSemester', () => {
 	it('takes a list of schedules and finds the first open semester', () => {

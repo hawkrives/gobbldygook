@@ -1,8 +1,7 @@
 // tests/courseLevels-test.js
-import 'should'
+import courseLevels from '../app/helpers/courseLevels'
 
 describe('courseLevels', () => {
-	import * as courseLevels from '../app/helpers/courseLevels'
 	let courses = []
 
 	beforeEach(() => {
