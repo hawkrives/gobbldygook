@@ -9,7 +9,6 @@ function calculateNextScheduleId(schedules) {
 	let maxId = _(schedules)
 		.pluck('id')
 		.max()
-		.value()
 
 	return maxId + 1
 }
