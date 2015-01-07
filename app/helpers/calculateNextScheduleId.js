@@ -1,5 +1,4 @@
-import * as _ from 'lodash'
-
+import _ from 'lodash'
 
 /**
  * Takes a list of schedules and finds the next id number.
@@ -10,7 +9,6 @@ function calculateNextScheduleId(schedules) {
 	let maxId = _(schedules)
 		.pluck('id')
 		.max()
-		.value()
 
 	return maxId + 1
 }

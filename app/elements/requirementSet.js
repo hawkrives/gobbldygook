@@ -1,6 +1,6 @@
-import * as _ from 'lodash'
-import * as React from 'react'
-import * as marked from 'marked'
+import _ from 'lodash'
+import React from 'react'
+import marked from 'marked'
 
 import {
 	BooleanRequirement, SomeArrayRequirement, BooleanArrayRequirement, NumberObjectRequirement

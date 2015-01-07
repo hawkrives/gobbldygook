@@ -1,19 +1,19 @@
 import '6to5/polyfill'
 import 'fetch'
 
-import * as Promise from 'bluebird'
+import Promise from 'bluebird'
 Promise.longStackTraces()
 
-import * as Router from 'react-router'
+import Router from 'react-router'
 
-import * as React from 'react'
+import React from 'react'
 React.initializeTouchEvents(true)
 
-import * as _ from 'lodash'
+import _ from 'lodash'
 
 import 'app/helpers/db'
 
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
 window.imm = Immutable
 
 

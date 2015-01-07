@@ -1,6 +1,5 @@
 // sto-areas/majors/test/computerScienceMajor.test.js
-import 'should'
-import * as compSci from 'sto-areas/major/computerScienceMajor'
+import compSci from 'sto-areas/major/computerScienceMajor'
 
 describe('Major - Computer Science', () => {
 	describe('foundationCourses', () => {

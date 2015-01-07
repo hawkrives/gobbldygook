@@ -1,6 +1,6 @@
-import * as _ from 'lodash'
-import * as React from 'react'
-import * as humanize from 'humanize-plus'
+import _ from 'lodash'
+import React from 'react'
+import humanize from 'humanize-plus'
 
 import ContentEditable from 'app/elements/contentEditable'
 

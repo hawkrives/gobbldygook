@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import {State, RouteHandler} from 'react-router'
 
 import Sidebar from 'app/elements/sidebar'

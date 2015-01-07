@@ -1,9 +1,8 @@
 // tests/calculateNextScheduleId-test.js
-import 'should'
+import calculateNextScheduleId from 'app/helpers/calculateNextScheduleId'
 
 describe('calculateNextScheduleId', () => {
 	it('calculates the next available schedule id', () => {
-		import calculateNextScheduleId from 'app/helpers/calculateNextScheduleId'
 		let schedules = {
 			"1": {"id": 1},
 			"2": {"id": 2},

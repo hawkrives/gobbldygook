@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import {State} from 'react-router'
 
 import SearchButton from 'app/elements/searchButton'

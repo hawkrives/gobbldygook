@@ -1,5 +1,5 @@
-import * as Reflux from 'reflux'
-import * as Immutable from 'immutable'
+import Reflux from 'reflux'
+import Immutable from 'immutable'
 import studentActions from 'app/flux/studentActions'
 import Student from 'app/models/student'
 

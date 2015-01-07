@@ -1,6 +1,6 @@
-import * as Promise from 'bluebird'
-import * as treo from 'treo'
-import * as treoPromise from 'treo/plugins/treo-promise'
+import Promise from 'bluebird'
+import treo from 'treo'
+import treoPromise from 'treo/plugins/treo-promise'
 
 let schema = treo.schema()
 	.version(1)

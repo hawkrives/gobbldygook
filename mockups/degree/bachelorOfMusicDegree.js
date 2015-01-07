@@ -1,9 +1,9 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 
-import * as common from 'sto-areas/lib/commonGraduationRequirements'
-import * as utilities from 'sto-areas/lib/commonGraduationUtilities'
-import * as educ from 'sto-areas/lib/commonEducationRequirements'
-import * as eduUtilities from 'sto-areas/lib/commonEducationUtilities'
+import common from 'sto-areas/lib/commonGraduationRequirements'
+import utilities from 'sto-areas/lib/commonGraduationUtilities'
+import educ from 'sto-areas/lib/commonEducationRequirements'
+import eduUtilities from 'sto-areas/lib/commonEducationUtilities'
 let countGeneds = eduUtilities.countGeneds
 
 function onlyMusicMajors(major) {

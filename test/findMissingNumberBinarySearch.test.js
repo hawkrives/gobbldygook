@@ -1,9 +1,9 @@
 // tests/findMissingNumberBinarySearch-test.js
-import * as should from 'should'
+import should from 'should'
+import findMissingNumberBinarySearch from 'app/helpers/findMissingNumberBinarySearch'
 
 describe('findMissingNumberBinarySearch', () => {
 	it('takes a list of numbers and finds the first gap', () => {
-		import findMissingNumberBinarySearch from 'app/helpers/findMissingNumberBinarySearch'
 		let nums = [
 			[1,2,3],
 			[0,1,2],

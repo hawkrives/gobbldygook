@@ -1,7 +1,7 @@
-import * as _ from 'lodash'
-import * as React from 'react'
-import * as humanize from 'humanize-plus'
-import * as Immutable from 'immutable'
+import _ from 'lodash'
+import React from 'react'
+import humanize from 'humanize-plus'
+import Immutable from 'immutable'
 
 import AreaOfStudy from 'app/elements/areaOfStudy'
 import StudentSummary from 'app/elements/studentSummary'

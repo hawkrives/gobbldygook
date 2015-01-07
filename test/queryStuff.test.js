@@ -1,5 +1,4 @@
 // tests/queryStuff-test.js
-import 'should'
 import buildQueryFromString from 'app/helpers/queryStuff'
 
 describe('buildQueryFromString', () => {

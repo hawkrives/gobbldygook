@@ -1,5 +1,5 @@
-import * as _ from 'lodash'
-import * as courseRelatedData from 'sto-courses'
+import _ from 'lodash'
+import courseRelatedData from 'sto-courses'
 
 let semesters = {
 	fall: 1,

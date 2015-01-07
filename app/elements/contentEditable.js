@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 let ContentEditable = React.createClass({
 	// from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable

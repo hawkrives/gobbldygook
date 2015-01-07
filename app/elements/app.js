@@ -1,6 +1,6 @@
-import * as React from 'react'
-import * as Reflux from 'reflux'
-import * as Immutable from 'immutable'
+import React from 'react'
+import Reflux from 'reflux'
+import Immutable from 'immutable'
 import {RouteHandler} from 'react-router'
 
 import studentStore from 'app/flux/studentStore'

@@ -1,6 +1,6 @@
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
 import {isUndefined} from 'lodash'
-import * as Promise from 'bluebird'
+import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
 
 import randomChar from 'app/helpers/randomChar'

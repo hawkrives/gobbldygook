@@ -1,20 +1,20 @@
-import * as _ from 'lodash'
+import {curry, any, isArray, contains} from 'lodash'
 
-let partialTitle = _.curry((partial, course) => {
-	return _.contains(course.title, partial)
+let partialTitle = curry((partial, course) => {
+	return contains(course.title, partial)
 })
 
-let partialName = _.curry((partial, course) => {
-	return _.contains(course.name, partial)
+let partialName = curry((partial, course) => {
+	return contains(course.name, partial)
 })
 
-let checkPartialNameOrTitle = _.curry((partial, course) => {
-	return _.any([partialTitle(partial, course), partialName(partial, course)])
+let checkPartialNameOrTitle = curry((partial, course) => {
+	return any([partialTitle(partial, course), partialName(partial, course)])
 })
 
-let partialNameOrTitle = _.curry((partial, course) => {
-	if (_.isArray(partial))
-		return _.any(partial, (p) => checkPartialNameOrTitle(p, course))
+let partialNameOrTitle = curry((partial, course) => {
+	if (isArray(partial))
+		return any(partial, (p) => checkPartialNameOrTitle(p, course))
 	return checkPartialNameOrTitle(partial, course)
 })
 

@@ -1,9 +1,8 @@
 // tests/hasDepartment-test.js
-import 'should'
+import hasDepartment from 'app/helpers/hasDepartment'
 
 describe('hasDepartment', () => {
 	it('checks if a course is in a department', () => {
-		import hasDepartment from 'app/helpers/hasDepartment'
 		let courses = [
 			{depts: ['ASIAN', 'REL'], num: 230},
 			{depts: ['BIO', 'CHEM'], num: 125},

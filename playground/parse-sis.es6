@@ -1,7 +1,7 @@
 'use strict';
 
-import * as _ from 'lodash'
-import * as SISData from './sis-degreeaudit.json'
+import _ from 'lodash'
+import SISData from './sis-degreeaudit.json'
 
 function tableToJson(table) {
 	// from http://johndyer.name/html-table-to-json/

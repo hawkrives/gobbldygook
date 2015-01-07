@@ -1,12 +1,12 @@
-// tests/partialTitle-test.js
-import 'should'
+// tests/time.test.js
+import {
+	findDays,
+	findTimes,
+	convertTimeStringsToOfferings,
+	checkCourseTimeConflicts} from 'app/helpers/time'
 
 describe('time', () => {
-	import time from 'app/helpers/time'
-
 	it('turns the day abbreviations into a list of unambiguous days', () => {
-		let findDays = time.findDays
-
 		findDays('M').should.eql(['Mo'])
 		findDays('T').should.eql(['Tu'])
 		findDays('W').should.eql(['We'])
@@ -56,8 +56,6 @@ describe('time', () => {
 	})
 
 	it('turns the absurd time shorthand into unambiguous 24-hour time', () => {
-		let findTimes = time.findTimes
-
 		findTimes('5:00-9:00').should.eql({start: 500, end: 900})
 		findTimes('7:00-9:00').should.eql({start: 700, end: 900})
 		findTimes('8:00-9:00').should.eql({start: 800, end: 900})
@@ -490,7 +488,6 @@ describe('time', () => {
 	})
 
 	it('turns the timestrings into semi-usable objects', () => {
-		let convertTimeStringsToOfferings = time.convertTimeStringsToOfferings
 		let courses = [
 			{times: ['MT 0100-0400PM','MF 0905-1000']},
 			{times: ['M-Th 0100-0200PM','MF 0905-1000']}
@@ -511,9 +508,6 @@ describe('time', () => {
 	})
 
 	it('checks for course time conflicts', () => {
-		let checkCourseTimeConflicts = time.checkCourseTimeConflicts
-		let convertTimeStringsToOfferings = time.convertTimeStringsToOfferings
-
 		let courses = [
 			{offerings: [
 				{day: 'Mo', times:[{start:1300,end:1600},{start:905,end:1000}]},

@@ -1,7 +1,7 @@
 // tests/areas/common-education-requirements-test.js
 import 'should'
 
-import * as reqs from 'sto-areas/lib/commonEducationRequirements'
+import reqs from 'sto-areas/lib/commonEducationRequirements'
 
 // todo: the [across two depts] requirements need to validate when there's
 // only one course.

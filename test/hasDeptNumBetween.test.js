@@ -1,7 +1,6 @@
 // test/hasDeptNumBetween.test.js
-import 'should'
-
 import hasDeptNumBetween from 'app/helpers/hasDeptNumBetween'
+
 describe('hasDeptNumBetween', () => {
 	it('returns true if a course\'s dept and num are between the parameters', () => {
 		let ASIAN_PARAMS = {dept: 'ASIAN', start: 200, end: 250}
