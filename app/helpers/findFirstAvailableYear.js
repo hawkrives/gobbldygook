@@ -1,4 +1,4 @@
-import Immutable from 'immutable'
+import _ from 'lodash'
 import findMissingNumberBinarySearch from 'app/helpers/findMissingNumberBinarySearch'
 
 /**
@@ -17,24 +17,25 @@ function findFirstAvailableYear(schedules, matriculation) {
 		return new Date().getFullYear()
 	}
 
-	let years = schedules
+	let years = _(schedules.toJS ? schedules.toJS() : schedules)
 		.map(sch => sch.year)
-		.toSet()
+		.uniq()
+		.value()
 
 	// put the matriculation year at the front to give a starting point
 	if (matriculation !== undefined)
-		years = years.add(matriculation - 1)
+		years.unshift(matriculation - 1)
 
-	years = years.sort()
+	years = _.sortBy(years)
 
 	// log('findFirstAvailableYear', years.toJS())
 
-	let missingNo = findMissingNumberBinarySearch(years.toJS())
+	let missingNo = findMissingNumberBinarySearch(years)
 	if (missingNo !== null) {
 		return missingNo
 	}
 
-	return years.max() + 1
+	return _.max(years) + 1
 }
 
 export default findFirstAvailableYear

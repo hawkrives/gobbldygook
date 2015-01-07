@@ -12,22 +12,21 @@ import findMissingNumberBinarySearch from 'app/helpers/findMissingNumberBinarySe
  * @returns {Number} - the first available semester slot
  */
 function findFirstAvailableSemester(schedules, forYear) {
-	let semesters = schedules
+	let semesters = _(schedules.toJS ? schedules.toJS() : schedules)
 		.filter(sch => sch.year === forYear)
 		.map(sch => sch.semester)
-		.toSet()
+		.uniq()
+		// stick a 0 at the front so findBinary will start from 1
+		.unshift(0)
+		.sortBy()
+		.value()
 
-	// stick a 0 at the front so findBinary will start from 1
-	semesters = semesters.add(0)
-
-	semesters = semesters.sort()
-
-	let missingNo = findMissingNumberBinarySearch(semesters.toJS())
+	let missingNo = findMissingNumberBinarySearch(semesters)
 	if (missingNo !== null) {
 		return missingNo
 	}
 
-	return semesters.max() + 1
+	return _.max(semesters) + 1
 }
 
 export default findFirstAvailableSemester
