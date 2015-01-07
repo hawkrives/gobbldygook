@@ -107,7 +107,7 @@ function buildQueryFromString(queryString) {
 	// Perform initial cleaning of the values, dependent on the keys
 	let grouped = _.mapValues(zipped, (vals, key) => {
 		let organized = _.map(vals, (val) => {
-			if (val.indexOf('$') === 0)
+			if (val.startsWith('$'))
 				return val.toUpperCase()
 
 			if (key === 'depts') {
