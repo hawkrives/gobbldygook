@@ -5,6 +5,8 @@ import * as Immutable from 'immutable'
 import db from 'app/helpers/db'
 import buildQueryFromString from 'app/helpers/queryStuff'
 
+import checkCoursesFor from './checkCoursesFor'
+
 
 /**
  * Gets a course from the database.
@@ -38,18 +40,6 @@ function getCourses(clbids) {
 		clbids = clbids.toJS()
 
 	return Promise.all(clbids.map(getCourse))
-}
-
-
-/**
- * Checks if any courses in a list of courses pass a given lodash filter.
- *
- * @param {Array} courses
- * @param {String|Object|Function} filter - any valid lodash filter
- * @returns {Boolean} - from _.any
- */
-function checkCoursesFor(courses, filter) {
-	return _.any(courses, filter)
 }
 
 
