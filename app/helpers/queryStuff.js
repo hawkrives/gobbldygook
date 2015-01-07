@@ -96,7 +96,7 @@ function buildQueryFromString(queryString) {
 	// Process the keys, to clean them up somewhat
 	keys = _.map(keys, (key) => {
 		key = key.toLowerCase()
-		if (key.indexOf('_') !== 0)
+		if (!key.startsWith('_'))
 			key = keywordMappings[key] || key
 		return key
 	})
@@ -144,7 +144,7 @@ function buildQueryFromString(queryString) {
 			return val
 		})
 
-		if (organized.length > 1 && organized[0].indexOf('$') !== 0) {
+		if (organized.length > 1 && !organized[0].startsWith('$')) {
 			organized.unshift('$AND')
 		}
 
