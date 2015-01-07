@@ -182,3 +182,11 @@ function checkComputerScienceMajor(student) {
 }
 
 export default checkComputerScienceMajor
+
+export {
+	foundationCourses,
+	coreCourses,
+	electiveCourses,
+	capstoneCourse,
+	checkComputerScienceMajor
+}
