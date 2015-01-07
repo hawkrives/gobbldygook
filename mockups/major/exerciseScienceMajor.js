@@ -51,7 +51,7 @@ function corePsychologyCourses(courses) {
 		- Psychology 125
 	*/
 
-	let principlesOfPsych= checkCoursesFor(courses, {deptnum:'PSYCH 125'})
+	let principlesOfPsych = checkCoursesFor(courses, {deptnum:'PSYCH 125'})
 
 	let requirements = [
 		{
@@ -165,7 +165,7 @@ function electiveCourses(courses) {
 			has: numberTaken,
 			needs: numberNeeded,
 			matches: validCourses,
-		}
+		},
 	}
 }
 
