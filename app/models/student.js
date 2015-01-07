@@ -201,7 +201,7 @@ class Student extends StudentRecord {
 	}
 
 	encode() {
-		return encodeURIComponent(this.toJS())
+		return encodeURIComponent(this.toJSON())
 	}
 
 	toString() {
