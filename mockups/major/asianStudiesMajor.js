@@ -60,19 +60,15 @@ function electives(courses) {
 		_(asianStudiesElectives).filter(partialNameOrTitle('Japan')).size() <= 4,
 	])
 
+	// Req. #4 was embedded at the beginning, when we reject any lower-level
+	// languages. That way, we can't count them.
 	let electivesAreGood = _.all([levelsTwoOrThree, onlyTwoAtLevelOne, notTooSpecialized])
+
 	// console.log('asianStudiesElectives', asianStudiesElectives)
 
 	let matching = _.size(asianStudiesElectives)
 	let needs = 6
 
-	// Req. #4 was embedded at the beginning, when we reject any lower-level
-	// languages. That way, we can't count them.
-	let details = [
-		levelsTwoOrThree,
-		onlyTwoAtLevelOne,
-		notTooSpecialized,
-	]
 	return {
 		title: 'Electives',
 		type: 'object/number',
