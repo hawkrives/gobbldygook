@@ -1,0 +1,101 @@
+{
+	title: "Asian Studies",
+	id: "m-asian",
+	type: "major",
+	requirements: [
+		{
+			title: "Language",
+			type: "object/number",
+			description: "",
+			components: {
+				courseCount: ["$eq", 2],
+				courseQuery: {
+					department: ["$or", "JAPAN", "CHIN"],
+					number: ["$ge", "112"]
+				}
+			}
+		},
+		{
+			title: "Interdisciplinary Approaches to Asia",
+			type: "boolean",
+			description: "",
+			components: {
+				hasTakenCourse: {
+					deptnum: "ASIAN 275"
+				}
+			}
+		},
+		{
+			title: "Senior Seminar",
+			type: "boolean",
+			description: "",
+			components: {
+				oneOf: [
+					hasTakenCourse: { deptnum: "ASIAN 399" },
+					hasTakenCourse: { deptnum: "ASIAN 397" },
+				]
+			}
+		}
+		{
+			title: "Electives",
+			type: "object/number",
+			description: "",
+			components: {
+				requirements: [
+					{
+						title: "Level II or III",
+						description: "At least two at level II or level III, *taken on campus*",
+						components: {
+							courseCount: ["$gte", 2],
+							courseQuery: {
+								department: "ASIAN",
+								level: ["$gte", 200],
+								fabrication: false,
+							}
+						}
+					},
+					{
+						title: "Level I",
+						description: "No more than two at level I",
+						components: {
+							courseCount: ["$lte", 2],
+							courseQuery: {
+								department: "ASIAN",
+								level: 100,
+							}
+						}
+					},
+					{
+						title: "Not Too Specialized",
+						description: "No more than four elective courses about any one country",
+						components: {
+							courseCount: ["$lte", 4],
+							oneOf: [
+								{
+									courseQuery: {
+										department: "ASIAN",
+										name: ["$in", ["Japan*", "Chin*"]],
+									}
+								},
+								{
+									courseCount: ["$lte", 4],
+									courseQuery: {
+										department: "ASIAN",
+										name: ["$in", ["Japan*", "Chin*"]],
+									}
+								}
+							]
+						}
+					}
+					{
+						title: "Early Language",
+						description: "No level I or level II language courses may count",
+						components: {
+
+						}
+					}
+				]
+			}
+		}
+	]
+}
