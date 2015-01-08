@@ -7,7 +7,7 @@ describe('Major - Computer Science', () => {
 			let validCourses = [
 				{deptnum: 'CSCI 121'},
 				{deptnum: 'CSCI 251'}, {deptnum: 'CSCI 252'}, {deptnum: 'CSCI 241'},
-				{deptnum: 'MATH 282', term: 20141}
+				{deptnum: 'MATH 282', term: 20141},
 			]
 			let expectedResult = {
 				title: 'Foundation',
@@ -27,7 +27,7 @@ describe('Major - Computer Science', () => {
 						title: 'Proof Writing',
 						result: true,
 					},
-				]
+				],
 			}
 
 			compSci.foundationCourses(validCourses).should.eql(expectedResult)
