@@ -20,8 +20,7 @@ function crossCulturalStudies(courses) {
 		.filter(hasDeptNumBetween({dept: 'ENGL', start: 200, end: 219}))
 		.value()
 
-	let fulfilledCrossCulturalStudies= _.filter([subsetOfCourses], (courses) => _.size(courses) >= 1)
-	let fulfilledCrossCulturalStudiesCourses = _.flatten(fulfilledCrossCulturalStudies)
+	let fulfilledCrossCulturalStudies = _.filter(subsetOfCourses, (courses) => _.size(courses) >= 1)
 
 	let numberFulfilled = _.size(fulfilledCrossCulturalStudies)
 	let numberNeeded = 1
@@ -34,7 +33,7 @@ function crossCulturalStudies(courses) {
 		details: {
 			has: numberFulfilled,
 			needs: numberNeeded,
-			matches: fulfilledCrossCulturalStudiesCourses
+			matches: fulfilledCrossCulturalStudies
 		}
 	}
 }
