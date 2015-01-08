@@ -115,7 +115,7 @@ let statisticsConcentration = {
 	id: 'c-stat',
 	department_abbr: 'STAT',
 
-	check: checkChinaStudiesConcentration,
+	check: checkStatisticsConcentration,
 	_requirements: {
 		foundationCourses,
 		coreCourses,
