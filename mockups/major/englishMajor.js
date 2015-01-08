@@ -33,8 +33,8 @@ function crossCulturalStudies(courses) {
 		details: {
 			has: numberFulfilled,
 			needs: numberNeeded,
-			matches: fulfilledCrossCulturalStudies
-		}
+			matches: fulfilledCrossCulturalStudies,
+		},
 	}
 }
 
@@ -61,7 +61,7 @@ function literaryHistory(courses) {
 			has: numberFulfilled,
 			needs: numberNeeded,
 			matches: fulfilledLiteraryHistory,
-		}
+		},
 	}
 }
 
@@ -98,7 +98,7 @@ function crossDisciplinaryOrGenre(courses) {
 			has: numberFulfilled,
 			needs: numberNeeded,
 			matches: crossAndGenreCourses,
-		}
+		},
 	}
 }
 
@@ -155,8 +155,8 @@ function electives(courses) {
 		details: {
 			has: matching,
 			needs: needs,
-			matches: englishMajorElectives
-		}
+			matches: englishMajorElectives,
+		},
 	}
 }
 
@@ -169,13 +169,13 @@ function checkEnglishMajor(student) {
 			crossCulturalStudies(courses),
 			literaryHistory(courses),
 			crossDisciplinaryOrGenre(courses),
-			//requirement1800(courses),			// fix me
+			// requirement1800(courses), fix me
 			electives(courses),
 		]
 
 		return {
 			result: _.all(englishMajorRequirements, 'result'),
-			details: englishMajorRequirements
+			details: englishMajorRequirements,
 		}
 	})
 }
