@@ -14,8 +14,8 @@
   Derived from <https://github.com/greypants/gulp-starter>.
 */
 
-require('6to5/register')
 var requireDir = require('require-dir');
+require('6to5-core/register')
 
 // Require all tasks in gulp/tasks, including subfolders
 requireDir('./gulp/tasks', { recurse: true });

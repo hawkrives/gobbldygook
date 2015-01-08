@@ -1,4 +1,4 @@
-require('6to5/register')
+require('6to5-core/register')
 var Immutable = require('immutable')
 var findFirstAvailableSemester = require('app/helpers/findFirstAvailableSemester')
 

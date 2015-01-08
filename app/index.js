@@ -1,4 +1,4 @@
-import '6to5/polyfill'
+import '6to5-core/polyfill'
 import 'fetch'
 
 import Promise from 'bluebird'

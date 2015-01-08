@@ -1,4 +1,4 @@
-require('6to5/register')
+require('6to5-core/register')
 var countCredits = require('app/helpers/countCredits')
 
 suite('countCredits', function() {

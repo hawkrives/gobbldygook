@@ -1,4 +1,4 @@
-require('6to5/register')
+require('6to5-core/register')
 var calculateNextScheduleId = require('app/helpers/calculateNextScheduleId')
 
 suite('calculateNextScheduleId', function() {
