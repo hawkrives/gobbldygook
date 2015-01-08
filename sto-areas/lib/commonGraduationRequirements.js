@@ -4,7 +4,7 @@ import {hasDeptNumBetween} from 'app/helpers/deptNum'
 import countCredits from 'app/helpers/countCredits'
 import hasDepartment from 'app/helpers/hasDepartment'
 import {onlyCoursesAtOrAboveLevel} from 'app/helpers/courseLevels'
-import utilities from 'sto-areas/lib/commonGraduationUtilities'
+import utilities from './commonGraduationUtilities'
 
 function courses(coursesTaken, creditsNeeded) {
 	// Students must take the equivalent of 35 St. Olaf credits through a
