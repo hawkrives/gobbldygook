@@ -8,6 +8,6 @@ grep "version" package.json
 
 read -p "Version: "  version; \
 npm version $version --message "v%s"
-# npm publish
+npm publish
 
 git push --follow-tags
