@@ -3,7 +3,7 @@ import _ from 'lodash'
 import hasDepartment from 'app/helpers/hasDepartment'
 import {partialNameOrTitle} from 'app/helpers/partialTitle'
 import {coursesAtLevel, coursesAtOrAboveLevel} from 'app/helpers/courseLevels'
-import {checkCoursesFor} from 'app/helpers/courses'
+import checkCoursesFor from 'app/helpers/checkCoursesFor'
 
 import isRequiredCourse from 'sto-areas/lib/isRequiredCourse'
 
