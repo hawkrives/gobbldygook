@@ -1,5 +1,12 @@
 import {curry, find, contains, all} from 'lodash'
 
+/**
+ * Takes a list of required courses and checks if a course matches.
+ *
+ * @param {Array<Course>} requiredCourses - the required courses.
+ * @param {Course} checkAgainst - the course to check.
+ * @returns {Boolean} - is the course in the list.
+ */
 let isRequiredCourse = curry(function(requiredCourses, checkAgainst) {
 	// Takes in a list of required course info, as objects that only have the
 	// info needed to match.
