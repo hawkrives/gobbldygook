@@ -12,7 +12,7 @@
     "build": "6to5 lib --out-dir dist",
     "watch": "6to5 --watch lib --out-dir dist",
     "test": "mocha",
-    "send": "./bin/publish.sh"
+    "push": "./bin/publish.sh"
   },
   "keywords": [
     "stolaf",
