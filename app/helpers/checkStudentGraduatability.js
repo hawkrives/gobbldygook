@@ -5,30 +5,6 @@ import {isUndefined} from 'lodash'
 import {isTrue} from 'app/helpers/is'
 import findResults from 'app/helpers/findResults'
 import findWordForProgress from 'app/helpers/findWordForProgress'
-import stoAreas from 'sto-areas'
-
-let areas = Immutable.Map({
-	// Degrees
-	'd-ba': stoAreas.degree.bachelorOfArts,
-	// 'd-bm': stoAreas.degree.bachelorOfMusic,
-
-	// Majors
-	'm-csci':  stoAreas.major.computerScience,
-	'm-asian': stoAreas.major.asianStudies,
-	'm-chem':  stoAreas.major.chemistry,
-	'm-phys':  stoAreas.major.physics,
-	'm-math':  stoAreas.major.mathematics,
-	'm-esth':  stoAreas.major.exerciseScience,
-	'm-engl':  stoAreas.major.english,
-
-	// Concentrations
-	'c-asian': stoAreas.concentration.asianStudies,
-	'c-stat':  stoAreas.concentration.statistics,
-	'c-chin':  stoAreas.concentration.chinaStudies,
-	'c-japan': stoAreas.concentration.japanStudies,
-
-	// Emphases
-})
 
 
 /**
@@ -65,7 +41,8 @@ let noResult = (type, title, id) => {
 function checkStudentAgainstArea(student, area) {
 	let {title, type, id} = area
 
-	let areaChecker = areas.get(area.id)
+	// let areaChecker = areas.get(area.id)
+	let areaChecker = area.check
 
 	if (!areaChecker)
 		return Promise.resolve(noResult(type, title, id))
