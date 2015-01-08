@@ -4,6 +4,7 @@ import hasDepartment from 'app/helpers/hasDepartment'
 import {partialNameOrTitle} from 'app/helpers/partialTitle'
 import checkCoursesFor from 'app/helpers/checkCoursesFor'
 
+import courseMatches from 'sto-areas/lib/courseMatches'
 import isRequiredCourse from 'sto-areas/lib/isRequiredCourse'
 
 const exerciseScienceRequiredCourses = [
@@ -140,18 +141,18 @@ function electiveCourses(courses) {
 		Statistics 214
 	*/
 
-	let validCourses = _.any([
-		checkCoursesFor(courses, {deptnum:'NEURO 239'}),
-		checkCoursesFor(courses, {deptnum:'ESTH 290'}),
-		checkCoursesFor(courses, {deptnum:'ESTH 376'}),
-		checkCoursesFor(courses, {deptnum:'PSYCH 230'}),
-		checkCoursesFor(courses, {deptnum:'PSYCH 241'}),
-		checkCoursesFor(courses, {deptnum:'PSYCH 247'}),
-		checkCoursesFor(courses, {deptnum:'STAT 110'}),
-		checkCoursesFor(courses, {deptnum:'STAT 212'}),
-		checkCoursesFor(courses, {deptnum:'STAT 214'}),
-	])
-
+	let validCourseQualifiers = [
+		{deptnum:'NEURO 239'},
+		{deptnum:'ESTH 290'},
+		{deptnum:'ESTH 376'},
+		{deptnum:'PSYCH 230'},
+		{deptnum:'PSYCH 241'},
+		{deptnum:'PSYCH 247'},
+		{deptnum:'STAT 110'},
+		{deptnum:'STAT 212'},
+		{deptnum:'STAT 214'},
+	]
+	let validCourses = _.filter(courses, courseMatches(validDeptNums))
 
 	let numberTaken = _.size(validCourses)
 	let numberNeeded = 2
