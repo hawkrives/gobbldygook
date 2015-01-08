@@ -46,7 +46,7 @@
     "treo": "^0.3.0"
   },
   "devDependencies": {
-    "6to5": "^2.7.4",
+    "6to5": "^2.8.2",
     "6to5ify": "^3.1.0",
     "autoprefixer-core": "4.0.2",
     "browser-sync": "^1.8.3",
@@ -74,7 +74,7 @@
     "mold-source-map": "^0.3.0",
     "pretty-hrtime": "^1.0.0",
     "require-dir": "^0.1.0",
-    "should": "^4.4.2",
+    "should": "^4.4.4",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
