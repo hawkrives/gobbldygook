@@ -16,7 +16,7 @@
     "gulp": "gulp",
     "serve": "gulp watch",
     "stat": "npm run lint && npm run benchmark && npm run test",
-    "test": "mocha",
+    "test": "mocha && mocha sto-areas",
     "watch": "gulp watch"
   },
   "repository": {
