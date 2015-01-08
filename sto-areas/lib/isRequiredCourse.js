@@ -1,4 +1,4 @@
-import {find, contains, all} from 'lodash'
+import {curry, find, contains, all} from 'lodash'
 
 let isRequiredCourse = curry(function(requiredCourses, checkAgainst) {
 	// Takes in a list of required course info, as objects that only have the
