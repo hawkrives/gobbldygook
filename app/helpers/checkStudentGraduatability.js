@@ -63,9 +63,7 @@ let noResult = (type, title, id) => {
  * @fulfill {Object} - The details of the area check.
  */
 function checkStudentAgainstArea(student, area) {
-	let title = area.title
-	let type = area.type
-	let id = area.id
+	let {title, type, id} = area
 
 	let areaChecker = areas.get(area.id)
 
