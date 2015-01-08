@@ -13,9 +13,6 @@ import _ from 'lodash'
 
 import 'app/helpers/db'
 
-import Immutable from 'immutable'
-window.imm = Immutable
-
 
 // Just for use in the browser console, I swear.
 window.lodash = _
