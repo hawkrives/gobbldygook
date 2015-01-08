@@ -165,7 +165,7 @@ let asianStudiesMajor = {
 	title: 'Asian Studies',
 	type: 'major',
 	id: 'm-asian',
-	department_abbr: 'ASIAN',
+	departmentAbbr: 'ASIAN',
 
 	check: checkAsianStudiesMajor,
 	_requirements: {

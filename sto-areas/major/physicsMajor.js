@@ -113,7 +113,7 @@ let physicsMajor = {
 	title: 'Physics',
 	type: 'major',
 	id: 'm-phys',
-	department_abbr: 'PHYS',
+	departmentAbbr: 'PHYS',
 
 	check: checkPhysicsMajor,
 	_requirements: {

@@ -181,7 +181,7 @@ let englishMajor = {
 	title: 'English',
 	type: 'major',
 	id: 'm-engl',
-	department_abbr: 'ENGL',
+	departmentAbbr: 'ENGL',
 
 	check: checkEnglishMajor,
 	_requirements: {

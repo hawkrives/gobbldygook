@@ -73,7 +73,7 @@ let asianStudiesConcentration = {
 	title: 'Asian Studies',
 	type: 'concentration',
 	id: 'c-asian',
-	department_abbr: 'ASIAN',
+	departmentAbbr: 'ASIAN',
 
 	check: checkAsianStudiesConcentration,
 	_requirements: {

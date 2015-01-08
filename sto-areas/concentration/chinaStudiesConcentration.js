@@ -100,7 +100,7 @@ let chinaStudiesConcentration = {
 	title: 'China Studies',
 	type: 'concentration',
 	id: 'c-chin',
-	department_abbr: 'CHIN',
+	departmentAbbr: 'CHIN',
 
 	check: checkChinaStudiesConcentration,
 	_requirements: {

@@ -100,7 +100,7 @@ let japanStudiesConcentration = {
 	title: 'Japan Studies',
 	type: 'concentration',
 	id: 'c-japan',
-	department_abbr: 'JAPAN',
+	departmentAbbr: 'JAPAN',
 
 	check: checkJapanStudiesConcentration,
 	_requirements: {

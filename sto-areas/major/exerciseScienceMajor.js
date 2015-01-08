@@ -192,7 +192,7 @@ let exerciseScienceMajor = {
 	title: 'Exercise Science',
 	type: 'major',
 	id: 'm-esth',
-	department_abbr: 'ESTH',
+	departmentAbbr: 'ESTH',
 
 	check: checkExerciseScienceMajor,
 	_requirements: {

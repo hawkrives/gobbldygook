@@ -221,7 +221,7 @@ let bachelorOfArtsDegree = {
 	title: 'Bachelor of Arts',
 	type: 'degree',
 	id: 'd-ba',
-	department_abbr: 'B.A.',
+	departmentAbbr: 'B.A.',
 
 	check: checkBachelorOfArtsDegree,
 	_requirements: {

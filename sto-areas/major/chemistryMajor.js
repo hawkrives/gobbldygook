@@ -146,7 +146,7 @@ let chemistryMajor = {
 	title: 'Chemistry',
 	type: 'major',
 	id: 'm-chem',
-	department_abbr: 'CHEM',
+	departmentAbbr: 'CHEM',
 
 	check: checkChemistryMajor,
 	_requirements: {

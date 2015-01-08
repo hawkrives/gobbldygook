@@ -113,7 +113,7 @@ let statisticsConcentration = {
 	title: 'Statistics',
 	type: 'concentration',
 	id: 'c-stat',
-	department_abbr: 'STAT',
+	departmentAbbr: 'STAT',
 
 	check: checkStatisticsConcentration,
 	_requirements: {
