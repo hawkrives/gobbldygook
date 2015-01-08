@@ -1,5 +1,6 @@
-// sto-areas/majors/test/computerScienceMajor.test.js
-import compSci from 'sto-areas/major/computerScienceMajor'
+// sto-areas/test/m-csci.test.js
+import compSci from '../major/computerScienceMajor'
+let reqs = compSci._requirements
 
 describe('Major - Computer Science', () => {
 	describe('foundationCourses', () => {
@@ -30,7 +31,7 @@ describe('Major - Computer Science', () => {
 				],
 			}
 
-			compSci.foundationCourses(validCourses).should.eql(expectedResult)
+			reqs.foundationCourses(validCourses).should.eql(expectedResult)
 		})
 	})
 })

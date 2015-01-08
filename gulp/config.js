@@ -11,7 +11,7 @@ export default {
 
 	lint: [
 		`${src}**/*.js`,
-		'mockups/**/*.js',
+		'sto-areas/**/*.js',
 		'gulp/**/*.js',
 		'test/**/*.js',
 		'benchmark/**/*.js',
@@ -22,7 +22,7 @@ export default {
 			['./node_modules/sto-courses', dest + 'data/courses'],
 			['./data/areas', dest + 'data/areas'],
 			['./app', './node_modules/app'],
-			['./mockups', './node_modules/sto-areas'],
+			['./sto-areas', './node_modules/sto-areas'],
 		],
 		opts: {force: true},
 	},
