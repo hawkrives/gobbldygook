@@ -6,8 +6,8 @@ describe('splitDeptNum', () => {
 		let asre = 'AS/RE 250'
 		let asianrel = 'ASIAN/REL 250'
 
-		splitDeptNum(asre).should.eql({depts: ['AS','RE'], num: 250})
-		splitDeptNum(asianrel).should.eql({depts: ['ASIAN','REL'], num: 250})
+		splitDeptNum(asre).should.eql({depts: ['AS', 'RE'], num: 250})
+		splitDeptNum(asianrel).should.eql({depts: ['ASIAN', 'REL'], num: 250})
 	})
 
 	it('splits up a single department course into components', () => {

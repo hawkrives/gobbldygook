@@ -5,9 +5,9 @@ import findMissingNumberBinarySearch from 'app/helpers/findMissingNumberBinarySe
 describe('findMissingNumberBinarySearch', () => {
 	it('takes a list of numbers and finds the first gap', () => {
 		let nums = [
-			[1,2,3],
-			[0,1,2],
-			[0,3,4]
+			[1, 2, 3],
+			[0, 1, 2],
+			[0, 3, 4],
 		]
 
 		should(findMissingNumberBinarySearch(nums[0])).equal(null)

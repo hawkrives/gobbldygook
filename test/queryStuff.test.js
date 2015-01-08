@@ -52,7 +52,7 @@ describe('buildQueryFromString', () => {
 
 	it('builds a query string even with no keys', () => {
 		let query = 'History of Asia'
-		let expectedResult ={
+		let expectedResult = {
 			title: ['History of Asia'],
 		}
 

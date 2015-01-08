@@ -489,40 +489,40 @@ describe('time', () => {
 
 	it('turns the timestrings into semi-usable objects', () => {
 		let courses = [
-			{times: ['MT 0100-0400PM','MF 0905-1000']},
-			{times: ['M-Th 0100-0200PM','MF 0905-1000']}
+			{times: ['MT 0100-0400PM', 'MF 0905-1000']},
+			{times: ['M-Th 0100-0200PM', 'MF 0905-1000']},
 		]
 
 		convertTimeStringsToOfferings(courses[0]).should.eql([
-			{day: 'Mo', times:[{start:1300,end:1600},{start:905,end:1000}]},
-			{day: 'Tu', times:[{start:1300,end:1600}]},
-			{day: 'Fr', times:[{start:905,end:1000}]}
+			{day: 'Mo', times:[{start:1300, end:1600}, {start:905, end:1000}]},
+			{day: 'Tu', times:[{start:1300, end:1600}]},
+			{day: 'Fr', times:[{start:905, end:1000}]},
 		])
 		convertTimeStringsToOfferings(courses[1]).should.eql([
-			{day: 'Mo', times:[{start:1300,end:1400},{start:905,end:1000}]},
-			{day: 'Tu', times:[{start:1300,end:1400}]},
-			{day: 'We', times:[{start:1300,end:1400}]},
-			{day: 'Th', times:[{start:1300,end:1400}]},
-			{day: 'Fr', times:[{start:905,end:1000}]}
+			{day: 'Mo', times:[{start:1300, end:1400}, {start:905, end:1000}]},
+			{day: 'Tu', times:[{start:1300, end:1400}]},
+			{day: 'We', times:[{start:1300, end:1400}]},
+			{day: 'Th', times:[{start:1300, end:1400}]},
+			{day: 'Fr', times:[{start:905, end:1000}]},
 		])
 	})
 
 	it('checks for course time conflicts', () => {
 		let courses = [
 			{offerings: [
-				{day: 'Mo', times:[{start:1300,end:1600},{start:905,end:1000}]},
-				{day: 'Tu', times:[{start:1300,end:1600}]},
-				{day: 'Fr', times:[{start:905,end:1000}]}
+				{day: 'Mo', times:[{start:1300, end:1600}, {start:905, end:1000}]},
+				{day: 'Tu', times:[{start:1300, end:1600}]},
+				{day: 'Fr', times:[{start:905, end:1000}]},
 			]},
 			{offerings: [
-				{day: 'Mo', times:[{start:1300,end:1400},{start:905,end:1000}]},
-				{day: 'Tu', times:[{start:1300,end:1400}]},
-				{day: 'We', times:[{start:1300,end:1400}]},
-				{day: 'Th', times:[{start:1300,end:1400}]},
-				{day: 'Fr', times:[{start:905,end:1000}]}
+				{day: 'Mo', times:[{start:1300, end:1400}, {start:905, end:1000}]},
+				{day: 'Tu', times:[{start:1300, end:1400}]},
+				{day: 'We', times:[{start:1300, end:1400}]},
+				{day: 'Th', times:[{start:1300, end:1400}]},
+				{day: 'Fr', times:[{start:905, end:1000}]},
 			]},
 			{offerings: [
-				{day: 'Mo', times:[{start:400,end:600}]}
+				{day: 'Mo', times:[{start:400, end:600}]},
 			]},
 		]
 
