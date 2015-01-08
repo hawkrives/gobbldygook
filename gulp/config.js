@@ -10,9 +10,11 @@ module.exports = {
 	},
 
 	lint: [
-		src + '**/*.js',
-		'./mockups/**/*.js',
-		'./gulp/**/*.js',
+		`${src}**/*.js`,
+		'mockups/**/*.js',
+		'gulp/**/*.js',
+		'test/**/*.js',
+		'benchmark/**/*.js',
 	],
 
 	link: {
