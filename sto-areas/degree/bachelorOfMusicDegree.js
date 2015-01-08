@@ -259,4 +259,20 @@ function checkBachelorOfMusicDegree(student) {
 	})
 }
 
+let bachelorOfMusicDegree = {
+	title: 'Bachelor of Music',
+	type: 'degree',
+	id: 'd-bm',
+	department_abbr: 'B.M.',
+
+	check: checkBachelorOfMusicDegree,
+	_requirements: {
+		dedicatedMusicMajor,
+		abstractAndQuantitativeReasoning,
+		foreignLanguage,
+		historicalOrLiteraryStudies,
+		multiculturalStudies,
+	},
+}
+
 export default checkBachelorOfMusicDegree

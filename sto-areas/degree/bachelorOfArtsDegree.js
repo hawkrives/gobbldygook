@@ -217,4 +217,17 @@ function checkBachelorOfArtsDegree(student) {
 	})
 }
 
-export default checkBachelorOfArtsDegree
+let bachelorOfArtsDegree = {
+	title: 'Bachelor of Arts',
+	type: 'degree',
+	id: 'd-ba',
+	department_abbr: 'B.A.',
+
+	check: checkBachelorOfArtsDegree,
+	_requirements: {
+		artsMajor,
+		beyondTheMajor,
+	},
+}
+
+export default bachelorOfArtsDegree
