@@ -1,7 +1,7 @@
-var dest = './dist/'
-var src = './app/'
+let dest = './dist/'
+let src = './app/'
 
-module.exports = {
+export default {
 	browserSync: {
 		browser: 'google chrome',
 		server: {
