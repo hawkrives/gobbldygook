@@ -1,11 +1,11 @@
-import _ from 'lodash'
+import {find, contains, all} from 'lodash'
 
-let isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
+let isRequiredCourse = curry(function(requiredCourses, checkAgainst) {
 	// Takes in a list of required course info, as objects that only have the
 	// info needed to match.
 
 	// Find if the current course exists in requiredCourses
-	let matchedCourse = _.find(requiredCourses, {deptnum: checkAgainst.deptnum})
+	let matchedCourse = find(requiredCourses, {deptnum: checkAgainst.deptnum})
 
 	// Begin the array of results!
 	let results = [matchedCourse ? true : false]
@@ -15,11 +15,11 @@ let isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
 	}
 
 	if (matchedCourse.name) {
-		results.push(_.contains(checkAgainst.name, matchedCourse.name))
+		results.push(contains(checkAgainst.name, matchedCourse.name))
 	}
 
 	if (matchedCourse.title) {
-		results.push(_.contains(checkAgainst.title, matchedCourse.title))
+		results.push(contains(checkAgainst.title, matchedCourse.title))
 	}
 
 	/*console.log('isRequiredCourse',
@@ -27,10 +27,10 @@ let isRequiredCourse = _.curry(function(requiredCourses, checkAgainst) {
 		'checkAgainst', checkAgainst,
 		'match', matchedCourse,
 		'results', results,
-		'result', _.all(results))*/
+		'result', all(results))*/
 
 	// Only return true if *all* of the checks returned true.
-	return _.all(results)
+	return all(results)
 })
 
 export default isRequiredCourse
