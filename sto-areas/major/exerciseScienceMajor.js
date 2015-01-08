@@ -187,4 +187,19 @@ function checkExerciseScienceMajor(student) {
 	})
 }
 
-export default checkExerciseScienceMajor
+let exerciseScienceMajor = {
+	title: 'Exercise Science',
+	type: 'major',
+	id: 'm-esth',
+	department_abbr: 'ESTH',
+
+	check: checkExerciseScienceMajor,
+	_requirements: {
+		coreBiologyCourses,
+		corePsychologyCourses,
+		coreCourses,
+		electiveCourses,
+	},
+}
+
+export default exerciseScienceMajor

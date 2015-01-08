@@ -158,7 +158,6 @@ function electives(courses) {
 	}
 }
 
-
 function checkEnglishMajor(student) {
 	return student.data().then((studentPieces) => {
 		let {courses} = studentPieces
@@ -178,4 +177,20 @@ function checkEnglishMajor(student) {
 	})
 }
 
-export default checkEnglishMajor
+let englishMajor = {
+	title: 'English',
+	type: 'major',
+	id: 'm-engl',
+	department_abbr: 'ENGL',
+
+	check: checkEnglishMajor,
+	_requirements: {
+		crossCulturalStudies,
+		literaryHistory,
+		crossDisciplinaryOrGenre,
+		requirement1800,
+		electives,
+	},
+}
+
+export default englishMajor

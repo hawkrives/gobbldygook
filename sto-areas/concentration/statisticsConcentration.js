@@ -109,4 +109,18 @@ function checkStatisticsConcentration(student) {
 	})
 }
 
-export default checkStatisticsConcentration
+let statisticsConcentration = {
+	title: 'Statistics',
+	type: 'concentration',
+	id: 'c-stat',
+	department_abbr: 'STAT',
+
+	check: checkChinaStudiesConcentration,
+	_requirements: {
+		foundationCourses,
+		coreCourses,
+		electiveCourses,
+	},
+}
+
+export default statisticsConcentration

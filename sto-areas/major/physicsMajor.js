@@ -109,4 +109,19 @@ function checkPhysicsMajor(student) {
 	})
 }
 
-export default checkPhysicsMajor
+let physicsMajor = {
+	title: 'Physics',
+	type: 'major',
+	id: 'm-phys',
+	department_abbr: 'PHYS',
+
+	check: checkPhysicsMajor,
+	_requirements: {
+		analyticsCourses,
+		transitionsCourses,
+		upperLevelCourses,
+		electiveCourses,
+	},
+}
+
+export default physicsMajor

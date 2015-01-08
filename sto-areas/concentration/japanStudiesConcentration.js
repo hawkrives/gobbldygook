@@ -96,4 +96,17 @@ function checkJapanStudiesConcentration(student) {
 	})
 }
 
-export default checkJapanStudiesConcentration
+let japanStudiesConcentration = {
+	title: 'Japan Studies',
+	type: 'concentration',
+	id: 'c-japan',
+	department_abbr: 'JAPAN',
+
+	check: checkJapanStudiesConcentration,
+	_requirements: {
+		language,
+		electives,
+	},
+}
+
+export default japanStudiesConcentration

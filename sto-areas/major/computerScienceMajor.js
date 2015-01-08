@@ -181,12 +181,19 @@ function checkComputerScienceMajor(student) {
 	})
 }
 
-export default checkComputerScienceMajor
+let computerScienceMajor = {
+	title: 'Computer Science',
+	type: 'major',
+	id: 'm-csci',
+	department_abbr: 'CSCI',
 
-export {
-	foundationCourses,
-	coreCourses,
-	electiveCourses,
-	capstoneCourse,
-	checkComputerScienceMajor
+	check: checkComputerScienceMajor,
+	_requirements: {
+		foundationCourses,
+		coreCourses,
+		electiveCourses,
+		capstoneCourse,
+	},
 }
+
+export default computerScienceMajor

@@ -69,4 +69,16 @@ function checkAsianStudiesConcentration(student) {
 	})
 }
 
-export default checkAsianStudiesConcentration
+let asianStudiesConcentration = {
+	title: 'Asian Studies',
+	type: 'concentration',
+	id: 'c-asian',
+	department_abbr: 'ASIAN',
+
+	check: checkAsianStudiesConcentration,
+	_requirements: {
+		electives,
+	},
+}
+
+export default asianStudiesConcentration

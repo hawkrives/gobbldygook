@@ -96,4 +96,17 @@ function checkChinaStudiesConcentration(student) {
 	})
 }
 
-export default checkChinaStudiesConcentration
+let chinaStudiesConcentration = {
+	title: 'China Studies',
+	type: 'concentration',
+	id: 'c-chin',
+	department_abbr: 'CHIN',
+
+	check: checkChinaStudiesConcentration,
+	_requirements: {
+		language,
+		electives,
+	},
+}
+
+export default chinaStudiesConcentration

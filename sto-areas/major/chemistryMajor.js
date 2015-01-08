@@ -142,4 +142,20 @@ function checkChemistryMajor(student) {
 	})
 }
 
-export default checkChemistryMajor
+let chemistryMajor = {
+	title: 'Chemistry',
+	type: 'major',
+	id: 'm-chem',
+	department_abbr: 'CHEM',
+
+	check: checkChemistryMajor,
+	_requirements: {
+		introductorySequence,
+		required,
+		laboratory,
+		electives,
+		beyondChemistry,
+	},
+}
+
+export default chemistryMajor

@@ -161,4 +161,19 @@ function checkAsianStudiesMajor(student) {
 	})
 }
 
-export default checkAsianStudiesMajor
+let asianStudiesMajor = {
+	title: 'Asian Studies',
+	type: 'major',
+	id: 'm-asian',
+	department_abbr: 'ASIAN',
+
+	check: checkAsianStudiesMajor,
+	_requirements: {
+		interdisciplinaryApproachesToAsia,
+		electives,
+		language,
+		seniorSeminar,
+	},
+}
+
+export default asianStudiesMajor
