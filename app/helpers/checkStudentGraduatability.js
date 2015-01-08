@@ -19,6 +19,7 @@ let areas = Immutable.Map({
 	'm-phys':  stoAreas.major.physics,
 	'm-math':  stoAreas.major.mathematics,
 	'm-esth':  stoAreas.major.exerciseScience,
+	'm-engl':  stoAreas.major.english,
 
 	// Concentrations
 	'c-asian': stoAreas.concentration.asianStudies,
