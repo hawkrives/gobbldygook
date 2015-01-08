@@ -70,22 +70,20 @@ function crossDisciplinaryOrGenre(courses) {
 	// One from either Cross-Disciplinary Studies or Genre
 	// check cross-disciplinary
 	let numberOfCrossNeeded = 1
-	let numberCrossFulfilled = _(courses)
-		.filter(hasDeptNumBetween({dept: 'ENGL', start: 260, end: 279}))
-		.size() >= numberOfCrossNeeded
+	let crossDisciplinaryCourses = _.filter(courses, hasDeptNumBetween({dept: 'ENGL', start: 260, end: 279}))
+	let numberCrossFulfilled = _.size(crossDisciplinaryCourses) >= numberOfCrossNeeded
 
 	// check genre
 	let numberOfGenreNeeded = 1
-	let numberGenreFulfilled = _(courses)
-		.filter(hasDeptNumBetween({dept: 'ENGL', start: 280, end: 299}))
-		.size() >= numberOfGenreNeeded
+	let genreCourses = _.filter(courses, hasDeptNumBetween({dept: 'ENGL', start: 280, end: 299}))
+	let numberGenreFulfilled = _.size(genreCourses) >= numberOfGenreNeeded
 
 
 	// evaluating how many courses we have fulfilled between Cross Disc. and Genre
 	let numberFulfilled = _([numberCrossFulfilled > 0, numberGenreFulfilled > 0]).compact().size()
 
 	// concat the two results together
-	let crossAndGenreCourses = fulfilledCrossDisciplinaryCourses.concat(fulfilledGenreCourses)
+	let crossAndGenreCourses = crossDisciplinaryCourses.concat(genreCourses)
 
 	let numberNeeded = 1
 
