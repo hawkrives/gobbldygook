@@ -3,12 +3,11 @@
    - gulp/tasks/browserSync.js watches and reloads compiled files
 */
 
-var _ = require('lodash')
-var gulp  = require('gulp')
-var config = require('../config')
+import gulp from 'gulp'
+import config from '../config'
 
-gulp.task('watch', ['prepare-build', 'sass', 'watchify', 'browserSync'], function() {
+gulp.task('watch', ['prepare-build', 'sass', 'watchify', 'browserSync'], () => {
 	gulp.watch(config.lint, ['lint'])
 	gulp.watch(config.sass.src, ['sass'])
-	gulp.watch(config.copy.map(_.first), ['copy'])
+	gulp.watch(config.copy.map(pathSet => pathSet[0]), ['copy'])
 })

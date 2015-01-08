@@ -1,11 +1,10 @@
-var gulp = require('gulp')
-var size = require('gulp-size')
-var uglify = require('gulp-uglify')
-var config = require('../config').production
+import gulp from 'gulp'
+import size from 'gulp-size'
+import uglify from 'gulp-uglify'
+import {production as config} from '../config'
 
-gulp.task('uglify-js', ['browserify'], function() {
-	return gulp.src(config.js)
+gulp.task('uglify-js', ['browserify'], () =>
+	gulp.src(config.js)
 		.pipe(uglify())
 		.pipe(gulp.dest(config.dest))
-		.pipe(size({title: 'uglified'}))
-})
+		.pipe(size({title: 'uglified'})))

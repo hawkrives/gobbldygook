@@ -1,7 +1,7 @@
-var gulp = require('gulp')
-var browserifyTask = require('./browserify')
+import gulp from 'gulp'
+import browserifyTask from './browserify'
 
-gulp.task('watchify', function(callback) {
+gulp.task('watchify', (callback) => {
 	// Start browserify task with devMode set to true
 	browserifyTask(callback, true)
 })

@@ -1,15 +1,18 @@
-var gulp = require('gulp')
-var symlink = require('gulp-symlink')
-var config = require('../config').link
+import Promise from 'bluebird'
+import gulp from 'gulp'
+import symlink from 'gulp-symlink'
+import {link as config} from '../config'
 
-gulp.task('link', function() {
-	var linkFolder = function(paths) {
-		var sourcePath = paths[0]
-		var destPath = paths[1]
+gulp.task('link', (cb) => {
+	let linkFolder = (paths) => {
+		return new Promise((resolve, reject) => {
+			let [sourcePath, destPath] = paths
 
-		return gulp.src(sourcePath)
-			.pipe(symlink(destPath, config.opts))
+			return gulp.src(sourcePath)
+				.pipe(symlink(destPath, config.opts))
+				.on('finish', resolve)
+		})
 	}
 
-	config.paths.forEach(linkFolder)
+	return Promise.all(config.paths.map(linkFolder))
 })

@@ -1,8 +1,7 @@
-var gulp = require('gulp')
-var jscs = require('gulp-jscs')
-var config = require('../config').lint
+import gulp from 'gulp'
+import jscs from 'gulp-jscs'
+import {lint as config} from '../config'
 
-gulp.task('lint', function() {
-	return gulp.src(config)
-		.pipe(jscs())
-})
+gulp.task('lint', () =>
+	gulp.src(config)
+		.pipe(jscs()))

@@ -1,19 +1,21 @@
-var browserSync  = require('browser-sync')
-var gulp = require('gulp')
-var size = require('gulp-size')
-var config = require('../config').copy
+import Promise from 'bluebird'
+import browserSync from 'browser-sync'
+import gulp from 'gulp'
+import size from 'gulp-size'
+import {copy as config} from '../config'
 
-gulp.task('copy', function() {
-	var copyFile = function(paths) {
-		var sourcePath = paths[0]
-		var destPath = paths[1]
-		var title = paths[2] || ''
+gulp.task('copy', () => {
+	let copyFile = (paths) => {
+		return new Promise((resolve, reject) => {
+			let [sourcePath, destPath, title] = paths
 
-		return gulp.src(sourcePath)
-			.pipe(gulp.dest(destPath))
-			.pipe(size({title: 'copy:' + title}))
-			.pipe(browserSync.reload({ stream: true }))
+			return gulp.src(sourcePath)
+				.pipe(gulp.dest(destPath))
+				.pipe(size({title: 'copy:' + title}))
+				.on('end', resolve)
+				.pipe(browserSync.reload({ stream: true }))
+		})
 	}
 
-	config.forEach(copyFile)
+	return Promise.all(config.map(copyFile))
 })

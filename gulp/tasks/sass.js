@@ -1,22 +1,22 @@
-var browserSync  = require('browser-sync')
-var gulp = require('gulp')
-var handleErrors = require('../util/handleErrors')
-var postcss = require('gulp-postcss')
-var sass = require('gulp-sass')
-var size = require('gulp-size')
-var sourcemaps = require('gulp-sourcemaps')
-var config = require('../config').sass
+import browserSync from 'browser-sync'
+import gulp from 'gulp'
+import handleErrors from '../util/handleErrors'
+import postcss from 'gulp-postcss'
+import sass from 'gulp-sass'
+import size from 'gulp-size'
+import sourcemaps from 'gulp-sourcemaps'
+import {sass as config} from '../config'
 
-var autoprefixer = require('autoprefixer-core')
-var csswring = require('csswring')
+let autoprefixer = require('autoprefixer-core')
+import csswring from 'csswring'
 
-var processors = [
+let processors = [
     autoprefixer(),
     csswring,
 ]
 
-gulp.task('sass', function() {
-	return gulp.src(config.src)
+gulp.task('sass', () =>
+	gulp.src(config.src)
 		// prepare to handle sourcemaps
 		.pipe(sourcemaps.init())
 
@@ -33,5 +33,4 @@ gulp.task('sass', function() {
 		// write out the compiled styles
 		.pipe(gulp.dest(config.dest))
 		.pipe(size({title: 'sass'}))
-		.pipe(browserSync.reload({ stream: true }))
-})
+		.pipe(browserSync.reload({ stream: true })))

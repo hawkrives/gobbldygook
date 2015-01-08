@@ -1,7 +1,7 @@
-var browserSync = require('browser-sync')
-var gulp = require('gulp')
-var config = require('../config').browserSync
+import browserSync from 'browser-sync'
+import gulp from 'gulp'
+import {browserSync as config} from '../config'
 
-gulp.task('browserSync', function() {
+gulp.task('browserSync', () => {
 	browserSync(config)
 })

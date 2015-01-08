@@ -8,24 +8,24 @@
    See browserify.bundleConfigs in gulp/config.js
 */
 
-var _ = require('lodash')
-var browserify = require('browserify')
-var browserSync  = require('browser-sync')
-var bundleLogger = require('../util/bundleLogger')
-var exorcist = require('exorcist')
-var gulp = require('gulp')
-var gulpif = require('gulp-if')
-var handleErrors = require('../util/handleErrors')
-var mold = require('mold-source-map')
-var source = require('vinyl-source-stream')
-var to5ify = require('6to5ify')
-var watchify = require('watchify')
-var config = require('../config').browserify
+import _ from 'lodash'
+import browserify from 'browserify'
+import browserSync from 'browser-sync'
+import bundleLogger from '../util/bundleLogger'
+import exorcist from 'exorcist'
+import gulp from 'gulp'
+import gulpif from 'gulp-if'
+import handleErrors from '../util/handleErrors'
+import mold from 'mold-source-map'
+import source from 'vinyl-source-stream'
+import to5ify from '6to5ify'
+import watchify from 'watchify'
+import {browserify as config} from '../config'
 
 function browserifyTask(callback, devMode) {
-	var bundleQueue = config.bundleConfigs.length
+	let bundleQueue = config.bundleConfigs.length
 
-	var browserifyThis = function(bundleConfig) {
+	let browserifyThis = (bundleConfig) => {
 		if (devMode) {
 			// Add watchify args and debug (sourcemaps) option
 			_.extend(bundleConfig, watchify.args, { debug: true })
@@ -34,13 +34,13 @@ function browserifyTask(callback, devMode) {
 			bundleConfig = _.omit(bundleConfig, ['external', 'require'])
 		}
 
-		var b = browserify(bundleConfig)
+		let b = browserify(bundleConfig)
 
 		b.transform(to5ify.configure({
 			blacklist: ['generators'],
 		}))
 
-		var bundle = function() {
+		let bundle = () => {
 			// Log when bundling starts
 			bundleLogger.start(bundleConfig.outputName)
 
@@ -81,7 +81,7 @@ function browserifyTask(callback, devMode) {
 			}
 		}
 
-		var reportFinished = function() {
+		let reportFinished = function() {
 			// Log when bundling completes
 			bundleLogger.end(bundleConfig.outputName)
 
@@ -99,10 +99,10 @@ function browserifyTask(callback, devMode) {
 	}
 
 	// Start bundling with Browserify for each bundleConfig specified
-	config.bundleConfigs.forEach(browserifyThis)
+	return config.bundleConfigs.map(browserifyThis)
 }
 
 gulp.task('browserify', browserifyTask)
 
 // Exporting the task so we can call it directly in our watch task, with the 'devMode' option
-module.exports = browserifyTask
+export default browserifyTask
