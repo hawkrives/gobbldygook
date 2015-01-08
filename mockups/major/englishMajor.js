@@ -136,16 +136,19 @@ function electives(courses) {
 
 	let levelsTwo = _(englishMajorElectives)
 		.reject(coursesAtLevel(298))
-		.filter(coursesAtOrAboveLevel(200)).size().value() >= 3
+		.filter(coursesAtOrAboveLevel(200))
+		.size() >= 3
 
 	let levelsThree = _(englishMajorElectives)
 		.reject(coursesAtLevel(298))
 		.reject(coursesAtLevel(396))
 		.reject(coursesAtLevel(398))
-		.filter(coursesAtOrAboveLevel(300)).size().value() >= 2
+		.filter(coursesAtOrAboveLevel(300))
+		.size() >= 2
 
-		.filter(coursesAtLevel(100)).size().value() <= 2
 	let onlyTwoAtLevelOne = _(englishMajorElectives)
+		.filter(coursesAtLevel(100))
+		.size() <= 2
 
 	let electivesAreGood = _.all([levelsTwo, levelsThree, onlyTwoAtLevelOne])
 	let matching = _.size(englishMajorElectives)
