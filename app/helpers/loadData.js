@@ -102,8 +102,7 @@ function updateDatabase(itemType, infoFromServer) {
 	let oldHash = localStorage.getItem(infoFromServer.path)
 	let newHash = infoFromServer.hash
 
-	let itemUrl = _.template('./data/${type}/${path}?v=${hash}',
-		{type: itemType, path: infoFromServer.path, hash: newHash})
+	let itemUrl = `./data/${itemType}/${infoFromServer.path}?v=${newHash}`
 
 	if (newHash === oldHash) {
 		if (logDataLoading)  console.log('skipped ' + itemUrl)
