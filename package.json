@@ -1,6 +1,6 @@
 {
   "name": "sto-sis-time-parser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A parser for the St. Olaf SIS timestrings.",
   "main": "index.js",
   "files": [
