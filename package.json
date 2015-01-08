@@ -1,0 +1,35 @@
+{
+  "name": "sto-sis-time-parser",
+  "version": "1.0.0",
+  "description": "A parser for the St. Olaf SIS timestrings.",
+  "main": "index.js",
+  "files": [
+    "README.md",
+    "index.js",
+    "dist/*"
+  ],
+  "scripts": {
+    "build": "6to5 lib --out-dir dist",
+    "watch": "6to5 --watch lib --out-dir dist",
+    "test": "mocha",
+    "publish": "./bin/publish.sh"
+  },
+  "keywords": [
+    "stolaf",
+    "sto-scheduler"
+  ],
+  "author": "Hawken M. Rives",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hawkrives/sto-sis-time-parser/issues"
+  },
+  "repository": "hawkrives/sto-sis-time-parser",
+  "devDependencies": {
+    "6to5": "^2.9.0",
+    "mocha": "^2.1.0",
+    "should": "^4.4.4"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1"
+  }
+}

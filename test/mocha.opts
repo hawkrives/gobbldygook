@@ -1,0 +1,4 @@
+--compilers js:6to5/register
+--reporter spec
+--ui bdd
+--require should
