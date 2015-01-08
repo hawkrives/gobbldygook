@@ -39,7 +39,6 @@ function crossCulturalStudies(courses) {
 	}
 }
 
-
 function literaryHistory(courses) {
 	// Courses from literary history (ENGL 220 - 239)
 	// One or two courses: one focusing on national literary tradition,
@@ -54,7 +53,7 @@ function literaryHistory(courses) {
 
 	let numberFulfilled = _.size(fulfilledLiteraryHistory)
 	let numberNeeded = 1
-	
+
 	return {
 		title: 'Literary History',
 		type: 'object/number',
@@ -121,13 +120,13 @@ function requirement1800(courses) {
 	// Among all level II courses (category-specific and elective)
 	// 1. One must be in literature before 1800
 	// 2. One must be in literature after 1800
-} 
+}
 
 function electives(courses) {
 	// Courses from (ENGL 240 - 259)
 	// Six electives, with stipulations:
 	// 1. At least three Level II
-	// 2. At least two Level III 
+	// 2. At least two Level III
 	// 3. An IS cannot count toward a Level II
 	// 4. An IS, IR, nor English 396 can count for one of a student’s two Level III requirements
 	let englishMajorElectives = _(courses)
@@ -157,7 +156,7 @@ function electives(courses) {
 		levelsThree,
 		onlyTwoAtLevelOne,
 	]
-	
+
 	return {
 		title: 'Electives',
 		type: 'object/number',
