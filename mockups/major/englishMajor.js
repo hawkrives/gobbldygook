@@ -16,7 +16,7 @@ let isRequiredEnglishMajorCourse = isRequiredCourse(ENGLISH_REQUIRED_COURSES)
 
 function crossCulturalStudies(courses) {
 	// Any course from cross-cultural studies (ENGL 200 - 219)
-	let subsetOfCourses = _.chain(courses)
+	let subsetOfCourses = _(courses)
 		.filter(hasDeptNumBetween({dept: 'ENGL', start: 200, end: 219}))
 		.value()
 
@@ -130,23 +130,23 @@ function electives(courses) {
 	// 2. At least two Level III 
 	// 3. An IS cannot count toward a Level II
 	// 4. An IS, IR, nor English 396 can count for one of a student’s two Level III requirements
-	let englishMajorElectives = _.chain(courses)
+	let englishMajorElectives = _(courses)
 		.filter(hasDeptNumBetween({dept: 'ENGL', start: 240, end: 259}))
 		.reject(isRequiredEnglishMajorCourse)
 		.value()
 
-	let levelsTwo = _.chain(englishMajorElectives)
+	let levelsTwo = _(englishMajorElectives)
 		.reject(coursesAtLevel(298))
 		.filter(coursesAtOrAboveLevel(200)).size().value() >= 3
 
-	let levelsThree = _.chain(englishMajorElectives)
+	let levelsThree = _(englishMajorElectives)
 		.reject(coursesAtLevel(298))
 		.reject(coursesAtLevel(396))
 		.reject(coursesAtLevel(398))
 		.filter(coursesAtOrAboveLevel(300)).size().value() >= 2
 
-	let onlyTwoAtLevelOne = _.chain(englishMajorElectives)
 		.filter(coursesAtLevel(100)).size().value() <= 2
+	let onlyTwoAtLevelOne = _(englishMajorElectives)
 
 	let electivesAreGood = _.all([levelsTwo, levelsThree, onlyTwoAtLevelOne])
 	let matching = _.size(englishMajorElectives)
