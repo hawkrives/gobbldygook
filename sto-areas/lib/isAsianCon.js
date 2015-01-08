@@ -1,6 +1,10 @@
+import {all, contains} from 'lodash'
+
 function isAsianCon(course) {
-	return _.all([
+	return all([
 		hasDepartment('ASIAN', c),
-		_.contains([210, 215, 216, 220], c.num), // these are the asiancon course numbers
+		contains([210, 215, 216, 220], c.num), // these are the asiancon course numbers
 	])
 }
+
+export default isAsianCon
