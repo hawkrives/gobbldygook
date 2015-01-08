@@ -43,12 +43,11 @@ function literaryHistory(courses) {
 	// One or two courses: one focusing on national literary tradition,
 	// or examine literature from two or more nations.
 
-	let subsetOfCourses = _.chain(courses)
+	let subsetOfCourses = _(courses)
 		.filter(hasDeptNumBetween({dept: 'ENGL', start: 220, end: 239}))
 		.value()
 
-	let fulfilledLiteraryHistory= _.filter([subsetOfCourses], (courses) => _.size(courses) >= 1)
-	let fulfilledLiteraryHistoryCourses = _.flatten(fulfilledLiteraryHistory)
+	let fulfilledLiteraryHistory = _.filter(subsetOfCourses, (courses) => _.size(courses) >= 1)
 
 	let numberFulfilled = _.size(fulfilledLiteraryHistory)
 	let numberNeeded = 1
@@ -61,7 +60,7 @@ function literaryHistory(courses) {
 		details: {
 			has: numberFulfilled,
 			needs: numberNeeded,
-			matches: fulfilledLiteraryHistoryCourses,
+			matches: fulfilledLiteraryHistory,
 		}
 	}
 }
