@@ -1,10 +1,10 @@
-cd ..
+#!/bin/sh
 
 git pull --rebase
 
 npm run build
 
-grep package.json "sto-sis-time-parser@"
+grep "version" package.json
 
 read -p "Version: "  version; \
 npm version $version --message "v%s"
