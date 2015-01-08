@@ -30,3 +30,4 @@ let studentActions = Reflux.createActions([
 ])
 
 export default studentActions
+window.actions = studentActions
