@@ -11,6 +11,6 @@ echo ""
 read -p "New Version [major|minor|patch]: " version
 npm version $version
 
-# npm publish
+npm publish
 
-# git push --follow-tags
+git push --follow-tags
