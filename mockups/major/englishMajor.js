@@ -69,42 +69,31 @@ function crossDisciplinaryOrGenre(courses) {
 	// Courses from cross disc. (ENGL 260 - 279) or genre (ENGL 280 - 299)
 	// One from either Cross-Disciplinary Studies or Genre
 	// check cross-disciplinary
-	let subsetOfCrossCourses = _.chain(courses)
+	let numberOfCrossNeeded = 1
+	let numberCrossFulfilled = _(courses)
 		.filter(hasDeptNumBetween({dept: 'ENGL', start: 260, end: 279}))
-		.value()
-
-	let fulfilledCrossDisciplinary = _.filter([subsetOfCrossCourses], (courses) => _.size(courses) >= 1)
-	let fulfilledCrossDisciplinaryCourses = _.flatten(fulfilledCrossDisciplinary)
-	let numberCrossFulfilled = _.size(fulfilledCrossDisciplinaryCourses)
+		.size() >= numberOfCrossNeeded
 
 	// check genre
-	let subsetOfGenreCourses = _.chain(courses)
+	let numberOfGenreNeeded = 1
+	let numberGenreFulfilled = _(courses)
 		.filter(hasDeptNumBetween({dept: 'ENGL', start: 280, end: 299}))
-		.value()
+		.size() >= numberOfGenreNeeded
 
-	let fulfilledGenre = _.filter([subsetOfGenreCourses], (courses) => _.size(courses) >= 1)
-	let fulfilledGenreCourses = _.flatten(fulfilledGenre)
-	let numberGenreFulfilled = _.size(fulfilledGenreCourses)
-	
-	let numberNeeded = 1
 
 	// evaluating how many courses we have fulfilled between Cross Disc. and Genre
-	let numberFulfilled = 0; 
-	if (numberCrossFulfilled > 0) {
-		numberFulfilled++
-	}
-	if (numberGenreFulfilled > 0) {
-		numberFulfilled++
-	}
-	
+	let numberFulfilled = _([numberCrossFulfilled > 0, numberGenreFulfilled > 0]).compact().size()
+
 	// concat the two results together
 	let crossAndGenreCourses = fulfilledCrossDisciplinaryCourses.concat(fulfilledGenreCourses)
+
+	let numberNeeded = 1
 
 	return {
 		title: 'Cross-Disciplinary or Genre',
 		type: 'object/number',
 		description: 'One from either Cross-Disciplinary or Genre',
-		result: (numberCrossFulfilled >= numberNeeded || numberGenreFulfilled >= numberNeeded),
+		result: _.any([(numberCrossFulfilled >= numberNeeded), (numberGenreFulfilled >= numberNeeded)]),
 		details: {
 			has: numberFulfilled,
 			needs: numberNeeded,
