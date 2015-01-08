@@ -1,5 +1,6 @@
 // sto-areas/test/m-csci.test.js
-import compSci from '../major/computerScienceMajor'
+import findArea from '../index'
+let compSci = findArea('m-csci', 2014)
 let reqs = compSci._requirements
 
 describe('Major - Computer Science', () => {
