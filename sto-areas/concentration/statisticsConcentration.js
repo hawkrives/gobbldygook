@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 import hasDepartment from 'app/helpers/hasDepartment'
-import {checkCoursesFor} from 'app/helpers/courses'
+import checkCoursesFor from 'app/helpers/checkCoursesFor'
 
 function foundationCourses(courses) {
 	/* Foundation courses:
