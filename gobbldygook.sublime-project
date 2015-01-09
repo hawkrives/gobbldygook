@@ -1,13 +1,8 @@
 {
-	"folders":
-	[
+	"folders": [
 		{
-			"file_exclude_patterns":
-			[
-				"*.woff"
-			],
-			"folder_exclude_patterns":
-			[
+			"file_exclude_patterns": [ "*.woff" ],
+			"folder_exclude_patterns": [
 				".idea",
 				".sass-cache",
 				"dist/data"
@@ -15,18 +10,20 @@
 			"path": "."
 		},
 		{
-			"folder_exclude_patterns":
-			[
-				"__pycache__"
-			],
-			"path": "/Users/hawken/Code/gobbldygook-area-data"
+			"folder_exclude_patterns": [],
+			"path": "../sto-sis-time-parser"
 		},
 		{
-			"folder_exclude_patterns":
-			[
-				"__pycache__"
-			],
-			"path": "/Users/hawken/Code/gobbldygook-course-data"
+			"folder_exclude_patterns": [],
+			"path": "../sto-helpers"
+		},
+		{
+			"folder_exclude_patterns": [],
+			"path": "../sto-area-data"
+		},
+		{
+			"folder_exclude_patterns": ["__pycache__"],
+			"path": "../sto-course-data"
 		}
 	]
 }
