@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "benchmark": "matcha",
-    "build": "npm run clean && gulp build",
+    "build": "gulp build",
     "check": "npm outdated --depth 0",
     "clean": "rm -rf dist/ && rm -f node_modules/app",
     "cloc": "cloc ./ --by-file-by-lang --exclude-dir=benchmark,data,dist,gulp,node_modules,playground,test",
@@ -18,10 +18,7 @@
     "lint": "gulp lint",
     "gulp": "gulp",
     "serve": "gulp watch",
-    "stat": "npm run lint && npm run benchmark && npm run test",
-    "test:app": "mocha",
-    "test:sto-areas": "mocha sto-areas/test",
-    "test": "npm run test:app && npm run test:sto-areas",
+    "test": "mocha",
     "watch": "gulp watch"
   },
   "dependencies": {
