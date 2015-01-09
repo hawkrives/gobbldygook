@@ -11,7 +11,6 @@ export default {
 
 	lint: [
 		`${src}**/*.js`,
-		'sto-areas/**/*.js',
 		'gulp/**/*.js',
 		'test/**/*.js',
 		'benchmark/**/*.js',
@@ -20,7 +19,6 @@ export default {
 	link: {
 		paths: [
 			['./node_modules/sto-courses', dest + 'data/courses'],
-			['./app', './node_modules/app'],
 		],
 		opts: {force: true},
 	},
