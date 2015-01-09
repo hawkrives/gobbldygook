@@ -51,11 +51,11 @@
     "treo": "^0.3.0"
   },
   "devDependencies": {
-    "6to5-core": "^2.9.0",
-    "6to5ify": "^3.1.1",
+    "6to5-core": "^2.9.3",
+    "6to5ify": "^3.1.2",
     "autoprefixer-core": "4.0.2",
     "browser-sync": "^1.8.3",
-    "browserify": "^8.0.3",
+    "browserify": "^8.1.0",
     "csswring": "^2.0.0",
     "exorcist": "^0.1.6",
     "gulp": "^3.8.10",
