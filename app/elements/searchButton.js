@@ -1,9 +1,10 @@
 import React from 'react'
 import _ from 'lodash'
 
-import {queryCourses} from 'app/helpers/courses'
 import toPrettyTerm from 'sto-helpers/lib/toPrettyTerm'
-import Course from 'app/elements/course'
+
+import {queryCourses} from '../helpers/courses'
+import Course from './course'
 
 let SearchButton = React.createClass({
 	getInitialState() {

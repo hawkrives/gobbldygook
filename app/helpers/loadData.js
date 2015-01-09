@@ -1,11 +1,12 @@
 import _ from 'lodash'
 import Promise from 'bluebird'
 
-import {status, json} from 'app/helpers/fetch'
-import db from 'app/helpers/db'
+import {status, json} from '../helpers/fetch'
+import db from '../helpers/db'
+import {discoverRecentYears} from '../helpers/recentTime'
+
 import buildDept from 'sto-helpers/lib/buildDept'
 import buildDeptNum from 'sto-helpers/lib/buildDeptNum'
-import {discoverRecentYears} from 'app/helpers/recentTime'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 let logDataLoading = false

@@ -11,7 +11,7 @@ React.initializeTouchEvents(true)
 
 import _ from 'lodash'
 
-import 'app/helpers/db'
+import './helpers/db'
 
 
 // Just for use in the browser console, I swear.
@@ -24,14 +24,14 @@ window.React = React
 // Handy debugging function
 window.log = (...args) => console.log(...args)
 
-import loadData from 'app/helpers/loadData'
+import loadData from './helpers/loadData'
 loadData()
 
-import Gobbldygook from 'app/elements/app'
-import StudentList from 'app/elements/studentList'
-import Student from 'app/elements/student'
-import CourseTable from 'app/elements/courseTable'
-import SemesterDetail from 'app/elements/semesterDetail'
+import Gobbldygook from './elements/app'
+import StudentList from './elements/studentList'
+import Student from './elements/student'
+import CourseTable from './elements/courseTable'
+import SemesterDetail from './elements/semesterDetail'
 
 let Route = React.createFactory(Router.Route)
 let DefaultRoute = React.createFactory(Router.DefaultRoute)

@@ -3,7 +3,7 @@ import {isUndefined} from 'lodash'
 import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
 
-import randomChar from 'sto-helpers/randomChar'
+import randomChar from 'sto-helpers/lib/randomChar'
 import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {getCourses} from '../helpers/courses'
 

@@ -2,8 +2,8 @@ import _ from 'lodash'
 import Promise from 'bluebird'
 import Immutable from 'immutable'
 
-import db from 'app/helpers/db'
-import buildQueryFromString from 'app/helpers/queryStuff'
+import db from '../helpers/db'
+import buildQueryFromString from '../helpers/queryStuff'
 
 import checkCoursesFor from 'sto-helpers/lib/checkCoursesFor'
 

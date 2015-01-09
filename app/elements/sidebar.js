@@ -1,8 +1,8 @@
 import React from 'react'
 import {State} from 'react-router'
 
-import SearchButton from 'app/elements/searchButton'
-import GraduationStatus from 'app/elements/graduationStatus'
+import SearchButton from './searchButton'
+import GraduationStatus from './graduationStatus'
 
 let Sidebar = React.createClass({
 	mixins: [State],

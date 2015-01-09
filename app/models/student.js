@@ -6,8 +6,8 @@ import {v4 as uuid} from 'node-uuid'
 import randomChar from 'sto-helpers/lib/randomChar'
 import countCredits from 'sto-helpers/lib/countCredits'
 
-import Schedule from 'app/models/schedule'
-import Study from 'app/models/study'
+import Schedule from '../models/schedule'
+import Study from '../models/study'
 
 import demoStudent from 'sto-areas/demo_student.json'
 
