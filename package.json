@@ -5,11 +5,14 @@
   "main": "dist/app.js",
   "browser": "dist/index.html",
   "private": true,
+  "repository": "hawkrives/gobbldygook",
+  "author": "Hawken MacKay Rives",
+  "license": "MIT",
   "scripts": {
     "benchmark": "matcha",
     "build": "npm run clean && gulp build",
     "check": "npm outdated --depth 0",
-    "clean": "rm -rf dist/ && rm -f node_modules/app && rm -f node_modules/sto-areas",
+    "clean": "rm -rf dist/ && rm -f node_modules/app",
     "cloc": "cloc ./ --by-file-by-lang --exclude-dir=benchmark,data,dist,gulp,node_modules,playground,test",
     "cloc-test": "cloc ./test/ --by-file-by-lang",
     "lint": "gulp lint",
@@ -21,16 +24,6 @@
     "test": "npm run test:app && npm run test:sto-areas",
     "watch": "gulp watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:hawkrives/gobbldygook.git"
-  },
-  "author": "Hawken MacKay Rives",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hawkrives/gobbldygook/issues"
-  },
-  "homepage": "https://hawkrives.github.io/gobbldygook",
   "dependencies": {
     "bluebird": "^2.6.2",
     "colors.css": "^2.0.4",
