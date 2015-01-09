@@ -2,7 +2,7 @@
 
 git pull --rebase
 
-npm run build
+npm test
 
 echo ""
 node ./bin/version.js
