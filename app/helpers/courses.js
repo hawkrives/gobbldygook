@@ -5,7 +5,7 @@ import Immutable from 'immutable'
 import db from 'app/helpers/db'
 import buildQueryFromString from 'app/helpers/queryStuff'
 
-import checkCoursesFor from './checkCoursesFor'
+import checkCoursesFor from 'sto-helpers/lib/checkCoursesFor'
 
 
 /**

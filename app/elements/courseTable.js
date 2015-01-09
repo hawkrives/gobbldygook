@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React from 'react'
 
 import studentActions from 'app/flux/studentActions'
-import findFirstAvailableYear from 'app/helpers/findFirstAvailableYear'
+import findFirstAvailableYear from 'sto-helpers/lib/findFirstAvailableYear'
 import Year from 'app/elements/year'
 
 let CourseTable = React.createClass({

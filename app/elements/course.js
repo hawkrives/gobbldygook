@@ -5,7 +5,7 @@ import {DragDropMixin} from 'react-dnd'
 
 import studentActions from 'app/flux/studentActions'
 import itemTypes from 'app/models/itemTypes'
-import semesterName from 'app/helpers/semesterName'
+import semesterName from 'sto-helpers/lib/semesterName'
 
 let cx = React.addons.classSet
 

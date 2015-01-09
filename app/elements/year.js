@@ -5,10 +5,10 @@ import Course from 'app/elements/course'
 import Semester from 'app/elements/semester'
 
 import studentActions from 'app/flux/studentActions'
-import {isCurrentYear} from 'app/helpers/isCurrent'
-import {expandYear} from 'app/helpers/semesterName'
-import findFirstAvailableSemester from 'app/helpers/findFirstAvailableSemester'
-import calculateNextScheduleId from 'app/helpers/calculateNextScheduleId'
+import {isCurrentYear} from 'sto-helpers/lib/isCurrent'
+import expandYear from 'sto-helpers/lib/expandYear'
+import findFirstAvailableSemester from 'sto-helpers/lib/findFirstAvailableSemester'
+import calculateNextScheduleId from 'sto-helpers/lib/calculateNextScheduleId'
 
 let Year = React.createClass({
 	canAddSemester() {

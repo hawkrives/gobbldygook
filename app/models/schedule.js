@@ -3,9 +3,9 @@ import {isUndefined} from 'lodash'
 import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
 
-import randomChar from 'app/helpers/randomChar'
-import {checkScheduleTimeConflicts} from 'app/helpers/time'
-import {getCourses} from 'app/helpers/courses'
+import randomChar from 'sto-helpers/randomChar'
+import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
+import {getCourses} from '../helpers/courses'
 
 let ScheduleRecord = Immutable.Record({
 	id: uuid(),

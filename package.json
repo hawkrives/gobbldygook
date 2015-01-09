@@ -46,6 +46,7 @@
     "reflux": "^0.2.3",
     "sto-courses": "^2.2.3",
     "sto-helpers": "^2.0.6",
+    "sto-sis-time-parser": "^1.0.6",
     "treo": "^0.3.0"
   },
   "devDependencies": {

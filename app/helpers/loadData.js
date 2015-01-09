@@ -3,9 +3,10 @@ import Promise from 'bluebird'
 
 import {status, json} from 'app/helpers/fetch'
 import db from 'app/helpers/db'
-import {buildDeptNum, buildDept} from 'app/helpers/deptNum'
+import buildDept from 'sto-helpers/lib/buildDept'
+import buildDeptNum from 'sto-helpers/lib/buildDeptNum'
 import {discoverRecentYears} from 'app/helpers/recentTime'
-import {convertTimeStringsToOfferings} from 'app/helpers/time'
+import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 let logDataLoading = false
 // let logDataLoading = true
@@ -143,7 +144,7 @@ function loadDataFiles(infoFile) {
 		.flatten()
 		.value()
 
-	return Promise.all(files).then(() => Promise.resolve(true))
+	return Promise.all(files)
 }
 
 function loadInfoFile(url) {
@@ -156,10 +157,10 @@ function loadInfoFile(url) {
 
 function loadData() {
 	let infoFiles = [
-		'./data/areas/info.json',
+		// './data/areas/info.json',
 		'./data/courses/info.json',
 	]
-	return Promise.all(_.map(infoFiles, loadInfoFile))
+	return Promise.all(infoFiles).map(loadInfoFile).done()
 }
 
 export default loadData

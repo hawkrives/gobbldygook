@@ -3,8 +3,8 @@ import Immutable from 'immutable'
 import _ from 'lodash'
 
 import {v4 as uuid} from 'node-uuid'
-import randomChar from 'app/helpers/randomChar'
-import countCredits from 'app/helpers/countCredits'
+import randomChar from 'sto-helpers/lib/randomChar'
+import countCredits from 'sto-helpers/lib/countCredits'
 
 import Schedule from 'app/models/schedule'
 import Study from 'app/models/study'

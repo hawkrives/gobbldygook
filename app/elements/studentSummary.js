@@ -4,8 +4,6 @@ import humanize from 'humanize-plus'
 
 import ContentEditable from 'app/elements/contentEditable'
 
-import add from 'app/helpers/add'
-import randomChar from 'app/helpers/randomChar'
 import studentActions from 'app/flux/studentActions'
 
 let goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."

@@ -2,9 +2,9 @@ import Promise from 'bluebird'
 import Immutable from 'immutable'
 import {isUndefined} from 'lodash'
 
-import {isTrue} from 'app/helpers/is'
-import findResults from 'app/helpers/findResults'
-import findWordForProgress from 'app/helpers/findWordForProgress'
+import {isTrue} from 'sto-helpers/lib/is'
+import findResults from 'sto-helpers/lib/findResults'
+import findWordForProgress from 'sto-helpers/lib/findWordForProgress'
 
 
 /**
@@ -47,7 +47,7 @@ function checkStudentAgainstArea(student, area) {
 	if (!areaChecker)
 		return Promise.resolve(noResult(type, title, id))
 
-	return areaChecker(student)
+	return areaChecker(student.data())
 		.then((studentResults) => {
 			let listOfResults = findResults(studentResults.details)
 
