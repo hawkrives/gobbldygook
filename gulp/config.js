@@ -20,9 +20,7 @@ export default {
 	link: {
 		paths: [
 			['./node_modules/sto-courses', dest + 'data/courses'],
-			['./data/areas', dest + 'data/areas'],
 			['./app', './node_modules/app'],
-			['./sto-areas', './node_modules/sto-areas'],
 		],
 		opts: {force: true},
 	},
