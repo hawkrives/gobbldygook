@@ -1,4 +1,4 @@
-// tests/queryStuff-test.js
+// tests/queryStuff.test.js
 import buildQueryFromString from 'app/helpers/queryStuff'
 
 describe('buildQueryFromString', () => {
