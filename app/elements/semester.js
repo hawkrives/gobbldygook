@@ -30,7 +30,8 @@ let Semester = React.createClass({
 			dropTarget: {
 				acceptDrop(courseIdentifier) {
 					console.log('dropped courseIdentifier', courseIdentifier)
-					studentActions.addCourse(this.props.student.id, this.state.schedule.id, courseIdentifier.clbid)
+					let {clbid, fromSchedule} = courseIdentifier
+					studentActions.moveCourse(this.props.student.id, fromSchedule, this.state.schedule.id, clbid)
 				}
 			}
 		})

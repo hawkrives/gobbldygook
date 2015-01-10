@@ -164,14 +164,7 @@ let Course = React.createClass({
 			dragSource: {
 				beginDrag() {
 					return {
-						item: {clbid: this.props.info.clbid}
-					}
-				},
-				endDrag(didDrop) {
-					if (didDrop) {
-						if (this.props.student) {
-							studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.info.clbid)
-						}
+						item: {clbid: this.props.info.clbid, fromSchedule: this.props.schedule.id}
 					}
 				},
 			}
