@@ -3,6 +3,10 @@
 	border: 0;
 	padding: 0.25em 0.5em;
 
+	&:disabled {
+		color: #888;
+	}
+
 	a { @include link-undecorated; }
 }
 
