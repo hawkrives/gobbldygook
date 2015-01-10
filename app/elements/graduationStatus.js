@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React from 'react'
-import humanize from 'humanize-plus'
+import {capitalize, pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 
 import AreaOfStudy from './areaOfStudy'
@@ -49,10 +49,10 @@ let GraduationStatus = React.createClass({
 		let sections = this.state.areaDetails
 			.groupBy(area => area.type)
 			.map((areas, areaType) => {
-				let pluralType = humanize.pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
+				let pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 
 				let areaTypeHeading = React.createElement('header', {className: 'area-type-heading'},
-					React.createElement('h1', null, humanize.capitalize(pluralType)))
+					React.createElement('h1', null, capitalize(pluralType)))
 
 				let areaElements = areas.map((area) => {
 					return React.createElement(AreaOfStudy, {
@@ -64,7 +64,7 @@ let GraduationStatus = React.createClass({
 
 				areaElements.push(React.createElement('button',
 					{key: 'add-button', className: 'add-area-of-study'},
-					`Add ${humanize.capitalize(areaType)}`))
+					`Add ${capitalize(areaType)}`))
 
 				return React.createElement('section',
 					{id: pluralType, key: areaType},
