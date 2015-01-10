@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import stoAreas from 'sto-areas'
+import getArea from 'sto-areas'
 
 let StudyRecord = Immutable.Record({
 	id: '',
@@ -14,9 +14,18 @@ class Study extends StudyRecord {
 	constructor(args, yearOfGraduation) {
 		let {id, index} = args
 
-		let {type, departmentAbbr, title, check} = stoAreas.find(id, yearOfGraduation)
 
-		super({id, type, abbr: departmentAbbr, title, index, check})
+		let {type, departmentAbbr, title, check} = getArea(id, yearOfGraduation)
+		console.log(id, title)
+
+		super({
+			id,
+			type,
+			title,
+			index,
+			check,
+			abbr: departmentAbbr,
+		})
 	}
 
 	reorder(newIndex) {
