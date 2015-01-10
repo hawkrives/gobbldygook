@@ -7,6 +7,8 @@ import AreaOfStudy from './areaOfStudy'
 import StudentSummary from './studentSummary'
 import RevertToDemoButton from './revertToDemoButton'
 import DownloadStudentButton from './downloadStudentButton'
+import UndoButton from './undoButton'
+import RedoButton from './redoButton'
 
 import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
@@ -76,6 +78,8 @@ let GraduationStatus = React.createClass({
 			// React.createElement('button', {className: 'parse-student', onClick: this.parse}, 'Parse'),
 			React.createElement(RevertToDemoButton, {studentId: this.props.student.id}),
 			React.createElement(DownloadStudentButton, {student: this.props.student}),
+			React.createElement(UndoButton, null),
+			React.createElement(RedoButton, null))
 
 		return React.createElement('section', {className: 'graduation-status'},
 			studentButtons, summary, sections)
