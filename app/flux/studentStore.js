@@ -61,7 +61,6 @@ let studentStore = Reflux.createStore({
 		let student = new Student(rawStudent)
 		window.studentData = student
 
-		this._preChange()
 		this.students = this.students.set(student.id, student)
 		this._postChange()
 	},
