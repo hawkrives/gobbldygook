@@ -12,7 +12,6 @@
 	- well, this version actually has fewer, since so many flew away into helpers or areas.
 - Fixed "Revert to Demo" button
 - Added "Undo" and "Redo" buttons
-	- they do, however, expose that moving a course by dragging is currently a two-step process.
 
 [sto-areas]: https://github.com/hawkrives/gobbldygook-area-data
 [sto-courses]: https://github.com/hawkrives/gobbldygook-course-data
