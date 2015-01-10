@@ -47,7 +47,7 @@ let GraduationStatus = React.createClass({
 		let summary = React.createElement(StudentSummary, {student: this.props.student, graduatability: this.state.graduatability})
 
 		let sections = this.state.areaDetails
-			.groupBy(area => area.type)
+			.groupBy(area => area.type || 'Unknown')
 			.map((areas, areaType) => {
 				let pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 
