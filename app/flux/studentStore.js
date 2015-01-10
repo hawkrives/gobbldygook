@@ -14,7 +14,7 @@ let studentStore = Reflux.createStore({
 		this.history = Immutable.Stack()
 		this.future = Immutable.Stack()
 
-		this._loadData()
+		this._loadInitialData()
 	},
 
 	getInitialState() {
@@ -41,8 +41,36 @@ let studentStore = Reflux.createStore({
 		}
 	},
 
-	_loadData(opts={}) {
-		console.log('studentStore._loadData, with', opts)
+	_preChange() {
+		this.history = this.history.push(this.students)
+	},
+
+	_postChange() {
+		console.groupCollapsed('studentStore._postChange')
+		// console.group('studentStore._postChange')
+		console.log('students', this.students)
+		this.students.forEach(student => student.save())
+		console.groupEnd('studentStore._postChange')
+		this.trigger(this.students)
+	},
+
+	resetStudentToDemo(studentId) {
+		console.info(`resetting student ${studentId} to the demo student`)
+		let rawStudent = demoStudent
+		rawStudent.active = true
+		rawStudent.id = studentId
+
+		let student = new Student(rawStudent)
+		window.studentData = student
+
+		this._preChange()
+		this.students = this.students.set(studentId, student)
+		this._postChange()
+	},
+
+	_loadInitialData() {
+		console.log('studentStore._loadInitialData')
+
 		let rawStudent = null
 		let studentId = localStorage.getItem('activeStudentId')
 		let demoStudentId = '3AE9E7EE-DA8F-4014-B987-8D88814BB848'
@@ -64,18 +92,6 @@ let studentStore = Reflux.createStore({
 
 		this.students = this.students.set(student.id, student)
 		this._postChange()
-	},
-
-	_preChange() {
-		this.history = this.history.unshift(this.students)
-	},
-
-	_postChange() {
-		console.groupCollapsed('studentStore._postChange')
-		console.log('studentStore._postChange', this.students)
-		this.students.forEach(student => student.save())
-		console.groupEnd('studentStore._postChange')
-		this.trigger(this.students)
 	},
 
 	_change(studentId, method, ...args) {
