@@ -133,6 +133,14 @@ class Student extends StudentRecord {
 		})
 	}
 
+	moveCourse(fromScheduleId, toScheduleId, clbid) {
+		console.log(`moving course ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+		return this.withMutations((student) => {
+			student = student.setIn(['schedules', fromScheduleId], student.getIn(['schedules', fromScheduleId]).removeCourse(clbid))
+			student = student.setIn(['schedules', toScheduleId], student.getIn(['schedules', toScheduleId]).addCourse(clbid))
+		})
+	}
+
 
 	// area-of-study methods
 
