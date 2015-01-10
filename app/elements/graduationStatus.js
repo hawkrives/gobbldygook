@@ -5,6 +5,8 @@ import Immutable from 'immutable'
 
 import AreaOfStudy from './areaOfStudy'
 import StudentSummary from './studentSummary'
+import RevertToDemoButton from './revertToDemoButton'
+import DownloadStudentButton from './downloadStudentButton'
 
 import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
@@ -72,26 +74,11 @@ let GraduationStatus = React.createClass({
 
 		let studentButtons = React.createElement('menu', {className: 'button-list student-buttons'},
 			// React.createElement('button', {className: 'parse-student', onClick: this.parse}, 'Parse'),
-			React.createElement('button', {className: 'demo-student', onClick: this.demo}, 'Demo'),
-			React.createElement('button', {className: 'download-student'},
-				React.createElement('a',
-					{href: this.download(), download: `${this.props.student.name}.gb-student.json`},
-					'Download')))
+			React.createElement(RevertToDemoButton, {studentId: this.props.student.id}),
+			React.createElement(DownloadStudentButton, {student: this.props.student}),
 
 		return React.createElement('section', {className: 'graduation-status'},
 			studentButtons, summary, sections)
-	},
-
-	parse() {
-		console.log('parse student')
-	},
-	demo() {
-		console.log('load demo data')
-		// revertStudentToDemo()
-	},
-	download() {
-		// console.log('start student download')
-		return `data:text/json;charset=utf-8,${this.props.student.encode()}`
 	},
 })
 
