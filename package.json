@@ -19,7 +19,8 @@
     "gulp": "gulp",
     "serve": "gulp watch",
     "test": "mocha",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "travis": "npm run build && npm run lint && npm test"
   },
   "dependencies": {
     "bluebird": "^2.6.2",
