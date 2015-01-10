@@ -6,7 +6,7 @@ let UndoButton = React.createClass({
 	render() {
 		return React.createElement('button', {
 			onClick: studentActions.undo,
-			disabled: (studentStore.history.size === 0)
+			disabled: (studentStore.history.size === 0),
 		}, 'Undo')
 	}
 })

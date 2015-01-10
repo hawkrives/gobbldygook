@@ -13,7 +13,7 @@ let downloadStudentButton = React.createClass({
 			'Download')
 
 		return React.createElement('button', {className: 'download-student'}, link)
-	}
+	},
 })
 
 export default downloadStudentButton

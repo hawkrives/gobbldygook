@@ -6,7 +6,7 @@ let RedoButton = React.createClass({
 	render() {
 		return React.createElement('button', {
 			onClick: studentActions.redo,
-			disabled: (studentStore.future.size === 0)
+			disabled: (studentStore.future.size === 0),
 		}, 'Redo')
 	}
 })
