@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import Promise from 'bluebird'
 
-import {status, json} from '../helpers/fetch'
-import db from '../helpers/db'
 import {discoverRecentYears} from '../helpers/recentTime'
+import {status, json} from './fetch'
+import db from './db'
 
 import buildDept from 'sto-helpers/lib/buildDept'
 import buildDeptNum from 'sto-helpers/lib/buildDeptNum'
