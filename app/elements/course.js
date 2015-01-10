@@ -163,8 +163,9 @@ let Course = React.createClass({
 		registerType(itemTypes.COURSE, {
 			dragSource: {
 				beginDrag() {
+					let scheduleId = this.props.schedule ? this.props.schedule.id : null
 					return {
-						item: {clbid: this.props.info.clbid, fromSchedule: this.props.schedule.id}
+						item: {clbid: this.props.info.clbid, fromSchedule: scheduleId}
 					}
 				},
 			}
