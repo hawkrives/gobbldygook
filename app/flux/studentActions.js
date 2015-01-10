@@ -33,6 +33,8 @@ let studentActions = Reflux.createActions([
 
 	'addFabrication',
 	'removeFabrication',
+
+	'resetStudentToDemo',
 ])
 
 export default studentActions
