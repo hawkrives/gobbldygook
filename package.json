@@ -34,7 +34,7 @@
     "react-dnd": "^0.6.2",
     "react-router": "^0.11.6",
     "reflux": "^0.2.3",
-    "sto-areas": "^2.0.2",
+    "sto-areas": "^2.0.4",
     "sto-courses": "^2.2.3",
     "sto-helpers": "^2.0.6",
     "sto-sis-time-parser": "^1.0.6",
