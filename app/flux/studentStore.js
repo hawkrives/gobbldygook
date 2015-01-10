@@ -110,7 +110,7 @@ let studentStore = Reflux.createStore({
 	changeCreditsNeeded(studentId, ...args)      { this._change(studentId, 'changeCreditsNeeded',      ...args) },
 	changeMatriculation(studentId, ...args)      { this._change(studentId, 'changeMatriculation',      ...args) },
 	changeGraduation(studentId, ...args)         { this._change(studentId, 'changeGraduation',         ...args) },
-	changeSetting(studentId, key, value)         { this._change(studentId, 'changeSetting',            key, value) },
+	changeSetting(studentId, key, value)         { this._change(studentId, 'changeSetting',         key, value) },
 	addArea(studentId, ...args)                  { this._change(studentId, 'addArea',                  ...args) },
 	addSchedule(studentId, ...args)              { this._change(studentId, 'addSchedule',              ...args) },
 	addFabrication(studentId, ...args)           { this._change(studentId, 'addArea',                  ...args) },
