@@ -9,8 +9,6 @@ import countCredits from 'sto-helpers/lib/countCredits'
 import Schedule from '../models/schedule'
 import Study from '../models/study'
 
-import demoStudent from 'sto-areas/demo_student.json'
-
 let currentVersionString = '3.0.0alpha8'
 
 let StudentRecord = Immutable.Record({

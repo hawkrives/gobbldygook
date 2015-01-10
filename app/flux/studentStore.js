@@ -2,6 +2,7 @@ import Reflux from 'reflux'
 import Immutable from 'immutable'
 
 import Student from '../models/student'
+import demoStudent from '../models/demoStudent.json'
 
 import studentActions from './studentActions'
 
