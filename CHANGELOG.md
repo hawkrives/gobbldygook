@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 3.0.0alpha10
+
+- Added `courses` as the first parameter to queryCourses, allowing the full power of that wierd query engine to run over any list of courses.
+
+
 ## 3.0.0alpha9
 
 - Modularized app
