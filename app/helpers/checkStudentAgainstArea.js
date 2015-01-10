@@ -3,29 +3,20 @@ import {titleCase} from 'humanize-plus'
 import {isTrue} from 'sto-helpers/lib/is'
 import findResults from 'sto-helpers/lib/findResults'
 import findWordForProgress from 'sto-helpers/lib/findWordForProgress'
-
-let areaTypes = {
-	m: 'major',
-	c: 'concentration',
-	a: 'not-found',
-	d: 'degree',
-	e: 'emphasis',
-}
+import parseAreaId from 'sto-helpers/lib/parseAreaId'
 
 
 /**
  * Controls the 'no result' result from areas of study.
  *
- * @param {String} type
- * @param {String} title
  * @param {String} id
  * @returns {Object}
  */
-let noResult = (type, title, id) => {
-	let [type, title] = id.split('-')
-	type = areaTypes[type]
+let noResult = (id) => {
+	let {type, title} = parseAreaId(id)
 	return Promise.resolve({
-		id, type,
+		id,
+		type,
 		title: titleCase(title),
 		result: false,
 		progress: {at: 0, of: 1, word: 'zero'},
@@ -49,7 +40,7 @@ function checkStudentAgainstArea(student, area) {
 	let {id, title, type, check, abbr} = area
 
 	if (type === 'not-found')
-		return noResult(type, title, id)
+		return noResult(id)
 
 	return check(student.data())
 		.then((studentResults) => {

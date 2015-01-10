@@ -5,7 +5,7 @@ import Immutable from 'immutable'
 import db from './db'
 
 import checkCoursesFor from 'sto-helpers/lib/checkCoursesFor'
-import queryCourses from './queryCourses'
+import queryCourses from 'sto-helpers/lib/queryCourses'
 
 
 /**
