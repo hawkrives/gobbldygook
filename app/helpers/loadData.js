@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import Promise from 'bluebird'
 
-import {discoverRecentYears} from '../helpers/recentTime'
 import {status, json} from './fetch'
 import db from './db'
 
