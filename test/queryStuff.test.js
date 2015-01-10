@@ -1,5 +1,5 @@
 // tests/queryStuff.test.js
-import buildQueryFromString from 'app/helpers/queryStuff'
+import buildQueryFromString from '../app/helpers/queryStuff'
 
 describe('buildQueryFromString', () => {
 	it('builds a query string with multiple keys into a query object', () => {
