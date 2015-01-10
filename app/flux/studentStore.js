@@ -21,15 +21,21 @@ let studentStore = Reflux.createStore({
 	},
 
 	undo() {
-		this.future = this.future.unshift(this.history.first())
-		this.students = this.history.shift()
-		this._postChange()
+		if (this.history.size) {
+			console.log('undoing...')
+			this.future = this.future.push(this.students)
+			this.students = this.history.first()
+			this.history = this.history.pop()
+			this._postChange()
+		}
 	},
 
 	redo() {
 		if (this.future.size) {
-			this.history = this.future
-			this.students = this.future.shift()
+			console.log('redoing...')
+			this.history = this.history.push(this.students)
+			this.students = this.future.first()
+			this.future = this.future.pop()
 			this._postChange()
 		}
 	},
