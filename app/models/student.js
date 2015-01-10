@@ -1,15 +1,16 @@
 import Promise from 'bluebird'
 import Immutable from 'immutable'
 import _ from 'lodash'
-
 import {v4 as uuid} from 'node-uuid'
+
+import {version as currentVersionString} from '../../package.json'
+
 import randomChar from 'sto-helpers/lib/randomChar'
 import countCredits from 'sto-helpers/lib/countCredits'
 
 import Schedule from '../models/schedule'
 import Study from '../models/study'
 
-let currentVersionString = '3.0.0alpha8'
 
 let StudentRecord = Immutable.Record({
 	id: uuid(),
