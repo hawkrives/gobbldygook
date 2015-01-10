@@ -1,10 +1,20 @@
 import Promise from 'bluebird'
 import Immutable from 'immutable'
 import {isUndefined} from 'lodash'
+import {titleCase} from 'humanize-plus'
 
 import {isTrue} from 'sto-helpers/lib/is'
 import findResults from 'sto-helpers/lib/findResults'
 import findWordForProgress from 'sto-helpers/lib/findWordForProgress'
+
+
+let areaTypes = {
+	m: 'major',
+	c: 'concentration',
+	a: 'not-found',
+	d: 'degree',
+	e: 'emphasis',
+}
 
 
 /**
@@ -16,17 +26,18 @@ import findWordForProgress from 'sto-helpers/lib/findWordForProgress'
  * @returns {Object}
  */
 let noResult = (type, title, id) => {
-	return {
-		id: id,
-		title: title,
+	let [type, title] = id.split('-')
+	type = areaTypes[type]
+	return Promise.resolve({
+		id, type,
+		title: titleCase(title),
 		result: false,
 		progress: {at: 0, of: 1, word: 'zero'},
-		type: type,
 		details: [{
 			title: `${type} not found!`,
 			description: `This ${type} could not be found.`,
 		}],
-	}
+	})
 }
 
 
@@ -39,15 +50,12 @@ let noResult = (type, title, id) => {
  * @fulfill {Object} - The details of the area check.
  */
 function checkStudentAgainstArea(student, area) {
-	let {title, type, id} = area
+	let {id, title, type, check, abbr} = area
 
-	// let areaChecker = areas.get(area.id)
-	let areaChecker = area.check
+	if (type === 'not-found')
+		return noResult(type, title, id)
 
-	if (!areaChecker)
-		return Promise.resolve(noResult(type, title, id))
-
-	return areaChecker(student.data())
+	return check(student.data())
 		.then((studentResults) => {
 			let listOfResults = findResults(studentResults.details)
 
