@@ -54,9 +54,9 @@ let GraduationStatus = React.createClass({
 				let areaTypeHeading = React.createElement('header', {className: 'area-type-heading'},
 					React.createElement('h1', null, capitalize(pluralType)))
 
-				let areaElements = areas.map((area) => {
+				let areaElements = areas.map((area, index) => {
 					return React.createElement(AreaOfStudy, {
-						key: area.id,
+						key: `${area.id}-${index}`,
 						student: this.props.student,
 						area: area,
 					})
