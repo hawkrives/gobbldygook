@@ -73,9 +73,8 @@ let studentStore = Reflux.createStore({
 
 		let rawStudent = null
 		let studentId = localStorage.getItem('activeStudentId')
-		let demoStudentId = '3AE9E7EE-DA8F-4014-B987-8D88814BB848'
 
-		let localStudent = localStorage.getItem(studentId || demoStudentId) || localStorage.getItem('student-v3.0a6')
+		let localStudent = localStorage.getItem(studentId) || localStorage.getItem('student-v3.0a6')
 
 		try {
 			rawStudent = JSON.parse(localStudent)
