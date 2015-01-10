@@ -5,6 +5,7 @@
 
 	&:disabled {
 		color: #888;
+		box-shadow: none;
 	}
 
 	a { @include link-undecorated; }
