@@ -1,10 +1,11 @@
 import _ from 'lodash'
 import React from 'react/addons'
-import humanize from 'humanize-plus'
+import {ordinal} from 'humanize-plus'
 import {DragDropMixin} from 'react-dnd'
 
 import itemTypes from '../models/itemTypes'
 import semesterName from 'sto-helpers/lib/semesterName'
+import {isTrue} from 'sto-helpers/lib/is'
 
 import ExpandedCourse from './expandedCourse'
 import CollapsedCourse from './collapsedCourse'
@@ -61,26 +62,27 @@ let Course = React.createClass({
 		let thisYear = new Date().getFullYear()
 		let warnings = []
 
-		if (this.props.schedule && (this.props.info.year !== this.props.schedule.year) && this.props.schedule.year <= thisYear) {
+		let {schedule, info: course, conflicts, index: i} = this.props
+
+		if (schedule && (course.year !== schedule.year) && schedule.year <= thisYear) {
 			warnings.push({
-				msg: `This course (from ${this.props.info.year}) is not offered in this year (${this.props.schedule.year}).`
+				msg: `This course (from ${course.year}) is not offered in this year (${schedule.year}).`
 			})
 		}
 
-		if (this.props.schedule && this.props.info.sem !== this.props.schedule.semester) {
+		if (schedule && course.sem !== schedule.semester) {
 			warnings.push({
-				msg: `This course (from ${semesterName(this.props.info.sem)}) is not offered in this semester.`,
+				msg: `This course (from ${semesterName(course.sem)}) is not offered in this semester.`,
 				className: 'course-invalid-semester',
 			})
 		}
 
-		if (this.props.conflicts && !_.isUndefined(this.props.index)) {
-			let i = this.props.index
-			if (_.any(this.props.conflicts[i])) {
-				let conflictIndex = _.findIndex(this.props.conflicts[i], item => item === true)
+		if (conflicts && i !== undefined) {
+			if (_.any(conflicts[i])) {
+				let conflictIndex = _.findIndex(conflicts[i], isTrue)
 				conflictIndex = conflictIndex + 1 // because humans don't 0-index lists
 				warnings.push({
-					msg: `This course has a time conflict with the ${humanize.ordinal(conflictIndex)} course.`,
+					msg: `This course has a time conflict with the ${ordinal(conflictIndex)} course.`,
 					className: 'course-time-conflict',
 				})
 			}
@@ -101,14 +103,13 @@ let Course = React.createClass({
 
 		let isDragging = this.getDragState(itemTypes.COURSE).isDragging
 
-		let courseInfo = this.state.isOpen ?
-			React.createElement(ExpandedCourse, this.props) :
-			React.createElement(CollapsedCourse, this.props)
+		let courseStyle = this.state.isOpen ? ExpandedCourse : CollapsedCourse
+		let courseInfo = React.createElement(courseStyle, this.props)
 
 		let warnings = this.findWarnings()
 
 		return React.createElement('article',
-			_.extend(
+			Object.assign(
 				{
 					className: cx({
 						course: true,
@@ -119,8 +120,8 @@ let Course = React.createClass({
 				},
 				this.dragSourceFor(itemTypes.COURSE)),
 
-			courseInfo, warnings
-		)
+			courseInfo,
+			warnings)
 	},
 })
 
