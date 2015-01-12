@@ -20,7 +20,7 @@ let ScheduleRecord = Immutable.Record({
 
 class Schedule extends ScheduleRecord {
 	constructor(data) {
-		log('schedule constructor')
+		console.log('schedule constructor')
 		super(data)
 		return this.withMutations((sched) => {
 			sched = sched.set('id', data.id || uuid())
@@ -75,7 +75,7 @@ class Schedule extends ScheduleRecord {
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.push(clbid))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
-			sched.get('_courseData').then(d => log(`it took ${Math.round(performance.now() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester}`, sched.clbids.toJS(), d.map(c => c.title)))
+			sched.get('_courseData').then(d => console.log(`it took ${Math.round(performance.now() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
 			return sched
 		})
 	}
@@ -88,7 +88,7 @@ class Schedule extends ScheduleRecord {
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.delete(index))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
-			sched.get('_courseData').then(d => log(`it took ${Math.round(performance.now() - start)}ms to remove ${clbid} from ${this.year}-${this.semester}`, sched.clbids.toJS(), d.map(c => c.title)))
+			sched.get('_courseData').then(d => console.log(`it took ${Math.round(performance.now() - start)}ms to remove ${clbid} from ${this.year}-${this.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
 			return sched
 		})
 	}
