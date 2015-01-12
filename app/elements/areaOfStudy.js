@@ -28,44 +28,35 @@ let AreaOfStudy = React.createClass({
 
 	toggle() {
 		this.setState({expanded: !this.state.expanded})
-
-		let sections = Immutable.Set(this.props.student.settings.get('expanded-sections') || [])
-		if (this.state.expanded) {
-			sections = sections.delete(this.props.area.id)
-		}
-		else {
-			sections = sections.add(this.props.area.id)
-		}
-
-		studentActions.changeSetting(this.props.student.id, 'expanded-sections', sections.toArray())
-	},
-
-	checkForExpansion(props) {
-		let sections = props.student.settings.get('expanded-sections')
-		if (sections)
-			return sections.indexOf(this.props.area.id) >= 0
-		return false
 	},
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({ expanded: this.checkForExpansion(this.props) })
+		this.setState({
+			reqSets: this.makeReqSets(),
+		})
 	},
 
 	componentWillMount() {
-		this.setState({ expanded: this.checkForExpansion(this.props) })
+		this.setState({
+			reqSets: this.makeReqSets(),
+		})
 	},
 
 	getInitialState() {
-		return { expanded: this.checkForExpansion(this.props) }
+		return {
+			expanded: false,
+			reqSets: this.makeReqSets(),
+		}
+	},
+
+	makeReqSets() {
+		let reqSets = _.map(this.props.area.details, (reqset) =>
+				React.createElement(RequirementSet, Object.assign({key: reqset.title}, reqset)))
+		return reqSets
 	},
 
 	render() {
 		// console.log(`render areaOfStudy for ${this.props.area.id}`)
-
-		let requirementSets = null
-		if (this.state.expanded)
-			requirementSets = _.map(this.props.area.details, (reqset) =>
-				React.createElement(RequirementSet, _.extend({key: reqset.title}, reqset)))
 
 		let header = React.createElement('header',
 			{className: 'summary', onClick: this.toggle},
@@ -84,7 +75,7 @@ let AreaOfStudy = React.createClass({
 		return React.createElement('div',
 			{key: this.props.area.id, className: classes},
 			header,
-			requirementSets)
+			this.state.expanded ? this.state.reqSets : null)
 	},
 })
 
