@@ -72,6 +72,14 @@ let studentStore = Reflux.createStore({
 		this._postChange()
 	},
 
+	reloadStudents() {
+		let loadedIds = this.students.map(s => s.id).toList()
+		let localIds = Immutable.List(localStorage.getItem('studentIds') || [])
+
+		if (!loadedIds.equals(localIds))
+			this._loadData()
+	},
+
 	_loadData() {
 		console.log('studentStore._loadData')
 
