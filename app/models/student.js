@@ -35,7 +35,8 @@ class Student extends StudentRecord {
 		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
 		// instead of our custom Studies, Schedules, and such.
 		let toRemove = Immutable.Set(['studies', 'schedules', 'overrides', 'fabrications'])
-		let filtered = Immutable.fromJS(encodedStudent).filterNot((val, key) => toRemove.has(key))
+		let immutableStudent = Immutable.fromJS(encodedStudent) || Immutable.Map()
+		let filtered = immutableStudent.filterNot((val, key) => toRemove.has(key))
 
 		super(filtered)
 
