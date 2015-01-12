@@ -216,7 +216,7 @@ class Student extends StudentRecord {
 	}
 
 	toString() {
-		return JSON.stringify(this.toJS())
+		return this.toJSON()
 	}
 
 	toJSON() {
