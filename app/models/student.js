@@ -43,6 +43,8 @@ class Student extends StudentRecord {
 		// Then add them manually.
 		if (encodedStudent) {
 			return this.withMutations((student) => {
+				student = student.set('id', encodedStudent.id || uuid())
+
 				_(encodedStudent.studies || []).forEach(study => {
 					student = student.addArea(study)
 				})
