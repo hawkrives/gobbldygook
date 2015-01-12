@@ -6,7 +6,6 @@ let studentActions = Reflux.createActions([
 	'redo',
 
 	'changeName',
-	'changeActive',
 	'changeCreditsNeeded',
 	'changeMatriculation',
 	'changeGraduation',
