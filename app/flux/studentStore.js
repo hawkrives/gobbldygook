@@ -6,6 +6,11 @@ import demoStudent from '../models/demoStudent.json'
 
 import studentActions from './studentActions'
 
+let cleanLocalStorage = () => {
+	localStorage.removeItem('activeStudentId')
+	localStorage.removeItem('student-v3.0a6')
+}
+
 let studentStore = Reflux.createStore({
 	listenables: studentActions,
 
