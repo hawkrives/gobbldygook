@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import React from 'react'
+import {Link} from 'react-router'
 import {capitalize, pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 
@@ -76,7 +77,7 @@ let GraduationStatus = React.createClass({
 			}).toJS()
 
 		let studentButtons = React.createElement('menu', {className: 'button-list student-buttons'},
-			// React.createElement('button', {className: 'parse-student', onClick: this.parse}, 'Parse'),
+			React.createElement('button', {className: 'back'}, React.createElement(Link, {to: '/'}, 'Back')),
 			React.createElement(RevertToDemoButton, {studentId: this.props.student.id}),
 			React.createElement(DownloadStudentButton, {student: this.props.student}),
 			React.createElement(UndoButton, null),
