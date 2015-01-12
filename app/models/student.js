@@ -32,6 +32,7 @@ let StudentRecord = Immutable.Record({
 
 class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
+		let startTime = performance.now()
 		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
 		// instead of our custom Studies, Schedules, and such.
 		let toRemove = Immutable.Set(['studies', 'schedules', 'overrides', 'fabrications'])
@@ -60,6 +61,8 @@ class Student extends StudentRecord {
 				_(encodedStudent.fabrications || []).forEach(fabrication => {
 					student = student.addFabrication(fabrication)
 				})
+
+				console.log('it took', performance.now() - startTime, 'ms to make a student')
 
 				return student
 			})
