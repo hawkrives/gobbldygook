@@ -1,0 +1,8 @@
+bin/
+lib/
+node_modules/
+test/
+
+.gitignore
+.npmignore
+index.es
