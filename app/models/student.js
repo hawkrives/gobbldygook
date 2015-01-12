@@ -15,7 +15,6 @@ import Study from '../models/study'
 let StudentRecord = Immutable.Record({
 	id: uuid(),
 	name: 'Student ' + randomChar(),
-	active: false,
 	version: currentVersionString,
 
 	creditsNeeded: 35,
@@ -66,10 +65,6 @@ class Student extends StudentRecord {
 
 	changeName(newName) {
 		return this.set('name', newName)
-	}
-
-	changeActive(isActive) {
-		return this.set('active', isActive)
 	}
 
 	changeCreditsNeeded(newCreditsNeeded) {
@@ -226,9 +221,6 @@ class Student extends StudentRecord {
 	save() {
 		console.log(`saving student ${this.name} (${this.id})`)
 		localStorage.setItem(this.id, this.toJSON())
-
-		if (this.active)
-			localStorage.setItem('activeStudentId', this.id)
 	}
 }
 

@@ -62,7 +62,6 @@ let studentStore = Reflux.createStore({
 	resetStudentToDemo(studentId) {
 		console.info(`resetting student ${studentId} to the demo student`)
 		let rawStudent = demoStudent
-		rawStudent.active = true
 		rawStudent.id = studentId
 
 		let student = new Student(rawStudent)
@@ -111,7 +110,6 @@ let studentStore = Reflux.createStore({
 	},
 
 	changeName(studentId, ...args)               { this._change(studentId, 'changeName',               ...args) },
-	changeActive(studentId, ...args)             { this._change(studentId, 'changeActive',             ...args) },
 	changeCreditsNeeded(studentId, ...args)      { this._change(studentId, 'changeCreditsNeeded',      ...args) },
 	changeMatriculation(studentId, ...args)      { this._change(studentId, 'changeMatriculation',      ...args) },
 	changeGraduation(studentId, ...args)         { this._change(studentId, 'changeGraduation',         ...args) },
