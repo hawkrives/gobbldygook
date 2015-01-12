@@ -28,6 +28,7 @@ loadData()
 import Gobbldygook from './elements/app'
 import StudentList from './elements/studentList'
 import Student from './elements/student'
+import AddStudent from './elements/student'
 import CourseTable from './elements/courseTable'
 import SemesterDetail from './elements/semesterDetail'
 
@@ -42,6 +43,7 @@ let DefaultRoute = React.createFactory(Router.DefaultRoute)
 let routes = (
 	Route({handler: Gobbldygook, name: 'gobbldygook', path: '/'},
 		DefaultRoute({handler: StudentList}),
+		Route({handler: AddStudent, name: 'add-student', path: 'add-student/'}),
 		Route({handler: Student, name: 'student', path: 's/:id/'},
 			DefaultRoute({handler: CourseTable}),
 			Route({handler: SemesterDetail, name: 'semester', path: 'semester/:year/:semester/'}))
