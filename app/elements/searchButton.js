@@ -14,6 +14,7 @@ let SearchButton = React.createClass({
 			query: '',
 		}
 	},
+
 	toggleSidebar() {
 		this.setState({open: !this.state.open})
 	},
@@ -34,6 +35,7 @@ let SearchButton = React.createClass({
 			return this.onSubmit()
 		}
 	},
+
 	query(searchQuery) {
 		let startQueryTime = performance.now()
 		let results = _(queryCourses(searchQuery))
@@ -71,6 +73,7 @@ let SearchButton = React.createClass({
 			courseObjects: courseObjects,
 		})
 	},
+
 	render() {
 		return React.createElement('div', {className: 'search-sidebar'},
 			React.createElement('header', {className: 'sidebar-heading'},
