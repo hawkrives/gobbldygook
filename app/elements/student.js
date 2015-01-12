@@ -40,7 +40,7 @@ let Student = React.createClass({
 	// },
 
 	render() {
-		console.info('student render', this.props.students.toJS())
+		console.info('list of students in Student', this.props.students.toJS())
 
 		if (!this.state.student)
 			return React.createElement('figure', {className: 'loading'},
