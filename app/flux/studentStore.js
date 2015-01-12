@@ -19,7 +19,7 @@ let studentStore = Reflux.createStore({
 		this.history = Immutable.Stack()
 		this.future = Immutable.Stack()
 
-		this._loadInitialData()
+		this._loadData()
 	},
 
 	getInitialState() {
@@ -72,8 +72,8 @@ let studentStore = Reflux.createStore({
 		this._postChange()
 	},
 
-	_loadInitialData() {
-		console.log('studentStore._loadInitialData')
+	_loadData() {
+		console.log('studentStore._loadData')
 
 		// studentIds is a list of IDs we know about.
 		let studentIds =
@@ -86,31 +86,34 @@ let studentStore = Reflux.createStore({
 			['student-v3.0a6']
 
 		// Fetch and load the students from their IDs
-		let localStudents = studentIds.map(id => {
-			// Get the student
-			let rawStudent = localStorage.getItem(id)
+		let localStudents = studentIds
+			// pull the students from localStorage
+			.map(id => { return localStorage.getItem(id) })
+			// filter out any that don't exist
+			.filter(rawStudent => rawStudent !== null)
+			// and process them
+			.map(rawStudent => {
+				// basicStudent defaults to an empty object so that the constructor
+				// has something to build from.
+				let basicStudent = {}
+				try {
+					basicStudent = JSON.parse(rawStudent)
+				}
+				catch (e) {
+					console.error('error parsing', basicStudent, e)
+				}
 
-			// basicStudent defaults to an empty object so that the constructor
-			// has something to build from.
-			let basicStudent = {}
-			try {
-				basicStudent = JSON.parse(rawStudent)
-			}
-			catch (e) {
-				console.error('error parsing', basicStudent, e)
-			}
+				if (basicStudent.id === 'student-v3.0a6')
+					delete basicStudent.id
 
-			if (basicStudent.id === 'student-v3.0a6')
-				delete basicStudent.id
+				// Make the student...
+				let fleshedStudent = new Student(basicStudent)
 
-			// Make the student...
-			let fleshedStudent = new Student(basicStudent)
+				// and save them, of course
+				fleshedStudent.save()
 
-			// and save them, of course
-			fleshedStudent.save()
-
-			return fleshedStudent
-		})
+				return fleshedStudent
+			})
 
 		// Update the studentIds list from the current list of students
 		localStorage.setItem('studentIds', JSON.stringify(localStudents.map(s => s.id)))
