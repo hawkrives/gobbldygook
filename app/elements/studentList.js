@@ -11,7 +11,15 @@ let StudentList = React.createClass({
 			React.createElement('li', {key: student.id},
 				React.createElement(Link,
 					{className: 'student-list--student', to: 'student', params: {id: student.id}},
-					student.name)))
+					student.name))).toList()
+
+		students = students.push(React.createElement('li', {key: 'new-student'},
+			React.createElement(Link,
+				{
+					className: 'student-list--student',
+					to: 'add-student',
+				},
+				"Add Student")))
 
 		return React.createElement('ul', {className: 'student-list'}, students.toJS())
 	},
