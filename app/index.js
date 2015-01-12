@@ -4,6 +4,10 @@ import 'fetch'
 import Promise from 'bluebird'
 Promise.longStackTraces()
 
+import errorActions from './flux/errorActions'
+import errorStore from './flux/errorStore'
+window.addEventListener('error', errorActions.logError)
+
 import Router from 'react-router'
 
 import './helpers/db'
@@ -49,7 +53,6 @@ let routes = (
 			Route({handler: SemesterDetail, name: 'semester', path: 'semester/:year/:semester/'}))
 	)
 )
-
 
 // run it
 console.log('3. 2.. 1... Blastoff!')
