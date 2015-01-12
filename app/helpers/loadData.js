@@ -155,7 +155,6 @@ function loadInfoFile(url) {
 
 function loadData() {
 	let infoFiles = [
-		// './data/areas/info.json',
 		'./data/courses/info.json',
 	]
 	return Promise.all(infoFiles).map(loadInfoFile).done()
