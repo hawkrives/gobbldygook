@@ -5,10 +5,11 @@ import Immutable from 'immutable'
 
 import AreaOfStudy from './areaOfStudy'
 import StudentSummary from './studentSummary'
-import RevertToDemoButton from './revertToDemoButton'
-import DownloadStudentButton from './downloadStudentButton'
-import UndoButton from './undoButton'
-import RedoButton from './redoButton'
+
+import RevertToDemoButton from '../components/revertToDemoButton'
+import DownloadStudentButton from '../components/downloadStudentButton'
+import UndoButton from '../components/undoButton'
+import RedoButton from '../components/redoButton'
 
 import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
