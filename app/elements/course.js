@@ -3,9 +3,13 @@ import React from 'react/addons'
 import humanize from 'humanize-plus'
 import {DragDropMixin} from 'react-dnd'
 
-import studentActions from '../flux/studentActions'
 import itemTypes from '../models/itemTypes'
 import semesterName from 'sto-helpers/lib/semesterName'
+
+import ExpandedCourse from './expandedCourse'
+import CollapsedCourse from './collapsedCourse'
+import MissingCourse from './missingCourse'
+import EmptyCourseSlot from './emptyCourseSlot'
 
 let cx = React.addons.classSet
 
@@ -17,146 +21,14 @@ function findSemesterList() {
 	]
 }
 
-
-let CourseTitle = React.createClass({
-	render() {
-		let course = this.props.info
-
-		let titleText = course.title
-		let type = this.props.info.type
-		let courseName = course.name || course.title
-
-		if (course.type === 'Topic')
-			titleText = courseName.replace(/top.*: */gi, '')
-
-		let isIndependent = /^I[RS]/.test(courseName)
-		if (isIndependent) {
-			type = courseName.substr(0, 3)
-			if (courseName.length > 3)
-				titleText = courseName.substring(3)
-		}
-
-		let courseType = React.createElement('span', {className: 'type'}, type)
-		let title = React.createElement('h1',
-			{className: 'title'},
-			(this.props.info.type === 'Research' && !isIndependent) ? null : courseType,
-			titleText)
-
-		return title
-	}
-})
-
-
-let ExpandedCourse = React.createClass({
-	propTypes: {
-		info: React.PropTypes.object,
-		student: React.PropTypes.object,
-		schedule: React.PropTypes.object,
-	},
-
-	removeFromSemester() {
-		studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.info.clbid)
-	},
-
-	render() {
-		let course = this.props.info
-		let tools = []
-
-		// /////
-
-		let title = React.createElement(CourseTitle, this.props)
-
-		let identifier = React.createElement('span',
-			{className: 'identifier'},
-			course.dept, ' ', course.num, course.sect)
-
-		let professors = React.createElement('span',
-			{className: 'professors'},
-			humanize.oxford(course.profs))
-
-		let summary = React.createElement('p',
-			{className: 'summary'},
-			identifier, professors)
-
-		// /////
-
-		let offerings = React.createElement('p',
-			{className: 'offerings'},
-			_.map(course.times,
-				time => React.createElement('span', {key: time}, time)))
-
-		let gereqs = React.createElement('ul',
-			{className: 'gereqs'},
-			_.map(course.gereqs,
-				ge => React.createElement('li', {key: ge}, ge)))
-
-		let description = React.createElement('p',
-			{className: 'description'},
-			course.desc)
-
-		let credits = React.createElement('span',
-			{className: 'credits'},
-			course.credits + ' ' + humanize.pluralize(course.credits, 'credit'))
-
-		let classInstanceOffered = React.createElement('span',
-			{className: 'instance'},
-			semesterName(course.sem) + ' ' + course.year)
-
-		let info = React.createElement('p',
-			{className: 'info'},
-			credits, classInstanceOffered)
-
-		let details = React.createElement('div',
-			{className: 'details'},
-			offerings, gereqs, description, info)
-
-		// /////
-
-		let semesterList = React.createElement('select',
-			{className: 'semester-select', key: 'semester-select'},
-			_.map(findSemesterList(), (s =>
-				React.createElement('option', {value: s.id, key: s.id}, s.title))))
-		tools.push(semesterList)
-
-		let deleteButton = React.createElement('button', {className: 'remove-course', onClick: this.removeFromSemester, key: 'remove-course'}, 'Remove Course')
-		if (this.props.schedule) {
-			tools.push(deleteButton)
-		}
-
-		let toolsEls = React.createElement('div',
-			{className: 'tools', onClick: (ev) => {ev.stopPropagation()}},
-			tools)
-
-		// /////
-
-		return React.createElement('div', {className: 'info-rows'}, title, summary, details, toolsEls)
-	},
-})
-
-
-let CollapsedCourse = React.createClass({
-	render() {
-		let course = this.props.info
-
-		let title = React.createElement(CourseTitle, this.props)
-
-		let identifier = React.createElement('span',
-			{className: 'identifier'},
-			course.dept, ' ', course.num, course.sect)
-
-		let professors = React.createElement('span',
-			{className: 'professors'},
-			humanize.oxford(course.profs))
-
-		let summary = React.createElement('p',
-			{className: 'summary'},
-			identifier, professors)
-
-		return React.createElement('div', {className: 'info-rows'}, title, summary)
-	}
-})
-
 let Course = React.createClass({
+	propTypes: {
+		schedule: React.PropTypes.object.isRequired,
+		conflicts: React.PropTypes.array,
+		index: React.PropTypes.number,
+		info: React.PropTypes.object.isRequired,
+	},
+
 	mixins: [DragDropMixin],
 
 	configureDragDrop(registerType) {
@@ -250,30 +122,6 @@ let Course = React.createClass({
 			courseInfo, warnings
 		)
 	},
-})
-
-let EmptyCourseSlot = React.createClass({
-	render() {
-		let title = 'Empty Slot'
-
-		let titleEl = React.createElement('h1', {className: 'title'}, title)
-		let details = React.createElement('p', {className: 'summary'}, 'no details')
-
-		return React.createElement('article', {className: 'course empty'},
-			React.createElement('div', {className: 'info-rows'}, titleEl, details))
-	}
-})
-
-let MissingCourse = React.createClass({
-	render() {
-		let title = `Missing Course`
-
-		let titleEl = React.createElement('h1', {className: 'title'}, title)
-		let details = React.createElement('p', {className: 'summary'}, 'no details')
-
-		return React.createElement('article', {className: 'course missing'},
-			React.createElement('div', {className: 'info-rows'}, titleEl, details))
-	}
 })
 
 export default Course
