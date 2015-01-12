@@ -99,7 +99,10 @@ let lookup = {
 	areas: 'info',
 }
 
-let logAdded = (item) => {if (logDataLoading) console.log(`added ${item.meta.path} (${item.count} ${item.type})`)}
+let logAdded = (item) => {
+	if (logDataLoading)
+		console.log(`added ${item.meta.path} (${item.count} ${item.type})`)
+}
 
 function updateDatabase(itemType, infoFromServer) {
 	let oldHash = localStorage.getItem(infoFromServer.path)

@@ -19,7 +19,7 @@ let StudentList = React.createClass({
 					className: 'student-list--student',
 					to: 'add-student',
 				},
-				"Add Student")))
+				'Add Student')))
 
 		return React.createElement('ul', {className: 'student-list'}, students.toJS())
 	},
