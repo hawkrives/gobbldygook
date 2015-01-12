@@ -53,7 +53,6 @@
     "exorcist": "^0.1.6",
     "gulp": "^3.8.10",
     "gulp-cached": "^1.0.1",
-    "gulp-changed": "^1.1.0",
     "gulp-if": "^1.2.5",
     "gulp-jscs": "^1.4.0",
     "gulp-jshint": "^1.9.0",
