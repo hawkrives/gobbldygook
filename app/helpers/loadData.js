@@ -99,6 +99,8 @@ let lookup = {
 	areas: 'info',
 }
 
+let logAdded = (item) => {if (logDataLoading) console.log(`added ${item.meta.path} (${item.count} ${item.type})`)}
+
 function updateDatabase(itemType, infoFromServer) {
 	let oldHash = localStorage.getItem(infoFromServer.path)
 	let newHash = infoFromServer.hash
@@ -126,13 +128,8 @@ function updateDatabase(itemType, infoFromServer) {
 		.then(cleanPriorData)
 		.then(storeItem)
 		.then(cacheItemHash)
-		.then((item) => {
-			if (logDataLoading)
-				console.log('added ' + item.meta.path + ' (' + item.count + ' ' + item.type + ')')
-		})
-		.catch((err) => {
-			return Promise.reject(err.stack)
-		})
+		.then(logAdded)
+		.catch((err) => Promise.reject(err))
 }
 
 function loadDataFiles(infoFile) {
