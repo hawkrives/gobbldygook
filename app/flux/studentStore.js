@@ -75,25 +75,57 @@ let studentStore = Reflux.createStore({
 	_loadInitialData() {
 		console.log('studentStore._loadInitialData')
 
-		let rawStudent = null
-		let studentId = localStorage.getItem('activeStudentId')
+		// studentIds is a list of IDs we know about.
+		let studentIds =
+			// Get the list of students we know about, or the string 'null'
+			// if localStorage doesn't have the key 'studentIds'.
+			JSON.parse(localStorage.getItem('studentIds') || 'null')
+			// Alternately, fetch the old key 'activeStudentId'
+			|| [localStorage.getItem('activeStudentId')]
+			// If both those fail, grab the really old 'student-v3.0a6'
+			|| ['student-v3.0a6']
 
-		let localStudent = localStorage.getItem(studentId) || localStorage.getItem('student-v3.0a6')
+		// Fetch and load the students from their IDs
+		let localStudents = studentIds.map(id => {
+			// Get the student
+			let rawStudent = localStorage.getItem(id)
 
-		try {
-			rawStudent = JSON.parse(localStudent)
-		}
-		catch (e) {
-			console.info('using demo student')
-			rawStudent = demoStudent
-			rawStudent.active = true
-			rawStudent.id = null
-		}
+			// basicStudent defaults to an empty object so that the constructor
+			// has something to build from.
+			let basicStudent = {}
+			try {
+				basicStudent = JSON.parse(rawStudent)
+			}
+			catch (e) {
+				console.error('error parsing', basicStudent, e)
+			}
 
-		let student = new Student(rawStudent)
-		window.studentData = student
+			if (basicStudent.id === 'student-v3.0a6')
+				delete basicStudent.id
 
-		this.students = this.students.set(student.id, student)
+			// Make the student...
+			let fleshedStudent = new Student(basicStudent)
+
+			// and save them, of course
+			fleshedStudent.save()
+
+			return fleshedStudent
+		})
+
+		// Update the studentIds list from the current list of students
+		localStorage.setItem('studentIds', JSON.stringify(localStudents.map(s => s.id)))
+
+		// Add them to students
+		this.students = this.students.withMutations(students => {
+			localStudents.forEach(localStudent => {
+				students = students.set(localStudent.id, localStudent)
+			})
+			return students
+		})
+
+		// Clean up localStorage
+		cleanLocalStorage()
+
 		this._postChange()
 	},
 
