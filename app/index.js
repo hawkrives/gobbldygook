@@ -6,20 +6,18 @@ Promise.longStackTraces()
 
 import Router from 'react-router'
 
-import React from 'react'
-React.initializeTouchEvents(true)
-
-import _ from 'lodash'
-
 import './helpers/db'
-
+import './helpers/bindKeys'
 
 // Just for use in the browser console, I swear.
+import _ from 'lodash'
 window.lodash = _
 
 // Stick React where I (and the Chrome devtools)
 // [ok, mostly for the devtools] can see it.
+import React from 'react'
 window.React = React
+React.initializeTouchEvents(true)
 
 // Handy debugging function
 window.log = (...args) => console.log(...args)
@@ -38,7 +36,6 @@ let DefaultRoute = React.createFactory(Router.DefaultRoute)
 
 // /
 // /s/122932
-// /s/122932?sections=d-ba,m-csci
 // /s/122932?search
 // /s/122932/semester/2014/fall?search=dept:NOT+dept:AMCON+dept:GCON+gened:HBS
 
