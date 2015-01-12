@@ -140,7 +140,6 @@ function loadDataFiles(infoFile) {
 		.filter((file) => parseInt(file.year, 10) >= new Date().getFullYear() - 4)
 		// Load them into the database
 		.map((file) => updateDatabase(infoFile.type, file))
-		.flatten()
 		.value()
 
 	return Promise.all(files)
