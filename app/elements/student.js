@@ -7,16 +7,28 @@ let Student = React.createClass({
 	mixins: [State],
 
 	getInitialState: function() {
-		return { student: null }
+		let queryId = this.getParams().id
+		return {
+			student: null,
+			message: `Loading Student ${queryId}`,
+			messageClass: '',
+		}
 	},
 
 	componentWillReceiveProps: function(nextProps) {
 		let queryId = this.getParams().id
 		let student = nextProps.students.get(queryId)
-		console.info('student\'s student: ', student.toJS())
 
-		window.stu = student
-		this.setState({student})
+		if (student) {
+			console.info('student\'s student: ', student.toJS())
+
+			window.stu = student
+			this.setState({student})
+		}
+		else {
+			this.setState({message: `Could not find student "${queryId}"`, messageClass: 'error'})
+			console.info('student is undefined at Student')
+		}
 	},
 
 	componentWillMount() {
@@ -31,11 +43,13 @@ let Student = React.createClass({
 		console.info('student render', this.props.students.toJS())
 
 		if (!this.state.student)
-			return React.createElement('img', {
-				className: 'loading',
-				src: 'images/loading.svg',
-				alt: 'Gobbldygook is Loading',
-			})
+			return React.createElement('figure', {className: 'loading'},
+				React.createElement('img', {
+					className: 'loading-spinner',
+					src: 'images/loading.svg',
+					alt: 'Gobbldygook is Loading',
+				}),
+				React.createElement('figcaption', {className: 'loading-message ' + this.state.messageClass}, this.state.message))
 
 		return React.createElement('div',
 			{className: 'student'},
