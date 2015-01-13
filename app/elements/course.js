@@ -14,14 +14,6 @@ import EmptyCourseSlot from './emptyCourseSlot'
 
 let cx = React.addons.classSet
 
-function findSemesterList() {
-	return [
-		{id: 1, title: 'Fall 2012-13'},
-		{id: 2, title: 'Interim 2012-13'},
-		{id: 3, title: 'Spring 2012-13'},
-	]
-}
-
 let Course = React.createClass({
 	propTypes: {
 		schedule: React.PropTypes.object.isRequired,

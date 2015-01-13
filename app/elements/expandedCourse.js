@@ -6,6 +6,14 @@ import CourseTitle from '../components/courseTitle'
 import studentActions from '../flux/studentActions'
 import semesterName from 'sto-helpers/lib/semesterName'
 
+function findSemesterList() {
+	return [
+		{id: 1, title: 'Fall 2012-13'},
+		{id: 2, title: 'Interim 2012-13'},
+		{id: 3, title: 'Spring 2012-13'},
+	]
+}
+
 let ExpandedCourse = React.createClass({
 	propTypes: {
 		info: React.PropTypes.object,
