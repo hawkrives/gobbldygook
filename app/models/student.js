@@ -62,6 +62,8 @@ class Student extends StudentRecord {
 					student = student.addFabrication(fabrication)
 				})
 
+				student = student.set('version', currentVersionString)
+
 				console.log('it took', performance.now() - startTime, 'ms to make a student')
 
 				return student
