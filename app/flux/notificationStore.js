@@ -42,9 +42,11 @@ let notificationStore = Reflux.createStore({
 		this._postChange()
 	},
 
-	startProgress(id, message, value, max) {
+	startProgress(id, message='', progress={}, hideButton=false) {
 		console.log('startProgress')
-		let notification = {id, message, value, max, type: 'progress'}
+		let value = progress.value || 0
+		let max = progress.max || 1
+		let notification = {id, message, value, max, type: 'progress', hideButton}
 		this.notifications = this.notifications.set(id, notification)
 		this._postChange()
 	},
