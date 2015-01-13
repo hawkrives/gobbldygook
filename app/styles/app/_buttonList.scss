@@ -13,6 +13,10 @@
 
 .button-list {
 	font-size: 0.85em;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: stretch;
+	align-items: stretch;
 
 	button, input[type='submit'] {
 		@include alt-button;
