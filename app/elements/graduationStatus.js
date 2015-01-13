@@ -7,11 +7,6 @@ import Immutable from 'immutable'
 import AreaOfStudy from './areaOfStudy'
 import StudentSummary from './studentSummary'
 
-import RevertToDemoButton from '../components/revertToDemoButton'
-import DownloadStudentButton from '../components/downloadStudentButton'
-import UndoButton from '../components/undoButton'
-import RedoButton from '../components/redoButton'
-
 import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
 let GraduationStatus = React.createClass({
@@ -76,15 +71,8 @@ let GraduationStatus = React.createClass({
 					areaElements)
 			}).toJS()
 
-		let studentButtons = React.createElement('menu', {className: 'button-list student-buttons'},
-			React.createElement('button', {className: 'back'}, React.createElement(Link, {to: '/'}, 'Back')),
-			React.createElement(RevertToDemoButton, {studentId: this.props.student.id}),
-			React.createElement(DownloadStudentButton, {student: this.props.student}),
-			React.createElement(UndoButton, null),
-			React.createElement(RedoButton, null))
-
 		return React.createElement('section', {className: 'graduation-status'},
-			studentButtons, summary, sections)
+			summary, sections)
 	},
 })
 
