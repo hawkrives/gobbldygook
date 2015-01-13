@@ -12,10 +12,14 @@
 }
 
 .button-list {
+	font-size: 0.85em;
+
 	button, input[type='submit'] {
 		@include alt-button;
 	}
 	button + button {
 		margin-left: 0.2em;
 	}
+
+	margin-bottom: 1em;
 }
