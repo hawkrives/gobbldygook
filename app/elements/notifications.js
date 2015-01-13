@@ -40,7 +40,7 @@ let Notification = React.createClass({
 			React.createElement('div',
 				{className: 'notification-content'},
 				message, progressBar),
-			closeButton)
+			this.props.hideButton ? null : closeButton)
 	}
 })
 
