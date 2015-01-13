@@ -1,8 +1,8 @@
 import React from 'react'
 import Reflux from 'reflux'
 import Immutable from 'immutable'
-import errorStore from '../flux/errorStore'
-import errorActions from '../flux/errorActions'
+import notificationStore from '../flux/notificationStore'
+import notificationActions from '../flux/notificationActions'
 
 let CloseNotificationButton = React.createClass({
 	render() {
@@ -11,32 +11,32 @@ let CloseNotificationButton = React.createClass({
 })
 
 let Notifications = React.createClass({
-	mixins: [Reflux.listenTo(errorStore, 'onError', 'onError')],
+	mixins: [Reflux.listenTo(notificationStore, 'onNotification', 'onNotification')],
 
-	onError(errors) {
-		// console.log('onError', errors.toJS())
-		this.setState({errors})
+	onNotification(notifications) {
+		// console.log('onNotification', notifications.toJS())
+		this.setState({notifications})
 	},
 
 	getInitialState() {
 		return {
-			errors: Immutable.List(),
+			notifications: Immutable.List(),
 		}
 	},
 
 	render() {
-		// console.log('errors', this.state.errors.toJS())
+		// console.log('notifications', this.state.notifications.toJS())
 
-		let errorElements = this.state.errors
+		let notificationElements = this.state.notifications
 			.toList()
 			.map((err, idx) =>
 				React.createElement('li',
-					{key: idx, className: 'notification-capsule', onClick: () => errorActions.removeError(err)},
+					{key: idx, className: 'notification-capsule', onClick: () => notificationActions.removenotification(err)},
 					err.message,
 					React.createElement(CloseNotificationButton)))
 			.toArray()
 
-		return React.createElement('ul', {className: 'notification-list'}, errorElements)
+		return React.createElement('ul', {className: 'notification-list'}, notificationElements)
 	},
 })
 

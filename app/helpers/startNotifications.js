@@ -1,5 +1,5 @@
-import errorActions from '../flux/errorActions'
-window.addEventListener('error', errorActions.logError)
+import notificationActions from '../flux/notificationActions'
+window.addEventListener('error', notificationActions.logError)
 
 import React from 'react'
 import Notifications from '../elements/notifications'
