@@ -21,10 +21,19 @@ let notificationStore = Reflux.createStore({
 		this.trigger(this.notifications)
 	},
 
-	removeNotification(id) {
-		console.log('removeNotification')
-		this.notifications = this.notifications.delete(id)
-		this._postChange()
+	removeNotification(id, delay=0) {
+		if (delay) {
+			setTimeout(() => {
+				console.log('removeNotification')
+				this.notifications = this.notifications.delete(id)
+				this._postChange()
+			}, delay)
+		}
+		else {
+			console.log('removeNotification')
+			this.notifications = this.notifications.delete(id)
+			this._postChange()
+		}
 	},
 
 	logError(error) {
