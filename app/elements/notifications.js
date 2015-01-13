@@ -6,7 +6,41 @@ import notificationActions from '../flux/notificationActions'
 
 let CloseNotificationButton = React.createClass({
 	render() {
-		return React.createElement('button', {className: 'close-notification'}, 'Close')
+		return React.createElement('button', {className: 'close-notification', title: 'Close'})
+	}
+})
+
+let Notification = React.createClass({
+	propTypes: {
+		id: React.PropTypes.any.isRequired,
+		message: React.PropTypes.string.isRequired,
+		value: React.PropTypes.number,
+		max: React.PropTypes.number,
+	},
+	remove() {
+		notificationActions.removeNotification(this.props.id)
+	},
+	render() {
+		let message = React.createElement('h1',
+			{className: 'notification-message'},
+			this.props.message)
+		let closeButton = React.createElement(CloseNotificationButton)
+
+		let progressBar = null
+		if (this.props.type === 'progress')
+			progressBar = React.createElement('progress',
+				{value: this.props.value, max: this.props.max})
+
+		return React.createElement('li',
+			{
+				key: this.props.key || this.props.id,
+				className: `notification-capsule  notification-type--${this.props.type}`,
+				onClick: this.remove,
+			},
+			React.createElement('div',
+				{className: 'notification-content'},
+				message, progressBar),
+			closeButton)
 	}
 })
 
@@ -26,14 +60,8 @@ let Notifications = React.createClass({
 
 	render() {
 		// console.log('notifications', this.state.notifications.toJS())
-
 		let notificationElements = this.state.notifications
-			.toList()
-			.map((err, idx) =>
-				React.createElement('li',
-					{key: idx, className: 'notification-capsule', onClick: () => notificationActions.removenotification(err)},
-					err.message,
-					React.createElement(CloseNotificationButton)))
+			.map((n) => React.createElement(Notification, Object.assign(n, {key: n.id})))
 			.toArray()
 
 		return React.createElement('ul', {className: 'notification-list'}, notificationElements)
