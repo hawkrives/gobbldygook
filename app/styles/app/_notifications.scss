@@ -86,11 +86,12 @@
 		flex: 1;
 		height: 10px;
 		overflow: hidden;
-		border: solid 1px $gray;
-		@include progress-bar($color: $green);
+		border: solid 1px $silver;
+		@include progress-bar($color: $silver);
 		border-radius: 3px;
 	}
 	output {
+		color: $silver;
 		margin-left: 0.5em;
 	}
 }
