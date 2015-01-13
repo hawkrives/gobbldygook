@@ -81,6 +81,7 @@
 		margin-top: 0.25em;
 		width: 100%;
 		height: 10px;
+		overflow: hidden;
 		border: solid 1px $gray;
 		@include progress-bar($color: $green);
 		border-radius: 3px;
