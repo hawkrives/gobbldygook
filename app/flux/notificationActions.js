@@ -1,8 +1,11 @@
 import Reflux from 'reflux'
 
 let notificationActions = Reflux.createActions([
+	'removeNotification',
 	'logError',
-	'removeError',
+	'logMessage',
+	'startProgress',
+	'updateProgress',
 ])
 
 window.notificationa = notificationActions
