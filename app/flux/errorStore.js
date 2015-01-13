@@ -7,17 +7,28 @@ let errorStore = Reflux.createStore({
 	listenables: errorActions,
 
 	init() {
-		this.errors = Immutable.Stack()
+		this.errors = Immutable.Set()
 	},
 
 	getInitialState() {
 		return this.errors
 	},
 
-	logError(error, opts) {
-		let {msg, style} = opts || {msg: '', style: ''}
-		console.debug(error)
+	_postChange() {
+		this.trigger(this.errors)
 	},
+
+	logError(error) {
+		console.log('logError')
+		this.errors = this.errors.add(error)
+		this._postChange()
+	},
+
+	removeError(error) {
+		console.log('removeError')
+		this.errors = this.errors.delete(error)
+		this._postChange()
+	}
 })
 
 window.errors = errorStore
