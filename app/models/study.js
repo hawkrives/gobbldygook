@@ -15,7 +15,7 @@ class Study extends StudyRecord {
 		let {id, index} = args
 
 		let {type, departmentAbbr, title, check} = getArea(id, yearOfGraduation)
-		console.log('made a Study', id, title)
+		// console.log('made a Study', id, title)
 
 		super({
 			id,
