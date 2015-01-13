@@ -106,7 +106,7 @@ let logAdded = (item) => {
 }
 
 let startProgressNotification = _.curry((notificationId, itemType, count) => {
-	notificationActions.startProgress(notificationId, `Loading ${itemType}`, {max: count - 1}, true)
+	notificationActions.startProgress(notificationId, `Loading ${itemType}`, {max: count}, true)
 })
 
 let updateProgressNotification = _.curry((notificationId, item) => {
