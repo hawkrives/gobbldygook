@@ -77,14 +77,21 @@
 }
 
 .notification-type--progress {
+	.progress-container {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+	}
 	progress {
-		margin-top: 0.25em;
-		width: 100%;
+		flex: 1;
 		height: 10px;
 		overflow: hidden;
 		border: solid 1px $gray;
 		@include progress-bar($color: $green);
 		border-radius: 3px;
+	}
+	output {
+		margin-left: 0.5em;
 	}
 }
 

@@ -27,9 +27,12 @@ let Notification = React.createClass({
 		let closeButton = React.createElement(CloseNotificationButton)
 
 		let progressBar = null
-		if (this.props.type === 'progress')
-			progressBar = React.createElement('progress',
-				{value: this.props.value, max: this.props.max})
+		if (this.props.type === 'progress') {
+			progressBar = React.createElement('div', {className: 'progress-container'},
+				React.createElement('progress',
+					{value: this.props.value, max: this.props.max}),
+				React.createElement('output', null, `${Math.round(100*(this.props.value/this.props.max))}%`))
+		}
 
 		return React.createElement('li',
 			{
