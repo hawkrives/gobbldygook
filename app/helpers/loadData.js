@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import Promise from 'bluebird'
 
+import notificationActions from '../flux/notificationActions'
 import {status, json} from './fetch'
 import db from './db'
 
@@ -104,7 +105,19 @@ let logAdded = (item) => {
 		console.log(`added ${item.meta.path} (${item.count} ${item.type})`)
 }
 
-function updateDatabase(itemType, infoFromServer) {
+let startProgressNotification = _.curry((notificationId, itemType, count) => {
+	notificationActions.startProgress(notificationId, `Loading ${itemType}`, {max: count - 1}, true)
+})
+
+let updateProgressNotification = _.curry((notificationId, item) => {
+	notificationActions.incrementProgress(notificationId)
+})
+
+let completeProgressNotification = _.curry((notificationId, x) => {
+	notificationActions.removeNotification(notificationId, 1500)
+})
+
+function updateDatabase(itemType, infoFromServer, notificationId, count) {
 	let oldHash = localStorage.getItem(infoFromServer.path)
 	let newHash = infoFromServer.hash
 
@@ -114,6 +127,8 @@ function updateDatabase(itemType, infoFromServer) {
 		if (logDataLoading)  console.log('skipped ' + itemUrl)
 		return Promise.resolve(false)
 	}
+
+	startProgressNotification(notificationId, itemType, count)
 
 	if (logDataLoading)  console.log('need to add ' + itemUrl)
 
@@ -132,20 +147,23 @@ function updateDatabase(itemType, infoFromServer) {
 		.then(storeItem)
 		.then(cacheItemHash)
 		.then(logAdded)
+		.then(updateProgressNotification(notificationId))
 		.catch((err) => Promise.reject(err))
 }
 
 function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
-	let files = _(infoFile.files)
-		// Only get the last four years of data
-		.filter((file) => parseInt(file.year, 10) >= new Date().getFullYear() - 4)
-		// Load them into the database
-		.map((file) => updateDatabase(infoFile.type, file))
-		.value()
+	// Only get the last four years of data
+	let lastFourYears = _.filter(infoFile.files,
+		(file) => parseInt(file.year, 10) >= new Date().getFullYear() - 4)
 
-	return Promise.all(files)
+	let notificationId = infoFile.type
+
+	// Load them into the database
+	let filePromises = _.map(lastFourYears, (file) => updateDatabase(infoFile.type, file, notificationId, _.size(lastFourYears)))
+
+	return Promise.all(filePromises).then(completeProgressNotification(notificationId))
 }
 
 function loadInfoFile(url) {
