@@ -5,7 +5,7 @@ let notificationActions = Reflux.createActions([
 	'logError',
 	'logMessage',
 	'startProgress',
-	'updateProgress',
+	'incrementProgress',
 ])
 
 window.notificationa = notificationActions

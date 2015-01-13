@@ -60,9 +60,11 @@ let notificationStore = Reflux.createStore({
 		this._postChange()
 	},
 
-	updateProgress(id, message, value, max) {
-		console.log('updateProgress')
-		this.notifications = this.notifications.mergeIn([id], {id, message, value, max})
+	incrementProgress(id, by) {
+		let progress = this.notifications.get(id)
+		progress.value += by || 1
+
+		this.notifications = this.notifications.set(id, progress)
 		this._postChange()
 	},
 })
