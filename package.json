@@ -9,7 +9,6 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "benchmark": "matcha",
     "build": "gulp build",
     "check": "npm outdated --depth 0",
     "clean": "rm -rf dist/ && rm -f node_modules/app",
@@ -20,7 +19,7 @@
     "serve": "gulp watch",
     "test": "mocha",
     "watch": "gulp watch",
-    "travis": "npm run build && npm run lint && npm test"
+    "travis": "npm run build && npm run lint && npm run test"
   },
   "dependencies": {
     "bluebird": "^2.6.4",
