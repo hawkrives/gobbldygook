@@ -36,10 +36,10 @@
     "react-dnd": "^0.6.2",
     "react-router": "^0.11.6",
     "reflux": "^0.2.3",
-    "sto-areas": "^2.3.1",
-    "sto-courses": "^3.0.2",
-    "sto-helpers": "^2.2.2",
-    "sto-sis-time-parser": "^1.0.7",
+    "sto-areas": "^2.3.5",
+    "sto-courses": "^3.0.3",
+    "sto-helpers": "^2.3.0",
+    "sto-sis-time-parser": "^1.0.8",
     "treo": "^0.3.0"
   },
   "devDependencies": {
