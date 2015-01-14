@@ -5,6 +5,7 @@ import notificationActions from '../flux/notificationActions'
 import {status, json} from './fetch'
 import db from './db'
 
+import buildCourseId from './buildCourseId'
 import buildDept from 'sto-helpers/lib/buildDept'
 import buildDeptNum from 'sto-helpers/lib/buildDeptNum'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
@@ -16,6 +17,7 @@ function prepareCourse(course) {
 	course.dept = course.dept || buildDept(course)
 	course.deptnum = course.deptnum || buildDeptNum(course)
 	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
+	course.id = course.id || buildCourseId(course)
 	return course
 }
 
