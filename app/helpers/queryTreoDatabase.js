@@ -47,7 +47,6 @@ function query(db) {
 	}
 }
 
-
 export default function plugin() {
 	return query
 }
