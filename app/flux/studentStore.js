@@ -96,7 +96,7 @@ let studentStore = Reflux.createStore({
 		// Fetch and load the students from their IDs
 		let localStudents = studentIds
 			// pull the students from localStorage
-			.map(id => { return localStorage.getItem(id) })
+			.map(id => localStorage.getItem(id))
 			// filter out any that don't exist
 			.filter(rawStudent => rawStudent !== null)
 			// and process them
