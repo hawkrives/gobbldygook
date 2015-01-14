@@ -40,7 +40,7 @@ let noResult = (id) => {
 function checkStudentAgainstArea(student, area) {
 	let {id, title, type, check, abbr} = area
 
-	if (type === 'not-found')
+	if (type === 'not-found' || check === undefined)
 		return noResult(id)
 
 	return check(student.data())
