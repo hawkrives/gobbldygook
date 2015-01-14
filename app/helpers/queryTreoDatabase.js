@@ -2,7 +2,7 @@
 // let db = treo('databaseName', schema)
 //   .use(queryTreoDatabase)
 
-import {any, isString, first, last} from 'lodash'
+import {any, isString, first, last, filter} from 'lodash'
 import deepEql from 'deep-eql'
 import checkAgainstQuery from 'sto-helpers/lib/checkCourseAgainstQuery'
 
@@ -38,26 +38,40 @@ function query(db) {
 		let current = 0
 		// Grab a key from the query to use as an index.
 		// TODO: Write a function to sort keys by preference.
-		let index = Object.keys(query)[0]
-		// console.log(Object.keys(query), query[index])
-
-		// `keys` is the list of permissible values for that range from the query
-		let keys = query[index]
+		let indexKeys = Object.keys(query)
+		let index = undefined
+		let iterator = iterateIndex
+		let keys = undefined
 		let range = undefined
-		if (keys.length) {
-			// If we have any keys, sort them according to the IDB spec
-			keys = keys.sort(treo.cmp)
 
-			let firstKey = first(keys)
-			let lastKey = last(keys)
-			range = treo.range({
-				gte: firstKey,
-				// If it's a string, append `uffff` because that's the highest
-				// value in Unicode, which lets us make sure and iterate over all
-				// values that we need.
-				// hacks.mozilla.org/2014/06/breaking-the-borders-of-indexeddb
-				lte: isString(lastKey) ? lastKey + 'uffff' : lastKey,
-			})
+		// Filter down to just the requested keys that also have indices
+		let keysWithIndices = filter(indexKeys, (key) => this.index(key))
+
+		// If the current store doesn't have an index for any of the
+		// requested keys, iterate over the entire store.
+		if (keysWithIndices.length === 0) {
+			iterator = iterateEntireStore
+		}
+		else {
+			index = first(keysWithIndices)
+
+			// `keys` is the list of permissible values for that range from the query
+			keys = query[index]
+			if (keys.length) {
+				// If we have any keys, sort them according to the IDB spec
+				keys = keys.sort(treo.cmp)
+
+				let firstKey = first(keys)
+				let lastKey = last(keys)
+				range = treo.range({
+					gte: firstKey,
+					// If it's a string, append `uffff` because that's the highest
+					// value in Unicode, which lets us make sure and iterate over all
+					// values that we need.
+					// hacks.mozilla.org/2014/06/breaking-the-borders-of-indexeddb
+					lte: isString(lastKey) ? lastKey + 'uffff' : lastKey,
+				})
+			}
 		}
 
 		function canAdd(query, currentValue) {
@@ -70,7 +84,15 @@ function query(db) {
 				!any(results, val => deepEql(val, currentValue))
 		}
 
-		function iterator(cursor) {
+		function iterateEntireStore(cursor) {
+			let value = cursor.value
+			if (canAdd(query, value)) {
+				results.push(value)
+			}
+			cursor.continue()
+		}
+
+		function iterateIndex(cursor) {
 			// console.log('cursor', cursor)
 			// console.log('key', keys[current], 'idx', current)
 
