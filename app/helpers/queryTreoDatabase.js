@@ -31,17 +31,22 @@ function query(db) {
 		// Return the results.
 
 		let results = []
-		// Prevent wrong logic from not having a query.
+		// Prevent invalid logic from not having a query.
 		if (!query)
 			return results
 
+		// The index of our current key
 		let current = 0
 		// Grab a key from the query to use as an index.
 		// TODO: Write a function to sort keys by preference.
 		let indexKeys = Object.keys(query)
+		// The index to limit ourselves to, if any
 		let index = undefined
+		// Which iterator to use (iterateIndex, unless there aren't any indices)
 		let iterator = iterateIndex
+		// The keys to look for
 		let keys = undefined
+		// A range to limit ourselves to (only applicable in an index)
 		let range = undefined
 
 		// Filter down to just the requested keys that also have indices
