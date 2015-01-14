@@ -8,7 +8,7 @@ import checkAgainstQuery from 'sto-helpers/lib/checkCourseAgainstQuery'
 
 function query(db) {
 	let treo = db.constructor
-	let {Index, Store} = treo
+	let {Store} = treo
 
 	/**
 	 * Examples:
@@ -22,7 +22,6 @@ function query(db) {
 	 * @param {Object} query
 	 * @param {Function} cb - cb(err, results)
 	 */
-	Index.prototype.query =
 	Store.prototype.query = function(query, cb) {
 		// Take a query object.
 		// Grab a key out of it to operate on an index.
