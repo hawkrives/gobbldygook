@@ -7,15 +7,15 @@ let StudyRecord = Immutable.Record({
 	abbr: '',
 	title: '',
 	index: 0,
+	revisionYear: null,
 	check: () => undefined,
 })
 
 class Study extends StudyRecord {
-	constructor(args, yearOfGraduation) {
-		let {id, index} = args
+	constructor(args) {
+		let {id, index, revisionYear} = args
 
-		let {type, departmentAbbr, title, check} = getArea(id, yearOfGraduation)
-		// console.log('made a Study', id, title)
+		let {type, departmentAbbr, title, check} = getArea(id, revisionYear)
 
 		super({
 			id,
@@ -23,6 +23,7 @@ class Study extends StudyRecord {
 			title,
 			index,
 			check,
+			revisionYear,
 			abbr: departmentAbbr,
 		})
 	}

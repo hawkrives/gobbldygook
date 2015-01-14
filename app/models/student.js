@@ -152,7 +152,7 @@ class Student extends StudentRecord {
 	}
 
 	addArea(areaOfStudy) {
-		let study = new Study(areaOfStudy, this.graduation)
+		let study = new Study(areaOfStudy)
 		return this.setIn(['studies', study.id], study)
 	}
 
