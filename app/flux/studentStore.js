@@ -140,6 +140,13 @@ let studentStore = Reflux.createStore({
 		this._postChange()
 	},
 
+	initStudent() {
+		let fleshedStudent = new Student({})
+		fleshedStudent.save()
+		localStorage.setItem('studentIds', JSON.stringify(JSON.parse(localStorage.getItem('studentIds')).concat([fleshedStudent.id])))
+		this._postChange()
+	},
+
 	_change(studentId, method, ...args) {
 		this._preChange()
 		this.students = this.students.set(studentId, this.students.get(studentId)[method](...args))
