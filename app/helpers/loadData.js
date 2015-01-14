@@ -17,7 +17,6 @@ function prepareCourse(course) {
 	course.dept = course.dept || buildDept(course)
 	course.deptnum = course.deptnum || buildDeptNum(course)
 	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
-	course.id = course.id || buildCourseId(course)
 	return course
 }
 
