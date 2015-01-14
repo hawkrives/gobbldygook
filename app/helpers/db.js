@@ -1,6 +1,4 @@
-import Promise from 'bluebird'
 import treo from 'treo'
-import treoPromise from 'treo/plugins/treo-promise'
 
 let schema = treo.schema()
 	.version(1)
@@ -22,7 +20,11 @@ let schema = treo.schema()
 		.addStore('students', { key: 'id' })
 			.addIndex('active', 'active', {multi: false, unique: true})
 
+
+import treoPromise from 'treo/plugins/treo-promise'
+import queryTreoDatabase from './queryTreoDatabase'
 let db = treo('gobbldygook', schema)
+	.use(queryTreoDatabase())
 	.use(treoPromise())
 
 window.eraseDatabase = () => {
