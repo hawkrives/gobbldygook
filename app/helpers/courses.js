@@ -18,7 +18,9 @@ import queryCourses from 'sto-helpers/lib/queryCourses'
  */
 function getCourse(clbid) {
 	// console.log('called getCourse', clbid)
-	return db.store('courses')
+	return db
+		.store('courses')
+		.index('clbid')
 		.get(clbid)
 		.catch((err) => new Error(`course retrieval failed for ${clbid}`, err))
 }
