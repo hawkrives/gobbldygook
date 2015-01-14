@@ -22,28 +22,73 @@ function query(db) {
 	 */
 	Index.prototype.query =
 	Store.prototype.query = function(query, cb) {
-		// Given a query object, if it includes a deptnum, grab that, because we can
-		// skip to that spot.
+		// Take a query object.
+		// If it includes a deptnum, grab that, because we can
+		//   skip to that spot.
+		// Otherwise, iterate over the entire database.
+
 		let result = []
+		let currentIndex = 0
+		let keys = query.deptnum || query.keys || []
+		let range = undefined
+		if (keys.length) {
+			keys = keys.map(key => key.replace(' ', '_'))
+			keys = keys.sort(treo.cmp)
+			range = treo.range({gte: keys[0], lte: keys[keys.length-1] + 'uffff'})
+		}
 
 		function iterator(cursor) {
-			if (!cursor)  {
+			// console.log(cursor)
+			// console.log(keys[currentIndex], currentIndex)
+
+			if (!keys.length) {
+				let value = cursor.value
+				if (checkAgainstQuery(query, value)) {
+					result.push(value)
+				}
+				cursor.continue()
+			}
+
+			else if (currentIndex > keys.length)  {
+				// console.log('done')
 				return done()
 			}
 
-			let value = cursor.value
-			if (checkAgainstQuery(query, value)) {
-				result.push(value)
+			else if (typeof cursor.key !== 'string') {
+				cursor.continue()
 			}
 
-			cursor.continue() // go to next key
+			else if (cursor.key > keys[currentIndex] && !cursor.key.startsWith(keys[currentIndex])) {
+				// console.log('greater')
+				let value = cursor.value
+				let isMatch = checkAgainstQuery(query, value)
+				if (isMatch) {
+					result.push(value)
+				}
+				currentIndex += 1
+				cursor.continue(isMatch ? undefined : keys[currentIndex])
+			}
+
+			else if (cursor.key.startsWith(keys[currentIndex])) {
+				// console.log('startsWith')
+				let value = cursor.value
+				if (checkAgainstQuery(query, value)) {
+					result.push(value)
+				}
+				cursor.continue()
+			}
+
+			else {
+				// console.log('other')
+				cursor.continue(keys[currentIndex])
+			}
 		}
 
 		function done(err) {
 			err ? cb(err) : cb(null, result)
 		}
 
-		this.cursor({ iterator }, done)
+		this.cursor({ iterator, range }, done)
 	}
 }
 
