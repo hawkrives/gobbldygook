@@ -80,7 +80,7 @@ let studentStore = Reflux.createStore({
 			this._loadData()
 	},
 
-	_loadData() {
+	_loadData(studentId) {
 		console.log('studentStore._loadData')
 
 		// studentIds is a list of IDs we know about.
@@ -92,6 +92,10 @@ let studentStore = Reflux.createStore({
 			[localStorage.getItem('activeStudentId')] ||
 			// If both those fail, grab the really old 'student-v3.0a6'
 			['student-v3.0a6']
+
+		if (studentId) {
+			studentIds.push(studentId)
+		}
 
 		// Fetch and load the students from their IDs
 		let localStudents = studentIds
@@ -143,8 +147,7 @@ let studentStore = Reflux.createStore({
 	initStudent() {
 		let fleshedStudent = new Student({})
 		fleshedStudent.save()
-		localStorage.setItem('studentIds', JSON.stringify(JSON.parse(localStorage.getItem('studentIds')).concat([fleshedStudent.id])))
-		this._postChange()
+		this._loadData(fleshedStudent.id)
 	},
 
 	_change(studentId, method, ...args) {
