@@ -5,13 +5,13 @@
 	"active": true,
 
 	"studies": [
-		{"id": "d-ba", "year": 2014},
-		{"id": "m-csci", "year": 2014},
-		{"id": "m-asian", "year": 2014},
-		{"id": "m-phys", "year": 2014},
-		{"id": "c-japan", "year": 2014},
-		{"id": "m-math", "year": 2014},
-		{"id": "c-stat", "year": 2014},
+		{"id": "d-ba", "revisionYear": 2014},
+		{"id": "m-csci", "revisionYear": 2014},
+		{"id": "m-asian", "revisionYear": 2011},
+		{"id": "m-phys", "revisionYear": 2011},
+		{"id": "m-math", "revisionYear": 2011},
+		{"id": "c-japan", "revisionYear": 2014},
+		{"id": "c-stat", "revisionYear": 2014},
 	],
 
 	"schedules": [
