@@ -45,6 +45,7 @@ class Student extends StudentRecord {
 		if (encodedStudent) {
 			return this.withMutations((student) => {
 				student = student.set('id', encodedStudent.id || uuid())
+				student = student.set('name', encodedStudent.name || 'Student ' + randomChar())
 
 				forEach((encodedStudent.studies || []), study => {
 					student = student.addArea(study)
