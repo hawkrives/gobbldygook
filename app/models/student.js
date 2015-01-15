@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 import Immutable from 'immutable'
-import _ from 'lodash'
+import {flatten, forEach, contains} from 'lodash'
 import {v4 as uuid} from 'node-uuid'
 
 import {version as currentVersionString} from '../../package.json'
@@ -35,9 +35,9 @@ class Student extends StudentRecord {
 		let startTime = performance.now()
 		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
 		// instead of our custom Studies, Schedules, and such.
-		let toRemove = Immutable.Set(['studies', 'schedules', 'overrides', 'fabrications'])
+		let toRemove = ['studies', 'schedules', 'overrides', 'fabrications']
 		let immutableStudent = Immutable.fromJS(encodedStudent) || Immutable.Map()
-		let filtered = immutableStudent.filterNot((val, key) => toRemove.has(key))
+		let filtered = immutableStudent.filterNot((val, key) => contains(toRemove, key))
 
 		super(filtered)
 
@@ -46,19 +46,19 @@ class Student extends StudentRecord {
 			return this.withMutations((student) => {
 				student = student.set('id', encodedStudent.id || uuid())
 
-				_(encodedStudent.studies || []).forEach(study => {
+				forEach((encodedStudent.studies || []), study => {
 					student = student.addArea(study)
 				})
 
-				_(encodedStudent.schedules || []).forEach(schedule => {
+				forEach((encodedStudent.schedules || []), schedule => {
 					student = student.addSchedule(schedule)
 				})
 
-				_(encodedStudent.overrides || []).forEach(override => {
+				forEach((encodedStudent.overrides || []), override => {
 					student = student.addOverride(override)
 				})
 
-				_(encodedStudent.fabrications || []).forEach(fabrication => {
+				forEach((encodedStudent.fabrications || []), fabrication => {
 					student = student.addFabrication(fabrication)
 				})
 
@@ -192,7 +192,7 @@ class Student extends StudentRecord {
 	get courses() {
 		let allCourses = this.activeSchedules.map((schedule) => schedule.courses).toArray()
 		let scheduleCoursePromises = Promise.all(allCourses)
-		return scheduleCoursePromises.then((results) => _.flatten(results))
+		return scheduleCoursePromises.then((results) => flatten(results))
 	}
 
 	get creditCount() {
