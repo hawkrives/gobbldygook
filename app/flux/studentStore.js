@@ -1,3 +1,4 @@
+import {chain, forEach, map} from 'lodash'
 import Reflux from 'reflux'
 import Immutable from 'immutable'
 
@@ -98,7 +99,7 @@ let studentStore = Reflux.createStore({
 		}
 
 		// Fetch and load the students from their IDs
-		let localStudents = studentIds
+		let localStudents = chain(studentIds)
 			// pull the students from localStorage
 			.map(id => localStorage.getItem(id))
 			// filter out any that don't exist
@@ -126,13 +127,14 @@ let studentStore = Reflux.createStore({
 
 				return fleshedStudent
 			})
+			.value()
 
 		// Update the studentIds list from the current list of students
-		localStorage.setItem('studentIds', JSON.stringify(localStudents.map(s => s.id)))
+		localStorage.setItem('studentIds', JSON.stringify(map(localStudents, s => s.id)))
 
 		// Add them to students
 		this.students = this.students.withMutations(students => {
-			localStudents.forEach(localStudent => {
+			forEach(localStudents, localStudent => {
 				students = students.set(localStudent.id, localStudent)
 			})
 			return students
