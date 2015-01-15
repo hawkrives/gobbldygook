@@ -121,9 +121,8 @@ function query(db) {
 				// to the current cursor.key, IDB throws an error.
 				// Therefore, if the current key equals the current key, we
 				// just go forward by one.
-				let nextKey = keys[current] === cursor.key
-					? undefined
-					: keys[current]
+				let nextKey = keys[current] === cursor.key ?
+					undefined : keys[current]
 				cursor.continue(nextKey)
 			}
 
@@ -152,7 +151,7 @@ function query(db) {
 			err ? cb(err) : cb(null, results)
 		}
 
-		this.cursor({ iterator, range, index }, done)
+		this.cursor({iterator, range, index}, done)
 	}
 }
 
