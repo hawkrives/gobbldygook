@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
+import studentActions from '../flux/studentActions'
 
 let StudentList = React.createClass({
 	shouldComponentUpdate(nextProps, nextState) {
@@ -13,11 +14,18 @@ let StudentList = React.createClass({
 					{className: 'student-list--student', to: 'student', params: {id: student.id}},
 					student.name))).toList()
 
+		// students = students.push(React.createElement('li', {key: 'new-student'},
+		// 	React.createElement(Link,
+		// 		{
+		// 			className: 'student-list--student',
+		// 			to: 'add-student',
+		// 		},
+		// 		'Add Student')))
 		students = students.push(React.createElement('li', {key: 'new-student'},
-			React.createElement(Link,
+			React.createElement('button',
 				{
 					className: 'student-list--student',
-					to: 'add-student',
+					onClick: studentActions.initStudent,
 				},
 				'Add Student')))
 
