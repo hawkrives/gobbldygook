@@ -16,7 +16,7 @@ let cx = React.addons.classSet
 
 let Course = React.createClass({
 	propTypes: {
-		schedule: React.PropTypes.object.isRequired,
+		schedule: React.PropTypes.object,
 		conflicts: React.PropTypes.array,
 		index: React.PropTypes.number,
 		info: React.PropTypes.object.isRequired,
