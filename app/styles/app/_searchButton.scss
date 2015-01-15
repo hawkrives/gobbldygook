@@ -21,8 +21,6 @@
 
 	z-index: $z-floating-button;
 
-	-webkit-appearance: none;
-	-moz-appearance: none;
 	appearance: none;
 
 	padding: 0;
@@ -36,7 +34,7 @@
 .search-sidebar {
 	@include block;
 
-	max-height: 100vh;
+	flex: 1;
 
 	background: white;
 	border-radius: .25em;
@@ -69,7 +67,7 @@
 	}
 
 	.course-list {
-		flex: 1;
+		height: auto;
 		overflow-y: scroll;
 	}
 }
