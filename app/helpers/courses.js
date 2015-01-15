@@ -4,8 +4,7 @@ import Immutable from 'immutable'
 
 import db from './db'
 
-import checkCoursesFor from 'sto-helpers/lib/checkCoursesFor'
-import queryCourses from 'sto-helpers/lib/queryCourses'
+import buildQueryFromString from 'sto-helpers/lib/buildQueryFromString'
 
 
 /**
@@ -45,18 +44,24 @@ function getCourses(clbids) {
 }
 
 
+function queryCourseDatabase(queryString) {
+	let queryObject = buildQueryFromString(queryString)
+	let start = performance.now()
+	return db
+		.store('courses')
+		.query(queryObject)
+		.catch(err => new Error('course query failed on', queryString, err))
+}
+
+
 export {
 	getCourse,
 	getCourses,
-	queryCourses,
-
-	checkCoursesFor
+	queryCourseDatabase
 }
 
 window.courseStuff = {
 	getCourse,
 	getCourses,
-	queryCourses,
-
-	checkCoursesFor,
+	queryCourseDatabase,
 }
