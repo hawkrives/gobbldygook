@@ -42,7 +42,7 @@ let SearchButton = React.createClass({
 			console.log('results', results)
 
 			let searchResults = _(results)
-				.sortBy(c => `${c.deptnum}${c.sect||''}`) // Sort the results
+				.sortBy(c => `${c.deptnum}${c.sect || ''}`) // Sort the results
 				.groupBy('term') // Group them by term
 				.pairs() // Turn the object into an array of pairs
 				// Sort the result arrays by the first element, the term,

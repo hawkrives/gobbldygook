@@ -21,7 +21,7 @@ function query(db) {
 	 *   byAuthor.query({dept: ['$AND', 'AMCON', 'GCON']}).then()
 	 *
 	 * @param {Object} query
-	 * @param {Function} cb - cb(err, results)
+	 * @returns {Promise}
 	 */
 	Store.prototype.query = function(query) {
 		return new Promise((resolve, reject) => {
