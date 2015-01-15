@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import toPrettyTerm from 'sto-helpers/lib/toPrettyTerm'
-import queryCourses from 'sto-helpers/lib/queryCourses'
+import {queryCourseDatabase} from '../helpers/courses'
 
 import Course from './course'
 
@@ -38,39 +38,41 @@ let SearchButton = React.createClass({
 
 	query(searchQuery) {
 		let startQueryTime = performance.now()
-		let results = _(queryCourses(searchQuery))
-			.sortBy(c => c.deptnum + (c.sect || '')) // Sort the results
-			.groupBy('term') // Group them by term
-			.pairs() // Turn the object into an array of pairs
-			// Sort the result arrays by the first element, the term,
-			// because Firefox seems to not guarantee object key sort.
-			.sortBy(group => group[0])
-			.reverse() // reverse it, so the most recent is at the top
-			.flatten() // then flatten so that it's all one flat list
-			.value()
+		queryCourseDatabase(searchQuery).then(results => {
+			console.log('results', results)
 
-		console.log('search results', results)
-		let endQueryTime = performance.now()
-		console.info('query took ' + (endQueryTime - startQueryTime) + 'ms.')
+			let searchResults = _(results)
+				.sortBy(c => `${c.deptnum}${c.sect||''}`) // Sort the results
+				.groupBy('term') // Group them by term
+				.pairs() // Turn the object into an array of pairs
+				// Sort the result arrays by the first element, the term,
+				// because object keys don't have an implicit sort.
+				.sortBy(group => group[0])
+				.reverse() // reverse it, so the most recent is at the top
+				.flatten() // then flatten so that it's all one flat list
+				.value()
 
-		let startTime = performance.now()
-		let courseObjects = _.map(results, (courseOrTerm) => {
-			if (!(_.isObject(courseOrTerm))) {
-				let prettyTerm = toPrettyTerm(courseOrTerm)
+			console.log('search results', searchResults)
+			let endQueryTime = performance.now()
+			console.info('query took ' + (endQueryTime - startQueryTime) + 'ms.')
+
+			let startTime = performance.now()
+			let courseObjects = _.map(searchResults, (courseOrTerm) => {
+				if (!(_.isObject(courseOrTerm))) {
+					let prettyTerm = toPrettyTerm(courseOrTerm)
+					return React.createElement('li',
+						{key: prettyTerm, className: 'course-group'},
+						prettyTerm)
+				}
 				return React.createElement('li',
-					{key: prettyTerm, className: 'course-group'},
-					prettyTerm)
-			}
-			return React.createElement('li',
-				{key: courseOrTerm.clbid},
-				React.createElement(Course, {info: courseOrTerm}))
-		})
+					{key: courseOrTerm.clbid},
+					React.createElement(Course, {info: courseOrTerm}))
+			})
 
-		let endTime = performance.now()
-		console.info('react element creation took an additional ' + (endTime - startTime) + 'ms.')
+			let endTime = performance.now()
+			console.info('react element creation took an additional ' + (endTime - startTime) + 'ms.')
 
-		this.setState({
-			courseObjects: courseObjects,
+			this.setState({courseObjects})
 		})
 	},
 
