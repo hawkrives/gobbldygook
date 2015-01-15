@@ -1,3 +1,4 @@
+import {contains} from 'lodash'
 import Immutable from 'immutable'
 import getArea from 'sto-areas'
 
@@ -31,6 +32,15 @@ class Study extends StudyRecord {
 
 	reorder(newIndex) {
 		this.set('index', newIndex)
+	}
+
+	toJSON() {
+		let toKeep = ['id', 'index', 'revisionYear']
+		let filtered = this
+			.toMap()
+			.filter((val, key) =>
+				contains(toKeep, key))
+		return JSON.stringify(filtered.toJS())
 	}
 }
 

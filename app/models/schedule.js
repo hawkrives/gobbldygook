@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import {isUndefined} from 'lodash'
+import {isUndefined, contains} from 'lodash'
 import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
 
@@ -119,6 +119,15 @@ class Schedule extends ScheduleRecord {
 					conflicts: conflicts,
 				}
 			})
+	}
+
+	toJSON() {
+		let toRemove = ['_courseData']
+		let filtered = this
+			.toMap()
+			.filterNot((val, key) =>
+				contains(toRemove, key))
+		return JSON.stringify(filtered.toJS())
 	}
 }
 
