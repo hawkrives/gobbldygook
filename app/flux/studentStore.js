@@ -6,6 +6,7 @@ import Student from '../models/student'
 import demoStudent from '../models/demoStudent.json'
 
 import studentActions from './studentActions'
+import notificationActions from './notificationActions'
 
 let cleanLocalStorage = () => {
 	localStorage.removeItem('activeStudentId')
@@ -122,7 +123,7 @@ let studentStore = Reflux.createStore({
 					basicStudent = JSON.parse(rawStudent)
 				}
 				catch (e) {
-					console.error('error parsing', basicStudent, e)
+					notificationActions.logError('error parsing student', basicStudent)
 				}
 
 				if (basicStudent.id === 'student-v3.0a6')
