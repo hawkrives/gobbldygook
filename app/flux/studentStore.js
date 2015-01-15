@@ -101,11 +101,20 @@ let studentStore = Reflux.createStore({
 		// Fetch and load the students from their IDs
 		let localStudents = chain(studentIds)
 			// pull the students from localStorage
-			.map(id => localStorage.getItem(id))
+			.map(id => [id, localStorage.getItem(id)])
+			// Remove any broken students from localStorage
+			.map(idAndStudent => {
+				let [id, rawStudent] = idAndStudent
+				if (rawStudent === '[object Object]')
+					localStorage.removeItem(id)
+				return rawStudent
+			})
 			// filter out any that don't exist
-			.filter(rawStudent => rawStudent !== null)
-			// and process them
-			.map(rawStudent => {
+			.reject(rawStudent => rawStudent === null)
+			// and any that are bad
+			.reject(rawStudent => rawStudent === '[object Object]')
+			// then process them
+			.map((rawStudent, idx) => {
 				// basicStudent defaults to an empty object so that the constructor
 				// has something to build from.
 				let basicStudent = {}
