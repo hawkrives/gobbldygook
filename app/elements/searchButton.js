@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import stickyfill from '../helpers/initStickyfill'
 
 import toPrettyTerm from 'sto-helpers/lib/toPrettyTerm'
 import {queryCourseDatabase} from '../helpers/courses'
@@ -13,6 +14,13 @@ let SearchButton = React.createClass({
 			courseObjects: null,
 			query: '',
 		}
+	},
+
+	componentDidMount() {
+		stickyfill.add(this.getDOMNode())
+	},
+	componentWillUnmount() {
+		stickyfill.remove(this.getDOMNode())
 	},
 
 	toggleSidebar() {

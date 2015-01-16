@@ -4,3 +4,6 @@ window.lodash = _
 
 // Handy debugging function
 window.log = (...args) => console.log(...args)
+
+import stickyfill from  './initStickyfill'
+stickyfill.init()
