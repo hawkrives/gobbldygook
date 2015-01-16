@@ -19,6 +19,7 @@ function tableToJson(table) {
 		}
 		data.push(rowData);
 	}
+	console.log(data)
 	return data;
 }
 
@@ -84,29 +85,53 @@ function cleanUpPage(html) {
 
 	// Get all tables.
 	var tonsOfTables = main.querySelectorAll('table');
+
 	// Remove the breadcrumb bar
 	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0]);
-	// Refresh the lsit of tables
-	tonsOfTables = main.querySelectorAll('table');
-	// Remove the "Degree Audit(s)" header
-	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0]);
+
 	// Refresh the list of tables
 	tonsOfTables = main.querySelectorAll('table');
+
+	// Remove the "Degree Audit(s)" header
+	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0]);
+
+	// Refresh the list of tables
+	tonsOfTables = main.querySelectorAll('table');
+
 	// Remove the "B.{A,M}." header
 	let degreeType = tonsOfTables[0].textContent.trim().split(' ')[0]
 	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0]);
 
 	// Now to remove the parent tables
-	var tables = Array.prototype.slice.call(main.querySelectorAll('table'));
+	//var tables = Array.prototype.slice.call(main.querySelectorAll('table'));
 
+	/*
 	// Remove the first parent table
 	tables.splice(0, 1)
+
 	// Remove the General Graduation Requirements parent table
 	tables.splice(2, 1)
+
 	// Remove the info table and count of s/u courses
 	tables.splice(3, 2)
+	*/
+	var tables2 = removeGPA(tonsOfTables);
+
+	console.log("tons of tables")
+	console.log(tables2)
 
 	return [tables, degreeType]
+}
+
+function removeGPA(arr){
+    var out = 0;
+    for (var i = 0; i < arr.length; i++) {
+        if (! (arr[i] % 2)) {
+            arr[out++] = arr[i];
+        }
+    }
+    arr.length = out;
+    return arr;
 }
 
 function nameTheTables(tables) {
@@ -294,7 +319,6 @@ function createSchedules(courses) {
 			let attemptToFindCourse = queryCourses({name: course.name, term: course.term, deptnum: course.deptnum})
 			if (attemptToFindCourse) {
 				clbids.push(attemptToFindCourse.clbid)
-				delete
 			}
 		})
 		return sched
@@ -319,7 +343,6 @@ function makeStudent(tables, degreeType) {
 function parseSIS(html) {
 	let [rawTables, degreeType] = cleanUpPage(html)
 	var tables = nameTheTables(rawTables)
-	console.log(tables)
 
 	var cleanedTables = {
 		courses: processCoursesTable(tables.courses),

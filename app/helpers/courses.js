@@ -46,6 +46,7 @@ function getCourses(clbids) {
 
 function queryCourseDatabase(queryString) {
 	let queryObject = buildQueryFromString(queryString)
+	// console.log('query obj', queryObject)
 	let start = performance.now()
 	return db
 		.store('courses')

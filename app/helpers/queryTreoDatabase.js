@@ -24,6 +24,7 @@ function query(db) {
 	 * @returns {Promise}
 	 */
 	Store.prototype.query = function(query) {
+		//console.log('got query', query)
 		return new Promise((resolve, reject) => {
 			// Take a query object.
 			// Grab a key out of it to operate on an index.
@@ -53,6 +54,7 @@ function query(db) {
 
 			// Filter down to just the requested keys that also have indices
 			let keysWithIndices = filter(indexKeys, (key) => this.index(key))
+			// console.log('keysWithIndices', keysWithIndices)
 
 			// If the current store doesn't have an index for any of the
 			// requested keys, iterate over the entire store.
@@ -92,6 +94,7 @@ function query(db) {
 			}
 
 			function iterateEntireStore(cursor) {
+				// console.log('cursor', cursor)
 				let value = cursor.value
 				if (canAdd(query, value)) {
 					results.push(value)
