@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link, State} from 'react-router'
 import _ from 'lodash'
+import stickyfill from '../helpers/initStickyfill'
 
 import toPrettyTerm from 'sto-helpers/lib/toPrettyTerm'
 import {queryCourseDatabase} from '../helpers/courses'
@@ -30,6 +31,15 @@ let SearchButton = React.createClass({
 		}
 	},
 
+	toggleSidebar() {
+		this.setState({open: !this.state.open})
+	},
+	openSidebar() {
+		this.setState({open: true})
+	},
+	closeSidebar() {
+		this.setState({open: false})
+	},
 	onSubmit: function() {
 		this.query(this.state.query)
 	},
