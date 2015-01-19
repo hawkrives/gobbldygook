@@ -2,11 +2,7 @@ $border-color: rgb(203, 203, 203);
 .requirement-set {
 	header {
 		margin: 0;
-		padding-top: 2px;
-		padding-left: 1em;
-		padding-right: 1em;
-		padding-top: 4px;
-		padding-bottom: 4px;
+		padding: 4px 1em;
 
 		background-color: rgb(245, 245, 245);
 
@@ -25,9 +21,6 @@ $border-color: rgb(203, 203, 203);
 	overflow: hidden;
 	border-radius: 3px;
 	margin: 0 0.35em 0.35em;
-	// margin-left: 0.35em;
-	// margin-right: 0.35em;
-	// margin-bottom: 0.35em;
 }
 
 .requirement-set .requirement-set {
@@ -59,16 +52,6 @@ $border-color: rgb(203, 203, 203);
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-
-	// &.incomplete {
-	// 	background-color: $red;
-	// 	color: white;
-	// }
-	// &.completed {
-	// 	background-color: darken($green, 10%);
-	// 	color: white;
-	// }
-	// border-radius: 3px;
 
 	&::before {
 		margin-right: 0.5em;
@@ -120,12 +103,7 @@ $border-color: rgb(203, 203, 203);
 	justify-content: space-around;
 
 	.match, .requirement {
-		// overflow: hidden;
-		// text-overflow: ellipsis;
-
 		padding: 2px 2px;
-		// flex: 1 0 35%;
-		// flex-basis: 35%;
 		min-width: 35%;
 		text-align: center;
 	}
