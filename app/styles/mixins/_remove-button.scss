@@ -2,8 +2,6 @@
 @import '../icons';
 
 @mixin remove-button {
-	@include button;
-
 	opacity: 0.5;
 	transition: 0.15s;
 

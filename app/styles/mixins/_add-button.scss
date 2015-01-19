@@ -2,8 +2,6 @@
 @import '../icons';
 
 @mixin add-button {
-	@include button;
-
 	&::after {
 		@include ionicon($ionicon-ios7-plus-empty);
 		@content;
