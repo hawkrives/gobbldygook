@@ -22,5 +22,7 @@
 	// Gets rid of tap active state
 	-webkit-tap-highlight-color: transparent;
 
-	@include link-undecorated;
+	a {
+		@include link-undecorated;
+	}
 }
