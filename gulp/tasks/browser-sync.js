@@ -2,6 +2,6 @@ import browserSync from 'browser-sync'
 import gulp from 'gulp'
 import {browserSync as config} from '../config'
 
-gulp.task('browserSync', () => {
+gulp.task('browser-sync', () => {
 	browserSync(config)
 })

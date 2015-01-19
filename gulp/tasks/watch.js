@@ -6,7 +6,7 @@
 import gulp from 'gulp'
 import config from '../config'
 
-gulp.task('watch', ['prepare-build', 'sass', 'watchify'], () => {
+gulp.task('watch', ['copy', 'sass', 'watchify'], () => {
 	gulp.run('browserSync')
 	gulp.watch(config.lint, ['lint'])
 	gulp.watch(config.sass.src, ['sass'])

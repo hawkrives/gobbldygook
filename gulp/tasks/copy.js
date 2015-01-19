@@ -6,7 +6,7 @@ import {copy as config} from '../config'
 
 gulp.task('copy', () => {
 	let copyFile = (paths) => {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			let [sourcePath, destPath, title] = paths
 
 			return gulp.src(sourcePath)
