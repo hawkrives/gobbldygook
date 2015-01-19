@@ -22,6 +22,7 @@
 	}
 
 	&[disabled] {
+		cursor: default;
 		$accent: if($dark == true, 'dark', 'light');
 		background-color: color('disabled', 'background--#{$accent}');
 		color: color('disabled', 'foreground--#{$accent}');
