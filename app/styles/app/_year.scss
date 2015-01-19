@@ -61,3 +61,16 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 		opacity: 1;
 	}
 }
+
+@media all and (max-width: $year-collapse-width) {
+	.year-title h1 {
+		transform: none;
+		white-space: auto;
+		width: auto;
+		margin-bottom: 0.25em;
+		text-align: center;
+	}
+	.year {
+		flex-flow: column nowrap;
+	}
+}
