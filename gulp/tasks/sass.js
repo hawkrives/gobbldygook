@@ -12,7 +12,7 @@ import csswring from 'csswring'
 
 let processors = [
     autoprefixer(),
-    csswring,
+    // csswring,
 ]
 
 gulp.task('sass', () =>
