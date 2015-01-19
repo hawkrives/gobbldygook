@@ -5,14 +5,11 @@
 	top: $page-edge-padding;
 
 	flex: 1;
-
-	background: white;
-	border-radius: .25em;
-
 	padding: 0.5rem;
 
 	display: flex;
 	flex-flow: column nowrap;
+	overflow-y: scroll;
 
 	.search-box {
 		width: 100%;
@@ -21,10 +18,8 @@
 		margin-bottom: 0.5rem;
 	}
 
-	.course-list, .course-list li > ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
+	.course-list {
+		@include list-unstyled;
 	}
 
 	.course-group {
@@ -34,11 +29,6 @@
 
 		margin-top: 1rem;
 		margin-bottom: 0.5rem;
-	}
-
-	.course-list {
-		height: auto;
-		overflow-y: scroll;
 	}
 }
 
