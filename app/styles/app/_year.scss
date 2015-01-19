@@ -3,7 +3,8 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 
 .add-year {
 	@include add-button;
-	@include block;
+	@include button--raised;
+	display: block;
 
 	width: calc(100% - #{$year-title-width});
 	font-size: 1.25em;
@@ -12,6 +13,7 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 
 .remove-year {
 	@include remove-button;
+	@include button--flat;
 
 	position: absolute;
 	left: 0;

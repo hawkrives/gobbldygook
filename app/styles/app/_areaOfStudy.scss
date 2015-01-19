@@ -1,5 +1,9 @@
+@import '../mixins/card';
+@import '../mixins/progress-bar';
+@import '../icons';
+
 .area-of-study {
-	@include block-small;
+	@include card;
 
 	overflow: hidden;
 
@@ -23,7 +27,7 @@
 	}
 
 	progress {
-		@include progress-bar($color: lighten($orange, 10%));
+		@include progress-bar($color: color('orange', '500'));
 
 		position: absolute;
 		top: 0;
@@ -33,17 +37,17 @@
 
 		border: 0;
 
-		&.hundred { @include progress-bar($color: $green); }
-		&.ninety  { @include progress-bar($color: $yellow); }
-		&.eighty  { @include progress-bar($color: $yellow); }
-		&.seventy { @include progress-bar($color: $yellow); }
-		&.sixty   { @include progress-bar($color: $yellow); }
-		&.fifty   { @include progress-bar($color: $orange); }
-		&.forty   { @include progress-bar($color: $orange); }
-		&.thirty  { @include progress-bar($color: $orange); }
-		&.twenty  { @include progress-bar($color: $red); }
-		&.ten     { @include progress-bar($color: $red); }
-		&.zero    { @include progress-bar($color: $red); }
+		&.hundred { @include progress-bar($color: color('green', '500')); }
+		&.ninety  { @include progress-bar($color: color('yellow', '500')); }
+		&.eighty  { @include progress-bar($color: color('yellow', '500')); }
+		&.seventy { @include progress-bar($color: color('yellow', '500')); }
+		&.sixty   { @include progress-bar($color: color('yellow', '500')); }
+		&.fifty   { @include progress-bar($color: color('orange', '500')); }
+		&.forty   { @include progress-bar($color: color('orange', '500')); }
+		&.thirty  { @include progress-bar($color: color('orange', '500')); }
+		&.twenty  { @include progress-bar($color: color('red', '500')); }
+		&.ten     { @include progress-bar($color: color('red', '500')); }
+		&.zero    { @include progress-bar($color: color('red', '500')); }
 	}
 
 	& > .summary::after {

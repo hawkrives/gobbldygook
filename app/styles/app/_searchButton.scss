@@ -32,7 +32,7 @@
 }
 
 .search-sidebar {
-	@include block;
+	@include card;
 
 	position: sticky;
 	top: $page-edge-padding;
@@ -76,7 +76,7 @@
 }
 
 .close-sidebar {
-	@include button;
+	@include button--flat;
 
 	color: $gray;
 	transition: 0.15s;

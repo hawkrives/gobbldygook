@@ -13,9 +13,9 @@
 .loading-message {
 	font-weight: 300;
 	margin-top: 1em;
-	color: $gray;
+	color: color('gray');
 
-	&.info    { color: $green; }
-	&.warning { color: $orange; }
-	&.error   { color: $red; }
+	&.info    { color: color('green'); }
+	&.warning { color: color('orange'); }
+	&.error   { color: color('red'); }
 }

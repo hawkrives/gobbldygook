@@ -15,7 +15,7 @@
 }
 
 .student-list--student {
-	@include alt-button;
+	@include button--raised;
 	@include link-undecorated;
 	display: inline-block;
 

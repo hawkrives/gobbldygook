@@ -5,7 +5,7 @@
 }
 
 .semester {
-	@include block;
+	@include card;
 	flex: 1 0 15em;
 	margin: 2px;
 
@@ -13,10 +13,10 @@
 }
 
 .semester.can-drop {
-	box-shadow: 0 0 0 1px rgba($gray, 0.5);
+	@include material-shadow(2);
 }
 .semester.is-over {
-	box-shadow: 0 0 0 2px $green;
+	@include material-shadow(3);
 }
 
 .semester-title {
@@ -59,17 +59,17 @@
 .semester-course-count {}
 
 .semester.invalid .semester-title {
-	color: $orange;
+	color: color('orange');
 }
 
 .semester.invalid .info-bar i {
-	color: $orange;
+	color: color('orange');
 	opacity: 0.9;
 }
 
 .add-semester {
 	@include add-button;
-	@include block;
+	@include button--raised;
 
 	flex-basis: 32px;
 	font-size: 1.25em;
@@ -80,6 +80,8 @@
 
 .remove-semester {
 	@include remove-button;
+	@include button--flat;
+
 	margin: 0;
 	padding: 0 2px 0 0;
 

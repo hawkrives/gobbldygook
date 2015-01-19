@@ -84,11 +84,11 @@ $border-color: rgb(203, 203, 203);
 
 	&.incomplete::before {
 		@include ionicon($ionicon-close);
-		color: $red;
+		color: color('red');
 	}
 	&.completed::before {
 		@include ionicon($ionicon-checkmark);
-		color: darken($green, 10%);
+		color: color('green');
 	}
 }
 

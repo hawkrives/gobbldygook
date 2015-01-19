@@ -1,15 +1,28 @@
+@import 'link-undecorated';
+
 @mixin button {
-	background: transparent;
-	border: none;
 	cursor: pointer;
-	color: $text-color;
 
-	&[disabled] {
-		cursor: not-allowed;
-		color: rgba($text-color, 0.5);
+	display: inline-block;
+	min-height: 3ex;
+	// min-width: 10em;
 
-		&:hover::after {
-			color: rgba($text-color, 0.75);
-		}
-	}
+	margin: 1ex 0;
+	padding: 0 2em;
+	border: 0;
+
+	transition: all .2s ease-out;
+	border-radius: 2px;
+	line-height: auto;
+
+	text-align: center;
+	text-transform: uppercase;
+
+	border: none;
+	outline: 0;
+
+	// Gets rid of tap active state
+	-webkit-tap-highlight-color: transparent;
+
+	@include link-undecorated;
 }

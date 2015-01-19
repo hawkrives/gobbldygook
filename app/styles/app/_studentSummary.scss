@@ -1,5 +1,5 @@
 #student-summary {
-	@include block-small;
+	@include card;
 	padding: $block-edge-padding $block-edge-padding*2 $block-edge-padding*2;
 
 	hyphens: auto;

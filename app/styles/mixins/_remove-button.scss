@@ -1,3 +1,6 @@
+@import 'button';
+@import '../icons';
+
 @mixin remove-button {
 	@include button;
 

@@ -1,10 +1,12 @@
 @import "mixins/add-button";
 @import "mixins/avatar-letter";
-@import "mixins/block";
-@import "mixins/block-base";
-@import "mixins/block-flat";
-@import "mixins/block-small";
+@import "mixins/brightness";
 @import "mixins/button";
+@import "mixins/button--raised";
+@import "mixins/button--flat";
+@import "mixins/card";
+@import "mixins/colors";
+@import "mixins/contrasting-color";
 @import "mixins/heading-neutral";
 @import "mixins/link-undecorated";
 @import "mixins/list-inline";

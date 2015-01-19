@@ -1,0 +1,14 @@
+@mixin card {
+	@include material-shadow(1);
+	background-color: $white;
+	border-radius: 2px;
+}
+
+@mixin card-content {
+	padding: 1em;
+}
+
+@mixin card-actions {
+	border-top: 1px solid rgba(160, 160, 160, 0.2);
+	padding: 1em;
+}

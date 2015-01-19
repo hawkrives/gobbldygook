@@ -1,20 +1,24 @@
 @mixin avatar-letter($size) {
 	@include no-select;
 
-	position: relative;
-	top: 1px;
-	display: inline-block;
 	font-family: Fira Sans, Helvetica Neue, Helvetica, Arial, sans-serif !important;
-	font-style: normal;
 	font-weight: 200;
+	font-style: normal;
+
 	text-align: center;
 	text-transform: uppercase;
+
+	position: relative;
+	top: 1px;
+
+	display: inline-block;
+
 	margin: 0;
 	padding: 0;
-
 	width: $size;
 	height: $size;
 	line-height: $size;
 	font-size: $size/3 * 2;
+
 	border-radius: $size;
 }

@@ -1,3 +1,5 @@
+@import '../mixins/material-shadow';
+
 .course {
 	margin-bottom: 0.35em;
 
@@ -105,6 +107,7 @@
 }
 
 .course.expanded {
+	@include material-shadow(1);
 	background-color: hsl(0, 0%, 98%);
 	border-radius: 5px;
 	padding: 0.15em 0.25em;
