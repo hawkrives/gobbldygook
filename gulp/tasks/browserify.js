@@ -8,15 +8,13 @@
    See browserify.bundleConfigs in gulp/config.js
 */
 
-import _ from 'lodash'
+import {extend} from 'lodash'
 import browserify from 'browserify'
 import browserSync from 'browser-sync'
 import bundleLogger from '../util/bundleLogger'
 import exorcist from 'exorcist'
 import gulp from 'gulp'
-import gulpif from 'gulp-if'
 import handleErrors from '../util/handleErrors'
-import mold from 'mold-source-map'
 import source from 'vinyl-source-stream'
 import to5ify from '6to5ify'
 import watchify from 'watchify'
@@ -28,28 +26,21 @@ function browserifyTask(callback, devMode) {
 	let browserifyThis = (bundleConfig) => {
 		if (devMode) {
 			// Add watchify args and debug (sourcemaps) option
-			_.extend(bundleConfig, watchify.args, { debug: true })
-			// A watchify require/external bug that prevents proper recompiling,
-			// so (for now) we'll ignore these options during development
-			bundleConfig = _.omit(bundleConfig, ['external', 'require'])
+			extend(bundleConfig, watchify.args, { debug: true })
 		}
 
-		let b = browserify(bundleConfig)
+		let bundler = browserify(bundleConfig)
 
-		b.transform(to5ify.configure({
-			blacklist: ['generators'],
-		}))
+		bundler.transform(to5ify)
 
 		let bundle = () => {
 			// Log when bundling starts
 			bundleLogger.start(bundleConfig.outputName)
 
-			return b
+			return bundler
 				.bundle()
 				// Report compile errors
 				.on('error', handleErrors)
-				// Make the sourcemap relative
-				.pipe(gulpif(devMode === true, mold.transformSourcesRelativeTo('.')))
 				// Use exorcist to remove the map file
 				.pipe(exorcist(bundleConfig.mapFile))
 				// Use vinyl-source-stream to make the stream gulp compatible.
@@ -63,25 +54,13 @@ function browserifyTask(callback, devMode) {
 
 		if (devMode) {
 			// Wrap with watchify and rebundle on changes
-			b = watchify(b)
+			bundler = watchify(bundler)
 			// Rebundle on update
-			b.on('update', bundle)
+			bundler.on('update', bundle)
 			bundleLogger.watch(bundleConfig.outputName)
 		}
-		else {
-			// Sort out shared dependencies.
-			// b.require exposes modules externally
-			if (bundleConfig.require) {
-				b.require(bundleConfig.require)
-			}
-			// b.external excludes modules from the bundle, and expects
-			// they'll be available externally
-			if (bundleConfig.external) {
-				b.external(bundleConfig.external)
-			}
-		}
 
-		let reportFinished = function() {
+		let reportFinished = () => {
 			// Log when bundling completes
 			bundleLogger.end(bundleConfig.outputName)
 
