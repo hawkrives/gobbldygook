@@ -28,7 +28,7 @@
 	}
 
 	progress {
-		@include progress-bar($color: color('orange', '500'));
+		@include progress-bar($color: color('orange'));
 
 		position: absolute;
 		top: 0;
@@ -39,13 +39,13 @@
 		border: 0;
 
 		&.hundred { @include progress-bar($color: color('green', '500')); }
-		&.ninety  { @include progress-bar($color: color('yellow', '500')); }
-		&.eighty  { @include progress-bar($color: color('yellow', '500')); }
-		&.seventy { @include progress-bar($color: color('yellow', '500')); }
-		&.sixty   { @include progress-bar($color: color('yellow', '500')); }
-		&.fifty   { @include progress-bar($color: color('orange', '500')); }
-		&.forty   { @include progress-bar($color: color('orange', '500')); }
-		&.thirty  { @include progress-bar($color: color('orange', '500')); }
+		&.ninety  { @include progress-bar($color: color('orange', '500')); }
+		&.eighty  { @include progress-bar($color: color('orange', '500')); }
+		&.seventy { @include progress-bar($color: color('orange', '500')); }
+		&.sixty   { @include progress-bar($color: color('amber', '500')); }
+		&.fifty   { @include progress-bar($color: color('amber', '500')); }
+		&.forty   { @include progress-bar($color: color('amber', '500')); }
+		&.thirty  { @include progress-bar($color: color('amber', '500')); }
 		&.twenty  { @include progress-bar($color: color('red', '500')); }
 		&.ten     { @include progress-bar($color: color('red', '500')); }
 		&.zero    { @include progress-bar($color: color('red', '500')); }
