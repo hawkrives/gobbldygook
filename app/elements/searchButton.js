@@ -1,6 +1,6 @@
 import React from 'react'
+import {Link, State} from 'react-router'
 import _ from 'lodash'
-import stickyfill from '../helpers/initStickyfill'
 
 import toPrettyTerm from 'sto-helpers/lib/toPrettyTerm'
 import {queryCourseDatabase} from '../helpers/courses'
@@ -8,36 +8,28 @@ import {queryCourseDatabase} from '../helpers/courses'
 import Course from './course'
 
 let SearchButton = React.createClass({
+	mixins: [State],
+
+	propTypes: {
+		student: React.PropTypes.object.isRequired,
+		toggle: React.PropTypes.func.isRequired,
+	},
+
 	getInitialState() {
 		return {
-			open: false,
 			courseObjects: null,
 			query: '',
 		}
 	},
 
-	componentDidMount() {
-		stickyfill.add(this.getDOMNode())
-	},
-	componentWillUnmount() {
-		stickyfill.remove(this.getDOMNode())
-	},
-
-	toggleSidebar() {
-		this.setState({open: !this.state.open})
-	},
-	openSidebar() {
-		this.setState({open: true})
-	},
-	closeSidebar() {
-		this.setState({open: false})
-	},
 	onSubmit: function() {
 		this.query(this.state.query)
 	},
+
 	onChange: function(evt) {
 		this.setState({query: evt.target.value})
 	},
+
 	onKeyDown: function(evt) {
 		if (evt.keyCode == 13) {
 			return this.onSubmit()
@@ -85,10 +77,12 @@ let SearchButton = React.createClass({
 	},
 
 	render() {
+		console.log(this.props)
 		return React.createElement('div', {className: 'search-sidebar'},
 			React.createElement('header', {className: 'sidebar-heading'},
 				React.createElement('h1', null, 'Search for Courses'),
-				React.createElement('button', {className: 'close-sidebar', onClick: this.closeSidebar, title: 'Close Sidebar'})),
+				React.createElement('button',
+					{className: 'close-sidebar', title: 'Close Sidebar', onClick: this.props.toggle})),
 			React.createElement('input', {
 				type: 'search',
 				placeholder: 'Search Courses',
