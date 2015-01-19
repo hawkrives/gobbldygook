@@ -44,24 +44,22 @@
 
 .close-sidebar {
 	@include button--flat;
+	min-height: 0;
+	padding: 0.5em 0.75em;
 
-	color: $gray;
+	color: color('gray');
 	transition: 0.15s;
-
-	&:hover {
-		color: $red;
-	}
 
 	&::after {
 		@include ionicon($ionicon-close);
 	}
-
-	align-items: center;
 }
 
 .sidebar-heading {
 	display: flex;
 	flex-flow: row nowrap;
+	align-items: baseline;
+	justify-content: space-between;
 	margin-bottom: 1em;
 
 	h1 {
