@@ -4,9 +4,6 @@
 	flex: 0 0 270px;
 	min-width: 270px;
 	margin-right: $page-edge-padding;
-	min-height: calc(100vh - #{$page-edge-padding * 2});
-	display: flex;
-	flex-flow: column nowrap;
 }
 
 @media all and (max-width: $single-column-width) {

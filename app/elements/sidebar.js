@@ -11,19 +11,44 @@ import GraduationStatus from './graduationStatus'
 
 let Sidebar = React.createClass({
 	mixins: [State],
+
+	propTypes: {
+		student: React.PropTypes.object.isRequired,
+	},
+
+	toggleSearch() {
+		this.setState({isSearching: !this.state.isSearching})
+	},
+
+	getInitialState() {
+		return {
+			isSearching: false,
+		}
+	},
+
 	render() {
-		let isSearching = 'search' in this.getQuery()
-		let sidebar = isSearching ?
-			React.createElement(SearchButton, {search: isSearching}) :
-			React.createElement(GraduationStatus, {student: this.props.student})
+		let student = this.props.student
+
+		let component = GraduationStatus
+		let props = {student}
+		if (this.state.isSearching) {
+			component = SearchButton
+			props.toggle = this.toggleSearch
+		}
+
+		let sidebar = React.createElement(component, props)
 
 		let studentButtons = React.createElement('menu', {className: 'button-list student-buttons'},
-			React.createElement('button', {className: 'back'}, React.createElement(Link, {to: '/'}, 'Back')),
-			React.createElement(DownloadStudentButton, {student: this.props.student}),
-			React.createElement(RevertToDemoButton, {studentId: this.props.student.id}),
+			React.createElement('button',
+				{className: 'back'},
+				React.createElement(Link, {to: '/'}, 'Back')),
+			React.createElement('button',
+				{className: 'search', onClick: this.toggleSearch},
+				'Search'),
+			React.createElement(DownloadStudentButton, {student}),
+			React.createElement(RevertToDemoButton, {studentId: student.id}),
 			React.createElement(UndoButton, null),
-			React.createElement(RedoButton, null),
-			React.createElement('button', {className: 'search'}, React.createElement(Link, {to: this.getPath(), query: {'search': ''}}, 'Search')))
+			React.createElement(RedoButton, null))
 
 		return React.createElement('aside', {className: 'sidebar'}, studentButtons, sidebar)
 	},

@@ -1,20 +1,21 @@
+@import '../mixins/card';
+@import '../mixins/button--flat';
+@import '../mixins/color';
+@import '../icons';
+
 .search-sidebar {
 	@include card;
 
 	position: sticky;
 	top: $page-edge-padding;
 
-	flex: 1;
+	height: calc(100vh - #{$page-edge-padding * 2});
 	padding: 0.5rem;
-
-	display: flex;
-	flex-flow: column nowrap;
 	overflow-y: scroll;
 
 	.search-box {
 		width: 100%;
 		box-sizing: inherit;
-
 		margin-bottom: 0.5rem;
 	}
 

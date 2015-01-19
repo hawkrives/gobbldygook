@@ -4,8 +4,8 @@ import _ from 'lodash'
 
 import toPrettyTerm from 'sto-helpers/lib/toPrettyTerm'
 import {queryCourseDatabase} from '../helpers/courses'
-
 import Course from './course'
+import stickyfill from '../helpers/initStickyfill'
 
 let SearchButton = React.createClass({
 	mixins: [State],
@@ -13,6 +13,14 @@ let SearchButton = React.createClass({
 	propTypes: {
 		student: React.PropTypes.object.isRequired,
 		toggle: React.PropTypes.func.isRequired,
+	},
+
+	componentDidMount() {
+		stickyfill.add(this.getDOMNode())
+	},
+
+	componentWillUnmount() {
+		stickyfill.remove(this.getDOMNode())
 	},
 
 	getInitialState() {
@@ -77,7 +85,6 @@ let SearchButton = React.createClass({
 	},
 
 	render() {
-		console.log(this.props)
 		return React.createElement('div', {className: 'search-sidebar'},
 			React.createElement('header', {className: 'sidebar-heading'},
 				React.createElement('h1', null, 'Search for Courses'),
