@@ -15,7 +15,7 @@ let StudentList = React.createClass({
 						{
 							className: 'student-list--student',
 							to: 'student',
-							params: {id: student.id}
+							params: {id: student.id},
 						},
 						student.name)))
 			.toList()
