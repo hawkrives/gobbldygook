@@ -6,8 +6,9 @@
 	@include button;
 
 	color: color($color, '500');
+	background-color: transparent;
 
-	&:hover, &:active {
+	&:hover, &:focus {
 		background-color: if($dark, rgba(#ccc, 0.15), rgba(#999, 0.20));
 	}
 
@@ -16,7 +17,11 @@
 	}
 
 	&[disabled] {
+		cursor: default;
 		$accent: if($dark == true, 'dark', 'light');
 		color: color('disabled', 'foreground--#{$accent}');
+		&:hover, &:focus, &:active {
+			background-color: transparent;
+		}
 	}
 }
