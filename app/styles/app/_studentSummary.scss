@@ -10,10 +10,10 @@
 	}
 
 	&.cannot-graduate .graduation-message {
-		color: $orange;
+		color: color('deep-orange');
 	}
 	&.can-graduate .graduation-message {
-		color: $green;
+		color: color('green');
 	}
 
 	p + p {
@@ -36,10 +36,10 @@
 	margin-left: -20px;
 
 	.cannot-graduate & {
-		color: $orange;
+		color: color('deep-orange');
 	}
 	.can-graduate & {
-		color: $green;
+		color: color('green');
 	}
 
 	& + p {
