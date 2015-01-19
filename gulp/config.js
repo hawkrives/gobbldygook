@@ -4,6 +4,7 @@ let src = './app/'
 export default {
 	browserSync: {
 		browser: 'google chrome',
+		files: `${dest}**`,
 		server: {
 			baseDir: dest,
 		},
