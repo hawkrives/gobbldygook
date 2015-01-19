@@ -70,6 +70,7 @@
 .add-semester {
 	@include add-button;
 	@include button--raised;
+	padding: 0;
 
 	flex-basis: 32px;
 	font-size: 1.25em;
@@ -81,9 +82,11 @@
 .remove-semester {
 	@include remove-button;
 	@include button--flat;
-
-	margin: 0;
-	padding: 0 2px 0 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-right: 0.5em;
+	padding-left: 0.5em;
+	min-height: 0;
 
 	opacity: 0;
 
