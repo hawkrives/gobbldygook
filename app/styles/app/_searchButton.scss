@@ -1,36 +1,3 @@
-.search-button {
-	$size: 48px;
-	background-color: $golden-black;
-
-	position: fixed;
-	bottom: 0.5rem;
-	left: 0.5rem;
-
-	width: $size;
-	height: $size;
-
-	border-radius: $size;
-
-	box-shadow: 0 0 2px #999;
-
-	color: white;
-	line-height: $size;
-	font-size: $size/3*2;
-
-	text-align: center;
-
-	z-index: $z-floating-button;
-
-	appearance: none;
-
-	padding: 0;
-	border: 0;
-
-	&::after {
-		@include ionicon($ionicon-ios7-search);
-	}
-}
-
 .search-sidebar {
 	@include card;
 
