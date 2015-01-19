@@ -13,10 +13,10 @@
 }
 
 .semester.can-drop {
-	@include material-shadow(2);
+	// @include material-shadow(2);
 }
 .semester.is-over {
-	@include material-shadow(3);
+	@include material-shadow(2);
 }
 
 .semester-title {
