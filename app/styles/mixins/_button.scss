@@ -1,0 +1,15 @@
+@mixin button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	color: $text-color;
+
+	&[disabled] {
+		cursor: not-allowed;
+		color: rgba($text-color, 0.5);
+
+		&:hover::after {
+			color: rgba($text-color, 0.75);
+		}
+	}
+}

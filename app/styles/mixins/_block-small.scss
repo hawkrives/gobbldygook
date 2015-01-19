@@ -1,0 +1,4 @@
+@mixin block-small {
+	@include block;
+	margin-bottom: $block-edge-padding * 2;
+}

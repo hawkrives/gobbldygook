@@ -1,0 +1,16 @@
+@mixin progress-bar($color, $bg: transparent, $gradient: null) {
+	@if $gradient == null {
+		$gradient: $color;
+	}
+
+	& {
+		color: $color;
+		background: $bg;
+
+		@content;
+	}
+
+	&::-moz-progress-bar      { background: $gradient; }
+	&::-webkit-progress-value { background: $gradient; }
+	&::-webkit-progress-bar   { background: $bg; }
+}

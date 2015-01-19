@@ -1,142 +1,16 @@
-@import "mixins/material-shadow";
+@import "mixins/add-button";
 @import "mixins/avatar-letter";
-
-@mixin no-select {
-	user-select: none;
-	cursor: default;
-}
-
-@mixin list-inline {
-	display: inline-block;
-	list-style: none;
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-left: 0;
-
-	& > li {
-		display: inline-block;
-	}
-}
-
-@mixin link-undecorated {
-	text-decoration: none;
-	color: inherit;
-}
-
-@mixin sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0;
-	overflow: hidden;
-	clip: rect(0,0,0,0);
-	border: 0;
-}
-
-@mixin progress-bar($color, $bg: transparent, $gradient: null) {
-	@if $gradient == null {
-		$gradient: $color;
-	}
-
-	& {
-		color: $color;
-		background: $bg;
-
-		@content;
-	}
-
-	&::-moz-progress-bar      { background: $gradient; }
-	&::-webkit-progress-value { background: $gradient; }
-	&::-webkit-progress-bar   { background: $bg; }
-}
-
-@mixin square($size) {
-	width: $size;
-	height: $size;
-}
-
-@mixin button {
-	background: transparent;
-	border: none;
-	cursor: pointer;
-	color: $text-color;
-
-	&[disabled] {
-		cursor: not-allowed;
-		color: rgba($text-color, 0.5);
-
-		&:hover::after {
-			color: rgba($text-color, 0.75);
-		}
-	}
-}
-
-@mixin add-button {
-	@include button;
-
-	&::after {
-		@include ionicon($ionicon-ios7-plus-empty);
-		@content;
-	}
-
-	&[disabled]::after {
-		@include ionicon($ionicon-checkmark);
-	}
-}
-
-@mixin remove-button {
-	@include button;
-
-	opacity: 0.5;
-	transition: 0.15s;
-
-	&:hover {
-		color: $red;
-		opacity: 1;
-	}
-
-	&::after {
-		@include ionicon($ionicon-close);
-	}
-}
-
-@mixin block-base {
-	border-radius: 3px;
-	border: 0;
-}
-
-@mixin block {
-	@include block-base;
-	// transition: border 0.5s ease-in-out;
-
-	background: #fff;
-	// box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
-	border-bottom: 1px solid #ccc;
-	// border: 1px solid;
-	// border-color: $border-colors;
-}
-
-@mixin block-small {
-	@include block;
-	margin-bottom: $block-edge-padding * 2;
-}
-
-@mixin block-flat {
-	@include block-base;
-	border: 1px solid transparent;
-
-	&:hover, &:focus, &:active {
-		background: #fff;
-		// border-color: $border-colors;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
-		border-radius: 3px;
-	}
-}
-
-@mixin heading-neutral {
-	font-size: inherit;
-	font-weight: inherit;
-	margin-top: 0;
-	margin-bottom: 0;
-}
+@import "mixins/block";
+@import "mixins/block-base";
+@import "mixins/block-flat";
+@import "mixins/block-small";
+@import "mixins/button";
+@import "mixins/heading-neutral";
+@import "mixins/link-undecorated";
+@import "mixins/list-inline";
+@import "mixins/material-shadow";
+@import "mixins/no-select";
+@import "mixins/progress-bar";
+@import "mixins/remove-button";
+@import "mixins/square";
+@import "mixins/sr-only";
