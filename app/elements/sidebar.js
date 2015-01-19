@@ -22,7 +22,8 @@ let Sidebar = React.createClass({
 			React.createElement(DownloadStudentButton, {student: this.props.student}),
 			React.createElement(RevertToDemoButton, {studentId: this.props.student.id}),
 			React.createElement(UndoButton, null),
-			React.createElement(RedoButton, null))
+			React.createElement(RedoButton, null),
+			React.createElement('button', {className: 'search'}, React.createElement(Link, {to: this.getPath(), query: {'search': ''}}, 'Search')))
 
 		return React.createElement('aside', {className: 'sidebar'}, studentButtons, sidebar)
 	},
