@@ -55,7 +55,8 @@
 	}
 
 	.info-rows {
-		flex: 1;
+		flex: 1 0 auto;
+		max-width: 100%;
 	}
 
 	p, ul {
