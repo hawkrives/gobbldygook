@@ -19,8 +19,8 @@ let Sidebar = React.createClass({
 
 		let studentButtons = React.createElement('menu', {className: 'button-list student-buttons'},
 			React.createElement('button', {className: 'back'}, React.createElement(Link, {to: '/'}, 'Back')),
-			React.createElement(RevertToDemoButton, {studentId: this.props.student.id}),
 			React.createElement(DownloadStudentButton, {student: this.props.student}),
+			React.createElement(RevertToDemoButton, {studentId: this.props.student.id}),
 			React.createElement(UndoButton, null),
 			React.createElement(RedoButton, null))
 
