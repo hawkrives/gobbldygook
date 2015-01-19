@@ -12,7 +12,7 @@
 // (tested on Chrome v35)
 
 @mixin material-shadow($depth){
-	// Top Shadow
+	$shadows: none;
 	@if $depth == 1 {
 		$shadows:
 			0px 1px 1.5px rgba(#000, 0.12),
