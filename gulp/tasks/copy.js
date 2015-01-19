@@ -4,18 +4,15 @@ import gulp from 'gulp'
 import size from 'gulp-size'
 import {copy as config} from '../config'
 
-gulp.task('copy', () => {
-	let copyFile = (paths) => {
-		return new Promise((resolve) => {
-			let [sourcePath, destPath, title] = paths
+let copyFile = (info) => new Promise((resolve) => {
+	let [sourcePath, destPath, title] = info
 
-			return gulp.src(sourcePath)
-				.pipe(gulp.dest(destPath))
-				.pipe(size({title: 'copy:' + title}))
-				.on('end', resolve)
-				.pipe(browserSync.reload({ stream: true }))
-		})
-	}
-
-	return Promise.all(config.map(copyFile))
+	gulp.src(sourcePath)
+		.pipe(size({title: 'copy:' + title}))
+		.pipe(gulp.dest(destPath))
+		.on('end', resolve)
 })
+
+let copyAll = () => Promise.all(config.map(copyFile))
+
+gulp.task('copy', copyAll)

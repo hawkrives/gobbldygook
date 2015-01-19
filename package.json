@@ -13,6 +13,8 @@
     "clean": "rm -rf dist/",
     "cloc": "cloc ./ --by-file-by-lang --exclude-dir=dist,gulp,node_modules,playground,test",
     "fix-gulp-watch": "cd node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-watcher/node_modules/gaze/node_modules/globule && npm i lodash@latest",
+    "fix-browser-sync": "cd node_modules/browser-sync/node_modules/glob-watcher/node_modules/gaze/node_modules/globule && npm i lodash@latest",
+    "fix": "npm run fix-gulp-watch && npm run fix-browser-sync",
     "gulp": "gulp",
     "build": "gulp build",
     "lint": "gulp lint",

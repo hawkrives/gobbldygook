@@ -14,11 +14,12 @@ require('6to5-core/register')
 
 require('./gulp/tasks/browserify')
 require('./gulp/tasks/browser-sync')
-require('./gulp/tasks/build')
 require('./gulp/tasks/copy')
 require('./gulp/tasks/lint')
 require('./gulp/tasks/sass')
-require('./gulp/tasks/watch')
 require('./gulp/tasks/watchify')
+
+require('./gulp/tasks/watch')
+require('./gulp/tasks/build')
 
 require('./gulp/tasks/default')

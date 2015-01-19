@@ -49,7 +49,6 @@ function browserifyTask(callback, devMode) {
 				// Specify the output destination
 				.pipe(gulp.dest(bundleConfig.dest))
 				.on('end', reportFinished)
-				.pipe(browserSync.reload({ stream: true }))
 		}
 
 		if (devMode) {

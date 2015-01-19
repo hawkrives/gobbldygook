@@ -31,6 +31,5 @@ gulp.task('sass', () =>
 		.pipe(sourcemaps.write('.'))
 
 		// write out the compiled styles
-		.pipe(gulp.dest(config.dest))
 		.pipe(size({title: 'sass'}))
-		.pipe(browserSync.reload({ stream: true })))
+		.pipe(gulp.dest(config.dest)))
