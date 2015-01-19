@@ -3,7 +3,8 @@
 // colors
 $background-start-color: #eaeaea;
 $background-end-color: #dcdcdc;
-$background: linear-gradient($background-start-color, $background-end-color);
+// $background: linear-gradient($background-start-color, $background-end-color);
+$background: $background-start-color;
 
 $golden-black: #3C362A;
 $near-black: #2C281F;
