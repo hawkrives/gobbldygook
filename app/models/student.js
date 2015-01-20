@@ -169,11 +169,11 @@ class Student extends StudentRecord {
 	// override methods
 
 	addOverride(override) {
-		return this.setIn(['overrides', override.id], override)
+		return this.setIn(['overrides', override.what], override)
 	}
 
-	removeOverride(overrideId) {
-		return this.set('overrides', this.overrides.delete(overrideId))
+	removeOverride(thingOverriden) {
+		return this.set('overrides', this.overrides.delete(thingOverriden))
 	}
 
 
