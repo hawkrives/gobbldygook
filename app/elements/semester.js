@@ -148,7 +148,7 @@ let Semester = React.createClass({
 		return React.createElement('div',
 			extend(semesterProps, this.dropTargetFor(itemTypes.COURSE)),
 			React.createElement('header', {className: 'semester-title'},
-				React.createElement('h1', null, React.createElement(Link,
+				React.createElement(Link,
 					{
 						to: 'semester',
 						params: {
@@ -156,9 +156,11 @@ let Semester = React.createClass({
 							year: this.props.year,
 							semester: this.props.semester,
 						},
+						className: 'semester-header',
 					},
-					semesterName(this.props.semester))),
-				infoBar,
+					React.createElement('h1', null,
+						semesterName(this.props.semester)),
+					infoBar),
 				React.createElement('button', {
 					className: 'remove-semester',
 					title: `Remove ${this.props.year} ${semesterName(this.props.semester)}`,
