@@ -8,8 +8,13 @@ $semester-spacing: 4px;
 
 .semester {
 	@include card;
-	flex: 1 0 15em;
+	flex: auto;
+	width: 16em;
 	margin: $semester-spacing;
+}
+
+.semester-header {
+	flex: 1;
 }
 
 .semester.can-drop {
@@ -40,7 +45,6 @@ $semester-spacing: 4px;
 
 .semester .info-bar {
 	@include list-inline;
-	flex: 1;
 	color: rgba($black, 0.5);
 
 	li {
@@ -66,7 +70,7 @@ $semester-spacing: 4px;
 	@include button--raised;
 	padding: 0;
 
-	flex-basis: 32px;
+	min-width: 48px;
 	font-size: 1.25em;
 	margin: $semester-spacing;
 	margin-right: 0;
