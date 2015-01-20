@@ -36,12 +36,9 @@ $semester-spacing: 4px;
 		display: inline-block;
 		@include heading-neutral;
 	}
-	& > * {
-		vertical-align: top;
-	}
 }
 
-.info-bar {
+.semester .info-bar {
 	@include list-inline;
 	flex: 1;
 	color: rgba($black, 0.5);
@@ -50,21 +47,18 @@ $semester-spacing: 4px;
 		&::before { content: " – "; }
 
 		font-feature-settings: 'onum';
-
 		padding-left: 0.25em;
-		padding-right: 0.25em;
 	}
 }
 
-.semester-course-count {}
-
 .semester.invalid .semester-title {
-	color: color('orange');
-}
+	background-color: color('deep-orange', '300');
+	color: $white;
+	border-bottom-color: $white;
 
-.semester.invalid .info-bar i {
-	color: color('orange');
-	opacity: 0.9;
+	.info-bar {
+		color: rgba($white, 0.75);
+	}
 }
 
 .add-semester {
@@ -85,10 +79,8 @@ $semester-spacing: 4px;
 .remove-semester {
 	@include remove-button;
 	@include button--flat;
-	padding-top: 0;
-	padding-bottom: 0;
-	padding-right: 0.5em;
-	padding-left: 0.5em;
+
+	padding: 0 0.5em;
 	min-height: 0;
 
 	opacity: 0;
