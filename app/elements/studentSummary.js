@@ -71,17 +71,18 @@ let StudentSummary = React.createClass({
 		let emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
 
 		return React.createElement('article', {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
-			React.createElement('div', {key: 'letter', id: 'student-letter'}, name.length ? name[0] : ''),
-			React.createElement('p', {key: 'hi'}, 'Hi, ', nameEl, '!'),
-			React.createElement('p', {key: 'overview'},
-				'You are planning on ', degreeEmphasizer,
-				phrases.degree, ' ', words.degree, ', with ', majorEmphasizer, words.major, ' in ', phrases.major,
-				(has.concentration > 0) ? [', and ' + concentrationEmphasizer, words.concentration, ' in ', phrases.concentration] : '',
-				(has.emphasis > 0) ? [', not to mention ', emphasisEmphasizer, words.emphasis, ' in ', phrases.emphasis] : '',
-				'.'),
-			React.createElement('p', {key: 'message', className: 'graduation-message'},
-				canGraduate ? goodGraduationMessage : badGraduationMessage)
-		)
+			React.createElement('header', null,
+				React.createElement('div', {key: 'letter', id: 'student-letter'}, name.length ? name[0] : ''),
+				React.createElement('p', {key: 'hi'}, 'Hi, ', nameEl, '!')),
+			React.createElement('div', {className: 'content'},
+				React.createElement('p', {key: 'overview'},
+					'You are planning on ', degreeEmphasizer,
+					phrases.degree, ' ', words.degree, ', with ', majorEmphasizer, words.major, ' in ', phrases.major,
+					(has.concentration > 0) ? [', and ' + concentrationEmphasizer, words.concentration, ' in ', phrases.concentration] : '',
+					(has.emphasis > 0) ? [', not to mention ', emphasisEmphasizer, words.emphasis, ' in ', phrases.emphasis] : '',
+					'.'),
+				React.createElement('p', {key: 'message', className: 'graduation-message'},
+					canGraduate ? goodGraduationMessage : badGraduationMessage)))
 	},
 })
 

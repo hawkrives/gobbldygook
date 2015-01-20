@@ -1,0 +1,13 @@
+@import 'button';
+@import '../icons';
+
+@mixin add-button {
+	&::after {
+		@include ionicon($ionicon-ios7-plus-empty);
+		@content;
+	}
+
+	&[disabled]::after {
+		@include ionicon($ionicon-checkmark);
+	}
+}

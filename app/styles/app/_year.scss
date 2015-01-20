@@ -3,15 +3,30 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 
 .add-year {
 	@include add-button;
-	@include block;
+	@include button--raised;
+	padding: 0;
 
+	display: block;
+	// the 2px is from the margin that seperates the semesters
 	width: calc(100% - #{$year-title-width});
 	font-size: 1.25em;
 	margin-left: $year-title-width;
+
+	@media all and (max-width: $year-collapse-width) {
+		width: calc(100% - #{$year-title-width} - #{$semester-spacing});
+	}
 }
 
 .remove-year {
 	@include remove-button;
+	@include button--flat;
+	@media all and (min-width: $year-collapse-width) {
+		padding-top: 0;
+		padding-bottom: 0;
+		padding-right: 0.5em;
+		padding-left: 0.5em;
+		min-height: 0;
+	}
 
 	position: absolute;
 	left: 0;
@@ -21,6 +36,14 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 	height: 28px;
 
 	opacity: 0;
+
+	@media all and (max-width: $year-collapse-width) {
+		position: static;
+
+		width: auto;
+		height: auto;
+		opacity: inherit;
+	}
 }
 
 .year:hover .remove-year {
@@ -34,13 +57,25 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 
 	display: flex;
 	flex-flow: row nowrap;
+	@media all and (max-width: $year-collapse-width) {
+		flex-flow: column nowrap;
+	}
 
 	// Make sure to give the year title breathing room
 	min-height: 105px;
+
 }
 
 .year-title {
 	@include no-select;
+
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: flex-start;
+	@media all and (max-width: $year-collapse-width) {
+		align-items: center;
+		flex-flow: row nowrap;
+	}
 
 	position: relative;
 
@@ -49,6 +84,15 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 		width: $year-title-size;
 		transform: translateY(1em) rotate(90deg);
 		white-space: nowrap;
+
+		@media all and (max-width: $year-collapse-width) {
+			width: auto;
+			transform: none;
+			white-space: normal;
+
+			text-align: center;
+			flex: 1;
+		}
 	}
 
 	font-feature-settings: "tnum";

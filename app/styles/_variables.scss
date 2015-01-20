@@ -1,22 +1,17 @@
-@import "clrs";
+@import "mixins/colors";
+@import "mixins/color";
 
 // colors
-$background-start-color: #e8e8e8;
-$background-end-color: #e3e3e3;
-$olaf-gold: #c3931e;
-
-$olaf-gradient-start: #e49f31;
-$olaf-gradient-end:   #c88926;
+$background-start-color: #eaeaea;
+$background-end-color: #dcdcdc;
+// $background: linear-gradient($background-start-color, $background-end-color);
+// $background: $background-start-color;
+$background: color('gray', '200');
 
 $golden-black: #3C362A;
 $near-black: #2C281F;
 
 $text-color: $near-black;
-
-$border-top-color: #e5e6e9;
-$border-side-color: #dfe0e4;
-$border-bottom-color: #d0d1d5;
-$border-colors: $border-top-color $border-side-color $border-bottom-color;
 
 // fonts
 $sans-font-stack: 'Fira Sans', 'Helvetica', 'Verdana', sans-serif;
@@ -30,3 +25,9 @@ $block-edge-padding: 5px;
 // z-indices
 $z-sidebar: 3;
 $z-floating-button: 2;
+
+// media queries
+$single-column-width: 35em;
+$year-collapse-width: 47.5em;
+
+$material-divider: 1px solid rgba(160, 160, 160, 0.2);

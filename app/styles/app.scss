@@ -5,4 +5,22 @@
 @import 'fonts';
 @import 'mixins';
 
-@import 'app/main';
+@import 'app/base';
+@import 'app/areaOfStudy';
+@import 'app/content';
+@import 'app/contentEditable';
+@import 'app/course';
+@import 'app/courseTable';
+@import 'app/graduationStatus';
+@import 'app/loading';
+@import 'app/notifications';
+@import 'app/requirement';
+@import 'app/requirementSet';
+@import 'app/searchButton';
+@import 'app/semester';
+@import 'app/semesterDetail';
+@import 'app/sidebar';
+@import 'app/student';
+@import 'app/studentList';
+@import 'app/studentSummary';
+@import 'app/year';

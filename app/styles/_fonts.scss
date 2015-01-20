@@ -2,22 +2,6 @@ $fira-path: "./fonts";
 
 @font-face{
     font-family: 'Fira Sans';
-    src: local('Fira Sans Hair'),
-         url($fira-path + "/FiraSans-Hair.woff") format('woff');
-    font-weight: 100;
-    font-style: normal;
-}
-
-@font-face{
-    font-family: 'Fira Sans';
-    src: local('Fira Sans Hair Italic'),
-         url($fira-path + "/FiraSans-HairItalic.woff") format('woff');
-    font-weight: 100;
-    font-style: italic;
-}
-
-@font-face{
-    font-family: 'Fira Sans';
     src: local('Fira Sans UltraLight'),
          url($fira-path + "/FiraSans-UltraLight.woff") format('woff');
     font-weight: 200;
@@ -109,37 +93,5 @@ $fira-path: "./fonts";
     src: local('Fira Sans Bold Italic'),
          url($fira-path + "/FiraSans-BoldItalic.woff") format('woff');
     font-weight: 700;
-    font-style: italic;
-}
-
-@font-face{
-    font-family: 'Fira Sans';
-    src: local('Fira Sans ExtraBold'),
-         url($fira-path + "/FiraSans-ExtraBold.woff") format('woff');
-    font-weight: 800;
-    font-style: normal;
-}
-
-@font-face{
-    font-family: 'Fira Sans';
-    src: local('Fira Sans ExtraBold Italic'),
-         url($fira-path + "/FiraSans-ExtraBoldItalic.woff") format('woff');
-    font-weight: 800;
-    font-style: italic;
-}
-
-@font-face{
-    font-family: 'Fira Sans';
-    src: local('Fira Sans Heavy'),
-         url($fira-path + "/FiraSans-Heavy.woff") format('woff');
-    font-weight: 900;
-    font-style: normal;
-}
-
-@font-face{
-    font-family: 'Fira Sans';
-    src: local('Fira Sans Heavy Italic'),
-         url($fira-path + "/FiraSans-HeavyItalic.woff") format('woff');
-    font-weight: 900;
     font-style: italic;
 }

@@ -1,3 +1,5 @@
+$semester-spacing: 4px;
+
 .semester-list {
 	flex: 1;
 	display: flex;
@@ -5,26 +7,30 @@
 }
 
 .semester {
-	@include block;
-	flex: 1 0 15em;
-	margin: 2px;
+	@include card;
+	flex: auto;
+	width: 16em;
+	margin: $semester-spacing;
+}
 
-	padding: $block-edge-padding/2 $block-edge-padding;
+.semester-header {
+	flex: 1;
 }
 
 .semester.can-drop {
-	box-shadow: 0 0 0 1px rgba($gray, 0.5);
+	// @include material-shadow(2);
 }
+
 .semester.is-over {
-	box-shadow: 0 0 0 2px $green;
+	@include material-shadow(2);
 }
 
 .semester-title {
-	margin-bottom: 0.5em;
-	font-size: 0.85em;
+	padding: $block-edge-padding $block-edge-padding*1.5;
+	border-bottom: $material-divider;
 
-	// cursor: move;
-	// @include no-select;
+	font-size: 0.85em;
+	a { @include link-undecorated; }
 
 	display: flex;
 	flex-flow: row nowrap;
@@ -35,53 +41,51 @@
 		display: inline-block;
 		@include heading-neutral;
 	}
-	& > * {
-		vertical-align: top;
-	}
 }
 
-.info-bar {
+.semester .info-bar {
 	@include list-inline;
-	flex: 1;
+	color: rgba($black, 0.5);
 
 	li {
 		&::before { content: " – "; }
 
 		font-feature-settings: 'onum';
-
-		color: $gray;
-
 		padding-left: 0.25em;
-		padding-right: 0.25em;
 	}
 }
 
-.semester-course-count {}
-
 .semester.invalid .semester-title {
-	color: $orange;
-}
+	background-color: color('deep-orange', '300');
+	color: $white;
+	border-bottom-color: $white;
 
-.semester.invalid .info-bar i {
-	color: $orange;
-	opacity: 0.9;
+	.info-bar {
+		color: rgba($white, 0.75);
+	}
 }
 
 .add-semester {
 	@include add-button;
-	@include block;
+	@include button--raised;
+	padding: 0;
 
-	flex-basis: 32px;
+	min-width: 48px;
 	font-size: 1.25em;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	margin-left: 2px;
+	margin: $semester-spacing;
+	margin-right: 0;
+
+	@media all and (max-width: $year-collapse-width) {
+		margin: $semester-spacing;
+	}
 }
 
 .remove-semester {
 	@include remove-button;
-	margin: 0;
-	padding: 0 2px 0 0;
+	@include button--flat;
+
+	padding: 0 0.5em;
+	min-height: 0;
 
 	opacity: 0;
 
@@ -94,4 +98,14 @@
 
 .course-list {
 	min-height: 30px;
+	padding-bottom: 0.25em;
+
+	.course {
+		padding: $block-edge-padding $block-edge-padding*1.5;
+		border-bottom: $material-divider;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
 }

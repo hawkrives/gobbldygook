@@ -1,9 +1,7 @@
+@import '../mixins/button--raised';
+
 .graduation-status {
 	font-size: 0.85em;
-
-	menu {
-		margin-top: 0;
-	}
 }
 
 .graduation-status .area-type-heading {
@@ -15,20 +13,6 @@
 
 	h1 {
 		@include heading-neutral;
-		padding: 5px 0 3px;
+		padding: 1em 0 0.35em;
 	}
-}
-
-.add-area-of-study {
-	@include add-button {
-		margin-left: 0.5em;
-	}
-	@include block-small;
-
-	width: 100%;
-	text-align: left;
-	text-transform: lowercase;
-	font-feature-settings: 'smcp';
-	padding-left: $block-edge-padding * 1.5;
-	font-size: 0.75em;
 }

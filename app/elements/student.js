@@ -44,11 +44,7 @@ let Student = React.createClass({
 
 		if (!this.state.student)
 			return React.createElement('figure', {className: 'loading'},
-				React.createElement('img', {
-					className: 'loading-spinner',
-					src: 'images/loading.svg',
-					alt: 'Gobbldygook is Loading',
-				}),
+				React.createElement('div', {className: 'loading-spinner'}, React.createElement('div', null), 'Loading Students&hellip;'),
 				React.createElement('figcaption', {className: 'loading-message ' + this.state.messageClass}, this.state.message))
 
 		return React.createElement('div',

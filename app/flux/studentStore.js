@@ -50,6 +50,7 @@ let studentStore = Reflux.createStore({
 
 	_preChange() {
 		this.history = this.history.push(this.students)
+		this.future = this.future.clear()
 	},
 
 	_postChange() {

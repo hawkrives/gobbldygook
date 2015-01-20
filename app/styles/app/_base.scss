@@ -8,7 +8,8 @@ html {
 
 	box-sizing: border-box;
 
-	background-color: $background-start-color;
+	background: $background;
+	min-height: 100vh;
 }
 
 body {

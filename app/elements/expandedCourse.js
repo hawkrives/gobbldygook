@@ -50,12 +50,12 @@ let ExpandedCourse = React.createClass({
 		let offerings = React.createElement('p',
 			{className: 'offerings'},
 			map(course.times,
-				time => React.createElement('span', {key: time}, time)))
+				(time, idx) => React.createElement('span', {key: time + idx}, time)))
 
 		let gereqs = React.createElement('ul',
 			{className: 'gereqs'},
 			map(course.gereqs,
-				ge => React.createElement('li', {key: ge}, ge)))
+				(ge, idx) => React.createElement('li', {key: ge + idx}, ge)))
 
 		let description = React.createElement('p',
 			{className: 'description'},
@@ -63,11 +63,11 @@ let ExpandedCourse = React.createClass({
 
 		let credits = React.createElement('span',
 			{className: 'credits'},
-			course.credits + ' ' + pluralize(course.credits, 'credit'))
+			`${course.credits} ${pluralize(course.credits, 'credit')}`)
 
 		let classInstanceOffered = React.createElement('span',
 			{className: 'instance'},
-			semesterName(course.sem) + ' ' + course.year)
+			`${semesterName(course.sem)} ${course.year}`)
 
 		let info = React.createElement('p',
 			{className: 'info'},

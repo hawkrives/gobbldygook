@@ -1,11 +1,13 @@
 import Immutable from 'immutable'
-import {isUndefined, contains} from 'lodash'
+import {isUndefined, contains, _ as lodash, reject} from 'lodash'
 import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
+import {isTrue} from 'sto-helpers/lib/is'
 
 import randomChar from 'sto-helpers/lib/randomChar'
 import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {getCourses} from '../helpers/courses'
+import findWarnings from '../helpers/findCourseWarnings'
 
 let ScheduleRecord = Immutable.Record({
 	id: uuid(),
@@ -100,15 +102,19 @@ class Schedule extends ScheduleRecord {
 		// Checks to see if the schedule is valid
 		return this.courses
 			 // only check the courses that have data
-			.then(courses => Immutable.Seq(courses).filterNot(isUndefined))
+			.then(courses => reject(courses, isUndefined))
 			// Step one: do any times conflict?
-			.then(checkScheduleTimeConflicts)
+			.then((courses) => findWarnings(courses, this.toJS()))
 			.then((conflicts) => {
-				let hasConflict = Immutable.Seq(conflicts)
+				let hasConflict = lodash(conflicts)
 					// flatten the nested arrays
-					.flatten(true)
-					// and see if any of the resulting values are true
-					.some((value) => value === true)
+					.flatten()
+					// filter to just the non-null/undefined items
+					.filter(item => item)
+					// grab the 'warning' values
+					.pluck('warning')
+					// and see if any are true
+					.any(isTrue)
 
 				if (hasConflict) {
 					console.log('schedule conflicts', conflicts, hasConflict)

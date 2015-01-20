@@ -3,7 +3,7 @@ import {DragDropMixin} from 'react-dnd'
 import Promise from 'bluebird'
 import React from 'react/addons'
 import {Link} from 'react-router'
-import humanize from 'humanize-plus'
+import {pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 
 import add from 'sto-helpers/lib/add'
@@ -50,6 +50,7 @@ let Semester = React.createClass({
 
 		Promise.all([schedule.courses, schedule.validate()]).then((results) => {
 			let [courses, validation] = results
+
 			this.setState({
 				schedule,
 				courses: Immutable.List(courses),
@@ -74,18 +75,7 @@ let Semester = React.createClass({
 			let courseCount = this.state.courses.size
 			infoIcons.push(React.createElement('li',
 				{className: 'semester-course-count', key: 'course-count'},
-				`${courseCount} ${humanize.pluralize(courseCount, 'course')}`))
-
-			if (this.state.validation.hasConflict) {
-				let conflicts = JSON.stringify(this.state.validation.conflicts, null, 2)
-				infoIcons.push(React.createElement('li',
-					{
-						className: 'semester-status',
-						key: 'semester-status',
-						title: conflicts,
-					},
-					React.createElement('i', {className: 'semester-alert'})))
-			}
+				`${courseCount} ${pluralize(courseCount, 'course')}`))
 
 			let credits = this.state.courses
 				.filterNot(isUndefined) // remove any undefined items
@@ -95,7 +85,7 @@ let Semester = React.createClass({
 			if (credits) {
 				infoIcons.push(React.createElement('li',
 					{className: 'semester-credit-count', key: 'credit-count'},
-					`${credits} ${humanize.pluralize(credits, 'credit')}`))
+					`${credits} ${pluralize(credits, 'credit')}`))
 			}
 		}
 		let infoBar = React.createElement('ul', {className: 'info-bar'}, infoIcons)
@@ -140,7 +130,7 @@ let Semester = React.createClass({
 				courseBlocks)
 		}
 		else if (this.state.schedule) {
-			courseList = React.createElement('div', {className: 'loading'}, 'Loading Courses')
+			courseList = React.createElement('div', {className: 'loading-spinner'}, React.createElement('div', null), 'Loading Courses&hellip;')
 		}
 
 		let droppableIsMoving = this.getDropState(itemTypes.COURSE).isDragging
@@ -149,6 +139,7 @@ let Semester = React.createClass({
 		let semesterProps = {
 			className: cx({
 				semester: true,
+				invalid: this.state.validation.hasConflict,
 				'can-drop': droppableIsMoving,
 				'is-over': droppableIsOver,
 			})
@@ -157,7 +148,7 @@ let Semester = React.createClass({
 		return React.createElement('div',
 			extend(semesterProps, this.dropTargetFor(itemTypes.COURSE)),
 			React.createElement('header', {className: 'semester-title'},
-				React.createElement('h1', null, React.createElement(Link,
+				React.createElement(Link,
 					{
 						to: 'semester',
 						params: {
@@ -165,9 +156,11 @@ let Semester = React.createClass({
 							year: this.props.year,
 							semester: this.props.semester,
 						},
+						className: 'semester-header',
 					},
-					semesterName(this.props.semester))),
-				infoBar,
+					React.createElement('h1', null,
+						semesterName(this.props.semester)),
+					infoBar),
 				React.createElement('button', {
 					className: 'remove-semester',
 					title: `Remove ${this.props.year} ${semesterName(this.props.semester)}`,
