@@ -5,6 +5,7 @@ import {DragDropMixin} from 'react-dnd'
 
 import itemTypes from '../models/itemTypes'
 import semesterName from 'sto-helpers/lib/semesterName'
+import expandYear from 'sto-helpers/lib/expandYear'
 import {isTrue} from 'sto-helpers/lib/is'
 
 import ExpandedCourse from './expandedCourse'
@@ -20,6 +21,12 @@ let Course = React.createClass({
 		conflicts: React.PropTypes.array,
 		index: React.PropTypes.number,
 		info: React.PropTypes.object.isRequired,
+	},
+
+	getDefaultProps() {
+		return {
+			conflicts: [],
+		}
 	},
 
 	mixins: [DragDropMixin],
@@ -58,13 +65,14 @@ let Course = React.createClass({
 
 		if (schedule && (course.year !== schedule.year) && schedule.year <= thisYear) {
 			warnings.push({
-				msg: `This course (from ${course.year}) is not offered in this year (${schedule.year}).`
+				msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
+				summary: 'Wrong Year',
 			})
 		}
 
 		if (schedule && course.sem !== schedule.semester) {
 			warnings.push({
-				msg: `This course (from ${semesterName(course.sem)}) is not offered in this semester.`,
+				msg: `Wrong Semester (originally from ${semesterName(course.sem)})`,
 				className: 'course-invalid-semester',
 			})
 		}
@@ -72,9 +80,9 @@ let Course = React.createClass({
 		if (conflicts && i !== undefined) {
 			if (_.any(conflicts[i])) {
 				let conflictIndex = _.findIndex(conflicts[i], isTrue)
-				conflictIndex = conflictIndex + 1 // because humans don't 0-index lists
+				conflictIndex += 1 // because humans don't 0-index lists
 				warnings.push({
-					msg: `This course has a time conflict with the ${ordinal(conflictIndex)} course.`,
+					msg: `Time conflict with the ${ordinal(conflictIndex)} course`,
 					className: 'course-time-conflict',
 				})
 			}
@@ -82,12 +90,15 @@ let Course = React.createClass({
 
 		let warningEls = _.map(warnings, (w, index) => {
 			let className = w.className || 'course-alert'
-			return React.createElement('span', {className, title: w.msg, key: className + index})
+			return React.createElement('li', {className, key: className + index}, w.msg)
 		})
 
-		return React.createElement('div',
-			{className: 'warnings'},
-			warningEls)
+		return [
+			Boolean(warnings.length),
+			React.createElement('ul',
+				{className: 'warnings'},
+				warningEls),
+		]
 	},
 
 	render() {
@@ -98,7 +109,7 @@ let Course = React.createClass({
 		let courseStyle = this.state.isOpen ? ExpandedCourse : CollapsedCourse
 		let courseInfo = React.createElement(courseStyle, this.props)
 
-		let warnings = this.findWarnings()
+		let [hasWarnings, warnings] = this.findWarnings()
 
 		return React.createElement('article',
 			Object.assign(
@@ -106,14 +117,15 @@ let Course = React.createClass({
 					className: cx({
 						course: true,
 						expanded: this.state.isOpen,
+						'has-warnings': hasWarnings,
 						'is-dragging': isDragging,
 					}),
 					onClick: this.toggle,
 				},
 				this.dragSourceFor(itemTypes.COURSE)),
 
-			courseInfo,
-			warnings)
+			warnings,
+			courseInfo)
 	},
 })
 
