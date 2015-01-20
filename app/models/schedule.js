@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import {isUndefined, contains} from 'lodash'
+import {isUndefined, contains, _ as lodash} from 'lodash'
 import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
 
@@ -104,11 +104,11 @@ class Schedule extends ScheduleRecord {
 			// Step one: do any times conflict?
 			.then(checkScheduleTimeConflicts)
 			.then((conflicts) => {
-				let hasConflict = Immutable.Seq(conflicts)
+				let hasConflict = lodash(conflicts)
 					// flatten the nested arrays
 					.flatten(true)
 					// and see if any of the resulting values are true
-					.some((value) => value === true)
+					.any((value) => value === true)
 
 				if (hasConflict) {
 					console.log('schedule conflicts', conflicts, hasConflict)
