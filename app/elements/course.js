@@ -1,12 +1,8 @@
-import _ from 'lodash'
+import {_ as lodash, isNull} from 'lodash'
 import React from 'react/addons'
-import {ordinal} from 'humanize-plus'
 import {DragDropMixin} from 'react-dnd'
 
 import itemTypes from '../models/itemTypes'
-import semesterName from 'sto-helpers/lib/semesterName'
-import expandYear from 'sto-helpers/lib/expandYear'
-import {isTrue} from 'sto-helpers/lib/is'
 
 import ExpandedCourse from './expandedCourse'
 import CollapsedCourse from './collapsedCourse'
@@ -57,50 +53,6 @@ let Course = React.createClass({
 		})
 	},
 
-	findWarnings() {
-		let thisYear = new Date().getFullYear()
-		let warnings = []
-
-		let {schedule, info: course, conflicts, index: i} = this.props
-
-		if (schedule && (course.year !== schedule.year) && schedule.year <= thisYear) {
-			warnings.push({
-				msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
-				summary: 'Wrong Year',
-			})
-		}
-
-		if (schedule && course.sem !== schedule.semester) {
-			warnings.push({
-				msg: `Wrong Semester (originally from ${semesterName(course.sem)})`,
-				className: 'course-invalid-semester',
-			})
-		}
-
-		if (conflicts && i !== undefined) {
-			if (_.any(conflicts[i])) {
-				let conflictIndex = _.findIndex(conflicts[i], isTrue)
-				conflictIndex += 1 // because humans don't 0-index lists
-				warnings.push({
-					msg: `Time conflict with the ${ordinal(conflictIndex)} course`,
-					className: 'course-time-conflict',
-				})
-			}
-		}
-
-		let warningEls = _.map(warnings, (w, index) => {
-			let className = w.className || 'course-alert'
-			return React.createElement('li', {className, key: className + index}, w.msg)
-		})
-
-		return [
-			Boolean(warnings.length),
-			React.createElement('ul',
-				{className: 'warnings'},
-				warningEls),
-		]
-	},
-
 	render() {
 		let course = this.props.info
 
@@ -109,7 +61,14 @@ let Course = React.createClass({
 		let courseStyle = this.state.isOpen ? ExpandedCourse : CollapsedCourse
 		let courseInfo = React.createElement(courseStyle, this.props)
 
-		let [hasWarnings, warnings] = this.findWarnings()
+		let hasWarnings = this.props.conflicts.length
+		let warnings = this.props.conflicts[this.props.index]
+		let warningEls = lodash(warnings)
+			.reject(isNull)
+			.filter({warning: true})
+			.map((w, index) =>
+				React.createElement('li', {className: w.className, key: w.className + index}, w.msg))
+			.value()
 
 		return React.createElement('article',
 			Object.assign(
@@ -124,7 +83,7 @@ let Course = React.createClass({
 				},
 				this.dragSourceFor(itemTypes.COURSE)),
 
-			warnings,
+			React.createElement('ul', {className: 'warnings'}, warningEls),
 			courseInfo)
 	},
 })

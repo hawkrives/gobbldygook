@@ -50,8 +50,12 @@ let Semester = React.createClass({
 
 		Promise.all([schedule.courses, schedule.validate()]).then((results) => {
 			let [courses, validation] = results
-			courses = Immutable.List(courses)
-			this.setState({schedule, courses, validation})
+
+			this.setState({
+				schedule,
+				courses: Immutable.List(courses),
+				validation,
+			})
 		})
 	},
 
