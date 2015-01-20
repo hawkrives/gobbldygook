@@ -40,7 +40,7 @@ class Study extends StudyRecord {
 			.toMap()
 			.filter((val, key) =>
 				contains(toKeep, key))
-		return JSON.stringify(filtered.toJS())
+		return filtered.toJS()
 	}
 }
 

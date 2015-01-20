@@ -216,20 +216,12 @@ class Student extends StudentRecord {
 	}
 
 	encode() {
-		return encodeURIComponent(this.toJSON())
-	}
-
-	toString() {
-		return this.toJSON()
-	}
-
-	toJSON() {
-		return JSON.stringify(this.toJS())
+		return encodeURIComponent(JSON.stringify(this))
 	}
 
 	save() {
 		console.log(`saving student ${this.name} (${this.id})`)
-		localStorage.setItem(this.id, this.toJSON())
+		localStorage.setItem(this.id, JSON.stringify(this))
 	}
 }
 

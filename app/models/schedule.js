@@ -133,7 +133,7 @@ class Schedule extends ScheduleRecord {
 			.toMap()
 			.filterNot((val, key) =>
 				contains(toRemove, key))
-		return JSON.stringify(filtered.toJS())
+		return filtered.toJS()
 	}
 }
 
