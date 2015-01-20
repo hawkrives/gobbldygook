@@ -1,10 +1,12 @@
 @import "mixins/colors";
+@import "mixins/color";
 
 // colors
 $background-start-color: #eaeaea;
 $background-end-color: #dcdcdc;
 // $background: linear-gradient($background-start-color, $background-end-color);
-$background: $background-start-color;
+// $background: $background-start-color;
+$background: color('gray', '200');
 
 $golden-black: #3C362A;
 $near-black: #2C281F;
