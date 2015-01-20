@@ -8,9 +8,13 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 
 	display: block;
 	// the 2px is from the margin that seperates the semesters
-	width: calc(100% - #{$year-title-width} - 2px);
+	width: calc(100% - #{$year-title-width});
 	font-size: 1.25em;
 	margin-left: $year-title-width;
+
+	@media all and (max-width: $year-collapse-width) {
+		width: calc(100% - #{$year-title-width} - #{$semester-spacing});
+	}
 }
 
 .remove-year {

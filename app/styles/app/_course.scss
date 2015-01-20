@@ -1,8 +1,6 @@
 @import '../mixins/material-shadow';
 
 .course {
-	margin-bottom: 0.35em;
-
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
@@ -17,7 +15,7 @@
 	.title {
 		margin-top: 0;
 		margin-bottom: 0;
-		line-height: 1;
+		line-height: normal;
 		padding: 0;
 		padding-bottom: 0.25ex;
 		font-size: 1em;
@@ -34,7 +32,7 @@
 	.type {
 		font-feature-settings: 'smcp';
 		font-size: 0.8em;
-		background-color: hsl(0, 0%, 90%);
+		background-color: color('gray', '200');
 		border-radius: 5px;
 		padding: 2px 4px;
 		margin-right: 5px;
@@ -84,17 +82,19 @@
 	}
 
 	.tools {
-		border-top: 1px solid hsl(0, 0%, 90%);
-		margin-top: 0.25em;
-		padding-top: 0.25em;
+		border-top: $material-divider;
+		margin-top: 0.5em;
+		padding-top: 0.5em;
 		display: flex;
 		flex-flow: row nowrap;
 		justify-content: space-between;
-
-		font-size: 1rem;
+		align-items: center;
 	}
 
 	.remove-course {
+		@include button--flat('red');
+		padding-left: 0.5em;
+		padding-right: 0.5em;
 		font-size: 0.85em;
 	}
 
@@ -108,18 +108,11 @@
 }
 
 .course.expanded {
-	@include material-shadow(1);
-	background-color: hsl(0, 0%, 98%);
-	border-radius: 5px;
-	padding: 0.15em 0.25em;
-	margin-bottom: 1em;
-	margin-top: 0.5em;
+	background-color: color('gray', '100');
 
 	.title {
-		padding-top: 0.25ex;
 		overflow: visible;
 		white-space: normal;
-		line-height: 1.2;
 	}
 
 	.summary, .details {
@@ -128,11 +121,11 @@
 }
 
 .course.empty {
-	opacity: 0.5;
+	color: color('gray', '500');
 	user-select: none;
 	cursor: default;
 
-	& .title {
+	.title {
 		cursor: default;
 	}
 }
