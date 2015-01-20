@@ -1,57 +1,47 @@
 #student-summary {
 	@include card;
-	overflow: hidden;
 	hyphens: auto;
 	font-feature-settings: 'onum';
 
-	$padding: $block-edge-padding * 2;
-
 	&.cannot-graduate .graduation-message {
-		color: color('deep-orange', '900');
+		color: color('deep-orange');
 	}
 	&.can-graduate .graduation-message {
-		color: color('green', '900');
+		color: color('green');
 	}
 
 	.content {
-		padding: $padding;
+		padding: $block-edge-padding * 2;
 		p {
 			margin: 0;
 		}
 
 		p + p {
-			margin-top: $padding;
+			margin-top: $block-edge-padding * 2;
 		}
 	}
 
 	header {
 		display: flex;
 		flex-flow: row nowrap;
-		align-items: baseline;
+		align-items: center;
 		justify-content: flex-start;
 
-		padding: $padding;
-		color: $white;
+		color: $black;
 		p {
 			margin: 0;
 			font-style: italic;
 		}
 	}
-
-	&.cannot-graduate header {
-		background-color: color('deep-orange');
-	}
-	&.can-graduate header {
-		background-color: color('deep-orange');
-	}
 }
 
 #student-letter {
-	@include avatar-letter(32px);
-	box-shadow: 0 0 0 1px currentColor, 0 0 0 1px white;
-	background-color: $white;
-	// margin-right: $padding;
-	margin-bottom: 1px;
+	@include avatar-letter(48px);
+	background-color: white;
+	border: solid 1px;
+
+	margin: $block-edge-padding $block-edge-padding*2;
+	margin-left: -6px;
 
 	.cannot-graduate & {
 		color: color('deep-orange');
