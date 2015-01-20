@@ -138,6 +138,7 @@ let Semester = React.createClass({
 		let semesterProps = {
 			className: cx({
 				semester: true,
+				invalid: this.state.validation.hasConflict,
 				'can-drop': droppableIsMoving,
 				'is-over': droppableIsOver,
 			})
