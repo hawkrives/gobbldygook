@@ -76,17 +76,6 @@ let Semester = React.createClass({
 				{className: 'semester-course-count', key: 'course-count'},
 				`${courseCount} ${humanize.pluralize(courseCount, 'course')}`))
 
-			if (this.state.validation.hasConflict) {
-				let conflicts = JSON.stringify(this.state.validation.conflicts, null, 2)
-				infoIcons.push(React.createElement('li',
-					{
-						className: 'semester-status',
-						key: 'semester-status',
-						title: conflicts,
-					},
-					React.createElement('i', {className: 'semester-alert'})))
-			}
-
 			let credits = this.state.courses
 				.filterNot(isUndefined) // remove any undefined items
 				.map(c => c.credits)
