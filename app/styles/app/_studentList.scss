@@ -1,17 +1,18 @@
 .student-list {
 	@include list-inline;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
 }
 
 .student-list > li {
+	margin: 0 0.5em 1em;
+
 	transform-origin: 50% 50%;
 	transition: 0.15s;
 
 	&:nth-child(odd):hover  { transform: rotate(-2deg); }
 	&:nth-child(even):hover { transform: rotate(2deg);  }
-
-	& + li {
-		margin-left: 1em;
-	}
 }
 
 .student-list--student {
@@ -23,5 +24,12 @@
 
 	&:hover {
 		text-decoration: underline;
+	}
+}
+
+.add-student {
+	min-width: 100%;
+	button {
+		width: 100%;
 	}
 }
