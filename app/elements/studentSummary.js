@@ -72,7 +72,7 @@ let StudentSummary = React.createClass({
 
 		return React.createElement('article', {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
 			React.createElement('header', null,
-				// React.createElement('div', {key: 'letter', id: 'student-letter'}, name.length ? name[0] : ''),
+				React.createElement('div', {key: 'letter', id: 'student-letter'}, name.length ? name[0] : ''),
 				React.createElement('p', {key: 'hi'}, 'Hi, ', nameEl, '!')),
 			React.createElement('div', {className: 'content'},
 				React.createElement('p', {key: 'overview'},
