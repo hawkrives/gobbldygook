@@ -3,7 +3,7 @@ import {DragDropMixin} from 'react-dnd'
 import Promise from 'bluebird'
 import React from 'react/addons'
 import {Link} from 'react-router'
-import humanize from 'humanize-plus'
+import {pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 
 import add from 'sto-helpers/lib/add'
@@ -75,7 +75,7 @@ let Semester = React.createClass({
 			let courseCount = this.state.courses.size
 			infoIcons.push(React.createElement('li',
 				{className: 'semester-course-count', key: 'course-count'},
-				`${courseCount} ${humanize.pluralize(courseCount, 'course')}`))
+				`${courseCount} ${pluralize(courseCount, 'course')}`))
 
 			let credits = this.state.courses
 				.filterNot(isUndefined) // remove any undefined items
@@ -85,7 +85,7 @@ let Semester = React.createClass({
 			if (credits) {
 				infoIcons.push(React.createElement('li',
 					{className: 'semester-credit-count', key: 'credit-count'},
-					`${credits} ${humanize.pluralize(credits, 'credit')}`))
+					`${credits} ${pluralize(credits, 'credit')}`))
 			}
 		}
 		let infoBar = React.createElement('ul', {className: 'info-bar'}, infoIcons)
