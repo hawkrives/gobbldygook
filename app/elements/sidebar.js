@@ -41,7 +41,7 @@ let Sidebar = React.createClass({
 		let studentButtons = React.createElement('menu', {className: 'button-list student-buttons'},
 			React.createElement('button',
 				{className: 'back'},
-				React.createElement(Link, {to: '/'}, 'Back')),
+				React.createElement(Link, {to: '/'}, 'All Students')),
 			React.createElement('button',
 				{className: 'search', onClick: this.toggleSearch},
 				'Search'),

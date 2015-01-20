@@ -17,7 +17,7 @@ let RevertStudentToDemoButton = React.createClass({
 				className: 'demo-student',
 				onClick: this.revertToDemo,
 			},
-			'Demo')
+			'Revert to Demo')
 	},
 })
 
