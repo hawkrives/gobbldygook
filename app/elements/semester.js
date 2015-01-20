@@ -126,7 +126,7 @@ let Semester = React.createClass({
 				courseBlocks)
 		}
 		else if (this.state.schedule) {
-			courseList = React.createElement('div', {className: 'loading'}, 'Loading Courses')
+			courseList = React.createElement('div', {className: 'loading-spinner'}, React.createElement('div', null), 'Loading Courses&hellip;')
 		}
 
 		let droppableIsMoving = this.getDropState(itemTypes.COURSE).isDragging

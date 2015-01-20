@@ -6,9 +6,63 @@
 	flex-flow: column nowrap;
 }
 
-.loading-spinner {
+/**
+ * (C)Leanest CSS spinner ever
+ */
 
+@keyframes spin {
+	to { transform: rotate(1turn); }
 }
+
+.loading-spinner {
+	position: relative;
+	display: inline-block;
+	width: 5em;
+	height: 5em;
+	margin: 0 .5em;
+	font-size: 24px;
+	animation: spin 1s infinite steps(8);
+
+	span {
+		opacity: 0;
+	}
+
+	&::before,
+	&::after,
+	& > div::before,
+	& > div::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 2.25em; /* (container width - part width)/2  */
+		width: .5em;
+		height: 1.5em;
+		border-radius: .2em;
+		background: #ddd;
+		box-shadow: 0 3.5em #ddd; /* container height - part height */
+		transform-origin: 50% 2.5em; /* container height / 2 */
+	}
+
+	&::before {
+		background: #555;
+	}
+
+	&::after {
+		transform: rotate(-45deg);
+		background: #777;
+	}
+
+	& > div::before {
+		transform: rotate(-90deg);
+		background: #999;
+	}
+
+	& > div::after {
+		transform: rotate(-135deg);
+		background: #bbb;
+	}
+}
+
 
 .loading-message {
 	font-weight: 300;

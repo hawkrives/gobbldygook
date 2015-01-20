@@ -23,11 +23,7 @@ let GobbldygookApp = React.createClass({
 	render() {
 		// console.log('rendering GobbldygookApp', this.state.studentsInitialized)
 		if (!this.state.studentsInitialized)
-			return React.createElement('img', {
-				className: 'loading',
-				src: 'images/loading.svg',
-				alt: 'Gobbldygook is Loading',
-			})
+			return React.createElement('div', {className: 'loading-spinner'}, React.createElement('div', null), 'Loading Students&hellip;')
 
 		return React.createElement(RouteHandler, {students: this.state.students})
 	},
