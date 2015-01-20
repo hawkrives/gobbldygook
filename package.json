@@ -40,7 +40,7 @@
     "stickyfill": "^1.1.1",
     "sto-areas": "^2.3.6",
     "sto-courses": "^3.0.3",
-    "sto-helpers": "^3.0.4",
+    "sto-helpers": "^3.0.5",
     "sto-sis-time-parser": "^1.0.8",
     "treo": "^0.3.0"
   },

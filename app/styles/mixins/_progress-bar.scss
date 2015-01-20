@@ -17,11 +17,9 @@
 	&::-webkit-progress-bar   { background: $bg; }
 }
 
-@mixin progress-track($base-color, $bar-weight: '300', $track-weight: '100') {
-	@include progress-bar(
-		$color: color($base-color, $bar-weight),
-		$bg: color($base-color, $track-weight))//,
-		// $gradient: repeating-linear-gradient(
-			// 'ellipse', 2em 1em at top left, $base-color 1em, $white)
-	// );
+@mixin progress-track($base-color, $has-track: true, $bar-weight: '300', $track-weight: '100') {
+	$bg: if($has-track, color($base-color, $track-weight), transparent);
+	$color: color($base-color, $bar-weight);
+
+	@include progress-bar($color: $color, $bg: $bg);
 }

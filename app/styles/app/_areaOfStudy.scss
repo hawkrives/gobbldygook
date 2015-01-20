@@ -53,7 +53,8 @@
 		&.thirty  { @include progress-track('amber'); }
 		&.twenty  { @include progress-track('red'); }
 		&.ten     { @include progress-track('red'); }
-		&.zero    { @include progress-track('red'); }
+		&.under-ten { @include progress-track('red'); }
+		&.zero    { @include progress-track('red', $has-track: false); }
 	}
 
 	& > .summary::after {
