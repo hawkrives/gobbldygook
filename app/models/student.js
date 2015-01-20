@@ -8,8 +8,8 @@ import {version as currentVersionString} from '../../package.json'
 import randomChar from 'sto-helpers/lib/randomChar'
 import countCredits from 'sto-helpers/lib/countCredits'
 
-import Schedule from '../models/schedule'
-import Study from '../models/study'
+import Schedule from './schedule'
+import Study from './study'
 
 
 let StudentRecord = Immutable.Record({
