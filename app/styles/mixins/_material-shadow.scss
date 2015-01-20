@@ -11,7 +11,7 @@
 // box-shadows, as transitioning the box-shadow's y-axis is buggy
 // (tested on Chrome v35)
 
-@mixin material-shadow($depth){
+@mixin material-shadow($depth, $filter: false) {
 	$shadows: none;
 	@if $depth == 1 {
 		$shadows:
@@ -39,6 +39,12 @@
 			0px 15px  6px rgba(#000, 0.22);
 	}
 
-	transition: box-shadow 0.7s 0.01s cubic-bezier(0.190, 1.000, 0.220, 1.000);
-	box-shadow: $shadows;
+	@if $filter {
+		transition: filter 0.7s 0.01s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+		filter: drop-shadow(#{nth($shadows, 1)}) drop-shadow(#{nth($shadows, 2)});
+	}
+	@else {
+		transition: box-shadow 0.7s 0.01s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+		box-shadow: $shadows;
+	}
 }

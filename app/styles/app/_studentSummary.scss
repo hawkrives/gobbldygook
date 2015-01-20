@@ -1,5 +1,5 @@
 #student-summary {
-	@include card;
+	@include card($filter: true);
 	hyphens: auto;
 	font-feature-settings: 'onum';
 
@@ -37,8 +37,8 @@
 
 #student-letter {
 	@include avatar-letter(48px);
-	background-color: white;
 	border: solid 1px;
+	background-color: white;
 
 	margin: $block-edge-padding $block-edge-padding*2;
 	margin-left: -6px;
