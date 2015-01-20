@@ -129,10 +129,8 @@ class Schedule extends ScheduleRecord {
 
 	toJSON() {
 		let toRemove = ['_courseData']
-		let filtered = this
-			.toMap()
-			.filterNot((val, key) =>
-				contains(toRemove, key))
+		let filtered = this.toMap()
+			.filterNot((val, key) => contains(toRemove, key))
 		return filtered.toJS()
 	}
 }

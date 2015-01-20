@@ -36,10 +36,8 @@ class Study extends StudyRecord {
 
 	toJSON() {
 		let toKeep = ['id', 'index', 'revisionYear']
-		let filtered = this
-			.toMap()
-			.filter((val, key) =>
-				contains(toKeep, key))
+		let filtered = this.toMap()
+			.filter((val, key) => contains(toKeep, key))
 		return filtered.toJS()
 	}
 }
