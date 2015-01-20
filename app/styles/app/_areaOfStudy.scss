@@ -32,28 +32,28 @@
 	}
 
 	progress {
-		@include progress-bar($color: color('orange'));
+		@include progress-track('orange');
 
 		position: absolute;
 		top: 0;
 		left: 0;
 
 		width: 100%;
-		height: 2px;
+		height: 4px;
 
 		border: 0;
 
-		&.hundred { @include progress-bar($color: color('green', '500')); }
-		&.ninety  { @include progress-bar($color: color('orange', '500')); }
-		&.eighty  { @include progress-bar($color: color('orange', '500')); }
-		&.seventy { @include progress-bar($color: color('orange', '500')); }
-		&.sixty   { @include progress-bar($color: color('amber', '500')); }
-		&.fifty   { @include progress-bar($color: color('amber', '500')); }
-		&.forty   { @include progress-bar($color: color('amber', '500')); }
-		&.thirty  { @include progress-bar($color: color('amber', '500')); }
-		&.twenty  { @include progress-bar($color: color('red', '500')); }
-		&.ten     { @include progress-bar($color: color('red', '500')); }
-		&.zero    { @include progress-bar($color: color('red', '500')); }
+		&.hundred { @include progress-track('green'); }
+		&.ninety  { @include progress-track('orange'); }
+		&.eighty  { @include progress-track('orange'); }
+		&.seventy { @include progress-track('orange'); }
+		&.sixty   { @include progress-track('amber'); }
+		&.fifty   { @include progress-track('amber'); }
+		&.forty   { @include progress-track('amber'); }
+		&.thirty  { @include progress-track('amber'); }
+		&.twenty  { @include progress-track('red'); }
+		&.ten     { @include progress-track('red'); }
+		&.zero    { @include progress-track('red'); }
 	}
 
 	& > .summary::after {
@@ -80,8 +80,7 @@
 		margin-left: 0.5em;
 	}
 	@include button--raised;
-	// padding-top: 0.25em;
-	// padding-bottom: 0.25em;
+
 	min-height: 0;
 	width: 100%;
 	text-align: left;
