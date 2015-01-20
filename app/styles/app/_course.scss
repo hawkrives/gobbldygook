@@ -1,10 +1,15 @@
 @import '../mixins/material-shadow';
 
 .course {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-	align-items: center;
+	.warnings {
+		@include list-unstyled;
+		font-size: 0.85em;
+		color: color('deep-orange', '300');
+	}
+
+	.warnings li::before {
+		margin-right: 0.35em;
+	}
 
 	.title, .summary {
 		text-overflow: ellipsis;
@@ -52,11 +57,6 @@
 		}
 	}
 
-	.info-rows {
-		flex: 1 0 auto;
-		max-width: 100%;
-	}
-
 	p, ul {
 		margin: 0;
 	}
@@ -101,14 +101,11 @@
 	.offerings, .gereqs, .description {
 		margin-bottom: 0.5em;
 	}
-
-	.warnings span {
-		margin-left: 0.25em;
-	}
 }
 
 .course.expanded {
-	background-color: color('gray', '100');
+	background-color: color('gray', '50');
+	color: $text-color;
 
 	.title {
 		overflow: visible;
