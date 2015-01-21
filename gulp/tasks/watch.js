@@ -13,7 +13,7 @@ gulp.task('watch', ['copy', 'sass', 'watchify'], () => {
 	gulp.watch(config.sass.src, ['sass'])
 
 	forEach(config.copy, pathInfo => {
-		let [sourcePath, destPath, title] = info
+		let [sourcePath, destPath, title] = pathInfo
 		gulp.watch(sourcePath, ['copy:' + title])
 	})
 })
