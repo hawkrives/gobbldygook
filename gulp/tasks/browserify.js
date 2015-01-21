@@ -15,6 +15,7 @@ import bundleLogger from '../util/bundleLogger'
 import exorcist from 'exorcist'
 import gulp from 'gulp'
 import handleErrors from '../util/handleErrors'
+import mold from 'mold-source-map'
 import source from 'vinyl-source-stream'
 import to5ify from '6to5ify'
 import watchify from 'watchify'
@@ -24,10 +25,8 @@ function browserifyTask(callback, devMode) {
 	let bundleQueue = config.bundleConfigs.length
 
 	let browserifyThis = (bundleConfig) => {
-		if (devMode) {
-			// Add watchify args and debug (sourcemaps) option
-			extend(bundleConfig, watchify.args, { debug: true })
-		}
+		// Add watchify args and debug (sourcemaps) option
+		extend(bundleConfig, watchify.args, { debug: true })
 
 		let bundler = browserify(bundleConfig)
 
@@ -41,6 +40,8 @@ function browserifyTask(callback, devMode) {
 				.bundle()
 				// Report compile errors
 				.on('error', handleErrors)
+				// Make the sourcemap relative
+				.pipe(mold.transformSourcesRelativeTo('.'))
 				// Use exorcist to remove the map file
 				.pipe(exorcist(bundleConfig.mapFile))
 				// Use vinyl-source-stream to make the stream gulp compatible.
