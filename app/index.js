@@ -1,5 +1,5 @@
 import '6to5-core/polyfill'
-import 'fetch'
+import 'whatwg-fetch'
 
 import Promise from 'bluebird'
 Promise.longStackTraces()
