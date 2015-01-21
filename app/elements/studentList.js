@@ -3,8 +3,36 @@ import {Link} from 'react-router'
 import studentActions from '../flux/studentActions'
 
 let StudentList = React.createClass({
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextProps.students !== this.props.students
+	handleSubmit(ev) {
+		ev.preventDefault()
+	},
+
+	// since we are starting off without any data, there is no initial value
+	getInitialState() {
+		return {
+			data: null,
+		};
+	},
+
+	// when a file is passed to the input field, retrieve the contents as a
+	// base64-encoded data URI and save it to the component's state
+	handleFile(ev) {
+		var reader = new FileReader()
+		var file = ev.target.files[0]
+
+		reader.onload = (upload) => {
+			let json = undefined
+			let result = upload.target.result
+			try {
+				json = JSON.parse(result)
+			}
+			catch (err) {
+				console.error('Error parsing as JSON', result)
+			}
+			this.setState({data: json})
+		}
+
+		reader.readAsText(file)
 	},
 
 	render() {
@@ -20,15 +48,26 @@ let StudentList = React.createClass({
 						student.name)))
 			.toList()
 
-		students = students.push(React.createElement('li', {key: 'add-student', className: 'add-student'},
-			React.createElement('button',
-				{
-					className: 'student-list--student',
-					onClick: studentActions.initStudent,
-				},
-				'Add Student')))
+		let buttons = [
+			React.createElement('button', {
+				key: 'create-student',
+				className: 'create-student',
+				onClick: studentActions.initStudent,
+			}, 'Add Student'),
 
-		return React.createElement('ul', {className: 'student-list'}, students.toJS())
+			React.createElement('input', {
+				type: 'file',
+				accept: '.json',
+				key: 'import-student',
+				className: 'import-student',
+				onSubmit: this.handleSubmit,
+				onChange: this.handleFile,
+			}),
+		]
+
+		return React.createElement('div', {className: 'students-overview'},
+			React.createElement('ul', {className: 'student-list'}, students.toJS()),
+			buttons)
 	},
 })
 
