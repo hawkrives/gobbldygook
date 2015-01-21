@@ -51,7 +51,7 @@ $semester-spacing: 4px;
 	li {
 		&::before { content: " – "; }
 
-		font-feature-settings: 'onum';
+		font-feature-settings: 'onum', 'smcp';
 		padding-left: 0.25em;
 	}
 }
