@@ -41,7 +41,7 @@
     "sto-courses": "3.0.3",
     "sto-helpers": "3.0.5",
     "sto-sis-time-parser": "1.0.8",
-    "treo": "0.3.0",
+    "treo": "^0.4.1",
     "whatwg-fetch": "0.6.1"
   },
   "devDependencies": {
