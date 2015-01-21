@@ -1,18 +1,23 @@
-import Promise from 'bluebird'
-import browserSync from 'browser-sync'
+import {map, bind} from 'lodash'
 import gulp from 'gulp'
+import cache from 'gulp-cached'
 import size from 'gulp-size'
 import {copy as config} from '../config'
 
-let copyFile = (info) => new Promise((resolve) => {
+let copyFile = (info) => {
 	let [sourcePath, destPath, title] = info
 
-	gulp.src(sourcePath)
-		.pipe(size({title: 'copy:' + title}))
+	return gulp.src(sourcePath)
+		.pipe(size({title: `copy:${title}`}))
 		.pipe(gulp.dest(destPath))
-		.on('end', resolve)
+}
+
+let copyTasks = map(config, pathInfo => {
+	let [sourcePath, destPath, title] = pathInfo
+	let taskName = `copy:${title}`
+	gulp.task(taskName, bind(copyFile, this, pathInfo))
+
+	return taskName
 })
 
-let copyAll = () => Promise.all(config.map(copyFile))
-
-gulp.task('copy', copyAll)
+gulp.task('copy', copyTasks)
