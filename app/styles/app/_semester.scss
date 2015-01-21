@@ -23,6 +23,7 @@ $semester-spacing: 4px;
 
 .semester.is-over {
 	@include material-shadow(2);
+	z-index: 10;
 }
 
 .semester-title {
