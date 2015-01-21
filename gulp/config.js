@@ -26,6 +26,7 @@ let copy = [
 	[`${src}.htaccess`, dest, 'htaccess'],
 	[`${src}images/loading.svg`, `${dest}images`, 'images'],
 	[`${src}fonts/*.woff`, `${dest}fonts`, 'fonts'],
+	[`${src}icons/font/ionicons.woff`, `${dest}fonts`, 'icon-font'],
 ]
 
 let browserify = {
