@@ -29,10 +29,10 @@ let schema = treo.schema()
 			.addIndex('type', 'type')
 			.addIndex('year', 'year')
 			.addIndex('sourcePath', 'sourcePath')
-		.addStore('areas', { increment: true })
+		.addStore('areas', { key: 'sourcePath' })
 			.addIndex('type', 'type', { multi: true })
 			.addIndex('sourcePath', 'sourcePath')
-		.addStore('students', { increment: true })
+		.addStore('students', { key: 'id' })
 
 
 import treoPromise from 'treo/plugins/treo-promise'
