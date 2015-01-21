@@ -5,6 +5,7 @@
 		@include list-unstyled;
 		font-size: 0.85em;
 		color: color('deep-orange', '300');
+		font-feature-settings: 'onum';
 	}
 
 	.warnings li::before {

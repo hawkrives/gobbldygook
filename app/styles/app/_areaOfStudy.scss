@@ -58,7 +58,7 @@
 	}
 
 	& > .summary::after {
-		@include ionicon($ionicon-ios7-more);
+		@include ionicon($ionicon-ios-more);
 
 		// position: absolute;
 		// top: 1px;
@@ -70,24 +70,26 @@
 	}
 
 	&.open > .summary::after {
-		@include ionicon($ionicon-ios7-more-outline);
+		@include ionicon($ionicon-ios-more-outline);
 
 		transform: rotate(90deg) scale(0.8);
 	}
 }
 
 .add-area-of-study {
-	@include add-button {
-		margin-left: 0.5em;
+	@include add-button($psuedo: '::before') {
+		margin-right: 0.5em;
 	}
 	@include button--raised;
 
 	min-height: 0;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
 	width: 100%;
 	text-align: left;
 	padding-left: $block-edge-padding * 1.5;
 
-	text-transform: lowercase;
+	text-transform: none;
 	font-feature-settings: 'smcp';
 	font-size: 0.85em;
 }

@@ -66,11 +66,11 @@ $border-color: rgb(203, 203, 203);
 	}
 
 	&.incomplete::before {
-		@include ionicon($ionicon-close);
+		@include ionicon($ionicon-android-checkbox-blank);
 		color: color('red');
 	}
 	&.completed::before {
-		@include ionicon($ionicon-checkmark);
+		@include ionicon($ionicon-android-checkmark-circle);
 		color: color('green');
 	}
 }
