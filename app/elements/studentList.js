@@ -11,7 +11,7 @@ let StudentList = React.createClass({
 	getInitialState() {
 		return {
 			data: null,
-		};
+		}
 	},
 
 	// when a file is passed to the input field, retrieve the contents as a

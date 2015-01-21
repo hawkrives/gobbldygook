@@ -58,7 +58,6 @@
   ],
   "requireSpaceAfterLineComment": true,
   "requireSpaceBeforeBinaryOperators": true,
-  "requireSpaceBeforeBlockStatements": true,
   "requireSpaceBeforeKeywords": [
     "do",
     "for",
