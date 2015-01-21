@@ -37,7 +37,7 @@
     "react-router": "0.11.6",
     "reflux": "0.2.3",
     "stickyfill": "1.1.1",
-    "sto-areas": "2.3.6",
+    "sto-areas": "2.3.7",
     "sto-courses": "3.0.3",
     "sto-helpers": "3.0.5",
     "sto-sis-time-parser": "1.0.8",
@@ -45,7 +45,7 @@
     "whatwg-fetch": "0.6.1"
   },
   "devDependencies": {
-    "6to5-core": "2.13.4",
+    "6to5-core": "2.13.5",
     "6to5ify": "3.1.2",
     "autoprefixer-core": "5.0.0",
     "browser-sync": "1.9.0",
