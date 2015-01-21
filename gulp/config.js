@@ -1,45 +1,50 @@
 let dest = './dist/'
 let src = './app/'
 
-export default {
-	browserSync: {
-		browser: 'google chrome',
-		files: `${dest}**`,
-		server: {
-			baseDir: dest,
-		},
+let browserSync = {
+	browser: 'google chrome',
+	files: `${dest}**`,
+	server: {
+		baseDir: dest,
 	},
+}
 
-	lint: [
-		`${src}**/*.js`,
-		'gulp/**/*.js',
-		'test/**/*.js',
-	],
+let lint = [
+	`${src}**/*.js`,
+	'gulp/**/*.js',
+	'test/**/*.js',
+]
 
-	sass: {
-		src: `${src}styles/**/*.scss`,
+let sass = {
+	src: `${src}styles/**/*.scss`,
+	dest: dest,
+}
+
+let copy = [
+	[`node_modules/sto-courses/**/*`, `${dest}data/courses`, 'courses'],
+	[`${src}index.html`, dest, 'markup'],
+	[`${src}.htaccess`, dest, 'htaccess'],
+	[`${src}images/loading.svg`, `${dest}images`, 'images'],
+	[`${src}fonts/*.woff`, `${dest}fonts`, 'fonts'],
+]
+
+let browserify = {
+	// A separate bundle will be generated for each
+	// bundle config in the list below
+	bundleConfigs: [{
+		entries: `${src}index.js`,
 		dest: dest,
-	},
+		// Additional file extentions to make optional
+		// extensions: ['.es6'],
+		outputName: 'app.js',
+		mapFile: `${dest}app.js.map`,
+	}],
+}
 
-	copy: [
-		[`node_modules/sto-courses/**/*`, `${dest}data/courses`, 'courses'],
-		[`${src}index.html`, dest, 'markup'],
-		[`${src}.htaccess`, dest, 'htaccess'],
-		[`${src}images/loading.svg`, `${dest}images`, 'images'],
-		[`${src}fonts/*.woff`, `${dest}fonts`, 'fonts'],
-		[`${src}icons/font/*.woff`, `${dest}fonts`, 'icons'],
-	],
-
-	browserify: {
-		// A separate bundle will be generated for each
-		// bundle config in the list below
-		bundleConfigs: [{
-			entries: `${src}index.js`,
-			dest: dest,
-			// Additional file extentions to make optional
-			// extensions: ['.es6'],
-			outputName: 'app.js',
-			mapFile: `${dest}app.js.map`,
-		}],
-	},
+export default {
+	browserSync,
+	lint,
+	sass,
+	copy,
+	browserify,
 }
