@@ -1,9 +1,8 @@
 @import '../icons/scss/ionicons-variables';
-$ionicons-font-path: './fonts';
 
 @font-face {
 	font-family: $ionicons-font-family;
-	src: url($ionicons-font-path + "/ionicons.woff") format("woff");
+	src: url('./fonts/ionicons.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -31,5 +30,5 @@ $ionicons-font-path: './fonts';
 }
 
 .course-invalid-year::before { @include ionicon($ionicon-alert-circled);}
-.course-invalid-semester::before { @include ionicon($ionicon-ios7-calendar-outline);}
-.course-time-conflict::before { @include ionicon($ionicon-ios7-clock-outline);}
+.course-invalid-semester::before { @include ionicon($ionicon-ios-calendar-outline);}
+.course-time-conflict::before { @include ionicon($ionicon-ios-clock-outline);}

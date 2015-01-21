@@ -3,11 +3,11 @@
 
 @mixin add-button {
 	&::after {
-		@include ionicon($ionicon-ios7-plus-empty);
+		@include ionicon($ionicon-android-add);
 		@content;
 	}
 
 	&[disabled]::after {
-		@include ionicon($ionicon-checkmark);
+		@include ionicon($ionicon-android-checkmark-circle);
 	}
 }
