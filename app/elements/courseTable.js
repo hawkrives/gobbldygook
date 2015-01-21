@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import React from 'react'
 
+import expandYear from 'sto-helpers/lib/expandYear'
 import findFirstAvailableYear from 'sto-helpers/lib/findFirstAvailableYear'
 
 import studentActions from '../flux/studentActions'
@@ -11,13 +12,26 @@ let CourseTable = React.createClass({
 		student: React.PropTypes.object.isRequired,
 	},
 
-	addYear() {
-		let nextAvailableYear = findFirstAvailableYear(this.props.student.schedules, this.props.student.matriculation)
+	getInitialState() {
+		return {
+			nextAvailableYear: undefined,
+		}
+	},
 
+	addYear() {
 		studentActions.addSchedule(this.props.student.id, {
-			year: nextAvailableYear, semester: 1,
+			year: this.state.nextAvailableYear, semester: 1,
 			index: 1, active: true,
 		})
+	},
+
+	componentWillReceiveProps(nextProps) {
+		let nextAvailableYear = findFirstAvailableYear(nextProps.student.schedules, nextProps.student.matriculation)
+		this.setState({nextAvailableYear})
+	},
+
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
 	},
 
 	render() {
@@ -42,7 +56,7 @@ let CourseTable = React.createClass({
 				className: 'add-year',
 				title: 'Add Year',
 				onClick: this.addYear,
-			}))
+			}, `${expandYear(this.state.nextAvailableYear, false, '–')}`))
 	},
 })
 
