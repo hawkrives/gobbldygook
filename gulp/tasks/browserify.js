@@ -42,6 +42,8 @@ function browserifyTask(callback, devMode) {
 				.on('error', handleErrors)
 				// Make the sourcemap relative
 				.pipe(mold.transformSourcesRelativeTo('.'))
+				// Report sourcemap molding errors
+				.on('error', handleErrors)
 				// Use exorcist to remove the map file
 				.pipe(exorcist(bundleConfig.mapFile))
 				// Use vinyl-source-stream to make the stream gulp compatible.
