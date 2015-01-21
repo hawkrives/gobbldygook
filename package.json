@@ -39,7 +39,7 @@
     "stickyfill": "1.1.1",
     "sto-areas": "2.3.7",
     "sto-courses": "3.0.3",
-    "sto-helpers": "3.0.5",
+    "sto-helpers": "3.0.6",
     "sto-sis-time-parser": "1.0.8",
     "treo": "^0.4.1",
     "whatwg-fetch": "0.6.1"
@@ -48,7 +48,7 @@
     "6to5-core": "2.13.5",
     "6to5ify": "3.1.2",
     "autoprefixer-core": "5.0.0",
-    "browser-sync": "1.9.0",
+    "browser-sync": "1.9.1",
     "browserify": "8.1.1",
     "chai": "1.10.0",
     "csswring": "3.0.0",
