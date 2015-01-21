@@ -39,13 +39,10 @@ let StudentList = React.createClass({
 		let students = this.props.students
 			.map((student) =>
 				React.createElement('li', {key: student.id},
-					React.createElement(Link,
-						{
-							className: 'student-list--student',
-							to: 'student',
-							params: {id: student.id},
-						},
-						student.name)))
+					React.createElement(Link, {
+						to: 'student',
+						params: {id: student.id},
+					}, student.name)))
 			.toList()
 
 		let buttons = [
@@ -67,7 +64,7 @@ let StudentList = React.createClass({
 
 		return React.createElement('div', {className: 'students-overview'},
 			React.createElement('ul', {className: 'student-list'}, students.toJS()),
-			buttons)
+			React.createElement('div', {className: 'student-buttons'}, buttons))
 	},
 })
 

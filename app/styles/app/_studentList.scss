@@ -2,10 +2,13 @@
 	@include list-inline;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-around;
+	flex: 1;
 }
 
-.student-list > li {
+.student-list li {
+	flex: 1;
+	max-width: 15em;
+
 	margin: 0 0.5em 1em;
 
 	transform-origin: 50% 50%;
@@ -15,11 +18,10 @@
 	&:nth-child(even):hover { transform: rotate(2deg);  }
 }
 
-.student-list--student {
+.student-list a {
 	@include button--raised;
 	@include link-undecorated;
-	display: inline-block;
-
+	display: block;
 	padding: 0.5em 1em;
 
 	&:hover {
@@ -27,9 +29,31 @@
 	}
 }
 
-.add-student {
-	min-width: 100%;
-	button {
-		width: 100%;
-	}
+.students-overview {
+	display: flex;
+	flex-direction: column;
+}
+
+.student-buttons {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.student-buttons .create-student,
+.student-buttons .import-student {
+	margin: 0 1em;
+}
+
+.student-buttons .create-student {
+	max-width: 20em;
+	@include button--raised;
+}
+
+.student-buttons .import-student {
+	border: dashed 5px color('gray', '400');
+	border-radius: 1em;
+	padding: 1em;
+	height: 10ex;
 }
