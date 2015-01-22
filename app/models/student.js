@@ -35,7 +35,7 @@ class Student extends StudentRecord {
 		// let startTime = performance.now()
 		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
 		// instead of our custom Studies, Schedules, and such.
-		let toRemove = ['studies', 'schedules', 'overrides', 'fabrications']
+		let toRemove = ['studies', 'schedules', 'overrides', 'fabrications', 'settings']
 		let filtered = omit(encodedStudent, toRemove)
 		let immutableStudent = Immutable.fromJS(filtered)
 
@@ -61,6 +61,10 @@ class Student extends StudentRecord {
 
 				forEach((encodedStudent.fabrications || []), fabrication => {
 					student = student.addFabrication(fabrication)
+				})
+
+				forEach((encodedStudent.settings || {}), (value, key) => {
+					student = student.changeSetting(key, value)
 				})
 
 				student = student.set('version', currentVersionString)
