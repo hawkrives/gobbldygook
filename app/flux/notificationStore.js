@@ -35,9 +35,10 @@ let notificationStore = Reflux.createStore({
 		}
 	},
 
-	logError(error, ...args) {
-		console.error(error, ...args)
+	logError(error={}, ...args) {
 		// console.log('logError')
+		if (!error.quiet)
+			console.error(error, ...args)
 		let id = this.errorIndex
 		let notification = {id, message: error.message, type: 'error'}
 		this.notifications = this.notifications.set(id, notification)
