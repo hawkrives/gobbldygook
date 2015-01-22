@@ -13,13 +13,13 @@ describe('studentStore', () => {
 		studentStore = require('../../app/flux/studentStore')
 	})
 
-	xit('creates itself correctly', () => {
+	it('creates itself correctly', () => {
 		expect(studentStore.students).toBeDefined()
 		expect(studentStore.history).toBeDefined()
 		expect(studentStore.future).toBeDefined()
 	})
 
-	xit('supports undoing things', () => {
+	it('supports undoing things', () => {
 		let initial = studentStore.students
 		studentStore.initStudent()
 		let oneChange = studentStore.students
@@ -42,7 +42,7 @@ describe('studentStore', () => {
 		studentStore.undo()
 		expect(studentStore.students).toBe(initial)
 	})
-	xit('supports redoing things', () => {
+	it('supports redoing things', () => {
 		let initial = studentStore.students
 		studentStore.initStudent()
 		let oneChange = studentStore.students
@@ -57,7 +57,7 @@ describe('studentStore', () => {
 		studentStore.redo()
 		expect(studentStore.students).toBe(oneChange)
 	})
-	xit('will not let you go back to a previous future', () => {
+	it('will not let you go back to a previous future', () => {
 		let initial = studentStore.students
 		studentStore.initStudent()
 		let oneChange = studentStore.students
@@ -80,7 +80,7 @@ describe('studentStore', () => {
 		expect(studentStore.students).toBe(newFuture)
 	})
 
-	xit('can reset a student to a demo state', () => {
+	it('can reset a student to a demo state', () => {
 		studentStore.initStudent()
 		let stu = studentStore.students.first()
 
@@ -88,7 +88,7 @@ describe('studentStore', () => {
 
 		expect(studentStore.students.first()).not.toBe(stu)
 	})
-	xit('reloads all currently known students from storage', () => {
+	it('reloads all currently known students from storage', () => {
 		studentStore.initStudent()
 		let stu = studentStore.students.first()
 
@@ -106,12 +106,12 @@ describe('studentStore', () => {
 	xit('loads the given id from storage', () => {})
 	xit('removes broken students fom storage', () => {})
 
-	xit('creates new students', () => {
+	it('creates new students', () => {
 		studentStore.initStudent()
 		expect(studentStore.students.size).toBe(1)
 	})
 
-	xit('saves state before changing students', () => {
+	it('saves state before changing students', () => {
 		studentStore.initStudent()
 		let initial = studentStore.students
 		let stu = initial.first()
@@ -124,7 +124,7 @@ describe('studentStore', () => {
 
 		expect(studentStore.students).toBe(initial)
 	})
-	xit('saves state before altering students', () => {
+	it('saves state before altering students', () => {
 		studentStore.initStudent()
 		let initial = studentStore.students
 		let stu = initial.first()
@@ -146,7 +146,7 @@ describe('studentStore', () => {
 		expect(studentStore.students).toBe(initial)
 	})
 
-	xit('passes methods that change students', () => {
+	it('calls methods that change students', () => {
 		studentStore.initStudent()
 		let initial = studentStore.students
 		let stu = initial.first()
@@ -155,7 +155,7 @@ describe('studentStore', () => {
 
 		expect(studentStore.students.get(stu.id).name).toBe('new name')
 	})
-	xit('passes methods that alter things inside of students', () => {
+	it('calls methods that alter things inside of students', () => {
 		studentStore.initStudent()
 		let initial = studentStore.students
 		let stu = initial.first()
