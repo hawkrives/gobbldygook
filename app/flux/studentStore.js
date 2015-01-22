@@ -1,4 +1,4 @@
-import {chain, forEach, map} from 'lodash'
+import {chain, forEach, map, uniq} from 'lodash'
 import Reflux from 'reflux'
 import Immutable from 'immutable'
 
@@ -97,6 +97,8 @@ let studentStore = Reflux.createStore({
 		if (studentId) {
 			studentIds.push(studentId)
 		}
+
+		studentIds = uniq(studentIds)
 
 		// Fetch and load the students from their IDs
 		let localStudents = chain(studentIds)
