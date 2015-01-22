@@ -81,6 +81,7 @@ describe('studentStore', () => {
 
 		studentStore.redo()
 		expect(studentStore.students).toBe(newFuture)
+		expect(studentStore.future.size).toBe(0)
 	})
 
 	it('can reset a student to a demo state', () => {
@@ -103,6 +104,7 @@ describe('studentStore', () => {
 
 		let other = studentStore.students.first()
 		expect(other).not.toBe(stu)
+		expect(other.name).toBe('name')
 	})
 
 	xit('loads students from storage', () => {})
