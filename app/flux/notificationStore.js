@@ -64,6 +64,7 @@ let notificationStore = Reflux.createStore({
 	incrementProgress(id, by) {
 		let progress = this.notifications.get(id)
 		progress.value += by || 1
+		progress.value = progress.value <= progress.max ? progress.value : progress.max
 
 		this.notifications = this.notifications.set(id, progress)
 		this._postChange()
