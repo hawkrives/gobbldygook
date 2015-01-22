@@ -158,6 +158,7 @@ let studentStore = Reflux.createStore({
 	initStudent() {
 		let fleshedStudent = new Student()
 		fleshedStudent.save()
+		this._preChange()
 		this._loadData(fleshedStudent.id)
 	},
 
