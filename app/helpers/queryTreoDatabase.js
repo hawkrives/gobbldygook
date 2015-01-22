@@ -7,8 +7,7 @@ import {any, isString, first, last, filter} from 'lodash'
 import deepEql from 'deep-eql'
 import checkAgainstQuery from 'sto-helpers/lib/checkCourseAgainstQuery'
 
-function query(db) {
-	let treo = db.constructor
+function query(db, treo) {
 	let {Store} = treo
 
 	/**
