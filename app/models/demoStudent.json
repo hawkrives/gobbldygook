@@ -142,5 +142,7 @@
 		}
 	],
 
-	"settings": {}
+	"settings": {
+		"exampleSetting": true
+	}
 }
