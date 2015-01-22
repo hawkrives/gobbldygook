@@ -23,6 +23,7 @@ let StudentList = React.createClass({
 		reader.onload = (upload) => {
 			studentActions.importStudent(upload.target.result)
 		}
+
 		reader.readAsText(file)
 	},
 
