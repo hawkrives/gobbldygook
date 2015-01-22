@@ -21,15 +21,7 @@ let StudentList = React.createClass({
 		var file = ev.target.files[0]
 
 		reader.onload = (upload) => {
-			let json = undefined
-			let result = upload.target.result
-			try {
-				json = JSON.parse(result)
-			}
-			catch (err) {
-				console.error('Error parsing as JSON', result)
-			}
-			this.setState({data: json})
+			studentActions.importStudent(upload.target.result)
 		}
 
 		reader.readAsText(file)
