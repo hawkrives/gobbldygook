@@ -1,6 +1,5 @@
 import Reflux from 'reflux'
 import Immutable from 'immutable'
-import uuid from 'node-uuid'
 
 import notificationActions from './notificationActions'
 
