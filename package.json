@@ -20,7 +20,7 @@
     "lint": "gulp lint",
     "serve": "gulp watch",
     "watch": "gulp watch",
-    "test": "mocha",
+    "test": "jest",
     "travis": "npm run build && npm run lint && npm run test"
   },
   "dependencies": {
@@ -51,7 +51,6 @@
     "autoprefixer-core": "5.0.0",
     "browser-sync": "1.9.1",
     "browserify": "8.1.1",
-    "chai": "1.10.0",
     "csswring": "3.0.0",
     "exorcist": "0.1.6",
     "gulp": "3.8.10",
@@ -65,11 +64,9 @@
     "gulp-util": "3.0.2",
     "jest-cli": "^0.2.1",
     "jscs-jsdoc": "0.4.0",
-    "mocha": "2.1.0",
     "mold-source-map": "^0.3.0",
     "postcss": "4.0.1",
     "pretty-hrtime": "1.0.0",
-    "require-dir": "0.1.0",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.0.0",
     "watchify": "2.2.1"
