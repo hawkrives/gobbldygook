@@ -21,10 +21,13 @@ describe('studentStore', () => {
 
 	it('supports undoing things', () => {
 		let initial = studentStore.students
+
 		studentStore.initStudent()
 		let oneChange = studentStore.students
+
 		studentStore.initStudent()
 		let twoChange = studentStore.students
+
 		studentStore.initStudent()
 		let threeChange = studentStore.students
 		studentStore.initStudent()
@@ -35,10 +38,13 @@ describe('studentStore', () => {
 		expect(threeChange.size).toBe(3)
 
 		expect(studentStore.students).toBe(threeChange)
+
 		studentStore.undo()
 		expect(studentStore.students).toBe(twoChange)
+
 		studentStore.undo()
 		expect(studentStore.students).toBe(oneChange)
+
 		studentStore.undo()
 		expect(studentStore.students).toBe(initial)
 	})
