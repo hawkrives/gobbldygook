@@ -23,21 +23,21 @@ let notificationStore = Reflux.createStore({
 	removeNotification(id, delay=0) {
 		if (delay) {
 			setTimeout(() => {
-				console.log('removeNotification')
+				// console.log('removeNotification')
 				this.notifications = this.notifications.delete(id)
 				this._postChange()
 			}, delay)
 		}
 		else {
-			console.log('removeNotification')
+			// console.log('removeNotification')
 			this.notifications = this.notifications.delete(id)
 			this._postChange()
 		}
 	},
 
 	logError(error, ...args) {
-		console.log('logError')
 		console.error(error, ...args)
+		// console.log('logError')
 		let id = this.errorIndex
 		let notification = {id, message: error.message, type: 'error'}
 		this.notifications = this.notifications.set(id, notification)
@@ -45,14 +45,14 @@ let notificationStore = Reflux.createStore({
 	},
 
 	logMessage(id, message) {
-		console.log('logMessage')
+		// console.log('logMessage')
 		let notification = {id, message, type: 'message'}
 		this.notifications = this.notifications.set(id, notification)
 		this._postChange()
 	},
 
 	startProgress(id, message='', progress={}, hideButton=false) {
-		console.log('startProgress')
+		// console.log('startProgress')
 		let value = progress.value || 0
 		let max = progress.max || 1
 		let notification = {id, message, value, max, type: 'progress', hideButton}
