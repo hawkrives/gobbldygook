@@ -1,7 +1,4 @@
 // tests/areas/common-education-requirements-test.js
-import 'should'
-
-import reqs from 'sto-areas/lib/commonEducationRequirements'
 
 // todo: the [across two depts] requirements need to validate when there's
 // only one course.
@@ -36,7 +33,7 @@ let makeResults = (title, abbr) => {
 	return [goodResult, badResult]
 }
 
-describe('firstYearWriting', function() {
+xdescribe('firstYearWriting', function() {
 	it('checks if a list of courses fulfills the FYW requirement', function() {
 		let firstYearWriting = reqs.firstYearWriting
 		let [goodResult, badResult] = makeResults('First Year Writing', 'FYW')
@@ -45,7 +42,7 @@ describe('firstYearWriting', function() {
 	})
 })
 
-describe('writingInContext', function() {
+xdescribe('writingInContext', function() {
 	it('checks if a list of courses fulfills the WRI requirement', function() {
 		let writingInContext = reqs.writingInContext
 		let [goodResult, badResult] = makeResults('Writing in Context', 'WRI')
@@ -54,7 +51,7 @@ describe('writingInContext', function() {
 	})
 })
 
-describe('foreignLanguage', function() {
+xdescribe('foreignLanguage', function() {
 	it('checks if a list of courses fulfills the FOL requirement', function() {
 		let foreignLanguage = reqs.foreignLanguage
 		let [goodResult, badResult] = makeResults('Foreign Language', 'FOL')
@@ -63,7 +60,7 @@ describe('foreignLanguage', function() {
 	})
 })
 
-describe('oralCommunication', function() {
+xdescribe('oralCommunication', function() {
 	it('checks if a list of courses fulfills the ORC requirement', function() {
 		let oralCommunication = reqs.oralCommunication
 		let [goodResult, badResult] = makeResults('Oral Communication', 'ORC')
@@ -72,7 +69,7 @@ describe('oralCommunication', function() {
 	})
 })
 
-describe('abstractAndQuantitativeReasoning', function() {
+xdescribe('abstractAndQuantitativeReasoning', function() {
 	it('checks if a list of courses fulfills the AQR requirement', function() {
 		let abstractAndQuantitativeReasoning = reqs.abstractAndQuantitativeReasoning
 		let [goodResult, badResult] = makeResults('Abstract and Quantitative Reasoning', 'AQR')
@@ -81,7 +78,7 @@ describe('abstractAndQuantitativeReasoning', function() {
 	})
 })
 
-describe('studiesInPhysicalMovement', function() {
+xdescribe('studiesInPhysicalMovement', function() {
 	it('checks if a list of courses fulfills the SPM requirement', function() {
 		let studiesInPhysicalMovement = reqs.studiesInPhysicalMovement
 		let [goodResult, badResult] = makeResults('Studies in Physical Movement', 'SPM')
@@ -127,7 +124,7 @@ describe('studiesInPhysicalMovement', function() {
 	})
 })
 
-describe('historicalStudiesInWesternCulture', function() {
+xdescribe('historicalStudiesInWesternCulture', function() {
 	it('checks if a list of courses fulfills the HWC requirement', function() {
 		let historicalStudiesInWesternCulture = reqs.historicalStudiesInWesternCulture
 		let [goodResult, badResult] = makeResults('Historical Studies in Western Culture', 'HWC')
@@ -136,7 +133,7 @@ describe('historicalStudiesInWesternCulture', function() {
 	})
 })
 
-describe('multiculturalGlobalStudies', function() {
+xdescribe('multiculturalGlobalStudies', function() {
 	it('checks if a list of courses fulfills the MCG requirement', function() {
 		let multiculturalGlobalStudies = reqs.multiculturalGlobalStudies
 		let [goodResult, badResult] = makeResults('Multicultural Studies - Global', 'MCG')
@@ -145,7 +142,7 @@ describe('multiculturalGlobalStudies', function() {
 	})
 })
 
-describe('multiculturalDomesticStudies', function() {
+xdescribe('multiculturalDomesticStudies', function() {
 	it('checks if a list of courses fulfills the MCD requirement', function() {
 		let multiculturalDomesticStudies = reqs.multiculturalDomesticStudies
 		let [goodResult, badResult] = makeResults('Multicultural Studies - Domestic', 'MCD')
@@ -154,7 +151,7 @@ describe('multiculturalDomesticStudies', function() {
 	})
 })
 
-describe('artisticStudies', function() {
+xdescribe('artisticStudies', function() {
 	it('checks if a list of courses fulfills the ALS-A requirement', function() {
 		let artisticStudies = reqs.artisticStudies
 		let [goodResult, badResult] = makeResults('Artistic Studies', 'ALS-A')
@@ -168,7 +165,7 @@ describe('artisticStudies', function() {
 	})
 })
 
-describe('literaryStudies', function() {
+xdescribe('literaryStudies', function() {
 	it('checks if a list of courses fulfills the ALS-L requirement', function() {
 		let literaryStudies = reqs.literaryStudies
 		let [goodResult, badResult] = makeResults('Literary Studies', 'ALS-L')
@@ -182,7 +179,7 @@ describe('literaryStudies', function() {
 	})
 })
 
-describe('biblicalStudies', function() {
+xdescribe('biblicalStudies', function() {
 	it('checks if a list of courses fulfills the BTS-B requirement', function() {
 		let biblicalStudies = reqs.biblicalStudies
 		let [goodResult, badResult] = makeResults('Biblical and Theological Studies - Bible', 'BTS-B')
@@ -191,7 +188,7 @@ describe('biblicalStudies', function() {
 	})
 })
 
-describe('theologicalStudies', function() {
+xdescribe('theologicalStudies', function() {
 	it('checks if a list of courses fulfills the BTS-T requirement', function() {
 		let theologicalStudies = reqs.theologicalStudies
 		let [goodResult, badResult] = makeResults('Biblical and Theological Studies - Theology', 'BTS-T')
@@ -200,7 +197,7 @@ describe('theologicalStudies', function() {
 	})
 })
 
-describe('scientificExplorationAndDiscovery', function() {
+xdescribe('scientificExplorationAndDiscovery', function() {
 	it('checks if a list of courses fulfills the SED requirement', function() {
 		let scientificExplorationAndDiscovery = reqs.scientificExplorationAndDiscovery
 		let [goodResult, badResult] = makeResults('Scientific Exploration and Discovery', 'SED')
@@ -214,7 +211,7 @@ describe('scientificExplorationAndDiscovery', function() {
 	})
 })
 
-describe('integratedScientificTopics', function() {
+xdescribe('integratedScientificTopics', function() {
 	it('checks if a list of courses fulfills the IST requirement', function() {
 		let integratedScientificTopics = reqs.integratedScientificTopics
 		let [goodResult, badResult] = makeResults('Integrated Scientific Topics', 'IST')
@@ -228,7 +225,7 @@ describe('integratedScientificTopics', function() {
 	})
 })
 
-describe('studiesInHumanBehaviorAndSociety', function() {
+xdescribe('studiesInHumanBehaviorAndSociety', function() {
 	it('checks if a list of courses fulfills the HBS requirement', function() {
 		let studiesInHumanBehaviorAndSociety = reqs.studiesInHumanBehaviorAndSociety
 		let [goodResult, badResult] = makeResults('Studies in Human Behavior and Society', 'HBS')
@@ -245,7 +242,7 @@ describe('studiesInHumanBehaviorAndSociety', function() {
 	})
 })
 
-describe('ethicalIssuesAndNormativePerspectives', function() {
+xdescribe('ethicalIssuesAndNormativePerspectives', function() {
 	it('checks if a list of courses fulfills the EIN requirement', function() {
 		let ethicalIssuesAndNormativePerspectives = reqs.ethicalIssuesAndNormativePerspectives
 		let [goodResult, badResult] = makeResults('Ethical Issues and Normative Perspectives', 'EIN')

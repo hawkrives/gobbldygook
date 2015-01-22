@@ -1,7 +1,7 @@
 // tests/areas/common-education-utilities-test.js
-jest.dontMock('../../mockups/commonEducationUtilities')
+// jest.dontMock('../../mockups/commonEducationUtilities')
 
-describe('onlyQuarterCreditCoursesCanBePassFail', function() {
+xdescribe('onlyQuarterCreditCoursesCanBePassFail', function() {
 	it('doesn\'t really do anything, yet', function() {
 		var quarterCreditCourses = require('../../mockups/commonEducationUtilities').onlyQuarterCreditCoursesCanBePassFail
 		var course = {}
@@ -9,7 +9,7 @@ describe('onlyQuarterCreditCoursesCanBePassFail', function() {
 	})
 })
 
-describe('hasGenEd', function() {
+xdescribe('hasGenEd', function() {
 	it('check if a given course counts towards a gened', function() {
 		var hasGenEd = require('../../mockups/commonEducationUtilities').hasGenEd
 		var course = {gereqs: ['FYW']}
@@ -19,7 +19,7 @@ describe('hasGenEd', function() {
 	})
 })
 
-describe('hasFOL', function() {
+xdescribe('hasFOL', function() {
 	it('check if a given course counts towards the FOL gened', function() {
 		var hasFOL = require('../../mockups/commonEducationUtilities').hasFOL
 		var courses = {
@@ -57,7 +57,7 @@ describe('hasFOL', function() {
 	})
 })
 
-describe('countGeneds', function() {
+xdescribe('countGeneds', function() {
 	it('counts the number of courses that have a given gened', function() {
 		var countGeneds = require('../../mockups/commonEducationUtilities').countGeneds
 		var courses = [
@@ -71,7 +71,7 @@ describe('countGeneds', function() {
 	})
 })
 
-describe('getDepartments', function() {
+xdescribe('getDepartments', function() {
 	it('returns an uniqued array of the departments from a list of courses', function() {
 		var getDepartments = require('../../mockups/commonEducationUtilities').getDepartments
 		var courses = [
@@ -83,7 +83,7 @@ describe('getDepartments', function() {
 	})
 })
 
-describe('acrossAtLeastTwoDepartments', function() {
+xdescribe('acrossAtLeastTwoDepartments', function() {
 	it('checks if a list of courses spans at least two departments', function() {
 		var twoDepts = require('../../mockups/commonEducationUtilities').acrossAtLeastTwoDepartments
 		var courses = [
@@ -99,7 +99,7 @@ describe('acrossAtLeastTwoDepartments', function() {
 	})
 })
 
-describe('checkThatNCoursesSpanTwoDepartments', function() {
+xdescribe('checkThatNCoursesSpanTwoDepartments', function() {
 	it('checks if a list of courses covers at least two departments', function() {
 		var checkThatNCoursesSpanTwoDepartments = require('../../mockups/commonEducationUtilities').checkThatNCoursesSpanTwoDepartments
 
