@@ -226,8 +226,12 @@ class Student extends StudentRecord {
 	}
 
 	save() {
-		console.log(`saving student ${this.name} (${this.id})`)
-		localStorage.setItem(this.id, JSON.stringify(this))
+		let oldVersion = localStorage.getItem(this.id)
+		let stringified = JSON.stringify(this)
+		if (oldVersion !== stringified) {
+			console.log(`saving student ${this.name} (${this.id})`)
+			localStorage.setItem(this.id, stringified)
+		}
 	}
 }
 
