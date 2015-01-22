@@ -7,14 +7,13 @@ let StudyRecord = Immutable.Record({
 	type: '',
 	abbr: '',
 	title: '',
-	index: 0,
 	revisionYear: null,
 	check: () => undefined,
 })
 
 class Study extends StudyRecord {
 	constructor(args) {
-		let {id, index, revisionYear} = args
+		let {id, revisionYear} = args
 
 		let {type, departmentAbbr, title, check} = getArea(id, revisionYear)
 		// console.log('made a Study', id, title)
@@ -23,19 +22,14 @@ class Study extends StudyRecord {
 			id,
 			type,
 			title,
-			index,
 			check,
 			revisionYear,
 			abbr: departmentAbbr,
 		})
 	}
 
-	reorder(newIndex) {
-		return this.set('index', newIndex)
-	}
-
 	toJSON() {
-		let toKeep = ['id', 'index', 'revisionYear']
+		let toKeep = ['id', 'revisionYear']
 		let filtered = this.toMap()
 			.filter((val, key) => contains(toKeep, key))
 		return filtered.toJS()
