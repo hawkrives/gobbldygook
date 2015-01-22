@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 import Immutable from 'immutable'
-import {flatten, forEach, contains} from 'lodash'
+import {flatten, forEach, omit} from 'lodash'
 import {v4 as uuid} from 'node-uuid'
 
 import {version as currentVersionString} from '../../package.json'
@@ -36,10 +36,10 @@ class Student extends StudentRecord {
 		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
 		// instead of our custom Studies, Schedules, and such.
 		let toRemove = ['studies', 'schedules', 'overrides', 'fabrications']
-		let immutableStudent = Immutable.fromJS(encodedStudent) || Immutable.Map()
-		let filtered = immutableStudent.filterNot((val, key) => contains(toRemove, key))
+		let filtered = omit(encodedStudent, toRemove)
+		let immutableStudent = Immutable.fromJS(filtered)
 
-		super(filtered)
+		super(immutableStudent)
 
 		// Then add them manually.
 		if (encodedStudent) {
