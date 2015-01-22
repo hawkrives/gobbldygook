@@ -30,7 +30,7 @@ let studentStore = Reflux.createStore({
 
 	undo() {
 		if (this.history.size) {
-			console.log('undoing...')
+			// console.log('undoing...')
 			this.future = this.future.push(this.students)
 			this.students = this.history.first()
 			this.history = this.history.pop()
@@ -40,7 +40,7 @@ let studentStore = Reflux.createStore({
 
 	redo() {
 		if (this.future.size) {
-			console.log('redoing...')
+			// console.log('redoing...')
 			this.history = this.history.push(this.students)
 			this.students = this.future.first()
 			this.future = this.future.pop()
@@ -54,16 +54,16 @@ let studentStore = Reflux.createStore({
 	},
 
 	_postChange() {
-		console.groupCollapsed('studentStore._postChange')
+		// console.groupCollapsed('studentStore._postChange')
 		// console.group('studentStore._postChange')
-		console.log('students', this.students)
+		// console.log('students', this.students)
 		this.students.forEach(student => student.save())
-		console.groupEnd('studentStore._postChange')
+		// console.groupEnd('studentStore._postChange')
 		this.trigger(this.students)
 	},
 
 	resetStudentToDemo(studentId) {
-		console.info(`resetting student ${studentId} to the demo student`)
+		// console.info(`resetting student ${studentId} to the demo student`)
 		let rawStudent = demoStudent
 		rawStudent.id = studentId
 
@@ -84,7 +84,7 @@ let studentStore = Reflux.createStore({
 	},
 
 	_loadData(studentId) {
-		console.log('studentStore._loadData')
+		// console.log('studentStore._loadData')
 
 		// studentIds is a list of IDs we know about.
 		let studentIds =
