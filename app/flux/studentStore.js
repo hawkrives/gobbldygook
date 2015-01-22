@@ -164,6 +164,22 @@ let studentStore = Reflux.createStore({
 		this._loadData(fleshedStudent.id)
 	},
 
+	importStudent(result) {
+		try {
+			let json = undefined
+			json = JSON.parse(result)
+
+			this._preChange()
+			let fleshedStudent = new Student(json)
+			fleshedStudent.save()
+			this._loadData(fleshedStudent.id)
+		}
+		catch (err) {
+			console.error('Error parsing as JSON', result)
+			return
+		}
+	},
+
 	_change(studentId, method, ...args) {
 		this._preChange()
 		this.students = this.students.set(studentId, this.students.get(studentId)[method](...args))
