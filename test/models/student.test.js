@@ -48,9 +48,6 @@ describe('Student', () => {
 			creditsNeeded,
 		} = stu
 
-		// console.log(schedules.toList().toJSON())
-		// console.log(demoStudent.schedules)
-
 		expect(stu).toBeDefined()
 		expect(id).toBeDefined()
 		expect(matriculation).toBe(2012)
@@ -125,6 +122,8 @@ describe('Student', () => {
 		})
 		xit('counts all credits currently scheduled', () => {
 			// disabled until we can mock getCourses
+			// plus, I'm not even sure how to check the result. lodash?
+			stu.courseCredits.then(credits => expect(credits).toBeTruthy())
 		})
 		it('supports moving courses between schedules in one-ish operation', () => {
 			let movedCourse = stu.moveCourse(1, 2, 82908)
