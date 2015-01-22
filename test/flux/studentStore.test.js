@@ -30,7 +30,6 @@ describe('studentStore', () => {
 
 		studentStore.initStudent()
 		let threeChange = studentStore.students
-		studentStore.initStudent()
 
 		expect(initial.size).toBe(0)
 		expect(oneChange.size).toBe(1)
@@ -52,7 +51,6 @@ describe('studentStore', () => {
 		let initial = studentStore.students
 		studentStore.initStudent()
 		let oneChange = studentStore.students
-		studentStore.initStudent()
 
 		expect(initial.size).toBe(0)
 		expect(oneChange.size).toBe(1)
@@ -69,7 +67,6 @@ describe('studentStore', () => {
 		let oneChange = studentStore.students
 		studentStore.initStudent()
 		let twoChange = studentStore.students
-		studentStore.initStudent()
 
 		expect(initial.size).toBe(0)
 		expect(oneChange.size).toBe(1)
