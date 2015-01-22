@@ -1,9 +1,15 @@
 // test/flux/studentStore.test.js
 jest.dontMock('../../app/flux/studentStore')
+jest.dontMock('dom-storage')
+
+import Storage from 'dom-storage'
+let local = new Storage(null, {strict: true})
+window.localStorage = local
 
 describe('studentStore', () => {
 	let studentStore = undefined
 	beforeEach(() => {
+		localStorage.clear()
 		studentStore = require('../../app/flux/studentStore')
 	})
 
