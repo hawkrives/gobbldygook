@@ -1,4 +1,0 @@
---compilers js:6to5-core/register
---reporter spec
---ui bdd
---require test/support/node

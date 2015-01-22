@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "6to5-core": "2.13.5",
+    "6to5-jest": "^1.0.0",
     "6to5ify": "3.1.2",
     "autoprefixer-core": "5.0.0",
     "browser-sync": "1.9.1",
@@ -62,6 +63,7 @@
     "gulp-size": "1.2.0",
     "gulp-sourcemaps": "1.3.0",
     "gulp-util": "3.0.2",
+    "jest-cli": "^0.2.1",
     "jscs-jsdoc": "0.4.0",
     "mocha": "2.1.0",
     "mold-source-map": "^0.3.0",
@@ -71,5 +73,12 @@
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.0.0",
     "watchify": "2.2.1"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/6to5-jest",
+    "testDirectoryName": "test",
+    "testPathDirs": [
+      "test"
+    ]
   }
 }
