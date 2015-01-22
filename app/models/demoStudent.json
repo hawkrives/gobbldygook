@@ -95,7 +95,8 @@
 		{
 			"id": 14, "year": 2012, "semester": 1,
 			"title": "Schedule 2", "index": 2,
-			"clbids": [82908, 91746, 92908, 97217]
+			"clbids": [82908, 91746, 92908, 97217],
+			"active": false
 		}
 	],
 
