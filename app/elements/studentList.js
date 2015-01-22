@@ -19,6 +19,7 @@ let StudentList = React.createClass({
 	handleFile(ev) {
 		var reader = new FileReader()
 		var file = ev.target.files[0]
+
 		reader.onload = (upload) => {
 			studentActions.importStudent(upload.target.result)
 		}
