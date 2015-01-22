@@ -90,9 +90,7 @@ let studentStore = Reflux.createStore({
 		let studentIds =
 			// Get the list of students we know about, or the string 'null'
 			// if localStorage doesn't have the key 'studentIds'.
-			JSON.parse(localStorage.getItem('studentIds') || 'null') ||
-			// Alternately, fetch the old key 'activeStudentId'
-			[localStorage.getItem('activeStudentId')] ||
+			JSON.parse(localStorage.getItem('studentIds')) ||
 			// If both those fail, grab the really old 'student-v3.0a6'
 			['student-v3.0a6']
 
