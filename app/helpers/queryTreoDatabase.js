@@ -3,12 +3,12 @@
 //   .use(queryTreoDatabase)
 
 import Promise from 'bluebird'
+import idbRange from 'idb-range'
 import {any, isString, first, last, filter} from 'lodash'
 import deepEql from 'deep-eql'
 import checkAgainstQuery from 'sto-helpers/lib/checkCourseAgainstQuery'
 
-function query(db) {
-	let treo = db.constructor
+function query(db, treo) {
 	let {Store} = treo
 
 	/**
@@ -70,7 +70,7 @@ function query(db) {
 
 					let firstKey = first(keys)
 					let lastKey = last(keys)
-					range = treo.range({
+					range = idbRange({
 						gte: firstKey,
 						// If it's a string, append `uffff` because that's the highest
 						// value in Unicode, which lets us make sure and iterate over all
