@@ -28,6 +28,7 @@
     "deep-eql": "0.1.3",
     "dom-storage": "^2.0.1",
     "humanize-plus": "1.5.0",
+    "idb-range": "^2.0.0",
     "immutable": "3.6.2",
     "keymage": "1.1.0",
     "lodash": "2.4.1",
