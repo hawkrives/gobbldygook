@@ -108,6 +108,7 @@ describe('studentStore', () => {
 	})
 
 	xit('loads students from storage', () => {})
+	xit('handles loading zero students from storage', () => {})
 	xit('loads the given id from storage', () => {})
 	xit('removes broken students fom storage', () => {})
 
