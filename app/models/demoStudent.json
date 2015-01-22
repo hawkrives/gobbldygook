@@ -143,6 +143,8 @@
 		}
 	],
 
+	"fabrications": [],
+
 	"settings": {
 		"exampleSetting": true
 	}
