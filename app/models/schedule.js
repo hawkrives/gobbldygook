@@ -21,7 +21,7 @@ let ScheduleRecord = Immutable.Record({
 })
 
 class Schedule extends ScheduleRecord {
-	constructor(data) {
+	constructor(data={}) {
 		// console.log('schedule constructor')
 		super(data)
 		return this.withMutations((sched) => {
