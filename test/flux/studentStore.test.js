@@ -107,10 +107,37 @@ describe('studentStore', () => {
 		expect(other.name).toBe('name')
 	})
 
-	xit('loads students from storage', () => {})
-	xit('handles loading zero students from storage', () => {})
-	xit('loads the given id from storage', () => {})
-	xit('removes broken students fom storage', () => {})
+	it('loads students from storage', () => {
+		localStorage.setItem('student', JSON.stringify({id: 'student'}))
+		localStorage.setItem('studentIds', JSON.stringify(['student']))
+		studentStore._loadData()
+		expect(studentStore.students.first().id).toBe('student')
+	})
+	it('handles loading zero students from storage', () => {
+		studentStore._loadData()
+		expect(studentStore.students.size).toBe(0)
+	})
+	it('loads the given id from storage', () => {
+		localStorage.setItem('student', JSON.stringify({id: 'student'}))
+		studentStore._loadData('student')
+		expect(studentStore.students.first().id).toBe('student')
+		expect(localStorage.getItem('studentIds')).toEqual('["student"]')
+	})
+	it('does not load the given id twice if it already exists in studentIds', () => {
+		localStorage.setItem('student', JSON.stringify({id: 'student'}))
+		localStorage.setItem('studentIds', JSON.stringify(['student']))
+		studentStore._loadData('student')
+		expect(studentStore.students.first().id).toBe('student')
+		expect(localStorage.getItem('studentIds')).toEqual('["student"]')
+	})
+	it('removes broken students fom storage', () => {
+		localStorage.setItem('student', JSON.stringify({id: 'student'}))
+		localStorage.setItem('broken', {id: 'broken'})
+		localStorage.setItem('studentIds', JSON.stringify(['student', 'broken']))
+		studentStore._loadData('student')
+		expect(studentStore.students.first().id).toBe('student')
+		expect(localStorage.getItem('studentIds')).toEqual('["student"]')
+	})
 
 	it('creates new students', () => {
 		studentStore.initStudent()
