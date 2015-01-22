@@ -22,10 +22,10 @@ let StudentRecord = Immutable.Record({
 	matriculation: 1894,
 	graduation: 1898,
 
-	studies: Immutable.Map(),
-	schedules: Immutable.Map(),
-	overrides: Immutable.Map(),
-	fabrications: Immutable.Map(),
+	studies: Immutable.OrderedMap(),
+	schedules: Immutable.OrderedMap(),
+	overrides: Immutable.OrderedMap(),
+	fabrications: Immutable.OrderedMap(),
 
 	settings: Immutable.Map(),
 })
