@@ -29,10 +29,10 @@ describe('studentStore', () => {
 		let threeChange = studentStore.students
 		studentStore.initStudent()
 
-		expect(initial.students.size).toBe(0)
-		expect(oneChange.students.size).toBe(1)
-		expect(twoChange.students.size).toBe(2)
-		expect(threeChange.students.size).toBe(3)
+		expect(initial.size).toBe(0)
+		expect(oneChange.size).toBe(1)
+		expect(twoChange.size).toBe(2)
+		expect(threeChange.size).toBe(3)
 
 		expect(studentStore.students).toBe(threeChange)
 		studentStore.undo()
@@ -48,8 +48,8 @@ describe('studentStore', () => {
 		let oneChange = studentStore.students
 		studentStore.initStudent()
 
-		expect(initial.students.size).toBe(0)
-		expect(oneChange.students.size).toBe(1)
+		expect(initial.size).toBe(0)
+		expect(oneChange.size).toBe(1)
 
 		expect(studentStore.students).toBe(oneChange)
 		studentStore.undo()
@@ -65,9 +65,9 @@ describe('studentStore', () => {
 		let twoChange = studentStore.students
 		studentStore.initStudent()
 
-		expect(initial.students.size).toBe(0)
-		expect(oneChange.students.size).toBe(1)
-		expect(twoChange.students.size).toBe(2)
+		expect(initial.size).toBe(0)
+		expect(oneChange.size).toBe(1)
+		expect(twoChange.size).toBe(2)
 
 		expect(studentStore.students).toBe(twoChange)
 		studentStore.undo()
