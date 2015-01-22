@@ -99,6 +99,16 @@ describe('Schedule', () => {
 		expect(JSON.parse(result)._courseData).toBeUndefined()
 	})
 
+	it('returns all of those properties, even the falsey ones', () => {
+		let sched1 = new Schedule({
+			id: 1, active: false,
+			title: 'My Schedule',
+		})
+		let result = JSON.stringify(sched1)
+		expect(result).toBe('{"id":1,"active":false,"year":0,"semester":0,"index":1,"title":"My Schedule","clbids":[]}')
+		expect(JSON.parse(result)._courseData).toBeUndefined()
+	})
+
 	describe('#course-methods', () => {
 		it('supports adding a course', () => {
 			let addedCourse = sched.addCourse(918)
