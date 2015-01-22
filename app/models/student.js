@@ -32,7 +32,7 @@ let StudentRecord = Immutable.Record({
 
 class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
-		let startTime = performance.now()
+		// let startTime = performance.now()
 		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
 		// instead of our custom Studies, Schedules, and such.
 		let toRemove = ['studies', 'schedules', 'overrides', 'fabrications']
@@ -65,7 +65,7 @@ class Student extends StudentRecord {
 
 				student = student.set('version', currentVersionString)
 
-				console.log('it took', performance.now() - startTime, 'ms to make a student')
+				// console.log('it took', performance.now() - startTime, 'ms to make a student')
 
 				return student
 			})
@@ -109,7 +109,7 @@ class Student extends StudentRecord {
 	}
 
 	destroySchedule(scheduleId) {
-		console.log(`removing schedule ${scheduleId}`)
+		// console.log(`removing schedule ${scheduleId}`)
 
 		let deadSched = this.getIn(['schedules', scheduleId])
 		let scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
@@ -127,18 +127,18 @@ class Student extends StudentRecord {
 
 	destroyMultipleSchedules(ids) {
 		return this.withMutations((student) => {
-			console.groupCollapsed('destroyMultipleSchedules')
+			// console.groupCollapsed('destroyMultipleSchedules')
 			Immutable.Seq(ids).forEach((id) => {
-				console.log('destroyMultipleSchedules', id)
+				// console.log('destroyMultipleSchedules', id)
 				student = student.destroySchedule(id)
 			})
-			console.groupEnd('destroyMultipleSchedules')
+			// console.groupEnd('destroyMultipleSchedules')
 			return student
 		})
 	}
 
 	moveCourse(fromScheduleId, toScheduleId, clbid) {
-		console.log(`moving course ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+		// console.log(`moving course ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 		return this.withMutations((student) => {
 			student = student.setIn(['schedules', fromScheduleId], student.getIn(['schedules', fromScheduleId]).removeCourse(clbid))
 			student = student.setIn(['schedules', toScheduleId], student.getIn(['schedules', toScheduleId]).addCourse(clbid))
