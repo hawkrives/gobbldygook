@@ -171,7 +171,6 @@ let studentStore = Reflux.createStore({
 		}
 		catch (err) {
 			console.error('Error parsing as JSON', rawStudent)
-			return
 		}
 
 		if (stu) {
