@@ -13,17 +13,153 @@ describe('studentStore', () => {
 		expect(studentStore.future).toBeDefined()
 	})
 
-	xit('supports undoing things')
-	xit('supports redoing things')
-	xit('will not let you go back to a previous future')
+	xit('supports undoing things', () => {
+		let initial = studentStore.students
+		studentStore.initStudent()
+		let oneChange = studentStore.students
+		studentStore.initStudent()
+		let twoChange = studentStore.students
+		studentStore.initStudent()
+		let threeChange = studentStore.students
+		studentStore.initStudent()
 
-	xit('can reset a student to a demo state')
-	xit('reloads all currently known students from storage')
+		expect(initial.students.size).toBe(0)
+		expect(oneChange.students.size).toBe(1)
+		expect(twoChange.students.size).toBe(2)
+		expect(threeChange.students.size).toBe(3)
 
-	xit('loads students from storage')
+		expect(studentStore.students).toBe(threeChange)
+		studentStore.undo()
+		expect(studentStore.students).toBe(twoChange)
+		studentStore.undo()
+		expect(studentStore.students).toBe(oneChange)
+		studentStore.undo()
+		expect(studentStore.students).toBe(initial)
+	})
+	xit('supports redoing things', () => {
+		let initial = studentStore.students
+		studentStore.initStudent()
+		let oneChange = studentStore.students
+		studentStore.initStudent()
 
-	xit('creates new students')
+		expect(initial.students.size).toBe(0)
+		expect(oneChange.students.size).toBe(1)
 
-	xit('passes methods that change students')
-	xit('passes methods that alter things inside of students')
+		expect(studentStore.students).toBe(oneChange)
+		studentStore.undo()
+		expect(studentStore.students).toBe(initial)
+		studentStore.redo()
+		expect(studentStore.students).toBe(oneChange)
+	})
+	xit('will not let you go back to a previous future', () => {
+		let initial = studentStore.students
+		studentStore.initStudent()
+		let oneChange = studentStore.students
+		studentStore.initStudent()
+		let twoChange = studentStore.students
+		studentStore.initStudent()
+
+		expect(initial.students.size).toBe(0)
+		expect(oneChange.students.size).toBe(1)
+		expect(twoChange.students.size).toBe(2)
+
+		expect(studentStore.students).toBe(twoChange)
+		studentStore.undo()
+		expect(studentStore.students).toBe(oneChange)
+
+		studentStore.initStudent()
+		let newFuture = studentStore.students
+
+		studentStore.redo()
+		expect(studentStore.students).toBe(newFuture)
+	})
+
+	xit('can reset a student to a demo state', () => {
+		studentStore.initStudent()
+		let stu = studentStore.students.first()
+
+		studentStore.resetStudentToDemo(stu.id)
+
+		expect(studentStore.students.first()).not.toBe(stu)
+	})
+	xit('reloads all currently known students from storage', () => {
+		studentStore.initStudent()
+		let stu = studentStore.students.first()
+
+		let mutable = JSON.parse(localStorage.getItem(stu.id))
+		mutable.name = 'name'
+		localStorage.setItem(mutable.id, JSON.stringify(mutable))
+
+		studentStore.reloadStudents()
+
+		let other = studentStore.students.first()
+		expect(other).not.toBe(stu)
+	})
+
+	xit('loads students from storage', () => {})
+	xit('loads the given id from storage', () => {})
+	xit('removes broken students fom storage', () => {})
+
+	xit('creates new students', () => {
+		studentStore.initStudent()
+		expect(studentStore.students.size).toBe(1)
+	})
+
+	xit('saves state before changing students', () => {
+		studentStore.initStudent()
+		let initial = studentStore.students
+		let stu = initial.first()
+
+		studentStore.changeName(stu.id, 'new name')
+
+		expect(studentStore.students).not.toBe(initial)
+
+		studentStore.undo()
+
+		expect(studentStore.students).toBe(initial)
+	})
+	xit('saves state before altering students', () => {
+		studentStore.initStudent()
+		let initial = studentStore.students
+		let stu = initial.first()
+
+		studentStore.addSchedule(stu.id)
+		let second = studentStore.students
+		let sched = studentStore.students.first().schedules.first()
+
+		studentStore.renameSchedule(stu.id, sched.id, 'new name')
+
+		expect(studentStore.students).not.toBe(second)
+
+		studentStore.undo()
+
+		expect(studentStore.students).toBe(second)
+
+		studentStore.undo()
+
+		expect(studentStore.students).toBe(initial)
+	})
+
+	xit('passes methods that change students', () => {
+		studentStore.initStudent()
+		let initial = studentStore.students
+		let stu = initial.first()
+
+		studentStore.changeName(stu.id, 'new name')
+
+		expect(studentStore.students.get(stu.id).name).toBe('new name')
+	})
+	xit('passes methods that alter things inside of students', () => {
+		studentStore.initStudent()
+		let initial = studentStore.students
+		let stu = initial.first()
+
+		studentStore.addSchedule(stu.id)
+		let second = studentStore.students
+		let sched = studentStore.students.get(stu.id).schedules.first()
+
+		studentStore.renameSchedule(stu.id, sched.id, 'new name')
+
+		expect(studentStore.students.get(stu.id).schedules.get(sched.id).title).toBe('new name')
+	})
 })
