@@ -31,7 +31,7 @@ class Study extends StudyRecord {
 	}
 
 	reorder(newIndex) {
-		this.set('index', newIndex)
+		return this.set('index', newIndex)
 	}
 
 	toJSON() {
