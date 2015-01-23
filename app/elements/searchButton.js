@@ -30,15 +30,15 @@ let SearchButton = React.createClass({
 		}
 	},
 
-	onSubmit: function() {
+	onSubmit() {
 		this.query(this.state.query)
 	},
 
-	onChange: function(evt) {
+	onChange(evt) {
 		this.setState({query: evt.target.value})
 	},
 
-	onKeyDown: function(evt) {
+	onKeyDown(evt) {
 		if (evt.keyCode == 13) {
 			return this.onSubmit()
 		}
