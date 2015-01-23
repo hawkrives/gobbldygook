@@ -89,6 +89,7 @@ let SearchButton = React.createClass({
 	query(searchQuery) {
 		if (searchQuery.length === 0 || this.state.query)
 			return
+
 		this.setState({results: [], hasQueried: false})
 		let startQueryTime = performance.now()
 
@@ -100,6 +101,8 @@ let SearchButton = React.createClass({
 	},
 
 	render() {
+		let showNoResults = this.state.results.length === 0 && this.state.hasQueried
+		let showIndicator = this.state.query
 
 		return React.createElement('div', {className: 'search-sidebar'},
 			React.createElement('header', {className: 'sidebar-heading'},
@@ -118,7 +121,15 @@ let SearchButton = React.createClass({
 				className: 'search-box',
 				autoFocus: true,
 			}),
-			React.createElement('ul', {className: 'course-list'}, this.state.courseObjects)
+			React.createElement('ul', {className: 'course-list'},
+				showIndicator ?
+					React.createElement('li', {className: 'loading'},
+						React.createElement('div', {className: 'loading-spinner'},
+							React.createElement('div', null))) :
+					showNoResults ?
+						React.createElement('li', {className: 'no-results'},
+							'No Results Found') :
+						this.state.results)
 		)
 	},
 })
