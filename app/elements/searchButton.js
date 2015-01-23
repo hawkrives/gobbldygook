@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link, State} from 'react-router'
-import _ from 'lodash'
+import {isObject, chain, map} from 'lodash'
 
 import toPrettyTerm from 'sto-helpers/lib/toPrettyTerm'
 import {queryCourseDatabase} from '../helpers/courses'
@@ -49,7 +49,7 @@ let SearchButton = React.createClass({
 		queryCourseDatabase(searchQuery).then(results => {
 			console.log('results', results)
 
-			let searchResults = _(results)
+			let searchResults = chain(results)
 				.sortBy(c => `${c.deptnum}${c.sect || ''}`) // Sort the results
 				.groupBy('term') // Group them by term
 				.pairs() // Turn the object into an array of pairs
@@ -65,8 +65,8 @@ let SearchButton = React.createClass({
 			console.info('query took ' + (endQueryTime - startQueryTime) + 'ms.')
 
 			let startTime = performance.now()
-			let courseObjects = _.map(searchResults, (courseOrTerm) => {
-				if (!(_.isObject(courseOrTerm))) {
+			let courseObjects = map(searchResults, (courseOrTerm) => {
+				if (!isObject(courseOrTerm)) {
 					let prettyTerm = toPrettyTerm(courseOrTerm)
 					return React.createElement('li',
 						{key: prettyTerm, className: 'course-group'},
