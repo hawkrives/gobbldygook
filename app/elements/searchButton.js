@@ -45,6 +45,9 @@ let SearchButton = React.createClass({
 	},
 
 	query(searchQuery) {
+		if (searchQuery.length === 0 || this.state.query)
+			return
+
 		let startQueryTime = performance.now()
 		queryCourseDatabase(searchQuery).then(results => {
 			console.log('results', results)
