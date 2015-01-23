@@ -21,6 +21,19 @@
 
 	.course-list {
 		@include list-unstyled;
+
+		.loading,
+		.no-results {
+			margin-top: 1em;
+			text-align: center;
+		}
+
+		.loading-spinner {
+			@include loading-spinner(
+				$size: 3em,
+				$segment-length: 0.9em,
+				$segment-width: 0.35em);
+		}
 	}
 
 	.course-group {

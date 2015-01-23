@@ -48,6 +48,7 @@ function queryCourseDatabase(queryString) {
 	let queryObject = buildQueryFromString(queryString)
 	console.log('query object', queryObject)
 	let start = performance.now()
+
 	return db
 		.store('courses')
 		.query(queryObject)
