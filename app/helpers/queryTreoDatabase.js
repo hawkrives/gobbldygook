@@ -34,7 +34,7 @@ function query(db, treo) {
 
 			let results = []
 			// Prevent invalid logic from not having a query.
-			if (!query)
+			if (!query || Object.keys(query).length === 0)
 				return results
 
 			// The index of our current key
