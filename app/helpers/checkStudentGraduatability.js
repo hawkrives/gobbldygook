@@ -17,8 +17,17 @@ function checkStudentGraduatability(student) {
 	// console.log('areaResults', student.studies.toArray(), areaResults)
 
 	return Promise.all(areaResults).then((areas) => {
-		let graduatability = (_(areas).pluck('result').filter(isTrue).size() - _.size(areas)) >= 1
-		return {graduatability: graduatability, areaDetails: Immutable.List(areas)}
+		let goodAreaCount = _(areas)
+			.pluck('result')
+			.filter(isTrue)
+			.size()
+
+		let graduatability = (goodAreaCount - _.size(areas)) === 0
+
+		return {
+			graduatability: graduatability,
+			areaDetails: Immutable.List(areas),
+		}
 	})
 }
 
