@@ -37,7 +37,8 @@ let AreaOfStudy = React.createClass({
 	},
 
 	toggle() {
-		this.setState({expanded: !this.state.expanded})
+		if (this.props.areaResult)
+			this.setState({expanded: !this.state.expanded})
 	},
 
 	componentWillReceiveProps(nextProps) {
