@@ -1,25 +1,39 @@
-import _ from 'lodash'
 import React from 'react/addons'
+import {map} from 'lodash'
 import RequirementSet from './requirementSet'
 
 let cx = React.addons.classSet
 
-let AreaOfStudy = React.createClass({
-	mixins: [State, Navigation],
+let makeRequirementSets = (props) => {
+	if (!props.areaResult)
+		return []
 
+	let reqSets = map(props.areaResult.details, (reqset) =>
+		React.createElement(RequirementSet,
+			Object.assign({key: reqset.title}, reqset)))
+
+	return reqSets
+}
+
+let AreaOfStudy = React.createClass({
 	propTypes: {
 		area: React.PropTypes.shape({
 			id: React.PropTypes.string.isRequired,
 			title: React.PropTypes.string.isRequired,
+			type: React.PropTypes.string,
+		}).isRequired,
+		areaResult: React.PropTypes.shape({
+			id: React.PropTypes.string.isRequired,
+			title: React.PropTypes.string.isRequired,
 			result: React.PropTypes.bool.isRequired,
+			type: React.PropTypes.string,
 			progress: React.PropTypes.shape({
 				at: React.PropTypes.number.isRequired,
 				of: React.PropTypes.number.isRequired,
 				word: React.PropTypes.string,
 			}).isRequired,
-			type: React.PropTypes.string,
 			details: React.PropTypes.arrayOf(React.PropTypes.object),
-		})
+		}),
 	},
 
 	toggle() {
@@ -27,51 +41,46 @@ let AreaOfStudy = React.createClass({
 	},
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({
-			reqSets: this.makeReqSets(),
-		})
+		this.setState({reqSets: makeRequirementSets(nextProps)})
 	},
 
 	componentWillMount() {
-		this.setState({
-			reqSets: this.makeReqSets(),
-		})
+		this.setState({reqSets: makeRequirementSets(this.props)})
 	},
 
 	getInitialState() {
 		return {
 			expanded: false,
-			reqSets: this.makeReqSets(),
+			reqSets: makeRequirementSets(this.props),
 		}
-	},
-
-	makeReqSets() {
-		let reqSets = _.map(this.props.area.details, (reqset) =>
-				React.createElement(RequirementSet, Object.assign({key: reqset.title}, reqset)))
-		return reqSets
 	},
 
 	render() {
 		// console.log(`render areaOfStudy for ${this.props.area.id}`)
 
+		let progressProps = this.props.areaResult ? {
+				className: this.props.areaResult.progress.word,
+				value: this.props.areaResult.progress.at,
+				max: this.props.areaResult.progress.of,
+		} : {}
+
+		let reqSets = this.state.expanded ? this.state.reqSets : null
+
 		let header = React.createElement('header',
 			{className: 'summary', onClick: this.toggle},
 			React.createElement('h1', null, this.props.area.title),
-			React.createElement('progress', {
-				value: this.props.area.progress.at,
-				max: this.props.area.progress.of,
-				className: this.props.area.progress.word,
-			}))
+			React.createElement('progress', progressProps))
 
 		let classes = cx({
 			'area-of-study': true,
 			open: this.state.expanded,
+			loading: !this.props.areaResult,
 		})
 
 		return React.createElement('div',
-			{key: this.props.area.id, className: classes},
+			{className: classes},
 			header,
-			this.state.expanded ? this.state.reqSets : null)
+			reqSets)
 	},
 })
 

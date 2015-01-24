@@ -52,19 +52,21 @@ let GraduationStatus = React.createClass({
 			graduatability: this.state.graduatability,
 		})
 
-		let sections = this.state.areaDetails
-			.groupBy(area => area.type || 'Unknown')
+		let sections = student.areasByType
 			.map((areas, areaType) => {
 				let pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 
 				let areaTypeHeading = React.createElement('header', {className: 'area-type-heading'},
 					React.createElement('h1', null, capitalize(pluralType)))
 
-				let areaElements = areas.map((area, index) => {
+				let areaElements = areas.toList().map((area, index) => {
+					let areaResult = this.state.areaDetails.find(a => a.id === area.id)
+
 					return React.createElement(AreaOfStudy, {
 						key: `${area.id}-${index}`,
-						student: this.props.student,
-						area: area,
+						student,
+						areaResult,
+						area,
 					})
 				}).toJS()
 
