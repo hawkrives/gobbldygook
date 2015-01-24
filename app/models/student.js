@@ -155,7 +155,7 @@ class Student extends StudentRecord {
 	// area-of-study methods
 
 	get areasByType() {
-		return this.studies.groupBy((study) => study.type)
+		return this.studies.groupBy(study => study.type || 'Unknown')
 	}
 
 	addArea(areaOfStudy) {
