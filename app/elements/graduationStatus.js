@@ -16,8 +16,10 @@ let GraduationStatus = React.createClass({
 
 	componentWillReceiveProps(nextProps) {
 		let graduatabilityPromise = checkStudentGraduatability(nextProps.student)
+
 		graduatabilityPromise.then((graduationStatus) => {
-			this.setState({graduatability: graduationStatus.graduatability, areaDetails: graduationStatus.areaDetails})
+			let {graduatability, areaDetails} = graduationStatus
+			this.setState({graduatability, areaDetails})
 		})
 	},
 
