@@ -13,7 +13,8 @@ import checkStudentAgainstArea from './checkStudentAgainstArea'
  * @fulfill {Object} - The details of the students graduation prospects.
  */
 function checkStudentGraduatability(student) {
-	let areaResults = student.studies.map((area) => checkStudentAgainstArea(student, area)).toArray()
+	let areaResults = student.studies.map((area) =>
+		checkStudentAgainstArea(student, area)).toArray()
 	// console.log('areaResults', student.studies.toArray(), areaResults)
 
 	return Promise.all(areaResults).then((areas) => {
