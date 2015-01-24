@@ -1,9 +1,5 @@
 import _ from 'lodash'
-import Immutable from 'immutable'
 import React from 'react/addons'
-import {State, Navigation} from 'react-router'
-
-import studentActions from '../flux/studentActions'
 import RequirementSet from './requirementSet'
 
 let cx = React.addons.classSet
