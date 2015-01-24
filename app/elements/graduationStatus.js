@@ -42,10 +42,15 @@ let GraduationStatus = React.createClass({
 
 	render() {
 		// console.info('graduation-status render', this.props.student)
-		if (!this.props.student)
+		let student = this.props.student
+
+		if (!student)
 			return null
 
-		let summary = React.createElement(StudentSummary, {student: this.props.student, graduatability: this.state.graduatability})
+		let summary = React.createElement(StudentSummary, {
+			student: student,
+			graduatability: this.state.graduatability,
+		})
 
 		let sections = this.state.areaDetails
 			.groupBy(area => area.type || 'Unknown')
