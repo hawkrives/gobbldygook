@@ -11,6 +11,8 @@ import checkStudentAgainstArea from './checkStudentAgainstArea'
  * @param {Student} student
  * @promise GraduatabilityPromise
  * @fulfill {Object} - The details of the students graduation prospects.
+ *    {Boolean} graduatability
+ *    {Immutable.List} areaDetails
  */
 function checkStudentGraduatability(student) {
 	let areaResults = student.studies.map((area) =>
