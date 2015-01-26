@@ -1,5 +1,5 @@
 import React from 'react'
-import studentActions from 'app/flux/studentActions'
+import studentActions from '../flux/studentActions'
 
 let RevertStudentToDemoButton = React.createClass({
 	propTypes: {

@@ -4,8 +4,8 @@ import React from 'react'
 import expandYear from 'sto-helpers/lib/expandYear'
 import findFirstAvailableYear from 'sto-helpers/lib/findFirstAvailableYear'
 
-import studentActions from 'app/flux/studentActions'
-import Year from 'app/elements/year'
+import studentActions from '../flux/studentActions'
+import Year from './year'
 
 let CourseTable = React.createClass({
 	propTypes: {

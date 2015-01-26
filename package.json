@@ -8,7 +8,7 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "config": {
-    "browserify": "--debug -e app/index.js -t 6to5ify -t aliasify",
+    "browserify": "--debug -e app/index.js -t 6to5ify",
     "stylus": "--sourcemap --use autoprefixer-stylus --compress",
     "uglify": "--source-map-root ./app --in-source-map dist/app.js.map --source-map dist/app.min.js.map --compress --mangle --screw-ie8"
   },
@@ -96,11 +96,5 @@
     "testPathDirs": [
       "test"
     ]
-  },
-  "aliasify": {
-    "aliases": {
-      "app": "./app",
-      "app/package.json": "./package.json"
-    }
   }
 }

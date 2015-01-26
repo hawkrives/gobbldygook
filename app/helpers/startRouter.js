@@ -1,12 +1,12 @@
 import React from 'react'
 import Router from 'react-router'
 
-import Gobbldygook from 'app/elements/app'
-import StudentList from 'app/elements/studentList'
-import Student from 'app/elements/student'
-import AddStudent from 'app/elements/student'
-import CourseTable from 'app/elements/courseTable'
-import SemesterDetail from 'app/elements/semesterDetail'
+import Gobbldygook from '../elements/app'
+import StudentList from '../elements/studentList'
+import Student from '../elements/student'
+import AddStudent from '../elements/student'
+import CourseTable from '../elements/courseTable'
+import SemesterDetail from '../elements/semesterDetail'
 
 let Route = React.createFactory(Router.Route)
 let DefaultRoute = React.createFactory(Router.DefaultRoute)

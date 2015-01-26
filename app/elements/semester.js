@@ -10,9 +10,9 @@ import add from 'sto-helpers/lib/add'
 import countCredits from 'sto-helpers/lib/countCredits'
 import semesterName from 'sto-helpers/lib/semesterName'
 import {isCurrentSemester} from 'sto-helpers/lib/isCurrent'
-import {Course, MissingCourse, EmptyCourseSlot} from 'app/elements/course'
-import studentActions from 'app/flux/studentActions'
-import itemTypes from 'app/models/itemTypes'
+import {Course, MissingCourse, EmptyCourseSlot} from './course'
+import studentActions from '../flux/studentActions'
+import itemTypes from '../models/itemTypes'
 
 let cx = React.addons.classSet
 

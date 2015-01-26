@@ -1,13 +1,13 @@
 import React from 'react'
 import {Link, State} from 'react-router'
 
-import RevertToDemoButton from 'app/components/revertToDemoButton'
-import DownloadStudentButton from 'app/components/downloadStudentButton'
-import UndoButton from 'app/components/undoButton'
-import RedoButton from 'app/components/redoButton'
+import RevertToDemoButton from '../components/revertToDemoButton'
+import DownloadStudentButton from '../components/downloadStudentButton'
+import UndoButton from '../components/undoButton'
+import RedoButton from '../components/redoButton'
 
-import SearchButton from 'app/elements/searchButton'
-import GraduationStatus from 'app/elements/graduationStatus'
+import SearchButton from './searchButton'
+import GraduationStatus from './graduationStatus'
 
 let Sidebar = React.createClass({
 	mixins: [State],

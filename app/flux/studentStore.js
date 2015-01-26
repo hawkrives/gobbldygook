@@ -2,11 +2,11 @@ import {chain, forEach, map, uniq} from 'lodash'
 import Reflux from 'reflux'
 import Immutable from 'immutable'
 
-import Student from 'app/models/student'
-import demoStudent from 'app/models/demoStudent.json'
+import Student from '../models/student'
+import demoStudent from '../models/demoStudent.json'
 
-import studentActions from 'app/flux/studentActions'
-import notificationActions from 'app/flux/notificationActions'
+import studentActions from '../flux/studentActions'
+import notificationActions from '../flux/notificationActions'
 
 let cleanLocalStorage = () => {
 	localStorage.removeItem('activeStudentId')

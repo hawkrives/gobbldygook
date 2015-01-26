@@ -2,7 +2,7 @@ import _ from 'lodash'
 import Promise from 'bluebird'
 import Immutable from 'immutable'
 
-import db from 'app/helpers/db'
+import db from './db'
 
 import buildQueryFromString from 'sto-helpers/lib/buildQueryFromString'
 

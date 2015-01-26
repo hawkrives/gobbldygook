@@ -1,5 +1,5 @@
 import React from 'react'
-import FakeCourse from 'app/components/fakeCourse'
+import FakeCourse from '../components/fakeCourse'
 
 let EmptyCourseSlot = React.createClass({
 	render() {

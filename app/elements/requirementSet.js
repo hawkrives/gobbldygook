@@ -4,7 +4,7 @@ import marked from 'marked'
 
 import {
 	BooleanRequirement, SomeArrayRequirement, BooleanArrayRequirement, NumberObjectRequirement
-} from 'app/elements/requirement'
+} from './requirement'
 
 let RequirementSet = React.createClass({
 	propTypes: {

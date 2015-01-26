@@ -4,10 +4,10 @@ import {Link} from 'react-router'
 import {capitalize, pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 
-import AreaOfStudy from 'app/elements/areaOfStudy'
-import StudentSummary from 'app/elements/studentSummary'
+import AreaOfStudy from '../elements/areaOfStudy'
+import StudentSummary from '../elements/studentSummary'
 
-import checkStudentGraduatability from 'app/helpers/checkStudentGraduatability'
+import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
 let GraduationStatus = React.createClass({
 	propTypes: {

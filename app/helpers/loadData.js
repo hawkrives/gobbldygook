@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import Promise from 'bluebird'
 
-import notificationActions from 'app/flux/notificationActions'
-import {status, json} from 'app/helpers/fetch'
-import db from 'app/helpers/db'
+import notificationActions from '../flux/notificationActions'
+import {status, json} from './fetch'
+import db from './db'
 
 import buildCourseId from 'app/helpers/buildCourseId'
 import buildDept from 'sto-helpers/lib/buildDept'

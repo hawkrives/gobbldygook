@@ -1,8 +1,8 @@
 import React from 'react'
 import Reflux from 'reflux'
 import Immutable from 'immutable'
-import notificationStore from 'app/flux/notificationStore'
-import notificationActions from 'app/flux/notificationActions'
+import notificationStore from '../flux/notificationStore'
+import notificationActions from '../flux/notificationActions'
 
 let CloseNotificationButton = React.createClass({
 	render() {
