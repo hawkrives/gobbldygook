@@ -22,10 +22,10 @@ describe('checkCourseTimeConflicts', () => {
 			]},
 		]
 
-		checkCourseTimeConflicts(courses[0], courses[1]).should.be.true
+		expect(checkCourseTimeConflicts(courses[0], courses[1])).to.be.true
 
-		checkCourseTimeConflicts(courses[0], courses[2]).should.be.false
-		checkCourseTimeConflicts(courses[1], courses[2]).should.be.false
+		expect(checkCourseTimeConflicts(courses[0], courses[2])).to.be.false
+		expect(checkCourseTimeConflicts(courses[1], courses[2])).to.be.false
 	})
 
 	it('handles the output of convertTimeStringsToOfferings', () => {
@@ -34,7 +34,7 @@ describe('checkCourseTimeConflicts', () => {
 			{offerings: convertTimeStringsToOfferings({times: ['MWF 0200-0255PM']})},
 		]
 
-		checkCourseTimeConflicts(testing[0], testing[1]).should.be.true
-		checkCourseTimeConflicts(testing[1], testing[0]).should.be.true
+		expect(checkCourseTimeConflicts(testing[0], testing[1])).to.be.true
+		expect(checkCourseTimeConflicts(testing[1], testing[0])).to.be.true
 	})
 })

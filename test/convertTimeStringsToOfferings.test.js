@@ -11,7 +11,7 @@ describe('convertTimeStringsToOfferings', () => {
 			{day: 'Fr', times: [{start:905,  end:1000}]},
 		]
 
-		convertTimeStringsToOfferings(course).should.eql(result)
+		expect(convertTimeStringsToOfferings(course)).to.eql(result)
 	})
 
 	it('correctly joins different times on the same day', () => {
@@ -25,6 +25,6 @@ describe('convertTimeStringsToOfferings', () => {
 			{day: 'Fr', times: [{start:905,  end:1000}]},
 		]
 
-		convertTimeStringsToOfferings(course).should.eql(result)
+		expect(convertTimeStringsToOfferings(course)).to.eql(result)
 	})
 })
