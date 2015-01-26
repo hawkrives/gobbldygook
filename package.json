@@ -47,6 +47,7 @@
     "lint": "jscs app/ test/",
     "test": "jest",
     "travis": "npm run lint & npm run build & npm run test & wait",
+    "start": "npm run serve",
     "publish": "npm run clean && npm run build && npm run uglify"
   },
   "dependencies": {
