@@ -1,6 +1,6 @@
 {
   "name": "gobbldygook",
-  "version": "3.0.0alpha10",
+  "version": "3.0.0-alpha11",
   "description": "A course scheduling app for St. Olaf College",
   "main": "app/index.js",
   "private": true,
