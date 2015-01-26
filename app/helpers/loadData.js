@@ -5,7 +5,6 @@ import notificationActions from '../flux/notificationActions'
 import {status, json} from './fetch'
 import db from './db'
 
-import buildCourseId from 'app/helpers/buildCourseId'
 import buildDept from 'sto-helpers/lib/buildDept'
 import buildDeptNum from 'sto-helpers/lib/buildDeptNum'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
