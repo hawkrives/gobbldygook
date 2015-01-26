@@ -59,7 +59,8 @@ let SearchButton = React.createClass({
 			// because object keys don't have an implicit sort.
 			.sortBy(group => group[0])
 			.reverse() // reverse it, so the most recent is at the top
-			.flatten() // then flatten so that it's all one flat list
+			.flatten() // flatten once, to merge the [date, courses] arrays
+			.flatten() // then flatten once more, to raise the courses into the array
 			.value()
 
 		console.log('search results', searchResults)
