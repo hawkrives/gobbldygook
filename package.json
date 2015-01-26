@@ -41,8 +41,8 @@
     "watch-lint": "nodemon --watch app --watch test --ext js --exec npm run lint",
     "watch": "npm run copy & npm run watch-lint & npm run watch-scripts & npm run watch-styles & wait",
 
-    "_browser-sync": "browser-sync start --config ./bs-config.js",
-    "serve": "npm run watch & npm run _browser-sync & wait",
+    "browser-sync": "browser-sync start --config ./bs-config.js",
+    "serve": "npm run watch & npm run browser-sync & wait",
 
     "lint": "jscs app/ test/",
     "test": "jest",
