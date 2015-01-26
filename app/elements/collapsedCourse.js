@@ -1,6 +1,6 @@
 import React from 'react'
 import {oxford} from 'humanize-plus'
-import CourseTitle from '../components/courseTitle'
+import CourseTitle from 'app/components/courseTitle'
 
 let CollapsedCourse = React.createClass({
 	propTypes: {

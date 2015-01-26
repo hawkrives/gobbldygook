@@ -1,11 +1,11 @@
 import _ from 'lodash'
 import Promise from 'bluebird'
 
-import notificationActions from '../flux/notificationActions'
-import {status, json} from './fetch'
-import db from './db'
+import notificationActions from 'app/flux/notificationActions'
+import {status, json} from 'app/helpers/fetch'
+import db from 'app/helpers/db'
 
-import buildCourseId from './buildCourseId'
+import buildCourseId from 'app/helpers/buildCourseId'
 import buildDept from 'sto-helpers/lib/buildDept'
 import buildDeptNum from 'sto-helpers/lib/buildDeptNum'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'

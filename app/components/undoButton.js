@@ -1,6 +1,6 @@
 import React from 'react'
-import studentActions from '../flux/studentActions'
-import studentStore from '../flux/studentStore'
+import studentActions from 'app/flux/studentActions'
+import studentStore from 'app/flux/studentStore'
 
 let UndoButton = React.createClass({
 	render() {
