@@ -3,8 +3,8 @@ import Immutable from 'immutable'
 import React from 'react/addons'
 import {State, Navigation} from 'react-router'
 
-import studentActions from '../flux/studentActions'
-import RequirementSet from './requirementSet'
+import studentActions from 'app/flux/studentActions'
+import RequirementSet from 'app/elements/requirementSet'
 
 let cx = React.addons.classSet
 

@@ -2,12 +2,12 @@ import {_ as lodash, isNull} from 'lodash'
 import React from 'react/addons'
 import {DragDropMixin} from 'react-dnd'
 
-import itemTypes from '../models/itemTypes'
+import itemTypes from 'app/models/itemTypes'
 
-import ExpandedCourse from './expandedCourse'
-import CollapsedCourse from './collapsedCourse'
-import MissingCourse from './missingCourse'
-import EmptyCourseSlot from './emptyCourseSlot'
+import ExpandedCourse from 'app/elements/expandedCourse'
+import CollapsedCourse from 'app/elements/collapsedCourse'
+import MissingCourse from 'app/elements/missingCourse'
+import EmptyCourseSlot from 'app/elements/emptyCourseSlot'
 
 let cx = React.addons.classSet
 

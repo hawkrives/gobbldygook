@@ -1,7 +1,7 @@
 import Reflux from 'reflux'
 import Immutable from 'immutable'
 
-import notificationActions from './notificationActions'
+import notificationActions from 'app/flux/notificationActions'
 
 let notificationStore = Reflux.createStore({
 	listenables: notificationActions,

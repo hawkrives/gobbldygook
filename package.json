@@ -28,11 +28,11 @@
     "copy-icons": "cp -f app/icons/font/ionicons.woff dist/fonts/",
     "copy": "npm run copy-courses & npm run copy-html & npm run copy-fonts & npm run copy-icons & wait",
 
-    "build-scripts": "browserify --debug -e app/index.js -t 6to5ify --insert-globals | exorcist dist/app.js.map > dist/app.js",
+    "build-scripts": "browserify --debug -e app/index.js -t 6to5ify -t aliasify --insert-globals | exorcist dist/app.js.map > dist/app.js",
     "build-styles": "stylus app/styles/app.styl --out dist/ --use autoprefixer-stylus --compress",
     "build": "npm run copy & npm run build-scripts & npm run build-styles & wait",
 
-    "watch-scripts": "watchify -v --debug -e app/index.js -o dist/app.js -t 6to5ify --insert-globals",
+    "watch-scripts": "watchify -v --debug -e app/index.js -o dist/app.js -t 6to5ify -t aliasify --insert-globals",
     "watch-styles": "stylus --watch app/styles/app.styl --out dist/ --use autoprefixer-stylus --compress",
     "watch-lint": "nodemon --watch app --watch test --ext js --exec npm run-script lint",
     "watch": "npm run copy & npm run watch-lint & npm run watch-scripts & npm run watch-styles & wait",
@@ -70,6 +70,7 @@
     "6to5-core": "2.13.7",
     "6to5-jest": "1.0.1",
     "6to5ify": "3.1.2",
+    "aliasify": "1.5.1",
     "autoprefixer-stylus": "0.5.0",
     "browser-sync": "1.9.1",
     "browserify": "8.1.1",
@@ -90,5 +91,11 @@
     "testPathDirs": [
       "test"
     ]
+  },
+  "aliasify": {
+    "aliases": {
+      "app": "./app",
+      "app/package.json": "./package.json"
+    }
   }
 }
