@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 3.0.0alpha11
+- Switched to Stylus as a pre-processor
+
 ## 3.0.0alpha10
 
 - Added `courses` as the first parameter to `queryCourses`, allowing the full power of that weird query engine to run over any list of courses.
