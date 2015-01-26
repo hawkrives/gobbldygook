@@ -2,8 +2,8 @@ import React from 'react'
 import {map} from 'lodash'
 import {oxford, pluralize} from 'humanize-plus'
 
-import CourseTitle from '../components/courseTitle'
-import studentActions from '../flux/studentActions'
+import CourseTitle from 'app/components/courseTitle'
+import studentActions from 'app/flux/studentActions'
 import semesterName from 'sto-helpers/lib/semesterName'
 
 function findSemesterList() {

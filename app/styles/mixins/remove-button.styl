@@ -1,0 +1,17 @@
+@require 'button'
+@require 'color'
+@require '../icons'
+
+remove-button() {
+	opacity: 0.5
+	transition: 0.15s
+
+	&:hover {
+		color: get-color('red')
+		opacity: 1
+	}
+
+	&::after {
+		ionicon($ionicon-close)
+	}
+}

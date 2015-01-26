@@ -1,0 +1,23 @@
+@require 'color'
+
+progress-bar($color, $bg = transparent, $gradient = null) {
+	$gradient = $gradient ? $gradient : $color
+
+	& {
+		color: $color
+		background: $bg
+
+		{block}
+	}
+
+	&::-moz-progress-bar      { background: $gradient }
+	&::-webkit-progress-value { background: $gradient }
+	&::-webkit-progress-bar   { background: $bg }
+}
+
+progress-track($base-color, $has-track = true, $bar-weight = '300', $track-weight = '100') {
+	$bg = $has-track ? get-color($base-color, $track-weight) : transparent
+	$color = get-color($base-color, $bar-weight)
+
+	progress-bar($color: $color, $bg: $bg)
+}

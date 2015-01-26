@@ -1,4 +1,4 @@
-import './db'
+import 'app/helpers/db'
 
-import loadData from './loadData'
+import loadData from 'app/helpers/loadData'
 loadData()

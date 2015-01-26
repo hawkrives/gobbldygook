@@ -1,0 +1,125 @@
+@require '../mixins/card'
+@require '../mixins/add-button'
+@require '../mixins/remove-button'
+@require '../mixins/material-shadow'
+@require '../mixins/heading-neutral'
+@require '../mixins/link-undecorated'
+@require '../mixins/list-inline'
+@require '../mixins/button--raised'
+@require '../mixins/button--flat'
+
+$semester-spacing = 4px
+
+.semester-list {
+	flex: 1
+	display: flex
+	flex-flow: row wrap
+}
+
+.semester {
+	card()
+
+	flex: auto
+	width: 16em
+	margin: $semester-spacing
+}
+
+.semester-header {
+	flex: 1
+}
+
+.semester.can-drop {
+	// material-shadow(2)
+}
+
+.semester.is-over {
+	material-shadow(2)
+	z-index: 10
+}
+
+.semester-title {
+	padding: ($block-edge-padding) ($block-edge-padding * 1.5)
+	border-bottom: $material-divider
+
+	font-size: 0.85em
+	a {
+		link-undecorated()
+	}
+
+	display: flex
+	flex-flow: row nowrap
+	align-items: flex-start
+	font-feature-settings: 'smcp'
+
+	h1 {
+		heading-neutral()
+		display: inline-block
+	}
+}
+
+.semester .info-bar {
+	list-inline()
+	color: rgba($black, 0.5)
+
+	li {
+		&::before { content: " – " }
+
+		font-feature-settings: 'onum', 'smcp'
+		padding-left: 0.25em
+	}
+}
+
+.semester.invalid .semester-title {
+	background-color: get-color('deep-orange', '300')
+	color: $white
+	border-bottom-color: $white
+
+	.info-bar {
+		color: rgba($white, 0.75)
+	}
+}
+
+.add-semester {
+	add-button()
+	button--raised()
+	padding: 0
+
+	min-width: 48px
+	font-size: 1.25em
+	margin: $semester-spacing
+	margin-right: 0
+
+	@media all and (max-width: $year-collapse-width) {
+		margin: $semester-spacing
+	}
+}
+
+.remove-semester {
+	remove-button()
+	button--flat()
+
+	padding: 0 0.5em
+	min-height: 0
+
+	opacity: 0
+
+	.semester:hover & {
+		opacity: 1
+
+		&:hover {opacity: 1}
+	}
+}
+
+.course-list {
+	min-height: 30px
+	padding-bottom: 0.25em
+
+	.course {
+		padding: ($block-edge-padding) ($block-edge-padding * 1.5)
+		border-bottom: $material-divider
+
+		&:last-child {
+			border-bottom: 0
+		}
+	}
+}

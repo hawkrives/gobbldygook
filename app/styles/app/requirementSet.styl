@@ -1,0 +1,115 @@
+@require '../mixins/heading-neutral'
+@require '../mixins/color'
+@require '../icons'
+
+$border-color = rgb(203, 203, 203)
+
+.requirement-set {
+	header {
+		margin: 0
+		padding: 4px 1em
+
+		background-color: rgb(245, 245, 245)
+
+		font-size: 0.85em
+		font-family: $heading-font-stack
+		font-weight: 300
+	}
+
+	h2 {
+		heading-neutral()
+		text-align: center
+		text-transform: uppercase
+	}
+
+	border: 1px solid $border-color
+	overflow: hidden
+	border-radius: 3px
+	margin: 0 0.35em 0.35em
+}
+
+.requirement-set .requirement-set {
+	margin-top: 0.35em
+	border: 0
+}
+
+.requirement-set .requirement-set header {
+	border-radius: 3px
+}
+
+.requirement-set .description {
+	& > * {
+		margin-top: 0.25em
+		margin-bottom: 0.25em
+	}
+
+	strong {
+		font-weight: 500
+	}
+
+	& > ul, & > ol {
+		padding-left: 0
+		margin-left: 1.5em
+	}
+}
+
+.requirement {
+	text-overflow: ellipsis
+	overflow: hidden
+	white-space: nowrap
+
+	&::before {
+		margin-right: 0.5em
+	}
+
+	&.nope {
+		opacity: 0.5
+		&::before {
+			opacity: 0.15
+			ionicon($ionicon-record)
+		}
+	}
+
+	&.incomplete::before {
+		ionicon($ionicon-android-checkbox-blank)
+		color: get-color('red')
+	}
+	&.completed::before {
+		ionicon($ionicon-android-checkmark-circle)
+		color: get-color('green')
+	}
+}
+
+.requirement-result-object-number,
+.requirement-result-some-array,
+.requirement-result-boolean {
+	text-align: center
+}
+
+.requirement-result > .requirement {
+	padding: 2px 5px
+	display: block
+}
+
+.requirement + .requirement-detail-list {
+	border-top: 1px solid $border-color
+
+	&:empty { border-top: 0 }
+}
+
+.requirement-detail-list {
+	margin: 0
+	padding: 2px
+	list-style: none
+
+	display: flex
+	flex-flow: row wrap
+
+	justify-content: space-around
+
+	.match, .requirement {
+		padding: 2px 2px
+		min-width: 35%
+		text-align: center
+	}
+}

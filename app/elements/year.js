@@ -1,9 +1,9 @@
 import React from 'react'
 import Immutable from 'immutable'
 
-import Course from './course'
-import Semester from './semester'
-import studentActions from '../flux/studentActions'
+import Course from 'app/elements/course'
+import Semester from 'app/elements/semester'
+import studentActions from 'app/flux/studentActions'
 
 import {isCurrentYear} from 'sto-helpers/lib/isCurrent'
 import expandYear from 'sto-helpers/lib/expandYear'

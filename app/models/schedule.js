@@ -6,8 +6,8 @@ import {isTrue} from 'sto-helpers/lib/is'
 
 import randomChar from 'sto-helpers/lib/randomChar'
 import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
-import {getCourses} from '../helpers/courses'
-import findWarnings from '../helpers/findCourseWarnings'
+import {getCourses} from 'app/helpers/courses'
+import findWarnings from 'app/helpers/findCourseWarnings'
 
 let ScheduleRecord = Immutable.Record({
 	id: uuid(),

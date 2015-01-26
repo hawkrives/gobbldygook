@@ -2,9 +2,9 @@ import _ from 'lodash'
 import React from 'react'
 import humanize from 'humanize-plus'
 
-import ContentEditable from './contentEditable'
+import ContentEditable from 'app/elements/contentEditable'
 
-import studentActions from '../flux/studentActions'
+import studentActions from 'app/flux/studentActions'
 
 let goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
 let badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
