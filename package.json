@@ -18,8 +18,8 @@
     "clean": "rm -rf dist/ && npm run prepare & wait",
     "prepare": "mkdir -p dist/data/courses dist/fonts",
 
-    "prebuild": "npm run prepare & npm run lint & wait",
     "precopy": "npm run prepare",
+    "prebuild": "npm run prepare & npm run lint & wait",
     "prewatch": "npm run prepare & npm run lint & wait",
 
     "copy-courses": "cp -f node_modules/sto-courses/info.json dist/data/courses && cp -f -R node_modules/sto-courses/terms dist/data/courses",
