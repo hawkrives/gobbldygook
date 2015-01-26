@@ -9,17 +9,38 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "check": "npm outdated --depth 0",
-    "clean": "rm -rf dist/",
-    "cloc": "cloc ./ --by-file-by-lang --exclude-dir=dist,gulp,node_modules,playground,test",
     "fix-gulp-watch": "cd node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-watcher/node_modules/gaze/node_modules/globule && npm i lodash@latest",
     "fix-browser-sync": "cd node_modules/browser-sync/node_modules/glob-watcher/node_modules/gaze/node_modules/globule && npm i lodash@latest",
-    "fix": "npm run fix-gulp-watch && npm run fix-browser-sync",
-    "gulp": "gulp",
-    "build": "gulp build",
-    "lint": "gulp lint",
-    "serve": "gulp watch",
-    "watch": "gulp watch",
+    "fix": "npm run fix-gulp-watch & npm run fix-browser-sync & wait",
+
+    "cloc": "cloc ./ --by-file-by-lang --exclude-dir=dist,gulp,node_modules,playground,test",
+    "check": "npm outdated --depth 0",
+    "clean": "rm -rf dist/ && npm run prepare & wait",
+    "prepare": "mkdir -p dist/data/courses dist/fonts",
+
+    "prebuild": "npm run prepare & npm run lint & wait",
+    "precopy": "npm run prepare",
+    "prewatch": "npm run prepare & npm run lint & wait",
+
+    "copy-courses": "cp -f node_modules/sto-courses/info.json dist/data/courses && cp -f -R node_modules/sto-courses/terms dist/data/courses",
+    "copy-html": "cp -f app/index.html app/.htaccess dist/",
+    "copy-fonts": "cp -f -R app/fonts dist/",
+    "copy-icons": "cp -f app/icons/font/ionicons.woff dist/fonts/",
+    "copy": "npm run copy-courses & npm run copy-html & npm run copy-fonts & npm run copy-icons & wait",
+
+    "build-scripts": "browserify --debug -e app/index.js -t 6to5ify --insert-globals | exorcist dist/app.js.map > dist/app.js",
+    "build-styles": "node-sass app/styles/app.scss --stdout | autoprefixer | csswring - > dist/app.css",
+    "build": "npm run copy & npm run build-scripts & npm run build-styles & wait",
+
+    "watch-scripts": "watchify -v --debug -e app/index.js -o dist/app.js -t 6to5ify --insert-globals",
+    "watch-styles": "nodemon --watch app/styles --ext scss --exec npm run-script build-styles",
+    "watch-lint": "nodemon --watch app --watch test --ext js --exec npm run-script lint",
+    "watch": "npm run copy & npm run watch-lint & npm run watch-scripts & npm run watch-styles & wait",
+
+    "_browser-sync": "browser-sync start --config ./bs-config.js",
+    "serve": "npm run watch & npm run _browser-sync & wait",
+
+    "lint": "jscs app/ test/",
     "test": "jest",
     "travis": "npm run build && npm run lint && npm run test"
   },
