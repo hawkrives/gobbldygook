@@ -1,0 +1,21 @@
+@require 'colors'
+
+// usage: color('name_of_color', 'type_of_color')
+// to avoid to repeating map-get($colors, ...)
+
+get-color($color, $level = '500') {
+	if $color is 'white' {
+		return #fff
+	}
+
+	if $color is 'black' {
+		return #000
+	}
+
+	if $color in $colors and $level in $colors[$color] {
+		return $colors[$color][$level]
+	}
+
+	error('Unknown level "' + $level + '" of color "' + $color + '" in $colors.')
+	return null
+}

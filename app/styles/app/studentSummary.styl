@@ -1,0 +1,58 @@
+@require '../mixins/card'
+@require '../mixins/color'
+@require '../mixins/avatar-letter'
+
+#student-summary {
+	card($filter: true)
+	hyphens: auto
+	font-feature-settings: 'onum'
+
+	&.cannot-graduate .graduation-message {
+		color: get-color('deep-orange')
+	}
+	&.can-graduate .graduation-message {
+		color: get-color('green')
+	}
+
+	.content {
+		padding: $block-edge-padding * 2
+		p {
+			margin: 0
+		}
+
+		p + p {
+			margin-top: $block-edge-padding * 2
+		}
+	}
+
+	header {
+		display: flex
+		flex-flow: row nowrap
+		align-items: center
+		justify-content: flex-start
+
+		color: $black
+
+		p {
+			margin: 0
+			font-style: italic
+		}
+	}
+}
+
+#student-letter {
+	avatar-letter(48px)
+	border: solid 1px
+	background-color: white
+
+	margin: $block-edge-padding $block-edge-padding*2
+	margin-left: -6px
+
+	.cannot-graduate & {
+		color: get-color('deep-orange')
+	}
+
+	.can-graduate & {
+		color: get-color('green')
+	}
+}
