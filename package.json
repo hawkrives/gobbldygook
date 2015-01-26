@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "push": "./bin/publish.sh",
-    "build": "6to5 lib --out-dir dist && 6to5 index.es > index.js",
+    "build": "6to5 lib --out-dir dist && node bin/make_index.js",
     "clean": "rm -rf dist/ index.js",
     "watch": "6to5 --watch lib --out-dir dist",
     "test": "mocha",
