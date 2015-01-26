@@ -8,6 +8,9 @@
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
+  "config": {
+    "uglify": "--source-map-root ./app --in-source-map dist/app.js.map --source-map dist/app.min.js.map --compress --mangle --screw-ie8"
+  },
   "scripts": {
     "fix-gulp-watch": "cd node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-watcher/node_modules/gaze/node_modules/globule && npm i lodash@latest",
     "fix-browser-sync": "cd node_modules/browser-sync/node_modules/glob-watcher/node_modules/gaze/node_modules/globule && npm i lodash@latest",
@@ -30,6 +33,7 @@
 
     "build-scripts": "browserify --debug -e app/index.js -t 6to5ify -t aliasify --insert-globals | exorcist dist/app.js.map > dist/app.js",
     "build-styles": "stylus app/styles/app.styl --out dist/ --use autoprefixer-stylus --compress",
+    "uglify": "uglifyjs dist/app.js --output dist/app.min.js $npm_package_config_uglify",
     "build": "npm run copy & npm run build-scripts & npm run build-styles & wait",
 
     "watch-scripts": "watchify -v --debug -e app/index.js -o dist/app.js -t 6to5ify -t aliasify --insert-globals",
@@ -83,6 +87,7 @@
     "mold-source-map": "0.3.0",
     "nodemon": "1.3.2",
     "stylus": "0.49.3",
+    "uglify-js": "2.4.16",
     "watchify": "2.2.1"
   },
   "jest": {
