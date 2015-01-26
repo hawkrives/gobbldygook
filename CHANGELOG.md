@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.9
+- Update lodash
+- Write a script to automatically update the index.js file
+
 ## 1.0.8
 - Fix camel-casing in `cleanTimeStringSegment`
 
