@@ -37,9 +37,9 @@
     "build-styles": "stylus app/styles/app.styl --out dist/ $npm_package_config_stylus",
     "build": "npm run copy & npm run build-scripts & npm run build-styles & wait",
 
-    "watch-lint": "nodemon --watch app --watch test --ext js --exec npm run-script lint",
     "watch-scripts": "watchify --verbose -o dist/app.js $npm_package_config_browserify",
     "watch-styles": "stylus --watch app/styles/app.styl --out dist/ $npm_package_config_stylus",
+    "watch-lint": "nodemon --watch app --watch test --ext js --exec npm run lint",
     "watch": "npm run copy & npm run watch-lint & npm run watch-scripts & npm run watch-styles & wait",
 
     "_browser-sync": "browser-sync start --config ./bs-config.js",
