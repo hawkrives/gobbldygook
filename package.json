@@ -16,10 +16,10 @@
     "postpublish": "npm run clean"
   },
   "dependencies": {
-    "lodash": "^2.4.1"
+    "lodash": "^3.0.0"
   },
   "devDependencies": {
-    "6to5": "^2.9.3",
+    "6to5": "^2.13.7",
     "chai": "^1.10.0",
     "mocha": "^2.1.0"
   },
