@@ -16,8 +16,10 @@ let GraduationStatus = React.createClass({
 
 	componentWillReceiveProps(nextProps) {
 		let graduatabilityPromise = checkStudentGraduatability(nextProps.student)
+
 		graduatabilityPromise.then((graduationStatus) => {
-			this.setState({graduatability: graduationStatus.graduatability, areaDetails: graduationStatus.areaDetails})
+			let {graduatability, areaDetails} = graduationStatus
+			this.setState({graduatability, areaDetails})
 		})
 	},
 
@@ -40,24 +42,31 @@ let GraduationStatus = React.createClass({
 
 	render() {
 		// console.info('graduation-status render', this.props.student)
-		if (!this.props.student)
+		let student = this.props.student
+
+		if (!student)
 			return null
 
-		let summary = React.createElement(StudentSummary, {student: this.props.student, graduatability: this.state.graduatability})
+		let summary = React.createElement(StudentSummary, {
+			student: student,
+			graduatability: this.state.graduatability,
+		})
 
-		let sections = this.state.areaDetails
-			.groupBy(area => area.type || 'Unknown')
+		let sections = student.areasByType
 			.map((areas, areaType) => {
 				let pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 
 				let areaTypeHeading = React.createElement('header', {className: 'area-type-heading'},
 					React.createElement('h1', null, capitalize(pluralType)))
 
-				let areaElements = areas.map((area, index) => {
+				let areaElements = areas.toList().map((area, index) => {
+					let areaResult = this.state.areaDetails.find(a => a.id === area.id)
+
 					return React.createElement(AreaOfStudy, {
 						key: `${area.id}-${index}`,
-						student: this.props.student,
-						area: area,
+						student,
+						areaResult,
+						area,
 					})
 				}).toJS()
 
