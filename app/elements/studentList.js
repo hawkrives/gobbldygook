@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
-import studentActions from '../flux/studentActions'
+import studentActions from 'app/flux/studentActions'
 
 let StudentList = React.createClass({
 	handleSubmit(ev) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import FakeCourse from '../components/fakeCourse'
+import FakeCourse from 'app/components/fakeCourse'
 
 let MissingCourse = React.createClass({
 	render() {

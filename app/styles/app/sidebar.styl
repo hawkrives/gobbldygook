@@ -1,0 +1,36 @@
+@require '../mixins/button--raised'
+
+.sidebar {
+	flex: 0 0 270px
+	min-width: 270px
+	margin-right: $page-edge-padding
+}
+
+@media all and (max-width: $single-column-width) {
+	.sidebar {
+		margin-right: 0
+		flex-basis: auto
+	}
+}
+
+.button-list {
+	font-size: 0.85em
+	display: flex
+	flex-flow: row wrap
+	justify-content: space-around
+
+	button, input[type='submit'] {
+		button--raised()
+
+		flex-grow: 1
+		padding-left: 1em
+		padding-right: 1em
+
+		$spacing = 0.5em
+		margin-right: ($spacing / 2)
+		margin-left: ($spacing / 2)
+		margin-bottom: $spacing
+	}
+
+	margin-bottom: 0.5em
+}

@@ -2,7 +2,7 @@ import Promise from 'bluebird'
 import _ from 'lodash'
 import Immutable from 'immutable'
 import {isTrue} from 'sto-helpers/lib/is'
-import checkStudentAgainstArea from './checkStudentAgainstArea'
+import checkStudentAgainstArea from 'app/helpers/checkStudentAgainstArea'
 
 
 /**

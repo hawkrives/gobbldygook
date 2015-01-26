@@ -1,0 +1,13 @@
+@require 'button'
+@require '../icons'
+
+add-button($psuedo = '::after') {
+	&{$psuedo} {
+		ionicon($ionicon-android-add)
+		{block}
+	}
+
+	&[disabled]{$psuedo} {
+		ionicon($ionicon-android-checkmark-circle)
+	}
+}

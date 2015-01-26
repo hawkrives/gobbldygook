@@ -3,13 +3,13 @@ import Immutable from 'immutable'
 import {flatten, forEach, omit} from 'lodash'
 import {v4 as uuid} from 'node-uuid'
 
-import {version as currentVersionString} from '../../package.json'
+import {version as currentVersionString} from 'app/package.json'
 
 import randomChar from 'sto-helpers/lib/randomChar'
 import countCredits from 'sto-helpers/lib/countCredits'
 
-import Schedule from './schedule'
-import Study from './study'
+import Schedule from 'app/models/schedule'
+import Study from 'app/models/study'
 
 
 let StudentRecord = Immutable.Record({

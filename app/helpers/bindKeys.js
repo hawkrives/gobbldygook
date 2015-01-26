@@ -1,6 +1,6 @@
 import keymage from 'keymage'
 
-import studentActions from '../flux/studentActions'
+import studentActions from 'app/flux/studentActions'
 
 // binding on 'defmod' binds on Command key on OS X and on Control key in other
 // systems
