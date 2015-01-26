@@ -4,8 +4,7 @@
 
 import Promise from 'bluebird'
 import idbRange from 'idb-range'
-import {any, isString, first, last, filter} from 'lodash'
-import deepEql from 'deep-eql'
+import {any, first, last, filter, isString, isEqual} from 'lodash'
 import checkAgainstQuery from 'sto-helpers/lib/checkCourseAgainstQuery'
 
 function query(db, treo) {
@@ -85,10 +84,10 @@ function query(db, treo) {
 				// Check if we want to add the current value to the results array.
 				// Essentially, make sure that the current value passes the query,
 				// and then that it's not already in the array.
-				// Note that because JS checks against identity, we use deepEql to
+				// Note that because JS checks against identity, we use isEqual to
 				// do an equality check against the two objects.
 				return checkAgainstQuery(query, currentValue) &&
-					!any(results, val => deepEql(val, currentValue))
+					!any(results, val => isEqual(val, currentValue))
 			}
 
 			function iterateEntireStore(cursor) {
