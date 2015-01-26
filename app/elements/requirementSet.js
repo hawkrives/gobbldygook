@@ -3,7 +3,10 @@ import React from 'react'
 import marked from 'marked'
 
 import {
-	BooleanRequirement, SomeArrayRequirement, BooleanArrayRequirement, NumberObjectRequirement
+	BooleanRequirement,
+	SomeArrayRequirement,
+	BooleanArrayRequirement,
+	NumberObjectRequirement
 } from './requirement'
 
 let RequirementSet = React.createClass({

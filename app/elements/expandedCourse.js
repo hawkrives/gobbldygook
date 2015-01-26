@@ -4,7 +4,7 @@ import {oxford, pluralize} from 'humanize-plus'
 
 import CourseTitle from '../components/courseTitle'
 import studentActions from '../flux/studentActions'
-import semesterName from 'sto-helpers/lib/semesterName'
+import {semesterName} from 'sto-helpers'
 
 function findSemesterList() {
 	return [

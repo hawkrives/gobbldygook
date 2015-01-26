@@ -5,8 +5,8 @@ import notificationActions from '../flux/notificationActions'
 import {status, json} from './fetch'
 import db from './db'
 
-import buildDept from 'sto-helpers/lib/buildDept'
-import buildDeptNum from 'sto-helpers/lib/buildDeptNum'
+import {buildDept} from 'sto-helpers'
+import {buildDeptNum} from 'sto-helpers'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 let logDataLoading = false

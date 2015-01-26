@@ -1,9 +1,9 @@
 import {_, isUndefined} from 'lodash'
 import {titleCase} from 'humanize-plus'
 import {isTrue} from 'sto-helpers/lib/is'
-import findResults from 'sto-helpers/lib/findResults'
-import findWordForProgress from 'sto-helpers/lib/findWordForProgress'
-import parseAreaId from 'sto-helpers/lib/parseAreaId'
+import {findResults} from 'sto-helpers'
+import {findWordForProgress} from 'sto-helpers'
+import {parseAreaId} from 'sto-helpers'
 
 
 /**

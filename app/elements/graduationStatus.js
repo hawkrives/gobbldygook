@@ -1,6 +1,4 @@
-import _ from 'lodash'
 import React from 'react'
-import {Link} from 'react-router'
 import {capitalize, pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 

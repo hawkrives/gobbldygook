@@ -2,8 +2,8 @@ import {map, flatten, findIndex, any, zip, clone} from 'lodash'
 import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {ordinal} from 'humanize-plus'
 import {isTrue} from 'sto-helpers/lib/is'
-import expandYear from 'sto-helpers/lib/expandYear'
-import semesterName from 'sto-helpers/lib/semesterName'
+import {expandYear} from 'sto-helpers'
+import {semesterName} from 'sto-helpers'
 
 let checkForInvalidYear = (course, scheduleYear) => {
 	let result = {

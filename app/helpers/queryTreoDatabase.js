@@ -5,7 +5,7 @@
 import Promise from 'bluebird'
 import idbRange from 'idb-range'
 import {any, first, last, filter, isString, isEqual} from 'lodash'
-import checkAgainstQuery from 'sto-helpers/lib/checkCourseAgainstQuery'
+import {checkAgainstQuery} from 'sto-helpers'
 
 function query(db, treo) {
 	let {Store} = treo

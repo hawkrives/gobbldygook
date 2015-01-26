@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import React from 'react'
 
-import expandYear from 'sto-helpers/lib/expandYear'
-import findFirstAvailableYear from 'sto-helpers/lib/findFirstAvailableYear'
+import {expandYear} from 'sto-helpers'
+import {findFirstAvailableYear} from 'sto-helpers'
 
 import studentActions from '../flux/studentActions'
 import Year from './year'

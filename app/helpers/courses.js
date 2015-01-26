@@ -4,7 +4,7 @@ import Immutable from 'immutable'
 
 import db from './db'
 
-import buildQueryFromString from 'sto-helpers/lib/buildQueryFromString'
+import {buildQueryFromString} from 'sto-helpers'
 
 
 /**

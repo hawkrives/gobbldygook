@@ -4,7 +4,7 @@ import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
 import {isTrue} from 'sto-helpers/lib/is'
 
-import randomChar from 'sto-helpers/lib/randomChar'
+import {randomChar} from 'sto-helpers'
 import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {getCourses} from '../helpers/courses'
 import findWarnings from '../helpers/findCourseWarnings'

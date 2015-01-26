@@ -5,8 +5,8 @@ import {v4 as uuid} from 'node-uuid'
 
 import {version as currentVersionString} from '../../package.json'
 
-import randomChar from 'sto-helpers/lib/randomChar'
-import countCredits from 'sto-helpers/lib/countCredits'
+import {randomChar} from 'sto-helpers'
+import {countCredits} from 'sto-helpers'
 
 import Schedule from './schedule'
 import Study from './study'
