@@ -39,7 +39,7 @@ function query(db, treo) {
 			// The index of our current key
 			let current = 0
 			// Grab a key from the query to use as an index.
-			// TODO: Write a function to sort keys by preference.
+			// TODO: Write a function to sort keys by priority.
 			let indexKeys = Object.keys(query)
 			// The index to limit ourselves to, if any
 			let index = undefined
