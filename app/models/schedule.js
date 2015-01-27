@@ -6,7 +6,7 @@ import {isTrue} from 'sto-helpers/lib/is'
 
 import {randomChar} from 'sto-helpers'
 import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
-import {getCourses} from '../helpers/courses'
+import getCourses from '../helpers/getCourses'
 import findWarnings from '../helpers/findCourseWarnings'
 
 let ScheduleRecord = Immutable.Record({

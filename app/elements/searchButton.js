@@ -3,7 +3,7 @@ import {Link, State} from 'react-router'
 import {isObject, chain, map} from 'lodash'
 
 import {toPrettyTerm} from 'sto-helpers'
-import {queryCourseDatabase} from '../helpers/courses'
+import queryCourseDatabase from '../helpers/queryCourseDatabase'
 import Course from './course'
 import stickyfill from '../helpers/initStickyfill'
 
