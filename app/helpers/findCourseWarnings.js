@@ -68,7 +68,7 @@ let findWarnings = (courses, schedule) => {
 	let timeConflicts = checkForTimeConflicts(courses)
 
 	let nearlyMerged = zip(warningsOfInvalidity, timeConflicts)
-	let warningsWithTimeConflicts = map(nearlyMerged, arr => flatten(arr, true))
+	let warningsWithTimeConflicts = map(nearlyMerged, flatten)
 
 	let allWarnings = warningsWithTimeConflicts
 
