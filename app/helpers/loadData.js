@@ -21,7 +21,7 @@ function prepareCourse(course) {
 
 function storeCourses(item) {
 	console.log('storing courses')
-	let start = performance.now()
+	let start = present()
 
 	let coursesToStore = _.map(item.data.courses, (course) => {
 		course.sourcePath = item.meta.path
@@ -30,7 +30,7 @@ function storeCourses(item) {
 
 	return db.store('courses').batch(coursesToStore)
 		.then((results) => {
-			let end = performance.now()
+			let end = present()
 			console.log('Stored courses in', (end - start) + 'ms.')
 			return item
 		})

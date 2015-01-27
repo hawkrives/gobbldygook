@@ -64,10 +64,10 @@ let SearchButton = React.createClass({
 			.value()
 
 		console.log('search results', searchResults)
-		let endQueryTime = performance.now()
+		let endQueryTime = present()
 		console.info(`query took ${(endQueryTime - startQueryTime)}ms.`)
 
-		let startTime = performance.now()
+		let startTime = present()
 		let courseObjects = map(searchResults, (courseOrTerm) => {
 			if (!isObject(courseOrTerm)) {
 				let prettyTerm = toPrettyTerm(courseOrTerm)
@@ -81,7 +81,7 @@ let SearchButton = React.createClass({
 				React.createElement(Course, {info: courseOrTerm}))
 		})
 
-		let endTime = performance.now()
+		let endTime = present()
 		console.info(`element creation took an additional ${(endTime - startTime)}ms.`)
 
 		this.setState({results: courseObjects, hasQueried: true, query: null})
@@ -92,7 +92,7 @@ let SearchButton = React.createClass({
 			return
 
 		this.setState({results: [], hasQueried: false})
-		let startQueryTime = performance.now()
+		let startQueryTime = present()
 
 		let query = queryCourseDatabase(searchQuery)
 			.then(results => [results, startQueryTime])

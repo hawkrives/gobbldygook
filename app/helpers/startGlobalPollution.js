@@ -7,3 +7,6 @@ window.log = (...args) => console.log(...args)
 
 import stickyfill from  './initStickyfill'
 stickyfill.init()
+
+import present from 'present'
+window.present = present

@@ -72,26 +72,26 @@ class Schedule extends ScheduleRecord {
 	}
 
 	addCourse(clbid) {
-		// let start = performance.now()
+		// let start = present()
 		// console.log(`adding clbid ${clbid} to schedule ${this.id} (${this.year}-${this.semester}.${this.index})`)
 
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.push(clbid))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
-			// sched.get('_courseData').then(d => console.log(`it took ${Math.round(performance.now() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
+			// sched.get('_courseData').then(d => console.log(`it took ${Math.round(present() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
 			return sched
 		})
 	}
 
 	removeCourse(clbid) {
-		// let start = performance.now()
+		// let start = present()
 		// console.log(`removing clbid ${clbid} from schedule ${this.id} (${this.year}-${this.semester}.${this.index})`)
 
 		let index = this.clbids.indexOf(clbid)
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.delete(index))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
-			// sched.get('_courseData').then(d => console.log(`it took ${Math.round(performance.now() - start)}ms to remove ${clbid} from ${this.year}-${this.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
+			// sched.get('_courseData').then(d => console.log(`it took ${Math.round(present() - start)}ms to remove ${clbid} from ${this.year}-${this.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
 			return sched
 		})
 	}

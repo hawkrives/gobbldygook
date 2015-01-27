@@ -32,7 +32,7 @@ let StudentRecord = Immutable.Record({
 
 class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
-		// let startTime = performance.now()
+		// let startTime = present()
 		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
 		// instead of our custom Studies, Schedules, and such.
 		let toRemove = ['studies', 'schedules', 'overrides', 'fabrications', 'settings']
@@ -69,7 +69,7 @@ class Student extends StudentRecord {
 
 				student = student.set('version', currentVersionString)
 
-				// console.log('it took', performance.now() - startTime, 'ms to make a student')
+				// console.log('it took', present() - startTime, 'ms to make a student')
 
 				return student
 			})
