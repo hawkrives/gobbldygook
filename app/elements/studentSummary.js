@@ -26,7 +26,7 @@ let StudentSummary = React.createClass({
 
 		let name = student.name
 		let nameEl = React.createElement(ContentEditable, {
-			html: name,
+			content: name,
 			onChange: this.updateStudentName,
 		})
 
