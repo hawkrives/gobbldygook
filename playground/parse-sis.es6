@@ -32,6 +32,14 @@ function tableToJson(table) {
 
 function prettyCourses(jsonCourses) {
 	return jsonCourses.map(function(course) {
+let unescapeAllValues = (obj) => _[_.isArray(obj) ? 'map' : 'mapValues'](obj, (value) => {
+	if (_.isString(value))
+		return _.unescape(value)
+	else if (_.isArray(value))
+		return unescapeAllValues(value)
+	return value
+})
+
 		delete course['&nbsp;']
 		delete course.inst
 
