@@ -47,8 +47,7 @@ let SearchButton = React.createClass({
 		}
 	},
 
-	processQueryResults(resultsAndStartQueryTime) {
-		let [results, startQueryTime] = resultsAndStartQueryTime
+	processQueryResults([results, startQueryTime]=[]) {
 		console.log('results', results)
 
 		let searchResults = chain(results)
