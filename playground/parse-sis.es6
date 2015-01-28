@@ -419,6 +419,14 @@ function findScheduleFromCourses(courses) {
 		}))
 }
 
+function comboHasCourses(courses, combinationOfClasses) {
+	return _(courses)
+		.takeWhile((course) =>
+			queryCourses(course, combinationOfClasses).length >= 1)
+		// .forEach(console.log.bind(console))
+		.size() === courses.length
+}
+
 function makeStudent(tables, degreeType) {
 	let student = {}
 
