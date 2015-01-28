@@ -64,7 +64,7 @@ function prettyifyCourses(jsonCourses) {
 		course.depts = course.dept.split('/')
 
 		if (course['g.e.'] && course['g.e.'].length)
-			course.geneds = course['g.e.'].split(' ')
+			course.gereqs = course['g.e.'].split(' ')
 		delete course['g.e.']
 
 		course.name = course.title.trim()
