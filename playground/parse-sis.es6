@@ -1,7 +1,15 @@
-'use strict';
-
+import '6to5-core/polyfill'
 import _ from 'lodash'
 import SISData from './sis-degreeaudit.json'
+import 'whatwg-fetch'
+import Promise from 'bluebird'
+import db from '../app/helpers/db'
+import loadData from '../app/helpers/loadData'
+import comb from '../app/helpers/combos'
+import queryCourses from 'sto-helpers/lib/queryCourses'
+import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
+
+loadData()
 
 function tableToJson(table) {
 	// from http://johndyer.name/html-table-to-json/
