@@ -57,7 +57,7 @@ function query(db, treo) {
 				keysWithIndices.unshift('deptnum')
 			}
 
-			// console.log(keysWithIndices)
+			// console.log('keysWithIndices', keysWithIndices)
 
 			// If the current store doesn't have an index for any of the
 			// requested keys, iterate over the entire store.
@@ -66,7 +66,7 @@ function query(db, treo) {
 			}
 			else {
 				index = first(keysWithIndices)
-				console.log(index)
+				// console.log(index)
 
 				// `keys` is the list of permissible values for that range from the query
 				keys = query[index]
