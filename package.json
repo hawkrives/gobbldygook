@@ -68,13 +68,13 @@
     "stickyfill": "^1.1.1",
     "sto-areas": "^2.3.8",
     "sto-courses": "^3.0.3",
-    "sto-helpers": "^4.1.0",
+    "sto-helpers": "^4.1.1",
     "sto-sis-time-parser": "^2.0.0",
     "treo": "^0.4.1",
     "whatwg-fetch": "^0.7.0"
   },
   "devDependencies": {
-    "6to5-core": "^3.0.11",
+    "6to5-core": "^3.0.12",
     "6to5-jest": "^3.0.0",
     "6to5ify": "^4.0.0",
     "autoprefixer-stylus": "^0.5.0",
