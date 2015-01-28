@@ -1,4 +1,5 @@
 import React from 'react'
+import {debounce} from 'lodash'
 
 let ContentEditable = React.createClass({
 	// from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
@@ -20,10 +21,14 @@ let ContentEditable = React.createClass({
 	},
 
 	handleChange(ev) {
-		if (this.props.onChange && ev.target.value !== this.state.content) {
-			this.props.onChange(ev)
+		let value = ev.target.value
+
+		if (this.props.onChange && value !== this.state.content) {
+			this.debounce = this.debounce || debounce((value) => {this.props.onChange({target: {value}})}, 500, {'maxWait': 1000})
+			this.debounce(value)
 		}
-		this.setState({content: ev.target.value})
+
+		this.setState({content: value})
 	},
 
 	render() {
