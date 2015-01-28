@@ -67,6 +67,7 @@ function query(db, treo) {
 			}
 			else {
 				index = first(keysWithIndices)
+				console.log(index)
 
 				// `keys` is the list of permissible values for that range from the query
 				keys = query[index]
