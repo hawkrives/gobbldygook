@@ -374,6 +374,51 @@ function createSchedules(courses) {
 		.done()
 }
 
+window.findScheduleFromCourses = findScheduleFromCourses
+
+function findScheduleFromCourses(courses) {
+	// find all matches for each course
+	let queryableCourses = _.map(courses, prepareCourseForQuery)
+	// console.log(`queryableCourses for ${courses[0].term}`, queryableCourses)
+	let matchPromises = _.map(queryableCourses, searchForCourseMatches)
+
+	return Promise
+		.all(matchPromises)
+		.then((matches) => new Promise((resolve, reject) => {
+			let start =  performance.now()
+			matches = _.flatten(matches)
+			// console.log(`individual results for ${courses[0].term}`, matches)
+			if (!matches.length) {
+				reject(new NoComboPossible())
+			}
+			// use combinations generator to iterate through all combos of matches
+			let foundCombo = undefined
+			for (let combo of comb(matches, courses.length)) {
+				// console.log(`${performance.now() - start}ms started combo`, _.pluck(combo, 'name'))
+				// check each combo for time conflicts and existence of each deptnum
+				// let start1 = performance.now()
+				if (!comboHasCourses(queryableCourses, combo)) {
+					// console.log(`combo did not have course`)
+					continue
+				}
+				// console.log(`combo had course, after ${performance.now() - start1}`)
+				// let start2 = performance.now()
+				if (_.any(_.flatten(checkScheduleTimeConflicts(combo)))) {
+					// console.log(`combo had time conflict`, checkScheduleTimeConflicts(combo))
+					continue
+				}
+				// console.log(`combo had no time conflicts, after ${performance.now() - start2}`)
+				foundCombo = combo
+				break
+			}
+			if (foundCombo) {
+				// console.log(`${performance.now() - start}ms finished combo for ${courses[0].term}`, foundCombo)
+				resolve(foundCombo)
+			}
+			reject(new NoComboPossible(JSON.stringify(matches)))
+		}))
+}
+
 function makeStudent(tables, degreeType) {
 	let student = {}
 
