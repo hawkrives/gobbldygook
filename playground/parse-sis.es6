@@ -366,9 +366,12 @@ function createSchedules(courses) {
 				}
 			})
 		})
-		return sched
-	})
-	console.log(schedules)
+		.then((resultArrays) => _.zipObject(terms, resultArrays))
+		.then((results) => {
+			console.log(`total results took ${performance.now()-start}ms`, results)
+			return results
+		})
+		.done()
 }
 
 function makeStudent(tables, degreeType) {
