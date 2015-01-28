@@ -338,6 +338,15 @@ function createSchedules(courses) {
 		// return sched
 	// })
 	//searchForCourseMatches(schedules[0])
+	let [terms, groupedCourses] = _(courses)
+		.groupBy('term')
+		.pairs()
+		.unzip()
+		.value()
+
+	console.log(terms, groupedCourses)
+
+	console.log('grouped courses by term')
 		})
 		return sched
 	})
