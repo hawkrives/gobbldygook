@@ -4,7 +4,7 @@
 
 import Promise from 'bluebird'
 import idbRange from 'idb-range'
-import {any, first, last, filter, isString, isEqual} from 'lodash'
+import {map, any, first, last, filter, isString, isEqual, contains} from 'lodash'
 import {checkCourseAgainstQuery as checkAgainstQuery} from 'sto-helpers'
 
 function query(db, treo) {
@@ -29,12 +29,12 @@ function query(db, treo) {
 			// Set up a range from the low and high value from the values for that key.
 			// Iterate over that range and index, checking each value against the query
 			//     and making sure not to add duplicates.
-			// Return the results.
+			// Return the resultIds.
 
-			let results = []
+			let resultIds = []
 			// Prevent invalid logic from not having a query.
 			if (!query || Object.keys(query).length === 0)
-				return results
+				return resultIds
 
 			// The index of our current key
 			let current = 0
@@ -87,20 +87,19 @@ function query(db, treo) {
 				}
 			}
 
-			function canAdd(query, currentValue) {
-				// Check if we want to add the current value to the results array.
+			function canAdd(query, currentValue, primaryKey) {
+				// Check if we want to add the current value to the resultIds array.
 				// Essentially, make sure that the current value passes the query,
 				// and then that it's not already in the array.
 				// Note that because JS checks against identity, we use isEqual to
 				// do an equality check against the two objects.
-				return checkAgainstQuery(query, currentValue) &&
-					!any(results, val => isEqual(val, currentValue))
+				return checkAgainstQuery(query, currentValue) && !contains(resultIds, primaryKey)
 			}
 
 			function iterateEntireStore(cursor) {
-				let value = cursor.value
-				if (canAdd(query, value)) {
-					results.push(value)
+				let {value, primaryKey} = cursor
+				if (canAdd(query, value, primaryKey)) {
+					resultIds.push(primaryKey)
 				}
 				cursor.continue()
 			}
@@ -119,10 +118,10 @@ function query(db, treo) {
 					// If the cursor's key is "past" the current one, we need to skip
 					// ahead to the next one key in the list of keys.
 					// console.log('greater')
-					let value = cursor.value
-					if (canAdd(query, value)) {
+					let {value, primaryKey} = cursor
+					if (canAdd(query, value, primaryKey)) {
 						// console.log('adding', value)
-						results.push(value)
+						resultIds.push(primaryKey)
 					}
 					current += 1
 					// If we attempt to continue to a key that is before or equal
@@ -138,10 +137,10 @@ function query(db, treo) {
 					// If we've found what we're looking for, add it, and go to
 					// the next result.
 					// console.log('equals')
-					let value = cursor.value
-					if (canAdd(query, value)) {
+					let {value, primaryKey} = cursor
+					if (canAdd(query, value, primaryKey)) {
 						// console.log('adding', value)
-						results.push(value)
+						resultIds.push(primaryKey)
 					}
 					cursor.continue()
 				}
@@ -154,9 +153,10 @@ function query(db, treo) {
 				}
 			}
 
-			function done(err) {
+			let done = (err) => {
 				// console.log('done fn')
-				err ? reject(err) : resolve(results)
+				let resultsPromise = Promise.all(map(resultIds, (id) => this.get(id)))
+				err ? reject(err) : resultsPromise.then(resolve)
 			}
 
 			this.cursor({iterator, range, index}, done)
