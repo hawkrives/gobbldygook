@@ -330,11 +330,14 @@ function createSchedules(courses) {
 		// }
 		// _.each(sched.courses, (course, i) => {
 			// attempt 1
-			let attemptToFindCourse = queryCourses({name: course.name, term: course.term, deptnum: course.deptnum})
-			if (attemptToFindCourse) {
-				clbids.push(attemptToFindCourse.clbid)
-				delete
-			}
+			// let attemptToFindCourse = queryCourses({name: course.name, term: course.term, deptnum: course.deptnum})
+			// if (attemptToFindCourse) {
+				// clbids.push(attemptToFindCourse.clbid)
+			// }
+		// })
+		// return sched
+	// })
+	//searchForCourseMatches(schedules[0])
 		})
 		return sched
 	})
