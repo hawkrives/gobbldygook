@@ -173,8 +173,11 @@ function processInfoTable(infoTable) {
 function processCoursesTable(coursesTable) {
 	var jsonRepresentation = tableToJson(coursesTable)
 	jsonRepresentation.pop() // remove the extra row at the end
-	var courses = prettyCourses(jsonRepresentation)
-	return courses
+
+	// loop to query each of the ugly
+	var coursesArr = prettyifyCourses(jsonRepresentation)
+
+	return coursesArr
 }
 
 function processGradTable(gradTable) {
