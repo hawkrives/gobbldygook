@@ -155,7 +155,7 @@ function query(db, treo) {
 
 			let done = (err) => {
 				// console.log('done fn')
-				let resultsPromise = Promise.all(map(resultIds, (id) => this.get(id)))
+				let resultsPromise = Promise.all(this.batchGet(resultIds))
 				err ? reject(err) : resultsPromise.then(resolve)
 			}
 
