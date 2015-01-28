@@ -1,6 +1,6 @@
 import {map, flatten, findIndex, any, zip, clone} from 'lodash'
-import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {ordinal} from 'humanize-plus'
+import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {isTrue, expandYear, semesterName} from 'sto-helpers'
 
 let checkForInvalidYear = (course, scheduleYear) => {
@@ -34,7 +34,7 @@ let checkForInvalidSemester = (course, scheduleSemester) => {
 }
 
 let checkForTimeConflicts = (courses) => {
-	let conflicts = checkScheduleTimeConflicts(courses)
+	let conflicts = findScheduleTimeConflicts(courses)
 	conflicts = map(conflicts, conflictSet => {
 		let result = {
 			warning: false,
