@@ -7,31 +7,31 @@ let ContentEditable = React.createClass({
 		content: React.PropTypes.string,
 	},
 
-	shouldComponentUpdate(nextProps) {
-		return nextProps.content !== this.getDOMNode().innerHTML
+	componentWillReceiveProps(nextProps) {
+		this.setState({content: nextProps.content})
 	},
 
-	componentWillUpdate(nextProps) {
-		if (nextProps.content !== this.getDOMNode().innerHTML) {
-			this.getDOMNode().innerHTML = nextProps.content
-		}
+	getDefaultProps() {
+		return {content: ''}
 	},
 
-	emitChange() {
-		let content = this.getDOMNode().innerHTML
-		if (this.props.onChange && content !== this.lastHtml) {
-			this.props.onChange({target: {value: content}})
+	getInitialState() {
+		return {content: this.props.content}
+	},
+
+	handleChange(ev) {
+		if (this.props.onChange && ev.target.value !== this.state.content) {
+			this.props.onChange(ev)
 		}
-		this.lastHtml = content
+		this.setState({content: ev.target.value})
 	},
 
 	render() {
-		return React.createElement('span', {
-			className: 'contenteditable',
-			onInput: this.emitChange,
-			onBlur: this.emitChange,
-			contentEditable: true,
-			dangerouslySetInnerHTML: {__html: this.props.content},
+		return React.createElement('input', {
+			type: 'text',
+			onChange: this.handleChange,
+			onBlur: this.handleChange,
+			value: this.state.content,
 		})
 	},
 })
