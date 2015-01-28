@@ -189,7 +189,7 @@ function processGradTable(gradTable) {
 			result[key] = {}
 		}
 	})
-	console.log('grad table', jsonRepresentation)
+	//console.log('grad table', jsonRepresentation)
 	// return courses
 }
 
