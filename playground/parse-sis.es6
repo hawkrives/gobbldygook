@@ -1,13 +1,16 @@
 import '6to5-core/polyfill'
 import _ from 'lodash'
-import SISData from './sis-degreeaudit.json'
 import 'whatwg-fetch'
 import Promise from 'bluebird'
+
+import SISData from './sis-degreeaudit.json'
+
 import db from '../app/helpers/db'
 import loadData from '../app/helpers/loadData'
-import comb from '../app/helpers/combos'
-import queryCourses from 'sto-helpers/lib/queryCourses'
-import {checkScheduleTimeConflicts} from 'sto-sis-time-parser'
+
+import {combinations as comb} from 'sto-helpers'
+import {queryCourses} from 'sto-helpers'
+import {checkScheduleForTimeConflicts} from 'sto-sis-time-parser'
 
 loadData()
 
@@ -403,8 +406,8 @@ function findScheduleFromCourses(courses) {
 				}
 				// console.log(`combo had course, after ${performance.now() - start1}`)
 				// let start2 = performance.now()
-				if (_.any(_.flatten(checkScheduleTimeConflicts(combo)))) {
-					// console.log(`combo had time conflict`, checkScheduleTimeConflicts(combo))
+				if (checkScheduleForTimeConflicts(combo)) {
+					// console.log(`combo had time conflict`, checkScheduleForTimeConflicts(combo))
 					continue
 				}
 				// console.log(`combo had no time conflicts, after ${performance.now() - start2}`)
