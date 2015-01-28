@@ -2,6 +2,8 @@
 
 ## 3.0.0alpha11
 - Switched to Stylus as a pre-processor
+- Updated 6to5
+- Updated sto-helpers and sto-sis-time-parser
 
 ## 3.0.0alpha10
 
