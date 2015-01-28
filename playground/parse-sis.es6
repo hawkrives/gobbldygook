@@ -80,6 +80,20 @@ function prettyifyCourses(jsonCourses) {
 	})
 }
 
+function prepareCourseForQuery(course) {
+	course = _.cloneDeep(course)
+
+	delete course.type
+	delete course.grade
+
+	course = _.mapValues(course, (value, key) => {
+		// console.log(key, value)
+		return _.isArray(value) ? value : [value]
+	})
+
+	return course
+}
+
 function parseHTMLfromJSON() {
 	var parser = new DOMParser();
 	var html = parser.parseFromString(SISData.sis, 'text/html');
