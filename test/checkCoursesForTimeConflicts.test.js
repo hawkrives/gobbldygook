@@ -1,8 +1,8 @@
-// test/checkCourseTimeConflicts.test.js
-import checkCourseTimeConflicts from '../lib/checkCourseTimeConflicts'
+// test/checkCoursesForTimeConflicts.test.js
+import checkCoursesForTimeConflicts from '../lib/checkCoursesForTimeConflicts'
 import convertTimeStringsToOfferings from '../lib/convertTimeStringsToOfferings'
 
-describe('checkCourseTimeConflicts', () => {
+describe('checkCoursesForTimeConflicts', () => {
 	it('checks for course time conflicts', () => {
 		let courses = [
 			{offerings: [
@@ -22,10 +22,10 @@ describe('checkCourseTimeConflicts', () => {
 			]},
 		]
 
-		expect(checkCourseTimeConflicts(courses[0], courses[1])).to.be.true
+		expect(checkCoursesForTimeConflicts(courses[0], courses[1])).to.be.true
 
-		expect(checkCourseTimeConflicts(courses[0], courses[2])).to.be.false
-		expect(checkCourseTimeConflicts(courses[1], courses[2])).to.be.false
+		expect(checkCoursesForTimeConflicts(courses[0], courses[2])).to.be.false
+		expect(checkCoursesForTimeConflicts(courses[1], courses[2])).to.be.false
 	})
 
 	it('handles the output of convertTimeStringsToOfferings', () => {
@@ -34,7 +34,7 @@ describe('checkCourseTimeConflicts', () => {
 			{offerings: convertTimeStringsToOfferings({times: ['MWF 0200-0255PM']})},
 		]
 
-		expect(checkCourseTimeConflicts(testing[0], testing[1])).to.be.true
-		expect(checkCourseTimeConflicts(testing[1], testing[0])).to.be.true
+		expect(checkCoursesForTimeConflicts(testing[0], testing[1])).to.be.true
+		expect(checkCoursesForTimeConflicts(testing[1], testing[0])).to.be.true
 	})
 })
