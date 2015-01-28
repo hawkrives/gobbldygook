@@ -96,6 +96,8 @@ let SearchButton = React.createClass({
 		let query = queryCourseDatabase(searchQuery)
 			.then(results => [results, startQueryTime])
 			.then(this.processQueryResults)
+			.catch(err => console.error(err))
+			.done()
 
 		this.setState({query})
 	},
