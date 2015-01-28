@@ -92,10 +92,11 @@ function query(db, treo) {
 				// Check if we want to add the current value to the results array.
 				// Essentially, make sure that the current value passes the query,
 				// and then that it's not already in the array.
-				// Note that because JS checks against identity, we use isEqual to
+				// Note that because JS checks against identity, we use deepEql to
 				// do an equality check against the two objects.
+				// if (currentValue.name === "Elem Linear Algebra") console.log(query, currentValue)
 				return checkAgainstQuery(query, currentValue) &&
-					!any(results, val => isEqual(val, currentValue))
+					!any(results, val => deepEql(val, currentValue))
 			}
 
 			function iterateEntireStore(cursor) {
