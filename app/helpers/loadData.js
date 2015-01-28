@@ -5,7 +5,7 @@ import notificationActions from '../flux/notificationActions'
 import {status, json} from './fetch'
 import db from './db'
 
-import {buildDept, buildDeptNum} from 'sto-helpers'
+import {buildDept, buildDeptNum, splitParagraph} from 'sto-helpers'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 let logDataLoading = false
@@ -16,6 +16,14 @@ function prepareCourse(course) {
 	course.dept = course.dept || buildDept(course)
 	course.deptnum = course.deptnum || buildDeptNum(course)
 	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
+
+	let nameWords = splitParagraph(course.name)
+	let notesWords = splitParagraph(course.notes)
+	let titleWords = splitParagraph(course.title)
+	let descWords = splitParagraph(course.desc)
+	let words = _.union(nameWords, notesWords, titleWords, descWords)
+	course.words = words
+
 	return course
 }
 
