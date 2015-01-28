@@ -70,8 +70,11 @@ function prettyifyCourses(jsonCourses) {
 		course.name = course.title.trim()
 		delete course.title
 
-		course.some_type = course.type
-		delete course.type
+		delete course.sts // status is In-Progress or blank
+
+		// console.log(JSON.stringify(course))
+		course = unescapeAllValues(course)
+		// console.log(JSON.stringify(course))
 
 		return course
 	})
