@@ -3,6 +3,8 @@
 .DS_Store
 .idea
 *.sublime-workspace
+playground/data
+playground/parse-sis.js
 
 # Temp folders
 .sass-cache
