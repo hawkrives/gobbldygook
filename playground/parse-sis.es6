@@ -30,8 +30,6 @@ function tableToJson(table) {
 	return data;
 }
 
-function prettyCourses(jsonCourses) {
-	return jsonCourses.map(function(course) {
 let unescapeAllValues = (obj) => _[_.isArray(obj) ? 'map' : 'mapValues'](obj, (value) => {
 	if (_.isString(value))
 		return _.unescape(value)
@@ -40,21 +38,24 @@ let unescapeAllValues = (obj) => _[_.isArray(obj) ? 'map' : 'mapValues'](obj, (v
 	return value
 })
 
+function prettyifyCourses(jsonCourses) {
+	return _.map(jsonCourses, function(course) {
 		delete course['&nbsp;']
 		delete course.inst
 
 		course.credit = course.credit.replace(/\((.*)\)/, '$1')
 		course.credit = parseFloat(course.credit)
+		course.credits = course.credit
+		delete course.credit
 
-		if (course['g.e.'])
+	 	if (course['g.e.'])
 			course['g.e.'] = course['g.e.'].trim()
+		delete course.gereqs
 
 		course.num = parseInt(course.no, 10)
 		delete course.no
 
 		course.sem = parseInt(course.term, 10)
-		delete course.term
-
 		course.year = parseInt(course.year, 10)
 		course.term = parseInt(String(course.year) + String(course.sem), 10)
 
