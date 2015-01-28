@@ -33,6 +33,9 @@ let schema = treo.schema()
 			.addIndex('type', 'type', { multi: true })
 			.addIndex('sourcePath', 'sourcePath')
 		.addStore('students', { key: 'id' })
+	.version(2)
+		.getStore('courses')
+			.addIndex('words', 'words', { multi: true })
 
 
 import treoPromise from 'treo/plugins/treo-promise'
