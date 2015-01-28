@@ -3,6 +3,8 @@
 ## 2.0.0
 - **Renamed:** `checkCourseTimeConflicts` -> `checkCoursesForTimeConflicts`
 - **Renamed:** `checkScheduleTimeConflicts` -> `findScheduleTimeConflicts`
+- **Added:** `checkScheduleForTimeConflicts` - returns true if there is a time conflict and false otherwise
+- Finished adding tests for the helper functions
 - Updated 6to5
 
 ## 1.0.9
