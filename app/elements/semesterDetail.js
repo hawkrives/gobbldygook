@@ -1,7 +1,7 @@
 import React from 'react'
 import Immutable from 'immutable'
 import {State} from 'react-router'
-import {isCurrentSemester} from 'sto-helpers/lib/isCurrent'
+import {isCurrentSemester} from 'sto-helpers'
 
 let SemesterDetail = React.createClass({
 	mixins: [State],
