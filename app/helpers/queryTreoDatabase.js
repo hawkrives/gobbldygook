@@ -53,6 +53,12 @@ function query(db, treo) {
 
 			// Filter down to just the requested keys that also have indices
 			let keysWithIndices = filter(indexKeys, (key) => this.index(key))
+			if (contains(keysWithIndices, 'deptnum')) {
+				keysWithIndices.splice(findIndex('deptnum'), 1)
+				keysWithIndices.unshift('deptnum')
+			}
+
+			// console.log(keysWithIndices)
 
 			// If the current store doesn't have an index for any of the
 			// requested keys, iterate over the entire store.
