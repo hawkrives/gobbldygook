@@ -29,7 +29,7 @@ let SearchButton = React.createClass({
 			hasQueried: false,
 			results: [],
 			queryString: '',
-			query: null,
+			queryInProgress: false,
 		}
 	},
 
@@ -83,11 +83,11 @@ let SearchButton = React.createClass({
 		let endTime = present()
 		console.info(`element creation took an additional ${(endTime - startTime)}ms.`)
 
-		this.setState({results: courseObjects, hasQueried: true, query: null})
+		this.setState({results: courseObjects, hasQueried: true, queryInProgress: false})
 	},
 
 	query(searchQuery) {
-		if (searchQuery.length === 0 || this.state.query)
+		if (searchQuery.length === 0 || this.state.queryInProgress)
 			return
 
 		this.setState({results: [], hasQueried: false})
@@ -99,12 +99,12 @@ let SearchButton = React.createClass({
 			.catch(err => console.error(err))
 			.done()
 
-		this.setState({query})
+		this.setState({queryInProgress: true})
 	},
 
 	render() {
 		let showNoResults = this.state.results.length === 0 && this.state.hasQueried
-		let showIndicator = this.state.query
+		let showIndicator = this.state.queryInProgress
 
 		return React.createElement('div', {className: 'search-sidebar'},
 			React.createElement('header', {className: 'sidebar-heading'},
