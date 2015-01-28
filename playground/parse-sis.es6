@@ -347,6 +347,24 @@ function createSchedules(courses) {
 	console.log(terms, groupedCourses)
 
 	console.log('grouped courses by term')
+	let start = performance.now()
+
+	let semesters = _(groupedCourses)
+		.map(findScheduleFromCourses)
+		.value()
+
+	console.log('started schedule building')
+	// let semesters = [findScheduleFromCourses(groupedCourses[1])]
+	Promise
+		.settle(semesters)
+		.then((resultPromiseInspections) => {
+			return _.map(resultPromiseInspections, (promiseInspection) => {
+				if (promiseInspection.isFulfilled()) {  // check if was successful
+					return promiseInspection.value()
+				} else if (promiseInspection.isRejected()) { // check if the read failed
+					console.error(promiseInspection.reason())
+				}
+			})
 		})
 		return sched
 	})
