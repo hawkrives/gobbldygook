@@ -41,13 +41,24 @@ let db = treo('gobbldygook', schema)
 	.use(queryTreoDatabase())
 	.use(treoPromise())
 
+window.deleteDatabase = () => new Promise(resolve => {
+	window.indexedDB.deleteDatabase('gobbldygook', resolve)
+}).then((res) => {
+	console.log('Database dropped')
+	return res
+})
+
+window.eraseStorage = () => new Promise(resolve => {
+	window.localStorage.clear()
+	resolve()
+}).then((res) => {
+	console.log('Storage erased')
+	return res
+})
 
 window.eraseDatabase = () => {
-	window.database.drop().then(() => {
-		console.log('Database dropped')
-		localStorage.clear()
-		console.log('localStorage cleared')
-	})
+	window.deleteDatabase()
+	window.eraseStorage()
 }
 
 window.database = db
