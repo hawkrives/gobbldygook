@@ -311,6 +311,8 @@ function findAreasOfStudy(areas, degreeType) {
 	return areasOfStudy
 }
 
+class NoComboPossible extends Error {}
+
 function createSchedules(courses) {
 	let terms = _.chain(courses).pluck('term').uniq().value()
 	let grouped = _.groupBy(courses, 'term')
