@@ -12,6 +12,7 @@ let logDataLoading = false
 // let logDataLoading = true
 
 function prepareCourse(course) {
+	course.name = course.name || course.title
 	course.dept = course.dept || buildDept(course)
 	course.deptnum = course.deptnum || buildDeptNum(course)
 	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
