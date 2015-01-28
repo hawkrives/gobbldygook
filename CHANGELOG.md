@@ -5,13 +5,11 @@
 - Updated 6to5
 - Updated sto-helpers and sto-sis-time-parser
 
-## 3.0.0alpha10
 
+## 3.0.0alpha10
 - Added `courses` as the first parameter to `queryCourses`, allowing the full power of that weird query engine to run over any list of courses.
 
-
 ## 3.0.0alpha9
-
 - Modularized app
 	- pulled [areas][sto-areas], [courses][sto-courses], [helpers][sto-helpers], and the [time parser][sto-sis-time-parser] into separate npm modules
 - Updated `student.studies` array
