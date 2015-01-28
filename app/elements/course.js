@@ -54,7 +54,8 @@ let Course = React.createClass({
 	},
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return nextProps.info.clbid !== this.props.info.clbid
+		return nextProps.info.clbid !== this.props.info.clbid ||
+			nextState.isOpen !== this.state.isOpen
 	},
 
 	render() {
