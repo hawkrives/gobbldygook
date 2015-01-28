@@ -40,9 +40,11 @@ let schema = treo.schema()
 
 import treoPromise from 'treo/plugins/treo-promise'
 import queryTreoDatabase from './queryTreoDatabase'
+import treoBatchGet from './treoBatchGet'
 let db = treo('gobbldygook', schema)
 	.use(queryTreoDatabase())
 	.use(treoPromise())
+	.use(treoBatchGet())
 
 window.deleteDatabase = () => new Promise(resolve => {
 	window.indexedDB.deleteDatabase('gobbldygook', resolve)
