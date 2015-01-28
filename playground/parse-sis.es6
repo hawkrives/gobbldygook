@@ -314,21 +314,21 @@ function findAreasOfStudy(areas, degreeType) {
 class NoComboPossible extends Error {}
 
 function createSchedules(courses) {
-	let terms = _.chain(courses).pluck('term').uniq().value()
-	let grouped = _.groupBy(courses, 'term')
-	let id = 1;
-	let schedules = _.map(terms, (t) => {
-		let sched = {
-			id: id++,
-			year: Math.floor(t / 10),
-			sem: t % 10,
-			title: 'Schedule 1',
-			index: 1,
-			active: true,
-			clbids: [],
-			raw_courses: grouped[t]
-		}
-		_.each(sched.courses, (course, i) => {
+	// let terms = _.chain(courses).pluck('term').uniq().value()
+	// let grouped = _.groupBy(courses, 'term')
+	// let id = 1;
+	// let schedules = _.map(terms, (t) => {
+		// let sched = {
+		// 	id: id++,
+		// 	year: Math.floor(t / 10),
+		// 	sem: t % 10,
+		// 	title: 'Schedule 1',
+		// 	index: 1,
+		// 	active: true,
+		// 	clbids: [],
+		// 	raw_courses: grouped[t]
+		// }
+		// _.each(sched.courses, (course, i) => {
 			// attempt 1
 			let attemptToFindCourse = queryCourses({name: course.name, term: course.term, deptnum: course.deptnum})
 			if (attemptToFindCourse) {
