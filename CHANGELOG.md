@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.0
+- **Renamed:** `checkCourseTimeConflicts` -> `checkCoursesForTimeConflicts`
+
 ## 1.0.9
 - Update lodash
 - Write a script to automatically update the index.js file
