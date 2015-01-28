@@ -457,7 +457,7 @@ function makeStudent(tables, degreeType) {
 function parseSIS(html) {
 	let [rawTables, degreeType] = cleanUpPage(html)
 	var tables = nameTheTables(rawTables)
-	console.log(tables)
+	//console.log(tables)
 
 	var cleanedTables = {
 		courses: processCoursesTable(tables.courses),
@@ -465,9 +465,9 @@ function parseSIS(html) {
 		areas: processAreaTable(tables.areas),
 	}
 
-	console.log('cleaned', cleanedTables)
+	//console.log('cleaned', cleanedTables)
 	let student = makeStudent(cleanedTables, degreeType)
-	console.log('student', student)
+	//console.log('student', student)
 
 	return student
 }
