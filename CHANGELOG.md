@@ -3,6 +3,7 @@
 ## 2.0.0
 - **Renamed:** `checkCourseTimeConflicts` -> `checkCoursesForTimeConflicts`
 - **Renamed:** `checkScheduleTimeConflicts` -> `findScheduleTimeConflicts`
+- Updated 6to5
 
 ## 1.0.9
 - Update lodash
