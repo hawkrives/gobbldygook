@@ -51,7 +51,7 @@ function prettyifyCourses(jsonCourses) {
 		course.credits = course.credit
 		delete course.credit
 
-	 	if (course['g.e.'])
+		if (course['g.e.'])
 			course['g.e.'] = course['g.e.'].trim()
 		delete course.gereqs
 
