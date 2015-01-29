@@ -36,6 +36,9 @@ let schema = treo.schema()
 	.version(2)
 		.getStore('courses')
 			.addIndex('words', 'words', { multi: true })
+	.version(3)
+		.getStore('courses')
+			.addIndex('prof_words', 'prof_words', { multi: true })
 
 
 import treoPromise from 'treo/plugins/treo-promise'
