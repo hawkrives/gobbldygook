@@ -121,7 +121,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 
 		// Prevent invalid logic from not having a query.
 		if (!query || !size(query) || !size(query[this.name]))
-			return results
+			resolvePromise(results)
 
 		// The index of our current key
 		let current = 0
@@ -131,7 +131,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 		keys = reject(keys, key => startsWith(key, '$'))
 
 		if (!keys.length) {
-			return results
+			resolvePromise(results)
 		}
 
 		// If we have any keys, sort them according to the IDB spec
