@@ -82,6 +82,9 @@ function queryStore(query) {
 
 			let allValues = allFoundKeys
 				.then(keys => flatten(keys))
+				// because multiple indices can be running at once, they might return
+				// the same primary keys. we'll just de-dupe them here before fetching.
+				.then(keys => uniq(keys))
 				.then(keys => this.batchGet(keys))
 
 			Promise.all(allValues).then(resolvePromise)
