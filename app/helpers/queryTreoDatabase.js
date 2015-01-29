@@ -136,6 +136,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 
 		// If we have any keys, sort them according to the IDB spec
 		keys = keys.sort(idbComparison)
+		keys = uniq(keys, true)
 
 		let firstKey = first(keys)
 		let lastKey = last(keys)
