@@ -90,9 +90,7 @@ function queryStore(query) {
 		// Otherwise, if the current store doesn't have an index for any of
 		// the requested keys, iterate over the entire store.
 		else {
-			this.cursor({
-				iterator: iterateStore({results, query})
-			}, done)
+			this.cursor({iterator: iterateStore}, done)
 		}
 
 		function done(err) {
