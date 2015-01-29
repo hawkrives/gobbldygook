@@ -100,21 +100,20 @@ function queryStore(query) {
 		// Otherwise, if the current store doesn't have an index for any of
 		// the requested keys, iterate over the entire store.
 		else {
-			this.cursor({iterator: iterateStore}, done)
-		}
-
-		function done(err) {
-			if (err)
-				rejectPromise(err)
-			Promise.all(this.batchGet(results)).then(resolvePromise)
-		}
-
-		function iterateStore(cursor) {
-			let {value, primaryKey} = cursor
-			if (canAdd({query, value, primaryKey, results})) {
-				resultIds.push(primaryKey)
+			let done = (err) => {
+				if (err) rejectPromise(err)
+				this.batchGet(results).then(resolvePromise)
 			}
-			cursor.continue()
+
+			function iterateStore(cursor) {
+				let {value, primaryKey} = cursor
+				if (canAdd({query, value, primaryKey, results})) {
+					results.push(primaryKey)
+				}
+				cursor.continue()
+			}
+
+			this.cursor({iterator: iterateStore}, done)
 		}
 	})
 }
