@@ -158,8 +158,8 @@ function queryIndex(query, {primaryKeysOnly=false}={}) {
 				resolvePromise(results)
 			}
 			else {
-				Promise
-					.all(this.objectStore.batchGet(resultIds))
+				this.objectStore
+					.batchGet(results)
 					.then(resolvePromise)
 			}
 		}
