@@ -124,7 +124,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 			resolvePromise(results)
 
 		// The index of our current key
-		let current = 0
+		let currentIndex = 0
 
 		// The keys to look for; the list of permissible values for that range from the query
 		let keys = query[this.name]
@@ -166,16 +166,16 @@ function queryIndex(query, primaryKeysOnly=false) {
 
 		function iterateIndex(cursor) {
 			// console.log('cursor', cursor, arguments)
-			console.log('key', keys[current], 'idx', current)
-			console.log(keys)
+			// console.log('key', keys[currentIndex], 'idx', currentIndex)
+			// console.log(keys)
 
-			if (current > keys.length) {
+			if (currentIndex > keys.length) {
 				// console.log('done')
 				// If we're out of keys, quit.
 				done()
 			}
 
-			else if (cursor.key > keys[current]) {
+			else if (cursor.key > keys[currentIndex]) {
 				// console.log('greater')
 				// If the cursor's key is "past" the current one, we need to skip
 				// ahead to the next one key in the list of keys.
@@ -184,17 +184,17 @@ function queryIndex(query, primaryKeysOnly=false) {
 					// console.log('adding', value)
 					results.push(primaryKey)
 				}
-				current += 1
+				currentIndex += 1
 
 				// If we attempt to continue to a key that is before or equal
 				// to the current cursor.key, IDB throws an error.
 				// Therefore, if the current key equals the current key, we
 				// just go forward by one.
-				let nextKey = (keys[current] === cursor.key) ? undefined : keys[current]
+				let nextKey = (keys[currentIndex] <= cursor.key) ? undefined : keys[currentIndex]
 				cursor.continue(nextKey)
 			}
 
-			else if (cursor.key === keys[current]) {
+			else if (cursor.key === keys[currentIndex]) {
 				// console.log('equals')
 				// If we've found what we're looking for, add it, and go to
 				// the next result.
@@ -210,7 +210,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 				// console.log('other')
 				// Otherwise, we're not there yet, and need to skip ahead to the
 				// first occurrence of our current key.
-				cursor.continue(keys[current])
+				cursor.continue(keys[currentIndex])
 			}
 		}
 
