@@ -65,20 +65,19 @@ let AreaOfStudy = React.createClass({
 				max: this.props.areaResult.progress.of,
 		} : {}
 
-		let reqSets = this.state.expanded ? this.state.reqSets : null
+		let reqSets = this.state.reqSets
 
-		let header = React.createElement('header',
-			{className: 'summary', onClick: this.toggle},
+		let header = React.createElement('summary',
+			{className: 'summary'},
 			React.createElement('h1', null, this.props.area.title),
 			React.createElement('progress', progressProps))
 
 		let classes = cx({
 			'area-of-study': true,
-			open: this.state.expanded,
 			loading: !this.props.areaResult,
 		})
 
-		return React.createElement('div',
+		return React.createElement('details',
 			{className: classes},
 			header,
 			reqSets)
