@@ -11,3 +11,6 @@ stickyfill.init()
 
 import present from 'present'
 window.present = present
+
+import startDetailsPolyfill from '../polyfills/details/Element.details'
+startDetailsPolyfill()
