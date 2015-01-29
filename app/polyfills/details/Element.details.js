@@ -33,7 +33,8 @@ let openProperty = {
 
 		detailsShim(this)
 
-		this.classList[booleanValue ? 'add' : 'remove']('▼')(this[booleanValue ? 'setAttribute' : 'removeAttribute'])('open', 'open')
+		this.classList[booleanValue ? 'add' : 'remove']('▼')
+		this[booleanValue ? 'setAttribute' : 'removeAttribute']('open', 'open')
 
 		return booleanValue
 	},
@@ -101,9 +102,9 @@ function detailsShim(details) {
 }
 
 // init
-function init(global) {
+function init() {
 	// property 'open'
-	Object.defineProperty(global.Element.prototype, 'open', openProperty)
+	Object.defineProperty(window.Element.prototype, 'open', openProperty)
 
 	let detailses = document.getElementsByTagName('details')
 	forEach(detailses, (details) => {
