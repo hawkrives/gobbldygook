@@ -121,6 +121,8 @@ function queryStore(query) {
 
 
 function queryIndex(query, primaryKeysOnly=false) {
+	let name = this.name
+
 	return new Promise((resolvePromise, rejectPromise) => {
 		// - takes a query object
 		// - filters down the props to just the current index's name
@@ -130,14 +132,14 @@ function queryIndex(query, primaryKeysOnly=false) {
 		let results = []
 
 		// Prevent invalid logic from not having a query.
-		if (!query || !size(query) || !size(query[this.name]))
+		if (!query || !size(query) || !size(query[name]))
 			resolvePromise(results)
 
 		// The index of our current key
 		let currentIndex = 0
 
 		// The keys to look for; the list of permissible values for that range from the query
-		let keys = query[this.name]
+		let keys = query[name]
 		keys = reject(keys, key => startsWith(key, '$'))
 
 		if (!keys.length) {
