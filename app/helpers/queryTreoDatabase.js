@@ -182,6 +182,7 @@ let iterateStore = curry(function({query, results=[]}={}, cursor) {
 
 
 let iterateIndex = curry(function({done, query, current=0, keys=[], results=[], primaryKeysOnly=false}={}, cursor) {
+	// console.log('cursor', cursor, arguments)
 	// console.log('key', keys[current], 'idx', current)
 
 	if (current > keys.length) {
