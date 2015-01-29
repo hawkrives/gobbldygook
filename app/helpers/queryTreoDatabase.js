@@ -35,12 +35,6 @@ import idbRange from 'idb-range'
 import {cmp as idbComparison} from 'treo'
 import {checkCourseAgainstQuery as checkAgainstQuery} from 'sto-helpers'
 
-function defer() {
-	let resolve, reject
-	let promise = new Promise(() => {[resolve, reject] = arguments})
-	return {resolve, reject, promise}
-}
-
 function canAdd({query, value, primaryKey, results}={}) {
 	// Check if we want to add the current value to the results array.
 	// Essentially, make sure that the current value passes the query,
