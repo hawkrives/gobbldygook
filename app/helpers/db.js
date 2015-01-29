@@ -49,6 +49,9 @@ let db = treo('gobbldygook', schema)
 	.use(treoPromise())
 	.use(treoBatchGet())
 
+export default db
+
+
 window.deleteDatabase = () => new Promise(resolve => {
 	window.indexedDB.deleteDatabase('gobbldygook', resolve)
 }).then((res) => {
@@ -70,4 +73,3 @@ window.eraseDatabase = () => {
 }
 
 window.database = db
-export default db
