@@ -94,7 +94,7 @@ function queryStore(query) {
 			let indices = filter(this.indexes, index => contains(keysWithIndices, index.name))
 
 			let resultPromises = map(indices,
-				index => index.query(query, {primaryKeysOnly: true}))
+				index => index.query(query, true))
 
 			let allFoundKeys = Promise.all(resultPromises)
 
@@ -108,7 +108,7 @@ function queryStore(query) {
 }
 
 
-function queryIndex(query, {primaryKeysOnly=false}={}) {
+function queryIndex(query, primaryKeysOnly=false) {
 	return new Promise((resolvePromise, rejectPromise) => {
 		// - takes a query object
 		// - filters down the props to just the current index's name
