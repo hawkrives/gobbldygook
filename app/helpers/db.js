@@ -45,9 +45,9 @@ import treoPromise from 'treo/plugins/treo-promise'
 import queryTreoDatabase from './queryTreoDatabase'
 import treoBatchGet from './treoBatchGet'
 let db = treo('gobbldygook', schema)
-	.use(queryTreoDatabase)
 	.use(treoPromise())
-	.use(treoBatchGet())
+	.use(queryTreoDatabase)
+	.use(treoBatchGet)
 
 export default db
 
