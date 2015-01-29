@@ -38,7 +38,7 @@ let schema = treo.schema()
 			.addIndex('words', 'words', { multi: true })
 	.version(3)
 		.getStore('courses')
-			.addIndex('prof_words', 'prof_words', { multi: true })
+			.addIndex('profWords', 'profWords', { multi: true })
 
 
 import treoPromise from 'treo/plugins/treo-promise'

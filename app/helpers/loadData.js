@@ -24,7 +24,7 @@ function prepareCourse(course) {
 	let words = _.union(nameWords, notesWords, titleWords, descWords)
 	course.words = words
 
-	course.prof_words = _.chain(course.profs)
+	course.profWords = _.chain(course.profs)
 		.map(splitParagraph)
 		.flatten()
 		.value()
