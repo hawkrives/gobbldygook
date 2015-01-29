@@ -109,7 +109,7 @@ function init(global) {
 	forEach(detailses, (details) => {
 		// DOM API
 		details.open = details.hasAttribute('open')
-	}
+	})
 }
 
 function start() {
