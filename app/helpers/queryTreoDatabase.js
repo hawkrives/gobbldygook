@@ -105,7 +105,7 @@ function queryStore(query) {
 				this.batchGet(results).then(resolvePromise)
 			}
 
-			function iterateStore(cursor) {
+			let iterateStore = (cursor) => {
 				let {value, primaryKey} = cursor
 				if (canAdd({query, value, primaryKey, results})) {
 					results.push(primaryKey)
