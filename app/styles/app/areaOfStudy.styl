@@ -100,8 +100,8 @@
 		transition: 0.1s
 	}
 
-	&.open > .summary::after {
-		ionicon($ionicon-ios-more-outline)
+	&[open] > .summary::after {
+		ionicon($ionicon-ios-more-outline);
 
 		transform: rotate(90deg) scale(0.8)
 	}
