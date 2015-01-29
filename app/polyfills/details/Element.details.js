@@ -2,6 +2,8 @@
 
 // HTMLElement.prototype.insertAdjacentHTML = https://gist.github.com/1276030
 
+import {forEach} from 'lodash'
+
 // Chrome 10 will fail this detection, but Chrome 10 no longer exists
 let support = 'open' in document.createElement('details')
 
@@ -19,13 +21,13 @@ function insertStyles() {
 
 // property 'open'
 let openProperty = {
-	'get': function() {
+	get: function() {
 		if (!('nodeName' in this) || this.nodeName.toUpperCase() != 'DETAILS')
 			return void 0
 
 		return this.hasAttribute('open')
 	},
-	'set': function(booleanValue) {
+	set: function(booleanValue) {
 		if (!('nodeName' in this) || this.nodeName.toUpperCase() != 'DETAILS')
 			return void 0
 
@@ -38,20 +40,20 @@ let openProperty = {
 }
 
 // event
-let eventDetailClick = function(e) {
-	if (e.detail === 0) // Opera generate 'click' event with `detail` == 0 together with 'keyup' event
+function eventDetailClick(ev) {
+	if (ev.detail === 0) // Opera generate 'click' event with `detail` == 0 together with 'keyup' event
 		return
 
 	// 32 - space. Need this ???
 	// 13 - Enter.
 
-	if (e.keyCode === 13 || /*e.type == 'keyup'*/ e.type === 'click') {
+	if (ev.keyCode === 13 || /*ev.type == 'keyup'*/ ev.type === 'click') {
 		this.parentNode.open = !this.parentNode.open
 	}
 }
 
 // details shim
-let detailsShim = function(details) {
+function detailsShim(details) {
 	if (details._ && details._.__isShimmed) {
 		return
 	}
@@ -62,9 +64,7 @@ let detailsShim = function(details) {
 
 	// Wrap text node's and found `summary`
 	let summary = undefined
-	let j = -1
-	let child = undefined
-	while (child = details.childNodes[++j]) {
+	forEach(details.childNodes, (child) => {
 		if (child.nodeType === 3 && /[^\t\n\r ]/.test(child.data)) {
 			details.insertBefore(
 				document.createElement('x-i'), // Create a fake inline element
@@ -75,7 +75,7 @@ let detailsShim = function(details) {
 		else if (child.nodeName.toUpperCase() == 'SUMMARY') {
 			summary = child
 		}
-	}
+	})
 
 	// Create a fake 'summary' element
 	if (!summary) {
@@ -101,29 +101,33 @@ let detailsShim = function(details) {
 }
 
 // init
-let init = function(global=window) {
+function init(global) {
 	// property 'open'
 	Object.defineProperty(global.Element.prototype, 'open', openProperty)
 
-	var detailses = document.getElementsByTagName('details')
-
-	let details = undefined
-	while (details = detailses[++i]) {
+	let detailses = document.getElementsByTagName('details')
+	forEach(detailses, (details) => {
 		// DOM API
 		details.open = details.hasAttribute('open')
 	}
 }
 
-if (!support) {
-	insertStyles()
+function start() {
+	if (!support) {
+		insertStyles()
 
-	// auto init
-	if (document.readyState != 'complete')
-		document.addEventListener('DOMContentLoaded', init, false)
-	else
-		init(window)
+		// auto init
+		if (document.readyState != 'complete') {
+			document.addEventListener('DOMContentLoaded', init, false)
+		}
+		else {
+			init(window)
+		}
+	}
+	// else {
+		// TODO: for animation and other stuff we need to listen 'open'
+		// property change and add 'open' css class for <details> element
+	// }
 }
-// else {
-	// TODO: for animation and other stuff we need to listen 'open'
-	// property change and add 'open' css class for <details> element
-// }
+
+export default start
