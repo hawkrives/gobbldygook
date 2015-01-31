@@ -115,9 +115,9 @@ class Schedule extends ScheduleRecord {
 					// and see if any are true
 					.any(isTrue)
 
-				if (hasConflict) {
-					console.log('schedule conflicts', conflicts, hasConflict)
-				}
+				// if (hasConflict) {
+				// 	console.log('schedule conflicts', conflicts, hasConflict)
+				// }
 
 				return {
 					hasConflict: hasConflict,
