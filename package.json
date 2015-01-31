@@ -16,38 +16,38 @@
     "fix-browser-sync": "cd node_modules/browser-sync/node_modules/glob-watcher/node_modules/gaze/node_modules/globule && npm i lodash@latest",
     "fix": "npm run fix-browser-sync & wait",
 
-    "cloc": "cloc ./ --by-file-by-lang --exclude-dir=dist,gulp,node_modules,playground,test --force-lang=CSS,styl",
+    "cloc": "cloc ./ --by-file-by-lang --exclude-dir=dist,node_modules,playground,test --force-lang=CSS,styl",
     "check": "npm outdated --depth 0",
-    "clean": "rm -rf dist/ && npm run prepare & wait",
-    "prepare": "mkdir -p dist/data/courses dist/fonts",
+    "clean": "rm -rf dist/",
 
-    "precopy": "npm run prepare",
-    "prebuild": "npm run prepare & npm run lint & wait",
-    "prewatch": "npm run prepare & npm run lint & wait",
-
-    "copy-courses": "cp -f node_modules/sto-courses/info.json dist/data/courses && cp -f -R node_modules/sto-courses/terms dist/data/courses",
-    "copy-html": "cp -f app/index.html app/.htaccess dist/",
-    "copy-fonts": "cp -f -R app/fonts dist/",
-    "copy-icons": "cp -f app/icons/font/ionicons.woff dist/fonts/",
+    "copy-courses": "mkdir -p dist/data/courses/ && cp -f node_modules/sto-courses/info.json dist/data/courses && cp -f -R node_modules/sto-courses/terms dist/data/courses",
+    "copy-html": "mkdir -p dist/ && cp -f app/index.html app/.htaccess dist/",
+    "copy-fonts": "mkdir -p dist/ && cp -f -R app/fonts dist/",
+    "copy-icons": "mkdir -p dist/fonts/ && cp -f app/icons/font/ionicons.woff dist/fonts/",
     "copy": "npm run copy-courses & npm run copy-html & npm run copy-fonts & npm run copy-icons & wait",
 
-    "uglify": "uglifyjs dist/app.js --output dist/app.min.js $npm_package_config_uglify",
     "build-scripts": "browserify $npm_package_config_browserify | exorcist dist/app.js.map > dist/app.js",
     "build-styles": "stylus app/styles/app.styl --out dist/ $npm_package_config_stylus",
+
+    "prebuild": "mkdir -p dist && npm run lint",
     "build": "npm run copy & npm run build-scripts & npm run build-styles & wait",
 
     "watch-scripts": "watchify --verbose -o dist/app.js $npm_package_config_browserify",
     "watch-styles": "stylus --watch app/styles/app.styl --out dist/ $npm_package_config_stylus",
     "watch-lint": "nodemon --watch app --watch test --ext js --exec npm run lint",
+
+    "prewatch": "npm run lint",
     "watch": "npm run copy & npm run watch-lint & npm run watch-scripts & npm run watch-styles & wait",
 
     "browser-sync": "browser-sync start --config ./bs-config.js",
-    "serve": "npm run watch & npm run browser-sync & wait",
 
+    "uglify": "uglifyjs dist/app.js --output dist/app.min.js $npm_package_config_uglify",
     "lint": "jscs app/ test/",
     "test": "jest",
-    "travis": "npm run lint && npm run build && npm run test",
+
     "start": "npm run serve",
+    "serve": "npm run watch & npm run browser-sync & wait",
+    "travis": "npm run lint && npm run build && npm run test",
     "publish": "npm run clean && npm run build && npm run uglify"
   },
   "dependencies": {
