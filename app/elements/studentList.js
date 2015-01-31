@@ -44,10 +44,10 @@ let StudentList = React.createClass({
 				])))
 			.toJS()
 
-		let buttons = React.createElement('menu', {className: 'student-buttons'}, [
+		let buttons = React.createElement('menu', {className: 'student-list-buttons'}, [
 			React.createElement('button'/*DropdownMenu*/, {
-				key: 'student-button--sort-by',
-				className: 'student-button--sort-by',
+				key: 'student-list-button--sort-by',
+				className: 'student-list-button--sort-by',
 				items: [
 					'First Name',
 					'Last Name',
@@ -58,8 +58,8 @@ let StudentList = React.createClass({
 			}, 'Sort'),
 
 			React.createElement('button'/*DropdownMenu*/, {
-				key: 'student-button--group-by',
-				className: 'student-button--group-by',
+				key: 'student-list-button--group-by',
+				className: 'student-list-button--group-by',
 				items: [
 					'None',
 					'Area',
@@ -69,40 +69,40 @@ let StudentList = React.createClass({
 			}, 'Group'),
 
 			React.createElement('button', {
-				key: 'student-button--edit',
-				className: 'student-button--edit',
+				key: 'student-list-button--edit',
+				className: 'student-list-button--edit',
 				onClick: this.editList,
 			}, 'Edit'),
 
 			React.createElement('button', {
-				key: 'student-button--new',
-				className: 'student-button--new',
+				key: 'student-list-button--new',
+				className: 'student-list-button--new',
 				onClick: studentActions.initStudent,
 			}, 'New'),
-
-			// React.createElement('input', {
-			// 	type: 'file',
-			// 	accept: '.json',
-			// 	key: 'import-student',
-			// 	className: 'import-student',
-			// 	onSubmit: this.handleSubmit,
-			// 	onChange: this.handleFile,
-			// }),
 		])
 
+		let importButton = React.createElement('input', {
+			type: 'file',
+			accept: '.json',
+			key: 'import-student',
+			className: 'import-student',
+			onSubmit: this.handleSubmit,
+			onChange: this.handleFile,
+		})
+
 		let studentFilter = React.createElement('input', {
-			className: 'student-filter',
+			className: 'student-list-filter',
 			placeholder: 'Filter students',
 		})
 
-		let toolbar = React.createElement('div', {className: 'student-toolbar'},
+		let toolbar = React.createElement('div', {className: 'student-list-toolbar'},
 			studentFilter, buttons)
 
 		let students = React.createElement('ol', {className: 'student-list'},
 			studentObjects)
 
 		return React.createElement('div', {className: 'students-overview'},
-			toolbar, students)
+			importButton, toolbar, students)
 	},
 })
 

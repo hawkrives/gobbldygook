@@ -38,7 +38,7 @@ let Sidebar = React.createClass({
 
 		let sidebar = React.createElement(component, props)
 
-		let studentButtons = React.createElement('menu', {className: 'button-list student-buttons'},
+		let studentButtons = React.createElement('menu', {className: 'student-buttons'},
 			React.createElement('button',
 				{className: 'back'},
 				React.createElement(Link, {to: '/'}, 'All Students')),

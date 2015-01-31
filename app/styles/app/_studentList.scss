@@ -6,7 +6,7 @@
 }
 
 
-.student-toolbar {
+.student-list-toolbar {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -16,17 +16,17 @@
 	margin-bottom: 1em;
 }
 
-.student-filter,
-.student-buttons {
+.student-list-filter,
+.student-list-buttons {
 	flex: 1;
 }
 
-.student-buttons {
+.student-list-buttons {
 	display: flex;
 	justify-content: center;
 }
 
-.student-buttons button {
+.student-list-buttons button {
 	@include button--flat;
 	padding-left: 1em;
 	padding-right: 1em;
@@ -38,12 +38,12 @@
 	}
 }
 
-.student-button--sort-by::before  { @include ionicon($ionicon-funnel); }
-.student-button--group-by::before { @include ionicon($ionicon-folder); }
-.student-button--edit::before     { @include ionicon($ionicon-navicon); }
-.student-button--new::before      { @include ionicon($ionicon-plus); }
+.student-list-button--sort-by::before  { @include ionicon($ionicon-funnel); }
+.student-list-button--group-by::before { @include ionicon($ionicon-folder); }
+.student-list-button--edit::before     { @include ionicon($ionicon-navicon); }
+.student-list-button--new::before      { @include ionicon($ionicon-plus); }
 
-.student-buttons [class$='by']::after {
+.student-list-buttons [class$='by']::after {
 	margin-left: 0.25em;
 	@include ionicon($ionicon-android-arrow-dropdown);
 }
