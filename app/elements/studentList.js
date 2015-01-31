@@ -42,27 +42,67 @@ let StudentList = React.createClass({
 					React.createElement('span', {key: 'name', className: 'name'}, student.name || 'Student'),
 					// React.createElement('span', {className: 'status', student.name || 'Student'}),
 				])))
+			.toJS()
 
-		let buttons = [
+		let buttons = React.createElement('menu', {className: 'student-buttons'}, [
+			React.createElement('button'/*DropdownMenu*/, {
+				key: 'student-button--sort-by',
+				className: 'student-button--sort-by',
+				items: [
+					'First Name',
+					'Last Name',
+					'Date Modified',
+					'Date Created',
+					'Graduation Year',
+				],
+			}, 'Sort'),
+
+			React.createElement('button'/*DropdownMenu*/, {
+				key: 'student-button--group-by',
+				className: 'student-button--group-by',
+				items: [
+					'None',
+					'Area',
+					'Graduatability',
+					'Graduation Year',
+				],
+			}, 'Group'),
+
 			React.createElement('button', {
-				key: 'create-student',
-				className: 'create-student',
-				onClick: studentActions.initStudent,
-			}, 'Add Student'),
+				key: 'student-button--edit',
+				className: 'student-button--edit',
+				onClick: this.editList,
+			}, 'Edit'),
 
-			React.createElement('input', {
-				type: 'file',
-				accept: '.json',
-				key: 'import-student',
-				className: 'import-student',
-				onSubmit: this.handleSubmit,
-				onChange: this.handleFile,
-			}),
-		]
+			React.createElement('button', {
+				key: 'student-button--new',
+				className: 'student-button--new',
+				onClick: studentActions.initStudent,
+			}, 'New'),
+
+			// React.createElement('input', {
+			// 	type: 'file',
+			// 	accept: '.json',
+			// 	key: 'import-student',
+			// 	className: 'import-student',
+			// 	onSubmit: this.handleSubmit,
+			// 	onChange: this.handleFile,
+			// }),
+		])
+
+		let studentFilter = React.createElement('input', {
+			className: 'student-filter',
+			placeholder: 'Filter students',
+		})
+
+		let toolbar = React.createElement('div', {className: 'student-toolbar'},
+			studentFilter, buttons)
+
+		let students = React.createElement('ol', {className: 'student-list'},
+			studentObjects)
 
 		return React.createElement('div', {className: 'students-overview'},
-			React.createElement('ul', {className: 'student-list'}, students.toJS()),
-			React.createElement('div', {className: 'student-buttons'}, buttons))
+			toolbar, students)
 	},
 })
 
