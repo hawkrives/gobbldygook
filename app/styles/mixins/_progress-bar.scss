@@ -1,0 +1,25 @@
+@import 'color';
+
+@mixin progress-bar($color, $bg: transparent, $gradient: null) {
+	@if $gradient == null {
+		$gradient: $color;
+	}
+
+	& {
+		color: $color;
+		background: $bg;
+
+		@content;
+	}
+
+	&::-moz-progress-bar      { background: $gradient; }
+	&::-webkit-progress-value { background: $gradient; }
+	&::-webkit-progress-bar   { background: $bg; }
+}
+
+@mixin progress-track($base-color, $has-track: true, $bar-weight: '300', $track-weight: '100') {
+	$bg: if($has-track, color($base-color, $track-weight), transparent);
+	$color: color($base-color, $bar-weight);
+
+	@include progress-bar($color: $color, $bg: $bg);
+}

@@ -1,0 +1,34 @@
+@import '../icons/scss/ionicons-variables';
+
+@font-face {
+	font-family: $ionicons-font-family;
+	src: url('./fonts/ionicons.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@mixin ion {
+	display: inline-block;
+	font-family: $ionicons-font-family;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	text-rendering: auto;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+// Ionicons Icons
+// --------------------------
+
+@mixin ionicon($name) {
+	@include ion;
+	content: $name;
+}
+
+.course-invalid-year::before { @include ionicon($ionicon-alert-circled);}
+.course-invalid-semester::before { @include ionicon($ionicon-ios-calendar-outline);}
+.course-time-conflict::before { @include ionicon($ionicon-ios-clock-outline);}

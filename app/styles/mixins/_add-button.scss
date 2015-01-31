@@ -1,0 +1,13 @@
+@import 'button';
+@import '../icons';
+
+@mixin add-button($psuedo: '::after') {
+	&#{$psuedo} {
+		@include ionicon($ionicon-android-add);
+		@content;
+	}
+
+	&[disabled]#{$psuedo} {
+		@include ionicon($ionicon-android-checkmark-circle);
+	}
+}

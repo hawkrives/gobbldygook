@@ -1,0 +1,33 @@
+@import "mixins/colors";
+@import "mixins/color";
+
+// colors
+$background-start-color: #eaeaea;
+$background-end-color: #dcdcdc;
+// $background: linear-gradient($background-start-color, $background-end-color);
+// $background: $background-start-color;
+$background: color('gray', '200');
+
+$golden-black: #3C362A;
+$near-black: #2C281F;
+
+$text-color: $near-black;
+
+// fonts
+$sans-font-stack: 'Fira Sans', 'Helvetica', 'Verdana', sans-serif;
+$body-font-stack: $sans-font-stack;
+$heading-font-stack: 'Fira Sans';
+
+// spacing
+$page-edge-padding: 15px;
+$block-edge-padding: 5px;
+
+// z-indices
+$z-sidebar: 3;
+$z-floating-button: 2;
+
+// media queries
+$single-column-width: 35em;
+$year-collapse-width: 47.5em;
+
+$material-divider: 1px solid rgba(160, 160, 160, 0.2);

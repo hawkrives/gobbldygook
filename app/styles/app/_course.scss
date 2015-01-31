@@ -1,0 +1,133 @@
+@import '../mixins/material-shadow';
+
+.course {
+	.warnings {
+		@include list-unstyled;
+		font-size: 0.85em;
+		color: color('deep-orange', '300');
+		font-feature-settings: 'onum';
+	}
+
+	.warnings li::before {
+		margin-right: 0.35em;
+	}
+
+	.title, .summary {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	.title {
+		margin-top: 0;
+		margin-bottom: 0;
+		line-height: normal;
+		padding: 0;
+		padding-bottom: 0.25ex;
+		font-size: 1em;
+		font-weight: 500;
+		font-family: $heading-font-stack;
+
+		cursor: move;
+	}
+
+	.title, .description {
+		font-feature-settings: 'onum';
+	}
+
+	.type {
+		font-feature-settings: 'smcp';
+		font-size: 0.8em;
+		background-color: color('gray', '200');
+		border-radius: 5px;
+		padding: 2px 4px;
+		margin-right: 5px;
+	}
+
+	.summary {
+		font-size: 0.75em;
+	}
+
+	.identifier {
+		font-feature-settings: 'tnum';
+	}
+
+	.identifier, .credits {
+		&::after {
+			content: " · ";
+		}
+	}
+
+	p, ul {
+		margin: 0;
+	}
+
+	.offerings > span {
+		display: block;
+	}
+
+	.gereqs {
+		padding: 0;
+		list-style: none;
+
+		li {
+			background-color: hsl(0, 0%, 90%);
+			border-radius: 3px;
+			display: inline-block;
+			padding: 0 0.25em;
+
+			& + li {
+				margin-left: 0.25em;
+			}
+		}
+	}
+
+	.tools {
+		border-top: $material-divider;
+		margin-top: 0.5em;
+		padding-top: 0.5em;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.remove-course {
+		@include button--flat('red');
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+		font-size: 0.85em;
+	}
+
+	.offerings, .gereqs, .description {
+		margin-bottom: 0.5em;
+	}
+}
+
+.course.expanded {
+	background-color: color('gray', '50');
+	color: $text-color;
+
+	.title {
+		overflow: visible;
+		white-space: normal;
+	}
+
+	.summary, .details {
+		font-size: 0.85em;
+	}
+}
+
+.course.empty {
+	color: color('gray', '500');
+	user-select: none;
+	cursor: default;
+
+	.title {
+		cursor: default;
+	}
+}
+
+.course.is-dragging {
+	opacity: 0.5;
+}
