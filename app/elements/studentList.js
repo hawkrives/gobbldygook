@@ -31,9 +31,8 @@ let StudentList = React.createClass({
 		let studentObjects = this.props.students
 			.toList()
 			.sortBy(s => s.name)
-			.map((student) => React.createElement('li', null,
+			.map((student) => React.createElement('li', {key: student.id},
 				React.createElement(Link, {
-					key: student.id,
 					className: 'student-list-item',
 					params: {id: student.id},
 					to: 'student',
