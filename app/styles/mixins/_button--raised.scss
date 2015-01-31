@@ -4,20 +4,20 @@
 @import 'button';
 
 // Raised Button
-@mixin button--raised($color: 'white', $dark: false) {
+@mixin button--raised($color: 'white', $dark: false, $filter: false) {
 	@include button;
 	$bg-color: color($color, '500');
 	background-color: $bg-color;
 	color: contrasting-color($bg-color, $white, $black);
 
-	@include material-shadow(1);
+	@include material-shadow(1, $filter);
 
 	&:hover, &:focus {
 		background-color: color($color, 600);
 	}
 
 	&:active {
-		@include material-shadow(2);
+		@include material-shadow(2, $filter);
 		background-color: color($color, 700);
 	}
 
