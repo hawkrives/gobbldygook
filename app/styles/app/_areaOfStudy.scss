@@ -47,18 +47,18 @@
 
 		border: 0;
 
-		&.hundred { @include progress-track('green'); }
-		&.ninety  { @include progress-track('orange'); }
-		&.eighty  { @include progress-track('orange'); }
-		&.seventy { @include progress-track('orange'); }
-		&.sixty   { @include progress-track('amber'); }
-		&.fifty   { @include progress-track('amber'); }
-		&.forty   { @include progress-track('amber'); }
-		&.thirty  { @include progress-track('amber'); }
-		&.twenty  { @include progress-track('red'); }
-		&.ten     { @include progress-track('red'); }
-		&.under-ten { @include progress-track('red'); }
-		&.zero    { @include progress-track('blue-gray'); }
+		&.hundred   { @include progress-track('green') }
+		&.ninety    { @include progress-track('orange') }
+		&.eighty    { @include progress-track('orange') }
+		&.seventy   { @include progress-track('orange') }
+		&.sixty     { @include progress-track('amber') }
+		&.fifty     { @include progress-track('amber') }
+		&.forty     { @include progress-track('amber') }
+		&.thirty    { @include progress-track('amber') }
+		&.twenty    { @include progress-track('red') }
+		&.ten       { @include progress-track('red') }
+		&.under-ten { @include progress-track('red') }
+		&.zero      { @include progress-track('blue-gray') }
 	}
 
 	.summary > .details-marker       { display: none; }
