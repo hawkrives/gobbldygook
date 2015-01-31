@@ -19,6 +19,8 @@ let noResult = (id) => {
 		revisionYear: null,
 		progress: {at: 0, of: 1, word: 'zero'},
 		details: [{
+			type: 'error',
+			result: false,
 			title: `${type} not found!`,
 			description: `This ${type} could not be found.`,
 		}],
