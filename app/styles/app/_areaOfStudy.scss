@@ -80,6 +80,10 @@
 		// transition: 0.1s;
 	}
 
+	&[open] {
+		padding-bottom: 0.35em;
+	}
+
 	&[open] > .summary::after {
 		@include ionicon($ionicon-ios-more-outline);
 
