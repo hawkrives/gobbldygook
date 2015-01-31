@@ -105,8 +105,7 @@ let studentStore = Reflux.createStore({
 			// pull the students from localStorage
 			.map(id => [id, localStorage.getItem(id)])
 			// Remove any broken students from localStorage
-			.map(idAndStudent => {
-				let [id, rawStudent] = idAndStudent
+			.map(([id, rawStudent]) => {
 				if (rawStudent === '[object Object]')
 					localStorage.removeItem(id)
 				return rawStudent
