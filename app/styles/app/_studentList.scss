@@ -1,59 +1,93 @@
-.student-list {
-	@include list-inline;
-	display: flex;
-	flex-flow: row wrap;
-	flex: 1;
-}
-
-.student-list li {
-	flex: 1;
-	max-width: 15em;
-
-	margin: 0 0.5em 1em;
-
-	transform-origin: 50% 50%;
-	transition: 0.15s;
-
-	&:nth-child(odd):hover  { transform: rotate(-2deg); }
-	&:nth-child(even):hover { transform: rotate(2deg);  }
-}
-
-.student-list a {
-	@include button--raised;
-	@include link-undecorated;
-	display: block;
-	padding: 0.5em 1em;
-
-	&:hover {
-		text-decoration: underline;
-	}
-}
-
 .students-overview {
 	display: flex;
 	flex-direction: column;
+	max-width: 45em;
+	margin: 0 auto;
+}
+
+
+.student-toolbar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-around;
+
+	margin-bottom: 1em;
+}
+
+.student-filter,
+.student-buttons {
+	flex: 1;
 }
 
 .student-buttons {
 	display: flex;
-	flex-flow: row wrap;
+	justify-content: center;
+}
+
+.student-buttons button {
+	@include button--flat;
+	padding-left: 1em;
+	padding-right: 1em;
+	margin: 0 0.25em;
+
+	&::before {
+		display: block;
+		padding-bottom: 0.2em;
+	}
+}
+
+.student-button--sort-by::before  { @include ionicon($ionicon-funnel); }
+.student-button--group-by::before { @include ionicon($ionicon-folder); }
+.student-button--edit::before     { @include ionicon($ionicon-navicon); }
+.student-button--new::before      { @include ionicon($ionicon-plus); }
+
+.student-buttons [class$='by']::after {
+	margin-left: 0.25em;
+	@include ionicon($ionicon-android-arrow-dropdown);
+}
+
+
+.student-list {
+	@include list-inline;
+	li { display: block; }
+}
+
+.student-list-item {
+	@include button--raised($filter: true);
+	@include link-undecorated;
+
+	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	max-width: 35em;
+	margin: 0 auto 1.25em;
+	padding: 0.5em 0.5em;
+	position: relative;
+
+	transition: 0.15s;
+	&:hover {
+		transform: translateX(0.25em);
+	}
+
+	&::after {
+		@include ionicon($ionicon-ios-arrow-forward);
+	}
 }
 
-.student-buttons .create-student,
-.student-buttons .import-student {
-	margin: 0 1em;
+.student-list-item:hover .name {
+	text-decoration: underline;
+}
+.student-list-item .name {
+	flex: 1;
 }
 
-.student-buttons .create-student {
-	max-width: 20em;
-	@include button--raised;
-}
-
-.student-buttons .import-student {
-	border: dashed 5px color('gray', '400');
-	border-radius: 1em;
-	padding: 1em;
-	height: 10ex;
+.student-list-item .letter {
+	@include avatar-letter(2em);
+	box-shadow: 0 0 0 1px color('blue'), 0 0 0 4px white;
+	background-color: white;
+	position: absolute;
+	top: -0.125em;
+	bottom: 0px;
+	left: -1em;
 }
