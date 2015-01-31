@@ -139,11 +139,6 @@ let studentStore = Reflux.createStore({
 			})
 			.value()
 
-		// TODO: Remove me once the new user flow is up and running
-		if (!localStudents.length) {
-			localStudents.push(new Student(demoStudent))
-		}
-
 		// Update the studentIds list from the current list of students
 		localStorage.setItem('studentIds', JSON.stringify(map(localStudents, s => s.id)))
 
