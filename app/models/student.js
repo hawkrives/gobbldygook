@@ -12,8 +12,8 @@ import Study from './study'
 
 
 let StudentRecord = Immutable.Record({
-	id: uuid(),
-	name: 'Student ' + randomChar(),
+	id: null,
+	name: null,
 	version: currentVersionString,
 
 	creditsNeeded: 35,
