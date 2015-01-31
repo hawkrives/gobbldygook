@@ -1,7 +1,7 @@
 module.exports = {
 	// browser: 'google chrome',
 	open: false,
-	files: 'dist/*',
+	files: ['dist/*.css', 'dist/*.js', 'dist/*.html'],
 	server: {
 		baseDir: './dist',
 	},
