@@ -80,7 +80,7 @@
 		// transition: 0.1s;
 	}
 
-	&.open > .summary::after {
+	&[open] > .summary::after {
 		@include ionicon($ionicon-ios-more-outline);
 
 		transform: rotate(90deg) scale(0.8);
