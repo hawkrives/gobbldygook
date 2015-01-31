@@ -21,7 +21,11 @@ $border-color: rgb(203, 203, 203);
 	border: 1px solid $border-color;
 	overflow: hidden;
 	border-radius: 3px;
-	margin: 0 0.35em 0.35em;
+	margin: 0 0.35em;
+
+	& + & {
+		margin-top: 0.35em;
+	}
 }
 
 .requirement-set .requirement-set {
