@@ -21,6 +21,9 @@ let StudentRecord = Immutable.Record({
 	matriculation: 1894,
 	graduation: 1898,
 
+	dateLastModified: null,
+	dateCreated: null,
+
 	studies: Immutable.OrderedMap(),
 	schedules: Immutable.OrderedMap(),
 	overrides: Immutable.OrderedMap(),
@@ -45,6 +48,8 @@ class Student extends StudentRecord {
 			return this.withMutations((student) => {
 				student = student.set('id', encodedStudent.id || uuid())
 				student = student.set('name', encodedStudent.name || 'Student ' + randomChar())
+				student = student.set('dateCreated', encodedStudent.dateCreated || new Date())
+				student = student.set('dateLastModified', encodedStudent.dateLastModified || new Date())
 
 				forEach((encodedStudent.studies || []), study => {
 					student = student.addArea(study)
@@ -229,7 +234,8 @@ class Student extends StudentRecord {
 		let stringified = JSON.stringify(this)
 		if (oldVersion !== stringified) {
 			console.log(`saving student ${this.name} (${this.id})`)
-			localStorage.setItem(this.id, stringified)
+			let student = this.set('dateLastModified', new Date())
+			localStorage.setItem(student.id, stringified)
 		}
 	}
 }
