@@ -10,6 +10,7 @@
   "config": {
     "browserify": "--debug -e app/index.js -t [ 6to5ify --experimental ]",
     "sass": "--stdout",
+    "csswring": "",
     "uglify": "--source-map-root ./app --in-source-map dist/app.js.map --source-map dist/app.min.js.map --compress --mangle --screw-ie8"
   },
   "scripts": {
@@ -27,7 +28,7 @@
     "copy": "npm run copy-courses & npm run copy-html & npm run copy-fonts & npm run copy-icons & wait",
 
     "build-scripts": "browserify $npm_package_config_browserify | exorcist dist/app.js.map > dist/app.js",
-    "build-styles": "node-sass app/styles/app.scss $npm_package_config_sass | autoprefixer | csswring - > dist/app.css",
+    "build-styles": "node-sass app/styles/app.scss $npm_package_config_sass | autoprefixer > dist/app.css",
 
     "prebuild": "mkdir -p dist && npm run lint",
     "build": "npm run copy & npm run build-scripts & npm run build-styles & wait",
@@ -41,6 +42,7 @@
 
     "browser-sync": "browser-sync start --config ./bs-config.js",
 
+    "csswring": "csswring $npm_package_config_csswring dist/app.css dist/app.min.css",
     "uglify": "uglifyjs dist/app.js --output dist/app.min.js $npm_package_config_uglify",
     "lint": "jscs app/ test/",
     "test": "jest",
@@ -48,7 +50,7 @@
     "start": "npm run serve",
     "serve": "npm run watch & npm run browser-sync & wait",
     "travis": "npm run lint && npm run build && npm run test",
-    "publish": "npm run clean && npm run build && npm run uglify"
+    "production": "npm run clean && npm run build && npm run uglify && npm run csswring"
   },
   "dependencies": {
     "bluebird": "^2.9.4",
