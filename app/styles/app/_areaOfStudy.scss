@@ -5,7 +5,6 @@
 .area-of-study {
 	@include card;
 
-	overflow: hidden;
 	margin-bottom: 0.75em;
 
 	$progress-height: 4px;
@@ -34,6 +33,10 @@
 
 	progress {
 		@include progress-track('blue');
+
+		overflow: hidden;
+		border-top-left-radius: 2px;
+		border-top-right-radius: 2px;
 
 		position: absolute;
 		top: 0;
