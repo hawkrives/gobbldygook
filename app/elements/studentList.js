@@ -28,14 +28,20 @@ let StudentList = React.createClass({
 	},
 
 	render() {
-		let students = this.props.students
-			.map((student) =>
-				React.createElement('li', {key: student.id},
-					React.createElement(Link, {
-						to: 'student',
-						params: {id: student.id},
-					}, student.name)))
+		let studentObjects = this.props.students
 			.toList()
+			.sortBy(s => s.name)
+			.map((student) => React.createElement('li', null,
+				React.createElement(Link, {
+					key: student.id,
+					className: 'student-list-item',
+					params: {id: student.id},
+					to: 'student',
+				}, [
+					React.createElement('span', {key: 'letter', className: 'letter'}, student.name.length ? student.name[0] : ''),
+					React.createElement('span', {key: 'name', className: 'name'}, student.name || 'Student'),
+					// React.createElement('span', {className: 'status', student.name || 'Student'}),
+				])))
 
 		let buttons = [
 			React.createElement('button', {
