@@ -34,7 +34,8 @@ let SearchButton = React.createClass({
 	},
 
 	onSubmit() {
-		this.query(this.state.queryString)
+		if (this.state.queryString !== this.state.lastQuery)
+			this.query(this.state.queryString)
 	},
 
 	onChange(evt) {
@@ -99,7 +100,7 @@ let SearchButton = React.createClass({
 			.catch(err => console.error(err))
 			.done()
 
-		this.setState({queryInProgress: true})
+		this.setState({queryInProgress: true, lastQuery: searchQuery})
 	},
 
 	render() {
