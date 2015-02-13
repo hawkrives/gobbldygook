@@ -1,29 +1,33 @@
 {
 	"folders": [
 		{
+			"name": "app",
 			"file_exclude_patterns": [ "*.woff" ],
 			"folder_exclude_patterns": [
-				".idea",
 				".sass-cache",
 				"dist/data"
 			],
 			"path": "."
 		},
 		{
-			"folder_exclude_patterns": [],
-			"path": "../sto-sis-time-parser"
-		},
-		{
-			"folder_exclude_patterns": [],
-			"path": "../sto-helpers"
-		},
-		{
+			"name": "area-data",
 			"folder_exclude_patterns": [],
 			"path": "../sto-area-data"
 		},
 		{
+			"name": "course-data",
 			"folder_exclude_patterns": ["__pycache__"],
 			"path": "../sto-course-data"
-		}
+		},
+		{
+			"name": "sto-helpers",
+			"folder_exclude_patterns": [],
+			"path": "../sto-helpers"
+		},
+		{
+			"name": "sis-time-parser",
+			"folder_exclude_patterns": [],
+			"path": "../sto-sis-time-parser"
+		},
 	]
 }
