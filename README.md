@@ -5,25 +5,29 @@ This is a course scheduler for students at St. Olaf College. You give it your ar
 
 
 ## Playing
-1. Go to <http://www.cs.stolaf.edu/users/rives/g/>
+
+1. Go to [www.cs.stolaf.edu/users/rives/g/](http://www.cs.stolaf.edu/users/rives/g/)
 2. Input your data
 3. ???
 4. Profit!
 
 
 ## Hacking
-Copy/paste for setup:
-```bash
-git clone https://github.com/hawkrives/gobbldygook.git
-cd gobbldygook
-git submodule init && git submodule update
-npm install
-npm run serve
-```
+- Prerequisites: 
+	- [node.js](https://nodejs.org) (`npm` is bundled with node.)
+	- [git](https://git-scm.com)
+- `git clone https://github.com/hawkrives/gobbldygook.git`
+- `cd gobbldygook`
+- `npm install`
+- `npm run serve`
 
-In short: clone, prepare submodules, install dependencies, and build.
+You can see additional commands by executing `npm run` with no arguments. 
 
-Available commands are in `package.json` under the `scripts` key.
+
+## Support
+We highly recommend joining our Slack chatroom. Just go to [gobbldygook.slack.com](https://gobbldygook.slack.com) and sign up for an account with your St. Olaf email. 
+
+If you don't want to join us there, you can file an issue via [github](https://github.com/hawkrives/gobbldygook/issues/), or you can send us an email, if you look us up on Stalkernet. 
 
 
 ## Credits
@@ -35,4 +39,6 @@ Available commands are in `package.json` under the `scripts` key.
 
 
 ## Screenshot
+It's a pretty old one, circa summer 2014. 
+
 ![Screenshot!](./screenshot.png)
