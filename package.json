@@ -45,6 +45,7 @@
     "csswring": "csswring $npm_package_config_csswring dist/app.css dist/app.min.css",
     "uglify": "uglifyjs dist/app.js --output dist/app.min.js $npm_package_config_uglify",
     "lint": "jscs app/ test/",
+    "eslint": "eslint app/",
     "test": "jest",
 
     "start": "npm run serve",
