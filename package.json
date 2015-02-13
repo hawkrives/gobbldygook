@@ -88,8 +88,8 @@
     "jest-cli": "^0.2.2",
     "jscs": "^1.10.0",
     "jscs-jsdoc": "^0.4.0",
-    "nodemon": "^1.3.5",
     "node-sass": "2.0.0-beta",
+    "nodemon": "^1.3.5",
     "uglify-js": "^2.4.16",
     "watchify": "^2.3.0"
   },
