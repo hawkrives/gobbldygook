@@ -1,3 +1,5 @@
+import Promise from 'bluebird'
+
 function status(response) {
 	if (response.status >= 200 && response.status < 300) {
 		return Promise.resolve(response)
