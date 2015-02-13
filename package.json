@@ -52,7 +52,7 @@
     "start": "npm run serve",
     "serve": "npm run watch & npm run browser-sync & wait",
     "travis": "npm run lint && npm run build && npm run test",
-    "production": "npm run clean && npm run build && npm run uglify && npm run csswring"
+    "production": "npm run clean && npm run build && npm run uglify & npm run csswring; wait"
   },
   "dependencies": {
     "bluebird": "^2.9.9",
