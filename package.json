@@ -42,7 +42,7 @@
 
     "browser-sync": "browser-sync start --config ./bs-config.js",
 
-    "csswring": "csswring $npm_package_config_csswring dist/app.css dist/app.min.css",
+    "csswring": "csswring $npm_package_config_csswring dist/app.css",
     "uglify": "uglifyjs dist/app.js --output dist/app.min.js $npm_package_config_uglify",
     "lint": "jscs app/ test/",
     "eslint": "eslint app/",
