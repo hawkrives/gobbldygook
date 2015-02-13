@@ -2,7 +2,7 @@ import _ from 'lodash'
 import Promise from 'bluebird'
 
 import notificationActions from '../flux/notificationActions'
-import {status, json} from './fetch'
+import {status, json} from './fetchHelpers'
 import db from './db'
 
 import {buildDept, buildDeptNum, splitParagraph} from 'sto-helpers'
