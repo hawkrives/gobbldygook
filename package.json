@@ -9,7 +9,7 @@
   "license": "MIT",
   "config": {
     "browserify": "--debug -e app/index.js -t [ 6to5ify --experimental ]",
-    "uglify": "--source-map-root ./app --in-source-map dist/app.js.map --source-map dist/app.min.js.map --compress --mangle --screw-ie8",
+    "uglify": "--source-map-root ./dist --in-source-map dist/app.js.map --source-map dist/app.min.js.map --compress --mangle --screw-ie8",
     "sass": "--stdout",
     "csswring": ""
   },
