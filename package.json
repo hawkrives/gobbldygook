@@ -64,7 +64,7 @@
     "stickyfill": "^1.1.1",
     "sto-areas": "^2.3.8",
     "sto-courses": "^3.0.5",
-    "sto-helpers": "^4.2.3",
+    "sto-helpers": "^4.2.4",
     "sto-sis-time-parser": "^2.0.0",
     "treo": "^0.4.2",
     "whatwg-fetch": "^0.7.0"
