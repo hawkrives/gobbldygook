@@ -21,7 +21,7 @@
     "check": "npm outdated --depth 0",
     "clean": "rm -rf dist/",
 
-    "precopy": "mkdir -p dist/fonts/ dist/data/courses/"
+    "precopy": "mkdir -p dist/fonts/ dist/data/courses/",
     "copy-courses": "cp -f node_modules/sto-courses/info.json dist/data/courses && cp -f -R node_modules/sto-courses/terms dist/data/courses",
     "copy-html": "cp -f app/htdocs/index.html app/htdocs/.htaccess dist/",
     "copy-fonts": "cp -f -R app/fonts dist/",
