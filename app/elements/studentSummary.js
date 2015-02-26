@@ -76,7 +76,8 @@ let StudentSummary = React.createClass({
 		return <article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 			<header>
 				<div key='letter' id='student-letter'>{name.length ? name[0] : ''}</div>
-				<p key='hi'>{`Hi, ${nameEl}!`</p>
+				<p key='hi'>{`Hi, ${nameEl}!`}</p>
+			</header>
 			<div className='content'>
 				<p key='overview'>{
 					'You are planning on ', degreeEmphasizer,
