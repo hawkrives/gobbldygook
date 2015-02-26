@@ -6,8 +6,6 @@ import itemTypes from '../models/itemTypes'
 
 import ExpandedCourse from './expandedCourse'
 import CollapsedCourse from './collapsedCourse'
-import MissingCourse from './missingCourse'
-import EmptyCourseSlot from './emptyCourseSlot'
 
 let cx = React.addons.classSet
 
@@ -94,4 +92,3 @@ let Course = React.createClass({
 })
 
 export default Course
-export {Course, MissingCourse, EmptyCourseSlot}

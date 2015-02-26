@@ -2,12 +2,10 @@ import _ from 'lodash'
 import React from 'react'
 import marked from 'marked'
 
-import {
-	BooleanRequirement,
-	SomeArrayRequirement,
-	BooleanArrayRequirement,
-	NumberObjectRequirement
-} from './requirement'
+import BooleanRequirement from './booleanRequirement'
+import SomeArrayRequirement from './someArrayRequirement'
+import BooleanArrayRequirement from './booleanArrayRequirement'
+import NumberObjectRequirement from './numberObjectRequirement'
 
 let RequirementSet = React.createClass({
 	propTypes: {
