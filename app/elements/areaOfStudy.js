@@ -9,7 +9,7 @@ let makeRequirementSets = (props) => {
 		return []
 
 	let reqSets = map(props.areaResult.details, (reqset) =>
-		<RequirementSet {key: reqset.title, ...reqset} />
+		<RequirementSet key={reqset.title} {...reqset} />)
 
 	return reqSets
 }

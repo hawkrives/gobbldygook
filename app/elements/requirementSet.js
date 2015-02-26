@@ -56,7 +56,7 @@ let RequirementSet = React.createClass({
 
 		if (this.props.type === 'array/requirementSet') {
 			details = map(this.props.details, (requirement, index) =>
-				<RequirementSet {key: index, ...requirement} />)
+				<RequirementSet key={index} {...requirement} />)
 		}
 
 		else if (this.props.type === 'array/some') {
