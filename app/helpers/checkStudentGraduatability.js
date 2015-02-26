@@ -1,5 +1,9 @@
 import Promise from 'bluebird'
-import _ from 'lodash'
+
+import size from 'lodash/collection/size'
+import filter from 'lodash/collection/filter'
+import pluck from 'lodash/collection/pluck'
+
 import Immutable from 'immutable'
 import {isTrue} from 'sto-helpers'
 import checkStudentAgainstArea from './checkStudentAgainstArea'
@@ -20,12 +24,9 @@ function checkStudentGraduatability(student) {
 	// console.log('areaResults', student.studies.toArray(), areaResults)
 
 	return Promise.all(areaResults).then((areas) => {
-		let goodAreaCount = _(areas)
-			.pluck('result')
-			.filter(isTrue)
-			.size()
+		let goodAreaCount = size(filter(pluck('result', areas), isTrue))
 
-		let graduatability = (goodAreaCount - _.size(areas)) === 0
+		let graduatability = (goodAreaCount - size(areas)) === 0
 
 		return {
 			graduatability: graduatability,

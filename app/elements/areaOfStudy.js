@@ -1,5 +1,5 @@
 import React from 'react/addons'
-import {map} from 'lodash'
+import map from 'lodash/collection/map'
 import RequirementSet from './requirementSet'
 
 let cx = React.addons.classSet
@@ -9,8 +9,7 @@ let makeRequirementSets = (props) => {
 		return []
 
 	let reqSets = map(props.areaResult.details, (reqset) =>
-		React.createElement(RequirementSet,
-			Object.assign({key: reqset.title}, reqset)))
+		<RequirementSet {key: reqset.title, ...reqset} />
 
 	return reqSets
 }
@@ -60,27 +59,27 @@ let AreaOfStudy = React.createClass({
 		// console.log(`render areaOfStudy for ${this.props.area.id}`)
 
 		let progressProps = this.props.areaResult ? {
-				className: this.props.areaResult.progress.word,
-				value: this.props.areaResult.progress.at,
-				max: this.props.areaResult.progress.of,
+			className: this.props.areaResult.progress.word,
+			value: this.props.areaResult.progress.at,
+			max: this.props.areaResult.progress.of,
 		} : {}
 
 		let reqSets = this.state.reqSets
 
-		let header = React.createElement('summary',
-			{className: 'summary'},
-			React.createElement('h1', null, this.props.area.title),
-			React.createElement('progress', progressProps))
+		let header = <summary className='summary'>
+			<h1>{this.props.area.title}</h1>
+			<progress {...progressProps} />
+		</summary>
 
 		let classes = cx({
 			'area-of-study': true,
 			loading: !this.props.areaResult,
 		})
 
-		return React.createElement('details',
-			{className: classes},
-			header,
-			reqSets)
+		return <details className={classes}>
+			{header}
+			{reqSets}
+		</details>
 	},
 })
 

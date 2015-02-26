@@ -3,7 +3,7 @@ import FakeCourse from '../components/fakeCourse'
 
 let MissingCourse = React.createClass({
 	render() {
-		return React.createElement(FakeCourse, {title: 'Missing Slot', className: 'missing'})
+		return <FakeCourse title='Missing Slot' className='missing' />
 	}
 })
 

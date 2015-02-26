@@ -23,9 +23,9 @@ let GobbldygookApp = React.createClass({
 	render() {
 		// console.log('rendering GobbldygookApp', this.state.studentsInitialized)
 		if (!this.state.studentsInitialized)
-			return React.createElement('div', {className: 'loading-spinner'}, React.createElement('div', null), 'Loading Students&hellip;')
+			return <div className='loading-spinner'><div>Loading Students&hellip;</div></div>
 
-		return React.createElement(RouteHandler, {students: this.state.students})
+		return <RouteHandler students={this.state.students} />
 	},
 })
 

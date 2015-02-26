@@ -1,4 +1,5 @@
-import _ from 'lodash'
+import map from 'lodash/collection/map'
+import extend from 'lodash/object/extend'
 import React from 'react'
 import marked from 'marked'
 
@@ -41,44 +42,47 @@ let RequirementSet = React.createClass({
 	render() {
 		// console.log('requirement-set render', this.props)
 
-		let title = React.createElement('h2', {
-			className: this.props.result ? 'completed' : 'incomplete',
-			title: this.props.description,
-		}, this.props.title)
+		let title = <h2
+			className={this.props.result ? 'completed' : 'incomplete'}
+			title={this.props.description}> {this.props.title} </h2>
 
 		let description = null
 		if (this.state.showDescription && this.state.descriptionHTML)
-			description = React.createElement('div', {className: 'description', dangerouslySetInnerHTML: {__html: this.state.descriptionHTML}})
+			description = <div className='description' dangerouslySetInnerHTML={{__html: this.state.descriptionHTML}} />
 
-		let titlebar = React.createElement('header', {onClick: this.toggleDescription}, title, description)
+		let titlebar = <header onClick={this.toggleDescription}>{title, description}</header>
 
 		let details = null
 
 		if (this.props.type === 'array/requirementSet') {
-			details = _.map(this.props.details, (requirement, index) => {
-				return React.createElement(RequirementSet, _.merge({key: index}, requirement))
-			})
+			details = map(this.props.details, (requirement, index) =>
+				<RequirementSet {key: index, ...requirement} />)
 		}
 
 		else if (this.props.type === 'array/some') {
-			details = React.createElement(SomeArrayRequirement, {result: this.props.result, details: this.props.details})
+			details = <SomeArrayRequirement
+				result={this.props.result}
+				details={this.props.details} />
 		}
 
 		else if (this.props.type === 'array/boolean') {
-			details = React.createElement(BooleanArrayRequirement, {details: this.props.details})
+			details = <BooleanArrayRequirement details={this.props.details} />
 		}
 
 		else if (this.props.type === 'boolean') {
-			details = React.createElement(BooleanRequirement, {result: this.props.result})
+			details = <BooleanRequirement result={this.props.result} />
 		}
 
 		else if (this.props.type === 'object/number') {
-			details = React.createElement(NumberObjectRequirement, {result: this.props.result, details: this.props.details})
+			details = <NumberObjectRequirement
+				result={this.props.result}
+				details={this.props.details} />
 		}
 
-		return React.createElement('div', {className: 'requirement-set', 'data-type': this.props.type},
-			titlebar,
-			details)
+		return <div className='requirement-set' data-type={this.props.type}>
+			{titlebar}
+			{details}
+		</div>
 	},
 })
 
