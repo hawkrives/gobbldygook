@@ -19,3 +19,5 @@ let BooleanRequirement = React.createClass({
 		</div>
 	},
 })
+
+export default BooleanRequirement

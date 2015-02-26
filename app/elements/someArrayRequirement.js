@@ -54,3 +54,5 @@ let SomeArrayRequirement = React.createClass({
 		</div>
 	},
 })
+
+export default SomeArrayRequirement
