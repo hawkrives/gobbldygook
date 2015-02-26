@@ -1,5 +1,3 @@
-@import '../mixins/material-shadow';
-
 .course {
 	.warnings {
 		@include list-unstyled;

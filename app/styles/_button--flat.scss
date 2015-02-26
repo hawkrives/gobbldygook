@@ -1,6 +1,3 @@
-@import 'color';
-@import 'button';
-
 // Flat button
 @mixin button--flat($color: 'black', $dark: false) {
 	@include button;
