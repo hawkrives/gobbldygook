@@ -7,7 +7,9 @@ import {pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 
 import {add, countCredits, semesterName, isCurrentSemester} from 'sto-helpers'
-import {Course, MissingCourse, EmptyCourseSlot} from './course'
+import Course from './course'
+import MissingCourse from './missingCourse'
+import EmptyCourseSlot from './emptyCourseSlot'
 import studentActions from '../flux/studentActions'
 import itemTypes from '../models/itemTypes'
 
