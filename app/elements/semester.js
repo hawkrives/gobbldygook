@@ -1,4 +1,4 @@
-import {isUndefined, extend} from 'lodash'
+import isUndefined from 'lodash/lang/isUndefined'
 import {DragDropMixin} from 'react-dnd'
 import Promise from 'bluebird'
 import React from 'react'

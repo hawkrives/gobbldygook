@@ -1,4 +1,5 @@
-import {_ as lodash, isNull} from 'lodash'
+import {_ as lodash} from 'lodash'
+import isNull from 'lodash/lang/isNull'
 import React from 'react'
 import cx from 'classnames'
 import {DragDropMixin} from 'react-dnd'
