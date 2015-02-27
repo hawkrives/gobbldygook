@@ -25,17 +25,23 @@ let Course = React.createClass({
 
 	mixins: [DragDropMixin],
 
-	configureDragDrop(registerType) {
-		registerType(itemTypes.COURSE, {
-			dragSource: {
-				beginDrag() {
-					let scheduleId = this.props.schedule ? this.props.schedule.id : null
-					return {
-						item: {clbid: this.props.info.clbid, fromSchedule: scheduleId}
-					}
-				},
-			}
-		})
+	statics: {
+		configureDragDrop(registerType) {
+			registerType(itemTypes.COURSE, {
+				dragSource: {
+					beginDrag(component) {
+						let {props} = component
+						let scheduleId = props.schedule ? props.schedule.id : null
+						return {
+							item: {
+								clbid: props.info.clbid,
+								fromSchedule: scheduleId,
+							}
+						}
+					},
+				}
+			})
+		},
 	},
 
 	getInitialState() {
