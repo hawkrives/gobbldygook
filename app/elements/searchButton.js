@@ -70,17 +70,13 @@ let SearchButton = React.createClass({
 		console.info(`query took ${(endQueryTime - startQueryTime)}ms.`)
 
 		let startTime = present()
-		let courseObjects = map(searchResults, (courseOrTerm) => {
+		let courseObjects = map(searchResults, (courseOrTerm, index) => {
 			if (!isObject(courseOrTerm)) {
 				let prettyTerm = toPrettyTerm(courseOrTerm)
 
-				return React.createElement('li',
-					{key: prettyTerm, className: 'course-group'},
-					prettyTerm)
+				return <li key={prettyTerm} className='course-group'>{prettyTerm}</li>
 			}
-			return React.createElement('li',
-				{key: courseOrTerm.clbid},
-				React.createElement(Course, {info: courseOrTerm}))
+			return <li key={courseOrTerm.clbid}><Course info={courseOrTerm} index={index} /></li>
 		})
 
 		let endTime = present()
@@ -109,33 +105,34 @@ let SearchButton = React.createClass({
 		let showNoResults = this.state.results.length === 0 && this.state.hasQueried
 		let showIndicator = this.state.queryInProgress
 
-		return React.createElement('div', {className: 'search-sidebar'},
-			React.createElement('header', {className: 'sidebar-heading'},
-				React.createElement('h1', null, 'Search for Courses'),
-				React.createElement('button', {
-					className: 'close-sidebar',
-					title: 'Close Sidebar',
-					onClick: this.props.toggle,
-				})),
-			React.createElement('input', {
-				type: 'search',
-				placeholder: 'Search Courses',
-				defaultValue: this.state.query,
-				onChange: this.onChange,
-				onKeyDown: this.onKeyDown,
-				className: 'search-box',
-				autoFocus: true,
-			}),
-			React.createElement('ul', {className: 'course-list'},
-				showIndicator ?
-					React.createElement('li', {className: 'loading'},
-						React.createElement('div', {className: 'loading-spinner'},
-							React.createElement('div', null))) :
-					showNoResults ?
-						React.createElement('li', {className: 'no-results'},
-							'No Results Found') :
-						this.state.results)
-		)
+		let loadingIndicator = <li className='loading'>
+			<div className='loading-spinner'><div /></div>
+		</li>
+
+		let contents = null
+		if (!showIndicator)
+			contents = showNoResults ?
+				<li className='no-results'>No Results Found</li> :
+				this.state.results
+
+		return <div className='search-sidebar'>
+			<header className='sidebar-heading'>
+				<h1>Search for Courses</h1>
+				<button className='close-sidebar' title='Close Sidebar'
+					onClick={this.props.toggle} />
+			</header>
+
+			<input type='search' className='search-box'
+				placeholder='Search Courses'
+				defaultValue={this.state.query}
+				onChange={this.onChange}
+				onKeyDown={this.onKeyDown}
+				autoFocus={true} />
+
+			<ul className='course-list'>
+				{showIndicator ? loadingIndicator : contents}
+			</ul>
+		</div>
 	},
 })
 
