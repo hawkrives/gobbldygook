@@ -96,7 +96,9 @@ let ExpandedCourse = React.createClass({
 
 		// /////
 
-		return React.createElement('div', {className: 'info-rows'}, title, summary, details, toolsEls)
+		return React.createElement('div',
+			{className: 'info-rows'},
+			title, summary, details, toolsEls)
 	},
 })
 
