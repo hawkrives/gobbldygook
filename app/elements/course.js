@@ -73,18 +73,16 @@ let Course = React.createClass({
 			.value()
 
 		return React.createElement('article',
-			Object.assign(
-				{
-					className: cx({
-						course: true,
-						expanded: this.state.isOpen,
-						'has-warnings': hasWarnings,
-						'is-dragging': isDragging,
-					}),
-					onClick: this.toggle,
-				},
-				this.dragSourceFor(itemTypes.COURSE)),
-
+			{
+				className: cx({
+					course: true,
+					expanded: this.state.isOpen,
+					'has-warnings': hasWarnings,
+					'is-dragging': isDragging,
+				}),
+				onClick: this.toggle,
+				...this.dragSourceFor(itemTypes.COURSE),
+			},
 			React.createElement('ul', {className: 'warnings'}, warningEls),
 			courseInfo)
 	},

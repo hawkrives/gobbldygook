@@ -144,7 +144,7 @@ let Semester = React.createClass({
 		}
 
 		return React.createElement('div',
-			extend(semesterProps, this.dropTargetFor(itemTypes.COURSE)),
+			{...semesterProps, ...this.dropTargetFor(itemTypes.COURSE)},
 			React.createElement('header', {className: 'semester-title'},
 				React.createElement(Link,
 					{
