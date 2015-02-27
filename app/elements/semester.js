@@ -46,9 +46,7 @@ let Semester = React.createClass({
 		let activeSchedules = nextProps.student.activeSchedules
 		let schedule = activeSchedules.find((s) => s.year === this.props.year && s.semester === this.props.semester)
 
-		Promise.all([schedule.courses, schedule.validate()]).then((results) => {
-			let [courses, validation] = results
-
+		Promise.all([schedule.courses, schedule.validate()]).then(([courses, validation]) => {
 			this.setState({
 				schedule,
 				courses: Immutable.List(courses),
