@@ -49,13 +49,14 @@ let Semester = React.createClass({
 		let activeSchedules = nextProps.student.activeSchedules
 		let schedule = activeSchedules.find((s) => s.year === this.props.year && s.semester === this.props.semester)
 
-		Promise.all([schedule.courses, schedule.validate()]).then(([courses, validation]) => {
-			this.setState({
-				schedule,
-				courses: Immutable.List(courses),
-				validation,
+		Promise.all([schedule.courses, schedule.validate()])
+			.then(([courses, validation]) => {
+				this.setState({
+					schedule,
+					courses: Immutable.List(courses),
+					validation,
+				})
 			})
-		})
 	},
 
 	getInitialState() {
@@ -72,9 +73,10 @@ let Semester = React.createClass({
 		let infoIcons = []
 		if (this.state.schedule && this.state.courses.size) {
 			let courseCount = this.state.courses.size
-			infoIcons.push(React.createElement('li',
-				{className: 'semester-course-count', key: 'course-count'},
-				`${courseCount} ${pluralize(courseCount, 'course')}`))
+			infoIcons.push(
+				<li className='semester-course-count' key='course-count'>
+					{`${courseCount} ${pluralize(courseCount, 'course')}`}
+				</li>)
 
 			let credits = this.state.courses
 				.filterNot(isUndefined) // remove any undefined items
@@ -82,30 +84,29 @@ let Semester = React.createClass({
 				.reduce(add)
 
 			if (credits) {
-				infoIcons.push(React.createElement('li',
-					{className: 'semester-credit-count', key: 'credit-count'},
-					`${credits} ${pluralize(credits, 'credit')}`))
+				infoIcons.push(
+					<li className='semester-credit-count' key='credit-count'>
+						{`${credits} ${pluralize(credits, 'credit')}`}
+					</li>)
 			}
 		}
-		let infoBar = React.createElement('ul', {className: 'info-bar'}, infoIcons)
+		let infoBar = <ul className='info-bar'>{infoIcons}</ul>
 
 		let courseList = null
 		if (this.state.schedule && this.state.courses) {
 			let courseObjects = this.state.courses
 				.filterNot(isUndefined)
 				.map((course, i) =>
-					React.createElement(Course, {
-						key: `${course.clbid}-${i}`,
-						info: course,
-						student: this.props.student,
-						schedule: this.state.schedule,
-						index: i,
-						conflicts: this.state.validation.conflicts,
-					}))
+					<Course key={`${course.clbid}-${i}`}
+						index={i}
+						info={course}
+						student={this.props.student}
+						schedule={this.state.schedule}
+						conflicts={this.state.validation.conflicts} />)
 
 			let couldntFindSlots = this.state.courses
 				.filter(isUndefined) // only keep the undefined items
-				.map((c, i) => React.createElement(MissingCourse, {key: i}))
+				.map((c, i) => <MissingCourse key={i} />)
 
 			// maxCredits is 4 for fall/spring and 1 for everything else
 			let maxCredits = ([1, 3].indexOf(this.props.semester) !== -1) ? 4 : 1
@@ -116,7 +117,7 @@ let Semester = React.createClass({
 				emptySlots =
 					Immutable.Range(Math.floor(currentCredits), maxCredits)
 					.skip(couldntFindSlots.size)
-					.map((i) => React.createElement(EmptyCourseSlot, {key: `empty-${i}`}))
+					.map((i) => <EmptyCourseSlot key={`empty-${i}`} />)
 			}
 
 			let courseBlocks = courseObjects
@@ -124,12 +125,10 @@ let Semester = React.createClass({
 				.concat(emptySlots)
 				.toJS()
 
-			courseList = React.createElement('div',
-				{className: 'course-list'},
-				courseBlocks)
+			courseList = <div className='course-list'>{courseBlocks}</div>
 		}
 		else if (this.state.schedule) {
-			courseList = React.createElement('div', {className: 'loading-spinner'}, React.createElement('div', null), 'Loading Courses&hellip;')
+			courseList = <div className='loading-spinner'><div>Loading Courses&hellip;</div></div>
 		}
 
 		let droppableIsMoving = this.getDropState(itemTypes.COURSE).isDragging
@@ -144,28 +143,24 @@ let Semester = React.createClass({
 			})
 		}
 
-		return React.createElement('div',
-			{...semesterProps, ...this.dropTargetFor(itemTypes.COURSE)},
-			React.createElement('header', {className: 'semester-title'},
-				React.createElement(Link,
-					{
-						to: 'semester',
-						params: {
-							id: this.props.student.id,
-							year: this.props.year,
-							semester: this.props.semester,
-						},
-						className: 'semester-header',
-					},
-					React.createElement('h1', null,
-						semesterName(this.props.semester)),
-					infoBar),
-				React.createElement('button', {
-					className: 'remove-semester',
-					title: `Remove ${this.props.year} ${semesterName(this.props.semester)}`,
-					onClick: this.removeSemester,
-				})),
-			courseList)
+		return <div {...semesterProps, ...this.dropTargetFor(itemTypes.COURSE)}>
+			<header className='semester-title'>
+				<Link className='semester-header'
+					to='semester'
+					params={{
+						id: this.props.student.id,
+						year: this.props.year,
+						semester: this.props.semester,
+					}}>
+					<h1>{semesterName(this.props.semester))}</h1>
+					{infoBar}
+				</Link>
+				<button className='remove-semester'
+					onClick={this.removeSemester}
+					title={`Remove ${this.props.year} ${semesterName(this.props.semester)}`} />
+			</header>
+			{courseList}
+		</div>
 	},
 
 	removeSemester() {
