@@ -1,5 +1,5 @@
 import React from 'react'
-import {debounce} from 'lodash'
+import debounce from 'lodash/function/debounce'
 
 let ContentEditable = React.createClass({
 	// from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable

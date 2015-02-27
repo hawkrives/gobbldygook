@@ -1,4 +1,4 @@
-import '6to5-core/polyfill'
+import 'babel-core/polyfill'
 import 'whatwg-fetch'
 
 import Promise from 'bluebird'

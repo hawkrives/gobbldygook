@@ -1,5 +1,3 @@
-@import 'color';
-
 @mixin progress-bar($color, $bg: transparent, $gradient: null) {
 	@if $gradient == null {
 		$gradient: $color;

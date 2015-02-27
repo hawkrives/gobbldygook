@@ -1,4 +1,8 @@
-import {chain, forEach, map, uniq} from 'lodash'
+import forEach from 'lodash/collection/forEach'
+import map from 'lodash/collection/map'
+import uniq from 'lodash/array/uniq'
+import {chain} from 'lodash'
+
 import Reflux from 'reflux'
 import Immutable from 'immutable'
 

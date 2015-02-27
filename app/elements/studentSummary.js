@@ -25,10 +25,7 @@ let StudentSummary = React.createClass({
 		let studies = student.studies
 
 		let name = student.name
-		let nameEl = React.createElement(ContentEditable, {
-			content: name,
-			onChange: this.updateStudentName,
-		})
+		let nameEl = <ContentEditable content={name} onChange={this.updateStudentName} />
 
 		let has = studies
 			.groupBy(s => s.type)
@@ -58,11 +55,17 @@ let StudentSummary = React.createClass({
 
 		let canGraduate = this.props.graduatability
 
+		// let phrases = {
+		// 	degree: React.createElement('span', {className: 'area-of-study-list', key:'degree'}, titles.degree),
+		// 	major: React.createElement('span', {className: 'area-of-study-list', key:'major'}, titles.major),
+		// 	concentration: React.createElement('span', {className: 'area-of-study-list', key:'concentration'}, titles.concentration),
+		// 	emphasis: React.createElement('span', {className: 'area-of-study-list', key:'emphasis'}, titles.emphasis),
+		// }
 		let phrases = {
-			degree: React.createElement('span', {className: 'area-of-study-list', key:'degree'}, titles.degree),
-			major: React.createElement('span', {className: 'area-of-study-list', key:'major'}, titles.major),
-			concentration: React.createElement('span', {className: 'area-of-study-list', key:'concentration'}, titles.concentration),
-			emphasis: React.createElement('span', {className: 'area-of-study-list', key:'emphasis'}, titles.emphasis),
+			degree: <span className='area-of-study-list' key='degree'>{titles.degree}</span>,
+			major: <span className='area-of-study-list' key='major'>{titles.major}</span>,
+			concentration: <span className='area-of-study-list' key='concentration'>{titles.concentration}</span>,
+			emphasis: <span className='area-of-study-list' key='emphasis'>{titles.emphasis}</span>,
 		}
 
 		let degreeEmphasizer = has.degree === 1 ? 'a ' : ''
@@ -70,19 +73,24 @@ let StudentSummary = React.createClass({
 		let concentrationEmphasizer = has.concentration === 1 ? 'a ' : ''
 		let emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
 
-		return React.createElement('article', {id: 'student-summary', className: canGraduate ? 'can-graduate' : 'cannot-graduate'},
-			React.createElement('header', null,
-				React.createElement('div', {key: 'letter', id: 'student-letter'}, name.length ? name[0] : ''),
-				React.createElement('p', {key: 'hi'}, 'Hi, ', nameEl, '!')),
-			React.createElement('div', {className: 'content'},
-				React.createElement('p', {key: 'overview'},
+		return <article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
+			<header>
+				<div key='letter' id='student-letter'>{name.length ? name[0] : ''}</div>
+				<p key='hi'>{`Hi, ${nameEl}!`}</p>
+			</header>
+			<div className='content'>
+				<p key='overview'>{
 					'You are planning on ', degreeEmphasizer,
 					phrases.degree, ' ', words.degree, ', with ', majorEmphasizer, words.major, ' in ', phrases.major,
 					(has.concentration > 0) ? [', and ' + concentrationEmphasizer, words.concentration, ' in ', phrases.concentration] : '',
 					(has.emphasis > 0) ? [', not to mention ', emphasisEmphasizer, words.emphasis, ' in ', phrases.emphasis] : '',
-					'.'),
-				React.createElement('p', {key: 'message', className: 'graduation-message'},
-					canGraduate ? goodGraduationMessage : badGraduationMessage)))
+					'.'
+				}</p>
+				<p key='message' className='graduation-message'>
+					{canGraduate ? goodGraduationMessage : badGraduationMessage}
+				</p>
+			</div>
+		</article>
 	},
 })
 

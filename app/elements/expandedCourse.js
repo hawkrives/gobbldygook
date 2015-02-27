@@ -2,7 +2,7 @@ import React from 'react'
 import {map} from 'lodash'
 import {oxford, pluralize} from 'humanize-plus'
 
-import CourseTitle from '../components/courseTitle'
+import CourseTitle from './courseTitle'
 import studentActions from '../flux/studentActions'
 import {semesterName} from 'sto-helpers'
 

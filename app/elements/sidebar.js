@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link, State} from 'react-router'
 
-import RevertToDemoButton from '../components/revertToDemoButton'
-import DownloadStudentButton from '../components/downloadStudentButton'
-import UndoButton from '../components/undoButton'
-import RedoButton from '../components/redoButton'
+import RevertToDemoButton from './revertToDemoButton'
+import DownloadStudentButton from './downloadStudentButton'
+import UndoButton from './undoButton'
+import RedoButton from './redoButton'
 
 import SearchButton from './searchButton'
 import GraduationStatus from './graduationStatus'

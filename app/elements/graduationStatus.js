@@ -45,41 +45,44 @@ let GraduationStatus = React.createClass({
 		if (!student)
 			return null
 
-		let summary = React.createElement(StudentSummary, {
-			student: student,
-			graduatability: this.state.graduatability,
-		})
+		let summary = <StudentSummary
+			student={student}
+			graduatability={this.state.graduatability} />
 
 		let sections = student.areasByType
 			.map((areas, areaType) => {
 				let pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 
-				let areaTypeHeading = React.createElement('header', {className: 'area-type-heading'},
-					React.createElement('h1', null, capitalize(pluralType)))
+				let areaTypeHeading = <header className='area-type-heading'>
+					<h1>{capitalize(pluralType)}</h1>
+				</header>
 
 				let areaElements = areas.toList().map((area, index) => {
 					let areaResult = this.state.areaDetails.find(a => a.id === area.id)
 
-					return React.createElement(AreaOfStudy, {
+					let props = {
 						key: `${area.id}-${index}`,
 						student,
 						areaResult,
 						area,
-					})
+					}
+					return <AreaOfStudy {...props} />
 				}).toJS()
 
-				areaElements.push(React.createElement('button',
-					{key: 'add-button', className: 'add-area-of-study'},
-					`Add ${capitalize(areaType)}`))
+				areaElements.push(
+					<button key='add-button' className='add-area-of-study'>
+						{`Add ${capitalize(areaType)}`}
+					</button>)
 
-				return React.createElement('section',
-					{id: pluralType, key: areaType},
-					areaTypeHeading,
-					areaElements)
+				return <section id={pluralType} key={areaType}>
+					{areaTypeHeading}
+					{areaElements}
+				</section>
 			}).toJS()
 
-		return React.createElement('section', {className: 'graduation-status'},
-			summary, sections)
+		return <section className='graduation-status'>
+			{summary, sections}
+		</section>
 	},
 })
 
