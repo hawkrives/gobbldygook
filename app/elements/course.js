@@ -1,4 +1,4 @@
-import {_ as lodash} from 'lodash'
+import {chain} from 'lodash'
 import isNull from 'lodash/lang/isNull'
 import React from 'react'
 import cx from 'classnames'
@@ -46,14 +46,14 @@ let Course = React.createClass({
 
 	getInitialState() {
 		return {
-			isOpen: false
+			isOpen: false,
 		}
 	},
 
-	toggle() {
+	toggleExpanded() {
 		// console.log(this.state.isOpen ? 'collapse' : 'expand')
 		this.setState({
-			isOpen: !this.state.isOpen
+			isOpen: !this.state.isOpen,
 		})
 	},
 
@@ -63,35 +63,30 @@ let Course = React.createClass({
 	},
 
 	render() {
-		let course = this.props.info
-
 		let isDragging = this.getDragState(itemTypes.COURSE).isDragging
 
-		let courseStyle = this.state.isOpen ? ExpandedCourse : CollapsedCourse
-		let courseInfo = React.createElement(courseStyle, this.props)
+		let CourseStyle = this.state.isOpen ? ExpandedCourse : CollapsedCourse
 
 		let hasWarnings = this.props.conflicts.length
 		let warnings = this.props.conflicts[this.props.index]
-		let warningEls = lodash(warnings)
+		let warningEls = chain(warnings)
 			.reject(isNull)
 			.filter({warning: true})
-			.map((w, index) =>
-				React.createElement('li', {className: w.className, key: w.className + index}, w.msg))
+			.map((w, index) => <li className={w.className} key={w.className + index}>{w.msg}</li>)
 			.value()
 
-		return React.createElement('article',
-			{
-				className: cx({
-					course: true,
-					expanded: this.state.isOpen,
-					'has-warnings': hasWarnings,
-					'is-dragging': isDragging,
-				}),
-				onClick: this.toggle,
-				...this.dragSourceFor(itemTypes.COURSE),
-			},
-			React.createElement('ul', {className: 'warnings'}, warningEls),
-			courseInfo)
+		let classSet = cx('course', {
+			expanded: this.state.isOpen,
+			'has-warnings': hasWarnings,
+			'is-dragging': isDragging,
+		})
+
+		return <article {...this.dragSourceFor(itemTypes.COURSE)}
+			className={classSet}
+			onClick={this.toggleExpanded}>
+			<ul className='warnings'>{warningEls}</ul>
+			<CourseStyle {...this.props} />
+		</article>
 	},
 })
 
