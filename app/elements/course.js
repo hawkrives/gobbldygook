@@ -1,13 +1,13 @@
-import {_ as lodash, isNull} from 'lodash'
-import React from 'react/addons'
+import {_ as lodash} from 'lodash'
+import isNull from 'lodash/lang/isNull'
+import React from 'react'
+import cx from 'classnames'
 import {DragDropMixin} from 'react-dnd'
 
 import itemTypes from '../models/itemTypes'
 
 import ExpandedCourse from './expandedCourse'
 import CollapsedCourse from './collapsedCourse'
-
-let cx = React.addons.classSet
 
 let Course = React.createClass({
 	propTypes: {
@@ -74,18 +74,16 @@ let Course = React.createClass({
 			.value()
 
 		return React.createElement('article',
-			Object.assign(
-				{
-					className: cx({
-						course: true,
-						expanded: this.state.isOpen,
-						'has-warnings': hasWarnings,
-						'is-dragging': isDragging,
-					}),
-					onClick: this.toggle,
-				},
-				this.dragSourceFor(itemTypes.COURSE)),
-
+			{
+				className: cx({
+					course: true,
+					expanded: this.state.isOpen,
+					'has-warnings': hasWarnings,
+					'is-dragging': isDragging,
+				}),
+				onClick: this.toggle,
+				...this.dragSourceFor(itemTypes.COURSE),
+			},
 			React.createElement('ul', {className: 'warnings'}, warningEls),
 			courseInfo)
 	},

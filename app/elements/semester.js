@@ -1,10 +1,11 @@
-import {isUndefined, extend} from 'lodash'
+import isUndefined from 'lodash/lang/isUndefined'
 import {DragDropMixin} from 'react-dnd'
 import Promise from 'bluebird'
-import React from 'react/addons'
+import React from 'react'
 import {Link} from 'react-router'
 import {pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
+import cx from 'classnames'
 
 import {add, countCredits, semesterName, isCurrentSemester} from 'sto-helpers'
 import Course from './course'
@@ -12,8 +13,6 @@ import MissingCourse from './missingCourse'
 import EmptyCourseSlot from './emptyCourseSlot'
 import studentActions from '../flux/studentActions'
 import itemTypes from '../models/itemTypes'
-
-let cx = React.addons.classSet
 
 let Semester = React.createClass({
 	mixins: [DragDropMixin],
@@ -47,9 +46,7 @@ let Semester = React.createClass({
 		let activeSchedules = nextProps.student.activeSchedules
 		let schedule = activeSchedules.find((s) => s.year === this.props.year && s.semester === this.props.semester)
 
-		Promise.all([schedule.courses, schedule.validate()]).then((results) => {
-			let [courses, validation] = results
-
+		Promise.all([schedule.courses, schedule.validate()]).then(([courses, validation]) => {
 			this.setState({
 				schedule,
 				courses: Immutable.List(courses),
@@ -145,7 +142,7 @@ let Semester = React.createClass({
 		}
 
 		return React.createElement('div',
-			extend(semesterProps, this.dropTargetFor(itemTypes.COURSE)),
+			{...semesterProps, ...this.dropTargetFor(itemTypes.COURSE)},
 			React.createElement('header', {className: 'semester-title'},
 				React.createElement(Link,
 					{

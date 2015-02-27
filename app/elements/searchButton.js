@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link, State} from 'react-router'
-import {isObject, chain, map} from 'lodash'
+import {chain} from 'lodash'
+import isObject from 'lodash/lang/isObject'
+import map from 'lodash/collection/map'
 
 import {toPrettyTerm} from 'sto-helpers'
 import queryCourseDatabase from '../helpers/queryCourseDatabase'

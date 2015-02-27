@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React from 'react'
 
 import {expandYear} from 'sto-helpers'

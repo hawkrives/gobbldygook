@@ -1,8 +1,7 @@
-import React from 'react/addons'
+import React from 'react'
 import map from 'lodash/collection/map'
 import RequirementSet from './requirementSet'
-
-let cx = React.addons.classSet
+import cx from 'classnames'
 
 let makeRequirementSets = (props) => {
 	if (!props.areaResult)
