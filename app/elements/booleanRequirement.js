@@ -1,5 +1,5 @@
-import React from 'react/addons'
-let cx = React.addons.classSet
+import React from 'react'
+import cx from 'classnames'
 
 let BooleanRequirement = React.createClass({
 	propTypes: {

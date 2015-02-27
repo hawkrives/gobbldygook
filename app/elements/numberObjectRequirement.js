@@ -1,9 +1,9 @@
 import map from 'lodash/collection/map'
-import React from 'react/addons'
-let cx = React.addons.classSet
-let {PropTypes, createClass} = React
+import React from 'react'
+import cx from 'classnames'
+let {PropTypes} = React
 
-let NumberObjectRequirement = createClass({
+let NumberObjectRequirement = React.createClass({
 	propTypes: {
 		result: PropTypes.bool.isRequired,
 		details: PropTypes.shape({

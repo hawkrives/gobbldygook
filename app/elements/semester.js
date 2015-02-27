@@ -1,10 +1,11 @@
 import {isUndefined, extend} from 'lodash'
 import {DragDropMixin} from 'react-dnd'
 import Promise from 'bluebird'
-import React from 'react/addons'
+import React from 'react'
 import {Link} from 'react-router'
 import {pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
+import cx from 'classnames'
 
 import {add, countCredits, semesterName, isCurrentSemester} from 'sto-helpers'
 import Course from './course'
@@ -12,8 +13,6 @@ import MissingCourse from './missingCourse'
 import EmptyCourseSlot from './emptyCourseSlot'
 import studentActions from '../flux/studentActions'
 import itemTypes from '../models/itemTypes'
-
-let cx = React.addons.classSet
 
 let Semester = React.createClass({
 	mixins: [DragDropMixin],

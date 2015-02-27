@@ -1,13 +1,12 @@
 import {_ as lodash, isNull} from 'lodash'
-import React from 'react/addons'
+import React from 'react'
+import cx from 'classnames'
 import {DragDropMixin} from 'react-dnd'
 
 import itemTypes from '../models/itemTypes'
 
 import ExpandedCourse from './expandedCourse'
 import CollapsedCourse from './collapsedCourse'
-
-let cx = React.addons.classSet
 
 let Course = React.createClass({
 	propTypes: {

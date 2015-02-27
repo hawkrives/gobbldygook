@@ -1,6 +1,6 @@
 import map from 'lodash/collection/map'
-import React from 'react/addons'
-let cx = React.addons.classSet
+import React from 'react'
+import cx from 'classnames'
 let {PropTypes} = React
 
 let SomeArrayRequirement = React.createClass({
