@@ -23,19 +23,22 @@ let Semester = React.createClass({
 		semester: React.PropTypes.number.isRequired,
 	},
 
-	configureDragDrop(registerType) {
-		registerType(itemTypes.COURSE, {
-			dropTarget: {
-				acceptDrop(courseIdentifier) {
-					console.log('dropped courseIdentifier', courseIdentifier)
-					let {clbid, fromSchedule} = courseIdentifier
-					if (fromSchedule)
-						studentActions.moveCourse(this.props.student.id, fromSchedule, this.state.schedule.id, clbid)
-					else
-						studentActions.addCourse(this.props.student.id, this.state.schedule.id, clbid)
+	statics: {
+		configureDragDrop(registerType) {
+			registerType(itemTypes.COURSE, {
+				dropTarget: {
+					acceptDrop(component, droppedItem) {
+						console.log('dropped component', component)
+						let {clbid, fromSchedule} = droppedItem
+						let {state, props} = component
+						if (fromSchedule)
+							studentActions.moveCourse(props.student.id, fromSchedule, state.schedule.id, clbid)
+						else
+							studentActions.addCourse(props.student.id, state.schedule.id, clbid)
+					}
 				}
-			}
-		})
+			})
+		},
 	},
 
 	componentWillMount() {
