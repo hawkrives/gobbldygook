@@ -5,33 +5,37 @@ let CourseTitle = React.createClass({
 		info: React.PropTypes.shape({
 			title: React.PropTypes.string.isRequired,
 			name: React.PropTypes.string,
+			num: React.PropTypes.number,
+			dept: React.PropTypes.string,
+			sect: React.PropTypes.string,
 			type: React.PropTypes.string,
 		}),
 	},
 	render() {
 		let course = this.props.info
 
-		let titleText = course.title
+		let identifier = <span className='identifier'>
+			{`${course.dept} ${course.num}${course.sect || ''}`}
+		</span>
+
+		let title = course.title
 		let type = course.type
 		let courseName = course.name || course.title
 
-		if (course.type === 'Topic')
-			titleText = courseName.replace(/top.*: */gi, '')
+		if (type === 'Topic')
+			title = courseName.replace(/top.*: */gi, '')
 
 		let isIndependent = /^I[RS]/.test(courseName)
 		if (isIndependent) {
 			type = courseName.substr(0, 3)
 			if (courseName.length > 3)
-				titleText = courseName.substring(3)
+				title = courseName.substring(3)
 		}
 
-		let courseType = React.createElement('span', {className: 'type'}, type)
-		let title = React.createElement('h1',
-			{className: 'title'},
-			(type === 'Research' && !isIndependent) ? null : courseType,
-			titleText)
-
-		return title
+		return <h1 className='title'>
+			{identifier}
+			{title}
+		</h1>
 	},
 })
 
