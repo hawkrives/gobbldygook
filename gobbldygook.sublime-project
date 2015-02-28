@@ -5,7 +5,9 @@
 			"file_exclude_patterns": [ "*.woff" ],
 			"folder_exclude_patterns": [
 				".sass-cache",
-				"dist/data"
+				"dist/data",
+				"node_modules",
+				"dist/"
 			],
 			"path": "."
 		},
