@@ -1,0 +1,5 @@
+@mixin info-button {
+	&::after {
+		@include ionicon($ionicon-information-circled);
+	}
+}
