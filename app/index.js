@@ -7,8 +7,8 @@ Promise.longStackTraces()
 import React from 'react'
 React.initializeTouchEvents(true)
 
-import './helpers/startNotifications'
 import './helpers/bindKeys'
-import './helpers/startGlobalPollution'
-import './helpers/startDataLoading'
-import './helpers/startRouter'
+import './startThings/startNotifications'
+import './startThings/startGlobalPollution'
+import './startThings/startDataLoading'
+import './startThings/startRouter'

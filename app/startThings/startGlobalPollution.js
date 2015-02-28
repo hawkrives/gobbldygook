@@ -6,7 +6,7 @@ window.lodash = _
 window.log = (...args) => console.log(...args)
 
 import '../polyfills/details/Element.details'
-import stickyfill from  './initStickyfill'
+import stickyfill from  '../helpers/initStickyfill'
 stickyfill.init()
 
 import present from 'present'
