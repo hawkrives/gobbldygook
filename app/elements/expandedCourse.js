@@ -91,14 +91,22 @@ let ExpandedCourse = React.createClass({
 		}
 
 		let toolsEls = React.createElement('div',
-			{className: 'tools', onClick: (ev) => {ev.stopPropagation()}},
+			{className: 'tools'},
 			tools)
 
 		// /////
 
-		return React.createElement('div',
-			{className: 'info-rows'},
-			title, summary, details, toolsEls)
+		return <div>
+			<div className='info-wrapper'>
+				<div className='info-rows'>
+					{title}
+					{summary}
+				</div>
+				<button className='show-info' onClick={this.props.onClick} />
+			</div>
+			{details}
+			{toolsEls}
+		</div>
 	},
 })
 

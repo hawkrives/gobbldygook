@@ -65,7 +65,7 @@ let Course = React.createClass({
 	render() {
 		let isDragging = this.getDragState(itemTypes.COURSE).isDragging
 
-		let CourseStyle = this.state.isOpen ? ExpandedCourse : CollapsedCourse
+		let InnerCourse = this.state.isOpen ? ExpandedCourse : CollapsedCourse
 
 		let hasWarnings = this.props.conflicts.length
 		let warnings = this.props.conflicts[this.props.index]
@@ -81,11 +81,9 @@ let Course = React.createClass({
 			'is-dragging': isDragging,
 		})
 
-			// onClick={this.toggleExpanded}>
-		return <article {...this.dragSourceFor(itemTypes.COURSE)}
-			className={classSet}>
+		return <article className={classSet} {...this.dragSourceFor(itemTypes.COURSE)}>
 			<ul className='warnings'>{warningEls}</ul>
-			<CourseStyle {...this.props} />
+			<InnerCourse {...this.props} onClick={this.toggleExpanded} />
 		</article>
 	},
 })

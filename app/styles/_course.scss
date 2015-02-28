@@ -25,8 +25,6 @@
 		font-size: 1em;
 		font-weight: 500;
 		font-family: $heading-font-stack;
-
-		cursor: move;
 	}
 
 	.title, .description {
@@ -36,19 +34,14 @@
 	.summary {
 		font-size: 0.75em;
 
-		* + *::before {
+		& > * + *::before {
 			content: " · ";
 		}
 	}
 
 	.identifier {
 		font-feature-settings: 'tnum';
-
 	}
-
-	// .type + .gereqs::before {
-	// 	content: " · ";
-	// }
 
 	p, ul {
 		margin: 0;
@@ -83,13 +76,34 @@
 		font-size: 0.85em;
 	}
 
-	.offerings, .gereqs, .description {
+	.offerings, .description {
 		margin-bottom: 0.5em;
+	}
+
+	.info-wrapper {
+		display: flex;
+		.info-rows {
+			flex: 1;
+		}
+	}
+
+	.show-info {
+		display: none;
+	}
+
+	.is-selected & .show-info, &.expanded .show-info {
+		@include button--flat;
+		@include info-button;
+		// font-size: 0.85em;
+		&:focus {
+			color: color('blue', '400');
+		}
+		padding: 0 0.5em;
 	}
 }
 
 .course.expanded {
-	background-color: color('gray', '50');
+	// background-color: color('gray', '50');
 	color: $text-color;
 
 	.title {

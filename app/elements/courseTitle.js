@@ -7,6 +7,12 @@ let CourseTitle = React.createClass({
 			name: React.PropTypes.string,
 			type: React.PropTypes.string,
 		}),
+		onClick: React.PropTypes.func,
+	},
+	getDefaultProps() {
+		return {
+			onClick() {}
+		}
 	},
 	render() {
 		let course = this.props.info
@@ -25,7 +31,10 @@ let CourseTitle = React.createClass({
 				title = courseName.substring(3)
 		}
 
-		return <h1 className='title'>{title}</h1>
+		return <div>
+			<h1 className='title'>{title}</h1>
+
+		</div>
 	},
 })
 

@@ -6,6 +6,12 @@ import map from 'lodash/collection/map'
 let CollapsedCourse = React.createClass({
 	propTypes: {
 		info: React.PropTypes.object,
+		onClick: React.PropTypes.func,
+	},
+	getDefaultProps() {
+		return {
+			onClick() {}
+		}
 	},
 	render() {
 		let course = this.props.info
@@ -19,15 +25,18 @@ let CollapsedCourse = React.createClass({
 				)}
 			</ul>
 
-		return <div className='info-rows'>
-			<CourseTitle {...this.props} />
-			<div className='summary'>
-				<span className='identifier'>
-					{`${course.dept} ${course.num}${course.sect || ''}`}
-				</span>
-				<span className='type'>{course.type}</span>
-				{gereqs}
+		return <div className='info-wrapper'>
+			<div className='info-rows'>
+				<CourseTitle onClick={this.props.onClick} {...this.props} />
+				<div className='summary'>
+					<span className='identifier'>
+						{`${course.dept} ${course.num}${course.sect || ''}`}
+					</span>
+					<span className='type'>{course.type}</span>
+					{gereqs}
+				</div>
 			</div>
+			<button className='show-info' onClick={this.props.onClick} />
 		</div>
 	},
 })
