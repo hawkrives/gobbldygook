@@ -33,24 +33,22 @@
 		font-feature-settings: 'onum';
 	}
 
-	.type {
-		margin-right: 5px;
-	}
-
 	.summary {
 		font-size: 0.75em;
+
+		* + *::before {
+			content: " · ";
+		}
 	}
 
 	.identifier {
 		font-feature-settings: 'tnum';
-		&::after {
-			content: ": ";
-		}
+
 	}
 
-	.type + .gereqs::before {
-		content: " · ";
-	}
+	// .type + .gereqs::before {
+	// 	content: " · ";
+	// }
 
 	p, ul {
 		margin: 0;
@@ -62,24 +60,9 @@
 
 	.gereqs {
 		@include list-inline;
-		// padding: 0;
-		// list-style: none;
-
+		display: inline;
 		li {
-			// background-color: hsl(0, 0%, 90%);
-			// border-radius: 3px;
-			// display: inline-block;
-			// padding: 0 0.25em;
-			&::after {
-				content: ', ';
-			}
-
-			& + li {
-				margin-left: 0.25em;
-			}
-			&:last-child::after {
-				content: '';
-			}
+			display: inline;
 		}
 	}
 

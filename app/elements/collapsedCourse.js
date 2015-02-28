@@ -11,10 +11,6 @@ let CollapsedCourse = React.createClass({
 		let course = this.props.info
 		let courseName = course.name || course.title
 
-		let isIndependent = /^I[RS]/.test(courseName)
-		let typeEl = null
-		if (course.type === 'Research' && !isIndependent)
-			typeEl = <span className='type'>{course.type}</span>
 		let gereqs = null
 		if (course.gereqs)
 			gereqs = <ul className='gereqs'>
@@ -26,7 +22,11 @@ let CollapsedCourse = React.createClass({
 		return <div className='info-rows'>
 			<CourseTitle {...this.props} />
 			<div className='summary'>
-				{typeEl, gereqs}
+				<span className='identifier'>
+					{`${course.dept} ${course.num}${course.sect || ''}`}
+				</span>
+				<span className='type'>{course.type}</span>
+				{gereqs}
 			</div>
 		</div>
 	},
