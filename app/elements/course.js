@@ -81,9 +81,9 @@ let Course = React.createClass({
 			'is-dragging': isDragging,
 		})
 
+			// onClick={this.toggleExpanded}>
 		return <article {...this.dragSourceFor(itemTypes.COURSE)}
-			className={classSet}
-			onClick={this.toggleExpanded}>
+			className={classSet}>
 			<ul className='warnings'>{warningEls}</ul>
 			<CourseStyle {...this.props} />
 		</article>

@@ -33,28 +33,22 @@
 		font-feature-settings: 'onum';
 	}
 
-	.type {
-		font-feature-settings: 'smcp';
-		font-size: 0.8em;
-		background-color: color('gray', '200');
-		border-radius: 5px;
-		padding: 2px 4px;
-		margin-right: 5px;
-	}
-
 	.summary {
 		font-size: 0.75em;
+
+		* + *::before {
+			content: " · ";
+		}
 	}
 
 	.identifier {
 		font-feature-settings: 'tnum';
+
 	}
 
-	.identifier, .credits {
-		&::after {
-			content: " · ";
-		}
-	}
+	// .type + .gereqs::before {
+	// 	content: " · ";
+	// }
 
 	p, ul {
 		margin: 0;
@@ -65,18 +59,10 @@
 	}
 
 	.gereqs {
-		padding: 0;
-		list-style: none;
-
+		@include list-inline;
+		display: inline;
 		li {
-			background-color: hsl(0, 0%, 90%);
-			border-radius: 3px;
-			display: inline-block;
-			padding: 0 0.25em;
-
-			& + li {
-				margin-left: 0.25em;
-			}
+			display: inline;
 		}
 	}
 

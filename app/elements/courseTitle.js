@@ -11,27 +11,21 @@ let CourseTitle = React.createClass({
 	render() {
 		let course = this.props.info
 
-		let titleText = course.title
+		let title = course.title
 		let type = course.type
 		let courseName = course.name || course.title
 
-		if (course.type === 'Topic')
-			titleText = courseName.replace(/top.*: */gi, '')
+		if (type === 'Topic')
+			title = courseName.replace(/top.*: */gi, '')
 
 		let isIndependent = /^I[RS]/.test(courseName)
 		if (isIndependent) {
 			type = courseName.substr(0, 3)
 			if (courseName.length > 3)
-				titleText = courseName.substring(3)
+				title = courseName.substring(3)
 		}
 
-		let courseType = React.createElement('span', {className: 'type'}, type)
-		let title = React.createElement('h1',
-			{className: 'title'},
-			(type === 'Research' && !isIndependent) ? null : courseType,
-			titleText)
-
-		return title
+		return <h1 className='title'>{title}</h1>
 	},
 })
 

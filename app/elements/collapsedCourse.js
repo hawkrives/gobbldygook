@@ -1,6 +1,7 @@
 import React from 'react'
 import {oxford} from 'humanize-plus'
 import CourseTitle from './courseTitle'
+import map from 'lodash/collection/map'
 
 let CollapsedCourse = React.createClass({
 	propTypes: {
@@ -8,22 +9,26 @@ let CollapsedCourse = React.createClass({
 	},
 	render() {
 		let course = this.props.info
+		let courseName = course.name || course.title
 
-		let title = React.createElement(CourseTitle, this.props)
+		let gereqs = null
+		if (course.gereqs)
+			gereqs = <ul className='gereqs'>
+				{map(course.gereqs, (ge, idx) =>
+					<li key={ge + idx}>{ge}</li>
+				)}
+			</ul>
 
-		let identifier = React.createElement('span',
-			{className: 'identifier'},
-			course.dept, ' ', course.num, course.sect)
-
-		let professors = React.createElement('span',
-			{className: 'professors'},
-			oxford(course.profs))
-
-		let summary = React.createElement('p',
-			{className: 'summary'},
-			identifier, professors)
-
-		return React.createElement('div', {className: 'info-rows'}, title, summary)
+		return <div className='info-rows'>
+			<CourseTitle {...this.props} />
+			<div className='summary'>
+				<span className='identifier'>
+					{`${course.dept} ${course.num}${course.sect || ''}`}
+				</span>
+				<span className='type'>{course.type}</span>
+				{gereqs}
+			</div>
+		</div>
 	},
 })
 

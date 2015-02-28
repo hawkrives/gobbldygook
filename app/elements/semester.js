@@ -6,6 +6,7 @@ import {Link} from 'react-router'
 import {pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 import cx from 'classnames'
+import ReactListSelect from 'react-list-select'
 
 import {add, countCredits, semesterName, isCurrentSemester} from 'sto-helpers'
 import Course from './course'
@@ -125,7 +126,7 @@ let Semester = React.createClass({
 				.concat(emptySlots)
 				.toJS()
 
-			courseList = <div className='course-list'>{courseBlocks}</div>
+			courseList = <ReactListSelect multiple={true} className='course-list' items={courseBlocks} />
 		}
 		else if (this.state.schedule) {
 			courseList = <div className='loading-spinner'><div>Loading Courses&hellip;</div></div>
@@ -143,7 +144,7 @@ let Semester = React.createClass({
 			})
 		}
 
-		return <div {...semesterProps, ...this.dropTargetFor(itemTypes.COURSE)}>
+		return <div {...semesterProps} {...this.dropTargetFor(itemTypes.COURSE)}>
 			<header className='semester-title'>
 				<Link className='semester-header'
 					to='semester'
@@ -152,7 +153,7 @@ let Semester = React.createClass({
 						year: this.props.year,
 						semester: this.props.semester,
 					}}>
-					<h1>{semesterName(this.props.semester))}</h1>
+					<h1>{semesterName(this.props.semester)}</h1>
 					{infoBar}
 				</Link>
 				<button className='remove-semester'
