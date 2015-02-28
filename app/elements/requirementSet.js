@@ -50,7 +50,7 @@ let RequirementSet = React.createClass({
 		if (this.state.showDescription && this.state.descriptionHTML)
 			description = <div className='description' dangerouslySetInnerHTML={{__html: this.state.descriptionHTML}} />
 
-		let titlebar = <header onClick={this.toggleDescription}>{title, description}</header>
+		let titlebar = <header onClick={this.toggleDescription}>{title}{description}</header>
 
 		let details = null
 

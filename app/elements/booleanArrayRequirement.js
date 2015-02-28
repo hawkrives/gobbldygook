@@ -23,7 +23,7 @@ let BooleanArrayRequirement = React.createClass({
 							completed: req.result,
 							incomplete: !req.result,
 						})}>
-						(req.abbr || req.title)
+						{req.abbr || req.title}
 					</li>
 				)}
 			</ul>
