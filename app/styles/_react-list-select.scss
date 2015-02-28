@@ -1,20 +1,22 @@
 .react-list-select {
   @include list-unstyled;
 
-  &:focus .react-list-select--item.is-focused {
-    &::before, &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: #79B9FF;
-    }
-    &::before {
-      left: 0;
-    }
-    &::after {
-      right: 0;
+  &:focus, &:hover {
+    .react-list-select--item.is-focused {
+      &::before, &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: color('blue', '200');
+      }
+      &::before {
+        left: 0;
+      }
+      &::after {
+        right: 0;
+      }
     }
   }
 }
@@ -26,11 +28,11 @@
   user-select: none;
 
   &.is-selected {
-    background: rgba(215, 231, 255, 0.5);
+    background: color('blue', '50');
     user-select: inherit;
   }
   &.is-disabled {
-    color: #afafaf;
+    background: color('gray', '500');
     cursor: default;
   }
 }
