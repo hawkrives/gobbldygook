@@ -29,6 +29,7 @@ plugins:
   - eslint-plugin-react
 
 rules:
+  strict: 0
   guard-for-in: 2
   default-case: 2
   no-div-regex: 2
@@ -47,6 +48,8 @@ rules:
   comma-style: 0
   key-spacing: 0
   quotes: 0
+  curly: 0
+  no-comma-dangle: 0
   semi:
     - 2
     - never
