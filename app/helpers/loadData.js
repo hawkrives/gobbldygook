@@ -1,6 +1,37 @@
 import _ from 'lodash'
 import Promise from 'bluebird'
 
+function get(url) {
+	// Return a new promise.
+	return new Promise(function(resolve, reject) {
+		// Do the usual XHR stuff
+		var req = new XMLHttpRequest();
+		req.open('GET', url);
+
+		req.onload = function() {
+			// This is called even on 404 etc
+			// so check the status
+			if (req.status == 200) {
+				// Resolve the promise with the response text
+				resolve(req.response);
+			}
+			else {
+				// Otherwise reject with the status text
+				// which will hopefully be a meaningful error
+				reject(Error(req.statusText));
+			}
+		};
+
+		// Handle network errors
+		req.onerror = function() {
+			reject(Error("Network Error"));
+		};
+
+		// Make the request
+		req.send();
+	});
+}
+
 import notificationActions from '../flux/notificationActions'
 import {status, json} from './fetchHelpers'
 import db from './db'
@@ -145,9 +176,8 @@ function updateDatabase(itemType, infoFromServer, notificationId, count) {
 
 	if (logDataLoading)  console.log('need to add ' + itemUrl)
 
-	return fetch(itemUrl)
-		.then(status)
-		.then(json)
+	return get(itemUrl)
+		.then(resp => JSON.parse(resp))
 		.then((data) => {
 			return {
 				data: data,
