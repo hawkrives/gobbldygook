@@ -81,7 +81,8 @@ let GraduationStatus = React.createClass({
 			}).toJS()
 
 		return <section className='graduation-status'>
-			{summary, sections}
+			{summary}
+			{sections}
 		</section>
 	},
 })
