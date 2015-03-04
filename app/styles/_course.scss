@@ -57,6 +57,9 @@
 		li {
 			display: inline;
 		}
+		li + li::before {
+			content: " · ";
+		}
 	}
 
 	.tools {
