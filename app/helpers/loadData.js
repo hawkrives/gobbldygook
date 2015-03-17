@@ -147,8 +147,9 @@ function updateDatabase(itemType, infoFromServer, notificationId, count) {
 
 	if (logDataLoading)  console.log('need to add ' + itemUrl)
 
-	return get(itemUrl)
-		.then(resp => JSON.parse(resp))
+	return fetch(itemUrl)
+		.then(status)
+		.then(json)
 		.then((data) => {
 			return {
 				data: data,
