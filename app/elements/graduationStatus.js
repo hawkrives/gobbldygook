@@ -7,10 +7,14 @@ import StudentSummary from '../elements/studentSummary'
 
 import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
-let GraduationStatus = React.createClass({
-	propTypes: {
-		student: React.PropTypes.object.isRequired,
-	},
+class GraduationStatus extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			graduatability: null,
+			areaDetails: Immutable.List(),
+		}
+	}
 
 	componentWillReceiveProps(nextProps) {
 		let graduatabilityPromise = checkStudentGraduatability(nextProps.student)
@@ -19,24 +23,11 @@ let GraduationStatus = React.createClass({
 			let {graduatability, areaDetails} = graduationStatus
 			this.setState({graduatability, areaDetails})
 		})
-	},
+	}
 
 	componentWillMount() {
 		this.componentWillReceiveProps(this.props)
-	},
-
-	getInitialState() {
-		return {
-			graduatability: null,
-			areaDetails: Immutable.List(),
-		}
-	},
-
-	getDefaultProps: function() {
-		return {
-			sections: []
-		}
-	},
+	}
 
 	render() {
 		// console.info('graduation-status render', this.props.student)
@@ -85,7 +76,15 @@ let GraduationStatus = React.createClass({
 			{summary}
 			{sections}
 		</section>
-	},
-})
+	}
+}
+
+GraduationStatus.propTypes = {
+	student: React.PropTypes.object.isRequired,
+}
+
+GraduationStatus.defaultProps = {
+	sections: []
+}
 
 export default GraduationStatus
