@@ -15,17 +15,17 @@ let Notifications = React.createClass({
 
 	getInitialState() {
 		return {
-			notifications: Immutable.List(),
+			notifications: Immutable.Map(),
 		}
 	},
 
 	render() {
-		// console.log('notifications', this.state.notifications.toJS())
+		console.log('notifications', this.state.notifications.toJS())
 		let notificationElements = this.state.notifications
-			.map((n) => React.createElement(Notification, Object.assign(n, {key: n.id})))
+			.map(n => <Notification key={n.id} {...n} />)
 			.toArray()
 
-		return React.createElement('ul', {className: 'notification-list'}, notificationElements)
+		return <ul className='notification-list'>{notificationElements}</ul>
 	},
 })
 
