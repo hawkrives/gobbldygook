@@ -28,13 +28,17 @@ rules:
   no-eq-null: 2
   wrap-iife: 2
   no-undef-init: 0
+  no-unused-vars: 1
+  no-console: 0
+  no-underscore-dangle: 0
   strict: [1, never]
 
   # es6
   no-var: 2
   generator-star-spacing: [2, start]
 
-  # stylistic issues - we're turning off all of these, to let JSCS handle them
+  # stylistic issues
+  new-cap: 0
   indent: [1, tab]
   camelcase: 2
   comma-style: [1, last]
@@ -50,3 +54,4 @@ rules:
   react/prop-types: 1  # prevent missing proptypes in a react component definition
   react/wrap-multilines: 1  # prevent missing parentheses around multilines jsx
   react/self-closing-comp: 1  # prevent extra closing tags for components without children
+  react/wrap-multilines: 0
