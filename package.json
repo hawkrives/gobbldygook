@@ -64,8 +64,8 @@
     "reflux": "^0.2.7",
     "stickyfill": "^1.1.1",
     "sto-areas": "^2.3.8",
-    "sto-courses": "^3.0.5",
-    "sto-helpers": "^4.2.4",
+    "sto-courses": "^3.1.0",
+    "sto-helpers": "^4.2.5",
     "sto-sis-time-parser": "^2.0.0",
     "treo": "^0.4.3",
     "whatwg-fetch": "^0.7.0"
