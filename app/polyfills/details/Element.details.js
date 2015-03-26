@@ -1,5 +1,4 @@
 ﻿// Originally from https://github.com/termi/Element.details
-
 // HTMLElement.prototype.insertAdjacentHTML = https://gist.github.com/1276030
 
 import {forEach} from 'lodash'
@@ -19,31 +18,12 @@ function insertStyles() {
 	'</style>')
 }
 
-// property 'open'
-let openProperty = {
-	get: function() {
-		if (!('nodeName' in this) || this.nodeName.toUpperCase() != 'DETAILS')
-			return void 0
-
-		return this.hasAttribute('open')
-	},
-	set: function(booleanValue) {
-		if (!('nodeName' in this) || this.nodeName.toUpperCase() != 'DETAILS')
-			return void 0
-
-		detailsShim(this)
-
-		this.classList[booleanValue ? 'add' : 'remove']('▼')
-		this[booleanValue ? 'setAttribute' : 'removeAttribute']('open', 'open')
-
-		return booleanValue
-	},
-}
-
 // event
 function eventDetailClick(ev) {
-	if (ev.detail === 0) // Opera generate 'click' event with `detail` == 0 together with 'keyup' event
+	if (ev.detail === 0) {
+		// Opera generate 'click' event with `detail` == 0 together with 'keyup' event
 		return
+	}
 
 	// 32 - space. Need this ???
 	// 13 - Enter.
@@ -55,7 +35,7 @@ function eventDetailClick(ev) {
 
 // details shim
 function detailsShim(details) {
-	if (details._ && details._.__isShimmed) {
+	if (details._ && details._._isShimmed) {
 		return
 	}
 
@@ -73,14 +53,15 @@ function detailsShim(details) {
 
 			details.removeChild(child)
 		}
-		else if (child.nodeName.toUpperCase() == 'SUMMARY') {
+		else if (child.nodeName.toUpperCase() === 'SUMMARY') {
 			summary = child
 		}
 	})
 
 	// Create a fake 'summary' element
 	if (!summary) {
-		(summary = document.createElement('x-s')).innerHTML = 'Details',
+		summary = document.createElement('x-s')
+		summary.innerHTML = 'Details'
 		summary.className = '▼▼' // http://css-tricks.com/unicode-class-names/
 	}
 
@@ -98,7 +79,30 @@ function detailsShim(details) {
 	summary.addEventListener('keyup', eventDetailClick, false)
 
 	// flag to avoid double shim
-	details._.__isShimmed = true
+	details._._isShimmed = true
+}
+
+// property 'open'
+let openProperty = {
+	get: function() {
+		if (!('nodeName' in this) || this.nodeName.toUpperCase() !== 'DETAILS') {
+			return void 0
+		}
+
+		return this.hasAttribute('open')
+	},
+	set: function(booleanValue) {
+		if (!('nodeName' in this) || this.nodeName.toUpperCase() !== 'DETAILS') {
+			return void 0
+		}
+
+		detailsShim(this)
+
+		this.classList[booleanValue ? 'add' : 'remove']('▼')
+		this[booleanValue ? 'setAttribute' : 'removeAttribute']('open', 'open')
+
+		return booleanValue
+	},
 }
 
 // init
@@ -118,7 +122,7 @@ function start() {
 		insertStyles()
 
 		// auto init
-		if (document.readyState != 'complete') {
+		if (document.readyState !== 'complete') {
 			document.addEventListener('DOMContentLoaded', init, false)
 		}
 		else {
