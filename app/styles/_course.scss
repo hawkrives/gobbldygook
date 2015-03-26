@@ -33,7 +33,8 @@
 
 	.summary {
 		font-size: 0.75em;
-
+	}
+	.summary, .info {
 		& > * + *::before {
 			content: " · ";
 		}
