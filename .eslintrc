@@ -35,7 +35,6 @@ rules:
 
   # es6
   no-var: 2
-  generator-star-spacing: [2, start]
 
   # stylistic issues
   new-cap: 0
