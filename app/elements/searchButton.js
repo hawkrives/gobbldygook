@@ -3,6 +3,7 @@ import {Link, State} from 'react-router'
 import {chain} from 'lodash'
 import isObject from 'lodash/lang/isObject'
 import map from 'lodash/collection/map'
+import present from 'present'
 
 import {toPrettyTerm} from 'sto-helpers'
 import queryCourseDatabase from '../helpers/queryCourseDatabase'
