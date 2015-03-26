@@ -102,7 +102,7 @@ class Schedule extends ScheduleRecord {
 	validate() {
 		// Checks to see if the schedule is valid
 		return this.courses
-			 // only check the courses that have data
+			// only check the courses that have data
 			.then(courses => reject(courses, isUndefined))
 			// Step one: do any times conflict?
 			.then((courses) => findWarnings(courses, this.toJS()))

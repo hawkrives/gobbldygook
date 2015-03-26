@@ -49,7 +49,7 @@ let StudentList = React.createClass({
 			.toJS()
 
 		let buttons = React.createElement('menu', {className: 'student-list-buttons'}, [
-			React.createElement('button'/*DropdownMenu*/, {
+			React.createElement('button', {
 				key: 'student-list-button--sort-by',
 				className: 'student-list-button--sort-by',
 				items: [
@@ -61,7 +61,7 @@ let StudentList = React.createClass({
 				],
 			}, 'Sort'),
 
-			React.createElement('button'/*DropdownMenu*/, {
+			React.createElement('button', {
 				key: 'student-list-button--group-by',
 				className: 'student-list-button--group-by',
 				items: [

@@ -138,13 +138,13 @@ function updateDatabase(itemType, infoFromServer, notificationId, count) {
 	let itemUrl = `./data/${itemType}/${infoFromServer.path}?v=${newHash}`
 
 	if (newHash === oldHash) {
-		if (logDataLoading)  console.log('skipped ' + itemUrl)
+		if (logDataLoading) console.log('skipped ' + itemUrl)
 		return Promise.resolve(false)
 	}
 
 	startProgressNotification(notificationId, itemType, count)
 
-	if (logDataLoading)  console.log('need to add ' + itemUrl)
+	if (logDataLoading) console.log('need to add ' + itemUrl)
 
 	return fetch(itemUrl)
 		.then(status)
