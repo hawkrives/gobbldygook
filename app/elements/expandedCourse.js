@@ -39,7 +39,7 @@ let ExpandedCourse = React.createClass({
 
 		let professors = React.createElement('span',
 			{className: 'professors'},
-			oxford(course.profs))
+			oxford(course.instructors))
 
 		let summary = React.createElement('p',
 			{className: 'summary'},
