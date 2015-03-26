@@ -14,17 +14,15 @@ function findSemesterList() {
 	]
 }
 
-let ExpandedCourse = React.createClass({
-	propTypes: {
-		info: React.PropTypes.object.isRequired,
-		student: React.PropTypes.object.isRequired,
-		schedule: React.PropTypes.object.isRequired,
-		onClick: React.PropTypes.func.isRequired,
-	},
+class ExpandedCourse extends React.Component {
+	constructor(props) {
+		super(props)
+		this.removeFromSemester = this.removeFromSemester.bind(this)
+	}
 
 	removeFromSemester() {
 		studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.info.clbid)
-	},
+	}
 
 	render() {
 		let course = this.props.info
@@ -32,68 +30,66 @@ let ExpandedCourse = React.createClass({
 
 		// /////
 
-		let title = React.createElement(CourseTitle, this.props)
+		let title = <CourseTitle {...this.props} />
 
-		let identifier = React.createElement('span',
-			{className: 'identifier'},
-			course.dept, ' ', course.num, course.sect)
+		let identifier = <span className='identifier'>
+			{course.dept} {course.num}{course.sect}
+		</span>
 
-		let professors = React.createElement('span',
-			{className: 'professors'},
-			oxford(course.instructors))
+		let professors = <span className='professors'>
+			{oxford(course.instructors)}
+		</span>
 
-		let summary = React.createElement('p',
-			{className: 'summary'},
-			identifier, professors)
-
-		// /////
-
-		let offerings = React.createElement('p',
-			{className: 'offerings'},
-			map(course.times,
-				(time, idx) => React.createElement('span', {key: time + idx}, time)))
-
-		let gereqs = React.createElement('ul',
-			{className: 'gereqs'},
-			map(course.gereqs,
-				(ge, idx) => React.createElement('li', {key: ge + idx}, ge)))
-
-		let description = React.createElement('p',
-			{className: 'description'},
-			course.desc)
-
-		let credits = React.createElement('span',
-			{className: 'credits'},
-			`${course.credits} ${pluralize(course.credits, 'credit')}`)
-
-		let classInstanceOffered = React.createElement('span',
-			{className: 'instance'},
-			`${semesterName(course.semester)} ${course.year}`)
-
-		let info = React.createElement('p',
-			{className: 'info'},
-			credits, classInstanceOffered)
-
-		let details = React.createElement('div',
-			{className: 'details'},
-			offerings, gereqs, description, info)
+		let summary = <p className='summary'>
+			{identifier}{professors}
+		</p>
 
 		// /////
 
-		let semesterList = React.createElement('select',
-			{className: 'semester-select', key: 'semester-select'},
-			map(findSemesterList(), (s =>
-				React.createElement('option', {value: s.id, key: s.id}, s.title))))
+		let offerings = <p className='offerings'>
+			{map(course.times, (time, idx) => <span key={time + idx}>{time}</span>)}
+		</p>
+
+		let gereqs = <ul className='gereqs'>
+			{map(course.gereqs, (ge, idx) => <li key={ge + idx}>{ge}</li>)}
+		</ul>
+
+		let description = <p className='description'>{course.desc}</p>
+
+		let credits = <span className='credits'>
+			{`${course.credits} ${pluralize(course.credits, 'credit')}`}
+		</span>
+
+		let classInstanceOffered = <span className='instance'>
+			{`${semesterName(course.semester)} ${course.year}`}
+		</span>
+
+		let info = <p className='info'>
+			{credits}
+			{classInstanceOffered}
+		</p>
+
+		let details = <div className='details'>
+			{offerings}
+			{gereqs}
+			{description}
+			{info}
+		</div>
+
+		// /////
+
+		let semesterList = <select className='semester-select' key='semester-select'>
+			{map(findSemesterList(), (s =>
+				<option value={s.id} key={s.id}>{s.title}</option>))}
+		</select>
 		tools.push(semesterList)
 
-		let deleteButton = React.createElement('button', {className: 'remove-course', onClick: this.removeFromSemester, key: 'remove-course'}, 'Remove Course')
 		if (this.props.schedule) {
+			let deleteButton = <button className='remove-course' onClick={this.removeFromSemester} key='remove-course'>Remove Course</button>
 			tools.push(deleteButton)
 		}
 
-		let toolsEls = React.createElement('div',
-			{className: 'tools'},
-			tools)
+		let toolsEls = <div className='tools'>{tools}</div>
 
 		// /////
 
@@ -108,7 +104,14 @@ let ExpandedCourse = React.createClass({
 			{details}
 			{toolsEls}
 		</div>
-	},
-})
+	}
+}
+
+ExpandedCourse.propTypes = {
+	info: React.PropTypes.object.isRequired,
+	student: React.PropTypes.object.isRequired,
+	schedule: React.PropTypes.object.isRequired,
+	onClick: React.PropTypes.func.isRequired,
+}
 
 export default ExpandedCourse
