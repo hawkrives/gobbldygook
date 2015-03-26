@@ -8,6 +8,11 @@ import studentActions from '../flux/studentActions'
 import {isCurrentYear, expandYear, findFirstAvailableSemester, calculateNextScheduleId} from 'sto-helpers'
 
 let Year = React.createClass({
+	propTypes: {
+		student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
+		year: React.PropTypes.number.isRequired,
+	},
+
 	canAddSemester() {
 		return findFirstAvailableSemester(this.props.student.schedules, this.props.year) <= 5
 	},

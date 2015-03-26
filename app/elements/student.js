@@ -1,10 +1,15 @@
 import React from 'react'
 import {State, RouteHandler} from 'react-router'
+import Immutable from 'immutable'
 
 import Sidebar from './sidebar'
 
 let Student = React.createClass({
 	mixins: [State],
+
+	propTypes: {
+		students: React.PropTypes.instanceOf(Immutable.List).isRequired,
+	},
 
 	getInitialState: function() {
 		let queryId = this.getParams().id

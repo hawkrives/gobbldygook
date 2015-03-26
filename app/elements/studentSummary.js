@@ -12,6 +12,7 @@ let badGraduationMessage = "You haven't planned everything out yet. Ask your adv
 let StudentSummary = React.createClass({
 	propTypes: {
 		student: React.PropTypes.object.isRequired,
+		graduatability: React.PropTypes.bool.isRequired,
 	},
 
 	updateStudentName(ev) {

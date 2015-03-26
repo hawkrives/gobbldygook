@@ -16,9 +16,10 @@ function findSemesterList() {
 
 let ExpandedCourse = React.createClass({
 	propTypes: {
-		info: React.PropTypes.object,
-		student: React.PropTypes.object,
-		schedule: React.PropTypes.object,
+		info: React.PropTypes.object.isRequired,
+		student: React.PropTypes.object.isRequired,
+		schedule: React.PropTypes.object.isRequired,
+		onClick: React.PropTypes.func.isRequired,
 	},
 
 	removeFromSemester() {

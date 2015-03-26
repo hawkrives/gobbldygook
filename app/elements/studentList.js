@@ -1,8 +1,13 @@
 import React from 'react'
+import Immutable from 'immutable'
 import {Link} from 'react-router'
 import studentActions from '../flux/studentActions'
 
 let StudentList = React.createClass({
+	propTypes: {
+		students: React.PropTypes.instanceOf(Immutable.List).isRequired,
+	},
+
 	handleSubmit(ev) {
 		ev.preventDefault()
 	},
