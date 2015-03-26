@@ -2,16 +2,6 @@
 // let db = treo('databaseName', schema)
 //   .use(queryTreoDatabase)
 
-function plugin(db, treo) {
-	let {Store, Index} = treo
-
-	Store.prototype.query = queryStore
-	Index.prototype.query = queryIndex
-}
-
-export default plugin
-
-
 import {
 	any,
 	contains,
@@ -231,3 +221,12 @@ function queryIndex(query, primaryKeysOnly=false) {
 		this.cursor({range, iterator: iterateIndex}, done)
 	})
 }
+
+function plugin(db, treo) {
+	let {Store, Index} = treo
+
+	Store.prototype.query = queryStore
+	Index.prototype.query = queryIndex
+}
+
+export default plugin

@@ -24,7 +24,9 @@ let ContentEditable = React.createClass({
 		let value = ev.target.value
 
 		if (this.props.onChange && value !== this.state.content) {
-			this.debounce = this.debounce || debounce((value) => {this.props.onChange({target: {value}})}, 500, {'maxWait': 1000})
+			this.debounce = this.debounce || debounce((value) => {
+				this.props.onChange({target: {value}})
+			}, 500, {'maxWait': 1000})
 			this.debounce(value)
 		}
 

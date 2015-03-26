@@ -1,13 +1,5 @@
 import Promise from 'bluebird'
 
-function plugin(db, treo) {
-	let {Store} = treo
-
-	Store.prototype.batchGet = batchGet
-}
-
-export default plugin
-
 function batchGet(keys) {
 	if (!keys.length) {
 		return Promise.resolve([])
@@ -26,8 +18,9 @@ function batchGet(keys) {
 			let results = []
 
 			tr.onerror = tr.onabort = reject
-			tr.oncomplete = function oncomplete() { resolve(results) }
-			next()
+			tr.oncomplete = function oncomplete() {
+				resolve(results)
+			}
 
 			function next() {
 				if (current >= keys.length) {
@@ -44,6 +37,16 @@ function batchGet(keys) {
 					next()
 				}
 			}
+
+			next()
 		})
 	})
 }
+
+function plugin(db, treo) {
+	let {Store} = treo
+
+	Store.prototype.batchGet = batchGet
+}
+
+export default plugin
