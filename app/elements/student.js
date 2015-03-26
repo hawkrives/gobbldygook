@@ -8,7 +8,7 @@ let Student = React.createClass({
 	mixins: [State],
 
 	propTypes: {
-		students: React.PropTypes.instanceOf(Immutable.List).isRequired,
+		students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 	},
 
 	getInitialState: function() {
