@@ -172,7 +172,7 @@ class Student extends StudentRecord {
 	}
 
 	removeMultipleAreas(ids) {
-		Seq(ids).forEach(this.removeArea, this)
+		Immutable.Seq(ids).forEach(this.removeArea, this)
 	}
 
 
