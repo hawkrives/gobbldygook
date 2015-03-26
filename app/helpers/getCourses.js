@@ -16,7 +16,7 @@ async function getCourses(clbids) {
 
 	// console.log('called getCourses', clbids)
 	if (Immutable.List.isList(clbids)) {
-		clbids = clbids.toJS()
+		clbids = clbids.toArray()
 	}
 
 	return await* map(clbids, getCourse)
