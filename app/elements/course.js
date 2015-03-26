@@ -65,7 +65,9 @@ let Course = React.createClass({
 	render() {
 		let isDragging = this.getDragState(itemTypes.COURSE).isDragging
 
+		/*eslint-disable no-unused-vars */
 		let InnerCourse = this.state.isOpen ? ExpandedCourse : CollapsedCourse
+		/*eslint-enable no-unused-vars */
 
 		let hasWarnings = this.props.conflicts.length
 		let warnings = this.props.conflicts[this.props.index]
