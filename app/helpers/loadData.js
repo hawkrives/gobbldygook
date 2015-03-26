@@ -38,7 +38,7 @@ function storeCourses(item) {
 	console.log('storing courses')
 	let start = present()
 
-	let coursesToStore = _.map(item.data.courses, (course) => {
+	let coursesToStore = _.map(item.data, (course) => {
 		course.sourcePath = item.meta.path
 		return prepareCourse(course)
 	})
