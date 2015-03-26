@@ -70,7 +70,7 @@ class GraduationStatus extends React.Component {
 					{areaTypeHeading}
 					{areaElements}
 				</section>
-			}).toJS()
+			}).toArray()
 
 		return <section className='graduation-status'>
 			{summary}
