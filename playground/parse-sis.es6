@@ -317,30 +317,6 @@ function findAreasOfStudy(areas, degreeType) {
 class NoComboPossible extends Error {}
 
 function createSchedules(courses) {
-	// let terms = _.chain(courses).pluck('term').uniq().value()
-	// let grouped = _.groupBy(courses, 'term')
-	// let id = 1;
-	// let schedules = _.map(terms, (t) => {
-		// let sched = {
-		// 	id: id++,
-		// 	year: Math.floor(t / 10),
-		// 	sem: t % 10,
-		// 	title: 'Schedule 1',
-		// 	index: 1,
-		// 	active: true,
-		// 	clbids: [],
-		// 	raw_courses: grouped[t]
-		// }
-		// _.each(sched.courses, (course, i) => {
-			// attempt 1
-			// let attemptToFindCourse = queryCourses({name: course.name, term: course.term, deptnum: course.deptnum})
-			// if (attemptToFindCourse) {
-				// clbids.push(attemptToFindCourse.clbid)
-			// }
-		// })
-		// return sched
-	// })
-	//searchForCourseMatches(schedules[0])
 	let [terms, groupedCourses] = _(courses)
 		.groupBy('term')
 		.pairs()
@@ -379,47 +355,52 @@ function createSchedules(courses) {
 
 window.findScheduleFromCourses = findScheduleFromCourses
 
-function findScheduleFromCourses(courses) {
+async function findScheduleFromCourses(courses) {
 	// find all matches for each course
 	let queryableCourses = _.map(courses, prepareCourseForQuery)
 	// console.log(`queryableCourses for ${courses[0].term}`, queryableCourses)
 	let matchPromises = _.map(queryableCourses, searchForCourseMatches)
 
-	return Promise
-		.all(matchPromises)
-		.then((matches) => new Promise((resolve, reject) => {
-			let start =  performance.now()
-			matches = _.flatten(matches)
-			// console.log(`individual results for ${courses[0].term}`, matches)
-			if (!matches.length) {
-				reject(new NoComboPossible())
-			}
-			// use combinations generator to iterate through all combos of matches
-			let foundCombo = undefined
-			for (let combo of comb(matches, courses.length)) {
-				// console.log(`${performance.now() - start}ms started combo`, _.pluck(combo, 'name'))
-				// check each combo for time conflicts and existence of each deptnum
-				// let start1 = performance.now()
-				if (!comboHasCourses(queryableCourses, combo)) {
-					// console.log(`combo did not have course`)
-					continue
-				}
-				// console.log(`combo had course, after ${performance.now() - start1}`)
-				// let start2 = performance.now()
-				if (checkScheduleForTimeConflicts(combo)) {
-					// console.log(`combo had time conflict`, checkScheduleForTimeConflicts(combo))
-					continue
-				}
-				// console.log(`combo had no time conflicts, after ${performance.now() - start2}`)
-				foundCombo = combo
-				break
-			}
-			if (foundCombo) {
-				// console.log(`${performance.now() - start}ms finished combo for ${courses[0].term}`, foundCombo)
-				resolve(foundCombo)
-			}
-			reject(new NoComboPossible(JSON.stringify(matches)))
-		}))
+	let matches = await* matchPromises
+
+	let start =  performance.now()
+	matches = _.flatten(matches)
+
+	// console.log(`individual results for ${courses[0].term}`, matches)
+	if (!matches.length) {
+		throw new NoComboPossible()
+	}
+
+	// use combinations generator to iterate through all combos of matches
+	let foundCombo = undefined
+
+	for (let combo of comb(matches, courses.length)) {
+		// console.log(`${performance.now() - start}ms started combo`, _.pluck(combo, 'name'))
+		// check each combo for time conflicts and existence of each deptnum
+		// let start1 = performance.now()
+		if (!comboHasCourses(queryableCourses, combo)) {
+			// console.log(`combo did not have course`)
+			continue
+		}
+		// console.log(`combo had course, after ${performance.now() - start1}`)
+		// let start2 = performance.now()
+		if (checkScheduleForTimeConflicts(combo)) {
+			// console.log(`combo had time conflict`, checkScheduleForTimeConflicts(combo))
+			continue
+		}
+		// console.log(`combo had no time conflicts, after ${performance.now() - start2}`)
+		foundCombo = combo
+		break
+	}
+
+	if (foundCombo) {
+		// console.log(`${performance.now() - start}ms finished combo for ${courses[0].term}`, foundCombo)
+		return foundCombo
+	}
+	else {
+
+		throw new NoComboPossible(JSON.stringify(matches))
+	}
 }
 
 function comboHasCourses(courses, combinationOfClasses) {
