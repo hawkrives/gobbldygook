@@ -3,8 +3,8 @@ import React from 'react'
 let CourseTitle = React.createClass({
 	propTypes: {
 		info: React.PropTypes.shape({
-			title: React.PropTypes.string.isRequired,
-			name: React.PropTypes.string,
+			title: React.PropTypes.string,
+			name: React.PropTypes.string.isRequired,
 			type: React.PropTypes.string,
 		}),
 		onClick: React.PropTypes.func,
@@ -17,24 +17,23 @@ let CourseTitle = React.createClass({
 	render() {
 		let course = this.props.info
 
-		let title = course.title
 		let type = course.type
-		let courseName = course.name || course.title
+		let isIndependent = /^I[RS]/.test(course.name)
 
-		if (type === 'Topic')
-			title = courseName.replace(/top.*: */gi, '')
+		let courseName = course.title || course.name
 
-		let isIndependent = /^I[RS]/.test(courseName)
 		if (isIndependent) {
+			courseName = course.name
 			type = courseName.substr(0, 3)
 			if (courseName.length > 3)
-				title = courseName.substring(3)
+				courseName = courseName.substring(3)
+		}
+		else if (type === 'Topic') {
+			courseName = course.name
+			courseName = courseName.replace(/top.*: */gi, '')
 		}
 
-		return <div>
-			<h1 className='title'>{title}</h1>
-
-		</div>
+		return <h1 className='title'>{courseName}</h1>
 	},
 })
 
