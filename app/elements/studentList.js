@@ -5,7 +5,7 @@ import studentActions from '../flux/studentActions'
 
 let StudentList = React.createClass({
 	propTypes: {
-		students: React.PropTypes.instanceOf(Immutable.List).isRequired,
+		students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 	},
 
 	handleSubmit(ev) {
