@@ -37,7 +37,7 @@ let noResult = (id) => {
  * @fulfill {Object} - The details of the area check.
  */
 function checkStudentAgainstArea(student, area) {
-	let {id, title, type, check, abbr} = area
+	let {id, title, type, check} = area
 
 	if (type === 'not-found' || check === undefined) {
 		return noResult(id)

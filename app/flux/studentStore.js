@@ -121,7 +121,7 @@ let studentStore = Reflux.createStore({
 			// and any that are bad
 			.reject(rawStudent => rawStudent === '[object Object]')
 			// then process them
-			.map((rawStudent, idx) => {
+			.map((rawStudent) => {
 				// basicStudent defaults to an empty object so that the constructor
 				// has something to build from.
 				let basicStudent = {}

@@ -94,7 +94,7 @@ let SearchButton = React.createClass({
 		this.setState({results: [], hasQueried: false})
 		let startQueryTime = present()
 
-		let query = queryCourseDatabase(searchQuery)
+		queryCourseDatabase(searchQuery)
 			.then(results => [results, startQueryTime])
 			.then(this.processQueryResults)
 			.catch(err => console.error(err))

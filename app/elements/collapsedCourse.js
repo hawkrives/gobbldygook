@@ -15,7 +15,6 @@ let CollapsedCourse = React.createClass({
 	},
 	render() {
 		let course = this.props.info
-		let courseName = course.name || course.title
 
 		let gereqs = null
 		if (course.gereqs) {

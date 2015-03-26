@@ -1,8 +1,6 @@
 import _ from 'lodash'
 import Promise from 'bluebird'
 
-import get from './get'
-
 import notificationActions from '../flux/notificationActions'
 import {status, json} from './fetchHelpers'
 import db from './db'
@@ -44,7 +42,7 @@ function storeCourses(item) {
 	})
 
 	return db.store('courses').batch(coursesToStore)
-		.then((results) => {
+		.then(() => {
 			let end = present()
 			console.log(`Stored ${_.size(coursesToStore)} courses in ${end - start}ms.`)
 			return item
@@ -61,7 +59,7 @@ function storeArea(item) {
 	area.sourcePath = item.meta.path
 
 	return db.store('areas').put(area)
-		.then((results) => {
+		.then(() => {
 			return item
 		})
 		.catch((records, err) => {
@@ -103,7 +101,7 @@ function cleanPriorData(item) {
 }
 
 function cacheItemHash(item) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		console.info(item.meta.path + ' called cacheItemHash')
 		localStorage.setItem(item.meta.path, item.meta.hash)
 		resolve(item)
@@ -125,12 +123,12 @@ let startProgressNotification = _.curry((notificationId, itemType, count) => {
 	notificationActions.startProgress(notificationId, `Loading ${itemType}`, {max: count}, true)
 })
 
-let updateProgressNotification = _.curry((notificationId, item) => {
+let updateProgressNotification = _.curry((notificationId) => {
 	notificationActions.incrementProgress(notificationId)
 })
 
-let completeProgressNotification = _.curry((notificationId, x) => {
-	notificationActions.removeNotification(notificationId, 1500)
+let completeProgressNotification = _.curry((notificationId, time=1500) => {
+	notificationActions.removeNotification(notificationId, time)
 })
 
 function updateDatabase(itemType, infoFromServer, notificationId, count) {
@@ -184,7 +182,9 @@ function loadDataFiles(infoFile) {
 
 function loadInfoFile(url) {
 	console.log('loading ' + url)
-	return get(url)
+	return fetch(url)
+		.then(status)
+		.then(json)
 		.then(resp => JSON.parse(resp))
 		.then(loadDataFiles)
 }
