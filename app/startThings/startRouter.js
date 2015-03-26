@@ -29,5 +29,7 @@ let routes = (
 console.log('3. 2.. 1... Blastoff!')
 
 /*eslint-disable no-unused-vars */
-Router.run(routes, (Handler) => React.render(<Handler />, document.querySelector('.app')))
+Router.run(routes, (Handler, state) => {
+	React.render(<Handler routerState={state} />, document.querySelector('.app'))
+})
 /*eslint-enable no-unused-vars */

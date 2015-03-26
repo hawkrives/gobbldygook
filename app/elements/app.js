@@ -8,6 +8,10 @@ import studentStore from '../flux/studentStore'
 let GobbldygookApp = React.createClass({
 	mixins: [Reflux.listenTo(studentStore, 'onStudentsChanged', 'onStudentsChanged')],
 
+	propTypes: {
+		routerState: React.PropTypes.object.isRequired,
+	},
+
 	onStudentsChanged(students) {
 		// console.log('app.onStudentsChanged', students)
 		this.setState({students, studentsInitialized: true})
@@ -26,7 +30,9 @@ let GobbldygookApp = React.createClass({
 			return <div className='loading-spinner'><div>Loading Students&hellip;</div></div>
 		}
 
-		return <RouteHandler students={this.state.students} />
+		return <RouteHandler
+			students={this.state.students}
+			routerState={this.props.routerState} />
 	},
 })
 
