@@ -5,14 +5,13 @@ import Immutable from 'immutable'
 import Sidebar from './sidebar'
 
 let Student = React.createClass({
-	mixins: [State],
-
 	propTypes: {
 		students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+		routerState: React.PropTypes.object.isRequired,
 	},
 
 	getInitialState: function() {
-		let queryId = this.getParams().id
+		let queryId = this.props.routerState.params.id
 		return {
 			student: null,
 			message: `Loading Student ${queryId}`,
@@ -21,7 +20,7 @@ let Student = React.createClass({
 	},
 
 	componentWillReceiveProps: function(nextProps) {
-		let queryId = this.getParams().id
+		let queryId = this.props.routerState.params.id
 		let student = nextProps.students.get(queryId)
 
 		if (student) {
@@ -48,16 +47,18 @@ let Student = React.createClass({
 		console.info('list of students in Student', this.props.students.toJS())
 
 		if (!this.state.student) {
-			return React.createElement('figure', {className: 'loading-screen'},
-				React.createElement('div', {className: 'loading-spinner'}, React.createElement('div', null), 'Loading Students&hellip;'),
-				React.createElement('figcaption', {className: 'loading-message ' + this.state.messageClass}, this.state.message))
+			return <figure className='loading-screen'>
+				<div className='loading-spinner'><div>Loading Students…</div></div>
+				<figcaption className={`loading-message ${this.state.messageClass}`}>{this.state.message}</figcaption>
+			</figure>
 		}
 
-		return React.createElement('div',
-			{className: 'student'},
-			React.createElement(Sidebar, {student: this.state.student}),
-			React.createElement('div', {className: 'content'},
-				React.createElement(RouteHandler, {student: this.state.student})))
+		return <div className='student'>
+			<Sidebar student={this.state.student} />
+			<div className='content'>
+				<RouteHandler student={this.state.student} />
+			</div>
+		</div>
 	},
 })
 
