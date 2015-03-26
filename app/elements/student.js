@@ -4,22 +4,18 @@ import Immutable from 'immutable'
 
 import Sidebar from './sidebar'
 
-let Student = React.createClass({
-	propTypes: {
-		students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
-		routerState: React.PropTypes.object.isRequired,
-	},
-
-	getInitialState: function() {
-		let queryId = this.props.routerState.params.id
-		return {
+class Student extends React.Component {
+	constructor(props) {
+		super(props)
+		let queryId = props.routerState.params.id
+		this.state = {
 			student: null,
 			message: `Loading Student ${queryId}`,
 			messageClass: '',
 		}
-	},
+	}
 
-	componentWillReceiveProps: function(nextProps) {
+	componentWillReceiveProps(nextProps) {
 		let queryId = this.props.routerState.params.id
 		let student = nextProps.students.get(queryId)
 
@@ -33,15 +29,11 @@ let Student = React.createClass({
 			this.setState({message: `Could not find student "${queryId}"`, messageClass: 'error'})
 			console.info('student is undefined at Student')
 		}
-	},
+	}
 
 	componentWillMount() {
 		this.componentWillReceiveProps(this.props)
-	},
-
-	// shouldComponentUpdate(nextProps, nextState) {
-		// return nextState.student !== this.state.student
-	// },
+	}
 
 	render() {
 		console.info('list of students in Student', this.props.students.toJS())
@@ -59,7 +51,12 @@ let Student = React.createClass({
 				<RouteHandler student={this.state.student} />
 			</div>
 		</div>
-	},
-})
+	}
+}
+
+Student.propTypes = {
+	students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+	routerState: React.PropTypes.object.isRequired,
+}
 
 export default Student

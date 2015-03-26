@@ -14,47 +14,28 @@ let makeRequirementSets = (props) => {
 	return reqSets
 }
 
-let AreaOfStudy = React.createClass({
-	propTypes: {
-		area: React.PropTypes.shape({
-			id: React.PropTypes.string.isRequired,
-			title: React.PropTypes.string.isRequired,
-			type: React.PropTypes.string,
-		}).isRequired,
-		areaResult: React.PropTypes.shape({
-			id: React.PropTypes.string.isRequired,
-			title: React.PropTypes.string.isRequired,
-			result: React.PropTypes.bool.isRequired,
-			type: React.PropTypes.string,
-			progress: React.PropTypes.shape({
-				at: React.PropTypes.number.isRequired,
-				of: React.PropTypes.number.isRequired,
-				word: React.PropTypes.string,
-			}).isRequired,
-			details: React.PropTypes.arrayOf(React.PropTypes.object),
-		}),
-	},
+class AreaOfStudy extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			expanded: false,
+			reqSets: makeRequirementSets(props),
+		}
+	}
 
 	toggle() {
 		if (this.props.areaResult) {
 			this.setState({expanded: !this.state.expanded})
 		}
-	},
+	}
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({reqSets: makeRequirementSets(nextProps)})
-	},
+	}
 
 	componentWillMount() {
-		this.setState({reqSets: makeRequirementSets(this.props)})
-	},
-
-	getInitialState() {
-		return {
-			expanded: false,
-			reqSets: makeRequirementSets(this.props),
-		}
-	},
+		this.componentWillReceiveProps(this.props)
+	}
 
 	render() {
 		// console.log(`render areaOfStudy for ${this.props.area.id}`)
@@ -81,7 +62,27 @@ let AreaOfStudy = React.createClass({
 			{header}
 			{reqSets}
 		</details>
-	},
-})
+	}
+}
+
+AreaOfStudy.propTypes = {
+	area: React.PropTypes.shape({
+		id: React.PropTypes.string.isRequired,
+		title: React.PropTypes.string.isRequired,
+		type: React.PropTypes.string,
+	}).isRequired,
+	areaResult: React.PropTypes.shape({
+		id: React.PropTypes.string.isRequired,
+		title: React.PropTypes.string.isRequired,
+		result: React.PropTypes.bool.isRequired,
+		type: React.PropTypes.string,
+		progress: React.PropTypes.shape({
+			at: React.PropTypes.number.isRequired,
+			of: React.PropTypes.number.isRequired,
+			word: React.PropTypes.string,
+		}).isRequired,
+		details: React.PropTypes.arrayOf(React.PropTypes.object),
+	}),
+}
 
 export default AreaOfStudy

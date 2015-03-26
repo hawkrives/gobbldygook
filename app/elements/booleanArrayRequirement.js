@@ -3,15 +3,7 @@ import React from 'react'
 import cx from 'classnames'
 let {PropTypes} = React
 
-let BooleanArrayRequirement = React.createClass({
-	propTypes: {
-		details: PropTypes.arrayOf(PropTypes.shape({
-			result: PropTypes.bool.isRequired,
-			title: PropTypes.string.isRequired,
-			abbr: PropTypes.string,
-		})).isRequired,
-	},
-
+class BooleanArrayRequirement extends React.Component {
 	render() {
 		return <div className='requirement-result requirement-result-boolean-array'>
 			<ul className='requirement-detail-list'>
@@ -28,7 +20,15 @@ let BooleanArrayRequirement = React.createClass({
 				)}
 			</ul>
 		</div>
-	},
-})
+	}
+}
+
+BooleanArrayRequirement.propTypes = {
+	details: PropTypes.arrayOf(PropTypes.shape({
+		result: PropTypes.bool.isRequired,
+		title: PropTypes.string.isRequired,
+		abbr: PropTypes.string,
+	})).isRequired,
+}
 
 export default BooleanArrayRequirement

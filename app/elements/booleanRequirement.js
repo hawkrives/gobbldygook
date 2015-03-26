@@ -1,10 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 
-let BooleanRequirement = React.createClass({
-	propTypes: {
-		result: React.PropTypes.bool.isRequired,
-	},
+class BooleanRequirement extends React.Component {
 	render() {
 		let requirementClasses = cx({
 			requirement: true,
@@ -17,7 +14,11 @@ let BooleanRequirement = React.createClass({
 				{this.props.result ? 'Completed' : 'Incomplete'}
 			</span>
 		</div>
-	},
-})
+	}
+}
+
+BooleanRequirement.propTypes = {
+	result: React.PropTypes.bool.isRequired,
+}
 
 export default BooleanRequirement

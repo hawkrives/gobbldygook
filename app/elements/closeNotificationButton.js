@@ -1,9 +1,9 @@
 import React from 'react'
 
-let CloseNotificationButton = React.createClass({
+class CloseNotificationButton extends React.Component {
 	render() {
-		return React.createElement('button', {className: 'close-notification', title: 'Close'})
+		return <button className='close-notification' title='Close' />
 	}
-})
+}
 
 export default CloseNotificationButton
