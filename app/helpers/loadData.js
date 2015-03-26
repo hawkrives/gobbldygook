@@ -15,9 +15,9 @@ import {map, filter, size} from 'lodash'
 let logDataLoading = false
 // let logDataLoading = true
 
-let log = (...args) => {if (logDataLoading) console.log(...args)}
-let info = (...args) => {if (logDataLoading) console.info(...args)}
-let error = (...args) => {if (logDataLoading) console.error(...args)}
+let log = (...args) => {
+	if (logDataLoading) console.log(...args)
+}
 
 
 function prepareCourse(course) {
@@ -70,7 +70,8 @@ async function storeCourses(item) {
 
 	try {
 		await db.store('courses').batch(coursesToStore)
-	} catch(e) {
+	}
+	catch(e) {
 		throw e
 	}
 
@@ -86,7 +87,8 @@ async function storeArea(item) {
 
 	try {
 		await db.store('areas').put(area)
-	} catch(e) {
+	}
+	catch(e) {
 		throw e
 	}
 
@@ -139,11 +141,6 @@ async function cacheItemHash(item) {
 	return item
 }
 
-let lookup = {
-	courses: 'courses',
-	areas: 'info',
-}
-
 async function updateDatabase(type, infoFromServer, notificationId, count) {
 	let {path, hash, year} = infoFromServer
 	let oldHash = localStorage.getItem(path)
@@ -159,12 +156,13 @@ async function updateDatabase(type, infoFromServer, notificationId, count) {
 
 	log(`need to add ${itemUrl}`)
 
-	let data;
+	let data = undefined
 	try {
 		data = await fetch(itemUrl)
 			.then(status)
 			.then(json)
-	} catch (e) {
+	}
+	catch (e) {
 		throw e
 	}
 
@@ -174,7 +172,8 @@ async function updateDatabase(type, infoFromServer, notificationId, count) {
 		await cleanPriorData(item)
 		await storeItem(item)
 		await cacheItemHash(item)
-	} catch (e) {
+	}
+	catch (e) {
 		throw e
 	}
 
