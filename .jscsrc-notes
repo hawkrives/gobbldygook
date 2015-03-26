@@ -1,2 +1,0 @@
-"requireSpaceBeforeBlockStatements": true,
-Put it back in after https://github.com/jscs-dev/node-jscs/issues/936 has a resolution
