@@ -9,6 +9,8 @@ import db from './db'
 import {buildDept, buildDeptNum, splitParagraph} from 'sto-helpers'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
+import {map, filter, size} from 'lodash'
+
 let logDataLoading = false
 // let logDataLoading = true
 
@@ -44,8 +46,7 @@ function storeCourses(item) {
 
 	return db.store('courses').batch(coursesToStore)
 		.then(() => {
-			let end = present()
-			console.log(`Stored ${_.size(coursesToStore)} courses in ${end - start}ms.`)
+			console.log(`Stored ${_.size(coursesToStore)} courses in ${present() - start}ms.`)
 			return item
 		})
 		.catch((records, err) => {
@@ -77,28 +78,38 @@ function storeItem(item) {
 	}
 }
 
-function cleanPriorData(item) {
-	let path = item.meta.path
-	console.info('deleting ' + item.type + ' from ' + path)
+async function cleanPriorData(item) {
+	let {path, type} = item.meta
+	console.info(`deleting ${type} from ${path}`)
 
-	return db.store(item.type)
-		.index('sourcePath')
-		.get(path)
-		.then((items) => {
-			return _.map(items, (item) => {
-				let result = Object.create(null)
-				result[item.clbid] = null
-				return result
-			})
-		})
-		.then((items) => db.store(item.type).batch(items))
-		.then(() => {
-			localStorage.removeItem(path)
-			return item
-		})
-		.catch((err) => {
-			throw err
-		})
+
+	let items = []
+
+	try {
+		items = await db.store(item.type)
+			.index('sourcePath')
+			.get(path)
+	}
+	catch (e) {
+		throw e
+	}
+
+	items = map(items, (item) => {
+		let result = Object.create(null)
+		result[item.clbid] = null
+		return result
+	})
+
+	try {
+		await db.store(item.type).batch(items)
+	}
+	catch (e) {
+		throw e
+	}
+
+	localStorage.removeItem(path)
+
+	return item
 }
 
 function cacheItemHash(item) {
@@ -166,35 +177,34 @@ function updateDatabase(itemType, infoFromServer, notificationId, count) {
 		.catch((err) => Promise.reject(err))
 }
 
-function loadDataFiles(infoFile) {
+async function loadDataFiles(infoFile) {
 	console.log('load data files', infoFile)
 
 	// Only get the last four years of data
-	let lastFourYears = _.filter(infoFile.files,
-		(file) => parseInt(file.year, 10) >= new Date().getFullYear() - 4)
+	let oldestYear = new Date().getFullYear() - 4
+	let lastFourYears = filter(infoFile.files, file => parseInt(file.year) >= oldestYear)
 
 	let notificationId = infoFile.type
 
 	// Load them into the database
-	let filePromises = _.map(lastFourYears, (file) => updateDatabase(infoFile.type, file, notificationId, _.size(lastFourYears)))
+	let filePromises = map(lastFourYears, (file) => updateDatabase(infoFile.type, file, notificationId, size(lastFourYears)))
 
-	return Promise.all(filePromises).then(completeProgressNotification(notificationId))
+	await* filePromises
+
+	completeProgressNotification(notificationId)
 }
 
-function loadInfoFile(url) {
+async function loadInfoFile(url) {
 	console.log('loading ' + url)
-	return fetch(url)
-		.then(status)
-		.then(json)
-		.then(resp => JSON.parse(resp))
-		.then(loadDataFiles)
+	let infoFile = await fetch(url).then(status).then(json)
+	loadDataFiles(infoFile)
 }
 
-function loadData() {
+async function loadData() {
 	let infoFiles = [
 		'./data/courses/info.json',
 	]
-	return Promise.all(infoFiles).map(loadInfoFile).done()
+	await* map(infoFiles, loadInfoFile)
 }
 
 export default loadData
