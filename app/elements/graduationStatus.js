@@ -16,13 +16,11 @@ class GraduationStatus extends React.Component {
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		let graduatabilityPromise = checkStudentGraduatability(nextProps.student)
+	async componentWillReceiveProps(nextProps) {
+		let graduationStatus = await checkStudentGraduatability(nextProps.student)
 
-		graduatabilityPromise.then((graduationStatus) => {
-			let {graduatability, areaDetails} = graduationStatus
-			this.setState({graduatability, areaDetails})
-		})
+		let {graduatability, areaDetails} = graduationStatus
+		this.setState({graduatability, areaDetails})
 	}
 
 	componentWillMount() {
