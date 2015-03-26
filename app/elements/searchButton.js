@@ -19,11 +19,11 @@ let SearchButton = React.createClass({
 	},
 
 	componentDidMount() {
-		stickyfill.add(this.getDOMNode())
+		stickyfill.add(React.findDOMNode(this))
 	},
 
 	componentWillUnmount() {
-		stickyfill.remove(this.getDOMNode())
+		stickyfill.remove(React.findDOMNode(this))
 	},
 
 	getInitialState() {
