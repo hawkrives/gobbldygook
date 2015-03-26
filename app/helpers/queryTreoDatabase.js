@@ -55,8 +55,9 @@ function queryStore(query) {
 
 		let results = []
 		// Prevent invalid logic from not having a query.
-		if (!size(query))
+		if (!size(query)) {
 			return results
+		}
 
 		// Grab a key from the query to use as an index.
 		// TODO: Write a function to sort keys by priority.
@@ -131,8 +132,9 @@ function queryIndex(query, primaryKeysOnly=false) {
 		let results = []
 
 		// Prevent invalid logic from not having a query.
-		if (!query || !size(query) || !size(query[name]))
+		if (!query || !size(query) || !size(query[name])) {
 			resolvePromise(results)
+		}
 
 		// The index of our current key
 		let currentIndex = 0

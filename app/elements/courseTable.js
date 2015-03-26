@@ -35,8 +35,9 @@ let CourseTable = React.createClass({
 
 	render() {
 		// console.log('course-table render', this.props)
-		if (!this.props.student)
+		if (!this.props.student) {
 			return null
+		}
 
 		let years = this.props.student.schedules
 			.sortBy(schedule => schedule.year)

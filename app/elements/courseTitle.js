@@ -25,8 +25,9 @@ let CourseTitle = React.createClass({
 		if (isIndependent) {
 			courseName = course.name
 			type = courseName.substr(0, 3)
-			if (courseName.length > 3)
+			if (courseName.length > 3) {
 				courseName = courseName.substring(3)
+			}
 		}
 		else if (type === 'Topic') {
 			courseName = course.name

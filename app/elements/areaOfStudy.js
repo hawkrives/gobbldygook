@@ -4,8 +4,9 @@ import RequirementSet from './requirementSet'
 import cx from 'classnames'
 
 let makeRequirementSets = (props) => {
-	if (!props.areaResult)
+	if (!props.areaResult) {
 		return []
+	}
 
 	let reqSets = map(props.areaResult.details, (reqset) =>
 		<RequirementSet key={reqset.title} {...reqset} />)
@@ -35,8 +36,9 @@ let AreaOfStudy = React.createClass({
 	},
 
 	toggle() {
-		if (this.props.areaResult)
+		if (this.props.areaResult) {
 			this.setState({expanded: !this.state.expanded})
+		}
 	},
 
 	componentWillReceiveProps(nextProps) {

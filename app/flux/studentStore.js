@@ -83,8 +83,9 @@ let studentStore = Reflux.createStore({
 		let loadedIds = this.students.map(s => s.id).toList()
 		let localIds = Immutable.List(localStorage.getItem('studentIds') || [])
 
-		if (!loadedIds.equals(localIds))
+		if (!loadedIds.equals(localIds)) {
 			this._loadData()
+		}
 	},
 
 	_loadData(studentId) {
@@ -110,8 +111,9 @@ let studentStore = Reflux.createStore({
 			.map(id => [id, localStorage.getItem(id)])
 			// Remove any broken students from localStorage
 			.map(([id, rawStudent]) => {
-				if (rawStudent === '[object Object]')
+				if (rawStudent === '[object Object]') {
 					localStorage.removeItem(id)
+				}
 				return rawStudent
 			})
 			// filter out any that don't exist
@@ -130,8 +132,9 @@ let studentStore = Reflux.createStore({
 					notificationActions.logError('error parsing student', basicStudent)
 				}
 
-				if (basicStudent.id === 'student-v3.0a6')
+				if (basicStudent.id === 'student-v3.0a6') {
 					delete basicStudent.id
+				}
 
 				// Make the student...
 				let fleshedStudent = new Student(basicStudent)

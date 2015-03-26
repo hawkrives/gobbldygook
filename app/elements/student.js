@@ -42,10 +42,11 @@ let Student = React.createClass({
 	render() {
 		console.info('list of students in Student', this.props.students.toJS())
 
-		if (!this.state.student)
+		if (!this.state.student) {
 			return React.createElement('figure', {className: 'loading-screen'},
 				React.createElement('div', {className: 'loading-spinner'}, React.createElement('div', null), 'Loading Students&hellip;'),
 				React.createElement('figcaption', {className: 'loading-message ' + this.state.messageClass}, this.state.message))
+		}
 
 		return React.createElement('div',
 			{className: 'student'},

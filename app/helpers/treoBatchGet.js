@@ -9,15 +9,17 @@ function plugin(db, treo) {
 export default plugin
 
 function batchGet(keys) {
-	if (!keys.length)
+	if (!keys.length) {
 		return Promise.resolve([])
+	}
 
 	return new Promise((resolve, reject) => {
 		var name = this.name
 
 		this.db.transaction('readonly', [name], function(err, tr) {
-			if (err)
+			if (err) {
 				reject(err)
+			}
 
 			var store = tr.objectStore(name)
 			var current = 0
@@ -28,8 +30,9 @@ function batchGet(keys) {
 			next()
 
 			function next() {
-				if (current >= keys.length)
+				if (current >= keys.length) {
 					return
+				}
 
 				var currentKey = keys[current]
 				current += 1

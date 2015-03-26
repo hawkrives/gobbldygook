@@ -36,8 +36,9 @@ let SearchButton = React.createClass({
 	},
 
 	onSubmit() {
-		if (this.state.queryString !== this.state.lastQuery)
+		if (this.state.queryString !== this.state.lastQuery) {
 			this.query(this.state.queryString)
+		}
 	},
 
 	onChange(evt) {
@@ -86,8 +87,9 @@ let SearchButton = React.createClass({
 	},
 
 	query(searchQuery) {
-		if (searchQuery.length === 0 || this.state.queryInProgress)
+		if (searchQuery.length === 0 || this.state.queryInProgress) {
 			return
+		}
 
 		this.setState({results: [], hasQueried: false})
 		let startQueryTime = present()
@@ -110,10 +112,11 @@ let SearchButton = React.createClass({
 		</li>
 
 		let contents = null
-		if (!showIndicator)
+		if (!showIndicator) {
 			contents = showNoResults ?
 				<li className='no-results'>No Results Found</li> :
 				this.state.results
+		}
 
 		return <div className='search-sidebar'>
 			<header className='sidebar-heading'>

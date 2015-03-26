@@ -42,8 +42,9 @@ let GraduationStatus = React.createClass({
 		// console.info('graduation-status render', this.props.student)
 		let student = this.props.student
 
-		if (!student)
+		if (!student) {
 			return null
+		}
 
 		let summary = <StudentSummary
 			student={student}

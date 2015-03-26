@@ -31,8 +31,9 @@ let RequirementSet = React.createClass({
 	},
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.description)
+		if (nextProps.description) {
 			this.setState({descriptionHTML: marked(nextProps.description)})
+		}
 	},
 
 	componentWillMount() {
@@ -47,8 +48,9 @@ let RequirementSet = React.createClass({
 			title={this.props.description}> {this.props.title} </h2>
 
 		let description = null
-		if (this.state.showDescription && this.state.descriptionHTML)
+		if (this.state.showDescription && this.state.descriptionHTML) {
 			description = <div className='description' dangerouslySetInnerHTML={{__html: this.state.descriptionHTML}} />
+		}
 
 		let titlebar = <header onClick={this.toggleDescription}>{title}{description}</header>
 

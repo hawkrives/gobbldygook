@@ -32,10 +32,12 @@ let Semester = React.createClass({
 						console.log('dropped component', component)
 						let {clbid, fromSchedule} = droppedItem
 						let {state, props} = component
-						if (fromSchedule)
+						if (fromSchedule) {
 							studentActions.moveCourse(props.student.id, fromSchedule, state.schedule.id, clbid)
-						else
+						}
+						else {
 							studentActions.addCourse(props.student.id, state.schedule.id, clbid)
+						}
 					}
 				}
 			})

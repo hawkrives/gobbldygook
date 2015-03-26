@@ -116,8 +116,9 @@ let lookup = {
 }
 
 let logAdded = (item) => {
-	if (logDataLoading)
+	if (logDataLoading) {
 		console.log(`added ${item.meta.path} (${item.count} ${item.type})`)
+	}
 }
 
 let startProgressNotification = _.curry((notificationId, itemType, count) => {

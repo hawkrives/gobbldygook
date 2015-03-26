@@ -15,8 +15,9 @@ function getCourses(clbids) {
 	// those clbids.
 
 	// console.log('called getCourses', clbids)
-	if (Immutable.List.isList(clbids))
+	if (Immutable.List.isList(clbids)) {
 		clbids = clbids.toJS()
+	}
 
 	return Promise.all(map(clbids, getCourse))
 }

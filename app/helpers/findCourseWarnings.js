@@ -19,8 +19,9 @@ let checkForInvalidYear = (course, scheduleYear) => {
 
 	let thisYear = new Date().getFullYear()
 
-	if (course.year !== scheduleYear && scheduleYear <= thisYear)
+	if (course.year !== scheduleYear && scheduleYear <= thisYear) {
 		result.warning = true
+	}
 
 	return result.warning ? result : null
 }
@@ -33,8 +34,9 @@ let checkForInvalidSemester = (course, scheduleSemester) => {
 		className: 'course-invalid-semester',
 	}
 
-	if (course.semester !== scheduleSemester)
+	if (course.semester !== scheduleSemester) {
 		result.warning = true
+	}
 
 	return result.warning ? result : null
 }

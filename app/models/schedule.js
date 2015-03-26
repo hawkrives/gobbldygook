@@ -39,10 +39,12 @@ class Schedule extends ScheduleRecord {
 	move(to={}) {
 		// `to` is an object: {year, semester}
 		return this.withMutations((sched) => {
-			if (to.year)
+			if (to.year) {
 				sched = sched.set('year', to.year)
-			if (to.semester)
+			}
+			if (to.semester) {
 				sched = sched.set('semester', to.semester)
+			}
 			return sched
 		})
 	}

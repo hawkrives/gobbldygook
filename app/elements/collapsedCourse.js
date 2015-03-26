@@ -18,12 +18,13 @@ let CollapsedCourse = React.createClass({
 		let courseName = course.name || course.title
 
 		let gereqs = null
-		if (course.gereqs)
+		if (course.gereqs) {
 			gereqs = <ul className='gereqs'>
 				{map(course.gereqs, (ge, idx) =>
 					<li key={ge + idx}>{ge}</li>
 				)}
 			</ul>
+		}
 
 		return <div className='info-wrapper'>
 			<div className='info-rows'>
