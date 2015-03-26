@@ -22,8 +22,8 @@ let StudentList = React.createClass({
 	// when a file is passed to the input field, retrieve the contents as a
 	// base64-encoded data URI and save it to the component's state
 	handleFile(ev) {
-		var reader = new FileReader()
-		var file = ev.target.files[0]
+		let reader = new FileReader()
+		let file = ev.target.files[0]
 
 		reader.onload = (upload) => {
 			studentActions.importStudent(upload.target.result)

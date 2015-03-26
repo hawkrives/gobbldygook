@@ -14,16 +14,16 @@ function batchGet(keys) {
 	}
 
 	return new Promise((resolve, reject) => {
-		var name = this.name
+		let name = this.name
 
 		this.db.transaction('readonly', [name], function(err, tr) {
 			if (err) {
 				reject(err)
 			}
 
-			var store = tr.objectStore(name)
-			var current = 0
-			var results = []
+			let store = tr.objectStore(name)
+			let current = 0
+			let results = []
 
 			tr.onerror = tr.onabort = reject
 			tr.oncomplete = function oncomplete() { resolve(results) }
@@ -34,10 +34,10 @@ function batchGet(keys) {
 					return
 				}
 
-				var currentKey = keys[current]
+				let currentKey = keys[current]
 				current += 1
 
-				var request = store.get(currentKey)
+				let request = store.get(currentKey)
 				request.onerror = reject
 				request.onsuccess = function(ev) {
 					results.push(ev.target.result)
