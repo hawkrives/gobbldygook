@@ -18,21 +18,24 @@ import checkStudentAgainstArea from './checkStudentAgainstArea'
  *    {Boolean} graduatability
  *    {Immutable.List} areaDetails
  */
-function checkStudentGraduatability(student) {
-	let areaResults = student.studies.map((area) =>
-		checkStudentAgainstArea(student, area)).toArray()
+async function checkStudentGraduatability(student) {
+	let areaResults = student.studies
+		.map((area) =>
+			checkStudentAgainstArea(student, area))
+		.toArray()
+
 	// console.log('areaResults', student.studies.toArray(), areaResults)
 
-	return Promise.all(areaResults).then((areas) => {
-		let goodAreaCount = size(filter(pluck('result', areas), isTrue))
+	let areas = await* areaResults
 
-		let graduatability = (goodAreaCount - size(areas)) === 0
+	let goodAreaCount = size(filter(pluck('result', areas), isTrue))
 
-		return {
-			graduatability: graduatability,
-			areaDetails: Immutable.List(areas),
-		}
-	})
+	let graduatability = (goodAreaCount - size(areas)) === 0
+
+	return {
+		graduatability: graduatability,
+		areaDetails: Immutable.List(areas),
+	}
 }
 
 export default checkStudentGraduatability

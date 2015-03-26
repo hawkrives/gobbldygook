@@ -99,33 +99,31 @@ class Schedule extends ScheduleRecord {
 
 	// Schedule Validation
 
-	validate() {
+	async validate() {
 		// Checks to see if the schedule is valid
-		return this.courses
-			// only check the courses that have data
-			.then(courses => reject(courses, isUndefined))
-			// Step one: do any times conflict?
-			.then((courses) => findWarnings(courses, this.toJS()))
-			.then((conflicts) => {
-				let hasConflict = lodash(conflicts)
-					// flatten the nested arrays
-					.flatten()
-					// filter to just the non-null/undefined items
-					.filter(item => item)
-					// grab the 'warning' values
-					.pluck('warning')
-					// and see if any are true
-					.any(isTrue)
+		let courses = await this.courses
 
-				// if (hasConflict) {
-				// 	console.log('schedule conflicts', conflicts, hasConflict)
-				// }
+		// only check the courses that have data
+		courses = reject(courses, isUndefined)
 
-				return {
-					hasConflict: hasConflict,
-					conflicts: conflicts,
-				}
-			})
+		// Step one: do any times conflict?
+		let conflicts = findWarnings(courses, this.toJS())
+
+		let hasConflict = lodash(conflicts)
+			// flatten the nested arrays
+			.flatten()
+			// filter to just the non-null/undefined items
+			.filter(item => item)
+			// grab the 'warning' values
+			.pluck('warning')
+			// and see if any are true
+			.any(isTrue)
+
+		// if (hasConflict) {
+		// 	console.log('schedule conflicts', conflicts, hasConflict)
+		// }
+
+		return {hasConflict, conflicts}
 	}
 
 	toJSON() {

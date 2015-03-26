@@ -36,28 +36,27 @@ let noResult = (id) => {
  * @promise ResultsPromise
  * @fulfill {Object} - The details of the area check.
  */
-function checkStudentAgainstArea(student, area) {
+async function checkStudentAgainstArea(student, area) {
 	let {id, title, type, check} = area
 
 	if (type === 'not-found' || check === undefined) {
 		return noResult(id)
 	}
 
-	return check(student.data())
-		.then((studentResults) => {
-			let listOfResults = findResults(studentResults.details)
+	let studentResults = await check(student.data())
 
-			let currentProgress = _(listOfResults).reject(isUndefined).filter(isTrue).size()
-			let maxProgress = listOfResults.length
-			let progressName = findWordForProgress(maxProgress, currentProgress)
+	let listOfResults = findResults(studentResults.details)
 
-			let progress = {at: currentProgress, of: maxProgress, word: progressName}
+	let currentProgress = _(listOfResults).reject(isUndefined).filter(isTrue).size()
+	let maxProgress = listOfResults.length
+	let progressName = findWordForProgress(maxProgress, currentProgress)
 
-			let result = studentResults.result
-			let details = studentResults.details
+	let progress = {at: currentProgress, of: maxProgress, word: progressName}
 
-			return {id, title, type, progress, result, details}
-		})
+	let result = studentResults.result
+	let details = studentResults.details
+
+	return {id, title, type, progress, result, details}
 }
 
 export default checkStudentAgainstArea

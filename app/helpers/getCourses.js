@@ -10,7 +10,7 @@ import getCourse from './getCourse'
  * @promise BluebirdPromiseArray
  * @fulfill {Array} - the courses.
  */
-function getCourses(clbids) {
+async function getCourses(clbids) {
 	// Takes a list of clbids, and returns a list of the course objects for
 	// those clbids.
 
@@ -19,7 +19,7 @@ function getCourses(clbids) {
 		clbids = clbids.toJS()
 	}
 
-	return Promise.all(map(clbids, getCourse))
+	return await* map(clbids, getCourse)
 }
 
 export default getCourses
