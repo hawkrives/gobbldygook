@@ -199,6 +199,7 @@ let studentStore = Reflux.createStore({
 		this._postChange()
 	},
 
+	/*eslint-disable no-multi-spaces, brace-style */
 	changeName(studentId, ...args)               { this._change(studentId, 'changeName',               ...args) },
 	changeCreditsNeeded(studentId, ...args)      { this._change(studentId, 'changeCreditsNeeded',      ...args) },
 	changeMatriculation(studentId, ...args)      { this._change(studentId, 'changeMatriculation',      ...args) },
@@ -221,6 +222,7 @@ let studentStore = Reflux.createStore({
 	removeCourse(studentId, scheduleId, ...args)    { this._alter([studentId, 'schedules', scheduleId], 'removeCourse',  ...args) },
 	reorderCourse(studentId, scheduleId, ...args)   { this._alter([studentId, 'schedules', scheduleId], 'reorderCourse', ...args) },
 	reorderArea(studentId, areaId, ...args)         { this._alter([studentId, 'studies', areaId],       'reorder',       ...args) },
+	/*eslint-enable no-multi-spaces, brace-style */
 })
 
 window.store = studentStore
