@@ -46,7 +46,7 @@ function storeCourses(item) {
 	return db.store('courses').batch(coursesToStore)
 		.then((results) => {
 			let end = present()
-			console.log('Stored courses in', (end - start) + 'ms.')
+			console.log(`Stored ${_.size(coursesToStore)} courses in ${end - start}ms.`)
 			return item
 		})
 		.catch((records, err) => {
