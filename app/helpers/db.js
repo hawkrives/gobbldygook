@@ -56,20 +56,15 @@ let db = treo('gobbldygook', schema)
 export default db
 
 
-window.deleteDatabase = () => new Promise(resolve => {
-	window.indexedDB.deleteDatabase('gobbldygook', resolve)
-}).then((res) => {
-	console.log('Database dropped')
-	return res
-})
+window.deleteDatabase = () => {
+	window.indexedDB.deleteDatabase('gobbldygook', () =>
+		console.log('Database dropped'))
+}
 
-window.eraseStorage = () => new Promise(resolve => {
+window.eraseStorage = () => {
 	window.localStorage.clear()
-	resolve()
-}).then((res) => {
 	console.log('Storage erased')
-	return res
-})
+}
 
 window.eraseDatabase = () => {
 	window.deleteDatabase()
