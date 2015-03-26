@@ -1,17 +1,19 @@
 import React from 'react'
 
-let FakeCourse = React.createClass({
-	propTypes: {
-		title: React.PropTypes.string.isRequired,
-		className: React.PropTypes.string.isRequired,
-	},
+class FakeCourse extends React.Component {
 	render() {
-		let titleEl = React.createElement('h1', {className: 'title'}, this.props.title)
-		let details = React.createElement('p', {className: 'summary'}, 'no details')
+		let titleEl = <h1 className='title'>{this.props.title}</h1>
+		let details = <p className='summary'>no details</p>
 
-		return React.createElement('article', {className: 'course ' + this.props.className},
-			React.createElement('div', {className: 'info-rows'}, titleEl, details))
-	},
-})
+		return <article className={`course ${this.props.className}`}>
+			<div className='info-rows'>{titleEl}{details}</div>
+		</article>
+	}
+}
+
+FakeCourse.propTypes = {
+	title: React.PropTypes.string.isRequired,
+	className: React.PropTypes.string.isRequired,
+}
 
 export default FakeCourse
