@@ -4,6 +4,11 @@ import notificationActions from '../flux/notificationActions'
 import CloseNotificationButton from './closeNotificationButton'
 
 class Notification extends React.Component {
+	constructor(props) {
+		super(props)
+		this.remove = this.remove.bind(this)
+	}
+
 	remove() {
 		notificationActions.removeNotification(this.props.id)
 	}
