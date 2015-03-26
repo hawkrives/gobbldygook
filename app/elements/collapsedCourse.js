@@ -3,18 +3,9 @@ import {oxford} from 'humanize-plus'
 import CourseTitle from './courseTitle'
 import map from 'lodash/collection/map'
 
-let CollapsedCourse = React.createClass({
-	propTypes: {
-		info: React.PropTypes.object,
-		onClick: React.PropTypes.func,
-	},
-	getDefaultProps() {
-		return {
-			onClick() {}
-		}
-	},
+class CollapsedCourse extends React.Component {
 	render() {
-		let course = this.props.info
+		let {info: course} = this.props
 
 		let gereqs = null
 		if (course.gereqs) {
@@ -38,7 +29,15 @@ let CollapsedCourse = React.createClass({
 			</div>
 			<button className='show-info' onClick={this.props.onClick} />
 		</div>
-	},
-})
+	}
+}
+
+CollapsedCourse.propTypes = {
+	info: React.PropTypes.object,
+	onClick: React.PropTypes.func,
+}
+CollapsedCourse.defaultProps = {
+	onClick() {}
+}
 
 export default CollapsedCourse
