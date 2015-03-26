@@ -11,7 +11,7 @@ class GraduationStatus extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			graduatability: null,
+			graduatability: false,
 			areaDetails: Immutable.List(),
 		}
 	}
