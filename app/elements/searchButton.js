@@ -46,7 +46,7 @@ let SearchButton = React.createClass({
 	},
 
 	onKeyDown(evt) {
-		if (evt.keyCode == 13) {
+		if (evt.keyCode === 13) {
 			this.onSubmit()
 		}
 	},
