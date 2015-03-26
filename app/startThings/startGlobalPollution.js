@@ -2,9 +2,6 @@
 import _ from 'lodash'
 window.lodash = _
 
-// Handy debugging function
-window.log = (...args) => console.log(...args)
-
 import '../polyfills/details/Element.details'
 import stickyfill from '../helpers/initStickyfill'
 stickyfill.init()
