@@ -3,7 +3,7 @@ import Reflux from 'reflux'
 import Immutable from 'immutable'
 import notificationStore from '../flux/notificationStore'
 
-import Notation from './notification'
+import Notification from './notification'
 
 let Notifications = React.createClass({
 	mixins: [Reflux.listenTo(notificationStore, 'onNotification', 'onNotification')],
