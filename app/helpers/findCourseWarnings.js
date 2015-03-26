@@ -29,11 +29,11 @@ let checkForInvalidSemester = (course, scheduleSemester) => {
 	let result = {
 		warning: false,
 		type: 'invalid-semester',
-		msg: `Wrong Semester (originally from ${semesterName(course.sem)})`,
+		msg: `Wrong Semester (originally from ${semesterName(course.semester)})`,
 		className: 'course-invalid-semester',
 	}
 
-	if (course.sem !== scheduleSemester)
+	if (course.semester !== scheduleSemester)
 		result.warning = true
 
 	return result.warning ? result : null

@@ -67,7 +67,7 @@ let ExpandedCourse = React.createClass({
 
 		let classInstanceOffered = React.createElement('span',
 			{className: 'instance'},
-			`${semesterName(course.sem)} ${course.year}`)
+			`${semesterName(course.semester)} ${course.year}`)
 
 		let info = React.createElement('p',
 			{className: 'info'},

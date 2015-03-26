@@ -58,9 +58,9 @@ function prettyifyCourses(jsonCourses) {
 		course.num = parseInt(course.no, 10)
 		delete course.no
 
-		course.sem = parseInt(course.term, 10)
+		course.semester = parseInt(course.term, 10)
 		course.year = parseInt(course.year, 10)
-		course.term = parseInt(String(course.year) + String(course.sem), 10)
+		course.term = parseInt(String(course.year) + String(course.semester), 10)
 
 		course.deptnum = course.dept + ' ' + course.num
 		course.level = course.level * 100
