@@ -11,8 +11,14 @@ import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 import {map, filter, size} from 'lodash'
 
+
 let logDataLoading = false
 // let logDataLoading = true
+
+let log = (...args) => {if (logDataLoading) console.log(...args)}
+let info = (...args) => {if (logDataLoading) console.info(...args)}
+let error = (...args) => {if (logDataLoading) console.error(...args)}
+
 
 function prepareCourse(course) {
 	course.name = course.name || course.title
@@ -35,38 +41,56 @@ function prepareCourse(course) {
 	return course
 }
 
-function storeCourses(item) {
+
+let startProgressNotification = _.curry((notificationId, itemType, count) => {
+	notificationActions.startProgress(notificationId, `Loading ${itemType}`, {max: count}, true)
+})
+
+let updateProgressNotification = _.curry((notificationId) => {
+	notificationActions.incrementProgress(notificationId)
+})
+
+let completeProgressNotification = _.curry((notificationId, time=1500) => {
+	notificationActions.removeNotification(notificationId, time)
+})
+
+let logAdded = (item) => {
+	log(`added ${item.path} (${item.count} ${item.type})`)
+}
+
+
+async function storeCourses(item) {
 	console.log('storing courses')
 	let start = present()
 
-	let coursesToStore = _.map(item.data, (course) => {
-		course.sourcePath = item.meta.path
+	let coursesToStore = map(item.data, (course) => {
+		course.sourcePath = item.path
 		return prepareCourse(course)
 	})
 
-	return db.store('courses').batch(coursesToStore)
-		.then(() => {
-			console.log(`Stored ${_.size(coursesToStore)} courses in ${present() - start}ms.`)
-			return item
-		})
-		.catch((records, err) => {
-			throw err
-		})
+	try {
+		await db.store('courses').batch(coursesToStore)
+	} catch(e) {
+		throw e
+	}
+
+	console.log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
+	return item
 }
 
-function storeArea(item) {
-	console.log(item.meta.path, 'called storeArea')
+async function storeArea(item) {
+	console.log(item.path, 'called storeArea')
 
 	let area = item.data.info
-	area.sourcePath = item.meta.path
+	area.sourcePath = item.path
 
-	return db.store('areas').put(area)
-		.then(() => {
-			return item
-		})
-		.catch((records, err) => {
-			throw err
-		})
+	try {
+		await db.store('areas').put(area)
+	} catch(e) {
+		throw e
+	}
+
+	return item
 }
 
 function storeItem(item) {
@@ -79,14 +103,13 @@ function storeItem(item) {
 }
 
 async function cleanPriorData(item) {
-	let {path, type} = item.meta
+	let {type, path} = item
 	console.info(`deleting ${type} from ${path}`)
-
 
 	let items = []
 
 	try {
-		items = await db.store(item.type)
+		items = await db.store(type)
 			.index('sourcePath')
 			.get(path)
 	}
@@ -108,16 +131,12 @@ async function cleanPriorData(item) {
 	}
 
 	localStorage.removeItem(path)
-
-	return item
 }
 
-function cacheItemHash(item) {
-	return new Promise((resolve) => {
-		console.info(item.meta.path + ' called cacheItemHash')
-		localStorage.setItem(item.meta.path, item.meta.hash)
-		resolve(item)
-	})
+async function cacheItemHash(item) {
+	console.info(`${item.path} called cacheItemHash`)
+	localStorage.setItem(item.path, item.hash)
+	return item
 }
 
 let lookup = {
@@ -125,56 +144,42 @@ let lookup = {
 	areas: 'info',
 }
 
-let logAdded = (item) => {
-	if (logDataLoading) {
-		console.log(`added ${item.meta.path} (${item.count} ${item.type})`)
-	}
-}
+async function updateDatabase(type, infoFromServer, notificationId, count) {
+	let {path, hash, year} = infoFromServer
+	let oldHash = localStorage.getItem(path)
 
-let startProgressNotification = _.curry((notificationId, itemType, count) => {
-	notificationActions.startProgress(notificationId, `Loading ${itemType}`, {max: count}, true)
-})
+	let itemUrl = `./data/${type}/${path}?v=${hash}`
 
-let updateProgressNotification = _.curry((notificationId) => {
-	notificationActions.incrementProgress(notificationId)
-})
-
-let completeProgressNotification = _.curry((notificationId, time=1500) => {
-	notificationActions.removeNotification(notificationId, time)
-})
-
-function updateDatabase(itemType, infoFromServer, notificationId, count) {
-	let oldHash = localStorage.getItem(infoFromServer.path)
-	let newHash = infoFromServer.hash
-
-	let itemUrl = `./data/${itemType}/${infoFromServer.path}?v=${newHash}`
-
-	if (newHash === oldHash) {
-		if (logDataLoading) console.log('skipped ' + itemUrl)
-		return Promise.resolve(false)
+	if (hash === oldHash) {
+		log('skipped ' + itemUrl)
+		return false
 	}
 
-	startProgressNotification(notificationId, itemType, count)
+	startProgressNotification(notificationId, type, count)
 
-	if (logDataLoading) console.log('need to add ' + itemUrl)
+	log(`need to add ${itemUrl}`)
 
-	return fetch(itemUrl)
-		.then(status)
-		.then(json)
-		.then((data) => {
-			return {
-				data: data,
-				meta: infoFromServer,
-				type: itemType,
-				count: _.size(data[lookup[itemType]]) || 1,
-			}
-		})
-		.then(cleanPriorData)
-		.then(storeItem)
-		.then(cacheItemHash)
-		.then(logAdded)
-		.then(updateProgressNotification(notificationId))
-		.catch((err) => Promise.reject(err))
+	let data;
+	try {
+		data = await fetch(itemUrl)
+			.then(status)
+			.then(json)
+	} catch (e) {
+		throw e
+	}
+
+	let item = {count: size(data), data, path, hash, year, type}
+
+	try {
+		await cleanPriorData(item)
+		await storeItem(item)
+		await cacheItemHash(item)
+	} catch (e) {
+		throw e
+	}
+
+	logAdded(item)
+	updateProgressNotification(notificationId)
 }
 
 async function loadDataFiles(infoFile) {
@@ -187,7 +192,8 @@ async function loadDataFiles(infoFile) {
 	let notificationId = infoFile.type
 
 	// Load them into the database
-	let filePromises = map(lastFourYears, (file) => updateDatabase(infoFile.type, file, notificationId, size(lastFourYears)))
+	let filePromises = map(lastFourYears, (file) =>
+		updateDatabase(infoFile.type, file, notificationId, size(lastFourYears)))
 
 	await* filePromises
 
