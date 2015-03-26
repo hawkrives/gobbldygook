@@ -2,51 +2,8 @@ import React from 'react'
 import Reflux from 'reflux'
 import Immutable from 'immutable'
 import notificationStore from '../flux/notificationStore'
-import notificationActions from '../flux/notificationActions'
 
-let CloseNotificationButton = React.createClass({
-	render() {
-		return React.createElement('button', {className: 'close-notification', title: 'Close'})
-	}
-})
-
-let Notification = React.createClass({
-	propTypes: {
-		id: React.PropTypes.any.isRequired,
-		message: React.PropTypes.string.isRequired,
-		value: React.PropTypes.number,
-		max: React.PropTypes.number,
-	},
-	remove() {
-		notificationActions.removeNotification(this.props.id)
-	},
-	render() {
-		let message = React.createElement('h1',
-			{className: 'notification-message'},
-			this.props.message)
-		let closeButton = React.createElement(CloseNotificationButton)
-
-		let progressBar = null
-		if (this.props.type === 'progress') {
-			let progressValue = Math.round(100 * (this.props.value / this.props.max))
-			progressBar = React.createElement('div', {className: 'progress-container'},
-				React.createElement('progress',
-					{value: this.props.value, max: this.props.max}),
-				React.createElement('output', null, `${progressValue}%`))
-		}
-
-		return React.createElement('li',
-			{
-				key: this.props.key || this.props.id,
-				className: `notification-capsule  notification-type--${this.props.type}`,
-				onClick: this.remove,
-			},
-			React.createElement('div',
-				{className: 'notification-content'},
-				message, progressBar),
-			this.props.hideButton ? null : closeButton)
-	},
-})
+import Notation from './notification'
 
 let Notifications = React.createClass({
 	mixins: [Reflux.listenTo(notificationStore, 'onNotification', 'onNotification')],
