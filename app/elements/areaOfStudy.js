@@ -23,12 +23,6 @@ class AreaOfStudy extends React.Component {
 		}
 	}
 
-	toggle() {
-		if (this.props.areaResult) {
-			this.setState({expanded: !this.state.expanded})
-		}
-	}
-
 	componentWillReceiveProps(nextProps) {
 		this.setState({reqSets: makeRequirementSets(nextProps)})
 	}
