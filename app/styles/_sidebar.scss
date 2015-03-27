@@ -17,18 +17,21 @@
 	flex-flow: row wrap;
 	justify-content: space-around;
 
-	button, input[type='submit'] {
-		@include button--raised;
-
-		flex-grow: 1;
-		padding-left: 1em;
-		padding-right: 1em;
-
-		$spacing: 0.5em;
-		margin-right: $spacing / 2;
-		margin-left: $spacing / 2;
-		margin-bottom: $spacing;
-	}
-
 	margin-bottom: 0.5em;
+}
+
+a.sidebar-btn {
+	@include link-undecorated;
+}
+.sidebar-btn {
+	@include button--raised;
+
+	flex-grow: 1;
+	padding-left: 1em;
+	padding-right: 1em;
+
+	$spacing: 0.5em;
+	margin-right: $spacing / 2;
+	margin-left: $spacing / 2;
+	margin-bottom: $spacing;
 }

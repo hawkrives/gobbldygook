@@ -1,19 +1,18 @@
 import React from 'react'
-import {Link, State} from 'react-router'
+import {Link} from 'react-router'
+import Immutable from 'immutable'
 
-import RevertToDemoButton from './revertToDemoButton'
-import DownloadStudentButton from './downloadStudentButton'
 import UndoButton from './undoButton'
 import RedoButton from './redoButton'
 
 import SearchButton from './searchButton'
 import GraduationStatus from './graduationStatus'
 
-let Sidebar = React.createClass({
-	mixins: [State],
+import studentActions from '../flux/studentActions'
 
+let Sidebar = React.createClass({
 	propTypes: {
-		student: React.PropTypes.object.isRequired,
+		student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 	},
 
 	toggleSearch() {
@@ -30,28 +29,33 @@ let Sidebar = React.createClass({
 		console.log('Sidebar#render')
 		let student = this.props.student
 
-		let component = GraduationStatus
+		let ActiveSidebarComponent = GraduationStatus
 		let props = {student}
 		if (this.state.isSearching) {
-			component = SearchButton
+			ActiveSidebarComponent = SearchButton
 			props.toggle = this.toggleSearch
 		}
 
-		let sidebar = React.createElement(component, props)
+		let sidebar = <aside className='sidebar'>
+			<menu className='student-buttons'>
+				<Link to='/' className='back sidebar-btn'>All Students</Link>
+				<button className='search sidebar-btn' onClick={this.toggleSearch}>Search</button>
+				<a className='sidebar-btn'
+					download={`${student.name}.gb-student.json`}
+					href={`data:text/json;charset=utf-8,${student.encode()}`}>
+					Download
+				</a>
+				<button className='sidebar-btn'
+					onClick={() => studentActions.resetStudentToDemo(student.id)}>
+					Revert to Demo
+				</button>
+				<UndoButton className='sidebar-btn' />
+				<RedoButton className='sidebar-btn' />
+			</menu>
+			<ActiveSidebarComponent {...props} />
+		</aside>
 
-		let studentButtons = React.createElement('menu', {className: 'student-buttons'},
-			React.createElement('button',
-				{className: 'back'},
-				React.createElement(Link, {to: '/'}, 'All Students')),
-			React.createElement('button',
-				{className: 'search', onClick: this.toggleSearch},
-				'Search'),
-			React.createElement(DownloadStudentButton, {student}),
-			React.createElement(RevertToDemoButton, {studentId: student.id}),
-			React.createElement(UndoButton, null),
-			React.createElement(RedoButton, null))
-
-		return React.createElement('aside', {className: 'sidebar'}, studentButtons, sidebar)
+		return sidebar
 	},
 })
 
