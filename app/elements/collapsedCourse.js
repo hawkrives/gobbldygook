@@ -34,8 +34,8 @@ class CollapsedCourse extends React.Component {
 }
 
 CollapsedCourse.propTypes = {
-	info: React.PropTypes.object,
-	onClick: React.PropTypes.func,
+	info: React.PropTypes.object.isRequired,
+	onClick: React.PropTypes.func.isRequired,
 }
 CollapsedCourse.defaultProps = {
 	onClick() {}
