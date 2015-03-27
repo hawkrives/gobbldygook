@@ -54,39 +54,33 @@ let Year = React.createClass({
 	},
 
 	render() {
-		let terms = this.state.schedules
+		const terms = this.state.schedules
 			.sortBy(schedule => schedule.semester)
 			.map((schedule) =>
-				React.createElement(Semester, {
-					key: `${schedule.year}-${schedule.semester}-${schedule.id}`,
-					student: this.props.student,
-					semester: schedule.semester,
-					year: this.props.year,
-				}))
+				<Semester
+					key={`${schedule.year}-${schedule.semester}-${schedule.id}`}
+					student={this.props.student}
+					semester={schedule.semester}
+					year={this.props.year} />)
 			.toList()
 
-		let niceYear = expandYear(this.props.year)
+		const niceYear = expandYear(this.props.year)
 
-		return React.createElement('div', {className: 'year'},
-			React.createElement('header', {className: 'year-title'},
-				React.createElement('h1', null, niceYear),
-				React.createElement('button', {
-					className: 'remove-year',
-					title: `Remove the year ${niceYear}`,
-					onClick: this.removeYear,
-				})
-			),
-			React.createElement('div',
-				{className: 'semester-list'},
-				terms.toJS()
-			),
-			React.createElement('button', {
-				className: 'add-semester',
-				title: 'Add Semester',
-				disabled: !this.canAddSemester(),
-				onClick: this.addSemester,
-			})
-		)
+		return <div className='year'>
+			<header className='year-title'>
+				<h1>{niceYear}</h1>
+				<button className='remove-year'
+					title={`Remove the year ${niceYear}`}
+					onClick={this.removeYear} />
+			</header>
+			<div className='semester-list'>
+				{terms.toJS()}
+			</div>
+			<button className='add-semester'
+				title='Add Semester'
+				disabled={!this.canAddSemester()}
+				onClick={this.addSemester} />
+		</div>
 	},
 })
 
