@@ -15,6 +15,7 @@ let CourseTitle = React.createClass({
 		}
 	},
 	render() {
+		console.log('CourseTitle#render')
 		let course = this.props.info
 
 		let type = course.type

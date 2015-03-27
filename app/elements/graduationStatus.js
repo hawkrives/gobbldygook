@@ -28,7 +28,7 @@ class GraduationStatus extends React.Component {
 	}
 
 	render() {
-		// console.info('graduation-status render', this.props.student)
+		console.info('GraduationStatus#render')
 		let student = this.props.student
 
 		if (!student) {

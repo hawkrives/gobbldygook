@@ -32,7 +32,7 @@ class AreaOfStudy extends React.Component {
 	}
 
 	render() {
-		// console.log(`render areaOfStudy for ${this.props.area.id}`)
+		console.log('AreaOfStudy#render', this.props.area.id)
 
 		let progressProps = this.props.areaResult ? {
 			className: this.props.areaResult.progress.word,

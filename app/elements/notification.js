@@ -14,6 +14,7 @@ class Notification extends React.Component {
 	}
 
 	render() {
+		console.log('Notification#render')
 		let message = <h1 className='notification-message'>{this.props.message}</h1>
 		let closeButton = <CloseNotificationButton />
 

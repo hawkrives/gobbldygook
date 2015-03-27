@@ -3,6 +3,7 @@ import cx from 'classnames'
 
 class BooleanRequirement extends React.Component {
 	render() {
+		console.log('BooleanRequirement#render')
 		let requirementClasses = cx({
 			requirement: true,
 			completed: this.props.result,

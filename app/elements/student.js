@@ -37,7 +37,7 @@ class Student extends React.Component {
 	}
 
 	render() {
-		console.info('list of students in Student', this.props.students.toJS())
+		console.info('Student#render')
 
 		if (!this.state.student) {
 			return <LoadingScreen

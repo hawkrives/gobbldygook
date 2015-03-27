@@ -105,6 +105,7 @@ let SearchButton = React.createClass({
 	},
 
 	render() {
+		console.log('SearchButton#render')
 		let showNoResults = this.state.results.length === 0 && this.state.hasQueried
 		let showIndicator = this.state.queryInProgress
 

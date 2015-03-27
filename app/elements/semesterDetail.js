@@ -33,6 +33,7 @@ let SemesterDetail = React.createClass({
 	},
 
 	render() {
+		console.log('SemesterDetail#render')
 		return React.createElement('div',
 			{className: 'semester-detail'},
 			React.createElement('pre', null,

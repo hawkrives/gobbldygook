@@ -71,7 +71,7 @@ let Semester = React.createClass({
 	},
 
 	render() {
-		// console.log('semester render', this.state.schedule)
+		console.log('Semester#render')
 
 		let infoIcons = []
 		if (this.state.schedule && this.state.courses.size) {

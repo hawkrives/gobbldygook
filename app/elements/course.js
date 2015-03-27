@@ -63,6 +63,7 @@ let Course = React.createClass({
 	},
 
 	render() {
+		console.log('Course#render')
 		let isDragging = this.getDragState(itemTypes.COURSE).isDragging
 
 		/*eslint-disable no-unused-vars */

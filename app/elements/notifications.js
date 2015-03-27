@@ -20,6 +20,7 @@ let Notifications = React.createClass({
 	},
 
 	render() {
+		console.log('Notifications#render')
 		// console.log('notifications', this.state.notifications.toJS())
 		let notificationElements = this.state.notifications
 			.map(n => <Notification key={n.id} {...n} />)

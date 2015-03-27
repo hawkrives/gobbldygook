@@ -30,6 +30,7 @@ class ContentEditable extends React.Component {
 	}
 
 	render() {
+		console.log('ContentEditable#render')
 		return <input
 			type='text'
 			onChange={this.handleChange}

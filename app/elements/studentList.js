@@ -30,6 +30,7 @@ class StudentList extends React.Component {
 	}
 
 	render() {
+		console.log('StudentList#render')
 		let studentObjects = this.props.students
 			.toList()
 			.sortBy(s => s.dateLastModified)
