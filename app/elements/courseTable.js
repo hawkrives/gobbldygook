@@ -43,20 +43,18 @@ let CourseTable = React.createClass({
 			.sortBy(schedule => schedule.year)
 			.groupBy(schedule => schedule.year)
 			.map((schedules, year) =>
-				React.createElement(Year, {
-					student: this.props.student,
-					year: year,
-					key: year,
-				}))
+				<Year student={this.props.student} year={year} key={year} />)
 			.toList()
+			.toArray()
 
-		return React.createElement('div', {className: 'course-table'},
-			years.toArray(),
-			React.createElement('button', {
-				className: 'add-year',
-				title: 'Add Year',
-				onClick: this.addYear,
-			}, `${expandYear(this.state.nextAvailableYear, false, '–')}`))
+		return <div className='course-table'>
+			{years}
+			<button className='add-year'
+				title='Add Year'
+				onClick={this.addYear}>
+				{`${expandYear(this.state.nextAvailableYear, false, '–')}`}
+			</button>
+		</div>
 	},
 })
 
