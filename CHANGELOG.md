@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 3.0.0alpha12
+- Stuff
+- More stuff
+- I really ought to update this more often
+
+
 ## 3.0.0alpha11
 - Switched to Stylus as a pre-processor
 - Updated 6to5
@@ -8,6 +14,7 @@
 
 ## 3.0.0alpha10
 - Added `courses` as the first parameter to `queryCourses`, allowing the full power of that weird query engine to run over any list of courses.
+
 
 ## 3.0.0alpha9
 - Modularized app
