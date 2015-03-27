@@ -17,18 +17,22 @@ class Student extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		console.log(nextProps)
 		let queryId = this.props.routerState.params.id
 		let student = nextProps.students.get(queryId)
 
 		if (student) {
-			console.info('student\'s student: ', student.toJS())
+			// console.info('student\'s student: ', student.toJS())
 
 			window.stu = student
 			this.setState({student})
 		}
 		else {
-			this.setState({message: `Could not find student "${queryId}"`, messageClass: 'error'})
-			console.info('student is undefined at Student')
+			this.setState({
+				message: `Could not find student "${queryId}"`,
+				messageClass: 'error'
+			})
+			// console.info('student is undefined at Student')
 		}
 	}
 
