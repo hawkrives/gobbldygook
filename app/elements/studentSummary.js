@@ -52,6 +52,14 @@ class StudentSummary extends React.Component {
 		let concentrationEl = <span className='area-of-study-list' key='concentrations'>{concentrationTitles}</span>
 		let emphasisEl = <span className='area-of-study-list' key='emphases'>{emphasisTitles}</span>
 
+		console.log(student.graduation, student.matriculation)
+		let graduationEl = <ContentEditable type='number'
+			content={student.graduation}
+			onChange={(ev) => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />
+		let sinceMatriculationEl = <ContentEditable type='number'
+			content={student.graduation - student.matriculation}
+			onChange={(ev) => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />
+
 		return <article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 			<header>
 				<div id='student-letter'>{name.length ? name[0] : ''}</div>
@@ -59,7 +67,8 @@ class StudentSummary extends React.Component {
 			</header>
 			<div className='content'>
 				<p>
-					You are planning on {degreeEmphasizer} {degreeEl} {degreeWords}
+					You are planning on graduating in {graduationEl}, {sinceMatriculationEl} years
+					after matriculating, with {degreeEmphasizer} {degreeEl} {degreeWords}
 					{(has.major > 0) ? [', with ', majorEmphasizer, majorWords, ' in ', majorEl] : null}
 					{(has.concentration > 0) ? [', and ' + concentrationEmphasizer, concentrationWords, ' in ', concentrationEl] : null}
 					{(has.emphasis > 0) ? [', not to mention ', emphasisEmphasizer, emphasisWords, ' in ', emphasisEl] : null}.
