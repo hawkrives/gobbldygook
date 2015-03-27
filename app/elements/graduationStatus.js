@@ -16,9 +16,10 @@ class GraduationStatus extends React.Component {
 		}
 	}
 
-	// shouldComponentUpdate(nextProps, nextState) {
-		// return nextProps.student !== this.props.student
-	// }
+	shouldComponentUpdate(nextProps, nextState) {
+		return ((nextProps.student !== this.props.student) ||
+			(nextState.areaDetails !== this.state.areaDetails))
+	}
 
 	async componentWillReceiveProps(nextProps) {
 		let graduationStatus = await nextProps.student.checkGraduatability()
