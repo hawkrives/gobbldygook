@@ -3,6 +3,7 @@ import React from 'react'
 import {oxford, pluralize} from 'humanize-plus'
 
 import ContentEditable from './contentEditable'
+import AutosizeInput from 'react-input-autosize'
 
 import studentActions from '../flux/studentActions'
 
@@ -18,8 +19,8 @@ class StudentSummary extends React.Component {
 
 		let name = student.name
 		let studentId = this.props.student.id
-		let NameEl = <ContentEditable
-			content={name}
+		let NameEl = <AutosizeInput className='autosize-input'
+			value={name}
 			onChange={(ev) => studentActions.updateName(studentId, ev.target.value.trim())} />
 
 		let has = studies
@@ -53,11 +54,13 @@ class StudentSummary extends React.Component {
 		let emphasisEl = <span className='area-of-study-list' key='emphases'>{emphasisTitles}</span>
 
 		console.log(student.graduation, student.matriculation)
-		let graduationEl = <ContentEditable type='number'
-			content={student.graduation}
+		let graduationEl = <AutosizeInput className='autosize-input'
+			value={String(student.graduation)}
+			minWidth='35'
 			onChange={(ev) => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />
-		let sinceMatriculationEl = <ContentEditable type='number'
-			content={student.graduation - student.matriculation}
+		let sinceMatriculationEl = <AutosizeInput className='autosize-input'
+			value={String(student.graduation - student.matriculation)}
+			minWidth='13'
 			onChange={(ev) => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />
 
 		return <article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
