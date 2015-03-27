@@ -1,6 +1,10 @@
 import React from 'react'
 
 class FakeCourse extends React.Component {
+	shouldComponentUpdate() {
+		return false
+	}
+
 	render() {
 		console.log('FakeCourse#render')
 		let titleEl = <h1 className='title'>{this.props.title}</h1>
