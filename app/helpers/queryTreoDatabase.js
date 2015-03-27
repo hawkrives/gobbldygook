@@ -52,7 +52,7 @@ function queryStore(query) {
 		// Grab a key from the query to use as an index.
 		// TODO: Write a function to sort keys by priority.
 		let indexKeys = keys(query)
-		// // <this is a very hacky way of prioritizing the deptnum>
+		// <this is a very hacky way of prioritizing the deptnum>
 		// if (contains(keysWithIndices, 'deptnum')) {
 		// 	keysWithIndices.splice(findIndex('deptnum'), 1)
 		// 	keysWithIndices.unshift('deptnum')
