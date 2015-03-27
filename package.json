@@ -58,6 +58,7 @@
     "ramda": "^0.13.0",
     "react": "^0.13.1",
     "react-dnd": "^0.9.8",
+    "react-input-autosize": "^0.4.2",
     "react-list-select": "^0.3.0",
     "react-router": "^0.13.2",
     "reflux": "^0.2.7",
