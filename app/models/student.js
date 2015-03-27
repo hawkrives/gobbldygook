@@ -172,7 +172,12 @@ class Student extends StudentRecord {
 	}
 
 	removeMultipleAreas(ids) {
-		Immutable.Seq(ids).forEach(this.removeArea, this)
+		return this.withMutations((student) => {
+			Immutable.Seq(ids).forEach((id) => {
+				student = student.removeArea(id)
+			})
+			return student
+		})
 	}
 
 
