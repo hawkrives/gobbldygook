@@ -1,14 +1,15 @@
 import React from 'react'
+import cx from 'classnames'
 import studentActions from '../flux/studentActions'
 import studentStore from '../flux/studentStore'
 
-let UndoButton = React.createClass({
+class UndoButton extends React.Component {
 	render() {
-		return React.createElement('button', {
-			onClick: studentActions.undo,
-			disabled: (studentStore.history.size === 0),
-		}, 'Undo')
+		console.log('UndoButton#render')
+		return <button className={cx(this.props.className)}
+			onClick={studentActions.undo}
+			disabled={studentStore.history.size === 0}>Undo</button>
 	}
-})
+}
 
 export default UndoButton
