@@ -16,8 +16,12 @@ class GraduationStatus extends React.Component {
 		}
 	}
 
+	// shouldComponentUpdate(nextProps, nextState) {
+		// return nextProps.student !== this.props.student
+	// }
+
 	async componentWillReceiveProps(nextProps) {
-		let graduationStatus = await checkStudentGraduatability(nextProps.student)
+		let graduationStatus = await nextProps.student.checkGraduatability()
 
 		let {graduatability, areaDetails} = graduationStatus
 		this.setState({graduatability, areaDetails})
@@ -50,13 +54,8 @@ class GraduationStatus extends React.Component {
 				let areaElements = areas.toList().map((area, index) => {
 					let areaResult = this.state.areaDetails.find(a => a.id === area.id)
 
-					let props = {
-						key: `${area.id}-${index}`,
-						student,
-						areaResult,
-						area,
-					}
-					return <AreaOfStudy {...props} />
+					let props = {student, areaResult, area}
+					return <AreaOfStudy key={`${area.id}-${index}`} {...props} />
 				}).toJS()
 
 				areaElements.push(
