@@ -78,11 +78,7 @@ class GraduationStatus extends React.Component {
 }
 
 GraduationStatus.propTypes = {
-	student: React.PropTypes.object.isRequired,
-}
-
-GraduationStatus.defaultProps = {
-	sections: []
+	student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 }
 
 export default GraduationStatus
