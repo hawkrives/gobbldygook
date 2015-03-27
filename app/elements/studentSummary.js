@@ -9,17 +9,17 @@ import studentActions from '../flux/studentActions'
 let goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
 let badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
-let StudentSummary = React.createClass({
-	propTypes: {
-		student: React.PropTypes.object.isRequired,
-		graduatability: React.PropTypes.bool.isRequired,
-	},
+class StudentSummary extends React.Component {
+	constructor(props) {
+		super(props)
+		this.updateStudentName = this.updateStudentName.bind(this)
+	}
 
 	updateStudentName(ev) {
 		let newName = ev.target.value
 		newName = newName.trim()
 		studentActions.changeName(this.props.student.id, newName)
-	},
+	}
 
 	render() {
 		let canGraduate = this.props.graduatability
@@ -76,7 +76,12 @@ let StudentSummary = React.createClass({
 				</p>
 			</div>
 		</article>
-	},
-})
+	}
+}
+
+StudentSummary.propTypes = {
+	student: React.PropTypes.object.isRequired,
+	graduatability: React.PropTypes.bool.isRequired,
+}
 
 export default StudentSummary

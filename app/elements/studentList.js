@@ -3,21 +3,18 @@ import Immutable from 'immutable'
 import {Link} from 'react-router'
 import studentActions from '../flux/studentActions'
 
-let StudentList = React.createClass({
-	propTypes: {
-		students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
-	},
+class StudentList extends React.Component {
+	constructor(props) {
+		super(props)
+		// since we are starting off without any data, there is no initial value
+		this.state = {
+			data: null,
+		}
+	}
 
 	handleSubmit(ev) {
 		ev.preventDefault()
-	},
-
-	// since we are starting off without any data, there is no initial value
-	getInitialState() {
-		return {
-			data: null,
-		}
-	},
+	}
 
 	// when a file is passed to the input field, retrieve the contents as a
 	// base64-encoded data URI and save it to the component's state
@@ -30,84 +27,84 @@ let StudentList = React.createClass({
 		}
 
 		reader.readAsText(file)
-	},
+	}
 
 	render() {
 		let studentObjects = this.props.students
 			.toList()
 			.sortBy(s => s.dateLastModified)
-			.map((student) => React.createElement('li', {key: student.id},
-				React.createElement(Link, {
-					className: 'student-list-item',
-					params: {id: student.id},
-					to: 'student',
-				}, [
-					React.createElement('span', {key: 'letter', className: 'letter'}, student.name.length ? student.name[0] : ''),
-					React.createElement('span', {key: 'name', className: 'name'}, student.name || 'Student'),
-					// React.createElement('span', {className: 'status', student.name || 'Student'}),
-				])))
+			.map((student) => <li key={student.id}>
+				<Link className='student-list-item'
+					params={{id: student.id}}
+					to='student'>
+					<span key='letter' className='letter'>{student.name.length ? student.name[0] : ''}</span>
+					<span key='name' className='name'>{student.name || 'Student'}</span>
+				</Link></li>)
 			.toJS()
 
-		let buttons = React.createElement('menu', {className: 'student-list-buttons'}, [
-			React.createElement('button', {
-				key: 'student-list-button--sort-by',
-				className: 'student-list-button--sort-by',
-				items: [
+		let buttons = <menu className='student-list-buttons'>
+			<button
+				key='student-list-button--sort-by'
+				className='student-list-button--sort-by'
+				items={[
 					'First Name',
 					'Last Name',
 					'Date Modified',
 					'Date Created',
 					'Graduation Year',
-				],
-			}, 'Sort'),
+				]}>Sort</button>
 
-			React.createElement('button', {
-				key: 'student-list-button--group-by',
-				className: 'student-list-button--group-by',
-				items: [
+			<button
+				key='student-list-button--group-by'
+				className='student-list-button--group-by'
+				items={[
 					'None',
 					'Area',
 					'Graduatability',
 					'Graduation Year',
-				],
-			}, 'Group'),
+				]}>Group</button>
 
-			React.createElement('button', {
-				key: 'student-list-button--edit',
-				className: 'student-list-button--edit',
-				onClick: this.editList,
-			}, 'Edit'),
+			<button
+				key='student-list-button--edit'
+				className='student-list-button--edit'
+				onClick={this.editList}>Edit</button>
 
-			React.createElement('button', {
-				key: 'student-list-button--new',
-				className: 'student-list-button--new',
-				onClick: studentActions.initStudent,
-			}, 'New'),
-		])
+			<button
+				key='student-list-button--new'
+				className='student-list-button--new'
+				onClick={studentActions.initStudent}>New</button>
+		</menu>
 
-		let importButton = React.createElement('input', {
-			type: 'file',
-			accept: '.json',
-			key: 'import-student',
-			className: 'import-student',
-			onSubmit: this.handleSubmit,
-			onChange: this.handleFile,
-		})
+		let importButton = <input
+			type='file'
+			accept='.json'
+			key='import-student'
+			className='import-student'
+			onSubmit={this.handleSubmit}
+			onChange={this.handleFile} />
 
-		let studentFilter = React.createElement('input', {
-			className: 'student-list-filter',
-			placeholder: 'Filter students',
-		})
+		let studentFilter = <input
+			className='student-list-filter'
+			placeholder='Filter students' />
 
-		let toolbar = React.createElement('div', {className: 'student-list-toolbar'},
-			studentFilter, buttons)
+		let toolbar = <div className='student-list-toolbar'>
+			{studentFilter}{buttons}
+		</div>
 
-		let students = React.createElement('ol', {className: 'student-list'},
-			studentObjects)
+		let students = <ol className='student-list'>
+			{studentObjects}
+		</ol>
 
-		return React.createElement('div', {className: 'students-overview'},
-			importButton, toolbar, students)
-	},
-})
+		return <div className='students-overview'>
+			{importButton}
+			{toolbar}
+			{students}
+		</div>
+	}
+}
+
+StudentList.propTypes = {
+	students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+}
 
 export default StudentList
