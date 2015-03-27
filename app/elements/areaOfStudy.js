@@ -18,9 +18,10 @@ class AreaOfStudy extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			expanded: false,
+			// open: false,
 			reqSets: makeRequirementSets(props),
 		}
+		// this.onToggle = this.onToggle.bind(this)
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -31,8 +32,22 @@ class AreaOfStudy extends React.Component {
 		this.componentWillReceiveProps(this.props)
 	}
 
+	// onToggle() {
+	// 	this.setState({open: !this.state.open})
+	// }
+
+	// componentDidMount() {
+	// 	let el = React.findDOMNode(this)
+	// 	el.addEventListener('toggle', this.onToggle)
+	// }
+
+	// componentWillUnmount() {
+	// 	let el = React.findDOMNode(this)
+	// 	el.removeEventListener('toggle', this.onToggle)
+	// }
+
 	render() {
-		console.log('AreaOfStudy#render', this.props.area.id)
+		console.log('AreaOfStudy#render')
 
 		let progressProps = this.props.areaResult ? {
 			className: this.props.areaResult.progress.word,
@@ -52,7 +67,11 @@ class AreaOfStudy extends React.Component {
 			loading: !this.props.areaResult,
 		})
 
-		return <details className={classes}>
+		let props = {}
+		// if (this.state.open)
+		// 	props['open'] = true
+
+		return <details className={classes} {...props}>
 			{header}
 			{reqSets}
 		</details>
