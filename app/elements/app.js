@@ -4,6 +4,7 @@ import Immutable from 'immutable'
 import {RouteHandler} from 'react-router'
 
 import studentStore from '../flux/studentStore'
+import LoadingScreen from './loadingScreen'
 
 let GobbldygookApp = React.createClass({
 	mixins: [Reflux.listenTo(studentStore, 'onStudentsChanged', 'onStudentsChanged')],
@@ -27,7 +28,7 @@ let GobbldygookApp = React.createClass({
 	render() {
 		// console.log('rendering GobbldygookApp', this.state.studentsInitialized)
 		if (!this.state.studentsInitialized) {
-			return <div className='loading-spinner'><div>Loading Students&hellip;</div></div>
+			return <LoadingScreen message="Loading Students…" />
 		}
 
 		return <RouteHandler

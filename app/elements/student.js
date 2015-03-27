@@ -3,6 +3,7 @@ import {State, RouteHandler} from 'react-router'
 import Immutable from 'immutable'
 
 import Sidebar from './sidebar'
+import LoadingScreen from './loadingScreen'
 
 class Student extends React.Component {
 	constructor(props) {
@@ -39,10 +40,9 @@ class Student extends React.Component {
 		console.info('list of students in Student', this.props.students.toJS())
 
 		if (!this.state.student) {
-			return <figure className='loading-screen'>
-				<div className='loading-spinner'><div>Loading Students…</div></div>
-				<figcaption className={`loading-message ${this.state.messageClass}`}>{this.state.message}</figcaption>
-			</figure>
+			return <LoadingScreen
+				className={this.state.messageClass}
+				message={this.state.message} />
 		}
 
 		return <div className='student'>
