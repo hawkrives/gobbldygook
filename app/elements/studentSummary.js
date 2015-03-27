@@ -10,17 +10,6 @@ let goodGraduationMessage = "It looks like you'll make it! Just follow the plan,
 let badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
 class StudentSummary extends React.Component {
-	constructor(props) {
-		super(props)
-		this.updateStudentName = this.updateStudentName.bind(this)
-	}
-
-	updateStudentName(ev) {
-		let newName = ev.target.value
-		newName = newName.trim()
-		studentActions.changeName(this.props.student.id, newName)
-	}
-
 	render() {
 		console.log('StudentSummary#render')
 		let canGraduate = this.props.graduatability
@@ -28,7 +17,10 @@ class StudentSummary extends React.Component {
 		let studies = student.studies
 
 		let name = student.name
-		let NameEl = <ContentEditable content={name} onChange={this.updateStudentName} />
+		let studentId = this.props.student.id
+		let NameEl = <ContentEditable
+			content={name}
+			onChange={(ev) => studentActions.updateName(studentId, ev.target.value.trim())} />
 
 		let has = studies
 			.groupBy(s => s.type)
