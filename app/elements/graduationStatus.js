@@ -64,7 +64,7 @@ class GraduationStatus extends React.Component {
 						{`Add ${capitalize(areaType)}`}
 					</button>)
 
-				return <section id={pluralType} key={areaType}>
+				return <section id={pluralType} key={areaType} className='area-of-study-group'>
 					{areaTypeHeading}
 					{areaElements}
 				</section>

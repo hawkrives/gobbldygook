@@ -38,7 +38,7 @@ let Sidebar = React.createClass({
 
 		let sidebar = <aside className='sidebar'>
 			<menu className='student-buttons'>
-				<Link to='/' className='back sidebar-btn'>All Students</Link>
+				<Link to='/' className='back sidebar-btn'>Students</Link>
 				<button className='search sidebar-btn' onClick={this.toggleSearch}>Search</button>
 				<a className='sidebar-btn'
 					download={`${student.name}.gb-student.json`}

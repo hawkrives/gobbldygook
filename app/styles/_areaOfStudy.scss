@@ -1,8 +1,23 @@
-.area-of-study {
+.area-of-study-group {
 	@include card;
 
 	margin-bottom: 0.75em;
+	// padding: 1em 0 0.35em;
+}
 
+.area-type-heading {
+	font-size: 0.9em;
+	font-weight: normal;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-feature-settings: 'smcp';
+
+	h1 {
+		@include heading-neutral;
+	}
+}
+
+.area-of-study {
 	$progress-height: 4px;
 
 	h1 {
@@ -31,8 +46,8 @@
 		@include progress-track('blue');
 
 		overflow: hidden;
-		border-top-left-radius: 2px;
-		border-top-right-radius: 2px;
+		// border-top-left-radius: 2px;
+		// border-top-right-radius: 2px;
 
 		position: absolute;
 		top: 0;
@@ -70,10 +85,6 @@
 		position: absolute;
 		right: 12px;
 		top: $progress-height;
-		// margin-right: 12px;
-		// z-index: 1;
-
-		// transition: 0.1s;
 	}
 
 	&[open] {
@@ -99,7 +110,7 @@
 	@include add-button($psuedo: '::before') {
 		margin-right: 0.5em;
 	}
-	@include button--raised;
+	// @include button--raised;
 
 	min-height: 0;
 	padding-top: 0.25em;

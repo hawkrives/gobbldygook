@@ -35,17 +35,14 @@ class StudentList extends React.Component {
 			.toList()
 			.sortBy(s => s.dateLastModified)
 			.map((student) => <li key={student.id}>
-				<Link className='student-list-item'
-					params={{id: student.id}}
-					to='student'>
+				<Link className='student-list-item' to='student' params={{id: student.id}}>
 					<span key='letter' className='letter'>{student.name.length ? student.name[0] : ''}</span>
 					<span key='name' className='name'>{student.name || 'Student'}</span>
 				</Link></li>)
 			.toJS()
 
 		let buttons = <menu className='student-list-buttons'>
-			<button
-				key='student-list-button--sort-by'
+			<button key='student-list-button--sort-by'
 				className='student-list-button--sort-by'
 				items={[
 					'First Name',
@@ -55,8 +52,7 @@ class StudentList extends React.Component {
 					'Graduation Year',
 				]}>Sort</button>
 
-			<button
-				key='student-list-button--group-by'
+			<button key='student-list-button--group-by'
 				className='student-list-button--group-by'
 				items={[
 					'None',
@@ -65,26 +61,23 @@ class StudentList extends React.Component {
 					'Graduation Year',
 				]}>Group</button>
 
-			<button
-				key='student-list-button--edit'
+			<button key='student-list-button--edit'
 				className='student-list-button--edit'
 				onClick={this.editList}>Edit</button>
 
-			<button
-				key='student-list-button--new'
+			<button key='student-list-button--new'
 				className='student-list-button--new'
 				onClick={studentActions.initStudent}>New</button>
 		</menu>
 
-		let importButton = <input
-			type='file'
+		let importButton = <input type='file'
 			accept='.json'
 			key='import-student'
 			className='import-student'
 			onSubmit={this.handleSubmit}
 			onChange={this.handleFile} />
 
-		let studentFilter = <input
+		let studentFilter = <input type='search'
 			className='student-list-filter'
 			placeholder='Filter students' />
 
