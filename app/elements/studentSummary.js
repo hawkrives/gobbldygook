@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import React from 'react'
+import Immutable from 'immutable'
 import {oxford, pluralize} from 'humanize-plus'
 
 import ContentEditable from './contentEditable'
@@ -11,6 +12,10 @@ let goodGraduationMessage = "It looks like you'll make it! Just follow the plan,
 let badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
 class StudentSummary extends React.Component {
+	shouldComponentUpdate(nextProps) {
+		return nextProps.student !== this.props.student || nextProps.graduatability !== this.props.graduatability
+	}
+
 	render() {
 		console.log('StudentSummary#render')
 		let canGraduate = this.props.graduatability
@@ -54,14 +59,20 @@ class StudentSummary extends React.Component {
 		let emphasisEl = <span className='area-of-study-list' key='emphases'>{emphasisTitles}</span>
 
 		console.log(student.graduation, student.matriculation)
+
 		let graduationEl = <AutosizeInput className='autosize-input'
 			value={String(student.graduation)}
 			minWidth='35'
-			onChange={(ev) => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />
+			onChange={(ev) =>
+				studentActions.changeGraduation(studentId, parseInt(ev.target.value))}
+			/>
+
 		let sinceMatriculationEl = <AutosizeInput className='autosize-input'
 			value={String(student.graduation - student.matriculation)}
 			minWidth='13'
-			onChange={(ev) => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />
+			onChange={(ev) =>
+				studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))}
+			/>
 
 		return <article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 			<header>
@@ -85,7 +96,7 @@ class StudentSummary extends React.Component {
 }
 
 StudentSummary.propTypes = {
-	student: React.PropTypes.object.isRequired,
+	student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 	graduatability: React.PropTypes.bool.isRequired,
 }
 
