@@ -60,19 +60,15 @@ class StudentSummary extends React.Component {
 
 		console.log(student.graduation, student.matriculation)
 
-		let graduationEl = <AutosizeInput className='autosize-input'
+		const graduationEl = <AutosizeInput
+			className='autosize-input'
 			value={String(student.graduation)}
-			minWidth='35'
-			onChange={(ev) =>
-				studentActions.changeGraduation(studentId, parseInt(ev.target.value))}
-			/>
+			onChange={(ev) => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />
 
-		let sinceMatriculationEl = <AutosizeInput className='autosize-input'
+		const sinceMatriculationEl = <AutosizeInput
+			className='autosize-input'
 			value={String(student.graduation - student.matriculation)}
-			minWidth='13'
-			onChange={(ev) =>
-				studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))}
-			/>
+			onChange={(ev) => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />
 
 		return <article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 			<header>
