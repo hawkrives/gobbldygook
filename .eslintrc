@@ -41,7 +41,7 @@ rules:
   indent: [1, tab]
   camelcase: 2
   comma-style: [1, last]
-  comma-spacing: [2, {before: false, after: true}]
+  comma-spacing: [1, {before: false, after: true}]
   key-spacing: [2, {beforeColon: false, afterColon: true}]
   quotes: [2, single, 'avoid-escape']
   consistent-this: [1, self]

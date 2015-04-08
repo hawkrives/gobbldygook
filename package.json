@@ -8,7 +8,7 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "config": {
-    "browserify": "--debug -e app/index.js -t [ babelify --experimental ]",
+    "browserify": "--debug -e app/index.js -t [ babelify --stage 0 ]",
     "uglify": "--source-map-root ./dist --in-source-map dist/app.js.map --source-map dist/app.min.js.map --compress --mangle --screw-ie8",
     "sass": "--stdout --source-map app.css.map --source-map-embed",
     "csswring": "--sourcemap"
@@ -43,7 +43,7 @@
     "production": "npm run clean && npm run build && npm run uglify & npm run csswring; wait"
   },
   "dependencies": {
-    "babel-core": "4.7.16",
+    "babel-core": "5.0.10",
     "bluebird": "2.9.24",
     "classnames": "1.2.0",
     "combinations-generator": "1.0.1",
@@ -59,37 +59,39 @@
     "react": "0.13.1",
     "react-components": "0.2.0",
     "react-dnd": "0.9.8",
-    "react-input-autosize": "0.4.2",
+    "react-input-autosize": "0.4.3",
     "react-list-select": "0.3.0",
     "react-router": "0.13.2",
-    "react-style": "0.5.1",
+    "react-style": "0.5.2",
     "reflux": "0.2.7",
     "stickyfill": "1.1.1",
-    "sto-areas": "2.3.11",
+    "sto-areas": "2.3.12",
     "sto-courses": "4.0.1",
     "sto-helpers": "4.2.11",
     "sto-sis-time-parser": "2.0.0",
-    "treo": "0.4.3",
+    "treo": "0.5.0",
     "whatwg-fetch": "0.7.0"
   },
   "devDependencies": {
     "autoprefixer": "5.1.0",
     "babel-eslint": "2.0.2",
-    "babel-jest": "4.0.0",
-    "babelify": "5.0.4",
+    "babel-jest": "5.0.1",
+    "babelify": "6.0.2",
     "browser-sync": "2.5.3",
     "browserify": "9.0.7",
     "csswring": "3.0.3",
     "dom-storage": "2.0.1",
     "eslint": "0.18.0",
-    "eslint-plugin-react": "1.6.1",
+    "eslint-plugin-react": "2.1.0",
     "exorcist": "0.1.6",
     "idb-polyfill": "0.0.2",
-    "jest-cli": "0.4.0",
     "node-sass": "2.1.1",
     "nodemon": "1.3.7",
     "uglify-js": "2.4.19",
     "watchify": "3.1.0"
+  },
+  "optionalDependencies": {
+    "jest-cli": "0.4.0"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
