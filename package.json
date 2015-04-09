@@ -43,7 +43,7 @@
     "production": "npm run clean && npm run build && npm run uglify & npm run csswring; wait"
   },
   "dependencies": {
-    "babel-core": "5.0.10",
+    "babel-core": "5.0.12",
     "bluebird": "2.9.24",
     "classnames": "1.2.0",
     "combinations-generator": "1.0.1",
@@ -62,7 +62,7 @@
     "react-input-autosize": "0.4.3",
     "react-list-select": "0.3.0",
     "react-router": "0.13.2",
-    "react-style": "0.5.2",
+    "react-style": "0.5.3",
     "reflux": "0.2.7",
     "stickyfill": "1.1.1",
     "sto-areas": "2.3.12",
@@ -78,7 +78,7 @@
     "babel-jest": "5.0.1",
     "babelify": "6.0.2",
     "browser-sync": "2.5.3",
-    "browserify": "9.0.7",
+    "browserify": "9.0.8",
     "csswring": "3.0.3",
     "dom-storage": "2.0.1",
     "eslint": "0.18.0",
