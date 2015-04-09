@@ -7,7 +7,7 @@ import {randomChar, isTrue} from 'sto-helpers'
 import getCourses from '../helpers/getCourses'
 import findWarnings from '../helpers/findCourseWarnings'
 
-let ScheduleRecord = Immutable.Record({
+const ScheduleRecord = Immutable.Record({
 	id: uuid(),
 	active: false,
 	year: 0,
@@ -61,7 +61,7 @@ class Schedule extends ScheduleRecord {
 	// Course Maintenance
 
 	reorderCourse(clbid, newIndex) {
-		let oldIndex = this.clbids.findIndex((id) => id === clbid)
+		const oldIndex = this.clbids.findIndex((id) => id === clbid)
 
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
@@ -87,7 +87,7 @@ class Schedule extends ScheduleRecord {
 		// let start = present()
 		// console.log(`removing clbid ${clbid} from schedule ${this.id} (${this.year}-${this.semester}.${this.index})`)
 
-		let index = this.clbids.indexOf(clbid)
+		const index = this.clbids.indexOf(clbid)
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.delete(index))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
@@ -107,9 +107,9 @@ class Schedule extends ScheduleRecord {
 		courses = reject(courses, isUndefined)
 
 		// Step one: do any times conflict?
-		let conflicts = findWarnings(courses, this.toJS())
+		const conflicts = findWarnings(courses, this.toJS())
 
-		let hasConflict = lodash(conflicts)
+		const hasConflict = lodash(conflicts)
 			// flatten the nested arrays
 			.flatten()
 			// filter to just the non-null/undefined items

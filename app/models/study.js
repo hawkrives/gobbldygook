@@ -2,7 +2,7 @@ import {contains} from 'lodash'
 import Immutable from 'immutable'
 import getArea from 'sto-areas'
 
-let StudyRecord = Immutable.Record({
+const StudyRecord = Immutable.Record({
 	id: '',
 	type: '',
 	abbr: '',
@@ -13,9 +13,9 @@ let StudyRecord = Immutable.Record({
 
 class Study extends StudyRecord {
 	constructor(args) {
-		let {id, revisionYear} = args
+		const {id, revisionYear} = args
 
-		let {type, departmentAbbr, title, check} = getArea(id, revisionYear)
+		const {type, departmentAbbr, title, check} = getArea(id, revisionYear)
 		// console.log('made a Study', id, title)
 
 		super({
@@ -29,8 +29,8 @@ class Study extends StudyRecord {
 	}
 
 	toJSON() {
-		let toKeep = ['id', 'revisionYear']
-		let filtered = this.toMap()
+		const toKeep = ['id', 'revisionYear']
+		const filtered = this.toMap()
 			.filter((val, key) => contains(toKeep, key))
 		return filtered.toJS()
 	}

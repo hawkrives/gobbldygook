@@ -13,7 +13,7 @@ import Study from './study'
 import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
 
-let StudentRecord = Immutable.Record({
+const StudentRecord = Immutable.Record({
 	id: null,
 	name: null,
 	version: currentVersionString,
@@ -36,12 +36,12 @@ let StudentRecord = Immutable.Record({
 
 class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
-		// let startTime = present()
+		// const startTime = present()
 		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
 		// instead of our custom Studies, Schedules, and such.
-		let toRemove = ['studies', 'schedules', 'overrides', 'fabrications', 'settings']
-		let filtered = omit(encodedStudent, toRemove)
-		let immutableStudent = Immutable.fromJS(filtered)
+		const toRemove = ['studies', 'schedules', 'overrides', 'fabrications', 'settings']
+		const filtered = omit(encodedStudent, toRemove)
+		const immutableStudent = Immutable.fromJS(filtered)
 
 		super(immutableStudent)
 
@@ -114,18 +114,18 @@ class Student extends StudentRecord {
 	}
 
 	addSchedule(newSchedule) {
-		let sched = new Schedule(newSchedule)
+		const sched = new Schedule(newSchedule)
 		return this.setIn(['schedules', sched.id], sched)
 	}
 
 	destroySchedule(scheduleId) {
 		// console.log(`removing schedule ${scheduleId}`)
 
-		let deadSched = this.getIn(['schedules', scheduleId])
-		let scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
+		const deadSched = this.getIn(['schedules', scheduleId])
+		const scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
 
 		if (deadSched && deadSched.active) {
-			let otherSchedKey = scheduleIsNoMore.findKey((sched) =>
+			const otherSchedKey = scheduleIsNoMore.findKey((sched) =>
 				sched.year === deadSched.year &&
 				sched.semester === deadSched.semester &&
 				sched.id !== deadSched.id)
@@ -165,7 +165,7 @@ class Student extends StudentRecord {
 	}
 
 	addArea(areaOfStudy) {
-		let study = new Study(areaOfStudy)
+		const study = new Study(areaOfStudy)
 		return this.setIn(['studies', study.id], study)
 	}
 
@@ -208,9 +208,11 @@ class Student extends StudentRecord {
 	// getters
 
 	get courses() {
-		let allCourses = this.activeSchedules.map((schedule) => schedule.courses).toArray()
-		let scheduleCoursePromises = Promise.all(allCourses)
-		return scheduleCoursePromises.then((results) => flatten(results))
+		const allCourses = this.activeSchedules
+			.map((schedule) => schedule.courses)
+			.toArray()
+		const scheduleCourses = Promise.all(allCourses)
+		return flatten(scheduleCourses)
 	}
 
 	get creditCount() {
@@ -244,11 +246,11 @@ class Student extends StudentRecord {
 	}
 
 	save() {
-		let oldVersion = localStorage.getItem(this.id)
-		let stringified = JSON.stringify(this)
+		const oldVersion = localStorage.getItem(this.id)
+		const stringified = JSON.stringify(this)
 		if (oldVersion !== stringified) {
 			console.log(`saving student ${this.name} (${this.id})`)
-			let student = this.set('dateLastModified', new Date())
+			const student = this.set('dateLastModified', new Date())
 			localStorage.setItem(student.id, stringified)
 		}
 	}
