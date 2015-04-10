@@ -1,8 +1,8 @@
-import 'babel-core/polyfill'
-import 'whatwg-fetch'
-
 import Promise from 'bluebird'
 Promise.longStackTraces()
+
+import 'babel-core/polyfill'
+import 'whatwg-fetch'
 
 import React from 'react'
 React.initializeTouchEvents(true)
