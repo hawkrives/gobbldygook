@@ -211,8 +211,8 @@ class Student extends StudentRecord {
 		const allCourses = this.activeSchedules
 			.map((schedule) => schedule.courses)
 			.toArray()
-		const scheduleCourses = Promise.all(allCourses)
-		return flatten(scheduleCourses)
+		const scheduleCoursePromises = Promise.all(allCourses)
+		return scheduleCoursePromises.then((scheduleCourses) => flatten(scheduleCourses))
 	}
 
 	get creditCount() {
