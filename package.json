@@ -38,7 +38,7 @@
     "test": "jest",
     "start": "npm run serve",
     "serve": "npm run watch & npm run browser-sync; wait",
-    "travis": "npm run lint && npm run build && npm run test",
+    "travis": "npm run lint && npm run build",
     "production": "npm run clean && npm run build && npm run uglify & npm run csswring; wait"
   },
   "dependencies": {
