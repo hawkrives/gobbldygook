@@ -118,9 +118,9 @@ async function cleanPriorData(item) {
 		throw e
 	}
 
-	items = map(items, (item) => {
+	items = map(items, ({clbid}) => {
 		let result = Object.create(null)
-		result[item.clbid] = null
+		result[clbid] = null
 		return result
 	})
 

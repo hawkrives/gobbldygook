@@ -7,7 +7,7 @@ import {
 	filter,
 	first,
 	isString,
-	keys,
+	keys as extractKeys,
 	last,
 	map,
 	reject,
@@ -47,7 +47,7 @@ function queryStore(query) {
 
 		// Grab a key from the query to use as an index.
 		// TODO: Write a function to sort keys by priority.
-		let indexKeys = keys(query)
+		let indexKeys = extractKeys(query)
 		// <this is a very hacky way of prioritizing the deptnum>
 		// if (contains(keysWithIndices, 'deptnum')) {
 		// 	keysWithIndices.splice(findIndex('deptnum'), 1)

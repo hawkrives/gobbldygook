@@ -20,8 +20,8 @@ class ContentEditable extends React.Component {
 		let {value} = ev.target
 
 		if (this.props.onChange && value !== this.state.content) {
-			this.debounce = this.debounce || debounce((value) => {
-				this.props.onChange({target: {value}})
+			this.debounce = this.debounce || debounce((val) => {
+				this.props.onChange({target: {val}})
 			}, 500, {'maxWait': 1000})
 			this.debounce(value)
 		}
