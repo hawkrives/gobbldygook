@@ -201,14 +201,17 @@ async function loadDataFiles(infoFile) {
 
 async function loadInfoFile(url) {
 	console.log('loading ' + url)
-	let infoFile = await fetch(url).then(status).then(json)
+	const infoFile = await fetch(url).then(status).then(json)
 	loadDataFiles(infoFile)
 }
 
 async function loadData() {
-	let infoFiles = [
-		'./data/courses/info.json',
-	]
+	const fileList = await fetch('./infoFiles.url')
+		.then(status)
+		.then(response => response.text())
+
+	const infoFiles = filter(fileList.split('\n'), url => url.length)
+
 	await* map(infoFiles, loadInfoFile)
 }
 
