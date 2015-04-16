@@ -68,6 +68,7 @@ class StudentSummary extends React.Component {
 			value={String(student.graduation - student.matriculation)}
 			onChange={(ev) => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />
 
+		/*eslint-disable comma-spacing */
 		return <article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 			<header>
 				<div id='student-letter'>{name.length ? name[0] : ''}</div>
@@ -86,6 +87,7 @@ class StudentSummary extends React.Component {
 				</p>
 			</div>
 		</article>
+		/*eslint-enable comma-spacing */
 	}
 }
 
