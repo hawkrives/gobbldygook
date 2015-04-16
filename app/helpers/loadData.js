@@ -185,7 +185,7 @@ async function loadDataFiles(infoFile) {
 
 	// Only get the last four years of data
 	let oldestYear = new Date().getFullYear() - 4
-	let lastFourYears = filter(infoFile.files, file => parseInt(file.year) >= oldestYear)
+	let lastFourYears = filter(infoFile.files, (file) => parseInt(file.year) >= oldestYear)
 
 	let notificationId = infoFile.type
 
@@ -207,9 +207,9 @@ async function loadInfoFile(url) {
 async function loadData() {
 	const fileList = await fetch('./infoFiles.url')
 		.then(status)
-		.then(response => response.text())
+		.then((response) => response.text())
 
-	const infoFiles = filter(fileList.split('\n'), url => url.length)
+	const infoFiles = filter(fileList.split('\n'), (url) => url.length)
 
 	await* map(infoFiles, loadInfoFile)
 }
