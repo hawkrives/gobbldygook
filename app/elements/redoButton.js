@@ -12,4 +12,8 @@ class RedoButton extends React.Component {
 	}
 }
 
+RedoButton.propTypes = {
+	className: React.PropTypes.string,
+}
+
 export default RedoButton

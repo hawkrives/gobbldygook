@@ -12,4 +12,8 @@ class UndoButton extends React.Component {
 	}
 }
 
+UndoButton.propTypes = {
+	className: React.PropTypes.string,
+}
+
 export default UndoButton
