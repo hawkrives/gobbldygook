@@ -65,7 +65,7 @@ function queryStore(query) {
 
 			// Run the queries
 			let resultPromises = map(indices,
-				index => index.query(query, true))
+				(index) => index.query(query, true))
 
 			// Wait for all indices to finish querying before getting their results
 			let allFoundKeys = Promise.all(resultPromises)
@@ -73,12 +73,12 @@ function queryStore(query) {
 			// Once we have the primary keys, we need to fetch the actual data:
 			let allValues = allFoundKeys
 				// they're in sub-arrays, one for each index, so we flatten them
-				.then(keys => flatten(keys))
+				.then((keys) => flatten(keys))
 				// because multiple indices can be running at once, they might return
 				// the same primary keys, so we'll just de-dupe them here before fetching
-				.then(keys => uniq(keys))
+				.then((keys) => uniq(keys))
 				// and then we actually go fetch them
-				.then(keys => this.batchGet(keys))
+				.then((keys) => this.batchGet(keys))
 
 			// Once they've been fetched, resolve the promise with the results.
 			Promise.all(allValues).then(resolvePromise)
