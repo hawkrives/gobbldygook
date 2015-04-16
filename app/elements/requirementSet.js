@@ -1,5 +1,4 @@
 import map from 'lodash/collection/map'
-import extend from 'lodash/object/extend'
 import React from 'react'
 import marked from 'marked'
 

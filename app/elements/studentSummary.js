@@ -1,9 +1,7 @@
-import _ from 'lodash'
 import React from 'react'
 import Immutable from 'immutable'
 import {oxford, pluralize} from 'humanize-plus'
 
-import ContentEditable from './contentEditable'
 import AutosizeInput from 'react-input-autosize'
 
 import studentActions from '../flux/studentActions'

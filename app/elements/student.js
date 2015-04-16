@@ -1,5 +1,5 @@
 import React from 'react'
-import {State, RouteHandler} from 'react-router'
+import {RouteHandler} from 'react-router'
 import Immutable from 'immutable'
 
 import Sidebar from './sidebar'

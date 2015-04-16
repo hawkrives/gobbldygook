@@ -3,7 +3,6 @@ import flatten from 'lodash/array/flatten'
 import findIndex from 'lodash/array/findIndex'
 import any from 'lodash/collection/any'
 import zip from 'lodash/array/zip'
-import clone from 'lodash/lang/clone'
 
 import {ordinal} from 'humanize-plus'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'

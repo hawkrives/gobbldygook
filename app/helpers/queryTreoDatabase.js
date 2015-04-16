@@ -3,13 +3,9 @@
 //   .use(queryTreoDatabase)
 
 import {
-	any,
 	contains,
-	curry,
 	filter,
-	findIndex,
 	first,
-	isEqual,
 	isString,
 	keys,
 	last,

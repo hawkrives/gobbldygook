@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import Promise from 'bluebird'
 import present from 'present'
 
 import notificationActions from '../flux/notificationActions'

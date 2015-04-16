@@ -5,8 +5,6 @@ import Immutable from 'immutable'
 import AreaOfStudy from '../elements/areaOfStudy'
 import StudentSummary from '../elements/studentSummary'
 
-import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
-
 class GraduationStatus extends React.Component {
 	constructor(props) {
 		super(props)

@@ -1,11 +1,10 @@
 import React from 'react'
 import Immutable from 'immutable'
 
-import Course from './course'
 import Semester from './semester'
 import studentActions from '../flux/studentActions'
 
-import {isCurrentYear, expandYear, findFirstAvailableSemester, calculateNextScheduleId} from 'sto-helpers'
+import {isCurrentYear, expandYear, findFirstAvailableSemester} from 'sto-helpers'
 
 let Year = React.createClass({
 	propTypes: {

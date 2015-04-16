@@ -1,5 +1,4 @@
 import React from 'react'
-import {oxford} from 'humanize-plus'
 import CourseTitle from './courseTitle'
 import map from 'lodash/collection/map'
 

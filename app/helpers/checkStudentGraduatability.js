@@ -1,5 +1,3 @@
-import Promise from 'bluebird'
-
 import size from 'lodash/collection/size'
 import filter from 'lodash/collection/filter'
 import pluck from 'lodash/collection/pluck'

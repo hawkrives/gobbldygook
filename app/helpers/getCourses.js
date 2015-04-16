@@ -1,6 +1,5 @@
 import map from 'lodash/collection/map'
 import Immutable from 'immutable'
-import Promise from 'bluebird'
 import getCourse from './getCourse'
 
 /**
