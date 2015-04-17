@@ -1,5 +1,6 @@
 import React from 'react'
 import CourseTitle from './courseTitle'
+import CourseIdentBlock from './courseIdentBlock'
 import map from 'lodash/collection/map'
 
 class CollapsedCourse extends React.Component {
@@ -20,9 +21,7 @@ class CollapsedCourse extends React.Component {
 			<div className='info-rows'>
 				<CourseTitle onClick={this.props.onClick} {...this.props} />
 				<div className='summary'>
-					<span className='identifier'>
-						{`${course.dept} ${course.num}${course.sect || ''}`}
-					</span>
+					<CourseIdentBlock {...course} />
 					<span className='type'>{course.type}</span>
 					{gereqs}
 				</div>

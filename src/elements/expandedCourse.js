@@ -3,6 +3,7 @@ import map from 'lodash/collection/map'
 import {oxford, pluralize} from 'humanize-plus'
 
 import CourseTitle from './courseTitle'
+import CourseIdentBlock from './courseIdentBlock'
 import studentActions from '../flux/studentActions'
 import {semesterName} from 'sto-helpers'
 
@@ -33,9 +34,7 @@ class ExpandedCourse extends React.Component {
 
 		let title = <CourseTitle {...this.props} />
 
-		let identifier = <span className='identifier'>
-			{course.dept} {course.num}{course.sect}
-		</span>
+		let identifier = <CourseIdentBlock {...course} />
 
 		let professors = <span className='professors'>
 			{oxford(course.instructors)}
