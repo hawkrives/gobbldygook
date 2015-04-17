@@ -32,7 +32,7 @@ class ExpandedCourse extends React.Component {
 
 		// /////
 
-		let title = <CourseTitle {...this.props} />
+		let title = <CourseTitle {...course} />
 
 		let identifier = <CourseIdentBlock {...course} />
 

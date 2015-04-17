@@ -1,42 +1,41 @@
 import React from 'react'
 
-let CourseTitle = React.createClass({
-	propTypes: {
-		info: React.PropTypes.shape({
-			title: React.PropTypes.string,
-			name: React.PropTypes.string.isRequired,
-			type: React.PropTypes.string,
-		}),
+export default class CourseTitle extends React.Component {
+	static propTypes = {
+		title: React.PropTypes.string,
+		name: React.PropTypes.string.isRequired,
+		type: React.PropTypes.string,
 		onClick: React.PropTypes.func,
-	},
-	getDefaultProps() {
-		return {
-			onClick() {}
-		}
-	},
+	}
+
+	static defaultProps = {
+		onClick() {}
+	}
+
+	shouldComponentUpdate(nextProps) {
+		return this.props.name !== nextProps.name && this.props.title !== nextProps.title
+	}
+
 	render() {
-		console.log('CourseTitle#render')
-		let course = this.props.info
-
-		let type = course.type
-		let isIndependent = /^I[RS]/.test(course.name)
-
-		let courseName = course.title || course.name
+		const {name, title, type} = this.props
+		const isIndependent = /^I[RS]/.test(name)
+		let courseName = title || name
 
 		if (isIndependent) {
-			courseName = course.name
-			type = courseName.substr(0, 3)
+			courseName = name
 			if (courseName.length > 3) {
 				courseName = courseName.substring(3)
 			}
 		}
 		else if (type === 'Topic') {
-			courseName = course.name
+			courseName = name
 			courseName = courseName.replace(/top.*: */gi, '')
 		}
 
-		return <h1 className='title'>{courseName}</h1>
-	},
-})
+		return <h1 className='title'>
+			{courseName}
+		</h1>
+	}
+}
 
 export default CourseTitle
