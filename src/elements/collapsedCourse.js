@@ -30,6 +30,9 @@ class CollapsedCourse extends React.Component {
 					<span className='type'>{course.type}</span>
 					{gereqs}
 				</div>
+				<div className='summary'>
+					{course.times}
+				</div>
 			</div>
 			<button className='show-info' onClick={this.props.onClick} />
 		</div>
