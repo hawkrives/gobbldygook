@@ -9,9 +9,7 @@
   "license": "MIT",
   "config": {
     "browserify": "--debug -e src/index.js -t [ babelify --stage 0 ]",
-    "uglify": "--source-map-root ./build/ --in-source-map build/app.js.map --source-map build/app.min.js.map --compress --mangle --screw-ie8",
-    "sass": "--stdout --source-map app.css.map --source-map-embed",
-    "csswring": "--sourcemap"
+    "uglify": "--source-map-root ./build/ --in-source-map build/app.js.map --source-map build/app.min.js.map --compress --mangle --screw-ie8"
   },
   "scripts": {
     "cloc": "cloc ./ --by-file-by-lang --include-dir=src",
@@ -31,7 +29,6 @@
     "prewatch": "npm run lint",
     "watch": "npm run copy & npm run watch-lint & npm run watch-scripts & npm run watch-styles; wait",
     "browser-sync": "browser-sync start --config ./bs-config.js",
-    "csswring": "csswring $npm_package_config_csswring build/app.css",
     "uglify": "uglifyjs build/app.js --output build/app.min.js $npm_package_config_uglify",
     "eslint": "eslint src/",
     "lint": "npm run eslint; wait",
@@ -39,7 +36,7 @@
     "start": "npm run serve",
     "serve": "npm run watch & npm run browser-sync; wait",
     "travis": "npm run lint && npm run build",
-    "production": "npm run clean && npm run build && npm run uglify & npm run csswring; wait"
+    "production": "npm run clean && npm run build && npm run uglify; wait"
   },
   "dependencies": {
     "babel-core": "5.1.10",
@@ -76,7 +73,6 @@
     "babelify": "6.0.2",
     "browser-sync": "2.6.4",
     "browserify": "9.0.8",
-    "csswring": "3.0.3",
     "dom-storage": "2.0.1",
     "eslint": "0.19.0",
     "eslint-plugin-react": "2.1.1",
