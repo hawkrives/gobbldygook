@@ -5,7 +5,7 @@ import studentStore from '../flux/studentStore'
 
 class RedoButton extends React.Component {
 	render() {
-		console.log('RedoButton#render')
+		// console.log('RedoButton#render')
 		return <button className={cx(this.props.className)}
 			onClick={studentActions.redo}
 			disabled={studentStore.future.size === 0}>Redo</button>

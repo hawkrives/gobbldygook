@@ -41,7 +41,7 @@ class Student extends React.Component {
 	}
 
 	render() {
-		console.info('Student#render')
+		// console.info('Student#render')
 
 		if (!this.state.student) {
 			return <LoadingScreen

@@ -15,7 +15,7 @@ class StudentSummary extends React.Component {
 	}
 
 	render() {
-		console.log('StudentSummary#render')
+		// console.log('StudentSummary#render')
 		let canGraduate = this.props.graduatability
 		let student = this.props.student
 		let studies = student.studies

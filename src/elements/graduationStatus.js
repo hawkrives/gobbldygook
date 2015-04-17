@@ -31,7 +31,7 @@ class GraduationStatus extends React.Component {
 	}
 
 	render() {
-		console.info('GraduationStatus#render')
+		// console.info('GraduationStatus#render')
 		let student = this.props.student
 
 		if (!student) {

@@ -53,7 +53,7 @@ let Year = React.createClass({
 	},
 
 	render() {
-		console.log('Year#render')
+		// console.log('Year#render')
 		const terms = this.state.schedules
 			.sortBy(schedule => schedule.semester)
 			.map((schedule) =>

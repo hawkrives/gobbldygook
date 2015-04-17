@@ -40,7 +40,7 @@ let RequirementSet = React.createClass({
 	},
 
 	render() {
-		console.log('RequirementSet#render')
+		// console.log('RequirementSet#render')
 		// console.log('requirement-set render', this.props)
 
 		let title = <h2

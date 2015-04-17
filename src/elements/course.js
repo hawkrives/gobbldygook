@@ -64,7 +64,7 @@ let Course = React.createClass({
 	},
 
 	render() {
-		console.log('Course#render')
+		// console.log('Course#render')
 		let isDragging = this.getDragState(itemTypes.COURSE).isDragging
 
 		let InnerCourse = this.state.isOpen ? ExpandedCourse : CollapsedCourse

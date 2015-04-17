@@ -9,7 +9,7 @@ class CollapsedCourse extends React.Component {
 	}
 
 	render() {
-		console.log('CollapsedCourse#render')
+		// console.log('CollapsedCourse#render')
 		let {info: course} = this.props
 
 		let gereqs = null

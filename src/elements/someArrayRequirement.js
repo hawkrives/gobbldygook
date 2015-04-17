@@ -22,7 +22,7 @@ let SomeArrayRequirement = React.createClass({
 	},
 
 	render() {
-		console.log('SomeArrayRequirement#render')
+		// console.log('SomeArrayRequirement#render')
 		let overview = null
 		if (this.props.details.has || this.props.details.needs || this.props.details.word) {
 			let overviewClasses = cx({

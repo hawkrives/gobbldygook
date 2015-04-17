@@ -6,7 +6,7 @@ class FakeCourse extends React.Component {
 	}
 
 	render() {
-		console.log('FakeCourse#render')
+		// console.log('FakeCourse#render')
 		let titleEl = <h1 className='title'>{this.props.title}</h1>
 		let details = <p className='summary'>no details</p>
 

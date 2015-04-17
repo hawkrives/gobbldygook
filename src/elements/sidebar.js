@@ -26,7 +26,7 @@ let Sidebar = React.createClass({
 	},
 
 	render() {
-		console.log('Sidebar#render')
+		// console.log('Sidebar#render')
 		let student = this.props.student
 
 		let ActiveSidebarComponent = GraduationStatus

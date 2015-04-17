@@ -34,7 +34,7 @@ let CourseTable = React.createClass({
 	},
 
 	render() {
-		console.log('CourseTable#render')
+		// console.log('CourseTable#render')
 		if (!this.props.student) {
 			return null
 		}

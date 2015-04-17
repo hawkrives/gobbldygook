@@ -26,7 +26,7 @@ let GobbldygookApp = React.createClass({
 	},
 
 	render() {
-		console.log('GobbldygookApp#render')
+		// console.log('GobbldygookApp#render')
 		if (!this.state.studentsInitialized) {
 			return <LoadingScreen message="Loading Students…" />
 		}

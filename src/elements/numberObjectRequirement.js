@@ -20,7 +20,7 @@ let NumberObjectRequirement = React.createClass({
 	},
 
 	render() {
-		console.log('NumberObjectRequirement#render')
+		// console.log('NumberObjectRequirement#render')
 		return <div className='requirement-result requirement-result-object-number'>
 			<span className={cx({
 					requirement: true,

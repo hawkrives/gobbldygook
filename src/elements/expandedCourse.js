@@ -30,7 +30,7 @@ class ExpandedCourse extends React.Component {
 	}
 
 	render() {
-		console.log('ExpandedCourse#render')
+		// console.log('ExpandedCourse#render')
 		let course = this.props.info
 		let tools = []
 
