@@ -17,7 +17,7 @@
     "cloc": "cloc ./ --by-file-by-lang --include-dir=src",
     "check": "npm outdated --depth 0",
     "clean": "rm -rf build/",
-    "copy-html": "cp -fR src/htdocs build/",
+    "copy-html": "cp -f src/htdocs/{index.html,.htaccess,infoFile.url} build/",
     "copy-fonts": "cp -fR src/fonts build/",
     "copy-icons": "mkdir -p build/fonts/ && cp -f src/icons/font/ionicons.woff build/fonts/",
     "copy": "npm run copy-html & npm run copy-fonts & npm run copy-icons; wait",
