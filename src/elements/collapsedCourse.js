@@ -20,6 +20,7 @@ class CollapsedCourse extends React.Component {
 		return <div className='info-wrapper'>
 			<div className='info-rows'>
 				<CourseTitle {...course} onClick={this.props.onClick} />
+				{this.props.children}
 				<div className='summary'>
 					<CourseIdentBlock {...course} />
 					<span className='type'>{course.type}</span>

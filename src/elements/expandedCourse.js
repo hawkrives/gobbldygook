@@ -97,6 +97,7 @@ class ExpandedCourse extends React.Component {
 			<div className='info-wrapper'>
 				<div className='info-rows'>
 					{title}
+					{this.props.children}
 					{summary}
 				</div>
 				<button className='show-info' onClick={this.props.onClick} />
