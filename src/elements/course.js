@@ -1,4 +1,5 @@
 import {chain} from 'lodash'
+import compact from 'lodash/array/compact'
 import isNull from 'lodash/lang/isNull'
 import React from 'react'
 import cx from 'classnames'
@@ -68,8 +69,8 @@ let Course = React.createClass({
 
 		let InnerCourse = this.state.isOpen ? ExpandedCourse : CollapsedCourse
 
-		let hasWarnings = this.props.conflicts.length
 		let warnings = this.props.conflicts[this.props.index]
+		let hasWarnings = compact(warnings).length
 		let warningEls = chain(warnings)
 			.reject(isNull)
 			.filter({warning: true})
