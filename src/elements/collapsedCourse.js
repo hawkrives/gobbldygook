@@ -4,6 +4,10 @@ import CourseIdentBlock from './courseIdentBlock'
 import map from 'lodash/collection/map'
 
 class CollapsedCourse extends React.Component {
+	shouldComponentUpdate(nextProps) {
+		return this.props.info.clbid !== nextProps.info.clbid
+	}
+
 	render() {
 		console.log('CollapsedCourse#render')
 		let {info: course} = this.props
