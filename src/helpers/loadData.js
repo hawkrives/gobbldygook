@@ -140,11 +140,11 @@ async function cacheItemHash(item) {
 	return item
 }
 
-async function updateDatabase(type, infoFromServer, notificationId, count) {
+async function updateDatabase(type, infoFromServer, infoFileBase, notificationId, count) {
 	let {path, hash, year} = infoFromServer
 	let oldHash = localStorage.getItem(path)
 
-	let itemUrl = `./data/${type}/${path}?v=${hash}`
+	let itemUrl = `/${path}?v=${hash}`
 
 	if (hash === oldHash) {
 		log('skipped ' + itemUrl)
@@ -157,7 +157,7 @@ async function updateDatabase(type, infoFromServer, notificationId, count) {
 
 	let data = undefined
 	try {
-		data = await fetch(itemUrl)
+		data = await fetch(infoFileBase + itemUrl)
 			.then(status)
 			.then(json)
 	}
@@ -180,7 +180,7 @@ async function updateDatabase(type, infoFromServer, notificationId, count) {
 	updateProgressNotification(notificationId)
 }
 
-async function loadDataFiles(infoFile) {
+async function loadDataFiles(infoFile, infoFileBase) {
 	console.log('load data files', infoFile)
 
 	// Only get the last four years of data
@@ -191,27 +191,27 @@ async function loadDataFiles(infoFile) {
 
 	// Load them into the database
 	let filePromises = map(lastFourYears, (file) =>
-		updateDatabase(infoFile.type, file, notificationId, size(lastFourYears)))
+		updateDatabase(infoFile.type, file, infoFileBase, notificationId, size(lastFourYears)))
 
 	await* filePromises
 
 	completeProgressNotification(notificationId)
 }
 
-async function loadInfoFile(url) {
+async function loadInfoFile(url, infoFileBase) {
 	console.log('loading ' + url)
 	const infoFile = await fetch(url).then(status).then(json)
-	loadDataFiles(infoFile)
+	loadDataFiles(infoFile, infoFileBase)
 }
 
 async function loadData() {
-	const fileList = await fetch('./infoFiles.url')
+	const infoFileBase = await fetch('./infoFile.url')
 		.then(status)
 		.then((response) => response.text())
+		.then((path) => path.trim())
 
-	const infoFiles = filter(fileList.split('\n'), (url) => url.length)
 
-	await* map(infoFiles, loadInfoFile)
+	await loadInfoFile(infoFileBase + '/info.json', infoFileBase)
 }
 
 export default loadData
