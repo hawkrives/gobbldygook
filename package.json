@@ -9,7 +9,6 @@
   "license": "MIT",
   "config": {
     "browserify": "--debug -e src/index.js -t [ babelify --stage 0 ]",
-    "exorcist": "build/app.js.map > build/app.js",
     "uglify": "--source-map-root ./build/ --in-source-map build/app.js.map --source-map build/app.min.js.map --compress --mangle --screw-ie8"
   },
   "scripts": {
@@ -20,11 +19,11 @@
     "copy-fonts": "cp -fR src/fonts build/",
     "copy-icons": "mkdir -p build/fonts/ && cp -f src/icons/font/ionicons.woff build/fonts/",
     "copy": "npm run copy-html & npm run copy-fonts & npm run copy-icons; wait",
-    "build-scripts": "browserify $npm_package_config_browserify | exorcist $npm_package_config_exorcist",
+    "build-scripts": "browserify $npm_package_config_browserify | exorcist build/app.js.map > build/app.js",
     "build-styles": "./bin/sass.js src/styles/app.scss build/app.css",
     "prebuild": "mkdir -p build/ && npm run lint",
     "build": "npm run copy & npm run build-scripts & npm run build-styles; wait",
-    "watch-scripts": "watchify --verbose -o \"exorcist $npm_package_config_exorcist\" $npm_package_config_browserify",
+    "watch-scripts": "watchify --verbose -o \"exorcist build/app.js.map > build/app.js\" $npm_package_config_browserify",
     "watch-styles": "nodemon --watch src/styles --ext scss --exec npm run-script build-styles",
     "watch-lint": "nodemon --watch app --watch test --ext js --exec npm run lint",
     "prewatch": "npm run lint",
