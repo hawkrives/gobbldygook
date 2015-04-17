@@ -42,7 +42,6 @@
     "production": "npm run clean && npm run build && npm run uglify & npm run csswring; wait"
   },
   "dependencies": {
-    "babel": "5.1.8",
     "babel-core": "5.1.8",
     "bluebird": "2.9.24",
     "classnames": "1.2.0",
@@ -55,7 +54,6 @@
     "marked": "0.3.3",
     "node-uuid": "1.4.3",
     "present": "0.0.6",
-    "ramda": "0.13.0",
     "react": "0.13.1",
     "react-components": "0.2.0",
     "react-dnd": "0.9.8",
