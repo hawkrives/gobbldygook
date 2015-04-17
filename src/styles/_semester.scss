@@ -60,13 +60,13 @@ $semester-edge-padding: ($block-edge-padding) ($block-edge-padding * 1.5);
 }
 
 .semester.invalid .semester-title {
-	background-color: color('deep-orange', '300');
-	color: $white;
-	border-bottom-color: $white;
+	// background-color: color('red', '600');
+	// color: $white;
+	// border-bottom-color: $white;
 
-	.info-bar {
-		color: rgba($white, 0.75);
-	}
+	// .info-bar {
+	// 	color: rgba($white, 0.75);
+	// }
 }
 
 .add-semester {
