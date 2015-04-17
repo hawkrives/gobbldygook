@@ -58,7 +58,6 @@
     "react-input-autosize": "0.4.3",
     "react-list-select": "0.3.0",
     "react-router": "0.13.2",
-    "react-style": "0.5.3",
     "reflux": "0.2.7",
     "stickyfill": "1.1.1",
     "sto-areas": "2.3.12",
@@ -89,9 +88,6 @@
     "pretty-hrtime": "1.0.0",
     "uglify-js": "2.4.20",
     "watchify": "3.1.1"
-  },
-  "optionalDependencies": {
-    "jest-cli": "0.4.0"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
