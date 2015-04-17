@@ -28,16 +28,3 @@ var Target = React.createClass({
 });
 
 return <Target />;
-
----
-
-Transition some components to inline styles?
-
-var StyleSheet = require('react-style')
-
-var styles = StyleSheet.create`
-  .foo {
-    color: red;
-    background-color: white;
-  }
-`
