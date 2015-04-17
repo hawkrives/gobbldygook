@@ -84,8 +84,9 @@ let Course = React.createClass({
 		})
 
 		return <article className={classSet} {...this.dragSourceFor(itemTypes.COURSE)}>
-			<ul className='warnings'>{warningEls}</ul>
-			<InnerCourse {...this.props} onClick={this.toggleExpanded} />
+			<InnerCourse {...this.props} onClick={this.toggleExpanded}>
+				{warningEls.length ? <ul className='warnings'>{warningEls}</ul> : null}
+			</InnerCourse>
 		</article>
 	},
 })
