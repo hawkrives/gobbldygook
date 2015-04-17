@@ -14,5 +14,5 @@ playground/parse-sis.js
 node_modules
 
 # The build results
-dist
+build
 .tern-port

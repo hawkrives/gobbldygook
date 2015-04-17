@@ -1,10 +1,10 @@
 module.exports = {
 	// browser: 'google chrome',
-	reloadDelay: 500,
+	reloadDelay: 250,
 	open: false,
-	files: ['dist/*.css', 'dist/*.js', 'dist/*.html'],
+	files: ['build/*.css', 'build/*.js', 'build/*.html'],
 	server: {
-		baseDir: './dist',
+		baseDir: './build',
 	},
 	notify: false,
 }
