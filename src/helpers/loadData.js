@@ -1,4 +1,7 @@
-import _ from 'lodash'
+import map from 'lodash/collection/map'
+import filter from 'lodash/collection/filter'
+import size from 'lodash/collection/size'
+import curry from 'lodash/function/curry'
 import present from 'present'
 
 import notificationActions from '../flux/notificationActions'
@@ -8,12 +11,12 @@ import db from './db'
 import {buildDept, buildDeptNum, splitParagraph} from 'sto-helpers'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
-import {map, filter, size} from 'lodash'
-
 import debug from 'debug'
 let log = debug('gobbldygook:data')
 debug.enable('gobbldygook:data')
 
+import union from 'lodash/array/union'
+import flatten from 'lodash/array/flatten'
 
 function prepareCourse(course) {
 	course.name = course.name || course.title
@@ -25,27 +28,24 @@ function prepareCourse(course) {
 	let notesWords = splitParagraph(course.notes)
 	let titleWords = splitParagraph(course.title)
 	let descWords = splitParagraph(course.desc)
-	let words = _.union(nameWords, notesWords, titleWords, descWords)
+	let words = union(nameWords, notesWords, titleWords, descWords)
 	course.words = words
 
-	course.profWords = _.chain(course.instructors)
-		.map(splitParagraph)
-		.flatten()
-		.value()
+	course.profWords = flatten(map(course.instructors, splitParagraph))
 
 	return course
 }
 
 
-let startProgressNotification = _.curry((notificationId, itemType, count) => {
+let startProgressNotification = curry((notificationId, itemType, count) => {
 	notificationActions.startProgress(notificationId, `Loading ${itemType}`, {max: count}, true)
 })
 
-let updateProgressNotification = _.curry((notificationId) => {
+let updateProgressNotification = curry((notificationId) => {
 	notificationActions.incrementProgress(notificationId)
 })
 
-let completeProgressNotification = _.curry((notificationId, time=1500) => {
+let completeProgressNotification = curry((notificationId, time=1500) => {
 	notificationActions.removeNotification(notificationId, time)
 })
 
