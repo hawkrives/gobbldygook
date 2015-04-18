@@ -55,8 +55,8 @@ let logAdded = (item) => {
 
 
 async function storeCourses(item) {
-	let start = present()
 	log('storing courses')
+	const start = present()
 
 	let coursesToStore = map(item.data, (course) => {
 		course.sourcePath = item.path
@@ -66,7 +66,7 @@ async function storeCourses(item) {
 	try {
 		await db.store('courses').batch(coursesToStore)
 	}
-	catch(e) {
+	catch (e) {
 		throw e
 	}
 
@@ -103,10 +103,10 @@ async function cleanPriorData(item) {
 	let {type, path} = item
 	log(`deleting ${type} from ${path}`)
 
-	let items = []
+	let oldCourses = []
 
 	try {
-		items = await db.store(type)
+		oldCourses = await db.store(type)
 			.index('sourcePath')
 			.get(path)
 	}
@@ -114,14 +114,14 @@ async function cleanPriorData(item) {
 		throw e
 	}
 
-	items = map(items, ({clbid}) => {
+	oldCourses = map(oldCourses, ({clbid}) => {
 		let result = Object.create(null)
 		result[clbid] = null
 		return result
 	})
 
 	try {
-		await db.store(item.type).batch(items)
+		await db.store(item.type).batch(oldCourses)
 	}
 	catch (e) {
 		throw e
