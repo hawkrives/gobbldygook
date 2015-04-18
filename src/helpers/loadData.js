@@ -10,13 +10,9 @@ import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 import {map, filter, size} from 'lodash'
 
-
-let logDataLoading = false
-// let logDataLoading = true
-
-let log = (...args) => {
-	if (logDataLoading) console.log(...args)
-}
+import debug from 'debug'
+let log = debug('gobbldygook:data')
+debug.enable('gobbldygook:data')
 
 
 function prepareCourse(course) {
@@ -59,8 +55,8 @@ let logAdded = (item) => {
 
 
 async function storeCourses(item) {
-	console.log('storing courses')
 	let start = present()
+	log('storing courses')
 
 	let coursesToStore = map(item.data, (course) => {
 		course.sourcePath = item.path
@@ -74,12 +70,12 @@ async function storeCourses(item) {
 		throw e
 	}
 
-	console.log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
+	log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
 	return item
 }
 
 async function storeArea(item) {
-	console.log(item.path, 'called storeArea')
+	log(item.path, 'called storeArea')
 
 	let area = item.data.info
 	area.sourcePath = item.path
@@ -105,7 +101,7 @@ function storeItem(item) {
 
 async function cleanPriorData(item) {
 	let {type, path} = item
-	console.info(`deleting ${type} from ${path}`)
+	log(`deleting ${type} from ${path}`)
 
 	let items = []
 
@@ -135,7 +131,7 @@ async function cleanPriorData(item) {
 }
 
 async function cacheItemHash(item) {
-	console.info(`${item.path} called cacheItemHash`)
+	log(`${item.path} called cacheItemHash`)
 	localStorage.setItem(item.path, item.hash)
 	return item
 }
@@ -181,7 +177,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 }
 
 async function loadDataFiles(infoFile, infoFileBase) {
-	console.log('load data files', infoFile)
+	log('load data files', infoFile)
 
 	// Only get the last four years of data
 	let oldestYear = new Date().getFullYear() - 4
@@ -199,7 +195,7 @@ async function loadDataFiles(infoFile, infoFileBase) {
 }
 
 async function loadInfoFile(url, infoFileBase) {
-	console.log('loading ' + url)
+	log('loading ' + url)
 	const infoFile = await fetch(url).then(status).then(json)
 	loadDataFiles(infoFile, infoFileBase)
 }
