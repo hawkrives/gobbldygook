@@ -206,7 +206,8 @@ async function loadData() {
 		.then((response) => response.text())
 		.then((path) => path.trim())
 
-	await loadInfoFile(infoFileBase + '/info.json', infoFileBase)
+	const cachebuster = Date.now()
+	await loadInfoFile(`${infoFileBase}/info.json?${cachebuster}`, infoFileBase)
 }
 
 export default loadData
