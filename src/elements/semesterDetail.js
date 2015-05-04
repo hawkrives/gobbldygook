@@ -19,10 +19,9 @@ let SemesterDetail = React.createClass({
 	},
 
 	componentWillReceiveProps(nextProps) {
-		let params = this.getParams()
-		let {year, semester} = params
+		const {year, semester} = this.getParams()
 
-		let schedules = nextProps.student.schedules.filter(isCurrentSemester(year, semester))
+		const schedules = nextProps.student.schedules.filter(isCurrentSemester(year, semester))
 		// console.log('semesterDetail.componentWillReceiveProps', year, semester, nextProps.student.schedules.toJS())
 
 		this.setState({year, semester, schedules})
@@ -34,11 +33,12 @@ let SemesterDetail = React.createClass({
 
 	render() {
 		// console.log('SemesterDetail#render')
-		return React.createElement('div',
-			{className: 'semester-detail'},
-			React.createElement('pre', null,
-				this.getPath(), '\n',
-				JSON.stringify(this.state.schedules.toJS(), null, 2)))
+		return <div className='semester-detail'>
+			<pre>
+				{this.getPath()}{'\n'}
+				{JSON.stringify(this.state.schedules.toJS(), null, 2)}
+			</pre>
+		</div>
 	},
 })
 
