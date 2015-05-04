@@ -40,9 +40,9 @@
     "production": "npm run clean && npm run build && npm run uglify; wait"
   },
   "dependencies": {
-    "babel-core": "5.1.10",
+    "babel-core": "5.1.11",
     "bluebird": "2.9.24",
-    "classnames": "1.2.0",
+    "classnames": "1.2.1",
     "combinations-generator": "1.0.1",
     "debug": "2.1.3",
     "humanize-plus": "1.5.0",
@@ -53,7 +53,7 @@
     "marked": "0.3.3",
     "node-uuid": "1.4.3",
     "present": "0.0.6",
-    "react": "0.13.1",
+    "react": "0.13.2",
     "react-components": "0.2.0",
     "react-dnd": "0.9.8",
     "react-input-autosize": "0.4.3",
@@ -68,16 +68,16 @@
     "whatwg-fetch": "0.7.0"
   },
   "devDependencies": {
-    "autoprefixer-core": "5.1.10",
+    "autoprefixer-core": "5.1.11",
     "babel-eslint": "3.0.1",
     "babel-jest": "5.0.1",
     "babelify": "6.0.2",
     "browser-sync": "2.6.4",
     "browserify": "9.0.8",
     "dom-storage": "2.0.1",
-    "eslint": "0.19.0",
-    "eslint-plugin-react": "2.1.1",
-    "exorcist": "0.2.0",
+    "eslint": "0.20.0",
+    "eslint-plugin-react": "2.2.0",
+    "exorcist": "0.3.0",
     "idb-polyfill": "0.0.2",
     "node-sass": "2.1.1",
     "nodemon": "1.3.7",
@@ -88,7 +88,7 @@
     "postcss-font-family": "1.1.0",
     "pretty-hrtime": "1.0.0",
     "uglify-js": "2.4.20",
-    "watchify": "3.1.1"
+    "watchify": "3.1.2"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
