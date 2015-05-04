@@ -4,6 +4,16 @@ import CourseIdentBlock from './courseIdentBlock'
 import map from 'lodash/collection/map'
 
 class CollapsedCourse extends React.Component {
+	static propTypes = {
+		info: React.PropTypes.object.isRequired,
+		onClick: React.PropTypes.func.isRequired,
+		children: React.PropTypes.array,
+	}
+
+	static defaultProps = {
+		onClick() {}
+	}
+
 	shouldComponentUpdate(nextProps) {
 		return this.props.info.clbid !== nextProps.info.clbid
 	}
@@ -37,14 +47,6 @@ class CollapsedCourse extends React.Component {
 			<button className='show-info' onClick={this.props.onClick} />
 		</div>
 	}
-}
-
-CollapsedCourse.propTypes = {
-	info: React.PropTypes.object.isRequired,
-	onClick: React.PropTypes.func.isRequired,
-}
-CollapsedCourse.defaultProps = {
-	onClick() {}
 }
 
 export default CollapsedCourse
