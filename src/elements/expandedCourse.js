@@ -117,6 +117,7 @@ ExpandedCourse.propTypes = {
 	student: React.PropTypes.object.isRequired,
 	schedule: React.PropTypes.object.isRequired,
 	onClick: React.PropTypes.func.isRequired,
+	children: React.PropTypes.array,
 }
 
 export default ExpandedCourse
