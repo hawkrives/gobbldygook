@@ -2,14 +2,14 @@ import React from 'react'
 
 export default class CourseTitle extends React.Component {
 	static propTypes = {
-		title: React.PropTypes.string,
 		name: React.PropTypes.string.isRequired,
-		type: React.PropTypes.string,
 		onClick: React.PropTypes.func,
+		title: React.PropTypes.string,
+		type: React.PropTypes.string,
 	}
 
 	static defaultProps = {
-		onClick() {}
+		onClick() {},
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -32,9 +32,7 @@ export default class CourseTitle extends React.Component {
 			courseName = courseName.replace(/top.*: */gi, '')
 		}
 
-		return <h1 className='title'>
-			{courseName}
-		</h1>
+		return <h1 className='title'>{courseName}</h1>
 	}
 }
 

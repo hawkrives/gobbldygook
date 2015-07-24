@@ -8,15 +8,15 @@ import Notification from './notification'
 let Notifications = React.createClass({
 	mixins: [Reflux.listenTo(notificationStore, 'onNotification', 'onNotification')],
 
-	onNotification(notifications) {
-		// console.log('onNotification', notifications.toJS())
-		this.setState({notifications})
-	},
-
 	getInitialState() {
 		return {
 			notifications: Immutable.Map(),
 		}
+	},
+
+	onNotification(notifications) {
+		// console.log('onNotification', notifications.toJS())
+		this.setState({notifications})
 	},
 
 	render() {

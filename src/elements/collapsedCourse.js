@@ -5,13 +5,13 @@ import map from 'lodash/collection/map'
 
 class CollapsedCourse extends React.Component {
 	static propTypes = {
+		children: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.element]),
 		info: React.PropTypes.object.isRequired,
 		onClick: React.PropTypes.func.isRequired,
-		children: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.element])
 	}
 
 	static defaultProps = {
-		onClick() {}
+		onClick() {},
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -24,14 +24,14 @@ class CollapsedCourse extends React.Component {
 
 		let gereqs = null
 		if (course.gereqs) {
-			gereqs = <ul className='gereqs'>
+			gereqs = (<ul className='gereqs'>
 				{map(course.gereqs, (ge, idx) =>
 					<li key={ge + idx}>{ge}</li>
 				)}
-			</ul>
+			</ul>)
 		}
 
-		return <div className='info-wrapper'>
+		return (<div className='info-wrapper'>
 			<div className='info-rows'>
 				<CourseTitle {...course} onClick={this.props.onClick} />
 				{this.props.children}
@@ -45,7 +45,7 @@ class CollapsedCourse extends React.Component {
 				</div>
 			</div>
 			<button className='show-info' onClick={this.props.onClick} />
-		</div>
+		</div>)
 	}
 }
 

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 
-import CourseExpression from './expression-course'
+import CourseExpression from './expression--course'
 
 import cx from 'classnames'
 import plur from 'plur'

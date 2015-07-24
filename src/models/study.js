@@ -3,8 +3,8 @@ import Immutable from 'immutable'
 
 import {status, text} from '../helpers/fetchHelpers'
 import yaml from 'js-yaml'
-import enhanceHanson from '../../area-data/lib/enhance-hanson'
-import pluralizeArea from '../../area-data/lib/pluralize-area'
+import enhanceHanson from '../lib/enhance-hanson'
+import pluralizeArea from '../lib/pluralize-area'
 import kebabCase from 'lodash/string/kebabCase'
 
 async function loadArea({name, type}) {

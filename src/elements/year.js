@@ -12,6 +12,26 @@ let Year = React.createClass({
 		year: React.PropTypes.number.isRequired,
 	},
 
+	getInitialState() {
+		return {
+			schedules: Immutable.List(),
+		}
+	},
+
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
+	},
+
+	componentWillReceiveProps(nextProps) {
+		let thisYearSchedules = nextProps.student.schedulesByYear.get(nextProps.year)
+		let schedules = thisYearSchedules.filter(s => s.active)
+		this.setState({schedules})
+	},
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextState.schedules !== this.state.schedules
+	},
+
 	canAddSemester() {
 		return findFirstAvailableSemester(this.props.student.schedules, this.props.year) <= 5
 	},
@@ -32,26 +52,6 @@ let Year = React.createClass({
 		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},
 
-	getInitialState() {
-		return {
-			schedules: Immutable.List()
-		}
-	},
-
-	componentWillMount() {
-		this.componentWillReceiveProps(this.props)
-	},
-
-	componentWillReceiveProps(nextProps) {
-		let thisYearSchedules = nextProps.student.schedulesByYear.get(nextProps.year)
-		let schedules = thisYearSchedules.filter(s => s.active)
-		this.setState({schedules})
-	},
-
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextState.schedules !== this.state.schedules
-	},
-
 	render() {
 		// console.log('Year#render')
 		const terms = this.state.schedules
@@ -66,7 +66,7 @@ let Year = React.createClass({
 
 		const niceYear = expandYear(this.props.year)
 
-		return <div className='year'>
+		return (<div className='year'>
 			<header className='year-title'>
 				<h1>{niceYear}</h1>
 				<button className='remove-year'
@@ -80,7 +80,7 @@ let Year = React.createClass({
 				title='Add Semester'
 				disabled={!this.canAddSemester()}
 				onClick={this.addSemester} />
-		</div>
+		</div>)
 	},
 })
 

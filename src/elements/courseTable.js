@@ -17,11 +17,8 @@ let CourseTable = React.createClass({
 		}
 	},
 
-	addYear() {
-		studentActions.addSchedule(this.props.student.id, {
-			year: this.state.nextAvailableYear, semester: 1,
-			index: 1, active: true,
-		})
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
 	},
 
 	componentWillReceiveProps(nextProps) {
@@ -29,8 +26,11 @@ let CourseTable = React.createClass({
 		this.setState({nextAvailableYear})
 	},
 
-	componentWillMount() {
-		this.componentWillReceiveProps(this.props)
+	addYear() {
+		studentActions.addSchedule(this.props.student.id, {
+			year: this.state.nextAvailableYear, semester: 1,
+			index: 1, active: true,
+		})
 	},
 
 	render() {
@@ -47,14 +47,14 @@ let CourseTable = React.createClass({
 			.toList()
 			.toArray()
 
-		return <div className='course-table'>
+		return (<div className='course-table'>
 			{years}
 			<button className='add-year'
 				title='Add Year'
 				onClick={this.addYear}>
-				{`${expandYear(this.state.nextAvailableYear, false, '–')}`}
+				{expandYear(this.state.nextAvailableYear, false, '–')}
 			</button>
-		</div>
+		</div>)
 	},
 })
 

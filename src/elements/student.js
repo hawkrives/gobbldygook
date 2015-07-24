@@ -16,6 +16,10 @@ class Student extends React.Component {
 		}
 	}
 
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
+	}
+
 	componentWillReceiveProps(nextProps) {
 		// console.log(nextProps)
 		let queryId = this.props.routerState.params.id
@@ -30,37 +34,33 @@ class Student extends React.Component {
 		else {
 			this.setState({
 				message: `Could not find student "${queryId}"`,
-				messageClass: 'error'
+				messageClass: 'error',
 			})
 			// console.info('student is undefined at Student')
 		}
-	}
-
-	componentWillMount() {
-		this.componentWillReceiveProps(this.props)
 	}
 
 	render() {
 		// console.info('Student#render')
 
 		if (!this.state.student) {
-			return <LoadingScreen
+			return (<LoadingScreen
 				className={this.state.messageClass}
-				message={this.state.message} />
+				message={this.state.message} />)
 		}
 
-		return <div className='student'>
+		return (<div className='student'>
 			<Sidebar student={this.state.student} />
 			<div className='content'>
 				<RouteHandler student={this.state.student} />
 			</div>
-		</div>
+		</div>)
 	}
 }
 
 Student.propTypes = {
-	students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 	routerState: React.PropTypes.object.isRequired,
+	students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 }
 
 export default Student

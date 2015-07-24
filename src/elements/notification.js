@@ -21,13 +21,13 @@ class Notification extends React.Component {
 		let progressBar = null
 		if (this.props.type === 'progress') {
 			let progressValue = Math.round(100 * (this.props.value / this.props.max))
-			progressBar = <div className='progress-container'>
+			progressBar = (<div className='progress-container'>
 				<progress value={this.props.value} max={this.props.max} />
 				<output>{progressValue}%</output>
-			</div>
+			</div>)
 		}
 
-		return <li key={this.props.key || this.props.id}
+		return (<li key={this.props.key || this.props.id}
 			className={`notification-capsule notification-type--${this.props.type}`}
 			onClick={this.remove}>
 			<div className='notification-content'>
@@ -35,18 +35,18 @@ class Notification extends React.Component {
 				{progressBar}
 			</div>
 			{this.props.hideButton ? null : closeButton}
-		</li>
+		</li>)
 	}
 }
 
 Notification.propTypes = {
-	id: React.PropTypes.any.isRequired,
-	message: React.PropTypes.string.isRequired,
-	value: React.PropTypes.number,
-	max: React.PropTypes.number,
-	type: React.PropTypes.string.isRequired,
-	key: React.PropTypes.string,
 	hideButton: React.PropTypes.bool,
+	id: React.PropTypes.any.isRequired,
+	key: React.PropTypes.string,
+	max: React.PropTypes.number,
+	message: React.PropTypes.string.isRequired,
+	type: React.PropTypes.string.isRequired,
+	value: React.PropTypes.number,
 }
 
 export default Notification

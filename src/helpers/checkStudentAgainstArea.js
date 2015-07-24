@@ -1,5 +1,5 @@
 import {findWordForProgress} from 'sto-helpers'
-import evaluate from '../../area-data/lib/evaluate'
+import evaluate from '../lib/evaluate'
 
 import zipObject from 'lodash/array/zipObject'
 import pairs from 'lodash/object/pairs'
@@ -47,7 +47,7 @@ async function checkStudentAgainstArea(student, area) {
 			at: currentProgress,
 			of: maxProgress,
 			word: findWordForProgress(maxProgress, currentProgress),
-		}
+		},
 	}
 }
 

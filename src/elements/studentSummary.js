@@ -22,9 +22,9 @@ class StudentSummary extends React.Component {
 
 		let name = student.name
 		let studentId = this.props.student.id
-		let NameEl = <AutosizeInput className='autosize-input'
+		let NameEl = (<AutosizeInput className='autosize-input'
 			value={name}
-			onChange={(ev) => studentActions.updateName(studentId, ev.target.value.trim())} />
+			onChange={(ev) => studentActions.updateName(studentId, ev.target.value.trim())} />)
 
 		let has = studies
 			.groupBy(s => s.type)
@@ -58,17 +58,17 @@ class StudentSummary extends React.Component {
 
 		// console.log(student.graduation, student.matriculation)
 
-		const graduationEl = <AutosizeInput
+		const graduationEl = (<AutosizeInput
 			className='autosize-input'
 			value={String(student.graduation)}
-			onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />
+			onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />)
 
-		const sinceMatriculationEl = <AutosizeInput
+		const sinceMatriculationEl = (<AutosizeInput
 			className='autosize-input'
 			value={String(student.graduation - student.matriculation)}
-			onChange={ev => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />
+			onChange={ev => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />)
 
-		return <article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
+		return (<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 			<header>
 				<div id='student-letter'>{name.length ? name[0] : ''}</div>
 				<p>Hi, {NameEl}</p>
@@ -85,13 +85,13 @@ class StudentSummary extends React.Component {
 					{canGraduate ? goodGraduationMessage : badGraduationMessage}
 				</p>
 			</div>
-		</article>
+		</article>)
 	}
 }
 
 StudentSummary.propTypes = {
-	student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 	graduatability: React.PropTypes.bool.isRequired,
+	student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 }
 
 export default StudentSummary

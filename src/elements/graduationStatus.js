@@ -2,7 +2,7 @@ import React from 'react'
 import {capitalize, pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 
-import AreaOfStudy from '../../area-data/components/area'
+import AreaOfStudy from '../elements/area-of-study'
 import StudentSummary from '../elements/studentSummary'
 
 import debug from 'debug'
@@ -24,13 +24,13 @@ class GraduationStatus extends React.Component {
 	//      (nextState.areaDetails !== this.state.areaDetails))
 	// }
 
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
+	}
+
 	async componentWillReceiveProps(nextProps) {
 		const {graduatability, areaDetails} = await checkStudentGraduatability(nextProps.student)
 		this.setState({graduatability, areaDetails})
-	}
-
-	componentWillMount() {
-		this.componentWillReceiveProps(this.props)
 	}
 
 	render() {
@@ -47,9 +47,10 @@ class GraduationStatus extends React.Component {
 				const pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 
 				return (
-					<section key={areaType}
-							 id={pluralType}
-							 className='area-of-study-group'>
+					<section
+						key={areaType}
+						id={pluralType}
+						className='area-of-study-group'>
 
 						<header className='area-type-heading'>
 							<h1>{capitalize(pluralType)}</h1>
@@ -66,11 +67,11 @@ class GraduationStatus extends React.Component {
 			})
 			.toArray()
 
-		return <section className='graduation-status'>
+		return (<section className='graduation-status'>
 			<StudentSummary student={student}
 							graduatability={this.state.graduatability} />
 			{sections}
-		</section>
+		</section>)
 	}
 }
 

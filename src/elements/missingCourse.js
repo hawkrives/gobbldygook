@@ -1,11 +1,9 @@
 import React from 'react'
 import FakeCourse from './fakeCourse'
 
-let MissingCourse = React.createClass({
+export default class MissingCourse extends React.Component {
 	render() {
 		// console.log('MissingCourse#render')
 		return <FakeCourse title='Missing Slot' className='missing' />
 	}
-})
-
-export default MissingCourse
+}

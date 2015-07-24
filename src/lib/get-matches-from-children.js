@@ -22,6 +22,7 @@ export default function getMatchesFromChildren(expr, ctx) {
     let childKeys = filter(keys(ctx), isRequirementName)
 
     // either use all of the child requirements in the computation,
+    /*eslint no-empty: 0 */
     if (expr.$children === '$all') {
         // do nothing; the default case.
     }

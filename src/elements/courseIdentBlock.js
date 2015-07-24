@@ -16,8 +16,8 @@ export default class CourseIdentBlock extends React.Component {
 	}
 
 	render() {
-		return <span className='identifier'>
+		return (<span className='identifier'>
 			{this.props.dept} {this.props.num}{this.props.section || ''}
-		</span>
+		</span>)
 	}
 }

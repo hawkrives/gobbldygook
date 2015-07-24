@@ -36,7 +36,7 @@ let Sidebar = React.createClass({
 			props.toggle = this.toggleSearch
 		}
 
-		let sidebar = <aside className='sidebar'>
+		let sidebar = (<aside className='sidebar'>
 			<menu className='student-buttons'>
 				<Link to='/' className='back sidebar-btn'>Students</Link>
 				<button className='search sidebar-btn' onClick={this.toggleSearch}>Search</button>
@@ -53,7 +53,7 @@ let Sidebar = React.createClass({
 				<RedoButton className='sidebar-btn' />
 			</menu>
 			<ActiveSidebarComponent {...props} />
-		</aside>
+		</aside>)
 
 		return sidebar
 	},

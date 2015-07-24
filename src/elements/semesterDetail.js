@@ -4,11 +4,11 @@ import {State} from 'react-router'
 import {isCurrentSemester} from 'sto-helpers'
 
 let SemesterDetail = React.createClass({
-	mixins: [State],
-
 	propTypes: {
 		student: React.PropTypes.object.isRequired,
 	},
+
+	mixins: [State],
 
 	getInitialState() {
 		return {
@@ -16,6 +16,10 @@ let SemesterDetail = React.createClass({
 			semester: null,
 			schedules: Immutable.List(),
 		}
+	},
+
+	componentDidMount() {
+		this.componentWillReceiveProps(this.props)
 	},
 
 	componentWillReceiveProps(nextProps) {
@@ -27,18 +31,14 @@ let SemesterDetail = React.createClass({
 		this.setState({year, semester, schedules})
 	},
 
-	componentDidMount() {
-		this.componentWillReceiveProps(this.props)
-	},
-
 	render() {
 		// console.log('SemesterDetail#render')
-		return <div className='semester-detail'>
+		return (<div className='semester-detail'>
 			<pre>
 				{this.getPath()}{'\n'}
 				{JSON.stringify(this.state.schedules.toJS(), null, 2)}
 			</pre>
-		</div>
+		</div>)
 	},
 })
 

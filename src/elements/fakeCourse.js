@@ -10,15 +10,15 @@ class FakeCourse extends React.Component {
 		let titleEl = <h1 className='title'>{this.props.title}</h1>
 		let details = <p className='summary'>no details</p>
 
-		return <article className={`course ${this.props.className}`}>
+		return (<article className={`course ${this.props.className}`}>
 			<div className='info-rows'>{titleEl}{details}</div>
-		</article>
+		</article>)
 	}
 }
 
 FakeCourse.propTypes = {
-	title: React.PropTypes.string.isRequired,
 	className: React.PropTypes.string.isRequired,
+	title: React.PropTypes.string.isRequired,
 }
 
 export default FakeCourse

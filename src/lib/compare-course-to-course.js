@@ -36,7 +36,6 @@ function wildcard(lhs) {
  * @param {Course} other - the course to compare against
  * @returns {boolean} - if the course matched
  */
-import map from 'lodash/collection/map';
 export default function compareCourseToCourse(query, other) {
     query = query.$course || query
     other = other.$course || other
