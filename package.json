@@ -86,7 +86,6 @@
     "eslint-watch": "1.2.4",
     "exorcist": "0.4.0",
     "graceful-fs": "4.1.2",
-    "idb-polyfill": "0.0.2",
     "js-beautify": "1.5.10",
     "junk": "1.0.2",
     "meow": "3.3.0",
