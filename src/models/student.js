@@ -10,8 +10,6 @@ import {randomChar, countCredits} from 'sto-helpers'
 import Schedule from './schedule'
 import Study from './study'
 
-import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
-
 
 const StudentRecord = Immutable.Record({
 	id: null,
@@ -221,13 +219,6 @@ class Student extends StudentRecord {
 
 
 	// helpers
-
-	checkGraduatability() {
-		if (!this.graduatability) {
-			this.graduatability = checkStudentGraduatability(this)
-		}
-		return this.graduatability
-	}
 
 	data() {
 		return Promise.props({
