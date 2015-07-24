@@ -3,15 +3,12 @@
 
 	font-family: Georgia;
 
-	// max-width: 250px;
 	margin-bottom: 1em;
 	display: block;
 
-	// border-radius: 3px;
 	border: 1px solid currentColor;
 	padding: 0em;
 	background-color: white;
-	box-shadow: 2px 2px 4px #aaa;
 
 	.summary > .details-marker       { display: none; }
 	.summary::-webkit-details-marker { display: none; }
@@ -42,7 +39,7 @@
 	&[open] > .summary::after {
 		transform: rotate(90deg) scale(0.8);
 	}
-	
+
 	progress {
 		@include progress-track('blue');
 
@@ -90,7 +87,6 @@
 	margin-top: 0;
 	margin-bottom: 0.25em;
 	margin-left: $block-edge-padding * 0.5;
-	// text-align: center;
 	font-feature-settings: 'smcp';
 
 	h1 {
