@@ -60,7 +60,7 @@ module.exports = (function() {
       },
       peg$c10 = function peg$c10(count, where) {
         return {
-          $type: "where",
+          $type: 'where',
           $count: count,
           $where: where
         };
@@ -95,7 +95,7 @@ module.exports = (function() {
       },
       peg$c19 = function peg$c19(filter) {
         return assign({
-          $type: "filter"
+          $type: 'filter'
         }, filter);
       },
       peg$c20 = "occurrence",
@@ -112,7 +112,7 @@ module.exports = (function() {
       },
       peg$c24 = function peg$c24(count, course) {
         return {
-          $type: "occurrence",
+          $type: 'occurrence',
           $count: count,
           $course: course.$course
         };
@@ -144,8 +144,8 @@ module.exports = (function() {
       },
       peg$c33 = function peg$c33(lhs, rhs) {
         return {
-          $type: "boolean",
-          $or: [lhs].concat("$or" in rhs ? rhs.$or : [rhs])
+          $type: 'boolean',
+          $or: [lhs].concat('$or' in rhs ? rhs.$or : [rhs])
         };
       },
       peg$c34 = {
@@ -160,8 +160,8 @@ module.exports = (function() {
       },
       peg$c37 = function peg$c37(lhs, rhs) {
         return {
-          $type: "boolean",
-          $and: [lhs].concat("$and" in rhs ? rhs.$and : [rhs])
+          $type: 'boolean',
+          $and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs])
         };
       },
       peg$c38 = function peg$c38(f, q) {
@@ -177,11 +177,11 @@ module.exports = (function() {
         description: "[a-z0-9_\\-]i"
       },
       peg$c42 = function peg$c42(word) {
-        return word.join("");
+        return word.join('');
       },
       peg$c43 = function peg$c43(key, op, value) {
         return {
-          $type: "qualification",
+          $type: 'qualification',
           $key: key,
           $operator: op,
           $value: value
@@ -195,7 +195,7 @@ module.exports = (function() {
         return {
           $name: name,
           $prop: prop,
-          $type: "function"
+          $type: 'function'
         };
       },
       peg$c46 = "<=",
@@ -205,7 +205,7 @@ module.exports = (function() {
         description: "\"<=\""
       },
       peg$c48 = function peg$c48() {
-        return "$lte";
+        return '$lte';
       },
       peg$c49 = "<",
       peg$c50 = {
@@ -214,7 +214,7 @@ module.exports = (function() {
         description: "\"<\""
       },
       peg$c51 = function peg$c51() {
-        return "$lt";
+        return '$lt';
       },
       peg$c52 = "==",
       peg$c53 = {
@@ -229,7 +229,7 @@ module.exports = (function() {
         description: "\"=\""
       },
       peg$c56 = function peg$c56() {
-        return "$eq";
+        return '$eq';
       },
       peg$c57 = ">=",
       peg$c58 = {
@@ -238,7 +238,7 @@ module.exports = (function() {
         description: "\">=\""
       },
       peg$c59 = function peg$c59() {
-        return "$gte";
+        return '$gte';
       },
       peg$c60 = ">",
       peg$c61 = {
@@ -247,7 +247,7 @@ module.exports = (function() {
         description: "\">\""
       },
       peg$c62 = function peg$c62() {
-        return "$gt";
+        return '$gt';
       },
       peg$c63 = "!=",
       peg$c64 = {
@@ -256,7 +256,7 @@ module.exports = (function() {
         description: "\"!=\""
       },
       peg$c65 = function peg$c65() {
-        return "$ne";
+        return '$ne';
       },
       peg$c66 = {
         type: "other",
@@ -395,47 +395,47 @@ module.exports = (function() {
         description: "\"ten\""
       },
       peg$c111 = function peg$c111(num) {
-        if (num === "zero") {
+        if (num === 'zero') {
           return 0;
-        } else if (num === "one") {
+        } else if (num === 'one') {
           return 1;
-        } else if (num === "two") {
+        } else if (num === 'two') {
           return 2;
-        } else if (num === "three") {
+        } else if (num === 'three') {
           return 3;
-        } else if (num === "four") {
+        } else if (num === 'four') {
           return 4;
-        } else if (num === "five") {
+        } else if (num === 'five') {
           return 5;
-        } else if (num === "six") {
+        } else if (num === 'six') {
           return 6;
-        } else if (num === "seven") {
+        } else if (num === 'seven') {
           return 7;
-        } else if (num === "eight") {
+        } else if (num === 'eight') {
           return 8;
-        } else if (num === "nine") {
+        } else if (num === 'nine') {
           return 9;
-        } else if (num === "ten") {
+        } else if (num === 'ten') {
           return 10;
-        } else if (num === "eleven") {
+        } else if (num === 'eleven') {
           return 11;
-        } else if (num === "twelve") {
+        } else if (num === 'twelve') {
           return 12;
-        } else if (num === "thirteen") {
+        } else if (num === 'thirteen') {
           return 13;
-        } else if (num === "fourteen") {
+        } else if (num === 'fourteen') {
           return 14;
-        } else if (num === "fifteen") {
+        } else if (num === 'fifteen') {
           return 15;
-        } else if (num === "sixteen") {
+        } else if (num === 'sixteen') {
           return 16;
-        } else if (num === "seventeen") {
+        } else if (num === 'seventeen') {
           return 17;
-        } else if (num === "eighteen") {
+        } else if (num === 'eighteen') {
           return 18;
-        } else if (num === "nineteen") {
+        } else if (num === 'nineteen') {
           return 19;
-        } else if (num === "twenty") {
+        } else if (num === 'twenty') {
           return 20;
         }
       },
@@ -447,7 +447,7 @@ module.exports = (function() {
       },
       peg$c114 = function peg$c114(value) {
         return {
-          $type: "boolean",
+          $type: 'boolean',
           $not: value
         };
       },
@@ -494,10 +494,10 @@ module.exports = (function() {
         return 0;
       },
       peg$c129 = function peg$c129(count, of) {
-        if (count === "all") count = of.length;
+        if (count === 'all') count = of.length;
         if (count && of.length < count) throw new Error("you requested " + count + " items, but only listed " + of.length + " options (" + JSON.stringify(of) + ").");
         return {
-          $type: "of",
+          $type: 'of',
           $count: count,
           $of: of
         };
@@ -522,8 +522,8 @@ module.exports = (function() {
       },
       peg$c136 = function peg$c136() {
         return {
-          $from: "children",
-          $children: "$all"
+          $from: 'children',
+          $children: '$all'
         };
       },
       peg$c137 = "filter",
@@ -534,25 +534,25 @@ module.exports = (function() {
       },
       peg$c139 = function peg$c139() {
         return {
-          $from: "filter"
+          $from: 'filter'
         };
       },
       peg$c140 = function peg$c140(where) {
         return {
-          $from: "where",
+          $from: 'where',
           $where: where
         };
       },
       peg$c141 = function peg$c141(reqs) {
         return {
-          $from: "children",
+          $from: 'children',
           $children: flatten(reqs)
         };
       },
       peg$c142 = function peg$c142(count, what, from) {
-        if (what === "department" && from["$from"] === "where") throw new Error("cannot use a modifier with \"departments from courses\"");
+        if (what === 'department' && from['$from'] === 'where') throw new Error('cannot use a modifier with "departments from courses"');
         return assign({
-          $type: "modifier",
+          $type: 'modifier',
           $count: count,
           $what: what
         }, from);
@@ -570,7 +570,7 @@ module.exports = (function() {
         description: "[A-Za-z0-9_\\- \\/]"
       },
       peg$c147 = function peg$c147(initial, rest) {
-        return initial + rest.join("");
+        return initial + rest.join('');
       },
       peg$c148 = function peg$c148(title) {
         return title.trim();
@@ -595,7 +595,7 @@ module.exports = (function() {
         return " (" + t + ")";
       },
       peg$c155 = function peg$c155(a, b) {
-        return "" + a + (b || "");
+        return "" + a + (b || '');
       },
       peg$c156 = function peg$c156(title) {
         if (options.abbreviations && title in options.abbreviations) {
@@ -604,7 +604,7 @@ module.exports = (function() {
           title = options.titles[title];
         }
         return {
-          $type: "reference",
+          $type: 'reference',
           $requirement: title
         };
       },
@@ -635,7 +635,7 @@ module.exports = (function() {
       },
       peg$c163 = function peg$c163(dept, num, details) {
         return {
-          $type: "course",
+          $type: 'course',
           $course: assign(details || {}, dept || fetchDept() || {}, num)
         };
       },
@@ -644,8 +644,8 @@ module.exports = (function() {
       },
       peg$c165 = function peg$c165(chars) {
         return {
-          dept: chars.join(""),
-          type: "joined"
+          dept: chars.join(''),
+          type: 'joined'
         };
       },
       peg$c166 = "/",
@@ -657,18 +657,18 @@ module.exports = (function() {
       peg$c168 = function peg$c168(l1, l2) {
         return {
           dept: l1 + l2,
-          type: "seperate"
+          type: 'seperate'
         };
       },
       peg$c169 = function peg$c169(dept1, part2) {
         var type = part2.type;
         var dept2 = part2.dept;
         var department = undefined;
-        if (type === "joined") {
+        if (type === 'joined') {
           department = {
             department: [dept1 + dept2]
           };
-        } else if (type === "seperate") {
+        } else if (type === 'seperate') {
           department = {
             department: [expandDepartment(dept1), expandDepartment(dept2)]
           };
@@ -682,7 +682,7 @@ module.exports = (function() {
       },
       peg$c171 = function peg$c171(nums) {
         return {
-          number: parseInt(nums.join(""))
+          number: parseInt(nums.join(''))
         };
       },
       peg$c172 = "XX",
@@ -725,7 +725,7 @@ module.exports = (function() {
         description: "\"*\""
       },
       peg$c182 = function peg$c182(nums) {
-        return parseInt(nums.join(""));
+        return parseInt(nums.join(''));
       },
       peg$c183 = /^[1-5]/,
       peg$c184 = {
@@ -752,10 +752,10 @@ module.exports = (function() {
         description: "[a-z]i"
       },
       peg$c191 = function peg$c191(chars) {
-        return chars.join("");
+        return chars.join('');
       },
       peg$c192 = function peg$c192(num) {
-        return parseInt(num.join(""));
+        return parseInt(num.join(''));
       },
       peg$c193 = /^[0-9]/,
       peg$c194 = {
@@ -882,10 +882,10 @@ module.exports = (function() {
           function hex(ch) {
             return ch.charCodeAt(0).toString(16).toUpperCase();
           }
-          return s.replace(/\\/g, "\\\\").replace(/"/g, "\\\"").replace(/\x08/g, "\\b").replace(/\t/g, "\\t").replace(/\n/g, "\\n").replace(/\f/g, "\\f").replace(/\r/g, "\\r").replace(/[\x00-\x07\x0B\x0E\x0F]/g, function(ch) {
-            return "\\x0" + hex(ch);
+          return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function(ch) {
+            return '\\x0' + hex(ch);
           }).replace(/[\x10-\x1F\x80-\xFF]/g, function(ch) {
-            return "\\x" + hex(ch);
+            return '\\x' + hex(ch);
           }).replace(/[\u0180-\u0FFF]/g, function(ch) {
             return "\\u0" + hex(ch);
           }).replace(/[\u1080-\uFFFF]/g, function(ch) {
@@ -3706,9 +3706,9 @@ module.exports = (function() {
     function fetchDept(dept) {
       return globalLastDept;
     }
-    var flatten = require("lodash").flatten;
-    var assign = require("lodash").assign;
-    var expandDepartment = require("./expand-department");
+    var flatten = require('lodash').flatten;
+    var assign = require('lodash').assign;
+    var expandDepartment = require('./expand-department');
     peg$result = peg$startRuleFunction();
     if (peg$result !== peg$FAILED && peg$currPos === input.length) {
       return peg$result;
