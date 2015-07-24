@@ -1,0 +1,28 @@
+import sortBy from 'lodash/collection/sortBy'
+import memoize from 'lodash/function/memoize'
+import identity from 'lodash/utility/identity'
+memoize.Cache = WeakMap
+
+/**
+ * Simplifies a course to just the department/number combo.
+ *
+ * Because we can't expect the handy unique crsid to exist on courses from
+ * area specs, we have to figure it out on our own.
+ * The closest thing we can do is to reduce a course to the department +
+ * number combination.
+ * We're overloading the term "course" even more than normal here, so
+ * in this case, it's a set of key:value props that are applied as a
+ * filter to a list of fully-fledged course objects (which are actually
+ * "class" objects, but whatevs.)
+ * So, if c1 looks like {dept: A, num: 1}, and c2 looks like {dept: A,
+ * num: 1, year: 2015}, c2 is a more specific instance of c1.
+ *
+ * @private
+ * @param {Course} course - the course to simplify
+ * @returns {string} - the stringified, simplified course
+ */
+function simplifyCourse(course) {
+    return `${sortBy(course.department).join('/')} ${course.number}`
+}
+
+export default memoize(simplifyCourse, identity)
