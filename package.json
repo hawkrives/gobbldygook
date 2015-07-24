@@ -19,7 +19,7 @@
     "build:peg": "pegjs < lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > lib/parse-hanson-string.js",
     "build:production": "npm run clean && npm run build && npm run uglify",
     "build:scripts": "browserify $npm_package_config_browserify | exorcist build/app.js.map > build/app.js",
-    "build:styles": "./bin/sass.js src/styles/app.scss build/app.css",
+    "build:styles": "babel-node ./bin/sass.js src/styles/app.scss build/app.css",
     "clean": "rm -rf build/",
     "copy": "concurrent 'npm run copy:html' 'npm run copy:fonts' 'npm run copy:icons'",
     "copy:fonts": "mkdirp build && cp -fR src/fonts build/",
