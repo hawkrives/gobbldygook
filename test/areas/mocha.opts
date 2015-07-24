@@ -1,0 +1,4 @@
+--compilers js:babel/register
+--require test/support/node
+--reporter dot
+--ui bdd
