@@ -2,7 +2,7 @@ import meow from 'meow'
 import pkg from '../package.json'
 import fs from 'graceful-fs'
 import yaml from 'js-yaml'
-import enhanceHanson from '../lib/enhance-hanson'
+import enhanceHanson from '../src/lib/enhance-hanson'
 
 export function cli() {
     const args = meow({

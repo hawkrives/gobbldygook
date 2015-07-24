@@ -1,4 +1,4 @@
-import {parse} from '../lib/parse-hanson-string'
+import {parse} from '../src/lib/parse-hanson-string'
 import meow from 'meow'
 import pkg from '../package.json'
 import stringify from 'json-stable-stringify'

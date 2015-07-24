@@ -1,22 +1,14 @@
-import evaluate from '../lib/evaluate'
-import enhanceFile from '../lib/enhance-hanson'
-import pluralizeArea from '../lib/pluralize-area'
-import kebabCase from 'lodash/string/kebabCase'
+import evaluate from '../src/lib/evaluate'
+import loadArea from './load-area'
 
 import {readFileSync, readdirSync} from 'graceful-fs'
-import {safeLoad} from 'js-yaml'
 
 import path from 'path'
 
 import {describe, it} from 'mocha'
 import {expect} from 'chai'
 
-const studentDir = './example-students/'
-
-function loadArea({name, type/*, revision*/}) {
-    const filepath = path.join('areas/', pluralizeArea(type), `${kebabCase(name)}.yaml`)
-    return enhanceFile(safeLoad(readFileSync(filepath, {encoding: 'utf-8'})), {topLevel: true})
-}
+const studentDir = './test/example-students/'
 
 function loadStudent(filename) {
     return JSON.parse(readFileSync(filename, {encoding: 'utf-8'}))
