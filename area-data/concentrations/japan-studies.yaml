@@ -1,0 +1,15 @@
+name: Japan Studies
+type: concentration
+revision: 2014-15
+result: all of (Language, Electives)
+
+Language:
+    # Four Japanese language courses above Japanese 112
+    four of ( JAPAN 231, 232, 301, 302 )
+
+Electives:
+    # Two other courses on Japan;
+    # no level I or II language courses may count in this category
+    two of (
+        ASIAN 130, 230, 275, 268.*.2014.3,
+              210, 215, 220 )

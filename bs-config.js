@@ -4,6 +4,9 @@ module.exports = {
 	files: ['build/*.css', 'build/*.js', 'build/*.html'],
 	server: {
 		baseDir: './build',
+		routes: {
+			'/areas': './area-data',
+		}
 	},
 	notify: false,
 }

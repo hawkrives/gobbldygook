@@ -1,0 +1,62 @@
+name: Mathematics
+type: Major
+revision: 2011-12
+result: all of (Basic, Transitions, Perspectives, Level III, Sequence, Math Courses)
+
+Basic:
+    Calculus I: MATH 120
+    Calculus II: MATH 128 | 128
+    Linear Algebra: MATH 220
+
+    result: all of ( Calculus I, Calculus II, Linear Algebra )
+
+Transitions:
+    two of ( MATH 242, 244, 252 )
+
+Perspectives:
+    description: One course from three of the four perspectives.
+
+    A: one of (MATH 252, 352, 356)
+    C: one of (MATH 244, 226, 230, 262, 340, 344)
+    D: one of (MATH 232, (238 | 239), 262, CSCI 231, MATH 264)
+    M: one of (MATH 242, 230, 236, 262, 266, (STAT 212 | 214 | 272), STAT 316, MATH 330)
+
+    result: three of (A, C, D, M)
+
+Level III:
+    description: Two Level III courses, at least one of which must be a Mathematics course.
+
+    declare:
+        math-level-3: MATH 330, 340, 344, 348, 351, 356, 364, 382, 384, 390, 396, 398
+
+    result: two of ( $math-level-3, STAT 322, CSCI 315, CSCI 333 ) &
+            one of ( $math-level-3 )
+
+
+Sequence:
+    description: A 200-300-level sequence of two courses, at least one of which must be a Mathematics course.
+
+    Differential Equations: MATH 230 & 330
+    Complex Analysis:       MATH 226 & 340
+    Real Analysis:          MATH 244 & 344
+    Topology:               MATH 224 & 348
+    Abstract Algebra:       MATH 252 & 352
+    Geometry:               MATH 220 & 356
+    Combinatorics:          MATH 232 & 364
+
+    result: one of (
+        Differential Equations,
+        Complex Analysis,
+        Real Analysis,
+        Topology,
+        Abstract Algebra,
+        Geometry,
+        Combinatorics )
+
+
+Math Courses:
+    six of (
+        MATH 120, 126, 128, 220, 242,
+             244, 252, 226, 230, 232,
+             236, 238, 239, 262, 266,
+             STAT 2XX)

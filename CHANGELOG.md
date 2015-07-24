@@ -1,9 +1,15 @@
 # CHANGELOG
 
+## [Next][]
+- Rebuilt area of study processing on top of the new Hanson format
+- Included the hanson processors in the main repo
+
+
 ## 3.0.0alpha12
 - Stuff
 - More stuff
 - I really ought to update this more often
+- Switched back to Sass
 
 
 ## 3.0.0alpha11
@@ -18,7 +24,7 @@
 
 ## 3.0.0alpha9
 - Modularized app
-	- pulled [areas][sto-areas], [courses][sto-courses], [helpers][sto-helpers], and the [time parser][sto-sis-time-parser] into separate npm modules
+	- pulled [areas](https://github.com/hawkrives/gobbldygook-area-data), [courses](https://github.com/hawkrives/gobbldygook-course-data), [helpers](https://github.com/hawkrives/sto-helpers), and the [time parser](https://github.com/hawkrives/sto-sis-time-parser) into separate npm modules
 - Updated `student.studies` array
 	- we now only use the `id` and `year` fields
 	- `year` is to identify which version of the area to load and check
@@ -27,8 +33,3 @@
 	- well, this version actually has fewer, since so many flew away into helpers or areas.
 - Fixed "Revert to Demo" button
 - Added "Undo" and "Redo" buttons
-
-[sto-areas]: https://github.com/hawkrives/gobbldygook-area-data
-[sto-courses]: https://github.com/hawkrives/gobbldygook-course-data
-[sto-helpers]: https://github.com/hawkrives/sto-helpers
-[sto-sis-time-parser]: https://github.com/hawkrives/sto-sis-time-parser

@@ -13,7 +13,7 @@ import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 import debug from 'debug'
 let log = debug('gobbldygook:data')
-debug.enable('gobbldygook:data')
+debug.disable('gobbldygook:data')
 
 import union from 'lodash/array/union'
 import flatten from 'lodash/array/flatten'

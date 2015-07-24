@@ -16,10 +16,6 @@ plugins:
 # 1 means warning
 # 2 means error
 rules:
-  # possible errors
-  comma-dangle: 'always-multiline'
-  valid-jsdoc: 1
-
   # best practices
   curly: [2, 'multi-line']
   guard-for-in: 2
@@ -38,8 +34,9 @@ rules:
 
   # stylistic issues
   new-cap: 0
-  indent: [1, tab]
+  indent: 0 #[1, tab]
   camelcase: 2
+  comma-dangle: [1, 'always-multiline']
   comma-style: [1, last]
   comma-spacing: [1, {before: false, after: true}]
   key-spacing: [2, {beforeColon: false, afterColon: true}]
@@ -48,9 +45,28 @@ rules:
   brace-style: [1, stroustrup]
   semi: [2, never]
 
-  # react rules
-  react/no-multi-comp: 1  # prevent multiple component definition per file
-  react/prop-types: 1  # prevent missing proptypes in a react component definition
-  react/wrap-multilines: 1  # prevent missing parentheses around multilines jsx
-  react/self-closing-comp: 1  # prevent extra closing tags for components without children
-  react/wrap-multilines: 0
+  # react rules – https://github.com/yannickcr/eslint-plugin-react
+  react/display-name: 0
+  react/jsx-curly-spacing: [1, 'never']
+  react/jsx-no-duplicate-props: 1
+  react/jsx-no-undef: 2
+  react/jsx-sort-prop-types: 1
+  react/jsx-uses-react: 2
+  react/jsx-uses-vars: 2
+  react/no-did-mount-set-state: 1
+  react/no-did-update-set-state: 1
+  react/no-multi-comp: 0  # prevent multiple component definition per file
+  react/no-unknown-property: 1
+  react/prop-types: 2    # prevent missing proptypes in a react component definition
+  react/react-in-jsx-scope: 2
+  react/self-closing-comp: 1    # prevent extra closing tags for components without children
+  react/sort-comp: 1
+  react/wrap-multilines: 1    # prevent missing parentheses around multilines jsx
+
+  # jsdoc
+  valid-jsdoc:
+    - 1
+    - prefer:
+        return: returns
+        arg: param
+        argument: param
