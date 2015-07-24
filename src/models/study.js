@@ -27,6 +27,8 @@ const StudyRecord = Immutable.Record({
 
 class Study extends StudyRecord {
 	constructor({name, type, revision}={}) {
+		// TODO: migration from older area save style
+
 		const data = loadArea({name, type, revision})
 		const id = `${kebabCase(name)}-${type}?rev=${revision}`
 
