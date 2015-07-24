@@ -17,7 +17,7 @@ class Student extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps)
+		// console.log(nextProps)
 		let queryId = this.props.routerState.params.id
 		let student = nextProps.students.get(queryId)
 

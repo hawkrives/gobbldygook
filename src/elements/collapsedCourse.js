@@ -7,7 +7,7 @@ class CollapsedCourse extends React.Component {
 	static propTypes = {
 		info: React.PropTypes.object.isRequired,
 		onClick: React.PropTypes.func.isRequired,
-		children: React.PropTypes.array,
+		children: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.element])
 	}
 
 	static defaultProps = {
