@@ -9,7 +9,7 @@
   "license": "MIT",
   "config": {
     "beautify": "-f - --end-with-newline --indent-size 2",
-    "browserify": "--debug -e src/index.js -t [ babelify --stage 0 ]",
+    "browserify": "--debug -e src/index.js -t babelify",
     "uglify": "--source-map-root ./build/ --in-source-map build/app.js.map --source-map build/app.min.js.map --compress --mangle --screw-ie8"
   },
   "scripts": {
