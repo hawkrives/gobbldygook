@@ -1,30 +1,20 @@
-import {_, isUndefined} from 'lodash'
-import {titleCase} from 'humanize-plus'
-import {isTrue, findResults, findWordForProgress, parseAreaId} from 'sto-helpers'
+import {findWordForProgress} from 'sto-helpers'
+import evaluate from '../../area-data/lib/evaluate'
 
+import zipObject from 'lodash/array/zipObject'
+import pairs from 'lodash/object/pairs'
+import map from 'lodash/collection/map'
 
-/**
- * Controls the 'no result' result from areas of study.
- *
- * @param {String} id
- * @returns {Object}
- */
-let noResult = (id) => {
-	let {type, title} = parseAreaId(id)
-	return Promise.resolve({
-		id,
-		type,
-		title: titleCase(title),
-		result: false,
-		revisionYear: null,
-		progress: {at: 0, of: 1, word: 'zero'},
-		details: [{
-			type: 'error',
-			result: false,
-			title: `${type} not found!`,
-			description: `This ${type} could not be found.`,
-		}],
-	})
+function alterCourse(course) {
+	return zipObject(map(pairs(course), ([key, value]) => {
+		if (key === 'depts') {
+			key = 'department'
+		}
+		else if (key === 'num') {
+			key = 'number'
+		}
+		return [key, value]
+	}))
 }
 
 
@@ -37,26 +27,28 @@ let noResult = (id) => {
  * @fulfill {Object} - The details of the area check.
  */
 async function checkStudentAgainstArea(student, area) {
-	let {id, title, type, check} = area
+	const studentData = await student.data()
+	const areaData = await area.data
+	const areaId = area.id
 
-	if (type === 'not-found' || check === undefined) {
-		return noResult(id)
+	studentData.courses = map(studentData.courses, alterCourse)
+
+	const details = await Promise.resolve(evaluate(studentData, areaData))
+
+	// let currentProgress = _(listOfResults).reject(isUndefined).filter(isTrue).size()
+	// let maxProgress = listOfResults.length
+	const currentProgress = 5
+	const maxProgress = 10
+
+	return {
+		...details,
+		id: areaId,
+		_progress: {
+			at: currentProgress,
+			of: maxProgress,
+			word: findWordForProgress(maxProgress, currentProgress),
+		}
 	}
-
-	let studentResults = await check(student.data())
-
-	let listOfResults = findResults(studentResults.details)
-
-	let currentProgress = _(listOfResults).reject(isUndefined).filter(isTrue).size()
-	let maxProgress = listOfResults.length
-	let progressName = findWordForProgress(maxProgress, currentProgress)
-
-	let progress = {at: currentProgress, of: maxProgress, word: progressName}
-
-	let result = studentResults.result
-	let details = studentResults.details
-
-	return {id, title, type, progress, result, details}
 }
 
 export default checkStudentAgainstArea

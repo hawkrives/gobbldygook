@@ -36,10 +36,10 @@ class StudentSummary extends React.Component {
 		let concentrations = studies.filter(s => s.type === 'concentration')
 		let emphases = studies.filter(s => s.type === 'emphasis')
 
-		let degreeTitles = oxford(degrees.map(s => s.title).toArray())
-		let majorTitles = oxford(majors.map(s => s.title).toArray())
-		let concentrationTitles = oxford(concentrations.map(s => s.title).toArray())
-		let emphasisTitles = oxford(emphases.map(s => s.title).toArray())
+		let degreeTitles = oxford(degrees.map(s => s.name).toArray())
+		let majorTitles = oxford(majors.map(s => s.name).toArray())
+		let concentrationTitles = oxford(concentrations.map(s => s.name).toArray())
+		let emphasisTitles = oxford(emphases.map(s => s.name).toArray())
 
 		let degreeWords = pluralize(degrees.size, 'degree')
 		let majorWords = pluralize(majors.size, 'major')

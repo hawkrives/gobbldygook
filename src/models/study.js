@@ -1,35 +1,46 @@
 import {contains} from 'lodash'
 import Immutable from 'immutable'
-import getArea from 'sto-areas'
+
+import {status, text} from '../helpers/fetchHelpers'
+import yaml from 'js-yaml'
+import enhanceHanson from '../../area-data/lib/enhance-hanson'
+import pluralizeArea from '../../area-data/lib/pluralize-area'
+import kebabCase from 'lodash/string/kebabCase'
+
+async function loadArea({name, type}) {
+	const filepath = `./areas/${pluralizeArea(type)}/${kebabCase(name)}.yaml`
+	const data = await fetch(filepath)
+		.then(status)
+		.then(text)
+	const loaded = yaml.safeLoad(data)
+	const enhanced = enhanceHanson(loaded, {topLevel: true})
+	return enhanced
+}
 
 const StudyRecord = Immutable.Record({
 	id: '',
 	type: '',
-	abbr: '',
-	title: '',
-	revisionYear: null,
-	check: () => undefined,
+	name: '',
+	revision: null,
+	data: Promise.resolve({}),
 })
 
 class Study extends StudyRecord {
-	constructor(args) {
-		const {id, revisionYear} = args
-
-		const {type, departmentAbbr, title, check} = getArea(id, revisionYear)
-		// console.log('made a Study', id, title)
+	constructor({name, type, revision}={}) {
+		const data = loadArea({name, type, revision})
+		const id = `${kebabCase(name)}-${type}?rev=${revision}`
 
 		super({
-			id,
 			type,
-			title,
-			check,
-			revisionYear,
-			abbr: departmentAbbr,
+			name,
+			revision,
+			id,
+			data,
 		})
 	}
 
 	toJSON() {
-		const toKeep = ['id', 'revisionYear']
+		const toKeep = ['type', 'name', 'revision', 'id']
 		const filtered = this.toMap()
 			.filter((val, key) => contains(toKeep, key))
 		return filtered.toJS()

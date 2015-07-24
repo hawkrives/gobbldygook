@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 
-function status(response) {
+export function status(response) {
 	if (response.status >= 200 && response.status < 300) {
 		return Promise.resolve(response)
 	}
@@ -9,8 +9,10 @@ function status(response) {
 	}
 }
 
-function json(response) {
+export function json(response) {
 	return response.json()
 }
 
-export {status, json}
+export function text(response) {
+	return response.text()
+}

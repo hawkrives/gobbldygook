@@ -4,13 +4,13 @@
 	"graduation": 2016,
 
 	"studies": [
-		{"id": "d-ba", "revisionYear": 2014},
-		{"id": "m-csci", "revisionYear": 2014},
-		{"id": "m-asian", "revisionYear": 2011},
-		{"id": "m-phys", "revisionYear": 2011},
-		{"id": "m-math", "revisionYear": 2011},
-		{"id": "c-japan", "revisionYear": 2014},
-		{"id": "c-stat", "revisionYear": 2014}
+		{"type": "degree", "name": "Bachelor of Arts", "revision": "2014-15"},
+		{"type": "major", "name": "Computer Science", "revision": "2014-15"},
+		{"type": "major", "name": "Asian Studies", "revision": "2011-12"},
+		{"type": "major", "name": "Physics", "revision": "2011-12"},
+		{"type": "major", "name": "Math", "revision": "2011-12"},
+		{"type": "concentration", "name": "Japan Studies", "revision": "2014-15"},
+		{"type": "concentration", "name": "Statistics", "revision": "2014-15"}
 	],
 
 	"schedules": [
@@ -100,48 +100,18 @@
 		}
 	],
 
-	"overrides": [
-		{
-			"what": "credits.taken",
-			"value": 1
-		},
-		{
-			"what": "credits.needed",
-			"value": 35
-		},
-		{
-			"what": "studies.major.csci.foundation.cs1",
-			"value": true
-		},
-		{
-			"what": "studies.degree.ba.education.foundation.firstYearWriting",
-			"value": true
-		},
-		{
-			"what": "studies.degree.bm.graduation.courses",
-			"value": true
-		},
-		{
-			"what": "studies.degree.ba.graduation",
-			"value": true
-		},
-		{
-			"what": "courses.623423.prerequisites.263234",
-			"value": true
-		},
-		{
-			"what": "studies.concentration.bmed.practicalApplication",
-			"value": 52412
-		},
-		{
-			"what": "studies.concentration.bmed.ethicalConsiderations",
-			"value": 52215
-		},
-		{
-			"what": "studies.concentration.bmed.highLevelElective",
-			"value": 52341
-		}
-	],
+	"overrides": {
+		"credits.taken": 1,
+		"credits.needed": 35,
+		"major.csci.foundation.cs1": true,
+		"degree.ba.education.foundation.firstYearWriting": true,
+		"degree.bm.graduation.courses": true,
+		"degree.ba.graduation": true,
+		"course.623423.prerequisites.263234": true,
+		"concentration.bmed.practicalApplication": 52412,
+		"concentration.bmed.ethicalConsiderations": 52215,
+		"concentration.bmed.highLevelElective": 52341
+	},
 
 	"fabrications": [],
 

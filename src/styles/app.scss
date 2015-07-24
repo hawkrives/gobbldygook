@@ -7,16 +7,18 @@
 
 @import 'react-list-select';
 
+@import 'area-of-study';
+@import 'expression--course';
+@import 'expression';
+@import 'requirement';
+
 @import 'base';
-@import 'areaOfStudy';
 @import 'content';
 @import 'course';
 @import 'courseTable';
 @import 'graduationStatus';
 @import 'loading';
 @import 'notifications';
-@import 'requirement';
-@import 'requirementSet';
 @import 'searchButton';
 @import 'semester';
 @import 'semesterDetail';
