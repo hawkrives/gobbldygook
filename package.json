@@ -30,7 +30,7 @@
     "prebuild": "npm run copy && npm run lint",
     "prewatch": "npm run copy && npm run lint",
     "start": "concurrent 'npm run watch' 'npm run browser-sync'",
-    "test": "mocha && jest",
+    "test": "mocha",
     "test:students": "mocha ./bin/test-students",
     "travis": "npm run test:students && npm run test",
     "uglify": "uglifyjs build/app.js --output build/app.min.js $npm_package_config_uglify",
