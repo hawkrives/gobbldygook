@@ -13,6 +13,7 @@
     "uglify": "--source-map-root ./build/ --in-source-map build/app.js.map --source-map build/app.min.js.map --compress --mangle --screw-ie8"
   },
   "scripts": {
+    "benchmark": "babel-node ./benchmarks/students-benchmark.js --runs 50 --graph",
     "browser-sync": "browser-sync start --config ./bs-config.js",
     "build": "concurrent 'npm run build:scripts' 'npm run build:styles' 'npm run build:peg'",
     "build:areas": "./bin/compile-areas areas/ --out-dir dist/",
