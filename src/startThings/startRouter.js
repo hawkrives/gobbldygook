@@ -8,6 +8,7 @@ import Student from '../elements/student'
 import AddStudent from '../elements/student'
 import CourseTable from '../elements/courseTable'
 import SemesterDetail from '../elements/semesterDetail'
+import DownloadStudent from '../elements/download-student'
 
 // /
 // /s/122932
@@ -21,6 +22,7 @@ let routes = (
 		<Route handler={Student} name='student' path='s/:id/'>
 			<DefaultRoute handler={CourseTable} />
 			<Route handler={SemesterDetail} name='semester' path='semester/:year/:semester/' />
+			<Route handler={DownloadStudent} name='download' path='download/' />
 		</Route>
 	</Route>
 )

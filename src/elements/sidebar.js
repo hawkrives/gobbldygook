@@ -40,11 +40,7 @@ let Sidebar = React.createClass({
 			<menu className='student-buttons'>
 				<Link to='/' className='back sidebar-btn'>Students</Link>
 				<button className='search sidebar-btn' onClick={this.toggleSearch}>Search</button>
-				<a className='sidebar-btn'
-					download={`${student.name}.gb-student.json`}
-					href={`data:text/json;charset=utf-8,${student.encode()}`}>
-					Download
-				</a>
+				<Link className='sidebar-btn' to='download' params={{id: student.id}}>Download</Link>
 				<button className='sidebar-btn'
 					onClick={() => studentActions.resetStudentToDemo(student.id)}>
 					Revert to Demo
