@@ -4,3 +4,7 @@ env:
 
 globals:
   expect: false
+
+rules:
+  no-empty: 0
+  no-unused-expressions: 0
