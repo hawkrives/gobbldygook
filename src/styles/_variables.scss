@@ -14,7 +14,7 @@ $text-color: $near-black;
 // fonts
 $sans-font-stack: 'Fira Sans', 'Helvetica', 'Verdana', sans-serif;
 $body-font-stack: $sans-font-stack;
-$heading-font-stack: 'Fira Sans';
+$heading-font-stack: $sans-font-stack;
 
 // spacing
 $page-edge-padding: 15px;

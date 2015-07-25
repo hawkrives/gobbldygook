@@ -11,20 +11,12 @@ import Course from './course'
 import stickyfill from '../helpers/initStickyfill'
 
 let SearchButton = React.createClass({
-	mixins: [State],
-
 	propTypes: {
 		student: React.PropTypes.object.isRequired,
 		toggle: React.PropTypes.func.isRequired,
 	},
 
-	componentDidMount() {
-		stickyfill.add(React.findDOMNode(this))
-	},
-
-	componentWillUnmount() {
-		stickyfill.remove(React.findDOMNode(this))
-	},
+	mixins: [State],
 
 	getInitialState() {
 		return {
@@ -34,6 +26,14 @@ let SearchButton = React.createClass({
 			queryString: '',
 			queryInProgress: false,
 		}
+	},
+
+	componentDidMount() {
+		stickyfill.add(React.findDOMNode(this))
+	},
+
+	componentWillUnmount() {
+		stickyfill.remove(React.findDOMNode(this))
 	},
 
 	onSubmit() {
@@ -109,9 +109,9 @@ let SearchButton = React.createClass({
 		let showNoResults = this.state.results.length === 0 && this.state.hasQueried
 		let showIndicator = this.state.queryInProgress
 
-		let loadingIndicator = <li className='loading'>
+		let loadingIndicator = (<li className='loading'>
 			<div className='loading-spinner'><div /></div>
-		</li>
+		</li>)
 
 		let contents = null
 		if (!showIndicator) {
@@ -120,7 +120,7 @@ let SearchButton = React.createClass({
 				this.state.results
 		}
 
-		return <div className='search-sidebar'>
+		return (<div className='search-sidebar'>
 			<header className='sidebar-heading'>
 				<h1>Search for Courses</h1>
 				<button className='close-sidebar' title='Close Sidebar'
@@ -137,7 +137,7 @@ let SearchButton = React.createClass({
 			<ul className='course-list'>
 				{showIndicator ? loadingIndicator : contents}
 			</ul>
-		</div>
+		</div>)
 	},
 })
 

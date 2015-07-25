@@ -6,8 +6,8 @@ import AutosizeInput from 'react-input-autosize'
 
 import studentActions from '../flux/studentActions'
 
-let goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
-let badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
+const goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
+const badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
 class StudentSummary extends React.Component {
 	shouldComponentUpdate(nextProps) {
@@ -22,9 +22,9 @@ class StudentSummary extends React.Component {
 
 		let name = student.name
 		let studentId = this.props.student.id
-		let NameEl = <AutosizeInput className='autosize-input'
+		let NameEl = (<AutosizeInput className='autosize-input'
 			value={name}
-			onChange={(ev) => studentActions.updateName(studentId, ev.target.value.trim())} />
+			onChange={(ev) => studentActions.updateName(studentId, ev.target.value.trim())} />)
 
 		let has = studies
 			.groupBy(s => s.type)
@@ -36,10 +36,10 @@ class StudentSummary extends React.Component {
 		let concentrations = studies.filter(s => s.type === 'concentration')
 		let emphases = studies.filter(s => s.type === 'emphasis')
 
-		let degreeTitles = oxford(degrees.map(s => s.title).toArray())
-		let majorTitles = oxford(majors.map(s => s.title).toArray())
-		let concentrationTitles = oxford(concentrations.map(s => s.title).toArray())
-		let emphasisTitles = oxford(emphases.map(s => s.title).toArray())
+		let degreeTitles = oxford(degrees.map(s => s.name).toArray())
+		let majorTitles = oxford(majors.map(s => s.name).toArray())
+		let concentrationTitles = oxford(concentrations.map(s => s.name).toArray())
+		let emphasisTitles = oxford(emphases.map(s => s.name).toArray())
 
 		let degreeWords = pluralize(degrees.size, 'degree')
 		let majorWords = pluralize(majors.size, 'major')
@@ -56,28 +56,28 @@ class StudentSummary extends React.Component {
 		let concentrationEl = <span className='area-of-study-list' key='concentrations'>{concentrationTitles}</span>
 		let emphasisEl = <span className='area-of-study-list' key='emphases'>{emphasisTitles}</span>
 
-		console.log(student.graduation, student.matriculation)
+		// console.log(student.graduation, student.matriculation)
 
-		const graduationEl = <AutosizeInput
+		const graduationEl = (<AutosizeInput
 			className='autosize-input'
 			value={String(student.graduation)}
-			onChange={(ev) => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />
+			onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />)
 
-		const sinceMatriculationEl = <AutosizeInput
+		const sinceMatriculationEl = (<AutosizeInput
 			className='autosize-input'
 			value={String(student.graduation - student.matriculation)}
-			onChange={(ev) => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />
+			onChange={ev => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />)
 
-		return <article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
+		return (<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 			<header>
 				<div id='student-letter'>{name.length ? name[0] : ''}</div>
 				<p>Hi, {NameEl}</p>
 			</header>
 			<div className='content'>
 				<p>
-					{"You are planning on graduating in"} {graduationEl}{","} {sinceMatriculationEl}{" "}
-					{"years after matriculating, with"} {degreeEmphasizer} {degreeEl} {degreeWords}
-					{(has.major > 0) ? [', with ', majorEmphasizer, majorWords, ' in ', majorEl] : null}
+					You are planning on graduating in {graduationEl}, {sinceMatriculationEl}{" "}
+					years after matriculating, with {degreeEmphasizer} {degreeEl} {degreeWords}
+					{(has.major > 0) ? [', ', majorEmphasizer, majorWords, ' in ', majorEl] : null}
 					{(has.concentration > 0) ? [', and ' + concentrationEmphasizer, concentrationWords, ' in ', concentrationEl] : null}
 					{(has.emphasis > 0) ? [', not to mention ', emphasisEmphasizer, emphasisWords, ' in ', emphasisEl] : null}.
 				</p>
@@ -85,13 +85,13 @@ class StudentSummary extends React.Component {
 					{canGraduate ? goodGraduationMessage : badGraduationMessage}
 				</p>
 			</div>
-		</article>
+		</article>)
 	}
 }
 
 StudentSummary.propTypes = {
-	student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 	graduatability: React.PropTypes.bool.isRequired,
+	student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 }
 
 export default StudentSummary

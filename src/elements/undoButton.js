@@ -6,9 +6,9 @@ import studentStore from '../flux/studentStore'
 class UndoButton extends React.Component {
 	render() {
 		// console.log('UndoButton#render')
-		return <button className={cx(this.props.className)}
+		return (<button className={cx(this.props.className)}
 			onClick={studentActions.undo}
-			disabled={studentStore.history.size === 0}>Undo</button>
+			disabled={studentStore.history.size === 0}>Undo</button>)
 	}
 }
 

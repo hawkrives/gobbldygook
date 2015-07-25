@@ -6,7 +6,7 @@ class ContentEditable extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			content: props.content
+			content: props.content,
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -31,17 +31,17 @@ class ContentEditable extends React.Component {
 
 	render() {
 		// console.log('ContentEditable#render')
-		return <input
+		return (<input
 			type={this.props.type}
 			onChange={this.handleChange}
 			onBlur={this.handleChange}
-			value={this.state.content} />
+			value={this.state.content} />)
 	}
 }
 
 ContentEditable.propTypes = {
-	onChange: React.PropTypes.func,
 	content: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+	onChange: React.PropTypes.func,
 	type: React.PropTypes.string,
 }
 ContentEditable.defaultProps = {

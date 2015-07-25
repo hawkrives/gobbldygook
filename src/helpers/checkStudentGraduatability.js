@@ -1,10 +1,12 @@
-import size from 'lodash/collection/size'
-import filter from 'lodash/collection/filter'
+import compact from 'lodash/array/compact'
+import memoize from 'lodash/function/memoize'
 import pluck from 'lodash/collection/pluck'
+import size from 'lodash/collection/size'
+import zipObject from 'lodash/array/zipObject'
 
-import Immutable from 'immutable'
-import {isTrue} from 'sto-helpers'
+import {Map} from 'immutable'
 import checkStudentAgainstArea from './checkStudentAgainstArea'
+
 
 
 /**
@@ -13,27 +15,21 @@ import checkStudentAgainstArea from './checkStudentAgainstArea'
  * @param {Student} student
  * @promise GraduatabilityPromise
  * @fulfill {Object} - The details of the students graduation prospects.
- *    {Boolean} graduatability
- *    {Immutable.List} areaDetails
+ *    {boolean} graduatability
+ *    {Immutable.Map} areaDetails
  */
 async function checkStudentGraduatability(student) {
-	let areaResults = student.studies
-		.map((area) =>
-			checkStudentAgainstArea(student, area))
+	const areaPromises = student.studies
+		.map(area => checkStudentAgainstArea(student, area))
 		.toArray()
 
-	// console.log('areaResults', student.studies.toArray(), areaResults)
+	const areas = await* areaPromises
+	const areaDetails = Map(zipObject(areas.map(area => [area.id, area])))
 
-	let areas = await* areaResults
+	const goodAreaCount = size(compact(pluck('result', areas)))
+	const graduatability = (goodAreaCount - size(areas)) === 0
 
-	let goodAreaCount = size(filter(pluck('result', areas), isTrue))
-
-	let graduatability = (goodAreaCount - size(areas)) === 0
-
-	return {
-		graduatability: graduatability,
-		areaDetails: Immutable.List(areas),
-	}
+	return {graduatability, areaDetails}
 }
 
-export default checkStudentGraduatability
+export default memoize(checkStudentGraduatability)

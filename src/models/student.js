@@ -10,8 +10,6 @@ import {randomChar, countCredits} from 'sto-helpers'
 import Schedule from './schedule'
 import Study from './study'
 
-import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
-
 
 const StudentRecord = Immutable.Record({
 	id: null,
@@ -61,8 +59,8 @@ class Student extends StudentRecord {
 					student = student.addSchedule(schedule)
 				})
 
-				forEach((encodedStudent.overrides || []), override => {
-					student = student.addOverride(override)
+				forEach((encodedStudent.overrides || []), (val, key) => {
+					student = student.addOverride({[key]: val})
 				})
 
 				forEach((encodedStudent.fabrications || []), fabrication => {
@@ -186,7 +184,11 @@ class Student extends StudentRecord {
 	// override methods
 
 	addOverride(override) {
-		return this.setIn(['overrides', override.what], override)
+		return this.withMutations(student => {
+			forEach(override, (val, key) => {
+				student.setIn(['overrides', key], val)
+			})
+		})
 	}
 
 	removeOverride(thingOverriden) {
@@ -222,13 +224,6 @@ class Student extends StudentRecord {
 
 	// helpers
 
-	checkGraduatability() {
-		if (!this.graduatability) {
-			this.graduatability = checkStudentGraduatability(this)
-		}
-		return this.graduatability
-	}
-
 	data() {
 		return Promise.props({
 			courses: this.courses,
@@ -252,6 +247,22 @@ class Student extends StudentRecord {
 			console.log(`saving student ${this.name} (${this.id})`)
 			const student = this.set('dateLastModified', new Date())
 			localStorage.setItem(student.id, stringified)
+		}
+	}
+
+	toJSON() {
+		return {
+			id: this.id,
+			name: this.name,
+			version: this.version,
+			creditsNeeded: this.creditsNeeded,
+			matriculation: this.matriculation,
+			graduation: this.graduation,
+			studies: this.studies.toList(),
+			schedules: this.schedules.toList(),
+			overrides: this.overrides.toMap(),
+			fabrications: this.fabrications.toList(),
+			settings: this.settings.toMap(),
 		}
 	}
 }

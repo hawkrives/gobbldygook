@@ -41,7 +41,7 @@ class StudentList extends React.Component {
 				</Link></li>)
 			.toJS()
 
-		let buttons = <menu className='student-list-buttons'>
+		let buttons = (<menu className='student-list-buttons'>
 			<button key='student-list-button--sort-by'
 				className='student-list-button--sort-by'
 				items={[
@@ -68,32 +68,32 @@ class StudentList extends React.Component {
 			<button key='student-list-button--new'
 				className='student-list-button--new'
 				onClick={studentActions.initStudent}>New</button>
-		</menu>
+		</menu>)
 
-		let importButton = <input type='file'
+		let importButton = (<input type='file'
 			accept='.json'
 			key='import-student'
 			className='import-student'
 			onSubmit={this.handleSubmit}
-			onChange={this.handleFile} />
+			onChange={this.handleFile} />)
 
-		let studentFilter = <input type='search'
+		let studentFilter = (<input type='search'
 			className='student-list-filter'
-			placeholder='Filter students' />
+			placeholder='Filter students' />)
 
-		let toolbar = <div className='student-list-toolbar'>
+		let toolbar = (<div className='student-list-toolbar'>
 			{studentFilter}{buttons}
-		</div>
+		</div>)
 
-		let students = <ol className='student-list'>
+		let students = (<ol className='student-list'>
 			{studentObjects}
-		</ol>
+		</ol>)
 
-		return <div className='students-overview'>
+		return (<div className='students-overview'>
 			{importButton}
 			{toolbar}
 			{students}
-		</div>
+		</div>)
 	}
 }
 

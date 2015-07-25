@@ -1,1 +1,2 @@
 src/polyfills/details/Element.details.js
+src/lib/parse-hanson-string.js

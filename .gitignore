@@ -1,7 +1,6 @@
 # Files to ignore
 *.log
 .DS_Store
-.idea
 *.sublime-workspace
 playground/data
 playground/parse-sis.js
@@ -13,6 +12,6 @@ playground/parse-sis.js
 # Node stuff
 node_modules
 
-# The build results
+# The build artifacts
 build
-.tern-port
+coverage

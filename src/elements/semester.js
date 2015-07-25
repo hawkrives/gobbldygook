@@ -16,13 +16,13 @@ import studentActions from '../flux/studentActions'
 import itemTypes from '../models/itemTypes'
 
 let Semester = React.createClass({
-	mixins: [DragDropMixin],
-
 	propTypes: {
+		semester: React.PropTypes.number.isRequired,
 		student: React.PropTypes.object.isRequired,
 		year: React.PropTypes.number.isRequired,
-		semester: React.PropTypes.number.isRequired,
 	},
+
+	mixins: [DragDropMixin],
 
 	statics: {
 		configureDragDrop(registerType) {
@@ -38,10 +38,18 @@ let Semester = React.createClass({
 						else {
 							studentActions.addCourse(props.student.id, state.schedule.id, clbid)
 						}
-					}
-				}
+					},
+				},
 			})
 		},
+	},
+
+	getInitialState() {
+		return {
+			courses: Immutable.List(),
+			schedule: null,
+			validation: {},
+		}
 	},
 
 	componentWillMount() {
@@ -62,12 +70,13 @@ let Semester = React.createClass({
 			})
 	},
 
-	getInitialState() {
-		return {
-			courses: Immutable.List(),
-			schedule: null,
-			validation: {},
-		}
+	removeSemester() {
+		let {year, semester} = this.props
+		let currentTermSchedules = this.props.student.schedules.filter(isCurrentSemester(year, semester))
+
+		let scheduleIds = currentTermSchedules.map(s => s.id)
+
+		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	},
 
 	render() {
@@ -143,10 +152,10 @@ let Semester = React.createClass({
 				invalid: this.state.validation.hasConflict,
 				'can-drop': droppableIsMoving,
 				'is-over': droppableIsOver,
-			})
+			}),
 		}
 
-		return <div {...semesterProps} {...this.dropTargetFor(itemTypes.COURSE)}>
+		return (<div {...semesterProps} {...this.dropTargetFor(itemTypes.COURSE)}>
 			<header className='semester-title'>
 				<Link className='semester-header'
 					to='semester'
@@ -163,16 +172,7 @@ let Semester = React.createClass({
 					title={`Remove ${this.props.year} ${semesterName(this.props.semester)}`} />
 			</header>
 			{courseList}
-		</div>
-	},
-
-	removeSemester() {
-		let {year, semester} = this.props
-		let currentTermSchedules = this.props.student.schedules.filter(isCurrentSemester(year, semester))
-
-		let scheduleIds = currentTermSchedules.map(s => s.id)
-
-		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
+		</div>)
 	},
 })
 

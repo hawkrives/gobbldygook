@@ -12,16 +12,10 @@ import CollapsedCourse from './collapsedCourse'
 
 let Course = React.createClass({
 	propTypes: {
-		schedule: React.PropTypes.object,
 		conflicts: React.PropTypes.array,
 		index: React.PropTypes.number,
 		info: React.PropTypes.object.isRequired,
-	},
-
-	getDefaultProps() {
-		return {
-			conflicts: [],
-		}
+		schedule: React.PropTypes.object,
 	},
 
 	mixins: [DragDropMixin],
@@ -37,12 +31,18 @@ let Course = React.createClass({
 							item: {
 								clbid: props.info.clbid,
 								fromSchedule: scheduleId,
-							}
+							},
 						}
 					},
-				}
+				},
 			})
 		},
+	},
+
+	getDefaultProps() {
+		return {
+			conflicts: [],
+		}
 	},
 
 	getInitialState() {
@@ -51,16 +51,16 @@ let Course = React.createClass({
 		}
 	},
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextProps.info.clbid !== this.props.info.clbid ||
+			nextState.isOpen !== this.state.isOpen
+	},
+
 	toggleExpanded() {
 		// console.log(this.state.isOpen ? 'collapse' : 'expand')
 		this.setState({
 			isOpen: !this.state.isOpen,
 		})
-	},
-
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextProps.info.clbid !== this.props.info.clbid ||
-			nextState.isOpen !== this.state.isOpen
 	},
 
 	render() {
@@ -83,11 +83,11 @@ let Course = React.createClass({
 			'is-dragging': isDragging,
 		})
 
-		return <article className={classSet} {...this.dragSourceFor(itemTypes.COURSE)}>
+		return (<article className={classSet} {...this.dragSourceFor(itemTypes.COURSE)}>
 			<InnerCourse {...this.props} onClick={this.toggleExpanded}>
 				{warningEls.length ? <ul className='warnings'>{warningEls}</ul> : null}
 			</InnerCourse>
-		</article>
+		</article>)
 	},
 })
 

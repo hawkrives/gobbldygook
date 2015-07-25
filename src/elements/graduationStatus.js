@@ -2,76 +2,76 @@ import React from 'react'
 import {capitalize, pluralize} from 'humanize-plus'
 import Immutable from 'immutable'
 
-import AreaOfStudy from '../elements/areaOfStudy'
+import AreaOfStudy from '../elements/area-of-study'
 import StudentSummary from '../elements/studentSummary'
+
+import debug from 'debug'
+const log = debug('gobbldygook:component:render')
+
+import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
 class GraduationStatus extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			graduatability: false,
-			areaDetails: Immutable.List(),
+			areaDetails: Immutable.Map(),
 		}
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return ((nextProps.student !== this.props.student) ||
-			(nextState.areaDetails !== this.state.areaDetails))
-	}
-
-	async componentWillReceiveProps(nextProps) {
-		let graduationStatus = await nextProps.student.checkGraduatability()
-
-		let {graduatability, areaDetails} = graduationStatus
-		this.setState({graduatability, areaDetails})
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	//  return ((nextProps.student !== this.props.student) ||
+	//      (nextState.areaDetails !== this.state.areaDetails))
+	// }
 
 	componentWillMount() {
 		this.componentWillReceiveProps(this.props)
 	}
 
+	async componentWillReceiveProps(nextProps) {
+		const {graduatability, areaDetails} = await checkStudentGraduatability(nextProps.student)
+		this.setState({graduatability, areaDetails})
+	}
+
 	render() {
-		// console.info('GraduationStatus#render')
+		log('GraduationStatus#render')
 		let student = this.props.student
 
 		if (!student) {
 			return null
 		}
 
-		let summary = <StudentSummary
-			student={student}
-			graduatability={this.state.graduatability} />
-
-		let sections = student.areasByType
+		const sections = this.state.areaDetails
+			.groupBy(a => a.type.toLowerCase())
 			.map((areas, areaType) => {
-				let pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
+				const pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 
-				let areaTypeHeading = <header className='area-type-heading'>
-					<h1>{capitalize(pluralType)}</h1>
-				</header>
+				return (
+					<section
+						key={areaType}
+						id={pluralType}
+						className='area-of-study-group'>
 
-				let areaElements = areas.toList().map((area, index) => {
-					let areaResult = this.state.areaDetails.find(a => a.id === area.id)
+						<header className='area-type-heading'>
+							<h1>{capitalize(pluralType)}</h1>
+						</header>
 
-					let props = {student, areaResult, area}
-					return <AreaOfStudy key={`${area.id}-${index}`} {...props} />
-				}).toJS()
+						{areas.map((area) =>
+							<AreaOfStudy key={area.id} {...area} />).toArray()}
 
-				areaElements.push(
-					<button key='add-button' className='add-area-of-study'>
-						{`Add ${capitalize(areaType)}`}
-					</button>)
+						<button className='add-area-of-study'>
+							Add {capitalize(areaType)}
+						</button>
+					</section>
+				)
+			})
+			.toArray()
 
-				return <section id={pluralType} key={areaType} className='area-of-study-group'>
-					{areaTypeHeading}
-					{areaElements}
-				</section>
-			}).toArray()
-
-		return <section className='graduation-status'>
-			{summary}
+		return (<section className='graduation-status'>
+			<StudentSummary student={student}
+							graduatability={this.state.graduatability} />
 			{sections}
-		</section>
+		</section>)
 	}
 }
 

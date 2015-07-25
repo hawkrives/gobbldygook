@@ -63,19 +63,21 @@ let db = treo('gobbldygook', schema)
 export default db
 
 
-window.deleteDatabase = () => {
-	window.indexedDB.deleteDatabase('gobbldygook', () =>
-		console.log('Database dropped'))
-}
+if (typeof window !== 'undefined') {
+	window.deleteDatabase = () => {
+		window.indexedDB.deleteDatabase('gobbldygook', () =>
+			console.log('Database dropped'))
+	}
 
-window.eraseStorage = () => {
-	window.localStorage.clear()
-	console.log('Storage erased')
-}
+	window.eraseStorage = () => {
+		window.localStorage.clear()
+		console.log('Storage erased')
+	}
 
-window.eraseDatabase = () => {
-	window.deleteDatabase()
-	window.eraseStorage()
-}
+	window.eraseDatabase = () => {
+		window.deleteDatabase()
+		window.eraseStorage()
+	}
 
-window.database = db
+	window.database = db
+}

@@ -1,0 +1,114 @@
+.area {
+	* {box-sizing: border-box;}
+
+	font-family: Georgia;
+
+	margin-bottom: 1em;
+	display: block;
+
+	border: 1px solid currentColor;
+	padding: 0em;
+	background-color: white;
+
+	.summary > .details-marker       { display: none; }
+	.summary::-webkit-details-marker { display: none; }
+	.summary::-moz-details-marker    { display: none; }
+	.summary::-ms-details-marker     { display: none; }
+	.summary::details-marker         { display: none; }
+
+	$progress-height: 4px;
+
+	.summary {
+		position: relative;
+		cursor: pointer;
+	}
+
+	& > .summary::after {
+		content: '⋯';
+
+		// font-size: 2em;
+		position: absolute;
+		right: 12px;
+		top: $progress-height;
+	}
+
+	&[open] {
+		padding-bottom: 0.35em;
+	}
+
+	&[open] > .summary::after {
+		transform: rotate(90deg) scale(0.8);
+	}
+
+	progress {
+		@include progress-track('blue');
+
+		overflow: hidden;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		width: 100%;
+		height: $progress-height;
+
+		border: 0;
+
+		&.hundred   { @include progress-track('green') }
+		&.ninety    { @include progress-track('orange') }
+		&.eighty    { @include progress-track('orange') }
+		&.seventy   { @include progress-track('orange') }
+		&.sixty     { @include progress-track('amber') }
+		&.fifty     { @include progress-track('amber') }
+		&.forty     { @include progress-track('amber') }
+		&.thirty    { @include progress-track('amber') }
+		&.twenty    { @include progress-track('red') }
+		&.ten       { @include progress-track('red') }
+		&.under-ten { @include progress-track('red') }
+		&.zero      { @include progress-track('blue-gray') }
+	}
+}
+
+.area--title {
+	padding: 0.5em;
+	margin: 0;
+
+	font-size: 1em;
+	border-bottom: solid 1px currentColor;
+}
+
+.area-of-study-group {
+	margin-top: 1em;
+}
+
+.area-type-heading {
+	font-size: 0.9em;
+	font-weight: normal;
+	margin-top: 0;
+	margin-bottom: 0.25em;
+	margin-left: $block-edge-padding * 0.5;
+	font-feature-settings: 'smcp';
+
+	h1 {
+		@include heading-neutral;
+	}
+}
+
+.add-area-of-study {
+	@include add-button($psuedo: '::before') {
+		margin-right: 0.5em;
+	}
+	@include button--raised;
+
+	min-height: 0;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+	width: 100%;
+	text-align: left;
+	padding-left: $block-edge-padding * 1.5;
+
+	text-transform: none;
+	font-feature-settings: 'smcp';
+	font-size: 0.85em;
+}
+
