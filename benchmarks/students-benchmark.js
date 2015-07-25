@@ -2,20 +2,15 @@ import fs from 'graceful-fs'
 import info from '../package.json'
 
 import evaluate from '../src/lib/evaluate'
-import enhanceHanson from '../src/lib/enhance-hanson'
-import pluralizeArea from '../src/lib/pluralize-area'
 
 import includes from 'lodash/collection/includes'
 import junk from 'junk'
-import kebabCase from 'lodash/string/kebabCase'
 import meow from 'meow'
 import ms from 'pretty-ms'
 import range from 'lodash/utility/range'
 import size from 'lodash/collection/size'
 import sparkly from 'sparkly'
 import sum from 'lodash/collection/sum'
-import yaml from 'js-yaml'
-import {join} from 'path'
 import loadArea from '../bin/load-area'
 
 function now(other=[]) {
