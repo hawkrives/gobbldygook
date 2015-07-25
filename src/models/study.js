@@ -7,7 +7,13 @@ import enhanceHanson from '../lib/enhance-hanson'
 import pluralizeArea from '../lib/pluralize-area'
 import kebabCase from 'lodash/string/kebabCase'
 
-async function loadArea({name, type}) {
+export async function loadArea({name, type}) {
+	if (!name) {
+		throw new Error(`loadArea(): 'name' must be provided`)
+	}
+	else if (!type) {
+		throw new Error(`loadArea(): 'type' must be provided`)
+	}
 	const filepath = `./areas/${pluralizeArea(type)}/${kebabCase(name)}.yaml`
 	const data = await fetch(filepath)
 		.then(status)
@@ -17,7 +23,7 @@ async function loadArea({name, type}) {
 	return enhanced
 }
 
-const StudyRecord = Immutable.Record({
+export const StudyRecord = Immutable.Record({
 	id: '',
 	type: '',
 	name: '',
@@ -25,10 +31,11 @@ const StudyRecord = Immutable.Record({
 	data: Promise.resolve({}),
 })
 
-class Study extends StudyRecord {
-	constructor({name, type, revision}={}) {
-		// TODO: migration from older area save style
+export default class Study extends StudyRecord {
+	constructor(args) {
+		let {name, type, revision} = args
 
+		// migrate from older area save style
 		const data = loadArea({name, type, revision})
 		const id = `${kebabCase(name)}-${type}?rev=${revision}`
 
@@ -48,5 +55,3 @@ class Study extends StudyRecord {
 		return filtered.toJS()
 	}
 }
-
-export default Study
