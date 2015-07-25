@@ -38,7 +38,7 @@
     "start": "npm run watch & npm run browser-sync & wait",
     "test": "mocha $npm_package_config_mocha",
     "test:students": "mocha ./bin/test-students",
-    "travis": "npm run build:areas && npm run test:students && npm run coveralls",
+    "travis": "npm run build:areas && npm run test:students && npm run cover",
     "uglify": "uglifyjs build/app.js --output build/app.min.js $npm_package_config_uglify",
     "watch": "concurrent 'npm run watch:lint' 'npm run watch:scripts' 'npm run watch:styles'",
     "watch:lint": "npm run lint -- -w",
