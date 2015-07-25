@@ -249,6 +249,22 @@ class Student extends StudentRecord {
 			localStorage.setItem(student.id, stringified)
 		}
 	}
+
+	toJSON() {
+		return {
+			id: this.id,
+			name: this.name,
+			version: this.version,
+			creditsNeeded: this.creditsNeeded,
+			matriculation: this.matriculation,
+			graduation: this.graduation,
+			studies: this.studies.toList(),
+			schedules: this.schedules.toList(),
+			overrides: this.overrides.toMap(),
+			fabrications: this.fabrications.toList(),
+			settings: this.settings.toMap(),
+		}
+	}
 }
 
 export default Student
