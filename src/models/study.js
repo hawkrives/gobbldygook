@@ -108,9 +108,10 @@ export default class Study extends StudyRecord {
 	}
 
 	toJSON() {
-		const toKeep = ['type', 'name', 'revision', 'id']
-		const filtered = this.toMap()
-			.filter((val, key) => contains(toKeep, key))
-		return filtered.toJS()
+		return {
+			type: this.type,
+			name: this.name,
+			revision: this.revision,
+		}
 	}
 }
