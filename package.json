@@ -97,6 +97,7 @@
     "isparta": "3.0.3",
     "js-beautify": "1.5.10",
     "junk": "1.0.2",
+    "matcha": "0.6.0",
     "meow": "3.3.0",
     "mkdirp": "0.5.1",
     "mocha": "2.2.5",
