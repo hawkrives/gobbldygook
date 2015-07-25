@@ -1,4 +1,4 @@
-import evaluate from '../lib/evaluate'
+import evaluate from '../../src/lib/evaluate'
 
 describe('evaluate', () => {
     it('evaluates!', () => {

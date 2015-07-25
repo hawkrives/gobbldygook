@@ -1,4 +1,4 @@
-import simplifyCourse from '../lib/simplify-course'
+import simplifyCourse from '../../src/lib/simplify-course'
 
 describe('simplifyCourse', () => {
     it('only uses department and number', () => {

@@ -1,4 +1,4 @@
-import filterByWhereClause from '../lib/filter-by-where-clause'
+import filterByWhereClause from '../../src/lib/filter-by-where-clause'
 
 describe('filterByWhereClause', () => {
     it('filters an array of courses by a where-clause', () => {

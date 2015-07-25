@@ -1,4 +1,4 @@
-import compareCourseToCourse from '../lib/compare-course-to-course'
+import compareCourseToCourse from '../../src/lib/compare-course-to-course'
 
 describe('compareCourseToCourse', () => {
     it('compares select keys of courses', () => {

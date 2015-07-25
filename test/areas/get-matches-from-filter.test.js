@@ -1,4 +1,4 @@
-import getMatchesFromFilter from '../lib/get-matches-from-filter'
+import getMatchesFromFilter from '../../src/lib/get-matches-from-filter'
 
 describe('getMatchesFromFilter', () => {
     it('returns the matches from the requirement\s filter property', () => {

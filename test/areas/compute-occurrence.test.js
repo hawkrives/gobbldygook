@@ -1,4 +1,4 @@
-import {computeOccurrence} from '../lib/compute-chunk'
+import {computeOccurrence} from '../../src/lib/compute-chunk'
 
 describe('computeOccurrence', () => {
     it('computes the number of times a course has been taken vs. a minimum count', () => {

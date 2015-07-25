@@ -1,4 +1,4 @@
-import countCredits from '../lib/count-credits'
+import countCredits from '../../src/lib/count-credits'
 
 describe('countCredits', () => {
     it('counts the number of credits in an array of courses', () => {

@@ -1,4 +1,4 @@
-import getDepartments from '../lib/get-departments'
+import getDepartments from '../../src/lib/get-departments'
 
 describe('getDepartments', () => {
     it('returns the distinct departments from an array of courses', () => {

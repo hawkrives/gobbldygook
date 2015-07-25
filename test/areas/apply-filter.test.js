@@ -1,4 +1,4 @@
-import applyFilter from '../lib/apply-filter'
+import applyFilter from '../../src/lib/apply-filter'
 
 describe('applyFilter', () => {
     it('filters a list of courses', () => {

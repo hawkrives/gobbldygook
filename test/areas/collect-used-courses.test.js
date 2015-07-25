@@ -1,4 +1,4 @@
-import collectUsedCourses from '../lib/collect-used-courses'
+import collectUsedCourses from '../../src/lib/collect-used-courses'
 
 describe('collectUsedCourses', () => {
     it('collects a list of all of the courses anywhere in this object which have the `_used` property.', () => {

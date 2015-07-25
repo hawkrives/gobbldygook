@@ -1,4 +1,4 @@
-import countCourses from '../lib/count-courses'
+import countCourses from '../../src/lib/count-courses'
 
 describe('countCourses', () => {
     it('counts the number of distinct courses in an array', () => {

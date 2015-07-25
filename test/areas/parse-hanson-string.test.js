@@ -1,4 +1,4 @@
-import {parse} from '../lib/parse-hanson-string'
+import {parse} from '../../src/lib/parse-hanson-string'
 
 describe('parse hanson-string', () => {
     describe('course parsing', () => {

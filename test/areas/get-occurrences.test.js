@@ -1,4 +1,4 @@
-import getOccurrences from '../lib/get-occurrences'
+import getOccurrences from '../../src/lib/get-occurrences'
 
 describe('getOccurrences', () => {
     it('returns a list of occurrences of a course', () => {

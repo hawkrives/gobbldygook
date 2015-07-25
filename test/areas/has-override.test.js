@@ -1,4 +1,4 @@
-import hasOverride from '../lib/has-override'
+import hasOverride from '../../src/lib/has-override'
 
 describe('hasOverride', () => {
     it('checks if an override exists', () => {

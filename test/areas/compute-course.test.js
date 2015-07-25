@@ -1,4 +1,4 @@
-import {computeCourse} from '../lib/compute-chunk'
+import {computeCourse} from '../../src/lib/compute-chunk'
 
 describe('computeCourse', () => {
     it('checks if a course exists in the list of courses', () => {

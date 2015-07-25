@@ -1,4 +1,4 @@
-import countDepartments from '../lib/count-departments'
+import countDepartments from '../../src/lib/count-departments'
 
 describe('countDepartments', () => {
     it('counts the number of distinct departments in an array of courses', () => {

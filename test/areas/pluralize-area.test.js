@@ -1,4 +1,4 @@
-import pluralizeArea from '../lib/pluralize-area'
+import pluralizeArea from '../../src/lib/pluralize-area'
 
 describe('pluralizeArea', () => {
     it('pluralizes degree to degrees', () => {

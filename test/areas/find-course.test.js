@@ -1,4 +1,4 @@
-import findCourse from '../lib/find-course'
+import findCourse from '../../src/lib/find-course'
 
 describe('findCourse', () => {
     it('finds a course in a list of courses', () => {

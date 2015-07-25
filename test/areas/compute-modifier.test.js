@@ -1,5 +1,5 @@
-import computeChunk, {computeModifier} from '../lib/compute-chunk'
-import applyFilter from '../lib/apply-filter'
+import computeChunk, {computeModifier} from '../../src/lib/compute-chunk'
+import applyFilter from '../../src/lib/apply-filter'
 
 describe('computeModifier', () => {
     it('checks for <things> from all children', () => {

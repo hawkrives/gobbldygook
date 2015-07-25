@@ -1,4 +1,4 @@
-import computeChunk, {computeBoolean} from '../lib/compute-chunk'
+import computeChunk, {computeBoolean} from '../../src/lib/compute-chunk'
 
 describe('computeBoolean', () => {
     it('computes the boolean result of and-clauses', () => {

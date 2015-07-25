@@ -1,4 +1,4 @@
-import compareCourseToQualification from '../lib/compare-course-to-qualification'
+import compareCourseToQualification from '../../src/lib/compare-course-to-qualification'
 
 describe('compareCourseToQualification', () => {
     it('compares a course property against an operator', () => {

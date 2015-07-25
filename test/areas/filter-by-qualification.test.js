@@ -1,4 +1,4 @@
-import {filterByQualification} from '../lib/filter-by-where-clause'
+import {filterByQualification} from '../../src/lib/filter-by-where-clause'
 
 describe('filterByQualification', () => {
     it('filters an array of courses by a qualification', () => {

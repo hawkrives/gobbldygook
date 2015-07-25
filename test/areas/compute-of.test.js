@@ -1,4 +1,4 @@
-import {computeOf} from '../lib/compute-chunk'
+import {computeOf} from '../../src/lib/compute-chunk'
 
 describe('computeOf', () => {
     it('computes a list of boolean-equivalent expressions against a desired count', () => {

@@ -1,4 +1,4 @@
-import checkForCourse from '../lib/check-for-course'
+import checkForCourse from '../../src/lib/check-for-course'
 
 describe('checkForCourse', () => {
     it('checks for a course in a list of courses', () => {

@@ -1,4 +1,4 @@
-import collectMatches from '../lib/collect-matches'
+import collectMatches from '../../src/lib/collect-matches'
 
 describe('collectMatches', () => {
     it('throws an error if confronted with an unknown type', () => {

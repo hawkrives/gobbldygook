@@ -1,4 +1,4 @@
-import getOverride from '../lib/get-override'
+import getOverride from '../../src/lib/get-override'
 
 describe('getOverride', () => {
     // Note: we're using .equal for booleans here to indicate that it's
