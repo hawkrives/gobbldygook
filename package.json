@@ -92,6 +92,7 @@
     "eslint-plugin-react": "3.0.0",
     "eslint-watch": "1.2.4",
     "exorcist": "0.4.0",
+    "glob": "5.0.14",
     "graceful-fs": "4.1.2",
     "isparta": "3.0.3",
     "js-beautify": "1.5.10",
