@@ -1,4 +1,3 @@
-import {contains} from 'lodash'
 import Immutable from 'immutable'
 
 import {status, text} from '../helpers/fetchHelpers'
