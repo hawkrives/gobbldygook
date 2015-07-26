@@ -66,6 +66,10 @@ export default class Expression extends Component {
         const {expr} = this.props
         const {$type} = expr
 
+        if (!$type) {
+            return null
+        }
+
         const wasComputed = expr.hasOwnProperty('_result')
         const computationResult = expr._result
 
