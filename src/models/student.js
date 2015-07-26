@@ -10,6 +10,8 @@ import {randomChar, countCredits} from 'sto-helpers'
 import Schedule from './schedule'
 import Study from './study'
 
+import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
+
 
 const StudentRecord = Immutable.Record({
 	id: null,
@@ -98,6 +100,10 @@ class Student extends StudentRecord {
 
 	changeSetting(key, value) {
 		return this.setIn(['settings', key], value)
+	}
+
+	get graduatability() {
+		return checkStudentGraduatability(this)
 	}
 
 

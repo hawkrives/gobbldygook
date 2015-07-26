@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import filter from 'lodash/collection/filter'
 
 import Requirement from './requirement'
 
@@ -7,6 +6,11 @@ import Requirement from './requirement'
 
 export default class AreaOfStudy extends Component {
     static propTypes = {
+        _progress: PropTypes.shape({
+            at: PropTypes.number.isRequired,
+            of: PropTypes.number.isRequired,
+            word: PropTypes.string.isRequired,
+        }),
         name: PropTypes.string.isRequired,
         result: PropTypes.object.isRequired,
         revision: PropTypes.string.isRequired,
@@ -14,6 +18,11 @@ export default class AreaOfStudy extends Component {
     }
 
     static defaultProps = {
+        _progress: {
+            word: 'zero',
+            at: 0,
+            of: 1,
+        },
         name: 'Unknown Area',
         type: '???',
         revision: '0000-00',
@@ -21,14 +30,14 @@ export default class AreaOfStudy extends Component {
     }
 
     render() {
-        const finalReqs = findRequirementsWithNoChildren(this.props)
-        const maxProgress = finalReqs.length
-        const currentProgress = filter(finalReqs)
-
         return (
             <details className='area'>
                 <summary className='summary'>
                     <h1 className='area--title'>{this.props.name}</h1>
+                    <progress
+                        className={`area--progress ${this.props._progress.word}`}
+                        value={this.props._progress.at}
+                        max={this.props._progress.of} />
                 </summary>
                 <Requirement {...this.props} topLevel />
             </details>

@@ -8,8 +8,6 @@ import StudentSummary from '../elements/studentSummary'
 import debug from 'debug'
 const log = debug('gobbldygook:component:render')
 
-import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
-
 class GraduationStatus extends React.Component {
 	constructor(props) {
 		super(props)
@@ -29,7 +27,7 @@ class GraduationStatus extends React.Component {
 	}
 
 	async componentWillReceiveProps(nextProps) {
-		const {graduatability, areaDetails} = await checkStudentGraduatability(nextProps.student)
+		const {graduatability, areaDetails} = await nextProps.student.graduatability
 		this.setState({graduatability, areaDetails})
 	}
 
