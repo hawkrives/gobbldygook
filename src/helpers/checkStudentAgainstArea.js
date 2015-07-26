@@ -28,7 +28,7 @@ function alterCourse(course) {
  * @promise ResultsPromise
  * @fulfill {Object} - The details of the area check.
  */
-async function checkStudentAgainstArea(student, area) {
+export default async function checkStudentAgainstArea(student, area) {
 	const studentData = await student.data()
 	const areaData = await area.data
 	const areaId = area.id
@@ -52,5 +52,3 @@ async function checkStudentAgainstArea(student, area) {
 		},
 	}
 }
-
-export default checkStudentAgainstArea
