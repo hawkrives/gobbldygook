@@ -1,6 +1,8 @@
 import Promise from 'bluebird'
 import Immutable from 'immutable'
-import {flatten, forEach, omit} from 'lodash'
+import flatten from 'lodash/array/flatten'
+import forEach from 'lodash/collection/forEach'
+import omit from 'lodash/object/omit'
 import {v4 as uuid} from 'node-uuid'
 
 import {version as currentVersionString} from '../../package.json'
@@ -152,8 +154,7 @@ class Student extends StudentRecord {
 		return this.withMutations((student) => {
 			changelog('destroyMultipleSchedules', ids)
 			// console.groupCollapsed('destroyMultipleSchedules')
-			Immutable.Seq(ids).forEach((id) => {
-				// console.log('destroyMultipleSchedules', id)
+			forEach('toArray' in ids ? ids.toArray() : ids, (id) => {
 				student = student.destroySchedule(id)
 			})
 			// console.groupEnd('destroyMultipleSchedules')
@@ -187,7 +188,7 @@ class Student extends StudentRecord {
 
 	removeMultipleAreas(ids) {
 		return this.withMutations((student) => {
-			Immutable.Seq(ids).forEach((id) => {
+			forEach('toArray' in ids ? ids.toArray() : ids, id => {
 				student = student.removeArea(id)
 			})
 			return student
@@ -197,11 +198,12 @@ class Student extends StudentRecord {
 
 	// override methods
 
-	addOverride(override) {
+	addOverride(overrideObj) {
 		return this.withMutations(student => {
-			forEach(override, (val, key) => {
-				student.setIn(['overrides', key], val)
+			forEach(overrideObj, (val, key) => {
+				student = student.setIn(['overrides', key], val)
 			})
+			return student
 		})
 	}
 
