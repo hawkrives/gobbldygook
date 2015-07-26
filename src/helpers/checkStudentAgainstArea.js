@@ -1,9 +1,11 @@
 import {findWordForProgress} from 'sto-helpers'
 import evaluate from '../lib/evaluate'
+import findLeafRequirements from '../lib/find-leaf-requirements'
 
 import zipObject from 'lodash/array/zipObject'
 import pairs from 'lodash/object/pairs'
 import map from 'lodash/collection/map'
+import filter from 'lodash/collection/filter'
 
 function alterCourse(course) {
 	return zipObject(map(pairs(course), ([key, value]) => {
@@ -35,10 +37,10 @@ async function checkStudentAgainstArea(student, area) {
 
 	const details = await Promise.resolve(evaluate(studentData, areaData))
 
-	// let currentProgress = _(listOfResults).reject(isUndefined).filter(isTrue).size()
-	// let maxProgress = listOfResults.length
-	const currentProgress = 5
-	const maxProgress = 10
+	const finalReqs = findLeafRequirements(details)
+    const maxProgress = finalReqs.length
+    const currentProgress = filter(finalReqs, {computed: true}).length
+    const progressWord = findWordForProgress(maxProgress, currentProgress)
 
 	return {
 		...details,
@@ -46,7 +48,7 @@ async function checkStudentAgainstArea(student, area) {
 		_progress: {
 			at: currentProgress,
 			of: maxProgress,
-			word: findWordForProgress(maxProgress, currentProgress),
+			word: progressWord,
 		},
 	}
 }
