@@ -101,7 +101,7 @@ export default class Expression extends Component {
         }
 
         else {
-            console.warn(`Expression(): type not handled: ${$type}`)
+            console.warn(`<Expression />: type not handled: ${$type}`)
             console.log(this.props)
             contents = JSON.stringify(expr)
         }
