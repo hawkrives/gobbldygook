@@ -7,7 +7,6 @@ import {Map} from 'immutable'
 import checkStudentAgainstArea from './checkStudentAgainstArea'
 
 
-
 /**
  * Checks a student objects graduation possibilities against all of its areas of study.
  *
@@ -31,4 +30,5 @@ async function checkStudentGraduatability(student) {
 	return {graduatability, areaDetails}
 }
 
-export default memoize(checkStudentGraduatability)
+export default checkStudentGraduatability
+// export default memoize(checkStudentGraduatability)

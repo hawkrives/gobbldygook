@@ -1,7 +1,6 @@
 import sortBy from 'lodash/collection/sortBy'
 import memoize from 'lodash/function/memoize'
 import identity from 'lodash/utility/identity'
-memoize.Cache = WeakMap
 
 /**
  * Simplifies a course to just the department/number combo.
@@ -25,4 +24,5 @@ function simplifyCourse(course) {
     return `${sortBy(course.department).join('/')} ${course.number}`
 }
 
-export default memoize(simplifyCourse, identity)
+export default simplifyCourse
+// export default memoize(simplifyCourse, identity)
