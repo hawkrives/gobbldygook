@@ -40,10 +40,10 @@ const StudentRecord = Immutable.Record({
 
 class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
-		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
-		// instead of our custom Studies, Schedules, and such.
 		const startTime = present()
 
+		// Don't pass the list params into the StudentRecord constructor;
+		// it creates them as JS objects, instead of our custom records.
 		const toRemove = ['studies', 'schedules', 'overrides', 'fabrications', 'settings']
 		const filtered = omit(encodedStudent, toRemove)
 		const immutableStudent = Immutable.fromJS(filtered)
@@ -57,6 +57,7 @@ class Student extends StudentRecord {
 				student = student.set('name', encodedStudent.name || 'Student ' + randomChar())
 				student = student.set('dateCreated', encodedStudent.dateCreated || new Date())
 				student = student.set('dateLastModified', encodedStudent.dateLastModified || new Date())
+				student = student.set('version', currentVersionString)
 
 				forEach((encodedStudent.studies || []), study => {
 					student = student.addArea(study)
@@ -77,8 +78,6 @@ class Student extends StudentRecord {
 				forEach((encodedStudent.settings || {}), (value, key) => {
 					student = student.changeSetting(key, value)
 				})
-
-				student = student.set('version', currentVersionString)
 
 				changelog(`it took ${present() - startTime} ms to make a student`)
 
@@ -115,11 +114,14 @@ class Student extends StudentRecord {
 	// schedule methods
 
 	get schedulesByYear() {
-		return this.schedules.groupBy(sched => sched.year)
+		return this.schedules
+			.groupBy(sched => sched.year)
 	}
 
 	get activeSchedules() {
-		return this.schedules.filter(sched => sched.active).sortBy(sched => sched.semester)
+		return this.schedules
+			.filter(sched => sched.active)
+			.sortBy(sched => sched.semester)
 	}
 
 	addSchedule(newSchedule) {
@@ -239,12 +241,12 @@ class Student extends StudentRecord {
 	data() {
 		return Promise.props({
 			courses: this.courses,
-			fabrications: this.fabrications.toList().toJS(),
-			overrides: this.overrides.toList().toJS(),
-			studies: this.studies.toList().toJS(),
 			creditsNeeded: this.creditsNeeded,
+			fabrications: this.fabrications.toList().toJS(),
 			graduation: this.graduation,
 			matriculation: this.matriculation,
+			overrides: this.overrides.toList().toJS(),
+			studies: this.studies.toList().toJS(),
 		})
 	}
 
@@ -253,6 +255,9 @@ class Student extends StudentRecord {
 	}
 
 	save() {
+		// grab the old (still-JSON-encoded) student from localstorage
+		// compare it to the current one
+		// if they're different, update dateLastModified, stringify, and save.
 		const oldVersion = localStorage.getItem(this.id)
 		const stringified = JSON.stringify(this)
 		if (oldVersion !== stringified) {
