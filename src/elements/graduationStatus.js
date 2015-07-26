@@ -39,8 +39,8 @@ class GraduationStatus extends React.Component {
 			return null
 		}
 
-		const sections = this.state.areaDetails
-			.groupBy(a => a.type.toLowerCase())
+		const sections = this.props.student.studies
+			.groupBy(study => study.type.toLowerCase())
 			.map((areas, areaType) => {
 				const pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
 
@@ -54,8 +54,10 @@ class GraduationStatus extends React.Component {
 							<h1>{capitalize(pluralType)}</h1>
 						</header>
 
-						{areas.map((area) =>
-							<AreaOfStudy key={area.id} {...area} />).toArray()}
+						{areas.map(baseArea => {
+							const area = this.state.areaDetails.get(baseArea.id) || baseArea
+							return <AreaOfStudy key={area.id} {...area} />
+						}).toArray()}
 
 						<button className='add-area-of-study'>
 							Add {capitalize(areaType)}
