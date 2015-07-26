@@ -10,6 +10,7 @@ import every from 'lodash/collection/every'
 import filterByWhereClause from './filter-by-where-clause'
 import find from 'lodash/collection/find'
 import findCourse from './find-course'
+import forEach from 'lodash/collection/forEach'
 import getMatchesFromChildren from './get-matches-from-children'
 import getMatchesFromFilter from './get-matches-from-filter'
 import getOccurrences from './get-occurrences'
@@ -97,9 +98,7 @@ export default function computeChunk({expr, ctx, courses, dirty}) {
     // the contained courses from `dirty`.
 
     if (!computedResult) {
-        collectUsedCourses(expr)
-            .map(simplifyCourse)
-            .forEach(crsid => dirty.delete(crsid))
+        forEach(map(collectUsedCourses(expr), simplifyCourse), crsid => dirty.delete(crsid))
     }
 
     return computedResult

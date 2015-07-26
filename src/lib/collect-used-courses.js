@@ -21,5 +21,5 @@ export default function collectUsedCourses(expr) {
     // flatten the list
     const courses = flattenDeep(children)
 
-    return uniq(courses)
+    return uniq(courses) || []
 }
