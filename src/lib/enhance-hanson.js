@@ -29,6 +29,11 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
         }
     })
 
+    // install the top-level $type key *after* the whitelist runs
+    if (topLevel) {
+        data.$type = 'requirement'
+    }
+
     const requirements = filter(keys(data), isRequirementName)
     const abbreviations = zipObject(map(requirements,
         req => [req.replace(/.* \(([A-Z\-]+)\)$|.*$/, '$1'), req]))
