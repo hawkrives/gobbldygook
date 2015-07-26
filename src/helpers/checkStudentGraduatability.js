@@ -1,4 +1,4 @@
-import memoize from 'lodash/function/memoize'
+// import memoize from 'lodash/function/memoize'
 import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
 import zipObject from 'lodash/array/zipObject'
