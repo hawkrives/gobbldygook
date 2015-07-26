@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import {isUndefined, contains, _ as lodash, reject} from 'lodash'
+import lodash, {isUndefined, reject} from 'lodash'
 import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
 
