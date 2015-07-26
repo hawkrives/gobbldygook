@@ -1,6 +1,5 @@
-import compact from 'lodash/array/compact'
 import memoize from 'lodash/function/memoize'
-import pluck from 'lodash/collection/pluck'
+import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
 import zipObject from 'lodash/array/zipObject'
 
@@ -26,8 +25,8 @@ async function checkStudentGraduatability(student) {
 	const areas = await* areaPromises
 	const areaDetails = Map(zipObject(areas.map(area => [area.id, area])))
 
-	const goodAreaCount = size(compact(pluck('result', areas)))
-	const graduatability = (goodAreaCount - size(areas)) === 0
+	const goodAreas = filter(areas, {computed: true})
+	const graduatability = (size(goodAreas) === size(areas))
 
 	return {graduatability, areaDetails}
 }
