@@ -4,6 +4,7 @@ import flatten from 'lodash/array/flatten'
 import forEach from 'lodash/collection/forEach'
 import omit from 'lodash/object/omit'
 import {v4 as uuid} from 'node-uuid'
+import stringify from 'json-stable-stringify'
 
 import {version as currentVersionString} from '../../package.json'
 
@@ -253,7 +254,7 @@ class Student extends StudentRecord {
 	}
 
 	encode() {
-		return encodeURIComponent(JSON.stringify(this))
+		return encodeURIComponent(stringify(this))
 	}
 
 	save() {
@@ -261,11 +262,10 @@ class Student extends StudentRecord {
 		// compare it to the current one
 		// if they're different, update dateLastModified, stringify, and save.
 		const oldVersion = localStorage.getItem(this.id)
-		const stringified = JSON.stringify(this)
-		if (oldVersion !== stringified) {
-			console.log(`saving student ${this.name} (${this.id})`)
+		if (oldVersion !== stringify(this)) {
+			changelog(`saving student ${this.name} (${this.id})`)
 			const student = this.set('dateLastModified', new Date())
-			localStorage.setItem(student.id, stringified)
+			localStorage.setItem(student.id, stringify(student))
 		}
 	}
 
