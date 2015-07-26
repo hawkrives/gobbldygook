@@ -12,6 +12,10 @@ import Study from './study'
 
 import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
+import present from 'present'
+import debug from 'debug'
+const changelog = debug('gobbldygook:model:student:changes')
+
 
 const StudentRecord = Immutable.Record({
 	id: null,
@@ -36,9 +40,10 @@ const StudentRecord = Immutable.Record({
 
 class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
-		// const startTime = present()
 		// Don't pass the list params into the StudentRecord constructor; it creates them as JS objects,
 		// instead of our custom Studies, Schedules, and such.
+		const startTime = present()
+
 		const toRemove = ['studies', 'schedules', 'overrides', 'fabrications', 'settings']
 		const filtered = omit(encodedStudent, toRemove)
 		const immutableStudent = Immutable.fromJS(filtered)
@@ -75,7 +80,7 @@ class Student extends StudentRecord {
 
 				student = student.set('version', currentVersionString)
 
-				// console.log('it took', present() - startTime, 'ms to make a student')
+				changelog(`it took ${present() - startTime} ms to make a student`)
 
 				return student
 			})
@@ -123,7 +128,7 @@ class Student extends StudentRecord {
 	}
 
 	destroySchedule(scheduleId) {
-		// console.log(`removing schedule ${scheduleId}`)
+		changelog(`removing schedule ${scheduleId}`)
 
 		const deadSched = this.getIn(['schedules', scheduleId])
 		const scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
@@ -143,6 +148,7 @@ class Student extends StudentRecord {
 
 	destroyMultipleSchedules(ids) {
 		return this.withMutations((student) => {
+			changelog('destroyMultipleSchedules', ids)
 			// console.groupCollapsed('destroyMultipleSchedules')
 			Immutable.Seq(ids).forEach((id) => {
 				// console.log('destroyMultipleSchedules', id)
@@ -154,7 +160,7 @@ class Student extends StudentRecord {
 	}
 
 	moveCourse(fromScheduleId, toScheduleId, clbid) {
-		// console.log(`moving course ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+		changelog(`moving course ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 		return this.withMutations((student) => {
 			student = student.setIn(['schedules', fromScheduleId], student.getIn(['schedules', fromScheduleId]).removeCourse(clbid))
 			student = student.setIn(['schedules', toScheduleId], student.getIn(['schedules', toScheduleId]).addCourse(clbid))
