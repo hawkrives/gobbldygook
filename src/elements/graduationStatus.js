@@ -9,7 +9,11 @@ import StudentSummary from './studentSummary'
 import debug from 'debug'
 const log = debug('gobbldygook:component:render')
 
-class GraduationStatus extends React.Component {
+export default class GraduationStatus extends React.Component {
+	static propTypes = {
+		student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
+	}
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -75,9 +79,3 @@ class GraduationStatus extends React.Component {
 		</section>)
 	}
 }
-
-GraduationStatus.propTypes = {
-	student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
-}
-
-export default GraduationStatus

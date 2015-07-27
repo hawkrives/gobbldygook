@@ -10,9 +10,10 @@ import studentActions from '../flux/studentActions'
 const goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
 const badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
-class StudentSummary extends React.Component {
-	shouldComponentUpdate(nextProps) {
-		return nextProps.student !== this.props.student || nextProps.graduatability !== this.props.graduatability
+export default class StudentSummary extends React.Component {
+	static propTypes = {
+		graduatability: React.PropTypes.bool.isRequired,
+		student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 	}
 
 	render() {
@@ -89,10 +90,3 @@ class StudentSummary extends React.Component {
 		</article>)
 	}
 }
-
-StudentSummary.propTypes = {
-	graduatability: React.PropTypes.bool.isRequired,
-	student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
-}
-
-export default StudentSummary

@@ -22,10 +22,6 @@ class ExpandedCourse extends React.Component {
 		this.removeFromSemester = this.removeFromSemester.bind(this)
 	}
 
-	shouldComponentUpdate(nextProps) {
-		return this.props.info.clbid !== nextProps.info.clbid
-	}
-
 	removeFromSemester() {
 		studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.info.clbid)
 	}
