@@ -58,7 +58,6 @@
     "react-router": "0.13.3",
     "reflux": "0.2.11",
     "stickyfill": "1.1.1",
-    "sto-areas": "2.3.12",
     "sto-helpers": "4.2.11",
     "sto-sis-time-parser": "2.0.0",
     "treo": "0.5.0",
