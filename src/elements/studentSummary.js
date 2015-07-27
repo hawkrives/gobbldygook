@@ -38,27 +38,20 @@ export default class StudentSummary extends React.Component {
 		const concentrations = studies.filter(s => s.type === 'concentration')
 		const emphases = studies.filter(s => s.type === 'emphasis')
 
-		const degreeTitles = oxford(degrees.map(s => s.name).toArray())
-		const majorTitles = oxford(majors.map(s => s.name).toArray())
-		const concentrationTitles = oxford(concentrations.map(s => s.name).toArray())
-		const emphasisTitles = oxford(emphases.map(s => s.name).toArray())
-
-		const degreeWords = plur('degree', degrees.size)
-		const majorWords = plur('major', majors.size)
-		const concentrationWords = plur('concentration', concentrations.size)
-		const emphasisWords = plur('emphasis', 'emphases', emphases.size)
+		const degreeWord = plur('degree', degrees.size)
+		const majorWord = plur('major', majors.size)
+		const concentrationWord = plur('concentration', concentrations.size)
+		const emphasisWord = plur('emphasis', 'emphases', emphases.size)
 
 		const degreeEmphasizer = has.degree === 1 ? 'a ' : ''
 		const majorEmphasizer = has.major === 1 ? 'a ' : ''
 		const concentrationEmphasizer = has.concentration === 1 ? 'a ' : ''
 		const emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
 
-		const degreeEl = <span className='area-of-study-list' key='degrees'>{degreeTitles}</span>
-		const majorEl = <span className='area-of-study-list' key='majors'>{majorTitles}</span>
-		const concentrationEl = <span className='area-of-study-list' key='concentrations'>{concentrationTitles}</span>
-		const emphasisEl = <span className='area-of-study-list' key='emphases'>{emphasisTitles}</span>
-
-		// console.log(student.graduation, student.matriculation)
+		const degreeEl = <span className='area-of-study-list'>{oxford(degrees.map(s => s.name).toArray())}</span>
+		const majorEl = <span className='area-of-study-list'>{oxford(majors.map(s => s.name).toArray())}</span>
+		const concentrationEl = <span className='area-of-study-list'>{oxford(concentrations.map(s => s.name).toArray())}</span>
+		const emphasisEl = <span className='area-of-study-list'>{oxford(emphases.map(s => s.name).toArray())}</span>
 
 		const graduationEl = (<AutosizeInput
 			className='autosize-input'
@@ -78,10 +71,10 @@ export default class StudentSummary extends React.Component {
 			<div className='content'>
 				<p>
 					You are planning on graduating in {graduationEl}, {sinceMatriculationEl}{" "}
-					years after matriculating, with {degreeEmphasizer} {degreeEl} {degreeWords}
-					{(has.major > 0) ? [', ', majorEmphasizer, majorWords, ' in ', majorEl] : null}
-					{(has.concentration > 0) ? [', and ' + concentrationEmphasizer, concentrationWords, ' in ', concentrationEl] : null}
-					{(has.emphasis > 0) ? [', not to mention ', emphasisEmphasizer, emphasisWords, ' in ', emphasisEl] : null}.
+					years after matriculating, with {degreeEmphasizer} {degreeEl} {degreeWord}
+					{(has.major > 0) ? [', ', majorEmphasizer, majorWord, ' in ', majorEl] : null}
+					{(has.concentration > 0) ? [', and ' + concentrationEmphasizer, concentrationWord, ' in ', concentrationEl] : null}
+					{(has.emphasis > 0) ? [', not to mention ', emphasisEmphasizer, emphasisWord, ' in ', emphasisEl] : null}.
 				</p>
 				<p className='graduation-message'>
 					{canGraduate ? goodGraduationMessage : badGraduationMessage}
