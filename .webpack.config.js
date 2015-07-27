@@ -32,7 +32,4 @@ module.exports = getConfig({
       ].join('\n')
     }
   },
-
-  // set this to whatever your machine name is plus `.local`
-  hostname: 'Precious.local',
 })
