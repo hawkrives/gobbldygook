@@ -49,7 +49,7 @@ function makeModifierExpression({expr}) {
 }
 
 function makeWhereExpression({expr}) {
-    const description = JSON.stringify(expr)
+    const description = `${expr._counted} of ${expr.$count} from ${expr.$where.$key} ${expr.$where.$operator} ${expr.$where.$value}`
 
     return {description}
 }
