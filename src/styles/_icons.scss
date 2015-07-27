@@ -1,8 +1,8 @@
-@import '../icons/scss/ionicons-variables';
+@import 'ionicons-variables';
 
 @font-face {
 	font-family: $ionicons-font-family;
-	src: url('./fonts/ionicons.woff') format('woff');
+	src: url('./static/icons/ionicons.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
