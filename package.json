@@ -10,15 +10,13 @@
   "config": {
     "beautify": "-f - --end-with-newline --indent-size 2",
     "webpack": "--progress --config=./.webpack.config.js",
-    "mocha": "test/areas test/models",
-    "uglify": "--source-map-root ./build/ --in-source-map build/app.js.map --source-map build/app.min.js.map --compress --mangle --screw-ie8"
+    "mocha": "test/areas test/models"
   },
   "scripts": {
     "benchmark": "babel-node ./benchmarks/students-benchmark.js --runs 50 --graph",
     "build": "webpack $npm_package_config_webpack",
     "build:areas": "./bin/compile-areas areas/ --out-dir dist/",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
-    "build:production": "npm run clean && npm run build && npm run uglify",
     "clean": "rm -rf build/",
     "copy": "mkdir -p build/ && cp -fR src/static/ build/ && ln -fs ../area-data/ build/areas",
     "cover": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- $npm_package_config_mocha",
@@ -33,7 +31,6 @@
     "test": "mocha $npm_package_config_mocha",
     "test:students": "mocha ./bin/test-students",
     "travis": "npm run build:areas && npm run test:students && npm run build && npm run cover",
-    "uglify": "uglifyjs build/app.js --output build/app.min.js $npm_package_config_uglify",
     "watch": "npm run watch:lint & npm run watch:test & wait"
   },
   "dependencies": {
@@ -110,7 +107,6 @@
     "sparkly": "2.0.1",
     "style-loader": "0.12.3",
     "stylus-loader": "1.2.1",
-    "uglify-js": "2.4.24",
     "url-loader": "0.5.6",
     "webpack": "1.10.1",
     "webpack-dev-server": "1.10.1",
