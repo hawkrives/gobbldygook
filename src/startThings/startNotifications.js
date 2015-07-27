@@ -6,4 +6,4 @@
 
 import React from 'react'
 import Notifications from '../elements/notifications'
-React.render(React.createElement(Notifications), document.querySelector('.notifications'))
+React.render(<Notifications />, document.getElementById('notifications'))
