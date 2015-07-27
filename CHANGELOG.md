@@ -3,6 +3,7 @@
 ## [Next][]
 - Rebuilt area of study processing on top of the new Hanson format
 - Included the hanson processors in the main repo
+- Switch to Webpack for the build system
 
 
 ## 3.0.0alpha12
