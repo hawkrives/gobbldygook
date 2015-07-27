@@ -44,7 +44,7 @@
 .expression--course,
 .expression--modifier,
 .expression--reference {
-	border: 1px solid currentColor;
+	@include card;
 	padding: 0.125em 0.25em;
 
 	&.computed::after {
