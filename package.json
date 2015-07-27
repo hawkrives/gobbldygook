@@ -18,7 +18,7 @@
     "build:areas": "./bin/compile-areas areas/ --out-dir dist/",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
     "clean": "rm -rf build/",
-    "copy": "mkdir -p build/ && cp -fR src/static/ build/ && ln -fs ../area-data/ build/areas",
+    "copy": "mkdirp build/ && cp -fR src/static/ build/ && ln -fs ../area-data/ build/areas",
     "cover": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- $npm_package_config_mocha",
     "cover:view": "npm run cover && opn coverage/lcov-report/index.html",
     "coveralls": "npm run cover && coveralls < ./coverage/lcov.info",
