@@ -7,6 +7,8 @@ import 'whatwg-fetch'
 import React from 'react'
 React.initializeTouchEvents(true)
 
+import './styles/app.scss'
+
 import './helpers/bindKeys'
 import './startThings/startNotifications'
 import './startThings/startGlobalPollution'
