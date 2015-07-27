@@ -9,8 +9,8 @@
   "license": "MIT",
   "config": {
     "beautify": "-f - --end-with-newline --indent-size 2",
-    "webpack": "--progress --config=./.webpack.config.js",
-    "mocha": "test/areas test/models"
+    "mocha": "test/areas test/models",
+    "webpack": "--progress --config=./.webpack.config.js"
   },
   "scripts": {
     "benchmark": "babel-node ./benchmarks/students-benchmark.js --runs 50 --graph",
