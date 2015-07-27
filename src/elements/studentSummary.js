@@ -1,6 +1,6 @@
 import React from 'react'
 import Immutable from 'immutable'
-import {oxford} from 'humanize-plus'
+import oxford from 'humanize-list'
 import plur from 'plur'
 
 import AutosizeInput from 'react-input-autosize'

@@ -1,6 +1,6 @@
 import React from 'react'
 import map from 'lodash/collection/map'
-import {oxford} from 'humanize-plus'
+import oxford from 'humanize-list'
 import plur from 'plur'
 
 import CourseTitle from './courseTitle'

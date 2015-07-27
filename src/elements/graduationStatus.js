@@ -1,5 +1,5 @@
 import React from 'react'
-import {capitalize} from 'humanize-plus'
+import capitalize from 'lodash/string/capitalize'
 import pluralizeArea from '../lib/pluralize-area'
 import Immutable from 'immutable'
 
