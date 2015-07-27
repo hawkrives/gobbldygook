@@ -48,15 +48,21 @@ export default class StudentSummary extends React.Component {
 		const concentrationEl = oxford(concentrations.map(s => s.name).toArray())
 		const emphasisEl = oxford(emphases.map(s => s.name).toArray())
 
-		const graduationEl = (<AutosizeInput
-			className='autosize-input'
+		const graduationEl = (<input
+			className='stretchy'
 			value={String(student.graduation)}
-			onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />)
+			onChange={ev => {
+				studentActions.changeGraduation(studentId, parseInt(ev.target.value))
+				Stretchy.resize(React.findDOMNode(this))
+			}} />)
 
-		const sinceMatriculationEl = (<AutosizeInput
-			className='autosize-input'
+		const sinceMatriculationEl = (<input
+			className='stretchy'
 			value={String(student.graduation - student.matriculation)}
-			onChange={ev => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />)
+			onChange={ev => {
+				studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))
+				Stretchy.resize(React.findDOMNode(this))
+			}} />)
 
 		return (<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 			<header>
