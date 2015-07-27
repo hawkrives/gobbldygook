@@ -3,7 +3,7 @@ import {DragDropMixin} from 'react-dnd'
 import Promise from 'bluebird'
 import React from 'react'
 import {Link} from 'react-router'
-import {pluralize} from 'humanize-plus'
+import plur from 'plur'
 import Immutable from 'immutable'
 import cx from 'classnames'
 import ReactListSelect from 'react-list-select'
@@ -87,7 +87,7 @@ let Semester = React.createClass({
 			let courseCount = this.state.courses.size
 			infoIcons.push(
 				<li className='semester-course-count' key='course-count'>
-					{`${courseCount} ${pluralize(courseCount, 'course')}`}
+					{`${courseCount} ${plur('course', courseCount)}`}
 				</li>)
 
 			let credits = this.state.courses
@@ -98,7 +98,7 @@ let Semester = React.createClass({
 			if (credits) {
 				infoIcons.push(
 					<li className='semester-credit-count' key='credit-count'>
-						{`${credits} ${pluralize(credits, 'credit')}`}
+						{`${credits} ${plur('credit', credits)}`}
 					</li>)
 			}
 		}

@@ -1,3 +1,5 @@
+import plur from 'plur'
+
 /**
  * Pluralizes an area type
  * @private
@@ -7,9 +9,7 @@
 export default function pluralizeArea(type) {
     type = type.toLowerCase()
     if (type === 'emphasis') {
-        return 'emphases'
+        return plur(type, 'emphases', 2)
     }
-    else {
-        return type + 's'
-    }
+    return plur(type, 2)
 }

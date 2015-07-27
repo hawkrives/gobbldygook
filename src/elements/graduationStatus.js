@@ -1,5 +1,6 @@
 import React from 'react'
-import {capitalize, pluralize} from 'humanize-plus'
+import {capitalize} from 'humanize-plus'
+import pluralizeArea from '../lib/pluralize-area'
 import Immutable from 'immutable'
 
 import AreaOfStudy from '../elements/area-of-study'
@@ -42,7 +43,7 @@ class GraduationStatus extends React.Component {
 		const sections = this.props.student.studies
 			.groupBy(study => study.type.toLowerCase())
 			.map((areas, areaType) => {
-				const pluralType = pluralize(2, areaType, areaType === 'emphasis' ? 'emphases' : undefined)
+				const pluralType = pluralizeArea(areaType)
 
 				return (
 					<section

@@ -1,6 +1,7 @@
 import React from 'react'
 import map from 'lodash/collection/map'
-import {oxford, pluralize} from 'humanize-plus'
+import {oxford} from 'humanize-plus'
+import plur from 'plur'
 
 import CourseTitle from './courseTitle'
 import CourseIdentBlock from './courseIdentBlock'
@@ -61,7 +62,7 @@ class ExpandedCourse extends React.Component {
 		let description = <p className='description'>{course.desc}</p>
 
 		let credits = (<span className='credits'>
-			{course.credits} {pluralize(course.credits, 'credit')}
+			{course.credits} {plur('credit', course.credits)}
 		</span>)
 
 		let classInstanceOffered = (<span className='instance'>
