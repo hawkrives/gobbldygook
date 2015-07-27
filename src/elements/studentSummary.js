@@ -1,6 +1,6 @@
 import React from 'react'
 import Immutable from 'immutable'
-import {oxford, pluralize} from 'humanize-plus'
+import {oxford} from 'humanize-plus'
 import plur from 'plur'
 
 import AutosizeInput from 'react-input-autosize'
@@ -18,45 +18,45 @@ export default class StudentSummary extends React.Component {
 
 	render() {
 		// console.log('StudentSummary#render')
-		let canGraduate = this.props.graduatability
-		let student = this.props.student
-		let studies = student.studies
+		const canGraduate = this.props.graduatability
+		const student = this.props.student
+		const studies = student.studies
 
-		let name = student.name
-		let studentId = this.props.student.id
-		let NameEl = (<AutosizeInput className='autosize-input'
+		const name = student.name
+		const studentId = student.id
+		const NameEl = (<AutosizeInput className='autosize-input'
 			value={name}
-			onChange={(ev) => studentActions.updateName(studentId, ev.target.value.trim())} />)
+			onChange={ev => studentActions.updateName(studentId, ev.target.value.trim())} />)
 
-		let has = studies
+		const has = studies
 			.groupBy(s => s.type)
 			.map(s => s.size)
 			.toObject()
 
-		let degrees = studies.filter(s => s.type === 'degree')
-		let majors = studies.filter(s => s.type === 'major')
-		let concentrations = studies.filter(s => s.type === 'concentration')
-		let emphases = studies.filter(s => s.type === 'emphasis')
+		const degrees = studies.filter(s => s.type === 'degree')
+		const majors = studies.filter(s => s.type === 'major')
+		const concentrations = studies.filter(s => s.type === 'concentration')
+		const emphases = studies.filter(s => s.type === 'emphasis')
 
-		let degreeTitles = oxford(degrees.map(s => s.name).toArray())
-		let majorTitles = oxford(majors.map(s => s.name).toArray())
-		let concentrationTitles = oxford(concentrations.map(s => s.name).toArray())
-		let emphasisTitles = oxford(emphases.map(s => s.name).toArray())
+		const degreeTitles = oxford(degrees.map(s => s.name).toArray())
+		const majorTitles = oxford(majors.map(s => s.name).toArray())
+		const concentrationTitles = oxford(concentrations.map(s => s.name).toArray())
+		const emphasisTitles = oxford(emphases.map(s => s.name).toArray())
 
-		let degreeWords = pluralize(degrees.size, 'degree')
-		let majorWords = pluralize(majors.size, 'major')
-		let concentrationWords = pluralize(concentrations.size, 'concentration')
-		let emphasisWords = pluralize(emphases.size, 'emphasis', 'emphases')
+		const degreeWords = plur('degree', degrees.size)
+		const majorWords = plur('major', majors.size)
+		const concentrationWords = plur('concentration', concentrations.size)
+		const emphasisWords = plur('emphasis', 'emphases', emphases.size)
 
-		let degreeEmphasizer = has.degree === 1 ? 'a ' : ''
-		let majorEmphasizer = has.major === 1 ? 'a ' : ''
-		let concentrationEmphasizer = has.concentration === 1 ? 'a ' : ''
-		let emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
+		const degreeEmphasizer = has.degree === 1 ? 'a ' : ''
+		const majorEmphasizer = has.major === 1 ? 'a ' : ''
+		const concentrationEmphasizer = has.concentration === 1 ? 'a ' : ''
+		const emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
 
-		let degreeEl = <span className='area-of-study-list' key='degrees'>{degreeTitles}</span>
-		let majorEl = <span className='area-of-study-list' key='majors'>{majorTitles}</span>
-		let concentrationEl = <span className='area-of-study-list' key='concentrations'>{concentrationTitles}</span>
-		let emphasisEl = <span className='area-of-study-list' key='emphases'>{emphasisTitles}</span>
+		const degreeEl = <span className='area-of-study-list' key='degrees'>{degreeTitles}</span>
+		const majorEl = <span className='area-of-study-list' key='majors'>{majorTitles}</span>
+		const concentrationEl = <span className='area-of-study-list' key='concentrations'>{concentrationTitles}</span>
+		const emphasisEl = <span className='area-of-study-list' key='emphases'>{emphasisTitles}</span>
 
 		// console.log(student.graduation, student.matriculation)
 
