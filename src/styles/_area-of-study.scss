@@ -1,12 +1,10 @@
 .area {
 	* {box-sizing: border-box;}
-
-	font-family: Georgia;
+	@include card;
 
 	margin-bottom: 1em;
 	display: block;
 
-	border: 1px solid currentColor;
 	padding: 0em;
 	background-color: white;
 
@@ -75,7 +73,6 @@
 	margin: 0;
 
 	font-size: 1em;
-	border-bottom: solid 1px currentColor;
 }
 
 .area-of-study-group {
