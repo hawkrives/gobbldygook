@@ -4,6 +4,7 @@
 *.sublime-workspace
 playground/data
 playground/parse-sis.js
+area-data/area-data
 
 # Temp folders
 .sass-cache
