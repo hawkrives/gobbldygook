@@ -1,0 +1,3 @@
+[submodule "vendor/stretchy"]
+	path = vendor/stretchy
+	url = https://github.com/LeaVerou/stretchy.git
