@@ -3,8 +3,8 @@ import {capitalize} from 'humanize-plus'
 import pluralizeArea from '../lib/pluralize-area'
 import Immutable from 'immutable'
 
-import AreaOfStudy from '../elements/area-of-study'
-import StudentSummary from '../elements/studentSummary'
+import AreaOfStudy from './area-of-study'
+import StudentSummary from './studentSummary'
 
 import debug from 'debug'
 const log = debug('gobbldygook:component:render')
