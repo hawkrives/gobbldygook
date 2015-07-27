@@ -34,7 +34,7 @@ export default class Requirement extends Component {
             : null
 
         const filterEl = this.props.filter
-            ? <div className='requirement--filter'>Filter: {JSON.stringify(this.props.filter)}</div>
+            ? <div className='requirement--filter'>Filter: {JSON.stringify(this.props.filter, null, 2)}</div>
             : null
 
         const wasComputed = this.props.hasOwnProperty('computed')
