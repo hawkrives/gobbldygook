@@ -28,11 +28,6 @@ export default class StudentSummary extends React.Component {
 			value={name}
 			onChange={ev => studentActions.updateName(studentId, ev.target.value.trim())} />)
 
-		const has = studies
-			.groupBy(s => s.type)
-			.map(s => s.size)
-			.toObject()
-
 		const degrees = studies.filter(s => s.type === 'degree')
 		const majors = studies.filter(s => s.type === 'major')
 		const concentrations = studies.filter(s => s.type === 'concentration')
@@ -43,15 +38,15 @@ export default class StudentSummary extends React.Component {
 		const concentrationWord = plur('concentration', concentrations.size)
 		const emphasisWord = plur('emphasis', 'emphases', emphases.size)
 
-		const degreeEmphasizer = has.degree === 1 ? 'a ' : ''
-		const majorEmphasizer = has.major === 1 ? 'a ' : ''
-		const concentrationEmphasizer = has.concentration === 1 ? 'a ' : ''
-		const emphasisEmphasizer = has.emphasis === 1 ? 'an ' : ''
+		const degreeEmphasizer = degrees.size === 1 ? 'a ' : ''
+		const majorEmphasizer = majors.size === 1 ? 'a ' : ''
+		const concentrationEmphasizer = concentrations.size === 1 ? 'a ' : ''
+		const emphasisEmphasizer = emphases.size === 1 ? 'an ' : ''
 
-		const degreeEl = <span className='area-of-study-list'>{oxford(degrees.map(s => s.name).toArray())}</span>
-		const majorEl = <span className='area-of-study-list'>{oxford(majors.map(s => s.name).toArray())}</span>
-		const concentrationEl = <span className='area-of-study-list'>{oxford(concentrations.map(s => s.name).toArray())}</span>
-		const emphasisEl = <span className='area-of-study-list'>{oxford(emphases.map(s => s.name).toArray())}</span>
+		const degreeEl = oxford(degrees.map(s => s.name).toArray())
+		const majorEl = oxford(majors.map(s => s.name).toArray())
+		const concentrationEl = oxford(concentrations.map(s => s.name).toArray())
+		const emphasisEl = oxford(emphases.map(s => s.name).toArray())
 
 		const graduationEl = (<AutosizeInput
 			className='autosize-input'
@@ -70,11 +65,12 @@ export default class StudentSummary extends React.Component {
 			</header>
 			<div className='content'>
 				<p>
-					You are planning on graduating in {graduationEl}, {sinceMatriculationEl}{" "}
-					years after matriculating, with {degreeEmphasizer} {degreeEl} {degreeWord}
-					{(has.major > 0) ? [', ', majorEmphasizer, majorWord, ' in ', majorEl] : null}
-					{(has.concentration > 0) ? [', and ' + concentrationEmphasizer, concentrationWord, ' in ', concentrationEl] : null}
-					{(has.emphasis > 0) ? [', not to mention ', emphasisEmphasizer, emphasisWord, ' in ', emphasisEl] : null}.
+					You are planning on graduating in {graduationEl}, {sinceMatriculationEl}
+					{' years after matriculating, with '}
+					{(degrees.size > 0) ? `${degreeEmphasizer}${degreeEl} ${degreeWord}` : `no ${degreeWord}`}
+					{(majors.size > 0) ? `, ${majorEmphasizer}${majorWord} in ${majorEl}` : null}
+					{(concentrations.size > 0) ? `, and ${concentrationEmphasizer}${concentrationWord} in ${concentrationEl}` : null}
+					{(emphases.size > 0) ? `, not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisEl}` : null}{"."}
 				</p>
 				<p className='graduation-message'>
 					{canGraduate ? goodGraduationMessage : badGraduationMessage}
