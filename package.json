@@ -15,7 +15,7 @@
   },
   "scripts": {
     "benchmark": "babel-node ./benchmarks/students-benchmark.js --runs 50 --graph",
-    "browser-sync": "browser-sync start --config ./bs-config.js",
+    "browsersync": "browser-sync start --config ./.browsersync.js",
     "build": "concurrent 'npm run build:scripts' 'npm run build:styles' 'npm run build:peg'",
     "build:areas": "./bin/compile-areas areas/ --out-dir dist/",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
@@ -35,7 +35,7 @@
     "prebuild": "npm run copy && npm run lint",
     "prewatch": "npm run copy && npm run lint",
     "profile": "cat profile/README.md",
-    "start": "npm run watch & npm run browser-sync & wait",
+    "start": "npm run watch & npm run browsersync & wait",
     "test": "mocha $npm_package_config_mocha",
     "test:students": "mocha ./bin/test-students",
     "travis": "npm run build:areas && npm run test:students && npm run cover",
