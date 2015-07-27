@@ -23,7 +23,7 @@
     "build:scripts": "browserify $npm_package_config_browserify | exorcist build/app.js.map > build/app.js",
     "build:styles": "babel-node ./bin/sass.js src/styles/app.scss build/app.css",
     "clean": "rm -rf build/",
-    "copy": "mkdir -p build/ && cp -fR src/static/ build/ && ln -fs ./area-data/ build/static/areas/",
+    "copy": "mkdir -p build/ && cp -fR src/static/ build/ && ln -fs ../area-data/ build/areas",
     "cover": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- $npm_package_config_mocha",
     "cover:view": "npm run cover && opn coverage/lcov-report/index.html",
     "coveralls": "npm run cover && coveralls < ./coverage/lcov.info",
