@@ -1,21 +1,21 @@
-# EditorConfig helps developers define and maintain consistent
-# coding styles between different editors and IDEs
-# editorconfig.org
+# EditorConfig <editorconfig.org> helps developers define and maintain
+# consistent coding styles between different editors and IDEs.
 
 root = true
 
 
 [*]
-
-# Change these settings to your own preference
-indent_style = space
-indent_size = 4
-
-# We recommend you to keep these unchanged
+# Please don't change these four settings.
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+
+# Below here, however, the rules are merely stylistic.
+[*]
+indent_style = space
+indent_size = 4
 
 [*.md]
 trim_trailing_whitespace = false
