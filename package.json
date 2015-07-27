@@ -31,7 +31,7 @@
     "start": "webpack-dev-server $npm_package_config_webpack",
     "test": "mocha $npm_package_config_mocha",
     "test:students": "mocha ./bin/test-students",
-    "travis": "npm run build:areas && npm run test:students && npm run build && npm run cover",
+    "travis": "npm run build:areas && npm run test:students && npm run build && npm run coveralls",
     "watch": "npm run watch:lint & npm run watch:test & wait"
   },
   "dependencies": {
