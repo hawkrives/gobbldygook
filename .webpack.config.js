@@ -16,7 +16,22 @@ module.exports = getConfig({
   clearBeforeBuild: '*.{js,css}',
 
   // To serve a default HTML file, or not to serve, that is the question.
-  html: false,
+  html: function(context) {
+    return {
+      'index.html': [
+        '<!DOCTYPE html>',
+        '<meta charset="UTF-8">',
+        '<meta name="viewport" content="width=device-width,initial-scale=1.0" />',
+        '<title>Gobbldygook</title>',
+        context.css ? '<link rel="stylesheet" href="' + context.css + '">' : '',
+        '<body>',
+        '  <main id="app"></main>',
+        '  <aside id="notifications"></aside>',
+        '</body>',
+        '<script src="' + context.main + '"></script>',
+      ].join('\n')
+    }
+  },
 
   // set this to whatever your machine name is plus `.local`
   hostname: 'Precious.local',
