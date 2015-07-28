@@ -45,7 +45,7 @@
 		width: 100%;
 		height: $progress-height;
 
-		@include progress-track('blue-gray');
+		@include progress-track('gray');
 		&.hundred   { @include progress-track('green') }
 		&.ninety    { @include progress-track('orange') }
 		&.eighty    { @include progress-track('orange') }
