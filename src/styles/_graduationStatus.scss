@@ -35,3 +35,22 @@
 
 	color: color('gray', '700');
 }
+
+.unused-area-of-studies {
+	display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+	font-feature-settings: 'smcp';
+	font-size: 0.9em;
+	color: color('gray', '700');
+}
+
+.add-unused-area-of-study {
+	@include button--flat;
+	text-transform: capitalize;
+	display: inline-block;
+	text-decoration: underline;
+	color: inherit;
+
+	padding: 0.125em 0.25em;
+}
