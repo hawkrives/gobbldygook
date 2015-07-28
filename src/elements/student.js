@@ -8,10 +8,9 @@ import LoadingScreen from './loadingScreen'
 class Student extends React.Component {
 	constructor(props) {
 		super(props)
-		let queryId = props.routerState.params.id
 		this.state = {
 			student: null,
-			message: `Loading Student ${queryId}`,
+			message: `Loading Student ${props.routerState.params.id}`,
 			messageClass: '',
 		}
 	}
