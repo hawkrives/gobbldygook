@@ -16,8 +16,11 @@
 }
 
 @mixin progress-track($base-color, $has-track: true, $bar-weight: '300', $track-weight: '100') {
-	$bg: if($has-track, color($base-color, $track-weight), transparent);
+	$bg: transparent;
 	$color: color($base-color, $bar-weight);
 
 	@include progress-bar($color: $color, $bg: $bg);
+	& {
+		border-top: 1px solid $color;
+	}
 }
