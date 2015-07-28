@@ -189,7 +189,7 @@ class Student extends StudentRecord {
 
 	removeMultipleAreas(ids) {
 		return this.withMutations((student) => {
-			forEach('toArray' in ids ? ids.toArray() : ids, id => {
+			forEach(ids.hasOwnProperty('toArray') ? ids.toArray() : ids, id => {
 				student = student.removeArea(id)
 			})
 			return student
