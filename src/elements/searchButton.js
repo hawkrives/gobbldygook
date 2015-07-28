@@ -121,7 +121,6 @@ let SearchButton = React.createClass({
 				this.state.results
 		}
 
-		return (<div className='search-sidebar'>
 		return (<div className={cx('search-sidebar', {'is-hidden': this.props.isHidden})}>
 			<header className='sidebar-heading'>
 				<h1>Search for Courses</h1>
