@@ -1,64 +1,48 @@
+$progress-height: 4px;
+
 .area {
 	@include card;
 
 	* {box-sizing: border-box;}
 
 	margin-bottom: 1em;
-
-	.summary > .details-marker       { display: none; }
-	.summary::-webkit-details-marker { display: none; }
-	.summary::-moz-details-marker    { display: none; }
-	.summary::-ms-details-marker     { display: none; }
-	.summary::details-marker         { display: none; }
-
-	$progress-height: 4px;
-
-	.summary {
-		position: relative;
-		cursor: pointer;
-
-		display: flex;
-		flex-flow: column nowrap;
-	}
-
-	.summary:active,
-	.summary:focus {
-		outline: 1px solid color('blue');
-		background-color: color('blue', '50');
-	}
-
-	& > .summary::after {
-		content: '⋯';
-
-		font-weight: bold;
-		position: absolute;
-		right: 12px;
-		top: $progress-height;
-	}
-
-	&[open] > .summary::after {
-		font-weight: normal;
-		transform: rotate(90deg) scale(0.8);
-	}
-
-	.area--progress {
-		width: 100%;
-		height: $progress-height;
-
-		@include progress-track('gray');
-		&.hundred   { @include progress-track('green') }
-		&.ninety    { @include progress-track('orange') }
-		&.eighty    { @include progress-track('orange') }
-		&.seventy   { @include progress-track('orange') }
-		&.sixty     { @include progress-track('amber') }
-		&.fifty     { @include progress-track('amber') }
-		&.forty     { @include progress-track('amber') }
-		&.thirty    { @include progress-track('amber') }
-		&.twenty    { @include progress-track('red') }
-		&.ten       { @include progress-track('red') }
-		&.under-ten { @include progress-track('red') }
-	}
 }
+
+
+.area--summary > .details-marker       { display: none; }
+.area--summary::-webkit-details-marker { display: none; }
+.area--summary::-moz-details-marker    { display: none; }
+.area--summary::-ms-details-marker     { display: none; }
+.area--summary::details-marker         { display: none; }
+
+.area--summary {
+	position: relative;
+	cursor: pointer;
+
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.area--summary:active,
+.area--summary:focus {
+	outline: 1px solid color('blue');
+	background-color: color('blue', '50');
+}
+
+.area--summary::after {
+	content: '⋯';
+
+	font-weight: bold;
+	position: absolute;
+	right: 12px;
+	top: $progress-height;
+}
+
+.area[open] .area--summary::after {
+	font-weight: normal;
+	transform: rotate(90deg) scale(0.8);
+}
+
 
 .area--title {
 	padding: 0.5em;
@@ -67,6 +51,26 @@
 
 	font-size: 1em;
 }
+
+
+.area--progress {
+	width: 100%;
+	height: $progress-height;
+
+	@include progress-track('gray');
+	&.hundred   { @include progress-track('green') }
+	&.ninety    { @include progress-track('orange') }
+	&.eighty    { @include progress-track('orange') }
+	&.seventy   { @include progress-track('orange') }
+	&.sixty     { @include progress-track('amber') }
+	&.fifty     { @include progress-track('amber') }
+	&.forty     { @include progress-track('amber') }
+	&.thirty    { @include progress-track('amber') }
+	&.twenty    { @include progress-track('red') }
+	&.ten       { @include progress-track('red') }
+	&.under-ten { @include progress-track('red') }
+}
+
 
 .area-of-study-group {
 	margin-top: 1em;
@@ -82,6 +86,7 @@
 	margin-left: $block-edge-padding * 0.5;
 	font-feature-settings: 'smcp';
 }
+
 
 .add-area-of-study {
 	@include add-button($psuedo: '::before') {

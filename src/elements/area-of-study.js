@@ -32,7 +32,7 @@ export default class AreaOfStudy extends Component {
     render() {
         return (
             <details className='area'>
-                <summary className='summary'>
+                <summary className='area--summary'>
                     <h1 className='area--title'>{this.props.name}</h1>
                     <progress
                         className={`area--progress ${this.props._progress.word}`}
