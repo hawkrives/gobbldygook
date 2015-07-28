@@ -64,7 +64,9 @@ export default class GraduationStatus extends React.Component {
 			<section className={cx('graduation-status', this.props.className)}>
 				<StudentSummary student={student}
 								graduatability={this.state.graduatability} />
+
 				{sections}
+
 				<section className='unused-area-of-studies'>
 					<span className='unused-areas-title'>Add: </span>
 					{map(unusedSectionsList, type => (
