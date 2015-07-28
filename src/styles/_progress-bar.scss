@@ -15,9 +15,9 @@
 	&::-webkit-progress-bar   { background: $bg; }
 }
 
-@mixin progress-track($base-color, $has-track: true, $bar-weight: '300', $track-weight: '100') {
-	$bg: transparent;
-	$color: color($base-color, $bar-weight);
+@mixin progress-track($base-color) {
+	$color: color($base-color, '300');
+	$bg: white;
 
 	@include progress-bar($color: $color, $bg: $bg);
 	& {
