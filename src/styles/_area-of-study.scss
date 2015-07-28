@@ -1,12 +1,9 @@
 .area {
-	* {box-sizing: border-box;}
 	@include card;
 
-	margin-bottom: 1em;
-	display: block;
+	* {box-sizing: border-box;}
 
-	padding: 0em;
-	background-color: white;
+	margin-bottom: 1em;
 
 	.summary > .details-marker       { display: none; }
 	.summary::-webkit-details-marker { display: none; }
@@ -28,10 +25,6 @@
 		position: absolute;
 		right: 12px;
 		top: $progress-height;
-	}
-
-	&[open] {
-		padding-bottom: 0.35em;
 	}
 
 	&[open] > .summary::after {
