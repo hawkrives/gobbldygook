@@ -64,8 +64,9 @@ export default class GraduationStatus extends React.Component {
 								graduatability={this.state.graduatability} />
 				{sections}
 				<section className='unused-area-of-studies'>
-					Add: {map(unusedSectionsList, type => (
-						<a key={type} className='add-unused-area-of-study'>{type}</a>
+					<span className='unused-areas-title'>Add: </span>
+					{map(unusedSectionsList, type => (
+						<button key={type} className='add-unused-area-of-study'>{type}</button>
 					))}
 				</section>
 			</section>
