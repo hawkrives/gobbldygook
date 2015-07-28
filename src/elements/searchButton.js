@@ -124,7 +124,9 @@ let SearchButton = React.createClass({
 		return (<div className={cx('search-sidebar', {'is-hidden': this.props.isHidden})}>
 			<header className='sidebar-heading'>
 				<h1>Search for Courses</h1>
-				<button className='close-sidebar' title='Close Sidebar'
+				<button
+					className='close-sidebar'
+					title='Close Sidebar'
 					onClick={this.props.toggle} />
 			</header>
 
