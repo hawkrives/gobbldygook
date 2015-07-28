@@ -5,15 +5,17 @@
 	@if $color == 'white' {
 		@return #fff;
 	}
-	@if $color == 'black' {
+	@else if $color == 'black' {
 		@return #000;
 	}
+
 	@if map-has-key($colors, $color) {
 		$curr_color: map-get($colors, $color);
 		@if map-has-key($curr_color, $level) {
 			@return map-get($curr_color, $level);
 		}
 	}
+
 	@warn 'Unknown `#{$level}` of `#{$color}` in $colors.';
 	@return null;
 }

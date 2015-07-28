@@ -15,12 +15,14 @@
 	&::-webkit-progress-bar   { background: $bg; }
 }
 
-@mixin progress-track($base-color) {
-	$color: color($base-color, '300');
+@mixin progress-track($color) {
 	$bg: white;
+	@if type-of($color) == 'string' {
+		$color: color($color, '300');
+	}
 
 	@include progress-bar($color: $color, $bg: $bg);
 	& {
-		border-top: 1px solid $color;
+		border: 1px solid $color;
 	}
 }
