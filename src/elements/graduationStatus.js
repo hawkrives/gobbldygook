@@ -55,9 +55,7 @@ export default class GraduationStatus extends React.Component {
 						id={pluralType}
 						className='area-of-study-group'>
 
-						<header className='area-type-heading'>
-							<h1>{capitalize(pluralType)}</h1>
-						</header>
+						<h1 className='area-type-heading'>{capitalize(pluralType)}</h1>
 
 						{areas.map(baseArea => {
 							const area = this.state.areaDetails.get(baseArea.id) || baseArea

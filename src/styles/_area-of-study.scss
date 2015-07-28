@@ -67,16 +67,14 @@
 }
 
 .area-type-heading {
+	@include heading-neutral;
+
 	font-size: 0.9em;
 	font-weight: normal;
 	margin-top: 0;
 	margin-bottom: 0.25em;
 	margin-left: $block-edge-padding * 0.5;
 	font-feature-settings: 'smcp';
-
-	h1 {
-		@include heading-neutral;
-	}
 }
 
 .add-area-of-study {
