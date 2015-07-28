@@ -46,8 +46,8 @@ export default class GraduationStatus extends React.Component {
 		const sections = this.props.student.studies
 			// group the studies by their type
 			.groupBy(study => study.type.toLowerCase())
-			// pull the results out of state
-			.map(areas => areas.map(a => this.state.areaDetails.get(a.id) || a))
+			// pull the results out of state, or use a mutable version from props
+			.map(areas => areas.map(a => this.state.areaDetails.get(a.id) || a.toObject()))
 			// then render them
 			.map((areas, areaType) =>
 				<AreaOfStudyGroup key={areaType} type={areaType} areas={areas.toList()} />)
