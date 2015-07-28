@@ -11,6 +11,7 @@ export default class AreaOfStudy extends Component {
             of: PropTypes.number.isRequired,
             word: PropTypes.string.isRequired,
         }),
+        data: PropTypes.object,
         name: PropTypes.string.isRequired,
         result: PropTypes.object.isRequired,
         revision: PropTypes.string.isRequired,
