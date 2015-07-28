@@ -2,6 +2,7 @@ import React from 'react'
 import Immutable from 'immutable'
 import map from 'lodash/collection/map'
 import difference from 'lodash/array/difference'
+import cx from 'classnames'
 
 import AreaOfStudyGroup from './area-of-study-group'
 import StudentSummary from './studentSummary'
@@ -13,6 +14,7 @@ const allAreaTypes = ['degree', 'major', 'concentration', 'emphasis']
 
 export default class GraduationStatus extends React.Component {
 	static propTypes = {
+		className: React.PropTypes.string,
 		student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 	}
 
@@ -59,7 +61,7 @@ export default class GraduationStatus extends React.Component {
 		const unusedSectionsList = difference(allAreaTypes, otherSections)
 
 		return (
-			<section className='graduation-status'>
+			<section className={cx('graduation-status', this.props.className)}>
 				<StudentSummary student={student}
 								graduatability={this.state.graduatability} />
 				{sections}
