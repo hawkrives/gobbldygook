@@ -210,7 +210,7 @@ let studentStore = Reflux.createStore({
 	addFabrication(studentId, ...args)           { this._change(studentId, 'addArea',                  ...args) },
 	addOverride(studentId, ...args)              { this._change(studentId, 'addSchedule',              ...args) },
 	removeArea(studentId, ...args)               { this._change(studentId, 'removeArea',               ...args) },
-	removeMultipleAreas(studentId, ...args)      { this._change(studentId, 'removeMultipleArea',       ...args) },
+	removeMultipleAreas(studentId, ...args)      { this._change(studentId, 'removeMultipleAreas',       ...args) },
 	destroySchedule(studentId, ...args)          { this._change(studentId, 'destroySchedule',          ...args) },
 	destroyMultipleSchedules(studentId, ...args) { this._change(studentId, 'destroyMultipleSchedules', ...args) },
 	moveCourse(studentId, ...args)               { this._change(studentId, 'moveCourse',               ...args) },
