@@ -21,6 +21,12 @@
 		flex-flow: column nowrap;
 	}
 
+	.summary:active,
+	.summary:focus {
+		outline: 1px solid color('blue');
+		background-color: color('blue', '50');
+	}
+
 	& > .summary::after {
 		content: '⋯';
 
