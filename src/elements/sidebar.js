@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import Immutable from 'immutable'
 
@@ -10,20 +10,21 @@ import GraduationStatus from './graduationStatus'
 
 import studentActions from '../flux/studentActions'
 
-let Sidebar = React.createClass({
-	propTypes: {
-		student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
-	},
+export default class Sidebar extends Component {
+	static propTypes = {
+		student: PropTypes.instanceOf(Immutable.Record).isRequired,
+	}
 
-	toggleSearch() {
-		this.setState({isSearching: !this.state.isSearching})
-	},
-
-	getInitialState() {
-		return {
+	constructor() {
+		super()
+		this.state = {
 			isSearching: false,
 		}
-	},
+	}
+
+	toggleSearch = () => {
+		this.setState({isSearching: !this.state.isSearching})
+	}
 
 	render() {
 		// console.log('Sidebar#render')
