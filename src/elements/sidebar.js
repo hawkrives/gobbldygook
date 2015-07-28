@@ -27,32 +27,27 @@ let Sidebar = React.createClass({
 
 	render() {
 		// console.log('Sidebar#render')
-		let student = this.props.student
 
-		let ActiveSidebarComponent = GraduationStatus
-		let props = {student}
-		if (this.state.isSearching) {
-			ActiveSidebarComponent = SearchButton
-			props.toggle = this.toggleSearch
-		}
-
-		let sidebar = (<aside className='sidebar'>
+		return (<aside className='sidebar'>
 			<menu className='student-buttons'>
 				<Link to='/' className='back sidebar-btn'>Students</Link>
 				<button className='search sidebar-btn' onClick={this.toggleSearch}>Search</button>
-				<Link className='sidebar-btn' to='download' params={{id: student.id}}>Download</Link>
+				<Link className='sidebar-btn' to='download' params={{id: this.props.student.id}}>Download</Link>
 				<button className='sidebar-btn'
-					onClick={() => studentActions.resetStudentToDemo(student.id)}>
+					onClick={() => studentActions.resetStudentToDemo(this.props.student.id)}>
 					Revert to Demo
 				</button>
 				<UndoButton className='sidebar-btn' />
 				<RedoButton className='sidebar-btn' />
 			</menu>
-			<ActiveSidebarComponent {...props} />
+
+			<GraduationStatus
+				isHidden={this.state.isSearching}
+				student={this.props.student} />
+
+			<SearchButton
+				isHidden={!this.state.isSearching}
+				toggle={this.toggleSearch} />
 		</aside>)
-
-		return sidebar
-	},
-})
-
-export default Sidebar
+	}
+}
