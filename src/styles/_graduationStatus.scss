@@ -16,24 +16,24 @@
 	margin-bottom: 0.25em;
 	margin-left: $block-edge-padding * 0.5;
 	font-feature-settings: 'smcp';
+
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
 }
 
 
 .add-area-of-study {
-	@include add-button($psuedo: '::before') {
-		margin-right: 0.5em;
-	}
-	@include button--raised;
+	@include button--flat;
+	display: inline-block;
+	text-decoration: underline;
 
 	min-height: 0;
-	padding-top: 0.25em;
-	padding-bottom: 0.25em;
-	width: 100%;
+	padding: 0.25em ($block-edge-padding * 1.5);
+	margin-left: 0.5em;
 	text-align: left;
-	padding-left: $block-edge-padding * 1.5;
 
-	text-transform: none;
-	font-feature-settings: 'smcp';
-	font-size: 0.85em;
+	text-transform: lowercase;
+
+	color: color('gray', '700');
 }
-

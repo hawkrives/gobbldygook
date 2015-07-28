@@ -22,11 +22,6 @@ export default class GraduationStatus extends React.Component {
 		}
 	}
 
-	// shouldComponentUpdate(nextProps, nextState) {
-	//  return ((nextProps.student !== this.props.student) ||
-	//      (nextState.areaDetails !== this.state.areaDetails))
-	// }
-
 	componentWillMount() {
 		this.componentWillReceiveProps(this.props)
 	}
@@ -55,25 +50,28 @@ export default class GraduationStatus extends React.Component {
 						id={pluralType}
 						className='area-of-study-group'>
 
-						<h1 className='area-type-heading'>{capitalize(pluralType)}</h1>
+						<h1 className='area-type-heading'>
+							{capitalize(pluralType)}
+							<button className='add-area-of-study'>
+								Add
+							</button>
+						</h1>
 
 						{areas.map(baseArea => {
 							const area = this.state.areaDetails.get(baseArea.id) || baseArea
 							return <AreaOfStudy key={area.id} {...area} />
 						}).toArray()}
-
-						<button className='add-area-of-study'>
-							Add {capitalize(areaType)}
-						</button>
 					</section>
 				)
 			})
 			.toArray()
 
-		return (<section className='graduation-status'>
-			<StudentSummary student={student}
-							graduatability={this.state.graduatability} />
-			{sections}
-		</section>)
+		return (
+			<section className='graduation-status'>
+				<StudentSummary student={student}
+								graduatability={this.state.graduatability} />
+				{sections}
+			</section>
+		)
 	}
 }
