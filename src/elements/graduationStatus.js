@@ -1,11 +1,9 @@
 import React from 'react'
-import capitalize from 'lodash/string/capitalize'
-import pluralizeArea from '../lib/pluralize-area'
 import Immutable from 'immutable'
 import map from 'lodash/collection/map'
 import difference from 'lodash/array/difference'
 
-import AreaOfStudy from './area-of-study'
+import AreaOfStudyGroup from './area-of-study-group'
 import StudentSummary from './studentSummary'
 
 import debug from 'debug'
@@ -44,20 +42,13 @@ export default class GraduationStatus extends React.Component {
 		}
 
 		const sections = this.props.student.studies
+			// group the studies by their type
 			.groupBy(study => study.type.toLowerCase())
-			.map((areas, areaType) => (
-				<section key={areaType} className='area-of-study-group'>
-					<h1 className='area-type-heading'>
-						{capitalize(pluralizeArea(areaType))}
-						<button className='add-area-of-study'>Add</button>
-					</h1>
-
-					{areas.map(baseArea => {
-						const area = this.state.areaDetails.get(baseArea.id) || baseArea
-						return <AreaOfStudy key={area.id} {...area} />
-					}).toArray()}
-				</section>
-			))
+			// pull the results out of state
+			.map(areas => areas.map(a => this.state.areaDetails.get(a.id) || a))
+			// then render them
+			.map((areas, areaType) =>
+				<AreaOfStudyGroup key={areaType} type={areaType} areas={areas.toList()} />)
 			.toArray()
 
 		const otherSections = this.props.student.studies
@@ -67,20 +58,16 @@ export default class GraduationStatus extends React.Component {
 
 		const unusedSectionsList = difference(allAreaTypes, otherSections)
 
-		const unusedSections = (
-			<section className='unused-area-of-studies'>
-				Add: {map(unusedSectionsList, type => (
-					<a key={type} className='add-unused-area-of-study'>{type}</a>
-				))}
-			</section>
-		)
-
 		return (
 			<section className='graduation-status'>
 				<StudentSummary student={student}
 								graduatability={this.state.graduatability} />
 				{sections}
-				{unusedSections}
+				<section className='unused-area-of-studies'>
+					Add: {map(unusedSectionsList, type => (
+						<a key={type} className='add-unused-area-of-study'>{type}</a>
+					))}
+				</section>
 			</section>
 		)
 	}
