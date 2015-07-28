@@ -14,7 +14,7 @@ const allAreaTypes = ['degree', 'major', 'concentration', 'emphasis']
 
 export default class GraduationStatus extends React.Component {
 	static propTypes = {
-		className: React.PropTypes.string,
+		isHidden: React.PropTypes.bool,
 		student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 	}
 
@@ -61,7 +61,7 @@ export default class GraduationStatus extends React.Component {
 		const unusedSectionsList = difference(allAreaTypes, otherSections)
 
 		return (
-			<section className={cx('graduation-status', this.props.className)}>
+			<section className={cx('graduation-status', {'is-hidden': this.props.isHidden})}>
 				<StudentSummary student={student}
 								graduatability={this.state.graduatability} />
 
