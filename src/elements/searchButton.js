@@ -13,7 +13,6 @@ import stickyfill from '../helpers/initStickyfill'
 
 let SearchButton = React.createClass({
 	propTypes: {
-		student: React.PropTypes.object.isRequired,
 		isHidden: React.PropTypes.bool,
 		toggle: React.PropTypes.func.isRequired,
 	},
