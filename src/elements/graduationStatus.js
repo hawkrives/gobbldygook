@@ -1,16 +1,20 @@
 import React from 'react'
-import capitalize from 'lodash/string/capitalize'
-import pluralizeArea from '../lib/pluralize-area'
 import Immutable from 'immutable'
+import map from 'lodash/collection/map'
+import difference from 'lodash/array/difference'
+import cx from 'classnames'
 
-import AreaOfStudy from './area-of-study'
+import AreaOfStudyGroup from './area-of-study-group'
 import StudentSummary from './studentSummary'
 
 import debug from 'debug'
 const log = debug('gobbldygook:component:render')
 
+const allAreaTypes = ['degree', 'major', 'concentration', 'emphasis']
+
 export default class GraduationStatus extends React.Component {
 	static propTypes = {
+		isHidden: React.PropTypes.bool,
 		student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 	}
 
@@ -21,11 +25,6 @@ export default class GraduationStatus extends React.Component {
 			areaDetails: Immutable.Map(),
 		}
 	}
-
-	// shouldComponentUpdate(nextProps, nextState) {
-	//  return ((nextProps.student !== this.props.student) ||
-	//      (nextState.areaDetails !== this.state.areaDetails))
-	// }
 
 	componentWillMount() {
 		this.componentWillReceiveProps(this.props)
@@ -45,37 +44,36 @@ export default class GraduationStatus extends React.Component {
 		}
 
 		const sections = this.props.student.studies
+			// group the studies by their type
 			.groupBy(study => study.type.toLowerCase())
-			.map((areas, areaType) => {
-				const pluralType = pluralizeArea(areaType)
-
-				return (
-					<section
-						key={areaType}
-						id={pluralType}
-						className='area-of-study-group'>
-
-						<header className='area-type-heading'>
-							<h1>{capitalize(pluralType)}</h1>
-						</header>
-
-						{areas.map(baseArea => {
-							const area = this.state.areaDetails.get(baseArea.id) || baseArea
-							return <AreaOfStudy key={area.id} {...area} />
-						}).toArray()}
-
-						<button className='add-area-of-study'>
-							Add {capitalize(areaType)}
-						</button>
-					</section>
-				)
-			})
+			// pull the results out of state, or use a mutable version from props
+			.map(areas => areas.map(a => this.state.areaDetails.get(a.id) || a.toObject()))
+			// then render them
+			.map((areas, areaType) =>
+				<AreaOfStudyGroup key={areaType} type={areaType} areas={areas.toList()} />)
 			.toArray()
 
-		return (<section className='graduation-status'>
-			<StudentSummary student={student}
-							graduatability={this.state.graduatability} />
-			{sections}
-		</section>)
+		const otherSections = this.props.student.studies
+			.map(x => x.type)
+			.toSet()
+			.toJS()
+
+		const unusedSectionsList = difference(allAreaTypes, otherSections)
+
+		return (
+			<section className={cx('graduation-status', {'is-hidden': this.props.isHidden})}>
+				<StudentSummary student={student}
+								graduatability={this.state.graduatability} />
+
+				{sections}
+
+				<section className='unused-area-of-studies'>
+					<span className='unused-areas-title'>Add: </span>
+					{map(unusedSectionsList, type => (
+						<button key={type} className='add-unused-area-of-study'>{type}</button>
+					))}
+				</section>
+			</section>
+		)
 	}
 }

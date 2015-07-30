@@ -11,6 +11,7 @@ export default class AreaOfStudy extends Component {
             of: PropTypes.number.isRequired,
             word: PropTypes.string.isRequired,
         }),
+        data: PropTypes.object,
         name: PropTypes.string.isRequired,
         result: PropTypes.object.isRequired,
         revision: PropTypes.string.isRequired,
@@ -32,7 +33,7 @@ export default class AreaOfStudy extends Component {
     render() {
         return (
             <details className='area'>
-                <summary className='summary'>
+                <summary className='area--summary'>
                     <h1 className='area--title'>{this.props.name}</h1>
                     <progress
                         className={`area--progress ${this.props._progress.word}`}

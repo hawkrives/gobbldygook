@@ -1,111 +1,80 @@
 .area {
-	* {box-sizing: border-box;}
 	@include card;
 
+	* {box-sizing: border-box;}
+
 	margin-bottom: 1em;
-	display: block;
-
-	padding: 0em;
-	background-color: white;
-
-	.summary > .details-marker       { display: none; }
-	.summary::-webkit-details-marker { display: none; }
-	.summary::-moz-details-marker    { display: none; }
-	.summary::-ms-details-marker     { display: none; }
-	.summary::details-marker         { display: none; }
-
-	$progress-height: 4px;
-
-	.summary {
-		position: relative;
-		cursor: pointer;
-	}
-
-	& > .summary::after {
-		content: '⋯';
-
-		font-weight: bold;
-		position: absolute;
-		right: 12px;
-		top: $progress-height;
-	}
-
-	&[open] {
-		padding-bottom: 0.35em;
-	}
-
-	&[open] > .summary::after {
-		font-weight: normal;
-		transform: rotate(90deg) scale(0.8);
-	}
-
-	progress {
-		@include progress-track('blue');
-
-		overflow: hidden;
-
-		position: absolute;
-		top: 0;
-		left: 0;
-
-		width: 100%;
-		height: $progress-height;
-
-		border: 0;
-
-		&.hundred   { @include progress-track('green') }
-		&.ninety    { @include progress-track('orange') }
-		&.eighty    { @include progress-track('orange') }
-		&.seventy   { @include progress-track('orange') }
-		&.sixty     { @include progress-track('amber') }
-		&.fifty     { @include progress-track('amber') }
-		&.forty     { @include progress-track('amber') }
-		&.thirty    { @include progress-track('amber') }
-		&.twenty    { @include progress-track('red') }
-		&.ten       { @include progress-track('red') }
-		&.under-ten { @include progress-track('red') }
-		&.zero      { @include progress-track('blue-gray') }
-	}
 }
 
-.area--title {
+
+// these must be specified separately
+.area--summary > .details-marker       { display: none; }
+.area--summary::-webkit-details-marker { display: none; }
+.area--summary::-moz-details-marker    { display: none; }
+.area--summary::-ms-details-marker     { display: none; }
+.area--summary::details-marker         { display: none; }
+
+.area--summary {
+	position: relative;
+	cursor: pointer;
+
+	display: flex;
+	flex-flow: column nowrap;
+
 	padding: 0.5em;
-	margin: 0;
+}
+
+.area--summary:active,
+.area--summary:focus {
+	outline: 1px solid color('blue');
+	color: color('blue', '900');
+	background-color: color('blue', '50');
+}
+
+.area--summary::after {
+	content: '⋯';
+
+	font-weight: bold;
+	position: absolute;
+	right: 0.85em;
+	top: 0.45em;
+}
+
+.area[open] .area--summary::after {
+	font-weight: normal;
+	transform: rotate(90deg) scale(0.8);
+}
+
+
+.area--title {
+	margin: 0 0 0.25em;
+	font-weight: 500;
 
 	font-size: 1em;
 }
 
-.area-of-study-group {
-	margin-top: 1em;
-}
 
-.area-type-heading {
-	font-size: 0.9em;
-	font-weight: normal;
-	margin-top: 0;
-	margin-bottom: 0.25em;
-	margin-left: $block-edge-padding * 0.5;
-	font-feature-settings: 'smcp';
+.area--progress {
+	width: 99%;
+	height: 4px;
+	margin: 0 auto;
+	border-radius: 2px;
 
-	h1 {
-		@include heading-neutral;
+	@include progress-track('gray');
+	&.hundred   { @include progress-track(color('green',  '300')) }
+	&.ninety    { @include progress-track(color('orange', '300')) }
+	&.eighty    { @include progress-track(color('orange', '300')) }
+	&.seventy   { @include progress-track(color('orange', '300')) }
+	&.sixty     { @include progress-track(color('yellow', '700')) }
+	&.fifty     { @include progress-track(color('yellow', '600')) }
+	&.forty     { @include progress-track(color('yellow', '600')) }
+	&.thirty    { @include progress-track(color('amber',  '500')) }
+	&.twenty    { @include progress-track(color('red',    '300')) }
+	&.ten       { @include progress-track(color('red',    '300')) }
+	&.under-ten { @include progress-track(color('red',    '300')) }
+
+	.area--summary:focus &,
+	.area--summary:active & {
+		box-shadow: 0 0 0 2px white;
 	}
-}
-
-.add-area-of-study {
-	@include add-button($psuedo: '::before') {
-		margin-right: 0.5em;
-	}
-	@include button--raised;
-
-	min-height: 0;
-	padding-top: 0.25em;
-	padding-bottom: 0.25em;
-	width: 100%;
-	text-align: left;
-	padding-left: $block-edge-padding * 1.5;
-
-	text-transform: none;
-	font-feature-settings: 'smcp';
-	font-size: 0.85em;
 }

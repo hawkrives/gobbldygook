@@ -23,8 +23,9 @@ function alterCourse(course) {
 /**
  * Checks a student object against an area of study.
  *
- * @param {Object} student
- * @param {Object} area
+ * @param {Object} student - the student to check
+ * @param {Object} area - the area to check against
+ * @returns {Promise} - the promise for a result
  * @promise ResultsPromise
  * @fulfill {Object} - The details of the area check.
  */

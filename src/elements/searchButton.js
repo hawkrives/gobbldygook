@@ -4,6 +4,7 @@ import {chain} from 'lodash'
 import isObject from 'lodash/lang/isObject'
 import map from 'lodash/collection/map'
 import present from 'present'
+import cx from 'classnames'
 
 import {toPrettyTerm} from 'sto-helpers'
 import queryCourseDatabase from '../helpers/queryCourseDatabase'
@@ -12,7 +13,7 @@ import stickyfill from '../helpers/initStickyfill'
 
 let SearchButton = React.createClass({
 	propTypes: {
-		student: React.PropTypes.object.isRequired,
+		isHidden: React.PropTypes.bool,
 		toggle: React.PropTypes.func.isRequired,
 	},
 
@@ -120,10 +121,12 @@ let SearchButton = React.createClass({
 				this.state.results
 		}
 
-		return (<div className='search-sidebar'>
+		return (<div className={cx('search-sidebar', {'is-hidden': this.props.isHidden})}>
 			<header className='sidebar-heading'>
 				<h1>Search for Courses</h1>
-				<button className='close-sidebar' title='Close Sidebar'
+				<button
+					className='close-sidebar'
+					title='Close Sidebar'
 					onClick={this.props.toggle} />
 			</header>
 
