@@ -12,7 +12,7 @@ import demoStudent from '../models/demoStudent.json'
 import studentActions from '../flux/studentActions'
 import notificationActions from '../flux/notificationActions'
 
-let cleanLocalStorage = () => {
+function cleanLocalStorage() {
 	localStorage.removeItem('activeStudentId')
 	localStorage.removeItem('student-v3.0a6')
 }
