@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import Promise from 'bluebird'
 import map from 'lodash/collection/map'
 import zipObject from 'lodash/array/zipObject'
 import findScheduleFromCourses from './find-schedule-from-courses'

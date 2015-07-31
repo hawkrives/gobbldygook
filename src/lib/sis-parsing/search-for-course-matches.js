@@ -1,3 +1,5 @@
+import db from '../../helpers/db'
+
 export default function searchForCourseMatches(queryObject) {
 	// console.log("searched for: ", queryObject)
 	// let start = performance.now()

@@ -12,6 +12,8 @@ import demoStudent from '../models/demoStudent.json'
 import studentActions from '../flux/studentActions'
 import notificationActions from '../flux/notificationActions'
 
+import parseSIS from '../lib/sis-parsing/parse-sis'
+
 function cleanLocalStorage() {
 	localStorage.removeItem('activeStudentId')
 	localStorage.removeItem('student-v3.0a6')
@@ -166,20 +168,47 @@ const studentStore = Reflux.createStore({
 		this._loadData(fleshedStudent.id)
 	},
 
-	importStudent(rawStudent) {
-		let stu = undefined
-		try {
-			stu = JSON.parse(rawStudent)
-		}
-		catch (err) {
-			console.error('Error parsing as JSON', rawStudent, err)
-		}
+	importStudent({data, type}) {
+		if (type === 'application/json') {
+			let stu = undefined
+			try {
+				stu = JSON.parse(data)
+			}
+			catch (err) {
+				throw err
+			}
 
-		if (stu) {
-			this._preChange()
-			const fleshedStudent = new Student(stu)
-			fleshedStudent.save()
-			this._loadData(fleshedStudent.id)
+			if (stu) {
+				this._preChange()
+				const fleshedStudent = new Student(stu)
+				fleshedStudent.save()
+				this._loadData(fleshedStudent.id)
+			}
+		}
+		else if (type === 'text/html') {
+			const parser = new DOMParser()
+			let html
+			try {
+				html = parser.parseFromString(data, 'text/html')
+			}
+			catch (err) {
+				throw err
+			}
+
+			let stu
+			try {
+				stu = parseSIS(html)
+			}
+			catch (err) {
+				throw err
+			}
+
+			if (stu) {
+				this._preChange()
+				const fleshedStudent = new Student(stu)
+				fleshedStudent.save()
+				this._loadData(fleshedStudent.id)
+			}
 		}
 	},
 
