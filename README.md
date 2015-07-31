@@ -13,21 +13,19 @@ This is a course scheduler for students at St. Olaf College. You give it your ar
 
 
 ## Hacking
-- Prerequisites: 
-	- [node.js](https://nodejs.org) (`npm` is bundled with node.)
-	- [git](https://git-scm.com)
+- Prerequisites: [node.js](https://nodejs.org) and [git](https://git-scm.com).
 - `git clone https://github.com/hawkrives/gobbldygook.git`
 - `cd gobbldygook`
 - `npm install`
 - `npm run serve`
 
-You can see additional commands by executing `npm run` with no arguments. 
+You can see additional commands by executing `npm run` with no arguments.
 
 
 ## Support
-We highly recommend joining our Slack chatroom. Just go to [gobbldygook.slack.com](https://gobbldygook.slack.com) and sign up for an account with your St. Olaf email. 
+We highly recommend joining our Slack chatroom. Just go to [gobbldygook.slack.com](https://gobbldygook.slack.com) and sign up for an account with your St. Olaf email.
 
-If you don't want to join us there, you can file an issue via [github](https://github.com/hawkrives/gobbldygook/issues/), or you can send us an email, if you look us up on Stalkernet. 
+If you don't want to join us there, you can file an issue via [github](https://github.com/hawkrives/gobbldygook/issues/), or you can send us an email, if you look us up on Stalkernet.
 
 
 ## Credits
@@ -39,6 +37,6 @@ If you don't want to join us there, you can file an issue via [github](https://g
 
 
 ## Screenshot
-It's a pretty old one, circa summer 2014. 
+It's a pretty old one, circa summer 2014.
 
 ![Screenshot!](./screenshot.png)
