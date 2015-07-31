@@ -16,28 +16,30 @@ loadData()
 
 function tableToJson(table) {
 	// from http://johndyer.name/html-table-to-json/
-	var data = []; // first row needs to be headers
-	var headers = [];
-	for (var i=0; i < table.rows[0].cells.length; i++) {
-		headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
+	let data = [] // first row needs to be headers
+	let headers = []
+	for (let i = 0; i < table.rows[0].cells.length; i++) {
+		headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '')
 	}
 	// go through cells
-	for (var i=1; i<table.rows.length; i++) {
-		var tableRow = table.rows[i];
-		var rowData = {};
-		for (var j=0; j < tableRow.cells.length; j++) {
-			rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+	for (let i = 1; i < table.rows.length; i++) {
+		let tableRow = table.rows[i]
+		let rowData = {}
+		for (let j = 0; j < tableRow.cells.length; j++) {
+			rowData[ headers[j] ] = tableRow.cells[j].innerHTML
 		}
-		data.push(rowData);
+		data.push(rowData)
 	}
-	return data;
+	return data
 }
 
 let unescapeAllValues = (obj) => _[_.isArray(obj) ? 'map' : 'mapValues'](obj, (value) => {
-	if (_.isString(value))
+	if (_.isString(value)) {
 		return _.unescape(value)
-	else if (_.isArray(value))
+	}
+	else if (_.isArray(value)) {
 		return unescapeAllValues(value)
+	}
 	return value
 })
 
@@ -51,8 +53,9 @@ function prettyifyCourses(jsonCourses) {
 		course.credits = course.credit
 		delete course.credit
 
-		if (course['g.e.'])
+		if (course['g.e.']) {
 			course['g.e.'] = course['g.e.'].trim()
+		}
 		delete course.gereqs
 
 		course.num = parseInt(course.no, 10)
@@ -66,8 +69,9 @@ function prettyifyCourses(jsonCourses) {
 		course.level = course.level * 100
 		course.depts = course.dept.split('/')
 
-		if (course['g.e.'] && course['g.e.'].length)
+		if (course['g.e.'] && course['g.e.'].length) {
 			course.gereqs = course['g.e.'].split(' ')
+		}
 		delete course['g.e.']
 
 		course.name = course.title.trim()
@@ -89,7 +93,7 @@ function prepareCourseForQuery(course) {
 	delete course.type
 	delete course.grade
 
-	course = _.mapValues(course, (value, key) => {
+	course = _.mapValues(course, (value) => {
 		// console.log(key, value)
 		return _.isArray(value) ? value : [value]
 	})
@@ -98,43 +102,43 @@ function prepareCourseForQuery(course) {
 }
 
 function parseHTMLfromJSON() {
-	var parser = new DOMParser();
-	var html = parser.parseFromString(SISData.sis, 'text/html');
+	let parser = new DOMParser()
+	let html = parser.parseFromString(SISData.sis, 'text/html')
 	return parseSIS(html)
 }
 
 function parseHTMLfromPage() {
-	var html = document.querySelector('#sis')
+	let html = document.querySelector('#sis')
 	return parseSIS(html)
 }
 
 function cleanUpPage(html) {
 	// Remove the topnav
-	var topNav = html.querySelector('.topnav');
-	topNav.parentNode.removeChild(topNav);
+	let topNav = html.querySelector('.topnav')
+	topNav.parentNode.removeChild(topNav)
 
-	var sidebar = html.querySelector('table td:nth-child(1)')
-	sidebar.parentNode.removeChild(sidebar);
+	let sidebar = html.querySelector('table td:nth-child(1)')
+	sidebar.parentNode.removeChild(sidebar)
 
 	// Delve deep within the table structure
-	var main = html.querySelector('table td')
+	let main = html.querySelector('table td')
 
 	// Get all tables.
-	var tonsOfTables = main.querySelectorAll('table');
+	let tonsOfTables = main.querySelectorAll('table')
 	// Remove the breadcrumb bar
-	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0]);
+	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0])
 	// Refresh the lsit of tables
-	tonsOfTables = main.querySelectorAll('table');
+	tonsOfTables = main.querySelectorAll('table')
 	// Remove the "Degree Audit(s)" header
-	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0]);
+	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0])
 	// Refresh the list of tables
-	tonsOfTables = main.querySelectorAll('table');
+	tonsOfTables = main.querySelectorAll('table')
 	// Remove the "B.{A,M}." header
 	let degreeType = tonsOfTables[0].textContent.trim().split(' ')[0]
-	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0]);
+	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0])
 
 	// Now to remove the parent tables
-	var tables = Array.prototype.slice.call(main.querySelectorAll('table'));
+	let tables = Array.prototype.slice.call(main.querySelectorAll('table'))
 
 	// Remove the first parent table
 	tables.splice(0, 1)
@@ -157,10 +161,10 @@ function nameTheTables(tables) {
 }
 
 function processInfoTable(infoTable) {
-	var info = {}
+	let info = {}
 	_.each(infoTable.rows, (row) => {
-		var rowName = row.cells[0].textContent.replace(/:$/, '').toLowerCase();
-		info[rowName] = row.cells[1].textContent;
+		let rowName = row.cells[0].textContent.replace(/:$/, '').toLowerCase()
+		info[rowName] = row.cells[1].textContent
 	})
 
 	info.graduation = parseInt(info['class year'], 10)
@@ -174,17 +178,17 @@ function processInfoTable(infoTable) {
 }
 
 function processCoursesTable(coursesTable) {
-	var jsonRepresentation = tableToJson(coursesTable)
+	let jsonRepresentation = tableToJson(coursesTable)
 	jsonRepresentation.pop() // remove the extra row at the end
 
 	// loop to query each of the ugly
-	var coursesArr = prettyifyCourses(jsonRepresentation)
+	let coursesArr = prettyifyCourses(jsonRepresentation)
 
 	return coursesArr
 }
 
 function processGradTable(gradTable) {
-	var jsonRepresentation = tableToJson(gradTable)
+	let jsonRepresentation = tableToJson(gradTable)
 	let result = {}
 	_.each(jsonRepresentation, (value, key) => {
 		if (key === '') {
@@ -197,7 +201,7 @@ function processGradTable(gradTable) {
 }
 
 function processAreaTable(areaTable) {
-	var jsonRepresentation = tableToJson(areaTable)
+	let jsonRepresentation = tableToJson(areaTable)
 	let majors = _.chain(jsonRepresentation).pluck('majors').compact().value()
 	let concentrations = _.chain(jsonRepresentation).pluck('concentrations').compact().value()
 	let emphases = _.chain(jsonRepresentation).pluck('emphases').compact().value()
@@ -206,69 +210,70 @@ function processAreaTable(areaTable) {
 
 function lookupAreaAbbrFromTitle(title) {
 	let lookup = {
-		"AFRICA AND THE AMERICAS": 'AFAM',
-		"ALTERNATE LANGUAGE STUDY OPTION": 'ALSO',
-		"AMERICAN CONVERSATION": 'AMCON',
-		"AMERICAN STUDIES": 'AMST',
-		"AMERICAN RACIAL AND MULTICULTURAL STUDIES": 'ARMS',
-		"ART AND ART HISTORY": 'ART',
-		"ASIAN STUDIES": 'ASIAN',
-		"BIOLOGY": 'BIO',
-		"BIOMOLECULAR SCIENCE": 'BMOLS',
-		"CHEMISTRY": 'CHEM',
-		"CHINESE": 'CHIN',
-		"CLASSICS": 'CLASS',
-		"COMPUTER SCIENCE": 'CSCI',
-		"DANCE": 'DANCE',
-		"ECONOMICS": 'ECON',
-		"EDUCATION": 'EDUC',
-		"ENGLISH": 'ENGL',
-		"ENVIRONMENTAL STUDIES": 'ENVST',
-		"EXERCISE SCIENCE ACTIVITY": 'ESAC',
-		"EXERCISE SCIENCE THEORY": 'ESTH',
-		"FAMILY STUDIES": 'FAMST',
-		"FILM STUDIES": 'FILM',
-		"FRENCH": 'FREN',
-		"GREAT CONVERSATION": 'GCON',
-		"GERMAN": 'GERM',
-		"GREEK": 'GREEK',
-		"HISTORY": 'HIST',
-		"HISPANIC STUDIES": 'HSPST',
-		"UNKNOWN (IDFA)": 'IDFA',
-		"INTERDEPARTMENTAL": 'INTD',
-		"INTERDISCIPLINARY": 'INTER',
-		"INTEGRATIVE STUDIES": 'IS',
-		"JAPANESE": 'JAPAN',
-		"LATIN": 'LATIN',
-		"MATHEMATICS": 'MATH',
-		"MEDIA STUDIES": 'MEDIA',
-		"MEDIEVAL STUDIES": 'MEDVL',
-		"MANAGEMENT STUDIES": 'MGMT',
-		"MUSIC": 'MUSIC',
-		"MUSIC PERFORMANCE": 'MUSPF',
-		"NEUROSCIENCE": 'NEURO',
-		"NORWEGIAN": 'NORW',
-		"NURSING": 'NURS',
-		"PHILOSPHY": 'PHIL',
-		"PHYSICS": 'PHYS',
-		"POLITICAL SCIENCE": 'PSCI',
-		"PSYCHOLOGY": 'PSYCH',
-		"RELIGION": 'REL',
-		"RUSSIAN STUDIES": 'RUSST',
-		"RUSSIAN": 'RUSSN',
-		"SCIENCE CONVERSATION": 'SCICN',
-		"SOCIOLOGY AND ANTHROPOLOGY": 'SOAN',
-		"SPANISH": 'SPAN',
-		"STATISTICS": 'STAT',
-		"SOCIAL WORK": 'SWRK',
-		"THEATER": 'THEAT',
-		"WOMEN'S STUDIES": 'WMGST',
-		"WOMEN'S & GENDER STUDIES": 'WMGST',
-		"WRITING": 'WRIT',
+		'AFRICA AND THE AMERICAS': 'AFAM',
+		'ALTERNATE LANGUAGE STUDY OPTION': 'ALSO',
+		'AMERICAN CONVERSATION': 'AMCON',
+		'AMERICAN STUDIES': 'AMST',
+		'AMERICAN RACIAL AND MULTICULTURAL STUDIES': 'ARMS',
+		'ART AND ART HISTORY': 'ART',
+		'ASIAN STUDIES': 'ASIAN',
+		'BIOLOGY': 'BIO',
+		'BIOMOLECULAR SCIENCE': 'BMOLS',
+		'CHEMISTRY': 'CHEM',
+		'CHINESE': 'CHIN',
+		'CLASSICS': 'CLASS',
+		'COMPUTER SCIENCE': 'CSCI',
+		'DANCE': 'DANCE',
+		'ECONOMICS': 'ECON',
+		'EDUCATION': 'EDUC',
+		'ENGLISH': 'ENGL',
+		'ENVIRONMENTAL STUDIES': 'ENVST',
+		'EXERCISE SCIENCE ACTIVITY': 'ESAC',
+		'EXERCISE SCIENCE THEORY': 'ESTH',
+		'FAMILY STUDIES': 'FAMST',
+		'FILM STUDIES': 'FILM',
+		'FRENCH': 'FREN',
+		'GREAT CONVERSATION': 'GCON',
+		'GERMAN': 'GERM',
+		'GREEK': 'GREEK',
+		'HISTORY': 'HIST',
+		'HISPANIC STUDIES': 'HSPST',
+		'UNKNOWN (IDFA)': 'IDFA',
+		'INTERDEPARTMENTAL': 'INTD',
+		'INTERDISCIPLINARY': 'INTER',
+		'INTEGRATIVE STUDIES': 'IS',
+		'JAPANESE': 'JAPAN',
+		'LATIN': 'LATIN',
+		'MATHEMATICS': 'MATH',
+		'MEDIA STUDIES': 'MEDIA',
+		'MEDIEVAL STUDIES': 'MEDVL',
+		'MANAGEMENT STUDIES': 'MGMT',
+		'MUSIC': 'MUSIC',
+		'MUSIC PERFORMANCE': 'MUSPF',
+		'NEUROSCIENCE': 'NEURO',
+		'NORWEGIAN': 'NORW',
+		'NURSING': 'NURS',
+		'PHILOSPHY': 'PHIL',
+		'PHYSICS': 'PHYS',
+		'POLITICAL SCIENCE': 'PSCI',
+		'PSYCHOLOGY': 'PSYCH',
+		'RELIGION': 'REL',
+		'RUSSIAN STUDIES': 'RUSST',
+		'RUSSIAN': 'RUSSN',
+		'SCIENCE CONVERSATION': 'SCICN',
+		'SOCIOLOGY AND ANTHROPOLOGY': 'SOAN',
+		'SPANISH': 'SPAN',
+		'STATISTICS': 'STAT',
+		'SOCIAL WORK': 'SWRK',
+		'THEATER': 'THEAT',
+		'WOMEN\'S STUDIES': 'WMGST',
+		'WOMEN\'S & GENDER STUDIES': 'WMGST',
+		'WRITING': 'WRIT',
 	}
-	var result = lookup[title.toUpperCase()]
-	if (!result)
-		return "UNKWN";
+	let result = lookup[title.toUpperCase()]
+	if (!result) {
+		return 'UNKWN'
+	}
 	return result
 }
 
@@ -280,7 +285,8 @@ function findAreasOfStudy(areas, degreeType) {
 		degree.id = 'd-ba'
 		degree.abbr = 'B.A.'
 		degree.title = 'Bachelor of Arts'
-	} else if (degreeType === 'B.M.') {
+	}
+	else if (degreeType === 'B.M.') {
 		degree.id = 'd-bm'
 		degree.abbr = 'B.M.'
 		degree.title = 'Bachelor of Music'
@@ -340,14 +346,15 @@ function createSchedules(courses) {
 			return _.map(resultPromiseInspections, (promiseInspection) => {
 				if (promiseInspection.isFulfilled()) {  // check if was successful
 					return promiseInspection.value()
-				} else if (promiseInspection.isRejected()) { // check if the read failed
+				}
+				else if (promiseInspection.isRejected()) { // check if the read failed
 					console.error(promiseInspection.reason())
 				}
 			})
 		})
 		.then((resultArrays) => _.zipObject(terms, resultArrays))
 		.then((results) => {
-			console.log(`total results took ${performance.now()-start}ms`, results)
+			console.log(`total results took ${performance.now() - start}ms`, results)
 			return results
 		})
 		.done()
@@ -363,7 +370,7 @@ async function findScheduleFromCourses(courses) {
 
 	let matches = await* matchPromises
 
-	let start =  performance.now()
+	// let start =  performance.now()
 	matches = _.flatten(matches)
 
 	// console.log(`individual results for ${courses[0].term}`, matches)
@@ -413,12 +420,12 @@ function comboHasCourses(courses, combinationOfClasses) {
 
 function searchForCourseMatches(queryObject) {
 	// console.log("searched for: ", queryObject)
-	let start = performance.now()
+	// let start = performance.now()
 
 	return db
 		.store('courses')
 		.query(queryObject)
-		// .then((results) => {console.log(`${performance.now() - start}ms to finish query for ${queryObject.term}`, results, queryObject); return results;})
+		// .then((results) => {console.log(`${performance.now() - start}ms to finish query for ${queryObject.term}`, results, queryObject); return results})
 		.catch(err => new Error('course query failed on', queryObject, err))
 }
 
@@ -440,10 +447,10 @@ function makeStudent(tables, degreeType) {
 
 function parseSIS(html) {
 	let [rawTables, degreeType] = cleanUpPage(html)
-	var tables = nameTheTables(rawTables)
+	let tables = nameTheTables(rawTables)
 	//console.log(tables)
 
-	var cleanedTables = {
+	let cleanedTables = {
 		courses: processCoursesTable(tables.courses),
 		info: processInfoTable(tables.info),
 		areas: processAreaTable(tables.areas),
@@ -458,6 +465,4 @@ function parseSIS(html) {
 
 parseHTMLfromJSON()
 
-document.querySelector('button').addEventListener('click', function(ev) {
-	parseHTMLfromPage()
-})
+document.querySelector('button').addEventListener('click', parseHTMLfromPage)
