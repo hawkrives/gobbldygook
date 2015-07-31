@@ -62,6 +62,7 @@ const studentStore = Reflux.createStore({
 	_postChange() {
 		// console.log('students', this.students)
 		this.students.forEach(student => student.save())
+		this._saveStudentIds()
 		this.trigger(this.students)
 	},
 
@@ -84,6 +85,10 @@ const studentStore = Reflux.createStore({
 		if (!(inMemory.equals(onDisk))) {
 			this._loadData()
 		}
+	},
+
+	_saveStudentIds() {
+		localStorage.setItem('studentIds', stringify(this.students.map(s => s.id).toArray()))
 	},
 
 	_loadData(studentId) {
@@ -144,9 +149,6 @@ const studentStore = Reflux.createStore({
 				return fleshedStudent
 			})
 
-		// Update the studentIds list from the current list of students
-		localStorage.setItem('studentIds', stringify(localStudents.map(s => s.id).toArray()))
-
 		// Add them to students
 		this.students = this.students.withMutations(students => {
 			localStudents.forEach(localStudent => {
@@ -154,6 +156,9 @@ const studentStore = Reflux.createStore({
 			})
 			return students
 		})
+
+		// Update the studentIds list from the current list of students
+		this._saveStudentIds()
 
 		// Clean up localStorage
 		cleanLocalStorage()
@@ -212,6 +217,14 @@ const studentStore = Reflux.createStore({
 		}
 	},
 
+	destroyStudent(studentId) {
+		this._preChange()
+		this.students = this.students.filterNot(s => s.id === studentId)
+		localStorage.removeItem(studentId)
+		this._saveStudentIds()
+		this._postChange()
+	},
+
 	_change(studentId, method, ...args) {
 		this._preChange()
 		this.students = this.students.set(studentId, this.students.get(studentId)[method](...args))
@@ -235,7 +248,7 @@ const studentStore = Reflux.createStore({
 	addFabrication(studentId, ...args)           { this._change(studentId, 'addArea',                  ...args) },
 	addOverride(studentId, ...args)              { this._change(studentId, 'addSchedule',              ...args) },
 	removeArea(studentId, ...args)               { this._change(studentId, 'removeArea',               ...args) },
-	removeMultipleAreas(studentId, ...args)      { this._change(studentId, 'removeMultipleAreas',       ...args) },
+	removeMultipleAreas(studentId, ...args)      { this._change(studentId, 'removeMultipleAreas',      ...args) },
 	destroySchedule(studentId, ...args)          { this._change(studentId, 'destroySchedule',          ...args) },
 	destroyMultipleSchedules(studentId, ...args) { this._change(studentId, 'destroyMultipleSchedules', ...args) },
 	moveCourse(studentId, ...args)               { this._change(studentId, 'moveCourse',               ...args) },
