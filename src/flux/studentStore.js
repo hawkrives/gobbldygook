@@ -76,10 +76,10 @@ const studentStore = Reflux.createStore({
 	},
 
 	reloadStudents() {
-		let loadedIds = this.students.map(s => s.id).toList()
-		let localIds = Immutable.List(localStorage.getItem('studentIds') || [])
+		const inMemory = this.students.map(s => s.id).toList()
+		const onDisk = Immutable.List(JSON.parse(localStorage.getItem('studentIds')))
 
-		if (!loadedIds.equals(localIds)) {
+		if (!(inMemory.equals(onDisk))) {
 			this._loadData()
 		}
 	},
