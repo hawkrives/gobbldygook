@@ -1,4 +1,6 @@
 import _ from 'lodash'
+import map from 'lodash/collection/map'
+import zipObject from 'lodash/array/zipObject'
 import findScheduleFromCourses from './find-schedule-from-courses'
 
 export default function createSchedules(courses) {
@@ -13,16 +15,14 @@ export default function createSchedules(courses) {
 	console.log('grouped courses by term')
 	let start = performance.now()
 
-	let semesters = _(groupedCourses)
-		.map(findScheduleFromCourses)
-		.value()
+	let semesters = map(groupedCourses, findScheduleFromCourses)
 
 	console.log('started schedule building')
 	// let semesters = [findScheduleFromCourses(groupedCourses[1])]
 	return Promise
 		.settle(semesters)
-		.then((resultPromiseInspections) => {
-			return _.map(resultPromiseInspections, (promiseInspection) => {
+		.then(resultPromiseInspections => {
+			return map(resultPromiseInspections, (promiseInspection) => {
 				if (promiseInspection.isFulfilled()) {  // check if was successful
 					return promiseInspection.value()
 				}
@@ -31,8 +31,8 @@ export default function createSchedules(courses) {
 				}
 			})
 		})
-		.then((resultArrays) => _.zipObject(terms, resultArrays))
-		.then((results) => {
+		.then(resultArrays => zipObject(terms, resultArrays))
+		.then(results => {
 			console.log(`total results took ${performance.now() - start}ms`, results)
 			return results
 		})
