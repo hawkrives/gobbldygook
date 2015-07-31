@@ -1,4 +1,5 @@
-import {chain} from 'lodash'
+import filter from 'lodash/collection/filter'
+import map from 'lodash/collection/map'
 import compact from 'lodash/array/compact'
 import isNull from 'lodash/lang/isNull'
 import React from 'react'
@@ -71,11 +72,10 @@ let Course = React.createClass({
 
 		let warnings = this.props.conflicts[this.props.index]
 		let hasWarnings = compact(warnings).length
-		let warningEls = chain(warnings)
-			.reject(isNull)
-			.filter({warning: true})
-			.map((w, index) => <li className={w.className} key={w.className + index}>{w.msg}</li>)
-			.value()
+
+		const validWarnings = filter(warnings, w => !isNull(w) && w.warning === true)
+		const warningEls = map(validWarnings, (w, index) =>
+			<li className={w.className} key={index}>{w.msg}</li>)
 
 		let classSet = cx('course', {
 			expanded: this.state.isOpen,

@@ -2,7 +2,8 @@
 import Student from '../../src/models/student.js'
 import demoStudent from '../../src/models/demoStudent.json'
 import Immutable from 'immutable'
-import {zipObject, pluck, chain} from 'lodash'
+import size from 'lodash/collection/size'
+import filter from 'lodash/collection/filter'
 
 describe('Student', () => {
 	it('is a Student', () => {
@@ -121,7 +122,7 @@ describe('Student', () => {
 		xit('returns only courses from active schedules', () => {
 			const stu = new Student(demoStudent)
 			// disabled until we can mock getCourses
-			let courseCountFromActive = chain(demoStudent.schedules).filter('active').pluck('clbids').size().value()
+			let courseCountFromActive = size(pluck(filter(demoStudent.schedules, 'active'), 'clbids'))
 			stu.courses.then(courses => expect(courses.length).to.equal(courseCountFromActive))
 		})
 		xit('counts all credits currently scheduled', () => {

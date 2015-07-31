@@ -1,8 +1,12 @@
 import React from 'react'
 import {State} from 'react-router'
-import {chain} from 'lodash'
+import flatten from 'lodash/array/flatten'
+import groupBy from 'lodash/collection/groupBy'
 import isObject from 'lodash/lang/isObject'
 import map from 'lodash/collection/map'
+import pairs from 'lodash/object/pairs'
+import sortBy from 'lodash/collection/sortBy'
+import sortByAll from 'lodash/collection/sortByAll'
 import present from 'present'
 import cx from 'classnames'
 
@@ -56,17 +60,17 @@ let SearchButton = React.createClass({
 	processQueryResults([results, startQueryTime]=[]) {
 		console.log('results', results)
 
-		let searchResults = chain(results)
-			.sortBy(c => `${c.deptnum}${c.sect || ''}`) // Sort the results
-			.groupBy('term') // Group them by term
-			.pairs() // Turn the object into an array of pairs
-			// Sort the result arrays by the first element, the term,
-			// because object keys don't have an implicit sort.
-			.sortBy(group => group[0])
-			.reverse() // reverse it, so the most recent is at the top
-			.flatten() // flatten once, to merge the [date, courses] arrays
-			.flatten() // then flatten once more, to raise the courses into the array
-			.value()
+		// Sort the results
+		const sortedByIdent = sortByAll(results, ['deptnum', 'sect'])
+		// Group them by term, then turn the object into an array of pairs
+		const groupedAndPaired = pairs(groupBy(sortedByIdent, 'term'))
+		// Sort the result arrays by the first element, the term, because
+		// object keys don't have an implicit sort. Also reverse it, so the
+		// most recent is at the top.
+		const sortedByTerm = sortBy(groupedAndPaired, group => group[0]).reverse()
+		// flatten once, to merge the [date, courses] arrays,
+		// then flatten once more, to raise the courses into the array
+		const searchResults = flatten(flatten(sortedByTerm))
 
 		console.log('search results', searchResults)
 		let endQueryTime = present()

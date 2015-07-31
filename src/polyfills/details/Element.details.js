@@ -1,7 +1,7 @@
 ﻿// Originally from https://github.com/termi/Element.details
 // HTMLElement.prototype.insertAdjacentHTML = https://gist.github.com/1276030
 
-import {forEach} from 'lodash'
+import forEach from 'lodash/collection/forEach'
 
 // Chrome 10 will fail this detection, but Chrome 10 no longer exists
 let support = 'open' in document.createElement('details')

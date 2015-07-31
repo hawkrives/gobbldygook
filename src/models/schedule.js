@@ -1,5 +1,11 @@
 import Immutable from 'immutable'
-import lodash, {isUndefined, reject} from 'lodash'
+import reject from 'lodash/collection/reject'
+import isUndefined from 'lodash/lang/isUndefined'
+import flatten from 'lodash/array/flatten'
+import filter from 'lodash/collection/filter'
+import identity from 'lodash/utility/identity'
+import pluck from 'lodash/collection/pluck'
+import some from 'lodash/collection/some'
 import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
 
@@ -109,15 +115,10 @@ class Schedule extends ScheduleRecord {
 		// Step one: do any times conflict?
 		const conflicts = findWarnings(courses, this.toJS())
 
-		const hasConflict = lodash(conflicts)
-			// flatten the nested arrays
-			.flatten()
-			// filter to just the non-null/undefined items
-			.filter(item => item)
-			// grab the 'warning' values
-			.pluck('warning')
-			// and see if any are true
-			.any(isTrue)
+		const flattened = flatten(conflicts)
+		const filtered = filter(flattened, identity)
+		const warnings = pluck(filtered, 'warning')
+		const hasConflict = some(warnings, isTrue)
 
 		// if (hasConflict) {
 		// 	console.log('schedule conflicts', conflicts, hasConflict)
