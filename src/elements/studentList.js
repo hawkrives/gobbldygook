@@ -23,7 +23,7 @@ class StudentList extends React.Component {
 		let file = ev.target.files[0]
 
 		reader.onload = (upload) => {
-			studentActions.importStudent(upload.target.result)
+			studentActions.importStudent({data: upload.target.result, type: file.type})
 		}
 
 		reader.readAsText(file)
@@ -71,7 +71,7 @@ class StudentList extends React.Component {
 		</menu>)
 
 		let importButton = (<input type='file'
-			accept='.json'
+			accept='.json,.html'
 			key='import-student'
 			className='import-student'
 			onSubmit={this.handleSubmit}
