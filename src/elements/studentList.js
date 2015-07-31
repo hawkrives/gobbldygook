@@ -48,19 +48,13 @@ export default class StudentList extends React.Component {
 			.sortBy(s => s.dateLastModified)
 			.map(student =>
 				<li key={student.id}>
-					<Link
-						className='student-list-item'
-						to='student'
-						params={{id: student.id}}
-						onClick={(ev) => {
-							if (this.state.isEditing) {
-								ev.preventDefault()
-								studentActions.destroyStudent(student.id)
-							}
-						}}>
+					<Link className='student-list-item'to='student'params={{id: student.id}}>
 						{
 							this.state.isEditing
-								? <span className='delete'>×</span>
+								? <span className='delete' onClick={(ev) => {
+									ev.preventDefault()
+									studentActions.destroyStudent(student.id)
+								}}>×</span>
 								: <span className='letter'>{student.name.length ? student.name[0] : ''}</span>
 						}
 						<span className='name'>{student.name || ''}</span>
