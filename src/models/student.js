@@ -41,7 +41,7 @@ const StudentRecord = Immutable.Record({
 	settings: Immutable.Map(),
 })
 
-class Student extends StudentRecord {
+export default class Student extends StudentRecord {
 	constructor(encodedStudent={}) {
 		const startTime = present()
 
@@ -285,5 +285,3 @@ class Student extends StudentRecord {
 		}
 	}
 }
-
-export default Student
