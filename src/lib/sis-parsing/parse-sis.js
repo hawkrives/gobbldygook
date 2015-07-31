@@ -6,19 +6,14 @@ import processAreaTable from './process-area-table'
 import makeStudent from './make-student'
 
 export default function parseSIS(html) {
-	let [rawTables, degreeType] = cleanThePage(html)
-	let tables = nameTheTables(rawTables)
-	//console.log(tables)
+	const [rawTables, degreeType] = cleanThePage(html)
+	const tables = nameTheTables(rawTables)
 
-	let cleanedTables = {
+	const cleanedTables = {
 		courses: processCoursesTable(tables.courses),
 		info: processInfoTable(tables.info),
 		areas: processAreaTable(tables.areas),
 	}
 
-	//console.log('cleaned', cleanedTables)
-	let student = makeStudent(cleanedTables, degreeType)
-	//console.log('student', student)
-
-	return student
+	return makeStudent(cleanedTables, degreeType)
 }

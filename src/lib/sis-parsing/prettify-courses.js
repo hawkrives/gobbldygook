@@ -1,7 +1,7 @@
 import map from 'lodash/collection/map'
 import unescapeAllValues from './unescape-all-values'
 
-export default function prettyifyCourses(jsonCourses) {
+export default function prettifyCourses(jsonCourses) {
 	return map(jsonCourses, function(course) {
 		delete course['&nbsp;']
 		delete course.inst

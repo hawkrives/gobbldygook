@@ -10,6 +10,7 @@ export default function makeStudent(tables, degreeType) {
 	student.graduation = tables.info.graduation
 
 	student.studies = findAreasOfStudy(tables.areas, degreeType)
+	student.courses = tables.courses
 	student.schedules = createSchedules(tables.courses)
 
 	return student
