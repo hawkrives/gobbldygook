@@ -17,7 +17,7 @@ function cleanLocalStorage() {
 	localStorage.removeItem('student-v3.0a6')
 }
 
-let studentStore = Reflux.createStore({
+const studentStore = Reflux.createStore({
 	listenables: studentActions,
 
 	init() {
@@ -58,11 +58,8 @@ let studentStore = Reflux.createStore({
 	},
 
 	_postChange() {
-		// console.groupCollapsed('studentStore._postChange')
-		// console.group('studentStore._postChange')
 		// console.log('students', this.students)
 		this.students.forEach(student => student.save())
-		// console.groupEnd('studentStore._postChange')
 		this.trigger(this.students)
 	},
 
@@ -71,7 +68,6 @@ let studentStore = Reflux.createStore({
 		const rawStudent = demoStudent
 		rawStudent.id = studentId
 
-		window.studentData = student
 		const student = new Student(rawStudent)
 
 		this._preChange()
@@ -96,7 +92,7 @@ let studentStore = Reflux.createStore({
 			// Get the list of students we know about, or the string 'null',
 			// if localStorage doesn't have the key 'studentIds'.
 			JSON.parse(localStorage.getItem('studentIds')) ||
-			// If both those fail, grab the really old 'student-v3.0a6'
+			// If that fails, grab the really old file 'student-v3.0a6'
 			['student-v3.0a6']
 
 		if (studentId) {
