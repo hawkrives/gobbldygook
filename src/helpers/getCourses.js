@@ -6,7 +6,7 @@ import getCourse from './getCourse'
  * Gets a list of course ids from the database.
  *
  * @param {Array|Immutable.List} clbids - a list of class/lab IDs
- * @promise BluebirdPromiseArray
+ * @returns {Promise[]} - an array of course promises
  * @fulfill {Array} - the courses.
  */
 async function getCourses(clbids) {

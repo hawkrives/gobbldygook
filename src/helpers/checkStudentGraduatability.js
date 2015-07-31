@@ -10,7 +10,8 @@ import checkStudentAgainstArea from './checkStudentAgainstArea'
 /**
  * Checks a student objects graduation possibilities against all of its areas of study.
  *
- * @param {Student} student
+ * @param {Student} student - the student object
+ * @returns {Promise} - the promise of knowledge
  * @promise GraduatabilityPromise
  * @fulfill {Object} - The details of the students graduation prospects.
  *    {boolean} graduatability
