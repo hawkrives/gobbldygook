@@ -68,11 +68,11 @@ let studentStore = Reflux.createStore({
 
 	resetStudentToDemo(studentId) {
 		// console.info(`resetting student ${studentId} to the demo student`)
-		let rawStudent = demoStudent
+		const rawStudent = demoStudent
 		rawStudent.id = studentId
 
-		let student = new Student(rawStudent)
 		window.studentData = student
+		const student = new Student(rawStudent)
 
 		this._preChange()
 		this.students = this.students.set(studentId, student)
@@ -93,7 +93,7 @@ let studentStore = Reflux.createStore({
 
 		// studentIds is a list of IDs we know about.
 		let studentIds =
-			// Get the list of students we know about, or the string 'null'
+			// Get the list of students we know about, or the string 'null',
 			// if localStorage doesn't have the key 'studentIds'.
 			JSON.parse(localStorage.getItem('studentIds')) ||
 			// If both those fail, grab the really old 'student-v3.0a6'
@@ -137,7 +137,7 @@ let studentStore = Reflux.createStore({
 				}
 
 				// Make the student...
-				let fleshedStudent = new Student(basicStudent)
+				const fleshedStudent = new Student(basicStudent)
 
 				// and save them, of course
 				fleshedStudent.save()
@@ -164,7 +164,7 @@ let studentStore = Reflux.createStore({
 	},
 
 	initStudent() {
-		let fleshedStudent = new Student()
+		const fleshedStudent = new Student()
 		fleshedStudent.save()
 		this._preChange()
 		this._loadData(fleshedStudent.id)
@@ -181,7 +181,7 @@ let studentStore = Reflux.createStore({
 
 		if (stu) {
 			this._preChange()
-			let fleshedStudent = new Student(stu)
+			const fleshedStudent = new Student(stu)
 			fleshedStudent.save()
 			this._loadData(fleshedStudent.id)
 		}
