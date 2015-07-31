@@ -8,8 +8,7 @@ import SISData from './sis-degreeaudit.json'
 import db from '../app/helpers/db'
 import loadData from '../app/helpers/loadData'
 
-import {combinations as comb} from 'sto-helpers'
-import {queryCourses} from 'sto-helpers'
+import {combinations as comb, queryCourses} from 'sto-helpers'
 import {checkScheduleForTimeConflicts} from 'sto-sis-time-parser'
 
 loadData()
