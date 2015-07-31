@@ -70,9 +70,7 @@ export default class Student extends StudentRecord {
 					student = student.addSchedule(schedule)
 				})
 
-				forEach((encodedStudent.overrides || []), (val, key) => {
-					student = student.addOverride({[key]: val})
-				})
+				student = student.addOverride(encodedStudent.overrides || {})
 
 				forEach((encodedStudent.fabrications || []), fabrication => {
 					student = student.addFabrication(fabrication)
