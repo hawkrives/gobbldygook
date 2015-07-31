@@ -82,12 +82,28 @@
 	flex: 1;
 }
 
-.student-list-item .letter {
+.student-list-item .letter,
+.student-list-item .delete {
 	@include avatar-letter(2em);
-	box-shadow: 0 0 0 1px color('blue'), 0 0 0 4px white;
 	background-color: white;
 	position: absolute;
 	top: -0.125em;
 	bottom: 0px;
 	left: -1em;
+}
+
+.student-list-item .letter {
+	box-shadow:
+		0 0 0 1px color('blue'),
+		0 0 0 4px white;
+}
+
+.student-list-item .delete {
+	box-shadow:
+		0 0 0 1px color('red'),
+		0 0 0 4px white;
+}
+
+.student-list-item:hover .delete {
+	box-shadow: 0 0 0 5px color('red');
 }
