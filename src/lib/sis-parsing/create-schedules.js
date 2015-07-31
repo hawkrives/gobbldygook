@@ -23,11 +23,13 @@ export default function createSchedules(courses) {
 	return Promise
 		.settle(semesters)
 		.then(resultPromiseInspections => {
-			return map(resultPromiseInspections, (promiseInspection) => {
-				if (promiseInspection.isFulfilled()) {  // check if was successful
+			return map(resultPromiseInspections, promiseInspection => {
+				// check if was successful
+				if (promiseInspection.isFulfilled()) {
 					return promiseInspection.value()
 				}
-				else if (promiseInspection.isRejected()) { // check if the read failed
+				// check if the read failed
+				else if (promiseInspection.isRejected()) {
 					console.error(promiseInspection.reason())
 				}
 			})
