@@ -3,6 +3,8 @@ import Immutable from 'immutable'
 import {Link} from 'react-router'
 import studentActions from '../flux/studentActions'
 import fuzzysearch from 'fuzzysearch'
+import Button from './button'
+import Icon from './icon'
 
 export default class StudentList extends React.Component {
 	static propTypes = {
@@ -79,17 +81,27 @@ export default class StudentList extends React.Component {
 						onChange={ev => this.setState({studentFilter: ev.target.value.toLowerCase()})} />
 
 					<menu className='student-list-buttons'>
-						<button className='student-list-button--sort-by'>Sort</button>
+						<Button className='student-list--button'>
+							<Icon name='ionicon-funnel' type='block' />
+							Sort
+						</Button>
 
-						<button className='student-list-button--group-by'>Group</button>
+						<Button className='student-list--button'>
+							<Icon name='ionicon-folder' type='block' />
+							Group
+						</Button>
 
-						<button
-							className='student-list-button--edit'
-							onClick={() => this.setState({isEditing: !this.state.isEditing})}>Edit</button>
+						<Button className='student-list--button'
+							onClick={() => this.setState({isEditing: !this.state.isEditing})}>
+							<Icon name='ionicon-navicon' type='block' />
+							Edit
+						</Button>
 
-						<button
-							className='student-list-button--new'
-							onClick={studentActions.initStudent}>New</button>
+						<Button className='student-list--button'
+							onClick={studentActions.initStudent}>
+							<Icon name='ionicon-plus' type='block' />
+							New
+						</Button>
 					</menu>
 				</div>
 
