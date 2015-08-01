@@ -27,3 +27,7 @@
 		color: color('disabled', 'foreground--#{$accent}');
 	}
 }
+
+.button--raised {
+	@include button--raised;
+}
