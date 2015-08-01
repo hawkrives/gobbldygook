@@ -37,18 +37,20 @@
 }
 
 
-
-.student-list {
-	@include list-inline;
-	li { display: block; }
-}
-
 .student-list-item {
-	@include button--raised($filter: true);
 	@include link-undecorated;
+	@include material-shadow(1, $filter: true);
+
+	&.is-selected {
+		outline: color('blue', '300') 2px solid;
+		background-color: color('blue', '50');
+	}
+
+	background-color: white;
 
 	display: flex;
 	align-items: center;
+
 	max-width: 35em;
 	margin: 0 auto 1.25em;
 	padding: 0.5em 0.5em;
@@ -56,40 +58,39 @@
 
 	transition: 0.15s;
 
-	&::after {
-		@include ionicon($ionicon-ios-arrow-forward);
-	}
+	cursor: pointer;
 }
 
-.student-list-item:hover .name {
-	text-decoration: underline;
+.student-list-item:hover {
+	transform: scale(1.05);
 }
-.student-list-item .name {
+.student-list-item-info {
 	flex: 1;
 }
 
-.student-list-item .letter,
-.student-list-item .delete {
-	@include avatar-letter(2em);
-	background-color: white;
-	position: absolute;
-	top: -0.125em;
-	bottom: 0px;
-	left: -1em;
+.student-list-item-info .name {
+	line-height: 1.5;
 }
 
-.student-list-item .letter {
-	box-shadow:
-		0 0 0 1px color('blue'),
-		0 0 0 4px white;
+.student-list-item-info .areas {
+	font-size: 0.8em;
+	font-feature-settings: 'smcp';
 }
 
-.student-list-item .delete {
-	box-shadow:
-		0 0 0 1px color('red'),
-		0 0 0 4px white;
+.student-list-item-info .area-type {
+	display: inline-block;
+	margin-right: 0.2em;
 }
 
-.student-list-item:hover .delete {
-	box-shadow: 0 0 0 5px color('red');
+.student-list-item-actions {
+	flex: 0 1 auto;
+}
+
+.student-list-item--go {
+	margin-left: 0.25em;
+}
+
+.student-list-item .delete:hover {
+	border-color: color('red');
+	background-color: color('red', '50');
 }
