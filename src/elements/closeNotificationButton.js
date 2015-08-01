@@ -3,6 +3,6 @@ import Button from './button'
 
 export default class CloseNotificationButton extends Component {
 	render() {
-		return <Button className='close-notification' title='Close'>×</Button>
+		return <Button type='flat' className='close-notification' title='Close'>×</Button>
 	}
 }
