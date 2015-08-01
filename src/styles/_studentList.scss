@@ -56,9 +56,6 @@
 	position: relative;
 
 	transition: 0.15s;
-	&:hover {
-		transform: translateX(0.25em);
-	}
 
 	&::after {
 		@include ionicon($ionicon-ios-arrow-forward);
