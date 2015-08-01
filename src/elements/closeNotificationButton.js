@@ -1,10 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
+import Button from './button'
 
-class CloseNotificationButton extends React.Component {
+export default class CloseNotificationButton extends Component {
 	render() {
-		// console.log('CloseNotificationButton#render')
-		return <button className='close-notification' title='Close' />
+		return <Button className='close-notification' title='Close'>×</Button>
 	}
 }
-
-export default CloseNotificationButton
