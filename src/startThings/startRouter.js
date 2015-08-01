@@ -3,7 +3,7 @@ import Router from 'react-router'
 import {Route, DefaultRoute} from 'react-router'
 
 import Gobbldygook from '../elements/app'
-import StudentList from '../elements/studentList'
+import StudentPicker from '../elements/student-picker'
 import Student from '../elements/student'
 import AddStudent from '../elements/student'
 import CourseTable from '../elements/courseTable'
@@ -17,7 +17,7 @@ import DownloadStudent from '../elements/download-student'
 
 let routes = (
 	<Route handler={Gobbldygook} name='gobbldygook' path='/'>
-		<DefaultRoute handler={StudentList} />
+		<DefaultRoute handler={StudentPicker} />
 		<Route handler={AddStudent} name='add-student' path='add-student/' />
 		<Route handler={Student} name='student' path='s/:id/'>
 			<DefaultRoute handler={CourseTable} />
