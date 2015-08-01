@@ -24,9 +24,9 @@ export default class StudentSummary extends React.Component {
 
 		const name = student.name
 		const studentId = student.id
-		const NameEl = (<AutosizeInput className='autosize-input'
-			value={name}
-			onChange={ev => studentActions.updateName(studentId, ev.target.value.trim())} />)
+		const NameEl = (<input className='autosize-input'
+			defaultValue={name}
+			onChange={ev => studentActions.changeName(studentId, ev.target.value.trim())} />)
 
 		const degrees = studies.filter(s => s.type === 'degree')
 		const majors = studies.filter(s => s.type === 'major')
@@ -51,12 +51,12 @@ export default class StudentSummary extends React.Component {
 		const graduationEl = (<AutosizeInput
 			className='autosize-input'
 			value={String(student.graduation)}
-			onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value))} />)
+			onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value || 0))} />)
 
 		const sinceMatriculationEl = (<AutosizeInput
 			className='autosize-input'
-			value={String(student.graduation - student.matriculation)}
-			onChange={ev => studentActions.changeMatriculation(studentId, student.graduation - parseInt(ev.target.value))} />)
+			value={String(student.matriculation)}
+			onChange={ev => studentActions.changeMatriculation(studentId, parseInt(ev.target.value || 0))} />)
 
 		return (<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 			<header>
@@ -65,8 +65,8 @@ export default class StudentSummary extends React.Component {
 			</header>
 			<div className='content'>
 				<p>
-					You are planning on graduating in {graduationEl}, {sinceMatriculationEl}
-					{' years after matriculating, with '}
+					You are planning on graduating in {graduationEl},
+					{' '} after matriculating in {sinceMatriculationEl}, with {' '}
 					{(degrees.size > 0) ? `${degreeEmphasizer}${degreeEl} ${degreeWord}` : `no ${degreeWord}`}
 					{(majors.size > 0) ? `, ${majorEmphasizer}${majorWord} in ${majorEl}` : null}
 					{(concentrations.size > 0) ? `, and ${concentrationEmphasizer}${concentrationWord} in ${concentrationEl}` : null}
