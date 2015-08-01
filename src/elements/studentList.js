@@ -34,9 +34,9 @@ export default class StudentList extends Component {
 			.sortBy(s => s.dateLastModified)
 			.map(student =>
 				<li key={student.id}>
-					<Link className='student-list-item'to='student'params={{id: student.id}}>
+					<Link className='student-list-item' to='student' params={{id: student.id}}>
 						{
-							this.state.isEditing
+							this.props.isEditing
 								? <span className='delete' onClick={(ev) => {
 									ev.preventDefault()
 									studentActions.destroyStudent(student.id)
