@@ -29,6 +29,7 @@ const StudentRecord = Immutable.Record({
 
 	matriculation: now.getFullYear() - 2,
 	graduation: now.getFullYear() + 2,
+	advisor: '',
 
 	dateLastModified: null,
 	dateCreated: null,
@@ -89,6 +90,10 @@ export default class Student extends StudentRecord {
 
 	changeName(newName) {
 		return this.set('name', newName)
+	}
+
+	changeAdvisor(newAdvisor) {
+		return this.set('advisor', newAdvisor)
 	}
 
 	changeCreditsNeeded(newCreditsNeeded) {

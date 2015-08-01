@@ -239,6 +239,7 @@ const studentStore = Reflux.createStore({
 
 	/*eslint-disable no-multi-spaces, brace-style */
 	changeName(studentId, ...args)               { this._change(studentId, 'changeName',               ...args) },
+	changeAdvisor(studentId, ...args)            { this._change(studentId, 'changeAdvisor',            ...args) },
 	changeCreditsNeeded(studentId, ...args)      { this._change(studentId, 'changeCreditsNeeded',      ...args) },
 	changeMatriculation(studentId, ...args)      { this._change(studentId, 'changeMatriculation',      ...args) },
 	changeGraduation(studentId, ...args)         { this._change(studentId, 'changeGraduation',         ...args) },

@@ -10,6 +10,7 @@ let studentActions = Reflux.createActions([
 	'destroyStudent',
 
 	'changeName',
+	'changeAdvisor',
 	'changeCreditsNeeded',
 	'changeMatriculation',
 	'changeGraduation',
