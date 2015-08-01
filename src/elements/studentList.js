@@ -9,6 +9,56 @@ import List from './list'
 import Icon from './icon'
 import identity from 'lodash/utility/identity'
 
+class StudentListItem extends Component {
+	static propTypes = {
+		isEditing: PropTypes.bool,
+		student: PropTypes.instanceOf(Immutable.Record).isRequired,
+	}
+
+	static defaultProps = {
+		isEditing: false,
+	}
+
+	render() {
+		// console.log('StudentList#render')
+		const student = this.props.student
+		const groupedStudies = student.studies.groupBy(s => s.type)
+		return (<span key={student.id}>
+			<Link className='student-list-item' to='student' params={{id: student.id}}>
+				<span className='student-list-item-info'>
+					<div className='name'>{student.name || ''}</div>
+					<div className='areas'>
+						{['degree', 'major', 'concentration', 'emphasis']
+							.map(type => groupedStudies.get(type))
+							.filter(identity)
+							.map(group =>
+								group.toArray()
+									.map(s => s.name)
+									.join(' · '))
+							.map((group, i, coll) =>
+								<span className='area-type' key={i}>
+									{group}{i < coll.length - 1 ? ' / ' : null}
+								</span>)}
+					</div>
+				</span>
+				<span className='student-list-item-actions'>
+					{
+						this.props.isEditing
+							? <Button className='delete' type='raised'
+								onClick={(ev) => {
+									ev.preventDefault()
+									studentActions.destroyStudent(student.id)}
+								}>Delete</Button>
+							: null
+					}
+				</span>
+				<Icon className='student-list-item--go' name='ionicon-ios-arrow-forward' />
+			</Link>
+		</span>)
+	}
+}
+
+
 export default class StudentList extends Component {
 	static propTypes = {
 		filter: PropTypes.string,
@@ -27,41 +77,7 @@ export default class StudentList extends Component {
 			.toList()
 			.filter(s => fuzzysearch(this.props.filter, s.name.toLowerCase()))
 			.sortBy(s => s.dateLastModified)
-			.map(student => {
-				const groupedStudies = student.studies.groupBy(s => s.type)
-				return (<span key={student.id}>
-					<Link className='student-list-item' to='student' params={{id: student.id}}>
-						<span className='student-list-item-info'>
-							<div className='name'>{student.name || ''}</div>
-							<div className='areas'>
-								{['degree', 'major', 'concentration', 'emphasis']
-									.map(type => groupedStudies.get(type))
-									.filter(identity)
-									.map(group =>
-										group.toArray()
-											.map(s => s.name)
-											.join(' · '))
-									.map((group, i, coll) =>
-										<span className='area-type' key={i}>
-											{group}{i < coll.length - 1 ? ' / ' : null}
-										</span>)}
-							</div>
-						</span>
-						<span className='student-list-item-actions'>
-							{
-								this.props.isEditing
-									? <Button className='delete' type='raised'
-										onClick={(ev) => {
-											ev.preventDefault()
-											studentActions.destroyStudent(student.id)}
-										}>Delete</Button>
-									: null
-							}
-						</span>
-						<Icon className='student-list-item--go' name='ionicon-ios-arrow-forward' />
-					</Link>
-				</span>)
-			})
+			.map(student => <StudentListItem student={student} />)
 			.toArray()
 
 		return (
