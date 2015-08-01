@@ -28,7 +28,9 @@ export default class StudentList extends Component {
 		// console.log('StudentList#render')
 		let studentObjects = this.props.students
 			.toList()
-			.filter(s => fuzzysearch(this.state.studentFilter, s.name.toLowerCase()))
+			.filter(s =>
+				fuzzysearch(this.state.studentFilter, s.name.toLowerCase()) ||
+				any(s.studies.map(st => st.name.toLowerCase()).toArray(), name => fuzzysearch(this.state.studentFilter, name)))
 			.sortBy(s => s.dateLastModified)
 			.map(student =>
 				<li key={student.id}>
