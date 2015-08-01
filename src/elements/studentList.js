@@ -41,9 +41,10 @@ export default class StudentList extends Component {
 									ev.preventDefault()
 									studentActions.destroyStudent(student.id)
 								}}>×</span>
-								: <span className='letter'>{student.name.length ? student.name[0] : ''}</span>
+								: null
 						}
 						<span className='name'>{student.name || ''}</span>
+						<span className='areas'>{student.studies.map(st => st.name).toArray().join(', ')}</span>
 					</Link>
 				</li>)
 			.toArray()
