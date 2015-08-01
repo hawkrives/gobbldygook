@@ -37,7 +37,7 @@ class StudentListItem extends Component {
 									.join(' · '))
 							.map((group, i, coll) =>
 								<span className='area-type' key={i}>
-									{group}{i < coll.length - 1 ? ' / ' : null}
+									{group}{i < coll.length - 1 ? <span className='joiner'>※</span> : null}
 								</span>)}
 					</div>
 				</span>

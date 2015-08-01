@@ -79,7 +79,13 @@
 
 .student-list-item-info .area-type {
 	display: inline-block;
-	margin-right: 0.2em;
+}
+.student-list-item-info .area-type .joiner {
+	vertical-align: baseline;
+	display: inline-block;
+	$joiner-spacing: 0.35em;
+	margin-left: $joiner-spacing;
+	margin-right: $joiner-spacing;
 }
 
 .student-list-item-actions {
