@@ -19,7 +19,7 @@ import present from 'present'
 import debug from 'debug'
 const changelog = debug('gobbldygook:model:student:changes')
 
-
+const now = new Date()
 const StudentRecord = Immutable.Record({
 	id: null,
 	name: null,
@@ -27,8 +27,8 @@ const StudentRecord = Immutable.Record({
 
 	creditsNeeded: 35,
 
-	matriculation: 1894,
-	graduation: 1898,
+	matriculation: now.getFullYear() - 2,
+	graduation: now.getFullYear() + 2,
 
 	dateLastModified: null,
 	dateCreated: null,
