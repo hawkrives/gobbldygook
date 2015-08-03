@@ -76,14 +76,14 @@
 .student-list-item-info .areas {
 	font-size: 0.8em;
 	font-feature-settings: 'smcp';
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
-.student-list-item-info .area-type {
-	display: inline-block;
-}
 .student-list-item-info .area-type .joiner {
 	vertical-align: baseline;
 	display: inline-block;
+
 	$joiner-spacing: 0.35em;
 	margin-left: $joiner-spacing;
 	margin-right: $joiner-spacing;
