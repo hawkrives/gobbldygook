@@ -28,7 +28,7 @@ let routes = (
 )
 
 // run it
-console.log('3. 2.. 1... Blastoff!')
+console.log('3. 2.. 1... Blast off! 🚀')
 
 Router.run(routes, (Handler, state) => {
 	React.render(<Handler routerState={state} />, document.getElementById('app'))
