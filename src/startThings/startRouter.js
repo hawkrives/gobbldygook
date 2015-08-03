@@ -1,6 +1,5 @@
 import React from 'react'
-import Router from 'react-router'
-import {Route, DefaultRoute} from 'react-router'
+import Router, {Route, DefaultRoute} from 'react-router'
 
 import Gobbldygook from '../elements/app'
 import StudentPicker from '../elements/student-picker'
