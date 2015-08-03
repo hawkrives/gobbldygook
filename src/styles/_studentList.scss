@@ -40,6 +40,7 @@
 .student-list-item {
 	@include link-undecorated;
 	@include material-shadow(1, $filter: true);
+	border-radius: $base-border-radius;
 
 	&.is-selected {
 		outline: color('blue', '300') 2px solid;
