@@ -1,0 +1,17 @@
+#app.modal {
+	background-color: color('gray', '800');
+	position: relative;
+}
+
+.modal {
+	position: absolute;
+	top: 1vh;
+	left: 10vw;
+	right: 10vw;
+
+	@include card;
+}
+
+.modal {
+	padding: 0.5em 1em;
+}

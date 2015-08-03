@@ -5,7 +5,8 @@ import {Route, DefaultRoute} from 'react-router'
 import Gobbldygook from '../elements/app'
 import StudentPicker from '../elements/student-picker'
 import Student from '../elements/student'
-import AddStudent from '../elements/student'
+import CreateStudent from '../elements/create-student'
+import NewStudentWizard from '../elements/new-student-wizard'
 import CourseTable from '../elements/courseTable'
 import SemesterDetail from '../elements/semesterDetail'
 import DownloadStudent from '../elements/download-student'
@@ -18,9 +19,10 @@ import DownloadStudent from '../elements/download-student'
 let routes = (
 	<Route handler={Gobbldygook} name='gobbldygook' path='/'>
 		<DefaultRoute handler={StudentPicker} />
-		<Route handler={AddStudent} name='add-student' path='add-student/' />
+		<Route handler={CreateStudent} name='create-student' path='create-student/' />
 		<Route handler={Student} name='student' path='s/:id/'>
 			<DefaultRoute handler={CourseTable} />
+			<Route handler={NewStudentWizard} name='wizard' path='wizard/' />
 			<Route handler={SemesterDetail} name='semester' path='semester/:year/:semester/' />
 			<Route handler={DownloadStudent} name='download' path='download/' />
 		</Route>
