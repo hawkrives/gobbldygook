@@ -7,27 +7,16 @@
 
 	&:hover,
 	&:focus {
-		@if $dark {
-			background-color: rgba(#ccc, 0.15);
-		}
-		@else {
-			background-color: rgba(#999, 0.20);
-		}
+		background-color: rgba(#999, 0.20);
 	}
 
 	&:active {
-		@if $dark {
-			background-color: rgba(#ccc, 0.25);
-		}
-		@else {
-			background-color: rgba(#999, 0.40);
-		}
+		background-color: rgba(#999, 0.40);
 	}
 
 	&[disabled] {
 		cursor: default;
-		$accent: if($dark, 'dark', 'light');
-		color: color('disabled', 'foreground--#{$accent}');
+		color: color('disabled', 'foreground--light');
 
 		&:hover,
 		&:focus,
