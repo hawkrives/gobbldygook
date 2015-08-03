@@ -23,7 +23,7 @@ class StudentListItem extends Component {
 		// console.log('StudentList#render')
 		const student = this.props.student
 		const groupedStudies = student.studies.groupBy(s => s.type)
-		return (<span key={student.id}>
+		return (<span>
 			<Link className='student-list-item' to='student' params={{id: student.id}}>
 				<span className='student-list-item-info'>
 					<div className='name'>{student.name || ''}</div>
@@ -77,7 +77,7 @@ export default class StudentList extends Component {
 			.toList()
 			.filter(s => fuzzysearch(this.props.filter, s.name.toLowerCase()))
 			.sortBy(s => s.dateLastModified)
-			.map(student => <StudentListItem student={student} />)
+			.map(student => <StudentListItem key={student.id} student={student} />)
 			.toArray()
 
 		return (
