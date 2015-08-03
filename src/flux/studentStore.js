@@ -174,8 +174,8 @@ const studentStore = Reflux.createStore({
 	},
 
 	importStudent({data, type}) {
+		let stu = undefined
 		if (type === 'application/json') {
-			let stu = undefined
 			try {
 				stu = JSON.parse(data)
 			}
@@ -183,15 +183,12 @@ const studentStore = Reflux.createStore({
 				throw err
 			}
 
-			if (stu) {
-				this._preChange()
-				const fleshedStudent = new Student(stu)
-				fleshedStudent.save()
-				this._loadData(fleshedStudent.id)
-			}
+
 		}
+
 		else if (type === 'text/html') {
 			const parser = new DOMParser()
+
 			let html
 			try {
 				html = parser.parseFromString(data, 'text/html')
@@ -200,20 +197,19 @@ const studentStore = Reflux.createStore({
 				throw err
 			}
 
-			let stu
 			try {
 				stu = parseSIS(html)
 			}
 			catch (err) {
 				throw err
 			}
+		}
 
-			if (stu) {
-				this._preChange()
-				const fleshedStudent = new Student(stu)
-				fleshedStudent.save()
-				this._loadData(fleshedStudent.id)
-			}
+		if (stu) {
+			this._preChange()
+			const fleshedStudent = new Student(stu)
+			fleshedStudent.save()
+			this._loadData(fleshedStudent.id)
 		}
 	},
 
