@@ -1,14 +1,14 @@
 import React from 'react'
 import Router, {Route, DefaultRoute} from 'react-router'
 
-import Gobbldygook from '../elements/app'
-import StudentPicker from '../elements/student-picker'
-import Student from '../elements/student'
-import CreateStudent from '../elements/create-student'
-import NewStudentWizard from '../elements/new-student-wizard'
-import CourseTable from '../elements/courseTable'
-import SemesterDetail from '../elements/semesterDetail'
-import DownloadStudent from '../elements/download-student'
+import Gobbldygook from '../pages/gobbldygook'
+import StudentPicker from '../pages/student-picker'
+import Student from '../pages/student'
+import CreateStudent from '../pages/create-student'
+import NewStudentWizard from '../pages/new-student-wizard'
+import CourseTable from '../pages/course-table'
+import SemesterDetail from '../pages/semester-detail'
+import DownloadStudent from '../pages/download-student'
 
 // /
 // /s/122932

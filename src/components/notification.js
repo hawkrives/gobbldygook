@@ -1,7 +1,7 @@
 import React from 'react'
 
 import notificationActions from '../flux/notificationActions'
-import CloseNotificationButton from './closeNotificationButton'
+import Button from './button'
 
 class Notification extends React.Component {
 	constructor(props) {
@@ -16,7 +16,11 @@ class Notification extends React.Component {
 	render() {
 		// console.log('Notification#render')
 		let message = <h1 className='notification-message'>{this.props.message}</h1>
-		let closeButton = <CloseNotificationButton />
+		let closeButton = <Button className='close-notification'
+            type='flat' 
+            title='Close'>
+            ×
+        </Button>
 
 		let progressBar = null
 		if (this.props.type === 'progress') {

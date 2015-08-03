@@ -8,7 +8,8 @@
 }
 
 @function pow($base, $exponent, $prec: 12) {
-	// Handles decimal exponents by trying to convert them into a fraction and then use a nthRoot-algorithm for parts of the calculation
+	// Handles decimal exponents by trying to convert them into a fraction and 
+	// then use a nthRoot-algorithm for parts of the calculation
 	@if (floor($exponent) != $exponent) {
 		$prec2 : pow(10, $prec);
 		$exponent: round($exponent * $prec2);
