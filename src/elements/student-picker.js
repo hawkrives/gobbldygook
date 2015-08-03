@@ -85,8 +85,8 @@ export default class StudentPicker extends Component {
 
 				<StudentList
 					isEditing={this.state.isEditing}
-					students={this.props.students}
-					filter={this.state.studentFilter} />
+					filter={this.state.studentFilter}
+					students={this.props.students} />
 			</div>
 		)
 	}
