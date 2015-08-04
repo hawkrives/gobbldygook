@@ -33,7 +33,7 @@ export default class Sidebar extends Component {
 				<Toolbar className='student-buttons'>
 					<Button className='sidebar-btn'>
 						<Link to='/' >
-							<Icon name='ionicon-ios-list' type='block' />
+							<Icon name='ionicon-ios-list-outline' type='block' />
 							Students
 						</Link>
 					</Button>
@@ -44,7 +44,7 @@ export default class Sidebar extends Component {
 					</Button>
 					<Button className='sidebar-btn'>
 						<Link to='download' params={{id: this.props.student.id}}>
-							<Icon name='ionicon-ios-download' type='block' />
+							<Icon name='ionicon-ios-download-outline' type='block' />
 							Download
 						</Link>
 					</Button>
