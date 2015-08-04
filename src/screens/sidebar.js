@@ -56,13 +56,13 @@ export default class Sidebar extends Component {
 					<Button className='sidebar-btn'
 						onClick={studentActions.undo}
 						disabled={studentStore.history.size === 0}>
-						<Icon name='ionicon-ios-undo' type='block' />
+						<Icon name={`ionicon-ios-undo${studentStore.history.size === 0 ? '-outline' : ''}`} type='block' />
 						Undo
 					</Button>
 					<Button className='sidebar-btn'
 						onClick={studentActions.redo}
 						disabled={studentStore.future.size === 0}>
-						<Icon name='ionicon-ios-redo' type='block' />
+						<Icon name={`ionicon-ios-redo${studentStore.future.size === 0 ? '-outline' : ''}`} type='block' />
 						Redo
 					</Button>
 				</Toolbar>
