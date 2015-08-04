@@ -17,6 +17,7 @@
     "build": "webpack $npm_package_config_webpack",
     "build:areas": "./bin/compile-areas areas/ --out-dir dist/",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
+    "build:production": "webpack -p $npm_package_config_webpack",
     "clean": "rm -rf build/",
     "copy": "mkdirp build/ && cp -fR src/static/ build/ && ln -fs ../area-data/ build/areas",
     "cover": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- $npm_package_config_mocha",
