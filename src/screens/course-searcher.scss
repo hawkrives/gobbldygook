@@ -1,0 +1,60 @@
+.search-sidebar {
+	@include card;
+
+	position: sticky;
+	top: $page-edge-padding;
+
+	height: calc(100vh - #{$page-edge-padding * 2});
+	padding: 0.5rem;
+	overflow-y: scroll;
+
+	.search-box {
+		width: 100%;
+		box-sizing: inherit;
+		margin-bottom: 0.5rem;
+	}
+
+	.course-list {
+		@include list-unstyled;
+
+		.loading,
+		.no-results {
+			margin-top: 1em;
+			text-align: center;
+		}
+	}
+
+	.course-group {
+		font-weight: 500;
+		text-align: center;
+		display: block;
+
+		margin-top: 1rem;
+		margin-bottom: 0.5rem;
+	}
+}
+
+.close-sidebar {
+	min-height: 0;
+	padding: 0.5em 0.8em;
+
+	color: color('gray');
+	transition: 0.15s;
+}
+
+.sidebar-heading {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: baseline;
+	justify-content: space-between;
+	margin-bottom: 0.5em;
+
+	h1 {
+		flex: 1;
+		text-align: center;
+		font-size: 1.25em;
+		font-weight: 500;
+		margin: 0;
+		font-feature-settings: 'smcp';
+	}
+}

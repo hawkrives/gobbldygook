@@ -1,0 +1,103 @@
+.students-overview {
+	display: flex;
+	flex-direction: column;
+	max-width: 45em;
+	margin: 0 auto;
+}
+
+
+.student-list-toolbar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-around;
+
+	margin-bottom: 1em;
+}
+
+.student-list-filter,
+.student-list-buttons {
+	flex: 1;
+}
+
+.student-list-buttons {
+	display: flex;
+	justify-content: center;
+}
+
+.student-list--button {
+	padding-left: 1em;
+	padding-right: 1em;
+	margin: 0 0.25em;
+
+	.icon {
+		padding-bottom: 0.2em;
+	}
+}
+
+
+.student-list-item {
+	@include link-undecorated;
+	@include material-shadow(1, $filter: true);
+	border-radius: $base-border-radius;
+
+	&.is-selected {
+		outline: color('blue', '300') 2px solid;
+		background-color: color('blue', '50');
+	}
+
+	background-color: white;
+
+	display: flex;
+	align-items: center;
+
+	max-width: 35em;
+	margin: 0 auto 1.25em;
+	padding: 0.5em 0.5em;
+	position: relative;
+
+	transition: 0.15s;
+
+	cursor: pointer;
+}
+
+.student-list-item:hover {
+	transform: scale(1.05);
+}
+.student-list-item-info {
+	flex: 1;
+}
+
+.student-list-item-info .name {
+	line-height: 1.5;
+}
+
+.student-list-item-info .areas {
+	font-size: 0.8em;
+	font-feature-settings: 'smcp';
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.student-list-item-info .area-type .joiner {
+	vertical-align: baseline;
+	display: inline-block;
+
+	$joiner-spacing: 0.35em;
+	margin-left: $joiner-spacing;
+	margin-right: $joiner-spacing;
+}
+
+.student-list-item-actions {
+	flex: 0 1 auto;
+}
+
+.student-list-item--go {
+	margin-left: 0.25em;
+}
+
+.student-list-item .delete:hover {
+	border-color: color('red');
+	background-color: color('red', '50');
+}

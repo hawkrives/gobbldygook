@@ -1,0 +1,9 @@
+@import 'brightness';
+
+@function contrasting-color($color, $light, $dark) {
+    @if brightness($color) < 65% {
+        @return $light;
+    }
+
+    @return $dark;
+}

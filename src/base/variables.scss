@@ -1,0 +1,37 @@
+// colors
+$background-start-color: #eaeaea;
+$background-end-color: #dcdcdc;
+// $background: linear-gradient($background-start-color, $background-end-color);
+// $background: $background-start-color;
+// $background: color('gray', '200');
+$background: #e9eaed;
+
+$golden-black: #3C362A;
+$near-black: #2C281F;
+
+$text-color: $near-black;
+
+// fonts
+$sans-font-stack: 'Fira Sans', 'Helvetica', 'Verdana', sans-serif;
+$body-font-stack: $sans-font-stack;
+$heading-font-stack: $sans-font-stack;
+
+// spacing
+$page-edge-padding: 15px;
+$block-edge-padding: 5px;
+
+// z-indices
+$z-sidebar: 3;
+$z-floating-button: 2;
+
+// media queries
+$single-column-width: 35em;
+$year-collapse-width: 47.5em;
+
+$material-divider: 1px solid rgba(160, 160, 160, 0.2);
+$base-border-radius: 3px;
+
+// react-list-select
+$react-list-select-accent: color('blue', '200');
+$react-list-select-selected: color('blue', '50');
+$react-list-select-disabled: color('gray', '500');

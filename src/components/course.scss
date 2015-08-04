@@ -1,0 +1,146 @@
+.course {
+	.warnings {
+		font-size: 0.85em;
+		font-feature-settings: 'onum';
+		padding-bottom: 2px;
+	}
+
+	.warnings .list-item {
+		padding: 0.125em 0.35em;
+		border-radius: 0.25em;
+		background-color: color('amber', '500');
+	}
+	.warnings .list-item::before {
+		margin-right: 0.35em;
+	}
+
+	.title,
+	.summary {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	.title {
+		margin-top: 0;
+		margin-bottom: 0;
+		line-height: normal;
+		padding: 0;
+		padding-bottom: 1px;
+		font-size: 1em;
+		font-weight: 500;
+		font-family: $heading-font-stack;
+	}
+
+	.title,
+	.description {
+		font-feature-settings: 'onum';
+	}
+
+	.summary {
+		font-size: 0.75em;
+	}
+
+	.summary,
+	.info {
+		& > * + *::before {
+			content: " · ";
+		}
+	}
+
+	.identifier {
+		font-feature-settings: 'tnum';
+	}
+
+	p,
+	ul {
+		margin: 0;
+	}
+
+	.offerings > span {
+		display: block;
+	}
+
+	.gereqs {
+		@include list-inline;
+		display: inline;
+		li {
+			display: inline;
+		}
+		li + li::before {
+			content: " · ";
+		}
+	}
+
+	.tools {
+		border-top: $material-divider;
+		margin-top: 0.5em;
+		padding-top: 0.5em;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.remove-course {
+		color: color('red', '500');
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+		font-size: 0.85em;
+	}
+	.remove-course[disabled] {
+		color: color('gray', '500');
+	}
+
+	.offerings,
+	.description {
+		margin-bottom: 0.5em;
+	}
+
+	.info-wrapper {
+		display: flex;
+		.info-rows {
+			flex: 1;
+		}
+	}
+
+	.show-info {
+		display: none;
+	}
+
+	.is-selected & .show-info,
+	&.expanded .show-info {
+		display: block;
+		&:focus {
+			color: color('blue', '400');
+		}
+		padding: 0 0.5em;
+	}
+}
+
+.course.expanded {
+	color: $text-color;
+
+	.title {
+		overflow: visible;
+		white-space: normal;
+	}
+
+	.summary, .details {
+		font-size: 0.85em;
+	}
+}
+
+.course.empty {
+	color: color('gray', '500');
+	user-select: none;
+	cursor: default;
+
+	.title {
+		cursor: default;
+	}
+}
+
+.course.is-dragging {
+	opacity: 0.5;
+}

@@ -1,0 +1,92 @@
+@mixin button {
+	cursor: pointer;
+
+	display: inline-block;
+	min-height: 3ex;
+
+	padding: 1ex 2em;
+	border: 0;
+
+	transition: all .2s ease-out;
+	border-radius: $base-border-radius;
+	line-height: normal;
+
+	text-align: center;
+	text-transform: uppercase;
+
+	border: none;
+	outline: 0;
+
+	// Gets rid of tap active state
+	-webkit-tap-highlight-color: transparent;
+
+	a {
+		@include link-undecorated;
+	}
+}
+
+// Raised Button
+@mixin button--raised($color: 'white', $dark: false, $filter: false) {
+	@include button;
+	$bg-color: color($color, '500');
+	background-color: $bg-color;
+	color: contrasting-color($bg-color, $white, $black);
+
+	@include material-shadow(1, $filter);
+
+	&:hover, &:focus {
+		background-color: color($color, '600');
+	}
+	&:focus {
+		outline: color('blue', '300') 2px solid;
+	}
+
+	&:active {
+		@include material-shadow(2, $filter);
+		background-color: color($color, '700');
+	}
+
+	&[disabled] {
+		@include material-shadow(0);
+		cursor: default;
+		$accent: if($dark == true, 'dark', 'light');
+		background-color: color('disabled', 'background--#{$accent}');
+		color: color('disabled', 'foreground--#{$accent}');
+	}
+}
+
+.button--raised {
+	@include button--raised;
+}
+
+// Flat button
+@mixin button--flat($color: 'black') {
+	@include button;
+
+	color: color($color, '500');
+	background-color: transparent;
+
+	&:hover,
+	&:focus {
+		background-color: rgba(#999, 0.20);
+	}
+
+	&:active {
+		background-color: rgba(#999, 0.40);
+	}
+
+	&[disabled] {
+		cursor: default;
+		color: color('disabled', 'foreground--light');
+
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: transparent;
+		}
+	}
+}
+
+.button--flat {
+	@include button--flat;
+}

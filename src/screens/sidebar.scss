@@ -1,0 +1,40 @@
+.sidebar {
+	flex: 0 0 270px;
+	min-width: 270px;
+	margin-right: $page-edge-padding;
+}
+
+@media all and (max-width: $single-column-width) {
+	.sidebar {
+		margin-right: 0;
+		flex-basis: auto;
+	}
+}
+
+.student-buttons {
+	font-size: 0.85em;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+
+	margin-bottom: 0.5em;
+}
+
+.sidebar-btn {
+	flex: 1 0 auto;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+
+	$spacing: 0.5em;
+	margin-right: $spacing / 2;
+	margin-left: $spacing / 2;
+	margin-bottom: $spacing;
+
+	.icon {
+		font-size: 1.5em;
+	}
+}
+
+.is-hidden {
+	display: none;
+}

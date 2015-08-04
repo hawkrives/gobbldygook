@@ -1,0 +1,25 @@
+.progress-bar {
+    border: 1px solid currentColor;
+    border-radius: $base-border-radius;
+
+    .progress-bar--track {
+        background-color: white;
+    }
+
+    .progress-bar--value {
+        background-color: currentColor;
+    }
+
+    color: color('gray', '300');
+    &.hundred   { color: color('green',  '300'); }
+    &.ninety    { color: color('orange', '300'); }
+    &.eighty    { color: color('orange', '300'); }
+    &.seventy   { color: color('orange', '300'); }
+    &.sixty     { color: color('yellow', '700'); }
+    &.fifty     { color: color('yellow', '600'); }
+    &.forty     { color: color('yellow', '600'); }
+    &.thirty    { color: color('amber',  '500'); }
+    &.twenty    { color: color('red',    '300'); }
+    &.ten       { color: color('red',    '300'); }
+    &.under-ten { color: color('red',    '300'); }
+}
