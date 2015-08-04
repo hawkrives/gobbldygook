@@ -1,5 +1,5 @@
-// vendor components
-@import 'vendor/react-list-select';
+@import 'mixins/colors';
+@import 'mixins/color';
 
 // initial setup
 @import 'base/variables';
@@ -8,8 +8,6 @@
 // mixins
 @import 'mixins/avatar-letter';
 @import 'mixins/card';
-@import 'mixins/color';
-@import 'mixins/colors';
 @import 'mixins/heading-neutral';
 @import 'mixins/link-undecorated';
 @import 'mixins/list-inline';
@@ -45,3 +43,6 @@
 @import 'screens/semester-detail';
 @import 'screens/sidebar';
 @import 'screens/student';
+
+// vendor components
+@import 'vendor/react-list-select';
