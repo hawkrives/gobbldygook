@@ -1,10 +1,13 @@
 import map from 'lodash/collection/map'
 import flatten from 'lodash/array/flatten'
 import findIndex from 'lodash/array/findIndex'
+import compact from 'lodash/array/compact'
 import any from 'lodash/collection/any'
 import zip from 'lodash/array/zip'
 
-import {ordinal} from 'humanize-plus'
+import ordinal from 'ord'
+import humanizeList from 'humanize-list'
+import plur from 'plur'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {isTrue, expandYear, semesterName} from 'sto-helpers'
 
@@ -51,10 +54,11 @@ let checkForTimeConflicts = (courses) => {
 		}
 
 		if (any(conflictSet)) {
-			let conflictIndex = findIndex(conflictSet, isTrue)
-			conflictIndex += 1 // because humans don't 0-index lists
+			// +1 to the indices because humans don't 0-index lists
+			const conflicts = compact(map(conflictSet, (possibility, i) => isTrue(possibility) ? i + 1 : false))
+			const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
 			result.warning = true
-			result.msg = `Time conflict with the ${ordinal(conflictIndex)} course`
+			result.msg = `Time conflict with the ${humanizeList(conflicted, {oxfordComma: true})} ${plur('course', conflicts.length)}`
 		}
 
 		return result.warning ? result : null
