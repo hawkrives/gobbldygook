@@ -214,7 +214,8 @@ export default class Student extends StudentRecord {
 	// getters
 
 	get courses() {
-		const allCourses = this.activeSchedules
+		const allCourses = this.schedules
+			.filter(sched => sched.active)
 			.map((schedule) => schedule.courses)
 			.toArray()
 		const scheduleCoursePromises = Promise.all(allCourses)
