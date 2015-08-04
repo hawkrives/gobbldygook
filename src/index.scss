@@ -21,14 +21,21 @@
 // basic styles
 @import 'base/fonts';
 @import 'base/normalize';
+@import 'base/base';
 
 // components
+@import 'components/button';
+@import 'components/icon';
+@import 'components/list';
+@import 'components/loading';
+@import 'components/modal';
+@import 'components/progress-bar';
+
 @import 'components/area-of-study';
 @import 'components/area-of-study-group';
 @import 'components/course';
 @import 'components/expression';
 @import 'components/expression--course';
-@import 'components/loading';
 @import 'components/requirement';
 @import 'components/semester';
 @import 'components/student-list';
