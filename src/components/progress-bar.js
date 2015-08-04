@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
-import round from 'lodash/math/round'
 import {findWordForProgress} from 'sto-helpers'
 
 export default class ProgressBar extends Component {
@@ -16,7 +15,7 @@ export default class ProgressBar extends Component {
     }
 
     render() {
-        const width = round(this.props.value / this.props.max)
+        const width = 100 * (this.props.value / this.props.max)
         const progressWord = findWordForProgress(this.props.max, this.props.value)
         const classNames = cx('progress-bar',
             this.props.className,
