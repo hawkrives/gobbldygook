@@ -31,18 +31,18 @@ export default class Sidebar extends Component {
 		return (
 			<aside className='sidebar'>
 				<Toolbar className='student-buttons'>
-					<Button className='back sidebar-btn'>
+					<Button className='sidebar-btn'>
 						<Link to='/' >
 							<Icon name='ionicon-ios-list' type='block' />
 							Students
 						</Link>
 					</Button>
-					<Button className='search sidebar-btn'
+					<Button className='sidebar-btn'
 						onClick={this.toggleSearch}>
 						<Icon name='ionicon-ios-search' type='block' />
 						Search
 					</Button>
-					<Button>
+					<Button className='sidebar-btn'>
 						<Link to='download' params={{id: this.props.student.id}}>
 							<Icon name='ionicon-ios-download' type='block' />
 							Download
