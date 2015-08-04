@@ -1,10 +1,7 @@
 .progress-bar {
     border: 1px solid currentColor;
     border-radius: $base-border-radius;
-
-    .progress-bar--track {
-        background-color: white;
-    }
+    background-color: white;
 
     .progress-bar--value {
         background-color: currentColor;
