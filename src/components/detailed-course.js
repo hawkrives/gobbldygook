@@ -35,7 +35,7 @@ export default class DetailedCourse extends Component {
 
 		return (
 			<div>
-				<BasicCourse className='info-wrapper' info={course} />
+				<BasicCourse className='info-wrapper' info={course} onClick={this.props.onClick} />
 				<div className='details'>
 					<span className='professors'>
 						{oxford(course.instructors)}
