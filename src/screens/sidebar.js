@@ -53,13 +53,13 @@ export default class Sidebar extends Component {
 						<Icon name='ionicon-ios-rose' type='block' />
 						Demo
 					</Button>
-					<Button className='sidebar-btn' type='raised'
+					<Button className='sidebar-btn'
 						onClick={studentActions.undo}
 						disabled={studentStore.history.size === 0}>
 						<Icon name='ionicon-ios-undo' type='block' />
 						Undo
 					</Button>
-					<Button className='sidebar-btn' type='raised'
+					<Button className='sidebar-btn'
 						onClick={studentActions.redo}
 						disabled={studentStore.future.size === 0}>
 						<Icon name='ionicon-ios-redo' type='block' />
