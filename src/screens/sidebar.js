@@ -50,8 +50,8 @@ export default class Sidebar extends Component {
 					</Button>
 					<Button className='sidebar-btn'
 						onClick={() => studentActions.resetStudentToDemo(this.props.student.id)}>
-						<Icon name='ionicon-ios-analytics' type='block' />
-						Revert to Demo
+						<Icon name='ionicon-ios-rose' type='block' />
+						Demo
 					</Button>
 					<Button className='sidebar-btn' type='raised'
 						onClick={studentActions.undo}
