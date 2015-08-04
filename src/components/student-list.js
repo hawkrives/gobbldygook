@@ -79,7 +79,7 @@ export default class StudentList extends Component {
 			.toList()
 			.filter(s => fuzzysearch(this.props.filter, s.name.toLowerCase()))
 			.sortBy(s => s.dateLastModified)
-			.map(student => <StudentListItem key={student.id} student={student} />)
+			.map(student => <StudentListItem key={student.id} student={student} isEditing={this.props.isEditing} />)
 			.toArray()
 
 		return (
