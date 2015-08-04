@@ -16,7 +16,6 @@ import {
 	flatten,
 	startsWith} from 'lodash'
 
-import Promise from 'bluebird'
 import idbRange from 'idb-range'
 import {cmp as idbComparison} from 'treo'
 import {checkCourseAgainstQuery as checkAgainstQuery} from 'sto-helpers'

@@ -1,5 +1,3 @@
-import Promise from 'bluebird'
-
 function batchGet(keys) {
 	if (!keys.length) {
 		return Promise.resolve([])

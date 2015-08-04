@@ -1,4 +1,3 @@
-import Promise from 'bluebird'
 import Immutable from 'immutable'
 import flatten from 'lodash/array/flatten'
 import forEach from 'lodash/collection/forEach'
@@ -226,15 +225,23 @@ export default class Student extends StudentRecord {
 	// helpers
 
 	data() {
-		return Promise.props({
-			courses: this.courses,
-			creditsNeeded: this.creditsNeeded,
-			fabrications: this.fabrications.toList().toJS(),
-			graduation: this.graduation,
-			matriculation: this.matriculation,
-			overrides: this.overrides.toList().toJS(),
-			studies: this.studies.toList().toJS(),
-		})
+		return Promise.all([
+			this.courses,
+			this.creditsNeeded,
+			this.fabrications.toList().toJS(),
+			this.graduation,
+			this.matriculation,
+			this.overrides.toList().toJS(),
+			this.studies.toList().toJS(),
+		]).then(results => ({
+			courses: results[0],
+			creditsNeeded: results[1],
+			fabrications: results[2],
+			graduation: results[3],
+			matriculation: results[4],
+			overrides: results[5],
+			studies: results[6],
+		}))
 	}
 
 	encode() {

@@ -1,4 +1,3 @@
-import Promise from 'bluebird'
 import Immutable from 'immutable'
 import reject from 'lodash/collection/reject'
 import isUndefined from 'lodash/lang/isUndefined'

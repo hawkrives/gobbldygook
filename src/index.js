@@ -1,5 +1,4 @@
-import Promise from 'bluebird'
-Promise.longStackTraces()
+import 'lie/polyfill'
 
 import 'babel-core/polyfill'
 import 'whatwg-fetch'

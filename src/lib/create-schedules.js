@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import Promise from 'bluebird'
 import map from 'lodash/collection/map'
 import zipObject from 'lodash/array/zipObject'
 import findScheduleFromCourses from './find-schedule-from-courses'
@@ -20,8 +19,7 @@ export default function createSchedules(courses) {
 
 	console.log('started schedule building')
 	// let semesters = [findScheduleFromCourses(groupedCourses[1])]
-	return Promise
-		.settle(semesters)
+	return Promise.all(semesters)
 		.then(resultPromiseInspections => {
 			return map(resultPromiseInspections, promiseInspection => {
 				// check if was successful
@@ -39,5 +37,4 @@ export default function createSchedules(courses) {
 			console.log(`total results took ${performance.now() - start}ms`, results)
 			return results
 		})
-		.done()
 }
