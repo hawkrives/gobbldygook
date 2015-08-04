@@ -5,5 +5,5 @@
  * @returns {string} - the stringified path
  */
 export default function pathToOverride(path) {
-    return path.join('.').toLowerCase()
+	return path.join('.').toLowerCase()
 }

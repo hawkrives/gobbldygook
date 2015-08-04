@@ -21,7 +21,7 @@ import sortBy from 'lodash/collection/sortBy'
  * @returns {string} - the stringified, simplified course
  */
 function simplifyCourse(course) {
-    return `${sortBy(course.department).join('/')} ${course.number}`
+	return `${sortBy(course.department).join('/')} ${course.number}`
 }
 
 export default simplifyCourse

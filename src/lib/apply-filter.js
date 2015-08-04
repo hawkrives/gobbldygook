@@ -11,20 +11,20 @@ import has from 'lodash/object/has'
  * @returns {Course[]} filtered - the filtered courses
  */
 export default function applyFilter(expr, courses) {
-    // default to an empty array
-    let filtered = []
+	// default to an empty array
+	let filtered = []
 
-    // a filter will be either a where-style query or a list of courses
-    if (has(expr, '$where')) {
-        filtered = filterByWhereClause(courses, expr.$where)
-    }
-    else if (has(expr, '$of')) {
-        filtered = filter(expr.$of, course =>
-            checkForCourse(course, courses))
-    }
+	// a filter will be either a where-style query or a list of courses
+	if (has(expr, '$where')) {
+		filtered = filterByWhereClause(courses, expr.$where)
+	}
+	else if (has(expr, '$of')) {
+		filtered = filter(expr.$of, course =>
+			checkForCourse(course, courses))
+	}
 
-    // grab the matches
-    expr._matches = filtered
+	// grab the matches
+	expr._matches = filtered
 
-    return filtered
+	return filtered
 }

@@ -8,5 +8,5 @@ import pathToOverride from './path-to-override'
  * @returns {*} - the value of the override
  */
 export default function getOverride(path, overrides) {
-    return overrides[pathToOverride(path)]
+	return overrides[pathToOverride(path)]
 }

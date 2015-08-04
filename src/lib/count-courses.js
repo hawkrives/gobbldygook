@@ -10,5 +10,5 @@ import simplifyCourse from './simplify-course'
  * @returns {number} - the number of unique courses
  */
 export default function countCourses(courses) {
-    return size(uniq(courses, simplifyCourse))
+	return size(uniq(courses, simplifyCourse))
 }

@@ -8,5 +8,5 @@ import pluck from 'lodash/collection/pluck'
  * @returns {number} - the sum of the 'credits' properties
  */
 export default function countCredits(courses) {
-    return sum(pluck(courses, 'credits'))
+	return sum(pluck(courses, 'credits'))
 }

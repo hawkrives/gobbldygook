@@ -14,6 +14,6 @@ import simplifyCourse from './simplify-course'
  * @returns {Course[]} - the list of occurrences of that course
  */
 export default function getOccurrences(course, courses) {
-    const base = simplifyCourse(course)
-    return filter(courses, c => simplifyCourse(c) === base)
+	const base = simplifyCourse(course)
+	return filter(courses, c => simplifyCourse(c) === base)
 }

@@ -8,5 +8,5 @@ import getDepartments from './get-departments'
  * @returns {number} - the number of unique departments
  */
 export default function countDepartments(courses) {
-    return compact(getDepartments(courses)).length
+	return compact(getDepartments(courses)).length
 }

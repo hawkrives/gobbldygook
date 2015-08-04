@@ -38,8 +38,8 @@ export default async function checkStudentAgainstArea(student, area) {
 	const details = await Promise.resolve(evaluate(studentData, areaData))
 
 	const finalReqs = findLeafRequirements(details)
-    const maxProgress = finalReqs.length
-    const currentProgress = filter(finalReqs, {computed: true}).length
+	const maxProgress = finalReqs.length
+	const currentProgress = filter(finalReqs, {computed: true}).length
 
 	return {
 		...details,

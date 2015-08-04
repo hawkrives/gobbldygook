@@ -35,73 +35,73 @@ import stringify from 'json-stable-stringify'
  * @returns {boolean} - the result of the expression
  */
 export default function computeChunk({expr, ctx, courses, dirty}) {
-    if (typeof expr !== 'object') {
-        throw new TypeError(`computeChunk(): the expr \`${stringify(expr)}\` must be an object, not a ${typeof expr}`)
-    }
-    assertKeys(expr, '$type')
-    const type = expr.$type
+	if (typeof expr !== 'object') {
+		throw new TypeError(`computeChunk(): the expr \`${stringify(expr)}\` must be an object, not a ${typeof expr}`)
+	}
+	assertKeys(expr, '$type')
+	const type = expr.$type
 
-    let computedResult = false
-    let matches = undefined
-    let counted = undefined
+	let computedResult = false
+	let matches = undefined
+	let counted = undefined
 
-    if (type === 'boolean') {
-        ({computedResult, matches} = computeBoolean({expr, ctx, courses, dirty}))
-    }
-    else if (type === 'course') {
-        ({computedResult} = computeCourse({expr, courses, dirty}))
-    }
-    else if (type === 'modifier') {
-        ({computedResult, matches, counted} = computeModifier({expr, ctx, courses}))
-    }
-    else if (type === 'occurrence') {
-        ({computedResult, matches, counted} = computeOccurrence({expr, courses}))
-    }
-    else if (type === 'of') {
-        ({computedResult, matches, counted} = computeOf({expr, ctx, courses, dirty}))
-    }
-    else if (type === 'reference') {
-        ({computedResult, matches} = computeReference({expr, ctx}))
-    }
-    else if (type === 'where') {
-        ({computedResult, matches, counted} = computeWhere({expr, courses}))
-    }
-    else {
-        throw new TypeError(`computeChunk(): the type "${type}" is not a valid expression type.`)
-    }
+	if (type === 'boolean') {
+		({computedResult, matches} = computeBoolean({expr, ctx, courses, dirty}))
+	}
+	else if (type === 'course') {
+		({computedResult} = computeCourse({expr, courses, dirty}))
+	}
+	else if (type === 'modifier') {
+		({computedResult, matches, counted} = computeModifier({expr, ctx, courses}))
+	}
+	else if (type === 'occurrence') {
+		({computedResult, matches, counted} = computeOccurrence({expr, courses}))
+	}
+	else if (type === 'of') {
+		({computedResult, matches, counted} = computeOf({expr, ctx, courses, dirty}))
+	}
+	else if (type === 'reference') {
+		({computedResult, matches} = computeReference({expr, ctx}))
+	}
+	else if (type === 'where') {
+		({computedResult, matches, counted} = computeWhere({expr, courses}))
+	}
+	else {
+		throw new TypeError(`computeChunk(): the type "${type}" is not a valid expression type.`)
+	}
 
-    expr._result = computedResult
+	expr._result = computedResult
 
-    if (type !== 'course') {
-        if (matches !== undefined) {
-            expr._matches = matches
-        }
-        if (counted !== undefined) {
-            expr._counted = counted
-        }
-    }
+	if (type !== 'course') {
+		if (matches !== undefined) {
+			expr._matches = matches
+		}
+		if (counted !== undefined) {
+			expr._counted = counted
+		}
+	}
 
-    // No matter how specific the matched course is, be it just dept/num or
-    // all of dept/num/sect/year/sem, it still needs to resolve down to an
-    // equivalent of `crsid`. I've done that via `simplifyCourse`, which takes
-    // a course and returns a string of "DEPT NUM".
+	// No matter how specific the matched course is, be it just dept/num or
+	// all of dept/num/sect/year/sem, it still needs to resolve down to an
+	// equivalent of `crsid`. I've done that via `simplifyCourse`, which takes
+	// a course and returns a string of "DEPT NUM".
 
-    // Therefore, when we check a course, if it matches, we mark it as
-    // `_used`; otherwise, we leave it alone.
+	// Therefore, when we check a course, if it matches, we mark it as
+	// `_used`; otherwise, we leave it alone.
 
-    // If we marked it as dirty, then we also run it through simplifyCourse
-    // and add that to the `dirty` list, which is a Set.
+	// If we marked it as dirty, then we also run it through simplifyCourse
+	// and add that to the `dirty` list, which is a Set.
 
-    // When we finish processing each individual chunk, we will go through
-    // it's composite chunks. For any of the composite chunks that evaluated
-    // to `false`, we will go through it's composite parts, and remove all of
-    // the contained courses from `dirty`.
+	// When we finish processing each individual chunk, we will go through
+	// it's composite chunks. For any of the composite chunks that evaluated
+	// to `false`, we will go through it's composite parts, and remove all of
+	// the contained courses from `dirty`.
 
-    if (!computedResult) {
-        forEach(map(collectUsedCourses(expr), simplifyCourse), crsid => dirty.delete(crsid))
-    }
+	if (!computedResult) {
+		forEach(map(collectUsedCourses(expr), simplifyCourse), crsid => dirty.delete(crsid))
+	}
 
-    return computedResult
+	return computedResult
 }
 
 
@@ -114,28 +114,28 @@ export default function computeChunk({expr, ctx, courses, dirty}) {
  * @returns {boolean} - the result of the modifier
  */
 export function computeBoolean({expr, ctx, courses, dirty}) {
-    let computedResult = false
+	let computedResult = false
 
-    if (expr.hasOwnProperty('$or')) {
-        // we only want this to use the first "true" result. we don't need to
-        // continue to look after we find one, because this is an or-clause
-        const result = find(expr.$or, req => computeChunk({expr: req, ctx, courses, dirty}))
-        computedResult = Boolean(result)
-    }
+	if (expr.hasOwnProperty('$or')) {
+		// we only want this to use the first "true" result. we don't need to
+		// continue to look after we find one, because this is an or-clause
+		const result = find(expr.$or, req => computeChunk({expr: req, ctx, courses, dirty}))
+		computedResult = Boolean(result)
+	}
 
-    else if (expr.hasOwnProperty('$and')) {
-        const results = map(expr.$and, req => computeChunk({expr: req, ctx, courses, dirty}))
-        computedResult = every(results)
-    }
+	else if (expr.hasOwnProperty('$and')) {
+		const results = map(expr.$and, req => computeChunk({expr: req, ctx, courses, dirty}))
+		computedResult = every(results)
+	}
 
-    else {
-        throw new TypeError(`computeBoolean(): neither $or nor $and could be found in ${stringify(expr)}`)
-    }
+	else {
+		throw new TypeError(`computeBoolean(): neither $or nor $and could be found in ${stringify(expr)}`)
+	}
 
-    return {
-        computedResult,
-        matches: collectMatches(expr),
-    }
+	return {
+		computedResult,
+		matches: collectMatches(expr),
+	}
 }
 
 
@@ -147,23 +147,23 @@ export function computeBoolean({expr, ctx, courses, dirty}) {
  * @returns {boolean} - if the course was found or not
  */
 export function computeCourse({expr, courses, dirty}) {
-    assertKeys(expr, '$course')
-    const foundCourse = findCourse(expr.$course, courses)
+	assertKeys(expr, '$course')
+	const foundCourse = findCourse(expr.$course, courses)
 
-    if (!foundCourse) {
-        return {computedResult: false}
-    }
+	if (!foundCourse) {
+		return {computedResult: false}
+	}
 
-    const match = assign(expr.$course, foundCourse)
-    const crsid = simplifyCourse(match)
+	const match = assign(expr.$course, foundCourse)
+	const crsid = simplifyCourse(match)
 
-    if (dirty.has(crsid)) {
-        return {computedResult: false, match}
-    }
+	if (dirty.has(crsid)) {
+		return {computedResult: false, match}
+	}
 
-    dirty.add(crsid)
-    expr._used = true
-    return {computedResult: true, match}
+	dirty.add(crsid)
+	expr._used = true
+	return {computedResult: true, match}
 }
 
 
@@ -175,51 +175,51 @@ export function computeCourse({expr, courses, dirty}) {
  * @returns {boolean} - the result of the modifier
  */
 export function computeModifier({expr, ctx, courses}) {
-    assertKeys(expr, '$what', '$count', '$from')
-    const what = expr.$what
+	assertKeys(expr, '$what', '$count', '$from')
+	const what = expr.$what
 
-    if (what !== 'course' && what !== 'credit' && what !== 'department') {
-        throw new SyntaxError(`computeModifier(): "${what}" is not a valid source for a modifier`)
-    }
+	if (what !== 'course' && what !== 'credit' && what !== 'department') {
+		throw new SyntaxError(`computeModifier(): "${what}" is not a valid source for a modifier`)
+	}
 
-    let filtered = []
-    let numCounted = undefined
+	let filtered = []
+	let numCounted = undefined
 
-    // get matches
-    if (expr.$from === 'children') {
-        filtered = getMatchesFromChildren(expr, ctx)
-    }
+	// get matches
+	if (expr.$from === 'children') {
+		filtered = getMatchesFromChildren(expr, ctx)
+	}
 
-    else if (expr.$from === 'filter') {
-        filtered = getMatchesFromFilter(ctx)
-    }
+	else if (expr.$from === 'filter') {
+		filtered = getMatchesFromFilter(ctx)
+	}
 
-    else if (expr.$from === 'where') {
-        assertKeys(expr, '$where')
-        filtered = filterByWhereClause(courses, expr.$where)
-    }
+	else if (expr.$from === 'where') {
+		assertKeys(expr, '$where')
+		filtered = filterByWhereClause(courses, expr.$where)
+	}
 
-    filtered = map(filtered, course =>
-        course.hasOwnProperty('$course') ? course.$course : course)
+	filtered = map(filtered, course =>
+		course.hasOwnProperty('$course') ? course.$course : course)
 
-    // count things
-    if (what === 'course') {
-        numCounted = countCourses(filtered)
-    }
+	// count things
+	if (what === 'course') {
+		numCounted = countCourses(filtered)
+	}
 
-    else if (what === 'department') {
-        numCounted = countDepartments(filtered)
-    }
+	else if (what === 'department') {
+		numCounted = countDepartments(filtered)
+	}
 
-    else if (what === 'credit') {
-        numCounted = countCredits(filtered)
-    }
+	else if (what === 'credit') {
+		numCounted = countCredits(filtered)
+	}
 
-    return {
-        computedResult: numCounted >= expr.$count,
-        counted: numCounted,
-        matches: filtered,
-    }
+	return {
+		computedResult: numCounted >= expr.$count,
+		counted: numCounted,
+		matches: filtered,
+	}
 }
 
 
@@ -230,15 +230,15 @@ export function computeModifier({expr, ctx, courses}) {
  * @returns {boolean} - the result of the occurrence
  */
 export function computeOccurrence({expr, courses}) {
-    assertKeys(expr, '$course', '$count')
+	assertKeys(expr, '$course', '$count')
 
-    const filtered = getOccurrences(expr.$course, courses)
+	const filtered = getOccurrences(expr.$course, courses)
 
-    return {
-        computedResult: filtered.length >= expr.$count,
-        counted: filtered.length,
-        matches: filtered,
-    }
+	return {
+		computedResult: filtered.length >= expr.$count,
+		counted: filtered.length,
+		matches: filtered,
+	}
 }
 
 
@@ -251,32 +251,32 @@ export function computeOccurrence({expr, courses}) {
  * @returns {boolean} - the result of the of-expression
  */
 export function computeOf({expr, ctx, courses, dirty}) {
-    assertKeys(expr, '$of', '$count')
+	assertKeys(expr, '$of', '$count')
 
-    // Go through $of, incrementing count if result of the thing is true.
-    // takeWhile runs until it recieves a `false`, so we stop when
-    // count >= expr.$count
-    // let count = 0
-    // takeWhile(expr.$of, req => {
-    //     count += Number(computeChunk({expr: req, ctx, courses, dirty}))
-    //     return count < expr.$count
-    // })
-    // return {
-    //     computedResult: count >= expr.$count,
-    //     counted: count,
-    //     matches: collectMatches(expr),
-    // }
+	// Go through $of, incrementing count if result of the thing is true.
+	// takeWhile runs until it recieves a `false`, so we stop when
+	// count >= expr.$count
+	// let count = 0
+	// takeWhile(expr.$of, req => {
+	//     count += Number(computeChunk({expr: req, ctx, courses, dirty}))
+	//     return count < expr.$count
+	// })
+	// return {
+	//     computedResult: count >= expr.$count,
+	//     counted: count,
+	//     matches: collectMatches(expr),
+	// }
 
-    const evaluated = map(expr.$of, req =>
-        computeChunk({expr: req, ctx, courses, dirty}))
+	const evaluated = map(expr.$of, req =>
+		computeChunk({expr: req, ctx, courses, dirty}))
 
-    const truthy = compact(evaluated)
+	const truthy = compact(evaluated)
 
-    return {
-        computedResult: truthy.length >= expr.$count,
-        counted: truthy.length,
-        matches: collectMatches(expr),
-    }
+	return {
+		computedResult: truthy.length >= expr.$count,
+		counted: truthy.length,
+		matches: collectMatches(expr),
+	}
 }
 
 
@@ -287,23 +287,23 @@ export function computeOf({expr, ctx, courses, dirty}) {
  * @returns {boolean} - the result of the reference expression
  */
 export function computeReference({expr, ctx}) {
-    assertKeys(expr, '$requirement')
+	assertKeys(expr, '$requirement')
 
-    if (!(ctx.hasOwnProperty(expr.$requirement))) {
-        throw new ReferenceError(`computeReference(): the requirement "${expr.$requirement}" does not exist in the provided requirement context`)
-    }
+	if (!(ctx.hasOwnProperty(expr.$requirement))) {
+		throw new ReferenceError(`computeReference(): the requirement "${expr.$requirement}" does not exist in the provided requirement context`)
+	}
 
-    const target = ctx[expr.$requirement]
+	const target = ctx[expr.$requirement]
 
-    let resultObj = {computedResult: target.computed}
+	let resultObj = {computedResult: target.computed}
 
-    // this needs to be checked because of the possibility of message-only keys.
-    // they don't have a `result` key.
-    if (target.hasOwnProperty('result')) {
-        resultObj.matches = collectMatches(target.result)
-    }
+	// this needs to be checked because of the possibility of message-only keys.
+	// they don't have a `result` key.
+	if (target.hasOwnProperty('result')) {
+		resultObj.matches = collectMatches(target.result)
+	}
 
-    return resultObj
+	return resultObj
 }
 
 
@@ -314,13 +314,13 @@ export function computeReference({expr, ctx}) {
  * @returns {boolean} - the result of the where-expression
  */
 export function computeWhere({expr, courses}) {
-    assertKeys(expr, '$where', '$count')
+	assertKeys(expr, '$where', '$count')
 
-    const filtered = filterByWhereClause(courses, expr.$where)
+	const filtered = filterByWhereClause(courses, expr.$where)
 
-    return {
-        computedResult: filtered.length >= expr.$count,
-        matches: filtered,
-        counted: filtered.length,
-    }
+	return {
+		computedResult: filtered.length >= expr.$count,
+		matches: filtered,
+		counted: filtered.length,
+	}
 }

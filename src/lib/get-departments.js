@@ -9,5 +9,5 @@ import pluck from 'lodash/collection/pluck'
  * @returns {string[]} - the list of unique departments
  */
 export default function getDepartments(courses) {
-    return uniq(flatten(pluck(courses, 'department')))
+	return uniq(flatten(pluck(courses, 'department')))
 }

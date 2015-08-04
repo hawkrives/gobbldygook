@@ -39,7 +39,7 @@ rules:
 
   # stylistic issues
   new-cap: 0
-  indent: [1, 4]
+  indent: [1, tab]
   camelcase: 2
   comma-dangle: [1, 'always-multiline']
   comma-style: [1, last]

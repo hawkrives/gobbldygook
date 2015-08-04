@@ -7,9 +7,9 @@ import plur from 'plur'
  * @returns {string} - the pluralized type
  */
 export default function pluralizeArea(type) {
-    type = type.toLowerCase()
-    if (type === 'emphasis') {
-        return plur(type, 'emphases', 2)
-    }
-    return plur(type, 2)
+	type = type.toLowerCase()
+	if (type === 'emphasis') {
+		return plur(type, 'emphases', 2)
+	}
+	return plur(type, 2)
 }

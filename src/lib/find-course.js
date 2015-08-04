@@ -9,5 +9,5 @@ import compareCourseToCourse from './compare-course-to-course'
  * @returns {Course|undefined} - the found course
  */
 export default function findCourse(query, courses) {
-    return find(courses, (c) => compareCourseToCourse(query, c))
+	return find(courses, (c) => compareCourseToCourse(query, c))
 }

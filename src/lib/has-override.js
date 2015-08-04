@@ -9,5 +9,5 @@ import pathToOverride from './path-to-override'
  * @returns {boolean} - whether there is a matching path in the overrides list
  */
 export default function hasOverride(path, overrides) {
-    return has(overrides, pathToOverride(path))
+	return has(overrides, pathToOverride(path))
 }

@@ -49,8 +49,8 @@ class StudentListItem extends Component {
 							? <Button className='delete' type='raised'
 								onClick={(ev) => {
 									ev.preventDefault()
-									studentActions.destroyStudent(student.id)}
-								}>Delete</Button>
+									studentActions.destroyStudent(student.id)
+								}}>Delete</Button>
 							: null
 					}
 				</span>

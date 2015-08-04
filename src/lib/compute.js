@@ -9,45 +9,45 @@ import getOverride from './get-override'
 // sub-requirements and such.
 
 export default function compute(requirement, {path, courses=[], overrides={}, dirty=new Set()}) {
-    requirement = mapValues(requirement, (req, name) => {
-        if (isRequirementName(name)) {
-            return compute(req, {path: path.concat([name]), courses, overrides, dirty})
-        }
-        return req
-    })
+	requirement = mapValues(requirement, (req, name) => {
+		if (isRequirementName(name)) {
+			return compute(req, {path: path.concat([name]), courses, overrides, dirty})
+		}
+		return req
+	})
 
-    let computed = false
+	let computed = false
 
-    // Apply a filter to the set of courses
-    if (requirement.hasOwnProperty('filter')) {
-        courses = applyFilter(requirement.filter, courses)
-    }
+	// Apply a filter to the set of courses
+	if (requirement.hasOwnProperty('filter')) {
+		courses = applyFilter(requirement.filter, courses)
+	}
 
-    // Now check for results
-    if (requirement.hasOwnProperty('result')) {
-        if (requirement.result === '') {
-            throw new SyntaxError(`compute(): requirement.result must not be empty (in ${JSON.stringify(requirement)})`)
-        }
-        computed = computeChunk({expr: requirement.result, ctx: requirement, courses, dirty})
-    }
+	// Now check for results
+	if (requirement.hasOwnProperty('result')) {
+		if (requirement.result === '') {
+			throw new SyntaxError(`compute(): requirement.result must not be empty (in ${JSON.stringify(requirement)})`)
+		}
+		computed = computeChunk({expr: requirement.result, ctx: requirement, courses, dirty})
+	}
 
-    // or ask for an override
-    else if (requirement.hasOwnProperty('message')) {
-        // TODO: show a button to toggle overriding
-        computed = false
-    }
+	// or ask for an override
+	else if (requirement.hasOwnProperty('message')) {
+		// TODO: show a button to toggle overriding
+		computed = false
+	}
 
-    // or throw an error
-    else {
-        throw new TypeError('compute(): either `message` or `result` is required')
-    }
+	// or throw an error
+	else {
+		throw new TypeError('compute(): either `message` or `result` is required')
+	}
 
-    requirement.computed = computed
+	requirement.computed = computed
 
-    if (hasOverride(path, overrides)) {
-        requirement.overridden = true
-        requirement.computed = getOverride(path, overrides)
-    }
+	if (hasOverride(path, overrides)) {
+		requirement.overridden = true
+		requirement.computed = getOverride(path, overrides)
+	}
 
-    return requirement
+	return requirement
 }
