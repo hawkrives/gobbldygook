@@ -59,7 +59,7 @@ export default class DetailedCourse extends Component {
 					</select>
 					<Button className='remove-course'
 						onClick={this.removeFromSemester}
-						disabled={Boolean(this.props.schedule)}>
+						disabled={!Boolean(this.props.schedule)}>
 						Remove Course
 					</Button>
 				</div>
