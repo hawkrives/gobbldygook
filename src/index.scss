@@ -1,33 +1,47 @@
-@import 'functions';
-@import 'normalize';
-@import 'icons';
-@import 'fonts';
-@import 'mixins';
-@import 'variables';
+// vendor components
+@import 'vendor/react-list-select';
 
-@import 'react-list-select';
+// initial setup
+@import 'base/variables';
+@import 'base/functions';
 
-@import 'modal';
-@import 'list';
+// mixins
+@import 'mixins/avatar-letter';
+@import 'mixins/card';
+@import 'mixins/color';
+@import 'mixins/colors';
+@import 'mixins/heading-neutral';
+@import 'mixins/link-undecorated';
+@import 'mixins/list-inline';
+@import 'mixins/list-unstyled';
+@import 'mixins/loading-spinner';
+@import 'mixins/material-shadow';
+@import 'mixins/no-select';
+@import 'mixins/square';
+@import 'mixins/sr-only';
 
-@import 'area-of-study';
-@import 'area-of-study-group';
-@import 'expression--course';
-@import 'expression';
-@import 'requirement';
+// basic styles
+@import 'base/fonts';
+@import 'base/normalize';
 
-@import 'base';
-@import 'content';
-@import 'course';
-@import 'courseTable';
-@import 'graduationStatus';
-@import 'loading';
-@import 'notifications';
-@import 'searchButton';
-@import 'semester';
-@import 'semesterDetail';
-@import 'sidebar';
-@import 'student';
-@import 'studentList';
-@import 'studentSummary';
-@import 'year';
+// components
+@import 'components/area-of-study';
+@import 'components/area-of-study-group';
+@import 'components/course';
+@import 'components/expression';
+@import 'components/expression--course';
+@import 'components/loading';
+@import 'components/requirement';
+@import 'components/semester';
+@import 'components/student-list';
+@import 'components/student-summary';
+@import 'components/year';
+
+// screens
+@import 'screens/course-searcher';
+@import 'screens/course-table';
+@import 'screens/graduation-status';
+@import 'screens/notifications';
+@import 'screens/semester-detail';
+@import 'screens/sidebar';
+@import 'screens/student';

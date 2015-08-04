@@ -1,24 +1,20 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-class FakeCourse extends React.Component {
-	shouldComponentUpdate() {
-		return false
+export default class FakeCourse extends Component {
+	static propTypes = {
+		className: React.PropTypes.string.isRequired,
+		title: React.PropTypes.string.isRequired,
 	}
 
 	render() {
 		// console.log('FakeCourse#render')
-		let titleEl = <h1 className='title'>{this.props.title}</h1>
-		let details = <p className='summary'>no details</p>
-
-		return (<article className={`course ${this.props.className}`}>
-			<div className='info-rows'>{titleEl}{details}</div>
-		</article>)
+		return (
+			<article className={`course ${this.props.className}`}>
+				<div className='info-rows'>
+					<h1 className='title'>{this.props.title}</h1>
+					<p className='summary'>no details</p>
+				</div>
+			</article>
+		)
 	}
 }
-
-FakeCourse.propTypes = {
-	className: React.PropTypes.string.isRequired,
-	title: React.PropTypes.string.isRequired,
-}
-
-export default FakeCourse

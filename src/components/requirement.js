@@ -5,8 +5,7 @@ import keys from 'lodash/object/keys'
 import isRequirementName from '../lib/is-requirement-name'
 
 import Expression from './expression'
-
-// import './requirement.scss'
+import Button from './button'
 
 export default class Requirement extends Component {
     static propTypes = {
@@ -47,10 +46,12 @@ export default class Requirement extends Component {
         const children = childKeys.map(k => <Requirement key={k} name={k} {...this.props[k]} />)
 
         let override = (this.props.message && !this.props.result)
-            ? (<span className='requirement--override-buttons button-group'>
-                <button>Not yet…</button>
-                <button>Done!</button>
-            </span>)
+            ? (
+                <span className='requirement--override-buttons button-group'>
+                    <Button>Not yet…</Button>
+                    <Button>Done!</Button>
+                </span>
+            )
             : null
 
         return (

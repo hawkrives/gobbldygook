@@ -1,12 +1,15 @@
 import React, {Component, PropTypes} from 'react'
 import Immutable from 'immutable'
 import {Link} from 'react-router'
-import studentActions from '../flux/studentActions'
+
 import fuzzysearch from 'fuzzysearch'
+import identity from 'lodash/utility/identity'
+
+import studentActions from '../flux/student-actions'
+
 import Button from './button'
 import List from './list'
 import Icon from './icon'
-import identity from 'lodash/utility/identity'
 
 class StudentListItem extends Component {
 	static propTypes = {

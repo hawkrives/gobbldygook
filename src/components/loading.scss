@@ -1,0 +1,20 @@
+.loading… {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column nowrap;
+}
+
+.loading-spinner {
+	@include loading-spinner;
+}
+
+.loading-message {
+	font-weight: 300;
+	margin-top: 1em;
+	color: color('gray');
+
+	&.info    { color: color('green'); }
+	&.warning { color: color('orange'); }
+	&.error   { color: color('red'); }
+}

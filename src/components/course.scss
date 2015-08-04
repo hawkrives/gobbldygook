@@ -1,22 +1,21 @@
 .course {
 	.warnings {
-		@include list-unstyled;
 		font-size: 0.85em;
 		font-feature-settings: 'onum';
 		padding-bottom: 2px;
 	}
 
-	.warnings li {
-		display: inline-block;
+	.warnings .list-item {
 		padding: 0.125em 0.35em;
 		border-radius: 0.25em;
 		background-color: color('amber', '500');
 	}
-	.warnings li::before {
+	.warnings .list-item::before {
 		margin-right: 0.35em;
 	}
 
-	.title, .summary {
+	.title,
+	.summary {
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
@@ -33,14 +32,17 @@
 		font-family: $heading-font-stack;
 	}
 
-	.title, .description {
+	.title,
+	.description {
 		font-feature-settings: 'onum';
 	}
 
 	.summary {
 		font-size: 0.75em;
 	}
-	.summary, .info {
+
+	.summary,
+	.info {
 		& > * + *::before {
 			content: " · ";
 		}
@@ -50,7 +52,8 @@
 		font-feature-settings: 'tnum';
 	}
 
-	p, ul {
+	p,
+	ul {
 		margin: 0;
 	}
 
@@ -80,13 +83,14 @@
 	}
 
 	.remove-course {
-		@include button--flat('red');
+		color: color('red', '500');
 		padding-left: 0.5em;
 		padding-right: 0.5em;
 		font-size: 0.85em;
 	}
 
-	.offerings, .description {
+	.offerings,
+	.description {
 		margin-bottom: 0.5em;
 	}
 
@@ -101,10 +105,8 @@
 		display: none;
 	}
 
-	.is-selected & .show-info, &.expanded .show-info {
-		@include button--flat;
-		@include info-button;
-		// font-size: 0.85em;
+	.is-selected & .show-info,
+	&.expanded .show-info {
 		&:focus {
 			color: color('blue', '400');
 		}
@@ -113,7 +115,6 @@
 }
 
 .course.expanded {
-	// background-color: color('gray', '50');
 	color: $text-color;
 
 	.title {

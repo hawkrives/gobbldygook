@@ -1,11 +1,7 @@
-import React from 'react'
-import FakeCourse from './fakeCourse'
+import React, {Component} from 'react'
+import FakeCourse from './fake-course'
 
-class EmptyCourseSlot extends React.Component {
-	shouldComponentUpdate() {
-		return false
-	}
-
+class EmptyCourseSlot extends Component {
 	render() {
 		// console.log('EmptyCourseSlot#render')
 		return <FakeCourse title='Empty Slot' className='empty' />

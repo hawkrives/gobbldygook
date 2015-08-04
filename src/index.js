@@ -9,8 +9,8 @@ React.initializeTouchEvents(true)
 
 import './index.scss'
 
-import './helpers/bindKeys'
-import './startThings/startNotifications'
-import './startThings/startGlobalPollution'
-import './startThings/startDataLoading'
-import './startThings/startRouter'
+import './start-things/bind-keys'
+import './start-things/start-notifications'
+import './start-things/start-global-pollution'
+import './start-things/start-data-loading'
+import './start-things/start-router'

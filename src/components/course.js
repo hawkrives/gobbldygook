@@ -1,22 +1,23 @@
-import filter from 'lodash/collection/filter'
-import map from 'lodash/collection/map'
-import compact from 'lodash/array/compact'
-import isNull from 'lodash/lang/isNull'
-import React from 'react'
+import React, {PropTypes} from 'react'
 import cx from 'classnames'
+import compact from 'lodash/array/compact'
+import filter from 'lodash/collection/filter'
+import isNull from 'lodash/lang/isNull'
+import map from 'lodash/collection/map'
 import {DragDropMixin} from 'react-dnd'
 
-import itemTypes from '../models/itemTypes'
+import itemTypes from '../models/item-types'
 
-import ExpandedCourse from './expandedCourse'
-import CollapsedCourse from './collapsedCourse'
+import List from './list'
+import DetailedCourse from './detailed-course'
+import BasicCourse from './basic-course'
 
 let Course = React.createClass({
 	propTypes: {
-		conflicts: React.PropTypes.array,
-		index: React.PropTypes.number,
-		info: React.PropTypes.object.isRequired,
-		schedule: React.PropTypes.object,
+		conflicts: PropTypes.array,
+		index: PropTypes.number,
+		info: PropTypes.object.isRequired,
+		schedule: PropTypes.object,
 	},
 
 	mixins: [DragDropMixin],
@@ -26,11 +27,10 @@ let Course = React.createClass({
 			registerType(itemTypes.COURSE, {
 				dragSource: {
 					beginDrag(component) {
-						let {props} = component
-						let scheduleId = props.schedule ? props.schedule.id : null
+						let scheduleId = component.props.schedule ? component.props.schedule.id : null
 						return {
 							item: {
-								clbid: props.info.clbid,
+								clbid: component.props.info.clbid,
 								fromSchedule: scheduleId,
 							},
 						}
@@ -47,35 +47,27 @@ let Course = React.createClass({
 	},
 
 	getInitialState() {
-		return {
-			isOpen: false,
-		}
-	},
-
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextProps.info.clbid !== this.props.info.clbid ||
-			nextState.isOpen !== this.state.isOpen
+		return {isOpen: false}
 	},
 
 	toggleExpanded() {
-		// console.log(this.state.isOpen ? 'collapse' : 'expand')
-		this.setState({
-			isOpen: !this.state.isOpen,
-		})
+		this.setState({isOpen: !this.state.isOpen})
 	},
 
 	render() {
 		// console.log('Course#render')
 		let isDragging = this.getDragState(itemTypes.COURSE).isDragging
 
-		let InnerCourse = this.state.isOpen ? ExpandedCourse : CollapsedCourse
+		let InnerCourse = this.state.isOpen
+			? DetailedCourse
+			: BasicCourse
 
-		let warnings = this.props.conflicts[this.props.index]
+		let warnings = this.props.conflicts[this.props.index || 0]
 		let hasWarnings = compact(warnings).length
 
 		const validWarnings = filter(warnings, w => !isNull(w) && w.warning === true)
 		const warningEls = map(validWarnings, (w, index) =>
-			<li className={w.className} key={index}>{w.msg}</li>)
+			<span className={w.className} key={index}>{w.msg}</span>)
 
 		let classSet = cx('course', {
 			expanded: this.state.isOpen,
@@ -83,11 +75,15 @@ let Course = React.createClass({
 			'is-dragging': isDragging,
 		})
 
-		return (<article className={classSet} {...this.dragSourceFor(itemTypes.COURSE)}>
-			<InnerCourse {...this.props} onClick={this.toggleExpanded}>
-				{warningEls.length ? <ul className='warnings'>{warningEls}</ul> : null}
-			</InnerCourse>
-		</article>)
+		return (
+			<article className={classSet} {...this.dragSourceFor(itemTypes.COURSE)}>
+				<InnerCourse {...this.props} onClick={this.toggleExpanded}>
+					{warningEls.length
+						? <List type='inline' className='warnings'>{warningEls}</List>
+						: null}
+				</InnerCourse>
+			</article>
+		)
 	},
 })
 

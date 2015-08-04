@@ -70,8 +70,6 @@ $semester-edge-padding: ($block-edge-padding) ($block-edge-padding * 1.5);
 }
 
 .add-semester {
-	@include add-button;
-	@include button--raised;
 	padding: 0;
 
 	min-width: 48px;
@@ -85,8 +83,13 @@ $semester-edge-padding: ($block-edge-padding) ($block-edge-padding * 1.5);
 }
 
 .remove-semester {
-	@include remove-button;
-	@include button--flat;
+	opacity: 0.5;
+	transition: 0.15s;
+
+	&:hover {
+		color: $red;
+		opacity: 1;
+	}
 
 	padding: 0 0.5em;
 	min-height: 0;

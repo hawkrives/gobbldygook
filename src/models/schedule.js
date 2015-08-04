@@ -1,3 +1,4 @@
+import Promise from 'bluebird'
 import Immutable from 'immutable'
 import reject from 'lodash/collection/reject'
 import isUndefined from 'lodash/lang/isUndefined'
@@ -6,12 +7,11 @@ import filter from 'lodash/collection/filter'
 import identity from 'lodash/utility/identity'
 import pluck from 'lodash/collection/pluck'
 import some from 'lodash/collection/some'
-import Promise from 'bluebird'
 import {v4 as uuid} from 'node-uuid'
 
 import {randomChar, isTrue} from 'sto-helpers'
-import getCourses from '../helpers/getCourses'
-import findWarnings from '../helpers/findCourseWarnings'
+import getCourses from '../lib/get-courses'
+import findWarnings from '../lib/find-course-warnings'
 
 const ScheduleRecord = Immutable.Record({
 	id: uuid(),
@@ -24,7 +24,7 @@ const ScheduleRecord = Immutable.Record({
 	_courseData: Promise.resolve(Immutable.List()),
 })
 
-class Schedule extends ScheduleRecord {
+export default class Schedule extends ScheduleRecord {
 	constructor(data={}) {
 		// console.log('schedule constructor')
 		super(data)
@@ -139,5 +139,3 @@ class Schedule extends ScheduleRecord {
 		}
 	}
 }
-
-export default Schedule

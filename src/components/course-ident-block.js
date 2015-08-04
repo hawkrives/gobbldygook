@@ -1,23 +1,17 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 
-export default class CourseIdentBlock extends React.Component {
+export default class CourseIdentBlock extends Component {
 	static propTypes = {
-		dept: React.PropTypes.string.isRequired,
-		num: React.PropTypes.number.isRequired,
-		section: React.PropTypes.string,
-	}
-
-	shouldComponentUpdate(nextProps) {
-		return (
-			this.props.dept !== nextProps.dept &&
-			this.props.num !== nextProps.num &&
-			this.props.section !== nextProps.section
-		)
+		dept: PropTypes.string.isRequired,
+		num: PropTypes.number.isRequired,
+		section: PropTypes.string,
 	}
 
 	render() {
-		return (<span className='identifier'>
-			{this.props.dept} {this.props.num}{this.props.section || ''}
-		</span>)
+		return (
+			<span className='identifier'>
+				{this.props.dept} {this.props.num}{this.props.section || ''}
+			</span>
+		)
 	}
 }

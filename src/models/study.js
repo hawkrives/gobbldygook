@@ -1,12 +1,12 @@
 import Immutable from 'immutable'
-
-import {status, text} from '../helpers/fetchHelpers'
 import yaml from 'js-yaml'
+import kebabCase from 'lodash/string/kebabCase'
+import debug from 'debug'
+
+import {status, text} from '../lib/fetch-helpers'
 import enhanceHanson from '../lib/enhance-hanson'
 import pluralizeArea from '../lib/pluralize-area'
-import kebabCase from 'lodash/string/kebabCase'
 
-import debug from 'debug'
 const migrationLog = debug('gobbldygook:data-migration:study')
 
 export async function loadArea({name, type}) {

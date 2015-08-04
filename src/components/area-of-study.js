@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 
 import Requirement from './requirement'
-
-// import './area.scss'
+import ProgressBar from './progress-bar'
 
 export default class AreaOfStudy extends Component {
     static propTypes = {
@@ -35,8 +34,7 @@ export default class AreaOfStudy extends Component {
             <details className='area'>
                 <summary className='area--summary'>
                     <h1 className='area--title'>{this.props.name}</h1>
-                    <progress
-                        className={`area--progress ${this.props._progress.word}`}
+                    <ProgressBar className='area--progress' colorful
                         value={this.props._progress.at}
                         max={this.props._progress.of} />
                 </summary>

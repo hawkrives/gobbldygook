@@ -1,19 +1,11 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 
-export default class CourseTitle extends React.Component {
+export default class CourseTitle extends Component {
 	static propTypes = {
-		name: React.PropTypes.string.isRequired,
-		onClick: React.PropTypes.func,
-		title: React.PropTypes.string,
-		type: React.PropTypes.string,
-	}
-
-	static defaultProps = {
-		onClick() {},
-	}
-
-	shouldComponentUpdate(nextProps) {
-		return this.props.name !== nextProps.name && this.props.title !== nextProps.title
+		name: PropTypes.string.isRequired,
+		onClick: PropTypes.func,
+		title: PropTypes.string,
+		type: PropTypes.string,
 	}
 
 	render() {
@@ -35,5 +27,3 @@ export default class CourseTitle extends React.Component {
 		return <h1 className='title'>{courseName}</h1>
 	}
 }
-
-export default CourseTitle

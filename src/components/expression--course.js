@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-// import './expression-course.scss'
 import cx from 'classnames'
 
 export default class CourseExpression extends Component {

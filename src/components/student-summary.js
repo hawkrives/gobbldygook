@@ -1,32 +1,33 @@
-import React from 'react'
-import Immutable from 'immutable'
+import React, {Component, PropTypes} from 'react'
 import oxford from 'humanize-list'
 import plur from 'plur'
 
 import AutosizeInput from 'react-input-autosize'
 
-import studentActions from '../flux/studentActions'
+import studentActions from '../flux/student-actions'
+import Student from '../models/student'
 
 const goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
 const badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
-export default class StudentSummary extends React.Component {
+export default class StudentSummary extends Component {
 	static propTypes = {
-		graduatability: React.PropTypes.bool.isRequired,
-		student: React.PropTypes.instanceOf(Immutable.Record).isRequired,
+		graduatability: PropTypes.bool.isRequired,
+		student: PropTypes.instanceOf(Student).isRequired,
 	}
 
 	render() {
-		// console.log('StudentSummary#render')
 		const canGraduate = this.props.graduatability
 		const student = this.props.student
 		const studies = student.studies
 
 		const name = student.name
 		const studentId = student.id
-		const NameEl = (<input className='autosize-input'
-			defaultValue={name}
-			onChange={ev => studentActions.changeName(studentId, ev.target.value.trim())} />)
+		const NameEl = (
+			<AutosizeInput className='autosize-input'
+				defaultValue={name}
+				onChange={ev => studentActions.changeName(studentId, ev.target.value.trim())} />
+		)
 
 		const degrees = studies.filter(s => s.type === 'degree')
 		const majors = studies.filter(s => s.type === 'major')
@@ -48,34 +49,40 @@ export default class StudentSummary extends React.Component {
 		const concentrationEl = oxford(concentrations.map(s => s.name).toArray())
 		const emphasisEl = oxford(emphases.map(s => s.name).toArray())
 
-		const graduationEl = (<AutosizeInput
-			className='autosize-input'
-			value={String(student.graduation)}
-			onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value || 0))} />)
+		const graduationEl = (
+			<AutosizeInput
+				className='autosize-input'
+				value={String(student.graduation)}
+				onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value || 0))} />
+		)
 
-		const sinceMatriculationEl = (<AutosizeInput
-			className='autosize-input'
-			value={String(student.matriculation)}
-			onChange={ev => studentActions.changeMatriculation(studentId, parseInt(ev.target.value || 0))} />)
+		const sinceMatriculationEl = (
+			<AutosizeInput
+				className='autosize-input'
+				value={String(student.matriculation)}
+				onChange={ev => studentActions.changeMatriculation(studentId, parseInt(ev.target.value || 0))} />
+		)
 
-		return (<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
-			<header>
-				<div id='student-letter'>{name.length ? name[0] : ''}</div>
-				<p>Hi, {NameEl}</p>
-			</header>
-			<div className='content'>
-				<p>
-					You are planning on graduating in {graduationEl},
-					{' '} after matriculating in {sinceMatriculationEl}, with {' '}
-					{(degrees.size > 0) ? `${degreeEmphasizer}${degreeEl} ${degreeWord}` : `no ${degreeWord}`}
-					{(majors.size > 0) ? `, ${majorEmphasizer}${majorWord} in ${majorEl}` : null}
-					{(concentrations.size > 0) ? `, and ${concentrationEmphasizer}${concentrationWord} in ${concentrationEl}` : null}
-					{(emphases.size > 0) ? `, not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisEl}` : null}{"."}
-				</p>
-				<p className='graduation-message'>
-					{canGraduate ? goodGraduationMessage : badGraduationMessage}
-				</p>
-			</div>
-		</article>)
+		return (
+			<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
+				<header>
+					<div id='student-letter'>{name.length ? name[0] : ''}</div>
+					<p>Hi, {NameEl}</p>
+				</header>
+				<div className='content'>
+					<p>
+						You are planning on graduating in {graduationEl},
+						{' '} after matriculating in {sinceMatriculationEl}, with {' '}
+						{(degrees.size > 0) ? `${degreeEmphasizer}${degreeEl} ${degreeWord}` : `no ${degreeWord}`}
+						{(majors.size > 0) ? `, ${majorEmphasizer}${majorWord} in ${majorEl}` : null}
+						{(concentrations.size > 0) ? `, and ${concentrationEmphasizer}${concentrationWord} in ${concentrationEl}` : null}
+						{(emphases.size > 0) ? `, not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisEl}` : null}{"."}
+					</p>
+					<p className='graduation-message'>
+						{canGraduate ? goodGraduationMessage : badGraduationMessage}
+					</p>
+				</div>
+			</article>
+		)
 	}
 }

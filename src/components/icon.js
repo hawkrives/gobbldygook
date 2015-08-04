@@ -756,7 +756,10 @@ export default class Icon extends Component {
 	}
 
 	render() {
-		const style = {display: this.props.type === 'inline' ? 'inline-block' : 'block'}
+		const style = {
+			display: this.props.type === 'inline' ? 'inline-block' : 'block',
+		}
+
 		return (
 			<span
 				className={cx('icon', this.props.className)}

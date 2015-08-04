@@ -1,9 +1,8 @@
-import React from 'react'
-import FakeCourse from './fakeCourse'
+import React, {Component} from 'react'
+import FakeCourse from './fake-course'
 
-export default class MissingCourse extends React.Component {
+export default class MissingCourse extends Component {
 	render() {
-		// console.log('MissingCourse#render')
 		return <FakeCourse title='Missing Slot' className='missing' />
 	}
 }

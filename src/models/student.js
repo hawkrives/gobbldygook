@@ -5,19 +5,18 @@ import forEach from 'lodash/collection/forEach'
 import omit from 'lodash/object/omit'
 import {v4 as uuid} from 'node-uuid'
 import stringify from 'json-stable-stringify'
+import present from 'present'
 
 import {version as currentVersionString} from '../../package.json'
+import {studentChangelog as changelog} from '../lib/logger'
+import checkGraduatability from '../lib/check-student-graduatability'
 
-import {randomChar, countCredits} from 'sto-helpers'
+import {randomChar} from 'sto-helpers'
 
 import Schedule from './schedule'
 import Study from './study'
 
-import checkStudentGraduatability from '../helpers/checkStudentGraduatability'
 
-import present from 'present'
-import debug from 'debug'
-const changelog = debug('gobbldygook:model:student:changes')
 
 const now = new Date()
 const StudentRecord = Immutable.Record({
@@ -113,22 +112,11 @@ export default class Student extends StudentRecord {
 	}
 
 	get graduatability() {
-		return checkStudentGraduatability(this)
+		return checkGraduatability(this)
 	}
 
 
 	// schedule methods
-
-	get schedulesByYear() {
-		return this.schedules
-			.groupBy(sched => sched.year)
-	}
-
-	get activeSchedules() {
-		return this.schedules
-			.filter(sched => sched.active)
-			.sortBy(sched => sched.semester)
-	}
 
 	addSchedule(newSchedule) {
 		const sched = new Schedule(newSchedule)
@@ -176,10 +164,6 @@ export default class Student extends StudentRecord {
 
 
 	// area-of-study methods
-
-	get areasByType() {
-		return this.studies.groupBy(study => study.type || 'Unknown')
-	}
 
 	addArea(areaOfStudy) {
 		const study = new Study(areaOfStudy)
@@ -235,10 +219,6 @@ export default class Student extends StudentRecord {
 			.toArray()
 		const scheduleCoursePromises = Promise.all(allCourses)
 		return scheduleCoursePromises.then((scheduleCourses) => flatten(scheduleCourses))
-	}
-
-	get creditCount() {
-		return this.courses.then(countCredits)
 	}
 
 

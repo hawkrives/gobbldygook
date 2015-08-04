@@ -4,6 +4,7 @@ import capitalize from 'lodash/string/capitalize'
 
 import {List as ImmutableList} from 'immutable'
 
+import Button from './button'
 import AreaOfStudy from './area-of-study'
 
 export default class AreaOfStudyGroup extends Component {
@@ -17,7 +18,9 @@ export default class AreaOfStudyGroup extends Component {
 			<section key={this.props.type} className='area-of-study-group'>
 				<h1 className='area-type-heading'>
 					{capitalize(pluralizeArea(this.props.type))}
-					<button className='add-area-of-study'>Add</button>
+					<Button className='add-area-of-study' type='flat'>
+						Add
+					</Button>
 				</h1>
 
 				{this.props.areas.map(area =>

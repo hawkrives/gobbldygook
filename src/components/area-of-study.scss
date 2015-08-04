@@ -58,20 +58,6 @@
 	width: 99%;
 	height: 4px;
 	margin: 0 auto;
-	border-radius: 2px;
-
-	@include progress-track('gray');
-	&.hundred   { @include progress-track(color('green',  '300')) }
-	&.ninety    { @include progress-track(color('orange', '300')) }
-	&.eighty    { @include progress-track(color('orange', '300')) }
-	&.seventy   { @include progress-track(color('orange', '300')) }
-	&.sixty     { @include progress-track(color('yellow', '700')) }
-	&.fifty     { @include progress-track(color('yellow', '600')) }
-	&.forty     { @include progress-track(color('yellow', '600')) }
-	&.thirty    { @include progress-track(color('amber',  '500')) }
-	&.twenty    { @include progress-track(color('red',    '300')) }
-	&.ten       { @include progress-track(color('red',    '300')) }
-	&.under-ten { @include progress-track(color('red',    '300')) }
 
 	.area--summary:focus &,
 	.area--summary:active & {

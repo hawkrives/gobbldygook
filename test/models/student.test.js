@@ -94,10 +94,6 @@ describe('Student', () => {
 		})
 	})
 	describe('areas', () => {
-		it('can get areas grouped by type', () => {
-			const stu = new Student(demoStudent)
-			expect(stu.areasByType).to.be.an.instanceof(Immutable.Map)
-		})
 		it('supports adding areas', () => {
 			const stu = new Student(demoStudent)
 			let newArea = stu.addArea({name: 'Exercise Science', type: 'major', revision: '2014-15'})
@@ -139,17 +135,6 @@ describe('Student', () => {
 		})
 	})
 	describe('schedules', () => {
-		it('supports grouping schedules by year', () => {
-			const stu = new Student(demoStudent)
-			expect(stu.schedulesByYear).to.be.an.instanceof(Immutable.Map)
-		})
-
-		it('supports only returning the active schedules', () => {
-			const stu = new Student(demoStudent)
-			expect(stu.activeSchedules).to.be.an.instanceof(Immutable.Map)
-			expect(typeof stu.activeSchedules).to.equal('object')
-		})
-
 		it('supports adding schedules', () => {
 			const stu = new Student(demoStudent)
 			let newSchedule = stu.addSchedule({id: 10912, title: 'a'})

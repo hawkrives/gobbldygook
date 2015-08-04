@@ -2,10 +2,6 @@ $year-title-size: 2em;
 $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75.
 
 .add-year {
-	@include add-button($psuedo: '::before') {
-		margin-right: 0.5em;
-	};
-	@include button--raised;
 	font-feature-settings: 'tnum';
 
 	display: block;
@@ -17,8 +13,14 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 }
 
 .remove-year {
-	@include remove-button;
-	@include button--flat;
+	opacity: 0.5;
+	transition: 0.15s;
+
+	&:hover {
+		color: $red;
+		opacity: 1;
+	}
+
 	@media all and (min-width: $year-collapse-width) {
 		padding-top: 0;
 		padding-bottom: 0;
