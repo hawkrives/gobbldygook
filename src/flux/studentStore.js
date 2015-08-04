@@ -12,6 +12,8 @@ import demoStudent from '../models/demoStudent.json'
 import studentActions from '../flux/studentActions'
 import notificationActions from '../flux/notificationActions'
 
+import parseSIS from '../lib/sis-parsing/parse-sis'
+
 function cleanLocalStorage() {
 	localStorage.removeItem('activeStudentId')
 	localStorage.removeItem('student-v3.0a6')
@@ -60,6 +62,7 @@ const studentStore = Reflux.createStore({
 	_postChange() {
 		// console.log('students', this.students)
 		this.students.forEach(student => student.save())
+		this._saveStudentIds()
 		this.trigger(this.students)
 	},
 
@@ -82,6 +85,10 @@ const studentStore = Reflux.createStore({
 		if (!(inMemory.equals(onDisk))) {
 			this._loadData()
 		}
+	},
+
+	_saveStudentIds() {
+		localStorage.setItem('studentIds', stringify(this.students.map(s => s.id).toArray()))
 	},
 
 	_loadData(studentId) {
@@ -142,9 +149,6 @@ const studentStore = Reflux.createStore({
 				return fleshedStudent
 			})
 
-		// Update the studentIds list from the current list of students
-		localStorage.setItem('studentIds', stringify(localStudents.map(s => s.id).toArray()))
-
 		// Add them to students
 		this.students = this.students.withMutations(students => {
 			localStudents.forEach(localStudent => {
@@ -152,6 +156,9 @@ const studentStore = Reflux.createStore({
 			})
 			return students
 		})
+
+		// Update the studentIds list from the current list of students
+		this._saveStudentIds()
 
 		// Clean up localStorage
 		cleanLocalStorage()
@@ -166,21 +173,56 @@ const studentStore = Reflux.createStore({
 		this._loadData(fleshedStudent.id)
 	},
 
-	importStudent(rawStudent) {
-		let stu = undefined
-		try {
-			stu = JSON.parse(rawStudent)
-		}
-		catch (err) {
-			console.error('Error parsing as JSON', rawStudent, err)
-		}
+	importStudent({data, type}) {
+		if (type === 'application/json') {
+			let stu = undefined
+			try {
+				stu = JSON.parse(data)
+			}
+			catch (err) {
+				throw err
+			}
 
-		if (stu) {
-			this._preChange()
-			const fleshedStudent = new Student(stu)
-			fleshedStudent.save()
-			this._loadData(fleshedStudent.id)
+			if (stu) {
+				this._preChange()
+				const fleshedStudent = new Student(stu)
+				fleshedStudent.save()
+				this._loadData(fleshedStudent.id)
+			}
 		}
+		else if (type === 'text/html') {
+			const parser = new DOMParser()
+			let html
+			try {
+				html = parser.parseFromString(data, 'text/html')
+			}
+			catch (err) {
+				throw err
+			}
+
+			let stu
+			try {
+				stu = parseSIS(html)
+			}
+			catch (err) {
+				throw err
+			}
+
+			if (stu) {
+				this._preChange()
+				const fleshedStudent = new Student(stu)
+				fleshedStudent.save()
+				this._loadData(fleshedStudent.id)
+			}
+		}
+	},
+
+	destroyStudent(studentId) {
+		this._preChange()
+		this.students = this.students.filterNot(s => s.id === studentId)
+		localStorage.removeItem(studentId)
+		this._saveStudentIds()
+		this._postChange()
 	},
 
 	_change(studentId, method, ...args) {
@@ -206,7 +248,7 @@ const studentStore = Reflux.createStore({
 	addFabrication(studentId, ...args)           { this._change(studentId, 'addArea',                  ...args) },
 	addOverride(studentId, ...args)              { this._change(studentId, 'addSchedule',              ...args) },
 	removeArea(studentId, ...args)               { this._change(studentId, 'removeArea',               ...args) },
-	removeMultipleAreas(studentId, ...args)      { this._change(studentId, 'removeMultipleAreas',       ...args) },
+	removeMultipleAreas(studentId, ...args)      { this._change(studentId, 'removeMultipleAreas',      ...args) },
 	destroySchedule(studentId, ...args)          { this._change(studentId, 'destroySchedule',          ...args) },
 	destroyMultipleSchedules(studentId, ...args) { this._change(studentId, 'destroyMultipleSchedules', ...args) },
 	moveCourse(studentId, ...args)               { this._change(studentId, 'moveCourse',               ...args) },

@@ -2,13 +2,21 @@ import React from 'react'
 import Immutable from 'immutable'
 import {Link} from 'react-router'
 import studentActions from '../flux/studentActions'
+import fuzzysearch from 'fuzzysearch'
 
-class StudentList extends React.Component {
+export default class StudentList extends React.Component {
+	static propTypes = {
+		students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+	}
+
 	constructor(props) {
 		super(props)
+
 		// since we are starting off without any data, there is no initial value
 		this.state = {
 			data: null,
+			studentFilter: '',
+			isEditing: false,
 		}
 	}
 
@@ -23,7 +31,10 @@ class StudentList extends React.Component {
 		let file = ev.target.files[0]
 
 		reader.onload = (upload) => {
-			studentActions.importStudent(upload.target.result)
+			studentActions.importStudent({
+				data: upload.target.result,
+				type: file.type,
+			})
 		}
 
 		reader.readAsText(file)
@@ -33,72 +44,59 @@ class StudentList extends React.Component {
 		// console.log('StudentList#render')
 		let studentObjects = this.props.students
 			.toList()
+			.filter(s => fuzzysearch(this.state.studentFilter, s.name.toLowerCase()))
 			.sortBy(s => s.dateLastModified)
-			.map((student) => <li key={student.id}>
-				<Link className='student-list-item' to='student' params={{id: student.id}}>
-					<span key='letter' className='letter'>{student.name.length ? student.name[0] : ''}</span>
-					<span key='name' className='name'>{student.name || 'Student'}</span>
-				</Link></li>)
-			.toJS()
+			.map(student =>
+				<li key={student.id}>
+					<Link className='student-list-item'to='student'params={{id: student.id}}>
+						{
+							this.state.isEditing
+								? <span className='delete' onClick={(ev) => {
+									ev.preventDefault()
+									studentActions.destroyStudent(student.id)
+								}}>×</span>
+								: <span className='letter'>{student.name.length ? student.name[0] : ''}</span>
+						}
+						<span className='name'>{student.name || ''}</span>
+					</Link>
+				</li>)
+			.toArray()
 
-		let buttons = (<menu className='student-list-buttons'>
-			<button key='student-list-button--sort-by'
-				className='student-list-button--sort-by'
-				items={[
-					'First Name',
-					'Last Name',
-					'Date Modified',
-					'Date Created',
-					'Graduation Year',
-				]}>Sort</button>
+		return (
+			<div className='students-overview'>
+				<input
+					className='import-student'
+					type='file'
+					accept='.json,.html'
+					onSubmit={this.handleSubmit}
+					onChange={this.handleFile} />
 
-			<button key='student-list-button--group-by'
-				className='student-list-button--group-by'
-				items={[
-					'None',
-					'Area',
-					'Graduatability',
-					'Graduation Year',
-				]}>Group</button>
+				<div className='student-list-toolbar'>
+					<input
+						type='search'
+						className='student-list-filter'
+						placeholder='Filter students'
+						onChange={ev => this.setState({studentFilter: ev.target.value.toLowerCase()})} />
 
-			<button key='student-list-button--edit'
-				className='student-list-button--edit'
-				onClick={this.editList}>Edit</button>
+					<menu className='student-list-buttons'>
+						<button className='student-list-button--sort-by'>Sort</button>
 
-			<button key='student-list-button--new'
-				className='student-list-button--new'
-				onClick={studentActions.initStudent}>New</button>
-		</menu>)
+						<button className='student-list-button--group-by'>Group</button>
 
-		let importButton = (<input type='file'
-			accept='.json'
-			key='import-student'
-			className='import-student'
-			onSubmit={this.handleSubmit}
-			onChange={this.handleFile} />)
+						<button
+							className='student-list-button--edit'
+							onClick={() => this.setState({isEditing: !this.state.isEditing})}>Edit</button>
 
-		let studentFilter = (<input type='search'
-			className='student-list-filter'
-			placeholder='Filter students' />)
+						<button
+							className='student-list-button--new'
+							onClick={studentActions.initStudent}>New</button>
+					</menu>
+				</div>
 
-		let toolbar = (<div className='student-list-toolbar'>
-			{studentFilter}{buttons}
-		</div>)
-
-		let students = (<ol className='student-list'>
-			{studentObjects}
-		</ol>)
-
-		return (<div className='students-overview'>
-			{importButton}
-			{toolbar}
-			{students}
-		</div>)
+				<ol className='student-list'>
+					{studentObjects}
+				</ol>
+			</div>
+		)
 	}
 }
-
-StudentList.propTypes = {
-	students: React.PropTypes.instanceOf(Immutable.Map).isRequired,
-}
-
-export default StudentList
