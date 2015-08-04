@@ -37,10 +37,6 @@ export default class DetailedCourse extends Component {
 			<div>
 				<BasicCourse className='info-wrapper' info={course} />
 				<div className='details'>
-					<p className='offerings'>
-						{map(course.times, (time, idx) =>
-							<span key={time + idx}>{time}</span>)}
-					</p>
 					<span className='professors'>
 						{oxford(course.instructors)}
 					</span>
