@@ -19,6 +19,7 @@ import Student from '../models/student'
 import Button from './button'
 import Course from './course'
 import Icon from './icon'
+import Loading from './loading'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 
@@ -147,7 +148,7 @@ let Semester = React.createClass({
 			courseList = <ReactListSelect multiple={true} className='course-list' items={courseBlocks} />
 		}
 		else if (this.state.schedule) {
-			courseList = <div className='loading-spinner'><div>Loading Courses&hellip;</div></div>
+			courseList = <Loading>Loading Courses…</Loading>
 		}
 
 		let droppableIsMoving = this.getDropState(itemTypes.COURSE).isDragging

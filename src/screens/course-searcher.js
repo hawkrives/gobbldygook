@@ -109,7 +109,7 @@ let CourseSearcher = React.createClass({
 		let contents = <li className='no-results'>No Results Found</li>
 
 		if (showIndicator) {
-			contents = <li className='loading'><Loading message='Searching…' /></li>
+			contents = <li className='loading'><Loading>Searching…</Loading></li>
 		}
 
 		else if (!showNoResults) {
