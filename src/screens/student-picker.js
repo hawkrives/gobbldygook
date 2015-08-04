@@ -43,7 +43,7 @@ export default class StudentPicker extends Component {
 	}
 
 	render() {
-		// console.log('StudentList#render')
+		// console.log('StudentPicker#render')
 		return (
 			<div className='students-overview'>
 				<input

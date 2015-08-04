@@ -22,7 +22,7 @@ class StudentListItem extends Component {
 	}
 
 	render() {
-		// console.log('StudentList#render')
+		// console.log('StudentListItem#render')
 		const student = this.props.student
 		const groupedStudies = student.studies.groupBy(s => s.type)
 		return (<span>
