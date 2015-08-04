@@ -44,10 +44,10 @@ export default class StudentSummary extends Component {
 		const concentrationEmphasizer = concentrations.size === 1 ? 'a ' : ''
 		const emphasisEmphasizer = emphases.size === 1 ? 'an ' : ''
 
-		const degreeEl = oxford(degrees.map(s => s.name).toArray())
-		const majorEl = oxford(majors.map(s => s.name).toArray())
-		const concentrationEl = oxford(concentrations.map(s => s.name).toArray())
-		const emphasisEl = oxford(emphases.map(s => s.name).toArray())
+		const degreeEl = oxford(degrees.map(s => s.name).toArray(), {oxfordComma: true})
+		const majorEl = oxford(majors.map(s => s.name).toArray(), {oxfordComma: true})
+		const concentrationEl = oxford(concentrations.map(s => s.name).toArray(), {oxfordComma: true})
+		const emphasisEl = oxford(emphases.map(s => s.name).toArray(), {oxfordComma: true})
 
 		const graduationEl = (
 			<AutosizeInput
