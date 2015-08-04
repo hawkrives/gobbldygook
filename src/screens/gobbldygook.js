@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import Immutable from 'immutable'
-import {ListenerMethods} from 'reflux'
 import {RouteHandler} from 'react-router'
 
 import studentStore from '../flux/student-store'
@@ -8,6 +7,7 @@ import studentStore from '../flux/student-store'
 import Loading from '../components/loading'
 
 export default class GobbldygookApp extends Component {
+	static displayName = 'GobbldygookApp'
 	static propTypes = {
 		routerState: PropTypes.object.isRequired,
 	}
@@ -18,21 +18,21 @@ export default class GobbldygookApp extends Component {
 			students: Immutable.Map(),
 			studentsInitialized: false,
 		}
+		this.onStudentsChanged = this.onStudentsChanged.bind(this)
 	}
 
 	componentDidMount() {
-        ListenerMethods.listenTo(studentStore, 'onStudentsChanged', 'onStudentsChanged').bind(this)
+		studentStore.emitter.on('change', this.onStudentsChanged)
+		studentStore.emitter.emit('change')
 	}
 
 	componentWillUnmount() {
-		ListenerMethods.stopListeningToAll()
+		studentStore.emitter.off('change', this.onStudentsChanged)
 	}
 
-	// mixins: [Reflux.listenTo(studentStore, 'onStudentsChanged', 'onStudentsChanged')]
-
-	onStudentsChanged(students) {
+	onStudentsChanged() {
 		this.setState({
-			students,
+			students: studentStore.students,
 			studentsInitialized: true,
 		})
 	}

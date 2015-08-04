@@ -1,24 +1,35 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Immutable from 'immutable'
-import Reflux from 'reflux'
 
 import notificationStore from '../flux/notification-store'
 
 import Notification from '../components/notification'
 
-let Notifications = React.createClass({
-	mixins: [Reflux.listenTo(notificationStore, 'onNotification', 'onNotification')],
+export default class Notifications extends Component {
+	static displayName = 'Notifications'
 
-	getInitialState() {
-		return {
+	constructor() {
+		super()
+		this.state = {
 			notifications: Immutable.Map(),
 		}
-	},
+		this.onNotification = this.onNotification.bind(this)
+	}
 
-	onNotification(notifications) {
-		// console.log('onNotification', notifications.toJS())
-		this.setState({notifications})
-	},
+	componentDidMount() {
+		notificationStore.emitter.on('change', this.onNotification)
+		notificationStore.emitter.emit('change')
+	}
+
+	componentWillUnmount() {
+		notificationStore.emitter.off('change', this.onNotification)
+	}
+
+	onNotification() {
+		this.setState({
+			notifications: notificationStore.notifications,
+		})
+	}
 
 	render() {
 		return (
@@ -28,7 +39,5 @@ let Notifications = React.createClass({
 					.toArray()}
 			</ul>
 		)
-	},
-})
-
-export default Notifications
+	}
+}
