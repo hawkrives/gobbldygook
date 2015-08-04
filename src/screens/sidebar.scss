@@ -21,14 +21,18 @@
 }
 
 .sidebar-btn {
-	flex-grow: 1;
-	padding-left: 1em;
-	padding-right: 1em;
+	flex: 1 0 auto;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 
 	$spacing: 0.5em;
 	margin-right: $spacing / 2;
 	margin-left: $spacing / 2;
 	margin-bottom: $spacing;
+
+	.icon {
+		font-size: 1.5em;
+	}
 }
 
 .is-hidden {
