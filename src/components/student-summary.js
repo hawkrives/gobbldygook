@@ -25,8 +25,8 @@ export default class StudentSummary extends Component {
 		const studentId = student.id
 		const NameEl = (
 			<AutosizeInput className='autosize-input'
-				defaultValue={name}
-				onChange={ev => studentActions.changeName(studentId, ev.target.value.trim())} />
+				value={name}
+				onChange={ev => studentActions.changeName(studentId, ev.target.value)} />
 		)
 
 		const degrees = studies.filter(s => s.type === 'degree')
