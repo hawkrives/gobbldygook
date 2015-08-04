@@ -107,6 +107,7 @@
 
 	.is-selected & .show-info,
 	&.expanded .show-info {
+		display: block;
 		&:focus {
 			color: color('blue', '400');
 		}
