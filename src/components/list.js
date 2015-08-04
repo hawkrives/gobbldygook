@@ -16,13 +16,14 @@ export default class List extends Component {
     }
 
     render() {
-        const Wrapper = this.props.type === 'number' ? React.DOM.ol : React.DOM.ul
+        const contents = React.Children.map(this.props.children, child =>
+            <li className='list-item'>{child}</li>)
+        const className = cx('list', `list--${this.props.type}`, this.props.className)
 
-        return (
-            <Wrapper className={cx('list', `list--${this.props.type}`, this.props.className)}>
-                {React.Children.map(this.props.children, contents =>
-                    <li className='list-item'>{contents}</li>)}
-            </Wrapper>
-        )
+        if (this.props.type === 'number') {
+            return <ol className={className}>{contents}</ol>
+        }
+
+        return <ul className={className}>{contents}</ul>
     }
 }
