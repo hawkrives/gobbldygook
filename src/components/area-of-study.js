@@ -8,7 +8,6 @@ export default class AreaOfStudy extends Component {
         _progress: PropTypes.shape({
             at: PropTypes.number.isRequired,
             of: PropTypes.number.isRequired,
-            word: PropTypes.string.isRequired,
         }),
         data: PropTypes.object,
         name: PropTypes.string.isRequired,
