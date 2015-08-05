@@ -80,7 +80,7 @@ function queryStore(query) {
 				.then((keys) => this.batchGet(keys))
 
 			// Once they've been fetched, resolve the promise with the results.
-			Promise.all(allValues).then(resolvePromise)
+			allValues.then(resolvePromise)
 		}
 
 		// Otherwise, if the current store doesn't have an index for any of
