@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {RouteHandler} from 'react-router'
 import Immutable from 'immutable'
+import DocumentTitle from 'react-document-title'
 
 import Sidebar from './sidebar'
 import Loading from '../components/loading'
@@ -52,10 +53,12 @@ export default class Student extends Component {
 		}
 
 		return (
-			<div className='student'>
-				<Sidebar student={this.state.student} />
-				<RouteHandler className='content' student={this.state.student} />
-			</div>
+			<DocumentTitle title={`${this.state.student.name} | Gobbldygook`}>
+				<div className='student'>
+					<Sidebar student={this.state.student} />
+					<RouteHandler className='content' student={this.state.student} />
+				</div>
+			</DocumentTitle>
 		)
 	}
 }

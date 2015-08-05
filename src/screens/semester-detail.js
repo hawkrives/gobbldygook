@@ -3,6 +3,8 @@ import cx from 'classnames'
 import {State} from 'react-router'
 import Immutable from 'immutable'
 import {isCurrentSemester} from 'sto-helpers'
+import DocumentTitle from 'react-document-title'
+import {semesterName} from 'sto-helpers'
 
 let SemesterDetail = React.createClass({
 	propTypes: {
@@ -28,12 +30,14 @@ let SemesterDetail = React.createClass({
 			.toJS()
 
 		return (
-			<div className={cx('semester-detail', this.props.className)}>
-				<pre>
-					{this.getPath()}{'\n'}
-					{JSON.stringify(schedules, null, 2)}
-				</pre>
-			</div>
+			<DocumentTitle title={`${semesterName(semester)} ${year} • ${this.props.student.name} | Gobbldygook`}>
+				<div className={cx('semester-detail', this.props.className)}>
+					<pre>
+						{this.getPath()}{'\n'}
+						{JSON.stringify(schedules, null, 2)}
+					</pre>
+				</div>
+			</DocumentTitle>
 		)
 	},
 })
