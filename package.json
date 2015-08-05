@@ -29,6 +29,7 @@
     "prebuild": "npm run clean && npm run copy",
     "prewatch": "npm run copy && npm run lint",
     "profile": "cat profile/README.md",
+    "prestart": "npm run copy",
     "start": "webpack-dev-server $npm_package_config_webpack",
     "test": "mocha $npm_package_config_mocha",
     "test:students": "mocha ./bin/test-students",
