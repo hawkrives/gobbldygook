@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import Immutable from 'immutable'
 import {Link} from 'react-router'
-import {DragDropMixin} from 'react-dnd'
+import {DropTarget} from 'react-dnd'
 import add from 'lodash/math/add'
 import isUndefined from 'lodash/lang/isUndefined'
 import plur from 'plur'
@@ -22,69 +22,77 @@ import Loading from './loading'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 
-let Semester = React.createClass({
-	propTypes: {
+// Implements the drag source contract.
+const semesterTarget = {
+	drop(props, monitor, component) {
+		const item = monitor.getItem()
+		console.log('dropped course', item)
+		let {clbid, fromScheduleID} = item
+		if (fromScheduleID) {
+			studentActions.moveCourse(props.student.id, fromScheduleID, component.state.schedule.id, clbid)
+		}
+		else {
+			studentActions.addCourse(props.student.id, component.state.schedule.id, clbid)
+		}
+	},
+}
+
+// Specifies the props to inject into your component.
+function collect(connect, monitor) {
+	return {
+		connectDropTarget: connect.dropTarget(),
+		isOver: monitor.isOver(),
+		canDrop: monitor.canDrop(),
+	}
+}
+
+class Semester extends Component {
+	static propTypes = {
+		canDrop: PropTypes.bool.isRequired,  // react-dnd
+		connectDropTarget: PropTypes.func.isRequired,  // react-dnd
+		isOver: PropTypes.bool.isRequired,  // react-dnd
 		semester: PropTypes.number.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
 		year: PropTypes.number.isRequired,
-	},
+	}
 
-	mixins: [DragDropMixin],
-
-	statics: {
-		configureDragDrop(registerType) {
-			registerType(itemTypes.COURSE, {
-				dropTarget: {
-					acceptDrop(component, droppedItem) {
-						console.log('dropped component', component)
-						let {clbid, fromSchedule} = droppedItem
-						let {state, props} = component
-						if (fromSchedule) {
-							studentActions.moveCourse(props.student.id, fromSchedule, state.schedule.id, clbid)
-						}
-						else {
-							studentActions.addCourse(props.student.id, state.schedule.id, clbid)
-						}
-					},
-				},
-			})
-		},
-	},
-
-	getInitialState() {
-		return {
+	constructor() {
+		super()
+		this.state = {
 			courses: Immutable.List(),
 			schedule: null,
 			validation: {},
 		}
-	},
+	}
 
 	componentWillMount() {
 		this.componentWillReceiveProps(this.props)
-	},
+	}
 
 	componentWillReceiveProps(nextProps) {
 		const schedule = nextProps.student.schedules
 			.filter(sched => sched.active)
 			.find(sched => (sched.year === this.props.year) && (sched.semester === this.props.semester))
 
-		Promise.all([schedule.courses, schedule.validate()])
-			.then(([courses, validation]) => {
-				this.setState({
-					schedule,
-					courses: Immutable.List(courses),
-					validation,
-				})
+		Promise.all([
+			schedule.courses,
+			schedule.validate(),
+		]).then(([courses, validation]) => {
+			this.setState({
+				courses: Immutable.List(courses),
+				schedule,
+				validation,
 			})
-	},
+		})
+	}
 
-	removeSemester() {
+	removeSemester = () => {
 		const scheduleIds = this.props.student.schedules
 			.filter(isCurrentSemester(this.props.year, this.props.semester))
 			.map(sched => sched.id)
 
 		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
-	},
+	}
 
 	render() {
 		let infoIcons = []
@@ -150,20 +158,15 @@ let Semester = React.createClass({
 			courseList = <Loading>Loading Courses…</Loading>
 		}
 
-		let droppableIsMoving = this.getDropState(itemTypes.COURSE).isDragging
-		let droppableIsOver = this.getDropState(itemTypes.COURSE).isHovering
+		const className = cx({
+			semester: true,
+			invalid: this.state.validation.hasConflict,
+			'can-drop': this.props.canDrop,
+			'is-over': this.props.isOver,
+		})
 
-		let semesterProps = {
-			className: cx({
-				semester: true,
-				invalid: this.state.validation.hasConflict,
-				'can-drop': droppableIsMoving,
-				'is-over': droppableIsOver,
-			}),
-		}
-
-		return (
-			<div {...semesterProps} {...this.dropTargetFor(itemTypes.COURSE)}>
+		return this.props.connectDropTarget(
+			<div className={className}>
 				<header className='semester-title'>
 					<Link className='semester-header'
 						to='semester'
@@ -186,7 +189,7 @@ let Semester = React.createClass({
 				{courseList}
 			</div>
 		)
-	},
-})
+	}
+}
 
-export default Semester
+export default DropTarget(itemTypes.COURSE, semesterTarget, collect)(Semester)

@@ -1,5 +1,7 @@
 import React from 'react'
 import Router, {Route, DefaultRoute} from 'react-router'
+import {DragDropContext} from 'react-dnd'
+import HTML5Backend from 'react-dnd/modules/backends/HTML5'
 
 import Gobbldygook from '../screens/gobbldygook'
 import StudentPicker from '../screens/student-picker'
@@ -32,5 +34,6 @@ let routes = (
 console.log('3. 2.. 1... Blast off! 🚀')
 
 Router.run(routes, (Handler, state) => {
+	Handler = DragDropContext(HTML5Backend)(Handler)
 	React.render(<Handler routerState={state} />, document.getElementById('app'))
 })
