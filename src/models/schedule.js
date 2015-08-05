@@ -1,6 +1,7 @@
 import Immutable from 'immutable'
 import reject from 'lodash/collection/reject'
 import isUndefined from 'lodash/lang/isUndefined'
+import isNumber from 'lodash/lang/isNumber'
 import flatten from 'lodash/array/flatten'
 import filter from 'lodash/collection/filter'
 import identity from 'lodash/utility/identity'
@@ -80,6 +81,11 @@ export default class Schedule extends ScheduleRecord {
 		// let start = present()
 		// console.log(`adding clbid ${clbid} to schedule ${this.id} (${this.year}-${this.semester}.${this.index})`)
 
+		if (!isNumber(clbid)) {
+			console.error('no clbid passed to addCourse!')
+			return this
+		}
+
 		return this.withMutations((sched) => {
 			sched = sched.set('clbids', sched.clbids.push(clbid))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
@@ -91,6 +97,11 @@ export default class Schedule extends ScheduleRecord {
 	removeCourse(clbid) {
 		// let start = present()
 		// console.log(`removing clbid ${clbid} from schedule ${this.id} (${this.year}-${this.semester}.${this.index})`)
+
+		if (!isNumber(clbid)) {
+			console.error('no clbid passed to removeCourse!')
+			return this
+		}
 
 		const index = this.clbids.indexOf(clbid)
 		return this.withMutations((sched) => {

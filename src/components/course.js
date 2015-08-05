@@ -1,10 +1,10 @@
-import React, {PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react'
+import {DragSource} from 'react-dnd'
 import cx from 'classnames'
 import compact from 'lodash/array/compact'
 import filter from 'lodash/collection/filter'
 import isNull from 'lodash/lang/isNull'
 import map from 'lodash/collection/map'
-import {DragDropMixin} from 'react-dnd'
 
 import itemTypes from '../models/item-types'
 
@@ -12,52 +12,51 @@ import List from './list'
 import DetailedCourse from './detailed-course'
 import BasicCourse from './basic-course'
 
-let Course = React.createClass({
-	propTypes: {
-		conflicts: PropTypes.array,
-		index: PropTypes.number,
-		info: PropTypes.object.isRequired,
-		schedule: PropTypes.object,
-	},
 
-	mixins: [DragDropMixin],
-
-	statics: {
-		configureDragDrop(registerType) {
-			registerType(itemTypes.COURSE, {
-				dragSource: {
-					beginDrag(component) {
-						let scheduleId = component.props.schedule ? component.props.schedule.id : null
-						return {
-							item: {
-								clbid: component.props.info.clbid,
-								fromSchedule: scheduleId,
-							},
-						}
-					},
-				},
-			})
-		},
-	},
-
-	getDefaultProps() {
+// Implements the drag source contract.
+const courseSource = {
+	beginDrag(props) {
+		const scheduleId = props.schedule ? props.schedule.id : null
 		return {
-			conflicts: [],
+			clbid: props.info.clbid,
+			fromScheduleID: scheduleId,
 		}
 	},
+}
 
-	getInitialState() {
-		return {isOpen: false}
-	},
+// Specifies the props to inject into your component.
+function collect(connect, monitor) {
+	return {
+		connectDragSource: connect.dragSource(),
+		isDragging: monitor.isDragging(),
+	}
+}
 
-	toggleExpanded() {
+class Course extends Component {
+	static propTypes = {
+		conflicts: PropTypes.array,
+		connectDragSource: PropTypes.func.isRequired,  // react-dnd
+		index: PropTypes.number,
+		info: PropTypes.object.isRequired,
+		isDragging: PropTypes.bool.isRequired,  // react-dnd
+		schedule: PropTypes.object,
+	}
+
+	static defaultProps = {
+		conflicts: [],
+	}
+
+	constructor() {
+		super()
+		this.state = {isOpen: false}
+	}
+
+	toggleExpanded = () => {
 		this.setState({isOpen: !this.state.isOpen})
-	},
+	}
 
 	render() {
 		// console.log('Course#render')
-		let isDragging = this.getDragState(itemTypes.COURSE).isDragging
-
 		let InnerCourse = this.state.isOpen
 			? DetailedCourse
 			: BasicCourse
@@ -72,11 +71,11 @@ let Course = React.createClass({
 		let classSet = cx('course', {
 			expanded: this.state.isOpen,
 			'has-warnings': hasWarnings,
-			'is-dragging': isDragging,
+			'is-dragging': this.props.isDragging,
 		})
 
-		return (
-			<article className={classSet} {...this.dragSourceFor(itemTypes.COURSE)}>
+		return this.props.connectDragSource(
+			<article className={classSet}>
 				<InnerCourse {...this.props} onClick={this.toggleExpanded}>
 					{warningEls.length
 						? <List type='inline' className='warnings'>{warningEls}</List>
@@ -84,7 +83,7 @@ let Course = React.createClass({
 				</InnerCourse>
 			</article>
 		)
-	},
-})
+	}
+}
 
-export default Course
+export default DragSource(itemTypes.COURSE, courseSource, collect)(Course)
