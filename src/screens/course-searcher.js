@@ -34,6 +34,7 @@ let CourseSearcher = React.createClass({
 			hasQueried: false,
 			results: [],
 			queryString: '',
+			lastQuery: '',
 			queryInProgress: false,
 		}
 	},
@@ -81,7 +82,11 @@ let CourseSearcher = React.createClass({
 		let endQueryTime = present()
 		console.info(`query took ${(endQueryTime - startQueryTime)}ms.`)
 
-		this.setState({results: searchResults, hasQueried: true, queryInProgress: false})
+		this.setState({
+			results: searchResults,
+			hasQueried: true,
+			queryInProgress: false,
+		})
 	},
 
 	query(searchQuery) {
