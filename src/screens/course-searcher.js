@@ -96,7 +96,6 @@ let CourseSearcher = React.createClass({
 			.then(results => [results, startQueryTime])
 			.then(this.processQueryResults)
 			.catch(err => console.error(err))
-			.done()
 
 		this.setState({queryInProgress: true, lastQuery: searchQuery})
 	},
