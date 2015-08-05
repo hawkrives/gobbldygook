@@ -27,6 +27,8 @@ let SemesterDetail = React.createClass({
 		const {year, semester} = this.getParams()
 		const schedules = this.props.student.schedules
 			.filter(isCurrentSemester(year, semester))
+			.map(sched => sched.toMap())
+			.map(sched => sched.delete('_courseData'))
 			.toJS()
 
 		return (
