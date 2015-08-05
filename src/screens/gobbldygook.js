@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Immutable from 'immutable'
 import {RouteHandler} from 'react-router'
+import DocumentTitle from 'react-document-title'
 
 import studentStore from '../flux/student-store'
 
@@ -42,8 +43,12 @@ export default class GobbldygookApp extends Component {
 			return <Loading>Loading Students…</Loading>
 		}
 
-		return (<RouteHandler
+		return (
+			<DocumentTitle title='Gobbldygook'>
+				<RouteHandler
 					students={this.state.students}
-					routerState={this.props.routerState} />)
+					routerState={this.props.routerState} />
+			</DocumentTitle>
+		)
 	}
 }
