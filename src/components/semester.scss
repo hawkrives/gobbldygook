@@ -18,12 +18,8 @@ $semester-edge-padding: ($block-edge-padding) ($block-edge-padding * 1.5);
 	flex: 1;
 }
 
-.semester.can-drop {
-	// @include material-shadow(2);
-}
-
 .semester.is-over {
-	@include material-shadow(2);
+	box-shadow: 0 0 4px #444;
 	z-index: 10;
 }
 
