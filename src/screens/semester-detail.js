@@ -4,10 +4,12 @@ import {State} from 'react-router'
 import Immutable from 'immutable'
 import {isCurrentSemester} from 'sto-helpers'
 
+import Student from '../models/student'
+
 let SemesterDetail = React.createClass({
 	propTypes: {
 		className: PropTypes.string,
-		student: PropTypes.object.isRequired,
+		student: PropTypes.instanceOf(Student).isRequired,
 	},
 
 	mixins: [State],
