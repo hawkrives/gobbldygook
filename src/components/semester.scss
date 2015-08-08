@@ -103,6 +103,10 @@ $semester-edge-padding: ($block-edge-padding) ($block-edge-padding * 1.5);
 	min-height: 30px;
 	padding-bottom: 0.25em;
 
+	&:focus {
+		outline: 0;
+	}
+
 	.course {
 		padding: $semester-edge-padding;
 		border-bottom: $material-divider;
