@@ -22,7 +22,7 @@ export function processAreasDir(dir) {
 
 			output.files.push({
 				hash: hash,
-				path: filename,
+				path: filename.replace('build/', '').replace('areas/', ''),
 				type: data.type.toLowerCase(),
 				revision: data.revision,
 			})
@@ -40,7 +40,7 @@ export function cli() {
 
 	const inDir = args.dir
 
-	const data = processAreasDir({dir: inDir, filetype: 'json'})
+	const data = processAreasDir({dir: inDir, filetype: 'yaml'})
 	if (args.save) {
 		fs.writeFileSync(path.join(inDir, 'info.json'), data, {encoding: 'utf-8'})
 	}

@@ -19,7 +19,7 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 	// 3. warns if it encounters any lowercase keys not in the whitelist
 
 	const baseWhitelist = ['result', 'message', 'declare']
-	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type'])
+	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath'])
 	const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description'])
 	const whitelist = topLevel ? topLevelWhitelist : lowerLevelWhitelist
 

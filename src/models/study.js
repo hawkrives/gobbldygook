@@ -1,27 +1,32 @@
 import Immutable from 'immutable'
-import yaml from 'js-yaml'
 import kebabCase from 'lodash/string/kebabCase'
 import debug from 'debug'
 
-import {status, text} from '../lib/fetch-helpers'
 import enhanceHanson from '../lib/enhance-hanson'
 import pluralizeArea from '../lib/pluralize-area'
 
 const migrationLog = debug('gobbldygook:data-migration:study')
 
 export async function loadArea({name, type}) {
+	const db = require('../lib/db')
+
 	if (!name) {
 		throw new Error(`loadArea(): 'name' must be provided`)
 	}
 	else if (!type) {
 		throw new Error(`loadArea(): 'type' must be provided`)
 	}
-	const filepath = `./areas/${pluralizeArea(type)}/${kebabCase(name)}.yaml`
-	const data = await fetch(filepath)
-		.then(status)
-		.then(text)
-	const loaded = yaml.safeLoad(data)
-	const enhanced = enhanceHanson(loaded, {topLevel: true})
+
+	const path = `${pluralizeArea(type)}/${kebabCase(name)}.yaml`
+
+	let data = await db.stores.areas.get(path)
+
+	if (!data) {
+		throw new Error(`could not load area ${path}`)
+	}
+
+	const enhanced = enhanceHanson(data, {topLevel: true})
+
 	return enhanced
 }
 

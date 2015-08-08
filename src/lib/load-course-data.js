@@ -3,6 +3,7 @@ import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
 import curry from 'lodash/function/curry'
 import present from 'present'
+import yaml from 'js-yaml'
 
 import notificationActions from '../flux/notification-actions'
 import {status, json, text} from './fetch-helpers'
@@ -77,7 +78,7 @@ async function storeCourses(item) {
 async function storeArea(item) {
 	log(item.path, 'called storeArea')
 
-	let area = item.data.info
+	let area = item.data
 	area.sourcePath = item.path
 
 	try {
@@ -99,14 +100,13 @@ function storeItem(item) {
 	}
 }
 
-async function cleanPriorData(item) {
-	let {type, path} = item
+async function cleanPriorData({path, type}) {
 	log(`deleting ${type} from ${path}`)
 
-	let oldCourses = []
+	let oldItems = []
 
 	try {
-		oldCourses = await db.store(type)
+		oldItems = await db.store(type)
 			.index('sourcePath')
 			.get(path)
 	}
@@ -114,14 +114,12 @@ async function cleanPriorData(item) {
 		throw e
 	}
 
-	oldCourses = map(oldCourses, ({clbid}) => {
-		let result = Object.create(null)
-		result[clbid] = null
-		return result
-	})
+	oldItems = map(oldItems, item => (
+		{[item.clbid || item.sourcePath]: null}
+	))
 
 	try {
-		await db.store(item.type).batch(oldCourses)
+		await db.store(type).batch(oldItems)
 	}
 	catch (e) {
 		throw e
@@ -137,7 +135,7 @@ async function cacheItemHash(item) {
 }
 
 async function updateDatabase(type, infoFromServer, infoFileBase, notificationId, count) {
-	let {path, hash, year} = infoFromServer
+	let {path, hash} = infoFromServer
 	let oldHash = localStorage.getItem(path)
 
 	let itemUrl = `/${path}?v=${hash}`
@@ -155,13 +153,27 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 	try {
 		data = await fetch(infoFileBase + itemUrl)
 			.then(status)
-			.then(json)
+			.then(text)
 	}
 	catch (e) {
 		throw e
 	}
 
-	let item = {count: size(data), data, path, hash, year, type}
+	try {
+		data = JSON.parse(data)
+	}
+	catch(e) {
+		data = yaml.safeLoad(data)
+	}
+
+	let item = {
+		...infoFromServer,
+		path,
+		hash,
+		data,
+		type,
+		count: size(data),
+	}
 
 	try {
 		await cleanPriorData(item)
