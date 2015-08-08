@@ -31,13 +31,12 @@ $area-edge-padding: 0.5em;
 }
 
 .area--confirm-removal {
-	background-color: rgba(white, 0.95);
-
 	text-align: center;
 
 	p {
-		font-size: 1.25em;
-		margin: 0;
+		margin: 1ex 0 1ex;
+	}
+	strong {
 		font-weight: 500;
 	}
 }

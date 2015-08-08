@@ -77,7 +77,7 @@ export default class AreaOfStudy extends Component {
 
 		const removalConfirmation = (
 			<div className='area--confirm-removal'>
-				<p>Remove {this.props.name}?</p>
+				<p>Remove <strong>{this.props.name}</strong>?</p>
 				<span className='button-group'>
 					<Button className='area--actually-remove-area' onClick={this.removeAreaFromStudent}>Remove</Button>
 					<Button onClick={this.endRemovalConfirmation}>Cancel</Button>
@@ -86,7 +86,7 @@ export default class AreaOfStudy extends Component {
 		)
 
 		return (
-			<details className='area' open={this.state.open && !this.state.confirmRemoval}>
+			<details className='area'>
 				<summary className='area--summary' onClick={() => this.setState(state => ({open: !state.open}))}>
 					{
 						this.state.confirmRemoval
@@ -94,7 +94,11 @@ export default class AreaOfStudy extends Component {
 							: summary
 					}
 				</summary>
-				<Requirement {...this.props} topLevel />
+				{
+					this.state.open && !this.state.confirmRemoval
+						? <Requirement {...this.props} topLevel />
+						: null
+				}
 			</details>
 		)
 	}
