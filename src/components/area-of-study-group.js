@@ -25,7 +25,6 @@ export default class AreaOfStudyGroup extends Component {
 	}
 
 	render() {
-		console.log(this.props)
 		return (
 			<section key={this.props.type} className='area-of-study-group'>
 				<h1 className='area-type-heading'>
@@ -36,7 +35,7 @@ export default class AreaOfStudyGroup extends Component {
 								Close
 							</Button>
 							: <Button className='add-area-of-study' type='flat' onClick={ev => this.props.initiateAddArea({ev, type: this.props.type})}>
-								Add
+								Add/Edit
 							</Button>
 					}
 				</h1>
@@ -45,7 +44,12 @@ export default class AreaOfStudyGroup extends Component {
 					<AreaOfStudy key={area.id} {...area} removeArea={this.props.removeArea} />).toArray()}
 
 				{this.props.showAreaPicker
-					? <AreaPicker currentAreas={this.props.areas} allAreas={this.props.allAreas} addArea={this.props.addArea} removeArea={this.props.removeArea} />
+					? <AreaPicker
+						currentAreas={this.props.areas}
+						type={this.props.type}
+						allAreas={this.props.allAreas}
+						addArea={this.props.addArea}
+						removeArea={this.props.removeArea} />
 					: null}
 			</section>
 		)

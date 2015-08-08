@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import I from 'immutable'
 import fuzzysearch from 'fuzzysearch'
+import pluralizeArea from '../lib/pluralize-area'
+import kebabCase from 'lodash/string/kebabCase'
 
 import Button from './button'
 import List from './list'
@@ -11,6 +13,7 @@ export default class AreaPicker extends Component {
 		allAreas: PropTypes.instanceOf(I.List).isRequired,
 		currentAreas: PropTypes.instanceOf(I.List).isRequired,
 		removeArea: PropTypes.func.isRequired,
+		type: PropTypes.string.isRequired,
 	}
 
 	constructor() {
@@ -25,7 +28,11 @@ export default class AreaPicker extends Component {
 
 		return (
 			<div className='add-area'>
-				<input value={this.state.filter} onChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})} />
+				<input
+					className='add-area--filter'
+					placeholder={'Filter ' + pluralizeArea(this.props.type)}
+					value={this.state.filter}
+					onChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})} />
 
 				<List type='plain'>
 					{this.props.allAreas
@@ -36,7 +43,7 @@ export default class AreaPicker extends Component {
 								{area.name}
 								{
 									currentAreaNames.includes(area.name)
-									? <Button type='flat' onClick={ev => this.props.removeArea({ev, areaId: area.id})}>
+									? <Button type='flat' onClick={ev => this.props.removeArea({ev, areaId: `${kebabCase(area.name)}-${area.type}?rev=${area.revision}`})}>
 										Remove
 									</Button>
 									: <Button type='flat' onClick={ev => this.props.addArea({ev, area})}>

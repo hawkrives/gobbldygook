@@ -1,0 +1,16 @@
+.add-area {
+	@include card;
+	padding: $area-edge-padding;
+}
+
+.add-area--filter {
+	width: 100%;
+	margin-bottom: $area-edge-padding;
+}
+
+.area--choice {
+	display: flex;
+
+	justify-content: space-between;
+	align-items: center;
+}

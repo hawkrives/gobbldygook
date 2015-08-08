@@ -64,6 +64,7 @@ export default class GraduationStatus extends Component {
 	}
 
 	removeAreaFromStudent = ({ev, areaId}) => {
+		console.log('removeAreaFromStudent()', areaId)
 		ev.preventDefault()
 		actions.removeArea(this.props.student.id, areaId)
 	}
