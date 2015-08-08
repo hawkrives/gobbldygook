@@ -45,7 +45,7 @@ export default class AreaOfStudyGroup extends Component {
 					<AreaOfStudy key={area.id} {...area} removeArea={this.props.removeArea} />).toArray()}
 
 				{this.props.showAreaPicker
-					? <AreaPicker currentAreas={this.props.areas} allAreas={this.props.allAreas} addArea={this.props.addArea} />
+					? <AreaPicker currentAreas={this.props.areas} allAreas={this.props.allAreas} addArea={this.props.addArea} removeArea={this.props.removeArea} />
 					: null}
 			</section>
 		)

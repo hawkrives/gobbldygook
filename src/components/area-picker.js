@@ -10,6 +10,7 @@ export default class AreaPicker extends Component {
 		addArea: PropTypes.func.isRequired,
 		allAreas: PropTypes.instanceOf(I.List).isRequired,
 		currentAreas: PropTypes.instanceOf(I.List).isRequired,
+		removeArea: PropTypes.func.isRequired,
 	}
 
 	constructor() {
@@ -20,20 +21,28 @@ export default class AreaPicker extends Component {
 	}
 
 	render() {
+		const currentAreaNames = this.props.currentAreas.map(a => a.name)
+
 		return (
 			<div className='add-area'>
 				<input value={this.state.filter} onChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})} />
 
 				<List type='plain'>
 					{this.props.allAreas
-						.toSet()
+						.toList()
 						.filter(a => fuzzysearch(this.state.filter, a.name.toLowerCase()))
 						.map((area, i) =>
 							<div key={i} className='area--choice'>
 								{area.name}
-								<Button type='flat' onClick={(ev) => this.props.addArea({ev, area})}>
-									Add
-								</Button>
+								{
+									currentAreaNames.includes(area.name)
+									? <Button type='flat' onClick={ev => this.props.removeArea({ev, areaId: area.id})}>
+										Remove
+									</Button>
+									: <Button type='flat' onClick={ev => this.props.addArea({ev, area})}>
+										Add
+									</Button>
+								}
 							</div>)
 						.toArray()}
 				</List>
