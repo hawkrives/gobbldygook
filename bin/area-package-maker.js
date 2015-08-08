@@ -39,7 +39,7 @@ export function cli() {
 
 	const inDir = args.dir
 
-	const data = processAreasDir(inDir)
+	const data = processAreasDir({dir: inDir, filetype: 'json'})
 	if (args.save) {
 		fs.writeFileSync(path.join(inDir, 'info.json'), data, {encoding: 'utf-8'})
 	}

@@ -20,7 +20,7 @@ export function cli() {
 
 	const inDir = args.input[0]
 	const outDir = args.flags.outDir
-	const sources = findAreas(inDir)
+	const sources = findAreas({dir: inDir})
 
 	sources
 		.forEach((filename, index) => {
