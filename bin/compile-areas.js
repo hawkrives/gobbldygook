@@ -2,11 +2,8 @@ import meow from 'meow'
 import pkg from '../package.json'
 import fs from 'graceful-fs'
 import yaml from 'js-yaml'
-import glob from 'glob'
-import uniq from 'lodash/array/uniq'
-import flatten from 'lodash/array/flatten'
 import enhanceHanson from '../src/lib/enhance-hanson'
-import junk from 'junk'
+import findAreas from './find-areas'
 import mkdirp from 'mkdirp'
 import path from 'path'
 
@@ -23,10 +20,9 @@ export function cli() {
 
 	const inDir = args.input[0]
 	const outDir = args.flags.outDir
-	const sources = uniq(flatten(glob.sync(inDir + '/**/*.yaml')))
+	const sources = findAreas(inDir)
 
 	sources
-		.filter(junk.not)
 		.forEach((filename, index) => {
 			if (index !== 0) {
 				console.log()

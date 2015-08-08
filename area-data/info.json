@@ -1,0 +1,94 @@
+{
+	"files": [
+		{
+			"hash": "ce1fb9f2836bb273aa7ffedc1f502f8ac176e0ae",
+			"path": "area-data/concentrations/asian-studies.yaml",
+			"revision": "2011-12",
+			"type": "concentration"
+		},
+		{
+			"hash": "2a601e8e4157544f2df71cfdae849639319ec634",
+			"path": "area-data/concentrations/china-studies.yaml",
+			"revision": "2011-12",
+			"type": "concentration"
+		},
+		{
+			"hash": "8ab99e91310dac6b3cdd1c18b63475c24d6b215f",
+			"path": "area-data/concentrations/japan-studies.yaml",
+			"revision": "2014-15",
+			"type": "concentration"
+		},
+		{
+			"hash": "4e932555d53f935924bd5c354a3cfe9988a966f0",
+			"path": "area-data/concentrations/statistics.yaml",
+			"revision": "2014-15",
+			"type": "concentration"
+		},
+		{
+			"hash": "62931bf2cb702fa272063e96f6e20971a0511c77",
+			"path": "area-data/degrees/bachelor-of-arts.yaml",
+			"revision": "2014-15",
+			"type": "degree"
+		},
+		{
+			"hash": "e73782dea3975470fb184f9e313d52d2cf94fe83",
+			"path": "area-data/majors/asian-studies-no-lang.yaml",
+			"revision": "2014-15",
+			"type": "major"
+		},
+		{
+			"hash": "c60c4a181cc1ddf56a71150d5808a7deddc034f2",
+			"path": "area-data/majors/asian-studies.yaml",
+			"revision": "2011-12",
+			"type": "major"
+		},
+		{
+			"hash": "f846c6b2fc434ee3c1d4434d63a0c8bdda41bc0f",
+			"path": "area-data/majors/chemistry.yaml",
+			"revision": "2013-14",
+			"type": "major"
+		},
+		{
+			"hash": "bdeea64579884bfce9e1d6773b3781101887f2ad",
+			"path": "area-data/majors/computer-science.yaml",
+			"revision": "2014-15",
+			"type": "major"
+		},
+		{
+			"hash": "997f37be9e11d03d8c64a005a49e8c63902c2d26",
+			"path": "area-data/majors/exercise-science.yaml",
+			"revision": "2014-15",
+			"type": "major"
+		},
+		{
+			"hash": "2c77f818be67dc25e08f720dce612b10bf2d238c",
+			"path": "area-data/majors/math.yaml",
+			"revision": "2011-12",
+			"type": "major"
+		},
+		{
+			"hash": "9b0e0e91adfdb61920e86ac364241a1f270a731a",
+			"path": "area-data/majors/physics.yaml",
+			"revision": "2011-12",
+			"type": "major"
+		},
+		{
+			"hash": "556187045333fe1df09a40772fc33651da145364",
+			"path": "area-data/majors/psychology.yaml",
+			"revision": "2014-15",
+			"type": "major"
+		},
+		{
+			"hash": "72315513efc91bd581c78662fd23c4118a02627e",
+			"path": "area-data/majors/studio-art.yaml",
+			"revision": "2014-15",
+			"type": "major"
+		},
+		{
+			"hash": "40928319c301f51c56c827dfff21c44559b9584f",
+			"path": "area-data/majors/theater.yaml",
+			"revision": "2010-11",
+			"type": "major"
+		}
+	]
+}
