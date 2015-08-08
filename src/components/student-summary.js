@@ -56,7 +56,7 @@ export default class StudentSummary extends Component {
 				onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value || 0))} />
 		)
 
-		const sinceMatriculationEl = (
+		const matriculationEl = (
 			<AutosizeInput
 				className='autosize-input'
 				value={String(student.matriculation)}
@@ -67,20 +67,19 @@ export default class StudentSummary extends Component {
 			<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 				<header>
 					<div id='student-letter'>{name.length ? name[0] : ''}</div>
-					<p>Hi, {NameEl}</p>
+					<div className='paragraph'>Hi, {NameEl}</div>
 				</header>
 				<div className='content'>
-					<p>
-						You are planning on graduating in {graduationEl},
-						{' '} after matriculating in {sinceMatriculationEl}, with {' '}
+					<div className='paragraph'>
+						After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
 						{(degrees.size > 0) ? `${degreeEmphasizer}${degreeEl} ${degreeWord}` : `no ${degreeWord}`}
 						{(majors.size > 0) ? `, ${majorEmphasizer}${majorWord} in ${majorEl}` : null}
 						{(concentrations.size > 0) ? `, and ${concentrationEmphasizer}${concentrationWord} in ${concentrationEl}` : null}
 						{(emphases.size > 0) ? `, not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisEl}` : null}{"."}
-					</p>
-					<p className='graduation-message'>
+					</div>
+					<div className='paragraph graduation-message'>
 						{canGraduate ? goodGraduationMessage : badGraduationMessage}
-					</p>
+					</div>
 				</div>
 			</article>
 		)
