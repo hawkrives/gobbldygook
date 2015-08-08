@@ -11,6 +11,7 @@ export function processAreasDir(dir) {
 
 	const output = {
 		files: [],
+		type: 'areas',
 	}
 
 	sources
