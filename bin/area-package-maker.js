@@ -28,7 +28,7 @@ export function processAreasDir(dir) {
 			})
 		})
 
-	return stringify(output, {space: '\t'})
+	return stringify(output, {space: '\t'}) + '\n'
 }
 
 export function cli() {
