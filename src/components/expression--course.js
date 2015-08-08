@@ -26,7 +26,7 @@ export default class CourseExpression extends Component {
 			: null
 
 		const section = this.props.section
-			? <span className='course--section'>.{this.props.section}</span>
+			? <span className='course--section'>[{this.props.section}]</span>
 			: null
 
 		const year = this.props.year
@@ -53,7 +53,8 @@ export default class CourseExpression extends Component {
 						<span className='course--number'>{this.props.number || String(this.props.level)[0] + 'XX'}</span>
 						{international}
 						{lab}
-						{' '}{section}
+						{' '}
+						{section}
 					</span>
 				</div>
 				{temporalIdentifiers}

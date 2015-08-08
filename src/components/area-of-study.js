@@ -5,8 +5,6 @@ import Icon from './icon'
 import Requirement from './requirement'
 import ProgressBar from './progress-bar'
 
-import actions from '../flux/student-actions'
-
 export default class AreaOfStudy extends Component {
 	static propTypes = {
 		_progress: PropTypes.shape({
@@ -16,9 +14,9 @@ export default class AreaOfStudy extends Component {
 		data: PropTypes.object,
 		id: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
+		removeArea: PropTypes.func.isRequired,
 		result: PropTypes.object.isRequired,
 		revision: PropTypes.string.isRequired,
-		studentId: PropTypes.string.isRequired,
 		type: PropTypes.string.isRequired,
 	}
 
@@ -52,11 +50,6 @@ export default class AreaOfStudy extends Component {
 		this.setState({confirmRemoval: false})
 	}
 
-	removeAreaFromStudent = (ev) => {
-		ev.preventDefault()
-		actions.removeArea(this.props.studentId, this.props.id)
-	}
-
 	render() {
 		const summary = (
 			<div>
@@ -79,7 +72,7 @@ export default class AreaOfStudy extends Component {
 			<div className='area--confirm-removal'>
 				<p>Remove <strong>{this.props.name}</strong>?</p>
 				<span className='button-group'>
-					<Button className='area--actually-remove-area' onClick={this.removeAreaFromStudent}>Remove</Button>
+					<Button className='area--actually-remove-area' onClick={(ev) => this.props.removeArea({ev, areaId: this.props.id})}>Remove</Button>
 					<Button onClick={this.endRemovalConfirmation}>Cancel</Button>
 				</span>
 			</div>
