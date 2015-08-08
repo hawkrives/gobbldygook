@@ -8,6 +8,7 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "config": {
+    "area_output": "build/areas/",
     "beautify": "-f - --end-with-newline --indent-size 2",
     "mocha": "test/areas test/models",
     "webpack": "--progress --config=./.webpack.config.js"
@@ -15,8 +16,8 @@
   "scripts": {
     "benchmark": "babel-node ./benchmarks/students-benchmark.js --runs 50 --graph",
     "build": "webpack $npm_package_config_webpack",
-    "build:area-info": "./bin/area-package-maker area-data --save",
-    "build:areas": "./bin/compile-areas area-data/ --out-dir dist/",
+    "build:areas": "./bin/compile-areas area-data/ --out-dir $npm_package_config_area_output",
+    "postbuild:areas": "./bin/area-package-maker $npm_package_config_area_output --save",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
     "build:production": "webpack -p $npm_package_config_webpack",
     "clean": "rm -rf build/",
@@ -35,7 +36,7 @@
     "start": "webpack-dev-server $npm_package_config_webpack",
     "test": "mocha $npm_package_config_mocha",
     "test:students": "mocha ./bin/test-students",
-    "travis": "npm run build:areas && npm run build:area-info && npm run test:students && npm run build && npm run coveralls",
+    "travis": "npm run build:areas && npm run test:students && npm run build && npm run coveralls",
     "watch": "npm run watch:lint & npm run watch:test & wait"
   },
   "dependencies": {
