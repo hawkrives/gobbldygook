@@ -6,6 +6,12 @@
 	margin-bottom: 1em;
 }
 
+.area--summary-row {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+}
+
 
 // these must be specified separately
 .area--summary > .details-marker       { display: none; }
@@ -14,37 +20,43 @@
 .area--summary::-ms-details-marker     { display: none; }
 .area--summary::details-marker         { display: none; }
 
+$area-edge-padding: 0.5em;
 .area--summary {
-	position: relative;
 	cursor: pointer;
 
 	display: flex;
 	flex-flow: column nowrap;
 
-	padding: 0.5em;
+	padding: $area-edge-padding;
 }
 
-.area--summary:active,
+.area--confirm-removal {
+	background-color: rgba(white, 0.95);
+
+	text-align: center;
+
+	p {
+		font-size: 1.25em;
+		margin: 0;
+		font-weight: 500;
+	}
+}
+
+.area--actually-remove-area {
+	color: color('red', '500');
+	&:hover, &:focus {
+		background-color: transparentize(color('red', '50'), 0.2);
+	}
+	&:active {
+		background-color: transparentize(color('red', '50'), 0.4);
+	}
+}
+
 .area--summary:focus {
 	outline: 1px solid color('blue');
 	color: color('blue', '900');
 	background-color: color('blue', '50');
 }
-
-.area--summary::after {
-	content: '⋯';
-
-	font-weight: bold;
-	position: absolute;
-	right: 0.85em;
-	top: 0.45em;
-}
-
-.area[open] .area--summary::after {
-	font-weight: normal;
-	transform: rotate(90deg) scale(0.8);
-}
-
 
 .area--title {
 	margin: 0 0 0.25em;
@@ -63,4 +75,10 @@
 	.area--summary:active & {
 		box-shadow: 0 0 0 2px white;
 	}
+}
+
+.area--remove-button {
+	padding: 0 0.5em;
+	margin-right: 0.5em;
+	min-height: 0;
 }

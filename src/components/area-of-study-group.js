@@ -10,6 +10,7 @@ import AreaOfStudy from './area-of-study'
 export default class AreaOfStudyGroup extends Component {
 	static propTypes = {
 		areas: PropTypes.instanceOf(ImmutableList).isRequired,
+		studentId: PropTypes.string.isRequired,
 		type: PropTypes.oneOf(['degree', 'major', 'concentration', 'emphasis']).isRequired,
 	}
 
@@ -24,7 +25,7 @@ export default class AreaOfStudyGroup extends Component {
 				</h1>
 
 				{this.props.areas.map(area =>
-					<AreaOfStudy key={area.id} {...area} />).toArray()}
+					<AreaOfStudy key={area.id} {...area} studentId={this.props.studentId} />).toArray()}
 			</section>
 		)
 	}

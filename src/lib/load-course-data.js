@@ -80,6 +80,7 @@ async function storeArea(item) {
 
 	let area = item.data
 	area.sourcePath = item.path
+	area.type = area.type.toLowerCase()
 
 	try {
 		await db.store('areas').put(area)

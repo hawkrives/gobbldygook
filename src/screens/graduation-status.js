@@ -12,6 +12,8 @@ import Student from '../models/student'
 import StudentSummary from '../components/student-summary'
 import areaTypes from '../models/area-types'
 
+import db from '../lib/db'
+
 const log = debug('gobbldygook:component:render')
 
 export default class GraduationStatus extends Component {
@@ -25,6 +27,7 @@ export default class GraduationStatus extends Component {
 		this.state = {
 			graduatability: false,
 			areaDetails: Immutable.Map(),
+			allAreas: Immutable.List(),
 		}
 	}
 
@@ -34,7 +37,8 @@ export default class GraduationStatus extends Component {
 
 	async componentWillReceiveProps(nextProps) {
 		const {graduatability, areaDetails} = await nextProps.student.graduatability
-		this.setState({graduatability, areaDetails})
+		const allAreas = Immutable.List(await db.stores.areas.all())
+		this.setState({graduatability, areaDetails, allAreas})
 	}
 
 	render() {
@@ -45,6 +49,8 @@ export default class GraduationStatus extends Component {
 			return null
 		}
 
+		const allAreasGrouped = this.state.allAreas.groupBy(a => a.type)
+
 		const sections = this.props.student.studies
 			// group the studies by their type
 			.groupBy(study => study.type.toLowerCase())
@@ -52,7 +58,11 @@ export default class GraduationStatus extends Component {
 			.map(areas => areas.map(a => this.state.areaDetails.get(a.id) || a.toObject()))
 			// then render them
 			.map((areas, areaType) =>
-				<AreaOfStudyGroup key={areaType} type={areaType} areas={areas.toList()} />)
+				<AreaOfStudyGroup key={areaType}
+					studentId={student.id}
+					type={areaType}
+					areas={areas.toList()}
+					allAreas={allAreasGrouped.get(areaType)} />)
 			.toArray()
 
 		const otherSections = this.props.student.studies
