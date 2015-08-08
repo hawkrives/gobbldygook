@@ -15,7 +15,8 @@
   "scripts": {
     "benchmark": "babel-node ./benchmarks/students-benchmark.js --runs 50 --graph",
     "build": "webpack $npm_package_config_webpack",
-    "build:areas": "./bin/compile-areas areas/ --out-dir dist/",
+    "build:area-info": "./bin/area-package-maker area-data --save",
+    "build:areas": "./bin/compile-areas area-data/ --out-dir dist/",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
     "build:production": "webpack -p $npm_package_config_webpack",
     "clean": "rm -rf build/",
@@ -34,7 +35,7 @@
     "start": "webpack-dev-server $npm_package_config_webpack",
     "test": "mocha $npm_package_config_mocha",
     "test:students": "mocha ./bin/test-students",
-    "travis": "npm run build:areas && npm run test:students && npm run build && npm run coveralls",
+    "travis": "npm run build:areas && npm run build:area-info && npm run test:students && npm run build && npm run coveralls",
     "watch": "npm run watch:lint & npm run watch:test & wait"
   },
   "dependencies": {
