@@ -5,7 +5,7 @@ import curry from 'lodash/function/curry'
 import present from 'present'
 
 import notificationActions from '../flux/notification-actions'
-import {status, json} from './fetch-helpers'
+import {status, json, text} from './fetch-helpers'
 import db from './db'
 
 import {buildDept, buildDeptNum, splitParagraph} from 'sto-helpers'
@@ -179,15 +179,18 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 async function loadDataFiles(infoFile, infoFileBase) {
 	log('load data files', infoFile)
 
-	// Only get the last four years of data
-	let oldestYear = new Date().getFullYear() - 4
-	let lastFourYears = filter(infoFile.files, (file) => parseInt(file.year) >= oldestYear)
-
 	let notificationId = infoFile.type
+	let filesToLoad = infoFile.files
+
+	if (infoFile.type === 'courses') {
+		// Only get the last four years of data
+		const oldestYear = new Date().getFullYear() - 4
+		filesToLoad = filter(filesToLoad, file => file.year >= oldestYear)
+	}
 
 	// Load them into the database
-	let filePromises = map(lastFourYears, (file) =>
-		updateDatabase(infoFile.type, file, infoFileBase, notificationId, size(lastFourYears)))
+	let filePromises = map(filesToLoad, file =>
+		updateDatabase(infoFile.type, file, infoFileBase, notificationId, size(filesToLoad)))
 
 	await* filePromises
 
@@ -196,18 +199,21 @@ async function loadDataFiles(infoFile, infoFileBase) {
 
 async function loadInfoFile(url, infoFileBase) {
 	log('loading ' + url)
-	const infoFile = await fetch(url).then(status).then(json)
-	loadDataFiles(infoFile, infoFileBase)
+	loadDataFiles(await fetch(url).then(status).then(json), infoFileBase)
 }
 
 async function loadData() {
-	const infoFileBase = await fetch('./infoFile.url')
-		.then(status)
-		.then((response) => response.text())
-		.then((path) => path.trim())
-
 	const cachebuster = Date.now()
-	await loadInfoFile(`${infoFileBase}/info.json?${cachebuster}`, infoFileBase)
+
+	const infoFiles = [
+		'./courseData.url',
+		'./areaData.url',
+	]
+
+	const processedFiles = await* map(infoFiles,
+		file => fetch(file).then(status).then(text).then(path => path.trim()))
+
+	await* map(processedFiles, path => loadInfoFile(`${path}/info.json?${cachebuster}`, path))
 }
 
 export default loadData
