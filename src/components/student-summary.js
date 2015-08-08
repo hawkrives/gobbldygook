@@ -67,7 +67,7 @@ export default class StudentSummary extends Component {
 			<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 				<header>
 					<div id='student-letter'>{name.length ? name[0] : ''}</div>
-					<div className='paragraph'>Hi, {NameEl}</div>
+					<div className='paragraph'>Hi, {NameEl}!</div>
 				</header>
 				<div className='content'>
 					<div className='paragraph'>
