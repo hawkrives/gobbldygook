@@ -4,7 +4,6 @@ import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import sample from 'lodash/collection/sample'
 
-import AutosizeInput from 'react-input-autosize'
 import ContentEditable from './content-editable'
 
 import studentActions from '../flux/student-actions'
@@ -15,6 +14,7 @@ const badGraduationMessage = "You haven't planned everything out yet. Ask your a
 
 const welcomeMessages = [
 	'Hi, ',
+	'Hi there, ',
 	'Hello, ',
 	'Konnichiwa, ',
 	'こんにちは、',
@@ -84,9 +84,9 @@ export default class StudentSummary extends Component {
 
 		return (
 			<article className={cx('student-summary', canGraduate ? 'can-graduate' : 'cannot-graduate')}>
-				<header>
+				<header className='student-summary--header'>
 					<div className='student-letter'>{student.name.length ? student.name[0] : ''}</div>
-					<div className='paragraph'>{this.state.welcome}{NameEl}!</div>
+					<div className='intro'>{this.state.welcome}{NameEl}!</div>
 				</header>
 				<div className='content'>
 					<div className='paragraph'>

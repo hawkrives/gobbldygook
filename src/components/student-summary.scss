@@ -1,7 +1,8 @@
 .student-summary {
 	@include card($filter: true);
+
 	hyphens: auto;
-	font-feature-settings: 'onum';
+	font-feature-settings: 'onum', 'tnum';
 
 	&.cannot-graduate .graduation-message {
 		color: color('deep-orange');
@@ -12,6 +13,7 @@
 
 	.content {
 		padding: $block-edge-padding * 2;
+
 		.paragraph {
 			margin: 0;
 		}
@@ -21,7 +23,7 @@
 		}
 	}
 
-	header {
+	.student-summary--header {
 		display: flex;
 		flex-flow: row nowrap;
 		align-items: center;
@@ -29,11 +31,13 @@
 
 		color: $black;
 
-		.paragraph {
+		.intro {
+			flex: 1;
 			margin: 0;
 			font-style: italic;
 			align-items: inherit;
-			margin-right: $block-edge-padding;
+			margin-right: $block-edge-padding * 2;
+			line-height: 1.6em;
 		}
 	}
 
