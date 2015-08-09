@@ -4,6 +4,7 @@ import Immutable from 'immutable'
 
 import debug from 'debug'
 import map from 'lodash/collection/map'
+import includes from 'lodash/collection/includes'
 import difference from 'lodash/array/difference'
 import union from 'lodash/array/union'
 
@@ -64,7 +65,6 @@ export default class GraduationStatus extends Component {
 	}
 
 	removeAreaFromStudent = ({ev, areaId}) => {
-		console.log('removeAreaFromStudent()', areaId)
 		ev.preventDefault()
 		actions.removeArea(this.props.student.id, areaId)
 	}
@@ -83,13 +83,13 @@ export default class GraduationStatus extends Component {
 			// group the studies by their type
 			.groupBy(study => study.type.toLowerCase())
 			// pull the results out of state, or use a mutable version from props
-			.map(areas => areas.map(a => this.state.areaDetails.get(a.id) || a.toObject()))
+			.map(areas => areas.map(area => this.state.areaDetails.get(area.id) || area.toObject()))
 			// then render them
 			.map((areas, areaType) =>
 				<AreaOfStudyGroup key={areaType}
 					showAreaPicker={this.state.showAreaPickerFor.get(areaType)}
 					type={areaType}
-					areas={areas.toList()}
+					areas={areas ? areas.toList() : Immutable.List()}
 					initiateAddArea={this.initiateAddArea}
 					endAddArea={this.endAddArea}
 					addArea={this.addAreaToStudent}
@@ -100,33 +100,52 @@ export default class GraduationStatus extends Component {
 		const usedAreaTypes = this.props.student.studies
 			.map(a => a.get('type'))
 			.toSet()
-			.union(this.state.showAreaPickerFor.filter(a => a === true).keys())
 			.toArray()
 
-		const unusedSectionsList = difference(allAreaTypes, usedAreaTypes)
+		const areaTypesToShowButtonsFor = union(usedAreaTypes, [...this.state.showAreaPickerFor.filter(a => a === true).keys()])
+		const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
+
+		const addUnusedAreaButtonList = (
+			<section className='unused-area-of-studies'>
+				<span className='unused-areas-title'>Add: </span>
+				{unusedTypes.map(type => (
+					<Button key={type}
+						className='add-unused-area-of-study'
+						onClick={(ev) => this.initiateAddArea({ev, type})}
+						type='flat'>
+						{type}
+					</Button>
+				))}
+			</section>
+		)
+
+		const unusedTypesToShow = this.state.showAreaPickerFor
+			.filter((toShow, type) => toShow === true && includes(unusedTypes, type))
+			.map((toShow, type) =>
+				<AreaOfStudyGroup key={type}
+					showAreaPicker={toShow}
+					type={type}
+					areas={Immutable.List()}
+					initiateAddArea={this.initiateAddArea}
+					endAddArea={this.endAddArea}
+					addArea={this.addAreaToStudent}
+					removeArea={this.removeAreaFromStudent}
+					allAreas={allAreasGrouped.get(type) || Immutable.List()} />)
+			.toArray()
 
 		return (
 			<section className={cx('graduation-status', {'is-hidden': this.props.isHidden})}>
-				<StudentSummary student={student}
-								graduatability={this.state.graduatability} />
+				<StudentSummary
+					student={student}
+					graduatability={this.state.graduatability} />
 
 				{sections}
 
-				{
-					unusedSectionsList.length
-						? <section className='unused-area-of-studies'>
-							<span className='unused-areas-title'>Add: </span>
-							{map(unusedSectionsList, type => (
-								<Button key={type}
-									className='add-unused-area-of-study'
-									onClick={(ev) => this.initiateAddArea({ev, type})}
-									type='flat'>
-									{type}
-								</Button>
-							))}
-						</section>
-						: null
-				}
+				{unusedTypesToShow}
+
+				{unusedTypes.length
+					? addUnusedAreaButtonList
+					: null}
 			</section>
 		)
 	}
