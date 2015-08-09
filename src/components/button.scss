@@ -58,7 +58,6 @@
 .button--flat {
 	@include button;
 
-	color: color('black', '500');
 	background-color: transparent;
 
 	&:hover {
