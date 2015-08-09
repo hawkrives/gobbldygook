@@ -6,11 +6,13 @@ import kebabCase from 'lodash/string/kebabCase'
 
 import Button from './button'
 import List from './list'
+import Toolbar from './toolbar'
 
 export default class AreaPicker extends Component {
 	static propTypes = {
 		addArea: PropTypes.func.isRequired,
 		allAreas: PropTypes.instanceOf(I.List).isRequired,
+		closePicker: PropTypes.func.isRequired,
 		currentAreas: PropTypes.instanceOf(I.List).isRequired,
 		removeArea: PropTypes.func.isRequired,
 		type: PropTypes.string.isRequired,
@@ -28,11 +30,14 @@ export default class AreaPicker extends Component {
 
 		return (
 			<div className='add-area'>
-				<input
-					className='add-area--filter'
-					placeholder={'Filter ' + pluralizeArea(this.props.type)}
-					value={this.state.filter}
-					onChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})} />
+				<Toolbar>
+					<input
+						className='add-area--filter'
+						placeholder={'Filter ' + pluralizeArea(this.props.type)}
+						value={this.state.filter}
+						onChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})} />
+					<Button className='close-area-picker' onClick={this.props.closePicker}>Close</Button>
+				</Toolbar>
 
 				<List type='plain'>
 					{this.props.allAreas

@@ -53,6 +53,7 @@ export default class AreaOfStudyGroup extends Component {
 				{this.props.showAreaPicker
 					? <AreaPicker
 						currentAreas={this.props.areas}
+						closePicker={ev => this.props.endAddArea({ev, type: this.props.type})}
 						type={this.props.type}
 						allAreas={this.props.allAreas}
 						addArea={this.props.addArea}

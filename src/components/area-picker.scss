@@ -1,11 +1,20 @@
 .add-area {
 	@include card;
 	padding: $area-edge-padding;
+
+	& > .toolbar {
+		display: flex;
+		margin-bottom: $area-edge-padding;
+
+	}
+}
+.close-area-picker {
+	margin-left: 0.5em;
+	padding: 0.25em 1em;
 }
 
 .add-area--filter {
-	width: 100%;
-	margin-bottom: $area-edge-padding;
+	flex: 1;
 }
 
 .area--choice {
