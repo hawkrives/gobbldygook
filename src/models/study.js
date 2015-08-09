@@ -101,7 +101,7 @@ export default class Study extends StudyRecord {
 
 		const id = `${kebabCase(name)}-${type}?rev=${revision}`
 		const data = loadArea({name, type, revision})
-			.catch(err => ({error: err.message}))
+			.catch(err => ({_error: err.message}))
 
 		super({
 			type,

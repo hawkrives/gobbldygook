@@ -33,9 +33,9 @@ export default async function checkStudentAgainstArea(student, area) {
 	const areaData = await area.data
 
 	const baseAreaResults = {name: area.name, type: area.type, id: area.id}
-	if (areaData.error) {
-		console.error('checkStudentAgainstArea():', areaData.error)
-		return {...baseAreaResults, error: areaData.error}
+	if (areaData._error) {
+		console.error('checkStudentAgainstArea():', areaData._error)
+		return {...baseAreaResults, _error: areaData._error}
 	}
 
 
@@ -47,7 +47,7 @@ export default async function checkStudentAgainstArea(student, area) {
 	}
 	catch (err) {
 		console.error('checkStudentAgainstArea():', err)
-		return {...baseAreaResults, error: err.message}
+		return {...baseAreaResults, _error: err.message}
 	}
 
 	const finalReqs = findLeafRequirements(details)

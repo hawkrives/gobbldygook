@@ -8,12 +8,12 @@ import ProgressBar from './progress-bar'
 
 export default class AreaOfStudy extends Component {
 	static propTypes = {
+		_error: PropTypes.string,
 		_progress: PropTypes.shape({
 			at: PropTypes.number.isRequired,
 			of: PropTypes.number.isRequired,
 		}),
 		data: PropTypes.object,
-		error: PropTypes.string,
 		id: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
 		removeArea: PropTypes.func.isRequired,
@@ -28,7 +28,7 @@ export default class AreaOfStudy extends Component {
 			at: 0,
 			of: 1,
 		},
-		error: '',
+		_error: '',
 		name: 'Unknown Area',
 		type: '???',
 		revision: '0000-00',
@@ -65,7 +65,7 @@ export default class AreaOfStudy extends Component {
 						<Icon className='area--open-indicator' name={this.state.open ? 'ionicon-chevron-up' : 'ionicon-chevron-down'} />
 					</span>
 				</div>
-				<ProgressBar className={cx('area--progress', {error: this.props.error})} colorful={true}
+				<ProgressBar className={cx('area--progress', {error: this.props._error})} colorful={true}
 					value={this.props._progress.at}
 					max={this.props._progress.of} />
 			</div>
@@ -82,15 +82,15 @@ export default class AreaOfStudy extends Component {
 		)
 
 		return (
-			<details className={cx('area', {errored: this.props.error})}>
+			<details className={cx('area', {errored: this.props._error})}>
 				<summary className='area--summary' onClick={() => this.setState(state => ({open: !state.open}))}>
 					{this.state.confirmRemoval
 						? removalConfirmation
 						: summary}
 				</summary>
 				{this.state.open && !this.state.confirmRemoval
-					? this.props.error
-						? <p className='area--error'>{this.props.error} {':('}</p>
+					? this.props._error
+						? <p className='area--error'>{this.props._error} {':('}</p>
 						: <Requirement {...this.props} topLevel />
 					: null}
 			</details>
