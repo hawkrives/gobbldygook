@@ -44,6 +44,7 @@ class CourseRemovalBox extends Component {
 
 		return this.props.connectDropTarget(
 			<div className={className}>
+				<Icon name='ionicon-ios-trash-outline' type='block' style={{fontSize: '3em', textAlign: 'center'}} />
 				Drop a course here to remove it.
 			</div>
 		)
