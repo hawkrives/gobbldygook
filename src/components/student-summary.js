@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
+import sample from 'lodash/collection/sample'
 
 import AutosizeInput from 'react-input-autosize'
 
@@ -10,10 +11,24 @@ import Student from '../models/student'
 const goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
 const badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
+const welcomeMessages = [
+	'Hi, ',
+	'Hello, ',
+	'Konnichiwa, ',
+	'こんにちは、',
+]
+
 export default class StudentSummary extends Component {
 	static propTypes = {
 		graduatability: PropTypes.bool.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
+	}
+
+	constructor() {
+		super()
+		this.state = {
+			welcome: sample(welcomeMessages),
+		}
 	}
 
 	render() {
@@ -26,7 +41,8 @@ export default class StudentSummary extends Component {
 		const NameEl = (
 			<AutosizeInput className='autosize-input'
 				value={name}
-				onChange={ev => studentActions.changeName(studentId, ev.target.value)} />
+				onChange={ev => studentActions.changeName(studentId, ev.target.value)}
+			/>
 		)
 
 		const degrees = studies.filter(s => s.type === 'degree')
@@ -67,7 +83,7 @@ export default class StudentSummary extends Component {
 			<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
 				<header>
 					<div id='student-letter'>{name.length ? name[0] : ''}</div>
-					<div className='paragraph'>Hi, {NameEl}!</div>
+					<div className='paragraph'>{this.state.welcome}{NameEl}!</div>
 				</header>
 				<div className='content'>
 					<div className='paragraph'>
