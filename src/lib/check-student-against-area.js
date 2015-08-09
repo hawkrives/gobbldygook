@@ -38,7 +38,6 @@ export default async function checkStudentAgainstArea(student, area) {
 		return {...baseAreaResults, _error: areaData._error}
 	}
 
-
 	studentData.courses = map(studentData.courses, alterCourse)
 
 	let details = {}
