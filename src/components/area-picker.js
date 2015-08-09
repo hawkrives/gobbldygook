@@ -48,10 +48,10 @@ export default class AreaPicker extends Component {
 								{area.name}
 								{
 									currentAreaNames.includes(area.name)
-									? <Button type='flat' onClick={ev => this.props.removeArea({ev, areaId: `${kebabCase(area.name)}-${area.type}?rev=${area.revision}`})}>
+									? <Button className='toggle-area' type='flat' onClick={ev => this.props.removeArea({ev, areaId: `${kebabCase(area.name)}-${area.type}?rev=${area.revision}`})}>
 										Remove
 									</Button>
-									: <Button type='flat' onClick={ev => this.props.addArea({ev, area})}>
+									: <Button className='toggle-area' type='flat' onClick={ev => this.props.addArea({ev, area})}>
 										Add
 									</Button>
 								}
