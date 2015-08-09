@@ -17,7 +17,7 @@ export default class AreaOfStudyGroup extends Component {
 		endAddArea: PropTypes.func.isRequired,
 		initiateAddArea: PropTypes.func.isRequired,
 		removeArea: PropTypes.func.isRequired,
-		showAreaPicker: PropTypes.bool,
+		showAreaPicker: PropTypes.bool.isRequired,
 		toggleOverride: PropTypes.func.isRequired,
 		type: PropTypes.oneOf(['degree', 'major', 'concentration', 'emphasis']).isRequired,
 	}
@@ -48,6 +48,7 @@ export default class AreaOfStudyGroup extends Component {
 						removeArea={this.props.removeArea}
 						addOverride={this.props.addOverride}
 						toggleOverride={this.props.toggleOverride}
+						showCloseButton={this.props.showAreaPicker}
 					/>).toArray()}
 
 				{this.props.showAreaPicker

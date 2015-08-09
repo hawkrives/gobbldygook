@@ -20,6 +20,7 @@ export default class AreaOfStudy extends Component {
 		removeArea: PropTypes.func.isRequired,
 		result: PropTypes.object.isRequired,
 		revision: PropTypes.string.isRequired,
+		showCloseButton: PropTypes.bool.isRequired,
 		toggleOverride: PropTypes.func.isRequired,
 		type: PropTypes.string.isRequired,
 	}
@@ -45,12 +46,12 @@ export default class AreaOfStudy extends Component {
 		}
 	}
 
-	startRemovalConfirmation = (ev) => {
+	startRemovalConfirmation = ev => {
 		ev.preventDefault()
 		this.setState({confirmRemoval: true})
 	}
 
-	endRemovalConfirmation = (ev) => {
+	endRemovalConfirmation = ev => {
 		ev.preventDefault()
 		this.setState({confirmRemoval: false})
 	}
@@ -61,9 +62,13 @@ export default class AreaOfStudy extends Component {
 				<div className='area--summary-row'>
 					<h1 className='area--title'>{this.props.name}</h1>
 					<span className='icons'>
-						<Button className='area--remove-button' onClick={this.startRemovalConfirmation}>
-							<Icon name='ionicon-close' />
-						</Button>
+						{
+							this.props.showCloseButton
+								? <Button className='area--remove-button' onClick={this.startRemovalConfirmation}>
+									<Icon name='ionicon-close' />
+								</Button>
+								: null
+						}
 						<Icon className='area--open-indicator' name={this.state.open ? 'ionicon-chevron-up' : 'ionicon-chevron-down'} />
 					</span>
 				</div>
@@ -77,7 +82,7 @@ export default class AreaOfStudy extends Component {
 			<div className='area--confirm-removal'>
 				<p>Remove <strong>{this.props.name}</strong>?</p>
 				<span className='button-group'>
-					<Button className='area--actually-remove-area' onClick={(ev) => this.props.removeArea({ev, areaId: this.props.id})}>Remove</Button>
+					<Button className='area--actually-remove-area' onClick={ev => this.props.removeArea({ev, areaId: this.props.id})}>Remove</Button>
 					<Button onClick={this.endRemovalConfirmation}>Cancel</Button>
 				</span>
 			</div>
