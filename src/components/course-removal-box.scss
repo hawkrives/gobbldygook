@@ -11,14 +11,17 @@
 	max-width: 270px;
 
 	display: none;
-	box-shadow: 0 0 10px 2px #444;
+	box-shadow: 0 0 10px #444;
 
 	&.can-drop {
 		color: black;
 		display: block;
 		z-index: $z-sidebar + 1;
 	}
+
 	&.is-over {
-		color: color('green', '600');
+		box-shadow: 0 0 10px color('red', '900');
+		color: color('red', '900');
+		background-color: color('red', '50');
 	}
 }
