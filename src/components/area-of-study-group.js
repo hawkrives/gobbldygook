@@ -18,6 +18,7 @@ export default class AreaOfStudyGroup extends Component {
 		initiateAddArea: PropTypes.func.isRequired,
 		removeArea: PropTypes.func.isRequired,
 		showAreaPicker: PropTypes.bool,
+		toggleOverride: PropTypes.func.isRequired,
 		type: PropTypes.oneOf(['degree', 'major', 'concentration', 'emphasis']).isRequired,
 	}
 
@@ -42,7 +43,12 @@ export default class AreaOfStudyGroup extends Component {
 				</h1>
 
 				{this.props.areas.map(area =>
-					<AreaOfStudy key={area.id} {...area} removeArea={this.props.removeArea} addOverride={this.props.addOverride} />).toArray()}
+					<AreaOfStudy key={area.id}
+						{...area}
+						removeArea={this.props.removeArea}
+						addOverride={this.props.addOverride}
+						toggleOverride={this.props.toggleOverride}
+					/>).toArray()}
 
 				{this.props.showAreaPicker
 					? <AreaPicker

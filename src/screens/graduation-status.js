@@ -71,6 +71,19 @@ export default class GraduationStatus extends Component {
 		actions.setOverride(this.props.student.id, {[codifiedPath]: true})
 	}
 
+	toggleOverrideOnStudent = ({ev, path}) => {
+		ev.preventDefault()
+		const codifiedPath = pathToOverride(path)
+		if (this.props.student.overrides.has(codifiedPath)) {
+			console.log('removing')
+			actions.removeOverride(this.props.student.id, codifiedPath)
+		}
+		else {
+			console.log('setting')
+			actions.setOverride(this.props.student.id, {[codifiedPath]: true})
+		}
+	}
+
 	removeAreaFromStudent = ({ev, areaId}) => {
 		ev.preventDefault()
 		actions.removeArea(this.props.student.id, areaId)
@@ -102,6 +115,7 @@ export default class GraduationStatus extends Component {
 					initiateAddArea={this.initiateAddArea}
 					removeArea={this.removeAreaFromStudent}
 					showAreaPicker={this.state.showAreaPickerFor.get(areaType)}
+					toggleOverride={this.toggleOverrideOnStudent}
 					type={areaType}
 				/>)
 			.toArray()
@@ -140,6 +154,7 @@ export default class GraduationStatus extends Component {
 					initiateAddArea={this.initiateAddArea}
 					removeArea={this.removeAreaFromStudent}
 					showAreaPicker={toShow}
+					toggleOverride={this.toggleOverrideOnStudent}
 					type={type}
 				/>)
 			.toArray()

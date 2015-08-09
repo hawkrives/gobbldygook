@@ -16,6 +16,7 @@ export default class Requirement extends Component {
 		name: PropTypes.string,
 		path: PropTypes.array,
 		result: PropTypes.object,
+		toggleOverride: PropTypes.func.isRequired,
 		topLevel: PropTypes.bool,
 	}
 
@@ -43,9 +44,28 @@ export default class Requirement extends Component {
 
 		const title = this.props.topLevel
 			? null
-			: <h2 className={`requirement--title ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`}>{this.props.name}</h2>
+			: (
+				<h2 className={`requirement--title ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`}>
+					{this.props.computed ? '✓' : '×'}{' '}
+					{this.props.name}
+					{' '}
+					<Button className='requirement--override-button' onClick={ev => this.props.toggleOverride({ev, path: this.props.path})}>
+						{
+							this.props.overridden
+								? '{Remove Override}'
+								: '{Override}'
+						}
+					</Button>
+				</h2>
+			)
 
-		const children = childKeys.map(key => <Requirement key={key} name={key} {...this.props[key]} path={this.props.path.concat(key)} addOverride={this.props.addOverride} />)
+		const children = childKeys.map(key => <Requirement key={key}
+			name={key}
+			{...this.props[key]}
+			path={this.props.path.concat(key)}
+			addOverride={this.props.addOverride}
+			toggleOverride={this.props.toggleOverride}
+		/>)
 
 		let override = (this.props.message && !this.props.result)
 			? (
