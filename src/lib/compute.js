@@ -33,7 +33,6 @@ export default function compute(requirement, {path, courses=[], overrides={}, di
 
 	// or ask for an override
 	else if (requirement.hasOwnProperty('message')) {
-		// TODO: show a button to toggle overriding
 		computed = false
 	}
 
