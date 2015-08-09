@@ -85,7 +85,7 @@ export default class Student extends StudentRecord {
 	}
 
 	changeName(newName) {
-		return this.set('name', (newName || '').trim())
+		return this.set('name', newName)
 	}
 
 	changeAdvisor(newAdvisor) {
