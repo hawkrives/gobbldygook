@@ -120,7 +120,7 @@ export default class GraduationStatus extends Component {
 		)
 
 		const unusedTypesToShow = this.state.showAreaPickerFor
-			.filter((toShow, type) => toShow === true && includes(unusedTypes, type))
+			.filter((toShow, type) => toShow === true && !includes(usedAreaTypes, type))
 			.map((toShow, type) =>
 				<AreaOfStudyGroup key={type}
 					showAreaPicker={toShow}
