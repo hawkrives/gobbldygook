@@ -9,13 +9,20 @@ import Icon from './icon'
 
 // Implements the drag source contract.
 const removeCourseTarget = {
-	drop(props, monitor, component) {
+	drop(props, monitor) {
 		const item = monitor.getItem()
-		const {clbid, fromScheduleID} = item
-		if (fromScheduleID) {
+		const {clbid, fromScheduleID, fromSchedule} = item
+		if (fromSchedule) {
 			console.log('dropped course', item)
 			studentActions.removeCourse(props.studentId, fromScheduleID, clbid)
 		}
+	},
+	canDrop(props, monitor) {
+		const item = monitor.getItem()
+		if (!item.fromSearch) {
+			return true
+		}
+		return false
 	},
 }
 

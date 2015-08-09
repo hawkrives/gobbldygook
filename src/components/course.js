@@ -18,6 +18,8 @@ const courseSource = {
 	beginDrag(props) {
 		const scheduleId = props.schedule ? props.schedule.id : null
 		return {
+			fromSchedule: scheduleId !== null,
+			fromSearch: scheduleId === null,
 			clbid: props.info.clbid,
 			fromScheduleID: scheduleId,
 		}
