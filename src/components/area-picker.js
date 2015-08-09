@@ -28,6 +28,20 @@ export default class AreaPicker extends Component {
 	render() {
 		const currentAreaNames = this.props.currentAreas.map(a => a.name)
 
+		const areaList = this.props.allAreas
+			.toList()
+			.filterNot(area => currentAreaNames.includes(area.name))
+			.filter(area => fuzzysearch(this.state.filter, area.name.toLowerCase()))
+			.map((area, i) =>
+				<div key={area.name + i} className='area--choice'>
+					{area.name}
+					<Button className='toggle-area' type='flat'
+						onClick={ev => this.props.addArea({ev, area})}>
+						Add
+					</Button>
+				</div>)
+			.toArray()
+
 		return (
 			<div className='add-area'>
 				<Toolbar>
@@ -40,23 +54,11 @@ export default class AreaPicker extends Component {
 				</Toolbar>
 
 				<List type='plain'>
-					{this.props.allAreas
-						.toList()
-						.filter(a => fuzzysearch(this.state.filter, a.name.toLowerCase()))
-						.map((area, i) =>
-							<div key={i} className='area--choice'>
-								{area.name}
-								{
-									currentAreaNames.includes(area.name)
-									? <Button className='toggle-area' type='flat' onClick={ev => this.props.removeArea({ev, areaId: `${kebabCase(area.name)}-${area.type}?rev=${area.revision}`})}>
-										Remove
-									</Button>
-									: <Button className='toggle-area' type='flat' onClick={ev => this.props.addArea({ev, area})}>
-										Add
-									</Button>
-								}
-							</div>)
-						.toArray()}
+					{areaList.length
+						? areaList
+						: currentAreaNames.size
+							? 'All available areas have already been added.'
+							: 'No areas are available.'}
 				</List>
 			</div>
 		)
