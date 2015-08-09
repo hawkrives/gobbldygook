@@ -748,6 +748,7 @@ export default class Icon extends Component {
 				return new Error('Invalid icon')
 			}
 		},
+		style: PropTypes.object,
 		type: PropTypes.oneOf(['block', 'inline']).isRequired,
 	}
 
@@ -763,7 +764,7 @@ export default class Icon extends Component {
 		return (
 			<span
 				className={cx('icon', this.props.className)}
-				style={style}>
+				style={{...style, ...this.props.style}}>
 				{icons[this.props.name]}
 			</span>
 		)
