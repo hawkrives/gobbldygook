@@ -13,6 +13,7 @@ export default class AreaOfStudy extends Component {
 			at: PropTypes.number.isRequired,
 			of: PropTypes.number.isRequired,
 		}),
+		addOverride: PropTypes.func.isRequired,
 		data: PropTypes.object,
 		id: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
@@ -91,7 +92,7 @@ export default class AreaOfStudy extends Component {
 				{this.state.open && !this.state.confirmRemoval
 					? this.props._error
 						? <p className='area--error'>{this.props._error} {':('}</p>
-						: <Requirement {...this.props} topLevel />
+						: <Requirement {...this.props} topLevel addOverride={this.props.addOverride} path={[this.props.type, this.props.name]} />
 					: null}
 			</details>
 		)

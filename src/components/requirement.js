@@ -9,10 +9,12 @@ import Button from './button'
 
 export default class Requirement extends Component {
 	static propTypes = {
+		addOverride: PropTypes.func.isRequired,
 		computed: PropTypes.bool,
 		filter: PropTypes.object,
 		message: PropTypes.string,
 		name: PropTypes.string,
+		path: PropTypes.array,
 		result: PropTypes.object,
 		topLevel: PropTypes.bool,
 	}
@@ -43,13 +45,13 @@ export default class Requirement extends Component {
 			? null
 			: <h2 className={`requirement--title ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`}>{this.props.name}</h2>
 
-		const children = childKeys.map(k => <Requirement key={k} name={k} {...this.props[k]} />)
+		const children = childKeys.map(key => <Requirement key={key} name={key} {...this.props[key]} path={this.props.path.concat(key)} addOverride={this.props.addOverride} />)
 
 		let override = (this.props.message && !this.props.result)
 			? (
 				<span className='requirement--override-buttons button-group'>
-					<Button>Not yet…</Button>
-					<Button>Done!</Button>
+					<Button type='flat'>Not yet…</Button>
+					<Button onClick={ev => this.props.addOverride({ev, path: this.props.path})} type='flat'>Done!</Button>
 				</span>
 			)
 			: null

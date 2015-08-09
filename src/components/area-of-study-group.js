@@ -11,6 +11,7 @@ import Button from './button'
 export default class AreaOfStudyGroup extends Component {
 	static propTypes = {
 		addArea: PropTypes.func.isRequired,
+		addOverride: PropTypes.func.isRequired,
 		allAreas: PropTypes.instanceOf(List).isRequired,
 		areas: PropTypes.instanceOf(List).isRequired,
 		endAddArea: PropTypes.func.isRequired,
@@ -41,7 +42,7 @@ export default class AreaOfStudyGroup extends Component {
 				</h1>
 
 				{this.props.areas.map(area =>
-					<AreaOfStudy key={area.id} {...area} removeArea={this.props.removeArea} />).toArray()}
+					<AreaOfStudy key={area.id} {...area} removeArea={this.props.removeArea} addOverride={this.props.addOverride} />).toArray()}
 
 				{this.props.showAreaPicker
 					? <AreaPicker
