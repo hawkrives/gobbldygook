@@ -1,7 +1,13 @@
 $edge-padding: 0.5em;
 
+.requirement {
+	@include card;
+	margin: 0 0.25em 0.25em 0.5em;
+}
+
 .requirement .requirement .requirement {
-	border-left: 0.125em black solid;
+	// margin: 0 0 0 0.5em;
+	// border-left: 0.125em black solid;
 }
 
 .requirement--result {
@@ -23,8 +29,7 @@ $edge-padding: 0.5em;
 	font-size: 1em;
 	font-weight: normal;
 
-	border-top: solid 1px black;
-	border-bottom: solid 1px black;
+	border-bottom: $material-divider;
 	padding: 0.2em 0.15em;
 }
 
