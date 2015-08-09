@@ -39,9 +39,10 @@ export default class StudentSummary extends Component {
 		const studies = student.studies
 
 		const NameEl = (
-			<ContentEditable className='autosize-input'
-				value={String(student.name)}
+			<ContentEditable
+				className='autosize-input'
 				onChange={ev => studentActions.changeName(student.id, ev.target.value)}
+				value={String(student.name)}
 			/>
 		)
 
@@ -68,15 +69,17 @@ export default class StudentSummary extends Component {
 		const graduationEl = (
 			<ContentEditable
 				className='autosize-input'
+				onChange={ev => studentActions.changeGraduation(student.id, parseInt(ev.target.value || 0))}
 				value={String(student.graduation)}
-				onChange={ev => studentActions.changeGraduation(student.id, parseInt(ev.target.value || 0))} />
+			/>
 		)
 
 		const matriculationEl = (
 			<ContentEditable
 				className='autosize-input'
+				onChange={ev => studentActions.changeMatriculation(student.id, parseInt(ev.target.value || 0))}
 				value={String(student.matriculation)}
-				onChange={ev => studentActions.changeMatriculation(student.id, parseInt(ev.target.value || 0))} />
+			/>
 		)
 
 		return (
