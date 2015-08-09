@@ -15,8 +15,6 @@ import {randomChar} from 'sto-helpers'
 import Schedule from './schedule'
 import Study from './study'
 
-
-
 const now = new Date()
 const StudentRecord = Immutable.Record({
 	id: null,
@@ -257,6 +255,7 @@ export default class Student extends StudentRecord {
 			changelog(`saving student ${this.name} (${this.id})`)
 			const student = this.set('dateLastModified', new Date())
 			localStorage.setItem(student.id, stringify(student))
+			require('../lib/db').stores.students.put(JSON.parse(stringify(student)))
 		}
 	}
 
