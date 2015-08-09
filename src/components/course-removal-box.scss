@@ -1,15 +1,17 @@
 .course-removal-box {
-	padding: 0.5em 1em;
+	padding: 5em 1em;
 	color: color('gray', '500');
 	border: 1px dashed currentColor;
 	background-color: white;
 	border-radius: 2px;
 
-	position: absolute;
-	top: 0;
-	left: 0;
+	position: fixed;
+	top: $page-edge-padding;
+	left: $page-edge-padding;
+	max-width: 270px;
 
 	display: none;
+	box-shadow: 0 0 10px 2px #444;
 
 	&.can-drop {
 		color: black;
