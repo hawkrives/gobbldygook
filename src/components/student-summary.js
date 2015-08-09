@@ -4,6 +4,7 @@ import plur from 'plur'
 import sample from 'lodash/collection/sample'
 
 import AutosizeInput from 'react-input-autosize'
+import ContentEditable from './content-editable'
 
 import studentActions from '../flux/student-actions'
 import Student from '../models/student'
@@ -39,9 +40,9 @@ export default class StudentSummary extends Component {
 		const name = student.name
 		const studentId = student.id
 		const NameEl = (
-			<AutosizeInput className='autosize-input'
-				value={name}
-				onChange={ev => studentActions.changeName(studentId, ev.target.value)}
+			<ContentEditable className='autosize-input'
+				value={String(student.name)}
+				onChange={ev => studentActions.changeName(student.id, ev.target.value)}
 			/>
 		)
 
@@ -66,17 +67,17 @@ export default class StudentSummary extends Component {
 		const emphasisEl = oxford(emphases.map(s => s.name).toArray())
 
 		const graduationEl = (
-			<AutosizeInput
+			<ContentEditable
 				className='autosize-input'
 				value={String(student.graduation)}
-				onChange={ev => studentActions.changeGraduation(studentId, parseInt(ev.target.value || 0))} />
+				onChange={ev => studentActions.changeGraduation(student.id, parseInt(ev.target.value || 0))} />
 		)
 
 		const matriculationEl = (
-			<AutosizeInput
+			<ContentEditable
 				className='autosize-input'
 				value={String(student.matriculation)}
-				onChange={ev => studentActions.changeMatriculation(studentId, parseInt(ev.target.value || 0))} />
+				onChange={ev => studentActions.changeMatriculation(student.id, parseInt(ev.target.value || 0))} />
 		)
 
 		return (
