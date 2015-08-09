@@ -35,6 +35,7 @@ let routes = (
 console.log('3. 2.. 1... Blast off! 🚀')
 
 Router.run(routes, (Handler, state) => {
-	Handler = DragDropContext(HTML5Backend)(Handler)
-	React.render(<Handler routerState={state} />, document.getElementById('app'))
+	// this causes the router to unmount after a single path change
+	const DnDHandler = DragDropContext(HTML5Backend)(Handler)
+	React.render(<DnDHandler routerState={state} />, document.getElementById('app'))
 })

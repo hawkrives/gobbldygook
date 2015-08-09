@@ -11,6 +11,8 @@ import GraduationStatus from './graduation-status'
 import Icon from '../components/icon'
 import Toolbar from '../components/toolbar'
 
+import CourseRemovalBox from '../components/course-removal-box'
+
 export default class Sidebar extends Component {
 	static propTypes = {
 		student: PropTypes.instanceOf(Student).isRequired,
@@ -66,6 +68,8 @@ export default class Sidebar extends Component {
 						Redo
 					</Button>
 				</Toolbar>
+
+				<CourseRemovalBox studentId={this.props.student.id} />
 
 				<GraduationStatus
 					isHidden={this.state.isSearching}
