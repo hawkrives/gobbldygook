@@ -64,6 +64,13 @@ export default class GraduationStatus extends Component {
 		actions.addArea(this.props.student.id, area)
 	}
 
+	addOverrideToStudent = ({ev, path}) => {
+		ev.preventDefault()
+		const codifiedPath = path.join('.').toLowerCase()
+		console.log('addOverrideToStudent():', path, codifiedPath)
+		actions.addOverride(this.props.student.id, {[codifiedPath]: true})
+	}
+
 	removeAreaFromStudent = ({ev, areaId}) => {
 		ev.preventDefault()
 		actions.removeArea(this.props.student.id, areaId)
@@ -87,14 +94,16 @@ export default class GraduationStatus extends Component {
 			// then render them
 			.map((areas, areaType) =>
 				<AreaOfStudyGroup key={areaType}
+					addArea={this.addAreaToStudent}
+					addOverride={this.addOverrideToStudent}
+					allAreas={allAreasGrouped.get(areaType) || Immutable.List()}
+					areas={areas ? areas.toList() : Immutable.List()}
+					endAddArea={this.endAddArea}
+					initiateAddArea={this.initiateAddArea}
+					removeArea={this.removeAreaFromStudent}
 					showAreaPicker={this.state.showAreaPickerFor.get(areaType)}
 					type={areaType}
-					areas={areas ? areas.toList() : Immutable.List()}
-					initiateAddArea={this.initiateAddArea}
-					endAddArea={this.endAddArea}
-					addArea={this.addAreaToStudent}
-					removeArea={this.removeAreaFromStudent}
-					allAreas={allAreasGrouped.get(areaType) || Immutable.List()} />)
+				/>)
 			.toArray()
 
 		const usedAreaTypes = this.props.student.studies
@@ -123,14 +132,16 @@ export default class GraduationStatus extends Component {
 			.filter((toShow, type) => toShow === true && !includes(usedAreaTypes, type))
 			.map((toShow, type) =>
 				<AreaOfStudyGroup key={type}
+					addArea={this.addAreaToStudent}
+					addOverride={this.addOverrideToStudent}
+					allAreas={allAreasGrouped.get(type) || Immutable.List()}
+					areas={Immutable.List()}
+					endAddArea={this.endAddArea}
+					initiateAddArea={this.initiateAddArea}
+					removeArea={this.removeAreaFromStudent}
 					showAreaPicker={toShow}
 					type={type}
-					areas={Immutable.List()}
-					initiateAddArea={this.initiateAddArea}
-					endAddArea={this.endAddArea}
-					addArea={this.addAreaToStudent}
-					removeArea={this.removeAreaFromStudent}
-					allAreas={allAreasGrouped.get(type) || Immutable.List()} />)
+				/>)
 			.toArray()
 
 		return (
