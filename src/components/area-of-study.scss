@@ -19,6 +19,10 @@
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
+
+	& > .icons {
+		font-size: 0.8em;
+	}
 }
 
 
