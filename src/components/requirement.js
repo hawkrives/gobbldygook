@@ -1,11 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import filter from 'lodash/collection/filter'
 import keys from 'lodash/object/keys'
+import cx from 'classnames'
 
 import isRequirementName from '../lib/is-requirement-name'
 
 import Expression from './expression'
 import Button from './button'
+import Icon from './icon'
 
 export default class Requirement extends Component {
 	static propTypes = {
@@ -14,7 +16,8 @@ export default class Requirement extends Component {
 		filter: PropTypes.object,
 		message: PropTypes.string,
 		name: PropTypes.string,
-		path: PropTypes.array,
+		overridden: PropTypes.bool,
+		path: PropTypes.array.isRequired,
 		result: PropTypes.object,
 		toggleOverride: PropTypes.func.isRequired,
 		topLevel: PropTypes.bool,
@@ -77,7 +80,7 @@ export default class Requirement extends Component {
 			: null
 
 		return (
-			<div className={`requirement`}>
+			<div className={cx(`requirement`, {overridden: this.props.overridden})}>
 				{title}
 				{message}
 				{override}

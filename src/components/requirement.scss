@@ -5,9 +5,9 @@ $edge-padding: 0.5em;
 	margin: 0 0.25em 0.25em 0.5em;
 }
 
-.requirement .requirement .requirement {
-	// margin: 0 0 0 0.5em;
-	// border-left: 0.125em black solid;
+.requirement--override-button {
+	padding: 0.25em 0.85em;
+	margin-left: 0.5em;
 }
 
 .requirement--result {
