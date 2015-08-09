@@ -33,7 +33,7 @@ function makeBooleanExpression({expr, ctx}) {
 }
 
 function makeOfExpression({expr, ctx}) {
-	const description = `${expr._counted || 0} of ${expr.$count}`
+	const description = `${expr._counted || 0} of ${expr.$count} from among`
 
 	const contents = expr.$of.map((ex, i) =>
 				<Expression key={i} expr={ex} ctx={ctx} />)
