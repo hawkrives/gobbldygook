@@ -73,9 +73,13 @@ export default class StudentSummary extends Component {
 					<div className='paragraph'>
 						After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
 						{(degrees.size > 0) ? `${degreeEmphasizer}${degreeEl} ${degreeWord}` : `no ${degreeWord}`}
-						{(majors.size > 0) ? `, ${majorEmphasizer}${majorWord} in ${majorEl}` : null}
-						{(concentrations.size > 0) ? `, and ${concentrationEmphasizer}${concentrationWord} in ${concentrationEl}` : null}
-						{(emphases.size > 0) ? `, not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisEl}` : null}{"."}
+						{(majors.size) ? (concentrations.size || emphases.size) ? ', ' : ' and ' : ''}
+						{(majors.size > 0) ? `${majorEmphasizer}${majorWord} in ${majorEl}` : null}
+						{(majors.size && concentrations.size) ? ', and ' : ''}
+						{(concentrations.size > 0) ? `${concentrationEmphasizer}${concentrationWord} in ${concentrationEl}` : null}
+						{((majors.size || concentrations.size) && emphases.size) ? ', ' : ''}
+						{(emphases.size > 0) ? `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisEl}` : null}
+						{'.'}
 					</div>
 					<div className='paragraph graduation-message'>
 						{canGraduate ? goodGraduationMessage : badGraduationMessage}
