@@ -71,14 +71,7 @@ $edge-padding: 0.5em;
 	display: flex;
 	justify-content: space-around;
 
-	button {
-		cursor: pointer;
-		flex: 1;
-		max-width: 25%;
+	.button {
 		border: solid 1px currentColor;
-		background-color: #efefef;
-	}
-	button:active {
-		background-color: #dadada;
 	}
 }
