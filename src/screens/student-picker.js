@@ -19,6 +19,7 @@ export default class StudentPicker extends Component {
 		this.state = {
 			studentFilter: '',
 			isEditing: false,
+			sortBy: 'modified',
 		}
 	}
 
@@ -32,7 +33,7 @@ export default class StudentPicker extends Component {
 		let reader = new FileReader()
 		let file = ev.target.files[0]
 
-		reader.onload = (upload) => {
+		reader.onload = upload => {
 			studentActions.importStudent({
 				data: upload.target.result,
 				type: file.type,
@@ -54,41 +55,45 @@ export default class StudentPicker extends Component {
 					onChange={this.handleFile} />
 
 				<div className='student-list-toolbar'>
-					<input
-						type='search'
-						className='student-list-filter'
-						placeholder='Filter students'
-						onChange={ev => this.setState({studentFilter: ev.target.value.toLowerCase()})} />
-
 					<menu className='student-list-buttons'>
-						<Button className='student-list--button'>
-							<Icon name='ionicon-funnel' type='block' />
-							Sort
+						<Button className='student-list--button'
+							onClick={() => this.setState({sortBy: this.state.sortBy === 'modified' ? 'name' : 'modified'})}>
+							<Icon name='ionicon-funnel' type='inline' />{' '}
+							Sort by: {this.state.sortBy}
 						</Button>
 
 						<Button className='student-list--button'>
-							<Icon name='ionicon-folder' type='block' />
-							Group
+							<Icon name='ionicon-folder' type='inline' />{' '}
+							Group by: {'nothing'}
 						</Button>
 
 						<Button className='student-list--button'
 							onClick={() => this.setState({isEditing: !this.state.isEditing})}>
-							<Icon name='ionicon-navicon' type='block' />
-							Edit
+							<Icon name='ionicon-navicon' type='inline' />{' '}
+							Edit List
 						</Button>
 
 						<Button className='student-list--button'
 							onClick={studentActions.initStudent}>
-							<Icon name='ionicon-plus' type='block' />
-							New
+							<Icon name='ionicon-plus' type='inline' />{' '}
+							New Student
 						</Button>
 					</menu>
+
+					<input
+						type='search'
+						className='student-list-filter'
+						placeholder='Filter students'
+						onChange={ev => this.setState({studentFilter: ev.target.value.toLowerCase()})}
+					/>
 				</div>
 
 				<StudentList
-					isEditing={this.state.isEditing}
 					filter={this.state.studentFilter}
-					students={this.props.students} />
+					isEditing={this.state.isEditing}
+					sortBy={this.state.sortBy}
+					students={this.props.students}
+				/>
 			</div>
 		)
 	}

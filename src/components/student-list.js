@@ -47,7 +47,7 @@ class StudentListItem extends Component {
 					{
 						this.props.isEditing
 							? <Button className='delete' type='raised'
-								onClick={(ev) => {
+								onClick={ev => {
 									ev.preventDefault()
 									studentActions.destroyStudent(student.id)
 								}}>Delete</Button>
@@ -65,6 +65,7 @@ export default class StudentList extends Component {
 	static propTypes = {
 		filter: PropTypes.string,
 		isEditing: PropTypes.bool,
+		sortBy: PropTypes.oneOf(['modified', 'name']),
 		students: PropTypes.instanceOf(Immutable.Map).isRequired,
 	}
 
@@ -75,11 +76,21 @@ export default class StudentList extends Component {
 
 	render() {
 		// console.log('StudentList#render')
-		let studentObjects = this.props.students
+		let sortProp = 'dateLastModified'
+		if (this.props.sortBy === 'name') {
+			sortProp = 'name'
+		}
+
+		const studentObjects = this.props.students
 			.toList()
 			.filter(s => fuzzysearch(this.props.filter, s.name.toLowerCase()))
-			.sortBy(s => s.dateLastModified)
-			.map(student => <StudentListItem key={student.id} student={student} isEditing={this.props.isEditing} />)
+			.sortBy(s => s[sortProp])
+			.map(student =>
+				<StudentListItem
+					key={student.id}
+					student={student}
+					isEditing={this.props.isEditing}
+				/>)
 			.toArray()
 
 		return (

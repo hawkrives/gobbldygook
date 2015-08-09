@@ -1,0 +1,39 @@
+.import-student {
+	margin-bottom: 0.5em;
+}
+
+.students-overview {
+	display: flex;
+	flex-direction: column;
+	max-width: 45em;
+	margin: 0 auto;
+}
+
+.student-list-toolbar {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: space-around;
+
+	margin-bottom: 1em;
+}
+
+.student-list-filter,
+.student-list-buttons {
+	width: 100%;
+}
+
+.student-list-buttons {
+	display: flex;
+	justify-content: center;
+}
+
+.student-list--button {
+	padding-left: 1em;
+	padding-right: 1em;
+	margin: 0 0.25em;
+
+	.icon {
+		padding-bottom: 0.2em;
+	}
+}
