@@ -1,5 +1,5 @@
 import React from 'react'
-import Router, {Route, DefaultRoute} from 'react-router'
+import Router, {Route, DefaultRoute, Redirect} from 'react-router'
 import {DragDropContext} from 'react-dnd'
 import HTML5Backend from 'react-dnd/modules/backends/HTML5'
 
@@ -21,6 +21,7 @@ let routes = (
 	<Route handler={Gobbldygook} name='gobbldygook' path='/'>
 		<DefaultRoute handler={StudentPicker} />
 		<Route handler={CreateStudent} name='create-student' path='create-student/' />
+		<Redirect path='s/' to='/' />
 		<Route handler={Student} name='student' path='s/:id/'>
 			<DefaultRoute handler={CourseTable} />
 			<Route handler={NewStudentWizard} name='wizard' path='wizard/' />
