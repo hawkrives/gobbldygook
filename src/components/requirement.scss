@@ -1,8 +1,11 @@
 $edge-padding: 0.5em;
 
 .requirement {
-	@include card;
 	margin: 0 0.25em 0.25em 0.5em;
+}
+
+.requirement .requirement {
+	@include card;
 }
 
 .requirement--override-button {
