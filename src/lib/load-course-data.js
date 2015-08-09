@@ -212,7 +212,20 @@ async function loadDataFiles(infoFile, infoFileBase) {
 
 async function loadInfoFile(url, infoFileBase) {
 	log('loading ' + url)
-	loadDataFiles(await fetch(url).then(status).then(json), infoFileBase)
+	let data
+	try {
+		data = await fetch(url).then(status).then(json)
+	}
+	catch (err) {
+		if (err.message.startsWith('Failed to fetch')) {
+			console.error(`loadInfoFile(): Failed to fetch ${url}`)
+			return false
+		}
+		else {
+			throw err
+		}
+	}
+	loadDataFiles(data, infoFileBase)
 }
 
 async function loadData() {
@@ -224,7 +237,11 @@ async function loadData() {
 	]
 
 	const processedFiles = await* map(infoFiles,
-		file => fetch(file).then(status).then(text).then(path => path.trim()))
+		file => fetch(file)
+			.then(status)
+			.then(text)
+			.then(path => path.trim())
+			.catch(err => console.error(err)))
 
 	await* map(processedFiles, path => loadInfoFile(`${path}/info.json?${cachebuster}`, path))
 }
