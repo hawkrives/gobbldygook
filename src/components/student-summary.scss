@@ -1,4 +1,4 @@
-#student-summary {
+.student-summary {
 	@include card($filter: true);
 	hyphens: auto;
 	font-feature-settings: 'onum';
@@ -49,7 +49,7 @@
 	}
 }
 
-#student-letter {
+.student-letter {
 	@include avatar-letter(48px);
 	border: solid 1px;
 	background-color: white;

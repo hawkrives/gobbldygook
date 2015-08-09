@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import cx from 'classnames'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import sample from 'lodash/collection/sample'
@@ -37,8 +38,6 @@ export default class StudentSummary extends Component {
 		const student = this.props.student
 		const studies = student.studies
 
-		const name = student.name
-		const studentId = student.id
 		const NameEl = (
 			<ContentEditable className='autosize-input'
 				value={String(student.name)}
@@ -81,9 +80,9 @@ export default class StudentSummary extends Component {
 		)
 
 		return (
-			<article id='student-summary' className={canGraduate ? 'can-graduate' : 'cannot-graduate'}>
+			<article className={cx('student-summary', canGraduate ? 'can-graduate' : 'cannot-graduate')}>
 				<header>
-					<div id='student-letter'>{name.length ? name[0] : ''}</div>
+					<div className='student-letter'>{student.name.length ? student.name[0] : ''}</div>
 					<div className='paragraph'>{this.state.welcome}{NameEl}!</div>
 				</header>
 				<div className='content'>
