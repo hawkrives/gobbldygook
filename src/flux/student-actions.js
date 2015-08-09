@@ -33,7 +33,7 @@ let studentActions = Reflux.createActions([
 	'reorderCourse',
 	'moveCourse',
 
-	'addOverride',
+	'setOverride',
 	'removeOverride',
 
 	'addFabrication',

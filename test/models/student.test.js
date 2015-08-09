@@ -84,7 +84,7 @@ describe('Student', () => {
 	describe('overrides', () => {
 		it('supports adding overrides', () => {
 			const stu = new Student(demoStudent)
-			let addedOverride = stu.addOverride({nothing: 'me!'})
+			let addedOverride = stu.setOverride({nothing: 'me!'})
 			expect(addedOverride.overrides.get('nothing')).to.equal('me!')
 		})
 		it('supports removing overrides', () => {

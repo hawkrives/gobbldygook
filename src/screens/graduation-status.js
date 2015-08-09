@@ -68,7 +68,7 @@ export default class GraduationStatus extends Component {
 	addOverrideToStudent = ({ev, path}) => {
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
-		actions.addOverride(this.props.student.id, {[codifiedPath]: true})
+		actions.setOverride(this.props.student.id, {[codifiedPath]: true})
 	}
 
 	removeAreaFromStudent = ({ev, areaId}) => {

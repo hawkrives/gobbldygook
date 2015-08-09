@@ -69,7 +69,7 @@ export default class Student extends StudentRecord {
 					student = student.addSchedule(schedule)
 				})
 
-				student = student.addOverride(encodedStudent.overrides || {})
+				student = student.setOverride(encodedStudent.overrides || {})
 
 				forEach((encodedStudent.fabrications || []), fabrication => {
 					student = student.addFabrication(fabrication)
@@ -185,7 +185,7 @@ export default class Student extends StudentRecord {
 
 	// override methods
 
-	addOverride(overrideObj) {
+	setOverride(overrideObj) {
 		return this.withMutations(student => {
 			forEach(overrideObj, (val, key) => {
 				student = student.setIn(['overrides', key], val)
