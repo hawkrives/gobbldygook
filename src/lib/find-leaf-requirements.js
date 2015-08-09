@@ -30,6 +30,10 @@ export default function findLeafRequirements(requirement) {
 		return null
 	}
 
+	if (requirement.computed === true) {
+		return [requirement]
+	}
+
 	// if there are no keys in this object which are requirement names,
 	// then we've found a leaf requirement! return it.
 	if (!some(keys(requirement), isRequirementName)) {
