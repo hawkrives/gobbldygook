@@ -2,12 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import Immutable from 'immutable'
 import {RouteHandler} from 'react-router'
 import DocumentTitle from 'react-document-title'
+import {DragDropContext} from 'react-dnd'
+import HTML5Backend from 'react-dnd/modules/backends/HTML5'
 
 import studentStore from '../flux/student-store'
-
 import Loading from '../components/loading'
 
-export default class GobbldygookApp extends Component {
+class GobbldygookApp extends Component {
 	static displayName = 'GobbldygookApp'
 	static propTypes = {
 		routerState: PropTypes.object.isRequired,
@@ -52,3 +53,5 @@ export default class GobbldygookApp extends Component {
 		)
 	}
 }
+
+export default DragDropContext(HTML5Backend)(GobbldygookApp)
