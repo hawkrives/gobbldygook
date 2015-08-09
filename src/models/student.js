@@ -231,7 +231,7 @@ export default class Student extends StudentRecord {
 			this.fabrications.toList().toJS(),
 			this.graduation,
 			this.matriculation,
-			this.overrides.toList().toJS(),
+			this.overrides.toObject(),
 			this.studies.toList().toJS(),
 		]).then(results => ({
 			courses: results[0],
@@ -270,9 +270,9 @@ export default class Student extends StudentRecord {
 			graduation: this.graduation,
 			studies: this.studies.toList(),
 			schedules: this.schedules.toList(),
-			overrides: this.overrides.toMap(),
+			overrides: this.overrides,
 			fabrications: this.fabrications.toList(),
-			settings: this.settings.toMap(),
+			settings: this.settings,
 		}
 	}
 }
