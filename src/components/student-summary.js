@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import oxford from 'humanize-list'
+import {oxford} from 'humanize-plus'
 import plur from 'plur'
 
 import AutosizeInput from 'react-input-autosize'
@@ -44,10 +44,10 @@ export default class StudentSummary extends Component {
 		const concentrationEmphasizer = concentrations.size === 1 ? 'a ' : ''
 		const emphasisEmphasizer = emphases.size === 1 ? 'an ' : ''
 
-		const degreeEl = oxford(degrees.map(s => s.name).toArray(), {oxfordComma: true})
-		const majorEl = oxford(majors.map(s => s.name).toArray(), {oxfordComma: true})
-		const concentrationEl = oxford(concentrations.map(s => s.name).toArray(), {oxfordComma: true})
-		const emphasisEl = oxford(emphases.map(s => s.name).toArray(), {oxfordComma: true})
+		const degreeEl = oxford(degrees.map(s => s.name).toArray())
+		const majorEl = oxford(majors.map(s => s.name).toArray())
+		const concentrationEl = oxford(concentrations.map(s => s.name).toArray())
+		const emphasisEl = oxford(emphases.map(s => s.name).toArray())
 
 		const graduationEl = (
 			<AutosizeInput
