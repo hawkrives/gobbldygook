@@ -3,10 +3,11 @@ import cx from 'classnames'
 import Immutable from 'immutable'
 
 import debug from 'debug'
-import map from 'lodash/collection/map'
 import includes from 'lodash/collection/includes'
 import difference from 'lodash/array/difference'
 import union from 'lodash/array/union'
+
+import pathToOverride from '../lib/path-to-override'
 
 import AreaOfStudyGroup from '../components/area-of-study-group'
 import Button from '../components/button'
@@ -66,8 +67,7 @@ export default class GraduationStatus extends Component {
 
 	addOverrideToStudent = ({ev, path}) => {
 		ev.preventDefault()
-		const codifiedPath = path.join('.').toLowerCase()
-		console.log('addOverrideToStudent():', path, codifiedPath)
+		const codifiedPath = pathToOverride(path)
 		actions.addOverride(this.props.student.id, {[codifiedPath]: true})
 	}
 
