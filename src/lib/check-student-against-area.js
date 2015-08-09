@@ -31,19 +31,32 @@ function alterCourse(course) {
 export default async function checkStudentAgainstArea(student, area) {
 	const studentData = await student.data()
 	const areaData = await area.data
-	const areaId = area.id
+
+	const baseAreaResults = {name: area.name, type: area.type, id: area.id}
+	if (areaData.error) {
+		console.error('checkStudentAgainstArea():', areaData.error)
+		return {...baseAreaResults, error: areaData.error}
+	}
+
 
 	studentData.courses = map(studentData.courses, alterCourse)
 
-	const details = await Promise.resolve(evaluate(studentData, areaData))
+	let details = {}
+	try {
+		details = await evaluate(studentData, areaData)
+	}
+	catch (err) {
+		console.error('checkStudentAgainstArea():', err)
+		return {...baseAreaResults, error: err.message}
+	}
 
 	const finalReqs = findLeafRequirements(details)
 	const maxProgress = finalReqs.length
 	const currentProgress = filter(finalReqs, {computed: true}).length
 
 	return {
+		...baseAreaResults,
 		...details,
-		id: areaId,
 		_progress: {
 			at: currentProgress,
 			of: maxProgress,

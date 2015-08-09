@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import cx from 'classnames'
 
 import Button from './button'
 import Icon from './icon'
@@ -12,6 +13,7 @@ export default class AreaOfStudy extends Component {
 			of: PropTypes.number.isRequired,
 		}),
 		data: PropTypes.object,
+		error: PropTypes.string,
 		id: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
 		removeArea: PropTypes.func.isRequired,
@@ -26,6 +28,7 @@ export default class AreaOfStudy extends Component {
 			at: 0,
 			of: 1,
 		},
+		error: '',
 		name: 'Unknown Area',
 		type: '???',
 		revision: '0000-00',
@@ -62,7 +65,7 @@ export default class AreaOfStudy extends Component {
 						<Icon className='area--open-indicator' name={this.state.open ? 'ionicon-chevron-up' : 'ionicon-chevron-down'} />
 					</span>
 				</div>
-				<ProgressBar className='area--progress' colorful={true}
+				<ProgressBar className={cx('area--progress', {error: this.props.error})} colorful={true}
 					value={this.props._progress.at}
 					max={this.props._progress.of} />
 			</div>
@@ -79,19 +82,17 @@ export default class AreaOfStudy extends Component {
 		)
 
 		return (
-			<details className='area'>
+			<details className={cx('area', {errored: this.props.error})}>
 				<summary className='area--summary' onClick={() => this.setState(state => ({open: !state.open}))}>
-					{
-						this.state.confirmRemoval
-							? removalConfirmation
-							: summary
-					}
+					{this.state.confirmRemoval
+						? removalConfirmation
+						: summary}
 				</summary>
-				{
-					this.state.open && !this.state.confirmRemoval
-						? <Requirement {...this.props} topLevel />
-						: null
-				}
+				{this.state.open && !this.state.confirmRemoval
+					? this.props.error
+						? <p className='area--error'>{this.props.error} {':('}</p>
+						: <Requirement {...this.props} topLevel />
+					: null}
 			</details>
 		)
 	}

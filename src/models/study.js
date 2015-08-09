@@ -22,7 +22,7 @@ export async function loadArea({name, type}) {
 	let data = await db.stores.areas.get(path)
 
 	if (!data) {
-		throw new Error(`could not load area ${path}`)
+		throw new Error(`Could not load area ${path}`)
 	}
 
 	const enhanced = enhanceHanson(data, {topLevel: true})
@@ -99,8 +99,9 @@ export default class Study extends StudyRecord {
 			({name, type, revision} = migrateFromOldSave(args))
 		}
 
-		const data = loadArea({name, type, revision})
 		const id = `${kebabCase(name)}-${type}?rev=${revision}`
+		const data = loadArea({name, type, revision})
+			.catch(err => ({error: err.message}))
 
 		super({
 			type,

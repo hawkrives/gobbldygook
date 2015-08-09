@@ -4,6 +4,15 @@
 	* {box-sizing: border-box;}
 
 	margin-bottom: 1em;
+
+	&.errored {
+		background-color: color('red', '50');
+	}
+}
+
+.area--error {
+	margin: 0;
+	padding: 0 0.5em 0.5em;
 }
 
 .area--summary-row {
@@ -73,6 +82,10 @@ $area-edge-padding: 0.5em;
 	.area--summary:focus &,
 	.area--summary:active & {
 		box-shadow: 0 0 0 2px white;
+	}
+
+	&.error {
+		color: color('red', '100');
 	}
 }
 
