@@ -5,6 +5,7 @@
 
     .progress-bar--value {
         background-color: currentColor;
+        max-width: 100%;
     }
 
     color: color('gray', '300');
