@@ -1,6 +1,6 @@
 // test/models/student.test.js
 import Student from '../../src/models/student.js'
-import demoStudent from '../../src/models/demoStudent.json'
+import demoStudent from '../../src/models/demo-student.json'
 import Immutable from 'immutable'
 import size from 'lodash/collection/size'
 import filter from 'lodash/collection/filter'
