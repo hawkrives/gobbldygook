@@ -24,11 +24,13 @@ export default class BasicCourse extends Component {
 					<div className='summary'>
 						<CourseIdentBlock {...course} />
 						<span className='type'>{course.type}</span>
-						<ul className='gereqs'>
-							{map(course.gereqs, (ge, idx) =>
-								<li key={ge + idx}>{ge}</li>
-							)}
-						</ul>
+						{course.gereqs
+							? <ul className='gereqs'>
+								{map(course.gereqs, (ge, idx) =>
+									<li key={ge + idx}>{ge}</li>
+								)}
+							</ul>
+							: null}
 					</div>
 					<div className='summary'>
 						{course.times}
