@@ -30,6 +30,7 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 
 	text-transform: none;
 	font-feature-settings: 'smcp';
+	font-weight: 400;
 
 	color: color('gray', '500');
 
@@ -52,7 +53,7 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 	font-feature-settings: "tnum";
 
 	line-height: 1em;
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 0.9em;
 }
 
