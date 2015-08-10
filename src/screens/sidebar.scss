@@ -12,23 +12,19 @@
 }
 
 .student-buttons {
-	font-size: 0.85em;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-around;
+	justify-content: stretch;
 
 	margin-bottom: 0.5em;
 }
 
 .sidebar-btn {
 	flex: 1 0 auto;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+	padding-left: 0.25em;
+	padding-right: 0.25em;
 
-	$spacing: 0.5em;
-	margin-right: $spacing / 2;
-	margin-left: $spacing / 2;
-	margin-bottom: $spacing;
+	margin-bottom: 0.5em;
 
 	.icon {
 		font-size: 1.5em;
