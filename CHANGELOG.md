@@ -27,7 +27,7 @@
 
 ## 3.0.0-alpha-9
 - Modularized app
-	- pulled [areas](https://github.com/hawkrives/gobbldygook-area-data), [courses](https://github.com/hawkrives/gobbldygook-course-data), [helpers](https://github.com/hawkrives/sto-helpers), and the [time parser](https://github.com/hawkrives/sto-sis-time-parser) into separate npm modules
+	- pulled areas (now at https://github.com/hawkrives/gobbldygook-area-data), courses (https://github.com/hawkrives/gobbldygook-course-data), helpers (https://github.com/hawkrives/sto-helpers), and the time parser (https://github.com/hawkrives/sto-sis-time-parser) into separate npm modules
 - Updated `student.studies` array
 	- we now only use the `id` and `year` fields
 	- `year` is to identify which version of the area to load and check
