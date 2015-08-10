@@ -6,7 +6,6 @@
 @import 'base/functions';
 
 // mixins
-@import 'mixins/avatar-letter';
 @import 'mixins/card';
 @import 'mixins/heading-neutral';
 @import 'mixins/link-undecorated';
@@ -34,6 +33,7 @@
 @import 'components/area-of-study';
 @import 'components/area-of-study-group';
 @import 'components/area-picker';
+@import 'components/avatar-letter';
 @import 'components/course';
 @import 'components/course-removal-box';
 @import 'components/expression';

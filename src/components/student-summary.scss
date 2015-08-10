@@ -8,7 +8,7 @@
 		color: color('deep-orange');
 	}
 	&.can-graduate .graduation-message {
-		color: color('green');
+		color: color('light-green');
 	}
 
 	.content {
@@ -50,22 +50,5 @@
 			background-color: color('blue', '50');
 			border-color: color('blue', '500');
 		}
-	}
-}
-
-.student-letter {
-	@include avatar-letter(48px);
-	border: solid 1px;
-	background-color: white;
-
-	margin: $block-edge-padding $block-edge-padding*2;
-	margin-left: -6px;
-
-	.cannot-graduate & {
-		color: color('deep-orange');
-	}
-
-	.can-graduate & {
-		color: color('green');
 	}
 }
