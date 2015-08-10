@@ -160,11 +160,6 @@ export default class GraduationStatus extends Component {
 
 		return (
 			<section className={cx('graduation-status', {'is-hidden': this.props.isHidden})}>
-				<AvatarLetter
-					className={cx('student-letter', this.state.graduatability ? 'can-graduate' : 'cannot-graduate')}
-					value={student.name}
-				/>
-
 				<StudentSummary
 					student={student}
 					graduatability={this.state.graduatability}

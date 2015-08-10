@@ -86,6 +86,15 @@ export default class StudentSummary extends Component {
 		return (
 			<article className={cx('student-summary', canGraduate ? 'can-graduate' : 'cannot-graduate')}>
 				<header className='student-summary--header'>
+					<AvatarLetter
+						className={cx(
+							'student-letter',
+							this.props.graduatability
+								? 'can-graduate'
+								: 'cannot-graduate'
+						)}
+						value={student.name}
+					/>
 					<div className='intro'>{this.state.welcome}{NameEl}!</div>
 				</header>
 				<div className='content'>

@@ -9,9 +9,6 @@
 	text-align: center;
 	text-transform: uppercase;
 
-	position: relative;
-	top: 1px;
-
 	display: inline-block;
 
 	margin: 0;
@@ -28,7 +25,8 @@
 	border: solid 1px;
 	background-color: white;
 
-	margin: $block-edge-padding auto;
+	display: block;
+	margin: $block-edge-padding auto ($block-edge-padding * 2);
 
 	&.cannot-graduate {
 		color: color('deep-orange');
