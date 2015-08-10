@@ -23,11 +23,16 @@
 	cursor: pointer;
 }
 
-.student-list-item:hover {
-	transform: scale(1.05);
+.student-list-item:hover,
+.student-list-item:focus {
+	outline: none;
+	background-color: color('blue', '50');
+	border-color: color('blue');
 }
+
 .student-list-item-info {
 	flex: 1;
+	margin-left: 0.5em;
 }
 
 .student-list-item-info .name {
@@ -37,8 +42,6 @@
 .student-list-item-info .areas {
 	font-size: 0.8em;
 	font-feature-settings: 'smcp';
-	text-overflow: ellipsis;
-	overflow: hidden;
 }
 
 .student-list-item-info .area-type .joiner {
@@ -56,6 +59,7 @@
 
 .student-list-item--go {
 	margin-left: 0.25em;
+	margin-right: 0.5em;
 }
 
 .student-list-item .delete:hover {
