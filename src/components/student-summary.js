@@ -4,6 +4,7 @@ import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import sample from 'lodash/collection/sample'
 
+import AvatarLetter from './avatar-letter'
 import ContentEditable from './content-editable'
 
 import studentActions from '../flux/student-actions'
@@ -56,10 +57,10 @@ export default class StudentSummary extends Component {
 		const concentrationWord = plur('concentration', concentrations.size)
 		const emphasisWord = plur('emphasis', 'emphases', emphases.size)
 
-		const degreeEmphasizer = degrees.size === 1 ? 'a ' : ''
-		const majorEmphasizer = majors.size === 1 ? 'a ' : ''
-		const concentrationEmphasizer = concentrations.size === 1 ? 'a ' : ''
-		const emphasisEmphasizer = emphases.size === 1 ? 'an ' : ''
+		const degreeEmphasizer = (degrees.size === 1) ? 'a ' : ''
+		const majorEmphasizer = (majors.size === 1) ? 'a ' : ''
+		const concentrationEmphasizer = (concentrations.size === 1) ? 'a ' : ''
+		const emphasisEmphasizer = (emphases.size === 1) ? 'an ' : ''
 
 		const degreeEl = oxford(degrees.map(s => s.name).toArray())
 		const majorEl = oxford(majors.map(s => s.name).toArray())
@@ -85,7 +86,15 @@ export default class StudentSummary extends Component {
 		return (
 			<article className={cx('student-summary', canGraduate ? 'can-graduate' : 'cannot-graduate')}>
 				<header className='student-summary--header'>
-					<div className='student-letter'>{student.name.length ? student.name[0] : ''}</div>
+					<AvatarLetter
+						className={cx(
+							'student-letter',
+							this.props.graduatability
+								? 'can-graduate'
+								: 'cannot-graduate'
+						)}
+						value={student.name}
+					/>
 					<div className='intro'>{this.state.welcome}{NameEl}!</div>
 				</header>
 				<div className='content'>

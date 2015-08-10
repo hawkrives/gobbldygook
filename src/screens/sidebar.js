@@ -10,6 +10,7 @@ import CourseSearcher from './course-searcher'
 import GraduationStatus from './graduation-status'
 import Icon from '../components/icon'
 import Toolbar from '../components/toolbar'
+import Separator from '../components/separator'
 
 import CourseRemovalBox from '../components/course-removal-box'
 
@@ -33,39 +34,43 @@ export default class Sidebar extends Component {
 		return (
 			<aside className='sidebar'>
 				<Toolbar className='student-buttons'>
-					<Button className='sidebar-btn'>
+					<Button className='sidebar-btn' title='Students'>
 						<Link to='/' >
 							<Icon name='ionicon-ios-list-outline' type='block' />
-							Students
 						</Link>
 					</Button>
 					<Button className='sidebar-btn'
+						title='Search'
 						onClick={this.toggleSearch}>
 						<Icon name='ionicon-ios-search' type='block' />
-						Search
 					</Button>
-					<Button className='sidebar-btn'>
-						<Link to='download' params={{id: this.props.student.id}}>
-							<Icon name='ionicon-ios-download-outline' type='block' />
-							Download
-						</Link>
-					</Button>
+
+					<Separator type='spacer' />
+
 					<Button className='sidebar-btn'
-						onClick={() => studentActions.resetStudentToDemo(this.props.student.id)}>
-						<Icon name='ionicon-ios-rose' type='block' />
-						Demo
-					</Button>
-					<Button className='sidebar-btn'
+						title='Undo'
 						onClick={studentActions.undo}
 						disabled={studentStore.history.size === 0}>
 						<Icon name={`ionicon-ios-undo${studentStore.history.size === 0 ? '-outline' : ''}`} type='block' />
-						Undo
 					</Button>
 					<Button className='sidebar-btn'
+						title='Redo'
 						onClick={studentActions.redo}
 						disabled={studentStore.future.size === 0}>
 						<Icon name={`ionicon-ios-redo${studentStore.future.size === 0 ? '-outline' : ''}`} type='block' />
-						Redo
+					</Button>
+
+					<Separator type='spacer' />
+
+					<Button className='sidebar-btn' title='Download'>
+						<Link to='download' params={{id: this.props.student.id}}>
+							<Icon name='ionicon-ios-download-outline' type='block' />
+						</Link>
+					</Button>
+					<Button className='sidebar-btn'
+						title='Revert to Demo'
+						onClick={() => studentActions.resetStudentToDemo(this.props.student.id)}>
+						<Icon name='ionicon-ios-rose' type='block' />
 					</Button>
 				</Toolbar>
 

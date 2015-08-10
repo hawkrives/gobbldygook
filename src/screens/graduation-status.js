@@ -10,6 +10,7 @@ import union from 'lodash/array/union'
 import pathToOverride from '../lib/path-to-override'
 
 import AreaOfStudyGroup from '../components/area-of-study-group'
+import AvatarLetter from '../components/avatar-letter'
 import Button from '../components/button'
 import Student from '../models/student'
 import StudentSummary from '../components/student-summary'
@@ -75,11 +76,9 @@ export default class GraduationStatus extends Component {
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
 		if (this.props.student.overrides.has(codifiedPath)) {
-			console.log('removing')
 			actions.removeOverride(this.props.student.id, codifiedPath)
 		}
 		else {
-			console.log('setting')
 			actions.setOverride(this.props.student.id, {[codifiedPath]: true})
 		}
 	}
@@ -134,7 +133,7 @@ export default class GraduationStatus extends Component {
 				{unusedTypes.map(type => (
 					<Button key={type}
 						className='add-unused-area-of-study'
-						onClick={(ev) => this.initiateAddArea({ev, type})}
+						onClick={ev => this.initiateAddArea({ev, type})}
 						type='flat'>
 						{type}
 					</Button>
@@ -163,7 +162,8 @@ export default class GraduationStatus extends Component {
 			<section className={cx('graduation-status', {'is-hidden': this.props.isHidden})}>
 				<StudentSummary
 					student={student}
-					graduatability={this.state.graduatability} />
+					graduatability={this.state.graduatability}
+				/>
 
 				{sections}
 

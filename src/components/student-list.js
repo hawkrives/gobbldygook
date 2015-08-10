@@ -7,6 +7,7 @@ import identity from 'lodash/utility/identity'
 
 import studentActions from '../flux/student-actions'
 
+import AvatarLetter from './avatar-letter'
 import Button from './button'
 import List from './list'
 import Icon from './icon'
@@ -27,6 +28,7 @@ class StudentListItem extends Component {
 		const groupedStudies = student.studies.groupBy(s => s.type)
 		return (<span>
 			<Link className='student-list-item' to='student' params={{id: student.id}}>
+				<AvatarLetter value={student.name} />
 				<span className='student-list-item-info'>
 					<div className='name'>{student.name || ''}</div>
 					<div className='areas'>

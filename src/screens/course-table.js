@@ -42,10 +42,10 @@ export default class CourseTable extends Component {
 			<div className={cx('course-table', this.props.className)}>
 				{years}
 				<Button className='add-year'
+					type='raised'
 					title='Add Year'
 					onClick={this.addYear}>
-					{expandYear(nextAvailableYear, false, '–')}
-					<Icon name='ionicon-android-add' />
+					Add {expandYear(nextAvailableYear, false, '–')}
 				</Button>
 			</div>
 		)

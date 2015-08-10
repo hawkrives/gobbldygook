@@ -1,6 +1,7 @@
 .student-summary {
-	@include card($filter: true);
+	@include card;
 
+	text-align: center;
 	hyphens: auto;
 	font-feature-settings: 'onum', 'tnum';
 
@@ -8,7 +9,7 @@
 		color: color('deep-orange');
 	}
 	&.can-graduate .graduation-message {
-		color: color('green');
+		color: color('light-green');
 	}
 
 	.content {
@@ -24,21 +25,12 @@
 	}
 
 	.student-summary--header {
-		display: flex;
-		flex-flow: row nowrap;
-		align-items: center;
-		justify-content: flex-start;
-
 		color: $black;
 
-		.intro {
-			flex: 1;
-			margin: 0;
-			font-style: italic;
-			align-items: inherit;
-			margin-right: $block-edge-padding * 2;
-			line-height: 1.6em;
-		}
+		margin: $block-edge-padding * 2;
+		margin-bottom: 0;
+		font-style: italic;
+		line-height: 1.6em;
 	}
 
 	.autosize-input {
@@ -50,22 +42,5 @@
 			background-color: color('blue', '50');
 			border-color: color('blue', '500');
 		}
-	}
-}
-
-.student-letter {
-	@include avatar-letter(48px);
-	border: solid 1px;
-	background-color: white;
-
-	margin: $block-edge-padding $block-edge-padding*2;
-	margin-left: -6px;
-
-	.cannot-graduate & {
-		color: color('deep-orange');
-	}
-
-	.can-graduate & {
-		color: color('green');
 	}
 }
