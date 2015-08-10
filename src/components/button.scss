@@ -48,10 +48,8 @@
 	}
 
 	&[disabled] {
-		@include material-shadow(0);
 		cursor: default;
-		background-color: color('disabled', 'background--light');
-		color: color('disabled', 'foreground--light');
+		color: color('gray', '500');
 	}
 }
 
