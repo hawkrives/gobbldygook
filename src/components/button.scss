@@ -1,4 +1,4 @@
-@mixin button {
+%button {
 	cursor: pointer;
 
 	display: inline-block;
@@ -26,7 +26,8 @@
 
 // Raised Button
 .button--raised {
-	@include button;
+	@extend %button;
+
 	background-color: color('white', '500');
 	color: color('black', '500');
 
@@ -56,7 +57,7 @@
 
 // Flat button
 .button--flat {
-	@include button;
+	@extend %button;
 
 	background-color: transparent;
 
