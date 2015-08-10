@@ -60,7 +60,8 @@
 	background-color: transparent;
 
 	&:hover {
-		background-color: rgba(#999, 0.20);
+		background-color: color('gray', '100');
+		border-color: color('gray', '400');
 	}
 
 	&:focus {
@@ -75,6 +76,7 @@
 		&:hover,
 		&:focus,
 		&:active {
+			border-color: transparent;
 			background-color: transparent;
 		}
 	}
