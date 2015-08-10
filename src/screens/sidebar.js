@@ -10,6 +10,7 @@ import CourseSearcher from './course-searcher'
 import GraduationStatus from './graduation-status'
 import Icon from '../components/icon'
 import Toolbar from '../components/toolbar'
+import Separator from '../components/separator'
 
 import CourseRemovalBox from '../components/course-removal-box'
 
@@ -44,6 +45,8 @@ export default class Sidebar extends Component {
 						<Icon name='ionicon-ios-search' type='block' />
 					</Button>
 
+					<Separator type='spacer' />
+
 					<Button className='sidebar-btn'
 						title='Undo'
 						onClick={studentActions.undo}
@@ -56,6 +59,8 @@ export default class Sidebar extends Component {
 						disabled={studentStore.future.size === 0}>
 						<Icon name={`ionicon-ios-redo${studentStore.future.size === 0 ? '-outline' : ''}`} type='block' />
 					</Button>
+
+					<Separator type='spacer' />
 
 					<Button className='sidebar-btn' title='Download'>
 						<Link to='download' params={{id: this.props.student.id}}>
