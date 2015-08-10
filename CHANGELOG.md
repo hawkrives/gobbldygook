@@ -1,6 +1,15 @@
 # CHANGELOG
 
-## [Next][]
+## Next (unreleased)
+
+
+## 3.0.0-alpha-15
+- made things prettier
+- implemented graphical area of study management
+- fixed bugs related to the StudentSummmary block's input fields
+- save/load area of study data from the database
+- handle area loading errors (shows error message buts continues to compute others)
+- allow sorting the list of students
 
 
 ## 3.0.0-alpha-14
