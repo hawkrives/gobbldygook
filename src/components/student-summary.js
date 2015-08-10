@@ -56,10 +56,10 @@ export default class StudentSummary extends Component {
 		const concentrationWord = plur('concentration', concentrations.size)
 		const emphasisWord = plur('emphasis', 'emphases', emphases.size)
 
-		const degreeEmphasizer = degrees.size === 1 ? 'a ' : ''
-		const majorEmphasizer = majors.size === 1 ? 'a ' : ''
-		const concentrationEmphasizer = concentrations.size === 1 ? 'a ' : ''
-		const emphasisEmphasizer = emphases.size === 1 ? 'an ' : ''
+		const degreeEmphasizer = (degrees.size === 1) ? 'a ' : ''
+		const majorEmphasizer = (majors.size === 1) ? 'a ' : ''
+		const concentrationEmphasizer = (concentrations.size === 1) ? 'a ' : ''
+		const emphasisEmphasizer = (emphases.size === 1) ? 'an ' : ''
 
 		const degreeEl = oxford(degrees.map(s => s.name).toArray())
 		const majorEl = oxford(majors.map(s => s.name).toArray())
