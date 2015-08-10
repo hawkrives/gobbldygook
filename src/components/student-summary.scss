@@ -24,21 +24,12 @@
 	}
 
 	.student-summary--header {
-		display: flex;
-		flex-flow: row nowrap;
-		align-items: center;
-		justify-content: flex-start;
-
 		color: $black;
 
-		.intro {
-			flex: 1;
-			margin: 0;
-			font-style: italic;
-			align-items: inherit;
-			margin-right: $block-edge-padding * 2;
-			line-height: 1.6em;
-		}
+		margin: $block-edge-padding * 2;
+		margin-bottom: 0;
+		font-style: italic;
+		line-height: 1.6em;
 	}
 
 	.autosize-input {

@@ -10,6 +10,7 @@ import union from 'lodash/array/union'
 import pathToOverride from '../lib/path-to-override'
 
 import AreaOfStudyGroup from '../components/area-of-study-group'
+import AvatarLetter from '../components/avatar-letter'
 import Button from '../components/button'
 import Student from '../models/student'
 import StudentSummary from '../components/student-summary'
@@ -159,6 +160,11 @@ export default class GraduationStatus extends Component {
 
 		return (
 			<section className={cx('graduation-status', {'is-hidden': this.props.isHidden})}>
+				<AvatarLetter
+					className={cx('student-letter', this.state.graduatability ? 'can-graduate' : 'cannot-graduate')}
+					value={student.name}
+				/>
+
 				<StudentSummary
 					student={student}
 					graduatability={this.state.graduatability}

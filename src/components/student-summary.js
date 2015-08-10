@@ -4,6 +4,7 @@ import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import sample from 'lodash/collection/sample'
 
+import AvatarLetter from './avatar-letter'
 import ContentEditable from './content-editable'
 
 import studentActions from '../flux/student-actions'
@@ -85,7 +86,6 @@ export default class StudentSummary extends Component {
 		return (
 			<article className={cx('student-summary', canGraduate ? 'can-graduate' : 'cannot-graduate')}>
 				<header className='student-summary--header'>
-					<div className='student-letter'>{student.name.length ? student.name[0] : ''}</div>
 					<div className='intro'>{this.state.welcome}{NameEl}!</div>
 				</header>
 				<div className='content'>
