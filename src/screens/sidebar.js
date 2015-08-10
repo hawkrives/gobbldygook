@@ -70,7 +70,7 @@ export default class Sidebar extends Component {
 					<Button className='sidebar-btn'
 						title='Revert to Demo'
 						onClick={() => studentActions.resetStudentToDemo(this.props.student.id)}>
-						<Icon name='ionicon-ios-rose' type='block' />
+						<Icon name='ionicon-ios-reload' type='block' />
 					</Button>
 				</Toolbar>
 
