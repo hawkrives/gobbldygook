@@ -36,7 +36,7 @@ export default class Sidebar extends Component {
 				<Toolbar className='student-buttons'>
 					<Button className='sidebar-btn' title='Students'>
 						<Link to='/' >
-							<Icon name='ionicon-ios-list-outline' type='block' />
+							<Icon name='ionicon-ios-people-outline' type='block' />
 						</Link>
 					</Button>
 					<Button className='sidebar-btn'
