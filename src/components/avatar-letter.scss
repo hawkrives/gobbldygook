@@ -20,19 +20,3 @@
 
 	border-radius: $size;
 }
-
-.student-letter {
-	border: solid 1px;
-	background-color: white;
-
-	display: block;
-	margin: $block-edge-padding auto ($block-edge-padding * 2);
-
-	&.cannot-graduate {
-		color: color('deep-orange');
-	}
-
-	&.can-graduate {
-		color: color('light-green');
-	}
-}
