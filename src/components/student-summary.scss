@@ -1,6 +1,7 @@
 .student-summary {
-	@include card($filter: true);
+	@include card;
 
+	text-align: center;
 	hyphens: auto;
 	font-feature-settings: 'onum', 'tnum';
 
