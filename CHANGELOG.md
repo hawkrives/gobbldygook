@@ -3,7 +3,7 @@
 ## Next (unreleased)
 
 
-## 3.0.0-alpha-15
+## 3.0.0-alpha.15
 - made things prettier
 - implemented graphical area of study management
 - fixed bugs related to the StudentSummmary block's input fields
@@ -12,29 +12,29 @@
 - allow sorting the list of students
 
 
-## 3.0.0-alpha-14
+## 3.0.0-alpha.14
 - Rebuilt area of study processing on top of the new Hanson format
 - Included the hanson processors in the main repo
 - Switch to Webpack for the build system
 
 
-## 3.0.0-alpha-12
+## 3.0.0-alpha.12
 - Stuff and more stuff
 - I really ought to update this more often
 - Switched back to Sass
 
 
-## 3.0.0-alpha-11
+## 3.0.0-alpha.11
 - Switched to Stylus as a pre-processor
 - Updated 6to5
 - Updated sto-helpers and sto-sis-time-parser
 
 
-## 3.0.0-alpha-10
+## 3.0.0-alpha.10
 - Added `courses` as the first parameter to `queryCourses`, allowing the full power of that weird query engine to run over any list of courses.
 
 
-## 3.0.0-alpha-9
+## 3.0.0-alpha.9
 - Modularized app
 	- pulled areas (now at https://github.com/hawkrives/gobbldygook-area-data), courses (https://github.com/hawkrives/gobbldygook-course-data), helpers (https://github.com/hawkrives/sto-helpers), and the time parser (https://github.com/hawkrives/sto-sis-time-parser) into separate npm modules
 - Updated `student.studies` array
