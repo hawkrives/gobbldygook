@@ -222,12 +222,15 @@ const studentStore = Reflux.createStore({
 	_change(studentId, method, ...args) {
 		this._preChange()
 		this.students = this.students.set(studentId, this.students.get(studentId)[method](...args))
+		this.students = this.students.set(studentId, this.students.get(studentId).checkGraduatability())
 		this._postChange()
 	},
 
 	_alter(pathToData, method, ...args) {
 		this._preChange()
+		const studentId = pathToData[0]
 		this.students = this.students.setIn(pathToData, this.students.getIn(pathToData)[method](...args))
+		this.students = this.students.set(studentId, this.students.get(studentId).checkGraduatability())
 		this._postChange()
 	},
 
