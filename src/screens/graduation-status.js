@@ -16,7 +16,6 @@ import StudentSummary from '../components/student-summary'
 import allAreaTypes from '../models/area-types'
 
 import actions from '../flux/student-actions'
-import db from '../lib/db'
 
 import './graduation-status.scss'
 
@@ -24,6 +23,7 @@ const log = debug('gobbldygook:component:render')
 
 export default class GraduationStatus extends Component {
 	static propTypes = {
+		allAreas: PropTypes.object.isRequired, // a promise
 		isHidden: PropTypes.bool,
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
@@ -44,7 +44,8 @@ export default class GraduationStatus extends Component {
 
 	async componentWillReceiveProps(nextProps) {
 		const {canGraduate, details} = await nextProps.student.graduatability
-		const allAreas = Immutable.List(await db.stores.areas.all())
+		let allAreas = await nextProps.allAreas
+		allAreas = Immutable.List(allAreas)
 		this.setState({
 			graduatability: canGraduate,
 			areaDetails: details,

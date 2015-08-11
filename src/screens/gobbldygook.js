@@ -8,6 +8,8 @@ import HTML5Backend from 'react-dnd/modules/backends/HTML5'
 import studentStore from '../flux/student-store'
 import Loading from '../components/loading'
 
+import db from '../lib/db'
+
 class GobbldygookApp extends Component {
 	static displayName = 'GobbldygookApp'
 	static propTypes = {
@@ -20,6 +22,7 @@ class GobbldygookApp extends Component {
 		this.state = {
 			students: Immutable.Map(),
 			studentsInitialized: false,
+			allAreas: db.stores.areas.all(), // a promise
 		}
 		this.onStudentsChanged = this.onStudentsChanged.bind(this)
 	}
@@ -52,6 +55,7 @@ class GobbldygookApp extends Component {
 		return (
 			<DocumentTitle title='Gobbldygook'>
 				<RouteHandler
+					allAreas={this.state.allAreas}
 					students={this.state.students}
 					routerState={this.props.routerState} />
 			</DocumentTitle>

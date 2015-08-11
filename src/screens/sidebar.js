@@ -18,6 +18,7 @@ import './sidebar.scss'
 
 export default class Sidebar extends Component {
 	static propTypes = {
+		allAreas: PropTypes.object.isRequired, // a promise
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
 
@@ -79,6 +80,7 @@ export default class Sidebar extends Component {
 				<CourseRemovalBox studentId={this.props.student.id} />
 
 				<GraduationStatus
+					allAreas={this.props.allAreas}
 					isHidden={this.state.isSearching}
 					student={this.props.student} />
 

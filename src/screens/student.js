@@ -10,6 +10,7 @@ import './student.scss'
 
 export default class Student extends Component {
 	static propTypes = {
+		allAreas: PropTypes.object.isRequired, // a promise
 		routerState: PropTypes.object.isRequired,
 		students: PropTypes.instanceOf(Immutable.Map).isRequired,
 	}
@@ -57,7 +58,7 @@ export default class Student extends Component {
 		return (
 			<DocumentTitle title={`${this.state.student.name} | Gobbldygook`}>
 				<div className='student'>
-					<Sidebar student={this.state.student} />
+					<Sidebar student={this.state.student} allAreas={this.props.allAreas} />
 					<RouteHandler className='content' student={this.state.student} />
 				</div>
 			</DocumentTitle>
