@@ -9,7 +9,7 @@
     return globalLastDept
   }
 
-  var flatten = require('lodash').flatten
+  var flatten = require('lodash/array/flatten')
   var expandDepartment = require('./expand-department')
 }
 

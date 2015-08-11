@@ -2,19 +2,18 @@
 // let db = treo('databaseName', schema)
 //   .use(queryTreoDatabase)
 
-import {
-	contains,
-	filter,
-	first,
-	isString,
-	keys as extractKeys,
-	last,
-	map,
-	reject,
-	size,
-	uniq,
-	flatten,
-	startsWith} from 'lodash'
+import contains from 'lodash/collection/contains'
+import filter from 'lodash/collection/filter'
+import first from 'lodash/array/first'
+import isString from 'lodash/lang/isString'
+import {default as extractKeys} from 'lodash/object/keys'
+import last from 'lodash/array/last'
+import map from 'lodash/collection/map'
+import reject from 'lodash/collection/reject'
+import size from 'lodash/collection/size'
+import uniq from 'lodash/array/uniq'
+import flatten from 'lodash/array/flatten'
+import startsWith from 'lodash/string/startsWith'
 
 import idbRange from 'idb-range'
 import {cmp as idbComparison} from 'treo'

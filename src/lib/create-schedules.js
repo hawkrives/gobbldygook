@@ -1,14 +1,12 @@
-import _ from 'lodash'
+import groupBy from 'lodash/collection/groupBy'
 import map from 'lodash/collection/map'
+import pairs from 'lodash/object/pairs'
+import unzip from 'lodash/array/unzip'
 import zipObject from 'lodash/array/zipObject'
 import findScheduleFromCourses from './find-schedule-from-courses'
 
 export default function createSchedules(courses) {
-	let [terms, groupedCourses] = _(courses)
-		.groupBy('term')
-		.pairs()
-		.unzip()
-		.value()
+	let [terms, groupedCourses] = unzip(pairs(groupBy(courses, 'term')))
 
 	console.log(terms, groupedCourses)
 
