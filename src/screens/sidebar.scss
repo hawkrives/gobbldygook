@@ -4,10 +4,8 @@
 	flex: 0 0 270px;
 	min-width: 270px;
 	margin-right: $page-edge-padding;
-}
 
-@media all and (max-width: $single-column-width) {
-	.sidebar {
+	@media all and (max-width: $single-column-width) {
 		margin-right: 0;
 		flex-basis: auto;
 	}

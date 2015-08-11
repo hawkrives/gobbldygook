@@ -4,10 +4,7 @@
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
-}
-
-@media all and (max-width: $single-column-width) {
-	.student {
+	@media all and (max-width: $single-column-width) {
 		flex-flow: column nowrap;
 	}
 }
