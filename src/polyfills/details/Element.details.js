@@ -1,4 +1,4 @@
-﻿// Originally from https://github.com/termi/Element.details
+// Originally from https://github.com/termi/Element.details
 // HTMLElement.prototype.insertAdjacentHTML = https://gist.github.com/1276030
 
 import forEach from 'lodash/collection/forEach'
@@ -45,7 +45,7 @@ function detailsShim(details) {
 
 	// Wrap text node's and found `summary`
 	let summary = undefined
-	forEach(details.childNodes, (child) => {
+	forEach(details.childNodes, child => {
 		if (child.nodeType === 3 && /[^\t\n\r ]/.test(child.data)) {
 			details.insertBefore(
 				document.createElement('x-i'), // Create a fake inline element
@@ -111,7 +111,7 @@ function init() {
 	Object.defineProperty(window.Element.prototype, 'open', openProperty)
 
 	let detailses = document.getElementsByTagName('details')
-	forEach(detailses, (details) => {
+	forEach(detailses, details => {
 		// DOM API
 		details.open = details.hasAttribute('open')
 	})
