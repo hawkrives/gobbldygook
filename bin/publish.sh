@@ -9,7 +9,7 @@ node ./bin/version.js
 echo ""
 
 read -p "New Version [major|minor|patch]: " version
-npm version $version
+npm version "$version"
 
 npm publish
 
