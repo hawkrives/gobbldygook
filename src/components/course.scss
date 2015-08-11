@@ -101,6 +101,7 @@
 		display: flex;
 		.info-rows {
 			flex: 1;
+			overflow: hidden;
 		}
 	}
 
