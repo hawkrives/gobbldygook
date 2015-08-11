@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+- Updated Babel
+- Removed accidental dependency on the *entirety* of lodash
+
 ## 2.0.0
 - **Renamed:** `checkCourseTimeConflicts` -> `checkCoursesForTimeConflicts`
 - **Renamed:** `checkScheduleTimeConflicts` -> `findScheduleTimeConflicts`
