@@ -11,6 +11,7 @@ import Loading from '../components/loading'
 class GobbldygookApp extends Component {
 	static displayName = 'GobbldygookApp'
 	static propTypes = {
+		passedRequirements: PropTypes.bool.isRequired,
 		routerState: PropTypes.object.isRequired,
 	}
 
@@ -40,6 +41,10 @@ class GobbldygookApp extends Component {
 	}
 
 	render() {
+		// if (!this.props.passedRequirements) {
+		// 	return <BrowserNotSupported />
+		// }
+
 		if (!this.state.studentsInitialized) {
 			return <Loading>Loading Students…</Loading>
 		}

@@ -32,7 +32,13 @@ let routes = (
 // run it
 console.log('3. 2.. 1... Blast off! 🚀')
 
+import checkSystemRequirements from './system-requirements'
+const passedRequirements = checkSystemRequirements()
+
 Router.run(routes, (Handler, state) => {
 	// this causes the router to unmount after a single path change
-	React.render(<Handler routerState={state} />, document.getElementById('app'))
+	React.render(<Handler
+		routerState={state}
+		passedRequirements={passedRequirements}
+	/>, document.getElementById('app'))
 })
