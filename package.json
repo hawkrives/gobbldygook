@@ -16,7 +16,11 @@
     "watch": "babel --watch lib --out-dir dist"
   },
   "dependencies": {
-    "lodash": "^3.0.0"
+    "lodash.filter": "^3.1.1",
+    "lodash.foreach": "^3.0.3",
+    "lodash.map": "^3.1.4",
+    "lodash.some": "^3.2.3",
+    "lodash.values": "^3.0.0"
   },
   "devDependencies": {
     "babel": "^5.8.21",
