@@ -36,9 +36,8 @@ import checkSystemRequirements from './system-requirements'
 const passedRequirements = checkSystemRequirements()
 
 Router.run(routes, (Handler, state) => {
-	// this causes the router to unmount after a single path change
 	React.render(<Handler
-		routerState={state}
 		passedRequirements={passedRequirements}
+		routerState={state}
 	/>, document.getElementById('app'))
 })
