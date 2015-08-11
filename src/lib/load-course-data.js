@@ -42,7 +42,7 @@ let startProgressNotification = curry((notificationId, itemType, count) => {
 	notificationActions.startProgress(notificationId, `Loading ${itemType}`, {max: count}, true)
 })
 
-let updateProgressNotification = curry((notificationId) => {
+let updateProgressNotification = curry(notificationId => {
 	notificationActions.incrementProgress(notificationId)
 })
 
@@ -50,7 +50,7 @@ let completeProgressNotification = curry((notificationId, time=1500) => {
 	notificationActions.removeNotification(notificationId, time)
 })
 
-let logAdded = (item) => {
+function logAdded(item) {
 	log(`added ${item.path} (${item.count} ${item.type})`)
 }
 
@@ -59,7 +59,7 @@ async function storeCourses(item) {
 	log('storing courses')
 	const start = present()
 
-	let coursesToStore = map(item.data, (course) => {
+	let coursesToStore = map(item.data, course => {
 		course.sourcePath = item.path
 		return prepareCourse(course)
 	})

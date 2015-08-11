@@ -9,5 +9,5 @@ import compareCourseToCourse from './compare-course-to-course'
  * @returns {Boolean} - if the course was found or not
  */
 export default function checkForCourse(query, courses) {
-	return some(courses, (c) => compareCourseToCourse(query, c))
+	return some(courses, course => compareCourseToCourse(query, course))
 }

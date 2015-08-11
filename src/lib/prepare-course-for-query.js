@@ -8,8 +8,7 @@ export default function prepareCourseForQuery(course) {
 	delete course.type
 	delete course.grade
 
-	course = mapValues(course, (value) => {
-		// console.log(key, value)
+	course = mapValues(course, value => {
 		return isArray(value) ? value : [value]
 	})
 

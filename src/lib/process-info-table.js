@@ -2,7 +2,7 @@ import forEach from 'lodash/collection/forEach'
 
 export default function processInfoTable(infoTable) {
 	let info = {}
-	forEach(infoTable.rows, (row) => {
+	forEach(infoTable.rows, row => {
 		let rowName = row.cells[0].textContent.replace(/:$/, '').toLowerCase()
 		info[rowName] = row.cells[1].textContent
 	})

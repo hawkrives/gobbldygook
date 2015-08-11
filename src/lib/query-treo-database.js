@@ -46,7 +46,7 @@ function queryStore(query) {
 
 		// Grab a key from the query to use as an index.
 		// TODO: Write a function to sort keys by priority.
-		let indexKeys = extractKeys(query)
+		const indexKeys = extractKeys(query)
 		// <this is a very hacky way of prioritizing the deptnum>
 		// if (contains(keysWithIndices, 'deptnum')) {
 		// 	keysWithIndices.splice(findIndex('deptnum'), 1)
@@ -54,30 +54,30 @@ function queryStore(query) {
 		// }
 
 		// Filter down to just the requested keys that also have indices
-		let keysWithIndices = filter(indexKeys, (key) => this.index(key))
+		const keysWithIndices = filter(indexKeys, key => this.index(key))
 
 		// If the current store has at least one index for a requested key,
 		// just run over that index.
 		if (size(keysWithIndices)) {
 			// We only want to search some indices
-			let indices = filter(this.indexes, index => contains(keysWithIndices, index.name))
+			const indices = filter(this.indexes, index => contains(keysWithIndices, index.name))
 
 			// Run the queries
-			let resultPromises = map(indices,
-				(index) => index.query(query, true))
+			const resultPromises = map(indices,
+				index => index.query(query, true))
 
 			// Wait for all indices to finish querying before getting their results
-			let allFoundKeys = Promise.all(resultPromises)
+			const allFoundKeys = Promise.all(resultPromises)
 
 			// Once we have the primary keys, we need to fetch the actual data:
 			let allValues = allFoundKeys
 				// they're in sub-arrays, one for each index, so we flatten them
-				.then((keys) => flatten(keys))
+				.then(keys => flatten(keys))
 				// because multiple indices can be running at once, they might return
 				// the same primary keys, so we'll just de-dupe them here before fetching
-				.then((keys) => uniq(keys))
+				.then(keys => uniq(keys))
 				// and then we actually go fetch them
-				.then((keys) => this.batchGet(keys))
+				.then(keys => this.batchGet(keys))
 
 			// Once they've been fetched, resolve the promise with the results.
 			allValues.then(resolvePromise)
@@ -86,12 +86,12 @@ function queryStore(query) {
 		// Otherwise, if the current store doesn't have an index for any of
 		// the requested keys, iterate over the entire store.
 		else {
-			let done = (err) => {
+			const done = err => {
 				if (err) rejectPromise(err)
 				this.batchGet(results).then(resolvePromise)
 			}
 
-			let iterateStore = (cursor) => {
+			let iterateStore = cursor => {
 				let {value, primaryKey} = cursor
 				if (canAdd({query, value, primaryKey, results})) {
 					results.push(primaryKey)
@@ -149,7 +149,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 			lte: isString(lastKey) ? lastKey + 'uffff' : lastKey,
 		})
 
-		let done = (err) => {
+		let done = err => {
 			if (err) {
 				rejectPromise(err)
 			}

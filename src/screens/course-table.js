@@ -6,8 +6,9 @@ import studentActions from '../flux/student-actions'
 import Student from '../models/student'
 
 import Button from '../components/button'
-import Icon from '../components/icon'
 import Year from '../components/year'
+
+import './course-table.scss'
 
 export default class CourseTable extends Component {
 	static propTypes = {

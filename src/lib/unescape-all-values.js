@@ -5,7 +5,8 @@ import mapValues from 'lodash/object/mapValues'
 import unescape from 'lodash/string/unescape'
 
 export default function unescapeAllValues(obj) {
-	return (isArray(obj) ? map : mapValues)(obj, (value) => {
+	const func = isArray(obj) ? map : mapValues
+	return func(obj, value => {
 		if (isString(value)) {
 			return unescape(value)
 		}

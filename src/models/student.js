@@ -52,7 +52,7 @@ export default class Student extends StudentRecord {
 
 		// Then add them manually.
 		if (encodedStudent) {
-			return this.withMutations((student) => {
+			return this.withMutations(student => {
 				student = student.set('id', encodedStudent.id || uuid())
 				student = student.set('name', encodedStudent.name || 'Student ' + randomChar())
 				student = student.set('dateCreated', encodedStudent.dateCreated || new Date())
@@ -127,7 +127,7 @@ export default class Student extends StudentRecord {
 		const scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
 
 		if (deadSched && deadSched.active) {
-			const otherSchedKey = scheduleIsNoMore.findKey((sched) =>
+			const otherSchedKey = scheduleIsNoMore.findKey(sched =>
 				sched.year === deadSched.year &&
 				sched.semester === deadSched.semester &&
 				sched.id !== deadSched.id)
@@ -140,10 +140,10 @@ export default class Student extends StudentRecord {
 	}
 
 	destroyMultipleSchedules(ids) {
-		return this.withMutations((student) => {
+		return this.withMutations(student => {
 			changelog('destroyMultipleSchedules', ids)
 			// console.groupCollapsed('destroyMultipleSchedules')
-			forEach('toArray' in ids ? ids.toArray() : ids, (id) => {
+			forEach('toArray' in ids ? ids.toArray() : ids, id => {
 				student = student.destroySchedule(id)
 			})
 			// console.groupEnd('destroyMultipleSchedules')
@@ -153,7 +153,7 @@ export default class Student extends StudentRecord {
 
 	moveCourse(fromScheduleId, toScheduleId, clbid) {
 		changelog(`moving course ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
-		return this.withMutations((student) => {
+		return this.withMutations(student => {
 			student = student.setIn(['schedules', fromScheduleId], student.getIn(['schedules', fromScheduleId]).removeCourse(clbid))
 			student = student.setIn(['schedules', toScheduleId], student.getIn(['schedules', toScheduleId]).addCourse(clbid))
 		})
@@ -172,7 +172,7 @@ export default class Student extends StudentRecord {
 	}
 
 	removeMultipleAreas(ids) {
-		return this.withMutations((student) => {
+		return this.withMutations(student => {
 			forEach(ids.hasOwnProperty('toArray') ? ids.toArray() : ids, id => {
 				student = student.removeArea(id)
 			})
@@ -213,10 +213,10 @@ export default class Student extends StudentRecord {
 	get courses() {
 		const allCourses = this.schedules
 			.filter(sched => sched.active)
-			.map((schedule) => schedule.courses)
+			.map(schedule => schedule.courses)
 			.toArray()
 		const scheduleCoursePromises = Promise.all(allCourses)
-		return scheduleCoursePromises.then((scheduleCourses) => flatten(scheduleCourses))
+		return scheduleCoursePromises.then(scheduleCourses => flatten(scheduleCourses))
 	}
 
 
@@ -255,7 +255,6 @@ export default class Student extends StudentRecord {
 			changelog(`saving student ${this.name} (${this.id})`)
 			const student = this.set('dateLastModified', new Date())
 			localStorage.setItem(student.id, stringify(student))
-			require('../lib/db').stores.students.put(JSON.parse(stringify(student)))
 		}
 	}
 

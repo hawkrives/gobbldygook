@@ -16,8 +16,8 @@ function loadStudent(filename) {
 
 function getStudentNames() {
 	return readdirSync(studentDir)
-		.filter((filename) => path.extname(filename) === '.json')
-		.map((filename) => path.resolve(studentDir + filename))
+		.filter(filename => path.extname(filename) === '.json')
+		.map(filename => path.resolve(studentDir + filename))
 }
 
 export function cli() {

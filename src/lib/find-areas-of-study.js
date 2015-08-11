@@ -19,7 +19,7 @@ export default function findAreasOfStudy(areas, degreeType) {
 		})
 	}
 
-	forEach(areas.majors, (area) => {
+	forEach(areas.majors, area => {
 		areasOfStudy.push({
 			type: 'major',
 			name: area,
@@ -27,7 +27,7 @@ export default function findAreasOfStudy(areas, degreeType) {
 		})
 	})
 
-	forEach(areas.concentrations, (area) => {
+	forEach(areas.concentrations, area => {
 		areasOfStudy.push({
 			type: 'concentration',
 			name: area,
@@ -35,7 +35,7 @@ export default function findAreasOfStudy(areas, degreeType) {
 		})
 	})
 
-	forEach(areas.emphases, (area) => {
+	forEach(areas.emphases, area => {
 		areasOfStudy.push({
 			type: 'emphasis',
 			name: area,

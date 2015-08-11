@@ -6,7 +6,7 @@ import compute from '../src/lib/compute'
 import get from 'lodash/object/get'
 import loadArea from './load-area'
 
-const checkAgainstArea = ({courses, overrides}, args) => (areaData) => {
+const checkAgainstArea = ({courses, overrides}, args) => areaData => {
 	if (args.path) {
 		const result = compute(
 			get(areaData, args.path), {

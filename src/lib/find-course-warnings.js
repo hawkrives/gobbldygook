@@ -1,6 +1,5 @@
 import map from 'lodash/collection/map'
 import flatten from 'lodash/array/flatten'
-import findIndex from 'lodash/array/findIndex'
 import compact from 'lodash/array/compact'
 import any from 'lodash/collection/any'
 import zip from 'lodash/array/zip'
@@ -11,7 +10,7 @@ import plur from 'plur'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {isTrue, expandYear, semesterName} from 'sto-helpers'
 
-let checkForInvalidYear = (course, scheduleYear) => {
+export function checkForInvalidYear(course, scheduleYear) {
 	let result = {
 		warning: false,
 		type: 'invalid-year',
@@ -28,7 +27,7 @@ let checkForInvalidYear = (course, scheduleYear) => {
 	return result.warning ? result : null
 }
 
-let checkForInvalidSemester = (course, scheduleSemester) => {
+export function checkForInvalidSemester(course, scheduleSemester) {
 	let result = {
 		warning: false,
 		type: 'invalid-semester',
@@ -43,7 +42,7 @@ let checkForInvalidSemester = (course, scheduleSemester) => {
 	return result.warning ? result : null
 }
 
-let checkForTimeConflicts = (courses) => {
+export function checkForTimeConflicts(courses) {
 	let conflicts = findScheduleTimeConflicts(courses)
 	conflicts = map(conflicts, conflictSet => {
 		let result = {
@@ -67,7 +66,7 @@ let checkForTimeConflicts = (courses) => {
 	return conflicts
 }
 
-let findWarnings = (courses, schedule) => {
+export function findWarnings(courses, schedule) {
 	let warningsOfInvalidity = map(courses, course => {
 		let invalidYear = checkForInvalidYear(course, schedule.year)
 		let invalidSemester = checkForInvalidSemester(course, schedule.semester)
@@ -85,9 +84,3 @@ let findWarnings = (courses, schedule) => {
 }
 
 export default findWarnings
-export {
-	findWarnings,
-	checkForTimeConflicts,
-	checkForInvalidSemester,
-	checkForInvalidYear
-}

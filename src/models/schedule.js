@@ -28,7 +28,7 @@ export default class Schedule extends ScheduleRecord {
 	constructor(data={}) {
 		// console.log('schedule constructor')
 		super(data)
-		return this.withMutations((sched) => {
+		return this.withMutations(sched => {
 			sched = sched.set('id', data.id || uuid())
 			sched = sched.set('clbids', Immutable.fromJS(data.clbids || []))
 			sched = sched.set('_courseData', getCourses(this.clbids))
@@ -44,7 +44,7 @@ export default class Schedule extends ScheduleRecord {
 	// Schedule Maintenance
 	move(to={}) {
 		// `to` is an object: {year, semester}
-		return this.withMutations((sched) => {
+		return this.withMutations(sched => {
 			if (to.year) {
 				sched = sched.set('year', to.year)
 			}
@@ -67,9 +67,9 @@ export default class Schedule extends ScheduleRecord {
 	// Course Maintenance
 
 	reorderCourse(clbid, newIndex) {
-		const oldIndex = this.clbids.findIndex((id) => id === clbid)
+		const oldIndex = this.clbids.findIndex(id => id === clbid)
 
-		return this.withMutations((sched) => {
+		return this.withMutations(sched => {
 			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
 			sched = sched.set('clbids', sched.clbids.splice(newIndex, 0, clbid))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
@@ -86,7 +86,7 @@ export default class Schedule extends ScheduleRecord {
 			return this
 		}
 
-		return this.withMutations((sched) => {
+		return this.withMutations(sched => {
 			sched = sched.set('clbids', sched.clbids.push(clbid))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
 			// sched.get('_courseData').then(d => console.log(`it took ${Math.round(present() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
@@ -104,7 +104,7 @@ export default class Schedule extends ScheduleRecord {
 		}
 
 		const index = this.clbids.indexOf(clbid)
-		return this.withMutations((sched) => {
+		return this.withMutations(sched => {
 			sched = sched.set('clbids', sched.clbids.delete(index))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
 			// sched.get('_courseData').then(d => console.log(`it took ${Math.round(present() - start)}ms to remove ${clbid} from ${this.year}-${this.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
