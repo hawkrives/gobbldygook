@@ -32,7 +32,7 @@ export default class GraduationStatus extends Component {
 		super(props)
 		this.state = {
 			graduatability: false,
-			areaDetails: Immutable.Map(),
+			areaDetails: Immutable.OrderedMap(),
 			allAreas: Immutable.List(),
 			showAreaPickerFor: Immutable.Map(),
 		}
@@ -43,9 +43,13 @@ export default class GraduationStatus extends Component {
 	}
 
 	async componentWillReceiveProps(nextProps) {
-		const {graduatability, areaDetails} = await nextProps.student.graduatability
+		const {canGraduate, details} = await nextProps.student.graduatability
 		const allAreas = Immutable.List(await db.stores.areas.all())
-		this.setState({graduatability, areaDetails, allAreas})
+		this.setState({
+			graduatability: canGraduate,
+			areaDetails: details,
+			allAreas,
+		})
 	}
 
 	initiateAddArea = ({ev, type}) => {
@@ -91,7 +95,7 @@ export default class GraduationStatus extends Component {
 
 	render() {
 		log('GraduationStatus#render')
-		let student = this.props.student
+		const student = this.props.student
 
 		if (!student) {
 			return null

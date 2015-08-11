@@ -36,6 +36,11 @@ const StudentRecord = Immutable.Record({
 	fabrications: Immutable.OrderedMap(),
 
 	settings: Immutable.Map(),
+
+	graduatability: Promise.resolve({
+		canGraduate: false,
+		studyResults: Immutable.OrderedMap(),
+	}),
 })
 
 export default class Student extends StudentRecord {
@@ -77,6 +82,8 @@ export default class Student extends StudentRecord {
 					student = student.changeSetting(key, value)
 				})
 
+				student.set('graduatability', checkGraduatability(student))
+
 				changelog(`it took ${present() - startTime} ms to make a student`)
 
 				return student
@@ -108,8 +115,8 @@ export default class Student extends StudentRecord {
 		return this.setIn(['settings', key], value)
 	}
 
-	get graduatability() {
-		return checkGraduatability(this)
+	checkGraduatability() {
+		return this.set('graduatability', checkGraduatability(this))
 	}
 
 
@@ -224,13 +231,14 @@ export default class Student extends StudentRecord {
 
 	data() {
 		return Promise.all([
-			this.courses,
-			this.creditsNeeded,
-			this.fabrications.toList().toJS(),
-			this.graduation,
-			this.matriculation,
-			this.overrides.toObject(),
-			this.studies.toList().toJS(),
+			this.courses, // 0
+			this.creditsNeeded, // 1
+			this.fabrications.toList().toJS(), // 2
+			this.graduation, // 3
+			this.matriculation, // 4
+			this.overrides.toObject(), // 5
+			this.studies.toList().toJS(), // 6
+			this.graduatability, // 7
 		]).then(results => ({
 			courses: results[0],
 			creditsNeeded: results[1],
@@ -239,6 +247,8 @@ export default class Student extends StudentRecord {
 			matriculation: results[4],
 			overrides: results[5],
 			studies: results[6],
+			studyResults: results[7].details,
+			graduatability: results[7].canGraduate,
 		}))
 	}
 
@@ -251,8 +261,10 @@ export default class Student extends StudentRecord {
 		// compare it to the current one
 		// if they're different, update dateLastModified, stringify, and save.
 		const oldVersion = localStorage.getItem(this.id)
+
 		if (oldVersion !== stringify(this)) {
 			changelog(`saving student ${this.name} (${this.id})`)
+
 			const student = this.set('dateLastModified', new Date())
 			localStorage.setItem(student.id, stringify(student))
 		}

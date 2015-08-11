@@ -1,9 +1,8 @@
-// import memoize from 'lodash/function/memoize'
 import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
-import zipObject from 'lodash/array/zipObject'
+import map from 'lodash/collection/map'
 
-import {Map} from 'immutable'
+import {OrderedMap as $Map} from 'immutable'
 import checkStudentAgainstArea from './check-student-against-area'
 
 
@@ -18,18 +17,23 @@ import checkStudentAgainstArea from './check-student-against-area'
  *    {Immutable.Map} areaDetails
  */
 async function checkStudentGraduatability(student) {
+	console.log('checkStudentGraduatability()')
+
 	const areaPromises = student.studies
 		.map(area => checkStudentAgainstArea(student, area))
 		.toArray()
 
 	const areas = await* areaPromises
-	const areaDetails = Map(zipObject(areas.map(area => [area.id, area])))
 
 	const goodAreas = filter(areas, {computed: true})
 	const graduatability = (size(goodAreas) === size(areas))
 
-	return {graduatability, areaDetails}
+	const areaDetails = $Map(map(areas, area => [area.id, area]))
+
+	return {
+		canGraduate: graduatability,
+		details: areaDetails,
+	}
 }
 
 export default checkStudentGraduatability
-// export default memoize(checkStudentGraduatability)
