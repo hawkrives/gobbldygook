@@ -1,6 +1,5 @@
 @import '../mixins/card';
 @import '../mixins/color';
-@import '../mixins/material-shadow';
 
 .import-student {
 	margin-bottom: 0.5em;
@@ -24,7 +23,6 @@
 
 .student-list-filter {
 	@include card;
-	@include material-shadow;
 	padding: 0.25em 0.5em;
 
 	&:focus {
