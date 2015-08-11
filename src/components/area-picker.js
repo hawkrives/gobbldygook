@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react'
 import I from 'immutable'
 import fuzzysearch from 'fuzzysearch'
 import pluralizeArea from '../lib/pluralize-area'
-import kebabCase from 'lodash/string/kebabCase'
 
 import Button from './button'
 import List from './list'

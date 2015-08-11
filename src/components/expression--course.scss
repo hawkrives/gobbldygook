@@ -2,13 +2,9 @@
 	display: inline-flex !important;
 	flex-flow: row nowrap;
 	align-items: center;
-	display: -webkit-inline-flex !important;
-	-webkit-flex-flow: row nowrap;
-	-webkit-align-items: center;
 
 	.course {
 		display: flex;
-		display: -webkit-flex;
 	}
 
 	font-size: 0.9em;
@@ -21,8 +17,6 @@
 	.temporal {
 		display: flex;
 		flex-flow: column nowrap;
-		display: -webkit-flex;
-		-webkit-flex-flow: column nowrap;
 		text-align: center;
 	}
 

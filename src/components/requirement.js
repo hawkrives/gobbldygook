@@ -7,7 +7,6 @@ import isRequirementName from '../lib/is-requirement-name'
 
 import Expression from './expression'
 import Button from './button'
-import Icon from './icon'
 
 import './requirement.scss'
 

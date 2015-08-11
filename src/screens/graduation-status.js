@@ -10,7 +10,6 @@ import union from 'lodash/array/union'
 import pathToOverride from '../lib/path-to-override'
 
 import AreaOfStudyGroup from '../components/area-of-study-group'
-import AvatarLetter from '../components/avatar-letter'
 import Button from '../components/button'
 import Student from '../models/student'
 import StudentSummary from '../components/student-summary'
