@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import './loading.scss'
+
 export default class Loading extends Component {
 	static propTypes = {
 		children: PropTypes.any,

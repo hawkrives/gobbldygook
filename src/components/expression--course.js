@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import './expression--course'
+
 export default class CourseExpression extends Component {
 	static propTypes = {
 		_result: PropTypes.bool,

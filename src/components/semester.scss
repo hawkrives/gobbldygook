@@ -1,5 +1,13 @@
-$semester-spacing: 4px;
-$semester-edge-padding: ($block-edge-padding) ($block-edge-padding * 1.5);
+@import '../base/variables';
+@import '../mixins/card';
+@import '../mixins/color';
+@import '../mixins/heading-neutral';
+@import '../mixins/link-undecorated';
+@import '../mixins/list-inline';
+
+$semester-edge-padding:
+	($block-edge-padding)
+	($block-edge-padding * 1.5);
 
 .semester-list {
 	flex: 1;
@@ -45,7 +53,7 @@ $semester-edge-padding: ($block-edge-padding) ($block-edge-padding * 1.5);
 
 .semester .info-bar {
 	@include list-inline;
-	color: rgba($black, 0.5);
+	color: color('gray', '500');
 
 	li {
 		&::before { content: " – "; }

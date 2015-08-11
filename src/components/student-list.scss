@@ -1,6 +1,11 @@
+@import '../base/variables';
+@import '../mixins/color';
+@import '../mixins/link-undecorated';
+@import '../mixins/material-shadow';
+
 .student-list-item {
 	@include link-undecorated;
-	@include material-shadow(1, $filter: true);
+	@include material-shadow;
 	border-radius: $base-border-radius;
 
 	&.is-selected {

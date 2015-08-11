@@ -12,6 +12,8 @@ import Button from './button'
 import List from './list'
 import Icon from './icon'
 
+import './student-list.scss'
+
 class StudentListItem extends Component {
 	static propTypes = {
 		isEditing: PropTypes.bool,

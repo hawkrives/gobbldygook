@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import isString from 'lodash/lang/isString'
 
+import './avatar-letter.scss'
+
 export default class AvatarLetter extends Component {
 	static propTypes = {
 		className: PropTypes.string,

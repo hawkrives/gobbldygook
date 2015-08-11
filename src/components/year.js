@@ -9,6 +9,8 @@ import Semester from './semester'
 
 import {isCurrentYear, expandYear, findFirstAvailableSemester} from 'sto-helpers'
 
+import './year.scss'
+
 export default class Year extends Component {
 	static propTypes = {
 		student: PropTypes.instanceOf(Student).isRequired,

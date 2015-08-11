@@ -1,4 +1,4 @@
-$edge-padding: 0.5em;
+@import '../mixins/card';
 
 .requirement {
 	margin: 0 0.25em 0.25em 0.5em;
@@ -25,7 +25,7 @@ $edge-padding: 0.5em;
 .requirement .requirement .requirement .requirement--title,
 .requirement .requirement .requirement .requirement--message,
 .requirement .requirement .requirement .requirement--filter {
-	padding-left: $edge-padding;
+	padding-left: $area-edge-padding;
 }
 
 .requirement--title {
@@ -62,8 +62,8 @@ $edge-padding: 0.5em;
 .requirement--message {
 	margin-top: 0em;
 	margin-bottom: 0em;
-	padding-left: $edge-padding;
-	padding-right: $edge-padding;
+	padding-left: $area-edge-padding;
+	padding-right: $area-edge-padding;
 }
 
 .requirement .requirement .requirement .requirement--message {

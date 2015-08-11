@@ -8,6 +8,8 @@ import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'
 import Button from './button'
 
+import './area-of-study-group.scss'
+
 export default class AreaOfStudyGroup extends Component {
 	static propTypes = {
 		addArea: PropTypes.func.isRequired,

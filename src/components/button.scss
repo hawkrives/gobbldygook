@@ -1,3 +1,8 @@
+@import '../base/variables';
+@import '../mixins/color';
+@import '../mixins/link-undecorated';
+@import '../mixins/material-shadow';
+
 %button {
 	cursor: pointer;
 
@@ -31,7 +36,7 @@
 	background-color: color('white', '500');
 	color: color('black', '500');
 
-	@include material-shadow(1);
+	@include material-shadow;
 
 	&:hover,
 	&:focus {
@@ -43,7 +48,7 @@
 	}
 
 	&:active {
-		@include material-shadow(2);
+		@include material-shadow;
 		background-color: color('white', '700');
 	}
 

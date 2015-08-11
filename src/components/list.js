@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import './list.scss'
+
 export default class List extends Component {
 	static propTypes = {
 		canSelect: PropTypes.bool,

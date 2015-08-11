@@ -1,3 +1,6 @@
+@import '../mixins/card';
+@import '../mixins/color';
+
 .expression {
 	display: inline-block;
 }
@@ -26,7 +29,7 @@
 }
 
 .expression.computed--not {
-	color: #777;
+	color: color('gray', '500');
 }
 
 .expression .joiner {

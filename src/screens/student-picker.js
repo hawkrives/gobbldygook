@@ -7,6 +7,8 @@ import Button from '../components/button'
 import Icon from '../components/icon'
 import StudentList from '../components/student-list'
 
+import './student-picker.scss'
+
 export default class StudentPicker extends Component {
 	static propTypes = {
 		students: PropTypes.instanceOf(Immutable.Map).isRequired,

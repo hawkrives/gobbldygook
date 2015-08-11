@@ -5,6 +5,8 @@ import CourseExpression from './expression--course'
 import cx from 'classnames'
 import plur from 'plur'
 
+import './expression.scss'
+
 const joiners = {
 	$and: 'AND',
 	$or: 'OR',

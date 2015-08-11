@@ -1,6 +1,7 @@
-@mixin card($filter: false) {
-	@include material-shadow(1, $filter);
-	background-color: $white;
+@import '../base/variables';
+
+@mixin card {
+	background-color: white;
 	border-radius: $base-border-radius;
 }
 

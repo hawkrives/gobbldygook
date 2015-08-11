@@ -8,6 +8,8 @@ import {semesterName} from 'sto-helpers'
 
 import Student from '../models/student'
 
+import './semester-detail.scss'
+
 let SemesterDetail = React.createClass({
 	propTypes: {
 		className: PropTypes.string,

@@ -14,6 +14,8 @@ import Separator from '../components/separator'
 
 import CourseRemovalBox from '../components/course-removal-box'
 
+import './sidebar.scss'
+
 export default class Sidebar extends Component {
 	static propTypes = {
 		student: PropTypes.instanceOf(Student).isRequired,

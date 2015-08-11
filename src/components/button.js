@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import './button.scss'
+
 export default class Button extends Component {
 	static propTypes = {
 		children: PropTypes.any.isRequired,

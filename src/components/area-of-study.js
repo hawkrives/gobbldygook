@@ -6,6 +6,8 @@ import Icon from './icon'
 import Requirement from './requirement'
 import ProgressBar from './progress-bar'
 
+import './area-of-study.scss'
+
 export default class AreaOfStudy extends Component {
 	static propTypes = {
 		_error: PropTypes.string,

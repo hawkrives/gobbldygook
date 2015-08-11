@@ -1,3 +1,7 @@
+@import '../base/variables';
+@import '../mixins/card';
+@import '../mixins/color';
+
 .student-summary {
 	@include card;
 

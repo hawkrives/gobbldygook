@@ -1,3 +1,6 @@
+@import '../base/variables';
+@import '../mixins/card';
+
 .add-area {
 	@include card;
 	padding: $area-edge-padding;

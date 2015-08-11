@@ -7,6 +7,8 @@ import itemTypes from '../models/item-types'
 
 import Icon from './icon'
 
+import './course-removal-box.scss'
+
 // Implements the drag source contract.
 const removeCourseTarget = {
 	drop(props, monitor) {

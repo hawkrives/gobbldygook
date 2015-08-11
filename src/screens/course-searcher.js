@@ -20,6 +20,8 @@ import Loading from '../components/loading'
 
 import stickyfill from '../lib/init-stickyfill'
 
+import './course-searcher.scss'
+
 let CourseSearcher = React.createClass({
 	propTypes: {
 		isHidden: PropTypes.bool,

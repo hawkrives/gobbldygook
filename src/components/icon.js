@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import './icon.scss'
+
 const icons = {
 	'ionicon-alert': '\uf101',
 	'ionicon-alert-circled': '\uf100',

@@ -1,3 +1,6 @@
+@import '../base/variables';
+@import '../mixins/color';
+
 .course-removal-box {
 	padding: 5em 1em;
 	color: color('gray', '500');

@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import {findWordForProgress} from 'sto-helpers'
 
+import './progress-bar.scss'
+
 export default class ProgressBar extends Component {
 	static propTypes = {
 		className: PropTypes.string,

@@ -10,6 +10,8 @@ import ContentEditable from './content-editable'
 import studentActions from '../flux/student-actions'
 import Student from '../models/student'
 
+import './student-summary.scss'
+
 const goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
 const badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 

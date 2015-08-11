@@ -12,6 +12,7 @@ import List from './list'
 import DetailedCourse from './detailed-course'
 import BasicCourse from './basic-course'
 
+import './course.scss'
 
 // Implements the drag source contract.
 const courseSource = {

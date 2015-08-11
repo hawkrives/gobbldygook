@@ -5,6 +5,8 @@ import notificationStore from '../flux/notification-store'
 
 import Notification from '../components/notification'
 
+import './notifications.scss'
+
 export default class Notifications extends Component {
 	static displayName = 'Notifications'
 

@@ -8,6 +8,8 @@ import Button from './button'
 import List from './list'
 import Toolbar from './toolbar'
 
+import './area-picker.scss'
+
 export default class AreaPicker extends Component {
 	static propTypes = {
 		addArea: PropTypes.func.isRequired,

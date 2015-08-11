@@ -6,6 +6,8 @@ import DocumentTitle from 'react-document-title'
 import Sidebar from './sidebar'
 import Loading from '../components/loading'
 
+import './student.scss'
+
 export default class Student extends Component {
 	static propTypes = {
 		routerState: PropTypes.object.isRequired,

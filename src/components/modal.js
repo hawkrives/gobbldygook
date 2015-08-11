@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import './modal.scss'
+
 export default class Modal extends Component {
 	static propTypes = {
 		children: PropTypes.any.isRequired,

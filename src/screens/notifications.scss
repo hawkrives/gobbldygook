@@ -1,3 +1,7 @@
+@import '../base/variables';
+@import '../mixins/color';
+@import '../mixins/material-shadow';
+
 .notification-enter {
 	opacity: 0.01;
 	transition: opacity .5s ease-in;
@@ -49,7 +53,7 @@
 
 	padding: 0.9em;
 
-	@include material-shadow(1);
+	@include material-shadow;
 	border-radius: 2px;
 
 	& + & {

@@ -1,3 +1,6 @@
+@import '../mixins/card';
+@import '../mixins/color';
+
 .area {
 	@include card;
 
@@ -34,7 +37,6 @@
 .area--summary::-ms-details-marker     { display: none; }
 .area--summary::details-marker         { display: none; }
 
-$area-edge-padding: 0.5em;
 .area--summary {
 	cursor: pointer;
 

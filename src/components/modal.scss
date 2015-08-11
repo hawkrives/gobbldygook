@@ -1,15 +1,17 @@
+@import '../mixins/card';
+
 #app.modal {
 	background-color: color('gray', '800');
 	position: relative;
 }
 
 .modal {
+	@include card;
+
 	position: absolute;
 	top: 1vh;
 	left: 10vw;
 	right: 10vw;
-
-	@include card;
 }
 
 .modal {

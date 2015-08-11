@@ -9,6 +9,8 @@ import Expression from './expression'
 import Button from './button'
 import Icon from './icon'
 
+import './requirement.scss'
+
 export default class Requirement extends Component {
 	static propTypes = {
 		addOverride: PropTypes.func.isRequired,

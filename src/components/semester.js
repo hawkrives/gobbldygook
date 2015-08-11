@@ -22,6 +22,8 @@ import Loading from './loading'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 
+import './semester.scss'
+
 // Implements the drag source contract.
 const semesterTarget = {
 	drop(props, monitor, component) {

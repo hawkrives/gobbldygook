@@ -19,6 +19,8 @@ import allAreaTypes from '../models/area-types'
 import actions from '../flux/student-actions'
 import db from '../lib/db'
 
+import './graduation-status'
+
 const log = debug('gobbldygook:component:render')
 
 export default class GraduationStatus extends Component {

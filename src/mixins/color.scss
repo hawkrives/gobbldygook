@@ -1,6 +1,8 @@
 // usage: color('name_of_color', 'type_of_color')
 // to avoid to repeating map-get($colors, ...)
 
+@import './colors';
+
 @function color($color, $level: '500') {
 	@if $color == 'white' {
 		@return #fff;

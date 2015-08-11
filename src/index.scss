@@ -1,58 +1,7 @@
-@import 'mixins/colors';
-@import 'mixins/color';
-
-// initial setup
-@import 'base/variables';
-@import 'base/functions';
-
-// mixins
-@import 'mixins/card';
-@import 'mixins/heading-neutral';
-@import 'mixins/link-undecorated';
-@import 'mixins/list-inline';
-@import 'mixins/list-unstyled';
-@import 'mixins/loading-spinner';
-@import 'mixins/material-shadow';
-@import 'mixins/no-select';
-@import 'mixins/square';
-@import 'mixins/sr-only';
-
 // basic styles
 @import 'base/fonts';
 @import 'base/normalize';
 @import 'base/base';
-
-// components
-@import 'components/button';
-@import 'components/icon';
-@import 'components/list';
-@import 'components/loading';
-@import 'components/modal';
-@import 'components/progress-bar';
-
-@import 'components/area-of-study';
-@import 'components/area-of-study-group';
-@import 'components/area-picker';
-@import 'components/avatar-letter';
-@import 'components/course';
-@import 'components/course-removal-box';
-@import 'components/expression';
-@import 'components/expression--course';
-@import 'components/requirement';
-@import 'components/semester';
-@import 'components/student-list';
-@import 'components/student-picker';
-@import 'components/student-summary';
-@import 'components/year';
-
-// screens
-@import 'screens/course-searcher';
-@import 'screens/course-table';
-@import 'screens/graduation-status';
-@import 'screens/notifications';
-@import 'screens/semester-detail';
-@import 'screens/sidebar';
-@import 'screens/student';
 
 // vendor components
 @import 'vendor/react-list-select';
