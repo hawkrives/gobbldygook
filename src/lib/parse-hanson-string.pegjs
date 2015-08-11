@@ -130,21 +130,20 @@ _ 'whitespace'
 
 counter
   = english_integer
-  / numeric_integer
 
 english_integer
   = num:(
         'zero'
-      / 'eleven' / 'one'
-      / 'twelve' / 'two'
-      / 'thirteen' / 'three'
-      / 'fourteen' / 'four'
-      / 'fifteen' / 'five'
-      / 'sixteen' / 'six'
-      / 'seventeen' / 'seven'
-      / 'eighteen' / 'eight'
-      / 'nineteen' / 'nine'
-      / 'twenty' / 'ten'
+      / 'one'
+      / 'two'
+      / 'three'
+      / 'four'
+      / 'five'
+      / 'six'
+      / 'seven'
+      / 'eight'
+      / 'nine'
+      / 'ten'
     )
     {
       if (num === 'zero')  { return 0 }
@@ -158,16 +157,6 @@ english_integer
       else if (num === 'eight') { return 8 }
       else if (num === 'nine')  { return 9 }
       else if (num === 'ten')   { return 10 }
-      else if (num === 'eleven')    { return 11 }
-      else if (num === 'twelve')    { return 12 }
-      else if (num === 'thirteen')  { return 13 }
-      else if (num === 'fourteen')  { return 14 }
-      else if (num === 'fifteen')   { return 15 }
-      else if (num === 'sixteen')   { return 16 }
-      else if (num === 'seventeen') { return 17 }
-      else if (num === 'eighteen')  { return 18 }
-      else if (num === 'nineteen')  { return 19 }
-      else if (num === 'twenty')    { return 20 }
     }
 
 
