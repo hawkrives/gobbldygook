@@ -8,9 +8,9 @@
   "main": "index.js",
   "scripts": {
     "push": "./bin/publish.sh",
-    "build": "6to5 lib --out-dir dist && node bin/make_index.js",
+    "build": "babel lib --out-dir dist && node bin/make_index.js",
     "clean": "rm -rf dist/ index.js",
-    "watch": "6to5 --watch lib --out-dir dist",
+    "watch": "babel --watch lib --out-dir dist",
     "test": "mocha",
     "prepublish": "npm run build",
     "postpublish": "npm run clean"
@@ -19,7 +19,7 @@
     "lodash": "^3.0.0"
   },
   "devDependencies": {
-    "6to5": "^3.0.5",
+    "babel": "^5.8.21",
     "chai": "^1.10.0",
     "mocha": "^2.1.0"
   },
