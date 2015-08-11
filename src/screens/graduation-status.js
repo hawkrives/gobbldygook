@@ -18,7 +18,7 @@ import allAreaTypes from '../models/area-types'
 import actions from '../flux/student-actions'
 import db from '../lib/db'
 
-import './graduation-status'
+import './graduation-status.scss'
 
 const log = debug('gobbldygook:component:render')
 
