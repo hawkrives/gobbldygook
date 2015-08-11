@@ -9,7 +9,7 @@
   "license": "MIT",
   "config": {
     "area_output": "build/areas/",
-    "beautify": "-f - --end-with-newline --indent-size 2",
+    "beautify": "-f - --end-with-newline --indent-with-tabs",
     "mocha": "test/areas test/models",
     "webpack": "--progress --config=./.webpack.config.js"
   },

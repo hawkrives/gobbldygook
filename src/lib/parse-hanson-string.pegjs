@@ -10,7 +10,6 @@
   }
 
   var flatten = require('lodash').flatten
-  var assign = require('lodash').assign
   var expandDepartment = require('./expand-department')
 }
 
@@ -50,9 +49,7 @@ filter
       'where' _ where:qualifier { return {$where: where} }
     / 'from' _ of:of_list { return {$of: of} }
   )
-  { return assign({
-      $type: 'filter',
-  }, filter ) }
+  { return {...filter, $type: 'filter'} }
 
 occurrence
   = count:counter _ 'occurrence' optional_s _ 'of' _ course:course
@@ -87,8 +84,7 @@ and_q 'qualification-and'
 
 
 parenthetical_q
-  = open_paren _ q:or_q _ close_paren
-    { return q }
+  = open_paren _ q:or_q _ close_paren { return q }
   / qualification
 
 
@@ -97,7 +93,7 @@ qualification
     op:operator _
     value:(
         f:func _ 'from' _ 'courses' _ 'where' _ q:qualifier
-          { return assign(f, {$where: q}) }
+          { return {...f, $where: q} }
       / word:[a-z0-9_\-]i+
           { return word.join('') }
     )
@@ -244,11 +240,12 @@ modifier
     {
       if (what === 'department' && from['$from'] === 'where')
         throw new Error('cannot use a modifier with "departments from courses"')
-      return assign({
+      return {
+        ...from,
         $type: 'modifier',
         $count: count,
         $what: what,
-      }, from)
+      }
     }
 
 
@@ -264,7 +261,7 @@ requirement_title
 reference 'requirement reference'
   = title:(
       a:requirement_title
-      b:(_ '(' t:requirement_title ')' { return ` (${t})` })?
+      b:(_ open_paren t:requirement_title close_paren { return ` (${t})` })?
       { return `${a}${b || ''}` }
     )
     {
@@ -283,25 +280,24 @@ reference 'requirement reference'
 
 // Course
 
-dot 'a single period'
-  = '.'
-
 course
   = dept:c_dept? _
     num:c_num
     details:(
-      dot section:c_sect sub:(
-        dot year:c_year sub:(
-          dot semester:c_sem { return {semester} }
-        )? { return assign({year}, sub) }
-      )? { return assign({section}, sub) }
+      '.' section:c_sect sub:(
+        '.' year:c_year sub:(
+          '.' semester:c_sem { return {semester} }
+        )? { return {...sub, year} }
+      )? { return {...sub, section} }
     )?
   {
     return {
       $type: 'course',
-      $course: assign(details || {},
-                      dept || fetchDept() || {},
-                      num)
+      $course: {
+        ...details,
+        ...(dept || fetchDept()),
+        ...num
+      },
     }
   }
 
@@ -347,7 +343,7 @@ c_num 'course number'
         result.lab = true
       }
 
-      return assign(result, num)
+      return {...result, ...num}
     }
 
 c_sect
@@ -363,7 +359,6 @@ c_sem
   = num:[1-5] { return parseInt(num) }
   / '*'
 
-
 // Primitives
 
 uppercase_letter
@@ -373,10 +368,6 @@ uppercase_letter
 word
   = chars:[a-z]i+
     { return chars.join('') }
-
-numeric_integer
-  = num:digit+
-    { return parseInt(num.join('')) }
 
 digit
   = num:[0-9]
