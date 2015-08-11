@@ -3,6 +3,12 @@
 ## Next (unreleased)
 
 
+## 3.0.0-alpha.16
+- updated node-sass to 3.2.0
+- made buttons more consistent
+- changed year headings to be horizontal, instead of vertical
+
+
 ## 3.0.0-alpha.15
 - made things prettier
 - implemented graphical area of study management
