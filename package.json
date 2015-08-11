@@ -7,13 +7,13 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "push": "./bin/publish.sh",
     "build": "babel lib --out-dir dist && node bin/make_index.js",
     "clean": "rm -rf dist/ index.js",
-    "watch": "babel --watch lib --out-dir dist",
-    "test": "mocha",
+    "postpublish": "npm run clean",
     "prepublish": "npm run build",
-    "postpublish": "npm run clean"
+    "push": "./bin/publish.sh",
+    "test": "mocha",
+    "watch": "babel --watch lib --out-dir dist"
   },
   "dependencies": {
     "lodash": "^3.0.0"
@@ -24,7 +24,7 @@
     "mocha": "^2.1.0"
   },
   "keywords": [
-    "stolaf",
-    "sto-scheduler"
+    "sto-scheduler",
+    "stolaf"
   ]
 }
