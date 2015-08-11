@@ -12,6 +12,9 @@ env:
   browser: true
   es6: true
 
+globals:
+  require: false
+
 plugins:
   - eslint-plugin-react
 
@@ -47,7 +50,7 @@ rules:
   consistent-this: [1, self]
   brace-style: [1, stroustrup]
   semi: [2, never]
-  arrow-parens: [2, as-needed]
+  arrow-parens: [1, as-needed]
   arrow-spacing: [1, {before: true, after: true}]
   no-implicit-coercion: [2, {boolean: true, number: true, string: true}]
 
