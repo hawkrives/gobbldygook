@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## Next (unreleased)
+- removed extraneous dependencies on lodash to reduce the build size
 
 
 ## 3.0.0-alpha.16
