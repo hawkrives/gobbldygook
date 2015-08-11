@@ -21,6 +21,6 @@ describe('checkScheduleForTimeConflicts', () => {
 			]},
 		]
 
-		expect(checkScheduleForTimeConflicts(schedule)).to.be.true()
+		expect(checkScheduleForTimeConflicts(schedule)).to.be.true
 	})
 })
