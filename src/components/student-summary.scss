@@ -57,11 +57,7 @@
 	margin: $block-edge-padding auto ($block-edge-padding * 2);
 
 	border: solid 1px;
-
 	background-color: white;
-	box-shadow:
-		0 0 0 5px white,
-		0 0 0 6px color('light-green', '100');
 
 	&.cannot-graduate {
 		color: color('deep-orange', '500');
@@ -69,5 +65,8 @@
 
 	&.can-graduate {
 		color: color('light-green', '800');
+		box-shadow:
+			0 0 0 5px white,
+			0 0 0 6px color('light-green', '100');
 	}
 }
