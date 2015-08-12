@@ -27,4 +27,18 @@ describe('convertTimeStringsToOfferings', () => {
 
 		expect(convertTimeStringsToOfferings(course)).to.eql(result)
 	})
+
+	it('does not return the same time object for different days', () => {
+		let course = {times: ['MF 0905-1000']}
+
+		let expected = [
+			{day: 'Mo', times: [{start:905, end:1000}]},
+			{day: 'Fr', times: [{start:905,  end:1000}]},
+		]
+
+		let result = convertTimeStringsToOfferings(course)
+
+		expect(result).to.deep.equal(expected)
+		expect(result[0].times[0]).to.not.equal(result[1].times[0])
+	})
 })
