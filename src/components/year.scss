@@ -16,7 +16,7 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 }
 
 .add-year {
-	font-feature-settings: 'tnum';
+	font-feature-settings: 'smcp';
 
 	display: block;
 	width: 100%;

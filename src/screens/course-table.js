@@ -46,7 +46,7 @@ export default class CourseTable extends Component {
 					type='raised'
 					title='Add Year'
 					onClick={this.addYear}>
-					Add {expandYear(nextAvailableYear, false, '–')}
+					Add Year ({expandYear(nextAvailableYear, true, '–')})
 				</Button>
 			</div>
 		)
