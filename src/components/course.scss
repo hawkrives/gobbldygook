@@ -29,8 +29,7 @@
 		margin-top: 0;
 		margin-bottom: 0;
 		line-height: 1.2;
-		padding: 0;
-		padding-bottom: 1px;
+		padding: 0 0 1px;
 		font-size: 1em;
 		font-weight: 500;
 		font-family: $heading-font-stack;
@@ -113,7 +112,7 @@
 		display: none;
 	}
 
-	.is-selected & .show-info,
+	&:hover .show-info,
 	&.expanded .show-info {
 		display: block;
 		&:focus {
