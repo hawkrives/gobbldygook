@@ -98,6 +98,8 @@ class Semester extends Component {
 
 	render() {
 		let infoIcons = []
+		let courseList = <Loading>Loading Courses…</Loading>
+
 		if (this.state.schedule && this.state.courses.size) {
 			let courseCount = this.state.courses.size
 			infoIcons.push(
@@ -120,7 +122,6 @@ class Semester extends Component {
 			}
 		}
 
-		let courseList = null
 		if (this.state.schedule && this.state.courses) {
 			let courseObjects = this.state.courses
 				.filterNot(isUndefined)
@@ -155,9 +156,6 @@ class Semester extends Component {
 				.concat(emptySlots)
 
 			courseList = <ReactListSelect multiple={true} className='course-list' items={courseBlocks} />
-		}
-		else if (this.state.schedule) {
-			courseList = <Loading>Loading Courses…</Loading>
 		}
 
 		const className = cx({
