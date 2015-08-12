@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.0.2
+- Fixed a bug where offerings could share time objects
+- Renamed `findTimes` to `findTime`
+- Updated publish script to exit as soon as any step errors
+
 ## 2.0.1
 - Updated Babel
 - Removed accidental dependency on the *entirety* of lodash
