@@ -6,7 +6,7 @@ export default function processCoursesTable(coursesTable) {
 	jsonRepresentation.pop() // remove the extra row at the end
 
 	// loop to query each of the ugly
-	let coursesArr = prettifyCourses(jsonRepresentation)
+	const coursesArr = prettifyCourses(jsonRepresentation)
 
 	return coursesArr
 }
