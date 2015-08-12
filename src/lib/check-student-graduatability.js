@@ -17,8 +17,6 @@ import checkStudentAgainstArea from './check-student-against-area'
  *    {Immutable.Map} areaDetails
  */
 async function checkStudentGraduatability(student) {
-	console.log('checkStudentGraduatability()')
-
 	const areaPromises = student.studies
 		.map(area => checkStudentAgainstArea(student, area))
 		.toArray()
