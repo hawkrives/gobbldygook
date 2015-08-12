@@ -15,10 +15,9 @@
   },
   "scripts": {
     "benchmark": "babel-node ./benchmarks/students-benchmark.js --runs 50 --graph",
-    "build": "webpack $npm_package_config_webpack",
+    "build": "NODE_ENV=production webpack -p webpack $npm_package_config_webpack",
     "build:areas": "./bin/compile-areas area-data/ --out-dir $npm_package_config_area_output",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
-    "build:production": "NODE_ENV=production webpack -p $npm_package_config_webpack",
     "clean": "rm -rf build/",
     "copy": "mkdirp build/ && cp -fR src/static/ build/ && npm run copy:areas",
     "copy:areas": "cp -rf ./area-data/ $npm_package_config_area_output && ./bin/area-package-maker $npm_package_config_area_output --save",
