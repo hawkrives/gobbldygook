@@ -9,10 +9,18 @@ export default function processInfoTable(infoTable) {
 
 	info.graduation = parseInt(info['class year'])
 	delete info['class year']
+
 	info.matriculation = parseInt(info['curriculum year'])
 	delete info['curriculum year']
+
 	info.standing = info['academic standing']
 	delete info['academic standing']
+
+	const [advisorName, advisorDepartment] = info.advisor.split(' - ')
+	info.advisor = {
+		name: advisorName,
+		department: advisorDepartment,
+	}
 
 	return info
 }
