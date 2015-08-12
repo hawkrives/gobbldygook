@@ -1,7 +1,7 @@
 import kebabCase from 'lodash/string/kebabCase'
 import yaml from 'js-yaml'
-import enhanceHanson from '../src/lib/enhance-hanson'
-import pluralizeArea from '../src/lib/pluralize-area'
+import enhanceHanson from '../../src/lib/enhance-hanson'
+import pluralizeArea from '../../src/lib/pluralize-area'
 import path from 'path'
 import fs from 'graceful-fs'
 
