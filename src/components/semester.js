@@ -145,10 +145,8 @@ class Semester extends Component {
 
 			let emptySlots = []
 			if (currentCredits < maxCredits) {
-				emptySlots =
-					range(Math.floor(currentCredits), maxCredits)
-						.map(i => <EmptyCourseSlot key={`empty-${i}`} />)
-
+				const minimumExtraCreditRange = range(Math.floor(currentCredits), maxCredits)
+				emptySlots = minimumExtraCreditRange.map(i => <EmptyCourseSlot key={`empty-${i}`} />)
 			}
 
 			courseList = (
