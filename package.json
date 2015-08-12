@@ -19,7 +19,7 @@
     "build:areas": "./bin/compile-areas area-data/ --out-dir $npm_package_config_area_output",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
     "clean": "rm -rf build/",
-    "copy": "mkdirp build/ && cp -fR src/static/ build/ && npm run copy:areas",
+    "copy": "mkdirp build/ && cp -fR src/static/* build/ && npm run copy:areas",
     "copy:areas": "cp -rf ./area-data/ $npm_package_config_area_output && ./bin/area-package-maker $npm_package_config_area_output --save",
     "cover": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- $npm_package_config_mocha",
     "cover:view": "npm run cover && opn coverage/lcov-report/index.html",
