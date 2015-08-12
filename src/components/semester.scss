@@ -27,7 +27,7 @@ $semester-edge-padding:
 }
 
 .semester.is-over {
-	box-shadow: 0 0 4px #444;
+	box-shadow: 0 0 4px color('gray', '500');
 	z-index: 10;
 }
 
