@@ -71,7 +71,6 @@ $semester-edge-padding:
 }
 
 .semester .info-bar {
-	@include list-inline;
 	color: color('gray', '500');
 
 	li {
