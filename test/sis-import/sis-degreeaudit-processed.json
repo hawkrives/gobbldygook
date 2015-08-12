@@ -1,0 +1,574 @@
+{
+  "tables": {
+    "courses": [
+      {
+        "year": 2012,
+        "term": 20121,
+        "type": "SE",
+        "level": 100,
+        "dept": "AMCON",
+        "grade": "B-",
+        "credits": 1,
+        "num": 101,
+        "semester": 1,
+        "deptnum": "AMCON 101",
+        "depts": [
+          "AMCON"
+        ],
+        "name": "Declaring Ind: 1607-1865"
+      },
+      {
+        "year": 2012,
+        "term": 20123,
+        "type": "SE",
+        "level": 100,
+        "dept": "AMCON",
+        "grade": "B-",
+        "credits": 1,
+        "gereqs": [
+          "FYW",
+          "HWC "
+        ],
+        "num": 102,
+        "semester": 3,
+        "deptnum": "AMCON 102",
+        "depts": [
+          "AMCON"
+        ],
+        "name": "Dem Vistas: 1800-1900"
+      },
+      {
+        "year": 2013,
+        "term": 20131,
+        "type": "SE",
+        "level": 200,
+        "dept": "AMCON",
+        "grade": "B-",
+        "credits": 1,
+        "gereqs": [
+          "ALS-L",
+          "MCD",
+          "WRI "
+        ],
+        "num": 201,
+        "semester": 1,
+        "deptnum": "AMCON 201",
+        "depts": [
+          "AMCON"
+        ],
+        "name": "Remaking Am: 1865-1945"
+      },
+      {
+        "year": 2013,
+        "term": 20133,
+        "type": "SE",
+        "level": 200,
+        "dept": "AMCON",
+        "grade": "B+",
+        "credits": 1,
+        "gereqs": [
+          "WRI",
+          "ORC",
+          "ALS-A",
+          "HBS "
+        ],
+        "num": 202,
+        "semester": 3,
+        "deptnum": "AMCON 202",
+        "depts": [
+          "AMCON"
+        ],
+        "name": "Pur/Happiness: 1920-Pres."
+      },
+      {
+        "year": 2012,
+        "term": 20122,
+        "type": "SE",
+        "level": 100,
+        "dept": "ASIAN",
+        "grade": "B+",
+        "credits": 1,
+        "gereqs": [
+          "MCG",
+          "ALS-L "
+        ],
+        "num": 130,
+        "semester": 2,
+        "deptnum": "ASIAN 130",
+        "depts": [
+          "ASIAN"
+        ],
+        "name": "Japan SciFi/Global Persp"
+      },
+      {
+        "year": 2013,
+        "term": 20131,
+        "type": "SE",
+        "level": 200,
+        "dept": "ASIAN",
+        "grade": "B+",
+        "credits": 1,
+        "num": 210,
+        "semester": 1,
+        "deptnum": "ASIAN 210",
+        "depts": [
+          "ASIAN"
+        ],
+        "name": "AsianCon1:MappingJourneys"
+      },
+      {
+        "year": 2013,
+        "term": 20132,
+        "type": "IN",
+        "level": 200,
+        "dept": "ASIAN",
+        "grade": "B+",
+        "credits": 1,
+        "num": 215,
+        "semester": 2,
+        "deptnum": "ASIAN 215",
+        "depts": [
+          "ASIAN"
+        ],
+        "name": "AsianCon2: Encounter Asia"
+      },
+      {
+        "year": 2013,
+        "term": 20133,
+        "type": "SE",
+        "level": 200,
+        "dept": "ASIAN",
+        "grade": "B+",
+        "credits": 1,
+        "gereqs": [
+          "HBS",
+          "ALS-A",
+          "ALS-L",
+          "ORC",
+          "MCG",
+          "WRI "
+        ],
+        "num": 220,
+        "semester": 3,
+        "deptnum": "ASIAN 220",
+        "depts": [
+          "ASIAN"
+        ],
+        "name": "AsiaCon3:InterpretJourney"
+      },
+      {
+        "year": 2014,
+        "term": 20141,
+        "type": "SE",
+        "level": 200,
+        "dept": "ASIAN",
+        "grade": "IP",
+        "credits": 0.25,
+        "num": 230,
+        "semester": 1,
+        "deptnum": "ASIAN 230",
+        "depts": [
+          "ASIAN"
+        ],
+        "name": "FLC - Japanese"
+      },
+      {
+        "year": 2014,
+        "term": 20141,
+        "type": "SE",
+        "level": 200,
+        "dept": "ASIAN",
+        "grade": "IP",
+        "credits": 1,
+        "gereqs": [
+          "ALS-L",
+          "MCG "
+        ],
+        "num": 230,
+        "semester": 1,
+        "deptnum": "ASIAN 230",
+        "depts": [
+          "ASIAN"
+        ],
+        "name": "The Philosophy of Anime"
+      },
+      {
+        "year": 2012,
+        "term": 20123,
+        "type": "SE",
+        "level": 200,
+        "dept": "ASIAN",
+        "grade": "B",
+        "credits": 1,
+        "gereqs": [
+          "ALS-A",
+          "MCG "
+        ],
+        "num": 268,
+        "semester": 3,
+        "deptnum": "ASIAN 268",
+        "depts": [
+          "ASIAN"
+        ],
+        "name": "Chinese Calligraphy"
+      },
+      {
+        "year": 2013,
+        "term": 20131,
+        "type": "SE",
+        "level": 200,
+        "dept": "ASIAN",
+        "grade": "A",
+        "credits": 0.25,
+        "num": 275,
+        "semester": 1,
+        "deptnum": "ASIAN 275",
+        "depts": [
+          "ASIAN"
+        ],
+        "name": "ID Approaches to Asia"
+      },
+      {
+        "year": 2011,
+        "term": 20119,
+        "type": "PS",
+        "level": 100,
+        "dept": "CSCI",
+        "grade": "B",
+        "credits": 0,
+        "num": 1043,
+        "semester": 9,
+        "deptnum": "CSCI 1043",
+        "depts": [
+          "CSCI"
+        ],
+        "name": "Intro Pgrm Prob Slvg"
+      },
+      {
+        "year": 2012,
+        "term": 20121,
+        "type": "SE",
+        "level": 100,
+        "dept": "CSCI",
+        "grade": "A-",
+        "credits": 1,
+        "gereqs": [
+          "AQR "
+        ],
+        "num": 121,
+        "semester": 1,
+        "deptnum": "CSCI 121",
+        "depts": [
+          "CSCI"
+        ],
+        "name": "Principles Comp Sci"
+      },
+      {
+        "year": 2013,
+        "term": 20131,
+        "type": "SE",
+        "level": 200,
+        "dept": "CSCI",
+        "grade": "B",
+        "credits": 1,
+        "num": 241,
+        "semester": 1,
+        "deptnum": "CSCI 241",
+        "depts": [
+          "CSCI"
+        ],
+        "name": "Hardware Design"
+      },
+      {
+        "year": 2012,
+        "term": 20123,
+        "type": "SE",
+        "level": 200,
+        "dept": "CSCI",
+        "grade": "B",
+        "credits": 1,
+        "num": 251,
+        "semester": 3,
+        "deptnum": "CSCI 251",
+        "depts": [
+          "CSCI"
+        ],
+        "name": "Software Design"
+      },
+      {
+        "year": 2012,
+        "term": 20123,
+        "type": "SE",
+        "level": 200,
+        "dept": "CSCI",
+        "grade": "B",
+        "credits": 0.25,
+        "num": 252,
+        "semester": 3,
+        "deptnum": "CSCI 252",
+        "depts": [
+          "CSCI"
+        ],
+        "name": "Software Design/Lab"
+      },
+      {
+        "year": 2014,
+        "term": 20141,
+        "type": "SE",
+        "level": 300,
+        "dept": "CSCI",
+        "grade": "IP",
+        "credits": 1,
+        "num": 300,
+        "semester": 1,
+        "deptnum": "CSCI 300",
+        "depts": [
+          "CSCI"
+        ],
+        "name": "Top: Mobile Web Graphics"
+      },
+      {
+        "year": 2014,
+        "term": 20141,
+        "type": "SE",
+        "level": 300,
+        "dept": "CSCI",
+        "grade": "IP",
+        "credits": 1,
+        "gereqs": [
+          "IST "
+        ],
+        "num": 315,
+        "semester": 1,
+        "deptnum": "CSCI 315",
+        "depts": [
+          "CSCI"
+        ],
+        "name": "Bioinformatics"
+      },
+      {
+        "year": 2012,
+        "term": 20121,
+        "type": "SE",
+        "level": 100,
+        "dept": "JAPAN",
+        "grade": "C-",
+        "credits": 1,
+        "num": 111,
+        "semester": 1,
+        "deptnum": "JAPAN 111",
+        "depts": [
+          "JAPAN"
+        ],
+        "name": "Beginning Japanese I"
+      },
+      {
+        "year": 2012,
+        "term": 20121,
+        "type": "SE",
+        "level": 100,
+        "dept": "JAPAN",
+        "grade": "NG",
+        "credits": 0,
+        "num": 111,
+        "semester": 1,
+        "deptnum": "JAPAN 111",
+        "depts": [
+          "JAPAN"
+        ],
+        "name": "Beginning Japanese I Lab"
+      },
+      {
+        "year": 2012,
+        "term": 20123,
+        "type": "SE",
+        "level": 100,
+        "dept": "JAPAN",
+        "grade": "NG",
+        "credits": 0,
+        "num": 112,
+        "semester": 3,
+        "deptnum": "JAPAN 112",
+        "depts": [
+          "JAPAN"
+        ],
+        "name": "Beginning Japanese II Lab"
+      },
+      {
+        "year": 2012,
+        "term": 20123,
+        "type": "SE",
+        "level": 100,
+        "dept": "JAPAN",
+        "grade": "C-",
+        "credits": 1,
+        "num": 112,
+        "semester": 3,
+        "deptnum": "JAPAN 112",
+        "depts": [
+          "JAPAN"
+        ],
+        "name": "Beginning Japanese II"
+      },
+      {
+        "year": 2013,
+        "term": 20131,
+        "type": "SE",
+        "level": 200,
+        "dept": "JAPAN",
+        "grade": "D+",
+        "credits": 1,
+        "gereqs": [
+          "FOL-J "
+        ],
+        "num": 231,
+        "semester": 1,
+        "deptnum": "JAPAN 231",
+        "depts": [
+          "JAPAN"
+        ],
+        "name": "Intermed Japanese I"
+      },
+      {
+        "year": 2013,
+        "term": 20131,
+        "type": "SE",
+        "level": 200,
+        "dept": "JAPAN",
+        "grade": "NG",
+        "credits": 0,
+        "num": 231,
+        "semester": 1,
+        "deptnum": "JAPAN 231",
+        "depts": [
+          "JAPAN"
+        ],
+        "name": "Intermed Japanese I Lab"
+      },
+      {
+        "year": 2013,
+        "term": 20133,
+        "type": "SE",
+        "level": 200,
+        "dept": "JAPAN",
+        "grade": "C",
+        "credits": 1,
+        "gereqs": [
+          "FOL-J "
+        ],
+        "num": 232,
+        "semester": 3,
+        "deptnum": "JAPAN 232",
+        "depts": [
+          "JAPAN"
+        ],
+        "name": "Intermed Japanese II"
+      },
+      {
+        "year": 2013,
+        "term": 20133,
+        "type": "SE",
+        "level": 200,
+        "dept": "JAPAN",
+        "grade": "NG",
+        "credits": 0,
+        "num": 232,
+        "semester": 3,
+        "deptnum": "JAPAN 232",
+        "depts": [
+          "JAPAN"
+        ],
+        "name": "Intermed Japanese II Lab"
+      },
+      {
+        "year": 2013,
+        "term": 20133,
+        "type": "SE",
+        "level": 200,
+        "dept": "MATH",
+        "grade": "B",
+        "credits": 1,
+        "gereqs": [
+          "AQR "
+        ],
+        "num": 220,
+        "semester": 3,
+        "deptnum": "MATH 220",
+        "depts": [
+          "MATH"
+        ],
+        "name": "Elem Linear Algebra"
+      },
+      {
+        "year": 2014,
+        "term": 20141,
+        "type": "SE",
+        "level": 200,
+        "dept": "MATH",
+        "grade": "IP",
+        "credits": 1,
+        "num": 282,
+        "semester": 1,
+        "deptnum": "MATH 282",
+        "depts": [
+          "MATH"
+        ],
+        "name": "Top: Intro Abstract Math"
+      },
+      {
+        "year": 2011,
+        "term": 20119,
+        "type": "AD",
+        "level": 100,
+        "dept": "REG",
+        "grade": "NG",
+        "credits": 1,
+        "num": 1,
+        "semester": 9,
+        "deptnum": "REG 1",
+        "depts": [
+          "REG"
+        ],
+        "name": "St. Olaf Equiv Credits"
+      },
+      {
+        "year": 2012,
+        "term": 20121,
+        "type": "SE",
+        "level": 100,
+        "dept": "REL",
+        "grade": "C",
+        "credits": 1,
+        "gereqs": [
+          "BTS-B "
+        ],
+        "num": 121,
+        "semester": 1,
+        "deptnum": "REL 121",
+        "depts": [
+          "REL"
+        ],
+        "name": "Bible/Culture/Commun"
+      }
+    ],
+    "info": {
+      "name": "Hawken M. Rives",
+      "advisor": {
+        "name": "Hall-Holt, Olaf A.",
+        "department": "Mathematics"
+      },
+      "graduation": 2016,
+      "matriculation": 2012,
+      "standing": "Good"
+    },
+    "areas": {
+      "majors": [
+        "Computer Science",
+        "Asian Studies"
+      ],
+      "concentrations": [],
+      "emphases": []
+    }
+  },
+  "degreeType": "B.A."
+}

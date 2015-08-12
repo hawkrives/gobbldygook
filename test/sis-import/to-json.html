@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style>
+	body {
+		margin: 0;
+	}
+	.app {
+		padding: 1em;
+		display: flex;
+		display: -webkit-flex;
+	}
+	.app > [class] {
+		flex: 1;
+		-webkit-flex: 1;
+		border: solid 1px lightgray;
+		min-height: 50vh;
+		overflow: scroll;
+	}
+	.app > *:first-child {
+		margin-right: 0.5em;
+	}
+	.app > *:last-child {
+		margin-left: 0.5em;
+	}
+</style>
+
+<form class="app">
+	<div class="input" contenteditable></div>
+	<pre class="output"></pre>
+	<button type='submit'>Process</button>
+</form>
+
+<script src="./to-json.bundle.js"></script>
