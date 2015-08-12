@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component, PropTypes, isValidElement, cloneElement} from 'react'
 import cx from 'classnames'
 
 import './list.scss'
@@ -19,7 +19,11 @@ export default class List extends Component {
 
 	render() {
 		const contents = React.Children.map(this.props.children, child =>
-			<li className='list-item'>{child}</li>)
+			isValidElement(child) && child.type === 'li'
+				? cloneElement(child, {className: 'list-item'})
+				: <li className='list-item'>{child}</li>
+		)
+
 		const className = cx('list', `list--${this.props.type}`, this.props.className)
 
 		if (this.props.type === 'number') {
