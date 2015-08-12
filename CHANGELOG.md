@@ -4,8 +4,9 @@
 - **Feature:** Locations are now embedded within offerings
 
 ## 2.0.2
-- Fixed a bug where offerings could share time objects
-- Renamed `findTimes` to `findTime`
+- **Renamed:** `findTimes` to `findTime`
+- **Bugfix:** In 2.0.1, offerings would to share time objects. No longer!
+	- This wasn't an issue before because something about our older use of `_.merge` created copies of the objects for us
 - Updated publish script to exit as soon as any step errors
 
 ## 2.0.1
