@@ -1,6 +1,20 @@
 import map from 'lodash/collection/map'
 import unescapeAllValues from './unescape-all-values'
 
+const COURSE_TYPES = {
+	IN: 'International',
+	SE: 'SE',
+	PS: 'PS',
+	AD: 'AD',
+}
+
+function expandCourseType(type) {
+	if (COURSE_TYPES.hasOwnProperty(type)) {
+		return COURSE_TYPES[type]
+	}
+	return type
+}
+
 export default function prettifyCourses(jsonCourses) {
 	return map(jsonCourses, function(course) {
 		delete course['&nbsp;']
@@ -31,10 +45,8 @@ export default function prettifyCourses(jsonCourses) {
 		// status is In-Progress or blank
 		delete course.sts
 
-		// console.log(JSON.stringify(course))
-		course = unescapeAllValues(course)
-		// console.log(JSON.stringify(course))
+		course.type = expandCourseType(course.type)
 
-		return course
+		return unescapeAllValues(course)
 	})
 }
