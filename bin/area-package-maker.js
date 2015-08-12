@@ -4,7 +4,7 @@ import stringify from 'json-stable-stringify'
 import fs from 'graceful-fs'
 import sha1 from 'sha1'
 import path from 'path'
-import findAreas from './find-areas'
+import findAreas from './lib/find-areas'
 
 export function processAreasDir(dir) {
 	const sources = findAreas(dir)

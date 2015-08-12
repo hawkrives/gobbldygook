@@ -3,7 +3,7 @@ import pkg from '../package.json'
 import fs from 'graceful-fs'
 import yaml from 'js-yaml'
 import enhanceHanson from '../src/lib/enhance-hanson'
-import findAreas from './find-areas'
+import findAreas from './lib/find-areas'
 import mkdirp from 'mkdirp'
 import path from 'path'
 

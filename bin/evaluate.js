@@ -4,7 +4,7 @@ import pkg from '../package.json'
 import fs from 'graceful-fs'
 import compute from '../src/lib/compute'
 import get from 'lodash/object/get'
-import loadArea from './load-area'
+import loadArea from './lib/load-area'
 
 const checkAgainstArea = ({courses, overrides}, args) => areaData => {
 	if (args.path) {

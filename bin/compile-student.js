@@ -8,7 +8,7 @@ export function cli() {
 	const args = meow({
 		pkg,
 		help: `Usage:
-			compile areaFile`,
+			compile-student areaFile`,
 	})
 
 	const [filename] = args.input

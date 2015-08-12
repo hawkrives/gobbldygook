@@ -1,5 +1,5 @@
 import evaluate from '../src/lib/evaluate'
-import loadArea from './load-area'
+import loadArea from './lib/load-area'
 
 import {readFileSync, readdirSync} from 'graceful-fs'
 
