@@ -49,6 +49,20 @@ $semester-edge-padding:
 		@include heading-neutral;
 		display: inline-block;
 	}
+
+	.button {
+		padding: 0 0.5em;
+		min-height: 0;
+
+		color: color('gray', '500');
+		transition: 0.15s;
+	}
+
+	.remove-semester:hover {
+		color: color('red', '500');
+		border-color: color('red', '500');
+		background-color: color('red', '50');
+	}
 }
 
 .semester .info-bar {
@@ -73,27 +87,6 @@ $semester-edge-padding:
 
 	@media all and (max-width: $year-collapse-width) {
 		margin: $semester-spacing;
-	}
-}
-
-.remove-semester {
-	opacity: 0.5;
-	transition: 0.15s;
-
-	&:hover {
-		color: $red;
-		opacity: 1;
-	}
-
-	padding: 0 0.5em;
-	min-height: 0;
-
-	opacity: 0;
-
-	.semester:hover & {
-		opacity: 1;
-
-		&:hover {opacity: 1;}
 	}
 }
 
