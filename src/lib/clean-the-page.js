@@ -1,4 +1,8 @@
 export default function cleanUpPage(html) {
+	if (!('querySelector' in html)) {
+		throw new Error('cleanUpPage(): html must be a document!')
+	}
+
 	// Remove the topnav
 	let topNav = html.querySelector('.topnav')
 	topNav.parentNode.removeChild(topNav)
@@ -19,7 +23,7 @@ export default function cleanUpPage(html) {
 	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0])
 	// Refresh the list of tables
 	tonsOfTables = main.querySelectorAll('table')
-	// Remove the "B.{A,M}." header
+	// Remove the "B.{A,M}. Degree Audit for <name>" header
 	let degreeType = tonsOfTables[0].textContent.trim().split(' ')[0]
 	tonsOfTables[0].parentNode.removeChild(tonsOfTables[0])
 
