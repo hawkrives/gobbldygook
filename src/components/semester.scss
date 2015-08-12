@@ -40,7 +40,7 @@ $semester-edge-padding:
 
 	display: flex;
 	flex-flow: row nowrap;
-	align-items: flex-start;
+	align-items: stretch;
 	font-feature-settings: 'smcp';
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
@@ -48,6 +48,11 @@ $semester-edge-padding:
 	h1 {
 		@include heading-neutral;
 		display: inline-block;
+	}
+
+	.buttons {
+		display: flex;
+		align-items: stretch;
 	}
 
 	.button {

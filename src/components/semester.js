@@ -174,16 +174,21 @@ class Semester extends Component {
 							year: this.props.year,
 							semester: this.props.semester,
 						}}>
+
 						<h1>{semesterName(this.props.semester)}</h1>
+
 						<List className='info-bar' type='inline'>
 							{infoBar}
 						</List>
 					</Link>
-					<Button className='remove-semester'
-						onClick={this.removeSemester}
-						title={`Remove ${this.props.year} ${semesterName(this.props.semester)}`}>
-						<Icon name='ionicon-close' />
-					</Button>
+
+					<span className='buttons'>
+						<Button className='remove-semester'
+							onClick={this.removeSemester}
+							title={`Remove ${this.props.year} ${semesterName(this.props.semester)}`}>
+							<Icon name='ionicon-close' />
+						</Button>
+					</span>
 				</header>
 
 				{courseList}
