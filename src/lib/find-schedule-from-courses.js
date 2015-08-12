@@ -26,7 +26,6 @@ export default async function findScheduleFromCourses(courses) {
 	let foundCombo = undefined
 
 	for (let combo of combinations(matches, courses.length)) {
-		// console.log(`${performance.now() - start}ms started combo`, _.pluck(combo, 'name'))
 		// check each combo for time conflicts and existence of each deptnum
 		// let start1 = performance.now()
 		if (!comboHasCourses(queryableCourses, combo)) {
