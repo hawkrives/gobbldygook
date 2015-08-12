@@ -18,6 +18,7 @@ import Student from '../models/student'
 import Button from './button'
 import Course from './course'
 import Icon from './icon'
+import List from './list'
 import Loading from './loading'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
@@ -97,12 +98,12 @@ class Semester extends Component {
 	}
 
 	render() {
-		let infoIcons = []
 		let courseList = <Loading>Loading Courses…</Loading>
 
+		let infoBar = []
 		if (this.state.schedule && this.state.courses.size) {
 			let courseCount = this.state.courses.size
-			infoIcons.push(
+			infoBar.push(
 				<li className='semester-course-count' key='course-count'>
 					{`${courseCount} ${plur('course', courseCount)}`}
 				</li>
@@ -114,7 +115,7 @@ class Semester extends Component {
 				.reduce(add)
 
 			if (credits) {
-				infoIcons.push(
+				infoBar.push(
 					<li className='semester-credit-count' key='credit-count'>
 						{`${credits} ${plur('credit', credits)}`}
 					</li>
@@ -176,9 +177,9 @@ class Semester extends Component {
 							semester: this.props.semester,
 						}}>
 						<h1>{semesterName(this.props.semester)}</h1>
-						<ul className='info-bar'>
-							{infoIcons}
-						</ul>
+						<List className='info-bar' type='inline'>
+							{infoBar}
+						</List>
 					</Link>
 					<Button className='remove-semester'
 						onClick={this.removeSemester}
