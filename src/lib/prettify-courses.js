@@ -1,5 +1,6 @@
 import map from 'lodash/collection/map'
 import unescapeAllValues from './unescape-all-values'
+import pick from 'lodash/object/pick'
 
 const COURSE_TYPES = {
 	IN: 'International',
@@ -17,7 +18,13 @@ function expandCourseType(type) {
 
 export default function prettifyCourses(jsonCourses) {
 	return map(jsonCourses, function(course) {
-		delete course['&nbsp;']
+		// remove all blank values that are filled with nbsps
+		course = pick(course, (value, key) =>
+			key.split('&nbsp;').join(' ').trim().length)
+
+		if (course.inst !== '<span class="sis-help" title=""></span>') {
+			course.institution = course.inst
+		}
 		delete course.inst
 
 		course.credits = parseFloat(course.credit.replace(/\((.*)\)/, '$1'))
