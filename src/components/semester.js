@@ -7,7 +7,6 @@ import add from 'lodash/math/add'
 import isUndefined from 'lodash/lang/isUndefined'
 import plur from 'plur'
 import range from 'lodash/utility/range'
-import ReactListSelect from 'react-list-select'
 import {semesterName, isCurrentSemester} from 'sto-helpers'
 import countCredits from '../lib/count-credits'
 
@@ -152,11 +151,12 @@ class Semester extends Component {
 
 			}
 
-			let courseBlocks = courseObjects
-				.concat(couldntFindSlots)
-				.concat(emptySlots)
-
-			courseList = <ReactListSelect multiple={true} className='course-list' items={courseBlocks} />
+			courseList = (
+				<List className='course-list' type='plain'>
+					{courseObjects}
+					{emptySlots}
+				</List>
+			)
 		}
 
 		const className = cx({
@@ -187,6 +187,7 @@ class Semester extends Component {
 						<Icon name='ionicon-close' />
 					</Button>
 				</header>
+
 				{courseList}
 			</div>
 		)
