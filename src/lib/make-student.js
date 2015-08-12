@@ -2,16 +2,16 @@ import findAreasOfStudy from './find-areas-of-study'
 import createSchedules from './create-schedules'
 
 export default function makeStudent(tables, degreeType) {
-	let student = {}
+	const {info, areas, courses} = tables
 
-	student.name = tables.info.name
-	student.advisor = tables.info.advisor
-	student.matriculation = tables.info.matriculation
-	student.graduation = tables.info.graduation
+	return {
+		name: info.name,
+		advisor: info.advisor,
+		matriculation: info.matriculation,
+		graduation: info.graduation,
 
-	student.studies = findAreasOfStudy(tables.areas, degreeType)
-	student.courses = tables.courses
-	student.schedules = createSchedules(tables.courses)
-
-	return student
+		studies: findAreasOfStudy(areas, degreeType),
+		courses: courses,
+		schedules: createSchedules(courses),
+	}
 }
