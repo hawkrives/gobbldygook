@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 git pull --rebase
 
 npm test
