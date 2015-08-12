@@ -124,19 +124,19 @@ class Semester extends Component {
 
 		if (this.state.schedule && this.state.courses) {
 			let courseObjects = this.state.courses
-				.filterNot(isUndefined)
-				.map((course, i) =>
-					<Course key={`${course.clbid}-${i}`}
+				.zip(this.state.schedule.clbids)
+				.map(([course, clbid], i) =>
+					course
+					? <Course
+						key={`${course.clbid}-${i}`}
 						index={i}
 						info={course}
 						student={this.props.student}
 						schedule={this.state.schedule}
-						conflicts={this.state.validation.conflicts} />)
-				.toArray()
-
-			let couldntFindSlots = this.state.courses
-				.filter(isUndefined) // only keep the undefined items
-				.map((c, i) => <MissingCourse key={i} />)
+						conflicts={this.state.validation.conflicts}
+					/>
+					: <MissingCourse key={i} clbid={clbid} />
+				)
 				.toArray()
 
 			// maxCredits is 4 for fall/spring and 1 for everything else
