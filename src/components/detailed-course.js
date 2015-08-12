@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import map from 'lodash/collection/map'
-import oxford from 'humanize-list'
+import {oxford} from 'humanize-plus'
 import plur from 'plur'
 
 import Button from './button'
@@ -37,20 +37,14 @@ export default class DetailedCourse extends Component {
 			<div>
 				<BasicCourse className='info-wrapper' info={course} onClick={this.props.onClick} />
 				<div className='details'>
-					<span className='professors'>
-						{oxford(course.instructors, {oxfordComma: true})}
-					</span>
-					<p className='description'>
-						{course.desc}
-					</p>
-					<p className='info'>
-						<span className='credits'>
-							{course.credits} {plur('credit', course.credits)}
-						</span>
-						<span className='instance'>
-							{semesterName(course.semester)} {course.year}
-						</span>
-					</p>
+					<dl>
+						<dt>Professors</dt>
+						<dd>{oxford(course.instructors)}</dd>
+
+						<dt>Course Description</dt>
+						<dd>{course.desc}</dd>
+					</dl>
+					<p>Offered in {semesterName(course.semester)} {course.year}. {course.credits} {plur('credit', course.credits)}.</p>
 				</div>
 				<div className='tools'>
 					<select className='semester-select'>

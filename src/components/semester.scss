@@ -110,5 +110,9 @@ $semester-edge-padding:
 		&:last-child {
 			border-bottom: 0;
 		}
+
+		&:hover {
+			background-color: color('gray', '100');
+		}
 	}
 }

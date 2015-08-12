@@ -38,16 +38,12 @@
 	}
 
 	.title,
-	.description {
+	.details {
 		font-feature-settings: 'onum';
 	}
 
 	.summary {
 		font-size: 0.75em;
-	}
-
-	.summary,
-	.info {
 		& > * + *::before {
 			content: " · ";
 		}
@@ -101,8 +97,7 @@
 		color: color('gray', '500');
 	}
 
-	.offerings,
-	.description {
+	.offerings {
 		margin-bottom: 0.5em;
 	}
 
@@ -126,6 +121,21 @@
 		}
 		padding: 0 0.5em;
 	}
+
+	dl {
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
+	dt {
+		font-weight: 500;
+		font-feature-settings: 'smcp';
+	}
+	dd + dt {
+		margin-top: 1em;
+	}
+	dd {
+		margin-left: 0;
+	}
 }
 
 .course.expanded {
@@ -136,7 +146,7 @@
 		white-space: normal;
 	}
 
-	.summary, .details {
+	.details {
 		font-size: 0.85em;
 	}
 }
