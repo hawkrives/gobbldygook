@@ -101,14 +101,14 @@ class Semester extends Component {
 
 		let infoBar = []
 		if (this.state.schedule && this.state.courses.size) {
-			let courseCount = this.state.courses.size
+			const courseCount = this.state.courses.size
 			infoBar.push(
 				<li className='semester-course-count' key='course-count'>
-					{`${courseCount} ${plur('course', courseCount)}`}
+					{courseCount} {plur('course', courseCount)}
 				</li>
 			)
 
-			let credits = this.state.courses
+			const credits = this.state.courses
 				.filterNot(isUndefined) // remove any undefined items
 				.map(c => c.credits)
 				.reduce(add)
@@ -116,7 +116,7 @@ class Semester extends Component {
 			if (credits) {
 				infoBar.push(
 					<li className='semester-credit-count' key='credit-count'>
-						{`${credits} ${plur('credit', credits)}`}
+						{credits} {plur('credit', credits)}
 					</li>
 				)
 			}
