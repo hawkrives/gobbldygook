@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.1.0
+- **Feature:** Locations are now embedded within offerings
+
 ## 2.0.2
 - Fixed a bug where offerings could share time objects
 - Renamed `findTimes` to `findTime`

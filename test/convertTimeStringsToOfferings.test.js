@@ -41,4 +41,15 @@ describe('convertTimeStringsToOfferings', () => {
 		expect(result).to.deep.equal(expected)
 		expect(result[0].times[0]).to.not.equal(result[1].times[0])
 	})
+
+	it('includes locations in the occurrences', () => {
+		let course = {times: ['MF 0905-1000'], locations: ['BMC 101']}
+
+		let expected = [
+			{day: 'Mo', times: [{start:905, end:1000}], location: 'BMC 101'},
+			{day: 'Fr', times: [{start:905, end:1000}], location: 'BMC 101'},
+		]
+
+		expect(convertTimeStringsToOfferings(course)).to.deep.equal(expected)
+	})
 })
