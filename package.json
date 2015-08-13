@@ -102,8 +102,6 @@
     "nomnom": "1.8.1",
     "pegjs": "0.8.0",
     "postcss": "4.1.16",
-    "postcss-calc": "4.1.0",
-    "postcss-colormin": "1.2.4",
     "postcss-loader": "0.5.1",
     "pretty-hrtime": "1.0.0",
     "pretty-ms": "2.0.0",
