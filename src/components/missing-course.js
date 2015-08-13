@@ -7,6 +7,6 @@ export default class MissingCourse extends Component {
 	}
 
 	render() {
-		return <FakeCourse title={`Cannot load ${this.props.clbid}`} className='missing' />
+		return <FakeCourse title={`Cannot load course ${this.props.clbid}`} className='missing' />
 	}
 }
