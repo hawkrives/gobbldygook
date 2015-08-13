@@ -61,8 +61,6 @@
     "react": "0.13.3",
     "react-dnd": "1.1.4",
     "react-document-title": "1.0.2",
-    "react-input-autosize": "0.5.0",
-    "react-list-select": "0.3.0",
     "react-router": "0.13.3",
     "reflux": "0.2.12",
     "sha1": "1.1.1",
