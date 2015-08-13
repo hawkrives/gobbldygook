@@ -5,7 +5,7 @@ import any from 'lodash/collection/any'
 import zip from 'lodash/array/zip'
 
 import ordinal from 'ord'
-import humanizeList from 'humanize-list'
+import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {isTrue, expandYear, semesterName} from 'sto-helpers'
@@ -57,7 +57,7 @@ export function checkForTimeConflicts(courses) {
 			const conflicts = compact(map(conflictSet, (possibility, i) => isTrue(possibility) ? i + 1 : false))
 			const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
 			result.warning = true
-			result.msg = `Time conflict with the ${humanizeList(conflicted, {oxfordComma: true})} ${plur('course', conflicts.length)}`
+			result.msg = `Time conflict with the ${oxford(conflicted, {oxfordComma: true})} ${plur('course', conflicts.length)}`
 		}
 
 		return result.warning ? result : null

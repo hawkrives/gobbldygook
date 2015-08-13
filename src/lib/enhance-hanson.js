@@ -2,7 +2,7 @@ import {parse} from './parse-hanson-string'
 import cloneDeep from 'lodash/lang/cloneDeep'
 import filter from 'lodash/collection/filter'
 import forEach from 'lodash/collection/forEach'
-import humanizeList from 'humanize-list'
+import {oxford} from 'humanize-plus'
 import includes from 'lodash/collection/includes'
 import isRequirementName from './is-requirement-name'
 import isString from 'lodash/lang/isString'
@@ -25,7 +25,7 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 
 	forEach(keys(data), key => {
 		if (!isRequirementName(key) && !includes(whitelist, key)) {
-			throw new TypeError(`enhanceHanson(): only ${humanizeList(whitelist)} keys are allowed, and '${key}' is not one of them. all requirements must begin with an uppercase letter or a number.`)
+			throw new TypeError(`enhanceHanson(): only ${oxford(whitelist)} keys are allowed, and '${key}' is not one of them. all requirements must begin with an uppercase letter or a number.`)
 		}
 	})
 
