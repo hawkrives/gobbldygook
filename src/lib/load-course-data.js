@@ -68,6 +68,17 @@ async function storeCourses(item) {
 		await db.store('courses').batch(coursesToStore)
 	}
 	catch (e) {
+		const db = e.target.db.name
+		const errorName = e.target.error.name
+
+		if (errorName === 'QuotaExceededError') {
+			notificationActions.logError({
+				id: 'db-storage-quota-exceeded',
+				message: `The database "${db}" has exceeded its storage quota.`,
+			})
+		}
+
+		console.error(e.target)
 		throw e
 	}
 
