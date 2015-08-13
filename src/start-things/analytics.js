@@ -1,7 +1,9 @@
 export function isogram() {
 	window.GoogleAnalyticsObject = 'ga'
-	window.ga.q = [['create', 'UA-10662325-7', 'auto'], ['send', 'pageview']]
-	window.ga.l = Number(new Date())
+	window.ga = {
+		q: [['create', 'UA-10662325-7', 'auto'], ['send', 'pageview']],
+		l: = Number(new Date()),
+	}
 
 	let script = document.createElement('script')
 	script.async = true
