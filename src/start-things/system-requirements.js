@@ -34,7 +34,7 @@ function supportsIndexedDB() {
 			}
 
 			let req = tx.objectStore('two').put({
-				'key': new Date().valueOf(),
+				'key': 'true',
 			})
 			req.onsuccess = () => {}
 			req.onerror = reject
