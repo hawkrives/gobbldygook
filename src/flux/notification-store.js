@@ -40,7 +40,7 @@ let notificationStore = Reflux.createStore({
 		if (!error.quiet) {
 			console.error(error, ...args)
 		}
-		let id = this.errorIndex
+		let id = error.id || this.errorIndex
 		let notification = {id, message: error.message, type: 'error'}
 		this.notifications = this.notifications.set(id, notification)
 		this._postChange()
