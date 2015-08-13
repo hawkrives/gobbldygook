@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.1.1
+- **Bugfix:** Revert part of 2.0.1
+	- we're just going to go back to the old implementation
+
 ## 2.1.0
 - **Feature:** Locations are now embedded within offerings
 
