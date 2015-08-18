@@ -14,3 +14,7 @@ node_js:
   - "0.12"
 
 script: npm run travis
+
+cache:
+  directories:
+    - node_modules
