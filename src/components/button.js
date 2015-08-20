@@ -19,7 +19,7 @@ export default class Button extends Component {
 
 	render() {
 		return (
-			<button
+			<button type='button'
 				className={cx('button', `button--${this.props.type}`, this.props.className)}
 				disabled={this.props.disabled}
 				onClick={this.props.onClick}
