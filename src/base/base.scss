@@ -27,6 +27,8 @@ menu {
 	flex: 1;
 }
 
+// hide the St. Olaf disclaimer
+// TODO: move it somewhere else, instead of hiding it
 [href="/cwis_policies/personal_disclaimer.html"] {
 	display: none;
 }
