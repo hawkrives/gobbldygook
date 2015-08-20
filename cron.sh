@@ -11,6 +11,7 @@ npm i --no-progress
 
 # run the tests
 npm test
+npm run test:students
 
 # build
 npm run build
