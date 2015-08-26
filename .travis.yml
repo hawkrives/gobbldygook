@@ -13,7 +13,7 @@ language: node_js
 node_js:
   - "0.12"
 
-script: npm run travis
+script: npm run travis && npm run coveralls
 
 cache:
   directories:

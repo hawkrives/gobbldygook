@@ -14,4 +14,4 @@ npm test
 npm run test:students
 
 # build
-npm run build
+npm run build:ci
