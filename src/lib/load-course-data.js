@@ -1,7 +1,6 @@
 import map from 'lodash/collection/map'
 import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
-import curry from 'lodash/function/curry'
 import present from 'present'
 import yaml from 'js-yaml'
 
@@ -35,23 +34,6 @@ function prepareCourse(course) {
 	course.profWords = flatten(map(course.instructors, splitParagraph))
 
 	return course
-}
-
-
-let startProgressNotification = curry((notificationId, itemType, count) => {
-	notificationActions.startProgress(notificationId, `Loading ${itemType}`, {max: count}, true)
-})
-
-let updateProgressNotification = curry(notificationId => {
-	notificationActions.incrementProgress(notificationId)
-})
-
-let completeProgressNotification = curry((notificationId, time=1500) => {
-	notificationActions.removeNotification(notificationId, time)
-})
-
-function logAdded(item) {
-	log(`added ${item.path} (${item.count} ${item.type})`)
 }
 
 
@@ -157,7 +139,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 		return false
 	}
 
-	startProgressNotification(notificationId, type, count)
+	notificationActions.startProgress(notificationId, `Loading ${type}`, {max: count}, true)
 
 	log(`need to add ${itemUrl}`)
 
@@ -178,7 +160,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 		data = yaml.safeLoad(data)
 	}
 
-	let item = {
+	const item = {
 		...infoFromServer,
 		path,
 		hash,
@@ -196,8 +178,8 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 		throw e
 	}
 
-	logAdded(item)
-	updateProgressNotification(notificationId)
+	log(`added ${item.path} (${item.count} ${item.type})`)
+	notificationActions.incrementProgress(notificationId)
 }
 
 async function loadDataFiles(infoFile, infoFileBase) {
@@ -218,7 +200,7 @@ async function loadDataFiles(infoFile, infoFileBase) {
 
 	await* filePromises
 
-	completeProgressNotification(notificationId)
+	notificationActions.removeNotification(notificationId, 1500)
 }
 
 async function loadInfoFile(url, infoFileBase) {
