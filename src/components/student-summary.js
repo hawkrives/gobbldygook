@@ -69,10 +69,10 @@ export default class StudentSummary extends Component {
 		const concentrationEmphasizer = (concentrations.size === 1) ? 'a ' : ''
 		const emphasisEmphasizer = (emphases.size === 1) ? 'an ' : ''
 
-		const degreeEl = oxford(degrees.map(s => s.name).toArray())
-		const majorEl = oxford(majors.map(s => s.name).toArray())
-		const concentrationEl = oxford(concentrations.map(s => s.name).toArray())
-		const emphasisEl = oxford(emphases.map(s => s.name).toArray())
+		const degreeList = oxford(degrees.map(s => s.name).toArray())
+		const majorList = oxford(majors.map(s => s.name).toArray())
+		const concentrationList = oxford(concentrations.map(s => s.name).toArray())
+		const emphasisList = oxford(emphases.map(s => s.name).toArray())
 
 		const graduationEl = (
 			<ContentEditable
@@ -107,15 +107,15 @@ export default class StudentSummary extends Component {
 				<div className='content'>
 					<div className='paragraph'>
 						After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
-						{(degrees.size > 0) ? `${degreeEmphasizer}${degreeEl} ${degreeWord}` : `no ${degreeWord}`}
+						{(degrees.size > 0) ? `${degreeEmphasizer}${degreeList} ${degreeWord}` : `no ${degreeWord}`}
 						{(majors.size) && (concentrations.size || emphases.size) ? ', ' : ' and '}
-						{(majors.size > 0) && `${majorEmphasizer}${majorWord} in ${majorEl}`}
+						{(majors.size > 0) && `${majorEmphasizer}${majorWord} in ${majorList}`}
 						{(majors.size && concentrations.size) ? ', and ' : ''}
-						{(concentrations.size > 0) && `${concentrationEmphasizer}${concentrationWord} in ${concentrationEl}`}
+						{(concentrations.size > 0) && `${concentrationEmphasizer}${concentrationWord} in ${concentrationList}`}
 						{((majors.size || concentrations.size) && emphases.size) ? ', ' : ''}
-						{(emphases.size > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisEl}`}
+						{(emphases.size > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
 						{'. '}
-						{this.props.coursesLoaded && `You have currently planned for ${countCredits(this.props.courses)} of your ${student.creditsNeeded} credits.`}
+						{this.props.coursesLoaded && `You have currently planned for ${countCredits(this.props.courses)} of your ${student.creditsNeeded} required credits.`}
 					</div>
 					<div className='paragraph graduation-message'>
 						{canGraduate ? goodGraduationMessage : badGraduationMessage}
