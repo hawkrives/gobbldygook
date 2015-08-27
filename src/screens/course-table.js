@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import {expandYear, findFirstAvailableYear} from 'sto-helpers'
+import Immutable from 'immutable'
 
 import studentActions from '../flux/student-actions'
 import Student from '../models/student'
@@ -13,6 +14,8 @@ import './course-table.scss'
 export default class CourseTable extends Component {
 	static propTypes = {
 		className: PropTypes.string,
+		courses: PropTypes.instanceOf(Immutable.List),
+		coursesLoaded: PropTypes.bool.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
 
@@ -34,7 +37,13 @@ export default class CourseTable extends Component {
 		let years = this.props.student.schedules
 			.groupBy(schedule => schedule.year)
 			.map((schedules, year) =>
-				<Year key={year} year={year} student={this.props.student} />)
+				<Year
+					key={year}
+					year={year}
+					student={this.props.student}
+					courses={this.props.courses}
+					coursesLoaded={this.props.coursesLoaded}
+				/>)
 			.toArray()
 
 		const nextAvailableYear = findFirstAvailableYear(this.props.student.schedules, this.props.student.matriculation)

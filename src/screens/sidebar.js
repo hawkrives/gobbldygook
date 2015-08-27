@@ -20,6 +20,8 @@ import './sidebar.scss'
 export default class Sidebar extends Component {
 	static propTypes = {
 		allAreas: PropTypes.instanceOf(Immutable.List),
+		courses: PropTypes.instanceOf(Immutable.List),
+		coursesLoaded: PropTypes.bool.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
 
@@ -82,12 +84,16 @@ export default class Sidebar extends Component {
 
 				<GraduationStatus
 					allAreas={this.props.allAreas}
+					courses={this.props.courses}
+					coursesLoaded={this.props.coursesLoaded}
 					isHidden={this.state.isSearching}
-					student={this.props.student} />
+					student={this.props.student}
+				/>
 
 				<CourseSearcher
 					isHidden={!this.state.isSearching}
-					toggle={this.toggleSearch} />
+					toggle={this.toggleSearch}
+				/>
 			</aside>
 		)
 	}

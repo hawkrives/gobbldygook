@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import Immutable from 'immutable'
 
 import studentActions from '../flux/student-actions'
 import Student from '../models/student'
@@ -13,6 +14,8 @@ import './year.scss'
 
 export default class Year extends Component {
 	static propTypes = {
+		courses: PropTypes.instanceOf(Immutable.List),
+		coursesLoaded: PropTypes.bool.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
 		year: PropTypes.number.isRequired,
 	}
@@ -49,7 +52,10 @@ export default class Year extends Component {
 					key={`${schedule.year}-${schedule.semester}-${schedule.id}`}
 					student={this.props.student}
 					semester={schedule.semester}
-					year={this.props.year} />)
+					year={this.props.year}
+					courses={this.props.courses.filter(c => schedule.clbids.includes(c.clbid))}
+					coursesLoaded={this.props.coursesLoaded}
+				/>)
 			.toList()
 
 		const niceYear = expandYear(this.props.year)
@@ -68,7 +74,7 @@ export default class Year extends Component {
 				</header>
 				<div className='row'>
 					<div className='semester-list'>
-						{terms.toJS()}
+						{terms.toArray()}
 					</div>
 					<Button className='add-semester'
 						type='raised'

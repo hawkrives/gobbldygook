@@ -24,6 +24,8 @@ const log = debug('gobbldygook:component:render')
 export default class GraduationStatus extends Component {
 	static propTypes = {
 		allAreas: PropTypes.instanceOf(Immutable.List),
+		courses: PropTypes.instanceOf(Immutable.List),
+		coursesLoaded: PropTypes.bool.isRequired,
 		isHidden: PropTypes.bool,
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
@@ -113,6 +115,8 @@ export default class GraduationStatus extends Component {
 					addOverride={this.addOverrideToStudent}
 					allAreas={allAreasGrouped.get(areaType) || Immutable.List()}
 					areas={areas ? areas.toList() : Immutable.List()}
+					courses={this.props.courses}
+					coursesLoaded={this.props.coursesLoaded}
 					endAddArea={this.endAddArea}
 					initiateAddArea={this.initiateAddArea}
 					removeArea={this.removeAreaFromStudent}
@@ -164,6 +168,8 @@ export default class GraduationStatus extends Component {
 		return (
 			<section className={cx('graduation-status', {'is-hidden': this.props.isHidden})}>
 				<StudentSummary
+					courses={this.props.courses}
+					coursesLoaded={this.props.coursesLoaded}
 					student={student}
 					graduatability={this.state.graduatability}
 				/>

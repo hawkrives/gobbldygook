@@ -18,10 +18,12 @@ export default class Student extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			student: null,
 			allAreas: Immutable.List(),
+			courses: Immutable.List(),
+			coursesLoaded: false,
 			message: `Loading Student ${props.routerState.params.id}`,
 			messageClass: '',
+			student: null,
 		}
 	}
 
@@ -36,9 +38,12 @@ export default class Student extends Component {
 
 		if (student) {
 			// console.info('student\'s student: ', student.toJS())
-
 			window.stu = student
 			this.setState({student})
+			student._courses.then(courses => this.setState({
+				courses: Immutable.List(courses),
+				coursesLoaded: true,
+			}))
 		}
 		else {
 			this.setState({
@@ -61,11 +66,15 @@ export default class Student extends Component {
 				<div className='student'>
 					<Sidebar
 						allAreas={this.props.allAreas}
+						courses={this.state.courses}
+						coursesLoaded={this.state.coursesLoaded}
 						student={this.state.student}
 					/>
 					<RouteHandler
 						className='content'
 						student={this.state.student}
+						courses={this.state.courses}
+						coursesLoaded={this.state.coursesLoaded}
 					/>
 				</div>
 			</DocumentTitle>
