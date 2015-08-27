@@ -11,6 +11,9 @@ import {courseDb} from './db'
  */
 function getCourse(clbid) {
 	// console.log('called getCourse', clbid)
+	if (process.env.NODE_ENV === 'test') {
+		return {_mock: true}
+	}
 	return courseDb
 		.get(clbid)
 		.catch(err => {
