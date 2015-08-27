@@ -21,7 +21,6 @@ function getCourse(clbid) {
 		.get(clbid)
 		.catch(err => {
 			console.error(`course retrieval failed for ${clbid}`)
-			throw err
 		})
 }
 
