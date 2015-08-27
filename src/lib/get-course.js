@@ -1,21 +1,22 @@
-import db from './db'
+import {courseDb} from './db'
 
 /**
  * Gets a course from the database.
  *
  * @param {Number} clbid - a class/lab ID
- * @returns {Promise} - TreoDatabasePromise
- * @promise TreoDatabasePromise
+ * @returns {Promise} - PouchDBPromise
+ * @promise PouchDBPromise
  * @fulfill {Object} - the course object.
  * @reject {Error} - a message about retrieval failing.
  */
 function getCourse(clbid) {
 	// console.log('called getCourse', clbid)
-	return db
-		.store('courses')
-		.index('clbid')
+	return courseDb
 		.get(clbid)
-		.catch(err => new Error(`course retrieval failed for ${clbid}`, err))
+		.catch(err => {
+			console.error(`course retrieval failed for ${clbid}`)
+			throw err
+		})
 }
 
 export default getCourse

@@ -9,7 +9,7 @@ import getCourse from './get-course'
  * @returns {Promise[]} - an array of course promises
  * @fulfill {Array} - the courses.
  */
-async function getCourses(clbids) {
+export default async function getCourses(clbids) {
 	// Takes a list of clbids, and returns a list of the course objects for
 	// those clbids.
 
@@ -20,5 +20,3 @@ async function getCourses(clbids) {
 
 	return await* map(clbids, getCourse)
 }
-
-export default getCourses
