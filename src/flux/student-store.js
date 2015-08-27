@@ -180,8 +180,6 @@ const studentStore = Reflux.createStore({
 			catch (err) {
 				throw err
 			}
-
-
 		}
 
 		else if (type === 'text/html') {
