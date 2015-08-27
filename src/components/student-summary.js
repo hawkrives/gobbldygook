@@ -74,6 +74,10 @@ export default class StudentSummary extends Component {
 		const concentrationList = oxford(concentrations.map(s => s.name).toArray())
 		const emphasisList = oxford(emphases.map(s => s.name).toArray())
 
+		const currentCredits = countCredits(this.props.courses)
+		const neededCredits = student.creditsNeeded
+		const enoughCredits = currentCredits >= neededCredits
+
 		const graduationEl = (
 			<ContentEditable
 				className='autosize-input'
@@ -115,7 +119,7 @@ export default class StudentSummary extends Component {
 						{((majors.size || concentrations.size) && emphases.size) ? ', ' : ''}
 						{(emphases.size > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
 						{'. '}
-						{this.props.coursesLoaded && `You have currently planned for ${countCredits(this.props.courses)} of your ${student.creditsNeeded} required credits.`}
+						{this.props.coursesLoaded && `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? '👍' : ''}`}
 					</div>
 					<div className='paragraph graduation-message'>
 						{canGraduate ? goodGraduationMessage : badGraduationMessage}
