@@ -3,8 +3,6 @@ import cx from 'classnames'
 import Immutable from 'immutable'
 import {Link} from 'react-router'
 import {DropTarget} from 'react-dnd'
-import add from 'lodash/math/add'
-import isUndefined from 'lodash/lang/isUndefined'
 import plur from 'plur'
 import range from 'lodash/utility/range'
 import {semesterName, isCurrentSemester} from 'sto-helpers'
@@ -24,17 +22,25 @@ import EmptyCourseSlot from './empty-course-slot'
 
 import './semester.scss'
 
+function getSchedule(student, year, semester) {
+	return student.schedules
+		.filter(sched => sched.active)
+		.find(sched => (sched.year === year) && (sched.semester === semester))
+}
+
 // Implements the drag source contract.
 const semesterTarget = {
 	drop(props, monitor, component) {
 		const item = monitor.getItem()
 		console.log('dropped course', item)
-		let {clbid, fromScheduleID} = item
+		const {clbid, fromScheduleID} = item
+		const toSchedule = getSchedule(component.props.student, component.props.year, component.props.semester)
+
 		if (fromScheduleID) {
-			studentActions.moveCourse(props.student.id, fromScheduleID, component.state.schedule.id, clbid)
+			studentActions.moveCourse(props.student.id, fromScheduleID, toSchedule.id, clbid)
 		}
 		else {
-			studentActions.addCourse(props.student.id, component.state.schedule.id, clbid)
+			studentActions.addCourse(props.student.id, toSchedule.id, clbid)
 		}
 	},
 }
@@ -52,6 +58,8 @@ class Semester extends Component {
 	static propTypes = {
 		canDrop: PropTypes.bool.isRequired,  // react-dnd
 		connectDropTarget: PropTypes.func.isRequired,  // react-dnd
+		courses: PropTypes.instanceOf(Immutable.List),
+		coursesLoaded: PropTypes.bool.isRequired,
 		isOver: PropTypes.bool.isRequired,  // react-dnd
 		semester: PropTypes.number.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
@@ -61,8 +69,6 @@ class Semester extends Component {
 	constructor() {
 		super()
 		this.state = {
-			courses: Immutable.List(),
-			schedule: null,
 			validation: {},
 		}
 	}
@@ -72,20 +78,8 @@ class Semester extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const schedule = nextProps.student.schedules
-			.filter(sched => sched.active)
-			.find(sched => (sched.year === this.props.year) && (sched.semester === this.props.semester))
-
-		Promise.all([
-			schedule.courses,
-			schedule.validate(),
-		]).then(([courses, validation]) => {
-			this.setState({
-				courses: Immutable.List(courses),
-				schedule,
-				validation,
-			})
-		})
+		const schedule = getSchedule(nextProps.student, nextProps.year, nextProps.semester)
+		schedule.validate().then(validation => this.setState({validation}))
 	}
 
 	removeSemester = () => {
@@ -99,19 +93,19 @@ class Semester extends Component {
 	render() {
 		let courseList = <Loading>Loading Courses…</Loading>
 
+		const schedule = getSchedule(this.props.student, this.props.year, this.props.semester)
+		const courses = Immutable.List(this.props.courses)
+
 		let infoBar = []
-		if (this.state.schedule && this.state.courses.size) {
-			const courseCount = this.state.courses.size
+		if (schedule && courses.size) {
+			const courseCount = courses.size
 			infoBar.push(
 				<li className='semester-course-count' key='course-count'>
 					{courseCount} {plur('course', courseCount)}
 				</li>
 			)
 
-			const credits = this.state.courses
-				.filterNot(isUndefined) // remove any undefined items
-				.map(c => c.credits)
-				.reduce(add)
+			const credits = countCredits(courses)
 
 			if (credits) {
 				infoBar.push(
@@ -122,9 +116,9 @@ class Semester extends Component {
 			}
 		}
 
-		if (this.state.schedule && this.state.courses) {
-			let courseObjects = this.state.courses
-				.zip(this.state.schedule.clbids)
+		if (schedule && courses && this.props.coursesLoaded) {
+			let courseObjects = courses
+				.zip(schedule.clbids)
 				.map(([course, clbid], i) =>
 					course
 					? <Course
@@ -132,7 +126,7 @@ class Semester extends Component {
 						index={i}
 						info={course}
 						student={this.props.student}
-						schedule={this.state.schedule}
+						schedule={schedule}
 						conflicts={this.state.validation.conflicts}
 					/>
 					: <MissingCourse key={i} clbid={clbid} />
@@ -141,7 +135,7 @@ class Semester extends Component {
 
 			// maxCredits is 4 for fall/spring and 1 for everything else
 			let maxCredits = ([1, 3].indexOf(this.props.semester) !== -1) ? 4 : 1
-			let currentCredits = countCredits(this.state.courses.toArray())
+			let currentCredits = countCredits(courses.toArray())
 
 			let emptySlots = []
 			if (currentCredits < maxCredits) {

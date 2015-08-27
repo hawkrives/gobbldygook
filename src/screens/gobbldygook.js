@@ -22,9 +22,12 @@ class GobbldygookApp extends Component {
 		this.state = {
 			students: Immutable.Map(),
 			studentsInitialized: false,
-			allAreas: db.stores.areas.all(), // a promise
+			allAreas: Immutable.List(),
 		}
-		this.onStudentsChanged = this.onStudentsChanged.bind(this)
+
+		db.stores.areas.all().then(areas => this.setState({
+			allAreas: Immutable.List(areas),
+		}))
 	}
 
 	componentDidMount() {
@@ -36,7 +39,7 @@ class GobbldygookApp extends Component {
 		studentStore.emitter.off('change', this.onStudentsChanged)
 	}
 
-	onStudentsChanged() {
+	onStudentsChanged = () => {
 		this.setState({
 			students: studentStore.students,
 			studentsInitialized: true,

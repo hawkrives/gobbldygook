@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import Immutable from 'immutable'
 import cx from 'classnames'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
@@ -9,6 +10,8 @@ import ContentEditable from './content-editable'
 
 import studentActions from '../flux/student-actions'
 import Student from '../models/student'
+
+import countCredits from '../lib/count-credits'
 
 import './student-summary.scss'
 
@@ -25,6 +28,8 @@ const welcomeMessages = [
 
 export default class StudentSummary extends Component {
 	static propTypes = {
+		courses: PropTypes.instanceOf(Immutable.List),
+		coursesLoaded: PropTypes.bool.isRequired,
 		graduatability: PropTypes.bool.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
@@ -64,10 +69,14 @@ export default class StudentSummary extends Component {
 		const concentrationEmphasizer = (concentrations.size === 1) ? 'a ' : ''
 		const emphasisEmphasizer = (emphases.size === 1) ? 'an ' : ''
 
-		const degreeEl = oxford(degrees.map(s => s.name).toArray())
-		const majorEl = oxford(majors.map(s => s.name).toArray())
-		const concentrationEl = oxford(concentrations.map(s => s.name).toArray())
-		const emphasisEl = oxford(emphases.map(s => s.name).toArray())
+		const degreeList = oxford(degrees.map(s => s.name).toArray())
+		const majorList = oxford(majors.map(s => s.name).toArray())
+		const concentrationList = oxford(concentrations.map(s => s.name).toArray())
+		const emphasisList = oxford(emphases.map(s => s.name).toArray())
+
+		const currentCredits = countCredits(this.props.courses)
+		const neededCredits = student.creditsNeeded
+		const enoughCredits = currentCredits >= neededCredits
 
 		const graduationEl = (
 			<ContentEditable
@@ -102,14 +111,15 @@ export default class StudentSummary extends Component {
 				<div className='content'>
 					<div className='paragraph'>
 						After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
-						{(degrees.size > 0) ? `${degreeEmphasizer}${degreeEl} ${degreeWord}` : `no ${degreeWord}`}
-						{(majors.size) ? (concentrations.size || emphases.size) ? ', ' : ' and ' : ''}
-						{(majors.size > 0) ? `${majorEmphasizer}${majorWord} in ${majorEl}` : null}
+						{(degrees.size > 0) ? `${degreeEmphasizer}${degreeList} ${degreeWord}` : `no ${degreeWord}`}
+						{(majors.size) && (concentrations.size || emphases.size) ? ', ' : ' and '}
+						{(majors.size > 0) && `${majorEmphasizer}${majorWord} in ${majorList}`}
 						{(majors.size && concentrations.size) ? ', and ' : ''}
-						{(concentrations.size > 0) ? `${concentrationEmphasizer}${concentrationWord} in ${concentrationEl}` : null}
+						{(concentrations.size > 0) && `${concentrationEmphasizer}${concentrationWord} in ${concentrationList}`}
 						{((majors.size || concentrations.size) && emphases.size) ? ', ' : ''}
-						{(emphases.size > 0) ? `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisEl}` : null}
-						{'.'}
+						{(emphases.size > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
+						{'. '}
+						{this.props.coursesLoaded && `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? '👍' : ''}`}
 					</div>
 					<div className='paragraph graduation-message'>
 						{canGraduate ? goodGraduationMessage : badGraduationMessage}

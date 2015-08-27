@@ -20,6 +20,7 @@ let routes = (
 		<DefaultRoute handler={StudentPicker} />
 		<Route handler={CreateStudent} name='create-student' path='create-student/' />
 		<Redirect path='s/' to='/' />
+		<Redirect path='s' to='/' />
 		<Route handler={Student} name='student' path='s/:id/'>
 			<DefaultRoute handler={CourseTable} />
 			<Route handler={NewStudentWizard} name='wizard' path='wizard/' />

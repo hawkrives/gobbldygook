@@ -10,7 +10,7 @@ import './student.scss'
 
 export default class Student extends Component {
 	static propTypes = {
-		allAreas: PropTypes.object.isRequired, // a promise
+		allAreas: PropTypes.instanceOf(Immutable.List).isRequired,
 		routerState: PropTypes.object.isRequired,
 		students: PropTypes.instanceOf(Immutable.Map).isRequired,
 	}
@@ -18,9 +18,12 @@ export default class Student extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			student: null,
+			allAreas: Immutable.List(),
+			courses: Immutable.List(),
+			coursesLoaded: false,
 			message: `Loading Student ${props.routerState.params.id}`,
 			messageClass: '',
+			student: null,
 		}
 	}
 
@@ -35,16 +38,18 @@ export default class Student extends Component {
 
 		if (student) {
 			// console.info('student\'s student: ', student.toJS())
-
 			window.stu = student
 			this.setState({student})
+			student.courses.then(courses => this.setState({
+				courses: Immutable.List(courses),
+				coursesLoaded: true,
+			}))
 		}
 		else {
 			this.setState({
 				message: `Could not find student "${queryId}"`,
 				messageClass: 'error',
 			})
-			// console.info('student is undefined at Student')
 		}
 	}
 
@@ -58,8 +63,18 @@ export default class Student extends Component {
 		return (
 			<DocumentTitle title={`${this.state.student.name} | Gobbldygook`}>
 				<div className='student'>
-					<Sidebar student={this.state.student} allAreas={this.props.allAreas} />
-					<RouteHandler className='content' student={this.state.student} />
+					<Sidebar
+						allAreas={this.props.allAreas}
+						courses={this.state.courses}
+						coursesLoaded={this.state.coursesLoaded}
+						student={this.state.student}
+					/>
+					<RouteHandler
+						className='content'
+						student={this.state.student}
+						courses={this.state.courses}
+						coursesLoaded={this.state.coursesLoaded}
+					/>
 				</div>
 			</DocumentTitle>
 		)
