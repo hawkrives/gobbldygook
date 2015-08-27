@@ -2,8 +2,6 @@
 import PouchDB from 'pouchdb'
 import find from 'pouchdb-find'
 PouchDB.plugin(find)
-import upsert from 'pouchdb-upsert'
-PouchDB.plugin(upsert)
 import search from 'pouchdb-quick-search'
 PouchDB.plugin(search)
 
