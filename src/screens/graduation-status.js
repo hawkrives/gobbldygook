@@ -23,7 +23,7 @@ const log = debug('gobbldygook:component:render')
 
 export default class GraduationStatus extends Component {
 	static propTypes = {
-		allAreas: PropTypes.object.isRequired, // a promise
+		allAreas: PropTypes.instanceOf(Immutable.List),
 		isHidden: PropTypes.bool,
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
@@ -44,12 +44,9 @@ export default class GraduationStatus extends Component {
 
 	async componentWillReceiveProps(nextProps) {
 		const {canGraduate, details} = await nextProps.student.graduatability
-		let allAreas = await nextProps.allAreas
-		allAreas = Immutable.List(allAreas)
 		this.setState({
 			graduatability: canGraduate,
 			areaDetails: details,
-			allAreas,
 		})
 	}
 
@@ -102,7 +99,7 @@ export default class GraduationStatus extends Component {
 			return null
 		}
 
-		const allAreasGrouped = this.state.allAreas.groupBy(a => a.type)
+		const allAreasGrouped = this.props.allAreas.groupBy(a => a.type)
 
 		const sections = this.props.student.studies
 			// group the studies by their type

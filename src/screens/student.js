@@ -10,7 +10,7 @@ import './student.scss'
 
 export default class Student extends Component {
 	static propTypes = {
-		allAreas: PropTypes.object.isRequired, // a promise
+		allAreas: PropTypes.instanceOf(Immutable.List).isRequired,
 		routerState: PropTypes.object.isRequired,
 		students: PropTypes.instanceOf(Immutable.Map).isRequired,
 	}
@@ -19,6 +19,7 @@ export default class Student extends Component {
 		super(props)
 		this.state = {
 			student: null,
+			allAreas: Immutable.List(),
 			message: `Loading Student ${props.routerState.params.id}`,
 			messageClass: '',
 		}
@@ -58,8 +59,14 @@ export default class Student extends Component {
 		return (
 			<DocumentTitle title={`${this.state.student.name} | Gobbldygook`}>
 				<div className='student'>
-					<Sidebar student={this.state.student} allAreas={this.props.allAreas} />
-					<RouteHandler className='content' student={this.state.student} />
+					<Sidebar
+						allAreas={this.props.allAreas}
+						student={this.state.student}
+					/>
+					<RouteHandler
+						className='content'
+						student={this.state.student}
+					/>
 				</div>
 			</DocumentTitle>
 		)

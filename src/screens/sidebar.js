@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
+import Immutable from 'immutable'
 
 import Student from '../models/student'
 import studentActions from '../flux/student-actions'
@@ -18,7 +19,7 @@ import './sidebar.scss'
 
 export default class Sidebar extends Component {
 	static propTypes = {
-		allAreas: PropTypes.object.isRequired, // a promise
+		allAreas: PropTypes.instanceOf(Immutable.List),
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
 
