@@ -7,7 +7,7 @@ import Button from './button'
 import BasicCourse from './basic-course'
 
 import studentActions from '../flux/student-actions'
-import {semesterName} from 'sto-helpers'
+import semesterName from '../helpers/semester-name'
 
 function findSemesterList() {
 	return [

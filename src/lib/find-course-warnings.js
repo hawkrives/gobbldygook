@@ -8,7 +8,9 @@ import ordinal from 'ord'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
-import {isTrue, expandYear, semesterName} from 'sto-helpers'
+import isTrue from '../helpers/is-true'
+import expandYear from '../helpers/expand-year'
+import semesterName from '../helpers/semester-name'
 
 export function checkForInvalidYear(course, scheduleYear) {
 	let result = {

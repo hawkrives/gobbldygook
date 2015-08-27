@@ -10,7 +10,7 @@ import {version as currentVersionString} from '../../package.json'
 import {studentChangelog as changelog} from '../lib/logger'
 import checkGraduatability from '../lib/check-student-graduatability'
 
-import {randomChar} from 'sto-helpers'
+import randomChar from '../helpers/random-char'
 
 import Schedule from './schedule'
 import Study from './study'

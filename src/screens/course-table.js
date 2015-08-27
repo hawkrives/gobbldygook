@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
-import {expandYear, findFirstAvailableYear} from 'sto-helpers'
+import expandYear from '../helpers/expand-year'
+import findFirstAvailableYear from '../helpers/find-first-available-year'
 import Immutable from 'immutable'
 
 import studentActions from '../flux/student-actions'

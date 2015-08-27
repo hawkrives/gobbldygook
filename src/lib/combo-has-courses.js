@@ -1,5 +1,5 @@
 import takeWhile from 'lodash/array/takeWhile'
-import {queryCourses} from 'sto-helpers'
+import queryCourses from '../helpers/query-courses'
 
 export default function comboHasAllCourses(courses, combinationOfClasses) {
 	const these = takeWhile(courses, course =>

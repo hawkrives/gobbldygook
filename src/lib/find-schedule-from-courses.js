@@ -1,6 +1,6 @@
 import map from 'lodash/collection/map'
 import flatten from 'lodash/array/flatten'
-import {combinations} from 'sto-helpers'
+import combinations from '../helpers/combinations'
 import prepareCourseForQuery from './prepare-course-for-query'
 import searchForCourseMatches from './search-for-course-matches'
 import comboHasCourses from './combo-has-courses'

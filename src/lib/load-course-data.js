@@ -8,7 +8,9 @@ import notificationActions from '../flux/notification-actions'
 import {status, json, text} from './fetch-helpers'
 import db from './db'
 
-import {buildDept, buildDeptNum, splitParagraph} from 'sto-helpers'
+import buildDept from '../helpers/build-dept'
+import buildDeptNum from '../helpers/build-dept-num'
+import splitParagraph from '../helpers/split-paragraph'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 import debug from 'debug'

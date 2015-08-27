@@ -10,7 +10,7 @@
   "config": {
     "area_output": "build/areas/",
     "beautify": "-f - --end-with-newline --indent-with-tabs",
-    "mocha": "test/areas test/models",
+    "mocha": "test/areas test/models test/helpers",
     "webpack": "--progress --config=./.webpack.config.js"
   },
   "scripts": {
@@ -66,6 +66,7 @@
     "reflux": "0.2.12",
     "sha1": "1.1.1",
     "stickyfill": "1.1.1",
+    "sto-course-related-data": "4.0.2",
     "sto-helpers": "4.2.12",
     "sto-sis-time-parser": "2.1.0",
     "treo": "0.5.0",

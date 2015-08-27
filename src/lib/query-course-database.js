@@ -1,5 +1,5 @@
 import db from './db'
-import {buildQueryFromString} from 'sto-helpers'
+import buildQueryFromString from '../helpers/build-query-from-string'
 
 function queryCourseDatabase(queryString) {
 	let queryObject = buildQueryFromString(queryString, {words: true, profWords: true})
