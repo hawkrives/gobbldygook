@@ -2,7 +2,7 @@
 
 var getConfig = require('hjs-webpack')
 
-module.exports = getConfig({
+var config = getConfig({
   // entry point for the app
   in: 'src/index.js',
 
@@ -36,3 +36,10 @@ module.exports = getConfig({
     }
   },
 })
+
+config.module.loaders.unshift({
+  test: /\.(svg)/,
+  loader: 'file-loader',
+})
+
+module.exports = config
