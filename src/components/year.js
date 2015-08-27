@@ -8,7 +8,9 @@ import Button from './button'
 import Icon from './icon'
 import Semester from './semester'
 
-import {isCurrentYear, expandYear, findFirstAvailableSemester} from 'sto-helpers'
+import isCurrentYear from '../helpers/is-current-year'
+import expandYear from '../helpers/expand-year'
+import findFirstAvailableSemester from '../helpers/find-first-available-semester'
 
 import './year.scss'
 

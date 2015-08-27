@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
-import {findWordForProgress} from 'sto-helpers'
+import findWordForProgress from '../helpers/find-word-for-progress'
 
 import './progress-bar.scss'
 

@@ -2,9 +2,9 @@ import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {State} from 'react-router'
 import Immutable from 'immutable'
-import {isCurrentSemester} from 'sto-helpers'
 import DocumentTitle from 'react-document-title'
-import {semesterName} from 'sto-helpers'
+import isCurrentSemester from '../helpers/is-current-semester'
+import semesterName from '../helpers/semester-name'
 
 import Student from '../models/student'
 

@@ -9,7 +9,8 @@ import pluck from 'lodash/collection/pluck'
 import some from 'lodash/collection/some'
 import {v4 as uuid} from 'node-uuid'
 
-import {randomChar, isTrue} from 'sto-helpers'
+import randomChar from '../helpers/random-char'
+import isTrue from '../helpers/is-true'
 import getCourses from '../lib/get-courses'
 import findWarnings from '../lib/find-course-warnings'
 

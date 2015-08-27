@@ -8,7 +8,7 @@ import pairs from 'lodash/object/pairs'
 import sortBy from 'lodash/collection/sortBy'
 import sortByAll from 'lodash/collection/sortByAll'
 import present from 'present'
-import {toPrettyTerm} from 'sto-helpers'
+import toPrettyTerm from '../helpers/to-pretty-term'
 import queryCourseDatabase from '../lib/query-course-database'
 
 import Button from '../components/button'
