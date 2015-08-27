@@ -50,7 +50,8 @@ export default class Requirement extends Component {
 			? null
 			: (
 				<h2 className={`requirement--title ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`}>
-					{this.props.computed ? '✓' : '×'}{' '}
+					<span className='requirement--title-status'>{this.props.computed ? '✓' : '×'}</span>
+					{' '}
 					{this.props.name}
 					{' '}
 					<Button className='requirement--override-button' onClick={ev => this.props.toggleOverride({ev, path: this.props.path})}>
