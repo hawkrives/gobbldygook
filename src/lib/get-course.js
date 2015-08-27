@@ -14,6 +14,9 @@ function getCourse(clbid) {
 	if (process.env.NODE_ENV === 'test') {
 		return {_mock: true}
 	}
+	if (typeof clbid === 'number') {
+		clbid = String(clbid)
+	}
 	return courseDb
 		.get(clbid)
 		.catch(err => {
