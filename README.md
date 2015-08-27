@@ -1,5 +1,7 @@
 # Gobbldygook
+
 [![Build Status](https://travis-ci.org/hawkrives/gobbldygook.svg?branch=master)](https://travis-ci.org/hawkrives/gobbldygook)
+[![Code Coverage](https://coveralls.io/repos/hawkrives/gobbldygook/badge.svg?branch=master&service=github)](https://coveralls.io/github/hawkrives/gobbldygook?branch=master)
 
 This is a course scheduler for students at St. Olaf College. You give it your areas of study (majors, concentrations, degrees), the courses you *have* taken and are *planning* on taking, and it tells you if you can graduate or not.
 
