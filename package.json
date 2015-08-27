@@ -31,6 +31,7 @@
     "prewatch": "npm run copy && npm run lint",
     "profile": "cat profile/README.md",
     "start": "webpack-dev-server $npm_package_config_webpack",
+    "stats": "webpack --config=./.webpack.config.js --profile --json > stats.json && open http://webpack.github.io/analyse/",
     "test": "mocha $npm_package_config_mocha",
     "test:students": "mocha ./bin/test-students",
     "travis": "npm run lint && npm run build:areas && npm run test:students && npm run build:ci && npm test",
