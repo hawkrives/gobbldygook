@@ -1,83 +1,62 @@
-import treo from 'treo'
+// set up PouchDB
+import PouchDB from 'pouchdb'
+import find from 'pouchdb-find'
+PouchDB.plugin(find)
+import upsert from 'pouchdb-upsert'
+PouchDB.plugin(upsert)
+import search from 'pouchdb-quick-search'
+PouchDB.plugin(search)
 
-let schema = treo.schema()
-	.version(1)
-		.addStore('courses', { key: 'clbid' })
-			.addIndex('clbid', 'clbid', { unique: true })
-			.addIndex('credits', 'credits')
-			.addIndex('crsid', 'crsid')
-			.addIndex('dept', 'dept')
-			.addIndex('depts', 'depts', { multi: true })
-			.addIndex('deptnum', 'deptnum')
-			.addIndex('desc', 'desc')
-			.addIndex('gereqs', 'gereqs', { multi: true })
-			.addIndex('groupid', 'groupid')
-			.addIndex('grouptype', 'grouptype')
-			.addIndex('halfcredit', 'halfcredit')
-			.addIndex('level', 'level')
-			.addIndex('name', 'name')
-			.addIndex('notes', 'notes')
-			.addIndex('num', 'num')
-			.addIndex('pf', 'pf')
-			.addIndex('places', 'places', { multi: true })
-			.addIndex('profs', 'profs', { multi: true })
-			.addIndex('sect', 'sect')
-			.addIndex('sem', 'sem')
-			.addIndex('term', 'term')
-			.addIndex('times', 'times', { multi: true })
-			.addIndex('title', 'title')
-			.addIndex('type', 'type')
-			.addIndex('year', 'year')
-			.addIndex('sourcePath', 'sourcePath')
-		.addStore('areas', { key: 'sourcePath' })
-			.addIndex('type', 'type', { multi: true })
-			.addIndex('sourcePath', 'sourcePath')
-		.addStore('students', { key: 'id' })
-	.version(2)
-		.getStore('courses')
-			.addIndex('words', 'words', { multi: true })
-	.version(3)
-		.getStore('courses')
-			.addIndex('profWords', 'profWords', { multi: true })
-	.version(4)
-		.getStore('courses')
-			.dropIndex('profs')
-			.addIndex('instructors', 'instructors', { multi: true })
-			.dropIndex('places')
-			.addIndex('locations', 'locations', { multi: true })
-			.dropIndex('sect')
-			.addIndex('section', 'section')
-			.dropIndex('sem')
-			.addIndex('semester', 'semester')
-			.dropIndex('halfcredit')
-
-
-import treoPromise from 'treo/plugins/treo-promise'
-import queryTreoDatabase from './query-treo-database'
-import treoBatchGet from './treo-batch-get'
-let db = treo('gobbldygook', schema)
-	.use(treoPromise())
-	.use(queryTreoDatabase)
-	.use(treoBatchGet)
-
-export default db
-
-
-if (typeof window !== 'undefined') {
-	window.deleteDatabase = () => {
-		window.indexedDB.deleteDatabase('gobbldygook', () =>
-			console.log('Database dropped'))
-	}
-
-	window.eraseStorage = () => {
-		window.localStorage.clear()
-		console.log('Storage erased')
-	}
-
-	window.eraseDatabase = () => {
-		window.deleteDatabase()
-		window.eraseStorage()
-	}
-
-	window.database = db
+// if we're running in node, make a directory for the databases
+const prefix = process.env.NODE_ENV === 'cli' ? './databases/' : ''
+if (process.env.NODE_ENV === 'cli') {
+	const mkdir = require('mkdirp')
+	mkdir.sync(prefix)
 }
+
+let opts = {}
+// if we're running a test, just stick the database in memory
+if (process.env.NODE_ENV === 'test') {
+	opts.db = require('memdown')
+}
+
+
+// make the databases
+export const courseDb  = new PouchDB(prefix + 'courses',  {...opts, size: 50})
+export const areaDb    = new PouchDB(prefix + 'areas',    {...opts, size: 5})
+export const studentDb = new PouchDB(prefix + 'students', {...opts, size: 5})
+export const cacheDb   = new PouchDB(prefix + 'cache',    {...opts, size: 1})
+global.database = {courseDb, areaDb, studentDb, cacheDb}
+
+// set up course indices
+courseDb.createIndex({index: {fields: ['clbid']}})  // should be unique
+courseDb.createIndex({index: {fields: ['credits']}})
+courseDb.createIndex({index: {fields: ['crsid']}})
+courseDb.createIndex({index: {fields: ['dept']}})
+courseDb.createIndex({index: {fields: ['depts']}})  // is an array
+courseDb.createIndex({index: {fields: ['deptnum']}})
+courseDb.createIndex({index: {fields: ['desc']}})
+courseDb.createIndex({index: {fields: ['gereqs']}})  // is an array
+courseDb.createIndex({index: {fields: ['groupid']}})
+courseDb.createIndex({index: {fields: ['grouptype']}})
+courseDb.createIndex({index: {fields: ['level']}})
+courseDb.createIndex({index: {fields: ['name']}})
+courseDb.createIndex({index: {fields: ['notes']}})
+courseDb.createIndex({index: {fields: ['num']}})
+courseDb.createIndex({index: {fields: ['pf']}})
+courseDb.createIndex({index: {fields: ['locations']}})  // is an array
+courseDb.createIndex({index: {fields: ['instructors']}})  // is an array
+courseDb.createIndex({index: {fields: ['section']}})
+courseDb.createIndex({index: {fields: ['semester']}})
+courseDb.createIndex({index: {fields: ['term']}})
+courseDb.createIndex({index: {fields: ['times']}})  // is an array
+courseDb.createIndex({index: {fields: ['title']}})
+courseDb.createIndex({index: {fields: ['type']}})
+courseDb.createIndex({index: {fields: ['year']}})
+courseDb.createIndex({index: {fields: ['sourcePath']}})
+courseDb.createIndex({index: {fields: ['words']}})  // is an array
+courseDb.createIndex({index: {fields: ['profWords']}})  // is an array
+
+// set up area indices
+areaDb.createIndex({index: {fields: ['type']}})  // is an array
+areaDb.createIndex({index: {fields: ['sourcePath']}})
