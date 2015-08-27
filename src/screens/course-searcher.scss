@@ -4,21 +4,20 @@
 @import '../mixins/list-unstyled';
 
 .search-sidebar {
-	@include card;
-
 	position: sticky;
 	top: $page-edge-padding;
 
 	height: calc(100vh - #{$page-edge-padding * 2});
-	padding: 0.5rem;
 	overflow-y: scroll;
 
-	.search-box {
-		width: 100%;
-		box-sizing: inherit;
-		margin-bottom: 0.5rem;
+	.course-group {
+		@include card;
+		padding: 0.5rem;
+
+		margin-top: 1em;
 	}
 
+	.term-list,
 	.course-list {
 		@include list-unstyled;
 
@@ -29,37 +28,50 @@
 		}
 	}
 
-	.course-group {
+	.course-group-title {
 		font-weight: 500;
 		text-align: center;
 		display: block;
 
-		margin-top: 1rem;
-		margin-bottom: 0.5rem;
+		margin-top: 0.25em;
+		margin-bottom: 0.5em;
+	}
+}
+
+.search-box {
+	flex: 1;
+	box-sizing: inherit;
+
+	padding: 0.75em 1em;
+	padding-right: 0.5em;
+	border: 0;
+
+	&:focus {
+		outline: none;
+		background-color: color('blue', '50');
+		color: color('blue', '900');
 	}
 }
 
 .close-sidebar {
-	min-height: 0;
-	padding: 0.5em 0.8em;
+	padding: 0 0.8em;
 
 	color: color('gray');
 	transition: 0.15s;
+
+	border: 0;
+	border-radius: 0;
 }
 
 .sidebar-heading {
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: baseline;
-	justify-content: space-between;
+	@include card;
+	padding: 0;
 	margin-bottom: 0.5em;
 
-	h1 {
-		flex: 1;
-		text-align: center;
-		font-size: 1.25em;
-		font-weight: 500;
-		margin: 0;
-		font-feature-settings: 'smcp';
-	}
+	position: relative;
+
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: stretch;
+	justify-content: stretch;
 }

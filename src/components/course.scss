@@ -95,6 +95,10 @@
 	}
 	.remove-course[disabled] {
 		color: color('gray', '500');
+		&:hover {
+			background-color: transparent;
+			border-color: transparent;
+		}
 	}
 
 	.offerings {
