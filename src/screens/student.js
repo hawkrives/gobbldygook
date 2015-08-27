@@ -40,7 +40,7 @@ export default class Student extends Component {
 			// console.info('student\'s student: ', student.toJS())
 			window.stu = student
 			this.setState({student})
-			student._courses.then(courses => this.setState({
+			student.courses.then(courses => this.setState({
 				courses: Immutable.List(courses),
 				coursesLoaded: true,
 			}))
@@ -50,7 +50,6 @@ export default class Student extends Component {
 				message: `Could not find student "${queryId}"`,
 				messageClass: 'error',
 			})
-			// console.info('student is undefined at Student')
 		}
 	}
 
