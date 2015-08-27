@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
-import './expression--course'
+import './expression--course.scss'
 
 export default class CourseExpression extends Component {
 	static propTypes = {
