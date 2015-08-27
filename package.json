@@ -71,8 +71,7 @@
     "stickyfill": "1.1.1",
     "sto-course-related-data": "4.0.2",
     "sto-helpers": "4.2.12",
-    "sto-sis-time-parser": "2.1.0",
-    "treo": "0.5.0"
+    "sto-sis-time-parser": "2.1.0"
   },
   "devDependencies": {
     "autoprefixer-core": "5.2.1",
