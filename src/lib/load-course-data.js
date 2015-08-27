@@ -78,10 +78,10 @@ async function storeArea(item) {
 	}
 
 	try {
-		await areaDb.upsert(id, () => area)
+		await areaDb.put(area)
 	}
-	catch(e) {
-		throw e
+	catch(err) {
+		throw err
 	}
 
 	return item
