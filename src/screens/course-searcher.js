@@ -107,10 +107,10 @@ let CourseSearcher = React.createClass({
 		const showNoResults = this.state.results.length === 0 && this.state.hasQueried
 		const showIndicator = this.state.queryInProgress
 
-		let contents = <li className='no-results'>No Results Found</li>
+		let contents = <li className='no-results course-group'>No Results Found</li>
 
 		if (showIndicator) {
-			contents = <li className='loading'><Loading>Searching…</Loading></li>
+			contents = <li className='loading course-group'><Loading>Searching…</Loading></li>
 		}
 
 		else if (!showNoResults) {
