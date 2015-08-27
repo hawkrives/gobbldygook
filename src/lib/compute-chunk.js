@@ -6,7 +6,7 @@ import compact from 'lodash/array/compact'
 import countCourses from './count-courses'
 import countCredits from './count-credits'
 import countDepartments from './count-departments'
-import difference from 'lodash/array/difference'
+import xor from 'lodash/array/xor'
 import every from 'lodash/collection/every'
 import filterByWhereClause from './filter-by-where-clause'
 import find from 'lodash/collection/find'
@@ -156,13 +156,13 @@ export function computeCourse({expr, courses, dirty}) {
 		return {computedResult: false}
 	}
 
+	const keysNotFromQuery = xor(keys(expr.$course), keys(foundCourse))
+	if (keysNotFromQuery.length) {
+		expr.$course._extraKeys = keysNotFromQuery
+	}
+
 	const match = assign(expr.$course, foundCourse)
 	const crsid = simplifyCourse(match)
-
-	const keysNotFromQuery = difference(keys(expr.$course), keys(foundCourse))
-	if (keysNotFromQuery.length) {
-		match._extraKeys = keysNotFromQuery
-	}
 
 	if (dirty.has(crsid)) {
 		return {computedResult: false, match}

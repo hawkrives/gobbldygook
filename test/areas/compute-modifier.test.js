@@ -249,9 +249,9 @@ describe('computeModifier', () => {
             expect(computedResult)
                 .to.be.true
             expect(matches).to.deep.equal([
-                {department: ['REL'], number: 111, credits: 1},
-                {department: ['REL'], number: 112, credits: 1},
-                {department: ['CSCI'], number: 251, credits: 1},
+                {department: ['REL'], number: 111, credits: 1.0, _extraKeys: ['credits']},
+                {department: ['REL'], number: 112, credits: 1.0, _extraKeys: ['credits']},
+                {department: ['CSCI'], number: 251, credits: 1.0, _extraKeys: ['credits']},
             ])
             expect(counted)
                 .to.equal(3)
@@ -310,9 +310,9 @@ describe('computeModifier', () => {
             expect(computedResult)
                 .to.be.true
             expect(matches).to.deep.equal([
-                {department: ['CHEM', 'BIO'], number: 111, credits: 1},
-                {department: ['CHEM', 'BIO'], number: 112, credits: 1},
-                {department: ['CSCI'], number: 251, credits: 1},
+                {department: ['CHEM', 'BIO'], number: 111, credits: 1.0, _extraKeys: ['credits']},
+                {department: ['CHEM', 'BIO'], number: 112, credits: 1.0, _extraKeys: ['credits']},
+                {department: ['CSCI'], number: 251, credits: 1.0, _extraKeys: ['credits']},
             ])
             expect(counted)
                 .to.equal(3)
@@ -372,8 +372,8 @@ describe('computeModifier', () => {
             expect(computedResult)
                 .to.be.true
             expect(matches).to.deep.equal([
-                {department: ['REL'], number: 111, credits: 1},
-                {department: ['CSCI'], number: 251, credits: 1},
+                {department: ['REL'], number: 111, credits: 1.0, _extraKeys: ['credits']},
+                {department: ['CSCI'], number: 251, credits: 1.0, _extraKeys: ['credits']},
             ])
             expect(counted)
                 .to.equal(2)
@@ -462,8 +462,8 @@ describe('computeModifier', () => {
         expect(courseResults.computedResult)
             .to.be.true
         expect(courseResults.matches).to.deep.equal([
-            {department: ['CHEM', 'BIO'], number: 111, credits: 1.0},
-            {department: ['CHEM', 'BIO'], number: 112, credits: 1.0},
+            {department: ['CHEM', 'BIO'], number: 111, credits: 1.0, _extraKeys: ['credits']},
+            {department: ['CHEM', 'BIO'], number: 112, credits: 1.0, _extraKeys: ['credits']},
         ])
         expect(courseResults.counted)
             .to.equal(2)
@@ -471,8 +471,8 @@ describe('computeModifier', () => {
         expect(departmentResults.computedResult)
             .to.be.true
         expect(departmentResults.matches).to.deep.equal([
-            {department: ['CHEM', 'BIO'], number: 111, credits: 1.0},
-            {department: ['CHEM', 'BIO'], number: 112, credits: 1.0},
+            {department: ['CHEM', 'BIO'], number: 111, credits: 1.0, _extraKeys: ['credits']},
+            {department: ['CHEM', 'BIO'], number: 112, credits: 1.0, _extraKeys: ['credits']},
         ])
         expect(departmentResults.counted)
             .to.equal(2)
