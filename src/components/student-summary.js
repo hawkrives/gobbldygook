@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import Immutable from 'immutable'
 import cx from 'classnames'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
@@ -9,6 +10,8 @@ import ContentEditable from './content-editable'
 
 import studentActions from '../flux/student-actions'
 import Student from '../models/student'
+
+import countCredits from '../lib/count-credits'
 
 import './student-summary.scss'
 
@@ -25,6 +28,8 @@ const welcomeMessages = [
 
 export default class StudentSummary extends Component {
 	static propTypes = {
+		courses: PropTypes.instanceOf(Immutable.List),
+		coursesLoaded: PropTypes.bool.isRequired,
 		graduatability: PropTypes.bool.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
@@ -110,6 +115,8 @@ export default class StudentSummary extends Component {
 						{((majors.size || concentrations.size) && emphases.size) ? ', ' : ''}
 						{(emphases.size > 0) ? `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisEl}` : null}
 						{'.'}
+						{'. '}
+						{this.props.coursesLoaded && `You have currently planned for ${countCredits(this.props.courses)} of your ${student.creditsNeeded} credits.`}
 					</div>
 					<div className='paragraph graduation-message'>
 						{canGraduate ? goodGraduationMessage : badGraduationMessage}
