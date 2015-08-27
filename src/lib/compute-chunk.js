@@ -6,6 +6,7 @@ import compact from 'lodash/array/compact'
 import countCourses from './count-courses'
 import countCredits from './count-credits'
 import countDepartments from './count-departments'
+import difference from 'lodash/array/difference'
 import every from 'lodash/collection/every'
 import filterByWhereClause from './filter-by-where-clause'
 import find from 'lodash/collection/find'
@@ -14,6 +15,7 @@ import forEach from 'lodash/collection/forEach'
 import getMatchesFromChildren from './get-matches-from-children'
 import getMatchesFromFilter from './get-matches-from-filter'
 import getOccurrences from './get-occurrences'
+import keys from 'lodash/object/keys'
 import map from 'lodash/collection/map'
 import simplifyCourse from './simplify-course'
 import stringify from 'json-stable-stringify'
@@ -156,6 +158,11 @@ export function computeCourse({expr, courses, dirty}) {
 
 	const match = assign(expr.$course, foundCourse)
 	const crsid = simplifyCourse(match)
+
+	const keysNotFromQuery = difference(keys(expr.$course), keys(foundCourse))
+	if (keysNotFromQuery.length) {
+		match._extraKeys = keysNotFromQuery
+	}
 
 	if (dirty.has(crsid)) {
 		return {computedResult: false, match}
