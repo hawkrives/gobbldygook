@@ -78,7 +78,7 @@ describe('computeCourse', () => {
 
         const query = {
             $type: 'course',
-            $course: {department: ['ART'], number: 250, crsid: 2015},
+            $course: {department: ['ART'], number: 250, crsid: 20951},
         }
 
         const {computedResult, match} = computeCourse({
@@ -88,6 +88,11 @@ describe('computeCourse', () => {
         expect(computedResult)
             .to.be.true
         expect(match)
-            .to.deep.equal({department: ['ART'], number: 250, crsid: 2015})
+            .to.deep.equal({
+                department: ['ART'],
+                number: 250,
+                crsid: 20951,
+                _extraKeys: ['crsid'],
+            })
     })
 })

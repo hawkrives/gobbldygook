@@ -1,7 +1,16 @@
 @import '../mixins/card';
+@import '../base/variables.scss';
 
 .requirement {
-	margin: 0 0.25em 0.25em 0.5em;
+	margin: 0.25em 0.25em 0.25em 0.5em;
+}
+
+.requirement + .requirement {
+	margin-top: 0.75em;
+}
+
+.requirement:last-child {
+	margin-bottom: 0.5em;
 }
 
 .requirement .requirement {
@@ -30,23 +39,32 @@
 
 .requirement--title {
 	font-size: 1em;
-	font-weight: normal;
+	font-weight: 500;
 
 	border-bottom: $material-divider;
 	padding: 0.2em 0.15em;
 }
 
+.requirement--title.computed-success {
+	background-color: $computed-success-background;
+}
+
+.requirement--title-status {
+	margin-right: 0.2em;
+}
+.requirement--title.computed-success .requirement--title-status {
+	color: $computed-success-color;
+}
+
 .requirement .requirement .requirement--title {
 	text-align: center;
-	font-weight: bold;
 
-	font-size: 0.8em;
+	font-size: 0.9em;
 	margin: 0;
 }
 
 .requirement .requirement .requirement .requirement--title {
 	text-align: left;
-	font-weight: normal;
 }
 
 .requirement--title,
@@ -55,8 +73,8 @@
 .requirement--filter,
 .requirement--override-buttons {
 	width: 100%;
-	padding-top: 0.4em;
-	padding-bottom: 0.4em;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
 }
 
 .requirement--message {

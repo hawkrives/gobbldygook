@@ -270,9 +270,9 @@ describe('computeBoolean', () => {
                     _result: true,
                     _counted: 3,
                     _matches: [
-                        {department: ['ART'], number: 120, credits: 1.0},
-                        {department: ['ART'], number: 104, credits: 1.0},
-                        {department: ['ART'], number: 105, credits: 1.0},
+                        {department: ['ART'], number: 120, credits: 1.0, _extraKeys: ['credits']},
+                        {department: ['ART'], number: 104, credits: 1.0, _extraKeys: ['credits']},
+                        {department: ['ART'], number: 105, credits: 1.0, _extraKeys: ['credits']},
                     ],
                 },
                 {
@@ -287,9 +287,9 @@ describe('computeBoolean', () => {
                     _result: true,
                     _counted: 3,
                     _matches: [
-                        {department: ['ART'], number: 120, credits: 1.0},
-                        {department: ['ART'], number: 104, credits: 1.0},
-                        {department: ['ART'], number: 105, credits: 1.0},
+                        {department: ['ART'], number: 120, credits: 1.0, _extraKeys: ['credits']},
+                        {department: ['ART'], number: 104, credits: 1.0, _extraKeys: ['credits']},
+                        {department: ['ART'], number: 105, credits: 1.0, _extraKeys: ['credits']},
                     ],
                 },
             ],
@@ -297,9 +297,9 @@ describe('computeBoolean', () => {
         })
         expect(computedResult).to.be.true
         expect(matches).to.deep.equal([
-            {department: ['ART'], number: 120, credits: 1.0},
-            {department: ['ART'], number: 104, credits: 1.0},
-            {department: ['ART'], number: 105, credits: 1.0},
+            {department: ['ART'], number: 120, credits: 1.0, _extraKeys: ['credits']},
+            {department: ['ART'], number: 104, credits: 1.0, _extraKeys: ['credits']},
+            {department: ['ART'], number: 105, credits: 1.0, _extraKeys: ['credits']},
         ])
     })
 

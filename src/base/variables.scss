@@ -28,3 +28,9 @@ $base-border-radius: 3px;
 $react-list-select-accent: color('blue', '200');
 $react-list-select-selected: color('blue', '50');
 $react-list-select-disabled: color('gray', '500');
+
+
+// area of study colors
+$computed-success-background: hsl(153, 25%, 95%);
+$computed-success-color: hsl(153, 43%, 42%);
+$computed-failure-color: hsl(3, 100%, 61%);

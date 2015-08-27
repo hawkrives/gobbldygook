@@ -1,5 +1,6 @@
 @import '../mixins/card';
 @import '../mixins/color';
+@import '../base/variables.scss';
 
 .expression {
 	display: inline-block;
@@ -21,6 +22,7 @@
 .expression--description:not(:only-child) {
 	display: block;
 	width: 100%;
+	margin-top: 0.35em;
 	margin-bottom: 0.35em;
 }
 
@@ -52,21 +54,21 @@
 
 	&.computed::after {
 		font-family: monospace;
-		margin-left: 0.35em;
+		margin-left: 0.4em;
 		display: inline-block;
 	}
 
 	&.computed.computed-success {
-		background-color: hsl(153, 25%, 95%);
+		background-color: $computed-success-background;
 	}
 	&.computed.computed-success::after {
 		content: '✓';
-		color: hsl(153, 43%, 42%);
+		color: $computed-success-color;
 	}
 
 	&.computed.computed-failure::after {
 		content: '×';
-		color: hsl(3, 100%, 61%);
+		color: $computed-failure-color;
 		font-weight: bold;
 	}
 }

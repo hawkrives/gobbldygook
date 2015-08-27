@@ -5,6 +5,7 @@
 
 	.course {
 		display: flex;
+		cursor: inherit;
 	}
 
 	font-size: 0.9em;
@@ -30,7 +31,7 @@
 			font-size: 0.7em;
 		}
 		& > :nth-child(2) {
-			font-weight: bold;
+			font-weight: 500;
 		}
 	}
 
@@ -52,7 +53,8 @@
 				rgba(0, 0, 0, 0.5) 17%,
 				white 20%,
 				white 44%,
-				rgba(0, 0, 0, 0.5) 46%);
+				rgba(0, 0, 0, 0.5) 46%
+			);
 		}
 	}
 }
