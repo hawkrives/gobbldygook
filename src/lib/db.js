@@ -7,10 +7,10 @@ PouchDB.plugin(search)
 
 // if we're running in node, make a directory for the databases
 const prefix = process.env.NODE_ENV === 'cli' ? './databases/' : ''
-if (process.env.NODE_ENV === 'cli') {
-	const mkdir = require('mkdirp')
-	mkdir.sync(prefix)
-}
+// if (process.env.NODE_ENV === 'cli') {
+// 	const mkdir = require('mkdirp')
+// 	mkdir.sync(prefix)
+// }
 
 let opts = {}
 // if we're running a test, just stick the database in memory
