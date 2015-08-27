@@ -2,9 +2,7 @@ import React, {PropTypes, findDOMNode} from 'react'
 import cx from 'classnames'
 import {State} from 'react-router'
 
-import flatten from 'lodash/array/flatten'
 import groupBy from 'lodash/collection/groupBy'
-import isObject from 'lodash/lang/isObject'
 import map from 'lodash/collection/map'
 import pairs from 'lodash/object/pairs'
 import sortBy from 'lodash/collection/sortBy'
@@ -68,17 +66,14 @@ let CourseSearcher = React.createClass({
 	processQueryResults([results, startQueryTime]=[]) {
 		console.log('results', results)
 
-		// Sort the results
-		const sortedByIdent = sortByAll(results, ['deptnum', 'sect'])
-		// Group them by term, then turn the object into an array of pairs
-		const groupedAndPaired = pairs(groupBy(sortedByIdent, 'term'))
+		// Sort the results.
+		const sortedByIdentifier = sortByAll(results, ['deptnum', 'sect'])
+		// Group them by term, then turn the object into an array of pairs.
+		const groupedAndPaired = pairs(groupBy(sortedByIdentifier, 'term'))
 		// Sort the result arrays by the first element, the term, because
 		// object keys don't have an implicit sort. Also reverse it, so the
 		// most recent is at the top.
-		const sortedByTerm = sortBy(groupedAndPaired, group => group[0]).reverse()
-		// flatten once, to merge the [date, courses] arrays,
-		// then flatten once more, to raise the courses into the array
-		const searchResults = flatten(flatten(sortedByTerm))
+		const searchResults = sortBy(groupedAndPaired, group => group[0]).reverse()
 
 		console.log('search results', searchResults)
 		let endQueryTime = present()
@@ -97,7 +92,7 @@ let CourseSearcher = React.createClass({
 		}
 
 		this.setState({results: [], hasQueried: false})
-		let startQueryTime = present()
+		const startQueryTime = present()
 
 		queryCourseDatabase(searchQuery)
 			.then(results => [results, startQueryTime])
@@ -109,8 +104,8 @@ let CourseSearcher = React.createClass({
 
 	render() {
 		// console.log('SearchButton#render')
-		let showNoResults = this.state.results.length === 0 && this.state.hasQueried
-		let showIndicator = this.state.queryInProgress
+		const showNoResults = this.state.results.length === 0 && this.state.hasQueried
+		const showIndicator = this.state.queryInProgress
 
 		let contents = <li className='no-results'>No Results Found</li>
 
@@ -119,16 +114,27 @@ let CourseSearcher = React.createClass({
 		}
 
 		else if (!showNoResults) {
-			contents = map(this.state.results, (courseOrTerm, index) =>
-				isObject(courseOrTerm)  // is it a course or a term?
-					? <li key={index}><Course info={courseOrTerm} /></li>
-					: <li key={index} className='course-group'>{toPrettyTerm(courseOrTerm)}</li>)
+			contents = map(this.state.results, ([term, courses]) =>
+				<li key={term} className='course-group'>
+					<p className='course-group-title'>{toPrettyTerm(term)}</p>
+					<ul className='course-list'>
+						{map(courses, (course, index) =>
+							<li key={index}><Course info={course} /></li>)}
+					</ul>
+				</li>
+			)
 		}
 
 		return (
-			<div className={cx('search-sidebar', {'is-hidden': this.props.isHidden})}>
+			<div className={cx('search-sidebar', this.props.isHidden && 'is-hidden')}>
 				<header className='sidebar-heading'>
-					<h1>Search for Courses</h1>
+					<input type='search' className='search-box'
+						placeholder='Search Courses'
+						defaultValue={this.state.query}
+						onChange={this.onChange}
+						onKeyDown={this.onKeyDown}
+						autoFocus={true}
+					/>
 					<Button
 						className='close-sidebar'
 						title='Close Sidebar'
@@ -138,14 +144,7 @@ let CourseSearcher = React.createClass({
 					</Button>
 				</header>
 
-				<input type='search' className='search-box'
-					placeholder='Search Courses'
-					defaultValue={this.state.query}
-					onChange={this.onChange}
-					onKeyDown={this.onKeyDown}
-					autoFocus={true} />
-
-				<ul className='course-list'>
+				<ul className='term-list'>
 					{contents}
 				</ul>
 			</div>
