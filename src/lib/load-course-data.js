@@ -57,8 +57,14 @@ async function storeCourses(item) {
 		await courseDb.bulkDocs(coursesToStore)
 	}
 	catch (err) {
-		console.error(err)
-		throw err
+		if (err.name === 'indexed_db_went_bad') {
+			notificationActions.logError({message: err.reason, quiet: true})
+			throw err
+		}
+		else {
+			console.error(err)
+			throw err
+		}
 	}
 
 	log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
@@ -78,10 +84,22 @@ async function storeArea(item) {
 	}
 
 	try {
-		await areaDb.put(area)
+		await areaDb.store('areas').put(area)
 	}
-	catch(err) {
-		throw err
+	catch (err) {
+		// handle 409=conflict errors
+		if (err.name === 'conflict') {
+			const doc = await areaDb.get(id)
+			await areaDb.remove(doc)
+			await areaDb.put(area)
+		}
+		else if (err.name === 'indexed_db_went_bad') {
+			notificationActions.logError({message: err.reason, quiet: true})
+			throw err
+		}
+		else {
+			throw err
+		}
 	}
 
 	return item
