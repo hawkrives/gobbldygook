@@ -64,7 +64,7 @@
     "present": "0.0.6",
     "react": "0.13.3",
     "react-dnd": "1.1.5",
-    "react-document-title": "1.0.4",
+    "react-document-title": "2.0.0",
     "react-router": "0.13.3",
     "reflux": "0.2.12",
     "sha1": "1.1.1",
