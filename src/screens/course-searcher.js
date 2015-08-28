@@ -1,6 +1,5 @@
-import React, {PropTypes, findDOMNode} from 'react'
+import React, {Component, PropTypes, findDOMNode} from 'react'
 import cx from 'classnames'
-import {State} from 'react-router'
 
 import groupBy from 'lodash/collection/groupBy'
 import map from 'lodash/collection/map'
@@ -20,13 +19,11 @@ import stickyfill from '../lib/init-stickyfill'
 
 import './course-searcher.scss'
 
-let CourseSearcher = React.createClass({
-	propTypes: {
+export default class CourseSearcher extends Component {
+	static propTypes = {
 		isHidden: PropTypes.bool,
 		toggle: PropTypes.func.isRequired,
-	},
-
-	mixins: [State],
+	}
 
 	getInitialState() {
 		return {
@@ -37,33 +34,33 @@ let CourseSearcher = React.createClass({
 			lastQuery: '',
 			queryInProgress: false,
 		}
-	},
+	}
 
 	componentDidMount() {
 		stickyfill.add(findDOMNode(this))
-	},
+	}
 
 	componentWillUnmount() {
 		stickyfill.remove(findDOMNode(this))
-	},
+	}
 
-	onSubmit() {
+	onSubmit = () => {
 		if (this.state.queryString !== this.state.lastQuery) {
 			this.query(this.state.queryString)
 		}
-	},
+	}
 
-	onChange(evt) {
+	onChange = evt => {
 		this.setState({queryString: evt.target.value})
-	},
+	}
 
-	onKeyDown(evt) {
+	onKeyDown = evt => {
 		if (evt.keyCode === 13) {
 			this.onSubmit()
 		}
-	},
+	}
 
-	processQueryResults([results, startQueryTime]=[]) {
+	processQueryResults = ([results, startQueryTime]=[]) => {
 		console.log('results', results)
 
 		// Sort the results.
@@ -84,9 +81,9 @@ let CourseSearcher = React.createClass({
 			hasQueried: true,
 			queryInProgress: false,
 		})
-	},
+	}
 
-	query(searchQuery) {
+	query = searchQuery => {
 		if (searchQuery.length === 0 || this.state.queryInProgress) {
 			return
 		}
@@ -100,7 +97,7 @@ let CourseSearcher = React.createClass({
 			.catch(err => console.error(err))
 
 		this.setState({queryInProgress: true, lastQuery: searchQuery})
-	},
+	}
 
 	render() {
 		// console.log('SearchButton#render')
@@ -149,7 +146,5 @@ let CourseSearcher = React.createClass({
 				</ul>
 			</div>
 		)
-	},
-})
-
-export default CourseSearcher
+	}
+}
