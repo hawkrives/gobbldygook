@@ -73,9 +73,13 @@ async function storeCourses(item) {
 async function storeArea(item) {
 	log(item.path, 'called storeArea')
 
-	let area = item.data
-	area.sourcePath = item.path
-	area.type = area.type.toLowerCase()
+	const id = item.path
+
+	let area = {
+		...item.data,
+		sourcePath: item.path,
+		type: item.data.type.toLowerCase(),
+	}
 
 	try {
 		await db.store('areas').put(area)
@@ -138,27 +142,29 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 
 	if (hash === oldHash) {
 		log('skipped ' + itemUrl)
-		return false
+		return true
 	}
 
 	notificationActions.startProgress(notificationId, `Loading ${type}`, {max: count}, true)
 
-	log(`need to add ${itemUrl}`)
+	log(`need to add ${path}`)
 
+	const url = infoFileBase + itemUrl
 	let data = undefined
 	try {
-		data = await fetch(infoFileBase + itemUrl)
+		data = await fetch(url)
 			.then(status)
 			.then(text)
 	}
-	catch (e) {
-		throw e
+	catch (err) {
+		console.error('Could not fetch ${url}')
+		return false
 	}
 
 	try {
 		data = JSON.parse(data)
 	}
-	catch(e) {
+	catch (err) {
 		data = yaml.safeLoad(data)
 	}
 
@@ -197,19 +203,20 @@ async function loadDataFiles(infoFile, infoFileBase) {
 	}
 
 	// Load them into the database
-	let filePromises = map(filesToLoad, file =>
-		updateDatabase(infoFile.type, file, infoFileBase, notificationId, size(filesToLoad)))
-
-	await* filePromises
+	await* map(filesToLoad, file =>
+		updateDatabase(infoFile.type, file, infoFileBase, notificationId, size(filesToLoad))
+			.catch(err => {
+				throw err
+			}))
 
 	notificationActions.removeNotification(notificationId, 1500)
 }
 
 async function loadInfoFile(url, infoFileBase) {
 	log('loading ' + url)
-	let data
+	let infoFile
 	try {
-		data = await fetch(url).then(status).then(json)
+		infoFile = await fetch(url).then(status).then(json)
 	}
 	catch (err) {
 		if (err.message.startsWith('Failed to fetch')) {
@@ -220,10 +227,16 @@ async function loadInfoFile(url, infoFileBase) {
 			throw err
 		}
 	}
-	loadDataFiles(data, infoFileBase)
+
+	try {
+		await loadDataFiles(infoFile, infoFileBase)
+	}
+	catch (err) {
+		throw err
+	}
 }
 
-async function loadData() {
+export default async function loadData() {
 	const cachebuster = Date.now()
 
 	const infoFiles = [
@@ -238,7 +251,11 @@ async function loadData() {
 			.then(path => path.trim())
 			.catch(err => console.error(err)))
 
-	await* map(processedFiles, path => loadInfoFile(`${path}/info.json?${cachebuster}`, path))
+	try {
+		await* map(processedFiles, path => loadInfoFile(`${path}/info.json?${cachebuster}`, path))
+	}
+	catch (err) {
+		console.error(err)
+		throw err
+	}
 }
-
-export default loadData
