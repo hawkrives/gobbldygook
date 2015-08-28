@@ -1,5 +1,5 @@
 import 'lie/polyfill'
-import 'whatwg-fetch'
+import 'isomorphic-fetch'
 
 import React from 'react'
 React.initializeTouchEvents(true)
