@@ -2,6 +2,7 @@ import assertKeys from './assert-keys'
 import assign from 'lodash/object/assign'
 import collectMatches from './collect-matches'
 import collectUsedCourses from './collect-used-courses'
+import computeCountWithOperator from './compute-count-with-operator'
 import compact from 'lodash/array/compact'
 import countCourses from './count-courses'
 import countCredits from './count-credits'
@@ -171,26 +172,6 @@ export function computeCourse({expr, courses, dirty}) {
 	dirty.add(crsid)
 	expr._used = true
 	return {computedResult: true, match}
-}
-
-
-function computeCountWithOperator({comparator, has, needs}) {
-	if (comparator !== '$eq' && comparator !== '$lte' && comparator !== '$gte') {
-		throw new SyntaxError(`computeModifier(): "${comparator}" must be one of $eq, $lte, or $gte.`)
-	}
-
-	// compute the result
-	if (comparator === '$lte') {
-		return has <= needs
-	}
-	else if (comparator === '$gte') {
-		return has >= needs
-	}
-	else if (comparator === '$eq') {
-		return has === needs
-	}
-
-	return false
 }
 
 
