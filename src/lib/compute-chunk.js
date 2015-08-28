@@ -189,6 +189,7 @@ function computeCountWithOperator({comparator, has, needs}) {
 	else if (comparator === '$eq') {
 		return has === needs
 	}
+
 	return false
 }
 
@@ -282,6 +283,7 @@ export function computeOf({expr, ctx, courses, dirty}) {
 	// Go through $of, incrementing count if result of the thing is true.
 	// takeWhile runs until it recieves a `false`, so we stop when
 	// count >= expr.$count.$num
+	//
 	// let count = 0
 	// takeWhile(expr.$of, req => {
 	//     count += Number(computeChunk({expr: req, ctx, courses, dirty}))
