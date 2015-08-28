@@ -477,4 +477,8 @@ describe('computeModifier', () => {
         expect(departmentResults.counted)
             .to.equal(2)
     })
+
+    it('throws when $what is none of "course", "credit", nor "department"', () => {
+        expect(() => computeModifier({expr: {$what: 'invalid', $from: {}, $count: {}}})).to.throw(TypeError)
+    })
 })

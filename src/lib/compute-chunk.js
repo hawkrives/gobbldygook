@@ -187,7 +187,7 @@ export function computeModifier({expr, ctx, courses}) {
 	const what = expr.$what
 
 	if (what !== 'course' && what !== 'credit' && what !== 'department') {
-		throw new SyntaxError(`computeModifier(): "${what}" is not a valid source for a modifier`)
+		throw new TypeError(`computeModifier(): "${what}" is not a valid source for a modifier`)
 	}
 
 	let filtered = []
