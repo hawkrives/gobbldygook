@@ -19,9 +19,11 @@ export async function loadArea({name, type}) {
 
 	const path = `${pluralizeArea(type)}/${kebabCase(name)}.yaml`
 
-	let data = await db.store('areas').get(path)
-
-	if (!data) {
+	let data
+	try {
+		data = await areaDb.get(path)
+	}
+	catch (err) {
 		throw new Error(`Could not load area ${path}`)
 	}
 
