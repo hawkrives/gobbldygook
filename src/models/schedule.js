@@ -22,7 +22,7 @@ const ScheduleRecord = Immutable.Record({
 	index: 1,
 	title: 'Schedule ' + randomChar().toUpperCase(),
 	clbids: Immutable.List(),
-	_courseData: Promise.resolve(Immutable.List()),
+	_courseData: Promise.resolve([]),
 })
 
 export default class Schedule extends ScheduleRecord {
