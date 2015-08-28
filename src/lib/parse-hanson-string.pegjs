@@ -200,7 +200,7 @@ of_list
 of
   = count:(
         counter
-      / 'all' { return { $operator: '$lte', $was: 'all' } }
+      / 'all' { return { $operator: '$eq', $was: 'all' } }
       / 'any' { return { $operator: '$gte', $num: 1, $was: 'any' } }
       / 'none' { return { $operator: '$eq', $num: 0, $was: 'none' } }
     )

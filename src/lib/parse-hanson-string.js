@@ -438,7 +438,7 @@ module.exports = (function() {
 			},
 			peg$c110 = function peg$c110() {
 				return {
-					$operator: '$lte',
+					$operator: '$eq',
 					$was: 'all'
 				};
 			},

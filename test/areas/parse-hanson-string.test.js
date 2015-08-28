@@ -469,7 +469,7 @@ describe('parse hanson-string', () => {
         it('if n is "all", it is the number of items in the of-parens', () => {
             const result = parse('all of (A, B, C)')
             expect(result).to.have.property('$count')
-            expect(result.$count).to.deep.equal({$operator: '$lte', $num: 3, $was: 'all'})
+            expect(result.$count).to.deep.equal({$operator: '$eq', $num: 3, $was: 'all'})
         })
         it('allows "n" to be "any"', () => {
             expect(() => parse('any of (A, B, C)')).to.not.throw()
