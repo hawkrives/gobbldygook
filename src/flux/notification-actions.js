@@ -8,6 +8,4 @@ let notificationActions = Reflux.createActions([
 	'incrementProgress',
 ])
 
-window.notificationa = notificationActions
-
 export default notificationActions
