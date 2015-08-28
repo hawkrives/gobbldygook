@@ -13,6 +13,7 @@ env:
   es6: true
 
 globals:
+  global: false
   require: false
   process: false
 
