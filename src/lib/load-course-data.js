@@ -1,6 +1,7 @@
 import map from 'lodash/collection/map'
 import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
+import startsWith from 'lodash/string/startsWith'
 import present from 'present'
 import yaml from 'js-yaml'
 
@@ -218,7 +219,7 @@ async function loadInfoFile(url, infoFileBase) {
 		infoFile = await fetch(url).then(status).then(json)
 	}
 	catch (err) {
-		if (err.message.startsWith('Failed to fetch')) {
+		if (startsWith(err.message, 'Failed to fetch')) {
 			console.error(`loadInfoFile(): Failed to fetch ${url}`)
 			return false
 		}
