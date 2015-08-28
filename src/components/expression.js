@@ -4,6 +4,7 @@ import CourseExpression from './expression--course'
 
 import cx from 'classnames'
 import plur from 'plur'
+import humanizeOperator from './humanize-operator'
 
 import './expression.scss'
 
@@ -35,7 +36,7 @@ function makeBooleanExpression({expr, ctx}) {
 }
 
 function makeOfExpression({expr, ctx}) {
-	const description = `${expr._counted || 0} of ${expr.$count} from among`
+	const description = `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
 
 	const contents = expr.$of.map((ex, i) =>
 				<Expression key={i} expr={ex} ctx={ctx} />)
@@ -44,13 +45,13 @@ function makeOfExpression({expr, ctx}) {
 }
 
 function makeModifierExpression({expr}) {
-	const description = `${expr._counted} of ${expr.$count} ${plur(expr.$what, expr.$count)} from ${expr.$from}`
+	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} from ${expr.$from}`
 
 	return {description}
 }
 
 function makeWhereExpression({expr}) {
-	const description = `${expr._counted} of ${expr.$count} from ${expr.$where.$key} ${expr.$where.$operator} ${expr.$where.$value}`
+	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from ${expr.$where.$key} ${expr.$where.$operator} ${expr.$where.$value}`
 
 	return {description}
 }

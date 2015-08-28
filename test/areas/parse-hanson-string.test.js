@@ -467,8 +467,9 @@ describe('parse hanson-string', () => {
             expect(() => parse('all of (A, B, C)')).to.not.throw()
         })
         it('if n is "all", it is the number of items in the of-parens', () => {
-            expect(parse('all of (A, B, C)')).to
-                .have.property('$count', 3)
+            const result = parse('all of (A, B, C)')
+            expect(result).to.have.property('$count')
+            expect(result.$count).to.deep.equal({$operator: '$lte', $num: 3, $was: 'all'})
         })
         it('allows "n" to be "any"', () => {
             expect(() => parse('any of (A, B, C)')).to.not.throw()
@@ -480,7 +481,7 @@ describe('parse hanson-string', () => {
         it('supports boolean statements within the parens', () => {
             expect(parse('one of (A | B & C, D)')).to.deep.equal({
                 $type: 'of',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $of: [
                     {
                         $type: 'boolean',
@@ -514,7 +515,7 @@ describe('parse hanson-string', () => {
         it('supports courses within the parens', () => {
             expect(parse('one of (CSCI 121)')).to.deep.equal({
                 $type: 'of',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $of: [
                     {
                         $type: 'course',
@@ -547,7 +548,7 @@ describe('parse hanson-string', () => {
         it('supports trailing commas', () => {
             expect(parse('one of (121,)')).to.deep.equal({
                 $type: 'of',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $of: [
                     {
                         $type: 'course',
@@ -558,7 +559,7 @@ describe('parse hanson-string', () => {
         })
 
         it('throws an error if more items are required than are provided', () => {
-            expect(() => parse('three of (CSCI 121, 125)')).to.throw('you requested 3 items, but only listed 2 options ([{"$type":"course","$course":{"department":["CSCI"],"number":121}},{"$type":"course","$course":{"department":["CSCI"],"number":125}}])')
+            expect(() => parse('three of (CSCI 121, 125)')).to.throw('you requested 3 items, but only gave 2 options ([{"$type":"course","$course":{"department":["CSCI"],"number":121}},{"$type":"course","$course":{"department":["CSCI"],"number":125}}])')
         })
     })
     describe('where-statements', () => {
@@ -596,7 +597,7 @@ describe('parse hanson-string', () => {
             it('function may include a space between the name and the paren', () => {
                 expect(parse('one course where { year = max (year) from courses where {gereqs=year} }')).to.deep.equal({
                     $type: 'where',
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $where: {
                         $type: 'qualification',
                         $key: 'year',
@@ -618,7 +619,7 @@ describe('parse hanson-string', () => {
             it('function may not include a space between the name and the paren', () => {
                 expect(parse('one course where { year = max(year) from courses where {gereqs=year} }')).to.deep.equal({
                     $type: 'where',
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $where: {
                         $type: 'qualification',
                         $key: 'year',
@@ -673,7 +674,7 @@ describe('parse hanson-string', () => {
         it('requires a course to check for occurrences of', () => {
             expect(parse('one occurrence of CSCI 121')).to.deep.equal({
                 $type: 'occurrence',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $course: {
                     department: [
                         'CSCI',
@@ -736,7 +737,7 @@ describe('parse hanson-string', () => {
         it('can count courses', () => {
             expect(parse('one course from children')).to.deep.equal({
                 $type: 'modifier',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $what: 'course',
                 $from: 'children',
                 $children: '$all',
@@ -745,7 +746,7 @@ describe('parse hanson-string', () => {
         it('can count credits', () => {
             expect(parse('one credit from children')).to.deep.equal({
                 $type: 'modifier',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $what: 'credit',
                 $from: 'children',
                 $children: '$all',
@@ -754,7 +755,7 @@ describe('parse hanson-string', () => {
         it('can count departments', () => {
             expect(parse('one department from children')).to.deep.equal({
                 $type: 'modifier',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $what: 'department',
                 $from: 'children',
                 $children: '$all',
@@ -768,7 +769,7 @@ describe('parse hanson-string', () => {
         it('can count from children', () => {
             expect(parse('one course from children')).to.deep.equal({
                 $type: 'modifier',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $what: 'course',
                 $from: 'children',
                 $children: '$all',
@@ -777,7 +778,7 @@ describe('parse hanson-string', () => {
         it('can count from specified children', () => {
             expect(parse('one course from (A, B)')).to.deep.equal({
                 $type: 'modifier',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $what: 'course',
                 $from: 'children',
                 $children: [{$requirement: 'A', $type: 'reference'}, {$requirement: 'B', $type: 'reference'}],
@@ -785,7 +786,7 @@ describe('parse hanson-string', () => {
 
             expect(parse('one course from (BTS-B, B)', {abbreviations: {'BTS-B': 'Bible'}})).to.deep.equal({
                 $type: 'modifier',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $what: 'course',
                 $from: 'children',
                 $children: [{$requirement: 'Bible', $type: 'reference'}, {$requirement: 'B', $type: 'reference'}],
@@ -794,7 +795,7 @@ describe('parse hanson-string', () => {
         it('can count from filter', () => {
             expect(parse('one course from filter')).to.deep.equal({
                 $type: 'modifier',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $what: 'course',
                 $from: 'filter',
             })
@@ -802,7 +803,7 @@ describe('parse hanson-string', () => {
         it('can count from where-statement', () => {
             expect(parse('one course from courses where {a = b}')).to.deep.equal({
                 $type: 'modifier',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $what: 'course',
                 $from: 'where',
                 $where: {
