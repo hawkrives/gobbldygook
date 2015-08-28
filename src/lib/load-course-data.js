@@ -141,7 +141,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 	let itemUrl = `/${path}?v=${hash}`
 
 	if (hash === oldHash) {
-		log('skipped ' + itemUrl)
+		log(`skipped ${path}`)
 		return true
 	}
 
