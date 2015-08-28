@@ -5,7 +5,7 @@ describe('getMatchesFromChildren', () => {
         const requirement = {
             result: {
                 $type: 'modifier',
-                $count: 2,
+                $count: {$operator: '$gte', $num: 2},
                 $what: 'course',
                 $from: 'children',
                 $children: '$all',
@@ -14,12 +14,12 @@ describe('getMatchesFromChildren', () => {
                 $type: 'requirement',
                 result: {
                     $type: 'of',
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $of: [
                         {$type: 'course', department: ['CSCI'], number: 121, _result: true},
                         {
                             $type: 'of',
-                            $count: 2,
+                            $count: {$operator: '$gte', $num: 2},
                             $of: [
                                 {$type: 'course', department: ['ASIAN'], number: 130, _result: true},
                                 {$type: 'course', department: ['ASIAN'], number: 275, _result: true},
@@ -27,7 +27,7 @@ describe('getMatchesFromChildren', () => {
                         },
                         {
                             $type: 'where',
-                            $count: 1,
+                            $count: {$operator: '$gte', $num: 1},
                             $where: {
                                 $type: 'qualification',
                                 $key: 'gereqs',
@@ -37,7 +37,7 @@ describe('getMatchesFromChildren', () => {
                         },
                         {
                             $type: 'occurrence',
-                            $count: 2,
+                            $count: {$operator: '$gte', $num: 2},
                             course: {$type: 'course', department: ['THEAT'], number: 222},
                             _matches: [
                                 {$type: 'course', department: ['THEAT'], number: 222, _result: true, year: 2014},
@@ -63,7 +63,7 @@ describe('getMatchesFromChildren', () => {
         const requirement = {
             result: {
                 $type: 'modifier',
-                $count: 2,
+                $count: {$operator: '$gte', $num: 2},
                 $what: 'course',
                 $from: 'children',
                 $children: '$all',
@@ -72,12 +72,12 @@ describe('getMatchesFromChildren', () => {
                 $type: 'requirement',
                 result: {
                     $type: 'of',
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $of: [
                         {$type: 'course', department: ['CSCI'], gereqs: ['AQR'], number: 121, _result: true},
                         {
                             $type: 'of',
-                            $count: 2,
+                            $count: {$operator: '$gte', $num: 2},
                             $of: [
                                 {$type: 'course', department: ['ASIAN'], number: 130, _result: true},
                                 {$type: 'course', department: ['ASIAN'], number: 275, _result: true},
@@ -85,7 +85,7 @@ describe('getMatchesFromChildren', () => {
                         },
                         {
                             $type: 'where',
-                            $count: 1,
+                            $count: {$operator: '$gte', $num: 1},
                             $where: {
                                 $type: 'qualification',
                                 $key: 'gereqs',
@@ -97,7 +97,7 @@ describe('getMatchesFromChildren', () => {
                         },
                         {
                             $type: 'occurrence',
-                            $count: 2,
+                            $count: {$operator: '$gte', $num: 2},
                             course: {$type: 'course', department: ['THEAT'], number: 222},
                             _matches: [
                                 {$type: 'course', department: ['THEAT'], number: 222, _result: true, year: 2014},

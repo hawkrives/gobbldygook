@@ -210,7 +210,7 @@ describe('computeBoolean', () => {
             $and: [
                 {
                     $children: '$all',
-                    $count: 3,
+                    $count: {$operator: '$gte', $num: 3},
                     $from: 'children',
                     $type: 'modifier',
                     $what: 'course',
@@ -226,7 +226,7 @@ describe('computeBoolean', () => {
                             $type: 'reference',
                         },
                     ],
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $from: 'children',
                     $type: 'modifier',
                     $what: 'credit',
@@ -237,7 +237,7 @@ describe('computeBoolean', () => {
         const requirement = {
             A: {$type: 'requirement', result: {$type: 'course', $course: {department: ['ART'], number: 120}}},
             C: {$type: 'requirement', result: {
-                $count: 2,
+                $count: {$operator: '$gte', $num: 2},
                 $of: [
                     {$type: 'course', $course: {department: ['ART'], number: 103}},
                     {$type: 'course', $course: {department: ['ART'], number: 104}},
@@ -263,7 +263,7 @@ describe('computeBoolean', () => {
             $and: [
                 {
                     $children: '$all',
-                    $count: 3,
+                    $count: {$operator: '$gte', $num: 3},
                     $from: 'children',
                     $type: 'modifier',
                     $what: 'course',
@@ -280,7 +280,7 @@ describe('computeBoolean', () => {
                         {$requirement: 'A', $type: 'reference'},
                         {$requirement: 'C', $type: 'reference'},
                     ],
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $from: 'children',
                     $type: 'modifier',
                     $what: 'credit',
@@ -307,12 +307,12 @@ describe('computeBoolean', () => {
         const clause = {
             $or: [
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $course: {department: ['THEAT'], number: 222},
                     $type: 'occurrence',
                 },
                 {
-                    $count: 3,
+                    $count: {$operator: '$gte', $num: 3},
                     $course: {department: ['THEAT'], number: 266},
                     $type: 'occurrence',
                 },
@@ -332,7 +332,7 @@ describe('computeBoolean', () => {
         expect(clause).to.deep.equal({
             $or: [
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $course: {department: ['THEAT'], number: 222},
                     $type: 'occurrence',
                     _result: false,
@@ -340,7 +340,7 @@ describe('computeBoolean', () => {
                     _matches: [],
                 },
                 {
-                    $count: 3,
+                    $count: {$operator: '$gte', $num: 3},
                     $course: {department: ['THEAT'], number: 266},
                     $type: 'occurrence',
                     _result: true,
@@ -366,7 +366,7 @@ describe('computeBoolean', () => {
         const clause = {
             $and: [
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $of: [
                         {$course: {department: ['CSCI'], number: 121}, $type: 'course'},
                         {$course: {department: ['CSCI'], number: 125}, $type: 'course'},
@@ -374,7 +374,7 @@ describe('computeBoolean', () => {
                     $type: 'of',
                 },
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $of: [
                         {$course: {department: ['ART'], number: 102}, $type: 'course'},
                         {$course: {department: ['ART'], number: 103}, $type: 'course'},
@@ -396,7 +396,7 @@ describe('computeBoolean', () => {
         expect(clause).to.deep.equal({
             $and: [
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $of: [
                         {_result: false, $course: {department: ['CSCI'], number: 121}, $type: 'course'},
                         {_used: true, _result: true, $course: {department: ['CSCI'], number: 125}, $type: 'course'},
@@ -409,7 +409,7 @@ describe('computeBoolean', () => {
                     _result: true,
                 },
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $of: [
                         {_used: true, _result: true, $course: {department: ['ART'], number: 102}, $type: 'course'},
                         {_result: false, $course: {department: ['ART'], number: 103}, $type: 'course'},
@@ -444,7 +444,7 @@ describe('computeBoolean', () => {
                 $type: 'course', $course: {department: ['ART'], number: 120},
             }},
             C: {$type: 'requirement', result: {
-                $count: 2,
+                $count: {$operator: '$gte', $num: 2},
                 $of: [
                     {$type: 'course', $course: {department: ['ART'], number: 103}},
                     {$type: 'course', $course: {department: ['ART'], number: 104}},
@@ -500,7 +500,7 @@ describe('computeBoolean', () => {
         const clause = {
             $and: [
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $type: 'where',
                     $where: {
                         $key: 'gereqs',
@@ -510,7 +510,7 @@ describe('computeBoolean', () => {
                     },
                 },
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $type: 'where',
                     $where: {
                         $key: 'gereqs',
@@ -534,7 +534,7 @@ describe('computeBoolean', () => {
         expect(clause).to.deep.equal({
             $and: [
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $type: 'where',
                     $where: {
                         $key: 'gereqs',
@@ -549,7 +549,7 @@ describe('computeBoolean', () => {
                     _result: true,
                 },
                 {
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $type: 'where',
                     $where: {
                         $key: 'gereqs',

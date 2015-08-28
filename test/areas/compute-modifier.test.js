@@ -5,7 +5,7 @@ describe('computeModifier', () => {
     it('checks for <things> from all children', () => {
         const modifier = {
             $type: 'modifier',
-            $count: 1,
+            $count: {$operator: '$gte', $num: 1},
             $what: 'course',
             $from: 'children',
             $children: '$all',
@@ -46,7 +46,7 @@ describe('computeModifier', () => {
 
         expect(modifier).to.deep.equal({
             $type: 'modifier',
-            $count: 1,
+            $count: {$operator: '$gte', $num: 1},
             $what: 'course',
             $from: 'children',
             $children: '$all',
@@ -56,7 +56,7 @@ describe('computeModifier', () => {
     it('checks for <things> from specified children', () => {
         const modifier = {
             $type: 'modifier',
-            $count: 1,
+            $count: {$operator: '$gte', $num: 1},
             $what: 'course',
             $from: 'children',
             $children: [{$type: 'reference', $requirement: 'Bible'}],
@@ -97,7 +97,7 @@ describe('computeModifier', () => {
 
         expect(modifier).to.deep.equal({
             $type: 'modifier',
-            $count: 1,
+            $count: {$operator: '$gte', $num: 1},
             $what: 'course',
             $from: 'children',
             $children: [{$type: 'reference', $requirement: 'Bible'}],
@@ -107,7 +107,7 @@ describe('computeModifier', () => {
     it('checks for <things> from the filter', () => {
         const modifier = {
             $type: 'modifier',
-            $count: 1,
+            $count: {$operator: '$gte', $num: 1},
             $what: 'course',
             $from: 'filter',
         }
@@ -148,7 +148,7 @@ describe('computeModifier', () => {
 
         expect(modifier).to.deep.equal({
             $type: 'modifier',
-            $count: 1,
+            $count: {$operator: '$gte', $num: 1},
             $what: 'course',
             $from: 'filter',
         })
@@ -157,7 +157,7 @@ describe('computeModifier', () => {
     it('checks for <things> from the given where-clause', () => {
         const modifier = {
             $type: 'modifier',
-            $count: 1,
+            $count: {$operator: '$gte', $num: 1},
             $what: 'course',
             $from: 'where',
             $where: {
@@ -191,7 +191,7 @@ describe('computeModifier', () => {
 
         expect(modifier).to.deep.equal({
             $type: 'modifier',
-            $count: 1,
+            $count: {$operator: '$gte', $num: 1},
             $what: 'course',
             $from: 'where',
             $where: {
@@ -207,7 +207,7 @@ describe('computeModifier', () => {
         it('courses', () => {
             const modifier = {
                 $type: 'modifier',
-                $count: 3,
+                $count: {$operator: '$gte', $num: 3},
                 $what: 'course',
                 $from: 'children',
                 $children: '$all',
@@ -258,7 +258,7 @@ describe('computeModifier', () => {
 
             expect(modifier).to.deep.equal({
                 $type: 'modifier',
-                $count: 3,
+                $count: {$operator: '$gte', $num: 3},
                 $what: 'course',
                 $from: 'children',
                 $children: '$all',
@@ -268,7 +268,7 @@ describe('computeModifier', () => {
         it('departments', () => {
             const modifier = {
                 $type: 'modifier',
-                $count: 3,
+                $count: {$operator: '$gte', $num: 3},
                 $what: 'department',
                 $from: 'children',
                 $children: '$all',
@@ -319,7 +319,7 @@ describe('computeModifier', () => {
 
             expect(modifier).to.deep.equal({
                 $type: 'modifier',
-                $count: 3,
+                $count: {$operator: '$gte', $num: 3},
                 $what: 'department',
                 $from: 'children',
                 $children: '$all',
@@ -329,7 +329,7 @@ describe('computeModifier', () => {
         it('credits', () => {
             const modifier = {
                 $type: 'modifier',
-                $count: 2,
+                $count: {$operator: '$gte', $num: 2},
                 $what: 'credit',
                 $from: 'children',
                 $children: '$all',
@@ -380,7 +380,7 @@ describe('computeModifier', () => {
 
             expect(modifier).to.deep.equal({
                 $type: 'modifier',
-                $count: 2,
+                $count: {$operator: '$gte', $num: 2},
                 $what: 'credit',
                 $from: 'children',
                 $children: '$all',
@@ -394,14 +394,14 @@ describe('computeModifier', () => {
             $and: [
                 {
                     $type: 'modifier',
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $what: 'course',
                     $from: 'children',
                     $children: '$all',
                 },
                 {
                     $type: 'modifier',
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $what: 'department',
                     $from: 'children',
                     $children: '$all',
@@ -444,14 +444,14 @@ describe('computeModifier', () => {
             $and: [
                 {
                     $type: 'modifier',
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $what: 'course',
                     $from: 'children',
                     $children: '$all',
                 },
                 {
                     $type: 'modifier',
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $what: 'department',
                     $from: 'children',
                     $children: '$all',
