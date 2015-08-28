@@ -25,8 +25,9 @@ export default class CourseSearcher extends Component {
 		toggle: PropTypes.func.isRequired,
 	}
 
-	getInitialState() {
-		return {
+	constructor() {
+		super()
+		this.state = {
 			isQuerying: false,
 			hasQueried: false,
 			results: [],
