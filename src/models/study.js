@@ -21,7 +21,7 @@ export async function loadArea({name, type}) {
 
 	let data
 	try {
-		data = await areaDb.get(path)
+		data = await db.store('areas').get(path)
 	}
 	catch (err) {
 		throw new Error(`Could not load area ${path}`)
