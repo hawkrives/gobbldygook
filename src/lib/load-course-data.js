@@ -7,7 +7,11 @@ import yaml from 'js-yaml'
 
 import notificationActions from '../flux/notification-actions'
 import {status, json, text} from './fetch-helpers'
-import db from './db'
+import {
+	courseDb,
+	areaDb,
+	cacheDb,
+} from './db'
 
 import buildDept from '../helpers/build-dept'
 import buildDeptNum from '../helpers/build-dept-num'
@@ -43,27 +47,24 @@ async function storeCourses(item) {
 	log('storing courses')
 	const start = present()
 
-	let coursesToStore = map(item.data, course => {
+	const coursesToStore = map(item.data, course => {
+		course._id = String(course.clbid)
 		course.sourcePath = item.path
 		return prepareCourse(course)
 	})
 
 	try {
-		await db.store('courses').batch(coursesToStore)
+		await courseDb.bulkDocs(coursesToStore)
 	}
-	catch (e) {
-		const db = e.target.db.name
-		const errorName = e.target.error.name
-
-		if (errorName === 'QuotaExceededError') {
-			notificationActions.logError({
-				id: 'db-storage-quota-exceeded',
-				message: `The database "${db}" has exceeded its storage quota.`,
-			})
+	catch (err) {
+		if (err.name === 'indexed_db_went_bad') {
+			notificationActions.logError({message: err.reason, quiet: true})
+			throw err
 		}
-
-		console.error(e.target)
-		throw e
+		else {
+			console.error(err)
+			throw err
+		}
 	}
 
 	log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
@@ -79,13 +80,26 @@ async function storeArea(item) {
 		...item.data,
 		sourcePath: item.path,
 		type: item.data.type.toLowerCase(),
+		_id: id,
 	}
 
 	try {
-		await db.store('areas').put(area)
+		await areaDb.store('areas').put(area)
 	}
-	catch(e) {
-		throw e
+	catch (err) {
+		// handle 409=conflict errors
+		if (err.name === 'conflict') {
+			const doc = await areaDb.get(id)
+			await areaDb.remove(doc)
+			await areaDb.put(area)
+		}
+		else if (err.name === 'indexed_db_went_bad') {
+			notificationActions.logError({message: err.reason, quiet: true})
+			throw err
+		}
+		else {
+			throw err
+		}
 	}
 
 	return item
@@ -103,40 +117,67 @@ function storeItem(item) {
 async function cleanPriorData({path, type}) {
 	log(`deleting ${type} from ${path}`)
 
+	let db
+	if (type === 'courses') {
+		db = courseDb
+	}
+	else if (type === 'areas') {
+		db = areaDb
+	}
+	else {
+		throw new ReferenceError(`"${type}" is not a valid database!`)
+	}
+
 	let oldItems = []
-
 	try {
-		oldItems = await db.store(type)
-			.index('sourcePath')
-			.get(path)
+		oldItems = await db.find({
+			selector: {sourcePath: {$eq: path}},
+			fields: ['_id', '_rev'],  // only return what we need to delete them
+		})
 	}
 	catch (e) {
 		throw e
 	}
 
-	oldItems = map(oldItems, item => (
-		{[item.clbid || item.sourcePath]: null}
-	))
+	oldItems = map(oldItems, item => ({...item, _deleted: true}))
 
 	try {
-		await db.store(type).batch(oldItems)
+		await db.bulkDocs(oldItems)
 	}
 	catch (e) {
 		throw e
 	}
 
-	localStorage.removeItem(path)
+	try {
+		const oldHashDoc = await cacheDb.get(path)
+		await cacheDb.remove(oldHashDoc)
+	}
+	catch (err) {
+		if (err.status !== 404) {
+			console.error('could not remove old hash from database')
+			throw err
+		}
+	}
 }
 
 async function cacheItemHash(item) {
 	log(`${item.path} called cacheItemHash`)
-	localStorage.setItem(item.path, item.hash)
+	cacheDb.put({_id: item.path, hash: item.hash})
 	return item
 }
 
 async function updateDatabase(type, infoFromServer, infoFileBase, notificationId, count) {
 	let {path, hash} = infoFromServer
-	let oldHash = localStorage.getItem(path)
+	let oldHash = undefined
+	try {
+		({hash: oldHash} = await cacheDb.get(path))
+	}
+	catch (err) {
+		// 404 is 'doc not found', so we don't care about it
+		if (err.status !== 404) {
+			throw err
+		}
+	}
 
 	let itemUrl = `/${path}?v=${hash}`
 

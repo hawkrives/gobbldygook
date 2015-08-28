@@ -5,11 +5,11 @@ import debug from 'debug'
 import enhanceHanson from '../lib/enhance-hanson'
 import pluralizeArea from '../lib/pluralize-area'
 
+import {areaDb} from '../lib/db'
+
 const migrationLog = debug('gobbldygook:data-migration:study')
 
 export async function loadArea({name, type}) {
-	const db = require('../lib/db')
-
 	if (!name) {
 		throw new Error(`loadArea(): 'name' must be provided`)
 	}
@@ -21,7 +21,7 @@ export async function loadArea({name, type}) {
 
 	let data
 	try {
-		data = await db.store('areas').get(path)
+		data = await areaDb.get(path)
 	}
 	catch (err) {
 		throw new Error(`Could not load area ${path}`)

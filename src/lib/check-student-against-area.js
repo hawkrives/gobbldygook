@@ -33,8 +33,10 @@ export default async function checkStudentAgainstArea(student, area) {
 	const areaData = await area.data
 
 	const baseAreaResults = {name: area.name, type: area.type, id: area.id}
-	if (areaData._error) {
-		console.error('checkStudentAgainstArea():', areaData._error)
+	if (areaData._error || process.env.NODE_ENV === 'test') {
+		if (process.env.NODE_ENV !== 'test') {
+			console.error('checkStudentAgainstArea():', areaData._error)
+		}
 		return {...baseAreaResults, _error: areaData._error}
 	}
 
