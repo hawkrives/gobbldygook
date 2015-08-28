@@ -17,7 +17,8 @@ import debug from 'debug'
 let log = debug('gobbldygook:data')
 debug.disable('gobbldygook:data')
 
-import union from 'lodash/array/union'
+import uniq from 'lodash/array/uniq'
+import sortBy from 'lodash/collection/sortBy'
 import flatten from 'lodash/array/flatten'
 
 function prepareCourse(course) {
@@ -26,18 +27,16 @@ function prepareCourse(course) {
 	course.deptnum = course.deptnum || buildDeptNum(course)
 	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
 
-	let nameWords = splitParagraph(course.name)
-	let notesWords = splitParagraph(course.notes)
-	let titleWords = splitParagraph(course.title)
-	let descWords = splitParagraph(course.desc)
-	let words = union(nameWords, notesWords, titleWords, descWords)
-	course.words = words
+	const nameWords = splitParagraph(course.name)
+	const notesWords = splitParagraph(course.notes)
+	const titleWords = splitParagraph(course.title)
+	const descWords = splitParagraph(course.desc)
 
-	course.profWords = flatten(map(course.instructors, splitParagraph))
+	course.words = uniq(sortBy([...nameWords, ...notesWords, ...titleWords, ...descWords]), true)
+	course.profWords = uniq(sortBy(flatten(map(course.instructors, splitParagraph))), true)
 
 	return course
 }
-
 
 async function storeCourses(item) {
 	log('storing courses')
