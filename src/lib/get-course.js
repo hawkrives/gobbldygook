@@ -19,7 +19,7 @@ function getCourse(clbid) {
 	}
 	return courseDb
 		.get(clbid)
-		.catch(err => {
+		.catch(() => {
 			console.error(`course retrieval failed for ${clbid}`)
 		})
 }
