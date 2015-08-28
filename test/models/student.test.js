@@ -1,9 +1,9 @@
 // test/models/student.test.js
 import Student from '../../src/models/student.js'
 import demoStudent from '../../src/models/demo-student.json'
-import Immutable from 'immutable'
 import size from 'lodash/collection/size'
 import filter from 'lodash/collection/filter'
+import pluck from 'lodash/collection/pluck'
 
 describe('Student', () => {
 	it('is a Student', () => {
@@ -81,6 +81,7 @@ describe('Student', () => {
 			expect(noMoreFabrication.fabrications.has('a')).to.be.false
 		})
 	})
+
 	describe('overrides', () => {
 		it('supports adding overrides', () => {
 			const stu = new Student(demoStudent)
@@ -93,6 +94,7 @@ describe('Student', () => {
 			expect(removedOverride.overrides.get('credits.taken')).to.not.exist
 		})
 	})
+
 	describe('areas', () => {
 		it('supports adding areas', () => {
 			const stu = new Student(demoStudent)
@@ -114,6 +116,7 @@ describe('Student', () => {
 			expect(noEsth.studies.get('m-esth')).to.not.exist
 		})
 	})
+
 	describe('courses', () => {
 		xit('returns only courses from active schedules', () => {
 			const stu = new Student(demoStudent)
@@ -134,6 +137,7 @@ describe('Student', () => {
 			expect(movedCourse.schedules.get(2).clbids).to.include(82908)
 		})
 	})
+
 	describe('schedules', () => {
 		it('supports adding schedules', () => {
 			const stu = new Student(demoStudent)
@@ -162,6 +166,7 @@ describe('Student', () => {
 			expect(removedSchedule.schedules.get(2)).to.not.exist
 		})
 	})
+
 	describe('properties', () => {
 		it('supports changing the name', () => {
 			const stu = new Student(demoStudent)
