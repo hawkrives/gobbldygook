@@ -22,7 +22,7 @@ const welcomeMessages = [
 	'Hi, ',
 	'Hi there, ',
 	'Hello, ',
-	'Konnichiwa, ',
+	'Konnichiha, ',
 	'こんにちは、',
 ]
 
