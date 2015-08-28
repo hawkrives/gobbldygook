@@ -572,4 +572,8 @@ describe('computeBoolean', () => {
             {department: ['ART'], number: 102, gereqs: ['BTS-T']},
         ])
     })
+
+    it('throws when neither $and nor $or were present', () => {
+        expect(() => computeBoolean({expr: {$neither: []}})).to.throw(TypeError)
+    })
 })
