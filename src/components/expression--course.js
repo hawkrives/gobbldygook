@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import includes from 'lodash/collection/includes'
+import semesterName from '../helpers/semester-name'
 
 import './expression--course.scss'
 
@@ -13,6 +14,39 @@ function hasOwnKey(course, key) {
 		course.hasOwnProperty(key) &&
 		!includes(course._extraKeys || [], key)
 	)
+}
+
+function shrinkDept(dept, index, collection) {
+	if (collection.length === 1) {
+		return dept
+	}
+
+	if (dept === 'ASIAN') {
+		return 'AS'
+	}
+	if (dept === 'ART') {
+		return 'AR'
+	}
+	else if (dept === 'REL') {
+		return 'RE'
+	}
+	else if (dept === 'PSCI') {
+		return 'PS'
+	}
+	else if (dept === 'PHIL') {
+		return 'PH'
+	}
+	else if (dept === 'HIST') {
+		return 'HI'
+	}
+	else if (dept === 'ENVST') {
+		return 'ES'
+	}
+	else if (dept === 'SOAN') {
+		return 'SA'
+	}
+
+	return dept
 }
 
 export default class CourseExpression extends Component {
@@ -30,7 +64,7 @@ export default class CourseExpression extends Component {
 	}
 
 	render() {
-		const department = this.props.department.join('/')
+		const department = this.props.department.map(shrinkDept).join('/')
 
 		const international = hasOwnKey(this.props, 'international') &&
 			<span className='course--international'>I</span>
@@ -43,7 +77,7 @@ export default class CourseExpression extends Component {
 		const year = hasOwnKey(this.props, 'year') &&
 			<span className='course--year'>{this.props.year}</span>
 		const semester = hasOwnKey(this.props, 'semester') &&
-			<span className='course--semester'>S{this.props.semester}</span>
+			<span className='course--semester'>{semesterName(this.props.semester).toUpperCase()}</span>
 
 		/////
 

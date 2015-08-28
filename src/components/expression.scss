@@ -15,7 +15,7 @@
 
 .expression--description {
 	text-align: center;
-	display: inline;
+	display: inline-block;
 	margin: 0;
 }
 
@@ -51,7 +51,7 @@
 	@include card;
 	padding: 0.125em 0.25em;
 
-	&.computed::after {
+	&.computed .result-indicator {
 		font-family: monospace;
 		margin-left: 0.4em;
 		display: inline-block;
@@ -60,13 +60,11 @@
 	&.computed.computed-success {
 		background-color: $computed-success-background;
 	}
-	&.computed.computed-success::after {
-		content: '✓';
+	&.computed .result-indicator--success {
 		color: $computed-success-color;
 	}
 
-	&.computed.computed-failure::after {
-		content: '×';
+	&.computed .result-indicator--failure {
 		color: $computed-failure-color;
 		font-weight: bold;
 	}

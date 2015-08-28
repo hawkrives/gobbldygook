@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react'
 
 import CourseExpression from './expression--course'
+import ResultIndicator from './result-indicator'
 
 import cx from 'classnames'
 import plur from 'plur'
-import humanizeOperator from './humanize-operator'
+import humanizeOperator from '../lib/humanize-operator'
 
 import './expression.scss'
 
@@ -36,7 +37,7 @@ function makeBooleanExpression({expr, ctx}) {
 }
 
 function makeOfExpression({expr, ctx}) {
-	const description = `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
+	const description = `${expr._counted || 0} of (${humanizeOperator(expr.$count.$operator)}) ${expr.$count.$num} from among`
 
 	const contents = expr.$of.map((ex, i) =>
 				<Expression key={i} expr={ex} ctx={ctx} />)
@@ -45,13 +46,13 @@ function makeOfExpression({expr, ctx}) {
 }
 
 function makeModifierExpression({expr}) {
-	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} from ${expr.$from}`
+	const description = `${expr._counted} of (${humanizeOperator(expr.$count.$operator)}) ${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} from ${expr.$from}`
 
 	return {description}
 }
 
 function makeWhereExpression({expr}) {
-	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from ${expr.$where.$key} ${expr.$where.$operator} ${expr.$where.$value}`
+	const description = `${expr._counted} of (${humanizeOperator(expr.$count.$operator)}) ${expr.$count.$num} from ${expr.$where.$key} ${expr.$where.$operator} ${expr.$where.$value}`
 
 	return {description}
 }
@@ -77,6 +78,7 @@ export default class Expression extends Component {
 
 		let contents = null
 		let description = null
+		let result = null
 
 		if ($type === 'boolean') {
 			({contents} = makeBooleanExpression({...this.props}))
@@ -84,10 +86,12 @@ export default class Expression extends Component {
 
 		else if ($type === 'course') {
 			contents = <CourseExpression {...expr.$course} />
+			result = <ResultIndicator result={computationResult}  />
 		}
 
 		else if ($type === 'reference') {
 			contents = expr.$requirement
+			result = <ResultIndicator result={computationResult}  />
 		}
 
 		else if ($type === 'of') {
@@ -96,6 +100,7 @@ export default class Expression extends Component {
 
 		else if ($type === 'modifier') {
 			({description} = makeModifierExpression({...this.props}))
+			result = <ResultIndicator result={computationResult}  />
 		}
 
 		else if ($type === 'where') {
@@ -116,8 +121,18 @@ export default class Expression extends Component {
 
 		return (
 			<span className={className}>
-				{description ? <p className='expression--description'>{description}</p> : null}
-				{contents ? <span className='expression--contents'>{contents}</span> : null}
+				{description &&
+					<span className='expression--description'>
+						{description}
+						{result}
+					</span>
+				}
+				{contents &&
+					<span className='expression--contents'>
+						{contents}
+						{result}
+					</span>
+				}
 			</span>
 		)
 	}
