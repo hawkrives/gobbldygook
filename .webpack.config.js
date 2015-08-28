@@ -12,7 +12,7 @@ var buildFilename = require('./webpack/build-filename')
 // we'll use this as the default for `isDev`
 var isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1
 
-var entryPoint = './src/index.js'
+var entryPoint = './src/start.js'
 var outputFolder = 'build/'
 
 var urlLoaderLimit = 10000
