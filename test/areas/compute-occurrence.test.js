@@ -4,7 +4,7 @@ describe('computeOccurrence', () => {
     it('computes the number of times a course has been taken vs. a minimum count', () => {
         const expr = {
             $type: 'occurrence',
-            $count: 2,
+            $count: {$operator: '$gte', $num: 2},
             $course: {$type: 'course', department: ['THEAT'], number: 222},
         }
 
@@ -29,7 +29,7 @@ describe('computeOccurrence', () => {
     it('ignores anything besides department and number via simplifyCourse', () => {
         const expr = {
             $type: 'occurrence',
-            $count: 2,
+            $count: {$operator: '$gte', $num: 2},
             $course: {$type: 'course', department: ['THEAT'], number: 222},
         }
 

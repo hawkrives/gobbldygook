@@ -94,7 +94,7 @@ describe('collectMatches', () => {
             $type: 'requirement',
             result: {
                 $type: 'modifier',
-                $count: 2,
+                $count: {$operator: '$gte', $num: 2},
                 $what: 'children',
                 $children: 'all',
                 _matches: [
@@ -137,7 +137,7 @@ describe('collectMatches', () => {
             $type: 'requirement',
             result: {
                 $type: 'of',
-                $count: 1,
+                $count: {$operator: '$gte', $num: 1},
                 $of: [
                     {
                         $type: 'boolean',
@@ -154,7 +154,7 @@ describe('collectMatches', () => {
                     },
                     {
                         $type: 'modifier',
-                        $count: 2,
+                        $count: {$operator: '$gte', $num: 2},
                         $what: 'children',
                         $children: 'all',
                         _matches: [

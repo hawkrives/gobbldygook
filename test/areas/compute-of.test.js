@@ -4,7 +4,7 @@ describe('computeOf', () => {
     it('computes a list of boolean-equivalent expressions against a desired count', () => {
         const expr = {
             $type: 'of',
-            $count: 2,
+            $count: {$operator: '$gte', $num: 2},
             $of: [
                 {$type: 'course', $course: {department: ['CSCI'], number: 121}},
                 {$type: 'course', $course: {department: ['CSCI'], number: 125}},
@@ -36,7 +36,7 @@ describe('computeOf', () => {
 
         expect(expr).to.deep.equal({
             $type: 'of',
-            $count: 2,
+            $count: {$operator: '$gte', $num: 2},
             $of: [
                 {_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 121}},
                 {_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 125}},

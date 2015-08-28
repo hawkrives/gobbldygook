@@ -2,6 +2,7 @@ import assertKeys from './assert-keys'
 import assign from 'lodash/object/assign'
 import collectMatches from './collect-matches'
 import collectUsedCourses from './collect-used-courses'
+import computeCountWithOperator from './compute-count-with-operator'
 import compact from 'lodash/array/compact'
 import countCourses from './count-courses'
 import countCredits from './count-credits'
@@ -223,7 +224,7 @@ export function computeModifier({expr, ctx, courses}) {
 	}
 
 	return {
-		computedResult: numCounted >= expr.$count,
+		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: numCounted, needs: expr.$count.$num}),
 		counted: numCounted,
 		matches: filtered,
 	}
@@ -242,7 +243,7 @@ export function computeOccurrence({expr, courses}) {
 	const filtered = getOccurrences(expr.$course, courses)
 
 	return {
-		computedResult: filtered.length >= expr.$count,
+		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: filtered.length, needs: expr.$count.$num}),
 		counted: filtered.length,
 		matches: filtered,
 	}
@@ -262,14 +263,15 @@ export function computeOf({expr, ctx, courses, dirty}) {
 
 	// Go through $of, incrementing count if result of the thing is true.
 	// takeWhile runs until it recieves a `false`, so we stop when
-	// count >= expr.$count
+	// count >= expr.$count.$num
+	//
 	// let count = 0
 	// takeWhile(expr.$of, req => {
 	//     count += Number(computeChunk({expr: req, ctx, courses, dirty}))
-	//     return count < expr.$count
+	//     return !(computeCountWithOperator({comparator: expr.$count.$operator, has: count, needs: expr.$count.$num})
 	// })
 	// return {
-	//     computedResult: count >= expr.$count,
+	//     computedResult: computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: count, needs: expr.$count.$num}),,
 	//     counted: count,
 	//     matches: collectMatches(expr),
 	// }
@@ -280,7 +282,7 @@ export function computeOf({expr, ctx, courses, dirty}) {
 	const truthy = compact(evaluated)
 
 	return {
-		computedResult: truthy.length >= expr.$count,
+		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: truthy.length, needs: expr.$count.$num}),
 		counted: truthy.length,
 		matches: collectMatches(expr),
 	}
@@ -326,7 +328,7 @@ export function computeWhere({expr, courses}) {
 	const filtered = filterByWhereClause(courses, expr.$where)
 
 	return {
-		computedResult: filtered.length >= expr.$count,
+		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: filtered.length, needs: expr.$count.$num}),
 		matches: filtered,
 		counted: filtered.length,
 	}

@@ -44,11 +44,11 @@ describe('collectUsedCourses', () => {
     it('can go down many layers deep', () => {
         const obj = {
             $type: 'of',
-            $count: 3,
+            $count: {$operator: '$gte', $num: 3},
             $of: [
                 {
                     $type: 'of',
-                    $count: 1,
+                    $count: {$operator: '$gte', $num: 1},
                     $of: [
                         {
                             $course: {department: ['CSCI'], number: 120},
@@ -67,7 +67,7 @@ describe('collectUsedCourses', () => {
                 },
                 {
                     $type: 'where',
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $where: {
                         $key: 'gereq',
                         $operator: '$eq',
@@ -77,12 +77,12 @@ describe('collectUsedCourses', () => {
                 },
                 {
                     $type: 'occurrence',
-                    $count: 2,
+                    $count: {$operator: '$gte', $num: 2},
                     $course: {department: ['CHEM'], number: 121},
                 },
                 {
                     $type: 'of',
-                    $count: 3,
+                    $count: {$operator: '$gte', $num: 3},
                     $of: [
                         {
                             $course: {department: ['ART', 'ASIAN'], number: 170},
@@ -107,7 +107,7 @@ describe('collectUsedCourses', () => {
                 },
                 {
                     $type: 'of',
-                    $count: 3,
+                    $count: {$operator: '$gte', $num: 3},
                     $of: [
                         {
                             $course: {department: ['ASIAN'], number: 210},

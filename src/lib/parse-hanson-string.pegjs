@@ -125,7 +125,9 @@ _ 'whitespace'
   = [ \n\t\r]*
 
 counter
-  = english_integer
+  = count:english_integer             { return { $operator: '$gte', $num: count } }
+  / 'at most' _ count:english_integer { return { $operator: '$lte', $num: count } }
+  / 'exactly' _ count:english_integer { return { $operator: '$eq',  $num: count } }
 
 english_integer
   = num:(
@@ -142,7 +144,7 @@ english_integer
       / 'ten'
     )
     {
-      if (num === 'zero')  { return 0 }
+      if (num === 'zero')       { return 0 }
       else if (num === 'one')   { return 1 }
       else if (num === 'two')   { return 2 }
       else if (num === 'three') { return 3 }
@@ -198,17 +200,19 @@ of_list
 of
   = count:(
         counter
-      / 'all'
-      / 'any' { return 1 }
-      / 'none' { return 0 }
+      / 'all' { return { $operator: '$eq', $was: 'all' } }
+      / 'any' { return { $operator: '$gte', $num: 1, $was: 'any' } }
+      / 'none' { return { $operator: '$eq', $num: 0, $was: 'none' } }
     )
     _ 'of' _ of:of_list
     {
-      if (count === 'all')
-        count = of.length
+      if (count.$was === 'all') {
+        count.$num = of.length
+      }
 
-      if (count && of.length < count)
-        throw new Error(`you requested ${count} items, but only listed ${of.length} options (${JSON.stringify(of)}).`)
+      if (of.length < count.$num) {
+        throw new Error(`you requested ${count.$num} items, but only gave ${of.length} options (${JSON.stringify(of)}).`)
+      }
 
       return {
         $type: 'of',
