@@ -67,7 +67,7 @@ var config = {
 						'<meta charset="UTF-8">',
 						'<meta name="viewport" content="width=device-width,initial-scale=1.0" />',
 						'<title>Gobbldygook</title>',
-						context.css ? '<link rel="stylesheet" href="' + context.css + '">' : '',
+						context.css && '<link rel="stylesheet" href="' + context.css + '">',
 						'<body>',
 						'  <main id="app"></main>',
 						'  <aside id="notifications"></aside>',
