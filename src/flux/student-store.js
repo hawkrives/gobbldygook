@@ -138,7 +138,7 @@ const studentStore = Reflux.createStore({
 					delete basicStudent.id
 				}
 
-				// Make the student...
+				// Make the student…
 				const fleshedStudent = new Student(basicStudent)
 
 				// and save them, of course
