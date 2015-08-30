@@ -93,7 +93,7 @@ export default class StudentList extends Component {
 			.toArray()
 
 		return (
-			<List className='student-list' type='plain' canSelect>
+			<List className='student-list' type='plain'>
 				{studentObjects}
 			</List>
 		)
