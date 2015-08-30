@@ -20,7 +20,6 @@ function makeBooleanExpression({expr, ctx}) {
 	if (expr.hasOwnProperty('$and')) {
 		kind = '$and'
 	}
-
 	else if (expr.hasOwnProperty('$or')) {
 		kind = '$or'
 	}
@@ -29,7 +28,9 @@ function makeBooleanExpression({expr, ctx}) {
 		if (i > 0) {
 			acc.push(<span key={`${i}-joiner`} className='joiner'>{joiners[kind]}</span>)
 		}
+
 		acc.push(<Expression key={i} expr={exp} ctx={ctx} />)
+
 		return acc
 	}, [])
 
@@ -45,8 +46,7 @@ const ofLookup = {
 function makeOfExpression({expr, ctx}) {
 	const description = ofLookup[expr.$count.$was] || `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
 
-	const contents = expr.$of.map((ex, i) =>
-				<Expression key={i} expr={ex} ctx={ctx} />)
+	const contents = expr.$of.map((ex, i) => <Expression key={i} expr={ex} ctx={ctx} />)
 
 	return {description, contents}
 }
@@ -143,14 +143,12 @@ export default class Expression extends Component {
 					<span className='expression--description'>
 						{description}
 						{result}
-					</span>
-				}
+					</span>}
 				{contents &&
 					<span className='expression--contents'>
 						{contents}
 						{result}
-					</span>
-				}
+					</span>}
 			</span>
 		)
 	}

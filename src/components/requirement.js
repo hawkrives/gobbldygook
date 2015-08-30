@@ -32,17 +32,14 @@ export default class Requirement extends Component {
 	render() {
 		const childKeys = filter(keys(this.props), isRequirementName)
 
-		const result = this.props.result
-			? <div className='requirement--result'><Expression expr={this.props.result} ctx={this.props} /></div>
-			: null
+		const result = this.props.result &&
+			<div className='requirement--result'><Expression expr={this.props.result} ctx={this.props} /></div>
 
-		const message = this.props.message
-			? <p className='requirement--message'>{this.props.message}</p>
-			: null
+		const message = this.props.message &&
+			<p className='requirement--message'>{this.props.message}</p>
 
-		const filterEl = this.props.filter
-			? <div className='requirement--filter'>Filter: {JSON.stringify(this.props.filter, null, 2)}</div>
-			: null
+		const filterEl = this.props.filter &&
+			<div className='requirement--filter'>Filter: {JSON.stringify(this.props.filter, null, 2)}</div>
 
 		const wasComputed = this.props.hasOwnProperty('computed')
 		const computationResult = this.props.computed
