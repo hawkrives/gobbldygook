@@ -2,11 +2,11 @@ name: Chemistry
 type: Major
 revision: 2013-14
 result: all of (
-    Intro, Organic,
-    Analytical, Physical,
+    Introductory Sequence,
+    Organic, Analytical, Physical,
     Elective, Physics, Calculus, Seminars )
 
-Intro:
+Introductory Sequence:
     First Year 1:
         CHEM 121 & 123 & 125
     First Year 2:
@@ -42,4 +42,4 @@ Calculus:
     MATH 126 | 128
 
 Seminars:
-    message: You are required to attend at least 12 departmental seminars.
+    message: You are required to attend at least 12 departmental seminars during your junior and senior years.
