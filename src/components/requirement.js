@@ -19,6 +19,7 @@ export default class Requirement extends Component {
 		name: PropTypes.string,
 		overridden: PropTypes.bool,
 		path: PropTypes.array.isRequired,
+		removeOverride: PropTypes.func.isRequired,
 		result: PropTypes.object,
 		toggleOverride: PropTypes.func.isRequired,
 		topLevel: PropTypes.bool,
@@ -70,16 +71,15 @@ export default class Requirement extends Component {
 			path={this.props.path.concat(key)}
 			addOverride={this.props.addOverride}
 			toggleOverride={this.props.toggleOverride}
+			removeOverride={this.props.removeOverride}
 		/>)
 
-		let override = (this.props.message && !this.props.result)
-			? (
-				<span className='requirement--override-buttons button-group'>
-					<Button type='flat'>Not yet…</Button>
-					<Button onClick={ev => this.props.addOverride({ev, path: this.props.path})} type='flat'>Done!</Button>
-				</span>
-			)
-			: null
+		let override = (this.props.message && !this.props.result) && (
+			<span className='requirement--override-buttons button-group'>
+				<Button onClick={ev => this.props.removeOverride({ev, path: this.props.path})} type='flat'>Not yet…</Button>
+				<Button onClick={ev => this.props.addOverride({ev, path: this.props.path})} type='flat'>Done!</Button>
+			</span>
+		)
 
 		return (
 			<div className={cx(`requirement`, {overridden: this.props.overridden})}>

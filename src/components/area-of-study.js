@@ -20,6 +20,7 @@ export default class AreaOfStudy extends Component {
 		id: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
 		removeArea: PropTypes.func.isRequired,
+		removeOverride: PropTypes.func.isRequired,
 		result: PropTypes.object.isRequired,
 		revision: PropTypes.string.isRequired,
 		showCloseButton: PropTypes.bool.isRequired,
@@ -90,6 +91,16 @@ export default class AreaOfStudy extends Component {
 			</div>
 		)
 
+		const contents = this.props._error
+			? <p className='area--error'>{this.props._error} {':('}</p>
+			: <Requirement {...this.props}
+				topLevel
+				addOverride={this.props.addOverride}
+				toggleOverride={this.props.toggleOverride}
+				removeOverride={this.props.removeOverride}
+				path={[this.props.type, this.props.name]}
+			/>
+
 		return (
 			<details className={cx('area', {errored: this.props._error})}>
 				<summary className='area--summary' onClick={() => this.setState(state => ({open: !state.open}))}>
@@ -97,16 +108,7 @@ export default class AreaOfStudy extends Component {
 						? removalConfirmation
 						: summary}
 				</summary>
-				{this.state.open && !this.state.confirmRemoval
-					? this.props._error
-						? <p className='area--error'>{this.props._error} {':('}</p>
-						: <Requirement {...this.props}
-							topLevel
-							addOverride={this.props.addOverride}
-							toggleOverride={this.props.toggleOverride}
-							path={[this.props.type, this.props.name]}
-						/>
-					: null}
+				{this.state.open && !this.state.confirmRemoval && contents}
 			</details>
 		)
 	}
