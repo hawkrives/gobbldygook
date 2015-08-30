@@ -2,11 +2,11 @@
 	display: inline-flex !important;
 	flex-flow: row nowrap;
 	align-items: center;
+}
 
-	.course {
-		display: flex;
-		cursor: inherit;
-	}
+.expression .course {
+	display: flex;
+	cursor: inherit;
 
 	font-size: 0.9em;
 
