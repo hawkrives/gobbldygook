@@ -16,7 +16,7 @@ Theatre:
 
 Electives:
     # plus one additional course selected from: Theater 338, 352, 379, 380, 394, 398.
-    one of (THEAT 338, 352, 379, 380, 394, 398)
+    any of (THEAT 338, 352, 379, 380, 394, 398)
 
 Practicum:
     description:
