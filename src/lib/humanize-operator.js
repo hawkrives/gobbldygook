@@ -1,6 +1,6 @@
 export default function humanizeOperator(operator) {
 	if (operator === '$gte') {
-		return 'at least'
+		return ''
 	}
 	else if (operator === '$lte') {
 		return 'at most'

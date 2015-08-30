@@ -46,13 +46,14 @@ function makeOfExpression({expr, ctx}) {
 }
 
 function makeModifierExpression({expr}) {
-	const description = `${expr._counted} of (${humanizeOperator(expr.$count.$operator)}) ${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} from ${expr.$from}`
+	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} from ${expr.$from}`
 
 	return {description}
 }
 
 function makeWhereExpression({expr}) {
-	const description = `${expr._counted} of (${humanizeOperator(expr.$count.$operator)}) ${expr.$count.$num} from ${expr.$where.$key} ${expr.$where.$operator} ${expr.$where.$value}`
+	console.log(expr)
+	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from ${expr.$where.$key} ${expr.$where.$operator} ${expr.$where.$value}`
 
 	return {description}
 }
