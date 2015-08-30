@@ -2,8 +2,12 @@
 @import '../base/variables.scss';
 
 .requirement {
-	margin: 0.25em 0.25em 0.25em 0.5em;
+	margin: 0.25em;
 	box-sizing: border-box;
+}
+
+.requirement .requirement {
+	margin-left: 0.5em;
 }
 
 .requirement + .requirement {
