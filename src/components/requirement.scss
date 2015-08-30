@@ -1,5 +1,6 @@
+@import '../base/variables';
 @import '../mixins/card';
-@import '../base/variables.scss';
+@import '../mixins/color';
 
 .requirement {
 	margin: 0.25em;
@@ -25,6 +26,7 @@
 .requirement--override-button {
 	padding: 0.25em 0.85em;
 	margin-left: 0.5em;
+	color: color('gray', '500');
 }
 
 .requirement--result {
