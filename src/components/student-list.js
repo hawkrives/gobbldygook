@@ -34,17 +34,12 @@ class StudentListItem extends Component {
 				<span className='student-list-item-info'>
 					<div className='name'>{student.name || ''}</div>
 					<div className='areas'>
-						{['degree', 'major', 'concentration', 'emphasis']
-							.map(type => groupedStudies.get(type))
-							.filter(identity)
-							.map(group =>
-								group.toArray()
-									.map(s => s.name)
-									.join(' · '))
-							.map((group, i, coll) =>
-								<span className='area-type' key={i}>
-									{group}{i < coll.length - 1 ? <span className='joiner'>※</span> : null}
-								</span>)}
+						{groupedStudies
+							.map(group => group.map(s => s.name).join(' · '))
+							.toList()
+							.interpose(<span className='joiner'>※</span>)
+							.map((group, i) => <span className='area-type' key={i}>{group}</span>)
+							.toArray()}
 					</div>
 				</span>
 				<span className='student-list-item-actions'>
