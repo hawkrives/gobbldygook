@@ -10,6 +10,7 @@ stats.json
 # Temp folders
 .sass-cache
 .tmp
+~
 
 # Node stuff
 node_modules

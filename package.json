@@ -7,6 +7,8 @@
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
+  "COURSE_INFO": "../sto-course-data/build/info.json",
+  "AREA_INFO": "./build/areas/info.json",
   "config": {
     "area_output": "build/areas/",
     "beautify": "-f - --end-with-newline --indent-with-tabs",
@@ -69,6 +71,7 @@
     "sto-course-related-data": "4.0.2",
     "sto-helpers": "4.2.12",
     "sto-sis-time-parser": "2.1.0",
+    "text-table": "0.2.0",
     "treo": "0.5.0"
   },
   "devDependencies": {
