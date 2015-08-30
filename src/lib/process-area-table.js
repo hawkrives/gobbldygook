@@ -1,11 +1,30 @@
 import compact from 'lodash/array/compact'
-import pluck from 'lodash/collection/pluck'
 import tableToJson from './table-to-json'
+import map from 'lodash/collection/map'
+
+function mungeArea(type) {
+	return area => ({name: area, type})
+}
 
 export default function processAreaTable(areaTable) {
-	let jsonRepresentation = tableToJson(areaTable)
-	let majors = compact(pluck(jsonRepresentation, 'majors'))
-	let concentrations = compact(pluck(jsonRepresentation, 'concentrations'))
-	let emphases = compact(pluck(jsonRepresentation, 'emphases'))
-	return {majors, concentrations, emphases}
+	// The areas table is layed out in columns, like so:
+	//
+	// Majors        | Emphases | Concentrations
+	// ------------- | -------- | --------------
+	// CompSci       |          | Japan Studies
+	// Asian Studies |          |
+	//
+	// Therefore, we loop over the rows, and pull out the data from there.
+
+	const jsonRepresentation = tableToJson(areaTable)
+
+	const majors = compact(map(jsonRepresentation, row => row.majors))
+	const concentrations = compact(map(jsonRepresentation, row => row.concentrations))
+	const emphases = compact(map(jsonRepresentation, row => row.emphases))
+
+	return [
+		...map(majors, mungeArea('major')),
+		...map(concentrations, mungeArea('concentration')),
+		...map(emphases, mungeArea('emphasis')),
+	]
 }
