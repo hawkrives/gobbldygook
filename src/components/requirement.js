@@ -44,23 +44,25 @@ export default class Requirement extends Component {
 		const wasComputed = this.props.hasOwnProperty('computed')
 		const computationResult = this.props.computed
 
-		const title = this.props.topLevel
-			? null
-			: (
-				<h2 className={`requirement--title ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`}>
-					<span className='requirement--title-status'>{this.props.computed ? '✓' : '×'}</span>
-					{' '}
-					{this.props.name}
-					{' '}
-					<Button className='requirement--override-button' onClick={ev => this.props.toggleOverride({ev, path: this.props.path})}>
-						{
-							this.props.overridden
-								? '{Remove Override}'
-								: '{Override}'
-						}
-					</Button>
-				</h2>
-			)
+		const title = !(this.props.topLevel) && (
+			<h2 className={`requirement--heading ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`}>
+				<span className='requirement--title'>
+					{/*<span className='requirement--title-status'>{this.props.computed ? '✓' : '×'}</span>*/}
+					<span className='requirement--title-status'>{this.props.computed ? '●' : '○'}</span>
+					{` ${this.props.name}`}
+					{this.props.overridden && <span className='requirement--title-override-text'>{' (Overridden)'}</span>}
+				</span>
+				<Button
+					className='requirement--override-button'
+					onClick={ev => this.props.toggleOverride({ev, path: this.props.path})}
+					title={this.props.overridden ? `Remove Override` : `Apply Override`}
+				>
+					{/*`[${this.props.overridden ? '⇢' : '⭃ ⭆ ⇝ ⤳'}]`*/}
+					{/*`[${this.props.overridden ? '◯ ◉' : '◎'}]`*/}
+					{`${this.props.overridden ? '◉' : '◎'}`}
+				</Button>
+			</h2>
+		)
 
 		const children = childKeys.map(key => <Requirement key={key}
 			name={key}

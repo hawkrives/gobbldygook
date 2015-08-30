@@ -38,43 +38,54 @@
 }
 
 .requirement .requirement .requirement .requirement--result,
-.requirement .requirement .requirement .requirement--title,
+.requirement .requirement .requirement .requirement--heading,
 .requirement .requirement .requirement .requirement--message,
 .requirement .requirement .requirement .requirement--filter {
 	padding-left: $area-edge-padding;
 }
 
-.requirement--title {
+.requirement--heading {
 	font-size: 1em;
 	font-weight: 500;
 
 	border-bottom: $material-divider;
-	padding: 0.2em 0.15em;
+	padding: 0.2em 0.15em 0.2em 0.7em;
+
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.requirement--title.computed-success {
+.requirement--title {
+	flex: 1;
+
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.requirement--title-override-text {
+	font-weight: normal;
+}
+
+.requirement--heading.computed-success {
 	background-color: $computed-success-background;
 }
 
 .requirement--title-status {
 	margin-right: 0.2em;
 }
-.requirement--title.computed-success .requirement--title-status {
+.requirement--heading.computed-success .requirement--title-status {
 	color: $computed-success-color;
 }
 
-.requirement .requirement .requirement--title {
-	text-align: center;
-
+.requirement .requirement .requirement--heading {
 	font-size: 0.9em;
 	margin: 0;
 }
 
-.requirement .requirement .requirement .requirement--title {
-	text-align: left;
-}
-
-.requirement--title,
+.requirement--heading,
 .requirement--result,
 .requirement--message,
 .requirement--filter,
