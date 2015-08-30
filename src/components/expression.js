@@ -64,6 +64,13 @@ function makeWhereExpression({expr}) {
 	return {description}
 }
 
+function makeOccurrenceExpression({expr}) {
+	const contents = <span className='expression expression--course'><CourseExpression {...expr.$course} /></span>
+	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${plur('occurrence', expr.$count.$num)} of `
+
+	return {description, contents}
+}
+
 export default class Expression extends Component {
 	static propTypes = {
 		ctx: PropTypes.object.isRequired,
@@ -112,6 +119,10 @@ export default class Expression extends Component {
 
 		else if ($type === 'where') {
 			({description} = makeWhereExpression({...this.props}))
+		}
+
+		else if ($type === 'occurrence') {
+			({description, contents} = makeOccurrenceExpression({...this.props}))
 		}
 
 		else {
