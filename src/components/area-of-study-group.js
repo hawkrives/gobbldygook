@@ -40,7 +40,9 @@ export default class AreaOfStudyGroup extends Component {
 								Close
 							</Button>
 							: <Button className='add-area-of-study' type='flat' onClick={ev => this.props.initiateAddArea({ev, type: this.props.type})}>
-								Add/Edit
+								{/*'Add/Edit'*/}
+								{/*'Add ⋎ Edit'*/}
+								{'Add ∨ Edit'}
 							</Button>
 					}
 				</h1>
