@@ -86,6 +86,7 @@ export default class GraduationStatus extends Component {
 	toggleOverrideOnStudent = ({ev, path}) => {
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
+
 		if (this.props.student.overrides.has(codifiedPath)) {
 			actions.removeOverride(this.props.student.id, codifiedPath)
 		}
