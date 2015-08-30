@@ -36,8 +36,14 @@ function makeBooleanExpression({expr, ctx}) {
 	return {contents}
 }
 
+const ofLookup = {
+	all: `All of`,
+	any: `Any of`,
+	none: `None of`,
+}
+
 function makeOfExpression({expr, ctx}) {
-	const description = `${expr._counted || 0} of (${humanizeOperator(expr.$count.$operator)}) ${expr.$count.$num} from among`
+	const description = ofLookup[expr.$count.$was] || `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
 
 	const contents = expr.$of.map((ex, i) =>
 				<Expression key={i} expr={ex} ctx={ctx} />)
