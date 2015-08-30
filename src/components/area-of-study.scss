@@ -4,8 +4,6 @@
 .area {
 	@include card;
 
-	* {box-sizing: border-box;}
-
 	margin-bottom: 1em;
 
 	&.errored {
