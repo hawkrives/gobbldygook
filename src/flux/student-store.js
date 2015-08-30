@@ -208,7 +208,7 @@ const studentStore = Reflux.createStore({
 
 	destroyStudent(studentId) {
 		this._preChange()
-		this.students = this.students.filterNot(s => s.id === studentId)
+		this.students = this.students.delete(studentId)
 		localStorage.removeItem(studentId)
 		this._saveStudentIds()
 		this._postChange()
