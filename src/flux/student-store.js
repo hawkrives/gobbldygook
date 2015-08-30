@@ -146,14 +146,11 @@ const studentStore = Reflux.createStore({
 
 				return fleshedStudent
 			})
+			.groupBy(student => student.id)
+			.map(student => student.get(0))
 
 		// Add them to students
-		this.students = this.students.withMutations(students => {
-			localStudents.forEach(localStudent => {
-				students = students.set(localStudent.id, localStudent)
-			})
-			return students
-		})
+		this.students = this.students.merge(localStudents)
 
 		// Update the studentIds list from the current list of students
 		this._saveStudentIds()
