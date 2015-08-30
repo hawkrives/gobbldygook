@@ -24,6 +24,11 @@ class StudentListItem extends Component {
 		isEditing: false,
 	}
 
+	onClick = ev => {
+		ev.preventDefault()
+		studentActions.destroyStudent(this.props.student.id)
+	}
+
 	render() {
 		// console.log('StudentListItem#render')
 		const student = this.props.student
@@ -43,15 +48,10 @@ class StudentListItem extends Component {
 					</div>
 				</span>
 				<span className='student-list-item-actions'>
-					{
-						this.props.isEditing
-							? <Button className='delete' type='raised'
-								onClick={ev => {
-									ev.preventDefault()
-									studentActions.destroyStudent(student.id)
-								}}>Delete</Button>
-							: null
-					}
+					{this.props.isEditing &&
+					<Button className='delete' type='raised' onClick={this.onClick}>
+						Delete
+					</Button>}
 				</span>
 				<Icon className='student-list-item--go' name='ionicon-ios-arrow-forward' />
 			</Link>
