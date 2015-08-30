@@ -1,16 +1,17 @@
 name: Africa and the Americas
 type: concentration
 revision: 2014-15
-result: Interdisciplinary Seminar & four of (Independent, Electives)
+result: five courses from children & Seminar & Independent & Electives
 
-Interdisciplinary Seminar:
+Seminar:
     Africa and the Americas: AFAM 231
 
 Independent:
     Academic Internship II: AFAM 294
     Academic Internship III: AFAM 394
     Independent Study: AFAM 298
-    Directed Undergraduate Research: AFAM 396
+    Directed Undergraduate Research:
+        result: AFAM 396
         message:
             This course provides a comprehensive research opportunity,
             including an introduction to relevant background material,
@@ -36,10 +37,12 @@ Electives:
     The Hero and the Trickster in Post-Colonial Literature: ENGL 108
     American Racial and Multicultural Literatures:          ENGL 205
     Women of the African Diaspora:                          ENGL 207
-    Post-Colonial Literatures:                              ENGL 210
+    Post-Colonial Literatures:
+        result: ENGL 210
         message:
             With a focus on Africa
-    The Major Seminar:                                      ENGL 399
+    The Major Seminar:
+        result: ENGL 399
         message:
             When topic pertains to Africa and the Americas
     The Francophone World:                                  FREN 271
@@ -48,27 +51,32 @@ Electives:
     Slavery in African History:                             HIST 151
     Slavery in the Americas:                                HIST 165
     Civil Rights Revolution:                                HIST 181
-    Slavery in West Africa - Ghana:                         HIST 256
+    Slavery in West Africa - Ghana:
+        result: HIST 256
         message:
             Abroad
     African-American History:                               HIST 277
     America in the Civil War and Reconstruction Era:        HIST 288
     Introduction to African History:                        HIST 291
     Muslim Societies in Sub-Saharan Africa:                 HIST 292
-    American Seminar:                                       HIST 370
+    American Seminar:
+        result: HIST 370
         message:
             When topic pertains to Africa and the Americas
     Introduction to Race and Ethnic Studies:                RACE 122
-    Introduction to Cultural Anthropology:                  SOAN 128
+    Introduction to Cultural Anthropology:
+        result: SOAN 128
         message:
             With a focus on Africa
     Gender in Cross-Cultural Perspective:                   SOAN 261
     Race and Class in American Culture:                     SOAN 264
-    Crime and Inequality:                                   SOAN 266
+    Crime and Inequality:
+        result: SOAN 266
         message:
             With a focus on Africa
     Class, Status, and Power:                               SOAN 268
-    Social Reality in South Africa:                         SWRK 280
+    Social Reality in South Africa:
+        result: SWRK 280
         message:
             Abroad
     result: any of (
