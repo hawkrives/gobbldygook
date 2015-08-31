@@ -67,11 +67,30 @@
 	@include card;
 	padding: 0;
 	margin-bottom: 0.5em;
+}
 
+.sidebar-heading .row {
 	position: relative;
 
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: stretch;
 	justify-content: stretch;
+}
+
+.search-filters {
+	padding: 0.35em 1em 0.75em;
+
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.search-filters .filter {
+	flex: 1;
+	text-align: center;
+}
+
+.search-filters label {
+	font-size: 0.9em;
+	font-weight: 500;
 }
