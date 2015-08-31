@@ -18,11 +18,16 @@ export default function compareCourseToQualification(course, {$key, $operator, $
 	}
 
 	else if (isPlainObject($value)) {
-		// we compute the value of the function-over-where-query style
-		// operators earlier, in the filterByQualification function.
-		assertKeys($value, '$computed-value')
-		const simplifiedOperator = {$key, $operator, $value: $value['$computed-value']}
-		return compareCourseToQualification(course, simplifiedOperator)
+		if ($value.$type === 'function') {
+			// we compute the value of the function-over-where-query style
+			// operators earlier, in the filterByQualification function.
+			assertKeys($value, '$computed-value')
+			const simplifiedOperator = {$key, $operator, $value: $value['$computed-value']}
+			return compareCourseToQualification(course, simplifiedOperator)
+		}
+		else {
+			throw new TypeError(`compareCourseToQualification(): "${$value.$type}" is not a valid type for a qualification's value.`)
+		}
 	}
 
 	else {

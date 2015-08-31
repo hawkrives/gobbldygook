@@ -63,4 +63,10 @@ describe('compareCourseToQualification', () => {
         const qualification = {$key: 'year', $operator: '$lte', $value: [2016]}
         expect(() => compareCourseToQualification(course, qualification)).to.throw(TypeError)
     })
+
+    it('throws if $value is an object and has an unknown type', () => {
+        const course = {department: ['ART', 'ASIAN'], year: 2015}
+        const qualification = {$key: 'year', $operator: '$lte', $value: {$type: 'unknown'}}
+        expect(() => compareCourseToQualification(course, qualification)).to.throw(TypeError)
+    })
 })
