@@ -10,6 +10,10 @@ import Button from './button'
 
 import './requirement.scss'
 
+function getResultOfRequirement(requirements) {
+	return requirementTitle => requirements[requirementTitle].computed ? 'A' : 'B'
+}
+
 export default class Requirement extends Component {
 	static propTypes = {
 		addOverride: PropTypes.func.isRequired,
@@ -69,14 +73,15 @@ export default class Requirement extends Component {
 			</h2>
 		)
 
-		const children = childKeys.map(key => <Requirement key={key}
-			name={key}
-			{...this.props[key]}
-			path={this.props.path.concat(key)}
-			addOverride={this.props.addOverride}
-			toggleOverride={this.props.toggleOverride}
-			removeOverride={this.props.removeOverride}
-		/>)
+		const children = map(sortBy(childKeys, getResultOfRequirement(this.props)), key =>
+			<Requirement key={key}
+				name={key}
+				{...this.props[key]}
+				path={this.props.path.concat(key)}
+				addOverride={this.props.addOverride}
+				toggleOverride={this.props.toggleOverride}
+				removeOverride={this.props.removeOverride}
+			/>)
 
 		let override = (this.props.message && !this.props.result) && (
 			<span className='requirement--override-buttons button-group'>

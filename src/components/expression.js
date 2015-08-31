@@ -3,6 +3,8 @@ import React, {Component, PropTypes} from 'react'
 import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
 
+import map from 'lodash/collection/map'
+import sortByOrder from 'lodash/collection/sortByOrder'
 import cx from 'classnames'
 import plur from 'plur'
 import humanizeOperator from '../lib/humanize-operator'
@@ -46,7 +48,8 @@ const ofLookup = {
 function makeOfExpression({expr, ctx}) {
 	const description = ofLookup[expr.$count.$was] || `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
 
-	const contents = expr.$of.map((ex, i) => <Expression key={i} expr={ex} ctx={ctx} />)
+	const contents = map(sortByOrder(expr.$of, ['_result'], ['desc']), (ex, i) =>
+		<Expression key={i} expr={ex} ctx={ctx} />)
 
 	return {description, contents}
 }
