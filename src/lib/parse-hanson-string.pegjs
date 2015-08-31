@@ -247,6 +247,16 @@ of
       }
     }
 
+
+child_list  // select a few requirements to apply the modifier to.
+  = open_paren _ reqs:(
+    val:reference
+    rest:( _ ',' _ second:reference { return second } )*
+    { return [val].concat(rest) }
+  )+ _ ','? _ close_paren
+  { return flatten(reqs) }
+
+
 modifier
   = count:counter _
     what:(
@@ -255,24 +265,18 @@ modifier
       / 'department'
     ) optional_s _ 'from' _
     from:(
-        'children' _ 'where' _ where:qualifier { return { $from: 'children-where', $where: where } }
+        'children' _ 'where' _ where:qualifier { return { $from: 'children-where', $where: where, $children: '$all' } }
       / 'children'                             { return { $from: 'children', $children: '$all' }}
       / 'filter'                               { return { $from: 'filter' }}
       / 'courses' _ 'where' _ where:qualifier  { return { $from: 'where', $where: where } }
-      / // select a few requirements to apply the modifier to.
-        // an alternative to "from children"
-        open_paren _ reqs:(
-          val:reference
-          rest:( _ ',' _ second:reference { return second } )*
-          { return [val].concat(rest) }
-        )+ _ ','? _ close_paren
-        { return { $from: 'children', $children: flatten(reqs) } }
+      / c:child_list _ 'where' _ w:qualifier   { return { $from: 'children-where', $where: w, $children: c } }
+      / children:child_list                    { return { $from: 'children', $children: children} }  // an alternative to "from children"
     )
     {
-      if (what === 'department' && from['$from'] === 'where') {
+      if (from.$from === 'where' && what === 'department') {
         throw new Error('cannot use a modifier with "departments from courses where {}"')
       }
-      if (from['$from'] === 'children-where' && what !== 'course') {
+      if (from.$from === 'children-where' && what !== 'course') {
         throw new Error('must use "courses from" with "children where"')
       }
       return {

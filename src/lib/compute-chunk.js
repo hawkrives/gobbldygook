@@ -207,6 +207,12 @@ export function computeModifier({expr, ctx, courses}) {
 		filtered = filterByWhereClause(courses, expr.$where)
 	}
 
+	else if (expr.$from === 'children-where') {
+		assertKeys(expr, '$where', '$children')
+		filtered = getMatchesFromChildren(expr, ctx)
+		filtered = filterByWhereClause(filtered, expr.$where)
+	}
+
 	filtered = map(filtered, course =>
 		course.hasOwnProperty('$course') ? course.$course : course)
 

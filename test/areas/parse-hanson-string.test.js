@@ -837,5 +837,38 @@ describe('parse hanson-string', () => {
                 },
             })
         })
+        it('can count from a where-statement, with the input filtered by all children', () => {
+            expect(parse('one course from children where {a = b}')).to.deep.equal({
+                $type: 'modifier',
+                $count: {$operator: '$gte', $num: 1},
+                $what: 'course',
+                $from: 'children-where',
+                $children: '$all',
+                $where: {
+                    $type: 'qualification',
+                    $key: 'a',
+                    $operator: '$eq',
+                    $value: 'b',
+                },
+            })
+        })
+        it('can count from a where-statement, with the input filtered by some children', () => {
+            expect(parse('one course from (A, B) where {a = b}')).to.deep.equal({
+                $type: 'modifier',
+                $count: {$operator: '$gte', $num: 1},
+                $what: 'course',
+                $from: 'children-where',
+                $children: [
+                    {$requirement: 'A', $type: 'reference'},
+                    {$requirement: 'B', $type: 'reference'},
+                ],
+                $where: {
+                    $type: 'qualification',
+                    $key: 'a',
+                    $operator: '$eq',
+                    $value: 'b',
+                },
+            })
+        })
     })
 })
