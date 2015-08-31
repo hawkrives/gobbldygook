@@ -106,6 +106,6 @@ describe('filterByWhereClause', () => {
             {department: ['ART', 'ASIAN'], number: 310, lab: true, year: 2012},
         ]
 
-        expect(() => filterByWhereClause(courses, clause)).to.throw(ReferenceError)
+        expect(() => filterByWhereClause(courses, clause)).to.throw(TypeError)
     })
 })

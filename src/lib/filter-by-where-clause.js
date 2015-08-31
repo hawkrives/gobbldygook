@@ -55,7 +55,7 @@ export default function filterByWhereClause(baseList, clause, fullList) {
 
 		// only 'and' and 'or' are currently supported.
 		else {
-			throw new ReferenceError(`filterByWhereClause(): neither $or nor $and could be found in ${JSON.stringify(clause)}`)
+			throw new TypeError(`filterByWhereClause(): neither $or nor $and could be found in ${JSON.stringify(clause)}`)
 		}
 	}
 
