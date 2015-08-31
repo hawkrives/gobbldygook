@@ -1,5 +1,5 @@
 {
-  var globalLastDept
+  let globalLastDept
 
   function storeDept(dept) {
     globalLastDept = dept
@@ -9,8 +9,8 @@
     return globalLastDept
   }
 
-  var flatten = require('lodash/array/flatten')
-  var expandDepartment = require('./expand-department')
+  const flatten = require('lodash/array/flatten')
+  const expandDepartment = require('./expand-department')
 }
 
 

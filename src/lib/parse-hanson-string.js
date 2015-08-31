@@ -3978,7 +3978,7 @@ module.exports = (function() {
 			}
 			return s0;
 		}
-		var globalLastDept;
+		var globalLastDept = undefined;
 
 		function storeDept(dept) {
 			globalLastDept = dept;
