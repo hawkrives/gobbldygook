@@ -87,4 +87,10 @@ describe('compareCourseToQualification', () => {
         const qualification2 = {$key: 'year', $operator: '$lte', $value: {$type: 'boolean', $and: [2013, 2013]}}
         expect(compareCourseToQualification(course2, qualification2)).to.be.true
     })
+
+    it('throws if $value is a boolean but neither $and nor $or', () => {
+        const course = {department: ['ART', 'ASIAN'], year: 2015}
+        const qualification = {$key: 'year', $operator: '$lte', $value: {$type: 'boolean', $xor: []}}
+        expect(() => compareCourseToQualification(course, qualification)).to.throw(TypeError)
+    })
 })
