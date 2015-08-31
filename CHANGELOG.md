@@ -6,6 +6,7 @@
 		facilitates the Film Studies "… one of which must be a 300-level course" requirement: `one course from children where {level = 300}`
 	- sugar for multiple possible values in a where-query: `… where {dept=(ENGL|FREN)}`
 		You could already do `… where {dept=ENGL | dept=FREN}`; this is just some sugary syntax. (Thanks, WMGST!)
+- NEW: Sort and Group courses in the search sidebar
 
 
 ## 3.0.0-beta.0
