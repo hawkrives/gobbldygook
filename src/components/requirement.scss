@@ -102,6 +102,11 @@
 	padding-right: $area-edge-padding;
 }
 
+.requirement--message,
+.requirement--result > .expression > .expression--description {
+	margin-top: 0.5em;
+}
+
 .requirement .requirement .requirement .requirement--message {
 	// padding-left: 0;
 }
@@ -110,7 +115,15 @@
 	display: flex;
 	justify-content: space-around;
 
+	margin-top: 0.25em;
+
 	.button {
 		border: solid 1px currentColor;
+
+		margin: 0 0.5em 0.5em;
+
+		& + .button {
+			margin-left: 0;
+		}
 	}
 }
