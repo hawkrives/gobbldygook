@@ -70,25 +70,26 @@ export default class Year extends Component {
 			<div className='year'>
 				<header className='year-title'>
 					<h1>{niceYear}</h1>
-					<Button className='remove-year' type='flat'
-						title={`Remove the year ${niceYear}`}
-						onClick={this.removeYear}>
-						Remove Year
-					</Button>
+
+					<span className='buttons'>
+						<Button className='add-semester'
+							type='flat'
+							title='Add Semester'
+							disabled={isAddSemesterDisabled}
+							onClick={this.addSemester}>
+							Add Semester
+						</Button>
+						<Button className='remove-year' type='flat'
+							title={`Remove the year ${niceYear}`}
+							onClick={this.removeYear}>
+							Remove Year
+						</Button>
+					</span>
 				</header>
 				<div className='row'>
 					<div className='semester-list'>
 						{terms.toArray()}
 					</div>
-					<Button className='add-semester'
-						type='raised'
-						title='Add Semester'
-						disabled={isAddSemesterDisabled}
-						onClick={this.addSemester}>
-						{isAddSemesterDisabled
-							? <Icon name='ionicon-android-checkmark-circle' />
-							: <Icon name='ionicon-android-add' />}
-					</Button>
 				</div>
 			</div>
 		)

@@ -55,10 +55,10 @@ export default class CourseTable extends Component {
 			<div className={cx('course-table', this.props.className)}>
 				{years}
 				<Button className='add-year'
-					type='raised'
+					type='flat'
 					title='Add Year'
 					onClick={this.addYear}>
-					Add Year ({expandYear(nextAvailableYear, true, '–')})
+					{`Add ${expandYear(nextAvailableYear, false, '–')}`}
 				</Button>
 			</div>
 		)

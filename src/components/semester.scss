@@ -81,19 +81,6 @@ $semester-edge-padding:
 	}
 }
 
-.add-semester {
-	padding: 0;
-
-	min-width: 48px;
-	font-size: 1.25em;
-	margin: $semester-spacing;
-	margin-right: 0;
-
-	@media all and (max-width: $year-collapse-width) {
-		margin: $semester-spacing;
-	}
-}
-
 .course-list {
 	min-height: 30px;
 	padding-bottom: 0.25em;

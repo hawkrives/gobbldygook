@@ -11,38 +11,7 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 
 	.row {
 		display: flex;
-		flex-flow: row nowrap;
-	}
-}
-
-.add-year {
-	font-feature-settings: 'smcp';
-
-	display: block;
-	width: 100%;
-	text-transform: none;
-
-	@media all and (max-width: $year-collapse-width) {
-		width: calc(100% - #{$year-title-width} - #{$semester-spacing});
-	}
-}
-
-.remove-year {
-	transition: 0.15s;
-
-	min-height: 0;
-	padding: 0 0.5em;
-
-	text-transform: none;
-	font-feature-settings: 'smcp';
-	font-weight: 400;
-
-	color: color('gray', '500');
-
-	&:hover {
-		color: color('red', '500');
-		background-color: color('red', '50');
-		border: solid 1px color('red', '500');
+		flex-flow: row wrap;
 	}
 }
 
@@ -70,4 +39,48 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 	// 4px is the semester edge padding
 	// 7.5px is the internal semester padding
 	margin-left: 4px + 7.5px;
+}
+
+.year-title .button {
+	transition: 0.15s;
+
+	min-height: 0;
+	padding: 0 0.5em;
+
+	text-transform: none;
+	font-feature-settings: 'smcp';
+	font-weight: 400;
+
+	color: color('gray', '500');
+
+	& + .button {
+		margin-left: 0.1em;
+	}
+}
+
+.add-year {
+	font-feature-settings: 'smcp';
+
+	display: block;
+	text-transform: none;
+
+	text-align: left;
+
+	font-weight: 500;
+	font-size: 0.9em;
+
+	// 4px is the semester edge padding
+	// 7.5px is the internal semester padding
+	margin: 0 4px;
+	padding-left: 7.5px;
+
+	&[disabled] {
+		text-decoration: line-through;
+	}
+}
+
+.remove-year:hover {
+	color: color('red', '500');
+	background-color: color('red', '50');
+	border: solid 1px color('red', '500');
 }
