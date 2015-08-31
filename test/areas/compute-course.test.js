@@ -25,7 +25,7 @@ describe('computeCourse', () => {
     })
 
     it('adds the course to the dirty set if it matches', () => {
-        const courses = [{department: ['ART'], number: 130}]
+        const courses = [{department: ['ART'], number: 130, type: 'Research'}]
         const query = {$type: 'course', $course: {department: ['ART'], number: 130, type: 'Research'}}
 
         const dirty = new Set()
