@@ -784,7 +784,7 @@ describe('parse hanson-string', () => {
                 $children: '$all',
             })
         })
-        it('will not count departments from courses-where', () => {
+        it('will refuse to count departments from courses-where', () => {
             expect(() => parse('one department from children')).not.to.throw()
             expect(() => parse('one department from filter')).not.to.throw()
             expect(() => parse('one department from courses where {a = b}')).to.throw()
@@ -823,7 +823,7 @@ describe('parse hanson-string', () => {
                 $from: 'filter',
             })
         })
-        it('can count from where-statement', () => {
+        it('can count from a where-statement', () => {
             expect(parse('one course from courses where {a = b}')).to.deep.equal({
                 $type: 'modifier',
                 $count: {$operator: '$gte', $num: 1},

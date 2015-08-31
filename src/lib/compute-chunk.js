@@ -195,6 +195,7 @@ export function computeModifier({expr, ctx, courses}) {
 
 	// get matches
 	if (expr.$from === 'children') {
+		assertKeys(expr, '$children')
 		filtered = getMatchesFromChildren(expr, ctx)
 	}
 
