@@ -127,8 +127,8 @@ and_qv
 
 
 qualification_value
-  = word:[a-z0-9_\-]i+
-  { return word.join('') }
+  = num:integer         { return num }
+  / word:[a-z0-9_\-]i+  { return word.join('') }
 
 
 func 'function'
@@ -408,6 +408,10 @@ uppercase_letter
 word
   = chars:[a-z]i+
     { return chars.join('') }
+
+integer
+  = digits:digit+
+    { return parseInt(digits.join('')) }
 
 digit
   = num:[0-9]

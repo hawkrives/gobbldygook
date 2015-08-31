@@ -609,6 +609,18 @@ describe('parse hanson-string', () => {
             it('value may include numbers', () => {
                 expect(() => parse('one course where {a = 1}')).not.to.throw()
             })
+            it('if value is an integer, it is coerced to an integer', () => {
+                expect(() => parse('one course where {a = 1}')).to.deep.equal({
+                    $count: {$num: 1, $operator: '$gte'},
+                    $type: 'where',
+                    $where: {
+                        $key: 'a',
+                        $operator: '$eq',
+                        $type: 'qualification',
+                        $value: 1,
+                    },
+                })
+            })
             it('value may include hyphens', () => {
                 expect(() => parse('one course where {a = BTS-B}')).not.to.throw()
             })
