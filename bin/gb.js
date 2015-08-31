@@ -1,6 +1,9 @@
 import nom from 'nomnom'
 import pkg from '../package.json'
 
+import {userCacheDir} from 'appdirs'
+const cacheDir = userCacheDir(pkg.name)
+
 import 'lie/polyfill'
 import fs from 'graceful-fs'
 import 'isomorphic-fetch'
@@ -71,18 +74,17 @@ const COURSE_INFO_LOCATION = process.env.COURSE_INFO || pkg.COURSE_INFO || 'http
 const AREA_INFO_LOCATION = process.env.AREA_INFO || pkg.AREA_INFO || 'https://stolaf.edu/people/rives/areas/info.json'
 
 function prepareDirs() {
-	mkdirp.sync(`~/Library/Caches/es.riv.Gobbldygook/`)
-	mkdirp.sync(`~/Library/Caches/es.riv.Gobbldygook/Courses/`)
-	mkdirp.sync(`~/Library/Caches/es.riv.Gobbldygook/Areas of Study/`)
+	mkdirp.sync(`${cacheDir}/Courses/`)
+	mkdirp.sync(`${cacheDir}/Areas of Study/`)
 }
 
 function cache() {
 	prepareDirs()
 
-	const priorCourseInfo = tryReadJsonFile(`~/Library/Caches/es.riv.Gobbldygook/Courses/info.prior.json`) || {}
-	const priorAreaInfo = tryReadJsonFile(`~/Library/Caches/es.riv.Gobbldygook/Areas/info.prior.json`) || {}
+	const priorCourseInfo = tryReadJsonFile(`${cacheDir}/Courses/info.prior.json`) || {}
+	const priorAreaInfo = tryReadJsonFile(`${cacheDir}/Areas/info.prior.json`) || {}
 
-	mkdirp.sync(`~/Library/Caches/es.riv.Gobbldygook/Courses/`)
+	mkdirp.sync(`${cacheDir}/Courses/`)
 
 	const courseInfo = loadJsonFile(COURSE_INFO_LOCATION)
 		.then(info => {
@@ -93,18 +95,18 @@ function cache() {
 					fullPath: path.normalize(`./${path.join(...COURSE_INFO_LOCATION.split('/').slice(0, -1))}/${file.path}`)}))
 				.map(file => ({...file, data: loadFile(file.fullPath)}))
 				.forEach(file => {
-					file.data.then(data => fs.writeFileSync(`~/Library/Caches/es.riv.Gobbldygook/Courses/${path.basename(file.path)}`, data))
+					file.data.then(data => fs.writeFileSync(`${cacheDir}/Courses/${path.basename(file.path)}`, data))
 				})
 			return info
 		})
 		.then(infoFile => {
 			let promises = map(infoFile.files, file => file.data)
 			Promise.all(promises).then(() => {
-				fs.writeFileSync(`~/Library/Caches/es.riv.Gobbldygook/Courses/info.prior.json`, JSON.stringify(infoFile))
+				fs.writeFileSync(`${cacheDir}/Courses/info.prior.json`, JSON.stringify(infoFile))
 
-				const infoFileExists = fs.existsSync(`~/Library/Caches/es.riv.Gobbldygook/Courses/info.json`)
+				const infoFileExists = fs.existsSync(`${cacheDir}/Courses/info.json`)
 				if (!infoFileExists) {
-					fs.writeFileSync(`~/Library/Caches/es.riv.Gobbldygook/Courses/info.json`, JSON.stringify(infoFile))
+					fs.writeFileSync(`${cacheDir}/Courses/info.json`, JSON.stringify(infoFile))
 				}
 			})
 		})
@@ -126,7 +128,7 @@ function cache() {
 function checkForStaleData() {
 	prepareDirs()
 
-	const courseInfo = tryReadJsonFile(`~/Library/Caches/es.riv.Gobbldygook/Courses/info.json`)
+	const courseInfo = tryReadJsonFile(`${cacheDir}/Courses/info.json`)
 
 	if (!courseInfo) {
 		console.warn('Need to cache courses')
@@ -170,7 +172,7 @@ function search({riddles, unique, sort, ...opts}={}) {
 	// console.warn(`searched for ${JSON.stringify(riddle, null)}`)
 	// check if data has been cached
 	checkForStaleData().then(() => {
-		let base = `~/Library/Caches/es.riv.Gobbldygook/Courses/`
+		let base = `${cacheDir}/Courses/`
 		let files = flatten(map(fs.readdirSync(base),  fn => tryReadJsonFile(path.join(base, fn))))
 
 		let filtered = files
@@ -213,6 +215,7 @@ export function cli() {
 		.help('search for a course')
 		.option('list', {
 			flag: true,
+			default: true,
 			help: 'Print matching courses in a list',
 		})
 		.option('unique', {
