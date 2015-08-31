@@ -61,25 +61,34 @@ function makeModifierExpression({expr}) {
 }
 
 function makeWhereExpression({expr}) {
-	console.log(expr)
+	// console.log(expr)
 	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from ${expr.$where.$key} ${expr.$where.$operator} ${expr.$where.$value}`
 
-	return {description}
+	let contents = map(expr._matches, (course, i) =>
+		<Expression key={i} expr={{$type: 'course', $course: course}} hideIndicator={true} />)
+
+	if (!contents.length) {
+		contents = null
+	}
+
+	return {description, contents}
 }
 
 function makeOccurrenceExpression({expr}) {
-	const contents = <span className='expression expression--course'><CourseExpression {...expr.$course} /></span>
 	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${plur('occurrence', expr.$count.$num)} of `
+
+	const contents = <Expression expr={{...expr, type: 'course'}} />
 
 	return {description, contents}
 }
 
 export default class Expression extends Component {
 	static propTypes = {
-		ctx: PropTypes.object.isRequired,
+		ctx: PropTypes.object,
 		expr: PropTypes.shape({
 			$type: PropTypes.string,
 		}).isRequired,
+		hideIndicator: PropTypes.bool,
 	}
 
 	render() {
@@ -121,7 +130,7 @@ export default class Expression extends Component {
 		}
 
 		else if ($type === 'where') {
-			({description} = makeWhereExpression({...this.props}))
+			({description, contents} = makeWhereExpression({...this.props}))
 		}
 
 		else if ($type === 'occurrence') {
@@ -131,7 +140,7 @@ export default class Expression extends Component {
 		else {
 			console.warn(`<Expression />: type not handled: ${$type}`)
 			console.log(this.props)
-			contents = JSON.stringify(expr)
+			contents = JSON.stringify(expr, null, 2)
 		}
 
 		const className = cx(
@@ -144,13 +153,12 @@ export default class Expression extends Component {
 			<span className={className}>
 				{description &&
 					<span className='expression--description'>
-						{description}
-						{result}
+						{description}{!this.props.hideIndicator && result}
 					</span>}
 				{contents &&
 					<span className='expression--contents'>
 						{contents}
-						{result}
+						{!this.props.hideIndicator && result}
 					</span>}
 			</span>
 		)

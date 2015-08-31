@@ -94,7 +94,7 @@ var config = {
 				loaders: ['json'],
 			},
 			{
-				test: /\.(otf|eot|ttf|woff)$/,
+				test: /\.(otf|eot|ttf|woff2?)$/,
 				loader: 'url-loader?limit=' + urlLoaderLimit,
 			},
 			{
@@ -109,7 +109,7 @@ var config = {
 	},
 
 	postcss: [
-		require('autoprefixer-core')(),
+		require('autoprefixer-core')({ browsers: ['last 2 versions', 'Firefox ESR'] }),
 	],
 }
 
