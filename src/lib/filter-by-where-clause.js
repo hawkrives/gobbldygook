@@ -1,7 +1,6 @@
 import assertKeys from './assert-keys'
 import compareCourseToQualification from './compare-course-to-qualification'
 import filter from 'lodash/collection/filter'
-import flatten from 'lodash/array/flatten'
 import forEach from 'lodash/collection/forEach'
 import has from 'lodash/object/has'
 import isPlainObject from 'lodash/lang/isPlainObject'

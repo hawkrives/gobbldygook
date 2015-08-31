@@ -3,7 +3,6 @@ import Immutable from 'immutable'
 import {Link} from 'react-router'
 
 import fuzzysearch from 'fuzzysearch'
-import identity from 'lodash/utility/identity'
 
 import studentActions from '../flux/student-actions'
 
