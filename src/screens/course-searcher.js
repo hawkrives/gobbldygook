@@ -39,6 +39,7 @@ export default class CourseSearcher extends Component {
 
 	componentDidMount() {
 		stickyfill.add(findDOMNode(this))
+		findDOMNode(this.refs.searchbox).focus()
 	}
 
 	componentWillUnmount() {
@@ -135,6 +136,7 @@ export default class CourseSearcher extends Component {
 						onChange={this.onChange}
 						onKeyDown={this.onKeyDown}
 						autoFocus={true}
+						ref='searchbox'
 					/>
 					<Button
 						className='close-sidebar'
