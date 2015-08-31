@@ -13,8 +13,7 @@ HJSPlugin.prototype.apply = function (compiler) {
 	var self = this
 	var htmlFunction = this.config.html
 
-	// let user pass `true` to use
-	// the simple default
+	// let user pass `true` to use the simple default.
 	// Same if `isDev` and `serveCustomHtmlInDev` is falsy
 	if (!htmlFunction) {
 		return
@@ -28,7 +27,7 @@ HJSPlugin.prototype.apply = function (compiler) {
 		var context = self.getAssets()
 
 		// access to package info
-		context.package = self.config.package
+		// context.package = self.config.package
 
 		// access to stats
 		context.stats = self.stats
@@ -36,18 +35,8 @@ HJSPlugin.prototype.apply = function (compiler) {
 		// expose `isDev` flag to html function context
 		context.isDev = self.config.isDev
 
-		// handle both sync and async versions
-		if (htmlFunction.length === 2) {
-			htmlFunction(context, function (err, result) {
-				if (err) throw err
-				self.addAssets(compiler, result)
-				callback()
-			})
-		}
-		else {
-			self.addAssets(compiler, htmlFunction(context))
-			callback()
-		}
+		self.addAssets(compiler, htmlFunction(context))
+		callback()
 	})
 }
 
@@ -56,8 +45,7 @@ HJSPlugin.prototype.apply = function (compiler) {
 HJSPlugin.prototype.addAssets = function (compiler, data) {
 	var dataType = typeof data
 	var pages
-	// if it's a string, we assume it's an html
-	// string for the index file
+	// if it's a string, we assume it's an html string for the index file
 	if (dataType === 'string') {
 		pages = {}
 		pages[this.filename] = data
@@ -92,7 +80,7 @@ HJSPlugin.prototype.getAssets = function () {
 				assets.css = value[1]
 			}
 
-			// Is the main bundle seems like it's always the first
+			// The main bundle seems like it's always the first
 			value = value[0]
 		}
 
