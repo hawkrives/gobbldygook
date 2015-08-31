@@ -65,13 +65,10 @@ export default class AreaOfStudy extends Component {
 				<div className='area--summary-row'>
 					<h1 className='area--title'>{this.props.name}</h1>
 					<span className='icons'>
-						{
-							this.props.showCloseButton
-								? <Button className='area--remove-button' onClick={this.startRemovalConfirmation}>
-									<Icon name='ionicon-close' />
-								</Button>
-								: null
-						}
+						{this.props.showCloseButton &&
+							<Button className='area--remove-button' onClick={this.startRemovalConfirmation}>
+								<Icon name='ionicon-close' />
+							</Button>}
 						<Icon className='area--open-indicator' name={this.state.open ? 'ionicon-chevron-up' : 'ionicon-chevron-down'} />
 					</span>
 				</div>
