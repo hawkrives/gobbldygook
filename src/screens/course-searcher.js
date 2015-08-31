@@ -47,6 +47,9 @@ export default class CourseSearcher extends Component {
 
 	onSubmit = () => {
 		if (this.state.queryString !== this.state.lastQuery) {
+			if (process.env.NODE_ENV === 'production') {
+				window.ga.q.push(['send', 'search_query', this.state.queryString])
+			}
 			this.query(this.state.queryString)
 		}
 	}
