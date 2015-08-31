@@ -65,20 +65,20 @@ export default function filterByWhereClause(baseList, clause, fullList) {
 	}
 }
 
+const qualificationFunctionLookup = {
+	max: max,
+	min: min,
+}
+
 export function filterByQualification(list, qualification, fullList) {
 	assertKeys(qualification, '$key', '$operator', '$value')
 	const value = qualification.$value
 
 	if (isPlainObject(value)) {
 		if (value.$type === 'function') {
-			let func = undefined
-			if (value.$name === 'max') {
-				func = max
-			}
-			else if (value.$name === 'min') {
-				func = min
-			}
-			else {
+			const func = qualificationFunctionLookup[value.$name]
+
+			if (!func) {
 				throw new ReferenceError(`filterByQualification(): ${value.$name} is not a valid function to call.`)
 			}
 			const complete = fullList || list
