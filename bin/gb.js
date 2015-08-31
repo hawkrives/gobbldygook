@@ -146,7 +146,7 @@ import table from 'text-table'
 function printCourse(options) {
 	return course => {
 		if (options.list) {
-			return [`${course.year}.${course.semester}`, `${course.depts.join('/')} ${course.num}${(course.section || '').toLowerCase()}`, `${course.name}`]
+			return [`${course.year}.${course.semester}`, `${course.depts.join('/')} ${course.num}${course.section ? `[${course.section}]` : ''}${course.type && course.type !== 'Research' && (' (' + course.type + ')')}`, `${course.name}`]
 		}
 		else {
 			console.log(
@@ -224,6 +224,7 @@ export function cli() {
 		})
 		.option('riddles', {
 			type: 'string',
+			required: true,
 			list: true,
 			position: 1,
 			transform: yaml.safeLoad,
