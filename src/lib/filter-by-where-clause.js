@@ -81,11 +81,12 @@ export function filterByQualification(list, qualification, fullList) {
 			if (!func) {
 				throw new ReferenceError(`filterByQualification(): ${value.$name} is not a valid function to call.`)
 			}
-			const complete = fullList || list
-			const filtered = filterByWhereClause(complete, value.$where)
+
+			const completeList = fullList || list
+			const filtered = filterByWhereClause(completeList, value.$where)
 			const items = pluck(filtered, value.$prop)
 			const computed = func(items)
-			// console.log('looked at', complete)
+			// console.log('looked at', completeList)
 			// console.log('reduced to', filtered)
 			// console.log('came up with', computed)
 			value['$computed-value'] = computed
