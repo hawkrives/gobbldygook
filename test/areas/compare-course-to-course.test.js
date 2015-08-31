@@ -99,12 +99,12 @@ describe('compareCourseToCourse', () => {
         })
     })
 
-    describe('compares the "lab" prop', () => {
-        it('the same "lab" value is equal', () => {
-            expect(compareCourseToCourse({lab: true}, {lab: true})).to.be.true
+    describe('compares the "type" prop', () => {
+        it('the same "type" value is equal', () => {
+            expect(compareCourseToCourse({type: 'Lab'}, {type: 'Lab'})).to.be.true
         })
-        it('different "lab" values are different', () => {
-            expect(compareCourseToCourse({lab: true}, {lab: false})).to.be.false
+        it('different "type" values are different', () => {
+            expect(compareCourseToCourse({type: 'Lab'}, {type: 'Research'})).to.be.false
         })
     })
 

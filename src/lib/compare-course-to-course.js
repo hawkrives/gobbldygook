@@ -7,18 +7,19 @@ import includes from 'lodash/collection/includes'
 const baseKeys = [
 	'department',
 	'international',
-	'lab',
 	'level',
 	'number',
 	'section',
 	'semester',
+	'type',
 	'year',
 ]
 
 /**
- * Used as a customizer for _.isEqual; checks if the left-side is a wildcard,
- * and returns as appropriate. _.isEqual falls back to the default comparison
+ * Used as a customizer for `isEqual`; checks if the left-side is a wildcard,
+ * and returns as appropriate. `isEqual` falls back to the default comparison
  * if the customizer returns `undefined`, so we take advantage of that here.
+ *
  * @private
  * @param {any} lhs - left-hand side of the comparison. rhs doesn't matter.
  * @returns {boolean} - if lhs was a wildcard
