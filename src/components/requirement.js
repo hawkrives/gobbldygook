@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import filter from 'lodash/collection/filter'
 import keys from 'lodash/object/keys'
+import map from 'lodash/collection/map'
+import sortBy from 'lodash/collection/sortBy'
 import cx from 'classnames'
 
 import isRequirementName from '../lib/is-requirement-name'
@@ -56,18 +58,13 @@ export default class Requirement extends Component {
 		const title = !(this.props.topLevel) && (
 			<h2 className={`requirement--heading ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`}>
 				<span className='requirement--title'>
-					{/*<span className='requirement--title-status'>{this.props.computed ? '✓' : '×'}</span>*/}
 					<span className='requirement--title-status'>{this.props.computed ? '●' : '○'}</span>
 					{` ${this.props.name}`}
 					{this.props.overridden && <span className='requirement--title-override-text'>{' (Overridden)'}</span>}
 				</span>
-				<Button
-					className='requirement--override-button'
+				<Button className='requirement--override-button'
 					onClick={ev => this.props.toggleOverride({ev, path: this.props.path})}
-					title={this.props.overridden ? `Remove Override` : `Apply Override`}
-				>
-					{/*`[${this.props.overridden ? '⇢' : '⭃ ⭆ ⇝ ⤳'}]`*/}
-					{/*`[${this.props.overridden ? '◯ ◉' : '◎'}]`*/}
+					title={this.props.overridden ? `Remove Override` : `Apply Override`}>
 					{`${this.props.overridden ? '◉' : '◎'}`}
 				</Button>
 			</h2>
