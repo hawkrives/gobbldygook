@@ -616,6 +616,13 @@ describe('parse hanson-string', () => {
                 expect(() => parse('one course where {a = BTS_B}')).not.to.throw()
             })
 
+            it('value may be a boolean and-list', () => {
+                expect(() => parse('four courses where { dept = THEAT & (num = (233 & 253) ) }')).not.to.throw()
+            })
+            it('value may be a boolean or-list', () => {
+                expect(() => parse('four courses where { dept = THEAT & (num = (233 | 253) ) }')).not.to.throw()
+            })
+
             xit('value may rely on a nested qualifier', () => {})
             it('function may include a space between the name and the paren', () => {
                 expect(parse('one course where { year = max (year) from courses where {gereqs=year} }')).to.deep.equal({
@@ -869,6 +876,11 @@ describe('parse hanson-string', () => {
                     $value: 'b',
                 },
             })
+        })
+        it('will refuse to count anything but courses from children-where', () => {
+            expect(() => parse('one department from children where {a = b}')).to.throw()
+            expect(() => parse('one credit from children where {a = b}')).to.throw()
+            expect(() => parse('one course from children where {a = b}')).not.to.throw()
         })
     })
 })
