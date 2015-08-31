@@ -241,12 +241,7 @@ export function cli() {
 		})
 
 	nom.option('version', {
-		flag: true,
-		help: 'print version and exit',
-		callback: () => pkg.version,
-	})
-
-	nom.option('v', {
+		string: '-v, --version',
 		flag: true,
 		help: 'print version and exit',
 		callback: () => pkg.version,
