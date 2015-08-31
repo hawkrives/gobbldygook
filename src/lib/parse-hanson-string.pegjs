@@ -13,88 +13,95 @@
   var expandDepartment = require('./expand-department')
 }
 
-start
+
+Start
   = or
 
-expr 'expression'
+
+Expression 'expression'
   = _ e:(
-      not
-    / parenthetical
-    / course
-    / where
-    / filter
-    / occurrence
-    / of
-    / modifier
-    / reference
+      Not
+    / Parenthetical
+    / Course
+    / Where
+    / Filter
+    / Occurrence
+    / Of
+    / Modifier
+    / Reference
   ) _
   { return e }
 
 
 // Primitives
 
-optional_s
+OptionalS
   = 's'?
 
-where
-  = count:counter _ 'course' optional_s _ 'where' _ where:qualifier
+
+Where
+  = count:Counter _ 'course' OptionalS _ 'where' _ where:Qualifier
   { return {
       $type: 'where',
       $count: count,
       $where: where,
   } }
 
-filter
+
+Filter
   = 'only' _ 'courses' _ filter:(
-      'where' _ where:qualifier { return {$where: where} }
-    / 'from' _ of:of_list { return {$of: of} }
+      'where' _ where:Qualifier { return {$where: where} }
+    / 'from' _ of:OfList { return {$of: of} }
   )
   { return {...filter, $type: 'filter'} }
 
-occurrence
-  = count:counter _ 'occurrence' optional_s _ 'of' _ course:course
+
+Occurrence
+  = count:Counter _ 'occurrence' OptionalS _ 'of' _ course:Course
     { return {
         $type: 'occurrence',
         $count: count,
         $course: course.$course,
     } }
 
+
 // Primitive Components
 
-qualifier
-  = '{' _ q:or_q _ '}'
+Qualifier
+  = '{' _ q:OrQualification _ '}'
     { return q }
 
-or_q 'qualification-or'
-  = lhs:and_q _ '|' _ rhs:or_q
+
+OrQualification 'qualification-or'
+  = lhs:AndQualification _ '|' _ rhs:OrQualification
     { return {
       $type: 'boolean',
       $or: [lhs].concat('$or' in rhs ? rhs.$or : [rhs]),
     } }
-  / and_q
+  / AndQualification
 
 
-and_q 'qualification-and'
-  = lhs:parenthetical_q _ '&' _ rhs:and_q
+AndQualification 'qualification-and'
+  = lhs:ParentheticalQualification _ '&' _ rhs:AndQualification
     { return {
       $type: 'boolean',
       $and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs]),
     } }
-  / parenthetical_q
+  / ParentheticalQualification
 
 
-parenthetical_q
-  = open_paren _ q:or_q _ close_paren { return q }
-  / qualification
+ParentheticalQualification
+  = OpenParen _ q:OrQualification _ CloseParen { return q }
+  / Qualification
 
 
-qualification
-  = key:word _
-    op:operator _
+Qualification
+  = key:Word _
+    op:Operator _
     value:(
-        f:func _ 'from' _ 'courses' _ 'where' _ q:qualifier  { return {...f, $where: q} }
-      / word:qualification_value
-      / list:parenthetical_qv
+        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return {...f, $where: q} }
+      / word:QualificationValue
+      / list:ParentheticalQualificationValue
     )
     { return {
         $type: 'qualification',
@@ -104,42 +111,43 @@ qualification
     } }
 
 
-parenthetical_qv
-  = open_paren _ value:or_qv _ close_paren { return value }
+ParentheticalQualificationValue
+  = OpenParen _ value:OrQualificationValue _ CloseParen { return value }
 
 
-or_qv
-  = lhs:and_qv _ '|' _ rhs:or_qv
+OrQualificationValue
+  = lhs:AndQualificationValue _ '|' _ rhs:OrQualificationValue
     { return {
       $type: 'boolean',
       $or: [lhs].concat(rhs.$or ? rhs.$or : [rhs]),
     } }
-  / and_qv
+  / AndQualificationValue
 
 
-and_qv
-  = lhs:qualification_value _ '&' _ rhs:and_qv
+AndQualificationValue
+  = lhs:QualificationValue _ '&' _ rhs:AndQualificationValue
     { return {
       $type: 'boolean',
       $and: [lhs].concat(rhs.$and ? rhs.$and : [rhs]),
     } }
-  / qualification_value
+  / QualificationValue
 
 
-qualification_value
-  = num:integer         { return num }
+QualificationValue
+  = num:Integer         { return num }
   / word:[a-z0-9_\-]i+  { return word.join('') }
 
 
-func 'function'
-  = name:word _ open_paren _ prop:word _ close_paren
+Function
+  = name:Word _ OpenParen _ prop:Word _ CloseParen
     { return {
       $name: name,
       $prop: prop,
       $type: 'function',
     } }
 
-operator
+
+Operator
   = ('<=')       { return '$lte' }
   / ('<')        { return '$lt'  }
   / ('==' / '=') { return '$eq'  }
@@ -147,13 +155,16 @@ operator
   / ('>')        { return '$gt'  }
   / ('!=')       { return '$ne'  }
 
+
 _ 'whitespace'
   = [ \n\t\r]*
 
-counter
+
+Counter
   = count:english_integer             { return { $operator: '$gte', $num: count } }
   / 'at most' _ count:english_integer { return { $operator: '$lte', $num: count } }
   / 'exactly' _ count:english_integer { return { $operator: '$eq',  $num: count } }
+
 
 english_integer
   = num:(
@@ -186,15 +197,16 @@ english_integer
 
 // Expressions
 
-not
-  = '!' _ value:expr
+Not
+  = '!' _ value:Expression
     { return {
       $type: 'boolean',
       $not: value
     } }
 
-parenthetical
-  = open_paren _ value:start _ close_paren
+
+Parenthetical
+  = OpenParen _ value:Start _ CloseParen
     { return value }
 
 or
@@ -205,32 +217,33 @@ or
     } }
   / and
 
+
 and
-  = lhs:expr _ '&' _ rhs:and
+  = lhs:Expression _ '&' _ rhs:and
     { return {
       $type: 'boolean',
       $and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs]),
     } }
-  / expr
+  / Expression
 
-of_list
-  = open_paren _
-    of:(
-      val:start
-      rest:( _ ',' _ second:start { return second } )*
+
+OfList
+  = OpenParen _ of:(
+      val:Start
+      rest:( _ ',' _ second:Start { return second } )*
       { return [val].concat(rest) }
-    )+ _ ','? _
-    close_paren
-    { return flatten(of) }
+    )+ _ ','? _ CloseParen
+  { return flatten(of) }
 
-of
+
+Of
   = count:(
-        counter
+        Counter
       / 'all'  { return { $operator: '$eq', $was: 'all' } }
       / 'any'  { return { $operator: '$gte', $num: 1, $was: 'any' } }
       / 'none' { return { $operator: '$eq', $num: 0, $was: 'none' } }
     )
-    _ 'of' _ of:of_list
+    _ 'of' _ of:OfList
     {
       if (count.$was === 'all') {
         count.$num = of.length
@@ -248,30 +261,30 @@ of
     }
 
 
-child_list  // select a few requirements to apply the modifier to.
-  = open_paren _ reqs:(
-    val:reference
-    rest:( _ ',' _ second:reference { return second } )*
+ChildList  // select a few requirements to apply the modifier to.
+  = OpenParen _ reqs:(
+    val:Reference
+    rest:( _ ',' _ second:Reference { return second } )*
     { return [val].concat(rest) }
-  )+ _ ','? _ close_paren
+  )+ _ ','? _ CloseParen
   { return flatten(reqs) }
 
 
-modifier
-  = count:counter _
+Modifier
+  = count:Counter _
     what:(
         'course'
       / 'credit'
       / 'department'
-    ) optional_s _ 'from' _
+    ) OptionalS _ 'from' _
     from:(
-        'children' _ 'where' _ where:qualifier { return { $from: 'children-where', $where: where, $children: '$all' } }
+        'children' _ 'where' _ where:Qualifier { return { $from: 'children-where', $where: where, $children: '$all' } }
       / 'children'                             { return { $from: 'children', $children: '$all' }}
-      / 'filter' _ 'where' _ where:qualifier   { return { $from: 'filter-where', $where: where }}
+      / 'filter' _ 'where' _ where:Qualifier   { return { $from: 'filter-where', $where: where }}
       / 'filter'                               { return { $from: 'filter' }}
-      / 'courses' _ 'where' _ where:qualifier  { return { $from: 'where', $where: where } }
-      / c:child_list _ 'where' _ w:qualifier   { return { $from: 'children-where', $where: w, $children: c } }
-      / children:child_list                    { return { $from: 'children', $children: children} }  // an alternative to "from [all] children"
+      / 'courses' _ 'where' _ where:Qualifier  { return { $from: 'where', $where: where } }
+      / c:ChildList _ 'where' _ w:Qualifier   { return { $from: 'children-where', $where: w, $children: c } }
+      / children:ChildList                    { return { $from: 'children', $children: children} }  // an alternative to "from [all] children"
     )
     {
       if (from.$from === 'where' && what === 'department') {
@@ -289,7 +302,7 @@ modifier
     }
 
 
-requirement_title
+RequirementTitle
   = title:(
       initial:[A-Z0-9]
       rest:[A-Za-z0-9_\- /'.]*
@@ -298,10 +311,10 @@ requirement_title
     { return title.trim() }
 
 
-reference 'requirement reference'
+Reference 'requirement reference'
   = title:(
-      a:requirement_title
-      b:(_ open_paren t:requirement_title close_paren { return ` (${t})` })?
+      a:RequirementTitle
+      b:(_ OpenParen t:RequirementTitle CloseParen { return ` (${t})` })?
       { return `${a}${b || ''}` }
     )
     {
@@ -320,13 +333,13 @@ reference 'requirement reference'
 
 // Course
 
-course
-  = dept:c_dept? _
-    num:c_num
+Course
+  = dept:CourseDepartment? _
+    num:CourseNumber
     details:(
-      '.' section:c_sect sub:(
-        '.' year:c_year sub:(
-          '.' semester:c_sem { return {semester} }
+      '.' section:CourseSection sub:(
+        '.' year:CourseYear sub:(
+          '.' semester:CourseSemester { return {semester} }
         )? { return {...sub, year} }
       )? { return {...sub, section} }
     )?
@@ -341,12 +354,13 @@ course
     }
   }
 
-c_dept
-  = dept1:(c1:uppercase_letter c2:uppercase_letter { return c1 + c2 })
+
+CourseDepartment
+  = dept1:(c1:UppercaseLetter c2:UppercaseLetter { return c1 + c2 })
     part2:(
-        chars:uppercase_letter+
+        chars:UppercaseLetter+
           { return {dept: chars.join(''), type: 'joined'} }
-      / '/' l1:uppercase_letter l2:uppercase_letter
+      / '/' l1:UppercaseLetter l2:UppercaseLetter
           { return {dept: l1 + l2, type: 'seperate'} }
     )
     {
@@ -358,18 +372,19 @@ c_dept
       else if (type === 'seperate') {
         department = {department: [
           expandDepartment(dept1),
-          expandDepartment(dept2)
+          expandDepartment(dept2),
         ]}
       }
       storeDept(department)
       return department
     }
 
-c_num 'course number'
+
+CourseNumber 'course number'
   = num:(
-        nums:(digit digit digit)
+        nums:(Digit Digit Digit)
           { return {number: parseInt(nums.join(''))} }
-      / num:digit 'XX'
+      / num:Digit 'XX'
           { return {level: num * 100} }
     )
     international:'I'? lab:'L'?
@@ -386,39 +401,48 @@ c_num 'course number'
       return {...result, ...num}
     }
 
-c_sect
-  = uppercase_letter
+
+CourseSection
+  = UppercaseLetter
   / '*'
 
-c_year
-  = nums:(digit digit digit digit)
+
+CourseYear
+  = nums:(Digit Digit Digit Digit)
     { return parseInt(nums.join('')) }
   / '*'
 
-c_sem
+
+CourseSemester
   = num:[1-5] { return parseInt(num) }
   / '*'
 
+
 // Primitives
 
-uppercase_letter
+UppercaseLetter
   = char:[A-Z]
     { return char }
 
-word
+
+Word
   = chars:[a-z]i+
     { return chars.join('') }
 
-integer
-  = digits:digit+
+
+Integer
+  = digits:Digit+
     { return parseInt(digits.join('')) }
 
-digit
+
+Digit
   = num:[0-9]
     { return parseInt(num) }
 
-open_paren
+
+OpenParen
   = '('
 
-close_paren
+
+CloseParen
   = ')'
