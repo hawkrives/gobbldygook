@@ -232,7 +232,7 @@ modifier
         'children' { return { $from: 'children', $children: '$all' }}
       / 'filter' { return { $from: 'filter' }}
       / 'courses' _ 'where' _ where:qualifier { return {$from: 'where', $where: where} }
-      / // select a few requirements to apply the modifier to
+      / // select a few requirements to apply the modifier to.
         // an alternative to "from children"
         open_paren _ reqs:(
           val:reference
@@ -256,7 +256,7 @@ modifier
 requirement_title
   = title:(
       initial:[A-Z0-9]
-      rest:[A-Za-z0-9_\- /]*
+      rest:[A-Za-z0-9_\- /'.]*
       { return initial + rest.join('') }
     )
     { return title.trim() }

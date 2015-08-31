@@ -542,11 +542,11 @@ module.exports = (function() {
 				value: "[A-Z0-9]",
 				description: "[A-Z0-9]"
 			},
-			peg$c133 = /^[A-Za-z0-9_\- \/]/,
+			peg$c133 = /^[A-Za-z0-9_\- \/'.]/,
 			peg$c134 = {
 				type: "class",
-				value: "[A-Za-z0-9_\\- \\/]",
-				description: "[A-Za-z0-9_\\- \\/]"
+				value: "[A-Za-z0-9_\\- \\/'.]",
+				description: "[A-Za-z0-9_\\- \\/'.]"
 			},
 			peg$c135 = function peg$c135(initial, rest) {
 				return initial + rest.join('');
