@@ -529,7 +529,9 @@ module.exports = (function() {
 				};
 			},
 			peg$c130 = function peg$c130(count, what, from) {
-				if (what === 'department' && from['$from'] === 'where') throw new Error('cannot use a modifier with "departments from courses"');
+				if (what === 'department' && from['$from'] === 'where') {
+					throw new Error('cannot use a modifier with "departments from courses where {}"');
+				}
 				return _extends({}, from, {
 					$type: 'modifier',
 					$count: count,

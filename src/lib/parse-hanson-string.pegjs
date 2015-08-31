@@ -242,8 +242,9 @@ modifier
         { return { $from: 'children', $children: flatten(reqs) } }
     )
     {
-      if (what === 'department' && from['$from'] === 'where')
-        throw new Error('cannot use a modifier with "departments from courses"')
+      if (what === 'department' && from['$from'] === 'where') {
+        throw new Error('cannot use a modifier with "departments from courses where {}"')
+      }
       return {
         ...from,
         $type: 'modifier',
