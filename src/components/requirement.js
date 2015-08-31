@@ -32,6 +32,11 @@ export default class Requirement extends Component {
 	render() {
 		const childKeys = filter(keys(this.props), isRequirementName)
 
+		const extraClasses = {overridden: this.props.overridden}
+		if (this.props.result && this.props.result.$type === 'course') {
+			extraClasses['compact-results'] = true
+		}
+
 		const result = this.props.result &&
 			<div className='requirement--result'><Expression expr={this.props.result} ctx={this.props} /></div>
 
@@ -81,7 +86,7 @@ export default class Requirement extends Component {
 		)
 
 		return (
-			<div className={cx(`requirement`, {overridden: this.props.overridden})}>
+			<div className={cx(`requirement`, extraClasses)}>
 				{title}
 				{message}
 				{override}
