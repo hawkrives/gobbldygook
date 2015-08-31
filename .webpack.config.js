@@ -1,7 +1,6 @@
 /* eslint no-var:0 */
 /* global module */
 
-var autoPrefixer = require('autoprefixer-core')
 var HtmlPlugin = require('./webpack/html-plugin')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -109,7 +108,9 @@ var config = {
 		],
 	},
 
-	postcss: [autoPrefixer()],
+	postcss: [
+		require('autoprefixer-core')(),
+	],
 }
 
 
