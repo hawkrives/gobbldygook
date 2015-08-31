@@ -84,6 +84,7 @@ export default class Sidebar extends Component {
 					: <CourseSearcher
 						isHidden={!this.props.isSearching}
 						toggle={this.props.toggleSearchSidebar}
+						student={this.props.student}
 					/>}
 			</aside>
 		)

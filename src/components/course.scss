@@ -3,8 +3,6 @@
 @import '../mixins/list-inline';
 
 .course {
-	cursor: grab;
-
 	.warnings {
 		font-size: 0.85em;
 		font-feature-settings: 'onum';
@@ -25,6 +23,7 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
+		cursor: grab;
 	}
 
 	.title {

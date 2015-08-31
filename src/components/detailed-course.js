@@ -6,28 +6,46 @@ import plur from 'plur'
 import Button from './button'
 import BasicCourse from './basic-course'
 
+import Student from '../models/student'
+import Schedule from '../models/schedule'
+
 import studentActions from '../flux/student-actions'
 import semesterName from '../helpers/semester-name'
+import expandYear from '../helpers/expand-year'
 
-function findSemesterList() {
-	return [
-		{id: 1, title: 'Fall 2012-13'},
-		{id: 2, title: 'Interim 2012-13'},
-		{id: 3, title: 'Spring 2012-13'},
-	]
+function findSemesterList(student) {
+	return student.schedules
+		.toList()
+		.map(sched => ({
+			...sched.toObject(),
+			title: `${semesterName(sched.get('semester'))} – ${sched.get('title')}`,
+		}))
+		.sortBy(sched => `${sched.year} ${sched.semester}`)
+		.groupBy(sched => sched.year)
+		.toJS()
 }
 
 export default class DetailedCourse extends Component {
 	static propTypes = {
-		children: PropTypes.array,
+		children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 		info: PropTypes.object.isRequired,
 		onClick: PropTypes.func.isRequired,
-		schedule: PropTypes.object.isRequired,
-		student: PropTypes.object.isRequired,
+		schedule: PropTypes.instanceOf(Schedule),
+		student: PropTypes.instanceOf(Student).isRequired,
 	}
 
 	removeFromSemester = () => {
 		studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.info.clbid)
+	}
+
+	moveToSchedule = ev => {
+		const targetScheduleId = parseInt(ev.target.value)
+		if (this.props.schedule) {
+			studentActions.moveCourse(this.props.student.id, this.props.schedule.id, targetScheduleId, this.props.info.clbid)
+		}
+		else {
+			studentActions.addCourse(this.props.student.id, targetScheduleId, this.props.info.clbid)
+		}
 	}
 
 	render() {
@@ -47,9 +65,13 @@ export default class DetailedCourse extends Component {
 					<p>Offered in {semesterName(course.semester)} {course.year}. {course.credits} {plur('credit', course.credits)}.</p>
 				</div>
 				<div className='tools'>
-					<select className='semester-select'>
-						{map(findSemesterList(), (s =>
-							<option value={s.id} key={s.id}>{s.title}</option>))}
+					<select className='semester-select' value={this.props.schedule ? this.props.schedule.id : null} onChange={this.moveToSchedule}>
+						{map(findSemesterList(this.props.student), (group, key) => (
+							<optgroup key={key} label={expandYear(key, true, '–')}>
+								{(map(group, sched =>
+									<option value={sched.id} key={sched.id}>{sched.title}</option>))}
+							</optgroup>
+						))}
 					</select>
 					<Button className='remove-course'
 						onClick={this.removeFromSemester}

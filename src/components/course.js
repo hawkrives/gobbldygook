@@ -7,6 +7,8 @@ import isNull from 'lodash/lang/isNull'
 import map from 'lodash/collection/map'
 
 import itemTypes from '../models/item-types'
+import Schedule from '../models/schedule'
+import Student from '../models/student'
 
 import List from './list'
 import DetailedCourse from './detailed-course'
@@ -42,7 +44,8 @@ class Course extends Component {
 		index: PropTypes.number,
 		info: PropTypes.object.isRequired,
 		isDragging: PropTypes.bool.isRequired,  // react-dnd
-		schedule: PropTypes.object,
+		schedule: PropTypes.instanceOf(Schedule),
+		student: PropTypes.instanceOf(Student),
 	}
 
 	static defaultProps = {

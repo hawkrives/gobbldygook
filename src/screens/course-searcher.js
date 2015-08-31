@@ -15,6 +15,7 @@ import Course from '../components/course'
 import Icon from '../components/icon'
 import Loading from '../components/loading'
 
+import Student from '../models/student'
 import stickyfill from '../lib/init-stickyfill'
 
 import './course-searcher.scss'
@@ -22,6 +23,7 @@ import './course-searcher.scss'
 export default class CourseSearcher extends Component {
 	static propTypes = {
 		isHidden: PropTypes.bool,
+		student: PropTypes.instanceOf(Student).isRequired,
 		toggle: PropTypes.func.isRequired,
 	}
 
@@ -121,7 +123,7 @@ export default class CourseSearcher extends Component {
 					<p className='course-group-title'>{toPrettyTerm(term)}</p>
 					<ul className='course-list'>
 						{map(courses, (course, index) =>
-							<li key={index}><Course info={course} /></li>)}
+							<li key={index}><Course info={course} student={this.props.student} /></li>)}
 					</ul>
 				</li>
 			)
