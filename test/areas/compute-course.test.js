@@ -26,7 +26,7 @@ describe('computeCourse', () => {
 
     it('adds the course to the dirty set if it matches', () => {
         const courses = [{department: ['ART'], number: 130}]
-        const query = {$type: 'course', $course: {department: ['ART'], number: 130}}
+        const query = {$type: 'course', $course: {department: ['ART'], number: 130, type: 'Research'}}
 
         const dirty = new Set()
 
@@ -36,12 +36,12 @@ describe('computeCourse', () => {
             .to.have.property('size', 1)
 
         expect([...dirty])
-            .to.deep.equal(['ART 130'])
+            .to.deep.equal(['ART 130 Research'])
     })
 
     it('does not add the course to the dirty set if it did not match', () => {
-        const courses = [{department: ['ASIAN', 'ART'], number: 130}]
-        const query = {$type: 'course', $course: {department: ['ART'], number: 999}}
+        const courses = [{department: ['ASIAN', 'ART'], number: 130, type: 'Research'}]
+        const query = {$type: 'course', $course: {department: ['ART'], number: 999, type: 'Lab'}}
 
         const dirty = new Set()
 
@@ -55,10 +55,10 @@ describe('computeCourse', () => {
     })
 
     it('returns false if the course is in the dirty set', () => {
-        const courses = [{department: ['ART'], number: 130}]
-        const query = {$type: 'course', $course: {department: ['ART'], number: 130}}
+        const courses = [{department: ['ART'], number: 130, type: 'Research'}]
+        const query = {$type: 'course', $course: {department: ['ART'], number: 130, type: 'Research'}}
 
-        const dirty = new Set(['ART 130'])
+        const dirty = new Set(['ART 130 Research'])
 
         const {computedResult, match} = computeCourse({expr: query, courses, dirty})
 
@@ -66,7 +66,7 @@ describe('computeCourse', () => {
             .to.be.false
 
         expect(match)
-            .to.deep.equal({department: ['ART'], number: 130})
+            .to.deep.equal({department: ['ART'], number: 130, type: 'Research'})
     })
 
     it('merges a query and the found course', () => {
