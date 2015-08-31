@@ -203,188 +203,186 @@ describe('computeModifier', () => {
         })
     })
 
-    describe('supports counting', () => {
-        it('courses', () => {
-            const modifier = {
-                $type: 'modifier',
-                $count: {$operator: '$gte', $num: 3},
-                $what: 'course',
-                $from: 'children',
-                $children: '$all',
-            }
+    it('supports counting courses', () => {
+        const modifier = {
+            $type: 'modifier',
+            $count: {$operator: '$gte', $num: 3},
+            $what: 'course',
+            $from: 'children',
+            $children: '$all',
+        }
 
-            const req = {
-                Bible: {
-                    $type: 'requirement',
-                    result: {
-                        $type: 'boolean',
-                        $and: [
-                            {$type: 'course', $course: {department: ['REL'], number: 111}},
-                            {$type: 'course', $course: {department: ['REL'], number: 112}},
-                        ],
-                    },
+        const req = {
+            Bible: {
+                $type: 'requirement',
+                result: {
+                    $type: 'boolean',
+                    $and: [
+                        {$type: 'course', $course: {department: ['REL'], number: 111}},
+                        {$type: 'course', $course: {department: ['REL'], number: 112}},
+                    ],
                 },
-                A: {
-                    $type: 'requirement',
-                    result: {
-                        $type: 'course',
-                        $course: {department: ['CSCI'], number: 251},
-                    },
+            },
+            A: {
+                $type: 'requirement',
+                result: {
+                    $type: 'course',
+                    $course: {department: ['CSCI'], number: 251},
                 },
-                result: modifier,
-            }
+            },
+            result: modifier,
+        }
 
-            const dirty = new Set()
-            const courses = [
-                {department: ['REL'], number: 111, credits: 1.0},
-                {department: ['REL'], number: 112, credits: 1.0},
-                {department: ['CSCI'], number: 251, credits: 1.0},
-            ]
+        const dirty = new Set()
+        const courses = [
+            {department: ['REL'], number: 111, credits: 1.0},
+            {department: ['REL'], number: 112, credits: 1.0},
+            {department: ['CSCI'], number: 251, credits: 1.0},
+        ]
 
-            req.Bible.computed = computeChunk({expr: req.Bible.result, ctx: req, courses, dirty})
-            req.A.computed = computeChunk({expr: req.A.result, ctx: req, courses, dirty})
+        req.Bible.computed = computeChunk({expr: req.Bible.result, ctx: req, courses, dirty})
+        req.A.computed = computeChunk({expr: req.A.result, ctx: req, courses, dirty})
 
-            const {computedResult, matches, counted} = computeModifier({expr: modifier, ctx: req, courses, dirty})
+        const {computedResult, matches, counted} = computeModifier({expr: modifier, ctx: req, courses, dirty})
 
-            expect(computedResult)
-                .to.be.true
-            expect(matches).to.deep.equal([
-                {department: ['REL'], number: 111, credits: 1.0, _extraKeys: ['credits']},
-                {department: ['REL'], number: 112, credits: 1.0, _extraKeys: ['credits']},
-                {department: ['CSCI'], number: 251, credits: 1.0, _extraKeys: ['credits']},
-            ])
-            expect(counted)
-                .to.equal(3)
+        expect(computedResult)
+            .to.be.true
+        expect(matches).to.deep.equal([
+            {department: ['REL'], number: 111, credits: 1.0, _extraKeys: ['credits']},
+            {department: ['REL'], number: 112, credits: 1.0, _extraKeys: ['credits']},
+            {department: ['CSCI'], number: 251, credits: 1.0, _extraKeys: ['credits']},
+        ])
+        expect(counted)
+            .to.equal(3)
 
-            expect(modifier).to.deep.equal({
-                $type: 'modifier',
-                $count: {$operator: '$gte', $num: 3},
-                $what: 'course',
-                $from: 'children',
-                $children: '$all',
-            })
+        expect(modifier).to.deep.equal({
+            $type: 'modifier',
+            $count: {$operator: '$gte', $num: 3},
+            $what: 'course',
+            $from: 'children',
+            $children: '$all',
         })
+    })
 
-        it('departments', () => {
-            const modifier = {
-                $type: 'modifier',
-                $count: {$operator: '$gte', $num: 3},
-                $what: 'department',
-                $from: 'children',
-                $children: '$all',
-            }
+    it('supports counting departments', () => {
+        const modifier = {
+            $type: 'modifier',
+            $count: {$operator: '$gte', $num: 3},
+            $what: 'department',
+            $from: 'children',
+            $children: '$all',
+        }
 
-            const req = {
-                CHBI: {
-                    $type: 'requirement',
-                    result: {
-                        $type: 'boolean',
-                        $and: [
-                            {$type: 'course', $course: {department: ['CHEM', 'BIO'], number: 111}},
-                            {$type: 'course', $course: {department: ['CHEM', 'BIO'], number: 112}},
-                        ],
-                    },
+        const req = {
+            CHBI: {
+                $type: 'requirement',
+                result: {
+                    $type: 'boolean',
+                    $and: [
+                        {$type: 'course', $course: {department: ['CHEM', 'BIO'], number: 111}},
+                        {$type: 'course', $course: {department: ['CHEM', 'BIO'], number: 112}},
+                    ],
                 },
-                A: {
-                    $type: 'requirement',
-                    result: {
-                        $type: 'course',
-                        $course: {department: ['CSCI'], number: 251},
-                    },
+            },
+            A: {
+                $type: 'requirement',
+                result: {
+                    $type: 'course',
+                    $course: {department: ['CSCI'], number: 251},
                 },
-                result: modifier,
-            }
+            },
+            result: modifier,
+        }
 
-            const dirty = new Set()
-            const courses = [
-                {department: ['CHEM', 'BIO'], number: 111, credits: 1.0},
-                {department: ['CHEM', 'BIO'], number: 112, credits: 1.0},
-                {department: ['CSCI'], number: 251, credits: 1.0},
-            ]
+        const dirty = new Set()
+        const courses = [
+            {department: ['CHEM', 'BIO'], number: 111, credits: 1.0},
+            {department: ['CHEM', 'BIO'], number: 112, credits: 1.0},
+            {department: ['CSCI'], number: 251, credits: 1.0},
+        ]
 
-            req.CHBI.computed = computeChunk({expr: req.CHBI.result, ctx: req, courses, dirty})
-            req.A.computed = computeChunk({expr: req.A.result, ctx: req, courses, dirty})
+        req.CHBI.computed = computeChunk({expr: req.CHBI.result, ctx: req, courses, dirty})
+        req.A.computed = computeChunk({expr: req.A.result, ctx: req, courses, dirty})
 
-            const {computedResult, matches, counted} = computeModifier({expr: modifier, ctx: req, courses, dirty})
+        const {computedResult, matches, counted} = computeModifier({expr: modifier, ctx: req, courses, dirty})
 
-            expect(computedResult)
-                .to.be.true
-            expect(matches).to.deep.equal([
-                {department: ['CHEM', 'BIO'], number: 111, credits: 1.0, _extraKeys: ['credits']},
-                {department: ['CHEM', 'BIO'], number: 112, credits: 1.0, _extraKeys: ['credits']},
-                {department: ['CSCI'], number: 251, credits: 1.0, _extraKeys: ['credits']},
-            ])
-            expect(counted)
-                .to.equal(3)
+        expect(computedResult)
+            .to.be.true
+        expect(matches).to.deep.equal([
+            {department: ['CHEM', 'BIO'], number: 111, credits: 1.0, _extraKeys: ['credits']},
+            {department: ['CHEM', 'BIO'], number: 112, credits: 1.0, _extraKeys: ['credits']},
+            {department: ['CSCI'], number: 251, credits: 1.0, _extraKeys: ['credits']},
+        ])
+        expect(counted)
+            .to.equal(3)
 
-            expect(modifier).to.deep.equal({
-                $type: 'modifier',
-                $count: {$operator: '$gte', $num: 3},
-                $what: 'department',
-                $from: 'children',
-                $children: '$all',
-            })
+        expect(modifier).to.deep.equal({
+            $type: 'modifier',
+            $count: {$operator: '$gte', $num: 3},
+            $what: 'department',
+            $from: 'children',
+            $children: '$all',
         })
+    })
 
-        it('credits', () => {
-            const modifier = {
-                $type: 'modifier',
-                $count: {$operator: '$gte', $num: 2},
-                $what: 'credit',
-                $from: 'children',
-                $children: '$all',
-            }
+    it('supports counting credits', () => {
+        const modifier = {
+            $type: 'modifier',
+            $count: {$operator: '$gte', $num: 2},
+            $what: 'credit',
+            $from: 'children',
+            $children: '$all',
+        }
 
-            const req = {
-                Bible: {
-                    $type: 'requirement',
-                    result: {
-                        $type: 'boolean',
-                        $or: [
-                            {$type: 'course', $course: {department: ['REL'], number: 111}},
-                            {$type: 'course', $course: {department: ['REL'], number: 112}},
-                            {$type: 'course', $course: {department: ['REL'], number: 251}},
-                        ],
-                    },
+        const req = {
+            Bible: {
+                $type: 'requirement',
+                result: {
+                    $type: 'boolean',
+                    $or: [
+                        {$type: 'course', $course: {department: ['REL'], number: 111}},
+                        {$type: 'course', $course: {department: ['REL'], number: 112}},
+                        {$type: 'course', $course: {department: ['REL'], number: 251}},
+                    ],
                 },
-                A: {
-                    $type: 'requirement',
-                    result: {
-                        $type: 'course',
-                        $course: {department: ['CSCI'], number: 251},
-                    },
+            },
+            A: {
+                $type: 'requirement',
+                result: {
+                    $type: 'course',
+                    $course: {department: ['CSCI'], number: 251},
                 },
-                result: modifier,
-            }
+            },
+            result: modifier,
+        }
 
-            const dirty = new Set()
-            const courses = [
-                {department: ['REL'], number: 111, credits: 1.0},
-                {department: ['REL'], number: 112, credits: 1.0},
-                {department: ['CSCI'], number: 251, credits: 1.0},
-            ]
+        const dirty = new Set()
+        const courses = [
+            {department: ['REL'], number: 111, credits: 1.0},
+            {department: ['REL'], number: 112, credits: 1.0},
+            {department: ['CSCI'], number: 251, credits: 1.0},
+        ]
 
-            req.Bible.computed = computeChunk({expr: req.Bible.result, ctx: req, courses, dirty})
-            req.A.computed = computeChunk({expr: req.A.result, ctx: req, courses, dirty})
+        req.Bible.computed = computeChunk({expr: req.Bible.result, ctx: req, courses, dirty})
+        req.A.computed = computeChunk({expr: req.A.result, ctx: req, courses, dirty})
 
-            const {computedResult, matches, counted} = computeModifier({expr: modifier, ctx: req, courses, dirty})
+        const {computedResult, matches, counted} = computeModifier({expr: modifier, ctx: req, courses, dirty})
 
-            expect(computedResult)
-                .to.be.true
-            expect(matches).to.deep.equal([
-                {department: ['REL'], number: 111, credits: 1.0, _extraKeys: ['credits']},
-                {department: ['CSCI'], number: 251, credits: 1.0, _extraKeys: ['credits']},
-            ])
-            expect(counted)
-                .to.equal(2)
+        expect(computedResult)
+            .to.be.true
+        expect(matches).to.deep.equal([
+            {department: ['REL'], number: 111, credits: 1.0, _extraKeys: ['credits']},
+            {department: ['CSCI'], number: 251, credits: 1.0, _extraKeys: ['credits']},
+        ])
+        expect(counted)
+            .to.equal(2)
 
-            expect(modifier).to.deep.equal({
-                $type: 'modifier',
-                $count: {$operator: '$gte', $num: 2},
-                $what: 'credit',
-                $from: 'children',
-                $children: '$all',
-            })
+        expect(modifier).to.deep.equal({
+            $type: 'modifier',
+            $count: {$operator: '$gte', $num: 2},
+            $what: 'credit',
+            $from: 'children',
+            $children: '$all',
         })
     })
 
