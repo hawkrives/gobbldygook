@@ -88,7 +88,7 @@ HJSPlugin.prototype.getAssets = function () {
 		// Webpack outputs an array for each chunk when using sourcemaps
 		if (value instanceof Array) {
 			// if we've got a CSS file add it here
-			if (chunk === 'main' && value.length === 2) {
+			if (chunk === 'main' && value.length >= 2) {
 				assets.css = value[1]
 			}
 
