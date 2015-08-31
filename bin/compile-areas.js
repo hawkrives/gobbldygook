@@ -1,5 +1,4 @@
-import meow from 'meow'
-import pkg from '../package.json'
+import nom from 'nomnom'
 import fs from 'graceful-fs'
 import yaml from 'js-yaml'
 import enhanceHanson from '../src/lib/enhance-hanson'
@@ -8,18 +7,23 @@ import mkdirp from 'mkdirp'
 import path from 'path'
 
 export function cli() {
-	const args = meow({
-		pkg,
-		help: `Usage:
-			compile-areas input-dir --out-dir output/`,
-	})
+	const args = nom
+		.script('compile-areas')
+		.option('inDir', {
+			position: 0,
+			required: true,
+			metavar: 'DIR',
+			help: 'The directory to process',
+		})
+		.option('outDir', {
+			required: true,
+			abbr: 'o',
+			full: 'out-dir',
+			help: 'The directory to output to',
+		})
+		.parse()
 
-	if (!args.flags.outDir || !args.input.length) {
-		args.showHelp()
-	}
-
-	const inDir = args.input[0]
-	const outDir = args.flags.outDir
+	const {inDir, outDir} = args
 	const sources = findAreas({dir: inDir})
 
 	sources
