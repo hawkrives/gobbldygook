@@ -1,3 +1,57 @@
 name: Women's and Gender Studies
 type: concentration
 revision: 2014-15
+result: Introduction & Additional Courses
+
+Introduction:
+    WMGST 121
+
+Additional Courses:
+    message:
+        In consultation with the instructor and the program director,
+        concentrators may count one course not designated as an approved
+        women's and gender studies course. Students who apply partial-credit
+        courses towards the concentration must still complete the minimum
+        number of credits. No more than one course taken elsewhere may be
+        counted towards the concentration.
+
+        Four additional courses, three of which must be at level II or III,
+        and they must be drawn from at least three departments.
+
+    filter: only courses from (
+            AMST 100,
+            ART 277,
+            ENGL 242, 264, 340,
+            FAMST 242, 253,
+            HIST 320.*.*.*,
+            PHIL 245,
+            PSYCH 390, 396.*.*.*,
+            REL 209, 344,
+            SOAN 235, 246, 260,
+
+            FREN 372.*.*.*,
+            HIST 121, 189.*.*.*, 191.*.*.*, 224, 231, 237, 239, 320.*.*.*,
+            PHIL 245,
+            PSYCH 223, 241,
+            REL 209, 264,
+            SOAN 128, 235, 261,
+            SPAN 250,
+
+            DANCE 246,
+            ENGL 246,
+            340.*.*.*,
+            FAMST 253,
+            HIST 115, 122, 182, 189.*.*.*, 272, 320.*.*.*,
+            REL 209, 264,
+            SOAN 246,
+
+            BIO 124,
+            NORW 282,
+            NURS 386,
+            PSYCH 350
+        )
+
+    result:
+        four credits from filter &
+        three courses from filter where {level = 200 | level = 300} &
+        three departments from filter
