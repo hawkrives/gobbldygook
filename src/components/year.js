@@ -10,6 +10,7 @@ import Semester from './semester'
 
 import isCurrentYear from '../helpers/is-current-year'
 import expandYear from '../helpers/expand-year'
+import semesterName from '../helpers/semester-name'
 import findFirstAvailableSemester from '../helpers/find-first-available-semester'
 
 import './year.scss'
@@ -28,7 +29,7 @@ export default class Year extends Component {
 	}
 
 	addSemester = () => {
-		let nextAvailableSemester = findFirstAvailableSemester(this.props.student.schedules, this.props.year)
+		const nextAvailableSemester = findFirstAvailableSemester(this.props.student.schedules, this.props.year)
 
 		studentActions.addSchedule(this.props.student.id, {
 			year: this.props.year, semester: nextAvailableSemester,
@@ -37,7 +38,7 @@ export default class Year extends Component {
 	}
 
 	removeYear = () => {
-		let scheduleIds = this.props.student.schedules
+		const scheduleIds = this.props.student.schedules
 			.filter(isCurrentYear(this.props.year))
 			.map(sched => sched.id)
 
@@ -64,6 +65,7 @@ export default class Year extends Component {
 
 		const niceYear = expandYear(this.props.year)
 
+		const nextAvailableSemester = findFirstAvailableSemester(this.props.student.schedules, this.props.year)
 		const isAddSemesterDisabled = !(this.canAddSemester())
 
 		return (
@@ -77,7 +79,7 @@ export default class Year extends Component {
 							title='Add Semester'
 							disabled={isAddSemesterDisabled}
 							onClick={this.addSemester}>
-							Add Semester
+							{`Add ‘${semesterName(nextAvailableSemester)}’`}
 						</Button>
 						<Button className='remove-year' type='flat'
 							title={`Remove the year ${niceYear}`}
