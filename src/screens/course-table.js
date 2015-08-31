@@ -36,7 +36,19 @@ export default class CourseTable extends Component {
 			return null
 		}
 
-		let years = this.props.student.schedules
+		const nextAvailableYear = findFirstAvailableYear(this.props.student.schedules, this.props.student.matriculation)
+
+		const nextYearButton = (
+			<Button className='add-year'
+				key='add-year'
+				type='flat'
+				title='Add Year'
+				onClick={this.addYear}>
+				{`Add ${expandYear(nextAvailableYear, false, '–')}`}
+			</Button>
+		)
+
+		const years = this.props.student.schedules
 			.groupBy(schedule => schedule.year)
 			.map((schedules, year) =>
 				<Year
@@ -47,19 +59,13 @@ export default class CourseTable extends Component {
 					coursesLoaded={this.props.coursesLoaded}
 					showSearchSidebar={this.props.showSearchSidebar}
 				/>)
+			.toList()
+			.splice(nextAvailableYear - this.props.student.matriculation, 0, nextYearButton)
 			.toArray()
-
-		const nextAvailableYear = findFirstAvailableYear(this.props.student.schedules, this.props.student.matriculation)
 
 		return (
 			<div className={cx('course-table', this.props.className)}>
 				{years}
-				<Button className='add-year'
-					type='flat'
-					title='Add Year'
-					onClick={this.addYear}>
-					{`Add ${expandYear(nextAvailableYear, false, '–')}`}
-				</Button>
 			</div>
 		)
 	}
