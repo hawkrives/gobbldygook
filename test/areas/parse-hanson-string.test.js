@@ -516,22 +516,13 @@ describe('parse hanson-string', () => {
                             {
                                 $type: 'boolean',
                                 $and: [
-                                    {
-                                        $type: 'reference',
-                                        $requirement: 'B',
-                                    },
-                                    {
-                                        $type: 'reference',
-                                        $requirement: 'C',
-                                    },
+                                    {$type: 'reference', $requirement: 'B'},
+                                    {$type: 'reference', $requirement: 'C'},
                                 ],
                             },
                         ],
                     },
-                    {
-                        $type: 'reference',
-                        $requirement: 'D',
-                    },
+                    {$type: 'reference', $requirement: 'D'},
                 ],
             })
         })
@@ -573,10 +564,7 @@ describe('parse hanson-string', () => {
                 $type: 'of',
                 $count: {$operator: '$gte', $num: 1},
                 $of: [
-                    {
-                        $type: 'course',
-                        $course: {number: 121},
-                    },
+                    {$type: 'course', $course: {number: 121}},
                 ],
             })
         })
@@ -602,6 +590,7 @@ describe('parse hanson-string', () => {
             it('boolean logic can be overridden by parens: (a | b) & c', () => {
                 expect(() => parse('four courses where { dept = THEAT & (num = 233 | num = 253) }')).not.to.throw()
             })
+
             it('key must be a string', () => {
                 expect(() => parse('one course where {a = b}')).not.to.throw()
                 expect(() => parse('one course where {1 = b}')).to.throw()
@@ -734,7 +723,6 @@ describe('parse hanson-string', () => {
             })
         })
         it('handles a full requirement title', () => {
-
             expect(parse('Biblical Studies (BTS-B)')).to
                 .have.property('$requirement', 'Biblical Studies (BTS-B)')
         })
