@@ -47,7 +47,7 @@ describe('compareCourseToQualification', () => {
         expect(compareCourseToQualification(course, {$key: 'department', $operator: '$eq', $value: 'ASIAN'})).to.be.true
     })
 
-    it('$ne checks if an item does not exist within an array?', () => {
+    it('$ne checks if an item does not exist within an array', () => {
         const course = {department: ['ART', 'ASIAN'], number: 310}
         expect(compareCourseToQualification(course, {$key: 'department', $operator: '$ne', $value: 'CSCI'})).to.be.true
     })
