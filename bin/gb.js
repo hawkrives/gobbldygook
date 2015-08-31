@@ -146,11 +146,11 @@ import table from 'text-table'
 function printCourse(options) {
 	return course => {
 		if (options.list) {
-			return [`${course.year}.${course.semester}`, `${course.depts.join('/')} ${course.num}${(course.section || '').toLowerCase()}`, `${course.title || course.name}`]
+			return [`${course.year}.${course.semester}`, `${course.depts.join('/')} ${course.num}${(course.section || '').toLowerCase()}`, `${course.name}`]
 		}
 		else {
 			console.log(
-`# ${course.title || course.name} (${course.year}.${course.semester})
+`# ${course.name} (${course.year}.${course.semester})
 ${course.depts.join('/')} ${course.num}${(course.section || '').toLowerCase()}
 
 Instructors: ${course.instructors}
@@ -165,16 +165,25 @@ import flatten from 'lodash/array/flatten'
 import filter from 'lodash/collection/filter'
 import forEach from 'lodash/collection/forEach'
 import uniq from 'lodash/array/uniq'
-function search({riddle, unique, ...opts}={}) {
-	console.log(`searched for ${JSON.stringify(riddle, null)}`)
+import sortByAll from 'lodash/collection/sortByAll'
+function search({riddles, unique, sort, ...opts}={}) {
+	// console.warn(`searched for ${JSON.stringify(riddle, null)}`)
 	// check if data has been cached
 	checkForStaleData().then(() => {
 		let base = `~/Library/Caches/es.riv.Gobbldygook/Courses/`
 		let files = flatten(map(fs.readdirSync(base),  fn => tryReadJsonFile(path.join(base, fn))))
 
-		let filtered = filter(files, riddle)
+		let filtered = files
+		forEach(riddles, riddle => {
+			filtered = filter(filtered, riddle)
+		})
+
 		if (unique) {
 			filtered = uniq(filtered, unique)
+		}
+
+		if (sort) {
+			filtered = sortByAll(filtered, flatten(sort))
 		}
 
 		if (opts.list) {
@@ -211,13 +220,23 @@ export function cli() {
 			metavar: 'KEY',
 			type: 'string',
 			transform: yaml.safeLoad,
-			help: 'Run a uniquing filter over the list of found courses, based on the given key',
+			help: 'Run a uniqing filter over the list of found courses, based on the given key',
 		})
-		.option('riddle', {
+		.option('riddles', {
 			type: 'string',
+			list: true,
 			position: 1,
 			transform: yaml.safeLoad,
-			help: 'A YAML-encoded filtering object. Passed to lodash.filter.',
+			help: 'A YAML-encoded filtering object. Passed to lodash.filter',
+		})
+		.option('sort', {
+			type: 'string',
+			list: true,
+			flag: false,
+			metavar: 'KEY',
+			default: 'year',
+			transform: yaml.safeLoad,
+			help: 'A key/array of keys to sort the courses by',
 		})
 
 	nom.option('version', {
