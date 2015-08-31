@@ -15,22 +15,19 @@ Additional Courses:
         number of credits. No more than one course taken elsewhere may be
         counted towards the concentration.
 
-        Four additional courses, three of which must be at level II or III,
-        and they must be drawn from at least three departments.
-
     filter: only courses from (
             AMST 100,
             ART 277,
             ENGL 242, 264, 340,
             FAMST 242, 253,
-            HIST 320.*.*.*,
+            HIST 320.*.2011.1, 320.*.2013.1,
             PHIL 245,
-            PSYCH 390, 396.*.*.*,
+            PSYCH 390, 396.*.2012.1, 396.*.2013.3,
             REL 209, 344,
             SOAN 235, 246, 260,
 
-            FREN 372.*.*.*,
-            HIST 121, 189.*.*.*, 191.*.*.*, 224, 231, 237, 239, 320.*.*.*,
+            FREN 372.*.2011.1,
+            HIST 121, 189.*.2011.1, 189.*.2012.1, 191.*.*.*, 224, 231, 237, 239, 320.*.2014.3,
             PHIL 245,
             PSYCH 223, 241,
             REL 209, 264,
@@ -38,10 +35,9 @@ Additional Courses:
             SPAN 250,
 
             DANCE 246,
-            ENGL 246,
-            340.*.*.*,
+            ENGL 246, 340.*.2011.2, 340.*.2011.3, 340.*.2012.1, 340.*.2012.2, 340.*.2013.2, 340.*.2014.2, 340.*.2015.2,
             FAMST 253,
-            HIST 115, 122, 182, 189.*.*.*, 272, 320.*.*.*,
+            HIST 115, 122, 182, 189.*.2011.1, 189.*.2012.1, 272, 320.*.2011.1, 320.*.2013.1,
             REL 209, 264,
             SOAN 246,
 
