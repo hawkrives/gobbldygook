@@ -63,6 +63,7 @@ class Semester extends Component {
 		coursesLoaded: PropTypes.bool.isRequired,
 		isOver: PropTypes.bool.isRequired,  // react-dnd
 		semester: PropTypes.number.isRequired,
+		showSearchSidebar: PropTypes.func.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
 		year: PropTypes.number.isRequired,
 	}
@@ -178,6 +179,11 @@ class Semester extends Component {
 					</Link>
 
 					<span className='buttons'>
+						<Button className='add-course'
+							onClick={() => this.props.showSearchSidebar({schedule})}
+							title='Search for courses'>
+							<Icon name='ionicon-search' /> Course
+						</Button>
 						<Button className='remove-semester'
 							onClick={this.removeSemester}
 							title={`Remove ${this.props.year} ${semesterName(this.props.semester)}`}>

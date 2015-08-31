@@ -17,6 +17,7 @@ export default class CourseTable extends Component {
 		className: PropTypes.string,
 		courses: PropTypes.instanceOf(Immutable.List),
 		coursesLoaded: PropTypes.bool.isRequired,
+		showSearchSidebar: PropTypes.func.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
 
@@ -44,6 +45,7 @@ export default class CourseTable extends Component {
 					student={this.props.student}
 					courses={this.props.courses}
 					coursesLoaded={this.props.coursesLoaded}
+					showSearchSidebar={this.props.showSearchSidebar}
 				/>)
 			.toArray()
 

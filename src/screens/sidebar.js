@@ -22,18 +22,9 @@ export default class Sidebar extends Component {
 		allAreas: PropTypes.instanceOf(Immutable.List),
 		courses: PropTypes.instanceOf(Immutable.List),
 		coursesLoaded: PropTypes.bool.isRequired,
+		isSearching: PropTypes.bool.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
-	}
-
-	constructor() {
-		super()
-		this.state = {
-			isSearching: false,
-		}
-	}
-
-	toggleSearch = () => {
-		this.setState({isSearching: !this.state.isSearching})
+		toggleSearchSidebar: PropTypes.func.isRequired,
 	}
 
 	render() {
@@ -47,7 +38,7 @@ export default class Sidebar extends Component {
 					</Button>
 					<Button className='sidebar-btn'
 						title='Search'
-						onClick={this.toggleSearch}>
+						onClick={this.props.toggleSearchSidebar}>
 						<Icon name='ionicon-ios-search' type='block' />
 					</Button>
 
@@ -82,18 +73,18 @@ export default class Sidebar extends Component {
 
 				<CourseRemovalBox studentId={this.props.student.id} />
 
-				<GraduationStatus
-					allAreas={this.props.allAreas}
-					courses={this.props.courses}
-					coursesLoaded={this.props.coursesLoaded}
-					isHidden={this.state.isSearching}
-					student={this.props.student}
-				/>
-
-				<CourseSearcher
-					isHidden={!this.state.isSearching}
-					toggle={this.toggleSearch}
-				/>
+				{!this.props.isSearching
+					? <GraduationStatus
+						allAreas={this.props.allAreas}
+						courses={this.props.courses}
+						coursesLoaded={this.props.coursesLoaded}
+						isHidden={this.props.isSearching}
+						student={this.props.student}
+					/>
+					: <CourseSearcher
+						isHidden={!this.props.isSearching}
+						toggle={this.props.toggleSearchSidebar}
+					/>}
 			</aside>
 		)
 	}

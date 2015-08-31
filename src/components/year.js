@@ -18,6 +18,7 @@ export default class Year extends Component {
 	static propTypes = {
 		courses: PropTypes.instanceOf(Immutable.List),
 		coursesLoaded: PropTypes.bool.isRequired,
+		showSearchSidebar: PropTypes.func.isRequired,
 		student: PropTypes.instanceOf(Student).isRequired,
 		year: PropTypes.number.isRequired,
 	}
@@ -57,6 +58,7 @@ export default class Year extends Component {
 					year={this.props.year}
 					courses={this.props.courses.filter(c => schedule.clbids.includes(c.clbid))}
 					coursesLoaded={this.props.coursesLoaded}
+					showSearchSidebar={this.props.showSearchSidebar}
 				/>)
 			.toList()
 

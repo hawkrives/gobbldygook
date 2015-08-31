@@ -23,6 +23,7 @@ export default class Student extends Component {
 			coursesLoaded: false,
 			message: `Loading Student ${props.routerState.params.id}`,
 			messageClass: '',
+			isSearching: false,
 			student: null,
 		}
 	}
@@ -53,6 +54,14 @@ export default class Student extends Component {
 		}
 	}
 
+	toggleSearchSidebar = () => {
+		this.setState({isSearching: !this.state.isSearching})
+	}
+
+	showSearchSidebar = () => {
+		this.setState({isSearching: true})
+	}
+
 	render() {
 		// console.info('Student#render')
 
@@ -67,6 +76,8 @@ export default class Student extends Component {
 						allAreas={this.props.allAreas}
 						courses={this.state.courses}
 						coursesLoaded={this.state.coursesLoaded}
+						isSearching={this.state.isSearching}
+						toggleSearchSidebar={this.toggleSearchSidebar}
 						student={this.state.student}
 					/>
 					<RouteHandler
@@ -74,6 +85,7 @@ export default class Student extends Component {
 						student={this.state.student}
 						courses={this.state.courses}
 						coursesLoaded={this.state.coursesLoaded}
+						showSearchSidebar={this.showSearchSidebar}
 					/>
 				</div>
 			</DocumentTitle>
