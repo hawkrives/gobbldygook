@@ -720,7 +720,7 @@ module.exports = (function() {
 					result.international = true;
 				}
 				if (lab) {
-					result.lab = true;
+					result.type = 'Lab';
 				}
 				return _extends({}, result, num);
 			},

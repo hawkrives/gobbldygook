@@ -380,7 +380,7 @@ c_num 'course number'
         result.international = true
       }
       if (lab) {
-        result.lab = true
+        result.type = 'Lab'
       }
 
       return {...result, ...num}

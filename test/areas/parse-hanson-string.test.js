@@ -127,7 +127,7 @@ describe('parse hanson-string', () => {
                 $course: {
                     department: ['CSCI'],
                     number: 121,
-                    lab: true,
+                    type: 'Lab',
                 },
             })
         })
@@ -145,7 +145,7 @@ describe('parse hanson-string', () => {
                     department: ['CSCI'],
                     number: 121,
                     international: true,
-                    lab: true,
+                    type: 'Lab',
                 },
             })
         })
