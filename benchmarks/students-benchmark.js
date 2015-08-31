@@ -1,11 +1,8 @@
 import fs from 'graceful-fs'
-import info from '../package.json'
-
 import evaluate from '../src/lib/evaluate'
-
 import includes from 'lodash/collection/includes'
 import junk from 'junk'
-import meow from 'meow'
+import nom from 'nomnom'
 import ms from 'pretty-ms'
 import range from 'lodash/utility/range'
 import size from 'lodash/collection/size'
@@ -49,17 +46,26 @@ function benchmark({runs, graph}) {
 }
 
 function cli() {
-	const args = meow({
-		help: `Usage: node students-benchmark [-r, --runs <number>] [--(no-)graph]`,
-		pkg: info,
-	})
+	const args = nom
+		.script('students-benchmark')
+		.option('runs', {
+			string: '-r, --runs',
+			metavar: 'COUNT',
+			default: 50,
+		})
+		.option('graph', {
+			flag: true,
+			default: true,
+		})
+		.option('debug', {flag: true})
+		.parse()
 
-	if (args.flags.args) {
-		console.log(args.flags)
+	if (args.debug) {
+		console.log(args)
 	}
 
-	const runs = args.flags.r || args.flags.runs || 50
-	const graph = args.flags.graph
+	const runs = args.runs
+	const graph = args.graph
 	benchmark({runs, graph})
 }
 

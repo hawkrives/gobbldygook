@@ -16,7 +16,7 @@
     "webpack": "--progress --config=./.webpack.config.js"
   },
   "scripts": {
-    "benchmark": "babel-node ./benchmarks/students-benchmark.js --runs 50 --graph",
+    "benchmark": "babel-node -- ./benchmarks/students-benchmark.js",
     "build": "env NODE_ENV=production webpack --production $npm_package_config_webpack",
     "build:areas": "./bin/compile-areas area-data/ --out-dir $npm_package_config_area_output",
     "build:ci": "npm run build -- --no-progress",
