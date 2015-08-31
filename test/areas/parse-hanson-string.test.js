@@ -599,7 +599,7 @@ describe('parse hanson-string', () => {
                 expect(() => parse('one course where {a = 1}')).not.to.throw()
             })
             it('if value is an integer, it is coerced to an integer', () => {
-                expect(() => parse('one course where {a = 1}')).to.deep.equal({
+                expect(parse('one course where {a = 1}')).to.deep.equal({
                     $count: {$num: 1, $operator: '$gte'},
                     $type: 'where',
                     $where: {
