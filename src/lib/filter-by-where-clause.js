@@ -45,12 +45,12 @@ export default function filterByWhereClause(list, clause, fullList) {
 		else if (has(clause, '$or')) {
 			let filtrations = []
 			forEach(clause.$or, q => {
-				filtrations.push(filterByWhereClause(list, q))
+				filtrations = filtrations.concat(filterByWhereClause(list, q))
 			})
 
-			// join together the list of lists of possibilities
-			// then uniquify them by way of turning them into the simplified representations
-			return uniq(flatten(filtrations), simplifyCourse)
+			// join together the list of lists of possibilities,
+			// then uniquify them by way of turning them into the simplified representations.
+			return uniq(filtrations, simplifyCourse)
 		}
 
 		// only 'and' and 'or' are currently supported.
