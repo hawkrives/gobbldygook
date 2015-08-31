@@ -77,7 +77,7 @@ async function storeArea(item) {
 
 	let area = {
 		...item.data,
-		sourcePath: item.path,
+		sourcePath: id,
 		type: item.data.type.toLowerCase(),
 	}
 
