@@ -92,10 +92,9 @@ qualification
   = key:word _
     op:operator _
     value:(
-        f:func _ 'from' _ 'courses' _ 'where' _ q:qualifier
-          { return {...f, $where: q} }
-      / word:[a-z0-9_\-]i+
-          { return word.join('') }
+        f:func _ 'from' _ 'courses' _ 'where' _ q:qualifier  { return {...f, $where: q} }
+      / word:qualification_value
+      / list:parenthetical_qv
     )
     { return {
         $type: 'qualification',
@@ -103,6 +102,33 @@ qualification
         $operator: op,
         $value: value,
     } }
+
+
+parenthetical_qv
+  = open_paren _ value:or_qv _ close_paren { return value }
+
+
+or_qv
+  = lhs:and_qv _ '|' _ rhs:or_qv
+    { return {
+      $type: 'boolean',
+      $or: [lhs].concat(rhs.$or ? rhs.$or : [rhs]),
+    } }
+  / and_qv
+
+
+and_qv
+  = lhs:qualification_value _ '&' _ rhs:and_qv
+    { return {
+      $type: 'boolean',
+      $and: [lhs].concat(rhs.$and ? rhs.$and : [rhs]),
+    } }
+  / qualification_value
+
+
+qualification_value
+  = word:[a-z0-9_\-]i+
+  { return word.join('') }
 
 
 func 'function'
@@ -229,9 +255,10 @@ modifier
       / 'department'
     ) optional_s _ 'from' _
     from:(
-        'children' { return { $from: 'children', $children: '$all' }}
-      / 'filter' { return { $from: 'filter' }}
-      / 'courses' _ 'where' _ where:qualifier { return {$from: 'where', $where: where} }
+        'children' _ 'where' _ where:qualifier { return { $from: 'children-where', $where: where } }
+      / 'children'                             { return { $from: 'children', $children: '$all' }}
+      / 'filter'                               { return { $from: 'filter' }}
+      / 'courses' _ 'where' _ where:qualifier  { return { $from: 'where', $where: where } }
       / // select a few requirements to apply the modifier to.
         // an alternative to "from children"
         open_paren _ reqs:(
@@ -244,6 +271,9 @@ modifier
     {
       if (what === 'department' && from['$from'] === 'where') {
         throw new Error('cannot use a modifier with "departments from courses where {}"')
+      }
+      if (from['$from'] === 'children-where' && what !== 'course') {
+        throw new Error('must use "courses from" with "children where"')
       }
       return {
         ...from,
