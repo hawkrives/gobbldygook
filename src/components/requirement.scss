@@ -118,7 +118,8 @@
 	margin-top: 0.25em;
 
 	.button {
-		border: solid 1px currentColor;
+		flex-grow: 1;
+		border: solid 1px color('gray', '500');
 
 		margin: 0 0.5em 0.5em;
 
