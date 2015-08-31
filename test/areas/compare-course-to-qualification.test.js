@@ -54,7 +54,7 @@ describe('compareCourseToQualification', () => {
 
     it('compares courses against a pre-determined query', () => {
         const course = {department: ['ART', 'ASIAN'], year: 2015}
-        const qualification = {$key: 'year', $operator: '$lte', $value: {'$computed-value': 2016}}
+        const qualification = {$key: 'year', $operator: '$lte', $value: {'$computed-value': 2016, $type: 'function'}}
         expect(compareCourseToQualification(course, qualification)).to.be.true
     })
 
