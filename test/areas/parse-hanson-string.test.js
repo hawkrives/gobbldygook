@@ -830,6 +830,20 @@ describe('parse hanson-string', () => {
                 $from: 'filter',
             })
         })
+        it('can count from filter, then apply a where-clause', () => {
+            expect(parse('one course from filter where {a = b}')).to.deep.equal({
+                $type: 'modifier',
+                $count: {$operator: '$gte', $num: 1},
+                $what: 'course',
+                $from: 'filter-where',
+                $where: {
+                    $key: 'a',
+                    $operator: '$eq',
+                    $type: 'qualification',
+                    $value: 'b',
+                },
+            })
+        })
         it('can count from a where-statement', () => {
             expect(parse('one course from courses where {a = b}')).to.deep.equal({
                 $type: 'modifier',

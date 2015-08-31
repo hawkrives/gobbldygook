@@ -200,7 +200,14 @@ export function computeModifier({expr, ctx, courses}) {
 	}
 
 	else if (expr.$from === 'filter') {
+		assertKeys(ctx, 'filter')
 		filtered = getMatchesFromFilter(ctx)
+	}
+
+	else if (expr.$from === 'filter-where') {
+		assertKeys(expr, '$where')
+		filtered = getMatchesFromFilter(ctx)
+		filtered = filterByWhereClause(filtered, expr.$where)
 	}
 
 	else if (expr.$from === 'where') {

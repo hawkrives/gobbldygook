@@ -226,8 +226,8 @@ of_list
 of
   = count:(
         counter
-      / 'all' { return { $operator: '$eq', $was: 'all' } }
-      / 'any' { return { $operator: '$gte', $num: 1, $was: 'any' } }
+      / 'all'  { return { $operator: '$eq', $was: 'all' } }
+      / 'any'  { return { $operator: '$gte', $num: 1, $was: 'any' } }
       / 'none' { return { $operator: '$eq', $num: 0, $was: 'none' } }
     )
     _ 'of' _ of:of_list
@@ -267,10 +267,11 @@ modifier
     from:(
         'children' _ 'where' _ where:qualifier { return { $from: 'children-where', $where: where, $children: '$all' } }
       / 'children'                             { return { $from: 'children', $children: '$all' }}
+      / 'filter' _ 'where' _ where:qualifier   { return { $from: 'filter-where', $where: where }}
       / 'filter'                               { return { $from: 'filter' }}
       / 'courses' _ 'where' _ where:qualifier  { return { $from: 'where', $where: where } }
       / c:child_list _ 'where' _ w:qualifier   { return { $from: 'children-where', $where: w, $children: c } }
-      / children:child_list                    { return { $from: 'children', $children: children} }  // an alternative to "from children"
+      / children:child_list                    { return { $from: 'children', $children: children} }  // an alternative to "from [all] children"
     )
     {
       if (from.$from === 'where' && what === 'department') {
