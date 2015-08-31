@@ -24,6 +24,8 @@ const welcomeMessages = [
 	'Hello, ',
 	'Konnichiha, ',
 	'こんにちは、',
+	'Yōkouso, ',
+	'ようこそ、',
 ]
 
 export default class StudentSummary extends Component {
