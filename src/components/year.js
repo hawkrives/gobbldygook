@@ -5,7 +5,6 @@ import studentActions from '../flux/student-actions'
 import Student from '../models/student'
 
 import Button from './button'
-import Icon from './icon'
 import Semester from './semester'
 
 import isCurrentYear from '../helpers/is-current-year'
