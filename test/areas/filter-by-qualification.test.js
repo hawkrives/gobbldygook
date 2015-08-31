@@ -22,6 +22,48 @@ describe('filterByQualification', () => {
         ])
     })
 
+    it('filters an array of courses by a boolean qualification-value', () => {
+        const basicQualification = {
+            $type: 'qualification',
+            $key: 'gereqs',
+            $value: {$type: 'boolean', $or: ['EIN', 'BTS-T']},
+            $operator: '$eq',
+        }
+
+        const courses = [
+            {department: ['ART', 'ASIAN'], number: 310, lab: true, year: 2012},
+            {department: ['ASIAN'], number: 275, year: 2016},
+            {department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2013},
+            {department: ['REL'], number: 111, section: 'C', gereqs: ['BTS-T'], year: 2012},
+            {department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
+        ]
+
+        expect(filterByQualification(courses, basicQualification)).to.deep.equal([
+            {department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2013},
+            {department: ['REL'], number: 111, section: 'C', gereqs: ['BTS-T'], year: 2012},
+            {department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
+        ])
+    })
+
+    it('requires that a boolean qualification-value be either $and or $or', () => {
+        const basicQualification = {
+            $type: 'qualification',
+            $key: 'gereqs',
+            $value: {$type: 'boolean', $xor: ['EIN', 'BTS-T']},
+            $operator: '$eq',
+        }
+
+        const courses = [
+            {department: ['ART', 'ASIAN'], number: 310, lab: true, year: 2012},
+            {department: ['ASIAN'], number: 275, year: 2016},
+            {department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2013},
+            {department: ['REL'], number: 111, section: 'C', gereqs: ['BTS-T'], year: 2012},
+            {department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
+        ]
+
+        expect(() => filterByQualification(courses, basicQualification)).to.throw(TypeError)
+    })
+
     it('filters an array based on a nested where-query with the max function', () => {
         const advancedQualificationMax = {
             $type: 'qualification',

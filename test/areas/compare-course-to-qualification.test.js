@@ -69,4 +69,22 @@ describe('compareCourseToQualification', () => {
         const qualification = {$key: 'year', $operator: '$lte', $value: {$type: 'unknown'}}
         expect(() => compareCourseToQualification(course, qualification)).to.throw(TypeError)
     })
+
+    it('handles $or boolean values', () => {
+        const course1 = {department: ['ART', 'ASIAN'], year: 2015}
+        const course2 = {department: ['ART', 'ASIAN'], year: 2013}
+        const qualification = {$key: 'year', $operator: '$lte', $value: {$type: 'boolean', $or: [2013, 2015]}}
+        expect(compareCourseToQualification(course1, qualification)).to.be.true
+        expect(compareCourseToQualification(course2, qualification)).to.be.true
+    })
+
+    it('handles $and boolean values', () => {
+        const course1 = {department: ['ART', 'ASIAN'], year: 2015}
+        const qualification1 = {$key: 'year', $operator: '$lte', $value: {$type: 'boolean', $and: [2013, 2015]}}
+        expect(compareCourseToQualification(course1, qualification1)).to.be.false
+
+        const course2 = {department: ['ART', 'ASIAN'], year: 2013}
+        const qualification2 = {$key: 'year', $operator: '$lte', $value: {$type: 'boolean', $and: [2013, 2013]}}
+        expect(compareCourseToQualification(course2, qualification2)).to.be.true
+    })
 })

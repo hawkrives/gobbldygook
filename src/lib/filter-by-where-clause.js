@@ -91,6 +91,11 @@ export function filterByQualification(list, qualification, fullList) {
 			// console.log('came up with', computed)
 			value['$computed-value'] = computed
 		}
+		else if (value.$type === 'boolean') {
+			if (!(value.hasOwnProperty('$or') || value.hasOwnProperty('$and'))) {
+				throw new TypeError(`compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify(value)}`)
+			}
+		}
 		else {
 			throw new TypeError(`filterByQualification(): ${value.$type} is not a valid type for a query.`)
 		}

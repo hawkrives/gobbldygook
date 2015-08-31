@@ -2,6 +2,8 @@ import isPlainObject from 'lodash/lang/isPlainObject'
 import isArray from 'lodash/lang/isArray'
 import includes from 'lodash/collection/includes'
 import assertKeys from './assert-keys'
+import every from 'lodash/collection/every'
+import some from 'lodash/collection/some'
 
 /**
  * Compares a course property against a MongoDB-style operator
@@ -24,6 +26,17 @@ export default function compareCourseToQualification(course, {$key, $operator, $
 			assertKeys($value, '$computed-value')
 			const simplifiedOperator = {$key, $operator, $value: $value['$computed-value']}
 			return compareCourseToQualification(course, simplifiedOperator)
+		}
+		else if ($value.$type === 'boolean') {
+			if ($value.hasOwnProperty('$or')) {
+				return some($value.$or, val => compareCourseToQualification(course, {$key, $operator, $value: val}))
+			}
+			else if ($value.hasOwnProperty('$and')) {
+				return every($value.$and, val => compareCourseToQualification(course, {$key, $operator, $value: val}))
+			}
+			else {
+				throw new TypeError(`compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`)
+			}
 		}
 		else {
 			throw new TypeError(`compareCourseToQualification(): "${$value.$type}" is not a valid type for a qualification's value.`)
