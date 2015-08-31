@@ -27,6 +27,10 @@ menu {
 
 .content {
 	flex: 1;
+
+    display: flex;
+    flex-flow: column nowrap;
+	align-items: stretch;
 }
 
 // hide the St. Olaf disclaimer
