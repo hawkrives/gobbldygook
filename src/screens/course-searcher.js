@@ -64,8 +64,6 @@ function to12Hour(time) {
 	const fullHour = ((hour + 11) % 12 + 1)
 	const meridian = hour < 12 ? 'am' : 'pm'
 
-	// console.log(time, `${fullHour}:${paddedMinute}${meridian}`)
-
 	return `${fullHour}:${paddedMinute}${meridian}`
 }
 
@@ -144,7 +142,7 @@ export default class CourseSearcher extends Component {
 	onSubmit = () => {
 		if (this.state.queryString !== this.state.lastQuery) {
 			if (process.env.NODE_ENV === 'production') {
-				window.ga.q.push(['send', 'search_query', this.state.queryString])
+				window.ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
 			}
 			this.query(this.state.queryString)
 		}
