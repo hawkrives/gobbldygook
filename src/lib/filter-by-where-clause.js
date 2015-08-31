@@ -11,12 +11,12 @@ import pluck from 'lodash/collection/pluck'
 import simplifyCourse from './simplify-course'
 import uniq from 'lodash/array/uniq'
 
-export default function filterByWhereClause(list, clause, fullList) {
+export default function filterByWhereClause(baseList, clause, fullList) {
 	// When filtering by an and-clause, we need access to both the
 	// entire list of courses, and the result of the prior iteration.
 	// To simplify future invocations, we default to `fullList = list`
 	if (!fullList) {
-		fullList = list
+		fullList = baseList
 	}
 
 	// There are only two types of where-clauses: boolean, and qualification.
@@ -24,7 +24,7 @@ export default function filterByWhereClause(list, clause, fullList) {
 
 	// This function always reduces down to a call to filterByQualification
 	if (clause.$type === 'qualification') {
-		return filterByQualification(list, clause, fullList)
+		return filterByQualification(baseList, clause, fullList)
 	}
 
 	// either an and- or or-clause.
@@ -33,7 +33,7 @@ export default function filterByWhereClause(list, clause, fullList) {
 		// result of the prior one. they are the list of unique courses which
 		// meet all of the qualifications.
 		if (has(clause, '$and')) {
-			let filtered = list
+			let filtered = baseList
 			forEach(clause.$and, q => {
 				filtered = filterByWhereClause(filtered, q, fullList)
 			})
@@ -45,7 +45,7 @@ export default function filterByWhereClause(list, clause, fullList) {
 		else if (has(clause, '$or')) {
 			let filtrations = []
 			forEach(clause.$or, q => {
-				filtrations = filtrations.concat(filterByWhereClause(list, q))
+				filtrations = filtrations.concat(filterByWhereClause(baseList, q))
 			})
 
 			// join together the list of lists of possibilities,
