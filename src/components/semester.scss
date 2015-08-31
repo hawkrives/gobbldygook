@@ -58,9 +58,14 @@ $semester-edge-padding:
 	.button {
 		padding: 0 0.5em;
 		min-height: 0;
+		font-size: 0.9em;
 
 		color: color('gray', '500');
 		transition: 0.15s;
+
+		& + .button {
+			margin-left: 0.1em;
+		}
 	}
 
 	.remove-semester:hover {
@@ -74,9 +79,7 @@ $semester-edge-padding:
 	color: color('gray', '500');
 
 	li {
-		&::before { content: " – "; }
-
-		font-feature-settings: 'onum', 'smcp';
+		font-feature-settings: 'onum';
 		padding-left: 0.25em;
 	}
 }

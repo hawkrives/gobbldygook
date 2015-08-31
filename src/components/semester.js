@@ -101,21 +101,10 @@ class Semester extends Component {
 		let infoBar = []
 		if (schedule && courses.size) {
 			const courseCount = courses.size
-			infoBar.push(
-				<li className='semester-course-count' key='course-count'>
-					{courseCount} {plur('course', courseCount)}
-				</li>
-			)
-
 			const credits = countCredits(courses)
 
-			if (credits) {
-				infoBar.push(
-					<li className='semester-credit-count' key='credit-count'>
-						{credits} {plur('credit', credits)}
-					</li>
-				)
-			}
+			infoBar.push(<li key='course-count'>{` – ${courseCount} ${plur('course', courseCount)}`}</li>)
+			credits && infoBar.push(<li key='credit-count'>{` – ${credits} ${plur('credit', credits)}`}</li>)
 		}
 
 		if (schedule && courses && this.props.coursesLoaded) {
@@ -170,7 +159,6 @@ class Semester extends Component {
 							year: this.props.year,
 							semester: this.props.semester,
 						}}>
-
 						<h1>{semesterName(this.props.semester)}</h1>
 
 						<List className='info-bar' type='inline'>
