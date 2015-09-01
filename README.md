@@ -38,7 +38,6 @@ If you don't want to join us there, you can file an issue via [github](https://g
 
 
 ## Screenshot
-It's a pretty old one, circa summer 2014.
 
 ### 2015 – September
 ![Screenshot, september 2015](./screenshots/september-2015.png)
