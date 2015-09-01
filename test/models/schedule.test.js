@@ -130,7 +130,7 @@ describe('Schedule', () => {
 	})
 
 	it('refuses to remove non-number clbids', () => {
-		expect(() => sched.addCourse('918')).to.throw(TypeError)
+		expect(() => sched.removeCourse('918')).to.throw(TypeError)
 	})
 
 	it('supports rearranging courses', () => {
