@@ -8,6 +8,7 @@ import first from 'lodash/array/first'
 import isString from 'lodash/lang/isString'
 import {default as extractKeys} from 'lodash/object/keys'
 import last from 'lodash/array/last'
+import findIndex from 'lodash/array/findIndex'
 import map from 'lodash/collection/map'
 import reject from 'lodash/collection/reject'
 import size from 'lodash/collection/size'
@@ -46,14 +47,14 @@ function queryStore(query) {
 		// Grab a key from the query to use as an index.
 		// TODO: Write a function to sort keys by priority.
 		const indexKeys = extractKeys(query)
-		// <this is a very hacky way of prioritizing the deptnum>
-		// if (contains(keysWithIndices, 'deptnum')) {
-		// 	keysWithIndices.splice(findIndex('deptnum'), 1)
-		// 	keysWithIndices.unshift('deptnum')
-		// }
 
 		// Filter down to just the requested keys that also have indices
 		const keysWithIndices = filter(indexKeys, key => this.index(key))
+		// <this is a very hacky way of prioritizing the deptnum>
+		if (contains(keysWithIndices, 'deptnum')) {
+			keysWithIndices.splice(findIndex('deptnum'), 1)
+			keysWithIndices.unshift('deptnum')
+		}
 
 		// If the current store has at least one index for a requested key,
 		// just run over that index.
