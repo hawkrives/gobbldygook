@@ -7,10 +7,24 @@ This is a course scheduler for students at St. Olaf College. You give it your ar
 
 
 ## Playing
-1. Go to [www.cs.stolaf.edu/users/rives/g/](http://www.cs.stolaf.edu/users/rives/g/)
-2. Input your data
-3. ???
-4. Profit!
+1. Visit [https://stolaf.edu/people/rives/g](https://stolaf.edu/people/rives/g)
+    - Gobbldygook currently supports every major browser, except for Safari (so Chrome, Firefox, Internet Explorer 11, and probably Microsoft Edge).
+    - Let's just say that Safari's database support is … a bit lacking.
+    - On iOS devices, every browser is required to use Safari internally, which means that Chrome, Opera, and Safari on iOS all have the same terrible database support.
+    - In summary: **don't use Safari, iPhones, iPads, or Apple Watches** to access Gobbldygook.
+
+2. Wait for the progress bars in the corner to go away ;-)
+	1. Then push "New Student".
+
+3. Fill out the student information form on the left: your name (or whatever you want to put there) and your matriculation and graduation.
+
+4. Add your areas of study: your degrees, majors, concentrations, and areas of emphasis.
+
+5. Search for the courses you have taken and are planning on taking, and drag them into the appropriate semesters.
+    - Make sure to choose the right offering for each semester!
+    - If you use the "search" button on a semester, it will automatically limit your search to just that semester, which might be helpful.
+
+If you've already been testing it, then you already have some data entered. You can now edit your name and matriculation/graduation years, and even add and remove areas of study! No longer are you bound by the shackles of "what did Hawken put in the demo student?"
 
 
 ## Hacking
