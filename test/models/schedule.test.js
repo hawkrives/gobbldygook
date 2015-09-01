@@ -108,21 +108,27 @@ describe('Schedule', () => {
 		expect(JSON.parse(result)._courseData).to.be.undefined
 	})
 
-	describe('#course-methods', () => {
-		it('supports adding a course', () => {
-			let addedCourse = sched.addCourse(918)
-			expect(addedCourse.clbids.toArray()).to.contain(918)
-		})
+	it('supports adding a course', () => {
+		let addedCourse = sched.addCourse(918)
+		expect(addedCourse.clbids.toArray()).to.contain(918)
+	})
 
-		it('supports removing a course', () => {
-			let removedCourse = sched.removeCourse(123)
-			expect(removedCourse.clbids.toArray()).not.to.contain(123)
-		})
+	it('refuses to add non-number clbids', () => {
+		expect(() => sched.addCourse('918')).to.throw(Error)
+	})
 
-		it('supports rearranging courses', () => {
-			let rearranged = sched.reorderCourse(123, 2)
-			expect(rearranged.clbids.toArray()).to.not.deep.equal([123, 234, 345])
-			expect(rearranged.clbids.toArray()).to.deep.equal([234, 345, 123])
-		})
+	it('supports removing a course', () => {
+		let removedCourse = sched.removeCourse(123)
+		expect(removedCourse.clbids.toArray()).not.to.contain(123)
+	})
+
+	it('refuses to remove non-number clbids', () => {
+		expect(() => sched.addCourse('918')).to.throw(Error)
+	})
+
+	it('supports rearranging courses', () => {
+		let rearranged = sched.reorderCourse(123, 2)
+		expect(rearranged.clbids.toArray()).to.not.deep.equal([123, 234, 345])
+		expect(rearranged.clbids.toArray()).to.deep.equal([234, 345, 123])
 	})
 })
