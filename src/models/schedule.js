@@ -28,13 +28,11 @@ const ScheduleRecord = Immutable.Record({
 export default class Schedule extends ScheduleRecord {
 	constructor(data={}) {
 		// console.log('schedule constructor')
+		data.id = data.id || uuid()
+		data.clbids = Immutable.fromJS(data.clbids || [])
+		data._courseData = getCourses(data.clbids)
+
 		super(data)
-		return this.withMutations(sched => {
-			sched = sched.set('id', data.id || uuid())
-			sched = sched.set('clbids', Immutable.fromJS(data.clbids || []))
-			sched = sched.set('_courseData', getCourses(this.clbids))
-			return sched
-		})
 	}
 
 	// Getters
