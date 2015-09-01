@@ -24,6 +24,13 @@ describe('Schedule', () => {
 		expect(sched.toJS() instanceof Object).to.be.true
 	})
 
+	it('does not mutate the passed-in object', () => {
+		const clbids = []
+		const input = {clbids}
+		new Schedule(input)
+		expect(input.clbids).to.equal(clbids)
+	})
+
 	it('ignores sets on known properties', () => {
 		try {
 			sched.index = 3
