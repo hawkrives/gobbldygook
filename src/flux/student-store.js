@@ -3,6 +3,8 @@ import stringify from 'json-stable-stringify'
 
 import Reflux from 'reflux'
 import Immutable from 'immutable'
+import range from 'lodash/utility/range'
+import forEach from 'lodash/collection/forEach'
 
 import Student from '../models/student'
 import demoStudent from '../models/demo-student.json'
@@ -162,7 +164,13 @@ const studentStore = Reflux.createStore({
 	},
 
 	initStudent() {
-		const fleshedStudent = new Student()
+		const fleshedStudent = new Student().withMutations(student => {
+			forEach(range(student.matriculation, student.graduation + 1), year => {
+				student = student.addSchedule({year, index: 1, active: true, semester: 1})
+				student = student.addSchedule({year, index: 1, active: true, semester: 2})
+				student = student.addSchedule({year, index: 1, active: true, semester: 3})
+			})
+		})
 		fleshedStudent.save()
 		this._preChange()
 		this._loadData(fleshedStudent.id)
