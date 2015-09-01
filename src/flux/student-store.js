@@ -165,7 +165,7 @@ const studentStore = Reflux.createStore({
 
 	initStudent() {
 		const fleshedStudent = new Student().withMutations(student => {
-			forEach(range(student.matriculation, student.graduation + 1), year => {
+			forEach(range(student.matriculation, student.graduation), year => {
 				student = student.addSchedule({year, index: 1, active: true, semester: 1})
 				student = student.addSchedule({year, index: 1, active: true, semester: 2})
 				student = student.addSchedule({year, index: 1, active: true, semester: 3})
