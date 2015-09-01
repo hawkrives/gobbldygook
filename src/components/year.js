@@ -73,13 +73,14 @@ export default class Year extends Component {
 					<h1>{niceYear}</h1>
 
 					<span className='buttons'>
+						{!isAddSemesterDisabled &&
 						<Button className='add-semester'
 							type='flat'
 							title='Add Semester'
 							disabled={isAddSemesterDisabled}
 							onClick={this.addSemester}>
 							{`Add ‘${semesterName(nextAvailableSemester)}’`}
-						</Button>
+						</Button>}
 						<Button className='remove-year' type='flat'
 							title={`Remove the year ${niceYear}`}
 							onClick={this.removeYear}>
