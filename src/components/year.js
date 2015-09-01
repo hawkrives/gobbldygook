@@ -32,7 +32,7 @@ export default class Year extends Component {
 
 		studentActions.addSchedule(this.props.student.id, {
 			year: this.props.year, semester: nextAvailableSemester,
-			sequence: 1, active: true,
+			index: 1, active: true,
 		})
 	}
 
