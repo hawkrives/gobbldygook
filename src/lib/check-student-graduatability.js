@@ -2,8 +2,9 @@ import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
 import map from 'lodash/collection/map'
 
-import {OrderedMap as $Map} from 'immutable'
+import {OrderedMap} from 'immutable'
 import checkStudentAgainstArea from './check-student-against-area'
+import countCredits from './count-credits'
 
 
 /**
@@ -24,9 +25,13 @@ async function checkStudentGraduatability(student) {
 	const areas = await* areaPromises
 
 	const goodAreas = filter(areas, {computed: true})
-	const graduatability = (size(goodAreas) === size(areas))
+	const allAreasPass = (size(goodAreas) === size(areas))
 
-	const areaDetails = $Map(map(areas, area => [area.id, area]))
+	const hasEnoughCredits = (countCredits(await student.courses) >= student.creditsNeeded)
+
+	const graduatability = (allAreasPass && hasEnoughCredits)
+
+	const areaDetails = OrderedMap(map(areas, area => [area.id, area]))
 
 	return {
 		canGraduate: graduatability,
