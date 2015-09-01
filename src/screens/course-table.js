@@ -50,6 +50,7 @@ export default class CourseTable extends Component {
 		)
 
 		const years = this.props.student.schedules
+			.sortBy(schedule => schedule.year)
 			.groupBy(schedule => schedule.year)
 			.map((schedules, year) =>
 				<Year
