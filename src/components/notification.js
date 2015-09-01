@@ -22,16 +22,12 @@ export default class Notification extends Component {
 
 	render() {
 		// console.log('Notification#render')
-		let progressBar = null
-		if (this.props.type === 'progress') {
-			let progressPercent = round(this.props.value / this.props.max, 2)
-			progressBar = (
-				<div className='progress-container'>
-					<ProgressBar value={this.props.value} max={this.props.max} />
-					<output>{progressPercent}%</output>
-				</div>
-			)
-		}
+		const progressBar = (this.props.type === 'progress') && (
+			<div className='progress-container'>
+				<ProgressBar value={this.props.value} max={this.props.max} />
+				<output>{round(this.props.value / this.props.max, 2) * 100}%</output>
+			</div>
+		)
 
 		return (
 			<li className={`notification-capsule notification-type--${this.props.type}`}
@@ -42,13 +38,12 @@ export default class Notification extends Component {
 					</h1>
 					{progressBar}
 				</div>
-				{this.props.hideButton
-					? null
-					: <Button className='close-notification'
-						type='flat'
-						title='Close'>
-						×
-					</Button>}
+				{!this.props.hideButton &&
+				<Button className='close-notification'
+					type='flat'
+					title='Close'>
+					×
+				</Button>}
 			</li>
 		)
 	}
