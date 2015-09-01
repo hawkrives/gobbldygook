@@ -68,7 +68,7 @@ export default class Schedule extends ScheduleRecord {
 
 	reorderCourse(clbid, newIndex) {
 		if (!isNumber(clbid)) {
-			throw new Error('reorderCourse(): clbid must be a number')
+			throw new TypeError('reorderCourse(): clbid must be a number')
 		}
 		const oldIndex = this.clbids.findIndex(id => id === clbid)
 
@@ -85,7 +85,7 @@ export default class Schedule extends ScheduleRecord {
 		// console.log(`adding clbid ${clbid} to schedule ${this.id} (${this.year}-${this.semester}.${this.index})`)
 
 		if (!isNumber(clbid)) {
-			throw new Error('addCourse(): clbid must be a number')
+			throw new TypeError('addCourse(): clbid must be a number')
 		}
 
 		return this.withMutations(sched => {
