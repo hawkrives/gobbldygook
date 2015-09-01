@@ -7,7 +7,6 @@ This is a course scheduler for students at St. Olaf College. You give it your ar
 
 
 ## Playing
-
 1. Go to [www.cs.stolaf.edu/users/rives/g/](http://www.cs.stolaf.edu/users/rives/g/)
 2. Input your data
 3. ???
@@ -19,7 +18,7 @@ This is a course scheduler for students at St. Olaf College. You give it your ar
 - `git clone https://github.com/hawkrives/gobbldygook.git`
 - `cd gobbldygook`
 - `npm install`
-- `npm run serve`
+- `npm start`
 
 You can see additional commands by executing `npm run` with no arguments.
 
