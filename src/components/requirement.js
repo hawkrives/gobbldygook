@@ -56,7 +56,7 @@ export default class Requirement extends Component {
 		const computationResult = this.props.computed
 
 		const title = !(this.props.topLevel) && (
-			<h2 className={`requirement--heading ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`}>
+			<h2 className={`requirement--heading ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`} title={this.props.name}>
 				<span className='requirement--title'>
 					<span className='requirement--title-status'>{this.props.computed ? '●' : '○'}</span>
 					{` ${this.props.name}`}
