@@ -20,6 +20,7 @@ import './sidebar.scss'
 export default class Sidebar extends Component {
 	static propTypes = {
 		allAreas: PropTypes.instanceOf(Immutable.List),
+		baseSearchQuery: PropTypes.object,
 		courses: PropTypes.instanceOf(Immutable.List),
 		coursesLoaded: PropTypes.bool.isRequired,
 		isSearching: PropTypes.bool.isRequired,
@@ -85,6 +86,7 @@ export default class Sidebar extends Component {
 						isHidden={!this.props.isSearching}
 						toggle={this.props.toggleSearchSidebar}
 						student={this.props.student}
+						baseSearchQuery={this.props.baseSearchQuery}
 					/>}
 			</aside>
 		)

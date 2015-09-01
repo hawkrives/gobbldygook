@@ -17,6 +17,7 @@ import semesterName from '../helpers/semester-name'
 import expandYear from '../helpers/expand-year'
 import queryCourseDatabase from '../lib/query-course-database'
 import padLeft from 'lodash/string/padLeft'
+import size from 'lodash/collection/size'
 
 import Button from '../components/button'
 import Course from '../components/course'
@@ -111,6 +112,7 @@ const SORT_BY_TO_KEY = {
 
 export default class CourseSearcher extends Component {
 	static propTypes = {
+		baseSearchQuery: PropTypes.object,
 		isHidden: PropTypes.bool,
 		student: PropTypes.instanceOf(Student).isRequired,
 		toggle: PropTypes.func.isRequired,
@@ -140,7 +142,7 @@ export default class CourseSearcher extends Component {
 	}
 
 	onSubmit = () => {
-		if (this.state.queryString !== this.state.lastQuery) {
+		if (this.state.queryString !== this.state.lastQuery || size(this.props.baseSearchQuery)) {
 			if (process.env.NODE_ENV === 'production') {
 				window.ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
 			}
@@ -159,14 +161,14 @@ export default class CourseSearcher extends Component {
 	}
 
 	query = searchQuery => {
-		if (searchQuery.length === 0 || this.state.queryInProgress) {
+		if ((searchQuery.length === 0 && !size(this.props.baseSearchQuery)) || this.state.queryInProgress) {
 			return
 		}
 
 		this.setState({results: [], hasQueried: false})
 		const startQueryTime = present()
 
-		queryCourseDatabase(searchQuery)
+		queryCourseDatabase(searchQuery, this.props.baseSearchQuery)
 			.then(results => {
 				console.info(`query took ${(present() - startQueryTime)}ms.`)
 				console.log('results', results)
@@ -222,12 +224,17 @@ export default class CourseSearcher extends Component {
 			)
 		}
 
+		let placeholderExtension = ''
+		if (size(this.props.baseSearchQuery)) {
+			placeholderExtension = ` in ${semesterName(this.props.baseSearchQuery.semester)} ${expandYear(this.props.baseSearchQuery.year, true, '–')}`
+		}
+
 		return (
 			<div className={cx('search-sidebar', this.props.isHidden && 'is-hidden')}>
 				<header className='sidebar-heading'>
 					<div className='row'>
 						<input type='search' className='search-box'
-							placeholder='Search Courses'
+							placeholder={'Search Courses' + placeholderExtension}
 							defaultValue={this.state.query}
 							onChange={this.onChange}
 							onKeyDown={this.onKeyDown}

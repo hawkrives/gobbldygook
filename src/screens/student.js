@@ -19,6 +19,7 @@ export default class Student extends Component {
 		super(props)
 		this.state = {
 			allAreas: Immutable.List(),
+			baseSearchQuery: {},
 			courses: Immutable.List(),
 			coursesLoaded: false,
 			message: `Loading Student ${props.routerState.params.id}`,
@@ -55,11 +56,20 @@ export default class Student extends Component {
 	}
 
 	toggleSearchSidebar = () => {
-		this.setState({isSearching: !this.state.isSearching})
+		this.setState({
+			isSearching: !this.state.isSearching,
+			baseSearchQuery: {},
+		})
 	}
 
-	showSearchSidebar = () => {
-		this.setState({isSearching: true})
+	showSearchSidebar = ({schedule}) => {
+		this.setState({
+			isSearching: true,
+			baseSearchQuery: {
+				semester: [schedule.semester],
+				year: [schedule.year],
+			},
+		})
 	}
 
 	render() {
@@ -74,6 +84,7 @@ export default class Student extends Component {
 				<div className='student'>
 					<Sidebar
 						allAreas={this.props.allAreas}
+						baseSearchQuery={this.state.baseSearchQuery}
 						courses={this.state.courses}
 						coursesLoaded={this.state.coursesLoaded}
 						isSearching={this.state.isSearching}
