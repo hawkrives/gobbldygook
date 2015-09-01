@@ -121,7 +121,7 @@ describe('Schedule', () => {
 	})
 
 	it('refuses to add non-number clbids', () => {
-		expect(() => sched.addCourse('918')).to.throw(Error)
+		expect(() => sched.addCourse('918')).to.throw(TypeError)
 	})
 
 	it('supports removing a course', () => {
@@ -130,12 +130,16 @@ describe('Schedule', () => {
 	})
 
 	it('refuses to remove non-number clbids', () => {
-		expect(() => sched.addCourse('918')).to.throw(Error)
+		expect(() => sched.addCourse('918')).to.throw(TypeError)
 	})
 
 	it('supports rearranging courses', () => {
 		let rearranged = sched.reorderCourse(123, 2)
 		expect(rearranged.clbids.toArray()).to.not.deep.equal([123, 234, 345])
 		expect(rearranged.clbids.toArray()).to.deep.equal([234, 345, 123])
+	})
+
+	it('requires that the clbid be a number when rearranging', () => {
+		expect(() => sched.reorderCourse('918', 1)).to.throw(TypeError)
 	})
 })
