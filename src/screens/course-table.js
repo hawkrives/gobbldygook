@@ -37,8 +37,9 @@ export default class CourseTable extends Component {
 		}
 
 		const nextAvailableYear = findFirstAvailableYear(this.props.student.schedules, this.props.student.matriculation)
+		const canAddYear = (this.props.student.graduation > nextAvailableYear)
 
-		const nextYearButton = (
+		const nextYearButton = canAddYear && (
 			<Button className='add-year'
 				key='add-year'
 				type='flat'
