@@ -1,23 +1,14 @@
 import {parse} from '../src/lib/parse-hanson-string'
-import meow from 'meow'
-import pkg from '../package.json'
+import nom from 'nomnom'
 import stringify from 'json-stable-stringify'
 
 export function cli() {
-	const args = meow({
-		pkg,
-		help: `Usage:
-			parse-result [--js] 'result expression'`,
-	})
+	const args = nom
+		.option('json', {flag: true})
+		.option('string', {position: 0, required: true})
+		.parse()
 
-	const data = args.input[0] || args.flags.js
-
-	if (!data) {
-		args.showHelp()
-		return
-	}
-
-	const string = stringify(parse(data), {space: 4})
+	const string = stringify(parse(args.string), {space: 4})
 	if (args.flags.js) {
 		console.log(string
 			.replace(/"/g, `'`)
