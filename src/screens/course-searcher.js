@@ -18,6 +18,7 @@ import expandYear from '../helpers/expand-year'
 import queryCourseDatabase from '../lib/query-course-database'
 import padLeft from 'lodash/string/padLeft'
 import size from 'lodash/collection/size'
+import keymage from 'keymage'
 
 import Button from '../components/button'
 import Course from '../components/course'
@@ -238,6 +239,8 @@ export default class CourseSearcher extends Component {
 							defaultValue={this.state.query}
 							onChange={this.onChange}
 							onKeyDown={this.onKeyDown}
+							onFocus={() => keymage.pushScope('search')}
+							onBlur={() => keymage.popScope()}
 							autoFocus={true}
 							ref='searchbox'
 						/>

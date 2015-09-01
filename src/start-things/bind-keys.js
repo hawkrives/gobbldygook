@@ -6,3 +6,6 @@ import studentActions from '../flux/student-actions'
 // the Control key in other systems
 keymage('defmod-z', studentActions.undo)
 keymage('defmod-shift-z', studentActions.redo)
+
+keymage('search', 'defmod-z', () => {})
+keymage('search', 'defmod-shift-z', () => {})
