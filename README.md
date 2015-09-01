@@ -41,4 +41,5 @@ If you don't want to join us there, you can file an issue via [github](https://g
 ## Screenshot
 It's a pretty old one, circa summer 2014.
 
-![Screenshot!](./screenshot.png)
+### 2014 - September
+![Screenshot, september 2014](./screenshots/september-2014.png)
