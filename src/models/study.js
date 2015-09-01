@@ -60,7 +60,7 @@ export function expandOldName(name) {
 		return 'Computer Science'
 	}
 	else if (name === 'math') {
-		return 'Math'
+		return 'Mathematics'
 	}
 	else if (name === 'phys') {
 		return 'Physics'
