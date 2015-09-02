@@ -30,7 +30,12 @@ Principles of Statistics:
     STAT 110
 
 Electives:
-    message: Students are permitted to take one of the four elective courses, but not a core course, S/U.
+    message:
+        Students are permitted to take one of the four elective courses, but
+        not a core course, S/U.
+
+        An introductory course is not required but may be used as an elective
+        for the major.
 
     Areas and Topics:
         one of (
