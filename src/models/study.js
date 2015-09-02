@@ -28,7 +28,7 @@ export async function loadArea({name, type, revision}) {
 	}
 
 	if (typeof data === 'undefined') {
-		throw new Error(`the area "${name}" (${type}) was undefined`)
+		throw new Error(`the area "${name}" (${type}) could not be found with the query {name: ${name}, type: ${type}, revision: ${revision}}`)
 	}
 
 	const enhanced = enhanceHanson(data, {topLevel: true})
