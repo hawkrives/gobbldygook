@@ -22,4 +22,15 @@ describe('findFirstAvailableYear', () => {
 
 		expect(findFirstAvailableYear(schedules, matriculation)).to.equal(2012)
 	})
+
+	it('does not add the matriculation year if it is already in the list of schedules', () => {
+		let schedules = [
+			{'id': 3, 'year': 2014},
+			{'id': 6, 'year': 2013},
+			{'id': 1, 'year': 2015},
+		]
+		let matriculation = 2013
+
+		expect(findFirstAvailableYear(schedules, matriculation)).to.equal(2016)
+	})
 })
