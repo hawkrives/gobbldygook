@@ -3,11 +3,11 @@ import kebabCase from 'lodash/string/kebabCase'
 import debug from 'debug'
 
 import enhanceHanson from '../lib/enhance-hanson'
-import pluralizeArea from '../lib/pluralize-area'
+import findAreaPath from '../lib/find-area-path'
 
 const migrationLog = debug('gobbldygook:data-migration:study')
 
-export async function loadArea({name, type}) {
+export async function loadArea({name, type, revision}) {
 	const db = require('../lib/db')
 
 	if (!name) {
@@ -17,7 +17,7 @@ export async function loadArea({name, type}) {
 		throw new Error(`loadArea(): 'type' must be provided`)
 	}
 
-	const path = `${pluralizeArea(type)}/${kebabCase(name)}.yaml`
+	const path = findAreaPath({name, type, revision})
 
 	let data
 	try {
