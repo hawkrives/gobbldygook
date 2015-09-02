@@ -6,6 +6,7 @@ export default class ContentEditable extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
+		onBlur: PropTypes.func,
 		onChange: PropTypes.func,
 		value: PropTypes.string,
 	}
@@ -25,7 +26,11 @@ export default class ContentEditable extends Component {
 	handleChange = ev => {
 		const value = ev.target.textContent
 		if (value !== this.props.value) {
-			this.props.onChange({target: {value: value}})
+			this.props.onChange({target: {value}})
+		}
+		if (ev.type === 'blur' && typeof this.props.onBlur === 'function') {
+			console.log(ev)
+			this.props.onBlur({target: {value}})
 		}
 		this.setState({lastValue: value})
 	}
