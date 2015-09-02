@@ -121,7 +121,7 @@ export default class StudentSummary extends Component {
 					<div className='paragraph'>
 						After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
 						{(degrees.size > 0) ? `${degreeEmphasizer}${degreeList} ${degreeWord}` : `no ${degreeWord}`}
-						{(majors.size) && (concentrations.size || emphases.size) ? ', ' : ' and '}
+						{(majors.size || concentrations.size || emphases.size) ? (majors.size) && (concentrations.size || emphases.size) ? ', ' : ' and ' : ''}
 						{(majors.size > 0) && `${majorEmphasizer}${majorWord} in ${majorList}`}
 						{(majors.size && concentrations.size) ? ', and ' : ''}
 						{(concentrations.size > 0) && `${concentrationEmphasizer}${concentrationWord} in ${concentrationList}`}
