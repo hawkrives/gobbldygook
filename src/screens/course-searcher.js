@@ -142,14 +142,17 @@ export default class CourseSearcher extends Component {
 		stickyfill.remove(findDOMNode(this))
 	}
 
-	onSubmit = () => {
-		if (this.state.queryString !== this.state.lastQuery || size(this.props.baseSearchQuery)) {
-			if (process.env.NODE_ENV === 'production') {
-				window.ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
-			}
-			this.query(this.state.queryString)
-		}
-	}
+    onSubmit = () => {
+        if (this.state.queryString !== this.state.lastQuery || size(this.props.baseSearchQuery)) {
+            if (process.env.NODE_ENV === 'production') {
+                try {
+                    window.ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
+                }
+                catch (e) {} // eslint-disable-line no-empty
+            }
+            this.query(this.state.queryString)
+        }
+    }
 
 	onChange = evt => {
 		this.setState({queryString: evt.target.value})
