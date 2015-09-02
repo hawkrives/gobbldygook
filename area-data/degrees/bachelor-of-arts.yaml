@@ -80,8 +80,6 @@ Core:
     Studies in Human Behavior and Society (HBS):
         filter: only courses where { gereqs = HBS }
         result: two departments from filter & two courses from filter
-        # two departments from courses where {gereqs = HBS} &
-        # two courses where { gereqs = HBS }
 
     result: all of ( HWC, MC, AL, BT, SCI, HBS )
 
