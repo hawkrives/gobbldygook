@@ -59,9 +59,10 @@ export default class AreaPicker extends Component {
 				<Toolbar>
 					<input
 						className='add-area--filter'
-						placeholder={'Filter ' + pluralizeArea(this.props.type)}
+						placeholder={`Filter ${pluralizeArea(this.props.type)}`}
 						value={this.state.filter}
-						onChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})} />
+						onChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})}
+					/>
 					<Button className='close-area-picker' onClick={this.props.closePicker}>Close</Button>
 				</Toolbar>
 
