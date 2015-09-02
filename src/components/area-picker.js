@@ -43,6 +43,17 @@ export default class AreaPicker extends Component {
 				</div>)
 			.toArray()
 
+		let message = 'Oh! We need a new message here!'
+		if (this.state.filter) {
+			message = `No matching ${pluralizeArea(this.props.type)}.`
+		}
+		else if (currentAreaNames.size) {
+			message = `All ${pluralizeArea(this.props.type)} have been added.`
+		}
+		else {
+			message = `No ${pluralizeArea(this.props.type)} are available.`
+		}
+
 		return (
 			<div className='add-area'>
 				<Toolbar>
@@ -55,11 +66,7 @@ export default class AreaPicker extends Component {
 				</Toolbar>
 
 				<List type='plain'>
-					{areaList.length
-						? areaList
-						: currentAreaNames.size
-							? 'All available areas have already been added.'
-							: 'No areas are available.'}
+					{areaList.length ? areaList : message}
 				</List>
 			</div>
 		)
