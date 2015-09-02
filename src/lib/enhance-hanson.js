@@ -23,6 +23,10 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 	// 3. throws if it encounters any lowercase keys not in the whitelist
 	// 4. throws if it cannot find any of the required keys
 
+	if (typeof data === 'undefined') {
+		throw new Error(`enhanceHanson(): data was undefined!`)
+	}
+
 	const baseWhitelist = ['result', 'message', 'declare']
 	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath'])
 	const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description'])

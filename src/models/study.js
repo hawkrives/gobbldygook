@@ -27,6 +27,10 @@ export async function loadArea({name, type, revision}) {
 		throw new Error(`Could not load area ${path}`)
 	}
 
+	if (typeof data === 'undefined') {
+		throw new Error(`the area "${name}" (${type}) was undefined`)
+	}
+
 	const enhanced = enhanceHanson(data, {topLevel: true})
 
 	return enhanced
