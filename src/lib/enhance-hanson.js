@@ -9,6 +9,7 @@ import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'
 import some from 'lodash/collection/some'
 import zipObject from 'lodash/array/zipObject'
+import {slugifyAreaName} from './find-area-path'
 import {oxford} from 'humanize-plus'
 import {parse} from './parse-hanson-string'
 
@@ -28,7 +29,7 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 	}
 
 	const baseWhitelist = ['result', 'message', 'declare']
-	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath'])
+	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug'])
 	const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description'])
 	const whitelist = topLevel ? topLevelWhitelist : lowerLevelWhitelist
 
@@ -41,6 +42,10 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 	// install the top-level $type key *after* the whitelist runs
 	if (topLevel) {
 		data.$type = 'requirement'
+
+		// because this only runs at the top level, we know
+		// that we'll have a name to use
+		data.slug = data.slug || slugifyAreaName(data.name)
 	}
 
 	const requirements = filter(keys(data), isRequirementName)
