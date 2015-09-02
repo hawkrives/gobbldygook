@@ -1,8 +1,10 @@
 import kebabCase from 'lodash/string/kebabCase'
 import pluralizeArea from '../../src/lib/pluralize-area'
 
+export function slugifyAreaName(name) {
+	return kebabCase(name.replace(`'`, ''))
+}
+
 export default function findAreaPath({name, type, revision}) {
-	name = kebabCase(name.replace(`'`, ''))
-	type = pluralizeArea(type)
-	return `${type}/${name}.yaml`
+	return `${pluralizeArea(type)}/${slugifyAreaName(name)}.yaml`
 }
