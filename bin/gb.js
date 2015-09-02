@@ -9,6 +9,9 @@ import fs from 'graceful-fs'
 import 'isomorphic-fetch'
 import {status, json, text} from '../src/lib/fetch-helpers'
 
+import quacksLikeDeptNum from '../src/helpers/quacks-like-dept-num'
+import splitDeptNum from '../src/helpers/split-dept-num'
+
 function check() {}
 function lint() {}
 
@@ -148,7 +151,7 @@ import table from 'text-table'
 function printCourse(options) {
 	return course => {
 		if (options.list) {
-			return [`${course.year}.${course.semester}`, `${course.depts.join('/')} ${course.num}${course.section ? `[${course.section}]` : ''}${course.type && course.type !== 'Research' && (' (' + course.type + ')')}`, `${course.name}`]
+			return [`${course.year}.${course.semester}`, `${course.depts.join('/')} ${course.num}${course.section ? `[${course.section}]` : ''}${course.type && course.type !== 'Research' ? ' (' + course.type + ')' : ''}`, `${course.name}${course.title && course.title !== course.name ? ` [${course.title}]` : ''}`]
 		}
 		else {
 			console.log(
@@ -167,6 +170,7 @@ import flatten from 'lodash/array/flatten'
 import filter from 'lodash/collection/filter'
 import forEach from 'lodash/collection/forEach'
 import uniq from 'lodash/array/uniq'
+import isString from 'lodash/lang/isString'
 import sortByAll from 'lodash/collection/sortByAll'
 function search({riddles, unique, sort, ...opts}={}) {
 	// console.warn(`searched for ${JSON.stringify(riddle, null)}`)
@@ -174,6 +178,8 @@ function search({riddles, unique, sort, ...opts}={}) {
 	checkForStaleData().then(() => {
 		let base = `${cacheDir}/Courses/`
 		let files = flatten(map(fs.readdirSync(base),  fn => tryReadJsonFile(path.join(base, fn))))
+
+		riddles	= riddles.map(r => isString(r) ? (quacksLikeDeptNum(r) ? splitDeptNum(r) : r) : r)
 
 		let filtered = files
 		forEach(riddles, riddle => {
@@ -250,5 +256,15 @@ export function cli() {
 		callback: () => pkg.version,
 	})
 
-	nom.parse()
+	nom.option('debug', {
+		string: '-d, --debug',
+		flag: true,
+		help: 'print debugging information',
+	})
+
+	const args = nom.parse()
+
+	if (args.debug) {
+		console.log(args)
+	}
 }
