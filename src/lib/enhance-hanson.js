@@ -1,22 +1,27 @@
-import {parse} from './parse-hanson-string'
 import cloneDeep from 'lodash/lang/cloneDeep'
 import filter from 'lodash/collection/filter'
 import forEach from 'lodash/collection/forEach'
-import {oxford} from 'humanize-plus'
 import includes from 'lodash/collection/includes'
 import isRequirementName from './is-requirement-name'
 import isString from 'lodash/lang/isString'
 import keys from 'lodash/object/keys'
 import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'
+import some from 'lodash/collection/some'
 import zipObject from 'lodash/array/zipObject'
+import {oxford} from 'humanize-plus'
+import {parse} from './parse-hanson-string'
+
+const none = (...args) => !some(...args)
+const quote = str => `"${str}"`
 
 let declaredVariables = {}
 
 export default function enhanceHanson(data, {topLevel=false}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
-	// 3. warns if it encounters any lowercase keys not in the whitelist
+	// 3. throws if it encounters any lowercase keys not in the whitelist
+	// 4. throws if it cannot find any of the required keys
 
 	const baseWhitelist = ['result', 'message', 'declare']
 	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath'])
@@ -25,7 +30,7 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 
 	forEach(keys(data), key => {
 		if (!isRequirementName(key) && !includes(whitelist, key)) {
-			throw new TypeError(`enhanceHanson(): only ${oxford(whitelist)} keys are allowed, and '${key}' is not one of them. all requirements must begin with an uppercase letter or a number.`)
+			throw new TypeError(`enhanceHanson(): only ${oxford(whitelist)} keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`)
 		}
 	})
 
@@ -81,6 +86,11 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 
 		return value
 	})
+
+	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
+	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
+		throw new TypeError(`enhanceHanson(): could not find any of [${oneOfTheseKeysMustExist.map(quote).join(', ')}] in [${keys(data).map(quote).join(', ')}].`)
+	}
 
 	forEach(data.declare || [], (value, key) => {
 		delete declaredVariables[key]
