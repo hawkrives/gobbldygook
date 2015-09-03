@@ -26,7 +26,8 @@ $semester-edge-padding:
 	flex: 1;
 }
 
-.semester.is-over {
+.semester.can-drop {
+	cursor: copy;
 	box-shadow: 0 0 4px color('gray', '500');
 	z-index: 10;
 }

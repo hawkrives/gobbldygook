@@ -44,6 +44,12 @@ const semesterTarget = {
 			studentActions.addCourse(props.student.id, toSchedule.id, clbid)
 		}
 	},
+	canDrop(props, monitor) {
+		const item = monitor.getItem()
+		const schedule = getSchedule(props.student, props.year, props.semester)
+		const hasClbid = schedule.clbids.contains(item.clbid)
+		return !hasClbid
+	},
 }
 
 // Specifies the props to inject into your component.
@@ -146,7 +152,6 @@ class Semester extends Component {
 			semester: true,
 			invalid: this.state.validation.hasConflict,
 			'can-drop': this.props.canDrop,
-			'is-over': this.props.isOver,
 		})
 
 		return this.props.connectDropTarget(
