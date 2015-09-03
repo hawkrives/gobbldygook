@@ -88,6 +88,10 @@ export default class Schedule extends ScheduleRecord {
 			throw new TypeError('addCourse(): clbid must be a number')
 		}
 
+		if (this.clbids.contains(clbid)) {
+			return this
+		}
+
 		return this.withMutations(sched => {
 			sched = sched.set('clbids', sched.clbids.push(clbid))
 			sched = sched.set('_courseData', getCourses(sched.clbids))
