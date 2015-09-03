@@ -2,6 +2,7 @@ import Immutable from 'immutable'
 import flatten from 'lodash/array/flatten'
 import forEach from 'lodash/collection/forEach'
 import omit from 'lodash/object/omit'
+import uniq from 'lodash/array/uniq'
 import {v4 as uuid} from 'node-uuid'
 import stringify from 'json-stable-stringify'
 import present from 'present'
@@ -222,8 +223,9 @@ export default class Student extends StudentRecord {
 			.filter(sched => sched.active)
 			.map(schedule => schedule.courses)
 			.toArray()
+
 		const scheduleCoursePromises = Promise.all(allCourses)
-		return scheduleCoursePromises.then(scheduleCourses => flatten(scheduleCourses))
+		return scheduleCoursePromises.then(scheduleCourses => uniq(flatten(scheduleCourses), course => course.clbid))
 	}
 
 
