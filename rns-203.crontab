@@ -1,0 +1,7 @@
+# minute  hour  day  month  day-of-week  command
+
+# update and build gobbldygook
+0  */12  *  *  *  /home/users/rives/src/gobbldygook/cron.sh
+
+# update course data
+0  */6  *  *  1-6  /home/users/rives/src/gobbldygook-course-data/auto-update.sh
