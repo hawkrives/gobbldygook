@@ -7,7 +7,7 @@ set -e
 git pull origin master
 
 # install any updated dependencies
-$HOME/bin/npm i --no-progress > /dev/null
+"$HOME/bin/npm" i --no-progress > /dev/null
 
 # run the tests
 npm test
