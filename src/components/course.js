@@ -24,6 +24,7 @@ const courseSource = {
 			fromSchedule: scheduleId !== null,
 			fromSearch: scheduleId === null,
 			clbid: props.info.clbid,
+			groupid: props.info.groupid,
 			fromScheduleID: scheduleId,
 		}
 	},
