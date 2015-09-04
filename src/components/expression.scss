@@ -91,3 +91,12 @@
 		font-weight: bold;
 	}
 }
+
+
+.expression--reference {
+	display: inline;
+}
+.expression--reference > .expression--contents {
+	display: inline;
+	flex-flow: none;
+}
