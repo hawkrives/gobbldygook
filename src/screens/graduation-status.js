@@ -129,6 +129,7 @@ export default class GraduationStatus extends Component {
 					removeArea={this.removeAreaFromStudent}
 					removeOverride={this.removeOverrideFromStudent}
 					showAreaPicker={this.state.showAreaPickerFor.get(areaType)}
+					studentId={this.props.student.id}
 					toggleOverride={this.toggleOverrideOnStudent}
 					type={areaType}
 				/>)

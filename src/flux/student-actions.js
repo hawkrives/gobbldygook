@@ -20,6 +20,7 @@ let studentActions = Reflux.createActions([
 	'removeArea',
 	'removeMultipleAreas',
 	'reorderArea',
+	'editArea',
 
 	'addSchedule',
 	'destroySchedule',

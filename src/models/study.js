@@ -2,12 +2,17 @@ import Immutable from 'immutable'
 import kebabCase from 'lodash/string/kebabCase'
 import debug from 'debug'
 
+import yaml from 'js-yaml'
 import enhanceHanson from '../lib/enhance-hanson'
 import findAreaPath from '../lib/find-area-path'
 
 const migrationLog = debug('gobbldygook:data-migration:study')
 
-export async function loadArea({name, type, revision}) {
+export async function loadArea({name, type, revision, source, isCustom}) {
+	if (isCustom && source) {
+		return {...enhanceHanson(yaml.safeLoad(source), {topLevel: true}), source}
+	}
+
 	const db = require('../lib/db')
 
 	if (!name) {
@@ -36,11 +41,17 @@ export async function loadArea({name, type, revision}) {
 	return enhanced
 }
 
+export function buildAreaId({name, type, revision}) {
+	return `${kebabCase(name)}-${type}?rev=${revision}`
+}
+
 export const StudyRecord = Immutable.Record({
 	id: '',
 	type: '',
 	name: '',
 	revision: null,
+	isCustom: false,
+	source: '',
 	data: Promise.resolve({}),
 })
 
@@ -97,7 +108,7 @@ export function migrateFromOldSave({id, revisionYear}) {
 
 export default class Study extends StudyRecord {
 	constructor(args) {
-		let {name, type, revision} = args
+		let {name, type, revision, isCustom, source} = args
 
 		// migrate from older area save style
 		if ('id' in args) {
@@ -105,16 +116,28 @@ export default class Study extends StudyRecord {
 			({name, type, revision} = migrateFromOldSave(args))
 		}
 
-		const id = `${kebabCase(name)}-${type}?rev=${revision}`
-		const data = loadArea({name, type, revision})
+		const data = loadArea({name, type, revision, source, isCustom})
 			.catch(err => ({_error: err.message}))
 
 		super({
-			type,
 			name,
+			type,
 			revision,
-			id,
+			isCustom,
+			source,
 			data,
+			id: buildAreaId({name, type, revision}),
+		})
+	}
+
+	edit(newSource) {
+		console.log('editing', this.name)
+		console.log(newSource)
+		return this.withMutations(area => {
+			area = area.set('source', newSource)
+			area = area.set('isCustom', true)
+			area = area.set('data', loadArea(area))
+			return area
 		})
 	}
 
@@ -123,6 +146,8 @@ export default class Study extends StudyRecord {
 			type: this.type,
 			name: this.name,
 			revision: this.revision,
+			isCustom: this.isCustom,
+			source: this.source,
 		}
 	}
 }

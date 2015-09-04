@@ -10,7 +10,14 @@
 		{"type": "major", "name": "Physics", "revision": "2011-12"},
 		{"type": "major", "name": "Mathematics", "revision": "2011-12"},
 		{"type": "concentration", "name": "Japan Studies", "revision": "2014-15"},
-		{"type": "concentration", "name": "Statistics", "revision": "2014-15"}
+		{"type": "concentration", "name": "Statistics", "revision": "2014-15"},
+		{
+			"type": "emphasis",
+			"name": "Custom!",
+			"revision": "1",
+			"isCustom": true,
+			"source": "name: Custom!\ntype: emphasis\nrevision: '1'\nresult: Requirement Title Goes Here\n\nRequirement Title Goes Here:\n  CSCI 121 & CSCI 251"
+		}
 	],
 
 	"schedules": [
