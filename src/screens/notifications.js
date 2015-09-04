@@ -1,45 +1,37 @@
-import React, {Component} from 'react'
-import Immutable from 'immutable'
+import React, {Component, PropTypes} from 'react'
+import {OrderedMap} from 'immutable'
 
-import notificationStore from '../flux/notification-store'
+import {connect} from 'react-redux'
+import {removeNotification} from '../actions/notification-actions'
 
 import Notification from '../components/notification'
 
 import './notifications.scss'
 
-export default class Notifications extends Component {
-	static displayName = 'Notifications'
-
-	constructor() {
-		super()
-		this.state = {
-			notifications: Immutable.Map(),
-		}
-		this.onNotification = this.onNotification.bind(this)
-	}
-
-	componentDidMount() {
-		notificationStore.emitter.on('change', this.onNotification)
-		notificationStore.emitter.emit('change')
-	}
-
-	componentWillUnmount() {
-		notificationStore.emitter.off('change', this.onNotification)
-	}
-
-	onNotification() {
-		this.setState({
-			notifications: notificationStore.notifications,
-		})
+export class Notifications extends Component {
+	static propTypes = {
+		dispatch: PropTypes.func.isRequired,
+		notifications: PropTypes.instanceOf(OrderedMap).isRequired,
 	}
 
 	render() {
 		return (
 			<ul className='notification-list'>
-				{this.state.notifications
-					.map(n => <Notification key={n.id} {...n} />)
-					.toArray()}
+				{this.props.notifications.map(n =>
+					<Notification {...n}
+						key={n.id}
+						onClick={id => this.props.dispatch(removeNotification(id))}
+					/>)
+				.toArray()}
 			</ul>
 		)
 	}
 }
+
+function select(state) {
+	return {
+		notifications: state.notifications,
+	}
+}
+
+export default connect(select)(Notifications)

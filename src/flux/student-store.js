@@ -10,7 +10,7 @@ import Student from '../models/student'
 import demoStudent from '../models/demo-student.json'
 
 import studentActions from './student-actions'
-import notificationActions from './notification-actions'
+// import notificationActions from './notification-actions'
 
 import parseSIS from '../lib/parse-sis'
 
@@ -133,7 +133,8 @@ const studentStore = Reflux.createStore({
 					basicStudent = JSON.parse(rawStudent)
 				}
 				catch (e) {
-					notificationActions.logError('error parsing student', basicStudent)
+					// notificationActions.logError('error parsing student', basicStudent)
+					console.error(e)
 				}
 
 				if (basicStudent.id === 'student-v3.0a6') {

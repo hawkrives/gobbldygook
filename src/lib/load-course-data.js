@@ -5,7 +5,6 @@ import startsWith from 'lodash/string/startsWith'
 import present from 'present'
 import yaml from 'js-yaml'
 
-import notificationActions from '../flux/notification-actions'
 import {status, json, text} from './fetch-helpers'
 import db from './db'
 
@@ -52,15 +51,15 @@ async function storeCourses(item) {
 		await db.store('courses').batch(coursesToStore)
 	}
 	catch (e) {
-		const db = e.target.db.name
-		const errorName = e.target.error.name
+		// const db = e.target.db.name
+		// const errorName = e.target.error.name
 
-		if (errorName === 'QuotaExceededError') {
-			notificationActions.logError({
-				id: 'db-storage-quota-exceeded',
-				message: `The database "${db}" has exceeded its storage quota.`,
-			})
-		}
+		// if (errorName === 'QuotaExceededError') {
+			// notificationActions.logError({
+			// 	id: 'db-storage-quota-exceeded',
+			// 	message: `The database "${db}" has exceeded its storage quota.`,
+			// })
+		// }
 
 		console.error(e.target)
 		throw e
@@ -145,7 +144,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 		return true
 	}
 
-	notificationActions.startProgress(notificationId, `Loading ${type}`, {max: count}, true)
+	// notificationActions.startProgress(notificationId, `Loading ${type}`, {max: count}, true)
 
 	log(`need to add ${path}`)
 
@@ -187,7 +186,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 	}
 
 	log(`added ${item.path} (${item.count} ${item.type})`)
-	notificationActions.incrementProgress(notificationId)
+	// notificationActions.incrementProgress(notificationId)
 }
 
 async function loadDataFiles(infoFile, infoFileBase) {
@@ -209,7 +208,7 @@ async function loadDataFiles(infoFile, infoFileBase) {
 				throw err
 			}))
 
-	notificationActions.removeNotification(notificationId, 1500)
+	// notificationActions.removeNotification(notificationId, 1500)
 }
 
 async function loadInfoFile(url, infoFileBase) {
