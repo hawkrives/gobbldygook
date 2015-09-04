@@ -6,7 +6,7 @@ import ProgressBar from './progress-bar'
 export default class Notification extends Component {
 	static propTypes = {
 		hideButton: PropTypes.bool,
-		id: PropTypes.any.isRequired,
+		id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 		max: PropTypes.number,
 		message: PropTypes.string.isRequired,
 		onClick: PropTypes.func.isRequired,
