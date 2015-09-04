@@ -40,17 +40,14 @@ export default class AreaOfStudyGroup extends Component {
 								Close
 							</Button>
 							: <Button className='add-area-of-study' type='flat' onClick={ev => this.props.initiateAddArea({ev, type: this.props.type})}>
-								{/*'Add/Edit'*/}
-								{/*'Add ⋎ Edit'*/}
-								{/*'Add ∨|∙ Edit'*/}
-								{'Add ∙ Edit'}
+								Add ∙ Edit
 							</Button>
 					}
 				</h1>
 
 				{this.props.areas.map(area =>
-					<AreaOfStudy key={area.id}
-						{...area}
+					<AreaOfStudy {...area}
+						key={area.id}
 						removeArea={this.props.removeArea}
 						addOverride={this.props.addOverride}
 						removeOverride={this.props.removeOverride}

@@ -34,7 +34,7 @@ export default async function checkStudentAgainstArea(student, area) {
 
 	const baseAreaResults = {name: area.name, type: area.type, id: area.id}
 	if (areaData._error) {
-		console.error('checkStudentAgainstArea():', areaData._error)
+		console.error('checkStudentAgainstArea():', areaData._error, baseAreaResults)
 		return {...baseAreaResults, _error: areaData._error}
 	}
 

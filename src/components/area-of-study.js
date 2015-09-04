@@ -83,7 +83,8 @@ export default class AreaOfStudy extends Component {
 				</div>
 				<ProgressBar className={cx('area--progress', {error: this.props._error})} colorful={true}
 					value={this.props._progress.at}
-					max={this.props._progress.of} />
+					max={this.props._progress.of}
+				/>
 			</div>
 		)
 
