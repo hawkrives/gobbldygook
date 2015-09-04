@@ -19,14 +19,15 @@ export default class AreaOfStudy extends Component {
 		addOverride: PropTypes.func.isRequired,
 		data: PropTypes.object,
 		id: PropTypes.string.isRequired,
+		isCustom: PropTypes.bool,
 		name: PropTypes.string.isRequired,
 		removeArea: PropTypes.func.isRequired,
 		removeOverride: PropTypes.func.isRequired,
 		result: PropTypes.object.isRequired,
 		revision: PropTypes.string.isRequired,
 		showCloseButton: PropTypes.bool.isRequired,
-		slug: PropTypes.string.isRequired,
 		showEditButton: PropTypes.bool.isRequired,
+		slug: PropTypes.string,
 		studentId: PropTypes.string.isRequired,
 		toggleOverride: PropTypes.func.isRequired,
 		type: PropTypes.string.isRequired,
@@ -67,16 +68,18 @@ export default class AreaOfStudy extends Component {
 		const summary = (
 			<div>
 				<div className='area--summary-row'>
-					<h1 className='area--title'>{this.props.name}</h1>
-					<span className='icons'>
-						{(this.props.slug && this.state.open) &&
-						<a className='catalog-link'
+					<h1 className='area--title'>
+						{this.props.slug && !this.props.isCustom
+						? <a className='catalog-link'
 							href={`http://catalog.stolaf.edu/academic-programs/${this.props.slug}/`}
 							target='_blank'
 							onClick={ev => ev.stopPropagation()}
 							title='View in the St. Olaf Catalog'>
-							Catalog
-						</a>}
+							{this.props.name}
+						</a>
+						: this.props.name}
+					</h1>
+					<span className='icons'>
 						{this.props.showCloseButton &&
 						<Button className='area--remove-button' onClick={this.startRemovalConfirmation}>
 							<Icon name='ionicon-close' />
