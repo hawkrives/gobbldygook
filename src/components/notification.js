@@ -1,8 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import round from 'lodash/math/round'
-
-import notificationActions from '../flux/notification-actions'
-
 import Button from './button'
 import ProgressBar from './progress-bar'
 
@@ -12,12 +9,9 @@ export default class Notification extends Component {
 		id: PropTypes.any.isRequired,
 		max: PropTypes.number,
 		message: PropTypes.string.isRequired,
+		onClick: PropTypes.func.isRequired,
 		type: PropTypes.string.isRequired,
 		value: PropTypes.number,
-	}
-
-	remove = () => {
-		notificationActions.removeNotification(this.props.id)
 	}
 
 	render() {
@@ -31,7 +25,7 @@ export default class Notification extends Component {
 
 		return (
 			<li className={`notification-capsule notification-type--${this.props.type}`}
-				onClick={this.remove}>
+				onClick={() => this.props.onClick(this.props.id)}>
 				<div className='notification-content'>
 					<h1 className='notification-message'>
 						{this.props.message}
