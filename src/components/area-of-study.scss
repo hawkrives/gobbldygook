@@ -36,8 +36,6 @@
 .area--summary::details-marker         { display: none; }
 
 .area--summary {
-	cursor: pointer;
-
 	display: flex;
 	flex-flow: column nowrap;
 
@@ -76,28 +74,29 @@
 	font-weight: 500;
 
 	font-size: 1em;
-}
 
-.area--summary-row .icons {
-	.area--open-indicator {
-		margin-right: 0.5em;
+	a {
+		color: inherit;
+		text-decoration: none;
 	}
 
+	.area[open] & a {
+		text-decoration: underline;
+	}
+}
+
+
+.area--summary-row .icons {
 	.button {
 		min-height: 0;
 		padding: 0 0.5em;
 		margin-right: 0.5em;
 	}
 
-	.catalog-link {
-		display: inline-block;
+	.area--open-indicator {
 		padding: 0 0.5em;
-		color: inherit;
-		text-decoration: none;
-
-		&:hover {
-			text-decoration: underline;
-		}
+		margin-right: 0.5em;
+		cursor: pointer;
 	}
 }
 
