@@ -111,5 +111,6 @@
 
 	&:hover {
 		background-color: transparentize(color('white'), 0.15);
+		color: color('black', '500');
 	}
 }
