@@ -9,3 +9,6 @@ keymage('defmod-shift-z', studentActions.redo)
 
 keymage('search', 'defmod-z', () => {})
 keymage('search', 'defmod-shift-z', () => {})
+
+keymage('edit-area', 'defmod-z', () => {})
+keymage('edit-area', 'defmod-shift-z', () => {})

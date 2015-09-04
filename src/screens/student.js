@@ -35,8 +35,8 @@ export default class Student extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		// console.log(nextProps)
-		let queryId = this.props.routerState.params.id
-		let student = nextProps.students.get(queryId)
+		const queryId = this.props.routerState.params.id
+		const student = nextProps.students.get(queryId)
 
 		if (student) {
 			// console.info('student\'s student: ', student.toJS())
@@ -46,6 +46,17 @@ export default class Student extends Component {
 				courses: Immutable.List(courses),
 				coursesLoaded: true,
 			}))
+
+			const customAreas = student.studies
+				.filter(study => study.isCustom)
+				.map(study => study.data)
+				.toArray()
+
+			Promise.all(customAreas).then(customAreas => {
+				this.setState({
+					allAreas: nextProps.allAreas.concat(customAreas),
+				})
+			})
 		}
 		else {
 			this.setState({
@@ -83,7 +94,7 @@ export default class Student extends Component {
 			<DocumentTitle title={`${this.state.student.name} | Gobbldygook`}>
 				<div className='student'>
 					<Sidebar
-						allAreas={this.props.allAreas}
+						allAreas={this.state.allAreas}
 						baseSearchQuery={this.state.baseSearchQuery}
 						courses={this.state.courses}
 						coursesLoaded={this.state.coursesLoaded}
@@ -93,6 +104,7 @@ export default class Student extends Component {
 					/>
 					<RouteHandler
 						className='content'
+						allAreas={this.state.allAreas}
 						student={this.state.student}
 						courses={this.state.courses}
 						coursesLoaded={this.state.coursesLoaded}
