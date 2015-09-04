@@ -164,7 +164,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 		data = JSON.parse(data)
 	}
 	catch (err) {
-		data = yaml.safeLoad(data)
+		data = {...yaml.safeLoad(data), source: data}
 	}
 
 	const item = {
