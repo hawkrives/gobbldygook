@@ -8,6 +8,10 @@ export default class Separator extends Component {
 		type: PropTypes.oneOf(['spacer', 'line']),
 	}
 
+	static defaultProps = {
+		type: 'spacer',
+	}
+
 	render() {
 		let style = {
 			display: 'flex',
