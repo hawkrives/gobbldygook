@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import {Link} from 'react-router'
 import cx from 'classnames'
 
 import Button from './button'
@@ -25,6 +26,8 @@ export default class AreaOfStudy extends Component {
 		revision: PropTypes.string.isRequired,
 		showCloseButton: PropTypes.bool.isRequired,
 		slug: PropTypes.string.isRequired,
+		showEditButton: PropTypes.bool.isRequired,
+		studentId: PropTypes.string.isRequired,
 		toggleOverride: PropTypes.func.isRequired,
 		type: PropTypes.string.isRequired,
 	}
@@ -77,6 +80,22 @@ export default class AreaOfStudy extends Component {
 						{this.props.showCloseButton &&
 						<Button className='area--remove-button' onClick={this.startRemovalConfirmation}>
 							<Icon name='ionicon-close' />
+						</Button>}
+						{this.props.showEditButton &&
+						<Button className='area--edit-button'>
+							<Link
+								to='area-editor'
+								params={{
+									id: this.props.studentId,
+								}}
+								query={{
+									type: this.props.type,
+									name: this.props.name,
+									revision: this.props.revision,
+								}}
+								onClick={ev => ev.stopPropagation()}>
+								<Icon name='ionicon-edit' />
+							</Link>
 						</Button>}
 						<Icon className='area--open-indicator' name={this.state.open ? 'ionicon-chevron-up' : 'ionicon-chevron-down'} />
 					</span>
