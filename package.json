@@ -12,7 +12,7 @@
   "config": {
     "area_output": "build/areas/",
     "beautify": "-f - --end-with-newline --indent-with-tabs",
-    "mocha": "test/areas test/models test/helpers",
+    "mocha": "test/areas test/models test/helpers test/actions test/reducers",
     "webpack": "--progress --config=./.webpack.config.js"
   },
   "scripts": {
