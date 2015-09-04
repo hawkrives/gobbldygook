@@ -3,6 +3,7 @@ import Immutable from 'immutable'
 
 import studentActions from '../flux/student-actions'
 
+import Toolbar from '../components/toolbar'
 import Button from '../components/button'
 import Icon from '../components/icon'
 import StudentList from '../components/student-list'
@@ -57,7 +58,7 @@ export default class StudentPicker extends Component {
 					onChange={this.handleFile} />
 
 				<div className='student-list-toolbar'>
-					<menu className='student-list-buttons'>
+					<Toolbar className='student-list-buttons'>
 						<Button className='student-list--button'
 							onClick={() => this.setState({sortBy: this.state.sortBy === 'modified' ? 'name' : 'modified'})}>
 							<Icon name='ionicon-funnel' type='inline' />{' '}
@@ -80,7 +81,7 @@ export default class StudentPicker extends Component {
 							<Icon name='ionicon-plus' type='inline' />{' '}
 							New Student
 						</Button>
-					</menu>
+					</Toolbar>
 
 					<input
 						type='search'

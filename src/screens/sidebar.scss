@@ -12,23 +12,7 @@
 }
 
 .student-buttons {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: stretch;
-
 	margin-bottom: 0.5em;
-}
-
-.sidebar-btn {
-	flex: 1 0 auto;
-	padding-left: 0.25em;
-	padding-right: 0.25em;
-
-	margin-bottom: 0.5em;
-
-	.icon {
-		font-size: 1.5em;
-	}
 }
 
 .is-hidden {
