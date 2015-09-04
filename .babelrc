@@ -1,6 +1,7 @@
 {
 	"optional": [
 		"runtime",
+		"es7.exportExtensions",
 		"es7.objectRestSpread",
 		"es7.classProperties",
 		"es7.asyncFunctions"
