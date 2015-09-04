@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import pluralizeArea from '../lib/pluralize-area'
 import capitalize from 'lodash/string/capitalize'
+import * as areaTypeConstants from '../models/area-types'
+import values from 'lodash/object/values'
 
 import {List} from 'immutable'
 
@@ -23,7 +25,7 @@ export default class AreaOfStudyGroup extends Component {
 		showAreaPicker: PropTypes.bool.isRequired,
 		studentId: PropTypes.string.isRequired,
 		toggleOverride: PropTypes.func.isRequired,
-		type: PropTypes.oneOf(['degree', 'major', 'concentration', 'emphasis']).isRequired,
+		type: PropTypes.oneOf(values(areaTypeConstants)).isRequired,
 	}
 
 	static defaultProps = {
