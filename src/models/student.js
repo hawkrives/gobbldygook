@@ -150,11 +150,9 @@ export default class Student extends StudentRecord {
 	destroyMultipleSchedules(ids) {
 		return this.withMutations(student => {
 			changelog('destroyMultipleSchedules', ids)
-			// console.groupCollapsed('destroyMultipleSchedules')
-			forEach('toArray' in ids ? ids.toArray() : ids, id => {
+			ids.forEach(id => {
 				student = student.destroySchedule(id)
 			})
-			// console.groupEnd('destroyMultipleSchedules')
 			return student
 		})
 	}
@@ -181,7 +179,7 @@ export default class Student extends StudentRecord {
 
 	removeMultipleAreas(ids) {
 		return this.withMutations(student => {
-			forEach(ids.hasOwnProperty('toArray') ? ids.toArray() : ids, id => {
+			ids.forEach(id => {
 				student = student.removeArea(id)
 			})
 			return student
