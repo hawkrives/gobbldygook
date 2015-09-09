@@ -53,6 +53,13 @@ let schema = treo.schema()
 	.version(5)
 		.addStore('courseCache', { key: 'id' })
 		.addStore('areaCache', { key: 'id' })
+		.getStore('areas')
+			.dropIndex('sourcePath')
+		.getStore('courses')
+			.dropIndex('desc')
+			.dropIndex('notes')
+			.dropIndex('title')
+			.dropIndex('name')
 
 
 import treoPromise from 'treo/plugins/treo-promise'
