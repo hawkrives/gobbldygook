@@ -23,7 +23,7 @@ export async function loadArea({name, type, revision, source, isCustom}) {
 		throw new Error(`loadArea(): 'type' must be provided`)
 	}
 
-	const path = findAreaPath({name, type, revision})
+	const path = `${findAreaPath({name, type, revision})}.yaml`
 
 	let data
 	try {
