@@ -85,12 +85,12 @@ var config = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				// an array, so that it can be added to lated
+				// an array, so that it can be added to later
 				loaders: ['babel-loader'],
 			},
 			{
 				test: /\.json$/,
-				// an array, so that it can be added to lated
+				// an array, so that it can be added to later
 				loaders: ['json'],
 			},
 			{
