@@ -165,9 +165,8 @@
 .course.empty {
 	color: color('gray', '500');
 	user-select: none;
-	cursor: default;
 
-	.title {
+	* {
 		cursor: default;
 	}
 }
