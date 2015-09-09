@@ -24,7 +24,7 @@ const welcomeMessages = [
 	'Hello, ',
 	'Konnichiha, ',
 	'こんにちは、',
-	'Yōkouso, ',
+	'Yōkōso, ',
 	'ようこそ、',
 	'Fram! Fram! ',
 	'Salut, ',
