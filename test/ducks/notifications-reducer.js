@@ -1,18 +1,26 @@
-import notifications from '../../src/reducers/notifications-reducer'
-import * as C from '../../src/constants/notification-constants'
-
 import {OrderedMap} from 'immutable'
+
+import reducer, {
+	INCREMENT_PROGRESS,
+	LOG_ERROR,
+	LOG_MESSAGE,
+	REMOVE_NOTIFICATION,
+	START_PROGRESS,
+} from '../../src/ducks/notifications'
+
 
 describe('notifications reducer', () => {
 	it('should return the initial state', () => {
-		expect(notifications(undefined, {})).to.deep.equal(OrderedMap())
+		const expected = OrderedMap()
+		const actual = reducer(undefined, {})
+		expect(actual).to.deep.equal(expected)
 	})
 
 	it('should handle LOG_MESSAGE', () => {
 		const id = 1
 		const message = 'message'
 
-		const actualState = notifications(undefined, {type: C.LOG_MESSAGE, payload: {id, message}})
+		const actualState = reducer(undefined, {type: LOG_MESSAGE, payload: {id, message}})
 		const expectedState = OrderedMap([[id, {id, message, type: 'message'}]])
 
 		expect(actualState.toJS()).to.deep.equal(expectedState.toJS())
@@ -22,7 +30,7 @@ describe('notifications reducer', () => {
 		const id = 1
 		const error = new Error('message')
 
-		const actualState = notifications(undefined, {type: C.LOG_ERROR, payload: {id, error, args: []}})
+		const actualState = reducer(undefined, {type: LOG_ERROR, payload: {id, error, args: []}})
 		const expectedState = OrderedMap([[id, {id, message: error.message, type: 'error'}]])
 
 		expect(actualState.toJS()).to.deep.equal(expectedState.toJS())
@@ -32,11 +40,11 @@ describe('notifications reducer', () => {
 		const id = 1
 		const message = 'message'
 
-		const action = {type: C.REMOVE_NOTIFICATION, payload: {id, message}}
+		const action = {type: REMOVE_NOTIFICATION, payload: {id, message}}
 
 		const initialState = OrderedMap([[id, {id, message, type: 'message'}]])
 		const expectedState = OrderedMap({})
-		const actualState = notifications(initialState, action)
+		const actualState = reducer(initialState, action)
 
 		expect(actualState.toJS()).to.deep.equal(expectedState.toJS())
 	})
@@ -48,7 +56,7 @@ describe('notifications reducer', () => {
 		const max = 1
 		const showButton = false
 
-		const actualState = notifications(undefined, {type: C.START_PROGRESS, payload: {id, message, value, max, showButton}})
+		const actualState = reducer(undefined, {type: START_PROGRESS, payload: {id, message, value, max, showButton}})
 		const expectedState = OrderedMap([[id, {id, message, value, max, showButton, type: 'progress'}]])
 
 		expect(actualState.toJS()).to.deep.equal(expectedState.toJS())
@@ -62,11 +70,11 @@ describe('notifications reducer', () => {
 		const by = 1
 		const showButton = false
 
-		const action = {type: C.INCREMENT_PROGRESS, payload: {id, by}}
+		const action = {type: INCREMENT_PROGRESS, payload: {id, by}}
 
 		const initialState = OrderedMap([[id, {id, message, value, max, showButton, type: 'progress'}]])
 		const expectedState = OrderedMap([[id, {id, message, value: value + by, max, showButton, type: 'progress'}]])
-		const actualState = notifications(initialState, action)
+		const actualState = reducer(initialState, action)
 
 		expect(actualState.toJS()).to.deep.equal(expectedState.toJS())
 	})
@@ -79,11 +87,11 @@ describe('notifications reducer', () => {
 		const by = 5
 		const showButton = false
 
-		const action = {type: C.INCREMENT_PROGRESS, payload: {id, by}}
+		const action = {type: INCREMENT_PROGRESS, payload: {id, by}}
 
 		const initialState = OrderedMap([[id, {id, message, value, max, showButton, type: 'progress'}]])
 		const expectedState = OrderedMap([[id, {id, message, value: 1, max, showButton, type: 'progress'}]])
-		const actualState = notifications(initialState, action)
+		const actualState = reducer(initialState, action)
 
 		expect(actualState.toJS()).to.deep.equal(expectedState.toJS())
 	})
@@ -96,11 +104,11 @@ describe('notifications reducer', () => {
 		const by = 5
 		const showButton = false
 
-		const action = {type: C.INCREMENT_PROGRESS, payload: {id, by}}
+		const action = {type: INCREMENT_PROGRESS, payload: {id, by}}
 
 		const initialState = OrderedMap([[id, {id, message, value, max, showButton, type: 'progress'}]])
 		const expectedState = OrderedMap([[id, {id, message, value: value + by, max, showButton, type: 'progress'}]])
-		const actualState = notifications(initialState, action)
+		const actualState = reducer(initialState, action)
 
 		expect(actualState.toJS()).to.deep.equal(expectedState.toJS())
 	})
@@ -109,10 +117,10 @@ describe('notifications reducer', () => {
 		const id = 1
 		const notification = {id, message: '', value: 0, max: 1, showButton: true}
 
-		const action = {type: C.INCREMENT_PROGRESS, payload: {id, by: 1}}
+		const action = {type: INCREMENT_PROGRESS, payload: {id, by: 1}}
 
 		const initialState = OrderedMap([[id, notification]])
-		const actualState = notifications(initialState, action)
+		const actualState = reducer(initialState, action)
 
 		expect(initialState.get(id)).not.to.equal(actualState.get(id))
 	})
