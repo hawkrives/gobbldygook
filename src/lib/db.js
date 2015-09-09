@@ -50,6 +50,9 @@ let schema = treo.schema()
 			.dropIndex('sem')
 			.addIndex('semester', 'semester')
 			.dropIndex('halfcredit')
+	.version(5)
+		.addStore('courseCache', { key: 'id' })
+		.addStore('areaCache', { key: 'id' })
 
 
 import treoPromise from 'treo/plugins/treo-promise'

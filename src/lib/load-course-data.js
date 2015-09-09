@@ -44,6 +44,18 @@ function prepareCourse(course) {
 	return course
 }
 
+function getCacheStoreName(type) {
+	if (type === 'courses') {
+		return 'courseCache'
+	}
+	else if (type === 'areas') {
+		return 'areaCache'
+	}
+	else {
+		throw new TypeError(`needsUpdate(): "${type}" is not a valid store type`)
+	}
+}
+
 async function storeCourses(item) {
 	log(`storeCourses(): ${item.path}`)
 
@@ -131,29 +143,22 @@ async function cleanPriorData({path, type}) {
 	}
 
 	try {
-		await db.store(type).batch(oldItems)
+		await db.store(getCacheStoreName(type)).del(path)
 	}
 	catch (err) {
 		throw err
 	}
-
-	localStorage.removeItem(path)
 }
 
-async function cacheItemHash(item) {
-	log(`${item.path} called cacheItemHash`)
-	localStorage.setItem(item.path, item.hash)
-	return item
+async function cacheItemHash({path, type, hash}) {
+	log(`cacheItemHash(): ${path}`)
+
+	await db.store(getCacheStoreName(type)).put({id: path, path, hash})
 }
 
 async function updateDatabase(type, infoFromServer, infoFileBase, notificationId, count) {
 	const {path, hash} = infoFromServer
 	const itemUrl = `/${path}?v=${hash}`
-
-	if (hash === oldHash) {
-		log(`skipped ${path}`)
-		return true
-	}
 
 	log(`updateDatabase(): ${path}`)
 	startProgress(notificationId, `Loading ${type}`, {max: count}, true)
@@ -199,6 +204,12 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 	incrementProgress(notificationId)
 }
 
+async function needsUpdate({type, path, hash}) {
+	const {hash: oldHash} = await db.store(getCacheStoreName(type)).get(path) || {}
+
+	return hash !== oldHash
+}
+
 async function loadDataFiles(infoFile, infoFileBase) {
 	log(`loadDataFiles(): ${infoFileBase}`)
 
@@ -211,41 +222,39 @@ async function loadDataFiles(infoFile, infoFileBase) {
 		filesToLoad = filter(filesToLoad, file => file.year >= oldestYear)
 	}
 
+	const fileNeedsLoading = await* map(filesToLoad, file => needsUpdate({type: infoFile.type, path: file.path, hash: file.hash}))
+	filesToLoad = filter(filesToLoad, (file, index) => fileNeedsLoading[index])
+
 	// Load them into the database
-	await* map(filesToLoad, file =>
-		updateDatabase(infoFile.type, file, infoFileBase, notificationId, size(filesToLoad))
-			.catch(err => {
-				throw err
-			}))
-
-	// notificationActions.removeNotification(notificationId, 1500)
-}
-
-async function loadInfoFile(url, infoFileBase) {
-	log('loading ' + url)
-	let infoFile
 	try {
-		infoFile = await fetch(url).then(status).then(json)
-	}
-	catch (err) {
-		if (startsWith(err.message, 'Failed to fetch')) {
-			console.error(`loadInfoFile(): Failed to fetch ${url}`)
-			return false
-		}
-		else {
-			throw err
-		}
-	}
-
-	try {
-		await loadDataFiles(infoFile, infoFileBase)
+		await* map(filesToLoad, file => updateDatabase(infoFile.type, file, infoFileBase, notificationId, size(filesToLoad)))
 	}
 	catch (err) {
 		throw err
 	}
+
+	removeNotification(notificationId, {delay: 1500})
 }
 
-export default async function loadData() {
+async function loadInfoFile(url, infoFileBase) {
+	log(`loadInfoFile(): ${url}`)
+
+	return fetch(url)
+		.then(status)
+		.then(json)
+		.then(infoFile => loadDataFiles(infoFile, infoFileBase))
+		.catch(err => {
+			if (startsWith(err.message, 'Failed to fetch')) {
+				console.error(`loadInfoFile(): Failed to fetch ${url}`)
+				return false
+			}
+			else {
+				throw err
+			}
+		})
+}
+
+export default function loadData() {
 	const cachebuster = Date.now()
 
 	const infoFiles = [
@@ -253,18 +262,17 @@ export default async function loadData() {
 		'./areaData.url',
 	]
 
-	const processedFiles = await* map(infoFiles,
+	const promises = map(infoFiles,
 		file => fetch(file)
 			.then(status)
 			.then(text)
 			.then(path => path.trim())
-			.catch(err => console.error(err)))
+			.then(path => {
+				return loadInfoFile(`${path}/info.json?${cachebuster}`, path)
+			})
+			.catch(err => {
+				throw err
+			}))
 
-	try {
-		await* map(processedFiles, path => loadInfoFile(`${path}/info.json?${cachebuster}`, path))
-	}
-	catch (err) {
-		console.error(err)
-		throw err
-	}
+	return Promise.all(promises)
 }
