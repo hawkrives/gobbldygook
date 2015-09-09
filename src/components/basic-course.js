@@ -9,12 +9,12 @@ import Icon from './icon'
 export default class BasicCourse extends Component {
 	static propTypes = {
 		children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
-		info: PropTypes.object.isRequired,
+		course: PropTypes.object.isRequired,
 		onClick: PropTypes.func,
 	}
 
 	render() {
-		const course = this.props.info
+		const course = this.props.course
 
 		return (
 			<div className='info-wrapper'>

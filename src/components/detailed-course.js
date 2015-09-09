@@ -28,32 +28,32 @@ function findSemesterList(student) {
 export default class DetailedCourse extends Component {
 	static propTypes = {
 		children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-		info: PropTypes.object.isRequired,
+		course: PropTypes.object.isRequired,
 		onClick: PropTypes.func.isRequired,
 		schedule: PropTypes.instanceOf(Schedule),
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
 
 	removeFromSemester = () => {
-		studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.info.clbid)
+		studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.course.clbid)
 	}
 
 	moveToSchedule = ev => {
 		const targetScheduleId = parseInt(ev.target.value)
 		if (this.props.schedule) {
-			studentActions.moveCourse(this.props.student.id, this.props.schedule.id, targetScheduleId, this.props.info.clbid)
+			studentActions.moveCourse(this.props.student.id, this.props.schedule.id, targetScheduleId, this.props.course.clbid)
 		}
 		else {
-			studentActions.addCourse(this.props.student.id, targetScheduleId, this.props.info.clbid)
+			studentActions.addCourse(this.props.student.id, targetScheduleId, this.props.course.clbid)
 		}
 	}
 
 	render() {
-		const course = this.props.info
+		const course = this.props.course
 
 		return (
 			<div>
-				<BasicCourse className='info-wrapper' info={course} onClick={this.props.onClick} />
+				<BasicCourse className='info-wrapper' course={course} onClick={this.props.onClick} />
 				<div className='details'>
 					<dl>
 						<dt>Professors</dt>

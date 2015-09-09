@@ -222,7 +222,7 @@ export default class CourseSearcher extends Component {
 					{GROUP_BY_TO_TITLE[this.state.groupBy](groupTitle) && <p className='course-group-title'>{GROUP_BY_TO_TITLE[this.state.groupBy](groupTitle)}</p>}
 					<ul className='course-list'>
 						{map(courses, (course, index) =>
-							<li key={index}><Course info={course} student={this.props.student} /></li>)}
+							<li key={index}><Course course={course} student={this.props.student} /></li>)}
 					</ul>
 				</li>
 			)

@@ -121,7 +121,7 @@ class Semester extends Component {
 					? <Course
 						key={`${course.clbid}-${i}`}
 						index={i}
-						info={course}
+						course={course}
 						student={this.props.student}
 						schedule={schedule}
 						conflicts={this.state.validation.conflicts}
