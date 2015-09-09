@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import semesterName from '../../src/helpers/semester-name'
 
 describe('semesterName', () => {

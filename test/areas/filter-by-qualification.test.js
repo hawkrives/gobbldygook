@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import {filterByQualification} from '../../src/lib/filter-by-where-clause'
 
 describe('filterByQualification', () => {

@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import countDepartments from '../../src/lib/count-departments'
 
 describe('countDepartments', () => {

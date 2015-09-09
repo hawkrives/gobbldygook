@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import findLeafRequirements from '../../src/lib/find-leaf-requirements'
 
 describe('findLeafRequirements', () => {

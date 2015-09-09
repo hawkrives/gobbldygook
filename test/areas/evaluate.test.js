@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import evaluate from '../../src/lib/evaluate'
 
 describe('evaluate', () => {

@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import applyFilter from '../../src/lib/apply-filter'
 
 describe('applyFilter', () => {

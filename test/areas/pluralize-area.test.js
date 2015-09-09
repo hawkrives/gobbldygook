@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import pluralizeArea from '../../src/lib/pluralize-area'
 
 describe('pluralizeArea', () => {

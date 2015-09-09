@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import notEmptyString from '../../src/helpers/not-empty-string'
 
 describe('notEmptyString', () => {

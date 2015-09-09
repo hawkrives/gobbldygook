@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import {
 	INCREMENT_PROGRESS,  incrementProgress,
 	LOG_ERROR,           logError,

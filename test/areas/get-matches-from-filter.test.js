@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import getMatchesFromFilter from '../../src/lib/get-matches-from-filter'
 
 describe('getMatchesFromFilter', () => {

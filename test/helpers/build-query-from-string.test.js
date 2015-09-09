@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import buildQueryFromString from '../../src/helpers/build-query-from-string'
 
 describe('buildQueryFromString', () => {

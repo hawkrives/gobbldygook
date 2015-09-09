@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import oddIndex from '../../src/helpers/odd-index'
 
 describe('oddIndex', () => {

@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import isTrue from '../../src/helpers/is-true'
 
 describe('isTrue', () => {

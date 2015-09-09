@@ -1,5 +1,5 @@
-// test/models/schedule.test.js
-import Schedule from '../../src/models/schedule.js'
+import {expect} from 'chai'
+import Schedule from '../../src/models/schedule'
 import {List} from 'immutable'
 
 describe('Schedule', () => {

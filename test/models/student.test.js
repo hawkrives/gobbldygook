@@ -1,5 +1,5 @@
-// test/models/student.test.js
-import Student from '../../src/models/student.js'
+import {expect} from 'chai'
+import Student from '../../src/models/student'
 import demoStudent from '../../src/models/demo-student.json'
 import size from 'lodash/collection/size'
 import filter from 'lodash/collection/filter'

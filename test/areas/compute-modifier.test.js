@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import computeChunk, {computeModifier} from '../../src/lib/compute-chunk'
 import applyFilter from '../../src/lib/apply-filter'
 

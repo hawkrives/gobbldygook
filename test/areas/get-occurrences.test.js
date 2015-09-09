@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import getOccurrences from '../../src/lib/get-occurrences'
 
 describe('getOccurrences', () => {

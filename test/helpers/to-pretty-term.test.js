@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import toPrettyTerm from '../../src/helpers/to-pretty-term'
 
 describe('toPrettyTerm', () => {

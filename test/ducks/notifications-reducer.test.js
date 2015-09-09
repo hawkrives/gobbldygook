@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import {OrderedMap} from 'immutable'
 
 import reducer, {

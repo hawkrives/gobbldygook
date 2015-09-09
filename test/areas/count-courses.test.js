@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import countCourses from '../../src/lib/count-courses'
 
 describe('countCourses', () => {

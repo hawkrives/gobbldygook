@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import {computeReference} from '../../src/lib/compute-chunk'
 
 describe('computeReference', () => {

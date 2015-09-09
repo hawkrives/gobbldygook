@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import getDepartments from '../../src/lib/get-departments'
 
 describe('getDepartments', () => {

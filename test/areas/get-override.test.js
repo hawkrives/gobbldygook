@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import getOverride from '../../src/lib/get-override'
 
 describe('getOverride', () => {

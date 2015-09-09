@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import filterByWhereClause from '../../src/lib/filter-by-where-clause'
 
 describe('filterByWhereClause', () => {

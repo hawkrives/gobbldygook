@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import findFirstAvailableYear from '../../src/helpers/find-first-available-year'
 
 describe('findFirstAvailableYear', () => {

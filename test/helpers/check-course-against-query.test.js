@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import checkCourseAgainstQuery from '../../src/helpers/check-course-against-query'
 
 describe('checkCourseAgainstQuery', () => {

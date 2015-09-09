@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import expandYear from '../../src/helpers/expand-year'
 
 describe('expandYear', () => {

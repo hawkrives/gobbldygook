@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import compareCourseToCourse from '../../src/lib/compare-course-to-course'
 
 describe('compareCourseToCourse', () => {

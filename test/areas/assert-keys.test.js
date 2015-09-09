@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import assertKeys from '../../src/lib/assert-keys'
 
 describe('assertKeys', () => {

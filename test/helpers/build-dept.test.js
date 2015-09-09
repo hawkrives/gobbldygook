@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import buildDept from '../../src/helpers/build-dept'
 
 describe('buildDept', () => {

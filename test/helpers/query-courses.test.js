@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import queryCourses from '../../src/helpers/query-courses'
 
 describe('queryCourses', () => {

@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import zipToObjectWithArrays from '../../src/helpers/zip-to-object-with-arrays'
 
 describe('zipToObjectWithArrays', () => {

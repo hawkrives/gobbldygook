@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import computeChunk, {computeBoolean} from '../../src/lib/compute-chunk'
 
 describe('computeBoolean', () => {

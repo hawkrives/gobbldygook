@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import splitDeptNum from '../../src/helpers/split-dept-num'
 
 describe('splitDeptNum', () => {

@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import {computeCourse} from '../../src/lib/compute-chunk'
 
 describe('computeCourse', () => {

@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import hasOverride from '../../src/lib/has-override'
 
 describe('hasOverride', () => {

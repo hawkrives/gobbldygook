@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import countCredits from '../../src/lib/count-credits'
 import {List} from 'immutable'
 

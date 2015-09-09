@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import getMatchesFromChildren from '../../src/lib/get-matches-from-children'
 
 describe('getMatchesFromChildren', () => {

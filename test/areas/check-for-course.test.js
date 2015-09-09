@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import checkForCourse from '../../src/lib/check-for-course'
 
 describe('checkForCourse', () => {

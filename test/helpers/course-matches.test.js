@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import courseMatches from '../../src/helpers/course-matches'
 
 describe('courseMatches', () => {

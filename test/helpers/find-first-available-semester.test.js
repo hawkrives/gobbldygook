@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import findFirstAvailableSemester from '../../src/helpers/find-first-available-semester'
 
 describe('findFirstAvailableSemester', () => {

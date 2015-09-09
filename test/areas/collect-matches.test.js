@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import collectMatches from '../../src/lib/collect-matches'
 
 describe('collectMatches', () => {
