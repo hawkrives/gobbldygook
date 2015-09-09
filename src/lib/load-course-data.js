@@ -45,14 +45,14 @@ function prepareCourse(course) {
 }
 
 async function storeCourses(item) {
-	log('storing courses')
-	const start = present()
+	log(`storeCourses(): ${item.path}`)
 
 	let coursesToStore = map(item.data, course => {
 		course.sourcePath = item.path
 		return prepareCourse(course)
 	})
 
+	const start = present()
 	try {
 		await db.store('courses').batch(coursesToStore)
 	}
@@ -70,13 +70,13 @@ async function storeCourses(item) {
 		console.error(e.target)
 		throw e
 	}
-
 	log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
+
 	return item
 }
 
 async function storeArea(item) {
-	log(item.path, 'called storeArea')
+	log(`storeArea(): ${item.path}`)
 
 	const id = item.path
 
@@ -89,8 +89,9 @@ async function storeArea(item) {
 	try {
 		await db.store('areas').put(area)
 	}
-	catch(e) {
-		throw e
+	catch (err) {
+		console.error(err)
+		throw err
 	}
 
 	return item
@@ -106,28 +107,34 @@ function storeItem(item) {
 }
 
 async function cleanPriorData({path, type}) {
-	log(`deleting ${type} from ${path}`)
+	log(`cleanPriorData(): ${path}`)
 
 	let oldItems = []
 
 	try {
-		oldItems = await db.store(type)
-			.index('sourcePath')
-			.get(path)
-	}
-	catch (e) {
-		throw e
-	}
+		if (type === 'courses') {
+			oldItems = await db.store(type).index('sourcePath').get(path)
+			oldItems = map(oldItems, item => ({ [item.clbid]: null }))
+		}
+		else if (type === 'areas') {
+			oldItems = await db.store(type).get(path)
+			oldItems = map(oldItems, item => ({ [item.sourcePath]: null }))
+		}
+		else {
+			throw new TypeError(`needsUpdate(): "${type}" is not a valid store type`)
+		}
 
-	oldItems = map(oldItems, item => (
-		{[item.clbid || item.sourcePath]: null}
-	))
+		await db.store(type).batch(oldItems)
+	}
+	catch (err) {
+		throw err
+	}
 
 	try {
 		await db.store(type).batch(oldItems)
 	}
-	catch (e) {
-		throw e
+	catch (err) {
+		throw err
 	}
 
 	localStorage.removeItem(path)
@@ -140,19 +147,16 @@ async function cacheItemHash(item) {
 }
 
 async function updateDatabase(type, infoFromServer, infoFileBase, notificationId, count) {
-	let {path, hash} = infoFromServer
-	let oldHash = localStorage.getItem(path)
-
-	let itemUrl = `/${path}?v=${hash}`
+	const {path, hash} = infoFromServer
+	const itemUrl = `/${path}?v=${hash}`
 
 	if (hash === oldHash) {
 		log(`skipped ${path}`)
 		return true
 	}
 
-	// notificationActions.startProgress(notificationId, `Loading ${type}`, {max: count}, true)
-
-	log(`need to add ${path}`)
+	log(`updateDatabase(): ${path}`)
+	startProgress(notificationId, `Loading ${type}`, {max: count}, true)
 
 	const url = infoFileBase + itemUrl
 	let data = undefined
@@ -166,10 +170,10 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 		return false
 	}
 
-	try {
+	if (type === 'courses') {
 		data = JSON.parse(data)
 	}
-	catch (err) {
+	else if (type === 'areas') {
 		data = {...yaml.safeLoad(data), source: data}
 	}
 
@@ -192,13 +196,13 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 	}
 
 	log(`added ${item.path} (${item.count} ${item.type})`)
-	// notificationActions.incrementProgress(notificationId)
+	incrementProgress(notificationId)
 }
 
 async function loadDataFiles(infoFile, infoFileBase) {
-	log('load data files', infoFile)
+	log(`loadDataFiles(): ${infoFileBase}`)
 
-	let notificationId = infoFile.type
+	const notificationId = infoFile.type
 	let filesToLoad = infoFile.files
 
 	if (infoFile.type === 'courses') {
