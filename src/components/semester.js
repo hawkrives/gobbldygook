@@ -5,6 +5,7 @@ import {Link} from 'react-router'
 import {DropTarget} from 'react-dnd'
 import plur from 'plur'
 import range from 'lodash/utility/range'
+import includes from 'lodash/collection/includes'
 import semesterName from '../helpers/semester-name'
 import isCurrentSemester from '../helpers/is-current-semester'
 import countCredits from '../lib/count-credits'
@@ -104,13 +105,16 @@ class Semester extends Component {
 		const schedule = getSchedule(this.props.student, this.props.year, this.props.semester)
 		const courses = Immutable.List(this.props.courses)
 
+		// recommendedCredits is 4 for fall/spring and 1 for everything else
+		const recommendedCredits = includes([1, 3], this.props.semester) ? 4 : 1
+		const currentCredits = courses.size ? countCredits(courses) : 0
+
 		let infoBar = []
 		if (schedule && courses.size) {
 			const courseCount = courses.size
-			const credits = countCredits(courses)
 
 			infoBar.push(<li key='course-count'>{` – ${courseCount} ${plur('course', courseCount)}`}</li>)
-			credits && infoBar.push(<li key='credit-count'>{` – ${credits} ${plur('credit', credits)}`}</li>)
+			currentCredits && infoBar.push(<li key='credit-count'>{` – ${currentCredits} ${plur('credit', currentCredits)}`}</li>)
 		}
 
 		if (schedule && courses && this.props.coursesLoaded) {
@@ -130,13 +134,9 @@ class Semester extends Component {
 				)
 				.toArray()
 
-			// maxCredits is 4 for fall/spring and 1 for everything else
-			let maxCredits = ([1, 3].indexOf(this.props.semester) !== -1) ? 4 : 1
-			let currentCredits = countCredits(courses.toArray())
-
 			let emptySlots = []
-			if (currentCredits < maxCredits) {
-				const minimumExtraCreditRange = range(Math.floor(currentCredits), maxCredits)
+			if (currentCredits < recommendedCredits) {
+				const minimumExtraCreditRange = range(Math.floor(currentCredits), recommendedCredits)
 				emptySlots = minimumExtraCreditRange.map(i => <EmptyCourseSlot key={`empty-${i}`} />)
 			}
 
