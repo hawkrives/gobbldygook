@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {OrderedMap} from 'immutable'
 
 import {connect} from 'react-redux'
-import {removeNotification} from '../actions/notification-actions'
+import {removeNotification} from '../ducks/notifications'
 
 import Notification from '../components/notification'
 
