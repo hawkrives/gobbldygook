@@ -117,20 +117,19 @@ class Semester extends Component {
 			currentCredits && infoBar.push(<li key='credit-count'>{` – ${currentCredits} ${plur('credit', currentCredits)}`}</li>)
 		}
 
-		if (schedule && courses && this.props.coursesLoaded) {
+		if (schedule && courses.size && this.props.coursesLoaded) {
 			let courseObjects = courses
-				.zip(schedule.clbids)
-				.map(([course, clbid], i) =>
-					course
-					? <Course
-						key={`${course.clbid}-${i}`}
+				.map((course, i) =>
+					course.error
+					? <MissingCourse key={course.clbid} clbid={course.clbid} error={course.error} />
+					: <Course
+						key={course.clbid}
 						index={i}
 						course={course}
 						student={this.props.student}
 						schedule={schedule}
 						conflicts={this.state.validation.conflicts}
 					/>
-					: <MissingCourse key={i} clbid={clbid} />
 				)
 				.toArray()
 
