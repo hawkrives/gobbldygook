@@ -5,6 +5,7 @@ import debug from 'debug'
 import yaml from 'js-yaml'
 import enhanceHanson from '../lib/enhance-hanson'
 import findAreaPath from '../lib/find-area-path'
+import includes from 'lodash/collection/includes'
 
 const migrationLog = debug('gobbldygook:data-migration:study')
 
@@ -27,6 +28,9 @@ export async function loadArea({name, type, revision, source, isCustom}) {
 	let data
 	try {
 		data = await db.store('areas').get(path)
+		if (!data && includes(path, '?')) {
+			data = await db.store('areas').get(path.split('?')[0])
+		}
 	}
 	catch (err) {
 		throw new Error(`Could not load area ${path}`)
@@ -42,7 +46,7 @@ export async function loadArea({name, type, revision, source, isCustom}) {
 }
 
 export function buildAreaId({name, type, revision}) {
-	return `${kebabCase(name)}-${type}?rev=${revision}`
+	return findAreaPath({name, type, revision})
 }
 
 export const StudyRecord = Immutable.Record({
