@@ -32,7 +32,7 @@ export default class Schedule extends ScheduleRecord {
 			...data,
 			id: data.id || uuid(),
 			clbids: Immutable.fromJS(data.clbids || []),
-			_courseData: getCourses(data.clbids),
+			_courseData: getCourses(data.clbids, {year: data.year, semester: data.semester}),
 		})
 	}
 
@@ -75,7 +75,7 @@ export default class Schedule extends ScheduleRecord {
 		return this.withMutations(sched => {
 			sched = sched.set('clbids', sched.clbids.splice(oldIndex, 1))
 			sched = sched.set('clbids', sched.clbids.splice(newIndex, 0, clbid))
-			sched = sched.set('_courseData', getCourses(sched.clbids))
+			sched = sched.set('_courseData', getCourses(sched.clbids, {year: sched.year, semester: sched.semester}))
 			return sched
 		})
 	}
@@ -94,7 +94,7 @@ export default class Schedule extends ScheduleRecord {
 
 		return this.withMutations(sched => {
 			sched = sched.set('clbids', sched.clbids.push(clbid))
-			sched = sched.set('_courseData', getCourses(sched.clbids))
+			sched = sched.set('_courseData', getCourses(sched.clbids, {year: sched.year, semester: sched.semester}))
 			// sched.get('_courseData').then(d => console.log(`it took ${Math.round(present() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
 			return sched
 		})
