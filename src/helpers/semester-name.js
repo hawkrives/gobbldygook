@@ -2,8 +2,8 @@ const semesters = {
 	1: 'Fall',
 	2: 'Interim',
 	3: 'Spring',
-	4: 'Early Summer',
-	5: 'Late Summer',
+	4: 'Summer Session 1',
+	5: 'Summer Session 2',
 }
 
 /**
