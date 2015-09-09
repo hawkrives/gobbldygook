@@ -87,21 +87,24 @@ describe('Student', () => {
 	it('supports adding areas', () => {
 		const stu = new Student(demoStudent)
 		let newArea = stu.addArea({name: 'Exercise Science', type: 'major', revision: '2014-15'})
-		expect(newArea.studies.get('exercise-science-major?rev=2014-15')).to.exist
+		expect(newArea.studies.get('majors/exercise-science-2014-15')).to.exist
 	})
 	it('supports removing areas', () => {
 		const stu = new Student(demoStudent)
-		let noCsci = stu.removeArea('m-csci')
-		expect(noCsci.studies.get('m-csci')).to.not.exist
+		let noCsci = stu.removeArea('majors/computer-science-2014-15')
+		expect(noCsci.studies.get('majors/computer-science-2014-15')).to.not.exist
 	})
 	it('supports removing multiple areas at one time', () => {
 		const stu = new Student(demoStudent)
-		let noCsci = stu
-			.removeArea('m-csci')
-			.addArea({id: 'm-esth', revisionYear: 2014})
-		let noEsth = noCsci.removeArea('m-esth')
-		expect(noEsth.studies.get('m-csci')).to.not.exist
-		expect(noEsth.studies.get('m-esth')).to.not.exist
+		const hasEsth = stu.addArea({type: 'major', name: 'Exercise Science', revision: '2014-15'})
+
+		const noCsciNorEsth = hasEsth.removeMultipleAreas([
+			'majors/computer-science-2014-15',
+			'majors/exercise-science-2014-15',
+		])
+
+		expect(noCsciNorEsth.studies.get('majors/computer-science-2014-15')).to.not.exist
+		expect(noCsciNorEsth.studies.get('majors/exercise-science-2014-15')).to.not.exist
 	})
 
 	// Courses
