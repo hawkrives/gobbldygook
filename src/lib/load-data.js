@@ -18,6 +18,7 @@ import {
 	incrementProgress,
 	removeNotification,
 } from '../ducks/notifications'
+import {refreshData} from '../flux/student-actions'
 
 import debug from 'debug'
 let log = debug('gobbldygook:data')
@@ -233,6 +234,8 @@ async function loadDataFiles(infoFile, infoFileBase) {
 	}
 
 	dispatch(removeNotification(notificationId, {delay: 1500}))
+
+	return infoFile
 }
 
 function loadInfoFile(url, infoFileBase) {
@@ -242,6 +245,9 @@ function loadInfoFile(url, infoFileBase) {
 		.then(status)
 		.then(json)
 		.then(infoFile => loadDataFiles(infoFile, infoFileBase))
+		.then(infoFile => {
+			refreshData({[infoFile.type]: true})
+		})
 		.catch(err => {
 			if (startsWith(err.message, 'Failed to fetch')) {
 				console.error(`loadInfoFile(): Failed to fetch ${url}`)

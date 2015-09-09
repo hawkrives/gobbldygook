@@ -2,6 +2,7 @@ import Reflux from 'reflux'
 
 let studentActions = Reflux.createActions([
 	'reload',
+	'refreshData',
 	'undo',
 	'redo',
 

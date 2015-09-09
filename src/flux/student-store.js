@@ -177,6 +177,22 @@ const studentStore = Reflux.createStore({
 		this._loadData(fleshedStudent.id)
 	},
 
+	refreshData({areas=false, courses=false}) {
+		if (areas) {
+			this.emit('area-refresh')
+		}
+
+		if (courses) { // eslint-disable-line no-empty
+			// nothing much… yet
+		}
+
+		if (areas || courses) {
+			this.students = this.students.withMutations(students => {
+				return students.map(s => s.checkGraduatability())
+			})
+		}
+	},
+
 	importStudent({data, type}) {
 		let stu = undefined
 		if (type === 'application/json') {

@@ -25,18 +25,18 @@ class GobbldygookApp extends Component {
 			allAreas: Immutable.List(),
 		}
 
-		db.stores.areas.all().then(areas => this.setState({
-			allAreas: Immutable.List(areas),
-		}))
+		this.onAreasChanged()
 	}
 
 	componentDidMount() {
 		studentStore.emitter.on('change', this.onStudentsChanged)
+		studentStore.emitter.on('area-refresh', this.onAreasRefreshed)
 		studentStore.emitter.emit('change')
 	}
 
 	componentWillUnmount() {
 		studentStore.emitter.off('change', this.onStudentsChanged)
+		studentStore.emitter.off('area-refresh', this.onAreasRefreshed)
 	}
 
 	onStudentsChanged = () => {
@@ -46,11 +46,13 @@ class GobbldygookApp extends Component {
 		})
 	}
 
-	render() {
-		// if (!this.props.passedRequirements) {
-		// 	return <BrowserNotSupported />
-		// }
+	onAreasRefreshed = () => {
+		db.stores.areas.all().then(areas => this.setState({
+			allAreas: Immutable.List(areas),
+		}))
+	}
 
+	render() {
 		if (!this.state.studentsInitialized) {
 			return <Loading>Loading Students…</Loading>
 		}
