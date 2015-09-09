@@ -61,7 +61,8 @@ class GobbldygookApp extends Component {
 				<RouteHandler
 					allAreas={this.state.allAreas}
 					students={this.state.students}
-					routerState={this.props.routerState} />
+					routerState={this.props.routerState}
+				/>
 			</DocumentTitle>
 		)
 	}

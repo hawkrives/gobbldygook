@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 
 export default class FakeCourse extends Component {
 	static propTypes = {
-		className: React.PropTypes.string.isRequired,
-		title: React.PropTypes.string.isRequired,
+		className: PropTypes.string.isRequired,
+		title: PropTypes.string.isRequired,
 	}
 
 	render() {

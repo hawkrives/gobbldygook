@@ -1,5 +1,4 @@
 import Immutable from 'immutable'
-import kebabCase from 'lodash/string/kebabCase'
 import debug from 'debug'
 
 import yaml from 'js-yaml'
