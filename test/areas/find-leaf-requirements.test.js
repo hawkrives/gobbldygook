@@ -7,7 +7,7 @@ describe('findLeafRequirements', () => {
 			'name': 'Asian Studies',
 			'type': 'Major',
 			'revision': '2011-12',
-            '$type': 'requirement',
+			'$type': 'requirement',
 			'result': {
 				'$type': 'boolean',
 				'$and': [
