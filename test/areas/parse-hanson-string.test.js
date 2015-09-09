@@ -40,6 +40,12 @@ describe('parse hanson-string', () => {
             })
         })
 
+		it('requires that sections be an uppercase letter or apostrophe', () => {
+			expect(() => parse('CSCI 121.A')).not.to.throw()
+			expect(() => parse('CSCI 121.*')).not.to.throw()
+			expect(() => parse('CSCI 121.a')).to.throw()
+		})
+
         it('parses courses with years', () => {
             expect(parse('CSCI 121.A.2014')).to.deep.equal({
                 $type: 'course',
