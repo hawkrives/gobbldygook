@@ -14,7 +14,7 @@ export default function getCourses(clbids, {year, semester}) {
 	// those clbids.
 
 	// console.log('called getCourses', clbids)
-	if (Immutable.List.isList(clbids)) {
+	if (Immutable.Iterable.isIterable(clbids)) {
 		clbids = clbids.toArray()
 	}
 
