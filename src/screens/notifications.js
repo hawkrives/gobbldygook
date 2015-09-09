@@ -14,6 +14,14 @@ export class Notifications extends Component {
 		notifications: PropTypes.instanceOf(OrderedMap).isRequired,
 	}
 
+	componentDidMount() {
+		typeof window !== 'undefined' && (window.dispatch = this.props.dispatch)
+	}
+
+	componentWillUnmount() {
+		typeof window !== 'undefined' && (delete window.dispatch)
+	}
+
 	render() {
 		return (
 			<ul className='notification-list'>

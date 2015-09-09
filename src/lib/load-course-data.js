@@ -27,6 +27,10 @@ import uniq from 'lodash/array/uniq'
 import sortBy from 'lodash/collection/sortBy'
 import flatten from 'lodash/array/flatten'
 
+function dispatch(action) {
+	typeof window !== 'undefined' && window.dispatch && window.dispatch(action)
+}
+
 function prepareCourse(course) {
 	course.name = course.name || course.title
 	course.dept = course.dept || buildDept(course)
@@ -56,7 +60,7 @@ function getCacheStoreName(type) {
 	}
 }
 
-async function storeCourses(item) {
+function storeCourses(item) {
 	log(`storeCourses(): ${item.path}`)
 
 	let coursesToStore = map(item.data, course => {
@@ -65,29 +69,28 @@ async function storeCourses(item) {
 	})
 
 	const start = present()
-	try {
-		await db.store('courses').batch(coursesToStore)
-	}
-	catch (e) {
-		// const db = e.target.db.name
-		// const errorName = e.target.error.name
+	return db.store('courses').batch(coursesToStore)
+		.then(() => {
+			log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
+		})
+		.catch(err => {
+			const db = err.target.db.name
+			const errorName = err.target.error.name
 
-		// if (errorName === 'QuotaExceededError') {
-			// notificationActions.logError({
-			// 	id: 'db-storage-quota-exceeded',
-			// 	message: `The database "${db}" has exceeded its storage quota.`,
-			// })
-		// }
+			if (errorName === 'QuotaExceededError') {
+				dispatch(logError({
+					id: 'db-storage-quota-exceeded',
+					message: `The database "${db}" has exceeded its storage quota.`,
+				}))
+			}
 
-		console.error(e.target)
-		throw e
-	}
-	log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
+			console.error(err)
+			throw err
 
-	return item
+		})
 }
 
-async function storeArea(item) {
+function storeArea(item) {
 	log(`storeArea(): ${item.path}`)
 
 	const id = item.path
@@ -98,15 +101,11 @@ async function storeArea(item) {
 		type: item.data.type.toLowerCase(),
 	}
 
-	try {
-		await db.store('areas').put(area)
-	}
-	catch (err) {
-		console.error(err)
-		throw err
-	}
-
-	return item
+	return db.store('areas').put(area)
+		.catch(err => {
+			console.error(err)
+			throw err
+		})
 }
 
 function storeItem(item) {
@@ -150,10 +149,10 @@ async function cleanPriorData({path, type}) {
 	}
 }
 
-async function cacheItemHash({path, type, hash}) {
+function cacheItemHash({path, type, hash}) {
 	log(`cacheItemHash(): ${path}`)
 
-	await db.store(getCacheStoreName(type)).put({id: path, path, hash})
+	return db.store(getCacheStoreName(type)).put({id: path, path, hash})
 }
 
 async function updateDatabase(type, infoFromServer, infoFileBase, notificationId, count) {
@@ -161,7 +160,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 	const itemUrl = `/${path}?v=${hash}`
 
 	log(`updateDatabase(): ${path}`)
-	startProgress(notificationId, `Loading ${type}`, {max: count}, true)
+	dispatch(startProgress(notificationId, `Loading ${type}`, {max: count}, true))
 
 	const url = infoFileBase + itemUrl
 	let data = undefined
@@ -201,7 +200,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 	}
 
 	log(`added ${item.path} (${item.count} ${item.type})`)
-	incrementProgress(notificationId)
+	dispatch(incrementProgress(notificationId))
 }
 
 async function needsUpdate({type, path, hash}) {
@@ -233,10 +232,10 @@ async function loadDataFiles(infoFile, infoFileBase) {
 		throw err
 	}
 
-	removeNotification(notificationId, {delay: 1500})
+	dispatch(removeNotification(notificationId, {delay: 1500}))
 }
 
-async function loadInfoFile(url, infoFileBase) {
+function loadInfoFile(url, infoFileBase) {
 	log(`loadInfoFile(): ${url}`)
 
 	return fetch(url)
