@@ -258,7 +258,7 @@ export default class Student extends StudentRecord {
 			this.matriculation, // 4
 			this.overrides.toObject(), // 5
 			this.studies.toList().toJS(), // 6
-			this.graduatability, // 7
+			this.graduatability, // 7, and 7
 		]).then(results => ({
 			courses: results[0],
 			creditsNeeded: results[1],
