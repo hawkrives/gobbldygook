@@ -15,11 +15,11 @@
 
 
 Start
-  = or
+  = Or
 
 
 Expression 'expression'
-  = _ e:(
+  = _ expr:(
       Not
     / Parenthetical
     / Course
@@ -30,7 +30,7 @@ Expression 'expression'
     / Modifier
     / Reference
   ) _
-  { return e }
+  { return expr }
 
 
 // Primitives
@@ -161,12 +161,12 @@ _ 'whitespace'
 
 
 Counter
-  = count:english_integer             { return { $operator: '$gte', $num: count } }
-  / 'at most' _ count:english_integer { return { $operator: '$lte', $num: count } }
-  / 'exactly' _ count:english_integer { return { $operator: '$eq',  $num: count } }
+  = count:EnglishInteger             { return { $operator: '$gte', $num: count } }
+  / 'at most' _ count:EnglishInteger { return { $operator: '$lte', $num: count } }
+  / 'exactly' _ count:EnglishInteger { return { $operator: '$eq',  $num: count } }
 
 
-english_integer
+EnglishInteger
   = num:(
         'zero'
       / 'one'
@@ -209,17 +209,17 @@ Parenthetical
   = OpenParen _ value:Start _ CloseParen
     { return value }
 
-or
-  = lhs:and _ '|' _ rhs:or
+Or
+  = lhs:And _ '|' _ rhs:Or
     { return {
       $type: 'boolean',
       $or: [lhs].concat('$or' in rhs ? rhs.$or : [rhs]),
     } }
-  / and
+  / And
 
 
-and
-  = lhs:Expression _ '&' _ rhs:and
+And
+  = lhs:Expression _ '&' _ rhs:And
     { return {
       $type: 'boolean',
       $and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs]),
@@ -404,25 +404,35 @@ CourseNumber 'course number'
 
 CourseSection
   = UppercaseLetter
-  / '*'
+  / Asterisk
+  / Else { throw new SyntaxError('A course section must be either an uppercase letter [A-Z] or an asterisk [*].')}
 
 
 CourseYear
   = nums:(Digit Digit Digit Digit)
     { return parseInt(nums.join('')) }
-  / '*'
+  / Asterisk
+  / Else { throw new SyntaxError('A course year must be either a four-digit year [e.g. 1994] or an asterisk [*].')}
 
 
 CourseSemester
   = num:[1-5] { return parseInt(num) }
-  / '*'
+  / Asterisk
+  / Else { throw new SyntaxError('A course semester must be either a number between 1 [Fall] and 5 [Summer Session 2], or an asterisk [*].')}
 
 
 // Primitives
 
+Else
+  = .+
+
 UppercaseLetter
   = char:[A-Z]
     { return char }
+
+
+Asterisk
+  = '*'
 
 
 Word
