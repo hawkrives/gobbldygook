@@ -154,7 +154,7 @@ else {
 	config.devtool = 'source-map'
 
 	// minify in production
-	config.plugins.push(
+	config.plugins.concat([
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.OccurenceOrderPlugin(true),
 		new webpack.optimize.UglifyJsPlugin({
@@ -171,8 +171,8 @@ else {
 		}),
 		new webpack.DefinePlugin({
 			'process.env': {NODE_ENV: JSON.stringify('production')},
-		})
-	)
+		}),
+	])
 
 	config.module.loaders.push({
 		test: /\.css$/,
