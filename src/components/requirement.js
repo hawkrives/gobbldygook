@@ -72,7 +72,10 @@ export default class Requirement extends Component {
 					title={this.props.overridden ? `Remove Override` : `Apply Override`}>
 					{`${this.props.overridden ? '◉' : '◎'}`}
 				</Button>
-				<span className='requirement--title'>{` ${this.props.name}`} <span className='requirement--status'>{this.props.computed ? '●' : '○'}</span></span>
+				<span className='requirement--title'>
+					{` ${this.props.name}`}
+					{!compactMode && <span className='requirement--status'>{this.props.computed ? '●' : '○'}</span>}
+				</span>
 				{this.props.overridden && <span className='requirement--title-override-text'>{' (Overridden)'}</span>}
 			</h2>
 		)
