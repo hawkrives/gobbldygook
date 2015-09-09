@@ -5,7 +5,7 @@ import DocumentTitle from 'react-document-title'
 import {DragDropContext} from 'react-dnd'
 import HTML5Backend from 'react-dnd/modules/backends/HTML5'
 
-import studentStore from '../flux/student-store'
+import studentStore, {REFRESH_AREAS, REFRESH_COURSES} from '../flux/student-store'
 import Loading from '../components/loading'
 
 import db from '../lib/db'
@@ -24,18 +24,18 @@ class GobbldygookApp extends Component {
 			allAreas: Immutable.List(),
 		}
 
-		this.onAreasChanged()
+		this.onAreasRefreshed()
 	}
 
 	componentDidMount() {
 		studentStore.emitter.on('change', this.onStudentsChanged)
-		studentStore.emitter.on('area-refresh', this.onAreasRefreshed)
+		studentStore.emitter.on(REFRESH_AREAS, this.onAreasRefreshed)
 		studentStore.emitter.emit('change')
 	}
 
 	componentWillUnmount() {
 		studentStore.emitter.off('change', this.onStudentsChanged)
-		studentStore.emitter.off('area-refresh', this.onAreasRefreshed)
+		studentStore.emitter.off(REFRESH_AREAS, this.onAreasRefreshed)
 	}
 
 	onStudentsChanged = () => {

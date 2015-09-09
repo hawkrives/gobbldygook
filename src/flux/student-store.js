@@ -14,6 +14,9 @@ import studentActions from './student-actions'
 
 import parseSIS from '../lib/parse-sis'
 
+export const REFRESH_AREAS = 'gobbldygook/stores/student/refresh-areas'
+export const REFRESH_COURSES = 'gobbldygook/stores/student/refresh-courses'
+
 function cleanLocalStorage() {
 	localStorage.removeItem('activeStudentId')
 	localStorage.removeItem('student-v3.0a6')
@@ -179,11 +182,11 @@ const studentStore = Reflux.createStore({
 
 	refreshData({areas=false, courses=false}) {
 		if (areas) {
-			this.emit('area-refresh')
+			this.emitter.emit(REFRESH_AREAS)
 		}
 
-		if (courses) { // eslint-disable-line no-empty
-			// nothing much… yet
+		if (courses) {
+			this.emitter.emit(REFRESH_AREAS)
 		}
 
 		if (areas || courses) {
