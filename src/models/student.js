@@ -173,6 +173,19 @@ export default class Student extends StudentRecord {
 		return this.setIn(['studies', study.id], study)
 	}
 
+	editArea(areaId, newSource) {
+		return this.withMutations(student => {
+			let studies = student.studies
+			let area = studies.get(areaId)
+			area = area.edit(newSource)
+
+			studies = studies.delete(areaId)
+			studies = studies.set(area.id, area)
+
+			return student.set('studies', studies)
+		})
+	}
+
 	removeArea(id) {
 		return this.set('studies', this.studies.delete(id))
 	}
