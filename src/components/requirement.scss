@@ -38,7 +38,6 @@
 }
 
 .requirement .requirement .requirement .requirement--result,
-.requirement .requirement .requirement .requirement--heading,
 .requirement .requirement .requirement .requirement--message,
 .requirement .requirement .requirement .requirement--filter {
 	padding-left: $area-edge-padding;
@@ -49,7 +48,7 @@
 	font-weight: 500;
 
 	border-bottom: $material-divider;
-	padding: 0.2em 0.15em 0.2em 0.7em;
+	padding: 0.2em 0.15em 0.2em 0.25em;
 
 	display: flex;
 	flex-flow: row nowrap;
@@ -62,7 +61,13 @@
 	padding: 0.45em 0.25em;
 }
 
+.requirement--title,
 .requirement--title-override-text {
+	padding: 0.45em 0.25em;
+}
+
+.requirement--title-override-text {
+	margin-left: 0.35em;
 	font-weight: normal;
 }
 
@@ -71,7 +76,7 @@
 }
 
 .requirement--status {
-	margin-left: 0.2em;
+	margin-left: 0.5em;
 }
 .requirement.computed-success > .requirement--heading .requirement--status {
 	color: $computed-success-color;
@@ -130,12 +135,11 @@
 
 
 .requirement.compact-results {
-	.requirement--status {
-		display: none;
+	.requirement--title-override-text {
+		padding-right: 0;
 	}
-
 	.requirement--heading {
-		flex: 1 0 auto;
+		flex: 0 1 auto;
 		width: auto;
 		display: flex;
 		border-bottom: 0;
