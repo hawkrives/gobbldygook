@@ -5,6 +5,7 @@ const departments = new Map(Object.entries({
 	CH: 'CHEM',
 	CS: 'CSCI',
 	EC: 'ECON',
+	EN: 'ENGL',
 	ES: 'ENVST',
 	HI: 'HIST',
 	MU: 'MUSIC',
