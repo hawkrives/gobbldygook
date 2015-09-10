@@ -8,6 +8,7 @@ const departments = new Map(Object.entries({
 	EN: 'ENGL',
 	ES: 'ENVST',
 	HI: 'HIST',
+	LI: 'LING',
 	MU: 'MUSIC',
 	PH: 'PHIL',
 	PS: 'PSCI',
