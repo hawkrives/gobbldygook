@@ -56,6 +56,9 @@ export default class DetailedCourse extends Component {
 				<BasicCourse className='info-wrapper' course={course} onClick={this.props.onClick} />
 				<div className='details'>
 					<dl>
+						<dt>Locations</dt>
+						<dd>{course.locations}</dd>
+
 						<dt>Professors</dt>
 						<dd>{oxford(course.instructors)}</dd>
 
