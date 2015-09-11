@@ -5,7 +5,7 @@ import path from 'path'
 import fs from 'graceful-fs'
 
 export default function loadArea({name, type, revision}) {
-	const filepath = path.join('area-data', findAreaPath({name, type, revision}))
+	const filepath = path.join('area-data', `${findAreaPath({name, type, revision})}.yaml`)
 	const data = fs.readFileSync(filepath, {encoding: 'utf-8'})
 	const obj = yaml.safeLoad(data)
 	return enhanceHanson(obj, {topLevel: true})
