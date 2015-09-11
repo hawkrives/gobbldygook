@@ -10,6 +10,7 @@ var buildFilename = require('./webpack/build-filename')
 // figure out if we're running `webpack` or `webpack-dev-server`
 // we'll use this as the default for `isDev`
 var isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1
+var isTest = (process.argv[1] || '').indexOf('karma') !== -1
 
 var entryPoint = './src/start.js'
 var outputFolder = 'build/'
@@ -143,6 +144,18 @@ if (isDev) {
 	})
 
 	// Add optional loaders
+	config.module.loaders.push({
+		test: /\.scss$/,
+		loader: 'style-loader!css-loader!postcss-loader!sass-loader',
+	})
+}
+
+else if (isTest) {
+	config.module.loaders.push({
+		test: /\.css$/,
+		loader: 'style-loader!css-loader!postcss-loader',
+	})
+
 	config.module.loaders.push({
 		test: /\.scss$/,
 		loader: 'style-loader!css-loader!postcss-loader!sass-loader',

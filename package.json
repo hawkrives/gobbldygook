@@ -13,7 +13,8 @@
     "area_output": "build/areas/",
     "beautify": "-f - --end-with-newline --indent-with-tabs",
     "mocha": "test/areas test/models test/helpers test/actions test/reducers",
-    "webpack": "--progress --config=./.webpack.config.js"
+    "karma": "--browsers Chrome --single-run",
+    "webpack": "--progress --config=./.webpackrc"
   },
   "scripts": {
     "benchmark": "babel-node -- ./benchmarks/students-benchmark.js",
@@ -27,7 +28,9 @@
     "cover": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- $npm_package_config_mocha",
     "cover:view": "npm run cover && open coverage/lcov-report/index.html",
     "coveralls": "npm run cover && coveralls < ./coverage/lcov.info",
+    "karma": "env NODE_ENV=test karma start .karmarc $npm_package_config_karma",
     "lint": "eslint bin/ src/",
+    "mocha": "env NODE_ENV=test mocha $npm_package_config_mocha",
     "prebuild": "npm run copy",
     "precopy": "npm run clean",
     "prestart": "npm run copy",
@@ -35,7 +38,7 @@
     "profile": "cat profile/README.md",
     "start": "webpack-dev-server $npm_package_config_webpack",
     "stats": "webpack --config=./.webpack.config.js --profile --json > stats.json && open http://webpack.github.io/analyse/",
-    "test": "mocha $npm_package_config_mocha",
+    "test": "npm run mocha && npm run karma",
     "test:students": "mocha ./bin/test-students",
     "travis": "npm run lint && npm run build:areas && npm run test:students && npm run build:ci",
     "watch": "npm run watch:lint & npm run watch:test & wait"
@@ -97,6 +100,11 @@
     "js-beautify": "1.5.10",
     "json-loader": "0.5.2",
     "junk": "1.0.2",
+    "karma": "0.13.9",
+    "karma-chrome-launcher": "0.2.0",
+    "karma-firefox-launcher": "0.1.6",
+    "karma-mocha": "0.2.0",
+    "karma-webpack": "1.7.0",
     "matcha": "0.6.0",
     "meow": "3.3.0",
     "mkdirp": "0.5.1",
