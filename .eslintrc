@@ -44,11 +44,11 @@ rules:
   new-cap: 0
   indent: [1, tab]
   camelcase: 2
-  comma-dangle: [1, 'always-multiline']
+  comma-dangle: [1, always-multiline]
   comma-style: [1, last]
   comma-spacing: [1, {before: false, after: true}]
   key-spacing: [2, {beforeColon: false, afterColon: true}]
-  quotes: [2, single, 'avoid-escape']
+  quotes: [2, single, avoid-escape]
   consistent-this: [1, self]
   brace-style: [1, stroustrup]
   semi: [2, never]
@@ -58,8 +58,8 @@ rules:
 
   # react rules – https://github.com/yannickcr/eslint-plugin-react
   react/display-name: 0
-  react/jsx-curly-spacing: [1, 'never']
-  react/jsx-indent-props: [1, 'tab']
+  react/jsx-curly-spacing: [1, never]
+  react/jsx-indent-props: [1, tab]
   react/jsx-no-duplicate-props: 1
   react/jsx-no-undef: 2
   react/jsx-sort-prop-types: 1
