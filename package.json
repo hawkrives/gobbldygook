@@ -28,7 +28,7 @@
     "cover:view": "npm run cover && open coverage/lcov-report/index.html",
     "coveralls": "npm run cover && coveralls < ./coverage/lcov.info",
     "eslint": "npm run lint",
-    "lint": "eslint --cache bin/ src/",
+    "lint": "eslint bin/ src/",
     "prebuild": "npm run copy",
     "precopy": "npm run clean",
     "prestart": "npm run copy",
