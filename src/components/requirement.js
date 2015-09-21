@@ -7,6 +7,7 @@ import cx from 'classnames'
 
 import isRequirementName from '../lib/is-requirement-name'
 
+import Filter from './expression--filter'
 import Expression from './expression'
 import Button from './button'
 
@@ -63,7 +64,7 @@ export default class Requirement extends Component {
 			<p className='requirement--message'>{this.props.message}</p>
 
 		const filterEl = this.props.filter &&
-			<div className='requirement--filter'>Filter: {JSON.stringify(this.props.filter, null, 2)}</div>
+			<div className='requirement--filter'>Filter: <Filter expr={this.props.filter} ctx={this.props} /></div>
 
 		const title = !(this.props.topLevel) && (
 			<h2 className='requirement--heading' title={this.props.name}>
