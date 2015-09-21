@@ -22,10 +22,8 @@ const welcomeMessages = [
 	'Hi, ',
 	'Hi there, ',
 	'Hello, ',
-	'Konnichiha, ',
-	'こんにちは、',
-	'Yōkōso, ',
-	'ようこそ、',
+	'こんにちは、', // japanese
+	'ようこそ、', // japanese
 	'Fram! Fram! ',
 	'Salut, ',
 	'Aloha, ',
@@ -33,6 +31,14 @@ const welcomeMessages = [
 	'Вітаю, ',
 	'Sawubona, ',
 	'Hei, ',
+	'Hola, ', // spanish
+	'Bonjour', // french
+	'Hallo', // german
+	'nyob zoo', // hmong
+	'你好，', // mandarin
+	'안녕하세요 ', // korean
+	'สวัสดี ', // thai
+	'halo, ', // indonesian
 ]
 
 export default class StudentSummary extends Component {
