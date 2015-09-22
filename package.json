@@ -13,7 +13,6 @@
     "area_output": "build/areas/",
     "beautify": "-f - --end-with-newline --indent-with-tabs",
     "mocha": "test/areas test/models test/helpers test/ducks",
-    "karma": "--browsers Chrome --single-run",
     "webpack": "--progress --config=./.webpackrc"
   },
   "scripts": {
@@ -29,7 +28,8 @@
     "cover:view": "npm run cover && open coverage/lcov-report/index.html",
     "coveralls": "npm run cover && coveralls < ./coverage/lcov.info",
     "eslint": "npm run lint",
-    "karma": "env NODE_ENV=test karma start .karmarc $npm_package_config_karma",
+    "karma": "env NODE_ENV=test karma start .karmarc --browsers Chrome,Firefox --single-run",
+    "karma:ci": "env NODE_ENV=test karma start .karmarc --browsers Firefox --single-run",
     "lint": "eslint bin/ src/",
     "mocha": "env NODE_ENV=test mocha $npm_package_config_mocha",
     "prebuild": "npm run copy",
@@ -41,7 +41,7 @@
     "stats": "webpack --bail --config=./.webpackrc --profile --json > stats.json && open http://webpack.github.io/analyse/",
     "test": "npm run mocha && npm run karma",
     "test:students": "mocha ./bin/test-students",
-    "travis": "npm run lint && npm run build:areas && npm run test:students && npm run build:ci",
+    "travis": "npm run lint && npm run build:areas && npm run test:students && npm run karma:ci && npm run build:ci",
     "watch": "npm run watch:lint & npm run watch:test & wait"
   },
   "dependencies": {
