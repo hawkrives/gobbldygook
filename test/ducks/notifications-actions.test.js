@@ -38,10 +38,10 @@ describe('logError', () => {
 		const error = new Error('message!')
 		const expectedAction = {
 			type: LOG_ERROR,
-			payload: {id, error, quiet: false, args: []},
+			payload: {id, error, quiet: true, args: []},
 		}
 
-		expect(logError({id, error})).to.deep.equal(expectedAction)
+		expect(logError({id, error, quiet: true})).to.deep.equal(expectedAction)
 	})
 
 	it('passes along any other arguments', () => {
@@ -49,10 +49,10 @@ describe('logError', () => {
 		const error = new Error('message!')
 		const expectedAction = {
 			type: LOG_ERROR,
-			payload: {id, error, quiet: false, args: ['arg']},
+			payload: {id, error, quiet: true, args: ['arg']},
 		}
 
-		expect(logError({id, error}, 'arg')).to.deep.equal(expectedAction)
+		expect(logError({id, error, quiet: true}, 'arg')).to.deep.equal(expectedAction)
 	})
 
 	it('can be marked as "quiet"', () => {

@@ -18,9 +18,6 @@ export default function reducer(state = initialState, action) {
 	}
 
 	else if (type === LOG_ERROR) {
-		if (!payload.quiet && process.env.NODE_ENV !== 'test') {
-			console.error(payload.error, ...payload.args)
-		}
 		return state.set(payload.id, {
 			id: payload.id,
 			message: payload.error.message,
@@ -71,6 +68,9 @@ export function logMessage(id, message) {
 export function logError({error, quiet=false, id=undefined}, ...args) {
 	if (id === undefined) {
 		id = uniqueId('error-')
+	}
+	if (!quiet && process.env.NODE_ENV !== 'test') {
+		console.error(error, ...args)
 	}
 	return { type: LOG_ERROR, payload: { id, error, quiet, args } }
 }
