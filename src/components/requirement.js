@@ -57,14 +57,21 @@ export default class Requirement extends Component {
 			extraClasses['compact-results'] = true
 		}
 
-		const result = this.props.result &&
-			<div className='requirement--result'><Expression expr={this.props.result} ctx={this.props} /></div>
+		const result = this.props.result && (
+			<div className='requirement--result'>
+				<Expression expr={this.props.result} ctx={this.props} />
+			</div>
+		)
 
 		const message = this.props.message &&
 			<p className='requirement--message'>{this.props.message}</p>
 
-		const filterEl = this.props.filter &&
-			<div className='requirement--filter'>Filter: <Filter expr={this.props.filter} ctx={this.props} /></div>
+		const filterEl = this.props.filter && (
+			<div className='requirement--filter'>
+				Filter:
+				<Filter expr={this.props.filter} ctx={this.props} />
+			</div>
+		)
 
 		const title = !(this.props.topLevel) && (
 			<h2 className='requirement--heading' title={this.props.name}>
