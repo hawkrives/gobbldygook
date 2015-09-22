@@ -137,9 +137,6 @@ if (isDev) {
 		new webpack.HotModuleReplacementPlugin(),
 	])
 
-	// add react-hot as module loader if it is installed
-	config.module.loaders[0].loaders.unshift('react-hot')
-
 	config.module.loaders.push({
 		test: /\.css$/,
 		loader: 'style-loader!css-loader!postcss-loader',
