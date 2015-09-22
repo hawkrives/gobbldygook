@@ -19,7 +19,7 @@ Language:
     result:
         one of (
             six credits from Latin & three credits from Greek,
-            three credits from Latin & six credits from Greek
+            six credits from Greek & three credits from Latin
         )
 
 Classics:
@@ -30,4 +30,4 @@ Classics:
 
 Ancient History:
     # todo: find out what courses are considered "ancient history"
-
+    one of (CLASS 111)
