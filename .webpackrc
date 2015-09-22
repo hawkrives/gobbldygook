@@ -23,6 +23,8 @@ var config = {
 	port: 3000,
 	hostname: 'localhost',
 
+	stats: {},
+
 	entry: [
 		entryPoint,
 	],
@@ -47,6 +49,7 @@ var config = {
 		// the hot module replacment plugin below.
 		hot: true,
 		contentBase: outputFolder,
+		stats: false,
 	},
 
 	resolve: {
@@ -165,6 +168,8 @@ else if (isTest) {
 // production
 else {
 	config.devtool = 'source-map'
+
+	config.stats.children = false
 
 	// minify in production
 	config.plugins = config.plugins.concat([
