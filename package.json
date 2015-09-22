@@ -18,7 +18,7 @@
   },
   "scripts": {
     "benchmark": "babel-node -- ./benchmarks/students-benchmark.js",
-    "build": "env NODE_ENV=production webpack --production $npm_package_config_webpack",
+    "build": "env NODE_ENV=production webpack --production --bail $npm_package_config_webpack",
     "build:areas": "./bin/compile-areas area-data/ --out-dir $npm_package_config_area_output",
     "build:ci": "npm run build -- --no-progress",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
@@ -38,7 +38,7 @@
     "prewatch": "npm run copy && npm run lint",
     "profile": "cat profile/README.md",
     "start": "webpack-dev-server $npm_package_config_webpack",
-    "stats": "webpack --config=./.webpack.config.js --profile --json > stats.json && open http://webpack.github.io/analyse/",
+    "stats": "webpack --bail --config=./.webpackrc --profile --json > stats.json && open http://webpack.github.io/analyse/",
     "test": "npm run mocha && npm run karma",
     "test:students": "mocha ./bin/test-students",
     "travis": "npm run lint && npm run build:areas && npm run test:students && npm run build:ci",
