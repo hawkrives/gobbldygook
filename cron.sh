@@ -6,7 +6,7 @@ set -e
 PATH=/home/users/rives/bin/:$PATH
 
 # update the code
-git pull origin master
+git pull origin stable
 
 npm set progress false
 
