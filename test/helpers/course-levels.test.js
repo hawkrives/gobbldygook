@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import coursesAtLevel from '../../src/helpers/courses-at-level'
 import coursesAtOrAboveLevel from '../../src/helpers/courses-at-or-above-level'
 import onlyCoursesAtOrAboveLevel from '../../src/helpers/only-courses-at-or-above-level'

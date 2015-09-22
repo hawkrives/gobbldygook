@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import isCurrentYear from '../../src/helpers/is-current-year'
 
 describe('isCurrentYear', () => {

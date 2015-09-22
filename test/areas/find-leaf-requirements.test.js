@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import findLeafRequirements from '../../src/lib/find-leaf-requirements'
 
 describe('findLeafRequirements', () => {
@@ -6,7 +7,7 @@ describe('findLeafRequirements', () => {
 			'name': 'Asian Studies',
 			'type': 'Major',
 			'revision': '2011-12',
-            '$type': 'requirement',
+			'$type': 'requirement',
 			'result': {
 				'$type': 'boolean',
 				'$and': [

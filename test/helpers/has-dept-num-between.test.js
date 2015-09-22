@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import hasDeptNumBetween from '../../src/helpers/has-dept-num-between'
 
 describe('hasDeptNumBetween', () => {

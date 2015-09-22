@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import combinations from '../../src/helpers/base-combinations'
 
 describe('combinations', () => {

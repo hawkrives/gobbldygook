@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import findMissingNumberBinarySearch from '../../src/helpers/find-missing-number-binary-search'
 
 describe('findMissingNumberBinarySearch', () => {

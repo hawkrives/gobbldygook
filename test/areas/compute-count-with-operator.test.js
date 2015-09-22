@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import computeCountWithOperator from '../../src/lib/compute-count-with-operator'
 
 describe('computeCountWithOperator', () => {

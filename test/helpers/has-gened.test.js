@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import hasGenEd from '../../src/helpers/has-gened'
 
 describe('hasGenEd', () => {

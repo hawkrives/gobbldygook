@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import evenIndex from '../../src/helpers/even-index'
 
 describe('evenIndex', () => {

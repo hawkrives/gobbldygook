@@ -1,4 +1,3 @@
 --compilers js:babel/register
---require test/_harness/node
 --reporter dot
 --ui bdd

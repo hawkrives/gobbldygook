@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import countGeneds from '../../src/helpers/count-geneds'
 
 describe('countGeneds', () => {

@@ -10,6 +10,7 @@ var buildFilename = require('./webpack/build-filename')
 // figure out if we're running `webpack` or `webpack-dev-server`
 // we'll use this as the default for `isDev`
 var isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1
+var isTest = (process.argv[1] || '').indexOf('karma') !== -1
 
 var entryPoint = './src/start.js'
 var outputFolder = 'build/'
@@ -21,6 +22,8 @@ var config = {
 	replace: null,
 	port: 3000,
 	hostname: 'localhost',
+
+	stats: {},
 
 	entry: [
 		entryPoint,
@@ -46,6 +49,7 @@ var config = {
 		// the hot module replacment plugin below.
 		hot: true,
 		contentBase: outputFolder,
+		stats: false,
 	},
 
 	resolve: {
@@ -85,12 +89,12 @@ var config = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				// an array, so that it can be added to lated
+				// an array, so that it can be added to later
 				loaders: ['babel-loader'],
 			},
 			{
 				test: /\.json$/,
-				// an array, so that it can be added to lated
+				// an array, so that it can be added to later
 				loaders: ['json'],
 			},
 			{
@@ -110,7 +114,6 @@ var config = {
 
 	postcss: [
 		require('autoprefixer')({ browsers: ['last 2 versions', 'Firefox ESR'] }),
-		require('postcss-import'),
 	],
 }
 
@@ -126,7 +129,6 @@ if (isDev) {
 		'webpack/hot/only-dev-server'
 	)
 
-	config.devServer = config.devServer
 	config.devServer.port = config.port
 	config.devServer.host = config.hostname
 
@@ -150,12 +152,26 @@ if (isDev) {
 	})
 }
 
+else if (isTest) {
+	config.module.loaders.push({
+		test: /\.css$/,
+		loader: 'style-loader!css-loader!postcss-loader',
+	})
+
+	config.module.loaders.push({
+		test: /\.scss$/,
+		loader: 'style-loader!css-loader!postcss-loader!sass-loader',
+	})
+}
+
 // production
 else {
 	config.devtool = 'source-map'
 
+	config.stats.children = false
+
 	// minify in production
-	config.plugins.push(
+	config.plugins = config.plugins.concat([
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.OccurenceOrderPlugin(true),
 		new webpack.optimize.UglifyJsPlugin({
@@ -172,8 +188,8 @@ else {
 		}),
 		new webpack.DefinePlugin({
 			'process.env': {NODE_ENV: JSON.stringify('production')},
-		})
-	)
+		}),
+	])
 
 	config.module.loaders.push({
 		test: /\.css$/,

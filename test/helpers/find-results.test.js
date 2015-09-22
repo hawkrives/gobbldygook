@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import findResults from '../../src/helpers/find-results'
 
 describe('findResults', () => {

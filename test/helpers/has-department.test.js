@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import hasDepartment from '../../src/helpers/has-department'
 
 describe('hasDepartment', () => {

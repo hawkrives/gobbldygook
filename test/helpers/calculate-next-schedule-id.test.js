@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import calculateNextScheduleId from '../../src/helpers/calculate-next-schedule-id'
 
 describe('calculateNextScheduleId', () => {

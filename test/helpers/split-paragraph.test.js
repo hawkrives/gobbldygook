@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import splitParagraph from '../../src/helpers/split-paragraph'
 
 describe('splitParagraph', () => {
