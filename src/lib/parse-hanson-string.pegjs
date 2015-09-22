@@ -283,8 +283,9 @@ Modifier
       / 'filter' _ 'where' _ where:Qualifier   { return { $from: 'filter-where', $where: where }}
       / 'filter'                               { return { $from: 'filter' }}
       / 'courses' _ 'where' _ where:Qualifier  { return { $from: 'where', $where: where } }
-      / c:ChildList _ 'where' _ w:Qualifier   { return { $from: 'children-where', $where: w, $children: c } }
-      / children:ChildList                    { return { $from: 'children', $children: children} }  // an alternative to "from [all] children"
+      / c:ChildList _ 'where' _ w:Qualifier    { return { $from: 'children-where', $where: w, $children: c } }
+      / children:ChildList                     { return { $from: 'children', $children: children} }  // an alternative to "from [all] children"
+      / child:Reference                        { return { $from: 'children', $children: [child]} }
     )
     {
       if (from.$from === 'where' && what === 'department') {
