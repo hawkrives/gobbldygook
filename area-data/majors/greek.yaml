@@ -1,0 +1,16 @@
+name: Greek
+type: major
+revision: 2011-12
+result: Greek & Ancient Greek History & Classics
+
+Greek:
+    seven of ( GREEK 111, 112, 231, 253 )
+
+Ancient Greek History:
+    one of ( GREEK 370, 372, 373, 374, 375 )
+
+Classics:
+    one of (
+        CLASS 121, 123, 126, 129, 241,
+              243, 244, 251, 253, 396
+    )
