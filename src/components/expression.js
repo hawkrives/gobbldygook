@@ -19,10 +19,10 @@ const joiners = {
 function makeBooleanExpression({expr, ctx}) {
 	let kind = '$invalid'
 
-	if (expr.hasOwnProperty('$and')) {
+	if ('$and' in expr) {
 		kind = '$and'
 	}
-	else if (expr.hasOwnProperty('$or')) {
+	else if ('$or' in expr) {
 		kind = '$or'
 	}
 
