@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import hasFOL from '../../src/helpers/has-fol'
 
 describe('hasFOL', () => {

@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import {parse} from '../../src/lib/parse-hanson-string'
 
 describe('parse hanson-string', () => {

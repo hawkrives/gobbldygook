@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import findAreaPath from '../../src/lib/find-area-path'
 
 describe('findAreaPath', () => {

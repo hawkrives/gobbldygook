@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import isCurrentSemester from '../../src/helpers/is-current-semester'
 
 describe('isCurrentSemester', () => {

@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import acrossAtLeastTwoDepartments from '../../src/helpers/across-at-least-two-departments'
 
 describe('acrossAtLeastTwoDepartments', () => {

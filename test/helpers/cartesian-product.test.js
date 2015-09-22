@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import cartesianProductOf from '../../src/helpers/cartesian-product'
 
 describe('cartesianProduct', () => {

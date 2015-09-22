@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import concatAndMerge from '../../src/helpers/concat-and-merge'
 import {merge} from 'lodash'
 

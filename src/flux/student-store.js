@@ -283,6 +283,7 @@ const studentStore = Reflux.createStore({
 	removeCourse(studentId, scheduleId, ...args)    { this._alter([studentId, 'schedules', scheduleId], 'removeCourse',  ...args) },
 	reorderCourse(studentId, scheduleId, ...args)   { this._alter([studentId, 'schedules', scheduleId], 'reorderCourse', ...args) },
 	reorderArea(studentId, areaId, ...args)         { this._alter([studentId, 'studies', areaId],       'reorder',       ...args) },
+	editArea(studentId, areaId, ...args)            { this._alter([studentId, 'studies', areaId],       'edit',          ...args) },
 	/* eslint-enable no-multi-spaces, brace-style */
 })
 
