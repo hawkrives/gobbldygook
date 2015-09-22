@@ -129,7 +129,6 @@ if (isDev) {
 		'webpack/hot/only-dev-server'
 	)
 
-	config.devServer = config.devServer
 	config.devServer.port = config.port
 	config.devServer.host = config.hostname
 
