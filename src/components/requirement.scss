@@ -24,8 +24,8 @@
 }
 
 .requirement--override-button {
-	padding: 0.25em 0.85em;
-	margin-left: 0.5em;
+	padding: 0.25em 0.5em;
+	margin-right: 0.25em;
 	color: color('gray', '500');
 }
 
@@ -38,7 +38,6 @@
 }
 
 .requirement .requirement .requirement .requirement--result,
-.requirement .requirement .requirement .requirement--heading,
 .requirement .requirement .requirement .requirement--message,
 .requirement .requirement .requirement .requirement--filter {
 	padding-left: $area-edge-padding;
@@ -49,7 +48,7 @@
 	font-weight: 500;
 
 	border-bottom: $material-divider;
-	padding: 0.2em 0.15em 0.2em 0.7em;
+	padding: 0.2em 0.15em 0.2em 0.25em;
 
 	display: flex;
 	flex-flow: row nowrap;
@@ -59,24 +58,27 @@
 
 .requirement--title {
 	flex: 1;
+	padding: 0.45em 0.25em;
+}
 
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+.requirement--title,
+.requirement--title-override-text {
+	padding: 0.45em 0.25em;
 }
 
 .requirement--title-override-text {
+	margin-left: 0.35em;
 	font-weight: normal;
 }
 
-.requirement--heading.computed-success {
+.requirement.computed-success > .requirement--heading {
 	background-color: $computed-success-background;
 }
 
-.requirement--title-status {
-	margin-right: 0.2em;
+.requirement--status {
+	margin-left: 0.5em;
 }
-.requirement--heading.computed-success .requirement--title-status {
+.requirement.computed-success > .requirement--heading .requirement--status {
 	color: $computed-success-color;
 }
 
@@ -128,5 +130,48 @@
 		& + .button {
 			margin-left: 0;
 		}
+	}
+}
+
+
+.requirement.compact-results {
+	.requirement--title-override-text {
+		padding-right: 0;
+	}
+	.requirement--heading {
+		flex: 0 1 auto;
+		width: auto;
+		display: flex;
+		border-bottom: 0;
+		padding: 0 !important;
+
+		.requirement--override-button {
+			margin-left: 0.25em;
+		}
+
+		.requirement--title {
+			flex: auto;
+		}
+	}
+
+	.requirement--result {
+		flex: 1 0 auto;
+		width: auto;
+		padding: 0;
+
+		justify-content: flex-end;
+
+		.expression--course {
+			background-color: white;
+			flex-shrink: 0;
+		}
+	}
+
+	display: flex;
+	flex-flow: row wrap;
+	padding: 0.2em 0.2em 0.2em 0;
+
+	&.computed-success {
+		background-color: $computed-success-background;
 	}
 }

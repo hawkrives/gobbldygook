@@ -1,2 +1,2 @@
-import loadData from '../lib/load-course-data'
+import loadData from '../lib/load-data'
 loadData()

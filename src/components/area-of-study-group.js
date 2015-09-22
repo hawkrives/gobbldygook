@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import pluralizeArea from '../lib/pluralize-area'
 import capitalize from 'lodash/string/capitalize'
+import * as areaTypeConstants from '../models/area-types'
+import values from 'lodash/object/values'
 
 import {List} from 'immutable'
 
@@ -21,8 +23,9 @@ export default class AreaOfStudyGroup extends Component {
 		removeArea: PropTypes.func.isRequired,
 		removeOverride: PropTypes.func.isRequired,
 		showAreaPicker: PropTypes.bool.isRequired,
+		studentId: PropTypes.string.isRequired,
 		toggleOverride: PropTypes.func.isRequired,
-		type: PropTypes.oneOf(['degree', 'major', 'concentration', 'emphasis']).isRequired,
+		type: PropTypes.oneOf(values(areaTypeConstants)).isRequired,
 	}
 
 	static defaultProps = {
@@ -40,22 +43,21 @@ export default class AreaOfStudyGroup extends Component {
 								Close
 							</Button>
 							: <Button className='add-area-of-study' type='flat' onClick={ev => this.props.initiateAddArea({ev, type: this.props.type})}>
-								{/*'Add/Edit'*/}
-								{/*'Add ⋎ Edit'*/}
-								{/*'Add ∨|∙ Edit'*/}
-								{'Add ∙ Edit'}
+								Add ∙ Edit
 							</Button>
 					}
 				</h1>
 
 				{this.props.areas.map(area =>
-					<AreaOfStudy key={area.id}
-						{...area}
+					<AreaOfStudy {...area}
+						key={area.id}
 						removeArea={this.props.removeArea}
 						addOverride={this.props.addOverride}
 						removeOverride={this.props.removeOverride}
 						toggleOverride={this.props.toggleOverride}
 						showCloseButton={this.props.showAreaPicker}
+						showEditButton={this.props.showAreaPicker}
+						studentId={this.props.studentId}
 					/>).toArray()}
 
 				{this.props.showAreaPicker

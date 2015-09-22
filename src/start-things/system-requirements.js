@@ -47,15 +47,15 @@ function supportsFlexbox() {
 }
 
 export default function checkSystemReqirements() {
-	let indexedDB = false
-	try {
-		supportsIndexedDB()
-		indexedDB = true
-	}
-	catch (err) {
-		indexedDB = false
-	}
-	const flexbox = supportsFlexbox()
+	// let indexedDB = false
+	// try {
+	// 	supportsIndexedDB()
+	// 	indexedDB = true
+	// }
+	// catch (err) {
+	// 	indexedDB = false
+	// }
+	// const flexbox = supportsFlexbox()
 
-	return indexedDB && flexbox
+	return true // indexedDB && flexbox
 }

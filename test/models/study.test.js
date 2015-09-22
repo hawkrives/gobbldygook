@@ -26,7 +26,7 @@ describe('Study', () => {
 
 		let {id, type, name, revision, data} = result
 
-		expect(id).to.equal('computer-science-major?rev=2014-15')
+		expect(id).to.equal('majors/computer-science-2014-15')
 		expect(type).to.equal('major')
 		expect(name).to.equal('Computer Science')
 		expect(revision).to.equal('2014-15')

@@ -29,7 +29,7 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 	}
 
 	const baseWhitelist = ['result', 'message', 'declare']
-	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug'])
+	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source'])
 	const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description'])
 	const whitelist = topLevel ? topLevelWhitelist : lowerLevelWhitelist
 
@@ -46,6 +46,10 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 		// because this only runs at the top level, we know
 		// that we'll have a name to use
 		data.slug = data.slug || slugifyAreaName(data.name)
+
+		if (typeof data.revision !== 'string') {
+			throw new TypeError('enhanceHanson(): "revision" must be a string. Try wrapping it in single quotes.')
+		}
 	}
 
 	const requirements = filter(keys(data), isRequirementName)

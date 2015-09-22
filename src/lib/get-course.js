@@ -15,7 +15,7 @@ function getCourse(clbid) {
 		.store('courses')
 		.index('clbid')
 		.get(clbid)
-		.catch(err => new Error(`course retrieval failed for ${clbid}`, err))
+		.catch(error => ({clbid, error}))
 }
 
 export default getCourse

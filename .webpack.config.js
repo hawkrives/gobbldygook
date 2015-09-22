@@ -109,7 +109,8 @@ var config = {
 	},
 
 	postcss: [
-		require('autoprefixer-core')({ browsers: ['last 2 versions', 'Firefox ESR'] }),
+		require('autoprefixer')({ browsers: ['last 2 versions', 'Firefox ESR'] }),
+		require('postcss-import'),
 	],
 }
 

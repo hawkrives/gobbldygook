@@ -23,8 +23,8 @@ const courseSource = {
 		return {
 			fromSchedule: scheduleId !== null,
 			fromSearch: scheduleId === null,
-			clbid: props.info.clbid,
-			groupid: props.info.groupid,
+			clbid: props.course.clbid,
+			groupid: props.course.groupid,
 			fromScheduleID: scheduleId,
 		}
 	},
@@ -42,8 +42,8 @@ class Course extends Component {
 	static propTypes = {
 		conflicts: PropTypes.array,
 		connectDragSource: PropTypes.func.isRequired,  // react-dnd
+		course: PropTypes.object.isRequired,
 		index: PropTypes.number,
-		info: PropTypes.object.isRequired,
 		isDragging: PropTypes.bool.isRequired,  // react-dnd
 		schedule: PropTypes.instanceOf(Schedule),
 		student: PropTypes.instanceOf(Student),

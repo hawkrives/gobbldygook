@@ -8,8 +8,10 @@ PATH=/home/users/rives/bin/:$PATH
 # update the code
 git pull origin stable
 
+npm set progress false
+
 # install any updated dependencies
-npm i --no-progress > /dev/null
+npm i > /dev/null
 
 # run the tests
 npm test

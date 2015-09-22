@@ -7,6 +7,7 @@ import cx from 'classnames'
 
 import isRequirementName from '../lib/is-requirement-name'
 
+import Filter from './expression--filter'
 import Expression from './expression'
 import Button from './button'
 
@@ -38,35 +39,52 @@ export default class Requirement extends Component {
 	render() {
 		const childKeys = filter(keys(this.props), isRequirementName)
 
-		const extraClasses = {overridden: this.props.overridden}
-		if (this.props.result && this.props.result.$type === 'course') {
+		const wasComputed = this.props.hasOwnProperty('computed')
+		const computationResult = this.props.computed
+		const computationClassName = wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'
+
+		const extraClasses = {
+			overridden: this.props.overridden,
+		}
+
+		const compactMode = (
+			!this.props.message &&
+			!this.props.filter &&
+			this.props.result &&
+			this.props.result.$type === 'course'
+		)
+		if (compactMode) {
 			extraClasses['compact-results'] = true
 		}
 
-		const result = this.props.result &&
-			<div className='requirement--result'><Expression expr={this.props.result} ctx={this.props} /></div>
+		const result = this.props.result && (
+			<div className='requirement--result'>
+				<Expression expr={this.props.result} ctx={this.props} />
+			</div>
+		)
 
 		const message = this.props.message &&
 			<p className='requirement--message'>{this.props.message}</p>
 
-		const filterEl = this.props.filter &&
-			<div className='requirement--filter'>Filter: {JSON.stringify(this.props.filter, null, 2)}</div>
-
-		const wasComputed = this.props.hasOwnProperty('computed')
-		const computationResult = this.props.computed
+		const filterEl = this.props.filter && (
+			<div className='requirement--filter'>
+				Filter:
+				<Filter expr={this.props.filter} ctx={this.props} />
+			</div>
+		)
 
 		const title = !(this.props.topLevel) && (
-			<h2 className={`requirement--heading ${wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'}`} title={this.props.name}>
-				<span className='requirement--title'>
-					<span className='requirement--title-status'>{this.props.computed ? '●' : '○'}</span>
-					{` ${this.props.name}`}
-					{this.props.overridden && <span className='requirement--title-override-text'>{' (Overridden)'}</span>}
-				</span>
+			<h2 className='requirement--heading' title={this.props.name}>
 				<Button className='requirement--override-button'
 					onClick={ev => this.props.toggleOverride({ev, path: this.props.path})}
 					title={this.props.overridden ? `Remove Override` : `Apply Override`}>
 					{`${this.props.overridden ? '◉' : '◎'}`}
 				</Button>
+				<span className='requirement--title'>
+					{` ${this.props.name}`}
+					{!compactMode && <span className='requirement--status'>{this.props.computed ? '●' : '○'}</span>}
+				</span>
+				{this.props.overridden && <span className='requirement--title-override-text'>{' (Overridden)'}</span>}
 			</h2>
 		)
 
@@ -80,7 +98,7 @@ export default class Requirement extends Component {
 				removeOverride={this.props.removeOverride}
 			/>)
 
-		let override = (this.props.message && !this.props.result) && (
+		const override = (this.props.message && !this.props.result) && (
 			<span className='requirement--override-buttons button-group'>
 				<Button onClick={ev => this.props.removeOverride({ev, path: this.props.path})} type='flat'>Not yet…</Button>
 				<Button onClick={ev => this.props.addOverride({ev, path: this.props.path})} type='flat'>Done!</Button>
@@ -88,7 +106,7 @@ export default class Requirement extends Component {
 		)
 
 		return (
-			<div className={cx(`requirement`, extraClasses)}>
+			<div className={cx(`requirement`, extraClasses, computationClassName)}>
 				{title}
 				{message}
 				{override}

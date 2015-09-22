@@ -150,11 +150,9 @@ export default class Student extends StudentRecord {
 	destroyMultipleSchedules(ids) {
 		return this.withMutations(student => {
 			changelog('destroyMultipleSchedules', ids)
-			// console.groupCollapsed('destroyMultipleSchedules')
-			forEach('toArray' in ids ? ids.toArray() : ids, id => {
+			ids.forEach(id => {
 				student = student.destroySchedule(id)
 			})
-			// console.groupEnd('destroyMultipleSchedules')
 			return student
 		})
 	}
@@ -175,13 +173,26 @@ export default class Student extends StudentRecord {
 		return this.setIn(['studies', study.id], study)
 	}
 
+	editArea(areaId, newSource) {
+		return this.withMutations(student => {
+			let studies = student.studies
+			let area = studies.get(areaId)
+			area = area.edit(newSource)
+
+			studies = studies.delete(areaId)
+			studies = studies.set(area.id, area)
+
+			return student.set('studies', studies)
+		})
+	}
+
 	removeArea(id) {
 		return this.set('studies', this.studies.delete(id))
 	}
 
 	removeMultipleAreas(ids) {
 		return this.withMutations(student => {
-			forEach(ids.hasOwnProperty('toArray') ? ids.toArray() : ids, id => {
+			ids.forEach(id => {
 				student = student.removeArea(id)
 			})
 			return student
@@ -219,13 +230,20 @@ export default class Student extends StudentRecord {
 	// getters
 
 	get courses() {
-		const allCourses = this.schedules
-			.filter(sched => sched.active)
-			.map(schedule => schedule.courses)
-			.toArray()
+		// - At it's core, this method just needs to get the list of courses that a student has chosen.
+		// - Each schedule has a list of courses that are a part of that schedule.
+		// - Additionally, we only care about the schedules that are marked as "active".
+		// - Keep in mind that each list of courses is actually a *promise* for the courses.
+		// - We also need to make sure to de-duplicate the final list of courses, so that each `clbid` only appears once.
+		// - Finally, remember that a given `clbid` might not exist in the database, in which case we get back 'undefined'.
+		//   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 
-		const scheduleCoursePromises = Promise.all(allCourses)
-		return scheduleCoursePromises.then(scheduleCourses => uniq(flatten(scheduleCourses), course => course.clbid))
+		const activeSchedules = this.schedules.filter(s => s.active)
+		const promisesForCourses = activeSchedules.map(s => s.courses).toArray()
+
+		return Promise.all(promisesForCourses)
+			.then(courses => uniq(flatten(courses), course => course.clbid))
+			.catch(err => console.log(err))
 	}
 
 
@@ -240,7 +258,7 @@ export default class Student extends StudentRecord {
 			this.matriculation, // 4
 			this.overrides.toObject(), // 5
 			this.studies.toList().toJS(), // 6
-			this.graduatability, // 7
+			this.graduatability, // 7, and 7
 		]).then(results => ({
 			courses: results[0],
 			creditsNeeded: results[1],

@@ -2,6 +2,7 @@ import Reflux from 'reflux'
 
 let studentActions = Reflux.createActions([
 	'reload',
+	'refreshData',
 	'undo',
 	'redo',
 
@@ -20,6 +21,7 @@ let studentActions = Reflux.createActions([
 	'removeArea',
 	'removeMultipleAreas',
 	'reorderArea',
+	'editArea',
 
 	'addSchedule',
 	'destroySchedule',

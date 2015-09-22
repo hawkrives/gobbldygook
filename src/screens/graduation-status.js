@@ -6,6 +6,7 @@ import debug from 'debug'
 import includes from 'lodash/collection/includes'
 import difference from 'lodash/array/difference'
 import union from 'lodash/array/union'
+import values from 'lodash/object/values'
 
 import pathToOverride from '../lib/path-to-override'
 
@@ -13,7 +14,7 @@ import AreaOfStudyGroup from '../components/area-of-study-group'
 import Button from '../components/button'
 import Student from '../models/student'
 import StudentSummary from '../components/student-summary'
-import allAreaTypes from '../models/area-types'
+import * as areaTypeConstants from '../models/area-types'
 
 import actions from '../flux/student-actions'
 
@@ -129,6 +130,7 @@ export default class GraduationStatus extends Component {
 					removeArea={this.removeAreaFromStudent}
 					removeOverride={this.removeOverrideFromStudent}
 					showAreaPicker={this.state.showAreaPickerFor.get(areaType)}
+					studentId={this.props.student.id}
 					toggleOverride={this.toggleOverrideOnStudent}
 					type={areaType}
 				/>)
@@ -139,20 +141,23 @@ export default class GraduationStatus extends Component {
 			.toSet()
 			.toArray()
 
+		const allAreaTypes = values(areaTypeConstants)
 		const areaTypesToShowButtonsFor = union(usedAreaTypes, [...this.state.showAreaPickerFor.filter(a => a === true).keys()])
 		const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
 
 		const addUnusedAreaButtonList = (
-			<section className='unused-area-of-studies'>
+			<section className='unused-areas-of-study'>
 				<span className='unused-areas-title'>Add: </span>
-				{unusedTypes.map(type => (
-					<Button key={type}
-						className='add-unused-area-of-study'
-						onClick={ev => this.initiateAddArea({ev, type})}
-						type='flat'>
-						{type}
-					</Button>
-				))}
+				<span className='unused-areas-buttons'>
+					{unusedTypes.map(type => (
+						<Button key={type}
+							className='add-unused-area-of-study'
+							onClick={ev => this.initiateAddArea({ev, type})}
+							type='flat'>
+							{type}
+						</Button>
+					))}
+				</span>
 			</section>
 		)
 

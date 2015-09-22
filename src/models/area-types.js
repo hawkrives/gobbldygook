@@ -1,6 +1,5 @@
-export const degree = 'degree'
-export const major = 'major'
-export const concentration = 'concentration'
-export const emphasis = 'emphasis'
-
-export default [degree, major, concentration, emphasis]
+export const DEGREE = 'degree'
+export const MAJOR = 'major'
+export const CONCENTRATION = 'concentration'
+export const EMPHASIS = 'emphasis'
+export const ID = 'interdisciplinary'

@@ -142,17 +142,17 @@ export default class CourseSearcher extends Component {
 		stickyfill.remove(findDOMNode(this))
 	}
 
-    onSubmit = () => {
-        if (this.state.queryString !== this.state.lastQuery || size(this.props.baseSearchQuery)) {
-            if (process.env.NODE_ENV === 'production') {
-                try {
-                    window.ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
-                }
-                catch (e) {} // eslint-disable-line no-empty
-            }
-            this.query(this.state.queryString)
-        }
-    }
+	onSubmit = () => {
+		if (this.state.queryString !== this.state.lastQuery || size(this.props.baseSearchQuery)) {
+			if (process.env.NODE_ENV === 'production') {
+				try {
+					window.ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
+				}
+				catch (e) {} // eslint-disable-line no-empty
+			}
+			this.query(this.state.queryString)
+		}
+	}
 
 	onChange = evt => {
 		this.setState({queryString: evt.target.value})
@@ -222,7 +222,7 @@ export default class CourseSearcher extends Component {
 					{GROUP_BY_TO_TITLE[this.state.groupBy](groupTitle) && <p className='course-group-title'>{GROUP_BY_TO_TITLE[this.state.groupBy](groupTitle)}</p>}
 					<ul className='course-list'>
 						{map(courses, (course, index) =>
-							<li key={index}><Course info={course} student={this.props.student} /></li>)}
+							<li key={index}><Course course={course} student={this.props.student} /></li>)}
 					</ul>
 				</li>
 			)

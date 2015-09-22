@@ -10,9 +10,12 @@ import Student from '../models/student'
 import demoStudent from '../models/demo-student.json'
 
 import studentActions from './student-actions'
-import notificationActions from './notification-actions'
+// import notificationActions from './notification-actions'
 
 import parseSIS from '../lib/parse-sis'
+
+export const REFRESH_AREAS = 'gobbldygook/stores/student/refresh-areas'
+export const REFRESH_COURSES = 'gobbldygook/stores/student/refresh-courses'
 
 function cleanLocalStorage() {
 	localStorage.removeItem('activeStudentId')
@@ -133,7 +136,8 @@ const studentStore = Reflux.createStore({
 					basicStudent = JSON.parse(rawStudent)
 				}
 				catch (e) {
-					notificationActions.logError('error parsing student', basicStudent)
+					// notificationActions.logError('error parsing student', basicStudent)
+					console.error(e)
 				}
 
 				if (basicStudent.id === 'student-v3.0a6') {
@@ -174,6 +178,22 @@ const studentStore = Reflux.createStore({
 		fleshedStudent.save()
 		this._preChange()
 		this._loadData(fleshedStudent.id)
+	},
+
+	refreshData({areas=false, courses=false}) {
+		if (areas) {
+			this.emitter.emit(REFRESH_AREAS)
+		}
+
+		if (courses) {
+			this.emitter.emit(REFRESH_AREAS)
+		}
+
+		if (areas || courses) {
+			this.students = this.students.withMutations(students => {
+				return students.map(s => s.checkGraduatability())
+			})
+		}
 	},
 
 	importStudent({data, type}) {
@@ -237,7 +257,7 @@ const studentStore = Reflux.createStore({
 		this._postChange()
 	},
 
-	/*eslint-disable no-multi-spaces, brace-style */
+	/* eslint-disable no-multi-spaces, brace-style */
 	changeName(studentId, ...args)               { this._change(studentId, 'changeName',               ...args) },
 	changeAdvisor(studentId, ...args)            { this._change(studentId, 'changeAdvisor',            ...args) },
 	changeCreditsNeeded(studentId, ...args)      { this._change(studentId, 'changeCreditsNeeded',      ...args) },
@@ -254,6 +274,7 @@ const studentStore = Reflux.createStore({
 	destroySchedule(studentId, ...args)          { this._change(studentId, 'destroySchedule',          ...args) },
 	destroyMultipleSchedules(studentId, ...args) { this._change(studentId, 'destroyMultipleSchedules', ...args) },
 	moveCourse(studentId, ...args)               { this._change(studentId, 'moveCourse',               ...args) },
+	editArea(studentId, areaId, ...args)         { this._change(studentId, 'editArea',         areaId, ...args) },
 
 	renameSchedule(studentId, scheduleId, ...args)  { this._alter([studentId, 'schedules', scheduleId], 'rename',        ...args) },
 	reorderSchedule(studentId, scheduleId, ...args) { this._alter([studentId, 'schedules', scheduleId], 'reorder',       ...args) },
@@ -262,7 +283,7 @@ const studentStore = Reflux.createStore({
 	removeCourse(studentId, scheduleId, ...args)    { this._alter([studentId, 'schedules', scheduleId], 'removeCourse',  ...args) },
 	reorderCourse(studentId, scheduleId, ...args)   { this._alter([studentId, 'schedules', scheduleId], 'reorderCourse', ...args) },
 	reorderArea(studentId, areaId, ...args)         { this._alter([studentId, 'studies', areaId],       'reorder',       ...args) },
-	/*eslint-enable no-multi-spaces, brace-style */
+	/* eslint-enable no-multi-spaces, brace-style */
 })
 
 window.store = studentStore

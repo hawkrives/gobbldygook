@@ -56,5 +56,5 @@ let partialNameOrTitle = curry((partial, course) => {
 export {
 	partialTitle,
 	partialName,
-	partialNameOrTitle
+	partialNameOrTitle,
 }

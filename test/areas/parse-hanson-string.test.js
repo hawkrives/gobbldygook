@@ -40,6 +40,12 @@ describe('parse hanson-string', () => {
             })
         })
 
+		it('requires that sections be an uppercase letter or apostrophe', () => {
+			expect(() => parse('CSCI 121.A')).not.to.throw()
+			expect(() => parse('CSCI 121.*')).not.to.throw()
+			expect(() => parse('CSCI 121.a')).to.throw('A course section must be either an uppercase letter [A-Z] or an asterisk [*].')
+		})
+
         it('parses courses with years', () => {
             expect(parse('CSCI 121.A.2014')).to.deep.equal({
                 $type: 'course',
@@ -66,12 +72,12 @@ describe('parse hanson-string', () => {
         })
 
         it('requires section to be present if year is', () => {
-            expect(() => parse('CSCI 121.2014')).to.throw('Expected "&", "|" or end of input but "." found.')
+            expect(() => parse('CSCI 121.2014')).to.throw('A course section must be either an uppercase letter [A-Z] or an asterisk [*].')
         })
 
         it('requires section and year to be present if semester is', () => {
-            expect(() => parse('CSCI 121.A.5')).to.throw('Expected "&", "|" or end of input but "." found.')
-            expect(() => parse('CSCI 121.5')).to.throw('Expected "&", "|" or end of input but "." found.')
+            expect(() => parse('CSCI 121.A.5')).to.throw('A course year must be either a four-digit year [e.g. 1994] or an asterisk [*].')
+            expect(() => parse('CSCI 121.5')).to.throw('A course section must be either an uppercase letter [A-Z] or an asterisk [*].')
         })
 
         it('supports wildcard sections', () => {
@@ -593,7 +599,7 @@ describe('parse hanson-string', () => {
 
             it('key must be a string', () => {
                 expect(() => parse('one course where {a = b}')).not.to.throw()
-                expect(() => parse('one course where {1 = b}')).to.throw()
+                expect(() => parse('one course where {1 = b}')).to.throw('Expected expression but "o" found.')
             })
             it('value may include numbers', () => {
                 expect(() => parse('one course where {a = 1}')).not.to.throw()
@@ -757,8 +763,8 @@ describe('parse hanson-string', () => {
             it('may only begin with a letter or number', () => {
                 expect(() => parse('0A')).not.to.throw()
                 expect(() => parse('A0')).not.to.throw()
-                expect(() => parse('_A0')).to.throw()
-                expect(() => parse('-A0')).to.throw()
+                expect(() => parse('_A0')).to.throw('Expected expression but "_" found.')
+                expect(() => parse('-A0')).to.throw('Expected expression but "-" found.')
                 expect(parse('(A0)')).to.have.property('$type', 'reference')
             })
         })
@@ -794,7 +800,7 @@ describe('parse hanson-string', () => {
         it('will refuse to count departments from courses-where', () => {
             expect(() => parse('one department from children')).not.to.throw()
             expect(() => parse('one department from filter')).not.to.throw()
-            expect(() => parse('one department from courses where {a = b}')).to.throw()
+            expect(() => parse('one department from courses where {a = b}')).to.throw('cannot use a modifier with "departments from courses where {}"')
         })
         it('can count from children', () => {
             expect(parse('one course from children')).to.deep.equal({
@@ -892,8 +898,8 @@ describe('parse hanson-string', () => {
             })
         })
         it('will refuse to count anything but courses from children-where', () => {
-            expect(() => parse('one department from children where {a = b}')).to.throw()
-            expect(() => parse('one credit from children where {a = b}')).to.throw()
+            expect(() => parse('one department from children where {a = b}')).to.throw('must use "courses from" with "children where"')
+            expect(() => parse('one credit from children where {a = b}')).to.throw('must use "courses from" with "children where"')
             expect(() => parse('one course from children where {a = b}')).not.to.throw()
         })
     })

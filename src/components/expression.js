@@ -19,10 +19,10 @@ const joiners = {
 function makeBooleanExpression({expr, ctx}) {
 	let kind = '$invalid'
 
-	if (expr.hasOwnProperty('$and')) {
+	if ('$and' in expr) {
 		kind = '$and'
 	}
-	else if (expr.hasOwnProperty('$or')) {
+	else if ('$or' in expr) {
 		kind = '$or'
 	}
 
@@ -55,14 +55,21 @@ function makeOfExpression({expr, ctx}) {
 }
 
 function makeModifierExpression({expr}) {
-	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} from ${expr.$from}`
+	const needs = `${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)}`
+	const description = `${expr._counted} of ${needs} from ${expr.$from}`
 
 	return {description}
 }
 
+function makeWhereQualifier(where) {
+	return `${where.$key} ${where.$operator} ${where.$value}`
+}
+
 function makeWhereExpression({expr}) {
 	// console.log(expr)
-	const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from ${expr.$where.$key} ${expr.$where.$operator} ${expr.$where.$value}`
+	const needs = `${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num}`
+	const qualifier = makeWhereQualifier(expr.$where)
+	const description = `${expr._counted} of ${needs} from ${qualifier}`
 
 	let contents = map(expr._matches, (course, i) =>
 		<Expression key={i} expr={{$type: 'course', $course: course}} hideIndicator={true} />)
