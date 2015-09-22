@@ -9,7 +9,7 @@ import getCourse from './get-course'
  * @returns {Promise[]} - an array of course promises
  * @fulfill {Array} - the courses.
  */
-export default function getCourses(clbids, {year, semester}) {
+export default function getCourses(clbids, {year, semester}={}) {
 	// Takes a list of clbids, and returns a list of the course objects for
 	// those clbids.
 
