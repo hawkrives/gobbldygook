@@ -1,6 +1,26 @@
 @import '../mixins/card';
 @import '../mixins/color';
 
+.app-title {
+	text-align: center;
+}
+
+.app-title svg {
+	transform: rotate(-90deg);
+}
+
+.app-title h1 {
+	font-weight: 300;
+	margin: 0;
+}
+
+.app-title h2 {
+	margin-top: 0;
+	margin-bottom: 2em;
+	font-weight: 400;
+	font-size: 1em;
+}
+
 .import-student {
 	margin-bottom: 0.5em;
 }

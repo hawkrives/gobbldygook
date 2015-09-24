@@ -9,6 +9,7 @@ import Icon from '../components/icon'
 import StudentList from '../components/student-list'
 
 import './student-picker.scss'
+import OleLion from '../components/ole-the-lion.js'
 
 export default class StudentPicker extends Component {
 	static propTypes = {
@@ -50,6 +51,12 @@ export default class StudentPicker extends Component {
 		// console.log('StudentPicker#render')
 		return (
 			<div className='students-overview'>
+				<heading className='app-title'>
+					<OleLion />
+					<h1>Gobbldygook</h1>
+					<h2>A Course Scheduling Helper</h2>
+				</heading>
+
 				<input
 					className='import-student'
 					type='file'
