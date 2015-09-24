@@ -1,5 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import Immutable from 'immutable'
+import DropZone from 'react-dropzone'
+import forEach from 'lodash/collection/forEach'
+import filter from 'lodash/collection/filter'
 
 import studentActions from '../flux/student-actions'
 
@@ -27,24 +30,21 @@ export default class StudentPicker extends Component {
 		}
 	}
 
-	handleSubmit(ev) {
-		ev.preventDefault()
-	}
+	handleDrop(files) {
+		files = filter(files, file => file.type === 'application/json' || file.type === 'text/html')
 
-	// when a file is passed to the input field, retrieve the contents as a
-	// base64-encoded data URI and save it to the component's state
-	handleFile(ev) {
-		let reader = new FileReader()
-		let file = ev.target.files[0]
+		forEach(files, file => {
+			const reader = new FileReader()
 
-		reader.onload = upload => {
-			studentActions.importStudent({
-				data: upload.target.result,
-				type: file.type,
+			reader.addEventListener('load', upload => {
+				studentActions.importStudent({
+					data: upload.target.result,
+					type: file.type,
+				})
 			})
-		}
 
-		reader.readAsText(file)
+			reader.readAsText(file)
+		})
 	}
 
 	render() {
@@ -57,12 +57,14 @@ export default class StudentPicker extends Component {
 					<h2>A Course Scheduling Helper</h2>
 				</heading>
 
-				<input
+				<DropZone
 					className='import-student'
-					type='file'
-					accept='.json,.html'
-					onSubmit={this.handleSubmit}
-					onChange={this.handleFile} />
+					activeClassName='import-student-active'
+					onDrop={this.handleDrop}>
+					<p>
+						<button>Choose File</button> or drop a student file here to import it.
+					</p>
+				</DropZone>
 
 				<div className='student-list-toolbar'>
 					<Toolbar className='student-list-buttons'>

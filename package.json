@@ -70,6 +70,7 @@
     "react-codemirror": "0.1.5",
     "react-dnd": "1.1.8",
     "react-document-title": "2.0.1",
+    "react-dropzone": "2.1.0",
     "react-redux": "2.1.2",
     "react-router": "0.13.3",
     "redux": "3.0.0",
