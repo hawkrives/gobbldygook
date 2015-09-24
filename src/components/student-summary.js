@@ -32,7 +32,7 @@ const welcomeMessages = [
 	'Sawubona, ',
 	'Hei, ',
 	'Hola, ', // spanish
-	'Bonjour', // french
+	'Bonjour, ', // french
 	'Hallo', // german
 	'nyob zoo', // hmong
 	'你好，', // mandarin
