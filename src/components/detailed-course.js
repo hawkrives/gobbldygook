@@ -62,6 +62,9 @@ export default class DetailedCourse extends Component {
 						<dt>Professors</dt>
 						<dd>{oxford(course.instructors)}</dd>
 
+						{course.prerequisites ? <dt>Prerequisites</dt> : null}
+						{course.prerequisites ? <dd>{course.prerequisites}</dd> : null}
+
 						<dt>Course Description</dt>
 						<dd>{course.desc}</dd>
 					</dl>
