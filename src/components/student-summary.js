@@ -33,8 +33,8 @@ const welcomeMessages = [
 	'Hei, ',
 	'Hola, ', // spanish
 	'Bonjour, ', // french
-	'Hallo', // german
-	'nyob zoo', // hmong
+	'Hallo, ', // german
+	'nyob zoo ', // hmong
 	'你好，', // mandarin
 	'안녕하세요 ', // korean
 	'สวัสดี ', // thai
