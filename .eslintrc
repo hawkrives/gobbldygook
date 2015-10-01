@@ -69,6 +69,7 @@ rules:
   react/jsx-sort-prop-types: 1
   react/jsx-uses-react: 2
   react/jsx-uses-vars: 2
+  react/no-direct-mutation-state: 2
   react/no-did-mount-set-state: 1
   react/no-did-update-set-state: 1
   react/no-multi-comp: 0  # prevent multiple component definition per file
