@@ -1,10 +1,10 @@
 import evaluate from '../src/lib/evaluate'
-import meow from 'meow'
-import pkg from '../package.json'
+import nomnom from 'nomnom'
 import fs from 'graceful-fs'
 import compute from '../src/lib/compute'
 import get from 'lodash/object/get'
 import loadArea from './lib/load-area'
+import yaml from 'js-yaml'
 
 const checkAgainstArea = ({courses, overrides}, args) => areaData => {
 	if (args.path) {
@@ -20,6 +20,9 @@ const checkAgainstArea = ({courses, overrides}, args) => areaData => {
 
 	if (args.json) {
 		console.log(JSON.stringify(result, null, 2))
+	}
+	else if (args.yaml) {
+		console.log(yaml.safeDump(result))
 	}
 	else if (args.prose) {
 		console.log('not implemented')
@@ -41,23 +44,38 @@ function run({courses, overrides, areas}, args) {
 }
 
 export function cli() {
-	const args = meow({
-		pkg,
-		help: `Usage:
-			evaluate [--json] [--prose] [--summary] [--status] [--path path.to.requirement] studentFile`,
-	})
+	const args = nomnom()
+		.option('json', {
+			flag: true,
+			help: 'print raw json output',
+		})
+		.option('yaml', {
+			flag: true,
+			help: 'print yaml-formatted json output',
+		})
+		.option('prose', {
+			flag: true,
+			help: 'print prose output',
+		})
+		.option('summary', {
+			flag: true,
+			help: 'print summarized output',
+		})
+		.option('status', {
+			flag: true,
+			help: 'no output; only use exit code',
+		})
+		.option('path', {
+			type: 'text',
+			help: 'change the root of the evaluation',
+		})
+		.option('studentFile', {
+			required: true,
+			metavar: 'FILE',
+			help: 'The file to process',
+			position: 0,
+		})
+		.parse()
 
-	let [filename] = args.input
-
-	if (!args.flags.json && !args.flags.prose && !args.flags.summary && !args.flags.status) {
-		args.showHelp()
-		return
-	}
-
-	if (filename) {
-		run(JSON.parse(fs.readFileSync(filename, 'utf-8')), args.flags)
-	}
-	else {
-		args.showHelp()
-	}
+	run(JSON.parse(fs.readFileSync(args.studentFile, 'utf-8')), args)
 }

@@ -113,7 +113,6 @@
     "karma-mocha": "0.2.0",
     "karma-webpack": "1.7.0",
     "matcha": "0.6.0",
-    "meow": "3.3.0",
     "mkdirp": "0.5.1",
     "mocha": "2.3.3",
     "node-libs-browser": "0.5.3",
