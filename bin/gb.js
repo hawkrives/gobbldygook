@@ -4,8 +4,9 @@ import pkg from '../package.json'
 import {userCacheDir} from 'appdirs'
 const cacheDir = userCacheDir(pkg.name)
 
-import 'lie/polyfill'
-import fs from 'graceful-fs'
+import Promise from 'bluebird'
+import fsCallbacks from 'graceful-fs'
+const fs = Promise.promisifyAll(fsCallbacks)
 import 'isomorphic-fetch'
 import {status, json, text} from '../src/lib/fetch-helpers'
 
@@ -15,38 +16,24 @@ import splitDeptNum from '../src/helpers/split-dept-num'
 function check() {}
 function lint() {}
 
-
-function callbackToPromise(resolve, reject) {
-	return (err, results) => {
-		err && reject(err)
-		resolve(results)
-	}
-}
-
-function readFilePromise(file, opts) {
-	return new Promise((resolve, reject) => {
-		fs.readFile(file, opts, callbackToPromise(resolve, reject))
-	})
-}
-
 function loadFile(pathOrUrl) {
 	return startsWith(pathOrUrl, 'http')
 		? fetch(pathOrUrl).then(status).then(text)
-		: readFilePromise(pathOrUrl, {encoding: 'utf-8'})
+		: fs.readFileAsync(pathOrUrl, {encoding: 'utf-8'})
 	// return JSON.parse(fs.readFileSync(pathOrUrl, 'utf8'))
 }
 
 function loadJsonFile(pathOrUrl) {
 	return startsWith(pathOrUrl, 'http')
 		? fetch(pathOrUrl).then(status).then(json)
-		: readFilePromise(pathOrUrl, {encoding: 'utf-8'}).then(JSON.parse)
+		: fs.readFileAsync(pathOrUrl, {encoding: 'utf-8'}).then(JSON.parse)
 	// return JSON.parse(fs.readFileSync(pathOrUrl, 'utf8'))
 }
 
 function loadYamlFile(pathOrUrl) {
 	return startsWith(pathOrUrl, 'http')
 		? fetch(pathOrUrl).then(status).then(text).then(yaml.safeLoad)
-		: readFilePromise(pathOrUrl, {encoding: 'utf-8'}).then(yaml.safeLoad)
+		: fs.readFileAsync(pathOrUrl, {encoding: 'utf-8'}).then(yaml.safeLoad)
 }
 
 function tryReadFile(path) {
