@@ -10,8 +10,6 @@ git pull origin stable
 
 npm set progress false
 
-npm set progress false
-
 # install any updated dependencies
 npm i > /dev/null
 
