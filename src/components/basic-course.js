@@ -31,6 +31,9 @@ export default class BasicCourse extends Component {
 								)}
 							</ul>
 							: null}
+						{course.prerequisites
+							? <span className='has-prerequisite' title={course.prerequisites}>!</span>
+							: null}
 					</div>
 					<div className='summary'>
 						{course.times}
