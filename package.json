@@ -48,6 +48,7 @@
   "dependencies": {
     "appdirs": "1.0.0",
     "babel-runtime": "5.8.25",
+    "bluebird": "2.10.1",
     "classnames": "2.1.5",
     "combinations-generator": "1.0.1",
     "debug": "2.2.0",
