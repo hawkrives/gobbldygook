@@ -17,7 +17,7 @@ export default function createSchedules(courses) {
 
 	console.log('started schedule building')
 	// let semesters = [findScheduleFromCourses(groupedCourses[1])]
-	return Promise.all(semesters)
+	return Promise.settle(semesters)
 		.then(resultPromiseInspections => {
 			return map(resultPromiseInspections, promiseInspection => {
 				// check if was successful
