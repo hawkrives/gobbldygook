@@ -48,7 +48,7 @@
   "dependencies": {
     "appdirs": "1.0.0",
     "babel-runtime": "5.8.25",
-    "bluebird": "2.10.1",
+    "bluebird": "2.10.2",
     "classnames": "2.1.5",
     "combinations-generator": "1.0.1",
     "debug": "2.2.0",
@@ -97,7 +97,7 @@
     "coveralls": "2.11.4",
     "css-loader": "0.19.0",
     "dom-storage": "2.0.1",
-    "eslint": "1.5.1",
+    "eslint": "1.6.0",
     "eslint-plugin-react": "3.5.1",
     "extract-text-webpack-plugin": "0.8.2",
     "file-loader": "0.8.4",
