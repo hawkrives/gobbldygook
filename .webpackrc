@@ -82,6 +82,10 @@ var config = {
 			isDev: isDev,
 			package: pkg,
 		}),
+
+		new webpack.ProvidePlugin({
+			Promise: 'bluebird',
+		}),
 	],
 
 	module: {
