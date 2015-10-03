@@ -1,0 +1,216 @@
+<style>
+#input label {
+	display: inline-block;
+}
+.loading {
+	opacity: 0.5;
+}
+#sis-frame {
+	width: 500px;
+	height: 400px;
+}
+</style>
+
+<form id='input' method='post' target='frame' onsubmit='loadCourses(); return false'>
+	<label>stnum: <input name='stnum' value='122932'></label>
+	<label>searchyearterm: <input name='searchyearterm' value='20143'></label>
+	<label>x: <input name='x' value='7'></label>
+	<label>y: <input name='y' value='12'></label>
+
+	<button type='submit'>Go</button>
+</form>
+
+<div id="error"></div>
+
+<script>
+'use strict'
+
+// [X] load the courses page
+// [X] if timeout, ask them to login to the sis in a seperate tab
+// [X]             then reload the courses page
+// [X] grab list of terms
+// [ ] extract courses from table and store into courses taken
+// [ ] remove current term from set of unfetched terms
+// [ ] repeat for term in unfetched terms:
+// [ ]     submit form for next oldest term
+// [ ]     extract courses from table and store into courses taken
+// [ ]     remove current term from set of unfetched terms
+
+// let termSet = new Set()
+
+function prepareFrame() {
+	return new Promise((resolve) => {
+		const f = document.getElementById('sis-frame')
+		if (f.ready) {
+			resolve()
+		}
+		f.addEventListener('load', () => {
+			f.ready = true
+			resolve()
+		})
+		f.reload = () => {
+			f.ready = false
+			f.src = `${f.src}/?permutation=${Date.now()}`
+			return prepareFrame()
+		}
+	})
+}
+
+function checkIfLoggedIn() {
+	return prepareFrame().then(() => new Promise((resolve, reject) => {
+		const f = document.getElementById('sis-frame')
+
+		f.classList.remove('loading')
+
+		const errorBox = document.querySelector('#error')
+		if (!errorBox) {
+			reject('missing error form')
+		}
+		const error = f.contentDocument.body.querySelector('.sis-error')
+		if (error && error.textContent.trim() === 'Sorry, your session has timed out; please login again.') {
+			errorBox.innerHTML = ''
+			const msg = document.createElement('p')
+			msg.textContent = 'Please log into the SIS in another tab, then push the "Reload SIS" button'
+			errorBox.appendChild(msg)
+
+			const btn = document.createElement('button')
+			btn.type = 'button'
+			btn.textContent = 'Reload SIS'
+			btn.onclick = () => {
+				f.classList.add('loading')
+				errorBox.classList.add('loading')
+				f.reload().then(main)
+			}
+			errorBox.appendChild(btn)
+			reject(false)
+		}
+		else if (error) {
+			errorBox.textContent = error.textContent
+		}
+		else {
+			errorBox.classList.remove('loading')
+			errorBox.textContent = ''
+			resolve(true)
+		}
+	}))
+}
+
+
+function getTermList() {
+	return new Promise(resolve => {
+		const f = document.getElementById('sis-frame')
+		const termSelector = f.contentDocument.getElementsByName('searchyearterm')[0]
+
+		if (!termSelector) {
+			return
+		}
+
+		const termSet = new Set(Array.from(termSelector.options).map(opt => opt.value).map(Number))
+
+		resolve(termSet)
+	})
+}
+
+function getCourses(term) {
+	const f = document.getElementById('sis-frame')
+	const termSelector = f.contentDocument.getElementsByName('searchyearterm')[0]
+
+	const currentTerm = Number(termSelector.value)
+	loadTerm(term).then(() => {
+		// termSet.delete(currentTerm)
+
+	})
+}
+
+function loadTerm(term) {
+	return new Promise(resolve => {
+		'https://www.stolaf.edu/sis/st-courses.cfm'
+		const f = document.getElementById('sis-frame')
+		const termSelector = f.contentDocument.getElementsByName('searchyearterm')[0]
+
+		const currentTerm = Number(termSelector.value)
+		if (currentTerm === term) {
+			resolve()
+		}
+
+		termSelector.value = String(term)
+
+		const form = f.contentDocument.querySelectorAll('form[action="st-courses.cfm"]')[1]
+		form.submit()
+	})
+}
+
+function makeFrame(url) {
+	const frame = document.createElement('iframe')
+	frame.class = 'loading sis-frame'
+	frame.sandbox = 'allow-same-origin allow-forms'
+	frame.src = url
+	frame.onload = main
+	frame.style = 'display: none'
+	return frame
+}
+
+function main() {
+	if (!document.getElementById('sis-frame')) {
+		const frame = makeFrame('https://www.stolaf.edu/sis/st-courses.cfm')
+		frame.id = 'sis-frame'
+		window.f = frame
+		document.body.appendChild(frame)
+	}
+
+	checkIfLoggedIn()
+		.then(getTermList)
+		.then(terms => {
+			return Promise.all([...terms].map(getCourses))
+		})
+		.then(blah => console.log(blah))
+		.catch('Not logged in… :(')
+		// .catch()
+}
+
+main()
+
+
+function getStudentId() {
+	return fetch('https://www.stolaf.edu/sis/st-degreeaudit.cfm')
+		.then(res => res.text())
+		.then()
+}
+
+function querySis() {
+	let form = new FormData(document.getElementById('input'))
+
+	fetch(
+		'https://www.stolaf.edu/sis/st-courses.cfm',
+		{credentials: 'same-origin', method: 'post', body: form}
+	)
+		.then(res => res.text())
+		.then(res => output.innerHTML = res)
+
+	return false
+}
+
+let courses = []
+let terms = []
+
+function loadCourses(term) {
+	const f = document.createElement('iframe')
+	f.src = 'https://www.stolaf.edu/sis/st-courses.cfm'
+}
+
+
+
+function loadTerms() {
+	const f = document.getElementById('frame')
+	if (f) {
+		f.addEventListener('load', () => {
+
+		})
+
+		f.src = 'https://www.stolaf.edu/sis/st-courses.cfm'
+	}
+}
+
+// loadTerms()
+
+</script>
