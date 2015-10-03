@@ -13,7 +13,7 @@
     "area_output": "build/areas/",
     "beautify": "-f - --end-with-newline --indent-with-tabs",
     "mocha": "test/areas test/models test/helpers test/ducks",
-    "webpack": "--progress --config=./.webpackrc"
+    "webpack": "--progress --config .webpackrc"
   },
   "scripts": {
     "benchmark": "babel-node -- ./benchmarks/students-benchmark.js",
@@ -38,7 +38,7 @@
     "prewatch": "npm run copy && npm run lint",
     "profile": "cat profile/README.md",
     "start": "webpack-dev-server $npm_package_config_webpack",
-    "stats": "webpack --bail --config=./.webpackrc --profile --json > stats.json && open http://webpack.github.io/analyse/",
+    "stats": "webpack --bail --config .webpackrc --profile --json > stats.json && open http://webpack.github.io/analyse/",
     "test": "npm run mocha",
     "test:browser": "npm run karma",
     "test:students": "mocha ./bin/test-students",
