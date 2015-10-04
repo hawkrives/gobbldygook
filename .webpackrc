@@ -1,6 +1,8 @@
 /* eslint no-var:0 */
 /* global module */
 
+global.Promise = require('bluebird')
+
 var HtmlPlugin = require('./webpack/html-plugin')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
