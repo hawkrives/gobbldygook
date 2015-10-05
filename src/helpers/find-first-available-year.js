@@ -4,6 +4,7 @@ import sortBy from 'lodash/collection/sortBy'
 import max from 'lodash/collection/max'
 import includes from 'lodash/collection/includes'
 import findMissingNumberBinarySearch from './find-missing-number-binary-search'
+import {Iterable as ImmutableIterable} from 'immutable'
 
 /**
  * Takes a list of schedules and finds the first open year.
@@ -21,7 +22,7 @@ function findFirstAvailableYear(schedules, matriculation) {
 		return new Date().getFullYear()
 	}
 
-	let scheds = schedules.toArray ? schedules.toArray() : schedules
+	const scheds = ImmutableIterable.isIterable(schedules) ? schedules.toArray() : schedules
 	let years = uniq(pluck(scheds, 'year'))
 
 	// put the matriculation year at the front to give a starting point
