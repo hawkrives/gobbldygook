@@ -87,7 +87,6 @@ function storeCourses(item) {
 
 			console.error(err)
 			throw err
-
 		})
 }
 
@@ -118,7 +117,8 @@ function storeItem(item) {
 	}
 }
 
-async function cleanPriorData({path, type}) {
+async function cleanPriorData(item) {
+	const {path, type} = item
 	log(`cleanPriorData(): ${path}`)
 
 	let oldItems = []
@@ -133,7 +133,7 @@ async function cleanPriorData({path, type}) {
 			oldItems = map(oldItems, item => ({ [item.sourcePath]: null }))
 		}
 		else {
-			throw new TypeError(`needsUpdate(): "${type}" is not a valid store type`)
+			throw new TypeError(`cleanPriorData(): "${type}" is not a valid store type`)
 		}
 
 		await db.store(type).batch(oldItems)
@@ -276,7 +276,7 @@ export default function loadData() {
 				return loadInfoFile(`${path}/info.json?${cachebuster}`, path)
 			})
 			.catch(err => {
-				throw err
+				console.error(err)
 			}))
 
 	return Promise.all(promises)
