@@ -117,7 +117,7 @@ class Semester extends Component {
 			currentCredits && infoBar.push(<li key='credit-count'>{` – ${currentCredits} ${plur('credit', currentCredits)}`}</li>)
 		}
 
-		if (schedule && courses.size && this.props.coursesLoaded) {
+		if (schedule && this.props.coursesLoaded) {
 			let courseObjects = courses
 				.map((course, i) =>
 					course.error
