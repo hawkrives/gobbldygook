@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import findAllAvailableYears from '../../src/helpers/find-all-available-years'
 
-describe('findAllAvailableYears', () => {
+xdescribe('findAllAvailableYears', () => {
 	it('takes a list of schedules and finds the first open year', () => {
 		const schedules = [
 			{'id': 3, 'year': 2012},
