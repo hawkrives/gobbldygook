@@ -57,7 +57,7 @@ export default class DetailedCourse extends Component {
 				<div className='details'>
 					<dl>
 						<dt>Locations</dt>
-						<dd>{course.locations}</dd>
+						<dd>{course.locations.join(' · ')}</dd>
 
 						<dt>Professors</dt>
 						<dd>{oxford(course.instructors)}</dd>
