@@ -53,6 +53,7 @@
     "combinations-generator": "1.0.1",
     "debug": "2.2.0",
     "fuzzysearch": "1.0.3",
+    "history": "1.12.3",
     "humanize-plus": "1.5.0",
     "idb-range": "2.4.0",
     "immutable": "3.7.5",
