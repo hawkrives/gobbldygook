@@ -10,10 +10,10 @@ class FilterOf extends Component {
 
 export default class Filter extends Component {
 	static propTypes = {
-		filter: PropTypes.object.isRequired,
+		filter: PropTypes.object,
 	}
 
 	render() {
-		return JSON.stringify(this.props.filter, null, 2)
+		return <div>{JSON.stringify(this.props.filter, null, 2)}</div>
 	}
 }
