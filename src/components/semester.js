@@ -156,13 +156,10 @@ class Semester extends Component {
 		return this.props.connectDropTarget(
 			<div className={className}>
 				<header className='semester-title'>
-					<Link className='semester-header'
-						to='semester'
-						params={{
-							id: this.props.student.id,
-							year: this.props.year,
-							semester: this.props.semester,
-						}}>
+					<Link
+						className='semester-header'
+						to={`semester/${this.props.student.id}/${this.props.year}/${this.props.semester}`}
+					>
 						<h1>{semesterName(this.props.semester)}</h1>
 
 						<List className='info-bar' type='inline'>

@@ -61,7 +61,7 @@ export default class Sidebar extends Component {
 					<Separator type='spacer' />
 
 					<Button className='sidebar-btn' title='Download'>
-						<Link to='download' params={{id: this.props.student.id}}>
+						<Link to={`download/${this.props.student.id}`}>
 							<Icon name='ionicon-ios-download-outline' type='block' />
 						</Link>
 					</Button>

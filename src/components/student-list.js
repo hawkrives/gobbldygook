@@ -30,13 +30,14 @@ class StudentListItem extends Component {
 
 	render() {
 		// console.log('StudentListItem#render')
-		const student = this.props.student
-		const groupedStudies = student.studies.groupBy(s => s.type)
+		const groupedStudies = this.props.student.studies.groupBy(s => s.type)
+		const {name, id} = this.props.student
+
 		return (<span>
-			<Link className='student-list-item' to='student' params={{id: student.id}}>
-				<AvatarLetter value={student.name} />
+			<Link className='student-list-item' to={`/s/${id}`}>
+				<AvatarLetter value={name} />
 				<span className='student-list-item-info'>
-					<div className='name'>{student.name || ''}</div>
+					<div className='name'>{name || ''}</div>
 					<div className='areas'>
 						{groupedStudies
 							.map(group => group.map(s => s.name).join(' · '))

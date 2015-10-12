@@ -1,5 +1,4 @@
-import React, {Component, PropTypes} from 'react'
-import {RouteHandler} from 'react-router'
+import React, {Component, PropTypes, cloneElement} from 'react'
 import Immutable from 'immutable'
 import DocumentTitle from 'react-document-title'
 
@@ -11,7 +10,8 @@ import './student.scss'
 export default class Student extends Component {
 	static propTypes = {
 		allAreas: PropTypes.instanceOf(Immutable.List).isRequired,
-		routerState: PropTypes.object.isRequired,
+		children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]).isRequired,
+		params: PropTypes.shape({id: PropTypes.string.isRequired}).isRequired,
 		students: PropTypes.instanceOf(Immutable.Map).isRequired,
 	}
 
@@ -22,7 +22,7 @@ export default class Student extends Component {
 			baseSearchQuery: {},
 			courses: Immutable.List(),
 			coursesLoaded: false,
-			message: `Loading Student ${props.routerState.params.id}`,
+			message: `Loading Student ${props.params.id}`,
 			messageClass: '',
 			isSearching: false,
 			student: null,
@@ -35,7 +35,7 @@ export default class Student extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		// console.log(nextProps)
-		const queryId = this.props.routerState.params.id
+		const queryId = this.props.params.id
 		const student = nextProps.students.get(queryId)
 
 		if (student) {
@@ -102,14 +102,14 @@ export default class Student extends Component {
 						toggleSearchSidebar={this.toggleSearchSidebar}
 						student={this.state.student}
 					/>
-					<RouteHandler
-						className='content'
-						allAreas={this.state.allAreas}
-						student={this.state.student}
-						courses={this.state.courses}
-						coursesLoaded={this.state.coursesLoaded}
-						showSearchSidebar={this.showSearchSidebar}
-					/>
+					{cloneElement(this.props.children, {
+						className: 'content',
+						allAreas: this.state.allAreas,
+						student: this.state.student,
+						courses: this.state.courses,
+						coursesLoaded: this.state.coursesLoaded,
+						showSearchSidebar: this.showSearchSidebar,
+					})}
 				</div>
 			</DocumentTitle>
 		)
