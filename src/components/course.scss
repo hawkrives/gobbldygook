@@ -19,6 +19,7 @@
 	}
 
 	.title,
+	.subtitle,
 	.summary {
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -26,7 +27,8 @@
 		cursor: grab;
 	}
 
-	.title {
+	.title,
+	.subtitle, {
 		margin-top: 0;
 		margin-bottom: 0;
 		line-height: 1.2;
@@ -34,6 +36,10 @@
 		font-size: 1em;
 		font-weight: 500;
 		font-family: $heading-font-stack;
+	}
+
+	.subtitle {
+		font-size: 0.75em;
 	}
 
 	.title,
@@ -148,7 +154,8 @@
 .course.expanded {
 	color: $text-color;
 
-	.title {
+	.title,
+	.subtitle {
 		overflow: visible;
 		white-space: normal;
 	}
