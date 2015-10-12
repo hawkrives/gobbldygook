@@ -12,6 +12,7 @@ export default class CourseTitle extends Component {
 		const {name, title, type} = this.props
 		const isIndependent = /^I[RS]/.test(name)
 		let courseName = title || name
+		let showSubtitle = false
 
 		if (isIndependent) {
 			courseName = name
@@ -20,10 +21,21 @@ export default class CourseTitle extends Component {
 			}
 		}
 		else if (type === 'Topic') {
-			courseName = name
-			courseName = courseName.replace(/top.*: */gi, '')
+			courseName = `${name.replace(/top.*: */gi, '')}`
+			showSubtitle = true
+		}
+		else if (type === 'Seminar') {
+			courseName = `${name.replace(/sem.*: */gi, '')}`
+			showSubtitle = true
 		}
 
-		return <h1 className='title'>{courseName}</h1>
+		return (
+			<header>
+				<h1 className='title'>{courseName}</h1>
+				{showSubtitle
+					? <h2 className='subtitle'>{title}</h2>
+					: null}
+			</header>
+		)
 	}
 }
