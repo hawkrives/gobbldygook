@@ -14,7 +14,7 @@ export default class BasicCourse extends Component {
 	}
 
 	render() {
-		const course = this.props.course
+		const {course} = this.props
 
 		return (
 			<div className='info-wrapper'>
