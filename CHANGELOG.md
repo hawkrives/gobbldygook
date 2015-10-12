@@ -4,6 +4,8 @@
 ### Changed
 - Stuff (this should be the last changelog with this entry…)
 - Began automating changelog/releases/stuff
+- Display "subtitles" for some courses
+	- Show subtitles on seminars and topics courses
 
 
 ## [3.0.0-beta.1] - 2015-10-09
