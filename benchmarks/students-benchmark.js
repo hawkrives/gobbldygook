@@ -1,6 +1,6 @@
 import fs from 'graceful-fs'
 import evaluate from '../src/lib/evaluate'
-import includes from 'lodash/collection/includes'
+import endsWith from 'lodash/string/endsWith'
 import junk from 'junk'
 import nom from 'nomnom'
 import ms from 'pretty-ms'
@@ -17,7 +17,7 @@ function now(other=[]) {
 
 function loadStudents(dir) {
 	return fs.readdirSync(dir)
-		.filter(name => !includes(name, '.ip'))
+		.filter(name => !endsWith(name, '.ip'))
 		.filter(junk.not)
 		.map(path => dir + path)
 		.map(path => fs.readFileSync(path, 'utf-8'))
@@ -38,7 +38,7 @@ function benchmark({runs, graph}) {
 
 				const avg = sum(times) / size(times)
 				if (graph) {
-					console.log(`  ${sparkly(times)}\n`)
+					console.log(`  ${sparkly(times)}`)
 				}
 				console.log(`  average time: ${ms(avg)} (over ${runs} runs)\n`)
 			})
