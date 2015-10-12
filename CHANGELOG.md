@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## Next (Unreleased)
+## [Unreleased]
+### Changed
+- Stuff (this should be the last changelog with this entry…)
+- Began automating changelog/releases/stuff
+
+
+## [3.0.0-beta.1] - 2015-10-09
 - NEW: added syntax to the Hanson format
 	- `<n> courses from children where {}`
 		facilitates the Film Studies "… one of which must be a 300-level course" requirement: `one course from children where {level = 300}`
@@ -9,17 +15,17 @@
 - NEW: Sort and Group courses in the search sidebar
 
 
-## 3.0.0-beta.0
+## [3.0.0-beta.0]
 - removed extraneous dependencies on lodash to reduce the build size
 
 
-## 3.0.0-alpha.16
+## [3.0.0-alpha.16]
 - updated node-sass to 3.2.0
 - made buttons more consistent
 - changed year headings to be horizontal, instead of vertical
 
 
-## 3.0.0-alpha.15
+## [3.0.0-alpha.15]
 - made things prettier
 - implemented graphical area of study management
 - fixed bugs related to the StudentSummmary block's input fields
@@ -28,29 +34,29 @@
 - allow sorting the list of students
 
 
-## 3.0.0-alpha.14
+## [3.0.0-alpha.14]
 - Rebuilt area of study processing on top of the new Hanson format
 - Included the hanson processors in the main repo
 - Switch to Webpack for the build system
 
 
-## 3.0.0-alpha.12
+## [3.0.0-alpha.12]
 - Stuff and more stuff
 - I really ought to update this more often
 - Switched back to Sass
 
 
-## 3.0.0-alpha.11
+## [3.0.0-alpha.11]
 - Switched to Stylus as a pre-processor
 - Updated 6to5
 - Updated sto-helpers and sto-sis-time-parser
 
 
-## 3.0.0-alpha.10
+## [3.0.0-alpha.10]
 - Added `courses` as the first parameter to `queryCourses`, allowing the full power of that weird query engine to run over any list of courses.
 
 
-## 3.0.0-alpha.9
+## [3.0.0-alpha.9]
 - Modularized app
 	- pulled areas (now at https://github.com/hawkrives/gobbldygook-area-data), courses (https://github.com/hawkrives/gobbldygook-course-data), helpers (https://github.com/hawkrives/sto-helpers), and the time parser (https://github.com/hawkrives/sto-sis-time-parser) into separate npm modules
 - Updated `student.studies` array
