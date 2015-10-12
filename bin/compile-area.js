@@ -11,7 +11,8 @@ const loggers = {
 }
 
 export function cli() {
-	const args = nom
+	const args = nom()
+		.script('compile-area')
 		.option('file', {
 			required: true,
 			metavar: 'FILE',
