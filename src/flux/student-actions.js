@@ -1,6 +1,6 @@
 import Reflux from 'reflux'
 
-let studentActions = Reflux.createActions([
+const studentActions = Reflux.createActions([
 	'reload',
 	'refreshData',
 	'undo',
@@ -45,4 +45,6 @@ let studentActions = Reflux.createActions([
 ])
 
 export default studentActions
-window.actions = studentActions
+if (typeof window !== 'undefined') {
+	window.actions = studentActions
+}
