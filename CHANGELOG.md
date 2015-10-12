@@ -1,6 +1,8 @@
 # CHANGELOG
 
 ## [Unreleased]
+
+## [3.0.0-beta2] - 2015-10-12
 ### Changed
 - Stuff (this should be the last changelog with this entry…)
 - Began automating changelog/releases/stuff
