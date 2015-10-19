@@ -61,6 +61,14 @@ export function removeNotification(id) {
 	return { type: REMOVE_NOTIFICATION, payload: { id } }
 }
 
+export function removeNotificationAfterDelay(id, delay=1500) {
+	return dispatch => {
+		setTimeout(() => {
+			dispatch(removeNotification(id))
+		}, delay)
+	}
+}
+
 export function logMessage(id, message) {
 	return { type: LOG_MESSAGE, payload: { id, message } }
 }

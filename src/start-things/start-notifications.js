@@ -1,6 +1,6 @@
 import React from 'react'
 import Notifications from '../screens/notifications'
-import {createStore} from 'redux'
+import createStore from '../ducks/store'
 import {Provider} from 'react-redux'
 import gobbldygookApp from '../ducks/reducer'
 
