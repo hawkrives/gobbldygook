@@ -1,6 +1,4 @@
-// import query_courses from ''
-// import load_student from ''
-// import check_student_against_area from ''
+import nomnom from 'nomnom'
 
 import {loadYamlFile} from './lib/read-file'
 import populateCourses from './lib/populate-courses'
@@ -14,8 +12,8 @@ import reject from 'lodash/collection/reject'
 import pluck from 'lodash/collection/pluck'
 import includes from 'lodash/collection/includes'
 
-async function populateStudent() {
-	let student = await loadYamlFile(process.argv[2])
+async function populateStudent(filename) {
+	let student = await loadYamlFile(filename)
 	student.courses = await populateCourses(student)
 	student.areas = student.studies.map(loadArea)
 	return student
@@ -63,10 +61,22 @@ function evaluateStudentAgainstEachMajor(student) {
 }
 
 export function cli() {
-	process.on('unhandledRejection', (reason, p) => {
-		console.error('Unhandled rejection in', p)
-		console.error('Reason:', reason)
-	})
+	const args = nomnom()
+		.option('json', {
+			flag: true,
+			help: 'Print valid JSON objects',
+		})
+		.option('students', {
+			required: true,
+			metavar: 'FILE',
+			help: 'The student file(s) to load',
+			position: 0,
+			list: true,
+		})
+		.parse()
 
-	populateStudent().then(evaluateStudentAgainstEachMajor)
+	for (let student of args.students) {
+		populateStudent(student)
+			.then(evaluateStudentAgainstEachMajor)
+	}
 }

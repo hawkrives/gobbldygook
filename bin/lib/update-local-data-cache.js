@@ -1,11 +1,14 @@
 import mkdirp from 'mkdirp'
 import find from 'lodash/collection/find'
+import some from 'lodash/collection/some'
+import startsWith from 'lodash/string/startsWith'
 import path from 'path'
 
 import {
+	tryReadFile,
 	tryReadJsonFile,
-	loadJsonFile,
 	loadFile,
+	loadJsonFile,
 } from './read-file'
 import {cacheDir} from './dirs'
 
@@ -15,8 +18,11 @@ const fs = Promise.promisifyAll(fsCallbacks)
 
 import loadPkg from 'load-pkg'
 const pkg = loadPkg()
-const COURSE_INFO_LOCATION = process.env.COURSE_INFO || pkg.COURSE_INFO || 'https://stolaf.edu/people/rives/courses/info.json'
-// const AREA_INFO_LOCATION = process.env.AREA_INFO || pkg.AREA_INFO || 'https://stolaf.edu/people/rives/areas/info.json'
+const COURSE_INFO_LOCATION = process.env.COURSE_INFO || 'https://stolaf.edu/people/rives/courses/info.json'
+// const AREA_INFO_LOCATION = process.env.AREA_INFO || 'https://stolaf.edu/people/rives/areas/info.json'
+
+const COURSES_ARE_REMOTE = startsWith(COURSE_INFO_LOCATION, 'http')
+// const AREAS_ARE_REMOTE = startsWith(AREA_INFO_LOCATION, 'http')
 
 function prepareDirs() {
 	mkdirp.sync(`${cacheDir}/Courses/`)
@@ -33,17 +39,29 @@ export async function cache() {
 
 	const courseInfo = await loadJsonFile(COURSE_INFO_LOCATION)
 
+	let location = COURSE_INFO_LOCATION
+	if (COURSES_ARE_REMOTE) {
+		location = COURSE_INFO_LOCATION.replace('https://', '')
+	}
+	const base = path.join(...location.split('/').slice(0, -1))
+
 	const infoFiles = courseInfo.files
 		.filter(file => {
 			const oldEntry = find(priorCourseInfo.files, file)
-			const hasNotBeenUpdated = (oldEntry.hash === file.hash)
-			return Boolean(oldEntry) && hasNotBeenUpdated
+			return Boolean(oldEntry) && (oldEntry.hash === file.hash)
 		})
-		.map(file => ({
-			...file,
-			fullPath: path.normalize(`${path.join(...COURSE_INFO_LOCATION.split('/').slice(0, -1))}/${file.path}`),
-		}))
-		.map(file => ({...file, data: loadFile(file.fullPath)}))
+		.map(file => {
+			let fullPath = path.normalize(`${base}/${file.path}`)
+			if (COURSES_ARE_REMOTE) {
+				fullPath = `https://${fullPath}`
+			}
+
+			return {
+				...file,
+				fullPath,
+				data: loadFile(fullPath)
+			}
+		})
 
 
 	await Promise.all(infoFiles.map(async file => {
@@ -60,24 +78,24 @@ export async function cache() {
 	return Promise.all([courseInfo])
 }
 
-export function checkForStaleData() {
+export async function checkForStaleData() {
 	prepareDirs()
 
+	const newCourseInfo = await loadJsonFile(COURSE_INFO_LOCATION)
 	const courseInfo = tryReadJsonFile(`${cacheDir}/Courses/info.json`)
 
 	if (!courseInfo) {
-		console.warn('Need to cache courses')
+		console.warn('Need to cache courses (no courseInfo file)')
 		return cache()
 	}
 
-	const needsUpdate = find(courseInfo.files, file => {
+	const needsUpdate = some(newCourseInfo.files, file => {
 		const oldEntry = find(courseInfo.files, file)
-		const hasNotBeenUpdated = (oldEntry.hash === file.hash)
-		return Boolean(oldEntry) && hasNotBeenUpdated
+		return Boolean(oldEntry) && (oldEntry.hash !== file.hash)
 	})
 
 	if (needsUpdate) {
-		console.warn('Need to cache courses')
+		console.warn('Need to cache courses (out of date)')
 		return cache()
 	}
 
