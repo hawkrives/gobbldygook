@@ -8,14 +8,14 @@ describe('queryCourses', () => {
 			year: [2013],
 		}
 		let courses = [
-			{depts: ['AMCON'], year: 2013}
+			{depts: ['AMCON'], year: 2013},
 		]
 		expect(queryCourses(query, courses)).to.eql(courses)
 	})
 
 	it('properly handles a list of five years', () => {
 		let query = {
-			year: ['$OR', 2010, 2011, 2012, 2013, 2014]
+			year: ['$OR', 2010, 2011, 2012, 2013, 2014],
 		}
 		let courses = [
 			{depts: ['AMCON'], year: 2013},

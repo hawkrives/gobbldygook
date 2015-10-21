@@ -1,3 +1,4 @@
+import {expect} from 'chai'
 import React from 'react/addons'
 import {Notifications} from '../../src/screens/notifications'
 import Notification from '../../src/components/notification'

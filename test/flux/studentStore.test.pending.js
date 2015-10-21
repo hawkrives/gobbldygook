@@ -1,6 +1,5 @@
 // test/flux/studentStore.test.js
-jest.dontMock('../../app/flux/studentStore')
-jest.dontMock('dom-storage')
+import {expect} from 'chai'
 
 import Storage from 'dom-storage'
 let local = new Storage(null, {strict: true})
@@ -194,7 +193,6 @@ describe('studentStore', () => {
 		let stu = initial.first()
 
 		studentStore.addSchedule(stu.id)
-		let second = studentStore.students
 		let sched = studentStore.students.get(stu.id).schedules.first()
 
 		studentStore.renameSchedule(stu.id, sched.id, 'new name')

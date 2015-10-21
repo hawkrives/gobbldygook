@@ -16,7 +16,7 @@ describe('partialTitle', () => {
 			{title: 'Fubar.'},
 			{title: 'Modern Japanese Literature'},
 		]
-		courses = courses.map((c) => {
+		courses = courses.map(c => {
 			c.name = c.title
 			return c
 		})
