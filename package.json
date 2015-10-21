@@ -95,7 +95,7 @@
     "babel-plugin-inline-package-json": "1.0.1",
     "babel-plugin-react-display-name": "2.0.0",
     "babel-plugin-react-transform": "1.1.1",
-    "chai": "3.3.0",
+    "chai": "3.4.0",
     "coveralls": "2.11.4",
     "css-loader": "0.20.2",
     "dom-storage": "2.0.1",
