@@ -1,6 +1,5 @@
 import nomnom from 'nomnom'
 import Promise from 'bluebird'
-import sparkly from 'sparkly'
 import search from './lib/search-for-courses'
 import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'

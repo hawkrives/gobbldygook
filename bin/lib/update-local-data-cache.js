@@ -5,7 +5,6 @@ import startsWith from 'lodash/string/startsWith'
 import path from 'path'
 
 import {
-	tryReadFile,
 	tryReadJsonFile,
 	loadFile,
 	loadJsonFile,
@@ -16,8 +15,6 @@ import Promise from 'bluebird'
 import fsCallbacks from 'graceful-fs'
 const fs = Promise.promisifyAll(fsCallbacks)
 
-import loadPkg from 'load-pkg'
-const pkg = loadPkg()
 const COURSE_INFO_LOCATION = process.env.COURSE_INFO || 'https://stolaf.edu/people/rives/courses/info.json'
 // const AREA_INFO_LOCATION = process.env.AREA_INFO || 'https://stolaf.edu/people/rives/areas/info.json'
 
@@ -59,7 +56,7 @@ export async function cache() {
 			return {
 				...file,
 				fullPath,
-				data: loadFile(fullPath)
+				data: loadFile(fullPath),
 			}
 		})
 

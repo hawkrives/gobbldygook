@@ -12,7 +12,6 @@ import db from '../lib/db'
 
 class GobbldygookApp extends Component {
 	static propTypes = {
-		passedRequirements: PropTypes.bool.isRequired,
 		routerState: PropTypes.object.isRequired,
 	}
 
