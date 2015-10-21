@@ -38,12 +38,8 @@ let routes = (
 // run it
 console.log('3. 2.. 1... Blast off! 🚀')
 
-import checkSystemRequirements from './system-requirements'
-const passedRequirements = checkSystemRequirements()
-
 Router.run(routes, (Handler, state) => {
 	React.render(<Handler
-		passedRequirements={passedRequirements}
 		routerState={state}
 	/>, document.getElementById('app'))
 })
