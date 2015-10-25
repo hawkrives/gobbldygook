@@ -5,6 +5,8 @@
 
 This is a course scheduler for students at St. Olaf College. You give it your areas of study (majors, concentrations, degrees), the courses you *have* taken and are *planning* on taking, and it tells you if you can graduate or not.
 
+We have a [trello board](https://trello.com/b/cviTwkre) where we track which areas of study we are working on; if you have one in particular that you want us to work on next, let us know by either voting on the Trello card or emailing us!
+
 
 ## Playing
 1. Visit [https://stolaf.edu/people/rives/g](https://stolaf.edu/people/rives/g)
@@ -38,9 +40,7 @@ You can see additional commands by executing `npm run` with no arguments.
 
 
 ## Support
-We highly recommend joining our Slack chatroom. Just go to [gobbldygook.slack.com](https://gobbldygook.slack.com) and sign up for an account with your St. Olaf email.
-
-If you don't want to join us there, you can file an issue via [github](https://github.com/hawkrives/gobbldygook/issues/), or you can send us an email, if you look us up on Stalkernet.
+You can file an issue via [github](https://github.com/hawkrives/gobbldygook/issues/), or you can send us an email, if you look us up on Stalkernet.
 
 
 ## Credits
