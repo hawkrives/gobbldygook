@@ -12,7 +12,7 @@ import rest from 'lodash/array/rest'
 import size from 'lodash/collection/size'
 import takeWhile from 'lodash/array/takeWhile'
 
-let checkCourseAgainstQueryBit = curry((course, [key, values]) => {
+const checkCourseAgainstQueryBit = curry((course, [key, values]) => {
 	if (!has(course, key)) {
 		return false
 	}
@@ -77,7 +77,7 @@ let checkCourseAgainstQueryBit = curry((course, [key, values]) => {
  * @param {Course} course - the course to check
  * @returns {Boolean}
  */
-let checkCourseAgainstQuery = curry((query, course) => {
+const checkCourseAgainstQuery = curry((query, course) => {
 	let kvPairs = pairs(query)
 	let matches = takeWhile(kvPairs, checkCourseAgainstQueryBit(course))
 

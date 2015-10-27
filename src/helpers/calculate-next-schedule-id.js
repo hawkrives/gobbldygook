@@ -6,10 +6,8 @@ import max from 'lodash/collection/max'
  * @param {Array} schedules - the list of schedules
  * @returns {Number} - the largest ID in the list.
  */
-function calculateNextScheduleId(schedules) {
+export default function calculateNextScheduleId(schedules) {
 	let maxId = max(pluck(schedules, 'id'))
 
 	return maxId + 1
 }
-
-export default calculateNextScheduleId

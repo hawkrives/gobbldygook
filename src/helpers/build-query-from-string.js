@@ -141,7 +141,7 @@ function organizeValues([key, values], {words=false, profWords=false}={}) {
 }
 
 
-function buildQueryFromString(queryString='', opts={}) {
+export default function buildQueryFromString(queryString='', opts={}) {
 	queryString = trim(queryString)
 	if (queryString.endsWith(':')) {
 		queryString = queryString.substring(0, queryString.length - 1)
@@ -208,5 +208,3 @@ function buildQueryFromString(queryString='', opts={}) {
 
 	return finalized
 }
-
-export default buildQueryFromString

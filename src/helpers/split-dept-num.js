@@ -8,7 +8,7 @@ import deptNumRegex from './dept-num-regex'
  * @param {Boolean} includeSection - include the section in the result?
  * @returns {Object} - the result
  */
-function splitDeptNum(deptNumString, includeSection=false) {
+export default function splitDeptNum(deptNumString, includeSection=false) {
 	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
 	// -> {depts: ['AS', 'RE'], num: 230}
 	let matches = deptNumRegex.exec(deptNumString)
@@ -24,5 +24,3 @@ function splitDeptNum(deptNumString, includeSection=false) {
 
 	return deptNum
 }
-
-export default splitDeptNum

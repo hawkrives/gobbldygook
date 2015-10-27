@@ -1,5 +1,6 @@
-let findWordForProgress = (maxProgress, currentProgress) => {
-	let progress = currentProgress / maxProgress
+
+export default function findWordForProgress(maxProgress, currentProgress) {
+	const progress = currentProgress / maxProgress
 
 	if (progress >= 1) {
 		return 'hundred'
@@ -37,5 +38,3 @@ let findWordForProgress = (maxProgress, currentProgress) => {
 
 	return 'zero'
 }
-
-export default findWordForProgress

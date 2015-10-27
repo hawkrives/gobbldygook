@@ -8,8 +8,6 @@ import pluck from 'lodash/collection/pluck'
  * @param {Course[]} courses - the list of courses
  * @returns {String[]} - just the departments
  */
-function getDepartments(courses) {
+export default function getDepartments(courses) {
 	return uniq(flatten(pluck(courses, 'depts')))
 }
-
-export default getDepartments

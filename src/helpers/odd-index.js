@@ -1,3 +1,3 @@
-let oddIndex  = (value, index) => index % 2 === 1
-
-export default oddIndex
+export default function oddIndex(value, index) {
+	return index % 2 === 1
+}

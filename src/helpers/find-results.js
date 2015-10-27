@@ -15,7 +15,7 @@ function checkIfShouldDescend(val, key, coll) {
 	}
 }
 
-function findResults(obj) {
+export default function findResults(obj) {
 	if (isArray(obj)) {
 		return reject(flatten(map(obj, findResults)), isUndefined)
 	}
@@ -26,5 +26,3 @@ function findResults(obj) {
 		return obj // not an obj, don't process me
 	}
 }
-
-export default findResults

@@ -1,3 +1,3 @@
-let notEmptyString = value => value.length > 0
-
-export default notEmptyString
+export default function notEmptyString(value) {
+	return value.length > 0
+}

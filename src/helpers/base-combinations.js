@@ -61,7 +61,7 @@
  * @param {Number} k - size of combinations to search for.
  * @returns {Array} - Array of found combinations; the size of a combination is k.
  */
-function combinations(set, k) {
+export default function combinations(set, k) {
 	if (k > set.length || k <= 0) {
 		return []
 	}
@@ -91,5 +91,3 @@ function combinations(set, k) {
 		return combs
 	}
 }
-
-export default combinations

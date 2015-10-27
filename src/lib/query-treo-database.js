@@ -1,7 +1,3 @@
-// import queryTreoDatabase from 'path/to/queryTreoDatabase'
-// let db = treo('databaseName', schema)
-//   .use(queryTreoDatabase)
-
 import contains from 'lodash/collection/contains'
 import filter from 'lodash/collection/filter'
 import first from 'lodash/array/first'
