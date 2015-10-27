@@ -56,8 +56,8 @@ export default class DetailedCourse extends Component {
 				<BasicCourse className='info-wrapper' course={course} onClick={this.props.onClick} />
 				<div className='details'>
 					<dl>
-						<dt>Locations</dt>
-						<dd>{course.locations.join(' · ')}</dd>
+						{course.locations ? <dt>Locations</dt> : null}
+						{course.locations ? <dd>{course.locations.join(' · ')}</dd> : null}
 
 						<dt>Professors</dt>
 						<dd>{oxford(course.instructors)}</dd>
