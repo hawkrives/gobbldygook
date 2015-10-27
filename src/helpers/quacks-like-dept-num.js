@@ -6,8 +6,6 @@ import deptNumRegex from './dept-num-regex'
  * @param {String} deptNumString - the deptnum
  * @returns {Boolean} - does it quack like a deptnum?
  */
-function quacksLikeDeptNum(deptNumString) {
+export default function quacksLikeDeptNum(deptNumString) {
 	return deptNumRegex.test(deptNumString)
 }
-
-export default quacksLikeDeptNum

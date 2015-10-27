@@ -8,12 +8,10 @@ import expandYear from './expand-year'
  * @param {Number} term - a term identifier.
  * @returns {String} - the prettied term
  */
-function toPrettyTerm(term) {
+export default function toPrettyTerm(term) {
 	term = String(term)
-	let year = term.substr(0, 4)
-	let sem = parseInt(term.substr(4, 1), 10)
+	const year = term.substr(0, 4)
+	const sem = parseInt(term.substr(4, 1), 10)
 
 	return `${semesterName(sem)} ${expandYear(year)}`
 }
-
-export default toPrettyTerm

@@ -8,10 +8,6 @@ import checkCourseAgainstQuery from './check-course-against-query'
  * @param {Array<Course>} courses - the courses to query
  * @returns {Array<Course>} - the courses that matched the query
  */
-function queryCourses(queryObj, courses) {
-	let results = filter(courses, checkCourseAgainstQuery(queryObj))
-
-	return results
+export default function queryCourses(queryObj, courses) {
+	return filter(courses, checkCourseAgainstQuery(queryObj))
 }
-
-export default queryCourses

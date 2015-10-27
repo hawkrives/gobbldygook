@@ -11,7 +11,7 @@ import map from 'lodash/collection/map'
  * @param {Course} course - the course
  * @returns {String} - the department string
  */
-function buildDept(course) {
+export default function buildDept(course) {
 	let departments = course.depts
 
 	departments = map(departments, dept => {
@@ -21,5 +21,3 @@ function buildDept(course) {
 
 	return departments.join('/')
 }
-
-export default buildDept

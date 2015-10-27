@@ -6,7 +6,7 @@ import buildDept from './build-dept'
  * @param {Course} course - the course
  * @returns {String} - the deptnum string
  */
-function buildDeptNum(course, includeSection=false) {
+export default function buildDeptNum(course, includeSection=false) {
 	let dept = buildDept(course)
 	let num = course.num
 
@@ -17,5 +17,3 @@ function buildDeptNum(course, includeSection=false) {
 
 	return `${dept} ${num}`
 }
-
-export default buildDeptNum

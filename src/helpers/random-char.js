@@ -5,5 +5,6 @@
  * @returns {String}
  */
 
-export default () =>
-	Math.random().toString(36).slice(2, 3)
+export default function randomChar() {
+	return Math.random().toString(36).slice(2, 3)
+}
