@@ -12,8 +12,6 @@ import demoStudent from '../models/demo-student.json'
 import studentActions from './student-actions'
 // import notificationActions from './notification-actions'
 
-import parseSIS from '../lib/parse-sis'
-
 export const REFRESH_AREAS = 'gobbldygook/stores/student/refresh-areas'
 export const REFRESH_COURSES = 'gobbldygook/stores/student/refresh-courses'
 
@@ -201,25 +199,6 @@ const studentStore = Reflux.createStore({
 		if (type === 'application/json') {
 			try {
 				stu = JSON.parse(data)
-			}
-			catch (err) {
-				throw err
-			}
-		}
-
-		else if (type === 'text/html') {
-			const parser = new DOMParser()
-
-			let html
-			try {
-				html = parser.parseFromString(data, 'text/html')
-			}
-			catch (err) {
-				throw err
-			}
-
-			try {
-				stu = parseSIS(html)
 			}
 			catch (err) {
 				throw err
