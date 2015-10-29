@@ -45,7 +45,7 @@ class GobbldygookApp extends Component {
 	}
 
 	onAreasRefreshed = () => {
-		db.stores.areas.all().then(areas => this.setState({
+		db.store('areas').getAll().then(areas => this.setState({
 			allAreas: Immutable.List(areas),
 		}))
 	}

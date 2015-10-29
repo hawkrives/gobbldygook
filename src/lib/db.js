@@ -1,6 +1,10 @@
 import treo from 'treo'
+import treoWebsql from 'treo-websql'
+import queryTreoDatabase from './query-treo-database'
+import treoBatchGet from './treo-batch-get'
+import Schema from 'idb-schema'
 
-let schema = treo.schema()
+const schema = new Schema()
 	.version(1)
 		.addStore('courses', { key: 'clbid' })
 			.addIndex('clbid', 'clbid', { unique: true })
@@ -41,42 +45,36 @@ let schema = treo.schema()
 			.addIndex('profWords', 'profWords', { multi: true })
 	.version(4)
 		.getStore('courses')
-			.dropIndex('profs')
+			.delIndex('profs')
 			.addIndex('instructors', 'instructors', { multi: true })
-			.dropIndex('places')
+			.delIndex('places')
 			.addIndex('locations', 'locations', { multi: true })
-			.dropIndex('sect')
+			.delIndex('sect')
 			.addIndex('section', 'section')
-			.dropIndex('sem')
+			.delIndex('sem')
 			.addIndex('semester', 'semester')
-			.dropIndex('halfcredit')
+			.delIndex('halfcredit')
 	.version(5)
 		.addStore('courseCache', { key: 'id' })
 		.addStore('areaCache', { key: 'id' })
 		.getStore('areas')
-			.dropIndex('sourcePath')
+			.delIndex('sourcePath')
 		.getStore('courses')
-			.dropIndex('desc')
-			.dropIndex('notes')
-			.dropIndex('title')
-			.dropIndex('name')
+			.delIndex('desc')
+			.delIndex('notes')
+			.delIndex('title')
+			.delIndex('name')
 
-
-import treoPromise from 'treo/plugins/treo-promise'
-import queryTreoDatabase from './query-treo-database'
-import treoBatchGet from './treo-batch-get'
-let db = treo('gobbldygook', schema)
-	.use(treoPromise())
+treoWebsql(treo)
+const db = treo('gobbldygook', schema)
 	.use(queryTreoDatabase)
 	.use(treoBatchGet)
 
 export default db
 
-
 if (typeof window !== 'undefined') {
 	window.deleteDatabase = () => {
-		window.indexedDB.deleteDatabase('gobbldygook', () =>
-			console.log('Database dropped'))
+		db.del().then(() => console.log('Database dropped'))
 	}
 
 	window.eraseStorage = () => {
