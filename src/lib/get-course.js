@@ -9,7 +9,7 @@ import db from './db'
  * @fulfill {Object} - the course object.
  * @reject {Error} - a message about retrieval failing.
  */
-function getCourse(clbid) {
+export default function getCourse(clbid) {
 	// console.log('called getCourse', clbid)
 	return db
 		.store('courses')
@@ -17,5 +17,3 @@ function getCourse(clbid) {
 		.get(clbid)
 		.catch(error => ({clbid, error}))
 }
-
-export default getCourse

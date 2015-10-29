@@ -213,11 +213,9 @@ function queryIndex(query, primaryKeysOnly=false) {
 	})
 }
 
-function plugin(db, treo) {
+export default function plugin(db, treo) {
 	let {Store, Index} = treo
 
 	Store.prototype.query = queryStore
 	Index.prototype.query = queryIndex
 }
-
-export default plugin
