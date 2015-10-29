@@ -2,6 +2,7 @@ import treo from 'treo'
 import treoWebsql from 'treo-websql'
 import queryTreoDatabase from './query-treo-database'
 import treoBatchGet from './treo-batch-get'
+import treoFindIn from './treo-find-in'
 import Schema from 'idb-schema'
 
 const schema = new Schema()
@@ -69,6 +70,7 @@ treoWebsql(treo)
 const db = treo('gobbldygook', schema)
 	.use(queryTreoDatabase)
 	.use(treoBatchGet)
+	.use(treoFindIn)
 
 export default db
 
