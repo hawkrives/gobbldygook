@@ -32,11 +32,9 @@
 		}
 	},
 	"plugins": [
-		"external-helpers-2",
 		"syntax-async-functions",
 		"transform-class-properties",
 		"transform-export-extensions",
-		"transform-runtime",
 	],
 	"presets": [
 		"es2015",

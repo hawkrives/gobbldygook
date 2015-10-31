@@ -96,7 +96,7 @@ var config = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				// an array, so that it can be added to later
-				loaders: ['babel-loader'],
+				loaders: ['babel-loader?plugins[]=external-helpers-2&plugins[]=transform-runtime'],
 			},
 			{
 				test: /\.json$/,
