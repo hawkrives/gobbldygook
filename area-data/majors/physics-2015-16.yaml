@@ -1,0 +1,21 @@
+name: Physics
+type: major
+revision: 2015-16
+result: all of (Analytics, Modern Physics, Upper-Level, Elective, Upper-Level Elective)
+
+Analytics:
+    PHYS 130 & 131 & 232
+
+Modern Physics:
+    PHYS 244 & 245
+
+Upper-Level:
+    # Physics 374, 375 and 385, 376 and 386
+    PHYS 374 & 375 & 385 & 386
+
+Elective:
+    one of (PHYS 112, 124, 125, 154, 246, 252, 360, 362, 376, 379, 390, 396)
+
+Upper-Level Elective:
+    description: "One upper-level physics elective, numbered between 300 and 393"
+    result: one of (360, 362, 376, 379, 390)
