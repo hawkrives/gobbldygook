@@ -33,7 +33,6 @@
 	},
 	"plugins": [
 		"external-helpers-2",
-		"inline-package-json",
 		"syntax-async-functions",
 		"transform-class-properties",
 		"transform-export-extensions",
