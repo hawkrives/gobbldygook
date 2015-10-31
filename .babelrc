@@ -38,7 +38,6 @@
 		"transform-class-properties",
 		"transform-export-extensions",
 		"transform-runtime",
-		"undeclared-variables-check"
 	],
 	"presets": [
 		"es2015",
