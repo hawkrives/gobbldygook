@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-require('babel/register')
+require('./lib/init.js')
 require('./test-students.js').cli()
