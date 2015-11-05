@@ -1,4 +1,5 @@
 import React from 'react'
+import {render} from 'react-dom'
 import Router, {Route, DefaultRoute, Redirect} from 'react-router'
 
 import Gobbldygook from '../screens/gobbldygook'
@@ -39,7 +40,7 @@ let routes = (
 console.log('3. 2.. 1... Blast off! 🚀')
 
 Router.run(routes, (Handler, state) => {
-	React.render(<Handler
+	render(<Handler
 		routerState={state}
 	/>, document.getElementById('app'))
 })
