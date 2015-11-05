@@ -30,6 +30,12 @@
 					]
 				}
 			}
+		},
+		"production": {
+			"optional": [
+				"optimisation.react.inlineElements",
+				"optimisation.react.constantElements"
+			],
 		}
 	},
 	"plugins": [

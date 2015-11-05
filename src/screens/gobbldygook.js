@@ -3,7 +3,7 @@ import Immutable from 'immutable'
 import {RouteHandler} from 'react-router'
 import DocumentTitle from 'react-document-title'
 import {DragDropContext} from 'react-dnd'
-import HTML5Backend from 'react-dnd/modules/backends/HTML5'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 import studentStore, {REFRESH_AREAS, REFRESH_COURSES} from '../flux/student-store'
 import Loading from '../components/loading'

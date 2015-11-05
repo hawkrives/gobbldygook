@@ -1,4 +1,5 @@
 import React from 'react'
+import {render} from 'react-dom'
 import Notifications from '../screens/notifications'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
@@ -6,9 +7,9 @@ import gobbldygookApp from '../ducks/reducer'
 
 const store = createStore(gobbldygookApp)
 
-React.render(
+render(
 	<Provider store={store}>
-		{() => <Notifications />}
+		<Notifications />
 	</Provider>,
 	document.getElementById('notifications')
 )

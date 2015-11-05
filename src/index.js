@@ -2,9 +2,6 @@ import './start-things/promises'
 
 import 'isomorphic-fetch'
 
-import React from 'react'
-React.initializeTouchEvents(true)
-
 import './index.scss'
 
 import './start-things/bind-keys'
