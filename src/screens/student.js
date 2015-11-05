@@ -42,10 +42,13 @@ export default class Student extends Component {
 			// console.info('student\'s student: ', student.toJS())
 			window.stu = student
 			this.setState({student})
-			student.courses.then(courses => this.setState({
-				courses: Immutable.List(courses),
-				coursesLoaded: true,
-			}))
+			student.courses.then(courses => {
+				this.setState({
+					courses: Immutable.List(courses),
+					coursesLoaded: true,
+				})
+				return null
+			})
 
 			const customAreas = student.studies
 				.filter(study => study.isCustom)
@@ -56,6 +59,7 @@ export default class Student extends Component {
 				this.setState({
 					allAreas: nextProps.allAreas.concat(customAreas),
 				})
+				return null
 			})
 		}
 		else {
