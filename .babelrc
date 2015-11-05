@@ -31,14 +31,52 @@
 			// }
 		}
 	},
+	// "presets": [
+	// 	"es2015",
+	// 	"react",
+	// 	"stage-2",
+	// 	"stage-1",
+	// ],
 	"plugins": [
+		// Extra syntax features
 		"syntax-async-functions",
+		"syntax-class-properties",
+		"syntax-flow",
+		"syntax-jsx",
+		"syntax-trailing-function-commas",
+
+		// Future proposals
 		"transform-class-properties",
+		"transform-async-to-generator",
+		"transform-es2015-classes",
+		"transform-exponentiation-operator",
 		"transform-export-extensions",
+		"transform-object-rest-spread",
+
+		// ES2015 features
+		"transform-es2015-arrow-functions",
+		"transform-es2015-block-scoped-functions",
+		"transform-es2015-block-scoping",
+		"transform-es2015-classes",
+		"transform-es2015-computed-properties",
+		"transform-es2015-constants",
+		"transform-es2015-destructuring",
+		"transform-es2015-for-of",
+		"transform-es2015-function-name",
+		"transform-es2015-literals",
+		"transform-es2015-modules-commonjs",
+		"transform-es2015-object-super",
+		"transform-es2015-parameters",
+		"transform-es2015-shorthand-properties",
+		"transform-es2015-spread",
+		"transform-es2015-sticky-regex",
+		"transform-es2015-template-literals",
+		"transform-es2015-typeof-symbol",
+		"transform-es2015-unicode-regex",
+		"transform-regenerator",
+
+		// React features
+		"transform-flow-strip-types",
+		"transform-react-jsx",
 	],
-	"presets": [
-		"es2015",
-		"react",
-		"stage-2",
-	]
 }
