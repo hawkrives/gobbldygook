@@ -5,10 +5,6 @@
 		// if NODE_ENV (or BABEL_ENV) environment variable is not set
 		// or is equal to "development"
 		"development": {
-			"optional": [
-				"optimisation.react.inlineElements",
-				"optimisation.react.constantElements"
-			],
 			"plugins": [
 				// Include react-display-name *before* react-transform
 				// if you’re using React.createClass()
@@ -34,6 +30,12 @@
 					]
 				}
 			}
+		},
+		"production": {
+			"optional": [
+				"optimisation.react.inlineElements",
+				"optimisation.react.constantElements"
+			],
 		}
 	},
 	"plugins": [
