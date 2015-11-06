@@ -136,7 +136,7 @@ var config = {
 			},
 			{
 				test: /\.svg$/,
-				loader: 'file-loader',
+				loader: 'svg-inline-loader',
 			},
 		],
 	},
