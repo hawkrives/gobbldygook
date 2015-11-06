@@ -3,7 +3,7 @@ type: major
 revision: 2015-16
 result:
     Foundation & Core & Level III & Electives & Chemistry &
-    at most two courses from children where { dept = BIO & level = 100 }
+    at most two courses from children where { level = 100 }
 
 Foundation:
     BIO 150
