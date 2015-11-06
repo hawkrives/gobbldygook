@@ -7,14 +7,7 @@ import './icon.scss'
 export default class Icon extends Component {
 	static propTypes = {
 		className: PropTypes.string,
-		name: function(props, propName) {
-			if (!props[propName]) {
-				return new Error('"name" is required.')
-			}
-			if (!iconsList.hasOwnProperty(props[propName])) {
-				return new Error(`"${propName}" is an invalid icon name.`)
-			}
-		},
+		name: PropTypes.string.isRequired,
 		style: PropTypes.object,
 		type: PropTypes.oneOf(['block', 'inline']).isRequired,
 	}
