@@ -112,7 +112,7 @@ var config = {
 				loader: 'url-loader?limit=' + urlLoaderLimit,
 			},
 			{
-				test: /\.(svg)/,
+				test: /\.svg$/,
 				loader: 'file-loader',
 			},
 		],
