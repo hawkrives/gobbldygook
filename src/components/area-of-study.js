@@ -84,7 +84,7 @@ export default class AreaOfStudy extends Component {
 					<span className='icons'>
 						{this.props.showCloseButton &&
 						<Button className='area--remove-button' onClick={this.startRemovalConfirmation}>
-							<Icon name='ionicon-close' />
+							<Icon name='close' />
 						</Button>}
 						{/*this.props.showEditButton &&
 						<Button className='area--edit-button'>
@@ -96,10 +96,10 @@ export default class AreaOfStudy extends Component {
 									revision: this.props.revision,
 								}}
 								onClick={ev => ev.stopPropagation()}>
-								<Icon name='ionicon-edit' />
+								<Icon name='edit' />
 							</Link>
 						</Button>*/}
-						<Icon className='area--open-indicator' name={this.state.open ? 'ionicon-chevron-up' : 'ionicon-chevron-down'} />
+						<Icon className='area--open-indicator' name={this.state.open ? 'chevron-up' : 'chevron-down'} />
 					</span>
 				</div>
 				<ProgressBar

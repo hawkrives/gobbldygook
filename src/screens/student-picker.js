@@ -69,24 +69,24 @@ export default class StudentPicker extends Component {
 					<Toolbar className='student-list-buttons'>
 						<Button className='student-list--button'
 							onClick={() => this.setState({sortBy: this.state.sortBy === 'modified' ? 'name' : 'modified'})}>
-							<Icon name='ionicon-funnel' type='inline' />{' '}
+							<Icon name='funnel' type='inline' />{' '}
 							Sort by: {this.state.sortBy}
 						</Button>
 
 						<Button className='student-list--button'>
-							<Icon name='ionicon-folder' type='inline' />{' '}
+							<Icon name='folder' type='inline' />{' '}
 							Group by: {'nothing'}
 						</Button>
 
 						<Button className='student-list--button'
 							onClick={() => this.setState({isEditing: !this.state.isEditing})}>
-							<Icon name='ionicon-navicon' type='inline' />{' '}
+							<Icon name='navicon' type='inline' />{' '}
 							Edit List
 						</Button>
 
 						<Button className='student-list--button'
 							onClick={studentActions.initStudent}>
-							<Icon name='ionicon-plus' type='inline' />{' '}
+							<Icon name='plus' type='inline' />{' '}
 							New Student
 						</Button>
 					</Toolbar>
