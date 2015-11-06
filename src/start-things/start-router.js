@@ -3,7 +3,7 @@ import {render} from 'react-dom'
 import Router, {Route, DefaultRoute, Redirect} from 'react-router'
 
 import Gobbldygook from '../screens/gobbldygook'
-import AreaEditor from '../screens/area-editor'
+// import AreaEditor from '../screens/area-editor'
 import CourseTable from '../screens/course-table'
 import CreateStudent from '../screens/create-student'
 import DownloadStudent from '../screens/download-student'
@@ -26,8 +26,8 @@ let routes = (
 		<Redirect path='s/:id' to='s/:id/' />
 		<Route handler={Student} name='student' path='s/:id/'>
 			<DefaultRoute handler={CourseTable} />
-			<Route handler={AreaEditor} name='area-editor' path='edit-area' />
-			<Redirect path='edit-area/' to='edit-area' />
+			{/*<Route handler={AreaEditor} name='area-editor' path='edit-area' />*/}
+			{/*<Redirect path='edit-area/' to='edit-area' />*/}
 			<Route handler={NewStudentWizard} name='wizard' path='wizard/' />
 			<Route handler={SemesterDetail} name='semester' path='semester/:year/:semester/' />
 			<Redirect path='semester/:year/:semester' to='semester/:year/:semester/' />
