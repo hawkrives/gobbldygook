@@ -28,11 +28,16 @@ module.exports = function(config) {
 			noInfo: true,
 		},
 
+		reporters: [
+			'quiet',
+		],
+
 		plugins: [
 			require('karma-chrome-launcher'),
 			require('karma-firefox-launcher'),
 			require('karma-mocha'),
 			require('karma-webpack'),
+			require('karma-quiet-reporter'),
 		],
 	})
 }
