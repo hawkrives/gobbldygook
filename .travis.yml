@@ -28,6 +28,14 @@ node_js:
   - stable
 
 
+# Be sure to install npm@3 before calling "npm install"
+before_install:
+  - npm install -g npm@3
+
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
 script:
   - npm run lint
   - npm run build:areas
@@ -36,13 +44,3 @@ script:
   - npm run build:ci
 
 after_success: npm run coveralls
-
-
-# Be sure to install npm@3 before calling "npm install"
-before_install:
-  - npm install -g npm@3
-
-
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
