@@ -41,20 +41,20 @@ script:
   - npm run lint
   - echo -en 'travis_fold:end:script.1\\r'
 
-  - echo 'Building areas…' && echo -en 'travis_fold:start:script.1\\r'
+  - echo 'Building areas…' && echo -en 'travis_fold:start:script.2\\r'
   - npm run build:areas
-  - echo -en 'travis_fold:end:script.1\\r'
+  - echo -en 'travis_fold:end:script.2\\r'
 
-  - echo 'Testing students…' && echo -en 'travis_fold:start:script.1\\r'
+  - echo 'Testing students…' && echo -en 'travis_fold:start:script.3\\r'
   - npm run test:students
-  - echo -en 'travis_fold:end:script.1\\r'
+  - echo -en 'travis_fold:end:script.3\\r'
 
-  - echo 'Testing Karma…' && echo -en 'travis_fold:start:script.1\\r'
+  - echo 'Testing Karma…' && echo -en 'travis_fold:start:script.4\\r'
   - npm run karma:ci
-  - echo -en 'travis_fold:end:script.1\\r'
+  - echo -en 'travis_fold:end:script.4\\r'
 
-  - echo 'Building…' && echo -en 'travis_fold:start:script.1\\r'
+  - echo 'Building…' && echo -en 'travis_fold:start:script.5\\r'
   - npm run build:ci
-  - echo -en 'travis_fold:end:script.1\\r'
+  - echo -en 'travis_fold:end:script.5\\r'
 
 after_success: npm run coveralls
