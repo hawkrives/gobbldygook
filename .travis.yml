@@ -37,10 +37,24 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 script:
+  - echo 'Linting…' && echo -en 'travis_fold:start:script.1\\r'
   - npm run lint
+  - echo -en 'travis_fold:end:script.1\\r'
+
+  - echo 'Building areas…' && echo -en 'travis_fold:start:script.1\\r'
   - npm run build:areas
+  - echo -en 'travis_fold:end:script.1\\r'
+
+  - echo 'Testing students…' && echo -en 'travis_fold:start:script.1\\r'
   - npm run test:students
+  - echo -en 'travis_fold:end:script.1\\r'
+
+  - echo 'Testing Karma…' && echo -en 'travis_fold:start:script.1\\r'
   - npm run karma:ci
+  - echo -en 'travis_fold:end:script.1\\r'
+
+  - echo 'Building…' && echo -en 'travis_fold:start:script.1\\r'
   - npm run build:ci
+  - echo -en 'travis_fold:end:script.1\\r'
 
 after_success: npm run coveralls
