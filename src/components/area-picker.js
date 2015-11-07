@@ -35,7 +35,7 @@ export default class AreaPicker extends Component {
 			.filter(area => fuzzysearch(this.state.filter, area.name.toLowerCase()))
 			.map((area, i) =>
 				<div key={area.name + i} className='area--choice'>
-					{area.name}
+					{`${area.name} [${area.revision}]`}
 					<Button className='toggle-area' type='flat'
 						onClick={ev => this.props.addArea({ev, area})}>
 						Add
