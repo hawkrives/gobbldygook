@@ -43,9 +43,9 @@ describe('filterByWhereClause', () => {
 				{
 					$type: 'qualification',
 					$key: 'year',
-					$operator: '$lte',
+					$operator: '$gte',
 					$value: {
-						$name: 'max',
+						$name: 'min',
 						$prop: 'year',
 						$type: 'function',
 						$where: {
@@ -61,9 +61,9 @@ describe('filterByWhereClause', () => {
 
 		const courses = [
 			{department: ['ART', 'ASIAN'], number: 310, lab: true, year: 2012},
-			{department: ['ASIAN'], number: 155, gereqs: ['EIN'], year: 2016},
+			{department: ['ASIAN'], number: 155, gereqs: ['EIN'], year: 2012},
 			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
-			{department: ['REL'], number: 111, section: 'C', gereqs: ['BTS-T'], year: 2012},
+			{department: ['REL'], number: 111, section: 'C', gereqs: ['BTS-T'], year: 2013},
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2015},
 		]
 
