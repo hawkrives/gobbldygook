@@ -47,8 +47,8 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 				filtrations = filtrations.concat(filterByWhereClause(baseList, q, distinct))
 			})
 
-			// join together the list of lists of possibilities,
-			// then uniquify them by way of turning them into the simplified representations.
+			// uniquify the list of possibilities by way of turning them into
+			// the simplified representations.
 			return uniq(filtrations, simplifyCourse)
 		}
 
