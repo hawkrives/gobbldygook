@@ -50,11 +50,11 @@ Where
 
 
 Filter
-  = 'only' _ 'courses' _ filter:(
+  = 'only' _ distinct:IsDistinct _ 'courses' _ filter:(
       'where' _ where:Qualifier { return {$where: where} }
     / 'from' _ of:OfList { return {$of: of} }
   )
-  { return {...filter, $type: 'filter'} }
+  { return {...filter, $distinct: distinct, $type: 'filter'} }
 
 
 Occurrence
