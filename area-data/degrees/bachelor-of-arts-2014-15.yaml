@@ -35,7 +35,7 @@ Foundation:
         one course where { gereqs = AQR }
 
     Studies in Physical Movement (SPM):
-        two courses where { gereqs = SPM }
+        two distinct courses where { gereqs = SPM }
 
     result: all of ( FYW, WRI, FOL, ORC, AQR, SPM )
 
