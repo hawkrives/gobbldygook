@@ -53,11 +53,6 @@ describe('Student', () => {
 		expect(result).to.be.ok
 	})
 
-	it('returns a promise for data', () => {
-		const stu = new Student(demoStudent)
-		expect(stu.data().then).to.exist
-	})
-
 	// fabrications
 	it('supports adding fabrications', () => {
 		const stu = new Student(demoStudent)
