@@ -632,8 +632,8 @@ describe('parse hanson-string', () => {
 			})
 
 			xit('value may rely on a nested qualifier', () => {})
-			it('function may include a space between the name and the paren', () => {
-				expect(parse('one course where { year = max (year) from courses where {gereqs=year} }')).to.deep.equal({
+			it('function may optionally include a space between the name and the paren', () => {
+				const expected = {
 					$type: 'where',
 					$count: {$operator: '$gte', $num: 1},
 					$where: {
@@ -652,30 +652,13 @@ describe('parse hanson-string', () => {
 							},
 						},
 					},
-				})
+					$distinct: false,
+				}
+
+				expect(parse('one course where { year = max (year) from courses where {gereqs=year} }')).to.deep.equal(expected)
+				expect(parse('one course where { year = max(year) from courses where {gereqs=year} }')).to.deep.equal(expected)
 			})
-			it('function may not include a space between the name and the paren', () => {
-				expect(parse('one course where { year = max(year) from courses where {gereqs=year} }')).to.deep.equal({
-					$type: 'where',
-					$count: {$operator: '$gte', $num: 1},
-					$where: {
-						$type: 'qualification',
-						$key: 'year',
-						$operator: '$eq',
-						$value: {
-							$name: 'max',
-							$prop: 'year',
-							$type: 'function',
-							$where: {
-								$type: 'qualification',
-								$key: 'gereqs',
-								$operator: '$eq',
-								$value: 'year',
-							},
-						},
-					},
-				})
-			})
+
 			describe('value may be compared by', () => {
 				it('= (single equals)', () => {
 					expect(parse('one course where {a = b}')).to
