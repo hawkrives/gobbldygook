@@ -74,26 +74,28 @@ export function filterByQualification(list, qualification, fullList) {
 	const value = qualification.$value
 
 	if (isPlainObject(value)) {
-		if (value.$type === 'function') {
+		if (value.$type === 'boolean') {
+			if (!value.hasOwnProperty('$or') && !value.hasOwnProperty('$and')) {
+				throw new TypeError(`compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify(value)}`)
+			}
+		}
+		else if (value.$type === 'function') {
 			const func = qualificationFunctionLookup[value.$name]
 
 			if (!func) {
-				throw new ReferenceError(`filterByQualification(): ${value.$name} is not a valid function to call.`)
+				throw new ReferenceError(`filterByQualification(): ${value.$name} is not a valid function name.`)
 			}
 
 			const completeList = fullList || list
 			const filtered = filterByWhereClause(completeList, value.$where)
 			const items = pluck(filtered, value.$prop)
 			const computed = func(items)
+
 			// console.log('looked at', completeList)
 			// console.log('reduced to', filtered)
 			// console.log('came up with', computed)
+
 			value['$computed-value'] = computed
-		}
-		else if (value.$type === 'boolean') {
-			if (!(value.hasOwnProperty('$or') || value.hasOwnProperty('$and'))) {
-				throw new TypeError(`compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify(value)}`)
-			}
 		}
 		else {
 			throw new TypeError(`filterByQualification(): ${value.$type} is not a valid type for a query.`)

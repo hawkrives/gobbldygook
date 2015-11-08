@@ -342,7 +342,11 @@ export function computeWhere({expr, courses}) {
 	const filtered = filterByWhereClause(courses, expr.$where)
 
 	return {
-		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: filtered.length, needs: expr.$count.$num}),
+		computedResult: computeCountWithOperator({
+			comparator: expr.$count.$operator,
+			has: filtered.length,
+			needs: expr.$count.$num,
+		}),
 		matches: filtered,
 		counted: filtered.length,
 	}
