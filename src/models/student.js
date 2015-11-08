@@ -243,7 +243,7 @@ export default class Student extends StudentRecord {
 
 		return Promise.all(promisesForCourses)
 			.then(courses => uniq(flatten(courses), course => course.clbid))
-			.catch(err => console.log(err))
+			.catch(err => console.error(err))
 	}
 
 
