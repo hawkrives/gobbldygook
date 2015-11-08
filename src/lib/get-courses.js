@@ -26,9 +26,10 @@ export default function getCourses(clbids, {year, semester}={}) {
 
 	return Promise.all(map(clbids, getCourse))
 		.then(courses => map(courses, course => {
-			return course.error
+			if (!course || course.error) {
 				// embed the year and semester that it came from in the case of an error
-				? {...course, year, semester}
-				: course
+				return {...course, year, semester}
+			}
+			return course
 		}))
 }
