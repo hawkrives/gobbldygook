@@ -22,7 +22,7 @@ async function checkStudentGraduatability(student) {
 		.map(area => checkStudentAgainstArea(student, area))
 		.toArray()
 
-	const areas = await* areaPromises
+	const areas = await Promise.all(areaPromises)
 
 	const goodAreas = filter(areas, {computed: true})
 	const allAreasPass = (size(goodAreas) === size(areas))
