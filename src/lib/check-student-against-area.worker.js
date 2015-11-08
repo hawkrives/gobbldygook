@@ -1,3 +1,5 @@
+/* global WorkerGlobalScope */
+
 import zipObject from 'lodash/array/zipObject'
 import pairs from 'lodash/object/pairs'
 import map from 'lodash/collection/map'
