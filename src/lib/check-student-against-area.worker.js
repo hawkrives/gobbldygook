@@ -54,14 +54,19 @@ async function checkStudentAgainstArea(studentData, area) {
 	}
 }
 
-self.addEventListener('message', ({data}) => {
-	const [id, student, area] = data
-	// console.log('[check-student] received message:', id, student, area)
+export default checkStudentAgainstArea
 
-	checkStudentAgainstArea(student, area)
-		.then(result => self.postMessage([id, 'result', result]))
-		.catch(err => {
-			console.error(`[check-student(${id})]`, err)
-			self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
-		})
-})
+if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
+	self.addEventListener('message', ({data}) => {
+		const [id, student, area] = data
+		// console.log('[check-student] received message:', id, student, area)
+
+		checkStudentAgainstArea(student, area)
+			.then(result => self.postMessage([id, 'result', result]))
+			.catch(err => {
+				console.error(`[check-student(${id})]`, err)
+				self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
+			})
+	})
+}
+
