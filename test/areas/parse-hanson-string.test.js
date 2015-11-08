@@ -605,6 +605,9 @@ describe('parse hanson-string', () => {
 			it('value may include numbers', () => {
 				expect(() => parse('one course where {a = 1}')).not.to.throw()
 			})
+			it('may require distinct course', () => {
+				expect(() => parse('two distinct courses where {a = 1}')).not.to.throw()
+			})
 			it('if value is an integer, it is coerced to an integer', () => {
 				expect(parse('one course where {a = 1}')).to.deep.equal({
 					$count: {$num: 1, $operator: '$gte'},
@@ -615,6 +618,7 @@ describe('parse hanson-string', () => {
 						$type: 'qualification',
 						$value: 1,
 					},
+					$distinct: false,
 				})
 			})
 			it('value may include hyphens', () => {

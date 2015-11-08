@@ -10,7 +10,7 @@ import pluck from 'lodash/collection/pluck'
 import simplifyCourse from './simplify-course'
 import uniq from 'lodash/array/uniq'
 
-export default function filterByWhereClause(baseList, clause, fullList) {
+export default function filterByWhereClause(baseList, clause, distinct, fullList) {
 	// When filtering by an and-clause, we need access to both the
 	// entire list of courses, and the result of the prior iteration.
 	// To simplify future invocations, we default to `fullList = list`
@@ -23,7 +23,7 @@ export default function filterByWhereClause(baseList, clause, fullList) {
 
 	// This function always reduces down to a call to filterByQualification
 	if (clause.$type === 'qualification') {
-		return filterByQualification(baseList, clause, fullList)
+		return filterByQualification(baseList, clause, distinct, fullList)
 	}
 
 	// either an and- or or-clause.
@@ -34,7 +34,7 @@ export default function filterByWhereClause(baseList, clause, fullList) {
 		if (has(clause, '$and')) {
 			let filtered = baseList
 			forEach(clause.$and, q => {
-				filtered = filterByWhereClause(filtered, q, fullList)
+				filtered = filterByWhereClause(filtered, q, distinct, fullList)
 			})
 			return filtered
 		}
@@ -44,7 +44,7 @@ export default function filterByWhereClause(baseList, clause, fullList) {
 		else if (has(clause, '$or')) {
 			let filtrations = []
 			forEach(clause.$or, q => {
-				filtrations = filtrations.concat(filterByWhereClause(baseList, q))
+				filtrations = filtrations.concat(filterByWhereClause(baseList, q, distinct))
 			})
 
 			// join together the list of lists of possibilities,
@@ -69,7 +69,7 @@ const qualificationFunctionLookup = {
 	min: min,
 }
 
-export function filterByQualification(list, qualification, fullList) {
+export function filterByQualification(list, qualification, distinct, fullList) {
 	assertKeys(qualification, '$key', '$operator', '$value')
 	const value = qualification.$value
 
@@ -102,8 +102,12 @@ export function filterByQualification(list, qualification, fullList) {
 		}
 	}
 
-	const filtered = filter(list, course =>
+	let filtered = filter(list, course =>
 		compareCourseToQualification(course, qualification))
+
+	if (distinct) {
+		filtered = uniq(list, simplifyCourse)
+	}
 
 	return filtered
 }

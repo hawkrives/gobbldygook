@@ -40,11 +40,12 @@ OptionalS
 
 
 Where
-  = count:Counter _ 'course' OptionalS _ 'where' _ where:Qualifier
+  = count:Counter _ distinct:'distinct'? _ 'course' OptionalS _ 'where' _ where:Qualifier
   { return {
       $type: 'where',
       $count: count,
       $where: where,
+      $distinct: Boolean(distinct),
   } }
 
 

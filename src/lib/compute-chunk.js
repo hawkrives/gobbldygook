@@ -337,9 +337,9 @@ export function computeReference({expr, ctx}) {
  * @returns {boolean} - the result of the where-expression
  */
 export function computeWhere({expr, courses}) {
-	assertKeys(expr, '$where', '$count')
+	assertKeys(expr, '$where', '$count', '$distinct')
 
-	const filtered = filterByWhereClause(courses, expr.$where)
+	const filtered = filterByWhereClause(courses, expr.$where, expr.$distinct)
 
 	return {
 		computedResult: computeCountWithOperator({

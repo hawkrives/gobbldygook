@@ -509,6 +509,7 @@ describe('computeBoolean', () => {
 						$type: 'qualification',
 						$value: 'WRI',
 					},
+					$distinct: false,
 				},
 				{
 					$count: {$operator: '$gte', $num: 1},
@@ -519,6 +520,7 @@ describe('computeBoolean', () => {
 						$type: 'qualification',
 						$value: 'BTS-T',
 					},
+					$distinct: false,
 				},
 			],
 			$type: 'boolean',
@@ -543,6 +545,7 @@ describe('computeBoolean', () => {
 						$type: 'qualification',
 						$value: 'WRI',
 					},
+					$distinct: false,
 					_counted: 1,
 					_matches: [
 						{department: ['CSCI'], number: 125, gereqs: ['WRI']},
@@ -558,6 +561,7 @@ describe('computeBoolean', () => {
 						$type: 'qualification',
 						$value: 'BTS-T',
 					},
+					$distinct: false,
 					_counted: 1,
 					_matches: [
 						{department: ['ART'], number: 102, gereqs: ['BTS-T']},

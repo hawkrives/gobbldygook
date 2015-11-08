@@ -18,7 +18,7 @@ describe('filterByWhereClause', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2015},
 		]
 
-		expect(filterByWhereClause(courses, clause)).to.deep.equal([
+		expect(filterByWhereClause(courses, clause, false)).to.deep.equal([
 			{department: ['ASIAN'], number: 155, gereqs: ['EIN'], year: 2016},
 			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
 		])
@@ -27,7 +27,7 @@ describe('filterByWhereClause', () => {
 	it('throws if confronted with an unknown type', () => {
 		const clause = {$type: 'bad'}
 
-		expect(() => filterByWhereClause([], clause)).to.throw(TypeError)
+		expect(() => filterByWhereClause([], clause, false)).to.throw(TypeError)
 	})
 
 	it('filters an array of courses by an and-joined where-clause', () => {
@@ -67,7 +67,7 @@ describe('filterByWhereClause', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2015},
 		]
 
-		expect(filterByWhereClause(courses, clause)).to.deep.equal([
+		expect(filterByWhereClause(courses, clause, false)).to.deep.equal([
 			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
 		])
 	})
@@ -89,7 +89,7 @@ describe('filterByWhereClause', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2015},
 		]
 
-		expect(filterByWhereClause(courses, clause)).to.deep.equal([
+		expect(filterByWhereClause(courses, clause, false)).to.deep.equal([
 			{department: ['ASIAN'], number: 155, gereqs: ['EIN'], year: 2016},
 			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
 			{department: ['ART', 'ASIAN'], number: 310, lab: true, year: 2012},
@@ -107,6 +107,22 @@ describe('filterByWhereClause', () => {
 			{department: ['ART', 'ASIAN'], number: 310, lab: true, year: 2012},
 		]
 
-		expect(() => filterByWhereClause(courses, clause)).to.throw(TypeError)
+		expect(() => filterByWhereClause(courses, clause, false)).to.throw(TypeError)
+	})
+
+	it('can require that the courses be distinct', () => {
+		const clause = {
+			$type: 'qualification',
+			$key: 'gereqs',
+			$operator: '$eq',
+			$value: 'SPM',
+		}
+
+		const courses = [
+			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM']},
+			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
+		]
+
+		expect(filterByWhereClause(courses, clause, true)).to.deep.equal([courses[0]])
 	})
 })
