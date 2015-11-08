@@ -4091,6 +4091,9 @@ module.exports = (function() {
 		}
 
 		function fetchDept(dept) {
+			if (typeof globalLastDept !== 'string') {
+				throw new Error('You must define a department for the first course in a result!');
+			}
 			return globalLastDept;
 		}
 		var flatten = require('lodash/array/flatten');
