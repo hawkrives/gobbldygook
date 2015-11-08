@@ -19,7 +19,7 @@ export default class Notification extends Component {
 		const progressBar = (this.props.type === 'progress') && (
 			<div className='progress-container'>
 				<ProgressBar value={this.props.value} max={this.props.max} />
-				<output>{round((this.props.value / this.props.max) * 100, 2)}%</output>
+				<output>{round((this.props.value / this.props.max) * 100, 0)}%</output>
 			</div>
 		)
 
