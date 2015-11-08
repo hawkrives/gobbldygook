@@ -2,6 +2,7 @@ import {parse} from '../src/lib/parse-hanson-string'
 import nom from 'nomnom'
 import stringify from 'json-stable-stringify'
 import yaml from 'js-yaml'
+import util from 'util'
 
 export function cli() {
 	const args = nom
@@ -19,6 +20,6 @@ export function cli() {
 		console.log(yaml.safeDump(string))
 	}
 	else {
-		console.dir(string)
+		console.log(util.inspect(string, {depth: null}))
 	}
 }
