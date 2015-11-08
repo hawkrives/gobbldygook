@@ -173,6 +173,7 @@ you may refer to it as `Biblical Study (BTS-B)`, `Biblical Study`, or `BTS-B`.
 
 When you need more power, you may reach for where-expressions, modifiers, and filters. With that said: *please* try and only use these in a last resort. Most majors can be expressed with only courses, boolean- and of-expressions, and requirement references.
 
+
 ### `where`-expressions
 
 A where-expression is composed of two parts: a counter and a qualifier.
@@ -189,7 +190,7 @@ The key/value pair must be separated by an operator. Valid operators are:
 - `>`, "less-than"
 - `>=`, "greater-than-or-equal-to"
 
-**Warning:** The logic of any operator other than `=` on value types other than numbers has not been defined nor tested.
+**Warning:** The logic of any operator other than `=`, on value types other than numbers, has not been defined nor tested.
 
 Qualifications may be separated by the boolean operator "and" (`&`) and/or the operator "or" (`|`). They may be grouped by parentheses. Normal boolean logic applies.
 
@@ -211,6 +212,8 @@ In extreme cases, the value may be expressed as the result of a function run ove
 This looks like `{ year <= max(year) from courses where { gereqs = BTS-T } }`
 
 *(TODO: make clearer.)* The value, in this case, is `max`, which is the name of a function to run on the values of the specified property from the list of courses which match the nested qualification.
+
+You may also require that the resulting courses be "distinct" courses; that is, that they are not just different offerings of the same course.
 
 
 ### The `filter` key
@@ -234,7 +237,7 @@ filter: only courses from ( CSCI 111, 112, 123, 151, 167 )
 Now `result` can only know about those five courses.
 
 
-### modifiers
+### Modifiers
 
 Modifiers primarily exist to count things. They can count things from four different sources: *all* child requirements ("from children"), *some* child requirements ("from (Child, Child 2)"), the `filter` key ("from filter"), or from a new where-expression ("from courses where {}").
 
@@ -310,15 +313,3 @@ Congratulations for having read this far! I think that's all of the concepts. So
     - subsequent lines of courses in the same department should be indented one space past the department name
     - a line break after the opening parenthesis
     - the closing parenthesis on the same line as the last course
-
-
-## A History of the Hanson Format
-### v1
-### v2
-### v3
-### v4
-### v4.1
-### v4.2
-### v4.3
-### v4.4
-### v4.5
