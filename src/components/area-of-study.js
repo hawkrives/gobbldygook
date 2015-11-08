@@ -11,6 +11,7 @@ import './area-of-study.scss'
 
 export default class AreaOfStudy extends Component {
 	static propTypes = {
+		_checked: PropTypes.bool.isRequired,
 		_error: PropTypes.string,
 		_progress: PropTypes.shape({
 			at: PropTypes.number.isRequired,
@@ -40,6 +41,7 @@ export default class AreaOfStudy extends Component {
 			of: 1,
 		},
 		_error: '',
+		_checked: false,
 		name: 'Unknown Area',
 		type: '???',
 		revision: '0000-00',
@@ -103,7 +105,9 @@ export default class AreaOfStudy extends Component {
 						<Icon className='area--open-indicator' name={this.state.open ? 'ionicon-chevron-up' : 'ionicon-chevron-down'} />
 					</span>
 				</div>
-				<ProgressBar className={cx('area--progress', {error: this.props._error})} colorful={true}
+				<ProgressBar
+					className={cx('area--progress', {error: this.props._error})}
+					colorful={true}
 					value={this.props._progress.at}
 					max={this.props._progress.of}
 				/>
@@ -120,18 +124,25 @@ export default class AreaOfStudy extends Component {
 			</div>
 		)
 
-		const contents = this.props._error
-			? <p className='area--error'>{this.props._error} {':('}</p>
-			: <Requirement {...this.props}
+		let contents = null
+		if (this.props._error) {
+			contents = <p className='area--error'>{this.props._error} {':('}</p>
+		}
+		else if (!this.props._checked) {
+			contents = <p className='area--loading'>Loading…</p>
+		}
+		else {
+			contents = (<Requirement {...this.props}
 				topLevel
 				addOverride={this.props.addOverride}
 				toggleOverride={this.props.toggleOverride}
 				removeOverride={this.props.removeOverride}
 				path={[this.props.type, this.props.name]}
-			/>
+			/>)
+		}
 
 		return (
-			<details className={cx('area', {errored: this.props._error})}>
+			<details className={cx('area', {errored: this.props._error}, {loading: !this.props._checked})}>
 				<summary className='area--summary' onClick={() => this.setState(state => ({open: !state.open}))}>
 					{this.state.confirmRemoval
 						? removalConfirmation

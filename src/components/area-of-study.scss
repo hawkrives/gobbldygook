@@ -10,6 +10,11 @@
 		background-color: color('red', '50');
 		color: color('red', '900');
 	}
+
+	&.loading:not(.errored) {
+		opacity: 0.75;
+		color: gray;
+	}
 }
 
 .area--error {
