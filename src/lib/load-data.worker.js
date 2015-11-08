@@ -1,5 +1,7 @@
 import {status, json, text} from './fetch-helpers'
 
+import stringifyError from './stringify-error'
+
 import debug from 'debug'
 const log = debug('gobbldygook:data')
 
@@ -256,10 +258,9 @@ function loadInfoFile(url, infoFileBase) {
 		})
 }
 
-self.onmessage = msg => {
-	const {data} = msg
-	console.log('Recieved message from main script', msg)
+self.addEventListener('message', ({data}) => {
+	console.log('[load-data] received message:', data)
 	loadInfoFile(...data)
 		.then(() => self.postMessage(true))
-		.catch(err => self.postMessage(err))
-}
+		.catch(err => self.postMessage(JSON.parse(stringifyError(err))))
+})

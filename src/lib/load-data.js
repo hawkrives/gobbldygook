@@ -3,8 +3,8 @@ import {status, text} from './fetch-helpers'
 
 import Worker from './load-data.worker.js'
 const worker = new Worker()
-worker.onmessage = msg => console.log('Recieved message from load-data:', msg)
-worker.onerror = msg => console.log('Recieved error from load-data:', msg)
+// worker.onmessage = msg => console.log('[main] received message from load-data worker:', msg)
+worker.onerror = msg => console.log('[main] received error from load-data worker:', msg)
 worker.addEventListener('message', ({data}) => {
 	if (data && data[0] === 'dispatch') {
 		typeof window !== 'undefined' && window.dispatch && window.dispatch(data[1])
