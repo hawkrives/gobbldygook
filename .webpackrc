@@ -101,7 +101,7 @@ var config = {
 			{
 				test: /\.json$/,
 				// an array, so that it can be added to later
-				loaders: ['json'],
+				loaders: ['json-loader'],
 			},
 			{
 				test: /\.(otf|eot|ttf|woff2?)$/,
