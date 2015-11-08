@@ -99,6 +99,12 @@ var config = {
 				loaders: ['babel-loader'],
 			},
 			{
+				test: /\.worker.js$/,
+				exclude: /node_modules/,
+				// an array, so that it can be added to later
+				loaders: ['worker-loader', 'babel-loader'],
+			},
+			{
 				test: /\.json$/,
 				// an array, so that it can be added to later
 				loaders: ['json-loader'],
