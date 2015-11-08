@@ -43,12 +43,12 @@ OptionalS
 
 
 Where
-  = count:Counter _ distinct:'distinct'? _ 'course' OptionalS _ 'where' _ where:Qualifier
+  = count:Counter _ distinct:IsDistinct _ 'course' OptionalS _ 'where' _ where:Qualifier
   { return {
       $type: 'where',
       $count: count,
       $where: where,
-      $distinct: Boolean(distinct),
+      $distinct: distinct,
   } }
 
 
@@ -185,7 +185,7 @@ EnglishInteger
       / 'ten'
     )
     {
-      if (num === 'zero')       { return 0 }
+           if (num === 'zero')  { return 0 }
       else if (num === 'one')   { return 1 }
       else if (num === 'two')   { return 2 }
       else if (num === 'three') { return 3 }
@@ -461,3 +461,8 @@ OpenParen
 
 CloseParen
   = ')'
+
+
+IsDistinct
+  = d:'distinct'?
+  { return Boolean(d) }
