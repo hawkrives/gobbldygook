@@ -1,23 +1,11 @@
-import evaluate from '../lib/evaluate'
-import findLeafRequirements from '../lib/find-leaf-requirements'
+import {v4 as uuid} from 'node-uuid'
 
-import zipObject from 'lodash/array/zipObject'
-import pairs from 'lodash/object/pairs'
-import map from 'lodash/collection/map'
-import filter from 'lodash/collection/filter'
+import Worker from './check-student-against-area.worker.js'
+const worker = new Worker()
+// worker.onmessage = msg => console.log('[main] received message from check-student worker:', msg)
+worker.onerror = msg => console.log('[main] received error from check-student worker:', msg)
 
-function alterCourse(course) {
-	return zipObject(map(pairs(course), ([key, value]) => {
-		if (key === 'depts') {
-			key = 'department'
-		}
-		else if (key === 'num') {
-			key = 'number'
-		}
-		return [key, value]
-	}))
-}
-
+import {getStudentData} from '../models/student'
 
 /**
  * Checks a student object against an area of study.
@@ -28,37 +16,38 @@ function alterCourse(course) {
  * @promise ResultsPromise
  * @fulfill {Object} - The details of the area check.
  */
-export default async function checkStudentAgainstArea(student, area) {
-	const studentData = await student.data()
-	const areaData = await area.data
+export default function checkStudentAgainstArea(student, area) {
+	return new Promise((resolve, reject) => {
+		const sourceId = uuid()
 
-	const baseAreaResults = {name: area.name, type: area.type, id: area.id}
-	if (areaData._error) {
-		console.error('checkStudentAgainstArea():', areaData._error, baseAreaResults)
-		return {...baseAreaResults, _error: areaData._error}
-	}
+		function onMessage({data}) {
+			const [resultId, type, contents] = data
 
-	studentData.courses = map(studentData.courses, alterCourse)
+			if (resultId === sourceId) {
+				worker.removeEventListener('message', onMessage)
 
-	let details = {}
-	try {
-		details = await evaluate(studentData, areaData)
-	}
-	catch (err) {
-		console.error('checkStudentAgainstArea():', err)
-		return {...baseAreaResults, _error: err.message}
-	}
+				if (type === 'result') {
+					resolve(contents)
+				}
+				else if (type === 'error') {
+					reject(contents)
+				}
+			}
+		}
 
-	const finalReqs = findLeafRequirements(details)
-	const maxProgress = finalReqs.length
-	const currentProgress = filter(finalReqs, {computed: true}).length
+		worker.addEventListener('message', onMessage)
 
-	return {
-		...baseAreaResults,
-		...details,
-		_progress: {
-			at: currentProgress,
-			of: maxProgress,
-		},
-	}
+		area.data
+			.then(areaData => {
+				return Promise.all([
+					getStudentData(student),
+					{...area.toJS(), data: areaData},
+				])
+			})
+			.then(([student, area]) => {
+				// console.log(sourceId, student, area)
+				worker.postMessage([sourceId, student, area])
+			})
+			.catch(err => console.error(err))
+	})
 }
