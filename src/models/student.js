@@ -16,6 +16,19 @@ import randomChar from '../helpers/random-char'
 import Schedule from './schedule'
 import Study from './study'
 
+export async function getStudentData(student) {
+	const courses = await student.courses
+
+	return {
+		courses: courses,
+		creditsNeeded: student.creditsNeeded,
+		fabrications: student.fabrications.toList().toJS(),
+		graduation: student.graduation,
+		matriculation: student.matriculation,
+		overrides: student.overrides.toObject(),
+	}
+}
+
 const now = new Date()
 const StudentRecord = Immutable.Record({
 	id: null,
@@ -248,29 +261,6 @@ export default class Student extends StudentRecord {
 
 
 	// helpers
-
-	data() {
-		return Promise.all([
-			this.courses, // 0
-			this.creditsNeeded, // 1
-			this.fabrications.toList().toJS(), // 2
-			this.graduation, // 3
-			this.matriculation, // 4
-			this.overrides.toObject(), // 5
-			this.studies.toList().toJS(), // 6
-			this.graduatability, // 7, and 7
-		]).then(results => ({
-			courses: results[0],
-			creditsNeeded: results[1],
-			fabrications: results[2],
-			graduation: results[3],
-			matriculation: results[4],
-			overrides: results[5],
-			studies: results[6],
-			studyResults: results[7].details,
-			graduatability: results[7].canGraduate,
-		}))
-	}
 
 	encode() {
 		return encodeURIComponent(stringify(this))
