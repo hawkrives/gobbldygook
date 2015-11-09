@@ -3,9 +3,6 @@ import {status, json, text} from './fetch-helpers'
 
 import stringifyError from './stringify-error'
 
-import debug from 'debug'
-const log = debug('gobbldygook:data')
-
 import uniq from 'lodash/array/uniq'
 import sortBy from 'lodash/collection/sortBy'
 import flatten from 'lodash/array/flatten'
@@ -65,7 +62,7 @@ function getCacheStoreName(type) {
 }
 
 function storeCourses(item) {
-	log(`storeCourses(): ${item.path}`)
+	console.log(`storeCourses(): ${item.path}`)
 
 	let coursesToStore = map(item.data, course => {
 		course.sourcePath = item.path
@@ -75,7 +72,7 @@ function storeCourses(item) {
 	const start = present()
 	return db.store('courses').batch(coursesToStore)
 		.then(() => {
-			log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
+			console.log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
 		})
 		.catch(err => {
 			const db = err.target.db.name
@@ -94,7 +91,7 @@ function storeCourses(item) {
 }
 
 function storeArea(item) {
-	log(`storeArea(): ${item.path}`)
+	console.log(`storeArea(): ${item.path}`)
 
 	const id = item.path
 
@@ -122,7 +119,7 @@ function storeItem(item) {
 
 async function cleanPriorData(item) {
 	const {path, type} = item
-	log(`cleanPriorData(): ${path}`)
+	console.log(`cleanPriorData(): ${path}`)
 
 	let oldItems = []
 
@@ -154,7 +151,7 @@ async function cleanPriorData(item) {
 }
 
 function cacheItemHash({path, type, hash}) {
-	log(`cacheItemHash(): ${path}`)
+	console.log(`cacheItemHash(): ${path}`)
 
 	return db.store(getCacheStoreName(type)).put({id: path, path, hash})
 }
@@ -163,7 +160,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 	const {path, hash} = infoFromServer
 	const itemUrl = `/${path}?v=${hash}`
 
-	log(`updateDatabase(): ${path}`)
+	console.log(`updateDatabase(): ${path}`)
 	dispatch(startProgress(notificationId, `Loading ${type}`, {max: count}, true))
 
 	const url = infoFileBase + itemUrl
@@ -174,7 +171,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 			.then(text)
 	}
 	catch (err) {
-		console.error('Could not fetch ${url}')
+		console.warn('Could not fetch ${url}')
 		return false
 	}
 
@@ -203,7 +200,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 		throw e
 	}
 
-	log(`added ${item.path} (${item.count} ${item.type})`)
+	console.log(`added ${item.path} (${item.count} ${item.type})`)
 	dispatch(incrementProgress(notificationId))
 }
 
@@ -214,7 +211,7 @@ async function needsUpdate({type, path, hash}) {
 }
 
 async function loadDataFiles(infoFile, infoFileBase) {
-	log(`loadDataFiles(): ${infoFileBase}`)
+	console.log(`loadDataFiles(): ${infoFileBase}`)
 
 	const notificationId = infoFile.type
 	let filesToLoad = infoFile.files
@@ -242,7 +239,7 @@ async function loadDataFiles(infoFile, infoFileBase) {
 }
 
 function loadInfoFile(url, infoFileBase) {
-	log(`loadInfoFile(): ${url}`)
+	console.log(`loadInfoFile(): ${url}`)
 
 	return fetch(url)
 		.then(status)
@@ -250,7 +247,7 @@ function loadInfoFile(url, infoFileBase) {
 		.then(infoFile => loadDataFiles(infoFile, infoFileBase))
 		.catch(err => {
 			if (startsWith(err.message, 'Failed to fetch')) {
-				console.error(`loadInfoFile(): Failed to fetch ${url}`)
+				console.warn(`loadInfoFile(): Failed to fetch ${url}`)
 				return false
 			}
 			else {
