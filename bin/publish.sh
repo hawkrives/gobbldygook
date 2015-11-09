@@ -13,6 +13,8 @@ echo ""
 read -rp "New Version [major|minor|patch]: " version
 npm version "$version"
 
+npm run build
 npm publish
+npm run clean
 
 git push --follow-tags
