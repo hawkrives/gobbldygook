@@ -13,7 +13,7 @@ Foundation:
 Core:
     Algorithms: CSCI 253
     Ethics:     CSCI 263
-    Theory:     CSCI 276 | 333
+    Theory:     CSCI 276 | 333 | 336
     Systems:    CSCI 273 | 284 | 300.*.2014.2 | 300.*.2012.3
 
     result: all of ( Algorithms, Ethics, Theory, Systems )
