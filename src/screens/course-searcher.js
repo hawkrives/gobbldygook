@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import {findDOMNode} from 'react-dom'
 import cx from 'classnames'
 
 import groupBy from 'lodash/collection/groupBy'
@@ -27,7 +26,6 @@ import Icon from '../components/icon'
 import Loading from '../components/loading'
 
 import Student from '../models/student'
-import stickyfill from '../lib/init-stickyfill'
 
 import './course-searcher.scss'
 
@@ -132,15 +130,6 @@ export default class CourseSearcher extends Component {
 			sortBy: SORT_BY['Year'],
 			groupBy: GROUP_BY['Term'],
 		}
-	}
-
-	componentDidMount() {
-		stickyfill.add(findDOMNode(this))
-		findDOMNode(this.refs.searchbox).focus()
-	}
-
-	componentWillUnmount() {
-		stickyfill.remove(findDOMNode(this))
 	}
 
 	onSubmit = () => {

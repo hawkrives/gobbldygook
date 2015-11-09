@@ -4,12 +4,6 @@
 @import '../mixins/list-unstyled';
 
 .search-sidebar {
-	position: sticky;
-	top: $page-edge-padding;
-
-	height: calc(100vh - #{$page-edge-padding * 2});
-	overflow-y: scroll;
-
 	.course-group {
 		@include card;
 		padding: 0.5em 0;
