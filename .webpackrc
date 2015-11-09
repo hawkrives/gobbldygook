@@ -2,12 +2,12 @@
 /* global module */
 
 global.Promise = require('bluebird')
-
-var HtmlPlugin = require('./webpack/html-plugin')
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var pkg = require('./package.json')
-var buildFilename = require('./webpack/build-filename')
+var webpack = require('webpack')
+
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var HtmlPlugin = require('./scripts/webpack/html-plugin')
+var buildFilename = require('./scripts/webpack/build-filename')
 
 // figure out if we're running `webpack` or `webpack-dev-server`
 // we'll use this as the default for `isDev`
