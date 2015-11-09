@@ -66,18 +66,22 @@ export default class CourseExpression extends Component {
 	render() {
 		const department = this.props.department.map(shrinkDept).join('/')
 
-		const international = hasOwnKey(this.props, 'international') &&
+		const international = this.props.international &&
 			<span className='course--international'>I</span>
-		const lab = hasOwnKey(this.props, 'lab') &&
+		const lab = this.props.lab &&
 			<span className='course--lab'>L</span>
 
-		const section = hasOwnKey(this.props, 'section') &&
+		const section = this.props.section && this.props.section !== '*' &&
 			<span className='course--section'>[{this.props.section}]</span>
 
-		const year = hasOwnKey(this.props, 'year') &&
+		const year = this.props.year &&
 			<span className='course--year'>{this.props.year}</span>
-		const semester = hasOwnKey(this.props, 'semester') &&
-			<span className='course--semester'>{semesterName(this.props.semester).toUpperCase()}</span>
+		const semester = this.props.semester &&
+			<span className='course--semester'>
+				{this.props.semester === '*'
+					? 'ANY'
+					: semesterName(this.props.semester).toUpperCase()}
+			</span>
 
 		/////
 
