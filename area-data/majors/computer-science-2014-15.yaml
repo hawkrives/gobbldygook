@@ -27,6 +27,7 @@ Electives:
     Topics in Computer Science: CSCI 300
     Logic Programming: CSCI 336
     Advanced Team Project: CSCI 350
+    HiPerCiC: ID 259 & ID 259L
 
     result: two of (
         Theory of Computation,
@@ -36,7 +37,8 @@ Electives:
         Bioinformatics,
         Topics in Computer Science,
         Logic Programming,
-        Advanced Team Project )
+        Advanced Team Project,
+        HiPerCiC, )
 
 Capstone:
     CSCI 390
