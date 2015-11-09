@@ -30,6 +30,10 @@ describe('quacksLikeDeptNum', () => {
 		expect(quacksLikeDeptNum('ASIAN 220B')).to.be.true
 	})
 
+	it('handles two-letter departments', () => {
+		expect(quacksLikeDeptNum('ID 220')).to.be.true
+	})
+
 	it('cares not how many spaces are between the dept and num', () => {
 		expect(quacksLikeDeptNum('ASIAN    192')).to.be.true
 		expect(quacksLikeDeptNum('ASIAN192')).to.be.true

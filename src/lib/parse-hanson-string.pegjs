@@ -360,13 +360,13 @@ Course
 CourseDepartment
   = dept1:(c1:UppercaseLetter c2:UppercaseLetter { return c1 + c2 })
     part2:(
-        chars:UppercaseLetter+
-          { return {dept: chars.join(''), type: 'joined'} }
-      / '/' l1:UppercaseLetter l2:UppercaseLetter
+      '/' l1:UppercaseLetter l2:UppercaseLetter
           { return {dept: l1 + l2, type: 'seperate'} }
+      / chars:UppercaseLetter*
+          { return {dept: chars.join(''), type: 'joined'} }
     )
     {
-      let {type, dept: dept2} = part2
+      const {type, dept: dept2} = part2
       let department
       if (type === 'joined') {
         department = {department: [dept1 + dept2]}
