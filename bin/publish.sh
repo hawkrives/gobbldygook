@@ -7,10 +7,10 @@ git pull --rebase
 npm test
 
 echo ""
-node ./bin/version.js
+node -e "var p=require('../package.json');console.log(p.name+': '+p.version)"
 echo ""
 
-read -p "New Version [major|minor|patch]: " version
+read -rp "New Version [major|minor|patch]: " version
 npm version "$version"
 
 npm publish
