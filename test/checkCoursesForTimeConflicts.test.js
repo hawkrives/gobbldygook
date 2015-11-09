@@ -1,6 +1,7 @@
 // test/checkCoursesForTimeConflicts.test.js
-import checkCoursesForTimeConflicts from '../lib/checkCoursesForTimeConflicts'
-import convertTimeStringsToOfferings from '../lib/convertTimeStringsToOfferings'
+import {expect} from 'chai'
+import checkCoursesForTimeConflicts from '../src/checkCoursesForTimeConflicts'
+import convertTimeStringsToOfferings from '../src/convertTimeStringsToOfferings'
 
 describe('checkCoursesForTimeConflicts', () => {
 	it('checks for course time conflicts', () => {

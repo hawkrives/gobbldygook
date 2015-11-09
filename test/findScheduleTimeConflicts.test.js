@@ -1,5 +1,6 @@
 // test/findScheduleTimeConflicts.test.js
-import findScheduleTimeConflicts from '../lib/findScheduleTimeConflicts'
+import {expect} from 'chai'
+import findScheduleTimeConflicts from '../src/findScheduleTimeConflicts'
 
 describe('findScheduleTimeConflicts', () => {
 	it('finds all time conflicts in a schedule', () => {

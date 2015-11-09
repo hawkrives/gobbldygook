@@ -1,5 +1,6 @@
 // test/checkScheduleForTimeConflicts.test.js
-import checkScheduleForTimeConflicts from '../lib/checkScheduleForTimeConflicts'
+import {expect} from 'chai'
+import checkScheduleForTimeConflicts from '../src/checkScheduleForTimeConflicts'
 
 describe('checkScheduleForTimeConflicts', () => {
 	it('checks if there is a time conflict in a schedule', () => {

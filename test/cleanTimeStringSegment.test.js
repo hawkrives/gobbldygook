@@ -1,5 +1,6 @@
 // test/cleanTimeStringSegment.test.js
-import cleanTimeStringSegment from '../lib/cleanTimeStringSegment'
+import {expect} from 'chai'
+import cleanTimeStringSegment from '../src/cleanTimeStringSegment'
 
 describe('cleanTimeStringSegment', () => {
 	it('trims up a timestring segment', () => {

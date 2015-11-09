@@ -1,5 +1,6 @@
 // test/convertTimeStringsToOfferings.test.js
-import convertTimeStringsToOfferings from '../lib/convertTimeStringsToOfferings'
+import {expect} from 'chai'
+import convertTimeStringsToOfferings from '../src/convertTimeStringsToOfferings'
 
 describe('convertTimeStringsToOfferings', () => {
 	it('turns the timestrings into semi-usable objects', () => {
@@ -33,23 +34,12 @@ describe('convertTimeStringsToOfferings', () => {
 
 		let expected = [
 			{day: 'Mo', times: [{start:905, end:1000}]},
-			{day: 'Fr', times: [{start:905,  end:1000}]},
+			{day: 'Fr', times: [{start:905, end:1000}]},
 		]
 
 		let result = convertTimeStringsToOfferings(course)
 
 		expect(result).to.deep.equal(expected)
 		expect(result[0].times[0]).to.not.equal(result[1].times[0])
-	})
-
-	it('includes locations in the occurrences', () => {
-		let course = {times: ['MF 0905-1000'], locations: ['BMC 101']}
-
-		let expected = [
-			{day: 'Mo', times: [{start:905, end:1000}], location: 'BMC 101'},
-			{day: 'Fr', times: [{start:905, end:1000}], location: 'BMC 101'},
-		]
-
-		expect(convertTimeStringsToOfferings(course)).to.deep.equal(expected)
 	})
 })

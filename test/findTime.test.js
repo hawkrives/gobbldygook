@@ -1,5 +1,6 @@
 // test/findTime.test.js
-import findTime from '../lib/findTime'
+import {expect} from 'chai'
+import findTime from '../src/findTime'
 
 describe('findTime', () => {
 	it('turns the absurd time shorthand into unambiguous 24-hour time', () => {

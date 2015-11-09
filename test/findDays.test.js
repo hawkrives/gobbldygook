@@ -1,5 +1,6 @@
 // test/findDays.test.js
-import findDays from '../lib/findDays'
+import {expect} from 'chai'
+import findDays from '../src/findDays'
 
 describe('findDays', () => {
 	it('turns the day abbreviations into a list of unambiguous days', () => {
