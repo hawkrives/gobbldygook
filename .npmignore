@@ -1,6 +1,6 @@
 bin/
-lib/
 node_modules/
+src/
 test/
 
 .gitignore
