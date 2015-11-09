@@ -1,3 +1,4 @@
+import 'isomorphic-fetch'
 import {status, json, text} from './fetch-helpers'
 
 import stringifyError from './stringify-error'
