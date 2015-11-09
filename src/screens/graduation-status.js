@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import Immutable from 'immutable'
 
-import debug from 'debug'
 import includes from 'lodash/collection/includes'
 import difference from 'lodash/array/difference'
 import union from 'lodash/array/union'
@@ -19,8 +18,6 @@ import * as areaTypeConstants from '../models/area-types'
 import actions from '../flux/student-actions'
 
 import './graduation-status.scss'
-
-const log = debug('gobbldygook:component:render')
 
 export default class GraduationStatus extends Component {
 	static propTypes = {
@@ -102,7 +99,7 @@ export default class GraduationStatus extends Component {
 	}
 
 	render() {
-		log('GraduationStatus#render')
+		// console.log('GraduationStatus#render')
 		const student = this.props.student
 
 		if (!student) {

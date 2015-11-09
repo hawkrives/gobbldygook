@@ -8,7 +8,6 @@ import stringify from 'json-stable-stringify'
 import present from 'present'
 
 import {version as currentVersionString} from '../../package.json'
-import {studentChangelog as changelog} from '../lib/logger'
 import checkGraduatability from '../lib/check-student-graduatability'
 
 import randomChar from '../helpers/random-char'
@@ -98,7 +97,7 @@ export default class Student extends StudentRecord {
 
 				student.set('graduatability', checkGraduatability(student))
 
-				changelog(`it took ${present() - startTime} ms to make a student`)
+				console.log(`Student(): it took ${present() - startTime} ms to make a student`)
 
 				return student
 			})
@@ -142,7 +141,7 @@ export default class Student extends StudentRecord {
 	}
 
 	destroySchedule(scheduleId) {
-		changelog(`removing schedule ${scheduleId}`)
+		console.log(`Student.destroySchedule(): removing schedule ${scheduleId}`)
 
 		const deadSched = this.getIn(['schedules', scheduleId])
 		const scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
@@ -162,7 +161,7 @@ export default class Student extends StudentRecord {
 
 	destroyMultipleSchedules(ids) {
 		return this.withMutations(student => {
-			changelog('destroyMultipleSchedules', ids)
+			console.log('Student.destroyMultipleSchedules():', ...ids)
 			ids.forEach(id => {
 				student = student.destroySchedule(id)
 			})
@@ -171,7 +170,7 @@ export default class Student extends StudentRecord {
 	}
 
 	moveCourse(fromScheduleId, toScheduleId, clbid) {
-		changelog(`moving course ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+		console.log(`Student.moveCourse(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 		return this.withMutations(student => {
 			student = student.setIn(['schedules', fromScheduleId], student.getIn(['schedules', fromScheduleId]).removeCourse(clbid))
 			student = student.setIn(['schedules', toScheduleId], student.getIn(['schedules', toScheduleId]).addCourse(clbid))
@@ -273,7 +272,7 @@ export default class Student extends StudentRecord {
 		const oldVersion = localStorage.getItem(this.id)
 
 		if (oldVersion !== stringify(this)) {
-			changelog(`saving student ${this.name} (${this.id})`)
+			console.log(`saving student ${this.name} (${this.id})`)
 
 			const student = this.set('dateLastModified', new Date())
 			localStorage.setItem(student.id, stringify(student))

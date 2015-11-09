@@ -1,12 +1,9 @@
 import Immutable from 'immutable'
-import debug from 'debug'
 
 import yaml from 'js-yaml'
 import enhanceHanson from '../lib/enhance-hanson'
 import findAreaPath from '../lib/find-area-path'
 import includes from 'lodash/collection/includes'
-
-const migrationLog = debug('gobbldygook:data-migration:study')
 
 export async function loadArea({name, type, revision, source, isCustom}) {
 	if (isCustom && source) {
@@ -115,7 +112,7 @@ export default class Study extends StudyRecord {
 
 		// migrate from older area save style
 		if ('id' in args) {
-			migrationLog(`migrating ${args.id}`);
+			console.log(`Study(): migrating ${args.id}`);
 			({name, type, revision} = migrateFromOldSave(args))
 		}
 
