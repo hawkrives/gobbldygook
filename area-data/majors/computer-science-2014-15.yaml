@@ -4,7 +4,7 @@ revision: 2014-15
 result: all of (Foundation, Core, Electives, Capstone)
 
 Foundation:
-    CS1:           CSCI 121 | 125
+    CS1:           CSCI 121 | 125 | PHYS 130L
     Design:        CSCI 241 & 251 & 252
     Proof-Writing: MATH 282.*.2014.1 | 244 | 252
 

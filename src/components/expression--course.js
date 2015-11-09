@@ -98,7 +98,7 @@ export default class CourseExpression extends Component {
 					<span>
 						<span className='course--number'>{this.props.number || String(this.props.level)[0] + 'XX'}</span>
 						{international}
-						{lab}
+						{lab ? 'L' : null}
 						{' '}
 						{section}
 					</span>
