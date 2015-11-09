@@ -42,4 +42,34 @@ describe('convertTimeStringsToOfferings', () => {
 		expect(result).to.deep.equal(expected)
 		expect(result[0].times[0]).to.not.equal(result[1].times[0])
 	})
+
+	it('joins locations with times offered', () => {
+		let info = {times: ['MF 0905-1000'], locations: ['TOH 103']}
+
+		let expected = [
+			{day: 'Mo', times: [{start:905, end:1000}], location: 'TOH 103'},
+			{day: 'Fr', times: [{start:905, end:1000}], location: 'TOH 103'},
+		]
+
+		let result = convertTimeStringsToOfferings(info)
+
+		expect(result).to.deep.equal(expected)
+	})
+
+	it('can join together multiple location/time pairs', () => {
+		let info = {
+			times: ['MF 0905-1000', 'W 1000-1155'],
+			locations: ['TOH 103', 'RNS 203'],
+		}
+
+		let expected = [
+			{day: 'Mo', times: [{start:905, end:1000}], location: 'TOH 103'},
+			{day: 'Fr', times: [{start:905, end:1000}], location: 'TOH 103'},
+			{day: 'We', times: [{start:1000, end: 1155}], location: 'RNS 203'},
+		]
+
+		let result = convertTimeStringsToOfferings(info)
+
+		expect(result).to.deep.equal(expected)
+	})
 })

@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2.2.0
+- Fixed embedding the location into the offering object
+
+## 2.1.3
+- Updated to Babel 6
+- Did some internal shuffling
+
+## 2.1.2
+- removed the `location` field
+
 ## 2.1.1
 - **Bugfix:** Revert part of 2.0.1
 	- we're just going to go back to the old implementation
