@@ -25,6 +25,10 @@ body {
 	margin: $page-edge-padding;
 }
 
+#app[aria-hidden=true] {
+	// Prevent scrolling the body while a modal is open.
+}
+
 menu {
 	padding: 0;
 	margin: 0;

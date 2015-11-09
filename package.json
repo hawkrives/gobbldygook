@@ -72,6 +72,7 @@
     "react-document-title": "2.0.1",
     "react-dom": "0.14.2",
     "react-dropzone": "3.0.0",
+    "react-modal2": "1.0.3",
     "react-redux": "4.0.0",
     "react-router": "0.13.5",
     "redux": "3.0.4",

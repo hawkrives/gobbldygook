@@ -13,6 +13,14 @@ import Student from '../models/student'
 import List from './list'
 import DetailedCourse from './detailed-course'
 import BasicCourse from './basic-course'
+import Button from './button'
+import Icon from './icon'
+import Toolbar from './toolbar'
+
+import Modal from 'react-modal2'
+if (typeof window !== 'undefined') {
+	Modal.setApplicationElement(document.getElementById('app'))
+}
 
 import './course.scss'
 
@@ -58,18 +66,18 @@ class Course extends Component {
 		this.state = {isOpen: false}
 	}
 
-	toggleExpanded = () => {
-		this.setState({isOpen: !this.state.isOpen})
+	closeModal = () => {
+		this.setState({isOpen: false})
+	}
+
+	openModal = () => {
+		this.setState({isOpen: true})
 	}
 
 	render() {
 		// console.log('Course#render')
-		let InnerCourse = this.state.isOpen
-			? DetailedCourse
-			: BasicCourse
-
-		let warnings = this.props.conflicts[this.props.index || 0]
-		let hasWarnings = compact(warnings).length
+		const warnings = this.props.conflicts[this.props.index || 0]
+		const hasWarnings = compact(warnings).length
 
 		const validWarnings = filter(warnings, w => !isNull(w) && w.warning === true)
 		const warningEls = map(validWarnings, (w, index) =>
@@ -81,13 +89,35 @@ class Course extends Component {
 			'is-dragging': this.props.isDragging,
 		})
 
+		const warningList = warningEls.length && (
+			<List type='inline' className='warnings'>{warningEls}</List>
+		)
+
+		const modal = this.state.isOpen && (
+			<Modal
+				backdropClassName='modal-backdrop'
+				modalClassName='course course--modal'
+				onClose={this.closeModal}
+			>
+				<Toolbar>
+					<Button onClick={this.closeModal}>
+						<Icon name='ionicon-close' />
+					</Button>
+				</Toolbar>
+
+				<DetailedCourse {...this.props} className='content'>
+					{warningList || null}
+				</DetailedCourse>
+			</Modal>
+		)
+
 		return this.props.connectDragSource(
-			<article className={classSet}>
-				<InnerCourse {...this.props} onClick={this.toggleExpanded}>
-					{warningEls.length
-						? <List type='inline' className='warnings'>{warningEls}</List>
-						: null}
-				</InnerCourse>
+			<article className={classSet} onClick={this.openModal}>
+				{warningList || null}
+
+				<BasicCourse className='course--inline info-wrapper' course={this.props.course} />
+
+				{modal || null}
 			</article>
 		)
 	}

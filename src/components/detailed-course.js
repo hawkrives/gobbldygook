@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import map from 'lodash/collection/map'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
+import cx from 'classnames'
 
 import Button from './button'
 import BasicCourse from './basic-course'
@@ -28,6 +29,7 @@ function findSemesterList(student) {
 export default class DetailedCourse extends Component {
 	static propTypes = {
 		children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
 		onClick: PropTypes.func.isRequired,
 		schedule: PropTypes.instanceOf(Schedule),
@@ -52,24 +54,28 @@ export default class DetailedCourse extends Component {
 		const course = this.props.course
 
 		return (
-			<div>
+			<div className={cx(this.props.className)}>
 				<BasicCourse className='info-wrapper' course={course} onClick={this.props.onClick} />
+
+				{this.props.children}
+
 				<div className='details'>
 					<dl>
 						{course.locations ? <dt>Locations</dt> : null}
 						{course.locations ? <dd>{course.locations.join(' · ')}</dd> : null}
 
-						<dt>Professors</dt>
-						<dd>{oxford(course.instructors)}</dd>
+						{course.instructors ? <dt>Professors</dt> : null}
+						{course.instructors ? <dd>{oxford(course.instructors)}</dd> : null}
 
 						{course.prerequisites ? <dt>Prerequisites</dt> : null}
 						{course.prerequisites ? <dd>{course.prerequisites}</dd> : null}
 
-						<dt>Course Description</dt>
-						<dd>{course.desc}</dd>
+						{course.desc ? <dt>Course Description</dt> : null}
+						{course.desc ? <dd>{course.desc}</dd> : null}
 					</dl>
 					<p>Offered in {semesterName(course.semester)} {course.year}. {course.credits} {plur('credit', course.credits)}.</p>
 				</div>
+
 				<div className='tools'>
 					<select className='semester-select' value={this.props.schedule ? this.props.schedule.id : null} onChange={this.moveToSchedule}>
 						{map(findSemesterList(this.props.student), (group, key) => (

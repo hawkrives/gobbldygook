@@ -1,23 +1,27 @@
 import React, {Component, PropTypes} from 'react'
 import map from 'lodash/collection/map'
+import cx from 'classnames'
 
-import Button from './button'
 import CourseTitle from './course-title'
 import CourseIdentBlock from './course-ident-block'
-import Icon from './icon'
 
 export default class BasicCourse extends Component {
 	static propTypes = {
 		children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
+		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
 		onClick: PropTypes.func,
+	}
+
+	static defaultProps = {
+		className: 'info-wrapper',
 	}
 
 	render() {
 		const {course} = this.props
 
 		return (
-			<div className='info-wrapper'>
+			<div className={cx(this.props.className)}>
 				<div className='info-rows'>
 					<CourseTitle {...course} onClick={this.props.onClick} />
 					{this.props.children}
@@ -39,11 +43,6 @@ export default class BasicCourse extends Component {
 						{course.times}
 					</div>
 				</div>
-				<Button className='show-info'
-					onClick={this.props.onClick}
-					title='Show course information'>
-					<Icon name='ionicon-information-circled' type='block' />
-				</Button>
 			</div>
 		)
 	}
