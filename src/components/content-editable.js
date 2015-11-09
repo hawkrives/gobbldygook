@@ -6,25 +6,27 @@ export default class ContentEditable extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
+		multiLine: PropTypes.bool,
 		onBlur: PropTypes.func,
-		onChange: PropTypes.func,
+		onChange: PropTypes.func.isRequired,
 		value: PropTypes.string,
 	}
 
 	static defaultProps = {
 		onChange: () => {},
+		multiLine: false,
 		value: '',
 	}
 
-	constructor() {
-		super()
-		this.state = {
-			lastValue: '',
+	handleKeyDown = ev => {
+		if (!this.props.multiLine && ev.keyCode === 13) {
+			ev.preventDefault()
 		}
 	}
 
 	handleChange = ev => {
 		const value = ev.target.textContent
+
 		if (value !== this.props.value) {
 			this.props.onChange({target: {value}})
 		}
@@ -32,6 +34,7 @@ export default class ContentEditable extends Component {
 			console.log(ev)
 			this.props.onBlur({target: {value}})
 		}
+
 		this.setState({lastValue: value})
 	}
 
@@ -40,6 +43,7 @@ export default class ContentEditable extends Component {
 		return (<span className={cx('contenteditable', this.props.className)}
 			onInput={this.handleChange}
 			onBlur={this.handleChange}
+			onKeyDown={this.handleKeyDown}
 			contentEditable={true}
 			dangerouslySetInnerHTML={{__html: this.props.value}}
 		/>)
