@@ -10,20 +10,18 @@
   "COURSE_INFO": "../sto-course-data/build/info.json",
   "AREA_INFO": "./build/areas/info.json",
   "config": {
-    "area_output": "build/areas/",
     "beautify": "-f - --end-with-newline --indent-with-tabs",
-    "mocha": "test/areas test/models test/helpers test/ducks",
-    "webpack": "--progress --config .webpackrc"
+    "mocha": "test/areas test/models test/helpers test/ducks"
   },
   "scripts": {
     "benchmark": "babel-node -- ./benchmarks/students-benchmark.js",
-    "build": "env NODE_ENV=production webpack --production --bail $npm_package_config_webpack",
-    "build:areas": "./bin/compile-areas area-data/ --out-dir $npm_package_config_area_output",
+    "build": "env NODE_ENV=production webpack --config .webpackrc --bail --production --progress",
+    "build:areas": "./bin/compile-areas area-data/ --out-dir build/areas/",
     "build:ci": "npm run build -- --no-progress",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
     "clean": "rimraf build/",
     "copy": "mkdirp build/ && cp -rf src/static/* build/ && npm run copy:areas",
-    "copy:areas": "cp -rf ./area-data/ $npm_package_config_area_output && ./bin/area-package-maker $npm_package_config_area_output --save",
+    "copy:areas": "cp -rf ./area-data/ build/areas/ && ./bin/area-package-maker build/areas/ --save",
     "cover": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- $npm_package_config_mocha",
     "cover:view": "npm run cover && open coverage/lcov-report/index.html",
     "coveralls": "npm run cover && coveralls < ./coverage/lcov.info",
@@ -35,10 +33,9 @@
     "prebuild": "npm run copy",
     "precopy": "npm run clean",
     "prestart": "npm run copy",
-    "prewatch": "npm run copy && npm run lint",
     "profile": "cat profile/README.md",
-    "start": "webpack-dev-server $npm_package_config_webpack",
-    "stats": "webpack --bail --config .webpackrc --profile --json > stats.json && open http://webpack.github.io/analyse/",
+    "start": "webpack-dev-server --config .webpackrc --progress",
+    "stats": "webpack --config .webpackrc --bail --profile --json > stats.json && open http://webpack.github.io/analyse/",
     "test": "npm run mocha",
     "test:browser": "npm run karma",
     "test:students": "mocha ./bin/test-students"
