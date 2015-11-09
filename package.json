@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src/ --out-dir lib/",
-    "clean": "rm -rf lib/ index.js",
+    "clean": "rm -rf lib/",
     "push": "./bin/publish.sh",
     "test": "mocha test/",
     "watch": "babel --watch src/ --out-dir lib/"
