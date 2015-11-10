@@ -16,7 +16,6 @@ import buildDept from '../helpers/build-dept'
 import semesterName from '../helpers/semester-name'
 import expandYear from '../helpers/expand-year'
 import queryCourseDatabase from '../lib/query-course-database'
-import padLeft from 'lodash/string/padLeft'
 import size from 'lodash/collection/size'
 import keymage from 'keymage'
 
@@ -25,55 +24,40 @@ import Course from '../components/course'
 import Icon from '../components/icon'
 import Loading from '../components/loading'
 
+import to12Hour from '../helpers/to-12-hour-time'
+
 import Student from '../models/student'
 
 import './course-searcher.scss'
 
-const SORT_BY = {
-	'Year': 'Year',
-	'Title': 'Title',
-	'Department': 'Department',
-	'Day of Week': 'Day of Week',
-	'Time of Day': 'Time of Day',
-}
+const SORT_BY = [
+	'Year',
+	'Title',
+	'Department',
+	'Day of Week',
+	'Time of Day',
+]
 
-const GROUP_BY = {
-	'Day of Week': 'Day of Week',
-	'Department': 'Department',
-	'GenEd': 'GenEd',
-	'Semester': 'Semester',
-	'Term': 'Term',
-	'Time of Day': 'Time of Day',
-	'Year': 'Year',
-	'None': 'None',
-}
+const GROUP_BY = [
+	'Day of Week',
+	'Department',
+	'GenEd',
+	'Semester',
+	'Term',
+	'Time of Day',
+	'Year',
+	'None',
+]
 
 const REVERSE_ORDER = ['Year', 'Term', 'Semester']
-
-function split24HourTime(time) {
-	time = padLeft(String(time), 4, '0')
-	return {
-		hour: parseInt(time.slice(0, 2)),
-		minute: parseInt(time.slice(2, 4)),
-	}
-}
-
-function to12Hour(time) {
-	const {hour, minute} = split24HourTime(time)
-	const paddedMinute = padLeft(minute, 2, '0')
-
-	const fullHour = ((hour + 11) % 12 + 1)
-	const meridian = hour < 12 ? 'am' : 'pm'
-
-	return `${fullHour}:${paddedMinute}${meridian}`
-}
 
 const DAY_OF_WEEK = course => course.offerings
 	? map(course.offerings, offer => offer.day).join('/')
 	: 'No Days Listed'
 
 const TIME_OF_DAY = course => course.offerings
-	? oxford(sortBy(uniq(flatten(map(course.offerings, offer => map(offer.times, time => `${to12Hour(time.start)}-${to12Hour(time.end)}`))))))
+	? oxford(sortBy(uniq(flatten(map(course.offerings, offer =>
+		map(offer.times, time => `${to12Hour(time.start)}-${to12Hour(time.end)}`))))))
 	: 'No Times Listed'
 
 const DEPARTMENT =  course => course.depts ? buildDept(course) : 'No Department'
@@ -127,8 +111,8 @@ export default class CourseSearcher extends Component {
 			queryString: '',
 			lastQuery: '',
 			queryInProgress: false,
-			sortBy: SORT_BY['Year'],
-			groupBy: GROUP_BY['Term'],
+			sortBy: SORT_BY[0],
+			groupBy: GROUP_BY[4],
 		}
 	}
 
