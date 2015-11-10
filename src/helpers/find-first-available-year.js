@@ -23,7 +23,7 @@ function findFirstAvailableYear(schedules, matriculation) {
 	}
 
 	const scheds = ImmutableIterable.isIterable(schedules) ? schedules.toArray() : schedules
-	let years = uniq(pluck(scheds, 'year'))
+	let years = pluck(scheds, 'year')
 
 	// put the matriculation year at the front to give a starting point
 	if (matriculation !== undefined && !includes(years, matriculation)) {
@@ -31,6 +31,9 @@ function findFirstAvailableYear(schedules, matriculation) {
 	}
 
 	years = sortBy(years)
+
+	// only uniq after we're done messing with the contents
+	years = uniq(years)
 
 	// console.log('findFirstAvailableYear', years.toJS())
 
