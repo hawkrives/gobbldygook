@@ -251,11 +251,16 @@ export default class Student extends StudentRecord {
 		// - Finally, remember that a given `clbid` might not exist in the database, in which case we get back 'undefined'.
 		//   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 
+		const start = present()
+
 		const activeSchedules = this.schedules.filter(s => s.active)
 		const promisesForCourses = activeSchedules.map(s => s.courses).toArray()
 
 		return Promise.all(promisesForCourses)
-			.then(courses => uniq(flatten(courses), course => course.clbid))
+			.then(courses => {
+				console.log(`Student(${this.id}).courses: it took ${round(present() - start, 2)} ms to fetch`)
+				return uniq(flatten(courses), course => course.clbid)
+			})
 			.catch(err => console.error(err))
 	}
 
