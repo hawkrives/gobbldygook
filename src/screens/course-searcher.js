@@ -98,7 +98,7 @@ export default class CourseSearcher extends Component {
 	static propTypes = {
 		baseSearchQuery: PropTypes.object,
 		isHidden: PropTypes.bool,
-		student: PropTypes.instanceOf(Student).isRequired,
+		student: PropTypes.object.isRequired,
 		toggle: PropTypes.func.isRequired,
 	}
 
