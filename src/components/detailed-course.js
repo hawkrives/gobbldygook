@@ -1,11 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import map from 'lodash/collection/map'
+import flatten from 'lodash/array/flatten'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import cx from 'classnames'
 
 import Button from './button'
-import BasicCourse from './basic-course'
+import CourseTitle from './course-title'
+import CourseIdentBlock from './course-ident-block'
 
 import Student from '../models/student'
 import Schedule from '../models/schedule'
@@ -13,6 +15,7 @@ import Schedule from '../models/schedule'
 import studentActions from '../flux/student-actions'
 import semesterName from '../helpers/semester-name'
 import expandYear from '../helpers/expand-year'
+import to12Hour from '../helpers/to-12-hour-time'
 
 function findSemesterList(student) {
 	return student.schedules
@@ -31,7 +34,6 @@ export default class DetailedCourse extends Component {
 		children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
-		onClick: PropTypes.func.isRequired,
 		schedule: PropTypes.instanceOf(Schedule),
 		student: PropTypes.instanceOf(Student).isRequired,
 	}
@@ -55,26 +57,62 @@ export default class DetailedCourse extends Component {
 
 		return (
 			<div className={cx(this.props.className)}>
-				<BasicCourse className='info-wrapper' course={course} onClick={this.props.onClick} />
+				<div className='info-wrapper'>
+					<CourseTitle {...course} />
 
-				{this.props.children}
+					<div className='summary'>
+						<CourseIdentBlock {...course} />
+						<span className='type'>{course.type}</span>
 
-				<div className='details'>
-					<dl>
-						{course.locations ? <dt>Locations</dt> : null}
-						{course.locations ? <dd>{course.locations.join(' · ')}</dd> : null}
-
-						{course.instructors ? <dt>Professors</dt> : null}
-						{course.instructors ? <dd>{oxford(course.instructors)}</dd> : null}
-
-						{course.prerequisites ? <dt>Prerequisites</dt> : null}
-						{course.prerequisites ? <dd>{course.prerequisites}</dd> : null}
-
-						{course.desc ? <dt>Course Description</dt> : null}
-						{course.desc ? <dd>{course.desc}</dd> : null}
-					</dl>
-					<p>Offered in {semesterName(course.semester)} {course.year}. {course.credits} {plur('credit', course.credits)}.</p>
+					</div>
 				</div>
+
+				<div className='columns'>
+					<div className='column'>
+						{this.props.children}
+
+						{course.desc && <div className='description'>
+							<h2>Description</h2>
+							<p>{course.desc}</p>
+						</div>}
+
+						<p>
+							Offered in {semesterName(course.semester)} {course.year}.{' '}
+							{course.credits} {plur('credit', course.credits)}.
+						</p>
+					</div>
+					<div className='column'>
+						{course.prerequisites && <div>
+							<h2>Prerequisites</h2>
+							<p>{course.prerequisites}</p>
+						</div>}
+
+						{course.times && <div>
+							<h2>{plur('Offering', course.offerings.length)}</h2>
+							<ul>
+								{flatten(map(course.offerings, (o, i) =>
+									map(o.times, (t, j) =>
+											<li key={`${i}-${j}`}>{o.day} from {to12Hour(t.start)} to {to12Hour(t.end)}, in {o.location}</li>)
+										))}
+							</ul>
+						</div>}
+
+						{course.instructors && <div>
+							<h2>{plur('Instructor', course.instructors.length)}</h2>
+							<div>{oxford(course.instructors)}</div>
+						</div>}
+
+						{course.gereqs && <div>
+							<h2>G.E. Requirements</h2>
+							<ul className='gereqs'>
+								{map(course.gereqs, (ge, idx) =>
+									<li key={ge + idx}>{ge}</li>
+								)}
+							</ul>
+						</div>}
+					</div>
+				</div>
+
 
 				<div className='tools'>
 					<select className='semester-select' value={this.props.schedule ? this.props.schedule.id : null} onChange={this.moveToSchedule}>

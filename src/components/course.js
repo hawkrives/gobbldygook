@@ -99,8 +99,8 @@ class Course extends Component {
 				modalClassName='course course--modal'
 				onClose={this.closeModal}
 			>
-				<Toolbar>
-					<Button onClick={this.closeModal}>
+				<Toolbar className='window-tools'>
+					<Button className='close-modal' onClick={this.closeModal}>
 						<Icon name='ionicon-close' />
 					</Button>
 				</Toolbar>
