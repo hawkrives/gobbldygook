@@ -14,7 +14,7 @@ export default class FakeCourse extends Component {
 	render() {
 		// console.log('FakeCourse#render')
 		return (
-			<article className={`course ${this.props.className}`}>
+			<article className={`course course--inline ${this.props.className}`}>
 				<div className='info-rows'>
 					<h1 className='title'>{this.props.title}</h1>
 					<p className='summary'>{this.props.details}</p>
