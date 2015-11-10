@@ -52,20 +52,27 @@
 	}
 }
 
-.close-sidebar {
-	padding: 0 0.8em;
+.sidebar-heading .button {
+	border: 0;
+	border-radius: 0;
 
 	color: color('gray');
 	transition: 0.15s;
-
-	border: 0;
-	border-radius: 0;
 }
 
 .sidebar-heading {
 	@include card;
 	padding: 0;
 	margin-bottom: 0.5em;
+}
+
+.submit-search-query {
+	width: 3em;
+	padding: 0 1em;
+}
+.submit-search-query:hover {
+	color: color('green');
+	background-color: color('green', 50);
 }
 
 .sidebar-heading .row {
@@ -75,6 +82,22 @@
 	flex-flow: row nowrap;
 	align-items: stretch;
 	justify-content: stretch;
+}
+
+.sidebar-heading h2 {
+	font-size: 0.8em;
+	font-weight: 500;
+	margin: 0;
+	padding: 0.5em 0 0.3em 1em;
+	text-align: left;
+	text-transform: uppercase;
+	flex: 1;
+}
+
+.close-sidebar {
+	font-size: 0.8em;
+	padding: 0.4em 1em;
+	flex: 0 1 auto;
 }
 
 .search-filters {

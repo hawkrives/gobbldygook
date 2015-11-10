@@ -26,7 +26,7 @@ import Loading from '../components/loading'
 
 import to12Hour from '../helpers/to-12-hour-time'
 
-import Student from '../models/student'
+import Separator from '../components/separator'
 
 import './course-searcher.scss'
 
@@ -143,7 +143,7 @@ export default class CourseSearcher extends Component {
 			return
 		}
 
-		this.setState({results: [], hasQueried: false})
+		this.setState({results: [], hasQueried: false, error: null})
 		const startQueryTime = present()
 
 		queryCourseDatabase(searchQuery, this.props.baseSearchQuery)
@@ -159,8 +159,13 @@ export default class CourseSearcher extends Component {
 					hasQueried: true,
 					queryInProgress: false,
 				})
+				return null
 			})
-			.catch(err => console.error(err))
+			.catch(err => {
+				console.log('error!')
+				console.error(err)
+				this.setState({queryInProgress: false, hasQueried: false, error: err})
+			})
 
 		this.setState({queryInProgress: true, lastQuery: searchQuery})
 	}
@@ -172,7 +177,11 @@ export default class CourseSearcher extends Component {
 
 		let contents = <li className='no-results course-group'>No Results Found</li>
 
-		if (showIndicator) {
+		if (this.state.error) {
+			contents = <li className='error course-group'>Something broke :-(</li>
+		}
+
+		else if (showIndicator) {
 			contents = <li className='loading course-group'><Loading>Searching…</Loading></li>
 		}
 
@@ -211,8 +220,19 @@ export default class CourseSearcher extends Component {
 			<div className={cx('search-sidebar', this.props.isHidden && 'is-hidden')}>
 				<header className='sidebar-heading'>
 					<div className='row'>
+						<h2>Course Search</h2>
+						<Separator type='flex-spacer' />
+						<Button
+							className='close-sidebar'
+							title='Close Sidebar'
+							type='flat'
+							onClick={this.props.toggle}>
+							Close
+						</Button>
+					</div>
+					<div className='row'>
 						<input type='search' className='search-box'
-							placeholder={'Search Courses' + placeholderExtension}
+							placeholder={'Search for a course or phrase' + placeholderExtension}
 							defaultValue={this.state.query}
 							onChange={this.onChange}
 							onKeyDown={this.onKeyDown}
@@ -222,11 +242,11 @@ export default class CourseSearcher extends Component {
 							ref='searchbox'
 						/>
 						<Button
-							className='close-sidebar'
-							title='Close Sidebar'
+							className='submit-search-query'
+							title='Search'
 							type='flat'
-							onClick={this.props.toggle}>
-							<Icon name='ionicon-close' />
+							onClick={this.onSubmit}>
+							<Icon name='ionicon-arrow-right-c' />
 						</Button>
 					</div>
 					{this.state.hasQueried &&
