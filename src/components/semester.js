@@ -99,6 +99,7 @@ class Semester extends Component {
 	}
 
 	render() {
+		console.log('Semester.render()')
 		let courseList = <Loading>Loading Courses…</Loading>
 
 		const schedule = getSchedule(this.props.student, this.props.year, this.props.semester)

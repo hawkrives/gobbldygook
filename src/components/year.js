@@ -42,7 +42,8 @@ export default class Year extends Component {
 	}
 
 	render() {
-		// console.log('Year#render')
+		console.log('Year.render()')
+
 		const terms = this.props.student.schedules
 			.filter(sched => sched.active)
 			.filter(sched => sched.year === this.props.year)
