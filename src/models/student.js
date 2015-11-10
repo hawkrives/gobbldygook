@@ -272,7 +272,7 @@ export default class Student extends StudentRecord {
 	}
 
 	save() {
-		// grab the old (still-JSON-encoded) student from localstorage
+		// grab the old (still JSON-encoded) student from localstorage
 		// compare it to the current one
 		// if they're different, update dateLastModified, stringify, and save.
 		const oldVersion = localStorage.getItem(this.id)

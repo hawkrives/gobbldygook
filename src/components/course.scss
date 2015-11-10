@@ -170,28 +170,28 @@
 	$inner-padding: 20px;
 	$outer-margin: 40px;
 
-    margin-top: $outer-margin;
-    margin-left: $outer-margin;
-    margin-right: $outer-margin;
-    margin-bottom: $outer-margin;
+	margin-top: $outer-margin;
+	margin-left: $outer-margin;
+	margin-right: $outer-margin;
+	margin-bottom: $outer-margin;
 
-    max-height: 90vh;
-    max-width: 40em;
+	max-height: 90vh;
+	max-width: 40em;
 
-    border: 1px solid #ccc;
-    background: #fff;
+	border: 1px solid #ccc;
+	background: #fff;
 
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 
-    border-radius: 4px;
-    outline: none;
-    padding: $inner-padding;
+	border-radius: 4px;
+	outline: none;
+	padding: $inner-padding;
 
-    .columns {
-    	display: flex;
-    	flex-flow: row nowrap;
-    }
+	.columns {
+		display: flex;
+		flex-flow: row nowrap;
+	}
 	.column {
 		flex: 1;
 	}
