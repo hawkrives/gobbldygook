@@ -2,14 +2,6 @@ Listen to localStorage's 'storage' event to trigger re-renders when content in t
 
 ---
 
-adding a schedule with a year and semester of 0 causes an infinite loop
-
-yep, it's still there. why does this bug exist. hmm.
-
-`actions.addSchedule(stu.id, {year: 0, semester: 0, active: true, title: 'New Schedule', index: 1})`
-
----
-
 # [9:46 PM] Drew Volz:
 
 I have two ideas for the credit tracking.

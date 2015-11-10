@@ -19,10 +19,14 @@ import findMissingNumberBinarySearch from './find-missing-number-binary-search'
 function findFirstAvailableSemester(schedules, forYear) {
 	let scheds = schedules.toJS ? schedules.toJS() : schedules
 	let thisYear = filter(scheds, {year: forYear})
-	let semesters = uniq(pluck(thisYear, 'semester'))
+
+	let semesters = pluck(thisYear, 'semester')
 
 	// stick a 0 at the front so findBinary will start from 1
 	semesters.unshift(0)
+
+	// uniq the list after we're done messing with the contents
+	semesters = uniq(semesters)
 
 	let sortedSemesters = sortBy(semesters)
 
