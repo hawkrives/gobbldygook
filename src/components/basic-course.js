@@ -7,7 +7,7 @@ import CourseIdentBlock from './course-ident-block'
 
 export default class BasicCourse extends Component {
 	static propTypes = {
-		children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
+		children: PropTypes.node,
 		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
 		onClick: PropTypes.func,

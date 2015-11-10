@@ -31,7 +31,7 @@ function findSemesterList(student) {
 
 export default class DetailedCourse extends Component {
 	static propTypes = {
-		children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+		children: PropTypes.node,
 		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
 		schedule: PropTypes.instanceOf(Schedule),
