@@ -5,7 +5,7 @@ export default class Separator extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		style: PropTypes.object,
-		type: PropTypes.oneOf(['spacer', 'line']),
+		type: PropTypes.oneOf(['spacer', 'line', 'flex-spacer']),
 	}
 
 	static defaultProps = {
@@ -26,6 +26,9 @@ export default class Separator extends Component {
 		}
 		else if (this.props.type === 'spacer') {
 			style = {...style, padding: '0 0.5em'}
+		}
+		else if (this.props.type === 'flex-spacer') {
+			style = {...style, flex: '1'}
 		}
 
 		return (
