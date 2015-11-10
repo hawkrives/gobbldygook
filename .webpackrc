@@ -69,6 +69,7 @@ var config = {
 				return {
 					'index.html': [
 						'<!DOCTYPE html>',
+						'<html lang="en-US">',
 						'<meta charset="UTF-8">',
 						'<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
 						'<title>Gobbldygook</title>',
@@ -78,6 +79,7 @@ var config = {
 						'  <aside id="notifications"></aside>',
 						'</body>',
 						'<script src="' + context.main + '"></script>',
+						'</html>',
 					].join('\n'),
 				}
 			},
