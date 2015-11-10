@@ -26,14 +26,16 @@ export default class Sidebar extends Component {
 		toggleSearchSidebar: PropTypes.func.isRequired,
 	}
 
+	static contextTypes = {
+		router: PropTypes.func,
+	}
+
 	render() {
 		return (
 			<aside className='sidebar'>
 				<Toolbar className='student-buttons'>
-					<Button className='sidebar-btn' title='Students'>
-						<Link to='/'>
-							<Icon name='ionicon-ios-people-outline' type='block' />
-						</Link>
+					<Button title='Students' onClick={() => this.context.router.transitionTo('/')}>
+						<Icon name='ionicon-ios-people-outline' type='block' />
 					</Button>
 					<Button
 						title='Search'
