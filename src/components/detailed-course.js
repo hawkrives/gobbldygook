@@ -9,9 +9,6 @@ import Button from './button'
 import CourseTitle from './course-title'
 import CourseIdentBlock from './course-ident-block'
 
-import Student from '../models/student'
-import Schedule from '../models/schedule'
-
 import studentActions from '../flux/student-actions'
 import semesterName from '../helpers/semester-name'
 import expandYear from '../helpers/expand-year'
@@ -34,8 +31,8 @@ export default class DetailedCourse extends Component {
 		children: PropTypes.node,
 		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
-		schedule: PropTypes.instanceOf(Schedule),
-		student: PropTypes.instanceOf(Student).isRequired,
+		schedule: PropTypes.object,
+		student: PropTypes.object.isRequired,
 	}
 
 	removeFromSemester = () => {

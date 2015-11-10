@@ -2,10 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import expandYear from '../helpers/expand-year'
 import findFirstAvailableYear from '../helpers/find-first-available-year'
-import Immutable from 'immutable'
 
 import studentActions from '../flux/student-actions'
-import Student from '../models/student'
 
 import Button from '../components/button'
 import Year from '../components/year'
@@ -15,10 +13,10 @@ import './course-table.scss'
 export default class CourseTable extends Component {
 	static propTypes = {
 		className: PropTypes.string,
-		courses: PropTypes.instanceOf(Immutable.List),
+		courses: PropTypes.object, // Immutable.List
 		coursesLoaded: PropTypes.bool.isRequired,
 		showSearchSidebar: PropTypes.func.isRequired,
-		student: PropTypes.instanceOf(Student).isRequired,
+		student: PropTypes.object.isRequired,
 	}
 
 	addYear = () => {

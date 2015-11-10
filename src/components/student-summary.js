@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import Immutable from 'immutable'
 import cx from 'classnames'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
@@ -9,7 +8,6 @@ import AvatarLetter from './avatar-letter'
 import ContentEditable from './content-editable'
 
 import studentActions from '../flux/student-actions'
-import Student from '../models/student'
 
 import countCredits from '../lib/count-credits'
 
@@ -43,10 +41,10 @@ const welcomeMessages = [
 
 export default class StudentSummary extends Component {
 	static propTypes = {
-		courses: PropTypes.instanceOf(Immutable.List),
+		courses: PropTypes.object, // Immutable.List
 		coursesLoaded: PropTypes.bool.isRequired,
 		graduatability: PropTypes.bool.isRequired,
-		student: PropTypes.instanceOf(Student).isRequired,
+		student: PropTypes.object.isRequired,
 	}
 
 	constructor() {

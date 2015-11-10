@@ -1,8 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import Immutable from 'immutable'
-
 import studentActions from '../flux/student-actions'
-import Student from '../models/student'
 
 import Button from './button'
 import Semester from './semester'
@@ -16,10 +13,10 @@ import './year.scss'
 
 export default class Year extends Component {
 	static propTypes = {
-		courses: PropTypes.instanceOf(Immutable.List),
+		courses: PropTypes.object, // Immutable.List
 		coursesLoaded: PropTypes.bool.isRequired,
 		showSearchSidebar: PropTypes.func.isRequired,
-		student: PropTypes.instanceOf(Student).isRequired,
+		student: PropTypes.object.isRequired,
 		year: PropTypes.number.isRequired,
 	}
 

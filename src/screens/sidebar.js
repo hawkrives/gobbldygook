@@ -1,8 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
-import Immutable from 'immutable'
 
-import Student from '../models/student'
 import studentActions from '../flux/student-actions'
 import studentStore from '../flux/student-store'
 
@@ -19,12 +17,12 @@ import './sidebar.scss'
 
 export default class Sidebar extends Component {
 	static propTypes = {
-		allAreas: PropTypes.instanceOf(Immutable.List),
+		allAreas: PropTypes.object, // Immutable.List
 		baseSearchQuery: PropTypes.object,
-		courses: PropTypes.instanceOf(Immutable.List),
+		courses: PropTypes.object, // Immutable.List
 		coursesLoaded: PropTypes.bool.isRequired,
 		isSearching: PropTypes.bool.isRequired,
-		student: PropTypes.instanceOf(Student).isRequired,
+		student: PropTypes.object.isRequired,
 		toggleSearchSidebar: PropTypes.func.isRequired,
 	}
 

@@ -11,7 +11,6 @@ import pathToOverride from '../lib/path-to-override'
 
 import AreaOfStudyGroup from '../components/area-of-study-group'
 import Button from '../components/button'
-import Student from '../models/student'
 import StudentSummary from '../components/student-summary'
 import * as areaTypeConstants from '../models/area-types'
 
@@ -21,11 +20,11 @@ import './graduation-status.scss'
 
 export default class GraduationStatus extends Component {
 	static propTypes = {
-		allAreas: PropTypes.instanceOf(Immutable.List),
-		courses: PropTypes.instanceOf(Immutable.List),
+		allAreas: PropTypes.object, // Immutable.List
+		courses: PropTypes.object, // Immutable.List
 		coursesLoaded: PropTypes.bool.isRequired,
 		isHidden: PropTypes.bool,
-		student: PropTypes.instanceOf(Student).isRequired,
+		student: PropTypes.object.isRequired,
 	}
 
 	constructor(props) {

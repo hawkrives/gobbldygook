@@ -12,7 +12,6 @@ import countCredits from '../lib/count-credits'
 
 import studentActions from '../flux/student-actions'
 import itemTypes from '../models/item-types'
-import Student from '../models/student'
 
 import Button from './button'
 import Course from './course'
@@ -66,12 +65,12 @@ class Semester extends Component {
 	static propTypes = {
 		canDrop: PropTypes.bool.isRequired,  // react-dnd
 		connectDropTarget: PropTypes.func.isRequired,  // react-dnd
-		courses: PropTypes.instanceOf(Immutable.List),
+		courses: PropTypes.object, // should be an immutable list
 		coursesLoaded: PropTypes.bool.isRequired,
 		isOver: PropTypes.bool.isRequired,  // react-dnd
 		semester: PropTypes.number.isRequired,
 		showSearchSidebar: PropTypes.func.isRequired,
-		student: PropTypes.instanceOf(Student).isRequired,
+		student: PropTypes.object.isRequired,
 		year: PropTypes.number.isRequired,
 	}
 

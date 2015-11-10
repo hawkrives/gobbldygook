@@ -53,8 +53,8 @@ class Course extends Component {
 		course: PropTypes.object.isRequired,
 		index: PropTypes.number,
 		isDragging: PropTypes.bool.isRequired,  // react-dnd
-		schedule: PropTypes.instanceOf(Schedule),
-		student: PropTypes.instanceOf(Student),
+		schedule: PropTypes.object,
+		student: PropTypes.object,
 	}
 
 	static defaultProps = {
