@@ -3,6 +3,7 @@ import flatten from 'lodash/array/flatten'
 import forEach from 'lodash/collection/forEach'
 import omit from 'lodash/object/omit'
 import uniq from 'lodash/array/uniq'
+import round from 'lodash/math/round'
 import {v4 as uuid} from 'node-uuid'
 import stringify from 'json-stable-stringify'
 import present from 'present'
@@ -97,7 +98,7 @@ export default class Student extends StudentRecord {
 
 				student.set('graduatability', checkGraduatability(student))
 
-				console.log(`Student(): it took ${present() - startTime} ms to make a student`)
+				console.log(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
 
 				return student
 			})
