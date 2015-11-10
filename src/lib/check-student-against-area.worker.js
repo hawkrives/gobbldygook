@@ -4,6 +4,8 @@ import zipObject from 'lodash/array/zipObject'
 import pairs from 'lodash/object/pairs'
 import map from 'lodash/collection/map'
 import filter from 'lodash/collection/filter'
+import round from 'lodash/math/round'
+import present from 'present'
 
 import stringifyError from './stringify-error'
 import evaluate from '../lib/evaluate'
@@ -60,11 +62,15 @@ export default checkStudentAgainstArea
 
 if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
 	self.addEventListener('message', ({data}) => {
+		const start = present()
 		const [id, student, area] = data
 		// console.log('[check-student] received message:', id, student, area)
 
 		checkStudentAgainstArea(student, area)
-			.then(result => self.postMessage([id, 'result', result]))
+			.then(result => {
+				console.log(`[check-student] it took ${round(present() - start)} ms to check`)
+				self.postMessage([id, 'result', result])
+			})
 			.catch(err => {
 				console.error(`[check-student(${id})]`, err)
 				self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
