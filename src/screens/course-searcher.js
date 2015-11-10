@@ -246,7 +246,7 @@ export default class CourseSearcher extends Component {
 							title='Search'
 							type='flat'
 							onClick={this.onSubmit}>
-							<Icon name='ionicon-arrow-right-c' />
+							<Icon name='ionicon-android-arrow-forward' />
 						</Button>
 					</div>
 					{this.state.hasQueried &&
