@@ -81,7 +81,7 @@ class Course extends Component {
 
 		const validWarnings = filter(warnings, w => !isNull(w) && w.warning === true)
 		const warningEls = map(validWarnings, (w, index) =>
-			<span className={w.className} key={index}>{w.msg}</span>)
+			<span key={index}><Icon name={w.icon} /> {w.msg}</span>)
 
 		let classSet = cx('course', {
 			expanded: this.state.isOpen,
