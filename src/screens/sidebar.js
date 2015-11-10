@@ -35,7 +35,7 @@ export default class Sidebar extends Component {
 							<Icon name='ionicon-ios-people-outline' type='block' />
 						</Link>
 					</Button>
-					<Button className='sidebar-btn'
+					<Button
 						title='Search'
 						onClick={this.props.toggleSearchSidebar}>
 						<Icon name='ionicon-ios-search' type='block' />
@@ -43,13 +43,13 @@ export default class Sidebar extends Component {
 
 					<Separator type='spacer' />
 
-					<Button className='sidebar-btn'
+					<Button
 						title='Undo'
 						onClick={studentActions.undo}
 						disabled={studentStore.history.size === 0}>
 						<Icon name={`ionicon-ios-undo${studentStore.history.size === 0 ? '-outline' : ''}`} type='block' />
 					</Button>
-					<Button className='sidebar-btn'
+					<Button
 						title='Redo'
 						onClick={studentActions.redo}
 						disabled={studentStore.future.size === 0}>
@@ -58,12 +58,12 @@ export default class Sidebar extends Component {
 
 					<Separator type='spacer' />
 
-					<Button className='sidebar-btn' title='Download'>
+					<Button title='Download'>
 						<Link to='download' params={{id: this.props.student.id}}>
 							<Icon name='ionicon-ios-download-outline' type='block' />
 						</Link>
 					</Button>
-					<Button className='sidebar-btn'
+					<Button
 						title='Revert to Demo'
 						onClick={() => studentActions.resetStudentToDemo(this.props.student.id)}>
 						<Icon name='ionicon-ios-reload' type='block' />
