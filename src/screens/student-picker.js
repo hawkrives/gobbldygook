@@ -52,7 +52,7 @@ export default class StudentPicker extends Component {
 		return (
 			<div className='students-overview'>
 				<heading className='app-title'>
-					<OleLion />
+					{/*<OleLion />*/}
 					<h1>Gobbldygook</h1>
 					<h2>A Course Scheduling Helper</h2>
 				</heading>
