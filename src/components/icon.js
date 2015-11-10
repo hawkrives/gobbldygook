@@ -9,10 +9,10 @@ export default class Icon extends Component {
 		className: PropTypes.string,
 		name: function(props, propName) {
 			if (!props[propName]) {
-				return new Error('`name` is required')
+				return new Error('"name" is required.')
 			}
 			if (!iconsList.hasOwnProperty(props[propName])) {
-				return new Error('Invalid icon')
+				return new Error(`"${propName}" is an invalid icon name.`)
 			}
 		},
 		style: PropTypes.object,
