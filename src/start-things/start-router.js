@@ -1,6 +1,5 @@
 import React from 'react'
-import {render} from 'react-dom'
-import Router, {Route, DefaultRoute, Redirect} from 'react-router'
+import {Route, DefaultRoute, Redirect} from 'react-router'
 
 import Gobbldygook from '../screens/gobbldygook'
 // import AreaEditor from '../screens/area-editor'
@@ -17,7 +16,7 @@ import StudentPicker from '../screens/student-picker'
 // /s/122932?search
 // /s/122932/semester/2014/fall?search=dept:NOT+dept:AMCON+dept:GCON+gened:HBS
 
-let routes = (
+export default (
 	<Route handler={Gobbldygook} name='gobbldygook' path='/'>
 		<DefaultRoute handler={StudentPicker} />
 		<Route handler={CreateStudent} name='create-student' path='create-student/' />
@@ -35,12 +34,3 @@ let routes = (
 		</Route>
 	</Route>
 )
-
-// run it
-console.log('3. 2.. 1... Blast off! 🚀')
-
-Router.run(routes, (Handler, state) => {
-	render(<Handler
-		routerState={state}
-	/>, document.getElementById('app'))
-})
