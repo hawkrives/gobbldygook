@@ -103,7 +103,7 @@
     "eslint-plugin-react": "3.8.0",
     "extract-text-webpack-plugin": "0.9.1",
     "file-loader": "0.8.4",
-    "glob": "5.0.15",
+    "glob": "6.0.1",
     "graceful-fs": "4.1.2",
     "isparta": "3.5.3",
     "js-beautify": "1.5.10",
