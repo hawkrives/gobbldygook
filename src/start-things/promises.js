@@ -5,10 +5,9 @@ require('babel-runtime/core-js/promise').default = require('bluebird')
 // handle promise errors
 const throwError = e => {
 	e.preventDefault()
-	throw e
+	console.warn(e)
 }
 
 if (typeof window !== 'undefined') {
-	// window.addEventListener('unhandledrejection', throwError)
-	// window.addEventListener('rejectionhandled', throwError)
+	window.addEventListener('unhandledrejection', throwError)
 }
