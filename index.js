@@ -1,4 +1,8 @@
-module.exports.checkCoursesForTimeConflicts = require("./lib/checkCoursesForTimeConflicts")
-module.exports.checkScheduleForTimeConflicts = require("./lib/checkScheduleForTimeConflicts")
-module.exports.convertTimeStringsToOfferings = require("./lib/convertTimeStringsToOfferings")
-module.exports.findScheduleTimeConflicts = require("./lib/findScheduleTimeConflicts")
+exports.checkCoursesForTimeConflicts = require("./lib/checkCoursesForTimeConflicts")
+exports.checkScheduleForTimeConflicts = require("./lib/checkScheduleForTimeConflicts")
+exports.convertTimeStringsToOfferings = require("./lib/convertTimeStringsToOfferings")
+exports.findScheduleTimeConflicts = require("./lib/findScheduleTimeConflicts")
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+})
