@@ -1,6 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component, PropTypes, cloneElement} from 'react'
 import Immutable from 'immutable'
-import {RouteHandler} from 'react-router'
 import DocumentTitle from 'react-document-title'
 import {DragDropContext} from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
@@ -12,7 +11,7 @@ import db from '../lib/db'
 
 class GobbldygookApp extends Component {
 	static propTypes = {
-		routerState: PropTypes.object.isRequired,
+		children: PropTypes.node,
 	}
 
 	constructor() {
@@ -57,11 +56,10 @@ class GobbldygookApp extends Component {
 
 		return (
 			<DocumentTitle title='Gobbldygook'>
-				<RouteHandler
-					allAreas={this.state.allAreas}
-					students={this.state.students}
-					routerState={this.props.routerState}
-				/>
+				{cloneElement(this.props.children, {
+					allAreas: this.state.allAreas,
+					students: this.state.students,
+				})}
 			</DocumentTitle>
 		)
 	}

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, DefaultRoute, Redirect} from 'react-router'
+import {Route, IndexRoute, Redirect} from 'react-router'
 
 import Gobbldygook from '../screens/gobbldygook'
 // import AreaEditor from '../screens/area-editor'
@@ -17,20 +17,20 @@ import StudentPicker from '../screens/student-picker'
 // /s/122932/semester/2014/fall?search=dept:NOT+dept:AMCON+dept:GCON+gened:HBS
 
 export default (
-	<Route handler={Gobbldygook} name='gobbldygook' path='/'>
-		<DefaultRoute handler={StudentPicker} />
-		<Route handler={CreateStudent} name='create-student' path='create-student/' />
-		<Redirect path='s/' to='/' />
-		<Redirect path='s' to='/' />
-		<Redirect path='s/:id' to='s/:id/' />
-		<Route handler={Student} name='student' path='s/:id/'>
-			<DefaultRoute handler={CourseTable} />
-			{/*<Route handler={AreaEditor} name='area-editor' path='edit-area' />*/}
-			{/*<Redirect path='edit-area/' to='edit-area' />*/}
-			<Route handler={NewStudentWizard} name='wizard' path='wizard/' />
-			<Route handler={SemesterDetail} name='semester' path='semester/:year/:semester/' />
-			<Redirect path='semester/:year/:semester' to='semester/:year/:semester/' />
-			<Route handler={DownloadStudent} name='download' path='download/' />
+	<Route component={Gobbldygook} path='/'>
+		<IndexRoute component={StudentPicker} />
+		<Route component={CreateStudent} path='create-student/' />
+		<Redirect from='s/' to='/' />
+		<Redirect from='s' to='/' />
+		<Redirect from='s/:id' to='s/:id/' />
+		<Route component={Student} path='s/:id/'>
+			<IndexRoute component={CourseTable} />
+			{/*<Route component={AreaEditor} path='edit-area' />*/}
+			{/*<Redirect from='edit-area/' to='edit-area' />*/}
+			<Route component={NewStudentWizard} path='wizard/' />
+			<Route component={SemesterDetail} path='semester/:year/:semester/' />
+			<Redirect from='semester/:year/:semester' to='semester/:year/:semester/' />
+			<Route component={DownloadStudent} path='download/' />
 		</Route>
 	</Route>
 )

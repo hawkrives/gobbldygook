@@ -16,8 +16,10 @@ console.log('3. 2.. 1... Blast off! 🚀')
 
 import React from 'react'
 import {render} from 'react-dom'
-import Router from 'react-router'
+import {Router} from 'react-router'
 
-Router.run(routes, (Handler, state) => {
-	render(React.createElement(Handler, {routerState: state}), document.getElementById('app'))
-})
+import history from './start-things/history'
+
+render(
+	React.createElement(Router, {history, routes}),
+	document.getElementById('app'))
