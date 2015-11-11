@@ -20,16 +20,16 @@ export default (
 	<Route component={Gobbldygook} path='/'>
 		<IndexRoute component={StudentPicker} />
 		<Route component={CreateStudent} path='create-student/' />
-		<Redirect from='s/' to='/' />
-		<Redirect from='s' to='/' />
-		<Redirect from='s/:id' to='s/:id/' />
+		{/*<Redirect from='s/' to='/' />*/}
+		{/*<Redirect from='s' to='/' />*/}
+		{/*<Redirect from='s/:id' to='s/:id/' />*/}
 		<Route component={Student} path='s/:id/'>
 			<IndexRoute component={CourseTable} />
 			{/*<Route component={AreaEditor} path='edit-area' />*/}
 			{/*<Redirect from='edit-area/' to='edit-area' />*/}
 			<Route component={NewStudentWizard} path='wizard/' />
 			<Route component={SemesterDetail} path='semester/:year/:semester/' />
-			<Redirect from='semester/:year/:semester' to='semester/:year/:semester/' />
+			{/*<Redirect from='semester/:year/:semester' to='semester/:year/:semester/' />*/}
 			<Route component={DownloadStudent} path='download/' />
 		</Route>
 	</Route>
