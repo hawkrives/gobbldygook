@@ -192,7 +192,6 @@ else {
 			output: {
 				comments: false,
 			},
-			sourceMap: false,
 		}),
 		new ExtractTextPlugin(config.output.cssFilename, {
 			allChunks: true,
