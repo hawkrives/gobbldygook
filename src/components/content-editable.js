@@ -9,6 +9,9 @@ export default class ContentEditable extends Component {
 		multiLine: PropTypes.bool,
 		onBlur: PropTypes.func,
 		onChange: PropTypes.func.isRequired,
+		onFocus: PropTypes.func,
+		onKeyDown: PropTypes.func,
+		placeholder: PropTypes.string,
 		value: PropTypes.string,
 	}
 
@@ -22,6 +25,16 @@ export default class ContentEditable extends Component {
 		if (!this.props.multiLine && ev.keyCode === 13) {
 			ev.preventDefault()
 		}
+		this.props.onKeyDown && this.props.onKeyDown(ev)
+	}
+
+	handleFocus = ev => {
+		this.props.onFocus && this.props.onFocus(ev)
+		// this.ref.placeholder.style.display = 'none'
+	}
+
+	handleBlur = ev => {
+		// this.ref.placeholder.style.display = 'inline'
 	}
 
 	handleChange = ev => {
@@ -40,13 +53,15 @@ export default class ContentEditable extends Component {
 
 	render() {
 		// console.log('ContentEditable#render')
-		return (<span className={cx('contenteditable', this.props.className)}
+		return <span
+			className={cx('contenteditable', this.props.className)}
 			onInput={this.handleChange}
 			onBlur={this.handleChange}
 			onKeyDown={this.handleKeyDown}
+			onFocus={this.handleFocus}
 			contentEditable={true}
 			dangerouslySetInnerHTML={{__html: this.props.value}}
-		/>)
+		/>
 	}
 }
 

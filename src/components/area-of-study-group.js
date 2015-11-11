@@ -21,15 +21,17 @@ export default class AreaOfStudyGroup extends Component {
 		endAddArea: PropTypes.func.isRequired,
 		initiateAddArea: PropTypes.func.isRequired,
 		removeArea: PropTypes.func.isRequired,
-		removeOverride: PropTypes.func.isRequired,
+		removeOverride: PropTypes.func,
 		showAreaPicker: PropTypes.bool.isRequired,
-		studentId: PropTypes.string.isRequired,
+		studentId: PropTypes.string,
 		toggleOverride: PropTypes.func.isRequired,
 		type: PropTypes.oneOf(values(areaTypeConstants)).isRequired,
 	}
 
 	static defaultProps = {
 		showAreaPicker: false,
+		studentId: '',
+		removeOverride: () => {},
 	}
 
 	render() {
