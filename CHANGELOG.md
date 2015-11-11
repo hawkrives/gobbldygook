@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.2.2
+- Actually fix index.js importing/exporting issues
+
 ## 2.2.1
 - Fix exports from the manual index.js
 
