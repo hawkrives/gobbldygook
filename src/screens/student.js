@@ -10,9 +10,15 @@ import './student.scss'
 
 export default class Student extends Component {
 	static propTypes = {
-		allAreas: PropTypes.instanceOf(Immutable.List).isRequired,
+		allAreas: PropTypes.object, // Immutable.List
+		children: PropTypes.node,
 		routerState: PropTypes.object.isRequired,
-		students: PropTypes.instanceOf(Immutable.Map).isRequired,
+		students: PropTypes.object, // Immutable.Map
+	}
+
+	static defaultProps = {
+		allAreas: Immutable.List(),
+		students: Immutable.Map(),
 	}
 
 	constructor(props) {

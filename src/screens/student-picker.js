@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import Immutable from 'immutable'
 import DropZone from 'react-dropzone'
 import forEach from 'lodash/collection/forEach'
 import filter from 'lodash/collection/filter'
@@ -16,7 +15,7 @@ import OleLion from '../components/ole-the-lion.js'
 
 export default class StudentPicker extends Component {
 	static propTypes = {
-		students: PropTypes.instanceOf(Immutable.Map).isRequired,
+		students: PropTypes.object, // Immutable.Map
 	}
 
 	constructor(props) {
