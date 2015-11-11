@@ -213,15 +213,14 @@ export default class CourseSearcher extends Component {
 
 		let placeholderExtension = ''
 		if (size(this.props.baseSearchQuery)) {
-			placeholderExtension = ` in ${semesterName(this.props.baseSearchQuery.semester)} ${expandYear(this.props.baseSearchQuery.year, true, '–')}`
+			placeholderExtension = `(${semesterName(this.props.baseSearchQuery.semester)} ${expandYear(this.props.baseSearchQuery.year, true, '–')})`
 		}
 
 		return (
 			<div className={cx('search-sidebar', this.props.isHidden && 'is-hidden')}>
 				<header className='sidebar-heading'>
 					<div className='row'>
-						<h2>Course Search</h2>
-						<Separator type='flex-spacer' />
+						<h2>Course Search<br/>{placeholderExtension}</h2>
 						<Button
 							className='close-sidebar'
 							title='Close Sidebar'
@@ -232,8 +231,8 @@ export default class CourseSearcher extends Component {
 					</div>
 					<div className='row'>
 						<input type='search' className='search-box'
-							placeholder={'Search for a course or phrase' + placeholderExtension}
 							defaultValue={this.state.query}
+							placeholder={'Search for a course or phrase'}
 							onChange={this.onChange}
 							onKeyDown={this.onKeyDown}
 							onFocus={() => keymage.pushScope('search')}
