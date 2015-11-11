@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.2.1
+- Fix exports from the manual index.js
+
 ## 2.2.0
 - Fixed embedding the location into the offering object
 
