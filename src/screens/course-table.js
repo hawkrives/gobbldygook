@@ -14,9 +14,15 @@ export default class CourseTable extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		courses: PropTypes.object, // Immutable.List
-		coursesLoaded: PropTypes.bool.isRequired,
-		showSearchSidebar: PropTypes.func.isRequired,
-		student: PropTypes.object.isRequired,
+		coursesLoaded: PropTypes.bool,
+		showSearchSidebar: PropTypes.func,
+		student: PropTypes.object,
+	}
+
+	static defaultProps = {
+		coursesLoaded: false,
+		showSearchSidebar: () => {},
+		student: {},
 	}
 
 	addYear = () => {

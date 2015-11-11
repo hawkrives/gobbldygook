@@ -157,12 +157,7 @@ class Semester extends Component {
 			<div className={className}>
 				<header className='semester-title'>
 					<Link className='semester-header'
-						to='semester'
-						params={{
-							id: this.props.student.id,
-							year: this.props.year,
-							semester: this.props.semester,
-						}}>
+						to={`/s/${this.props.student.id}/semester/${this.props.year}/${this.props.semester}/`}>
 						<h1>{semesterName(this.props.semester)}</h1>
 
 						<List className='info-bar' type='inline'>

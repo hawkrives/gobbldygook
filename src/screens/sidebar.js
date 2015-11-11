@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import history from '../start-things/history'
 
 import studentActions from '../flux/student-actions'
 import studentStore from '../flux/student-store'
@@ -34,7 +34,7 @@ export default class Sidebar extends Component {
 		return (
 			<aside className='sidebar'>
 				<Toolbar className='student-buttons'>
-					<Button title='Students' onClick={() => this.context.router.transitionTo('/')}>
+					<Button title='Students' onClick={() => history.pushState(null, '/')}>
 						<Icon name='ionicon-ios-people-outline' type='block' />
 					</Button>
 					<Button
@@ -60,10 +60,8 @@ export default class Sidebar extends Component {
 
 					<Separator type='spacer' />
 
-					<Button title='Download'>
-						<Link to='download' params={{id: this.props.student.id}}>
-							<Icon name='ionicon-ios-download-outline' type='block' />
-						</Link>
+					<Button title='Download' onClick={() => history.pushState(null, `/s/${this.props.student.id}/download/`)}>
+						<Icon name='ionicon-ios-download-outline' type='block' />
 					</Button>
 					<Button
 						title='Revert to Demo'

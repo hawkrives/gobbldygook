@@ -89,10 +89,7 @@ export default class AreaOfStudy extends Component {
 						{/*this.props.showEditButton &&
 						<Button className='area--edit-button'>
 							<Link
-								to='area-editor'
-								params={{
-									id: this.props.studentId,
-								}}
+								to='/s/${this.props.studentId}/area-editor'
 								query={{
 									type: this.props.type,
 									name: this.props.name,

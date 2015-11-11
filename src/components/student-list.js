@@ -33,7 +33,7 @@ class StudentListItem extends Component {
 		const student = this.props.student
 		const groupedStudies = student.studies.groupBy(s => s.type)
 		return (<span>
-			<Link className='student-list-item' to='student' params={{id: student.id}}>
+			<Link className='student-list-item' to={`/s/${student.id}/`}>
 				<AvatarLetter value={student.name} />
 				<span className='student-list-item-info'>
 					<div className='name'>{student.name || ''}</div>
