@@ -9,6 +9,6 @@ const throwError = e => {
 }
 
 if (typeof window !== 'undefined') {
-	window.addEventListener('unhandledrejection', throwError)
-	window.addEventListener('rejectionhandled', throwError)
+	// window.addEventListener('unhandledrejection', throwError)
+	// window.addEventListener('rejectionhandled', throwError)
 }
