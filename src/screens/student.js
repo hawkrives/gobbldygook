@@ -15,6 +15,11 @@ export default class Student extends Component {
 		students: PropTypes.instanceOf(Immutable.Map).isRequired,
 	}
 
+	static defaultProps = {
+		allAreas: Immutable.List(),
+		students: Immutable.Map(),
+	}
+
 	constructor(props) {
 		super(props)
 		this.state = {
