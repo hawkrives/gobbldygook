@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "appdirs": "1.0.0",
-    "babel-runtime": "5.8.34",
+    "babel-runtime": "5.8.29",
     "bluebird": "3.0.5",
     "classnames": "2.2.0",
     "codemirror": "5.8.0",
