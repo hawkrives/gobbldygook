@@ -90,6 +90,10 @@ var config = {
 		new webpack.ProvidePlugin({
 			Promise: 'bluebird',
 		}),
+
+		new webpack.DefinePlugin({
+			VERSION: JSON.stringify(pkg.version),
+		}),
 	],
 
 	module: {

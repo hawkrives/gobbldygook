@@ -8,7 +8,6 @@ import {v4 as uuid} from 'node-uuid'
 import stringify from 'json-stable-stringify'
 import present from 'present'
 
-import {version as currentVersionString} from '../../package.json'
 import checkGraduatability from '../lib/check-student-graduatability'
 
 import randomChar from '../helpers/random-char'
@@ -33,7 +32,7 @@ const now = new Date()
 const StudentRecord = Immutable.Record({
 	id: null,
 	name: null,
-	version: currentVersionString,
+	version: VERSION,
 
 	creditsNeeded: 35,
 
@@ -76,7 +75,7 @@ export default class Student extends StudentRecord {
 				student = student.set('name', encodedStudent.name || 'Student ' + randomChar())
 				student = student.set('dateCreated', encodedStudent.dateCreated || new Date())
 				student = student.set('dateLastModified', encodedStudent.dateLastModified || new Date())
-				student = student.set('version', currentVersionString)
+				student = student.set('version', VERSION)
 
 				forEach((encodedStudent.studies || []), study => {
 					student = student.addArea(study)
