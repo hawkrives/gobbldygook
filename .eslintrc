@@ -17,6 +17,7 @@ globals:
   require: false
   process: false
   VERSION: false
+  debug: false
 
 plugins:
   - eslint-plugin-react

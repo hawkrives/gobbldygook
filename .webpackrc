@@ -87,6 +87,7 @@ var config = {
 
 		new webpack.ProvidePlugin({
 			Promise: 'bluebird',
+			debug: 'debug',
 		}),
 
 		new webpack.DefinePlugin({
