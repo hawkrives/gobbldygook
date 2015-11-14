@@ -1,6 +1,7 @@
 /* eslint no-var:0 */
 /* global module */
 
+// shim Promise because node 0.10 doesn't support native promises
 global.Promise = require('bluebird')
 var pkg = require('./package.json')
 var webpack = require('webpack')
@@ -9,10 +10,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlPlugin = require('./scripts/webpack/html-plugin')
 var buildFilename = require('./scripts/webpack/build-filename')
 
-// figure out if we're running `webpack` or `webpack-dev-server`
-// we'll use this as the default for `isDev`
-var isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1
-var isTest = (process.argv[1] || '').indexOf('karma') !== -1
+var isProduction = (process.env.NODE_ENV === 'production')
+var isDev = (process.env.NODE_ENV === 'dev')
+var isTest = (process.env.NODE_ENV === 'test')
 
 var entryPoint = './src/start.js'
 var outputFolder = 'build/'
@@ -89,6 +89,21 @@ var config = {
 
 		new webpack.ProvidePlugin({
 			Promise: 'bluebird',
+			debug: 'debug',
+		}),
+
+		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
+		// to support the !!js/function type. We don't use and have no need for it, so
+		// tell webpack to ignore it.
+		// new webpack.IgnorePlugin(/schema\/default_full/, /js-yaml/),
+		new webpack.NormalModuleReplacementPlugin(/schema\/default_full$/, function(result) {
+			// console.error('NormalModuleReplacementPlugin', arguments)
+			result.request = result.request.replace('default_full', 'default_safe')
+		}),
+
+		new webpack.DefinePlugin({
+			VERSION: JSON.stringify(pkg.version),
+			DEV: isDev,
 		}),
 	],
 
@@ -176,7 +191,7 @@ else if (isTest) {
 }
 
 // production
-else {
+else if (isProduction) {
 	config.devtool = 'source-map'
 
 	config.stats.children = false
@@ -210,6 +225,10 @@ else {
 		test: /\.scss$/,
 		loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader'),
 	})
+}
+
+else {
+	throw new Error('Unknown environment! Not dev, production, nor test!')
 }
 
 module.exports = config
