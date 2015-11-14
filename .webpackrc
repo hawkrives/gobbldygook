@@ -97,6 +97,7 @@ var config = {
 
 		new webpack.DefinePlugin({
 			VERSION: JSON.stringify(pkg.version),
+			DEV: isDev,
 		}),
 	],
 

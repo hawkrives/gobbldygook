@@ -17,6 +17,7 @@ globals:
   require: false
   process: false
   VERSION: false
+  DEV: false
   debug: false
 
 plugins:
