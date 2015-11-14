@@ -49,7 +49,7 @@
     "codemirror": "5.8.0",
     "combinations-generator": "1.0.1",
     "fuzzysearch": "1.0.3",
-    "history": "1.13.0",
+    "history": "1.13.1",
     "humanize-plus": "1.5.0",
     "idb-range": "3.1.0",
     "immutable": "3.7.5",
