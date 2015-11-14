@@ -9,10 +9,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlPlugin = require('./scripts/webpack/html-plugin')
 var buildFilename = require('./scripts/webpack/build-filename')
 
-// figure out if we're running `webpack` or `webpack-dev-server`
-// we'll use this as the default for `isDev`
-var isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1
-var isTest = (process.argv[1] || '').indexOf('karma') !== -1
+var isProduction = (process.env.NODE_ENV === 'production')
+var isDev = (process.env.NODE_ENV === 'dev')
+var isTest = (process.env.NODE_ENV === 'test')
 
 var entryPoint = './src/start.js'
 var outputFolder = 'build/'
@@ -180,7 +179,7 @@ else if (isTest) {
 }
 
 // production
-else {
+else if (isProduction) {
 	config.devtool = 'source-map'
 
 	config.stats.children = false
@@ -214,6 +213,10 @@ else {
 		test: /\.scss$/,
 		loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader'),
 	})
+}
+
+else {
+	throw new Error('Unknown environment! Not dev, production, nor test!')
 }
 
 module.exports = config
