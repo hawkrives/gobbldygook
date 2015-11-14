@@ -1,7 +1,6 @@
 /* eslint no-var:0 */
 /* global module */
 
-global.Promise = require('bluebird')
 var pkg = require('./package.json')
 var webpack = require('webpack')
 
