@@ -7,7 +7,7 @@ import filter from 'lodash/collection/filter'
 import identity from 'lodash/utility/identity'
 import pluck from 'lodash/collection/pluck'
 import some from 'lodash/collection/some'
-import {v4 as uuid} from 'node-uuid'
+import {v4 as uuid} from 'uuid'
 
 import randomChar from '../helpers/random-char'
 import isTrue from '../helpers/is-true'

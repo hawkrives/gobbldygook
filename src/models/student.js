@@ -4,7 +4,7 @@ import forEach from 'lodash/collection/forEach'
 import omit from 'lodash/object/omit'
 import uniq from 'lodash/array/uniq'
 import round from 'lodash/math/round'
-import {v4 as uuid} from 'node-uuid'
+import {v4 as uuid} from 'uuid'
 import stringify from 'json-stable-stringify'
 import present from 'present'
 
