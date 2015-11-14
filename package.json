@@ -16,7 +16,7 @@
   "scripts": {
     "benchmark": "babel-node -- ./benchmarks/students-benchmark.js",
     "build": "env NODE_ENV=production webpack --config .webpackrc --bail --production --progress",
-    "build:dev": "webpack --config .webpackrc --bail --progress",
+    "build:dev": "env NODE_ENV=dev webpack --config .webpackrc --bail --progress",
     "build:areas": "./bin/compile-areas area-data/ --out-dir build/areas/",
     "build:ci": "npm run build -- --no-progress",
     "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
@@ -35,8 +35,10 @@
     "precopy": "npm run clean",
     "prestart": "npm run copy",
     "profile": "cat profile/README.md",
-    "start": "webpack-dev-server --config .webpackrc --progress",
-    "stats": "webpack --config .webpackrc --bail --profile --json > stats.json && open http://webpack.github.io/analyse/",
+    "start": "env NODE_ENV=dev webpack-dev-server --config .webpackrc --progress",
+    "stats": "env NODE_ENV=production npm run stats:base",
+    "stats:base": "webpack --config .webpackrc --bail --profile --json > stats.json && open http://webpack.github.io/analyse/",
+    "stats:dev": "env NODE_ENV=dev npm run stats:base",
     "test": "npm run mocha",
     "test:browser": "npm run karma",
     "test:students": "mocha ./bin/test-students"
