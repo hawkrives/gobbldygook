@@ -16,9 +16,9 @@ globals:
   global: false
   require: false
   process: false
-  VERSION: false
-  DEV: false
-  debug: false
+  VERSION: false  # inserted by webpack.DefinePlugin
+  DEV: false  # inserted by webpack.DefinePlugin
+  debug: false  # inserted by webpack.DefinePlugin
 
 plugins:
   - eslint-plugin-react
