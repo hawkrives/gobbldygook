@@ -1,4 +1,4 @@
-import {v4 as uuid} from 'node-uuid'
+import {v4 as uuid} from 'uuid'
 
 import Worker from './check-student-against-area.worker.js'
 const worker = new Worker()
