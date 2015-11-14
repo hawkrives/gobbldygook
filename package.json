@@ -48,6 +48,7 @@
     "classnames": "2.2.0",
     "codemirror": "5.8.0",
     "combinations-generator": "1.0.1",
+    "debug": "2.2.0",
     "fuzzysearch": "1.0.3",
     "history": "1.13.1",
     "humanize-plus": "1.5.0",
