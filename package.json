@@ -62,7 +62,7 @@
     "load-pkg": "2.0.1",
     "lodash": "3.10.1",
     "marked": "0.3.5",
-    "node-uuid": "1.4.6",
+    "node-uuid": "1.4.7",
     "ord": "0.1.1",
     "plur": "2.1.0",
     "present": "0.0.6",
