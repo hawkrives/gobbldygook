@@ -120,7 +120,7 @@
     "latest-release": "1.0.2",
     "matcha": "0.6.0",
     "mkdirp": "0.5.1",
-    "mocha": "2.3.3",
+    "mocha": "2.3.4",
     "node-libs-browser": "0.5.3",
     "node-sass": "3.4.2",
     "nomnom": "1.8.1",
