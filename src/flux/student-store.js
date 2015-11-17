@@ -2,9 +2,17 @@ import uniq from 'lodash/array/uniq'
 import stringify from 'json-stable-stringify'
 
 import Reflux from 'reflux'
-import Immutable from 'immutable'
+import groupBy from 'lodash/collection/groupBy'
+import get from 'lodash/object/get'
+import set from 'lodash/object/set'
+import findIndex from 'lodash/array/findIndex'
 import range from 'lodash/utility/range'
 import forEach from 'lodash/collection/forEach'
+import first from 'lodash/array/first'
+import map from 'lodash/collection/map'
+import cloneDeep from 'lodash/lang/cloneDeep'
+import sortBy from 'lodash/collection/sortBy'
+import isEqual from 'lodash/lang/isEqual'
 
 import Student from '../models/student'
 import demoStudent from '../models/demo-student.json'
@@ -24,9 +32,9 @@ const studentStore = Reflux.createStore({
 	listenables: studentActions,
 
 	init() {
-		this.students = Immutable.Map()
-		this.history = Immutable.Stack()
-		this.future = Immutable.Stack()
+		this.students = {}
+		this.history = []
+		this.future = []
 
 		this._loadData()
 	},
@@ -36,33 +44,33 @@ const studentStore = Reflux.createStore({
 	},
 
 	undo() {
-		if (this.history.size) {
+		if (this.history.length) {
 			// console.log('undoing...')
-			this.future = this.future.push(this.students)
-			this.students = this.history.first()
+			this.future.push(cloneDeep(this.students))
+			this.students = first(this.history)
 			this.history = this.history.pop()
 			this._postChange()
 		}
 	},
 
 	redo() {
-		if (this.future.size) {
+		if (this.future.length) {
 			// console.log('redoing...')
-			this.history = this.history.push(this.students)
-			this.students = this.future.first()
+			this.history.push(cloneDeep(this.students))
+			this.students = first(this.future)
 			this.future = this.future.pop()
 			this._postChange()
 		}
 	},
 
 	_preChange() {
-		this.history = this.history.push(this.students)
-		this.future = this.future.clear()
+		this.history.push(this.students)
+		this.future = []
 	},
 
 	_postChange() {
 		// console.log('students', this.students)
-		this.students.forEach(student => student.save())
+		forEach(this.students, student => student.save())
 		this._saveStudentIds()
 		this.trigger(this.students)
 	},
@@ -75,21 +83,21 @@ const studentStore = Reflux.createStore({
 		const student = new Student(rawStudent)
 
 		this._preChange()
-		this.students = this.students.set(studentId, student)
+		this.students[studentId] = student
 		this._postChange()
 	},
 
 	reloadStudents() {
-		const inMemory = this.students.map(s => s.id).toList()
-		const onDisk = Immutable.List(JSON.parse(localStorage.getItem('studentIds')))
+		const inMemory = sortBy(map(this.students, s => s.id))
+		const onDisk = sortBy(JSON.parse(localStorage.getItem('studentIds')))
 
-		if (!(inMemory.equals(onDisk))) {
+		if (!(isEqual(inMemory, onDisk))) {
 			this._loadData()
 		}
 	},
 
 	_saveStudentIds() {
-		localStorage.setItem('studentIds', stringify(this.students.map(s => s.id).toArray()))
+		localStorage.setItem('studentIds', stringify(map(this.students, s => s.id)))
 	},
 
 	_loadData(studentId) {
@@ -99,9 +107,7 @@ const studentStore = Reflux.createStore({
 		let studentIds =
 			// Get the list of students we know about, or the string 'null',
 			// if localStorage doesn't have the key 'studentIds'.
-			JSON.parse(localStorage.getItem('studentIds')) ||
-			// If that fails, grab the really old file 'student-v3.0a6'
-			['student-v3.0a6']
+			JSON.parse(localStorage.getItem('studentIds'))
 
 		if (studentId) {
 			studentIds.push(studentId)
@@ -110,7 +116,7 @@ const studentStore = Reflux.createStore({
 		studentIds = uniq(studentIds)
 
 		// Fetch and load the students from their IDs
-		const localStudents = Immutable.List(studentIds)
+		let localStudents = studentIds
 			// pull the students from localStorage
 			.map(id => [id, localStorage.getItem(id)])
 			// Remove any broken students from localStorage
@@ -121,9 +127,9 @@ const studentStore = Reflux.createStore({
 				return rawStudent
 			})
 			// filter out any that don't exist
-			.filterNot(rawStudent => rawStudent === null)
+			.filter(rawStudent => rawStudent !== null)
 			// and any that are bad
-			.filterNot(rawStudent => rawStudent === '[object Object]')
+			.filter(rawStudent => rawStudent !== '[object Object]')
 			// then process them
 			.map(rawStudent => {
 				// basicStudent defaults to an empty object so that the constructor
@@ -150,11 +156,13 @@ const studentStore = Reflux.createStore({
 
 				return fleshedStudent
 			})
-			.groupBy(student => student.id)
-			.map(student => student.get(0))
+
+		localStudents = map(
+			groupBy(localStudents, student => student.id),
+			student => student[0])
 
 		// Add them to students
-		this.students = this.students.merge(localStudents)
+		this.students = uniq(this.students.concat(localStudents))
 
 		// Update the studentIds list from the current list of students
 		this._saveStudentIds()
@@ -166,16 +174,18 @@ const studentStore = Reflux.createStore({
 	},
 
 	initStudent() {
-		const fleshedStudent = new Student().withMutations(student => {
-			forEach(range(student.matriculation, student.graduation), year => {
-				student = student.addSchedule({year, index: 1, active: true, semester: 1})
-				student = student.addSchedule({year, index: 1, active: true, semester: 2})
-				student = student.addSchedule({year, index: 1, active: true, semester: 3})
-			})
+		let student = new Student()
+
+		forEach(range(student.matriculation, student.graduation), year => {
+			student = student.addSchedule({year, index: 1, active: true, semester: 1})
+			student = student.addSchedule({year, index: 1, active: true, semester: 2})
+			student = student.addSchedule({year, index: 1, active: true, semester: 3})
 		})
-		fleshedStudent.save()
+
+		student.save()
+
 		this._preChange()
-		this._loadData(fleshedStudent.id)
+		this._loadData(student.id)
 	},
 
 	refreshData({areas=false, courses=false}) {
@@ -188,9 +198,7 @@ const studentStore = Reflux.createStore({
 		}
 
 		if (areas || courses) {
-			this.students = this.students.withMutations(students => {
-				return students.map(s => s.checkGraduatability())
-			})
+			this.students = this.students.map(s => s.checkGraduatability())
 		}
 	},
 
@@ -215,7 +223,13 @@ const studentStore = Reflux.createStore({
 
 	destroyStudent(studentId) {
 		this._preChange()
-		this.students = this.students.delete(studentId)
+
+		const studentIndex = findIndex(this.students, {id: studentId})
+		this.students = [
+			...this.students.splice(0, studentIndex),
+			...this.students.splice(studentIndex + 1),
+		]
+
 		localStorage.removeItem(studentId)
 		this._saveStudentIds()
 		this._postChange()
@@ -223,16 +237,41 @@ const studentStore = Reflux.createStore({
 
 	_change(studentId, method, ...args) {
 		this._preChange()
-		this.students = this.students.set(studentId, this.students.get(studentId)[method](...args))
-		this.students = this.students.set(studentId, this.students.get(studentId).checkGraduatability())
+
+		const studentIndex = findIndex(this.students, {id: studentId})
+		let student = this.students[studentIndex]
+		student = student[method](...args)
+		student = student.checkGraduatability()
+
+		this.students = [
+			...this.students.splice(0, studentIndex),
+			student,
+			...this.students.splice(studentIndex + 1),
+		]
+
 		this._postChange()
 	},
 
 	_alter(pathToData, method, ...args) {
 		this._preChange()
+
 		const studentId = pathToData[0]
-		this.students = this.students.setIn(pathToData, this.students.getIn(pathToData)[method](...args))
-		this.students = this.students.set(studentId, this.students.get(studentId).checkGraduatability())
+		pathToData = pathToData.slice(1)
+
+		const studentIndex = findIndex(this.students, {id: studentId})
+		let student = this.students[studentIndex]
+
+		let changed = get(student, pathToData)[method](...args)
+		set(student, pathToData, changed)
+
+		student = student.checkGraduatability()
+
+		this.students = [
+			...this.students.splice(0, studentIndex),
+			student,
+			...this.students.splice(studentIndex + 1),
+		]
+
 		this._postChange()
 	},
 
