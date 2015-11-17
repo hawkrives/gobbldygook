@@ -1,5 +1,6 @@
-import {OrderedMap} from 'immutable'
 import uniqueId from 'lodash/utility/uniqueId'
+import findIndex from 'lodash/array/findIndex'
+import clone from 'lodash/lang/clone'
 
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION'
 export const LOG_MESSAGE = 'LOG_MESSAGE'
@@ -8,43 +9,48 @@ export const START_PROGRESS = 'START_PROGRESS'
 export const INCREMENT_PROGRESS = 'INCREMENT_PROGRESS'
 
 
-const initialState = OrderedMap({})
+const initialState = []
 
 export default function reducer(state = initialState, action) {
 	const {type, payload} = action
 
 	if (type === LOG_MESSAGE) {
-		return state.set(payload.id, {id: payload.id, message: payload.message, type: 'message'})
+		return [...state, {id: payload.id, message: payload.message, type: 'message'}]
 	}
 
 	else if (type === LOG_ERROR) {
-		return state.set(payload.id, {
+		return [...state, {
 			id: payload.id,
 			message: payload.error.message,
 			type: 'error',
-		})
+		}]
 	}
 
 	else if (type === START_PROGRESS) {
-		return state.set(payload.id, {
+		return [...state, {
 			id: payload.id,
 			message: payload.message,
 			value: payload.value,
 			max: payload.max,
 			showButton: payload.showButton,
 			type: 'progress',
-		})
+		}]
 	}
 
 	else if (type === INCREMENT_PROGRESS) {
 		// make a copy of the previous item
-		const progress = {...state.get(payload.id)}
+		const itemIndex = findIndex(state, {id: payload.id})
+		const progress = clone(state[itemIndex])
 		progress.value += payload.by
 		progress.value = progress.value <= progress.max
 			? progress.value
 			: progress.max
 
-		return state.set(payload.id, progress)
+		return [
+			...state.slice(0, itemIndex),
+			progress,
+			...state.slice(itemIndex + 1),
+		]
 	}
 
 	else if (type === REMOVE_NOTIFICATION) {

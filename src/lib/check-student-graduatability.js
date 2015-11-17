@@ -1,8 +1,8 @@
 import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
 import map from 'lodash/collection/map'
+import zipObject from 'lodash/array/zipObject'
 
-import {OrderedMap} from 'immutable'
 import checkStudentAgainstArea from './check-student-against-area'
 import countCredits from './count-credits'
 
@@ -18,9 +18,9 @@ import countCredits from './count-credits'
  *    {Immutable.Map} areaDetails
  */
 async function checkStudentGraduatability(student) {
-	const areaPromises = student.studies
-		.map(area => checkStudentAgainstArea(student, area))
-		.toArray()
+	const areaPromises = map(
+		student.studies,
+		area => checkStudentAgainstArea(student, area))
 
 	const areas = await Promise.all(areaPromises)
 
@@ -31,7 +31,7 @@ async function checkStudentGraduatability(student) {
 
 	const graduatability = (allAreasPass && hasEnoughCredits)
 
-	const areaDetails = OrderedMap(map(areas, area => [area.id, area]))
+	const areaDetails = zipObject(map(areas, area => [area.id, area]))
 
 	return {
 		canGraduate: graduatability,

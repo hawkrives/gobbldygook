@@ -4,8 +4,6 @@ import capitalize from 'lodash/string/capitalize'
 import * as areaTypeConstants from '../models/area-types'
 import values from 'lodash/object/values'
 
-import {List} from 'immutable'
-
 import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'
 import Button from './button'
@@ -16,8 +14,8 @@ export default class AreaOfStudyGroup extends Component {
 	static propTypes = {
 		addArea: PropTypes.func.isRequired,
 		addOverride: PropTypes.func.isRequired,
-		allAreas: PropTypes.instanceOf(List).isRequired,
-		areas: PropTypes.instanceOf(List).isRequired,
+		allAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
+		areas: PropTypes.arrayOf(PropTypes.object).isRequired,
 		endAddArea: PropTypes.func.isRequired,
 		initiateAddArea: PropTypes.func.isRequired,
 		removeArea: PropTypes.func.isRequired,

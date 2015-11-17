@@ -1,7 +1,8 @@
 import React, {Component, PropTypes, cloneElement} from 'react'
-import Immutable from 'immutable'
 import DocumentTitle from 'react-document-title'
 
+import map from 'lodash/collection/map'
+import filter from 'lodash/collection/filter'
 import Sidebar from './sidebar'
 import Loading from '../components/loading'
 
@@ -9,23 +10,23 @@ import './student.scss'
 
 export default class Student extends Component {
 	static propTypes = {
-		allAreas: PropTypes.object, // Immutable.List
+		allAreas: PropTypes.array,
 		children: PropTypes.node,
 		params: PropTypes.object, // react-router
-		students: PropTypes.object, // Immutable.Map
+		students: PropTypes.object,
 	}
 
 	static defaultProps = {
-		allAreas: Immutable.List(),
-		students: Immutable.Map(),
+		allAreas: [],
+		students: {},
 	}
 
 	constructor(props) {
 		super(props)
 		this.state = {
-			allAreas: Immutable.List(),
+			allAreas: [],
 			baseSearchQuery: {},
-			courses: Immutable.List(),
+			courses: [],
 			coursesLoaded: false,
 			message: `Loading Student ${props.params.id}`,
 			messageClass: '',
@@ -49,16 +50,13 @@ export default class Student extends Component {
 			this.setState({student})
 			student.courses.then(courses => {
 				this.setState({
-					courses: Immutable.List(courses),
+					courses: courses,
 					coursesLoaded: true,
 				})
 				return null
 			})
 
-			const customAreas = student.studies
-				.filter(study => study.isCustom)
-				.map(study => study.data)
-				.toArray()
+			const customAreas = map(filter(student.studies, {isCustom: true}), study => study.data)
 
 			Promise.all(customAreas).then(customAreas => {
 				this.setState({

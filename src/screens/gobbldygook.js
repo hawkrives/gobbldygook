@@ -1,5 +1,4 @@
 import React, {Component, PropTypes, cloneElement} from 'react'
-import Immutable from 'immutable'
 import DocumentTitle from 'react-document-title'
 import {DragDropContext} from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
@@ -17,9 +16,9 @@ class GobbldygookApp extends Component {
 	constructor() {
 		super()
 		this.state = {
-			students: Immutable.Map(),
+			students: {},
 			studentsInitialized: false,
-			allAreas: Immutable.List(),
+			allAreas: [],
 		}
 
 		this.onAreasRefreshed()
@@ -45,7 +44,7 @@ class GobbldygookApp extends Component {
 
 	onAreasRefreshed = () => {
 		db.stores.areas.all().then(areas => this.setState({
-			allAreas: Immutable.List(areas),
+			allAreas: areas,
 		}))
 	}
 

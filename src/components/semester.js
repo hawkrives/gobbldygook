@@ -1,11 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
-import Immutable from 'immutable'
 import {Link} from 'react-router'
 import {DropTarget} from 'react-dnd'
 import plur from 'plur'
 import range from 'lodash/utility/range'
 import includes from 'lodash/collection/includes'
+import find from 'lodash/collection/find'
+import filter from 'lodash/collection/filter'
+import map from 'lodash/collection/map'
 import semesterName from '../helpers/semester-name'
 import isCurrentSemester from '../helpers/is-current-semester'
 import countCredits from '../lib/count-credits'
@@ -24,9 +26,9 @@ import EmptyCourseSlot from './empty-course-slot'
 import './semester.scss'
 
 function getSchedule(student, year, semester) {
-	return student.schedules
-		.filter(sched => sched.active)
-		.find(sched => (sched.year === year) && (sched.semester === semester))
+	return find(
+		filter(student.schedules, sched => sched.active),
+		sched => (sched.year === year) && (sched.semester === semester))
 }
 
 // Implements the drag source contract.
@@ -47,7 +49,7 @@ const semesterTarget = {
 	canDrop(props, monitor) {
 		const item = monitor.getItem()
 		const schedule = getSchedule(props.student, props.year, props.semester)
-		const hasClbid = schedule.clbids.contains(item.clbid)
+		const hasClbid = includes(schedule.clbids, item.clbid)
 		return !hasClbid
 	},
 }
@@ -91,9 +93,9 @@ class Semester extends Component {
 	}
 
 	removeSemester = () => {
-		const scheduleIds = this.props.student.schedules
-			.filter(isCurrentSemester(this.props.year, this.props.semester))
-			.map(sched => sched.id)
+		const scheduleIds = map(
+			filter(this.props.student.schedules, isCurrentSemester(this.props.year, this.props.semester)),
+			sched => sched.id)
 
 		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
 	}
@@ -103,23 +105,22 @@ class Semester extends Component {
 		let courseList = <Loading>Loading Courses…</Loading>
 
 		const schedule = getSchedule(this.props.student, this.props.year, this.props.semester)
-		const courses = Immutable.List(this.props.courses)
+		const courses = this.props.courses
 
 		// recommendedCredits is 4 for fall/spring and 1 for everything else
-		const recommendedCredits = includes([1, 3], this.props.semester) ? 4 : 1
-		const currentCredits = courses.size ? countCredits(courses) : 0
+		const recommendedCredits = (this.props.semester === 1 || this.props.semester === 3) ? 4 : 1
+		const currentCredits = courses.length ? countCredits(courses) : 0
 
 		let infoBar = []
-		if (schedule && courses.size) {
-			const courseCount = courses.size
+		if (schedule && courses.length) {
+			const courseCount = courses.length
 
 			infoBar.push(<li key='course-count'>{` – ${courseCount} ${plur('course', courseCount)}`}</li>)
 			currentCredits && infoBar.push(<li key='credit-count'>{` – ${currentCredits} ${plur('credit', currentCredits)}`}</li>)
 		}
 
 		if (schedule && this.props.coursesLoaded) {
-			let courseObjects = courses
-				.map((course, i) =>
+			let courseObjects = map(courses, (course, i) =>
 					course.error
 					? <MissingCourse key={course.clbid} clbid={course.clbid} error={course.error} />
 					: <Course
@@ -131,12 +132,11 @@ class Semester extends Component {
 						conflicts={this.state.validation.conflicts}
 					/>
 				)
-				.toArray()
 
 			let emptySlots = []
 			if (currentCredits < recommendedCredits) {
 				const minimumExtraCreditRange = range(Math.floor(currentCredits), recommendedCredits)
-				emptySlots = minimumExtraCreditRange.map(i => <EmptyCourseSlot key={`empty-${i}`} />)
+				emptySlots = map(minimumExtraCreditRange, i => <EmptyCourseSlot key={`empty-${i}`} />)
 			}
 
 			courseList = (

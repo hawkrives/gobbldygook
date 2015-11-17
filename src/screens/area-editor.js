@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import yaml from 'js-yaml'
 import cx from 'classnames'
-import {List} from 'immutable'
 import keymage from 'keymage'
 import omit from 'lodash/object/omit'
+import find from 'lodash/collection/find'
 import Toolbar from '../components/toolbar'
 import Button from '../components/button'
 import Icon from '../components/icon'
@@ -18,7 +18,7 @@ import './area-editor.scss'
 
 export default class AreaEditor extends Component {
 	static propTypes = {
-		allAreas: PropTypes.instanceOf(List).isRequired,
+		allAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
 		className: PropTypes.string,
 		params: PropTypes.object.isRequired,
 		query: PropTypes.object.isRequired,
@@ -42,7 +42,7 @@ export default class AreaEditor extends Component {
 		}
 
 		const {name, type, revision} = nextProps.query
-		const area = nextProps.allAreas.find(area =>
+		const area = find(nextProps.allAreas, area =>
 			area.type === type && area.name === name && area.revision === revision)
 
 		let data = omit(area, ['sourcePath'])

@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import I from 'immutable'
 import fuzzysearch from 'fuzzysearch'
 import pluralizeArea from '../lib/pluralize-area'
 
@@ -12,9 +11,9 @@ import './area-picker.scss'
 export default class AreaPicker extends Component {
 	static propTypes = {
 		addArea: PropTypes.func.isRequired,
-		allAreas: PropTypes.instanceOf(I.List).isRequired,
+		allAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
 		closePicker: PropTypes.func.isRequired,
-		currentAreas: PropTypes.instanceOf(I.List).isRequired,
+		currentAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
 		removeArea: PropTypes.func.isRequired,
 		type: PropTypes.string.isRequired,
 	}

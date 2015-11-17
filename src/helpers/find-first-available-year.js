@@ -22,8 +22,7 @@ function findFirstAvailableYear(schedules, matriculation) {
 		return new Date().getFullYear()
 	}
 
-	const scheds = ImmutableIterable.isIterable(schedules) ? schedules.toArray() : schedules
-	let years = pluck(scheds, 'year')
+	let years = pluck(schedules, 'year')
 
 	// put the matriculation year at the front to give a starting point
 	if (matriculation !== undefined && !includes(years, matriculation)) {

@@ -1,11 +1,16 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
-import Immutable from 'immutable'
 
 import includes from 'lodash/collection/includes'
 import difference from 'lodash/array/difference'
 import union from 'lodash/array/union'
 import values from 'lodash/object/values'
+import map from 'lodash/collection/map'
+import filter from 'lodash/collection/filter'
+import groupBy from 'lodash/collection/groupBy'
+import has from 'lodash/object/has'
+import uniq from 'lodash/array/uniq'
+import pluck from 'lodash/collection/pluck'
 
 import pathToOverride from '../lib/path-to-override'
 
@@ -20,8 +25,8 @@ import './graduation-status.scss'
 
 export default class GraduationStatus extends Component {
 	static propTypes = {
-		allAreas: PropTypes.object, // Immutable.List
-		courses: PropTypes.object, // Immutable.List
+		allAreas: PropTypes.array,
+		courses: PropTypes.array,
 		coursesLoaded: PropTypes.bool.isRequired,
 		isHidden: PropTypes.bool,
 		student: PropTypes.object.isRequired,
@@ -31,9 +36,9 @@ export default class GraduationStatus extends Component {
 		super(props)
 		this.state = {
 			graduatability: false,
-			areaDetails: Immutable.OrderedMap(),
-			allAreas: Immutable.List(),
-			showAreaPickerFor: Immutable.Map(),
+			areaDetails: {},
+			allAreas: [],
+			showAreaPickerFor: {},
 		}
 	}
 
@@ -84,7 +89,7 @@ export default class GraduationStatus extends Component {
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
 
-		if (this.props.student.overrides.has(codifiedPath)) {
+		if (has(this.props.student.overrides, codifiedPath)) {
 			actions.removeOverride(this.props.student.id, codifiedPath)
 		}
 		else {
@@ -105,40 +110,44 @@ export default class GraduationStatus extends Component {
 			return null
 		}
 
-		const allAreasGrouped = this.props.allAreas.groupBy(a => a.type)
+		const allAreasGrouped = groupBy(this.props.allAreas, 'type')
 
-		const sections = this.props.student.studies
-			// group the studies by their type
-			.groupBy(study => study.type.toLowerCase())
-			// pull the results out of state, or use a mutable version from props
-			.map(areas => areas.map(area => this.state.areaDetails.get(area.id) || area.toObject()))
-			// then render them
-			.map((areas, areaType) =>
-				<AreaOfStudyGroup key={areaType}
-					addArea={this.addAreaToStudent}
-					addOverride={this.addOverrideToStudent}
-					allAreas={allAreasGrouped.get(areaType) || Immutable.List()}
-					areas={areas ? areas.toList() : Immutable.List()}
-					courses={this.props.courses}
-					coursesLoaded={this.props.coursesLoaded}
-					endAddArea={this.endAddArea}
-					initiateAddArea={this.initiateAddArea}
-					removeArea={this.removeAreaFromStudent}
-					removeOverride={this.removeOverrideFromStudent}
-					showAreaPicker={this.state.showAreaPickerFor.get(areaType)}
-					studentId={this.props.student.id}
-					toggleOverride={this.toggleOverrideOnStudent}
-					type={areaType}
-				/>)
-			.toArray()
+		const sections = (
+			map(
+				map(
+					groupBy(
+						// group the studies by their type
+						this.props.student.studies,
+						study => study.type.toLowerCase()),
 
-		const usedAreaTypes = this.props.student.studies
-			.map(a => a.get('type'))
-			.toSet()
-			.toArray()
+					// pull the results out of state, or use a mutable version from props
+					areas => areas.map(area => this.state.areaDetails[area.id] || area)),
+
+				// and then render them
+				(areas, areaType) =>
+					<AreaOfStudyGroup key={areaType}
+						addArea={this.addAreaToStudent}
+						addOverride={this.addOverrideToStudent}
+						allAreas={allAreasGrouped[areaType] || []}
+						areas={areas || []}
+						courses={this.props.courses}
+						coursesLoaded={this.props.coursesLoaded}
+						endAddArea={this.endAddArea}
+						initiateAddArea={this.initiateAddArea}
+						removeArea={this.removeAreaFromStudent}
+						removeOverride={this.removeOverrideFromStudent}
+						showAreaPicker={this.state.showAreaPickerFor[areaType]}
+						studentId={this.props.student.id}
+						toggleOverride={this.toggleOverrideOnStudent}
+						type={areaType}
+					/>))
+
+		const usedAreaTypes = uniq(pluck(this.props.student.studies, 'type'))
 
 		const allAreaTypes = values(areaTypeConstants)
-		const areaTypesToShowButtonsFor = union(usedAreaTypes, [...this.state.showAreaPickerFor.filter(a => a === true).keys()])
+		const areaTypesToShowButtonsFor = union(
+			usedAreaTypes,
+			[...this.state.showAreaPickerFor.filter(a => a === true).keys()])
 		const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
 
 		const addUnusedAreaButtonList = (
@@ -157,22 +166,24 @@ export default class GraduationStatus extends Component {
 			</section>
 		)
 
-		const unusedTypesToShow = this.state.showAreaPickerFor
-			.filter((toShow, type) => toShow === true && !includes(usedAreaTypes, type))
-			.map((toShow, type) =>
-				<AreaOfStudyGroup key={type}
-					addArea={this.addAreaToStudent}
-					addOverride={this.addOverrideToStudent}
-					allAreas={allAreasGrouped.get(type) || Immutable.List()}
-					areas={Immutable.List()}
-					endAddArea={this.endAddArea}
-					initiateAddArea={this.initiateAddArea}
-					removeArea={this.removeAreaFromStudent}
-					showAreaPicker={toShow}
-					toggleOverride={this.toggleOverrideOnStudent}
-					type={type}
-				/>)
-			.toArray()
+		const unusedTypesToShow = (
+			map(
+				filter(
+					this.state.showAreaPickerFor,
+					(toShow, type) => toShow === true && !includes(usedAreaTypes, type)),
+				(toShow, type) =>
+					<AreaOfStudyGroup key={type}
+						addArea={this.addAreaToStudent}
+						addOverride={this.addOverrideToStudent}
+						allAreas={allAreasGrouped[type] || []}
+						areas={[]}
+						endAddArea={this.endAddArea}
+						initiateAddArea={this.initiateAddArea}
+						removeArea={this.removeAreaFromStudent}
+						showAreaPicker={toShow}
+						toggleOverride={this.toggleOverrideOnStudent}
+						type={type}
+					/>))
 
 		return (
 			<section className={cx('graduation-status', {'is-hidden': this.props.isHidden})}>

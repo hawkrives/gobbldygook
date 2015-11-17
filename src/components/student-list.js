@@ -1,7 +1,12 @@
 import React, {Component, PropTypes} from 'react'
-import Immutable from 'immutable'
 import {Link} from 'react-router'
 
+import groupBy from 'lodash/collection/groupBy'
+import map from 'lodash/collection/map'
+import filter from 'lodash/collection/filter'
+import values from 'lodash/object/values'
+import sortBy from 'lodash/collection/sortBy'
+import interpose from '../helpers/interpose'
 import fuzzysearch from 'fuzzysearch'
 
 import studentActions from '../flux/student-actions'
@@ -16,7 +21,7 @@ import './student-list.scss'
 class StudentListItem extends Component {
 	static propTypes = {
 		isEditing: PropTypes.bool,
-		student: PropTypes.instanceOf(Immutable.Record).isRequired,
+		student: PropTypes.object.isRequired,
 	}
 
 	static defaultProps = {
@@ -31,19 +36,18 @@ class StudentListItem extends Component {
 	render() {
 		// console.log('StudentListItem#render')
 		const student = this.props.student
-		const groupedStudies = student.studies.groupBy(s => s.type)
+		const groupedStudies = groupBy(student.studies, s => s.type)
 		return (<span>
 			<Link className='student-list-item' to={`/s/${student.id}/`}>
 				<AvatarLetter value={student.name} />
 				<span className='student-list-item-info'>
 					<div className='name'>{student.name || ''}</div>
 					<div className='areas'>
-						{groupedStudies
-							.map(group => group.map(s => s.name).join(' · '))
-							.toList()
-							.interpose(<span className='joiner'>※</span>)
-							.map((group, i) => <span className='area-type' key={i}>{group}</span>)
-							.toArray()}
+						{map(
+							interpose(
+								map(groupedStudies, group => group.map(s => s.name).join(' · ')),
+								<span className='joiner'>※</span>),
+							(group, i) => <span className='area-type' key={i}>{group}</span>)}
 					</div>
 				</span>
 				<span className='student-list-item-actions'>
@@ -64,7 +68,7 @@ export default class StudentList extends Component {
 		filter: PropTypes.string,
 		isEditing: PropTypes.bool,
 		sortBy: PropTypes.oneOf(['modified', 'name']),
-		students: PropTypes.instanceOf(Immutable.Map).isRequired,
+		students: PropTypes.object.isRequired,
 	}
 
 	static defaultProps = {
@@ -79,17 +83,19 @@ export default class StudentList extends Component {
 			sortProp = 'name'
 		}
 
-		const studentObjects = this.props.students
-			.toList()
-			.filter(s => fuzzysearch(this.props.filter, s.name.toLowerCase()))
-			.sortBy(s => s[sortProp])
-			.map(student =>
-				<StudentListItem
-					key={student.id}
-					student={student}
-					isEditing={this.props.isEditing}
-				/>)
-			.toArray()
+		const studentObjects = map(
+				sortBy(
+					filter(
+						values(this.props.students),
+						s => fuzzysearch(this.props.filter, s.name.toLowerCase())),
+					s => s[sortProp]),
+				student =>
+					<StudentListItem
+						key={student.id}
+						student={student}
+						isEditing={this.props.isEditing}
+					/>
+			)
 
 		return (
 			<List className='student-list' type='plain'>

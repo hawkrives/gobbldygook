@@ -1,5 +1,4 @@
 import map from 'lodash/collection/map'
-import Immutable from 'immutable'
 import getCourse from './get-course'
 
 /**
@@ -14,9 +13,6 @@ export default function getCourses(clbids, {year, semester}={}) {
 	// those clbids.
 
 	// console.log('called getCourses', clbids)
-	if (Immutable.Iterable.isIterable(clbids)) {
-		clbids = clbids.toArray()
-	}
 
 	//
 	// Current problem: this rejects as soon as one item is rejected.
