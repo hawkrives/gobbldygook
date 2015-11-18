@@ -22,7 +22,7 @@ export default function Schedule(data={}) {
 		return new Schedule(data)
 	}
 
-	let schedule = {
+	const baseSchedule = {
 		id: uuid(),
 		active: false,
 
@@ -36,9 +36,12 @@ export default function Schedule(data={}) {
 		courses: Promise.resolve([]),
 
 		toJSON() {
-			return omit(this, val => val instanceof Promise || val instanceof Function)
+			return omit(this, value => value instanceof Promise)
 		},
+	}
 
+	let schedule = {
+		...baseSchedule,
 		...data,
 	}
 
@@ -60,18 +63,14 @@ export function moveSchedule(schedule, year, semester) {
 }
 
 export function reorderSchedule(schedule, index) {
-	let sched = {...schedule}
-	sched.index = index
-	return sched
+	return {...schedule, index}
 }
 
 export function renameSchedule(schedule, title) {
-	let sched = {...schedule}
-	sched.title = title
-	return sched
+	return {...schedule, title}
 }
 
-export function reorderCourseInSchedule(schedule, clbid, newIndex) {
+export function reorderCourse(schedule, clbid, newIndex) {
 	if (!isNumber(clbid)) {
 		throw new TypeError('reorderCourse(): clbid must be a number')
 	}
@@ -90,7 +89,7 @@ export function reorderCourseInSchedule(schedule, clbid, newIndex) {
 	return sched
 }
 
-export function addCourseToSchedule(schedule, clbid) {
+export function addCourse(schedule, clbid) {
 	// let start = present()
 	// console.log(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
@@ -111,7 +110,7 @@ export function addCourseToSchedule(schedule, clbid) {
 	return sched
 }
 
-export function removeCourseFromSchedule(schedule, clbid) {
+export function removeCourse(schedule, clbid) {
 	// let start = present()
 	// console.log(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
