@@ -1,33 +1,22 @@
 import {expect} from 'chai'
-import Study, {expandOldType, expandOldName} from '../../src/models/study'
+import proxyquire from 'proxyquire'
+import stringify from 'json-stable-stringify'
+
+function loadAreaStub() {
+	return Promise.resolve({})
+}
 
 describe('Study', () => {
-	it('is a Study', () => {
-		let csci = new Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
-		expect(csci instanceof Study).to.be.true
-	})
-
-	it('can be turned into a JS object', () => {
-		let csci = new Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
-		expect(csci.toJS()).to.be.an.instanceof(Object)
-	})
-
-	it('ignores sets on known properties', () => {
-		let csci = new Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
-		try {
-			csci.type = 'concentration'
-		}
-		catch (err) {}
-		expect(csci.type).to.equal('major')
+	const Study = proxyquire('../../src/models/study', {
+		'./load-area': loadAreaStub,
 	})
 
 	it('holds an area of study for a student', () => {
 		let csci = new Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
-		let result = csci.toJS()
 
-		let {id, type, name, revision, data} = result
+		let {path, type, name, revision, data} = csci
 
-		expect(id).to.equal('majors/computer-science-2014-15')
+		expect(path).to.equal('majors/computer-science/2014-15')
 		expect(type).to.equal('major')
 		expect(name).to.equal('Computer Science')
 		expect(revision).to.equal('2014-15')
@@ -36,58 +25,27 @@ describe('Study', () => {
 
 	it('can turn into JSON', () => {
 		let csci = new Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
-		let result = JSON.stringify(csci)
+		let result = stringify(csci)
 
 		expect(JSON.parse(result)).to.deep.equal({
-			type: 'major',
 			name: 'Computer Science',
+			path: 'majors/computer-science/2014-15',
 			revision: '2014-15',
+			type: 'major',
+			source: '',
 		})
 	})
 
 	it('only translates some properties into the JSON bit', () => {
 		let csci = new Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
-		let result = JSON.stringify(csci)
+		let result = stringify(csci)
 
 		expect(JSON.parse(result)).to.deep.equal({
 			name: 'Computer Science',
-			type: 'major',
+			path: 'majors/computer-science/2014-15',
 			revision: '2014-15',
+			type: 'major',
+			source: '',
 		})
-	})
-
-	it('can migrate from the old save-style to the new', () => {
-		let csci = new Study({id: 'm-csci', revisionYear: 2014})
-
-		expect(csci.name).to.equal('Computer Science')
-		expect(csci.type).to.equal('major')
-		expect(csci.revision).to.equal('2014-15')
-	})
-})
-
-describe('expandOldType', () => {
-	it('handles majors', () => {
-		expect(expandOldType('m')).to.equal('major')
-	})
-	it('handles concentrations', () => {
-		expect(expandOldType('c')).to.equal('concentration')
-	})
-	it('handles degrees', () => {
-		expect(expandOldType('d')).to.equal('degree')
-	})
-	it('handles emphases', () => {
-		expect(expandOldType('e')).to.equal('emphasis')
-	})
-})
-
-describe('expandOldName', () => {
-	it('handles all of the old names', () => {
-		expect(expandOldName('csci')).to.equal('Computer Science')
-		expect(expandOldName('math')).to.equal('Mathematics')
-		expect(expandOldName('phys')).to.equal('Physics')
-		expect(expandOldName('asian')).to.equal('Asian Studies')
-		expect(expandOldName('stat')).to.equal('Statistics')
-		expect(expandOldName('japan')).to.equal('Japan Studies')
-		expect(expandOldName('ba')).to.equal('Bachelor of Arts')
 	})
 })
