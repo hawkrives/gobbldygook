@@ -20,12 +20,12 @@ export default function Study(data) {
 		},
 	}
 
-	baseStudy.path = findAreaPath(study.name, study.type, study.revision)
-
 	const study = {
 		...baseStudy,
 		...data,
 	}
+
+	study.path = study.path || findAreaPath({name: study.name, type: study.type, revision: study.revision})
 
 	study.data = loadArea(study.path)
 		.catch(err => ({_error: err.message}))
