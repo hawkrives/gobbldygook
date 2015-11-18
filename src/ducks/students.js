@@ -1,13 +1,29 @@
 import undoable from 'redux-undo'
 
-import uniqueId from 'lodash/utility/uniqueId'
-import findIndex from 'lodash/array/findIndex'
 import remove from 'lodash/array/remove'
 import forEach from 'lodash/collection/forEach'
+import get from 'lodash/object/get'
+import set from 'lodash/object/set'
 import range from 'lodash/utility/range'
 
-import Student from '../models/student'
-import Schedule from '../models/schedule'
+import Student, {
+	saveStudent,
+	addArea as addAreaToStudent,
+	removeArea as removeAreaFromStudent,
+	addSchedule as addScheduleToStudent,
+	destroySchedule as destroyScheduleFromStudent,
+	moveCourse as moveCourseAcrossSchedules,
+} from '../models/student'
+
+import Schedule, {
+	renameSchedule as renameScheduleInStudent,
+	reorderSchedule as reorderScheduleInStudent,
+	moveSchedule as moveScheduleInStudent,
+	addCourse as addCourseToSchedule,
+	removeCourse as removeCourseFromSchedule,
+	reorderCourse as reorderCourseInSchedule,
+} from '../models/schedule'
+
 import Study from '../models/study'
 
 export const INIT_STUDENT = 'INIT_STUDENT'
@@ -24,8 +40,6 @@ export const CHANGE_SETTING = 'CHANGE_SETTING'
 export const ADD_AREA = 'ADD_AREA'
 export const REMOVE_AREA = 'REMOVE_AREA'
 export const REMOVE_MULTIPLE_AREAS = 'REMOVE_MULTIPLE_AREAS'
-export const REORDER_AREA = 'REORDER_AREA'
-export const EDIT_AREA = 'EDIT_AREA'
 
 export const ADD_SCHEDULE = 'ADD_SCHEDULE'
 export const DESTROY_SCHEDULE = 'DESTROY_SCHEDULE'
@@ -54,9 +68,11 @@ function changeStudent(state, studentId, key, value) {
 	return {...state, [studentId]: student}
 }
 
-function alterWithinStudent(state, studentId, key, value) {
-	const student = {...state[studentId]}
-	student[key] = value
+function mutateStudent(state, studentId, path, pureFunc, ...args) {
+	let student = {...state[studentId]}
+	let item = get(student, path)
+	item = pureFunc(item, ...args)
+	set(student, path, item)
 	return {...state, [studentId]: student}
 }
 
@@ -97,6 +113,60 @@ function reducer(state = initialState, action) {
 			return changeStudent(state, payload.studentId, payload.key, payload.value)
 		}
 
+		case ADD_AREA: {
+			const student = addAreaToStudent(state[payload.studentId], payload.area)
+			return {...state, [payload.studentId]: student}
+		}
+		case REMOVE_AREA: {
+			const student = removeAreaFromStudent(state[payload.studentId], payload.areaId)
+			return {...state, [payload.studentId]: student}
+		}
+		case REMOVE_MULTIPLE_AREAS: {
+			let student = {...state[payload.studentId]}
+			for (const areaId of payload.areaIds) {
+				student = removeAreaFromStudent(student, areaId)
+			}
+			return {...state, [payload.studentId]: student}
+		}
+
+		case ADD_SCHEDULE: {
+			const student = addScheduleToStudent(state[payload.studentId], payload.schedule)
+			return {...state, [payload.studentId]: student}
+		}
+		case DESTROY_SCHEDULE: {
+			const student = destroyScheduleFromStudent(state[payload.studentId], payload.scheduleId)
+			return {...state, [payload.studentId]: student}
+		}
+		case DESTROY_MULTIPLE_SCHEDULES: {
+			let student = {...state[payload.studentId]}
+			for (const id of payload.scheduleIds) {
+				student = removeAreaFromStudent(student, id)
+			}
+			return {...state, [payload.studentId]: student}
+		}
+		case RENAME_SCHEDULE: {
+			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], renameScheduleInStudent, payload.newTitle)
+		}
+		case REORDER_SCHEDULE: {
+			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], reorderScheduleInStudent, payload.newIndex)
+		}
+		case MOVE_SCHEDULE: {
+			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], moveScheduleInStudent, payload.year, payload.semester)
+		}
+
+		case ADD_COURSE: {
+			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], addCourseToSchedule, payload.clbid)
+		}
+		case REMOVE_COURSE: {
+			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], removeCourseFromSchedule, payload.clbid)
+		}
+		case REORDER_COURSE: {
+			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], reorderCourseInSchedule, payload.clbid, payload.year, payload.semester)
+		}
+		case MOVE_COURSE: {
+			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], moveCourseAcrossSchedules, payload.fromScheduleId, payload.toScheduleId, payload.clbid)
+		}
+
 		default: {
 			return state
 		}
@@ -110,8 +180,6 @@ export default undoable(reducer, {
 })
 
 
-
-function saveStudent() {}
 
 export function initStudent() {
 	let student = new Student()
@@ -178,6 +246,7 @@ export function changeSetting(studentId, key, value) {
 	return { type: CHANGE_SETTING, payload: {studentId, key, value} }
 }
 
+
 export function addArea(studentId, areaQuery) {
 	let area = new Study(areaQuery)
 	return { type: ADD_AREA, payload: {studentId, area} }
@@ -188,9 +257,7 @@ export function removeArea(studentId, areaId) {
 export function removeMultipleAreas(studentId, ...areaIds) {
 	return { type: REMOVE_MULTIPLE_AREAS, payload: {studentId, areaIds} }
 }
-export function reorderArea(studentId, areaId, newIndex) {
-	return { type: REORDER_AREA, payload: {studentId, areaId, newIndex} }
-}
+
 
 export function addSchedule(studentId, schedule) {
 	const sched = new Schedule(schedule)
@@ -212,6 +279,7 @@ export function moveSchedule(studentId, scheduleId, year, semester) {
 	return { type: MOVE_SCHEDULE, payload: {studentId, scheduleId, year, semester} }
 }
 
+
 export function addCourse(studentId, scheduleId, clbid) {
 	return { type: ADD_COURSE, payload: {studentId, scheduleId, clbid} }
 }
@@ -221,41 +289,22 @@ export function removeCourse(studentId, scheduleId, clbid) {
 export function reorderCourse(studentId, scheduleId, clbid, index) {
 	return { type: REORDER_COURSE, payload: {studentId, scheduleId, clbid, index} }
 }
-export function moveCourse(studentId, scheduleId, clbid, year, semester) {
-	return { type: MOVE_COURSE, payload: {studentId, scheduleId, clbid, year, semester} }
+export function moveCourse(studentId, fromScheduleId, toScheduleId, clbid) {
+	return { type: MOVE_COURSE, payload: {studentId, fromScheduleId, toScheduleId, clbid} }
 }
 
-export function setOverride(studentId, overrides) {
-	return { type: SET_OVERRIDE, payload: {studentId, overrides} }
+
+export function setOverride(studentId, key, value) {
+	return { type: SET_OVERRIDE, payload: {studentId, key, value} }
 }
 export function removeOverride(studentId, overridePath) {
 	return { type: REMOVE_OVERRIDE, payload: {studentId, override: overridePath} }
 }
+
 
 export function addFabrication(studentId, fabrication) {
 	return { type: ADD_FABRICATION, payload: {studentId, fabrication} }
 }
 export function removeFabrication(studentId, fabricationId) {
 	return { type: REMOVE_FABRICATION, payload: {studentId, fabricationId} }
-}
-
-
-
-
-export function logError({error, quiet=false, id=undefined}, ...args) {
-	if (id === undefined) {
-		id = uniqueId('error-')
-	}
-	if (!quiet && process.env.NODE_ENV !== 'test') {
-		console.error(error, ...args)
-	}
-	return { type: LOG_ERROR, payload: { id, error, quiet, args } }
-}
-
-export function startProgress(id, message='', {value=0, max=1, showButton=false}={}) {
-	return { type: START_PROGRESS, payload: { id, message, value, max, showButton } }
-}
-
-export function incrementProgress(id, by=1) {
-	return { type: INCREMENT_PROGRESS, payload: { id, by } }
 }
