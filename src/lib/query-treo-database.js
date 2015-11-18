@@ -48,7 +48,7 @@ function queryStore(query) {
 		const keysWithIndices = filter(indexKeys, key => this.index(key))
 		// <this is a very hacky way of prioritizing the deptnum>
 		if (contains(keysWithIndices, 'deptnum')) {
-			keysWithIndices.splice(findIndex('deptnum'), 1)
+			keysWithIndices.splice(findIndex(keysWithIndices, keyName => keyName === 'deptnum'), 1)
 			keysWithIndices.unshift('deptnum')
 		}
 
