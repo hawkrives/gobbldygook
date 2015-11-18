@@ -11,6 +11,8 @@ import contains from 'lodash/collection/contains'
 import omit from 'lodash/object/omit'
 import remove from 'lodash/array/remove'
 import {v4 as uuid} from 'uuid'
+import present from 'present'
+const debug = require('debug')('gb:models')
 
 import randomChar from '../helpers/random-char'
 import isTrue from '../helpers/is-true'
@@ -93,8 +95,8 @@ export function reorderCourse(schedule, clbid, newIndex) {
 }
 
 export function addCourse(schedule, clbid) {
-	// let start = present()
-	// console.log(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+	let start = present()
+	debug(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	if (!isNumber(clbid)) {
 		throw new TypeError('addCourse(): clbid must be a number')
@@ -108,14 +110,14 @@ export function addCourse(schedule, clbid) {
 
 	sched.clbids.push(clbid)
 	sched.courses = getCourses(sched.clbids, {year: sched.year, semester: sched.semester})
-	// sched.courses.then(d => console.log(`it took ${Math.round(present() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
+	sched.courses.then(d => debug(`it took ${Math.round(present() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids, 'titles:', d.map(c => c.title)))
 
 	return sched
 }
 
 export function removeCourse(schedule, clbid) {
-	// let start = present()
-	// console.log(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+	let start = present()
+	debug(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	if (!isNumber(clbid)) {
 		throw new TypeError('removeCourse(): clbid must be a number')
@@ -125,7 +127,7 @@ export function removeCourse(schedule, clbid) {
 
 	remove(sched.clbids, it => it === clbid)
 	sched.courses = getCourses(sched.clbids)
-	// schedule.courses.then(d => console.log(`it took ${Math.round(present() - start)}ms to remove ${clbid} from ${this.year}-${this.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
+	sched.courses.then(d => debug(`it took ${Math.round(present() - start)}ms to remove ${clbid} from ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids, 'titles:', d.map(c => c.title)))
 
 	return sched
 }
@@ -137,16 +139,16 @@ export function validateSchedule(schedule) {
 		courses = reject(courses, isUndefined)
 
 		// Step one: do any times conflict?
-		const conflicts = findWarnings(courses, this.toJS())
+		const conflicts = findWarnings(courses, schedule)
 
 		const flattened = flatten(conflicts)
 		const filtered = filter(flattened, identity)
 		const warnings = pluck(filtered, 'warning')
 		const hasConflict = some(warnings, isTrue)
 
-		// if (hasConflict) {
-		// 	console.log('schedule conflicts', conflicts, hasConflict)
-		// }
+		if (hasConflict) {
+			debug('schedule conflicts', conflicts, hasConflict)
+		}
 
 		return {hasConflict, conflicts}
 	})

@@ -2,10 +2,6 @@ import {expect} from 'chai'
 import proxyquire from 'proxyquire'
 import stringify from 'json-stable-stringify'
 
-function getCoursesStub() {
-	return Promise.resolve([])
-}
-
 describe('Schedule', () => {
 	const {
 		default: Schedule,
@@ -16,7 +12,7 @@ describe('Schedule', () => {
 		reorderSchedule,
 		reorderCourse,
 	} = proxyquire('../../src/models/schedule', {
-		'../lib/get-courses': getCoursesStub,
+		'../lib/get-courses': () => Promise.resolve([]),
 	})
 
 	let sched = undefined

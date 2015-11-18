@@ -1,28 +1,28 @@
 import {expect} from 'chai'
-import Student from '../../src/models/student'
+import proxyquire from 'proxyquire'
 import demoStudent from '../../src/models/demo-student.json'
 import size from 'lodash/collection/size'
 import filter from 'lodash/collection/filter'
 import pluck from 'lodash/collection/pluck'
+import find from 'lodash/collection/find'
+import stringify from 'json-stable-stringify'
 
 describe('Student', () => {
-	it('is a Student', () => {
-		const stu = new Student(demoStudent)
-		expect(stu instanceof Student).to.be.true
-	})
-
-	it('can be turned into a JS object', () => {
-		const stu = new Student(demoStudent)
-		expect(stu.toJS() instanceof Object).to.be.true
-	})
-
-	it('ignores sets on known properties', () => {
-		const stu = new Student(demoStudent)
-		try {
-			stu.name = 3
-		}
-		catch (err) {}
-		expect(stu.name).to.equal('Hawken MacKay Rives')
+	const {
+		default: Student,
+		addFabrication,
+		removeFabrication,
+		setOverride,
+		removeOverride,
+		addArea,
+		removeArea,
+		moveCourse,
+		addSchedule,
+		destroySchedule,
+	} = proxyquire('../../src/models/student', {
+		'./schedule': proxyquire('../../src/models/schedule', {
+			'../lib/get-courses': () => Promise.resolve([]),
+		}),
 	})
 
 	it('creates a unique ID for each new student without an ID prop', () => {
@@ -49,57 +49,46 @@ describe('Student', () => {
 
 	it('can turn into JSON', () => {
 		const stu = new Student(demoStudent)
-		let result = JSON.stringify(stu)
+		let result = stringify(stu)
 		expect(result).to.be.ok
 	})
 
 	// fabrications
 	it('supports adding fabrications', () => {
 		const stu = new Student(demoStudent)
-		let addedFabrication = stu.addFabrication({id: 'a'})
-		expect(addedFabrication.fabrications.get('a')).to.deep.equal({id: 'a'})
+		let addedFabrication = addFabrication(stu, {id: 'a'})
+		expect(addedFabrication.fabrications['a']).to.deep.equal({id: 'a'})
 	})
 	it('supports removing fabrications', () => {
 		const stu = new Student(demoStudent)
-		let addedFabrication = stu.addFabrication({id: 'a'})
-		let noMoreFabrication = addedFabrication.removeFabrication('a')
-		expect(noMoreFabrication.fabrications.has('a')).to.be.false
+		let addedFabrication = addFabrication(stu, {id: 'a'})
+		let noMoreFabrication = removeFabrication(addedFabrication, 'a')
+		expect(noMoreFabrication.fabrications.hasOwnProperty('a')).to.be.false
 	})
 
 	// overrides
 	it('supports adding overrides', () => {
 		const stu = new Student(demoStudent)
-		let addedOverride = stu.setOverride({nothing: 'me!'})
-		expect(addedOverride.overrides.get('nothing')).to.equal('me!')
+		let addedOverride = setOverride(stu, 'nothing', 'me!')
+		expect(addedOverride.overrides['nothing']).to.equal('me!')
 	})
 	it('supports removing overrides', () => {
 		const stu = new Student(demoStudent)
-		let removedOverride = stu.removeOverride('credits.taken')
-		expect(removedOverride.overrides.get('credits.taken')).to.not.exist
+		let removedOverride = removeOverride(stu, 'credits.taken')
+		expect(removedOverride.overrides['credits.taken']).to.not.exist
 	})
 
 	// areas
 	it('supports adding areas', () => {
 		const stu = new Student(demoStudent)
-		let newArea = stu.addArea({name: 'Exercise Science', type: 'major', revision: '2014-15'})
-		expect(newArea.studies.get('majors/exercise-science-2014-15')).to.exist
+		let newArea = addArea(stu, {name: 'Exercise Science', type: 'major', revision: '2014-15'})
+		console.log(newArea.studies)
+		expect(find(newArea.studies, {path: 'majors/exercise-science/2014-15'})).not.to.be.undefined
 	})
 	it('supports removing areas', () => {
 		const stu = new Student(demoStudent)
-		let noCsci = stu.removeArea('majors/computer-science-2014-15')
-		expect(noCsci.studies.get('majors/computer-science-2014-15')).to.not.exist
-	})
-	it('supports removing multiple areas at one time', () => {
-		const stu = new Student(demoStudent)
-		const hasEsth = stu.addArea({type: 'major', name: 'Exercise Science', revision: '2014-15'})
-
-		const noCsciNorEsth = hasEsth.removeMultipleAreas([
-			'majors/computer-science-2014-15',
-			'majors/exercise-science-2014-15',
-		])
-
-		expect(noCsciNorEsth.studies.get('majors/computer-science-2014-15')).to.not.exist
-		expect(noCsciNorEsth.studies.get('majors/exercise-science-2014-15')).to.not.exist
+		let noCsci = removeArea(stu, 'majors/computer-science/2014-15')
+		expect(find(noCsci.studies, {path: 'majors/computer-science/2014-15'})).to.be.undefined
 	})
 
 	// Courses
@@ -117,16 +106,16 @@ describe('Student', () => {
 	})
 	it('supports moving courses between schedules in one-ish operation', () => {
 		const stu = new Student(demoStudent)
-		let movedCourse = stu.moveCourse(1, 2, 82908)
-		expect(movedCourse.schedules.get(1).clbids).to.not.include(82908)
-		expect(movedCourse.schedules.get(2).clbids).to.include(82908)
+		let movedCourse = moveCourse(stu, 1, 2, 82908)
+		expect(movedCourse.schedules[1].clbids).to.not.include(82908)
+		expect(movedCourse.schedules[2].clbids).to.include(82908)
 	})
 
 	// schedules
 	it('supports adding schedules', () => {
 		const stu = new Student(demoStudent)
-		let newSchedule = stu.addSchedule({id: 10912, title: 'a'})
-		expect(newSchedule.schedules.get(10912).toJSON()).to.deep.equal({
+		let newSchedule = addSchedule(stu, {id: 10912, title: 'a'})
+		expect(find(newSchedule.schedules, {id: 10912})).to.deep.equal({
 			id: 10912,
 			active: false,
 			clbids: [],
@@ -138,44 +127,7 @@ describe('Student', () => {
 	})
 	it('supports removing schedules', () => {
 		const stu = new Student(demoStudent)
-		let removedSchedule = stu.destroySchedule(1)
-		expect(removedSchedule.schedules.get(1)).to.not.exist
-	})
-	it('supports removing multiple schedules at once', () => {
-		const stu = new Student(demoStudent)
-		let removedSchedule = stu.destroyMultipleSchedules([1, 2])
-		expect(removedSchedule.schedules.get(1)).to.not.exist
-		expect(removedSchedule.schedules.get(2)).to.not.exist
-	})
-
-	// properties
-	it('supports changing the name', () => {
-		const stu = new Student(demoStudent)
-		let newName = stu.changeName('Andrew Joseph Volz')
-		expect(newName.name).to.equal('Andrew Joseph Volz')
-	})
-
-	it('supports changing the number of credits needed', () => {
-		const stu = new Student(demoStudent)
-		let newCredits = stu.changeCreditsNeeded(1)
-		expect(newCredits.creditsNeeded).to.equal(1)
-	})
-
-	it('supports changing the matriculation', () => {
-		const stu = new Student(demoStudent)
-		let newMatriculation = stu.changeMatriculation(1)
-		expect(newMatriculation.matriculation).to.equal(1)
-	})
-
-	it('supports changing the graduation', () => {
-		const stu = new Student(demoStudent)
-		let newGraduation = stu.changeGraduation(1)
-		expect(newGraduation.graduation).to.equal(1)
-	})
-
-	it('supports changing settings', () => {
-		const stu = new Student(demoStudent)
-		let newSetting = stu.changeSetting('setting', 'value')
-		expect(newSetting.settings.get('setting')).to.equal('value')
+		let removedSchedule = destroySchedule(stu, 1)
+		expect(find(removedSchedule.schedules, {id: 1})).to.not.exist
 	})
 })

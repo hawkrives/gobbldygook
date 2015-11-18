@@ -7,6 +7,7 @@ import checkStudentAgainstArea from './check-student-against-area'
 import countCredits from './count-credits'
 
 
+
 /**
  * Checks a student objects graduation possibilities against all of its areas of study.
  *
@@ -17,7 +18,9 @@ import countCredits from './count-credits'
  *    {boolean} graduatability
  *    {Immutable.Map} areaDetails
  */
-async function checkStudentGraduatability(student) {
+export default async function checkStudentGraduatability(student) {
+	console.log('hi from checkStudentGraduatability')
+
 	const areaPromises = map(
 		student.studies,
 		area => checkStudentAgainstArea(student, area))
@@ -38,5 +41,3 @@ async function checkStudentGraduatability(student) {
 		details: areaDetails,
 	}
 }
-
-export default checkStudentGraduatability

@@ -9,6 +9,7 @@ import remove from 'lodash/array/remove'
 import {v4 as uuid} from 'uuid'
 import stringify from 'json-stable-stringify'
 import present from 'present'
+const debug = require('debug')('gb:models')
 
 import checkGraduatability from '../lib/check-student-graduatability'
 
@@ -76,7 +77,7 @@ export default function Student(data) {
 
 			return Promise.all(promisesForCourses)
 				.then(courses => {
-					console.log(`Student(${this.id}).courses: it took ${round(present() - start, 2)} ms to fetch`)
+					debug(`Student(${this.id}).courses: it took ${round(present() - start, 2)} ms to fetch`)
 					return uniq(flatten(courses), course => course.clbid)
 				})
 				.catch(err => console.error(err))
@@ -94,29 +95,9 @@ export default function Student(data) {
 
 	student.graduatability = checkGraduatability(student)
 
-	console.log(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
+	debug(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
 
 	return student
-}
-
-
-export function changeStudentName(student, newName) {
-	return {...student, name: newName}
-}
-export function changeStudentAdvisor(student, newAdvisor) {
-	return {...student, advisor: newAdvisor}
-}
-export function changeStudentCreditsNeeded(student, newCreditsNeeded) {
-	return {...student, creditsNeeded: newCreditsNeeded}
-}
-export function changeStudentMatriculation(student, newMatriculation) {
-	return {...student, matriculation: newMatriculation}
-}
-export function changeStudentGraduation(student, newGraduation) {
-	return {...student, graduation: newGraduation}
-}
-export function changeStudentSetting(student, key, value) {
-	return {...student, settings: {...student.settings, [key]: value}}
 }
 
 
@@ -124,7 +105,7 @@ export function addSchedule(student, newSchedule) {
 	return {...student, schedules: {...student.schedules, [newSchedule.id]: newSchedule}}
 }
 export function destroySchedule(student, scheduleId) {
-	console.log(`Student.destroySchedule(): removing schedule ${scheduleId}`)
+	debug(`Student.destroySchedule(): removing schedule ${scheduleId}`)
 
 	const deadSched = student.schedules[scheduleId]
 	const schedules = omit(student.schedules, [scheduleId])
@@ -143,7 +124,7 @@ export function destroySchedule(student, scheduleId) {
 	return {...student, schedules}
 }
 export function moveCourse(student, fromScheduleId, toScheduleId, clbid) {
-	console.log(`Student.moveCourse(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+	debug(`Student.moveCourse(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 
 	let schedules = {...student.schedules}
 	schedules[fromScheduleId] = removeCourse(schedules[fromScheduleId], clbid)
@@ -201,7 +182,7 @@ export function saveStudent(student) {
 	const oldVersion = localStorage.getItem(student.id)
 
 	if (oldVersion !== stringify(student)) {
-		console.log(`saving student ${student.name} (${student.id})`)
+		debug(`saving student ${student.name} (${student.id})`)
 
 		const student = student.set('dateLastModified', new Date())
 		localStorage.setItem(student.id, stringify(student))

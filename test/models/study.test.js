@@ -2,13 +2,9 @@ import {expect} from 'chai'
 import proxyquire from 'proxyquire'
 import stringify from 'json-stable-stringify'
 
-function loadAreaStub() {
-	return Promise.resolve({})
-}
-
 describe('Study', () => {
 	const Study = proxyquire('../../src/models/study', {
-		'./load-area': loadAreaStub,
+		'./load-area': () => Promise.resolve({}),
 	})
 
 	it('holds an area of study for a student', () => {
