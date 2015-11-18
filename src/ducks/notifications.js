@@ -14,51 +14,57 @@ const initialState = []
 export default function reducer(state = initialState, action) {
 	const {type, payload} = action
 
-	if (type === LOG_MESSAGE) {
-		return [...state, {id: payload.id, message: payload.message, type: 'message'}]
-	}
+	switch (type) {
+		case LOG_MESSAGE: {
+			return [...state, {
+				id: payload.id,
+				message: payload.message,
+				type: 'message',
+			}]
+		}
 
-	else if (type === LOG_ERROR) {
-		return [...state, {
-			id: payload.id,
-			message: payload.error.message,
-			type: 'error',
-		}]
-	}
+		case LOG_ERROR: {
+			return [...state, {
+				id: payload.id,
+				message: payload.error.message,
+				type: 'error',
+			}]
+		}
 
-	else if (type === START_PROGRESS) {
-		return [...state, {
-			id: payload.id,
-			message: payload.message,
-			value: payload.value,
-			max: payload.max,
-			showButton: payload.showButton,
-			type: 'progress',
-		}]
-	}
+		case START_PROGRESS: {
+			return [...state, {
+				id: payload.id,
+				message: payload.message,
+				value: payload.value,
+				max: payload.max,
+				showButton: payload.showButton,
+				type: 'progress',
+			}]
+		}
 
-	else if (type === INCREMENT_PROGRESS) {
-		// make a copy of the previous item
-		const itemIndex = findIndex(state, {id: payload.id})
-		const progress = clone(state[itemIndex])
-		progress.value += payload.by
-		progress.value = progress.value <= progress.max
-			? progress.value
-			: progress.max
+		case INCREMENT_PROGRESS: {
+			// make a copy of the previous item
+			const itemIndex = findIndex(state, {id: payload.id})
+			const progress = clone(state[itemIndex])
+			progress.value += payload.by
+			progress.value = progress.value <= progress.max
+				? progress.value
+				: progress.max
 
-		return [
-			...state.slice(0, itemIndex),
-			progress,
-			...state.slice(itemIndex + 1),
-		]
-	}
+			return [
+				...state.slice(0, itemIndex),
+				progress,
+				...state.slice(itemIndex + 1),
+			]
+		}
 
-	else if (type === REMOVE_NOTIFICATION) {
-		return state.delete(payload.id)
-	}
+		case REMOVE_NOTIFICATION: {
+			return state.delete(payload.id)
+		}
 
-	else {
-		return state
+		default: {
+			return state
+		}
 	}
 }
 
