@@ -49,7 +49,7 @@ rules:
 
   # stylistic issues
   new-cap: 0
-  indent: [1, tab]
+  indent: [1, tab, {SwitchCase: 1}]
   camelcase: 2
   comma-dangle: [1, always-multiline]
   comma-style: [1, last]
