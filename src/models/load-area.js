@@ -1,7 +1,7 @@
 import enhanceHanson from '../lib/enhance-hanson'
 import includes from 'lodash/collection/includes'
 
-export async function loadArea(path) {
+export default async function loadArea(path) {
 	const db = require('../lib/db')
 
 	let data
