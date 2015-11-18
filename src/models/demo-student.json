@@ -4,13 +4,13 @@
 	"graduation": 2016,
 
 	"studies": [
-		{"type": "degree", "name": "Bachelor of Arts", "revision": "2014-15"},
-		{"type": "major", "name": "Computer Science", "revision": "2014-15"},
-		{"type": "major", "name": "Asian Studies", "revision": "2011-12"},
-		{"type": "major", "name": "Physics", "revision": "2011-12"},
-		{"type": "major", "name": "Mathematics", "revision": "2011-12"},
-		{"type": "concentration", "name": "Japan Studies", "revision": "2014-15"},
-		{"type": "concentration", "name": "Statistics", "revision": "2014-15"},
+		{"type": "degree", "name": "Bachelor of Arts", "revision": "latest"},
+		{"type": "major", "name": "Computer Science", "revision": "latest"},
+		{"type": "major", "name": "Asian Studies", "revision": "latest"},
+		{"type": "major", "name": "Physics", "revision": "latest"},
+		{"type": "major", "name": "Mathematics", "revision": "latest"},
+		{"type": "concentration", "name": "Japan Studies", "revision": "latest"},
+		{"type": "concentration", "name": "Statistics", "revision": "latest"},
 		{
 			"type": "emphasis",
 			"name": "Custom!",
