@@ -51,14 +51,19 @@ export default function Schedule(data={}) {
 }
 
 
-export function moveSchedule(schedule, year, semester) {
+export function moveSchedule(schedule, {year, semester}={}) {
+	if (year === undefined && semester === undefined) {
+		return schedule
+	}
+
 	let sched = {...schedule}
-	if (year) {
+	if (typeof year === 'number') {
 		sched.year = year
 	}
-	if (semester) {
+	if (typeof semester === 'number') {
 		sched.semester = semester
 	}
+
 	return sched
 }
 
@@ -77,14 +82,12 @@ export function reorderCourse(schedule, clbid, newIndex) {
 
 	let sched = {...schedule}
 
-	const oldIndex = findIndex(sched.clbids, clbid)
-	const course = sched.clbids[oldIndex]
+	const oldIndex = findIndex(sched.clbids, id => id === clbid)
 
 	sched.clbids.splice(oldIndex, 1)
 	sched.clbids.splice(newIndex, 0, clbid)
 
-	sched.courses.splice(oldIndex, 1)
-	sched.courses.splice(newIndex, 0, course)
+	sched.courses = getCourses(sched.clbids, {year: sched.year, semester: sched.semester})
 
 	return sched
 }
@@ -120,9 +123,7 @@ export function removeCourse(schedule, clbid) {
 
 	let sched = {...schedule}
 
-	const index = findIndex(sched.clbids, clbid)
-
-	remove(sched.clbids, (_, i) => i === index)
+	remove(sched.clbids, it => it === clbid)
 	sched.courses = getCourses(sched.clbids)
 	// schedule.courses.then(d => console.log(`it took ${Math.round(present() - start)}ms to remove ${clbid} from ${this.year}-${this.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
 

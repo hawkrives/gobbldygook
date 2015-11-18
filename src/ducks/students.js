@@ -155,7 +155,7 @@ function reducer(state = initialState, action) {
 			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], reorderScheduleInStudent, payload.newIndex)
 		}
 		case MOVE_SCHEDULE: {
-			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], moveScheduleInStudent, payload.year, payload.semester)
+			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], moveScheduleInStudent, {year: payload.year, semester: payload.semester})
 		}
 
 		case ADD_COURSE: {
@@ -239,7 +239,7 @@ export function importStudent({data, type}) {
 
 export function destroyStudent(studentId) {
 	let ids = JSON.parse(localStorage.getItem('studentIds'))
-	remove(ids, studentId)
+	remove(ids, id => id === studentId)
 	localStorage.setItem('studentIds', JSON.stringify(ids))
 
 	localStorage.removeItem(studentId)
