@@ -1,15 +1,24 @@
 import {expect} from 'chai'
-import Schedule, {
-	addCourse,
-	removeCourse,
-	renameSchedule,
-	moveSchedule,
-	reorderSchedule,
-	reorderCourse,
-} from '../../src/models/schedule'
+import proxyquire from 'proxyquire'
 import stringify from 'json-stable-stringify'
 
+function getCoursesStub() {
+	return Promise.resolve([])
+}
+
 describe('Schedule', () => {
+	const {
+		default: Schedule,
+		addCourse,
+		removeCourse,
+		renameSchedule,
+		moveSchedule,
+		reorderSchedule,
+		reorderCourse,
+	} = proxyquire('../../src/models/schedule', {
+		'../lib/get-courses': getCoursesStub,
+	})
+
 	let sched = undefined
 	beforeEach(() => {
 		sched = new Schedule({
