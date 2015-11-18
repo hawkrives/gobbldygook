@@ -9,7 +9,7 @@ import some from 'lodash/collection/some'
 import findIndex from 'lodash/array/findIndex'
 import contains from 'lodash/collection/contains'
 import omit from 'lodash/object/omit'
-import deleteFromArray from '../helpers/delete-from-array'
+import remove from 'lodash/array/remove'
 import {v4 as uuid} from 'uuid'
 
 import randomChar from '../helpers/random-char'
@@ -17,37 +17,28 @@ import isTrue from '../helpers/is-true'
 import getCourses from '../lib/get-courses'
 import findWarnings from '../lib/find-course-warnings'
 
-
-const ScheduleObject = {
-	id: '',
-	active: false,
-
-	index: 0,
-	title: '',
-
-	clbids: [],
-	year: 0,
-	semester: 0,
-
-	courses: Promise.resolve([]),
-}
-
-ScheduleObject.prototype.toJSON = function() {
-	return omit(this, 'courses')
-}
-
-
 export default function Schedule(data={}) {
+	if (!(this instanceof Schedule)) {
+		return new Schedule(data)
+	}
+
 	let schedule = {
-		...Object.create(ScheduleObject),
 		id: uuid(),
 		active: false,
-		year: 0,
-		semester: 0,
+
 		index: 1,
 		title: `Schedule ${randomChar().toUpperCase()}`,
+
 		clbids: [],
+		year: 0,
+		semester: 0,
+
 		courses: Promise.resolve([]),
+
+		toJSON() {
+			return omit(this, val => val instanceof Promise || val instanceof Function)
+		},
+
 		...data,
 	}
 
@@ -55,8 +46,6 @@ export default function Schedule(data={}) {
 
 	return schedule
 }
-
-
 
 
 export function moveSchedule(schedule, year, semester) {
@@ -134,7 +123,7 @@ export function removeCourseFromSchedule(schedule, clbid) {
 
 	const index = findIndex(sched.clbids, clbid)
 
-	sched.clbids = deleteFromArray(sched.clbids, index)
+	remove(sched.clbids, (_, i) => i === index)
 	sched.courses = getCourses(sched.clbids)
 	// schedule.courses.then(d => console.log(`it took ${Math.round(present() - start)}ms to remove ${clbid} from ${this.year}-${this.semester};`, 'clbids:', sched.clbids.toJS(), 'titles:', d.map(c => c.title)))
 
