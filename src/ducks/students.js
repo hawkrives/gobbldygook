@@ -13,6 +13,10 @@ import Student, {
 	addSchedule as addScheduleToStudent,
 	destroySchedule as destroyScheduleFromStudent,
 	moveCourse as moveCourseAcrossSchedules,
+	setOverride as setOverrideOnStudent,
+	removeOverride as removeOverrideFromStudent,
+	addFabrication as addFabricationToStudent,
+	removeFabrication as removeFabricationFromStudent,
 } from '../models/student'
 
 import Schedule, {
@@ -165,6 +169,23 @@ function reducer(state = initialState, action) {
 		}
 		case MOVE_COURSE: {
 			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], moveCourseAcrossSchedules, payload.fromScheduleId, payload.toScheduleId, payload.clbid)
+		}
+
+		case SET_OVERRIDE: {
+			const student = setOverrideOnStudent(state[payload.studentId], payload.key, payload.value)
+			return {...state, [payload.studentId]: student}
+		}
+		case REMOVE_OVERRIDE: {
+			const student = removeOverrideFromStudent(state[payload.studentId], payload.override)
+			return {...state, [payload.studentId]: student}
+		}
+		case ADD_FABRICATION: {
+			const student = addFabricationToStudent(state[payload.studentId], payload.fabrication)
+			return {...state, [payload.studentId]: student}
+		}
+		case REMOVE_FABRICATION: {
+			const student = removeFabricationFromStudent(state[payload.studentId], payload.fabricationId)
+			return {...state, [payload.studentId]: student}
 		}
 
 		default: {
