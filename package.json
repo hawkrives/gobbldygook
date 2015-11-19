@@ -60,7 +60,7 @@
     "isomorphic-fetch": "2.2.0",
     "js-yaml": "3.4.3",
     "json-stable-stringify": "1.0.0",
-    "keymage": "1.1.0",
+    "keymage": "1.1.2",
     "lie": "3.0.1",
     "load-pkg": "2.0.1",
     "lodash": "3.10.1",
