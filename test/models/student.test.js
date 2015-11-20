@@ -82,14 +82,13 @@ describe('Student', () => {
 	// areas
 	it('supports adding areas', () => {
 		const stu = new Student(demoStudent)
-		let newArea = addArea(stu, {name: 'Exercise Science', type: 'major', revision: '2014-15'})
-		console.log(newArea.studies)
+		let newArea = addArea(stu, {name: 'Exercise Science', type: 'major', revision: '2014-15', path: 'majors/exercise-science/2014-15'})
 		expect(find(newArea.studies, {path: 'majors/exercise-science/2014-15'})).not.to.be.undefined
 	})
 	it('supports removing areas', () => {
 		const stu = new Student(demoStudent)
-		let noCsci = removeArea(stu, 'majors/computer-science/2014-15')
-		expect(find(noCsci.studies, {path: 'majors/computer-science/2014-15'})).to.be.undefined
+		let noCsci = removeArea(stu, 'majors/computer-science/latest')
+		expect(find(noCsci.studies, {path: 'majors/computer-science/latest'})).to.be.undefined
 	})
 
 	// Courses
@@ -115,8 +114,8 @@ describe('Student', () => {
 	// schedules
 	it('supports adding schedules', () => {
 		const stu = new Student(demoStudent)
-		let newSchedule = addSchedule(stu, {id: 10912, title: 'a'})
-		expect(find(newSchedule.schedules, {id: 10912})).to.deep.equal({
+		let newSchedule = addSchedule(stu, {id: 10912, title: 'a', active: false, clbids: [], index: 1, semester: 0, year: 0})
+		expect(newSchedule.schedules[10912]).to.deep.equal({
 			id: 10912,
 			active: false,
 			clbids: [],
@@ -129,6 +128,6 @@ describe('Student', () => {
 	it('supports removing schedules', () => {
 		const stu = new Student(demoStudent)
 		let removedSchedule = destroySchedule(stu, 1)
-		expect(find(removedSchedule.schedules, {id: 1})).to.not.exist
+		expect(removedSchedule.schedules[1]).to.be.undefined
 	})
 })
