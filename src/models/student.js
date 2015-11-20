@@ -5,7 +5,7 @@ import omit from 'lodash/object/omit'
 import uniq from 'lodash/array/uniq'
 import round from 'lodash/math/round'
 import findKey from 'lodash/object/findKey'
-import remove from 'lodash/array/remove'
+import reject from 'lodash/collection/reject'
 import {v4 as uuid} from 'uuid'
 import stringify from 'json-stable-stringify'
 import present from 'present'
@@ -138,9 +138,7 @@ export function addArea(student, areaOfStudy) {
 	return {...student, studies: [...student.studies, areaOfStudy]}
 }
 export function removeArea(student, areaPath) {
-	let studies = [...student.studies]
-	remove(studies, {path: areaPath})
-	return {...student, studies}
+	return {...student, studies: reject([...student.studies], {path: areaPath})}
 }
 
 

@@ -9,7 +9,6 @@ import some from 'lodash/collection/some'
 import findIndex from 'lodash/array/findIndex'
 import contains from 'lodash/collection/contains'
 import omit from 'lodash/object/omit'
-import remove from 'lodash/array/remove'
 import {v4 as uuid} from 'uuid'
 import present from 'present'
 const debug = require('debug')('gb:models')
@@ -125,7 +124,7 @@ export function removeCourse(schedule, clbid) {
 
 	let sched = {...schedule}
 
-	remove(sched.clbids, it => it === clbid)
+	sched.clbids = reject(sched.clbids, id => id === clbid)
 	sched.courses = getCourses(sched.clbids)
 	sched.courses.then(d => debug(`it took ${Math.round(present() - start)}ms to remove ${clbid} from ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids, 'titles:', d.map(c => c.title)))
 
