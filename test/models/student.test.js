@@ -23,6 +23,7 @@ describe('Student', () => {
 		'./schedule': proxyquire('../../src/models/schedule', {
 			'../lib/get-courses': () => Promise.resolve([]),
 		}),
+		'../lib/check-student-graduatability': () => Promise.resolve({}),
 	})
 
 	it('creates a unique ID for each new student without an ID prop', () => {
