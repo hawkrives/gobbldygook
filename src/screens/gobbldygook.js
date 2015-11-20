@@ -2,7 +2,7 @@ import React, {Component, PropTypes, cloneElement} from 'react'
 import Immutable from 'immutable'
 import DocumentTitle from 'react-document-title'
 import {DragDropContext} from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
+import TouchBackend from 'react-dnd-touch-backend'
 
 import studentStore, {REFRESH_AREAS, REFRESH_COURSES} from '../flux/student-store'
 import Loading from '../components/loading'
@@ -65,4 +65,4 @@ class GobbldygookApp extends Component {
 	}
 }
 
-export default DragDropContext(HTML5Backend)(GobbldygookApp)
+export default DragDropContext(TouchBackend({ enableMouseEvents: true }))(GobbldygookApp)
