@@ -6,5 +6,5 @@ export function slugifyAreaName(name) {
 }
 
 export default function findAreaPath({name, type, revision}) {
-	return `${pluralizeArea(type)}/${slugifyAreaName(name)}-${revision}`
+	return `${pluralizeArea(type)}/${slugifyAreaName(name)}` + (revision === 'latest' ? '' : `-${revision}`)
 }
