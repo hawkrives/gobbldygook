@@ -1,34 +1,36 @@
 import nom from 'nomnom'
 import path from 'path'
-import {describe, it} from 'mocha'
+import Mocha, {Test} from 'mocha'
 import {expect} from 'chai'
 
 import evaluate from '../src/lib/evaluate'
 import loadStudent from './lib/load-student'
 
-export function testStudent(studentFileName) {
-	loadStudent(studentFileName).then(({
+export async function testStudent(studentFileName, mochaInstance) {
+	const {
 		areas,
 		courses,
 		expectation=true,
 		filename,
 		overrides,
 		pending=false,
-	}) => {
-		const func = pending ? describe.skip : describe
+	} = await loadStudent(studentFileName)
 
-		func(path.basename(filename), () => {
-			areas.forEach(data => {
-				it(`${expectation ? 'should' : 'should not'} pass ${data.name}`, () => {
-					const result = evaluate({courses, overrides}, data)
-					expect(result).to.have.property('computed', expectation)
-				})
-			})
-		})
+	if (pending) {
+		return
+	}
+
+	const suiteInstance = Mocha.Suite.create(mochaInstance.suite, path.basename(filename))
+
+	areas.forEach(data => {
+		suiteInstance.addTest(new Test(`${expectation ? 'should' : 'should not'} pass ${data.name}`, () => {
+			const result = evaluate({courses, overrides}, data)
+			expect(result).to.have.property('computed', expectation)
+		}))
 	})
 }
 
-export function cli() {
+export async function cli() {
 	const args = nom()
 		.option('filename', {
 			required: true,
@@ -37,5 +39,7 @@ export function cli() {
 		})
 		.parse()
 
-	testStudent(args.filename)
+	const mochaInstance = new Mocha()
+	await testStudent(args.filename, mochaInstance)
+	mochaInstance.run()
 }
