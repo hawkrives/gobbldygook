@@ -6,4 +6,4 @@ process.on('unhandledRejection', function(reason, p) {
 })
 
 require('babel/register')
-require('./olaf-convert-semi-to-json.js').cli()
+require('./olaf-convert-semi-to-json.js')
