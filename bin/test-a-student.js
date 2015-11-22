@@ -8,23 +8,34 @@ import {readFileSync} from 'graceful-fs'
 import evaluate from '../src/lib/evaluate'
 import loadArea from './lib/load-area'
 
-function loadStudent(filename) {
-	const data = yaml.safeLoad(readFileSync(filename, {encoding: 'utf-8'}))
-	data.areas = data.areas.map(loadArea)
+async function loadStudent(filename) {
+	console.log(filename)
+	const data = yaml.safeLoad(readFileSync(filename, 'utf-8'))
+	console.log(filename)
+	data.areas = await Promise.all(data.areas.map(loadArea))
+	console.log(filename)
 	data.filename = filename
+	console.log(filename)
 	return data
 }
 
 export function testStudent(studentFileName) {
-	const {courses, overrides, areas, filename, expectation=true, pending=false} = loadStudent(studentFileName)
+	loadStudent(studentFileName).then(({
+		areas,
+		courses,
+		expectation=true,
+		filename,
+		overrides,
+		pending=false,
+	}) => {
+		const func = pending ? describe.skip : describe
 
-	const func = pending ? describe.skip : describe
-
-	func(path.basename(filename), () => {
-		areas.forEach(data => {
-			it(`${expectation ? 'should' : 'should not'} pass ${data.name}`, () => {
-				const result = evaluate({courses, overrides}, data)
-				expect(result).to.have.property('computed', expectation)
+		func(path.basename(filename), () => {
+			areas.forEach(data => {
+				it(`${expectation ? 'should' : 'should not'} pass ${data.name}`, () => {
+					const result = evaluate({courses, overrides}, data)
+					expect(result).to.have.property('computed', expectation)
+				})
 			})
 		})
 	})

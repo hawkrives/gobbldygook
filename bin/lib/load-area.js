@@ -1,20 +1,40 @@
+import Promise from 'bluebird'
 import yaml from 'js-yaml'
 import enhanceHanson from '../../src/lib/enhance-hanson'
-import findAreaPath from '../../src/lib/find-area-path'
-import path from 'path'
-import fs from 'graceful-fs'
+import map from 'lodash/collection/map'
+import filter from 'lodash/collection/filter'
+import max from 'lodash/collection/max'
+import find from 'lodash/collection/find'
+import findAreas from './find-areas'
+const fs = Promise.promisifyAll(require('graceful-fs'))
 
-export default function loadArea({name, type, revision, source, isCustom}) {
-	let obj = {}
-	if (isCustom) {
-		obj = yaml.safeLoad(source)
+export async function getArea({name, type, revision}) {
+	type = type.toLowerCase()
+	name = name.toLowerCase()
+
+	const root = 'area-data/'
+	const areaFiles = findAreas(root)
+	const areaData = await Promise.all(map(areaFiles, async f => fs.readFileAsync(f, 'utf-8')))
+	const areas = map(areaData, yaml.safeLoad)
+
+	const filteredAreas = filter(areas, area => (
+		area.type.toLowerCase() === type &&
+		area.name.toLowerCase() === name
+	))
+
+	if (revision === 'latest') {
+		// max returns the entire object that it matched
+		return max(filteredAreas, area => Number(area.revision.split('-')[0]))
 	}
 	else {
-		const filepath = path.join('area-data', `${findAreaPath({name, type, revision})}.yaml`)
-		const data = fs.readFileSync(filepath, {encoding: 'utf-8'})
-		obj = yaml.safeLoad(data)
+		return find(filteredAreas, {revision})
 	}
+}
 
+export default async function loadArea({name, type, revision, source, isCustom}) {
+	let obj = isCustom
+		? yaml.safeLoad(source)
+		: await getArea({name, type, revision})
 
 	let result
 	try {

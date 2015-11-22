@@ -24,7 +24,7 @@ export function cli() {
 		.parse()
 
 	const {inDir, outDir} = args
-	const sources = findAreas({dir: inDir})
+	const sources = findAreas(inDir)
 
 	sources
 		.forEach((filename, index) => {

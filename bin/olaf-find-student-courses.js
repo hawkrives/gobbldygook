@@ -35,7 +35,7 @@ async function populateStudent(filename) {
 	}
 
 	try {
-		student.areas = student.studies.map(loadArea)
+		student.areas = await Promise.all(student.studies.map(loadArea))
 	}
 	catch (err) {
 		console.error('Problem loading areas', err)

@@ -12,5 +12,7 @@ function getStudentNames() {
 }
 
 export function cli() {
-	getStudentNames().forEach(testStudent)
+	for (const studentFilename of getStudentNames()) {
+		testStudent(studentFilename)
+	}
 }
