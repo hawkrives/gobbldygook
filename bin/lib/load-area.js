@@ -14,7 +14,8 @@ export async function getArea({name, type, revision}) {
 
 	const root = 'area-data/'
 	const areaFiles = findAreas(root)
-	const areaData = await Promise.all(map(areaFiles, async f => fs.readFileAsync(f, 'utf-8')))
+	const areaData = map(areaFiles, f => fs.readFileSync(f, 'utf-8'))
+
 	const areas = map(areaData, yaml.safeLoad)
 
 	const filteredAreas = filter(areas, area => (
