@@ -1,3 +1,6 @@
+// Usage: ./bin/olaf-convert-semi-to-json ./playground/olaf-semicolons/sample-1.txt > blank.student
+//        ./bin/olaf-find-student-courses blank.student
+
 import nomnom from 'nomnom'
 
 import {loadYamlFile} from './lib/read-file'
