@@ -1,23 +1,10 @@
 import nom from 'nomnom'
 import path from 'path'
-import yaml from 'js-yaml'
 import {describe, it} from 'mocha'
 import {expect} from 'chai'
-import {readFileSync} from 'graceful-fs'
 
 import evaluate from '../src/lib/evaluate'
-import loadArea from './lib/load-area'
-
-async function loadStudent(filename) {
-	console.log(filename)
-	const data = yaml.safeLoad(readFileSync(filename, 'utf-8'))
-	console.log(filename)
-	data.areas = await Promise.all(data.areas.map(loadArea))
-	console.log(filename)
-	data.filename = filename
-	console.log(filename)
-	return data
-}
+import loadStudent from './lib/load-student'
 
 export function testStudent(studentFileName) {
 	loadStudent(studentFileName).then(({
