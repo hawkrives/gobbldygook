@@ -4,6 +4,7 @@ import yaml from 'js-yaml'
 import enhanceHanson from '../lib/enhance-hanson'
 import findAreaPath from '../lib/find-area-path'
 import includes from 'lodash/collection/includes'
+const debug = require('debug')('gobbldygook:models')
 
 export async function loadArea({name, type, revision, source, isCustom}) {
 	if (isCustom && source) {
@@ -112,7 +113,7 @@ export default class Study extends StudyRecord {
 
 		// migrate from older area save style
 		if ('id' in args) {
-			console.log(`Study(): migrating ${args.id}`);
+			debug(`Study(): migrating ${args.id}`);
 			({name, type, revision} = migrateFromOldSave(args))
 		}
 
@@ -131,8 +132,8 @@ export default class Study extends StudyRecord {
 	}
 
 	edit(newSource) {
-		console.log('editing', this.name)
-		console.log(newSource)
+		debug('editing', this.name)
+		debug(newSource)
 		return this.withMutations(area => {
 			area = area.set('source', newSource)
 			area = area.set('isCustom', true)

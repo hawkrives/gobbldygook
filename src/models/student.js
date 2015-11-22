@@ -7,6 +7,7 @@ import round from 'lodash/math/round'
 import {v4 as uuid} from 'uuid'
 import stringify from 'json-stable-stringify'
 import present from 'present'
+const debug = require('debug')('gobbldygook:models')
 
 import checkGraduatability from '../lib/check-student-graduatability'
 
@@ -97,7 +98,7 @@ export default class Student extends StudentRecord {
 
 				student.set('graduatability', checkGraduatability(student))
 
-				console.log(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
+				debug(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
 
 				return student
 			})
@@ -141,7 +142,7 @@ export default class Student extends StudentRecord {
 	}
 
 	destroySchedule(scheduleId) {
-		console.log(`Student.destroySchedule(): removing schedule ${scheduleId}`)
+		debug(`Student.destroySchedule(): removing schedule ${scheduleId}`)
 
 		const deadSched = this.getIn(['schedules', scheduleId])
 		const scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
@@ -161,7 +162,7 @@ export default class Student extends StudentRecord {
 
 	destroyMultipleSchedules(ids) {
 		return this.withMutations(student => {
-			console.log('Student.destroyMultipleSchedules():', ...ids)
+			debug('Student.destroyMultipleSchedules():', ...ids)
 			ids.forEach(id => {
 				student = student.destroySchedule(id)
 			})
@@ -170,7 +171,7 @@ export default class Student extends StudentRecord {
 	}
 
 	moveCourse(fromScheduleId, toScheduleId, clbid) {
-		console.log(`Student.moveCourse(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+		debug(`Student.moveCourse(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 		return this.withMutations(student => {
 			student = student.setIn(['schedules', fromScheduleId], student.getIn(['schedules', fromScheduleId]).removeCourse(clbid))
 			student = student.setIn(['schedules', toScheduleId], student.getIn(['schedules', toScheduleId]).addCourse(clbid))
@@ -257,7 +258,7 @@ export default class Student extends StudentRecord {
 
 		return Promise.all(promisesForCourses)
 			.then(courses => {
-				console.log(`Student(${this.id}).courses: it took ${round(present() - start, 2)} ms to fetch`)
+				debug(`Student(${this.id}).courses: it took ${round(present() - start, 2)} ms to fetch`)
 				return uniq(flatten(courses), course => course.clbid)
 			})
 			.catch(err => console.error(err))
@@ -277,7 +278,7 @@ export default class Student extends StudentRecord {
 		const oldVersion = localStorage.getItem(this.id)
 
 		if (oldVersion !== stringify(this)) {
-			console.log(`saving student ${this.name} (${this.id})`)
+			debug(`saving student ${this.name} (${this.id})`)
 
 			const student = this.set('dateLastModified', new Date())
 			localStorage.setItem(student.id, stringify(student))
