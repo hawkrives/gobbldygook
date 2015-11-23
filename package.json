@@ -48,7 +48,7 @@
     "babel-runtime": "5.8.29",
     "bluebird": "3.0.5",
     "classnames": "2.2.0",
-    "codemirror": "5.8.0",
+    "codemirror": "5.9.0",
     "combinations-generator": "1.0.1",
     "debug": "2.2.0",
     "fuzzysearch": "1.0.3",
