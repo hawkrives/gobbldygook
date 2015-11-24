@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
-import iconsList from './icons-list.json'
 import './icon.scss'
 
 export default class Icon extends Component {
@@ -22,11 +21,12 @@ export default class Icon extends Component {
 		}
 
 		return (
-			<span
+			<svg
 				className={cx('icon', this.props.className)}
-				style={{...style, ...this.props.style}}>
-				{iconsList[this.props.name]}
-			</span>
+				style={{...style, ...this.props.style}}
+			>
+				<use xlinkHref={`../icons/ionicons/${this.props.name}.svg`} />
+			</svg>
 		)
 	}
 }
