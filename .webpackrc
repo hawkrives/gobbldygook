@@ -169,7 +169,7 @@ if (isDev) {
 
 	// Add optional loaders
 	config.module.loaders.push({
-		test: /\.scss$/,
+		test: /\.s(c|a)ss$/,
 		loader: 'style-loader!css-loader!postcss-loader!sass-loader',
 	})
 }
@@ -181,7 +181,7 @@ else if (isTest) {
 	})
 
 	config.module.loaders.push({
-		test: /\.scss$/,
+		test: /\.s(c|a)ss$/,
 		loader: 'style-loader!css-loader!postcss-loader!sass-loader',
 	})
 }
