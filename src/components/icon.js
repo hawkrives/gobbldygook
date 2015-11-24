@@ -25,7 +25,7 @@ export default class Icon extends Component {
 				className={cx('icon', this.props.className)}
 				style={{...style, ...this.props.style}}
 			>
-				<use xlinkHref={`../icons/ionicons/${this.props.name}.svg`} />
+				<use xlinkHref={`./ionicons.svg#${this.props.name}`} />
 			</svg>
 		)
 	}
