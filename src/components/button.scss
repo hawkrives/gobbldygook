@@ -11,6 +11,11 @@
 	justify-content: center;
 	align-items: center;
 
+	// display: inline-flex collapses inline whitespace
+	// white-space: pre brings it back, although it will
+	// also show newlines, so be careful.
+	white-space: pre;
+
 	padding: 1ex 2em;
 	border: solid 1px transparent;
 
