@@ -134,10 +134,6 @@ var config = {
 				test: /\.(jpe?g|png|gif)$/,
 				loader: 'url-loader?limit=' + urlLoaderLimit,
 			},
-			{
-				test: /\.svg$/,
-				loader: 'svg-inline-loader',
-			},
 		],
 	},
 
