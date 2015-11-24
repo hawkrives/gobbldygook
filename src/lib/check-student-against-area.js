@@ -46,7 +46,10 @@ export default function checkStudentAgainstArea(student, area) {
 			})
 			.then(([student, area]) => {
 				// console.log(sourceId, student, area)
-				worker.postMessage([sourceId, student, area])
+				// why stringify? https://code.google.com/p/chromium/issues/detail?id=536620#c11
+				// > We know that serialization/deserialization is slow. It's actually faster to
+				// > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
+				worker.postMessage(JSON.stringify([sourceId, student, area]))
 			})
 			.catch(err => console.error(err))
 	})
