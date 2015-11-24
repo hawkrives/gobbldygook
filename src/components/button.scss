@@ -6,8 +6,10 @@
 %button {
 	cursor: pointer;
 
-	display: inline-block;
 	min-height: 3ex;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
 
 	padding: 1ex 2em;
 	border: solid 1px transparent;
