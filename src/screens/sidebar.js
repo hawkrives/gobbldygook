@@ -35,12 +35,12 @@ export default class Sidebar extends Component {
 			<aside className='sidebar'>
 				<Toolbar className='student-buttons'>
 					<Button title='Students' onClick={() => history.pushState(null, '/')}>
-						<Icon name='ionicon-ios-people-outline' type='block' />
+							<Icon name='ios-people-outline' type='block' />
 					</Button>
 					<Button
 						title='Search'
 						onClick={this.props.toggleSearchSidebar}>
-						<Icon name='ionicon-ios-search' type='block' />
+						<Icon name='ios-search' type='block' />
 					</Button>
 
 					<Separator type='spacer' />
@@ -49,24 +49,24 @@ export default class Sidebar extends Component {
 						title='Undo'
 						onClick={studentActions.undo}
 						disabled={studentStore.history.size === 0}>
-						<Icon name={`ionicon-ios-undo${studentStore.history.size === 0 ? '-outline' : ''}`} type='block' />
+						<Icon name={`ios-undo${studentStore.history.size === 0 ? '-outline' : ''}`} type='block' />
 					</Button>
 					<Button
 						title='Redo'
 						onClick={studentActions.redo}
 						disabled={studentStore.future.size === 0}>
-						<Icon name={`ionicon-ios-redo${studentStore.future.size === 0 ? '-outline' : ''}`} type='block' />
+						<Icon name={`ios-redo${studentStore.future.size === 0 ? '-outline' : ''}`} type='block' />
 					</Button>
 
 					<Separator type='spacer' />
 
 					<Button title='Download' onClick={() => history.pushState(null, `/s/${this.props.student.id}/download/`)}>
-						<Icon name='ionicon-ios-download-outline' type='block' />
+						<Icon name='ios-download-outline' type='block' />
 					</Button>
 					<Button
 						title='Revert to Demo'
 						onClick={() => studentActions.resetStudentToDemo(this.props.student.id)}>
-						<Icon name='ionicon-ios-reload' type='block' />
+						<Icon name='ios-reload' type='block' />
 					</Button>
 				</Toolbar>
 

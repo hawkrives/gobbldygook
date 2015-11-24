@@ -52,7 +52,7 @@ class StudentListItem extends Component {
 						Delete
 					</Button>}
 				</span>
-				<Icon className='student-list-item--go' name='ionicon-ios-arrow-forward' />
+				<Icon className='student-list-item--go' name='ios-arrow-forward' />
 			</Link>
 		</span>)
 	}
