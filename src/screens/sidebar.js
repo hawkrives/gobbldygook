@@ -61,7 +61,7 @@ export default class Sidebar extends Component {
 					<Separator type='spacer' />
 
 					<Button title='Download' onClick={() => history.pushState(null, `/s/${this.props.student.id}/download/`)}>
-						<Icon name='ionicon-ios-download-outline' type='block' />
+						<Icon name='ios-download-outline' type='block' />
 					</Button>
 					<Button
 						title='Revert to Demo'
