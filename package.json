@@ -109,7 +109,7 @@
     "graceful-fs": "4.1.2",
     "isparta": "3.5.3",
     "js-beautify": "1.5.10",
-    "json-loader": "0.5.3",
+    "json-loader": "0.5.4",
     "junk": "1.0.2",
     "karma": "0.13.15",
     "karma-chrome-launcher": "0.2.1",
