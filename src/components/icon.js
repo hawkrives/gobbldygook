@@ -16,14 +16,10 @@ export default class Icon extends Component {
 	}
 
 	render() {
-		const style = {
-			display: this.props.type === 'inline' ? 'inline-block' : 'block',
-		}
-
 		return (
 			<svg
-				className={cx('icon', this.props.className)}
-				style={{...style, ...this.props.style}}
+				className={cx('icon', `icon--${this.props.type}`, this.props.className)}
+				style={this.props.style}
 			>
 				<use xlinkHref={`./ionicons.svg#${this.props.name}`} />
 			</svg>
