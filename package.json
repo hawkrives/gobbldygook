@@ -138,7 +138,7 @@
     "sparkly": "2.0.1",
     "style-loader": "0.13.0",
     "url-loader": "0.5.7",
-    "webpack": "1.12.8",
+    "webpack": "1.12.9",
     "webpack-dev-server": "1.12.1",
     "worker-loader": "0.7.0"
   }
