@@ -1,4 +1,4 @@
-import {v4 as uuid} from 'uuid'
+import uniqueId from 'lodash/utility/uniqueId'
 
 import Worker from './check-student-against-area.worker.js'
 const worker = new Worker()
@@ -18,7 +18,7 @@ import {getStudentData} from '../models/student'
  */
 export default function checkStudentAgainstArea(student, area) {
 	return new Promise((resolve, reject) => {
-		const sourceId = uuid()
+		const sourceId = uniqueId()
 
 		function onMessage({data}) {
 			const [resultId, type, contents] = data
