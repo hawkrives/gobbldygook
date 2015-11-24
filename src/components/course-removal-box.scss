@@ -18,7 +18,7 @@
 
 	&.can-drop {
 		color: black;
-		display: block;
+		display: flex;
 		z-index: $z-sidebar + 1;
 	}
 
