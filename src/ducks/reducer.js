@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import notifications from './notifications'
-import students from './students'
+import notifications from './reducers/notifications'
+import students from './reducers/students'
 
 export default combineReducers({
 	notifications,
