@@ -97,6 +97,7 @@ function storeArea(item) {
 
 	let area = {
 		...item.data,
+		dateAdded: new Date(),
 		sourcePath: id,
 		type: item.data.type.toLowerCase(),
 	}
