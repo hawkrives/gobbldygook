@@ -11,7 +11,6 @@ import Icon from '../components/icon'
 import StudentList from '../components/student-list'
 
 import './student-picker.scss'
-import OleLion from '../components/ole-the-lion.js'
 
 export default class StudentPicker extends Component {
 	static propTypes = {

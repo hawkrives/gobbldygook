@@ -33,7 +33,7 @@ export default class ContentEditable extends Component {
 		// this.ref.placeholder.style.display = 'none'
 	}
 
-	handleBlur = ev => {
+	handleBlur = () => {
 		// this.ref.placeholder.style.display = 'inline'
 	}
 

@@ -3,7 +3,7 @@ import path from 'path'
 import Mocha, {Test} from 'mocha'
 import {expect} from 'chai'
 
-import evaluate from '../src/lib/evaluate'
+import evaluate from '../src/area-tools/evaluate'
 import loadStudent from './lib/load-student'
 
 export async function testStudent(studentFileName, mochaInstance) {

@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import countCourses from '../../src/lib/count-courses'
+import countCourses from '../../src/area-tools/count-courses'
 
 describe('countCourses', () => {
 	it('counts the number of distinct courses in an array', () => {

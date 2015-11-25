@@ -15,7 +15,7 @@ import {oxford} from 'humanize-plus'
 import buildDept from '../helpers/build-dept'
 import semesterName from '../helpers/semester-name'
 import expandYear from '../helpers/expand-year'
-import queryCourseDatabase from '../lib/query-course-database'
+import queryCourseDatabase from '../helpers/query-course-database'
 import size from 'lodash/collection/size'
 import keymage from 'keymage'
 
@@ -25,8 +25,6 @@ import Icon from '../components/icon'
 import Loading from '../components/loading'
 
 import to12Hour from '../helpers/to-12-hour-time'
-
-import Separator from '../components/separator'
 
 import './course-searcher.scss'
 

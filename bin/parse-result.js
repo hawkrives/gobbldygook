@@ -1,4 +1,4 @@
-import {parse} from '../src/lib/parse-hanson-string'
+import {parse} from '../src/area-tools/parse-hanson-string'
 import nom from 'nomnom'
 import stringify from 'json-stable-stringify'
 import yaml from 'js-yaml'

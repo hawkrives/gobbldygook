@@ -9,7 +9,7 @@ import ContentEditable from './content-editable'
 
 import studentActions from '../flux/student-actions'
 
-import countCredits from '../lib/count-credits'
+import countCredits from '../area-tools/count-credits'
 
 import './student-summary.scss'
 

@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import checkForCourse from '../../src/lib/check-for-course'
+import checkForCourse from '../../src/area-tools/check-for-course'
 
 describe('checkForCourse', () => {
 	it('checks for a course in a list of courses', () => {

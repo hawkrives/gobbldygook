@@ -1,4 +1,4 @@
-import findAreaPath from '../lib/find-area-path'
+import findAreaPath from '../helpers/find-area-path'
 import loadArea from './load-area'
 import omit from 'lodash/object/omit'
 

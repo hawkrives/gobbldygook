@@ -1,2 +1,2 @@
-import loadData from '../lib/load-data'
+import loadData from '../helpers/load-data'
 loadData()

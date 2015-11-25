@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import fuzzysearch from 'fuzzysearch'
-import pluralizeArea from '../lib/pluralize-area'
+import pluralizeArea from '../area-tools/pluralize-area'
 
 import Button from './button'
 import List from './list'

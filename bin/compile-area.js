@@ -1,7 +1,7 @@
 import nom from 'nomnom'
 import fs from 'graceful-fs'
 import yaml from 'js-yaml'
-import enhanceHanson from '../src/lib/enhance-hanson'
+import enhanceHanson from '../src/area-tools/enhance-hanson'
 import stringify from 'json-stable-stringify'
 
 const loggers = {

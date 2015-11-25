@@ -5,17 +5,6 @@ import semesterName from '../helpers/semester-name'
 
 import './expression--course.scss'
 
-function hasOwnKey(course, key) {
-	// In order to have an "own key":
-	// 1. the course MUST have the key on its object
-	// 2. the key MUST NOT appear in the _extraKeys array
-	//      (which may or may not exist)
-	return (
-		course.hasOwnProperty(key) &&
-		!includes(course._extraKeys || [], key)
-	)
-}
-
 function shrinkDept(dept, index, collection) {
 	if (collection.length === 1) {
 		return dept

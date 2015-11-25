@@ -1,6 +1,6 @@
 import {expect} from 'chai'
-import computeChunk, {computeModifier} from '../../src/lib/compute-chunk'
-import applyFilter from '../../src/lib/apply-filter'
+import computeChunk, {computeModifier} from '../../src/area-tools/compute-chunk'
+import applyFilter from '../../src/area-tools/apply-filter'
 
 describe('computeModifier', () => {
 	it('checks for <things> from all children', () => {

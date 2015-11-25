@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import evaluate from '../../src/lib/evaluate'
+import evaluate from '../../src/area-tools/evaluate'
 
 describe('evaluate', () => {
 	it('evaluates!', () => {

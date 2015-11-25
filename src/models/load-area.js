@@ -1,4 +1,4 @@
-import enhanceHanson from '../lib/enhance-hanson'
+import {enhance as enhanceHanson} from '../area-tools'
 import isArray from 'lodash/lang/isArray'
 import some from 'lodash/collection/some'
 import max from 'lodash/collection/max'
@@ -9,7 +9,7 @@ export default async function loadArea({name, type, revision, source, isCustom})
 		return {...enhanceHanson(yaml.safeLoad(source), {topLevel: true}), source}
 	}
 
-	const db = require('../lib/db')
+	const db = require('../helpers/db')
 
 	let query = {name: [name], type: [type]}
 	if (revision) {

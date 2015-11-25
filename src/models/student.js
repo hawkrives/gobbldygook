@@ -12,7 +12,7 @@ import present from 'present'
 import localStorage from '../helpers/localstorage'
 const debug = require('debug')('gb:models')
 
-import checkGraduatability from '../lib/check-student-graduatability'
+import checkGraduatability from '../helpers/check-student-graduatability'
 
 import randomChar from '../helpers/random-char'
 

@@ -10,7 +10,7 @@ import filter from 'lodash/collection/filter'
 import map from 'lodash/collection/map'
 import semesterName from '../helpers/semester-name'
 import isCurrentSemester from '../helpers/is-current-semester'
-import countCredits from '../lib/count-credits'
+import countCredits from '../area-tools/count-credits'
 
 import studentActions from '../flux/student-actions'
 import itemTypes from '../models/item-types'

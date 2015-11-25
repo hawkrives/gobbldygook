@@ -12,7 +12,7 @@ import has from 'lodash/object/has'
 import uniq from 'lodash/array/uniq'
 import pluck from 'lodash/collection/pluck'
 
-import pathToOverride from '../lib/path-to-override'
+import pathToOverride from '../area-tools/path-to-override'
 
 import AreaOfStudyGroup from '../components/area-of-study-group'
 import Button from '../components/button'

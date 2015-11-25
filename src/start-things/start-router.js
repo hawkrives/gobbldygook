@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, IndexRoute, Redirect} from 'react-router'
+import {Route, IndexRoute} from 'react-router'
 
 import Gobbldygook from '../screens/gobbldygook'
 // import AreaEditor from '../screens/area-editor'
