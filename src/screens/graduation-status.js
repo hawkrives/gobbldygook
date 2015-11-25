@@ -7,7 +7,7 @@ import difference from 'lodash/array/difference'
 import union from 'lodash/array/union'
 import values from 'lodash/object/values'
 
-import pathToOverride from '../helpers/path-to-override'
+import pathToOverride from '../area-tools/path-to-override'
 
 import AreaOfStudyGroup from '../components/area-of-study-group'
 import Button from '../components/button'
