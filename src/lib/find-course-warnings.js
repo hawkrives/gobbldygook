@@ -17,7 +17,7 @@ export function checkForInvalidYear(course, scheduleYear) {
 		warning: false,
 		type: 'invalid-year',
 		msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
-		icon: 'ionicon-alert-circled',
+		icon: 'alert-circled',
 	}
 
 	let thisYear = new Date().getFullYear()
@@ -34,7 +34,7 @@ export function checkForInvalidSemester(course, scheduleSemester) {
 		warning: false,
 		type: 'invalid-semester',
 		msg: `Wrong Semester (originally from ${semesterName(course.semester)})`,
-		icon: 'ionicon-ios-calendar-outline',
+		icon: 'ios-calendar-outline',
 	}
 
 	if (course.semester !== scheduleSemester) {
@@ -51,7 +51,7 @@ export function checkForTimeConflicts(courses) {
 			warning: false,
 			type: 'time-conflict',
 			msg: '',
-			icon: 'ionicon-ios-clock-outline',
+			icon: 'ios-clock-outline',
 		}
 
 		if (any(conflictSet)) {

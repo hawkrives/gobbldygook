@@ -1,0 +1,25 @@
+name: Mathematical Biology
+type: Concentration
+revision: 2015-16 # really 2013-14
+result: Core & MSCS Electives & Biology Electives & Integrative Project & Senior Math Biology Symposium
+
+Core: MATH 236
+
+MSCS Electives:
+    two of (
+        (CSCI 125 | 251), CSCI 315,
+        MATH 230, 242, 330,
+        (STAT 212 | 214 | 272), STAT 302,
+    )
+
+Biology Electives:
+    two of (
+        BIO 233, 247, 261, 315, 371, 383,
+        BI/ES 350, NEURO 239,
+    )
+
+Integrative Project:
+    message: Students are required to work on an independent project that integrates mathematics, computer science, and/or statistics with biology.
+
+Senior Math Biology Symposium:
+    message: Seniors present their independent project in the form of a poster in a Mathematical Biology Symposium held at St. Olaf in the spring.

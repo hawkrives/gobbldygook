@@ -1,3 +1,6 @@
+// Usage: ./bin/olaf-convert-semi-to-json ./playground/olaf-semicolons/sample-1.txt > blank.student
+//        ./bin/olaf-find-student-courses blank.student
+
 import nomnom from 'nomnom'
 
 import {loadYamlFile} from './lib/read-file'
@@ -5,17 +8,39 @@ import populateCourses from './lib/populate-courses'
 import simplifyCourse from '../src/lib/simplify-course'
 import loadArea from './lib/load-area'
 import evaluate from '../src/lib/evaluate'
+import some from 'lodash/collection/some'
 import forEach from 'lodash/collection/forEach'
 import uniq from 'lodash/array/uniq'
 import flatten from 'lodash/array/flatten'
 import reject from 'lodash/collection/reject'
 import pluck from 'lodash/collection/pluck'
 import includes from 'lodash/collection/includes'
+import repeat from 'lodash/string/repeat'
+import find from 'lodash/collection/find'
 
 async function populateStudent(filename) {
-	let student = await loadYamlFile(filename)
-	student.courses = await populateCourses(student)
-	student.areas = student.studies.map(loadArea)
+	let student
+	try {
+		student = await loadYamlFile(filename)
+	}
+	catch (err) {
+		console.error('Problem loading student', err)
+	}
+
+	try {
+		student.courses = await populateCourses(student)
+	}
+	catch (err) {
+		console.error('Problem populating courses', err)
+	}
+
+	try {
+		student.areas = await Promise.all(student.studies.map(loadArea))
+	}
+	catch (err) {
+		console.error('Problem loading areas', err)
+	}
+
 	return student
 }
 
@@ -24,31 +49,67 @@ function prettyCourse(c) {
 }
 
 function evaluateStudentAgainstEachMajor(student) {
+	console.log('All Courses')
+	console.log(student.courses.map(prettyCourse).map(line => `- ${line}`).join('\n'))
+	console.log()
+
 	let used = []
-	const degreeEvaluation = evaluate(student, student.areas.find(a => a.type === 'degree'))
-	const countedTowardsDegree = degreeEvaluation.result._matches
-	countedTowardsDegree.forEach(c => used.push(c))
+	let usedIncludingDegrees = []
+
+	const hasDegree = some(student.areas, {type: 'degree'})
+	let countedTowardsDegree = []
+	if (hasDegree) {
+		const degreeEvaluation = evaluate(student, student.areas.find(a => a.type === 'degree'))
+		countedTowardsDegree = degreeEvaluation.result._matches
+	}
+	countedTowardsDegree.forEach(c => usedIncludingDegrees.push(c))
 
 	let countedTowardsMajors = {}
-	student.areas
+	student.areas = student.areas
 		.filter(a => a.type.toLowerCase() !== 'degree')
 		.map(area => evaluate(student, area))
-		.forEach(evaluated => {
-			countedTowardsMajors[evaluated.name] = evaluated.result._matches
-		})
+
+	student.areas.forEach(evaluated => {
+		countedTowardsMajors[evaluated.name] = evaluated.result._matches
+	})
 
 	forEach(countedTowardsMajors, (courses, name) => {
-		const usedCourses = uniq([...courses, ...countedTowardsDegree], simplifyCourse)
+		const title = `Regarding ${name}… (result: ${find(student.areas, {name}).computed})`
+		console.log(`${title}\n${repeat('=', title.length)}\n`)
+		const usedCourses = uniq(courses, simplifyCourse)
+		const usedClbids = pluck(usedCourses, 'clbid')
 		const unusedCourses = reject(
-			uniq([...student.courses, ...courses, ...countedTowardsDegree], simplifyCourse),
-			c => includes(pluck(usedCourses, 'clbid'), c.clbid))
+			uniq([...student.courses, ...courses], simplifyCourse),
+			c => includes(usedClbids, c.clbid))
 
 		usedCourses.forEach(c => used.push(c))
 
-		console.log(`Used for ${name} and degree:`)
+		console.log(`Used:`)
 		console.log(usedCourses.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
-		console.log(`Not used for ${name} and degree:`)
+		console.log()
+		console.log(`Not used:`)
 		console.log(unusedCourses.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
+		console.log()
+
+		if (hasDegree) {
+			const subtitle = `When factoring in the degree:`
+			console.log(`${subtitle}\n${repeat('-', subtitle.length)}`)
+
+			const usedCourses = uniq([...courses, ...countedTowardsDegree], simplifyCourse)
+			const usedClbids = pluck(usedCourses, 'clbid')
+			const unusedCourses = reject(
+				uniq([...student.courses, ...courses, ...countedTowardsDegree], simplifyCourse),
+				c => includes(usedClbids, c.clbid))
+
+			usedCourses.forEach(c => usedIncludingDegrees.push(c))
+
+			console.log(`Used:`)
+			console.log(usedIncludingDegrees.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
+			console.log()
+			console.log(`Not used:`)
+			console.log(unusedCourses.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
+			console.log()
+		}
 	})
 
 	used = uniq(used, 'clbid')
@@ -56,15 +117,18 @@ function evaluateStudentAgainstEachMajor(student) {
 	const unusedCourses = reject(
 		uniq([...student.courses, ...flatten(countedTowardsMajors), ...countedTowardsDegree], simplifyCourse),
 		c => includes(pluck(used, 'clbid'), c.clbid))
-	console.log(`Not used for anything:`)
+
+	const remainingTitle = 'Not used for anything:'
+	console.log(`${remainingTitle}\n${repeat('=', remainingTitle.length)}`)
 	console.log(unusedCourses.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
 }
 
 export function cli() {
 	const args = nomnom()
+		.script('olaf-find-student-courses')
 		.option('json', {
 			flag: true,
-			help: 'Print valid JSON objects',
+			help: 'Print JSON structures',
 		})
 		.option('students', {
 			required: true,

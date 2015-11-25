@@ -1,20 +1,13 @@
-@font-face {
-	font-family: Ionicons;
-	src: url(../icons/ionicons.woff) format(woff);
-	font-weight: normal;
-	font-style: normal;
+.icon {
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
 }
 
-.icon {
+.icon--block {
+	display: block;
+}
+
+.icon--inline {
 	display: inline-block;
-	font-family: Ionicons;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	text-rendering: auto;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }

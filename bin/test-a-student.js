@@ -1,36 +1,36 @@
 import nom from 'nomnom'
 import path from 'path'
-import yaml from 'js-yaml'
-import {describe, it} from 'mocha'
+import Mocha, {Test} from 'mocha'
 import {expect} from 'chai'
-import {readFileSync} from 'graceful-fs'
 
 import evaluate from '../src/lib/evaluate'
-import loadArea from './lib/load-area'
+import loadStudent from './lib/load-student'
 
-function loadStudent(filename) {
-	const data = yaml.safeLoad(readFileSync(filename, {encoding: 'utf-8'}))
-	data.areas = data.areas.map(loadArea)
-	data.filename = filename
-	return data
-}
+export async function testStudent(studentFileName, mochaInstance) {
+	const {
+		areas,
+		courses,
+		expectation=true,
+		filename,
+		overrides,
+		pending=false,
+	} = await loadStudent(studentFileName)
 
-export function testStudent(studentFileName) {
-	const {courses, overrides, areas, filename, expectation=true, pending=false} = loadStudent(studentFileName)
+	if (pending) {
+		return
+	}
 
-	const func = pending ? describe.skip : describe
+	const suiteInstance = Mocha.Suite.create(mochaInstance.suite, path.basename(filename))
 
-	func(path.basename(filename), () => {
-		areas.forEach(data => {
-			it(`${expectation ? 'should' : 'should not'} pass ${data.name}`, () => {
-				const result = evaluate({courses, overrides}, data)
-				expect(result).to.have.property('computed', expectation)
-			})
-		})
+	areas.forEach(data => {
+		suiteInstance.addTest(new Test(`${expectation ? 'should' : 'should not'} pass ${data.name}`, () => {
+			const result = evaluate({courses, overrides}, data)
+			expect(result).to.have.property('computed', expectation)
+		}))
 	})
 }
 
-export function cli() {
+export async function cli() {
 	const args = nom()
 		.option('filename', {
 			required: true,
@@ -39,5 +39,7 @@ export function cli() {
 		})
 		.parse()
 
-	testStudent(args.filename)
+	const mochaInstance = new Mocha()
+	await testStudent(args.filename, mochaInstance)
+	mochaInstance.run()
 }

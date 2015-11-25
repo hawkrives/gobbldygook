@@ -1,3 +1,8 @@
+/* olaf-count-courses-with-ges
+ * This script takes a list of terms (f.ex. 20151 for Fall 2015) and returns the number of courses
+ * with ge requirements, grouped by the number of ge requirements it offeers, per term.
+ */
+
 import nomnom from 'nomnom'
 import Promise from 'bluebird'
 import search from './lib/search-for-courses'
@@ -13,18 +18,33 @@ function findCoursesWithGes(term) {
 
 export async function cli() {
 	const args = nomnom()
-		.option('term', {list: true, default: []})
-		.option('year', {list: true, default: []})
+		.script('olaf-count-courses-with-ges')
+		.option('terms', {position: 0, list: true, required: true, help: 'the years or terms to search for: 2015, or 20141, etc.'})
 		.parse()
 
-	args.term = args.term.concat(...args.year.map(y => [1, 2, 3, 4, 5].map(s => parseInt(`${y}${s}`))))
-	const courses = zipObject(await Promise.all(map(args.term, async term => [term, await findCoursesWithGes(term)])))
+	args.terms = args.terms.reduce((list, term) => {
+		let stringterm = String(term)
+		if (stringterm.length === 4) {
+			return list.concat([1, 2, 3, 4, 5].map(s => parseInt(`${stringterm}${s}`)))
+		}
+		return list.concat(term)
+	}, [])
 
-	// console.log(courses)
-	// const counts = mapValues(courses, c => c.length)
-	// console.log(counts)
+	const courses = zipObject(
+		await Promise.all(
+			map(
+				args.terms,
+				async term => [
+					term,
+					await findCoursesWithGes(term),
+				])))
 
-	const groupedByGeCount = mapValues(courses, list => mapValues({...groupBy(list, c => c.gereqs && c.gereqs.length || 0), total: list}, l => l.length))
+	const groupedByGeCount = mapValues(
+		courses,
+		list => mapValues({
+			...groupBy(list, c => c.gereqs && c.gereqs.length || 0),
+			total: list,
+		}, l => l.length))
+
 	console.log(yaml.safeDump(groupedByGeCount))
-	// console.log(sparkly(sizes))
 }

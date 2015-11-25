@@ -182,8 +182,7 @@ export function saveStudent(student) {
 
 	if (oldVersion !== stringify(student)) {
 		debug(`saving student ${student.name} (${student.id})`)
-
-		const student = student.set('dateLastModified', new Date())
+		const student = student.dateLastModified = new Date()
 		localStorage.setItem(student.id, stringify(student))
 	}
 }

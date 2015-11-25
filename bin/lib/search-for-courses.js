@@ -33,7 +33,7 @@ export default async function search({riddles, unique, sort}={}) {
 	await checkForStaleData()
 
 	let base = `${cacheDir}/Courses/`
-	let courses = flatten(map(fs.readdirSync(base),  fn => (tryReadJsonFile(path.join(base, fn)) || [])))
+	let courses = flatten(map(fs.readdirSync(base), fn => (tryReadJsonFile(path.join(base, fn)) || [])))
 
 	riddles	= riddles.map(getDeptNumsFromRiddles)
 

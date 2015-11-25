@@ -169,12 +169,12 @@ class Semester extends Component {
 						<Button className='add-course'
 							onClick={() => this.props.showSearchSidebar({schedule})}
 							title='Search for courses'>
-							<Icon name='ionicon-search' /> Course
+							<Icon name='search' /> Course
 						</Button>
 						<Button className='remove-semester'
 							onClick={this.removeSemester}
 							title={`Remove ${this.props.year} ${semesterName(this.props.semester)}`}>
-							<Icon name='ionicon-close' />
+							<Icon name='close' />
 						</Button>
 					</span>
 				</header>

@@ -93,12 +93,12 @@ export default class AreaEditor extends Component {
 			<div className={cx(this.props.className)}>
 				<Toolbar style={{marginBottom: '0.5em'}}>
 					<Button onClick={this.onSave}>
-						<Icon name='ionicon-ios-download-outline' />
+						<Icon name='ios-download-outline' />
 						<Separator type='spacer' />
 						Save
 					</Button>
 					<Button>
-						<Icon name='ionicon-ios-reload' />
+						<Icon name='ios-reload' />
 						<Separator type='spacer' />
 						Revert
 					</Button>
@@ -106,12 +106,12 @@ export default class AreaEditor extends Component {
 					<Separator type='spacer' />
 
 					<Button>
-						<Icon name='ionicon-ios-download-outline' />
+						<Icon name='ios-download-outline' />
 						<Separator type='spacer' />
 						Download
 					</Button>
 					<Button>
-						<Icon name='ionicon-ios-upload-outline' />
+						<Icon name='ios-upload-outline' />
 						<Separator type='spacer' />
 						Submit
 					</Button>

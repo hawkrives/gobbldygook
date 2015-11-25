@@ -63,17 +63,22 @@ export default checkStudentAgainstArea
 if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
 	self.addEventListener('message', ({data}) => {
 		const start = present()
-		const [id, student, area] = data
+
+		// why stringify? https://code.google.com/p/chromium/issues/detail?id=536620#c11
+		// > We know that serialization/deserialization is slow. It's actually faster to
+		// > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
+
+		const [id, student, area] = JSON.parse(data)
 		// console.log('[check-student] received message:', id, student, area)
 
 		checkStudentAgainstArea(student, area)
 			.then(result => {
-				console.log(`[check-student] it took ${round(present() - start)} ms to check`)
-				self.postMessage([id, 'result', result])
+				console.log(`[check-student(${id})] took ${round(present() - start)} ms`)
+				self.postMessage(JSON.stringify([id, 'result', result]))
 			})
 			.catch(err => {
 				console.error(`[check-student(${id})]`, err)
-				self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
+				self.postMessage(JSON.stringify([id, 'error', stringifyError(err)]))
 			})
 	})
 }

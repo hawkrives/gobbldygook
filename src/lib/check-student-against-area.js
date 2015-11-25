@@ -1,4 +1,4 @@
-import {v4 as uuid} from 'uuid'
+import uniqueId from 'lodash/utility/uniqueId'
 
 import Worker from './check-student-against-area.worker.js'
 const worker = new Worker()
@@ -18,10 +18,10 @@ import {getStudentData} from '../models/student'
  */
 export default function checkStudentAgainstArea(student, area) {
 	return new Promise((resolve, reject) => {
-		const sourceId = uuid()
+		const sourceId = uniqueId()
 
 		function onMessage({data}) {
-			const [resultId, type, contents] = data
+			const [resultId, type, contents] = JSON.parse(data)
 
 			if (resultId === sourceId) {
 				worker.removeEventListener('message', onMessage)
@@ -46,7 +46,10 @@ export default function checkStudentAgainstArea(student, area) {
 			})
 			.then(([student, area]) => {
 				// console.log(sourceId, student, area)
-				worker.postMessage([sourceId, student, area])
+				// why stringify? https://code.google.com/p/chromium/issues/detail?id=536620#c11
+				// > We know that serialization/deserialization is slow. It's actually faster to
+				// > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
+				worker.postMessage(JSON.stringify([sourceId, student, area]))
 			})
 			.catch(err => console.error(err))
 	})
