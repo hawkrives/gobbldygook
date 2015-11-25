@@ -9,7 +9,7 @@ import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'
 import some from 'lodash/collection/some'
 import zipObject from 'lodash/array/zipObject'
-import {makeAreaSlug} from './make-area-slug'
+import makeAreaSlug from './make-area-slug'
 import {oxford} from 'humanize-plus'
 import {parse} from './parse-hanson-string'
 

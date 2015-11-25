@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 import yaml from 'js-yaml'
-import enhanceHanson from '../../src/lib/enhance-hanson'
+import enhanceHanson from '../../src/area-tools/enhance-hanson'
 import map from 'lodash/collection/map'
 import filter from 'lodash/collection/filter'
 import find from 'lodash/collection/find'
