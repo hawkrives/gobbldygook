@@ -39,7 +39,7 @@
     "stats:base": "webpack --config .webpackrc --bail --profile --json > stats.json && open http://webpack.github.io/analyse/",
     "stats:dev": "env NODE_ENV=dev npm run stats:base",
     "test": "npm run mocha",
-    "test:students": "mocha ./bin/test-students"
+    "test:students": "./bin/test-students"
   },
   "dependencies": {
     "appdirs": "1.0.0",

@@ -55,39 +55,4 @@ describe('Study', () => {
 			revision: '2014-15',
 		})
 	})
-
-	it('can migrate from the old save-style to the new', () => {
-		let csci = new Study({id: 'm-csci', revisionYear: 2014})
-
-		expect(csci.name).to.equal('Computer Science')
-		expect(csci.type).to.equal('major')
-		expect(csci.revision).to.equal('2014-15')
-	})
-})
-
-describe('expandOldType', () => {
-	it('handles majors', () => {
-		expect(expandOldType('m')).to.equal('major')
-	})
-	it('handles concentrations', () => {
-		expect(expandOldType('c')).to.equal('concentration')
-	})
-	it('handles degrees', () => {
-		expect(expandOldType('d')).to.equal('degree')
-	})
-	it('handles emphases', () => {
-		expect(expandOldType('e')).to.equal('emphasis')
-	})
-})
-
-describe('expandOldName', () => {
-	it('handles all of the old names', () => {
-		expect(expandOldName('csci')).to.equal('Computer Science')
-		expect(expandOldName('math')).to.equal('Mathematics')
-		expect(expandOldName('phys')).to.equal('Physics')
-		expect(expandOldName('asian')).to.equal('Asian Studies')
-		expect(expandOldName('stat')).to.equal('Statistics')
-		expect(expandOldName('japan')).to.equal('Japan Studies')
-		expect(expandOldName('ba')).to.equal('Bachelor of Arts')
-	})
 })

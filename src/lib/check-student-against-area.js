@@ -21,7 +21,7 @@ export default function checkStudentAgainstArea(student, area) {
 		const sourceId = uniqueId()
 
 		function onMessage({data}) {
-			const [resultId, type, contents] = data
+			const [resultId, type, contents] = JSON.parse(data)
 
 			if (resultId === sourceId) {
 				worker.removeEventListener('message', onMessage)

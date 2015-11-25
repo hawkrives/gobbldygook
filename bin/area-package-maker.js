@@ -40,7 +40,7 @@ export function cli() {
 
 	const inDir = args.dir
 
-	const data = processAreasDir({dir: inDir, filetype: 'yaml'})
+	const data = processAreasDir(inDir)
 	if (args.save) {
 		fs.writeFileSync(path.join(inDir, 'info.json'), data, {encoding: 'utf-8'})
 	}
