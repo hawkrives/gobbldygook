@@ -3,7 +3,9 @@ import Immutable from 'immutable'
 import yaml from 'js-yaml'
 import enhanceHanson from '../lib/enhance-hanson'
 import findAreaPath from '../lib/find-area-path'
-import includes from 'lodash/collection/includes'
+import isArray from 'lodash/lang/isArray'
+import some from 'lodash/collection/some'
+import max from 'lodash/collection/max'
 const debug = require('debug')('gobbldygook:models')
 
 export async function loadArea({name, type, revision, source, isCustom}) {
@@ -16,24 +18,33 @@ export async function loadArea({name, type, revision, source, isCustom}) {
 	if (!name) {
 		throw new Error(`loadArea(): 'name' must be provided`)
 	}
-	else if (!type) {
+	if (!type) {
 		throw new Error(`loadArea(): 'type' must be provided`)
 	}
 
-	const path = `${findAreaPath({name, type, revision})}.yaml`
+	let query = {name: [name], type: [type]}
+	if (revision) {
+		query.revision = [revision]
+	}
 
 	let data
 	try {
-		data = await db.store('areas').get(path)
-		if (!data && includes(path, '?')) {
-			data = await db.store('areas').get(path.split('?')[0])
-		}
+		data = await db.store('areas').query(query)
 	}
 	catch (err) {
-		throw new Error(`Could not load area ${path}`)
+		throw new Error(`Could not find area ${JSON.stringify(query)}`)
 	}
 
-	if (typeof data === 'undefined') {
+	if (isArray(data) && data.length) {
+		if (some(data, possibility => 'dateAdded' in possibility)) {
+			data = max(data, 'dateAdded')
+		}
+		else {
+			data = max(data, possibility => possibility.sourcePath.length)
+		}
+	}
+
+	if (typeof data === 'undefined' || isArray(data)) {
 		throw new Error(`the area "${name}" (${type}) could not be found with the query {name: ${name}, type: ${type}, revision: ${revision}}`)
 	}
 
