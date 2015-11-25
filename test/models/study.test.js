@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import Study, {expandOldType, expandOldName} from '../../src/models/study'
+import Study from '../../src/models/study'
 
 describe('Study', () => {
 	it('is a Study', () => {
