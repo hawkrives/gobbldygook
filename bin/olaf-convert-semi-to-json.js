@@ -35,6 +35,6 @@ let onlyCoursesAndGereqs = unzip(
 let onlyMajors = splitten.slice(0, indexOfFirstCourse)
 
 console.log(JSON.stringify({
-	studies: onlyMajors.map(m => ({type: 'major', name: m, revision: 'latest'})),
+	studies: onlyMajors.map(m => ({type: 'major', name: m})),
 	clbids: onlyCoursesAndGereqs.map(cAndGe => first(cAndGe)).filter(s => s.trim().length).map(c => Number(c)),
 }, null, 2))

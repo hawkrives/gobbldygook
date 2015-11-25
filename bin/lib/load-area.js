@@ -4,6 +4,7 @@ import enhanceHanson from '../../src/lib/enhance-hanson'
 import map from 'lodash/collection/map'
 import filter from 'lodash/collection/filter'
 import find from 'lodash/collection/find'
+import max from 'lodash/collection/max'
 import findAreas from './find-areas'
 const fs = Promise.promisifyAll(require('graceful-fs'))
 
@@ -21,6 +22,11 @@ export async function getArea({name, type, revision}) {
 		area.type.toLowerCase() === type &&
 		area.name.toLowerCase() === name
 	))
+
+	if (!revision) {
+		// max returns the entire object that it matched
+		return max(filteredAreas, area => Number(area.revision.split('-')[0]))
+	}
 
 	return find(filteredAreas, {revision})
 }
