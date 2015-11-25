@@ -60,7 +60,6 @@ export default class DetailedCourse extends Component {
 					<div className='summary'>
 						<CourseIdentBlock {...course} />
 						<span className='type'>{course.type}</span>
-
 					</div>
 				</div>
 

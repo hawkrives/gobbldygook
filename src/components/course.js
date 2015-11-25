@@ -7,8 +7,6 @@ import isNull from 'lodash/lang/isNull'
 import map from 'lodash/collection/map'
 
 import itemTypes from '../models/item-types'
-import Schedule from '../models/schedule'
-import Student from '../models/student'
 
 import List from './list'
 import DetailedCourse from './detailed-course'
@@ -17,10 +15,7 @@ import Button from './button'
 import Icon from './icon'
 import Toolbar from './toolbar'
 
-import Modal from 'react-modal2'
-if (typeof window !== 'undefined') {
-	Modal.setApplicationElement(document.getElementById('app'))
-}
+import Modal from './modal'
 
 import './course.scss'
 
@@ -101,7 +96,7 @@ class Course extends Component {
 			>
 				<Toolbar className='window-tools'>
 					<Button className='close-modal' onClick={this.closeModal}>
-						<Icon name='ionicon-close' />
+						<Icon name='close' />
 					</Button>
 				</Toolbar>
 

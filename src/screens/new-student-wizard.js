@@ -38,7 +38,7 @@ export default class NewStudentScreen extends Component {
 		const today = new Date()
 
 		return (
-			<Modal className={cx()}>
+			<Modal modalClassName='student-wizard'>
 				<Toolbar>
 					<Button>Import from File</Button>
 					<Button>Open from Google Drive</Button>
