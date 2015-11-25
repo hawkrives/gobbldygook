@@ -7,7 +7,7 @@ import map from 'lodash/collection/map'
 import sortByOrder from 'lodash/collection/sortByOrder'
 import cx from 'classnames'
 import plur from 'plur'
-import humanizeOperator from '../lib/humanize-operator'
+import humanizeOperator from '../area-tools/humanize-operator'
 
 import './expression.scss'
 

@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import findLeafRequirements from '../../src/lib/find-leaf-requirements'
+import findLeafRequirements from '../../src/area-tools/find-leaf-requirements'
 
 describe('findLeafRequirements', () => {
 	it('finds the leafs of a requirement tree', () => {

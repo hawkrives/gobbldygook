@@ -9,7 +9,7 @@ import stringify from 'json-stable-stringify'
 import present from 'present'
 const debug = require('debug')('gobbldygook:models')
 
-import checkGraduatability from '../lib/check-student-graduatability'
+import checkGraduatability from '../helpers/check-student-graduatability'
 
 import randomChar from '../helpers/random-char'
 

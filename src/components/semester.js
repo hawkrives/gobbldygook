@@ -8,7 +8,7 @@ import range from 'lodash/utility/range'
 import includes from 'lodash/collection/includes'
 import semesterName from '../helpers/semester-name'
 import isCurrentSemester from '../helpers/is-current-semester'
-import countCredits from '../lib/count-credits'
+import countCredits from '../area-tools/count-credits'
 
 import studentActions from '../flux/student-actions'
 import itemTypes from '../models/item-types'

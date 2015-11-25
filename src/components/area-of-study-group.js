@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import pluralizeArea from '../lib/pluralize-area'
+import pluralizeArea from '../area-tools/pluralize-area'
 import capitalize from 'lodash/string/capitalize'
 import * as areaTypeConstants from '../models/area-types'
 import values from 'lodash/object/values'

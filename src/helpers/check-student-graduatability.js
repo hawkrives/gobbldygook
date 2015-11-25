@@ -4,7 +4,7 @@ import map from 'lodash/collection/map'
 
 import {OrderedMap} from 'immutable'
 import checkStudentAgainstArea from './check-student-against-area'
-import countCredits from './count-credits'
+import countCredits from '../area-tools/count-credits'
 
 
 /**

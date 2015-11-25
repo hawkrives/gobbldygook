@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import getMatchesFromChildren from '../../src/lib/get-matches-from-children'
+import getMatchesFromChildren from '../../src/area-tools/get-matches-from-children'
 
 describe('getMatchesFromChildren', () => {
 	it('extracts matches from a requirement\'s children', () => {

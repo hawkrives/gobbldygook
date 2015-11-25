@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import findCourse from '../../src/lib/find-course'
+import findCourse from '../../src/area-tools/find-course'
 
 describe('findCourse', () => {
 	it('finds a course in a list of courses', () => {

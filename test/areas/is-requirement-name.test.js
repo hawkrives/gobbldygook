@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import isRequirementName from '../../src/lib/is-requirement-name'
+import isRequirementName from '../../src/area-tools/is-requirement-name'
 
 describe('isRequirementName checks if a string is a requirement name', () => {
 	it('can contain hyphens', () => {

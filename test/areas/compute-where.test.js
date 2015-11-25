@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {computeWhere} from '../../src/lib/compute-chunk'
+import {computeWhere} from '../../src/area-tools/compute-chunk'
 
 expect('computeWhere', () => {
 	it('can require that the courses be distinct', () => {

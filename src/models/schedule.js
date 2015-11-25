@@ -11,8 +11,8 @@ import {v4 as uuid} from 'uuid'
 
 import randomChar from '../helpers/random-char'
 import isTrue from '../helpers/is-true'
-import getCourses from '../lib/get-courses'
-import findWarnings from '../lib/find-course-warnings'
+import getCourses from '../helpers/get-courses'
+import findWarnings from '../helpers/find-course-warnings'
 
 const ScheduleRecord = Immutable.Record({
 	id: uuid(),

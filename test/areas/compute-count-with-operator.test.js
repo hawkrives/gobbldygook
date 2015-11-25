@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import computeCountWithOperator from '../../src/lib/compute-count-with-operator'
+import computeCountWithOperator from '../../src/area-tools/compute-count-with-operator'
 
 describe('computeCountWithOperator', () => {
 	it('throws on operators other than $eq, $lte, or $gte', () => {

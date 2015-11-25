@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {parse} from '../../src/lib/parse-hanson-string'
+import {parse} from '../../src/area-tools/parse-hanson-string'
 
 describe('parse hanson-string', () => {
 	describe('course parsing', () => {

@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import countCredits from '../../src/lib/count-credits'
+import countCredits from '../../src/area-tools/count-credits'
 import {List} from 'immutable'
 
 describe('countCredits', () => {

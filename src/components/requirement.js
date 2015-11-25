@@ -5,7 +5,7 @@ import map from 'lodash/collection/map'
 import sortBy from 'lodash/collection/sortBy'
 import cx from 'classnames'
 
-import isRequirementName from '../lib/is-requirement-name'
+import isRequirementName from '../area-tools/is-requirement-name'
 
 import Filter from './expression--filter'
 import Expression from './expression'

@@ -7,7 +7,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import studentStore, {REFRESH_AREAS, REFRESH_COURSES} from '../flux/student-store'
 import Loading from '../components/loading'
 
-import db from '../lib/db'
+import db from '../helpers/db'
 
 class GobbldygookApp extends Component {
 	static propTypes = {

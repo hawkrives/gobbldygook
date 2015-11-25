@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {computeCourse} from '../../src/lib/compute-chunk'
+import {computeCourse} from '../../src/area-tools/compute-chunk'
 
 describe('computeCourse', () => {
 	it('checks if a course exists in the list of courses', () => {

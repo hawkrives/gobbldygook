@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import pathToOverride from '../../src/lib/path-to-override'
+import pathToOverride from '../../src/area-tools/path-to-override'
 
 describe('pathToOverride', () => {
 	it('computes the path to an override', () => {

@@ -9,7 +9,7 @@ import present from 'present'
 
 import stringifyError from './stringify-error'
 import {evaluate} from '../area-tools'
-import findLeafRequirements from '../lib/find-leaf-requirements'
+import findLeafRequirements from '../area-tools/find-leaf-requirements'
 
 function alterCourse(course) {
 	return zipObject(map(pairs(course), ([key, value]) => {
