@@ -1,0 +1,60 @@
+name: Biology
+type: major
+revision: 2014-15
+result:
+    Cell/Molecular Biology & Biodiversity and Evolution &
+    Genetics & Ecology & Multicellular Organisms &
+    Level III & Electives &
+    at most three courses from children where { level = 100 }
+
+Cell/Molecular Biology:
+    Option A: BIO 125
+    Option B: CH/BI 125 & 126 & 227
+    result: Option A | Option B
+
+Biodiversity and Evolution: BIO 126
+
+Genetics: BIO 233
+
+Ecology: BIO 261
+
+Multicellular Organisms:
+    Vertebrate Biology: BIO 242
+    Animal Physiology: BIO 247
+    Invertebrate Biology: BIO 248
+    Plant Physiology:  BIO 251
+    Plant Morphology: BIO 252
+    Comparative Vertebrate Anatomy: BIO 266
+    Biology of Reproduction: BIO 275
+    result: one of (
+            Vertebrate Biology,
+            Animal Physiology,
+            Invertebrate Biology,
+            Plant Physiology,
+            Plant Morphology,
+            Comparative Vertebrate Anatomy,
+            Biology of Reproduction,
+        )
+
+Level III: one of (
+        BIO 315, 341, 348, BI/ES 350, BIO 363, 364, 371,
+            372, 382, 383, 385, 386, 391,
+    )
+
+Electives:
+    two of (
+        BIO 298, 396, 398,
+        CHEM 379, NEURO 239, PSYCH 238, ESTH 375,
+        BIO 121, 123, 124, 127, 128, 130, 131, 135, 143, 150,
+        CH/BI 125, 126, 227,
+        BI/ES 226, 228, 286,
+        BIO 227, 231, 233, 242, 243, 247, 248, 249, 251, 252, 261, 266, 275, 282, 284, 287, 288, 292,
+        BIO 315, 341, 348, BI/ES 350, BIO 363, 364, 371, 372, 382, 383, 385, 386, 391,
+    )
+
+Chemistry:
+    Intro A: CHEM 121 & 123 & 126
+    Intro B: CHEM 125 & 126
+    CHBI: CH/BI 125 & 126
+
+    result: Intro A | Intro B | CHBI
