@@ -8,7 +8,7 @@ import round from 'lodash/math/round'
 import present from 'present'
 
 import stringifyError from './stringify-error'
-import evaluate from '../lib/evaluate'
+import {evaluate} from '../area-tools'
 import findLeafRequirements from '../lib/find-leaf-requirements'
 
 function alterCourse(course) {

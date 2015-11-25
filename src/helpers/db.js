@@ -63,8 +63,8 @@ let schema = treo.schema()
 
 
 import treoPromise from 'treo/plugins/treo-promise'
-import queryTreoDatabase from './query-treo-database'
-import batchGet from './treo-batch-get'
+import queryTreoDatabase from '../helpers/treo-plugins/query-treo-database'
+import batchGet from '../helpers/treo-plugins/treo-batch-get'
 let db = treo('gobbldygook', schema)
 	.use(treoPromise())
 	.use(queryTreoDatabase)
