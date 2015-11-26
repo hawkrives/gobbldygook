@@ -119,6 +119,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
 	}
 
+	// If the schedule already has the course we're adding, just return the student
 	if (contains(schedule.clbids, clbid)) {
 		return student
 	}
@@ -141,6 +142,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
 	}
 
+	// If the schedule doesn't have the course we're removing, just return the student
 	if (!contains(schedule.clbids, clbid)) {
 		return student
 	}
