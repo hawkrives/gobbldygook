@@ -4,13 +4,13 @@
 	"graduation": 2016,
 
 	"studies": [
-		{"type": "degree", "name": "Bachelor of Arts", "revision": "latest", "path": "degrees/bachelor-of-arts/latest"},
-		{"type": "major", "name": "Computer Science", "revision": "latest", "path": "majors/computer-science/latest"},
-		{"type": "major", "name": "Asian Studies", "revision": "latest", "path": "majors/asian-studies/latest"},
-		{"type": "major", "name": "Physics", "revision": "latest", "path": "majors/physics/latest"},
-		{"type": "major", "name": "Mathematics", "revision": "latest", "path": "majors/mathematics/latest"},
-		{"type": "concentration", "name": "Japan Studies", "revision": "latest", "path": "concentrations/japan-studies/latest"},
-		{"type": "concentration", "name": "Statistics", "revision": "latest", "path": "concentrations/statistics/latest"},
+		{"type": "degree", "name": "Bachelor of Arts", "revision": "latest"},
+		{"type": "major", "name": "Computer Science", "revision": "latest"},
+		{"type": "major", "name": "Asian Studies", "revision": "latest"},
+		{"type": "major", "name": "Physics", "revision": "latest"},
+		{"type": "major", "name": "Mathematics", "revision": "latest"},
+		{"type": "concentration", "name": "Japan Studies", "revision": "latest"},
+		{"type": "concentration", "name": "Statistics", "revision": "latest"},
 		{
 			"type": "emphasis",
 			"name": "Custom!",
