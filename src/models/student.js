@@ -1,6 +1,7 @@
 import clone from 'lodash/lang/clone'
 import contains from 'lodash/collection/contains'
 import filter from 'lodash/collection/filter'
+import find from 'lodash/collection/find'
 import findIndex from 'lodash/array/findIndex'
 import findKey from 'lodash/object/findKey'
 import findWarnings from '../helpers/find-course-warnings'
@@ -164,7 +165,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 
 	let schedule = clone(find(student.schedules, {id: scheduleId}))
 
-	if (contains(schedule.clbids, clbid)) {
+	if (!schedule || contains(schedule.clbids, clbid)) {
 		return student
 	}
 

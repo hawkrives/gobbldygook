@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import proxyquire from 'proxyquire'
+import mock from 'mock-require'
 import demoStudent from '../../src/models/demo-student.json'
 import size from 'lodash/collection/size'
 import filter from 'lodash/collection/filter'
@@ -7,24 +7,37 @@ import pluck from 'lodash/collection/pluck'
 import find from 'lodash/collection/find'
 import stringify from 'json-stable-stringify'
 
+mock('../../src/helpers/get-courses', () => Promise.resolve([]))
+mock('../lib/check-student-graduatability', () => Promise.resolve([]))
+
 describe('Student', () => {
 	const {
 		default: Student,
-		addFabrication,
-		removeFabrication,
-		setOverride,
-		removeOverride,
-		addArea,
-		removeArea,
-		moveCourse,
-		addSchedule,
-		destroySchedule,
-	} = proxyquire('../../src/models/student', {
-		'./schedule': proxyquire('../../src/models/schedule', {
-			'../lib/get-courses': () => Promise.resolve([]),
-		}),
-		'../lib/check-student-graduatability': () => Promise.resolve({}),
-	})
+		changeStudentName,
+		changeStudentAdvisor,
+		changeStudentCreditsNeeded,
+		changeStudentMatriculation,
+		changeStudentGraduation,
+		changeStudentSetting,
+		addScheduleToStudent,
+		destroyScheduleFromStudent,
+		addCourseToSchedule,
+		removeCourseFromSchedule,
+		moveCourseToSchedule,
+		addAreaToStudent,
+		removeAreaFromStudent,
+		setOverrideOnStudent,
+		removeOverrideFromStudent,
+		addFabricationToStudent,
+		removeFabricationFromStudent,
+		encodeStudent,
+		saveStudent,
+		moveScheduleInStudent,
+		reorderScheduleInStudent,
+		renameScheduleInStudent,
+		reorderCourseInSchedule,
+		validateSchedule,
+	} = require('../../src/models/student')
 
 	it('creates a unique ID for each new student without an ID prop', () => {
 		let stu1 = new Student()
@@ -57,37 +70,37 @@ describe('Student', () => {
 	// fabrications
 	it('supports adding fabrications', () => {
 		const stu = new Student(demoStudent)
-		let addedFabrication = addFabrication(stu, {id: 'a'})
+		let addedFabrication = addFabricationToStudent(stu, {id: 'a'})
 		expect(addedFabrication.fabrications['a']).to.deep.equal({id: 'a'})
 	})
 	it('supports removing fabrications', () => {
 		const stu = new Student(demoStudent)
-		let addedFabrication = addFabrication(stu, {id: 'a'})
-		let noMoreFabrication = removeFabrication(addedFabrication, 'a')
+		let addedFabrication = addFabricationToStudent(stu, {id: 'a'})
+		let noMoreFabrication = removeFabricationFromStudent(addedFabrication, 'a')
 		expect(noMoreFabrication.fabrications.hasOwnProperty('a')).to.be.false
 	})
 
 	// overrides
 	it('supports adding overrides', () => {
 		const stu = new Student(demoStudent)
-		let addedOverride = setOverride(stu, 'nothing', 'me!')
+		let addedOverride = setOverrideOnStudent(stu, 'nothing', 'me!')
 		expect(addedOverride.overrides['nothing']).to.equal('me!')
 	})
 	it('supports removing overrides', () => {
 		const stu = new Student(demoStudent)
-		let removedOverride = removeOverride(stu, 'credits.taken')
+		let removedOverride = removeOverrideFromStudent(stu, 'credits.taken')
 		expect(removedOverride.overrides['credits.taken']).to.not.exist
 	})
 
 	// areas
 	it('supports adding areas', () => {
 		const stu = new Student(demoStudent)
-		let newArea = addArea(stu, {name: 'Exercise Science', type: 'major', revision: '2014-15', path: 'majors/exercise-science/2014-15'})
+		let newArea = addAreaToStudent(stu, {name: 'Exercise Science', type: 'major', revision: '2014-15', path: 'majors/exercise-science/2014-15'})
 		expect(find(newArea.studies, {path: 'majors/exercise-science/2014-15'})).not.to.be.undefined
 	})
 	it('supports removing areas', () => {
 		const stu = new Student(demoStudent)
-		let noCsci = removeArea(stu, 'majors/computer-science/latest')
+		let noCsci = removeAreaFromStudent(stu, 'majors/computer-science/latest')
 		expect(find(noCsci.studies, {path: 'majors/computer-science/latest'})).to.be.undefined
 	})
 
@@ -106,7 +119,7 @@ describe('Student', () => {
 	})
 	it('supports moving courses between schedules in one-ish operation', () => {
 		const stu = new Student(demoStudent)
-		let movedCourse = moveCourse(stu, 1, 2, 82908)
+		let movedCourse = moveCourseToSchedule(stu, 1, 2, 82908)
 		expect(movedCourse.schedules[1].clbids).to.not.include(82908)
 		expect(movedCourse.schedules[2].clbids).to.include(82908)
 	})
@@ -114,7 +127,7 @@ describe('Student', () => {
 	// schedules
 	it('supports adding schedules', () => {
 		const stu = new Student(demoStudent)
-		let newSchedule = addSchedule(stu, {id: 10912, title: 'a', active: false, clbids: [], index: 1, semester: 0, year: 0})
+		let newSchedule = addScheduleToStudent(stu, {id: 10912, title: 'a', active: false, clbids: [], index: 1, semester: 0, year: 0})
 		expect(newSchedule.schedules[10912]).to.deep.equal({
 			id: 10912,
 			active: false,
@@ -127,7 +140,7 @@ describe('Student', () => {
 	})
 	it('supports removing schedules', () => {
 		const stu = new Student(demoStudent)
-		let removedSchedule = destroySchedule(stu, 1)
+		let removedSchedule = destroyScheduleFromStudent(stu, 1)
 		expect(removedSchedule.schedules[1]).to.be.undefined
 	})
 })
