@@ -1,10 +1,11 @@
-import remove from 'lodash/array/remove'
+import reject from 'lodash/collection/reject'
 import forEach from 'lodash/collection/forEach'
 import range from 'lodash/utility/range'
+import serializeError from 'serialize-error'
 
-import Student, {saveStudent} from '../models/student'
-import Schedule from '../models/schedule'
-import Study from '../models/study'
+import Student, {saveStudent, addScheduleToStudent} from '../../models/student'
+import Schedule from '../../models/schedule'
+import Study from '../../models/study'
 
 import {
 	INIT_STUDENT,
@@ -18,10 +19,10 @@ import {
 	CHANGE_SETTING,
 	ADD_AREA,
 	REMOVE_AREA,
-	REMOVE_MULTIPLE_AREAS,
+	REMOVE_AREAS,
 	ADD_SCHEDULE,
 	DESTROY_SCHEDULE,
-	DESTROY_MULTIPLE_SCHEDULES,
+	DESTROY_SCHEDULES,
 	RENAME_SCHEDULE,
 	REORDER_SCHEDULE,
 	MOVE_SCHEDULE,
@@ -40,9 +41,9 @@ export function initStudent() {
 	let student = new Student()
 
 	forEach(range(student.matriculation, student.graduation), year => {
-		student = addSchedule(student, {year, index: 1, active: true, semester: 1})
-		student = addSchedule(student, {year, index: 1, active: true, semester: 2})
-		student = addSchedule(student, {year, index: 1, active: true, semester: 3})
+		student = addScheduleToStudent(student, new Schedule({year, index: 1, active: true, semester: 1}))
+		student = addScheduleToStudent(student, new Schedule({year, index: 1, active: true, semester: 2}))
+		student = addScheduleToStudent(student, new Schedule({year, index: 1, active: true, semester: 3}))
 	})
 
 	saveStudent(student)
@@ -50,15 +51,14 @@ export function initStudent() {
 	return { type: INIT_STUDENT, payload: student }
 }
 
-export function importStudent({data, type}) {
+export function importStudent({data, type}={}) {
 	let stu = undefined
 	if (type === 'application/json') {
 		try {
 			stu = JSON.parse(data)
 		}
 		catch (err) {
-			console.error(err)
-			return { type: IMPORT_STUDENT, error: true, payload: err }
+			return { type: IMPORT_STUDENT, error: true, payload: serializeError(err) }
 		}
 	}
 
@@ -72,8 +72,8 @@ export function importStudent({data, type}) {
 }
 
 export function destroyStudent(studentId) {
-	let ids = JSON.parse(localStorage.getItem('studentIds'))
-	remove(ids, id => id === studentId)
+	let ids = JSON.parse(localStorage.getItem('studentIds')) || []
+	ids = reject(ids, id => id === studentId)
 	localStorage.setItem('studentIds', JSON.stringify(ids))
 
 	localStorage.removeItem(studentId)
@@ -106,11 +106,11 @@ export function addArea(studentId, areaQuery) {
 	let area = new Study(areaQuery)
 	return { type: ADD_AREA, payload: {studentId, area} }
 }
-export function removeArea(studentId, areaId) {
-	return { type: REMOVE_AREA, payload: {studentId, areaId} }
+export function removeArea(studentId, areaQuery) {
+	return { type: REMOVE_AREA, payload: {studentId, areaQuery} }
 }
-export function removeMultipleAreas(studentId, ...areaIds) {
-	return { type: REMOVE_MULTIPLE_AREAS, payload: {studentId, areaIds} }
+export function removeAreas(studentId, ...areaQueries) {
+	return { type: REMOVE_AREAS, payload: {studentId, areaQueries} }
 }
 
 
@@ -121,8 +121,8 @@ export function addSchedule(studentId, schedule) {
 export function destroySchedule(studentId, scheduleId) {
 	return { type: DESTROY_SCHEDULE, payload: {studentId, scheduleId} }
 }
-export function destroyMultipleSchedules(studentId, ...scheduleIds) {
-	return { type: DESTROY_MULTIPLE_SCHEDULES, payload: {studentId, scheduleIds} }
+export function destroySchedules(studentId, ...scheduleIds) {
+	return { type: DESTROY_SCHEDULES, payload: {studentId, scheduleIds} }
 }
 export function renameSchedule(studentId, scheduleId, newTitle) {
 	return { type: RENAME_SCHEDULE, payload: {studentId, scheduleId, newTitle} }
