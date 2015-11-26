@@ -20,7 +20,6 @@ import stringify from 'json-stable-stringify'
 import {v4 as uuid} from 'uuid'
 const debug = require('debug')('gb:models')
 
-import checkGraduatability from '../helpers/check-student-graduatability'
 import randomChar from '../helpers/random-char'
 
 const now = new Date()
@@ -63,8 +62,6 @@ export default function Student(data) {
 		...baseStudent,
 		...data,
 	}
-
-	student.graduatability = checkGraduatability(student)
 
 	debug(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
 
