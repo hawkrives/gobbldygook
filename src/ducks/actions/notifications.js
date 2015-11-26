@@ -1,4 +1,5 @@
 import uniqueId from 'lodash/utility/uniqueId'
+
 import {
 	LOG_MESSAGE,
 	LOG_ERROR,
@@ -6,6 +7,7 @@ import {
 	INCREMENT_PROGRESS,
 	REMOVE_NOTIFICATION,
 } from '../constants/notifications'
+
 
 export function removeNotification(id) {
 	return { type: REMOVE_NOTIFICATION, payload: { id } }

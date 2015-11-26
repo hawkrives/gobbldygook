@@ -12,16 +12,13 @@ import {
 	removeOverride as removeOverrideFromStudent,
 	addFabrication as addFabricationToStudent,
 	removeFabrication as removeFabricationFromStudent,
-} from '../models/student'
-
-import {
 	renameSchedule as renameScheduleInStudent,
 	reorderSchedule as reorderScheduleInStudent,
 	moveSchedule as moveScheduleInStudent,
 	addCourse as addCourseToSchedule,
 	removeCourse as removeCourseFromSchedule,
 	reorderCourse as reorderCourseInSchedule,
-} from '../models/schedule'
+} from '../models/student'
 
 import {
 	INIT_STUDENT,

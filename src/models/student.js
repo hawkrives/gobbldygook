@@ -1,22 +1,28 @@
-import flatten from 'lodash/array/flatten'
+import contains from 'lodash/collection/contains'
 import filter from 'lodash/collection/filter'
-import pluck from 'lodash/collection/pluck'
-import omit from 'lodash/object/omit'
-import uniq from 'lodash/array/uniq'
-import round from 'lodash/math/round'
+import findIndex from 'lodash/array/findIndex'
 import findKey from 'lodash/object/findKey'
-import reject from 'lodash/collection/reject'
-import {v4 as uuid} from 'uuid'
-import stringify from 'json-stable-stringify'
-import present from 'present'
+import findWarnings from '../helpers/find-course-warnings'
+import flatten from 'lodash/array/flatten'
+import identity from 'lodash/utility/identity'
+import isNumber from 'lodash/lang/isNumber'
+import isTrue from '../helpers/is-true'
+import isUndefined from 'lodash/lang/isUndefined'
 import localStorage from '../helpers/localstorage'
+import omit from 'lodash/object/omit'
+import pluck from 'lodash/collection/pluck'
+import present from 'present'
+import reject from 'lodash/collection/reject'
+import round from 'lodash/math/round'
+import some from 'lodash/collection/some'
+import stringify from 'json-stable-stringify'
+import uniq from 'lodash/array/uniq'
+import {v4 as uuid} from 'uuid'
 const debug = require('debug')('gb:models')
 
 import checkGraduatability from '../helpers/check-student-graduatability'
-
 import randomChar from '../helpers/random-char'
-
-import {addCourse, removeCourse} from './schedule'
+import getCourses from '../helpers/get-courses'
 
 export async function getStudentData(student) {
 	const courses = await student.courses
@@ -24,10 +30,10 @@ export async function getStudentData(student) {
 	return {
 		courses: courses,
 		creditsNeeded: student.creditsNeeded,
-		fabrications: student.fabrications.toList().toJS(),
+		fabrications: student.fabrications,
 		graduation: student.graduation,
 		matriculation: student.matriculation,
-		overrides: student.overrides.toObject(),
+		overrides: student.overrides,
 	}
 }
 
@@ -102,10 +108,11 @@ export default function Student(data) {
 }
 
 
-export function addSchedule(student, newSchedule) {
+export function addScheduleToStudent(student, newSchedule) {
 	return {...student, schedules: {...student.schedules, [newSchedule.id]: newSchedule}}
 }
-export function destroySchedule(student, scheduleId) {
+
+export function destroyScheduleFromStudent(student, scheduleId) {
 	debug(`Student.destroySchedule(): removing schedule ${scheduleId}`)
 
 	const deadSched = student.schedules[scheduleId]
@@ -124,21 +131,64 @@ export function destroySchedule(student, scheduleId) {
 
 	return {...student, schedules}
 }
-export function moveCourse(student, fromScheduleId, toScheduleId, clbid) {
+
+
+export function addCourseToSchedule(schedule, clbid) {
+	let start = present()
+	debug(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+
+	if (!isNumber(clbid)) {
+		throw new TypeError('addCourse(): clbid must be a number')
+	}
+
+	if (contains(schedule.clbids, clbid)) {
+		return schedule
+	}
+
+	let sched = {...schedule}
+
+	sched.clbids.push(clbid)
+	sched.courses = getCourses(sched.clbids, {year: sched.year, semester: sched.semester})
+	sched.courses.then(d => debug(`it took ${Math.round(present() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids, 'titles:', d.map(c => c.title)))
+
+	return sched
+}
+
+export function removeCourseFromSchedule(student, scheduleId, clbid) {
+	if (!isNumber(clbid)) {
+		throw new TypeError('removeCourse(): clbid must be a number')
+	}
+
+	let start = present()
+
+	let sched = {...find(student.schedules, {id: scheduleId})}
+	let schedules = omit(student.schedules, [scheduleId])
+
+	debug(`removing clbid ${clbid} from schedule ${sched.id} (${sched.year}-${sched.semester}.${sched.index})`)
+
+	sched.clbids = reject(sched.clbids, id => id === clbid)
+	sched.courses = getCourses(sched.clbids)
+	sched.courses.then(d => debug(`it took ${Math.round(present() - start)}ms to remove ${clbid} from ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids, 'titles:', d.map(c => c.title)))
+
+	return {...student, schedules}
+}
+
+export function moveCourseToSchedule(student, fromScheduleId, toScheduleId, clbid) {
 	debug(`Student.moveCourse(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 
 	let schedules = {...student.schedules}
-	schedules[fromScheduleId] = removeCourse(schedules[fromScheduleId], clbid)
-	schedules[toScheduleId] = addCourse(schedules[toScheduleId], clbid)
+	schedules[fromScheduleId] = removeCourseToSchedule(schedules[fromScheduleId], clbid)
+	schedules[toScheduleId] = addCourseToSchedule(schedules[toScheduleId], clbid)
 
 	return {...student, schedules}
 }
 
 
-export function addArea(student, areaOfStudy) {
+export function addAreaToStudent(student, areaOfStudy) {
 	return {...student, studies: [...student.studies, areaOfStudy]}
 }
-export function removeArea(student, areaPath) {
+
+export function removeAreaToSchedule(student, areaPath) {
 	return {...student, studies: reject([...student.studies], {path: areaPath})}
 }
 
@@ -148,6 +198,7 @@ export function setOverride(student, key, value) {
 	overrides[key] = value
 	return {...student, overrides}
 }
+
 export function removeOverride(student, key) {
 	let overrides = {...student.overrides}
 	delete overrides[key]
@@ -167,9 +218,6 @@ export function removeFabrication(student, fabricationId) {
 }
 
 
-
-// helpers
-
 export function encodeStudent(student) {
 	return encodeURIComponent(stringify(student))
 }
@@ -185,4 +233,70 @@ export function saveStudent(student) {
 		const student = student.dateLastModified = new Date()
 		localStorage.setItem(student.id, stringify(student))
 	}
+}
+
+
+
+export function moveSchedule(schedule, {year, semester}={}) {
+	if (year === undefined && semester === undefined) {
+		return schedule
+	}
+
+	let sched = {...schedule}
+	if (typeof year === 'number') {
+		sched.year = year
+	}
+	if (typeof semester === 'number') {
+		sched.semester = semester
+	}
+
+	return sched
+}
+
+export function reorderSchedule(schedule, index) {
+	return {...schedule, index}
+}
+
+export function renameSchedule(schedule, title) {
+	return {...schedule, title}
+}
+
+export function reorderCourse(schedule, clbid, newIndex) {
+	if (!isNumber(clbid)) {
+		throw new TypeError('reorderCourse(): clbid must be a number')
+	}
+
+	let sched = {...schedule}
+
+	const oldIndex = findIndex(sched.clbids, id => id === clbid)
+
+	sched.clbids.splice(oldIndex, 1)
+	sched.clbids.splice(newIndex, 0, clbid)
+
+	sched.courses = getCourses(sched.clbids, {year: sched.year, semester: sched.semester})
+
+	return sched
+}
+
+
+export function validateSchedule(schedule) {
+	// Checks to see if the schedule is valid
+	return schedule.courses.then(courses => {
+		// only check the courses that have data
+		courses = reject(courses, isUndefined)
+
+		// Step one: do any times conflict?
+		const conflicts = findWarnings(courses, schedule)
+
+		const flattened = flatten(conflicts)
+		const filtered = filter(flattened, identity)
+		const warnings = pluck(filtered, 'warning')
+		const hasConflict = some(warnings, isTrue)
+
+		if (hasConflict) {
+			debug('schedule conflicts', conflicts, hasConflict)
+		}
+
+		return {hasConflict, conflicts}
+	})
 }
