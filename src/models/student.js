@@ -168,8 +168,8 @@ export function addAreaToStudent(student, areaOfStudy) {
 	return {...student, studies: [...student.studies, areaOfStudy]}
 }
 
-export function removeAreaFromStudent(student, areaPath) {
-	return {...student, studies: reject([...student.studies], {path: areaPath})}
+export function removeAreaFromStudent(student, areaQuery) {
+	return {...student, studies: reject([...student.studies], areaQuery)}
 }
 
 

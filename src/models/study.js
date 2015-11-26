@@ -1,4 +1,3 @@
-import findAreaPath from '../helpers/find-area-path'
 import loadArea from './load-area'
 import omit from 'lodash/object/omit'
 
@@ -21,9 +20,7 @@ export default function Study(data) {
 		...data,
 	}
 
-	study.path = study.path || findAreaPath({name: study.name, type: study.type, revision: study.revision})
-
-	study.data = loadArea(study.path)
+	study.data = loadArea(study)
 		.catch(err => ({_error: err.message}))
 
 	return study
