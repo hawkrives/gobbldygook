@@ -42,6 +42,8 @@ describe('Student', () => {
 		validateSchedule,
 	} = require('../../src/models/student')
 
+	const getStudentCourses = require('../../src/helpers/get-student-courses')
+
 	it('creates a unique ID for each new student without an ID prop', () => {
 		let stu1 = new Student()
 		let stu2 = new Student()
@@ -108,17 +110,10 @@ describe('Student', () => {
 	})
 
 	// Courses
-	xit('returns only courses from active schedules', () => {
+	it('returns only courses from active schedules', () => {
 		const stu = new Student(demoStudent)
-		// disabled until we can mock getCourses
 		let courseCountFromActive = size(pluck(filter(demoStudent.schedules, 'active'), 'clbids'))
-		stu.courses.then(courses => expect(courses.length).to.equal(courseCountFromActive))
-	})
-	xit('counts all credits currently scheduled', () => {
-		const stu = new Student(demoStudent)
-		// disabled until we can mock getCourses
-		// plus, I'm not even sure how to check the result. lodash?
-		stu.courseCredits.then(credits => expect(credits).to.be.ok)
+		getStudentCourses(stu).then(courses => expect(courses.length).to.equal(courseCountFromActive))
 	})
 	it('supports moving courses between schedules in one-ish operation', () => {
 		const stu = new Student(demoStudent)
