@@ -5,9 +5,12 @@ import size from 'lodash/collection/size'
 import filter from 'lodash/collection/filter'
 import pluck from 'lodash/collection/pluck'
 import find from 'lodash/collection/find'
+import map from 'lodash/collection/map'
 import stringify from 'json-stable-stringify'
 
-mock('../../src/helpers/get-courses', () => Promise.resolve([]))
+mock('../../src/helpers/get-courses', (clbids, {year, semester}={}) => {
+	return Promise.resolve(map(clbids, id => ({clbid: id, year, semester})))
+})
 mock('../lib/check-student-graduatability', () => Promise.resolve([]))
 
 describe('Student', () => {
