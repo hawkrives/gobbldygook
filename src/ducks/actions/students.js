@@ -3,6 +3,7 @@ import forEach from 'lodash/collection/forEach'
 import range from 'lodash/utility/range'
 
 import Student, {saveStudent} from '../models/student'
+import Schedule from '../models/schedule'
 import Study from '../models/study'
 
 import {

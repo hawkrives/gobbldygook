@@ -1,23 +1,28 @@
 import undoable from 'redux-undo'
-import get from 'lodash/object/get'
-import set from 'lodash/object/set'
+import omit from 'lodash/object/omit'
 
 import {
-	addArea as addAreaToStudent,
-	removeArea as removeAreaFromStudent,
-	addSchedule as addScheduleToStudent,
-	destroySchedule as destroyScheduleFromStudent,
-	moveCourse as moveCourseAcrossSchedules,
-	setOverride as setOverrideOnStudent,
-	removeOverride as removeOverrideFromStudent,
-	addFabrication as addFabricationToStudent,
-	removeFabrication as removeFabricationFromStudent,
-	renameSchedule as renameScheduleInStudent,
-	reorderSchedule as reorderScheduleInStudent,
-	moveSchedule as moveScheduleInStudent,
-	addCourse as addCourseToSchedule,
-	removeCourse as removeCourseFromSchedule,
-	reorderCourse as reorderCourseInSchedule,
+	changeStudentName,
+	changeStudentAdvisor,
+	changeStudentCreditsNeeded,
+	changeStudentMatriculation,
+	changeStudentGraduation,
+	changeStudentSetting,
+	addAreaToStudent,
+	removeAreaFromStudent,
+	addScheduleToStudent,
+	destroyScheduleFromStudent,
+	moveCourseAcrossSchedules,
+	setOverrideOnStudent,
+	removeOverrideFromStudent,
+	addFabricationToStudent,
+	removeFabricationFromStudent,
+	renameScheduleInStudent,
+	reorderScheduleInStudent,
+	moveScheduleInStudent,
+	addCourseToSchedule,
+	removeCourseFromSchedule,
+	reorderCourseInSchedule,
 } from '../models/student'
 
 import {
@@ -52,20 +57,6 @@ import {
 
 const initialState = {}
 
-function changeStudent(state, studentId, key, value) {
-	const student = {...state[studentId]}
-	student[key] = value
-	return {...state, [studentId]: student}
-}
-
-function mutateStudent(state, studentId, path, pureFunc, ...args) {
-	let student = {...state[studentId]}
-	let item = get(student, path)
-	item = pureFunc(item, ...args)
-	set(student, path, item)
-	return {...state, [studentId]: student}
-}
-
 function reducer(state = initialState, action) {
 	const {type, payload} = action
 
@@ -75,103 +66,114 @@ function reducer(state = initialState, action) {
 			if (payload.error) {
 				return state
 			}
-			return [...state, payload]
+			return {...state, [payload.id]: payload}
 		}
 
 		case DESTROY_STUDENT: {
-			let newState = {...state}
-			delete newState[payload.studentId]
-			return newState
+			return omit(state, [payload.studentId])
 		}
 
 		case CHANGE_NAME: {
-			return changeStudent(state, payload.studentId, 'name', payload.name)
+			const student = changeStudentName(state[payload.studentId], payload.name)
+			return {...state, [student.id]: student}
 		}
 		case CHANGE_ADVISOR: {
-			return changeStudent(state, payload.studentId, 'advisor', payload.advisor)
+			const student = changeStudentAdvisor(state[payload.studentId], payload.advisor)
+			return {...state, [student.id]: student}
 		}
 		case CHANGE_CREDITS_NEEDED: {
-			return changeStudent(state, payload.studentId, 'creditsNeeded', payload.credits)
+			const student = changeStudentCreditsNeeded(state[payload.studentId], payload.credits)
+			return {...state, [student.id]: student}
 		}
 		case CHANGE_MATRICULATION: {
-			return changeStudent(state, payload.studentId, 'matriculation', payload.matriculation)
+			const student = changeStudentMatriculation(state[payload.studentId], payload.matriculation)
+			return {...state, [student.id]: student}
 		}
 		case CHANGE_GRADUATION: {
-			return changeStudent(state, payload.studentId, 'graduation', payload.graduation)
+			const student = changeStudentGraduation(state[payload.studentId], payload.graduation)
+			return {...state, [student.id]: student}
 		}
 		case CHANGE_SETTING: {
-			return changeStudent(state, payload.studentId, payload.key, payload.value)
+			const student = changeStudentSetting(state[payload.studentId], payload.key, payload.value)
+			return {...state, [student.id]: student}
 		}
 
 		case ADD_AREA: {
 			const student = addAreaToStudent(state[payload.studentId], payload.area)
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 		case REMOVE_AREA: {
 			const student = removeAreaFromStudent(state[payload.studentId], payload.areaId)
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 		case REMOVE_MULTIPLE_AREAS: {
 			let student = {...state[payload.studentId]}
 			for (const areaId of payload.areaIds) {
 				student = removeAreaFromStudent(student, areaId)
 			}
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 
 		case ADD_SCHEDULE: {
 			const student = addScheduleToStudent(state[payload.studentId], payload.schedule)
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 		case DESTROY_SCHEDULE: {
 			const student = destroyScheduleFromStudent(state[payload.studentId], payload.scheduleId)
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 		case DESTROY_MULTIPLE_SCHEDULES: {
-			let student = {...state[payload.studentId]}
+			let student = state[payload.studentId]
 			for (const id of payload.scheduleIds) {
-				student = removeAreaFromStudent(student, id)
+				student = destroyScheduleFromStudent(student, id)
 			}
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 		case RENAME_SCHEDULE: {
-			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], renameScheduleInStudent, payload.newTitle)
+			const student = renameScheduleInStudent(state[payload.studentId], payload.scheduleId, payload.newTitle)
+			return {...state, [student.id]: student}
 		}
 		case REORDER_SCHEDULE: {
-			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], reorderScheduleInStudent, payload.newIndex)
+			const student = reorderScheduleInStudent(state[payload.studentId], payload.scheduleId, payload.newIndex)
+			return {...state, [student.id]: student}
 		}
 		case MOVE_SCHEDULE: {
-			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], moveScheduleInStudent, {year: payload.year, semester: payload.semester})
+			const student = moveScheduleInStudent(state[payload.studentId], payload.scheduleId, {year: payload.year, semester: payload.semester})
+			return {...state, [student.id]: student}
 		}
 
 		case ADD_COURSE: {
-			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], addCourseToSchedule, payload.clbid)
+			const student = addCourseToSchedule(state[payload.studentId], payload.scheduleId, payload.clbid)
+			return {...state, [student.id]: student}
 		}
 		case REMOVE_COURSE: {
-			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], removeCourseFromSchedule, payload.clbid)
+			const student = removeCourseFromSchedule(state[payload.studentId], payload.scheduleId, payload.clbid)
+			return {...state, [student.id]: student}
 		}
 		case REORDER_COURSE: {
-			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], reorderCourseInSchedule, payload.clbid, payload.year, payload.semester)
+			const student = reorderCourseInSchedule(state[payload.studentId], payload.scheduleId, {clbid: payload.clbid, index: payload.index})
+			return {...state, [student.id]: student}
 		}
 		case MOVE_COURSE: {
-			return mutateStudent(state, payload.studentId, ['schedules', payload.scheduleId], moveCourseAcrossSchedules, payload.fromScheduleId, payload.toScheduleId, payload.clbid)
+			const student = moveCourseAcrossSchedules(state[payload.studentId], payload.scheduleId, {fromScheduleId: payload.fromScheduleId, toScheduleId: payload.toScheduleId, clbid: payload.clbid})
+			return {...state, [student.id]: student}
 		}
 
 		case SET_OVERRIDE: {
 			const student = setOverrideOnStudent(state[payload.studentId], payload.key, payload.value)
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 		case REMOVE_OVERRIDE: {
 			const student = removeOverrideFromStudent(state[payload.studentId], payload.override)
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 		case ADD_FABRICATION: {
 			const student = addFabricationToStudent(state[payload.studentId], payload.fabrication)
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 		case REMOVE_FABRICATION: {
 			const student = removeFabricationFromStudent(state[payload.studentId], payload.fabricationId)
-			return {...state, [payload.studentId]: student}
+			return {...state, [student.id]: student}
 		}
 
 		default: {

@@ -1,3 +1,4 @@
+import clone from 'lodash/lang/clone'
 import contains from 'lodash/collection/contains'
 import filter from 'lodash/collection/filter'
 import findIndex from 'lodash/array/findIndex'
@@ -108,6 +109,30 @@ export default function Student(data) {
 }
 
 
+////////
+////////
+////////
+
+export function changeStudentName(student, newName) {
+	return {...student, name: newName}
+}
+export function changeStudentAdvisor(student, newAdvisor) {
+	return {...student, advisor: newAdvisor}
+}
+export function changeStudentCreditsNeeded(student, newCreditsNeeded) {
+	return {...student, creditsNeeded: newCreditsNeeded}
+}
+export function changeStudentMatriculation(student, newMatriculation) {
+	return {...student, matriculation: newMatriculation}
+}
+export function changeStudentGraduation(student, newGraduation) {
+	return {...student, graduation: newGraduation}
+}
+export function changeStudentSetting(student, newSetting) {
+	return {...student, setting: newSetting}
+}
+
+
 export function addScheduleToStudent(student, newSchedule) {
 	return {...student, schedules: {...student.schedules, [newSchedule.id]: newSchedule}}
 }
@@ -133,25 +158,23 @@ export function destroyScheduleFromStudent(student, scheduleId) {
 }
 
 
-export function addCourseToSchedule(schedule, clbid) {
-	let start = present()
-	debug(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
-
+export function addCourseToSchedule(student, scheduleId, clbid) {
 	if (!isNumber(clbid)) {
 		throw new TypeError('addCourse(): clbid must be a number')
 	}
 
+	let schedule = clone(find(student.schedules, {id: scheduleId}))
+
 	if (contains(schedule.clbids, clbid)) {
-		return schedule
+		return student
 	}
 
-	let sched = {...schedule}
+	debug(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
-	sched.clbids.push(clbid)
-	sched.courses = getCourses(sched.clbids, {year: sched.year, semester: sched.semester})
-	sched.courses.then(d => debug(`it took ${Math.round(present() - start)}ms to add ${clbid} to ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids, 'titles:', d.map(c => c.title)))
+	schedule.clbids = schedule.clbids.concat(clbid)
+	schedule.courses = getCourses(schedule.clbids, {year: schedule.year, semester: schedule.semester})
 
-	return sched
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
 export function removeCourseFromSchedule(student, scheduleId, clbid) {
@@ -159,28 +182,23 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 		throw new TypeError('removeCourse(): clbid must be a number')
 	}
 
-	let start = present()
+	let schedule = clone(find(student.schedules, {id: scheduleId}))
 
-	let sched = {...find(student.schedules, {id: scheduleId})}
-	let schedules = omit(student.schedules, [scheduleId])
+	debug(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
-	debug(`removing clbid ${clbid} from schedule ${sched.id} (${sched.year}-${sched.semester}.${sched.index})`)
+	schedule.clbids = reject(schedule.clbids, id => id === clbid)
+	schedule.courses = getCourses(schedule.clbids)
 
-	sched.clbids = reject(sched.clbids, id => id === clbid)
-	sched.courses = getCourses(sched.clbids)
-	sched.courses.then(d => debug(`it took ${Math.round(present() - start)}ms to remove ${clbid} from ${sched.year}-${sched.semester};`, 'clbids:', sched.clbids, 'titles:', d.map(c => c.title)))
-
-	return {...student, schedules}
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
 export function moveCourseToSchedule(student, fromScheduleId, toScheduleId, clbid) {
 	debug(`Student.moveCourse(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 
-	let schedules = {...student.schedules}
-	schedules[fromScheduleId] = removeCourseToSchedule(schedules[fromScheduleId], clbid)
-	schedules[toScheduleId] = addCourseToSchedule(schedules[toScheduleId], clbid)
+	student = removeCourseFromSchedule(student, fromScheduleId, clbid)
+	student = addCourseToSchedule(student, toScheduleId, clbid)
 
-	return {...student, schedules}
+	return {...student}
 }
 
 
@@ -188,30 +206,30 @@ export function addAreaToStudent(student, areaOfStudy) {
 	return {...student, studies: [...student.studies, areaOfStudy]}
 }
 
-export function removeAreaToSchedule(student, areaPath) {
+export function removeAreaFromStudent(student, areaPath) {
 	return {...student, studies: reject([...student.studies], {path: areaPath})}
 }
 
 
-export function setOverride(student, key, value) {
+export function setOverrideOnStudent(student, key, value) {
 	let overrides = {...student.overrides}
 	overrides[key] = value
 	return {...student, overrides}
 }
 
-export function removeOverride(student, key) {
+export function removeOverrideFromStudent(student, key) {
 	let overrides = {...student.overrides}
 	delete overrides[key]
 	return {...student, overrides}
 }
 
 
-export function addFabrication(student, fabrication) {
+export function addFabricationToStudent(student, fabrication) {
 	let fabrications = {...student.fabrications, [fabrication.id]: fabrication}
 	return {...student, fabrications}
 }
 
-export function removeFabrication(student, fabricationId) {
+export function removeFabricationFromStudent(student, fabricationId) {
 	let fabrications = {...student.fabrications}
 	delete fabrications[fabricationId]
 	return {...student, fabrications}
@@ -237,45 +255,55 @@ export function saveStudent(student) {
 
 
 
-export function moveSchedule(schedule, {year, semester}={}) {
+export function moveScheduleInStudent(student, scheduleId, {year, semester}={}) {
 	if (year === undefined && semester === undefined) {
-		return schedule
+		return student
 	}
 
-	let sched = {...schedule}
+	let schedule = clone(find(student.schedules, {id: scheduleId}))
+
 	if (typeof year === 'number') {
-		sched.year = year
+		schedule.year = year
 	}
 	if (typeof semester === 'number') {
-		sched.semester = semester
+		schedule.semester = semester
 	}
 
-	return sched
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
-export function reorderSchedule(schedule, index) {
-	return {...schedule, index}
+export function reorderScheduleInStudent(student, scheduleId, index) {
+	let schedule = {
+		...find(student.schedules, {id: scheduleId}),
+		index: index,
+	}
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
-export function renameSchedule(schedule, title) {
-	return {...schedule, title}
+export function renameScheduleInStudent(student, scheduleId, title) {
+	let schedule = {
+		...find(student.schedules, {id: scheduleId}),
+		title: title,
+	}
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
-export function reorderCourse(schedule, clbid, newIndex) {
+export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
 	if (!isNumber(clbid)) {
 		throw new TypeError('reorderCourse(): clbid must be a number')
 	}
 
-	let sched = {...schedule}
+	let schedule = clone(find(student.schedules, {id: scheduleId}))
 
-	const oldIndex = findIndex(sched.clbids, id => id === clbid)
+	const oldIndex = findIndex(schedule.clbids, id => id === clbid)
 
-	sched.clbids.splice(oldIndex, 1)
-	sched.clbids.splice(newIndex, 0, clbid)
+	schedule.clbids = [...schedule.clbids]
+	schedule.clbids.splice(oldIndex, 1)
+	schedule.clbids.splice(index, 0, clbid)
 
-	sched.courses = getCourses(sched.clbids, {year: sched.year, semester: sched.semester})
+	schedule.courses = getCourses(schedule.clbids, {year: schedule.year, semester: schedule.semester})
 
-	return sched
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
 
