@@ -3,10 +3,6 @@ import loadArea from './load-area'
 import omit from 'lodash/object/omit'
 
 export default function Study(data) {
-	if (!(this instanceof Study)) {
-		return new Study(data)
-	}
-
 	let baseStudy = {
 		type: null,
 		name: null,

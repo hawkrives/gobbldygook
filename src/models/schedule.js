@@ -3,10 +3,6 @@ import {v4 as uuid} from 'uuid'
 import randomChar from '../helpers/random-char'
 
 export default function Schedule(data={}) {
-	if (!(this instanceof Schedule)) {
-		return new Schedule(data)
-	}
-
 	const baseSchedule = {
 		id: uuid(),
 		active: false,
