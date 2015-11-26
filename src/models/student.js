@@ -7,9 +7,11 @@ import findKey from 'lodash/object/findKey'
 import findWarnings from '../helpers/find-course-warnings'
 import flatten from 'lodash/array/flatten'
 import identity from 'lodash/utility/identity'
+import isArray from 'lodash/lang/isArray'
 import isNumber from 'lodash/lang/isNumber'
 import isTrue from '../helpers/is-true'
 import isUndefined from 'lodash/lang/isUndefined'
+import map from 'lodash/collection/map'
 import omit from 'lodash/object/omit'
 import pluck from 'lodash/collection/pluck'
 import present from 'present'
@@ -17,6 +19,7 @@ import reject from 'lodash/collection/reject'
 import round from 'lodash/math/round'
 import some from 'lodash/collection/some'
 import stringify from 'json-stable-stringify'
+import zipObject from 'lodash/array/zipObject'
 import {v4 as uuid} from 'uuid'
 const debug = require('debug')('gb:models')
 
@@ -52,6 +55,10 @@ export default function Student(data) {
 	const student = {
 		...baseStudent,
 		...data,
+	}
+
+	if (isArray(student.schedules)) {
+		student.schedules = zipObject(map(student.schedules, s => [s.id, s]))
 	}
 
 	debug(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
