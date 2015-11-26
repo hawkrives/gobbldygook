@@ -17,26 +17,11 @@ import reject from 'lodash/collection/reject'
 import round from 'lodash/math/round'
 import some from 'lodash/collection/some'
 import stringify from 'json-stable-stringify'
-import uniq from 'lodash/array/uniq'
 import {v4 as uuid} from 'uuid'
 const debug = require('debug')('gb:models')
 
 import checkGraduatability from '../helpers/check-student-graduatability'
 import randomChar from '../helpers/random-char'
-import getCourses from '../helpers/get-courses'
-
-export async function getStudentData(student) {
-	const courses = await student.courses
-
-	return {
-		courses: courses,
-		creditsNeeded: student.creditsNeeded,
-		fabrications: student.fabrications,
-		graduation: student.graduation,
-		matriculation: student.matriculation,
-		overrides: student.overrides,
-	}
-}
 
 const now = new Date()
 
@@ -68,28 +53,6 @@ export default function Student(data) {
 			canGraduate: false,
 			studyResults: [],
 		}),
-
-		get courses() {
-			// - At it's core, this method just needs to get the list of courses that a student has chosen.
-			// - Each schedule has a list of courses that are a part of that schedule.
-			// - Additionally, we only care about the schedules that are marked as "active".
-			// - Keep in mind that each list of courses is actually a *promise* for the courses.
-			// - We also need to make sure to de-duplicate the final list of courses, so that each `clbid` only appears once.
-			// - Finally, remember that a given `clbid` might not exist in the database, in which case we get back 'undefined'.
-			//   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
-
-			const start = present()
-
-			const activeSchedules = filter(this.schedules, {active: true})
-			const promisesForCourses = pluck(activeSchedules, 'courses')
-
-			return Promise.all(promisesForCourses)
-				.then(courses => {
-					debug(`Student(${this.id}).courses: it took ${round(present() - start, 2)} ms to fetch`)
-					return uniq(flatten(courses), course => course.clbid)
-				})
-				.catch(err => console.error(err))
-		},
 
 		toJSON() {
 			return omit(this, value => value instanceof Promise)
