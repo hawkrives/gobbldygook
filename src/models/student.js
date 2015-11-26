@@ -124,8 +124,11 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 	}
 
 	let schedule = clone(find(student.schedules, {id: scheduleId}))
+	if (!schedule) {
+		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
+	}
 
-	if (!schedule || contains(schedule.clbids, clbid)) {
+	if (contains(schedule.clbids, clbid)) {
 		return student
 	}
 
@@ -143,6 +146,14 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 	}
 
 	let schedule = clone(find(student.schedules, {id: scheduleId}))
+
+	if (!schedule) {
+		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
+	}
+
+	if (!contains(schedule.clbids, clbid)) {
+		return student
+	}
 
 	debug(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
