@@ -25,7 +25,7 @@ import {
 	startProgress,
 	incrementProgress,
 	removeNotification,
-} from '../ducks/notifications'
+} from '../ducks/actions/notifications'
 
 
 function dispatch(action) {
