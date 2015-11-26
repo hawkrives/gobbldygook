@@ -47,15 +47,6 @@ export default function Student(data) {
 		fabrications: {},
 
 		settings: {},
-
-		graduatability: Promise.resolve({
-			canGraduate: false,
-			studyResults: [],
-		}),
-
-		toJSON() {
-			return omit(this, value => value instanceof Promise)
-		},
 	}
 
 	const student = {
