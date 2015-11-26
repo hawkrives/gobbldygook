@@ -2,7 +2,6 @@ import omit from 'lodash/object/omit'
 import {v4 as uuid} from 'uuid'
 
 import randomChar from '../helpers/random-char'
-import getCourses from '../helpers/get-courses'
 
 export default function Schedule(data={}) {
 	if (!(this instanceof Schedule)) {
@@ -31,8 +30,6 @@ export default function Schedule(data={}) {
 		...baseSchedule,
 		...data,
 	}
-
-	schedule.courses = getCourses(schedule.clbids, {year: schedule.year, semester: schedule.semester})
 
 	return schedule
 }

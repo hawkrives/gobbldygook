@@ -135,7 +135,6 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 	debug(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	schedule.clbids = schedule.clbids.concat(clbid)
-	schedule.courses = getCourses(schedule.clbids, {year: schedule.year, semester: schedule.semester})
 
 	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
@@ -158,7 +157,6 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 	debug(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	schedule.clbids = reject(schedule.clbids, id => id === clbid)
-	schedule.courses = getCourses(schedule.clbids)
 
 	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
@@ -271,8 +269,6 @@ export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
 	schedule.clbids = [...schedule.clbids]
 	schedule.clbids.splice(oldIndex, 1)
 	schedule.clbids.splice(index, 0, clbid)
-
-	schedule.courses = getCourses(schedule.clbids, {year: schedule.year, semester: schedule.semester})
 
 	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
