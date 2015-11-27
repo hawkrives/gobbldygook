@@ -178,3 +178,89 @@ describe('destroyScheduleFromStudent', () => {
 		expect(removedSchedule.schedules['1']).to.be.undefined
 	})
 })
+
+
+describe('changeStudentName', () => {
+	it(`can change the student's name`, () => {
+		let initial = Student()
+		expect(changeStudentName(initial, 'my name'))
+			.to.have.property('name', 'my name')
+	})
+
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentName(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentAdvisor', () => {
+	it(`can change the student's advisor`, () => {
+		let initial = Student()
+		expect(changeStudentAdvisor(initial, 'professor name'))
+			.to.have.property('advisor', 'professor name')
+	})
+
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentAdvisor(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentCreditsNeeded', () => {
+	it(`can change the student's number of credits needed`, () => {
+		let initial = Student()
+		expect(changeStudentCreditsNeeded(initial, 130))
+			.to.have.property('creditsNeeded', 130)
+	})
+
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentCreditsNeeded(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentMatriculation', () => {
+	it(`can change the student's matriculation year`, () => {
+		let initial = Student()
+		expect(changeStudentMatriculation(initial, 1800))
+			.to.have.property('matriculation', 1800)
+	})
+
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentMatriculation(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentGraduation', () => {
+	it(`can change the student's graduation year`, () => {
+		let initial = Student()
+		expect(changeStudentGraduation(initial, 2100))
+			.to.have.property('graduation', 2100)
+	})
+
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentGraduation(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentSetting', () => {
+	it(`can change settings in the student `, () => {
+		let initial = Student()
+		expect(changeStudentSetting(initial, 'key', 'value'))
+			.to.have.property('settings')
+			.which.deep.equals({key: 'value'})
+	})
+
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentSetting(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
