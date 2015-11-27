@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 
 import {connect} from 'react-redux'
-import {removeNotification} from '../ducks/notifications'
+import {removeNotification} from '../ducks/actions/notifications'
 
 import Notification from '../components/notification'
 

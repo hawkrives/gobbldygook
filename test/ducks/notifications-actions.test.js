@@ -1,11 +1,20 @@
 import {expect} from 'chai'
+
 import {
-	INCREMENT_PROGRESS,  incrementProgress,
-	LOG_ERROR,           logError,
-	LOG_MESSAGE,         logMessage,
-	REMOVE_NOTIFICATION, removeNotification,
-	START_PROGRESS,      startProgress,
-} from '../../src/ducks/notifications'
+	incrementProgress,
+	logError,
+	logMessage,
+	removeNotification,
+	startProgress,
+} from '../../src/ducks/actions/notifications'
+
+import {
+	INCREMENT_PROGRESS,
+	LOG_ERROR,
+	LOG_MESSAGE,
+	REMOVE_NOTIFICATION,
+	START_PROGRESS,
+} from '../../src/ducks/constants/notifications'
 
 describe('removeNotification', () => {
 	it('should create an action to remove a notification', () => {
