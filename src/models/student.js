@@ -86,8 +86,8 @@ export function changeStudentMatriculation(student, newMatriculation) {
 export function changeStudentGraduation(student, newGraduation) {
 	return {...student, graduation: newGraduation}
 }
-export function changeStudentSetting(student, newSetting) {
-	return {...student, setting: newSetting}
+export function changeStudentSetting(student, key, value) {
+	return {...student, settings: {...student.settings, [key]: value}}
 }
 
 
