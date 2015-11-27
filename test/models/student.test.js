@@ -57,18 +57,17 @@ describe('Student', () => {
 
 	it('holds a student', () => {
 		const stu = Student(demoStudent)
-		const json = JSON.parse(JSON.stringify(stu))
 
 		expect(stu).to.exist
 		expect(stu.id).to.exist
 		expect(stu.matriculation).to.equal(2012)
 		expect(stu.graduation).to.equal(2016)
 		expect(stu.creditsNeeded).to.equal(35)
-		expect(json.studies).to.deep.equal(demoStudent.studies)
-		expect(json.schedules).to.deep.equal(demoStudent.schedules)
-		expect(json.fabrications).to.deep.equal(demoStudent.fabrications)
-		expect(json.settings).to.deep.equal(demoStudent.settings)
-		expect(json.overrides).to.deep.equal(demoStudent.overrides)
+		expect(stu.studies).to.deep.equal(demoStudent.studies)
+		expect(stu.schedules).to.deep.equal(demoStudent.schedules)
+		expect(stu.fabrications).to.deep.equal(demoStudent.fabrications)
+		expect(stu.settings).to.deep.equal(demoStudent.settings)
+		expect(stu.overrides).to.deep.equal(demoStudent.overrides)
 	})
 
 	it('can turn into JSON', () => {
