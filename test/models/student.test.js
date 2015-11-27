@@ -9,7 +9,7 @@ import stringify from 'json-stable-stringify'
 
 mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock'))
 mock('../../src/models/load-area', require('../mocks/load-area.mock'))
-mock('../lib/check-student-graduatability', require('../mocks/check-student-graduatability.mock'))
+mock('../../src/helpers/check-student-graduatability', require('../mocks/check-student-graduatability.mock'))
 
 const {
 	default: Student,
