@@ -4,6 +4,8 @@ global.debug = require('debug')
 global.VERSION = String(require('../package.json').version)
 global.DEV = false
 
+process.env.NODE_ENV = 'test'
+
 let storage = new Map()
 global.localStorage = {
 	_storage: storage,
