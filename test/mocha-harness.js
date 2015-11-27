@@ -15,3 +15,11 @@ global.localStorage = {
 		storage = new Map()
 	},
 }
+
+require.extensions['.scss'] = function () {
+	return null
+}
+
+require.extensions['.css'] = function () {
+	return null
+}
