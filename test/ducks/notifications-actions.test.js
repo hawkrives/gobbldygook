@@ -16,7 +16,7 @@ import {
 	START_PROGRESS,
 } from '../../src/ducks/constants/notifications'
 
-describe('removeNotification', () => {
+describe('removeNotification action', () => {
 	it('should create an action to remove a notification', () => {
 		const id = 1
 		const expectedAction = {
@@ -28,7 +28,7 @@ describe('removeNotification', () => {
 	})
 })
 
-describe('logMessage', () => {
+describe('logMessage action', () => {
 	it('should create an action to log a message', () => {
 		const id = 1
 		const message = 'Message!'
@@ -41,7 +41,7 @@ describe('logMessage', () => {
 	})
 })
 
-describe('logError', () => {
+describe('logError action', () => {
 	it('should create an action to log an error', () => {
 		const id = 1
 		const error = new Error('message!')
@@ -76,7 +76,7 @@ describe('logError', () => {
 	})
 })
 
-describe('startProgress', () => {
+describe('startProgress action', () => {
 	it('should create an action to begin a progress-bar', () => {
 		const id = 1
 		const message = 'message'
@@ -119,7 +119,7 @@ describe('startProgress', () => {
 	})
 })
 
-describe('incrementProgress', () => {
+describe('incrementProgress action', () => {
 	it('should create an action to increment a progress-bar', () => {
 		const id = 1
 		const expectedAction = {

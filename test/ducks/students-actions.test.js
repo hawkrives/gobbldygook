@@ -69,7 +69,7 @@ const {
 	REMOVE_FABRICATION,
 } = require('../../src/ducks/constants/students')
 
-describe('initStudent', () => {
+describe('initStudent action', () => {
 	it('returns an action to create a student', () => {
 		let action = initStudent()
 		expect(action).to.have.property('type', INIT_STUDENT)
@@ -78,7 +78,7 @@ describe('initStudent', () => {
 	})
 })
 
-describe('importStudent', () => {
+describe('importStudent action', () => {
 	it('returns an action to import a student', () => {
 		let action = importStudent({})
 		expect(action).to.have.property('type', IMPORT_STUDENT)
@@ -93,7 +93,7 @@ describe('importStudent', () => {
 	})
 })
 
-describe('destroyStudent', () => {
+describe('destroyStudent action', () => {
 	beforeEach(() => {
 		localStorage.setItem('student', JSON.stringify({}))
 		localStorage.setItem('studentIds', JSON.stringify(['student']))
@@ -115,7 +115,7 @@ describe('destroyStudent', () => {
 	})
 })
 
-describe('changeName', () => {
+describe('changeName action', () => {
 	it('returns an action to change the name of a student', () => {
 		let action = changeName('id', 'new name')
 		expect(action).to.have.property('type', CHANGE_NAME)
@@ -128,7 +128,7 @@ describe('changeName', () => {
 	})
 })
 
-describe('changeAdvisor', () => {
+describe('changeAdvisor action', () => {
 	it('returns an action to change the advisor of a student', () => {
 		let action = changeAdvisor('id', 'new advisor')
 		expect(action).to.have.property('type', CHANGE_ADVISOR)
@@ -141,7 +141,7 @@ describe('changeAdvisor', () => {
 	})
 })
 
-describe('changeCreditsNeeded', () => {
+describe('changeCreditsNeeded action', () => {
 	it('returns an action to change the creditsNeeded of a student', () => {
 		let action = changeCreditsNeeded('id', 30)
 		expect(action).to.have.property('type', CHANGE_CREDITS_NEEDED)
@@ -154,7 +154,7 @@ describe('changeCreditsNeeded', () => {
 	})
 })
 
-describe('changeMatriculation', () => {
+describe('changeMatriculation action', () => {
 	it('returns an action to change the matriculation of a student', () => {
 		let action = changeMatriculation('id', 1800)
 		expect(action).to.have.property('type', CHANGE_MATRICULATION)
@@ -167,7 +167,7 @@ describe('changeMatriculation', () => {
 	})
 })
 
-describe('changeGraduation', () => {
+describe('changeGraduation action', () => {
 	it('returns an action to change the graduation of a student', () => {
 		let action = changeGraduation('id', 2100)
 		expect(action).to.have.property('type', CHANGE_GRADUATION)
@@ -180,7 +180,7 @@ describe('changeGraduation', () => {
 	})
 })
 
-describe('changeSetting', () => {
+describe('changeSetting action', () => {
 	it('returns an action to change the setting of a student', () => {
 		let action = changeSetting('id', 'key', 'val')
 		expect(action).to.have.property('type', CHANGE_SETTING)
@@ -195,7 +195,7 @@ describe('changeSetting', () => {
 })
 
 
-describe('addArea', () => {
+describe('addArea action', () => {
 	it('returns an action to add an area to a student', () => {
 		let action = addArea('id', {name: 'Area', type: 'Study?'})
 		expect(action).to.have.property('type', ADD_AREA)
@@ -204,7 +204,7 @@ describe('addArea', () => {
 	})
 })
 
-describe('removeArea', () => {
+describe('removeArea action', () => {
 	it('returns an action to remove an area from a student', () => {
 		let action = removeArea('id', {name: 'Area', type: 'Study?'})
 		expect(action).to.have.property('type', REMOVE_AREA)
@@ -217,7 +217,7 @@ describe('removeArea', () => {
 	})
 })
 
-describe('removeAreas', () => {
+describe('removeAreas action', () => {
 	it('returns an action to remove several areas from a student', () => {
 		let action = removeAreas('id', {name: 'Area', type: 'Study?'})
 		expect(action).to.have.property('type', REMOVE_AREAS)
@@ -231,7 +231,7 @@ describe('removeAreas', () => {
 })
 
 
-describe('addSchedule', () => {
+describe('addSchedule action', () => {
 	it('returns an action to add a schedule to a student', () => {
 		let action = addSchedule('id', {year: 2012})
 		expect(action).to.have.property('type', ADD_SCHEDULE)
@@ -240,7 +240,7 @@ describe('addSchedule', () => {
 	})
 })
 
-describe('destroySchedule', () => {
+describe('destroySchedule action', () => {
 	it('returns an action to remove a schedule from a student', () => {
 		let action = destroySchedule('id', 'sid')
 		expect(action).to.have.property('type', DESTROY_SCHEDULE)
@@ -253,7 +253,7 @@ describe('destroySchedule', () => {
 	})
 })
 
-describe('destroySchedules', () => {
+describe('destroySchedules action', () => {
 	it('returns an action to remove several schedules from a student', () => {
 		let action = destroySchedules('id', 'sid', 'sid2')
 		expect(action).to.have.property('type', DESTROY_SCHEDULES)
@@ -266,7 +266,7 @@ describe('destroySchedules', () => {
 	})
 })
 
-describe('renameSchedule', () => {
+describe('renameSchedule action', () => {
 	it('returns an action to rename a schedule', () => {
 		let action = renameSchedule('id', 'sid', 'name')
 		expect(action).to.have.property('type', RENAME_SCHEDULE)
@@ -280,7 +280,7 @@ describe('renameSchedule', () => {
 	})
 })
 
-describe('reorderSchedule', () => {
+describe('reorderSchedule action', () => {
 	it('returns an action to reorder a schedule', () => {
 		let action = reorderSchedule('id', 'sid', 1)
 		expect(action).to.have.property('type', REORDER_SCHEDULE)
@@ -294,7 +294,7 @@ describe('reorderSchedule', () => {
 	})
 })
 
-describe('moveSchedule', () => {
+describe('moveSchedule action', () => {
 	it('returns an action to move a schedule', () => {
 		let action = moveSchedule('id', 'sid', 2012, 3)
 		expect(action).to.have.property('type', MOVE_SCHEDULE)
@@ -310,7 +310,7 @@ describe('moveSchedule', () => {
 })
 
 
-describe('addCourse', () => {
+describe('addCourse action', () => {
 	it('returns an action to add an override', () => {
 		let action = addCourse('id', 'sid', 123)
 		expect(action).to.have.property('type', ADD_COURSE)
@@ -324,7 +324,7 @@ describe('addCourse', () => {
 	})
 })
 
-describe('removeCourse', () => {
+describe('removeCourse action', () => {
 	it('returns an action to add an override', () => {
 		let action = removeCourse('id', 'sid', 123)
 		expect(action).to.have.property('type', REMOVE_COURSE)
@@ -338,7 +338,7 @@ describe('removeCourse', () => {
 	})
 })
 
-describe('reorderCourse', () => {
+describe('reorderCourse action', () => {
 	it('returns an action to add an override', () => {
 		let action = reorderCourse('id', 'sid', 123, 2)
 		expect(action).to.have.property('type', REORDER_COURSE)
@@ -353,7 +353,7 @@ describe('reorderCourse', () => {
 	})
 })
 
-describe('moveCourse', () => {
+describe('moveCourse action', () => {
 	it('returns an action to add an override', () => {
 		let action = moveCourse('id', 'fsid', 'tsid', 123)
 		expect(action).to.have.property('type', MOVE_COURSE)
@@ -370,7 +370,7 @@ describe('moveCourse', () => {
 
 
 
-describe('setOverride', () => {
+describe('setOverride action', () => {
 	it('returns an action to add an override', () => {
 		let action = setOverride('id', 'override/path', true)
 		expect(action).to.have.property('type', SET_OVERRIDE)
@@ -384,7 +384,7 @@ describe('setOverride', () => {
 	})
 })
 
-describe('removeOverride', () => {
+describe('removeOverride action', () => {
 	it('returns an action to remove an override', () => {
 		let action = removeOverride('id', 'override/path')
 		expect(action).to.have.property('type', REMOVE_OVERRIDE)
@@ -398,7 +398,7 @@ describe('removeOverride', () => {
 })
 
 
-describe('addFabrication', () => {
+describe('addFabrication action', () => {
 	it('returns an action to add a fabrication', () => {
 		let action = addFabrication('id', {'fab/path': true})
 		expect(action).to.have.property('type', ADD_FABRICATION)
@@ -411,7 +411,7 @@ describe('addFabrication', () => {
 	})
 })
 
-describe('removeFabrication', () => {
+describe('removeFabrication action', () => {
 	it('returns an action to remove a fabrication', () => {
 		let action = removeFabrication('id', 'fab/path')
 		expect(action).to.have.property('type', REMOVE_FABRICATION)
