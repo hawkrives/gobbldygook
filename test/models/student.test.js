@@ -72,7 +72,7 @@ describe('Student', () => {
 	})
 
 	it('can turn into JSON', () => {
-		const stu = Student(demoStudent)
+		const stu = Student()
 		let result = stringify(stu)
 		expect(result).to.be.ok
 	})
@@ -80,7 +80,7 @@ describe('Student', () => {
 
 describe('addFabricationToStudent', () => {
 	it('supports adding fabrications', () => {
-		const stu = Student(demoStudent)
+		const stu = Student()
 		let addedFabrication = addFabricationToStudent(stu, {id: 'a'})
 		expect(addedFabrication.fabrications['a']).to.deep.equal({id: 'a'})
 	})
@@ -97,7 +97,7 @@ describe('removeFabricationFromStudent', () => {
 
 describe('setOverrideOnStudent', () => {
 	it('supports adding overrides', () => {
-		const stu = Student(demoStudent)
+		const stu = Student()
 		let addedOverride = setOverrideOnStudent(stu, 'nothing', 'me!')
 		expect(addedOverride.overrides['nothing']).to.equal('me!')
 	})
@@ -113,7 +113,7 @@ describe('removeOverrideFromStudent', () => {
 
 describe('addAreaToStudent', () => {
 	it('supports adding areas', () => {
-		const stu = Student(demoStudent)
+		const stu = Student()
 		let query = {name: 'Exercise Science', type: 'major', revision: '2014-15'}
 		let newArea = addAreaToStudent(stu, Study(query))
 		expect(find(newArea.studies, query)).not.to.be.undefined
@@ -148,8 +148,16 @@ describe('getStudentCourses', () => {
 
 describe('addScheduleToStudent', () => {
 	it('supports adding schedules', () => {
-		const stu = Student(demoStudent)
-		let newSchedule = addScheduleToStudent(stu, Schedule({id: '10912', title: 'a', active: false, clbids: [], index: 1, semester: 0, year: 0}))
+		const stu = Student()
+		let newSchedule = addScheduleToStudent(stu, Schedule({
+			id: '10912',
+			title: 'a',
+			active: false,
+			clbids: [],
+			index: 1,
+			semester: 0,
+			year: 0,
+		}))
 		expect(newSchedule.schedules['10912']).to.deep.equal({
 			id: '10912',
 			active: false,
@@ -164,9 +172,10 @@ describe('addScheduleToStudent', () => {
 
 describe('destroyScheduleFromStudent', () => {
 	it('supports removing schedules', () => {
-		const stu = new Student(demoStudent)
-		let removedSchedule = destroyScheduleFromStudent(stu, '1')
-		expect(removedSchedule.schedules['1']).to.be.undefined
+		const sched = Schedule
+		const stu = addScheduleToStudent(Student(), sched)
+		let removedSchedule = destroyScheduleFromStudent(stu, sched.id)
+		expect(removedSchedule.schedules[sched.id]).to.be.undefined
 	})
 })
 
