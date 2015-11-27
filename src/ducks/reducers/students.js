@@ -57,7 +57,7 @@ import {
 
 const initialState = {}
 
-function reducer(state = initialState, action) {
+export function reducer(state = initialState, action) {
 	const {type, payload} = action
 
 	switch (type) {
