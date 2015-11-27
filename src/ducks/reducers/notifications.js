@@ -1,5 +1,6 @@
 import findIndex from 'lodash/array/findIndex'
 import clone from 'lodash/lang/clone'
+import reject from 'lodash/collection/reject'
 
 import {
 	LOG_MESSAGE,
@@ -59,7 +60,7 @@ export default function reducer(state = initialState, action) {
 		}
 
 		case REMOVE_NOTIFICATION: {
-			return state.delete(payload.id)
+			return reject(state, {id: payload.id})
 		}
 
 		default: {
