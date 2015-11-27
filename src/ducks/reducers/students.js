@@ -23,7 +23,7 @@ import {
 	addCourseToSchedule,
 	removeCourseFromSchedule,
 	reorderCourseInSchedule,
-} from '../models/student'
+} from '../../models/student'
 
 import {
 	INIT_STUDENT,
@@ -37,10 +37,10 @@ import {
 	CHANGE_SETTING,
 	ADD_AREA,
 	REMOVE_AREA,
-	REMOVE_MULTIPLE_AREAS,
+	REMOVE_AREAS,
 	ADD_SCHEDULE,
 	DESTROY_SCHEDULE,
-	DESTROY_MULTIPLE_SCHEDULES,
+	DESTROY_SCHEDULES,
 	RENAME_SCHEDULE,
 	REORDER_SCHEDULE,
 	MOVE_SCHEDULE,
@@ -106,7 +106,7 @@ function reducer(state = initialState, action) {
 			const student = removeAreaFromStudent(state[payload.studentId], payload.areaId)
 			return {...state, [student.id]: student}
 		}
-		case REMOVE_MULTIPLE_AREAS: {
+		case REMOVE_AREAS: {
 			let student = {...state[payload.studentId]}
 			for (const areaId of payload.areaIds) {
 				student = removeAreaFromStudent(student, areaId)
@@ -122,7 +122,7 @@ function reducer(state = initialState, action) {
 			const student = destroyScheduleFromStudent(state[payload.studentId], payload.scheduleId)
 			return {...state, [student.id]: student}
 		}
-		case DESTROY_MULTIPLE_SCHEDULES: {
+		case DESTROY_SCHEDULES: {
 			let student = state[payload.studentId]
 			for (const id of payload.scheduleIds) {
 				student = destroyScheduleFromStudent(student, id)
