@@ -1,23 +1,16 @@
 import clone from 'lodash/lang/clone'
 import contains from 'lodash/collection/contains'
-import filter from 'lodash/collection/filter'
 import find from 'lodash/collection/find'
 import findIndex from 'lodash/array/findIndex'
 import findKey from 'lodash/object/findKey'
-import findWarnings from '../helpers/find-course-warnings'
-import flatten from 'lodash/array/flatten'
-import identity from 'lodash/utility/identity'
 import isArray from 'lodash/lang/isArray'
 import isNumber from 'lodash/lang/isNumber'
-import isTrue from '../helpers/is-true'
 import isUndefined from 'lodash/lang/isUndefined'
 import map from 'lodash/collection/map'
 import omit from 'lodash/object/omit'
-import pluck from 'lodash/collection/pluck'
 import present from 'present'
 import reject from 'lodash/collection/reject'
 import round from 'lodash/math/round'
-import some from 'lodash/collection/some'
 import stringify from 'json-stable-stringify'
 import zipObject from 'lodash/array/zipObject'
 import {v4 as uuid} from 'uuid'
@@ -287,27 +280,4 @@ export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
 	schedule.clbids.splice(index, 0, clbid)
 
 	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
-}
-
-
-export function validateSchedule(schedule) {
-	// Checks to see if the schedule is valid
-	return schedule.courses.then(courses => {
-		// only check the courses that have data
-		courses = reject(courses, isUndefined)
-
-		// Step one: do any times conflict?
-		const conflicts = findWarnings(courses, schedule)
-
-		const flattened = flatten(conflicts)
-		const filtered = filter(flattened, identity)
-		const warnings = pluck(filtered, 'warning')
-		const hasConflict = some(warnings, isTrue)
-
-		if (hasConflict) {
-			debug('schedule conflicts', conflicts, hasConflict)
-		}
-
-		return {hasConflict, conflicts}
-	})
 }
