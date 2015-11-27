@@ -5,20 +5,11 @@ import size from 'lodash/collection/size'
 import filter from 'lodash/collection/filter'
 import pluck from 'lodash/collection/pluck'
 import find from 'lodash/collection/find'
-import map from 'lodash/collection/map'
 import stringify from 'json-stable-stringify'
 
-mock('../../src/helpers/get-courses', (clbids, {year, semester}={}) => {
-	return Promise.resolve(map(clbids, id => ({clbid: id, year, semester})))
-})
-mock('../../src/models/load-area', ({name, type, revision}) => {
-	return Promise.resolve({
-		name,
-		type,
-		revision,
-	})
-})
-mock('../lib/check-student-graduatability', () => Promise.resolve([]))
+mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock'))
+mock('../../src/models/load-area', require('../mocks/load-area.mock'))
+mock('../lib/check-student-graduatability', require('../mocks/check-student-graduatability.mock'))
 
 const {
 	default: Student,
