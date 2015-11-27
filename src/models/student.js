@@ -226,15 +226,24 @@ export function saveStudent(student) {
 
 export function moveScheduleInStudent(student, scheduleId, {year, semester}={}) {
 	if (year === undefined && semester === undefined) {
-		return student
+		throw new RangeError('moveScheduleInStudent: Either year or semester must be provided.')
+	}
+	if (!isUndefined(year) && !isNumber(year)) {
+		throw new TypeError('moveScheduleInStudent: year must be a number.')
+	}
+	if (!isUndefined(semester) && !isNumber(semester)) {
+		throw new TypeError('moveScheduleInStudent: semester must be a number.')
 	}
 
 	let schedule = clone(find(student.schedules, {id: scheduleId}))
+	if (!schedule) {
+		throw new ReferenceError(`moveScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`)
+	}
 
-	if (typeof year === 'number') {
+	if (isNumber(year)) {
 		schedule.year = year
 	}
-	if (typeof semester === 'number') {
+	if (isNumber(semester)) {
 		schedule.semester = semester
 	}
 
@@ -242,18 +251,22 @@ export function moveScheduleInStudent(student, scheduleId, {year, semester}={}) 
 }
 
 export function reorderScheduleInStudent(student, scheduleId, index) {
-	let schedule = {
-		...find(student.schedules, {id: scheduleId}),
-		index: index,
+	let old = find(student.schedules, {id: scheduleId})
+	if (!old) {
+		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
 	}
+
+	let schedule = {...old, index: index}
 	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
 export function renameScheduleInStudent(student, scheduleId, title) {
-	let schedule = {
-		...find(student.schedules, {id: scheduleId}),
-		title: title,
+	let old = find(student.schedules, {id: scheduleId})
+	if (!old) {
+		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
 	}
+
+	let schedule = {...old, title: title}
 	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
@@ -263,6 +276,9 @@ export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
 	}
 
 	let schedule = clone(find(student.schedules, {id: scheduleId}))
+	if (!schedule) {
+		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
+	}
 
 	const oldIndex = findIndex(schedule.clbids, id => id === clbid)
 
