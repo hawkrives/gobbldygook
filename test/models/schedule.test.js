@@ -1,23 +1,20 @@
 import {expect} from 'chai'
-import proxyquire from 'proxyquire'
 import stringify from 'json-stable-stringify'
 
-describe('Schedule', () => {
-	const {
-		default: Schedule,
-		addCourse,
-		removeCourse,
-		renameSchedule,
-		moveSchedule,
-		reorderSchedule,
-		reorderCourse,
-	} = proxyquire('../../src/models/schedule', {
-		'../lib/get-courses': () => Promise.resolve([]),
-	})
+const {
+	default: Schedule,
+	addCourse,
+	removeCourse,
+	renameSchedule,
+	moveSchedule,
+	reorderSchedule,
+	reorderCourse,
+} = require('../../src/models/schedule')
 
+describe('Schedule', () => {
 	let sched = undefined
 	beforeEach(() => {
-		sched = new Schedule({
+		sched = Schedule({
 			id: 1,
 			active: true,
 			year: 1994,
@@ -31,7 +28,7 @@ describe('Schedule', () => {
 	it('does not mutate the passed-in object', () => {
 		const clbids = []
 		const input = {clbids}
-		new Schedule(input)
+		Schedule(input)
 		expect(input.clbids).to.equal(clbids)
 	})
 
@@ -40,8 +37,8 @@ describe('Schedule', () => {
 	})
 
 	it('creates a unique ID for each new schedule without an ID prop', () => {
-		let sched1 = new Schedule()
-		let sched2 = new Schedule()
+		let sched1 = Schedule()
+		let sched2 = Schedule()
 		expect(sched1.id).not.to.equal(sched2.id)
 	})
 
@@ -98,7 +95,7 @@ describe('Schedule', () => {
 	})
 
 	it('returns all of those properties, even the falsey ones', () => {
-		let sched1 = new Schedule({
+		let sched1 = Schedule({
 			id: 1, active: false,
 			title: 'My Schedule',
 		})
