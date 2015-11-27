@@ -35,7 +35,6 @@ const {
 	reorderCourseInSchedule,
 	encodeStudent,
 	saveStudent,
-	validateSchedule,
 } = require('../../src/models/student')
 
 const getStudentCourses = require('../../src/helpers/get-student-courses')
