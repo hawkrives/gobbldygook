@@ -1,6 +1,6 @@
 import db from './db'
 
-const courseCache = new WeakMap()
+const courseCache = new Map()
 
 /**
  * Gets a course from the database.
