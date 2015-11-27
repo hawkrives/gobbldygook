@@ -30,12 +30,12 @@ const {
 	removeOverrideFromStudent,
 	addFabricationToStudent,
 	removeFabricationFromStudent,
-	encodeStudent,
-	saveStudent,
 	moveScheduleInStudent,
 	reorderScheduleInStudent,
 	renameScheduleInStudent,
 	reorderCourseInSchedule,
+	encodeStudent,
+	saveStudent,
 	validateSchedule,
 } = require('../../src/models/student')
 
@@ -255,3 +255,112 @@ describe('changeStudentSetting', () => {
 		expect(final).to.not.equal(initial)
 	})
 })
+
+
+
+describe('moveScheduleInStudent', () => {
+	it('throws if not given anywhere to move to', () => {
+		expect(() => moveScheduleInStudent({}, '', {}))
+			.to.throw(RangeError)
+	})
+
+	it('can move just a year', () => {
+		let sched = Schedule({year: 2012})
+		let stu = {schedules: {[sched.id]: sched}}
+		let actual = moveScheduleInStudent(stu, sched.id, {year: 2014})
+		expect(actual.schedules[sched.id].year).to.equal(2014)
+	})
+
+	it('can move just a semester', () => {
+		let sched = Schedule({semester: 1})
+		let stu = {schedules: {[sched.id]: sched}}
+		let actual = moveScheduleInStudent(stu, sched.id, {semester: 3})
+		expect(actual.schedules[sched.id].semester).to.equal(3)
+	})
+
+	it('can move both a year and a semester', () => {
+		let sched = Schedule({year: 2012, semester: 1})
+		let stu = {schedules: {[sched.id]: sched}}
+		let actual = moveScheduleInStudent(stu, sched.id, {year: 2014, semester: 3})
+		expect(actual.schedules[sched.id].year).to.equal(2014)
+		expect(actual.schedules[sched.id].semester).to.equal(3)
+	})
+
+	it('throws if year is not a number', () => {
+		let sched = Schedule()
+		let stu = {schedules: {[sched.id]: sched}}
+		expect(() => moveScheduleInStudent(stu, sched.id, {year: '2014'}))
+			.to.throw(TypeError)
+	})
+
+	it('throws if semester is not a number', () => {
+		let sched = Schedule()
+		let stu = {schedules: {[sched.id]: sched}}
+		expect(() => moveScheduleInStudent(stu, sched.id, {semester: '5'}))
+			.to.throw(TypeError)
+	})
+
+	it('returns a new object', () => {
+		let sched = Schedule({year: 2012})
+		let actual = moveScheduleInStudent({schedules: {[sched.id]: sched}}, sched.id, {year: 2014})
+		expect(actual.schedules[sched.id]).to.not.equal(sched)
+	})
+})
+
+// describe('reorderScheduleInStudent', () => {
+// 	it('changes the "index" property', () => {
+// 		let newOrder = reorderScheduleInStudent(sched, 5)
+// 		expect(newOrder.index).to.equal(5)
+// 	})
+// 	it('returns a new object', () => {})
+// })
+
+// describe('renameScheduleInStudent', () => {
+// 	it('renames the schedule', () => {
+// 		let newName = renameScheduleInStudent(sched, 'My New Title')
+// 		expect(newName.title).to.equal('My New Title')
+// 	})
+// 	it('returns a new object', () => {})
+// })
+
+// describe('addCourseToSchedule', () => {
+// 	it('supports adding a course', () => {
+// 		let addedCourse = addCourseToSchedule(sched, 918)
+// 		expect(addedCourse.clbids).to.contain(918)
+// 	})
+
+// 	it('refuses to add non-number clbids', () => {
+// 		expect(() => addCourseToSchedule(sched, '918')).to.throw(TypeError)
+// 	})
+
+// 	it('returns a new object', () => {})
+// 	it('returns the same student if the clbid already exists in the schedule', () => {})
+// })
+
+// describe('removeCourseFromSchedule', () => {
+// 	it('supports removing a course', () => {
+// 		let removedCourse = removeCourseFromSchedule(sched, 123)
+// 		expect(removedCourse.clbids).not.to.contain(123)
+// 	})
+
+// 	it('refuses to remove non-number clbids', () => {
+// 		expect(() => removeCourseFromSchedule(sched, '918')).to.throw(TypeError)
+// 	})
+
+// 	it('returns a new object', () => {})
+// 	it('returns the same student if the clbid does not exist in the schedule', () => {})
+// })
+
+// describe('reorderCourseInSchedule', () => {
+// 	it('supports rearranging courses', () => {
+// 		let rearranged = reorderCourseInSchedule(sched, 123, 2)
+// 		expect(rearranged.clbids).to.not.deep.equal([123, 234, 345])
+// 		expect(rearranged.clbids).to.deep.equal([234, 345, 123])
+// 	})
+
+// 	it('requires that the clbid be a number when rearranging', () => {
+// 		expect(() => reorderCourseInSchedule(sched, '918', 1)).to.throw(TypeError)
+// 	})
+
+// 	it('returns a new object', () => {})
+// })
