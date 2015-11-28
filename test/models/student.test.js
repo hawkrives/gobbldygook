@@ -68,7 +68,7 @@ describe('Student', () => {
 		expect(stu.overrides).to.deep.equal(demoStudent.overrides)
 	})
 
-	it('can turn into JSON', () => {
+	it('turns into JSON', () => {
 		const stu = Student()
 		let result = stringify(stu)
 		expect(result).to.be.ok
@@ -76,7 +76,7 @@ describe('Student', () => {
 })
 
 describe('addFabricationToStudent', () => {
-	it('supports adding fabrications', () => {
+	it('adds fabrications', () => {
 		const stu = Student()
 		let addedFabrication = addFabricationToStudent(stu, {clbid: '123'})
 		expect(addedFabrication.fabrications['123']).to.deep.equal({clbid: '123'})
@@ -84,7 +84,7 @@ describe('addFabricationToStudent', () => {
 })
 
 describe('removeFabricationFromStudent', () => {
-	it('supports removing fabrications', () => {
+	it('removes fabrications', () => {
 		const stu = Student(demoStudent)
 		let addedFabrication = addFabricationToStudent(stu, {clbid: '123'})
 		let noMoreFabrication = removeFabricationFromStudent(addedFabrication, '123')
@@ -93,13 +93,13 @@ describe('removeFabricationFromStudent', () => {
 })
 
 describe('setOverrideOnStudent', () => {
-	it('supports adding overrides', () => {
+	it('adds overrides', () => {
 		const stu = Student()
 		let addedOverride = setOverrideOnStudent(stu, 'nothing', 'me!')
 		expect(addedOverride.overrides['nothing']).to.equal('me!')
 	})
 
-	it('will set overrides to falsy values if asked', () => {
+	it('sets overrides to falsy values if asked', () => {
 		const stu = Student()
 		let addedOverride = setOverrideOnStudent(stu, 'nothing', false)
 		expect(addedOverride.overrides['nothing']).to.equal(false)
@@ -107,7 +107,7 @@ describe('setOverrideOnStudent', () => {
 })
 
 describe('removeOverrideFromStudent', () => {
-	it('supports removing overrides', () => {
+	it('removes overrides', () => {
 		const stu = Student(demoStudent)
 		let removedOverride = removeOverrideFromStudent(stu, 'credits.taken')
 		expect(removedOverride.overrides['credits.taken']).to.not.exist
@@ -115,7 +115,7 @@ describe('removeOverrideFromStudent', () => {
 })
 
 describe('addAreaToStudent', () => {
-	it('supports adding areas', () => {
+	it('adds areas', () => {
 		const stu = Student()
 		let query = {name: 'Exercise Science', type: 'major', revision: '2014-15'}
 		let newArea = addAreaToStudent(stu, Study(query))
@@ -124,7 +124,7 @@ describe('addAreaToStudent', () => {
 })
 
 describe('removeAreaFromStudent', () => {
-	it('supports removing areas', () => {
+	it('removes areas', () => {
 		const stu = Student(demoStudent)
 		let query = {type: 'major', name: 'Computer Science', revision: 'latest'}
 		let noCsci = removeAreaFromStudent(stu, query)
@@ -133,7 +133,7 @@ describe('removeAreaFromStudent', () => {
 })
 
 describe('moveCourseToSchedule', () => {
-	it('supports moving courses between schedules in one-ish operation', () => {
+	it('moves courses between schedules in one-ish operation', () => {
 		const stu = Student(demoStudent)
 		let movedCourse = moveCourseToSchedule(stu, {fromScheduleId: '1', toScheduleId: '2', clbid: 82908})
 		expect(movedCourse.schedules['1'].clbids).to.not.include(82908)
@@ -150,7 +150,7 @@ describe('getStudentCourses', () => {
 })
 
 describe('addScheduleToStudent', () => {
-	it('supports adding schedules', () => {
+	it('adds schedules', () => {
 		const stu = Student()
 		let newSchedule = addScheduleToStudent(stu, Schedule({
 			id: '10912',
@@ -174,14 +174,14 @@ describe('addScheduleToStudent', () => {
 })
 
 describe('destroyScheduleFromStudent', () => {
-	it('supports removing schedules', () => {
+	it('removes schedules', () => {
 		const sched = Schedule()
 		const stu = addScheduleToStudent(Student(), sched)
 		let removedSchedule = destroyScheduleFromStudent(stu, sched.id)
 		expect(removedSchedule.schedules[sched.id]).to.be.undefined
 	})
 
-	it('should make another schedule active if there is another schedule available for the same term', () => {
+	it('makes another schedule active if there is another schedule available for the same term', () => {
 		const sched1 = Schedule({year: 2012, semester: 1, index: 1, active: true})
 		const sched2 = Schedule({year: 2012, semester: 1, index: 2})
 		let stu = Student()
@@ -195,7 +195,7 @@ describe('destroyScheduleFromStudent', () => {
 
 
 describe('changeStudentName', () => {
-	it(`can change the student's name`, () => {
+	it(`changes the student's name`, () => {
 		let initial = Student()
 		expect(changeStudentName(initial, 'my name'))
 			.to.have.property('name', 'my name')
@@ -209,7 +209,7 @@ describe('changeStudentName', () => {
 })
 
 describe('changeStudentAdvisor', () => {
-	it(`can change the student's advisor`, () => {
+	it(`changes the student's advisor`, () => {
 		let initial = Student()
 		expect(changeStudentAdvisor(initial, 'professor name'))
 			.to.have.property('advisor', 'professor name')
@@ -223,7 +223,7 @@ describe('changeStudentAdvisor', () => {
 })
 
 describe('changeStudentCreditsNeeded', () => {
-	it(`can change the student's number of credits needed`, () => {
+	it(`changes the student's number of credits needed`, () => {
 		let initial = Student()
 		expect(changeStudentCreditsNeeded(initial, 130))
 			.to.have.property('creditsNeeded', 130)
@@ -237,7 +237,7 @@ describe('changeStudentCreditsNeeded', () => {
 })
 
 describe('changeStudentMatriculation', () => {
-	it(`can change the student's matriculation year`, () => {
+	it(`changes the student's matriculation year`, () => {
 		let initial = Student()
 		expect(changeStudentMatriculation(initial, 1800))
 			.to.have.property('matriculation', 1800)
@@ -251,7 +251,7 @@ describe('changeStudentMatriculation', () => {
 })
 
 describe('changeStudentGraduation', () => {
-	it(`can change the student's graduation year`, () => {
+	it(`changes the student's graduation year`, () => {
 		let initial = Student()
 		expect(changeStudentGraduation(initial, 2100))
 			.to.have.property('graduation', 2100)
@@ -265,7 +265,7 @@ describe('changeStudentGraduation', () => {
 })
 
 describe('changeStudentSetting', () => {
-	it(`can change settings in the student `, () => {
+	it(`changes settings in the student `, () => {
 		let initial = Student()
 		expect(changeStudentSetting(initial, 'key', 'value'))
 			.to.have.property('settings')
@@ -287,21 +287,21 @@ describe('moveScheduleInStudent', () => {
 			.to.throw(RangeError)
 	})
 
-	it('can move just a year', () => {
+	it('moves just a year', () => {
 		let sched = Schedule({year: 2012})
 		let stu = {schedules: {[sched.id]: sched}}
 		let actual = moveScheduleInStudent(stu, sched.id, {year: 2014})
 		expect(actual.schedules[sched.id].year).to.equal(2014)
 	})
 
-	it('can move just a semester', () => {
+	it('moves just a semester', () => {
 		let sched = Schedule({semester: 1})
 		let stu = {schedules: {[sched.id]: sched}}
 		let actual = moveScheduleInStudent(stu, sched.id, {semester: 3})
 		expect(actual.schedules[sched.id].semester).to.equal(3)
 	})
 
-	it('can move both a year and a semester', () => {
+	it('moves both a year and a semester', () => {
 		let sched = Schedule({year: 2012, semester: 1})
 		let stu = {schedules: {[sched.id]: sched}}
 		let actual = moveScheduleInStudent(stu, sched.id, {year: 2014, semester: 3})
@@ -369,7 +369,7 @@ describe('addCourseToSchedule', () => {
 		stu = addScheduleToStudent(Student(), sched)
 	})
 
-	it('supports adding a course', () => {
+	it('adds a course', () => {
 		let addedCourse = addCourseToSchedule(stu, sched.id, 918)
 		expect(addedCourse.schedules[sched.id].clbids).to.contain(918)
 	})
@@ -399,7 +399,7 @@ describe('removeCourseFromSchedule', () => {
 		stu = addScheduleToStudent(Student(), sched)
 	})
 
-	it('supports removing a course', () => {
+	it('removes a course', () => {
 		let removedCourse = removeCourseFromSchedule(stu, sched.id, 123)
 		expect(removedCourse.schedules[sched.id].clbids).not.to.contain(123)
 	})
@@ -429,7 +429,7 @@ describe('reorderCourseInSchedule', () => {
 		stu = addScheduleToStudent(Student(), sched)
 	})
 
-	it('supports rearranging courses', () => {
+	it('rearranges courses', () => {
 		let rearranged = reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 1})
 		expect(rearranged.schedules[sched.id].clbids).to.not.deep.equal([123, 456, 789])
 		expect(rearranged.schedules[sched.id].clbids).to.deep.equal([456, 123, 789])

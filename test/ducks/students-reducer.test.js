@@ -34,7 +34,7 @@ import {
 describe('students reducer', () => {
 	const {reducer} = require('../../src/ducks/reducers/students')
 
-	it('should return the initial state', () => {
+	it('returns the initial state', () => {
 		const expected = {}
 		const actual = reducer(undefined, {})
 		expect(actual).to.deep.equal(expected)
@@ -44,7 +44,7 @@ describe('students reducer', () => {
 describe('students reducer', () => {
 	const {reducer} = require('../../src/ducks/reducers/students')
 
-	it('should handle INIT_STUDENT', () => {
+	it('handles INIT_STUDENT', () => {
 		let initialState = {}
 
 		let student = {id: 'xyz'}
@@ -56,7 +56,7 @@ describe('students reducer', () => {
 		expect(actual).to.deep.equal(expected)
 		expect(actual).to.not.equal(initialState)
 	})
-	it('should return existing state if INIT_STUDENT has an error', () => {
+	it('returns existing state if INIT_STUDENT has an error', () => {
 		let initialState = {}
 
 		let action = {type: INIT_STUDENT, payload: new Error(), error: true}
@@ -67,7 +67,7 @@ describe('students reducer', () => {
 		expect(actual).to.equal(expected)
 	})
 
-	it('should handle IMPORT_STUDENT', () => {
+	it('handles IMPORT_STUDENT', () => {
 		let initialState = {}
 
 		let student = {id: 'xyz'}
@@ -79,7 +79,7 @@ describe('students reducer', () => {
 		expect(actual).to.deep.equal(expected)
 		expect(actual).to.not.equal(initialState)
 	})
-	it('should return existing state if IMPORT_STUDENT has an error', () => {
+	it('returns existing state if IMPORT_STUDENT has an error', () => {
 		let initialState = {}
 
 		let action = {type: IMPORT_STUDENT, payload: new Error(), error: true}
@@ -90,7 +90,7 @@ describe('students reducer', () => {
 		expect(actual).to.equal(expected)
 	})
 
-	it('should handle DESTROY_STUDENT', () => {
+	it('handles DESTROY_STUDENT', () => {
 		let student = {id: 'xyz'}
 		let initialState = {[student.id]: student}
 
@@ -103,7 +103,7 @@ describe('students reducer', () => {
 		expect(actual).to.not.equal(initialState)
 	})
 
-	it('should handle CHANGE_NAME', () => {
+	it('handles CHANGE_NAME', () => {
 		let student = {id: 'xyz', name: 'first'}
 		let initialState = {[student.id]: student}
 
@@ -120,7 +120,7 @@ describe('students reducer', () => {
 		expect(actual['xyz']).to.not.equal(student)
 	})
 
-	it('should handle CHANGE_ADVISOR', () => {
+	it('handles CHANGE_ADVISOR', () => {
 		let student = {id: 'xyz', advisor: 'first'}
 		let initialState = {[student.id]: student}
 
@@ -137,7 +137,7 @@ describe('students reducer', () => {
 		expect(actual['xyz']).to.not.equal(student)
 	})
 
-	it('should handle CHANGE_CREDITS_NEEDED', () => {
+	it('handles CHANGE_CREDITS_NEEDED', () => {
 		let student = {id: 'xyz', creditsNeeded: 30}
 		let initialState = {[student.id]: student}
 
@@ -154,7 +154,7 @@ describe('students reducer', () => {
 		expect(actual['xyz']).to.not.equal(student)
 	})
 
-	it('should handle CHANGE_MATRICULATION', () => {
+	it('handles CHANGE_MATRICULATION', () => {
 		let student = {id: 'xyz', matriculation: 1800}
 		let initialState = {[student.id]: student}
 
@@ -171,7 +171,7 @@ describe('students reducer', () => {
 		expect(actual['xyz']).to.not.equal(student)
 	})
 
-	it('should handle CHANGE_GRADUATION', () => {
+	it('handles CHANGE_GRADUATION', () => {
 		let student = {id: 'xyz', graduation: 30}
 		let initialState = {[student.id]: student}
 
@@ -188,7 +188,7 @@ describe('students reducer', () => {
 		expect(actual['xyz']).to.not.equal(student)
 	})
 
-	it('should handle CHANGE_SETTING', () => {
+	it('handles CHANGE_SETTING', () => {
 		let student = {id: 'xyz', settings: {name: 'nothing'}}
 		let initialState = {[student.id]: student}
 
@@ -206,7 +206,7 @@ describe('students reducer', () => {
 		expect(actual['xyz']).to.not.equal(student)
 	})
 
-	it('should handle ADD_AREA', () => {
+	it('handles ADD_AREA', () => {
 		let student = {id: 'xyz', studies: []}
 		let initialState = {[student.id]: student}
 
@@ -224,7 +224,7 @@ describe('students reducer', () => {
 		expect(actual['xyz']).to.not.equal(student)
 	})
 
-	it('should handle REMOVE_AREA', () => {
+	it('handles REMOVE_AREA', () => {
 		let student = {id: 'xyz', studies: [
 			{name: 'Exercise Science', type: 'major'},
 			{name: 'Asian Studies', type: 'major'},
@@ -244,7 +244,7 @@ describe('students reducer', () => {
 		expect(actual['xyz']).to.not.equal(student)
 	})
 
-	it('should handle REMOVE_AREAS', () => {
+	it('handles REMOVE_AREAS', () => {
 		let student = {id: 'xyz', studies: [
 			{name: 'Exercise Science', type: 'major'},
 			{name: 'Computer Science', type: 'major'},
@@ -268,7 +268,7 @@ describe('students reducer', () => {
 		expect(actual['xyz']).to.not.equal(student)
 	})
 
-	it('should handle ADD_SCHEDULE', () => {
+	it('handles ADD_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {}}
 		let initialState = {[student.id]: student}
 
@@ -286,7 +286,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
 	})
 
-	it('should handle DESTROY_SCHEDULE', () => {
+	it('handles DESTROY_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {
 			'1': {id: '1', title: 'Schedule!!!'},
 			'2': {id: '2', title: 'Schedule???'},
@@ -314,7 +314,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
 	})
 
-	it('should handle DESTROY_SCHEDULES', () => {
+	it('handles DESTROY_SCHEDULES', () => {
 		let student = {id: 'xyz', schedules: {
 			'1': {id: '1', title: 'Schedule!!!'},
 			'2': {id: '2', title: 'Schedule???'},
@@ -343,7 +343,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
 	})
 
-	it('should handle RENAME_SCHEDULE', () => {
+	it('handles RENAME_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {
 			'1': {id: '1', title: 'Schedule!!!'},
 		}}
@@ -372,7 +372,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
 	})
 
-	it('should handle REORDER_SCHEDULE', () => {
+	it('handles REORDER_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {
 			'1': {id: '1', title: 'Schedule!!!', index: 1},
 		}}
@@ -401,7 +401,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
 	})
 
-	it('should handle MOVE_SCHEDULE', () => {
+	it('handles MOVE_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {
 			'1': {id: '1', year: 0, semester: 0},
 		}}
@@ -431,7 +431,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
 	})
 
-	it('should handle ADD_COURSE', () => {
+	it('handles ADD_COURSE', () => {
 		let student = {id: 'xyz', schedules: {
 			'1': {id: '1', clbids: [123]},
 		}}
@@ -459,7 +459,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
 	})
 
-	it('should handle REMOVE_COURSE', () => {
+	it('handles REMOVE_COURSE', () => {
 		let student = {id: 'xyz', schedules: {
 			'1': {id: '1', clbids: [123, 789]},
 		}}
@@ -487,7 +487,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
 	})
 
-	it('should handle REORDER_COURSE', () => {
+	it('handles REORDER_COURSE', () => {
 		let student = {id: 'xyz', schedules: {
 			'1': {id: '1', clbids: [123, 789]},
 		}}
@@ -516,7 +516,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
 	})
 
-	it('should handle MOVE_COURSE', () => {
+	it('handles MOVE_COURSE', () => {
 		let student = {id: 'xyz', schedules: {
 			'1': {id: '1', clbids: [123]},
 			'2': {id: '2', clbids: [789]},
@@ -550,7 +550,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
 	})
 
-	it('should handle SET_OVERRIDE', () => {
+	it('handles SET_OVERRIDE', () => {
 		let student = {id: 'xyz', overrides: {}}
 		let initialState = {[student.id]: student}
 
@@ -569,7 +569,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].overrides).to.not.equal(student.overrides)
 	})
 
-	it('should handle REMOVE_OVERRIDE', () => {
+	it('handles REMOVE_OVERRIDE', () => {
 		let student = {id: 'xyz', overrides: {'path.to.override': true}}
 		let initialState = {[student.id]: student}
 
@@ -587,7 +587,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].overrides).to.not.equal(student.overrides)
 	})
 
-	it('should handle ADD_FABRICATION', () => {
+	it('handles ADD_FABRICATION', () => {
 		let student = {id: 'xyz', fabrications: {}}
 		let initialState = {[student.id]: student}
 
@@ -605,7 +605,7 @@ describe('students reducer', () => {
 		expect(actual['xyz'].fabrications).to.not.equal(student.fabrications)
 	})
 
-	it('should handle REMOVE_FABRICATION', () => {
+	it('handles REMOVE_FABRICATION', () => {
 		let student = {id: 'xyz', fabrications: {'1': {clbid: '1', something: 'um…'}}}
 		let initialState = {[student.id]: student}
 
@@ -629,7 +629,7 @@ describe('the undoable students reducer', () => {
 	const {default: undoableReducer} = require('../../src/ducks/reducers/students')
 	const {ActionCreators: {undo, redo}} = require('redux-undo')
 
-	it('should return the initial state', () => {
+	it('returns the initial state', () => {
 		const expected = {
 			past: [
 				{},
@@ -644,7 +644,7 @@ describe('the undoable students reducer', () => {
 		expect(actual.future).to.deep.equal(expected.future)
 	})
 
-	it('should return a new object with changes', () => {
+	it('returns a new object with changes', () => {
 		const initial = {}
 		const hasOneStudent = undoableReducer(initial, {type: INIT_STUDENT, payload: {id: 'xyz'}})
 
@@ -653,7 +653,7 @@ describe('the undoable students reducer', () => {
 		expect(size(hasOneStudent.present)).to.equal(1)
 	})
 
-	it('should hold previous states', () => {
+	it('holds previous states', () => {
 		const initial = {}
 		const hasOneStudent = undoableReducer(initial, {type: INIT_STUDENT, payload: {id: 'xyz'}})
 
@@ -669,7 +669,7 @@ describe('the undoable students reducer', () => {
 		expect(hasTwoStudents.past[1]).to.deep.equal(hasOneStudent.present)
 	})
 
-	it('should allow undoing to a previous state', () => {
+	it('allows undoing to a previous state', () => {
 		const initial = {}
 		const hasOneStudent = undoableReducer(initial, {type: INIT_STUDENT, payload: {id: 'xyz'}})
 
@@ -677,7 +677,7 @@ describe('the undoable students reducer', () => {
 		expect(shouldBeInitial.present).to.deep.equal(initial)
 	})
 
-	it('should allow redoing to a future state', () => {
+	it('allows redoing to a future state', () => {
 		const initial = {}
 		const hasOneStudent = undoableReducer(initial, {type: INIT_STUDENT, payload: {id: 'xyz'}})
 
@@ -695,7 +695,7 @@ describe('the undoable students reducer', () => {
 		expect(shouldHaveOneStudent.past[0]).to.deep.equal(initial)
 	})
 
-	it('should only hold 9 previous states', () => {
+	it('only holds 9 previous states', () => {
 		const initial = {}
 
 		let state = initial

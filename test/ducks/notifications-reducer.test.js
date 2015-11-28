@@ -12,13 +12,13 @@ import reducer from '../../src/ducks/reducers/notifications'
 
 
 describe('notifications reducer', () => {
-	it('should return the initial state', () => {
+	it('returns the initial state', () => {
 		const expected = []
 		const actual = reducer(undefined, {})
 		expect(actual).to.deep.equal(expected)
 	})
 
-	it('should handle LOG_MESSAGE', () => {
+	it('handles LOG_MESSAGE', () => {
 		const id = 1
 		const message = 'message'
 
@@ -28,7 +28,7 @@ describe('notifications reducer', () => {
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
-	it('should handle LOG_ERROR', () => {
+	it('handles LOG_ERROR', () => {
 		const id = 1
 		const error = new Error('message')
 
@@ -38,7 +38,7 @@ describe('notifications reducer', () => {
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
-	it('should handle REMOVE_NOTIFICATION', () => {
+	it('handles REMOVE_NOTIFICATION', () => {
 		const id = 1
 		const message = 'message'
 
@@ -51,7 +51,7 @@ describe('notifications reducer', () => {
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
-	it('should handle START_PROGRESS', () => {
+	it('handles START_PROGRESS', () => {
 		const id = 1
 		const message = 'message'
 		const value = 0
@@ -64,7 +64,7 @@ describe('notifications reducer', () => {
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
-	it('should handle INCREMENT_PROGRESS', () => {
+	it('handles INCREMENT_PROGRESS', () => {
 		const id = 1
 		const message = 'message'
 		const value = 0
@@ -81,7 +81,7 @@ describe('notifications reducer', () => {
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
-	it('should not let INCREMENT_PROGRESS go past "max"', () => {
+	it('does not let INCREMENT_PROGRESS go past "max"', () => {
 		const id = 1
 		const message = 'message'
 		const value = 0
@@ -98,7 +98,7 @@ describe('notifications reducer', () => {
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
-	it('should allow custom values for INCREMENT_PROGRESS', () => {
+	it('allows custom values for INCREMENT_PROGRESS', () => {
 		const id = 1
 		const message = 'message'
 		const value = 5
@@ -115,7 +115,7 @@ describe('notifications reducer', () => {
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
-	it('should not mutate the progress item during INCREMENT_PROGRESS', () => {
+	it('does not mutate the progress item during INCREMENT_PROGRESS', () => {
 		const id = 1
 		const notification = {id, message: '', value: 0, max: 1, showButton: true}
 

@@ -17,7 +17,7 @@ import {
 } from '../../src/ducks/constants/notifications'
 
 describe('removeNotification action', () => {
-	it('should create an action to remove a notification', () => {
+	it('creates an action to remove a notification', () => {
 		const id = 1
 		const expectedAction = {
 			type: REMOVE_NOTIFICATION,
@@ -29,7 +29,7 @@ describe('removeNotification action', () => {
 })
 
 describe('logMessage action', () => {
-	it('should create an action to log a message', () => {
+	it('creates an action to log a message', () => {
 		const id = 1
 		const message = 'Message!'
 		const expectedAction = {
@@ -42,7 +42,7 @@ describe('logMessage action', () => {
 })
 
 describe('logError action', () => {
-	it('should create an action to log an error', () => {
+	it('creates an action to log an error', () => {
 		const id = 1
 		const error = new Error('message!')
 		const expectedAction = {
@@ -77,7 +77,7 @@ describe('logError action', () => {
 })
 
 describe('startProgress action', () => {
-	it('should create an action to begin a progress-bar', () => {
+	it('creates an action to begin a progress-bar', () => {
 		const id = 1
 		const message = 'message'
 		const expectedAction = {
@@ -120,7 +120,7 @@ describe('startProgress action', () => {
 })
 
 describe('incrementProgress action', () => {
-	it('should create an action to increment a progress-bar', () => {
+	it('creates an action to increment a progress-bar', () => {
 		const id = 1
 		const expectedAction = {
 			type: INCREMENT_PROGRESS,
@@ -130,7 +130,7 @@ describe('incrementProgress action', () => {
 		expect(incrementProgress(id)).to.deep.equal(expectedAction)
 	})
 
-	it('can increment their progress by an arbitrary amount', () => {
+	it('increments their progress by an arbitrary amount', () => {
 		const id = 1
 		const by = 10
 		const expectedAction = {
