@@ -1,15 +1,11 @@
 import React from 'react'
 import {render} from 'react-dom'
-import Notifications from '../screens/notifications'
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
-import gobbldygookApp from '../ducks/reducer'
+import configureStore from '../ducks/store/configure-store'
+import Root from '../containers/Root'
 
-const store = createStore(gobbldygookApp)
+const store = configureStore()
 
 render(
-	<Provider store={store}>
-		<Notifications />
-	</Provider>,
-	document.getElementById('notifications')
+	<Root store={store} />,
+	document.getElementById('app')
 )

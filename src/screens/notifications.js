@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 
+import map from 'lodash/collection/map'
 import {connect} from 'react-redux'
 import {removeNotification} from '../ducks/actions/notifications'
 
@@ -24,12 +25,11 @@ export class Notifications extends Component {
 	render() {
 		return (
 			<ul className='notification-list'>
-				{this.props.notifications.map(n =>
+				{map(this.props.notifications, n =>
 					<Notification {...n}
 						key={n.id}
 						onClick={id => this.props.dispatch(removeNotification(id))}
-					/>)
-				.toArray()}
+					/>)}
 			</ul>
 		)
 	}
