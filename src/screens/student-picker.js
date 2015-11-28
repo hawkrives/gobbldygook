@@ -1,9 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import DropZone from 'react-dropzone'
 import forEach from 'lodash/collection/forEach'
-import filter from 'lodash/collection/filter'
-
-import studentActions from '../flux/student-actions'
 
 import Toolbar from '../components/toolbar'
 import Button from '../components/button'
@@ -14,11 +11,16 @@ import './student-picker.scss'
 
 export default class StudentPicker extends Component {
 	static propTypes = {
-		students: PropTypes.object,
+		actions: PropTypes.objectOf(PropTypes.func).isRequired,
+		students: PropTypes.shape({ // a history object!
+			past: PropTypes.arrayOf(PropTypes.object),
+			present: PropTypes.object,
+			future: PropTypes.arrayOf(PropTypes.object),
+		}),
 	}
 
-	constructor(props) {
-		super(props)
+	constructor() {
+		super()
 
 		// since we are starting off without any data, there is no initial value
 		this.state = {
@@ -28,14 +30,12 @@ export default class StudentPicker extends Component {
 		}
 	}
 
-	handleDrop(files) {
-		files = filter(files, file => file.type === 'application/json' || file.type === 'text/html')
-
+	handleDrop = files => {
 		forEach(files, file => {
 			const reader = new FileReader()
 
 			reader.addEventListener('load', upload => {
-				studentActions.importStudent({
+				this.props.actions.importStudent({
 					data: upload.target.result,
 					type: file.type,
 				})
@@ -58,9 +58,10 @@ export default class StudentPicker extends Component {
 				<DropZone
 					className='import-student'
 					activeClassName='import-student-active'
-					onDrop={this.handleDrop}>
+					onDrop={this.handleDrop}
+				>
 					<p>
-						<button>Choose File</button> or drop a student file here to import it.
+						<button>Choose a File</button> or drop a student file here to import it.
 					</p>
 				</DropZone>
 
@@ -84,7 +85,7 @@ export default class StudentPicker extends Component {
 						</Button>
 
 						<Button className='student-list--button'
-							onClick={studentActions.initStudent}>
+							onClick={this.props.actions.initStudent}>
 							<Icon name='plus' type='inline' />{' '}
 							New Student
 						</Button>
