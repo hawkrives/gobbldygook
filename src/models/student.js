@@ -199,7 +199,7 @@ export function removeOverrideFromStudent(student, key) {
 
 
 export function addFabricationToStudent(student, fabrication) {
-	let fabrications = {...student.fabrications, [fabrication.id]: fabrication}
+	let fabrications = {...student.fabrications, [fabrication.clbid]: fabrication}
 	return {...student, fabrications}
 }
 
