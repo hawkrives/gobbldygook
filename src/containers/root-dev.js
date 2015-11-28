@@ -2,8 +2,8 @@ import React, { Component, PropTypes, cloneElement } from 'react'
 import {Provider} from 'react-redux'
 
 import DevTools from './devtools'
-import App from './app'
-import Notifications from './notifications'
+import App from '../screens/app'
+import Notifications from '../screens/notifications'
 
 export default class Root extends Component {
 	static propTypes = {
