@@ -379,19 +379,35 @@ describe('addCourseToSchedule', () => {
 	})
 })
 
-// describe('removeCourseFromSchedule', () => {
-// 	it('supports removing a course', () => {
-// 		let removedCourse = removeCourseFromSchedule(sched, 123)
-// 		expect(removedCourse.clbids).not.to.contain(123)
-// 	})
+describe('removeCourseFromSchedule', () => {
+	let sched, stu
+	beforeEach(() => {
+		sched = Schedule({clbids: [123]})
+		stu = addScheduleToStudent(Student(), sched)
+	})
 
-// 	it('refuses to remove non-number clbids', () => {
-// 		expect(() => removeCourseFromSchedule(sched, '918')).to.throw(TypeError)
-// 	})
+	it('supports removing a course', () => {
+		let removedCourse = removeCourseFromSchedule(stu, sched.id, 123)
+		expect(removedCourse.schedules[sched.id].clbids).not.to.contain(123)
+	})
 
-// 	it('returns a new object', () => {})
-// 	it('returns the same student if the clbid does not exist in the schedule', () => {})
-// })
+	it('refuses to remove non-number clbids', () => {
+		expect(() => removeCourseFromSchedule(stu, sched.id, '918')).to.throw(TypeError)
+	})
+
+	it('returns a new object', () => {
+		let actual = removeCourseFromSchedule(stu, sched.id, 123)
+		expect(actual).to.not.equal(stu)
+		expect(actual.schedules[sched.id]).to.not.equal(stu.schedules[sched.id])
+		expect(actual.schedules[sched.id]).to.not.equal(sched)
+	})
+
+	it('returns the same student if the clbid does not exist in the schedule', () => {
+		let sched = Schedule({clbids: []})
+		let stu = addScheduleToStudent(Student(), sched)
+		expect(removeCourseFromSchedule(stu, sched.id, 123)).to.equal(stu)
+	})
+})
 
 // describe('reorderCourseInSchedule', () => {
 // 	it('supports rearranging courses', () => {
