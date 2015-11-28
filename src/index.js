@@ -18,8 +18,7 @@ import {render} from 'react-dom'
 import './start/analytics'
 
 // Set up a "history" object for react-router
-import createHashHistory from 'history/lib/createHashHistory'
-const history = createHashHistory()
+import history from './history'
 
 // Kick off data loading
 import loadData from './helpers/load-data'
