@@ -1,6 +1,5 @@
 import clone from 'lodash/lang/clone'
 import contains from 'lodash/collection/contains'
-import find from 'lodash/collection/find'
 import findIndex from 'lodash/array/findIndex'
 import findKey from 'lodash/object/findKey'
 import isArray from 'lodash/lang/isArray'
@@ -99,6 +98,10 @@ export function destroyScheduleFromStudent(student, scheduleId) {
 		throw new TypeError('destroyScheduleFromStudent: schedules must not be an array!')
 	}
 
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
+	}
+
 	const deadSched = student.schedules[scheduleId]
 	const schedules = omit(student.schedules, [scheduleId])
 
@@ -122,10 +125,11 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 		throw new TypeError('addCourse(): clbid must be a number')
 	}
 
-	let schedule = clone(find(student.schedules, {id: scheduleId}))
-	if (!schedule) {
+	if (!(scheduleId in student.schedules)) {
 		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
 	}
+
+	let schedule = clone(student.schedules[scheduleId])
 
 	// If the schedule already has the course we're adding, just return the student
 	if (contains(schedule.clbids, clbid)) {
@@ -144,11 +148,11 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 		throw new TypeError('removeCourse(): clbid must be a number')
 	}
 
-	let schedule = clone(find(student.schedules, {id: scheduleId}))
-
-	if (!schedule) {
+	if (!(scheduleId in student.schedules)) {
 		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
 	}
+
+	let schedule = clone(student.schedules[scheduleId])
 
 	// If the schedule doesn't have the course we're removing, just return the student
 	if (!contains(schedule.clbids, clbid)) {
@@ -236,10 +240,11 @@ export function moveScheduleInStudent(student, scheduleId, {year, semester}={}) 
 		throw new TypeError('moveScheduleInStudent: semester must be a number.')
 	}
 
-	let schedule = clone(find(student.schedules, {id: scheduleId}))
-	if (!schedule) {
+	if (!(scheduleId in student.schedules)) {
 		throw new ReferenceError(`moveScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`)
 	}
+
+	let schedule = clone(student.schedules[scheduleId])
 
 	if (isNumber(year)) {
 		schedule.year = year
@@ -252,22 +257,20 @@ export function moveScheduleInStudent(student, scheduleId, {year, semester}={}) 
 }
 
 export function reorderScheduleInStudent(student, scheduleId, index) {
-	let old = find(student.schedules, {id: scheduleId})
-	if (!old) {
-		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`reorderScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`)
 	}
 
-	let schedule = {...old, index: index}
+	let schedule = {...student.schedules[scheduleId], index: index}
 	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
 export function renameScheduleInStudent(student, scheduleId, title) {
-	let old = find(student.schedules, {id: scheduleId})
-	if (!old) {
-		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`renameScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`)
 	}
 
-	let schedule = {...old, title: title}
+	let schedule = {...student.schedules[scheduleId], title: title}
 	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
@@ -276,10 +279,11 @@ export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
 		throw new TypeError('reorderCourse(): clbid must be a number')
 	}
 
-	let schedule = clone(find(student.schedules, {id: scheduleId}))
-	if (!schedule) {
-		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`reorderCourseInSchedule: Could not find a schedule with an ID of "${scheduleId}".`)
 	}
+
+	let schedule = clone(student.schedules[scheduleId])
 
 	const oldIndex = findIndex(schedule.clbids, id => id === clbid)
 
