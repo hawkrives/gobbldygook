@@ -104,7 +104,7 @@
     "file-loader": "0.8.5",
     "glob": "6.0.1",
     "graceful-fs": "4.1.2",
-    "isparta": "3.5.3",
+    "isparta": "4.0.0",
     "js-beautify": "1.5.10",
     "json-loader": "0.5.4",
     "junk": "1.0.2",
