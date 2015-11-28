@@ -75,6 +75,7 @@ export function StudentPicker(props) {
 			</div>
 
 			<StudentList
+				actions={actions}
 				filter={filterText}
 				isEditing={isEditing}
 				sortBy={sortBy}
