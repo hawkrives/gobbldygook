@@ -78,16 +78,16 @@ describe('Student', () => {
 describe('addFabricationToStudent', () => {
 	it('supports adding fabrications', () => {
 		const stu = Student()
-		let addedFabrication = addFabricationToStudent(stu, {id: 'a'})
-		expect(addedFabrication.fabrications['a']).to.deep.equal({id: 'a'})
+		let addedFabrication = addFabricationToStudent(stu, {clbid: '123'})
+		expect(addedFabrication.fabrications['123']).to.deep.equal({clbid: '123'})
 	})
 })
 
 describe('removeFabricationFromStudent', () => {
 	it('supports removing fabrications', () => {
 		const stu = Student(demoStudent)
-		let addedFabrication = addFabricationToStudent(stu, {id: 'a'})
-		let noMoreFabrication = removeFabricationFromStudent(addedFabrication, 'a')
+		let addedFabrication = addFabricationToStudent(stu, {clbid: '123'})
+		let noMoreFabrication = removeFabricationFromStudent(addedFabrication, '123')
 		expect(noMoreFabrication.fabrications.hasOwnProperty('a')).to.be.false
 	})
 })
@@ -131,7 +131,7 @@ describe('removeAreaFromStudent', () => {
 describe('moveCourseToSchedule', () => {
 	it('supports moving courses between schedules in one-ish operation', () => {
 		const stu = Student(demoStudent)
-		let movedCourse = moveCourseToSchedule(stu, '1', '2', 82908)
+		let movedCourse = moveCourseToSchedule(stu, {fromScheduleId: '1', toScheduleId: '2', clbid: 82908})
 		expect(movedCourse.schedules['1'].clbids).to.not.include(82908)
 		expect(movedCourse.schedules['2'].clbids).to.include(82908)
 	})
@@ -317,21 +317,37 @@ describe('moveScheduleInStudent', () => {
 	})
 })
 
-// describe('reorderScheduleInStudent', () => {
-// 	it('changes the "index" property', () => {
-// 		let newOrder = reorderScheduleInStudent(sched, 5)
-// 		expect(newOrder.index).to.equal(5)
-// 	})
-// 	it('returns a new object', () => {})
-// })
+describe('reorderScheduleInStudent', () => {
+	it('changes the "index" property', () => {
+		let sched = Schedule({index: 0})
+		let stu = {schedules: {[sched.id]: sched}}
+		let newOrder = reorderScheduleInStudent(stu, sched.id, 5)
+		expect(newOrder.schedules[sched.id].index).to.equal(5)
+	})
+	it('returns a new object', () => {
+		let sched = Schedule({index: 0})
+		let stu = {schedules: {[sched.id]: sched}}
+		let newOrder = reorderScheduleInStudent(stu, sched.id, 5)
+		expect(newOrder).to.not.equal(stu)
+		expect(newOrder.schedules[sched.id]).to.not.equal(sched)
+	})
+})
 
-// describe('renameScheduleInStudent', () => {
-// 	it('renames the schedule', () => {
-// 		let newName = renameScheduleInStudent(sched, 'My New Title')
-// 		expect(newName.title).to.equal('My New Title')
-// 	})
-// 	it('returns a new object', () => {})
-// })
+describe('renameScheduleInStudent', () => {
+	it('renames the schedule', () => {
+		let sched = Schedule({title: 'Initial Title'})
+		let stu = {schedules: {[sched.id]: sched}}
+		let newOrder = renameScheduleInStudent(stu, sched.id, 'My New Title')
+		expect(newOrder.schedules[sched.id].title).to.equal('My New Title')
+	})
+	it('returns a new object', () => {
+		let sched = Schedule({title: 'Initial Title'})
+		let stu = {schedules: {[sched.id]: sched}}
+		let newOrder = renameScheduleInStudent(stu, sched.id, 'My New Title')
+		expect(newOrder).to.not.equal(stu)
+		expect(newOrder.schedules[sched.id]).to.not.equal(sched)
+	})
+})
 
 describe('addCourseToSchedule', () => {
 	let sched, stu
