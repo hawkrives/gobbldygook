@@ -102,7 +102,7 @@ var config = {
 		}),
 
 		new webpack.DefinePlugin({
-			VERSION: String(pkg.version),
+			VERSION: JSON.stringify(pkg.version),
 			DEV: isDev,
 		}),
 	],
