@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import DropZone from 'react-dropzone'
 import forEach from 'lodash/collection/forEach'
+import noop from 'lodash/utility/noop'
 
 import Toolbar from '../components/toolbar'
 import Button from '../components/button'
@@ -9,9 +10,96 @@ import StudentList from '../components/student-list'
 
 import './student-picker.scss'
 
-export default class StudentPicker extends Component {
+export function StudentPicker(props) {
+	const {
+		actions,
+		students,
+		onSortChange,
+		sortBy,
+		onGroupChange,
+		groupBy,
+		onFilterChange,
+		filterText,
+		onDrop,
+		onToggleEditing,
+		isEditing,
+	} = props
+
+	return (
+		<div className='students-overview'>
+			<heading className='app-title'>
+				<h1>Gobbldygook</h1>
+				<h2>A Course Scheduling Helper</h2>
+			</heading>
+
+			<DropZone
+				className='import-student'
+				activeClassName='import-student-active'
+				onDrop={onDrop}
+			>
+				<p>
+					<button>Choose a File</button> or drop a student file here to import it.
+				</p>
+			</DropZone>
+
+			<div className='student-list-toolbar'>
+				<Toolbar className='student-list-buttons'>
+					<Button className='student-list--button' onClick={onSortChange}>
+						<Icon name='funnel' type='inline' />{' '}
+						Sort by: {sortBy}
+					</Button>
+
+					<Button className='student-list--button' onClick={onGroupChange}>
+						<Icon name='folder' type='inline' />{' '}
+						Group by: {groupBy}
+					</Button>
+
+					<Button className='student-list--button' onClick={onToggleEditing}>
+						<Icon name='navicon' type='inline' />{' '}
+						Edit List
+					</Button>
+
+					<Button className='student-list--button' onClick={actions.initStudent}>
+						<Icon name='plus' type='inline' />{' '}
+						New Student
+					</Button>
+				</Toolbar>
+
+				<input
+					type='search'
+					className='student-list-filter'
+					placeholder='Filter students'
+					value={filterText}
+					onChange={onFilterChange}
+				/>
+			</div>
+
+			<StudentList
+				filter={filterText}
+				isEditing={isEditing}
+				sortBy={sortBy}
+				students={students}
+			/>
+		</div>
+	)
+}
+StudentPicker.propTypes = {
+	actions: PropTypes.object.isRequired,
+	filterText: PropTypes.string.isRequired,
+	groupBy: PropTypes.string.isRequired,
+	isEditing: PropTypes.bool.isRequired,
+	onDrop: PropTypes.func.isRequired,
+	onFilterChange: PropTypes.func.isRequired,
+	onGroupChange: PropTypes.func.isRequired,
+	onSortChange: PropTypes.func.isRequired,
+	onToggleEditing: PropTypes.func.isRequired,
+	sortBy: PropTypes.string.isRequired,
+	students: PropTypes.object.isRequired,
+}
+
+export default class StudentPickerContainer extends Component {
 	static propTypes = {
-		actions: PropTypes.objectOf(PropTypes.func).isRequired,
+		actions: PropTypes.objectOf(PropTypes.func),
 		students: PropTypes.shape({ // a history object!
 			past: PropTypes.arrayOf(PropTypes.object),
 			present: PropTypes.object,
@@ -24,13 +112,14 @@ export default class StudentPicker extends Component {
 
 		// since we are starting off without any data, there is no initial value
 		this.state = {
-			studentFilter: '',
+			filterText: '',
 			isEditing: false,
 			sortBy: 'modified',
+			groupBy: 'nothing',
 		}
 	}
 
-	handleDrop = files => {
+	onDrop = files => {
 		forEach(files, file => {
 			const reader = new FileReader()
 
@@ -45,67 +134,37 @@ export default class StudentPicker extends Component {
 		})
 	}
 
+	onFilterChange = ev => {
+		this.setState({filterText: ev.target.value.toLowerCase()})
+	}
+
+	onGroupChange = () => {
+		noop()
+	}
+
+	onSortChange = () => {
+		this.setState({sortBy: this.state.sortBy === 'modified' ? 'name' : 'modified'})
+	}
+
+	onToggleEditing = () => {
+		this.setState({isEditing: !this.state.isEditing})
+	}
+
 	render() {
 		// console.log('StudentPicker#render')
 		return (
-			<div className='students-overview'>
-				<heading className='app-title'>
-					{/*<OleLion />*/}
-					<h1>Gobbldygook</h1>
-					<h2>A Course Scheduling Helper</h2>
-				</heading>
-
-				<DropZone
-					className='import-student'
-					activeClassName='import-student-active'
-					onDrop={this.handleDrop}
-				>
-					<p>
-						<button>Choose a File</button> or drop a student file here to import it.
-					</p>
-				</DropZone>
-
-				<div className='student-list-toolbar'>
-					<Toolbar className='student-list-buttons'>
-						<Button className='student-list--button'
-							onClick={() => this.setState({sortBy: this.state.sortBy === 'modified' ? 'name' : 'modified'})}>
-							<Icon name='funnel' type='inline' />{' '}
-							Sort by: {this.state.sortBy}
-						</Button>
-
-						<Button className='student-list--button'>
-							<Icon name='folder' type='inline' />{' '}
-							Group by: {'nothing'}
-						</Button>
-
-						<Button className='student-list--button'
-							onClick={() => this.setState({isEditing: !this.state.isEditing})}>
-							<Icon name='navicon' type='inline' />{' '}
-							Edit List
-						</Button>
-
-						<Button className='student-list--button'
-							onClick={this.props.actions.initStudent}>
-							<Icon name='plus' type='inline' />{' '}
-							New Student
-						</Button>
-					</Toolbar>
-
-					<input
-						type='search'
-						className='student-list-filter'
-						placeholder='Filter students'
-						onChange={ev => this.setState({studentFilter: ev.target.value.toLowerCase()})}
-					/>
-				</div>
-
-				<StudentList
-					filter={this.state.studentFilter}
-					isEditing={this.state.isEditing}
-					sortBy={this.state.sortBy}
-					students={this.props.students}
-				/>
-			</div>
+			<StudentPicker
+				{...this.props}
+				filterText={this.state.filterText}
+				groupBy={this.state.groupBy}
+				isEditing={this.state.isEditing}
+				onDrop={this.onDrop}
+				onFilterChange={this.onFilterChange}
+				onGroupChange={this.onGroupChange}
+				onSortChange={this.onSortChange}
+				onToggleEditing={this.onToggleEditing}
+				sortBy={this.state.sortBy}
+			/>
 		)
 	}
 }
