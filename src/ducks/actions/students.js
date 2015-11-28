@@ -1,6 +1,9 @@
 import reject from 'lodash/collection/reject'
 import forEach from 'lodash/collection/forEach'
 import range from 'lodash/utility/range'
+import map from 'lodash/collection/map'
+import uniq from 'lodash/array/uniq'
+import last from 'lodash/array/last'
 import serializeError from 'serialize-error'
 
 import Student, {saveStudent, addScheduleToStudent} from '../../models/student'
@@ -8,6 +11,7 @@ import Schedule from '../../models/schedule'
 import Study from '../../models/study'
 
 import {
+	LOAD_STUDENTS,
 	INIT_STUDENT,
 	IMPORT_STUDENT,
 	DESTROY_STUDENT,
@@ -35,6 +39,48 @@ import {
 	ADD_FABRICATION,
 	REMOVE_FABRICATION,
 } from '../constants/students'
+
+
+export async function loadStudents() {
+	// Get the list of students we know about, or the string 'null',
+	// if localStorage doesn't have the key 'studentIds'.
+	let studentIds = uniq(JSON.parse(localStorage.getItem('studentIds')) || [])
+
+	// pull the students from localStorage
+	const studentIdPairs = map(studentIds, id => [id, localStorage.getItem(id)])
+
+	// Remove any broken students from localStorage
+	forEach(studentIdPairs, ([id, rawStudent]) => {
+		if (rawStudent === '[object Object]') {
+			localStorage.removeItem(id)
+		}
+		return rawStudent
+	})
+
+	// take the array of [id,student] pairs and just grab the students
+	const rawStudents = map(studentIdPairs, last)
+
+	// filter out any that don't exist and/or are just plain bad
+	const validStudents = reject(rawStudents, rawStudent => (
+		rawStudent === null || rawStudent === '[object Object]'))
+
+	const students = map(validStudents, rawStudent => {
+		// basicStudent defaults to an empty object so that the constructor
+		// has something to build from.
+		let basicStudent = {}
+
+		try {
+			basicStudent = JSON.parse(rawStudent)
+		}
+		catch (e) {
+			console.error(e)
+		}
+
+		return basicStudent
+	})
+
+	return { type: LOAD_STUDENTS, payload: students }
+}
 
 
 export function initStudent() {

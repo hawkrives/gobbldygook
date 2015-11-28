@@ -1,10 +1,12 @@
 /* globals module */
-import { createStore, compose } from 'redux'
+import { applyMiddleware, createStore, compose } from 'redux'
 import { persistState } from 'redux-devtools'
+import promiseMiddleware from 'redux-promise'
 import rootReducer from '../reducers/root'
 import DevTools from '../../containers/devtools'
 
 const finalCreateStore = compose(
+	applyMiddleware(promiseMiddleware),
 	DevTools.instrument(),
 	persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore)

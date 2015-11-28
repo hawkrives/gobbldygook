@@ -1,5 +1,7 @@
 import undoable from 'redux-undo'
 import omit from 'lodash/object/omit'
+import map from 'lodash/collection/map'
+import zipObject from 'lodash/array/zipObject'
 
 import {
 	changeStudentName,
@@ -26,6 +28,7 @@ import {
 } from '../../models/student'
 
 import {
+	LOAD_STUDENTS,
 	INIT_STUDENT,
 	IMPORT_STUDENT,
 	DESTROY_STUDENT,
@@ -61,6 +64,10 @@ export function reducer(state = initialState, action) {
 	const {type, payload, error} = action
 
 	switch (type) {
+		case LOAD_STUDENTS: {
+			return zipObject(map(payload, student => [student.id, student]))
+		}
+
 		case INIT_STUDENT:
 		case IMPORT_STUDENT: {
 			if (error) {

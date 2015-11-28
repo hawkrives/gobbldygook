@@ -1,3 +1,4 @@
+export const LOAD_STUDENTS = 'gobbldygook/students/LOAD_STUDENTS'
 export const INIT_STUDENT = 'gobbldygook/students/INIT_STUDENT'
 export const IMPORT_STUDENT = 'gobbldygook/students/IMPORT_STUDENT'
 export const DESTROY_STUDENT = 'gobbldygook/students/DESTROY_STUDENT'
