@@ -15,6 +15,11 @@ const initialState = []
 export default function reducer(state = initialState, action) {
 	const {type, payload} = action
 
+	if (payload && type !== REMOVE_NOTIFICATION && findIndex(state, {id: payload.id}) >= 0) {
+		console.error(`cannot add a second notification with an existing id "${payload.id}"`)
+		return state
+	}
+
 	switch (type) {
 		case LOG_MESSAGE: {
 			return [...state, {
