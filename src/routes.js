@@ -1,15 +1,15 @@
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 
-import Gobbldygook from '../screens/gobbldygook'
-// import AreaEditor from '../screens/area-editor'
-import CourseTable from '../screens/course-table'
-import CreateStudent from '../screens/create-student'
-import DownloadStudent from '../screens/download-student'
-import NewStudentWizard from '../screens/new-student-wizard'
-import SemesterDetail from '../screens/semester-detail'
-import Student from '../screens/student'
-import StudentPicker from '../screens/student-picker'
+import App from './screens/app'
+// import AreaEditor from './screens/area-editor'
+import CourseTable from './screens/course-table'
+import CreateStudent from './screens/create-student'
+import DownloadStudent from './screens/download-student'
+import NewStudentWizard from './screens/new-student-wizard'
+import SemesterDetail from './screens/semester-detail'
+import Student from './screens/student'
+import StudentPicker from './screens/student-picker'
 
 // /
 // /s/122932
@@ -17,7 +17,7 @@ import StudentPicker from '../screens/student-picker'
 // /s/122932/semester/2014/fall?search=dept:NOT+dept:AMCON+dept:GCON+gened:HBS
 
 export default (
-	<Route component={Gobbldygook} path='/'>
+	<Route component={App} path='/'>
 		<IndexRoute component={StudentPicker} />
 		<Route component={CreateStudent} path='create-student/' />
 		{/*<Redirect from='s/' to='/' />*/}

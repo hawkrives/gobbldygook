@@ -21,6 +21,7 @@ export default class SemesterDetail extends Component {
 	}
 
 	constructor() {
+		super()
 		this.state = {
 			year: null,
 			semester: null,
