@@ -201,5 +201,8 @@ export default undoable(reducer, {
 		)
 	},
 
-	initialState: undefined,
+	// treat LOAD_STUDENTS as the beginning of history
+	initTypes: ['@@redux/INIT', '@@INIT', LOAD_STUDENTS],
+
+	initialState: initialState,
 })
