@@ -192,8 +192,7 @@ export function setOverrideOnStudent(student, key, value) {
 }
 
 export function removeOverrideFromStudent(student, key) {
-	let overrides = {...student.overrides}
-	delete overrides[key]
+	let overrides = omit(student.overrides, [key])
 	return {...student, overrides}
 }
 
@@ -213,8 +212,7 @@ export function removeFabricationFromStudent(student, fabricationId) {
 	if (typeof fabricationId !== 'string') {
 		throw new TypeError(`removeCourseFromSchedule: clbid must be a string`)
 	}
-	let fabrications = {...student.fabrications}
-	delete fabrications[fabricationId]
+	let fabrications = omit(student.fabrications, [fabricationId])
 	return {...student, fabrications}
 }
 
