@@ -74,6 +74,8 @@ export default class StudentList extends Component {
 	static defaultProps = {
 		isEditing: false,
 		filter: '',
+		students: {},
+		actions: {},
 	}
 
 	render() {
