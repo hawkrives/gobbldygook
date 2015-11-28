@@ -423,3 +423,5 @@ describe('removeFabrication action', () => {
 		})
 	})
 })
+
+mock.stopAll()
