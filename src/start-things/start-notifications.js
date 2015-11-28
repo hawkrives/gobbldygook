@@ -1,7 +1,7 @@
 import React from 'react'
 import {render} from 'react-dom'
 import configureStore from '../ducks/store/configure-store'
-import Root from '../containers/Root'
+import Root from '../containers/root'
 
 const store = configureStore()
 
