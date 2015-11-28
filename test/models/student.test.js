@@ -98,6 +98,8 @@ describe('setOverrideOnStudent', () => {
 		let addedOverride = setOverrideOnStudent(stu, 'nothing', 'me!')
 		expect(addedOverride.overrides['nothing']).to.equal('me!')
 	})
+
+	it('will set overrides to falsy values if asked')
 })
 
 describe('removeOverrideFromStudent', () => {
@@ -387,4 +389,6 @@ describe('addCourseToSchedule', () => {
 // 	})
 
 // 	it('returns a new object', () => {})
+
+// 	it('requires that the new index be within the boundaries of the clbids list')
 // })
