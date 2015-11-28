@@ -9,8 +9,6 @@ import sortBy from 'lodash/collection/sortBy'
 import interpose from '../helpers/interpose'
 import fuzzysearch from 'fuzzysearch'
 
-import studentActions from '../flux/student-actions'
-
 import AvatarLetter from './avatar-letter'
 import Button from './button'
 import List from './list'
@@ -20,6 +18,7 @@ import './student-list.scss'
 
 class StudentListItem extends Component {
 	static propTypes = {
+		actions: PropTypes.objectOf(PropTypes.func).isRequired,
 		isEditing: PropTypes.bool,
 		student: PropTypes.object.isRequired,
 	}
@@ -30,14 +29,14 @@ class StudentListItem extends Component {
 
 	deleteStudent = ev => {
 		ev.preventDefault()
-		studentActions.destroyStudent(this.props.student.id)
+		this.props.actions.destroyStudent(this.props.student.id)
 	}
 
 	render() {
 		// console.log('StudentListItem#render')
-		const student = this.props.student
+		const { student, isEditing } = this.props
 		const groupedStudies = groupBy(student.studies, s => s.type)
-		return (<span>
+		return (
 			<Link className='student-list-item' to={`/s/${student.id}/`}>
 				<AvatarLetter value={student.name} />
 				<span className='student-list-item-info'>
@@ -51,20 +50,21 @@ class StudentListItem extends Component {
 					</div>
 				</span>
 				<span className='student-list-item-actions'>
-					{this.props.isEditing &&
+					{isEditing &&
 					<Button className='delete' type='raised' onClick={this.deleteStudent}>
 						Delete
 					</Button>}
 				</span>
 				<Icon className='student-list-item--go' name='ios-arrow-forward' />
 			</Link>
-		</span>)
+		)
 	}
 }
 
 
 export default class StudentList extends Component {
 	static propTypes = {
+		actions: PropTypes.objectOf(PropTypes.func).isRequired,
 		filter: PropTypes.string,
 		isEditing: PropTypes.bool,
 		sortBy: PropTypes.oneOf(['modified', 'name']),
@@ -83,17 +83,21 @@ export default class StudentList extends Component {
 			sortProp = 'name'
 		}
 
+		const { filter: filterText, isEditing, actions } = this.props
+		const students = this.props.students.present
+
 		const studentObjects = map(
 				sortBy(
 					filter(
-						values(this.props.students),
-						s => fuzzysearch(this.props.filter, s.name.toLowerCase())),
+						values(students),
+						s => fuzzysearch(filterText, s.name.toLowerCase())),
 					s => s[sortProp]),
 				student =>
 					<StudentListItem
 						key={student.id}
 						student={student}
-						isEditing={this.props.isEditing}
+						actions={actions}
+						isEditing={isEditing}
 					/>
 			)
 
