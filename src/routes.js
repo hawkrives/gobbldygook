@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, IndexRoute} from 'react-router'
+import { Route, IndexRoute, Redirect } from 'react-router'
 
 import App from './screens/app'
 // import AreaEditor from './screens/area-editor'
@@ -9,7 +9,8 @@ import App from './screens/app'
 // import NewStudentWizard from './screens/new-student-wizard'
 // import SemesterDetail from './screens/semester-detail'
 // import Student from './screens/student'
-// import StudentPicker from './screens/student-picker'
+import Degub from './components/degub'
+import StudentPicker from './screens/student-picker'
 
 // /
 // /s/122932
@@ -18,8 +19,10 @@ import App from './screens/app'
 
 export default (
 	<Route component={App} path='/'>
-		{/*<IndexRoute component={StudentPicker} />
-		<Route component={CreateStudent} path='create-student/' />
+		<IndexRoute component={StudentPicker} />
+		<Route component={Degub} path='degub' />
+		<Redirect from='debug' to='degub' />
+		{/*<Route component={CreateStudent} path='create-student/' />
 		<Route component={Student} path='s/:id/'>
 			<IndexRoute component={CourseTable} />
 			{//<Route component={AreaEditor} path='edit-area' />}

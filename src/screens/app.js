@@ -14,7 +14,7 @@ import '../index.scss'
 export class App extends Component {
 	static propTypes = {
 		actions: PropTypes.objectOf(PropTypes.func).isRequired,
-		areas: PropTypes.array,
+		areas: PropTypes.array.isRequired,
 		children: PropTypes.node,
 		students: PropTypes.shape({ // a history object!
 			past: PropTypes.arrayOf(PropTypes.object),
@@ -26,23 +26,11 @@ export class App extends Component {
 	render() {
 		return (
 			<DocumentTitle title='Gobbldygook'>
-				<div>
-					<div>Here!</div>
-					<button disabled={this.props.students.past.length === 0} onClick={this.props.actions.undo}>Undo</button>
-					<button disabled={this.props.students.future.length === 0} onClick={this.props.actions.redo}>Redo</button>
-					<ul>
-						{map(this.props.students.present, (s, i) =>
-							<li key={i}>{s.id} {s.name}</li>)}
-					</ul>
-					<ul>
-						{map(this.props.areas, (s, i) =>
-							<li key={i}>{s.name}</li>)}
-					</ul>
-				</div>
-				{/*cloneElement(this.props.children, {
-					allAreas: this.state.allAreas,
+				{cloneElement(this.props.children, {
+					actions: this.props.actions,
+					areas: this.props.areas,
 					students: this.props.students,
-				})*/}
+				})}
 			</DocumentTitle>
 		)
 	}
