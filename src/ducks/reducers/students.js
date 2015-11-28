@@ -1,4 +1,4 @@
-import undoable from 'redux-undo'
+import undoable, {excludeAction as undoableExcludeAction} from 'redux-undo'
 import omit from 'lodash/object/omit'
 import map from 'lodash/collection/map'
 import zipObject from 'lodash/array/zipObject'
@@ -192,5 +192,14 @@ export function reducer(state = initialState, action) {
 export default undoable(reducer, {
 	limit: 10,
 
-	initialState: initialState,
+	filter: (action, currentState, previousState) => {
+		return (
+			// ignore the LOAD_STUDENTS action
+			(action !== LOAD_STUDENTS) &&
+			// *and* don't save histories when nothing has changed.
+			(currentState !== previousState)
+		)
+	},
+
+	initialState: undefined,
 })
