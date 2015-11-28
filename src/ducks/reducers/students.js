@@ -103,13 +103,13 @@ export function reducer(state = initialState, action) {
 			return {...state, [student.id]: student}
 		}
 		case REMOVE_AREA: {
-			const student = removeAreaFromStudent(state[payload.studentId], payload.areaId)
+			const student = removeAreaFromStudent(state[payload.studentId], payload.areaQuery)
 			return {...state, [student.id]: student}
 		}
 		case REMOVE_AREAS: {
 			let student = {...state[payload.studentId]}
-			for (const areaId of payload.areaIds) {
-				student = removeAreaFromStudent(student, areaId)
+			for (const areaQuery of payload.areaQueries) {
+				student = removeAreaFromStudent(student, areaQuery)
 			}
 			return {...state, [student.id]: student}
 		}
