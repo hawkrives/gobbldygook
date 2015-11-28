@@ -14,22 +14,16 @@ export class App extends Component {
 	static propTypes = {
 		actions: PropTypes.objectOf(PropTypes.func).isRequired,
 		areas: PropTypes.array.isRequired,
-		children: PropTypes.node,
-		students: PropTypes.shape({ // a history object!
-			past: PropTypes.arrayOf(PropTypes.object),
-			present: PropTypes.object,
-			future: PropTypes.arrayOf(PropTypes.object),
-		}),
+		canRedo: PropTypes.bool.isRequired,
+		canUndo: PropTypes.bool.isRequired,
+		children: PropTypes.node.isRequired,
+		students: PropTypes.object.isRequired,
 	}
 
 	render() {
 		return (
 			<DocumentTitle title='Gobbldygook'>
-				{cloneElement(this.props.children, {
-					actions: this.props.actions,
-					areas: this.props.areas,
-					students: this.props.students,
-				})}
+				{cloneElement(this.props.children, {...this.props})}
 			</DocumentTitle>
 		)
 	}
@@ -41,7 +35,9 @@ function mapStateToProps(state) {
 	// redux-react will bind it to props.
 	return {
 		areas: state.areas,
-		students: state.students,
+		students: state.students.present,
+		canUndo: state.students.past.length !== 0,
+		canRedo: state.students.future.length !== 0,
 	}
 }
 

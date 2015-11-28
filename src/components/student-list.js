@@ -86,7 +86,7 @@ export default class StudentList extends Component {
 		}
 
 		const { filter: filterText, isEditing, actions } = this.props
-		const students = this.props.students.present
+		const students = this.props.students
 
 		const studentObjects = map(
 				sortBy(

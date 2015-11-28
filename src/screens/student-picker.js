@@ -100,11 +100,7 @@ StudentPicker.propTypes = {
 export default class StudentPickerContainer extends Component {
 	static propTypes = {
 		actions: PropTypes.objectOf(PropTypes.func),
-		students: PropTypes.shape({ // a history object!
-			past: PropTypes.arrayOf(PropTypes.object),
-			present: PropTypes.object,
-			future: PropTypes.arrayOf(PropTypes.object),
-		}),
+		students: PropTypes.object,
 	}
 
 	constructor() {

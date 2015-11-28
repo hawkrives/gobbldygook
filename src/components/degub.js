@@ -2,14 +2,15 @@ import React, { PropTypes } from 'react'
 import map from 'lodash/collection/map'
 import size from 'lodash/collection/size'
 
-export default function Degub({students, areas, actions}) {
-	console.log('degub.render', [size(students), size(areas), size(actions)])
+export default function Degub(props) {
+	const {students, areas, actions, canUndo, canRedo} = props
+	console.log('degub.render', [size(students), size(areas), size(actions), canUndo, canRedo])
 	return (
 		<div>
-			<button disabled={students.past.length === 0} onClick={actions.undo}>Undo</button>
-			<button disabled={students.future.length === 0} onClick={actions.redo}>Redo</button>
+			<button disabled={!canUndo} onClick={actions.undo}>Undo</button>
+			<button disabled={!canRedo} onClick={actions.redo}>Redo</button>
 			<ul>
-				{map(students.present, (s, i) =>
+				{map(students, (s, i) =>
 					<li key={i}>{s.id} {s.name}</li>)}
 			</ul>
 			<ul>
@@ -23,15 +24,15 @@ export default function Degub({students, areas, actions}) {
 Degub.propTypes = {
 	actions: PropTypes.objectOf(PropTypes.func).isRequired,
 	areas: PropTypes.array.isRequired,
-	students: PropTypes.shape({ // a history object!
-		past: PropTypes.arrayOf(PropTypes.object),
-		present: PropTypes.object,
-		future: PropTypes.arrayOf(PropTypes.object),
-	}).isRequired,
+	canRedo: PropTypes.bool.isRequired,
+	canUndo: PropTypes.bool.isRequired,
+	students: PropTypes.object.isRequired,
 }
 
 Degub.defaultProps = {
-	students: {},
-	areas: [],
 	actions: {},
+	areas: [],
+	canRedo: false,
+	canUndo: false,
+	students: {},
 }
