@@ -50,7 +50,7 @@ export default function Student(data) {
 	}
 
 	if (isArray(student.schedules)) {
-		student.schedules = zipObject(map(student.schedules, s => [s.id, s]))
+		student.schedules = zipObject(map(student.schedules, s => [String(s.id), {...s, id: String(s.id)}]))
 	}
 
 	debug(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
