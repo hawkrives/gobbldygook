@@ -12,7 +12,7 @@ import {
 	removeAreaFromStudent,
 	addScheduleToStudent,
 	destroyScheduleFromStudent,
-	moveCourseAcrossSchedules,
+	moveCourseToSchedule,
 	setOverrideOnStudent,
 	removeOverrideFromStudent,
 	addFabricationToStudent,
@@ -155,7 +155,7 @@ export function reducer(state = initialState, action) {
 			return {...state, [student.id]: student}
 		}
 		case MOVE_COURSE: {
-			const student = moveCourseAcrossSchedules(state[payload.studentId], payload.scheduleId, {fromScheduleId: payload.fromScheduleId, toScheduleId: payload.toScheduleId, clbid: payload.clbid})
+			const student = moveCourseToSchedule(state[payload.studentId], {fromScheduleId: payload.fromScheduleId, toScheduleId: payload.toScheduleId, clbid: payload.clbid})
 			return {...state, [student.id]: student}
 		}
 
