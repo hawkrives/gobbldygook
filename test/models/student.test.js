@@ -174,6 +174,8 @@ describe('destroyScheduleFromStudent', () => {
 		let removedSchedule = destroyScheduleFromStudent(stu, sched.id)
 		expect(removedSchedule.schedules[sched.id]).to.be.undefined
 	})
+
+	it('should make another schedule active if there is another schedule available for the same term')
 })
 
 
