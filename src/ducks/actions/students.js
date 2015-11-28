@@ -76,7 +76,9 @@ export async function loadStudents() {
 			console.error(e)
 		}
 
-		return basicStudent
+		let student = Student(basicStudent)
+
+		return student
 	})
 
 	return { type: LOAD_STUDENTS, payload: students }
