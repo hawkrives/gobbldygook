@@ -8,6 +8,8 @@ import Loading from '../components/loading'
 
 import db from '../helpers/db'
 
+import './index.scss'
+
 class GobbldygookApp extends Component {
 	static propTypes = {
 		children: PropTypes.node,

@@ -2,7 +2,6 @@ import './start-things/promises'
 
 // import 'isomorphic-fetch'
 
-import './index.scss'
 
 // import './start-things/bind-keys'
 // import './start-things/analytics'
