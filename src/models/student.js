@@ -85,11 +85,19 @@ export function changeStudentSetting(student, key, value) {
 
 
 export function addScheduleToStudent(student, newSchedule) {
+	if (student.schedules instanceof Array) {
+		throw new TypeError('addScheduleToStudent: schedules must not be an array!')
+	}
+
 	return {...student, schedules: {...student.schedules, [newSchedule.id]: newSchedule}}
 }
 
 export function destroyScheduleFromStudent(student, scheduleId) {
 	debug(`Student.destroySchedule(): removing schedule ${scheduleId}`)
+
+	if (student.schedules instanceof Array) {
+		throw new TypeError('destroyScheduleFromStudent: schedules must not be an array!')
+	}
 
 	const deadSched = student.schedules[scheduleId]
 	const schedules = omit(student.schedules, [scheduleId])
