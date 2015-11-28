@@ -40,7 +40,7 @@ script:
   - npm run lint
   - npm run build:areas
   - npm run test:students
-  - npm run nyc
+  - npm run nyc  # runs mocha with coverage
   - npm run build:ci
 
 after_success: npm run coveralls
