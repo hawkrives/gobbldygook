@@ -54,8 +54,8 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
 	})
-	it('should return a new student and state from INIT_STUDENT')
 	it('should return existing state if INIT_STUDENT has an error', () => {
 		let initialState = {}
 
@@ -77,9 +77,18 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
 	})
-	it('should return a new student and state from IMPORT_STUDENT')
-	it('should return existing state if IMPORT_STUDENT has an error')
+	it('should return existing state if IMPORT_STUDENT has an error', () => {
+		let initialState = {}
+
+		let action = {type: IMPORT_STUDENT, payload: new Error(), error: true}
+
+		let expected = initialState
+		let actual = reducer(initialState, action)
+
+		expect(actual).to.equal(expected)
+	})
 
 	it('should handle DESTROY_STUDENT', () => {
 		let student = {id: 'xyz'}
@@ -91,8 +100,8 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
 	})
-	it('should return a new student and state from DESTROY_STUDENT')
 
 	it('should handle CHANGE_NAME', () => {
 		let student = {id: 'xyz', name: 'first'}
@@ -107,8 +116,9 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
 	})
-	it('should return a new student and state from CHANGE_NAME')
 
 	it('should handle CHANGE_ADVISOR', () => {
 		let student = {id: 'xyz', advisor: 'first'}
@@ -123,8 +133,9 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
 	})
-	it('should return a new student and state from CHANGE_ADVISOR')
 
 	it('should handle CHANGE_CREDITS_NEEDED', () => {
 		let student = {id: 'xyz', creditsNeeded: 30}
@@ -139,8 +150,9 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
 	})
-	it('should return a new student and state from CHANGE_CREDITS_NEEDED')
 
 	it('should handle CHANGE_MATRICULATION', () => {
 		let student = {id: 'xyz', matriculation: 1800}
@@ -155,8 +167,9 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
 	})
-	it('should return a new student and state from CHANGE_MATRICULATION')
 
 	it('should handle CHANGE_GRADUATION', () => {
 		let student = {id: 'xyz', graduation: 30}
@@ -171,8 +184,9 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
 	})
-	it('should return a new student and state from CHANGE_GRADUATION')
 
 	it('should handle CHANGE_SETTING', () => {
 		let student = {id: 'xyz', settings: {name: 'nothing'}}
@@ -188,24 +202,27 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
 	})
-	it('should return a new student and state from CHANGE_SETTING')
 
 	it('should handle ADD_AREA', () => {
 		let student = {id: 'xyz', studies: []}
 		let initialState = {[student.id]: student}
 
+		let area = {name: `I'm an area`}
 		let action = {type: ADD_AREA, payload: {
 			studentId: student.id,
-			area: `I'm an area`,
+			area: area,
 		}}
 
-		let expected = {[student.id]: {...student, studies: [`I'm an area`]}}
+		let expected = {[student.id]: {...student, studies: [{name: `I'm an area`}]}}
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
 	})
-	it('should return a new student and state from ADD_AREA')
 
 	it('should handle REMOVE_AREA', () => {
 		let student = {id: 'xyz', studies: [
@@ -223,8 +240,9 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
 	})
-	it('should return a new student and state from REMOVE_AREA')
 
 	it('should handle REMOVE_AREAS', () => {
 		let student = {id: 'xyz', studies: [
@@ -246,8 +264,9 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
 	})
-	it('should return a new student and state from REMOVE_AREAS')
 
 	it('should handle ADD_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {}}
@@ -262,8 +281,10 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
 	})
-	it('should return a new student and state from ADD_SCHEDULE')
 
 	it('should handle DESTROY_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {
@@ -288,8 +309,10 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
 	})
-	it('should return a new student and state from DESTROY_SCHEDULE')
 
 	it('should handle DESTROY_SCHEDULES', () => {
 		let student = {id: 'xyz', schedules: {
@@ -315,8 +338,10 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
 	})
-	it('should return a new student and state from DESTROY_SCHEDULES')
 
 	it('should handle RENAME_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {
@@ -341,8 +366,11 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
+		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
 	})
-	it('should return a new student and state from RENAME_SCHEDULE')
 
 	it('should handle REORDER_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {
@@ -367,8 +395,11 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
+		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
 	})
-	it('should return a new student and state from REORDER_SCHEDULE')
 
 	it('should handle MOVE_SCHEDULE', () => {
 		let student = {id: 'xyz', schedules: {
@@ -394,8 +425,11 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
+		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
 	})
-	it('should return a new student and state from MOVE_SCHEDULE')
 
 	it('should handle ADD_COURSE', () => {
 		let student = {id: 'xyz', schedules: {
@@ -418,8 +452,12 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
+		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
+		expect(actual['xyz'].schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
 	})
-	it('should return a new student and state from ADD_COURSE')
 
 	it('should handle REMOVE_COURSE', () => {
 		let student = {id: 'xyz', schedules: {
@@ -442,8 +480,12 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
+		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
+		expect(actual['xyz'].schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
 	})
-	it('should return a new student and state from REMOVE_COURSE')
 
 	it('should handle REORDER_COURSE', () => {
 		let student = {id: 'xyz', schedules: {
@@ -467,8 +509,12 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
+		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
+		expect(actual['xyz'].schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
 	})
-	it('should return a new student and state from REORDER_COURSE')
 
 	it('should handle MOVE_COURSE', () => {
 		let student = {id: 'xyz', schedules: {
@@ -497,8 +543,12 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].schedules).to.not.equal(student.schedules)
+		expect(actual['xyz'].schedules['1']).to.not.equal(student.schedules['1'])
+		expect(actual['xyz'].schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
 	})
-	it('should return a new student and state from MOVE_COURSE')
 
 	it('should handle SET_OVERRIDE', () => {
 		let student = {id: 'xyz', overrides: {}}
@@ -514,8 +564,10 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].overrides).to.not.equal(student.overrides)
 	})
-	it('should return a new student and state from SET_OVERRIDE')
 
 	it('should handle REMOVE_OVERRIDE', () => {
 		let student = {id: 'xyz', overrides: {'path.to.override': true}}
@@ -530,8 +582,10 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].overrides).to.not.equal(student.overrides)
 	})
-	it('should return a new student and state from REMOVE_OVERRIDE')
 
 	it('should handle ADD_FABRICATION', () => {
 		let student = {id: 'xyz', fabrications: {}}
@@ -546,8 +600,10 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].fabrications).to.not.equal(student.fabrications)
 	})
-	it('should return a new student and state from ADD_FABRICATION')
 
 	it('should handle REMOVE_FABRICATION', () => {
 		let student = {id: 'xyz', fabrications: {'1': {clbid: '1', something: 'um…'}}}
@@ -562,8 +618,10 @@ describe('students reducer', () => {
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
+		expect(actual).to.not.equal(initialState)
+		expect(actual['xyz']).to.not.equal(student)
+		expect(actual['xyz'].fabrications).to.not.equal(student.fabrications)
 	})
-	it('should return a new student and state from REMOVE_FABRICATION')
 })
 
 
