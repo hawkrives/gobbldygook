@@ -19,6 +19,7 @@ export default function Degub({students, areas, actions}) {
 		</div>
 	)
 }
+
 Degub.propTypes = {
 	actions: PropTypes.objectOf(PropTypes.func).isRequired,
 	areas: PropTypes.array.isRequired,
@@ -26,5 +27,11 @@ Degub.propTypes = {
 		past: PropTypes.arrayOf(PropTypes.object),
 		present: PropTypes.object,
 		future: PropTypes.arrayOf(PropTypes.object),
-	}),
+	}).isRequired,
+}
+
+Degub.defaultProps = {
+	students: {},
+	areas: [],
+	actions: {},
 }
