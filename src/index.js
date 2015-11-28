@@ -35,6 +35,11 @@ import configureStore from './ducks/store/configure-store'
 import Root from './containers/root'
 const store = configureStore()
 
+import { loadStudents } from './ducks/actions/students'
+import { loadAreas } from './ducks/actions/areas'
+store.dispatch(loadStudents())
+store.dispatch(loadAreas())
+
 render(
 	(<Root store={store}>
 		<Router history={history}>
