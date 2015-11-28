@@ -99,7 +99,11 @@ describe('setOverrideOnStudent', () => {
 		expect(addedOverride.overrides['nothing']).to.equal('me!')
 	})
 
-	it('will set overrides to falsy values if asked')
+	it('will set overrides to falsy values if asked', () => {
+		const stu = Student()
+		let addedOverride = setOverrideOnStudent(stu, 'nothing', false)
+		expect(addedOverride.overrides['nothing']).to.equal(false)
+	})
 })
 
 describe('removeOverrideFromStudent', () => {
@@ -171,13 +175,22 @@ describe('addScheduleToStudent', () => {
 
 describe('destroyScheduleFromStudent', () => {
 	it('supports removing schedules', () => {
-		const sched = Schedule
+		const sched = Schedule()
 		const stu = addScheduleToStudent(Student(), sched)
 		let removedSchedule = destroyScheduleFromStudent(stu, sched.id)
 		expect(removedSchedule.schedules[sched.id]).to.be.undefined
 	})
 
-	it('should make another schedule active if there is another schedule available for the same term')
+	it('should make another schedule active if there is another schedule available for the same term', () => {
+		const sched1 = Schedule({year: 2012, semester: 1, index: 1, active: true})
+		const sched2 = Schedule({year: 2012, semester: 1, index: 2})
+		let stu = Student()
+		stu = addScheduleToStudent(stu, sched1)
+		stu = addScheduleToStudent(stu, sched2)
+
+		let removedSchedule = destroyScheduleFromStudent(stu, sched1.id)
+		expect(removedSchedule.schedules[sched2.id]).to.have.property('active', true)
+	})
 })
 
 
@@ -409,18 +422,40 @@ describe('removeCourseFromSchedule', () => {
 	})
 })
 
-// describe('reorderCourseInSchedule', () => {
-// 	it('supports rearranging courses', () => {
-// 		let rearranged = reorderCourseInSchedule(sched, 123, 2)
-// 		expect(rearranged.clbids).to.not.deep.equal([123, 234, 345])
-// 		expect(rearranged.clbids).to.deep.equal([234, 345, 123])
-// 	})
+describe('reorderCourseInSchedule', () => {
+	let sched, stu
+	beforeEach(() => {
+		sched = Schedule({clbids: [123, 456, 789]})
+		stu = addScheduleToStudent(Student(), sched)
+	})
 
-// 	it('requires that the clbid be a number when rearranging', () => {
-// 		expect(() => reorderCourseInSchedule(sched, '918', 1)).to.throw(TypeError)
-// 	})
+	it('supports rearranging courses', () => {
+		let rearranged = reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 1})
+		expect(rearranged.schedules[sched.id].clbids).to.not.deep.equal([123, 456, 789])
+		expect(rearranged.schedules[sched.id].clbids).to.deep.equal([456, 123, 789])
+	})
 
-// 	it('returns a new object', () => {})
+	it('requires that the clbid be a number when rearranging', () => {
+		expect(() => reorderCourseInSchedule(stu, sched.id, {clbid: '123', index: 1})).to.throw(TypeError)
+	})
 
-// 	it('requires that the new index be within the boundaries of the clbids list')
-// })
+	it('returns a new object', () => {
+		let actual = reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 1})
+		expect(actual).to.not.equal(stu)
+		expect(actual.schedules[sched.id]).to.not.equal(stu.schedules[sched.id])
+		expect(actual.schedules[sched.id]).to.not.equal(sched)
+	})
+
+	it('requires that the new index be within the boundaries of the clbids list', () => {
+		let shouldThrowBecauseNegative = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: -1})
+		let shouldThrowBecausePastEnd = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 100})
+		let shouldThrowBecauseInfinity = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: Infinity})
+		expect(shouldThrowBecauseNegative).to.throw(RangeError)
+		expect(shouldThrowBecausePastEnd).to.throw(RangeError)
+		expect(shouldThrowBecauseInfinity).to.throw(RangeError)
+	})
+	it('requires that the clbid to be moved actually appear in the list of clbids', () => {
+		let shouldThrow = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123456789, index: 0})
+		expect(shouldThrow).to.throw(ReferenceError)
+	})
+})
