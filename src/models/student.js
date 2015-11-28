@@ -285,7 +285,15 @@ export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
 
 	let schedule = clone(student.schedules[scheduleId])
 
+	if (index < 0 || index >= schedule.clbids.length) {
+		throw new RangeError(`reorderCourseInSchedule: ${index} is outside of the exclusive range 0..${schedule.clbids.length}`)
+	}
+
 	const oldIndex = findIndex(schedule.clbids, id => id === clbid)
+
+	if (oldIndex < 0) {
+		throw new ReferenceError(`reorderCourseInSchedule: ${clbid} is not in schedule "${scheduleId}"`)
+	}
 
 	schedule.clbids = [...schedule.clbids]
 	schedule.clbids.splice(oldIndex, 1)
