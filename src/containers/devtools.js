@@ -8,6 +8,6 @@ export default createDevTools(
 		toggleVisibilityKey='H'
 		changePositionKey='Q'
 	>
-			<LogMonitor />
+		<LogMonitor />
 	</DockMonitor>
 )
