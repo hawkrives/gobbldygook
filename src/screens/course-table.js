@@ -13,7 +13,7 @@ import './course-table.scss'
 export default class CourseTable extends Component {
 	static propTypes = {
 		className: PropTypes.string,
-		courses: PropTypes.object, // Immutable.List
+		courses: PropTypes.arrayOf(PropTypes.object),
 		coursesLoaded: PropTypes.bool,
 		showSearchSidebar: PropTypes.func,
 		student: PropTypes.object,

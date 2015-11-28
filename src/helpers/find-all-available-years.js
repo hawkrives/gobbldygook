@@ -13,7 +13,7 @@ import first from 'lodash/array/first'
  * will return [2013, 2015]. If `schedules` is empty, it will return the
  * current year.
  *
- * @param {Array|Immutable.List} schedules - the list of schedules
+ * @param {Array} schedules - the list of schedules
  * @param {Number} matriculation - the year of matriculation
  * @returns {Number} - the available years
  */

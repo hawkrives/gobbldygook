@@ -15,7 +15,7 @@ import countCredits from '../area-tools/count-credits'
  * @promise GraduatabilityPromise
  * @fulfill {Object} - The details of the students graduation prospects.
  *    {boolean} graduatability
- *    {Immutable.Map} areaDetails
+ *    {object} areaDetails
  */
 export default async function checkStudentGraduatability(student) {
 	const areaPromises = map(

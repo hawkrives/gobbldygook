@@ -17,9 +17,9 @@ import './sidebar.scss'
 
 export default class Sidebar extends Component {
 	static propTypes = {
-		allAreas: PropTypes.object, // Immutable.List
+		allAreas: PropTypes.arrayOf(PropTypes.object),
 		baseSearchQuery: PropTypes.object,
-		courses: PropTypes.object, // Immutable.List
+		courses: PropTypes.arrayOf(PropTypes.object),
 		coursesLoaded: PropTypes.bool.isRequired,
 		isSearching: PropTypes.bool.isRequired,
 		student: PropTypes.object.isRequired,

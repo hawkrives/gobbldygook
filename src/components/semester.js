@@ -67,7 +67,7 @@ class Semester extends Component {
 	static propTypes = {
 		canDrop: PropTypes.bool.isRequired,  // react-dnd
 		connectDropTarget: PropTypes.func.isRequired,  // react-dnd
-		courses: PropTypes.object, // should be an immutable list
+		courses: PropTypes.arrayOf(PropTypes.object),
 		coursesLoaded: PropTypes.bool.isRequired,
 		isOver: PropTypes.bool.isRequired,  // react-dnd
 		semester: PropTypes.number.isRequired,

@@ -14,7 +14,7 @@ import './student-picker.scss'
 
 export default class StudentPicker extends Component {
 	static propTypes = {
-		students: PropTypes.object, // Immutable.Map
+		students: PropTypes.object,
 	}
 
 	constructor(props) {

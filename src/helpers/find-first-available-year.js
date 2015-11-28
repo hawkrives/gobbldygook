@@ -4,7 +4,6 @@ import sortBy from 'lodash/collection/sortBy'
 import max from 'lodash/collection/max'
 import includes from 'lodash/collection/includes'
 import findMissingNumberBinarySearch from './find-missing-number-binary-search'
-import {Iterable as ImmutableIterable} from 'immutable'
 
 /**
  * Takes a list of schedules and finds the first open year.
@@ -13,7 +12,7 @@ import {Iterable as ImmutableIterable} from 'immutable'
  * will return 2016. If schedules is empty, it will return the
  * current year.
  *
- * @param {Array|Immutable.List} schedules - the list of schedules
+ * @param {Array} schedules - the list of schedules
  * @param {Number} matriculation - the year of matriculated
  * @returns {Number} - the first available semester slot
  */

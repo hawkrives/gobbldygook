@@ -13,7 +13,7 @@ import './year.scss'
 
 export default class Year extends Component {
 	static propTypes = {
-		courses: PropTypes.object, // Immutable.List
+		courses: PropTypes.arrayOf(PropTypes.object),
 		coursesLoaded: PropTypes.bool.isRequired,
 		showSearchSidebar: PropTypes.func.isRequired,
 		student: PropTypes.object.isRequired,
