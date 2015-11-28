@@ -12,16 +12,23 @@ import {
 
 const initialState = []
 
+function checkForDuplicateIds(state, {payload}) {
+	if (findIndex(state, {id: payload.id}) >= 0) {
+		console.error(`cannot add a second notification with an existing id "${payload.id}"`)
+		return true
+	}
+	return false
+}
+
 export default function reducer(state = initialState, action) {
 	const {type, payload} = action
 
-	if (payload && type !== REMOVE_NOTIFICATION && findIndex(state, {id: payload.id}) >= 0) {
-		console.error(`cannot add a second notification with an existing id "${payload.id}"`)
-		return state
-	}
-
 	switch (type) {
 		case LOG_MESSAGE: {
+			if (checkForDuplicateIds(state, action)) {
+				return state
+			}
+
 			return [...state, {
 				id: payload.id,
 				message: payload.message,
@@ -30,6 +37,10 @@ export default function reducer(state = initialState, action) {
 		}
 
 		case LOG_ERROR: {
+			if (checkForDuplicateIds(state, action)) {
+				return state
+			}
+
 			return [...state, {
 				id: payload.id,
 				message: payload.error.message,
@@ -38,6 +49,10 @@ export default function reducer(state = initialState, action) {
 		}
 
 		case START_PROGRESS: {
+			if (checkForDuplicateIds(state, action)) {
+				return state
+			}
+
 			return [...state, {
 				id: payload.id,
 				message: payload.message,
