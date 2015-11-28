@@ -58,12 +58,12 @@ import {
 const initialState = {}
 
 export function reducer(state = initialState, action) {
-	const {type, payload} = action
+	const {type, payload, error} = action
 
 	switch (type) {
 		case INIT_STUDENT:
 		case IMPORT_STUDENT: {
-			if (payload.error) {
+			if (error) {
 				return state
 			}
 			return {...state, [payload.id]: payload}

@@ -56,7 +56,16 @@ describe('students reducer', () => {
 		expect(actual).to.deep.equal(expected)
 	})
 	it('should return a new student and state from INIT_STUDENT')
-	it('should return existing state if INIT_STUDENT has an error')
+	it('should return existing state if INIT_STUDENT has an error', () => {
+		let initialState = {}
+
+		let action = {type: INIT_STUDENT, payload: new Error(), error: true}
+
+		let expected = initialState
+		let actual = reducer(initialState, action)
+
+		expect(actual).to.equal(expected)
+	})
 
 	it('should handle IMPORT_STUDENT', () => {
 		let initialState = {}
