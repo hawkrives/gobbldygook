@@ -1,11 +1,10 @@
 import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
-import map from 'lodash/collection/map'
 import React, {Component, PropTypes, cloneElement} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { DragDropContext } from 'react-dnd'
-const { ActionCreators: { undo, redo } } = require('redux-undo')
+import { ActionCreators as UndoableActionCreators } from 'redux-undo'
 
 import * as actionCreators from '../ducks/actions/students'
 
@@ -52,8 +51,8 @@ function mapDispatchToProps(dispatch) {
 	return {
 		actions: {
 			...bindActionCreators(actionCreators, dispatch),
-			undo: () => dispatch(undo()),
-			redo: () => dispatch(redo()),
+			undo: () => dispatch(UndoableActionCreators.undo()),
+			redo: () => dispatch(UndoableActionCreators.redo()),
 		},
 	}
 }
