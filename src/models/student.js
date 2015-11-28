@@ -166,7 +166,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }
 
-export function moveCourseToSchedule(student, fromScheduleId, toScheduleId, clbid) {
+export function moveCourseToSchedule(student, {fromScheduleId, toScheduleId, clbid}) {
 	debug(`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 
 	student = removeCourseFromSchedule(student, fromScheduleId, clbid)
