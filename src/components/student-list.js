@@ -37,26 +37,27 @@ class StudentListItem extends Component {
 		const { student, isEditing } = this.props
 		const groupedStudies = groupBy(student.studies, s => s.type)
 		return (
-			<Link className='student-list-item' to={`/s/${student.id}/`}>
-				<AvatarLetter value={student.name} />
-				<span className='student-list-item-info'>
-					<div className='name'>{student.name || ''}</div>
-					<div className='areas'>
-						{map(
-							interpose(
-								map(groupedStudies, group => group.map(s => s.name).join(' · ')),
-								<span className='joiner'>※</span>),
-							(group, i) => <span className='area-type' key={i}>{group}</span>)}
-					</div>
-				</span>
-				<span className='student-list-item-actions'>
-					{isEditing &&
-					<Button className='delete' type='raised' onClick={this.deleteStudent}>
-						Delete
-					</Button>}
-				</span>
-				<Icon className='student-list-item--go' name='ios-arrow-forward' />
-			</Link>
+			<div className='student-list-item-container'>
+				{isEditing &&
+				<Button className='delete' type='flat' onClick={this.deleteStudent}>
+					<Icon name='ios-trash-outline' />
+				</Button>}
+				<Link className='student-list-item' to={`/s/${student.id}/`}>
+					<AvatarLetter value={student.name} />
+					<span className='student-list-item-info'>
+						<div className='name'>{student.name || ''}</div>
+						<div className='areas'>
+							{map(
+								interpose(
+									map(groupedStudies, group => group.map(s => s.name).join(' · ')),
+									<span className='joiner'>|</span>),
+								(group, i) => <span className='area-type' key={i}>{group}</span>)}
+						</div>
+					</span>
+
+					<Icon className='student-list-item--go' name='ios-arrow-forward' />
+				</Link>
+			</div>
 		)
 	}
 }
