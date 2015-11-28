@@ -199,11 +199,20 @@ export function removeOverrideFromStudent(student, key) {
 
 
 export function addFabricationToStudent(student, fabrication) {
+	if (!('clbid' in fabrication)) {
+		throw new TypeError(`addFabricationToStudent: fabrications must include a clbid`)
+	}
+	if (typeof fabrication.clbid !== 'string') {
+		throw new TypeError(`addFabricationToStudent: clbid must be a string`)
+	}
 	let fabrications = {...student.fabrications, [fabrication.clbid]: fabrication}
 	return {...student, fabrications}
 }
 
 export function removeFabricationFromStudent(student, fabricationId) {
+	if (typeof fabricationId !== 'string') {
+		throw new TypeError(`removeCourseFromSchedule: clbid must be a string`)
+	}
 	let fabrications = {...student.fabrications}
 	delete fabrications[fabricationId]
 	return {...student, fabrications}
