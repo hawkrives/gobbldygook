@@ -1,7 +1,6 @@
 import React, { Component, PropTypes, cloneElement } from 'react'
 import {Provider} from 'react-redux'
 
-import App from '../screens/app'
 import Notifications from '../screens/notifications'
 
 export default class Root extends Component {
@@ -14,9 +13,7 @@ export default class Root extends Component {
 		return (
 			<Provider store={this.props.store}>
 				<div>
-					<App>
-						{cloneElement(this.props.children)}
-					</App>
+					{cloneElement(this.props.children)}
 					<Notifications />
 				</div>
 			</Provider>
