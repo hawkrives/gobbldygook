@@ -145,7 +145,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 
 export function removeCourseFromSchedule(student, scheduleId, clbid) {
 	if (!isNumber(clbid)) {
-		throw new TypeError('removeCourse(): clbid must be a number')
+		throw new TypeError(`removeCourse(): clbid must be a number (was ${typeof clbid})`)
 	}
 
 	if (!(scheduleId in student.schedules)) {
@@ -167,7 +167,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 }
 
 export function moveCourseToSchedule(student, fromScheduleId, toScheduleId, clbid) {
-	debug(`Student.moveCourse(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+	debug(`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 
 	student = removeCourseFromSchedule(student, fromScheduleId, clbid)
 	student = addCourseToSchedule(student, toScheduleId, clbid)
