@@ -6,7 +6,7 @@ export default function Degub(props) {
 	const {students, areas, actions, canUndo, canRedo} = props
 	console.log('degub.render', [size(students), size(areas), size(actions), canUndo, canRedo])
 	return (
-		<div>
+		<div className={`degub ${props.className || ''}`}>
 			<button disabled={!canUndo} onClick={actions.undo}>Undo</button>
 			<button disabled={!canRedo} onClick={actions.redo}>Redo</button>
 			<ul>
@@ -26,6 +26,7 @@ Degub.propTypes = {
 	areas: PropTypes.array.isRequired,
 	canRedo: PropTypes.bool.isRequired,
 	canUndo: PropTypes.bool.isRequired,
+	className: PropTypes.string,
 	students: PropTypes.object.isRequired,
 }
 
