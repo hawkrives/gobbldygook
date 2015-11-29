@@ -3,7 +3,7 @@ import omit from 'lodash/object/omit'
 import history from '../history'
 
 import Button from '../components/button'
-// import CourseSearcher from './course-searcher'
+import CourseSearcher from './course-searcher'
 // import GraduationStatus from './graduation-status'
 import Icon from '../components/icon'
 import Toolbar from '../components/toolbar'
@@ -30,25 +30,23 @@ export default class Sidebar extends Component {
 	}
 
 	showShareSheet = () => {
-		console.log(this.context.location.query)
-		const query = {...this.context.location.query, share: true}
-		console.log(query)
+		const query = {...this.context.location.query, share: null}
 		history.pushState(null, this.context.location.pathname, query)
 	}
 
-	removeSearchQuery = () => {
-		const query = omit(this.context.location.query, ['partialSearch', 'searchTerm'])
+	closeSearchSidebar = () => {
+		const query = omit(this.context.location.query, ['partialSearch', 'search'])
 		history.pushState(null, this.context.location.pathname, query)
 	}
 
-	showSearchSidebar = () => {
-		const query = {...this.context.location.query, searchTerm: ''}
+	openSearchSidebar = () => {
+		const query = {...this.context.location.query, search: null}
 		history.pushState(null, this.context.location.pathname, query)
 	}
 
 	render() {
 		const { actions, canUndo, canRedo, student } = this.props
-		const isSearching = 'partialSearch' in this.context.location.query || 'searchTerm' in this.context.location.query
+		const isSearching = 'partialSearch' in this.context.location.query || 'search' in this.context.location.query
 
 		return (
 			<aside className='sidebar'>
@@ -56,7 +54,7 @@ export default class Sidebar extends Component {
 					<Button title='Students' onClick={this.goHome}>
 						<Icon name='ios-people-outline' type='block' />
 					</Button>
-					<Button title='Search' onClick={isSearching ? this.removeSearchQuery : this.showSearchSidebar}>
+					<Button title='Search' onClick={isSearching ? this.closeSearchSidebar : this.openSearchSidebar}>
 						<Icon name='ios-search' type='block' />
 					</Button>
 
@@ -80,9 +78,13 @@ export default class Sidebar extends Component {
 
 				<div>{isSearching ? 'Is searching!' : 'is not searching…'}</div>
 
-				{/*!isSearching
-					? <GraduationStatus isHidden={isSearching} />
-					: <CourseSearcher isHidden={!isSearching} />*/}
+				{!isSearching
+					? null //<GraduationStatus isHidden={isSearching} />
+					: <CourseSearcher
+						{...{actions, student}}
+						isHidden={!isSearching}
+						closeSearchSidebar={this.closeSearchSidebar}
+					/>}
 			</aside>
 		)
 	}
