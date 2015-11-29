@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import map from 'lodash/collection/map'
+import sortByAll from 'lodash/collection/sortByAll'
+import groupBy from 'lodash/collection/groupBy'
 import flatten from 'lodash/array/flatten'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
@@ -9,25 +11,24 @@ import Button from './button'
 import CourseTitle from './course-title'
 import CourseIdentBlock from './course-ident-block'
 
-import studentActions from '../flux/student-actions'
 import semesterName from '../helpers/semester-name'
 import expandYear from '../helpers/expand-year'
 import to12Hour from '../helpers/to-12-hour-time'
 
 function findSemesterList(student) {
-	return student.schedules
-		.toList()
-		.map(sched => ({
-			...sched.toObject(),
-			title: `${semesterName(sched.get('semester'))} – ${sched.get('title')}`,
-		}))
-		.sortBy(sched => `${sched.year} ${sched.semester}`)
-		.groupBy(sched => sched.year)
-		.toJS()
+	let schedules = map(student.schedules, s => ({
+		...s, title: `${semesterName(s.semester)} – ${s.title}`,
+	}))
+
+	let sorted = sortByAll(schedules, ['year', 'semester'])
+	let byYear = groupBy(sorted, 'year')
+
+	return byYear
 }
 
 export default class DetailedCourse extends Component {
 	static propTypes = {
+		actions: PropTypes.object.isRequired,
 		children: PropTypes.node,
 		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
@@ -36,21 +37,25 @@ export default class DetailedCourse extends Component {
 	}
 
 	removeFromSemester = () => {
-		studentActions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.course.clbid)
+		this.props.actions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.course.clbid)
 	}
 
 	moveToSchedule = ev => {
-		const targetScheduleId = parseInt(ev.target.value)
+		const targetScheduleId = ev.target.value
+		if (targetScheduleId == 'none') {
+			return
+		}
+
 		if (this.props.schedule) {
-			studentActions.moveCourse(this.props.student.id, this.props.schedule.id, targetScheduleId, this.props.course.clbid)
+			this.props.actions.moveCourse(this.props.student.id, this.props.schedule.id, targetScheduleId, this.props.course.clbid)
 		}
 		else {
-			studentActions.addCourse(this.props.student.id, targetScheduleId, this.props.course.clbid)
+			this.props.actions.addCourse(this.props.student.id, targetScheduleId, this.props.course.clbid)
 		}
 	}
 
 	render() {
-		const course = this.props.course
+		const { course } = this.props
 
 		return (
 			<div className={cx(this.props.className)}>
@@ -109,9 +114,13 @@ export default class DetailedCourse extends Component {
 					</div>
 				</div>
 
-
 				<div className='tools'>
-					<select className='semester-select' value={this.props.schedule ? this.props.schedule.id : null} onChange={this.moveToSchedule}>
+					<select
+						className='semester-select'
+						value={this.props.schedule ? this.props.schedule.id : 'none'}
+						onChange={this.moveToSchedule}
+					>
+						<option value='none'>No Schedule</option>
 						{map(findSemesterList(this.props.student), (group, key) => (
 							<optgroup key={key} label={expandYear(key, true, '–')}>
 								{(map(group, sched =>

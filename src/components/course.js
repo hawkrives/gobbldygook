@@ -43,6 +43,7 @@ function collect(connect, monitor) {
 
 class Course extends Component {
 	static propTypes = {
+		actions: PropTypes.object.isRequired,
 		conflicts: PropTypes.array,
 		connectDragSource: PropTypes.func.isRequired,  // react-dnd
 		course: PropTypes.object.isRequired,
