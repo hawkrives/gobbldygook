@@ -12,6 +12,7 @@ import semesterName from '../helpers/semester-name'
 import isCurrentSemester from '../helpers/is-current-semester'
 import countCredits from '../area-tools/count-credits'
 import validateSchedule from '../helpers/validate-schedule'
+import compareProps from '../helpers/compare-props'
 
 import itemTypes from '../models/item-types'
 import history from '../history'
@@ -97,7 +98,7 @@ class Semester extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return (this.props !== nextProps) || (this.state !== nextState)
+		return compareProps(this.props, nextProps) || compareProps(this.state, nextState)
 	}
 
 	removeSemester = () => {
