@@ -63,6 +63,7 @@
     "ord": "0.1.1",
     "plur": "2.1.1",
     "present": "0.0.6",
+    "query-string": "3.0.0",
     "react": "0.14.3",
     "react-codemirror": "0.2.1",
     "react-dnd": "2.0.2",
