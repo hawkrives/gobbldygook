@@ -17,7 +17,6 @@ import semesterName from '../helpers/semester-name'
 import expandYear from '../helpers/expand-year'
 import queryCourseDatabase from '../helpers/query-course-database'
 import size from 'lodash/collection/size'
-import keymage from 'keymage'
 
 import Button from '../components/button'
 import Course from '../components/course'
@@ -94,10 +93,14 @@ const SORT_BY_TO_KEY = {
 
 export default class CourseSearcher extends Component {
 	static propTypes = {
-		baseSearchQuery: PropTypes.object,
+		actions: PropTypes.object.isRequired,
+		closeSearchSidebar: PropTypes.func.isRequired,
 		isHidden: PropTypes.bool,
 		student: PropTypes.object.isRequired,
-		toggle: PropTypes.func.isRequired,
+	}
+
+	static contextTypes = {
+		location: React.PropTypes.object,
 	}
 
 	constructor() {
@@ -115,7 +118,7 @@ export default class CourseSearcher extends Component {
 	}
 
 	onSubmit = () => {
-		if (this.state.queryString !== this.state.lastQuery || size(this.props.baseSearchQuery)) {
+		if (this.state.queryString !== this.state.lastQuery || size(this.context.location.query.partialSearch)) {
 			if (process.env.NODE_ENV === 'production') {
 				try {
 					window.ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
@@ -137,14 +140,14 @@ export default class CourseSearcher extends Component {
 	}
 
 	query = searchQuery => {
-		if ((searchQuery.length === 0 && !size(this.props.baseSearchQuery)) || this.state.queryInProgress) {
+		if ((searchQuery.length === 0 && !size(this.context.location.query.partialSearch)) || this.state.queryInProgress) {
 			return
 		}
 
 		this.setState({results: [], hasQueried: false, error: null})
 		const startQueryTime = present()
 
-		queryCourseDatabase(searchQuery, this.props.baseSearchQuery)
+		queryCourseDatabase(searchQuery, this.context.location.query.partialSearch)
 			.then(results => {
 				console.info(`query took ${(present() - startQueryTime)}ms.`)
 				console.log('results', results)
@@ -170,6 +173,9 @@ export default class CourseSearcher extends Component {
 
 	render() {
 		// console.log('SearchButton#render')
+		// TODO: Speed this up! This preperation stuff takes ~230ms by itself, with enough courses
+		// rendered. (like, say, {year: 2012})
+		console.time('render')
 		const showNoResults = this.state.results.length === 0 && this.state.hasQueried
 		const showIndicator = this.state.queryInProgress
 
@@ -203,16 +209,18 @@ export default class CourseSearcher extends Component {
 					{GROUP_BY_TO_TITLE[this.state.groupBy](groupTitle) && <p className='course-group-title'>{GROUP_BY_TO_TITLE[this.state.groupBy](groupTitle)}</p>}
 					<ul className='course-list'>
 						{map(courses, (course, index) =>
-							<li key={index}><Course course={course} student={this.props.student} /></li>)}
+							<li key={index}><Course course={course} student={this.props.student} actions={this.props.actions} /></li>)}
+							{/*<li key={index}>{JSON.stringify(course, null, 2)}</li>)}*/}
 					</ul>
 				</li>
 			)
 		}
 
 		let placeholderExtension = ''
-		if (size(this.props.baseSearchQuery)) {
-			placeholderExtension = `(${semesterName(this.props.baseSearchQuery.semester)} ${expandYear(this.props.baseSearchQuery.year, true, '–')})`
+		if (size(this.context.location.query.partialSearch)) {
+			placeholderExtension = `(${toPrettyTerm(this.context.location.query.partialSearch.term)})`
 		}
+		console.timeEnd('render')
 
 		return (
 			<div className={cx('search-sidebar', this.props.isHidden && 'is-hidden')}>
@@ -223,18 +231,19 @@ export default class CourseSearcher extends Component {
 							className='close-sidebar'
 							title='Close Sidebar'
 							type='flat'
-							onClick={this.props.toggle}>
+							onClick={this.props.closeSearchSidebar}
+						>
 							Close
 						</Button>
 					</div>
 					<div className='row'>
-						<input type='search' className='search-box'
-							defaultValue={this.state.query}
+						<input
+							type='search'
+							className='search-box'
+							value={this.state.query}
 							placeholder={'Search for a course or phrase'}
 							onChange={this.onChange}
 							onKeyDown={this.onKeyDown}
-							onFocus={() => keymage.pushScope('search')}
-							onBlur={() => keymage.popScope()}
 							autoFocus={true}
 							ref='searchbox'
 						/>
