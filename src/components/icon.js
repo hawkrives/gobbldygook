@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import compareProps from '../helpers/compare-props'
 import './icon.scss'
 
 export default class Icon extends Component {
@@ -13,6 +14,10 @@ export default class Icon extends Component {
 
 	static defaultProps = {
 		type: 'inline',
+	}
+
+	shouldComponentUpdate(nextProps) {
+		return compareProps(this.props, nextProps)
 	}
 
 	render() {
