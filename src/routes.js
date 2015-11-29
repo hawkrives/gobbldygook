@@ -26,7 +26,7 @@ export default (
 		<Route component={Student} path='s/:id/'>
 			{/*{<IndexRoute component={Degub} />}*/}
 			<IndexRoute component={CourseTable} />
-			{/*{//<Route component={AreaEditor} path='edit-area' />}
+			{/*{<Route component={AreaEditor} path='edit-area' />}
 			<Route component={NewStudentWizard} path='wizard/' />
 			<Route component={SemesterDetail} path='semester/:year/:semester/' />
 			<Route component={DownloadStudent} path='download/' />*/}

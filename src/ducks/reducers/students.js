@@ -1,4 +1,4 @@
-import undoable, {excludeAction as undoableExcludeAction} from 'redux-undo'
+import undoable from 'redux-undo'
 import omit from 'lodash/object/omit'
 import map from 'lodash/collection/map'
 import zipObject from 'lodash/array/zipObject'
