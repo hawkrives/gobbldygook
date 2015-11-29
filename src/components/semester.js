@@ -37,11 +37,11 @@ const semesterTarget = {
 	drop(props, monitor, component) {
 		const item = monitor.getItem()
 		console.log('dropped course', item)
-		const {clbid, fromScheduleID} = item
+		const {clbid, fromScheduleId, isFromSchedule} = item
 		const toSchedule = getSchedule(component.props.student, component.props.year, component.props.semester)
 
-		if (fromScheduleID) {
-			props.actions.moveCourse(props.student.id, fromScheduleID, toSchedule.id, clbid)
+		if (isFromSchedule) {
+			props.actions.moveCourse(props.student.id, fromScheduleId, toSchedule.id, clbid)
 		}
 		else {
 			props.actions.addCourse(props.student.id, toSchedule.id, clbid)
@@ -94,6 +94,10 @@ class Semester extends Component {
 	componentWillReceiveProps(nextProps) {
 		const schedule = getSchedule(nextProps.student, nextProps.year, nextProps.semester)
 		validateSchedule(schedule).then(validation => this.setState({validation}))
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return (this.props !== nextProps) || (this.state !== nextState)
 	}
 
 	removeSemester = () => {

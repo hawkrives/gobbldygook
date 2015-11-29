@@ -24,11 +24,11 @@ const courseSource = {
 	beginDrag(props) {
 		const scheduleId = props.schedule ? props.schedule.id : null
 		return {
-			fromSchedule: scheduleId !== null,
-			fromSearch: scheduleId === null,
+			isFromSchedule: scheduleId !== null,
+			isFromSearch: scheduleId === null,
 			clbid: props.course.clbid,
 			groupid: props.course.groupid,
-			fromScheduleID: scheduleId,
+			fromScheduleId: scheduleId,
 		}
 	},
 }
@@ -60,6 +60,10 @@ class Course extends Component {
 	constructor() {
 		super()
 		this.state = {isOpen: false}
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return (this.props !== nextProps) || (this.state !== nextState)
 	}
 
 	closeModal = () => {
