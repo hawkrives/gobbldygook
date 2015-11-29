@@ -9,7 +9,7 @@ import Icon from '../components/icon'
 import Toolbar from '../components/toolbar'
 import Separator from '../components/separator'
 
-// import CourseRemovalBox from '../components/course-removal-box'
+import CourseRemovalBox from '../components/course-removal-box'
 
 import './sidebar.scss'
 
@@ -76,7 +76,7 @@ export default class Sidebar extends Component {
 					</Button>
 				</Toolbar>
 
-				{/*<CourseRemovalBox studentId={student.id} />*/}
+				<CourseRemovalBox studentId={student.id} actions={actions} />
 
 				<div>{isSearching ? 'Is searching!' : 'is not searching…'}</div>
 
