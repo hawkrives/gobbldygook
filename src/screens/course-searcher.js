@@ -114,7 +114,7 @@ class CourseResultsList extends Component {
 	}
 
 	render() {
-		console.log('CourseResultsList.render')
+		// console.log('CourseResultsList.render')
 		const {
 			actions,
 			groupBy: groupByValue,
@@ -160,109 +160,139 @@ class CourseResultsList extends Component {
 	}
 }
 
-function CourseSearcher(props) {
-	const {
-		actions,
-		groupBy,
-		hasQueried,
-		isHidden,
-		onCloseSearchSidebar,
-		onKeyDown,
-		onQueryChange,
-		onQuerySubmit,
-		onSortChange,
-		onGroupByChange,
-		queryInProgress,
-		queryString,
-		partialQuery,
-		results,
-		queryError,
-		sortBy,
-		student,
-	} = props
-
-	// TODO: Speed this up! This preperation stuff takes ~230ms by itself, with enough courses
-	// rendered. (like, say, {year: 2012})
-	const showNoResults = results.length === 0 && hasQueried
-	const showIndicator = queryInProgress
-
-	let contents = <div className='no-results course-group'>No Results Found</div>
-
-	if (queryError) {
-		contents = <div className='error course-group'>Something broke :-(</div>
+class CourseSearcher extends Component {
+	static propTypes = {
+		actions: PropTypes.object.isRequired,
+		groupBy: PropTypes.oneOf(GROUP_BY).isRequired,
+		hasQueried: PropTypes.bool,
+		isHidden: PropTypes.bool,
+		onCloseSearchSidebar: PropTypes.func.isRequired,
+		onGroupByChange: PropTypes.func.isRequired,
+		onKeyDown: PropTypes.func.isRequired,
+		onQueryChange: PropTypes.func.isRequired,
+		onQuerySubmit: PropTypes.func.isRequired,
+		onSortChange: PropTypes.func.isRequired,
+		partialQuery: PropTypes.object.isRequired,
+		queryError: PropTypes.string,
+		queryInProgress: PropTypes.bool.isRequired,
+		queryString: PropTypes.string.isRequired,
+		results: PropTypes.array.isRequired,
+		sortBy: PropTypes.oneOf(SORT_BY).isRequired,
+		student: PropTypes.object.isRequired,
 	}
 
-	else if (showIndicator) {
-		contents = <div className='loading course-group'><Loading>Searching…</Loading></div>
+	static defaultProps = {
+		queryError: '',
 	}
 
-	else if (!showNoResults) {
-		contents = <CourseResultsList
-			actions={actions}
-			student={student}
-			groupBy={groupBy}
-			sortBy={sortBy}
-			results={results}
-		/>
+	shouldComponentUpdate(nextProps) {
+		return compareProps(this.props, nextProps)
 	}
 
-	let placeholderExtension = partialQuery.term
-		? `(${toPrettyTerm(partialQuery.term)})`
-		: ''
+	render() {
+		const {
+			actions,
+			groupBy,
+			hasQueried,
+			isHidden,
+			onCloseSearchSidebar,
+			onKeyDown,
+			onQueryChange,
+			onQuerySubmit,
+			onSortChange,
+			onGroupByChange,
+			queryInProgress,
+			queryString,
+			partialQuery,
+			results,
+			queryError,
+			sortBy,
+			student,
+		} = this.props
 
-	return (
-		<div className={cx('search-sidebar', isHidden && 'is-hidden')}>
-			<header className='sidebar-heading'>
-				<div className='row'>
-					<h2>Course Search<br/>{placeholderExtension}</h2>
-					<Button
-						className='close-sidebar'
-						title='Close Sidebar'
-						type='flat'
-						onClick={onCloseSearchSidebar}
-					>
-						Close
-					</Button>
-				</div>
-				<div className='row'>
-					<input
-						type='search'
-						className='search-box'
-						value={queryString}
-						placeholder={'Search for a course or phrase'}
-						onChange={onQueryChange}
-						onKeyDown={onKeyDown}
-						autoFocus={true}
-					/>
-					<Button
-						className='submit-search-query'
-						title='Search'
-						type='flat'
-						onClick={onQuerySubmit}
-					>
-						<Icon name='android-arrow-forward' />
-					</Button>
-				</div>
-				{hasQueried &&
-				<div className='row search-filters'>
-					<span className='filter'>
-						<label htmlFor='sort'>Sort by:</label><br/>
-						<select id='sort' value={sortBy} onChange={onSortChange}>
-							{map(SORT_BY, opt => <option key={opt} value={opt}>{opt}</option>)}
-						</select>
-					</span>
-					<span className='filter'>
-						<label htmlFor='group'>Group by:</label><br/>
-						<select id='group' value={groupBy} onChange={onGroupByChange}>
-							{map(GROUP_BY, opt => <option key={opt} value={opt}>{opt}</option>)}
-						</select>
-					</span>
-				</div>}
-			</header>
+		// TODO: Speed this up! This preperation stuff takes ~230ms by itself, with enough courses
+		// rendered. (like, say, {year: 2012})
+		const showNoResults = results.length === 0 && hasQueried
+		const showIndicator = queryInProgress
 
-			{contents}
-		</div>
-	)
+		let contents = <div className='no-results course-group'>No Results Found</div>
+
+		if (queryError) {
+			contents = <div className='error course-group'>Something broke :-(</div>
+		}
+
+		else if (showIndicator) {
+			contents = <div className='loading course-group'><Loading>Searching…</Loading></div>
+		}
+
+		else if (!showNoResults) {
+			contents = <CourseResultsList
+				actions={actions}
+				student={student}
+				groupBy={groupBy}
+				sortBy={sortBy}
+				results={results}
+			/>
+		}
+
+		let placeholderExtension = partialQuery.term
+			? `(${toPrettyTerm(partialQuery.term)})`
+			: ''
+
+		return (
+			<div className={cx('search-sidebar', isHidden && 'is-hidden')}>
+				<header className='sidebar-heading'>
+					<div className='row'>
+						<h2>Course Search<br/>{placeholderExtension}</h2>
+						<Button
+							className='close-sidebar'
+							title='Close Sidebar'
+							type='flat'
+							onClick={onCloseSearchSidebar}
+						>
+							Close
+						</Button>
+					</div>
+					<div className='row'>
+						<input
+							type='search'
+							className='search-box'
+							value={queryString}
+							placeholder={'Search for a course or phrase'}
+							onChange={onQueryChange}
+							onKeyDown={onKeyDown}
+							autoFocus={true}
+						/>
+						<Button
+							className='submit-search-query'
+							title='Search'
+							type='flat'
+							onClick={onQuerySubmit}
+						>
+							<Icon name='android-arrow-forward' />
+						</Button>
+					</div>
+					{hasQueried &&
+					<div className='row search-filters'>
+						<span className='filter'>
+							<label htmlFor='sort'>Sort by:</label><br/>
+							<select id='sort' value={sortBy} onChange={onSortChange}>
+								{map(SORT_BY, opt => <option key={opt} value={opt}>{opt}</option>)}
+							</select>
+						</span>
+						<span className='filter'>
+							<label htmlFor='group'>Group by:</label><br/>
+							<select id='group' value={groupBy} onChange={onGroupByChange}>
+								{map(GROUP_BY, opt => <option key={opt} value={opt}>{opt}</option>)}
+							</select>
+						</span>
+					</div>}
+				</header>
+
+				{contents}
+			</div>
+		)
+	}
 }
 
 export default class CourseSearcherContainer extends Component {
@@ -280,7 +310,7 @@ export default class CourseSearcherContainer extends Component {
 	constructor() {
 		super()
 		this.state = {
-			error: null,
+			error: '',
 			isQuerying: false,
 			hasQueried: false,
 			results: [],
