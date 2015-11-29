@@ -1,5 +1,9 @@
 import React, {Component, PropTypes} from 'react'
-import studentActions from '../flux/student-actions'
+import filter from 'lodash/collection/filter'
+import pluck from 'lodash/collection/pluck'
+import sortBy from 'lodash/collection/sortBy'
+import map from 'lodash/collection/map'
+import includes from 'lodash/collection/includes'
 
 import Button from './button'
 import Semester from './semester'
@@ -13,9 +17,8 @@ import './year.scss'
 
 export default class Year extends Component {
 	static propTypes = {
+		actions: PropTypes.object.isRequired,
 		courses: PropTypes.arrayOf(PropTypes.object),
-		coursesLoaded: PropTypes.bool.isRequired,
-		showSearchSidebar: PropTypes.func.isRequired,
 		student: PropTypes.object.isRequired,
 		year: PropTypes.number.isRequired,
 	}
@@ -27,38 +30,32 @@ export default class Year extends Component {
 	addSemester = () => {
 		const nextAvailableSemester = findFirstAvailableSemester(this.props.student.schedules, this.props.year)
 
-		studentActions.addSchedule(this.props.student.id, {
+		this.props.actions.addSchedule(this.props.student.id, {
 			year: this.props.year, semester: nextAvailableSemester,
 			index: 1, active: true,
 		})
 	}
 
 	removeYear = () => {
-		const scheduleIds = this.props.student.schedules
-			.filter(isCurrentYear(this.props.year))
-			.map(sched => sched.id)
+		const scheduleIds = filter(pluck(this.props.student.schedules, 'id'), isCurrentYear(this.props.year))
 
-		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
+		this.props.actions.destroySchedules(this.props.student.id, scheduleIds)
 	}
 
 	render() {
-		console.log('Year.render()')
+		// console.log('Year.render()')
 
-		const terms = this.props.student.schedules
-			.filter(sched => sched.active)
-			.filter(sched => sched.year === this.props.year)
-			.sortBy(schedule => schedule.semester)
-			.map(schedule =>
-				<Semester
-					key={`${schedule.year}-${schedule.semester}-${schedule.id}`}
-					student={this.props.student}
-					semester={schedule.semester}
-					year={this.props.year}
-					courses={this.props.courses.filter(c => schedule.clbids.includes(c.clbid))}
-					coursesLoaded={this.props.coursesLoaded}
-					showSearchSidebar={this.props.showSearchSidebar}
-				/>)
-			.toList()
+		let valid = filter(this.props.student.schedules, {active: true, year: this.props.year})
+		let sorted = sortBy(valid, 'semester')
+		let terms = map(sorted, schedule =>
+			<Semester
+				key={`${schedule.year}-${schedule.semester}-${schedule.id}`}
+				actions={this.props.actions}
+				student={this.props.student}
+				semester={schedule.semester}
+				year={this.props.year}
+				courses={filter(this.props.courses, c => includes(schedule.clbids, c.clbid))}
+			/>)
 
 		const niceYear = expandYear(this.props.year)
 
@@ -88,7 +85,7 @@ export default class Year extends Component {
 				</header>
 				<div className='row'>
 					<div className='semester-list'>
-						{terms.toArray()}
+						{terms}
 					</div>
 				</div>
 			</div>

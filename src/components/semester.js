@@ -11,9 +11,10 @@ import map from 'lodash/collection/map'
 import semesterName from '../helpers/semester-name'
 import isCurrentSemester from '../helpers/is-current-semester'
 import countCredits from '../area-tools/count-credits'
+import validateSchedule from '../helpers/validate-schedule'
 
-import studentActions from '../flux/student-actions'
 import itemTypes from '../models/item-types'
+import history from '../history'
 
 import Button from './button'
 import Course from './course'
@@ -40,10 +41,10 @@ const semesterTarget = {
 		const toSchedule = getSchedule(component.props.student, component.props.year, component.props.semester)
 
 		if (fromScheduleID) {
-			studentActions.moveCourse(props.student.id, fromScheduleID, toSchedule.id, clbid)
+			props.actions.moveCourse(props.student.id, fromScheduleID, toSchedule.id, clbid)
 		}
 		else {
-			studentActions.addCourse(props.student.id, toSchedule.id, clbid)
+			props.actions.addCourse(props.student.id, toSchedule.id, clbid)
 		}
 	},
 	canDrop(props, monitor) {
@@ -65,15 +66,18 @@ function collect(connect, monitor) {
 
 class Semester extends Component {
 	static propTypes = {
+		actions: PropTypes.object,
 		canDrop: PropTypes.bool.isRequired,  // react-dnd
 		connectDropTarget: PropTypes.func.isRequired,  // react-dnd
 		courses: PropTypes.arrayOf(PropTypes.object),
-		coursesLoaded: PropTypes.bool.isRequired,
 		isOver: PropTypes.bool.isRequired,  // react-dnd
 		semester: PropTypes.number.isRequired,
-		showSearchSidebar: PropTypes.func.isRequired,
 		student: PropTypes.object.isRequired,
 		year: PropTypes.number.isRequired,
+	}
+
+	static contextTypes = {
+		location: React.PropTypes.object,
 	}
 
 	constructor() {
@@ -89,7 +93,7 @@ class Semester extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		const schedule = getSchedule(nextProps.student, nextProps.year, nextProps.semester)
-		schedule.validate().then(validation => this.setState({validation}))
+		validateSchedule(schedule).then(validation => this.setState({validation}))
 	}
 
 	removeSemester = () => {
@@ -97,18 +101,28 @@ class Semester extends Component {
 			filter(this.props.student.schedules, isCurrentSemester(this.props.year, this.props.semester)),
 			sched => sched.id)
 
-		studentActions.destroyMultipleSchedules(this.props.student.id, scheduleIds)
+		this.props.actions.destroySchedules(this.props.student.id, scheduleIds)
+	}
+
+	initiateSearch = schedule => {
+		const query = {
+			...this.context.location.query,
+			partialSearch: JSON.stringify({
+				term: `${schedule.year}${schedule.semester}`,
+			}),
+		}
+		history.pushState(null, this.context.location.pathname, query)
 	}
 
 	render() {
-		console.log('Semester.render()')
+		// console.log('Semester.render()')
 		let courseList = <Loading>Loading Courses…</Loading>
 
 		const schedule = getSchedule(this.props.student, this.props.year, this.props.semester)
-		const courses = this.props.courses
+		const { actions, courses, semester, student } = this.props
 
 		// recommendedCredits is 4 for fall/spring and 1 for everything else
-		const recommendedCredits = (this.props.semester === 1 || this.props.semester === 3) ? 4 : 1
+		const recommendedCredits = (semester === 1 || semester === 3) ? 4 : 1
 		const currentCredits = courses.length ? countCredits(courses) : 0
 
 		let infoBar = []
@@ -119,19 +133,19 @@ class Semester extends Component {
 			currentCredits && infoBar.push(<li key='credit-count'>{` – ${currentCredits} ${plur('credit', currentCredits)}`}</li>)
 		}
 
-		if (schedule && this.props.coursesLoaded) {
+		if (schedule && courses) {
 			let courseObjects = map(courses, (course, i) =>
-					course.error
-					? <MissingCourse key={course.clbid} clbid={course.clbid} error={course.error} />
-					: <Course
-						key={course.clbid}
-						index={i}
-						course={course}
-						student={this.props.student}
-						schedule={schedule}
-						conflicts={this.state.validation.conflicts}
-					/>
-				)
+				course.error
+				? <MissingCourse key={course.clbid} clbid={course.clbid} error={course.error} />
+				: <Course
+					key={course.clbid}
+					index={i}
+					actions={actions}
+					course={course}
+					student={student}
+					schedule={schedule}
+					conflicts={this.state.validation.conflicts}
+				/>)
 
 			let emptySlots = []
 			if (currentCredits < recommendedCredits) {
@@ -156,8 +170,10 @@ class Semester extends Component {
 		return this.props.connectDropTarget(
 			<div className={className}>
 				<header className='semester-title'>
-					<Link className='semester-header'
-						to={`/s/${this.props.student.id}/semester/${this.props.year}/${this.props.semester}/`}>
+					<Link
+						className='semester-header'
+						to={`/s/${this.props.student.id}/semester/${this.props.year}/${this.props.semester}/`}
+					>
 						<h1>{semesterName(this.props.semester)}</h1>
 
 						<List className='info-bar' type='inline'>
@@ -166,14 +182,18 @@ class Semester extends Component {
 					</Link>
 
 					<span className='buttons'>
-						<Button className='add-course'
-							onClick={() => this.props.showSearchSidebar({schedule})}
-							title='Search for courses'>
+						<Button
+							className='add-course'
+							onClick={this.initiateSearch.bind(this, schedule)}
+							title='Search for courses'
+						>
 							<Icon name='search' /> Course
 						</Button>
-						<Button className='remove-semester'
+						<Button
+							className='remove-semester'
 							onClick={this.removeSemester}
-							title={`Remove ${this.props.year} ${semesterName(this.props.semester)}`}>
+							title={`Remove ${this.props.year} ${semesterName(this.props.semester)}`}
+						>
 							<Icon name='close' />
 						</Button>
 					</span>
