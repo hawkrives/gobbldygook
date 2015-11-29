@@ -5,6 +5,7 @@ import compact from 'lodash/array/compact'
 import filter from 'lodash/collection/filter'
 import isNull from 'lodash/lang/isNull'
 import map from 'lodash/collection/map'
+import compareProps from '../helpers/compare-props'
 
 import itemTypes from '../models/item-types'
 
@@ -63,7 +64,7 @@ class Course extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return (this.props !== nextProps) || (this.state !== nextState)
+		return compareProps(this.props, nextProps) || compareProps(this.state, nextState)
 	}
 
 	closeModal = () => {

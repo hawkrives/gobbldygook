@@ -9,7 +9,7 @@ import cx from 'classnames'
 
 import Button from './button'
 import CourseTitle from './course-title'
-import CourseIdentBlock from './course-ident-block'
+import buildCourseIdent from '../helpers/build-course-ident'
 
 import semesterName from '../helpers/semester-name'
 import expandYear from '../helpers/expand-year'
@@ -63,7 +63,9 @@ export default class DetailedCourse extends Component {
 					<CourseTitle {...course} />
 
 					<div className='summary'>
-						<CourseIdentBlock {...course} />
+						<span className='identifier'>
+							{buildCourseIdent(course)}
+						</span>
 						<span className='type'>{course.type}</span>
 					</div>
 				</div>

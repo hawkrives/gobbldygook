@@ -1,16 +1,22 @@
 import React, {Component, PropTypes} from 'react'
+import compareProps from '../helpers/compare-props'
+
+const independentRegex = /^I[RS]/
 
 export default class CourseTitle extends Component {
 	static propTypes = {
 		name: PropTypes.string.isRequired,
-		onClick: PropTypes.func,
 		title: PropTypes.string,
 		type: PropTypes.string,
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return compareProps(this.props, nextProps)
+	}
+
 	render() {
 		const {name, title, type} = this.props
-		const isIndependent = /^I[RS]/.test(name)
+		const isIndependent = independentRegex.test(name)
 		let courseName = title || name
 		let subtitle = undefined
 
@@ -32,9 +38,7 @@ export default class CourseTitle extends Component {
 		return (
 			<header>
 				<h1 className='title'>{courseName}</h1>
-				{subtitle && subtitle.length
-					? <h2 className='subtitle'>{subtitle}</h2>
-					: null}
+				{subtitle && subtitle.length && <h2 className='subtitle'>{subtitle}</h2>}
 			</header>
 		)
 	}
