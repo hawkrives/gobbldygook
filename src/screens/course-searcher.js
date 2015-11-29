@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import compareProps from '../helpers/compare-props'
 import groupBy from 'lodash/collection/groupBy'
 import includes from 'lodash/collection/includes'
 import uniq from 'lodash/array/uniq'
@@ -99,49 +100,64 @@ function getPartialSearch(location) {
 	}
 }
 
-function CourseResultsList(props) {
-	const {
-		actions,
-		groupBy: groupByValue,
-		results,
-		sortBy: sortByValue,
-		student,
-	} = props
-
-	const sorted = sortBy(results, SORT_BY_TO_KEY[sortByValue])
-
-	// Group them by term, then turn the object into an array of pairs.
-	const groupedAndPaired = pairs(groupBy(sorted, GROUP_BY_TO_KEY[groupByValue]))
-
-	// Sort the result arrays by the first element, the term, because
-	// object keys don't have an implicit sort.
-	const searchResults = sortBy(groupedAndPaired, group => group[0])
-
-	if (includes(REVERSE_ORDER, groupByValue)) {
-		// Also reverse it, so the most recent is at the top.
-		searchResults.reverse()
+class CourseResultsList extends Component {
+	static propTypes = {
+		actions: PropTypes.object.isRequired,
+		groupBy: PropTypes.oneOf(GROUP_BY).isRequired,
+		results: PropTypes.array.isRequired,
+		sortBy: PropTypes.oneOf(SORT_BY).isRequired,
+		student: PropTypes.object.isRequired,
 	}
 
-	return (
-		<ul className='term-list'>
-			{map(searchResults, ([groupTitle, courses]) => {
-				const title = GROUP_BY_TO_TITLE[groupByValue](groupTitle)
-				return <li key={groupTitle} className='course-group'>
-					{title && <p className='course-group-title'>{title}</p>}
-					<ul className='course-list'>
-						{map(courses, (course, index) =>
-							<li key={index}>
-								<Course
-									course={course}
-									student={student}
-									actions={actions}
-								/>
-							</li>)}
-					</ul>
-				</li>
-			})}
-		</ul>
-	)
+	shouldComponentUpdate(nextProps) {
+		return compareProps(this.props, nextProps)
+	}
+
+	render() {
+		console.log('CourseResultsList.render')
+		const {
+			actions,
+			groupBy: groupByValue,
+			results,
+			sortBy: sortByValue,
+			student,
+		} = this.props
+
+		const sorted = sortBy(results, SORT_BY_TO_KEY[sortByValue])
+
+		// Group them by term, then turn the object into an array of pairs.
+		const groupedAndPaired = pairs(groupBy(sorted, GROUP_BY_TO_KEY[groupByValue]))
+
+		// Sort the result arrays by the first element, the term, because
+		// object keys don't have an implicit sort.
+		const searchResults = sortBy(groupedAndPaired, group => group[0])
+
+		if (includes(REVERSE_ORDER, groupByValue)) {
+			// Also reverse it, so the most recent is at the top.
+			searchResults.reverse()
+		}
+
+		return (
+			<ul className='term-list'>
+				{map(searchResults, ([groupTitle, courses]) => {
+					const title = GROUP_BY_TO_TITLE[groupByValue](groupTitle)
+					return <li key={groupTitle} className='course-group'>
+						{title && <p className='course-group-title'>{title}</p>}
+						<ul className='course-list'>
+							{map(courses, (course, index) =>
+								<li key={index}>
+									<Course
+										course={course}
+										student={student}
+										actions={actions}
+									/>
+								</li>)}
+						</ul>
+					</li>
+				})}
+			</ul>
+		)
+	}
 }
 
 function CourseSearcher(props) {
