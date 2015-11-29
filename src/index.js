@@ -34,6 +34,10 @@ import configureStore from './ducks/store/configure-store'
 import Root from './containers/root'
 const store = configureStore()
 
+if (process.env.NODE_ENV !== 'production') {
+	typeof window !== 'undefined' && (window.Perf = require('react-addons-perf'))
+}
+
 import { loadStudents } from './ducks/actions/students'
 import { loadAreas } from './ducks/actions/areas'
 store.dispatch(loadStudents())
