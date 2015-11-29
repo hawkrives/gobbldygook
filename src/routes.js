@@ -3,7 +3,7 @@ import { Route, IndexRoute, Redirect } from 'react-router'
 
 import App from './screens/app'
 // import AreaEditor from './screens/area-editor'
-// import CourseTable from './screens/course-table'
+import CourseTable from './screens/course-table'
 // import CreateStudent from './screens/create-student'
 // import DownloadStudent from './screens/download-student'
 // import NewStudentWizard from './screens/new-student-wizard'
@@ -24,9 +24,9 @@ export default (
 		<Redirect from='debug' to='degub' />
 		{/*<Route component={CreateStudent} path='create-student/' />*/}
 		<Route component={Student} path='s/:id/'>
-			<IndexRoute component={Degub} />
-			{/*<IndexRoute component={CourseTable} />
-			{//<Route component={AreaEditor} path='edit-area' />}
+			{/*{<IndexRoute component={Degub} />}*/}
+			<IndexRoute component={CourseTable} />
+			{/*{//<Route component={AreaEditor} path='edit-area' />}
 			<Route component={NewStudentWizard} path='wizard/' />
 			<Route component={SemesterDetail} path='semester/:year/:semester/' />
 			<Route component={DownloadStudent} path='download/' />*/}
