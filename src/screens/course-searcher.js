@@ -118,7 +118,7 @@ export default class CourseSearcher extends Component {
 	}
 
 	onSubmit = () => {
-		if (this.state.queryString !== this.state.lastQuery || size(this.context.location.query.partialSearch)) {
+		if (this.state.queryString !== this.state.lastQuery || this.context.location.query.partialSearch) {
 			if (process.env.NODE_ENV === 'production') {
 				try {
 					window.ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
@@ -140,14 +140,14 @@ export default class CourseSearcher extends Component {
 	}
 
 	query = searchQuery => {
-		if ((searchQuery.length === 0 && !size(this.context.location.query.partialSearch)) || this.state.queryInProgress) {
+		if ((searchQuery.length === 0 && !this.context.location.query.partialSearch) || this.state.queryInProgress) {
 			return
 		}
 
 		this.setState({results: [], hasQueried: false, error: null})
 		const startQueryTime = present()
 
-		queryCourseDatabase(searchQuery, this.context.location.query.partialSearch)
+		queryCourseDatabase(searchQuery, JSON.parse(this.context.location.query.partialSearch))
 			.then(results => {
 				console.info(`query took ${(present() - startQueryTime)}ms.`)
 				console.log('results', results)
@@ -218,7 +218,7 @@ export default class CourseSearcher extends Component {
 
 		let placeholderExtension = ''
 		if (size(this.context.location.query.partialSearch)) {
-			placeholderExtension = `(${toPrettyTerm(this.context.location.query.partialSearch.term)})`
+			placeholderExtension = `(${toPrettyTerm(JSON.parse(this.context.location.query.partialSearch).term)})`
 		}
 		console.timeEnd('render')
 
