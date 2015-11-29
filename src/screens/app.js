@@ -1,12 +1,12 @@
 import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
-import React, {Component, PropTypes, cloneElement} from 'react'
+import React, { Component, PropTypes, cloneElement } from 'react'
+import { DragDropContext } from 'react-dnd'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { DragDropContext } from 'react-dnd'
 import { ActionCreators as UndoableActionCreators } from 'redux-undo'
-
 import * as actionCreators from '../ducks/actions/students'
+import omit from 'lodash/object/omit'
 
 import '../index.scss'
 
@@ -23,21 +23,20 @@ export class App extends Component {
 	render() {
 		return (
 			<DocumentTitle title='Gobbldygook'>
-				{cloneElement(this.props.children, {...this.props})}
+				{cloneElement(this.props.children, omit(this.props, 'children'))}
 			</DocumentTitle>
 		)
 	}
 }
-
 
 function mapStateToProps(state) {
 	// selects some state that is relevant to this component, and returns it.
 	// redux-react will bind it to props.
 	return {
 		areas: state.areas,
-		students: state.students.present,
-		canUndo: state.students.past.length !== 0,
 		canRedo: state.students.future.length !== 0,
+		canUndo: state.students.past.length !== 0,
+		students: state.students.present,
 	}
 }
 
@@ -55,5 +54,4 @@ function mapDispatchToProps(dispatch) {
 
 const draggable = DragDropContext(HTML5Backend)(App)
 const connected = connect(mapStateToProps, mapDispatchToProps)(draggable)
-
 export default connected
