@@ -1,5 +1,5 @@
 import fs from 'graceful-fs'
-import evaluate from '../src/lib/evaluate'
+import evaluate from '../src/area-tools/evaluate'
 import endsWith from 'lodash/string/endsWith'
 import junk from 'junk'
 import nom from 'nomnom'
@@ -24,25 +24,25 @@ function loadStudents(dir) {
 		.map(JSON.parse)
 }
 
-function benchmark({runs, graph}) {
-	loadStudents('./test/example-students/')
-		.forEach(({courses=[], overrides={}, areas=[]}) => {
-			areas.forEach(areaInfo => {
-				console.log(`the '${areaInfo.name}' ${areaInfo.type} (${areaInfo.revision})`)
-				let areaData = loadArea(areaInfo)
-				let times = range(runs).map(() => {
-					const start = process.hrtime()
-					evaluate({courses, overrides}, areaData)
-					return now(start)
-				})
+async function benchmark({runs, graph}) {
+	for (const {courses=[], overrides={}, areas=[]} of loadStudents('./test/example-students/')) {
+		for (const areaInfo of areas) {
+			console.log(`the '${areaInfo.name}' ${areaInfo.type} (${areaInfo.revision})`)
+			const areaData = await loadArea(areaInfo)  // eslint-disable-line babel/no-await-in-loop
 
-				const avg = sum(times) / size(times)
-				if (graph) {
-					console.log(`  ${sparkly(times)}`)
-				}
-				console.log(`  average time: ${ms(avg)} (over ${runs} runs)\n`)
+			let times = range(runs).map(() => {
+				const start = process.hrtime()
+				evaluate({courses, overrides}, areaData)
+				return now(start)
 			})
-		})
+
+			const avg = sum(times) / size(times)
+			if (graph) {
+				console.log(`  ${sparkly(times)}`)
+			}
+			console.log(`  average time: ${ms(avg)} (over ${runs} runs)\n`)
+		}
+	}
 }
 
 function cli() {
