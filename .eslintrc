@@ -22,6 +22,7 @@ globals:
 
 plugins:
   - eslint-plugin-react
+  - eslint-plugin-babel
 
 # 1 means warning
 # 2 means error
@@ -59,7 +60,7 @@ rules:
   consistent-this: [1, self]
   brace-style: [1, stroustrup]
   semi: [2, never]
-  arrow-parens: [1, as-needed]
+  babel/arrow-parens: [1, as-needed]
   arrow-spacing: [1, {before: true, after: true}]
   no-implicit-coercion: [2, {boolean: true, number: true, string: true}]
   space-before-keywords: [1, always]
@@ -84,6 +85,10 @@ rules:
   react/self-closing-comp: 1    # prevent extra closing tags for components without children
   react/sort-comp: 1
   react/wrap-multilines: 0
+
+  # babel
+  babel/no-await-in-loop: 1
+
 
   # jsdoc
   valid-jsdoc:
