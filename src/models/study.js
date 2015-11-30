@@ -1,4 +1,4 @@
-import loadArea from './load-area'
+import loadArea from '../helpers/load-area'
 import omit from 'lodash/object/omit'
 
 export default function Study(data) {
