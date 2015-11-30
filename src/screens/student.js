@@ -60,7 +60,7 @@ export class Student extends Component {
 		return (
 			<DocumentTitle title={`${this.props.student.name} | Gobbldygook`}>
 				<div className='student'>
-					<Sidebar {...childProps} />
+					<Sidebar {...childProps} courses={this.state.courses} areas={this.props.areas} />
 					{cloneElement(this.props.children, {...childProps, courses: this.state.courses, className: 'content'})}
 				</div>
 			</DocumentTitle>

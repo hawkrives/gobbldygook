@@ -4,7 +4,7 @@ import history from '../history'
 
 import Button from '../components/button'
 import CourseSearcher from './course-searcher'
-// import GraduationStatus from './graduation-status'
+import GraduationStatus from './graduation-status'
 import Icon from '../components/icon'
 import Toolbar from '../components/toolbar'
 import Separator from '../components/separator'
@@ -16,8 +16,10 @@ import './sidebar.scss'
 export default class Sidebar extends Component {
 	static propTypes = {
 		actions: PropTypes.object.isRequired,
+		areas: PropTypes.array.isRequired,
 		canRedo: PropTypes.bool.isRequired,
 		canUndo: PropTypes.bool.isRequired,
+		courses: PropTypes.array.isRequired,
 		student: PropTypes.object.isRequired,
 	}
 
@@ -45,7 +47,7 @@ export default class Sidebar extends Component {
 	}
 
 	render() {
-		const { actions, canUndo, canRedo, student } = this.props
+		const { actions, canUndo, canRedo, student, courses, areas } = this.props
 		const isSearching = 'partialSearch' in this.context.location.query || 'search' in this.context.location.query
 
 		return (
@@ -76,10 +78,11 @@ export default class Sidebar extends Component {
 
 				<CourseRemovalBox studentId={student.id} actions={actions} />
 
-				<div>{isSearching ? 'Is searching!' : 'is not searching…'}</div>
-
 				{!isSearching
-					? null //<GraduationStatus isHidden={isSearching} />
+					? <GraduationStatus
+						{...{actions, student, courses, areas}}
+						isHidden={isSearching}
+					/>
 					: <CourseSearcher
 						{...{actions, student}}
 						isHidden={!isSearching}

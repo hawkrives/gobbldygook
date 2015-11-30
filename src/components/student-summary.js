@@ -2,12 +2,12 @@ import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
+import filter from 'lodash/collection/filter'
+import pluck from 'lodash/collection/pluck'
 import sample from 'lodash/collection/sample'
 
 import AvatarLetter from './avatar-letter'
 import ContentEditable from './content-editable'
-
-import studentActions from '../flux/student-actions'
 
 import countCredits from '../area-tools/count-credits'
 
@@ -41,8 +41,8 @@ const welcomeMessages = [
 
 export default class StudentSummary extends Component {
 	static propTypes = {
+		actions: PropTypes.object,
 		courses: PropTypes.arrayOf(PropTypes.object),
-		coursesLoaded: PropTypes.bool.isRequired,
 		graduatability: PropTypes.bool.isRequired,
 		student: PropTypes.object.isRequired,
 	}
@@ -55,6 +55,7 @@ export default class StudentSummary extends Component {
 	}
 
 	render() {
+		const {actions} = this.props
 		const canGraduate = this.props.graduatability
 		const student = this.props.student
 		const studies = student.studies
@@ -62,30 +63,30 @@ export default class StudentSummary extends Component {
 		const NameEl = (
 			<ContentEditable
 				className='autosize-input'
-				onBlur={ev => studentActions.changeName(student.id, ev.target.value)}
+				onBlur={ev => actions.changeName(student.id, ev.target.value)}
 				value={String(student.name)}
 			/>
 		)
 
-		const degrees = studies.filter(s => s.type === 'degree')
-		const majors = studies.filter(s => s.type === 'major')
-		const concentrations = studies.filter(s => s.type === 'concentration')
-		const emphases = studies.filter(s => s.type === 'emphasis')
+		const degrees = filter(studies, {type: 'degree'})
+		const majors = filter(studies, {type: 'major'})
+		const concentrations = filter(studies, {type: 'concentration'})
+		const emphases = filter(studies, {type: 'emphasis'})
 
 		const degreeWord = plur('degree', degrees.size)
 		const majorWord = plur('major', majors.size)
 		const concentrationWord = plur('concentration', concentrations.size)
-		const emphasisWord = plur('emphasis', 'emphases', emphases.size)
+		const emphasisWord = plur('emphasis', emphases.size)
 
 		const degreeEmphasizer = (degrees.size === 1) ? 'a ' : ''
 		const majorEmphasizer = (majors.size === 1) ? 'a ' : ''
 		const concentrationEmphasizer = (concentrations.size === 1) ? 'a ' : ''
 		const emphasisEmphasizer = (emphases.size === 1) ? 'an ' : ''
 
-		const degreeList = oxford(degrees.map(s => s.name).toArray())
-		const majorList = oxford(majors.map(s => s.name).toArray())
-		const concentrationList = oxford(concentrations.map(s => s.name).toArray())
-		const emphasisList = oxford(emphases.map(s => s.name).toArray())
+		const degreeList = oxford(pluck(degrees, 'name'))
+		const majorList = oxford(pluck(majors, 'name'))
+		const concentrationList = oxford(pluck(concentrations, 'name'))
+		const emphasisList = oxford(pluck(emphases, 'name'))
 
 		const currentCredits = countCredits(this.props.courses)
 		const neededCredits = student.creditsNeeded
@@ -94,7 +95,7 @@ export default class StudentSummary extends Component {
 		const graduationEl = (
 			<ContentEditable
 				className='autosize-input'
-				onBlur={ev => studentActions.changeGraduation(student.id, parseInt(ev.target.value || 0))}
+				onBlur={ev => actions.changeGraduation(student.id, parseInt(ev.target.value || 0))}
 				value={String(student.graduation)}
 			/>
 		)
@@ -102,7 +103,7 @@ export default class StudentSummary extends Component {
 		const matriculationEl = (
 			<ContentEditable
 				className='autosize-input'
-				onBlur={ev => studentActions.changeMatriculation(student.id, parseInt(ev.target.value || 0))}
+				onBlur={ev => actions.changeMatriculation(student.id, parseInt(ev.target.value || 0))}
 				value={String(student.matriculation)}
 			/>
 		)
@@ -132,7 +133,7 @@ export default class StudentSummary extends Component {
 						{((majors.size || concentrations.size) && emphases.size) ? ', ' : ''}
 						{(emphases.size > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
 						{'. '}
-						{this.props.coursesLoaded && `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? '👍' : ''}`}
+						{currentCredits && `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`}
 					</div>
 					<div className='paragraph graduation-message'>
 						{canGraduate ? goodGraduationMessage : badGraduationMessage}
