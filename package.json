@@ -35,7 +35,7 @@
     "profile": "cat profile/README.md",
     "start": "env NODE_ENV=dev webpack-dev-server --config .webpackrc --progress",
     "stats": "env NODE_ENV=production npm run stats:base",
-    "stats:base": "webpack --config .webpackrc --bail --profile --json > stats.json && open http://webpack.github.io/analyse/",
+    "stats:base": "webpack --config .webpackrc --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
     "stats:dev": "env NODE_ENV=dev npm run stats:base",
     "test": "npm run mocha",
     "test:students": "./bin/test-students",
