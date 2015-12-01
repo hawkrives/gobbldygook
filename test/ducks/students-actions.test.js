@@ -70,8 +70,11 @@ const {
 } = require('../../src/ducks/constants/students')
 
 describe('initStudent action', () => {
-	it('returns an action to create a student', () => {
-		let action = initStudent()
+	it('returns an action to create a student', async () => {
+		let actionPromise = initStudent()
+		expect(actionPromise instanceof Promise).to.true
+
+		let action = await actionPromise
 		expect(action).to.have.property('type', INIT_STUDENT)
 		expect(action).to.have.property('payload')
 		expect(action.payload).to.be.an.object
@@ -79,14 +82,17 @@ describe('initStudent action', () => {
 })
 
 describe('importStudent action', () => {
-	it('returns an action to import a student', () => {
-		let action = importStudent({})
+	it('returns an action to import a student', async () => {
+		let actionPromise = importStudent({})
+		expect(actionPromise instanceof Promise).to.be.true
+
+		let action = await actionPromise
 		expect(action).to.have.property('type', IMPORT_STUDENT)
 		expect(action).to.have.property('payload')
 	})
 
-	it('includes an "error" property if there is an error', () => {
-		let action = importStudent({data: '^INVALID_JSON^', type: 'application/json'})
+	it('includes an "error" property if there is an error', async () => {
+		let action = await importStudent({data: '^INVALID_JSON^', type: 'application/json'})
 		expect(action).to.have.property('error', true)
 		expect(action).to.have.property('payload')
 		expect(action.payload).to.have.property('message', 'Unexpected token ^')
@@ -95,15 +101,18 @@ describe('importStudent action', () => {
 
 describe('destroyStudent action', () => {
 	beforeEach(() => {
-		localStorage.setItem('student', JSON.stringify({}))
+		localStorage.setItem('student', JSON.stringify({id: 'student'}))
 		localStorage.setItem('studentIds', JSON.stringify(['student']))
 	})
 	afterEach(() => {
 		localStorage.clear()
 	})
 
-	it('destroys a student and returns an action to remove it from memory', () => {
-		let action = destroyStudent('student')
+	it('destroys a student and returns an action to remove it from memory', async () => {
+		let actionPromise = destroyStudent('student')
+		expect(actionPromise instanceof Promise).to.be.true
+
+		let action = await actionPromise
 		expect(action).to.have.property('type', DESTROY_STUDENT)
 		expect(action).to.have.property('payload')
 		expect(action.payload).to.be.an.object

@@ -221,20 +221,6 @@ export function encodeStudent(student) {
 	return encodeURIComponent(stringify(student))
 }
 
-export function saveStudent(student) {
-	// grab the old (still JSON-encoded) student from localstorage
-	// compare it to the current one
-	// if they're different, update dateLastModified, stringify, and save.
-	const oldVersion = localStorage.getItem(student.id)
-
-	if (oldVersion !== stringify(student)) {
-		debug(`saving student ${student.name} (${student.id})`)
-		student = {...student, dateLastModified: new Date()}
-		localStorage.setItem(student.id, stringify(student))
-	}
-}
-
-
 
 export function moveScheduleInStudent(student, scheduleId, {year, semester}={}) {
 	if (year === undefined && semester === undefined) {
