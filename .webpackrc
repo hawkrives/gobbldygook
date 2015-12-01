@@ -100,6 +100,9 @@ var config = {
 			// console.error('NormalModuleReplacementPlugin', arguments)
 			result.request = result.request.replace('default_full', 'default_safe')
 		}),
+		new webpack.NormalModuleReplacementPlugin(/babel-runtime\/core-js\/promise/, function(result) {
+			result.request = 'bluebird'
+		}),
 
 		new webpack.DefinePlugin({
 			VERSION: JSON.stringify(pkg.version),
