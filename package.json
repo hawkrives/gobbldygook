@@ -98,7 +98,7 @@
     "coveralls": "2.11.4",
     "css-loader": "0.23.0",
     "dom-storage": "2.0.1",
-    "eslint": "1.10.2",
+    "eslint": "1.10.3",
     "eslint-plugin-react": "3.11.2",
     "extract-text-webpack-plugin": "0.9.1",
     "file-loader": "0.8.5",

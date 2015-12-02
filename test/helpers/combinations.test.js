@@ -3,8 +3,9 @@ import combinations from '../../src/helpers/combinations'
 
 function collect(comb) {
 	let items = []
-	for (let item of comb)
+	for (let item of comb) {
 		items.push(item)
+	}
 	return items
 }
 
