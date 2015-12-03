@@ -7,8 +7,6 @@
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
-  "COURSE_INFO": "../sto-course-data/build/info.json",
-  "AREA_INFO": "./build/areas/info.json",
   "config": {
     "beautify": "-f - --end-with-newline --indent-with-tabs",
     "mocha": "test/areas test/models test/helpers test/ducks"
