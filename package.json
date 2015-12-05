@@ -75,7 +75,7 @@
     "react-gateway": "1.1.0",
     "react-modal2": "2.0.1",
     "react-redux": "4.0.0",
-    "react-router": "1.0.0",
+    "react-router": "1.0.1",
     "redux": "3.0.4",
     "reflux": "0.3.0",
     "sha1": "1.1.1",
