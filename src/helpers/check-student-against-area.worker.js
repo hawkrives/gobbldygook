@@ -11,6 +11,8 @@ import stringifyError from './stringify-error'
 import evaluate from '../area-tools/evaluate'
 import findLeafRequirements from '../area-tools/find-leaf-requirements'
 
+const debug = require('debug')('gobbldygook:helpers:check-student-against-area')
+
 function alterCourse(course) {
 	return zipObject(map(pairs(course), ([key, value]) => {
 		if (key === 'depts') {
@@ -73,7 +75,7 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScop
 
 		checkStudentAgainstArea(student, area)
 			.then(result => {
-				console.log(`[check-student(${id})] took ${round(present() - start)} ms`)
+				debug(`[check-student(${id})] took ${round(present() - start)} ms`)
 				self.postMessage(JSON.stringify([id, 'result', result]))
 			})
 			.catch(err => {

@@ -18,6 +18,8 @@ import buildDeptNum from '../helpers/build-dept-num'
 import splitParagraph from '../helpers/split-paragraph'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
+const debug = require('debug')('gobbldygook:helpers:load-data')
+
 import db from './db'
 
 import {
@@ -62,7 +64,7 @@ function getCacheStoreName(type) {
 }
 
 function storeCourses(item) {
-	console.log(`storeCourses(): ${item.path}`)
+	debug(`storeCourses(): ${item.path}`)
 
 	let coursesToStore = map(item.data, course => {
 		course.sourcePath = item.path
@@ -72,7 +74,7 @@ function storeCourses(item) {
 	const start = present()
 	return db.store('courses').batch(coursesToStore)
 		.then(() => {
-			console.log(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
+			debug(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
 		})
 		.catch(err => {
 			const db = err.target.db.name
@@ -91,7 +93,7 @@ function storeCourses(item) {
 }
 
 function storeArea(item) {
-	console.log(`storeArea(): ${item.path}`)
+	debug(`storeArea(): ${item.path}`)
 
 	const id = item.path
 
@@ -120,7 +122,7 @@ function storeItem(item) {
 
 async function cleanPriorData(item) {
 	const {path, type} = item
-	console.log(`cleanPriorData(): ${path}`)
+	debug(`cleanPriorData(): ${path}`)
 
 	let oldItems = []
 
@@ -152,7 +154,7 @@ async function cleanPriorData(item) {
 }
 
 function cacheItemHash({path, type, hash}) {
-	console.log(`cacheItemHash(): ${path}`)
+	debug(`cacheItemHash(): ${path}`)
 
 	return db.store(getCacheStoreName(type)).put({id: path, path, hash})
 }
@@ -161,7 +163,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 	const {path, hash} = infoFromServer
 	const itemUrl = `/${path}?v=${hash}`
 
-	console.log(`updateDatabase(): ${path}`)
+	debug(`updateDatabase(): ${path}`)
 	dispatch(startProgress(notificationId, `Loading ${type}`, {max: count}, true))
 
 	const url = infoFileBase + itemUrl
@@ -201,7 +203,7 @@ async function updateDatabase(type, infoFromServer, infoFileBase, notificationId
 		throw e
 	}
 
-	console.log(`added ${item.path} (${item.count} ${item.type})`)
+	debug(`added ${item.path} (${item.count} ${item.type})`)
 	dispatch(incrementProgress(notificationId))
 }
 
@@ -212,7 +214,7 @@ async function needsUpdate({type, path, hash}) {
 }
 
 async function loadDataFiles(infoFile, infoFileBase) {
-	console.log(`loadDataFiles(): ${infoFileBase}`)
+	debug(`loadDataFiles(): ${infoFileBase}`)
 
 	const notificationId = infoFile.type
 	let filesToLoad = infoFile.files
@@ -240,7 +242,7 @@ async function loadDataFiles(infoFile, infoFileBase) {
 }
 
 function loadInfoFile(url, infoFileBase) {
-	console.log(`loadInfoFile(): ${url}`)
+	debug(`loadInfoFile(): ${url}`)
 
 	return fetch(url)
 		.then(status)
@@ -258,7 +260,7 @@ function loadInfoFile(url, infoFileBase) {
 }
 
 self.addEventListener('message', ({data}) => {
-	console.log('[load-data] received message:', data)
+	debug('[load-data] received message:', data)
 	loadInfoFile(...data)
 		.then(() => self.postMessage(true))
 		.catch(err => self.postMessage(JSON.parse(stringifyError(err))))
