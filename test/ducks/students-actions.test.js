@@ -70,11 +70,9 @@ const {
 } = require('../../src/ducks/constants/students')
 
 describe('initStudent action', () => {
-	it('returns an action to create a student', async () => {
-		let actionPromise = initStudent()
-		expect(actionPromise instanceof Promise).to.true
+	it('returns an action to create a student', () => {
+		let action = initStudent()
 
-		let action = await actionPromise
 		expect(action).to.have.property('type', INIT_STUDENT)
 		expect(action).to.have.property('payload')
 		expect(action.payload).to.be.an.object
@@ -82,17 +80,15 @@ describe('initStudent action', () => {
 })
 
 describe('importStudent action', () => {
-	it('returns an action to import a student', async () => {
-		let actionPromise = importStudent({})
-		expect(actionPromise instanceof Promise).to.be.true
+	it('returns an action to import a student', () => {
+		let action = importStudent({})
 
-		let action = await actionPromise
 		expect(action).to.have.property('type', IMPORT_STUDENT)
 		expect(action).to.have.property('payload')
 	})
 
-	it('includes an "error" property if there is an error', async () => {
-		let action = await importStudent({data: '^INVALID_JSON^', type: 'application/json'})
+	it('includes an "error" property if there is an error', () => {
+		let action = importStudent({data: '^INVALID_JSON^', type: 'application/json'})
 		expect(action).to.have.property('error', true)
 		expect(action).to.have.property('payload')
 		expect(action.payload).to.have.property('message', 'Unexpected token ^')
