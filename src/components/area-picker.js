@@ -1,6 +1,10 @@
 import React, {Component, PropTypes} from 'react'
 import fuzzysearch from 'fuzzysearch'
 import pluralizeArea from '../area-tools/pluralize-area'
+import map from 'lodash/collection/map'
+import reject from 'lodash/collection/reject'
+import filter from 'lodash/collection/filter'
+import includes from 'lodash/collection/includes'
 
 import Button from './button'
 import List from './list'
@@ -26,13 +30,11 @@ export default class AreaPicker extends Component {
 	}
 
 	render() {
-		const currentAreaNames = this.props.currentAreas.map(a => a.name)
+		const currentAreaNames = map(this.props.currentAreas, a => a.name)
 
-		const areaList = this.props.allAreas
-			.toList()
-			.filterNot(area => currentAreaNames.includes(area.name))
-			.filter(area => fuzzysearch(this.state.filter, area.name.toLowerCase()))
-			.map((area, i) =>
+		const onlyAvailableAreas = reject(this.props.allAreas, area => includes(currentAreaNames, area.name))
+		const filteredOnName = filter(onlyAvailableAreas, area => fuzzysearch(this.state.filter, area.name.toLowerCase()))
+		const areaList = map(filteredOnName, (area, i) =>
 				<div key={area.name + i} className='area--choice'>
 					{`${area.name} [${area.revision}]`}
 					<Button className='toggle-area' type='flat'
@@ -40,7 +42,6 @@ export default class AreaPicker extends Component {
 						Add
 					</Button>
 				</div>)
-			.toArray()
 
 		let message = 'Oh! We need a new message here!'
 		if (this.state.filter) {
