@@ -5,6 +5,7 @@ import Button from './button'
 import Icon from './icon'
 import Requirement from './requirement'
 import ProgressBar from './progress-bar'
+import compareProps from '../helpers/compare-props'
 
 import './area-of-study.scss'
 
@@ -178,6 +179,10 @@ export default class AreaOfStudyContainer extends Component {
 			isOpen: false,
 			confirmRemoval: false,
 		}
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return compareProps(this.props, nextProps) || compareProps(this.state, nextState)
 	}
 
 	startRemovalConfirmation = ev => {

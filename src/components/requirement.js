@@ -11,6 +11,7 @@ import Filter from './expression--filter'
 import Expression from './expression'
 import Button from './button'
 
+import compareProps from '../helpers/compare-props'
 import './requirement.scss'
 
 function getResultOfRequirement(requirements) {
@@ -34,6 +35,10 @@ export default class Requirement extends Component {
 
 	static defaultProps = {
 		topLevel: false,
+	}
+
+	shouldComponentUpdate(nextProps) {
+		return compareProps(this.props, nextProps)
 	}
 
 	render() {
