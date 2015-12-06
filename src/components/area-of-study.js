@@ -104,17 +104,17 @@ function AreaOfStudy(props) {
 	}
 
 	return (
-		<details className={cx('area', {errored: Boolean(error)}, {loading: !checked})}>
-			<summary
+		<div className={cx('area', {errored: Boolean(error)}, {loading: !checked})}>
+			<div
 				className='area--summary'
 				onClick={toggleAreaExpansion}
 			>
 				{confirmRemoval
 					? removalConfirmation
 					: summary}
-			</summary>
+			</div>
 			{isOpen && !confirmRemoval && contents}
-		</details>
+		</div>
 	)
 }
 AreaOfStudy.propTypes = {
