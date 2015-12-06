@@ -38,7 +38,7 @@ async function benchmark({runs, graph}) {
 
 			const avg = sum(times) / size(times)
 			if (graph) {
-				console.log(`  ${sparkly(times)}`)
+				console.log(`  ${sparkly(times, {min: 0})}`)
 			}
 			console.log(`  average time: ${ms(avg)} (over ${runs} runs)\n`)
 		}
