@@ -73,15 +73,15 @@ export default class StudentSummary extends Component {
 		const concentrations = filter(studies, {type: 'concentration'})
 		const emphases = filter(studies, {type: 'emphasis'})
 
-		const degreeWord = plur('degree', degrees.size)
-		const majorWord = plur('major', majors.size)
-		const concentrationWord = plur('concentration', concentrations.size)
-		const emphasisWord = plur('emphasis', emphases.size)
+		const degreeWord = plur('degree', degrees.length)
+		const majorWord = plur('major', majors.length)
+		const concentrationWord = plur('concentration', concentrations.length)
+		const emphasisWord = plur('emphasis', emphases.length)
 
-		const degreeEmphasizer = (degrees.size === 1) ? 'a ' : ''
-		const majorEmphasizer = (majors.size === 1) ? 'a ' : ''
-		const concentrationEmphasizer = (concentrations.size === 1) ? 'a ' : ''
-		const emphasisEmphasizer = (emphases.size === 1) ? 'an ' : ''
+		const degreeEmphasizer = (degrees.length === 1) ? 'a ' : ''
+		const majorEmphasizer = (majors.length === 1) ? 'a ' : ''
+		const concentrationEmphasizer = (concentrations.length === 1) ? 'a ' : ''
+		const emphasisEmphasizer = (emphases.length === 1) ? 'an ' : ''
 
 		const degreeList = oxford(pluck(degrees, 'name'))
 		const majorList = oxford(pluck(majors, 'name'))
@@ -125,13 +125,13 @@ export default class StudentSummary extends Component {
 				<div className='content'>
 					<div className='paragraph'>
 						After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
-						{(degrees.size > 0) ? `${degreeEmphasizer}${degreeList} ${degreeWord}` : `no ${degreeWord}`}
-						{(majors.size || concentrations.size || emphases.size) ? (majors.size) && (concentrations.size || emphases.size) ? ', ' : ' and ' : ''}
-						{(majors.size > 0) && `${majorEmphasizer}${majorWord} in ${majorList}`}
-						{(majors.size && concentrations.size) ? ', and ' : ''}
-						{(concentrations.size > 0) && `${concentrationEmphasizer}${concentrationWord} in ${concentrationList}`}
-						{((majors.size || concentrations.size) && emphases.size) ? ', ' : ''}
-						{(emphases.size > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
+						{(degrees.length > 0) ? `${degreeEmphasizer}${degreeList} ${degreeWord}` : `no ${degreeWord}`}
+						{(majors.length || concentrations.length || emphases.length) ? (majors.length) && (concentrations.length || emphases.length) ? ', ' : ' and ' : ''}
+						{(majors.length > 0) && `${majorEmphasizer}${majorWord} in ${majorList}`}
+						{(majors.length && concentrations.length) ? ', and ' : ''}
+						{(concentrations.length > 0) && `${concentrationEmphasizer}${concentrationWord} in ${concentrationList}`}
+						{((majors.length || concentrations.length) && emphases.length) ? ', ' : ''}
+						{(emphases.length > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
 						{'. '}
 						{currentCredits && `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`}
 					</div>
