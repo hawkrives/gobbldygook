@@ -3,6 +3,7 @@ import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import omit from 'lodash/object/omit'
 
+import ShareSheet from './share-sheet'
 import Sidebar from './sidebar'
 import Loading from '../components/loading'
 import getStudentCourses from '../helpers/get-student-courses'
@@ -18,6 +19,10 @@ export class Student extends Component {
 		children: PropTypes.node.isRequired,  // from react-router
 		params: PropTypes.object,
 		student: PropTypes.object,
+	}
+
+	static contextTypes = {
+		location: PropTypes.object,
 	}
 
 	constructor() {
@@ -62,6 +67,7 @@ export class Student extends Component {
 				<div className='student'>
 					<Sidebar {...childProps} courses={this.state.courses} areas={this.props.areas} />
 					{cloneElement(this.props.children, {...childProps, courses: this.state.courses, className: 'content'})}
+					{'share' in this.context.location.query && <ShareSheet student={this.props.student} />}
 				</div>
 			</DocumentTitle>
 		)
