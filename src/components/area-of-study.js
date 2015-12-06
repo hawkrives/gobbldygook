@@ -16,6 +16,7 @@ function AreaOfStudy(props) {
 		confirmRemoval,
 		endRemovalConfirmation,
 		isOpen,
+		removeArea,
 		removeOverride,
 		showCloseButton,
 		startRemovalConfirmation,
@@ -29,10 +30,13 @@ function AreaOfStudy(props) {
 		slug,
 		isCustom,
 		name,
-		_progress: progress = {},
+		_progress: progress,
 		_error: error,
 		_checked: checked,
 	} = area
+
+	const progressAt = typeof progress !== 'undefined' ? progress.at : 0
+	const progressOf = typeof progress !== 'undefined' ? progress.of : 1
 
 	const summary = (
 		<div>
@@ -63,8 +67,8 @@ function AreaOfStudy(props) {
 			<ProgressBar
 				className={cx('area--progress', {error: error})}
 				colorful={true}
-				value={progress.at}
-				max={progress.of}
+				value={progressAt}
+				max={progressOf}
 			/>
 		</div>
 	)
@@ -75,7 +79,7 @@ function AreaOfStudy(props) {
 			<span className='button-group'>
 				<Button
 					className='area--actually-remove-area'
-					onClick={ev => props.removeArea({ev, areaQuery: {name, type, revision}})}
+					onClick={ev => removeArea({ev, areaQuery: {name, type, revision}})}
 				>
 					Remove
 				</Button>
@@ -124,6 +128,7 @@ AreaOfStudy.propTypes = {
 	confirmRemoval: PropTypes.bool.isRequired,
 	endRemovalConfirmation: PropTypes.func.isRequired,
 	isOpen: PropTypes.bool.isRequired,
+	removeArea: PropTypes.func.isRequired,
 	removeOverride: PropTypes.func.isRequired,
 	showCloseButton: PropTypes.bool.isRequired,
 	startRemovalConfirmation: PropTypes.func.isRequired,
@@ -144,7 +149,6 @@ export default class AreaOfStudyContainer extends Component {
 			data: PropTypes.object,
 			isCustom: PropTypes.bool,
 			name: PropTypes.string.isRequired,
-			result: PropTypes.object,
 			revision: PropTypes.string.isRequired,
 			slug: PropTypes.string,
 			type: PropTypes.string.isRequired,
@@ -169,7 +173,6 @@ export default class AreaOfStudyContainer extends Component {
 			name: 'Unknown Area',
 			type: '???',
 			revision: '0000-00',
-			result: {},
 		},
 	}
 
@@ -210,6 +213,7 @@ export default class AreaOfStudyContainer extends Component {
 				confirmRemoval={this.state.confirmRemoval}
 				endRemovalConfirmation={this.endRemovalConfirmation}
 				isOpen={this.state.isOpen}
+				removeArea={this.props.removeArea}
 				removeOverride={this.props.removeOverride}
 				showCloseButton={this.props.showCloseButton}
 				startRemovalConfirmation={this.startRemovalConfirmation}
