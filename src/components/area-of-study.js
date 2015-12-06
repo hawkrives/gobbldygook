@@ -8,7 +8,129 @@ import ProgressBar from './progress-bar'
 
 import './area-of-study.scss'
 
-export default class AreaOfStudy extends Component {
+function AreaOfStudy(props) {
+	const {
+		addOverride,
+		area,
+		confirmRemoval,
+		endRemovalConfirmation,
+		isOpen,
+		removeOverride,
+		showCloseButton,
+		startRemovalConfirmation,
+		toggleAreaExpansion,
+		toggleOverride,
+	} = props
+
+	const {
+		type,
+		revision,
+		slug,
+		isCustom,
+		name,
+		_progress: progress = {},
+		_error: error,
+		_checked: checked,
+	} = area
+
+	const summary = (
+		<div>
+			<div className='area--summary-row'>
+				<h1 className='area--title'>
+					{slug && !isCustom && isOpen
+						? <a className='catalog-link'
+							href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
+							target='_blank'
+							onClick={ev => ev.stopPropagation()}
+							title='View in the St. Olaf Catalog'
+						>
+							{name}
+						</a>
+						: name}
+				</h1>
+				<span className='icons'>
+					{showCloseButton &&
+					<Button className='area--remove-button' onClick={startRemovalConfirmation}>
+						<Icon name='close' />
+					</Button>}
+					<Icon
+						className='area--open-indicator'
+						name={isOpen ? 'chevron-up' : 'chevron-down'}
+					/>
+				</span>
+			</div>
+			<ProgressBar
+				className={cx('area--progress', {error: error})}
+				colorful={true}
+				value={progress.at}
+				max={progress.of}
+			/>
+		</div>
+	)
+
+	const removalConfirmation = (
+		<div className='area--confirm-removal'>
+			<p>Remove <strong>{name}</strong>?</p>
+			<span className='button-group'>
+				<Button
+					className='area--actually-remove-area'
+					onClick={ev => props.removeArea({ev, areaQuery: {name, type, revision}})}
+				>
+					Remove
+				</Button>
+				<Button onClick={endRemovalConfirmation}>Cancel</Button>
+			</span>
+		</div>
+	)
+
+	let contents = null
+	if (error) {
+		contents = <p className='area--error'>{error} {':('}</p>
+	}
+	else if (!checked) {
+		contents = <p className='area--loading'>Loading…</p>
+	}
+	else {
+		contents = (
+			<Requirement
+				{...area}
+				topLevel
+				addOverride={addOverride}
+				toggleOverride={toggleOverride}
+				removeOverride={removeOverride}
+				path={[type, name]}
+			/>
+		)
+	}
+
+	return (
+		<details className={cx('area', {errored: Boolean(error)}, {loading: !checked})}>
+			<summary
+				className='area--summary'
+				onClick={toggleAreaExpansion}
+			>
+				{confirmRemoval
+					? removalConfirmation
+					: summary}
+			</summary>
+			{isOpen && !confirmRemoval && contents}
+		</details>
+	)
+}
+AreaOfStudy.propTypes = {
+	addOverride: PropTypes.func.isRequired,
+	area: PropTypes.object.isRequired,
+	confirmRemoval: PropTypes.bool.isRequired,
+	endRemovalConfirmation: PropTypes.func.isRequired,
+	isOpen: PropTypes.bool.isRequired,
+	removeOverride: PropTypes.func.isRequired,
+	showCloseButton: PropTypes.bool.isRequired,
+	startRemovalConfirmation: PropTypes.func.isRequired,
+	toggleAreaExpansion: PropTypes.func.isRequired,
+	toggleOverride: PropTypes.func.isRequired,
+}
+
+export default class AreaOfStudyContainer extends Component {
 	static propTypes = {
 		addOverride: PropTypes.func.isRequired,
 		area: PropTypes.shape({
@@ -35,23 +157,25 @@ export default class AreaOfStudy extends Component {
 	}
 
 	static defaultProps = {
-		_progress: {
-			word: 'zero',
-			at: 0,
-			of: 1,
+		area: {
+			_progress: {
+				word: 'zero',
+				at: 0,
+				of: 1,
+			},
+			_error: '',
+			_checked: false,
+			name: 'Unknown Area',
+			type: '???',
+			revision: '0000-00',
+			result: {},
 		},
-		_error: '',
-		_checked: false,
-		name: 'Unknown Area',
-		type: '???',
-		revision: '0000-00',
-		result: {},
 	}
 
 	constructor() {
 		super()
 		this.state = {
-			open: false,
+			isOpen: false,
 			confirmRemoval: false,
 		}
 	}
@@ -66,92 +190,27 @@ export default class AreaOfStudy extends Component {
 		this.setState({confirmRemoval: false})
 	}
 
+	toggleAreaExpansion = ev => {
+		ev.preventDefault()
+		this.setState({isOpen: !this.state.isOpen})
+	}
+
 	render() {
 		const { area } = this.props
-		const { type, revision, slug, isCustom, name, _progress: progress, _error: error, _checked: checked } = area
-
-		const summary = (
-			<div>
-				<div className='area--summary-row'>
-					<h1 className='area--title'>
-						{slug && !isCustom && this.state.open
-							? <a className='catalog-link'
-								href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
-								target='_blank'
-								onClick={ev => ev.stopPropagation()}
-								title='View in the St. Olaf Catalog'
-							>
-								{name}
-							</a>
-							: name}
-					</h1>
-					<span className='icons'>
-						{this.props.showCloseButton &&
-						<Button className='area--remove-button' onClick={this.startRemovalConfirmation}>
-							<Icon name='close' />
-						</Button>}
-						<Icon
-							className='area--open-indicator'
-							name={this.state.open ? 'chevron-up' : 'chevron-down'}
-						/>
-					</span>
-				</div>
-				<ProgressBar
-					className={cx('area--progress', {error: error})}
-					colorful={true}
-					value={progress.at}
-					max={progress.of}
-				/>
-			</div>
-		)
-
-		const removalConfirmation = (
-			<div className='area--confirm-removal'>
-				<p>Remove <strong>{name}</strong>?</p>
-				<span className='button-group'>
-					<Button
-						className='area--actually-remove-area'
-						onClick={ev => this.props.removeArea({ev, areaQuery: {name, type, revision}})}
-					>
-						Remove
-					</Button>
-					<Button onClick={this.endRemovalConfirmation}>Cancel</Button>
-				</span>
-			</div>
-		)
-
-		let contents = null
-		if (error) {
-			contents = <p className='area--error'>{error} {':('}</p>
-		}
-		else if (!checked) {
-			contents = <p className='area--loading'>Loading…</p>
-		}
-		else {
-			contents = (
-				<Requirement
-					{...this.props}
-					topLevel
-					addOverride={this.props.addOverride}
-					toggleOverride={this.props.toggleOverride}
-					removeOverride={this.props.removeOverride}
-					path={[type, name]}
-				/>
-			)
-		}
 
 		return (
-			<details className={cx('area', {errored: Boolean(error)}, {loading: !checked})}>
-				<summary
-					className='area--summary'
-					onClick={() => this.setState(state => ({open: !state.open}))}
-				>
-					{this.state.confirmRemoval
-						? removalConfirmation
-						: summary}
-				</summary>
-				{this.state.open && !this.state.confirmRemoval && contents}
-			</details>
+			<AreaOfStudy
+				addOverride={this.props.addOverride}
+				area={area}
+				confirmRemoval={this.state.confirmRemoval}
+				endRemovalConfirmation={this.endRemovalConfirmation}
+				isOpen={this.state.isOpen}
+				removeOverride={this.props.removeOverride}
+				showCloseButton={this.props.showCloseButton}
+				startRemovalConfirmation={this.startRemovalConfirmation}
+				toggleAreaExpansion={this.toggleAreaExpansion}
+				toggleOverride={this.props.toggleOverride}
+			/>
 		)
 	}
 }

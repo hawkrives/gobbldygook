@@ -55,7 +55,7 @@ export default class AreaOfStudyGroup extends Component {
 						</Button>}
 				</h1>
 
-				{/*{map(this.props.areas, (area, i) =>
+				{map(this.props.areas, (area, i) =>
 					<AreaOfStudy area={area}
 						key={i}
 						removeArea={this.props.removeArea}
@@ -65,7 +65,7 @@ export default class AreaOfStudyGroup extends Component {
 						showCloseButton={this.props.showAreaPicker}
 						showEditButton={this.props.showAreaPicker}
 						studentId={this.props.studentId}
-					/>)}*/}
+					/>)}
 
 				{this.props.showAreaPicker && <AreaPicker
 					currentAreas={this.props.areas}
