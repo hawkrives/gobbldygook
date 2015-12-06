@@ -22,6 +22,6 @@ export default async function getStudentCourses(student) {
 	const promisesForCourses = map(activeSchedules, getCoursesFromSchedule)
 	const courses = await Promise.all(promisesForCourses)
 
-	debug(`Student(${student.id}).courses: it took ${round(present() - start, 2)} ms to fetch`)
+	debug(`Student(${student.id}): ${round(present() - start, 2)} ms to fetch ${courses.length} courses`)
 	return uniq(flatten(courses), course => course.clbid)
 }
