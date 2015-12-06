@@ -174,7 +174,7 @@ export default class GraduationStatus extends Component {
 				<AreaOfStudyGroup key={type}
 					addArea={this.addAreaToStudent}
 					addOverride={this.addOverrideToStudent}
-					allAreas={allAreasGrouped[type] || []}
+					allAreasOfType={allAreasGrouped[type] || []}
 					areas={[]}
 					endAddArea={this.endAddArea}
 					initiateAddArea={this.initiateAddArea}
@@ -196,9 +196,7 @@ export default class GraduationStatus extends Component {
 
 				{unusedTypesToShowComponents}
 
-				{unusedTypes.length
-					? addUnusedAreaButtonList
-					: null}
+				{unusedTypes.length && addUnusedAreaButtonList}
 			</section>
 		)
 	}
