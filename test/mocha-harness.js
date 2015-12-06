@@ -6,15 +6,15 @@ global.DEV = false
 
 process.env.NODE_ENV = 'test'
 
-let storage = new Map()
+let storage = {}
 global.localStorage = {
 	_storage: storage,
-	getItem: key => storage.get(key),
-	setItem: (key, val) => storage.set(key, val),
-	removeItem: key => storage.delete(key),
-	hasItem: key => storage.has(key),
+	getItem: key => storage[key],
+	setItem: (key, val) => storage[key] = val,
+	removeItem: key => delete storage[key],
+	hasItem: key => key in storage,
 	clear: () => {
-		storage = new Map()
+		storage = {}
 	},
 }
 
