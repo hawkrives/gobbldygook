@@ -6,11 +6,13 @@
 	@media all and (min-width: $single-column-width) {
 		position: fixed;
 		overflow-y: scroll;
-		top: $page-edge-padding;
 
-		height: calc(100vh - #{$page-edge-padding * 2});
+		top: 0;
+		padding-top: $page-edge-padding;
+
+		height: 100vh;
 		width: $sidebar-width;
-		padding-bottom: 75vh;
+		padding-bottom: 25vh;
 	}
 }
 
