@@ -4,15 +4,13 @@ import range from 'lodash/utility/range'
 import map from 'lodash/collection/map'
 import uniq from 'lodash/array/uniq'
 import last from 'lodash/array/last'
-import union from 'lodash/array/union'
-import stringify from 'json-stable-stringify'
 
 import Student, {addScheduleToStudent} from '../../models/student'
 import Schedule from '../../models/schedule'
 import Study from '../../models/study'
+import {removeStudentFromCache} from '../../models/save-student'
 
 import {
-	SAVE_STUDENT,
 	LOAD_STUDENTS,
 	INIT_STUDENT,
 	IMPORT_STUDENT,
@@ -86,61 +84,20 @@ export async function loadStudents() {
 	return { type: LOAD_STUDENTS, payload: students }
 }
 
-function getIdCache() {
-	return JSON.parse(localStorage.getItem('studentIds') || '[]')
-}
-
-
-function setIdCache(ids) {
-	localStorage.setItem('studentIds', JSON.stringify(ids))
-}
-
-
-function addStudentToCache(studentId) {
-	let ids = getIdCache()
-	ids = union(ids, [studentId])
-	setIdCache(ids)
-}
-
-
-function removeStudentFromCache(studentId) {
-	let ids = getIdCache()
-	ids = reject(ids, id => id === studentId)
-	setIdCache(ids)
-}
-
-
-export function saveStudent(student) {
-	// grab the old (still JSON-encoded) student from localstorage
-	// compare it to the current one
-	// if they're different, update dateLastModified, stringify, and save.
-	const oldVersion = localStorage.getItem(student.id)
-
-	if (oldVersion !== stringify(student)) {
-		debug(`saving student ${student.name} (${student.id})`)
-		student = {...student, dateLastModified: new Date()}
-		localStorage.setItem(student.id, stringify(student))
-		addStudentToCache(student.id)
-	}
-
-	return Promise.resolve({ type: SAVE_STUDENT, payload: student })
-}
 
 export function initStudent() {
 	let student = new Student()
 
 	forEach(range(student.matriculation, student.graduation), year => {
-		student = addScheduleToStudent(student, new Schedule({year, index: 1, active: true, semester: 1}))
-		student = addScheduleToStudent(student, new Schedule({year, index: 1, active: true, semester: 2}))
-		student = addScheduleToStudent(student, new Schedule({year, index: 1, active: true, semester: 3}))
+		student = addScheduleToStudent(student, Schedule({year, index: 1, active: true, semester: 1}))
+		student = addScheduleToStudent(student, Schedule({year, index: 1, active: true, semester: 2}))
+		student = addScheduleToStudent(student, Schedule({year, index: 1, active: true, semester: 3}))
 	})
 
-	return saveStudent(student)
-		.then(() => ({ type: INIT_STUDENT, payload: student }))
-		.catch(err => ({ type: INIT_STUDENT, payload: err, error: true }))
+	return { type: INIT_STUDENT, payload: student }
 }
 
-export async function importStudent({data, type}={}) {
+export function importStudent({data, type}={}) {
 	let stu = undefined
 	if (type === 'application/json') {
 		try {
@@ -167,9 +124,7 @@ export async function importStudent({data, type}={}) {
 	}
 
 	const fleshedStudent = new Student(stu)
-	return saveStudent(fleshedStudent)
-		.then(() => ({ type: IMPORT_STUDENT, payload: fleshedStudent }))
-		.catch(err => ({ type: IMPORT_STUDENT, payload: err, error: true }))
+	return { type: IMPORT_STUDENT, payload: fleshedStudent }
 }
 
 export async function destroyStudent(studentId) {
