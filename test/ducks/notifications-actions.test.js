@@ -5,6 +5,7 @@ import {
 	logError,
 	logMessage,
 	removeNotification,
+	removeNotificationAfterDelay,
 	startProgress,
 } from '../../src/ducks/actions/notifications'
 
@@ -13,6 +14,7 @@ import {
 	LOG_ERROR,
 	LOG_MESSAGE,
 	REMOVE_NOTIFICATION,
+	REMOVE_NOTIFICATION_DELAYED,
 	START_PROGRESS,
 } from '../../src/ducks/constants/notifications'
 
@@ -25,6 +27,23 @@ describe('removeNotification action', () => {
 		}
 
 		expect(removeNotification(id)).to.deep.equal(expectedAction)
+	})
+})
+
+describe('removeNotificationAfterDelay action', () => {
+	it('creates an action to remove a notification after a delay', async () => {
+		const id = 1
+		const expectedAction = {
+			type: REMOVE_NOTIFICATION_DELAYED,
+			payload: Promise.resolve({id}),
+		}
+
+		let actual = removeNotificationAfterDelay(id, 10)
+		expect(actual.type).to.equal(expectedAction.type)
+
+		let actualPayload = await actual.payload
+		let expectedPayload = await expectedAction.payload
+		expect(actualPayload).to.deep.equal(expectedPayload)
 	})
 })
 
