@@ -1,7 +1,6 @@
 import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
 import map from 'lodash/collection/map'
-import zipObject from 'lodash/array/zipObject'
 
 import checkStudentAgainstArea from './check-student-against-area'
 import countCredits from '../area-tools/count-credits'
@@ -22,16 +21,14 @@ export default async function checkStudentGraduatability(student) {
 		student.studies,
 		area => checkStudentAgainstArea(student, area))
 
-	const areas = await Promise.all(areaPromises)
+	const areaDetails = await Promise.all(areaPromises)
 
-	const goodAreas = filter(areas, {computed: true})
-	const allAreasPass = (size(goodAreas) === size(areas))
+	const goodAreas = filter(areaDetails, {computed: true})
+	const allAreasPass = (size(goodAreas) === size(areaDetails))
 
 	const hasEnoughCredits = (countCredits(await student.courses) >= student.creditsNeeded)
 
 	const graduatability = (allAreasPass && hasEnoughCredits)
-
-	const areaDetails = zipObject(map(areas, area => [area.id, area]))
 
 	return {
 		canGraduate: graduatability,

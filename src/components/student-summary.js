@@ -42,8 +42,8 @@ const welcomeMessages = [
 export default class StudentSummary extends Component {
 	static propTypes = {
 		actions: PropTypes.object,
+		canGraduate: PropTypes.bool.isRequired,
 		courses: PropTypes.arrayOf(PropTypes.object),
-		graduatability: PropTypes.bool.isRequired,
 		student: PropTypes.object.isRequired,
 	}
 
@@ -55,9 +55,7 @@ export default class StudentSummary extends Component {
 	}
 
 	render() {
-		const {actions} = this.props
-		const canGraduate = this.props.graduatability
-		const student = this.props.student
+		const {actions, canGraduate, student} = this.props
 		const studies = student.studies
 
 		const NameEl = (
@@ -114,7 +112,7 @@ export default class StudentSummary extends Component {
 					<AvatarLetter
 						className={cx(
 							'student-letter',
-							this.props.graduatability
+							canGraduate
 								? 'can-graduate'
 								: 'cannot-graduate'
 						)}

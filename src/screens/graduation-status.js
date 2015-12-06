@@ -5,6 +5,7 @@ import includes from 'lodash/collection/includes'
 import difference from 'lodash/array/difference'
 import union from 'lodash/array/union'
 import values from 'lodash/object/values'
+import find from 'lodash/collection/find'
 import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'
 import groupBy from 'lodash/collection/groupBy'
@@ -15,6 +16,7 @@ import keys from 'lodash/object/keys'
 import pick from 'lodash/object/pick'
 import isTrue from '../helpers/is-true'
 
+import compareProps from '../helpers/compare-props'
 import pathToOverride from '../area-tools/path-to-override'
 import checkStudentGraduatability from '../helpers/check-student-graduatability'
 import AreaOfStudyGroup from '../components/area-of-study-group'
@@ -24,7 +26,142 @@ import * as areaTypeConstants from '../models/area-types'
 
 import './graduation-status.scss'
 
-export default class GraduationStatus extends Component {
+
+class GraduationStatus extends Component {
+	static propTypes = {
+		addAreaToStudent: PropTypes.func.isRequired,
+		addOverrideToStudent: PropTypes.func.isRequired,
+		areaDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
+		areas: PropTypes.arrayOf(PropTypes.object).isRequired,
+		canGraduate: PropTypes.bool.isRequired,
+		courses: PropTypes.arrayOf(PropTypes.object).isRequired,
+		endAddArea: PropTypes.func.isRequired,
+		initiateAddArea: PropTypes.func.isRequired,
+		isHidden: PropTypes.bool.isRequired,
+		removeAreaFromStudent: PropTypes.func.isRequired,
+		removeOverrideFromStudent: PropTypes.func.isRequired,
+		showAreaPickerFor: PropTypes.object.isRequired,
+		student: PropTypes.object.isRequired,
+		toggleOverrideOnStudent: PropTypes.func.isRequired,
+	}
+
+	shouldComponentUpdate(nextProps) {
+		return compareProps(this.props, nextProps)
+	}
+
+	render() {
+		const {
+			addAreaToStudent,
+			addOverrideToStudent,
+			areaDetails,
+			areas,
+			canGraduate,
+			courses,
+			endAddArea,
+			initiateAddArea,
+			isHidden,
+			removeAreaFromStudent,
+			removeOverrideFromStudent,
+			showAreaPickerFor,
+			student,
+			toggleOverrideOnStudent,
+		} = this.props
+
+		if (!student) {
+			return null
+		}
+
+		const allAreasGrouped = groupBy(areas, 'type')
+
+		// group the studies by their type
+		const groupedStudies = groupBy(student.studies, study => study.type.toLowerCase())
+
+		// pull out the results
+		const studyResults = mapValues(groupedStudies, group =>
+			map(group, area =>
+				find(areaDetails, pick(area, ['name', 'type', 'revision'])) || area))
+
+		// and then render them
+		const sections = map(studyResults, (areas, areaType) =>
+			<AreaOfStudyGroup key={areaType}
+				addArea={addAreaToStudent}
+				addOverride={addOverrideToStudent}
+				allAreasOfType={allAreasGrouped[areaType] || []}
+				areas={areas}
+				courses={courses}
+				endAddArea={endAddArea}
+				initiateAddArea={initiateAddArea}
+				removeArea={removeAreaFromStudent}
+				removeOverride={removeOverrideFromStudent}
+				showAreaPicker={showAreaPickerFor[areaType]}
+				studentId={student.id}
+				toggleOverride={toggleOverrideOnStudent}
+				type={areaType}
+			/>)
+
+		const allAreaTypes = values(areaTypeConstants)
+		const usedAreaTypes = uniq(pluck(student.studies, 'type'))
+
+		const areaTypesToShowButtonsFor = union(
+			usedAreaTypes,
+			keys(pick(showAreaPickerFor, isTrue)))
+
+		const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
+
+		const unusedAreaTypeButtons = (
+			<section className='unused-areas-of-study'>
+				<span className='unused-areas-title'>Add: </span>
+				<span className='unused-areas-buttons'>
+					{unusedTypes.map(type => (
+						<Button key={type}
+							className='add-unused-area-of-study'
+							onClick={ev => initiateAddArea({ev, type})}
+							type='flat'
+						>
+							{type}
+						</Button>
+					))}
+				</span>
+			</section>
+		)
+
+		const unusedTypesToShow = pick(showAreaPickerFor,
+			(toShow, type) => toShow === true && !includes(usedAreaTypes, type))
+
+		const unusedTypesToShowComponents = map(unusedTypesToShow, (toShow, type) =>
+			<AreaOfStudyGroup key={type}
+				addArea={addAreaToStudent}
+				addOverride={addOverrideToStudent}
+				allAreasOfType={allAreasGrouped[type] || []}
+				areas={[]}
+				endAddArea={endAddArea}
+				initiateAddArea={initiateAddArea}
+				removeArea={removeAreaFromStudent}
+				showAreaPicker={toShow}
+				toggleOverride={toggleOverrideOnStudent}
+				type={type}
+			/>)
+
+		return (
+			<section className={cx('graduation-status', {'is-hidden': isHidden})}>
+				<StudentSummary
+					courses={courses}
+					student={student}
+					canGraduate={canGraduate}
+				/>
+
+				{sections}
+
+				{unusedTypesToShowComponents}
+
+				{unusedTypes.length && unusedAreaTypeButtons}
+			</section>
+		)
+	}
+}
+
+
+export default class GraduationStatusContainer extends Component {
 	static propTypes = {
 		actions: PropTypes.object.isRequired,
 		areas: PropTypes.array.isRequired,
@@ -36,8 +173,8 @@ export default class GraduationStatus extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			graduatability: false,
-			areaDetails: {},
+			canGraduate: false,
+			areaDetails: [],
 			showAreaPickerFor: {},
 		}
 	}
@@ -49,7 +186,7 @@ export default class GraduationStatus extends Component {
 	async componentWillReceiveProps(nextProps) {
 		const {canGraduate, details} = await checkStudentGraduatability(nextProps.student)
 		this.setState({
-			graduatability: canGraduate,
+			canGraduate: canGraduate,
 			areaDetails: details,
 		})
 	}
@@ -104,100 +241,24 @@ export default class GraduationStatus extends Component {
 
 	render() {
 		// console.log('GraduationStatus#render')
-		const student = this.props.student
-
-		if (!student) {
-			return null
-		}
-
-		const allAreasGrouped = groupBy(this.props.areas, 'type')
-
-		// group the studies by their type
-		const groupedStudies = groupBy(
-			this.props.student.studies,
-			study => study.type.toLowerCase())
-
-		// pull the results out of state, or use a mutable version from props
-		const studyResults = mapValues(
-			groupedStudies,
-			areas => map(areas, area => this.state.areaDetails[area.id] || area))
-
-		// and then render them
-		const sections = map(studyResults,
-			(areas, areaType) =>
-				<AreaOfStudyGroup key={areaType}
-					addArea={this.addAreaToStudent}
-					addOverride={this.addOverrideToStudent}
-					allAreasOfType={allAreasGrouped[areaType] || []}
-					areas={areas || []}
-					courses={this.props.courses}
-					endAddArea={this.endAddArea}
-					initiateAddArea={this.initiateAddArea}
-					removeArea={this.removeAreaFromStudent}
-					removeOverride={this.removeOverrideFromStudent}
-					showAreaPicker={this.state.showAreaPickerFor[areaType]}
-					studentId={this.props.student.id}
-					toggleOverride={this.toggleOverrideOnStudent}
-					type={areaType}
-				/>)
-
-		const usedAreaTypes = uniq(pluck(this.props.student.studies, 'type'))
-
-		const allAreaTypes = values(areaTypeConstants)
-		const areaTypesToShowButtonsFor = union(
-			usedAreaTypes,
-			keys(pick(this.state.showAreaPickerFor, isTrue)))
-		const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
-
-		const addUnusedAreaButtonList = (
-			<section className='unused-areas-of-study'>
-				<span className='unused-areas-title'>Add: </span>
-				<span className='unused-areas-buttons'>
-					{unusedTypes.map(type => (
-						<Button key={type}
-							className='add-unused-area-of-study'
-							onClick={ev => this.initiateAddArea({ev, type})}
-							type='flat'
-						>
-							{type}
-						</Button>
-					))}
-				</span>
-			</section>
-		)
-
-		const unusedTypesToShow = pick(this.state.showAreaPickerFor,
-			(toShow, type) => toShow === true && !includes(usedAreaTypes, type))
-
-		const unusedTypesToShowComponents = map(unusedTypesToShow,
-			(toShow, type) =>
-				<AreaOfStudyGroup key={type}
-					addArea={this.addAreaToStudent}
-					addOverride={this.addOverrideToStudent}
-					allAreasOfType={allAreasGrouped[type] || []}
-					areas={[]}
-					endAddArea={this.endAddArea}
-					initiateAddArea={this.initiateAddArea}
-					removeArea={this.removeAreaFromStudent}
-					showAreaPicker={toShow}
-					toggleOverride={this.toggleOverrideOnStudent}
-					type={type}
-				/>)
 
 		return (
-			<section className={cx('graduation-status', {'is-hidden': this.props.isHidden})}>
-				<StudentSummary
-					courses={this.props.courses}
-					student={student}
-					graduatability={this.state.graduatability}
-				/>
-
-				{sections}
-
-				{unusedTypesToShowComponents}
-
-				{unusedTypes.length && addUnusedAreaButtonList}
-			</section>
+			<GraduationStatus
+				addAreaToStudent={this.addAreaToStudent}
+				addOverrideToStudent={this.addOverrideToStudent}
+				areas={this.props.areas}
+				areaDetails={this.state.areaDetails}
+				courses={this.props.courses}
+				endAddArea={this.endAddArea}
+				canGraduate={this.state.canGraduate}
+				initiateAddArea={this.initiateAddArea}
+				isHidden={this.props.isHidden}
+				removeAreaFromStudent={this.removeAreaFromStudent}
+				removeOverrideFromStudent={this.removeOverrideFromStudent}
+				showAreaPickerFor={this.state.showAreaPickerFor}
+				student={this.props.student}
+				toggleOverrideOnStudent={this.toggleOverrideOnStudent}
+			/>
 		)
 	}
 }
