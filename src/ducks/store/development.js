@@ -8,7 +8,7 @@ import saveStudentsMiddleware from '../middleware/save-students'
 import rootReducer from '../reducers/root'
 import DevTools from '../../containers/devtools'
 
-const loggerMiddleware = createLogger()
+const loggerMiddleware = createLogger({collapsed: true})
 
 const finalCreateStore = compose(
 	applyMiddleware(
