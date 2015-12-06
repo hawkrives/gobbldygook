@@ -15,7 +15,6 @@ import BasicCourse from './basic-course'
 import Button from './button'
 import Icon from './icon'
 import Toolbar from './toolbar'
-
 import Modal from './modal'
 
 import './course.scss'

@@ -7,8 +7,10 @@ require('babel-runtime/core-js/promise').default = Bluebird
 import 'isomorphic-fetch'
 
 // Include other polyfills
-import startDetailsPolyfill from './polyfills/details/Element.details'
-startDetailsPolyfill()
+// import startDetailsPolyfill from './polyfills/details/Element.details'
+// startDetailsPolyfill()
+// Add debug to window
+window.DEBUG = require('debug')
 
 // Include React and react-dom.render
 import React from 'react'

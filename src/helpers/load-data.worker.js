@@ -18,7 +18,7 @@ import buildDeptNum from '../helpers/build-dept-num'
 import splitParagraph from '../helpers/split-paragraph'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
-const debug = require('debug')('gobbldygook:helpers:load-data')
+const debug = require('debug')('gb:helpers:load-data')
 
 import db from './db'
 
