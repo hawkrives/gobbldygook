@@ -125,7 +125,7 @@
     "redux-devtools": "2.1.5",
     "rimraf": "2.4.4",
     "sass-loader": "3.1.2",
-    "sparkly": "2.0.1",
+    "sparkly": "3.1.0",
     "style-loader": "0.13.0",
     "svg-sprite-generator": "0.0.7",
     "url-loader": "0.5.7",
