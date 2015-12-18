@@ -32,14 +32,6 @@
 	}
 }
 
-
-// these must be specified separately
-.area--summary > .details-marker       { display: none; }
-.area--summary::-webkit-details-marker { display: none; }
-.area--summary::-moz-details-marker    { display: none; }
-.area--summary::-ms-details-marker     { display: none; }
-.area--summary::details-marker         { display: none; }
-
 .area--summary {
 	display: flex;
 	flex-flow: column nowrap;

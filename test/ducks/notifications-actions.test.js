@@ -1,14 +1,23 @@
 import {expect} from 'chai'
-import {
-	INCREMENT_PROGRESS,  incrementProgress,
-	LOG_ERROR,           logError,
-	LOG_MESSAGE,         logMessage,
-	REMOVE_NOTIFICATION, removeNotification,
-	START_PROGRESS,      startProgress,
-} from '../../src/ducks/notifications'
 
-describe('removeNotification', () => {
-	it('should create an action to remove a notification', () => {
+import {
+	incrementProgress,
+	logError,
+	logMessage,
+	removeNotification,
+	startProgress,
+} from '../../src/ducks/actions/notifications'
+
+import {
+	INCREMENT_PROGRESS,
+	LOG_ERROR,
+	LOG_MESSAGE,
+	REMOVE_NOTIFICATION,
+	START_PROGRESS,
+} from '../../src/ducks/constants/notifications'
+
+describe('removeNotification action', () => {
+	it('creates an action to remove a notification', () => {
 		const id = 1
 		const expectedAction = {
 			type: REMOVE_NOTIFICATION,
@@ -17,10 +26,25 @@ describe('removeNotification', () => {
 
 		expect(removeNotification(id)).to.deep.equal(expectedAction)
 	})
+
+	it('creates an action to remove a notification after a delay', async () => {
+		const id = 1
+		const expectedAction = {
+			type: REMOVE_NOTIFICATION,
+			payload: Promise.resolve({id}),
+		}
+
+		let actual = removeNotification(id, 10)
+		expect(actual.type).to.equal(expectedAction.type)
+
+		let actualPayload = await actual.payload
+		let expectedPayload = await expectedAction.payload
+		expect(actualPayload).to.deep.equal(expectedPayload)
+	})
 })
 
-describe('logMessage', () => {
-	it('should create an action to log a message', () => {
+describe('logMessage action', () => {
+	it('creates an action to log a message', () => {
 		const id = 1
 		const message = 'Message!'
 		const expectedAction = {
@@ -32,8 +56,8 @@ describe('logMessage', () => {
 	})
 })
 
-describe('logError', () => {
-	it('should create an action to log an error', () => {
+describe('logError action', () => {
+	it('creates an action to log an error', () => {
 		const id = 1
 		const error = new Error('message!')
 		const expectedAction = {
@@ -67,8 +91,8 @@ describe('logError', () => {
 	})
 })
 
-describe('startProgress', () => {
-	it('should create an action to begin a progress-bar', () => {
+describe('startProgress action', () => {
+	it('creates an action to begin a progress-bar', () => {
 		const id = 1
 		const message = 'message'
 		const expectedAction = {
@@ -110,8 +134,8 @@ describe('startProgress', () => {
 	})
 })
 
-describe('incrementProgress', () => {
-	it('should create an action to increment a progress-bar', () => {
+describe('incrementProgress action', () => {
+	it('creates an action to increment a progress-bar', () => {
 		const id = 1
 		const expectedAction = {
 			type: INCREMENT_PROGRESS,
@@ -121,7 +145,7 @@ describe('incrementProgress', () => {
 		expect(incrementProgress(id)).to.deep.equal(expectedAction)
 	})
 
-	it('can increment their progress by an arbitrary amount', () => {
+	it('increments their progress by an arbitrary amount', () => {
 		const id = 1
 		const by = 10
 		const expectedAction = {

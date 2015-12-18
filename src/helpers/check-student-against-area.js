@@ -1,11 +1,28 @@
 import uniqueId from 'lodash/utility/uniqueId'
+import loadArea from './load-area'
+import getStudentData from './get-student-data'
 
 import Worker from './check-student-against-area.worker.js'
 const worker = new Worker()
 // worker.onmessage = msg => console.log('[main] received message from check-student worker:', msg)
-worker.onerror = msg => console.log('[main] received error from check-student worker:', msg)
+worker.addEventListener('error', msg => console.log('[main] received error from check-student worker:', msg))
 
-import {getStudentData} from '../models/student'
+
+function onMessage({sourceId, resolve, reject}, {data}) {
+	const [resultId, type, contents] = JSON.parse(data)
+
+	if (resultId === sourceId) {
+		worker.removeEventListener('message', onMessage)
+
+		if (type === 'result') {
+			resolve(contents)
+		}
+		else if (type === 'error') {
+			reject({_error: contents.message})
+		}
+	}
+}
+
 
 /**
  * Checks a student object against an area of study.
@@ -16,41 +33,23 @@ import {getStudentData} from '../models/student'
  * @promise ResultsPromise
  * @fulfill {Object} - The details of the area check.
  */
-export default function checkStudentAgainstArea(student, area) {
-	return new Promise((resolve, reject) => {
-		const sourceId = uniqueId()
+export default async function checkStudentAgainstArea(student, area) {
+	const sourceId = uniqueId()
 
-		function onMessage({data}) {
-			const [resultId, type, contents] = JSON.parse(data)
+	return new Promise(async (resolve, reject) => {
+		worker.addEventListener('message', onMessage.bind(null, {sourceId, resolve, reject}))
 
-			if (resultId === sourceId) {
-				worker.removeEventListener('message', onMessage)
-
-				if (type === 'result') {
-					resolve(contents)
-				}
-				else if (type === 'error') {
-					reject(contents)
-				}
-			}
+		const areaData = {
+			...area,
+			data: await loadArea(area),
 		}
 
-		worker.addEventListener('message', onMessage)
+		const studentData = await getStudentData(student)
 
-		area.data
-			.then(areaData => {
-				return Promise.all([
-					getStudentData(student),
-					{...area.toJS(), data: areaData},
-				])
-			})
-			.then(([student, area]) => {
-				// console.log(sourceId, student, area)
-				// why stringify? https://code.google.com/p/chromium/issues/detail?id=536620#c11
-				// > We know that serialization/deserialization is slow. It's actually faster to
-				// > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
-				worker.postMessage(JSON.stringify([sourceId, student, area]))
-			})
-			.catch(err => console.error(err))
+		/* why stringify? from https://code.google.com/p/chromium/issues/detail?id=536620#c11:
+		 > We know that serialization/deserialization is slow. It's actually faster to
+		 > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
+		 */
+		worker.postMessage(JSON.stringify([sourceId, studentData, areaData]))
 	})
 }

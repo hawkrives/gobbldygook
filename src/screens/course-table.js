@@ -2,8 +2,9 @@ import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import expandYear from '../helpers/expand-year'
 import findFirstAvailableYear from '../helpers/find-first-available-year'
-
-import studentActions from '../flux/student-actions'
+import sortBy from 'lodash/collection/sortBy'
+import groupBy from 'lodash/collection/groupBy'
+import map from 'lodash/collection/map'
 
 import Button from '../components/button'
 import Year from '../components/year'
@@ -12,21 +13,18 @@ import './course-table.scss'
 
 export default class CourseTable extends Component {
 	static propTypes = {
+		actions: PropTypes.object,
 		className: PropTypes.string,
-		courses: PropTypes.object, // Immutable.List
-		coursesLoaded: PropTypes.bool,
-		showSearchSidebar: PropTypes.func,
+		courses: PropTypes.arrayOf(PropTypes.object),
 		student: PropTypes.object,
 	}
 
 	static defaultProps = {
-		coursesLoaded: false,
-		showSearchSidebar: () => {},
 		student: {},
 	}
 
 	addYear = () => {
-		studentActions.addSchedule(this.props.student.id, {
+		this.props.actions.addSchedule(this.props.student.id, {
 			year: findFirstAvailableYear(this.props.student.schedules, this.props.student.matriculation),
 			semester: 1,
 			index: 1,
@@ -35,7 +33,7 @@ export default class CourseTable extends Component {
 	}
 
 	render() {
-		console.log('CourseTable.render()')
+		// console.log('CourseTable.render()')
 		if (!this.props.student) {
 			return null
 		}
@@ -53,21 +51,17 @@ export default class CourseTable extends Component {
 			</Button>
 		)
 
-		const years = this.props.student.schedules
-			.sortBy(schedule => schedule.year)
-			.groupBy(schedule => schedule.year)
-			.map((schedules, year) =>
-				<Year
-					key={year}
-					year={year}
-					student={this.props.student}
-					courses={this.props.courses}
-					coursesLoaded={this.props.coursesLoaded}
-					showSearchSidebar={this.props.showSearchSidebar}
-				/>)
-			.toList()
-			.splice(nextAvailableYear - this.props.student.matriculation, 0, nextYearButton)
-			.toArray()
+		let sorted = sortBy(this.props.student.schedules, 'year')
+		let grouped = groupBy(sorted, 'year')
+		let years = map(grouped, (schedules, year) =>
+			<Year
+				key={year}
+				year={Number(year)}
+				actions={this.props.actions}
+				courses={this.props.courses}
+				student={this.props.student}
+			/>)
+		years.splice(nextAvailableYear - this.props.student.matriculation, 0, nextYearButton)
 
 		return (
 			<div className={cx('course-table', this.props.className)}>

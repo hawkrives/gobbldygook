@@ -1,133 +1,168 @@
 import {expect} from 'chai'
-import Student from '../../src/models/student'
+import mock from 'mock-require'
 import demoStudent from '../../src/models/demo-student.json'
 import size from 'lodash/collection/size'
 import filter from 'lodash/collection/filter'
 import pluck from 'lodash/collection/pluck'
+import find from 'lodash/collection/find'
+import stringify from 'json-stable-stringify'
+
+mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock'))
+mock('../../src/models/load-area', require('../mocks/load-area.mock'))
+
+const {
+	default: Student,
+	changeStudentName,
+	changeStudentAdvisor,
+	changeStudentCreditsNeeded,
+	changeStudentMatriculation,
+	changeStudentGraduation,
+	changeStudentSetting,
+	addScheduleToStudent,
+	destroyScheduleFromStudent,
+	addCourseToSchedule,
+	removeCourseFromSchedule,
+	moveCourseToSchedule,
+	addAreaToStudent,
+	removeAreaFromStudent,
+	setOverrideOnStudent,
+	removeOverrideFromStudent,
+	addFabricationToStudent,
+	removeFabricationFromStudent,
+	moveScheduleInStudent,
+	reorderScheduleInStudent,
+	renameScheduleInStudent,
+	reorderCourseInSchedule,
+	encodeStudent,
+	saveStudent,
+} = require('../../src/models/student')
+
+const getStudentCourses = require('../../src/helpers/get-student-courses')
+
+const Study = require('../../src/models/study')
+const Schedule = require('../../src/models/schedule')
 
 describe('Student', () => {
-	it('is a Student', () => {
-		const stu = new Student(demoStudent)
-		expect(stu instanceof Student).to.be.true
-	})
-
-	it('can be turned into a JS object', () => {
-		const stu = new Student(demoStudent)
-		expect(stu.toJS() instanceof Object).to.be.true
-	})
-
-	it('ignores sets on known properties', () => {
-		const stu = new Student(demoStudent)
-		try {
-			stu.name = 3
-		}
-		catch (err) {}
-		expect(stu.name).to.equal('Hawken MacKay Rives')
+	it('returns an object', () => {
+		expect(typeof Student()).to.equal('object')
 	})
 
 	it('creates a unique ID for each new student without an ID prop', () => {
-		let stu1 = new Student()
-		let stu2 = new Student()
+		let stu1 = Student()
+		let stu2 = Student()
 		expect(stu1.id).to.not.equal(stu2.id)
 	})
 
 	it('holds a student', () => {
-		const stu = new Student(demoStudent)
-		const json = JSON.parse(JSON.stringify(stu))
+		const stu = Student(demoStudent)
 
 		expect(stu).to.exist
 		expect(stu.id).to.exist
 		expect(stu.matriculation).to.equal(2012)
 		expect(stu.graduation).to.equal(2016)
 		expect(stu.creditsNeeded).to.equal(35)
-		expect(json.studies).to.deep.equal(demoStudent.studies)
-		expect(json.schedules).to.deep.equal(demoStudent.schedules)
-		expect(json.fabrications).to.deep.equal(demoStudent.fabrications)
-		expect(json.settings).to.deep.equal(demoStudent.settings)
-		expect(json.overrides).to.deep.equal(demoStudent.overrides)
+		expect(stu.studies).to.deep.equal(demoStudent.studies)
+		expect(stu.schedules).to.deep.equal(demoStudent.schedules)
+		expect(stu.fabrications).to.deep.equal(demoStudent.fabrications)
+		expect(stu.settings).to.deep.equal(demoStudent.settings)
+		expect(stu.overrides).to.deep.equal(demoStudent.overrides)
 	})
 
-	it('can turn into JSON', () => {
-		const stu = new Student(demoStudent)
-		let result = JSON.stringify(stu)
+	it('turns into JSON', () => {
+		const stu = Student()
+		let result = stringify(stu)
 		expect(result).to.be.ok
 	})
+})
 
-	// fabrications
-	it('supports adding fabrications', () => {
-		const stu = new Student(demoStudent)
-		let addedFabrication = stu.addFabrication({id: 'a'})
-		expect(addedFabrication.fabrications.get('a')).to.deep.equal({id: 'a'})
+describe('addFabricationToStudent', () => {
+	it('adds fabrications', () => {
+		const stu = Student()
+		let addedFabrication = addFabricationToStudent(stu, {clbid: '123'})
+		expect(addedFabrication.fabrications['123']).to.deep.equal({clbid: '123'})
 	})
-	it('supports removing fabrications', () => {
-		const stu = new Student(demoStudent)
-		let addedFabrication = stu.addFabrication({id: 'a'})
-		let noMoreFabrication = addedFabrication.removeFabrication('a')
-		expect(noMoreFabrication.fabrications.has('a')).to.be.false
-	})
+})
 
-	// overrides
-	it('supports adding overrides', () => {
-		const stu = new Student(demoStudent)
-		let addedOverride = stu.setOverride({nothing: 'me!'})
-		expect(addedOverride.overrides.get('nothing')).to.equal('me!')
+describe('removeFabricationFromStudent', () => {
+	it('removes fabrications', () => {
+		const stu = Student(demoStudent)
+		let addedFabrication = addFabricationToStudent(stu, {clbid: '123'})
+		let noMoreFabrication = removeFabricationFromStudent(addedFabrication, '123')
+		expect(noMoreFabrication.fabrications.hasOwnProperty('a')).to.be.false
 	})
-	it('supports removing overrides', () => {
-		const stu = new Student(demoStudent)
-		let removedOverride = stu.removeOverride('credits.taken')
-		expect(removedOverride.overrides.get('credits.taken')).to.not.exist
-	})
+})
 
-	// areas
-	it('supports adding areas', () => {
-		const stu = new Student(demoStudent)
-		let newArea = stu.addArea({name: 'Exercise Science', type: 'major', revision: '2014-15'})
-		expect(newArea.studies.get('majors/exercise-science-2014-15')).to.exist
-	})
-	it('supports removing areas', () => {
-		const stu = new Student(demoStudent)
-		let noCsci = stu.removeArea('majors/computer-science-2014-15')
-		expect(noCsci.studies.get('majors/computer-science-2014-15')).to.not.exist
-	})
-	it('supports removing multiple areas at one time', () => {
-		const stu = new Student(demoStudent)
-		const hasEsth = stu.addArea({type: 'major', name: 'Exercise Science', revision: '2014-15'})
-
-		const noCsciNorEsth = hasEsth.removeMultipleAreas([
-			'majors/computer-science-2014-15',
-			'majors/exercise-science-2014-15',
-		])
-
-		expect(noCsciNorEsth.studies.get('majors/computer-science-2014-15')).to.not.exist
-		expect(noCsciNorEsth.studies.get('majors/exercise-science-2014-15')).to.not.exist
+describe('setOverrideOnStudent', () => {
+	it('adds overrides', () => {
+		const stu = Student()
+		let addedOverride = setOverrideOnStudent(stu, 'nothing', 'me!')
+		expect(addedOverride.overrides['nothing']).to.equal('me!')
 	})
 
-	// Courses
-	xit('returns only courses from active schedules', () => {
-		const stu = new Student(demoStudent)
-		// disabled until we can mock getCourses
+	it('sets overrides to falsy values if asked', () => {
+		const stu = Student()
+		let addedOverride = setOverrideOnStudent(stu, 'nothing', false)
+		expect(addedOverride.overrides['nothing']).to.equal(false)
+	})
+})
+
+describe('removeOverrideFromStudent', () => {
+	it('removes overrides', () => {
+		const stu = Student(demoStudent)
+		let removedOverride = removeOverrideFromStudent(stu, 'credits.taken')
+		expect(removedOverride.overrides['credits.taken']).to.not.exist
+	})
+})
+
+describe('addAreaToStudent', () => {
+	it('adds areas', () => {
+		const stu = Student()
+		let query = {name: 'Exercise Science', type: 'major', revision: '2014-15'}
+		let newArea = addAreaToStudent(stu, Study(query))
+		expect(find(newArea.studies, query)).not.to.be.undefined
+	})
+})
+
+describe('removeAreaFromStudent', () => {
+	it('removes areas', () => {
+		const stu = Student(demoStudent)
+		let query = {type: 'major', name: 'Computer Science', revision: 'latest'}
+		let noCsci = removeAreaFromStudent(stu, query)
+		expect(find(noCsci.studies, query)).to.be.undefined
+	})
+})
+
+describe('moveCourseToSchedule', () => {
+	it('moves courses between schedules in one-ish operation', () => {
+		const stu = Student(demoStudent)
+		let movedCourse = moveCourseToSchedule(stu, {fromScheduleId: '1', toScheduleId: '2', clbid: 82908})
+		expect(movedCourse.schedules['1'].clbids).to.not.include(82908)
+		expect(movedCourse.schedules['2'].clbids).to.include(82908)
+	})
+})
+
+describe('getStudentCourses', () => {
+	it('only returns courses from active schedules', () => {
+		const stu = Student(demoStudent)
 		let courseCountFromActive = size(pluck(filter(demoStudent.schedules, 'active'), 'clbids'))
-		stu.courses.then(courses => expect(courses.length).to.equal(courseCountFromActive))
+		getStudentCourses(stu).then(courses => expect(courses.length).to.equal(courseCountFromActive))
 	})
-	xit('counts all credits currently scheduled', () => {
-		const stu = new Student(demoStudent)
-		// disabled until we can mock getCourses
-		// plus, I'm not even sure how to check the result. lodash?
-		stu.courseCredits.then(credits => expect(credits).to.be.ok)
-	})
-	it('supports moving courses between schedules in one-ish operation', () => {
-		const stu = new Student(demoStudent)
-		let movedCourse = stu.moveCourse(1, 2, 82908)
-		expect(movedCourse.schedules.get(1).clbids).to.not.include(82908)
-		expect(movedCourse.schedules.get(2).clbids).to.include(82908)
-	})
+})
 
-	// schedules
-	it('supports adding schedules', () => {
-		const stu = new Student(demoStudent)
-		let newSchedule = stu.addSchedule({id: 10912, title: 'a'})
-		expect(newSchedule.schedules.get(10912).toJSON()).to.deep.equal({
-			id: 10912,
+describe('addScheduleToStudent', () => {
+	it('adds schedules', () => {
+		const stu = Student()
+		let newSchedule = addScheduleToStudent(stu, Schedule({
+			id: '10912',
+			title: 'a',
+			active: false,
+			clbids: [],
+			index: 1,
+			semester: 0,
+			year: 0,
+		}))
+		expect(newSchedule.schedules['10912']).to.deep.equal({
+			id: '10912',
 			active: false,
 			clbids: [],
 			index: 1,
@@ -136,46 +171,291 @@ describe('Student', () => {
 			year: 0,
 		})
 	})
-	it('supports removing schedules', () => {
-		const stu = new Student(demoStudent)
-		let removedSchedule = stu.destroySchedule(1)
-		expect(removedSchedule.schedules.get(1)).to.not.exist
-	})
-	it('supports removing multiple schedules at once', () => {
-		const stu = new Student(demoStudent)
-		let removedSchedule = stu.destroyMultipleSchedules([1, 2])
-		expect(removedSchedule.schedules.get(1)).to.not.exist
-		expect(removedSchedule.schedules.get(2)).to.not.exist
+})
+
+describe('destroyScheduleFromStudent', () => {
+	it('removes schedules', () => {
+		const sched = Schedule()
+		const stu = addScheduleToStudent(Student(), sched)
+		let removedSchedule = destroyScheduleFromStudent(stu, sched.id)
+		expect(removedSchedule.schedules[sched.id]).to.be.undefined
 	})
 
-	// properties
-	it('supports changing the name', () => {
-		const stu = new Student(demoStudent)
-		let newName = stu.changeName('Andrew Joseph Volz')
-		expect(newName.name).to.equal('Andrew Joseph Volz')
+	it('makes another schedule active if there is another schedule available for the same term', () => {
+		const sched1 = Schedule({year: 2012, semester: 1, index: 1, active: true})
+		const sched2 = Schedule({year: 2012, semester: 1, index: 2})
+		let stu = Student()
+		stu = addScheduleToStudent(stu, sched1)
+		stu = addScheduleToStudent(stu, sched2)
+
+		let removedSchedule = destroyScheduleFromStudent(stu, sched1.id)
+		expect(removedSchedule.schedules[sched2.id]).to.have.property('active', true)
+	})
+})
+
+
+describe('changeStudentName', () => {
+	it(`changes the student's name`, () => {
+		let initial = Student()
+		expect(changeStudentName(initial, 'my name'))
+			.to.have.property('name', 'my name')
 	})
 
-	it('supports changing the number of credits needed', () => {
-		const stu = new Student(demoStudent)
-		let newCredits = stu.changeCreditsNeeded(1)
-		expect(newCredits.creditsNeeded).to.equal(1)
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentName(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentAdvisor', () => {
+	it(`changes the student's advisor`, () => {
+		let initial = Student()
+		expect(changeStudentAdvisor(initial, 'professor name'))
+			.to.have.property('advisor', 'professor name')
 	})
 
-	it('supports changing the matriculation', () => {
-		const stu = new Student(demoStudent)
-		let newMatriculation = stu.changeMatriculation(1)
-		expect(newMatriculation.matriculation).to.equal(1)
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentAdvisor(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentCreditsNeeded', () => {
+	it(`changes the student's number of credits needed`, () => {
+		let initial = Student()
+		expect(changeStudentCreditsNeeded(initial, 130))
+			.to.have.property('creditsNeeded', 130)
 	})
 
-	it('supports changing the graduation', () => {
-		const stu = new Student(demoStudent)
-		let newGraduation = stu.changeGraduation(1)
-		expect(newGraduation.graduation).to.equal(1)
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentCreditsNeeded(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentMatriculation', () => {
+	it(`changes the student's matriculation year`, () => {
+		let initial = Student()
+		expect(changeStudentMatriculation(initial, 1800))
+			.to.have.property('matriculation', 1800)
 	})
 
-	it('supports changing settings', () => {
-		const stu = new Student(demoStudent)
-		let newSetting = stu.changeSetting('setting', 'value')
-		expect(newSetting.settings.get('setting')).to.equal('value')
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentMatriculation(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentGraduation', () => {
+	it(`changes the student's graduation year`, () => {
+		let initial = Student()
+		expect(changeStudentGraduation(initial, 2100))
+			.to.have.property('graduation', 2100)
+	})
+
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentGraduation(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+describe('changeStudentSetting', () => {
+	it(`changes settings in the student `, () => {
+		let initial = Student()
+		expect(changeStudentSetting(initial, 'key', 'value'))
+			.to.have.property('settings')
+			.which.deep.equals({key: 'value'})
+	})
+
+	it('returns a new object', () => {
+		let initial = Student()
+		let final = changeStudentSetting(initial)
+		expect(final).to.not.equal(initial)
+	})
+})
+
+
+
+describe('moveScheduleInStudent', () => {
+	it('throws if not given anywhere to move to', () => {
+		expect(() => moveScheduleInStudent({}, '', {}))
+			.to.throw(RangeError)
+	})
+
+	it('moves just a year', () => {
+		let sched = Schedule({year: 2012})
+		let stu = {schedules: {[sched.id]: sched}}
+		let actual = moveScheduleInStudent(stu, sched.id, {year: 2014})
+		expect(actual.schedules[sched.id].year).to.equal(2014)
+	})
+
+	it('moves just a semester', () => {
+		let sched = Schedule({semester: 1})
+		let stu = {schedules: {[sched.id]: sched}}
+		let actual = moveScheduleInStudent(stu, sched.id, {semester: 3})
+		expect(actual.schedules[sched.id].semester).to.equal(3)
+	})
+
+	it('moves both a year and a semester', () => {
+		let sched = Schedule({year: 2012, semester: 1})
+		let stu = {schedules: {[sched.id]: sched}}
+		let actual = moveScheduleInStudent(stu, sched.id, {year: 2014, semester: 3})
+		expect(actual.schedules[sched.id].year).to.equal(2014)
+		expect(actual.schedules[sched.id].semester).to.equal(3)
+	})
+
+	it('throws if year is not a number', () => {
+		let sched = Schedule()
+		let stu = {schedules: {[sched.id]: sched}}
+		expect(() => moveScheduleInStudent(stu, sched.id, {year: '2014'}))
+			.to.throw(TypeError)
+	})
+
+	it('throws if semester is not a number', () => {
+		let sched = Schedule()
+		let stu = {schedules: {[sched.id]: sched}}
+		expect(() => moveScheduleInStudent(stu, sched.id, {semester: '5'}))
+			.to.throw(TypeError)
+	})
+
+	it('returns a new object', () => {
+		let sched = Schedule({year: 2012})
+		let actual = moveScheduleInStudent({schedules: {[sched.id]: sched}}, sched.id, {year: 2014})
+		expect(actual.schedules[sched.id]).to.not.equal(sched)
+	})
+})
+
+describe('reorderScheduleInStudent', () => {
+	it('changes the "index" property', () => {
+		let sched = Schedule({index: 0})
+		let stu = {schedules: {[sched.id]: sched}}
+		let newOrder = reorderScheduleInStudent(stu, sched.id, 5)
+		expect(newOrder.schedules[sched.id].index).to.equal(5)
+	})
+	it('returns a new object', () => {
+		let sched = Schedule({index: 0})
+		let stu = {schedules: {[sched.id]: sched}}
+		let newOrder = reorderScheduleInStudent(stu, sched.id, 5)
+		expect(newOrder).to.not.equal(stu)
+		expect(newOrder.schedules[sched.id]).to.not.equal(sched)
+	})
+})
+
+describe('renameScheduleInStudent', () => {
+	it('renames the schedule', () => {
+		let sched = Schedule({title: 'Initial Title'})
+		let stu = {schedules: {[sched.id]: sched}}
+		let newOrder = renameScheduleInStudent(stu, sched.id, 'My New Title')
+		expect(newOrder.schedules[sched.id].title).to.equal('My New Title')
+	})
+	it('returns a new object', () => {
+		let sched = Schedule({title: 'Initial Title'})
+		let stu = {schedules: {[sched.id]: sched}}
+		let newOrder = renameScheduleInStudent(stu, sched.id, 'My New Title')
+		expect(newOrder).to.not.equal(stu)
+		expect(newOrder.schedules[sched.id]).to.not.equal(sched)
+	})
+})
+
+describe('addCourseToSchedule', () => {
+	let sched, stu
+	beforeEach(() => {
+		sched = Schedule()
+		stu = addScheduleToStudent(Student(), sched)
+	})
+
+	it('adds a course', () => {
+		let addedCourse = addCourseToSchedule(stu, sched.id, 918)
+		expect(addedCourse.schedules[sched.id].clbids).to.contain(918)
+	})
+
+	it('refuses to add non-number clbids', () => {
+		expect(() => addCourseToSchedule(stu, sched.id, '918')).to.throw(TypeError)
+	})
+
+	it('returns a new object', () => {
+		let actual = addCourseToSchedule(stu, sched.id, 918)
+		expect(actual).to.not.equal(stu)
+		expect(actual.schedules[sched.id]).to.not.equal(stu.schedules[sched.id])
+		expect(actual.schedules[sched.id]).to.not.equal(sched)
+	})
+
+	it('returns the same student if the clbid already exists in the schedule', () => {
+		let sched = Schedule({clbids: [456]})
+		let stu = addScheduleToStudent(Student(), sched)
+		expect(addCourseToSchedule(stu, sched.id, 456)).to.equal(stu)
+	})
+})
+
+describe('removeCourseFromSchedule', () => {
+	let sched, stu
+	beforeEach(() => {
+		sched = Schedule({clbids: [123]})
+		stu = addScheduleToStudent(Student(), sched)
+	})
+
+	it('removes a course', () => {
+		let removedCourse = removeCourseFromSchedule(stu, sched.id, 123)
+		expect(removedCourse.schedules[sched.id].clbids).not.to.contain(123)
+	})
+
+	it('refuses to remove non-number clbids', () => {
+		expect(() => removeCourseFromSchedule(stu, sched.id, '918')).to.throw(TypeError)
+	})
+
+	it('returns a new object', () => {
+		let actual = removeCourseFromSchedule(stu, sched.id, 123)
+		expect(actual).to.not.equal(stu)
+		expect(actual.schedules[sched.id]).to.not.equal(stu.schedules[sched.id])
+		expect(actual.schedules[sched.id]).to.not.equal(sched)
+	})
+
+	it('returns the same student if the clbid does not exist in the schedule', () => {
+		let sched = Schedule({clbids: []})
+		let stu = addScheduleToStudent(Student(), sched)
+		expect(removeCourseFromSchedule(stu, sched.id, 123)).to.equal(stu)
+	})
+})
+
+describe('reorderCourseInSchedule', () => {
+	let sched, stu
+	beforeEach(() => {
+		sched = Schedule({clbids: [123, 456, 789]})
+		stu = addScheduleToStudent(Student(), sched)
+	})
+
+	it('rearranges courses', () => {
+		let rearranged = reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 1})
+		expect(rearranged.schedules[sched.id].clbids).to.not.deep.equal([123, 456, 789])
+		expect(rearranged.schedules[sched.id].clbids).to.deep.equal([456, 123, 789])
+	})
+
+	it('requires that the clbid be a number when rearranging', () => {
+		expect(() => reorderCourseInSchedule(stu, sched.id, {clbid: '123', index: 1})).to.throw(TypeError)
+	})
+
+	it('returns a new object', () => {
+		let actual = reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 1})
+		expect(actual).to.not.equal(stu)
+		expect(actual.schedules[sched.id]).to.not.equal(stu.schedules[sched.id])
+		expect(actual.schedules[sched.id]).to.not.equal(sched)
+	})
+
+	it('requires that the new index be within the boundaries of the clbids list', () => {
+		let shouldThrowBecauseNegative = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: -1})
+		let shouldThrowBecausePastEnd = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 100})
+		let shouldThrowBecauseInfinity = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: Infinity})
+		expect(shouldThrowBecauseNegative).to.throw(RangeError)
+		expect(shouldThrowBecausePastEnd).to.throw(RangeError)
+		expect(shouldThrowBecauseInfinity).to.throw(RangeError)
+	})
+	it('requires that the clbid to be moved actually appear in the list of clbids', () => {
+		let shouldThrow = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123456789, index: 0})
+		expect(shouldThrow).to.throw(ReferenceError)
 	})
 })

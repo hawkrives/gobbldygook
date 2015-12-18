@@ -73,4 +73,6 @@ export default function compareCourseToQualification(course, {$key, $operator, $
 			return course[$key] >= $value
 		}
 	}
+
+	throw new TypeError(`compareCourseToQualification: "${$operator} is not a valid operator"`)
 }

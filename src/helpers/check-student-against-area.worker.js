@@ -8,8 +8,10 @@ import round from 'lodash/math/round'
 import present from 'present'
 
 import stringifyError from './stringify-error'
-import {evaluate} from '../area-tools'
+import evaluate from '../area-tools/evaluate'
 import findLeafRequirements from '../area-tools/find-leaf-requirements'
+
+const debug = require('debug')('gb:helpers:check-student-against-area')
 
 function alterCourse(course) {
 	return zipObject(map(pairs(course), ([key, value]) => {

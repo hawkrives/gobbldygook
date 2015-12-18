@@ -3,6 +3,10 @@
 @import '../mixins/link-undecorated';
 @import '../mixins/material-shadow';
 
+.student-list-item-container {
+	margin-bottom: 1.25em;
+}
+
 .student-list-item {
 	@include link-undecorated;
 	@include material-shadow;
@@ -15,11 +19,12 @@
 
 	background-color: white;
 
+	flex: 1;
 	display: flex;
 	align-items: center;
 
 	max-width: 35em;
-	margin: 0 auto 1.25em;
+	margin: 0 auto;
 	padding: 0.5em 0.5em;
 	position: relative;
 
@@ -58,17 +63,29 @@
 	margin-right: $joiner-spacing;
 }
 
-.student-list-item-actions {
-	flex: 0 1 auto;
-	margin-right: 0.5em;
-}
-
 .student-list-item--go {
 	margin-left: 0.25em;
 	margin-right: 0.5em;
 }
 
-.student-list-item .delete:hover {
-	border-color: color('red');
-	background-color: color('red', '50');
+.student-list-item-container {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: stretch;
+}
+
+.student-list-item-actions {
+	flex: 0 1 auto;
+	margin-right: 0.5em;
+}
+
+.student-list-item-container .delete {
+	font-size: 2em;
+	padding: 0.25em 0.5em;
+}
+
+.student-list-item-container .delete:hover {
+	color: white;
+	border-color: color('red', '900');
+	background-color: color('red', '500');
 }

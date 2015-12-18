@@ -1,303 +1,296 @@
-import Immutable from 'immutable'
-import flatten from 'lodash/array/flatten'
-import forEach from 'lodash/collection/forEach'
+import clone from 'lodash/lang/clone'
+import contains from 'lodash/collection/contains'
+import findIndex from 'lodash/array/findIndex'
+import findKey from 'lodash/object/findKey'
+import isArray from 'lodash/lang/isArray'
+import isNumber from 'lodash/lang/isNumber'
+import isUndefined from 'lodash/lang/isUndefined'
+import map from 'lodash/collection/map'
 import omit from 'lodash/object/omit'
-import uniq from 'lodash/array/uniq'
-import round from 'lodash/math/round'
-import {v4 as uuid} from 'uuid'
-import stringify from 'json-stable-stringify'
 import present from 'present'
-const debug = require('debug')('gobbldygook:models')
-
-import checkGraduatability from '../helpers/check-student-graduatability'
+import reject from 'lodash/collection/reject'
+import round from 'lodash/math/round'
+import stringify from 'json-stable-stringify'
+import zipObject from 'lodash/array/zipObject'
+import {v4 as uuid} from 'uuid'
+const debug = require('debug')('gb:models')
 
 import randomChar from '../helpers/random-char'
 
-import Schedule from './schedule'
-import Study from './study'
+const now = new Date()
 
-export async function getStudentData(student) {
-	const courses = await student.courses
+export default function Student(data) {
+	const startTime = present()
 
-	return {
-		courses: courses,
-		creditsNeeded: student.creditsNeeded,
-		fabrications: student.fabrications.toList().toJS(),
-		graduation: student.graduation,
-		matriculation: student.matriculation,
-		overrides: student.overrides.toObject(),
+	const baseStudent = {
+		id: uuid(),
+		name: 'Student ' + randomChar(),
+		version: VERSION,
+
+		creditsNeeded: 35,
+
+		matriculation: now.getFullYear() - 2,
+		graduation: now.getFullYear() + 2,
+		advisor: '',
+
+		dateLastModified: new Date(),
+		dateCreated: new Date(),
+
+		studies: [],
+		schedules: {},
+		overrides: {},
+		fabrications: {},
+
+		settings: {},
 	}
+
+	const student = {
+		...baseStudent,
+		...data,
+	}
+
+	if (isArray(student.schedules)) {
+		student.schedules = zipObject(map(student.schedules, s => [String(s.id), {...s, id: String(s.id)}]))
+	}
+
+	debug(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
+
+	return student
 }
 
-const now = new Date()
-const StudentRecord = Immutable.Record({
-	id: null,
-	name: null,
-	version: VERSION,
 
-	creditsNeeded: 35,
+////////
+////////
+////////
 
-	matriculation: now.getFullYear() - 2,
-	graduation: now.getFullYear() + 2,
-	advisor: '',
+export function changeStudentName(student, newName) {
+	return {...student, name: newName}
+}
+export function changeStudentAdvisor(student, newAdvisor) {
+	return {...student, advisor: newAdvisor}
+}
+export function changeStudentCreditsNeeded(student, newCreditsNeeded) {
+	return {...student, creditsNeeded: newCreditsNeeded}
+}
+export function changeStudentMatriculation(student, newMatriculation) {
+	return {...student, matriculation: newMatriculation}
+}
+export function changeStudentGraduation(student, newGraduation) {
+	return {...student, graduation: newGraduation}
+}
+export function changeStudentSetting(student, key, value) {
+	return {...student, settings: {...student.settings, [key]: value}}
+}
 
-	dateLastModified: null,
-	dateCreated: null,
 
-	studies: Immutable.OrderedMap(),
-	schedules: Immutable.OrderedMap(),
-	overrides: Immutable.OrderedMap(),
-	fabrications: Immutable.OrderedMap(),
+export function addScheduleToStudent(student, newSchedule) {
+	if (student.schedules instanceof Array) {
+		throw new TypeError('addScheduleToStudent: schedules must not be an array!')
+	}
 
-	settings: Immutable.Map(),
+	return {...student, schedules: {...student.schedules, [newSchedule.id]: newSchedule}}
+}
 
-	graduatability: Promise.resolve({
-		canGraduate: false,
-		studyResults: Immutable.OrderedMap(),
-	}),
-})
+export function destroyScheduleFromStudent(student, scheduleId) {
+	debug(`Student.destroySchedule(): removing schedule ${scheduleId}`)
 
-export default class Student extends StudentRecord {
-	constructor(encodedStudent={}) {
-		const startTime = present()
+	if (student.schedules instanceof Array) {
+		throw new TypeError('destroyScheduleFromStudent: schedules must not be an array!')
+	}
 
-		// Don't pass the list params into the StudentRecord constructor;
-		// it creates them as JS objects, instead of our custom records.
-		const toRemove = ['studies', 'schedules', 'overrides', 'fabrications', 'settings']
-		const filtered = omit(encodedStudent, toRemove)
-		const immutableStudent = Immutable.fromJS(filtered)
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
+	}
 
-		super(immutableStudent)
+	const deadSched = student.schedules[scheduleId]
+	const schedules = omit(student.schedules, [scheduleId])
 
-		// Then add them manually.
-		if (encodedStudent) {
-			return this.withMutations(student => {
-				student = student.set('id', encodedStudent.id || uuid())
-				student = student.set('name', encodedStudent.name || 'Student ' + randomChar())
-				student = student.set('dateCreated', encodedStudent.dateCreated || new Date())
-				student = student.set('dateLastModified', encodedStudent.dateLastModified || new Date())
-				student = student.set('version', VERSION)
+	if (deadSched && deadSched.active) {
+		const otherSchedKey = findKey(schedules, sched =>
+			sched.year === deadSched.year &&
+			sched.semester === deadSched.semester &&
+			sched.id !== deadSched.id)
 
-				forEach((encodedStudent.studies || []), study => {
-					student = student.addArea(study)
-				})
-
-				forEach((encodedStudent.schedules || []), schedule => {
-					student = student.addSchedule(schedule)
-				})
-
-				student = student.setOverride(encodedStudent.overrides || {})
-
-				forEach((encodedStudent.fabrications || []), fabrication => {
-					student = student.addFabrication(fabrication)
-				})
-
-				forEach((encodedStudent.settings || {}), (value, key) => {
-					student = student.changeSetting(key, value)
-				})
-
-				student.set('graduatability', checkGraduatability(student))
-
-				debug(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
-
-				return student
-			})
+		if (otherSchedKey) {
+			schedules[otherSchedKey] = {...schedules[otherSchedKey], active: true}
 		}
 	}
 
-	changeName(newName) {
-		return this.set('name', newName)
+	return {...student, schedules}
+}
+
+
+export function addCourseToSchedule(student, scheduleId, clbid) {
+	if (!isNumber(clbid)) {
+		throw new TypeError('addCourse(): clbid must be a number')
 	}
 
-	changeAdvisor(newAdvisor) {
-		return this.set('advisor', newAdvisor)
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
 	}
 
-	changeCreditsNeeded(newCreditsNeeded) {
-		return this.set('creditsNeeded', newCreditsNeeded)
+	let schedule = clone(student.schedules[scheduleId])
+
+	// If the schedule already has the course we're adding, just return the student
+	if (contains(schedule.clbids, clbid)) {
+		return student
 	}
 
-	changeMatriculation(newMatriculation) {
-		return this.set('matriculation', newMatriculation)
+	debug(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+
+	schedule.clbids = schedule.clbids.concat(clbid)
+
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
+}
+
+export function removeCourseFromSchedule(student, scheduleId, clbid) {
+	if (!isNumber(clbid)) {
+		throw new TypeError(`removeCourse(): clbid must be a number (was ${typeof clbid})`)
 	}
 
-	changeGraduation(newGraduation) {
-		return this.set('graduation', newGraduation)
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`Could not find a schedule with an ID of ${scheduleId}.`)
 	}
 
-	changeSetting(key, value) {
-		return this.setIn(['settings', key], value)
+	let schedule = clone(student.schedules[scheduleId])
+
+	// If the schedule doesn't have the course we're removing, just return the student
+	if (!contains(schedule.clbids, clbid)) {
+		return student
 	}
 
-	checkGraduatability() {
-		return this.set('graduatability', checkGraduatability(this))
+	debug(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+
+	schedule.clbids = reject(schedule.clbids, id => id === clbid)
+
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
+}
+
+export function moveCourseToSchedule(student, {fromScheduleId, toScheduleId, clbid}) {
+	debug(`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+
+	student = removeCourseFromSchedule(student, fromScheduleId, clbid)
+	student = addCourseToSchedule(student, toScheduleId, clbid)
+
+	return {...student}
+}
+
+
+export function addAreaToStudent(student, areaOfStudy) {
+	return {...student, studies: [...student.studies, areaOfStudy]}
+}
+
+export function removeAreaFromStudent(student, areaQuery) {
+	return {...student, studies: reject(student.studies, areaQuery)}
+}
+
+
+export function setOverrideOnStudent(student, key, value) {
+	let overrides = {...student.overrides}
+	overrides[key] = value
+	return {...student, overrides}
+}
+
+export function removeOverrideFromStudent(student, key) {
+	let overrides = omit(student.overrides, [key])
+	return {...student, overrides}
+}
+
+
+export function addFabricationToStudent(student, fabrication) {
+	if (!('clbid' in fabrication)) {
+		throw new TypeError(`addFabricationToStudent: fabrications must include a clbid`)
+	}
+	if (typeof fabrication.clbid !== 'string') {
+		throw new TypeError(`addFabricationToStudent: clbid must be a string`)
+	}
+	let fabrications = {...student.fabrications, [fabrication.clbid]: fabrication}
+	return {...student, fabrications}
+}
+
+export function removeFabricationFromStudent(student, fabricationId) {
+	if (typeof fabricationId !== 'string') {
+		throw new TypeError(`removeCourseFromSchedule: clbid must be a string`)
+	}
+	let fabrications = omit(student.fabrications, [fabricationId])
+	return {...student, fabrications}
+}
+
+
+export function encodeStudent(student) {
+	return encodeURIComponent(stringify(student))
+}
+
+
+export function moveScheduleInStudent(student, scheduleId, {year, semester}={}) {
+	if (year === undefined && semester === undefined) {
+		throw new RangeError('moveScheduleInStudent: Either year or semester must be provided.')
+	}
+	if (!isUndefined(year) && !isNumber(year)) {
+		throw new TypeError('moveScheduleInStudent: year must be a number.')
+	}
+	if (!isUndefined(semester) && !isNumber(semester)) {
+		throw new TypeError('moveScheduleInStudent: semester must be a number.')
 	}
 
-
-	// schedule methods
-
-	addSchedule(newSchedule) {
-		const sched = new Schedule(newSchedule)
-		return this.setIn(['schedules', sched.id], sched)
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`moveScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`)
 	}
 
-	destroySchedule(scheduleId) {
-		debug(`Student.destroySchedule(): removing schedule ${scheduleId}`)
+	let schedule = clone(student.schedules[scheduleId])
 
-		const deadSched = this.getIn(['schedules', scheduleId])
-		const scheduleIsNoMore = this.set('schedules', this.schedules.delete(scheduleId))
-
-		if (deadSched && deadSched.active) {
-			const otherSchedKey = scheduleIsNoMore.findKey(sched =>
-				sched.year === deadSched.year &&
-				sched.semester === deadSched.semester &&
-				sched.id !== deadSched.id)
-
-			if (otherSchedKey) {
-				return scheduleIsNoMore.setIn(['schedules', otherSchedKey, 'active'], true)
-			}
-		}
-		return scheduleIsNoMore
+	if (isNumber(year)) {
+		schedule.year = year
+	}
+	if (isNumber(semester)) {
+		schedule.semester = semester
 	}
 
-	destroyMultipleSchedules(ids) {
-		return this.withMutations(student => {
-			debug('Student.destroyMultipleSchedules():', ...ids)
-			ids.forEach(id => {
-				student = student.destroySchedule(id)
-			})
-			return student
-		})
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
+}
+
+export function reorderScheduleInStudent(student, scheduleId, index) {
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`reorderScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`)
 	}
 
-	moveCourse(fromScheduleId, toScheduleId, clbid) {
-		debug(`Student.moveCourse(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
-		return this.withMutations(student => {
-			student = student.setIn(['schedules', fromScheduleId], student.getIn(['schedules', fromScheduleId]).removeCourse(clbid))
-			student = student.setIn(['schedules', toScheduleId], student.getIn(['schedules', toScheduleId]).addCourse(clbid))
-		})
+	let schedule = {...student.schedules[scheduleId], index: index}
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
+}
+
+export function renameScheduleInStudent(student, scheduleId, title) {
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`renameScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`)
 	}
 
+	let schedule = {...student.schedules[scheduleId], title: title}
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
+}
 
-	// area-of-study methods
-
-	addArea(areaOfStudy) {
-		const study = new Study(areaOfStudy)
-		return this.setIn(['studies', study.id], study)
+export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
+	if (!isNumber(clbid)) {
+		throw new TypeError('reorderCourse(): clbid must be a number')
 	}
 
-	editArea(areaId, newSource) {
-		return this.withMutations(student => {
-			let studies = student.studies
-			let area = studies.get(areaId)
-			area = area.edit(newSource)
-
-			studies = studies.delete(areaId)
-			studies = studies.set(area.id, area)
-
-			return student.set('studies', studies)
-		})
+	if (!(scheduleId in student.schedules)) {
+		throw new ReferenceError(`reorderCourseInSchedule: Could not find a schedule with an ID of "${scheduleId}".`)
 	}
 
-	removeArea(id) {
-		return this.set('studies', this.studies.delete(id))
+	let schedule = clone(student.schedules[scheduleId])
+
+	if (index < 0 || index >= schedule.clbids.length) {
+		throw new RangeError(`reorderCourseInSchedule: ${index} is outside of the exclusive range 0..${schedule.clbids.length}`)
 	}
 
-	removeMultipleAreas(ids) {
-		return this.withMutations(student => {
-			ids.forEach(id => {
-				student = student.removeArea(id)
-			})
-			return student
-		})
+	const oldIndex = findIndex(schedule.clbids, id => id === clbid)
+
+	if (oldIndex < 0) {
+		throw new ReferenceError(`reorderCourseInSchedule: ${clbid} is not in schedule "${scheduleId}"`)
 	}
 
+	schedule.clbids = [...schedule.clbids]
+	schedule.clbids.splice(oldIndex, 1)
+	schedule.clbids.splice(index, 0, clbid)
 
-	// override methods
-
-	setOverride(overrideObj) {
-		return this.withMutations(student => {
-			forEach(overrideObj, (val, key) => {
-				student = student.setIn(['overrides', key], val)
-			})
-			return student
-		})
-	}
-
-	removeOverride(thingOverriden) {
-		return this.set('overrides', this.overrides.delete(thingOverriden))
-	}
-
-
-	// fabrication methods
-
-	addFabrication(fabrication) {
-		return this.setIn(['fabrications', fabrication.id], fabrication)
-	}
-
-	removeFabrication(fabricationId) {
-		return this.set('fabrications', this.fabrications.delete(fabricationId))
-	}
-
-
-	// getters
-
-	get courses() {
-		// - At it's core, this method just needs to get the list of courses that a student has chosen.
-		// - Each schedule has a list of courses that are a part of that schedule.
-		// - Additionally, we only care about the schedules that are marked as "active".
-		// - Keep in mind that each list of courses is actually a *promise* for the courses.
-		// - We also need to make sure to de-duplicate the final list of courses, so that each `clbid` only appears once.
-		// - Finally, remember that a given `clbid` might not exist in the database, in which case we get back 'undefined'.
-		//   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
-
-		const start = present()
-
-		const activeSchedules = this.schedules.filter(s => s.active)
-		const promisesForCourses = activeSchedules.map(s => s.courses).toArray()
-
-		return Promise.all(promisesForCourses)
-			.then(courses => {
-				debug(`Student(${this.id}).courses: it took ${round(present() - start, 2)} ms to fetch`)
-				return uniq(flatten(courses), course => course.clbid)
-			})
-			.catch(err => console.error(err))
-	}
-
-
-	// helpers
-
-	encode() {
-		return encodeURIComponent(stringify(this))
-	}
-
-	save() {
-		// grab the old (still JSON-encoded) student from localstorage
-		// compare it to the current one
-		// if they're different, update dateLastModified, stringify, and save.
-		const oldVersion = localStorage.getItem(this.id)
-
-		if (oldVersion !== stringify(this)) {
-			debug(`saving student ${this.name} (${this.id})`)
-
-			const student = this.set('dateLastModified', new Date())
-			localStorage.setItem(student.id, stringify(student))
-		}
-	}
-
-	toJSON() {
-		return {
-			id: this.id,
-			name: this.name,
-			version: this.version,
-			creditsNeeded: this.creditsNeeded,
-			matriculation: this.matriculation,
-			graduation: this.graduation,
-			studies: this.studies.toList(),
-			schedules: this.schedules.toList(),
-			overrides: this.overrides,
-			fabrications: this.fabrications.toList(),
-			settings: this.settings,
-		}
-	}
+	return {...student, schedules: {...student.schedules, [schedule.id]: schedule}}
 }

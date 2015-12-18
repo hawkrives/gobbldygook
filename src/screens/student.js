@@ -1,36 +1,29 @@
-import React, {Component, PropTypes, cloneElement} from 'react'
-import Immutable from 'immutable'
+import React, { Component, PropTypes, cloneElement } from 'react'
 import DocumentTitle from 'react-document-title'
+import { connect } from 'react-redux'
+import omit from 'lodash/object/omit'
 
 import Sidebar from './sidebar'
 import Loading from '../components/loading'
+import getStudentCourses from '../helpers/get-student-courses'
 
 import './student.scss'
 
-export default class Student extends Component {
+export class Student extends Component {
 	static propTypes = {
-		allAreas: PropTypes.object, // Immutable.List
-		children: PropTypes.node,
-		params: PropTypes.object, // react-router
-		students: PropTypes.object, // Immutable.Map
+		actions: PropTypes.object,
+		areas: PropTypes.array,
+		canRedo: PropTypes.bool,
+		canUndo: PropTypes.bool,
+		children: PropTypes.node.isRequired,  // from react-router
+		params: PropTypes.object,
+		student: PropTypes.object,
 	}
 
-	static defaultProps = {
-		allAreas: Immutable.List(),
-		students: Immutable.Map(),
-	}
-
-	constructor(props) {
-		super(props)
+	constructor() {
+		super()
 		this.state = {
-			allAreas: Immutable.List(),
-			baseSearchQuery: {},
-			courses: Immutable.List(),
-			coursesLoaded: false,
-			message: `Loading Student ${props.params.id}`,
-			messageClass: '',
-			isSearching: false,
-			student: null,
+			courses: [],
 		}
 	}
 
@@ -39,88 +32,49 @@ export default class Student extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		// console.log(nextProps)
-		const queryId = this.props.params.id
-		const student = nextProps.students.get(queryId)
+		if (nextProps.student) {
+			window.stu = nextProps.student
 
-		if (student) {
-			// console.info('student\'s student: ', student.toJS())
-			window.stu = student
-			this.setState({student})
-			student.courses.then(courses => {
+			getStudentCourses(nextProps.student).then(courses => {
 				this.setState({
-					courses: Immutable.List(courses),
-					coursesLoaded: true,
-				})
-				return null
-			})
-
-			const customAreas = student.studies
-				.filter(study => study.isCustom)
-				.map(study => study.data)
-				.toArray()
-
-			Promise.all(customAreas).then(customAreas => {
-				this.setState({
-					allAreas: nextProps.allAreas.concat(customAreas),
+					courses: courses,
 				})
 				return null
 			})
 		}
-		else {
-			this.setState({
-				message: `Could not find student "${queryId}"`,
-				messageClass: 'error',
-			})
-		}
 	}
 
-	toggleSearchSidebar = () => {
-		this.setState({
-			isSearching: !this.state.isSearching,
-			baseSearchQuery: {},
-		})
-	}
-
-	showSearchSidebar = ({schedule}) => {
-		this.setState({
-			isSearching: true,
-			baseSearchQuery: {
-				semester: [schedule.semester],
-				year: [schedule.year],
-			},
-		})
+	componentWillUnmount() {
+		delete window.stu
 	}
 
 	render() {
-		// console.info('Student#render')
+		// console.info('Student.render')
 
-		if (!this.state.student) {
-			return <Loading className={this.state.messageClass}>{this.state.message}</Loading>
+		if (!this.props.student) {
+			return <Loading>{`Loading Student ${this.props.params.id}`}</Loading>
 		}
 
+		const childProps = omit(this.props, 'children')
+
 		return (
-			<DocumentTitle title={`${this.state.student.name} | Gobbldygook`}>
+			<DocumentTitle title={`${this.props.student.name} | Gobbldygook`}>
 				<div className='student'>
-					<Sidebar
-						allAreas={this.state.allAreas}
-						baseSearchQuery={this.state.baseSearchQuery}
-						courses={this.state.courses}
-						coursesLoaded={this.state.coursesLoaded}
-						isSearching={this.state.isSearching}
-						toggleSearchSidebar={this.toggleSearchSidebar}
-						student={this.state.student}
-					/>
-					{cloneElement(this.props.children, {
-						className: 'content',
-						allAreas: this.state.allAreas,
-						student: this.state.student,
-						courses: this.state.courses,
-						coursesLoaded: this.state.coursesLoaded,
-						showSearchSidebar: this.showSearchSidebar,
-					})}
+					<Sidebar {...childProps} courses={this.state.courses} areas={this.props.areas} />
+					{cloneElement(this.props.children, {...childProps, courses: this.state.courses, className: 'content'})}
 				</div>
 			</DocumentTitle>
 		)
 	}
 }
+
+
+function mapStateToProps(state, ownProps) {
+	// selects some state that is relevant to this component, and returns it.
+	// redux-react will bind it to props.
+	return {
+		student: state.students.present[ownProps.params.id],
+	}
+}
+
+export default connect(mapStateToProps)(Student)

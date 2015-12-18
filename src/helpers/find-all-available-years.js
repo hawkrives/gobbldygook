@@ -4,7 +4,6 @@ import sortBy from 'lodash/collection/sortBy'
 import max from 'lodash/collection/max'
 import includes from 'lodash/collection/includes'
 import findMissingNumberBinarySearch from './find-missing-number-binary-search'
-import {Iterable as ImmutableIterable} from 'immutable'
 import first from 'lodash/array/first'
 
 /**
@@ -14,7 +13,7 @@ import first from 'lodash/array/first'
  * will return [2013, 2015]. If `schedules` is empty, it will return the
  * current year.
  *
- * @param {Array|Immutable.List} schedules - the list of schedules
+ * @param {Array} schedules - the list of schedules
  * @param {Number} matriculation - the year of matriculation
  * @returns {Number} - the available years
  */
@@ -23,8 +22,7 @@ function findAllAvailableYears(schedules, matriculation) {
 		return new Date().getFullYear()
 	}
 
-	const scheds = ImmutableIterable.isIterable(schedules) ? schedules.toArray() : schedules
-	let years = uniq(pluck(scheds, 'year'))
+	let years = uniq(pluck(schedules, 'year'))
 
 	// put the matriculation year at the front to give a starting point
 	if (matriculation !== undefined && !includes(years, matriculation)) {

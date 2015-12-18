@@ -1,7 +1,7 @@
-@import '../mixins/no-select';
+// @import '../mixins/no-select';
 
 .avatar-letter {
-	@include no-select;
+	// @include no-select;
 	$size: 48px;
 
 	font-family: Fira Sans, Helvetica Neue, Helvetica, Arial, sans-serif !important;

@@ -1,10 +1,13 @@
 import React, {Component, PropTypes} from 'react'
-import Immutable from 'immutable'
 import {Link} from 'react-router'
 
+import groupBy from 'lodash/collection/groupBy'
+import map from 'lodash/collection/map'
+import filter from 'lodash/collection/filter'
+import values from 'lodash/object/values'
+import sortBy from 'lodash/collection/sortBy'
+import interpose from '../helpers/interpose'
 import fuzzysearch from 'fuzzysearch'
-
-import studentActions from '../flux/student-actions'
 
 import AvatarLetter from './avatar-letter'
 import Button from './button'
@@ -15,8 +18,9 @@ import './student-list.scss'
 
 class StudentListItem extends Component {
 	static propTypes = {
+		actions: PropTypes.objectOf(PropTypes.func).isRequired,
 		isEditing: PropTypes.bool,
-		student: PropTypes.instanceOf(Immutable.Record).isRequired,
+		student: PropTypes.object.isRequired,
 	}
 
 	static defaultProps = {
@@ -25,51 +29,54 @@ class StudentListItem extends Component {
 
 	deleteStudent = ev => {
 		ev.preventDefault()
-		studentActions.destroyStudent(this.props.student.id)
+		this.props.actions.destroyStudent(this.props.student.id)
 	}
 
 	render() {
 		// console.log('StudentListItem#render')
-		const student = this.props.student
-		const groupedStudies = student.studies.groupBy(s => s.type)
-		return (<span>
-			<Link className='student-list-item' to={`/s/${student.id}/`}>
-				<AvatarLetter value={student.name} />
-				<span className='student-list-item-info'>
-					<div className='name'>{student.name || ''}</div>
-					<div className='areas'>
-						{groupedStudies
-							.map(group => group.map(s => s.name).join(' · '))
-							.toList()
-							.interpose(<span className='joiner'>※</span>)
-							.map((group, i) => <span className='area-type' key={i}>{group}</span>)
-							.toArray()}
-					</div>
-				</span>
-				<span className='student-list-item-actions'>
-					{this.props.isEditing &&
-					<Button className='delete' type='raised' onClick={this.deleteStudent}>
-						Delete
-					</Button>}
-				</span>
-				<Icon className='student-list-item--go' name='ios-arrow-forward' />
-			</Link>
-		</span>)
+		const { student, isEditing } = this.props
+		const groupedStudies = groupBy(student.studies, s => s.type)
+		return (
+			<div className='student-list-item-container'>
+				{isEditing &&
+				<Button className='delete' type='flat' onClick={this.deleteStudent}>
+					<Icon name='ios-trash-outline' />
+				</Button>}
+				<Link className='student-list-item' to={`/s/${student.id}/`}>
+					<AvatarLetter value={student.name} />
+					<span className='student-list-item-info'>
+						<div className='name'>{student.name || ''}</div>
+						<div className='areas'>
+							{map(
+								interpose(
+									map(groupedStudies, group => group.map(s => s.name).join(' · ')),
+									<span className='joiner'>|</span>),
+								(group, i) => <span className='area-type' key={i}>{group}</span>)}
+						</div>
+					</span>
+
+					<Icon className='student-list-item--go' name='ios-arrow-forward' />
+				</Link>
+			</div>
+		)
 	}
 }
 
 
 export default class StudentList extends Component {
 	static propTypes = {
+		actions: PropTypes.objectOf(PropTypes.func).isRequired,
 		filter: PropTypes.string,
 		isEditing: PropTypes.bool,
 		sortBy: PropTypes.oneOf(['modified', 'name']),
-		students: PropTypes.instanceOf(Immutable.Map).isRequired,
+		students: PropTypes.object.isRequired,
 	}
 
 	static defaultProps = {
 		isEditing: false,
 		filter: '',
+		students: {},
+		actions: {},
 	}
 
 	render() {
@@ -79,17 +86,23 @@ export default class StudentList extends Component {
 			sortProp = 'name'
 		}
 
-		const studentObjects = this.props.students
-			.toList()
-			.filter(s => fuzzysearch(this.props.filter, s.name.toLowerCase()))
-			.sortBy(s => s[sortProp])
-			.map(student =>
-				<StudentListItem
-					key={student.id}
-					student={student}
-					isEditing={this.props.isEditing}
-				/>)
-			.toArray()
+		const { filter: filterText, isEditing, actions } = this.props
+		const students = this.props.students
+
+		const studentObjects = map(
+				sortBy(
+					filter(
+						values(students),
+						s => fuzzysearch(filterText, s.name.toLowerCase())),
+					s => s[sortProp]),
+				student =>
+					<StudentListItem
+						key={student.id}
+						student={student}
+						actions={actions}
+						isEditing={isEditing}
+					/>
+			)
 
 		return (
 			<List className='student-list' type='plain'>

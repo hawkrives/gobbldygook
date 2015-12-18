@@ -2,7 +2,6 @@ import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
 import map from 'lodash/collection/map'
 
-import {OrderedMap} from 'immutable'
 import checkStudentAgainstArea from './check-student-against-area'
 import countCredits from '../area-tools/count-credits'
 
@@ -15,28 +14,24 @@ import countCredits from '../area-tools/count-credits'
  * @promise GraduatabilityPromise
  * @fulfill {Object} - The details of the students graduation prospects.
  *    {boolean} graduatability
- *    {Immutable.Map} areaDetails
+ *    {object} areaDetails
  */
-async function checkStudentGraduatability(student) {
-	const areaPromises = student.studies
-		.map(area => checkStudentAgainstArea(student, area))
-		.toArray()
+export default async function checkStudentGraduatability(student) {
+	const areaPromises = map(
+		student.studies,
+		area => checkStudentAgainstArea(student, area))
 
-	const areas = await Promise.all(areaPromises)
+	const areaDetails = await Promise.all(areaPromises)
 
-	const goodAreas = filter(areas, {computed: true})
-	const allAreasPass = (size(goodAreas) === size(areas))
+	const goodAreas = filter(areaDetails, {computed: true})
+	const allAreasPass = (size(goodAreas) === size(areaDetails))
 
 	const hasEnoughCredits = (countCredits(await student.courses) >= student.creditsNeeded)
 
 	const graduatability = (allAreasPass && hasEnoughCredits)
-
-	const areaDetails = OrderedMap(map(areas, area => [area.id, area]))
 
 	return {
 		canGraduate: graduatability,
 		details: areaDetails,
 	}
 }
-
-export default checkStudentGraduatability

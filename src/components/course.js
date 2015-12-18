@@ -5,6 +5,7 @@ import compact from 'lodash/array/compact'
 import filter from 'lodash/collection/filter'
 import isNull from 'lodash/lang/isNull'
 import map from 'lodash/collection/map'
+import compareProps from '../helpers/compare-props'
 
 import itemTypes from '../models/item-types'
 
@@ -14,7 +15,6 @@ import BasicCourse from './basic-course'
 import Button from './button'
 import Icon from './icon'
 import Toolbar from './toolbar'
-
 import Modal from './modal'
 
 import './course.scss'
@@ -24,11 +24,11 @@ const courseSource = {
 	beginDrag(props) {
 		const scheduleId = props.schedule ? props.schedule.id : null
 		return {
-			fromSchedule: scheduleId !== null,
-			fromSearch: scheduleId === null,
+			isFromSchedule: scheduleId !== null,
+			isFromSearch: scheduleId === null,
 			clbid: props.course.clbid,
 			groupid: props.course.groupid,
-			fromScheduleID: scheduleId,
+			fromScheduleId: scheduleId,
 		}
 	},
 }
@@ -43,6 +43,7 @@ function collect(connect, monitor) {
 
 class Course extends Component {
 	static propTypes = {
+		actions: PropTypes.object.isRequired,
 		conflicts: PropTypes.array,
 		connectDragSource: PropTypes.func.isRequired,  // react-dnd
 		course: PropTypes.object.isRequired,
@@ -59,6 +60,10 @@ class Course extends Component {
 	constructor() {
 		super()
 		this.state = {isOpen: false}
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return compareProps(this.props, nextProps) || compareProps(this.state, nextState)
 	}
 
 	closeModal = () => {

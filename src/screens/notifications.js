@@ -1,8 +1,9 @@
 import React, {Component, PropTypes} from 'react'
-import {OrderedMap} from 'immutable'
 
+import map from 'lodash/collection/map'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {removeNotification} from '../ducks/notifications'
+import * as actionCreators from '../ducks/actions/notifications'
 
 import Notification from '../components/notification'
 
@@ -10,8 +11,11 @@ import './notifications.scss'
 
 export class Notifications extends Component {
 	static propTypes = {
+		actions: PropTypes.shape({
+			removeNotification: PropTypes.func.isRequired,
+		}).isRequired,
 		dispatch: PropTypes.func.isRequired,
-		notifications: PropTypes.instanceOf(OrderedMap).isRequired,
+		notifications: PropTypes.array.isRequired,
 	}
 
 	componentDidMount() {
@@ -25,21 +29,31 @@ export class Notifications extends Component {
 	render() {
 		return (
 			<ul className='notification-list'>
-				{this.props.notifications.map(n =>
+				{map(this.props.notifications, n =>
 					<Notification {...n}
 						key={n.id}
-						onClick={id => this.props.dispatch(removeNotification(id))}
-					/>)
-				.toArray()}
+						onClick={id => this.props.actions.removeNotification(id)}
+					/>)}
 			</ul>
 		)
 	}
 }
 
-function select(state) {
+function mapStateToProps(state) {
+	// selects some state that is relevant to this component, and returns it.
+	// redux-react will bind it to props.
 	return {
 		notifications: state.notifications,
 	}
 }
 
-export default connect(select)(Notifications)
+function mapDispatchToProps(dispatch) {
+	// binds the actions creators to this dispatch function.
+	// then passes the keys of the returned object as props to the connect()-ed component
+	return {
+		actions: bindActionCreators(actionCreators, dispatch),
+		dispatch: dispatch,
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications)

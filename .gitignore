@@ -1,5 +1,6 @@
 # Files to ignore
 *.log
+.nyc_output/
 .DS_Store
 .idea/
 *.sublime-workspace

@@ -65,7 +65,7 @@ let schema = treo.schema()
 import treoPromise from 'treo/plugins/treo-promise'
 import queryTreoDatabase from '../helpers/treo-plugins/query-treo-database'
 import batchGet from '../helpers/treo-plugins/treo-batch-get'
-let db = treo('gobbldygook', schema)
+const db = treo('gobbldygook', schema)
 	.use(treoPromise())
 	.use(queryTreoDatabase)
 	.use(batchGet)
@@ -75,8 +75,7 @@ export default db
 
 if (typeof window !== 'undefined') {
 	window.deleteDatabase = () => {
-		window.indexedDB.deleteDatabase('gobbldygook', () =>
-			console.log('Database dropped'))
+		window.indexedDB.deleteDatabase('gobbldygook', console.log.bind(console, 'Database dropped'))
 	}
 
 	window.eraseStorage = () => {

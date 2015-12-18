@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import compareProps from '../helpers/compare-props'
 import './button.scss'
 
 export default class Button extends Component {
@@ -18,6 +19,10 @@ export default class Button extends Component {
 		type: 'flat',
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return compareProps(this.props, nextProps)
+	}
+
 	render() {
 		return (
 			<button type='button'
@@ -25,7 +30,8 @@ export default class Button extends Component {
 				disabled={this.props.disabled}
 				onClick={this.props.onClick}
 				style={this.props.style}
-				title={this.props.title}>
+				title={this.props.title}
+			>
 				{this.props.children}
 			</button>
 		)

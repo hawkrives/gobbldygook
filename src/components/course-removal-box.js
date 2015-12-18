@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import {DropTarget} from 'react-dnd'
 
-import studentActions from '../flux/student-actions'
 import itemTypes from '../models/item-types'
 
 import Icon from './icon'
@@ -12,16 +11,17 @@ import './course-removal-box.scss'
 // Implements the drag source contract.
 const removeCourseTarget = {
 	drop(props, monitor) {
+		const { actions } = props
 		const item = monitor.getItem()
-		const {clbid, fromScheduleID, fromSchedule} = item
-		if (fromSchedule) {
+		const { clbid, fromScheduleId, isFromSchedule } = item
+		if (isFromSchedule) {
 			console.log('dropped course', item)
-			studentActions.removeCourse(props.studentId, fromScheduleID, clbid)
+			actions.removeCourse(props.studentId, fromScheduleId, clbid)
 		}
 	},
 	canDrop(props, monitor) {
-		const item = monitor.getItem()
-		if (!item.fromSearch) {
+		const { isFromSearch } = monitor.getItem()
+		if (!isFromSearch) {
 			return true
 		}
 		return false
@@ -39,6 +39,7 @@ function collect(connect, monitor) {
 
 class CourseRemovalBox extends Component {
 	static propTypes = {
+		actions: PropTypes.object.isRequired,
 		canDrop: PropTypes.bool.isRequired,  // react-dnd
 		connectDropTarget: PropTypes.func.isRequired,  // react-dnd
 		isOver: PropTypes.bool.isRequired,  // react-dnd

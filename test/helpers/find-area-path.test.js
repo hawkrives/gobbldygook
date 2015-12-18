@@ -10,6 +10,11 @@ describe('findAreaPath', () => {
 		})).to.equal('concentrations/womens-and-gender-studies-2014-15')
 	})
 
+	it('handles the "latest" revision', () => {
+		expect(findAreaPath({name: 'Asian Studies', type: 'major', revision: 'latest'}))
+			.to.equal('majors/asian-studies')
+	})
+
 	it('expects the latest revision to not have a revision in the title', () => {
 		expect(findAreaPath({
 			name: 'Computer Science',
