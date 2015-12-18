@@ -26,7 +26,7 @@ import {
 	logError,
 	startProgress,
 	incrementProgress,
-	removeNotificationAfterDelay,
+	removeNotification,
 } from '../ducks/actions/notifications'
 
 
@@ -236,7 +236,7 @@ async function loadDataFiles(infoFile, infoFileBase) {
 		throw err
 	}
 
-	dispatch(removeNotificationAfterDelay(notificationId, 1500))
+	dispatch(removeNotification(notificationId, 1500))
 
 	return infoFile
 }

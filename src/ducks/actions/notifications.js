@@ -7,19 +7,17 @@ import {
 	START_PROGRESS,
 	INCREMENT_PROGRESS,
 	REMOVE_NOTIFICATION,
-	REMOVE_NOTIFICATION_DELAYED,
 } from '../constants/notifications'
 
 
-export function removeNotification(id) {
-	return { type: REMOVE_NOTIFICATION, payload: { id } }
-}
-
-export function removeNotificationAfterDelay(id, time) {
-	return {
-		type: REMOVE_NOTIFICATION_DELAYED,
-		payload: delay(time).then(() => ({id})),
+export function removeNotification(id, time=0) {
+	if (time) {
+		return {
+			type: REMOVE_NOTIFICATION,
+			payload: delay(time).then(() => ({id})),
+		}
 	}
+	return { type: REMOVE_NOTIFICATION, payload: { id } }
 }
 
 export function logMessage(id, message) {
