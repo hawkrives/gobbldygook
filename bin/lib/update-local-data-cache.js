@@ -18,8 +18,8 @@ const fs = Promise.promisifyAll(fsCallbacks)
 const COURSE_INFO_LOCATION = process.env.COURSE_INFO || 'https://stolaf.edu/people/rives/courses/info.json'
 // const AREA_INFO_LOCATION = process.env.AREA_INFO || 'https://stolaf.edu/people/rives/areas/info.json'
 
-const COURSES_ARE_REMOTE = startsWith(COURSE_INFO_LOCATION, 'http')
-// const AREAS_ARE_REMOTE = startsWith(AREA_INFO_LOCATION, 'http')
+const COURSES_ARE_REMOTE = startsWith(COURSE_INFO_LOCATION, 'https')
+// const AREAS_ARE_REMOTE = startsWith(AREA_INFO_LOCATION, 'https')
 
 function prepareDirs() {
 	mkdirp.sync(`${cacheDir}/Courses/`)
@@ -83,18 +83,17 @@ export async function checkForStaleData() {
 
 	if (!courseInfo) {
 		console.warn('Need to cache courses (no courseInfo file)')
-		return cache()
+		await cache()
 	}
 
 	const needsUpdate = some(newCourseInfo.files, file => {
 		const oldEntry = find(courseInfo.files, file)
-		return Boolean(oldEntry) && (oldEntry.hash !== file.hash)
+		const isCached = fs.existsSync(`${cacheDir}/Courses/${path.basename(file.path)}`)
+		return (Boolean(oldEntry) && (oldEntry.hash !== file.hash)) || !isCached
 	})
 
 	if (needsUpdate) {
 		console.warn('Need to cache courses (out of date)')
-		return cache()
+		await cache()
 	}
-
-	return Promise.resolve(true)
 }
