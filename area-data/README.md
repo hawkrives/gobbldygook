@@ -213,7 +213,7 @@ This looks like `{ year <= max(year) from courses where { gereqs = BTS-T } }`
 
 *(TODO: make clearer.)* The value, in this case, is `max`, which is the name of a function to run on the values of the specified property from the list of courses which match the nested qualification.
 
-You may also require that the resulting courses be "distinct" courses; that is, that they are not just different offerings of the same course.
+You may also require that the resulting courses be "distinct" courses; that is, that they are not just different offerings of the same course. In other words, you can require that they be different *courses*, not just different *classes*.
 
 
 ### The `filter` key
