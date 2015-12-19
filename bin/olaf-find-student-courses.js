@@ -17,6 +17,9 @@ import pluck from 'lodash/collection/pluck'
 import includes from 'lodash/collection/includes'
 import repeat from 'lodash/string/repeat'
 import find from 'lodash/collection/find'
+import pairs from 'lodash/object/pairs'
+import first from 'lodash/array/first'
+import yaml from 'js-yaml'
 
 async function populateStudent(filename) {
 	let student
@@ -35,6 +38,7 @@ async function populateStudent(filename) {
 	}
 
 	try {
+		student.studies.push({type: "degree", name: "Bachelor of Arts"})
 		student.areas = await Promise.all(student.studies.map(loadArea))
 	}
 	catch (err) {
@@ -48,79 +52,62 @@ function prettyCourse(c) {
 	return `${c.department.join('/')} ${c.number}${c.gereqs ? ` [${c.gereqs.join(' ')}]` : ''}`
 }
 
-function evaluateStudentAgainstEachMajor(student) {
-	console.log('All Courses')
-	console.log(student.courses.map(prettyCourse).map(line => `- ${line}`).join('\n'))
-	console.log()
+function prettyCourseList(list) {
+	return list.map(c => `  - ${prettyCourse(c)}`).join('\n')
+}
 
-	let used = []
-	let usedIncludingDegrees = []
+function makeHeading(str) {
+	return `${str}\n${repeat('=', str.length)}\n`
+}
+
+function evaluateStudentAgainstEachMajor(student) {
+	// console.log('All Courses')
+	// console.log(student.courses.map(prettyCourse).map(line => `- ${line}`).join('\n'))
+	// console.log()
 
 	const hasDegree = some(student.areas, {type: 'degree'})
-	let countedTowardsDegree = []
-	if (hasDegree) {
-		const degreeEvaluation = evaluate(student, student.areas.find(a => a.type === 'degree'))
-		countedTowardsDegree = degreeEvaluation.result._matches
-	}
-	countedTowardsDegree.forEach(c => usedIncludingDegrees.push(c))
+	const degreeEvaluation = evaluate(student, find(student.areas, a => a.type === 'degree'))
+	const countedTowardsDegree = [...degreeEvaluation.result._matches]
+	// console.log(yaml.safeDump(degreeEvaluation))
+	console.log(degreeEvaluation.Foundation['Studies in Physical Movement (SPM)'])
+
+	return
 
 	let countedTowardsMajors = {}
-	student.areas = student.areas
+	let areas = student.areas
 		.filter(a => a.type.toLowerCase() !== 'degree')
 		.map(area => evaluate(student, area))
 
-	student.areas.forEach(evaluated => {
+	areas.forEach(evaluated => {
 		countedTowardsMajors[evaluated.name] = evaluated.result._matches
 	})
 
-	forEach(countedTowardsMajors, (courses, name) => {
-		const title = `Regarding ${name}… (result: ${find(student.areas, {name}).computed})`
-		console.log(`${title}\n${repeat('=', title.length)}\n`)
-		const usedCourses = uniq(courses, simplifyCourse)
-		const usedClbids = pluck(usedCourses, 'clbid')
-		const unusedCourses = reject(
-			uniq([...student.courses, ...courses], simplifyCourse),
-			c => includes(usedClbids, c.clbid))
+	///
 
-		usedCourses.forEach(c => used.push(c))
+	let [name, coursesUsedInMajor] = first(pairs(countedTowardsMajors))
 
-		console.log(`Used:`)
-		console.log(usedCourses.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
-		console.log()
-		console.log(`Not used:`)
-		console.log(unusedCourses.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
-		console.log()
 
-		if (hasDegree) {
-			const subtitle = `When factoring in the degree:`
-			console.log(`${subtitle}\n${repeat('-', subtitle.length)}`)
+	let usedCourses = uniq([...coursesUsedInMajor, ...countedTowardsDegree], simplifyCourse)
+	let usedClbids = pluck(usedCourses, 'clbid')
+	let allCourses = uniq([...student.courses, ...usedCourses], simplifyCourse)
+	console.log(usedCourses.length, allCourses.length)
 
-			const usedCourses = uniq([...courses, ...countedTowardsDegree], simplifyCourse)
-			const usedClbids = pluck(usedCourses, 'clbid')
-			const unusedCourses = reject(
-				uniq([...student.courses, ...courses, ...countedTowardsDegree], simplifyCourse),
-				c => includes(usedClbids, c.clbid))
-
-			usedCourses.forEach(c => usedIncludingDegrees.push(c))
-
-			console.log(`Used:`)
-			console.log(usedIncludingDegrees.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
-			console.log()
-			console.log(`Not used:`)
-			console.log(unusedCourses.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
-			console.log()
-		}
-	})
-
-	used = uniq(used, 'clbid')
-
-	const unusedCourses = reject(
+	let unusedCourses = reject(
 		uniq([...student.courses, ...flatten(countedTowardsMajors), ...countedTowardsDegree], simplifyCourse),
-		c => includes(pluck(used, 'clbid'), c.clbid))
+		c => includes(usedClbids, c.clbid))
 
-	const remainingTitle = 'Not used for anything:'
-	console.log(`${remainingTitle}\n${repeat('=', remainingTitle.length)}`)
-	console.log(unusedCourses.map(prettyCourse).map(line => `  - ${line}`).join('\n'))
+
+	console.log(makeHeading(`${`Used for ${name}… (result: ${find(areas, {name}).computed})`}`))
+	console.log(prettyCourseList(usedCourses))
+
+	console.log(makeHeading('Not used:'))
+	console.log(prettyCourseList(unusedCourses))
+
+	console.log('actually used')
+	console.log(prettyCourseList(coursesUsedInMajor))
+
+	console.log('actually used 2')
+	console.log(prettyCourseList(countedTowardsDegree))
 }
 
 export function cli() {
