@@ -6,7 +6,7 @@ const findAreas = require('./lib/find-areas').default
 const mkdirp = require('mkdirp')
 const path = require('path')
 
-export function cli() {
+function cli() {
 	const args = nom
 		.script('compile-areas')
 		.option('inDir', {
@@ -44,3 +44,5 @@ export function cli() {
 			fs.writeFileSync(outputFile, JSON.stringify(enhanced, null, 2), {encoding: 'utf-8'})
 		})
 }
+
+module.exports.cli = cli
