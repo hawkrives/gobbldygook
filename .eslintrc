@@ -85,7 +85,7 @@ rules:
   react/self-closing-comp: 1    # prevent extra closing tags for components without children
   react/sort-comp: 1
   react/wrap-multilines: 0
-  react/no-deprecated-reactdom: 2
+  react/no-deprecated: 2
 
   # babel
   babel/no-await-in-loop: 1
