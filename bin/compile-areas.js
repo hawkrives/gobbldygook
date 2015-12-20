@@ -23,7 +23,8 @@ function cli() {
 		})
 		.parse()
 
-	const {inDir, outDir} = args
+	const inDir = args.inDir
+	const outDir = args.outDir
 	const sources = findAreas(inDir)
 
 	sources
