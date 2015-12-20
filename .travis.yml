@@ -24,7 +24,6 @@ branches:
   only: [master, stable]
 
 node_js:
-  - "0.10.31"
   - stable
 
 
