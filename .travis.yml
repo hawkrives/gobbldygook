@@ -24,13 +24,7 @@ branches:
   only: [master, stable]
 
 node_js:
-  - "0.10.31"
   - stable
-
-
-# Be sure to install npm@3 before calling "npm install"
-before_install:
-  - npm install -g npm@3
 
 before_script:
   - export DISPLAY=:99.0

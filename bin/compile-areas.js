@@ -1,12 +1,12 @@
-import nom from 'nomnom'
-import fs from 'graceful-fs'
-import yaml from 'js-yaml'
-import enhanceHanson from '../src/area-tools/enhance-hanson'
-import findAreas from './lib/find-areas'
-import mkdirp from 'mkdirp'
-import path from 'path'
+const nom = require('nomnom')
+const fs = require('graceful-fs')
+const yaml = require('js-yaml')
+const enhanceHanson = require('../src/area-tools/enhance-hanson').default
+const findAreas = require('./lib/find-areas').default
+const mkdirp = require('mkdirp')
+const path = require('path')
 
-export function cli() {
+function cli() {
 	const args = nom
 		.script('compile-areas')
 		.option('inDir', {
@@ -23,7 +23,8 @@ export function cli() {
 		})
 		.parse()
 
-	const {inDir, outDir} = args
+	const inDir = args.inDir
+	const outDir = args.outDir
 	const sources = findAreas(inDir)
 
 	sources
@@ -44,3 +45,5 @@ export function cli() {
 			fs.writeFileSync(outputFile, JSON.stringify(enhanced, null, 2), {encoding: 'utf-8'})
 		})
 }
+
+module.exports.cli = cli
