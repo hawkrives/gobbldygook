@@ -99,7 +99,7 @@
     "chai": "3.4.1",
     "codecov.io": "0.1.6",
     "coveralls": "2.11.6",
-    "css-loader": "0.23.0",
+    "css-loader": "0.23.1",
     "eslint": "1.10.3",
     "eslint-plugin-babel": "3.0.0",
     "eslint-plugin-react": "3.12.0",
