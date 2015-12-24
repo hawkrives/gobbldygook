@@ -17,7 +17,7 @@
     "build:areas": "./bin/compile-areas area-data/ --out-dir build/areas/",
     "build:ci": "npm run build -- --no-progress",
     "build:dev": "env NODE_ENV=dev webpack --config .webpackrc --bail --progress",
-    "build:peg": "pegjs < src/lib/parse-hanson-string.pegjs | babel --compact 'true' | js-beautify $npm_package_config_beautify > src/lib/parse-hanson-string.js",
+    "build:peg": "pegjs < src/area-tools/parse-hanson-string.pegjs | ./scripts/babel-stdin.js | js-beautify $npm_package_config_beautify > src/area-tools/parse-hanson-string.js",
     "clean": "rimraf build/",
     "copy": "mkdirp build/ && cp -rf src/static/* build/ && npm run copy:areas && npm run copy:icons",
     "copy:areas": "cp -rf ./area-data/ build/areas/ && ./bin/area-package-maker build/areas/ --save",
