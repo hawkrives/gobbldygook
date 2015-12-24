@@ -20,6 +20,7 @@ export default async function loadArea({name, type, revision, source, isCustom})
 		data = await db.store('areas').query(query)
 	}
 	catch (err) {
+		console.error(err)
 		throw new Error(`Could not find area ${JSON.stringify(query)}`)
 	}
 
