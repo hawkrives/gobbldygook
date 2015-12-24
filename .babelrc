@@ -1,51 +1,67 @@
 {
-	"stage": 2,
 	"env": {
 		// these plugins will be included only in development mode, e.g.
 		// if NODE_ENV (or BABEL_ENV) environment variable is not set
 		// or is equal to "development"
 		"development": {
 			"plugins": [
-				// Include react-display-name *before* react-transform
-				// if you’re using React.createClass()
-				"react-display-name",
-				"react-transform"
-			],
-			"extra": {
-				// must be defined and be an array
-				"react-transform": {
+				["react-transform", {
 					"transforms": [
 						{
-							// can be an NPM module name or a local path
 							"transform": "react-transform-hmr",
-							// see specific transform's docs for "imports" and "locals" it needs
 							"imports": ["react"],
-							"locals": ["module"]
+							"locals": ["module"],
 						},
 						{
-							// you can have many transforms, not just one
 							"transform": "react-transform-catch-errors",
-							"imports": ["react", "redbox-react"]
+							"imports": ["react", "redbox-react"],
+						},
+						{
+							"transform": "react-transform-render-visualizer",
 						}
-					]
-				}
-			}
+					],
+				}],
+			],
 		},
 		"production": {
-			"optional": [
-				"optimisation.react.inlineElements",
-				"optimisation.react.constantElements"
+			"plugins": [
+				"transform-react-constant-elements",
+				"transform-react-inline-elements",
+
+				"transform-member-expression-literals",
+				"transform-merge-sibling-variables",
+				"transform-minify-booleans",
+				"transform-property-literals",
+				"transform-simplify-comparison-operators",
+
+				"transform-inline-environment-variables",
 			],
 		}
 	},
-	"plugins": [
-		"inline-package-json"
+	"presets": [
+		"es2015",
+		"react",
+		"stage-2",
 	],
-	"optional": [
-		"runtime",
-		"es7.exportExtensions",
-		"es7.objectRestSpread",
-		"es7.classProperties",
-		"es7.asyncFunctions"
-	]
+	"plugins": [
+		"syntax-async-functions",
+		"syntax-async-generators",
+		"syntax-class-properties",
+		"syntax-export-extensions",
+		"syntax-object-rest-spread",
+		"syntax-trailing-function-commas",
+
+		// I probably only need one of these?
+		"transform-async-to-generator",
+		"transform-regenerator",
+
+		"transform-class-properties",
+		"transform-export-extensions",
+		"transform-object-rest-spread",
+		"transform-react-display-name",
+
+		"transform-undefined-to-void",
+
+		"transform-runtime",
+	],
 }
