@@ -8,7 +8,7 @@ import find from 'lodash/collection/find'
 import stringify from 'json-stable-stringify'
 
 mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock').default)
-mock('../../src/models/load-area', require('../mocks/load-area.mock').default)
+mock('../../src/helpers/load-area', require('../mocks/load-area.mock').default)
 
 const {
 	default: Student,

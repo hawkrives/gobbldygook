@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import mock from 'mock-require'
 import stringify from 'json-stable-stringify'
 
-mock('../../src/models/load-area', require('../mocks/load-area.mock').default)
+mock('../../src/helpers/load-area', require('../mocks/load-area.mock').default)
 const Study = require('../../src/models/study').default
 
 describe('Study', () => {
