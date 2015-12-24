@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 // Usage: ./bin/olaf-convert-semi-to-json ./playground/olaf-semicolons/sample-1.txt > blank.student
 //        ./bin/olaf-find-student-courses blank.student
 
@@ -10,7 +8,6 @@ import populateCourses from './lib/populate-courses'
 import simplifyCourse from '../src/area-tools/simplify-course'
 import loadArea from './lib/load-area'
 import evaluate from '../src/area-tools/evaluate'
-import some from 'lodash/collection/some'
 import uniq from 'lodash/array/uniq'
 import flatten from 'lodash/array/flatten'
 import reject from 'lodash/collection/reject'
@@ -61,17 +58,9 @@ function makeHeading(str) {
 }
 
 function evaluateStudentAgainstEachMajor(student) {
-	// console.log('All Courses')
-	// console.log(student.courses.map(prettyCourse).map(line => `- ${line}`).join('\n'))
-	// console.log()
-
-	const hasDegree = some(student.areas, {type: 'degree'})
 	const degreeEvaluation = evaluate(student, find(student.areas, a => a.type === 'degree'))
 	const countedTowardsDegree = [...degreeEvaluation.result._matches]
 	// console.log(yaml.safeDump(degreeEvaluation))
-	console.log(degreeEvaluation.Foundation['Studies in Physical Movement (SPM)'])
-
-	return
 
 	let countedTowardsMajors = {}
 	let areas = student.areas
@@ -86,28 +75,19 @@ function evaluateStudentAgainstEachMajor(student) {
 
 	let [name, coursesUsedInMajor] = first(pairs(countedTowardsMajors))
 
-
 	let usedCourses = uniq([...coursesUsedInMajor, ...countedTowardsDegree], simplifyCourse)
 	let usedClbids = pluck(usedCourses, 'clbid')
-	let allCourses = uniq([...student.courses, ...usedCourses], simplifyCourse)
-	console.log(usedCourses.length, allCourses.length)
 
 	let unusedCourses = reject(
 		uniq([...student.courses, ...flatten(countedTowardsMajors), ...countedTowardsDegree], simplifyCourse),
 		c => includes(usedClbids, c.clbid))
 
-
 	console.log(makeHeading(`${`Used for ${name}… (result: ${find(areas, {name}).computed})`}`))
 	console.log(prettyCourseList(usedCourses))
+	console.log()
 
 	console.log(makeHeading('Not used:'))
 	console.log(prettyCourseList(unusedCourses))
-
-	console.log('actually used')
-	console.log(prettyCourseList(coursesUsedInMajor))
-
-	console.log('actually used 2')
-	console.log(prettyCourseList(countedTowardsDegree))
 }
 
 export function cli() {
