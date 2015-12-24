@@ -17,10 +17,12 @@ node_js:
   - stable
 
 script:
+  - set -e  # exit the build as soon as one command errors
   - npm run lint
   - npm run build:areas
   - npm run test:students
   - npm run nyc  # runs mocha with coverage
   - npm run build:ci
+  - set +e  # reset the setting
 
 after_success: npm run coveralls && npm run codecov

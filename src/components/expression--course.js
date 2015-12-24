@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
-import includes from 'lodash/collection/includes'
 import semesterName from '../helpers/semester-name'
 
 import './expression--course.scss'
