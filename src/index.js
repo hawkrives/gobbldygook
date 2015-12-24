@@ -2,6 +2,11 @@
 import Bluebird from 'bluebird'
 global.Promise = Bluebird
 require('babel-runtime/core-js/promise').default = Bluebird
+Bluebird.config({
+	warnings: {
+		wForgottenReturn: false,
+	},
+})
 
 // enable the regenerator runtime
 require('babel-regenerator-runtime')
