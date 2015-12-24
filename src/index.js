@@ -3,6 +3,9 @@ import Bluebird from 'bluebird'
 global.Promise = Bluebird
 require('babel-runtime/core-js/promise').default = Bluebird
 
+// enable the regenerator runtime
+require('babel-regenerator-runtime')
+
 // Include fetch
 import 'isomorphic-fetch'
 
