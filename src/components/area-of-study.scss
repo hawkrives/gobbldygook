@@ -17,6 +17,13 @@
 	}
 }
 
+.area .message {
+	padding-left: $area-edge-padding;
+	padding-right: $area-edge-padding;
+	margin: 0;
+	margin-bottom: $area-edge-padding;
+}
+
 .area--error {
 	margin: 0;
 	padding: 0 0.5em 0.5em;

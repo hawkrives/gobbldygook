@@ -90,10 +90,10 @@ function AreaOfStudy(props) {
 
 	let contents = null
 	if (error) {
-		contents = <p className='area--error'>{error} {':('}</p>
+		contents = <p className='message area--error'>{error} {':('}</p>
 	}
 	else if (!checked) {
-		contents = <p className='area--loading'>Loading…</p>
+		contents = <p className='message area--loading'>Loading…</p>
 	}
 	else {
 		contents = (
