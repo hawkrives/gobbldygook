@@ -1,44 +1,25 @@
+import { request, requestTransaction } from 'idb-request'
+
 function batchGet(keys) {
+	let results = []
 	if (!keys.length) {
-		return Promise.resolve([])
+		return Promise.resolve(results)
 	}
 
-	return new Promise((resolve, reject) => {
-		let name = this.name
+	return this.db.getInstance()
+		.then(db => {
+			const tr = db.transaction(this.name, 'readonly')
+			const store = tr.objectStore(this.name)
 
-		this.db.transaction('readonly', [name], function(err, tr) {
-			if (err) {
-				reject(err)
-			}
+			const requests = keys.map(k => request(store.get(k)))
+			requests.push(requestTransaction(tr)) // add the transactions promise
 
-			let store = tr.objectStore(name)
-			let current = 0
-			let results = []
-
-			tr.onerror = tr.onabort = reject
-			tr.oncomplete = function oncomplete() {
-				resolve(results)
-			}
-
-			function next() {
-				if (current >= keys.length) {
-					return
-				}
-
-				let currentKey = keys[current]
-				current += 1
-
-				let request = store.get(currentKey)
-				request.onerror = reject
-				request.onsuccess = function(ev) {
-					results.push(ev.target.result)
-					next()
-				}
-			}
-
-			next()
+			return Promise.all(requests)
 		})
-	})
+		.then(results => {
+			results.pop() // remove the transaction promise
+			return results
+		})
 }
 
 export default function plugin() {

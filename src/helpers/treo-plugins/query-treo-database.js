@@ -11,6 +11,7 @@ import size from 'lodash/collection/size'
 import uniq from 'lodash/array/uniq'
 import flatten from 'lodash/array/flatten'
 import startsWith from 'lodash/string/startsWith'
+import sortBy from 'lodash/collection/sortBy'
 
 import idbRange from 'idb-range'
 import {cmp as idbComparison} from 'treo'
@@ -35,6 +36,7 @@ function queryStore(query) {
 		// Return the results.
 
 		let results = []
+
 		// Prevent invalid logic from not having a query.
 		if (!size(query)) {
 			return results
@@ -49,7 +51,7 @@ function queryStore(query) {
 
 		// <this is a very hacky way of prioritizing the deptnum>
 		if (includes(keysWithIndices, 'deptnum')) {
-			keysWithIndices.splice(findIndex(keysWithIndices, keyName => keyName === 'deptnum'), 1)
+			keysWithIndices.splice(findIndex(keysWithIndices, 'deptnum'), 1)
 			keysWithIndices.unshift('deptnum')
 		}
 
@@ -57,7 +59,8 @@ function queryStore(query) {
 		// just run over that index.
 		if (size(keysWithIndices)) {
 			// We only want to search some indices
-			const indices = filter(this.indexes, index => includes(keysWithIndices, index))
+			const indices = filter(this.indexes, index =>
+				includes(keysWithIndices, index))
 
 			// Run the queries
 			const resultPromises = map(indices,
@@ -68,11 +71,14 @@ function queryStore(query) {
 
 			// Once we have the primary keys, we need to fetch the actual data:
 			let allValues = allFoundKeys
-				// they're in sub-arrays, one for each index, so we flatten them
-				.then(keys => flatten(keys))
-				// because multiple indices can be running at once, they might return
-				// the same primary keys, so we'll just de-dupe them here before fetching
-				.then(keys => uniq(keys))
+				.then(keys => {
+					// They're in sub-arrays, one for each index, so we
+					// flatten them.
+					// Also, because multiple indices can be running at once,
+					// they might return the same primary keys, so we'll just
+					// de-dupe them here before fetching.
+					return uniq(flatten(keys))
+				})
 				// and then we actually go fetch them
 				.then(keys => this.batchGet(keys))
 
@@ -96,7 +102,7 @@ function queryStore(query) {
 				cursor.continue()
 			}
 
-			this.cursor({iterator: iterateStore}, done)
+			this.cursor({iterator: iterateStore}).then(done)
 		}
 	})
 }
@@ -104,6 +110,7 @@ function queryStore(query) {
 
 function queryIndex(query, primaryKeysOnly=false) {
 	let name = this.name
+	// console.log(query)
 
 	return new Promise((resolvePromise, rejectPromise) => {
 		// - takes a query object
@@ -130,7 +137,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 		}
 
 		// If we have any keys, sort them according to the IDB spec
-		keys = keys.sort(idbComparison)
+		keys = sortBy(keys, idbComparison)
 		keys = uniq(keys, true)
 
 		let firstKey = first(keys)
@@ -154,16 +161,17 @@ function queryIndex(query, primaryKeysOnly=false) {
 				resolvePromise(results)
 			}
 			else {
-				this.objectStore
+				this
+					.store
 					.batchGet(results)
 					.then(resolvePromise)
 			}
 		}
 
 		function iterateIndex(cursor) {
-			// console.log('cursor', cursor, arguments)
-			// console.log('key', keys[currentIndex], 'idx', currentIndex)
-			// console.log(keys)
+			// console.log('cursor:', cursor)
+			// console.log('key:', keys[currentIndex], 'idx:', currentIndex, 'size:', keys.length)
+			// console.log('keys:', keys)
 
 			if (currentIndex > keys.length) {
 				// console.log('done')
@@ -210,7 +218,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 			}
 		}
 
-		this.cursor({range, iterator: iterateIndex}, done)
+		this.cursor({range, iterator: iterateIndex}).then(done)
 	})
 }
 
