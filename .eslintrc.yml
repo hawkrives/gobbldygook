@@ -90,7 +90,6 @@ rules:
   # babel
   babel/no-await-in-loop: 1
 
-
   # jsdoc
   valid-jsdoc:
     - 1
