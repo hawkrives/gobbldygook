@@ -131,7 +131,7 @@ describe('filterByWhereClause', () => {
 		expect(actual).to.deep.equal(expected)
 	})
 
-	it.only('does not count things that don\'t count when matching "distinct"', () => {
+	it('does not count things that don\'t count when matching "distinct"', () => {
 		const clause = {
 			$type: 'qualification',
 			$key: 'gereqs',

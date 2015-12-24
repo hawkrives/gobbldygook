@@ -190,4 +190,46 @@ describe('filterByQualification', () => {
 		expect(() => filterByQualification(courses, advancedQualificationBad, false))
 			.to.throw(TypeError)
 	})
+
+	it('can require that the courses be distinct', () => {
+		const clause = {
+			$type: 'qualification',
+			$key: 'gereqs',
+			$operator: '$eq',
+			$value: 'SPM',
+		}
+
+		const courses = [
+			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM']},
+			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
+		]
+
+		const isDistinct = true
+
+		const expected = [courses[0]]
+		const actual = filterByQualification(courses, clause, isDistinct)
+
+		expect(actual).to.deep.equal(expected)
+	})
+
+	it('does not count things that don\'t count when matching "distinct"', () => {
+		const clause = {
+			$type: 'qualification',
+			$key: 'gereqs',
+			$operator: '$eq',
+			$value: 'SPM',
+		}
+
+		const courses = [
+			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['FYW']},
+			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
+		]
+
+		const isDistinct = true
+
+		const expected = [courses[1]]
+		const actual = filterByQualification(courses, clause, isDistinct)
+
+		expect(actual).to.deep.equal(expected)
+	})
 })
