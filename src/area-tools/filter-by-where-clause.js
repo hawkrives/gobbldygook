@@ -87,7 +87,7 @@ export function filterByQualification(list, qualification, distinct, fullList) {
 			}
 
 			const completeList = fullList || list
-			const filtered = filterByWhereClause(completeList, value.$where)
+			const filtered = filterByWhereClause(completeList, value.$where, distinct)
 			const items = pluck(filtered, value.$prop)
 			const computed = func(items)
 
