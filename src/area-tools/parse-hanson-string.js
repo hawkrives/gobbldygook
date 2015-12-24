@@ -1,15 +1,14 @@
 "use strict";
-var _extends = Object.assign || function(target) {
-	for (var i = 1; i < arguments.length; i++) {
-		var source = arguments[i];
-		for (var key in source) {
-			if (Object.prototype.hasOwnProperty.call(source, key)) {
-				target[key] = source[key];
-			}
-		}
-	}
-	return target;
-};
+var _stringify = require("babel-runtime/core-js/json/stringify");
+var _stringify2 = _interopRequireDefault(_stringify);
+var _extends2 = require("babel-runtime/helpers/extends");
+var _extends3 = _interopRequireDefault(_extends2);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : {
+		default: obj
+	};
+}
 module.exports = (function() {
 	"use strict";
 	/*
@@ -107,7 +106,7 @@ module.exports = (function() {
 				};
 			},
 			peg$c17 = function peg$c17(distinct, filter) {
-				return _extends({}, filter, {
+				return (0, _extends3.default)({}, filter, {
 					$distinct: distinct,
 					$type: 'filter'
 				});
@@ -179,7 +178,7 @@ module.exports = (function() {
 				};
 			},
 			peg$c36 = function peg$c36(key, op, f, q) {
-				return _extends({}, f, {
+				return (0, _extends3.default)({}, f, {
 					$where: q
 				});
 			},
@@ -486,7 +485,7 @@ module.exports = (function() {
 					count.$num = of.length;
 				}
 				if (of.length < count.$num) {
-					throw new Error("you requested " + count.$num + " items, but only gave " + of.length + " options (" + JSON.stringify(of) + ").");
+					throw new Error("you requested " + count.$num + " items, but only gave " + of.length + " options (" + (0, _stringify2.default)(of) + ").");
 				}
 				return {
 					$type: 'of',
@@ -577,7 +576,7 @@ module.exports = (function() {
 				if (from.$from === 'children-where' && what !== 'course') {
 					throw new Error('must use "courses from" with "children where"');
 				}
-				return _extends({}, from, {
+				return (0, _extends3.default)({}, from, {
 					$type: 'modifier',
 					$count: count,
 					$what: what
@@ -634,19 +633,19 @@ module.exports = (function() {
 				};
 			},
 			peg$c148 = function peg$c148(dept, num, section, year, sub) {
-				return _extends({}, sub, {
+				return (0, _extends3.default)({}, sub, {
 					year: year
 				});
 			},
 			peg$c149 = function peg$c149(dept, num, section, sub) {
-				return _extends({}, sub, {
+				return (0, _extends3.default)({}, sub, {
 					section: section
 				});
 			},
 			peg$c150 = function peg$c150(dept, num, details) {
 				return {
 					$type: 'course',
-					$course: _extends({}, details, dept || fetchDept(), num)
+					$course: (0, _extends3.default)({}, details, dept || fetchDept(), num)
 				};
 			},
 			peg$c151 = function peg$c151(c1, c2) {
@@ -673,7 +672,7 @@ module.exports = (function() {
 			peg$c156 = function peg$c156(dept1, part2) {
 				var type = part2.type;
 				var dept2 = part2.dept;
-				var department = undefined;
+				var department = void 0;
 				if (type === 'joined') {
 					department = {
 						department: [dept1 + dept2]
@@ -726,7 +725,7 @@ module.exports = (function() {
 				if (lab) {
 					result.type = 'Lab';
 				}
-				return _extends({}, result, num);
+				return (0, _extends3.default)({}, result, num);
 			},
 			peg$c167 = function peg$c167() {
 				throw new SyntaxError('A course section must be either an uppercase letter [A-Z] or an asterisk [*].');
@@ -4108,7 +4107,7 @@ module.exports = (function() {
 			s0 = s1;
 			return s0;
 		}
-		var globalLastDept = undefined;
+		var globalLastDept = void 0;
 
 		function storeDept(dept) {
 			globalLastDept = dept;
@@ -4118,7 +4117,7 @@ module.exports = (function() {
 			return globalLastDept;
 		}
 		var flatten = require('lodash/array/flatten');
-		var expandDepartment = require('./expand-department');
+		var expandDepartment = require('./expand-department').default;
 		peg$result = peg$startRuleFunction();
 		if (peg$result !== peg$FAILED && peg$currPos === input.length) {
 			return peg$result;
