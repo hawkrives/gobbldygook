@@ -3,4 +3,4 @@ process.on('unhandledRejection', function(reason, p) {
 	console.error('Reason:', reason)
 })
 
-require('babel/register')
+require('babel-register')
