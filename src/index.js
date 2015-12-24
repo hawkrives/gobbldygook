@@ -6,9 +6,6 @@ require('babel-runtime/core-js/promise').default = Bluebird
 // Include fetch
 import 'isomorphic-fetch'
 
-// Include other polyfills
-// import startDetailsPolyfill from './polyfills/details/Element.details'
-// startDetailsPolyfill()
 // Add debug to window
 window.DEBUG = require('debug')
 
