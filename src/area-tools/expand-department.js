@@ -1,4 +1,4 @@
-const departments = new Map(Object.entries({
+const departments = {
 	AR: 'ART',
 	AS: 'ASIAN',
 	BI: 'BIO',
@@ -14,11 +14,11 @@ const departments = new Map(Object.entries({
 	PS: 'PSCI',
 	RE: 'REL',
 	SA: 'SOAN',
-}))
+}
 
 export default function expandDepartment(dept) {
-	if (departments.has(dept)) {
-		return departments.get(dept)
+	if (dept in departments) {
+		return departments[dept]
 	}
 	else {
 		throw new TypeError(`expandDepartment(): "${dept}" is not a valid department shorthand`)
