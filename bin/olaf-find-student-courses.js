@@ -9,7 +9,6 @@ import simplifyCourse from '../src/area-tools/simplify-course'
 import loadArea from './lib/load-area'
 import evaluate from '../src/area-tools/evaluate'
 import some from 'lodash/collection/some'
-import forEach from 'lodash/collection/forEach'
 import uniq from 'lodash/array/uniq'
 import flatten from 'lodash/array/flatten'
 import reject from 'lodash/collection/reject'
@@ -19,7 +18,6 @@ import repeat from 'lodash/string/repeat'
 import find from 'lodash/collection/find'
 import pairs from 'lodash/object/pairs'
 import first from 'lodash/array/first'
-import yaml from 'js-yaml'
 
 async function populateStudent(filename) {
 	let student
@@ -38,7 +36,7 @@ async function populateStudent(filename) {
 	}
 
 	try {
-		student.studies.push({type: "degree", name: "Bachelor of Arts"})
+		student.studies.push({type: 'degree', name: 'Bachelor of Arts'})
 		student.areas = await Promise.all(student.studies.map(loadArea))
 	}
 	catch (err) {
