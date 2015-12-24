@@ -29,7 +29,6 @@
 				"transform-react-inline-elements",
 
 				"transform-member-expression-literals",
-				"transform-merge-sibling-variables",
 				"transform-minify-booleans",
 				"transform-property-literals",
 				"transform-simplify-comparison-operators",
@@ -51,7 +50,6 @@
 		"syntax-object-rest-spread",
 		"syntax-trailing-function-commas",
 
-		// I probably only need one of these?
 		"transform-async-to-generator",
 		"transform-regenerator",
 
