@@ -123,6 +123,32 @@ describe('filterByWhereClause', () => {
 			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
 		]
 
-		expect(filterByWhereClause(courses, clause, true)).to.deep.equal([courses[0]])
+		const isDistinct = true
+
+		const expected = [courses[0]]
+		const actual = filterByWhereClause(courses, clause, isDistinct)
+
+		expect(actual).to.deep.equal(expected)
+	})
+
+	it.only('does not count things that don\'t count when matching "distinct"', () => {
+		const clause = {
+			$type: 'qualification',
+			$key: 'gereqs',
+			$operator: '$eq',
+			$value: 'SPM',
+		}
+
+		const courses = [
+			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['FYW']},
+			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
+		]
+
+		const isDistinct = true
+
+		const expected = [courses[1]]
+		const actual = filterByWhereClause(courses, clause, isDistinct)
+
+		expect(actual).to.deep.equal(expected)
 	})
 })

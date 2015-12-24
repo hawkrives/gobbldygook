@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import {computeWhere} from '../../src/area-tools/compute-chunk'
 
-expect('computeWhere', () => {
-	it('can require that the courses be distinct', () => {
+describe('computeWhere', () => {
+	it('requires "distinct" courses to be different courses', () => {
 		const expr = {
 			$type: 'boolean',
 			$count: { $operator: '$gte', $num: 2 },
@@ -12,30 +12,37 @@ expect('computeWhere', () => {
 				$operator: '$eq',
 				$value: 'SPM',
 			},
-			$distinct: false,
+			$distinct: true,
 		}
 
-		const shouldHaveOneCourse = [
+		const courses = [
 			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM']},
 			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
 		]
 
-
-		expect(computeWhere({expr, shouldHaveOneCourse})).to.deep.equal({
+		const expected = {
 			computedResult: false,
-			matches: [shouldHaveOneCourse[0]],
+			matches: [courses[0]],
 			counted: 1,
-		})
+		}
 
-		const shouldHaveBothCourses = [
+		const actual = computeWhere({expr, courses})
+
+		expect(actual).to.deep.equal(expected)
+
+		const altCourses = [
 			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM']},
 			{department: ['ESTH'], number: 187, year: 2013, gereqs: ['SPM']},
 		]
 
-		expect(computeWhere({expr, shouldHaveBothCourses})).to.deep.equal({
-			computedResult: false,
-			matches: shouldHaveBothCourses,
-			counted: 1,
-		})
+		let expected2 = {
+			computedResult: true,
+			matches: altCourses,
+			counted: 2,
+		}
+
+		let actual2 = computeWhere({expr, courses: altCourses})
+
+		expect(actual2).to.deep.equal(expected2)
 	})
 })
