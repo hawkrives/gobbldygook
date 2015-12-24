@@ -1,9 +1,4 @@
 #!/usr/bin/env node
 
-process.on('unhandledRejection', function(reason, p) {
-	console.error('Unhandled rejection in', p)
-	console.error('Reason:', reason)
-})
-
-require('babel/register')
+require('./lib/init')
 require('./olaf-convert-semi-to-json.js')

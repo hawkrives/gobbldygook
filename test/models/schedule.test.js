@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import stringify from 'json-stable-stringify'
 
-const Schedule = require('../../src/models/schedule')
+const Schedule = require('../../src/models/schedule').default
 
 describe('Schedule', () => {
 	it('does not mutate the passed-in object', () => {

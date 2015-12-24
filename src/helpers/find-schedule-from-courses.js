@@ -12,7 +12,7 @@ export default async function findScheduleFromCourses(courses) {
 	// console.log(`queryableCourses for ${courses[0].term}`, queryableCourses)
 	let matchPromises = map(queryableCourses, searchForCourseMatches)
 
-	let matches = await* matchPromises
+	let matches = await Promise.all(matchPromises)
 
 	// let start =  performance.now()
 	matches = flatten(matches)

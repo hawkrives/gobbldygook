@@ -1,4 +1,4 @@
-import contains from 'lodash/collection/contains'
+import includes from 'lodash/collection/includes'
 import filter from 'lodash/collection/filter'
 import first from 'lodash/array/first'
 import isString from 'lodash/lang/isString'
@@ -22,7 +22,7 @@ function canAdd({query, value, primaryKey, results}={}) {
 	// and then that it's not already in the array.
 	// Note that because JS checks against identity, we use isEqual to
 	// do an equality check against the two objects.
-	return checkAgainstQuery(query, value) && !contains(results, primaryKey)
+	return checkAgainstQuery(query, value) && !includes(results, primaryKey)
 }
 
 function queryStore(query) {
@@ -45,9 +45,10 @@ function queryStore(query) {
 		const indexKeys = extractKeys(query)
 
 		// Filter down to just the requested keys that also have indices
-		const keysWithIndices = filter(indexKeys, key => this.index(key))
+		const keysWithIndices = filter(indexKeys, key => includes(this.indexes, key))
+
 		// <this is a very hacky way of prioritizing the deptnum>
-		if (contains(keysWithIndices, 'deptnum')) {
+		if (includes(keysWithIndices, 'deptnum')) {
 			keysWithIndices.splice(findIndex(keysWithIndices, keyName => keyName === 'deptnum'), 1)
 			keysWithIndices.unshift('deptnum')
 		}
@@ -56,11 +57,11 @@ function queryStore(query) {
 		// just run over that index.
 		if (size(keysWithIndices)) {
 			// We only want to search some indices
-			const indices = filter(this.indexes, index => contains(keysWithIndices, index.name))
+			const indices = filter(this.indexes, index => includes(keysWithIndices, index))
 
 			// Run the queries
 			const resultPromises = map(indices,
-				index => index.query(query, true))
+				indexName => this.index(indexName).query(query, true))
 
 			// Wait for all indices to finish querying before getting their results
 			const allFoundKeys = Promise.all(resultPromises)
@@ -213,11 +214,13 @@ function queryIndex(query, primaryKeysOnly=false) {
 	})
 }
 
-function plugin(db, treo) {
-	let {Store, Index} = treo
+function plugin() {
+	return (db, treo) => {
+		let {Store, Index} = treo
 
-	Store.prototype.query = queryStore
-	Index.prototype.query = queryIndex
+		Store.prototype.query = queryStore
+		Index.prototype.query = queryIndex
+	}
 }
 
 export default plugin

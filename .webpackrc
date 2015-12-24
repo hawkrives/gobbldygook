@@ -11,7 +11,7 @@ var HtmlPlugin = require('./scripts/webpack/html-plugin')
 var buildFilename = require('./scripts/webpack/build-filename')
 
 var isProduction = (process.env.NODE_ENV === 'production')
-var isDev = (process.env.NODE_ENV === 'dev')
+var isDev = (process.env.NODE_ENV === 'development')
 var isTest = (process.env.NODE_ENV === 'test')
 
 var entryPoint = './src/start.js'
@@ -227,7 +227,7 @@ else if (isProduction) {
 }
 
 else {
-	throw new Error('Unknown environment! Not dev, production, nor test!')
+	throw new Error('Unknown environment! Not development, production, nor test!')
 }
 
 module.exports = config

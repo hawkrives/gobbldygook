@@ -7,8 +7,8 @@ import pluck from 'lodash/collection/pluck'
 import find from 'lodash/collection/find'
 import stringify from 'json-stable-stringify'
 
-mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock'))
-mock('../../src/models/load-area', require('../mocks/load-area.mock'))
+mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock').default)
+mock('../../src/helpers/load-area', require('../mocks/load-area.mock').default)
 
 const {
 	default: Student,
@@ -37,10 +37,10 @@ const {
 	saveStudent,
 } = require('../../src/models/student')
 
-const getStudentCourses = require('../../src/helpers/get-student-courses')
+const getStudentCourses = require('../../src/helpers/get-student-courses').default
 
-const Study = require('../../src/models/study')
-const Schedule = require('../../src/models/schedule')
+const Study = require('../../src/models/study').default
+const Schedule = require('../../src/models/schedule').default
 
 describe('Student', () => {
 	it('returns an object', () => {

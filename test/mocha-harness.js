@@ -1,6 +1,8 @@
 global.Promise = require('bluebird')
 global.debug = require('debug')
 
+require('babel-regenerator-runtime')
+
 global.VERSION = String(require('../package.json').version)
 global.DEV = false
 

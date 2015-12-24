@@ -3,13 +3,12 @@ import isArray from 'lodash/lang/isArray'
 import some from 'lodash/collection/some'
 import max from 'lodash/collection/max'
 import yaml from 'js-yaml'
+import db from '../helpers/db'
 
 export default async function loadArea({name, type, revision, source, isCustom}) {
 	if (isCustom && source) {
 		return {...enhanceHanson(yaml.safeLoad(source), {topLevel: true}), source}
 	}
-
-	const db = require('../helpers/db')
 
 	let query = {name: [name], type: [type]}
 	if (revision) {
@@ -21,6 +20,7 @@ export default async function loadArea({name, type, revision, source, isCustom})
 		data = await db.store('areas').query(query)
 	}
 	catch (err) {
+		console.error(err)
 		throw new Error(`Could not find area ${JSON.stringify(query)}`)
 	}
 

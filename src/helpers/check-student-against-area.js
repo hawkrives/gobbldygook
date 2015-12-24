@@ -41,10 +41,23 @@ export default async function checkStudentAgainstArea(student, area) {
 
 		const areaData = {
 			...area,
-			data: await loadArea(area),
+		}
+		try {
+			areaData.data = await loadArea(area)
+		}
+		catch (err) {
+			console.error(err)
+			return
 		}
 
-		const studentData = await getStudentData(student)
+		let studentData
+		try {
+			studentData = await getStudentData(student)
+		}
+		catch (err) {
+			console.error(err)
+			return
+		}
 
 		/* why stringify? from https://code.google.com/p/chromium/issues/detail?id=536620#c11:
 		 > We know that serialization/deserialization is slow. It's actually faster to
