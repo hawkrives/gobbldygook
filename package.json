@@ -95,7 +95,7 @@
     "babel-loader": "5.3.3",
     "babel-plugin-inline-package-json": "1.0.1",
     "babel-plugin-react-display-name": "2.0.0",
-    "babel-plugin-react-transform": "1.1.1",
+    "babel-plugin-react-transform": "2.0.0",
     "chai": "3.4.1",
     "codecov.io": "0.1.6",
     "coveralls": "2.11.6",
