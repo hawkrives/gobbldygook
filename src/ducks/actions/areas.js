@@ -5,6 +5,6 @@ import {
 import db from '../../helpers/db'
 
 export async function loadAreas() {
-	let areas = await db.store('areas').all()
+	let areas = await db.store('areas').getAll()
 	return { type: LOAD_AREAS, payload: areas }
 }
