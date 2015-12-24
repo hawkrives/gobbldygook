@@ -106,7 +106,7 @@ export function filterByQualification(list, qualification, distinct, fullList) {
 		compareCourseToQualification(course, qualification))
 
 	if (distinct) {
-		filtered = uniq(list, simplifyCourse)
+		filtered = uniq(filtered, simplifyCourse)
 	}
 
 	return filtered
