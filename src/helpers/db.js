@@ -1,4 +1,4 @@
-import treo from 'treo'
+import treo, {Database} from 'treo'
 treo.Promise = require('bluebird')
 
 import queryTreoDatabase from '../helpers/treo-plugins/query-treo-database'
@@ -6,7 +6,7 @@ import batchGet from '../helpers/treo-plugins/treo-batch-get'
 
 import schema from './db-schema'
 
-const db = treo('gobbldygook', schema)
+const db = new Database('gobbldygook', schema)
 	.use(queryTreoDatabase())
 	.use(batchGet())
 
