@@ -27,6 +27,7 @@
 	text-transform: uppercase;
 
 	outline: 0;
+	color: currentColor;
 
 	// Gets rid of tap active state
 	-webkit-tap-highlight-color: transparent;
@@ -41,7 +42,6 @@
 	@extend %button;
 
 	background-color: color('white', '500');
-	color: color('black', '500');
 
 	@include material-shadow;
 
