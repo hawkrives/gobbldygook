@@ -1,6 +1,5 @@
 import 'isomorphic-fetch'
 import {status, json, text} from './fetch-helpers'
-
 import stringifyError from './stringify-error'
 
 import uniq from 'lodash/array/uniq'
@@ -13,26 +12,20 @@ import map from 'lodash/collection/map'
 import present from 'present'
 import yaml from 'js-yaml'
 
+import db from './db'
+import * as actions from '../ducks/actions/notifications'
 import buildDept from '../helpers/build-dept'
 import buildDeptNum from '../helpers/build-dept-num'
 import splitParagraph from '../helpers/split-paragraph'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
-const debug = require('debug')('gb:helpers:load-data')
-
-import db from './db'
-
-import {
-	logError,
-	startProgress,
-	incrementProgress,
-	removeNotification,
-} from '../ducks/actions/notifications'
+const debug = (...args) => console.log(...args)
 
 
 function dispatch(action) {
-	self.postMessage(['dispatch', action])
+	self.postMessage([null, 'dispatch', action])
 }
+
 
 function prepareCourse(course) {
 	course.name = course.name || course.title
@@ -51,6 +44,14 @@ function prepareCourse(course) {
 	return course
 }
 
+
+function cacheItemHash(path, type, hash) {
+	debug(`cacheItemHash(): ${path}`)
+
+	return db.store(getCacheStoreName(type)).put({id: path, path, hash})
+}
+
+
 function getCacheStoreName(type) {
 	if (type === 'courses') {
 		return 'courseCache'
@@ -63,11 +64,12 @@ function getCacheStoreName(type) {
 	}
 }
 
-function storeCourses(item) {
-	debug(`storeCourses(): ${item.path}`)
 
-	let coursesToStore = map(item.data, course => {
-		course.sourcePath = item.path
+function storeCourses(path, data) {
+	debug(`storeCourses(): ${path}`)
+
+	let coursesToStore = map(data, course => {
+		course.sourcePath = path
 		return prepareCourse(course)
 	})
 
@@ -81,7 +83,7 @@ function storeCourses(item) {
 			const errorName = err.target.error.name
 
 			if (errorName === 'QuotaExceededError') {
-				dispatch(logError({
+				dispatch(actions.logError({
 					id: 'db-storage-quota-exceeded',
 					message: `The database "${db}" has exceeded its storage quota.`,
 				}))
@@ -92,16 +94,15 @@ function storeCourses(item) {
 		})
 }
 
-function storeArea(item) {
-	debug(`storeArea(): ${item.path}`)
 
-	const id = item.path
+function storeArea(path, data) {
+	debug(`storeArea(): ${path}`)
 
 	let area = {
-		...item.data,
+		...data,
+		type: data.type.toLowerCase(),
+		sourcePath: path,
 		dateAdded: new Date(),
-		sourcePath: id,
-		type: item.data.type.toLowerCase(),
 	}
 
 	return db.store('areas').put(area)
@@ -111,17 +112,8 @@ function storeArea(item) {
 		})
 }
 
-function storeItem(item) {
-	if (item.type === 'courses') {
-		return storeCourses(item)
-	}
-	else if (item.type === 'areas') {
-		return storeArea(item)
-	}
-}
 
-async function cleanPriorData(item) {
-	const {path, type} = item
+async function cleanPriorData(path, type) {
 	debug(`cleanPriorData(): ${path}`)
 
 	let oldItems = []
@@ -153,65 +145,64 @@ async function cleanPriorData(item) {
 	}
 }
 
-function cacheItemHash({path, type, hash}) {
-	debug(`cacheItemHash(): ${path}`)
 
-	return db.store(getCacheStoreName(type)).put({id: path, path, hash})
-}
-
-async function updateDatabase(type, infoFromServer, infoFileBase, notificationId, count) {
+const updateDatabase = (type, infoFileBase, notificationId) => async infoFromServer => {
+	// Get the path to the current file and the hash of the file
 	const {path, hash} = infoFromServer
+	// Append the hash, to act as a sort of cache-busting mechanism
 	const itemUrl = `/${path}?v=${hash}`
 
 	debug(`updateDatabase(): ${path}`)
-	dispatch(startProgress(notificationId, `Loading ${type}`, {max: count}, true))
 
 	const url = infoFileBase + itemUrl
-	let data = undefined
+
+	// go fetch the data!
+	let rawData = undefined
 	try {
-		data = await fetch(url)
-			.then(status)
-			.then(text)
+		rawData = await (fetch(url).then(status).then(text))
 	}
 	catch (err) {
 		console.warn('Could not fetch ${url}')
 		return false
 	}
 
+	// now parse the data into a usable form
+	let data
 	if (type === 'courses') {
-		data = JSON.parse(data)
+		data = JSON.parse(rawData)
 	}
 	else if (type === 'areas') {
-		data = {...yaml.safeLoad(data), source: data}
-	}
-
-	const item = {
-		...infoFromServer,
-		path,
-		hash,
-		data,
-		type,
-		count: size(data),
+		data = yaml.safeLoad(rawData)
+		data.source = rawData
 	}
 
 	try {
-		await cleanPriorData(item)
-		await storeItem(item)
-		await cacheItemHash(item)
+		await cleanPriorData(path, type)
+
+		if (type === 'courses') {
+			await storeCourses(path, data)
+		}
+		else if (type === 'areas') {
+			await storeArea(path, data)
+		}
+
+		await cacheItemHash(path, type, hash)
 	}
 	catch (e) {
 		throw e
 	}
 
-	debug(`added ${item.path} (${item.count} ${item.type})`)
-	dispatch(incrementProgress(notificationId))
+	debug(`added ${path} (${size(data)} ${type})`)
+	dispatch(actions.incrementProgress(notificationId))
 }
 
-async function needsUpdate({type, path, hash}) {
+
+async function needsUpdate(type, path, hash) {
 	const {hash: oldHash} = await db.store(getCacheStoreName(type)).get(path) || {}
 
 	return hash !== oldHash
 }
+
 
 async function loadDataFiles(infoFile, infoFileBase) {
 	debug(`loadDataFiles(): ${infoFileBase}`)
@@ -225,28 +216,41 @@ async function loadDataFiles(infoFile, infoFileBase) {
 		filesToLoad = filter(filesToLoad, file => file.year >= oldestYear)
 	}
 
-	const fileNeedsLoading = await Promise.all(map(filesToLoad, file => needsUpdate({type: infoFile.type, path: file.path, hash: file.hash})))
+	// For each file, see if it needs loading.
+	const filesThatNeedUpdate = map(filesToLoad, file => needsUpdate(infoFile.type, file.path, file.hash))
+	const fileNeedsLoading = await Promise.all(filesThatNeedUpdate)
+
+	// Cross-reference each file to load with the list of files that need loading
 	filesToLoad = filter(filesToLoad, (file, index) => fileNeedsLoading[index])
+
+	// Exit early if nothing needs to happen
+	if (filesToLoad.length === 0) {
+		return true
+	}
+
+	// Fire off the progress bar
+	dispatch(actions.startProgress(notificationId, `Loading ${infoFile.type}`, {max: size(filesToLoad)}, true))
 
 	// Load them into the database
 	try {
-		await Promise.all(map(filesToLoad, file => updateDatabase(infoFile.type, file, infoFileBase, notificationId, size(filesToLoad))))
+		const update = updateDatabase(infoFile.type, infoFileBase, notificationId)
+		await Promise.all(map(filesToLoad, update))
 	}
 	catch (err) {
 		throw err
 	}
 
-	dispatch(removeNotification(notificationId, 1500))
+	// Remove the progress bar after 1.5 seconds
+	dispatch(actions.removeNotification(notificationId, 1500))
 
-	return infoFile
+	return true
 }
+
 
 function loadInfoFile(url, infoFileBase) {
 	debug(`loadInfoFile(): ${url}`)
 
-	return fetch(url)
-		.then(status)
-		.then(json)
+	return (fetch(url).then(status).then(json))
 		.then(infoFile => loadDataFiles(infoFile, infoFileBase))
 		.catch(err => {
 			if (startsWith(err.message, 'Failed to fetch')) {
@@ -259,9 +263,12 @@ function loadInfoFile(url, infoFileBase) {
 		})
 }
 
+
 self.addEventListener('message', ({data}) => {
-	debug('[load-data] received message:', data)
-	loadInfoFile(...data)
-		.then(() => self.postMessage(true))
-		.catch(err => self.postMessage(JSON.parse(stringifyError(err))))
+	const [id, ...args] = data
+	debug('[load-data] received message:', args)
+
+	loadInfoFile(...args)
+		.then(result => self.postMessage([id, 'result', result]))
+		.catch(err => self.postMessage([id, 'error', JSON.parse(stringifyError(err))]))
 })
