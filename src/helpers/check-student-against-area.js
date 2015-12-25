@@ -46,8 +46,7 @@ export default async function checkStudentAgainstArea(student, area) {
 			areaData.data = await loadArea(area)
 		}
 		catch (err) {
-			console.error(err)
-			return
+			reject(err)
 		}
 
 		let studentData
@@ -55,8 +54,7 @@ export default async function checkStudentAgainstArea(student, area) {
 			studentData = await getStudentData(student)
 		}
 		catch (err) {
-			console.error(err)
-			return
+			reject(err)
 		}
 
 		/* why stringify? from https://code.google.com/p/chromium/issues/detail?id=536620#c11:
