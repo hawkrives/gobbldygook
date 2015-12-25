@@ -19,6 +19,7 @@ export default class AreaPicker extends Component {
 		closePicker: PropTypes.func.isRequired,
 		currentAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
 		removeArea: PropTypes.func.isRequired,
+		studentMatriculation: PropTypes.number.isRequired,
 		type: PropTypes.string.isRequired,
 	}
 

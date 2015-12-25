@@ -95,7 +95,7 @@ class GraduationStatus extends Component {
 				removeArea={removeAreaFromStudent}
 				removeOverride={removeOverrideFromStudent}
 				showAreaPicker={showAreaPickerFor[areaType]}
-				studentId={student.id}
+				student={student}
 				toggleOverride={toggleOverrideOnStudent}
 				type={areaType}
 			/>)
