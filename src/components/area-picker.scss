@@ -27,6 +27,21 @@
 
 	justify-content: space-between;
 	align-items: center;
+
+	& + .area--choice {
+		margin-top: 0.5em;
+	}
+}
+.area-listing {
+	flex: 1;
+	display: flex;
+	flex-flow: column nowrap;
+}
+.area-listing .title {
+	font-weight: 500;
+}
+.area-listing .revision {
+	font-size: 0.8em;
 }
 
 .toggle-area {
