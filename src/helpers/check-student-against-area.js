@@ -4,24 +4,7 @@ import getStudentData from './get-student-data'
 
 import Worker from './check-student-against-area.worker.js'
 const worker = new Worker()
-// worker.onmessage = msg => console.log('[main] received message from check-student worker:', msg)
-worker.addEventListener('error', msg => console.log('[main] received error from check-student worker:', msg))
-
-
-function onMessage({sourceId, resolve, reject}, {data}) {
-	const [resultId, type, contents] = JSON.parse(data)
-
-	if (resultId === sourceId) {
-		worker.removeEventListener('message', onMessage)
-
-		if (type === 'result') {
-			resolve(contents)
-		}
-		else if (type === 'error') {
-			reject({_error: contents.message})
-		}
-	}
-}
+worker.onerror = msg => console.warn('[main] received error from check-student worker:', msg)
 
 
 /**
@@ -37,7 +20,23 @@ export default async function checkStudentAgainstArea(student, area) {
 	const sourceId = uniqueId()
 
 	return new Promise(async (resolve, reject) => {
-		worker.addEventListener('message', onMessage.bind(null, {sourceId, resolve, reject}))
+		// This is inside of the function so that it doesn't get unregistered too early
+		function onMessage({data}) {
+			const [resultId, type, contents] = JSON.parse(data)
+
+			if (resultId === sourceId) {
+				worker.removeEventListener('message', onMessage)
+
+				if (type === 'result') {
+					resolve(contents)
+				}
+				else if (type === 'error') {
+					reject({_error: contents.message})
+				}
+			}
+		}
+
+		worker.addEventListener('message', onMessage(sourceId, resolve, reject))
 
 		const areaData = {
 			...area,
@@ -58,8 +57,8 @@ export default async function checkStudentAgainstArea(student, area) {
 		}
 
 		/* why stringify? from https://code.google.com/p/chromium/issues/detail?id=536620#c11:
-		 > We know that serialization/deserialization is slow. It's actually faster to
-		 > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
+		 * > We know that serialization/deserialization is slow. It's actually faster to
+		 * > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 		 */
 		worker.postMessage(JSON.stringify([sourceId, studentData, areaData]))
 	})
