@@ -34,15 +34,20 @@ export default class AreaPicker extends Component {
 		const currentAreaNames = map(this.props.currentAreas, a => a.name)
 
 		const onlyAvailableAreas = reject(this.props.allAreas, area => includes(currentAreaNames, area.name))
+		// const onlyUnusedAreas = reject(this.props.allAreas, area => includes(currentAreaNames, area.name))
+		// const onlyAvailableAreas = reject(onlyUnusedAreas, area => this.props.studentMatriculation && this.props.studentMatriculation > Number(area.revision.split('-')[0]))
 		const filteredOnName = filter(onlyAvailableAreas, area => fuzzysearch(this.state.filter, area.name.toLowerCase()))
 		const areaList = map(filteredOnName, (area, i) =>
-				<div key={area.name + i} className='area--choice'>
-					{`${area.name} [${area.revision}]`}
+				<li key={area.name + i} className='area--choice'>
+					<span className='area-listing'>
+						<span className='title'>{area.name}</span>
+						<span className='revision'>{area.revision}</span>
+					</span>
 					<Button className='toggle-area' type='flat'
 						onClick={ev => this.props.addArea({ev, area})}>
 						Add
 					</Button>
-				</div>)
+				</li>)
 
 		let message = 'Oh! We need a new message here!'
 		if (this.state.filter) {
