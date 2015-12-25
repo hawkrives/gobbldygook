@@ -183,12 +183,14 @@ export default class GraduationStatusContainer extends Component {
 		this.componentWillReceiveProps(this.props)
 	}
 
-	async componentWillReceiveProps(nextProps) {
-		const {canGraduate, details} = await checkStudentGraduatability(nextProps.student)
-		this.setState({
-			canGraduate: canGraduate,
-			areaDetails: details,
-		})
+	componentWillReceiveProps(nextProps) {
+		checkStudentGraduatability(nextProps.student)
+			.then(({canGraduate, details}) => {
+				this.setState({
+					canGraduate: canGraduate,
+					areaDetails: details,
+				})
+			})
 	}
 
 	initiateAddArea = ({ev, type}) => {
