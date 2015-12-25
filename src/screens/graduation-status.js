@@ -29,6 +29,7 @@ import './graduation-status.scss'
 
 class GraduationStatus extends Component {
 	static propTypes = {
+		actions: PropTypes.object.isRequired,
 		addAreaToStudent: PropTypes.func.isRequired,
 		addOverrideToStudent: PropTypes.func.isRequired,
 		areaDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -145,6 +146,7 @@ class GraduationStatus extends Component {
 		return (
 			<section className={cx('graduation-status', {'is-hidden': isHidden})}>
 				<StudentSummary
+					actions={this.props.actions}
 					courses={courses}
 					student={student}
 					canGraduate={canGraduate}
@@ -246,6 +248,7 @@ export default class GraduationStatusContainer extends Component {
 
 		return (
 			<GraduationStatus
+				actions={this.props.actions}
 				addAreaToStudent={this.addAreaToStudent}
 				addOverrideToStudent={this.addOverrideToStudent}
 				areas={this.props.areas}

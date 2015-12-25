@@ -41,7 +41,7 @@ const welcomeMessages = [
 
 export default class StudentSummary extends Component {
 	static propTypes = {
-		actions: PropTypes.object,
+		actions: PropTypes.object.isRequired,
 		canGraduate: PropTypes.bool.isRequired,
 		courses: PropTypes.arrayOf(PropTypes.object),
 		student: PropTypes.object.isRequired,
