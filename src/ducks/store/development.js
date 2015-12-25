@@ -25,7 +25,7 @@ export default function configureStore(initialState) {
 
 	if (module.hot) {
 		module.hot.accept('../reducers/root', () =>
-			store.replaceReducer(require('../reducers/root'))
+			store.replaceReducer(require('../reducers/root').default)
 		)
 	}
 
