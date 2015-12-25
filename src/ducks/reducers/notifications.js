@@ -14,7 +14,7 @@ const initialState = []
 
 function checkForDuplicateIds(state, {payload}) {
 	if (findIndex(state, {id: payload.id}) >= 0) {
-		console.error(`cannot add a second notification with an existing id "${payload.id}"`)
+		console.error(`cannot add a second notification with the existing id "${payload.id}"`)
 		return true
 	}
 	return false
