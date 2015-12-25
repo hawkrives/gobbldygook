@@ -22,7 +22,7 @@ export default class AreaOfStudyGroup extends Component {
 		removeArea: PropTypes.func.isRequired,
 		removeOverride: PropTypes.func,
 		showAreaPicker: PropTypes.bool.isRequired,
-		studentId: PropTypes.string,
+		student: PropTypes.object,
 		toggleOverride: PropTypes.func.isRequired,
 		type: PropTypes.oneOf(values(areaTypeConstants)).isRequired,
 	}
@@ -64,7 +64,7 @@ export default class AreaOfStudyGroup extends Component {
 						toggleOverride={this.props.toggleOverride}
 						showCloseButton={this.props.showAreaPicker}
 						showEditButton={this.props.showAreaPicker}
-						studentId={this.props.studentId}
+						studentId={this.props.student.id}
 					/>)}
 
 				{this.props.showAreaPicker && <AreaPicker
@@ -74,6 +74,7 @@ export default class AreaOfStudyGroup extends Component {
 					allAreas={this.props.allAreasOfType}
 					addArea={this.props.addArea}
 					removeArea={this.props.removeArea}
+					studentMatriculation={this.props.student.matriculation}
 				/>}
 			</section>
 		)
