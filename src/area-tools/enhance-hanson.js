@@ -29,7 +29,7 @@ export default function enhanceHanson(data, {topLevel=false}={}) {
 	}
 
 	const baseWhitelist = ['result', 'message', 'declare']
-	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source'])
+	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded'])
 	const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description'])
 	const whitelist = topLevel ? topLevelWhitelist : lowerLevelWhitelist
 
