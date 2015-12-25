@@ -1,26 +1,33 @@
-/* eslint no-var:0 */
 /* global module */
+'use strict'
 
-// shim Promise because node 0.10 doesn't support native promises
-global.Promise = require('bluebird')
-var pkg = require('./package.json')
-var webpack = require('webpack')
+const pkg = require('./package.json')
+const webpack = require('webpack')
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var HtmlPlugin = require('./scripts/webpack/html-plugin')
-var buildFilename = require('./scripts/webpack/build-filename')
+const ProvidePlugin = webpack.ProvidePlugin
+const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
+const DefinePlugin = webpack.DefinePlugin
+const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
+const DedupePlugin = webpack.optimize.DedupePlugin
+const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlPlugin = require('./scripts/webpack/html-plugin')
+const buildFilename = require('./scripts/webpack/build-filename')
 
-var isProduction = (process.env.NODE_ENV === 'production')
-var isDev = (process.env.NODE_ENV === 'development')
-var isTest = (process.env.NODE_ENV === 'test')
+const isProduction = (process.env.NODE_ENV === 'production')
+const isDev = (process.env.NODE_ENV === 'development')
+const isTest = (process.env.NODE_ENV === 'test')
 
-var entryPoint = './src/start.js'
-var outputFolder = 'build/'
+const outputFolder = 'build/'
 
-var urlLoaderLimit = 10000
-var useHash = false
+const urlLoaderLimit = 10000
+const useHash = false
 
-var config = {
+const config = {
+	progress: true,
+	bail: true,
+
 	replace: null,
 	port: 3000,
 	hostname: 'localhost',
@@ -28,13 +35,11 @@ var config = {
 	stats: {},
 
 	entry: [
-		entryPoint,
+		'./src/start.js',
 	],
 
 	output: {
 		path: outputFolder + '/',
-		// Name or full path of output directory commonly named `www` or `public`.
-		// This is where your fully static site should end up for simple deployment.
 		publicPath: '',
 
 		filename: isDev ? 'app.js' : buildFilename(pkg, useHash, 'js'),
@@ -65,7 +70,7 @@ var config = {
 	plugins: [
 		new HtmlPlugin({
 			// To serve a default HTML file, or not to serve, that is the question.
-			html: function(context) {
+			html(context) {
 				return {
 					'index.html': [
 						'<!DOCTYPE html>',
@@ -73,21 +78,20 @@ var config = {
 						'<meta charset="UTF-8">',
 						'<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
 						'<title>Gobbldygook</title>',
-						context.css && '<link rel="stylesheet" href="' + context.css + '">',
+						context.css && `<link rel="stylesheet" href="${context.css}">`,
 						'<body>',
 						'  <main id="app"></main>',
 						'  <aside id="notifications"></aside>',
 						'</body>',
-						'<script src="' + context.main + '"></script>',
+						`<script src="${context.main}"></script>`,
 						'</html>',
 					].join('\n'),
 				}
 			},
 			isDev: isDev,
-			package: pkg,
 		}),
 
-		new webpack.ProvidePlugin({
+		new ProvidePlugin({
 			Promise: 'bluebird',
 			debug: 'debug',
 		}),
@@ -95,16 +99,11 @@ var config = {
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
 		// tell webpack to ignore it.
-		// new webpack.IgnorePlugin(/schema\/default_full/, /js-yaml/),
-		new webpack.NormalModuleReplacementPlugin(/schema\/default_full$/, function(result) {
-			// console.error('NormalModuleReplacementPlugin', arguments)
+		new NormalModuleReplacementPlugin(/schema\/default_full$/, function(result) {
 			result.request = result.request.replace('default_full', 'default_safe')
 		}),
-		// new webpack.NormalModuleReplacementPlugin(/babel-runtime\/core-js\/promise/, function(result) {
-		// 	result.request = 'bluebird'
-		// }),
 
-		new webpack.DefinePlugin({
+		new DefinePlugin({
 			VERSION: JSON.stringify(pkg.version),
 			DEV: isDev,
 		}),
@@ -115,27 +114,26 @@ var config = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				// an array, so that it can be added to later
 				loaders: ['babel-loader'],
 			},
 			{
 				test: /\.worker.js$/,
 				exclude: /node_modules/,
-				// an array, so that it can be added to later
 				loaders: ['worker-loader', 'babel-loader'],
 			},
 			{
 				test: /\.json$/,
-				// an array, so that it can be added to later
 				loaders: ['json-loader'],
 			},
 			{
 				test: /\.(otf|eot|ttf|woff2?)$/,
-				loader: 'url-loader?limit=' + urlLoaderLimit,
+				loader: 'url-loader',
+				query: {limit: urlLoaderLimit},
 			},
 			{
 				test: /\.(jpe?g|png|gif)$/,
-				loader: 'url-loader?limit=' + urlLoaderLimit,
+				loader: 'url-loader',
+				query: {limit: urlLoaderLimit},
 			},
 		],
 	},
@@ -162,30 +160,30 @@ if (isDev) {
 
 	// add dev plugins
 	config.plugins = config.plugins.concat([
-		new webpack.HotModuleReplacementPlugin(),
+		new HotModuleReplacementPlugin(),
 	])
 
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: 'style-loader!css-loader!postcss-loader',
+		loaders: ['style-loader', 'css-loader', 'postcss-loader'],
 	})
 
 	// Add optional loaders
 	config.module.loaders.push({
 		test: /\.s(c|a)ss$/,
-		loader: 'style-loader!css-loader!postcss-loader!sass-loader',
+		loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
 	})
 }
 
 else if (isTest) {
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: 'style-loader!css-loader!postcss-loader',
+		loaders: ['style-loader', 'css-loader', 'postcss-loader'],
 	})
 
 	config.module.loaders.push({
 		test: /\.s(c|a)ss$/,
-		loader: 'style-loader!css-loader!postcss-loader!sass-loader',
+		loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
 	})
 }
 
@@ -197,9 +195,9 @@ else if (isProduction) {
 
 	// minify in production
 	config.plugins = config.plugins.concat([
-		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.OccurenceOrderPlugin(true),
-		new webpack.optimize.UglifyJsPlugin({
+		new DedupePlugin(),
+		new OccurenceOrderPlugin(true),
+		new UglifyJsPlugin({
 			compress: {
 				warnings: false,
 			},
@@ -210,19 +208,19 @@ else if (isProduction) {
 		new ExtractTextPlugin(config.output.cssFilename, {
 			allChunks: true,
 		}),
-		new webpack.DefinePlugin({
+		new DefinePlugin({
 			'process.env': {NODE_ENV: JSON.stringify('production')},
 		}),
 	])
 
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader'),
+		loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader']),
 	})
 
 	config.module.loaders.push({
-		test: /\.scss$/,
-		loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader'),
+		test: /\.s(c|a)ss$/,
+		loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader']),
 	})
 }
 

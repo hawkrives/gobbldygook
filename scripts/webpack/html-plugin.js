@@ -1,7 +1,7 @@
-/* eslint no-var:0 prefer-spread:0 */
 /* global module */
+'use strict'
 
-var forEach = require('lodash/collection/forEach')
+const forEach = require('lodash/collection/forEach')
 
 // Main export
 function HJSPlugin(options) {
@@ -9,9 +9,8 @@ function HJSPlugin(options) {
 	this.filename = options.filename || 'index.html'
 }
 
-HJSPlugin.prototype.apply = function (compiler) {
-	var self = this
-	var htmlFunction = this.config.html
+HJSPlugin.prototype.apply = function(compiler) {
+	const htmlFunction = this.config.html
 
 	// let user pass `true` to use the simple default.
 	// Same if `isDev` and `serveCustomHtmlInDev` is falsy
@@ -19,36 +18,34 @@ HJSPlugin.prototype.apply = function (compiler) {
 		return
 	}
 
-	self.compiler = compiler
+	this.compiler = compiler
 
-	compiler.plugin('emit', function (compiler, callback) {
-		// store stats on self
-		self.stats = compiler.getStats().toJson()
-		var context = self.getAssets()
-
-		// access to package info
-		// context.package = self.config.package
+	compiler.plugin('emit', (compiler, callback) => {
+		// store stats on this
+		this.stats = compiler.getStats().toJson()
+		const context = this.getAssets()
 
 		// access to stats
-		context.stats = self.stats
+		context.stats = this.stats
 
 		// expose `isDev` flag to html function context
-		context.isDev = self.config.isDev
+		context.isDev = this.config.isDev
 
-		self.addAssets(compiler, htmlFunction(context))
+		this.addAssets(compiler, htmlFunction(context))
 		callback()
 	})
 }
 
 // Oddly enough we have to pass in the compiler here
 // it's changed from when it was stored on `this` previously
-HJSPlugin.prototype.addAssets = function (compiler, data) {
-	var dataType = typeof data
-	var pages
+HJSPlugin.prototype.addAssets = function(compiler, data) {
+	const dataType = typeof data
+	let pages
 	// if it's a string, we assume it's an html string for the index file
 	if (dataType === 'string') {
-		pages = {}
-		pages[this.filename] = data
+		pages = {
+			[this.filename]: data,
+		}
 	}
 	else if (dataType === 'object') {
 		pages = data
@@ -57,22 +54,18 @@ HJSPlugin.prototype.addAssets = function (compiler, data) {
 		throw new Error('Result from `html` callback must be a string or an object')
 	}
 
-	forEach(pages, function(asset, name) {
+	forEach(pages, (asset, name) => {
 		compiler.assets[name] = {
-			source: function () {
-				return asset
-			},
-			size: function () {
-				return asset.length
-			},
+			source: () => asset,
+			size: () => asset.length,
 		}
 	})
 }
 
-HJSPlugin.prototype.getAssets = function () {
-	var assets = this.assets = {}
+HJSPlugin.prototype.getAssets = function() {
+	const assets = this.assets = {}
 
-	forEach(this.stats.assetsByChunkName, function(value, chunk) {
+	forEach(this.stats.assetsByChunkName, (value, chunk) => {
 		// Webpack outputs an array for each chunk when using sourcemaps
 		if (value instanceof Array) {
 			// if we've got a CSS file add it here
