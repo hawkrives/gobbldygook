@@ -1,6 +1,6 @@
 import db from './db'
 
-const courseCache = new Map()
+const courseCache = Object.create(null)
 
 /**
  * Gets a course from the database.
@@ -14,28 +14,27 @@ const courseCache = new Map()
 export default async function getCourse(clbid) {
 	// console.log('called getCourse', clbid)
 
-	if (courseCache.has(clbid)) {
-		let value = courseCache.get(clbid)
+	if (clbid in courseCache) {
+		let value = courseCache[clbid]
 		if (value instanceof Promise) {
 			return await value
 		}
 		else {
 			return value
 		}
-		return courseCache.get(clbid)
+		return courseCache[clbid]
 	}
 
 	let course
 	try {
-		const coursePromise = db.store('courses').index('clbid').get(clbid)
-		courseCache.set(clbid, coursePromise)
-		course = await coursePromise
+		courseCache[clbid] = db.store('courses').index('clbid').get(clbid)
+		course = await courseCache[clbid]
 	}
 	catch (error) {
 		return {clbid, error}
 	}
 
-	courseCache.set(clbid, course)
+	courseCache[clbid] = course
 
 	return course
 }
