@@ -1,5 +1,5 @@
 import uniqueId from 'lodash/utility/uniqueId'
-import delay from 'delay'
+// import delayByPromise from 'delay'
 
 import {
 	LOG_MESSAGE,
@@ -10,14 +10,14 @@ import {
 } from '../constants/notifications'
 
 
-export function removeNotification(id, time=0) {
-	if (time) {
-		return {
-			type: REMOVE_NOTIFICATION,
-			payload: delay(time).then(() => ({id})),
-		}
-	}
-	return { type: REMOVE_NOTIFICATION, payload: { id } }
+export function removeNotification(id, delay=0) {
+	// if (delay) {
+	// 	return {
+	// 		type: REMOVE_NOTIFICATION,
+	// 		payload: delayByPromise(time).then(() => ({id})),
+	// 	}
+	// }
+	return { type: REMOVE_NOTIFICATION, payload: { id, delay } }
 }
 
 export function logMessage(id, message) {
