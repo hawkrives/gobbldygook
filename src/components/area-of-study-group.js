@@ -68,13 +68,13 @@ export default class AreaOfStudyGroup extends Component {
 					/>)}
 
 				{this.props.showAreaPicker && <AreaPicker
-					currentAreas={this.props.areas}
-					closePicker={ev => this.props.endAddArea({ev, type: this.props.type})}
-					type={this.props.type}
-					allAreas={this.props.allAreasOfType}
 					addArea={this.props.addArea}
+					allAreas={this.props.allAreasOfType}
+					closePicker={ev => this.props.endAddArea({ev, type: this.props.type})}
+					currentAreas={this.props.areas}
 					removeArea={this.props.removeArea}
 					studentMatriculation={this.props.student.matriculation}
+					type={this.props.type}
 				/>}
 			</section>
 		)
