@@ -14,6 +14,15 @@ export function isogram() {
 	document.body.appendChild(script)
 }
 
+export function ga(...args) {
+	if (PRODUCTION) {
+		try {
+			window.ga(...args)
+		}
+		catch (e) {} // eslint-disable-line no-empty
+	}
+}
+
 if (PRODUCTION) {
 	console.log('Initializing analytics 📊')
 	isogram()
