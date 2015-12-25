@@ -7,17 +7,13 @@
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
-  "config": {
-    "beautify": "-f - --end-with-newline --indent-with-tabs",
-    "mocha": "test/areas test/models test/helpers test/ducks"
-  },
   "scripts": {
     "benchmark": "babel-node -- ./benchmarks/students-benchmark.js",
     "build": "env NODE_ENV=production webpack --config ./.webpackrc.js --bail --production --progress",
     "build:areas": "./bin/compile-areas area-data/ --out-dir build/areas/",
     "build:ci": "npm run build -- --no-progress",
     "build:dev": "env NODE_ENV=development webpack --config ./.webpackrc.js --bail --progress",
-    "build:peg": "pegjs < src/area-tools/parse-hanson-string.pegjs | ./scripts/babel-stdin.js | js-beautify $npm_package_config_beautify > src/area-tools/parse-hanson-string.js",
+    "build:peg": "pegjs < src/area-tools/parse-hanson-string.pegjs | ./scripts/babel-stdin.js | js-beautify - -f --end-with-newline --indent-with-tabs > src/area-tools/parse-hanson-string.js",
     "clean": "rm -rf build/",
     "copy": "mkdir -p build/ && cp -rf src/static/* build/ && npm run copy:areas && npm run copy:icons",
     "copy:areas": "cp -rf ./area-data/ build/areas/ && ./bin/area-package-maker build/areas/ --save",
@@ -25,7 +21,7 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "codecov": "nyc report --reporter=text-lcov | codecov",
     "lint": "eslint bin/ src/ test/",
-    "mocha": "env NODE_ENV=test mocha $npm_package_config_mocha",
+    "mocha": "env NODE_ENV=test mocha test/{areas,models,helpers,ducks}",
     "nyc": "nyc npm run mocha",
     "prebuild": "npm run copy",
     "precopy": "npm run clean",
