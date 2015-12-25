@@ -8,7 +8,8 @@ const finalCreateStore = compose(
 	applyMiddleware(
 		promiseMiddleware,
 		thunkMiddleware,
-		saveStudentsMiddleware)
+		saveStudentsMiddleware,
+	)
 )(createStore)
 
 export default function configureStore(initialState) {

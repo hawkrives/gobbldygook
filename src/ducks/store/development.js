@@ -15,7 +15,8 @@ const finalCreateStore = compose(
 		promiseMiddleware,
 		thunkMiddleware,
 		saveStudentsMiddleware,
-		loggerMiddleware),
+		loggerMiddleware,
+	),
 	DevTools.instrument(),
 	persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore)
