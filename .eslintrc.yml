@@ -40,13 +40,13 @@ rules:
   no-unused-vars: 1
   no-console: 0
   no-underscore-dangle: 0
-  strict: [1, never]
+  strict: [1, unnecessary]
   no-class-assign: 2
   no-const-assign: 2
   prefer-spread: 1
   no-var: 2
-  # global-require: 1  # this has to wait until we figure out a better way of starting the program
   no-restricted-syntax: [2, WithStatement]
+  babel/no-await-in-loop: 1
 
   # stylistic issues
   new-cap: 0
@@ -86,9 +86,6 @@ rules:
   react/sort-comp: 1
   react/wrap-multilines: 0
   react/no-deprecated: 2
-
-  # babel
-  babel/no-await-in-loop: 1
 
   # jsdoc
   valid-jsdoc:
