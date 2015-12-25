@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
+import {ga} from '../start/analytics'
 import compareProps from '../helpers/compare-props'
 import groupBy from 'lodash/collection/groupBy'
 import includes from 'lodash/collection/includes'
@@ -328,12 +329,7 @@ export default class CourseSearcherContainer extends Component {
 
 	onQuerySubmit = () => {
 		if (this.state.queryString !== this.state.lastQuery || getPartialSearch(this.context.location)) {
-			if (process.env.NODE_ENV === 'production') {
-				try {
-					window.ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
-				}
-				catch (e) {} // eslint-disable-line no-empty
-			}
+			ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
 			this.query(this.state.queryString)
 		}
 	}
