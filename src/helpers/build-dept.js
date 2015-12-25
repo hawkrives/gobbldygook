@@ -1,4 +1,4 @@
-import {departmentNameToAbbr} from 'sto-course-related-data'
+import departmentNameToAbbr from 'sto-course-related-data/handmade/to_department_abbreviations.json'
 import map from 'lodash/collection/map'
 
 /**
