@@ -20,10 +20,8 @@ import evenIndex from './even-index'
 import notEmptyString from './not-empty-string'
 import zipToObjectWithArrays from './zip-to-object-with-arrays'
 
-import {
-	departmentNameToAbbr as departmentMapping,
-	gereqTitleToAbbr as gereqMapping,
-} from 'sto-course-related-data'
+import departmentMapping from 'sto-course-related-data/handmade/to_department_abbreviations.json'
+import gereqMapping from 'sto-course-related-data/handmade/to_gereq_abbreviations.json'
 
 let semesters = {
 	'fall': 1,
