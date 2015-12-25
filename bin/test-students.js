@@ -18,7 +18,7 @@ export async function cli() {
 	const mochaInstance = new Mocha()
 
 	for (const studentFilename of getStudentNames()) {
-		await testStudent(studentFilename, mochaInstance)
+		await testStudent(studentFilename, mochaInstance)  // eslint-disable-line babel/no-await-in-loop
 	}
 
 	mochaInstance.run()
