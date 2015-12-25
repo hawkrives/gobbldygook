@@ -33,8 +33,6 @@ const {
 	reorderScheduleInStudent,
 	renameScheduleInStudent,
 	reorderCourseInSchedule,
-	encodeStudent,
-	saveStudent,
 } = require('../../src/models/student')
 
 const getStudentCourses = require('../../src/helpers/get-student-courses').default
