@@ -1,5 +1,5 @@
-/* eslint no-var:0 */
 /* global module */
+'use strict'
 
 module.exports = function buildFilename(pkg, hash, ext) {
 	return [
