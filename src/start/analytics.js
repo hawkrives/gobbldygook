@@ -14,7 +14,7 @@ export function isogram() {
 	document.body.appendChild(script)
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (PRODUCTION) {
 	console.log('Initializing analytics 📊')
 	isogram()
 }

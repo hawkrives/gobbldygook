@@ -40,7 +40,7 @@ import configureStore from './ducks/store/configure-store'
 import Root from './containers/root'
 const store = configureStore()
 
-if (process.env.NODE_ENV !== 'production') {
+if (PRODUCTION) {
 	typeof window !== 'undefined' && (window.Perf = require('react-addons-perf'))
 }
 
