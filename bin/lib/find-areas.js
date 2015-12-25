@@ -1,10 +1,11 @@
-import flatten from 'lodash/array/flatten'
-import glob from 'glob'
-import junk from 'junk'
-import uniq from 'lodash/array/uniq'
-import path from 'path'
+const flatten = require('lodash/array/flatten')
+const glob = require('glob')
+const junk = require('junk')
+const uniq = require('lodash/array/uniq')
+const path = require('path')
 
-export default function findAreas(dir, filetype='yaml') {
+module.exports = function findAreas(dir, filetype) {
+	filetype = filetype || 'yaml'
 	const sources = uniq(flatten(glob.sync(path.join(dir, `**/*.${filetype}`))))
 	return sources.filter(junk.not)
 }
