@@ -4,6 +4,7 @@ import map from 'lodash/collection/map'
 
 import checkStudentAgainstArea from './check-student-against-area'
 import countCredits from '../area-tools/count-credits'
+import getStudentCourses from './get-student-courses'
 
 
 /**
@@ -17,8 +18,7 @@ import countCredits from '../area-tools/count-credits'
  *    {object} areaDetails
  */
 export default async function checkStudentGraduatability(student) {
-	const areaPromises = map(
-		student.studies,
+	const areaPromises = map(student.studies,
 		area => checkStudentAgainstArea(student, area))
 
 	const areaDetails = await Promise.all(areaPromises)
@@ -26,7 +26,8 @@ export default async function checkStudentGraduatability(student) {
 	const goodAreas = filter(areaDetails, {computed: true})
 	const allAreasPass = (size(goodAreas) === size(areaDetails))
 
-	const hasEnoughCredits = (countCredits(await student.courses) >= student.creditsNeeded)
+	const currentCredits = countCredits(await getStudentCourses(student))
+	const hasEnoughCredits = (currentCredits >= student.creditsNeeded)
 
 	const graduatability = (allAreasPass && hasEnoughCredits)
 
