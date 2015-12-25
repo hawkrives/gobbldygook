@@ -1,6 +1,6 @@
 /* globals module */
 
-if (process.env.NODE_ENV === 'production') {
+if (PRODUCTION) {
 	module.exports = require('./production').default
 }
 else {

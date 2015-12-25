@@ -105,7 +105,9 @@ const config = {
 
 		new DefinePlugin({
 			VERSION: JSON.stringify(pkg.version),
-			DEV: isDev,
+			DEVELOPMENT: isDev,
+			PRODUCTION: isProduction,
+			TESTING: isTest,
 		}),
 	],
 

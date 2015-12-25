@@ -4,7 +4,9 @@ global.debug = require('debug')
 require('babel-regenerator-runtime')
 
 global.VERSION = String(require('../package.json').version)
-global.DEV = false
+global.DEVELOPMENT = false
+global.PRODUCTION = false
+global.TESTING = true
 
 process.env.NODE_ENV = 'test'
 

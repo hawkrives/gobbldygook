@@ -28,7 +28,7 @@ export function logError({error, quiet=false, id=undefined}, ...args) {
 	if (id === undefined) {
 		id = uniqueId('error-')
 	}
-	if (!quiet && process.env.NODE_ENV !== 'test') {
+	if (!quiet && TESTING) {
 		console.error(error, ...args)
 	}
 	return { type: LOG_ERROR, payload: { id, error, quiet, args } }

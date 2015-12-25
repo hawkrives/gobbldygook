@@ -13,12 +13,17 @@ env:
   es6: true
 
 globals:
+  # node globals
   global: false
   require: false
   process: false
-  VERSION: false  # inserted by webpack.DefinePlugin
-  DEV: false  # inserted by webpack.DefinePlugin
-  debug: false  # inserted by webpack.DefinePlugin
+
+  # webpack.DefinePlugin
+  VERSION: false
+  DEVELOPMENT: false
+  PRODUCTION: false
+  TESTING: false
+  debug: false
 
 plugins:
   - eslint-plugin-react
