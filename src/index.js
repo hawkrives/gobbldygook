@@ -1,7 +1,6 @@
 // Set up the default promise implementation as Bluebird
 import Bluebird from 'bluebird'
 global.Promise = Bluebird
-require('babel-runtime/core-js/promise').default = Bluebird
 Bluebird.config({
 	warnings: {
 		wForgottenReturn: false,
@@ -9,7 +8,7 @@ Bluebird.config({
 })
 
 // enable the regenerator runtime
-require('babel-regenerator-runtime')
+require('babel-runtime/regenerator')
 
 // Include fetch
 import 'isomorphic-fetch'
