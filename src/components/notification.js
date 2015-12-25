@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import round from 'lodash/math/round'
 import Button from './button'
 import ProgressBar from './progress-bar'
+import './notification.scss'
 
 export default class Notification extends Component {
 	static propTypes = {
