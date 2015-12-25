@@ -21,7 +21,7 @@ describe('removeNotification action', () => {
 		const id = 1
 		const expectedAction = {
 			type: REMOVE_NOTIFICATION,
-			payload: {id},
+			payload: {id, delay: 0},
 		}
 
 		expect(removeNotification(id)).to.deep.equal(expectedAction)
@@ -29,12 +29,13 @@ describe('removeNotification action', () => {
 
 	it('creates an action to remove a notification after a delay', async () => {
 		const id = 1
+		const delay = 10
 		const expectedAction = {
 			type: REMOVE_NOTIFICATION,
-			payload: Promise.resolve({id}),
+			payload: Promise.resolve({id, delay}),
 		}
 
-		let actual = removeNotification(id, 10)
+		let actual = removeNotification(id, delay)
 		expect(actual.type).to.equal(expectedAction.type)
 
 		let actualPayload = await actual.payload
