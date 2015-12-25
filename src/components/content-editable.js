@@ -44,7 +44,7 @@ export default class ContentEditable extends Component {
 			this.props.onChange({target: {value}})
 		}
 		if (ev.type === 'blur' && typeof this.props.onBlur === 'function') {
-			console.log(ev)
+			// console.log(ev)
 			this.props.onBlur({target: {value}})
 		}
 
