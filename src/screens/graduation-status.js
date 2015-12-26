@@ -139,6 +139,7 @@ class GraduationStatus extends Component {
 				initiateAddArea={initiateAddArea}
 				removeArea={removeAreaFromStudent}
 				showAreaPicker={toShow}
+				student={student}
 				toggleOverride={toggleOverrideOnStudent}
 				type={type}
 			/>)
