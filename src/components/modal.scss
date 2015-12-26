@@ -1,8 +1,7 @@
 @import '../mixins/card';
 
-#app.modal {
-	background-color: color('gray', '800');
-	position: relative;
+#app[aria-hidden="true"] {
+	filter: blur(5px);
 }
 
 .modal {
