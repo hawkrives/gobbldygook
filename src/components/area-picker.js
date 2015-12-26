@@ -5,6 +5,10 @@ import map from 'lodash/collection/map'
 import reject from 'lodash/collection/reject'
 import filter from 'lodash/collection/filter'
 import includes from 'lodash/collection/includes'
+import groupBy from 'lodash/collection/groupBy'
+import flatten from 'lodash/array/flatten'
+import sortBy from 'lodash/collection/sortBy'
+import max from 'lodash/collection/max'
 
 import Button from './button'
 import List from './list'
@@ -19,7 +23,7 @@ export default class AreaPicker extends Component {
 		closePicker: PropTypes.func.isRequired,
 		currentAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
 		removeArea: PropTypes.func.isRequired,
-		studentMatriculation: PropTypes.number.isRequired,
+		studentGraduation: PropTypes.number.isRequired,
 		type: PropTypes.string.isRequired,
 	}
 
@@ -31,11 +35,26 @@ export default class AreaPicker extends Component {
 	}
 
 	render() {
-		const currentAreaNames = map(this.props.currentAreas, a => a.name)
+		const graduation = this.props.studentGraduation
 
-		const onlyAvailableAreas = reject(this.props.allAreas, area => includes(currentAreaNames, area.name))
-		// const onlyUnusedAreas = reject(this.props.allAreas, area => includes(currentAreaNames, area.name))
-		// const onlyAvailableAreas = reject(onlyUnusedAreas, area => this.props.studentMatriculation && this.props.studentMatriculation > Number(area.revision.split('-')[0]))
+		const currentAreaNames = map(this.props.currentAreas, a => a.name)
+		let onlyAvailableAreas = reject(this.props.allAreas, area => includes(currentAreaNames, area.name))
+		onlyAvailableAreas = reject(onlyAvailableAreas, area => area['available through'] && area['available through'] <= graduation)
+
+		const groupedAreas = groupBy(onlyAvailableAreas, area => `{${area.name}, ${area.type}}`)
+
+		onlyAvailableAreas = flatten(map(groupedAreas, areaSet => {
+			return areaSet.length >= 2
+				? filter(sortBy(areaSet, 'revision'), (area, i, list) => {
+					const availableThrough = i < list.length - 1
+						? max(map([area, list[i+1]], a => Number(a.revision.split('-')[0]) + 1))
+						: Number(area.revision.split('-')[0]) + 1
+
+					return availableThrough <= graduation
+				})
+				: areaSet
+		}))
+
 		const filteredOnName = filter(onlyAvailableAreas, area => fuzzysearch(this.state.filter, area.name.toLowerCase()))
 		const areaList = map(filteredOnName, (area, i) =>
 				<li key={area.name + i} className='area--choice'>
