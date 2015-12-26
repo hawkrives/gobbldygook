@@ -3,7 +3,6 @@ import {status, json, text} from './fetch-helpers'
 import stringifyError from './stringify-error'
 
 import uniq from 'lodash/array/uniq'
-import sortBy from 'lodash/collection/sortBy'
 import flatten from 'lodash/array/flatten'
 import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
@@ -19,7 +18,7 @@ import buildDeptNum from '../helpers/build-dept-num'
 import splitParagraph from '../helpers/split-paragraph'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
-const debug = (...args) => console.log(...args)
+const debug = console.log.bind(console)
 
 
 function dispatch(action) {
@@ -28,20 +27,19 @@ function dispatch(action) {
 
 
 function prepareCourse(course) {
-	course.name = course.name || course.title
-	course.dept = course.dept || buildDept(course)
-	course.deptnum = course.deptnum || buildDeptNum(course)
-	course.offerings = course.offerings || convertTimeStringsToOfferings(course)
-
 	const nameWords = splitParagraph(course.name)
 	const notesWords = splitParagraph(course.notes)
 	const titleWords = splitParagraph(course.title)
 	const descWords = splitParagraph(course.desc)
 
-	course.words = uniq(sortBy([...nameWords, ...notesWords, ...titleWords, ...descWords]), true)
-	course.profWords = uniq(sortBy(flatten(map(course.instructors, splitParagraph))), true)
-
-	return course
+	return {
+		name: course.name || course.title,
+		dept: course.dept || buildDept(course),
+		deptnum: course.deptnum || buildDeptNum(course),
+		offerings: course.offerings || convertTimeStringsToOfferings(course),
+		words: uniq([...nameWords, ...notesWords, ...titleWords, ...descWords]),
+		profWords: uniq(flatten(map(course.instructors, splitParagraph))),
+	}
 }
 
 
@@ -70,7 +68,7 @@ function storeCourses(path, data) {
 
 	let coursesToStore = map(data, course => {
 		course.sourcePath = path
-		return prepareCourse(course)
+		return {...course, ...prepareCourse(course)}
 	})
 
 	const start = present()
@@ -89,7 +87,6 @@ function storeCourses(path, data) {
 				}))
 			}
 
-			console.error(err)
 			throw err
 		})
 }
@@ -107,7 +104,6 @@ function storeArea(path, data) {
 
 	return db.store('areas').put(area)
 		.catch(err => {
-			console.error(err)
 			throw err
 		})
 }
@@ -177,8 +173,10 @@ const updateDatabase = (type, infoFileBase, notificationId) => async infoFromSer
 	}
 
 	try {
+		// clear out any old data
 		await cleanPriorData(path, type)
 
+		// store the new data
 		if (type === 'courses') {
 			await storeCourses(path, data)
 		}
@@ -186,13 +184,14 @@ const updateDatabase = (type, infoFileBase, notificationId) => async infoFromSer
 			await storeArea(path, data)
 		}
 
+		// record that we stored the new data
 		await cacheItemHash(path, type, hash)
 	}
 	catch (e) {
 		throw e
 	}
 
-	debug(`added ${path} (${size(data)} ${type})`)
+	debug(`added ${path}` + type === 'courses' ? ` (${size(data)} courses)` : '')
 	dispatch(actions.incrementProgress(notificationId))
 }
 
@@ -205,8 +204,6 @@ async function needsUpdate(type, path, hash) {
 
 
 async function loadDataFiles(infoFile, infoFileBase) {
-	debug(`loadDataFiles(): ${infoFileBase}`)
-
 	const notificationId = infoFile.type
 	let filesToLoad = infoFile.files
 
