@@ -13,6 +13,8 @@ import yaml from 'js-yaml'
 
 import db from './db'
 import * as actions from '../ducks/actions/notifications'
+import * as courseActions from '../ducks/actions/courses'
+import * as areaActions from '../ducks/actions/areas'
 import buildDept from '../helpers/build-dept'
 import buildDeptNum from '../helpers/build-dept-num'
 import splitParagraph from '../helpers/split-paragraph'
@@ -205,6 +207,7 @@ async function needsUpdate(type, path, hash) {
 
 async function loadDataFiles(infoFile, infoFileBase) {
 	const notificationId = infoFile.type
+	const type = infoFile.type
 	let filesToLoad = infoFile.files
 
 	if (infoFile.type === 'courses') {
@@ -239,6 +242,12 @@ async function loadDataFiles(infoFile, infoFileBase) {
 
 	// Remove the progress bar after 1.5 seconds
 	dispatch(actions.removeNotification(notificationId, 1500))
+	if (type === 'courses') {
+		dispatch(courseActions.loadCourses())
+	}
+	else if (type === 'areas') {
+		dispatch(areaActions.loadAreas())
+	}
 
 	return true
 }
