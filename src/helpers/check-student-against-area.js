@@ -36,7 +36,7 @@ export default async function checkStudentAgainstArea(student, area) {
 			}
 		}
 
-		worker.addEventListener('message', onMessage(sourceId, resolve, reject))
+		worker.addEventListener('message', onMessage)
 
 		const areaData = {
 			...area,
