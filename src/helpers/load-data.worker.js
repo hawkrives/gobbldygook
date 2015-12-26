@@ -2,12 +2,17 @@ import 'isomorphic-fetch'
 import {status, json, text} from './fetch-helpers'
 import stringifyError from './stringify-error'
 
+import range from 'idb-range'
 import uniq from 'lodash/array/uniq'
 import flatten from 'lodash/array/flatten'
 import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
 import startsWith from 'lodash/string/startsWith'
 import map from 'lodash/collection/map'
+import groupBy from 'lodash/collection/groupBy'
+import sortBy from 'lodash/collection/sortBy'
+import zipObject from 'lodash/array/zipObject'
+import some from 'lodash/collection/some'
 import present from 'present'
 import yaml from 'js-yaml'
 
@@ -115,12 +120,14 @@ async function cleanPriorData(path, type) {
 
 	try {
 		if (type === 'courses') {
-			let oldItems = await db.store(type).index('sourcePath').get(path)
-			ops = map(oldItems, item => ({ type: 'del', key: item.clbid }))
+			// erase any old items from this sourcePath
+			let oldItems = await db.store('courses').index('sourcePath').getAll(range({ eq: path }))
+			ops = zipObject(map(oldItems, item => ([item.clbid, null])))
 		}
 		else if (type === 'areas') {
-			let oldItems = await db.store(type).get(path)
-			ops = map(oldItems, item => ({ type: 'del', key: item.sourcePath }))
+			// erase any old items with this path
+			let oldItems = await db.store('areas').getAll(range({ eq: path }))
+			ops = zipObject(map(oldItems, item => ([item.sourcePath, null])))
 		}
 		else {
 			throw new TypeError(`cleanPriorData(): "${type}" is not a valid store type`)
@@ -202,6 +209,46 @@ async function needsUpdate(type, path, hash) {
 }
 
 
+async function removeDuplicateAreas() {
+	let allAreas
+	try {
+		await db.store('areas').getAll()
+	}
+	catch (err) {
+		throw err
+	}
+
+	// now de-duplicate, based on name, type, and revision
+	// reasons for duplicates:
+	// - a major adds a new revision
+	// 		- the old one will have already been replaced by the new one, because of cleanPriorData
+	// - a major … are there any other cases?
+
+	const grouped = groupBy(allAreas, area => `{${area.name}, ${area.type}, ${area.revision}}`)
+	const withDuplicates = filter(grouped, list => list.length > 1)
+
+	let ops = {}
+	for (let duplicatesList of withDuplicates) {
+		duplicatesList = sortBy(duplicatesList, area => area.sourcePath.length)
+		duplicatesList.unshift() // take off the shortest one
+		ops = {...ops, ...zipObject(map(duplicatesList, item => ([item.sourcePath, null])))}
+	}
+
+	// remove any that are invalid
+	// --- something about any values that aren't objects
+
+	const invalidAreas = filter(allAreas, area => some(['name', 'revision', 'type'], key => area[key] === undefined))
+	ops = {...ops, ...zipObject(map(invalidAreas, item => ([item.sourcePath, null])))}
+
+	try {
+		await db.store('areas').batch(ops)
+	}
+	catch (err) {
+		throw err
+	}
+}
+
+
 async function loadFiles(url, infoFileBase) {
 	debug(`loadFiles(): ${url}`)
 
@@ -246,6 +293,16 @@ async function loadFiles(url, infoFileBase) {
 	try {
 		const update = updateDatabase(type, infoFileBase, notificationId)
 		await Promise.all(map(filesToLoad, update))
+	}
+	catch (err) {
+		throw err
+	}
+
+	// Clean up the database a bit
+	try {
+		if (type === 'areas') {
+			removeDuplicateAreas()
+		}
 	}
 	catch (err) {
 		throw err
