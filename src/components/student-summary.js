@@ -131,7 +131,7 @@ export default class StudentSummary extends Component {
 						{((majors.length || concentrations.length) && emphases.length) ? ', ' : ''}
 						{(emphases.length > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
 						{'. '}
-						{currentCredits && `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`}
+						{currentCredits ? `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`: ''}
 					</div>
 					<div className='paragraph graduation-message'>
 						{canGraduate ? goodGraduationMessage : badGraduationMessage}
