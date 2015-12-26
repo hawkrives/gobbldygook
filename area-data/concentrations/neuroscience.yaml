@@ -16,6 +16,7 @@ Biopsychology:
 Cellular and Molecular Neuroscience:
     NEURO 239
 
+
 Level II:
     description:
         one level II foundation elective (must be from different
@@ -102,7 +103,7 @@ Interdisciplinary:
         one interdisciplinary elective from neuroscience related offerings
         outside the natural sciences
 
-    Computer Science:        CSCI 231 | 253 | 315 | 333
+    Computer Science:        CSCI 253 | 315 | 333
     Dance:                   two of (DANCE 201, 212, 301)
     Exercise Science Theory: ESTH 374 | 375
     Math:                    MATH 230 | 236 | 330
@@ -137,7 +138,8 @@ Capstone:
 
     message:
         You may also take other designated seminars in chemistry or biology or
-        psychology.
+        psychology. Note that PSYCH 336, 338, or 339 cannot count for both a
+        level III and a capstone seminar.
 
     result: one of (
         Biology Seminar,
