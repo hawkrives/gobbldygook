@@ -69,6 +69,7 @@
 	output {
 		color: color('gray', '300');
 		margin-left: 0.5em;
+		font-feature-settings: 'lnum';
 	}
 }
 
