@@ -205,19 +205,33 @@ async function needsUpdate(type, path, hash) {
 }
 
 
-async function loadDataFiles(infoFile, infoFileBase) {
-	const notificationId = infoFile.type
+async function loadFiles(url, infoFileBase) {
+	debug(`loadFiles(): ${url}`)
+
+	let infoFile
+	try {
+		infoFile = await (fetch(url).then(status).then(json))
+	}
+	catch (err) {
+		if (startsWith(err.message, 'Failed to fetch')) {
+			console.warn(`loadFiles(): Failed to fetch ${url}`)
+			return false
+		}
+		throw err
+	}
+
 	const type = infoFile.type
+	const notificationId = type
 	let filesToLoad = infoFile.files
 
-	if (infoFile.type === 'courses') {
+	if (type === 'courses') {
 		// Only get the last four years of data
 		const oldestYear = new Date().getFullYear() - 4
 		filesToLoad = filter(filesToLoad, file => file.year >= oldestYear)
 	}
 
 	// For each file, see if it needs loading.
-	const filesThatNeedUpdate = map(filesToLoad, file => needsUpdate(infoFile.type, file.path, file.hash))
+	const filesThatNeedUpdate = map(filesToLoad, file => needsUpdate(type, file.path, file.hash))
 	const fileNeedsLoading = await Promise.all(filesThatNeedUpdate)
 
 	// Cross-reference each file to load with the list of files that need loading
@@ -229,11 +243,11 @@ async function loadDataFiles(infoFile, infoFileBase) {
 	}
 
 	// Fire off the progress bar
-	dispatch(actions.startProgress(notificationId, `Loading ${infoFile.type}`, {max: size(filesToLoad)}, true))
+	dispatch(actions.startProgress(notificationId, `Loading ${type}`, {max: size(filesToLoad)}, true))
 
 	// Load them into the database
 	try {
-		const update = updateDatabase(infoFile.type, infoFileBase, notificationId)
+		const update = updateDatabase(type, infoFileBase, notificationId)
 		await Promise.all(map(filesToLoad, update))
 	}
 	catch (err) {
@@ -252,29 +266,11 @@ async function loadDataFiles(infoFile, infoFileBase) {
 	return true
 }
 
-
-function loadInfoFile(url, infoFileBase) {
-	debug(`loadInfoFile(): ${url}`)
-
-	return (fetch(url).then(status).then(json))
-		.then(infoFile => loadDataFiles(infoFile, infoFileBase))
-		.catch(err => {
-			if (startsWith(err.message, 'Failed to fetch')) {
-				console.warn(`loadInfoFile(): Failed to fetch ${url}`)
-				return false
-			}
-			else {
-				throw err
-			}
-		})
-}
-
-
 self.addEventListener('message', ({data}) => {
 	const [id, ...args] = data
 	debug('[load-data] received message:', args)
 
-	loadInfoFile(...args)
+	loadFiles(...args)
 		.then(result => self.postMessage([id, 'result', result]))
 		.catch(err => self.postMessage([id, 'error', JSON.parse(stringifyError(err))]))
 })
