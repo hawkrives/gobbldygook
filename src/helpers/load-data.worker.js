@@ -12,9 +12,6 @@ import present from 'present'
 import yaml from 'js-yaml'
 
 import db from './db'
-import * as actions from '../ducks/actions/notifications'
-import * as courseActions from '../ducks/actions/courses'
-import * as areaActions from '../ducks/actions/areas'
 import buildDept from '../helpers/build-dept'
 import buildDeptNum from '../helpers/build-dept-num'
 import splitParagraph from '../helpers/split-paragraph'
@@ -23,8 +20,8 @@ import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 const debug = console.log.bind(console)
 
 
-function dispatch(action) {
-	self.postMessage([null, 'dispatch', action])
+function dispatch(type, action, ...args) {
+	self.postMessage([null, 'dispatch', {type, action, args}])
 }
 
 
@@ -83,10 +80,10 @@ function storeCourses(path, data) {
 			const errorName = err.target.error.name
 
 			if (errorName === 'QuotaExceededError') {
-				dispatch(actions.logError({
+				dispatch('notifications', 'logError', {
 					id: 'db-storage-quota-exceeded',
 					message: `The database "${db}" has exceeded its storage quota.`,
-				}))
+				})
 			}
 
 			throw err
@@ -194,7 +191,7 @@ const updateDatabase = (type, infoFileBase, notificationId) => async infoFromSer
 	}
 
 	debug(`added ${path}`)
-	dispatch(actions.incrementProgress(notificationId))
+	dispatch('notifications', 'incrementProgress', notificationId)
 }
 
 
@@ -243,7 +240,7 @@ async function loadFiles(url, infoFileBase) {
 	}
 
 	// Fire off the progress bar
-	dispatch(actions.startProgress(notificationId, `Loading ${type}`, {max: size(filesToLoad)}, true))
+	dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, {max: size(filesToLoad)}, true)
 
 	// Load them into the database
 	try {
@@ -255,12 +252,12 @@ async function loadFiles(url, infoFileBase) {
 	}
 
 	// Remove the progress bar after 1.5 seconds
-	dispatch(actions.removeNotification(notificationId, 1500))
+	dispatch('notifications', 'removeNotification', notificationId, 1500)
 	if (type === 'courses') {
-		dispatch(courseActions.loadCourses())
+		dispatch('courses', 'loadCourses')
 	}
 	else if (type === 'areas') {
-		dispatch(areaActions.loadAreas())
+		dispatch('areas', 'loadAreas')
 	}
 
 	return true
