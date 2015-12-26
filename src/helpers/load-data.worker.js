@@ -191,7 +191,7 @@ const updateDatabase = (type, infoFileBase, notificationId) => async infoFromSer
 		throw e
 	}
 
-	debug(`added ${path}` + type === 'courses' ? ` (${size(data)} courses)` : '')
+	debug(`added ${path}`)
 	dispatch(actions.incrementProgress(notificationId))
 }
 
