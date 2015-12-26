@@ -111,22 +111,22 @@ function storeArea(path, data) {
 async function cleanPriorData(path, type) {
 	debug(`cleanPriorData(): ${path}`)
 
-	let oldItems = []
+	let ops = []
 
 	try {
 		if (type === 'courses') {
-			oldItems = await db.store(type).index('sourcePath').get(path)
-			oldItems = map(oldItems, item => ({ [item.clbid]: null }))
+			let oldItems = await db.store(type).index('sourcePath').get(path)
+			ops = map(oldItems, item => ({ type: 'del', key: item.clbid }))
 		}
 		else if (type === 'areas') {
-			oldItems = await db.store(type).get(path)
-			oldItems = map(oldItems, item => ({ [item.sourcePath]: null }))
+			let oldItems = await db.store(type).get(path)
+			ops = map(oldItems, item => ({ type: 'del', key: item.sourcePath }))
 		}
 		else {
 			throw new TypeError(`cleanPriorData(): "${type}" is not a valid store type`)
 		}
 
-		await db.store(type).batch(oldItems)
+		await db.store(type).batch(ops)
 	}
 	catch (err) {
 		throw err
