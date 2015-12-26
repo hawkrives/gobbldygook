@@ -3,7 +3,6 @@ import cx from 'classnames'
 import {Link} from 'react-router'
 import {DropTarget} from 'react-dnd'
 import plur from 'plur'
-import range from 'lodash/utility/range'
 import includes from 'lodash/collection/includes'
 import find from 'lodash/collection/find'
 import filter from 'lodash/collection/filter'
@@ -18,12 +17,10 @@ import itemTypes from '../models/item-types'
 import history from '../history'
 
 import Button from './button'
-import Course from './course'
+import CourseList from './course-list'
 import Icon from './icon'
 import List from './list'
 import Loading from './loading'
-import MissingCourse from './missing-course'
-import EmptyCourseSlot from './empty-course-slot'
 
 import './semester.scss'
 
@@ -84,7 +81,7 @@ class Semester extends Component {
 	constructor() {
 		super()
 		this.state = {
-			validation: {},
+			validation: {conflicts: []},
 		}
 	}
 
@@ -139,31 +136,15 @@ class Semester extends Component {
 		}
 
 		if (schedule && courses) {
-			let courseObjects = map(courses, (course, i) =>
-				course.error
-				? <MissingCourse key={course.clbid} clbid={course.clbid} error={course.error} />
-				: <Course
-					key={course.clbid}
-					index={i}
-					actions={actions}
-					course={course}
-					student={student}
-					schedule={schedule}
-					conflicts={this.state.validation.conflicts}
-				/>)
-
-			let emptySlots = []
-			if (currentCredits < recommendedCredits) {
-				const minimumExtraCreditRange = range(Math.floor(currentCredits), recommendedCredits)
-				emptySlots = map(minimumExtraCreditRange, i => <EmptyCourseSlot key={`empty-${i}`} />)
-			}
-
-			courseList = (
-				<List className='course-list' type='plain'>
-					{courseObjects}
-					{emptySlots}
-				</List>
-			)
+			courseList = <CourseList
+				courses={courses}
+				creditCount={currentCredits}
+				availableCredits={recommendedCredits}
+				student={student}
+				schedule={schedule}
+				actions={actions}
+				conflicts={this.state.validation.conflicts}
+			/>
 		}
 
 		const className = cx({
