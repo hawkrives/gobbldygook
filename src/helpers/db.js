@@ -15,10 +15,14 @@ export default db
 
 if (typeof window !== 'undefined') {
 	window.deleteDatabase = () => {
-		db.del().then(() => console.log('Database dropped'))
+		const DBDeleteRequest = window.indexedDB.deleteDatabase('gobbldygook')
+		console.log('Commencing database deletion')
+		DBDeleteRequest.onerror = () => console.log('Error deleting database.')
+		DBDeleteRequest.onsuccess = () => console.log('Database deleted successfully')
 	}
 
 	window.eraseStorage = () => {
+		console.log('Commencing storage erasure')
 		window.localStorage.clear()
 		console.log('Storage erased')
 	}
