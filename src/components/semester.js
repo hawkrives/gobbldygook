@@ -110,7 +110,7 @@ class Semester extends Component {
 		const query = {
 			...this.context.location.query,
 			partialSearch: JSON.stringify({
-				term: `${schedule.year}${schedule.semester}`,
+				term: [Number(`${schedule.year}${schedule.semester}`)],
 			}),
 		}
 		history.pushState(null, this.context.location.pathname, query)
