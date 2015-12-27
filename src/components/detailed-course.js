@@ -33,7 +33,7 @@ export default class DetailedCourse extends Component {
 		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
 		schedule: PropTypes.object,
-		student: PropTypes.object.isRequired,
+		student: PropTypes.object,
 	}
 
 	removeFromSemester = () => {
@@ -120,19 +120,20 @@ export default class DetailedCourse extends Component {
 					<select
 						className='semester-select'
 						value={this.props.schedule ? this.props.schedule.id : 'none'}
+						disabled={!Boolean(this.props.student)}
 						onChange={this.moveToSchedule}
 					>
 						<option value='none'>No Schedule</option>
-						{map(findSemesterList(this.props.student), (group, key) => (
+						{Boolean(this.props.student) ? map(findSemesterList(this.props.student), (group, key) => (
 							<optgroup key={key} label={expandYear(key, true, '–')}>
 								{(map(group, sched =>
 									<option value={sched.id} key={sched.id}>{sched.title}</option>))}
 							</optgroup>
-						))}
+						)) : null}
 					</select>
 					<Button className='remove-course'
 						onClick={this.removeFromSemester}
-						disabled={!Boolean(this.props.schedule)}>
+						disabled={!Boolean(this.props.schedule) || !Boolean(this.props.student)}>
 						Remove Course
 					</Button>
 				</div>
