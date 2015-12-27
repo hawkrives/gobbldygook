@@ -272,7 +272,9 @@ class CourseSearcher extends Component {
 							type='flat'
 							onClick={onQuerySubmit}
 						>
-							Search <Icon name='android-arrow-forward' />
+							{showIndicator
+								? [<span key='msg'>Searching…</span>]
+								: [<span key='msg'>Search </span>, <Icon key='icon' name='android-arrow-forward' />]}
 						</Button>
 					</div>
 					{hasQueried &&
