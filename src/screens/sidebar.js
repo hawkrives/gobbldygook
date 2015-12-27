@@ -36,12 +36,12 @@ export default class Sidebar extends Component {
 		history.pushState(null, this.context.location.pathname, query)
 	}
 
-	closeSearchSidebar = () => {
+	closeSearcher = () => {
 		const query = omit(this.context.location.query, ['partialSearch', 'search'])
 		history.pushState(null, this.context.location.pathname, query)
 	}
 
-	openSearchSidebar = () => {
+	openSearcher = () => {
 		const query = {...this.context.location.query, search: null}
 		history.pushState(null, this.context.location.pathname, query)
 	}
@@ -56,7 +56,7 @@ export default class Sidebar extends Component {
 					<Button title='Students' onClick={this.goHome}>
 						<Icon name='ios-people-outline' type='block' />
 					</Button>
-					<Button title='Search' onClick={isSearching ? this.closeSearchSidebar : this.openSearchSidebar}>
+					<Button title='Search' onClick={isSearching ? this.closeSearcher : this.openSearcher}>
 						<Icon name='ios-search' type='block' />
 					</Button>
 
@@ -86,7 +86,7 @@ export default class Sidebar extends Component {
 					: <CourseSearcher
 						{...{actions, student}}
 						isHidden={!isSearching}
-						closeSearchSidebar={this.closeSearchSidebar}
+						closeSearcher={this.closeSearcher}
 					/>}
 			</aside>
 		)

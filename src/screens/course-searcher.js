@@ -167,7 +167,7 @@ class CourseSearcher extends Component {
 		groupBy: PropTypes.oneOf(GROUP_BY).isRequired,
 		hasQueried: PropTypes.bool,
 		isHidden: PropTypes.bool,
-		onCloseSearchSidebar: PropTypes.func.isRequired,
+		onCloseSearcher: PropTypes.func.isRequired,
 		onGroupByChange: PropTypes.func.isRequired,
 		onKeyDown: PropTypes.func.isRequired,
 		onQueryChange: PropTypes.func.isRequired,
@@ -196,7 +196,7 @@ class CourseSearcher extends Component {
 			groupBy,
 			hasQueried,
 			isHidden,
-			onCloseSearchSidebar,
+			onCloseSearcher,
 			onKeyDown,
 			onQueryChange,
 			onQuerySubmit,
@@ -247,9 +247,9 @@ class CourseSearcher extends Component {
 						<h2>Course Search<br/>{placeholderExtension}</h2>
 						<Button
 							className='close-sidebar'
-							title='Close Sidebar'
+							title='Close Search'
 							type='flat'
-							onClick={onCloseSearchSidebar}
+							onClick={onCloseSearcher}
 						>
 							Close
 						</Button>
@@ -301,7 +301,7 @@ class CourseSearcher extends Component {
 export default class CourseSearcherContainer extends Component {
 	static propTypes = {
 		actions: PropTypes.object.isRequired,
-		closeSearchSidebar: PropTypes.func.isRequired,
+		closeSearcher: PropTypes.func.isRequired,
 		isHidden: PropTypes.bool,
 		student: PropTypes.object.isRequired,
 	}
@@ -398,7 +398,7 @@ export default class CourseSearcherContainer extends Component {
 				groupBy={this.state.groupBy}
 				hasQueried={this.state.hasQueried}
 				isHidden={this.props.isHidden}
-				onCloseSearchSidebar={this.props.closeSearchSidebar}
+				onCloseSearcher={this.props.closeSearcher}
 				onGroupByChange={this.onGroupByChange}
 				onKeyDown={this.onKeyDown}
 				onQueryChange={this.onQueryChange}
