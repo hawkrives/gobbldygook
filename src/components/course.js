@@ -23,10 +23,12 @@ import './course.scss'
 const courseSource = {
 	beginDrag(props) {
 		const scheduleId = props.schedule ? props.schedule.id : null
+		const labid = props.lab ? props.lab.clbid : undefined
 		return {
 			isFromSchedule: scheduleId !== null,
 			isFromSearch: scheduleId === null,
 			clbid: props.course.clbid,
+			labid: labid,
 			groupid: props.course.groupid,
 			fromScheduleId: scheduleId,
 		}
@@ -49,6 +51,7 @@ class Course extends Component {
 		course: PropTypes.object.isRequired,
 		index: PropTypes.number,
 		isDragging: PropTypes.bool.isRequired,  // react-dnd
+		lab: PropTypes.object,
 		schedule: PropTypes.object,
 		student: PropTypes.object,
 	}
@@ -115,7 +118,11 @@ class Course extends Component {
 			<article className={classSet} onClick={this.openModal}>
 				{warningList || null}
 
-				<BasicCourse className='course--inline info-wrapper' course={this.props.course} />
+				<BasicCourse
+					className='course--inline info-wrapper'
+					course={this.props.course}
+					lab={this.props.lab}
+				/>
 
 				{modal || null}
 			</article>

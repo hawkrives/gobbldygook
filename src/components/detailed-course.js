@@ -32,12 +32,14 @@ export default class DetailedCourse extends Component {
 		children: PropTypes.node,
 		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
+		lab: PropTypes.object,
 		schedule: PropTypes.object,
 		student: PropTypes.object,
 	}
 
 	removeFromSemester = () => {
 		this.props.actions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.course.clbid)
+		this.props.lab && this.props.actions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.lab.clbid)
 	}
 
 	moveToSchedule = ev => {
@@ -48,6 +50,7 @@ export default class DetailedCourse extends Component {
 
 		if (this.props.schedule) {
 			this.props.actions.moveCourse(this.props.student.id, this.props.schedule.id, targetScheduleId, this.props.course.clbid)
+			this.props.lab && this.props.actions.moveCourse(this.props.student.id, this.props.schedule.id, targetScheduleId, this.props.lab.clbid)
 		}
 		else {
 			this.props.actions.addCourse(this.props.student.id, targetScheduleId, this.props.course.clbid)

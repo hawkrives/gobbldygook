@@ -35,11 +35,12 @@ const semesterTarget = {
 	drop(props, monitor, component) {
 		const item = monitor.getItem()
 		console.log('dropped course', item)
-		const {clbid, fromScheduleId, isFromSchedule} = item
+		const {clbid, fromScheduleId, isFromSchedule, labid} = item
 		const toSchedule = getSchedule(component.props.student, component.props.year, component.props.semester)
 
 		if (isFromSchedule) {
 			props.actions.moveCourse(props.student.id, fromScheduleId, toSchedule.id, clbid)
+			labid && props.actions.moveCourse(props.student.id, fromScheduleId, toSchedule.id, labid)
 		}
 		else {
 			props.actions.addCourse(props.student.id, toSchedule.id, clbid)

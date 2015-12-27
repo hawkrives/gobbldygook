@@ -13,10 +13,11 @@ const removeCourseTarget = {
 	drop(props, monitor) {
 		const { actions } = props
 		const item = monitor.getItem()
-		const { clbid, fromScheduleId, isFromSchedule } = item
+		const { clbid, fromScheduleId, isFromSchedule, labid } = item
 		if (isFromSchedule) {
 			console.log('dropped course', item)
 			actions.removeCourse(props.studentId, fromScheduleId, clbid)
+			labid && actions.removeCourse(props.studentId, fromScheduleId, labid)
 		}
 	},
 	canDrop(props, monitor) {

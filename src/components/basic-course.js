@@ -23,6 +23,11 @@ export default class BasicCourse extends Component {
 
 	render() {
 		const { course } = this.props
+		const lab = this.props.lab
+			? <span className='lab'>
+				{`Lab: ${buildCourseIdent(this.props.lab)}L`}
+			</span>
+			: null
 
 		return (
 			<div className={cx(this.props.className)}>
@@ -33,6 +38,7 @@ export default class BasicCourse extends Component {
 						<span className='identifier'>
 							{buildCourseIdent(course)}
 						</span>
+						{lab}
 						<span className='type'>{course.type}</span>
 						{course.gereqs && <ul className='gereqs'>
 							{map(course.gereqs, (ge, idx) =>
