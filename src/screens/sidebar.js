@@ -8,7 +8,6 @@ import GraduationStatus from './graduation-status'
 import Icon from '../components/icon'
 import Toolbar from '../components/toolbar'
 import Separator from '../components/separator'
-import ShareSheet from './share-sheet'
 
 import CourseRemovalBox from '../components/course-removal-box'
 
@@ -74,7 +73,6 @@ export default class Sidebar extends Component {
 
 					<Button title='Share' onClick={this.showShareSheet}>
 						<Icon name='ios-upload-outline' type='block' />
-						{'share' in this.context.location.query && <ShareSheet student={this.props.student} />}
 					</Button>
 				</Toolbar>
 
