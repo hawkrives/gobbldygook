@@ -149,7 +149,7 @@ export default class StudentPickerContainer extends Component {
 	}
 
 	onAddStudent = () => {
-		this.props.actions.addStudent()
+		this.props.actions.initStudent()
 	}
 
 	onOpenSearchOverlay = () => {
