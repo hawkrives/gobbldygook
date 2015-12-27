@@ -20,8 +20,10 @@ export default async function getStudentCourses(student) {
 
 	const activeSchedules = filter(student.schedules, {active: true})
 	const promisesForCourses = map(activeSchedules, getCoursesFromSchedule)
-	const courses = await Promise.all(promisesForCourses)
+	let courses = await Promise.all(promisesForCourses)
+	courses = uniq(flatten(courses), course => course.clbid)
 
 	debug(`Student(${student.id}): ${round(present() - start, 2)} ms to fetch ${courses.length} courses`)
-	return uniq(flatten(courses), course => course.clbid)
+
+	return courses
 }
