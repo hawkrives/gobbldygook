@@ -1,69 +1,97 @@
-import React, {Component, PropTypes} from 'react'
-import cx from 'classnames'
+import React, {PropTypes} from 'react'
+import omit from 'lodash/object/omit'
+import history from '../history'
 
 import Button from '../components/button'
 import Icon from '../components/icon'
 import Modal from '../components/modal'
 import Toolbar from '../components/toolbar'
 
-import studentActions from '../flux/student-actions'
+import './new-student-wizard.scss'
 
-
-export default class NewStudentScreen extends Component {
-	static propTypes = {
-
+function closeModal(location, studentId=null) {
+	console.log(arguments)
+	const query = omit(location.query, ['student-wizard'])
+	let path = location.pathname
+	if (studentId) {
+		path = `/s/${studentId}/`
 	}
+	history.pushState(null, path, query)
+}
 
-	constructor() {
-		super()
+function onCreateStudent(location, actions) {
+	actions.initStudent().then(([student]) => {
+		closeModal(location, student.id)
+	})
+}
 
-		this.state = {}
-	}
+export default function NewStudentSheet(props, context) {
+	const boundCloseModal = closeModal.bind(null, context.location)
 
-	render() {
-		// alright.
-		// basic info,
-		// then areas,
-		// then schedules.
+	// alright.
+	// basic info,
+	// then areas,
+	// then schedules.
 
-		// can be:
-		// - imported from the SIS
-		// - imported from an export file
-		// - shared from someone else
-		// - filled in manually
+	// can be:
+	// - imported from the SIS
+	// - imported from an export file
+	// - shared from someone else
+	// - filled in manually
 
-		// oh, so this is where that module from dan abramov comes in - the
-		// one that lets you change global state when a component is rendered
+	// oh, so this is where that module from dan abramov comes in - the
+	// one that lets you change global state when a component is rendered
+	// later: why?
 
-		const today = new Date()
+	const today = new Date()
 
-		return (
-			<Modal modalClassName='student-wizard'>
-				<Toolbar>
-					<Button>Import from File</Button>
-					<Button>Open from Google Drive</Button>
-				</Toolbar>
+	return (
+		<Modal
+			modalClassName='student-wizard'
+			onClose={boundCloseModal}
+		>
+			<Toolbar className='window-tools'>
+				<Button className='close-modal' onClick={boundCloseModal}>
+					<Icon name='close' />
+				</Button>
+			</Toolbar>
 
-				<div className='intro'>
-					<p>Welcome to Gobbldygook!</p>
-					<p>
-						We can import your course information from the St.
-						Olaf SIS, from an exported file, from Google Drive, or
-						you can just tell us about your stuff by hand.
-					</p>
-				</div>
+			<Toolbar>
+				<Button>Import from File</Button>
+				<Button>Open from Google Drive</Button>
+			</Toolbar>
 
-				<form className='form'>
-					<div><label>Name: <input type='text' /></label></div>
-					<div><label>Matriculation: <input type='year' placeholder={today.getFullYear() - 2} /></label></div>
-					<div><label>Graduation: <input type='year' placeholder={today.getFullYear() + 2} /></label></div>
-					<div><label>Advisor: <input type='text' /></label></div>
-					<div><label>Studies: <input type='text' /></label></div>
-					<div><label>Schedules: <input type='text' /></label></div>
-					<div><label>Overrides: <input type='text' /></label></div>
-					<div><label>Fabrications: <input type='text' /></label></div>
-				</form>
-			</Modal>
-		)
-	}
+			<div className='intro'>
+				<p>Welcome to Gobbldygook!</p>
+				<p>
+					We can import your course information from the St.
+					Olaf SIS, from an exported file, from Google Drive, or
+					you can just tell us about your stuff by hand.
+				</p>
+			</div>
+
+			<form className='form'>
+				<div><label>Name: <input type='text' /></label></div>
+				<div><label>Matriculation: <input type='year' placeholder={today.getFullYear() - 2} /></label></div>
+				<div><label>Graduation: <input type='year' placeholder={today.getFullYear() + 2} /></label></div>
+				<div><label>Advisor: <input type='text' /></label></div>
+				<div><label>Studies: <input type='text' /></label></div>
+				<div><label>Schedules: <input type='text' /></label></div>
+				<div><label>Overrides: <input type='text' /></label></div>
+				<div><label>Fabrications: <input type='text' /></label></div>
+			</form>
+
+			<Button onClick={() => onCreateStudent(context.location, props.actions)}>
+				Create Student
+			</Button>
+		</Modal>
+	)
+}
+
+NewStudentSheet.propTypes = {
+	actions: PropTypes.objectOf(PropTypes.func).isRequired,
+}
+
+NewStudentSheet.contextTypes = {
+	location: PropTypes.object,
 }
