@@ -271,8 +271,9 @@ class CourseSearcher extends Component {
 							title='Search'
 							type='flat'
 							onClick={onQuerySubmit}
+							disabled={queryInProgress}
 						>
-							{showIndicator
+							{queryInProgress
 								? [<span key='msg'>Searching…</span>]
 								: [<span key='msg'>Search </span>, <Icon key='icon' name='android-arrow-forward' />]}
 						</Button>

@@ -86,6 +86,10 @@
 	color: color('green');
 	background-color: color('green', '50');
 }
+.submit-search-query:disabled {
+	color: color('gray');
+	background-color: white;
+}
 
 .sidebar-heading .row {
 	position: relative;
