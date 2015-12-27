@@ -19,7 +19,6 @@ export default function ShareSheet(props, context) {
 	} = props
 
 	return <Modal
-		backdropClassName='modal-backdrop'
 		modalClassName='course course--modal'
 		onClose={() => closeModal(context.location)}
 	>

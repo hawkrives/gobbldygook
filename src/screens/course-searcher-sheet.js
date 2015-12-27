@@ -15,7 +15,6 @@ export default function CourseSearcherSheet(props, context) {
 	const boundCloseModal = closeModal.bind(null, context.location)
 
 	return <Modal
-		backdropClassName='modal-backdrop'
 		modalClassName='course-searcher--modal'
 		onClose={boundCloseModal}
 	>
