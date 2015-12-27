@@ -15,11 +15,14 @@
 	.course-list {
 		@include list-unstyled;
 
-		.loading,
-		.no-results {
-			margin-top: 1em;
-			text-align: center;
-		}
+	}
+
+	.loading,
+	.no-results {
+		margin-top: 1em;
+		text-align: center;
+		color: color('gray', '500');
+		font-size: 0.9em;
 	}
 
 	.course-group-title {
