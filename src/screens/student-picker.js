@@ -8,7 +8,6 @@ import Toolbar from '../components/toolbar'
 import Button from '../components/button'
 import Icon from '../components/icon'
 import StudentList from '../components/student-list'
-import Separator from '../components/separator'
 
 import './student-picker.scss'
 
