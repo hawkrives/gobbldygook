@@ -107,7 +107,7 @@ class CourseResultsList extends Component {
 		groupBy: PropTypes.oneOf(GROUP_BY).isRequired,
 		results: PropTypes.array.isRequired,
 		sortBy: PropTypes.oneOf(SORT_BY).isRequired,
-		student: PropTypes.object.isRequired,
+		student: PropTypes.object,
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -179,7 +179,7 @@ class CourseSearcher extends Component {
 		queryString: PropTypes.string.isRequired,
 		results: PropTypes.array.isRequired,
 		sortBy: PropTypes.oneOf(SORT_BY).isRequired,
-		student: PropTypes.object.isRequired,
+		student: PropTypes.object,
 	}
 
 	static defaultProps = {
@@ -303,7 +303,7 @@ export default class CourseSearcherContainer extends Component {
 		actions: PropTypes.object.isRequired,
 		closeSearcher: PropTypes.func.isRequired,
 		isHidden: PropTypes.bool,
-		student: PropTypes.object.isRequired,
+		student: PropTypes.object,
 	}
 
 	static contextTypes = {
