@@ -6,6 +6,7 @@ import Button from '../components/button'
 import Icon from '../components/icon'
 import Toolbar from '../components/toolbar'
 import Modal from '../components/modal'
+import List from '../components/list'
 
 function closeModal(location) {
 	const query = omit(location.query, ['share'])
@@ -29,7 +30,12 @@ export default function ShareSheet(props, context) {
 		</Toolbar>
 
 		<div>
-			Share Modal
+			Share "{student.name}" via:
+			<List type='bullet'>
+				<li>Google Drive</li>
+				<li>Email File</li>
+				<li>Download File</li>
+			</List>
 		</div>
 	</Modal>
 }
