@@ -58,6 +58,7 @@
 
 .student-list-filter {
 	@include card;
+	flex: 5 0 auto;
 	padding: 0.25em 0.5em;
 
 	&:focus {
@@ -68,7 +69,6 @@
 	}
 }
 
-.student-list-filter,
 .student-list-buttons {
 	width: 100%;
 }

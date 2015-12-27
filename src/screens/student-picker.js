@@ -45,33 +45,35 @@ export function StudentPicker(props) {
 			<div className='student-list-toolbar'>
 				<Toolbar className='student-list-buttons'>
 					<Button className='student-list--button' onClick={onSortChange}>
-						<Icon name='funnel' type='inline' />{' '}
+						<Icon name='android-funnel' type='inline' />{' '}
 						Sort by: {sortBy}
 					</Button>
 
+					<input
+						type='search'
+						className='student-list-filter'
+						placeholder='Filter students'
+						value={filterText}
+						onChange={onFilterChange}
+					/>
+
 					<Button className='student-list--button' onClick={onGroupChange}>
-						<Icon name='folder' type='inline' />{' '}
+						<Icon name='android-apps' type='inline' />{' '}
 						Group by: {groupBy}
-					</Button>
-
-					<Button className='student-list--button' onClick={onToggleEditing}>
-						<Icon name='navicon' type='inline' />{' '}
-						Edit List
-					</Button>
-
-					<Button className='student-list--button' onClick={actions.initStudent}>
-						<Icon name='plus' type='inline' />{' '}
-						New Student
 					</Button>
 				</Toolbar>
 
-				<input
-					type='search'
-					className='student-list-filter'
-					placeholder='Filter students'
-					value={filterText}
-					onChange={onFilterChange}
-				/>
+				<Toolbar className='student-list-buttons'>
+					<Button className='student-list--button' onClick={onToggleEditing}>
+						<Icon name='android-menu' type='inline' />{' '}
+						Edit List
+					</Button>
+
+					<Button className='student-list--button' onClick={onAddStudent}>
+						<Icon name='android-add' type='inline' />{' '}
+						New Student
+					</Button>
+				</Toolbar>
 			</div>
 
 			<StudentList
