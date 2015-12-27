@@ -264,13 +264,15 @@ class CourseSearcher extends Component {
 							onKeyDown={onKeyDown}
 							autoFocus={true}
 						/>
+					</div>
+					<div className='row submit'>
 						<Button
 							className='submit-search-query'
 							title='Search'
 							type='flat'
 							onClick={onQuerySubmit}
 						>
-							<Icon name='android-arrow-forward' />
+							Search <Icon name='android-arrow-forward' />
 						</Button>
 					</div>
 					{hasQueried &&
