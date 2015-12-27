@@ -148,7 +148,8 @@ export default class StudentPickerContainer extends Component {
 	}
 
 	onAddStudent = () => {
-		this.props.actions.initStudent()
+		const query = {...this.context.location.query, 'student-wizard': null}
+		history.pushState(null, this.context.location.pathname, query)
 	}
 
 	onOpenSearchOverlay = () => {

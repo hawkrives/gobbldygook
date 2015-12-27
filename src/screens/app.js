@@ -8,6 +8,7 @@ import { ActionCreators as UndoableActionCreators } from 'redux-undo'
 import * as actionCreators from '../ducks/actions/students'
 import omit from 'lodash/object/omit'
 import CourseSearcherSheet from './course-searcher-sheet'
+import NewStudentSheet from './new-student-wizard'
 
 import '../index.scss'
 
@@ -32,6 +33,8 @@ export class App extends Component {
 					{cloneElement(this.props.children, omit(this.props, 'children'))}
 					{'search-overlay' in this.context.location.query &&
 						<CourseSearcherSheet actions={this.props.actions} />}
+					{'student-wizard' in this.context.location.query &&
+						<NewStudentSheet actions={this.props.actions} />}
 				</div>
 			</DocumentTitle>
 		)
