@@ -2,27 +2,31 @@ import React, {Component, PropTypes} from 'react'
 import DropZone from 'react-dropzone'
 import forEach from 'lodash/collection/forEach'
 import noop from 'lodash/utility/noop'
+import history from '../history'
 
 import Toolbar from '../components/toolbar'
 import Button from '../components/button'
 import Icon from '../components/icon'
 import StudentList from '../components/student-list'
+import Separator from '../components/separator'
 
 import './student-picker.scss'
 
 export function StudentPicker(props) {
 	const {
 		actions,
-		students,
-		onSortChange,
-		sortBy,
-		onGroupChange,
-		groupBy,
-		onFilterChange,
 		filterText,
-		onDrop,
-		onToggleEditing,
+		groupBy,
 		isEditing,
+		onDrop,
+		onAddStudent,
+		onFilterChange,
+		onGroupChange,
+		onOpenSearchOverlay,
+		onSortChange,
+		onToggleEditing,
+		sortBy,
+		students,
 	} = props
 
 	return (
@@ -64,6 +68,11 @@ export function StudentPicker(props) {
 				</Toolbar>
 
 				<Toolbar className='student-list-buttons'>
+					<Button className='student-list--button' onClick={onOpenSearchOverlay}>
+						<Icon name='android-search' type='inline' />{' '}
+						Search Courses
+					</Button>
+
 					<Button className='student-list--button' onClick={onToggleEditing}>
 						<Icon name='android-menu' type='inline' />{' '}
 						Edit List
@@ -91,9 +100,11 @@ StudentPicker.propTypes = {
 	filterText: PropTypes.string.isRequired,
 	groupBy: PropTypes.string.isRequired,
 	isEditing: PropTypes.bool.isRequired,
+	onAddStudent: PropTypes.func.isRequired,
 	onDrop: PropTypes.func.isRequired,
 	onFilterChange: PropTypes.func.isRequired,
 	onGroupChange: PropTypes.func.isRequired,
+	onOpenSearchOverlay: PropTypes.func.isRequired,
 	onSortChange: PropTypes.func.isRequired,
 	onToggleEditing: PropTypes.func.isRequired,
 	sortBy: PropTypes.string.isRequired,
@@ -104,6 +115,10 @@ export default class StudentPickerContainer extends Component {
 	static propTypes = {
 		actions: PropTypes.objectOf(PropTypes.func),
 		students: PropTypes.object,
+	}
+
+	static contextTypes = {
+		location: PropTypes.object,
 	}
 
 	constructor() {
@@ -133,6 +148,15 @@ export default class StudentPickerContainer extends Component {
 		})
 	}
 
+	onAddStudent = () => {
+		this.props.actions.addStudent()
+	}
+
+	onOpenSearchOverlay = () => {
+		const query = {...this.context.location.query, 'search-overlay': null}
+		history.pushState(null, this.context.location.pathname, query)
+	}
+
 	onFilterChange = ev => {
 		this.setState({filterText: ev.target.value.toLowerCase()})
 	}
@@ -157,9 +181,11 @@ export default class StudentPickerContainer extends Component {
 				filterText={this.state.filterText}
 				groupBy={this.state.groupBy}
 				isEditing={this.state.isEditing}
+				onAddStudent={this.onAddStudent}
 				onDrop={this.onDrop}
 				onFilterChange={this.onFilterChange}
 				onGroupChange={this.onGroupChange}
+				onOpenSearchOverlay={this.onOpenSearchOverlay}
 				onSortChange={this.onSortChange}
 				onToggleEditing={this.onToggleEditing}
 				sortBy={this.state.sortBy}
