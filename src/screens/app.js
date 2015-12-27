@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { ActionCreators as UndoableActionCreators } from 'redux-undo'
 import * as actionCreators from '../ducks/actions/students'
 import omit from 'lodash/object/omit'
+import CourseSearcherSheet from './course-searcher-sheet'
 
 import '../index.scss'
 
@@ -20,10 +21,18 @@ export class App extends Component {
 		students: PropTypes.object.isRequired,
 	}
 
+	static contextTypes = {
+		location: PropTypes.object,
+	}
+
 	render() {
 		return (
 			<DocumentTitle title='Gobbldygook'>
-				{cloneElement(this.props.children, omit(this.props, 'children'))}
+				<div>
+					{cloneElement(this.props.children, omit(this.props, 'children'))}
+					{'search-overlay' in this.context.location.query &&
+						<CourseSearcherSheet actions={this.props.actions} />}
+				</div>
 			</DocumentTitle>
 		)
 	}
