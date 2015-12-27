@@ -61,7 +61,7 @@ export function StudentPicker(props) {
 						onChange={onFilterChange}
 					/>
 
-					<Button className='student-list--button' onClick={onGroupChange}>
+					<Button className='student-list--button' onClick={onGroupChange} disabled>
 						<Icon name='android-apps' type='inline' />{' '}
 						Group by: {groupBy}
 					</Button>
