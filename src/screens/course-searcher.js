@@ -392,7 +392,7 @@ export default class CourseSearcherContainer extends Component {
 	}
 
 	render() {
-		let partialQuery = getPartialSearch()
+		let partialQuery = getPartialSearch(this.context.location)
 
 		return (
 			<CourseSearcher
