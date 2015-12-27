@@ -49,6 +49,11 @@
 
 	&:focus, &:hover {
 		outline: none;
+	}
+	&:hover {
+		background-color: color('gray', '100');
+	}
+	&:focus {
 		background-color: color('blue', '50');
 		color: color('blue', '900');
 		&::-webkit-input-placeholder {
