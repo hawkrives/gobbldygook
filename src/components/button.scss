@@ -81,7 +81,7 @@
 		border-color: color('blue', '300');
 	}
 
-	&[disabled] {
+	&:disabled {
 		cursor: default;
 		color: color('disabled', 'foreground--light');
 
