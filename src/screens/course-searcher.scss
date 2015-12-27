@@ -76,7 +76,8 @@
 	padding: 1em 1em;
 	flex: 1;
 }
-.submit-search-query:hover {
+.submit-search-query:hover,
+.submit-search-query:focus {
 	color: color('green');
 	background-color: color('green', '50');
 }
