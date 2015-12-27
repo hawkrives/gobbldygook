@@ -124,6 +124,8 @@ class CourseResultsList extends Component {
 			student,
 		} = this.props
 
+		// TODO: Speed this up! This preperation stuff takes ~230ms by itself, with enough courses
+		// rendered. (like, say, {year: 2012})
 		const sorted = sortBy(results, SORT_BY_TO_KEY[sortByValue])
 
 		// Group them by term, then turn the object into an array of pairs.
@@ -211,8 +213,6 @@ class CourseSearcher extends Component {
 			student,
 		} = this.props
 
-		// TODO: Speed this up! This preperation stuff takes ~230ms by itself, with enough courses
-		// rendered. (like, say, {year: 2012})
 		const showNoResults = results.length === 0 && hasQueried
 		const showIndicator = queryInProgress
 
