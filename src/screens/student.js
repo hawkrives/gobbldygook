@@ -38,8 +38,6 @@ export class Student extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.student) {
-			window.stu = nextProps.student
-
 			getStudentCourses(nextProps.student).then(courses => {
 				this.setState({
 					courses: courses,
@@ -49,13 +47,7 @@ export class Student extends Component {
 		}
 	}
 
-	componentWillUnmount() {
-		delete window.stu
-	}
-
 	render() {
-		// console.info('Student.render')
-
 		if (!this.props.student) {
 			return <Loading>{`Loading Student ${this.props.params.id}`}</Loading>
 		}
