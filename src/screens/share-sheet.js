@@ -14,16 +14,15 @@ function closeModal(location) {
 }
 
 export default function ShareSheet(props, context) {
-	const {
-		student,
-	} = props
+	const { student } = props
+	const boundCloseModal = closeModal.bind(null, context.location)
 
 	return <Modal
 		modalClassName='course course--modal'
-		onClose={() => closeModal(context.location)}
+		onClose={boundCloseModal}
 	>
 		<Toolbar className='window-tools'>
-			<Button className='close-modal' onClick={() => closeModal(context.location)}>
+			<Button className='close-modal' onClick={boundCloseModal}>
 				<Icon name='close' />
 			</Button>
 		</Toolbar>
