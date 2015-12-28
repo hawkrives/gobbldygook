@@ -14,11 +14,18 @@ describe('hasDepartment', () => {
 		expect(hasDepartment('REL', course)).to.be.true
 	})
 
-	it('cares not about the ordering of departments', () => {
+	it('does not care about the ordering of departments', () => {
 		let course1 = {depts: ['BIO', 'CHEM'], num: 125}
 		let course2 = {depts: ['CHEM', 'BIO'], num: 125}
 
 		expect(hasDepartment('BIO', course1)).to.be.true
 		expect(hasDepartment('CHEM', course2)).to.be.true
+	})
+
+	it('checks against an array of possible departments', () => {
+		let course = {depts: ['ASIAN', 'REL'], num: 230}
+
+		expect(hasDepartment(['REL', 'AMCON'], course)).to.be.true
+		expect(hasDepartment(['AMCON', 'GCON'], course)).to.be.false
 	})
 })

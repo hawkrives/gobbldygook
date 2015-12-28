@@ -34,4 +34,9 @@ describe('findFirstAvailableYear', () => {
 
 		expect(findFirstAvailableYear(schedules, matriculation)).to.equal(2016)
 	})
+
+	it('uses the current year as the matriculation year if not given, and no schedules available', () => {
+		let expected = new Date().getFullYear()
+		expect(findFirstAvailableYear([])).to.equal(expected)
+	})
 })

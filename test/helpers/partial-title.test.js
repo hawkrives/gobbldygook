@@ -40,4 +40,12 @@ describe('partialTitle', () => {
 		expect(partialNameOrTitle('Japanese', courses[4])).to.be.true
 		expect(partialNameOrTitle('China', courses[4])).to.be.false
 	})
+
+	it('checks against every given partial name', () => {
+		const checker = partialNameOrTitle(['Asia', 'Dance', 'Japanese'])
+		expect(checker(courses[0])).to.be.true
+		expect(checker(courses[1])).to.be.true
+		expect(checker(courses[2])).to.be.false
+		expect(checker(courses[4])).to.be.true
+	})
 })
