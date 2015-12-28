@@ -10,7 +10,6 @@ import omit from 'lodash/object/omit'
 import present from 'present'
 import reject from 'lodash/collection/reject'
 import round from 'lodash/math/round'
-import stringify from 'json-stable-stringify'
 import zipObject from 'lodash/array/zipObject'
 import {v4 as uuid} from 'uuid'
 const debug = require('debug')('gb:models')
@@ -214,11 +213,6 @@ export function removeFabricationFromStudent(student, fabricationId) {
 	}
 	let fabrications = omit(student.fabrications, [fabricationId])
 	return {...student, fabrications}
-}
-
-
-export function encodeStudent(student) {
-	return encodeURIComponent(stringify(student))
 }
 
 
