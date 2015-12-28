@@ -10,7 +10,7 @@ import contains from 'lodash/collection/contains'
  * @param {Course} course
  * @returns {Boolean}
  */
-let partialTitle = curry((partial, course) => {
+export const partialTitle = curry((partial, course) => {
 	return contains(course.title, partial)
 })
 
@@ -22,7 +22,7 @@ let partialTitle = curry((partial, course) => {
  * @param {Course} course
  * @returns {Boolean}
  */
-let partialName = curry((partial, course) => {
+export const partialName = curry((partial, course) => {
 	return contains(course.name, partial)
 })
 
@@ -34,7 +34,7 @@ let partialName = curry((partial, course) => {
  * @param {Course} course
  * @returns {Boolean}
  */
-let checkPartialNameOrTitle = curry((partial, course) => {
+const checkPartialNameOrTitle = curry((partial, course) => {
 	return (partialTitle(partial, course) || partialName(partial, course))
 })
 
@@ -46,15 +46,9 @@ let checkPartialNameOrTitle = curry((partial, course) => {
  * @param {Course} course
  * @returns {Boolean}
  */
-let partialNameOrTitle = curry((partial, course) => {
+export const partialNameOrTitle = curry((partial, course) => {
 	if (isArray(partial)) {
 		return any(partial, p => checkPartialNameOrTitle(p, course))
 	}
 	return checkPartialNameOrTitle(partial, course)
 })
-
-export {
-	partialTitle,
-	partialName,
-	partialNameOrTitle,
-}

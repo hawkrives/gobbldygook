@@ -10,7 +10,6 @@ import omit from 'lodash/object/omit'
 import present from 'present'
 import reject from 'lodash/collection/reject'
 import round from 'lodash/math/round'
-import stringify from 'json-stable-stringify'
 import zipObject from 'lodash/array/zipObject'
 import {v4 as uuid} from 'uuid'
 const debug = require('debug')('gb:models')
@@ -111,6 +110,7 @@ export function destroyScheduleFromStudent(student, scheduleId) {
 			sched.semester === deadSched.semester &&
 			sched.id !== deadSched.id)
 
+		/* istanbul ignore else */
 		if (otherSchedKey) {
 			schedules[otherSchedKey] = {...schedules[otherSchedKey], active: true}
 		}
@@ -199,7 +199,7 @@ export function removeOverrideFromStudent(student, key) {
 
 export function addFabricationToStudent(student, fabrication) {
 	if (!('clbid' in fabrication)) {
-		throw new TypeError(`addFabricationToStudent: fabrications must include a clbid`)
+		throw new ReferenceError(`addFabricationToStudent: fabrications must include a clbid`)
 	}
 	if (typeof fabrication.clbid !== 'string') {
 		throw new TypeError(`addFabricationToStudent: clbid must be a string`)
@@ -214,11 +214,6 @@ export function removeFabricationFromStudent(student, fabricationId) {
 	}
 	let fabrications = omit(student.fabrications, [fabricationId])
 	return {...student, fabrications}
-}
-
-
-export function encodeStudent(student) {
-	return encodeURIComponent(stringify(student))
 }
 
 
@@ -278,13 +273,16 @@ export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
 
 	let schedule = clone(student.schedules[scheduleId])
 
-	if (index < 0 || index >= schedule.clbids.length) {
-		throw new RangeError(`reorderCourseInSchedule: ${index} is outside of the exclusive range 0..${schedule.clbids.length}`)
+	if (index < 0) {
+		index = 0
+	}
+	else if (index >= schedule.clbids.length) {
+		index = schedule.clbids.length - 1
 	}
 
 	const oldIndex = findIndex(schedule.clbids, id => id === clbid)
 
-	if (oldIndex < 0) {
+	if (oldIndex === -1) {
 		throw new ReferenceError(`reorderCourseInSchedule: ${clbid} is not in schedule "${scheduleId}"`)
 	}
 

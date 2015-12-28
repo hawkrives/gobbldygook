@@ -2,12 +2,12 @@ import union from 'lodash/array/union'
 import reject from 'lodash/collection/reject'
 import stringify from 'json-stable-stringify'
 
-function getIdCache() {
+export function getIdCache() {
 	return JSON.parse(localStorage.getItem('studentIds') || '[]')
 }
 
 
-function setIdCache(ids) {
+export function setIdCache(ids) {
 	localStorage.setItem('studentIds', JSON.stringify(ids))
 }
 
@@ -18,12 +18,12 @@ export function addStudentToCache(studentId) {
 	setIdCache(ids)
 }
 
-
 export function removeStudentFromCache(studentId) {
 	let ids = getIdCache()
 	ids = reject(ids, id => id === studentId)
 	setIdCache(ids)
 }
+
 
 export default async function saveStudent(student) {
 	// 1. grab the old (still JSON-encoded) student from localstorage

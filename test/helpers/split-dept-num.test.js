@@ -15,4 +15,10 @@ describe('splitDeptNum', () => {
 
 		expect(splitDeptNum(deptnum)).to.eql({depts: ['ASIAN'], num: 275})
 	})
+
+	it('includes the section, if given', () => {
+		let deptnum = 'ASIAN 275A'
+
+		expect(splitDeptNum(deptnum, true)).to.eql({depts: ['ASIAN'], num: 275, sect: 'A'})
+	})
 })
