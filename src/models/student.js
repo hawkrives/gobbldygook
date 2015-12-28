@@ -198,7 +198,7 @@ export function removeOverrideFromStudent(student, key) {
 
 export function addFabricationToStudent(student, fabrication) {
 	if (!('clbid' in fabrication)) {
-		throw new TypeError(`addFabricationToStudent: fabrications must include a clbid`)
+		throw new ReferenceError(`addFabricationToStudent: fabrications must include a clbid`)
 	}
 	if (typeof fabrication.clbid !== 'string') {
 		throw new TypeError(`addFabricationToStudent: clbid must be a string`)
