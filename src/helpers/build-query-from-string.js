@@ -178,6 +178,7 @@ export default function buildQueryFromString(queryString='', opts={}) {
 	// Process the keys, to clean them up somewhat
 	keys = map(keys, key => {
 		key = key.toLowerCase()
+		/* istanbul ignore else */
 		if (!startsWith(key, '_')) {
 			key = keywordMappings[key] || key
 		}

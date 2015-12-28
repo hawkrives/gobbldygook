@@ -110,6 +110,7 @@ export function destroyScheduleFromStudent(student, scheduleId) {
 			sched.semester === deadSched.semester &&
 			sched.id !== deadSched.id)
 
+		/* istanbul ignore else */
 		if (otherSchedKey) {
 			schedules[otherSchedKey] = {...schedules[otherSchedKey], active: true}
 		}
