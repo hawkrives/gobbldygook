@@ -7,7 +7,7 @@ const Study = require('../../src/models/study').default
 
 describe('Study', () => {
 	it('holds an area of study for a student', () => {
-		let csci = new Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
+		let csci = Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
 
 		expect(csci.type).to.equal('major')
 		expect(csci.name).to.equal('Computer Science')
@@ -16,7 +16,7 @@ describe('Study', () => {
 	})
 
 	it('can turn into JSON', () => {
-		let csci = new Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
+		let csci = Study({type: 'major', name: 'Computer Science', revision: '2014-15'})
 		let result = stringify(csci)
 
 		expect(JSON.parse(result)).to.deep.equal({
@@ -25,5 +25,14 @@ describe('Study', () => {
 			type: 'major',
 			source: '',
 		})
+	})
+
+	it('catches errors and puts them in _error', async () => {
+		let csci = Study({type: 'major', name: 'Computer Science', revision: '2014-15', _shouldError: true})
+
+		expect(csci.name).to.equal('Computer Science')
+		expect(csci.revision).to.equal('2014-15')
+		expect(csci.type).to.equal('major')
+		expect(await csci.data).to.have.property('_error', 'Error!')
 	})
 })
