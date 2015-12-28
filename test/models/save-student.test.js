@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import cloneDeep from 'lodash/lang/cloneDeep'
 import reject from 'lodash/collection/reject'
-import stringify from 'json-stable-stringify'
 import omit from 'lodash/object/omit'
 import {v4 as uuid} from 'uuid'
 
