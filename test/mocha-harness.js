@@ -14,7 +14,7 @@ let storage = {}
 global.localStorage = {
 	_storage: storage,
 	getItem: key => storage[key],
-	setItem: (key, val) => storage[key] = val,
+	setItem: (key, val) => storage[key] = String(val),
 	removeItem: key => delete storage[key],
 	hasItem: key => key in storage,
 	clear: () => {
