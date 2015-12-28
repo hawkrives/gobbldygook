@@ -1,9 +1,6 @@
 import {expect} from 'chai'
 import mock from 'mock-require'
 import demoStudent from '../../src/models/demo-student.json'
-import size from 'lodash/collection/size'
-import filter from 'lodash/collection/filter'
-import pluck from 'lodash/collection/pluck'
 import find from 'lodash/collection/find'
 import stringify from 'json-stable-stringify'
 
@@ -34,8 +31,6 @@ const {
 	renameScheduleInStudent,
 	reorderCourseInSchedule,
 } = require('../../src/models/student')
-
-const getStudentCourses = require('../../src/helpers/get-student-courses').default
 
 const Study = require('../../src/models/study').default
 const Schedule = require('../../src/models/schedule').default
@@ -136,14 +131,6 @@ describe('moveCourseToSchedule', () => {
 		let movedCourse = moveCourseToSchedule(stu, {fromScheduleId: '1', toScheduleId: '2', clbid: 82908})
 		expect(movedCourse.schedules['1'].clbids).to.not.include(82908)
 		expect(movedCourse.schedules['2'].clbids).to.include(82908)
-	})
-})
-
-describe('getStudentCourses', () => {
-	it('only returns courses from active schedules', () => {
-		const stu = Student(demoStudent)
-		let courseCountFromActive = size(pluck(filter(demoStudent.schedules, 'active'), 'clbids'))
-		getStudentCourses(stu).then(courses => expect(courses.length).to.equal(courseCountFromActive))
 	})
 })
 
