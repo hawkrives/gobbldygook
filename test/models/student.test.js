@@ -2,6 +2,7 @@ import {expect} from 'chai'
 import mock from 'mock-require'
 import demoStudent from '../../src/models/demo-student.json'
 import find from 'lodash/collection/find'
+import findIndex from 'lodash/array/findIndex'
 import stringify from 'json-stable-stringify'
 
 mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock').default)
@@ -497,32 +498,60 @@ describe('removeCourseFromSchedule', () => {
 
 describe('reorderCourseInSchedule', () => {
 	it('rearranges courses', () => {
+		const sched = Schedule({clbids: [123, 456, 789]})
+		const stu = addScheduleToStudent(Student(), sched)
 		let rearranged = reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 1})
 		expect(rearranged.schedules[sched.id].clbids).to.not.deep.equal([123, 456, 789])
 		expect(rearranged.schedules[sched.id].clbids).to.deep.equal([456, 123, 789])
 	})
 
-	it('requires that the clbid be a number when rearranging', () => {
+	it('requires that the clbid be a number', () => {
+		const sched = Schedule({clbids: [123, 456, 789]})
+		const stu = addScheduleToStudent(Student(), sched)
 		expect(() => reorderCourseInSchedule(stu, sched.id, {clbid: '123', index: 1})).to.throw(TypeError)
 	})
 
 	it('returns a new object', () => {
+		const sched = Schedule({clbids: [123, 456, 789]})
+		const stu = addScheduleToStudent(Student(), sched)
 		let actual = reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 1})
 		expect(actual).to.not.equal(stu)
 		expect(actual.schedules[sched.id]).to.not.equal(stu.schedules[sched.id])
 		expect(actual.schedules[sched.id]).to.not.equal(sched)
 	})
 
-	it('requires that the new index be within the boundaries of the clbids list', () => {
-		let shouldThrowBecauseNegative = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: -1})
-		let shouldThrowBecausePastEnd = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: 100})
-		let shouldThrowBecauseInfinity = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: Infinity})
-		expect(shouldThrowBecauseNegative).to.throw(RangeError)
-		expect(shouldThrowBecausePastEnd).to.throw(RangeError)
-		expect(shouldThrowBecauseInfinity).to.throw(RangeError)
-	})
 	it('requires that the clbid to be moved actually appear in the list of clbids', () => {
-		let shouldThrow = () => reorderCourseInSchedule(stu, sched.id, {clbid: 123456789, index: 0})
-		expect(shouldThrow).to.throw(ReferenceError)
+		const sched = Schedule({clbids: [123, 456, 789]})
+		const stu = addScheduleToStudent(Student(), sched)
+		expect(() => reorderCourseInSchedule(stu, sched.id, {clbid: 123456789, index: 0}))
+			.to.throw(ReferenceError)
+	})
+
+	it('throws if the schedule id cannot be found', () => {
+		let sched = Schedule({clbids: [123456789, 123]})
+		let stu = {schedules: {[sched.id]: sched}}
+		expect(() => reorderCourseInSchedule(stu, sched.id + 'bad', {clbid: 123, index: 0}))
+			.to.throw(ReferenceError)
+	})
+
+	it('truncates the requested index if it is greater than the number of courses', () => {
+		let sched = Schedule({clbids: [123456789, 123]})
+		let stu = {schedules: {[sched.id]: sched}}
+		let reordered = reorderCourseInSchedule(stu, sched.id, {clbid: 123456789, index: 10})
+		expect(findIndex(reordered.schedules[sched.id].clbids, c => c === 123456789)).to.equal(1)
+	})
+
+	it('truncates the requested index if it is Infinity', () => {
+		let sched = Schedule({clbids: [123456789, 123]})
+		let stu = {schedules: {[sched.id]: sched}}
+		let reordered = reorderCourseInSchedule(stu, sched.id, {clbid: 123456789, index: Infinity})
+		expect(findIndex(reordered.schedules[sched.id].clbids, c => c === 123456789)).to.equal(1)
+	})
+
+	it('truncates the requested index if it is less than 0', () => {
+		let sched = Schedule({clbids: [123456789, 123]})
+		let stu = {schedules: {[sched.id]: sched}}
+		let reordered = reorderCourseInSchedule(stu, sched.id, {clbid: 123, index: -10})
+		expect(findIndex(reordered.schedules[sched.id].clbids, c => c === 123)).to.equal(0)
 	})
 })
