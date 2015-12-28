@@ -3,11 +3,9 @@ import Student from '../models/student'
 export default function loadStudent(studentId) {
 	const rawStudent = localStorage.getItem(studentId)
 
-	if (rawStudent === '[object Object]') {
-		localStorage.removeItem(studentId)
-	}
 
 	if (rawStudent === null || rawStudent === '[object Object]') {
+		localStorage.removeItem(studentId)
 		return null
 	}
 
