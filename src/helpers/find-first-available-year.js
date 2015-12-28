@@ -16,8 +16,8 @@ import findMissingNumberBinarySearch from './find-missing-number-binary-search'
  * @param {Number} matriculation - the year of matriculated
  * @returns {Number} - the first available semester slot
  */
-function findFirstAvailableYear(schedules, matriculation) {
-	if (schedules && schedules.size === 0 && matriculation === undefined) {
+export default function findFirstAvailableYear(schedules, matriculation) {
+	if (schedules && schedules.length === 0 && matriculation === undefined) {
 		return new Date().getFullYear()
 	}
 
@@ -42,5 +42,3 @@ function findFirstAvailableYear(schedules, matriculation) {
 
 	return max(years) + 1
 }
-
-export default findFirstAvailableYear
