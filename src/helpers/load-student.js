@@ -1,8 +1,8 @@
 import Student from '../models/student'
+const log = (...args) => TESTING || /* istanbul ignore next */ console.error(...args)
 
 export default function loadStudent(studentId) {
 	const rawStudent = localStorage.getItem(studentId)
-
 
 	if (rawStudent === null || rawStudent === '[object Object]') {
 		localStorage.removeItem(studentId)
@@ -17,7 +17,7 @@ export default function loadStudent(studentId) {
 		basicStudent = JSON.parse(rawStudent)
 	}
 	catch (e) {
-		console.error(e)
+		log(e)
 	}
 
 	return Promise.resolve(Student(basicStudent))
