@@ -13,10 +13,21 @@ process.env.NODE_ENV = 'test'
 let storage = {}
 global.localStorage = {
 	_storage: storage,
-	getItem: key => storage[key],
-	setItem: (key, val) => storage[key] = String(val),
-	removeItem: key => delete storage[key],
-	hasItem: key => key in storage,
+	getItem: key => {
+		if (!localStorage.hasItem(key)) {
+			return null
+		}
+		return storage[key]
+	},
+	setItem: (key, val) => {
+		return storage[key] = String(val)
+	},
+	removeItem: key => {
+		delete storage[key]
+	},
+	hasItem: key => {
+		return key in storage
+	},
 	clear: () => {
 		storage = {}
 	},
