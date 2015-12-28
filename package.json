@@ -20,7 +20,7 @@
     "copy:icons": "svg-sprite-generate -d src/icons/ionicons/ -o build/ionicons.svg",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "codecov": "nyc report --reporter=text-lcov | codecov",
-    "lint": "eslint bin/ src/ test/",
+    "lint": "eslint *.js benchmarks/ bin/ scripts/ src/ test/",
     "nyc": "nyc npm test",
     "prebuild": "npm run copy",
     "precopy": "npm run clean",
