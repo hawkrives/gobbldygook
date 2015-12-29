@@ -13,6 +13,7 @@ import groupBy from 'lodash/collection/groupBy'
 import sortBy from 'lodash/collection/sortBy'
 import zipObject from 'lodash/array/zipObject'
 import some from 'lodash/collection/some'
+import round from 'lodash/math/round'
 import present from 'present'
 import yaml from 'js-yaml'
 
@@ -78,7 +79,7 @@ function storeCourses(path, data) {
 	const start = present()
 	return db.store('courses').batch(coursesToStore)
 		.then(() => {
-			debug(`Stored ${size(coursesToStore)} courses in ${present() - start}ms.`)
+			debug(`Stored ${size(coursesToStore)} courses in ${round(present() - start, 2)}ms.`)
 		})
 		.catch(err => {
 			const db = err.target.db.name
