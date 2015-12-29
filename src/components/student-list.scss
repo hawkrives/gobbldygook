@@ -1,36 +1,37 @@
 @import '../base/variables';
+@import '../mixins/card';
 @import '../mixins/color';
 @import '../mixins/link-undecorated';
-@import '../mixins/material-shadow';
 
-.student-list-item-container {
-	margin-bottom: 1.25em;
+.student-list {
+	@include card;
+	max-width: 35em;
+	width: 100%;
+	margin: 0 auto;
 }
 
 .student-list-item {
 	@include link-undecorated;
-	@include material-shadow;
-	border-radius: $base-border-radius;
-
-	&.is-selected {
-		outline: color('blue', '300') 2px solid;
-		background-color: color('blue', '50');
-	}
 
 	background-color: white;
+	&.is-selected {
+		background-color: color('blue', '50');
+	}
 
 	flex: 1;
 	display: flex;
 	align-items: center;
 
-	max-width: 35em;
-	margin: 0 auto;
-	padding: 0.5em 0.5em;
+	padding: 0.75em 0.5em;
 	position: relative;
 
 	transition: 0.15s;
 
 	cursor: pointer;
+}
+
+.student-list-item-container + .student-list-item-container .student-list-item {
+	border-top: $material-divider;
 }
 
 .student-list-item:hover,
@@ -51,7 +52,7 @@
 
 .student-list-item-info .areas {
 	font-size: 0.8em;
-	font-feature-settings: 'smcp';
+	// font-feature-settings: 'smcp';
 }
 
 .student-list-item-info .area-type .joiner {

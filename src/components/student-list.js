@@ -43,7 +43,7 @@ class StudentListItem extends Component {
 					<Icon name='ios-trash-outline' />
 				</Button>}
 				<Link className='student-list-item' to={`/s/${student.id}/`}>
-					<AvatarLetter value={student.name} />
+					{/*<AvatarLetter value={student.name} />*/}
 					<span className='student-list-item-info'>
 						<div className='name'>{student.name || ''}</div>
 						<div className='areas'>
@@ -105,9 +105,9 @@ export default class StudentList extends Component {
 			)
 
 		return (
-			<List className='student-list' type='plain'>
+			<div className='student-list'>
 				{studentObjects}
-			</List>
+			</div>
 		)
 	}
 }

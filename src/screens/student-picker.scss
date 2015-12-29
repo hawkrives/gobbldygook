@@ -16,7 +16,7 @@
 
 .app-title h2 {
 	margin-top: 0;
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 	font-weight: 400;
 	font-size: 1em;
 }
@@ -58,8 +58,11 @@
 
 .student-list-filter {
 	@include card;
-	flex: 5 0 auto;
+	flex: 3 0 auto;
+	align-self: center;
 	padding: 0.25em 0.5em;
+	margin-right: 1em;
+	margin-left: 1em; // only for the search button
 
 	&:focus {
 		color: color('blue', '900');
@@ -78,11 +81,14 @@
 }
 
 .student-list--button {
-	padding-left: 1em;
-	padding-right: 1em;
-	margin: 0 0.25em;
+	padding-left: 0.5em !important;
+	padding-right: 0.5em !important;
+	margin: 0 0.125em;
+	flex-direction: column;
+	flex: 0 1 auto !important;
 
 	.icon {
-		font-size: 1em;
+		font-size: 1.5em;
+		margin-bottom: 0.25em;
 	}
 }
