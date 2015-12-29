@@ -61,7 +61,7 @@ export function StudentPicker(props) {
 					/>
 
 					<Button className='student-list--button' onClick={onSortChange}>
-						<Icon name='android-funnel' />
+						<Icon name='funnel' />
 						Sort
 					</Button>
 
@@ -80,6 +80,11 @@ export function StudentPicker(props) {
 						New
 					</Button>
 				</Toolbar>
+
+				<div>
+					<span>Sorting by <b>{sortBy}</b> (a-z);</span>{' '}
+					<span>grouping by <b>{groupBy}</b>.</span>
+				</div>
 			</div>
 
 			<StudentList

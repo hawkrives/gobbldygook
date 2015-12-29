@@ -9,9 +9,7 @@ import sortBy from 'lodash/collection/sortBy'
 import interpose from '../helpers/interpose'
 import fuzzysearch from 'fuzzysearch'
 
-import AvatarLetter from './avatar-letter'
 import Button from './button'
-import List from './list'
 import Icon from './icon'
 
 import './student-list.scss'
@@ -41,9 +39,9 @@ class StudentListItem extends Component {
 				{isEditing &&
 				<Button className='delete' type='flat' onClick={this.deleteStudent}>
 					<Icon name='ios-trash-outline' />
+					Delete
 				</Button>}
 				<Link className='student-list-item' to={`/s/${student.id}/`}>
-					{/*<AvatarLetter value={student.name} />*/}
 					<span className='student-list-item-info'>
 						<div className='name'>{student.name || ''}</div>
 						<div className='areas'>

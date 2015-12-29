@@ -8,6 +8,7 @@
 	max-width: 35em;
 	width: 100%;
 	margin: 0 auto;
+	overflow: hidden;
 }
 
 .student-list-item {
@@ -30,7 +31,7 @@
 	cursor: pointer;
 }
 
-.student-list-item-container + .student-list-item-container .student-list-item {
+.student-list-item-container + .student-list-item-container {
 	border-top: $material-divider;
 }
 
@@ -52,7 +53,6 @@
 
 .student-list-item-info .areas {
 	font-size: 0.8em;
-	// font-feature-settings: 'smcp';
 }
 
 .student-list-item-info .area-type .joiner {
@@ -65,7 +65,7 @@
 }
 
 .student-list-item--go {
-	margin-left: 0.25em;
+	margin-left: 1em;
 	margin-right: 0.5em;
 }
 
@@ -81,8 +81,16 @@
 }
 
 .student-list-item-container .delete {
-	font-size: 2em;
-	padding: 0.25em 0.5em;
+	flex-direction: column;
+	padding: 0.5em 1em;
+	font-size: 0.9em;
+	border: 0;
+	border-radius: 0;
+
+	.icon {
+		font-size: 2em;
+		margin-bottom: 0.125em;
+	}
 }
 
 .student-list-item-container .delete:hover {
