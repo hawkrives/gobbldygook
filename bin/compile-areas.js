@@ -32,15 +32,16 @@ export function cli() {
 				console.log()
 			}
 
-			console.log(`reading ${filename}`)
+			process.stdout.write(`${filename}: `)
+			process.stdout.write(`reading`)
 			const data = fs.readFileSync(filename, {encoding: 'utf-8'})
-			console.log(`loading ${filename}`)
+			process.stdout.write(`, loading`)
 			const obj = yaml.safeLoad(data)
-			console.log(`enhancing ${filename}`)
+			process.stdout.write(`, enhancing\n`)
 			const enhanced = enhanceHanson(obj, {topLevel: true})
 			const outputFile = filename.replace(inDir, outDir).replace('.yaml', '.json')
 			mkdirp.sync(path.dirname(outputFile))
-			console.log(`writing to ${outputFile}`)
+			process.stdout.write(`writing to ${outputFile}\n`)
 			fs.writeFileSync(outputFile, JSON.stringify(enhanced, null, 2), {encoding: 'utf-8'})
 		})
 }
