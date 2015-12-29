@@ -3,6 +3,10 @@
 # Opt-in to the new Travis infrastructure
 sudo: false
 
+# Cache node_modules
+cache:
+  - node_modules
+
 # Send travis notifications to Slack
 notifications:
   slack:
