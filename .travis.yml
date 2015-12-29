@@ -5,7 +5,8 @@ sudo: false
 
 # Cache node_modules
 cache:
-  - node_modules
+  directories:
+    - node_modules
 
 # Send travis notifications to Slack
 notifications:
