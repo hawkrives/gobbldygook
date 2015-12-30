@@ -1,8 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import DropZone from 'react-dropzone'
-import forEach from 'lodash/collection/forEach'
-import noop from 'lodash/utility/noop'
 import history from '../history'
+import {Link} from 'react-router'
 
 import Toolbar from '../components/toolbar'
 import Button from '../components/button'
@@ -17,7 +15,6 @@ export function StudentPicker(props) {
 		filterText,
 		groupBy,
 		isEditing,
-		onDrop,
 		onAddStudent,
 		onFilterChange,
 		onGroupChange,
@@ -34,16 +31,6 @@ export function StudentPicker(props) {
 				<h1>Gobbldygook</h1>
 				<h2>A Course Scheduling Helper</h2>
 			</heading>
-
-			<DropZone
-				className='import-student'
-				activeClassName='import-student-active'
-				onDrop={onDrop}
-			>
-				<p>
-					<button>Choose a File</button> or drop a student file here to import it.
-				</p>
-			</DropZone>
 
 			<div className='student-list-toolbar'>
 				<Toolbar className='student-list-buttons'>
@@ -75,10 +62,12 @@ export function StudentPicker(props) {
 						Edit
 					</Button>
 
+					<Link to={'wizard/'}>
 					<Button className='student-list--button' onClick={onAddStudent}>
 						<Icon name='android-add' />
 						New
 					</Button>
+					</Link>
 				</Toolbar>
 
 				<div>
@@ -103,7 +92,6 @@ StudentPicker.propTypes = {
 	groupBy: PropTypes.string.isRequired,
 	isEditing: PropTypes.bool.isRequired,
 	onAddStudent: PropTypes.func.isRequired,
-	onDrop: PropTypes.func.isRequired,
 	onFilterChange: PropTypes.func.isRequired,
 	onGroupChange: PropTypes.func.isRequired,
 	onOpenSearchOverlay: PropTypes.func.isRequired,
@@ -135,21 +123,6 @@ export default class StudentPickerContainer extends Component {
 		}
 	}
 
-	onDrop = files => {
-		forEach(files, file => {
-			const reader = new FileReader()
-
-			reader.addEventListener('load', upload => {
-				this.props.actions.importStudent({
-					data: upload.target.result,
-					type: file.type,
-				})
-			})
-
-			reader.readAsText(file)
-		})
-	}
-
 	onAddStudent = () => {
 		const query = {...this.context.location.query, 'student-wizard': null}
 		history.pushState(null, this.context.location.pathname, query)
@@ -164,9 +137,7 @@ export default class StudentPickerContainer extends Component {
 		this.setState({filterText: ev.target.value.toLowerCase()})
 	}
 
-	onGroupChange = () => {
-		noop()
-	}
+	onGroupChange = () => {}
 
 	onSortChange = () => {
 		this.setState({sortBy: this.state.sortBy === 'modified' ? 'name' : 'modified'})
@@ -185,7 +156,6 @@ export default class StudentPickerContainer extends Component {
 				groupBy={this.state.groupBy}
 				isEditing={this.state.isEditing}
 				onAddStudent={this.onAddStudent}
-				onDrop={this.onDrop}
 				onFilterChange={this.onFilterChange}
 				onGroupChange={this.onGroupChange}
 				onOpenSearchOverlay={this.onOpenSearchOverlay}

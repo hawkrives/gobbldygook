@@ -1,97 +1,100 @@
 import React, {PropTypes} from 'react'
-import omit from 'lodash/object/omit'
+import forEach from 'lodash/collection/forEach'
+import DropZone from 'react-dropzone'
 import history from '../history'
 
 import Button from '../components/button'
-import Icon from '../components/icon'
-import Modal from '../components/modal'
-import Toolbar from '../components/toolbar'
+import List from '../components/list'
 
 import './new-student-wizard.scss'
 
-function closeModal(location, studentId=null) {
-	console.log(arguments)
-	const query = omit(location.query, ['student-wizard'])
-	let path = location.pathname
-	if (studentId) {
-		path = `/s/${studentId}/`
-	}
-	history.pushState(null, path, query)
-}
-
 function onCreateStudent(location, actions) {
 	actions.initStudent().then(([student]) => {
-		closeModal(location, student.id)
+		history.replaceState(null, `/s/${student.id}/`)
 	})
 }
 
-export default function NewStudentSheet(props, context) {
-	const boundCloseModal = closeModal.bind(null, context.location)
+const onDrop = (actions, files) => {
+	forEach(files, file => {
+		const reader = new FileReader()
 
-	// alright.
-	// basic info,
-	// then areas,
-	// then schedules.
+		reader.addEventListener('load', upload => {
+			actions.importStudent({
+				data: upload.target.result,
+				type: file.type,
+			})
+		})
 
-	// can be:
-	// - imported from the SIS
-	// - imported from an export file
-	// - shared from someone else
-	// - filled in manually
+		reader.readAsText(file)
+	})
+}
 
-	// oh, so this is where that module from dan abramov comes in - the
-	// one that lets you change global state when a component is rendered
-	// later: why?
+let dropZoneRef
 
-	const today = new Date()
-
+export default function NewStudentScreen(props, context) {
 	return (
-		<Modal
-			modalClassName='student-wizard'
-			onClose={boundCloseModal}
+		<DropZone
+			className='student-wizard'
+			activeClassName='student-wizard-can-drop'
+			ref={ref => dropZoneRef = ref}
+			disableClick
+			accept='application/json'
+			onDrop={files => onDrop(props.actions, files)}
 		>
-			<Toolbar className='window-tools'>
-				<Button className='close-modal' onClick={boundCloseModal}>
-					<Icon name='close' />
-				</Button>
-			</Toolbar>
+			<div>
+			<header className='introduction'>
+				<h1 className='title'>Hi there!</h1>
+				<h2 className='subtitle'>I don't know anything about you. Care to enlighten me?</h2>
+			</header>
 
-			<Toolbar>
-				<Button>Import from File</Button>
-				<Button>Open from Google Drive</Button>
-			</Toolbar>
-
-			<div className='intro'>
-				<p>Welcome to Gobbldygook!</p>
+			<div className='intro-page'>
 				<p>
-					We can import your course information from the St.
-					Olaf SIS, from an exported file, from Google Drive, or
-					you can just tell us about your stuff by hand.
+					You're welcome to manually type in all of your
+					information, but we can just pull in your information
+					from the SIS. Alternately, if you've used Gobbldygook
+					before, we can import your data from a file, or from
+					Google Drive.
 				</p>
+
+
+				<List type='plain' className='button-container'>
+					<li><Button disabled type='raised'>Import from the SIS</Button></li>
+					<li><Button disabled type='raised'>Manually</Button></li>
+					<li><Button disabled type='raised'>Import from Google Drive</Button></li>
+					<li><Button disabled type='raised' onClick={() => dropZoneRef.open()}>Import from a file</Button></li>
+				</List>
 			</div>
+			{/*<div>
+				<form className='form'>
+					<div><label>Name: <input type='text' /></label></div>
+					<div><label>Matriculation: <input type='year' placeholder={today.getFullYear() - 2} /></label></div>
+					<div><label>Graduation: <input type='year' placeholder={today.getFullYear() + 2} /></label></div>
+					<div><label>Advisor: <input type='text' /></label></div>
+					<div><label>Studies: <input type='text' /></label></div>
+					<div><label>Schedules: <input type='text' /></label></div>
+					<div><label>Overrides: <input type='text' /></label></div>
+					<div><label>Fabrications: <input type='text' /></label></div>
+				</form>
+			</div>*/}
 
-			<form className='form'>
-				<div><label>Name: <input type='text' /></label></div>
-				<div><label>Matriculation: <input type='year' placeholder={today.getFullYear() - 2} /></label></div>
-				<div><label>Graduation: <input type='year' placeholder={today.getFullYear() + 2} /></label></div>
-				<div><label>Advisor: <input type='text' /></label></div>
-				<div><label>Studies: <input type='text' /></label></div>
-				<div><label>Schedules: <input type='text' /></label></div>
-				<div><label>Overrides: <input type='text' /></label></div>
-				<div><label>Fabrications: <input type='text' /></label></div>
-			</form>
-
-			<Button onClick={() => onCreateStudent(context.location, props.actions)}>
-				Create Student
-			</Button>
-		</Modal>
+			<p>
+				Does everything look alright?<br/>
+				<Button
+					type='raised'
+					onClick={() => onCreateStudent(context.location, props.actions)}
+				>
+					Let's go!
+				</Button>
+			</p>
+			</div>
+		</DropZone>
 	)
 }
 
-NewStudentSheet.propTypes = {
-	actions: PropTypes.objectOf(PropTypes.func).isRequired,
+NewStudentScreen.propTypes = {
+	actions: PropTypes.objectOf(PropTypes.func),
 }
 
-NewStudentSheet.contextTypes = {
+NewStudentScreen.contextTypes = {
 	location: PropTypes.object,
 }

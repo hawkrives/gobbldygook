@@ -21,25 +21,6 @@
 	font-size: 1em;
 }
 
-.import-student {
-	margin-bottom: 0.5em;
-
-	border: dashed 2px $text-color;
-	border-radius: 8px;
-	padding: 10px;
-
-	transition: all 0.5s;
-
-	p {
-		margin: 0;
-	}
-}
-
-.import-student-active {
-	border-style: solid;
-	background-color: white;
-}
-
 .students-overview {
 	display: flex;
 	flex-direction: column;
