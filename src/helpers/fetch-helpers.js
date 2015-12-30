@@ -1,9 +1,17 @@
+import {NetworkError} from './errors'
+
 export function status(response) {
 	if (response.status >= 200 && response.status < 300) {
 		return Promise.resolve(response)
 	}
 	else {
 		return Promise.reject(new Error(response.statusText))
+	}
+}
+
+export function classifyFetchErrors(err) {
+	if (err instanceof TypeError && err.message === 'Failed to fetch') {
+		throw new NetworkError('Failed to fetch')
 	}
 }
 
