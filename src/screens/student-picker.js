@@ -28,7 +28,7 @@ export function StudentPicker(props) {
 	return (
 		<div className='students-overview'>
 			<heading className='app-title'>
-				<h1>Gobbldygook</h1>
+				<h1>GobbldygooK</h1>
 				<h2>A Course Scheduling Helper</h2>
 			</heading>
 

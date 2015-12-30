@@ -12,6 +12,7 @@
 .app-title h1 {
 	font-weight: 300;
 	margin: 0;
+	font-feature-settings: 'smcp';
 }
 
 .app-title h2 {
@@ -19,6 +20,7 @@
 	margin-bottom: 1em;
 	font-weight: 400;
 	font-size: 1em;
+	font-feature-settings: 'smcp';
 }
 
 .students-overview {
