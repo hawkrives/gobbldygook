@@ -25,9 +25,6 @@ const urlLoaderLimit = 10000
 const useHash = false
 
 const config = {
-	progress: true,
-	bail: true,
-
 	replace: null,
 	port: 3000,
 	hostname: 'localhost',
