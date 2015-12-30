@@ -6,6 +6,7 @@ import {status, text, classifyFetchErrors} from './fetch-helpers'
 import {AuthError, NetworkError} from './errors'
 
 const COURSES_URL = 'https://www.stolaf.edu/sis/st-courses.cfm'
+const DEGREE_AUDIT_URL = 'https://www.stolaf.edu/sis/st-degreeaudit.cfm'
 
 const fetch = (url, args={}) => global.fetch(url, {cache: 'no-cache', credentials: 'same-origin', mode: 'same-origin', ...args}).catch(classifyFetchErrors)
 const fetchHtml = (...args) => fetch(...args).then(status).then(text).then(html)
@@ -94,6 +95,16 @@ function getCourses(studentId, term) {
 }
 
 
+function collectAllCourses(studentId, terms) {
+	return Promise.all(map(terms, term => getCourses(studentId, term)))
+}
+
+function extractAdvisor(html) {}
+function extractStudentName(html) {}
+function extractMatriculation(html) {}
+function extractGraduation(html) {}
+function extractAreas(html) {}
+
 
 export function checkIfLoggedIn() {
 	return fetchHtml(COURSES_URL).then(response => {
@@ -110,18 +121,45 @@ export function checkIfLoggedIn() {
 }
 
 
-export function getStudentCourses() {
+function loadPages(html) {
+	return Promise.all([html, fetchHtml(DEGREE_AUDIT_URL)])
+}
+
+
+function beginDataExtraction([coursesPage, degreeAuditPage]) {
+	let studentId = extractStudentId(coursesPage)
+	let terms = extractTermList(coursesPage)
+
+	return Promise.all([
+		collectAllCourses(studentId, terms),
+		{
+			advisor: extractAdvisor(degreeAuditPage),
+			name: extractStudentName(degreeAuditPage),
+			matriculation: extractMatriculation(degreeAuditPage),
+			graduation: extractGraduation(degreeAuditPage),
+			areasOfStudy: extractAreas(degreeAuditPage),
+		},
+	])
+}
+
+
+function flattenData([coursesByTerm, studentInfo]) {
+	return {
+		courses: flatten(coursesByTerm),
+		...studentInfo,
+	}
+}
+
+
+export function getStudentInfo() {
 	if (!navigator.onLine) {
 		return Promise.reject(new NetworkError('The network is offline.'))
 	}
 
 	return checkIfLoggedIn()
-		.then(html => {
-			let studentId = extractStudentId(html)
-			let terms = extractTermList(html)
-			return Promise.all(map(terms, term => getCourses(studentId, term)))
-		})
-		.then(coursesByTerm => flatten(coursesByTerm))
+		.then(loadPages)
+		.then(beginDataExtraction)
+		.then(flattenData)
 		.catch(err => {
 			if (err instanceof AuthError) {
 				throw new AuthError('Could not log in to the SIS.')
