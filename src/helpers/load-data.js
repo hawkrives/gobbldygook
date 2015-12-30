@@ -56,7 +56,12 @@ export default function loadData() {
 		'./areaData.url',
 	]
 
-	const promises = map(infoFiles, url => loadDataFile(url).catch(err => console.error(err)))
+	if (navigator.onLine) {
+		const promises = map(infoFiles, url => loadDataFile(url).catch(err => console.error(err)))
 
-	return Promise.all(promises)
+		return Promise.all(promises)
+	}
+	else {
+		return Promise.resolve(null)
+	}
 }
