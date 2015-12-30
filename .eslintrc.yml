@@ -42,7 +42,7 @@ rules:
   no-eq-null: 2
   wrap-iife: 2
   no-undef-init: 0
-  no-unused-vars: 1
+  no-unused-vars: [1, {args: 'after-used', argsIgnorePattern: '^_$'}]
   no-console: 0
   no-underscore-dangle: 0
   # strict: [1, unnecessary]
