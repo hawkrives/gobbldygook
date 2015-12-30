@@ -2,16 +2,14 @@
 @import '../mixins/color';
 
 .area {
-	@include card;
-
-	margin-bottom: 1em;
+	cursor: pointer;
 
 	&.errored {
 		background-color: color('red', '50');
 		color: color('red', '900');
 	}
 
-	&.loading:not(.errored) {
+	&:not(.errored).loading {
 		opacity: 0.75;
 		color: gray;
 	}

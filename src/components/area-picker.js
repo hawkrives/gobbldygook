@@ -68,15 +68,15 @@ export default class AreaPicker extends Component {
 					</Button>
 				</li>)
 
-		let message = 'Oh! We need a new message here!'
+		let message = <li>Oh! We need a new message here!</li>
 		if (this.state.filter) {
-			message = `No matching ${pluralizeArea(this.props.type)}.`
+			message = <li>No matching ${pluralizeArea(this.props.type)}.</li>
 		}
 		else if (currentAreaNames.size) {
-			message = `All ${pluralizeArea(this.props.type)} have been added.`
+			message = <li>All ${pluralizeArea(this.props.type)} have been added.</li>
 		}
 		else {
-			message = `No ${pluralizeArea(this.props.type)} are available.`
+			message = <li>No {pluralizeArea(this.props.type)} are available.</li>
 		}
 
 		return (
@@ -88,7 +88,7 @@ export default class AreaPicker extends Component {
 						value={this.state.filter}
 						onChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})}
 					/>
-					<Button className='close-area-picker' onClick={this.props.closePicker}>Close</Button>
+					{/*<Button className='close-area-picker' onClick={this.props.closePicker}>Close</Button>*/}
 				</Toolbar>
 
 				<List type='plain'>

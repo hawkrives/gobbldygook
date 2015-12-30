@@ -55,6 +55,16 @@ export default class AreaOfStudyGroup extends Component {
 						</Button>}
 				</h1>
 
+				{this.props.showAreaPicker && <AreaPicker
+					addArea={this.props.addArea}
+					allAreas={this.props.allAreasOfType}
+					closePicker={ev => this.props.endAddArea({ev, type: this.props.type})}
+					currentAreas={this.props.areas}
+					removeArea={this.props.removeArea}
+					studentGraduation={this.props.student.graduation}
+					type={this.props.type}
+				/>}
+
 				{map(this.props.areas, (area, i) =>
 					<AreaOfStudy area={area}
 						key={i}
@@ -66,16 +76,6 @@ export default class AreaOfStudyGroup extends Component {
 						showEditButton={this.props.showAreaPicker}
 						studentId={this.props.student.id}
 					/>)}
-
-				{this.props.showAreaPicker && <AreaPicker
-					addArea={this.props.addArea}
-					allAreas={this.props.allAreasOfType}
-					closePicker={ev => this.props.endAddArea({ev, type: this.props.type})}
-					currentAreas={this.props.areas}
-					removeArea={this.props.removeArea}
-					studentGraduation={this.props.student.graduation}
-					type={this.props.type}
-				/>}
 			</section>
 		)
 	}
