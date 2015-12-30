@@ -1,32 +1,34 @@
-import React, {Component, PropTypes, isValidElement, cloneElement} from 'react'
+import React, {PropTypes, isValidElement, cloneElement} from 'react'
 import cx from 'classnames'
 
 import './list.scss'
 
-export default class List extends Component {
-	static propTypes = {
-		canSelect: PropTypes.bool,
-		children: PropTypes.any.isRequired,
-		className: PropTypes.string,
-		onChange: PropTypes.func,
-		seperator: PropTypes.string,
-		type: PropTypes.oneOf(['inline', 'number', 'bullet', 'plain']).isRequired,
+export default function List(props) {
+	const {
+		children,
+		type='inline',
+	} = props
+
+	let {
+		className,
+	} = props
+
+	const contents = React.Children.map(children, child =>
+		isValidElement(child)
+		? cloneElement(child, {...child.props, className: cx('list-item', child.props.className)})
+		: child)
+
+	className = cx('list', `list--${props.type}`, className)
+
+	if (type === 'number') {
+		return <ol className={className}>{contents}</ol>
 	}
 
-	static defaultProps = {
-		type: 'inline',
-	}
+	return <ul className={className}>{contents}</ul>
+}
 
-	render() {
-		const contents = React.Children.map(this.props.children, child =>
-			cloneElement(child, {...child.props, className: cx('list-item', child.props.className)}))
-
-		const className = cx('list', `list--${this.props.type}`, this.props.className)
-
-		if (this.props.type === 'number') {
-			return <ol className={className}>{contents}</ol>
-		}
-
-		return <ul className={className}>{contents}</ul>
-	}
+List.propTypes = {
+	children: PropTypes.node,
+	className: PropTypes.string,
+	type: PropTypes.oneOf(['inline', 'number', 'bullet', 'plain']).isRequired,
 }
