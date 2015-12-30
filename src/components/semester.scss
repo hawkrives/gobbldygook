@@ -84,25 +84,3 @@ $semester-edge-padding:
 		padding-left: 0.25em;
 	}
 }
-
-.course-list {
-	min-height: 30px;
-	padding-bottom: 0.25em;
-
-	&:focus {
-		outline: 0;
-	}
-
-	.course {
-		padding: $semester-edge-padding;
-		border-bottom: $material-divider;
-
-		&:last-child {
-			border-bottom: 0;
-		}
-
-		&:hover {
-			background-color: color('gray', '100');
-		}
-	}
-}

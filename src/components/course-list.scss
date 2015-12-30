@@ -1,0 +1,27 @@
+@import '../base/variables';
+@import './semester';
+
+.course-list {
+	min-height: 30px;
+	padding-bottom: 0.25em;
+
+	&:focus {
+		outline: 0;
+	}
+
+	.list-item {
+		border-bottom: $material-divider;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+
+	.course {
+		padding: $semester-edge-padding;
+
+		&:hover {
+			background-color: color('gray', '100');
+		}
+	}
+}
