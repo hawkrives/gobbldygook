@@ -7,15 +7,14 @@ import List from './list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 
-// import './course-list.scss'
+import './course-list.scss'
 
 
 export default function CourseList(props) {
 	let courseObjects = map(props.courses, (course, i) =>
 		course.error
-		? <li><MissingCourse key={course.clbid} clbid={course.clbid} error={course.error} /></li>
-		: <li><Course
-			key={course.clbid}
+		? <li key={course.clbid}><MissingCourse clbid={course.clbid} error={course.error} /></li>
+		: <li key={course.clbid}><Course
 			index={i}
 			actions={props.actions}
 			course={course}
@@ -27,7 +26,7 @@ export default function CourseList(props) {
 	let emptySlots = []
 	if (props.creditCount < props.availableCredits) {
 		const minimumExtraCreditRange = range(Math.floor(props.creditCount), props.availableCredits)
-		emptySlots = map(minimumExtraCreditRange, i => <EmptyCourseSlot key={`empty-${i}`} />)
+		emptySlots = map(minimumExtraCreditRange, i => <li key={`empty-${i}`}><EmptyCourseSlot /></li>)
 	}
 
 	return (
