@@ -40,13 +40,11 @@
 // Raised Button
 .button--raised {
 	@extend %button;
+	@include material-shadow;
 
 	background-color: color('white', '500');
 
-	@include material-shadow;
-
-	&:hover,
-	&:focus {
+	&:hover {
 		background-color: color('white', '600');
 	}
 	&:focus {
