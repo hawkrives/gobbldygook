@@ -1,5 +1,6 @@
 @import '../mixins/card';
 @import '../mixins/color';
+@import '../mixins/link-undecorated';
 
 .app-title {
 	text-align: center;
@@ -57,10 +58,11 @@
 
 .student-list-buttons {
 	width: 100%;
-}
-
-.student-list-buttons {
 	justify-content: center;
+
+	a {
+		@include link-undecorated;
+	}
 }
 
 .student-list--button {
