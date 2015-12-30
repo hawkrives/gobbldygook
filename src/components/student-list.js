@@ -9,6 +9,7 @@ import sortBy from 'lodash/collection/sortBy'
 import interpose from '../helpers/interpose'
 import fuzzysearch from 'fuzzysearch'
 
+import List from './list'
 import Button from './button'
 import Icon from './icon'
 
@@ -35,7 +36,7 @@ class StudentListItem extends Component {
 		const { student, isEditing } = this.props
 		const groupedStudies = groupBy(student.studies, s => s.type)
 		return (
-			<div className='student-list-item-container'>
+			<li className='student-list-item-container'>
 				{isEditing &&
 				<Button className='delete' type='flat' onClick={this.deleteStudent}>
 					<Icon name='ios-trash-outline' />
@@ -55,7 +56,7 @@ class StudentListItem extends Component {
 
 					<Icon className='student-list-item--go' name='ios-arrow-forward' />
 				</Link>
-			</div>
+			</li>
 		)
 	}
 }
@@ -103,9 +104,9 @@ export default class StudentList extends Component {
 			)
 
 		return (
-			<div className='student-list'>
+			<List className='student-list' type='plain'>
 				{studentObjects}
-			</div>
+			</List>
 		)
 	}
 }

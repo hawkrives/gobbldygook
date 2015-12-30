@@ -13,8 +13,8 @@ import EmptyCourseSlot from './empty-course-slot'
 export default function CourseList(props) {
 	let courseObjects = map(props.courses, (course, i) =>
 		course.error
-		? <MissingCourse key={course.clbid} clbid={course.clbid} error={course.error} />
-		: <Course
+		? <li><MissingCourse key={course.clbid} clbid={course.clbid} error={course.error} /></li>
+		: <li><Course
 			key={course.clbid}
 			index={i}
 			actions={props.actions}
@@ -22,7 +22,7 @@ export default function CourseList(props) {
 			student={props.student}
 			schedule={props.schedule}
 			conflicts={props.conflicts}
-		/>)
+		/></li>)
 
 	let emptySlots = []
 	if (props.creditCount < props.availableCredits) {
@@ -30,17 +30,11 @@ export default function CourseList(props) {
 		emptySlots = map(minimumExtraCreditRange, i => <EmptyCourseSlot key={`empty-${i}`} />)
 	}
 
-	let courseList = (
+	return (
 		<List className='course-list' type='plain'>
 			{courseObjects}
 			{emptySlots}
 		</List>
-	)
-
-	return (
-		<div className='course-list'>
-			{courseList}
-		</div>
 	)
 }
 CourseList.propTypes = {

@@ -19,10 +19,7 @@ export default class List extends Component {
 
 	render() {
 		const contents = React.Children.map(this.props.children, child =>
-			isValidElement(child) && child.type === 'li'
-				? cloneElement(child, {className: cx('list-item', child.props.className)})
-				: <li className='list-item'>{child}</li>
-		)
+			cloneElement(child, {...child.props, className: cx('list-item', child.props.className)}))
 
 		const className = cx('list', `list--${this.props.type}`, this.props.className)
 
