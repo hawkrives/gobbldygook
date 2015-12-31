@@ -3,10 +3,11 @@
 # Opt-in to the new Travis infrastructure
 sudo: false
 
+# Turned off until npm quits removing packages
 # Cache node_modules
-cache:
-  directories:
-    - node_modules
+# cache:
+#   directories:
+#     - node_modules
 
 # Send travis notifications to Slack
 notifications:
