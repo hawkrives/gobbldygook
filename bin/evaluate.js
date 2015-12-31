@@ -241,15 +241,22 @@ function proseify(requirement, name, path, depth=0) {
 
 const checkAgainstArea = ({courses, overrides}, args) => areaData => {
 	let result = {}
+	let path = []
 	if (args.path) {
+		path = [areaData.type, areaData.name].concat(args.path.split('.'))
 		result = compute(
-			get(areaData, args.path), {
-				path: [areaData.type, areaData.name].concat(args.path.split('.')),
-				courses, overrides})
+			get(areaData, args.path),
+			{
+				path,
+				courses,
+				overrides,
+			}
+		)
 	}
 
 	else {
 		result = evaluate({courses, overrides}, areaData)
+		path = [areaData.type, areaData.name]
 	}
 
 	if (args.json) {
@@ -259,10 +266,10 @@ const checkAgainstArea = ({courses, overrides}, args) => areaData => {
 		console.log(yaml.safeDump(result))
 	}
 	else if (args.prose) {
-		console.log(proseify(result, areaData.name, [areaData.type, areaData.name]))
+		console.log(proseify(result, areaData.name, path))
 	}
 	else if (args.summary) {
-		console.log(summarize(result, areaData.name, [areaData.type, areaData.name]))
+		console.log(summarize(result, areaData.name, path))
 	}
 
 	if (!result.computed) {
