@@ -1,4 +1,5 @@
 import {expect} from 'chai'
+import cloneDeep from 'lodash/lang/cloneDeep'
 import computeChunk, {computeModifier} from '../../src/area-tools/compute-chunk'
 import applyFilter from '../../src/area-tools/apply-filter'
 
@@ -153,6 +154,57 @@ describe('computeModifier', () => {
 			$what: 'course',
 			$from: 'filter',
 		})
+	})
+
+	it('counts, excluding a given course', () => {
+		const modifier = {
+			$besides: {$type: 'course', $course: {'department': ['CHEM'], 'number': 398}},
+			$count: {$num: 1, $operator: '$gte'},
+			$from: 'filter',
+			$type: 'modifier',
+			$what: 'course',
+		}
+
+		const req = {
+			filter: {
+				$type: 'filter',
+				$where: {
+					$type: 'qualification',
+					$key: 'department',
+					$operator: '$eq',
+					$value: {
+						$or: ['CHEM', 'REL'],
+						$type: 'boolean',
+					},
+				},
+			},
+			result: modifier,
+		}
+
+		let goodCourses = [
+			{department: ['REL'], number: 111},
+		]
+		goodCourses = applyFilter(req.filter, goodCourses)
+
+		const {computedResult: one} = computeModifier({expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: goodCourses, dirty: new Set()})
+		expect(one).to.be.true
+
+		let badCourses = [
+			{department: ['CHEM'], number: 398},
+		]
+		badCourses = applyFilter(req.filter, badCourses)
+
+		const {computedResult: two} = computeModifier({expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: badCourses, dirty: new Set()})
+		expect(two).to.be.false
+
+		let moreGoodCourses = [
+			{department: ['CHEM'], number: 398},
+			{department: ['REL'], number: 111},
+		]
+		moreGoodCourses = applyFilter(req.filter, moreGoodCourses)
+
+		const {computedResult: three} = computeModifier({expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: badCourses, dirty: new Set()})
+		expect(three).to.be.true
 	})
 
 	it('checks for <things> from the given where-clause', () => {

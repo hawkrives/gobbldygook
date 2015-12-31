@@ -263,21 +263,6 @@ Of
     }
 
 
-Besides
-  = count:Counter _
-    what:('course' / 'credit')
-    OptionalS _ 'besides' _
-    course:Course
-    {
-      return {
-        $type: 'besides',
-        $course: course,
-        $count: count,
-        $what: what,
-      }
-    }
-
-
 ChildList  // select a few requirements to apply the modifier to.
   = OpenParen _ reqs:(
     val:Reference
@@ -293,7 +278,7 @@ Modifier
         'course'
       / 'credit'
       / 'department'
-    ) OptionalS _ 'from' _
+    ) OptionalS _ besides:Besides? _ 'from' _
     from:(
         'children' _ 'where' _ where:Qualifier { return { $from: 'children-where', $where: where, $children: '$all' } }
       / 'children'                             { return { $from: 'children', $children: '$all' }}
@@ -306,18 +291,26 @@ Modifier
     )
     {
       if (from.$from === 'where' && what === 'department') {
-        throw new Error('cannot use a modifier with "departments from courses where {}"')
+        throw new Error('cannot use a modifier with "departments"')
       }
       if (from.$from === 'children-where' && what !== 'course') {
         throw new Error('must use "courses from" with "children where"')
       }
-      return {
+      let result = {
         ...from,
         $type: 'modifier',
         $count: count,
         $what: what,
       }
+      if (besides) {
+        result.$besides = besides
+      }
+      return result
     }
+
+
+Besides
+  = 'besides' _ course:Course { return course }
 
 
 RequirementTitle

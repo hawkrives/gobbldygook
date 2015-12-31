@@ -272,7 +272,7 @@ result: three credits from filter
 
 A special type of modifier is the "besides" modifier. It counts any course *except* for the one described by the modifier.
 
-As such, `result: one course besides CHEM 398` would pass as long as the student has at least one course that is not CHEM 398.
+As such, `result: one course besides CHEM 398 from { ... }` would pass as long as the student has at least one course that is not CHEM 398.
 
 
 

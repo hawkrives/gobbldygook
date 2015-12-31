@@ -788,7 +788,7 @@ describe('parse hanson-string', () => {
 		it('will refuse to count departments from courses-where', () => {
 			expect(() => parse('one department from children')).not.to.throw()
 			expect(() => parse('one department from filter')).not.to.throw()
-			expect(() => parse('one department from courses where {a = b}')).to.throw('cannot use a modifier with "departments from courses where {}"')
+			expect(() => parse('one department from courses where {a = b}')).to.throw('cannot use a modifier with "departments"')
 		})
 		it('can count from children', () => {
 			expect(parse('one course from children')).to.deep.equal({
