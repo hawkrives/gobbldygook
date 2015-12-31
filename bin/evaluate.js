@@ -211,17 +211,21 @@ function stringifyFilter(filter) {
 	return resultString
 }
 
+function indent(indentWith, string) {
+	return string.split('\n').map(line => indentWith + line).join('\n')
+}
+
 function proseify(requirement, name, path, depth=0) {
 	let prose = ''
 	const hasChildren = some(keys(requirement), isRequirementName)
 	if (hasChildren) {
 		const subReqs = filter(pairs(requirement), ([k, _]) => isRequirementName(k))
-		prose = '\n' + map(subReqs, ([k, v]) => {
+		prose = map(subReqs, ([k, v]) => {
 			return proseify(v, k, path.concat(k), depth + 1)
 		}).join('\n')
 	}
 
-	let resultString = `${name}:\n`
+	let resultString = `${name}: `
 
 	if ('filter' in requirement) {
 		resultString += stringifyFilter(requirement.filter) + '\n'
@@ -237,8 +241,7 @@ function proseify(requirement, name, path, depth=0) {
 		resultString += requirement.message + '\n'
 	}
 
-	// return `${repeat(' ', depth * 2)}${name}: ${requirement.computed} ${hasChildren ? '' : listCourses(requirement)}${prose}`
-	return `${resultString}${prose}`
+	return indent(depth ? '  ' : '', `${resultString}${prose}`)
 }
 
 
