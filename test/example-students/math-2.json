@@ -1,0 +1,17 @@
+{
+    "areas": [{"type": "major", "name": "Mathematics", "revision": "2011-12"}],
+    "courses": [
+        {"department": ["MATH"], "number": 252, "name": "Abstract Algebra I"},
+        {"department": ["MATH"], "number": 230, "section": "B", "name": "Differential Equations I"},
+        {"department": ["MATH"], "number": 330, "section": "B", "name": "Differential Equations II"},
+        {"department": ["MATH"], "number": 128, "secion": "C", "name": "Honors Calculus II"},
+        {"department": ["MATH"], "number": 252, "name": "Real Analysis"},
+        {"department": ["STAT"], "number": 212, "name": "Statistics for the Sciences"},
+        {"department": ["MATH"], "number": 262, "name": "Probability Theory"},
+        {"department": ["MATH"], "number": 220, "section": "D", "name": "Linear Algebra"},
+        {"department": ["MATH"], "number": 390, "name": "Mathematics Practicum"}
+    ],
+    "overrides": {
+        "major.mathematics.basic.calculus i": true
+    }
+}
