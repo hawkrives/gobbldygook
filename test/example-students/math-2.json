@@ -1,4 +1,5 @@
 {
+    "pending": true,
     "areas": [{"type": "major", "name": "Mathematics", "revision": "2011-12"}],
     "courses": [
         {"department": ["MATH"], "number": 128, "secion": "C", "name": "Honors Calculus II"},

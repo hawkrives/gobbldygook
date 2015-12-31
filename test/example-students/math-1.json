@@ -1,0 +1,26 @@
+{
+    "pending": true,
+    "areas": [{"type": "major", "name": "Mathematics", "revision": "2011-12"}],
+    "courses": [
+        {"department": ["MATH"], "number": 125},
+        {"department": ["MATH"], "number": 126},
+        {"department": ["MATH"], "number": 247},
+        {"department": ["MATH"], "number": 248},
+        {"department": ["MATH"], "number": 255},
+        {"department": ["MATH"], "number": 371},
+        {"department": ["MATH"], "number": 379},
+        {"department": ["MATH"], "number": 380},
+        {"department": ["MATH"], "number": 382},
+        {"department": ["MATH"], "number": 384},
+        {"department": ["MATH"], "number": 386},
+        {"department": ["MATH"], "number": 388},
+        {"department": ["MATH"], "number": 398},
+        {"department": ["MATH"], "number": 999},
+        {"department": ["MATH"], "number": 128},
+        {"department": ["MATH"], "number": 220},
+        {"department": ["MATH"], "number": 226},
+        {"department": ["MATH"], "number": 230},
+        {"department": ["MATH"], "number": 124},
+        {"department": ["MATH"], "number": 125}
+    ]
+}
