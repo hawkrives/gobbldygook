@@ -88,7 +88,7 @@ export default function computeChunk({expr, ctx, courses, dirty}) {
 	// No matter how specific the matched course is, be it just dept/num or
 	// all of dept/num/sect/year/sem, it still needs to resolve down to an
 	// equivalent of `crsid`. I've done that via `simplifyCourse`, which takes
-	// a course and returns a string of "DEPT NUM".
+	// a course and returns a string of "DEPT NUM TYPE".
 
 	// Therefore, when we check a course, if it matches, we mark it as
 	// `_used`; otherwise, we leave it alone.
