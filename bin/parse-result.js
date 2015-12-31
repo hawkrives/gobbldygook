@@ -23,7 +23,7 @@ function parseString(args, string) {
 	}
 }
 
-exports.cli = function cli() {
+module.exports.cli = function cli() {
 	const args = nom
 		.option('json', {flag: true, help: 'Print the result as valid JSON'})
 		.option('yaml', {flag: true, help: 'Print the result as YAML'})
@@ -32,9 +32,17 @@ exports.cli = function cli() {
 		.parse()
 
 	if (args.stdin) {
-		getStdin().then(string => parseString(args, string))
+		getStdin()
+			.then(string => parseString(args, string))
+			.catch(err => {
+				throw err
+			})
 	}
 	else {
 		parseString(args, args.string)
 	}
 }
+
+process.on('unhandledRejection', reason => {
+	console.error(reason)
+})
