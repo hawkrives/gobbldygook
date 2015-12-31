@@ -1,10 +1,10 @@
-import {parse} from '../src/area-tools/parse-hanson-string'
-import nom from 'nomnom'
-import stringify from 'json-stable-stringify'
-import yaml from 'js-yaml'
-import util from 'util'
+const parse = require('../src/area-tools/parse-hanson-string').parse
+const nom = require('nomnom')
+const stringify = require('json-stable-stringify')
+const yaml = require('js-yaml')
+const util = require('util')
 
-export function cli() {
+exports.cli = function cli() {
 	const args = nom
 		.option('json', {flag: true, help: 'Print the result as valid JSON'})
 		.option('yaml', {flag: true, help: 'Print the result as YAML'})

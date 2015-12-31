@@ -1,3 +1,5 @@
+/* globals module */
+
 const departments = {
 	AR: 'ART',
 	AS: 'ASIAN',
@@ -16,7 +18,7 @@ const departments = {
 	SA: 'SOAN',
 }
 
-export default function expandDepartment(dept) {
+function expandDepartment(dept) {
 	if (dept in departments) {
 		return departments[dept]
 	}
@@ -24,3 +26,5 @@ export default function expandDepartment(dept) {
 		throw new TypeError(`expandDepartment(): "${dept}" is not a valid department shorthand`)
 	}
 }
+
+module.exports = {__esModule: true, default: expandDepartment}
