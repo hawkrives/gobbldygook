@@ -81,10 +81,17 @@ function stringifyCourse(expr) {
 	return condenseCourse(expr.$course)
 }
 
+function stringifyChildren(expr) {
+	if (expr.$children === '$all') {
+		return 'all children'
+	}
+	return `(${map(expr.$children, child => stringifyReference(child)).join(', ')})`
+}
+
 function stringifyModifier(expr) {
 	let modifier
 	if (expr.$from === 'children') {
-		modifier = `children [${expr.$children}]`
+		modifier = `${stringifyChildren(expr)}`
 	}
 
 	else if (expr.$from === 'filter') {
@@ -100,7 +107,7 @@ function stringifyModifier(expr) {
 	}
 
 	else if (expr.$from === 'children-where') {
-		modifier = `children [${expr.$children}], where {${stringifyWhereClause(expr.$where)}}`
+		modifier = `${stringifyChildren(expr)}, where {${stringifyWhereClause(expr.$where)}}`
 	}
 	return `${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} ${expr.$besides ? `[besides ${condenseCourse(expr.$besides.$course)}] ` : ''}from ${modifier}`
 }
