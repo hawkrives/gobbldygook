@@ -68,12 +68,15 @@ function stringifyChunk(expr) {
 	return resultString
 }
 
+const AND = chalk.bold('AND')
+const OR = chalk.bold('OR')
+
 function stringifyBoolean(expr) {
 	if ('$or' in expr) {
-		return `(${map(expr.$or, req => stringifyChunk(req)).join(' OR ')})`
+		return `(${map(expr.$or, req => stringifyChunk(req)).join(` ${OR} `)})`
 	}
 	else if ('$and' in expr) {
-		return `(${map(expr.$and, req => stringifyChunk(req)).join(' AND ')})`
+		return `(${map(expr.$and, req => stringifyChunk(req)).join(` ${AND} `)})`
 	}
 }
 
@@ -136,10 +139,10 @@ function stringifyQualification({$key, $operator, $value}) {
 		}
 		else if ($value.$type === 'boolean') {
 			if ('$or' in $value) {
-				return map($value.$or, val => stringifyQualification({$key, $operator, $value: val})).join(' OR ')
+				return map($value.$or, val => stringifyQualification({$key, $operator, $value: val})).join(` ${OR} `)
 			}
 			else if ('$and' in $value) {
-				return map($value.$and, val => stringifyQualification({$key, $operator, $value: val})).join(' AND ')
+				return map($value.$and, val => stringifyQualification({$key, $operator, $value: val})).join(` ${AND} `)
 			}
 			else {
 				throw new TypeError(`stringifyQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`)
