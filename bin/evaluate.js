@@ -14,7 +14,7 @@ import some from 'lodash/collection/some'
 import keys from 'lodash/object/keys'
 import sortBy from 'lodash/collection/sortBy'
 import plur from 'plur'
-// import chalk from 'chalk'
+import chalk from 'chalk'
 
 
 function condenseCourse(course) {
@@ -60,7 +60,12 @@ function stringifyChunk(expr) {
 		default:
 			throw new Error(`uh oh! unknown type "${expr.$type}"`)
 	}
-	return resultString + ('_result' in expr ? `: ${expr._result}` : '')
+
+	if ('_result' in expr) {
+		const color = expr._result ? chalk.green : chalk.red
+		return color(`${resultString}: ${expr._result}`)
+	}
+	return resultString
 }
 
 function stringifyBoolean(expr) {
