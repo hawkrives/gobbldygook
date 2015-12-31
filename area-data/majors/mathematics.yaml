@@ -1,7 +1,11 @@
 name: Mathematics
 type: Major
 revision: 2011-12
-result: all of (Basic, Transitions, Perspectives, Level III, Sequence, Math Courses)
+result:
+    Basic & Transitions & Perspectives & Level III & Sequence & Electives &
+    seven courses from (Transitions, Perspectives, Level III, Sequence, Electives) &
+    at most two courses from children where { department != MATH }
+
 
 Basic:
     Calculus I: MATH 120
@@ -10,11 +14,13 @@ Basic:
 
     result: all of ( Calculus I, Calculus II, Linear Algebra )
 
+
 Transitions:
     two of ( MATH 242, 244, 252 )
 
+
 Perspectives:
-    description: One course from three of the four perspectives.
+    description: One course from each of three of the four perspectives.
 
     A: one of (MATH 252, 352, 356)
     C: one of (MATH 244, 226, 230, 262, 340, 344)
@@ -23,14 +29,30 @@ Perspectives:
 
     result: three of (A, C, D, M)
 
+
+Electives:
+    any of (
+        MATH 226, 230, 232, 236, (238 | 239), 262, 266, 2XX,
+        (STAT 212 | 214 | 272), STAT 316,
+        CSCI 231,
+        one of (CHEM 371, ECON 385, (PHYS 374 | 375 | 376))
+    )
+
+
 Level III:
     description: Two Level III courses, at least one of which must be a Mathematics course.
 
-    declare:
-        math-level-3: MATH 330, 340, 344, 348, 351, 356, 364, 382, 384, 390, 396, 398
+    filter: only courses from (
+            MATH 330, 340, 344, 348, 351, 356,
+                 364, 382, 384, 390, 396, 398,
+            STAT 322,
+            CSCI 315, 333
+        )
 
-    result: two of ( $math-level-3, STAT 322, CSCI 315, CSCI 333 ) &
-            one of ( $math-level-3 )
+    result:
+        two courses from filter &
+        one course from filter where { department = MATH } &
+        one course besides MATH 390 from filter
 
 
 Sequence:
@@ -52,11 +74,3 @@ Sequence:
         Abstract Algebra,
         Geometry,
         Combinatorics )
-
-
-Math Courses:
-    six of (
-        MATH 120, 126, 128, 220, 242,
-             244, 252, 226, 230, 232,
-             236, 238, 239, 262, 266,
-             STAT 2XX)
