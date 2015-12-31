@@ -121,7 +121,7 @@ function stringifyOf(expr) {
 }
 
 function stringifyReference(expr) {
-	return `${expr.$requirement}`
+	return `*${expr.$requirement}`
 }
 
 function stringifyQualification({$key, $operator, $value}) {
