@@ -5,18 +5,38 @@ import compute from '../src/area-tools/compute'
 import get from 'lodash/object/get'
 import loadArea from './lib/load-area'
 import yaml from 'js-yaml'
+import isRequirementName from '../src/area-tools/is-requirement-name'
+import pairs from 'lodash/object/pairs'
+import map from 'lodash/collection/map'
+import filter from 'lodash/collection/filter'
+import repeat from 'lodash/string/repeat'
+
+
+function summarize(requirement, name, path, depth=0) {
+	const subReqs = filter(pairs(requirement), ([k, _]) => isRequirementName(k))
+
+	let prose = ''
+	if (subReqs.length) {
+		prose = '\n' + map(subReqs, ([k, v]) => {
+			return summarize(v, k, path.concat(k), depth + 1)
+		}).join('\n')
+	}
+
+	return `${repeat(' ', depth * 2)}${name}: ${requirement.computed}${prose}`
+}
 
 const checkAgainstArea = ({courses, overrides}, args) => areaData => {
+	let result = {}
 	if (args.path) {
-		const result = compute(
+		result = compute(
 			get(areaData, args.path), {
 				path: [areaData.type, areaData.name].concat(args.path.split('.')),
 				courses, overrides})
-		console.log(result)
-		return
 	}
 
-	const result = evaluate({courses, overrides}, areaData)
+	else {
+		result = evaluate({courses, overrides}, areaData)
+	}
 
 	if (args.json) {
 		console.log(JSON.stringify(result, null, 2))
@@ -29,8 +49,7 @@ const checkAgainstArea = ({courses, overrides}, args) => areaData => {
 		// console.log(proseify(result))
 	}
 	else if (args.summary) {
-		console.log('not implemented')
-		// console.log(summarize(result))
+		console.log(summarize(result, areaData.name, [areaData.type, areaData.name]))
 	}
 
 	if (!result.computed) {
