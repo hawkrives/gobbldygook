@@ -3,23 +3,38 @@ const nom = require('nomnom')
 const stringify = require('json-stable-stringify')
 const yaml = require('js-yaml')
 const util = require('util')
+const getStdin = require('get-stdin')
+
+function parseString(args, string) {
+	if (string.length === 0) {
+		throw new Error('Either --stdin or an argument is required')
+	}
+
+	const parsed = parse(string)
+
+	if (args.json) {
+		console.log(stringify(parsed, {space: 4}))
+	}
+	else if (args.yaml) {
+		console.log(yaml.safeDump(parsed))
+	}
+	else {
+		console.log(util.inspect(parsed, {depth: null}))
+	}
+}
 
 exports.cli = function cli() {
 	const args = nom
 		.option('json', {flag: true, help: 'Print the result as valid JSON'})
 		.option('yaml', {flag: true, help: 'Print the result as YAML'})
-		.option('string', {position: 0, required: true})
+		.option('stdin', {flag: true, help: 'Take input via STDIN'})
+		.option('string', {position: 0})
 		.parse()
 
-	const string = parse(args.string)
-
-	if (args.json) {
-		console.log(stringify(string, {space: 4}))
-	}
-	else if (args.yaml) {
-		console.log(yaml.safeDump(string))
+	if (args.stdin) {
+		getStdin().then(string => parseString(args, string))
 	}
 	else {
-		console.log(util.inspect(string, {depth: null}))
+		parseString(args, args.string)
 	}
 }
