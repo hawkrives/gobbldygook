@@ -8,6 +8,7 @@ import countCourses from './count-courses'
 import countCredits from './count-credits'
 import countDepartments from './count-departments'
 import every from 'lodash/collection/every'
+import excludeCourse from './exclude-course'
 import filterByWhereClause from './filter-by-where-clause'
 import find from 'lodash/collection/find'
 import findCourse from './find-course'
@@ -68,6 +69,9 @@ export default function computeChunk({expr, ctx, courses, dirty}) {
 	}
 	else if (type === 'where') {
 		({computedResult, matches, counted} = computeWhere({expr, courses}))
+	}
+	else if (type === 'besides') {
+		({computedResult, matches, counted} = computeBesides({expr, courses}))
 	}
 	else {
 		throw new TypeError(`computeChunk(): the type "${type}" is not a valid expression type.`)
@@ -349,5 +353,39 @@ export function computeWhere({expr, courses}) {
 		}),
 		matches: filtered,
 		counted: filtered.length,
+	}
+}
+
+
+/**
+ * Computes the result of a "besides" modifier expression variant.
+ * @param {Object} expr - the expression to process
+ * @param {Course[]} courses - the list of courses to search
+ * @returns {boolean} - the result of the modifier
+ */
+export function computeBesides({expr, courses}) {
+	assertKeys(expr, '$course', '$type', '$count', '$what')
+	const what = expr.$what
+
+	let filtered = excludeCourse(expr.$course, courses)
+	let numCounted = undefined
+
+	// count things
+	if (what === 'course') {
+		numCounted = countCourses(filtered)
+	}
+
+	else if (what === 'credit') {
+		numCounted = countCredits(filtered)
+	}
+
+	else {
+		throw new TypeError(`computeBesides(): "${what}" is not a valid source for a "besides" modifier`)
+	}
+
+	return {
+		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: numCounted, needs: expr.$count.$num}),
+		counted: numCounted,
+		matches: filtered,
 	}
 }

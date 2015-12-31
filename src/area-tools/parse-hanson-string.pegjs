@@ -28,6 +28,7 @@ Expression 'expression'
     / Occurrence
     / Of
     / Modifier
+    / Besides
     / Reference
   ) _
   { return expr }
@@ -262,6 +263,21 @@ Of
     }
 
 
+Besides
+  = count:Counter _
+    what:('course' / 'credit')
+    OptionalS _ 'besides' _
+    course:Course
+    {
+      return {
+        $type: 'besides',
+        $course: course,
+        $count: count,
+        $what: what,
+      }
+    }
+
+
 ChildList  // select a few requirements to apply the modifier to.
   = OpenParen _ reqs:(
     val:Reference
@@ -427,6 +443,7 @@ CourseSemester
 
 Else
   = .+
+
 
 UppercaseLetter
   = char:[A-Z]
