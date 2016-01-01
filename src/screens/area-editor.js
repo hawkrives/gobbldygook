@@ -9,7 +9,6 @@ import Button from '../components/button'
 import Icon from '../components/icon'
 import Separator from '../components/separator'
 import studentActions from '../flux/student-actions'
-import {buildAreaId} from '../models/study'
 
 import CodeMirror from 'react-codemirror'
 import 'codemirror/mode/yaml/yaml'
