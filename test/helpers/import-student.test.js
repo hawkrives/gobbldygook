@@ -9,23 +9,13 @@ import {
 } from '../../src/helpers/import-student'
 
 import parseHtml from '../../src/helpers/parse-html'
-import assign from 'lodash/object/assign'
 import fs from 'fs'
 import path from 'path'
-import glob from 'glob'
-const fileList = glob.sync(path.join(__dirname, './_support/import-student.*.html'))
-const files = fileList
-	.map(fn => [
-		path.basename(fn).replace('import-student.', '').replace('.html', ''),
-		fs.readFileSync(fn, 'utf-8'),
-	])
-	.reduce((obj, [fn, contents]) => {
-		return assign({}, obj, {[fn]: contents})
-	}, {})
+const file = filename => fs.readFileSync(path.join(__dirname, `./_support/import-student.${filename}.html`))
 
 describe('extractTermList', () => {
 	it('returns the list of terms', () => {
-		const html = parseHtml(files['term-20151'])
+		const html = parseHtml(file('term-20151'))
 		const actual = extractTermList(html)
 		const expected = [20153, 20152, 20151, 20143, 20142, 20141, 20133, 20132, 20131, 20123, 20122, 20121, 20119]
 		expect(actual).to.deep.equal(expected)
@@ -34,7 +24,7 @@ describe('extractTermList', () => {
 
 describe('extractStudentId', () => {
 	it('returns the student id', () => {
-		const html = parseHtml(files['term-20151'])
+		const html = parseHtml(file('term-20151'))
 		const actual = extractStudentId(html)
 		const expected = 101010
 		expect(actual).to.deep.equal(expected)
@@ -48,9 +38,9 @@ describe('extractStudentId', () => {
 	})
 })
 
-describe('extractTermList', () => {
+describe('getCoursesFromHtml', () => {
 	it('returns the list of courses', () => {
-		const html = parseHtml(files['term-20151'])
+		const html = parseHtml(file('term-20151'))
 		const actual = getCoursesFromHtml(html, 20151)
 		const expected = [
 			{
@@ -125,7 +115,7 @@ describe('extractTermList', () => {
 
 describe('getGraduationInformation', () => {
 	it('extracts information about the degrees', () => {
-		const html = parseHtml(files['degree-audit'])
+		const html = parseHtml(file('degree-audit'))
 		const actual = getGraduationInformation(html)
 		const expected = [
 			{
