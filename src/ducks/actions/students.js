@@ -6,7 +6,6 @@ import uniq from 'lodash/array/uniq'
 import loadStudent from '../../helpers/load-student'
 import Student, {addScheduleToStudent} from '../../models/student'
 import Schedule from '../../models/schedule'
-import Study from '../../models/study'
 import {removeStudentFromCache} from '../../models/save-student'
 
 import {
@@ -124,8 +123,7 @@ export function changeSetting(studentId, key, value) {
 }
 
 
-export function addArea(studentId, areaQuery) {
-	let area = new Study(areaQuery)
+export function addArea(studentId, area) {
 	return { type: ADD_AREA, payload: {studentId, area} }
 }
 export function removeArea(studentId, areaQuery) {
