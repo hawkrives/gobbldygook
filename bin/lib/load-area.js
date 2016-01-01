@@ -39,7 +39,7 @@ export default async function loadArea({name, type, revision, source, isCustom})
 	let result
 	try {
 		// console.log(obj)
-		result = enhanceHanson(obj, {topLevel: true})
+		result = enhanceHanson(obj)
 	}
 	catch (err) {
 		console.error(`Problem enhancing area "${name}"`, err)

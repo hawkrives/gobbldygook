@@ -18,7 +18,7 @@ const quote = str => `"${str}"`
 
 let declaredVariables = {}
 
-export default function enhanceHanson(data, {topLevel=false}={}) {
+export default function enhanceHanson(data, {topLevel=true}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
 	// 3. throws if it encounters any lowercase keys not in the whitelist
