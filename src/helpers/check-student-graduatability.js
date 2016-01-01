@@ -14,8 +14,8 @@ import getStudentCourses from './get-student-courses'
  * @returns {Promise} - the promise of knowledge
  * @promise GraduatabilityPromise
  * @fulfill {Object} - The details of the students graduation prospects.
- *    {boolean} graduatability
- *    {object} areaDetails
+ *    {boolean} canGraduate
+ *    {object} details
  */
 export default async function checkStudentGraduatability(student) {
 	const areaPromises = map(student.studies,
