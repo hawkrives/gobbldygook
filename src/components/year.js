@@ -8,7 +8,6 @@ import includes from 'lodash/collection/includes'
 import Button from './button'
 import Semester from './semester'
 
-import isCurrentYear from '../helpers/is-current-year'
 import expandYear from '../helpers/expand-year'
 import semesterName from '../helpers/semester-name'
 import findFirstAvailableSemester from '../helpers/find-first-available-semester'
@@ -37,7 +36,8 @@ export default class Year extends Component {
 	}
 
 	removeYear = () => {
-		const scheduleIds = filter(pluck(this.props.student.schedules, 'id'), isCurrentYear(this.props.year))
+		const thisYearSchedules = filter(this.props.student.schedules, s => s.year === parseInt(this.props.year))
+		const scheduleIds = pluck(thisYearSchedules, 'id')
 
 		this.props.actions.destroySchedules(this.props.student.id, scheduleIds)
 	}
