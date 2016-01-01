@@ -2,6 +2,7 @@ import filter from 'lodash/collection/filter'
 import flatten from 'lodash/array/flatten'
 import forEach from 'lodash/collection/forEach'
 import forOwn from 'lodash/object/forOwn'
+import includes from 'lodash/collection/includes'
 import map from 'lodash/collection/map'
 import mapKeys from 'lodash/object/mapKeys'
 import parseHtml from './parse-html'
@@ -238,21 +239,22 @@ export function getGraduationInformation(dom) {
 	let elements = selectAll('#bigbodymainstyle > td:first-of-type > *', dom)
 	let tagNames = elements.map(el => el.name)
 
-	let degree1AnchorIndex = tagNames.indexOf('a')
-	let degree1AuditInfo = elements[degree1AnchorIndex+2]
-	let degree1InfoTable = elements[degree1AnchorIndex+3]
-	let degree1 = extractInformationFromDegreeAudit(degree1AuditInfo, degree1InfoTable)
+	let degrees = []
+	// I believe that, if you have two degrees, there are two anchors: degree1 and degree2.
+	while (includes(tagNames, 'a')) {
+		let degreeAnchorIndex = tagNames.indexOf('a')
+		let degreeAuditInfo = elements[degreeAnchorIndex+2]
+		let degreeInfoTable = elements[degreeAnchorIndex+3]
+		let degree = extractInformationFromDegreeAudit(degreeAuditInfo, degreeInfoTable)
+		degrees.push(degree)
 
-	tagNames = tagNames.splice(degree1AnchorIndex)
-	let degree2
-	if (tagNames.indexOf('a') > 0) {
-		let degree2AnchorIndex = tagNames.indexOf('a') + degree1AnchorIndex
-		let degree2AuditInfo = elements[degree2AnchorIndex+2]
-		let degree2InfoTable = elements[degree2AnchorIndex+3]
-		degree2 = extractInformationFromDegreeAudit(degree2AuditInfo, degree2InfoTable)
+		// Once we've collected a degree, we remove every tag name up past the index of the currect <a>.
+		tagNames = tagNames.slice(degreeAnchorIndex + 1)
+		elements = elements.slice(degreeAnchorIndex + 1)
+		// If there's another degree, then let's do it again!
 	}
 
-	return [degree1, degree2]
+	return degrees
 }
 
 

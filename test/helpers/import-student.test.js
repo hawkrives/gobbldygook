@@ -139,7 +139,6 @@ describe('getGraduationInformation', () => {
 				'matriculation': 2012,
 				'graduation': 2016,
 			},
-			undefined,
 		]
 		expect(actual).to.deep.equal(expected)
 	})
