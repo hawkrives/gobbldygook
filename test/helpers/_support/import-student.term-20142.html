@@ -1,0 +1,298 @@
+
+
+<html><head>
+  <meta http-equiv="Expires" CONTENT="0">
+  <meta http-equiv="Cache-Control" CONTENT="no-cache">
+  <meta http-equiv="Pragma" CONTENT="no-cache">
+  <meta name="robots" content="noindex,nofollow" />
+
+<link rel="stylesheet" href="/js/jquery/humanity/jquery-ui-1.8.5.custom.css" type="text/css" media="all" />
+
+<script language="JavaScript">
+history.forward();
+</script>
+<script language="JavaScript" src="js/sis.js"></script>
+<script language="JavaScript" src="/js/jquery/jquery-1.7.1.min.js"></script>
+<script language="JavaScript" src="/js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
+<title>St. Olaf College Student Information System</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="sis-stylesheet.css" rel="stylesheet" type="text/css">
+
+
+    </head>
+    <body>
+	<div id="bigbodymainstyle">
+
+      <table class="topnav" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr><td valign="center" width="754" height="53" bgcolor="#C78812"><img src="images/header.gif" height="34" alt="St. Olaf College Student Information System">
+        
+	</td>
+	<td height="53" bgcolor="#C78812">&nbsp;</td></tr>
+
+	</tr>
+	<tr>     <!-- SPACER IMAGE --> 
+    <td><img src="/images/spacer.gif" width="754" height="1"></td> 
+  </tr> 
+	<tr>
+	<td nowrap align="right" bgcolor="#000000">
+	
+		<span style="color: white;">
+		
+			Signed in as:
+		Student M. Name                                   
+		
+		
+		</span>
+
+<!-- end debugging -->
+		</td><td align="right" height="20" bgcolor="#000000">
+		<form method="post" action="logout.cfm">
+		<input type="image" src="/images/logout_onblack.gif" border="0" width="45" height="15" alt="Logout">&nbsp;&nbsp;
+		</form>
+
+	
+	</td></tr></table>
+    
+
+    <form name="facourses" method="post" action="fa-courses.cfm">
+	<input type="hidden" name="type" value="">
+    </form>
+    <form name="cdstulist" method="post" action="cd-stulist.cfm">
+	<input type="hidden" name="type" value="">
+    </form>
+
+   
+    <table width="100%">
+      <td class="noprint" valign="top" width="150">
+	<table height="25" width="100%" border="0"><tr><td id="navbarleft" align="center"><b>SIS Menu</b></td></tr></table>
+    	<table width="100%">
+		
+			<tr><td class="sis-leftsideheader">STUDENT</td></tr>
+			<tr><td class="sis-leftsidelinks" nowrap>
+			
+				&nbsp;<a accesskey="a" href="index.cfm">Holds &amp; Alerts</a>
+			
+			<br>
+    			&nbsp;<a class="sis-nounderline" href="st-courses.cfm">Courses &amp; Grades</a><br>
+			
+			&nbsp;<a class="sis-nounderline" href="st-registration3.cfm">Registration</a><br>
+    			&nbsp;<a class="sis-nounderline" href="st-financials.cfm">Financials</a><br>
+    			&nbsp;<a class="sis-nounderline" href="addresses.cfm">Personal</a><br>
+			
+			&nbsp;<a class="sis-nounderline" href="st-parentaccess.cfm">Permissions</a><br>
+
+    			&nbsp;<a class="sis-nounderline" href="st-forms.cfm">Forms &amp; Links</a><br>
+			</td></tr>
+    		
+    	</td></tr>
+
+	
+
+    	<tr><td></td></tr>
+	<tr><td class="sis-leftsideheader">TOOLS</td></tr>
+	<tr><td class="sis-leftsidelinks" nowrap>
+		
+		&nbsp;<a class="sis-nounderline" href="#" onClick="JavaScript:sis_classlab_openwindow(0, '20151');">Class &amp; Lab</a><br>
+		&nbsp;<a class="sis-nounderline" href="ei.cfm">Enrollments</a><br>
+		
+		&nbsp;<a class="sis-nounderline" href="JavaScript:sis_catalog_openwindow();">College Catalog</a><br>
+
+
+		
+
+		&nbsp;<a class="sis-nounderline" href="#" onClick="JavaScript:sis_gpacalculator_openwindow();">GPA Calculator</a><br>
+
+		
+
+
+    	</td></tr>
+
+	
+
+	<tr><td></td></tr>
+	<tr><td height="20" valign="middle" align="center" bgcolor="#000000">
+		<form method="post" action="logout.cfm">
+		<input type="image" src="/images/logout_onblack.gif" border="0" width="45" height="15" alt="Logout">
+		</form>
+
+
+
+
+	</table>
+      </td>
+      <td valign="top">
+	
+    <table class="noprint" height="25" width="100%" border="0"><tr><td style="border-bottom:1px solid black;" id="navbarright">&nbsp;</td></tr></table>
+    
+
+<script language="JavaScript">
+	if (document.getElementById('navbarright') != undefined) {
+		document.getElementById('navbarright').innerHTML = '<table width="100%" border="0"><tr><td><table border="0"><tr><td><a style="text-decoration: none;font-size:11px;color:blue;" href="index.cfm">Home</a></td><td nowrap style="font-size:11px;">&nbsp;&raquo;&nbsp;</td><td style="font-size:11px;"><form name="navform1" style="margin: 0; padding: 0;" method="post" action="/sis/st-courses.cfm"><input type="hidden" name="navbarindex" value="1"><input type="hidden" name="Y" value="11"><input type="hidden" name="FIELDNAMES" value="STNUM,SEARCHYEARTERM,X,Y"><input type="hidden" name="STNUM" value="101010 "><input type="hidden" name="X" value="18"><input type="hidden" name="SEARCHYEARTERM" value="20142"></form><a style="text-decoration: none;color:blue;" href="#" onClick="JavaScript:document.forms.navform1.submit();">Courses for Student M. Name</a></td></td></tr></table></td><td align="right"><b>Advisor:</b> Advisor, Name O.</td></tr></table>';
+	}
+</script>
+
+	<table border="0" width="100%">
+	<tr><td align="left">
+	<h3>Courses for Student M. Name</h3>
+	</td><td align="right" valign="bottom">
+		<form method="post" action="st-courses.cfm"
+			onSubmit="JavaScript:this.action=this.theaction.options[this.theaction.selectedIndex].value;">
+		<input type="hidden" name="stnum" value="101010 ">
+		<input type="hidden" name="preserve" value="noadd">
+		
+			<input type="hidden" name="searchyearterm" value="20142">
+		
+		<table border="0"><tr><td valign="middle">
+		    <select name="theaction">
+			
+
+<option selected  value="st-courses.cfm">Courses
+<option  value="st-grades.cfm">Grades
+<option  value="st-degreeaudit.cfm">Degree Audit
+
+<option  value="addresses.cfm">Personal
+
+<option  value="st-advising.cfm">Advising Information
+<option  value="st-gradapp.cfm">Graduation Application
+<option  value="st-hold-list.cfm">Holds
+
+		    </select>
+		</td><td valign="middle"><input type="image" src="images/go.gif"></td></tr></table>
+		</form>
+	</td>
+	</tr>
+	</table>
+
+<p>
+
+
+
+<form method="post" action="st-courses.cfm">
+<input type="hidden" name="stnum" value="101010 ">
+<table border="0" width="100%" cellpadding="5">
+<tr><td nowrap align="left"><b>Year/Term:</b></td><td><table><tr><td>
+	<select class="sis-formfont" name="searchyearterm">
+
+		
+			<option 
+				
+				value="20153">2015-2016, Semester 2 
+			<option 
+				
+				value="20152">2015-2016, Interim 
+			<option 
+				
+				value="20151">2015-2016, Semester 1 
+			<option 
+				
+				value="20143">2014-2015, Semester 2 
+			<option 
+				
+					selected
+					
+				value="20142">2014-2015, Interim 
+			<option 
+				
+				value="20141">2014-2015, Semester 1 
+			<option 
+				
+				value="20133">2013-2014, Semester 2 
+			<option 
+				
+				value="20132">2013-2014, Interim 
+			<option 
+				
+				value="20131">2013-2014, Semester 1 
+			<option 
+				
+				value="20123">2012-2013, Semester 2 
+			<option 
+				
+				value="20122">2012-2013, Interim 
+			<option 
+				
+				value="20121">2012-2013, Semester 1 
+			<option 
+				
+				value="20119">2011-2012, Non-St. Olaf 
+	</select>
+	</td><td>
+	<input type="image" src="images/go.gif">
+	</td></tr></table>
+</td>
+<td width="100%">&nbsp;</td>
+<td nowrap align="right"><b>Advisor:</b> <a href="JavaScript:sis_facinfo_openwindow('16583');">Advisor, Name O.</a></td>
+</tr>
+</table>
+</form>
+
+<p>
+
+
+
+<table cellpadding="2" cellspacing="1" width="100%">
+  <tr>
+        <td colspan="5" class="sis-termheader" style="font-size: 14px;">Interim, 2014-2015</td></tr>
+
+<tr class="sis-tblheader">
+	<td class="sis-departmentname">Course #</td>
+	<td class="sis-center">L</td>
+	<td class="sis-coursename">Course Name</td>
+	<td class="sis-courselab">&frac12;</td>
+	<td class="sis-credits">Cr&nbsp;</td>
+	<td class="sis-center">GrOpt</td>
+	<td class="sis-gereqs">GE Reqs</td>
+	<td class="sis-meetingtime">Time(s)</td>
+	<td class="sis-meetinglocation">Locations(s)</td>
+	<td class="sis-instructorname">Instructor(s)</td>
+</tr>
+
+
+
+  <tr class="sis-line1">
+	<td class="sis-departmentname">CHEM 398B</td>
+	<td class="sis-center">&nbsp;</td>
+	<td nowrap class="sis-coursename">
+		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000099351');">IR/Software Development            </a></td>
+	<td class="sis-courselab">&nbsp; </td>
+	<td class="sis-credits">1.00&nbsp;</td>
+
+	<td class="sis-center">Graded</td>
+        <td class="sis-gereqs">&nbsp;</td>
+        <td nowrap class="sis-meetingtime">&nbsp;</td>
+        <td nowrap class="sis-meetinglocation">&nbsp;</td>
+	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;3090&apos;)">Hanson, Robert</a></td>
+  </tr>
+
+  
+
+<tr class="sis-tblheader">
+	<td colspan="4" align="right"><b>Total Credits:</b></td>
+	<td class="sis-credits">1.00&nbsp;</td>
+	<td colspan="5">&nbsp;</td>
+</tr>
+
+</table>
+
+
+
+
+
+
+<form name="showschedule" target="_blank" method="post" action="tool-cal.cfm">
+	<input type="hidden" name="CLBIDLIST" value="0000099351">
+</form>
+<a href="JavaScript:document.showschedule.submit();">View Weekly Schedule</a> [Printable In Chrome]
+
+</td></tr>
+</table>
+<p align="right" class="sis-smallformfont">Unauthorized Use Prohibited. This information is private. See <a href="JavaScript:sis_openwindow('http://www.stolaf.edu/offices/registrar/ferpa.html');">FERPA Guidelines</a>.</p>
+
+
+</div> 
+</body></html>
+
+	<div style="display: none;" id="fusiondebugging">
+	<div id="foo">
+	<div id="baz">
+
