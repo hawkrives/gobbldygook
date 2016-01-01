@@ -6,7 +6,7 @@ import plur from 'plur'
 import includes from 'lodash/collection/includes'
 import find from 'lodash/collection/find'
 import filter from 'lodash/collection/filter'
-import map from 'lodash/collection/map'
+import pluck from 'lodash/collection/pluck'
 import semesterName from '../helpers/semester-name'
 import isCurrentSemester from '../helpers/is-current-semester'
 import countCredits from '../area-tools/count-credits'
@@ -27,7 +27,7 @@ import './semester.scss'
 function getSchedule(student, year, semester) {
 	return find(
 		filter(student.schedules, sched => sched.active),
-		sched => (sched.year === year) && (sched.semester === semester))
+		isCurrentSemester(year, semester))
 }
 
 // Implements the drag source contract.
@@ -99,11 +99,10 @@ class Semester extends Component {
 	}
 
 	removeSemester = () => {
-		const scheduleIds = map(
-			filter(this.props.student.schedules, isCurrentSemester(this.props.year, this.props.semester)),
-			sched => sched.id)
+		const thisSemesterSchedules = filter(this.props.student.schedules, isCurrentSemester(this.props.year, this.props.semester))
+		const scheduleIds = pluck(thisSemesterSchedules, 'id')
 
-		this.props.actions.destroySchedules(this.props.student.id, scheduleIds)
+		this.props.actions.destroySchedules(this.props.student.id, ...scheduleIds)
 	}
 
 	initiateSearch = schedule => {
