@@ -14,6 +14,6 @@ export function cli() {
 
 	const data = fs.readFileSync(args.filename, {encoding: 'utf-8'})
 	const obj = yaml.safeLoad(data)
-	const enhanced = enhanceHanson(obj, {topLevel: true})
+	const enhanced = enhanceHanson(obj)
 	console.log(JSON.stringify(enhanced, null, 2))
 }

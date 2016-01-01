@@ -38,7 +38,7 @@ export function cli() {
 			process.stdout.write(`, loading`)
 			const obj = yaml.safeLoad(data)
 			process.stdout.write(`, enhancing\n`)
-			const enhanced = enhanceHanson(obj, {topLevel: true})
+			const enhanced = enhanceHanson(obj)
 			const outputFile = filename.replace(inDir, outDir).replace('.yaml', '.json')
 			mkdirp.sync(path.dirname(outputFile))
 			process.stdout.write(`writing to ${outputFile}\n`)

@@ -45,7 +45,7 @@ export function cli() {
 	const logger = loggers[args.output]
 
 	if (args['parse']) {
-		const enhanced = enhanceHanson(obj, {topLevel: true})
+		const enhanced = enhanceHanson(obj)
 		logger(enhanced)
 	}
 	else {
