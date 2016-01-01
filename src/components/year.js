@@ -39,7 +39,7 @@ export default class Year extends Component {
 		const thisYearSchedules = filter(this.props.student.schedules, s => s.year === parseInt(this.props.year))
 		const scheduleIds = pluck(thisYearSchedules, 'id')
 
-		this.props.actions.destroySchedules(this.props.student.id, scheduleIds)
+		this.props.actions.destroySchedules(this.props.student.id, ...scheduleIds)
 	}
 
 	render() {
