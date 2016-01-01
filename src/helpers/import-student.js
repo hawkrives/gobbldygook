@@ -1,9 +1,18 @@
-import cheerio from 'cheerio'
 import flatten from 'lodash/array/flatten'
 import map from 'lodash/collection/map'
 import forOwn from 'lodash/object/forOwn'
+import forEach from 'lodash/collection/forEach'
 import {status, text, classifyFetchErrors} from './fetch-helpers'
 import {AuthError, NetworkError} from './errors'
+import parseHtml from './parse-html'
+import {selectAll, selectOne} from 'css-select'
+import util from 'util'
+import serializer from 'dom-serializer'
+import partition from 'lodash/collection/partition'
+import zipObject from 'lodash/array/zipObject'
+import unzip from 'lodash/array/unzip'
+import filter from 'lodash/collection/filter'
+import mapKeys from 'lodash/object/mapKeys'
 
 const COURSES_URL = 'https://www.stolaf.edu/sis/st-courses.cfm'
 const DEGREE_AUDIT_URL = 'https://www.stolaf.edu/sis/st-degreeaudit.cfm'
@@ -13,7 +22,7 @@ const fetchHtml = (...args) => fetch(...args).then(status).then(text).then(html)
 
 
 function html(text) {
-	return cheerio.load(text)
+	return parseHtml(text)
 }
 
 function buildFormData(obj) {
@@ -24,66 +33,92 @@ function buildFormData(obj) {
 	return formData
 }
 
-function getItemsFromCell(sisCell) {
-	return Array.from(sisCell.children())
-		.map(item => item.text().trim())
-		.filter(item => item.length)
+function getText(elems) {
+	return getTextItems(elems).join('')
+}
+
+function getTextItems(elems) {
+	if (elems.children) {
+		elems = elems.children
+	}
+	if (!elems) {
+		return []
+	}
+
+	let ret = []
+
+	forEach(elems, elem => {
+		if (elem.type === 'text') {
+			ret = ret.concat(elem.data.trim())
+		}
+		else if (elem.children && elem.type !== 'comment') {
+			ret = ret.concat(getText(elem.children))
+		}
+	})
+
+	return ret.filter(s => s.length)
 }
 
 function removeInternalWhitespace(text) {
-	return text.replace(/\s+/, ' ')
+	return text.split(/\s+/).join(' ')
 }
 
 
-function extractTermList(html) {
-	let termSelector = html('[name=searchyearterm]')[0]
-	if (!termSelector) {
+export function extractTermList(dom) {
+	const termSelector = selectOne('[name=searchyearterm]', dom)
+	if (termSelector === null) {
 		return []
 	}
-	return Array.from(termSelector.attr('options')).map(opt => Number(opt.value))
+
+	const options = selectAll('option', termSelector)
+	if (!options.length) {
+		return []
+	}
+
+	return options.map(opt => Number(opt.attribs.value))
 }
 
 
-function extractStudentId(html) {
-	let idElement = html('[name=stnum]')[0]
+export function extractStudentId(dom) {
+	let idElement = selectOne('[name=stnum]', dom)
 	if (!idElement) {
 		return null
 	}
-	return Number(idElement.text().trim())
+	return Number(idElement.attribs.value)
 }
 
 
 function convertRowToCourse(term, sisRow) {
 	// the columns go: deptnum, lab, name, halfsemester, credits, passfail, gereqs, times, locations, instructors
 
-	// returns a string like 20151 CSCI 273 L
-	// wait, what returns this string?
+	let tableRow = selectAll('> td', sisRow)
+	let clbid = Number(selectOne('.sis-coursename > a', sisRow).attribs.href.replace(/JavaScript:sis_coursedesc\('(\d*)'\);/, '$1'))
 
-	let tableRow = sisRow.children()
 	return {
-		term: term,
-		deptnum: removeInternalWhitespace(tableRow[0].text().trim()),
-		lab: tableRow[1].text().trim() === 'L' ? true : false,
-		name: tableRow[2].text().trim(),
+		term,
+		clbid,
+		deptnum: removeInternalWhitespace(getText(tableRow[0])),
+		lab: getText(tableRow[1]) === 'L' ? true : false,
+		name: getText(tableRow[2]),
 		// halfsemester: tableRow[3],
-		credits: Number(tableRow[4].text().trim()),
-		gradetype: tableRow[5].text().trim(),
-		gereqs: getItemsFromCell(tableRow[6]) || [],
-		times: getItemsFromCell(tableRow[7]).map(removeInternalWhitespace) || [],
-		locations: getItemsFromCell(tableRow[8]) || [],
-		instructors: getItemsFromCell(tableRow[9]) || [],
+		credits: Number(getText(tableRow[4])),
+		gradetype: getText(tableRow[5]),
+		gereqs: getTextItems(tableRow[6]) || [],
+		times: getTextItems(tableRow[7]).map(removeInternalWhitespace) || [],
+		locations: getTextItems(tableRow[8]) || [],
+		instructors: getTextItems(tableRow[9]) || [],
 	}
 }
 
 
-function getCoursesFromHtml(html, term) {
-	let courseRows = Array.from(html('.sis-tblheader').parent().children()).slice(2, -1)
+export function getCoursesFromHtml(dom, term) {
+	let courseRows = selectAll('.sis-line1, .sis-line2', dom)
 
-	if (!courseRows) {
+	if (!courseRows.length) {
 		return []
 	}
 
-	return Array.from(courseRows).map(row => convertRowToCourse(term, row))
+	return courseRows.map(row => convertRowToCourse(term, row))
 }
 
 
@@ -99,18 +134,112 @@ function collectAllCourses(studentId, terms) {
 	return Promise.all(map(terms, term => getCourses(studentId, term)))
 }
 
-function extractAdvisor(html) {}
-function extractStudentName(html) {}
-function extractMatriculation(html) {}
-function extractGraduation(html) {}
-function extractAreas(html) {}
+function extractInformationFromDegreeAudit(auditInfo, infoTable) {
+	let [degreeType] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
+	if (degreeType === 'B.A.') {
+		degreeType = 'Bachelor of Arts'
+	}
+	else if (degreeType === 'B.M.') {
+		degreeType = 'Bachelor of Music'
+	}
+
+	let [info, areas] = selectAll('table table', infoTable)
+
+	let infoText = map(selectAll('td', info), getText)
+	let infoKeysValues = partition(infoText, (_, i) => !(i % 2))
+	info = zipObject(unzip(infoKeysValues))
+	info = mapKeys(info, (val, key) => key.replace(':', '').toLowerCase())
+
+	info.advisor = info.advisor.replace(/\s-.*/, '')
+	info.graduation = Number(info['class year'])
+	delete info['class year']
+	info.matriculation = Number(info['curriculum year'])
+	delete info['curriculum year']
+
+	areas = map(selectAll('td', areas), getText)
+	let majors         = filter(areas, (item, i) => i % 3 === 0 && item.length)
+	let emphases       = filter(areas, (item, i) => i % 3 === 1 && item.length)
+	let concentrations = filter(areas, (item, i) => i % 3 === 2 && item.length)
+
+	return {
+		...info,
+		degree: degreeType,
+		majors,
+		emphases,
+		concentrations,
+	}
+}
+
+export function getGraduationInformation(dom) {
+	// #bigbodymainstyle
+	//   table (top navigation)
+	//   form
+	//   form
+	//   table (side navigation)
+	//   td (degree audits)
+	//     table (a thing?)
+	//     div.noprint (header + navigation dropdown)
+	//     a[name=degree1] (the anchor for the first degree)
+	//     table[width=100%] (the ehader for the degree audit – B.A. Degree Audit for Name)
+	//     p
+	//       font
+	//         b (responsibility paragraph)
+	//         <text> ("this is an unofficial audit")
+	//         p
+	//           table
+	//             tr
+	//               td
+	//                 table
+	//                   tr
+	//                     td
+	//                       table
+	//                         tr
+	//                           td, td (name, student name)
+	//                         tr
+	//                           td, td (advisor, name)
+	//                         tr
+	//                           td, td (class year, year)
+	//                         tr
+	//                           td, td (curriculum year, year)
+	//                         tr
+	//                           td, td (academic standing, quality)
+	//                     td
+	//                       table
+	//                         tr
+	//                           th ("Majors")
+	//                           th ("Emphases")
+	//                           th ("Concentrations")
+	//                         tr (this row is repeated as many times as needed)
+	//                           td (major)
+	//                           td (emphasis)
+	//                           td (concentration)
+
+	let elements = selectAll('#bigbodymainstyle > td:first-of-type > *', dom)
+	let tagNames = elements.map(el => el.name)
+
+	let degree1AnchorIndex = tagNames.indexOf('a')
+	let degree1AuditInfo = elements[degree1AnchorIndex+2]
+	let degree1InfoTable = elements[degree1AnchorIndex+3]
+	let degree1 = extractInformationFromDegreeAudit(degree1AuditInfo, degree1InfoTable)
+
+	tagNames = tagNames.splice(degree1AnchorIndex)
+	let degree2
+	if (tagNames.indexOf('a') > 0) {
+		let degree2AnchorIndex = tagNames.indexOf('a') + degree1AnchorIndex
+		let degree2AuditInfo = elements[degree2AnchorIndex+2]
+		let degree2InfoTable = elements[degree2AnchorIndex+3]
+		degree2 = extractInformationFromDegreeAudit(degree2AuditInfo, degree2InfoTable)
+	}
+
+	return [degree1, degree2]
+}
 
 
 export function checkIfLoggedIn() {
 	return fetchHtml(COURSES_URL).then(response => {
-		let errorMsg = response('.sis-error')[0]
+		let errorMsg = selectOne('.sis-error', response)
 		let badMsg = 'Sorry, your session has timed out; please login again.'
-		if (errorMsg && errorMsg.text().trim() === badMsg) {
+		if (errorMsg && getText(errorMsg) === badMsg) {
 			throw new AuthError('Not logged in. Please log into the SIS in another tab, then try again.')
 		}
 		else if (errorMsg) {
@@ -121,24 +250,18 @@ export function checkIfLoggedIn() {
 }
 
 
-function loadPages(html) {
-	return Promise.all([html, fetchHtml(DEGREE_AUDIT_URL)])
+function loadPages(dom) {
+	return Promise.all([dom, fetchHtml(DEGREE_AUDIT_URL)])
 }
 
 
-function beginDataExtraction([coursesPage, degreeAuditPage]) {
-	let studentId = extractStudentId(coursesPage)
-	let terms = extractTermList(coursesPage)
+function beginDataExtraction([coursesDom, degreeAuditDom]) {
+	let studentId = extractStudentId(coursesDom)
+	let terms = extractTermList(coursesDom)
 
 	return Promise.all([
 		collectAllCourses(studentId, terms),
-		{
-			advisor: extractAdvisor(degreeAuditPage),
-			name: extractStudentName(degreeAuditPage),
-			matriculation: extractMatriculation(degreeAuditPage),
-			graduation: extractGraduation(degreeAuditPage),
-			areasOfStudy: extractAreas(degreeAuditPage),
-		},
+		getGraduationInformation(degreeAuditDom),
 	])
 }
 
@@ -151,7 +274,7 @@ function flattenData([coursesByTerm, studentInfo]) {
 }
 
 
-export function getStudentInfo() {
+export default function getStudentInfo() {
 	if (!navigator.onLine) {
 		return Promise.reject(new NetworkError('The network is offline.'))
 	}
