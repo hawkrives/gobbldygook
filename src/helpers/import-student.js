@@ -170,48 +170,45 @@ function extractInformationFromDegreeAudit(auditInfo, infoTable) {
 
 export function getGraduationInformation(dom) {
 	// #bigbodymainstyle
-	//   table (top navigation)
+	//   table  (top navigation)
 	//   form
 	//   form
-	//   table (side navigation)
-	//   td (degree audits)
-	//     table (a thing?)
-	//     div.noprint (header + navigation dropdown)
-	//     a[name=degree1] (the anchor for the first degree)
-	//     table[width=100%] (the ehader for the degree audit – B.A. Degree Audit for Name)
-	//     p
+	//   table  (side navigation)
+	//   td  (degree audits)
+	//     table  (a thing?)
+	//     div.noprint  (header + navigation dropdown)
+	//     a[name=degree1]  (the anchor for the first degree)
+	//     table[width=100%]  (the header for the degree audit – B.A. Degree Audit for Name)
+	//       tr > td > h3
+	//     p  (info table)
 	//       font
-	//         b (responsibility paragraph)
-	//         <text> ("this is an unofficial audit")
+	//         b  (responsibility paragraph)
+	//         <text>  ("this is an unofficial audit")
 	//         p
 	//           table
 	//             tr
 	//               td
 	//                 table
 	//                   tr
-	//                     td
-	//                       table
-	//                         tr
-	//                           td, td (name, student name)
-	//                         tr
-	//                           td, td (advisor, name)
-	//                         tr
-	//                           td, td (class year, year)
-	//                         tr
-	//                           td, td (curriculum year, year)
-	//                         tr
-	//                           td, td (academic standing, quality)
-	//                     td
-	//                       table
-	//                         tr
-	//                           th ("Majors")
-	//                           th ("Emphases")
-	//                           th ("Concentrations")
-	//                         tr (this row is repeated as many times as needed)
-	//                           td (major)
-	//                           td (emphasis)
-	//                           td (concentration)
-
+	//                     td, td  (name, student name)
+	//                   tr
+	//                     td, td  (advisor, name)
+	//                   tr
+	//                     td, td  (class year, year)
+	//                   tr
+	//                     td, td  (curriculum year, year)
+	//                   tr
+	//                     td, td  (academic standing, quality)
+	//               td
+	//                 table
+	//                   tr
+	//                     th  ("Majors")
+	//                     th  ("Emphases")
+	//                     th  ("Concentrations")
+	//                   tr  (this row is repeated as many times as needed)
+	//                     td  (major)
+	//                     td  (emphasis)
+	//                     td  (concentration)
 	let elements = selectAll('#bigbodymainstyle > td:first-of-type > *', dom)
 	let tagNames = elements.map(el => el.name)
 
