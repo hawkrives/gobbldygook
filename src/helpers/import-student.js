@@ -157,7 +157,9 @@ function extractInformationFromDegreeAudit(auditInfo, infoTable) {
 	// `mapKeys` purpose is to remove the ':' from the end of the keys, and to lower-case the keys.
 	info = mapKeys(info, (val, key) => key.replace(':', '').toLowerCase())
 
-	info.advisor = info.advisor.replace(/\s-.*/, '')
+	// The advisor's name also includes their department. We don't care about the department, so we remove it.
+	info.advisor = info.advisor.replace(/\s-\s.*/, '')
+
 	// Now we're just cleaning up some of the longer key names.
 	info.graduation = Number(info['class year'])
 	delete info['class year']
