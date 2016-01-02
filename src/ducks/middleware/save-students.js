@@ -1,6 +1,6 @@
 import map from 'lodash/collection/map'
 import filter from 'lodash/collection/filter'
-import saveStudent from '../../models/save-student'
+import saveStudent from '../../helpers/save-student'
 import * as studentActions from '../constants/students'
 import includes from 'lodash/collection/includes'
 import values from 'lodash/object/values'

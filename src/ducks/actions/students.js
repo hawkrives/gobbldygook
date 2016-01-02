@@ -6,7 +6,7 @@ import uniq from 'lodash/array/uniq'
 import loadStudent from '../../helpers/load-student'
 import Student, {addScheduleToStudent} from '../../models/student'
 import Schedule from '../../models/schedule'
-import {removeStudentFromCache} from '../../models/save-student'
+import {removeStudentFromCache} from '../../helpers/save-student'
 
 import {
 	LOAD_STUDENTS,
