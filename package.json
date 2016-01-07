@@ -1,8 +1,8 @@
 {
-  "name": "sto-sis-time-parser",
+  "name": "stolaf-sis-timestring-parser",
   "description": "A parser for the St. Olaf SIS timestrings.",
   "version": "2.2.2",
-  "repository": "hawkrives/sto-sis-time-parser",
+  "repository": "StoDevX/sto-sis-time-parser",
   "author": "Hawken M. Rives",
   "license": "MIT",
   "main": "index.js",
