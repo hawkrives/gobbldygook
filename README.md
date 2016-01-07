@@ -1,4 +1,4 @@
-# sto-sis-time-parser
+# stolaf-sis-timestring-parser
 
 [![Build Status](https://travis-ci.org/hawkrives/sto-sis-time-parser.svg?branch=master)](https://travis-ci.org/hawkrives/sto-sis-time-parser)
 
