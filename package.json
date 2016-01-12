@@ -160,7 +160,7 @@
     "style-loader": "0.13.0",
     "svg-sprite-generator": "0.0.7",
     "url-loader": "0.5.7",
-    "webpack": "1.12.10",
+    "webpack": "1.12.11",
     "webpack-dev-server": "1.14.0",
     "worker-loader": "0.7.0"
   }
