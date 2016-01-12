@@ -129,7 +129,7 @@
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
     "get-stdin": "5.0.1",
-    "glob": "6.0.3",
+    "glob": "6.0.4",
     "graceful-fs": "4.1.2",
     "js-beautify": "1.5.10",
     "json-loader": "0.5.4",
