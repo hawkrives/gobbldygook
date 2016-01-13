@@ -102,7 +102,7 @@ class Semester extends Component {
 		const scheduleIds = pluck(thisSemesterSchedules, 'id')
 
 		this.props.actions.destroySchedules(this.props.student.id, ...scheduleIds)
-	}
+	};
 
 	initiateSearch = schedule => {
 		const query = {
@@ -112,7 +112,7 @@ class Semester extends Component {
 			}),
 		}
 		this.context.router.push({pathname: this.context.location.pathname, query})
-	}
+	};
 
 	render() {
 		// console.log('Semester.render()')

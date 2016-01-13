@@ -29,7 +29,7 @@ class StudentListItem extends Component {
 	deleteStudent = ev => {
 		ev.preventDefault()
 		this.props.actions.destroyStudent(this.props.student.id)
-	}
+	};
 
 	render() {
 		// console.log('StudentListItem#render')

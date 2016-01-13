@@ -337,25 +337,25 @@ export default class CourseSearcherContainer extends Component {
 			ga('send', 'event', 'search_query', 'submit', this.state.queryString, 1)
 			this.query(this.state.queryString)
 		}
-	}
+	};
 
 	onQueryChange = ev => {
 		this.setState({queryString: ev.target.value})
-	}
+	};
 
 	onKeyDown = ev => {
 		if (ev.keyCode === 13) {
 			this.onQuerySubmit()
 		}
-	}
+	};
 
 	onSortChange = ev => {
 		this.setState({sortBy: ev.target.value})
-	}
+	};
 
 	onGroupByChange = ev => {
 		this.setState({groupBy: ev.target.value})
-	}
+	};
 
 	query = searchQuery => {
 		if ((searchQuery.length === 0 && !getPartialSearch(this.context.location)) || this.state.queryInProgress) {
@@ -390,7 +390,7 @@ export default class CourseSearcherContainer extends Component {
 			})
 
 		this.setState({queryInProgress: true, lastQuery: searchQuery})
-	}
+	};
 
 	render() {
 		let partialQuery = getPartialSearch(this.context.location)

@@ -29,22 +29,22 @@ export default class Sidebar extends Component {
 
 	goHome = () => {
 		this.context.router.push('/')
-	}
+	};
 
 	showShareSheet = () => {
 		const query = {...this.context.location.query, share: null}
 		this.context.router.push({pathname: this.context.location.pathname, query})
-	}
+	};
 
 	closeSearcher = () => {
 		const query = omit(this.context.location.query, ['partialSearch', 'search'])
 		this.context.router.push({pathname: this.context.location.pathname, query})
-	}
+	};
 
 	openSearcher = () => {
 		const query = {...this.context.location.query, search: null}
 		this.context.router.push({pathname: this.context.location.pathname, query})
-	}
+	};
 
 	render() {
 		const { actions, canUndo, canRedo, student, courses, areas } = this.props

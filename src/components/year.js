@@ -24,7 +24,7 @@ export default class Year extends Component {
 
 	canAddSemester = () => {
 		return findFirstAvailableSemester(this.props.student.schedules, this.props.year) <= 5
-	}
+	};
 
 	addSemester = () => {
 		const nextAvailableSemester = findFirstAvailableSemester(this.props.student.schedules, this.props.year)
@@ -33,14 +33,14 @@ export default class Year extends Component {
 			year: this.props.year, semester: nextAvailableSemester,
 			index: 1, active: true,
 		})
-	}
+	};
 
 	removeYear = () => {
 		const thisYearSchedules = filter(this.props.student.schedules, s => s.year === parseInt(this.props.year))
 		const scheduleIds = pluck(thisYearSchedules, 'id')
 
 		this.props.actions.destroySchedules(this.props.student.id, ...scheduleIds)
-	}
+	};
 
 	render() {
 		// console.log('Year.render()')

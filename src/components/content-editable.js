@@ -25,16 +25,16 @@ export default class ContentEditable extends Component {
 			ev.preventDefault()
 		}
 		this.props.onKeyDown && this.props.onKeyDown(ev)
-	}
+	};
 
 	handleFocus = ev => {
 		this.props.onFocus && this.props.onFocus(ev)
 		// this.ref.placeholder.style.display = 'none'
-	}
+	};
 
 	handleBlur = () => {
 		// this.ref.placeholder.style.display = 'inline'
-	}
+	};
 
 	handleChange = ev => {
 		const value = ev.target.textContent
@@ -48,7 +48,7 @@ export default class ContentEditable extends Component {
 		}
 
 		this.setState({lastValue: value})
-	}
+	};
 
 	render() {
 		// console.log('ContentEditable#render')

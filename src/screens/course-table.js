@@ -30,7 +30,7 @@ export default class CourseTable extends Component {
 			index: 1,
 			active: true,
 		})
-	}
+	};
 
 	render() {
 		// console.log('CourseTable.render()')

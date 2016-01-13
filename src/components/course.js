@@ -68,11 +68,11 @@ class Course extends Component {
 
 	closeModal = () => {
 		this.setState({isOpen: false})
-	}
+	};
 
 	openModal = () => {
 		this.setState({isOpen: true})
-	}
+	};
 
 	render() {
 		// console.log('Course#render')

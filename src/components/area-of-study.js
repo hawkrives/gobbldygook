@@ -191,17 +191,17 @@ export default class AreaOfStudyContainer extends Component {
 	startRemovalConfirmation = ev => {
 		ev.preventDefault()
 		this.setState({confirmRemoval: true})
-	}
+	};
 
 	endRemovalConfirmation = ev => {
 		ev.preventDefault()
 		this.setState({confirmRemoval: false})
-	}
+	};
 
 	toggleAreaExpansion = ev => {
 		ev.preventDefault()
 		this.setState({isOpen: !this.state.isOpen})
-	}
+	};
 
 	render() {
 		const { area } = this.props

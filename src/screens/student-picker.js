@@ -126,26 +126,26 @@ export default class StudentPickerContainer extends Component {
 	onAddStudent = () => {
 		const query = {...this.context.location.query, 'student-wizard': null}
 		this.context.router.push({pathname: this.context.location.pathname, query})
-	}
+	};
 
 	onOpenSearchOverlay = () => {
 		const query = {...this.context.location.query, 'search-overlay': null}
 		this.context.router.push({pathname: this.context.location.pathname, query})
-	}
+	};
 
 	onFilterChange = ev => {
 		this.setState({filterText: ev.target.value.toLowerCase()})
-	}
+	};
 
-	onGroupChange = () => {}
+	onGroupChange = () => {};
 
 	onSortChange = () => {
 		this.setState({sortBy: this.state.sortBy === 'modified' ? 'name' : 'modified'})
-	}
+	};
 
 	onToggleEditing = () => {
 		this.setState({isEditing: !this.state.isEditing})
-	}
+	};
 
 	render() {
 		// console.log('StudentPicker#render')

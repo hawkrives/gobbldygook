@@ -38,7 +38,7 @@ export default class DetailedCourse extends Component {
 
 	removeFromSemester = () => {
 		this.props.actions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.course.clbid)
-	}
+	};
 
 	moveToSchedule = ev => {
 		const targetScheduleId = ev.target.value
@@ -52,7 +52,7 @@ export default class DetailedCourse extends Component {
 		else {
 			this.props.actions.addCourse(this.props.student.id, targetScheduleId, this.props.course.clbid)
 		}
-	}
+	};
 
 	render() {
 		const { course } = this.props

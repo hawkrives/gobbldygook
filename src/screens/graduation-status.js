@@ -205,31 +205,31 @@ export default class GraduationStatusContainer extends Component {
 		this.setState(state => ({
 			showAreaPickerFor: {...state.showAreaPickerFor, [type]: true},
 		}))
-	}
+	};
 
 	endAddArea = ({ev, type}) => {
 		ev.preventDefault()
 		this.setState(state => ({
 			showAreaPickerFor: {...state.showAreaPickerFor, [type]: false},
 		}))
-	}
+	};
 
 	addAreaToStudent = ({ev, area}) => {
 		ev.preventDefault()
 		this.props.actions.addArea(this.props.student.id, area)
-	}
+	};
 
 	addOverrideToStudent = ({ev, path}) => {
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
 		this.props.actions.setOverride(this.props.student.id, codifiedPath, true)
-	}
+	};
 
 	removeOverrideFromStudent = ({ev, path}) => {
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
 		this.props.actions.setOverride(this.props.student.id, codifiedPath)
-	}
+	};
 
 	toggleOverrideOnStudent = ({ev, path}) => {
 		ev.preventDefault()
@@ -241,12 +241,12 @@ export default class GraduationStatusContainer extends Component {
 		else {
 			this.props.actions.setOverride(this.props.student.id, codifiedPath, true)
 		}
-	}
+	};
 
 	removeAreaFromStudent = ({ev, areaQuery}) => {
 		ev.preventDefault()
 		this.props.actions.removeArea(this.props.student.id, areaQuery)
-	}
+	};
 
 	render() {
 		// console.log('GraduationStatus#render')
