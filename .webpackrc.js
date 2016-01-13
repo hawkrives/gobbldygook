@@ -14,6 +14,7 @@ const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
 const buildFilename = require('./scripts/webpack/build-filename')
+const NotifierPlugin = require('webpack-notifier')
 
 const isProduction = (process.env.NODE_ENV === 'production')
 const isDev = (process.env.NODE_ENV === 'development')
@@ -106,6 +107,8 @@ const config = {
 			PRODUCTION: isProduction,
 			TESTING: isTest,
 		}),
+
+		new NotifierPlugin({title: `${pkg.name} build`}),
 	],
 
 	module: {
