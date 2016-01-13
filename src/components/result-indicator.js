@@ -1,20 +1,14 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 import cx from 'classnames'
 
-export default class ResultIndicator extends Component {
-	static propTypes = {
-		result: PropTypes.bool,
-	}
+export default function ResultIndicator({result}) {
+	return (
+		<span className={cx('result-indicator', result ? 'result-indicator--success' : 'result-indicator--failure')}>
+			{result ? '✓' : '×'}
+		</span>
+	)
+}
 
-	render() {
-		const symbol = this.props.result
-			? '✓'
-			: '×'
-
-		return (
-			<span className={cx('result-indicator', this.props.result ? 'result-indicator--success' : 'result-indicator--failure')}>
-				{symbol}
-			</span>
-		)
-	}
+ResultIndicator.propTypes = {
+	result: PropTypes.bool,
 }

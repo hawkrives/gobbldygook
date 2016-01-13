@@ -1,34 +1,35 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import findWordForProgress from '../helpers/find-word-for-progress'
 
 import './progress-bar.scss'
 
-export default class ProgressBar extends Component {
-	static propTypes = {
-		className: PropTypes.string,
-		colorful: PropTypes.bool,
-		max: PropTypes.number,
-		value: PropTypes.number,
-	}
+export default function ProgressBar(props) {
+	const {
+		value,
+		max = 1,
+		colorful,
+		className,
+	} = props
 
-	static defaultProps = {
-		max: 1,
-	}
+	const width = 100 * (value / max)
+	const progressWord = findWordForProgress(max, value)
+	const classNames = cx('progress-bar',
+		className,
+		{[progressWord]: colorful})
 
-	render() {
-		const width = 100 * (this.props.value / this.props.max)
-		const progressWord = findWordForProgress(this.props.max, this.props.value)
-		const classNames = cx('progress-bar',
-			this.props.className,
-			{[progressWord]: this.props.colorful})
-
-		return (
-			<div className={classNames}>
-				<div className='progress-bar--track' style={{height: '100%', width: '100%'}}>
-					<div className='progress-bar--value' style={{height: '100%', width: `${width}%`}} />
-				</div>
+	return (
+		<div className={classNames}>
+			<div className='progress-bar--track' style={{height: '100%', width: '100%'}}>
+				<div className='progress-bar--value' style={{height: '100%', width: `${width}%`}} />
 			</div>
-		)
-	}
+		</div>
+	)
+}
+
+ProgressBar.propTypes = {
+	className: PropTypes.string,
+	colorful: PropTypes.bool,
+	max: PropTypes.number,
+	value: PropTypes.number,
 }
