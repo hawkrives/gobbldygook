@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.2.4
+- Fix lodash pathnames
+
 ## 2.2.3
 - The dependency update release (lodash@4, babel@6.4, etc.)
 
