@@ -1,10 +1,10 @@
-const semesters = {
-	1: 'Fall',
-	2: 'Interim',
-	3: 'Spring',
-	4: 'Summer Session 1',
-	5: 'Summer Session 2',
-}
+const semesters = new Map([
+	[1, 'Fall'],
+	[2, 'Interim'],
+	[3, 'Spring'],
+	[4, 'Summer Session 1'],
+	[5, 'Summer Session 2'],
+])
 
 /**
  * Takes a semester number and returns the associated semester string.
@@ -13,5 +13,7 @@ const semesters = {
  * @returns {String} - the nice semester name
  */
 export default function semesterName(semester) {
-	return semesters[semester] || 'Unknown (' + semester + ')'
+	return semesters.has(semester)
+        ? semesters.get(semester)
+        : 'Unknown (' + semester + ')'
 }
