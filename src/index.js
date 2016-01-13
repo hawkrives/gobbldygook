@@ -8,7 +8,7 @@ Bluebird.config({
 })
 
 // enable the regenerator runtime
-require('babel-runtime/regenerator')
+import 'babel-runtime/regenerator'
 
 // Include fetch
 import 'isomorphic-fetch'

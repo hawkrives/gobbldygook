@@ -28,7 +28,6 @@ const saveStudentsMiddleware = store => next => action => {
 	const newState = store.getState()
 	const newStudents = newState.students.present
 
-
 	const studentsToSave = filter(newStudents, (student, id) => newStudents[id] !== oldStudents[id])
 	const studentSavingPromises = map(studentsToSave, student => {
 		return new Promise((resolve, reject) => {

@@ -1,4 +1,4 @@
-function findMissingNumberBinarySearch(arr) {
+export default function findMissingNumberBinarySearch(arr) {
 	// via http://stackoverflow.com/questions/11385896/find-the-first-missing-number-in-a-sorted-list
 	let len = arr.length
 
@@ -33,5 +33,3 @@ function findMissingNumberBinarySearch(arr) {
 	// there is no hole
 	return null
 }
-
-export default findMissingNumberBinarySearch

@@ -1,4 +1,3 @@
-
 export default function findWordForProgress(maxProgress, currentProgress) {
 	const progress = currentProgress / maxProgress
 
