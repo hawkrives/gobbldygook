@@ -7,6 +7,8 @@ import Toolbar from '../components/toolbar'
 import Modal from '../components/modal'
 import List from '../components/list'
 
+import encodeStudent from '../helpers/encode-student'
+
 function closeModal(location, router) {
 	const query = omit(location.query, ['share'])
 	router.push({pathname: location.pathname, query})
@@ -15,6 +17,8 @@ function closeModal(location, router) {
 export default function ShareSheet(props, context) {
 	const { student } = props
 	const boundCloseModal = () => closeModal(context.location, context.router)
+
+	const encoded = encodeStudent(student)
 
 	return <Modal
 		modalClassName='course course--modal'
@@ -34,11 +38,21 @@ export default function ShareSheet(props, context) {
 				<li>Download File</li>
 			</List>
 		</div>
+
+		<div>
+			<Button disabled={!encoded}>
+				<a
+					download={`${student.name}.gb-student.json`}
+					href={`data:text/json;charset=utf-8,${encoded}`}>
+					Download {student.name}
+				</a>
+			</Button>
+		</div>
 	</Modal>
 }
 
 ShareSheet.propTypes = {
-	student: PropTypes.object,
+	student: PropTypes.object.isRequired,
 }
 
 ShareSheet.contextTypes = {
