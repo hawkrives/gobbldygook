@@ -1,4 +1,3 @@
-import has from 'lodash/object/has'
 import reject from 'lodash/collection/reject'
 
 /**
@@ -10,7 +9,7 @@ import reject from 'lodash/collection/reject'
  * @returns {void}
  */
 export default function assertKeys(obj, ...listOfKeys) {
-	const missingKeys = reject(listOfKeys, key => has(obj, key))
+	const missingKeys = reject(listOfKeys, key => key in obj)
 	if (missingKeys.length) {
 		throw new ReferenceError(`assertKeys(): missing ${missingKeys.join(', ')} from ${JSON.stringify(obj)}`)
 	}

@@ -30,7 +30,7 @@ export default function collectMatches(expr) {
 
 	// next, we have the "run collectMatches on all my children" cases.
 	else if (type === 'requirement') {
-		if (expr.hasOwnProperty('result')) {
+		if ('result' in expr) {
 			matches = collectMatches(expr.result)
 		}
 		else {

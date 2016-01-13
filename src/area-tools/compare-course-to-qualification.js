@@ -20,59 +20,71 @@ export default function compareCourseToQualification(course, {$key, $operator, $
 	}
 
 	else if (isPlainObject($value)) {
-		if ($value.$type === 'function') {
-			// we compute the value of the function-over-where-query style
-			// operators earlier, in the filterByQualification function.
-			assertKeys($value, '$computed-value')
-			const simplifiedOperator = {$key, $operator, $value: $value['$computed-value']}
-			return compareCourseToQualification(course, simplifiedOperator)
-		}
-		else if ($value.$type === 'boolean') {
-			if ($value.hasOwnProperty('$or')) {
-				return some($value.$or, val => compareCourseToQualification(course, {$key, $operator, $value: val}))
-			}
-			else if ($value.hasOwnProperty('$and')) {
-				return every($value.$and, val => compareCourseToQualification(course, {$key, $operator, $value: val}))
-			}
-			else {
-				throw new TypeError(`compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`)
-			}
-		}
-		else {
-			throw new TypeError(`compareCourseToQualification(): "${$value.$type}" is not a valid type for a qualification's value.`)
-		}
+		compareCourseToQualificationViaObject(course, {$key, $operator, $value})
 	}
 
 	else {
-		// get the actual course out of the object
-		course = course.$course || course
-
-		// it's a static value; a number or string
-		if ($operator === '$eq') {
-			if (isArray(course[$key])) {
-				return includes(course[$key], $value)
-			}
-			return course[$key] === $value
-		}
-		else if ($operator === '$ne') {
-			if (isArray(course[$key])) {
-				return !includes(course[$key], $value)
-			}
-			return course[$key] !== $value
-		}
-		else if ($operator === '$lt') {
-			return course[$key] < $value
-		}
-		else if ($operator === '$lte') {
-			return course[$key] <= $value
-		}
-		else if ($operator === '$gt') {
-			return course[$key] > $value
-		}
-		else if ($operator === '$gte') {
-			return course[$key] >= $value
-		}
+		return compareCourseToQualificationViaOperator(course, {$key, $operator, $value})
 	}
 
 	throw new TypeError(`compareCourseToQualification: "${$operator} is not a valid operator"`)
+}
+
+
+function compareCourseToQualificationViaObject(course, {$key, $operator, $value}) {
+	if ($value.$type === 'function') {
+		// we compute the value of the function-over-where-query style
+		// operators earlier, in the filterByQualification function.
+		assertKeys($value, '$computed-value')
+		const simplifiedOperator = {$key, $operator, $value: $value['$computed-value']}
+		return compareCourseToQualification(course, simplifiedOperator)
+	}
+	else if ($value.$type === 'boolean') {
+		if ('$or' in $value) {
+			return some($value.$or, val =>
+				compareCourseToQualification(course, {$key, $operator, $value: val}))
+		}
+		else if ('$and' in $value) {
+			return every($value.$and, val =>
+				compareCourseToQualification(course, {$key, $operator, $value: val}))
+		}
+		else {
+			throw new TypeError(`compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`)
+		}
+	}
+	else {
+		throw new TypeError(`compareCourseToQualification(): "${$value.$type}" is not a valid type for a qualification's value.`)
+	}
+}
+
+
+function compareCourseToQualificationViaOperator(course, {$key, $operator, $value}) {
+	// get the actual course out of the object
+	course = course.$course || course
+
+	// it's a static value; a number or string
+	if ($operator === '$eq') {
+		if (isArray(course[$key])) {
+			return includes(course[$key], $value)
+		}
+		return course[$key] === $value
+	}
+	else if ($operator === '$ne') {
+		if (isArray(course[$key])) {
+			return !includes(course[$key], $value)
+		}
+		return course[$key] !== $value
+	}
+	else if ($operator === '$lt') {
+		return course[$key] < $value
+	}
+	else if ($operator === '$lte') {
+		return course[$key] <= $value
+	}
+	else if ($operator === '$gt') {
+		return course[$key] > $value
+	}
+	else if ($operator === '$gte') {
+		return course[$key] >= $value
+	}
 }

@@ -25,7 +25,7 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 	// 4. throws if it cannot find any of the required keys
 
 	if (typeof data !== 'object') {
-		throw new Error(`enhanceHanson(): data was not an object!`)
+		throw new Error(`enhanceHanson: data was not an object!`)
 	}
 
 	const baseWhitelist = ['result', 'message', 'declare']
@@ -35,7 +35,7 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 
 	forEach(keys(data), key => {
 		if (!isRequirementName(key) && !includes(whitelist, key)) {
-			throw new TypeError(`enhanceHanson(): only ${oxford(whitelist)} keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`)
+			throw new TypeError(`enhanceHanson: only ${oxford(whitelist)} keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`)
 		}
 	})
 
@@ -48,7 +48,7 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 		data.slug = data.slug || makeAreaSlug(data.name)
 
 		if (typeof data.revision !== 'string') {
-			throw new TypeError('enhanceHanson(): "revision" must be a string. Try wrapping it in single quotes.')
+			throw new TypeError('enhanceHanson: "revision" must be a string. Try wrapping it in single quotes.')
 		}
 	}
 
@@ -57,8 +57,6 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 		req => [req.replace(/.* \(([A-Z\-]+)\)$|.*$/, '$1'), req]))
 	const titles = zipObject(map(requirements,
 		req => [req.replace(/(.*?) +\([A-Z\-]+\)$|.*$/, '$1'), req]))
-
-	// console.log(abbreviations, titles)
 
 	const oldVariables = cloneDeep(declaredVariables)
 	declaredVariables = {}
@@ -93,7 +91,7 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 				value = parse(value, {abbreviations, titles})
 			}
 			catch (e) {
-				throw new SyntaxError(`enhanceHanson(): ${e.message} (in '${value}')`)
+				throw new SyntaxError(`enhanceHanson: ${e.message} (in '${value}')`)
 			}
 		}
 
@@ -102,7 +100,9 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 
 	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
 	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
-		throw new TypeError(`enhanceHanson(): could not find any of [${oneOfTheseKeysMustExist.map(quote).join(', ')}] in [${keys(data).map(quote).join(', ')}].`)
+		let requiredKeys = oneOfTheseKeysMustExist.map(quote).join(', ')
+		let existingKeys = keys(data).map(quote).join(', ')
+		throw new TypeError(`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`)
 	}
 
 	forEach(data.declare || [], (value, key) => {

@@ -19,12 +19,12 @@ export default function compute(requirement, {path, courses=[], overrides={}, di
 	let computed = false
 
 	// Apply a filter to the set of courses
-	if (requirement.hasOwnProperty('filter')) {
+	if ('filter' in requirement) {
 		courses = applyFilter(requirement.filter, courses)
 	}
 
 	// Now check for results
-	if (requirement.hasOwnProperty('result')) {
+	if ('result' in requirement) {
 		if (requirement.result === '') {
 			throw new SyntaxError(`compute(): requirement.result must not be empty (in ${JSON.stringify(requirement)})`)
 		}
@@ -32,7 +32,7 @@ export default function compute(requirement, {path, courses=[], overrides={}, di
 	}
 
 	// or ask for an override
-	else if (requirement.hasOwnProperty('message')) {
+	else if ('message' in requirement) {
 		computed = false
 	}
 

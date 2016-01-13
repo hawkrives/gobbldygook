@@ -120,14 +120,14 @@ export default function computeChunk({expr, ctx, courses, dirty}) {
 export function computeBoolean({expr, ctx, courses, dirty}) {
 	let computedResult = false
 
-	if (expr.hasOwnProperty('$or')) {
+	if ('$or' in expr) {
 		// we only want this to use the first "true" result. we don't need to
 		// continue to look after we find one, because this is an or-clause
 		const result = find(expr.$or, req => computeChunk({expr: req, ctx, courses, dirty}))
 		computedResult = Boolean(result)
 	}
 
-	else if (expr.hasOwnProperty('$and')) {
+	else if ('$and' in expr) {
 		const results = map(expr.$and, req => computeChunk({expr: req, ctx, courses, dirty}))
 		computedResult = every(results)
 	}
@@ -222,8 +222,14 @@ export function computeModifier({expr, ctx, courses}) {
 		filtered = filterByWhereClause(filtered, expr.$where)
 	}
 
+	else {
+		throw new TypeError(`computeModifier: "${expr.$from}" is not a valid $from value`)
+	}
+
+
 	filtered = map(filtered, course =>
-		course.hasOwnProperty('$course') ? course.$course : course)
+		'$course' in course ? course.$course : course)
+
 
 	if (expr.$besides) {
 		filtered = excludeCourse(expr.$besides, filtered)
@@ -241,6 +247,11 @@ export function computeModifier({expr, ctx, courses}) {
 	else if (what === 'credit') {
 		numCounted = countCredits(filtered)
 	}
+
+	else {
+		throw new TypeError(`computeModifier: "${what}" is not a valid thing to count`)
+	}
+
 
 	return {
 		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: numCounted, needs: expr.$count.$num}),
@@ -317,7 +328,7 @@ export function computeOf({expr, ctx, courses, dirty}) {
 export function computeReference({expr, ctx}) {
 	assertKeys(expr, '$requirement')
 
-	if (!(ctx.hasOwnProperty(expr.$requirement))) {
+	if (!(expr.$requirement in ctx)) {
 		throw new ReferenceError(`computeReference(): the requirement "${expr.$requirement}" does not exist in the provided requirement context`)
 	}
 
@@ -327,7 +338,7 @@ export function computeReference({expr, ctx}) {
 
 	// this needs to be checked because of the possibility of message-only keys.
 	// they don't have a `result` key.
-	if (target.hasOwnProperty('result')) {
+	if ('result' in target) {
 		resultObj.matches = collectMatches(target.result)
 	}
 

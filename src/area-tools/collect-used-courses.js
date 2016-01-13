@@ -10,7 +10,7 @@ export default function collectUsedCourses(expr) {
 	// anywhere in this object which have the `_used` property.
 
 	// check to see we're on a _used course
-	if (expr.$type === 'course' && expr.hasOwnProperty('_used') && expr.hasOwnProperty('$course')) {
+	if (expr.$type === 'course' && '_used' in expr && '$course' in expr) {
 		return expr.$course
 	}
 

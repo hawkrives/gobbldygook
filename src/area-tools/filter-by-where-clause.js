@@ -2,7 +2,6 @@ import assertKeys from './assert-keys'
 import compareCourseToQualification from './compare-course-to-qualification'
 import filter from 'lodash/collection/filter'
 import forEach from 'lodash/collection/forEach'
-import has from 'lodash/object/has'
 import isPlainObject from 'lodash/lang/isPlainObject'
 import max from 'lodash/collection/max'
 import min from 'lodash/collection/min'
@@ -31,7 +30,7 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 		// and-clauses become the result of applying each invocation to the
 		// result of the prior one. they are the list of unique courses which
 		// meet all of the qualifications.
-		if (has(clause, '$and')) {
+		if ('$and' in clause) {
 			let filtered = baseList
 			forEach(clause.$and, q => {
 				filtered = filterByWhereClause(filtered, q, distinct, fullList)
@@ -41,7 +40,7 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 
 		// or-clauses are the list of unique courses that meet one or more
 		// of the qualifications.
-		else if (has(clause, '$or')) {
+		else if ('$or' in clause) {
 			let filtrations = []
 			forEach(clause.$or, q => {
 				filtrations = filtrations.concat(filterByWhereClause(baseList, q, distinct))
@@ -54,13 +53,13 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 
 		// only 'and' and 'or' are currently supported.
 		else {
-			throw new TypeError(`filterByWhereClause(): neither $or nor $and could be found in ${JSON.stringify(clause)}`)
+			throw new TypeError(`filterByWhereClause: neither $or nor $and were present in ${JSON.stringify(clause)}`)
 		}
 	}
 
 	// where-clauses *must* be either a 'boolean' or a 'qualification'
 	else {
-		throw new TypeError(`filterByWhereClause(): wth kind of type is a "${clause.$type}" clause?`)
+		throw new TypeError(`filterByWhereClause: wth kind of type is a "${clause.$type}" clause?`)
 	}
 }
 
@@ -75,15 +74,15 @@ export function filterByQualification(list, qualification, distinct, fullList) {
 
 	if (isPlainObject(value)) {
 		if (value.$type === 'boolean') {
-			if (!value.hasOwnProperty('$or') && !value.hasOwnProperty('$and')) {
-				throw new TypeError(`compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify(value)}`)
+			if (!('$or' in value) && !('$and' in value)) {
+				throw new TypeError(`filterByQualification: neither $or nor $and were present in ${JSON.stringify(value)}`)
 			}
 		}
 		else if (value.$type === 'function') {
 			const func = qualificationFunctionLookup[value.$name]
 
 			if (!func) {
-				throw new ReferenceError(`filterByQualification(): ${value.$name} is not a valid function name.`)
+				throw new ReferenceError(`filterByQualification: ${value.$name} is not a valid function name.`)
 			}
 
 			const completeList = fullList || list
@@ -98,7 +97,7 @@ export function filterByQualification(list, qualification, distinct, fullList) {
 			value['$computed-value'] = computed
 		}
 		else {
-			throw new TypeError(`filterByQualification(): ${value.$type} is not a valid type for a query.`)
+			throw new TypeError(`filterByQualification: ${value.$type} is not a valid type for a query.`)
 		}
 	}
 
