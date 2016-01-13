@@ -1,5 +1,5 @@
-import some from 'lodash.some'
-import filter from 'lodash.filter'
+import some from 'lodash/some'
+import filter from 'lodash/filter'
 
 function checkOfferingForTimeConflict(main, alternate) {
 	// const altStartsAfterMain      = alternate.start >= main.start

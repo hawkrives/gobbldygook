@@ -1,4 +1,4 @@
-import map from 'lodash.map'
+import map from 'lodash/map'
 import daysOfTheWeek from './daysOfTheWeek'
 
 const daySequence = ['M', 'T', 'W', 'Th', 'F']

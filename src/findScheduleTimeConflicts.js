@@ -1,4 +1,4 @@
-import map from 'lodash.map'
+import map from 'lodash/map'
 import checkCoursesForTimeConflicts from './checkCoursesForTimeConflicts'
 
 export default function findScheduleTimeConflicts(courses) {

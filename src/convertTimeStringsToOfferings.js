@@ -1,8 +1,9 @@
-import forEach from 'lodash.foreach'
-import isArray from 'lodash.isarray'
-import merge from 'lodash.merge'
-import values from 'lodash.values'
-import zip from 'lodash.zip'
+import forEach from 'lodash/foreach'
+import isArray from 'lodash/isarray'
+import mergeWith from 'lodash/mergeWith'
+import assign from 'lodash/assign'
+import values from 'lodash/values'
+import zip from 'lodash/zip'
 import findDays from './findDays'
 import findTime from './findTime'
 
@@ -23,10 +24,10 @@ export default function convertTimeStringsToOfferings(course) {
 			let offering = {
 				day: day,
 				location: location,
-				times: [time],
+				times: [assign({}, time)],
 			}
 
-			merge(offerings[day], offering,
+			mergeWith(offerings[day], offering,
 				(a, b) => isArray(a) ? a.concat(b) : undefined)
 		})
 	})

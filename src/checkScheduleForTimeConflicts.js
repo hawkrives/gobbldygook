@@ -1,4 +1,4 @@
-import some from 'lodash.some'
+import some from 'lodash/some'
 import checkCoursesForTimeConflicts from './checkCoursesForTimeConflicts'
 
 export default function checkScheduleForTimeConflicts(courses) {
