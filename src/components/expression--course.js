@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import semesterName from '../helpers/semester-name'
 import {shrinkDept} from '../area-tools/convert-department'
+import map from 'lodash/collection/map'
 
 import './expression--course.scss'
 
@@ -20,7 +21,7 @@ export default class CourseExpression extends Component {
 	};
 
 	render() {
-		const department = this.props.department.map(shrinkDept).join('/')
+		const department = map(this.props.department, shrinkDept).join('/')
 
 		const international = this.props.international &&
 			<span className='course--international'>I</span>
