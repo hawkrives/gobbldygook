@@ -21,7 +21,7 @@ export default class AreaEditor extends Component {
 		className: PropTypes.string,
 		params: PropTypes.object.isRequired,
 		query: PropTypes.object.isRequired,
-	}
+	};
 
 	constructor() {
 		super()

@@ -21,11 +21,11 @@ export class App extends Component {
 		children: PropTypes.node.isRequired,
 		location: PropTypes.object.isRequired,
 		students: PropTypes.object.isRequired,
-	}
+	};
 
 	static childContextTypes = {
 		location: PropTypes.object,
-	}
+	};
 
 	getChildContext() {
 		return {

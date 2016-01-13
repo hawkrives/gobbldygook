@@ -34,7 +34,7 @@ export default class DetailedCourse extends Component {
 		course: PropTypes.object.isRequired,
 		schedule: PropTypes.object,
 		student: PropTypes.object,
-	}
+	};
 
 	removeFromSemester = () => {
 		this.props.actions.removeCourse(this.props.student.id, this.props.schedule.id, this.props.course.clbid)

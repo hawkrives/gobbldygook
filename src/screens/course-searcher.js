@@ -108,7 +108,7 @@ class CourseResultsList extends Component {
 		results: PropTypes.array.isRequired,
 		sortBy: PropTypes.oneOf(SORT_BY).isRequired,
 		student: PropTypes.object,
-	}
+	};
 
 	shouldComponentUpdate(nextProps) {
 		return compareProps(this.props, nextProps)
@@ -182,11 +182,11 @@ class CourseSearcher extends Component {
 		results: PropTypes.array.isRequired,
 		sortBy: PropTypes.oneOf(SORT_BY).isRequired,
 		student: PropTypes.object,
-	}
+	};
 
 	static defaultProps = {
 		queryError: '',
-	}
+	};
 
 	shouldComponentUpdate(nextProps) {
 		return compareProps(this.props, nextProps)
@@ -307,11 +307,11 @@ export default class CourseSearcherContainer extends Component {
 		closeSearcher: PropTypes.func.isRequired,
 		isHidden: PropTypes.bool,
 		student: PropTypes.object,
-	}
+	};
 
 	static contextTypes = {
 		location: React.PropTypes.object,
-	}
+	};
 
 	constructor() {
 		super()

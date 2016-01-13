@@ -104,12 +104,12 @@ export default class StudentPickerContainer extends Component {
 	static propTypes = {
 		actions: PropTypes.objectOf(PropTypes.func),
 		students: PropTypes.object,
-	}
+	};
 
 	static contextTypes = {
 		location: PropTypes.object.isRequired,
 		router: PropTypes.object.isRequired,
-	}
+	};
 
 	constructor() {
 		super()

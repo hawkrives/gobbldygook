@@ -20,7 +20,7 @@ export default class Year extends Component {
 		courses: PropTypes.arrayOf(PropTypes.object),
 		student: PropTypes.object.isRequired,
 		year: PropTypes.number.isRequired,
-	}
+	};
 
 	canAddSemester = () => {
 		return findFirstAvailableSemester(this.props.student.schedules, this.props.year) <= 5

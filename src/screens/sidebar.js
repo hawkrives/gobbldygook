@@ -20,12 +20,12 @@ export default class Sidebar extends Component {
 		canUndo: PropTypes.bool.isRequired,
 		courses: PropTypes.array.isRequired,
 		student: PropTypes.object.isRequired,
-	}
+	};
 
 	static contextTypes = {
 		location: PropTypes.object.isRequired,
 		router: PropTypes.object.isRequired,
-	}
+	};
 
 	goHome = () => {
 		this.context.router.push('/')

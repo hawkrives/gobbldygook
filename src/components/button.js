@@ -13,11 +13,11 @@ export default class Button extends Component {
 		style: PropTypes.object,
 		title: PropTypes.string,
 		type: PropTypes.oneOf(['flat', 'raised']).isRequired,
-	}
+	};
 
 	static defaultProps = {
 		type: 'flat',
-	}
+	};
 
 	shouldComponentUpdate(nextProps) {
 		return compareProps(this.props, nextProps)

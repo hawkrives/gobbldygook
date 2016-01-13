@@ -71,11 +71,11 @@ class Semester extends Component {
 		semester: PropTypes.number.isRequired,
 		student: PropTypes.object.isRequired,
 		year: PropTypes.number.isRequired,
-	}
+	};
 
 	static contextTypes = {
 		router: React.PropTypes.object.isRequired,
-	}
+	};
 
 	constructor() {
 		super()

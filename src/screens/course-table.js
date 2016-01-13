@@ -17,11 +17,11 @@ export default class CourseTable extends Component {
 		className: PropTypes.string,
 		courses: PropTypes.arrayOf(PropTypes.object),
 		student: PropTypes.object,
-	}
+	};
 
 	static defaultProps = {
 		student: {},
-	}
+	};
 
 	addYear = () => {
 		this.props.actions.addSchedule(this.props.student.id, {

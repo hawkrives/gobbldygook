@@ -1,9 +1,8 @@
 import React, {PropTypes, Component} from 'react'
 import cx from 'classnames'
 
+// from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 export default class ContentEditable extends Component {
-	// from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
-
 	static propTypes = {
 		className: PropTypes.string,
 		multiLine: PropTypes.bool,
@@ -13,13 +12,13 @@ export default class ContentEditable extends Component {
 		onKeyDown: PropTypes.func,
 		placeholder: PropTypes.string,
 		value: PropTypes.string,
-	}
+	};
 
 	static defaultProps = {
 		onChange: () => {},
 		multiLine: false,
 		value: '',
-	}
+	};
 
 	handleKeyDown = ev => {
 		if (!this.props.multiLine && ev.keyCode === 13) {

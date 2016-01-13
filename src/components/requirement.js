@@ -31,11 +31,11 @@ export default class Requirement extends Component {
 		result: PropTypes.object,
 		toggleOverride: PropTypes.func.isRequired,
 		topLevel: PropTypes.bool,
-	}
+	};
 
 	static defaultProps = {
 		topLevel: false,
-	}
+	};
 
 	shouldComponentUpdate(nextProps) {
 		return compareProps(this.props, nextProps)

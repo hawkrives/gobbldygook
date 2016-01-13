@@ -25,7 +25,7 @@ export default class AreaPicker extends Component {
 		removeArea: PropTypes.func.isRequired,
 		studentGraduation: PropTypes.number.isRequired,
 		type: PropTypes.string.isRequired,
-	}
+	};
 
 	constructor() {
 		super()

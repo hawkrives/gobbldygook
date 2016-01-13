@@ -25,13 +25,13 @@ export default class AreaOfStudyGroup extends Component {
 		student: PropTypes.object.isRequired,
 		toggleOverride: PropTypes.func.isRequired,
 		type: PropTypes.oneOf(values(areaTypeConstants)).isRequired,
-	}
+	};
 
 	static defaultProps = {
 		showAreaPicker: false,
 		studentId: '',
 		removeOverride: () => {},
-	}
+	};
 
 	render() {
 		return (

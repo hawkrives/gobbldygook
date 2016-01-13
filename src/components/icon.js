@@ -10,11 +10,11 @@ export default class Icon extends Component {
 		name: PropTypes.string.isRequired,
 		style: PropTypes.object,
 		type: PropTypes.oneOf(['block', 'inline']).isRequired,
-	}
+	};
 
 	static defaultProps = {
 		type: 'inline',
-	}
+	};
 
 	shouldComponentUpdate(nextProps) {
 		return compareProps(this.props, nextProps)

@@ -20,11 +20,11 @@ class StudentListItem extends Component {
 		actions: PropTypes.objectOf(PropTypes.func).isRequired,
 		isEditing: PropTypes.bool,
 		student: PropTypes.object.isRequired,
-	}
+	};
 
 	static defaultProps = {
 		isEditing: false,
-	}
+	};
 
 	deleteStudent = ev => {
 		ev.preventDefault()
@@ -69,14 +69,14 @@ export default class StudentList extends Component {
 		isEditing: PropTypes.bool,
 		sortBy: PropTypes.oneOf(['modified', 'name']),
 		students: PropTypes.object.isRequired,
-	}
+	};
 
 	static defaultProps = {
 		isEditing: false,
 		filter: '',
 		students: {},
 		actions: {},
-	}
+	};
 
 	render() {
 		// console.log('StudentList#render')

@@ -8,7 +8,7 @@ export default class CourseTitle extends Component {
 		name: PropTypes.string.isRequired,
 		title: PropTypes.string,
 		type: PropTypes.string,
-	}
+	};
 
 	shouldComponentUpdate(nextProps) {
 		return compareProps(this.props, nextProps)

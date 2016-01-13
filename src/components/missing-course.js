@@ -5,7 +5,7 @@ export default class MissingCourse extends Component {
 	static propTypes = {
 		clbid: PropTypes.number.isRequired,
 		error: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Error)]).isRequired,
-	}
+	};
 
 	render() {
 		return (<FakeCourse

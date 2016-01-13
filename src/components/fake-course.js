@@ -5,11 +5,11 @@ export default class FakeCourse extends Component {
 		className: PropTypes.string.isRequired,
 		details: PropTypes.string,
 		title: PropTypes.string.isRequired,
-	}
+	};
 
 	static defaultProps = {
 		details: 'no details',
-	}
+	};
 
 	render() {
 		// console.log('FakeCourse#render')

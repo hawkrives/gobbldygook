@@ -11,11 +11,11 @@ export default class BasicCourse extends Component {
 		children: PropTypes.node,
 		className: PropTypes.string,
 		course: PropTypes.object.isRequired,
-	}
+	};
 
 	static defaultProps = {
 		className: 'info-wrapper',
-	}
+	};
 
 	shouldComponentUpdate(nextProps) {
 		return compareProps(this.props, nextProps)

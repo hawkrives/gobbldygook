@@ -15,7 +15,7 @@ export default class Modal extends Component {
 		children: PropTypes.node.isRequired,
 		modalClassName: PropTypes.string,
 		onClose: PropTypes.func.isRequired,
-	}
+	};
 
 	render() {
 		return (

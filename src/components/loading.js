@@ -7,7 +7,7 @@ export default class Loading extends Component {
 	static propTypes = {
 		children: PropTypes.any,
 		className: PropTypes.string,
-	}
+	};
 
 	render() {
 		return (

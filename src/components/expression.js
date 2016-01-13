@@ -96,7 +96,7 @@ export default class Expression extends Component {
 			$type: PropTypes.string,
 		}).isRequired,
 		hideIndicator: PropTypes.bool,
-	}
+	};
 
 	render() {
 		const {expr} = this.props

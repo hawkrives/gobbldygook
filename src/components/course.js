@@ -51,11 +51,11 @@ class Course extends Component {
 		isDragging: PropTypes.bool.isRequired,  // react-dnd
 		schedule: PropTypes.object,
 		student: PropTypes.object,
-	}
+	};
 
 	static defaultProps = {
 		conflicts: [],
-	}
+	};
 
 	constructor() {
 		super()

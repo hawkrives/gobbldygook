@@ -45,7 +45,7 @@ export default class StudentSummary extends Component {
 		canGraduate: PropTypes.bool.isRequired,
 		courses: PropTypes.arrayOf(PropTypes.object),
 		student: PropTypes.object.isRequired,
-	}
+	};
 
 	constructor() {
 		super()

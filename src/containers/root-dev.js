@@ -8,7 +8,7 @@ export default class Root extends Component {
 	static propTypes = {
 		children: PropTypes.node,
 		store: PropTypes.object.isRequired,
-	}
+	};
 
 	render() {
 		return (

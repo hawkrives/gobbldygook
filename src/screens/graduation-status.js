@@ -43,7 +43,12 @@ class GraduationStatus extends Component {
 		showAreaPickerFor: PropTypes.object.isRequired,
 		student: PropTypes.object.isRequired,
 		toggleOverrideOnStudent: PropTypes.func.isRequired,
-	}
+	};
+
+	static defaultProps = {
+		areaDetails: [],
+		canGraduate: false,
+	};
 
 	shouldComponentUpdate(nextProps) {
 		return compareProps(this.props, nextProps)
@@ -170,7 +175,7 @@ export default class GraduationStatusContainer extends Component {
 		courses: PropTypes.array.isRequired,
 		isHidden: PropTypes.bool.isRequired,
 		student: PropTypes.object.isRequired,
-	}
+	};
 
 	constructor(props) {
 		super(props)

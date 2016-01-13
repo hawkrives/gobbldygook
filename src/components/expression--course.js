@@ -17,7 +17,7 @@ export default class CourseExpression extends Component {
 		semester: PropTypes.number,
 		style: PropTypes.object,
 		year: PropTypes.number,
-	}
+	};
 
 	render() {
 		const department = this.props.department.map(shrinkDept).join('/')

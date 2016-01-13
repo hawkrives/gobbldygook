@@ -44,7 +44,7 @@ class CourseRemovalBox extends Component {
 		connectDropTarget: PropTypes.func.isRequired,  // react-dnd
 		isOver: PropTypes.bool.isRequired,  // react-dnd
 		studentId: PropTypes.string.isRequired,
-	}
+	};
 
 	render() {
 		const className = cx('course-removal-box', {

@@ -7,7 +7,7 @@ export default class Toolbar extends Component {
 		children: PropTypes.any.isRequired,
 		className: PropTypes.string,
 		style: PropTypes.object,
-	}
+	};
 
 	render() {
 		return (

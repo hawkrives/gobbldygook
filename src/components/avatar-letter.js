@@ -8,11 +8,11 @@ export default class AvatarLetter extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		value: PropTypes.string,
-	}
+	};
 
 	static defaultProps = {
 		value: '',
-	}
+	};
 
 	render() {
 		return (

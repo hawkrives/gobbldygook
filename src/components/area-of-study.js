@@ -159,7 +159,7 @@ export default class AreaOfStudyContainer extends Component {
 		showEditButton: PropTypes.bool.isRequired,
 		studentId: PropTypes.string.isRequired,
 		toggleOverride: PropTypes.func.isRequired,
-	}
+	};
 
 	static defaultProps = {
 		area: {
@@ -174,7 +174,7 @@ export default class AreaOfStudyContainer extends Component {
 			type: '???',
 			revision: '0000-00',
 		},
-	}
+	};
 
 	constructor() {
 		super()

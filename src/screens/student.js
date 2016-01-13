@@ -19,11 +19,11 @@ export class Student extends Component {
 		children: PropTypes.node.isRequired,  // from react-router
 		params: PropTypes.object,
 		student: PropTypes.object,
-	}
+	};
 
 	static contextTypes = {
 		location: PropTypes.object.isRequired,
-	}
+	};
 
 	constructor() {
 		super()

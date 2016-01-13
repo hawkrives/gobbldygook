@@ -13,7 +13,7 @@ export default class Notification extends Component {
 		onClick: PropTypes.func.isRequired,
 		type: PropTypes.string.isRequired,
 		value: PropTypes.number,
-	}
+	};
 
 	render() {
 		// console.log('Notification#render')
