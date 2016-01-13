@@ -61,15 +61,15 @@ export default class AreaEditor extends Component {
 		this.setState({value: newValue})
 	}
 
-	onSave = () => {
-		const {id: studentId} = this.props.params
-		const {name, type, revision} = this.props.query
-		const areaId = buildAreaId({name, type, revision})
-		console.log(`saving ${name} into ${studentId}`)
+	// onSave = () => {
+	// 	const {id: studentId} = this.props.params
+	// 	const {name, type, revision} = this.props.query
+	// 	const areaId = buildAreaId({name, type, revision})
+	// 	console.log(`saving ${name} into ${studentId}`)
 
-		const {value} = this.state
-		areaId && studentActions.editArea(studentId, areaId, value)
-	}
+	// 	const {value} = this.state
+	// 	areaId && studentActions.editArea(studentId, areaId, value)
+	// }
 
 	onFocusChange = focused => {
 		if (focused) {
