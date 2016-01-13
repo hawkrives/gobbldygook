@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import expandDepartment from '../../src/area-tools/expand-department'
+import {expandDepartment} from '../../src/area-tools/convert-department'
 
 describe('expandDepartment', () => {
 	it('expands a short department abbreviation into a long abbreviation', () => {
