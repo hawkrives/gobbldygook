@@ -20,14 +20,12 @@ export default function compareCourseToQualification(course, {$key, $operator, $
 	}
 
 	else if (isPlainObject($value)) {
-		compareCourseToQualificationViaObject(course, {$key, $operator, $value})
+		return compareCourseToQualificationViaObject(course, {$key, $operator, $value})
 	}
 
 	else {
 		return compareCourseToQualificationViaOperator(course, {$key, $operator, $value})
 	}
-
-	throw new TypeError(`compareCourseToQualification: "${$operator} is not a valid operator"`)
 }
 
 
@@ -86,5 +84,9 @@ function compareCourseToQualificationViaOperator(course, {$key, $operator, $valu
 	}
 	else if ($operator === '$gte') {
 		return course[$key] >= $value
+	}
+
+	else {
+		throw new TypeError(`compareCourseToQualificationViaOperator: "${$operator} is not a valid operator"`)
 	}
 }
