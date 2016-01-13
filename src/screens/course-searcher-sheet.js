@@ -1,18 +1,17 @@
 import React, {PropTypes} from 'react'
 
 import omit from 'lodash/object/omit'
-import history from '../history'
 import Modal from '../components/modal'
 import CourseSearcher from './course-searcher'
 
-function closeModal(location) {
+function closeModal(location, router) {
 	const query = omit(location.query, ['search-overlay'])
-	history.pushState(null, location.pathname, query)
+	router.push({pathname: location.pathname, query})
 }
 
 export default function CourseSearcherSheet(props, context) {
 	const { actions } = props
-	const boundCloseModal = closeModal.bind(null, context.location)
+	const boundCloseModal = () => closeModal(context.location, context.router)
 
 	return <Modal
 		modalClassName='course-searcher--modal'
@@ -31,5 +30,6 @@ CourseSearcherSheet.propTypes = {
 }
 
 CourseSearcherSheet.contextTypes = {
-	location: PropTypes.object,
+	location: PropTypes.object.isRequired,
+	router: PropTypes.object.isRequired,
 }

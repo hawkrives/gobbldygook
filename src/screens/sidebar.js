@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import omit from 'lodash/object/omit'
-import history from '../history'
 
 import Button from '../components/button'
 import CourseSearcher from './course-searcher'
@@ -24,26 +23,27 @@ export default class Sidebar extends Component {
 	}
 
 	static contextTypes = {
-		location: PropTypes.object,
+		location: PropTypes.object.isRequired,
+		router: PropTypes.object.isRequired,
 	}
 
 	goHome = () => {
-		history.pushState(null, '/')
+		this.context.router.push('/')
 	}
 
 	showShareSheet = () => {
 		const query = {...this.context.location.query, share: null}
-		history.pushState(null, this.context.location.pathname, query)
+		this.context.router.push({pathname: this.context.location.pathname, query})
 	}
 
 	closeSearcher = () => {
 		const query = omit(this.context.location.query, ['partialSearch', 'search'])
-		history.pushState(null, this.context.location.pathname, query)
+		this.context.router.push({pathname: this.context.location.pathname, query})
 	}
 
 	openSearcher = () => {
 		const query = {...this.context.location.query, search: null}
-		history.pushState(null, this.context.location.pathname, query)
+		this.context.router.push({pathname: this.context.location.pathname, query})
 	}
 
 	render() {

@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import history from '../history'
 import {Link} from 'react-router'
 
 import Toolbar from '../components/toolbar'
@@ -108,7 +107,8 @@ export default class StudentPickerContainer extends Component {
 	}
 
 	static contextTypes = {
-		location: PropTypes.object,
+		location: PropTypes.object.isRequired,
+		router: PropTypes.object.isRequired,
 	}
 
 	constructor() {
@@ -125,12 +125,12 @@ export default class StudentPickerContainer extends Component {
 
 	onAddStudent = () => {
 		const query = {...this.context.location.query, 'student-wizard': null}
-		history.pushState(null, this.context.location.pathname, query)
+		this.context.router.push({pathname: this.context.location.pathname, query})
 	}
 
 	onOpenSearchOverlay = () => {
 		const query = {...this.context.location.query, 'search-overlay': null}
-		history.pushState(null, this.context.location.pathname, query)
+		this.context.router.push({pathname: this.context.location.pathname, query})
 	}
 
 	onFilterChange = ev => {

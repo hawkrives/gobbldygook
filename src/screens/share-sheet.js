@@ -1,21 +1,20 @@
 import React, {PropTypes} from 'react'
 
 import omit from 'lodash/object/omit'
-import history from '../history'
 import Button from '../components/button'
 import Icon from '../components/icon'
 import Toolbar from '../components/toolbar'
 import Modal from '../components/modal'
 import List from '../components/list'
 
-function closeModal(location) {
+function closeModal(location, router) {
 	const query = omit(location.query, ['share'])
-	history.pushState(null, location.pathname, query)
+	router.push({pathname: location.pathname, query})
 }
 
 export default function ShareSheet(props, context) {
 	const { student } = props
-	const boundCloseModal = closeModal.bind(null, context.location)
+	const boundCloseModal = () => closeModal(context.location, context.router)
 
 	return <Modal
 		modalClassName='course course--modal'
@@ -43,5 +42,6 @@ ShareSheet.propTypes = {
 }
 
 ShareSheet.contextTypes = {
-	location: PropTypes.object,
+	location: PropTypes.object.isRequired,
+	router: PropTypes.object.isRequired,
 }

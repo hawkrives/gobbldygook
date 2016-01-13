@@ -19,11 +19,18 @@ export class App extends Component {
 		canRedo: PropTypes.bool.isRequired,
 		canUndo: PropTypes.bool.isRequired,
 		children: PropTypes.node.isRequired,
+		location: PropTypes.object.isRequired,
 		students: PropTypes.object.isRequired,
 	}
 
-	static contextTypes = {
+	static childContextTypes = {
 		location: PropTypes.object,
+	}
+
+	getChildContext() {
+		return {
+			location: this.props.location,
+		}
 	}
 
 	render() {
@@ -31,9 +38,9 @@ export class App extends Component {
 			<DocumentTitle title='Gobbldygook'>
 				<div>
 					{cloneElement(this.props.children, omit(this.props, 'children'))}
-					{'search-overlay' in this.context.location.query &&
+					{'search-overlay' in this.props.location.query &&
 						<CourseSearcherSheet actions={this.props.actions} />}
-					{'student-wizard' in this.context.location.query &&
+					{'student-wizard' in this.props.location.query &&
 						<NewStudentSheet actions={this.props.actions} />}
 				</div>
 			</DocumentTitle>

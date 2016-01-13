@@ -23,9 +23,6 @@ import {render} from 'react-dom'
 // Include google analytics (in production)
 import './start/analytics'
 
-// Set up a "history" object for react-router
-import history from './history'
-
 // Kick off data loading
 import loadData from './helpers/load-data'
 loadData()
@@ -33,9 +30,10 @@ loadData()
 // Kick off the GUI
 console.log('3. 2.. 1... Blast off! 🚀')
 
-import { Router } from 'react-router'
+import { Router, hashHistory } from 'react-router'
 import routes from './routes'
 
+// Create the redux store
 import configureStore from './ducks/store/configure-store'
 import Root from './containers/root'
 const store = configureStore()
@@ -51,7 +49,7 @@ store.dispatch(loadAreas())
 
 render(
 	(<Root store={store}>
-		<Router history={history}>
+		<Router history={hashHistory}>
 			{routes}
 		</Router>
 	</Root>),

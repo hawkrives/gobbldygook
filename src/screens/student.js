@@ -22,7 +22,7 @@ export class Student extends Component {
 	}
 
 	static contextTypes = {
-		location: PropTypes.object,
+		location: PropTypes.object.isRequired,
 	}
 
 	constructor() {

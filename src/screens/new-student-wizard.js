@@ -1,16 +1,15 @@
 import React, {PropTypes} from 'react'
 import forEach from 'lodash/collection/forEach'
 import DropZone from 'react-dropzone'
-import history from '../history'
 
 import Button from '../components/button'
 import List from '../components/list'
 
 import './new-student-wizard.scss'
 
-function onCreateStudent(location, actions) {
+function onCreateStudent(router, actions) {
 	actions.initStudent().then(([student]) => {
-		history.replaceState(null, `/s/${student.id}/`)
+		router.replace(`/s/${student.id}/`)
 	})
 }
 
@@ -81,7 +80,7 @@ export default function NewStudentScreen(props, context) {
 				Does everything look alright?<br/>
 				<Button
 					type='raised'
-					onClick={() => onCreateStudent(context.location, props.actions)}
+					onClick={() => onCreateStudent(context.router, props.actions)}
 				>
 					Let's go!
 				</Button>
@@ -96,5 +95,5 @@ NewStudentScreen.propTypes = {
 }
 
 NewStudentScreen.contextTypes = {
-	location: PropTypes.object,
+	router: PropTypes.object.isRequired,
 }

@@ -14,7 +14,6 @@ import validateSchedule from '../helpers/validate-schedule'
 import compareProps from '../helpers/compare-props'
 
 import itemTypes from '../models/item-types'
-import history from '../history'
 
 import Button from './button'
 import CourseList from './course-list'
@@ -75,7 +74,7 @@ class Semester extends Component {
 	}
 
 	static contextTypes = {
-		location: React.PropTypes.object,
+		router: React.PropTypes.object.isRequired,
 	}
 
 	constructor() {
@@ -112,7 +111,7 @@ class Semester extends Component {
 				term: [Number(`${schedule.year}${schedule.semester}`)],
 			}),
 		}
-		history.pushState(null, this.context.location.pathname, query)
+		this.context.router.push({pathname: this.context.location.pathname, query})
 	}
 
 	render() {
