@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.2.3
+- The dependency update release (lodash@4, babel@6.4, etc.)
+
 ## 2.2.2
 - Actually fix index.js importing/exporting issues
 
