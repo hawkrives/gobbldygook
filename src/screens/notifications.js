@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 
 import map from 'lodash/collection/map'
 import {bindActionCreators} from 'redux'
@@ -9,34 +9,24 @@ import Notification from '../components/notification'
 
 import './notifications.scss'
 
-export class Notifications extends Component {
-	static propTypes = {
-		actions: PropTypes.shape({
-			removeNotification: PropTypes.func.isRequired,
-		}).isRequired,
-		dispatch: PropTypes.func.isRequired,
-		notifications: PropTypes.array.isRequired,
-	}
+export function Notifications({notifications, actions}) {
+	return (
+		<ul className='notification-list'>
+			{map(notifications, n =>
+				<Notification
+					{...n}
+					key={n.id}
+					onClick={id => actions.removeNotification(id)}
+				/>)}
+		</ul>
+	)
+}
 
-	componentDidMount() {
-		typeof window !== 'undefined' && (window.dispatch = this.props.dispatch)
-	}
-
-	componentWillUnmount() {
-		typeof window !== 'undefined' && (delete window.dispatch)
-	}
-
-	render() {
-		return (
-			<ul className='notification-list'>
-				{map(this.props.notifications, n =>
-					<Notification {...n}
-						key={n.id}
-						onClick={id => this.props.actions.removeNotification(id)}
-					/>)}
-			</ul>
-		)
-	}
+Notifications.propTypes = {
+	actions: PropTypes.shape({
+		removeNotification: PropTypes.func.isRequired,
+	}).isRequired,
+	notifications: PropTypes.array.isRequired,
 }
 
 function mapStateToProps(state) {
@@ -52,7 +42,6 @@ function mapDispatchToProps(dispatch) {
 	// then passes the keys of the returned object as props to the connect()-ed component
 	return {
 		actions: bindActionCreators(actionCreators, dispatch),
-		dispatch: dispatch,
 	}
 }
 
