@@ -40,8 +40,8 @@ import configureStore from './ducks/store/configure-store'
 import Root from './containers/root'
 const store = configureStore()
 
-if (PRODUCTION) {
-	typeof window !== 'undefined' && (window.Perf = require('react-addons-perf'))
+if (DEVELOPMENT) {
+	global.Perf = require('react-addons-perf')
 }
 
 import { loadStudents } from './ducks/actions/students'
