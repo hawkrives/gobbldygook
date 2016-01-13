@@ -34,7 +34,8 @@ const saveStudentsMiddleware = store => next => action => {
 	// save them
 	const studentSavingPromises = map(studentsToSave, saveStudent)
 
-	return Promise.all(studentSavingPromises).then(result)
+	return Promise.all(studentSavingPromises)
+		.then(() => result)
 }
 
 export default saveStudentsMiddleware
