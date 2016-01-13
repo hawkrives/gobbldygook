@@ -10,8 +10,7 @@
     "build": "babel src/ --out-dir lib/",
     "clean": "rm -rf lib/",
     "push": "./bin/publish.sh",
-    "test": "mocha test/",
-    "watch": "babel --watch src/ --out-dir lib/"
+    "test": "mocha test/"
   },
   "dependencies": {
     "lodash": "^4.0.0"
