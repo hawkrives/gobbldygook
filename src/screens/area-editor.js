@@ -8,7 +8,6 @@ import Toolbar from '../components/toolbar'
 import Button from '../components/button'
 import Icon from '../components/icon'
 import Separator from '../components/separator'
-import studentActions from '../flux/student-actions'
 
 import CodeMirror from 'react-codemirror'
 import 'codemirror/mode/yaml/yaml'
@@ -59,7 +58,7 @@ export default class AreaEditor extends Component {
 
 	onUpdateCode = newValue => {
 		this.setState({value: newValue})
-	}
+	};
 
 	// onSave = () => {
 	// 	const {id: studentId} = this.props.params
@@ -80,7 +79,7 @@ export default class AreaEditor extends Component {
 		}
 
 		this.setState({isEditing: focused})
-	}
+	};
 
 	render() {
 		const options = {
