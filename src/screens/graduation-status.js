@@ -14,7 +14,6 @@ import uniq from 'lodash/array/uniq'
 import pluck from 'lodash/collection/pluck'
 import keys from 'lodash/object/keys'
 import pick from 'lodash/object/pick'
-import isTrue from '../helpers/is-true'
 
 import compareProps from '../helpers/compare-props'
 import pathToOverride from '../area-tools/path-to-override'
@@ -105,7 +104,7 @@ class GraduationStatus extends Component {
 
 		const areaTypesToShowButtonsFor = union(
 			usedAreaTypes,
-			keys(pick(showAreaPickerFor, isTrue)))
+			keys(pick(showAreaPickerFor, k => k === true)))
 
 		const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
 

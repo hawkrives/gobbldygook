@@ -2,7 +2,6 @@ import filter from 'lodash/collection/filter'
 import findWarnings from '../helpers/find-course-warnings'
 import flatten from 'lodash/array/flatten'
 import identity from 'lodash/utility/identity'
-import isTrue from '../helpers/is-true'
 import pluck from 'lodash/collection/pluck'
 import some from 'lodash/collection/some'
 import reject from 'lodash/collection/reject'
@@ -23,7 +22,7 @@ export default async function validateSchedule(schedule) {
 	const flattened = flatten(conflicts)
 	const filtered = filter(flattened, identity)
 	const warnings = pluck(filtered, 'warning')
-	const hasConflict = some(warnings, isTrue)
+	const hasConflict = some(warnings, w => w === true)
 
 	if (hasConflict) {
 		debug('schedule conflicts', conflicts, hasConflict)

@@ -16,8 +16,6 @@ import splitDeptNum from './split-dept-num'
 import buildDeptNum from './build-dept-num'
 
 import splitParagraph from './split-paragraph'
-import evenIndex from './even-index'
-import notEmptyString from './not-empty-string'
 import zipToObjectWithArrays from './zip-to-object-with-arrays'
 
 import departmentMapping from 'sto-course-related-data/handmade/to_department_abbreviations.json'
@@ -159,10 +157,10 @@ export default function buildQueryFromString(queryString='', opts={}) {
 	let matches = queryString.split(rex)
 
 	// Remove extra whitespace and remove empty strings
-	let cleaned = filter(map(matches, trim), notEmptyString)
+	let cleaned = filter(map(matches, trim), str => str.length > 0)
 
 	// Grab the keys and values from the lists
-	let [keys, values] = partition(cleaned, evenIndex)
+	let [keys, values] = partition(cleaned, (_, i) => i % 2 === 0)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
 		let {depts, num} = splitDeptNum(stringThing)

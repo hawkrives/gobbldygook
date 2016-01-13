@@ -8,7 +8,6 @@ import ordinal from 'ord'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
-import isTrue from '../helpers/is-true'
 import expandYear from '../helpers/expand-year'
 import semesterName from '../helpers/semester-name'
 
@@ -56,7 +55,7 @@ export function checkForTimeConflicts(courses) {
 
 		if (any(conflictSet)) {
 			// +1 to the indices because humans don't 0-index lists
-			const conflicts = compact(map(conflictSet, (possibility, i) => isTrue(possibility) ? i + 1 : false))
+			const conflicts = compact(map(conflictSet, (possibility, i) => (possibility === true) ? i + 1 : false))
 			const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
 			result.warning = true
 			result.msg = `Time conflict with the ${oxford(conflicted, {oxfordComma: true})} ${plur('course', conflicts.length)}`
