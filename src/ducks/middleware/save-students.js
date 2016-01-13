@@ -28,12 +28,11 @@ const saveStudentsMiddleware = store => next => action => {
 	const newState = store.getState()
 	const newStudents = newState.students.present
 
-	const studentsToSave = filter(newStudents, (student, id) => newStudents[id] !== oldStudents[id])
-	const studentSavingPromises = map(studentsToSave, student => {
-		return new Promise((resolve, reject) => {
-			saveStudent(student).then(resolve).catch(reject)
-		})
-	})
+	// get any student objects whose identity has changed
+	const studentsToSave = filter(newStudents, (_, id) => newStudents[id] !== oldStudents[id])
+
+	// save them
+	const studentSavingPromises = map(studentsToSave, saveStudent)
 
 	return Promise.all(studentSavingPromises).then(result)
 }
