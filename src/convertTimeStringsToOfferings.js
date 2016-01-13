@@ -1,5 +1,5 @@
-import forEach from 'lodash/foreach'
-import isArray from 'lodash/isarray'
+import forEach from 'lodash/forEach'
+import isArray from 'lodash/isArray'
 import mergeWith from 'lodash/mergeWith'
 import assign from 'lodash/assign'
 import values from 'lodash/values'
