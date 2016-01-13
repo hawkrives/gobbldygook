@@ -10,7 +10,7 @@ import {
 	removeStudentFromCache,
 	getIdCache,
 	setIdCache,
-} from '../../src/models/save-student'
+} from '../../src/helpers/save-student'
 import demoStudent from '../../src/models/demo-student.json'
 
 const student = cloneDeep(demoStudent)

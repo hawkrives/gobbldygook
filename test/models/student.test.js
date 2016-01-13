@@ -33,7 +33,6 @@ const {
 	reorderCourseInSchedule,
 } = require('../../src/models/student')
 
-const Study = require('../../src/models/study').default
 const Schedule = require('../../src/models/schedule').default
 
 describe('Student', () => {
@@ -141,7 +140,7 @@ describe('addAreaToStudent', () => {
 	it('adds areas', () => {
 		const stu = Student()
 		let query = {name: 'Exercise Science', type: 'major', revision: '2014-15'}
-		let newArea = addAreaToStudent(stu, Study(query))
+		let newArea = addAreaToStudent(stu, query)
 		expect(find(newArea.studies, query)).not.to.be.undefined
 	})
 })

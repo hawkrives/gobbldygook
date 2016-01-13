@@ -9,7 +9,6 @@ mock('../../src/models/student', {
 	addScheduleToStudent: noop,
 })
 mock('../../src/models/schedule', () => ({}))
-mock('../../src/models/study', () => ({}))
 
 const {
 	initStudent,
