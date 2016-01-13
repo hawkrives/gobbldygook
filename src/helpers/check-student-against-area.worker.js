@@ -1,7 +1,6 @@
 /* global WorkerGlobalScope */
 
-import zipObject from 'lodash/array/zipObject'
-import pairs from 'lodash/object/pairs'
+import mapKeys from 'lodash/object/mapKeys'
 import map from 'lodash/collection/map'
 import filter from 'lodash/collection/filter'
 import round from 'lodash/math/round'
@@ -12,15 +11,15 @@ import evaluate from '../area-tools/evaluate'
 import findLeafRequirements from '../area-tools/find-leaf-requirements'
 
 function alterCourse(course) {
-	return zipObject(map(pairs(course), ([key, value]) => {
+	return mapKeys(course, (value, key) => {
 		if (key === 'depts') {
 			key = 'department'
 		}
 		else if (key === 'num') {
 			key = 'number'
 		}
-		return [key, value]
-	}))
+		return key
+	})
 }
 
 async function checkStudentAgainstArea(studentData, area) {
