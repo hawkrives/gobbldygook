@@ -133,28 +133,16 @@ function collectAllCourses(studentId, terms) {
 	return Promise.all(map(terms, term => getCourses(studentId, term)))
 }
 
-function extractInformationFromDegreeAudit(auditInfo, infoTable) {
-	let [degreeType] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
-	if (degreeType === 'B.A.') {
-		degreeType = 'Bachelor of Arts'
-	}
-	else if (degreeType === 'B.M.') {
-		degreeType = 'Bachelor of Music'
-	}
-
-	// There are two tables that are children of another table
-	// yay, tables for layout.
-	let [info, areas] = selectAll('table table', infoTable)
-
+function extractInformationFromInfoTable(table) {
 	// So "info" is the first table; it's essentially key-value pairs, in column-row fashion.
 	// We start out by grabbing all <td> elements under "info"
-	let infoText = map(selectAll('td', info), getText)
+	let infoText = map(selectAll('td', table), getText)
 	// Next, because they're k/v pairs, we want to group them into two arrays: keys, and values.
 	// `partition` groups elements of an array into two arrays based on the predicate function, which we've built around the index.
 	let infoKeysValues = partition(infoText, (_, i) => !(i % 2))
 	// The zipObject(unzip()) dance builds an object from the k/v paired arrays
 	// `unzip` turns the [[keys], [values]] array into [[k,v], [k,v], ...], which `zipObject` turns into an object.
-	info = zipObject(unzip(infoKeysValues))
+	let info = zipObject(unzip(infoKeysValues))
 	// `mapKeys` purpose is to remove the ':' from the end of the keys, and to lower-case the keys.
 	info = mapKeys(info, (val, key) => key.replace(':', '').toLowerCase())
 
@@ -167,9 +155,12 @@ function extractInformationFromDegreeAudit(auditInfo, infoTable) {
 	info.matriculation = Number(info['curriculum year'])
 	delete info['curriculum year']
 
+	return info
+}
 
+function extractInformationFromAreaTable(table) {
 	// Alright! Now we're going to grab all <td> elements from the "areas" table.
-	areas = map(selectAll('td', areas), getText)
+	let areas = map(selectAll('td', table), getText)
 
 	// This table is organized into rows.
 	// The number of rows is equal to the largest category of areas.
@@ -183,11 +174,32 @@ function extractInformationFromDegreeAudit(auditInfo, infoTable) {
 	let concentrations = filter(areas, (item, i) => i % 3 === 2 && item.length)
 
 	return {
-		...info,
-		degree: degreeType,
 		majors,
 		emphases,
 		concentrations,
+	}
+}
+
+function extractInformationFromDegreeAudit(auditInfo, infoElement) {
+	let [degreeType] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
+	if (degreeType === 'B.A.') {
+		degreeType = 'Bachelor of Arts'
+	}
+	else if (degreeType === 'B.M.') {
+		degreeType = 'Bachelor of Music'
+	}
+
+	// There are two tables that are children of another table
+	// yay, tables for layout.
+	let [infoTable, areaTable] = selectAll('table table', infoElement)
+
+	let info = extractInformationFromInfoTable(infoTable)
+	let areas = extractInformationFromAreaTable(areaTable)
+
+	return {
+		...info,
+		...areas,
+		degree: degreeType,
 	}
 }
 

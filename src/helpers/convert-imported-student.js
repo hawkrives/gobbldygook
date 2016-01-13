@@ -9,7 +9,20 @@ import uniq from 'lodash/array/uniq'
 import zipObject from 'lodash/array/zipObject'
 
 export default function convertStudent(partialStudent) {
-	let schedules = groupBy(partialStudent.courses, 'term')
+	let schedules = processSchedules(partialStudent)
+	let info = processDegrees(partialStudent)
+
+	let newStudent = Student({
+		...info,
+		schedules,
+	})
+
+	return newStudent
+}
+
+
+function processSchedules(student) {
+	let schedules = groupBy(student.courses, 'term')
 	schedules = map(schedules, (courses, term) => {
 		term = String(term)
 		return Schedule({
@@ -20,12 +33,34 @@ export default function convertStudent(partialStudent) {
 		})
 	})
 	schedules = zipObject(map(schedules, s => [s.id, s]))
+	return schedules
+}
 
+
+function processDegrees(student) {
+	let singularData = resolveSingularDataPoints(student)
+	let studies = []
+
+	for (let {concentrations, emphases, majors, degree} of student.degrees) {
+		studies.push({name: degree, type: 'degree', revision: 'latest'})
+		studies = studies.concat(majors.map(name =>         ({name, type: 'major', revision: 'latest'})))
+		studies = studies.concat(concentrations.map(name => ({name, type: 'concentration', revision: 'latest'})))
+		studies = studies.concat(emphases.map(name =>       ({name, type: 'emphasis', revision: 'latest'})))
+	}
+
+	return {
+		...singularData,
+		studies,
+	}
+}
+
+
+function resolveSingularDataPoints(student) {
 	let thereShouldOnlyBeOne = {
-		names: pluck(partialStudent.degrees, 'name'),
-		advisors: pluck(partialStudent.degrees, 'advisor'),
-		matriculations: pluck(partialStudent.degrees, 'matriculation'),
-		graduations: pluck(partialStudent.degrees, 'graduation'),
+		names: pluck(student.degrees, 'name'),
+		advisors: pluck(student.degrees, 'advisor'),
+		matriculations: pluck(student.degrees, 'matriculation'),
+		graduations: pluck(student.degrees, 'graduation'),
 	}
 
 	forEach(thereShouldOnlyBeOne, (group, name) => {
@@ -38,23 +73,6 @@ export default function convertStudent(partialStudent) {
 	let advisor = thereShouldOnlyBeOne.advisors[0]
 	let matriculation = parseInt(thereShouldOnlyBeOne.matriculations[0], 10)
 	let graduation = parseInt(thereShouldOnlyBeOne.graduations[0], 10)
-	let studies = []
 
-	for (let {concentrations, emphases, majors, degree} of partialStudent.degrees) {
-		studies.push({name: degree, type: 'degree', revision: 'latest'})
-		studies = studies.concat(majors.map(name =>         ({name, type: 'major', revision: 'latest'})))
-		studies = studies.concat(concentrations.map(name => ({name, type: 'concentration', revision: 'latest'})))
-		studies = studies.concat(emphases.map(name =>       ({name, type: 'emphasis', revision: 'latest'})))
-	}
-
-	let newStudent = Student({
-		name,
-		advisor,
-		matriculation,
-		graduation,
-		schedules,
-		studies,
-	})
-
-	return newStudent
+	return {name, advisor, matriculation, graduation}
 }
