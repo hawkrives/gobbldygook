@@ -1,41 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import semesterName from '../helpers/semester-name'
+import {shrinkDept} from '../area-tools/convert-department'
 
 import './expression--course.scss'
-
-function shrinkDept(dept, index, collection) {
-	if (collection.length === 1) {
-		return dept
-	}
-
-	if (dept === 'ASIAN') {
-		return 'AS'
-	}
-	if (dept === 'ART') {
-		return 'AR'
-	}
-	else if (dept === 'REL') {
-		return 'RE'
-	}
-	else if (dept === 'PSCI') {
-		return 'PS'
-	}
-	else if (dept === 'PHIL') {
-		return 'PH'
-	}
-	else if (dept === 'HIST') {
-		return 'HI'
-	}
-	else if (dept === 'ENVST') {
-		return 'ES'
-	}
-	else if (dept === 'SOAN') {
-		return 'SA'
-	}
-
-	return dept
-}
 
 export default class CourseExpression extends Component {
 	static propTypes = {

@@ -10,7 +10,7 @@
   }
 
   const flatten = require('lodash/array/flatten')
-  const expandDepartment = require('./expand-department').default
+  const expandDepartment = require('./convert-department').expandDepartment
 }
 
 

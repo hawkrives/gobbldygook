@@ -4183,7 +4183,7 @@ module.exports = (function() {
 			return globalLastDept;
 		}
 		var flatten = require('lodash/array/flatten');
-		var expandDepartment = require('./expand-department').default;
+		var expandDepartment = require('./convert-department').expandDepartment;
 		peg$result = peg$startRuleFunction();
 		if (peg$result !== peg$FAILED && peg$currPos === input.length) {
 			return peg$result;
