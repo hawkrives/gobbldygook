@@ -70,7 +70,7 @@
     "react-dom": "0.14.6",
     "react-dropzone": "3.3.2",
     "react-gateway": "1.1.0",
-    "react-modal2": "2.0.1",
+    "react-modal2": "3.0.2",
     "react-redux": "4.0.6",
     "react-router": "2.0.0-rc4",
     "redux": "3.0.5",
