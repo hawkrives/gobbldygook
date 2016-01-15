@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.2.5
+- Removed most usages of lodash
+- Added code coverage
+
 ## 2.2.4
 - Fix lodash pathnames
 
