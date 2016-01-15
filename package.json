@@ -21,7 +21,9 @@
     "failFast": true
   },
   "dependencies": {
-    "lodash": "^4.0.0"
+    "lodash.mergewith": "^4.0.1",
+    "lodash.values": "^4.0.0",
+    "lodash.zip": "^4.0.0"
   },
   "devDependencies": {
     "ava": "^0.9.2",

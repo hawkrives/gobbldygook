@@ -1,4 +1,3 @@
-import map from 'lodash/map'
 import daysOfTheWeek from './daysOfTheWeek'
 
 const daySequence = ['M', 'T', 'W', 'Th', 'F']
@@ -23,5 +22,5 @@ export default function findDays(daystring) {
 	}
 
 	// 'M' => 'Mo'
-	return map(listOfDays, day => daysOfTheWeek[day])
+	return listOfDays.map(day => daysOfTheWeek[day])
 }

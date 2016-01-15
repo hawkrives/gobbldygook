@@ -1,4 +1,3 @@
-import map from 'lodash/map'
 import checkCoursesForTimeConflicts from './checkCoursesForTimeConflicts'
 
 export default function findScheduleTimeConflicts(courses) {
@@ -21,12 +20,8 @@ export default function findScheduleTimeConflicts(courses) {
 	// }
 	// true = conflict, false = no conflict, null = same course
 
-	if (courses.hasOwnProperty('toArray')) {
-		courses = courses.toArray()
-	}
-
-	let results = map(courses, c1 => {
-		return map(courses, c2 => {
+	let results = courses.map(c1 => {
+		return courses.map(c2 => {
 			let result = false
 			if (c1 === c2) {
 				result = null
