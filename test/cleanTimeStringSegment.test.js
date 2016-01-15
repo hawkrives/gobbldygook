@@ -1,13 +1,15 @@
-// test/cleanTimeStringSegment.test.js
-import {expect} from 'chai'
+import test from 'ava'
+import 'babel-core/register'
 import cleanTimeStringSegment from '../src/cleanTimeStringSegment'
 
-describe('cleanTimeStringSegment', () => {
-	it('trims up a timestring segment', () => {
-		expect(cleanTimeStringSegment('    800AM   ')).to.equal('800AM')
-	})
+test('cleanTimeStringSegment trims up a timestring segment', t => {
+	const expected = '800AM'
+	const actual = cleanTimeStringSegment('    800AM   ')
+	t.is(actual, expected)
+})
 
-	it('capitalizes a timestring segment', () => {
-		expect(cleanTimeStringSegment('800am')).to.equal('800AM')
-	})
+test('cleanTimeStringSegment capitalizes a timestring segment', t => {
+	const expected = '800AM'
+	const actual = cleanTimeStringSegment('800am')
+	t.is(actual, expected)
 })

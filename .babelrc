@@ -1,10 +1,11 @@
 {
-	presets: [
-		'es2015',
+	"sourceMaps": "inline",
+	"presets": [
+		"es2015",
 	],
-	plugins: [
-		'syntax-export-extensions',
-		'transform-object-rest-spread',
-		'transform-export-extensions',
+	"plugins": [
+		"syntax-export-extensions",
+		"transform-object-rest-spread",
+		"transform-export-extensions",
 	]
 }
