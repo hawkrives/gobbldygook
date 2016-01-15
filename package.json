@@ -80,7 +80,7 @@
     "redux-undo": "0.6.0",
     "sha1": "1.1.1",
     "sto-course-related-data": "4.0.2",
-    "sto-sis-time-parser": "2.2.4",
+    "sto-sis-time-parser": "2.2.5",
     "text-table": "0.2.0",
     "treo": "0.6.0-rc2",
     "uuid": "2.0.1"
