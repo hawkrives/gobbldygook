@@ -25,10 +25,6 @@ body {
 	margin: $page-edge-padding;
 }
 
-#app[aria-hidden=true] {
-	// Prevent scrolling the body while a modal is open.
-}
-
 menu {
 	padding: 0;
 	margin: 0;
@@ -37,8 +33,8 @@ menu {
 .student > .content {
 	flex: 1;
 
-    display: flex;
-    flex-flow: column nowrap;
+	display: flex;
+	flex-flow: column nowrap;
 	align-items: stretch;
 
 	@media all and (min-width: $single-column-width) {

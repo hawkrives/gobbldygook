@@ -1,5 +1,5 @@
 @mixin fira($variant, $weight) {
-    @font-face{
+    @font-face {
         font-family: 'Fira Sans';
         src: local('Fira Sans #{$variant}'),
              url('./fonts/FiraSans-#{$variant}.woff2') format('woff2'),
@@ -7,7 +7,8 @@
         font-weight: $weight;
         font-style: normal;
     }
-    @font-face{
+
+    @font-face {
         font-family: 'Fira Sans';
         src: local('Fira Sans #{$variant} Italic'),
              url('./fonts/FiraSans-#{$variant}Italic.woff2') format('woff2'),
