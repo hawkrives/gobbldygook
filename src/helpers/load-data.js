@@ -2,9 +2,9 @@ import map from 'lodash/collection/map'
 import {status, text} from './fetch-helpers'
 import uniqueId from 'lodash/utility/uniqueId'
 
-import * as notificationActions from '../ducks/actions/notifications'
-import * as courseActions from '../ducks/actions/courses'
-import * as areaActions from '../ducks/actions/areas'
+import * as notificationActions from '../redux/notifications/actions'
+import * as courseActions from '../redux/courses/actions'
+import * as areaActions from '../redux/areas/actions'
 const actions = {
 	notifications: notificationActions,
 	courses: courseActions,
