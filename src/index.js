@@ -19,6 +19,9 @@ window.DEBUG = require('debug')
 // Include React and react-dom.render
 import React from 'react'
 import {render} from 'react-dom'
+if (DEVELOPMENT) {
+	global.Perf = require('react-addons-perf')
+}
 
 // Include google analytics (in production)
 import './start/analytics'
@@ -37,10 +40,6 @@ import routes from './routes'
 import configureStore from './ducks/store/configure-store'
 import Root from './containers/root'
 const store = configureStore()
-
-if (DEVELOPMENT) {
-	global.Perf = require('react-addons-perf')
-}
 
 import { loadStudents } from './ducks/actions/students'
 import { loadAreas } from './ducks/actions/areas'
