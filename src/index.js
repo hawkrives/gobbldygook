@@ -33,23 +33,24 @@ loadData()
 // Kick off the GUI
 console.log('3. 2.. 1... Blast off! 🚀')
 
-import { Router, hashHistory } from 'react-router'
+import { Router } from 'react-router'
+import history from './history'
 import routes from './routes'
 
 // Create the redux store
-import configureStore from './ducks/store/configure-store'
+import routerMiddleware from './redux/middleware/router'
+import configureStore from './redux'
 import Root from './containers/root'
 const store = configureStore()
+routerMiddleware.listenForReplays(store)
 
-import { loadStudents } from './ducks/actions/students'
-import { loadAreas } from './ducks/actions/areas'
-store.dispatch(loadStudents())
-store.dispatch(loadAreas())
+// import { loadStudents } from './ducks/actions/students'
+// import { loadAreas } from './ducks/actions/areas'
+// store.dispatch(loadStudents())
+// store.dispatch(loadAreas())
 
 render(
 	(<Root store={store}>
-		<Router history={hashHistory}>
-			{routes}
-		</Router>
+		<Router history={history} routes={routes} />
 	</Root>),
 	document.getElementById('app') )
