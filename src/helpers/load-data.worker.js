@@ -213,7 +213,7 @@ async function needsUpdate(type, path, hash) {
 async function removeDuplicateAreas() {
 	let allAreas
 	try {
-		await db.store('areas').getAll()
+		allAreas = await db.store('areas').getAll()
 	}
 	catch (err) {
 		throw err
@@ -231,7 +231,7 @@ async function removeDuplicateAreas() {
 	let ops = {}
 	for (let duplicatesList of withDuplicates) {
 		duplicatesList = sortBy(duplicatesList, area => area.sourcePath.length)
-		duplicatesList.unshift() // take off the shortest one
+		duplicatesList.shift() // take off the shortest one
 		ops = {...ops, ...zipObject(map(duplicatesList, item => ([item.sourcePath, null])))}
 	}
 
