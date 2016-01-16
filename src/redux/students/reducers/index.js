@@ -25,7 +25,7 @@ import {
 	addCourseToSchedule,
 	removeCourseFromSchedule,
 	reorderCourseInSchedule,
-} from '../../models/student'
+} from '../../../models/student'
 
 import {
 	LOAD_STUDENTS,
@@ -55,7 +55,7 @@ import {
 	REMOVE_OVERRIDE,
 	ADD_FABRICATION,
 	REMOVE_FABRICATION,
-} from '../constants/students'
+} from '../constants'
 
 
 const initialState = {}

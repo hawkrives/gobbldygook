@@ -1,8 +1,8 @@
-import map from 'lodash/collection/map'
+import * as studentActions from '../students/constants'
 import filter from 'lodash/collection/filter'
-import saveStudent from '../../helpers/save-student'
-import * as studentActions from '../constants/students'
 import includes from 'lodash/collection/includes'
+import map from 'lodash/collection/map'
+import saveStudent from '../../helpers/save-student'
 import values from 'lodash/object/values'
 
 const whitelist = [...values(studentActions)]

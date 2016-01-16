@@ -7,7 +7,7 @@ import {
 	START_PROGRESS,
 	INCREMENT_PROGRESS,
 	REMOVE_NOTIFICATION,
-} from '../constants/notifications'
+} from '../constants'
 
 
 export function removeNotification(id, delay=0) {

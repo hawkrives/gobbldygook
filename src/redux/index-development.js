@@ -4,9 +4,10 @@ import { persistState } from 'redux-devtools'
 import promiseMiddleware from 'redux-promise'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
-import saveStudentsMiddleware from '../middleware/save-students'
-import rootReducer from '../reducers/root'
-import DevTools from '../../containers/devtools'
+import saveStudentsMiddleware from './middleware/save-students'
+import routerMiddleware from './middleware/router'
+import rootReducer from './reducer'
+import DevTools from '../containers/devtools'
 
 const loggerMiddleware = createLogger({collapsed: true})
 
@@ -14,6 +15,7 @@ const finalCreateStore = compose(
 	applyMiddleware(
 		promiseMiddleware,
 		thunkMiddleware,
+		routerMiddleware,
 		saveStudentsMiddleware,
 		loggerMiddleware
 	),
@@ -25,8 +27,8 @@ export default function configureStore(initialState) {
 	const store = finalCreateStore(rootReducer, initialState)
 
 	if (module.hot) {
-		module.hot.accept('../reducers/root', () =>
-			store.replaceReducer(require('../reducers/root').default)
+		module.hot.accept('./reducer', () =>
+			store.replaceReducer(require('./reducer').default)
 		)
 	}
 

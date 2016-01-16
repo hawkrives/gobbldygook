@@ -8,7 +8,7 @@ import {
 	START_PROGRESS,
 	INCREMENT_PROGRESS,
 	REMOVE_NOTIFICATION,
-} from '../constants/notifications'
+} from '../constants'
 
 const initialState = []
 

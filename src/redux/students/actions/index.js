@@ -3,10 +3,10 @@ import range from 'lodash/utility/range'
 import map from 'lodash/collection/map'
 import uniq from 'lodash/array/uniq'
 
-import loadStudent from '../../helpers/load-student'
-import Student, {addScheduleToStudent} from '../../models/student'
-import Schedule from '../../models/schedule'
-import {removeStudentFromCache} from '../../helpers/save-student'
+import loadStudent from '../../../helpers/load-student'
+import Student, {addScheduleToStudent} from '../../../models/student'
+import Schedule from '../../../models/schedule'
+import {removeStudentFromCache} from '../../../helpers/save-student'
 
 import {
 	LOAD_STUDENTS,
@@ -36,7 +36,7 @@ import {
 	REMOVE_OVERRIDE,
 	ADD_FABRICATION,
 	REMOVE_FABRICATION,
-} from '../constants/students'
+} from '../constants'
 
 
 export function loadStudents() {
