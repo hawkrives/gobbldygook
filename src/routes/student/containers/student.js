@@ -67,12 +67,8 @@ export class Student extends Component {
 }
 
 
-function mapStateToProps(state, ownProps) {
-	// selects some state that is relevant to this component, and returns it.
-	// redux-react will bind it to props.
-	return {
-		student: state.students.present[ownProps.params.id],
-	}
-}
+const mapStateToProps = (state, ownProps) => ({
+	student: state.students.present[ownProps.params.id],
+})
 
 export default connect(mapStateToProps)(Student)

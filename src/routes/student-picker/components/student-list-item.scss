@@ -1,18 +1,9 @@
-@import '../base/variables';
-@import '../mixins/card';
-@import '../mixins/color';
-@import '../mixins/link-undecorated';
-
-.student-list {
-	@include card;
-	max-width: 35em;
-	width: 100%;
-	margin: 0 auto;
-	overflow: hidden;
-}
+@import '../../../base/variables';
+@import '../../../mixins/color';
+@import '../../../mixins/link-undecorated';
 
 .student-list-item {
-	@include link-undecorated;
+    @include link-undecorated;
 
 	background-color: white;
 	&.is-selected {

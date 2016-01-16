@@ -1,16 +1,16 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 import {Link} from 'react-router'
 
-import Toolbar from '../components/toolbar'
-import Button from '../components/button'
-import Icon from '../components/icon'
-import StudentList from '../components/student-list'
+import Toolbar from '../../../components/toolbar'
+import Button from '../../../components/button'
+import Icon from '../../../components/icon'
+import StudentList from './student-list'
 
 import './student-picker.scss'
 
-export function StudentPicker(props) {
+export default function StudentPicker(props) {
 	const {
-		actions,
+		destroyStudent,
 		filterText,
 		groupBy,
 		isEditing,
@@ -76,7 +76,7 @@ export function StudentPicker(props) {
 			</div>
 
 			<StudentList
-				actions={actions}
+				destroyStudent={destroyStudent}
 				filter={filterText}
 				isEditing={isEditing}
 				sortBy={sortBy}
@@ -85,8 +85,9 @@ export function StudentPicker(props) {
 		</div>
 	)
 }
+
 StudentPicker.propTypes = {
-	actions: PropTypes.object.isRequired,
+	destroyStudent: PropTypes.func.isRequired,
 	filterText: PropTypes.string.isRequired,
 	groupBy: PropTypes.string.isRequired,
 	isEditing: PropTypes.bool.isRequired,
@@ -98,71 +99,4 @@ StudentPicker.propTypes = {
 	onToggleEditing: PropTypes.func.isRequired,
 	sortBy: PropTypes.string.isRequired,
 	students: PropTypes.object.isRequired,
-}
-
-export default class StudentPickerContainer extends Component {
-	static propTypes = {
-		actions: PropTypes.objectOf(PropTypes.func),
-		students: PropTypes.object,
-	};
-
-	static contextTypes = {
-		location: PropTypes.object.isRequired,
-		router: PropTypes.object.isRequired,
-	};
-
-	constructor() {
-		super()
-
-		// since we are starting off without any data, there is no initial value
-		this.state = {
-			filterText: '',
-			isEditing: false,
-			sortBy: 'modified',
-			groupBy: 'nothing',
-		}
-	}
-
-	onAddStudent = () => {
-		const query = {...this.context.location.query, 'student-wizard': null}
-		this.context.router.push({pathname: this.context.location.pathname, query})
-	};
-
-	onOpenSearchOverlay = () => {
-		const query = {...this.context.location.query, 'search-overlay': null}
-		this.context.router.push({pathname: this.context.location.pathname, query})
-	};
-
-	onFilterChange = ev => {
-		this.setState({filterText: ev.target.value.toLowerCase()})
-	};
-
-	onGroupChange = () => {};
-
-	onSortChange = () => {
-		this.setState({sortBy: this.state.sortBy === 'modified' ? 'name' : 'modified'})
-	};
-
-	onToggleEditing = () => {
-		this.setState({isEditing: !this.state.isEditing})
-	};
-
-	render() {
-		// console.log('StudentPicker#render')
-		return (
-			<StudentPicker
-				{...this.props}
-				filterText={this.state.filterText}
-				groupBy={this.state.groupBy}
-				isEditing={this.state.isEditing}
-				onAddStudent={this.onAddStudent}
-				onFilterChange={this.onFilterChange}
-				onGroupChange={this.onGroupChange}
-				onOpenSearchOverlay={this.onOpenSearchOverlay}
-				onSortChange={this.onSortChange}
-				onToggleEditing={this.onToggleEditing}
-				sortBy={this.state.sortBy}
-			/>
-		)
-	}
 }
