@@ -47,9 +47,6 @@ routerMiddleware.listenForReplays(store)
 
 global.store = store
 
-import { loadStudents } from './redux/students/actions'
-store.dispatch(loadStudents())
-
 render(
 	(<Root store={store}>
 		<Router history={history} routes={routes} />

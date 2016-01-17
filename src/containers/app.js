@@ -11,7 +11,7 @@ export class App extends Component {
 			<DocumentTitle title='Gobbldygook'>
 				<div>
 					{this.props.content}
-					{this.props.overlay ? this.props.overlay : null}
+					{this.props.overlay}
 				</div>
 			</DocumentTitle>
 		)

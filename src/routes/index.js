@@ -5,7 +5,7 @@ export default {
 
 		getIndexRoute(location, cb) {
 			require.ensure([], () => {
-				cb(null, require('./student-picker').default)
+				cb(null, {content: require('./student-picker').default})
 			})
 		},
 
@@ -14,9 +14,9 @@ export default {
 				cb(null, [
 					require('./edit-area').default,  // edit-area
 					require('./search').default,  // search
-					require('./degub').default,  // search
+					require('./degub').default,  // debug
 					// require('./new-student').default,
-					// require('./student').default,
+					require('./student').default, // s/:id
 				])
 			})
 		},
