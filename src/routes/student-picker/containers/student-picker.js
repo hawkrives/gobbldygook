@@ -2,11 +2,12 @@ import React, {Component, PropTypes} from 'react'
 import StudentPicker from '../components/student-picker'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { destroyStudent } from '../../../redux/students/actions'
+import { destroyStudent, loadStudents } from '../../../redux/students/actions'
 
 export default class StudentPickerContainer extends Component {
 	static propTypes = {
 		destroyStudent: PropTypes.func.isRequired,
+		loadStudents: PropTypes.func.isRequired,
 		routing: PropTypes.object.isRequired,
 		students: PropTypes.object.isRequired,
 	};
@@ -18,6 +19,10 @@ export default class StudentPickerContainer extends Component {
 		sortBy: 'dateLastModified',
 		groupBy: 'nothing',
 	};
+
+	componentWillMount() {
+		this.props.loadStudents()
+	}
 
 	onFilterChange = ev => {
 		this.setState({filterText: ev.target.value.toLowerCase()})
@@ -59,7 +64,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	...bindActionCreators({destroyStudent}, dispatch),
+	...bindActionCreators({destroyStudent, loadStudents}, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentPickerContainer)
