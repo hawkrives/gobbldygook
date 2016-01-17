@@ -23,7 +23,9 @@ export function ga(...args) {
 	}
 }
 
-if (PRODUCTION) {
-	console.log('Initializing analytics 📊')
-	isogram()
+export default function start() {
+	if (PRODUCTION) {
+		console.log('Initializing analytics 📊')
+		isogram()
+	}
 }

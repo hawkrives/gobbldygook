@@ -24,7 +24,8 @@ if (DEVELOPMENT) {
 }
 
 // Include google analytics (in production)
-import './start/analytics'
+import startAnalytics from './analytics'
+startAnalytics()
 
 // Kick off data loading
 import loadData from './helpers/load-data'
