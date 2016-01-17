@@ -16,7 +16,7 @@ export class AreaEditScreen extends Component {
 	static propTypes = {
 		areas: PropTypes.shape({
 			areas: PropTypes.arrayOf(PropTypes.object).isRequired,
-			loading: PropTypes.bool.isRequired,
+			isLoading: PropTypes.bool.isRequired,
 		}).isRequired, // redux
 		loadAllAreas: PropTypes.func.isRequired,  // redux
 		params: PropTypes.object.isRequired,  // react-router
@@ -99,7 +99,7 @@ export class AreaEditScreen extends Component {
 			/>)
 		}
 
-		if (this.props.areas.loading) {
+		if (this.props.areas.isLoading) {
 			return <Loading>Loading areas…</Loading>
 		}
 
