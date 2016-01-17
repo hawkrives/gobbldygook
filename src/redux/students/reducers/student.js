@@ -149,8 +149,6 @@ export function studentReducer(student = initialState, action) {
 export default undoable(studentReducer, {
 	limit: 10,
 
-	debug: true,
-
 	filter: (action, currentState, previousState) => {
 		// don't save histories when nothing has changed.
 		return (currentState !== previousState)

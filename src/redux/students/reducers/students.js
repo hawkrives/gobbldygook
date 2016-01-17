@@ -14,14 +14,14 @@ import studentReducer from './student'
 
 const initialState = {}
 
-export function studentsReducer(state = initialState, action) {
+export default function studentsReducer(state = initialState, action) {
 	const {type, payload, error} = action
 
 	switch (type) {
 		case LOAD_STUDENTS: {
 			return zipObject(map(payload, student => [
 				student.id,
-				studentReducer(student, action),
+				studentReducer({present: student}, action),
 			]))
 		}
 
@@ -32,7 +32,7 @@ export function studentsReducer(state = initialState, action) {
 			}
 			return {
 				...state,
-				[payload.id]: studentReducer(payload, action),
+				[payload.id]: studentReducer({present: payload}, action),
 			}
 		}
 

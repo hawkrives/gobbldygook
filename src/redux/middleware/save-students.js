@@ -18,7 +18,7 @@ const saveStudentsMiddleware = store => next => action => {
 
 	// save a copy of the old state
 	const oldState = store.getState()
-	const oldStudents = oldState.students.students
+	const oldStudents = oldState.students.data
 
 	// dispatch the action along the chain
 	// this is what actually changes the state
@@ -26,11 +26,14 @@ const saveStudentsMiddleware = store => next => action => {
 
 	// grab a copy of the *new* state
 	const newState = store.getState()
-	const newStudents = newState.students.students
+	const newStudents = newState.students.data
+
+	if (oldStudents === newStudents) {
+		return result
+	}
 
 	// get any student objects whose identity has changed
 	const studentsToSave = filter(newStudents, (_, id) => newStudents[id] !== oldStudents[id])
-	console.log('studentsToSave', studentsToSave.length)
 
 	// save them
 	const studentSavingPromises = map(studentsToSave, stu => saveStudent(stu.present))

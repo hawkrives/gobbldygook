@@ -6,17 +6,23 @@ import studentsReducer from './students'
 
 const initialState = {
 	isLoading: false,
-	students: {},
+	data: {},
 }
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case BEGIN_LOADING: {
-			return {...state, isLoading: true}
+			return {
+				...state,
+				isLoading: true,
+			}
 		}
 
 		default: {
-			return {students: studentsReducer(state.students, action), isLoading: false}
+			return {
+				data: studentsReducer(state.data, action),
+				isLoading: false,
+			}
 		}
 	}
 }
