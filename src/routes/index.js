@@ -10,11 +10,10 @@ export default {
 		},
 
 		getChildRoutes(state, cb) {
-			console.log('getChildRoutes', state)
 			require.ensure([], () => {
 				cb(null, [
-					require('./edit-area').default,
-					// require('./course-searcher-overlay').default,
+					require('./edit-area').default,  // edit-area
+					require('./search').default,  // search
 					// require('./new-student').default,
 					// require('./student').default,
 				])

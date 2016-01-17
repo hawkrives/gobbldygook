@@ -1,6 +1,6 @@
 export default {
 	path: 'search',
-	getComponents(cb) {
+	getComponents(state, cb) {
 		require.ensure([], () => {
 			cb(null, {
 				overlay: require('./containers/course-searcher-overlay').default,
