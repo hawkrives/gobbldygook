@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import StudentPicker from '../components/student-picker'
+import Loading from '../../../components/loading'
+import mapValues from 'lodash/object/mapValues'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { destroyStudent, loadStudents } from '../../../redux/students/actions'
@@ -39,6 +41,11 @@ export default class StudentPickerContainer extends Component {
 	};
 
 	render() {
+		if (this.props.students.isLoading) {
+			return <Loading>Loading students…</Loading>
+		}
+
+		const students = mapValues(this.props.students.data, s => s.present)
 		return (
 			<StudentPicker
 				{...this.props}
@@ -52,6 +59,7 @@ export default class StudentPickerContainer extends Component {
 				onSortChange={this.onSortChange}
 				onToggleEditing={this.onToggleEditing}
 				sortBy={this.state.sortBy}
+				students={students}
 			/>
 		)
 	}
@@ -59,7 +67,7 @@ export default class StudentPickerContainer extends Component {
 
 
 const mapStateToProps = state => ({
-	students: state.students.present,
+	students: state.students,
 	routing: state.routing,
 })
 
