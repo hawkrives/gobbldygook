@@ -13,6 +13,9 @@ const semesters = new Map([
  * @returns {String} - the nice semester name
  */
 export default function semesterName(semester) {
+	if (typeof semester === 'string') {
+		semester = parseInt(semester, 10)
+	}
 	return semesters.has(semester)
         ? semesters.get(semester)
         : 'Unknown (' + semester + ')'
