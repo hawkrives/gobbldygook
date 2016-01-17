@@ -23,4 +23,9 @@ App.propTypes = {
 	overlay: PropTypes.node,
 }
 
+import StudentPicker from '../routes/student-picker/containers/student-picker'
+App.defaultProps = {
+	content: <StudentPicker />,
+}
+
 export default DragDropContext(HTML5Backend)(App)
