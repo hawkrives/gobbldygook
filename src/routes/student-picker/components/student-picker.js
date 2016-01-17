@@ -14,10 +14,8 @@ export default function StudentPicker(props) {
 		filterText,
 		groupBy,
 		isEditing,
-		onAddStudent,
 		onFilterChange,
 		onGroupChange,
-		onOpenSearchOverlay,
 		onSortChange,
 		onToggleEditing,
 		sortBy,
@@ -33,10 +31,12 @@ export default function StudentPicker(props) {
 
 			<div className='student-list-toolbar'>
 				<Toolbar className='student-list-buttons'>
-					<Button className='student-list--button' onClick={onOpenSearchOverlay}>
+					<Link to={'search/'}>
+					<Button className='student-list--button'>
 						<Icon name='android-search' />
 						Courses
 					</Button>
+					</Link>
 
 					<input
 						type='search'
@@ -62,7 +62,7 @@ export default function StudentPicker(props) {
 					</Button>
 
 					<Link to={'wizard/'}>
-					<Button className='student-list--button' onClick={onAddStudent}>
+					<Button className='student-list--button'>
 						<Icon name='android-add' />
 						New
 					</Button>
@@ -91,10 +91,8 @@ StudentPicker.propTypes = {
 	filterText: PropTypes.string.isRequired,
 	groupBy: PropTypes.string.isRequired,
 	isEditing: PropTypes.bool.isRequired,
-	onAddStudent: PropTypes.func.isRequired,
 	onFilterChange: PropTypes.func.isRequired,
 	onGroupChange: PropTypes.func.isRequired,
-	onOpenSearchOverlay: PropTypes.func.isRequired,
 	onSortChange: PropTypes.func.isRequired,
 	onToggleEditing: PropTypes.func.isRequired,
 	sortBy: PropTypes.string.isRequired,
