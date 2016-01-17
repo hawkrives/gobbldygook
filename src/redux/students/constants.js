@@ -31,3 +31,5 @@ export const REMOVE_OVERRIDE = 'gobbldygook/students/REMOVE_OVERRIDE'
 
 export const ADD_FABRICATION = 'gobbldygook/students/ADD_FABRICATION'
 export const REMOVE_FABRICATION = 'gobbldygook/students/REMOVE_FABRICATION'
+
+export const BEGIN_LOADING = 'gobbldygook/students/BEGIN_LOADING'

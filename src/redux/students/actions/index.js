@@ -36,16 +36,24 @@ import {
 	REMOVE_OVERRIDE,
 	ADD_FABRICATION,
 	REMOVE_FABRICATION,
+	BEGIN_LOADING,
 } from '../constants'
 
 
-export function loadStudents() {
-	// Get the list of students we know about, or the string 'null',
-	// if localStorage doesn't have the key 'studentIds'.
-	let studentIds = uniq(JSON.parse(localStorage.getItem('studentIds')) || [])
+function beginLoading() {
+	return {type: BEGIN_LOADING}
+}
 
-	let promises = map(studentIds, loadStudent)
-	return { type: LOAD_STUDENTS, payload: Promise.all(promises) }
+export function loadStudents() {
+	return dispatch => {
+		dispatch(beginLoading())
+		// Get the list of students we know about, or the string 'null',
+		// if localStorage doesn't have the key 'studentIds'.
+		let studentIds = uniq(JSON.parse(localStorage.getItem('studentIds')) || [])
+
+		let promises = map(studentIds, loadStudent)
+		return dispatch({ type: LOAD_STUDENTS, payload: Promise.all(promises) })
+	}
 }
 
 

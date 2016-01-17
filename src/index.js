@@ -45,10 +45,10 @@ import Root from './containers/root'
 const store = configureStore()
 routerMiddleware.listenForReplays(store)
 
-// import { loadStudents } from './ducks/actions/students'
-// import { loadAreas } from './ducks/actions/areas'
-// store.dispatch(loadStudents())
-// store.dispatch(loadAreas())
+global.store = store
+
+import { loadStudents } from './redux/students/actions'
+store.dispatch(loadStudents())
 
 render(
 	(<Root store={store}>
