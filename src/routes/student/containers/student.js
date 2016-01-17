@@ -1,65 +1,62 @@
 import React, { Component, PropTypes, cloneElement } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import omit from 'lodash/object/omit'
 
-import Sidebar from './sidebar'
-import Loading from '../components/loading'
-import getStudentCourses from '../helpers/get-student-courses'
-import ShareSheet from './share-sheet'
+// import Sidebar from './sidebar'
+import Loading from '../../../components/loading'
+import getStudentCourses from '../../../helpers/get-student-courses'
 
 import './student.scss'
 
 export class Student extends Component {
 	static propTypes = {
-		actions: PropTypes.object,
-		areas: PropTypes.array,
-		canRedo: PropTypes.bool,
-		canUndo: PropTypes.bool,
-		children: PropTypes.node.isRequired,  // from react-router
-		params: PropTypes.object,
-		student: PropTypes.object,
+		content: PropTypes.node,  // from react-router
+		isLoading: PropTypes.bool.isRequired,
+		overlay: PropTypes.node,  // from react-router
+		params: PropTypes.object,  // react-router
+		sidebar: PropTypes.node,  // from react-router
+		student: PropTypes.object,  // redux
 	};
 
-	static contextTypes = {
-		location: PropTypes.object.isRequired,
+	state = {
+		courses: [],
 	};
-
-	constructor() {
-		super()
-		this.state = {
-			courses: [],
-		}
-	}
 
 	componentWillMount() {
-		this.componentWillReceiveProps(this.props)
+		this.handleLoadStudent(this.props)
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.student) {
-			getStudentCourses(nextProps.student).then(courses => {
+		this.handleLoadStudent(nextProps)
+	}
+
+	handleLoadStudent = props => {
+		if (props.student) {
+			getStudentCourses(props.student).then(courses => {
 				this.setState({
 					courses: courses,
 				})
 				return null
 			})
 		}
-	}
+	};
 
 	render() {
-		if (!this.props.student) {
-			return <Loading>{`Loading Student ${this.props.params.id}`}</Loading>
+		console.log(this.props)
+
+		if (this.props.isLoading){//} || !this.props.student) {
+			return <Loading>Loading Student…</Loading>
 		}
 
-		const childProps = omit(this.props, 'children')
+		const name = this.props.student ? this.props.student.present.name : 'Loading…'
 
 		return (
-			<DocumentTitle title={`${this.props.student.name} | Gobbldygook`}>
+			<DocumentTitle title={`${name} | Gobbldygook`}>
 				<div className='student'>
-					<Sidebar {...childProps} courses={this.state.courses} areas={this.props.areas} />
-					{cloneElement(this.props.children, {...childProps, courses: this.state.courses, className: 'content'})}
-					{'share' in this.context.location.query && <ShareSheet student={this.props.student} />}
+					{/*<Sidebar></Sidebar>*/}
+					{/*this.props.sidebar*/}
+					{this.props.content}
+					{/*this.props.overlay*/}
 				</div>
 			</DocumentTitle>
 		)
@@ -68,7 +65,8 @@ export class Student extends Component {
 
 
 const mapStateToProps = (state, ownProps) => ({
-	student: state.students.present[ownProps.params.id],
+	student: state.students.data[ownProps.params.id],
+	isLoading: state.students.isLoading,
 })
 
 export default connect(mapStateToProps)(Student)
