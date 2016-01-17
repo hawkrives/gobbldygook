@@ -105,13 +105,9 @@ class Semester extends Component {
 	};
 
 	initiateSearch = schedule => {
-		const query = {
-			...this.context.location.query,
-			partialSearch: JSON.stringify({
-				term: [Number(`${schedule.year}${schedule.semester}`)],
-			}),
-		}
-		this.context.router.push({pathname: this.context.location.pathname, query})
+		this.props.actions.setPartialQuery({
+			term: [Number(`${schedule.year}${schedule.semester}`)],
+		})
 	};
 
 	render() {
