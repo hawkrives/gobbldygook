@@ -10,14 +10,11 @@ import compareProps from '../helpers/compare-props'
 import itemTypes from '../models/item-types'
 
 import List from './list'
-import DetailedCourse from './detailed-course'
-import BasicCourse from './basic-course'
-import Button from './button'
+import CourseTitle from './course-title'
+import buildCourseIdent from '../helpers/build-course-ident'
 import Icon from './icon'
-import Toolbar from './toolbar'
-import Modal from './modal'
 
-import './course.scss'
+import './inline-course.scss'
 
 // Implements the drag source contract.
 const courseSource = {
@@ -43,7 +40,6 @@ function collect(connect, monitor) {
 
 class Course extends Component {
 	static propTypes = {
-		actions: PropTypes.object.isRequired,
 		conflicts: PropTypes.array,
 		connectDragSource: PropTypes.func.isRequired,  // react-dnd
 		course: PropTypes.object.isRequired,
@@ -75,7 +71,7 @@ class Course extends Component {
 	};
 
 	render() {
-		// console.log('Course#render')
+		const { course } = this.props
 		const warnings = this.props.conflicts[this.props.index || 0]
 		const hasWarnings = compact(warnings).length
 
@@ -83,7 +79,7 @@ class Course extends Component {
 		const warningEls = map(validWarnings, (w, index) =>
 			<li key={index}><Icon name={w.icon} /> {w.msg}</li>)
 
-		let classSet = cx('course', {
+		let classSet = cx('course course--inline info-wrapper', {
 			expanded: this.state.isOpen,
 			'has-warnings': hasWarnings,
 			'is-dragging': this.props.isDragging,
@@ -93,31 +89,29 @@ class Course extends Component {
 			<List type='inline' className='warnings'>{warningEls}</List>
 		)
 
-		const modal = this.state.isOpen && (
-			<Modal
-				backdropClassName='modal-backdrop'
-				modalClassName='course course--modal'
-				onClose={this.closeModal}
-			>
-				<Toolbar className='window-tools'>
-					<Button className='close-modal' onClick={this.closeModal}>
-						<Icon name='close' />
-					</Button>
-				</Toolbar>
-
-				<DetailedCourse {...this.props} className='content'>
-					{warningList || null}
-				</DetailedCourse>
-			</Modal>
-		)
-
 		return this.props.connectDragSource(
-			<article className={classSet} onClick={this.openModal}>
+			<article className={classSet}>
 				{warningList || null}
 
-				<BasicCourse className='course--inline info-wrapper' course={this.props.course} />
-
-				{modal || null}
+				<div className='info-rows'>
+					<CourseTitle title={course.title} name={course.name} type={course.type} />
+					<div className='summary'>
+						<span className='identifier'>
+							{buildCourseIdent(course)}
+						</span>
+						<span className='type'>{course.type}</span>
+						{course.gereqs && <ul className='gereqs'>
+							{map(course.gereqs, (ge, idx) =>
+								<li key={ge + idx}>{ge}</li>
+							)}
+						</ul>}
+						{course.prerequisites &&
+							<span className='has-prerequisite' title={course.prerequisites}>!</span>}
+					</div>
+					<div className='summary'>
+						{course.times}
+					</div>
+				</div>
 			</article>
 		)
 	}
