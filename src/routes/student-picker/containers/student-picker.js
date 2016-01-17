@@ -48,7 +48,7 @@ export default class StudentPickerContainer extends Component {
 		const students = mapValues(this.props.students.data, s => s.present)
 		return (
 			<StudentPicker
-				{...this.props}
+				destroyStudent={this.props.destroyStudent}
 				filterText={this.state.filterText}
 				groupBy={this.state.groupBy}
 				isEditing={this.state.isEditing}
@@ -58,6 +58,7 @@ export default class StudentPickerContainer extends Component {
 				onOpenSearchOverlay={this.onOpenSearchOverlay}
 				onSortChange={this.onSortChange}
 				onToggleEditing={this.onToggleEditing}
+				routing={this.props.routing}
 				sortBy={this.state.sortBy}
 				students={students}
 			/>
