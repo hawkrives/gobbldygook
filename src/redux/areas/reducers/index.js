@@ -3,7 +3,7 @@ import {
 	LOADING_AREAS,
 } from '../constants'
 
-const initialState = {areas: [], isLoading: false}
+const initialState = {data: [], isLoading: false}
 
 export default function reducer(state = initialState, action) {
 	const {type, payload} = action
@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action) {
 		}
 
 		case LOAD_ALL_AREAS: {
-			return {...state, areas: payload, isLoading: false}
+			return {...state, data: payload, isLoading: false}
 		}
 
 		default: {

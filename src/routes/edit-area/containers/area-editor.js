@@ -15,7 +15,7 @@ import AreaEditor from '../components/area-editor'
 export class AreaEditScreen extends Component {
 	static propTypes = {
 		areas: PropTypes.shape({
-			areas: PropTypes.arrayOf(PropTypes.object).isRequired,
+			data: PropTypes.arrayOf(PropTypes.object).isRequired,
 			isLoading: PropTypes.bool.isRequired,
 		}).isRequired, // redux
 		loadAllAreas: PropTypes.func.isRequired,  // redux
@@ -52,7 +52,7 @@ export class AreaEditScreen extends Component {
 			return
 		}
 
-		const allAreas = props.areas.areas
+		const allAreas = props.areas.data
 
 		const area = find(allAreas, area =>
 			area.type === type && area.name === name && area.revision === revision)
@@ -103,7 +103,7 @@ export class AreaEditScreen extends Component {
 			return <Loading>Loading areas…</Loading>
 		}
 
-		let areas = this.props.areas.areas
+		let areas = this.props.areas.data
 
 		if (name) {
 			name = decodeURIComponent(name)
