@@ -1,6 +1,6 @@
 export default {
 	path: 'degub',
-	getComponents(cb) {
+	getComponents(state, cb) {
 		require.ensure([], () => {
 			cb(null, {
 				content: require('./components/degub').default,

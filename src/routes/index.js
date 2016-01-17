@@ -14,6 +14,7 @@ export default {
 				cb(null, [
 					require('./edit-area').default,  // edit-area
 					require('./search').default,  // search
+					require('./degub').default,  // search
 					// require('./new-student').default,
 					// require('./student').default,
 				])

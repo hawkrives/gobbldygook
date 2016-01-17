@@ -1,39 +1,64 @@
 import React, { PropTypes } from 'react'
 import map from 'lodash/collection/map'
 import size from 'lodash/collection/size'
+import { connect } from 'react-redux'
+import { ActionTypes } from 'redux-undo'
 
-export default function Degub(props) {
-	const {students, areas, actions, canUndo, canRedo} = props
-	console.log('degub.render', [size(students), size(areas), size(actions), canUndo, canRedo])
+function Student({undo, redo, student}) {
+	const canUndo = 'past' in student && student.past.length
+	const canRedo = 'future' in student && student.future.length
+	const present = student.present
+
 	return (
-		<div className={`degub ${props.className || ''}`}>
-			<button disabled={!canUndo} onClick={actions.undo}>Undo</button>
-			<button disabled={!canRedo} onClick={actions.redo}>Redo</button>
-			<ul>
-				{map(students, (s, i) =>
-					<li key={i}>{s.id} {s.name}</li>)}
-			</ul>
-			<ul>
-				{map(areas, (s, i) =>
-					<li key={i}>{s.name} ({s.revision})</li>)}
-			</ul>
+		<div>
+			<button disabled={!canUndo} onClick={undo}>Undo</button>
+			<button disabled={!canRedo} onClick={redo}>Redo</button>
+			{' '}<code>{present.id}</code> {present.name}
 		</div>
 	)
 }
 
+export default function Degub(props) {
+	const students = props.students.data
+	const isLoading = props.students.isLoading
+	console.log('degub.render', isLoading, size(students))
+	if (isLoading) {
+		return 'Loading students…'
+	}
+
+	return (
+		<ul className={`degub ${props.className || ''}`}>
+			{map(students, (s, i) =>
+				<li key={i}>
+					<Student
+						student={s}
+						undo={() => props.undo(s.present.id)}
+						redo={() => props.redo(s.present.id)}
+					/>
+				</li>)}
+		</ul>
+	)
+}
+
 Degub.propTypes = {
-	actions: PropTypes.objectOf(PropTypes.func).isRequired,
-	areas: PropTypes.array.isRequired,
-	canRedo: PropTypes.bool.isRequired,
-	canUndo: PropTypes.bool.isRequired,
 	className: PropTypes.string,
+	redo: PropTypes.func.isRequired,
 	students: PropTypes.object.isRequired,
+	undo: PropTypes.func.isRequired,
 }
 
 Degub.defaultProps = {
 	actions: {},
-	areas: [],
-	canRedo: false,
-	canUndo: false,
 	students: {},
 }
+
+const mapStateToProps = state => ({
+	students: state.students,
+})
+
+const mapDispatchToProps = dispatch => ({
+	undo: id => dispatch({type: ActionTypes.UNDO, payload: {studentId: id}}),
+	redo: id => dispatch({type: ActionTypes.REDO, payload: {studentId: id}}),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Degub)
