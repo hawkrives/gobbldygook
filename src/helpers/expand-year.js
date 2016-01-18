@@ -6,6 +6,9 @@
  * @returns {String} - the expanded year
  */
 export default function expandYear(year, short=false, seperator='—') {
+    if (year === undefined) {
+        return '???'
+    }
 	const thisYear = year
 	let nextYear = parseInt(thisYear, 10) + 1
 	if (short) {
