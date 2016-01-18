@@ -35,6 +35,9 @@ export default function processedReducer(state = initialState, action) {
 		case GET_STUDENT_DATA:
 		case BEGIN_CHECK_GRADUATABILITY:
 		case CHECK_GRADUATABILITY: {
+			if (!payload.id) {
+				console.error('no id in action for processedReducer', action)
+			}
 			return {
 				...state,
 				[payload.id]: singleReducer(state[payload.id], action),
