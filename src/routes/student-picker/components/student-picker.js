@@ -80,6 +80,7 @@ export default function StudentPicker(props) {
 				filter={filterText}
 				isEditing={isEditing}
 				sortBy={sortBy}
+				groupBy={groupBy}
 				students={students}
 			/>
 		</div>

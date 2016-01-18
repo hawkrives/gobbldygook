@@ -19,6 +19,7 @@ export default function StudentList(props) {
 	let {
 		filter: filterText,
 		sortBy: sortByKey,
+		groupBy: groupByKey,
 	} = props
 
 	filterText = filterText.toLowerCase()
@@ -28,7 +29,7 @@ export default function StudentList(props) {
 			filter(
 				students,
 				s => fuzzysearch(filterText, s.data.name.toLowerCase())),
-			s => s[sortByKey]),
+			s => s.data[sortByKey]),
 		student =>
 			<StudentListItem
 				key={student.data.id}
@@ -48,8 +49,9 @@ export default function StudentList(props) {
 StudentList.propTypes = {
 	destroyStudent: PropTypes.func.isRequired,
 	filter: PropTypes.string.isRequired,
+	groupBy: PropTypes.string.isRequired,
 	isEditing: PropTypes.bool.isRequired,
-	sortBy: PropTypes.oneOf(['dateLastModified', 'name']).isRequired,
+	sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate']).isRequired,
 	students: PropTypes.object.isRequired,
 }
 
