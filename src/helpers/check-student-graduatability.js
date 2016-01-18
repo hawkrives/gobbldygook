@@ -19,9 +19,9 @@ import getActiveStudentCourses from './get-active-student-courses'
  */
 export default function checkStudentGraduatability(student) {
 	const areaPromises = map(student.areas, checkStudentAgainstArea(student))
-	return Promise.all(areaPromises).then(details => {
-		const goodAreas = filter(details, area => area._area && area._area.computed === true)
-		const allAreasPass = (size(goodAreas) === size(details))
+	return Promise.all(areaPromises).then(areaDetails => {
+		const goodAreas = filter(areaDetails, area => area._area && area._area.computed === true)
+		const allAreasPass = (size(goodAreas) === size(areaDetails))
 
 		const currentCredits = countCredits(getActiveStudentCourses(student))
 		const hasEnoughCredits = (currentCredits >= student.creditsNeeded)
@@ -31,7 +31,7 @@ export default function checkStudentGraduatability(student) {
 		return {
 			...student,
 			canGraduate: graduatability,
-			areas: details,
+			areas: areaDetails,
 		}
 	})
 }
