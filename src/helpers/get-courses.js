@@ -12,7 +12,7 @@ const courseCache = new Map()
  * @returns {Promise} - TreoDatabasePromise
  * @fulfill {Object} - the course object, potentially with an embedded error message.
  */
-async function getCourse({clbid, term}) {
+export async function getCourse({clbid, term}) {
 	if (courseCache.has(clbid)) {
 		return await courseCache.get(clbid)
 	}

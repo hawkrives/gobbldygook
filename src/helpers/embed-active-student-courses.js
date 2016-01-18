@@ -1,6 +1,7 @@
 import filter from 'lodash/collection/filter'
 import map from 'lodash/collection/map'
 import zipObject from 'lodash/array/zipObject'
+import {getCourse} from './get-courses'
 
 export default function embedActiveStudentCourses(student, {cache=[]}) {
 	// - At it's core, this method just needs to get the list of courses that a student has chosen.
@@ -11,25 +12,23 @@ export default function embedActiveStudentCourses(student, {cache=[]}) {
 	// - Finally, remember that a given `clbid` might not exist in the database, in which case we get back 'undefined'.
 	//   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 
-	return new Promise(resolve => {
-		const active = [...filter(student.schedules, {active: true})]
+	const active = [...filter(student.schedules, {active: true})]
 
-		const enhanced = map(active, schedule => {
-            schedule = {
-                ...schedule,
-                    courses: map(schedule.clbids, clbid => {
-                    let course = cache[clbid]
-                    if (!course) {
-                        course = {clbid, term: schedule.term, error: 'Could not find course'}
-                    }
-                    return course
-                }),
-            }
-            return [schedule.id, schedule]
-        })
+	const enhanced = map(active, schedule => {
+		let courses = map(schedule.clbids, clbid => {
+			let course = cache[clbid] || getCourse({clbid, term: parseInt(`${schedule.year}${schedule.semester}`)})
+			if (!course) {
+				course = {clbid, term: schedule.term, error: 'Could not find course'}
+			}
+			return course
+		})
 
-        const obj = zipObject(enhanced)
+		return Promise.all(courses).then(fulfilledCourses => {
+			return [schedule.id, {...schedule, courses: fulfilledCourses}]
+		})
+	})
 
-		resolve(obj)
+	return Promise.all(enhanced).then(fulfilled => {
+		return zipObject(fulfilled)
 	})
 }
