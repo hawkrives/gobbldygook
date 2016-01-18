@@ -1,4 +1,5 @@
-@import 'nth-root';
+@import './nth-root.scss';
+@import './gcd.scss';
 
 @function pow($base, $exponent, $prec: 12) {
 	// Handles decimal exponents by trying to convert them into a fraction and

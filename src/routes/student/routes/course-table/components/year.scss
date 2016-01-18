@@ -1,7 +1,7 @@
-@import '../base/variables';
-@import '../mixins/color';
-@import '../mixins/heading-neutral';
-@import '../mixins/no-select';
+@import '../../../../../base/variables';
+@import '../../../../../mixins/color';
+@import '../../../../../mixins/heading-neutral';
+@import '../../../../../mixins/no-select';
 
 $year-title-size: 2em;
 $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75.

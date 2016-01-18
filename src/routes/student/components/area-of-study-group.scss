@@ -1,7 +1,7 @@
-@import '../base/variables';
-@import '../mixins/card';
-@import '../mixins/color';
-@import '../mixins/heading-neutral';
+@import '../../../base/variables';
+@import '../../../mixins/card';
+@import '../../../mixins/color';
+@import '../../../mixins/heading-neutral';
 
 .area-of-study-group {
 	@include card;
