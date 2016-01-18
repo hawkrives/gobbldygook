@@ -20,7 +20,7 @@ export function Semester() {
 	const { student, semester, year, canDrop, schedule } = this.props
 	const { courses, validation } = schedule
 
-	// recommendedCredits is 4 for fall/spring and 1 for everything else
+	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
 	const recommendedCredits = (semester === 1 || semester === 3) ? 4 : 1
 	const currentCredits = courses.length ? countCredits(courses) : 0
 
