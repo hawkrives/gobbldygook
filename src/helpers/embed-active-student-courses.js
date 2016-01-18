@@ -1,5 +1,6 @@
 import filter from 'lodash/collection/filter'
-import forEach from 'lodash/collection/forEach'
+import map from 'lodash/collection/map'
+import zipObject from 'lodash/array/zipObject'
 
 export default function embedActiveStudentCourses(student, {cache=[]}) {
 	// - At it's core, this method just needs to get the list of courses that a student has chosen.
@@ -11,20 +12,24 @@ export default function embedActiveStudentCourses(student, {cache=[]}) {
 	//   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 
 	return new Promise(resolve => {
-		const activeSchedules = {...filter(student.schedules, {active: true})}
+		const active = [...filter(student.schedules, {active: true})]
 
-		forEach(activeSchedules, schedule => {
-			schedule.courses = []
+		const enhanced = map(active, schedule => {
+            schedule = {
+                ...schedule,
+                    courses: map(schedule.clbids, clbid => {
+                    let course = cache[clbid]
+                    if (!course) {
+                        course = {clbid, term: schedule.term, error: 'Could not find course'}
+                    }
+                    return course
+                }),
+            }
+            return [schedule.id, schedule]
+        })
 
-			forEach(schedule.clbids, clbid => {
-				let course = cache[clbid]
-				if (!course) {
-					course = {clbid, term: schedule.term, error: 'Could not find course'}
-				}
-				schedule.courses.push(course)
-			})
-		})
+        const obj = zipObject(enhanced)
 
-		resolve(activeSchedules)
+		resolve(obj)
 	})
 }
