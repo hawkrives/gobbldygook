@@ -2,7 +2,6 @@ import all from 'lodash/collection/all'
 import any from 'lodash/collection/any'
 import compact from 'lodash/array/compact'
 import contains from 'lodash/collection/contains'
-import curry from 'lodash/function/curry'
 import has from 'lodash/object/has'
 import indexOf from 'lodash/array/indexOf'
 import isArray from 'lodash/lang/isArray'
@@ -12,7 +11,7 @@ import rest from 'lodash/array/rest'
 import size from 'lodash/collection/size'
 import takeWhile from 'lodash/array/takeWhile'
 
-const checkCourseAgainstQueryBit = curry((course, [key, values]) => {
+const checkCourseAgainstQueryBit = course => ([key, values]) => {
 	if (!has(course, key)) {
 		return false
 	}
@@ -68,7 +67,7 @@ const checkCourseAgainstQueryBit = curry((course, [key, values]) => {
 	if (XOR)  result = compact(internalMatches).length === 1
 
 	return result
-})
+}
 
 /**
  * Checks if a course passes a query check.
@@ -77,11 +76,11 @@ const checkCourseAgainstQueryBit = curry((course, [key, values]) => {
  * @param {Course} course - the course to check
  * @returns {Boolean}
  */
-const checkCourseAgainstQuery = curry((query, course) => {
+const checkCourseAgainstQuery = query => course => {
 	let kvPairs = pairs(query)
 	let matches = takeWhile(kvPairs, checkCourseAgainstQueryBit(course))
 
 	return size(kvPairs) === size(matches) && all(matches)
-})
+}
 
 export default checkCourseAgainstQuery
