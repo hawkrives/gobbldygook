@@ -8,6 +8,7 @@ import saveStudentsMiddleware from './middleware/save-students'
 import routerMiddleware from './middleware/router'
 import rootReducer from './reducer'
 import DevTools from '../containers/devtools'
+import freezingMiddleware from 'redux-freeze'
 
 const loggerMiddleware = createLogger({collapsed: true})
 
@@ -16,6 +17,7 @@ const finalCreateStore = compose(
 		promiseMiddleware,
 		thunkMiddleware,
 		routerMiddleware,
+		freezingMiddleware,
 		saveStudentsMiddleware,
 		loggerMiddleware
 	),
