@@ -1,7 +1,5 @@
 import db from './db'
 import map from 'lodash/collection/map'
-import pluck from 'lodash/collection/pluck'
-import includes from 'lodash/collection/includes'
 
 const courseCache = new Map()
 /**
@@ -39,8 +37,6 @@ export async function getCourse({clbid, term}) {
 // 		.catch(error => ({clbid, term, error: error.message}))
 // }
 
-export default getCourse
-
 
 /**
  * Takes a list of clbids, and returns a list of the course objects for those
@@ -52,29 +48,4 @@ export default getCourse
  */
 export default function getCourses(clbids) {
 	return Promise.all(map(clbids, getCourse))
-}
-
-
-/**
- * Takes a list of schedules, and returns a list of course objects from the
- * included clbids.
- *
- * @param {Schedule[]} schedules - a list of schedules
- * @param {Object[]} cachedCourses - a list of all cached courses
- * @returns {Promise} - a promise for the course data
- * @fulfill {Object[]} - the courses.
- */
-export function getCoursesFromSchedules(schedules, cachedCourses) {
-	let cachedClbids = pluck(cachedCourses, 'clbid')
-
-	let needToCache = []
-	for (let {clbids, year, semester} of schedules) {
-		for (let clbid of clbids) {
-			if (!includes(cachedClbids, clbid)) {
-				needToCache.push({clbid, term: `${year}${semester}`})
-			}
-		}
-	}
-
-	return getCourses(needToCache)
 }
