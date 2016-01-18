@@ -1,10 +1,11 @@
 import React, { Component, PropTypes, cloneElement } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { loadStudent } from '../../../redux/students/actions/load-students'
 
 // import Sidebar from './sidebar'
 import Loading from '../../../components/loading'
-import getStudentCourses from '../../../helpers/get-student-courses'
 
 import './student.scss'
 
@@ -12,38 +13,28 @@ export class Student extends Component {
 	static propTypes = {
 		content: PropTypes.node,  // from react-router
 		isLoading: PropTypes.bool.isRequired,
+		loadStudent: PropTypes.func.isRequired,
 		overlay: PropTypes.node,  // from react-router
 		params: PropTypes.object,  // react-router
 		sidebar: PropTypes.node,  // from react-router
 		student: PropTypes.object,  // redux
 	};
 
-	state = {
-		courses: [],
-	};
-
 	componentWillMount() {
-		this.handleLoadStudent(this.props)
+		this.loadStudent(this.props)
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.handleLoadStudent(nextProps)
+		this.loadStudent(nextProps)
 	}
 
-	handleLoadStudent = props => {
-		if (props.student) {
-			getStudentCourses(props.student).then(courses => {
-				this.setState({
-					courses: courses,
-				})
-				return null
-			})
+	loadStudent = props => {
+		if (!props.student || props.params.studentId !== this.props.params.studentId)  {
+			props.loadStudent(props.params.studentId)
 		}
 	};
 
 	render() {
-		console.log(this.props)
-
 		if (this.props.isLoading){//} || !this.props.student) {
 			return <Loading>Loading Student…</Loading>
 		}
@@ -66,7 +57,11 @@ export class Student extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
 	student: state.students.data[ownProps.params.id],
+	processed: state.processed[ownProps.params.id],
 	isLoading: state.students.isLoading,
 })
 
-export default connect(mapStateToProps)(Student)
+const mapDispatchToProps = dispatch =>
+	bindActionCreators({loadStudent}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Student)
