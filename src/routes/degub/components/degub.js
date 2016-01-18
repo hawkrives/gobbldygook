@@ -3,6 +3,7 @@ import map from 'lodash/collection/map'
 import size from 'lodash/collection/size'
 import { connect } from 'react-redux'
 import { ActionTypes } from 'redux-undo'
+import { loadStudents } from '../../../redux/students/actions'
 
 function Student({undo, redo, student}) {
 	const canUndo = 'past' in student && student.past.length
@@ -11,19 +12,25 @@ function Student({undo, redo, student}) {
 
 	return (
 		<div>
-			<button disabled={!canUndo} onClick={undo}>Undo</button>
-			<button disabled={!canRedo} onClick={redo}>Redo</button>
-			{' '}<code>{present.id}</code> {present.name}
+			<button disabled={!canUndo} onClick={undo} style={{color: canUndo ? '#444' : '#888'}}>
+				Undo
+			</button>
+			<button disabled={!canRedo} onClick={redo} style={{color: canRedo ? '#444' : '#888'}}>
+				Redo
+			</button>
+			{' '}
+			<code>{present.id}</code> {present.name}
 		</div>
 	)
 }
 
-export default function Degub(props) {
+
+function Degub(props) {
 	const students = props.students.data
 	const isLoading = props.students.isLoading
 	console.log('degub.render', isLoading, size(students))
 	if (isLoading) {
-		return 'Loading students…'
+		return <div>Loading students…</div>
 	}
 
 	return (
@@ -52,6 +59,20 @@ Degub.defaultProps = {
 	students: {},
 }
 
+
+class DegubContainer extends React.Component {
+	static propTypes = {
+		loadStudents: PropTypes.func.isRequired,
+	};
+	componentWillMount() {
+		this.props.loadStudents()
+	}
+	render() {
+		return <Degub {...this.props} />
+	}
+}
+
+
 const mapStateToProps = state => ({
 	students: state.students,
 })
@@ -59,6 +80,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	undo: id => dispatch({type: ActionTypes.UNDO, payload: {studentId: id}}),
 	redo: id => dispatch({type: ActionTypes.REDO, payload: {studentId: id}}),
+	loadStudents: () => dispatch(loadStudents()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Degub)
+export default connect(mapStateToProps, mapDispatchToProps)(DegubContainer)
