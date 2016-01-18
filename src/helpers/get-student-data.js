@@ -11,4 +11,7 @@ export default function getStudentData(student, {areas, courses}) {
 			areas: loadedAreas,
 			schedules: loadedSchedules,
 		}))
+		.catch(err => {
+			throw err
+		})
 }
