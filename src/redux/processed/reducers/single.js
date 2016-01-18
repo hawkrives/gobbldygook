@@ -10,6 +10,8 @@ import {
 import {
 	LOAD_STUDENT,
 	LOAD_STUDENTS,
+	INIT_STUDENT,
+	IMPORT_STUDENT,
 } from '../../students/constants'
 
 const initialState = {
@@ -44,9 +46,11 @@ export default function singleReducer(state = initialState, action) {
 			return {...state, data: payload, isValdiating: false}
 		}
 
+		case INIT_STUDENT:
+		case IMPORT_STUDENT:
 		case LOAD_STUDENT:
 		case LOAD_STUDENTS: {
-			return {...initialState, data: state}
+			return {...state, data: payload}
 		}
 
 		default: {
