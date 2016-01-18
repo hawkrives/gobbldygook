@@ -43,7 +43,6 @@ const whitelist = [
 	// courseActions.CACHE_COURSES_FROM_SCHEDULES,
 ]
 function shouldTakeAction({type}) {
-	console.log('shouldTakeAction', type, includes(whitelist, type))
 	return includes(whitelist, type)
 }
 
@@ -64,14 +63,20 @@ const checkStudentsMiddleware = store => next => action => {
 	const newState = store.getState()
 	const newStudents = newState.students.data
 
-	let affectedStudents = filter(newStudents, (_, id) => newStudents[id].present !== oldStudents[id].present)
+	let affectedStudents = filter(newStudents, (_, id) => {
+		const changed = newStudents[id] !== oldStudents[id]
+		if (changed && newStudents[id] && 'present' in newStudents[id]) {
+			return true
+		}
+		return false
+	})
 
 	// check them
-	const promises = map(affectedStudents, ({id}) => store.dispatch(checkStudent(id)))
+	const promises = map(affectedStudents, s => store.dispatch(checkStudent(s.present.id)))
 
 	return Promise.all(promises).then(() => result)
 }
 
-// export default checkStudentsMiddleware
+export default checkStudentsMiddleware
 
-export default store => next => action => next(action)
+// export default store => next => action => next(action)
