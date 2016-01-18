@@ -19,7 +19,7 @@ const finalCreateStore = compose(
 		thunkMiddleware,
 		routerMiddleware,
 		freezingMiddleware,
-		// checkStudentsMiddleware
+		checkStudentsMiddleware,
 		saveStudentsMiddleware,
 		loggerMiddleware
 	),
