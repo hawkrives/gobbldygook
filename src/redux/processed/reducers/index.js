@@ -24,7 +24,6 @@ const initialState = {}
 
 export default function processedReducer(state = initialState, action) {
 	const {type, payload} = action
-	console.log('processedReducer', type)
 
 	switch (type) {
 		case LOAD_STUDENT:
