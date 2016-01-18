@@ -41,11 +41,12 @@ export default class StudentPickerContainer extends Component {
 	};
 
 	render() {
-		if (this.props.students.isLoading) {
-			return <Loading>Loading students…</Loading>
-		}
+		// if (this.props.students.isLoading) {
+		// 	return <Loading>Loading students…</Loading>
+		// }
 
-		const students = mapValues(this.props.students.data, s => s.present)
+		// const students = mapValues(this.props.students.data, s => s.present)
+		const students = this.props.students
 		return (
 			<StudentPicker
 				destroyStudent={this.props.destroyStudent}
@@ -68,7 +69,7 @@ export default class StudentPickerContainer extends Component {
 
 
 const mapStateToProps = state => ({
-	students: state.students,
+	students: state.processed,
 	routing: state.routing,
 })
 

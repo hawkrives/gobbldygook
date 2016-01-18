@@ -38,6 +38,23 @@
 	margin-left: 0.5em;
 }
 
+.student-list-item-container {
+	border-left: solid 3px transparent;
+}
+
+.student-list-item-container.loading {
+	border-left-color: color('blue', '300');
+}
+
+.student-list-item-container.can-graduate {
+	border-left-color: color('green', '300');
+}
+
+.student-list-item-container.cannot-graduate {
+	border-left-color: color('red', '300');
+}
+
+
 .student-list-item-info .name {
 	line-height: 1.5;
 }

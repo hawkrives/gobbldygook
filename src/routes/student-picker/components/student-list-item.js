@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import cx from 'classnames'
 import {Link} from 'react-router'
 import groupBy from 'lodash/collection/groupBy'
 import map from 'lodash/collection/map'
@@ -11,17 +12,27 @@ import './student-list-item.scss'
 
 export default function StudentListItem(props) {
 	const { student, isEditing, destroyStudent } = props
-	const groupedStudies = groupBy(student.studies, s => s.type)
+
+	const isLoading = student.isLoading || student.isValdiating || student.isChecking
+	let opts = {loading: isLoading}
+	if (!isLoading) {
+		opts['can-graduate'] = student.data.canGraduate
+		opts['cannot-graduate'] = !student.data.canGraduate
+	}
+
+	const classname = cx('student-list-item-container', opts)
+
+	const groupedStudies = groupBy(student.data.studies, s => s.type)
 	return (
-		<li className='student-list-item-container'>
+		<li className={classname}>
 			{isEditing &&
-			<Button className='delete' type='flat' onClick={() => destroyStudent(student.id)}>
+			<Button className='delete' type='flat' onClick={() => destroyStudent(student.data.id)}>
 				<Icon name='ios-trash-outline' />
 				Delete
 			</Button>}
-			<Link className='student-list-item' to={`/s/${student.id}/`}>
+			<Link className='student-list-item' to={`/s/${student.data.id}/`}>
 				<span className='student-list-item-info'>
-					<div className='name'>{student.name || ''}</div>
+					<div className='name'>{student.data.name || ''}</div>
 					<div className='areas'>
 						{map(
 							interpose(
