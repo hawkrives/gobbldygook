@@ -1,13 +1,9 @@
-import present from 'present'
 import uniq from 'lodash/array/uniq'
-import round from 'lodash/math/round'
 import filter from 'lodash/collection/filter'
 import map from 'lodash/collection/map'
 import flatten from 'lodash/array/flatten'
-import getCoursesFromSchedule from './get-courses-from-schedule'
-const debug = require('debug')('gb:helpers:get-student-courses')
 
-export default async function getStudentCourses(student) {
+export default function getActiveStudentCourses(student) {
 	// - At it's core, this method just needs to get the list of courses that a student has chosen.
 	// - Each schedule has a list of courses that are a part of that schedule.
 	// - Additionally, we only care about the schedules that are marked as "active".
@@ -16,14 +12,9 @@ export default async function getStudentCourses(student) {
 	// - Finally, remember that a given `clbid` might not exist in the database, in which case we get back 'undefined'.
 	//   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 
-	const start = present()
-
 	const activeSchedules = filter(student.schedules, {active: true})
-	const promisesForCourses = map(activeSchedules, getCoursesFromSchedule)
-	let courses = await Promise.all(promisesForCourses)
+	let courses = map(activeSchedules, s => s.courses)
 	courses = uniq(flatten(courses), course => course.clbid)
-
-	debug(`Student(${student.id}): ${round(present() - start, 2)} ms to fetch ${courses.length} courses`)
 
 	return courses
 }

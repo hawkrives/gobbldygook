@@ -25,6 +25,7 @@ import {
 } from '../../../models/student'
 
 import {
+	LOAD_STUDENT,
 	LOAD_STUDENTS,
 	INIT_STUDENT,
 	IMPORT_STUDENT,
@@ -155,5 +156,5 @@ export default undoable(studentReducer, {
 	},
 
 	// treat LOAD_STUDENTS as the beginning of history
-	initTypes: ['@@redux/INIT', '@@INIT', LOAD_STUDENTS, INIT_STUDENT, IMPORT_STUDENT],
+	initTypes: ['@@redux/INIT', '@@INIT', LOAD_STUDENTS, LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT],
 })

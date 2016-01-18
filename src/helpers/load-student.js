@@ -6,7 +6,7 @@ export default function loadStudent(studentId) {
 
 	if (rawStudent === null || rawStudent === '[object Object]') {
 		localStorage.removeItem(studentId)
-		return null
+		return Promise.resolve(null)
 	}
 
 	// basicStudent defaults to an empty object so that the constructor has

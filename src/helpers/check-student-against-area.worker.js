@@ -9,6 +9,7 @@ import present from 'present'
 import stringifyError from './stringify-error'
 import evaluate from '../area-tools/evaluate'
 import findLeafRequirements from '../area-tools/find-leaf-requirements'
+import getActiveStudentCourses from './get-active-student-courses'
 
 function alterCourse(course) {
 	return mapKeys(course, (value, key) => {
@@ -22,39 +23,38 @@ function alterCourse(course) {
 	})
 }
 
-async function checkStudentAgainstArea(studentData, area) {
-	const areaData = area.data
+function checkStudentAgainstArea(student, area) {
+	const areaData = area._area
 
-	const baseAreaInfo = {name: area.name, type: area.type, id: area.id}
-	if (areaData._error) {
-		console.error('checkStudentAgainstArea():', areaData._error, baseAreaInfo)
-		return {...baseAreaInfo, _error: areaData._error}
+	if (area._error) {
+		console.error('checkStudentAgainstArea:', area._error, area)
+		return Promise.resolve(area)
 	}
 
-	studentData.courses = map(studentData.courses, alterCourse)
+	student.courses = map(getActiveStudentCourses(student), alterCourse)
 
 	let details = {}
 	try {
-		details = await evaluate(studentData, areaData)
+		details = evaluate(student, areaData)
 	}
 	catch (err) {
-		console.error('checkStudentAgainstArea():', err)
-		return {...baseAreaInfo, _error: err.message}
+		console.error('checkStudentAgainstArea:', err)
+		return Promise.resolve({...area, _error: err.message})
 	}
 
 	const finalReqs = findLeafRequirements(details)
 	const maxProgress = finalReqs.length
 	const currentProgress = filter(finalReqs, {computed: true}).length
 
-	return {
-		...baseAreaInfo,
-		...details,
+	return Promise.resolve({
+		...area,
+		_area: details,
 		_checked: true,
 		_progress: {
 			at: currentProgress,
 			of: maxProgress,
 		},
-	}
+	})
 }
 
 export default checkStudentAgainstArea

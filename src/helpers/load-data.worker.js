@@ -312,10 +312,10 @@ async function loadFiles(url, infoFileBase) {
 	// Remove the progress bar after 1.5 seconds
 	dispatch('notifications', 'removeNotification', notificationId, 1500)
 	if (type === 'courses') {
-		dispatch('courses', 'refreshCourses')
+		dispatch('courses', 'reloadCachedCourses')
 	}
 	else if (type === 'areas') {
-		dispatch('areas', 'refreshAreas')
+		dispatch('areas', 'reloadCachedAreas')
 	}
 
 	return true

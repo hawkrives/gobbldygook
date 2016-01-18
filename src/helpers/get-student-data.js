@@ -1,14 +1,14 @@
-import getStudentCourses from './get-student-courses'
+import embedActiveStudentCourses from './embed-active-student-courses'
+import getStudentStudies from './get-student-studies'
 
-export default async function getStudentData(student) {
-	const courses = await getStudentCourses(student)
+export default function getStudentData(student, {areas, courses}) {
+	const promisedAreas = getStudentStudies(student, {cache: areas, cacheOnly: true})
+	const promisedSchedules = embedActiveStudentCourses(student, {cache: courses, cacheOnly: true})
 
-	return {
-		courses: courses,
-		creditsNeeded: student.creditsNeeded,
-		fabrications: student.fabrications,
-		graduation: student.graduation,
-		matriculation: student.matriculation,
-		overrides: student.overrides,
-	}
+	return Promise.all([promisedAreas, promisedSchedules])
+		.then(([loadedAreas, loadedSchedules]) => ({
+			...student,
+			areas: loadedAreas,
+			schedules: loadedSchedules,
+		}))
 }

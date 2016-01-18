@@ -1,6 +1,4 @@
 import uniqueId from 'lodash/utility/uniqueId'
-import loadArea from './load-area'
-import getStudentData from './get-student-data'
 
 import Worker from './check-student-against-area.worker.js'
 const worker = new Worker()
@@ -16,10 +14,10 @@ worker.onerror = msg => console.warn('[main] received error from check-student w
  * @promise ResultsPromise
  * @fulfill {Object} - The details of the area check.
  */
-export default async function checkStudentAgainstArea(student, area) {
+export default function checkStudentAgainstArea(student) {
 	const sourceId = uniqueId()
 
-	return new Promise(async (resolve, reject) => {
+	return area => new Promise((resolve, reject) => {
 		// This is inside of the function so that it doesn't get unregistered too early
 		function onMessage({data}) {
 			const [resultId, type, contents] = JSON.parse(data)
@@ -38,28 +36,10 @@ export default async function checkStudentAgainstArea(student, area) {
 
 		worker.addEventListener('message', onMessage)
 
-		const areaData = {
-			...area,
-		}
-		try {
-			areaData.data = await loadArea(area)
-		}
-		catch (err) {
-			reject(err)
-		}
-
-		let studentData
-		try {
-			studentData = await getStudentData(student)
-		}
-		catch (err) {
-			reject(err)
-		}
-
 		/* why stringify? from https://code.google.com/p/chromium/issues/detail?id=536620#c11:
 		 * > We know that serialization/deserialization is slow. It's actually faster to
 		 * > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 		 */
-		worker.postMessage(JSON.stringify([sourceId, studentData, areaData]))
+		worker.postMessage(JSON.stringify([sourceId, student, area]))
 	})
 }

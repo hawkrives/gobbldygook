@@ -3,6 +3,7 @@ import map from 'lodash/collection/map'
 import zipObject from 'lodash/array/zipObject'
 
 import {
+	LOAD_STUDENT,
 	LOAD_STUDENTS,
 	INIT_STUDENT,
 	IMPORT_STUDENT,
@@ -25,6 +26,7 @@ export default function studentsReducer(state = initialState, action) {
 			]))
 		}
 
+		case LOAD_STUDENT:
 		case INIT_STUDENT:
 		case IMPORT_STUDENT: {
 			if (error) {

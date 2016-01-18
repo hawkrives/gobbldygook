@@ -4,6 +4,7 @@ import { persistState } from 'redux-devtools'
 import promiseMiddleware from 'redux-promise'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
+import checkStudentsMiddleware from './middleware/check-students'
 import saveStudentsMiddleware from './middleware/save-students'
 import routerMiddleware from './middleware/router'
 import rootReducer from './reducer'
@@ -18,6 +19,7 @@ const finalCreateStore = compose(
 		thunkMiddleware,
 		routerMiddleware,
 		freezingMiddleware,
+		// checkStudentsMiddleware
 		saveStudentsMiddleware,
 		loggerMiddleware
 	),
