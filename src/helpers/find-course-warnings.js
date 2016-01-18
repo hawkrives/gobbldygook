@@ -1,7 +1,7 @@
 import map from 'lodash/collection/map'
 import flatten from 'lodash/array/flatten'
 import compact from 'lodash/array/compact'
-import any from 'lodash/collection/any'
+import some from 'lodash/collection/some'
 import zip from 'lodash/array/zip'
 
 import ordinal from 'ord'
@@ -53,7 +53,7 @@ export function checkForTimeConflicts(courses) {
 			icon: 'ios-clock-outline',
 		}
 
-		if (any(conflictSet)) {
+		if (some(conflictSet)) {
 			// +1 to the indices because humans don't 0-index lists
 			const conflicts = compact(map(conflictSet, (possibility, i) => (possibility === true) ? i + 1 : false))
 			const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
