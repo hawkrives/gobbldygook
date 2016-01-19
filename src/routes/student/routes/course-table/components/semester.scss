@@ -17,8 +17,8 @@ $semester-edge-padding:
 
 .semester {
 	@include card;
-	flex: auto;
-	width: 16em;
+	flex: 1 0;
+	min-width: 16em;
 	margin: $semester-spacing;
 }
 
