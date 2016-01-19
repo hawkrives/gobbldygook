@@ -5,12 +5,13 @@ import importStudent from './import-student'
 import initStudent from './init-student'
 import destroyStudent from './destroy-student'
 
-import * as change from './change'
 import * as areas from './areas'
-import * as schedules from './schedules'
+import * as change from './change'
+import * as check from './check-student'
 import * as courses from './courses'
-import * as overrides from './overrides'
 import * as fabrications from './fabrications'
+import * as overrides from './overrides'
+import * as schedules from './schedules'
 
 module.exports = {
 	__esModule: true,
@@ -19,12 +20,13 @@ module.exports = {
 	importStudent,
 	initStudent,
 	destroyStudent,
-	...change,
 	...areas,
-	...schedules,
+	...change,
+	...check,
 	...courses,
-	...overrides,
 	...fabrications,
+	...overrides,
+	...schedules,
 }
 
 // this is the better way to do it

@@ -1,46 +1,46 @@
-import * as studentActions from '../students/constants'
-import * as areaActions from '../areas/constants'
-import * as courseActions from '../courses/constants'
+import * as studentConstants from '../students/constants'
+import * as areaConstants from '../areas/constants'
+import * as courseConstants from '../courses/constants'
 
 import filter from 'lodash/collection/filter'
 import includes from 'lodash/collection/includes'
 import map from 'lodash/collection/map'
 
-import {checkStudent} from '../processed/actions'
+import {checkStudent} from '../students/actions/check-student'
 
 const whitelist = [
-	studentActions.LOAD_STUDENTS,
-	studentActions.INIT_STUDENT,
-	studentActions.IMPORT_STUDENT,
-	studentActions.CHANGE_CREDITS_NEEDED,
-	studentActions.CHANGE_MATRICULATION,
-	studentActions.CHANGE_GRADUATION,
-	studentActions.ADD_AREA,
-	studentActions.REMOVE_AREA,
-	studentActions.REMOVE_AREAS,
-	studentActions.ADD_SCHEDULE,
-	studentActions.DESTROY_SCHEDULE,
-	studentActions.DESTROY_SCHEDULES,
-	studentActions.MOVE_SCHEDULE,
-	studentActions.ADD_COURSE,
-	studentActions.REMOVE_COURSE,
-	studentActions.MOVE_COURSE,
-	studentActions.SET_OVERRIDE,
-	studentActions.REMOVE_OVERRIDE,
-	studentActions.ADD_FABRICATION,
-	studentActions.REMOVE_FABRICATION,
+	studentConstants.LOAD_STUDENTS,
+	studentConstants.INIT_STUDENT,
+	studentConstants.IMPORT_STUDENT,
+	studentConstants.CHANGE_CREDITS_NEEDED,
+	studentConstants.CHANGE_MATRICULATION,
+	studentConstants.CHANGE_GRADUATION,
+	studentConstants.ADD_AREA,
+	studentConstants.REMOVE_AREA,
+	studentConstants.REMOVE_AREAS,
+	studentConstants.ADD_SCHEDULE,
+	studentConstants.DESTROY_SCHEDULE,
+	studentConstants.DESTROY_SCHEDULES,
+	studentConstants.MOVE_SCHEDULE,
+	studentConstants.ADD_COURSE,
+	studentConstants.REMOVE_COURSE,
+	studentConstants.MOVE_COURSE,
+	studentConstants.SET_OVERRIDE,
+	studentConstants.REMOVE_OVERRIDE,
+	studentConstants.ADD_FABRICATION,
+	studentConstants.REMOVE_FABRICATION,
 
 	// need to check everyone with one of the new areas
 	// when one of these fires
-	// areaActions.LOAD_AREAS,
-	// areaActions.RELOAD_CACHED_AREAS,
-	// areaActions.CACHE_AREAS_FROM_STUDIES,
+	// areaConstants.LOAD_AREAS,
+	// areaConstants.RELOAD_CACHED_AREAS,
+	// areaConstants.CACHE_AREAS_FROM_STUDIES,
 
 	// need to check everyone with one of these courses
 	// when one of these fires
-	// courseActions.LOAD_COURSES,
-	// courseActions.RELOAD_CACHED_COURSES,
-	// courseActions.CACHE_COURSES_FROM_SCHEDULES,
+	// courseConstants.LOAD_COURSES,
+	// courseConstants.RELOAD_CACHED_COURSES,
+	// courseConstants.CACHE_COURSES_FROM_SCHEDULES,
 ]
 function shouldTakeAction({type}) {
 	return includes(whitelist, type)
@@ -53,7 +53,7 @@ const checkStudentsMiddleware = store => next => action => {
 
 	// save a copy of the old state
 	const oldState = store.getState()
-	const oldStudents = oldState.students.data
+	const oldStudents = oldState.students
 
 	// dispatch the action along the chain
 	// this is what actually changes the state
@@ -61,11 +61,12 @@ const checkStudentsMiddleware = store => next => action => {
 
 	// grab a copy of the *new* state
 	const newState = store.getState()
-	const newStudents = newState.students.data
+	const newStudents = newState.students
 
 	let affectedStudents = filter(newStudents, (_, id) => {
-		const changed = newStudents[id] !== oldStudents[id]
-		if (changed && newStudents[id] && 'present' in newStudents[id]) {
+		const now = newStudents[id]
+		const changed = now.data !== oldStudents[id].data
+		if (changed && now.data && 'present' in now.data) {
 			return true
 		}
 		return false

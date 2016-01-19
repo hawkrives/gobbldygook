@@ -1,6 +1,0 @@
-export const BEGIN_GET_STUDENT_DATA = 'gobbldygook/processed/BEGIN_GET_STUDENT_DATA'
-export const GET_STUDENT_DATA = 'gobbldygook/processed/GET_STUDENT_DATA'
-export const BEGIN_CHECK_GRADUATABILITY = 'gobbldygook/processed/BEGIN_CHECK_GRADUATABILITY'
-export const CHECK_GRADUATABILITY = 'gobbldygook/processed/CHECK_GRADUATABILITY'
-export const BEGIN_VALIDATE_SCHEDULES = 'gobbldygook/processed/BEGIN_VALIDATE_SCHEDULES'
-export const VALIDATE_SCHEDULES = 'gobbldygook/processed/VALIDATE_SCHEDULES'

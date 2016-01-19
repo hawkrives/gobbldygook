@@ -1,4 +1,6 @@
+export const BEGIN_LOAD_STUDENT = 'gobbldygook/students/BEGIN_LOAD_STUDENT'
 export const LOAD_STUDENT = 'gobbldygook/students/LOAD_STUDENT'
+
 export const LOAD_STUDENTS = 'gobbldygook/students/LOAD_STUDENTS'
 export const INIT_STUDENT = 'gobbldygook/students/INIT_STUDENT'
 export const IMPORT_STUDENT = 'gobbldygook/students/IMPORT_STUDENT'
@@ -33,4 +35,9 @@ export const REMOVE_OVERRIDE = 'gobbldygook/students/REMOVE_OVERRIDE'
 export const ADD_FABRICATION = 'gobbldygook/students/ADD_FABRICATION'
 export const REMOVE_FABRICATION = 'gobbldygook/students/REMOVE_FABRICATION'
 
-export const BEGIN_LOADING = 'gobbldygook/students/BEGIN_LOADING'
+export const BEGIN_GET_STUDENT_DATA = 'gobbldygook/processed/BEGIN_GET_STUDENT_DATA'
+export const GET_STUDENT_DATA = 'gobbldygook/processed/GET_STUDENT_DATA'
+export const BEGIN_CHECK_GRADUATABILITY = 'gobbldygook/processed/BEGIN_CHECK_GRADUATABILITY'
+export const CHECK_GRADUATABILITY = 'gobbldygook/processed/CHECK_GRADUATABILITY'
+export const BEGIN_VALIDATE_SCHEDULES = 'gobbldygook/processed/BEGIN_VALIDATE_SCHEDULES'
+export const VALIDATE_SCHEDULES = 'gobbldygook/processed/VALIDATE_SCHEDULES'
