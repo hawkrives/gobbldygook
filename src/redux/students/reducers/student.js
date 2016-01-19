@@ -125,7 +125,11 @@ export function studentReducer(state = initialState, action) {
 			return reorderCourseInSchedule(state, payload.scheduleId, {clbid: payload.clbid, index: payload.index})
 		}
 		case MOVE_COURSE: {
-			return moveCourseToSchedule(state, {fromScheduleId: payload.fromScheduleId, toScheduleId: payload.toScheduleId, clbid: payload.clbid})
+			return moveCourseToSchedule(state, {
+				fromScheduleId: payload.fromScheduleId,
+				toScheduleId: payload.toScheduleId,
+				clbid: payload.clbid,
+			})
 		}
 
 		case SET_OVERRIDE: {
@@ -155,8 +159,6 @@ export default undoable(studentReducer, {
 		// don't save histories when nothing has changed.
 		return (currentState !== previousState)
 	},
-
-	initialState: initialState,
 
 	// treat LOAD_STUDENTS as the beginning of history
 	initTypes: ['@@redux/INIT', '@@INIT', LOAD_STUDENTS, LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT],
