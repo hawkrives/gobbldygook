@@ -25,5 +25,13 @@ export default function Schedule(data={}) {
 		throw new TypeError('Schedule id must be a string.')
 	}
 
+	if (typeof schedule.year === 'string') {
+		schedule.year = parseInt(schedule.year, 10)
+	}
+
+	if (typeof schedule.semester === 'string') {
+		schedule.semester = parseInt(schedule.semester, 10)
+	}
+
 	return schedule
 }
