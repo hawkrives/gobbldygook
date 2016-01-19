@@ -62,6 +62,7 @@ export class SemesterContainer extends Component {
 		}
 
 		return this.props.connectDropTarget(
+			<div>
 			<Semester
 				canDrop={canDrop}
 				isOver={isOver}
@@ -72,6 +73,7 @@ export class SemesterContainer extends Component {
 				initiateSearch={() => initiateSearch(this.props.setPartialQuery, schedule)}
 				removeSemester={() => removeSemester(this.props.destroySchedules, student, year, semester)}
 			/>
+			</div>
 		)
 	}
 }
