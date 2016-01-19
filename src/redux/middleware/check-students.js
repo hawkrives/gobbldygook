@@ -6,7 +6,7 @@ import filter from 'lodash/collection/filter'
 import includes from 'lodash/collection/includes'
 import map from 'lodash/collection/map'
 
-import {checkStudent} from '../students/actions/check-student'
+import checkStudent from '../students/actions/check-student'
 
 const whitelist = [
 	studentConstants.LOAD_STUDENTS,
@@ -73,7 +73,8 @@ const checkStudentsMiddleware = store => next => action => {
 	})
 
 	// check them
-	const promises = map(affectedStudents, s => store.dispatch(checkStudent(s.present.id)))
+	const promises = map(affectedStudents, s =>
+		store.dispatch(checkStudent(s.data.present.id)))
 
 	return Promise.all(promises).then(() => result)
 }
