@@ -26,7 +26,6 @@ import {
 
 import {
 	LOAD_STUDENT,
-	LOAD_STUDENTS,
 	INIT_STUDENT,
 	IMPORT_STUDENT,
 	CHANGE_NAME,
@@ -155,11 +154,11 @@ export function studentReducer(state = initialState, action) {
 export default undoable(studentReducer, {
 	limit: 10,
 
-	filter: (action, currentState, previousState) => {
-		// don't save histories when nothing has changed.
+	filter(action, currentState, previousState) {
+		// only save history when something has changed.
 		return (currentState !== previousState)
 	},
 
 	// treat LOAD_STUDENTS as the beginning of history
-	initTypes: ['@@redux/INIT', '@@INIT', LOAD_STUDENTS, LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT],
+	initTypes: ['@@redux/INIT', '@@INIT', LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT],
 })
