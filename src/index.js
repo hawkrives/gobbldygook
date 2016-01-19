@@ -45,7 +45,7 @@ import Root from './containers/root'
 const store = configureStore()
 routerMiddleware.listenForReplays(store)
 
-global.store = store
+// global.store = store
 
 render(
 	(<Root store={store}>
