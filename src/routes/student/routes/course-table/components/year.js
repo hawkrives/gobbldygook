@@ -3,15 +3,15 @@ import filter from 'lodash/collection/filter'
 import sortBy from 'lodash/collection/sortBy'
 import map from 'lodash/collection/map'
 
-import Button from './button'
-import Semester from './semester'
+import Button from '../../../../../components/button'
+import Semester from '../containers/semester'
 
 import findFirstAvailableSemester from '../../../../../helpers/find-first-available-semester'
 import expandYear from '../../../../../helpers/expand-year'
 import semesterName from '../../../../../helpers/semester-name'
 
-
 import './year.scss'
+
 
 const canAddSemester = (schedules, year) =>
 	(findFirstAvailableSemester(schedules, year) <= 5)
@@ -48,7 +48,7 @@ export default function Year(props) {
 						type='flat'
 						title='Add Semester'
 						disabled={isAddSemesterDisabled}
-						onClick={this.props.addSemester}
+						onClick={props.addSemester}
 					>
 						{`Add ‘${semesterName(nextAvailableSemester)}’`}
 					</Button>}
@@ -56,7 +56,7 @@ export default function Year(props) {
 						className='remove-year'
 						type='flat'
 						title={`Remove the year ${niceYear}`}
-						onClick={this.props.removeYear}
+						onClick={props.removeYear}
 					>
 						Remove Year
 					</Button>

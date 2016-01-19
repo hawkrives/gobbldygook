@@ -1,16 +1,14 @@
 import React, {PropTypes} from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import map from 'lodash/collection/map'
+import filter from 'lodash/collection/filter'
 
+import {addSchedule, destroySchedules} from '../../../../../redux/students/actions'
 import findFirstAvailableYear from '../../../../../helpers/find-first-available-year'
 import findFirstAvailableSemester from '../../../../../helpers/find-first-available-semester'
 
-import map from 'lodash/collection/map'
-import filter from 'lodash/filter'
-
 import CourseTable from '../components/course-table'
-
-import {addSchedule, destroySchedules} from '../../../../../redux/students/actions'
-import {bindActionCreators} from 'redux'
 
 const addYear = (addSchedule, student) => {
 	addSchedule(student.id, {
@@ -39,12 +37,13 @@ const removeYear = (destroySchedules, student, year) => {
 
 
 export function CourseTableContainer(props) {
+	const student = props.student.data.present
 	return (
 		<CourseTable
-			student={props.student}
-			addYear={() => addYear(props.addSchedule, props.student)}
-			addSemester={year => addSemester(props.addSchedule, props.student, year)}
-			removeYear={year => removeYear(props.destroySchedules, props.student, year)}
+			student={student}
+			addYear={() => addYear(props.addSchedule, student)}
+			addSemester={year => addSemester(props.addSchedule, student, year)}
+			removeYear={year => removeYear(props.destroySchedules, student, year)}
 		/>
 	)
 }
@@ -60,4 +59,4 @@ CourseTableContainer.propTypes = {
 const mapDispatchToProps = dispatch =>
 	bindActionCreators({addSchedule, destroySchedules}, dispatch)
 
-export default connect(undefined, mapDispatchToProps)(CourseTable)
+export default connect(undefined, mapDispatchToProps)(CourseTableContainer)

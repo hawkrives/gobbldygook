@@ -10,7 +10,7 @@ import isCurrentSemester from '../../../../../helpers/is-current-semester'
 import compareProps from '../../../../../helpers/compare-props'
 import itemTypes from '../../../../../models/item-types'
 import Loading from '../../../../../components/loading'
-import {destroySchedules, setPartialQuery} from '../../../../../redux/students/actions'
+import {destroySchedules, setPartialQuery, moveCourse, addCourse} from '../../../../../redux/students/actions'
 import Semester from '../components/semester'
 
 
@@ -37,10 +37,12 @@ const removeSemester = (destroySchedules, student, year, semester) => {
 
 export class SemesterContainer extends Component {
 	static propTypes = {
+		addCourse: PropTypes.func.isRequired,  // redux
 		canDrop: PropTypes.bool.isRequired,  // react-dnd
 		connectDropTarget: PropTypes.func.isRequired,  // react-dnd
 		destroySchedules: PropTypes.func.isRequired,
 		isOver: PropTypes.bool.isRequired,  // react-dnd
+		moveCourse: PropTypes.func.isRequired, // redux
 		semester: PropTypes.number.isRequired,
 		setPartialQuery: PropTypes.func.isRequired, // redux
 		student: PropTypes.object.isRequired,
@@ -81,13 +83,15 @@ const semesterTarget = {
 		const item = monitor.getItem()
 		console.log('dropped course', item)
 		const {clbid, fromScheduleId, isFromSchedule} = item
+		// we use component.props here in order to allow dropping from a not-semester onto a semester
+		// wait...
 		const toSchedule = getSchedule(component.props.student, component.props.year, component.props.semester)
 
 		if (isFromSchedule) {
-			props.actions.moveCourse(props.student.id, fromScheduleId, toSchedule.id, clbid)
+			props.moveCourse(props.student.id, fromScheduleId, toSchedule.id, clbid)
 		}
 		else {
-			props.actions.addCourse(props.student.id, toSchedule.id, clbid)
+			props.addCourse(props.student.id, toSchedule.id, clbid)
 		}
 	},
 	canDrop(props, monitor) {
@@ -111,7 +115,7 @@ const droppable = DropTarget(itemTypes.COURSE, semesterTarget, collect)(Semester
 
 
 const mapDispatchToProps = dispatch =>
-	bindActionCreators({setPartialQuery, destroySchedules}, dispatch)
+	bindActionCreators({setPartialQuery, destroySchedules, moveCourse, addCourse}, dispatch)
 
 const connected = connect(undefined, mapDispatchToProps)(droppable)
 

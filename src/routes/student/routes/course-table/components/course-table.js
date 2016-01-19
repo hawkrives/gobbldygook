@@ -1,7 +1,9 @@
+import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import expandYear from '../../../../../helpers/expand-year'
 
 import findFirstAvailableYear from '../../../../../helpers/find-first-available-year'
+import map from 'lodash/collection/map'
 import sortBy from 'lodash/collection/sortBy'
 import groupBy from 'lodash/collection/groupBy'
 
@@ -31,13 +33,14 @@ export default function CourseTable(props) {
 
 	let sorted = sortBy(schedules, 'year')
 	let grouped = groupBy(sorted, 'year')
+
 	let years = map(grouped, (schedules, year) =>
 		<Year
 			key={year}
 			year={Number(year)}
 			student={student}
-			addSemester={() => this.props.addSemester(year)}
-			removeYear={() => this.props.removeYear(year)}
+			addSemester={() => props.addSemester(year)}
+			removeYear={() => props.removeYear(year)}
 		/>)
 	years.splice(nextAvailableYear - matriculation, 0, nextYearButton)
 
@@ -49,8 +52,8 @@ export default function CourseTable(props) {
 }
 
 CourseTable.propTypes = {
-	addYear: PropTypes.func.isRequired,
 	addSemester: PropTypes.func.isRequired,
+	addYear: PropTypes.func.isRequired,
 	className: PropTypes.string,
 	removeYear: PropTypes.func.isRequired,
 	student: PropTypes.object.isRequired,

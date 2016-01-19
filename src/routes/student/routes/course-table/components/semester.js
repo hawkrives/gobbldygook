@@ -8,24 +8,23 @@ import countCredits from '../../../../../area-tools/count-credits'
 import Button from '../../../../../components/button'
 import Icon from '../../../../../components/icon'
 import List from '../../../../../components/list'
-import Loading from '../../../../../components/loading'
 
 import CourseList from './course-list'
 import './semester.scss'
 
 
-export function Semester() {
-	let courseList = <Loading>Loading Courses…</Loading>
+export default function Semester(props) {
+	let courseList = null
 
-	const { student, semester, year, canDrop, schedule } = this.props
+	const { student, semester, year, canDrop, schedule } = props
 	const { courses, validation } = schedule
 
 	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
 	const recommendedCredits = (semester === 1 || semester === 3) ? 4 : 1
-	const currentCredits = courses.length ? countCredits(courses) : 0
+	const currentCredits = courses && courses.length ? countCredits(courses) : 0
 
 	let infoBar = []
-	if (schedule && courses.length) {
+	if (schedule && courses && courses.length) {
 		const courseCount = courses.length
 
 		infoBar.push(<li key='course-count'>{` – ${courseCount} ${plur('course', courseCount)}`}</li>)
@@ -39,12 +38,12 @@ export function Semester() {
 			availableCredits={recommendedCredits}
 			student={student}
 			schedule={schedule}
-			conflicts={validation.conflicts}
+			conflicts={validation ? validation.conflicts : []}
 		/>
 	}
 
 	const className = cx('semester', {
-		invalid: validation.hasConflict,
+		invalid: validation ? validation.hasConflict : false,
 		'can-drop': canDrop,
 	})
 
@@ -65,14 +64,14 @@ export function Semester() {
 				<span className='buttons'>
 					<Button
 						className='add-course'
-						onClick={this.props.initiateSearch}
+						onClick={props.initiateSearch}
 						title='Search for courses'
 					>
 						<Icon name='search' /> Course
 					</Button>
 					<Button
 						className='remove-semester'
-						onClick={this.props.removeSemester}
+						onClick={props.removeSemester}
 						title={`Remove ${year} ${semesterName(semester)}`}
 					>
 						<Icon name='close' />
@@ -90,6 +89,7 @@ Semester.propTypes = {
 	initiateSearch: PropTypes.func.isRequired,
 	isOver: PropTypes.bool.isRequired,
 	removeSemester: PropTypes.func.isRequired,
+	schedule: PropTypes.object.isRequired,
 	semester: PropTypes.number.isRequired,
 	student: PropTypes.object.isRequired,
 	year: PropTypes.number.isRequired,
