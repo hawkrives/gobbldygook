@@ -7,20 +7,15 @@ import isNumber from 'lodash/lang/isNumber'
 import isUndefined from 'lodash/lang/isUndefined'
 import map from 'lodash/collection/map'
 import omit from 'lodash/object/omit'
-import present from 'present'
 import reject from 'lodash/collection/reject'
-import round from 'lodash/math/round'
 import zipObject from 'lodash/array/zipObject'
 import {v4 as uuid} from 'uuid'
-const debug = require('debug')('gb:models')
 
 import randomChar from '../helpers/random-char'
 
 const now = new Date()
 
 export default function Student(data) {
-	const startTime = present()
-
 	const baseStudent = {
 		id: uuid(),
 		name: 'Student ' + randomChar(),
@@ -51,8 +46,6 @@ export default function Student(data) {
 	if (isArray(student.schedules)) {
 		student.schedules = zipObject(map(student.schedules, s => [String(s.id), {...s, id: String(s.id)}]))
 	}
-
-	debug(`Student(): it took ${round(present() - startTime, 2)} ms to make a student`)
 
 	return student
 }
