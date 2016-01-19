@@ -1,5 +1,5 @@
 import uniq from 'lodash/array/uniq'
-import pluck from 'lodash/collection/pluck'
+import map from 'lodash/collection/map'
 import sortBy from 'lodash/collection/sortBy'
 import max from 'lodash/collection/max'
 import includes from 'lodash/collection/includes'
@@ -21,7 +21,7 @@ export default function findFirstAvailableYear(schedules, matriculation) {
 		return new Date().getFullYear()
 	}
 
-	let years = pluck(schedules, 'year')
+	let years = map(schedules, s => s.year)
 
 	// put the matriculation year at the front to give a starting point
 	if (matriculation !== undefined && !includes(years, matriculation)) {
@@ -32,8 +32,6 @@ export default function findFirstAvailableYear(schedules, matriculation) {
 
 	// only uniq after we're done messing with the contents
 	years = uniq(years)
-
-	// console.log('findFirstAvailableYear', years.toJS())
 
 	let missingNo = findMissingNumberBinarySearch(years)
 	if (missingNo !== null) {

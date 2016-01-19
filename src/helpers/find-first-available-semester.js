@@ -1,6 +1,6 @@
 import max from 'lodash/collection/max'
 import filter from 'lodash/collection/filter'
-import pluck from 'lodash/collection/pluck'
+import map from 'lodash/collection/map'
 import uniq from 'lodash/array/uniq'
 import sortBy from 'lodash/collection/sortBy'
 
@@ -19,7 +19,7 @@ import findMissingNumberBinarySearch from './find-missing-number-binary-search'
 export default function findFirstAvailableSemester(schedules, forYear) {
 	let thisYear = filter(schedules, {year: forYear})
 
-	let semesters = pluck(thisYear, 'semester')
+	let semesters = map(thisYear, s => s.semester)
 
 	// stick a 0 at the front so findBinary will start from 1
 	semesters.unshift(0)
