@@ -13,8 +13,8 @@ import {
 
 
 function getStudent(state, studentId) {
-	if (studentId in state.students && state.students[studentId].data) {
-		return state.students[studentId].data
+	if (studentId in state.students && state.students[studentId].data.present) {
+		return state.students[studentId].data.present
 	}
 	return {}
 }

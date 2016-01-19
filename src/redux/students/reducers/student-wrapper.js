@@ -17,7 +17,7 @@ const initialState = {
 	isFetching: false,
 	isLoading: false,
 	isValdiating: false,
-	data: {},
+	data: {present: {}},
 }
 
 export default function studentWrapperReducer(state = initialState, action) {
@@ -31,7 +31,7 @@ export default function studentWrapperReducer(state = initialState, action) {
 			return {
 				...state,
 				isLoading: false,
-				data: studentReducer(payload, action),
+				data: studentReducer({present: payload}, action),
 			}
 		}
 
@@ -41,7 +41,7 @@ export default function studentWrapperReducer(state = initialState, action) {
 		case GET_STUDENT_DATA: {
 			return {
 				...state,
-				data: studentReducer(payload, action),
+				data: studentReducer({present: payload}, action),
 				isFetching: false,
 			}
 		}
@@ -52,7 +52,7 @@ export default function studentWrapperReducer(state = initialState, action) {
 		case CHECK_GRADUATABILITY: {
 			return {
 				...state,
-				data: studentReducer(payload, action),
+				data: studentReducer({present: payload}, action),
 				isChecking: false,
 			}
 		}
@@ -63,7 +63,7 @@ export default function studentWrapperReducer(state = initialState, action) {
 		case VALIDATE_SCHEDULES: {
 			return {
 				...state,
-				data: studentReducer(payload, action),
+				data: studentReducer({present: payload}, action),
 				isValdiating: false,
 			}
 		}
