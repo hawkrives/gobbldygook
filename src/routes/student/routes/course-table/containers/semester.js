@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import {findDOMNode} from 'react-dom'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {DropTarget} from 'react-dnd'
@@ -61,9 +62,9 @@ export class SemesterContainer extends Component {
 			return <Loading>Loading Courses…</Loading>
 		}
 
-		return this.props.connectDropTarget(
-			<div>
+		return (
 			<Semester
+				ref={instance => this.props.connectDropTarget(findDOMNode(instance))}
 				canDrop={canDrop}
 				isOver={isOver}
 				student={student}
@@ -73,7 +74,6 @@ export class SemesterContainer extends Component {
 				initiateSearch={() => initiateSearch(this.props.setPartialQuery, schedule)}
 				removeSemester={() => removeSemester(this.props.destroySchedules, student, year, semester)}
 			/>
-			</div>
 		)
 	}
 }
