@@ -1,0 +1,41 @@
+old: 'dept: $NOR  dept: AMCON  dept: GCON  gereq: HWC  year: 2015'
+new: 'dept: !AMCON and !GCON  gereq: HWC  year: 2015'
+
+op:: $and
+value:
+  - op: $and
+    value:
+      - {op: $ne, key: 'dept', value: 'AMCON'}
+      - {op: $ne, key: 'dept', value: 'GCON'}
+  - op: $eq
+    key: gereq
+    value: HWC
+  - op: $eq
+    key: year
+    value: 2015
+
+
+synonym-a: 'dept: !AMCON and !GCON'
+synonym-b: 'dept: !AMCON or !GCON'
+synonym-c: 'dept: !(AMCON or GCON)'
+
+op: $and
+value:
+  - {op: $ne, key: 'dept', value: 'AMCON'}
+  - {op: $ne, key: 'dept', value: 'GCON'}
+
+op: $or
+value:
+  - {op: $ne, key: 'dept', value: 'AMCON'}
+  - {op: $ne, key: 'dept', value: 'GCON'}
+
+op: $not
+value:
+  - op: $or
+    value:
+      - {op: $ne, key: 'dept', value: 'AMCON'}
+      - {op: $ne, key: 'dept', value: 'GCON'}
+
+
+# irrelevant
+query-string: 'open-area=m-asian&open-area=m-csci&open-area=d-ba&seelcted-course=129435&search-query="dept: !(AMCON or GCON) gereq: HWC year: 2015"&search-base="term: 20151"&picker='

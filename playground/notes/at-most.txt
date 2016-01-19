@@ -1,0 +1,15 @@
+6 electives. At most 2 may be level 2.
+
+No level 1 are required.
+Up to 3 L1 may count, but no more than 2 seminars.
+
+10 math courses, that is, 7 excluding Basics, of which at most 2 may be outside of MATH.
+
+At most 2 level 1 BIO courses.
+
+
+
+---
+
+
+Collect courses up to the limit, then return. Remove any other matches from the list.
