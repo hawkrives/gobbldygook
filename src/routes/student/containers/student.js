@@ -12,10 +12,10 @@ import './student.scss'
 export class Student extends Component {
 	static propTypes = {
 		content: PropTypes.node,  // from react-router
-		isLoading: PropTypes.bool.isRequired,
 		loadStudent: PropTypes.func.isRequired,
 		overlay: PropTypes.node,  // from react-router
 		params: PropTypes.object,  // react-router
+		processed: PropTypes.object,  // redux
 		sidebar: PropTypes.node,  // from react-router
 		student: PropTypes.object,  // redux
 	};
@@ -35,18 +35,21 @@ export class Student extends Component {
 	};
 
 	render() {
-		if (this.props.isLoading){//} || !this.props.student) {
+		if (!this.props.student) {
+			return <div>Student {this.props.params.studentId} could not be loaded.</div>
+		}
+
+		if (this.props.student.isLoading){
 			return <Loading>Loading Student…</Loading>
 		}
 
-		const name = this.props.student ? this.props.student.present.name : 'Loading…'
+		const name = this.props.student ? this.props.student.data.present.name : 'Loading…'
 
 		return (
 			<DocumentTitle title={`${name} | Gobbldygook`}>
 				<div className='student'>
-					{/*<Sidebar></Sidebar>*/}
-					{/*this.props.sidebar*/}
-					{this.props.content}
+					{/*<Sidebar>{cloneElement(this.props.sidebar, {student: this.props.student, processed: this.props.processed})}</Sidebar>*/}
+					{cloneElement(this.props.content, {student: this.props.student})}
 					{/*this.props.overlay*/}
 				</div>
 			</DocumentTitle>
@@ -56,9 +59,7 @@ export class Student extends Component {
 
 
 const mapStateToProps = (state, ownProps) => ({
-	student: state.students.data[ownProps.params.id],
-	processed: state.processed[ownProps.params.id],
-	isLoading: state.students.isLoading,
+	student: state.students[ownProps.params.studentId],
 })
 
 const mapDispatchToProps = dispatch =>

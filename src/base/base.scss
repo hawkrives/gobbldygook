@@ -30,18 +30,6 @@ menu {
 	margin: 0;
 }
 
-.student > .content {
-	flex: 1;
-
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: stretch;
-
-	@media all and (min-width: $single-column-width) {
-		margin-left: $sidebar-width + $page-edge-padding;
-	}
-}
-
 // hide the St. Olaf disclaimer
 // TODO: move it somewhere else, instead of hiding it
 [href="/cwis_policies/personal_disclaimer.html"] {

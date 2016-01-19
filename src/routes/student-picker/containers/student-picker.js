@@ -48,7 +48,7 @@ export default class StudentPickerContainer extends Component {
 		// 	return <Loading>Loading students…</Loading>
 		// }
 
-		// const students = mapValues(this.props.students.data, s => s.present)
+		// const students = mapValues(this.props.students, s => s.data.present)
 		const students = this.props.students
 		return (
 			<StudentPicker
@@ -72,7 +72,7 @@ export default class StudentPickerContainer extends Component {
 
 
 const mapStateToProps = state => ({
-	students: state.processed,
+	students: state.students,
 	routing: state.routing,
 })
 

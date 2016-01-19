@@ -8,3 +8,15 @@
 		flex-flow: column nowrap;
 	}
 }
+
+.student > .content {
+	flex: 1;
+
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: stretch;
+
+	// @media all and (min-width: $single-column-width) {
+	// 	margin-left: $sidebar-width + $page-edge-padding;
+	// }
+}

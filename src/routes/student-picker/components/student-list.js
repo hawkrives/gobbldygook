@@ -26,13 +26,12 @@ export default function StudentList(props) {
 
 	const studentObjects = map(
 		sortBy(
-			filter(
-				students,
-				s => fuzzysearch(filterText, s.data.name.toLowerCase())),
+			filter(students, s =>
+				fuzzysearch(filterText, (s.data.name || '').toLowerCase())),
 			s => s.data[sortByKey]),
-		student =>
+		(student, i) =>
 			<StudentListItem
-				key={student.data.id}
+				key={student.data.id || i}
 				student={student}
 				destroyStudent={destroyStudent}
 				isEditing={isEditing}

@@ -13,7 +13,7 @@ import './student-list-item.scss'
 export default function StudentListItem(props) {
 	const { student, isEditing, destroyStudent } = props
 
-	const isLoading = student.isLoading || student.isValdiating || student.isChecking
+	const isLoading = student.isLoading || student.isFetching || student.isValdiating || student.isChecking
 	let opts = {loading: isLoading}
 	if (!isLoading) {
 		opts['can-graduate'] = student.data.canGraduate
