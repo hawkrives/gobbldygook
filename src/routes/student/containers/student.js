@@ -2,7 +2,7 @@ import React, { Component, PropTypes, cloneElement } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { loadStudent } from '../../../redux/students/actions/load-students'
+import loadStudent from '../../../redux/students/actions/load-student'
 
 // import Sidebar from './sidebar'
 import Loading from '../../../components/loading'
