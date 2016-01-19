@@ -1,4 +1,3 @@
-import findIndex from 'lodash/array/findIndex'
 import clone from 'lodash/lang/clone'
 import reject from 'lodash/collection/reject'
 
@@ -12,49 +11,26 @@ import {
 
 const initialState = []
 
-function checkForDuplicateIds(state, {payload}) {
-	if (findIndex(state, {id: payload.id}) >= 0) {
-		console.error(`cannot add a second notification with the existing id "${payload.id}"`)
-		return true
-	}
-	return false
-}
-
 export default function reducer(state = initialState, action) {
 	const {type, payload} = action
 
 	switch (type) {
 		case LOG_MESSAGE: {
-			if (checkForDuplicateIds(state, action)) {
-				return state
-			}
-
 			return [...state, {
-				id: payload.id,
 				message: payload.message,
 				type: 'message',
 			}]
 		}
 
 		case LOG_ERROR: {
-			if (checkForDuplicateIds(state, action)) {
-				return state
-			}
-
 			return [...state, {
-				id: payload.id,
 				message: payload.error.message,
 				type: 'error',
 			}]
 		}
 
 		case START_PROGRESS: {
-			if (checkForDuplicateIds(state, action)) {
-				return state
-			}
-
 			return [...state, {
-				id: payload.id,
 				message: payload.message,
 				value: payload.value,
 				max: payload.max,
@@ -65,22 +41,21 @@ export default function reducer(state = initialState, action) {
 
 		case INCREMENT_PROGRESS: {
 			// make a copy of the previous item
-			const itemIndex = findIndex(state, {id: payload.id})
-			const progress = clone(state[itemIndex])
+			const progress = clone(state[payload.index])
 			progress.value += payload.by
 			progress.value = progress.value <= progress.max
 				? progress.value
 				: progress.max
 
 			return [
-				...state.slice(0, itemIndex),
+				...state.slice(0, payload.index),
 				progress,
-				...state.slice(itemIndex + 1),
+				...state.slice(payload.index + 1),
 			]
 		}
 
 		case REMOVE_NOTIFICATION: {
-			return reject(state, {id: payload.id})
+			return reject(state, (_, i) => i === payload.index)
 		}
 
 		default: {

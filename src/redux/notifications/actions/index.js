@@ -1,5 +1,4 @@
-import uniqueId from 'lodash/utility/uniqueId'
-import delayByPromise from 'delay'
+import delay from 'delay'
 
 import {
 	LOG_MESSAGE,
@@ -10,34 +9,31 @@ import {
 } from '../constants'
 
 
-export function removeNotification(id, delay=0) {
-	if (delay) {
+export function removeNotification(index, delayBy=0) {
+	if (delayBy) {
 		return {
 			type: REMOVE_NOTIFICATION,
-			payload: delayByPromise(delay).then(() => ({ id })),
+			payload: delay(delayBy).then(() => ({ index })),
 		}
 	}
-	return { type: REMOVE_NOTIFICATION, payload: { id } }
+	return { type: REMOVE_NOTIFICATION, payload: { index } }
 }
 
-export function logMessage(id, message) {
-	return { type: LOG_MESSAGE, payload: { id, message } }
+export function logMessage(message) {
+	return { type: LOG_MESSAGE, payload: { message } }
 }
 
-export function logError({error, quiet=false, id=undefined}, ...args) {
-	if (id === undefined) {
-		id = uniqueId('error-')
-	}
-	if (!quiet && TESTING) {
+export function logError({error, quiet=false}, ...args) {
+	if (!quiet && !TESTING) {
 		console.error(error, ...args)
 	}
-	return { type: LOG_ERROR, payload: { id, error, quiet, args } }
+	return { type: LOG_ERROR, payload: { error, quiet, args } }
 }
 
-export function startProgress(id, message='', {value=0, max=1, showButton=false}={}) {
-	return { type: START_PROGRESS, payload: { id, message, value, max, showButton } }
+export function startProgress(message='', {value=0, max=1, showButton=false}={}) {
+	return { type: START_PROGRESS, payload: { message, value, max, showButton } }
 }
 
-export function incrementProgress(id, by=1) {
-	return { type: INCREMENT_PROGRESS, payload: { id, by } }
+export function incrementProgress(index, by=1) {
+	return { type: INCREMENT_PROGRESS, payload: { index, by } }
 }

@@ -7,10 +7,9 @@ import './notification.scss'
 export default class Notification extends Component {
 	static propTypes = {
 		hideButton: PropTypes.bool,
-		id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 		max: PropTypes.number,
 		message: PropTypes.string.isRequired,
-		onClick: PropTypes.func.isRequired,
+		onClose: PropTypes.func.isRequired,
 		type: PropTypes.string.isRequired,
 		value: PropTypes.number,
 	};
@@ -26,7 +25,7 @@ export default class Notification extends Component {
 
 		return (
 			<li className={`notification-capsule notification-type--${this.props.type}`}
-				onClick={() => this.props.onClick(this.props.id)}>
+				onClick={this.props.onClose}>
 				<div className='notification-content'>
 					<h1 className='notification-message'>
 						{this.props.message}
