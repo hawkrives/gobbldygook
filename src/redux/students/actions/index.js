@@ -4,6 +4,7 @@ import {default as loadStudents, loadStudent} from './load-students'
 import importStudent from './import-student'
 import initStudent from './init-student'
 import destroyStudent from './destroy-student'
+import saveStudent from './save-student'
 
 import * as areas from './areas'
 import * as change from './change'
@@ -20,6 +21,7 @@ module.exports = {
 	importStudent,
 	initStudent,
 	destroyStudent,
+	saveStudent,
 	...areas,
 	...change,
 	...check,

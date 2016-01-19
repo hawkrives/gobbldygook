@@ -41,3 +41,5 @@ export const BEGIN_CHECK_GRADUATABILITY = 'gobbldygook/processed/BEGIN_CHECK_GRA
 export const CHECK_GRADUATABILITY = 'gobbldygook/processed/CHECK_GRADUATABILITY'
 export const BEGIN_VALIDATE_SCHEDULES = 'gobbldygook/processed/BEGIN_VALIDATE_SCHEDULES'
 export const VALIDATE_SCHEDULES = 'gobbldygook/processed/VALIDATE_SCHEDULES'
+
+export const SAVE_STUDENT = 'gobbldygook/processed/SAVE_STUDENT'
