@@ -6,6 +6,7 @@ import isArray from 'lodash/lang/isArray'
 import isNumber from 'lodash/lang/isNumber'
 import isUndefined from 'lodash/lang/isUndefined'
 import map from 'lodash/collection/map'
+import mapValues from 'lodash/object/mapValues'
 import omit from 'lodash/object/omit'
 import reject from 'lodash/collection/reject'
 import zipObject from 'lodash/array/zipObject'
@@ -14,6 +15,7 @@ import {v4 as uuid} from 'uuid'
 import randomChar from '../helpers/random-char'
 
 const now = new Date()
+import Schedule from './schedule'
 
 export default function Student(data) {
 	const baseStudent = {
@@ -46,6 +48,8 @@ export default function Student(data) {
 	if (isArray(student.schedules)) {
 		student.schedules = zipObject(map(student.schedules, s => [String(s.id), {...s, id: String(s.id)}]))
 	}
+
+	student.schedules = mapValues(student.schedules, Schedule)
 
 	return student
 }
