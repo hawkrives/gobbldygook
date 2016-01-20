@@ -68,7 +68,6 @@ export default function studentWrapperReducer(state = initialState, action) {
 			}
 		}
 
-
 		default: {
 			return {
 				...state,
