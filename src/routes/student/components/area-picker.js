@@ -98,6 +98,7 @@ export default class AreaPickerContainer extends Component {
 
 	render() {
 		return <AreaPicker {...this.props}
+			filterText={this.state.filter}
 			onFilterChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})}
 		/>
 	}
