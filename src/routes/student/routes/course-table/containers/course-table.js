@@ -40,6 +40,7 @@ export function CourseTableContainer(props) {
 	const student = props.student.data.present
 	return (
 		<CourseTable
+			className={props.className}
 			student={student}
 			addYear={() => addYear(props.addSchedule, student)}
 			addSemester={year => addSemester(props.addSchedule, student, year)}

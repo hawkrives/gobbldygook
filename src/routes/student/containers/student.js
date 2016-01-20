@@ -56,7 +56,7 @@ export class Student extends Component {
 					<Sidebar student={this.props.student}>
 						{sidebarContents}
 					</Sidebar>
-					{cloneElement(this.props.content, {student: this.props.student})}
+					{cloneElement(this.props.content, {student: this.props.student, className: 'content'})}
 					{this.props.overlay && cloneElement(this.props.overlay, {student: this.props.student})}
 				</div>
 			</DocumentTitle>
