@@ -27,14 +27,14 @@ export default class GraduationStatusContainer extends Component {
 		showAreaPickerFor: {},
 	};
 
-	initiateAddArea = (type, ev) => {
+	handleInitiateAddArea = (type, ev) => {
 		ev.preventDefault()
 		this.setState(state => ({
 			showAreaPickerFor: {...state.showAreaPickerFor, [type]: true},
 		}))
 	};
 
-	endAddArea = (type, ev) => {
+	handleEndAddArea = (type, ev) => {
 		ev.preventDefault()
 		this.setState(state => ({
 			showAreaPickerFor: {...state.showAreaPickerFor, [type]: false},
@@ -98,7 +98,7 @@ export default class GraduationStatusContainer extends Component {
 				onEndAddArea={this.handleEndAddArea}
 				onInitiateAddArea={this.handleInitiateAddArea}
 				onRemoveArea={this.handleRemoveArea}
-				onRemoveOverride={this.handleTemoveOverride}
+				onRemoveOverride={this.handleRemoveOverride}
 				onToggleOverride={this.handleToggleOverride}
 				showAreaPickerFor={this.state.showAreaPickerFor}
 				student={student}
@@ -110,6 +110,6 @@ export default class GraduationStatusContainer extends Component {
 const mapDispatch = dispatch =>
 	bindActionCreators({addArea, setOverride, removeOverride, removeArea, changeName, changeMatriculation, changeGraduation}, dispatch)
 
-const mapState = state => ({allAreas: state.areas})
+const mapState = state => ({allAreas: state.areas.data})
 
 export default connect(mapState, mapDispatch)(GraduationStatusContainer)

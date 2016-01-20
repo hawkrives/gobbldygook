@@ -180,17 +180,17 @@ export default class AreaOfStudyContainer extends Component {
 	render() {
 		return (
 			<AreaOfStudy
-				onAddOverride={this.props.onAddOverride}
 				area={this.props.area}
-				showConfirmRemoval={this.state.confirmRemoval}
-				onEndRemovalConfirmation={this.endRemovalConfirmation}
 				isOpen={this.state.isOpen}
+				onAddOverride={this.props.onAddOverride}
+				onEndRemovalConfirmation={this.endRemovalConfirmation}
 				onRemoveArea={this.props.onRemoveArea}
 				onRemoveOverride={this.props.onRemoveOverride}
-				showCloseButton={this.props.showCloseButton}
-				startRemovalConfirmation={this.startRemovalConfirmation}
-				toggleAreaExpansion={this.toggleAreaExpansion}
+				onStartRemovalConfirmation={this.startRemovalConfirmation}
+				onToggleAreaExpansion={this.toggleAreaExpansion}
 				onToggleOverride={this.props.onToggleOverride}
+				showCloseButton={this.props.showCloseButton}
+				showConfirmRemoval={this.state.confirmRemoval}
 			/>
 		)
 	}

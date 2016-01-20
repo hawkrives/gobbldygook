@@ -12,7 +12,8 @@ import Button from '../../../components/button'
 import './area-of-study-group.scss'
 
 export default function AreaOfStudyGroup(props) {
-	const showOrHidePicker = props.showAreaPicker
+	const showAreaPicker = props.showAreaPicker || false
+	const showOrHidePicker = showAreaPicker
 		? props.onEndAddArea
 		: props.onInitiateAddArea
 
@@ -25,11 +26,11 @@ export default function AreaOfStudyGroup(props) {
 					type='flat'
 					onClick={ev => showOrHidePicker(props.type, ev)}
 				>
-					{props.showAreaPicker ? 'Close' : 'Add ∙ Edit'}
+					{showAreaPicker ? 'Close' : 'Add ∙ Edit'}
 				</Button>
 			</h1>
 
-			{props.showAreaPicker && <AreaPicker
+			{showAreaPicker && <AreaPicker
 				areaList={props.allAreasOfType}
 				currentAreas={props.areas}
 				onAddArea={props.onAddArea}
@@ -44,8 +45,8 @@ export default function AreaOfStudyGroup(props) {
 					onRemoveArea={props.onRemoveArea}
 					onRemoveOverride={props.onRemoveOverride}
 					onToggleOverride={props.onToggleOverride}
-					showCloseButton={props.showAreaPicker}
-					showEditButton={props.showAreaPicker}
+					showCloseButton={showAreaPicker}
+					showEditButton={showAreaPicker}
 					studentId={props.student.id}
 				/>)}
 		</section>
