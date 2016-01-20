@@ -52,6 +52,7 @@ export default function studentsReducer(state = initialState, action) {
 		case INIT_STUDENT:
 		case IMPORT_STUDENT: {
 			if (error) {
+				console.error(payload)
 				return state
 			}
 			return {
@@ -61,6 +62,10 @@ export default function studentsReducer(state = initialState, action) {
 		}
 
 		case DESTROY_STUDENT: {
+			if (error) {
+				console.error(payload)
+				return state
+			}
 			return omit(state, [payload.studentId])
 		}
 
@@ -72,6 +77,10 @@ export default function studentsReducer(state = initialState, action) {
 		case CHECK_GRADUATABILITY:
 		case BEGIN_VALIDATE_SCHEDULES:
 		case VALIDATE_SCHEDULES: {
+			if (error) {
+				console.error(payload)
+				return state
+			}
 			return {
 				...state,
 				[payload.id]: studentWrapperReducer(state[payload.id], action),
@@ -101,6 +110,10 @@ export default function studentsReducer(state = initialState, action) {
 		case REMOVE_OVERRIDE:
 		case ADD_FABRICATION:
 		case REMOVE_FABRICATION: {
+			if (error) {
+				console.error(payload)
+				return state
+			}
 			const id = payload.studentId
 			return {
 				...state,
@@ -110,6 +123,10 @@ export default function studentsReducer(state = initialState, action) {
 
 		case UndoableActionTypes.UNDO:
 		case UndoableActionTypes.REDO: {
+			if (error) {
+				console.error(payload)
+				return state
+			}
 			return {
 				...state,
 				[payload.id]: studentWrapperReducer(state[payload.id], action),
