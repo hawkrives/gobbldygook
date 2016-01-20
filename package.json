@@ -88,7 +88,7 @@
   },
   "devDependencies": {
     "autoprefixer": "6.3.1",
-    "babel-cli": "6.4.0",
+    "babel-cli": "6.4.5",
     "babel-core": "6.4.0",
     "babel-eslint": "4.1.6",
     "babel-loader": "6.2.1",
@@ -100,7 +100,7 @@
     "babel-plugin-syntax-export-extensions": "6.3.13",
     "babel-plugin-syntax-object-rest-spread": "6.3.13",
     "babel-plugin-syntax-trailing-function-commas": "6.3.13",
-    "babel-plugin-transform-async-to-generator": "6.4.0",
+    "babel-plugin-transform-async-to-generator": "6.4.6",
     "babel-plugin-transform-class-properties": "6.4.0",
     "babel-plugin-transform-export-extensions": "6.4.0",
     "babel-plugin-transform-inline-environment-variables": "6.3.13",
