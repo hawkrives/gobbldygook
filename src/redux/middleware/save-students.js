@@ -57,13 +57,14 @@ const saveStudentsMiddleware = store => next => action => {
 	}
 
 	// get any student objects whose identity has changed
-	const studentsToSave = filter(newStudents, (_, id) => newStudents[id].data !== oldStudents[id].data)
+	const studentsToSave = filter(newStudents, (_, id) =>
+		newStudents[id].data.present !== oldStudents[id].data.present)
 
 	// save them
-	const studentSavingPromises = map(studentsToSave, stu =>
+	const promises = map(studentsToSave, stu =>
 		store.dispatch(saveStudent(stu.data.present.id)))
 
-	return Promise.all(studentSavingPromises)
+	return Promise.all(promises)
 		.then(() => result)
 }
 

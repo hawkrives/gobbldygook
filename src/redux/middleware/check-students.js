@@ -63,14 +63,8 @@ const checkStudentsMiddleware = store => next => action => {
 	const newState = store.getState()
 	const newStudents = newState.students
 
-	let affectedStudents = filter(newStudents, (_, id) => {
-		const now = newStudents[id]
-		const changed = now.data !== oldStudents[id].data
-		if (changed && now.data && 'present' in now.data) {
-			return true
-		}
-		return false
-	})
+	const affectedStudents = filter(newStudents, (_, id) =>
+		newStudents[id].data.present !== oldStudents[id].data.present)
 
 	// check them
 	const promises = map(affectedStudents, s =>
