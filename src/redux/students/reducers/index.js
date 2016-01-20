@@ -1,4 +1,5 @@
 import omit from 'lodash/object/omit'
+import {ActionTypes as UndoableActionTypes} from 'redux-undo'
 
 import {
 	INIT_STUDENT,
@@ -104,6 +105,14 @@ export default function studentsReducer(state = initialState, action) {
 			return {
 				...state,
 				[id]: studentWrapperReducer(state[id], action),
+			}
+		}
+
+		case UndoableActionTypes.UNDO:
+		case UndoableActionTypes.REDO: {
+			return {
+				...state,
+				[payload.id]: studentWrapperReducer(state[payload.id], action),
 			}
 		}
 
