@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {DropTarget} from 'react-dnd'
 
@@ -8,15 +8,36 @@ import Icon from './icon'
 
 import './course-removal-box.scss'
 
+function CourseRemovalBox(props) {
+	const className = cx('course-removal-box', {
+		'can-drop': this.props.canDrop,
+		'is-over': this.props.isOver,
+	})
+
+	return props.connectDropTarget(
+		<div className={className}>
+			<Icon name='ios-trash-outline' type='block' style={{fontSize: '3em', textAlign: 'center'}} />
+			Drop a course here to remove it.
+		</div>
+	)
+}
+CourseRemovalBox.propTypes = {
+	canDrop: PropTypes.bool.isRequired,  // react-dnd
+	connectDropTarget: PropTypes.func.isRequired,  // react-dnd
+	isOver: PropTypes.bool.isRequired,  // react-dnd
+	removeCourse: PropTypes.func.isRequired,  // studentId is embedded in the passed function
+}
+
+
 // Implements the drag source contract.
 const removeCourseTarget = {
 	drop(props, monitor) {
-		const { actions } = props
 		const item = monitor.getItem()
 		const { clbid, fromScheduleId, isFromSchedule } = item
 		if (isFromSchedule) {
 			console.log('dropped course', item)
-			actions.removeCourse(props.studentId, fromScheduleId, clbid)
+			// the studentId is embedded in the passed function
+			props.removeCourse(fromScheduleId, clbid)
 		}
 	},
 	canDrop(props, monitor) {
@@ -34,30 +55,6 @@ function collect(connect, monitor) {
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),
 		canDrop: monitor.canDrop(),
-	}
-}
-
-class CourseRemovalBox extends Component {
-	static propTypes = {
-		actions: PropTypes.object.isRequired,
-		canDrop: PropTypes.bool.isRequired,  // react-dnd
-		connectDropTarget: PropTypes.func.isRequired,  // react-dnd
-		isOver: PropTypes.bool.isRequired,  // react-dnd
-		studentId: PropTypes.string.isRequired,
-	};
-
-	render() {
-		const className = cx('course-removal-box', {
-			'can-drop': this.props.canDrop,
-			'is-over': this.props.isOver,
-		})
-
-		return this.props.connectDropTarget(
-			<div className={className}>
-				<Icon name='ios-trash-outline' type='block' style={{fontSize: '3em', textAlign: 'center'}} />
-				Drop a course here to remove it.
-			</div>
-		)
 	}
 }
 
