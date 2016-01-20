@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.2.6
+- Put some more lodash back in
+
 ## 2.2.5
 - Removed most usages of lodash
 - Added code coverage

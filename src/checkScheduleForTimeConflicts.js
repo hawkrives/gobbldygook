@@ -1,3 +1,4 @@
+import some from 'lodash/some'
 import checkCoursesForTimeConflicts from './checkCoursesForTimeConflicts'
 
 export default function checkScheduleForTimeConflicts(courses) {
@@ -12,6 +13,6 @@ export default function checkScheduleForTimeConflicts(courses) {
 	// 	}
 	// }
 
-	return courses.some(c1 => courses.some(c2 =>
+	return some(courses, c1 => some(courses, c2 =>
 		checkCoursesForTimeConflicts(c1, c2)))
 }
