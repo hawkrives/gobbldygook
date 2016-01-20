@@ -23,7 +23,7 @@ function shouldLoad(state, id) {
 	let savedStudent = JSON.parse(localStorage.getItem(id))
 	let thisStudent = state.students[id]
 
-	if (thisStudent.isLoading || savedStudent.dateLastModified === thisStudent.dateLastModified) {
+	if (thisStudent.isLoading || savedStudent.dateLastModified === thisStudent.data.present.dateLastModified) {
 		return false
 	}
 
