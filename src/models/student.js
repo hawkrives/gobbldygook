@@ -60,21 +60,39 @@ export default function Student(data) {
 ////////
 
 export function changeStudentName(student, newName) {
+	if (student.name === newName) {
+		return student
+	}
 	return {...student, name: newName}
 }
 export function changeStudentAdvisor(student, newAdvisor) {
+	if (student.advisor === newAdvisor) {
+		return student
+	}
 	return {...student, advisor: newAdvisor}
 }
 export function changeStudentCreditsNeeded(student, newCreditsNeeded) {
+	if (student.creditsNeeded === newCreditsNeeded) {
+		return student
+	}
 	return {...student, creditsNeeded: newCreditsNeeded}
 }
 export function changeStudentMatriculation(student, newMatriculation) {
+	if (student.matriculation === newMatriculation) {
+		return student
+	}
 	return {...student, matriculation: newMatriculation}
 }
 export function changeStudentGraduation(student, newGraduation) {
+	if (student.graduation === newGraduation) {
+		return student
+	}
 	return {...student, graduation: newGraduation}
 }
 export function changeStudentSetting(student, key, value) {
+	if (student.settings && student.settings[key] === value) {
+		return student
+	}
 	return {...student, settings: {...student.settings, [key]: value}}
 }
 
