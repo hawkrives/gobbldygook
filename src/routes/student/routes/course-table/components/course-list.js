@@ -15,7 +15,7 @@ export default function CourseList(props) {
 	let courseObjects = map(props.schedule.courses, (course, i) =>
 		course.error
 		? <li key={course.clbid}><MissingCourse clbid={course.clbid} error={course.error} /></li>
-		: <li key={course.clbid}><Link to={`/${props.student.id}/course/${course.clbid}`}><InlineCourse
+		: <li key={course.clbid}><Link to={`/s/${props.student.id}/course/${course.clbid}`}><InlineCourse
 			index={i}
 			course={course}
 			student={props.student}
