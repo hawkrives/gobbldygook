@@ -23,7 +23,7 @@ function canAdd({query, value, primaryKey, results}={}) {
 	// and then that it's not already in the array.
 	// Note that because JS checks against identity, we use isEqual to
 	// do an equality check against the two objects.
-	return checkAgainstQuery(query, value) && !includes(results, primaryKey)
+	return checkAgainstQuery(query)(value) && !includes(results, primaryKey)
 }
 
 function queryStore(query) {
