@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import loadStudent from '../../../redux/students/actions/load-student'
 
-// import Sidebar from './sidebar'
+import Sidebar from '../../../containers/sidebar'
 import Loading from '../../../components/loading'
+import GraduationStatus from './graduation-status'
 
 import './student.scss'
 
@@ -45,12 +46,18 @@ export class Student extends Component {
 
 		const name = this.props.student ? this.props.student.data.present.name : 'Loading…'
 
+		const sidebarContents = this.props.sidebar
+			? cloneElement(this.props.sidebar, {student: this.props.student})
+			: <GraduationStatus student={this.props.student} />
+
 		return (
 			<DocumentTitle title={`${name} | Gobbldygook`}>
 				<div className='student'>
-					{/*<Sidebar>{cloneElement(this.props.sidebar, {student: this.props.student, processed: this.props.processed})}</Sidebar>*/}
+					<Sidebar student={this.props.student}>
+						{sidebarContents}
+					</Sidebar>
 					{cloneElement(this.props.content, {student: this.props.student})}
-					{/*this.props.overlay*/}
+					{cloneElement(this.props.overlay, {student: this.props.student})}
 				</div>
 			</DocumentTitle>
 		)
