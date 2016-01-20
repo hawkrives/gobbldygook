@@ -14,10 +14,10 @@ worker.onerror = msg => console.warn('[main] received error from check-student w
  * @promise ResultsPromise
  * @fulfill {Object} - The details of the area check.
  */
-export default function checkStudentAgainstArea(student) {
-	const sourceId = uniqueId()
+const checkStudentAgainstArea = student => area => {
+	return new Promise((resolve, reject) => {
+		const sourceId = uniqueId()
 
-	return area => new Promise((resolve, reject) => {
 		// This is inside of the function so that it doesn't get unregistered too early
 		function onMessage({data}) {
 			const [resultId, type, contents] = JSON.parse(data)
@@ -43,3 +43,5 @@ export default function checkStudentAgainstArea(student) {
 		worker.postMessage(JSON.stringify([sourceId, student, area]))
 	})
 }
+
+export default checkStudentAgainstArea
