@@ -72,12 +72,12 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScop
 
 		checkStudentAgainstArea(student, area)
 			.then(result => {
-				console.log(`[check-student(${id})] took ${round(present() - start)} ms`)
 				self.postMessage(JSON.stringify([id, 'result', result]))
+				console.log(`[check-student(${id})] took ${round(present() - start)} ms`)
 			})
 			.catch(err => {
-				console.error(`[check-student(${id})]`, err)
 				self.postMessage(JSON.stringify([id, 'error', stringifyError(err)]))
+				console.error(`[check-student(${id})]`, err)
 			})
 	})
 }
