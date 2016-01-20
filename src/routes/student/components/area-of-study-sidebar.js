@@ -62,7 +62,7 @@ export default function AreaOfStudySidebar(props) {
 				{unusedTypes.map(type => (
 					<Button key={type}
 						className='add-unused-area-of-study'
-						onClick={ev => props.onInitiateAddArea({ev, type})}
+						onClick={ev => props.onInitiateAddArea(type, ev)}
 						type='flat'
 					>
 						{type}
