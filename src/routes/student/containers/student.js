@@ -47,8 +47,8 @@ export class Student extends Component {
 		const name = this.props.student ? this.props.student.data.present.name : 'Loading…'
 
 		const sidebarContents = this.props.sidebar
-			? cloneElement(this.props.sidebar, {student: this.props.student})
-			: <GraduationStatus student={this.props.student} />
+			? cloneElement(this.props.sidebar, {student: this.props.student.data.present})
+			: <GraduationStatus student={this.props.student.data.present} />
 
 		return (
 			<DocumentTitle title={`${name} | Gobbldygook`}>

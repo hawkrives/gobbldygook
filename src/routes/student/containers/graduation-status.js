@@ -86,7 +86,7 @@ export default class GraduationStatusContainer extends Component {
 	};
 
 	render() {
-		const student = this.props.student.data.present
+		const student = this.props.student
 		return (
 			<GraduationStatus
 				allAreas={this.props.allAreas}
