@@ -24,12 +24,12 @@ export function Sidebar(props) {
 	return (
 		<aside className='sidebar'>
 			<Toolbar className='student-buttons'>
-				<Link to='/'>
+				<Link className='button' to='/'>
 					<Button title='Students'>
 						<Icon name='ios-people-outline' type='block' />
 					</Button>
 				</Link>
-				<Link to={`/s/${studentId}/search`}>
+				<Link className='button' to={`/s/${studentId}/search`}>
 					<Button title='Search'>
 						<Icon name='ios-search' type='block' />
 					</Button>
@@ -46,7 +46,7 @@ export function Sidebar(props) {
 
 				<Separator type='spacer' />
 
-				<Link to={`/s/${studentId}/share`}>
+				<Link className='button' to={`/s/${studentId}/share`}>
 					<Button title='Share'>
 						<Icon name='ios-upload-outline' type='block' />
 					</Button>

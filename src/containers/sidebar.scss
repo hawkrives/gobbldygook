@@ -1,4 +1,5 @@
 @import '../base/variables';
+@import '../mixins/link-undecorated';
 
 .sidebar {
 	width: 100%;
@@ -13,6 +14,10 @@
 		height: 100vh;
 		width: $sidebar-width;
 		padding-bottom: 25vh;
+	}
+
+	.toolbar a {
+		@include link-undecorated;
 	}
 }
 
