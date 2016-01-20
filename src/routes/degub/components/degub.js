@@ -1,14 +1,18 @@
 import React, { PropTypes } from 'react'
 import map from 'lodash/collection/map'
-import size from 'lodash/collection/size'
 import { connect } from 'react-redux'
-import { ActionTypes } from 'redux-undo'
-import { loadStudents } from '../../../redux/students/actions'
+import { bindActionCreators } from 'redux'
+import { undo, redo } from '../../../redux/students/actions/undo'
+import { loadStudents } from '../../../redux/students/actions/load-students'
 
 function Student({undo, redo, student}) {
-	const canUndo = 'past' in student && student.past.length
-	const canRedo = 'future' in student && student.future.length
-	const present = student.present
+	if (student.isLoading) {
+		return <div>Loading student…</div>
+	}
+
+	const canUndo = student.data.past.length
+	const canRedo = student.data.future.length
+	const present = student.data.present
 
 	return (
 		<div>
@@ -26,12 +30,7 @@ function Student({undo, redo, student}) {
 
 
 function Degub(props) {
-	const students = props.students.data
-	const isLoading = props.students.isLoading
-	console.log('degub.render', isLoading, size(students))
-	if (isLoading) {
-		return <div>Loading students…</div>
-	}
+	const students = props.students || []
 
 	return (
 		<ul className={`degub ${props.className || ''}`}>
@@ -39,8 +38,8 @@ function Degub(props) {
 				<li key={i}>
 					<Student
 						student={s}
-						undo={() => props.undo(s.present.id)}
-						redo={() => props.redo(s.present.id)}
+						undo={() => props.undo(s.data.present.id)}
+						redo={() => props.redo(s.data.present.id)}
 					/>
 				</li>)}
 		</ul>
@@ -52,11 +51,6 @@ Degub.propTypes = {
 	redo: PropTypes.func.isRequired,
 	students: PropTypes.object.isRequired,
 	undo: PropTypes.func.isRequired,
-}
-
-Degub.defaultProps = {
-	actions: {},
-	students: {},
 }
 
 
@@ -77,10 +71,6 @@ const mapStateToProps = state => ({
 	students: state.students,
 })
 
-const mapDispatchToProps = dispatch => ({
-	undo: id => dispatch({type: ActionTypes.UNDO, payload: {studentId: id}}),
-	redo: id => dispatch({type: ActionTypes.REDO, payload: {studentId: id}}),
-	loadStudents: () => dispatch(loadStudents()),
-})
+const mapDispatchToProps = dispatch => bindActionCreators({undo, redo, loadStudents}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(DegubContainer)
