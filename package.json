@@ -40,7 +40,7 @@
     "babel-runtime": "6.3.19",
     "bluebird": "3.1.1",
     "classnames": "2.2.3",
-    "codemirror": "5.10.0",
+    "codemirror": "5.11.0",
     "combinations-generator": "1.0.1",
     "css-select": "1.0.0",
     "debug": "2.2.0",
