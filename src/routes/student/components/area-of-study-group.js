@@ -30,13 +30,13 @@ export default function AreaOfStudyGroup(props) {
 				</Button>
 			</h1>
 
-			{showAreaPicker && <AreaPicker
+			{showAreaPicker ? <AreaPicker
 				areaList={props.allAreasOfType}
 				currentAreas={props.areas}
 				onAddArea={props.onAddArea}
 				studentGraduation={props.student.graduation}
 				type={props.type}
-			/>}
+			/> : null}
 
 			{map(props.areas, (area, i) =>
 				<AreaOfStudy area={area}
