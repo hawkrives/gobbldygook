@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 
 import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
@@ -7,7 +7,7 @@ import map from 'lodash/collection/map'
 import sortByOrder from 'lodash/collection/sortByOrder'
 import cx from 'classnames'
 import plur from 'plur'
-import humanizeOperator from '../area-tools/humanize-operator'
+import humanizeOperator from '../../../area-tools/humanize-operator'
 
 import './expression.scss'
 
@@ -89,85 +89,83 @@ function makeOccurrenceExpression({expr}) {
 	return {description, contents}
 }
 
-export default class Expression extends Component {
-	static propTypes = {
-		ctx: PropTypes.object,
-		expr: PropTypes.shape({
-			$type: PropTypes.string,
-		}).isRequired,
-		hideIndicator: PropTypes.bool,
-	};
+export default function Expression(props) {
+	const {expr} = props
+	const {$type} = expr
 
-	render() {
-		const {expr} = this.props
-		const {$type} = expr
-
-		if (!$type) {
-			return null
-		}
-
-		const wasComputed = expr.hasOwnProperty('_result')
-		const computationResult = expr._result
-
-		let contents = null
-		let description = null
-		let result = null
-
-		if ($type === 'boolean') {
-			({contents} = makeBooleanExpression({...this.props}))
-		}
-
-		else if ($type === 'course') {
-			contents = <CourseExpression {...expr.$course} />
-			result = <ResultIndicator result={computationResult}  />
-		}
-
-		else if ($type === 'reference') {
-			contents = expr.$requirement
-			result = <ResultIndicator result={computationResult}  />
-		}
-
-		else if ($type === 'of') {
-			({contents, description} = makeOfExpression({...this.props}))
-		}
-
-		else if ($type === 'modifier') {
-			({description} = makeModifierExpression({...this.props}))
-			result = <ResultIndicator result={computationResult}  />
-		}
-
-		else if ($type === 'where') {
-			({description, contents} = makeWhereExpression({...this.props}))
-		}
-
-		else if ($type === 'occurrence') {
-			({description, contents} = makeOccurrenceExpression({...this.props}))
-		}
-
-		else {
-			console.warn(`<Expression />: type not handled: ${$type}`)
-			console.log(this.props)
-			contents = JSON.stringify(expr, null, 2)
-		}
-
-		const className = cx(
-			'expression',
-			`expression--${$type}`,
-			wasComputed ? 'computed' : 'computed--not',
-			computationResult ? 'computed-success' : 'computed-failure')
-
-		return (
-			<span className={className}>
-				{description &&
-					<span className='expression--description'>
-						{description}{!this.props.hideIndicator && result}
-					</span>}
-				{contents &&
-					<span className='expression--contents'>
-						{contents}
-						{!this.props.hideIndicator && result}
-					</span>}
-			</span>
-		)
+	if (!$type) {
+		return null
 	}
+
+	const wasComputed = expr.hasOwnProperty('_result')
+	const computationResult = expr._result
+
+	let contents = null
+	let description = null
+	let result = null
+
+	if ($type === 'boolean') {
+		({contents} = makeBooleanExpression({...props}))
+	}
+
+	else if ($type === 'course') {
+		contents = <CourseExpression {...expr.$course} />
+		result = <ResultIndicator result={computationResult}  />
+	}
+
+	else if ($type === 'reference') {
+		contents = expr.$requirement
+		result = <ResultIndicator result={computationResult}  />
+	}
+
+	else if ($type === 'of') {
+		({contents, description} = makeOfExpression({...props}))
+	}
+
+	else if ($type === 'modifier') {
+		({description} = makeModifierExpression({...props}))
+		result = <ResultIndicator result={computationResult}  />
+	}
+
+	else if ($type === 'where') {
+		({description, contents} = makeWhereExpression({...props}))
+	}
+
+	else if ($type === 'occurrence') {
+		({description, contents} = makeOccurrenceExpression({...props}))
+	}
+
+	else {
+		console.warn(`<Expression />: type not handled: ${$type}`)
+		console.log(props)
+		contents = JSON.stringify(expr, null, 2)
+	}
+
+	const className = cx(
+		'expression',
+		`expression--${$type}`,
+		wasComputed ? 'computed' : 'computed--not',
+		computationResult ? 'computed-success' : 'computed-failure')
+
+	return (
+		<span className={className}>
+			{description &&
+				<span className='expression--description'>
+					{description}{!props.hideIndicator && result}
+				</span>}
+			{contents &&
+				<span className='expression--contents'>
+					{contents}
+					{!props.hideIndicator && result}
+				</span>}
+		</span>
+	)
+}
+
+Expression.propTypes = {
+	ctx: PropTypes.object,
+	expr: PropTypes.shape({
+		$type: PropTypes.string,
+	}).isRequired,
+	hideIndicator: PropTypes.bool,
 }

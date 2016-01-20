@@ -1,15 +1,16 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import filter from 'lodash/collection/filter'
-import pluck from 'lodash/collection/pluck'
+import map from 'lodash/collection/map'
 import sample from 'lodash/collection/sample'
 
-import AvatarLetter from './avatar-letter'
-import ContentEditable from './content-editable'
+import AvatarLetter from '../../../components/avatar-letter'
+import ContentEditable from '../../../components/content-editable'
 
-import countCredits from '../area-tools/count-credits'
+import getActiveStudentCourses from '../../../helpers/get-active-student-courses'
+import countCredits from '../../../area-tools/count-credits'
 
 import './student-summary.scss'
 
@@ -39,105 +40,95 @@ const welcomeMessages = [
 	'halo, ', // indonesian
 ]
 
-export default class StudentSummary extends Component {
-	static propTypes = {
-		actions: PropTypes.object.isRequired,
-		canGraduate: PropTypes.bool.isRequired,
-		courses: PropTypes.arrayOf(PropTypes.object),
-		student: PropTypes.object.isRequired,
-	};
+const welcomeMessage = sample(welcomeMessages)
 
-	constructor() {
-		super()
-		this.state = {
-			welcome: sample(welcomeMessages),
-		}
-	}
+export default function StudentSummary(props) {
+	const {student} = props
+	const {studies, canGraduate} = student
 
-	render() {
-		const {actions, canGraduate, student} = this.props
-		const studies = student.studies
+	const NameEl = (
+		<ContentEditable
+			className='autosize-input'
+			onBlur={props.onChangeName}
+			value={String(student.name)}
+		/>
+	)
 
-		const NameEl = (
-			<ContentEditable
-				className='autosize-input'
-				onBlur={ev => actions.changeName(student.id, ev.target.value)}
-				value={String(student.name)}
-			/>
-		)
+	const degrees = filter(studies, {type: 'degree'})
+	const majors = filter(studies, {type: 'major'})
+	const concentrations = filter(studies, {type: 'concentration'})
+	const emphases = filter(studies, {type: 'emphasis'})
 
-		const degrees = filter(studies, {type: 'degree'})
-		const majors = filter(studies, {type: 'major'})
-		const concentrations = filter(studies, {type: 'concentration'})
-		const emphases = filter(studies, {type: 'emphasis'})
+	const degreeWord = plur('degree', degrees.length)
+	const majorWord = plur('major', majors.length)
+	const concentrationWord = plur('concentration', concentrations.length)
+	const emphasisWord = plur('emphasis', emphases.length)
 
-		const degreeWord = plur('degree', degrees.length)
-		const majorWord = plur('major', majors.length)
-		const concentrationWord = plur('concentration', concentrations.length)
-		const emphasisWord = plur('emphasis', emphases.length)
+	const degreeEmphasizer = (degrees.length === 1) ? 'a ' : ''
+	const majorEmphasizer = (majors.length === 1) ? 'a ' : ''
+	const concentrationEmphasizer = (concentrations.length === 1) ? 'a ' : ''
+	const emphasisEmphasizer = (emphases.length === 1) ? 'an ' : ''
 
-		const degreeEmphasizer = (degrees.length === 1) ? 'a ' : ''
-		const majorEmphasizer = (majors.length === 1) ? 'a ' : ''
-		const concentrationEmphasizer = (concentrations.length === 1) ? 'a ' : ''
-		const emphasisEmphasizer = (emphases.length === 1) ? 'an ' : ''
+	const degreeList = oxford(map(degrees, d => d.name))
+	const majorList = oxford(map(majors, m => m.name))
+	const concentrationList = oxford(map(concentrations, c => c.name))
+	const emphasisList = oxford(map(emphases, e => e.name))
 
-		const degreeList = oxford(pluck(degrees, 'name'))
-		const majorList = oxford(pluck(majors, 'name'))
-		const concentrationList = oxford(pluck(concentrations, 'name'))
-		const emphasisList = oxford(pluck(emphases, 'name'))
+	const currentCredits = countCredits(getActiveStudentCourses(student))
+	const neededCredits = student.creditsNeeded
+	const enoughCredits = currentCredits >= neededCredits
 
-		const currentCredits = countCredits(this.props.courses)
-		const neededCredits = student.creditsNeeded
-		const enoughCredits = currentCredits >= neededCredits
+	const graduationEl = (
+		<ContentEditable
+			className='autosize-input'
+			onBlur={props.onChangeGraduation}
+			value={String(student.graduation)}
+		/>
+	)
 
-		const graduationEl = (
-			<ContentEditable
-				className='autosize-input'
-				onBlur={ev => actions.changeGraduation(student.id, parseInt(ev.target.value || 0))}
-				value={String(student.graduation)}
-			/>
-		)
+	const matriculationEl = (
+		<ContentEditable
+			className='autosize-input'
+			onBlur={props.onChangeMatriculation}
+			value={String(student.matriculation)}
+		/>
+	)
 
-		const matriculationEl = (
-			<ContentEditable
-				className='autosize-input'
-				onBlur={ev => actions.changeMatriculation(student.id, parseInt(ev.target.value || 0))}
-				value={String(student.matriculation)}
-			/>
-		)
+	const canGraduateClass = canGraduate ? 'can-graduate' : 'cannot-graduate'
 
-		return (
-			<article className={cx('student-summary', canGraduate ? 'can-graduate' : 'cannot-graduate')}>
-				<header className='student-summary--header'>
-					<AvatarLetter
-						className={cx(
-							'student-letter',
-							canGraduate
-								? 'can-graduate'
-								: 'cannot-graduate'
-						)}
-						value={student.name}
-					/>
-					<div className='intro'>{this.state.welcome}{NameEl}!</div>
-				</header>
-				<div className='content'>
-					<div className='paragraph'>
-						After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
-						{(degrees.length > 0) ? `${degreeEmphasizer}${degreeList} ${degreeWord}` : `no ${degreeWord}`}
-						{(majors.length || concentrations.length || emphases.length) ? (majors.length) && (concentrations.length || emphases.length) ? ', ' : ' and ' : ''}
-						{(majors.length > 0) && `${majorEmphasizer}${majorWord} in ${majorList}`}
-						{(majors.length && concentrations.length) ? ', and ' : ''}
-						{(concentrations.length > 0) && `${concentrationEmphasizer}${concentrationWord} in ${concentrationList}`}
-						{((majors.length || concentrations.length) && emphases.length) ? ', ' : ''}
-						{(emphases.length > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
-						{'. '}
-						{currentCredits ? `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`: ''}
-					</div>
-					<div className='paragraph graduation-message'>
-						{canGraduate ? goodGraduationMessage : badGraduationMessage}
-					</div>
+	return (
+		<article className={cx('student-summary', canGraduateClass)}>
+			<header className='student-summary--header'>
+				<AvatarLetter
+					className={cx('student-letter', canGraduateClass)}
+					value={student.name}
+				/>
+				<div className='intro'>{welcomeMessage}{NameEl}!</div>
+			</header>
+			<div className='content'>
+				<div className='paragraph'>
+					After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
+					{(degrees.length > 0) ? `${degreeEmphasizer}${degreeList} ${degreeWord}` : `no ${degreeWord}`}
+					{(majors.length || concentrations.length || emphases.length) ? (majors.length) && (concentrations.length || emphases.length) ? ', ' : ' and ' : ''}
+					{(majors.length > 0) && `${majorEmphasizer}${majorWord} in ${majorList}`}
+					{(majors.length && concentrations.length) ? ', and ' : ''}
+					{(concentrations.length > 0) && `${concentrationEmphasizer}${concentrationWord} in ${concentrationList}`}
+					{((majors.length || concentrations.length) && emphases.length) ? ', ' : ''}
+					{(emphases.length > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
+					{'. '}
+					{currentCredits ? `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`: ''}
 				</div>
-			</article>
-		)
-	}
+				<div className='paragraph graduation-message'>
+					{canGraduate ? goodGraduationMessage : badGraduationMessage}
+				</div>
+			</div>
+		</article>
+	)
+}
+
+StudentSummary.propTypes = {
+	onChangeGraduation: PropTypes.func.isRequired,
+	onChangeMatriculation: PropTypes.func.isRequired,
+	onChangeName: PropTypes.func.isRequired,
+	student: PropTypes.object.isRequired,
 }

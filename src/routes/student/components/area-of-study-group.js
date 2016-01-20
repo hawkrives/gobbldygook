@@ -1,82 +1,68 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 import map from 'lodash/collection/map'
-import pluralizeArea from '../area-tools/pluralize-area'
+import pluralizeArea from '../../../area-tools/pluralize-area'
 import capitalize from 'lodash/string/capitalize'
-import * as areaTypeConstants from '../models/area-types'
+import * as areaTypeConstants from '../../../models/area-types'
 import values from 'lodash/object/values'
 
 import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'
-import Button from './button'
+import Button from '../../../components/button'
 
 import './area-of-study-group.scss'
 
-export default class AreaOfStudyGroup extends Component {
-	static propTypes = {
-		addArea: PropTypes.func.isRequired,
-		addOverride: PropTypes.func.isRequired,
-		allAreasOfType: PropTypes.arrayOf(PropTypes.object).isRequired,
-		areas: PropTypes.arrayOf(PropTypes.object).isRequired,
-		endAddArea: PropTypes.func.isRequired,
-		initiateAddArea: PropTypes.func.isRequired,
-		removeArea: PropTypes.func.isRequired,
-		removeOverride: PropTypes.func,
-		showAreaPicker: PropTypes.bool.isRequired,
-		student: PropTypes.object.isRequired,
-		toggleOverride: PropTypes.func.isRequired,
-		type: PropTypes.oneOf(values(areaTypeConstants)).isRequired,
-	};
+export default function AreaOfStudyGroup(props) {
+	const showOrHidePicker = props.showAreaPicker
+		? props.onEndAddArea
+		: props.onInitiateAddArea
 
-	static defaultProps = {
-		showAreaPicker: false,
-		studentId: '',
-		removeOverride: () => {},
-	};
+	return (
+		<section className='area-of-study-group'>
+			<h1 className='area-type-heading'>
+				{capitalize(pluralizeArea(props.type))}
+				<Button
+					className='add-area-of-study'
+					type='flat'
+					onClick={ev => showOrHidePicker(props.type, ev)}
+				>
+					{props.showAreaPicker ? 'Close' : 'Add ∙ Edit'}
+				</Button>
+			</h1>
 
-	render() {
-		return (
-			<section key={this.props.type} className='area-of-study-group'>
-				<h1 className='area-type-heading'>
-					{capitalize(pluralizeArea(this.props.type))}
-					{this.props.showAreaPicker
-						? <Button
-							className='add-area-of-study'
-							type='flat'
-							onClick={ev => this.props.endAddArea({ev, type: this.props.type})}
-						>
-							Close
-						</Button>
-						: <Button
-							className='add-area-of-study'
-							type='flat'
-							onClick={ev => this.props.initiateAddArea({ev, type: this.props.type})}
-						>
-							Add ∙ Edit
-						</Button>}
-				</h1>
+			{props.showAreaPicker && <AreaPicker
+				areaList={props.allAreasOfType}
+				currentAreas={props.areas}
+				onAddArea={props.onAddArea}
+				studentGraduation={props.student.graduation}
+				type={props.type}
+			/>}
 
-				{this.props.showAreaPicker && <AreaPicker
-					addArea={this.props.addArea}
-					allAreas={this.props.allAreasOfType}
-					closePicker={ev => this.props.endAddArea({ev, type: this.props.type})}
-					currentAreas={this.props.areas}
-					removeArea={this.props.removeArea}
-					studentGraduation={this.props.student.graduation}
-					type={this.props.type}
-				/>}
+			{map(props.areas, (area, i) =>
+				<AreaOfStudy area={area}
+					key={i}
+					onAddOverride={props.onAddOverride}
+					onRemoveArea={props.onRemoveArea}
+					onRemoveOverride={props.onRemoveOverride}
+					onToggleOverride={props.onToggleOverride}
+					showCloseButton={props.showAreaPicker}
+					showEditButton={props.showAreaPicker}
+					studentId={props.student.id}
+				/>)}
+		</section>
+	)
+}
 
-				{map(this.props.areas, (area, i) =>
-					<AreaOfStudy area={area}
-						key={i}
-						removeArea={this.props.removeArea}
-						addOverride={this.props.addOverride}
-						removeOverride={this.props.removeOverride}
-						toggleOverride={this.props.toggleOverride}
-						showCloseButton={this.props.showAreaPicker}
-						showEditButton={this.props.showAreaPicker}
-						studentId={this.props.student.id}
-					/>)}
-			</section>
-		)
-	}
+AreaOfStudyGroup.propTypes = {
+	allAreasOfType: PropTypes.arrayOf(PropTypes.object).isRequired,
+	areas: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onAddArea: PropTypes.func.isRequired,
+	onAddOverride: PropTypes.func.isRequired,
+	onEndAddArea: PropTypes.func.isRequired,
+	onInitiateAddArea: PropTypes.func.isRequired,
+	onRemoveArea: PropTypes.func.isRequired,
+	onRemoveOverride: PropTypes.func,
+	onToggleOverride: PropTypes.func.isRequired,
+	showAreaPicker: PropTypes.bool.isRequired,
+	student: PropTypes.object.isRequired,
+	type: PropTypes.oneOf(values(areaTypeConstants)).isRequired,
 }

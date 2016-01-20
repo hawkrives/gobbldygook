@@ -1,11 +1,9 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 
-export default class Filter extends Component {
-	static propTypes = {
-		filter: PropTypes.object,
-	};
+export default function Filter(props) {
+	return <div>{JSON.stringify(props.filter, null, 2)}</div>
+}
 
-	render() {
-		return <div>{JSON.stringify(this.props.filter, null, 2)}</div>
-	}
+Filter.propTypes = {
+	filter: PropTypes.object,
 }
