@@ -77,9 +77,9 @@ export default function Requirement(props) {
 			name={key}
 			{...props[key]}
 			path={props.path.concat(key)}
-			addOverride={props.onAddOverride}
-			toggleOverride={props.onToggleOverride}
-			removeOverride={props.onRemoveOverride}
+			onAddOverride={props.onAddOverride}
+			onToggleOverride={props.onToggleOverride}
+			onRemoveOverride={props.onRemoveOverride}
 		/>)
 
 	const override = (props.message && !props.result) && (
