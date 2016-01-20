@@ -23,6 +23,7 @@ function AreaOfStudy(props) {
 		slug,
 		isCustom = false,
 		name = 'Unknown Area',
+		_area: areaDetails,
 		_progress: progress,
 		_error: error = '',
 		_checked: checked = false,
@@ -91,7 +92,7 @@ function AreaOfStudy(props) {
 	else {
 		contents = (
 			<Requirement
-				{...area}
+				{...areaDetails}
 				topLevel
 				onAddOverride={props.onAddOverride}
 				onRemoveOverride={props.onRemoveOverride}
@@ -117,6 +118,7 @@ function AreaOfStudy(props) {
 }
 AreaOfStudy.propTypes = {
 	area: PropTypes.shape({
+		_area: PropTypes.object,
 		_checked: PropTypes.bool,
 		_error: PropTypes.string,
 		_progress: PropTypes.shape({
