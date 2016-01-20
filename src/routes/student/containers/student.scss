@@ -16,7 +16,7 @@
 	flex-flow: column nowrap;
 	align-items: stretch;
 
-	// @media all and (min-width: $single-column-width) {
-	// 	margin-left: $sidebar-width + $page-edge-padding;
-	// }
+	@media all and (min-width: $single-column-width) {
+		margin-left: $sidebar-width + $page-edge-padding;
+	}
 }
