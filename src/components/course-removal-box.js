@@ -10,8 +10,8 @@ import './course-removal-box.scss'
 
 function CourseRemovalBox(props) {
 	const className = cx('course-removal-box', {
-		'can-drop': this.props.canDrop,
-		'is-over': this.props.isOver,
+		'can-drop': props.canDrop,
+		'is-over': props.isOver,
 	})
 
 	return props.connectDropTarget(

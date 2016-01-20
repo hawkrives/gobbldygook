@@ -54,7 +54,7 @@ export function Sidebar(props) {
 			</Toolbar>
 
 			<CourseRemovalBox
-				onRemoveCourse={(scheduleId, clbid) => props.removeCourse(studentId, scheduleId, clbid)}
+				removeCourse={(scheduleId, clbid) => props.removeCourse(studentId, scheduleId, clbid)}
 			/>
 
 			{props.children}
