@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
 import range from 'lodash/utility/range'
 import map from 'lodash/collection/map'
 
@@ -14,13 +15,13 @@ export default function CourseList(props) {
 	let courseObjects = map(props.schedule.courses, (course, i) =>
 		course.error
 		? <li key={course.clbid}><MissingCourse clbid={course.clbid} error={course.error} /></li>
-		: <li key={course.clbid}><InlineCourse
+		: <li key={course.clbid}><Link to={`/${props.student.id}/course/${course.clbid}`}><InlineCourse
 			index={i}
 			course={course}
 			student={props.student}
 			schedule={props.schedule}
 			conflicts={props.conflicts}
-		/></li>)
+		/></Link></li>)
 
 	let emptySlots = []
 	if (props.creditCount < props.availableCredits) {

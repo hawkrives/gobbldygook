@@ -1,9 +1,13 @@
 @import '../../../../../base/variables';
+@import '../../../../../mixins/link-undecorated';
 @import './semester';
 
 .course-list {
 	min-height: 30px;
 	padding-bottom: 0.25em;
+	a {
+		@include link-undecorated;
+	}
 
 	&:focus {
 		outline: 0;
