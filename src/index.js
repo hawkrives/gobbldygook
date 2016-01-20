@@ -43,6 +43,8 @@ import routerMiddleware from './redux/middleware/router'
 import configureStore from './redux'
 import Root from './containers/root'
 const store = configureStore()
+import {loadAllAreas} from './redux/areas/actions'
+store.dispatch(loadAllAreas())
 routerMiddleware.listenForReplays(store)
 
 // global.store = store
