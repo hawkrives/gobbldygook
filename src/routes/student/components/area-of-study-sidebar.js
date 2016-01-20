@@ -55,7 +55,7 @@ export default function AreaOfStudySidebar(props) {
 
 	const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
 
-	const unusedAreaTypeButtons = unusedTypes.length && (
+	const unusedAreaTypeButtons = unusedTypes.length ? (
 		<section className='unused-areas-of-study'>
 			<span className='unused-areas-title'>Add: </span>
 			<span className='unused-areas-buttons'>
@@ -70,7 +70,7 @@ export default function AreaOfStudySidebar(props) {
 				))}
 			</span>
 		</section>
-	)
+	) : null
 
 	const unusedTypesToShow = pick(showAreaPickerFor,
 		(toShow, type) => toShow === true && !includes(usedAreaTypes, type))
