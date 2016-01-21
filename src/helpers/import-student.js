@@ -6,7 +6,7 @@ import includes from 'lodash/includes'
 import map from 'lodash/map'
 import mapKeys from 'lodash/mapKeys'
 import parseHtml from './parse-html'
-import partition from 'lodash/partition'
+import partitionByIndex from './partition-by-index'
 import unzip from 'lodash/unzip'
 import fromPairs from 'lodash/fromPairs'
 import {AuthError, NetworkError} from './errors'
@@ -139,7 +139,7 @@ function extractInformationFromInfoTable(table) {
 	let infoText = map(selectAll('td', table), getText)
 	// Next, because they're k/v pairs, we want to group them into two arrays: keys, and values.
 	// `partition` groups elements of an array into two arrays based on the predicate function, which we've built around the index.
-	let infoKeysValues = partition(infoText, (_, i) => !(i % 2))
+	let infoKeysValues = partitionByIndex(infoText)
 	// The fromPairs(unzip()) dance builds an object from the k/v paired arrays.
 	// `unzip` turns the [[keys], [values]] array into [[k,v], [k,v], ...], which `fromPairs` turns into an object.
 	let info = fromPairs(unzip(infoKeysValues))

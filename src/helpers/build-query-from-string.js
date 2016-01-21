@@ -4,7 +4,7 @@ import includes from 'lodash/includes'
 import isArray from 'lodash/isArray'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
-import partition from 'lodash/partition'
+import partitionByIndex from './partition-by-index'
 import startsWith from 'lodash/startsWith'
 import toPairs from 'lodash/toPairs'
 import trim from 'lodash/trim'
@@ -159,7 +159,7 @@ export default function buildQueryFromString(queryString='', opts={}) {
 	let cleaned = filter(map(matches, trim), str => str.length > 0)
 
 	// Grab the keys and values from the lists
-	let [keys, values] = partition(cleaned, (_, i) => i % 2 === 0)
+	let [keys, values] = partitionByIndex(cleaned)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
 		let {depts, num} = splitDeptNum(stringThing)
