@@ -1,5 +1,5 @@
 import db from '../../../helpers/db'
-import flatMap from 'lodash/flatMap'
+import flatten from 'lodash/flatten'
 import map from 'lodash/map'
 import loadArea from '../../../helpers/load-area'
 
@@ -38,7 +38,7 @@ export function loadAreas() {
 	return (dispatch, getState) => {
 		dispatch(loadingAreas())
 		const {students} = getState()
-		const areas = flatMap(students.present, student => student.studies)
+		const areas = flatten(map(students, student => student.data.present.studies))
 		dispatch({ type: START_LOAD_AREAS, payload: areas })
 		const areaPromises = Promise.all(map(areas, loadArea))
 		return dispatch({ type: LOAD_AREAS, payload: areaPromises })

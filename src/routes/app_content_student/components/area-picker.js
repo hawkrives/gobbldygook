@@ -6,7 +6,7 @@ import reject from 'lodash/reject'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 import groupBy from 'lodash/groupBy'
-import flatMap from 'lodash/flatMap'
+import flatten from 'lodash/flatten'
 import sortBy from 'lodash/sortBy'
 import maxBy from 'lodash/maxBy'
 
@@ -25,7 +25,7 @@ function AreaPicker(props) {
 
 	const groupedAreas = groupBy(onlyAvailableAreas, area => `{${area.name}, ${area.type}}`)
 
-	onlyAvailableAreas = flatMap(groupedAreas, areaSet => {
+	onlyAvailableAreas = flatten(map(groupedAreas, areaSet => {
 		return areaSet.length >= 2
 			? filter(sortBy(areaSet, 'revision'), (area, i, list) => {
 				const availableThrough = i < list.length - 1
@@ -35,7 +35,7 @@ function AreaPicker(props) {
 				return availableThrough <= graduation
 			})
 			: areaSet
-	})
+	}))
 
 	const filteredOnName = filter(onlyAvailableAreas, area =>
 		fuzzysearch(props.filterText, area.name.toLowerCase()))

@@ -1,4 +1,5 @@
-import flatMap from 'lodash/flatMap'
+import flatten from 'lodash/flatten'
+import map from 'lodash/map'
 import compact from 'lodash/compact'
 import isRequirementName from './is-requirement-name'
 import isPlainObject from 'lodash/isPlainObject'
@@ -41,5 +42,5 @@ export default function findLeafRequirements(requirement) {
 
 	// otherwise, run findLeafRequirements over the object, to descend further
 	// down the tree of madness.
-	return compact(flatMap(requirement, findLeafRequirements))
+	return compact(flatten(map(requirement, findLeafRequirements)))
 }

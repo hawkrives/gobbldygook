@@ -1,5 +1,6 @@
 import assertKeys from './assert-keys'
-import flatMap from 'lodash/flatMap'
+import flatten from 'lodash/flatten'
+import map from 'lodash/map'
 import uniqBy from 'lodash/uniqBy'
 import stringify from 'json-stable-stringify'
 
@@ -37,10 +38,10 @@ export default function collectMatches(expr) {
 		}
 	}
 	else if (type === 'boolean') {
-		matches = flatMap(expr.$and || expr.$or, collectMatches)
+		matches = flatten(map(expr.$and || expr.$or, collectMatches))
 	}
 	else if (type === 'of') {
-		matches = flatMap(expr.$of, collectMatches)
+		matches = flatten(map(expr.$of, collectMatches))
 	}
 
 	// finally, we have the "pre-computed _matches" cases, where the evaluation
