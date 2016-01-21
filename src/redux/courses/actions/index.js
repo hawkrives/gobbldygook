@@ -4,9 +4,9 @@ import {
 	CACHE_COURSES_FROM_SCHEDULES,
 } from '../constants'
 
-import flatMap from 'lodash/array/flatMap'
-import values from 'lodash/object/values'
-import map from 'lodash/collection/map'
+import flatMap from 'lodash/flatMap'
+import values from 'lodash/values'
+import map from 'lodash/map'
 import getCourses, {getCoursesFromSchedules} from '../../../helpers/get-courses'
 
 

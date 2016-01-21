@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import map from 'lodash/collection/map'
-import filter from 'lodash/collection/filter'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
 
 import {addSchedule, destroySchedules} from '../../../redux/students/actions/schedules'
 import findFirstAvailableYear from '../../../helpers/find-first-available-year'

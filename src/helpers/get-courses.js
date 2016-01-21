@@ -1,5 +1,5 @@
 import db from './db'
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 
 const courseCache = new Map()
 /**

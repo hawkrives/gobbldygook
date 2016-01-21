@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
-import map from 'lodash/collection/map'
-import sortBy from 'lodash/collection/sortBy'
-import groupBy from 'lodash/collection/groupBy'
-import flatMap from 'lodash/array/flatMap'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
+import groupBy from 'lodash/groupBy'
+import flatMap from 'lodash/flatMap'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 

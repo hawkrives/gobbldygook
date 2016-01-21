@@ -1,4 +1,4 @@
-import omit from 'lodash/object/omit'
+import omit from 'lodash/omit'
 import {ActionTypes as UndoableActionTypes} from 'redux-undo'
 
 import {

@@ -1,6 +1,6 @@
-import filter from 'lodash/collection/filter'
-import map from 'lodash/collection/map'
-import fromPairs from 'lodash/array/fromPairs'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import fromPairs from 'lodash/fromPairs'
 import {getCourse} from './get-courses'
 
 export default function embedActiveStudentCourses(student, {cache=[]}) {

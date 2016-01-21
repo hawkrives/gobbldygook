@@ -1,6 +1,6 @@
-import reduce from 'lodash/collection/reduce'
-import zip from 'lodash/array/zip'
-import has from 'lodash/object/has'
+import reduce from 'lodash/reduce'
+import zip from 'lodash/zip'
+import has from 'lodash/has'
 
 export default function zipToObjectWithArrays(keys, vals) {
 	let arr = zip(keys, vals)

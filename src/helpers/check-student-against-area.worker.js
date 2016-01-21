@@ -1,9 +1,9 @@
 /* global WorkerGlobalScope */
 
-import mapKeys from 'lodash/object/mapKeys'
-import map from 'lodash/collection/map'
-import filter from 'lodash/collection/filter'
-import round from 'lodash/math/round'
+import mapKeys from 'lodash/mapKeys'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
+import round from 'lodash/round'
 import present from 'present'
 
 import stringifyError from './stringify-error'

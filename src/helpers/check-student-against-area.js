@@ -1,4 +1,4 @@
-import uniqueId from 'lodash/utility/uniqueId'
+import uniqueId from 'lodash/uniqueId'
 
 import Worker from './check-student-against-area.worker.js'
 const worker = new Worker()

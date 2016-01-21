@@ -1,6 +1,6 @@
 import db from '../../../helpers/db'
-import flatMap from 'lodash/array/flatMap'
-import map from 'lodash/collection/map'
+import flatMap from 'lodash/flatMap'
+import map from 'lodash/map'
 import loadArea from '../../../helpers/load-area'
 
 import {

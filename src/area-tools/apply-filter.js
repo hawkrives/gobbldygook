@@ -1,5 +1,5 @@
 import checkForCourse from './check-for-course'
-import filter from 'lodash/collection/filter'
+import filter from 'lodash/filter'
 import filterByWhereClause from './filter-by-where-clause'
 
 /**

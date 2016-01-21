@@ -9,7 +9,7 @@
     return globalLastDept
   }
 
-  const flatten = require('lodash/array/flatten')
+  const flatten = require('lodash/flatten')
   const expandDepartment = require('./convert-department').expandDepartment
 }
 

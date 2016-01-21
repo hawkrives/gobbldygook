@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {Link} from 'react-router'
-import groupBy from 'lodash/collection/groupBy'
-import map from 'lodash/collection/map'
+import groupBy from 'lodash/groupBy'
+import map from 'lodash/map'
 import interpose from '../../../helpers/interpose'
 
 import Button from '../../../components/button'

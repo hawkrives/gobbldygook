@@ -1,6 +1,6 @@
-import filter from 'lodash/collection/filter'
-import size from 'lodash/collection/size'
-import map from 'lodash/collection/map'
+import filter from 'lodash/filter'
+import size from 'lodash/size'
+import map from 'lodash/map'
 
 import checkStudentAgainstArea from './check-student-against-area'
 import countCredits from '../area-tools/count-credits'

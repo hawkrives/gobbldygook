@@ -1,4 +1,4 @@
-import compact from 'lodash/array/compact'
+import compact from 'lodash/compact'
 import getDepartments from './get-departments'
 
 /**

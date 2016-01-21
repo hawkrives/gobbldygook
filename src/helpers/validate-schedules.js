@@ -1,4 +1,4 @@
-import mapValues from 'lodash/object/mapValues'
+import mapValues from 'lodash/mapValues'
 import validateSchedule from './validate-schedule'
 
 export default async function validateSchedules(student) {

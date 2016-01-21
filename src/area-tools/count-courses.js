@@ -1,5 +1,5 @@
-import uniqBy from 'lodash/array/uniqBy'
-import size from 'lodash/collection/size'
+import uniqBy from 'lodash/uniqBy'
+import size from 'lodash/size'
 import simplifyCourse from './simplify-course'
 
 /**

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
-import filter from 'lodash/collection/filter'
-import map from 'lodash/collection/map'
-import sortBy from 'lodash/collection/sortBy'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
 import fuzzysearch from 'fuzzysearch'
 
 import List from '../../../components/list'

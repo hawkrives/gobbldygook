@@ -1,5 +1,5 @@
-import map from 'lodash/collection/map'
-import uniq from 'lodash/array/uniq'
+import map from 'lodash/map'
+import uniq from 'lodash/uniq'
 
 import {
 	LOAD_STUDENTS,

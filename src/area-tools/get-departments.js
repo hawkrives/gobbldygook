@@ -1,5 +1,5 @@
-import flatMap from 'lodash/collection/flatMap'
-import uniq from 'lodash/array/uniq'
+import flatMap from 'lodash/flatMap'
+import uniq from 'lodash/uniq'
 
 /**
  * Gets the list of unique departments from a list of courses

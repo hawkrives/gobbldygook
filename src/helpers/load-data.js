@@ -1,6 +1,6 @@
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 import {status, text} from './fetch-helpers'
-import uniqueId from 'lodash/utility/uniqueId'
+import uniqueId from 'lodash/uniqueId'
 
 import * as notificationActions from '../redux/notifications/actions'
 import * as courseActions from '../redux/courses/actions'

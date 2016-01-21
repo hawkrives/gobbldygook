@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import semesterName from '../../../helpers/semester-name'
 import {shrinkDept} from '../../../area-tools/convert-department'
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 
 import './expression--course.scss'
 

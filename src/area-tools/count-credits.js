@@ -1,4 +1,4 @@
-import sum from 'lodash/math/sum'
+import sum from 'lodash/sum'
 
 /**
  * Sums up the number of credits offered by a set of courses

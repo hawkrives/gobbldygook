@@ -2,9 +2,9 @@ import * as studentConstants from '../students/constants'
 // import * as areaConstants from '../areas/constants'
 // import * as courseConstants from '../courses/constants'
 
-import filter from 'lodash/collection/filter'
-import includes from 'lodash/collection/includes'
-import map from 'lodash/collection/map'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import map from 'lodash/map'
 
 import checkStudent from '../students/actions/check-student'
 

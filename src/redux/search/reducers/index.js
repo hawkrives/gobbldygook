@@ -8,18 +8,18 @@ import {
 	SET_PARTIAL_QUERY,
 } from '../constants'
 
-import groupBy from 'lodash/collection/groupBy'
-import sortBy from 'lodash/collection/sortBy'
+import groupBy from 'lodash/groupBy'
+import sortBy from 'lodash/sortBy'
 
 import {SORT_BY, GROUP_BY} from '../../../components/course-searcher-options'
 
-import includes from 'lodash/collection/includes'
-import uniq from 'lodash/array/uniq'
-import flatMap from 'lodash/array/flatMap'
-import toPairs from 'lodash/object/toPairs'
-import round from 'lodash/math/round'
+import includes from 'lodash/includes'
+import uniq from 'lodash/uniq'
+import flatMap from 'lodash/flatMap'
+import toPairs from 'lodash/toPairs'
+import round from 'lodash/round'
 import { oxford } from 'humanize-plus'
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 import present from 'present'
 
 import buildDept from '../../../helpers/build-dept'

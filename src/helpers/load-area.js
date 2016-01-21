@@ -1,8 +1,8 @@
 import db from './db'
 import {enhance as enhanceHanson} from '../area-tools'
-import some from 'lodash/collection/some'
-import maxBy from 'lodash/collection/maxBy'
-import isArray from 'lodash/lang/isArray'
+import some from 'lodash/some'
+import maxBy from 'lodash/maxBy'
+import isArray from 'lodash/isArray'
 import yaml from 'js-yaml'
 
 function resolveArea(areas) {

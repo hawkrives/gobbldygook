@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 import compareProps from '../helpers/compare-props'
 import InlineCourse from '../components/inline-course'
 

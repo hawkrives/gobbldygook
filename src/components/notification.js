@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import round from 'lodash/math/round'
+import round from 'lodash/round'
 import Button from './button'
 import ProgressBar from './progress-bar'
 import './notification.scss'

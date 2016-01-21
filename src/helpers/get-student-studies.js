@@ -1,5 +1,5 @@
 import getArea from './load-area'
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 
 export default function getStudentStudies(student, {cache=[], cacheOnly=false}) {
 	const promises = map(student.studies, study => getArea(study, {cache, cacheOnly}))

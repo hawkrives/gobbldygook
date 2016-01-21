@@ -1,11 +1,11 @@
-import filter from 'lodash/collection/filter'
+import filter from 'lodash/filter'
 import findWarnings from '../helpers/find-course-warnings'
-import flatten from 'lodash/array/flatten'
-import identity from 'lodash/utility/identity'
-import map from 'lodash/collection/map'
-import some from 'lodash/collection/some'
-import reject from 'lodash/collection/reject'
-import isUndefined from 'lodash/lang/isUndefined'
+import flatten from 'lodash/flatten'
+import identity from 'lodash/identity'
+import map from 'lodash/map'
+import some from 'lodash/some'
+import reject from 'lodash/reject'
+import isUndefined from 'lodash/isUndefined'
 
 export default function validateSchedule(schedule) {
 	// Checks to see if the schedule is valid

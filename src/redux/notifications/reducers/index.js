@@ -1,5 +1,5 @@
-import clone from 'lodash/lang/clone'
-import reject from 'lodash/collection/reject'
+import clone from 'lodash/clone'
+import reject from 'lodash/reject'
 
 import {
 	LOG_MESSAGE,

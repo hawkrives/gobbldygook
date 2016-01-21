@@ -1,4 +1,4 @@
-import kebabCase from 'lodash/string/kebabCase'
+import kebabCase from 'lodash/kebabCase'
 
 export default function makeAreaSlug(name) {
 	return kebabCase(name.replace(`'`, '')).toLowerCase()

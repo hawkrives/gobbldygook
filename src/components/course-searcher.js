@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 import toPrettyTerm from '../helpers/to-pretty-term'
 
 import Button from './button'
