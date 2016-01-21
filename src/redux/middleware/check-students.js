@@ -1,6 +1,6 @@
 import * as studentConstants from '../students/constants'
-// import * as areaConstants from '../areas/constants'
-// import * as courseConstants from '../courses/constants'
+import * as areaConstants from '../areas/constants'
+import * as courseConstants from '../courses/constants'
 
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
@@ -9,7 +9,7 @@ import map from 'lodash/map'
 import {checkStudent} from '../students/actions/check-student'
 
 const whitelist = [
-	studentConstants.LOAD_STUDENTS,
+	studentConstants.LOAD_STUDENT,
 	studentConstants.INIT_STUDENT,
 	studentConstants.IMPORT_STUDENT,
 	studentConstants.CHANGE_CREDITS_NEEDED,
@@ -32,15 +32,11 @@ const whitelist = [
 
 	// need to check everyone with one of the new areas
 	// when one of these fires
-	// areaConstants.LOAD_AREAS,
-	// areaConstants.RELOAD_CACHED_AREAS,
-	// areaConstants.CACHE_AREAS_FROM_STUDIES,
+	areaConstants.REFRESH_AREAS,
 
 	// need to check everyone with one of these courses
 	// when one of these fires
-	// courseConstants.LOAD_COURSES,
-	// courseConstants.RELOAD_CACHED_COURSES,
-	// courseConstants.CACHE_COURSES_FROM_SCHEDULES,
+	courseConstants.REFRESH_COURSES,
 ]
 function shouldTakeAction({type}) {
 	return includes(whitelist, type)
