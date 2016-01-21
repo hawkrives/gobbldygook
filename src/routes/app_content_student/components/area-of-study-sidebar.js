@@ -9,7 +9,6 @@ import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'
 import groupBy from 'lodash/collection/groupBy'
 import uniq from 'lodash/array/uniq'
-import pluck from 'lodash/collection/pluck'
 import keys from 'lodash/object/keys'
 import pick from 'lodash/object/pick'
 
@@ -47,7 +46,7 @@ export default function AreaOfStudySidebar(props) {
 		/>)
 
 	const allAreaTypes = values(areaTypeConstants)
-	const usedAreaTypes = uniq(pluck(student.studies, 'type'))
+	const usedAreaTypes = uniq(map(student.studies, s => s.type))
 
 	const areaTypesToShowButtonsFor = union(
 		usedAreaTypes,

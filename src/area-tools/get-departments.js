@@ -1,6 +1,6 @@
-import uniq from 'lodash/array/uniq'
 import flatten from 'lodash/array/flatten'
-import pluck from 'lodash/collection/pluck'
+import map from 'lodash/collection/map'
+import uniq from 'lodash/array/uniq'
 
 /**
  * Gets the list of unique departments from a list of courses
@@ -9,5 +9,5 @@ import pluck from 'lodash/collection/pluck'
  * @returns {string[]} - the list of unique departments
  */
 export default function getDepartments(courses) {
-	return uniq(flatten(pluck(courses, 'department')))
+	return uniq(flatten(map(courses, c => c.department)))
 }

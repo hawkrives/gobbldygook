@@ -3,9 +3,9 @@ import compareCourseToQualification from './compare-course-to-qualification'
 import filter from 'lodash/collection/filter'
 import forEach from 'lodash/collection/forEach'
 import isPlainObject from 'lodash/lang/isPlainObject'
+import map from 'lodash/collection/map'
 import max from 'lodash/collection/max'
 import min from 'lodash/collection/min'
-import pluck from 'lodash/collection/pluck'
 import simplifyCourse from './simplify-course'
 import uniq from 'lodash/array/uniq'
 
@@ -87,7 +87,7 @@ export function filterByQualification(list, qualification, distinct, fullList) {
 
 			const completeList = fullList || list
 			const filtered = filterByWhereClause(completeList, value.$where, distinct)
-			const items = pluck(filtered, value.$prop)
+			const items = map(filtered, c => c[value.$prop])
 			const computed = func(items)
 
 			// console.log('looked at', completeList)

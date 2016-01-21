@@ -6,7 +6,6 @@ import isArray from 'lodash/lang/isArray'
 import isRequirementName from './is-requirement-name'
 import keys from 'lodash/object/keys'
 import map from 'lodash/collection/map'
-import pluck from 'lodash/collection/pluck'
 import stringify from 'json-stable-stringify'
 import uniq from 'lodash/array/uniq'
 
@@ -28,7 +27,7 @@ export default function getMatchesFromChildren(expr, ctx) {
 
 	// or just use some of them (those listed in expr.$children)
 	else if (isArray(expr.$children)) {
-		const requested = pluck(expr.$children, '$requirement')
+		const requested = map(expr.$children, c => c.$requirement)
 		childKeys = filter(childKeys, key => includes(requested, key))
 	}
 

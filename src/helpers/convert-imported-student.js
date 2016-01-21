@@ -3,7 +3,6 @@ import Student from '../models/student'
 import Schedule from '../models/schedule'
 import groupBy from 'lodash/collection/groupBy'
 import map from 'lodash/collection/map'
-import pluck from 'lodash/collection/pluck'
 import forEach from 'lodash/collection/forEach'
 import uniq from 'lodash/array/uniq'
 import zipObject from 'lodash/array/zipObject'
@@ -27,7 +26,7 @@ function processSchedules(student) {
 		term = String(term)
 		return Schedule({
 			active: true,
-			clbids: pluck(courses, 'clbid'),
+			clbids: map(courses, c => c.clbid),
 			year: parseInt(term.substr(0, 4), 10),
 			semester: parseInt(term.substr(4, 1), 10),
 		})
@@ -57,10 +56,10 @@ function processDegrees(student) {
 
 function resolveSingularDataPoints(student) {
 	let thereShouldOnlyBeOne = {
-		names: pluck(student.degrees, 'name'),
-		advisors: pluck(student.degrees, 'advisor'),
-		matriculations: pluck(student.degrees, 'matriculation'),
-		graduations: pluck(student.degrees, 'graduation'),
+		names: map(student.degrees, d => d.name),
+		advisors: map(student.degrees, d => d.advisor),
+		matriculations: map(student.degrees, d => d.matriculation),
+		graduations: map(student.degrees, d => d.graduation),
 	}
 
 	forEach(thereShouldOnlyBeOne, (group, name) => {
