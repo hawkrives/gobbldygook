@@ -1,6 +1,6 @@
 import * as studentConstants from '../students/constants'
-import * as areaConstants from '../areas/constants'
-import * as courseConstants from '../courses/constants'
+// import * as areaConstants from '../areas/constants'
+// import * as courseConstants from '../courses/constants'
 
 import filter from 'lodash/collection/filter'
 import includes from 'lodash/collection/includes'
@@ -74,5 +74,3 @@ const checkStudentsMiddleware = store => next => action => {
 }
 
 export default checkStudentsMiddleware
-
-// export default store => next => action => next(action)

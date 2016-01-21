@@ -19,7 +19,7 @@ export default function StudentList(props) {
 	let {
 		filter: filterText,
 		sortBy: sortByKey,
-		groupBy: groupByKey,
+		// groupBy: groupByKey,
 	} = props
 
 	filterText = filterText.toLowerCase()

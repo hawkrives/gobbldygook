@@ -69,13 +69,10 @@ const checkCourseAgainstQueryBit = course => ([key, values]) => {
 	return result
 }
 
-/**
- * Checks if a course passes a query check.
- *
- * @param {Object} query - the query object that comes out of buildQueryFromString
- * @param {Course} course - the course to check
- * @returns {Boolean}
- */
+// Checks if a course passes a query check.
+// query: Object | the query object that comes out of buildQueryFromString
+// course: Course | the course to check
+// returns: Boolean | did all query bits pass the check?
 const checkCourseAgainstQuery = query => course => {
 	let kvPairs = pairs(query)
 	let matches = takeWhile(kvPairs, checkCourseAgainstQueryBit(course))
