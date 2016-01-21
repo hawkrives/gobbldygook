@@ -1,7 +1,7 @@
 /* global module */
 'use strict'
 
-const forEach = require('lodash/collection/forEach')
+const forEach = require('lodash/forEach')
 
 // Main export
 function HJSPlugin(options) {
