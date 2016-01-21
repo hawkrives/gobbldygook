@@ -1,0 +1,31 @@
+@import '../../../base/variables';
+@import '../../../mixins/link-undecorated';
+@import './semester';
+
+.course-list {
+	min-height: 30px;
+	padding-bottom: 0.25em;
+	a {
+		@include link-undecorated;
+	}
+
+	&:focus {
+		outline: 0;
+	}
+
+	.list-item {
+		// border-bottom: $material-divider;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+
+	.course {
+		padding: $semester-edge-padding;
+
+		&:hover {
+			background-color: color('gray', '100');
+		}
+	}
+}

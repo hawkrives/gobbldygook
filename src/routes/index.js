@@ -5,18 +5,18 @@ export default {
 
 		getIndexRoute(location, cb) {
 			require.ensure([], () => {
-				cb(null, {content: require('./student-picker').default})
+				cb(null, {content: require('./app_content_student-picker').default})
 			})
 		},
 
 		getChildRoutes(state, cb) {
 			require.ensure([], () => {
 				cb(null, [
-					require('./edit-area').default,  // edit-area
-					require('./search').default,  // search
-					require('./degub').default,  // debug
-					// require('./new-student').default,
-					require('./student').default, // s/:id
+					require('./app_content_edit-area').default,  // edit-area
+					require('./app_overlay_search').default,  // search
+					require('./app_content_degub').default,  // debug
+					require('./app_content_new-student').default,
+					require('./app_content_student').default, // s/:id
 				])
 			})
 		},

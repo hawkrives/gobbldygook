@@ -23,7 +23,7 @@ App.propTypes = {
 	overlay: PropTypes.node,
 }
 
-import StudentPicker from '../routes/student-picker/containers/student-picker'
+import StudentPicker from '../routes/app_content_student-picker/containers/student-picker'
 App.defaultProps = {
 	content: <StudentPicker />,
 }
