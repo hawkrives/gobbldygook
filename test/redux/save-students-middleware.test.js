@@ -1,7 +1,7 @@
 import {expect} from 'chai'
-import saveStudentsMiddleware, {shouldTakeAction} from '../../src/ducks/middleware/save-students'
-import {LOAD_STUDENTS, CHANGE_NAME} from '../../src/ducks/constants/students'
-import {LOG_MESSAGE} from '../../src/ducks/constants/notifications'
+import saveStudentsMiddleware, {shouldTakeAction} from '../../src/redux/middleware/save-students'
+import {LOAD_STUDENTS, CHANGE_NAME} from '../../src/redux/students/constants'
+import {LOG_MESSAGE} from '../../src/redux/notifications/constants'
 
 describe('shouldTakeAction', () => {
 	it('should ignore LOAD_STUDENTS', () => {
@@ -17,7 +17,7 @@ describe('shouldTakeAction', () => {
 
 describe('saveStudentsMiddleware', () => {
 	const doDispatch = () => {}
-	const doGetState = () => ({students: {present: {}}})
+	const doGetState = () => ({students: {'123': {data: {past: [], future: [], present: {}}}}})
 	const doNextAction = (...args) => [...args]
 	const nextHandler = saveStudentsMiddleware({dispatch: doDispatch, getState: doGetState})
 
