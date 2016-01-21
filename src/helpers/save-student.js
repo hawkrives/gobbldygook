@@ -1,7 +1,7 @@
-import union from 'lodash/array/union'
-import reject from 'lodash/collection/reject'
+import union from 'lodash/union'
+import reject from 'lodash/reject'
 import stringify from 'json-stable-stringify'
-import omit from 'lodash/object/omit'
+import omit from 'lodash/omit'
 
 export function getIdCache() {
 	return JSON.parse(localStorage.getItem('studentIds') || '[]')
@@ -34,7 +34,7 @@ export default async function saveStudent(student) {
 	const oldVersion = localStorage.getItem(student.id)
 
 	if (oldVersion !== stringify(student)) {
-		console.log(`saving student ${student.name} (${student.id})`)
+		!TESTING && console.log(`saving student ${student.name} (${student.id})`)
 		student = {...student, dateLastModified: new Date()}
 		student = omit(student, ['areas', 'canGraduate'])
 		student.schedules = omit({...student.schedules}, ['courses', 'conflicts', 'hasConflict'])

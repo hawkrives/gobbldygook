@@ -1,17 +1,18 @@
-import includes from 'lodash/collection/includes'
-import filter from 'lodash/collection/filter'
-import first from 'lodash/array/first'
-import isString from 'lodash/lang/isString'
-import {default as extractKeys} from 'lodash/object/keys'
-import last from 'lodash/array/last'
-import findIndex from 'lodash/array/findIndex'
-import map from 'lodash/collection/map'
-import reject from 'lodash/collection/reject'
-import size from 'lodash/collection/size'
-import uniq from 'lodash/array/uniq'
-import flatten from 'lodash/array/flatten'
-import startsWith from 'lodash/string/startsWith'
-import sortBy from 'lodash/collection/sortBy'
+import includes from 'lodash/includes'
+import filter from 'lodash/filter'
+import head from 'lodash/head'
+import isString from 'lodash/isString'
+import {default as extractKeys} from 'lodash/keys'
+import last from 'lodash/last'
+import findIndex from 'lodash/findIndex'
+import map from 'lodash/map'
+import reject from 'lodash/reject'
+import size from 'lodash/size'
+import uniq from 'lodash/uniq'
+import sortedUniq from 'lodash/sortedUniq'
+import flatten from 'lodash/flatten'
+import startsWith from 'lodash/startsWith'
+import sortBy from 'lodash/sortBy'
 
 import idbRange from 'idb-range'
 import {cmp as idbComparison} from 'treo'
@@ -138,9 +139,9 @@ function queryIndex(query, primaryKeysOnly=false) {
 
 		// If we have any keys, sort them according to the IDB spec
 		keys = sortBy(keys, idbComparison)
-		keys = uniq(keys, true)
+		keys = sortedUniq(keys)
 
-		let firstKey = first(keys)
+		let firstKey = head(keys)
 		let lastKey = last(keys)
 
 		// A range to limit ourselves to

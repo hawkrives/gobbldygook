@@ -1,15 +1,15 @@
-import all from 'lodash/collection/all'
-import any from 'lodash/collection/any'
-import compact from 'lodash/array/compact'
-import contains from 'lodash/collection/contains'
-import has from 'lodash/object/has'
-import indexOf from 'lodash/array/indexOf'
-import isArray from 'lodash/lang/isArray'
-import map from 'lodash/collection/map'
-import pairs from 'lodash/object/pairs'
-import rest from 'lodash/array/rest'
-import size from 'lodash/collection/size'
-import takeWhile from 'lodash/array/takeWhile'
+import compact from 'lodash/compact'
+import every from 'lodash/every'
+import has from 'lodash/has'
+import includes from 'lodash/includes'
+import indexOf from 'lodash/indexOf'
+import isArray from 'lodash/isArray'
+import map from 'lodash/map'
+import size from 'lodash/size'
+import some from 'lodash/some'
+import tail from 'lodash/tail'
+import takeWhile from 'lodash/takeWhile'
+import toPairs from 'lodash/toPairs'
 
 const checkCourseAgainstQueryBit = course => ([key, values]) => {
 	if (!has(course, key)) {
@@ -33,37 +33,37 @@ const checkCourseAgainstQueryBit = course => ([key, values]) => {
 	if (hasBool) {
 		// remove the first value from the array
 		// by returning all but the first element
-		values = rest(values)
+		values = tail(values)
 	}
 
-	if (contains(['title', 'name', 'description', 'notes', 'instructors', 'times', 'locations'], key)) {
+	if (includes(['title', 'name', 'description', 'notes', 'instructors', 'times', 'locations'], key)) {
 		substring = true
 	}
 
 	let internalMatches = map(values, val => {
 		// dept, gereqs, etc.
 		if (isArray(course[key]) && !substring) {
-			return contains(course[key], val)
+			return includes(course[key], val)
 		}
 		else if (isArray(course[key]) && substring) {
-			return any(map(course[key], item => contains(item.toLowerCase(), val.toLowerCase())))
+			return some(map(course[key], item => includes(item.toLowerCase(), val.toLowerCase())))
 		}
 		else if (substring) {
-			return contains(course[key].toLowerCase(), val.toLowerCase())
+			return includes(course[key].toLowerCase(), val.toLowerCase())
 		}
 		return course[key] === val
 	})
 
 	if (!hasBool) {
-		return all(internalMatches)
+		return every(internalMatches)
 	}
 
 	let result = false
 
-	if (OR)   result = any(internalMatches)
-	if (NOR)  result = !any(internalMatches)
-	if (AND)  result = all(internalMatches)
-	if (NOT)  result = !all(internalMatches)
+	if (OR)   result = some(internalMatches)
+	if (NOR)  result = !some(internalMatches)
+	if (AND)  result = every(internalMatches)
+	if (NOT)  result = !every(internalMatches)
 	if (XOR)  result = compact(internalMatches).length === 1
 
 	return result
@@ -74,10 +74,10 @@ const checkCourseAgainstQueryBit = course => ([key, values]) => {
 // course: Course | the course to check
 // returns: Boolean | did all query bits pass the check?
 const checkCourseAgainstQuery = query => course => {
-	let kvPairs = pairs(query)
+	let kvPairs = toPairs(query)
 	let matches = takeWhile(kvPairs, checkCourseAgainstQueryBit(course))
 
-	return size(kvPairs) === size(matches) && all(matches)
+	return size(kvPairs) === size(matches) && every(matches)
 }
 
 export default checkCourseAgainstQuery

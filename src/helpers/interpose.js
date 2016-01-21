@@ -1,4 +1,4 @@
-import reduce from 'lodash/collection/reduce'
+import reduce from 'lodash/reduce'
 
 export default function interpose(data, value) {
 	const len = data.length

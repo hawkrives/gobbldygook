@@ -1,5 +1,5 @@
-import words from 'lodash/string/words'
-import deburr from 'lodash/string/deburr'
+import words from 'lodash/words'
+import deburr from 'lodash/deburr'
 
 export default function splitParagraph(string='') {
 	let lowercase = string.toLowerCase()

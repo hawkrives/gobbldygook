@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Link} from 'react-router'
-import map from 'lodash/collection/map'
-import sortBy from 'lodash/collection/sortBy'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
 import List from '../../../components/list'
 
 export default function AreaList(props) {

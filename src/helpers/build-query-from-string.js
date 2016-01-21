@@ -1,14 +1,14 @@
-import isArray from 'lodash/lang/isArray'
-import contains from 'lodash/collection/contains'
-import filter from 'lodash/collection/filter'
-import flatten from 'lodash/array/flatten'
-import map from 'lodash/collection/map'
-import mapValues from 'lodash/object/mapValues'
-import partition from 'lodash/collection/partition'
-import pairs from 'lodash/object/pairs'
-import startsWith from 'lodash/string/startsWith'
-import trim from 'lodash/string/trim'
-import unzip from 'lodash/array/unzip'
+import filter from 'lodash/filter'
+import flatten from 'lodash/flatten'
+import includes from 'lodash/includes'
+import isArray from 'lodash/isArray'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import partitionByIndex from './partition-by-index'
+import startsWith from 'lodash/startsWith'
+import toPairs from 'lodash/toPairs'
+import trim from 'lodash/trim'
+import unzip from 'lodash/unzip'
 
 import quacksLikeDeptNum from './quacks-like-dept-num'
 import splitDeptNum from './split-dept-num'
@@ -111,11 +111,11 @@ function organizeValues([key, values], {words=false, profWords=false}={}) {
 			val = parseFloat(val)
 		}
 
-		else if (contains(['year', 'term', 'level', 'num', 'groupid', 'clbid', 'crsid'], key)) {
+		else if (includes(['year', 'term', 'level', 'num', 'groupid', 'clbid', 'crsid'], key)) {
 			val = parseInt(val, 10)
 		}
 
-		else if (contains(['title', 'name', 'notes', 'description', 'words'], key)) {
+		else if (includes(['title', 'name', 'notes', 'description', 'words'], key)) {
 			if (words || key === 'words') {
 				val = splitParagraph(val)
 				key = 'words'
@@ -159,7 +159,7 @@ export default function buildQueryFromString(queryString='', opts={}) {
 	let cleaned = filter(map(matches, trim), str => str.length > 0)
 
 	// Grab the keys and values from the lists
-	let [keys, values] = partition(cleaned, (_, i) => i % 2 === 0)
+	let [keys, values] = partitionByIndex(cleaned)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
 		let {depts, num} = splitDeptNum(stringThing)
@@ -186,7 +186,7 @@ export default function buildQueryFromString(queryString='', opts={}) {
 	let zipped = zipToObjectWithArrays(keys, values)
 
 	// Perform initial cleaning of the values, dependent on the keys
-	let paired = unzip(map(pairs(zipped), kvpairs => organizeValues(kvpairs, opts)))
+	let paired = unzip(map(toPairs(zipped), kvpairs => organizeValues(kvpairs, opts)))
 
 	let organized = zipToObjectWithArrays(...paired) // spread the [k, v] pairs into the arguments properly
 

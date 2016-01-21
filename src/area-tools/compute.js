@@ -1,4 +1,4 @@
-import mapValues from 'lodash/object/mapValues'
+import mapValues from 'lodash/mapValues'
 import isRequirementName from './is-requirement-name'
 import applyFilter from './apply-filter'
 import computeChunk from './compute-chunk'

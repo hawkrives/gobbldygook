@@ -1,9 +1,9 @@
-import map from 'lodash/collection/map'
-import filter from 'lodash/collection/filter'
-import isPlainObject from 'lodash/lang/isPlainObject'
-import isArray from 'lodash/lang/isArray'
-import flattenDeep from 'lodash/array/flattenDeep'
-import uniq from 'lodash/array/uniq'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
+import isPlainObject from 'lodash/isPlainObject'
+import isArray from 'lodash/isArray'
+import flattenDeep from 'lodash/flattenDeep'
+import uniq from 'lodash/uniq'
 
 export default function collectUsedCourses(expr) {
 	// this function needs to end up with a list of all of the courses

@@ -1,6 +1,6 @@
-import map from 'lodash/collection/map'
-import reduce from 'lodash/collection/reduce'
-import flatten from 'lodash/array/flatten'
+import map from 'lodash/map'
+import reduce from 'lodash/reduce'
+import flatten from 'lodash/flatten'
 
 export default function cartesianProductOf(...args) {
 	return reduce([...args], (a, b) => {

@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
-import filter from 'lodash/collection/filter'
-import keys from 'lodash/object/keys'
-import map from 'lodash/collection/map'
-import sortBy from 'lodash/collection/sortBy'
+import filter from 'lodash/filter'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
 import cx from 'classnames'
 
 import isRequirementName from '../../../area-tools/is-requirement-name'

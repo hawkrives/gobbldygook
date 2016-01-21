@@ -2,7 +2,7 @@ import saveStudentFunc from '../../../helpers/save-student'
 
 import {SAVE_STUDENT} from '../constants'
 
-export default function saveStudent(id) {
+export function saveStudent(id) {
 	return (dispatch, getState) => {
 		const student = getState().students[id].data.present
 		const saving = saveStudentFunc(student)

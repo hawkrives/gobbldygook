@@ -1,6 +1,6 @@
-import filter from 'lodash/collection/filter'
-import map from 'lodash/collection/map'
-import zipObject from 'lodash/array/zipObject'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import fromPairs from 'lodash/fromPairs'
 import {getCourse} from './get-courses'
 
 export default function embedActiveStudentCourses(student, {cache=[]}) {
@@ -29,6 +29,6 @@ export default function embedActiveStudentCourses(student, {cache=[]}) {
 	})
 
 	return Promise.all(enhanced).then(fulfilled => {
-		return zipObject(fulfilled)
+		return fromPairs(fulfilled)
 	})
 }

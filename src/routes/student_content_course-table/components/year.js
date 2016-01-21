@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
-import filter from 'lodash/collection/filter'
-import sortBy from 'lodash/collection/sortBy'
-import map from 'lodash/collection/map'
+import filter from 'lodash/filter'
+import sortBy from 'lodash/sortBy'
+import map from 'lodash/map'
 
 import Button from '../../../components/button'
 import Semester from '../containers/semester'

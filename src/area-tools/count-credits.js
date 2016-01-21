@@ -1,4 +1,4 @@
-import sum from 'lodash/math/sum'
+import sumBy from 'lodash/sumBy'
 
 /**
  * Sums up the number of credits offered by a set of courses
@@ -7,5 +7,5 @@ import sum from 'lodash/math/sum'
  * @returns {number} - the sum of the 'credits' properties
  */
 export default function countCredits(courses=[]) {
-	return sum(courses, 'credits')
+	return sumBy(courses, 'credits')
 }

@@ -1,5 +1,4 @@
 import {expect} from 'chai'
-import find from 'lodash/collection/find'
 
 import {
 	INCREMENT_PROGRESS,
@@ -7,8 +6,8 @@ import {
 	LOG_MESSAGE,
 	REMOVE_NOTIFICATION,
 	START_PROGRESS,
-} from '../../src/ducks/constants/notifications'
-import reducer from '../../src/ducks/reducers/notifications'
+} from '../../src/redux/notifications/constants'
+import reducer from '../../src/redux/notifications/reducers'
 
 
 describe('notifications reducer', () => {
@@ -19,32 +18,30 @@ describe('notifications reducer', () => {
 	})
 
 	it('handles LOG_MESSAGE', () => {
-		const id = 1
 		const message = 'message'
 
-		const actualState = reducer(undefined, {type: LOG_MESSAGE, payload: {id, message}})
-		const expectedState = [{id, message, type: 'message'}]
+		const actualState = reducer(undefined, {type: LOG_MESSAGE, payload: {message}})
+		const expectedState = [{message, type: 'message'}]
 
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
 	it('handles LOG_ERROR', () => {
-		const id = 1
 		const error = new Error('message')
 
-		const actualState = reducer(undefined, {type: LOG_ERROR, payload: {id, error, args: []}})
-		const expectedState = [{id, message: error.message, type: 'error'}]
+		const actualState = reducer(undefined, {type: LOG_ERROR, payload: {error, args: []}})
+		const expectedState = [{message: error.message, type: 'error'}]
 
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
 	it('handles REMOVE_NOTIFICATION', () => {
-		const id = 1
+		const index = 0
 		const message = 'message'
 
-		const action = {type: REMOVE_NOTIFICATION, payload: {id, message}}
+		const action = {type: REMOVE_NOTIFICATION, payload: {index, message}}
 
-		const initialState = [{id, message, type: 'message'}]
+		const initialState = [{message, type: 'message'}]
 		const expectedState = []
 		const actualState = reducer(initialState, action)
 
@@ -52,78 +49,77 @@ describe('notifications reducer', () => {
 	})
 
 	it('handles START_PROGRESS', () => {
-		const id = 1
 		const message = 'message'
 		const value = 0
 		const max = 1
 		const showButton = false
 
-		const actualState = reducer(undefined, {type: START_PROGRESS, payload: {id, message, value, max, showButton}})
-		const expectedState = [{id, message, value, max, showButton, type: 'progress'}]
+		const actualState = reducer(undefined, {type: START_PROGRESS, payload: {message, value, max, showButton}})
+		const expectedState = [{message, value, max, showButton, type: 'progress'}]
 
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
 	it('handles INCREMENT_PROGRESS', () => {
-		const id = 1
+		const index = 0
 		const message = 'message'
 		const value = 0
 		const max = 1
 		const by = 1
 		const showButton = false
 
-		const action = {type: INCREMENT_PROGRESS, payload: {id, by}}
+		const action = {type: INCREMENT_PROGRESS, payload: {index, by}}
 
-		const initialState = [{id, message, value, max, showButton, type: 'progress'}]
-		const expectedState = [{id, message, value: value + by, max, showButton, type: 'progress'}]
+		const initialState = [{message, value, max, showButton, type: 'progress'}]
+		const expectedState = [{message, value: value + by, max, showButton, type: 'progress'}]
 		const actualState = reducer(initialState, action)
 
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
 	it('does not let INCREMENT_PROGRESS go past "max"', () => {
-		const id = 1
+		const index = 0
 		const message = 'message'
 		const value = 0
 		const max = 1
 		const by = 5
 		const showButton = false
 
-		const action = {type: INCREMENT_PROGRESS, payload: {id, by}}
+		const action = {type: INCREMENT_PROGRESS, payload: {index, by}}
 
-		const initialState = [{id, message, value, max, showButton, type: 'progress'}]
-		const expectedState = [{id, message, value: 1, max, showButton, type: 'progress'}]
+		const initialState = [{message, value, max, showButton, type: 'progress'}]
+		const expectedState = [{message, value: 1, max, showButton, type: 'progress'}]
 		const actualState = reducer(initialState, action)
 
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
 	it('allows custom values for INCREMENT_PROGRESS', () => {
-		const id = 1
+		const index = 0
 		const message = 'message'
 		const value = 5
 		const max = 10
 		const by = 5
 		const showButton = false
 
-		const action = {type: INCREMENT_PROGRESS, payload: {id, by}}
+		const action = {type: INCREMENT_PROGRESS, payload: {index, by}}
 
-		const initialState = [{id, message, value, max, showButton, type: 'progress'}]
-		const expectedState = [{id, message, value: value + by, max, showButton, type: 'progress'}]
+		const initialState = [{message, value, max, showButton, type: 'progress'}]
+		const expectedState = [{message, value: value + by, max, showButton, type: 'progress'}]
 		const actualState = reducer(initialState, action)
 
 		expect(actualState).to.deep.equal(expectedState)
 	})
 
 	it('does not mutate the progress item during INCREMENT_PROGRESS', () => {
-		const id = 1
-		const notification = {id, message: '', value: 0, max: 1, showButton: true}
+		const index = 0
+		const notification = {index, message: '', value: 0, max: 1, showButton: true}
 
-		const action = {type: INCREMENT_PROGRESS, payload: {id, by: 1}}
+		const action = {type: INCREMENT_PROGRESS, payload: {index, by: 1}}
 
 		const initialState = [notification]
 		const actualState = reducer(initialState, action)
 
-		expect(find(initialState, {id})).not.to.equal(find(actualState, {id}))
+		expect(initialState[0]).not.to.equal(actualState[0])
 	})
 })

@@ -2,6 +2,7 @@
 'use strict'
 
 const pkg = require('./package.json')
+const buildFilename = require('./scripts/webpack/build-filename')
 const webpack = require('webpack')
 
 const ProvidePlugin = webpack.ProvidePlugin
@@ -13,7 +14,6 @@ const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
-const buildFilename = require('./scripts/webpack/build-filename')
 const NotifierPlugin = require('webpack-notifier')
 
 const isProduction = (process.env.NODE_ENV === 'production')

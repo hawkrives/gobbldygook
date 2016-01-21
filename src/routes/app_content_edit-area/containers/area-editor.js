@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import yaml from 'js-yaml'
 import keymage from 'keymage'
-import omit from 'lodash/object/omit'
-import find from 'lodash/collection/find'
-import filter from 'lodash/collection/filter'
+import omit from 'lodash/omit'
+import find from 'lodash/find'
+import filter from 'lodash/filter'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { loadAllAreas } from '../../../redux/areas/actions'
@@ -57,7 +57,7 @@ export class AreaEditScreen extends Component {
 		const area = find(allAreas, area =>
 			area.type === type && area.name === name && area.revision === revision)
 
-		let data = omit(area, ['sourcePath'])
+		let data = omit(area, 'sourcePath')
 		if ('source' in data && typeof data.source === 'string') {
 			data = data.source
 		}

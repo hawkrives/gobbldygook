@@ -1,14 +1,14 @@
 import React, {Component, PropTypes} from 'react'
 import fuzzysearch from 'fuzzysearch'
 import pluralizeArea from '../../../area-tools/pluralize-area'
-import map from 'lodash/collection/map'
-import reject from 'lodash/collection/reject'
-import filter from 'lodash/collection/filter'
-import includes from 'lodash/collection/includes'
-import groupBy from 'lodash/collection/groupBy'
-import flatten from 'lodash/array/flatten'
-import sortBy from 'lodash/collection/sortBy'
-import max from 'lodash/collection/max'
+import map from 'lodash/map'
+import reject from 'lodash/reject'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import groupBy from 'lodash/groupBy'
+import flatten from 'lodash/flatten'
+import sortBy from 'lodash/sortBy'
+import maxBy from 'lodash/maxBy'
 
 import Button from '../../../components/button'
 import List from '../../../components/list'
@@ -29,7 +29,7 @@ function AreaPicker(props) {
 		return areaSet.length >= 2
 			? filter(sortBy(areaSet, 'revision'), (area, i, list) => {
 				const availableThrough = i < list.length - 1
-					? max(map([area, list[i+1]], a => Number(a.revision.split('-')[0]) + 1))
+					? maxBy(map([area, list[i+1]], a => Number(a.revision.split('-')[0]) + 1))
 					: Number(area.revision.split('-')[0]) + 1
 
 				return availableThrough <= graduation

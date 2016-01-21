@@ -1,10 +1,10 @@
 import Promise from 'bluebird'
 import yaml from 'js-yaml'
 import enhanceHanson from '../../src/area-tools/enhance-hanson'
-import map from 'lodash/collection/map'
-import filter from 'lodash/collection/filter'
-import find from 'lodash/collection/find'
-import max from 'lodash/collection/max'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
+import find from 'lodash/find'
+import maxBy from 'lodash/maxBy'
 import findAreas from './find-areas'
 const fs = Promise.promisifyAll(require('graceful-fs'))
 
@@ -24,8 +24,8 @@ export async function getArea({name, type, revision}) {
 	))
 
 	if (!revision) {
-		// max returns the entire object that it matched
-		return max(filteredAreas, area => Number(area.revision.split('-')[0]))
+		// maxBy returns the entire object that it matched
+		return maxBy(filteredAreas, area => Number(area.revision.split('-')[0]))
 	}
 
 	return find(filteredAreas, {revision})

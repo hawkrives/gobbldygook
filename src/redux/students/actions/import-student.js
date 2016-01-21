@@ -4,7 +4,7 @@ import {
 	IMPORT_STUDENT,
 } from '../constants'
 
-export default function importStudent({data, type}={}) {
+export function importStudent({data, type}={}) {
 	let stu = undefined
 	if (type === 'application/json') {
 		try {

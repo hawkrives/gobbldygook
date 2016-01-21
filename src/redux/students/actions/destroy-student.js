@@ -4,7 +4,7 @@ import {
 	DESTROY_STUDENT,
 } from '../constants'
 
-export default async function destroyStudent(studentId) {
+export async function destroyStudent(studentId) {
 	removeStudentFromCache(studentId)
 	localStorage.removeItem(studentId)
 

@@ -1,4 +1,4 @@
-import filter from 'lodash/collection/filter'
+import filter from 'lodash/filter'
 import simplifyCourse from './simplify-course'
 
 // old version; compares course objects instead of simplified versions

@@ -1,13 +1,13 @@
 import assertKeys from './assert-keys'
 import compareCourseToQualification from './compare-course-to-qualification'
-import filter from 'lodash/collection/filter'
-import forEach from 'lodash/collection/forEach'
-import isPlainObject from 'lodash/lang/isPlainObject'
-import map from 'lodash/collection/map'
-import max from 'lodash/collection/max'
-import min from 'lodash/collection/min'
+import filter from 'lodash/filter'
+import forEach from 'lodash/forEach'
+import isPlainObject from 'lodash/isPlainObject'
+import map from 'lodash/map'
+import max from 'lodash/max'
+import min from 'lodash/min'
 import simplifyCourse from './simplify-course'
-import uniq from 'lodash/array/uniq'
+import uniqBy from 'lodash/uniqBy'
 
 export default function filterByWhereClause(baseList, clause, distinct, fullList) {
 	// When filtering by an and-clause, we need access to both the
@@ -48,7 +48,7 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 
 			// uniquify the list of possibilities by way of turning them into
 			// the simplified representations.
-			return uniq(filtrations, simplifyCourse)
+			return uniqBy(filtrations, simplifyCourse)
 		}
 
 		// only 'and' and 'or' are currently supported.
@@ -105,7 +105,7 @@ export function filterByQualification(list, qualification, distinct, fullList) {
 		compareCourseToQualification(course, qualification))
 
 	if (distinct) {
-		filtered = uniq(filtered, simplifyCourse)
+		filtered = uniqBy(filtered, simplifyCourse)
 	}
 
 	return filtered

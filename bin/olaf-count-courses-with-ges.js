@@ -4,12 +4,11 @@
  */
 
 import nomnom from 'nomnom'
-import Promise from 'bluebird'
 import search from './lib/search-for-courses'
-import map from 'lodash/collection/map'
-import mapValues from 'lodash/object/mapValues'
-import zipObject from 'lodash/array/zipObject'
-import groupBy from 'lodash/collection/groupBy'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import fromPairs from 'lodash/fromPairs'
+import groupBy from 'lodash/groupBy'
 import yaml from 'js-yaml'
 
 function findCoursesWithGes(term) {
@@ -30,7 +29,7 @@ export async function cli() {
 		return list.concat(term)
 	}, [])
 
-	const courses = zipObject(
+	const courses = fromPairs(
 		await Promise.all(
 			map(
 				args.terms,

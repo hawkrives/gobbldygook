@@ -1,14 +1,14 @@
-import cloneDeep from 'lodash/lang/cloneDeep'
-import filter from 'lodash/collection/filter'
-import forEach from 'lodash/collection/forEach'
-import includes from 'lodash/collection/includes'
+import cloneDeep from 'lodash/cloneDeep'
+import filter from 'lodash/filter'
+import forEach from 'lodash/forEach'
+import includes from 'lodash/includes'
 import isRequirementName from './is-requirement-name'
-import isString from 'lodash/lang/isString'
-import keys from 'lodash/object/keys'
-import map from 'lodash/collection/map'
-import mapValues from 'lodash/object/mapValues'
-import some from 'lodash/collection/some'
-import zipObject from 'lodash/array/zipObject'
+import isString from 'lodash/isString'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import some from 'lodash/some'
+import fromPairs from 'lodash/fromPairs'
 import makeAreaSlug from './make-area-slug'
 import {oxford} from 'humanize-plus'
 import {parse} from './parse-hanson-string'
@@ -53,9 +53,9 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 	}
 
 	const requirements = filter(keys(data), isRequirementName)
-	const abbreviations = zipObject(map(requirements,
+	const abbreviations = fromPairs(map(requirements,
 		req => [req.replace(/.* \(([A-Z\-]+)\)$|.*$/, '$1'), req]))
-	const titles = zipObject(map(requirements,
+	const titles = fromPairs(map(requirements,
 		req => [req.replace(/(.*?) +\([A-Z\-]+\)$|.*$/, '$1'), req]))
 
 	const oldVariables = cloneDeep(declaredVariables)

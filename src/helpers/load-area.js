@@ -1,16 +1,16 @@
 import db from './db'
 import {enhance as enhanceHanson} from '../area-tools'
-import some from 'lodash/collection/some'
-import max from 'lodash/collection/max'
-import isArray from 'lodash/lang/isArray'
+import some from 'lodash/some'
+import maxBy from 'lodash/maxBy'
+import isArray from 'lodash/isArray'
 import yaml from 'js-yaml'
 
 function resolveArea(areas) {
 	if (some(areas, possibility => 'dateAdded' in possibility)) {
-		return max(areas, 'dateAdded')
+		return maxBy(areas, 'dateAdded')
 	}
 	else {
-		return max(areas, possibility => possibility.sourcePath.length)
+		return maxBy(areas, possibility => possibility.sourcePath.length)
 	}
 }
 

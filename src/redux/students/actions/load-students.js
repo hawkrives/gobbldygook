@@ -1,13 +1,10 @@
-import map from 'lodash/collection/map'
-import uniq from 'lodash/array/uniq'
+import map from 'lodash/map'
+import uniq from 'lodash/uniq'
 
-import {
-	LOAD_STUDENTS,
-} from '../constants'
+import {LOAD_STUDENTS} from '../constants'
+import {loadStudent} from './load-student'
 
-import loadStudent from './load-student'
-
-export default function loadStudents() {
+export function loadStudents() {
 	return dispatch => {
 		// Get the list of students we know about, or the string 'null',
 		// if localStorage doesn't have the key 'studentIds'.

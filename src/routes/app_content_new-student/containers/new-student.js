@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import forEach from 'lodash/collection/forEach'
+import forEach from 'lodash/forEach'
 import DropZone from 'react-dropzone'
 
 import Button from '../../../components/button'

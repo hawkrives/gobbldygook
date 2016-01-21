@@ -8,19 +8,18 @@ import {
 	SET_PARTIAL_QUERY,
 } from '../constants'
 
-import groupBy from 'lodash/collection/groupBy'
-import sortByAll from 'lodash/collection/sortByAll'
-import sortBy from 'lodash/collection/sortBy'
+import groupBy from 'lodash/groupBy'
+import sortBy from 'lodash/sortBy'
 
 import {SORT_BY, GROUP_BY} from '../../../components/course-searcher-options'
 
-import includes from 'lodash/collection/includes'
-import uniq from 'lodash/array/uniq'
-import flatten from 'lodash/array/flatten'
-import pairs from 'lodash/object/pairs'
-import round from 'lodash/math/round'
+import includes from 'lodash/includes'
+import uniq from 'lodash/uniq'
+import flatMap from 'lodash/flatMap'
+import toPairs from 'lodash/toPairs'
+import round from 'lodash/round'
 import { oxford } from 'humanize-plus'
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 import present from 'present'
 
 import buildDept from '../../../helpers/build-dept'
@@ -32,8 +31,8 @@ const DAY_OF_WEEK = course => course.offerings
 	: 'No Days Listed'
 
 const TIME_OF_DAY = course => course.offerings
-	? oxford(sortBy(uniq(flatten(map(course.offerings, offer =>
-		map(offer.times, time => `${to12Hour(time.start)}-${to12Hour(time.end)}`))))))
+	? oxford(sortBy(uniq(flatMap(course.offerings, offer =>
+		map(offer.times, time => `${to12Hour(time.start)}-${to12Hour(time.end)}`)))))
 	: 'No Times Listed'
 
 const DEPARTMENT = course => course.depts ? buildDept(course) : 'No Department'
@@ -66,10 +65,10 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 	// TODO: Speed this up! This preperation stuff takes ~230ms by itself,
 	// with enough courses rendered. (like, say, {year: 2012})
 	const sortByArgs = ['year', 'deptnum', 'semester', 'section'].concat(SORT_BY_TO_KEY[sorting])
-	const sorted = sortByAll(rawResults, sortByArgs)
+	const sorted = sortBy(rawResults, sortByArgs)
 
 	// Group them by term, then turn the object into an array of pairs.
-	const groupedAndPaired = pairs(groupBy(sorted, GROUP_BY_TO_KEY[grouping]))
+	const groupedAndPaired = toPairs(groupBy(sorted, GROUP_BY_TO_KEY[grouping]))
 
 	// Sort the result arrays by the first element, the term, because
 	// object keys don't have an implicit sort.

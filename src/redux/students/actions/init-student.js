@@ -1,5 +1,5 @@
-import forEach from 'lodash/collection/forEach'
-import range from 'lodash/utility/range'
+import forEach from 'lodash/forEach'
+import range from 'lodash/range'
 
 import Student, {addScheduleToStudent} from '../../../models/student'
 import Schedule from '../../../models/schedule'
@@ -8,7 +8,7 @@ import {
 	INIT_STUDENT,
 } from '../constants'
 
-export default function initStudent() {
+export function initStudent() {
 	let student = new Student()
 
 	forEach(range(student.matriculation, student.graduation), year => {

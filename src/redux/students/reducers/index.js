@@ -1,4 +1,4 @@
-import omit from 'lodash/object/omit'
+import omit from 'lodash/omit'
 import {ActionTypes as UndoableActionTypes} from 'redux-undo'
 
 import {
@@ -66,7 +66,7 @@ export default function studentsReducer(state = initialState, action) {
 				console.error(payload)
 				return state
 			}
-			return omit(state, [payload.studentId])
+			return omit(state, payload.studentId)
 		}
 
 		case BEGIN_LOAD_STUDENT:

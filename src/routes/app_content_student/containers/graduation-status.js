@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import has from 'lodash/object/has'
+import has from 'lodash/has'
 import pathToOverride from '../../../area-tools/path-to-override'
 
 import {changeName, changeMatriculation, changeGraduation} from '../../../redux/students/actions/change'

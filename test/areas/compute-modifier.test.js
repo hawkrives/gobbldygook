@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import cloneDeep from 'lodash/lang/cloneDeep'
+import cloneDeep from 'lodash/cloneDeep'
 import computeChunk, {computeModifier} from '../../src/area-tools/compute-chunk'
 import applyFilter from '../../src/area-tools/apply-filter'
 

@@ -1,7 +1,7 @@
 import assertKeys from './assert-keys'
-import flatten from 'lodash/array/flatten'
-import map from 'lodash/collection/map'
-import uniq from 'lodash/array/uniq'
+import flatten from 'lodash/flatten'
+import map from 'lodash/map'
+import uniqBy from 'lodash/uniqBy'
 import stringify from 'json-stable-stringify'
 
 /**
@@ -63,5 +63,5 @@ export default function collectMatches(expr) {
 	}
 
 	// then we either return the matches, or an empty array if it's falsy
-	return matches ? uniq(matches, stringify) : []
+	return matches ? uniqBy(matches, stringify) : []
 }

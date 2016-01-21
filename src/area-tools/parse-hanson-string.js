@@ -4182,7 +4182,7 @@ module.exports = (function() {
 		function fetchDept(dept) {
 			return globalLastDept;
 		}
-		var flatten = require('lodash/array/flatten');
+		var flatten = require('lodash/flatten');
 		var expandDepartment = require('./convert-department').expandDepartment;
 		peg$result = peg$startRuleFunction();
 		if (peg$result !== peg$FAILED && peg$currPos === input.length) {

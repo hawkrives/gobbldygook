@@ -1,8 +1,8 @@
-import uniq from 'lodash/array/uniq'
-import map from 'lodash/collection/map'
-import sortBy from 'lodash/collection/sortBy'
-import max from 'lodash/collection/max'
-import includes from 'lodash/collection/includes'
+import uniq from 'lodash/uniq'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
+import max from 'lodash/max'
+import includes from 'lodash/includes'
 import findMissingNumberBinarySearch from './find-missing-number-binary-search'
 
 /**

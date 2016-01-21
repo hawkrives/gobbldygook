@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Link} from 'react-router'
-import range from 'lodash/utility/range'
-import map from 'lodash/collection/map'
+import range from 'lodash/range'
+import map from 'lodash/map'
 
 import InlineCourse from '../../../components/inline-course'
 import List from '../../../components/list'

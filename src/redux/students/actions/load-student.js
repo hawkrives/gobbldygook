@@ -30,7 +30,7 @@ function shouldLoad(state, id) {
 	return true
 }
 
-export default function loadStudent(id) {
+export function loadStudent(id) {
 	return (dispatch, getState) => {
 		if (!shouldLoad(getState(), id)) {
 			return

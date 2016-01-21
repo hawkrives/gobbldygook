@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
-import map from 'lodash/collection/map'
-import sortByAll from 'lodash/collection/sortByAll'
-import groupBy from 'lodash/collection/groupBy'
-import flatten from 'lodash/array/flatten'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
+import groupBy from 'lodash/groupBy'
+import flatMap from 'lodash/flatMap'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 
@@ -19,7 +19,7 @@ function findSemesterList(student) {
 		...s, title: `${semesterName(s.semester)} – ${s.title}`,
 	}))
 
-	let sorted = sortByAll(schedules, ['year', 'semester'])
+	let sorted = sortBy(schedules, ['year', 'semester'])
 	let byYear = groupBy(sorted, 'year')
 
 	return byYear
@@ -118,10 +118,10 @@ export default function CourseOverlay(props) {
 					{course.times && <div>
 						<h2>{plur('Offering', course.offerings.length)}</h2>
 						<ul>
-							{flatten(map(course.offerings, (o, i) =>
+							{flatMap(course.offerings, (o, i) =>
 								map(o.times, (t, j) =>
-										<li key={`${i}-${j}`}>{o.day} from {to12Hour(t.start)} to {to12Hour(t.end)}, in {o.location}</li>)
-									))}
+									<li key={`${i}-${j}`}>{o.day} from {to12Hour(t.start)} to {to12Hour(t.end)}, in {o.location}</li>)
+								)}
 						</ul>
 					</div>}
 

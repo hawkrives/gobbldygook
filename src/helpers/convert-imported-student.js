@@ -1,11 +1,11 @@
 // import db from './db'
 import Student from '../models/student'
 import Schedule from '../models/schedule'
-import groupBy from 'lodash/collection/groupBy'
-import map from 'lodash/collection/map'
-import forEach from 'lodash/collection/forEach'
-import uniq from 'lodash/array/uniq'
-import zipObject from 'lodash/array/zipObject'
+import groupBy from 'lodash/groupBy'
+import map from 'lodash/map'
+import forEach from 'lodash/forEach'
+import uniq from 'lodash/uniq'
+import fromPairs from 'lodash/fromPairs'
 
 export default function convertStudent(partialStudent) {
 	let schedules = processSchedules(partialStudent)
@@ -31,7 +31,7 @@ function processSchedules(student) {
 			semester: parseInt(term.substr(4, 1), 10),
 		})
 	})
-	schedules = zipObject(map(schedules, s => [s.id, s]))
+	schedules = fromPairs(map(schedules, s => [s.id, s]))
 	return schedules
 }
 

@@ -1,4 +1,4 @@
-import reject from 'lodash/collection/reject'
+import reject from 'lodash/reject'
 
 /**
  * Throws a ReferenceError if any requested key is missing.
