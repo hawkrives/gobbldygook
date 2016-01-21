@@ -308,7 +308,7 @@ describe('changeStudentSetting', () => {
 
 	it('returns a new object', () => {
 		let initial = Student()
-		let final = changeStudentSetting(initial)
+		let final = changeStudentSetting(initial, 'key', 'value2')
 		expect(final).to.not.equal(initial)
 	})
 })
