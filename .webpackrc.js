@@ -111,6 +111,7 @@ const config = {
 			DEVELOPMENT: isDev,
 			PRODUCTION: isProduction,
 			TESTING: isTest,
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 
 		new NotifierPlugin({title: `${pkg.name} build`}),
@@ -214,9 +215,6 @@ else if (isProduction) {
 		}),
 		new ExtractTextPlugin(config.output.cssFilename, {
 			allChunks: true,
-		}),
-		new DefinePlugin({
-			'process.env': {NODE_ENV: JSON.stringify('production')},
 		}),
 	])
 
