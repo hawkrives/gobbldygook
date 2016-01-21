@@ -30,7 +30,7 @@
     "stats": "env NODE_ENV=production npm run stats:base",
     "stats:base": "webpack --config ./.webpackrc.js --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
     "stats:dev": "env NODE_ENV=development npm run stats:base",
-    "test": "env NODE_ENV=test mocha test/areas test/models test/helpers test/ducks",
+    "test": "env NODE_ENV=test mocha test/**/*.js",
     "test-watch": "npm run test -- --watch",
     "test:students": "./bin/test-students",
     "view-coverage": "nyc report --reporter=html && open coverage/index.html"
