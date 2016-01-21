@@ -7,7 +7,7 @@ import map from 'lodash/collection/map'
 import max from 'lodash/collection/max'
 import min from 'lodash/collection/min'
 import simplifyCourse from './simplify-course'
-import uniq from 'lodash/array/uniq'
+import uniqBy from 'lodash/array/uniqBy'
 
 export default function filterByWhereClause(baseList, clause, distinct, fullList) {
 	// When filtering by an and-clause, we need access to both the
@@ -48,7 +48,7 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 
 			// uniquify the list of possibilities by way of turning them into
 			// the simplified representations.
-			return uniq(filtrations, simplifyCourse)
+			return uniqBy(filtrations, simplifyCourse)
 		}
 
 		// only 'and' and 'or' are currently supported.

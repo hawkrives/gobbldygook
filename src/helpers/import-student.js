@@ -8,7 +8,7 @@ import mapKeys from 'lodash/object/mapKeys'
 import parseHtml from './parse-html'
 import partition from 'lodash/collection/partition'
 import unzip from 'lodash/array/unzip'
-import zipObject from 'lodash/array/zipObject'
+import fromPairs from 'lodash/array/fromPairs'
 import {AuthError, NetworkError} from './errors'
 import {selectAll, selectOne} from 'css-select'
 import {status, text, classifyFetchErrors} from './fetch-helpers'
@@ -140,9 +140,9 @@ function extractInformationFromInfoTable(table) {
 	// Next, because they're k/v pairs, we want to group them into two arrays: keys, and values.
 	// `partition` groups elements of an array into two arrays based on the predicate function, which we've built around the index.
 	let infoKeysValues = partition(infoText, (_, i) => !(i % 2))
-	// The zipObject(unzip()) dance builds an object from the k/v paired arrays
-	// `unzip` turns the [[keys], [values]] array into [[k,v], [k,v], ...], which `zipObject` turns into an object.
-	let info = zipObject(unzip(infoKeysValues))
+	// The fromPairs(unzip()) dance builds an object from the k/v paired arrays.
+	// `unzip` turns the [[keys], [values]] array into [[k,v], [k,v], ...], which `fromPairs` turns into an object.
+	let info = fromPairs(unzip(infoKeysValues))
 	// `mapKeys` purpose is to remove the ':' from the end of the keys, and to lower-case the keys.
 	info = mapKeys(info, (val, key) => key.replace(':', '').toLowerCase())
 

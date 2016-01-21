@@ -5,7 +5,7 @@ import groupBy from 'lodash/collection/groupBy'
 import map from 'lodash/collection/map'
 import forEach from 'lodash/collection/forEach'
 import uniq from 'lodash/array/uniq'
-import zipObject from 'lodash/array/zipObject'
+import fromPairs from 'lodash/array/fromPairs'
 
 export default function convertStudent(partialStudent) {
 	let schedules = processSchedules(partialStudent)
@@ -31,7 +31,7 @@ function processSchedules(student) {
 			semester: parseInt(term.substr(4, 1), 10),
 		})
 	})
-	schedules = zipObject(map(schedules, s => [s.id, s]))
+	schedules = fromPairs(map(schedules, s => [s.id, s]))
 	return schedules
 }
 

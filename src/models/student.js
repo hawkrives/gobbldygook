@@ -1,7 +1,8 @@
 import clone from 'lodash/lang/clone'
-import contains from 'lodash/collection/contains'
 import findIndex from 'lodash/array/findIndex'
 import findKey from 'lodash/object/findKey'
+import fromPairs from 'lodash/array/fromPairs'
+import includes from 'lodash/collection/includes'
 import isArray from 'lodash/lang/isArray'
 import isNumber from 'lodash/lang/isNumber'
 import isUndefined from 'lodash/lang/isUndefined'
@@ -9,7 +10,6 @@ import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'
 import omit from 'lodash/object/omit'
 import reject from 'lodash/collection/reject'
-import zipObject from 'lodash/array/zipObject'
 import {v4 as uuid} from 'uuid'
 
 import randomChar from '../helpers/random-char'
@@ -46,7 +46,7 @@ export default function Student(data) {
 	}
 
 	if (isArray(student.schedules)) {
-		student.schedules = zipObject(map(student.schedules, s => [String(s.id), {...s, id: String(s.id)}]))
+		student.schedules = fromPairs(map(student.schedules, s => [String(s.id), {...s, id: String(s.id)}]))
 	}
 
 	student.schedules = mapValues(student.schedules, Schedule)
@@ -117,7 +117,7 @@ export function destroyScheduleFromStudent(student, scheduleId) {
 	}
 
 	const deadSched = student.schedules[scheduleId]
-	const schedules = omit(student.schedules, [scheduleId])
+	const schedules = omit(student.schedules, scheduleId)
 
 	if (deadSched && deadSched.active) {
 		const otherSchedKey = findKey(schedules, sched =>
@@ -147,7 +147,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 	let schedule = clone(student.schedules[scheduleId])
 
 	// If the schedule already has the course we're adding, just return the student
-	if (contains(schedule.clbids, clbid)) {
+	if (includes(schedule.clbids, clbid)) {
 		return student
 	}
 
@@ -170,7 +170,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 	let schedule = clone(student.schedules[scheduleId])
 
 	// If the schedule doesn't have the course we're removing, just return the student
-	if (!contains(schedule.clbids, clbid)) {
+	if (!includes(schedule.clbids, clbid)) {
 		return student
 	}
 
@@ -207,7 +207,7 @@ export function setOverrideOnStudent(student, key, value) {
 }
 
 export function removeOverrideFromStudent(student, key) {
-	let overrides = omit(student.overrides, [key])
+	let overrides = omit(student.overrides, key)
 	return {...student, overrides}
 }
 
@@ -227,7 +227,7 @@ export function removeFabricationFromStudent(student, fabricationId) {
 	if (typeof fabricationId !== 'string') {
 		throw new TypeError(`removeCourseFromSchedule: clbid must be a string`)
 	}
-	let fabrications = omit(student.fabrications, [fabricationId])
+	let fabrications = omit(student.fabrications, fabricationId)
 	return {...student, fabrications}
 }
 

@@ -57,7 +57,7 @@ export class AreaEditScreen extends Component {
 		const area = find(allAreas, area =>
 			area.type === type && area.name === name && area.revision === revision)
 
-		let data = omit(area, ['sourcePath'])
+		let data = omit(area, 'sourcePath')
 		if ('source' in data && typeof data.source === 'string') {
 			data = data.source
 		}

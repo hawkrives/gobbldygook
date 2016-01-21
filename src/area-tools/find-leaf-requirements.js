@@ -1,10 +1,9 @@
-import map from 'lodash/collection/map'
+import flatMap from 'lodash/collection/flatMap'
 import compact from 'lodash/array/compact'
 import isRequirementName from './is-requirement-name'
 import isPlainObject from 'lodash/lang/isPlainObject'
 import keys from 'lodash/object/keys'
 import some from 'lodash/collection/some'
-import flatten from 'lodash/array/flatten'
 
 /**
  * Searches recursively through a requirement tree to find all of the
@@ -42,5 +41,5 @@ export default function findLeafRequirements(requirement) {
 
 	// otherwise, run findLeafRequirements over the object, to descend further
 	// down the tree of madness.
-	return compact(flatten(map(requirement, findLeafRequirements)))
+	return compact(flatMap(requirement, findLeafRequirements))
 }

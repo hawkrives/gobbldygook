@@ -1,4 +1,4 @@
-import uniq from 'lodash/array/uniq'
+import uniqBy from 'lodash/array/uniqBy'
 import size from 'lodash/collection/size'
 import simplifyCourse from './simplify-course'
 
@@ -10,5 +10,5 @@ import simplifyCourse from './simplify-course'
  * @returns {number} - the number of unique courses
  */
 export default function countCourses(courses) {
-	return size(uniq(courses, simplifyCourse))
+	return size(uniqBy(courses, simplifyCourse))
 }

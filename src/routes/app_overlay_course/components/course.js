@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import map from 'lodash/collection/map'
 import sortBy from 'lodash/collection/sortBy'
 import groupBy from 'lodash/collection/groupBy'
-import flatten from 'lodash/array/flatten'
+import flatMap from 'lodash/array/flatMap'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 
@@ -118,10 +118,10 @@ export default function CourseOverlay(props) {
 					{course.times && <div>
 						<h2>{plur('Offering', course.offerings.length)}</h2>
 						<ul>
-							{flatten(map(course.offerings, (o, i) =>
+							{flatMap(course.offerings, (o, i) =>
 								map(o.times, (t, j) =>
-										<li key={`${i}-${j}`}>{o.day} from {to12Hour(t.start)} to {to12Hour(t.end)}, in {o.location}</li>)
-									))}
+									<li key={`${i}-${j}`}>{o.day} from {to12Hour(t.start)} to {to12Hour(t.end)}, in {o.location}</li>)
+								)}
 						</ul>
 					</div>}
 

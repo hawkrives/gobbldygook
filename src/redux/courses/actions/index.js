@@ -4,7 +4,7 @@ import {
 	CACHE_COURSES_FROM_SCHEDULES,
 } from '../constants'
 
-import flatten from 'lodash/array/flatten'
+import flatMap from 'lodash/array/flatMap'
 import values from 'lodash/object/values'
 import map from 'lodash/collection/map'
 import getCourses, {getCoursesFromSchedules} from '../../../helpers/get-courses'
@@ -24,7 +24,7 @@ export function reloadCachedCourses() {
 export function loadCourses() {
 	return (dispatch, getState) => {
 		let {students, courses} = getState()
-		let schedules = flatten(map(students, student => values(student.schedules)))
+		let schedules = flatMap(students, student => values(student.schedules))
 		console.log('schedules', schedules)
 		let action = { type: LOAD_COURSES, payload: getCoursesFromSchedules(schedules, courses) }
 		return dispatch(action)

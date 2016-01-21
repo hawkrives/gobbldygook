@@ -4,14 +4,14 @@ import stringifyError from './stringify-error'
 
 import range from 'idb-range'
 import uniq from 'lodash/array/uniq'
-import flatten from 'lodash/array/flatten'
+import flatMap from 'lodash/array/flatMap'
 import filter from 'lodash/collection/filter'
 import size from 'lodash/collection/size'
 import startsWith from 'lodash/string/startsWith'
 import map from 'lodash/collection/map'
 import groupBy from 'lodash/collection/groupBy'
 import sortBy from 'lodash/collection/sortBy'
-import zipObject from 'lodash/array/zipObject'
+import fromPairs from 'lodash/array/fromPairs'
 import some from 'lodash/collection/some'
 import round from 'lodash/math/round'
 import present from 'present'
@@ -43,7 +43,7 @@ function prepareCourse(course) {
 		deptnum: course.deptnum || buildDeptNum(course),
 		offerings: course.offerings || convertTimeStringsToOfferings(course),
 		words: uniq([...nameWords, ...notesWords, ...titleWords, ...descWords]),
-		profWords: uniq(flatten(map(course.instructors, splitParagraph))),
+		profWords: uniq(flatMap(course.instructors, splitParagraph)),
 	}
 }
 
@@ -123,12 +123,12 @@ async function cleanPriorData(path, type) {
 		if (type === 'courses') {
 			// erase any old items from this sourcePath
 			let oldItems = await db.store('courses').index('sourcePath').getAll(range({ eq: path }))
-			ops = zipObject(map(oldItems, item => ([item.clbid, null])))
+			ops = fromPairs(map(oldItems, item => ([item.clbid, null])))
 		}
 		else if (type === 'areas') {
 			// erase any old items with this path
 			let oldItems = await db.store('areas').getAll(range({ eq: path }))
-			ops = zipObject(map(oldItems, item => ([item.sourcePath, null])))
+			ops = fromPairs(map(oldItems, item => ([item.sourcePath, null])))
 		}
 		else {
 			throw new TypeError(`cleanPriorData(): "${type}" is not a valid store type`)
@@ -232,14 +232,14 @@ async function removeDuplicateAreas() {
 	for (let duplicatesList of withDuplicates) {
 		duplicatesList = sortBy(duplicatesList, area => area.sourcePath.length)
 		duplicatesList.shift() // take off the shortest one
-		ops = {...ops, ...zipObject(map(duplicatesList, item => ([item.sourcePath, null])))}
+		ops = {...ops, ...fromPairs(map(duplicatesList, item => ([item.sourcePath, null])))}
 	}
 
 	// remove any that are invalid
 	// --- something about any values that aren't objects
 
 	const invalidAreas = filter(allAreas, area => some(['name', 'revision', 'type'], key => area[key] === undefined))
-	ops = {...ops, ...zipObject(map(invalidAreas, item => ([item.sourcePath, null])))}
+	ops = {...ops, ...fromPairs(map(invalidAreas, item => ([item.sourcePath, null])))}
 
 	try {
 		await db.store('areas').batch(ops)

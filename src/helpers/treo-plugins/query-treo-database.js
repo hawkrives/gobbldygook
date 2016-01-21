@@ -1,6 +1,6 @@
 import includes from 'lodash/collection/includes'
 import filter from 'lodash/collection/filter'
-import first from 'lodash/array/first'
+import head from 'lodash/array/head'
 import isString from 'lodash/lang/isString'
 import {default as extractKeys} from 'lodash/object/keys'
 import last from 'lodash/array/last'
@@ -9,6 +9,7 @@ import map from 'lodash/collection/map'
 import reject from 'lodash/collection/reject'
 import size from 'lodash/collection/size'
 import uniq from 'lodash/array/uniq'
+import sortedUniq from 'lodash/array/sortedUniq'
 import flatten from 'lodash/array/flatten'
 import startsWith from 'lodash/string/startsWith'
 import sortBy from 'lodash/collection/sortBy'
@@ -138,9 +139,9 @@ function queryIndex(query, primaryKeysOnly=false) {
 
 		// If we have any keys, sort them according to the IDB spec
 		keys = sortBy(keys, idbComparison)
-		keys = uniq(keys, true)
+		keys = sortedUniq(keys)
 
-		let firstKey = first(keys)
+		let firstKey = head(keys)
 		let lastKey = last(keys)
 
 		// A range to limit ourselves to

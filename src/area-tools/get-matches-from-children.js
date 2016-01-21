@@ -7,7 +7,7 @@ import isRequirementName from './is-requirement-name'
 import keys from 'lodash/object/keys'
 import map from 'lodash/collection/map'
 import stringify from 'json-stable-stringify'
-import uniq from 'lodash/array/uniq'
+import uniqBy from 'lodash/array/uniqBy'
 
 /**
  * Extract the matched courses from all children.
@@ -41,7 +41,7 @@ export default function getMatchesFromChildren(expr, ctx) {
 	// finally, collect the matching courses from the requested children
 	const matches = map(childKeys, key => collectMatches(ctx[key]))
 	const flatMatches = flatten(matches)
-	const uniquedMatches = uniq(flatMatches, stringify)
+	const uniquedMatches = uniqBy(flatMatches, stringify)
 
 	return uniquedMatches
 }

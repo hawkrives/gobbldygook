@@ -15,8 +15,8 @@ import {SORT_BY, GROUP_BY} from '../../../components/course-searcher-options'
 
 import includes from 'lodash/collection/includes'
 import uniq from 'lodash/array/uniq'
-import flatten from 'lodash/array/flatten'
-import pairs from 'lodash/object/pairs'
+import flatMap from 'lodash/array/flatMap'
+import toPairs from 'lodash/object/toPairs'
 import round from 'lodash/math/round'
 import { oxford } from 'humanize-plus'
 import map from 'lodash/collection/map'
@@ -31,8 +31,8 @@ const DAY_OF_WEEK = course => course.offerings
 	: 'No Days Listed'
 
 const TIME_OF_DAY = course => course.offerings
-	? oxford(sortBy(uniq(flatten(map(course.offerings, offer =>
-		map(offer.times, time => `${to12Hour(time.start)}-${to12Hour(time.end)}`))))))
+	? oxford(sortBy(uniq(flatMap(course.offerings, offer =>
+		map(offer.times, time => `${to12Hour(time.start)}-${to12Hour(time.end)}`)))))
 	: 'No Times Listed'
 
 const DEPARTMENT = course => course.depts ? buildDept(course) : 'No Department'
@@ -68,7 +68,7 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 	const sorted = sortBy(rawResults, sortByArgs)
 
 	// Group them by term, then turn the object into an array of pairs.
-	const groupedAndPaired = pairs(groupBy(sorted, GROUP_BY_TO_KEY[grouping]))
+	const groupedAndPaired = toPairs(groupBy(sorted, GROUP_BY_TO_KEY[grouping]))
 
 	// Sort the result arrays by the first element, the term, because
 	// object keys don't have an implicit sort.

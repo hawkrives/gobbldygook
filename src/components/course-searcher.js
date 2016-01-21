@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import groupBy from 'lodash/collection/groupBy'
 import map from 'lodash/collection/map'
-import sortBy from 'lodash/collection/sortBy'
 import toPrettyTerm from '../helpers/to-pretty-term'
 
 import Button from './button'

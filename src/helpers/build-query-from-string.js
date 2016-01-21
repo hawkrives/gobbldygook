@@ -1,12 +1,12 @@
-import isArray from 'lodash/lang/isArray'
-import contains from 'lodash/collection/contains'
 import filter from 'lodash/collection/filter'
 import flatten from 'lodash/array/flatten'
+import includes from 'lodash/collection/includes'
+import isArray from 'lodash/lang/isArray'
 import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'
 import partition from 'lodash/collection/partition'
-import pairs from 'lodash/object/pairs'
 import startsWith from 'lodash/string/startsWith'
+import toPairs from 'lodash/object/toPairs'
 import trim from 'lodash/string/trim'
 import unzip from 'lodash/array/unzip'
 
@@ -111,11 +111,11 @@ function organizeValues([key, values], {words=false, profWords=false}={}) {
 			val = parseFloat(val)
 		}
 
-		else if (contains(['year', 'term', 'level', 'num', 'groupid', 'clbid', 'crsid'], key)) {
+		else if (includes(['year', 'term', 'level', 'num', 'groupid', 'clbid', 'crsid'], key)) {
 			val = parseInt(val, 10)
 		}
 
-		else if (contains(['title', 'name', 'notes', 'description', 'words'], key)) {
+		else if (includes(['title', 'name', 'notes', 'description', 'words'], key)) {
 			if (words || key === 'words') {
 				val = splitParagraph(val)
 				key = 'words'
@@ -186,7 +186,7 @@ export default function buildQueryFromString(queryString='', opts={}) {
 	let zipped = zipToObjectWithArrays(keys, values)
 
 	// Perform initial cleaning of the values, dependent on the keys
-	let paired = unzip(map(pairs(zipped), kvpairs => organizeValues(kvpairs, opts)))
+	let paired = unzip(map(toPairs(zipped), kvpairs => organizeValues(kvpairs, opts)))
 
 	let organized = zipToObjectWithArrays(...paired) // spread the [k, v] pairs into the arguments properly
 

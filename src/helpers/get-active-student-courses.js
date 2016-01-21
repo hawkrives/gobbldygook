@@ -1,7 +1,6 @@
-import uniq from 'lodash/array/uniq'
+import uniqBy from 'lodash/array/uniqBy'
 import filter from 'lodash/collection/filter'
-import map from 'lodash/collection/map'
-import flatten from 'lodash/array/flatten'
+import flatMap from 'lodash/collection/flatMap'
 
 export default function getActiveStudentCourses(student) {
 	// - At it's core, this method just needs to get the list of courses that a student has chosen.
@@ -13,8 +12,8 @@ export default function getActiveStudentCourses(student) {
 	//   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 
 	const activeSchedules = filter(student.schedules, {active: true})
-	let courses = flatten(map(activeSchedules, s => s.courses))
-	courses = uniq(filter(courses, c => c), course => course.clbid)
+	let courses = flatMap(activeSchedules, s => s.courses)
+	courses = uniqBy(filter(courses, c => c), course => course.clbid)
 
 	return courses
 }
