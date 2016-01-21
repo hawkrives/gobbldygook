@@ -1,4 +1,4 @@
-import includes from 'lodash/collection/includes'
+import includes from 'lodash/includes'
 import path from 'path'
 import {readdirSync} from 'graceful-fs'
 import junk from 'junk'

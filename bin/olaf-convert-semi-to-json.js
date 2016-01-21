@@ -6,9 +6,9 @@
 
 const fs = require('graceful-fs')
 const nomnom = require('nomnom')
-const partition = require('lodash/collection/partition')
-const unzip = require('lodash/array/unzip')
-const first = require('lodash/array/first')
+const partition = require('lodash/partition')
+const unzip = require('lodash/unzip')
+const head = require('lodash/head')
 
 const args = nomnom()
 	.option('file', {
@@ -36,5 +36,5 @@ let onlyMajors = splitten.slice(0, indexOfFirstCourse)
 
 console.log(JSON.stringify({
 	studies: onlyMajors.map(m => ({type: 'major', name: m})),
-	clbids: onlyCoursesAndGereqs.map(cAndGe => first(cAndGe)).filter(s => s.trim().length).map(c => Number(c)),
+	clbids: onlyCoursesAndGereqs.map(cAndGe => head(cAndGe)).filter(s => s.trim().length).map(c => Number(c)),
 }, null, 2))

@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 import {status, json, text} from '../../src/helpers/fetch-helpers'
 
-import startsWith from 'lodash/string/startsWith'
+import startsWith from 'lodash/startsWith'
 import yaml from 'js-yaml'
 
 import Promise from 'bluebird'

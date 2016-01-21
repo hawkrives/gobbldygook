@@ -1,11 +1,11 @@
 import {tryReadJsonFile} from './read-file'
 
-import flatten from 'lodash/array/flatten'
-import filter from 'lodash/collection/filter'
-import forEach from 'lodash/collection/forEach'
-import uniq from 'lodash/array/uniq'
-import isString from 'lodash/lang/isString'
-import sortByAll from 'lodash/collection/sortByAll'
+import flatten from 'lodash/flatten'
+import filter from 'lodash/filter'
+import forEach from 'lodash/forEach'
+import uniqBy from 'lodash/uniqBy'
+import isString from 'lodash/isString'
+import sortBy from 'lodash/sortBy'
 
 import {cacheDir} from './dirs'
 
@@ -15,7 +15,7 @@ const fs = Promise.promisifyAll(fsCallbacks)
 
 import {checkForStaleData} from './update-local-data-cache'
 
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 import path from 'path'
 
 import quacksLikeDeptNum from '../../src/helpers/quacks-like-dept-num'
@@ -43,11 +43,11 @@ export default async function search({riddles, unique, sort}={}) {
 	})
 
 	if (unique) {
-		filtered = uniq(filtered, unique)
+		filtered = uniqBy(filtered, unique)
 	}
 
 	if (sort) {
-		filtered = sortByAll(filtered, flatten(sort))
+		filtered = sortBy(filtered, flatten(sort))
 	}
 
 	return filtered

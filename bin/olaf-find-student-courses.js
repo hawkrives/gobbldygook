@@ -8,15 +8,15 @@ import populateCourses from './lib/populate-courses'
 import simplifyCourse from '../src/area-tools/simplify-course'
 import loadArea from './lib/load-area'
 import evaluate from '../src/area-tools/evaluate'
-import uniq from 'lodash/array/uniq'
-import flatten from 'lodash/array/flatten'
-import reject from 'lodash/collection/reject'
-import pluck from 'lodash/collection/pluck'
-import includes from 'lodash/collection/includes'
-import repeat from 'lodash/string/repeat'
-import find from 'lodash/collection/find'
-import pairs from 'lodash/object/pairs'
-import first from 'lodash/array/first'
+import uniqBy from 'lodash/uniqBy'
+import flatten from 'lodash/flatten'
+import reject from 'lodash/reject'
+import pluck from 'lodash/pluck'
+import includes from 'lodash/includes'
+import repeat from 'lodash/repeat'
+import find from 'lodash/find'
+import toPairs from 'lodash/toPairs'
+import head from 'lodash/head'
 
 async function populateStudent(filename) {
 	let student
@@ -73,13 +73,13 @@ function evaluateStudentAgainstEachMajor(student) {
 
 	///
 
-	let [name, coursesUsedInMajor] = first(pairs(countedTowardsMajors))
+	let [name, coursesUsedInMajor] = head(toPairs(countedTowardsMajors))
 
-	let usedCourses = uniq([...coursesUsedInMajor, ...countedTowardsDegree], simplifyCourse)
+	let usedCourses = uniqBy([...coursesUsedInMajor, ...countedTowardsDegree], simplifyCourse)
 	let usedClbids = pluck(usedCourses, 'clbid')
 
 	let unusedCourses = reject(
-		uniq([...student.courses, ...flatten(countedTowardsMajors), ...countedTowardsDegree], simplifyCourse),
+		uniqBy([...student.courses, ...flatten(countedTowardsMajors), ...countedTowardsDegree], simplifyCourse),
 		c => includes(usedClbids, c.clbid))
 
 	console.log(makeHeading(`${`Used for ${name}… (result: ${find(areas, {name}).computed})`}`))

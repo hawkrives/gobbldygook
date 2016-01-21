@@ -1,13 +1,12 @@
 import fs from 'graceful-fs'
 import evaluate from '../src/area-tools/evaluate'
-import endsWith from 'lodash/string/endsWith'
+import endsWith from 'lodash/endsWith'
 import junk from 'junk'
 import nom from 'nomnom'
 import ms from 'pretty-ms'
-import range from 'lodash/utility/range'
-import size from 'lodash/collection/size'
+import range from 'lodash/range'
 import sparkly from 'sparkly'
-import sum from 'lodash/collection/sum'
+import mean from 'lodash/mean'
 import loadArea from '../bin/lib/load-area'
 
 function now(other=[]) {
@@ -36,7 +35,7 @@ async function benchmark({runs, graph}) {
 				return now(start)
 			})
 
-			const avg = sum(times) / size(times)
+			const avg = mean(times)
 			if (graph) {
 				console.log(`  ${sparkly(times, {min: 0})}`)
 			}
