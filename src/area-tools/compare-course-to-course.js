@@ -1,4 +1,4 @@
-import isEqual from 'lodash/isEqual'
+import isEqualWith from 'lodash/isEqualWith'
 import every from 'lodash/every'
 import keys from 'lodash/keys'
 import filter from 'lodash/filter'
@@ -16,8 +16,8 @@ const baseKeys = [
 ]
 
 /**
- * Used as a customizer for `isEqual`; checks if the left-side is a wildcard,
- * and returns as appropriate. `isEqual` falls back to the default comparison
+ * Used as a customizer for `isEqualWith`; checks if the left-side is a wildcard,
+ * and returns as appropriate. `isEqualWith` falls back to the default comparison
  * if the customizer returns `undefined`, so we take advantage of that here.
  *
  * @private
@@ -57,5 +57,5 @@ export default function compareCourseToCourse(query, other) {
 
 	// We only check the specified keys.
 	// If any of them are not equal, we return false.
-	return every(keysToCheck, key => isEqual(query[key], other[key], wildcard))
+	return every(keysToCheck, key => isEqualWith(query[key], other[key], wildcard))
 }
