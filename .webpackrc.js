@@ -57,6 +57,11 @@ const config = {
 		stats: false,
 	},
 
+	node: {
+		process: false,
+		Buffer: false,
+	},
+
 	resolve: {
 		extensions: [
 			'',
