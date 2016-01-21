@@ -4,7 +4,6 @@ import filter from 'lodash/collection/filter'
 import flatten from 'lodash/array/flatten'
 import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'
-import parseInt from 'lodash/string/parseInt'
 import partition from 'lodash/collection/partition'
 import pairs from 'lodash/object/pairs'
 import startsWith from 'lodash/string/startsWith'
@@ -90,7 +89,7 @@ function organizeValues([key, values], {words=false, profWords=false}={}) {
 
 		else if (key === 'semester') {
 			val = val.toLowerCase()
-			val = semesters[val] || parseInt(val)
+			val = semesters[val] || parseInt(val, 10)
 		}
 
 		else if (key === 'instructors') {
@@ -113,7 +112,7 @@ function organizeValues([key, values], {words=false, profWords=false}={}) {
 		}
 
 		else if (contains(['year', 'term', 'level', 'num', 'groupid', 'clbid', 'crsid'], key)) {
-			val = parseInt(val)
+			val = parseInt(val, 10)
 		}
 
 		else if (contains(['title', 'name', 'notes', 'description', 'words'], key)) {
