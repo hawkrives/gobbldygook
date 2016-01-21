@@ -8,7 +8,7 @@ import {
 	INIT_STUDENT,
 } from '../constants'
 
-export default function initStudent() {
+export function initStudent() {
 	let student = new Student()
 
 	forEach(range(student.matriculation, student.graduation), year => {

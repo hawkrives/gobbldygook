@@ -54,7 +54,7 @@ export function validateSchedules(studentId) {
 	}
 }
 
-export default function checkStudent(studentId) {
+export function checkStudent(studentId) {
 	return dispatch => {
 		return dispatch(getStudentData(studentId))
 			.then(() => dispatch(validateSchedules(studentId)))

@@ -6,7 +6,7 @@ import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 import map from 'lodash/map'
 
-import checkStudent from '../students/actions/check-student'
+import {checkStudent} from '../students/actions/check-student'
 
 const whitelist = [
 	studentConstants.LOAD_STUDENTS,
