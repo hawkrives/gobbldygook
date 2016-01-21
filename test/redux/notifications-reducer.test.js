@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import find from 'lodash/collection/find'
+import find from 'lodash/find'
 
 import {
 	INCREMENT_PROGRESS,

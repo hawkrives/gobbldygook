@@ -1,7 +1,7 @@
 import {expect} from 'chai'
-import cloneDeep from 'lodash/lang/cloneDeep'
-import reject from 'lodash/collection/reject'
-import omit from 'lodash/object/omit'
+import cloneDeep from 'lodash/cloneDeep'
+import reject from 'lodash/reject'
+import omit from 'lodash/omit'
 import {v4 as uuid} from 'uuid'
 
 import {
@@ -33,7 +33,7 @@ describe('saveStudent', () => {
 		expect(actualStudentIds).to.deep.equal(expectedStudentIds)
 		let expectedStudent = student
 		let actualStudent = JSON.parse(localStorage.getItem(student.id))
-		expect(omit(actualStudent, ['dateLastModified'])).to.deep.equal(expectedStudent)
+		expect(omit(actualStudent, 'dateLastModified')).to.deep.equal(expectedStudent)
 	})
 })
 

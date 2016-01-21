@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import mock from 'mock-require'
-import noop from 'lodash/utility/noop'
+import noop from 'lodash/noop'
 
 mock('../../src/models/student', {
 	__esModule: true,

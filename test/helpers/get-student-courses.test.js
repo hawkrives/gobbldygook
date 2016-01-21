@@ -8,14 +8,14 @@ mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock').defau
 mock('../../src/helpers/load-area', require('../mocks/load-area.mock').default)
 import Student from '../../src/models/student'
 
-import size from 'lodash/collection/size'
-import filter from 'lodash/collection/filter'
-import pluck from 'lodash/collection/pluck'
+import size from 'lodash/size'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
 
 describe('getStudentCourses', () => {
 	it('only returns courses from active schedules', () => {
 		const stu = Student(demoStudent)
-		let courseCountFromActive = size(pluck(filter(demoStudent.schedules, 'active'), 'clbids'))
+		let courseCountFromActive = size(map(filter(demoStudent.schedules, 'active'), 'clbids'))
 		getStudentCourses(stu).then(courses => expect(courses.length).to.equal(courseCountFromActive))
 	})
 })

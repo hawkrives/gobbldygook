@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import mock from 'mock-require'
 import demoStudent from '../../src/models/demo-student.json'
-import find from 'lodash/collection/find'
-import findIndex from 'lodash/array/findIndex'
+import find from 'lodash/find'
+import findIndex from 'lodash/findIndex'
 import stringify from 'json-stable-stringify'
 
 mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock').default)
