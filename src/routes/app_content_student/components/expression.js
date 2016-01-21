@@ -4,7 +4,7 @@ import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
 
 import map from 'lodash/collection/map'
-import sortByOrder from 'lodash/collection/sortByOrder'
+import orderBy from 'lodash/collection/orderBy'
 import cx from 'classnames'
 import plur from 'plur'
 import humanizeOperator from '../../../area-tools/humanize-operator'
@@ -48,7 +48,7 @@ const ofLookup = {
 function makeOfExpression({expr, ctx}) {
 	const description = ofLookup[expr.$count.$was] || `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
 
-	const contents = map(sortByOrder(expr.$of, ['_result'], ['desc']), (ex, i) =>
+	const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
 		<Expression key={i} expr={ex} ctx={ctx} />)
 
 	return {description, contents}

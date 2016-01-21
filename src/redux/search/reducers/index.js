@@ -9,7 +9,6 @@ import {
 } from '../constants'
 
 import groupBy from 'lodash/collection/groupBy'
-import sortByAll from 'lodash/collection/sortByAll'
 import sortBy from 'lodash/collection/sortBy'
 
 import {SORT_BY, GROUP_BY} from '../../../components/course-searcher-options'
@@ -66,7 +65,7 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 	// TODO: Speed this up! This preperation stuff takes ~230ms by itself,
 	// with enough courses rendered. (like, say, {year: 2012})
 	const sortByArgs = ['year', 'deptnum', 'semester', 'section'].concat(SORT_BY_TO_KEY[sorting])
-	const sorted = sortByAll(rawResults, sortByArgs)
+	const sorted = sortBy(rawResults, sortByArgs)
 
 	// Group them by term, then turn the object into an array of pairs.
 	const groupedAndPaired = pairs(groupBy(sorted, GROUP_BY_TO_KEY[grouping]))

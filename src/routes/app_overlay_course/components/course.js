@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import map from 'lodash/collection/map'
-import sortByAll from 'lodash/collection/sortByAll'
+import sortBy from 'lodash/collection/sortBy'
 import groupBy from 'lodash/collection/groupBy'
 import flatten from 'lodash/array/flatten'
 import {oxford} from 'humanize-plus'
@@ -19,7 +19,7 @@ function findSemesterList(student) {
 		...s, title: `${semesterName(s.semester)} – ${s.title}`,
 	}))
 
-	let sorted = sortByAll(schedules, ['year', 'semester'])
+	let sorted = sortBy(schedules, ['year', 'semester'])
 	let byYear = groupBy(sorted, 'year')
 
 	return byYear
