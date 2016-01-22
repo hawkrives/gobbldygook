@@ -9,7 +9,6 @@ import map from 'lodash/map'
 import {checkStudent} from '../students/actions/check-student'
 
 const whitelist = [
-	studentConstants.LOAD_STUDENT,
 	studentConstants.INIT_STUDENT,
 	studentConstants.IMPORT_STUDENT,
 	studentConstants.CHANGE_CREDITS_NEEDED,
