@@ -6,6 +6,8 @@ import { loadStudent } from '../../../redux/students/actions/load-student'
 
 import Sidebar from '../../../containers/sidebar'
 import Loading from '../../../components/loading'
+
+import CourseTable from '../../student_content_course-table/containers/course-table'
 import GraduationStatus from './graduation-status'
 
 import './student.scss'
@@ -46,18 +48,28 @@ export class Student extends Component {
 
 		const name = this.props.student ? this.props.student.data.present.name : 'Loading…'
 
-		const sidebarContents = this.props.sidebar
-			? cloneElement(this.props.sidebar, {student: this.props.student.data.present})
-			: <GraduationStatus student={this.props.student.data.present} />
+		const contentProps = {student: this.props.student, className: 'content'}
+		const contents = this.props.content
+			? cloneElement(this.props.content, contentProps)
+			: <CourseTable {...contentProps} />
+
+		const sidebarProps = {student: this.props.student.data.present}
+		const sidebar = this.props.sidebar
+			? cloneElement(this.props.sidebar, sidebarProps)
+			: <GraduationStatus {...sidebarProps} />
+
+		const overlay = this.props.overlay
+			? cloneElement(this.props.overlay, {student: this.props.student.data.present})
+			: null
 
 		return (
 			<DocumentTitle title={`${name} | Gobbldygook`}>
 				<div className='student'>
 					<Sidebar student={this.props.student}>
-						{sidebarContents}
+						{sidebar}
 					</Sidebar>
-					{cloneElement(this.props.content, {student: this.props.student, className: 'content'})}
-					{this.props.overlay && cloneElement(this.props.overlay, {student: this.props.student})}
+					{contents}
+					{overlay}
 				</div>
 			</DocumentTitle>
 		)
