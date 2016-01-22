@@ -9,7 +9,7 @@ import {groupResults, sortResults, submitQuery, updateQuery} from '../redux/sear
 export class CourseSearcherContainer extends Component {
 	static propTypes = {
 		closeSearcher: PropTypes.func.isRequired,
-		groupResults: PropTypes.func.isRequired,
+		groupResults: PropTypes.func.isRequired,  // redux
 		location: PropTypes.object, // redux
 		search: PropTypes.shape({
 			error: PropTypes.any.isRequired,
@@ -20,10 +20,10 @@ export class CourseSearcherContainer extends Component {
 			query: PropTypes.string.isRequired,
 			results: PropTypes.array.isRequired,
 			sortBy: PropTypes.string.isRequired,
-		}).isRequired,
-		sortResults: PropTypes.func.isRequired,
-		submitQuery: PropTypes.func.isRequired,
-		updateQuery: PropTypes.func.isRequired,
+		}).isRequired,  // redux
+		sortResults: PropTypes.func.isRequired,  // redux
+		submitQuery: PropTypes.func.isRequired,  // redux
+		updateQuery: PropTypes.func.isRequired,  // redux
 	};
 
 	shouldComponentUpdate(nextProps, nextState) {
