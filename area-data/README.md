@@ -29,7 +29,7 @@ In the most basic sense, an area of study file is a list of requirements, where 
 
 Each requirement must include either a `result` key, or a `message` key. (These key names are case-sensitive.) If no keys exist under a requirement, the value is parsed as a course expression, and implicitly assigned to `result`.
 
-If a `message` key is provided, the message is rendered with markdown and displayed before the result. If only a message key is provided. It is rendered and shown with a button for easy acquiescence (to the demands of the message.)
+If a `message` key is provided, the message is rendered with markdown and displayed before the result. If only a message key is provided, it is rendered and shown with a button for easy acquiescence (to the demands of the message.)
 
 The values of the `result` and `message` keys are interpreted as strings. In order to remain readable, we recommend splitting the contents of the string over multiple lines once it gets long. The string may be split by any number of line breaks, as long as the first non-whitespace character on the line is indented past the first character of the key.
 
@@ -65,7 +65,7 @@ The top level must have at least four keys: `name`, `type`, `revision`, and `res
 
 ### Course Expressions
 
-A course expression is a powerful construct. It can be as simple as "the user must have taken Computer Science 111," or as complex as "one course with both the EIN general education requirement *and* taken in a year before (or in the same year as) the highest year from courses with the BTS-T general education requirement," or really anything in-between.
+A course expression is a powerful construct. It can be as simple as "the user must have taken Computer Science 111," or as complex as "one course with both the EIN general education requirement *and* taken in a year after (or in the same year as) the lowest year from courses with the BTS-T general education requirement," or really anything in-between.
 
 The most basic course expression is a single course. A single course is specified, at the simplest level, by the department abbreviation, a space, then the course number, like `CSCI 115` or `AS/RE 150`. If you use a dual-department course, it must use the short abbreviations of the departments—AS instead of ASIAN, AR instead of ART—separated by a forward-slash (the `/` character.)
 
@@ -97,7 +97,7 @@ That's why we support "of-expressions."
 
 of-expressions may contain any of the expressions detailed in this document. `three of (CSCI 121 & 125, 241, 251 & 252)` is valid.
 
-The number at the beginning of the of-expression may be any number between `zero` and `twenty`, or one of the words `all`, `any`, or `none`.
+The number at the beginning of the of-expression may be any number between `zero` and `ten`, or one of the words `all`, `any`, or `none`.
 
 `none` equates to `zero`—that is, the student must have taken zero of the courses listed to pass the expression. `any` equates to `one`, and `all` is evaluated to be the number of items within the of-expression.
 
@@ -178,7 +178,7 @@ When you need more power, you may reach for where-expressions, modifiers, and fi
 
 A where-expression is composed of two parts: a counter and a qualifier.
 
-The counter is the same as in an of-expression; an English number between zero and twenty. A qualifier is made up of one or more qualifications, surrounded by curly braces.
+The counter is the same as in an of-expression; an English number between zero and ten. A qualifier is made up of one or more qualifications, surrounded by curly braces.
 
 A qualification is a `key`/`value` pair representing a property/value pair to look for. Qualifiers operate on a list of courses, filtering the list to only those courses which qualify.
 
