@@ -1,16 +1,19 @@
 import React, {PropTypes} from 'react'
 
-import includes from 'lodash/includes'
 import difference from 'lodash/difference'
-import union from 'lodash/union'
-import values from 'lodash/values'
+import filter from 'lodash/filter'
 import find from 'lodash/find'
+import groupBy from 'lodash/groupBy'
+import includes from 'lodash/includes'
+import keys from 'lodash/keys'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
-import groupBy from 'lodash/groupBy'
-import uniq from 'lodash/uniq'
-import keys from 'lodash/keys'
 import pick from 'lodash/pick'
+import pickBy from 'lodash/pickBy'
+import toPairs from 'lodash/toPairs'
+import union from 'lodash/union'
+import uniq from 'lodash/uniq'
+import values from 'lodash/values'
 
 import AreaOfStudyGroup from './area-of-study-group'
 import Button from '../../../components/button'
@@ -50,7 +53,7 @@ export default function AreaOfStudySidebar(props) {
 
 	const areaTypesToShowButtonsFor = union(
 		usedAreaTypes,
-		keys(pick(showAreaPickerFor, k => k === true)))
+		keys(pickBy(showAreaPickerFor, k => k === true)))
 
 	const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
 
@@ -71,10 +74,10 @@ export default function AreaOfStudySidebar(props) {
 		</section>
 	) : null
 
-	const unusedTypesToShow = pick(showAreaPickerFor,
-		(toShow, type) => toShow === true && !includes(usedAreaTypes, type))
+	const unusedTypesToShow = filter(toPairs(showAreaPickerFor),
+		([type, toShow]) => toShow === true && !includes(usedAreaTypes, type))
 
-	const unusedTypesToShowComponents = map(unusedTypesToShow, (shouldShow, type) =>
+	const unusedTypesToShowComponents = map(unusedTypesToShow, ([type, shouldShow]) =>
 		<AreaOfStudyGroup key={type}
 			allAreasOfType={allAreasGrouped[type] || []}
 			areas={[]}
