@@ -1,9 +1,9 @@
 export default {
 	path: 'search',
-	getComponents(cb) {
+	getComponents(location, cb) {
 		require.ensure([], () => {
 			cb(null, {
-				sidebar: require('../../containers/course-searcher').default,
+				sidebar: require('./containers/search-sidebar').default,
 			})
 		})
 	},
