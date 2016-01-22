@@ -7,5 +7,5 @@ import sumBy from 'lodash/sumBy'
  * @returns {number} - the sum of the 'credits' properties
  */
 export default function countCredits(courses=[]) {
-	return sumBy(courses, 'credits')
+	return sumBy(courses, 'credits') || 0
 }
