@@ -1,22 +1,23 @@
 @import '../../../base/variables';
 
 .student {
+	height: 100vh;
+
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
+
 	@media all and (max-width: $single-column-width) {
 		flex-flow: column nowrap;
 	}
 }
 
 .student > .content {
-	flex: 1;
+	flex: 2;
 
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: stretch;
 
-	@media all and (min-width: $single-column-width) {
-		margin-left: $sidebar-width + $page-edge-padding;
-	}
+	margin-right: $page-edge-padding;
 }

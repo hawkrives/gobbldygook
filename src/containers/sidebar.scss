@@ -2,18 +2,12 @@
 @import '../mixins/link-undecorated';
 
 .sidebar {
-	width: 100%;
+	flex: 1;
 
 	@media all and (min-width: $single-column-width) {
-		position: fixed;
-		overflow-y: scroll;
-
-		top: 0;
-		padding-top: $page-edge-padding;
-
-		height: 100vh;
-		width: $sidebar-width;
-		padding-bottom: 25vh;
+		max-width: 280px;
+		padding-left: $page-edge-padding;
+		padding-right: $page-edge-padding * (2/3);
 	}
 
 	.toolbar a {

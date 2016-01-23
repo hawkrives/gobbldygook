@@ -22,12 +22,19 @@ html {
 }
 
 body {
-	margin: $page-edge-padding;
+	height: 100%;
 }
+
 
 menu {
 	padding: 0;
 	margin: 0;
+}
+
+.sidebar, .content {
+	padding-top: $page-edge-padding;
+	padding-bottom: 15vh;
+	overflow-y: scroll;
 }
 
 // hide the St. Olaf disclaimer
