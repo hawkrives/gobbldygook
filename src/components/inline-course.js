@@ -16,28 +16,6 @@ import Icon from './icon'
 
 import './inline-course.scss'
 
-// Implements the drag source contract.
-const courseSource = {
-	beginDrag(props) {
-		const scheduleId = props.schedule ? props.schedule.id : null
-		return {
-			isFromSchedule: scheduleId !== null,
-			isFromSearch: scheduleId === null,
-			clbid: props.course.clbid,
-			groupid: props.course.groupid,
-			fromScheduleId: scheduleId,
-		}
-	},
-}
-
-// Specifies the props to inject into your component.
-function collect(connect, monitor) {
-	return {
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}
-}
-
 class Course extends Component {
 	static propTypes = {
 		conflicts: PropTypes.array,
@@ -114,6 +92,28 @@ class Course extends Component {
 				</div>
 			</article>
 		)
+	}
+}
+
+// Implements the drag source contract.
+const courseSource = {
+	beginDrag(props) {
+		const scheduleId = props.schedule ? props.schedule.id : null
+		return {
+			isFromSchedule: scheduleId !== null,
+			isFromSearch: scheduleId === null,
+			clbid: props.course.clbid,
+			groupid: props.course.groupid,
+			fromScheduleId: scheduleId,
+		}
+	},
+}
+
+// Specifies the props to inject into your component.
+function collect(connect, monitor) {
+	return {
+		connectDragSource: connect.dragSource(),
+		isDragging: monitor.isDragging(),
 	}
 }
 
