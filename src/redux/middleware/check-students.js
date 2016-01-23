@@ -5,6 +5,7 @@ import * as courseConstants from '../courses/constants'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 import map from 'lodash/map'
+import toArray from 'lodash/toArray'
 
 import {checkStudent} from '../students/actions/check-student'
 
@@ -58,8 +59,18 @@ const checkStudentsMiddleware = store => next => action => {
 	const newState = store.getState()
 	const newStudents = newState.students
 
-	const affectedStudents = filter(newStudents, (_, id) =>
-		newStudents[id].data.present !== oldStudents[id].data.present)
+	let affectedStudents = []
+
+	if (action.type === areaConstants.REFRESH_AREAS) {
+		affectedStudents = toArray(newStudents)
+	}
+	else if (action.type === courseConstants.REFRESH_COURSES) {
+		affectedStudents = toArray(newStudents)
+	}
+	else {
+		affectedStudents = filter(newStudents, (_, id) =>
+			newStudents[id].data.present !== oldStudents[id].data.present)
+	}
 
 	// check them
 	const promises = map(affectedStudents, s =>
