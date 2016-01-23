@@ -1,9 +1,13 @@
 import React, {PropTypes} from 'react'
+import {findDOMNode} from 'react-dom'
 import cx from 'classnames'
 import {Link} from 'react-router'
 import plur from 'plur'
 import semesterName from '../../../helpers/semester-name'
 import countCredits from '../../../area-tools/count-credits'
+import itemTypes from '../../../models/item-types'
+import {DropTarget} from 'react-dnd'
+import includes from 'lodash/includes'
 
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
@@ -48,7 +52,7 @@ export default function Semester(props) {
 	})
 
 	return (
-		<div className={className}>
+		<div className={className} ref={instance => props.connectDropTarget(findDOMNode(instance))}>
 			<header className='semester-title'>
 				<Link
 					className='semester-header'
@@ -62,13 +66,12 @@ export default function Semester(props) {
 				</Link>
 
 				<span className='buttons'>
-					<Button
+					<Link to={`/s/${student.id}/search/${year}/${semester}`}><Button
 						className='add-course'
-						onClick={props.initiateSearch}
 						title='Search for courses'
 					>
 						<Icon name='search' /> Course
-					</Button>
+					</Button></Link>
 					<Button
 						className='remove-semester'
 						onClick={props.removeSemester}
@@ -85,12 +88,51 @@ export default function Semester(props) {
 }
 
 Semester.propTypes = {
+	addCourse: PropTypes.func.isRequired,  // redux
 	canDrop: PropTypes.bool.isRequired,
-	initiateSearch: PropTypes.func.isRequired,
+	connectDropTarget: PropTypes.func.isRequired,
 	isOver: PropTypes.bool.isRequired,
+	moveCourse: PropTypes.func.isRequired, // redux
 	removeSemester: PropTypes.func.isRequired,
 	schedule: PropTypes.object.isRequired,
 	semester: PropTypes.number.isRequired,
 	student: PropTypes.object.isRequired,
 	year: PropTypes.number.isRequired,
 }
+
+// Implements the drag source contract.
+const semesterTarget = {
+	drop(props, monitor, component) {
+		console.log('dropped course')
+		const item = monitor.getItem()
+		const {clbid, fromScheduleId, isFromSchedule} = item
+		// we use component.props here in order to allow dropping from a not-semester onto a semester
+		// wait...
+		const toSchedule = props.schedule
+
+		if (isFromSchedule) {
+			props.moveCourse(props.student.id, fromScheduleId, toSchedule.id, clbid)
+		}
+		else {
+			props.addCourse(props.student.id, toSchedule.id, clbid)
+		}
+	},
+	canDrop(props, monitor) {
+		const item = monitor.getItem()
+		console.log('canDrop', props)
+		return !includes(props.schedule.clbids, item.clbid)
+	},
+}
+
+// Specifies the props to inject into your component.
+function collect(connect, monitor) {
+	return {
+		connectDropTarget: connect.dropTarget(),
+		isOver: monitor.isOver(),
+		canDrop: monitor.canDrop(),
+	}
+}
+
+const droppable = DropTarget(itemTypes.COURSE, semesterTarget, collect)(Semester)
+
+export default droppable
