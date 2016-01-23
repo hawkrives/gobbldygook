@@ -27,6 +27,15 @@ function canAdd({query, value, primaryKey, results}={}) {
 	return checkAgainstQuery(query)(value) && !includes(results, primaryKey)
 }
 
+const preferredKeyOrder = ['deptnum']
+const sortKeys = key => {
+	let idx = preferredKeyOrder.indexOf(key)
+	if (idx >= 0) {
+		return idx
+	}
+	return undefined
+}
+
 function queryStore(query) {
 	return new Promise((resolvePromise, rejectPromise) => {
 		// Take a query object.
@@ -48,13 +57,10 @@ function queryStore(query) {
 		const indexKeys = extractKeys(query)
 
 		// Filter down to just the requested keys that also have indices
-		const keysWithIndices = filter(indexKeys, key => includes(this.indexes, key))
+		let keysWithIndices = filter(indexKeys, key => includes(this.indexes, key))
 
-		// <this is a very hacky way of prioritizing the deptnum>
-		if (includes(keysWithIndices, 'deptnum')) {
-			keysWithIndices.splice(findIndex(keysWithIndices, 'deptnum'), 1)
-			keysWithIndices.unshift('deptnum')
-		}
+		// Prioritize some keys over others
+		keysWithIndices = sortBy(keysWithIndices, sortKeys)
 
 		// If the current store has at least one index for a requested key,
 		// just run over that index.
