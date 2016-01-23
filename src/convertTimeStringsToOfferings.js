@@ -1,5 +1,5 @@
 import assign from 'lodash/assign'
-import mergeWith from 'lodash/mergewith'
+import mergeWith from 'lodash/mergeWith'
 import values from 'lodash/values'
 import zip from 'lodash/zip'
 import findDays from './findDays'

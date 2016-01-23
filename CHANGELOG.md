@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.2.8
+- Fix wrong case in filename of `lodash/mergeWith` import
+
 ## 2.2.7
 - Shrink the compiled bundle
 
