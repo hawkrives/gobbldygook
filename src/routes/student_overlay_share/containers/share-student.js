@@ -6,12 +6,21 @@ import Toolbar from '../../../components/toolbar'
 import Modal from '../../../components/modal'
 import List from '../../../components/list'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { routeActions } from 'redux-simple-router'
+
 import encodeStudent from '../../../helpers/encode-student'
 
 export default function ShareSheet(props) {
 	const { student } = props
-	// const boundCloseModal = () => closeModal(context.location, context.router)
-	const boundCloseModal = () => {}
+
+	if (!student) {
+		return null
+	}
+
+	const boundCloseModal = () => props.push({pathname: `/s/${props.params.studentId}/`})
+
 
 	const encoded = encodeStudent(student)
 
@@ -47,5 +56,11 @@ export default function ShareSheet(props) {
 }
 
 ShareSheet.propTypes = {
-	student: PropTypes.object.isRequired,
+	params: PropTypes.shape({
+		studentId: PropTypes.string.isRequired,
+	}),
+	student: PropTypes.object,
 }
+
+const mapDispatchToProps = dispatch => bindActionCreators({push: routeActions.push}, dispatch)
+export default connect(undefined, mapDispatchToProps)(ShareSheet)
