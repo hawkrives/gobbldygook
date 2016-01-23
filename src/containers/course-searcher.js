@@ -4,24 +4,26 @@ import { bindActionCreators } from 'redux'
 import compareProps from '../helpers/compare-props'
 import CourseSearcher from '../components/course-searcher'
 
-import {groupResults, sortResults, submitQuery, updateQuery} from '../redux/search/actions'
+import {groupResults, sortResults, submitQuery, updateQuery, setPartialQuery} from '../redux/search/actions'
 
 export class CourseSearcherContainer extends Component {
 	static propTypes = {
 		closeSearcher: PropTypes.func.isRequired,
 		groupResults: PropTypes.func.isRequired,  // redux
 		location: PropTypes.object, // redux
+		partial: PropTypes.shape({year: PropTypes.number, semester: PropTypes.number}),
 		search: PropTypes.shape({
 			error: PropTypes.any.isRequired,
 			groupBy: PropTypes.string.isRequired,
 			hasQueried: PropTypes.bool.isRequired,
 			inProgress: PropTypes.bool.isRequired,
-			partial: PropTypes.object.isRequired,
 			query: PropTypes.string.isRequired,
 			results: PropTypes.array.isRequired,
 			sortBy: PropTypes.string.isRequired,
 		}).isRequired,  // redux
+		setPartialQuery: PropTypes.func.isRequired,
 		sortResults: PropTypes.func.isRequired,  // redux
+		studentId: PropTypes.string,
 		submitQuery: PropTypes.func.isRequired,  // redux
 		updateQuery: PropTypes.func.isRequired,  // redux
 	};
@@ -31,6 +33,7 @@ export class CourseSearcherContainer extends Component {
 	}
 
 	handleQuerySubmit = () => {
+		this.props.setPartialQuery(this.props.partial)
 		this.props.submitQuery()
 	};
 
@@ -65,10 +68,11 @@ export class CourseSearcherContainer extends Component {
 				onQueryChange={this.handleQueryChange}
 				onQuerySubmit={this.handleQuerySubmit}
 				onSortChange={this.handleSortChange}
-				partial={this.props.search.partial}
+				partial={this.props.partial}
 				query={this.props.search.query}
 				results={this.props.search.results}
 				sortBy={this.props.search.sortBy}
+				studentId={this.props.studentId}
 			/>
 		)
 	}
@@ -80,6 +84,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch =>
-	bindActionCreators({groupResults, sortResults, submitQuery, updateQuery}, dispatch)
+	bindActionCreators({groupResults, sortResults, submitQuery, updateQuery, setPartialQuery}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseSearcherContainer)

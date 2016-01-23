@@ -51,9 +51,15 @@ export default function CourseSearcher(props) {
 		/>
 	}
 
-	let placeholderExtension = partial.term
-		? `(${toPrettyTerm(partial.term)})`
-		: ''
+	let placeholderExtension = ''
+	if (partial) {
+		if (partial.year && partial.semester) {
+			placeholderExtension = `(${toPrettyTerm(`${partial.year}${partial.semester}`)})`
+		}
+		else if (partial.year) {
+			placeholderExtension = `(${partial.year})`
+		}
+	}
 
 	return (
 		<div className='search-sidebar'>
@@ -126,7 +132,7 @@ CourseSearcher.propTypes = {
 	onQueryChange: PropTypes.func.isRequired,
 	onQuerySubmit: PropTypes.func.isRequired,
 	onSortChange: PropTypes.func.isRequired,
-	partial: PropTypes.object.isRequired,
+	partial: PropTypes.object,
 	query: PropTypes.string.isRequired,
 	results: PropTypes.array.isRequired,
 	sortBy: PropTypes.oneOf([...SORT_BY.values()]).isRequired,

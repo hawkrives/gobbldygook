@@ -2,6 +2,7 @@ import { ga } from '../../../analytics'
 import queryCourseDatabase from '../../../helpers/query-course-database'
 import present from 'present'
 import round from 'lodash/round'
+import mapValues from 'lodash/mapValues'
 
 import {
 	UPDATE_QUERY,
@@ -18,7 +19,10 @@ export function updateQuery(newQuery) {
 }
 
 export function setPartialQuery(partial) {
-	return { type: SET_PARTIAL_QUERY, payload: partial }
+	if (partial) {
+		partial = mapValues(partial, val => Array.isArray(val) ? val : [val])
+		return { type: SET_PARTIAL_QUERY, payload: partial }
+	}
 }
 
 export function clearResults() {

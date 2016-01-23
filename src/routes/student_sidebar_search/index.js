@@ -1,5 +1,5 @@
 export default {
-	path: 'search',
+	path: 'search(/:year)(/:semester)',
 	getComponents(location, cb) {
 		require.ensure([], () => {
 			cb(null, {
