@@ -40,7 +40,7 @@ export default function AreaOfStudyGroup(props) {
 
 			{map(props.areas, (area, i) =>
 				<AreaOfStudy area={area}
-					key={i}
+					key={i + area.name ? area.name : ''}
 					onAddOverride={props.onAddOverride}
 					onRemoveArea={props.onRemoveArea}
 					onRemoveOverride={props.onRemoveOverride}
