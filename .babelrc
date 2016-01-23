@@ -1,5 +1,5 @@
 {
-	"sourceMaps": "inline",
+	"sourceMaps": false,
 	"presets": [
 		"es2015",
 	],
