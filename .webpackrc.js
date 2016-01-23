@@ -96,7 +96,6 @@ const config = {
 
 		new ProvidePlugin({
 			Promise: 'bluebird',
-			debug: 'debug',
 		}),
 
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima

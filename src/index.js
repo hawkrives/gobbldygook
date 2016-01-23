@@ -13,9 +13,6 @@ import 'babel-runtime/regenerator'
 // Include fetch
 import 'isomorphic-fetch'
 
-// Add debug to window
-window.DEBUG = require('debug')
-
 // Include React and react-dom.render
 import React from 'react'
 import {render} from 'react-dom'

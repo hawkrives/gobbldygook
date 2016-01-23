@@ -106,7 +106,7 @@ export function addScheduleToStudent(student, newSchedule) {
 }
 
 export function destroyScheduleFromStudent(student, scheduleId) {
-	debug(`Student.destroySchedule(): removing schedule ${scheduleId}`)
+	!TESTING && console.log(`Student.destroySchedule(): removing schedule ${scheduleId}`)
 
 	if (student.schedules instanceof Array) {
 		throw new TypeError('destroyScheduleFromStudent: schedules must not be an array!')
@@ -151,7 +151,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 		return student
 	}
 
-	debug(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+	!TESTING && console.log(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	schedule.clbids = schedule.clbids.concat(clbid)
 
@@ -174,7 +174,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 		return student
 	}
 
-	debug(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+	!TESTING && console.log(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	schedule.clbids = reject(schedule.clbids, id => id === clbid)
 
@@ -182,7 +182,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 }
 
 export function moveCourseToSchedule(student, {fromScheduleId, toScheduleId, clbid}) {
-	debug(`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+	!TESTING && console.log(`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 
 	student = removeCourseFromSchedule(student, fromScheduleId, clbid)
 	student = addCourseToSchedule(student, toScheduleId, clbid)
