@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.2.7
+- Shrink the compiled bundle
+
 ## 2.2.6
 - Put some more lodash back in
 
