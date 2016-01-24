@@ -53,4 +53,4 @@ render(
 	(<Root store={store}>
 		<Router history={history} routes={routes} />
 	</Root>),
-	document.getElementById('app') )
+	document.getElementById('gobbldygook') )
