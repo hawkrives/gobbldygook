@@ -40,32 +40,37 @@ const removeFromSemester = ({studentId, removeCourse, clbid, scheduleId}) => () 
 	}
 }
 
-function moveToSchedule({moveCourse, addCourse}) {
-	return ({scheduleId, studentId, clbid}) => ev => {
+function moveToSchedule({moveCourse, addCourse, removeCourse, scheduleId, studentId, clbid}) {
+	return ev => {
 		const targetScheduleId = ev.target.value
-		if (targetScheduleId == 'none') {
+		if (targetScheduleId === '$none') {
 			return
+		}
+		else if (targetScheduleId === '$remove') {
+			return removeCourse(studentId, scheduleId, clbid)
 		}
 
 		if (scheduleId) {
-			moveCourse(studentId, scheduleId, targetScheduleId, clbid)
+			return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
 		}
 		else {
-			addCourse(studentId, targetScheduleId, clbid)
+			return addCourse(studentId, targetScheduleId, clbid)
 		}
 	}
 }
 
 
-function SemesterSelector({scheduleId, student, moveCourse, addCourse}) {
+function SemesterSelector({scheduleId, student, moveCourse, addCourse, removeCourse, clbid}) {
 	return (
 		<select
 			className='semester-select'
 			value={scheduleId || 'none'}
-			disabled={!Boolean(student)}
-			onChange={moveToSchedule({moveCourse, addCourse})}
+			disabled={!Boolean(student) || !(Boolean(clbid))}
+			onChange={moveToSchedule({moveCourse, addCourse, removeCourse, scheduleId, studentId: student.id, clbid})}
 		>
-			<option value='none'>No Schedule</option>
+			{scheduleId
+				? <option value='$remove'>Remove from Schedule</option>
+				: <option value='$none'>No Schedule</option>}
 			{Boolean(student) ? map(findSemesterList(student), (group, key) => (
 				<optgroup key={key} label={expandYear(key, true, '–')}>
 					{(map(group, sched =>
@@ -77,9 +82,10 @@ function SemesterSelector({scheduleId, student, moveCourse, addCourse}) {
 }
 
 SemesterSelector.propTypes = {
-	addCourse: PropTypes.func,
-	moveCourse: PropTypes.func,
-	removeCourse: PropTypes.func,
+	addCourse: PropTypes.func.isRequired,
+	clbid: PropTypes.number,
+	moveCourse: PropTypes.func.isRequired,
+	removeCourse: PropTypes.func.isRequired,
 	scheduleId: PropTypes.string,
 	student: PropTypes.object,
 }
@@ -160,7 +166,14 @@ export default function ModalCourse(props) {
 			</div>
 
 			<div className='tools'>
-				<SemesterSelector scheduleId={scheduleId} student={student} moveCourse={moveCourse} addCourse={addCourse} />
+				<SemesterSelector
+					scheduleId={scheduleId}
+					student={student}
+					moveCourse={moveCourse}
+					addCourse={addCourse}
+					removeCourse={removeCourse}
+					clbid={course.clbid}
+				/>
 				<Button className='remove-course'
 					onClick={removeFromSemester({studentId, removeCourse, clbid: course.clbid, scheduleId})}
 					disabled={!Boolean(scheduleId) || !Boolean(student)}>
