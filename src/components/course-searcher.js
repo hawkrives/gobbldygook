@@ -14,20 +14,21 @@ import './course-searcher.scss'
 
 export default function CourseSearcher(props) {
 	const {
+		error='',
 		groupBy,
 		hasQueried,
+		inProgress,
 		onCloseSearcher,
+		onGroupByChange,
 		onKeyDown,
 		onQueryChange,
 		onQuerySubmit,
 		onSortChange,
-		onGroupByChange,
-		inProgress,
-		query,
 		partial,
+		query,
 		results,
-		error='',
 		sortBy,
+		studentId,
 	} = props
 
 	const showNoResults = results.length === 0 && hasQueried
@@ -48,6 +49,7 @@ export default function CourseSearcher(props) {
 			groupBy={groupBy}
 			sortBy={sortBy}
 			results={results}
+			studentId={studentId}
 		/>
 	}
 

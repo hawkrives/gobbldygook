@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import map from 'lodash/map'
-import compareProps from '../helpers/compare-props'
-import InlineCourse from '../components/inline-course'
+import InlineCourse from './inline-course'
 
+import compareProps from '../helpers/compare-props'
 import toPrettyTerm from '../helpers/to-pretty-term'
 import expandYear from '../helpers/expand-year'
 import semesterName from '../helpers/semester-name'
@@ -22,6 +22,8 @@ export default class CourseResultsList extends Component {
 	static propTypes = {
 		groupBy: PropTypes.string.isRequired,
 		results: PropTypes.array.isRequired,
+		sortBy: PropTypes.string,
+		studentId: PropTypes.string,
 	};
 
 	shouldComponentUpdate(nextProps) {
@@ -30,7 +32,7 @@ export default class CourseResultsList extends Component {
 
 	render() {
 		// console.log('CourseResultsList.render')
-		const { results, groupBy: groupByValue } = this.props
+		const { results, groupBy: groupByValue, studentId } = this.props
 
 		return (
 			<ul className='term-list'>
@@ -41,7 +43,7 @@ export default class CourseResultsList extends Component {
 						<ul className='course-list'>
 							{map(courses, (course, index) =>
 								<li key={index}>
-									<InlineCourse course={course} />
+									<InlineCourse course={course} studentId={studentId} />
 								</li>)}
 						</ul>
 					</li>

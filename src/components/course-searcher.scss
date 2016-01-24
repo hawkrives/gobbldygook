@@ -3,7 +3,7 @@
 @import '../mixins/card';
 @import '../mixins/list-unstyled';
 
-.search-sidebar {
+.course-search {
 	.course-group {
 		@include card;
 		padding: 0.5em 0;
@@ -14,7 +14,10 @@
 	.term-list,
 	.course-list {
 		@include list-unstyled;
+	}
 
+	.course-list > li + li {
+		margin-top: 0.5em;
 	}
 
 	.loading,
