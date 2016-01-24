@@ -23,6 +23,7 @@ export function setPartialQuery(partial) {
 		partial = mapValues(partial, val => Array.isArray(val) ? val : [val])
 		return { type: SET_PARTIAL_QUERY, payload: partial }
 	}
+	return {type: SET_PARTIAL_QUERY, payload: {}}
 }
 
 export function clearResults() {
