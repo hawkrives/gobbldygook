@@ -14,7 +14,7 @@ export default class Root extends Component {
 		return (
 			<Provider store={this.props.store}>
 				<div>
-					{cloneElement(this.props.children)}
+					{this.props.children}
 					<Notifications />
 					{/*<DevTools />*/}
 				</div>
