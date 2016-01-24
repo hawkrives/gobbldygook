@@ -1,3 +1,4 @@
+import endsWith from 'lodash/endsWith'
 import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
 import includes from 'lodash/includes'
@@ -138,7 +139,7 @@ function organizeValues([key, values], {words=false, profWords=false}={}) {
 
 export default function buildQueryFromString(queryString='', opts={}) {
 	queryString = trim(queryString)
-	if (queryString.endsWith(':')) {
+	if (endsWith(queryString, ':')) {
 		queryString = queryString.substring(0, queryString.length - 1)
 	}
 
