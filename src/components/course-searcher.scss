@@ -138,23 +138,3 @@
 	font-weight: 500;
 }
 
-
-.course-searcher--modal {
-	$inner-padding: 20px;
-	$outer-margin: 40px;
-
-	margin-top: $outer-margin;
-	margin-left: $outer-margin;
-	margin-right: $outer-margin;
-	margin-bottom: $outer-margin;
-
-	// max-height: 90vh;
-	width: 40em;
-
-	overflow: auto;
-	-webkit-overflow-scrolling: touch;
-
-	border-radius: 4px;
-	outline: none;
-	// padding: $inner-padding;
-}

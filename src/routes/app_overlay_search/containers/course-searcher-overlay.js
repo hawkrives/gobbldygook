@@ -5,19 +5,19 @@ import { connect } from 'react-redux'
 import { routeActions } from 'redux-simple-router'
 import Modal from '../../../components/modal'
 import CourseSearcher from '../../../containers/course-searcher'
+import './course-searcher-overlay.scss'
 
-export default function CourseSearcherSheet(props) {
+export default function CourseSearcherOverlay(props) {
 	const boundCloseModal = () => props.push({pathname: '/'})
 
-	return <Modal
-		modalClassName='course-searcher--modal'
-		onClose={boundCloseModal}
-	>
-		<CourseSearcher closeSearcher={boundCloseModal} />
-	</Modal>
+	return (
+		<Modal onClose={boundCloseModal}>
+			<CourseSearcher closeSearcher={boundCloseModal} />
+		</Modal>
+	)
 }
 
-CourseSearcherSheet.propTypes = {
+CourseSearcherOverlay.propTypes = {
 	push: PropTypes.func.isRequired, // redux
 }
 
@@ -26,4 +26,4 @@ const mapDispatchToProps = dispatch => ({
 	...bindActionCreators(actions, dispatch),
 })
 
-export default connect(undefined, mapDispatchToProps)(CourseSearcherSheet)
+export default connect(undefined, mapDispatchToProps)(CourseSearcherOverlay)

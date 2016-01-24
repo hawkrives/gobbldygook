@@ -4,6 +4,7 @@ import cx from 'classnames'
 export default function Separator(props) {
 	const {
 		className,
+		flex = 1,
 		style,
 		type = 'spacer',
 	} = props
@@ -24,7 +25,7 @@ export default function Separator(props) {
 		renderedStyle = {...renderedStyle, padding: '0 0.5em'}
 	}
 	else if (type === 'flex-spacer') {
-		renderedStyle = {...renderedStyle, flex: '1'}
+		renderedStyle = {...renderedStyle, flex}
 	}
 
 	return (
@@ -37,6 +38,7 @@ export default function Separator(props) {
 
 Separator.propTypes = {
 	className: PropTypes.string,
+	flex: PropTypes.number,
 	style: PropTypes.object,
 	type: PropTypes.oneOf(['spacer', 'line', 'flex-spacer']),
 }

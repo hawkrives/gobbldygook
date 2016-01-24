@@ -62,7 +62,7 @@ export default function CourseSearcher(props) {
 	}
 
 	return (
-		<div className='search-sidebar'>
+		<div className='course-search'>
 			<header className='sidebar-heading'>
 				<div className='row'>
 					<h2>Course Search<br/>{placeholderExtension}</h2>
@@ -136,4 +136,5 @@ CourseSearcher.propTypes = {
 	query: PropTypes.string.isRequired,
 	results: PropTypes.array.isRequired,
 	sortBy: PropTypes.oneOf([...SORT_BY.values()]).isRequired,
+	studentId: PropTypes.string,
 }

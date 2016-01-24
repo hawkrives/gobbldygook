@@ -7,6 +7,8 @@ import {oxford} from 'humanize-plus'
 import plur from 'plur'
 
 import Modal from './modal'
+import Separator from './separator'
+import Toolbar from './toolbar'
 import Button from './button'
 import CourseTitle from './course-title'
 import buildCourseIdent from '../helpers/build-course-ident'
@@ -93,8 +95,12 @@ export default function ModalCourse(props) {
 	} = props
 
 	return (
-	<Modal onClose={onClose} modalClassName='course--modal'>
-		<div>
+		<Modal onClose={onClose}>
+		<div className='course--modal'>
+			<Toolbar>
+				<Separator type='flex-spacer' flex={3} />
+				<Button type='raised' onClick={onClose}>Close</Button>
+			</Toolbar>
 			<div className='info-wrapper'>
 				<CourseTitle {...course} />
 

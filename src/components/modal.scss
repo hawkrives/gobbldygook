@@ -1,14 +1,8 @@
 @import '../mixins/card';
 
 .modal--content {
-	@include card;
-
-	position: absolute;
-	top: 1vh;
-	left: 10vw;
-	right: 10vw;
-
-	padding: 0.5em 1em;
+	display: flex;
+	justify-content: center;
 }
 
 .modal--backdrop {
@@ -18,8 +12,5 @@
 	right: 0;
 	bottom: 0;
 	background-color: rgba(255, 255, 255, 0.5);
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
 	overflow: auto;
 }
