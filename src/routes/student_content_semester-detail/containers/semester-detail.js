@@ -32,7 +32,7 @@ export default class SemesterDetail extends Component {
 	render() {
 		// console.log('SemesterDetail#render')
 		const {year, semester} = this.props.params
-		const {student} = this.props
+		const student = this.props.student.data.present
 
 		const schedules = map(
 			filter(student.schedules, isCurrentSemester(year, semester)),
@@ -42,7 +42,7 @@ export default class SemesterDetail extends Component {
 			<DocumentTitle title={`${semesterName(semester)} ${year} • ${student.name} | Gobbldygook`}>
 				<div className={cx('semester-detail', this.props.className)}>
 					<pre>
-						{`${this.props.location.pathname}${this.props.location.search}\n`}
+						{this.props.location.pathname}{'\n'}
 						{JSON.stringify(schedules, null, 2)}
 					</pre>
 				</div>
