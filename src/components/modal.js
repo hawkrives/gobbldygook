@@ -7,7 +7,7 @@ import './modal.scss'
 
 export default function Modal(props) {
 	return (
-		<Gateway into='modal'>
+		<Gateway into={props.into}>
 			<ReactModal2
 				onClose={props.onClose}
 				backdropClassName={cx('modal--backdrop', props.backdropClassName)}
@@ -22,6 +22,7 @@ export default function Modal(props) {
 Modal.propTypes = {
 	backdropClassName: PropTypes.string,
 	children: PropTypes.node.isRequired,
+	into: PropTypes.string.isRequired,
 	modalClassName: PropTypes.string,
 	onClose: PropTypes.func.isRequired,
 }

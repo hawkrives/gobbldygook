@@ -11,7 +11,7 @@ export default function CourseSearcherOverlay(props) {
 	const boundCloseModal = () => props.push({pathname: '/'})
 
 	return (
-		<Modal onClose={boundCloseModal}>
+		<Modal onClose={boundCloseModal} into='search-modal'>
 			<CourseSearcher closeSearcher={boundCloseModal} />
 		</Modal>
 	)

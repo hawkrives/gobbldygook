@@ -35,7 +35,9 @@ function findSemesterList(student) {
 }
 
 const removeFromSemester = ({studentId, removeCourse, clbid, scheduleId}) => () => {
-	removeCourse(studentId, scheduleId, clbid)
+	if (studentId) {
+		removeCourse(studentId, scheduleId, clbid)
+	}
 }
 
 function moveToSchedule({moveCourse, addCourse}) {
@@ -87,6 +89,7 @@ export default function ModalCourse(props) {
 	const {
 		course,
 		student,
+		studentId,
 		scheduleId,
 		removeCourse,
 		addCourse,
@@ -95,7 +98,7 @@ export default function ModalCourse(props) {
 	} = props
 
 	return (
-		<Modal onClose={onClose}>
+		<Modal onClose={onClose} into='course-modal'>
 		<div className='course--modal'>
 			<Toolbar>
 				<Separator type='flex-spacer' flex={3} />
@@ -159,7 +162,7 @@ export default function ModalCourse(props) {
 			<div className='tools'>
 				<SemesterSelector scheduleId={scheduleId} student={student} moveCourse={moveCourse} addCourse={addCourse} />
 				<Button className='remove-course'
-					onClick={removeFromSemester({studentId: student.id, removeCourse, clbid: course.clbid, scheduleId})}
+					onClick={removeFromSemester({studentId, removeCourse, clbid: course.clbid, scheduleId})}
 					disabled={!Boolean(scheduleId) || !Boolean(student)}>
 					Remove Course
 				</Button>
@@ -177,12 +180,17 @@ ModalCourse.propTypes = {
 	removeCourse: PropTypes.func,  // redux
 	scheduleId: PropTypes.string,  // parent
 	student: PropTypes.object,  // redux
-	studentId: PropTypes.string.isRequired,  // parent
+	studentId: PropTypes.string,  // parent
 }
 
-const mapState = (state, ownProps) => ({
-	student: state.students[ownProps.studentId].data.present,
-})
+const mapState = (state, ownProps) => {
+	if (ownProps.studentId) {
+		return {
+			student: state.students[ownProps.studentId].data.present,
+		}
+	}
+	return {}
+}
 
 const mapDispatch = dispatch => bindActionCreators({addCourse, moveCourse, removeCourse}, dispatch)
 
