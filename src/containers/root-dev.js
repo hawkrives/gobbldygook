@@ -13,7 +13,7 @@ export default class Root extends Component {
 	render() {
 		return (
 			<Provider store={this.props.store}>
-				<div>
+				<div id='app-wrapper'>
 					{this.props.children}
 					<Notifications />
 					{/*<DevTools />*/}

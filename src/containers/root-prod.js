@@ -12,7 +12,7 @@ export default class Root extends Component {
 	render() {
 		return (
 			<Provider store={this.props.store}>
-				<div>
+				<div id='app-wrapper'>
 					{cloneElement(this.props.children)}
 					<Notifications />
 				</div>
