@@ -6,13 +6,17 @@ import flatMap from 'lodash/flatMap'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 
-import Button from '../../../components/button'
-import CourseTitle from '../../../components/course-title'
-import buildCourseIdent from '../../../helpers/build-course-ident'
+import Button from './button'
+import CourseTitle from './course-title'
+import buildCourseIdent from '../helpers/build-course-ident'
 
-import semesterName from '../../../helpers/semester-name'
-import expandYear from '../../../helpers/expand-year'
-import to12Hour from '../../../helpers/to-12-hour-time'
+import semesterName from '../helpers/semester-name'
+import expandYear from '../helpers/expand-year'
+import to12Hour from '../helpers/to-12-hour-time'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { addCourse, moveCourse, removeCourse } from '../redux/students/actions/courses'
 
 function findSemesterList(student) {
 	let schedules = map(student.schedules, s => ({
@@ -74,7 +78,7 @@ SemesterSelector.propTypes = {
 }
 
 
-export default function CourseOverlay(props) {
+export default function ModalCourse(props) {
 	const {
 		course,
 		student,
@@ -153,11 +157,24 @@ export default function CourseOverlay(props) {
 	)
 }
 
-CourseOverlay.propTypes = {
-	addCourse: PropTypes.function,
-	course: PropTypes.object.isRequired,
-	moveCourse: PropTypes.function,
-	removeCourse: PropTypes.function,
-	scheduleId: PropTypes.string,
-	student: PropTypes.object,
+ModalCourse.propTypes = {
+	addCourse: PropTypes.function,  // redux
+	course: PropTypes.object.isRequired,  // parent
+	moveCourse: PropTypes.function,  // redux
+	removeCourse: PropTypes.function,  // redux
+	scheduleId: PropTypes.string,  // parent
+	student: PropTypes.object,  // redux
+	studentId: PropTypes.string.isRequired,  // parent
 }
+
+const mapState = (state, ownProps) => ({
+	student: state.students[ownProps.studentId].data.present,
+})
+
+const actions = {addCourse, moveCourse, removeCourse}
+const mapDispatch = dispatch => ({
+	...bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(ModalCourse)
+

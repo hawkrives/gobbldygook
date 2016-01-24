@@ -13,7 +13,6 @@ export default {
 				require('../student_overlay_share').default, // share
 				require('../student_sidebar_search').default, // search
 				require('../student_content_semester-detail').default, // :year/:term
-				require('../app_overlay_course').default, // course/:clbid
 			])
 		})
 	},
