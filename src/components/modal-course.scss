@@ -35,15 +35,11 @@
 .course--modal {
 	@include card;
 
-	$outer-margin: 40px;
 	.info-wrapper,
 	.columns,
 	.tools {
 		padding: 0 20px;
 	}
-
-	margin-top: $outer-margin;
-	margin-bottom: $outer-margin;
 
 	max-width: 45em;
 
