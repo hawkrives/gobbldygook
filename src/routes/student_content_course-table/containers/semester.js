@@ -4,7 +4,6 @@ import {bindActionCreators} from 'redux'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
 import isCurrentSemester from '../../../helpers/is-current-semester'
-import compareProps from '../../../helpers/compare-props'
 
 import Loading from '../../../components/loading'
 import {destroySchedules} from '../../../redux/students/actions/schedules'
