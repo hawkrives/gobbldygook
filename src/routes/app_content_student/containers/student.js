@@ -16,7 +16,6 @@ export class Student extends Component {
 	static propTypes = {
 		content: PropTypes.node,  // from react-router
 		loadStudent: PropTypes.func.isRequired,
-		overlay: PropTypes.node,  // from react-router
 		params: PropTypes.object,  // react-router
 		processed: PropTypes.object,  // redux
 		sidebar: PropTypes.node,  // from react-router
@@ -58,10 +57,6 @@ export class Student extends Component {
 			? cloneElement(this.props.sidebar, sidebarProps)
 			: <GraduationStatus {...sidebarProps} />
 
-		const overlay = this.props.overlay
-			? cloneElement(this.props.overlay, {student: this.props.student.data.present})
-			: null
-
 		return (
 			<DocumentTitle title={`${name} | Gobbldygook`}>
 				<div className='student'>
@@ -69,7 +64,6 @@ export class Student extends Component {
 						{sidebar}
 					</Sidebar>
 					{contents}
-					{overlay}
 				</div>
 			</DocumentTitle>
 		)

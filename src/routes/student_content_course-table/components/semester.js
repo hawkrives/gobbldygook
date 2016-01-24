@@ -40,7 +40,7 @@ export default function Semester(props) {
 			courses={courses}
 			creditCount={currentCredits}
 			availableCredits={recommendedCredits}
-			student={student}
+			studentId={student.id}
 			schedule={schedule}
 			conflicts={validation ? validation.conflicts : []}
 		/>

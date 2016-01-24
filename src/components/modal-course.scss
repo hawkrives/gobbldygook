@@ -1,0 +1,100 @@
+@import '../base/variables';
+
+.course--modal {
+	display: flex;
+	flex-flow: column;
+
+	.content {
+		flex: 1;
+		display: flex;
+		flex-flow: column;
+	}
+
+	.details {
+		flex: 1;
+	}
+
+	.title,
+	.subtitle {
+		overflow: visible;
+		white-space: normal;
+	}
+
+	.summary {
+		white-space: normal;
+	}
+
+	.title {
+		font-size: 1.5em;
+		font-weight: 300;
+		text-align: center;
+	}
+}
+
+.course--modal {
+	$inner-padding: 20px;
+	$outer-margin: 40px;
+
+	margin-top: $outer-margin;
+	margin-left: $outer-margin;
+	margin-right: $outer-margin;
+	margin-bottom: $outer-margin;
+
+	// max-height: 90vh;
+	// max-width: 45em;
+
+	border: 1px solid #ccc;
+	background: #fff;
+
+	border-radius: 4px;
+	outline: none;
+	padding: $inner-padding;
+
+	.columns {
+		display: flex;
+		flex-flow: row nowrap;
+
+		@media screen and (max-width: 45em) {
+			flex-flow: column;
+		}
+	}
+	.column {
+		flex: 1;
+	}
+	.column + .column {
+		margin-left: 1em;
+	}
+
+	h2 {
+		font-weight: 500;
+		font-feature-settings: 'smcp';
+		font-size: 1em;
+		margin-bottom: 0;
+	}
+
+	.description {
+		hyphens: auto;
+	}
+
+	.window-tools {
+		margin-top: -$inner-padding;
+		margin-right: -$inner-padding;
+		justify-content: flex-end;
+
+		font-size: 0.85em;
+	}
+
+	.close-modal {
+		flex: 0 1 auto;
+		padding-left: 2em;
+		padding-right: 2em;
+
+		font-size: 0.9em;
+
+		border-top: 0;
+		border-right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		border-top-left-radius: 0;
+	}
+}

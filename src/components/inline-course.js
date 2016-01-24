@@ -13,6 +13,7 @@ import List from './list'
 import CourseTitle from './course-title'
 import buildCourseIdent from '../helpers/build-course-ident'
 import Icon from './icon'
+import ModalCourse from './modal-course'
 
 import './inline-course.scss'
 
@@ -23,18 +24,17 @@ class Course extends Component {
 		course: PropTypes.object.isRequired,
 		index: PropTypes.number,
 		isDragging: PropTypes.bool.isRequired,  // react-dnd
-		schedule: PropTypes.object,
-		student: PropTypes.object,
+		scheduleId: PropTypes.string,
+		studentId: PropTypes.string,
 	};
 
 	static defaultProps = {
 		conflicts: [],
 	};
 
-	constructor() {
-		super()
-		this.state = {isOpen: false}
-	}
+	state = {
+		isOpen: false,
+	};
 
 	shouldComponentUpdate(nextProps, nextState) {
 		return compareProps(this.props, nextProps) || compareProps(this.state, nextState)
@@ -49,8 +49,8 @@ class Course extends Component {
 	};
 
 	render() {
-		const { course } = this.props
-		const warnings = this.props.conflicts[this.props.index || 0]
+		const { course, conflicts, index, scheduleId, studentId } = this.props
+		const warnings = conflicts[index || 0]
 		const hasWarnings = compact(warnings).length
 
 		const validWarnings = filter(warnings, w => !isNull(w) && w.warning === true)
@@ -68,7 +68,10 @@ class Course extends Component {
 		)
 
 		return this.props.connectDragSource(
-			<article className={classSet}>
+			<article
+				className={classSet}
+				onClick={this.openModal}
+			>
 				{warningList || null}
 
 				<div className='info-rows'>
@@ -90,6 +93,10 @@ class Course extends Component {
 						{course.times}
 					</div>
 				</div>
+
+				{this.state.isOpen
+					? <ModalCourse onClose={this.closeModal} course={course} scheduleId={scheduleId} studentId={studentId} />
+					: null}
 			</article>
 		)
 	}
@@ -98,7 +105,7 @@ class Course extends Component {
 // Implements the drag source contract.
 const courseSource = {
 	beginDrag(props) {
-		const scheduleId = props.schedule ? props.schedule.id : null
+		let scheduleId = props.scheduleId || null
 		return {
 			isFromSchedule: scheduleId !== null,
 			isFromSearch: scheduleId === null,

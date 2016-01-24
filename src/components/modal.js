@@ -1,17 +1,13 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import ReactModal2 from 'react-modal2'
-import ReactGateway from 'react-gateway'
+import {Gateway} from 'react-gateway'
 
 import './modal.scss'
 
-if (typeof window !== 'undefined') {
-	ReactModal2.setApplicationElement(document.getElementById('app'))
-}
-
 export default function Modal(props) {
 	return (
-		<ReactGateway>
+		<Gateway into='modal'>
 			<ReactModal2
 				onClose={props.onClose}
 				backdropClassName={cx('modal--backdrop', props.backdropClassName)}
@@ -19,7 +15,7 @@ export default function Modal(props) {
 			>
 				{props.children}
 			</ReactModal2>
-		</ReactGateway>
+		</Gateway>
 	)
 }
 

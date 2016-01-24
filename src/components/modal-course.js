@@ -6,6 +6,7 @@ import flatMap from 'lodash/flatMap'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 
+import Modal from './modal'
 import Button from './button'
 import CourseTitle from './course-title'
 import buildCourseIdent from '../helpers/build-course-ident'
@@ -17,6 +18,8 @@ import to12Hour from '../helpers/to-12-hour-time'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { addCourse, moveCourse, removeCourse } from '../redux/students/actions/courses'
+
+import './modal-course.scss'
 
 function findSemesterList(student) {
 	let schedules = map(student.schedules, s => ({
@@ -70,9 +73,9 @@ function SemesterSelector({scheduleId, student, moveCourse, addCourse}) {
 }
 
 SemesterSelector.propTypes = {
-	addCourse: PropTypes.function,
-	moveCourse: PropTypes.function,
-	removeCourse: PropTypes.function,
+	addCourse: PropTypes.func,
+	moveCourse: PropTypes.func,
+	removeCourse: PropTypes.func,
 	scheduleId: PropTypes.string,
 	student: PropTypes.object,
 }
@@ -86,9 +89,11 @@ export default function ModalCourse(props) {
 		removeCourse,
 		addCourse,
 		moveCourse,
+		onClose,
 	} = props
 
 	return (
+	<Modal onClose={onClose} modalClassName='course--modal'>
 		<div>
 			<div className='info-wrapper'>
 				<CourseTitle {...course} />
@@ -149,19 +154,21 @@ export default function ModalCourse(props) {
 				<SemesterSelector scheduleId={scheduleId} student={student} moveCourse={moveCourse} addCourse={addCourse} />
 				<Button className='remove-course'
 					onClick={removeFromSemester({studentId: student.id, removeCourse, clbid: course.clbid, scheduleId})}
-					disabled={!Boolean(this.props.scheduleId) || !Boolean(this.props.student)}>
+					disabled={!Boolean(scheduleId) || !Boolean(student)}>
 					Remove Course
 				</Button>
 			</div>
 		</div>
+		</Modal>
 	)
 }
 
 ModalCourse.propTypes = {
-	addCourse: PropTypes.function,  // redux
+	addCourse: PropTypes.func,  // redux
 	course: PropTypes.object.isRequired,  // parent
-	moveCourse: PropTypes.function,  // redux
-	removeCourse: PropTypes.function,  // redux
+	moveCourse: PropTypes.func,  // redux
+	onClose: PropTypes.func.isRequired, // parent
+	removeCourse: PropTypes.func,  // redux
 	scheduleId: PropTypes.string,  // parent
 	student: PropTypes.object,  // redux
 	studentId: PropTypes.string.isRequired,  // parent
@@ -171,10 +178,6 @@ const mapState = (state, ownProps) => ({
 	student: state.students[ownProps.studentId].data.present,
 })
 
-const actions = {addCourse, moveCourse, removeCourse}
-const mapDispatch = dispatch => ({
-	...bindActionCreators(actions, dispatch),
-})
+const mapDispatch = dispatch => bindActionCreators({addCourse, moveCourse, removeCourse}, dispatch)
 
 export default connect(mapState, mapDispatch)(ModalCourse)
-

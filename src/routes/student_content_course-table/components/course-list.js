@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react'
-import {Link} from 'react-router'
 import range from 'lodash/range'
 import map from 'lodash/map'
 
@@ -18,15 +17,13 @@ export default function CourseList(props) {
 			<MissingCourse clbid={course.clbid} error={course.error} />
 		</li>)
 		: (<li key={course.clbid}>
-			<Link to={`/s/${props.student.id}/course/${course.clbid}`}>
-				<InlineCourse
-					index={i}
-					course={course}
-					student={props.student}
-					schedule={props.schedule}
-					conflicts={props.conflicts}
-				/>
-			</Link>
+			<InlineCourse
+				index={i}
+				course={course}
+				conflicts={props.conflicts}
+				scheduleId={props.schedule.id}
+				studentId={props.studentId}
+			/>
 		</li>))
 
 	let emptySlots = []
@@ -47,5 +44,5 @@ CourseList.propTypes = {
 	conflicts: PropTypes.array.isRequired,
 	creditCount: PropTypes.number.isRequired,
 	schedule: PropTypes.object.isRequired,
-	student: PropTypes.object.isRequired,
+	studentId: PropTypes.string.isRequired,
 }
