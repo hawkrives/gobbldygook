@@ -7,6 +7,9 @@ Bluebird.config({
 	},
 })
 
+// Enable crash tracking
+require('ohcrash')('ogdR7qSuIqexx4aixXhFKlG2')
+
 // enable the regenerator runtime
 import 'babel-runtime/regenerator'
 
