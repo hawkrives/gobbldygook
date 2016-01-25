@@ -31,7 +31,7 @@ export default function StudentPicker(props) {
 
 			<div className='student-list-toolbar'>
 				<Toolbar className='student-list-buttons'>
-					<Link to={'search/'}>
+					<Link to='search/'>
 					<Button className='student-list--button'>
 						<Icon name='android-search' />
 						Courses
@@ -61,7 +61,7 @@ export default function StudentPicker(props) {
 						Edit
 					</Button>
 
-					<Link to={'wizard/'}>
+					<Link to='create/'>
 					<Button className='student-list--button'>
 						<Icon name='android-add' />
 						New
