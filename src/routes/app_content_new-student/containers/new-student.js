@@ -1,95 +1,120 @@
-import React, {PropTypes} from 'react'
-import forEach from 'lodash/forEach'
-import DropZone from 'react-dropzone'
-
+import React, {Component, PropTypes} from 'react'
 import Button from '../../../components/button'
-import List from '../../../components/list'
 
 import './new-student.scss'
 
-function onCreateStudent(initStudent, go) {
-	return initStudent()
-		.then(([student]) => go(`/s/${student.id}/`))
-}
+const SIS_METHOD = 'sis'
+const DRIVE_METHOD = 'sis'
+const FILE_METHOD = 'sis'
+const MANUAL_METHOD = 'sis'
 
-const onDrop = importStudent => files => {
-	forEach(files, file => {
-		const reader = new FileReader()
-
-		reader.addEventListener('load', upload => {
-			importStudent({
-				data: upload.target.result,
-				type: file.type,
-			})
-		})
-
-		reader.readAsText(file)
-	})
-}
-
-let dropZoneRef
-export default function NewStudentScreen(props) {
-	return (
-		<DropZone
-			className='student-wizard'
-			activeClassName='student-wizard-can-drop'
-			ref={ref => dropZoneRef = ref}
-			disableClick
-			accept='application/json'
-			onDrop={onDrop(props.importStudent)}
-		>
-			<div>
-			<header className='introduction'>
-				<h1 className='title'>Hi there!</h1>
-				<h2 className='subtitle'>I don't know anything about you. Care to enlighten me?</h2>
-			</header>
-
-			<div className='intro-page'>
-				<p>
-					You're welcome to manually type in all of your
-					information, but we can just pull in your information
-					from the SIS. Alternately, if you've used Gobbldygook
-					before, we can import your data from a file, or from
-					Google Drive.
-				</p>
-
-
-				<List type='plain' className='button-container'>
-					<li><Button disabled type='raised'>Import from the SIS</Button></li>
-					<li><Button disabled type='raised'>Manually</Button></li>
-					<li><Button disabled type='raised'>Import from Google Drive</Button></li>
-					<li><Button disabled type='raised' onClick={dropZoneRef.open}>Import from a file</Button></li>
-				</List>
-			</div>
-			{/*<div>
-				<form className='form'>
-					<div><label>Name: <input type='text' /></label></div>
-					<div><label>Matriculation: <input type='year' placeholder={today.getFullYear() - 2} /></label></div>
-					<div><label>Graduation: <input type='year' placeholder={today.getFullYear() + 2} /></label></div>
-					<div><label>Advisor: <input type='text' /></label></div>
-					<div><label>Studies: <input type='text' /></label></div>
-					<div><label>Schedules: <input type='text' /></label></div>
-					<div><label>Overrides: <input type='text' /></label></div>
-					<div><label>Fabrications: <input type='text' /></label></div>
-				</form>
-			</div>*/}
-
+function WelcomeScreen({onNextScreen}) {
+	return <div>
+		<header className='header'>
+			<h1>Hi there!</h1>
+			<h2>I don't know anything about you. Care to enlighten me?</h2>
+		</header>
+		<section className='body'>
 			<p>
-				Does everything look alright?<br/>
-				<Button
-					type='raised'
-					onClick={() => onCreateStudent(props.initStudent, props.go)}
-				>
-					Let's go!
-				</Button>
+				We need to know:
 			</p>
-			</div>
-		</DropZone>
-	)
+			<ul>
+				<li>what year you entered the college,</li>
+				<li>when you plan on graduating from the college,</li>
+				<li>what you want to major in,</li>
+				<li>and anything you've already taken.</li>
+			</ul>
+			<p>
+				We have a few ways to do that: you can import your data from the SIS,
+				you can link up to a previous file on Google Drive,
+				you can upload an exported file,
+				or you can just fill everything out manually.
+			</p>
+		</section>
+		<section className='choices'>
+			<Button type='raised' onClick={() => onNextScreen(SIS_METHOD)}>Import from the SIS</Button>
+			<Button type='raised' disabled onClick={() => onNextScreen(DRIVE_METHOD)}>Link to Google Drive</Button>
+			<Button type='raised' onClick={() => onNextScreen(FILE_METHOD)}>Upload a File</Button>
+			<Button type='raised' onClick={() => onNextScreen(MANUAL_METHOD)}>Create Manually</Button>
+		</section>
+	</div>
 }
 
-NewStudentScreen.propTypes = {
-	go: PropTypes.func.isRequired,
-	importStudent: PropTypes.func.isRequired,
-	initStudent: PropTypes.func.isRequired,
+function SISImportScreen({onNextScreen, onPreviousScreen}) {
+	return <div>
+		<Button type='raised' onClick={onPreviousScreen}>Back</Button>
+		Import from the SIS
+		<section>
+			<Button type='raised' onClick={onNextScreen}>Next</Button>
+		</section>
+	</div>
+}
+
+function DriveLinkScreen({onNextScreen, onPreviousScreen}) {
+	return <div>
+		<Button type='raised' onClick={onPreviousScreen}>Back</Button>
+		Link to Google Drive
+		<section>
+			<Button type='raised' onClick={onNextScreen}>Next</Button>
+		</section>
+	</div>
+}
+
+function UploadFileScreen({onNextScreen, onPreviousScreen}) {
+	return <div>
+		<Button type='raised' onClick={onPreviousScreen}>Back</Button>
+		Uplaod a File
+		<section>
+			<Button type='raised' onClick={onNextScreen}>Next</Button>
+		</section>
+	</div>
+}
+
+function ManualCreationScreen({onNextScreen, onPreviousScreen}) {
+	return <div>
+		<Button type='raised' onClick={onPreviousScreen}>Back</Button>
+		Manually Create
+		<section>
+			<Button type='raised' onClick={onNextScreen}>Next</Button>
+		</section>
+	</div>
+}
+
+export default class NewStudent extends Component {
+	state = {
+		method: null,
+	};
+
+	handleChooseScreen = method => {
+		this.setState({method})
+	};
+
+	revertToChooseScreen = () => {
+		this.setState({method: null})
+	};
+
+	render() {
+		let screen = null
+		if (!this.state.method) {
+			screen = <WelcomeScreen onNextScreen={this.handleChooseScreen} />
+		}
+		else if (this.state.method === SIS_METHOD) {
+			screen = <SISImportScreen onComplete={this.importFromSIS} onPreviousScreen={this.revertToChooseScreen} />
+		}
+		else if (this.state.method === DRIVE_METHOD) {
+			screen = <DriveLinkScreen onComplete={this.importFromDrive} onPreviousScreen={this.revertToChooseScreen} />
+		}
+		else if (this.state.method === FILE_METHOD) {
+			screen = <UploadFileScreen onComplete={this.importFromFile} onPreviousScreen={this.revertToChooseScreen} />
+		}
+		else if (this.state.method === MANUAL_METHOD) {
+			screen = <ManualCreationScreen onComplete={this.importFromManual} onPreviousScreen={this.revertToChooseScreen} />
+		}
+
+		return (
+			<div className='new-student'>
+				{screen}
+			</div>
+		)
+	}
 }

@@ -1,60 +1,43 @@
 @import '../../../base/variables';
 @import '../../../mixins/color';
+@import '../../../mixins/card';
 
-.student-wizard {
+.new-student {
+	@include card;
 	$inner-padding: 20px;
 	$outer-margin: 40px;
 
 	margin: $outer-margin auto;
 
-	max-width: 30em;
+	max-width: 40em;
 	width: 100%;
 
-	border: 1px solid #ccc;
-	background: #fff;
-
-	overflow: auto;
-	-webkit-overflow-scrolling: touch;
-
-	border-radius: 4px;
-	outline: none;
 	padding: $inner-padding;
-
-	transition: all 0.5s;
 
 	.introduction {
 		text-align: center;
 		width: 75%;
 		margin: 0 auto;
 	}
+}
 
-	.title {
-		font-size: 2em;
+.new-student .header {
+	text-align: center;
+
+	h1 {
+		font-weight: 400;
+	}
+	h2 {
 		font-weight: 300;
-		margin: 0;
-	}
-
-	.subtitle {
-		font-size: 1.25em;
-		font-weight: 300;
-		margin-top: 0;
-	}
-
-	.button--raised {
-		background-color: color('gray', '100');
-		&:hover {
-			background-color: color('white', '50');
-		}
-	}
-
-	.button-container {
-		text-align: center;
-		.list-item + .list-item {
-			margin-top: 0.5em;
-		}
 	}
 }
 
-.student-wizard-can-drop {
-	border-color: $text-color;
+.new-student .choices {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+
+	button {
+		margin-bottom: 1em;
+	}
 }
