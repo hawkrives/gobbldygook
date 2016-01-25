@@ -36,8 +36,8 @@ export default {
 
 //<Route path='/' component={App}>
 //	<IndexRoute components={{content: StudentPicker}} />
-//	<Route path='search' components={{overlay: CourseSearcherSheet}} />
-//	<Route path='wizard' components={{content: NewStudentWizard}} />
+//	<Route path='search' components={{overlay: CourseSearcherOverlay}} />
+//	<Route path='create' components={{content: NewStudent}} />
 //	<Route path='edit-area(/:type)(/:name)(/:revision)' components={{content: AreaEditor}} />
 //
 //	<Route path='degub' components={{content: Degub}} />
