@@ -49,7 +49,7 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 		data.slug = data.slug || makeAreaSlug(data.name)
 
 		if (typeof data.revision !== 'string') {
-			throw new TypeError('enhanceHanson: "revision" must be a string. Try wrapping it in single quotes.')
+			throw new TypeError(`enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${data.revision}" is a ${typeof data.revision}.`)
 		}
 	}
 
