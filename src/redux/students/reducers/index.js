@@ -57,7 +57,7 @@ export default function studentsReducer(state = initialState, action) {
 			}
 			return {
 				...state,
-				[payload.id]: studentWrapperReducer(payload, action),
+				[payload.id]: studentWrapperReducer(undefined, action),
 			}
 		}
 

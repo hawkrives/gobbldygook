@@ -60,6 +60,10 @@ export function studentReducer(state = initialState, action) {
 	const {type, payload} = action
 
 	switch (type) {
+		case INIT_STUDENT: {
+			return payload
+		}
+
 		case CHANGE_NAME: {
 			return changeStudentName(state, payload.name)
 		}
