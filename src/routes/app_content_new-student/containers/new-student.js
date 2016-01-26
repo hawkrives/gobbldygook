@@ -1,89 +1,28 @@
 import React, {Component, PropTypes} from 'react'
-import Button from '../../../components/button'
+import DropZone from 'react-dropzone'
 
+import WelcomeScreen from './welcome'
+import SISImportScreen from './sis-import'
+import UploadFileScreen from './upload-file'
+import DriveLinkScreen from './drive-link'
+import ManualCreationScreen from './manual'
+
+import {FILE_METHOD, SIS_METHOD, MANUAL_METHOD, DRIVE_METHOD} from '../methods'
 import './new-student.scss'
 
-const SIS_METHOD = 'sis'
-const DRIVE_METHOD = 'sis'
-const FILE_METHOD = 'sis'
-const MANUAL_METHOD = 'sis'
-
-function WelcomeScreen({onNextScreen}) {
-	return <div>
-		<header className='header'>
-			<h1>Hi there!</h1>
-			<h2>I don't know anything about you. Care to enlighten me?</h2>
-		</header>
-		<section className='body'>
-			<p>
-				We need to know:
-			</p>
-			<ul>
-				<li>what year you entered the college,</li>
-				<li>when you plan on graduating from the college,</li>
-				<li>what you want to major in,</li>
-				<li>and anything you've already taken.</li>
-			</ul>
-			<p>
-				We have a few ways to do that: you can import your data from the SIS,
-				you can link up to a previous file on Google Drive,
-				you can upload an exported file,
-				or you can just fill everything out manually.
-			</p>
-		</section>
-		<section className='choices'>
-			<Button type='raised' onClick={() => onNextScreen(SIS_METHOD)}>Import from the SIS</Button>
-			<Button type='raised' disabled onClick={() => onNextScreen(DRIVE_METHOD)}>Link to Google Drive</Button>
-			<Button type='raised' onClick={() => onNextScreen(FILE_METHOD)}>Upload a File</Button>
-			<Button type='raised' onClick={() => onNextScreen(MANUAL_METHOD)}>Create Manually</Button>
-		</section>
-	</div>
-}
-
-function SISImportScreen({onNextScreen, onPreviousScreen}) {
-	return <div>
-		<Button type='raised' onClick={onPreviousScreen}>Back</Button>
-		Import from the SIS
-		<section>
-			<Button type='raised' onClick={onNextScreen}>Next</Button>
-		</section>
-	</div>
-}
-
-function DriveLinkScreen({onNextScreen, onPreviousScreen}) {
-	return <div>
-		<Button type='raised' onClick={onPreviousScreen}>Back</Button>
-		Link to Google Drive
-		<section>
-			<Button type='raised' onClick={onNextScreen}>Next</Button>
-		</section>
-	</div>
-}
-
-function UploadFileScreen({onNextScreen, onPreviousScreen}) {
-	return <div>
-		<Button type='raised' onClick={onPreviousScreen}>Back</Button>
-		Uplaod a File
-		<section>
-			<Button type='raised' onClick={onNextScreen}>Next</Button>
-		</section>
-	</div>
-}
-
-function ManualCreationScreen({onNextScreen, onPreviousScreen}) {
-	return <div>
-		<Button type='raised' onClick={onPreviousScreen}>Back</Button>
-		Manually Create
-		<section>
-			<Button type='raised' onClick={onNextScreen}>Next</Button>
-		</section>
-	</div>
-}
 
 export default class NewStudent extends Component {
+	static propTypes = {};
+
 	state = {
 		method: null,
+		data: null,
+		files: null,
 	};
+
+	componentDidMount() {
+		this.preventGlobalDrop()
+	}
 
 	handleChooseScreen = method => {
 		this.setState({method})
@@ -93,28 +32,70 @@ export default class NewStudent extends Component {
 		this.setState({method: null})
 	};
 
+	importFromFile = file => {
+		console.log('importFromFile', file)
+		// this.setState({})
+	};
+
+	handleFileDrop = files => {
+		this.setState({files, method: FILE_METHOD})
+		// forEach(files, this.importFromFile)
+	};
+
+	preventGlobalDrop() {
+		if (typeof window === 'undefined') {
+			return
+		}
+
+		window.addEventListener('dragover', e => e.preventDefault())
+		window.addEventListener('drop', e => e.preventDefault())
+	}
+
 	render() {
+		console.log(this.state)
 		let screen = null
 		if (!this.state.method) {
-			screen = <WelcomeScreen onNextScreen={this.handleChooseScreen} />
+			screen = <WelcomeScreen onNext={this.handleChooseScreen} />
 		}
 		else if (this.state.method === SIS_METHOD) {
-			screen = <SISImportScreen onComplete={this.importFromSIS} onPreviousScreen={this.revertToChooseScreen} />
+			screen = <SISImportScreen
+				onComplete={this.importFromSIS}
+				onBack={this.revertToChooseScreen}
+			/>
 		}
 		else if (this.state.method === DRIVE_METHOD) {
-			screen = <DriveLinkScreen onComplete={this.importFromDrive} onPreviousScreen={this.revertToChooseScreen} />
+			screen = <DriveLinkScreen
+				onComplete={this.importFromDrive}
+				onBack={this.revertToChooseScreen}
+			/>
 		}
 		else if (this.state.method === FILE_METHOD) {
-			screen = <UploadFileScreen onComplete={this.importFromFile} onPreviousScreen={this.revertToChooseScreen} />
+			screen = <UploadFileScreen
+				onComplete={this.importFromFile}
+				onBack={this.revertToChooseScreen}
+			/>
 		}
 		else if (this.state.method === MANUAL_METHOD) {
-			screen = <ManualCreationScreen onComplete={this.importFromManual} onPreviousScreen={this.revertToChooseScreen} />
+			screen = <ManualCreationScreen
+				onComplete={this.importFromManual}
+				onBack={this.revertToChooseScreen}
+			/>
 		}
 
 		return (
+			<DropZone
+				ref={c => (this._dropzone = c)}
+				className='dropzone'
+				activeClassName='dropzone-active'
+				accept='application/json'
+				onDrop={this.handleFileDrop}
+				multiple
+				disableClick
+			>
 			<div className='new-student'>
 				{screen}
 			</div>
+			</DropZone>
 		)
 	}
 }
