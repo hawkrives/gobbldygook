@@ -5,10 +5,7 @@ import map from 'lodash/map'
 import reject from 'lodash/reject'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
-import groupBy from 'lodash/groupBy'
-import flatten from 'lodash/flatten'
-import sortBy from 'lodash/sortBy'
-import maxBy from 'lodash/maxBy'
+import filterAreaList from '../../../helpers/filter-area-list'
 
 import Button from '../../../components/button'
 import List from '../../../components/list'
@@ -21,21 +18,8 @@ function AreaPicker(props) {
 
 	const currentAreaNames = map(props.currentAreas, a => a.name)
 	let onlyAvailableAreas = reject(props.areaList, area => includes(currentAreaNames, area.name))
-	onlyAvailableAreas = reject(onlyAvailableAreas, area => area['available through'] && area['available through'] <= graduation)
 
-	const groupedAreas = groupBy(onlyAvailableAreas, area => `{${area.name}, ${area.type}}`)
-
-	onlyAvailableAreas = flatten(map(groupedAreas, areaSet => {
-		return areaSet.length >= 2
-			? filter(sortBy(areaSet, 'revision'), (area, i, list) => {
-				const availableThrough = i < list.length - 1
-					? maxBy(map([area, list[i+1]], a => Number(a.revision.split('-')[0]) + 1))
-					: Number(area.revision.split('-')[0]) + 1
-
-				return availableThrough <= graduation
-			})
-			: areaSet
-	}))
+	onlyAvailableAreas = filterAreaList(onlyAvailableAreas, {graduation})
 
 	const filteredOnName = filter(onlyAvailableAreas, area =>
 		fuzzysearch(props.filterText, area.name.toLowerCase()))
