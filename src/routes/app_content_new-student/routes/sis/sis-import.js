@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-
-import {checkIfLoggedIn} from '../../../../helpers/import-student'
+import serializeError from 'serialize-error'
+import getStudentInfo from '../../../../helpers/import-student'
 
 export default class SISImportScreen extends Component {
 	static propTypes = {};
@@ -8,12 +8,14 @@ export default class SISImportScreen extends Component {
 	state = {
 		loggedIn: null,
 		checkingLogin: true,
+		data: {},
+		error: null,
 	};
 
 	componentWillMount() {
-		checkIfLoggedIn()
-			.then(() => this.setState({loggedIn: true, checkingLogin: false}))
-			.catch(() => this.setState({loggedIn: false, checkingLogin: false}))
+		getStudentInfo()
+			.then(data => this.setState({loggedIn: true, checkingLogin: false, student: data}))
+			.catch(err => this.setState({loggedIn: false, checkingLogin: false, error: serializeError(err)}))
 	}
 
 	render() {
@@ -29,6 +31,12 @@ export default class SISImportScreen extends Component {
 						? 'Logged in!'
 						: 'Not logged in.'}
 			</div>
+
+			{this.state.error ? <pre>{JSON.stringify(this.state.error)}</pre> : null}
+
+			<pre>
+				{JSON.stringify(this.state.data)}
+			</pre>
 		</div>
 	}
 }
