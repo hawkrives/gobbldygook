@@ -68,8 +68,12 @@ const checkStudentsMiddleware = store => next => action => {
 		affectedStudents = toArray(newStudents)
 	}
 	else {
-		affectedStudents = filter(newStudents, (_, id) =>
-			newStudents[id].data.present !== oldStudents[id].data.present)
+		affectedStudents = filter(newStudents, (_, id) => {
+			if (!(id in oldStudents)) {
+				return true
+			}
+			return newStudents[id].data.present !== oldStudents[id].data.present
+		})
 	}
 
 	// check them
