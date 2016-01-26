@@ -26,6 +26,7 @@
     "precopy": "npm run clean",
     "prestart": "npm run copy",
     "profile": "cat profile/README.md",
+    "serve-production": "env NODE_ENV=production webpack-dev-server --config ./.webpackrc.js --progress",
     "start": "env NODE_ENV=development webpack-dev-server --config ./.webpackrc.js --progress",
     "stats": "env NODE_ENV=production npm run stats:base",
     "stats:base": "webpack --config ./.webpackrc.js --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
