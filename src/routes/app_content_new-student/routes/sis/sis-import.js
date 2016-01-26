@@ -4,6 +4,7 @@ import Button from '../../../../components/button'
 import getStudentInfo, {checkIfLoggedIn} from '../../../../helpers/import-student'
 import convertStudent from '../../../../helpers/convert-imported-student'
 import DOMify from 'react-domify'
+import StudentSummary from '../../../app_content_student/components/student-summary'
 import { push } from 'react-router-redux'
 import { initStudent } from '../../../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
@@ -48,6 +49,7 @@ export default class SISImportScreen extends Component {
 	};
 
 	render() {
+		let {student} = this.state
 		return <div>
 			<header className='header'>
 				<h1>Import from the SIS</h1>
@@ -63,7 +65,13 @@ export default class SISImportScreen extends Component {
 
 			{this.state.error ? <pre>{JSON.stringify(this.state.error)}</pre> : null}
 
-			{this.state.student ? <DOMify value={this.state.student} /> : null}
+			{/*this.state.student ? <DOMify value={this.state.student} /> : null*/}
+			{this.state.student
+				? <div>
+					<StudentSummary student={student} editable={false} />
+					<pre>{JSON.stringify(student.schedules, null, 2)}</pre>
+				</div>
+				: null}
 
 			<div>
 				<Button

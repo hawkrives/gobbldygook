@@ -43,16 +43,16 @@ const welcomeMessages = [
 const welcomeMessage = sample(welcomeMessages)
 
 export default function StudentSummary(props) {
-	const {student} = props
+	const {student, editable=true} = props
 	const {studies, canGraduate} = student
 
-	const NameEl = (
-		<ContentEditable
+	const NameEl = (editable
+		? <ContentEditable
 			className='autosize-input'
 			onBlur={props.onChangeName}
 			value={String(student.name)}
 		/>
-	)
+		: <span>{String(student.name)}</span>)
 
 	const degrees = filter(studies, {type: 'degree'})
 	const majors = filter(studies, {type: 'major'})
@@ -78,20 +78,22 @@ export default function StudentSummary(props) {
 	const neededCredits = student.creditsNeeded
 	const enoughCredits = currentCredits >= neededCredits
 
-	const graduationEl = (
-		<ContentEditable
+	const graduationEl = (editable
+		? <ContentEditable
 			className='autosize-input'
 			onBlur={props.onChangeGraduation}
 			value={String(student.graduation)}
 		/>
+		: <span>{String(student.graduation)}</span>
 	)
 
-	const matriculationEl = (
-		<ContentEditable
+	const matriculationEl = (editable
+		? <ContentEditable
 			className='autosize-input'
 			onBlur={props.onChangeMatriculation}
 			value={String(student.matriculation)}
 		/>
+		: <span>{String(student.matriculation)}</span>
 	)
 
 	const canGraduateClass = canGraduate ? 'can-graduate' : 'cannot-graduate'
@@ -127,6 +129,7 @@ export default function StudentSummary(props) {
 }
 
 StudentSummary.propTypes = {
+	editable: PropTypes.bool,
 	onChangeGraduation: PropTypes.func.isRequired,
 	onChangeMatriculation: PropTypes.func.isRequired,
 	onChangeName: PropTypes.func.isRequired,
