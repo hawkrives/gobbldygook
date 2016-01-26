@@ -7,7 +7,6 @@ import forEach from 'lodash/forEach'
 import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
 import filter from 'lodash/filter'
-import endsWith from 'lodash/endsWith'
 import plur from 'plur'
 
 export default function convertStudent({courses, degrees}) {
@@ -25,8 +24,20 @@ export default function convertStudent({courses, degrees}) {
 }
 
 
+function isNormalSemester({term='00000'}) {
+	term = String(term)
+	if (term.length !== 5) {
+		return true
+	}
+	let s = term[4]
+	if (s !== '1' && s !== '2' && s !== '3' && s !== '4' && s !== '5') {
+		return true
+	}
+	return false
+}
+
 function processFabrications(courses) {
-	let onlyNonOlaf = filter(courses, ({term}) => endsWith(term, '9'))
+	let onlyNonOlaf = filter(courses, isNormalSemester)
 	let fabrications = fromPairs(map(onlyNonOlaf, c => [c.clbid, c]))
 	return fabrications
 }
