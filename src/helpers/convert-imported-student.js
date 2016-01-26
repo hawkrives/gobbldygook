@@ -29,7 +29,6 @@ function processFabrications(courses) {
 	let onlyNonOlaf = filter(courses, ({term}) => endsWith(term, '9'))
 	let fabrications = fromPairs(map(onlyNonOlaf, c => [c.clbid, c]))
 	return fabrications
-
 }
 
 

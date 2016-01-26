@@ -28,7 +28,7 @@ export default function WelcomeScreen() {
 		</section>
 		<section className='choices'>
 			<Link to='/create/sis'>
-				<Button disabled type='raised'>
+				<Button type='raised'>
 					Import from the SIS
 				</Button>
 			</Link>
