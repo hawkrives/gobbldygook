@@ -8,8 +8,8 @@ import {
 	INIT_STUDENT,
 } from '../constants'
 
-export function initStudent() {
-	let student = new Student()
+export function initStudent(raw) {
+	let student = new Student(raw)
 
 	forEach(range(student.matriculation, student.graduation), year => {
 		student = addScheduleToStudent(student, Schedule({year, index: 1, active: true, semester: 1}))
