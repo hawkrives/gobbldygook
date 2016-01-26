@@ -16,7 +16,7 @@ export default function embedActiveStudentCourses(student, {cache=[]}) {
 
 	const enhanced = map(active, schedule => {
 		let courses = map(schedule.clbids, clbid => {
-			let course = cache[clbid] || getCourse({clbid, term: parseInt(`${schedule.year}${schedule.semester}`)})
+			let course = cache[clbid] || getCourse({clbid, term: parseInt(`${schedule.year}${schedule.semester}`)}, student.fabrications)
 			if (!course) {
 				course = {clbid, term: schedule.term, error: 'Could not find course'}
 			}
