@@ -8,7 +8,7 @@ import List from '../../../components/list'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { routeActions } from 'redux-simple-router'
+import { push } from 'react-router-redux'
 
 import encodeStudent from '../../../helpers/encode-student'
 
@@ -62,5 +62,5 @@ ShareSheet.propTypes = {
 	student: PropTypes.object,
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({push: routeActions.push}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({push}, dispatch)
 export default connect(undefined, mapDispatchToProps)(ShareSheet)

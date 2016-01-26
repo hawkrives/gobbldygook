@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { routeActions } from 'redux-simple-router'
+import { push } from 'react-router-redux'
 import Modal from '../../../components/modal'
 import CourseSearcher from '../../../containers/course-searcher'
 import './course-searcher-overlay.scss'
@@ -21,9 +21,6 @@ CourseSearcherOverlay.propTypes = {
 	push: PropTypes.func.isRequired, // redux
 }
 
-const actions = {push: routeActions.push}
-const mapDispatchToProps = dispatch => ({
-	...bindActionCreators(actions, dispatch),
-})
+const mapDispatchToProps = dispatch => bindActionCreators({push}, dispatch)
 
 export default connect(undefined, mapDispatchToProps)(CourseSearcherOverlay)

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { routeReducer } from 'redux-simple-router'
+import { routeReducer } from 'react-router-redux'
 
 import areas from './areas/reducers'
 import notifications from './notifications/reducers'
