@@ -80,7 +80,7 @@ class Course extends Component {
 						<span className='identifier'>
 							{buildCourseIdent(course)}
 						</span>
-						<span className='type'>{course.type}</span>
+						{course.type !== 'Research' ? <span className='type'>{course.type}</span> : null}
 						{course.gereqs && <ul className='gereqs'>
 							{map(course.gereqs, (ge, idx) =>
 								<li key={ge + idx}>{ge}</li>
