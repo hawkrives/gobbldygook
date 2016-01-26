@@ -22,9 +22,9 @@ export default function Year(props) {
 	const { schedules } = student
 
 	let valid = filter(schedules, {active: true, year: year})
-	console.log(valid)
+	console.log('valid', year, valid)
 	let sorted = sortBy(valid, 'semester')
-	console.log(sorted)
+	console.log('sorted', year, sorted)
 	let terms = map(sorted, schedule =>
 		<Semester
 			key={`${schedule.year}-${schedule.semester}-${schedule.id}`}
