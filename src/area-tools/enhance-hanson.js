@@ -18,6 +18,10 @@ const quote = str => `"${str}"`
 
 let declaredVariables = {}
 
+const baseWhitelist = ['result', 'message', 'declare']
+const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', 'error'])
+const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description'])
+
 export default function enhanceHanson(data, {topLevel=true}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
@@ -28,9 +32,6 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 		throw new Error(`enhanceHanson: data was not an object!`)
 	}
 
-	const baseWhitelist = ['result', 'message', 'declare']
-	const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through'])
-	const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description'])
 	const whitelist = topLevel ? topLevelWhitelist : lowerLevelWhitelist
 
 	forEach(keys(data), key => {
