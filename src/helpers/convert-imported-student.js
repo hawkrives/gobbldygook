@@ -6,18 +6,29 @@ import map from 'lodash/map'
 import forEach from 'lodash/forEach'
 import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
+import filter from 'lodash/filter'
+import endsWith from 'lodash/endsWith'
 import plur from 'plur'
 
 export default function convertStudent({courses, degrees}) {
 	let schedules = processSchedules(courses)
-	let info = processDegrees(studentInfo)
+	let info = processDegrees(degrees)
+	let fabrications = processFabrications(courses)
 
 	let newStudent = Student({
 		...info,
 		schedules,
+		fabrications,
 	})
 
 	return newStudent
+}
+
+
+function processFabrications(courses) {
+	let onlyNonOlaf = filter(courses, ({term}) => endsWith(term, '9'))
+	let fabrications = fromPairs(map(onlyNonOlaf, c => [c.clbid, c]))
+	return fabrications
 }
 
 
