@@ -19,7 +19,7 @@ const quote = str => `"${str}"`
 let declaredVariables = {}
 
 const baseWhitelist = ['result', 'message', 'declare']
-const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', 'error'])
+const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error'])
 const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description'])
 
 export default function enhanceHanson(data, {topLevel=true}={}) {
