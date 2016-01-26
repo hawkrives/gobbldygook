@@ -691,10 +691,10 @@ xdescribe('convertStudent', () => {
 			'dateLastModified': '2016-01-01T17:03:27.011Z',
 			'dateCreated': '2016-01-01T17:03:27.011Z',
 			'studies': [
-				{'name': 'Bachelor of Arts', 'type': 'degree'},
-				{'name': 'Computer Science', 'type': 'major'},
-				{'name': 'Asian Studies', 'type': 'major'},
-				{'name': 'Japan Studies', 'type': 'concentration'},
+				{'name': 'Bachelor of Arts', 'type': 'degree', 'revision': 'latest'},
+				{'name': 'Computer Science', 'type': 'major', 'revision': 'latest'},
+				{'name': 'Asian Studies', 'type': 'major', 'revision': 'latest'},
+				{'name': 'Japan Studies', 'type': 'concentration', 'revision': 'latest'},
 			],
 			'schedules': {
 				'27cb6d96-4662-4106-91ce-eca37dc5226e': {

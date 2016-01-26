@@ -8,7 +8,7 @@ import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
 import plur from 'plur'
 
-export default function convertStudent({courses, studentInfo}) {
+export default function convertStudent({courses, degrees}) {
 	let schedules = processSchedules(courses)
 	let info = processDegrees(studentInfo)
 
