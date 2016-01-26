@@ -32,6 +32,7 @@ function loadArea(areaQuery) {
 
 	return db.store('areas').query(dbQuery)
 		.then(area => {
+			console.log(area)
 			if (isArray(area) && area.length) {
 				area = resolveArea(area, dbQuery)
 			}
@@ -52,7 +53,7 @@ function loadArea(areaQuery) {
 const promiseCache = new Map()
 
 export default async function getArea({name, type, revision, source, isCustom}, {cache=[]}) {
-	let cachedArea = find(cache, a => a.name === name && a.type === type && a.revision === revision)
+	let cachedArea = find(cache, a => (a.name === name) && (a.type === type) && (revision === 'latest' ? true : a.revision === revision))
 	if (cachedArea) {
 		console.log('loadArea used cached area')
 		return cachedArea
