@@ -4,12 +4,14 @@ import flatten from 'lodash/flatten'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
-import maxBy from 'lodash/maxBy'
 
 function convertRevisionToYear(rev) {
 	// The +1 is because the year is the beginning of the academic year, but
 	// the graduation is the end.
-	return Number(rev.split('-')[0]) + 1
+	if (!rev) {
+		console.error(rev)
+	}
+	return Number((rev || '').split('-')[0]) + 1
 }
 
 // Matricated in: 2014
