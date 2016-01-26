@@ -2,7 +2,6 @@ import React from 'react'
 import {Link} from 'react-router'
 
 import Button from '../../../../components/button'
-import {FILE_METHOD, SIS_METHOD, MANUAL_METHOD, DRIVE_METHOD} from '../../methods'
 
 export default function WelcomeScreen() {
 	return <div>
@@ -29,7 +28,7 @@ export default function WelcomeScreen() {
 		</section>
 		<section className='choices'>
 			<Link to='/create/sis'>
-				<Button type='raised'>
+				<Button disabled type='raised'>
 					Import from the SIS
 				</Button>
 			</Link>
@@ -39,7 +38,7 @@ export default function WelcomeScreen() {
 				</Button>
 			</Link>
 			<Link to='/create/upload'>
-				<Button type='raised'>
+				<Button disabled type='raised'>
 					Upload a File
 				</Button>
 			</Link>
