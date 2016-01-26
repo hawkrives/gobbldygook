@@ -5,8 +5,11 @@ import maxBy from 'lodash/maxBy'
 import isArray from 'lodash/isArray'
 import yaml from 'js-yaml'
 
-function resolveArea(areas) {
-	if (some(areas, possibility => 'dateAdded' in possibility)) {
+function resolveArea(areas, query) {
+	if (!('revision' in query)) {
+		return maxBy(areas, 'revision')
+	}
+	else if (some(areas, possibility => 'dateAdded' in possibility)) {
 		return maxBy(areas, 'dateAdded')
 	}
 	else {
@@ -23,14 +26,14 @@ function loadArea(areaQuery) {
 	}
 
 	let dbQuery = {name: [name], type: [type]}
-	if (revision) {
+	if (revision && revision !== 'latest') {
 		dbQuery.revision = [revision]
 	}
 
 	return db.store('areas').query(dbQuery)
 		.then(area => {
 			if (isArray(area) && area.length) {
-				area = resolveArea(area)
+				area = resolveArea(area, dbQuery)
 			}
 
 			if (area === undefined || isArray(area)) {
