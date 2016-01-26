@@ -16,8 +16,11 @@ export default class SISImportScreen extends Component {
 
 	componentWillMount() {
 		getStudentInfo()
-			.then(data =>
-				this.setState({loggedIn: true, checkingLogin: false, student: convertStudent(data)}))
+			.then(data => {
+				console.log(data)
+				console.log(convertStudent(data))
+				this.setState({loggedIn: true, checkingLogin: false, student: convertStudent(data)})
+			})
 			.catch(err => {
 				console.error(err)
 				this.setState({loggedIn: false, checkingLogin: false, error: serializeError(err)})
