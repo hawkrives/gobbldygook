@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import serializeError from 'serialize-error'
 import getStudentInfo from '../../../../helpers/import-student'
+import convertStudent from '../../../../helpers/convert-imported-student'
 import DOMify from 'react-domify'
 
 export default class SISImportScreen extends Component {
@@ -15,8 +16,10 @@ export default class SISImportScreen extends Component {
 
 	componentWillMount() {
 		getStudentInfo()
-			.then(data => this.setState({loggedIn: true, checkingLogin: false, student: data}))
-			.catch(err => this.setState({loggedIn: false, checkingLogin: false, error: serializeError(err)}))
+			.then(data =>
+				this.setState({loggedIn: true, checkingLogin: false, student: convertStudent(data)}))
+			.catch(err =>
+				this.setState({loggedIn: false, checkingLogin: false, error: serializeError(err)}))
 	}
 
 	render() {
