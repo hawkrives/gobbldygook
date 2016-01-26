@@ -8,9 +8,9 @@ import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
 import plur from 'plur'
 
-export default function convertStudent(partialStudent) {
-	let schedules = processSchedules(partialStudent)
-	let info = processDegrees(partialStudent)
+export default function convertStudent({courses, studentInfo}) {
+	let schedules = processSchedules(courses)
+	let info = processDegrees(studentInfo)
 
 	let newStudent = Student({
 		...info,
@@ -21,8 +21,8 @@ export default function convertStudent(partialStudent) {
 }
 
 
-function processSchedules(student) {
-	let schedules = groupBy(student.courses, 'term')
+function processSchedules(courses) {
+	let schedules = groupBy(courses, 'term')
 	schedules = map(schedules, (courses, term) => {
 		term = String(term)
 		return Schedule({
@@ -37,11 +37,11 @@ function processSchedules(student) {
 }
 
 
-function processDegrees(student) {
-	let singularData = resolveSingularDataPoints(student)
+function processDegrees(degrees) {
+	let singularData = resolveSingularDataPoints(degrees)
 	let studies = []
 
-	for (let {concentrations, emphases, majors, degree} of student.degrees) {
+	for (let {concentrations, emphases, majors, degree} of degrees) {
 		studies.push({name: degree, type: 'degree', revision: 'latest'})
 		studies = studies.concat(majors.map(name =>         ({name, type: 'major', revision: 'latest'})))
 		studies = studies.concat(concentrations.map(name => ({name, type: 'concentration', revision: 'latest'})))
@@ -55,12 +55,12 @@ function processDegrees(student) {
 }
 
 
-function resolveSingularDataPoints(student) {
+function resolveSingularDataPoints(degrees) {
 	let thereShouldOnlyBeOne = {
-		names: map(student.degrees, d => d.name),
-		advisors: map(student.degrees, d => d.advisor),
-		matriculations: map(student.degrees, d => d.matriculation),
-		graduations: map(student.degrees, d => d.graduation),
+		names: map(degrees, d => d.name),
+		advisors: map(degrees, d => d.advisor),
+		matriculations: map(degrees, d => d.matriculation),
+		graduations: map(degrees, d => d.graduation),
 	}
 
 	forEach(thereShouldOnlyBeOne, (group, name) => {
