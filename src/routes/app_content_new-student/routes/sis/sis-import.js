@@ -35,7 +35,7 @@ export default class SISImportScreen extends Component {
 			{this.state.error ? <pre>{JSON.stringify(this.state.error)}</pre> : null}
 
 			<pre>
-				{JSON.stringify(this.state.data)}
+				{JSON.stringify(this.state.student)}
 			</pre>
 		</div>
 	}
