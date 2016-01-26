@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import serializeError from 'serialize-error'
 import getStudentInfo from '../../../../helpers/import-student'
+import DOMify from 'react-domify'
 
 export default class SISImportScreen extends Component {
 	static propTypes = {};
@@ -34,9 +35,7 @@ export default class SISImportScreen extends Component {
 
 			{this.state.error ? <pre>{JSON.stringify(this.state.error)}</pre> : null}
 
-			<pre>
-				{JSON.stringify(this.state.student)}
-			</pre>
+			<DOMify value={this.state.student} />
 		</div>
 	}
 }
