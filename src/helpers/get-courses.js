@@ -1,6 +1,5 @@
 import db from './db'
 import map from 'lodash/map'
-import find from 'lodash/find'
 
 const courseCache = new Map()
 /**
@@ -8,14 +7,13 @@ const courseCache = new Map()
  *
  * @param {Number} clbid - a class/lab ID
  * @param {Number} term - a course term
- * @param {Array} fabricationsList - an array of fabrications
+ * @param {Object} fabrications - a (clbid, course) object of fabrications
  * @returns {Promise} - TreoDatabasePromise
  * @fulfill {Object} - the course object, potentially with an embedded error message.
  */
-export async function getCourse({clbid, term}, fabricationsList) {
-	let fabricationP = find(fabricationsList, {clbid})
-	if (fabricationP) {
-		return fabricationP
+export async function getCourse({clbid, term}, fabrications) {
+	if (clbid in fabrications) {
+		return fabrications[clbid]
 	}
 
 	if (courseCache.has(clbid)) {
@@ -50,7 +48,7 @@ export async function getCourse({clbid, term}, fabricationsList) {
  * clbids.
  *
  * @param {Number[]} clbids - a list of class/lab IDs
- * @param {Course[]} fabrications - a list of fabrications
+ * @param {Object} fabrications - a list of fabrications
  * @returns {Promise} - a promise for the course data
  * @fulfill {Object[]} - the courses.
  */
