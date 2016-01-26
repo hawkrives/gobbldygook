@@ -58,7 +58,7 @@ export default class SISImportScreen extends Component {
 					? 'Checking login…'
 					: this.state.loggedIn
 						? 'Logged in!'
-						: 'Not logged in.'}
+						: 'Not logged in. Please log in to the SIS in another tab.'}
 			</div>
 
 			{this.state.error ? <pre>{JSON.stringify(this.state.error)}</pre> : null}
