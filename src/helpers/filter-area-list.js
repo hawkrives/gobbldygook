@@ -8,9 +8,6 @@ import sortBy from 'lodash/sortBy'
 function convertRevisionToYear(rev) {
 	// The +1 is because the year is the beginning of the academic year, but
 	// the graduation is the end.
-	if (!rev) {
-		console.error(rev)
-	}
 	return Number((rev || '').split('-')[0]) + 1
 }
 

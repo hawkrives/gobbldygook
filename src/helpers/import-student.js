@@ -305,6 +305,7 @@ function beginDataExtraction([coursesDom, degreeAuditDom]) {
 
 
 function flattenData([coursesByTerm, studentInfo]) {
+	console.log(arguments)
 	return {
 		courses: flatten(coursesByTerm),
 		...studentInfo,
