@@ -1,9 +1,10 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import {Link} from 'react-router'
 
-import Button from '../../../components/button'
-import {FILE_METHOD, SIS_METHOD, MANUAL_METHOD, DRIVE_METHOD} from '../methods'
+import Button from '../../../../components/button'
+import {FILE_METHOD, SIS_METHOD, MANUAL_METHOD, DRIVE_METHOD} from '../../methods'
 
-export default function WelcomeScreen({onNext}) {
+export default function WelcomeScreen() {
 	return <div>
 		<header className='header'>
 			<h1>Hi there!</h1>
@@ -27,13 +28,26 @@ export default function WelcomeScreen({onNext}) {
 			</p>
 		</section>
 		<section className='choices'>
-			<Button type='raised' onClick={() => onNext(SIS_METHOD)}>Import from the SIS</Button>
-			<Button disabled type='raised' onClick={() => onNext(DRIVE_METHOD)}>Link to Google Drive</Button>
-			<Button type='raised' onClick={() => onNext(FILE_METHOD)}>Upload a File</Button>
-			<Button type='raised' onClick={() => onNext(MANUAL_METHOD)}>Create Manually</Button>
+			<Link to='/create/sis'>
+				<Button type='raised'>
+					Import from the SIS
+				</Button>
+			</Link>
+			<Link to='/create/drive' onClick={ev => ev.preventDefault()}>
+				<Button disabled type='raised'>
+					Link to Google Drive
+				</Button>
+			</Link>
+			<Link to='/create/upload'>
+				<Button type='raised'>
+					Upload a File
+				</Button>
+			</Link>
+			<Link to='/create/manual'>
+				<Button type='raised'>
+					Create Manually
+				</Button>
+			</Link>
 		</section>
 	</div>
-}
-WelcomeScreen.propTypes = {
-	onNext: PropTypes.func.isRequired,
 }
