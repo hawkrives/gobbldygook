@@ -6,6 +6,7 @@ import map from 'lodash/map'
 import forEach from 'lodash/forEach'
 import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
+import plur from 'plur'
 
 export default function convertStudent(partialStudent) {
 	let schedules = processSchedules(partialStudent)
@@ -63,8 +64,12 @@ function resolveSingularDataPoints(student) {
 	}
 
 	forEach(thereShouldOnlyBeOne, (group, name) => {
-		if (uniq(group).length !== 1) {
-			throw new Error(`convertStudent: The student has more than one ${name}: ${JSON.stringify(group)}`)
+		let len = uniq(group).length
+		if (len > 1) {
+			throw new Error(`convertStudent: The student has more than one ${plur(name, 2)}: ${JSON.stringify(group)}`)
+		}
+		else if (!len) {
+			throw new Error(`convertStudent: The student has zero ${plur(name, 0)}: ${JSON.stringify(group)}`)
 		}
 	})
 

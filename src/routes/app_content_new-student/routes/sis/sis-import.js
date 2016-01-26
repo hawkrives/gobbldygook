@@ -18,8 +18,10 @@ export default class SISImportScreen extends Component {
 		getStudentInfo()
 			.then(data =>
 				this.setState({loggedIn: true, checkingLogin: false, student: convertStudent(data)}))
-			.catch(err =>
-				this.setState({loggedIn: false, checkingLogin: false, error: serializeError(err)}))
+			.catch(err => {
+				console.error(err)
+				this.setState({loggedIn: false, checkingLogin: false, error: serializeError(err)})
+			})
 	}
 
 	render() {
