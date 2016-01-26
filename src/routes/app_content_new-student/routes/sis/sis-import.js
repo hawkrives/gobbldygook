@@ -68,7 +68,7 @@ export default class SISImportScreen extends Component {
 			{/*this.state.student ? <DOMify value={this.state.student} /> : null*/}
 			{this.state.student
 				? <div>
-					<StudentSummary student={student} editable={false} />
+					<StudentSummary student={student} editable={false} showMessage={false} />
 					<pre>{JSON.stringify(student.schedules, null, 2)}</pre>
 				</div>
 				: null}

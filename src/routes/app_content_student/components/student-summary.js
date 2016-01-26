@@ -43,7 +43,7 @@ const welcomeMessages = [
 const welcomeMessage = sample(welcomeMessages)
 
 export default function StudentSummary(props) {
-	const {student, editable=true} = props
+	const {student, editable=true, showMessage=true} = props
 	const {studies, canGraduate} = student
 
 	const NameEl = (editable
@@ -120,9 +120,9 @@ export default function StudentSummary(props) {
 					{'. '}
 					{currentCredits ? `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`: ''}
 				</div>
-				<div className='paragraph graduation-message'>
+				{showMessage ? <div className='paragraph graduation-message'>
 					{canGraduate ? goodGraduationMessage : badGraduationMessage}
-				</div>
+				</div>: null}
 			</div>
 		</article>
 	)
@@ -133,5 +133,6 @@ StudentSummary.propTypes = {
 	onChangeGraduation: PropTypes.func.isRequired,
 	onChangeMatriculation: PropTypes.func.isRequired,
 	onChangeName: PropTypes.func.isRequired,
+	showMessage: PropTypes.bool,
 	student: PropTypes.object.isRequired,
 }
