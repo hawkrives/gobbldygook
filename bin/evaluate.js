@@ -6,7 +6,7 @@ import get from 'lodash/get'
 import loadArea from './lib/load-area'
 import yaml from 'js-yaml'
 import isRequirementName from '../src/area-tools/is-requirement-name'
-import pairs from 'lodash/pairs'
+import toPairs from 'lodash/toPairs'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import repeat from 'lodash/repeat'
@@ -15,6 +15,7 @@ import keys from 'lodash/keys'
 import sortBy from 'lodash/sortBy'
 import plur from 'plur'
 import chalk from 'chalk'
+import humanizeOperator from '../src/area-tools/humanize-operator'
 
 
 function condenseCourse(course) {
@@ -23,7 +24,7 @@ function condenseCourse(course) {
 
 function summarize(requirement, name, path, depth=0) {
 	let prose = ''
-	const subReqs = filter(pairs(requirement), ([k, _]) => isRequirementName(k))
+	const subReqs = filter(toPairs(requirement), ([k, _]) => isRequirementName(k))
 	if (subReqs.length) {
 		prose = '\n' + map(subReqs, ([k, v]) => {
 			return summarize(v, k, path.concat(k), depth + 1)
@@ -120,7 +121,7 @@ function stringifyOccurrence(expr) {
 }
 
 function stringifyOf(expr) {
-	return `${expr.$count.$num} of (${map(expr.$of, req => stringifyChunk(req)).join(', ')})`
+	return `${expr.$count.$num} of${humanizeOperator(expr.$count.$operator)} (${map(expr.$of, req => stringifyChunk(req)).join(', ')})`
 }
 
 function stringifyReference(expr) {
@@ -219,7 +220,7 @@ function proseify(requirement, name, path, depth=0) {
 	let prose = ''
 	const hasChildren = some(keys(requirement), isRequirementName)
 	if (hasChildren) {
-		const subReqs = filter(pairs(requirement), ([k, _]) => isRequirementName(k))
+		const subReqs = filter(toPairs(requirement), ([k, _]) => isRequirementName(k))
 		prose = map(subReqs, ([k, v]) => {
 			return proseify(v, k, path.concat(k), depth + 1)
 		}).join('\n')
