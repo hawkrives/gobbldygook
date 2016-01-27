@@ -17,7 +17,7 @@ describe('loadStudent', () => {
 	})
 
 	it('returns a promise', () => {
-		expect(loadStudent(student.id)).to.be.instanceof(Promise)
+		expect(loadStudent(student.id)).to.have.property('then')
 	})
 
 	it('loads a student', async () => {
