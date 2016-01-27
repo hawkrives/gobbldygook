@@ -2,10 +2,10 @@ import {NetworkError} from './errors'
 
 export function status(response) {
 	if (response.status >= 200 && response.status < 300) {
-		return Promise.resolve(response)
+		return response
 	}
 	else {
-		return Promise.reject(new Error(response.statusText))
+		throw new Error(response.statusText)
 	}
 }
 

@@ -1,3 +1,4 @@
+import Bluebird from 'bluebird'
 import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
 import forEach from 'lodash/forEach'
@@ -130,7 +131,7 @@ function getCourses(studentId, term) {
 
 
 function collectAllCourses(studentId, terms) {
-	return Promise.all(map(terms, term => getCourses(studentId, term)))
+	return Bluebird.all(map(terms, term => getCourses(studentId, term)))
 }
 
 function extractInformationFromInfoTable(table) {
@@ -272,7 +273,7 @@ export function getGraduationInformation(dom) {
 
 export function checkIfLoggedIn() {
 	if (typeof window !== 'undefined' && window.location.hostname !== 'www.stolaf.edu') {
-		return Promise.reject(new AuthError('Wrong domain. Student import can only work under the www.stolaf.edu domain.'))
+		return Bluebird.reject(new AuthError('Wrong domain. Student import can only work under the www.stolaf.edu domain.'))
 	}
 	return fetchHtml(COURSES_URL).then(response => {
 		let errorMsg = selectOne('.sis-error', response)
@@ -289,7 +290,7 @@ export function checkIfLoggedIn() {
 
 
 function loadPages(dom) {
-	return Promise.all([dom, fetchHtml(DEGREE_AUDIT_URL)])
+	return Bluebird.all([dom, fetchHtml(DEGREE_AUDIT_URL)])
 }
 
 
@@ -297,7 +298,7 @@ function beginDataExtraction([coursesDom, degreeAuditDom]) {
 	let studentId = extractStudentId(coursesDom)
 	let terms = extractTermList(coursesDom)
 
-	return Promise.all([
+	return Bluebird.all([
 		collectAllCourses(studentId, terms),
 		getGraduationInformation(degreeAuditDom),
 	])
@@ -314,7 +315,7 @@ function flattenData([coursesByTerm, studentInfo]) {
 
 export default function getStudentInfo() {
 	if (!navigator.onLine) {
-		return Promise.reject(new NetworkError('The network is offline.'))
+		return Bluebird.reject(new NetworkError('The network is offline.'))
 	}
 
 	return checkIfLoggedIn()

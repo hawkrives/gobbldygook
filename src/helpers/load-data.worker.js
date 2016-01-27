@@ -1,3 +1,5 @@
+import Bluebird from 'bluebird'
+
 import 'isomorphic-fetch'
 import {status, json, text} from './fetch-helpers'
 import stringifyError from './stringify-error'
@@ -277,7 +279,7 @@ async function loadFiles(url, infoFileBase) {
 
 	// For each file, see if it needs loading.
 	const filesThatNeedUpdate = map(filesToLoad, file => needsUpdate(type, file.path, file.hash))
-	const fileNeedsLoading = await Promise.all(filesThatNeedUpdate)
+	const fileNeedsLoading = await Bluebird.all(filesThatNeedUpdate)
 
 	// Cross-reference each file to load with the list of files that need loading
 	filesToLoad = filter(filesToLoad, (file, index) => fileNeedsLoading[index])
@@ -293,7 +295,7 @@ async function loadFiles(url, infoFileBase) {
 	// Load them into the database
 	try {
 		const update = updateDatabase(type, infoFileBase, notificationId)
-		await Promise.all(map(filesToLoad, update))
+		await Bluebird.all(map(filesToLoad, update))
 	}
 	catch (err) {
 		throw err

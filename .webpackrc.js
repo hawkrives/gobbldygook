@@ -93,10 +93,6 @@ const config = {
 			isDev: isDev,
 		}),
 
-		new ProvidePlugin({
-			Promise: 'bluebird',
-		}),
-
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
 		// tell webpack to ignore it.

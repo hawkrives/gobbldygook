@@ -1,3 +1,4 @@
+import Bluebird from 'bluebird'
 import db from './db'
 import map from 'lodash/map'
 
@@ -53,5 +54,5 @@ export async function getCourse({clbid, term}, fabrications) {
  * @fulfill {Object[]} - the courses.
  */
 export default function getCourses(clbids, fabrications) {
-	return Promise.all(map(clbids, c => getCourse(c, fabrications)))
+	return Bluebird.all(map(clbids, c => getCourse(c, fabrications)))
 }

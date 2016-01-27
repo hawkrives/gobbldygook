@@ -1,3 +1,4 @@
+import Bluebird from 'bluebird'
 import map from 'lodash/map'
 import {status, text} from './fetch-helpers'
 import uniqueId from 'lodash/uniqueId'
@@ -22,7 +23,7 @@ worker.onmessage = ({data: [resultId, type, actionInfo]}) => {
 }
 
 function loadDataFile(url) {
-	return new Promise((resolve, reject) => {
+	return new Bluebird(resolve => {
 		const sourceId = uniqueId()
 		const cachebuster = Date.now()
 
@@ -35,7 +36,7 @@ function loadDataFile(url) {
 					resolve(contents)
 				}
 				else if (type === 'error') {
-					reject(contents)
+					resolve(contents)
 				}
 			}
 		}
@@ -59,9 +60,9 @@ export default function loadData() {
 	if (navigator.onLine) {
 		const promises = map(infoFiles, url => loadDataFile(url).catch(err => console.error(err)))
 
-		return Promise.all(promises)
+		return Bluebird.all(promises)
 	}
 	else {
-		return Promise.resolve(null)
+		return Bluebird.resolve(null)
 	}
 }

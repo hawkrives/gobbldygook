@@ -1,3 +1,4 @@
+import Bluebird from 'bluebird'
 import * as studentActions from '../students/constants'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
@@ -68,7 +69,7 @@ const saveStudentsMiddleware = store => next => action => {
 	const promises = map(studentsToSave, stu =>
 		store.dispatch(saveStudent(stu.data.present.id)))
 
-	return Promise.all(promises).then(() => result)
+	return Bluebird.all(promises).then(() => result)
 }
 
 export default saveStudentsMiddleware

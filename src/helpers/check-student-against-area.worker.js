@@ -1,5 +1,5 @@
 /* global WorkerGlobalScope */
-
+import Bluebird from 'bluebird'
 import mapKeys from 'lodash/mapKeys'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
@@ -24,12 +24,12 @@ function alterCourse(course) {
 }
 
 function checkStudentAgainstArea(student, area) {
-	const areaData = area._area
-
-	if (area._error) {
-		console.error('checkStudentAgainstArea:', area._error, area)
-		return Promise.resolve(area)
+	if (!area || area._error) {
+		console.error('checkStudentAgainstArea:', (area ? area._error : 'area is null'), area)
+		return Bluebird.resolve(area)
 	}
+
+	const areaData = area._area
 
 	student.courses = map(getActiveStudentCourses(student), alterCourse)
 
@@ -39,14 +39,14 @@ function checkStudentAgainstArea(student, area) {
 	}
 	catch (err) {
 		console.error('checkStudentAgainstArea:', err)
-		return Promise.resolve({...area, _error: err.message})
+		return Bluebird.resolve({...area, _error: err.message})
 	}
 
 	const finalReqs = findLeafRequirements(details)
 	const maxProgress = finalReqs.length
 	const currentProgress = filter(finalReqs, {computed: true}).length
 
-	return Promise.resolve({
+	return Bluebird.resolve({
 		...area,
 		_area: details,
 		_checked: true,

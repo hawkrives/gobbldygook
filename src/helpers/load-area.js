@@ -31,21 +31,29 @@ function loadArea(areaQuery) {
 	}
 
 	return db.store('areas').query(dbQuery)
-		.then(area => {
-			console.log(area)
-			if (isArray(area) && area.length) {
-				area = resolveArea(area, dbQuery)
+		.then(result => {
+			console.log('before', result)
+			if (result === undefined) {
+				return {...areaQuery, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`}
 			}
 
-			if (area === undefined || isArray(area)) {
-				area._error = `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`
+			if (result.length === 1) {
+				result = result[0]
+			}
+			else if (result.length >= 2) {
+				result = resolveArea(result, dbQuery)
+			}
+			else {
+				result = {name, type, revision, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`}
 			}
 
-			return {...areaQuery, _area: enhanceHanson(area)}
+			console.log('after', result)
+			return {...areaQuery, _area: enhanceHanson(result)}
 		})
 		.catch(err => {
 			console.error(err)  // we can probably remove this in the future
 			area._error = `Could not find area ${JSON.stringify(dbQuery)} (error: ${err.message})`
+			return area
 		})
 }
 

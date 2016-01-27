@@ -1,3 +1,4 @@
+import Bluebird from 'bluebird'
 import db from '../../../helpers/db'
 import flatten from 'lodash/flatten'
 import map from 'lodash/map'
@@ -29,7 +30,7 @@ export function reloadCachedAreas() {
 		dispatch(loadingAreas())
 		const {areas} = getState()
 		dispatch({ type: START_LOAD_AREAS, payload: areas })
-		const areaPromises = Promise.all(map(areas, loadArea))
+		const areaPromises = Bluebird.all(map(areas, loadArea))
 		return dispatch({ type: RELOAD_CACHED_AREAS, payload: areaPromises })
 	}
 }
@@ -40,7 +41,7 @@ export function loadAreas() {
 		const {students} = getState()
 		const areas = flatten(map(students, student => student.data.present.studies))
 		dispatch({ type: START_LOAD_AREAS, payload: areas })
-		const areaPromises = Promise.all(map(areas, loadArea))
+		const areaPromises = Bluebird.all(map(areas, loadArea))
 		return dispatch({ type: LOAD_AREAS, payload: areaPromises })
 	}
 }
@@ -50,7 +51,7 @@ export function cacheAreasFromStudies(areas) {
 		dispatch(loadingAreas())
 		dispatch({ type: START_LOAD_AREAS, payload: areas })
 		const {areas: cachedAreas} = getState()
-		const areaPromises = Promise.all(map(areas, area => loadArea(area, cachedAreas)))
+		const areaPromises = Bluebird.all(map(areas, area => loadArea(area, cachedAreas)))
 		return dispatch({ type: CACHE_AREAS_FROM_STUDIES, payload: areaPromises })
 	}
 }

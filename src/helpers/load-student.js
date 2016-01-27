@@ -1,3 +1,5 @@
+import Bluebird from 'bluebird'
+
 import Student from '../models/student'
 const log = (...args) => TESTING || /* istanbul ignore next */ console.error(...args)
 
@@ -6,7 +8,7 @@ export default function loadStudent(studentId) {
 
 	if (rawStudent === null || rawStudent === '[object Object]') {
 		localStorage.removeItem(studentId)
-		return Promise.resolve(null)
+		return Bluebird.resolve(null)
 	}
 
 	// basicStudent defaults to an empty object so that the constructor has
@@ -20,5 +22,5 @@ export default function loadStudent(studentId) {
 		log(e)
 	}
 
-	return Promise.resolve(Student(basicStudent))
+	return Bluebird.resolve(Student(basicStudent))
 }

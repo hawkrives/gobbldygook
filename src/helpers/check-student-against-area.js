@@ -1,3 +1,4 @@
+import Bluebird from 'bluebird'
 import uniqueId from 'lodash/uniqueId'
 
 import Worker from './check-student-against-area.worker.js'
@@ -15,7 +16,7 @@ worker.onerror = msg => console.warn('[main] received error from check-student w
  * @fulfill {Object} - The details of the area check.
  */
 const checkStudentAgainstArea = student => area => {
-	return new Promise((resolve, reject) => {
+	return new Bluebird(resolve => {
 		const sourceId = uniqueId()
 
 		// This is inside of the function so that it doesn't get unregistered too early
@@ -29,7 +30,7 @@ const checkStudentAgainstArea = student => area => {
 					resolve(contents)
 				}
 				else if (type === 'error') {
-					reject({_error: contents.message})
+					resolve({_error: contents.message})
 				}
 			}
 		}

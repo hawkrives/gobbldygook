@@ -1,3 +1,5 @@
+import Bluebird from 'bluebird'
+
 import filter from 'lodash/filter'
 import size from 'lodash/size'
 import map from 'lodash/map'
@@ -19,7 +21,7 @@ import getActiveStudentCourses from './get-active-student-courses'
  */
 export default function checkStudentGraduatability(student) {
 	const areaPromises = map(student.areas, checkStudentAgainstArea(student))
-	return Promise.all(areaPromises).then(areaDetails => {
+	return Bluebird.all(areaPromises).then(areaDetails => {
 		const goodAreas = filter(areaDetails, area => area._area && area._area.computed === true)
 		const allAreasPass = (size(goodAreas) === size(areaDetails))
 

@@ -1,3 +1,4 @@
+import Bluebird from 'bluebird'
 import map from 'lodash/map'
 import uniq from 'lodash/uniq'
 
@@ -12,7 +13,7 @@ export function loadStudents() {
 
 		return dispatch({
 			type: LOAD_STUDENTS,
-			payload: Promise.all(map(studentIds, id => dispatch(loadStudent(id)))),
+			payload: Bluebird.all(map(studentIds, id => dispatch(loadStudent(id)))),
 		})
 	}
 }

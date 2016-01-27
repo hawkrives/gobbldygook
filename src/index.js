@@ -1,6 +1,5 @@
 // Set up the default promise implementation as Bluebird
 import Bluebird from 'bluebird'
-global.Promise = Bluebird
 Bluebird.config({
 	warnings: {
 		wForgottenReturn: false,

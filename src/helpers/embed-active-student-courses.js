@@ -1,3 +1,4 @@
+import Bluebird from 'bluebird'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
 import fromPairs from 'lodash/fromPairs'
@@ -23,12 +24,12 @@ export default function embedActiveStudentCourses(student, {cache=[]}) {
 			return course
 		})
 
-		return Promise.all(courses).then(fulfilledCourses => {
+		return Bluebird.all(courses).then(fulfilledCourses => {
 			return [schedule.id, {...schedule, courses: fulfilledCourses}]
 		})
 	})
 
-	return Promise.all(enhanced).then(fulfilled => {
+	return Bluebird.all(enhanced).then(fulfilled => {
 		return fromPairs(fulfilled)
 	})
 }

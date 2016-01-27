@@ -1,3 +1,5 @@
+import Bluebird from 'bluebird'
+
 import * as studentConstants from '../students/constants'
 import * as areaConstants from '../areas/constants'
 import * as courseConstants from '../courses/constants'
@@ -80,7 +82,7 @@ const checkStudentsMiddleware = store => next => action => {
 	const promises = map(affectedStudents, s =>
 		store.dispatch(checkStudent(s.data.present.id)))
 
-	return Promise.all(promises).then(() => result)
+	return Bluebird.all(promises).then(() => result)
 }
 
 export default checkStudentsMiddleware
