@@ -1,5 +1,21 @@
 import isSafari from 'is-safari'
 
+const canonicalUrl = 'https://www.stolaf.edu/people/rives/g'
+function redirectIfNeeded() {
+	if (typeof window !== 'undefined') {
+		let {protocol, hostname} = window.location
+		if (hostname === 'localhost') {
+			return
+		}
+		if (hostname !== 'www.stolaf.edu') {
+			window.location = canonicalUrl
+		}
+		if (protocol !== 'https:') {
+			window.location = canonicalUrl
+		}
+	}
+}
+
 if (isSafari) {
 	document.write(`
         Safari is not supported, unfortunately, until Apple gets
@@ -16,5 +32,7 @@ if (isSafari) {
 }
 
 else {
+	redirectIfNeeded()
+
 	require('./index.js')
 }
