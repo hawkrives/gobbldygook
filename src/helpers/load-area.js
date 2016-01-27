@@ -32,7 +32,6 @@ function loadArea(areaQuery) {
 
 	return db.store('areas').query(dbQuery)
 		.then(result => {
-			console.log('before', result)
 			if (result === undefined) {
 				return {...areaQuery, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`}
 			}
@@ -47,7 +46,6 @@ function loadArea(areaQuery) {
 				result = {name, type, revision, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`}
 			}
 
-			console.log('after', result)
 			return {...areaQuery, _area: enhanceHanson(result)}
 		})
 		.catch(err => {

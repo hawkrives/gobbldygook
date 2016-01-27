@@ -102,12 +102,10 @@ Semester.propTypes = {
 
 // Implements the drag source contract.
 const semesterTarget = {
-	drop(props, monitor, component) {
+	drop(props, monitor) {
 		console.log('dropped course')
 		const item = monitor.getItem()
 		const {clbid, fromScheduleId, isFromSchedule} = item
-		// we use component.props here in order to allow dropping from a not-semester onto a semester
-		// wait...
 		const toSchedule = props.schedule
 
 		if (isFromSchedule) {
@@ -119,7 +117,6 @@ const semesterTarget = {
 	},
 	canDrop(props, monitor) {
 		const item = monitor.getItem()
-		console.log('canDrop', props)
 		return !includes(props.schedule.clbids, item.clbid)
 	},
 }
