@@ -1,6 +1,7 @@
 import union from 'lodash/union'
 import reject from 'lodash/reject'
 import stringify from 'json-stable-stringify'
+import mapValues from 'lodash/mapValues'
 import omit from 'lodash/omit'
 
 export function getIdCache() {
@@ -33,11 +34,13 @@ export default async function saveStudent(student) {
 
 	const oldVersion = localStorage.getItem(student.id)
 
+	student = {...student}
+	student = omit(student, ['areas', 'canGraduate'])
+	student.schedules = mapValues(student.schedules, s => omit(s, ['courses', 'conflicts', 'hasConflict']))
+
 	if (oldVersion !== stringify(student)) {
 		!TESTING && console.log(`saving student ${student.name} (${student.id})`)
 		student = {...student, dateLastModified: new Date()}
-		student = omit(student, ['areas', 'canGraduate'])
-		student.schedules = omit({...student.schedules}, ['courses', 'conflicts', 'hasConflict'])
 		localStorage.setItem(student.id, stringify(student))
 		await addStudentToCache(student.id)
 	}
