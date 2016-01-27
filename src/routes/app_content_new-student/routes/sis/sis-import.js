@@ -24,10 +24,7 @@ export default class SISImportScreen extends Component {
 	componentWillMount() {
 		checkIfLoggedIn()
 			.then(() => this.setState({loggedIn: true, checkingLogin: false}))
-			.catch(err => {
-				console.error(err)
-				this.setState({loggedIn: false, checkingLogin: false, error: serializeError(err)})
-			})
+			.catch(() => this.setState({loggedIn: false, checkingLogin: false}))
 	}
 
 	handleImportData = () => {
