@@ -1,6 +1,6 @@
 ## Where expressions
 
-- WhereExpressions need to accomodate for multiple qualifiers.
+WhereExpressions need to accomodate for multiple qualifiers.
 
 - The courses are rendering the fully-qualified indicators on the second computation/render/pass/whatever
 - They should never render the fully-qualified indicator
@@ -44,6 +44,7 @@ Collect courses up to the limit, then return. Remove any other matches from the 
 ## New Search Syntax
 
 old: `dept: $NOR  dept: AMCON  dept: GCON  gereq: HWC  year: 2015`
+
 new: `dept: !AMCON and !GCON  gereq: HWC  year: 2015`
 
 ```yaml
