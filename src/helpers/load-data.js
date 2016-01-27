@@ -18,7 +18,7 @@ worker.onerror = msg => console.warn('[main] received error from load-data worke
 worker.onmessage = ({data: [resultId, type, actionInfo]}) => {
 	if (resultId === null && type === 'dispatch') {
 		const action = actions[actionInfo.type][actionInfo.action](...actionInfo.args)
-		typeof window !== 'undefined' && window.dispatch && window.dispatch(action)
+		global.dispatch && global.dispatch(action)
 	}
 }
 
@@ -58,7 +58,7 @@ export default function loadData() {
 	]
 
 	if (navigator.onLine) {
-		const promises = map(infoFiles, url => loadDataFile(url).catch(err => console.error(err)))
+		const promises = map(infoFiles, url => loadDataFile(url))
 
 		return Bluebird.all(promises)
 	}
