@@ -74,7 +74,7 @@
     "react-gateway": "2.0.4",
     "react-input-autosize": "0.6.8",
     "react-modal2": "3.0.2",
-    "react-redux": "4.0.6",
+    "react-redux": "4.1.1",
     "react-router": "2.0.0-rc5",
     "react-router-redux": "2.1.0",
     "react-select": "1.0.0-beta8",
