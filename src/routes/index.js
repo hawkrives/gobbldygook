@@ -6,7 +6,7 @@ export default {
 		getIndexRoute(location, cb) {
 			require.ensure([], () => {
 				cb(null, {content: require('./app_content_student-picker').default})
-			})
+			}, 'app.index')
 		},
 
 		getChildRoutes(state, cb) {
@@ -18,13 +18,13 @@ export default {
 					require('./app_content_new-student').default,
 					require('./app_content_student').default, // s/:id
 				])
-			})
+			}, 'app.routes')
 		},
 
 		getComponent(location, cb) {
 			require.ensure([], () => {
 				cb(null, require('../containers/app').default)
-			})
+			}, 'app.component')
 		},
 	}],
 }

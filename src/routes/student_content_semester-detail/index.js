@@ -5,6 +5,6 @@ export default {
 			cb(null, {
 				content: require('./containers/semester-detail').default,
 			})
-		})
+		}, 'semester-detail.components')
 	},
 }

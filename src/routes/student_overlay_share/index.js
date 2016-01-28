@@ -5,6 +5,6 @@ export default {
 			cb(null, {
 				overlay: require('./containers/share-student').default,
 			})
-		})
+		}, 'share-student.components')
 	},
 }

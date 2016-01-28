@@ -6,6 +6,6 @@ export default {
 			cb(null, {
 				content: require('./containers/area-editor').default,
 			})
-		})
+		}, 'area-editor.components')
 	},
 }

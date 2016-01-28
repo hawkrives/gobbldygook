@@ -3,6 +3,6 @@ export default {
 	getComponent(location, cb) {
 		require.ensure([], () => {
 			cb(null, require('./sis-import').default)
-		})
+		}, 'new-student.import.component')
 	},
 }

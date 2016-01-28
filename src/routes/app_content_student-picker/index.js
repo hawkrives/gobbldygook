@@ -4,6 +4,6 @@ export default {
 			cb(null, {
 				content: require('./containers/student-picker').default,
 			})
-		})
+		}, 'student-picker.components')
 	},
 }

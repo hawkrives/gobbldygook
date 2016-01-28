@@ -4,6 +4,6 @@ export default {
 			cb(null, {
 				content: require('./containers/course-table').default,
 			})
-		})
+		}, 'course-table.components')
 	},
 }

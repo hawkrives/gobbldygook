@@ -5,6 +5,6 @@ export default {
 			cb(null, {
 				sidebar: require('./containers/search-sidebar').default,
 			})
-		})
+		}, 'search-sidebar.components')
 	},
 }

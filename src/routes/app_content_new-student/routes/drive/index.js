@@ -3,6 +3,6 @@ export default {
 	getComponent(location, cb) {
 		require.ensure([], () => {
 			cb(null, require('./drive').default)
-		})
+		}, 'new-student.drive.component')
 	},
 }

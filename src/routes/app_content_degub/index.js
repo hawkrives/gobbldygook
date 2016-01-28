@@ -5,6 +5,6 @@ export default {
 			cb(null, {
 				content: require('./components/degub').default,
 			})
-		})
+		}, 'degub.components')
 	},
 }

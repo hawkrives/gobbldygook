@@ -5,6 +5,6 @@ export default {
 			cb(null, {
 				overlay: require('./containers/course-searcher-overlay').default,
 			})
-		})
+		}, 'course-overlay.components')
 	},
 }
