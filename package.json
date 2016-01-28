@@ -156,7 +156,7 @@
     "react-transform-hmr": "1.0.1",
     "react-transform-render-visualizer": "0.3.0",
     "redbox-react": "1.2.0",
-    "redux-devtools": "3.0.1",
+    "redux-devtools": "3.0.2",
     "redux-devtools-dock-monitor": "1.0.1",
     "redux-devtools-log-monitor": "1.0.2",
     "redux-freeze": "0.1.2",
