@@ -22,7 +22,7 @@ function loadArea(areaQuery) {
 
 	let area = {...areaQuery}
 	if (isCustom && source) {
-		return {...areaQuery, _area: enhanceHanson(yaml.safeLoad(source))}
+		return Promise.resolve({...areaQuery, _area: enhanceHanson(yaml.safeLoad(source))})
 	}
 
 	let dbQuery = {name: [name], type: [type]}
