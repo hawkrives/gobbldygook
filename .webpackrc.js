@@ -4,11 +4,11 @@
 const pkg = require('./package.json')
 const webpack = require('webpack')
 
-const ProvidePlugin = webpack.ProvidePlugin
-const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
+const DedupePlugin = webpack.optimize.DedupePlugin
 const DefinePlugin = webpack.DefinePlugin
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
-const DedupePlugin = webpack.optimize.DedupePlugin
+const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
 const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -30,9 +30,10 @@ const config = {
 
 	stats: {},
 
-	entry: [
-		'./src/start.js',
-	],
+	entry: {
+		app: './src/start.js',
+		common: ['react', 'bluebird'],
+	},
 
 	output: {
 		path: outputFolder + '/',
@@ -109,6 +110,12 @@ const config = {
 		}),
 
 		new NotifierPlugin({title: `${pkg.name} build`}),
+
+		new CommonsChunkPlugin({
+			minChunks: Infinity,
+			name: 'common',
+			filename: 'commons.[hash].js',
+		}),
 	],
 
 	module: {
@@ -141,8 +148,17 @@ const config = {
 	},
 
 	postcss: [
-		require('autoprefixer')({ browsers: ['last 2 versions', 'Firefox ESR'] }),
+		require('autoprefixer')({
+			browsers: ['last 2 versions', 'Firefox ESR'],
+		}),
 	],
+
+	worker: {
+		output: {
+			filename: '[hash].worker.js',
+			chunkFilename: '[id].[hash].worker.js',
+		},
+	},
 }
 
 
@@ -152,10 +168,8 @@ if (isDevelopment) {
 	config.devtool = 'eval'
 
 	// add dev server and hotloading clientside code
-	config.entry.unshift(
-		'webpack-dev-server/client?http://' + config.hostname + ':' + config.port,
-		'webpack/hot/only-dev-server'
-	)
+	config.entry['dev-server'] = `webpack-dev-server/client?http://${config.hostname}:${config.port}`
+	config.entry['hot'] = 'webpack/hot/only-dev-server'
 
 	config.devServer.port = config.port
 	config.devServer.host = config.hostname
@@ -165,12 +179,12 @@ if (isDevelopment) {
 		new HotModuleReplacementPlugin(),
 	])
 
+	// Add style loaders
 	config.module.loaders.push({
 		test: /\.css$/,
 		loaders: ['style-loader', 'css-loader', 'postcss-loader'],
 	})
 
-	// Add optional loaders
 	config.module.loaders.push({
 		test: /\.s(c|a)ss$/,
 		loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
@@ -192,7 +206,6 @@ else if (isTest) {
 // production
 else if (isProduction) {
 	config.devtool = 'source-map'
-
 	config.stats.children = false
 
 	// minify in production
