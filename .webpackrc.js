@@ -16,7 +16,7 @@ const HtmlPlugin = require('./scripts/webpack/html-plugin')
 const NotifierPlugin = require('webpack-notifier')
 
 const isProduction = (process.env.NODE_ENV === 'production')
-const isDev = (process.env.NODE_ENV === 'development')
+const isDevelopment = (process.env.NODE_ENV === 'development')
 const isTest = (process.env.NODE_ENV === 'test')
 
 const outputFolder = 'build/'
@@ -90,7 +90,7 @@ const config = {
 					].join('\n'),
 				}
 			},
-			isDev: isDev,
+			isDev: isDevelopment,
 		}),
 
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
@@ -102,7 +102,7 @@ const config = {
 
 		new DefinePlugin({
 			VERSION: JSON.stringify(pkg.version),
-			DEVELOPMENT: isDev,
+			DEVELOPMENT: isDevelopment,
 			PRODUCTION: isProduction,
 			TESTING: isTest,
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -147,7 +147,7 @@ const config = {
 
 
 // dev specific stuff
-if (isDev) {
+if (isDevelopment) {
 	// debugging option
 	config.devtool = 'eval'
 
