@@ -2,7 +2,6 @@
 'use strict'
 
 const pkg = require('./package.json')
-const buildFilename = require('./scripts/webpack/build-filename')
 const webpack = require('webpack')
 
 const ProvidePlugin = webpack.ProvidePlugin
@@ -23,7 +22,6 @@ const isTest = (process.env.NODE_ENV === 'test')
 const outputFolder = 'build/'
 
 const urlLoaderLimit = 10000
-const useHash = false
 
 const config = {
 	replace: null,
@@ -40,10 +38,12 @@ const config = {
 		path: outputFolder + '/',
 		publicPath: '',
 
-		filename: isDev ? 'app.js' : buildFilename(pkg, useHash, 'js'),
-		cssFilename: isDev ? 'app.css' : buildFilename(pkg, useHash, 'css'),
+		// extract-text-plugin uses [contenthash], and webpack uses [hash].
+		filename: isDevelopment ? 'app.js' : `${pkg.name}.[hash].js`,
+		cssFilename: isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`,
+		chunkFilename: 'chunk.[name].[chunkhash].js',
 
-		hash: useHash,
+		hash: true,
 	},
 
 	devServer: {
