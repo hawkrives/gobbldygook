@@ -60,7 +60,7 @@
 
 		"transform-undefined-to-void",
 
-		"external-helpers-2",
+		"external-helpers",
 		"transform-runtime",
 	],
 }

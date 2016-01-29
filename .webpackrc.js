@@ -20,7 +20,6 @@ const isDevelopment = (process.env.NODE_ENV === 'development')
 const isTest = (process.env.NODE_ENV === 'test')
 
 const outputFolder = 'build/'
-
 const urlLoaderLimit = 10000
 
 const config = {
