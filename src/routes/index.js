@@ -39,9 +39,7 @@ export default {
 //	<Route path='search' components={{overlay: CourseSearcherOverlay}} />
 //	<Route path='create' components={{content: NewStudent}} />
 //	<Route path='edit-area(/:type)(/:name)(/:revision)' components={{content: AreaEditor}} />
-//
 //	<Route path='degub' components={{content: Degub}} />
-//
 //	<Route component={Student} path='s/:id/'>
 //		<IndexRoute components={{content: CourseTable}} />
 //		<Route path='share' components={{overlay: ShareSheet}} />
