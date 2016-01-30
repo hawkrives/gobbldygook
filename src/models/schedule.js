@@ -14,6 +14,8 @@ export default function Schedule(data={}) {
 		clbids: [],
 		year: 0,
 		semester: 0,
+
+		metadata: {},
 	}
 
 	let schedule = {
