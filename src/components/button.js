@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
+import Link from 'react-router/lib/Link'
 
 import compareProps from '../helpers/compare-props'
 import './button.scss'
@@ -9,6 +10,7 @@ export default class Button extends Component {
 		children: PropTypes.any.isRequired,
 		className: PropTypes.string,
 		disabled: PropTypes.bool,
+		link: PropTypes.bool,
 		onClick: PropTypes.func,
 		style: PropTypes.object,
 		title: PropTypes.string,
@@ -24,16 +26,18 @@ export default class Button extends Component {
 	}
 
 	render() {
-		return (
-			<button type='button'
-				className={cx('button', `button--${this.props.type}`, this.props.className)}
-				disabled={this.props.disabled}
-				onClick={this.props.onClick}
-				style={this.props.style}
-				title={this.props.title}
-			>
-				{this.props.children}
-			</button>
-		)
+		let tag = this.props.link ? Link : 'button'
+		let props = {
+			type: 'button',
+			className: cx('button', `button--${this.props.type}`, this.props.className),
+			disabled: this.props.disabled,
+			onClick: this.props.onClick,
+			style: this.props.style,
+			title: this.props.title,
+		}
+		if (this.props.link) {
+			props = {...props, ...this.props}
+		}
+		return React.createElement(tag, props, this.props.children)
 	}
 }

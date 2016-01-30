@@ -31,10 +31,6 @@
 
 	// Gets rid of tap active state
 	-webkit-tap-highlight-color: transparent;
-
-	a {
-		@include link-undecorated;
-	}
 }
 
 // Raised Button
@@ -92,7 +88,6 @@
 	}
 }
 
-a .button--raised,
-a .button--flat {
-	width: 100%;
+a.button {
+	@include link-undecorated;
 }
