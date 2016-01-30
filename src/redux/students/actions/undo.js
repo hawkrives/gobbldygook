@@ -5,5 +5,5 @@ export function undo(id) {
 }
 
 export function redo(id) {
-	return {type: UndoableActionTypes.UNDO, payload: {id}}
+	return {type: UndoableActionTypes.REDO, payload: {id}}
 }
