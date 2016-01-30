@@ -4,7 +4,7 @@ import map from 'lodash/map'
 
 export default function getStudentStudies(student, {cache=[], cacheOnly=false}) {
 	const promises = map(student.studies,
-		study => loadArea(study, {cache, cacheOnly}).catch(err => {console.error(err)}))
+		study => loadArea(study, {cache, cacheOnly}).catch(err => console.error(err)))
 
 	return Bluebird.all(promises)
 }
