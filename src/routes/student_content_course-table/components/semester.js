@@ -14,8 +14,7 @@ import Icon from '../../../components/icon'
 import List from '../../../components/list'
 
 import CourseList from './course-list'
-import './semester.scss'
-
+import styles from './semester.scss'
 
 export default function Semester(props) {
 	let courseList = null
@@ -31,8 +30,8 @@ export default function Semester(props) {
 	if (schedule && courses && courses.length) {
 		const courseCount = courses.length
 
-		infoBar.push(<li key='course-count'>{` – ${courseCount} ${plur('course', courseCount)}`}</li>)
-		currentCredits && infoBar.push(<li key='credit-count'>{` – ${currentCredits} ${plur('credit', currentCredits)}`}</li>)
+		infoBar.push(<li key='course-count'>{`${courseCount} ${plur('course', courseCount)}`}</li>)
+		currentCredits && infoBar.push(<li key='credit-count'>{`${currentCredits} ${plur('credit', currentCredits)}`}</li>)
 	}
 
 	if (schedule) {
@@ -46,40 +45,38 @@ export default function Semester(props) {
 		/>
 	}
 
-	const className = cx('semester', {
+	const className = cx(styles.semester, {
 		invalid: validation ? validation.hasConflict : false,
-		'can-drop': canDrop,
+		[styles.canDrop]: canDrop,
 	})
 
 	return (
 		<div className={className} ref={instance => props.connectDropTarget(findDOMNode(instance))}>
-			<header className='semester-title'>
+			<header className={styles.title}>
 				<Link
-					className='semester-header'
+					className={styles.header}
 					to={`/s/${student.id}/semester/${year}/${semester}`}
 				>
 					<h1>{semesterName(semester)}</h1>
 
-					<List className='info-bar' type='inline'>
+					<List className={styles.info} type='inline'>
 						{infoBar}
 					</List>
 				</Link>
 
-				<span className='buttons'>
-					<Link to={`/s/${student.id}/search/${year}/${semester}`}><Button
-						className='add-course'
-						title='Search for courses'
-					>
-						<Icon name='search' /> Course
-					</Button></Link>
-					<Button
-						className='remove-semester'
-						onClick={props.removeSemester}
-						title={`Remove ${year} ${semesterName(semester)}`}
-					>
-						<Icon name='close' />
-					</Button>
-				</span>
+				<Button link
+					to={`/s/${student.id}/search/${year}/${semester}`}
+					title='Search for courses'
+				>
+					<Icon name='search' /> Course
+				</Button>
+				<Button
+					className={styles.remove}
+					onClick={props.removeSemester}
+					title={`Remove ${year} ${semesterName(semester)}`}
+				>
+					<Icon name='close' />
+				</Button>
 			</header>
 
 			{courseList}

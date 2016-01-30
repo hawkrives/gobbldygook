@@ -7,7 +7,7 @@ import List from '../../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 
-import './course-list.scss'
+import styles from './course-list.scss'
 
 
 export default function CourseList(props) {
@@ -19,6 +19,7 @@ export default function CourseList(props) {
 		: (<li key={course.clbid}>
 			<InlineCourse
 				index={i}
+				className={styles.course}
 				course={course}
 				conflicts={props.conflicts}
 				scheduleId={props.schedule.id}
@@ -33,7 +34,7 @@ export default function CourseList(props) {
 	}
 
 	return (
-		<List className='course-list' type='plain'>
+		<List className={styles.courseList} type='plain'>
 			{courseObjects}
 			{emptySlots}
 		</List>

@@ -1,10 +1,11 @@
 @import '../../../base/variables';
 @import '../../../mixins/link-undecorated';
-@import './semester';
+@import './variables';
 
-.course-list {
+:local(.courseList) {
 	min-height: 30px;
 	padding-bottom: 0.25em;
+
 	a {
 		@include link-undecorated;
 	}
@@ -13,19 +14,17 @@
 		outline: 0;
 	}
 
-	.list-item {
-		// border-bottom: $material-divider;
-
-		&:last-child {
-			border-bottom: 0;
-		}
+	:global(.list-item):last-child {
+		border-bottom: 0;
 	}
+}
 
-	.course {
-		padding: $semester-edge-padding;
 
-		&:hover {
-			background-color: color('gray', '100');
-		}
+:local(.course) {
+	composes: course from '../../../components/inline-course.scss';
+	padding: $semester-edge-padding;
+
+	&:hover {
+		background-color: color('gray', '100');
 	}
 }

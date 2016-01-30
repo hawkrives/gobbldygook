@@ -4,59 +4,78 @@
 @import '../../../mixins/heading-neutral';
 @import '../../../mixins/link-undecorated';
 @import '../../../mixins/list-inline';
+@import './variables';
 
-$semester-edge-padding:
-	($block-edge-padding)
-	($block-edge-padding * 1.5);
-
-.semester-list {
-	flex: 1;
-	display: flex;
-	flex-flow: row wrap;
-}
-
-.semester {
-	@include card;
-	flex: 1 0;
-	min-width: 16em;
-	margin: $semester-spacing;
-}
-
-.semester-header {
-	flex: 1;
-}
-
-.semester.can-drop {
-	cursor: copy;
-	box-shadow: 0 0 4px color('gray', '500');
-	z-index: 10;
-}
-
-.semester-title {
-	padding: $semester-edge-padding;
-	border-bottom: $material-divider;
-
-	font-size: 0.85em;
-	a { @include link-undecorated; }
-
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: stretch;
-	font-feature-settings: 'smcp';
-	border-top-right-radius: 2px;
-	border-top-left-radius: 2px;
-
-	h1 {
-		@include heading-neutral;
-		display: inline-block;
-	}
-
-	.buttons {
+:local {
+	.semester-list {
+		flex: 1;
 		display: flex;
-		align-items: stretch;
+		flex-flow: row wrap;
+	}
+	.semester {
+		@include card;
+		flex: 1 0;
+		min-width: 16em;
+		margin: $semester-spacing;
 	}
 
-	.button {
+	.canDrop {
+		cursor: copy;
+		box-shadow: 0 0 4px color('gray', '500');
+		z-index: 10;
+	}
+
+	.remove:hover {
+		color: color('red', '500');
+		border-color: color('red', '500');
+		background-color: color('red', '50');
+	}
+
+
+	.title {
+		padding: $semester-edge-padding;
+		border-bottom: $material-divider;
+
+		font-size: 0.85em;
+
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: stretch;
+		font-feature-settings: 'smcp';
+		border-top-right-radius: 2px;
+		border-top-left-radius: 2px;
+	}
+
+	.header {
+		@include link-undecorated;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+
+		h1 {
+			@include heading-neutral;
+			display: inline-block;
+		}
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.info {
+		color: color('gray', '500');
+		font-size: 0.8em;
+
+		li {
+			font-feature-settings: 'onum';
+		}
+		li + li::before {
+			content: " – ";
+			padding-left: 0.25em;
+		}
+	}
+
+	.title :global(.button) {
 		padding: 0 0.4em;
 		min-height: 0;
 		font-size: 0.9em;
@@ -64,23 +83,8 @@ $semester-edge-padding:
 		color: color('gray', '500');
 		transition: 0.15s;
 
-		& + .button {
+		& + :global(.button) {
 			margin-left: 0.1em;
 		}
-	}
-
-	.remove-semester:hover {
-		color: color('red', '500');
-		border-color: color('red', '500');
-		background-color: color('red', '50');
-	}
-}
-
-.semester .info-bar {
-	color: color('gray', '500');
-
-	li {
-		font-feature-settings: 'onum';
-		padding-left: 0.25em;
 	}
 }

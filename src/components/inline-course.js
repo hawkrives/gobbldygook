@@ -15,10 +15,11 @@ import buildCourseIdent from '../helpers/build-course-ident'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 
-import './inline-course.scss'
+import styles from './inline-course.scss'
 
 class Course extends Component {
 	static propTypes = {
+		className: PropTypes.string,
 		conflicts: PropTypes.array,
 		connectDragSource: PropTypes.func.isRequired,  // react-dnd
 		course: PropTypes.object.isRequired,
@@ -57,14 +58,14 @@ class Course extends Component {
 		const warningEls = map(validWarnings, (w, index) =>
 			<li key={index}><Icon name={w.icon} /> {w.msg}</li>)
 
-		let classSet = cx('course course--inline info-wrapper', {
-			expanded: this.state.isOpen,
-			'has-warnings': hasWarnings,
-			'is-dragging': this.props.isDragging,
+		let classSet = cx(this.props.className, styles.course, {
+			[styles.expanded]: this.state.isOpen,
+			[styles.hasWarnings]: hasWarnings,
+			[styles.isDragging]: this.props.isDragging,
 		})
 
 		const warningList = warningEls.length && (
-			<List type='inline' className='warnings'>{warningEls}</List>
+			<List type='inline' className={styles.warnings}>{warningEls}</List>
 		)
 
 		return this.props.connectDragSource(
@@ -74,24 +75,22 @@ class Course extends Component {
 			>
 				{warningList || null}
 
-				<div className='info-rows'>
-					<CourseTitle title={course.title} name={course.name} type={course.type} />
-					<div className='summary'>
-						<span className='identifier'>
-							{buildCourseIdent(course)}
-						</span>
-						{course.type !== 'Research' ? <span className='type'>{course.type}</span> : null}
-						{course.gereqs && <ul className='gereqs'>
-							{map(course.gereqs, (ge, idx) =>
-								<li key={ge + idx}>{ge}</li>
-							)}
-						</ul>}
-						{course.prerequisites &&
-							<span className='has-prerequisite' title={course.prerequisites}>!</span>}
-					</div>
-					<div className='summary'>
-						{course.times}
-					</div>
+				<CourseTitle className={styles.row} title={course.title} name={course.name} type={course.type} />
+				<div className={styles.row + ' ' + styles.summary}>
+					<span className={styles.identifier}>
+						{buildCourseIdent(course)}
+					</span>
+					{course.type !== 'Research' ? <span className={styles.type}>{course.type}</span> : null}
+					{course.gereqs && <ul className={styles.gereqs}>
+						{map(course.gereqs, (ge, idx) =>
+							<li key={ge + idx}>{ge}</li>
+						)}
+					</ul>}
+					{course.prerequisites &&
+						<span className={styles.hasPrerequisite} title={course.prerequisites}>!</span>}
+				</div>
+				<div className={styles.row + ' ' + styles.summary}>
+					{course.times}
 				</div>
 
 				{this.state.isOpen

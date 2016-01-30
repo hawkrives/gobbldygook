@@ -30,6 +30,46 @@
 		font-weight: 300;
 		text-align: center;
 	}
+
+	.details {
+		font-feature-settings: 'onum';
+	}
+
+	.tools {
+		border-top: $material-divider;
+		margin-top: 0.5em;
+		padding-top: 0.5em;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.remove-course {
+		color: color('red', '500');
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+		font-size: 0.85em;
+		&:hover {
+			background-color: color('red', '50');
+			border-color: color('red', '500');
+		}
+	}
+	.remove-course[disabled] {
+		color: color('gray', '500');
+		&:hover {
+			background-color: transparent;
+			border-color: transparent;
+		}
+	}
+
+	.offerings {
+		margin-bottom: 0.5em;
+	}
+
+	.offerings > span {
+		display: block;
+	}
 }
 
 .course--modal {

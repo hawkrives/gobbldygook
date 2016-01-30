@@ -1,121 +1,70 @@
-@import '../base/variables';
-@import '../mixins/color';
-@import '../mixins/list-inline';
+@import '../base/variables.scss';
+@import '../mixins/color.scss';
+@import '../mixins/list-inline.scss';
 
-.course {
-	.warnings {
-		font-size: 0.85em;
-		font-feature-settings: 'onum';
-		padding-bottom: 2px;
+
+:local(.course) p,
+:local(.course) ul {
+	margin: 0;
+}
+
+:local(.course) {
+	display: block;
+
+	&:hover {
+		cursor: pointer;
+		background-color: color('gray', '100');
 	}
+}
 
-	.warnings .list-item {
+:local(.summary) {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 0.75em;
+
+	& > * + *::before {
+		content: " · ";
+	}
+}
+
+
+:local(.identifier) {
+	font-feature-settings: 'tnum';
+}
+
+:local(.row) {
+	overflow: hidden;
+	line-height: 1.5;
+}
+
+:local(.gereqs) {
+	@include list-inline;
+	display: inline;
+	li {
+		display: inline;
+	}
+	li + li::before {
+		content: " · ";
+	}
+}
+
+:local(.warnings) {
+	font-size: 0.85em;
+	font-feature-settings: 'onum';
+	padding-bottom: 2px;
+
+	:global(.list-item) {
 		padding: 0.125em 0.35em;
 		border-radius: 0.25em;
 		background-color: color('amber', '500');
 	}
-	.warnings .list-item::before {
+	:global(.list-item)::before {
 		margin-right: 0.35em;
-	}
-
-	.title,
-	.subtitle,
-	.summary {
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-	}
-
-	.title,
-	.subtitle {
-		margin-top: 0;
-		margin-bottom: 0;
-		line-height: 1.2;
-		padding: 0 0 1px;
-		font-size: 1em;
-		font-weight: 500;
-		font-family: $heading-font-stack;
-	}
-
-	.subtitle {
-		font-size: 0.75em;
-	}
-
-	.title,
-	.details {
-		font-feature-settings: 'onum';
-	}
-
-	.summary > * + *::before {
-		content: " · ";
-	}
-
-	.identifier {
-		font-feature-settings: 'tnum';
-	}
-
-	p,
-	ul {
-		margin: 0;
-	}
-
-	.offerings > span {
-		display: block;
-	}
-
-	.gereqs {
-		@include list-inline;
-		display: inline;
-		li {
-			display: inline;
-		}
-		li + li::before {
-			content: " · ";
-		}
-	}
-
-	.tools {
-		border-top: $material-divider;
-		margin-top: 0.5em;
-		padding-top: 0.5em;
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.remove-course {
-		color: color('red', '500');
-		padding-left: 0.5em;
-		padding-right: 0.5em;
-		font-size: 0.85em;
-		&:hover {
-			background-color: color('red', '50');
-			border-color: color('red', '500');
-		}
-	}
-	.remove-course[disabled] {
-		color: color('gray', '500');
-		&:hover {
-			background-color: transparent;
-			border-color: transparent;
-		}
-	}
-
-	.offerings {
-		margin-bottom: 0.5em;
-	}
-
-
-
-	.info-rows {
-		flex: 1;
-		overflow: hidden;
-		line-height: 1.5;
 	}
 }
 
-.course.empty {
+:global(.course.empty) {
 	color: color('gray', '500');
 	user-select: none;
 
@@ -124,15 +73,6 @@
 	}
 }
 
-.course.is-dragging {
+:local(.isDragging) {
 	opacity: 0.5;
-}
-
-.course--inline {
-	cursor: pointer;
-	display: flex;
-
-	.summary {
-		font-size: 0.75em;
-	}
 }

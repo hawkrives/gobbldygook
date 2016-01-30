@@ -1,0 +1,21 @@
+:local(.title),
+:local(.subtitle) {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: 1.2;
+	padding: 0 0 1px;
+	font-size: 1em;
+	font-weight: 500;
+}
+
+:local(.subtitle) {
+	font-size: 0.75em;
+}
+
+:local(.title) {
+	font-feature-settings: 'onum';
+}
