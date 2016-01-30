@@ -43,7 +43,7 @@ function loadArea(areaQuery) {
 				result = resolveArea(result, dbQuery)
 			}
 			else {
-				result = {name, type, revision, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`}
+				return {name, type, revision, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`}
 			}
 
 			return {...areaQuery, _area: enhanceHanson(result)}
