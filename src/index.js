@@ -33,7 +33,7 @@ loadData()
 // Kick off the GUI
 console.log('3. 2.. 1... Blast off! 🚀')
 
-import { Router } from 'react-router'
+import Router from 'react-router/lib/Router'
 import history from './history'
 import routes from './routes'
 

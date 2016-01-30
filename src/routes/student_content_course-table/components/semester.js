@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {findDOMNode} from 'react-dom'
 import cx from 'classnames'
-import {Link} from 'react-router'
+import Link from 'react-router/lib/Link'
 import plur from 'plur'
 import semesterName from '../../../helpers/semester-name'
 import countCredits from '../../../area-tools/count-credits'
