@@ -1,4 +1,4 @@
-@import 'luma';
+@import './luma';
 
 @function contrast-ratio($color1, $color2) {
 	$luma1: luma($color1) + 5;

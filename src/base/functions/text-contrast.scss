@@ -1,4 +1,4 @@
-@import 'contrast-ratio';
+@import './contrast-ratio';
 
 @function text-contrast($color, $bgcolor: $color) {
 	$threshold: 4.5; // 4.5 = WCAG AA,7= WCAG AAA

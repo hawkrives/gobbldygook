@@ -1,4 +1,4 @@
-@import './pow.scss';
+@import './pow';
 
 @function nth-root($num, $n: 2, $prec: 12) {
 	// From: http://rosettacode.org/wiki/Nth_root#JavaScript

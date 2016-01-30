@@ -1,4 +1,4 @@
-@import 'pow';
+@import './pow';
 
 @function luma($color){
 	// Thanks voxpelli for a very concise implementation of luminance measure in sass
