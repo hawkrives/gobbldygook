@@ -8,4 +8,5 @@ export default function humanizeOperator(operator) {
 	else if (operator === '$eq') {
 		return 'exactly'
 	}
+	throw new TypeError(`humanizeOperator does not recognize "${operator}" as being an operator.`)
 }
