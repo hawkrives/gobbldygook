@@ -22,7 +22,7 @@
 
 :local(.course) {
 	composes: course from '../../../components/inline-course.scss';
-	padding: $semester-edge-padding;
+	padding: $semester-padding;
 
 	&:hover {
 		background-color: color('gray', '100');

@@ -6,85 +6,92 @@
 @import '../../../mixins/list-inline';
 @import './variables';
 
-:local {
-	.semester-list {
-		flex: 1;
-		display: flex;
-		flex-flow: row wrap;
-	}
-	.semester {
-		@include card;
-		flex: 1 0;
-		min-width: 16em;
-		margin: $semester-spacing;
-	}
 
-	.canDrop {
-		cursor: copy;
-		box-shadow: 0 0 4px color('gray', '500');
-		z-index: 10;
-	}
+:local(.semester-list) {
+	flex: 1;
+	display: flex;
+	flex-flow: row wrap;
+}
+:local(.semester) {
+	@include card;
+	flex: 1 0;
+	min-width: 16em;
+	margin: $semester-spacing;
+}
 
-	.remove:hover {
-		color: color('red', '500');
-		border-color: color('red', '500');
-		background-color: color('red', '50');
-	}
+:local(.canDrop) {
+	cursor: copy;
+	box-shadow: 0 0 4px color('gray', '500');
+	z-index: 10;
+}
+
+:local(.remove):hover {
+	color: color('red', '500');
+	border-color: color('red', '500');
+	background-color: color('red', '50');
+}
 
 
-	.title {
-		padding: $semester-edge-padding;
-		border-bottom: $material-divider;
+:local(.title) {
+	border-bottom: $material-divider;
 
-		font-size: 0.85em;
+	font-size: 0.85em;
 
-		display: flex;
-		flex-flow: row nowrap;
-		align-items: stretch;
-		font-feature-settings: 'smcp';
-		border-top-right-radius: 2px;
-		border-top-left-radius: 2px;
-	}
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: stretch;
+	font-feature-settings: 'smcp';
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	color: color('gray', '500');
+}
 
-	.header {
-		@include link-undecorated;
-		flex: 1;
-		display: flex;
-		flex-direction: column;
+:local(.title) :global(.button) {
+	padding: $semester-padding;
 
-		h1 {
-			@include heading-neutral;
-			display: inline-block;
-		}
+	min-height: 0;
+	font-size: 0.9em;
 
-		&:hover {
-			text-decoration: underline;
-		}
-	}
+	border: 0;
+	transition: 0.15s;
 
-	.info {
-		color: color('gray', '500');
-		font-size: 0.8em;
-
-		li {
-			font-feature-settings: 'onum';
-		}
-		li + li::before {
-			content: " – ";
-			padding-left: 0.25em;
-		}
-	}
-
-	.title :global(.button) {
-		padding: 0 0.4em;
-		min-height: 0;
-		font-size: 0.9em;
-
-		color: color('gray', '500');
-		transition: 0.15s;
-
-		& + :global(.button) {
-			margin-left: 0.1em;
-		}
+	& + :global(.button) {
+		margin-left: 0.1em;
 	}
 }
+
+
+:local(.header) {
+	@include link-undecorated;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+
+	padding-top: $semester-top-padding;
+	padding-left: $semester-side-padding;
+	padding-bottom: $semester-top-padding;
+
+	h1 {
+		@include heading-neutral;
+		display: inline-block;
+		color: black;
+	}
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:local(.info) {
+	font-size: 0.8em;
+
+	li {
+		font-feature-settings: 'onum';
+	}
+	li + li::before {
+		content: " – ";
+		padding-left: 0.25em;
+	}
+}
+
+
