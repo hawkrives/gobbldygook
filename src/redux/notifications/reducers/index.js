@@ -1,5 +1,4 @@
-import clone from 'lodash/clone'
-import reject from 'lodash/reject'
+import omit from 'lodash/omit'
 
 import {
 	LOG_MESSAGE,
@@ -9,53 +8,49 @@ import {
 	REMOVE_NOTIFICATION,
 } from '../constants'
 
-const initialState = []
+const initialState = {}
 
 export default function reducer(state = initialState, action) {
 	const {type, payload} = action
 
 	switch (type) {
 		case LOG_MESSAGE: {
-			return [...state, {
+			return {...state, [payload.id]: {
 				message: payload.message,
 				type: 'message',
-			}]
+			}}
 		}
 
 		case LOG_ERROR: {
-			return [...state, {
+			return {...state, [payload.id]: {
 				message: payload.error.message,
 				type: 'error',
-			}]
+			}}
 		}
 
 		case START_PROGRESS: {
-			return [...state, {
+			return {...state, [payload.id]: {
 				message: payload.message,
 				value: payload.value,
 				max: payload.max,
 				showButton: payload.showButton,
 				type: 'progress',
-			}]
+			}}
 		}
 
 		case INCREMENT_PROGRESS: {
 			// make a copy of the previous item
-			const progress = clone(state[payload.index])
+			const progress = {...state[payload.id]}
 			progress.value += payload.by
 			progress.value = progress.value <= progress.max
 				? progress.value
 				: progress.max
 
-			return [
-				...state.slice(0, payload.index),
-				progress,
-				...state.slice(payload.index + 1),
-			]
+			return {...state, [payload.id]: progress}
 		}
 
 		case REMOVE_NOTIFICATION: {
-			return reject(state, (_, i) => i === payload.index)
+			return omit(state, payload.id)
 		}
 
 		default: {

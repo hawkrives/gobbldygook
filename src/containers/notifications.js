@@ -18,7 +18,7 @@ export const Notifications = ({notifications, removeNotification}) => (
 )
 
 Notifications.propTypes = {
-	notifications: PropTypes.array.isRequired,
+	notifications: PropTypes.object.isRequired,
 	removeNotification: PropTypes.func.isRequired,
 }
 
