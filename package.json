@@ -137,7 +137,7 @@
     "get-stdin": "5.0.1",
     "glob": "6.0.4",
     "graceful-fs": "4.1.2",
-    "js-beautify": "1.6.0",
+    "js-beautify": "1.6.1",
     "json-loader": "0.5.4",
     "junk": "1.0.2",
     "latest-release": "1.0.2",
