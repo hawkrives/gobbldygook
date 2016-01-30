@@ -1,5 +1,4 @@
 @import '../base/variables';
-@import '../mixins/link-undecorated';
 
 .sidebar {
 	flex: 1;
@@ -8,10 +7,6 @@
 		max-width: 280px;
 		padding-left: $page-edge-padding;
 		padding-right: $page-edge-padding * (2/3);
-	}
-
-	.toolbar a {
-		@include link-undecorated;
 	}
 }
 

@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import Link from 'react-router/lib/Link'
 
 import Button from '../components/button'
 import Icon from '../components/icon'
@@ -24,16 +23,12 @@ export function Sidebar(props) {
 	return (
 		<aside className='sidebar'>
 			<Toolbar className='student-buttons'>
-				<Link className='button' to='/'>
-					<Button title='Students'>
-						<Icon name='ios-people-outline' type='block' />
-					</Button>
-				</Link>
-				<Link className='button' to={`/s/${studentId}/search`}>
-					<Button title='Search'>
-						<Icon name='ios-search' type='block' />
-					</Button>
-				</Link>
+				<Button link to='/' title='Students'>
+					<Icon name='ios-people-outline' type='block' />
+				</Button>
+				<Button link to={`/s/${studentId}/search`} title='Search'>
+					<Icon name='ios-search' type='block' />
+				</Button>
 
 				<Separator type='spacer' />
 
@@ -46,11 +41,9 @@ export function Sidebar(props) {
 
 				<Separator type='spacer' />
 
-				<Link className='button' to={`/s/${studentId}/share`}>
-					<Button title='Share'>
-						<Icon name='ios-upload-outline' type='block' />
-					</Button>
-				</Link>
+				<Button link to={`/s/${studentId}/share`} title='Share'>
+					<Icon name='ios-upload-outline' type='block' />
+				</Button>
 			</Toolbar>
 
 			<CourseRemovalBox

@@ -1,6 +1,4 @@
 import React from 'react'
-import Link from 'react-router/lib/Link'
-
 import Button from '../../../../components/button'
 
 export default function WelcomeScreen() {
@@ -27,26 +25,27 @@ export default function WelcomeScreen() {
 			</p>
 		</section>
 		<section className='choices'>
-			<Link to='/create/sis'>
-				<Button type='raised'>
-					Import from the SIS
-				</Button>
-			</Link>
-			<Link to='/create/drive' onClick={ev => ev.preventDefault()}>
-				<Button disabled type='raised'>
-					Link to Google Drive
-				</Button>
-			</Link>
-			<Link to='/create/upload'>
-				<Button disabled type='raised'>
-					Upload a File
-				</Button>
-			</Link>
-			<Link to='/create/manual'>
-				<Button type='raised'>
-					Create Manually
-				</Button>
-			</Link>
+			<Button link type='raised'
+				to='/create/sis'
+			>
+				Import from the SIS
+			</Button>
+			<Button disabled link type='raised'
+				to='/create/drive'
+				onClick={ev => ev.preventDefault()}
+			>
+				Link to Google Drive
+			</Button>
+			<Button disabled link type='raised'
+				to='/create/upload'
+			>
+				Upload a File
+			</Button>
+			<Button link type='raised'
+				to='/create/manual'
+			>
+				Create Manually
+			</Button>
 		</section>
 	</div>
 }

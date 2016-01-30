@@ -20,12 +20,10 @@ export default function AreaEditor(props) {
 	return (
 		<div>
 			<Toolbar style={{marginBottom: '0.5em'}}>
-				<Link to='/edit-area'>
-					<Button>
-						<Icon name='ios-arrow-left' />
-						Back
-					</Button>
-				</Link>
+				<Button link to='/edit-area' >
+					<Icon name='ios-arrow-left' />
+					Back
+				</Button>
 
 				<Separator type='flex-spacer' />
 
