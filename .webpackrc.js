@@ -175,9 +175,7 @@ if (isDevelopment) {
 	config.devServer.host = config.hostname
 
 	// add dev plugins
-	config.plugins = config.plugins.concat([
-		new HotModuleReplacementPlugin(),
-	])
+	config.plugins.push(new HotModuleReplacementPlugin())
 
 	// Add style loaders
 	config.module.loaders.push({
@@ -209,30 +207,25 @@ else if (isProduction) {
 	config.stats.children = false
 
 	// minify in production
+	let extractor = new ExtractTextPlugin(config.output.cssFilename, {allChunks: true})
 	config.plugins = config.plugins.concat([
 		new DedupePlugin(),
 		new OccurenceOrderPlugin(true),
 		new UglifyJsPlugin({
-			compress: {
-				warnings: false,
-			},
-			output: {
-				comments: false,
-			},
+			compress: { warnings: false },
+			output: { comments: false },
 		}),
-		new ExtractTextPlugin(config.output.cssFilename, {
-			allChunks: true,
-		}),
+		extractor,
 	])
 
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader']),
+		loader: extractor.extract('style-loader', ['css-loader', 'postcss-loader']),
 	})
 
 	config.module.loaders.push({
 		test: /\.s(c|a)ss$/,
-		loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader']),
+		loader: extractor.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader']),
 	})
 }
 
