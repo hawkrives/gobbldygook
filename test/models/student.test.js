@@ -183,6 +183,7 @@ describe('addScheduleToStudent', () => {
 			semester: 0,
 			title: 'a',
 			year: 0,
+			metadata: {},
 		})
 	})
 
