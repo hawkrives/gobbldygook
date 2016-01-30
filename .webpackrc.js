@@ -30,7 +30,7 @@ const config = {
 	stats: {},
 
 	entry: {
-		app: './src/start.js',
+		main: './src/start.js',
 		common: ['react', 'bluebird'],
 	},
 
@@ -85,6 +85,7 @@ const config = {
 						'<body>',
 						'  <main id="gobbldygook"></main>',
 						'</body>',
+						`<script src="${context.common}"></script>`,
 						`<script src="${context.main}"></script>`,
 						'</html>',
 					].join('\n'),
