@@ -14,7 +14,7 @@
     "build:ci": "npm run build -- --no-progress",
     "build:dev": "env NODE_ENV=development webpack --config ./.webpackrc.js --bail --progress --devtool=source-map",
     "build:peg": "pegjs < src/area-tools/parse-hanson-string.pegjs | ./scripts/babel-stdin.js | js-beautify -f - --end-with-newline --indent-with-tabs > src/area-tools/parse-hanson-string.js",
-    "clean": "rm -rf build/",
+    "clean": "rm -rf build/* && rm -rf build/",
     "copy": "mkdir -p build/ && cp -rf src/static/* build/ && npm run copy:areas && npm run copy:icons",
     "copy:areas": "cp -rf ./area-data/ build/areas/ && ./bin/area-package-maker build/areas/ --save",
     "copy:icons": "svg-sprite-generate -d src/icons/ionicons/ -o build/ionicons.svg",
