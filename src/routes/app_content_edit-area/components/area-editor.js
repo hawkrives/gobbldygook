@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react'
-import Link from 'react-router/lib/Link'
 
 import Toolbar from '../../../components/toolbar'
 import Button from '../../../components/button'

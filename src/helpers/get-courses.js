@@ -3,15 +3,12 @@ import db from './db'
 import map from 'lodash/map'
 
 const courseCache = new Map()
-/**
- * Gets a course from the database.
- *
- * @param {Number} clbid - a class/lab ID
- * @param {Number} term - a course term
- * @param {Object} fabrications - a (clbid, course) object of fabrications
- * @returns {Promise} - TreoDatabasePromise
- * @fulfill {Object} - the course object, potentially with an embedded error message.
- */
+// Gets a course from the database.
+// @param {Number} clbid - a class/lab ID
+// @param {Number} term - a course term
+// @param {Object} fabrications - a (clbid, course) object of fabrications
+// @returns {Promise} - TreoDatabasePromise
+// @fulfill {Object} - the course object, potentially with an embedded error message.
 export async function getCourse({clbid, term}, fabrications) {
 	if (clbid in fabrications) {
 		return fabrications[clbid]

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, cloneElement } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {Provider} from 'react-redux'
 
 // import DevTools from './devtools'
