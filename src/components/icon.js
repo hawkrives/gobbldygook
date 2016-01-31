@@ -1,33 +1,26 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 import cx from 'classnames'
 
-import compareProps from '../helpers/compare-props'
 import './icon.scss'
 
-export default class Icon extends Component {
-	static propTypes = {
-		className: PropTypes.string,
-		name: PropTypes.string.isRequired,
-		style: PropTypes.object,
-		type: PropTypes.oneOf(['block', 'inline']).isRequired,
-	};
+export default function Icon(props) {
+	return (
+		<svg
+			className={cx('icon', `icon--${props.type}`, props.className)}
+			style={props.style}
+		>
+			<use xlinkHref={`./ionicons.svg#${props.name}`} />
+		</svg>
+	)
+}
 
-	static defaultProps = {
-		type: 'inline',
-	};
+Icon.propTypes = {
+	className: PropTypes.string,
+	name: PropTypes.string.isRequired,
+	style: PropTypes.object,
+	type: PropTypes.oneOf(['block', 'inline']).isRequired,
+}
 
-	shouldComponentUpdate(nextProps) {
-		return compareProps(this.props, nextProps)
-	}
-
-	render() {
-		return (
-			<svg
-				className={cx('icon', `icon--${this.props.type}`, this.props.className)}
-				style={this.props.style}
-			>
-				<use xlinkHref={`./ionicons.svg#${this.props.name}`} />
-			</svg>
-		)
-	}
+Icon.defaultProps = {
+	type: 'inline',
 }

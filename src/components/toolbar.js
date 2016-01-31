@@ -1,19 +1,17 @@
-import React, {Component, PropTypes} from 'react'
+import React, { PropTypes} from 'react'
 import cx from 'classnames'
 import './toolbar.scss'
 
-export default class Toolbar extends Component {
-	static propTypes = {
-		children: PropTypes.any.isRequired,
-		className: PropTypes.string,
-		style: PropTypes.object,
-	};
+export default function Toolbar(props) {
+	return (
+		<div className={cx('toolbar', props.className)} style={props.style}>
+			{props.children}
+		</div>
+	)
+}
 
-	render() {
-		return (
-			<div className={cx('toolbar', this.props.className)} style={this.props.style}>
-				{this.props.children}
-			</div>
-		)
-	}
+Toolbar.propTypes = {
+	children: PropTypes.node.isRequired,
+	className: PropTypes.string,
+	style: PropTypes.object,
 }
