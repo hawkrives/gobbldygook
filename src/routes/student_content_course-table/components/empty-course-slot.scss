@@ -1,0 +1,10 @@
+@import '../../../mixins/color.scss';
+
+:local(.empty) {
+	color: color('gray', '500');
+	user-select: none;
+
+	* {
+		cursor: default;
+	}
+}

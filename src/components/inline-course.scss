@@ -64,15 +64,6 @@
 	}
 }
 
-:global(.course.empty) {
-	color: color('gray', '500');
-	user-select: none;
-
-	* {
-		cursor: default;
-	}
-}
-
 :local(.isDragging) {
 	opacity: 0.5;
 }

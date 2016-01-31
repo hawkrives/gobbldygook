@@ -1,25 +1,25 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
+import cx from 'classnames'
+import styles from '../../../components/inline-course.scss'
+import {title} from '../../../components/course-title.scss'
 
-export default class FakeCourse extends Component {
-	static propTypes = {
-		className: PropTypes.string.isRequired,
-		details: PropTypes.string,
-		title: PropTypes.string.isRequired,
-	};
+export default function FakeCourse(props) {
+	return (
+		<article className={cx(styles.course, props.className)}>
+			<div className={styles.row}>
+				<h1 className={title}>{props.title}</h1>
+				<p className={styles.summary}>{props.details}</p>
+			</div>
+		</article>
+	)
+}
 
-	static defaultProps = {
-		details: 'no details',
-	};
+FakeCourse.propTypes = {
+	className: PropTypes.string.isRequired,
+	details: PropTypes.string,
+	title: PropTypes.string.isRequired,
+}
 
-	render() {
-		// console.log('FakeCourse#render')
-		return (
-			<article className={`course course--inline ${this.props.className}`}>
-				<div className='info-rows'>
-					<h1 className='title'>{this.props.title}</h1>
-					<p className='summary'>{this.props.details}</p>
-				</div>
-			</article>
-		)
-	}
+FakeCourse.defaultProps = {
+	details: 'no details',
 }

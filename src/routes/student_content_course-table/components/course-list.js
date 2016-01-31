@@ -14,7 +14,7 @@ export default function CourseList(props) {
 	let courseObjects = map(props.schedule.courses, (course, i) =>
 		course.error
 		? (<li key={course.clbid}>
-			<MissingCourse clbid={course.clbid} error={course.error} />
+			<MissingCourse className={styles.course} clbid={course.clbid} error={course.error} />
 		</li>)
 		: (<li key={course.clbid}>
 			<InlineCourse
@@ -30,7 +30,7 @@ export default function CourseList(props) {
 	let emptySlots = []
 	if (props.creditCount < props.availableCredits) {
 		const minimumExtraCreditRange = range(Math.floor(props.creditCount), props.availableCredits)
-		emptySlots = map(minimumExtraCreditRange, i => <li key={`empty-${i}`}><EmptyCourseSlot /></li>)
+		emptySlots = map(minimumExtraCreditRange, i => <li key={`empty-${i}`}><EmptyCourseSlot className={styles.course} /></li>)
 	}
 
 	return (

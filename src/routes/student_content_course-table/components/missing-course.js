@@ -1,17 +1,16 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 import FakeCourse from './fake-course'
 
-export default class MissingCourse extends Component {
-	static propTypes = {
-		clbid: PropTypes.number.isRequired,
-		error: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Error)]).isRequired,
-	};
+export default function MissingCourse(props) {
+	return (<FakeCourse
+		title={`Cannot load course ${props.clbid}`}
+		details={String(props.error)}
+		className={`missing ${props.className}`}
+	/>)
+}
 
-	render() {
-		return (<FakeCourse
-			title={`Cannot load course ${this.props.clbid}`}
-			details={String(this.props.error)}
-			className='missing'
-		/>)
-	}
+MissingCourse.propTypes = {
+	className: PropTypes.string,
+	clbid: PropTypes.number.isRequired,
+	error: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Error)]).isRequired,
 }

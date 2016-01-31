@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
+import React, {PropTypes} from 'react'
 import FakeCourse from './fake-course'
+import styles from './empty-course-slot.scss'
 
-class EmptyCourseSlot extends Component {
-	render() {
-		// console.log('EmptyCourseSlot#render')
-		return <FakeCourse title='Empty Slot' className='empty' />
-	}
+export default function EmptyCourseSlot({className}) {
+	return <FakeCourse title='Empty Slot' className={`${styles.empty} ${className}`} />
 }
 
-export default EmptyCourseSlot
+EmptyCourseSlot.propTypes = {
+	className: PropTypes.string,
+}

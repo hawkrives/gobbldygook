@@ -87,7 +87,7 @@ class Course extends Component {
 						)}
 					</ul>}
 					{course.prerequisites &&
-						<span className={styles.hasPrerequisite} title={course.prerequisites}>!</span>}
+						<span className={styles.hasPrerequisite} title={course.prerequisites}>Preqreq</span>}
 				</div>
 				<div className={styles.row + ' ' + styles.summary}>
 					{course.times}
