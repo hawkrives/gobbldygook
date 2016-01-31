@@ -31,7 +31,17 @@ const config = {
 
 	entry: {
 		main: './src/start.js',
-		common: ['react', 'bluebird', 'redux', 'react-redux'],
+		common: [
+			'react',
+			'bluebird',
+			'redux',
+			'react-redux',
+			'react-dnd',
+			'dnd-core',
+			'react-modal2',
+			'react-gateway',
+			'react-side-effect',
+		],
 	},
 
 	output: {
