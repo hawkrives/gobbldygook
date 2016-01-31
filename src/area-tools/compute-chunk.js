@@ -292,7 +292,7 @@ export function computeOf({expr, ctx, courses, dirty}) {
 
 	// Go through $of, incrementing count if result of the thing is true.
 	let count = 0
-	for (let req of expr.$of) {
+	forEach(expr.$of, req => {
 		// computeChunk return a boolean
 		// Number() converts that to a 0 or a 1, which then is added to `count`.
 		count += Number(computeChunk({expr: req, ctx, courses, dirty}))
@@ -310,13 +310,13 @@ export function computeOf({expr, ctx, courses, dirty}) {
 			// Reality: Other things expect this to be a greedy operation,
 			//   namely the "courses from children" expression.
 			// if (didPass) {
-			// 	break
+			// 	return false
 			// }
 		}
 		else if (expr.$count.$operator === '$eq') {
 			// If we have exactly the right number, stop.
 			if (didPass) {
-				break
+				return false
 			}
 		}
 		else if (expr.$count.$operator === '$lte') {
@@ -324,13 +324,13 @@ export function computeOf({expr, ctx, courses, dirty}) {
 			// Instead, we check to see if the next step would cause us to go over our limit.
 			// If it would, we stop the loop.
 			if (count + 1 >= expr.$count.num) {
-				break
+				return false
 			}
 		}
 		else {
 			throw new TypeError(`computeOf: not sure what to do with a "${expr.$count.$operator}" operator`)
 		}
-	}
+	})
 
 	return {
 		computedResult: computeCountWithOperator({
