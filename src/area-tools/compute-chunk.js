@@ -2,7 +2,6 @@ import assertKeys from './assert-keys'
 import assign from 'lodash/assign'
 import collectMatches from './collect-matches'
 import collectUsedCourses from './collect-used-courses'
-import compact from 'lodash/compact'
 import computeCountWithOperator from './compute-count-with-operator'
 import countCourses from './count-courses'
 import countCredits from './count-credits'
@@ -292,28 +291,54 @@ export function computeOf({expr, ctx, courses, dirty}) {
 	assertKeys(expr, '$of', '$count')
 
 	// Go through $of, incrementing count if result of the thing is true.
-	// takeWhile runs until it recieves a `false`, so we stop when
-	// count >= expr.$count.$num
-	//
-	// let count = 0
-	// takeWhile(expr.$of, req => {
-	//     count += Number(computeChunk({expr: req, ctx, courses, dirty}))
-	//     return !(computeCountWithOperator({comparator: expr.$count.$operator, has: count, needs: expr.$count.$num})
-	// })
-	// return {
-	//     computedResult: computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: count, needs: expr.$count.$num}),,
-	//     counted: count,
-	//     matches: collectMatches(expr),
-	// }
+	let count = 0
+	for (let req of expr.$of) {
+		// computeChunk return a boolean
+		// Number() converts that to a 0 or a 1, which then is added to `count`.
+		count += Number(computeChunk({expr: req, ctx, courses, dirty}))
 
-	const evaluated = map(expr.$of, req =>
-		computeChunk({expr: req, ctx, courses, dirty}))
+		// We compute didPass out here so that it's in a more standard place
+		let didPass = computeCountWithOperator({
+			comparator: expr.$count.$operator,
+			needs: expr.$count.$num,
+			has: count,
+		})
 
-	const truthy = compact(evaluated)
+		// Now we break into seperate paths
+		if (expr.$count.$operator === '$gte') {
+			// Ideal: If we've amassed enough matches, stop checking.
+			// Reality: Other things expect this to be a greedy operation,
+			//   namely the "courses from children" expression.
+			// if (didPass) {
+			// 	break
+			// }
+		}
+		else if (expr.$count.$operator === '$eq') {
+			// If we have exactly the right number, stop.
+			if (didPass) {
+				break
+			}
+		}
+		else if (expr.$count.$operator === '$lte') {
+			// We can't use computeCountWithOperator here, because 0 <= N for all N.
+			// Instead, we check to see if the next step would cause us to go over our limit.
+			// If it would, we stop the loop.
+			if (count + 1 >= expr.$count.num) {
+				break
+			}
+		}
+		else {
+			throw new TypeError(`computeOf: not sure what to do with a "${expr.$count.$operator}" operator`)
+		}
+	}
 
 	return {
-		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: truthy.length, needs: expr.$count.$num}),
-		counted: truthy.length,
+		computedResult: computeCountWithOperator({
+			comparator: expr.$count.$operator,
+			needs: expr.$count.$num,
+			has: count,
+		}),
+		counted: count,
 		matches: collectMatches(expr),
 	}
 }
