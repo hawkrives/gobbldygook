@@ -290,7 +290,7 @@ async function loadFiles(url, infoFileBase) {
 	}
 
 	// Fire off the progress bar
-	dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, {max: size(filesToLoad)}, true)
+	dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, {max: size(filesToLoad), showButton: true})
 
 	// Load them into the database
 	try {
