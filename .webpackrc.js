@@ -190,12 +190,12 @@ if (isDevelopment) {
 	// Add style loaders
 	config.module.loaders.push({
 		test: /\.css$/,
-		loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+		loaders: ['style-loader', 'css-loader?localIdentName=[path][name]·[local]·[hash:base64:5]', 'postcss-loader'],
 	})
 
 	config.module.loaders.push({
 		test: /\.s(c|a)ss$/,
-		loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+		loaders: ['style-loader', 'css-loader?localIdentName=[path][name]·[local]·[hash:base64:5]', 'postcss-loader', 'sass-loader'],
 	})
 }
 
