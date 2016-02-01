@@ -61,7 +61,6 @@ export default class SISImportScreen extends Component {
 
 			{this.state.error ? <pre>{JSON.stringify(this.state.error)}</pre> : null}
 
-			{/*this.state.student ? <DOMify value={this.state.student} /> : null*/}
 			{this.state.student
 				? <div>
 					<StudentSummary student={student} editable={false} showMessage={false} />
@@ -70,14 +69,11 @@ export default class SISImportScreen extends Component {
 				: null}
 
 			<div>
-				<Button
-					disabled={!this.state.loggedIn}
-					onClick={this.handleImportData}
-				>
-					Import Student
-				</Button>
+				{!this.state.student
+					? <Button disabled={!this.state.loggedIn} onClick={this.handleImportData}>Fetch Student</Button>
+					: null}
 				{this.state.student
-					? <Button onClick={this.handleCreateStudent}>Let's go!</Button>
+					? <Button onClick={this.handleCreateStudent}>Import Student</Button>
 					: null}
 			</div>
 		</div>
