@@ -6,7 +6,7 @@ import convertStudent from '../../../../helpers/convert-imported-student'
 import StudentSummary from '../../../app_content_student/components/student-summary'
 import { push } from 'react-router-redux'
 import { initStudent } from '../../../../redux/students/actions/init-student'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 export default class SISImportScreen extends Component {
 	static propTypes = {
@@ -63,7 +63,7 @@ export default class SISImportScreen extends Component {
 
 			{this.state.student
 				? <div>
-					<StudentSummary student={student} editable={false} showMessage={false} />
+					<StudentSummary student={student} showMessage={false} />
 					<pre>{JSON.stringify(student.schedules, null, 2)}</pre>
 				</div>
 				: null}

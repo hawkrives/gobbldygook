@@ -43,10 +43,13 @@ const welcomeMessages = [
 const welcomeMessage = sample(welcomeMessages)
 
 export default function StudentSummary(props) {
-	const {student, editable=true, showMessage=true} = props
+	const {
+		student,
+		showMessage=true,
+	} = props
 	const {studies, canGraduate} = student
 
-	const NameEl = (editable
+	const NameEl = (props.onChangeName
 		? <ContentEditable
 			className='autosize-input'
 			onBlur={props.onChangeName}
@@ -78,7 +81,7 @@ export default function StudentSummary(props) {
 	const neededCredits = student.creditsNeeded
 	const enoughCredits = currentCredits >= neededCredits
 
-	const graduationEl = (editable
+	const graduationEl = (props.onChangeGraduation
 		? <ContentEditable
 			className='autosize-input'
 			onBlur={props.onChangeGraduation}
@@ -87,7 +90,7 @@ export default function StudentSummary(props) {
 		: <span>{String(student.graduation)}</span>
 	)
 
-	const matriculationEl = (editable
+	const matriculationEl = (props.onChangeMatriculation
 		? <ContentEditable
 			className='autosize-input'
 			onBlur={props.onChangeMatriculation}
@@ -129,10 +132,9 @@ export default function StudentSummary(props) {
 }
 
 StudentSummary.propTypes = {
-	editable: PropTypes.bool,
-	onChangeGraduation: PropTypes.func.isRequired,
-	onChangeMatriculation: PropTypes.func.isRequired,
-	onChangeName: PropTypes.func.isRequired,
+	onChangeGraduation: PropTypes.func,
+	onChangeMatriculation: PropTypes.func,
+	onChangeName: PropTypes.func,
 	showMessage: PropTypes.bool,
 	student: PropTypes.object.isRequired,
 }
