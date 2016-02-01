@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import size from 'lodash/size'
 
 import Toolbar from '../../../components/toolbar'
 import Button from '../../../components/button'
@@ -70,14 +71,14 @@ export default function StudentPicker(props) {
 				</div>
 			</div>
 
-			<StudentList
+			{size(students) > 0 ? <StudentList
 				destroyStudent={destroyStudent}
 				filter={filterText}
 				isEditing={isEditing}
 				sortBy={sortBy}
 				groupBy={groupBy}
 				students={students}
-			/>
+			/> : <Button className='make-student' link type='raised' to='/create'>Add a Student</Button>}
 		</div>
 	)
 }
