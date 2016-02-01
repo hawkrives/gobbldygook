@@ -16,6 +16,7 @@ export class Student extends Component {
 	static propTypes = {
 		content: PropTypes.node,  // from react-router
 		loadStudent: PropTypes.func.isRequired,
+		overlay: PropTypes.node,
 		params: PropTypes.object,  // react-router
 		processed: PropTypes.object,  // redux
 		sidebar: PropTypes.node,  // from react-router
@@ -64,6 +65,7 @@ export class Student extends Component {
 						{sidebar}
 					</Sidebar>
 					{contents}
+					{this.props.overlay || null}
 				</div>
 			</DocumentTitle>
 		)

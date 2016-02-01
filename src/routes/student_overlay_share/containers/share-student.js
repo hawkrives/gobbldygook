@@ -12,20 +12,17 @@ import { push } from 'react-router-redux'
 
 import encodeStudent from '../../../helpers/encode-student'
 
-export default function ShareSheet(props) {
-	const { student } = props
+import styles from './share-student.scss'
 
-	if (!student) {
-		return null
-	}
+export function ShareSheet(props) {
+	let { student } = props
+	student = student || {}
 
-	const boundCloseModal = () => props.push({pathname: `/s/${props.params.studentId}/`})
-
-
-	const encoded = encodeStudent(student)
+	const boundCloseModal = () => props.push(`/s/${props.params.studentId}/`)
 
 	return <Modal
-		modalClassName='course course--modal'
+		into='share-modal'
+		modalClassName={styles.dialog}
 		onClose={boundCloseModal}
 	>
 		<Toolbar className='window-tools'>
@@ -37,20 +34,16 @@ export default function ShareSheet(props) {
 		<div>
 			Share "{student.name}" via:
 			<List type='bullet'>
-				<li>Google Drive</li>
-				<li>Email File</li>
-				<li>Download File</li>
+				<li>Google Drive (not implemented)</li>
+				<li>
+					<a
+						download={`${student.name}.gbstudent`}
+						href={`data:text/json;charset=utf-8,${encodeStudent(student)}`}
+					>
+						Download file
+					</a>
+				</li>
 			</List>
-		</div>
-
-		<div>
-			<Button disabled={!encoded}>
-				<a
-					download={`${student.name}.gb-student.json`}
-					href={`data:text/json;charset=utf-8,${encoded}`}>
-					Download {student.name}
-				</a>
-			</Button>
 		</div>
 	</Modal>
 }
@@ -58,9 +51,13 @@ export default function ShareSheet(props) {
 ShareSheet.propTypes = {
 	params: PropTypes.shape({
 		studentId: PropTypes.string.isRequired,
-	}),
+	}).isRequired,
+	push: PropTypes.func.isRequired,
 	student: PropTypes.object,
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({push}, dispatch)
-export default connect(undefined, mapDispatchToProps)(ShareSheet)
+const mapState = (state, ownProps) => {
+	return {student: state.students[ownProps.params.studentId].data.present}
+}
+const mapDispatch = dispatch => bindActionCreators({push}, dispatch)
+export default connect(mapState, mapDispatch)(ShareSheet)

@@ -7,6 +7,7 @@
 - Always sort areas of study by type
 - Add a "make student" button when there are no students, instead of showing an empty list
 - Enable the "upload student" screen, and allow it to import multiple students at once
+- Fix the "share student" dialog
 
 
 ## [3.0.0-beta2] - 2015-10-12

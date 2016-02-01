@@ -20,8 +20,10 @@ export class App extends Component {
 					<div id='gateway-wrapper'>
 						<div id='content-wrapper'>{content}</div>
 						{overlay}
+
 						<GatewayDest name='search-modal' className='modal-container' />
 						<GatewayDest name='course-modal' className='modal-container' />
+						<GatewayDest name='share-modal' className='modal-container' />
 					</div>
 				</GatewayProvider>
 			</DocumentTitle>

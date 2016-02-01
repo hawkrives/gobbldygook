@@ -1,0 +1,11 @@
+@import '../../../mixins/card.scss';
+
+:local(.dialog) {
+	@include card;
+	flex-flow: column;
+	padding: 1em 2em;
+
+	a {
+		cursor: pointer;
+	}
+}
