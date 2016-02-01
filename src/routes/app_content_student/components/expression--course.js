@@ -11,7 +11,7 @@ export default function CourseExpression(props) {
 
 	const international = props.international &&
 		<span className='course--international'>I</span>
-	const lab = props.lab &&
+	const lab = props.lab || props.type === 'Lab' &&
 		<span className='course--lab'>L</span>
 
 	const section = props.section && props.section !== '*' &&
@@ -61,5 +61,6 @@ CourseExpression.propTypes = {
 	section: PropTypes.string,
 	semester: PropTypes.number,
 	style: PropTypes.object,
+	type: PropTypes.string,
 	year: PropTypes.number,
 }
