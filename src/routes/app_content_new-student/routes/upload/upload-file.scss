@@ -1,0 +1,33 @@
+:local(.dropzone) {
+	margin: 30px auto;
+	border: 2px dashed black;
+	border-radius: 4px;
+	padding: 30px;
+	width: 200px;
+	transition: all 0.5s;
+
+	p {
+		margin: 0;
+	}
+}
+
+:local(.canDrop) {
+	cursor: copy;
+	background-color: lime;
+	// background-color: rgb(238, 238, 238);
+	border-radius: 8px;
+	border-style: solid;
+}
+
+:local(.cannotDrop) {
+	cursor: no-drop;
+	background-color: pink;
+	border-radius: 8px;
+	border-style: solid;
+}
+
+:local(.results) {
+	li + li {
+		margin-top: 0.5em;
+	}
+}
