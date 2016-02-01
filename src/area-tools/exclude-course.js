@@ -8,6 +8,6 @@ import compareCourseToCourse from './compare-course-to-course'
  * @param {Course[]} courses - the list to look through
  * @returns {Course[]} - the filtered list of courses
  */
-export default function findCourse(query, courses) {
+export default function excludeCourse(query, courses) {
 	return reject(courses, course => compareCourseToCourse(query, course))
 }
