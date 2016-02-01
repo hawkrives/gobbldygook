@@ -14,6 +14,7 @@ export default class Button extends Component {
 		onClick: PropTypes.func,
 		style: PropTypes.object,
 		title: PropTypes.string,
+		to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 		type: PropTypes.oneOf(['flat', 'raised']).isRequired,
 	};
 
@@ -36,7 +37,7 @@ export default class Button extends Component {
 			title: this.props.title,
 		}
 		if (this.props.link) {
-			props = {...props, ...this.props}
+			props = {...props, to: this.props.to}
 		}
 		return React.createElement(tag, props, this.props.children)
 	}
