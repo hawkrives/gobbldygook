@@ -44,6 +44,8 @@
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
 	color: color('gray', '500');
+
+	overflow: hidden;
 }
 
 :local(.title) :global(.button) {
@@ -53,6 +55,7 @@
 	font-size: 0.9em;
 
 	border: 0;
+	border-radius: 0;
 	transition: 0.15s;
 
 	& + :global(.button) {
@@ -93,5 +96,3 @@
 		padding-left: 0.25em;
 	}
 }
-
-
