@@ -1,9 +1,7 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 import ScreenToolbar from '../../components/screen-toolbar'
 
 export default class DriveLinkScreen extends Component {
-	static propTypes = {};
-
 	render() {
 		return <div>
 			<header className='header'>

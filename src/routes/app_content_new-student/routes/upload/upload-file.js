@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import {findDOMNode} from 'react-dom'
 import DropZone from 'react-dropzone'
 import map from 'lodash/map'
 import Button from '../../../../components/button'
