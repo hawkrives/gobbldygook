@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [3.0.0-beta6] - unreleased
+- Fixed mouse cursor being a pointer over the entire area of study body; made it only change over the title bit.
+- Always sort areas of study by type
+- Add a "make student" button when there are no students, instead of showing an empty list
+- Enable the "upload student" screen, and allow it to import multiple students at once
+
+
 ## [3.0.0-beta2] - 2015-10-12
 ### Changed
 - Stuff (this should be the last changelog with this entry…)
