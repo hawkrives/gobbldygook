@@ -222,7 +222,12 @@ else if (isProduction) {
 		new DedupePlugin(),
 		new OccurenceOrderPlugin(true),
 		new UglifyJsPlugin({
-			compress: { warnings: false },
+			compress: {
+				warnings: false,
+				pure_getters: true, // eslint-disable-line camelcase
+				screw_ie8: true, // eslint-disable-line camelcase
+				unsafe: true,
+			},
 			output: { comments: false },
 		}),
 		extractor,
