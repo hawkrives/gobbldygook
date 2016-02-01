@@ -2,8 +2,6 @@
 @import '../../../mixins/color';
 
 .area {
-	cursor: pointer;
-
 	&.errored {
 		background-color: color('red', '50');
 		color: color('red', '900');
@@ -38,6 +36,7 @@
 }
 
 .area--summary {
+	cursor: pointer;
 	display: flex;
 	flex-flow: column nowrap;
 
