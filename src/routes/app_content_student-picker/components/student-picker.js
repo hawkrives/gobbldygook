@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react'
-import Link from 'react-router/lib/Link'
 
 import Toolbar from '../../../components/toolbar'
 import Button from '../../../components/button'
@@ -31,12 +30,10 @@ export default function StudentPicker(props) {
 
 			<div className='student-list-toolbar'>
 				<Toolbar className='student-list-buttons'>
-					<Link to='search/'>
-					<Button className='student-list--button'>
+					<Button link to='search/' className='student-list--button'>
 						<Icon name='android-search' />
 						Courses
 					</Button>
-					</Link>
 
 					<input
 						type='search'
@@ -61,12 +58,10 @@ export default function StudentPicker(props) {
 						Edit
 					</Button>
 
-					<Link to='create/'>
-					<Button className='student-list--button'>
+					<Button link to='create/' className='student-list--button'>
 						<Icon name='android-add' />
 						New
 					</Button>
-					</Link>
 				</Toolbar>
 
 				<div>
