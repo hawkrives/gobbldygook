@@ -4,6 +4,7 @@ import Link from 'react-router/lib/Link'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
 import interpose from '../../../helpers/interpose'
+import sortStudiesByType from '../../../helpers/sort-studies-by-type'
 
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
@@ -22,7 +23,8 @@ export default function StudentListItem(props) {
 
 	const classname = cx('student-list-item-container', opts)
 
-	const groupedStudies = groupBy(student.data.present.studies, s => s.type)
+	let sortedStudies = sortStudiesByType(student.data.present.studies)
+	const groupedStudies = groupBy(sortedStudies, s => s.type)
 	return (
 		<li className={classname}>
 			{isEditing &&

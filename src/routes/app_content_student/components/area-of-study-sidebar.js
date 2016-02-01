@@ -15,6 +15,7 @@ import union from 'lodash/union'
 import uniq from 'lodash/uniq'
 import values from 'lodash/values'
 
+import sortStudiesByType from '../../../helpers/sort-studies-by-type'
 import AreaOfStudyGroup from './area-of-study-group'
 import Button from '../../../components/button'
 import * as areaTypeConstants from '../../../models/area-types'
@@ -23,8 +24,10 @@ export default function AreaOfStudySidebar(props) {
 	const {allAreas, student, showAreaPickerFor} = props
 	const allAreasGrouped = groupBy(allAreas, 'type')
 
+	const sortedStudies = sortStudiesByType(student.studies)
+
 	// group the studies by their type
-	const groupedStudies = groupBy(student.studies, study => study.type.toLowerCase())
+	const groupedStudies = groupBy(sortedStudies, study => study.type.toLowerCase())
 
 	// pull out the results
 	const studyResults = mapValues(groupedStudies, group =>
