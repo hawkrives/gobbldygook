@@ -36,7 +36,7 @@ export default function WelcomeScreen() {
 			>
 				Link to Google Drive
 			</Button>
-			<Button disabled link type='raised'
+			<Button link type='raised'
 				to='/create/upload'
 			>
 				Upload a File
