@@ -46,6 +46,8 @@ export default function StudentSummary(props) {
 	const {
 		student,
 		showMessage=true,
+		showAvatar=true,
+		randomizeHello=false,
 	} = props
 	const {studies, canGraduate} = student
 
@@ -104,11 +106,11 @@ export default function StudentSummary(props) {
 	return (
 		<article className={cx('student-summary', canGraduateClass)}>
 			<header className='student-summary--header'>
-				<AvatarLetter
+				{showAvatar ? <AvatarLetter
 					className={cx('student-letter', canGraduateClass)}
 					value={student.name}
-				/>
-				<div className='intro'>{welcomeMessage}{NameEl}!</div>
+				/> : null}
+				<div className='intro'>{randomizeHello ? sample(welcomeMessages) : welcomeMessage}{NameEl}!</div>
 			</header>
 			<div className='content'>
 				<div className='paragraph'>
@@ -135,6 +137,8 @@ StudentSummary.propTypes = {
 	onChangeGraduation: PropTypes.func,
 	onChangeMatriculation: PropTypes.func,
 	onChangeName: PropTypes.func,
+	randomizeHello: PropTypes.bool,
+	showAvatar: PropTypes.bool,
 	showMessage: PropTypes.bool,
 	student: PropTypes.object.isRequired,
 }
