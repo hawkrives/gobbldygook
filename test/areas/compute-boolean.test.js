@@ -413,7 +413,7 @@ describe('computeBoolean', () => {
 					$count: {$operator: '$gte', $num: 1},
 					$of: [
 						{_used: true, _result: true, $course: {department: ['ART'], number: 102}, $type: 'course'},
-						{_result: false, $course: {department: ['ART'], number: 103}, $type: 'course'},
+						{$course: {department: ['ART'], number: 103}, $type: 'course'},
 					],
 					$type: 'of',
 					_counted: 1,

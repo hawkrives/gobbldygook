@@ -41,7 +41,7 @@ describe('computeOf', () => {
 			$of: [
 				{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 121}},
 				{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 125}},
-				{_result: false, $type: 'course', $course: {department: ['CSCI'], number: 150}},
+				{$type: 'course', $course: {department: ['CSCI'], number: 150}},
 			],
 		})
 	})
