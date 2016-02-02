@@ -12,7 +12,7 @@ export default {
 		getChildRoutes(state, cb) {
 			require.ensure([], () => {
 				cb(null, [
-					require('./app_content_edit-area').default,  // edit-area
+					require('./app_content_areas').default,  // edit-area
 					require('./app_overlay_search').default,  // search
 					require('./app_content_degub').default,  // debug
 					require('./app_content_new-student').default,

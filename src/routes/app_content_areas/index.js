@@ -1,5 +1,5 @@
 export default {
-	path: 'edit-area(/:type)(/:name)(/:revision)',
+	path: 'areas(/:type)(/:name)(/:revision)',
 
 	getComponents(location, cb) {
 		require.ensure([], require => {

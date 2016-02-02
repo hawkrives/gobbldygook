@@ -19,35 +19,31 @@ export default function AreaEditor(props) {
 	return (
 		<div>
 			<Toolbar style={{marginBottom: '0.5em'}}>
-				<Button link to='/edit-area' >
+				<Button link to='/areas' >
 					<Icon name='ios-arrow-left' />
-					Back
+					{' '}Back
 				</Button>
 
 				<Separator type='flex-spacer' />
 
 				<Button onClick={props.onSave}>
 					<Icon name='ios-download-outline' />
-					<Separator type='spacer' />
-					Save
+					{' '}Save
 				</Button>
 				<Button>
 					<Icon name='ios-reload' />
-					<Separator type='spacer' />
-					Revert
+					{' '}Revert
 				</Button>
 
 				<Separator type='flex-spacer' />
 
 				<Button>
 					<Icon name='ios-download-outline' />
-					<Separator type='spacer' />
-					Download
+					{' '}Download
 				</Button>
 				<Button>
 					<Icon name='ios-upload-outline' />
-					<Separator type='spacer' />
-					Submit
+					{' '}Submit
 				</Button>
 			</Toolbar>
 

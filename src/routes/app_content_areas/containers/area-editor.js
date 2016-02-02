@@ -19,7 +19,11 @@ export class AreaEditScreen extends Component {
 			isLoading: PropTypes.bool.isRequired,
 		}).isRequired, // redux
 		loadAllAreas: PropTypes.func.isRequired,  // redux
-		params: PropTypes.object.isRequired,  // react-router
+		params: PropTypes.shape({
+			name: PropTypes.string,
+			type: PropTypes.string,
+			revision: PropTypes.string,
+		}).isRequired,  // react-router
 		routing: PropTypes.object.isRequired,  // react-router
 	};
 
@@ -46,7 +50,7 @@ export class AreaEditScreen extends Component {
 			return
 		}
 
-		const {type, name, revision} = props.params
+		let {type, name, revision} = props.params
 
 		if (!type || !name || !revision) {
 			return
@@ -92,7 +96,7 @@ export class AreaEditScreen extends Component {
 
 		if (this.state.area && (type && name && revision)) {
 			return (<AreaEditor
-				onSave={this.onSave}
+				onSave={this.handleSave}
 				value={this.state.area}
 				onChange={this.handleChange}
 				onFocusChange={this.handleFocusChange}
