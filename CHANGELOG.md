@@ -3,12 +3,23 @@
 ## [Unreleased]
 
 ## [3.0.0-beta6] - unreleased
+### Areas of Study
+- Simplify some requirements in Math and Physics
+	- They should have the same effect
+- Change computation of electives for Asian Studies
+	- I hope it will have the same effect
+- Fix the China Studies concentration
+
+### Changes
 - Fixed mouse cursor being a pointer over the entire area of study body; made it only change over the title bit.
 - Always sort areas of study by type
 - Add a "make student" button when there are no students, instead of showing an empty list
 - Enable the "upload student" screen, and allow it to import multiple students at once
 - Fix the "share student" dialog
 - Fix the progress bars for loading courses / areas
+- Actually show descriptions in the requirements area
+- Made the computation for of-expressions be "lazy", so that they don't grab too many courses.
+	- This usually affected the Electives sections
 
 
 ## [3.0.0-beta2] - 2015-10-12
