@@ -1,16 +1,13 @@
 import Bluebird from 'bluebird'
 import db from '../../../helpers/db'
-import flatten from 'lodash/flatten'
 import map from 'lodash/map'
 import loadArea from '../../../helpers/load-area'
 
 import {
 	LOAD_ALL_AREAS,
 	LOADING_AREAS,
-	RELOAD_CACHED_AREAS,
+	REFRESH_AREAS,
 	START_LOAD_AREAS,
-	LOAD_AREAS,
-	CACHE_AREAS_FROM_STUDIES,
 } from '../constants'
 
 export function loadingAreas() {
@@ -25,33 +22,12 @@ export function loadAllAreas() {
 	}
 }
 
-export function reloadCachedAreas() {
+export function refreshAreas() {
 	return (dispatch, getState) => {
 		dispatch(loadingAreas())
-		const {areas} = getState()
+		const areas = getState().areas.data
 		dispatch({ type: START_LOAD_AREAS, payload: areas })
 		const areaPromises = Bluebird.all(map(areas, loadArea))
-		return dispatch({ type: RELOAD_CACHED_AREAS, payload: areaPromises })
-	}
-}
-
-export function loadAreas() {
-	return (dispatch, getState) => {
-		dispatch(loadingAreas())
-		const {students} = getState()
-		const areas = flatten(map(students, student => student.data.present.studies))
-		dispatch({ type: START_LOAD_AREAS, payload: areas })
-		const areaPromises = Bluebird.all(map(areas, loadArea))
-		return dispatch({ type: LOAD_AREAS, payload: areaPromises })
-	}
-}
-
-export function cacheAreasFromStudies(areas) {
-	return (dispatch, getState) => {
-		dispatch(loadingAreas())
-		dispatch({ type: START_LOAD_AREAS, payload: areas })
-		const {areas: cachedAreas} = getState()
-		const areaPromises = Bluebird.all(map(areas, area => loadArea(area, cachedAreas)))
-		return dispatch({ type: CACHE_AREAS_FROM_STUDIES, payload: areaPromises })
+		return dispatch({ type: REFRESH_AREAS, payload: areaPromises })
 	}
 }
