@@ -18,7 +18,7 @@ const COURSES_URL = 'https://www.stolaf.edu/sis/st-courses.cfm'
 const DEGREE_AUDIT_URL = 'https://www.stolaf.edu/sis/st-degreeaudit.cfm'
 
 const fetch = (url, args={}) => global.fetch(url, {cache: 'no-cache', credentials: 'same-origin', mode: 'same-origin', ...args}).catch(classifyFetchErrors)
-const fetchHtml = (...args) => fetch(...args).then(status).then(text).then(resp => {console.log(...args, resp); return resp}).then(html)
+const fetchHtml = (...args) => fetch(...args).then(status).then(text).then(html)
 
 
 function html(text) {
@@ -81,6 +81,7 @@ export function extractTermList(dom) {
 
 export function extractStudentId(dom) {
 	let idElement = selectOne('[name=stnum]', dom)
+	console.log('ids', selectAll('[name=stnum]', dom).map(el => Number(el.attribs.value)))
 	if (!idElement) {
 		return null
 	}
@@ -128,10 +129,7 @@ function getCourses(studentId, term) {
 	let formData = buildFormData({stnum: studentId, searchyearterm: term})
 
 	return fetchHtml(COURSES_URL, {method: 'POST', body: formData})
-		.then(response => {
-			console.log(term, response)
-			return getCoursesFromHtml(response, term)
-		})
+		.then(response => getCoursesFromHtml(response, term))
 }
 
 
@@ -301,6 +299,7 @@ function loadPages(dom) {
 
 function beginDataExtraction([coursesDom, degreeAuditDom]) {
 	let studentId = extractStudentId(coursesDom)
+	console.log('student id', studentId)
 	let terms = extractTermList(coursesDom)
 
 	return Bluebird.all([
