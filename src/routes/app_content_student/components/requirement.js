@@ -49,6 +49,8 @@ export default function Requirement(props) {
 
 	const message = props.message &&
 		<p className='requirement--message'>{props.message}</p>
+	const description = props.description &&
+		<p className='requirement--description'>{props.description}</p>
 
 	const filterEl = props.filter && (
 		<div className='requirement--filter'>
@@ -92,6 +94,7 @@ export default function Requirement(props) {
 	return (
 		<div className={cx(`requirement`, extraClasses, computationClassName)}>
 			{title}
+			{description}
 			{message}
 			{override}
 			{filterEl}
@@ -102,6 +105,7 @@ export default function Requirement(props) {
 }
 Requirement.propTypes = {
 	computed: PropTypes.bool,
+	description: PropTypes.string,
 	filter: PropTypes.object,
 	message: PropTypes.string,
 	name: PropTypes.string,

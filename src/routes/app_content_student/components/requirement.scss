@@ -39,6 +39,7 @@
 
 .requirement .requirement .requirement .requirement--result,
 .requirement .requirement .requirement .requirement--message,
+.requirement .requirement .requirement .requirement--description,
 .requirement .requirement .requirement .requirement--filter {
 	padding-left: $area-edge-padding;
 }
@@ -89,6 +90,7 @@
 
 .requirement--heading,
 .requirement--result,
+.requirement--description,
 .requirement--message,
 .requirement--filter,
 .requirement--override-buttons {
@@ -97,7 +99,8 @@
 	padding-bottom: 0.2em;
 }
 
-.requirement--message {
+.requirement--message,
+.requirement--description {
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-left: $area-edge-padding;
@@ -107,11 +110,13 @@
 }
 
 .requirement--message,
+.requirement--description,
 .requirement--result > .expression > .expression--description {
 	margin-top: 0.5em;
 }
 
-.requirement .requirement .requirement .requirement--message {
+.requirement .requirement .requirement .requirement--message,
+.requirement .requirement .requirement .requirement--description {
 	// padding-left: 0;
 }
 
