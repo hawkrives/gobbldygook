@@ -115,9 +115,11 @@ export function getCoursesFromHtml(dom, term) {
 	let courseRows = selectAll('.sis-line1, .sis-line2', dom)
 
 	if (!courseRows.length) {
+		console.log(term, 'no rows')
 		return []
 	}
 
+	console.log(term, 'rows', courseRows.map(row => convertRowToCourse(term, row)))
 	return courseRows.map(row => convertRowToCourse(term, row))
 }
 
