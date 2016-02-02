@@ -3,13 +3,14 @@ import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
 import forEach from 'lodash/forEach'
 import forOwn from 'lodash/forOwn'
+import fromPairs from 'lodash/fromPairs'
 import includes from 'lodash/includes'
+import last from 'lodash/last'
 import map from 'lodash/map'
 import mapKeys from 'lodash/mapKeys'
 import parseHtml from './parse-html'
 import partitionByIndex from './partition-by-index'
 import unzip from 'lodash/unzip'
-import fromPairs from 'lodash/fromPairs'
 import {AuthError, NetworkError} from './errors'
 import {selectAll, selectOne} from 'css-select'
 import {status, text, classifyFetchErrors} from './fetch-helpers'
@@ -80,8 +81,7 @@ export function extractTermList(dom) {
 
 
 export function extractStudentId(dom) {
-	let idElement = selectOne('[name=stnum]', dom)
-	console.log('ids', selectAll('[name=stnum]', dom).map(el => Number(el.attribs.value)))
+	let idElement = last(selectAll('[name=stnum]', dom))
 	if (!idElement) {
 		return null
 	}
@@ -299,7 +299,6 @@ function loadPages(dom) {
 
 function beginDataExtraction([coursesDom, degreeAuditDom]) {
 	let studentId = extractStudentId(coursesDom)
-	console.log('student id', studentId)
 	let terms = extractTermList(coursesDom)
 
 	return Bluebird.all([
