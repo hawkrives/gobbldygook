@@ -6,7 +6,7 @@ import isArray from 'lodash/isArray'
 import isRequirementName from './is-requirement-name'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
-import stringify from 'json-stable-stringify'
+import stringify from 'stabilize'
 import uniqBy from 'lodash/uniqBy'
 
 /**

@@ -1,6 +1,6 @@
 import union from 'lodash/union'
 import reject from 'lodash/reject'
-import stringify from 'json-stable-stringify'
+import stringify from 'stabilize'
 import mapValues from 'lodash/mapValues'
 import omit from 'lodash/omit'
 

@@ -2,7 +2,7 @@ import assertKeys from './assert-keys'
 import flatten from 'lodash/flatten'
 import map from 'lodash/map'
 import uniqBy from 'lodash/uniqBy'
-import stringify from 'json-stable-stringify'
+import stringify from 'stabilize'
 
 /**
  * Collects matched courses from a result object

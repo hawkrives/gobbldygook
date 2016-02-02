@@ -18,7 +18,7 @@ import getOccurrences from './get-occurrences'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 import simplifyCourse from './simplify-course'
-import stringify from 'json-stable-stringify'
+import stringify from 'stabilize'
 import xor from 'lodash/xor'
 
 
