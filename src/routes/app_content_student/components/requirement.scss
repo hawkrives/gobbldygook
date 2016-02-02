@@ -123,6 +123,7 @@
 .requirement--override-buttons {
 	display: flex;
 	justify-content: space-around;
+	flex-flow: row wrap;
 
 	margin-top: 0.25em;
 
@@ -131,10 +132,6 @@
 		border: solid 1px color('gray', '500');
 
 		margin: 0 0.5em 0.5em;
-
-		& + .button {
-			margin-left: 0;
-		}
 	}
 }
 
