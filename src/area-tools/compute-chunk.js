@@ -306,12 +306,10 @@ export function computeOf({expr, ctx, courses, dirty}) {
 
 		// Now we break into seperate paths
 		if (expr.$count.$operator === '$gte') {
-			// Ideal: If we've amassed enough matches, stop checking.
-			// Reality: Other things expect this to be a greedy operation,
-			//   namely the "courses from children" expression.
-			// if (didPass) {
-			// 	return false
-			// }
+			// If we've amassed enough matches, stop checking.
+			if (didPass) {
+				return false
+			}
 		}
 		else if (expr.$count.$operator === '$eq') {
 			// If we have exactly the right number, stop.
