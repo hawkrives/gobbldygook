@@ -31,7 +31,7 @@ export function logError({id, error, quiet=false}, ...args) {
 }
 
 export function startProgress(id, message='', {value=0, max=1, showButton=false}={}) {
-	return { type: START_PROGRESS, payload: { message, value, max, showButton } }
+	return { type: START_PROGRESS, payload: { id, message, value, max, showButton } }
 }
 
 export function incrementProgress(id, by=1) {
