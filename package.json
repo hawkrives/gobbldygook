@@ -148,7 +148,7 @@
     "pretty-ms": "2.1.0",
     "react-addons-perf": "0.14.7",
     "react-transform-catch-errors": "1.0.1",
-    "react-transform-hmr": "1.0.1",
+    "react-transform-hmr": "1.0.2",
     "react-transform-render-visualizer": "0.3.0",
     "redbox-react": "1.2.2",
     "redux-devtools": "3.0.2",
