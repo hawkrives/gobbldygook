@@ -18,7 +18,7 @@ const COURSES_URL = 'https://www.stolaf.edu/sis/st-courses.cfm'
 const DEGREE_AUDIT_URL = 'https://www.stolaf.edu/sis/st-degreeaudit.cfm'
 
 const fetch = (url, args={}) => global.fetch(url, {cache: 'no-cache', credentials: 'same-origin', mode: 'same-origin', ...args}).catch(classifyFetchErrors)
-const fetchHtml = (...args) => fetch(...args).then(status).then(text).then(html)
+const fetchHtml = (...args) => fetch(...args).then(status).then(text).then(resp => {console.log(...args, resp); return resp}).then(html)
 
 
 function html(text) {
@@ -128,7 +128,10 @@ function getCourses(studentId, term) {
 	let formData = buildFormData({stnum: studentId, searchyearterm: term})
 
 	return fetchHtml(COURSES_URL, {method: 'POST', body: formData})
-		.then(response => getCoursesFromHtml(response, term))
+		.then(response => {
+			console.log(term, response)
+			return getCoursesFromHtml(response, term)
+		})
 }
 
 
