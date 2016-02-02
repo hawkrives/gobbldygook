@@ -40,7 +40,8 @@ Level III:
         Sometimes Level III topics courses in other departments like
         Environmental Studies can count as the Level III biology course.
 
-    result: one of (
+    result:
+        one of (
             BIO 315, 341, 348, BI/ES 350, BIO 363, 364, 371, 372, 382, 383, 385, 386, 391,
         )
 

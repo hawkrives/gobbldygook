@@ -9,11 +9,12 @@ Language:
         JAPAN 231, 232, 294, 298, 301, 302, 320, 394, 398 )
 
 
-Interdisciplinary: ASIAN 275
+Interdisciplinary:
+    ASIAN 275
 
 
 Seminar:
-    result: ASIAN 397 | 399
+    ASIAN 397 | 399
 
 
 Electives:
