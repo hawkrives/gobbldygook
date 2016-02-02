@@ -15,7 +15,7 @@ Interdisciplinary:
 
 
 Seminar:
-    one of ( ASIAN 397, 399 )
+    ASIAN 397 | 399
 
 
 Electives:
@@ -23,11 +23,9 @@ Electives:
         You may not count more than four courses about any one country.
         At least two of the level II and III courses must be taken on-campus.
 
-    Level I:
-        two of ( ASIAN 121, 123, 126, 130, 156 )
-
-    Above I:
-        two of (
+    filter:
+        only courses from (
+            ASIAN 121, 123, 126, 130, 156, PHIL 127,
             ASIAN 200, 210, 215, 216, 220, 230, 235, 236, 237,
             AS/SA 239,
             ASIAN 240,
@@ -51,7 +49,9 @@ Electives:
             CHIN 301, 302, 320, 351, 394, 398,
             JAPAN 301, 302, 320, 394, 398,
             ECON 218, 238,
-            HIST 240,
-            PHIL 127 )
+            HIST 240
+        )
 
-    result: seven courses from children & Level I & Above I
+    result:
+        seven courses from filter &
+        at most two courses from filter where { level = 100 }
