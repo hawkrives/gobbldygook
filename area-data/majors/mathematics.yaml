@@ -35,7 +35,7 @@ Electives:
         MATH 226, 230, 232, 236, (238 | 239), 262, 266, 2XX,
         (STAT 212 | 214 | 272), STAT 316,
         CSCI 231,
-        one of (CHEM 371, ECON 385, (PHYS 374 | 375 | 376))
+        (CHEM 371 | ECON 385 | (PHYS 374 | 375 | 376))
     )
 
 
