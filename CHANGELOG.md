@@ -20,6 +20,7 @@
 - Actually show descriptions in the requirements area
 - Made the computation for of-expressions be "lazy", so that they don't grab too many courses.
 	- This usually affected the Electives sections
+- Move the area editor to `/areas`
 
 
 ## [3.0.0-beta2] - 2015-10-12
