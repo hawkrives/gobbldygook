@@ -5,11 +5,11 @@ import forEach from 'lodash/forEach'
 import forOwn from 'lodash/forOwn'
 import fromPairs from 'lodash/fromPairs'
 import includes from 'lodash/includes'
-import last from 'lodash/last'
 import map from 'lodash/map'
 import mapKeys from 'lodash/mapKeys'
 import parseHtml from './parse-html'
 import partitionByIndex from './partition-by-index'
+import uniq from 'lodash/uniq'
 import unzip from 'lodash/unzip'
 import {AuthError, NetworkError} from './errors'
 import {selectAll, selectOne} from 'css-select'
@@ -80,12 +80,9 @@ export function extractTermList(dom) {
 }
 
 
-export function extractStudentId(dom) {
-	let idElement = last(selectAll('[name=stnum]', dom))
-	if (!idElement) {
-		return null
-	}
-	return Number(idElement.attribs.value)
+export function extractStudentIds(dom) {
+	let idElements = selectAll('[name=stnum]', dom)
+	return uniq(map(filter(idElements, el => el), el => Number(el.attribs.value)))
 }
 
 
@@ -285,7 +282,7 @@ export function checkIfLoggedIn() {
 		else if (errorMsg) {
 			throw new Error(errorMsg)
 		}
-		return response
+		return extractStudentIds(response)
 	})
 }
 
