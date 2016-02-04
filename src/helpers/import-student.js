@@ -274,7 +274,7 @@ export function getGraduationInformation(dom) {
 
 export function checkIfLoggedIn() {
 	if (typeof window !== 'undefined' && window.location.hostname !== 'www.stolaf.edu') {
-		return Bluebird.reject(new AuthError('Wrong domain. Student import can only work under the www.stolaf.edu domain.'))
+		return Bluebird.reject(new AuthError('Wrong domain. Student import will only work under the www.stolaf.edu domain.'))
 	}
 	return fetchHtml(COURSES_URL).then(response => {
 		let errorMsg = selectOne('.sis-error', response)
