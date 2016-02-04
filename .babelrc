@@ -4,14 +4,10 @@
 		// if NODE_ENV (or BABEL_ENV) environment variable is not set
 		// or is equal to "development"
 		"development": {
+			"presets": ["react-hmre"],
 			"plugins": [
 				["react-transform", {
 					"transforms": [
-						{
-							"transform": "react-transform-hmr",
-							"imports": ["react"],
-							"locals": ["module"],
-						},
 						{
 							"transform": "react-transform-catch-errors",
 							"imports": ["react", "redbox-react"],
