@@ -44,8 +44,8 @@ export default class SISImportScreen extends Component {
 			.catch(() => this.setState({loggedIn: false, checkingLogin: false}))
 	};
 
-	handleImportData = id => {
-		getStudentInfo(id)
+	handleImportData = () => {
+		getStudentInfo(this.state.selectedId)
 			.then(data => {
 				console.log(data)
 				return data
@@ -66,7 +66,7 @@ export default class SISImportScreen extends Component {
 
 	handleSelectId = value => {
 		this.setState({selectedId: value})
-		this.handleImportData(value)
+		this.handleImportData()
 	};
 
 	render() {
