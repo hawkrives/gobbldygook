@@ -20,9 +20,9 @@ export default class SISImportScreen extends Component {
 
 	state = {
 		loggedIn: null,
-		checkingLogin: false,
+		checkingLogin: true,
 		error: null,
-		ids: null,
+		ids: [],
 		selectedId: null,
 		student: null,
 	};
@@ -121,7 +121,7 @@ export default class SISImportScreen extends Component {
 								<li>{year}:
 									<ul>
 										{map(sortBy(schedules, 'semester'), schedule =>
-											<li>{semesterName(schedule.semester)}:
+											<li>{semesterName(schedule.semester)}: {JSON.stringify(schedule.courses, null, 2)}
 												<ul>
 													{map(schedule.courses, course => {
 														<li>{course.deptnum} – {course.name}</li>
