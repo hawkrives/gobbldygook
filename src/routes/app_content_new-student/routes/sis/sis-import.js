@@ -117,15 +117,6 @@ export default class SISImportScreen extends Component {
 					? <div>
 						<StudentSummary student={student} showMessage={false} />
 						<ul>
-							{/*<li>2011:
-								<ul>
-									<li>Non-St. Olaf
-										<ul>
-											<li>{deptnum} – {title}</li>
-										</ul>
-									</li>
-								</ul>
-							</li>*/}
 							{map(groupBy(student.schedules, 'year'), (schedules, year) =>
 								<li>{year}:
 									<ul>
