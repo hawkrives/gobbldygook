@@ -296,18 +296,17 @@ function loadPages(studentId) {
 }
 
 
-function beginDataExtraction([coursesDom, degreeAuditDom]) {
-	let studentId = extractStudentId(coursesDom)
+function beginDataExtraction({id, coursesDom, auditDom}) {
 	let terms = extractTermList(coursesDom)
 
-	return Bluebird.all([
-		collectAllCourses(studentId, terms),
-		getGraduationInformation(degreeAuditDom),
-	])
+	return Bluebird.props({
+		coursesByTerm: collectAllCourses(id, terms),
+		studentInfo: getGraduationInformation(auditDom),
+	})
 }
 
 
-function flattenData([coursesByTerm, studentInfo]) {
+function flattenData({coursesByTerm, studentInfo}) {
 	return {
 		courses: flatten(coursesByTerm),
 		degrees: studentInfo,
