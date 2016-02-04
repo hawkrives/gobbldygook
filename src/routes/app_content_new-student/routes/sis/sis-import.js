@@ -146,9 +146,10 @@ export default class SISImportScreen extends Component {
 					: null}
 
 				<div>
-					{loggedIn && student
+					{loggedIn ? student
 						? <Button onClick={this.handleCreateStudent}>Import Student</Button>
-						: <Button disabled={!loggedIn} onClick={this.handleImportData}>Fetch Student</Button>}
+						: <Button disabled={!loggedIn} onClick={this.handleImportData}>Fetch Student</Button>
+					: null}
 				</div>
 			</div>
 		)
