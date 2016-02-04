@@ -287,8 +287,12 @@ export function checkIfLoggedIn() {
 }
 
 
-function loadPages(dom) {
-	return Bluebird.all([dom, fetchHtml(DEGREE_AUDIT_URL)])
+function loadPages(studentId) {
+	return Bluebird.props({
+		id: studentId,
+		coursesDom: fetchHtml(COURSES_URL),
+		auditDom: fetchHtml(DEGREE_AUDIT_URL),
+	})
 }
 
 
@@ -311,13 +315,12 @@ function flattenData([coursesByTerm, studentInfo]) {
 }
 
 
-export default function getStudentInfo() {
+export default function getStudentInfo(studentId) {
 	if (!navigator.onLine) {
 		return Bluebird.reject(new NetworkError('The network is offline.'))
 	}
 
-	return checkIfLoggedIn()
-		.then(loadPages)
+	return loadPages(studentId)
 		.then(beginDataExtraction)
 		.then(flattenData)
 		.catch(err => {
