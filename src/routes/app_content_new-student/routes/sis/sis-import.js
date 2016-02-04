@@ -123,7 +123,7 @@ export default class SISImportScreen extends Component {
 										{map(sortBy(schedules, 'semester'), schedule =>
 											<li>{semesterName(schedule.semester)}:
 												<ul>
-													{map(schedules.courses, course => {
+													{map(schedule.courses, course => {
 														<li>{course.deptnum} – {course.name}</li>
 													})}
 												</ul>
