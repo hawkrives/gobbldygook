@@ -20,11 +20,11 @@ export default class SISImportScreen extends Component {
 
 	state = {
 		loggedIn: null,
-		checkingLogin: true,
-		data: {},
+		checkingLogin: false,
 		error: null,
-		ids: [],
+		ids: null,
 		selectedId: null,
+		student: null,
 	};
 
 	componentWillMount() {
