@@ -93,7 +93,7 @@
     "babel-cli": "6.4.5",
     "babel-core": "6.4.5",
     "babel-eslint": "4.1.8",
-    "babel-loader": "6.2.1",
+    "babel-loader": "6.2.2",
     "babel-plugin-external-helpers": "6.4.0",
     "babel-plugin-react-transform": "2.0.0",
     "babel-plugin-syntax-async-functions": "6.3.13",
