@@ -98,7 +98,7 @@ export default class SISImportScreen extends Component {
 
 				{error ? <p>{error.message}</p> : null}
 
-				{!loggedIn ? <Button disabled={!checkingLogin}>Check Again</Button> : null}
+				{!loggedIn ? <Button disabled={checkingLogin} onClick={this.checkLoginState}>Check Again</Button> : null}
 
 				{ids.length > 1 ? <div>
 					<p>Hang on one second… we found multiple student IDs. Which one is yours?</p>
@@ -146,7 +146,7 @@ export default class SISImportScreen extends Component {
 					: null}
 
 				<div>
-					{student
+					{loggedIn && student
 						? <Button onClick={this.handleCreateStudent}>Import Student</Button>
 						: <Button disabled={!loggedIn} onClick={this.handleImportData}>Fetch Student</Button>}
 				</div>
