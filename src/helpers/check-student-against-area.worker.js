@@ -87,4 +87,3 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScop
 			})
 	})
 }
-
