@@ -6,6 +6,7 @@ import stringifyError from './stringify-error'
 
 import range from 'idb-range'
 import uniq from 'lodash/uniq'
+import forEach from 'lodash/forEach'
 import flatMap from 'lodash/flatMap'
 import filter from 'lodash/filter'
 import size from 'lodash/size'
@@ -151,7 +152,7 @@ async function cleanPriorData(path, type) {
 }
 
 
-const updateDatabase = (type, infoFileBase, notificationId) => async infoFromServer => {
+const updateDatabase = async (type, infoFileBase, notificationId, infoFromServer) => {
 	// Get the path to the current file and the hash of the file
 	const {path, hash} = infoFromServer
 	// Append the hash, to act as a sort of cache-busting mechanism
@@ -231,11 +232,11 @@ async function removeDuplicateAreas() {
 	const withDuplicates = filter(grouped, list => list.length > 1)
 
 	let ops = {}
-	for (let duplicatesList of withDuplicates) {
+	forEach(withDuplicates, duplicatesList => {
 		duplicatesList = sortBy(duplicatesList, area => area.sourcePath.length)
 		duplicatesList.shift() // take off the shortest one
 		ops = {...ops, ...fromPairs(map(duplicatesList, item => ([item.sourcePath, null])))}
-	}
+	})
 
 	// remove any that are invalid
 	// --- something about any values that aren't objects
@@ -278,8 +279,7 @@ async function loadFiles(url, infoFileBase) {
 	}
 
 	// For each file, see if it needs loading.
-	const filesThatNeedUpdate = map(filesToLoad, file => needsUpdate(type, file.path, file.hash))
-	const fileNeedsLoading = await Bluebird.all(filesThatNeedUpdate)
+	const fileNeedsLoading = await Bluebird.map(filesToLoad, file => needsUpdate(type, file.path, file.hash))
 
 	// Cross-reference each file to load with the list of files that need loading
 	filesToLoad = filter(filesToLoad, (file, index) => fileNeedsLoading[index])
@@ -294,8 +294,10 @@ async function loadFiles(url, infoFileBase) {
 
 	// Load them into the database
 	try {
-		const update = updateDatabase(type, infoFileBase, notificationId)
-		await Bluebird.all(map(filesToLoad, update))
+		await Bluebird.map(
+			filesToLoad,
+			file => updateDatabase(type, infoFileBase, notificationId, file),
+			{concurrency: 2})
 	}
 	catch (err) {
 		throw err

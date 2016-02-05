@@ -58,9 +58,7 @@ export default function loadData() {
 	]
 
 	if (navigator.onLine) {
-		const promises = map(infoFiles, url => loadDataFile(url))
-
-		return Bluebird.all(promises)
+		return Bluebird.map(infoFiles, loadDataFile)
 	}
 	else {
 		return Bluebird.resolve(null)
