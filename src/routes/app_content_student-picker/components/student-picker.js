@@ -8,6 +8,12 @@ import StudentList from './student-list'
 
 import './student-picker.scss'
 
+let sortByExpanded = {
+	dateLastModified: 'date last modified',
+	name: 'name',
+	canGraduate: 'can graduate',
+}
+
 export default function StudentPicker(props) {
 	const {
 		destroyStudent,
@@ -66,7 +72,7 @@ export default function StudentPicker(props) {
 				</Toolbar>
 
 				<div>
-					<span>Sorting by <b>{sortBy}</b> (a-z);</span>{' '}
+					<span>Sorting by <b>{sortByExpanded[sortBy]}</b> (a-z);</span>{' '}
 					<span>grouping by <b>{groupBy}</b>.</span>
 				</div>
 			</div>
