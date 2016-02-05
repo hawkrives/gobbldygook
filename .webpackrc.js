@@ -133,12 +133,12 @@ const config = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loaders: ['babel-loader'],
+				loaders: ['babel-loader?cacheDirectory'],
 			},
 			{
 				test: /\.worker.js$/,
 				exclude: /node_modules/,
-				loaders: ['worker-loader', 'babel-loader'],
+				loaders: ['worker-loader', 'babel-loader?cacheDirectory'],
 			},
 			{
 				test: /\.json$/,
