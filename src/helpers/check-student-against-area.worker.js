@@ -23,37 +23,43 @@ function alterCourse(course) {
 	})
 }
 
-function checkStudentAgainstArea(student, area) {
-	if (!area || area._error) {
-		console.error('checkStudentAgainstArea:', (area ? area._error : 'area is null'), area)
-		return Bluebird.resolve(area)
-	}
-
-	const areaData = area._area
-
-	student.courses = map(getActiveStudentCourses(student), alterCourse)
-
-	let details = {}
+function tryEvaluate(student, area) {
 	try {
-		details = evaluate(student, areaData)
+		return evaluate(student, area)
 	}
 	catch (err) {
 		console.error('checkStudentAgainstArea:', err)
-		return Bluebird.resolve({...area, _error: err.message})
+		return {...area, _error: err.message}
 	}
+}
 
-	const finalReqs = findLeafRequirements(details)
-	const maxProgress = finalReqs.length
-	const currentProgress = filter(finalReqs, {computed: true}).length
+function checkStudentAgainstArea(student, area) {
+	return new Bluebird(resolve => {
+		if (!area || area._error) {
+			console.error('checkStudentAgainstArea:', (area ? area._error : 'area is null'), area)
+			resolve(area)
+		}
 
-	return Bluebird.resolve({
-		...area,
-		_area: details,
-		_checked: true,
-		_progress: {
-			at: currentProgress,
-			of: maxProgress,
-		},
+		student.courses = map(getActiveStudentCourses(student), alterCourse)
+
+		let details = tryEvaluate(student, area._area)
+		if (details._error) {
+			resolve(details)
+		}
+
+		const finalReqs = findLeafRequirements(details)
+		const maxProgress = finalReqs.length
+		const currentProgress = filter(finalReqs, {computed: true}).length
+
+		resolve({
+			...area,
+			_area: details,
+			_checked: true,
+			_progress: {
+				at: currentProgress,
+				of: maxProgress,
+			},
+		})
 	})
 }
 
