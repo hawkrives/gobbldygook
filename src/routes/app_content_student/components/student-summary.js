@@ -5,7 +5,6 @@ import plur from 'plur'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
 import sample from 'lodash/sample'
-import Autosize from 'react-input-autosize'
 
 import AvatarLetter from '../../../components/avatar-letter'
 import ContentEditable from '../../../components/content-editable'
@@ -53,9 +52,9 @@ export default function StudentSummary(props) {
 	const {studies, canGraduate} = student
 
 	const NameEl = (props.onChangeName
-		? <Autosize
+		? <ContentEditable
 			className='autosize-input'
-			onChange={props.onChangeName}
+			onBlur={props.onChangeName}
 			value={String(student.name)}
 		/>
 		: <span>{String(student.name)}</span>)
@@ -85,18 +84,18 @@ export default function StudentSummary(props) {
 	const enoughCredits = currentCredits >= neededCredits
 
 	const graduationEl = (props.onChangeGraduation
-		? <Autosize
+		? <ContentEditable
 			className='autosize-input'
-			onChange={props.onChangeGraduation}
+			onBlur={props.onChangeGraduation}
 			value={String(student.graduation)}
 		/>
 		: <span>{String(student.graduation)}</span>
 	)
 
 	const matriculationEl = (props.onChangeMatriculation
-		? <Autosize
+		? <ContentEditable
 			className='autosize-input'
-			onChange={props.onChangeMatriculation}
+			onBlur={props.onChangeMatriculation}
 			value={String(student.matriculation)}
 		/>
 		: <span>{String(student.matriculation)}</span>
