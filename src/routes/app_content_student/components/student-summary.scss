@@ -44,7 +44,10 @@
 		line-height: 1.6em;
 	}
 
-	.autosize-input {
+	.autosize-input input {
+		background-color: transparent;
+		border: 0;
+
 		border-bottom: 1px solid color('gray', '400');
 		padding: 0 0.125em 0 0;
 
