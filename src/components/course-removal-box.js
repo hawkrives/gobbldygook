@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {DropTarget} from 'react-dnd'
 
-import itemTypes from '../models/item-types'
+import {COURSE} from '../models/item-types'
 
 import Icon from './icon'
 
@@ -58,4 +58,4 @@ function collect(connect, monitor) {
 	}
 }
 
-export default DropTarget(itemTypes.COURSE, removeCourseTarget, collect)(CourseRemovalBox)
+export default DropTarget(COURSE, removeCourseTarget, collect)(CourseRemovalBox)

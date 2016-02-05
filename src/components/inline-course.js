@@ -7,7 +7,7 @@ import isNull from 'lodash/isNull'
 import map from 'lodash/map'
 import compareProps from '../helpers/compare-props'
 
-import itemTypes from '../models/item-types'
+import {COURSE} from '../models/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'
@@ -17,7 +17,7 @@ import ModalCourse from './modal-course'
 
 import styles from './inline-course.scss'
 
-class Course extends Component {
+class InlineCourse extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		conflicts: PropTypes.array,
@@ -127,4 +127,4 @@ function collect(connect, monitor) {
 	}
 }
 
-export default DragSource(itemTypes.COURSE, courseSource, collect)(Course)
+export default DragSource(COURSE, courseSource, collect)(InlineCourse)

@@ -5,7 +5,7 @@ import Link from 'react-router/lib/Link'
 import plur from 'plur'
 import semesterName from '../../../helpers/semester-name'
 import countCredits from '../../../area-tools/count-credits'
-import itemTypes from '../../../models/item-types'
+import {COURSE} from '../../../models/item-types'
 import {DropTarget} from 'react-dnd'
 import includes from 'lodash/includes'
 
@@ -127,6 +127,6 @@ function collect(connect, monitor) {
 	}
 }
 
-const droppable = DropTarget(itemTypes.COURSE, semesterTarget, collect)(Semester)
+const droppable = DropTarget(COURSE, semesterTarget, collect)(Semester)
 
 export default droppable
