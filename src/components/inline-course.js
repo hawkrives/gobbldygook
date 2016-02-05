@@ -38,7 +38,11 @@ class Course extends Component {
 	};
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return compareProps(this.props, nextProps) || compareProps(this.state, nextState)
+		return (
+			this.props.course !== nextProps.course ||
+			this.state.isOpen !== nextState.isOpen ||
+			this.props.isDragging !== nextProps.isDragging
+		)
 	}
 
 	closeModal = () => {
