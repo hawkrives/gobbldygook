@@ -2,12 +2,12 @@
 	width: 1em;
 	height: 1em;
 	fill: currentColor;
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	top: -0.0625em;
 }
 
 .icon--block {
 	display: block;
-}
-
-.icon--inline {
-	display: inline-block;
 }
