@@ -20,7 +20,7 @@ import 'isomorphic-fetch'
 
 // Include React and react-dom.render
 import React from 'react'
-import {render} from 'react-dom'
+import { render } from 'react-dom'
 if (DEVELOPMENT) {
 	global.Perf = require('react-addons-perf')
 }
@@ -47,7 +47,7 @@ import Root from './containers/root'
 const store = configureStore()
 global.dispatch = store.dispatch
 
-import {loadAllAreas} from './redux/areas/actions'
+import { loadAllAreas } from './redux/areas/actions'
 store.dispatch(loadAllAreas())
 routerMiddleware.listenForReplays(store)
 
