@@ -16,7 +16,7 @@ import getSchedule from '../../../helpers/get-schedule'
 export class SemesterContainer extends Component {
 	static propTypes = {
 		addCourse: PropTypes.func.isRequired,  // redux
-		destroySchedules: PropTypes.func.isRequired,
+		destroySchedules: PropTypes.func.isRequired, // redux
 		moveCourse: PropTypes.func.isRequired, // redux
 		semester: PropTypes.number.isRequired,
 		student: PropTypes.object.isRequired,
