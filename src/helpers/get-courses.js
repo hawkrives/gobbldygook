@@ -1,6 +1,7 @@
 import Bluebird from 'bluebird'
 import db from './db'
 import map from 'lodash/map'
+import omit from 'lodash/omit'
 
 const courseCache = new Map()
 // Gets a course from the database.
@@ -22,6 +23,7 @@ export async function getCourse({clbid, term}, fabrications) {
 		.index('clbid')
 		.get(clbid)
 		.then(course => course || {clbid, term, error: `Could not find ${clbid}`})
+		.then(course => omit(course, ['profWords', 'words', 'sourcePath']))
 		.catch(error => ({clbid, term, error: error.message}))
 
 	courseCache.set(clbid, promise)
