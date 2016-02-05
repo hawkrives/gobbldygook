@@ -12,56 +12,50 @@ import expandYear from '../helpers/expand-year'
 import semesterName from '../helpers/semester-name'
 
 export function checkForInvalidYear(course, scheduleYear) {
-	let result = {
-		warning: false,
-		type: 'invalid-year',
-		msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
-		icon: 'alert-circled',
-	}
-
 	let thisYear = new Date().getFullYear()
 
 	if (course.year !== scheduleYear && scheduleYear <= thisYear) {
-		result.warning = true
+		return {
+			warning: true,
+			type: 'invalid-year',
+			msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
+			icon: 'alert-circled',
+		}
 	}
 
-	return result.warning ? result : null
+	return null
 }
 
 export function checkForInvalidSemester(course, scheduleSemester) {
-	let result = {
-		warning: false,
-		type: 'invalid-semester',
-		msg: `Wrong Semester (originally from ${semesterName(course.semester)})`,
-		icon: 'ios-calendar-outline',
-	}
-
 	if (course.semester !== scheduleSemester) {
-		result.warning = true
+		return {
+			warning: true,
+			type: 'invalid-semester',
+			msg: `Wrong Semester (originally from ${semesterName(course.semester)})`,
+			icon: 'ios-calendar-outline',
+		}
 	}
 
-	return result.warning ? result : null
+	return null
 }
 
 export function checkForTimeConflicts(courses) {
 	let conflicts = findScheduleTimeConflicts(courses)
-	conflicts = map(conflicts, conflictSet => {
-		let result = {
-			warning: false,
-			type: 'time-conflict',
-			msg: '',
-			icon: 'ios-clock-outline',
-		}
 
+	conflicts = map(conflicts, conflictSet => {
 		if (some(conflictSet)) {
 			// +1 to the indices because humans don't 0-index lists
 			const conflicts = compact(map(conflictSet, (possibility, i) => (possibility === true) ? i + 1 : false))
 			const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
-			result.warning = true
-			result.msg = `Time conflict with the ${oxford(conflicted, {oxfordComma: true})} ${plur('course', conflicts.length)}`
+			return {
+				warning: true,
+				type: 'time-conflict',
+				msg: `Time conflict with the ${oxford(conflicted, {oxfordComma: true})} ${plur('course', conflicts.length)}`,
+				icon: 'ios-clock-outline',
+			}
 		}
 
-		return result.warning ? result : null
+		return null
 	})
 
 	return conflicts
