@@ -34,7 +34,7 @@ export default function AreaOfStudyGroup(props) {
 				areaList={props.allAreasOfType}
 				currentAreas={props.areas}
 				onAddArea={props.onAddArea}
-				studentGraduation={props.student.graduation}
+				studentGraduation={props.studentGraduation}
 				type={props.type}
 			/> : null}
 
@@ -47,7 +47,7 @@ export default function AreaOfStudyGroup(props) {
 					onToggleOverride={props.onToggleOverride}
 					showCloseButton={showAreaPicker}
 					showEditButton={showAreaPicker}
-					studentId={props.student.id}
+					studentId={props.studentId}
 				/>)}
 		</section>
 	)
@@ -64,6 +64,7 @@ AreaOfStudyGroup.propTypes = {
 	onRemoveOverride: PropTypes.func,
 	onToggleOverride: PropTypes.func.isRequired,
 	showAreaPicker: PropTypes.bool.isRequired,
-	student: PropTypes.object.isRequired,
+	studentGraduation: PropTypes.number.isRequired,
+	studentId: PropTypes.string.isRequired,
 	type: PropTypes.oneOf(values(areaTypeConstants)).isRequired,
 }

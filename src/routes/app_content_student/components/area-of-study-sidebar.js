@@ -47,7 +47,8 @@ export default function AreaOfStudySidebar(props) {
 			onRemoveOverride={props.onRemoveOverride}
 			onToggleOverride={props.onToggleOverride}
 			showAreaPicker={showAreaPickerFor[areaType] || false}
-			student={student}
+			studentGraduation={student.graduation}
+			studentId={student.id}
 			type={areaType}
 		/>)
 
@@ -91,7 +92,8 @@ export default function AreaOfStudySidebar(props) {
 			onRemoveArea={props.onRemoveArea}
 			onToggleOverride={props.onToggleOverride}
 			showAreaPicker={shouldShow || false}
-			student={student}
+			studentGraduation={student.graduation}
+			studentId={student.id}
 			type={type}
 		/>)
 
