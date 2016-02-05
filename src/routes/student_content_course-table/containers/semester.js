@@ -45,7 +45,7 @@ export class SemesterContainer extends Component {
 				removeSemester={this.removeSemester}
 				schedule={schedule}
 				semester={semester}
-				student={student}
+				studentId={student.id}
 				year={year}
 			/>
 		)

@@ -19,7 +19,7 @@ import styles from './semester.scss'
 export default function Semester(props) {
 	let courseList = null
 
-	const { student, semester, year, canDrop, schedule } = props
+	const { studentId, semester, year, canDrop, schedule } = props
 	const { courses, validation } = schedule
 
 	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
@@ -39,7 +39,7 @@ export default function Semester(props) {
 			courses={courses}
 			creditCount={currentCredits}
 			availableCredits={recommendedCredits}
-			studentId={student.id}
+			studentId={studentId}
 			schedule={schedule}
 			conflicts={validation ? validation.conflicts : []}
 		/>
@@ -55,7 +55,7 @@ export default function Semester(props) {
 			<header className={styles.title}>
 				<Link
 					className={styles.header}
-					to={`/s/${student.id}/semester/${year}/${semester}`}
+					to={`/s/${studentId}/semester/${year}/${semester}`}
 				>
 					<h1>{semesterName(semester)}</h1>
 
@@ -65,7 +65,7 @@ export default function Semester(props) {
 				</Link>
 
 				<Button link
-					to={`/s/${student.id}/search/${year}/${semester}`}
+					to={`/s/${studentId}/search/${year}/${semester}`}
 					title='Search for courses'
 				>
 					<Icon name='search' /> Course
@@ -93,7 +93,7 @@ Semester.propTypes = {
 	removeSemester: PropTypes.func.isRequired,
 	schedule: PropTypes.object.isRequired,
 	semester: PropTypes.number.isRequired,
-	student: PropTypes.object.isRequired,
+	studentId: PropTypes.string.isRequired,
 	year: PropTypes.number.isRequired,
 }
 
@@ -106,10 +106,10 @@ const semesterTarget = {
 		const toSchedule = props.schedule
 
 		if (isFromSchedule) {
-			props.moveCourse(props.student.id, fromScheduleId, toSchedule.id, clbid)
+			props.moveCourse(props.studentId, fromScheduleId, toSchedule.id, clbid)
 		}
 		else {
-			props.addCourse(props.student.id, toSchedule.id, clbid)
+			props.addCourse(props.studentId, toSchedule.id, clbid)
 		}
 	},
 	canDrop(props, monitor) {
