@@ -9,6 +9,7 @@ import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
 import plur from 'plur'
 import filter from 'lodash/filter'
+import {v4 as uuid} from 'uuid'
 
 export default async function convertStudent({courses, degrees}) {
 	let {
@@ -36,13 +37,14 @@ async function processSchedules(courses) {
 		return getCourse(course).then(resolvedCourse => {
 			if (resolvedCourse.error) {
 				course._fabrication = true
+				course.clbid = course.clbid || uuid()
 				return course
 			}
 			return resolvedCourse
 		})
 	}))
 
-	let fabrications = filter(courses, '_fabrication')
+	let fabrications = fromPairs(map(filter(courses, '_fabrication'), c => [c.clbid, c]))
 
 	let schedules = groupBy(courses, 'term')
 	schedules = map(schedules, (courses, term) => {
