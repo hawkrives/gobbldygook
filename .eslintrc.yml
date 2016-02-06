@@ -45,6 +45,7 @@ rules:
   no-unused-vars: [1, {args: 'after-used', argsIgnorePattern: '^_$'}]
   no-console: 0
   no-underscore-dangle: 0
+  no-redeclare: [2, {builtinGlobals: true}]
   # strict: [1, unnecessary]
   no-class-assign: 2
   no-const-assign: 2
