@@ -30,6 +30,15 @@ export class SemesterContainer extends Component {
 		this.props.destroySchedules(student.id, ...scheduleIds)
 	};
 
+	shouldComponentUpdate(nextProps) {
+		return (
+			nextProps.student !== this.props.student ||
+			nextProps.addCourse !== this.props.addCourse ||
+			nextProps.moveCourse !== this.props.moveCourse ||
+			nextProps.destroySchedules !== this.props.destroySchedules
+		)
+	}
+
 	render() {
 		const { student, semester, year, addCourse, moveCourse } = this.props
 		const schedule = getSchedule(student, year, semester)
