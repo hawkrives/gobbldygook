@@ -307,6 +307,11 @@ result:
 ```
 
 
+Need to Document:
+
+the `student selected` key on requirements. it shows a message, and forces the student to specify what courses they need to take.
+
+
 ## Formatting
 
 Congratulations for having read this far! I think that's all of the concepts. So. With the hard-and-fast rules out of the way, let's think about some subjective ones for a minute: the formatting of the major specification file.
