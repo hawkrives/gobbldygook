@@ -296,6 +296,9 @@ Modifier
       if (from.$from === 'children-where' && what !== 'course') {
         throw new Error('must use "courses from" with "children where"')
       }
+      if (count.$operator !== '$gte' && what !== 'course') {
+        throw new Error('can only use at-least style counters with non-course requests')
+      }
       let result = {
         ...from,
         $type: 'modifier',

@@ -4,12 +4,13 @@ import filter from 'lodash/filter'
 import forEach from 'lodash/forEach'
 import isPlainObject from 'lodash/isPlainObject'
 import map from 'lodash/map'
-import max from 'lodash/max'
-import min from 'lodash/min'
+import _max from 'lodash/max'
+import _min from 'lodash/min'
+import take from 'lodash/take'
 import simplifyCourse from './simplify-course'
 import uniqBy from 'lodash/uniqBy'
 
-export default function filterByWhereClause(baseList, clause, distinct, fullList) {
+export default function filterByWhereClause(baseList, clause, {distinct, fullList, counter}={}) {
 	// When filtering by an and-clause, we need access to both the
 	// entire list of courses, and the result of the prior iteration.
 	// To simplify future invocations, we default to `fullList = list`
@@ -22,7 +23,7 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 
 	// This function always reduces down to a call to filterByQualification
 	if (clause.$type === 'qualification') {
-		return filterByQualification(baseList, clause, distinct, fullList)
+		return filterByQualification(baseList, clause, {distinct, fullList, counter})
 	}
 
 	// either an and- or or-clause.
@@ -33,7 +34,7 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 		if ('$and' in clause) {
 			let filtered = baseList
 			forEach(clause.$and, q => {
-				filtered = filterByWhereClause(filtered, q, distinct, fullList)
+				filtered = filterByWhereClause(filtered, q, {distinct, fullList, counter})
 			})
 			return filtered
 		}
@@ -43,7 +44,7 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 		else if ('$or' in clause) {
 			let filtrations = []
 			forEach(clause.$or, q => {
-				filtrations = filtrations.concat(filterByWhereClause(baseList, q, distinct))
+				filtrations = filtrations.concat(filterByWhereClause(baseList, q, {distinct, counter}))
 			})
 
 			// uniquify the list of possibilities by way of turning them into
@@ -64,11 +65,11 @@ export default function filterByWhereClause(baseList, clause, distinct, fullList
 }
 
 const qualificationFunctionLookup = {
-	max: max,
-	min: min,
+	max: _max,
+	min: _min,
 }
 
-export function filterByQualification(list, qualification, distinct, fullList) {
+export function filterByQualification(list, qualification, {distinct=false, fullList, counter={}}={}) {
 	assertKeys(qualification, '$key', '$operator', '$value')
 	const value = qualification.$value
 
@@ -86,7 +87,10 @@ export function filterByQualification(list, qualification, distinct, fullList) {
 			}
 
 			const completeList = fullList || list
-			const filtered = filterByWhereClause(completeList, value.$where, distinct)
+			// we're not passing distinct or counter back to filterByWhereClause here,
+			// because this call is not affected by how the results need to be qualified,
+			// since it's finding the matches to get a value from.
+			const filtered = filterByWhereClause(completeList, value.$where)
 			const items = map(filtered, c => c[value.$prop])
 			const computed = func(items)
 
@@ -103,6 +107,41 @@ export function filterByQualification(list, qualification, distinct, fullList) {
 
 	let filtered = filter(list, course =>
 		compareCourseToQualification(course, qualification))
+
+	// If we have a limit on the number of courses, then only return the
+	// number that we're allowed to accept.
+	if (counter && (counter.$operator === '$lte' || counter.$operator === '$eq')) {
+		filtered = take(filtered, counter.$num)
+	}
+
+	/* if (counter.$operator === '$gte') {
+		filtered = filter(list, course =>
+			compareCourseToQualification(course, qualification))
+	}
+	else {
+		let count = 0
+		forEach(list, course =>  {
+			if (compareCourseToQualification(course, qualification)) {
+				filtered.push(course)
+				count += 1
+				if (counter.$operator === '$lte') {
+					// We can't use computeCountWithOperator here, because 0
+					// <= N for all N. Instead, we check to see if the next
+					// step would cause us to go over our limit. If it would,
+					// we stop the loop.
+					if (count + 1 >= counter.$num) {
+						return false // exit now
+					}
+				}
+				else if (counter.$operator === '$eq') {
+					// If we have exactly the right number, stop.
+					if (count === counter.$num) {
+						return false // exit now
+					}
+				}
+			}
+		})
+	} */
 
 	if (distinct) {
 		filtered = uniqBy(filtered, simplifyCourse)
