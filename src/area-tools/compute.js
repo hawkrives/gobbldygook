@@ -1,17 +1,20 @@
-import mapValues from 'lodash/mapValues'
-import isRequirementName from './is-requirement-name'
 import applyFilter from './apply-filter'
+import applyFulfillmentToExpression from './apply-fulfillment-to-expression'
 import computeChunk from './compute-chunk'
-import hasOverride from './has-override'
+import getFulfillment from './get-fulfillment'
 import getOverride from './get-override'
+import hasOverride from './has-override'
+import isRequirementName from './is-requirement-name'
+import mapValues from 'lodash/mapValues'
+
 
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.
 
-export default function compute(requirement, {path, courses=[], overrides={}, dirty=new Set()}) {
+export default function compute(requirement, {path, courses=[], overrides={}, fulfillments={}, dirty=new Set()}) {
 	requirement = mapValues(requirement, (req, name) => {
 		if (isRequirementName(name)) {
-			return compute(req, {path: path.concat([name]), courses, overrides, dirty})
+			return compute(req, {path: path.concat([name]), courses, overrides, dirty, fulfillments})
 		}
 		return req
 	})
@@ -28,7 +31,13 @@ export default function compute(requirement, {path, courses=[], overrides={}, di
 		if (requirement.result === '') {
 			throw new SyntaxError(`compute(): requirement.result must not be empty (in ${JSON.stringify(requirement)})`)
 		}
-		computed = computeChunk({expr: requirement.result, ctx: requirement, courses, dirty})
+
+		let fulfillment = getFulfillment(path, fulfillments)
+		if (fulfillment) {
+			requirement.result = applyFulfillmentToExpression(requirement.result, fulfillment)
+		}
+
+		computed = computeChunk({expr: requirement.result, ctx: requirement, courses, dirty, fulfillment})
 	}
 
 	// or ask for an override

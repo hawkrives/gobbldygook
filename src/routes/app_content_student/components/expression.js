@@ -145,7 +145,8 @@ export default function Expression(props) {
 		'expression',
 		`expression--${$type}`,
 		wasComputed ? 'computed' : 'computed--not',
-		computationResult ? 'computed-success' : 'computed-failure')
+		computationResult ? 'computed-success' : 'computed-failure',
+		expr._isFulfillment ? 'fulfillment' : '')
 
 	return (
 		<span className={className}>
@@ -156,7 +157,7 @@ export default function Expression(props) {
 			{contents &&
 				<span className='expression--contents'>
 					{contents}
-					{!props.hideIndicator && result}
+					{(props.hideIndicator || expr._isFulfillment) ? null : result}
 				</span>}
 		</span>
 	)
@@ -165,6 +166,7 @@ export default function Expression(props) {
 Expression.propTypes = {
 	ctx: PropTypes.object,
 	expr: PropTypes.shape({
+		_isFulfillment: PropTypes.bool,
 		$type: PropTypes.string,
 	}).isRequired,
 	hideIndicator: PropTypes.bool,

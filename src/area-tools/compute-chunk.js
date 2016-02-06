@@ -1,3 +1,4 @@
+import applyFulfillmentToResult from './apply-fulfillment-to-result'
 import assertKeys from './assert-keys'
 import assign from 'lodash/assign'
 import collectMatches from './collect-matches'
@@ -38,7 +39,7 @@ import xor from 'lodash/xor'
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the expression
  */
-export default function computeChunk({expr, ctx, courses, dirty}) {
+export default function computeChunk({expr, ctx, courses, dirty, fulfillment}) {
 	if (typeof expr !== 'object') {
 		throw new TypeError(`computeChunk(): the expr \`${stringify(expr)}\` must be an object, not a ${typeof expr}`)
 	}
@@ -72,6 +73,10 @@ export default function computeChunk({expr, ctx, courses, dirty}) {
 	}
 	else {
 		throw new TypeError(`computeChunk(): the type "${type}" is not a valid expression type.`)
+	}
+
+	if (fulfillment) {
+		({computedResult, matches, counted} = applyFulfillmentToResult({fulfillment, expr, computedResult, matches, counted}))
 	}
 
 	expr._result = computedResult
