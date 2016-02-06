@@ -70,6 +70,7 @@
     "react-gateway": "2.0.4",
     "react-input-autosize": "0.6.8",
     "react-modal2": "3.0.2",
+    "react-radio-group": "2.2.0",
     "react-redux": "4.3.0",
     "react-router": "2.0.0-rc5",
     "react-router-redux": "3.0.0",
