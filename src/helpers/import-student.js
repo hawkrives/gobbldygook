@@ -82,9 +82,7 @@ export function extractTermList(dom) {
 
 export function extractStudentIds(dom) {
 	let idElements = selectAll('[name=stnum]', dom)
-	let ids = uniq(map(filter(idElements, el => el), el => Number(el.attribs.value)))
-	console.log('ids', ids)
-	return ids
+	return uniq(map(filter(idElements, el => el), el => Number(el.attribs.value)))
 }
 
 

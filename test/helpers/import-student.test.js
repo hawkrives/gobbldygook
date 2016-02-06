@@ -3,7 +3,7 @@
 import {expect} from 'chai'
 import {
 	extractTermList,
-	extractStudentId,
+	extractStudentIds,
 	getCoursesFromHtml,
 	getGraduationInformation,
 } from '../../src/helpers/import-student'
@@ -22,18 +22,18 @@ describe('extractTermList', () => {
 	})
 })
 
-describe('extractStudentId', () => {
+describe('extractStudentIds', () => {
 	it('returns the student id', () => {
 		const html = parseHtml(file('term-20151'))
-		const actual = extractStudentId(html)
-		const expected = 101010
+		const actual = extractStudentIds(html)
+		const expected = [101010]
 		expect(actual).to.deep.equal(expected)
 	})
 
-	it(`returns null if the student id couldn't be found`, () => {
+	it(`returns an empty list if no student ids were found`, () => {
 		const html = parseHtml('<html />')
-		const actual = extractStudentId(html)
-		const expected = null
+		const actual = extractStudentIds(html)
+		const expected = []
 		expect(actual).to.deep.equal(expected)
 	})
 })
