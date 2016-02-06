@@ -1,4 +1,5 @@
-// import db from './db'
+import {getCourse} from './get-courses'
+import Bluebird from 'bluebird'
 import Student from '../models/student'
 import Schedule from '../models/schedule'
 import groupBy from 'lodash/groupBy'
@@ -6,13 +7,20 @@ import map from 'lodash/map'
 import forEach from 'lodash/forEach'
 import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
-import filter from 'lodash/filter'
 import plur from 'plur'
+import filter from 'lodash/filter'
+import {v4 as uuid} from 'uuid'
 
-export default function convertStudent({courses, degrees}) {
-	let schedules = processSchedules(courses)
-	let info = processDegrees(degrees)
-	let fabrications = processFabrications(courses)
+export default async function convertStudent({courses, degrees}) {
+	let {
+		schedulesAndFabrications,
+		info,
+	} = await Bluebird.props({
+		schedulesAndFabrications: processSchedules(courses),
+		info: processDegrees(degrees),
+	})
+
+	let {schedules, fabrications} = schedulesAndFabrications
 
 	let newStudent = Student({
 		...info,
@@ -24,30 +32,25 @@ export default function convertStudent({courses, degrees}) {
 }
 
 
-function isNormalSemester({term='00000'}) {
-	term = String(term)
-	if (term.length !== 5) {
-		return true
-	}
-	let s = term[4]
-	if (s !== '1' && s !== '2' && s !== '3' && s !== '4' && s !== '5') {
-		return true
-	}
-	return false
-}
+async function processSchedules(courses) {
+	courses = await Bluebird.all(map(courses, course => {
+		return getCourse(course).then(resolvedCourse => {
+			if (resolvedCourse.error) {
+				course._fabrication = true
+				course.clbid = course.clbid || uuid()
+				return course
+			}
+			return resolvedCourse
+		})
+	}))
 
-function processFabrications(courses) {
-	let onlyNonOlaf = filter(courses, isNormalSemester)
-	let fabrications = fromPairs(map(onlyNonOlaf, c => [c.clbid, c]))
-	return fabrications
-}
+	let fabrications = fromPairs(map(filter(courses, '_fabrication'), c => [c.clbid, c]))
 
-
-function processSchedules(courses) {
 	let schedules = groupBy(courses, 'term')
 	schedules = map(schedules, (courses, term) => {
 		term = String(term)
 		return Schedule({
+			courses,
 			active: true,
 			clbids: map(courses, c => c.clbid),
 			year: parseInt(term.substr(0, 4), 10),
@@ -55,7 +58,8 @@ function processSchedules(courses) {
 		})
 	})
 	schedules = fromPairs(map(schedules, s => [s.id, s]))
-	return schedules
+
+	return {schedules, fabrications}
 }
 
 

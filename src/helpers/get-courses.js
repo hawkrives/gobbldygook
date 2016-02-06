@@ -10,7 +10,7 @@ const courseCache = new Map()
 // @param {Object} fabrications - a (clbid, course) object of fabrications
 // @returns {Promise} - TreoDatabasePromise
 // @fulfill {Object} - the course object, potentially with an embedded error message.
-export async function getCourse({clbid, term}, fabrications) {
+export async function getCourse({clbid, term}, fabrications={}) {
 	if (clbid in fabrications) {
 		return fabrications[clbid]
 	}

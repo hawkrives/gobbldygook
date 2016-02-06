@@ -5,11 +5,11 @@ import forEach from 'lodash/forEach'
 import forOwn from 'lodash/forOwn'
 import fromPairs from 'lodash/fromPairs'
 import includes from 'lodash/includes'
-import last from 'lodash/last'
 import map from 'lodash/map'
 import mapKeys from 'lodash/mapKeys'
 import parseHtml from './parse-html'
 import partitionByIndex from './partition-by-index'
+import uniq from 'lodash/uniq'
 import unzip from 'lodash/unzip'
 import {AuthError, NetworkError} from './errors'
 import {selectAll, selectOne} from 'css-select'
@@ -80,12 +80,9 @@ export function extractTermList(dom) {
 }
 
 
-export function extractStudentId(dom) {
-	let idElement = last(selectAll('[name=stnum]', dom))
-	if (!idElement) {
-		return null
-	}
-	return Number(idElement.attribs.value)
+export function extractStudentIds(dom) {
+	let idElements = selectAll('[name=stnum]', dom)
+	return uniq(map(filter(idElements, el => el), el => Number(el.attribs.value)))
 }
 
 
@@ -285,28 +282,31 @@ export function checkIfLoggedIn() {
 		else if (errorMsg) {
 			throw new Error(errorMsg)
 		}
-		return response
+		return extractStudentIds(response)
 	})
 }
 
 
-function loadPages(dom) {
-	return Bluebird.all([dom, fetchHtml(DEGREE_AUDIT_URL)])
+function loadPages(studentId) {
+	return Bluebird.props({
+		id: studentId,
+		coursesDom: fetchHtml(COURSES_URL),
+		auditDom: fetchHtml(DEGREE_AUDIT_URL),
+	})
 }
 
 
-function beginDataExtraction([coursesDom, degreeAuditDom]) {
-	let studentId = extractStudentId(coursesDom)
+function beginDataExtraction({id, coursesDom, auditDom}) {
 	let terms = extractTermList(coursesDom)
 
-	return Bluebird.all([
-		collectAllCourses(studentId, terms),
-		getGraduationInformation(degreeAuditDom),
-	])
+	return Bluebird.props({
+		coursesByTerm: collectAllCourses(id, terms),
+		studentInfo: getGraduationInformation(auditDom),
+	})
 }
 
 
-function flattenData([coursesByTerm, studentInfo]) {
+function flattenData({coursesByTerm, studentInfo}) {
 	return {
 		courses: flatten(coursesByTerm),
 		degrees: studentInfo,
@@ -314,13 +314,12 @@ function flattenData([coursesByTerm, studentInfo]) {
 }
 
 
-export default function getStudentInfo() {
+export default function getStudentInfo(studentId) {
 	if (!navigator.onLine) {
 		return Bluebird.reject(new NetworkError('The network is offline.'))
 	}
 
-	return checkIfLoggedIn()
-		.then(loadPages)
+	return loadPages(studentId)
 		.then(beginDataExtraction)
 		.then(flattenData)
 		.catch(err => {
