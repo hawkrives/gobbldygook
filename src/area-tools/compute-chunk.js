@@ -22,6 +22,53 @@ import stringify from 'stabilize'
 import take from 'lodash/take'
 import xor from 'lodash/xor'
 
+function applyFulfillmentToResult({fulfillment, expr, computedResult, matches, counted}) {
+	console.log('fulfillment', fulfillment)
+	console.log('for expression', expr)
+	let needsFulfillment = true
+
+	if (expr.$type === 'boolean' || expr.$type === 'course') {
+		return {computedResult, matches, counted}
+	}
+
+	let counter = expr.$count
+	if (counter && (counter.$operator === '$lte' || counter.$operator === '$eq')) {
+		console.log(expr.$type, counter)
+		if (expr.$type === 'of' && counter.$was === 'all') {
+			// if we have a query that used to be 'all of', then we still need it to be 'all of'?
+			// um... actually, we might not want this.
+			counter.$num += 1
+			needsFulfillment = true
+			console.log('of all')
+		}
+		else if (computedResult === true) {
+			// if we already have enough matches in an 'at-most' query, don't
+			// add another one
+			needsFulfillment = false
+		}
+	}
+
+	// this feels like it'll be a bit wierd around checking modifiers with departments and credits…
+	if (needsFulfillment) {
+		console.log('needsFulfillment')
+		if (expr.$type === 'of') {
+			console.log('of!', fulfillment)
+			expr.$of.push(fulfillment)
+		}
+
+		matches.push(fulfillment)
+		counted += 1
+
+		computedResult = computeCountWithOperator({
+			comparator: counter.$operator,
+			has: counted,
+			needs: counter.$num,
+		})
+	}
+
+	return {computedResult, matches, counted}
+}
+
 
 /**
  * Computes the result of an expression.
@@ -38,7 +85,7 @@ import xor from 'lodash/xor'
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the expression
  */
-export default function computeChunk({expr, ctx, courses, dirty}) {
+export default function computeChunk({expr, ctx, courses, dirty, fulfillment}) {
 	if (typeof expr !== 'object') {
 		throw new TypeError(`computeChunk(): the expr \`${stringify(expr)}\` must be an object, not a ${typeof expr}`)
 	}
@@ -72,6 +119,10 @@ export default function computeChunk({expr, ctx, courses, dirty}) {
 	}
 	else {
 		throw new TypeError(`computeChunk(): the type "${type}" is not a valid expression type.`)
+	}
+
+	if (fulfillment) {
+		({computedResult, matches, counted} = applyFulfillmentToResult({fulfillment, expr, computedResult, matches, counted}))
 	}
 
 	expr._result = computedResult

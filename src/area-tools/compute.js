@@ -5,13 +5,34 @@ import computeChunk from './compute-chunk'
 import hasOverride from './has-override'
 import getOverride from './get-override'
 
+import pathToOverride from './path-to-override'
+function getFulfillment(path, fulfillments) {
+	return fulfillments[pathToOverride(path)] || null
+}
+
+function applyFulfillmentToExpression(expr, fulfillment) {
+	// If it's a Boolean / course expr, it gets wrapped in an OR.
+	// Otherwise, we don't do anything at this stage.
+	if (expr.$type === 'boolean' && expr.$or) {
+		expr._fulfillment = fulfillment
+		expr.$or.push(fulfillment)
+	}
+	else if (expr.$and || expr.$type === 'course') {
+		// example OR-expression:
+		// { $type: "boolean", $or: [{...}, {...}] }
+		expr = {$type: 'boolean', $or: [expr, fulfillment]}
+		expr._fulfillment = fulfillment
+	}
+	return expr
+}
+
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.
 
-export default function compute(requirement, {path, courses=[], overrides={}, dirty=new Set()}) {
+export default function compute(requirement, {path, courses=[], overrides={}, fulfillments={}, dirty=new Set()}) {
 	requirement = mapValues(requirement, (req, name) => {
 		if (isRequirementName(name)) {
-			return compute(req, {path: path.concat([name]), courses, overrides, dirty})
+			return compute(req, {path: path.concat([name]), courses, overrides, dirty, fulfillments})
 		}
 		return req
 	})
@@ -28,7 +49,13 @@ export default function compute(requirement, {path, courses=[], overrides={}, di
 		if (requirement.result === '') {
 			throw new SyntaxError(`compute(): requirement.result must not be empty (in ${JSON.stringify(requirement)})`)
 		}
-		computed = computeChunk({expr: requirement.result, ctx: requirement, courses, dirty})
+
+		let fulfillment = getFulfillment(path, fulfillments)
+		if (fulfillment) {
+			requirement.result = applyFulfillmentToExpression(requirement.result, fulfillment)
+		}
+
+		computed = computeChunk({expr: requirement.result, ctx: requirement, courses, dirty, fulfillment})
 	}
 
 	// or ask for an override
