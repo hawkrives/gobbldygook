@@ -46,10 +46,6 @@ export default class SISImportScreen extends Component {
 
 	handleImportData = () => {
 		getStudentInfo(this.state.selectedId)
-			.then(data => {
-				console.log(data)
-				return data
-			})
 			.then(convertStudent)
 			.then(student => this.setState({student}))
 			.catch(err => {
