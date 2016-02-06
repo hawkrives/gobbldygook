@@ -321,7 +321,7 @@ export function computeOf({expr, ctx, courses, dirty}) {
 			// We can't use computeCountWithOperator here, because 0 <= N for all N.
 			// Instead, we check to see if the next step would cause us to go over our limit.
 			// If it would, we stop the loop.
-			if (count + 1 >= expr.$count.num) {
+			if (count + 1 >= expr.$count.$num) {
 				return false
 			}
 		}
