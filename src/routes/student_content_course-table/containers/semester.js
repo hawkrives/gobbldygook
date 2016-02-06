@@ -23,13 +23,6 @@ export class SemesterContainer extends Component {
 		year: PropTypes.number.isRequired,
 	};
 
-	removeSemester = () => {
-		const { student, semester, year } = this.props
-		const thisSemesterSchedules = filter(student.schedules, isCurrentSemester(year, semester))
-		const scheduleIds = map(thisSemesterSchedules, s => s.id)
-		this.props.destroySchedules(student.id, ...scheduleIds)
-	};
-
 	shouldComponentUpdate(nextProps) {
 		return (
 			nextProps.student !== this.props.student ||
@@ -38,6 +31,13 @@ export class SemesterContainer extends Component {
 			nextProps.destroySchedules !== this.props.destroySchedules
 		)
 	}
+
+	removeSemester = () => {
+		const { student, semester, year } = this.props
+		const thisSemesterSchedules = filter(student.schedules, isCurrentSemester(year, semester))
+		const scheduleIds = map(thisSemesterSchedules, s => s.id)
+		this.props.destroySchedules(student.id, ...scheduleIds)
+	};
 
 	render() {
 		const { student, semester, year, addCourse, moveCourse } = this.props

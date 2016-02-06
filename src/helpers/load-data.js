@@ -1,5 +1,4 @@
 import Bluebird from 'bluebird'
-import map from 'lodash/map'
 import {status, text} from './fetch-helpers'
 import uniqueId from 'lodash/uniqueId'
 

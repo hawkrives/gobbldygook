@@ -5,7 +5,6 @@ import compact from 'lodash/compact'
 import filter from 'lodash/filter'
 import isNull from 'lodash/isNull'
 import map from 'lodash/map'
-import compareProps from '../helpers/compare-props'
 
 import {COURSE} from '../models/item-types'
 
