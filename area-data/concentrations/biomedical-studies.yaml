@@ -1,0 +1,57 @@
+name: Biomedical Studies
+type: concentration
+revision: 2011-12
+available through: 2016
+result:
+  Foundation & Practical Application &
+  Ethical Considerations & Elective &
+  Senior Capstone Review
+
+
+Foundation:
+  BIO 123 | 243
+
+Practical Application:
+  student selected: true
+  message: Must be outside your major.
+  description:
+    It is any course in which the student practices something practical
+    or logistical relating to the health career of interest. For example,
+    many pre-dental students take a course in studio art to practice
+    working with their hands. As another example, many pre-medical
+    students take a health economics course to better understand the
+    context of health care.
+
+
+Ethical Considerations:
+  student selected: true
+  message: May be your EIN for GE.
+  description:
+    This is requirement is fulfilled through the EIN general education
+    requirement. Several of the EIN courses focus on health related topics,
+    such as PHIL 250 Biomedical Ethics and PHIL 259 Global Health Ethics.
+    However, students can count any EIN designated course for this
+    requirement, because the practice of ethical considerations is
+    transferable to health care no matter what the original context in which
+    it was learned.
+
+Elective:
+  student selected: true
+  message: Must be outside your major.
+  description:
+    Any 200- or 300-level course that contributes to the student's career
+    preparation. For example, many students preparing for graduate programs in
+    occupational therapy take a 200-level psychology course, and many students
+    interested in health administration take a course that focuses on
+    socioeconomic or cultural diversity.
+
+Experiential Learning:
+  message:
+    Students must participate in at least one significant experience that
+    provides immersion in the biomedical field(s) being considered.
+
+Senior Capstone Review:
+  message:
+    Students must write a one-page review of how their work in the biomedical
+    studies concentration has helped formulate next steps for after
+    graduation from St. Olaf College.
