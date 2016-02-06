@@ -29,6 +29,12 @@
 	margin: 0.1em;
 }
 
+.expression.fulfillment {
+	color: color('orange', '700') !important;
+	background-color: color('orange', '50') !important;
+	border-color: color('orange', '100') !important;
+}
+
 .expression.computed--not {
 	color: color('gray', '500');
 }
