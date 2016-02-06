@@ -36,6 +36,7 @@ export default function Student(data) {
 		schedules: {},
 		overrides: {},
 		fabrications: {},
+		fulfillments: {},
 
 		settings: {},
 	}

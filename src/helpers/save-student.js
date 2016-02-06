@@ -35,7 +35,7 @@ export default async function saveStudent(student) {
 	const oldVersion = localStorage.getItem(student.id)
 
 	student = {...student}
-	student = omit(student, ['areas', 'canGraduate'])
+	student = omit(student, ['areas', 'canGraduate', 'fulfilled'])
 	student.schedules = mapValues(student.schedules, s => omit(s, ['courses', 'conflicts', 'hasConflict']))
 
 	if (oldVersion !== stringify(student)) {

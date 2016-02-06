@@ -1,6 +1,5 @@
 /* global WorkerGlobalScope */
 import Bluebird from 'bluebird'
-import mapKeys from 'lodash/mapKeys'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import round from 'lodash/round'
@@ -10,18 +9,7 @@ import stringifyError from './stringify-error'
 import evaluate from '../area-tools/evaluate'
 import findLeafRequirements from '../area-tools/find-leaf-requirements'
 import getActiveStudentCourses from './get-active-student-courses'
-
-function alterCourse(course) {
-	return mapKeys(course, (value, key) => {
-		if (key === 'depts') {
-			key = 'department'
-		}
-		else if (key === 'num') {
-			key = 'number'
-		}
-		return key
-	})
-}
+import alterCourse from './alter-course-for-evaluation'
 
 function tryEvaluate(student, area) {
 	try {
