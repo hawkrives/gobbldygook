@@ -20,7 +20,7 @@ let declaredVariables = {}
 
 const baseWhitelist = ['result', 'message', 'declare']
 const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error'])
-const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description'])
+const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description', 'student selected'])
 
 export default function enhanceHanson(data, {topLevel=true}={}) {
 	// 1. adds 'result' key, if missing
