@@ -50,13 +50,11 @@ function applyFulfillmentToResult({fulfillment, expr, computedResult, matches, c
 
 	// this feels like it'll be a bit wierd around checking modifiers with departments and credits…
 	if (needsFulfillment) {
-		console.log('needsFulfillment')
 		if (expr.$type === 'of') {
-			console.log('of!', fulfillment)
 			expr.$of.push(fulfillment)
 		}
 
-		matches.push(fulfillment)
+		matches.push(fulfillment.$course)
 		counted += 1
 
 		computedResult = computeCountWithOperator({
