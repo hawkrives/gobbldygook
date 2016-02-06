@@ -1,3 +1,4 @@
+import applyFulfillmentToResult from './apply-fulfillment-to-result'
 import assertKeys from './assert-keys'
 import assign from 'lodash/assign'
 import collectMatches from './collect-matches'
@@ -21,51 +22,6 @@ import simplifyCourse from './simplify-course'
 import stringify from 'stabilize'
 import take from 'lodash/take'
 import xor from 'lodash/xor'
-
-function applyFulfillmentToResult({fulfillment, expr, computedResult, matches, counted}) {
-	console.log('fulfillment', fulfillment)
-	console.log('for expression', expr)
-	let needsFulfillment = true
-
-	if (expr.$type === 'boolean' || expr.$type === 'course') {
-		return {computedResult, matches, counted}
-	}
-
-	let counter = expr.$count
-	if (counter && (counter.$operator === '$lte' || counter.$operator === '$eq')) {
-		console.log(expr.$type, counter)
-		if (expr.$type === 'of' && counter.$was === 'all') {
-			// if we have a query that used to be 'all of', then we still need it to be 'all of'?
-			// um... actually, we might not want this.
-			counter.$num += 1
-			needsFulfillment = true
-			console.log('of all')
-		}
-		else if (computedResult === true) {
-			// if we already have enough matches in an 'at-most' query, don't
-			// add another one
-			needsFulfillment = false
-		}
-	}
-
-	// this feels like it'll be a bit wierd around checking modifiers with departments and credits…
-	if (needsFulfillment) {
-		if (expr.$type === 'of') {
-			expr.$of.push(fulfillment)
-		}
-
-		matches.push(fulfillment.$course)
-		counted += 1
-
-		computedResult = computeCountWithOperator({
-			comparator: counter.$operator,
-			has: counted,
-			needs: counter.$num,
-		})
-	}
-
-	return {computedResult, matches, counted}
-}
 
 
 /**

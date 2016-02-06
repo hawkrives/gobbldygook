@@ -1,30 +1,12 @@
-import mapValues from 'lodash/mapValues'
-import isRequirementName from './is-requirement-name'
 import applyFilter from './apply-filter'
+import applyFulfillmentToExpression from './apply-fulfillment-to-expression'
 import computeChunk from './compute-chunk'
-import hasOverride from './has-override'
+import getFulfillment from './get-fulfillment'
 import getOverride from './get-override'
+import hasOverride from './has-override'
+import isRequirementName from './is-requirement-name'
+import mapValues from 'lodash/mapValues'
 
-import pathToOverride from './path-to-override'
-function getFulfillment(path, fulfillments) {
-	return fulfillments[pathToOverride(path)] || null
-}
-
-function applyFulfillmentToExpression(expr, fulfillment) {
-	// If it's a Boolean / course expr, it gets wrapped in an OR.
-	// Otherwise, we don't do anything at this stage.
-	if (expr.$type === 'boolean' && expr.$or) {
-		expr._fulfillment = fulfillment
-		expr.$or.push(fulfillment)
-	}
-	else if (expr.$and || expr.$type === 'course') {
-		// example OR-expression:
-		// { $type: "boolean", $or: [{...}, {...}] }
-		expr = {$type: 'boolean', $or: [expr, fulfillment]}
-		expr._fulfillment = fulfillment
-	}
-	return expr
-}
 
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.
