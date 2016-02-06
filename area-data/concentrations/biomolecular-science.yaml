@@ -1,0 +1,40 @@
+name: Biomolecular Science
+type: concentration
+revision: 2014-15
+result: Core & Experiential Learning & Electives
+
+Core:
+  # BIO 150 Evolutionary Foundations of Biodiversity
+  # BIO 227 Cell Biology 1
+  # BIO 233 Intermediate Genetics
+  # BMOLS 201 Explorations in Biomolecular Science
+  # CHEM 125  Structural Chemistry and Equilibrium [^1][^2]
+  # CHEM 126  Energies and Rates of Chemical Reactions [^1]
+  # CHEM 247  Organic Chemistry I
+  #   & CHEM 253  Synthesis Laboratory I
+  # CHEM 248  Organic Chemistry II
+  #   & CHEM 254  Synthesis Laboratory II
+  # CHEM 379  Biochemistry I
+  #   & CHEM 373  Experimental Biochemistry
+
+  # [^1]: CH/BI 125, CH/BI 126 and CH/BI 227 can substitute for CHEM 125, CHEM 126, and BIO 227.
+  # [^2]: CHEM 121 and CHEM 123 can substitute for CHEM 125
+  # That's what this line does.
+  # CHEM 125 or 121+123, plus 126 and BIO 227, OR all of those can be substituted for the CH/BI sequence.
+  (((CHEM 125 | (121 & 123)) & 126 & BIO 227) | (CH/BI 125 & 126 & (127 | 227))) &
+  BIO 150 & 227 & 233 & BMOLS 201
+
+Experiential Learning:
+  message:
+    Participation in an experimentally based research experience or employment
+    that takes biomolecular sciences beyond the traditional classroom is
+    required of each concentrator. This can occur either on- or off-campus.
+    This activity must be pre-approved by the Biomolecular Science Committee
+    and be supported after the fact by a letter from a supervisor.
+
+Electives:
+  two of (
+    BIO 315, 341, 364, 372, 382, 383,
+    CHEM 384, 385, 391,
+    CSCI 315
+  )
