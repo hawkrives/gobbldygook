@@ -19,6 +19,7 @@ import keys from 'lodash/keys'
 import map from 'lodash/map'
 import simplifyCourse from './simplify-course'
 import stringify from 'stabilize'
+import take from 'lodash/take'
 import xor from 'lodash/xor'
 
 
@@ -226,6 +227,16 @@ export function computeModifier({expr, ctx, courses}) {
 	}
 
 
+	// normally, you're allowed to count courses, or departments, or credits,
+	// but if you as for an 'at most' or an 'exactly', it will now throw a
+	// parse error, so we don't have to worry about how to count 'at most two
+	// departments'.
+	// thus, if we have a limit on the number of courses, then only return the
+	// number that we're allowed to accept.
+	if (expr.$count.$operator === '$lte' || expr.$count.$operator === '$eq') {
+		filtered = take(filtered, expr.$count.$num)
+	}
+
 	filtered = map(filtered, course =>
 		'$course' in course ? course.$course : course)
 
@@ -253,7 +264,11 @@ export function computeModifier({expr, ctx, courses}) {
 
 
 	return {
-		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: numCounted, needs: expr.$count.$num}),
+		computedResult: computeCountWithOperator({
+			comparator: expr.$count.$operator,
+			has: numCounted,
+			needs: expr.$count.$num,
+		}),
 		counted: numCounted,
 		matches: filtered,
 	}
@@ -269,7 +284,12 @@ export function computeModifier({expr, ctx, courses}) {
 export function computeOccurrence({expr, courses}) {
 	assertKeys(expr, '$course', '$count')
 
-	const filtered = getOccurrences(expr.$course, courses)
+	let filtered = getOccurrences(expr.$course, courses)
+	// If we have a limit on the number of courses, then only return the
+	// number that we're allowed to accept.
+	if (expr.$count.$operator === '$lte' || expr.$count.$operator === '$eq') {
+		filtered = take(filtered, expr.$count.$num)
+	}
 
 	return {
 		computedResult: computeCountWithOperator({comparator: expr.$count.$operator, has: filtered.length, needs: expr.$count.$num}),
@@ -378,7 +398,7 @@ export function computeReference({expr, ctx}) {
 export function computeWhere({expr, courses}) {
 	assertKeys(expr, '$where', '$count', '$distinct')
 
-	const filtered = filterByWhereClause(courses, expr.$where, expr.$distinct)
+	const filtered = filterByWhereClause(courses, expr.$where, {distinct: expr.$distinct, counter: expr.$count})
 
 	return {
 		computedResult: computeCountWithOperator({

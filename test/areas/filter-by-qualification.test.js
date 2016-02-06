@@ -18,7 +18,7 @@ describe('filterByQualification', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
 		]
 
-		expect(filterByQualification(courses, basicQualification, false)).to.deep.equal([
+		expect(filterByQualification(courses, basicQualification)).to.deep.equal([
 			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2013},
 		])
 	})
@@ -39,7 +39,7 @@ describe('filterByQualification', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
 		]
 
-		expect(filterByQualification(courses, basicQualification, false)).to.deep.equal([
+		expect(filterByQualification(courses, basicQualification)).to.deep.equal([
 			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2013},
 			{department: ['REL'], number: 111, section: 'C', gereqs: ['BTS-T'], year: 2012},
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
@@ -62,7 +62,7 @@ describe('filterByQualification', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
 		]
 
-		expect(() => filterByQualification(courses, basicQualification, false)).to.throw(TypeError)
+		expect(() => filterByQualification(courses, basicQualification)).to.throw(TypeError)
 	})
 
 	it('filters an array based on a nested where-query with the max function', () => {
@@ -91,7 +91,7 @@ describe('filterByQualification', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
 		]
 
-		expect(filterByQualification(courses, advancedQualificationMax, false)).to.deep.equal([
+		expect(filterByQualification(courses, advancedQualificationMax)).to.deep.equal([
 			{department: ['ART', 'ASIAN'], number: 310, lab: true, year: 2012},
 			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2013},
 			{department: ['REL'], number: 111, section: 'C', gereqs: ['BTS-T'], year: 2012},
@@ -125,7 +125,7 @@ describe('filterByQualification', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
 		]
 
-		expect(filterByQualification(courses, advancedQualificationMin, false)).to.deep.equal([
+		expect(filterByQualification(courses, advancedQualificationMin)).to.deep.equal([
 			{department: ['ART', 'ASIAN'], number: 310, lab: true, year: 2012},
 			{department: ['REL'], number: 111, section: 'C', gereqs: ['BTS-T'], year: 2012},
 		])
@@ -157,7 +157,7 @@ describe('filterByQualification', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
 		]
 
-		expect(() => filterByQualification(courses, advancedQualificationBad, false))
+		expect(() => filterByQualification(courses, advancedQualificationBad))
 			.to.throw(ReferenceError)
 	})
 
@@ -187,7 +187,7 @@ describe('filterByQualification', () => {
 			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2013},
 		]
 
-		expect(() => filterByQualification(courses, advancedQualificationBad, false))
+		expect(() => filterByQualification(courses, advancedQualificationBad))
 			.to.throw(TypeError)
 	})
 
@@ -204,10 +204,8 @@ describe('filterByQualification', () => {
 			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
 		]
 
-		const isDistinct = true
-
 		const expected = [courses[0]]
-		const actual = filterByQualification(courses, clause, isDistinct)
+		const actual = filterByQualification(courses, clause, {distinct: true})
 
 		expect(actual).to.deep.equal(expected)
 	})
@@ -225,10 +223,8 @@ describe('filterByQualification', () => {
 			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
 		]
 
-		const isDistinct = true
-
 		const expected = [courses[1]]
-		const actual = filterByQualification(courses, clause, isDistinct)
+		const actual = filterByQualification(courses, clause, {distinct: true})
 
 		expect(actual).to.deep.equal(expected)
 	})
