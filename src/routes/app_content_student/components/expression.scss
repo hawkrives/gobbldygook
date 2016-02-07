@@ -35,8 +35,8 @@
 	border-color: color('orange', '100') !important;
 }
 
-.expression.computed--not {
-	color: color('gray', '500');
+.expression--course.not-used {
+	opacity: 0.5;
 }
 
 .expression .joiner {
@@ -44,16 +44,18 @@
 	margin-left: 0.75em;
 	margin-right: 0.75em;
 
-	// word-wrap: break-word;
-	// width: 1em;
-	// line-height: 0.9em;
 	font-size: 0.6em;
 	font-weight: bold;
+}
+
+.was-evaluated {
+	// color: color('blue', '500') !important;
 }
 
 .result-indicator {
 	display: inline-block;
 	margin-left: 0.2em;
+	font-size: 0.8em;
 }
 
 .expression--boolean:not(:only-child),
@@ -67,38 +69,37 @@
 	border-right: $border;
 
 	border-radius: .55em;
-
-	// take 2: the .card border
-	// @include card;
 }
 
 .expression--course,
 .expression--modifier,
 .expression--reference {
-	@include card;
+	border: solid 1px #ccc;
+	background-color: #f2f2f2;
+	border-radius: 3px;
+
 	padding: 0.125em 0.25em;
 
-	&.computed .result-indicator {
-		font-family: monospace;
-		margin-left: 0.4em;
-		display: inline-block;
+	&.evaluated .result-indicator {
+		margin-left: 0.5em;
 	}
 
-	&.computed.computed-success {
-		background-color: $computed-success-background;
+	&.evaluated.taken {
+		background-color: $result-success-background;
 	}
-	&.computed .result-indicator--success {
-		color: $computed-success-color;
+	&.evaluated .result-indicator--success {
+		color: $result-success-color;
 	}
 
-	&.computed .result-indicator--failure {
-		color: $computed-failure-color;
+	&.evaluated .result-indicator--failure {
+		color: $result-failure-color;
 		font-weight: bold;
 	}
 }
 
 
 .expression--reference {
+	font-size: 0.9em;
 	display: inline;
 }
 .expression--reference > .expression--contents {

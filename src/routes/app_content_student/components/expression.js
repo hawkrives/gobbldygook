@@ -4,8 +4,6 @@ import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
 
 import map from 'lodash/map'
-import orderBy from 'lodash/orderBy'
-import cx from 'classnames'
 import plur from 'plur'
 import humanizeOperator from '../../../area-tools/humanize-operator'
 
@@ -48,7 +46,8 @@ const ofLookup = {
 function makeOfExpression({expr, ctx}) {
 	const description = ofLookup[expr.$count.$was] || `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
 
-	const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
+	// const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
+	const contents = map(expr.$of, (ex, i) =>
 		<Expression key={i} expr={ex} ctx={ctx} />)
 
 	return {description, contents}
@@ -107,20 +106,25 @@ export default function Expression(props) {
 		return null
 	}
 
-	const wasComputed = expr.hasOwnProperty('_result')
 	const computationResult = expr._result
+	const isFulfillment = expr._isFulfillment
+	const wasUsed = expr.hasOwnProperty('_result') && computationResult
+	const wasTaken = expr._taken
+	const wasEvaluated = expr._checked
 
 	let contents = null
 	let description = null
 	let result = null
 
 	if ($type === 'boolean') {
-		({contents} = makeBooleanExpression({...props}))
+		({contents} = makeBooleanExpression(props))
 	}
 
 	else if ($type === 'course') {
-		contents = <CourseExpression {...expr.$course} />
-		result = <ResultIndicator result={computationResult}  />
+		// _request is the original course that was written in the spec.
+		// $course is the matched course. It's used mostly by where-expressions and the like.
+		contents = <CourseExpression {...expr._request || expr.$course} _taken={expr._taken} />
+		result = <ResultIndicator result={wasTaken}  />
 	}
 
 	else if ($type === 'reference') {
@@ -129,20 +133,20 @@ export default function Expression(props) {
 	}
 
 	else if ($type === 'of') {
-		({contents, description} = makeOfExpression({...props}))
+		({contents, description} = makeOfExpression(props))
 	}
 
 	else if ($type === 'modifier') {
-		({description} = makeModifierExpression({...props}))
+		({description} = makeModifierExpression(props))
 		result = <ResultIndicator result={computationResult}  />
 	}
 
 	else if ($type === 'where') {
-		({description, contents} = makeWhereExpression({...props}))
+		({description, contents} = makeWhereExpression(props))
 	}
 
 	else if ($type === 'occurrence') {
-		({description, contents} = makeOccurrenceExpression({...props}))
+		({description, contents} = makeOccurrenceExpression(props))
 	}
 
 	else {
@@ -151,12 +155,14 @@ export default function Expression(props) {
 		contents = JSON.stringify(expr, null, 2)
 	}
 
-	const className = cx(
+	const className = [
 		'expression',
 		`expression--${$type}`,
-		wasComputed ? 'computed' : 'computed--not',
-		computationResult ? 'computed-success' : 'computed-failure',
-		expr._isFulfillment ? 'fulfillment' : '')
+		wasEvaluated ? 'evaluated' : 'not-evaluated',
+		isFulfillment ? 'fulfillment' : '',
+		wasTaken ? 'taken' : 'not-taken',
+		wasUsed ? 'used' : 'not-used',
+	].join(' ')
 
 	return (
 		<span className={className}>
@@ -177,6 +183,8 @@ Expression.propTypes = {
 	ctx: PropTypes.object,
 	expr: PropTypes.shape({
 		_isFulfillment: PropTypes.bool,
+		_checked: PropTypes.bool,
+		_result: PropTypes.bool,
 		$type: PropTypes.string,
 	}).isRequired,
 	hideIndicator: PropTypes.bool,

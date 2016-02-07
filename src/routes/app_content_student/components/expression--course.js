@@ -36,7 +36,7 @@ export default function CourseExpression(props) {
 		</div>)
 
 	return (
-		<span className={cx('course', {matched: props._result})} style={props.style}>
+		<span className={cx('course', {matched: props._result, taken: props._taken})} style={props.style}>
 			<div className='basic-identifiers'>
 				<span className='course--department'>{department}</span>
 				<span>
@@ -54,6 +54,7 @@ export default function CourseExpression(props) {
 
 CourseExpression.propTypes = {
 	_result: PropTypes.bool,
+	_taken: PropTypes.bool,
 	department: PropTypes.arrayOf(PropTypes.string).isRequired,
 	international: PropTypes.bool,
 	lab: PropTypes.bool,

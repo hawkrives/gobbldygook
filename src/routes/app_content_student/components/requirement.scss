@@ -3,179 +3,190 @@
 @import '../../../mixins/color';
 @import './variables-expression.scss';
 
-.requirement {
-	margin: 0.25em;
-	box-sizing: border-box;
-}
-
-.requirement .requirement {
-	margin-left: 0.5em;
-}
-
-.requirement + .requirement {
-	margin-top: 0.75em;
-}
-
-.requirement:last-child {
-	margin-bottom: 0.5em;
-}
-
-.requirement .requirement {
-	@include card;
-}
-
-.requirement--override-button {
-	padding: 0.25em 0.5em;
-	margin-right: 0.25em;
-	color: color('gray', '500');
-}
-
-.requirement--result {
-	padding-left: 0.25em;
-	padding-right: 0.25em;
-
-	display: flex;
-	justify-content: center;
-}
-
-.requirement .requirement .requirement .requirement--result,
-.requirement .requirement .requirement .requirement--message,
-.requirement .requirement .requirement .requirement--description,
-.requirement .requirement .requirement .requirement--filter {
-	padding-left: $area-edge-padding;
-}
-
-.requirement--heading {
-	font-size: 1em;
-	font-weight: 500;
-
-	border-bottom: $material-divider;
-	padding: 0.2em 0.15em 0.2em 0.25em;
-
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.requirement--title {
-	flex: 1;
-	padding: 0.45em 0.25em;
-}
-
-.requirement--title,
-.requirement--title-override-text {
-	padding: 0.45em 0.25em;
-}
-
-.requirement--title-override-text {
-	margin-left: 0.35em;
-	font-weight: normal;
-}
-
-.requirement.computed-success > .requirement--heading {
-	background-color: $computed-success-background;
-}
-
-.requirement--status {
-	margin-left: 0.5em;
-}
-.requirement.computed-success > .requirement--heading .requirement--status {
-	color: $computed-success-color;
-}
-
-.requirement .requirement .requirement--heading {
-	font-size: 0.9em;
-	margin: 0;
-}
-
-.requirement--heading,
-.requirement--result,
-.requirement--description,
-.requirement--message,
-.requirement--filter,
-.requirement--override-buttons {
-	width: 100%;
-	padding-top: 0.2em;
-	padding-bottom: 0.2em;
-}
-
-.requirement--message,
-.requirement--description {
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-left: $area-edge-padding;
-	padding-right: $area-edge-padding;
-
-	font-feature-settings: 'onum';
-}
-
-.requirement--message,
-.requirement--description,
-.requirement--result > .expression > .expression--description {
-	margin-top: 0.5em;
-}
-
-.requirement .requirement .requirement .requirement--message,
-.requirement .requirement .requirement .requirement--description {
-	// padding-left: 0;
-}
-
-.requirement--override-buttons {
-	display: flex;
-	justify-content: space-around;
-	flex-flow: row wrap;
-
-	margin-top: 0.25em;
-
-	.button {
-		flex-grow: 1;
-		border: solid 1px color('gray', '500');
-
-		margin: 0 0.5em 0.5em;
-	}
-}
-
-
-.requirement.compact-results {
-	.requirement--title-override-text {
-		padding-right: 0;
+:local {
+	.requirement {
+		margin: 0.25em;
+		box-sizing: border-box;
+		font-feature-settings: 'onum';
 	}
 
-	.requirement--heading {
-		flex: 0 1 auto;
-		width: auto;
+	.requirement.is-closed > *:not(.heading) {
+		display: none;
+	}
+
+	.requirement .requirement {
+		margin-left: 0.5em;
+	}
+
+	.requirement + .requirement {
+		margin-top: 0.75em;
+	}
+
+	.requirement:last-child {
+		margin-bottom: 0.5em;
+	}
+
+	.requirement .requirement {
+		@include card;
+	}
+
+	.override-button {
+		padding: 0.25em 0.5em;
+		margin-right: 0.25em;
+		color: color('gray', '500');
+	}
+
+	.result {
+		padding-left: 0.25em;
+		padding-right: 0.25em;
+
 		display: flex;
-		border-bottom: 0;
-		padding: 0 !important;
+		justify-content: center;
+	}
 
-		.requirement--override-button {
-			margin-left: 0.25em;
+	.requirement .requirement .requirement .result,
+	.requirement .requirement .requirement .message,
+	.requirement .requirement .requirement .description,
+	.requirement .requirement .requirement .filter {
+		padding-left: $area-edge-padding;
+	}
+
+	.heading {
+		font-size: 1em;
+		font-weight: 500;
+
+		border-bottom: $material-divider;
+		padding: 0.2em 0.15em 0.2em 0.25em;
+
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.title {
+		flex: 1;
+		padding: 0.45em 0.25em;
+	}
+
+	.title,
+	.override-text {
+		padding: 0.45em 0.25em;
+	}
+
+	.override-text {
+		margin-left: 0.35em;
+		font-weight: normal;
+	}
+
+	.requirement.result-success > .heading {
+		background-color: $result-success-background;
+	}
+
+	.status {
+		margin-left: 0.5em;
+
+		:global(.result-indicator) {
+			margin-left: 0;
 		}
+	}
+	.result-success > .heading .status {
+		color: $result-success-color;
+	}
 
-		.requirement--title {
-			flex: auto;
+	.requirement .requirement .heading {
+		font-size: 0.9em;
+		margin: 0;
+	}
+
+	.heading,
+	.result,
+	.description,
+	.message,
+	.filter,
+	.override-buttons {
+		width: 100%;
+		padding-top: 0.2em;
+		padding-bottom: 0.2em;
+	}
+
+	.message,
+	.description {
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-left: $area-edge-padding;
+		padding-right: $area-edge-padding;
+
+		font-feature-settings: 'onum';
+	}
+
+	.message,
+	.description,
+	.result > :global(.expression) > :global(.expression--description) {
+		margin-top: 0.5em;
+	}
+
+	.requirement .requirement .requirement .message,
+	.requirement .requirement .requirement .description {
+		// padding-left: 0;
+	}
+
+	.override-buttons {
+		display: flex;
+		justify-content: space-around;
+		flex-flow: row wrap;
+
+		margin-top: 0.25em;
+
+		:global(.button) {
+			flex-grow: 1;
+			border: solid 1px color('gray', '500');
+
+			margin: 0 0.5em 0.5em;
 		}
 	}
 
-	.requirement--result {
-		flex: 1 0 auto;
-		width: auto;
-		padding: 0;
 
-		justify-content: flex-end;
-
-		.expression--course {
-			background-color: white;
-			flex-shrink: 0;
+	.compact-results {
+		.override-text {
+			padding-right: 0;
 		}
-	}
 
-	display: flex;
-	flex-flow: row wrap;
-	padding: 0.2em 0.2em 0.2em 0;
+		.heading {
+			flex: 0 1 auto;
+			width: auto;
+			display: flex;
+			border-bottom: 0;
+			padding: 0 !important;
 
-	&.computed-success {
-		background-color: $computed-success-background;
+			.override-button {
+				margin-left: 0.25em;
+			}
+
+			.title {
+				flex: auto;
+			}
+		}
+
+		.result {
+			flex: 1 0 auto;
+			width: auto;
+			padding: 0;
+
+			justify-content: flex-end;
+
+			.expression--course {
+				background-color: white;
+				flex-shrink: 0;
+			}
+		}
+
+		display: flex;
+		flex-flow: row wrap;
+		padding: 0.2em 0.2em 0.2em 0;
+
+		&.result-success {
+			background-color: $result-success-background;
+		}
 	}
 }

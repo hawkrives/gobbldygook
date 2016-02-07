@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, {PropTypes, Component} from 'react'
 import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
@@ -10,72 +10,56 @@ import isRequirementName from '../../../area-tools/is-requirement-name'
 import Filter from './expression--filter'
 import Expression from './expression'
 import Button from '../../../components/button'
+import ResultIndicator from './result-indicator'
 
-import './requirement.scss'
+import styles from './requirement.scss'
+console.log(styles)
 
-function getResultOfRequirement(requirements) {
-	return requirementTitle => requirements[requirementTitle].computed ? 'A' : 'B'
-}
+// function getResultOfRequirement(requirements) {
+// 	return requirementTitle => requirements[requirementTitle].computed ? 'A' : 'B'
+// }
 
-export default function Requirement(props) {
+export function Requirement(props) {
 	const {
 		topLevel = false,
 	} = props
 	const childKeys = filter(keys(props), isRequirementName)
 
-	const wasComputed = props.hasOwnProperty('computed')
-	const computationResult = props.computed
-	const computationClassName = wasComputed ? computationResult ? 'computed-success' : 'computed-failure' : 'computed-not'
+	const wasEvaluated = props.result && props.result._checked
+	const computationClassName = wasEvaluated ? props.computed ? 'result-success' : 'result-failure' : ''
+	const status = <ResultIndicator result={props.computed} />
 
-	const extraClasses = {
-		overridden: props.overridden,
-	}
-
-	const compactMode = (
-		!props.message &&
-		!props.filter &&
-		props.result &&
-		props.result.$type === 'course'
-	)
-	if (compactMode) {
-		extraClasses['compact-results'] = true
-	}
+	const extraClasses = [props.overridden ? 'overridden' : '']
 
 	const result = props.result && (
-		<div className='requirement--result'>
+		<div className={styles.result}>
 			<Expression expr={props.result} ctx={props} />
 		</div>
 	)
 
 	const message = props.message &&
-		<p className='requirement--message'>{props.message}</p>
+		<p className={styles.message}>{props.message}</p>
 	const description = props.description &&
-		<p className='requirement--description'>{props.description}</p>
+		<p className={styles.description}>{props.description}</p>
 
 	const filterEl = props.filter && (
-		<div className='requirement--filter'>
+		<div className={styles.filter}>
 			Filter:
 			<Filter expr={props.filter} ctx={props} />
 		</div>
 	)
 
 	const title = !topLevel && (
-		<h2 className='requirement--heading' title={props.name}>
-			<Button className='requirement--override-button'
-				onClick={ev => props.onToggleOverride(props.path, ev)}
-				title={props.overridden ? `Remove Override` : `Apply Override`}>
-				{`${props.overridden ? '◉' : '◎'}`}
-			</Button>
-			<span className='requirement--title'>
+		<h2 className={styles.heading} title={props.name} onClick={props.onToggleOpen}>
+			<span className={styles.title}>
 				{` ${props.name}`}
-				{!compactMode && <span className='requirement--status'>{props.computed ? '●' : '○'}</span>}
+				<span className={styles.status}>{status}</span>
 			</span>
-			{props.overridden && <span className='requirement--title-override-text'>{' (Overridden)'}</span>}
 		</h2>
 	)
 
-	const children = map(sortBy(childKeys, getResultOfRequirement(props)), key =>
-		<Requirement key={key}
+	const children = map(childKeys, key =>
+		<ExpandableRequirement key={key}
 			name={key}
 			{...props[key]}
 			path={props.path.concat(key)}
@@ -84,22 +68,31 @@ export default function Requirement(props) {
 			onRemoveOverride={props.onRemoveOverride}
 		/>)
 
-	const override = (props.message && !props.result) && (
-		<span className='requirement--override-buttons button-group'>
+	const overrideButtons = (props.message && !props.result) && (
+		<span className={`${styles['override-buttons']} button-group`}>
 			<Button onClick={ev => props.onRemoveOverride(props.path, ev)} type='flat'>Not yet…</Button>
 			<Button onClick={ev => props.onAddOverride(props.path, ev)} type='flat'>Done!</Button>
 		</span>
 	)
 
+	let className = [
+		styles.requirement,
+		extraClasses.join(' '),
+		computationClassName,
+		props.isOpen ? 'is-open' : 'is-closed',
+	].join(' ')
+
 	return (
-		<div className={cx(`requirement`, extraClasses, computationClassName)}>
+		<div className={className}>
 			{title}
 			{description}
 			{message}
-			{override}
+			{overrideButtons}
 			{filterEl}
 			{result}
-			{children.length ? <div className='children'>{children}</div> : null}
+			{children.length
+				? <div className='children'>{children}</div>
+				: null}
 		</div>
 	)
 }
@@ -107,13 +100,32 @@ Requirement.propTypes = {
 	computed: PropTypes.bool,
 	description: PropTypes.string,
 	filter: PropTypes.object,
+	isOpen: PropTypes.bool,
 	message: PropTypes.string,
 	name: PropTypes.string,
 	onAddOverride: PropTypes.func.isRequired,
 	onRemoveOverride: PropTypes.func.isRequired,
+	onToggleOpen: PropTypes.func.isRequired,
 	onToggleOverride: PropTypes.func.isRequired,
 	overridden: PropTypes.bool,
 	path: PropTypes.array.isRequired,
 	result: PropTypes.object,
 	topLevel: PropTypes.bool,
+}
+Requirement.defaultProps = {
+	onToggleOpen: () => {},
+}
+
+export default class ExpandableRequirement extends Component {
+	state = {
+		open: true,
+	};
+
+	handleToggleOpen = () => {
+		this.setState({open: !this.state.open})
+	};
+
+	render() {
+		return <Requirement {...this.props} isOpen={this.state.open} onToggleOpen={this.handleToggleOpen} />
+	}
 }
