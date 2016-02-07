@@ -1,5 +1,4 @@
 import assertKeys from './assert-keys'
-import flatten from 'lodash/flatten'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
 import stringify from 'stabilize'
