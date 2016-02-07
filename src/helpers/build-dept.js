@@ -1,5 +1,4 @@
 import departmentNameToAbbr from 'sto-course-related-data/handmade/to_department_abbreviations.json'
-import map from 'lodash/map'
 
 /**
  * Builds a department string from a course.
@@ -14,7 +13,7 @@ import map from 'lodash/map'
 export default function buildDept(course) {
 	let departments = course.depts
 
-	departments = map(departments, dept => {
+	departments = departments.map(dept => {
 		dept = dept.toLowerCase()
 		return departmentNameToAbbr[dept] || dept.toUpperCase()
 	})
