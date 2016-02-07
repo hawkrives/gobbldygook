@@ -1,6 +1,6 @@
 @import '../../../mixins/card';
 @import '../../../mixins/color';
-@import '../../../base/variables.scss';
+@import './variables-expression.scss';
 
 .expression {
 	display: inline-block;
