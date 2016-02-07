@@ -1,6 +1,5 @@
 import applyFulfillmentToResult from './apply-fulfillment-to-result'
 import assertKeys from './assert-keys'
-import assign from 'lodash/assign'
 import collectMatches from './collect-matches'
 import collectTakenCourses from './collect-taken-courses'
 import computeCountWithOperator from './compute-count-with-operator'
@@ -10,7 +9,6 @@ import countDepartments from './count-departments'
 import every from 'lodash/every'
 import excludeCourse from './exclude-course'
 import filterByWhereClause from './filter-by-where-clause'
-import find from 'lodash/find'
 import findCourse from './find-course'
 import forEach from 'lodash/forEach'
 import getMatchesFromChildren from './get-matches-from-children'
@@ -19,6 +17,7 @@ import getOccurrences from './get-occurrences'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 import simplifyCourse from './simplify-course'
+import some from 'lodash/some'
 import stringify from 'stabilize'
 import take from 'lodash/take'
 import xor from 'lodash/xor'
@@ -39,7 +38,7 @@ import xor from 'lodash/xor'
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the expression
  */
-export default function computeChunk({expr, ctx, courses, dirty, fulfillment}) {
+export default function computeChunk({expr, ctx, courses, dirty, fulfillment, isNeeded=true}) {
 	if (typeof expr !== 'object') {
 		throw new TypeError(`computeChunk(): the expr \`${stringify(expr)}\` must be an object, not a ${typeof expr}`)
 	}
@@ -50,11 +49,13 @@ export default function computeChunk({expr, ctx, courses, dirty, fulfillment}) {
 	let matches = undefined
 	let counted = undefined
 
+	// Modifiers, occurrences, references, and wheres don't need isNeeded,
+	// because they don't result in recursive calls to computeChunk.
 	if (type === 'boolean') {
-		({computedResult, matches} = computeBoolean({expr, ctx, courses, dirty}))
+		({computedResult, matches} = computeBoolean({expr, ctx, courses, dirty, isNeeded}))
 	}
 	else if (type === 'course') {
-		({computedResult} = computeCourse({expr, courses, dirty}))
+		({computedResult} = computeCourse({expr, courses, dirty, isNeeded}))
 	}
 	else if (type === 'modifier') {
 		({computedResult, matches, counted} = computeModifier({expr, ctx, courses}))
@@ -63,7 +64,7 @@ export default function computeChunk({expr, ctx, courses, dirty, fulfillment}) {
 		({computedResult, matches, counted} = computeOccurrence({expr, courses}))
 	}
 	else if (type === 'of') {
-		({computedResult, matches, counted} = computeOf({expr, ctx, courses, dirty}))
+		({computedResult, matches, counted} = computeOf({expr, ctx, courses, dirty, isNeeded}))
 	}
 	else if (type === 'reference') {
 		({computedResult, matches} = computeReference({expr, ctx}))
@@ -84,6 +85,7 @@ export default function computeChunk({expr, ctx, courses, dirty, fulfillment}) {
 	if (type !== 'course') {
 		if (matches !== undefined) {
 			expr._matches = matches
+			// console.log(expr)
 		}
 		if (counted !== undefined) {
 			expr._counted = counted
@@ -107,8 +109,11 @@ export default function computeChunk({expr, ctx, courses, dirty, fulfillment}) {
 	// the contained courses from `dirty`.
 
 	if (!computedResult) {
-		forEach(map(collectUsedCourses(expr), simplifyCourse), crsid => dirty.delete(crsid))
+		let identifiers = map(collectTakenCourses(expr), simplifyCourse)
+		forEach(identifiers, crsid => dirty.delete(crsid))
 	}
+
+	expr._checked = true
 
 	return computedResult
 }
@@ -122,18 +127,36 @@ export default function computeChunk({expr, ctx, courses, dirty, fulfillment}) {
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the modifier
  */
-export function computeBoolean({expr, ctx, courses, dirty}) {
+export function computeBoolean({expr, ctx, courses, dirty, isNeeded}) {
 	let computedResult = false
 
 	if ('$or' in expr) {
 		// we only want this to use the first "true" result. we don't need to
 		// continue to look after we find one, because this is an or-clause
-		const result = find(expr.$or, req => computeChunk({expr: req, ctx, courses, dirty}))
-		computedResult = Boolean(result)
+
+		// `haveAnyBeenTrue` tells us if we need to mark any further courses as dirty.
+		// If it's true, then we don't actually need any more courses; we're just looking.
+		let haveAnyBeenTrue = false
+		const results = map(expr.$or, req => {
+			// we check the next chunk of the requirement:
+
+			// isNeeded is set to the negated `haveAnyBeenTrue`, because
+			// that's how we check if we need to flag any further courses.
+			let thisResult = computeChunk({expr: req, ctx, courses, dirty, isNeeded: !haveAnyBeenTrue})
+
+			// now, if we just found one, we set haveAnyBeenTrue; otherwise,
+			// we leave it at its prior value.
+			haveAnyBeenTrue = thisResult || haveAnyBeenTrue
+
+			// and we're collecting an array of the results, so we'll return
+			// the result.
+			return thisResult
+		})
+		computedResult = some(results)
 	}
 
 	else if ('$and' in expr) {
-		const results = map(expr.$and, req => computeChunk({expr: req, ctx, courses, dirty}))
+		const results = map(expr.$and, req => computeChunk({expr: req, ctx, courses, dirty, isNeeded}))
 		computedResult = every(results)
 	}
 
@@ -155,7 +178,7 @@ export function computeBoolean({expr, ctx, courses, dirty}) {
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - if the course was found or not
  */
-export function computeCourse({expr, courses, dirty}) {
+export function computeCourse({expr, courses, dirty, isNeeded}) {
 	assertKeys(expr, '$course')
 	const foundCourse = findCourse(expr.$course, courses)
 
@@ -168,16 +191,23 @@ export function computeCourse({expr, courses, dirty}) {
 		expr.$course._extraKeys = keysNotFromQuery
 	}
 
-	const match = assign(expr.$course, foundCourse)
+	expr._request = expr.$course
+	expr.$course = {...expr.$course, ...foundCourse}
+	let match = expr.$course
 	const crsid = simplifyCourse(match)
 
 	if (dirty.has(crsid)) {
 		return {computedResult: false, match}
 	}
 
-	dirty.add(crsid)
 	expr._taken = true
-	return {computedResult: true, match}
+	if (isNeeded) {
+		dirty.add(crsid)
+		return {computedResult: true, match}
+	}
+	else {
+		return {match}
+	}
 }
 
 
@@ -312,15 +342,18 @@ export function computeOccurrence({expr, courses}) {
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the of-expression
  */
-export function computeOf({expr, ctx, courses, dirty}) {
+export function computeOf({expr, ctx, courses, dirty, isNeeded}) {
 	assertKeys(expr, '$of', '$count')
 
 	// Go through $of, incrementing count if result of the thing is true.
 	let count = 0
 	forEach(expr.$of, req => {
-		// computeChunk return a boolean
+		// computeChunk return a boolean.
 		// Number() converts that to a 0 or a 1, which then is added to `count`.
-		count += Number(computeChunk({expr: req, ctx, courses, dirty}))
+		let thisResult = computeChunk({expr: req, ctx, courses, dirty, isNeeded})
+		if (isNeeded) {
+			count += Number(thisResult)
+		}
 
 		// We compute didPass out here so that it's in a more standard place
 		let didPass = computeCountWithOperator({
@@ -329,17 +362,21 @@ export function computeOf({expr, ctx, courses, dirty}) {
 			has: count,
 		})
 
-		// Now we break into seperate paths
+		// Now we break into seperate paths.
+
+		// Note that none of these exit the loop early, because we have to
+		// look at every chunk. Instead, we note that we don't need to mark
+		// any other courses as being dirty once we've passed the check.
 		if (expr.$count.$operator === '$gte') {
 			// If we've amassed enough matches, stop checking.
 			if (didPass) {
-				return false
+				isNeeded = false
 			}
 		}
 		else if (expr.$count.$operator === '$eq') {
 			// If we have exactly the right number, stop.
 			if (didPass) {
-				return false
+				isNeeded = false
 			}
 		}
 		else if (expr.$count.$operator === '$lte') {
@@ -347,7 +384,7 @@ export function computeOf({expr, ctx, courses, dirty}) {
 			// Instead, we check to see if the next step would cause us to go over our limit.
 			// If it would, we stop the loop.
 			if (count + 1 >= expr.$count.$num) {
-				return false
+				isNeeded = false
 			}
 		}
 		else {
@@ -389,6 +426,8 @@ export function computeReference({expr, ctx}) {
 	if ('result' in target) {
 		resultObj.matches = collectMatches(target.result)
 	}
+
+	expr._checked = target._checked
 
 	return resultObj
 }
