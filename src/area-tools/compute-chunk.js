@@ -2,7 +2,7 @@ import applyFulfillmentToResult from './apply-fulfillment-to-result'
 import assertKeys from './assert-keys'
 import assign from 'lodash/assign'
 import collectMatches from './collect-matches'
-import collectUsedCourses from './collect-used-courses'
+import collectTakenCourses from './collect-taken-courses'
 import computeCountWithOperator from './compute-count-with-operator'
 import countCourses from './count-courses'
 import countCredits from './count-credits'
@@ -96,7 +96,7 @@ export default function computeChunk({expr, ctx, courses, dirty, fulfillment}) {
 	// a course and returns a string of "DEPT NUM TYPE".
 
 	// Therefore, when we check a course, if it matches, we mark it as
-	// `_used`; otherwise, we leave it alone.
+	// `_taken`; otherwise, we leave it alone.
 
 	// If we marked it as dirty, then we also run it through simplifyCourse
 	// and add that to the `dirty` list, which is a Set.
@@ -176,7 +176,7 @@ export function computeCourse({expr, courses, dirty}) {
 	}
 
 	dirty.add(crsid)
-	expr._used = true
+	expr._taken = true
 	return {computedResult: true, match}
 }
 
