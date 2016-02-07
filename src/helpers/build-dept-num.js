@@ -11,8 +11,7 @@ export default function buildDeptNum(course, includeSection=false) {
 	let num = course.num
 
 	if (includeSection) {
-		let sect = course.sect
-		return `${dept} ${num}${sect}`
+		return `${dept} ${num}${course.sect}`
 	}
 
 	return `${dept} ${num}`
