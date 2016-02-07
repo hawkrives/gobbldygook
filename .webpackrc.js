@@ -29,9 +29,7 @@ const config = {
 
 	stats: {},
 
-	entry: {
-		main: './src/start.js',
-	},
+	entry: ['./src/start.js'],
 
 	output: {
 		path: outputFolder + '/',
@@ -178,8 +176,10 @@ if (isDevelopment) {
 	config.devtool = 'eval'
 
 	// add dev server and hotloading clientside code
-	config.entry['dev-server'] = `webpack-dev-server/client?http://${config.hostname}:${config.port}`
-	config.entry['hot'] = 'webpack/hot/only-dev-server'
+	config.entry.unshift(
+		'webpack-dev-server/client?http://' + config.hostname + ':' + config.port,
+		'webpack/hot/only-dev-server'
+	)
 
 	config.devServer.port = config.port
 	config.devServer.host = config.hostname
