@@ -1,13 +1,14 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import semesterName from '../../../helpers/semester-name'
-import {shrinkDept} from '../../../area-tools/convert-department'
-import map from 'lodash/map'
+import {shrinkDepartment} from '../../../area-tools/convert-department'
 
 import './expression--course.scss'
 
 export default function CourseExpression(props) {
-	const department = map(props.department, shrinkDept).join('/')
+	const department = props.department.length > 1
+		? props.department.map(shrinkDepartment).join('/')
+		: props.department.join('/')
 
 	const international = props.international &&
 		<span className='course--international'>I</span>
