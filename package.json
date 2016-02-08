@@ -112,7 +112,7 @@
     "babel-plugin-transform-minify-booleans": "6.3.13",
     "babel-plugin-transform-object-rest-spread": "6.3.13",
     "babel-plugin-transform-property-literals": "6.3.13",
-    "babel-plugin-transform-react-constant-elements": "6.4.0",
+    "babel-plugin-transform-react-constant-elements": "6.5.0",
     "babel-plugin-transform-react-display-name": "6.4.0",
     "babel-plugin-transform-react-inline-elements": "6.4.0",
     "babel-plugin-transform-regenerator": "6.4.4",
