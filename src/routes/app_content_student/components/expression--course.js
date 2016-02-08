@@ -54,7 +54,6 @@ export default function CourseExpression(props) {
 
 CourseExpression.propTypes = {
 	_result: PropTypes.bool,
-	_taken: PropTypes.bool,
 	department: PropTypes.arrayOf(PropTypes.string).isRequired,
 	international: PropTypes.bool,
 	lab: PropTypes.bool,
