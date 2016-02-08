@@ -44,7 +44,7 @@ async function benchmark({runs, graph}) {
 	}
 }
 
-function cli() {
+export function cli() {
 	const args = nom
 		.script('students-benchmark')
 		.option('runs', {

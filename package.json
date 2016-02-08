@@ -8,7 +8,7 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "benchmark": "babel-node -- ./benchmarks/students-benchmark.js",
+    "benchmark": "./benchmarks/students-benchmark",
     "build": "env NODE_ENV=production webpack --config ./.webpackrc.js --bail --production --progress",
     "build:areas": "./bin/compile-areas area-data/ --out-dir build/areas/",
     "build:ci": "npm run build -- --no-progress",
@@ -92,7 +92,6 @@
   },
   "devDependencies": {
     "autoprefixer": "6.3.1",
-    "babel-cli": "6.4.5",
     "babel-core": "6.4.5",
     "babel-eslint": "4.1.8",
     "babel-loader": "6.2.2",
