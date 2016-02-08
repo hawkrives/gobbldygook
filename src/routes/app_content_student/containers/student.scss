@@ -15,9 +15,5 @@
 .student > .content {
 	flex: 2;
 
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: stretch;
-
 	margin-right: $page-edge-padding;
 }
