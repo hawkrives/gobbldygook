@@ -78,6 +78,7 @@
 	background-color: #f2f2f2;
 	border-radius: 3px;
 
+	font-size: 0.9em;
 	padding: 0.125em 0.25em;
 
 	&.evaluated .result-indicator {
@@ -99,7 +100,6 @@
 
 
 .expression--reference {
-	font-size: 0.9em;
 	display: inline;
 }
 .expression--reference > .expression--contents {
