@@ -1,12 +1,11 @@
 import React, {PropTypes} from 'react'
-import cx from 'classnames'
+import Icon from '../../../components/icon'
 
 export default function ResultIndicator({result}) {
-	return (
-		<span className={cx('result-indicator', result ? 'result-indicator--success' : 'result-indicator--failure')}>
-			{result ? '✓' : '×'}
-		</span>
-	)
+	return <Icon
+		name={result ? 'checkmark' : 'close'}
+		className={`result-indicator ${result ? 'result-indicator--success' : 'result-indicator--failure'}`}
+	/>
 }
 
 ResultIndicator.propTypes = {
