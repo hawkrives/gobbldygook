@@ -109,7 +109,7 @@
     "babel-plugin-transform-export-extensions": "6.4.0",
     "babel-plugin-transform-inline-environment-variables": "6.3.13",
     "babel-plugin-transform-member-expression-literals": "6.3.13",
-    "babel-plugin-transform-minify-booleans": "6.3.13",
+    "babel-plugin-transform-minify-booleans": "6.5.0",
     "babel-plugin-transform-object-rest-spread": "6.3.13",
     "babel-plugin-transform-property-literals": "6.3.13",
     "babel-plugin-transform-react-constant-elements": "6.4.0",
