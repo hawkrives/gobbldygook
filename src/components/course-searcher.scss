@@ -24,7 +24,7 @@
 	.no-results {
 		margin-top: 1em;
 		text-align: center;
-		color: color('gray', '500');
+		color: $gray-500;
 		font-size: 0.9em;
 	}
 
@@ -53,13 +53,13 @@
 		outline: none;
 	}
 	&:hover {
-		background-color: color('gray', '100');
+		background-color: $gray-100;
 	}
 	&:focus {
-		background-color: color('blue', '50');
-		color: color('blue', '900');
+		background-color: $blue-50;
+		color: $blue-900;
 		&::-webkit-input-placeholder {
-			color: desaturate(color('light-blue', '300'), 75%);
+			color: desaturate($light-blue-300, 75%);
 		}
 	}
 }
@@ -68,7 +68,7 @@
 	border: 0;
 	border-radius: 0;
 
-	color: color('gray');
+	color: $gray;
 	transition: 0.15s;
 }
 
@@ -85,11 +85,11 @@
 }
 .submit-search-query:hover,
 .submit-search-query:focus {
-	color: color('green');
-	background-color: color('green', '50');
+	color: $green;
+	background-color: $green-50;
 }
 .submit-search-query:disabled {
-	color: color('gray');
+	color: $gray;
 	background-color: white;
 }
 
@@ -136,4 +136,3 @@
 	font-size: 0.9em;
 	font-weight: 500;
 }
-

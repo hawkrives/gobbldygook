@@ -5,7 +5,7 @@
 .add-area {
 	// @include card;
 	padding: $area-edge-padding;
-	border-top: $material-divider;list
+	border-top: $material-divider;
 
 	& > .toolbar {
 		margin-bottom: $area-edge-padding;
@@ -20,12 +20,12 @@
 
 .add-area--filter {
 	flex: 1;
-	border: solid 1px color('gray', '300');
+	border: solid 1px $gray-300;
 	padding: 0.25em;
 	margin-bottom: 0.5em;
 	&:focus {
-		background-color: color('blue', '50');
-		border-color: color('blue', '500');
+		background-color: $blue-50;
+		border-color: $blue-500;
 		outline: 0;
 	}
 }

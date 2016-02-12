@@ -3,7 +3,7 @@
 
 .course-removal-box {
 	padding: 5em 1em;
-	color: color('gray', '500');
+	color: $gray-500;
 	background-color: white;
 	border-radius: 5px;
 
@@ -22,8 +22,8 @@
 	}
 
 	&.is-over {
-		box-shadow: 0 0 10px color('red', '900');
-		color: color('red', '900');
-		background-color: color('red', '50');
+		box-shadow: 0 0 10px $red-900;
+		color: $red-900;
+		background-color: $red-50;
 	}
 }

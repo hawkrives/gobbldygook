@@ -33,7 +33,7 @@
 	.override-button {
 		padding: 0.25em 0.5em;
 		margin-right: 0.25em;
-		color: color('gray', '500');
+		color: $gray-500;
 	}
 
 	.result {
@@ -140,7 +140,7 @@
 
 		:global(.button) {
 			flex-grow: 1;
-			border: solid 1px color('gray', '500');
+			border: solid 1px $gray-500;
 
 			margin: 0 0.5em 0.5em;
 		}

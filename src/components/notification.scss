@@ -20,7 +20,7 @@
 
 	padding: 0.9em;
 
-	box-shadow: 0 2px 6px color('gray', '700');
+	box-shadow: 0 2px 6px $gray-700;
 	border-radius: 2px;
 
 	& + & {
@@ -43,12 +43,12 @@
 }
 
 .notification-type--error {
-	background: color('red');
+	background: $red;
 	color: $white;
 
 	.close-notification:hover {
-		border-color: color('red', '900');
-		color: color('red', '900');
+		border-color: $red-900;
+		color: $red-900;
 	}
 }
 
@@ -62,12 +62,12 @@
 		flex: 1;
 		height: 10px;
 		overflow: hidden;
-		border: solid 1px color('gray', '300');
+		border: solid 1px $gray-300;
 		background-color: transparent;
-		color: color('gray', '300');
+		color: $gray-300;
 	}
 	output {
-		color: color('gray', '300');
+		color: $gray-300;
 		margin-left: 0.5em;
 		font-feature-settings: 'lnum';
 	}
@@ -78,7 +78,7 @@
 	padding: 2px 6px 1px;
 
 	&:hover {
-		background-color: transparentize(color('white'), 0.15);
-		color: color('black', '500');
+		background-color: transparentize($white, 0.15);
+		color: $black;
 	}
 }

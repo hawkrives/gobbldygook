@@ -21,14 +21,14 @@
 
 :local(.canDrop) {
 	cursor: copy;
-	box-shadow: 0 0 4px color('gray', '500');
+	box-shadow: 0 0 4px $gray-500;
 	z-index: 10;
 }
 
 :local(.remove):hover {
-	color: color('red', '500');
-	border-color: color('red', '500');
-	background-color: color('red', '50');
+	color: $red-500;
+	border-color: $red-500;
+	background-color: $red-50;
 }
 
 
@@ -43,7 +43,7 @@
 	font-feature-settings: 'smcp';
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
-	color: color('gray', '500');
+	color: $gray-500;
 
 	overflow: hidden;
 }

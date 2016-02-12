@@ -50,9 +50,9 @@
 	margin-left: 1em; // only for the search button
 
 	&:focus {
-		color: color('blue', '900');
-		border-color: color('blue', '500');
-		background-color: color('blue', '50');
+		color: $blue-900;
+		border-color: $blue-500;
+		background-color: $blue-50;
 		outline: none;
 	}
 }

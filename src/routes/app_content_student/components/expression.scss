@@ -30,9 +30,9 @@
 }
 
 .expression.fulfillment {
-	color: color('orange', '700') !important;
-	background-color: color('orange', '50') !important;
-	border-color: color('orange', '100') !important;
+	color: $orange-700 !important;
+	background-color: $orange-50 !important;
+	border-color: $orange-100 !important;
 }
 
 .expression--course.not-used {
@@ -49,7 +49,7 @@
 }
 
 .was-evaluated {
-	// color: color('blue', '500') !important;
+	// color: $blue-500 !important;
 }
 
 .result-indicator {
@@ -64,7 +64,7 @@
 	margin: 0.2em;
 
 	// take 1: giant parentheses
-	$border: solid 2px color('gray', '400');
+	$border: solid 2px $gray-400;
 	border-left: $border;
 	border-right: $border;
 

@@ -7,7 +7,7 @@
 
 	background-color: white;
 	&.is-selected {
-		background-color: color('blue', '50');
+		background-color: $blue-50;
 	}
 
 	flex: 1;
@@ -29,8 +29,8 @@
 .student-list-item:hover,
 .student-list-item:focus {
 	outline: none;
-	background-color: color('blue', '50');
-	border-color: color('blue');
+	background-color: $blue-50;
+	border-color: $blue;
 }
 
 .student-list-item-info {
@@ -43,15 +43,15 @@
 }
 
 .student-list-item-container.loading {
-	border-left-color: color('blue', '300');
+	border-left-color: $blue-300;
 }
 
 .student-list-item-container.can-graduate {
-	border-left-color: color('green', '300');
+	border-left-color: $green-300;
 }
 
 .student-list-item-container.cannot-graduate {
-	border-left-color: color('red', '300');
+	border-left-color: $red-300;
 }
 
 
@@ -103,6 +103,6 @@
 
 .student-list-item-container .delete:hover {
 	color: white;
-	border-color: color('red', '900');
-	background-color: color('red', '500');
+	border-color: $red-900;
+	background-color: $red-500;
 }

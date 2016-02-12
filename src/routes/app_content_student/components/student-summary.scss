@@ -11,15 +11,15 @@
 	text-shadow: 0 1px transparentize(white, 0.5);
 
 	&.cannot-graduate .graduation-message {
-		color: color('deep-orange', '500');
+		color: $deep-orange-500;
 	}
 	&.can-graduate .graduation-message {
-		color: color('light-green', '800');
+		color: $light-green-800;
 	}
 	&.can-graduate {
-		background-color: color('light-green', '50');
+		background-color: $light-green-50;
 		&::selection {
-			background-color: color('light-green', '900');
+			background-color: $light-green-900;
 		}
 	}
 
@@ -45,13 +45,13 @@
 	}
 
 	.autosize-input {
-		border-bottom: 1px solid color('gray', '400');
+		border-bottom: 1px solid $gray-400;
 		padding: 0 0.125em 0 0;
 
 		&:focus {
 			outline: 0;
-			background-color: color('blue', '50');
-			border-color: color('blue', '500');
+			background-color: $blue-50;
+			border-color: $blue-500;
 		}
 	}
 }
@@ -64,13 +64,13 @@
 	background-color: white;
 
 	&.cannot-graduate {
-		color: color('deep-orange', '500');
+		color: $deep-orange-500;
 	}
 
 	&.can-graduate {
-		color: color('light-green', '800');
+		color: $light-green-800;
 		box-shadow:
 			0 0 0 5px white,
-			0 0 0 6px color('light-green', '100');
+			0 0 0 6px $light-green-100;
 	}
 }

@@ -51,7 +51,7 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 	font-feature-settings: 'smcp';
 	font-weight: 400;
 
-	color: color('gray', '500');
+	color: $gray-500;
 
 	& + .button {
 		margin-left: 0.1em;
@@ -80,7 +80,7 @@ $year-title-width: $year-title-size * 0.75; // no, I don't know why this is 0.75
 }
 
 .remove-year:hover {
-	color: color('red', '500');
-	background-color: color('red', '50');
-	border: solid 1px color('red', '500');
+	color: $red-500;
+	background-color: $red-50;
+	border: solid 1px $red-500;
 }

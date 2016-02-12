@@ -1,5 +1,6 @@
 @import '../../../base/variables';
 @import '../../../mixins/link-undecorated';
+@import '../../../mixins/color';
 @import './variables';
 
 :local(.courseList) {
@@ -25,6 +26,6 @@
 	padding: $semester-padding;
 
 	&:hover {
-		background-color: color('gray', '100');
+		background-color: $gray-100;
 	}
 }

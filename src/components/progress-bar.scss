@@ -11,16 +11,16 @@
         max-width: 100%;
     }
 
-    color: color('gray', '300');
-    &.hundred   { color: color('green',  '300'); }
-    &.ninety    { color: color('orange', '300'); }
-    &.eighty    { color: color('orange', '300'); }
-    &.seventy   { color: color('orange', '300'); }
-    &.sixty     { color: color('yellow', '700'); }
-    &.fifty     { color: color('yellow', '600'); }
-    &.forty     { color: color('yellow', '600'); }
-    &.thirty    { color: color('amber',  '500'); }
-    &.twenty    { color: color('red',    '300'); }
-    &.ten       { color: color('red',    '300'); }
-    &.under-ten { color: color('red',    '300'); }
+    color: $gray-300;
+    &.hundred   { color: $green-300; }
+    &.ninety    { color: $orange-300; }
+    &.eighty    { color: $orange-300; }
+    &.seventy   { color: $orange-300; }
+    &.sixty     { color: $yellow-700; }
+    &.fifty     { color: $yellow-600; }
+    &.forty     { color: $yellow-600; }
+    &.thirty    { color: $amber-500; }
+    &.twenty    { color: $red-300; }
+    &.ten       { color: $red-300; }
+    &.under-ten { color: $red-300; }
 }

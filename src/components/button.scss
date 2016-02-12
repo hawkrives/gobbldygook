@@ -38,24 +38,24 @@
 	@extend %button;
 	@include material-shadow;
 
-	background-color: color('white', '500');
+	background-color: $white;
 
 	&:hover {
-		background-color: color('white', '600');
+		background-color: $white;
 	}
 	&:focus {
-		background-color: color('blue', '50');
-		border-color: color('blue', '300');
+		background-color: $blue-50;
+		border-color: $blue-300;
 	}
 
 	&:active {
 		@include material-shadow;
-		background-color: color('white', '700');
+		background-color: $white;
 	}
 
 	&[disabled] {
 		cursor: default;
-		color: color('gray', '500');
+		color: $gray-500;
 	}
 }
 
@@ -66,18 +66,18 @@
 	background-color: transparent;
 
 	&:hover {
-		background-color: color('gray', '100');
-		border-color: color('gray', '400');
+		background-color: $gray-100;
+		border-color: $gray-400;
 	}
 
 	&:focus {
-		background-color: color('blue', '50');
-		border-color: color('blue', '300');
+		background-color: $blue-50;
+		border-color: $blue-300;
 	}
 
 	&:disabled {
 		cursor: default;
-		color: color('disabled', 'foreground--light');
+		color: $disabled-foreground--light;
 
 		&:hover,
 		&:focus,

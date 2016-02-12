@@ -3,8 +3,8 @@
 
 .area {
 	&.errored {
-		background-color: color('red', '50');
-		color: color('red', '900');
+		background-color: $red-50;
+		color: $red-900;
 	}
 
 	&:not(.errored).loading {
@@ -55,19 +55,19 @@
 }
 
 .area--actually-remove-area {
-	color: color('red', '500');
+	color: $red-500;
 	&:hover, &:focus {
-		background-color: transparentize(color('red', '50'), 0.2);
+		background-color: transparentize($red-50, 0.2);
 	}
 	&:active {
-		background-color: transparentize(color('red', '50'), 0.4);
+		background-color: transparentize($red-50, 0.4);
 	}
 }
 
 .area--summary:focus {
-	outline: 1px solid color('blue');
-	color: color('blue', '900');
-	background-color: color('blue', '50');
+	outline: 1px solid $blue-500;
+	color: $blue-900;
+	background-color: $blue-50;
 }
 
 .area--title {
@@ -112,6 +112,6 @@
 	}
 
 	&.error {
-		color: color('red', '100');
+		color: $red-100;
 	}
 }
