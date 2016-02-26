@@ -126,7 +126,7 @@
     "chai": "3.5.0",
     "chalk": "1.1.1",
     "codecov.io": "0.1.6",
-    "coveralls": "2.11.6",
+    "coveralls": "2.11.8",
     "css-loader": "0.23.1",
     "eslint": "1.10.3",
     "eslint-plugin-babel": "3.1.0",
