@@ -39,7 +39,7 @@
   "dependencies": {
     "appdirs": "1.0.0",
     "babel-regenerator-runtime": "6.5.0",
-    "babel-runtime": "6.5.0",
+    "babel-runtime": "6.6.0",
     "bluebird": "3.2.2",
     "classnames": "2.2.3",
     "codemirror": "5.11.0",
