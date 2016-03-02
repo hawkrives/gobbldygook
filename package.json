@@ -113,7 +113,7 @@
     "babel-plugin-transform-property-literals": "6.5.0",
     "babel-plugin-transform-react-constant-elements": "6.5.0",
     "babel-plugin-transform-react-display-name": "6.5.0",
-    "babel-plugin-transform-react-inline-elements": "6.5.0",
+    "babel-plugin-transform-react-inline-elements": "6.6.4",
     "babel-plugin-transform-regenerator": "6.5.0",
     "babel-plugin-transform-runtime": "6.5.0",
     "babel-plugin-transform-simplify-comparison-operators": "6.5.0",
