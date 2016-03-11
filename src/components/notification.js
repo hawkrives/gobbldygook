@@ -1,44 +1,41 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
 import round from 'lodash/round'
 import Button from './button'
 import ProgressBar from './progress-bar'
 import './notification.scss'
 
-export default class Notification extends Component {
-	static propTypes = {
-		hideButton: PropTypes.bool,
-		max: PropTypes.number,
-		message: PropTypes.string.isRequired,
-		onClose: PropTypes.func.isRequired,
-		type: PropTypes.string.isRequired,
-		value: PropTypes.number,
-	};
+export default function Notification(props) {
+	// console.log('Notification#render')
+	const progressBar = (props.type === 'progress') && (
+		<div className='progress-container'>
+			<ProgressBar value={props.value} max={props.max} />
+			<output>{round((props.value / props.max) * 100, 0)}%</output>
+		</div>
+	)
 
-	render() {
-		// console.log('Notification#render')
-		const progressBar = (this.props.type === 'progress') && (
-			<div className='progress-container'>
-				<ProgressBar value={this.props.value} max={this.props.max} />
-				<output>{round((this.props.value / this.props.max) * 100, 0)}%</output>
+	return (
+		<li className={`notification-capsule notification-type--${props.type}`}
+			onClick={props.onClose}>
+			<div className='notification-content'>
+				<h1 className='notification-message'>
+					{props.message}
+				</h1>
+				{progressBar}
 			</div>
-		)
-
-		return (
-			<li className={`notification-capsule notification-type--${this.props.type}`}
-				onClick={this.props.onClose}>
-				<div className='notification-content'>
-					<h1 className='notification-message'>
-						{this.props.message}
-					</h1>
-					{progressBar}
-				</div>
-				{!this.props.hideButton &&
-				<Button className='close-notification'
-					type='flat'
-					title='Close'>
-					×
-				</Button>}
-			</li>
-		)
-	}
+			{!props.hideButton &&
+			<Button className='close-notification'
+				type='flat'
+				title='Close'>
+				×
+			</Button>}
+		</li>
+	)
+}
+Notification.propTypes = {
+	hideButton: PropTypes.bool,
+	max: PropTypes.number,
+	message: PropTypes.string.isRequired,
+	onClose: PropTypes.func.isRequired,
+	type: PropTypes.string.isRequired,
+	value: PropTypes.number,
 }

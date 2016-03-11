@@ -20,6 +20,7 @@ export function updateQuery(newQuery) {
 
 export function setPartialQuery(partial) {
 	if (partial) {
+		// eslint-disable-next-line no-confusing-arrow
 		partial = mapValues(partial, val => Array.isArray(val) ? val : [val])
 		return { type: SET_PARTIAL_QUERY, payload: partial }
 	}

@@ -1,4 +1,5 @@
 import loadPkg from 'load-pkg'
-const pkg = loadPkg.sync(process.cwd())
 import {userCacheDir} from 'appdirs'
+
+const pkg = loadPkg.sync(process.cwd())
 export const cacheDir = userCacheDir(pkg.name)

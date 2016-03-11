@@ -9,10 +9,6 @@ import sortBy from 'lodash/sortBy'
 
 import {cacheDir} from './dirs'
 
-import Promise from 'bluebird'
-import fsCallbacks from 'graceful-fs'
-const fs = Promise.promisifyAll(fsCallbacks)
-
 import {checkForStaleData} from './update-local-data-cache'
 
 import map from 'lodash/map'
@@ -20,6 +16,10 @@ import path from 'path'
 
 import quacksLikeDeptNum from '../../src/helpers/quacks-like-dept-num'
 import splitDeptNum from '../../src/helpers/split-dept-num'
+
+import Promise from 'bluebird'
+import fsCallbacks from 'graceful-fs'
+const fs = Promise.promisifyAll(fsCallbacks)
 
 function getDeptNumsFromRiddles(r) {
 	if (isString(r) && quacksLikeDeptNum(r)) {

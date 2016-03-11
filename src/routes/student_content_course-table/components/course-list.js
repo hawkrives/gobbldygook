@@ -11,6 +11,7 @@ import styles from './course-list.scss'
 
 
 export default function CourseList(props) {
+	// eslint-disable-next-line no-confusing-arrow
 	let courseObjects = map(props.schedule.courses, (course, i) =>
 		course.error
 		? (<li key={course.clbid}>

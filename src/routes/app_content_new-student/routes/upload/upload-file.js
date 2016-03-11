@@ -100,9 +100,11 @@ export default class UploadFileScreen extends Component {
 				</DropZone>
 
 				<List type='plain' className={styles.results}>
-					{map(students, stu => stu.payload
-						? <li key={stu.payload.id}><StudentSummary student={stu.payload} showMessage={false} showAvatar={false} randomizeHello /></li>
-						: <li key={stu.name}>{stu.name} returned the error "{stu.error}"</li>)}
+					{
+						// eslint-disable-next-line no-confusing-arrow
+						map(students, stu => stu.payload
+							? <li key={stu.payload.id}><StudentSummary student={stu.payload} showMessage={false} showAvatar={false} randomizeHello /></li>
+							: <li key={stu.name}>{stu.name} returned the error "{stu.error}"</li>)}
 					{map(files, file => <li key={file.name}>{file.name}</li>)}
 				</List>
 

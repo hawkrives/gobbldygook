@@ -45,6 +45,7 @@ export function checkForTimeConflicts(courses) {
 	conflicts = map(conflicts, conflictSet => {
 		if (some(conflictSet)) {
 			// +1 to the indices because humans don't 0-index lists
+			// eslint-disable-next-line no-confusing-arrow
 			const conflicts = compact(map(conflictSet, (possibility, i) => (possibility === true) ? i + 1 : false))
 			const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
 			return {

@@ -33,11 +33,11 @@ export function cli() {
 			}
 
 			process.stdout.write(`${filename}: `)
-			process.stdout.write(`reading`)
+			process.stdout.write('reading')
 			const data = fs.readFileSync(filename, {encoding: 'utf-8'})
-			process.stdout.write(`, loading`)
+			process.stdout.write(', loading')
 			const obj = yaml.safeLoad(data)
-			process.stdout.write(`, enhancing\n`)
+			process.stdout.write(', enhancing\n')
 			const enhanced = enhanceHanson(obj)
 			const outputFile = filename.replace(inDir, outDir).replace('.yaml', '.json')
 			mkdirp.sync(path.dirname(outputFile))

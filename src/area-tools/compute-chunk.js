@@ -272,6 +272,7 @@ export function computeModifier({expr, ctx, courses}) {
 		filtered = take(filtered, expr.$count.$num)
 	}
 
+	// eslint-disable-next-line no-confusing-arrow
 	filtered = map(filtered, course =>
 		'$course' in course ? course.$course : course)
 

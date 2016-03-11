@@ -28,6 +28,12 @@ function Student({undo, redo, student}) {
 	)
 }
 
+Student.propTypes = {
+	redo: PropTypes.func.isRequired,
+	student: PropTypes.object.isRequired,
+	undo: PropTypes.func.isRequired,
+}
+
 
 function Degub(props) {
 	const students = props.students || []

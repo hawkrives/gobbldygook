@@ -38,9 +38,9 @@ function makeBooleanExpression({expr, ctx}) {
 }
 
 const ofLookup = {
-	all: `All of`,
-	any: `Any of`,
-	none: `None of`,
+	all: 'All of',
+	any: 'Any of',
+	none: 'None of',
 }
 
 function makeOfExpression({expr, ctx}) {

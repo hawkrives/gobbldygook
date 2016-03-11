@@ -26,17 +26,21 @@ import buildDept from '../../../helpers/build-dept'
 import to12Hour from '../../../helpers/to-12-hour-time'
 const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
+// eslint-disable-next-line no-confusing-arrow
 const DAY_OF_WEEK = course => course.offerings
 	? map(course.offerings, offer => offer.day).join('/')
 	: 'No Days Listed'
 
+// eslint-disable-next-line no-confusing-arrow
 const TIME_OF_DAY = course => course.offerings
 	? oxford(sortBy(uniq(flatMap(course.offerings, offer =>
 		map(offer.times, time => `${to12Hour(time.start)}-${to12Hour(time.end)}`)))))
 	: 'No Times Listed'
 
+// eslint-disable-next-line no-confusing-arrow
 const DEPARTMENT = course => course.depts ? buildDept(course) : 'No Department'
 
+// eslint-disable-next-line no-confusing-arrow
 const GEREQ = course => course.gereqs ? oxford(course.gereqs) : 'No GEs'
 
 const GROUP_BY_TO_KEY = {
@@ -53,6 +57,7 @@ const GROUP_BY_TO_KEY = {
 const SORT_BY_TO_KEY = {
 	'Year': 'year',
 	'Title': 'title',
+	// eslint-disable-next-line no-confusing-arrow
 	'Department': course => course.depts ? buildDept(course) : 'No Department',
 	'Day of Week': DAY_OF_WEEK,
 	'Time of Day': TIME_OF_DAY,

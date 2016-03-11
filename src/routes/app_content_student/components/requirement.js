@@ -2,8 +2,6 @@ import React, {PropTypes, Component} from 'react'
 import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
-import sortBy from 'lodash/sortBy'
-import cx from 'classnames'
 
 import isRequirementName from '../../../area-tools/is-requirement-name'
 

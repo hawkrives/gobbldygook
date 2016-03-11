@@ -29,7 +29,7 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 	// 4. throws if it cannot find any of the required keys
 
 	if (typeof data !== 'object') {
-		throw new Error(`enhanceHanson: data was not an object!`)
+		throw new Error('enhanceHanson: data was not an object!')
 	}
 
 	const whitelist = topLevel ? topLevelWhitelist : lowerLevelWhitelist

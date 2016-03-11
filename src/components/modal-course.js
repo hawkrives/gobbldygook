@@ -65,13 +65,13 @@ function SemesterSelector({scheduleId, student, moveCourse, addCourse, removeCou
 		<select
 			className='semester-select'
 			value={scheduleId || 'none'}
-			disabled={!Boolean(student) || !(Boolean(clbid))}
+			disabled={!student || !clbid}
 			onChange={moveToSchedule({moveCourse, addCourse, removeCourse, scheduleId, studentId: student.id, clbid})}
 		>
 			{scheduleId
 				? <option value='$remove'>Remove from Schedule</option>
 				: <option value='$none'>No Schedule</option>}
-			{Boolean(student) ? map(findSemesterList(student), (group, key) => (
+			{student ? map(findSemesterList(student), (group, key) => (
 				<optgroup key={key} label={expandYear(key, true, '–')}>
 					{(map(group, sched =>
 						<option value={sched.id} key={sched.id}>{sched.title}</option>))}
@@ -176,7 +176,7 @@ export default function ModalCourse(props) {
 				/>
 				<Button className='remove-course'
 					onClick={removeFromSemester({studentId, removeCourse, clbid: course.clbid, scheduleId})}
-					disabled={!Boolean(scheduleId) || !Boolean(student)}>
+					disabled={!scheduleId || !student}>
 					Remove Course
 				</Button>
 			</div>

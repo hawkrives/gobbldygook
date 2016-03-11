@@ -1,4 +1,9 @@
-import React, {PropTypes, isValidElement, cloneElement} from 'react'
+import React, {
+	Children as ReactChildren,
+	PropTypes,
+	isValidElement,
+	cloneElement,
+} from 'react'
 import cx from 'classnames'
 
 import './list.scss'
@@ -13,7 +18,8 @@ export default function List(props) {
 		className,
 	} = props
 
-	const contents = React.Children.map(children, child =>
+	// eslint-disable-next-line no-confusing-arrow
+	const contents = ReactChildren.map(children, child =>
 		isValidElement(child)
 		? cloneElement(child, {...child.props, className: cx('list-item', child.props.className)})
 		: child)

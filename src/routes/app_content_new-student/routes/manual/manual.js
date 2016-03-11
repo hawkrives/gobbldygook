@@ -143,7 +143,7 @@ class ManualCreationScreen extends Component {
 			</pre> : null}
 
 			<div className='intro'>
-				Hi! My name is {nameEl}.<br/>I matriculated in {matriculationEl},
+				Hi! My name is {nameEl}.<br />I matriculated in {matriculationEl},
 				and I plan to graduate in {graduationEl}.
 			</div>
 

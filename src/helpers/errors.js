@@ -1,11 +1,2 @@
-export class AuthError extends Error {
-	constructor(msg) {
-		super(msg)
-	}
-}
-
-export class NetworkError extends Error {
-	constructor(msg) {
-		super(msg)
-	}
-}
+export class AuthError extends Error {}
+export class NetworkError extends Error {}

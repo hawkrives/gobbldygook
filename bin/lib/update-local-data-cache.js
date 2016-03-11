@@ -62,7 +62,7 @@ export async function cache() {
 
 
 	await Promise.all(infoFiles.map(async file => {
-		await fs.writeFileAsync(`${cacheDir}/Courses/${path.basename(file.path)}`, await file.data)
+		return await fs.writeFileAsync(`${cacheDir}/Courses/${path.basename(file.path)}`, await file.data)
 	}))
 
 	await fs.writeFileAsync(`${cacheDir}/Courses/info.prior.json`, JSON.stringify(courseInfo))

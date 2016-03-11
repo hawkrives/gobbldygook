@@ -16,7 +16,7 @@ import some from 'lodash/some'
  */
 export default function compareCourseToQualification(course, {$key, $operator, $value}) {
 	if (isArray($value)) {
-		throw new TypeError(`compareCourseToQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)`)
+		throw new TypeError("compareCourseToQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)")
 	}
 
 	else if (isPlainObject($value)) {

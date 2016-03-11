@@ -9,6 +9,7 @@ import semesterName from '../../../helpers/semester-name'
 
 import './semester-detail.scss'
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class SemesterDetail extends Component {
 	static propTypes = {
 		className: PropTypes.string,
