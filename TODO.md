@@ -1,3 +1,55 @@
+## More
+
+TODO
+
+-----
+
+## greediness
+
+two of (CSCI 121, 125, 241, 251)
+            √      X    √   [√]
+
+ √  – taken, used
+ X  - not taken
+[√] - taken, not used
+
+
+
+Get rid of the pure gray results.
+
+Make them green, half-transparent green, or transparent red.
+
+For "taken and used", "taken, not used" and "not taken".
+
+
+-----
+
+dirty checking is still going to be tricky for Math
+
+> No, because I can take my transition courses and they count towards perspectives.
+> Some courses have multiple perspectives that can't be used
+
+
+-----
+
+add rendering for filters
+
+----
+
+like,
+if it's not needed by anything else, then go ahead and check it
+but if it's used for something else, then don't?
+
+map courses to uses {
+  ART 234: [Studio Art > 3D Media > Ceramics, Art History > Other Requirement]
+}
+
+
+----
+
+we're holding on to the old evaluated areas of study in the history of the student object. they're really big.
+
+
 ## Where expressions
 
 WhereExpressions need to accomodate for multiple qualifiers.
