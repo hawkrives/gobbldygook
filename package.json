@@ -8,7 +8,6 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "benchmark": "./benchmarks/students-benchmark",
     "build": "env NODE_ENV=production webpack --config ./.webpackrc.js --bail --production --progress",
     "build:areas": "./bin/compile-areas area-data/ --out-dir build/areas/",
     "build:ci": "npm run build -- --no-progress",
@@ -20,7 +19,7 @@
     "copy:icons": "svg-sprite-generate -d src/icons/ionicons/ -o build/ionicons.svg",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "codecov": "nyc report --reporter=text-lcov | codecov",
-    "lint": "eslint *.js benchmarks/ bin/ scripts/ src/ test/",
+    "lint": "eslint *.js bin/ scripts/ src/ test/",
     "nyc": "nyc npm test",
     "prebuild": "npm run copy",
     "precopy": "npm run clean",
