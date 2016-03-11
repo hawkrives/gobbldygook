@@ -1,18 +1,18 @@
 import {expect} from 'chai'
-import collectUsedCourses from '../../src/area-tools/collect-used-courses'
+import collectTakenCourses from '../../src/area-tools/collect-taken-courses'
 
-describe('collectUsedCourses', () => {
-	it('collects a list of all of the courses anywhere in this object which have the `_used` property.', () => {
+describe('collectTakenCourses', () => {
+	it('collects a list of all of the courses anywhere in this object which have the `_taken` property.', () => {
 		const obj = {
 			$type: 'course',
 			$course: {
 				department: ['ASIAN'],
 				number: 120,
 			},
-			_used: true,
+			_taken: true,
 		}
 
-		expect(collectUsedCourses(obj)).to.equal(obj.$course)
+		expect(collectTakenCourses(obj)).to.equal(obj.$course)
 	})
 
 	it('can go down several layers deep', () => {
@@ -25,7 +25,7 @@ describe('collectUsedCourses', () => {
 						department: ['ASIAN'],
 						number: 120,
 					},
-					_used: true,
+					_taken: true,
 				},
 				{
 					$type: 'course',
@@ -37,7 +37,7 @@ describe('collectUsedCourses', () => {
 			],
 		}
 
-		expect(collectUsedCourses(obj)).to.deep.equal([
+		expect(collectTakenCourses(obj)).to.deep.equal([
 			obj.$or[0].$course,
 		])
 	})
@@ -58,7 +58,7 @@ describe('collectUsedCourses', () => {
 						{
 							$course: {department: ['CSCI'], number: 121},
 							$type: 'course',
-							_used: true,
+							_taken: true,
 						},
 						{
 							$course: {department: ['CSCI'], number: 122},
@@ -88,12 +88,12 @@ describe('collectUsedCourses', () => {
 						{
 							$course: {department: ['ART', 'ASIAN'], number: 170},
 							$type: 'course',
-							_used: true,
+							_taken: true,
 						},
 						{
 							$course: {department: ['ART', 'ASIAN'], number: 175},
 							$type: 'course',
-							_used: true,
+							_taken: true,
 						},
 						{
 							$course: {department: ['ART', 'ASIAN'], number: 180},
@@ -102,7 +102,7 @@ describe('collectUsedCourses', () => {
 						{
 							$course: {department: ['ART', 'ASIAN'], number: 190},
 							$type: 'course',
-							_used: true,
+							_taken: true,
 						},
 					],
 				},
@@ -113,24 +113,24 @@ describe('collectUsedCourses', () => {
 						{
 							$course: {department: ['ASIAN'], number: 210},
 							$type: 'course',
-							_used: true,
+							_taken: true,
 						},
 						{
 							$course: {department: ['ASIAN'], number: 215},
 							$type: 'course',
-							_used: true,
+							_taken: true,
 						},
 						{
 							$course: {department: ['ASIAN'], number: 220},
 							$type: 'course',
-							_used: true,
+							_taken: true,
 						},
 					],
 				},
 			],
 		}
 
-		expect(collectUsedCourses(obj)).to.deep.equal([
+		expect(collectTakenCourses(obj)).to.deep.equal([
 			{department: ['CSCI'], number: 121},
 			{department: ['ART', 'ASIAN'], number: 170},
 			{department: ['ART', 'ASIAN'], number: 175},

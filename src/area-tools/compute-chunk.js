@@ -206,7 +206,7 @@ export function computeCourse({expr, courses, dirty, isNeeded}) {
 		return {computedResult: true, match}
 	}
 	else {
-		return {match}
+		return {computedResult: false, match}
 	}
 }
 

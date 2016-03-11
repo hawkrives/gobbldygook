@@ -23,7 +23,7 @@ describe('computeOf', () => {
 			{department: ['CSCI'], number: 125},
 		]
 
-		const {computedResult, matches, counted} = computeOf({expr, ctx: req, courses, dirty})
+		const {computedResult, matches, counted} = computeOf({expr, ctx: req, courses, dirty, isNeeded: true})
 
 		expect(computedResult)
 			.to.be.true
@@ -39,9 +39,28 @@ describe('computeOf', () => {
 			$type: 'of',
 			$count: {$operator: '$gte', $num: 2},
 			$of: [
-				{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 121}},
-				{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 125}},
-				{$type: 'course', $course: {department: ['CSCI'], number: 150}},
+				{
+					_checked: true,
+					_taken: true,
+					_result: true,
+					$type: 'course',
+					_request: {department: ['CSCI'], number: 121},
+					$course: {department: ['CSCI'], number: 121},
+				},
+				{
+					_checked: true,
+					_taken: true,
+					_result: true,
+					$type: 'course',
+					_request: {department: ['CSCI'], number: 125},
+					$course: {department: ['CSCI'], number: 125},
+				},
+				{
+					_result: false,
+					_checked: true,
+					$type: 'course',
+					$course: {department: ['CSCI'], number: 150},
+				},
 			],
 		})
 	})

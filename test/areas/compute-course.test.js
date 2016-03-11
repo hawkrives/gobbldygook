@@ -15,7 +15,7 @@ describe('computeCourse', () => {
 		}
 
 		const {computedResult, match} = computeCourse({
-			expr: query, courses, dirty: new Set(),
+			expr: query, courses, dirty: new Set(), isNeeded: true,
 		})
 
 		expect(computedResult)
@@ -31,7 +31,7 @@ describe('computeCourse', () => {
 
 		const dirty = new Set()
 
-		computeCourse({expr: query, courses, dirty})
+		computeCourse({expr: query, courses, dirty, isNeeded: true})
 
 		expect(dirty)
 			.to.have.property('size', 1)
@@ -46,7 +46,7 @@ describe('computeCourse', () => {
 
 		const dirty = new Set()
 
-		computeCourse({expr: query, courses, dirty})
+		computeCourse({expr: query, courses, dirty, isNeeded: true})
 
 		expect(dirty)
 			.to.have.property('size', 0)
@@ -61,7 +61,7 @@ describe('computeCourse', () => {
 
 		const dirty = new Set(['ART 130 Research'])
 
-		const {computedResult, match} = computeCourse({expr: query, courses, dirty})
+		const {computedResult, match} = computeCourse({expr: query, courses, dirty, isNeeded: true})
 
 		expect(computedResult)
 			.to.be.false
@@ -83,7 +83,7 @@ describe('computeCourse', () => {
 		}
 
 		const {computedResult, match} = computeCourse({
-			expr: query, courses, dirty: new Set(),
+			expr: query, courses, dirty: new Set(), isNeeded: true,
 		})
 
 		expect(computedResult)

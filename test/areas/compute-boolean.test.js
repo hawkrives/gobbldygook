@@ -16,12 +16,26 @@ describe('computeBoolean', () => {
 			{department: ['CSCI'], number: 125},
 		]
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set()})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true})
 		expect(clause).to.deep.equal({
 			$type: 'boolean',
 			$and: [
-				{_result: true, _used: true, $type: 'course', $course: {department: ['CSCI'], number: 121}},
-				{_result: true, _used: true, $type: 'course', $course: {department: ['CSCI'], number: 125}},
+				{
+					_result: true,
+					_taken: true,
+					_checked: true,
+					_request: {department: ['CSCI'], number: 121},
+					$type: 'course',
+					$course: {department: ['CSCI'], number: 121},
+				},
+				{
+					_result: true,
+					_taken: true,
+					_checked: true,
+					_request: {department: ['CSCI'], number: 125},
+					$type: 'course',
+					$course: {department: ['CSCI'], number: 125},
+				},
 			],
 		})
 		expect(computedResult).to.be.true
@@ -45,40 +59,26 @@ describe('computeBoolean', () => {
 			{department: ['CSCI'], number: 125},
 		]
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set()})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true})
 		expect(clause).to.deep.equal({
 			$type: 'boolean',
 			$or: [
-				{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 121}},
-				{$type: 'course', $course: {department: ['CSCI'], number: 125}},
-			],
-		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
-			{department: ['CSCI'], number: 121},
-		])
-	})
-
-	it('only computes an or-clause until it has a result', () => {
-		const clause = {
-			$type: 'boolean',
-			$or: [
-				{$type: 'course', $course: {department: ['CSCI'], number: 121}},
-				{$type: 'course', $course: {department: ['CSCI'], number: 125}},
-			],
-		}
-		const requirement = {result: clause}
-		const courses = [
-			{department: ['CSCI'], number: 121},
-			{department: ['CSCI'], number: 125},
-		]
-
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set()})
-		expect(clause).to.deep.equal({
-			$type: 'boolean',
-			$or: [
-				{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 121}},
-				{$type: 'course', $course: {department: ['CSCI'], number: 125}},
+				{
+					_taken: true,
+					_result: true,
+					_checked: true,
+					_request: {department: ['CSCI'], number: 121},
+					$type: 'course',
+					$course: {department: ['CSCI'], number: 121},
+				},
+				{
+					_taken: true,
+					_result: false,
+					_checked: true,
+					_request: {department: ['CSCI'], number: 125},
+					$type: 'course',
+					$course: {department: ['CSCI'], number: 125},
+				},
 			],
 		})
 		expect(computedResult).to.be.true
@@ -101,12 +101,24 @@ describe('computeBoolean', () => {
 			{department: ['CSCI'], number: 125},
 		]
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set()})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true})
 		expect(clause).to.deep.equal({
 			$type: 'boolean',
 			$or: [
-				{_result: false, $type: 'course', $course: {department: ['CSCI'], number: 121}},
-				{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 125}},
+				{
+					_result: false,
+					_checked: true,
+					$type: 'course',
+					$course: {department: ['CSCI'], number: 121},
+				},
+				{
+					_taken: true,
+					_result: true,
+					_checked: true,
+					_request: {department: ['CSCI'], number: 125},
+					$type: 'course',
+					$course: {department: ['CSCI'], number: 125},
+				},
 			],
 		})
 		expect(computedResult).to.be.true
@@ -142,27 +154,53 @@ describe('computeBoolean', () => {
 			{department: ['CSCI'], number: 125},
 		]
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set()})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true})
 		expect(clause).to.deep.equal({
 			$and: [
 				{
 					$or: [
-						{_result: false, $type: 'course', $course: {department: ['CSCI'], number: 121}},
-						{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 125}},
+						{
+							_result: false,
+							_checked: true,
+							$type: 'course',
+							$course: {department: ['CSCI'], number: 121},
+						},
+						{
+							_taken: true,
+							_result: true,
+							_checked: true,
+							_request: {department: ['CSCI'], number: 125},
+							$type: 'course',
+							$course: {department: ['CSCI'], number: 125},
+						},
 					],
 					$type: 'boolean',
 					_result: true,
+					_checked: true,
 					_matches: [
 						{department: ['CSCI'], number: 125},
 					],
 				},
 				{
 					$or: [
-						{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 130}},
-						{$type: 'course', $course: {department: ['CSCI'], number: 131}},
+						{
+							_taken: true,
+							_result: true,
+							_checked: true,
+							$type: 'course',
+							_request: {department: ['CSCI'], number: 130},
+							$course: {department: ['CSCI'], number: 130},
+						},
+						{
+							_checked: true,
+							_result: false,
+							$type: 'course',
+							$course: {department: ['CSCI'], number: 131},
+						},
 					],
 					$type: 'boolean',
 					_result: true,
+					_checked: true,
 					_matches: [
 						{department: ['CSCI'], number: 130},
 					],
@@ -192,11 +230,23 @@ describe('computeBoolean', () => {
 			{department: ['CSCI'], number: 125},
 		]
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set()})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true})
 		expect(clause).to.deep.equal({
 			$or: [
-				{_result: false, $type: 'course', $course: {department: ['CSCI'], number: 121}},
-				{_used: true, _result: true, $type: 'course', $course: {department: ['CSCI'], number: 125}},
+				{
+					_result: false,
+					_checked: true,
+					$type: 'course',
+					$course: {department: ['CSCI'], number: 121},
+				},
+				{
+					_taken: true,
+					_result: true,
+					_checked: true,
+					_request: {department: ['CSCI'], number: 125},
+					$type: 'course',
+					$course: {department: ['CSCI'], number: 125},
+				},
 			],
 			$type: 'boolean',
 		})
@@ -236,7 +286,10 @@ describe('computeBoolean', () => {
 			$type: 'boolean',
 		}
 		const requirement = {
-			A: {$type: 'requirement', result: {$type: 'course', $course: {department: ['ART'], number: 120}}},
+			A: {$type: 'requirement', result: {
+				$type: 'course',
+				$course: {department: ['ART'], number: 120},
+			}},
 			C: {$type: 'requirement', result: {
 				$count: {$operator: '$gte', $num: 2},
 				$of: [
@@ -259,7 +312,7 @@ describe('computeBoolean', () => {
 		requirement.A.computed = computeChunk({expr: requirement.A.result, ctx: requirement, courses, dirty})
 		requirement.C.computed = computeChunk({expr: requirement.C.result, ctx: requirement, courses, dirty})
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty, isNeeded: true})
 		expect(clause).to.deep.equal({
 			$and: [
 				{
@@ -268,6 +321,7 @@ describe('computeBoolean', () => {
 					$from: 'children',
 					$type: 'modifier',
 					$what: 'course',
+					_checked: true,
 					_result: true,
 					_counted: 3,
 					_matches: [
@@ -285,6 +339,7 @@ describe('computeBoolean', () => {
 					$from: 'children',
 					$type: 'modifier',
 					$what: 'credit',
+					_checked: true,
 					_result: true,
 					_counted: 3,
 					_matches: [
@@ -329,13 +384,14 @@ describe('computeBoolean', () => {
 			{department: ['THEAT'], number: 266, year: 2015, semester: 1},
 		]
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set()})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true})
 		expect(clause).to.deep.equal({
 			$or: [
 				{
 					$count: {$operator: '$gte', $num: 1},
 					$course: {department: ['THEAT'], number: 222},
 					$type: 'occurrence',
+					_checked: true,
 					_result: false,
 					_counted: 0,
 					_matches: [],
@@ -344,6 +400,7 @@ describe('computeBoolean', () => {
 					$count: {$operator: '$gte', $num: 3},
 					$course: {department: ['THEAT'], number: 266},
 					$type: 'occurrence',
+					_checked: true,
 					_result: true,
 					_counted: 3,
 					_matches: [
@@ -393,14 +450,26 @@ describe('computeBoolean', () => {
 			{department: ['ART'], number: 102},
 		]
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set()})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true})
 		expect(clause).to.deep.equal({
 			$and: [
 				{
 					$count: {$operator: '$gte', $num: 1},
 					$of: [
-						{_result: false, $course: {department: ['CSCI'], number: 121}, $type: 'course'},
-						{_used: true, _result: true, $course: {department: ['CSCI'], number: 125}, $type: 'course'},
+						{
+							_result: false,
+							_checked: true,
+							$course: {department: ['CSCI'], number: 121},
+							$type: 'course',
+						},
+						{
+							_taken: true,
+							_result: true,
+							_checked: true,
+							_request: {department: ['CSCI'], number: 125},
+							$course: {department: ['CSCI'], number: 125},
+							$type: 'course',
+						},
 					],
 					$type: 'of',
 					_counted: 1,
@@ -408,12 +477,25 @@ describe('computeBoolean', () => {
 						{department: ['CSCI'], number: 125},
 					],
 					_result: true,
+					_checked: true,
 				},
 				{
 					$count: {$operator: '$gte', $num: 1},
 					$of: [
-						{_used: true, _result: true, $course: {department: ['ART'], number: 102}, $type: 'course'},
-						{$course: {department: ['ART'], number: 103}, $type: 'course'},
+						{
+							_taken: true,
+							_result: true,
+							_checked: true,
+							_request: {department: ['ART'], number: 102},
+							$course: {department: ['ART'], number: 102},
+							$type: 'course',
+						},
+						{
+							_checked: true,
+							_result: false,
+							$course: {department: ['ART'], number: 103},
+							$type: 'course',
+						},
 					],
 					$type: 'of',
 					_counted: 1,
@@ -421,6 +503,7 @@ describe('computeBoolean', () => {
 						{department: ['ART'], number: 102},
 					],
 					_result: true,
+					_checked: true,
 				},
 			],
 			$type: 'boolean',
@@ -466,13 +549,14 @@ describe('computeBoolean', () => {
 		requirement.A.computed = computeChunk({expr: requirement.A.result, ctx: requirement, courses, dirty})
 		requirement.C.computed = computeChunk({expr: requirement.C.result, ctx: requirement, courses, dirty})
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty, isNeeded: true})
 		expect(clause).to.deep.equal({
 			$and: [
 				{
 					$requirement: 'A',
 					$type: 'reference',
 					_result: true,
+					_checked: true,
 					_matches: [
 						{department: ['ART'], number: 120},
 					],
@@ -481,6 +565,7 @@ describe('computeBoolean', () => {
 					$requirement: 'C',
 					$type: 'reference',
 					_result: true,
+					_checked: true,
 					_matches: [
 						{department: ['ART'], number: 104},
 						{department: ['ART'], number: 105},
@@ -533,7 +618,7 @@ describe('computeBoolean', () => {
 			{department: ['ART'], number: 102, gereqs: ['BTS-T']},
 		]
 
-		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set()})
+		const {computedResult, matches} = computeBoolean({expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true})
 		expect(clause).to.deep.equal({
 			$and: [
 				{
@@ -551,6 +636,7 @@ describe('computeBoolean', () => {
 						{department: ['CSCI'], number: 125, gereqs: ['WRI']},
 					],
 					_result: true,
+					_checked: true,
 				},
 				{
 					$count: {$operator: '$gte', $num: 1},
@@ -567,6 +653,7 @@ describe('computeBoolean', () => {
 						{department: ['ART'], number: 102, gereqs: ['BTS-T']},
 					],
 					_result: true,
+					_checked: true,
 				},
 			],
 			$type: 'boolean',
@@ -579,6 +666,6 @@ describe('computeBoolean', () => {
 	})
 
 	it('throws when neither $and nor $or were present', () => {
-		expect(() => computeBoolean({expr: {$neither: []}})).to.throw(TypeError)
+		expect(() => computeBoolean({expr: {$neither: []}, isNeeded: true})).to.throw(TypeError)
 	})
 })
