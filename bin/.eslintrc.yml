@@ -2,5 +2,8 @@
 env:
   node: true
 
+parserOptions:
+  sourceType: 'script'
+
 rules:
   no-process-exit: 0

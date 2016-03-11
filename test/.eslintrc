@@ -3,5 +3,6 @@ env:
   mocha: true
 
 rules:
-  no-empty: 0
-  no-unused-expressions: 0
+  no-empty: off
+  no-unused-expressions: off
+  quotes: off
