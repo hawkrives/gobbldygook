@@ -9,7 +9,7 @@ getStdin()
 	.then(code => {
 		const result = babel.transform(code, {
 			compact: true,
-			extends: '../.babelrc',
+			extends: './.babelrc',
 			highlightCode: false,
 		})
 		console.log(result.code)
