@@ -6,6 +6,7 @@ result:
     seven courses from (Transitions, Perspectives, Level III, Sequence, Electives) &
     at most two courses from children where { department != MATH }
 
+children share courses: true
 
 Basic:
     Calculus I: MATH 120
@@ -21,6 +22,7 @@ Transitions:
 
 Perspectives:
     description: One course from each of three of the four perspectives.
+    children share courses: false
 
     Axiomatic/Algebraic (A): one of (MATH 252, 352, 356)
     Continuous/Analytic (C): one of (MATH  230, 244, 226, 262, 340, 344)
