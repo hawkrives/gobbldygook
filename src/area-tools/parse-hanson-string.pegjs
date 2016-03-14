@@ -395,15 +395,12 @@ CourseDepartment
 
 
 CourseNumber 'course number'
-  = num:(
-        nums:(Digit Digit Digit)
-          { return {number: parseInt(nums.join(''))} }
-      / num:Digit 'XX'
-          { return {level: num * 100} }
-    )
+  = nums:(Digit Digit Digit)
     international:'I'? lab:'L'?
     {
       let result = {}
+
+      let number = parseInt(nums.join(''))
 
       if (international) {
         result.international = true
@@ -412,7 +409,7 @@ CourseNumber 'course number'
         result.type = 'Lab'
       }
 
-      return {...result, ...num}
+      return {...result, number}
     }
 
 
