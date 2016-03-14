@@ -9,9 +9,6 @@ Bluebird.config({
 // Enable crash tracking
 PRODUCTION && require('ohcrash')('ogdR7qSuIqexx4aixXhFKlG2')
 
-// enable the regenerator runtime
-import 'babel-runtime/regenerator'
-
 // enable svg <use> support in IE 9, 10, 11
 import 'svgxuse'
 
