@@ -74,7 +74,7 @@ function makeWhereQualifier(where) {
 	return `${key} ${operator} ${where.$value}`
 }
 
-function makeWhereExpression({expr}) {
+export function makeWhereExpression({expr}) {
 	// console.log(expr)
 	const needs = `${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num}`
 	const qualifier = makeWhereQualifier(expr.$where)

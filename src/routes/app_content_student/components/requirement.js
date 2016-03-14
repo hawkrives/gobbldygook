@@ -11,7 +11,6 @@ import Button from '../../../components/button'
 import ResultIndicator from './result-indicator'
 
 import styles from './requirement.scss'
-console.log(styles)
 
 // function getResultOfRequirement(requirements) {
 // 	return requirementTitle => requirements[requirementTitle].computed ? 'A' : 'B'
@@ -42,8 +41,7 @@ export function Requirement(props) {
 
 	const filterEl = props.filter && (
 		<div className={styles.filter}>
-			Filter:
-			<Filter expr={props.filter} ctx={props} />
+			Filter: <Filter expr={props.filter} ctx={props} />
 		</div>
 	)
 
