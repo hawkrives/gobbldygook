@@ -22,12 +22,10 @@ Transitions:
 Perspectives:
     description: One course from each of three of the four perspectives.
 
-    # MATH 230, Real, can only count for one of the perspectives,
-    # but it can count for both Perspectives and Electives.
-    A: one of (MATH 252, 352, 356)
-    C: one of (MATH 244, 226, 230, 262, 340, 344)
-    D: one of (MATH 232, (238 | 239), 262, CSCI 231, MATH 264)
-    M: one of (MATH 242, 230, 236, 262, 266, (STAT 212 | 214 | 272), STAT 316, MATH 330)
+    Axiomatic/Algebraic (A): one of (MATH 252, 352, 356)
+    Continuous/Analytic (C): one of (MATH  230, 244, 226, 262, 340, 344)
+    Discrete/Combinatorial (D): one of (MATH 232, (238 | 239), 262, CSCI 231, MATH 264)
+    Modeling/Computation (M): one of (MATH 230, 242,  236, 262, 266, (STAT 212 | 214 | 272), STAT 316, MATH 330)
 
     result: three of (A, C, D, M)
 
