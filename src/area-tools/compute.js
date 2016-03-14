@@ -12,9 +12,20 @@ import mapValues from 'lodash/mapValues'
 // sub-requirements and such.
 
 export default function compute(requirement, {path, courses=[], overrides={}, fulfillments={}, dirty=new Set()}) {
+	let childrenShareCourses = Boolean(requirement['children share courses'])
+
 	requirement = mapValues(requirement, (req, name) => {
 		if (isRequirementName(name)) {
-			return compute(req, {path: path.concat([name]), courses, overrides, dirty, fulfillments})
+			// Primarily for the math major: if a requirement is set to 'children share courses',
+			// then they share courses. The default is false (well, undefined).
+			// If they don't share courses, then they share the dirty set;
+			// if they do, however, they each receive their own dirty set, so that they don't know if a course has been used yet or not.
+			// 'children share courses' is non-recursive.
+			let localDirty = dirty
+			if (childrenShareCourses) {
+				localDirty = new Set()
+			}
+			return compute(req, {path: path.concat([name]), courses, overrides, dirty: localDirty, fulfillments})
 		}
 		return req
 	})
