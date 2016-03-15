@@ -7,7 +7,6 @@ import present from 'present'
 
 import stringifyError from './stringify-error'
 import evaluate from '../area-tools/evaluate'
-import findLeafRequirements from '../area-tools/find-leaf-requirements'
 import getActiveStudentCourses from './get-active-student-courses'
 import alterCourse from './alter-course-for-evaluation'
 
@@ -35,9 +34,12 @@ function checkStudentAgainstArea(student, area) {
 			resolve(details)
 		}
 
-		const finalReqs = findLeafRequirements(details)
+		let result = details.result
+		let bits = result.$of || result.$and || result.$or
+		let finalReqs = map(bits, b => b._result)
+
 		const maxProgress = finalReqs.length
-		const currentProgress = filter(finalReqs, {computed: true}).length
+		const currentProgress = filter(finalReqs, Boolean).length
 
 		resolve({
 			...area,
