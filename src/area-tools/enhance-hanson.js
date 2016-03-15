@@ -54,10 +54,11 @@ export default function enhanceHanson(data, {topLevel=true}={}) {
 	}
 
 	const requirements = filter(keys(data), isRequirementName)
+	let regex = /(.*?) +\(([A-Z\-]+)\)$/i
 	const abbreviations = fromPairs(map(requirements,
-		req => [req.replace(/.* \(([A-Z\-]+)\)$|.*$/, '$1'), req]))
+		req => [req.replace(regex, '$2'), req]))
 	const titles = fromPairs(map(requirements,
-		req => [req.replace(/(.*?) +\([A-Z\-]+\)$|.*$/, '$1'), req]))
+		req => [req.replace(regex, '$1'), req]))
 
 	const oldVariables = cloneDeep(declaredVariables)
 	declaredVariables = {}
