@@ -1,0 +1,72 @@
+name: Political Science
+type: major
+revision: 2014-15
+
+result:
+    nine courses from children &
+    Analyzing Politics and Policies &
+    American Politics and Public Policy &
+    Comparative Politics &
+    International Relations &
+    Political Theory
+
+message:
+    Only three of your nine courses can be Level I courses.
+
+# TODO: Add instances of 299, 298, 398, and 399
+# to their respective categories.
+
+Analyzing Politics and Policies:
+    PSCI 220
+
+American Politics and Public Policy:
+    one of (
+        PSCI 111,
+             204, 211, 244, 246, 255, 272,
+             311,
+        ES/PS 276
+    )
+
+Comparative Politics:
+    one of (
+        PSCI 112, 115, 117,
+             252, 264, 282, 283,
+             350, 367, 370, 382, 385,
+        AS/PS 245, 250
+    )
+
+International Relations:
+    one of (
+        PSCI 115, 119, 121
+             257, 258, 285,
+             321,
+        ES/PS 201
+    )
+
+Political Theory:
+    one of (
+        PSCI 113, 119,
+             232, 259, 260, 262, 278, 284,
+             384,
+        ES/PS 225
+    )
+
+Additional Courses:
+    description: >
+        Students may designate a *selected statistics course* __OR__ one
+        additional semester of a world language beyond the level of
+        proficiency required for general education (French, German, or Spanish
+        numbered above 232 or Chinese, Greek, Latin, Japanese, Norwegian, or
+        Russian numbered above 231) as one of their nine courses in the
+        political science major. Additional study in statistics and/or a world
+        language is especially recommended for students considering graduate
+        study.
+
+    Statistics:
+        one course where { department = STAT }
+
+    Languages:
+        one course where { number > 232 & department = (FREN | GERM | SPAN) } |
+        one course where { number > 231 & department = (CHIN | GREEK | LATIN | JAPAN | NORW | RUSSN) }
+
+    result: Statistics | Languages
