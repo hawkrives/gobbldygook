@@ -4,6 +4,11 @@ TODO
 
 -----
 
+Add a check to the area compiler to check for invalid requirement references
+
+
+-----
+
 ## greediness
 
 two of (CSCI 121, 125, 241, 251)
