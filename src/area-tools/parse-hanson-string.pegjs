@@ -171,6 +171,7 @@ Counter
 EnglishInteger
   = num:(
         'zero'
+      / 'one-point-five'
       / 'one'
       / 'two'
       / 'three'
@@ -185,6 +186,7 @@ EnglishInteger
     {
            if (num === 'zero')  { return 0 }
       else if (num === 'one')   { return 1 }
+      else if (num === 'one-point-five') { return 1.5 }
       else if (num === 'two')   { return 2 }
       else if (num === 'three') { return 3 }
       else if (num === 'four')  { return 4 }
@@ -194,6 +196,8 @@ EnglishInteger
       else if (num === 'eight') { return 8 }
       else if (num === 'nine')  { return 9 }
       else if (num === 'ten')   { return 10 }
+      else
+        throw new Error(`invalid number "${num}"`)
     }
 
 
