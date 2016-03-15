@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 // import CourseExpression from './expression--course'
-import Expression, {makeWhereExpression} from './expression'
+import Expression, {makeWhereQualifier} from './expression'
 import map from 'lodash/map'
 
 function FilterOf({expr, ctx}) {
@@ -19,13 +19,15 @@ FilterOf.propTypes = {
 }
 
 function FilterWhere({expr}) {
-	let {description, contents} = makeWhereExpression({expr})
-	return <div><p>{description}</p><div>{contents}</div></div>
+	const qualifier = makeWhereQualifier(expr.$where)
+	const description = `only courses where ${qualifier}`
+
+	return <div><p>{description}</p></div>
 }
 FilterWhere.propTypes = {
 	ctx: PropTypes.object,
 	expr: PropTypes.shape({
-		$where: PropTypes.array,
+		$where: PropTypes.object,
 	}),
 }
 

@@ -68,20 +68,19 @@ let operators = {
 let keys = {
 	gereqs: 'G.E.',
 }
-function makeWhereQualifier(where) {
+export function makeWhereQualifier(where) {
 	let operator = operators[where.$operator] || '?'
 	let key = keys[where.$key] || where.$key
 	return `${key} ${operator} ${where.$value}`
 }
 
 export function makeWhereExpression({expr}) {
-	// console.log(expr)
 	const needs = `${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num}`
 	const qualifier = makeWhereQualifier(expr.$where)
 	const description = `${expr._counted} of ${needs} ${expr.$distinct ? 'distinct' : ''} ${plur('course', expr.$count.$num)} from courses where ${qualifier}`
 
 	let contents = map(expr._matches, (course, i) =>
-		<Expression key={i} expr={{$type: 'course', $course: course}} hideIndicator={true} />)
+		<Expression key={i} expr={{$type: 'course', $course: course}} hideIndicator />)
 
 	if (!contents.length) {
 		contents = null
