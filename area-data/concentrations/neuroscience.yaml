@@ -1,18 +1,19 @@
 name: Neuroscience
 type: concentration
 revision: 2011-12
-result: all of (
-    Biopsychology,
-    Cellular and Molecular Neuroscience,
-    two departments from (Level II, Level III),
-    Level II,
-    Level III,
-    Interdisciplinary,
-    Capstone)
+result:
+    Biopsychology &
+    Cellular and Molecular Neuroscience &
+    two departments from (Level II, Level III) &
+    Level II &
+    Level III &
+    Interdisciplinary &
+    Capstone
 
 
 Biopsychology:
     PSYCH 238
+
 Cellular and Molecular Neuroscience:
     NEURO 239
 
@@ -132,15 +133,13 @@ Interdisciplinary:
 
 Capstone:
     Biology Seminar:
-        one of (BIO 385)
+        BIO 385
     Psychology Seminar:
-        one of (PSYCH 336, 338, 339)
+        PSYCH 336 | 338 | 339
 
     message:
         You may also take other designated seminars in chemistry or biology or
         psychology. Note that PSYCH 336, 338, or 339 cannot count for both a
         level III and a capstone seminar.
 
-    result: one of (
-        Biology Seminar,
-        Psychology Seminar)
+    result: Biology Seminar | Psychology Seminar
