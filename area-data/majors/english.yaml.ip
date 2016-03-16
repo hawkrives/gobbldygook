@@ -10,7 +10,9 @@ Level I:
     ENGL 185
 
 Level II:
-    description: '3 courses: one from cross-cultural studies, one from literary history, and one from either cross-disciplinary studies or genre.'
+    description: >
+        3 courses: one from cross-cultural studies, one from literary history,
+        and one from either cross-disciplinary studies or genre.
 
     Cross-Cultural Studies:
         one of (
@@ -18,7 +20,10 @@ Level II:
                  210, 211, 212, 213, 214, 215, 216, 217, 218, 219 )
 
     Literary History:
-        description: "One or two courses: one focusing on national literary tradition, or examine literature from two or more nations."
+        description: >
+            One or two courses: one focusing on national literary tradition,
+            or examine literature from two or more nations.
+
         result: one of (
                     ENGL 220, 221, 222, 223, 224, 225, 226, 227, 228, 229,
                          230, 231, 232, 233, 234, 235, 236, 237, 238, 239 )
@@ -34,16 +39,14 @@ Level II:
                  290, 291, 292, 293, 294, 295, 296, 297, 298, 299 )
 
     result:
-        all of (
-            Cross-Cultural Studies,
-            Literary History,
-            one of ( Cross-Disciplinary Studies, Genre Studies )
-        )
+        Cross-Cultural Studies & Literary History &
+        one of ( Cross-Disciplinary Studies, Genre Studies )
 
 1800s:
-    description:
+    description: >
         Among all courses taken at level II (category-specific and elective),
-        one must be in literature before 1800; one must be in literature after 1800.
+        one must be in literature before 1800; one must be in literature after
+        1800.
 
     # Among all level II courses (category-specific and elective)
     # 1. One must be in literature before 1800
@@ -62,7 +65,9 @@ Electives:
     # 2. At least two Level III
     # 3. An IS cannot count toward a Level II
     # 4. Neither IS, IR, nor English 396 can count for one of a student’s two Level III requirements
-    description: Six electives, two of which must be at level III. At least one level III course must be a literature course.
+    description: >
+        Six electives, two of which must be at level III. At least one level
+        III course must be a literature course.
 
     Literature:
         # perhaps we could simply list the 300-level
@@ -75,7 +80,7 @@ Electives:
         # together, they make 6 required courses, where two are at level 3.
         four of (
             ENGL 240, 241, 242, 243, 244, 245, 246, 247, 248, 249,
-                 250, 251, 252, 253, 254, 255, 256, 257, 258, 259 ))
+                 250, 251, 252, 253, 254, 255, 256, 257, 258, 259 )
         &
         two of ( ENGL 360, 372, 373, 393, 391, 392, 396, 399 )
 
