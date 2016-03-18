@@ -42,7 +42,8 @@ Foundation:
 
 Core:
     Historical Studies in Western Culture (HWC):
-        two courses where { gereqs = HWC }
+        message: One course must be taught by a St. Olaf professor
+        result: two courses where { gereqs = HWC }
 
     Multicultural Studies (MC):
         Domestic (MCD): one course where { gereqs = MCD }
@@ -86,11 +87,14 @@ Core:
 
 Integrative:
     Ethical Issues and Normative Perspectives (EIN):
-        one course where {
-            gereqs = EIN &
-            year >= min (year) from courses where {
-                gereqs = BTS-T
+        message:
+            Strictly speaking, your BTS-T should be completed *before*
+            you take your EIN.
+        result: one course where {
+                gereqs = EIN &
+                year >= min (year) from courses where {
+                    gereqs = BTS-T
+                }
             }
-        }
 
     result: EIN
