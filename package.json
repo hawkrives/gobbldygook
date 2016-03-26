@@ -90,7 +90,7 @@
   "devDependencies": {
     "autoprefixer": "6.3.3",
     "babel-core": "6.7.2",
-    "babel-eslint": "5.0.0",
+    "babel-eslint": "5.0.1",
     "babel-loader": "6.2.4",
     "babel-plugin-external-helpers": "6.5.0",
     "babel-plugin-react-transform": "2.0.2",
