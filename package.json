@@ -77,7 +77,7 @@
     "redux-promise": "0.5.1",
     "redux-thunk": "2.0.1",
     "redux-undo": "0.6.1",
-    "serialize-error": "1.1.0",
+    "serialize-error": "2.0.0",
     "sha1": "1.1.1",
     "stabilize": "1.0.0",
     "sto-course-related-data": "4.0.2",
