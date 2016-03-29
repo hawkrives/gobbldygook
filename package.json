@@ -149,7 +149,7 @@
     "postcss": "5.0.19",
     "postcss-loader": "0.8.2",
     "pretty-ms": "2.1.0",
-    "react-addons-perf": "0.14.7",
+    "react-addons-perf": "0.14.8",
     "react-transform-catch-errors": "1.0.2",
     "react-transform-hmr": "1.0.4",
     "react-transform-render-visualizer": "0.4.0",
