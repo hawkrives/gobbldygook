@@ -153,7 +153,7 @@
     "react-transform-catch-errors": "1.0.2",
     "react-transform-hmr": "1.0.4",
     "react-transform-render-visualizer": "0.4.0",
-    "redbox-react": "1.2.2",
+    "redbox-react": "1.2.3",
     "redux-devtools": "3.1.1",
     "redux-devtools-dock-monitor": "1.1.0",
     "redux-devtools-log-monitor": "1.0.5",
