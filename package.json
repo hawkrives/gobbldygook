@@ -70,7 +70,7 @@
     "react-modal2": "3.0.2",
     "react-radio-group": "2.2.0",
     "react-redux": "4.4.1",
-    "react-router": "2.0.1",
+    "react-router": "2.1.1",
     "react-router-redux": "3.0.0",
     "react-select": "1.0.0-beta11",
     "redux": "3.3.1",
