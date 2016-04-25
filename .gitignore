@@ -9,6 +9,7 @@ playground/parse-sis.js
 area-data/area-data
 stats.json
 .eslintcache
+.vscode/
 
 # Temp folders
 .sass-cache
