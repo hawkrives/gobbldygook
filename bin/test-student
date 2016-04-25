@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
 require('./lib/init')
-require('./compile-areas.js').cli()
+require('./test-student.js').cli()

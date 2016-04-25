@@ -1,8 +1,14 @@
-import nom from 'nomnom'
-import fs from 'graceful-fs'
-import yaml from 'js-yaml'
-import enhanceHanson from '../src/area-tools/enhance-hanson'
-import stringify from 'json-stable-stringify'
+'use strict'
+const bluebird = require('bluebird')
+let fs = require('graceful-fs')
+fs = bluebird.promisifyAll(fs)
+
+const nom = require('nomnom')
+const yaml = require('js-yaml')
+const stringify = require('json-stable-stringify')
+const enhanceHanson = require('../src/area-tools/enhance-hanson')
+const getStdin = require('get-stdin')
+const includes = require('lodash/includes')
 
 const loggers = {
 	text: console.dir.bind(console),
@@ -10,45 +16,68 @@ const loggers = {
 	yaml: data => console.log(yaml.safeDump(data)),
 }
 
-export function cli() {
-	const args = nom()
+function compileArea(args, data) {
+	let obj = yaml.safeLoad(data)
+
+	if (args.parse) {
+		obj = enhanceHanson(obj)
+	}
+
+	return obj
+}
+
+function loadFile(path) {
+	return fs.readFileAsync(path, 'utf-8')
+}
+
+module.exports.cli = async function cli() {
+	let args = nom()
 		.script('compile-area')
-		.option('file', {
-			required: true,
-			metavar: 'FILE',
-			help: 'The file to process',
+		.option('input', {
+			help: 'The file or folder to process',
+			list: true,
 			position: 0,
+			default: [],
 		})
-		.option('parse', {
+		.option('enhance', {
+			help: 'Run the enhancer',
 			flag: true,
 			default: true,
-			help: 'Run the ehnancer',
 		})
-		.option('output', {
-			choices: ['json', 'text', 'yaml'],
-			default: 'text',
+		.option('stdin', {
+			help: 'Read a file from stdin',
+			flag: true,
+		})
+		.option('out-format', {
 			help: 'The output style',
+			abbr: 'f',
+			choices: Object.keys(loggers),
+			default: 'text',
+		})
+		.option('out-dir', {
+			help: 'The output folder',
+			abbr: 'd',
 		})
 		.option('debug', {
-			flag: true,
 			help: 'Enable debugging output',
+			flag: true,
 		})
 		.parse()
 
 	if (args.debug) {
-		console.log(args)
+		console.error(args)
 	}
 
-	const data = fs.readFileSync(args.file, {encoding: 'utf-8'})
-	const obj = yaml.safeLoad(data)
+	let logger = loggers[args['out-format']]
 
-	const logger = loggers[args.output]
+	let fromStdin = includes(args, '-')
+	let sources = args.input.filter(fn => fn !== '-').map(loadFile)
+	if (fromStdin && process.stdin.isTTY) {
+		sources.push(getStdin())
+	}
 
-	if (args['parse']) {
-		const enhanced = enhanceHanson(obj)
-		logger(enhanced)
-	}
-	else {
-		logger(obj)
-	}
+	let files = await Promise.all(sources)
+	let results = files.map(area => compileArea(args, area))
+
+	results.forEach(logger)
 }

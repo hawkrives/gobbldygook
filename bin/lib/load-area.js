@@ -1,4 +1,4 @@
-import Promise from 'bluebird'
+import bluebird from 'bluebird'
 import yaml from 'js-yaml'
 import enhanceHanson from '../../src/area-tools/enhance-hanson'
 import map from 'lodash/map'
@@ -6,7 +6,7 @@ import filter from 'lodash/filter'
 import find from 'lodash/find'
 import maxBy from 'lodash/maxBy'
 import findAreas from './find-areas'
-const fs = Promise.promisifyAll(require('graceful-fs'))
+const fs = bluebird.promisifyAll(require('graceful-fs'))
 
 export async function getArea({name, type, revision}) {
 	type = type.toLowerCase()
@@ -14,7 +14,8 @@ export async function getArea({name, type, revision}) {
 
 	const root = 'area-data/'
 	const areaFiles = findAreas(root)
-	const areaData = map(areaFiles, f => fs.readFileSync(f, 'utf-8'))
+	let areaData = map(areaFiles, f => fs.readFileAsync(f, 'utf-8'))
+	areaData = await Promise.all(areaData)
 
 	const areas = map(areaData, yaml.safeLoad)
 

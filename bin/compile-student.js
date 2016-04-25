@@ -1,10 +1,18 @@
-import nom from 'nomnom'
-import fs from 'graceful-fs'
-import yaml from 'js-yaml'
-import enhanceHanson from '../src/area-tools/enhance-hanson'
+'use strict'
 
-export function cli() {
-	const args = nom()
+const nom = require('nomnom')
+const fs = require('graceful-fs')
+const yaml = require('js-yaml')
+const enhanceHanson = require('../src/area-tools/enhance-hanson')
+
+function compileStudent(args, data) {
+	let obj = yaml.safeLoad(data)
+	let enhanced = enhanceHanson(obj)
+	return enhanced
+}
+
+module.exports = function cli() {
+	let args = nom()
 		.script('compile-student')
 		.option('filename', {
 			position: 0,
@@ -12,8 +20,7 @@ export function cli() {
 			help: 'the file to process',
 		})
 
-	const data = fs.readFileSync(args.filename, {encoding: 'utf-8'})
-	const obj = yaml.safeLoad(data)
-	const enhanced = enhanceHanson(obj)
-	console.log(JSON.stringify(enhanced, null, 2))
+	let data = fs.readFileSync(args.filename, {encoding: 'utf-8'})
+	let student = compileStudent(args, data)
+	console.log(JSON.stringify(student, null, 2))
 }
