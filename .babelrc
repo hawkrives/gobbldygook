@@ -1,24 +1,5 @@
 {
 	"env": {
-		// these plugins will be included only in development mode, e.g.
-		// if NODE_ENV (or BABEL_ENV) environment variable is not set
-		// or is equal to "development"
-		"development": {
-			"presets": ["react-hmre"],
-			"plugins": [
-				["react-transform", {
-					"transforms": [
-						{
-							"transform": "react-transform-catch-errors",
-							"imports": ["react", "redbox-react"],
-						},
-						// {
-						// 	"transform": "react-transform-render-visualizer",
-						// }
-					],
-				}],
-			],
-		},
 		"production": {
 			"plugins": [
 				"transform-react-constant-elements",
@@ -30,33 +11,21 @@
 				"transform-simplify-comparison-operators",
 
 				"transform-inline-environment-variables",
+                "transform-undefined-to-void",
 			],
-		}
+		},
 	},
 	"presets": [
 		"es2015",
 		"react",
-		"stage-2",
+		"stage-1",
 	],
 	"plugins": [
-		"syntax-async-functions",
-		"syntax-async-generators",
-		"syntax-class-properties",
-		"syntax-export-extensions",
-		"syntax-object-rest-spread",
-		"syntax-trailing-function-commas",
-
-		"transform-async-to-generator",
-		"transform-regenerator",
-
-		"transform-class-properties",
-		"transform-export-extensions",
-		"transform-object-rest-spread",
 		"transform-react-display-name",
-
-		"transform-undefined-to-void",
 
 		"external-helpers",
 		"transform-runtime",
+
+		"react-hot-loader/babel",
 	],
 }

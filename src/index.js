@@ -1,3 +1,5 @@
+/* globals module */
+
 // Set up the default promise implementation as Bluebird
 import Bluebird from 'bluebird'
 Bluebird.config({
@@ -50,8 +52,25 @@ routerMiddleware.listenForReplays(store)
 
 // global.store = store
 
+import {AppContainer} from 'react-hot-loader'
+
 render(
-	(<Root store={store}>
-		<Router history={history} routes={routes} />
-	</Root>),
+	// (<AppContainer>
+		(<Root store={store}>
+			<Router history={history} routes={routes} />
+		</Root>),
+	// </AppContainer>),
 	document.getElementById('gobbldygook') )
+
+// if (module.hot) {
+// 	module.hot.accept('./containers/root', () => {
+// 		let Root = require('./containers/root').default
+// 		render(
+// 			(<AppContainer>
+// 				<Root store={store}>
+// 					<Router history={history} routes={routes} />
+// 				</Root>
+// 			</AppContainer>),
+// 			document.getElementById('gobbldygook') )
+// 	})
+// }

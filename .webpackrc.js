@@ -178,7 +178,8 @@ if (isDevelopment) {
 	// add dev server and hotloading clientside code
 	config.entry.unshift(
 		'webpack-dev-server/client?http://' + config.hostname + ':' + config.port,
-		'webpack/hot/only-dev-server'
+		'webpack/hot/only-dev-server',
+		'react-hot-loader/patch'
 	)
 
 	config.devServer.port = config.port
