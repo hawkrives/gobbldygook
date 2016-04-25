@@ -10,7 +10,7 @@ We have a [trello board](https://trello.com/b/cviTwkre) where we track which are
 
 ## Playing
 1. Visit https://stolaf.edu/people/rives/g
-    – Gobbldygook currently supports every major browser, except for Safari, and apparently Internet Explorer – unintentional, and on the to-do list. (so Chrome, Firefox, Internet Explorer 11, and probably Microsoft Edge).
+    – Gobbldygook currently supports every major browser, except for Safari (so Chrome, Firefox, Internet Explorer 11, and Microsoft Edge). (Addendum: IE support is currently broken. Unsure why. It's on the TODO list.)
     – Let's just say that Safari's database support is … a bit lacking.
     – On iOS devices, every browser is required to use Safari internally, which means that Chrome, Opera, and Safari on iOS all have the same terrible database support.
     – In short: you can't use Safari, iPhone, iPad, or Apple Watch to access Gobbldygook. :-(
