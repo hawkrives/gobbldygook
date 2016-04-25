@@ -14,7 +14,7 @@
     "build:dev": "cross-env NODE_ENV=development webpack --config ./.webpackrc.js --bail --progress --devtool=source-map",
     "build:peg": "pegjs < src/area-tools/parse-hanson-string.pegjs | ./scripts/babel-stdin.js | js-beautify -f - --end-with-newline --indent-with-tabs > src/area-tools/parse-hanson-string.js",
     "clean": "rimraf build",
-    "copy": "mkdirp build/ && cpy 'src/static/*' build/ --parents && npm run copy:areas && npm run copy:icons",
+    "copy": "mkdirp build/ && cpy 'src/static/*' build/ && npm run copy:areas && npm run copy:icons",
     "copy:areas": "cpy 'area-data/*/*' build/areas/ --parents && ./bin/area-packager build/areas/ --save",
     "copy:icons": "svg-sprite-generate -d src/icons/ionicons/ -o build/ionicons.svg",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
