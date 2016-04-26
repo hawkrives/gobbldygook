@@ -9,7 +9,6 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./.webpackrc.js --bail --production --progress",
-    "build:areas": "./bin/compile-areas area-data/ --out-dir build/areas/",
     "build:ci": "npm run build -- --no-progress",
     "build:dev": "cross-env NODE_ENV=development webpack --config ./.webpackrc.js --bail --progress --devtool=source-map",
     "build:peg": "pegjs < src/area-tools/parse-hanson-string.pegjs | ./scripts/babel-stdin.js | js-beautify -f - --end-with-newline --indent-with-tabs > src/area-tools/parse-hanson-string.js",
