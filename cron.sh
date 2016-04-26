@@ -5,8 +5,6 @@ set -e
 
 PATH=/home/users/rives/bin/:$PATH
 
-node -v
-
 # update the code
 git pull origin stable
 
