@@ -30,7 +30,7 @@
     "stats:dev": "cross-env NODE_ENV=development npm run stats:base",
     "test": "cross-env NODE_ENV=test mocha test/**/*.js",
     "test-watch": "npm run test -- --watch",
-    "test:students": "./bin/test-students",
+    "test:students": "./bin/test-student test/example-students",
     "view-coverage": "nyc report --reporter=html && open coverage/index.html"
   },
   "dependencies": {
