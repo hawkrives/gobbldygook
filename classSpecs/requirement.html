@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+   This document was automatically created using an XSLT stylesheet by Aubrey Barnard.
+   See www.stolaf.edu/people/barnard/xml/xml.html for additional information.
+   -->
+<html xmlns="http://www.w3.org/TR/xhtml1/strict">
+<head>
+<title>The Requirement Class Specification.</title>
+</head>
+<body bgcolor="white">
+<div class="specification">
+<center>
+<p>
+<big>
+<big>
+<big>
+<big>The Requirement Class Specification.</big>
+</big>
+</big>
+</big>
+</p>
+</center>
+<center>
+<p>
+<big>
+<big>
+<big>This class models all requirements in a major.</big>
+</big>
+</big>
+</p>
+</center>
+<center>
+<p>Xandra Best. Wednesday, May 15, 2013</p>
+</center>
+<br/>
+<hr/>
+<br/>
+<br/>
+
+<dl class="class-spec">
+<p>
+<dt>
+<big>
+<strong>CLASS <code> Requirement</code>
+</strong>
+</big>
+</dt>
+<dd>
+
+<dl class="inheritance">
+<p>
+<dt>
+<strong>No superclass.</strong>
+</dt>
+<dd/>
+</p>
+</dl>
+
+<dl class="variables">
+<p>
+<dt>
+<strong>State variables:</strong>
+</dt>
+<dd>
+<dl>
+<p>
+<dt class="var">
+<code>protected  string name</code>
+</dt>
+<dd>Name of requirement.</dd>
+</p>
+<p>
+<dt class="var">
+<code>protected  int needed</code>
+</dt>
+<dd>Number of courses needed of requirement.</dd>
+</p>
+<p>
+<dt class="var">
+<code>protected  int has</code>
+</dt>
+<dd>Number of courses had of requirement.</dd>
+</p>
+<p>
+<dt class="var">
+<code>protected  bool satisfied</code>
+</dt>
+<dd>Whether requirement is satisfied.</dd>
+</p>
+</dl>
+</dd>
+</p>
+</dl>
+
+<dl class="constructors-list">
+<p>
+<dt>
+<strong>Constructors:</strong>
+</dt>
+<dd>
+<dl>
+
+<p>
+<dt class="constructor">
+<code> Requirement</code>
+</dt>
+<dd>
+<dl>
+Default constructor.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Requirement object is initialized using init with arguments n="", need =0.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="constructor">
+<code> Requirement</code>
+</dt>
+<dd>
+<dl>
+Partial constructor.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>Name of requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Requirement object is initialized using init with arguments n=str, need =0.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="constructor">
+<code> Requirement</code>
+</dt>
+<dd>
+<dl>
+Regular constructor.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>Name of requirement.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>int n</code>
+</dt>
+<dd>Number of valid courses needed.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Requirement object is initialized using init with arguments n=str, need =n.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="constructor">
+<code> Requirement</code>
+</dt>
+<dd>
+<dl>
+Copy constructor.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Requirement c</code>
+</dt>
+<dd>Reference to a requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Requirement object is initialized by copying values from c.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+</dl>
+</dd>
+</p>
+</dl>
+
+<dl class="methods-list">
+<p>
+<dt>
+<strong>Methods:</strong>
+</dt>
+<dd>
+<dl>
+
+<p>
+<dt class="method">
+<code>  init</code>
+</dt>
+<dd>
+<dl>
+Initializes instance of Requirement.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string n</code>
+</dt>
+<dd>Name of requirement.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>int needed</code>
+</dt>
+<dd>Number of courses needed for requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>State variables are set as follows: name = n, needed = need, has =0, satisfied = false.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  copy</code>
+</dt>
+<dd>
+<dl>
+Copies state variable values from one requirement to another.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Requirement c</code>
+</dt>
+<dd>Reference to a Requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>State variables are changed to match those of c.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> Requirement =</code>
+</dt>
+<dd>
+<dl>
+Assignment operator.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Requirement c</code>
+</dt>
+<dd>Reference to a Requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>State variables are changed using copy.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>A requirement that is a copy of c.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  incrementHas</code>
+</dt>
+<dd>
+<dl>
+Deal with a course that satisfies a requirement.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Has is incremented by one and satisfied is updated.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  decrementHas</code>
+</dt>
+<dd>
+<dl>
+Opposite of incrementHas
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Has is decremented by one and satisfied is updated.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> string getName</code>
+</dt>
+<dd>
+<dl>
+Get name of requirement.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Return name.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> int getNeeded</code>
+</dt>
+<dd>
+<dl>
+Get number of requirements needed.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Return needed.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> int getHas</code>
+</dt>
+<dd>
+<dl>
+Get number of requirements had.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Return has.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> bool getSatisfied</code>
+</dt>
+<dd>
+<dl>
+Check whether requirement is satisfied.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Return satisfied.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  setName</code>
+</dt>
+<dd>
+<dl>
+Set name.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>New name.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Name is set to str.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  setNeeded</code>
+</dt>
+<dd>
+<dl>
+Set number of requirements needed.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>int n</code>
+</dt>
+<dd>New number needed.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Needed is set to n.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>No return value.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> friend bool ==</code>
+</dt>
+<dd>
+<dl>
+Equal to operator. 
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Requirement l</code>
+</dt>
+<dd>Reference to Requirement.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>const Requirement r</code>
+</dt>
+<dd>Reference to Requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Return true if requirements are identical.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> friend bool !=</code>
+</dt>
+<dd>
+<dl>
+Not equal to operator.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>Requirement l</code>
+</dt>
+<dd>Reference to Requirement.</dd>
+</p>
+<p>
+<dt class="arg">
+<code>Requirement r</code>
+</dt>
+<dd>Reference to Requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Return true if requirements are not identical.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> virtual void getData</code>
+</dt>
+<dd>
+<dl>
+Writes out data about requirements satisfied.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>ostream os</code>
+</dt>
+<dd>Reference to ostream.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>name, need, has, satisfied written out to os.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>os.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> virtual void display</code>
+</dt>
+<dd>
+<dl>
+Couts data about requirements satisfied.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Couts given data.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+</dl>
+</dd>
+</p>
+</dl>
+
+</dd>
+<dt>
+<hr/>
+</dt>
+<dd/>
+</p>
+</dl>
+
+</div>
+</body>
+</html>

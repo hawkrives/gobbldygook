@@ -1,0 +1,36 @@
+Name = AsianStudies
+Department = ASIAN
+
+# Requirements
+
+## IDApproachesToAsia
+needed = 1
+validCourses = ASIAN 275
+
+## HumanRightsAsianContext
+needed = 1
+validCourses = ASIAN 397
+
+## Semester in Asia
+needed = 1
+validCourses = ASIAN 399
+
+## Electives
+needed = 1
+validCourses = ART 259, ASIAN 121, ASIAN 156, ASIAN 235, ASIAN 268, ASIAN 270, ASIAN 310, ECON 238, HIST 250, HIST 251, HIST 252, HIST 345
+
+
+# Sets
+## Chinese
+needed = 2
+validCourses = CHIN 231, CHIN 232, CHIN 251, CHIN 252, CHIN 300, CHIN 351
+
+## Japanese
+needed = 2
+validCourses = JAPAN 231, JAPAN 232, JAPAN 251, JAPAN 252, JAPAN 300
+
+
+# Special
+## Language
+needed = 1
+validSets = Chinese, Japanese

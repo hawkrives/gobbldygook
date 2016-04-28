@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE spec SYSTEM "http://www.cs.stolaf.edu/lib/SpecML/SpecML.dtd">
+<?xml-stylesheet
+   href="http://www.cs.stolaf.edu/lib/SpecML/SpecMLToHTML.xsl"
+   type="text/xsl"?>
+
+<spec>
+<title>The Major Class Specification</title>
+<header>This class models a major at St Olaf College.</header>
+<credits>Xandra Best. Wednesday, May 15, 2013</credits>
+
+<class name="Major, Friend Class: Concentration">
+
+<nosuperclass/>
+
+<variables>
+<var name="name" type="string">Name of major.</var>
+<var name="department" type="Department">Associated department of major.</var>
+<var name="requirements" type="vector of MajorRequirement">Regular requirements in major.</var>
+<var name="specialRequirements" type="vector of SpecialRequirement">Special requirements in major.</var>
+<var name="setRequirements" type="vector of MajorRequiremnet">Regular requirements in Special requirements.</var>
+</variables>
+
+<constructors-list>
+
+<constructor>
+<desc>Default constructor.</desc>
+<noarguments />
+<statechange>This instance of Major is initialized by setting state varible name to "None" and department to "NONE".</statechange>
+</constructor>
+
+<constructor>
+<desc>Regular constructor.</desc>
+<arguments>
+<arg name="str" type="string">Name of major.</arg>
+</arguments>
+<statechange>This instance of Major is initialized by calling init.</statechange>
+</constructor>
+
+<constructor>
+<desc>Copy constructor.</desc>
+<arguments>
+<arg name="c" type="const Major">Reference to a major.</arg>
+</arguments>
+<statechange>This instance of Major is initialized as a copy of c by calling copy.</statechange>
+</constructor>
+
+</constructors-list>
+
+<methods-list>
+
+<method name="copy">
+<desc>Creates a copy of another Major</desc>
+<arguments>
+<arg name="c" type="const Major">Reference to a major.</arg>
+</arguments>
+<statechange>No state change.</statechange>
+<return>An exact copy of Major c.</return>
+</method>
+
+<method name="init" visibility="private">
+<desc>Initializes instance of Major.</desc>
+<arguments>
+<arg name="record" type="vector of string">A group of majors.</arg>
+</arguments>
+<statechange>Instances of Major are initialized.</statechange>
+</method>
+
+<method name="=">
+<desc>Assignment operator.</desc>
+<arguments>
+<arg name="c" type="const Major">Reference to a major.</arg>
+</arguments>
+<statechange>No state change.</statechange>
+<return>Reference to c.</return>
+</method>
+
+<method name="getData" returntype="ostream">
+<desc>Writes out data.</desc>
+<arguments>
+<arg name="os" type="ostream">Reference to ostream.</arg>
+</arguments>
+<statechange>Name is read out to ostream.</statechange>
+<return>os is returned.</return>
+</method>
+
+<method name="display">
+<desc>Couts name.</desc>
+<noarguments />
+<statechange></statechange>
+<return>Couts name of major.</return>
+</method>
+
+<method name="getSpecialRequirement" returntype="SpecialRequirement">
+<desc>Searches through requirement vectors and returns relevant pointer.</desc>
+<arguments>
+<arg name="str" type="string">Name of special requirement.</arg>
+</arguments>
+<statechange>No state change.</statechange>
+<return>Pointer to the SpecialRequirement object.</return>
+</method>
+
+<method name="getMajorRequirement" returntype="MajorRequirement">
+<desc>Searches through requirement vectors and returns relevant pointer.</desc>
+<arguments>
+<arg name="str" type="string">Name of major requirement.</arg>
+</arguments>
+<statechange>No state change.</statechange>
+<return>Pointer to the MajorRequirement object.</return>
+</method>
+
+<method name="getSetRequirement" returntype="SetRequirement">
+<desc>Searches through requirement vectors and returns relevant pointer.</desc>
+<arguments>
+<arg name="str" type="string">Name of set requirement.</arg>
+</arguments>
+<statechange>No state change.</statechange>
+<return>Pointer to the SetRequirement object.</return>
+</method>
+
+</methods-list>
+
+</class>
+
+</spec>

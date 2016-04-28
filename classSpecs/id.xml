@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE spec SYSTEM "http://www.cs.stolaf.edu/lib/SpecML/SpecML.dtd">
+<?xml-stylesheet
+href="http://www.cs.stolaf.edu/lib/SpecML/SpecMLToHTML.xsl"
+type="text/xsl"?>
+
+<spec>
+	<title>The ID Class Specification</title>
+	<header>This class models a way to identifify a single course.</header>
+	<credits>Hawken Rives. Thursday, May 16, 2013</credits>
+
+	<class name="ID">
+
+		<nosuperclass/>
+
+		<variables>
+			<var name="departments" type="vector&lt;Department&gt;">Vector of departments, used essentially to store the various names of departments.</var>
+			<var name="number" type="int">The number associated with a course.</var>
+			<var name="section" type="string">The section associated with a course.</var>
+		</variables>
+
+		<constructors-list>
+
+			<constructor>
+				<desc>Default constructor.</desc>
+				<noarguments/>
+				<statechange>ID object is initialized by calling ID::init with a blank department, a zero for the section, and an empty string for the section.</statechange>
+			</constructor>
+
+			<constructor>
+				<desc>Copy constructor.</desc>
+				<arguments>
+					<arg name="c" type="const ID&amp;">The object to copy.</arg>
+				</arguments>
+				<statechange>Calls ID::copy and passes c along.</statechange>
+			</constructor>
+
+			<constructor>
+				<desc>Regular constructor.</desc>
+				<arguments>
+					<arg name="str" type="string">A string containing the ID to parse.</arg>
+				</arguments>
+				<statechange>Parses a string and assigns various parts to various variables.</statechange>
+			</constructor>
+
+			<constructor>
+				<desc>Regular constructor.</desc>
+				<arguments>
+					<arg name="dn" type="string">A string containing part of the ID to parse, namely the department and number.</arg>
+					<arg name="s" type="string">A string containing part of the ID to parse, namely the section.</arg>
+				</arguments>
+				<statechange>Passes the concatenated result of (dn + s) to the single string constuctor.</statechange>
+			</constructor>
+
+			<constructor>
+				<desc>Regular constructor.</desc>
+				<arguments>
+					<arg name="s1" type="string">A string containing part of the ID to parse, namely the department.</arg>
+					<arg name="s2" type="string">A string containing part of the ID to parse, namely the number.</arg>
+					<arg name="s3" type="string">A string containing part of the ID to parse, namely the section.</arg>
+				</arguments>
+				<statechange>Passes the concatenated result of (d + n + s) to the single string constuctor.</statechange>
+			</constructor>
+
+			<constructor>
+				<desc>Regular constructor.</desc>
+				<arguments>
+					<arg name="d" type="Department">A Department containing the department for the identifier.</arg>
+					<arg name="n" type="int">An integer containing a number for the identifier.</arg>
+					<arg name="s" type="string">A string containing the section for the identifier.</arg>
+				</arguments>
+				<statechange>Calls ID::init and passes along d, n, and s.</statechange>
+			</constructor>
+
+		</constructors-list>
+
+		<methods-list>
+
+			<method name="init" returntype="void">
+				<desc>Assigns things to their proper places within the class.</desc>
+				<arguments>
+					<arg name="d" type="Department">The department of the ID.</arg>
+					<arg name="n" type="int">The number of the ID.</arg>
+					<arg name="s" type="string">The section of the ID.</arg>
+				</arguments>
+				<statechange>Creates the ID.</statechange>
+				<return>No return value.</return>
+			</method>
+
+			<method name="copy" returntype="void">
+				<desc>Copies things to their proper places within the class.</desc>
+				<arguments>
+					<arg name="c" type="const ID&amp;">The ID object to copy from.</arg>
+				</arguments>
+				<statechange>Creates a copy of c.</statechange>
+				<return>No return value.</return>
+			</method>
+
+			<method name="=" returntype="ID &amp;">
+				<desc>Assignment operator.</desc>
+				<arguments>
+					<arg name="c" type="const ID&amp;">Reference to an ID.</arg>
+				</arguments>
+				<statechange>Calls ID::copy</statechange>
+				<return>Return the ID.</return>
+			</method>
+
+			<method name="getDepartment" returntype="Department">
+				<desc>Returns the department.</desc>
+				<arguments>
+					<arg name="i" type="int">The index of Department, in case there are two.</arg>
+				</arguments>
+				<statechange>No state change.</statechange>
+				<return>Department</return>
+			</method>
+
+			<method name="getDepartment_const" returntype="const Department">
+				<desc>Returns the department.</desc>
+				<arguments>
+					<arg name="i" type="int">The index of Department, in case there are two.</arg>
+				</arguments>
+				<statechange>No state change.</statechange>
+				<return>const Department</return>
+			</method>
+
+			<method name="getNumber" returntype="int">
+				<desc>Returns the number.</desc>
+				<noarguments/>
+				<statechange>No state change.</statechange>
+				<return>int</return>
+			</method>
+
+			<method name="getSection" returntype="string">
+				<desc>Returns the section.</desc>
+				<noarguments/>
+				<statechange>No state change.</statechange>
+				<return>string</return>
+			</method>
+
+			<method name="==" returntype="friend bool">
+				<desc>Equal to operator.</desc>
+				<arguments>
+					<arg name="i1" type="const ID&amp;">Reference to ID.</arg>
+					<arg name="i2" type="const ID&amp;">Reference to ID.</arg>
+				</arguments>
+				<statechange>No state change.</statechange>
+				<return>True if state variables are identical.</return>
+			</method>
+
+			<method name="!=" returntype="friend bool">
+				<desc>Not equal to operator.</desc>
+				<arguments>
+					<arg name="i1" type="ID&amp;">Reference to ID.</arg>
+					<arg name="i2" type="ID&amp;">Reference to ID.</arg>
+				</arguments>
+				<statechange>No state change.</statechange>
+				<return>True if state variables are not identical.</return>
+			</method>
+
+			<method name="&lt;" returntype="friend bool">
+				<desc>Not equal to operator.</desc>
+				<arguments>
+					<arg name="i1" type="const ID&amp;">Reference to ID.</arg>
+					<arg name="i2" type="const ID&amp;">Reference to ID.</arg>
+				</arguments>
+				<statechange>No state change.</statechange>
+				<return>True if i1's state variables are less than i2's state variables.</return>
+			</method>
+
+			<method name="getData" returntype="ostream">
+				<desc>Reads in data from ostream.</desc>
+				<arguments>
+					<arg name="os" type="ostream">Reference to ostream.</arg>
+				</arguments>
+				<statechange>Writes department, number, and section into ostream.</statechange>
+				<return>Returns reference to os.</return>
+			</method>
+
+			<method name="display">
+				<desc>Displays data related to IDs.</desc>
+				<noarguments/>
+				<statechange>No state change.</statechange>
+				<return>Cout data.</return>
+			</method>
+
+		</methods-list>
+
+	</class>
+
+</spec>

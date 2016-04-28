@@ -1,0 +1,16 @@
+Name = Statistics
+Department = STAT
+
+
+#Requirements
+##StatisticalModeling
+needed = 1
+validCourses = STAT 272
+
+##AdvancedStatisticalModeling
+needed = 1
+validCourses = STAT 316
+
+##Electives
+needed = 2
+validCourses = CSCI 125, ECON 385, MATH 262, PSYCH 230, SOAN 371, STAT 282, STAT 298, STAT 322, STAT 398

@@ -1,0 +1,45 @@
+%YAML 1.1
+---
+name: Physics
+dept: PHYS
+
+requirements:
+    MathPrerequisites:
+        description: Math Prerequisites
+        needed: 4
+        valid: [MATH 126, MATH 128, MATH 220, MATH 226, MATH 230]
+
+    AnalyticalPhysics:
+        description: Analytical Physics
+        needed: 3
+        valid: [PHYS 130, PHYS 131, PHYS 132, PHYS 232]
+
+    ModernPhysics:
+        description: Modern Physics
+        needed: 1
+        valid: [PHYS 244]
+
+    ClassicalMechanics:
+        description: Classical Mechanics
+        needed: 1
+        valid: [PHYS 374]
+
+    MaxwellsEquations:
+        description: Maxwell's Equations
+        needed: 1
+        valid: [PHYS 375]
+
+    QuantumMechanics:
+        description: Quantum Mechanics
+        needed: 2
+        valid: [PHYS 376, PHYS 386]
+
+    Elective:
+        description: Electives
+        needed: 1
+        valid: [
+            PHYS 123, PHYS 124, PHYS 125, PHYS 154,
+            PHYS 245, PHYS 246, PHYS 252, PHYS 294,
+            PHYS 298, PHYS 379, PHYS 390, PHYS 392,
+            PHYS 394, PHYS 396, PHYS 398, PHYS 399
+        ]
