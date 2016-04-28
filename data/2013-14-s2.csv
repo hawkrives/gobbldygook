@@ -1,0 +1,933 @@
+St,Course #,S,L,Course Name,_,CR ,PN,GE Reqs,Meeting Time(s),Location(s),Instructor(s)
+O,AFAM 231,,S,Sem: Africa/Americas,,1.00 ,N,ALS-L MCG,T 0935-1100 Th 0930-1050,TOH 110 TOH 110,"Iddrisu, Abdulai"
+O,AFAM 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,AFAM 298,,,IS/,,1.00 ,N,,,,Staff
+O,AFAM 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,AFAM 398,,,IR/,,1.00 ,N,,,,Staff
+O,ALSO 100,,T,Top: Beginning Arabic I Prerequisite: Permission of instructor required to register.,,1.00 ,N,,MWF 0200-0255PM,,"Debska-McWilliams, Renata"
+O,ALSO 101,,T,Top: Beginning Arabic II Prerequisite: completion of ALSO 100 or permission of the instructor.,,1.00 ,N,,MWF 1255-0150PM,TOH 153,"Debska-McWilliams, Renata"
+O,ALSO 103,,T,Top: Beginning Korean II Prerequisite: completion of ALSO 102 or permission of the instructor.,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,TOH 153 TOH 153,"Debska-McWilliams, Renata"
+O,ALSO 104,,T,Beginning Italian I Prerequisite: Permission of instructor required to register.,,1.00 ,N,,MWF 1045-1140,,"Debska-McWilliams, Renata"
+O,ALSO 105,,T,Beginning Italian II Prerequisite: Permission of instructor required to register.,,1.00 ,N,,MWF 1150-1245PM,,"Debska-McWilliams, Renata"
+O,ALSO 201,,T,Top: Intermed Arabic II Prerequisite: completion of ALSO 200 or permission of the instructor.,,1.00 ,N,,T 0800-0925 Th 0800-0920,TOH 153 TOH 153,"Debska-McWilliams, Renata"
+O,AMCON 102,A,,Dem Vistas: 1800-1900 Open to American Conversations students only.,,1.00 ,N,FYW HWC,MWF 1255-0150PM,TOH 212,"Allister, Mark"
+O,AMCON 102,B,,Dem Vistas: 1800-1900 Open to American Conversations students only.,,1.00 ,N,FYW HWC,MWF 1255-0150PM,TOH 214,"Fure-Slocum, Eric J."
+O,AMCON 202,A,,Pur/Happiness: 1920-Pres. Open to American Conversations students only.,,1.00 ,N,ALS-A HBS ORC WRI,MWF 1150-1245PM,OM 110,"Wells, Colin"
+O,AMCON 202,B,,Pur/Happiness: 1920-Pres. Open to American Conversations students only.,,1.00 ,N,ALS-A HBS ORC WRI,MWF 1150-1245PM,OM 140,"Kutulas, Judy"
+O,AMST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,AMST 298,,,IS/,,1.00 ,N,,,,Staff
+O,AMST 301,,S,Sem: US Gender/Sex,,1.00 ,N,,MWF 1150-1245PM,HH 516,"Titus, Mary"
+O,AMST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,AMST 398,,,IR/,,1.00 ,N,,,,Staff
+O,AR/AS 260,,,Arts of Japan,,1.00 ,N,ALS-A MCG,MWF 0200-0255PM,,"Kucera, Karil J."
+O,ARMS 251,,,Top: Multiculturalism/Ed,,1.00 ,N,MCD,MWF 1045-1140,TOH 214,"Kelly, Maria L."
+O,ARMS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ARMS 298,,,IS/,,1.00 ,N,,,,Staff
+O,ARMS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ARMS 398,,,IR/,,1.00 ,N,,,,Staff
+O,ART 102,A,,Foundation 2-D Media This course has class year limits.,,1.00 ,N,ALS-A,MWF 0800-1000,DC 216,"Ewald, Jill"
+O,ART 102,B,,Foundation 2-D Media This course has class year limits.,,1.00 ,N,ALS-A,MWF 1045-1245PM,DC 216,"Weeks, Michon"
+O,ART 102,C,,Foundation 2-D Media,,1.00 ,N,ALS-A,MWF 1255-0255PM,,"Weeks, Michon"
+O,ART 103,,,Foundation 3-D Media This course has class year limits.,,1.00 ,N,ALS-A,T 0800-1100 Th 0800-1050,DC 106 DC 106,"Dell, Irve"
+O,ART 104,,,Foundation New Media This course has class year limits.,,1.00 ,N,ALS-A,MWF 0800-1000,DC 100,"Nelson, Peter B."
+O,ART 151,A,,Intro/Art History II This course has class-year limits.,,1.00 ,N,ALS-A HWC ORC,MWF 1045-1140,DC 305,"Tradowsky, Christopher"
+O,ART 151,B,,Intro/Art History II This course has class-year limits.,,1.00 ,N,ALS-A HWC ORC,MWF 1150-1245PM,DC 305,"Rohn, Matthew"
+O,ART 205,,,Photography,,1.00 ,N,ALS-A,T 1145-0245PM Th 1245-0345PM,DC 102 DC 102,"Ojala, Margaret"
+O,ART 207,,,Ceramics,,1.00 ,N,ALS-A,T 1145-0245PM Th 1245-0345PM,,"Gallas, Ron"
+O,ART 224,,,Sculpt: Metal Direct,,1.00 ,N,,T 1145-0245PM Th 1245-0345PM,DC 105 DC 105,"Dell, Irve"
+O,ART 226,,,Printmkg: Relief/Litho,,1.00 ,N,,MWF 1045-1245PM,DC 212,"Saurer, John"
+O,ART 228,,,Animated Art,,1.00 ,N,,MWF 1150-0150PM,DC 100,"Nelson, Peter B."
+O,ART 234,,,Intermediate Ceramics,,1.00 ,N,,T 0800-1100 Th 0800-1050,DC 115 DC 115,"Gallas, Ron"
+O,ART 238,,,Intermed Photography,,1.00 ,N,,T 0800-1100 Th 0800-1050,DC 102 DC 102,"Ojala, Margaret"
+O,ART 269,,,African Art History,,1.00 ,N,ALS-A MCG WRI,MWF 0200-0255PM,DC 204,"Tradowsky, Christopher"
+O,ART 277,,,Women in Art,,1.00 ,N,ALS-A,T 0120-0245PM Th 0215-0335PM,,"Tradowsky, Christopher"
+O,ART 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ART 298,,,IS/,,1.00 ,N,,,,Staff
+O,ART 298,A,,IS/,,1.00 ,N,,,,Staff
+O,ART 298,B,,IS/,,1.00 ,N,,,,Staff
+O,ART 343,,,Sr Studies/Studio Art Open to Seniors only.,,1.00 ,N,,MW 0100-0300PM M 0700-0900PM,,"Nelson, Peter B. Griep, Mary Saurer, John"
+O,ART 350,,,Methods of Art Hist,,1.00 ,N,ORC WRI,M 0700-1000PM,,"Kucera, Karil J."
+O,ART 370,,,Issues Art Criticism,,1.00 ,N,EIN,T 1145-0110PM Th 1245-0205PM,,"Rohn, Matthew"
+O,ART 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ART 398,,,IR/,,1.00 ,N,,,,Staff
+O,ART 398,A,,IR/,,1.00 ,N,,,,Staff
+O,AS/HI 251,,,Modern China,,1.00 ,N,MCG,MWF 0200-0255PM,HH 317,"Entenmann, Robert"
+O,AS/HI 251,,F,FLC - Chinese,,0.25 ,N,,,,"Entenmann, Robert"
+O,AS/HI 252,,,Japanese Civilization,,1.00 ,N,MCG,T 0120-0245PM Th 0215-0335PM,,"Entenmann, Robert"
+O,AS/HI 345,,S,Sem: East Asia,,1.00 ,N,WRI,T 0800-0925 Th 0800-0920,,"Entenmann, Robert"
+O,AS/PH 251,,,Asian Philosophy,,1.00 ,N,MCG,T 0935-1100 Th 0930-1050,OM 310 OM 310,"Rambachan, Anantanand"
+O,AS/RE 254,,,Jesus on the Indian Road,,1.00 ,N,BTS-T,MWF 0200-0255PM,OM 10,"Lagerquist, L. DeAne"
+O,AS/RE 256,,,Religions China/Japan,,1.00 ,N,MCG,MWF 1150-1245PM,,"Reed, Barbara"
+O,ASIAN 156,,,Cont China Thru Film Students must be available for film viewing on Mondays 7-9 p.m.,,1.00 ,N,ALS-A MCG,T 1145-0110PM Th 1245-0205PM,,"Wan, Pin Pin"
+O,ASIAN 220,,,AsiaCon3:InterpretJourney Registration restricted to students in the Asian Con program.,,1.00 ,N,ALS-A ALS-L HBS MCG ORC WRI,T 1145-0110PM Th 1245-0205PM,HH 317 HH 317,"Tegtmeyer Pak, Katherine S. Wong, Ka F."
+O,ASIAN 235,,,Mod Japanese Lit-Tr,,1.00 ,N,ALS-L MCG,MWF 1045-1140,TOH 210,"Bridges IV, William H."
+O,ASIAN 235,,F,FLC - Japanese,,0.25 ,N,,,,"Bridges IV, William H."
+O,ASIAN 236,,,Chinese Lit-Tr,,1.00 ,N,ALS-L MCG,T 0120-0245PM Th 0215-0335PM,,"Shih, Hsiang-Lin"
+O,ASIAN 275,,,ID Approaches to Asia,,0.25 ,N,,M 0700-0900PM,RML 250,"MacPherson, Kristina"
+O,ASIAN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ASIAN 298,,,IS/,,1.00 ,N,,,,Staff
+O,ASIAN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ASIAN 398,,,IR/,,1.00 ,N,,,,Staff
+O,BI/ES 226,,,Conservation Biology Prerequisite: one natural science course.,,1.00 ,N,IST,MWF 1150-1245PM,,"Angell, Diane K."
+O,BIO 121,,,"Biological Science Students in Bio 121 must also register for one lab Bio 121 AL, BL, or CL.",,1.00 ,N,IST SED,MWF 1150-1245PM,RNS 410,Staff
+O,BIO 121,A,L,    Biological Science Lab,,0.00 ,N,,M 0200-0400PM,RNS 454,Staff
+O,BIO 121,B,L,    Biological Science Lab,,0.00 ,N,,T 0900-1100,RNS 454,Staff
+O,BIO 121,C,L,    Biological Science Lab,,0.00 ,N,,T 0120-0320PM,RNS 454,Staff
+O,BIO 150,A,,Biodiversity Foundations,,1.00 ,N,IST SED,MWF 1045-1140,,"Angell, Diane K."
+O,BIO 150,B,,Biodiversity Foundations,,1.00 ,N,IST SED,MWF 0905-1000,,"Porterfield, Jean C."
+O,BIO 150,A,L,    Biodiversity Found Lab,,0.00 ,N,,T 0800-1100PM,,"Angell, Diane K."
+O,BIO 150,B,L,    Biodiversity Found Lab,,0.00 ,N,,T 0120-0420PM,,"Angell, Diane K."
+O,BIO 150,C,L,    Biodiversity Found Lab,,0.00 ,N,,W 0100-0400PM,,"Porterfield, Jean C."
+O,BIO 150,D,L,    Biodiversity Found Lab,,0.00 ,N,,Th 0215-0515PM,,"Porterfield, Jean C."
+O,BIO 227,A,,Cell Biology Students in Bio 227A must also register for one lab Bio 227 AL or BL.,,1.00 ,N,,MWF 0905-1000,,"Giannini, John"
+O,BIO 227,B,,Cell Biology Students in Bio 227B must also register for one lab Bio 227 CL or DL.,,1.00 ,N,,MWF 1045-1140,,"Demas, James"
+O,BIO 227,A,L,    Cell Biology Lab,,0.00 ,N,,T 0800-1100PM,,"Giannini, John"
+O,BIO 227,B,L,    Cell Biology Lab,,0.00 ,N,,T 0120-0420PM,,"Giannini, John"
+O,BIO 227,C,L,    Cell Biology Lab,,0.00 ,N,,Th 0800-1100,,"Demas, James"
+O,BIO 227,D,L,    Cell Biology Lab,,0.00 ,N,,Th 1245-0345PM,,"Demas, James"
+O,BIO 231,,,"Microbiology Students in Bio 231 must also register for one lab Bio 231 AL, BL, or CL. This course has class-year limits.",,1.00 ,N,,MWF 1045-1140,RNS 150,"Johnson, Theodore"
+O,BIO 231,A,L,    Microbiology Lab,,0.00 ,N,,T 0120-0420PM,RNS 398,"Johnson, Theodore"
+O,BIO 231,B,L,    Microbiology Lab,,0.00 ,N,,W 0200-0500PM,RNS 398,"Johnson, Theodore"
+O,BIO 231,C,L,    Microbiology Lab,,0.00 ,N,,Th 1245-0345PM,RNS 398,"Johnson, Theodore"
+O,BIO 233,,,"Intermediate Genetics Students in Bio 233A must also register for one lab Bio 233 AL, BL or CL. This course has class-year limits.",,1.00 ,N,,MWF 1150-1245PM,RNS 410,"Bowers, Lisa M."
+O,BIO 233,A,L,    Intermediate Genetics Lab,,0.00 ,N,,W 0200-0500PM,RNS 394,"Bowers, Lisa M."
+O,BIO 233,B,L,    Intermediate Genetics Lab,,0.00 ,N,,Th 0800-1100,RNS 398,"Bowers, Lisa M."
+O,BIO 233,C,L,    Intermediate Genetics Lab,,0.00 ,N,,Th 0215-0515PM,RNS 394,"Bowers, Lisa M."
+O,BIO 243,,,"Human Anatomy & Physiol Students in Bio 243 must also register for one lab Bio 243 AL, BL or CL. This course has class-year limits.",,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,RNS 210 RNS 210,"Van Wylen, David"
+O,BIO 243,A,L,    Human Anatomy & Physiol L,,0.00 ,N,,W 0200-0500PM,RNS 254,"Van Wylen, David"
+O,BIO 243,B,L,    Human Anatomy & Physiol L,,0.00 ,N,,Th 0800-1100,,"Van Wylen, David"
+O,BIO 243,C,L,    Human Anatomy & Physiol L,,0.00 ,N,,Th 0215-0515PM,RNS 254,"Van Wylen, David"
+O,BIO 252,,,Plant Morphology Students in Bio 252 must also register for one lab Bio 252 AL or BL. This course has class-year limits.,,1.00 ,N,WRI,T 0800-0925 Th 0800-0920,RNS 190 RNS 190,"Umbanhowar, Charles Jr."
+O,BIO 252,A,L,    Plant Morphology Lab,,0.00 ,N,,M 0100-0400PM,RNS 455,"Umbanhowar, Charles Jr."
+O,BIO 252,B,L,    Plant Morphology Lab,,0.00 ,N,,T 0120-0420PM,RNS 455,"Umbanhowar, Charles Jr."
+O,BIO 261,,,Ecological Principles Students in Bio 261 must also register for one lab Bio 261 AL or BL.,,1.00 ,N,SED,MWF 0800-0855,RNS 290,"Swift, Michael"
+O,BIO 261,A,L,    Ecological Principles Lab,,0.00 ,N,,Th 0800-1100,RNS 440,"Swift, Michael"
+O,BIO 261,B,L,    Ecological Principles Lab,,0.00 ,N,,Th 0215-0515PM,RNS 440,"Swift, Michael"
+O,BIO 266,,,"Comp Vertebrate Anat Students in Bio 266 must also register for one lab Bio 266 AL, BL or CL.",,1.00 ,N,,MWF 0800-0855,RNS 290,"Kermott, Louis Henry"
+O,BIO 266,A,L,    Comp Vertebrate Anat Lab,,0.00 ,N,,M 0100-0400PM,RNS 254,"Kermott, Louis Henry"
+O,BIO 266,B,L,    Comp Vertebrate Anat Lab,,0.00 ,N,,T 0800-1100,RNS 254,"Kermott, Louis Henry"
+O,BIO 266,C,L,    Comp Vertebrate Anat Lab,,0.00 ,N,,T 0120-0420PM,,"Kermott, Louis Henry"
+O,BIO 291,,T,Top: India Prerequisite: Permission of instructor.,,0.25 ,N,,,,"Walter, Anne"
+O,BIO 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,BIO 298,,,IS/,,1.00 ,N,,,,Staff
+O,BIO 298,A,,IS/,,1.00 ,N,,,,Staff
+O,BIO 298,B,,IS/,,1.00 ,N,WRI,,,Staff
+O,BIO 341,,,Advanced Cell Biology Students in Bio 341 must also register for one lab Bio 341 AL or BL.,,1.00 ,N,WRI,MWF 0905-1000,,"Walter, Anne"
+O,BIO 341,A,L,    Advanced Cell Biology Lab,,0.00 ,N,,Th 0800-1100,,"Walter, Anne"
+O,BIO 341,B,L,    Advanced Cell Biology Lab,,0.00 ,N,,Th 0215-0515PM,,"Walter, Anne"
+O,BIO 372,,,Developmental Biology,,1.00 ,N,WRI,T 0935-1100 Th 0930-1050,,"Cole, Eric"
+O,BIO 372,,L,    Developmental Biology Lab,,0.00 ,N,,W 0200-0500PM,,"Cole, Eric"
+O,BIO 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,BIO 396,,,Research:,,1.00 ,N,,Th 0800-1050,,"Schade, John D."
+O,BIO 398,,,IR/,,1.00 ,N,,,,Staff
+O,BIO 398,A,,IR/,,1.00 ,N,,,,Staff
+O,BMOLS 201,,,Expl Biomolecular Sci,,0.25 ,Y,,Th 0700-0900PM,RNS 400,Staff
+O,BMOLS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,BMOLS 298,,,IS/,,1.00 ,N,,,,Staff
+O,BMOLS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,BMOLS 398,,,IR/,,1.00 ,N,,,,Staff
+O,CH/BI 227,,,Integrated Chem/Bio III Students in CH/BI 227 must also register for lab CH/BI 227 AL or BL. Open only to those students who have completed CH/BI 126.,,1.00 ,N,IST SED,MWF 1150-1245PM,RNS 310,"Listenberger, Laura"
+O,CH/BI 227,A,L,    Integr Chem/Bio III Lab,,0.00 ,N,,T 0800-1100,,"Listenberger, Laura"
+O,CH/BI 227,B,L,    Integr Chem/Bio III Lab,,0.00 ,N,,T 1145-0245PM,,"Listenberger, Laura"
+O,CHEM 107,,,Forensic Sci With Lab Students in Chem 107 must also register for Chem 107 lab.,,1.00 ,N,IST SED,MWF 1045-1140,RNS 310,"Beussman, Douglas J."
+O,CHEM 107,,L,    Forensic Science Lab,,0.00 ,N,,M 0200-0500PM,RNS 454,"Beussman, Douglas J."
+O,CHEM 111,,,Chemistry & the World Students in Chem 111 must also register for lab Chem 111 L.,,1.00 ,N,IST SED,T 1145-0110PM Th 1245-0205PM,RNS 390 RNS 390,"Terrell, Cassidy R."
+O,CHEM 111,,L,    Chemistry & the World Lab,,0.00 ,N,,M 0200-0500PM,RNS 355,"Terrell, Cassidy R."
+O,CHEM 126,A,,"Chemical Reactions Students in Chem 126A, B, C, D, or E must also register for one lab Chem 126 AL, BL, CL, DL, EL, FL, GL, HL, or IL.",,1.00 ,N,SED,MWF 0800-0855,RNS 390,Staff
+O,CHEM 126,B,,"Chemical Reactions Students in Chem 126A, B, C, D, or E must also register for one lab Chem 126 AL, BL, CL, DL, EL, FL, GL, HL, or IL.",,1.00 ,N,SED,T 0935-1100 Th 0930-1050,RNS 390 RNS 390,"Fogarty, Keir"
+O,CHEM 126,C,,"Chemical Reactions Students in Chem 126A, B, C, D, or E must also register for one lab Chem 126 AL, BL, CL, DL, EL, FL, GL, HL, or IL.",,1.00 ,N,SED,MWF 1045-1140,RNS 390,"Miessler, Gary"
+O,CHEM 126,D,,"Chemical Reactions Students in Chem 126A, B, C, D, or E must also register for one lab Chem 126 AL, BL, CL, DL, EL, FL, GL, HL, or IL.",,1.00 ,N,SED,MWF 1150-1245PM,RNS 390,"Abdella, Beth"
+O,CHEM 126,E,,"Chemical Reactions Students in Chem 126A, B, C, D, or E must also register for one lab Chem 126 AL, BL, CL, DL, EL, FL, GL, HL, or IL.",,1.00 ,N,SED,MWF 1255-0150PM,RNS 390,"Marlier, Elodie"
+O,CHEM 126,A,L,    Chem Reactions/Lab,,0.00 ,N,,M 0200-0500PM,RNS 350,"Abdella, Beth"
+O,CHEM 126,B,L,    Chem Reactions/Lab,,0.00 ,N,,T 0800-1100,RNS 350,"Marlier, Elodie"
+O,CHEM 126,C,L,    Chem Reactions/Lab,,0.00 ,N,,T 1145-0245PM,RNS 350,"Miessler, Gary"
+O,CHEM 126,D,L,    Chem Reactions/Lab,,0.00 ,N,,T 0300-0600PM,RNS 350,"Pearson, Wesley"
+O,CHEM 126,E,L,    Chemical Reactions Lab,,0.00 ,N,,W 1150-0250PM,RNS 350,"Walczak, Mary"
+O,CHEM 126,F,L,    Chem Reactions/Lab,,0.00 ,N,,Th 0800-1100,RNS 350,"Muth, Gregory W."
+O,CHEM 126,G,L,    Chem Reactions/Lab,,0.00 ,N,,Th 1250-0350PM,RNS 350,"Muth, Gregory W."
+O,CHEM 126,H,L,    Chemical Reactions Lab,,0.00 ,N,,Th 0300-0600PM,RNS 355,"Pearson, Wesley"
+O,CHEM 126,I,L,    Chemical Reactions Lab,,0.00 ,N,,W 0300-0600PM,RNS 350,"Pearson, Wesley"
+O,CHEM 248,A,,Organic Chemistry II Students in Chem 248 must also register for one Chem 254 lab.,,1.00 ,N,,MWF 0800-0855,RNS 310,"Pearson, Wesley"
+O,CHEM 248,B,,Organic Chemistry II Students in Chem 248 must also register for one Chem 254 lab.,,1.00 ,N,,MWF 0905-1000,RNS 310,"Kalyani, Dipannita"
+O,CHEM 248,C,,Organic Chemistry II Students in Chem 248 must also register for one Chem 254 lab.,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,RNS 310 RNS 310,"Roberts, William P."
+O,CHEM 254,A,L,    Synthesis Lab II,,0.25 ,Y,,M 0200-0500PM,RNS 340,"Kalyani, Dipannita"
+O,CHEM 254,B,L,    Synthesis Lab II,,0.25 ,Y,,T 0800-1100,RNS 340,"Roberts, William P."
+O,CHEM 254,C,L,    Synthesis Lab II This lab has been canceled.,,0.25 ,Y,,T 1145-0245PM,RNS 340,"Roberts, William P."
+O,CHEM 254,D,L,    Synthesis Lab II,,0.25 ,Y,,T 0300-0600PM,RNS 340,"Kalyani, Dipannita"
+O,CHEM 254,E,L,    Synthesis Lab II,,0.25 ,Y,,W 0200-0500PM,RNS 340,"Terrell, Cassidy R."
+O,CHEM 254,F,L,    Synthesis Lab II,,0.25 ,Y,,Th 0800-1100,RNS 340,"Terrell, Cassidy R."
+O,CHEM 254,G,L,    Synthesis Lab II,,0.25 ,Y,,Th 1250-0350PM,RNS 340,"Kalyani, Dipannita"
+O,CHEM 255,,,Analytical Chem Students in Chem 255 must also register for Chem 256 AL or BL.,,1.00 ,N,,T 0935-1100 Th 0930-1050,RNS 310 RNS 310,"Beussman, Douglas J."
+O,CHEM 256,A,L,    Analytical Lab,,0.25 ,Y,,T 0120-0520PM,RNS 446,"Beussman, Douglas J."
+O,CHEM 256,B,L,    Analytical Lab,,0.25 ,Y,,W 0100-0500PM,RNS 446,"Beussman, Douglas J."
+O,CHEM 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CHEM 298,,,IS/,,1.00 ,N,,,,Staff
+O,CHEM 298,A,,IS/,,1.00 ,N,,,,Staff
+O,CHEM 357,A,L,    Physical Lab,,0.25 ,Y,WRI,T 1145-0345PM,RNS 392,"Schwinefus, Jeffrey J."
+O,CHEM 357,B,L,    Physical Lab,,0.25 ,Y,WRI,W 0100-0500PM,RNS 392,"Fogarty, Keir"
+O,CHEM 371,,,Physical Chemistry Students in Chem 371 must also register for Chem 357 AL or BL.,,1.00 ,N,IST,T 0800-0925 Th 0800-0920,RNS 290 RNS 290,"Fogarty, Keir"
+O,CHEM 373,,,Experimental Biochem,,0.25 ,Y,,W 0100-0500PM,RNS 393,"Listenberger, Laura"
+O,CHEM 374,,L,    Adv Synthesis Lab,,0.25 ,Y,,T 0120-0520PM,,"Marlier, Elodie"
+O,CHEM 375,,L,    Advanced Lab,,0.25 ,Y,,,,Staff
+O,CHEM 379,,,Biochemistry I,,1.00 ,N,IST,MWF 1150-1245PM,RNS 310,"Muth, Gregory W."
+O,CHEM 385,,,Biochemistry II,,1.00 ,N,,MWF 1045-1140,RNS 435,"Terrell, Cassidy R."
+O,CHEM 386,,,Adv Inorganic Chem,,1.00 ,N,,MWF 1150-1245PM,RNS 435,"Miessler, Gary"
+O,CHEM 390,,S,Sem: Lit of Chemistry This course open to seniors only.,,0.25 ,Y,,M 0700-0900PM,RNS 316,Staff
+O,CHEM 391,,T,Top: Biophysical Chem,,1.00 ,N,,T 0800-0925 Th 0800-0920,RNS 316 RNS 316,"Schwinefus, Jeffrey J."
+O,CHEM 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CHEM 398,,,IR/,,1.00 ,N,,,,Staff
+O,CHEM 398,A,,IR/,,1.00 ,N,,,,Staff
+O,CHEM 398,B,,IR/,,1.00 ,N,,,,Staff
+O,CHIN 112,A,,"Beginning Chinese II Students in Chin 112A must also register for one lab Chin 112 AL, BL, or CL.",,1.00 ,N,,MWF 0905-1000,TOH 316,"Wong, Ka F."
+O,CHIN 112,B,,"Beginning Chinese II Students in Chin 112B must also register for one lab Chin 112 AL, BL, or CL.",,1.00 ,N,,MWF 1150-1245PM,TOH 316,"Wong, Ka F."
+O,CHIN 112,C,,"Beginning Chinese II Students in Chin 112A must also register for one lab Chin 112 AL, BL, or CL.",,1.00 ,N,,MWF 0200-0255PM,TOH 316,Staff
+O,CHIN 112,A,L,    Beginning Chinese II Lab,,0.00 ,N,,T 0935-1100,TOH 308,"Wong, Ka F."
+O,CHIN 112,B,L,    Beginning Chinese II Lab,,0.00 ,N,,T 1145-0110PM,TOH 316,"Wong, Ka F."
+O,CHIN 112,C,L,    Beginning Chinese II Lab,,0.00 ,N,,T 0120-0245PM,TOH 316,Staff
+O,CHIN 232,A,,Intermed Chinese II Students in Chinese 232A must also register for one lab Chinese 232AL or BL.,,1.00 ,N,FOL-C,MWF 1045-1140,TOH 316,"Shih, Hsiang-Lin"
+O,CHIN 232,B,,Intermed Chinese II Students in Chinese 232B must also register for one lab Chinese 232AL or BL.,,1.00 ,N,FOL-C,MWF 1255-0150PM,TOH 316,"Shih, Hsiang-Lin"
+O,CHIN 232,A,L,    Intermed Chinese II Lab,,0.00 ,N,,Th 0930-1050,,"Shih, Hsiang-Lin"
+O,CHIN 232,B,L,    Intermed Chinese II Lab,,0.00 ,N,,Th 0800-0920,,"Shih, Hsiang-Lin"
+O,CHIN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CHIN 298,,,IS/,,1.00 ,N,,,,Staff
+O,CHIN 302,,,Advanced Chinese II,,1.00 ,N,FOL-C,MWF 1255-0150PM,TOH 300,Staff
+O,CHIN 320,,,Special Topics in Chinese,,1.00 ,N,,MWF 0800-0855,TOH 300,Staff
+O,CHIN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CHIN 398,,,IR/,,1.00 ,N,,,,Staff
+O,CLASS 241,,,Greek & Roman Myth-Tr,,1.00 ,N,ALS-L,T 1145-0110PM Th 1245-0205PM,TOH 210 TOH 210,"Reece, Steve T."
+O,CLASS 243,,,Golden Age Greece-Tr,,1.00 ,N,ALS-L HWC,T 0800-0925 Th 0800-0920,,"Groton, Anne"
+O,CLASS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CLASS 298,,,IS/,,1.00 ,N,,,,Staff
+O,CLASS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CLASS 398,,,IR/,,1.00 ,N,,,,Staff
+O,CLASS 398,A,,IR/,,1.00 ,N,,,,Staff
+O,CSCI 121,A,,Principles Comp Sci,,1.00 ,N,AQR,MWF 1255-0150PM,,"Allen, Richard"
+O,CSCI 121,B,,Principles Comp Sci,,1.00 ,N,AQR,MWF 1045-1140,,"Brown, Richard"
+O,CSCI 251,,,Software Design This course has class-year limits. Students in CSCI 251 must also register for one lab CSCI 252 AL or BL.,,1.00 ,N,,MWF 0905-1000,RNS 203,"Hall-Holt, Olaf A."
+O,CSCI 252,A,L,    Software Design/Lab,,0.25 ,N,,W 0300-0500PM,RNS 203,"Hall-Holt, Olaf A."
+O,CSCI 252,B,L,    Software Design/Lab,,0.25 ,N,,Th 1245-0245PM,RNS 202,"Hall-Holt, Olaf A."
+O,CSCI 253,,,Algorithms/Data Struc,,1.00 ,N,,MWF 1150-1245PM,,"Hall-Holt, Olaf A."
+O,CSCI 263,,,Ethical Iss: Software Prerequisite: Completion of BTS-T or permission to instructor.,,1.00 ,N,EIN ORC,T 0935-1100 Th 0930-1050,RNS 203 RNS 203,"Huff, Charles"
+O,CSCI 276,,,Programming Languages,,1.00 ,N,,MWF 1045-1140,,"Allen, Richard"
+O,CSCI 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CSCI 298,,,IS/,,1.00 ,N,,,,Staff
+O,CSCI 390,,S,Sem: Senior Capstone,,1.00 ,N,WRI,T 1145-0110PM Th 1245-0205PM,,"Brown, Richard"
+O,CSCI 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CSCI 398,,,IR/,,1.00 ,N,,,,Staff
+O,DANCE 106,A,,Ballroom I (Men),,0.25 ,Y,ALS-A SPM,T 1005-1100 Th 0955-1050,DC Studio 1 DC Studio 1,"von Bibra, Anne"
+O,DANCE 106,B,,Ballroom I (Women),,0.25 ,Y,ALS-A SPM,T 1005-1100 Th 0955-1050,DC Studio 1 DC Studio 1,"von Bibra, Anne"
+O,DANCE 111,A,,Modern Dance I (.25),,0.25 ,Y,ALS-A SPM,MF 1045-1140,DC Studio 1,"Roberts, Anthony"
+O,DANCE 111,B,,Modern Dance I,,0.25 ,Y,ALS-A SPM,T 0200-0255PM Th 0240-0335PM,DC Studio 1 DC Studio 1,"Roberts, Anthony"
+O,DANCE 121,,,Ballet I,,0.25 ,Y,ALS-A SPM,T 1150-1245PM Th 1245-0140PM,DC Studio 2 DC Studio 2,"Klopchin, Heather J."
+O,DANCE 130,,,Advanced Beginning Ballet,,0.50 ,N,ALS-A SPM,T 0120-0245PM Th 0215-0335PM,DC Studio 2 DC Studio 2,"Klopchin, Heather J."
+O,DANCE 131,,,Advanced Beginning Ballet,,0.25 ,N,ALS-A SPM,T 0120-0245PM Th 0215-0335PM,DC Studio 2 DC Studio 2,"Klopchin, Heather J."
+O,DANCE 206,A,,Ballroom II (Men),,0.25 ,Y,ALS-A SPM,MW 0905-1000,DC Studio 1,"von Bibra, Anne"
+O,DANCE 206,B,,Ballroom II (Women),,0.25 ,Y,ALS-A SPM,MW 0905-1000,DC Studio 1,"von Bibra, Anne"
+O,DANCE 209,,,Intl Dance II,,0.25 ,Y,ALS-A SPM,T 0200-0255PM Th 0240-0335PM,DC Studio 3 DC Studio 3,"von Bibra, Anne"
+O,DANCE 210,,,Modern Dance II,,0.50 ,N,ALS-A SPM,T 0800-0925 Th 0800-0920,DC Studio 1 DC Studio 1,"Klopchin, Heather J."
+O,DANCE 211,,,Modern Dance II,,0.25 ,N,ALS-A SPM,T 0800-0925 Th 0800-0920,DC Studio 1 DC Studio 1,"Klopchin, Heather J."
+O,DANCE 220,,,Ballet II,,0.50 ,N,ALS-A SPM,T 0935-1100 Th 0930-1050,DC Studio 2 DC Studio 2,"Bader, Jennifer"
+O,DANCE 221,,,Ballet II,,0.25 ,N,ALS-A SPM,T 0935-1100 Th 0930-1050,DC Studio 2 DC Studio 2,"Bader, Jennifer"
+O,DANCE 241,,,Movement Improvisation,,0.25 ,N,SPM,MWF 1150-1245PM,DC Studio 1,"Saterstrom, Sheryl"
+O,DANCE 246,,,Dance in United States,,1.00 ,N,ALS-A MCD WRI,MWF 1255-0150PM,DC 305,"Klopchin, Heather J."
+O,DANCE 250,,,Modern Dance II:Technique,,0.50 ,N,ALS-A SPM,MWF 0200-0330PM,DC Studio 2,"Roberts, Anthony"
+O,DANCE 251,,,Modern Dance II:Technique,,0.25 ,N,ALS-A SPM,MWF 0200-0330PM,DC Studio 2,"Roberts, Anthony"
+O,DANCE 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,DANCE 298,,,IS/,,1.00 ,N,,,,Staff
+O,DANCE 301,,,Advance Body Moveable,,0.50 ,N,,T 0935-1100 Th 0930-1050,DC Studio 3 DC Studio 3,"Saterstrom, Sheryl"
+O,DANCE 310,,,Modern III,,0.50 ,N,ALS-A SPM,MWF 0200-0330PM,DC Studio 1,"Roberts, Janice"
+O,DANCE 311,,,Modern III,,0.25 ,N,ALS-A SPM,MWF 0200-0330PM,DC Studio 1,"Roberts, Janice"
+O,DANCE 320,,,Ballet III,,0.50 ,N,ALS-A SPM,T 0800-0925 Th 0800-0920,DC Studio 2 DC Studio 2,"Bader, Jennifer"
+O,DANCE 321,,,Ballet III,,0.25 ,N,ALS-A SPM,T 0800-0925 Th 0800-0920,DC Studio 2 DC Studio 2,"Bader, Jennifer"
+O,DANCE 374,,,Advanced Choreography,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,DC Studio 1 DC Studio 1,"Roberts, Janice"
+O,DANCE 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,DANCE 398,,,IR/,,1.00 ,N,,,,Staff
+O,ECON 121,A,,Principles of Econ,,1.00 ,N,HBS,MWF 1045-1140,HH 413,"Soderlind, Steve"
+O,ECON 121,B,,Principles of Econ,,1.00 ,N,HBS,MWF 1255-0150PM,HH 413,"Binder, Seth"
+O,ECON 121,C,,Principles of Econ,,1.00 ,N,HBS,MWF 0905-1000,,"Judge, Rebecca"
+O,ECON 121,D,,Principles of Econ,,1.00 ,N,HBS,T 1145-0110PM Th 1245-0205PM,,Staff
+O,ECON 121,E,,Principles of Econ,,1.00 ,N,HBS,MWF 1255-0150PM,,"Judge, Rebecca"
+O,ECON 121,F,,Principles of Econ,,1.00 ,N,HBS,T 0935-1100 Th 0930-1050,,Staff
+O,ECON 222,,,Game Theory in Economics,,1.00 ,N,,MWF 0200-0255PM,TOH 210,"Becker, Anthony"
+O,ECON 247,A,,History Econ Thought,,1.00 ,N,HWC,MWF 0800-0855,HH 413,"Wojick, Paul"
+O,ECON 247,B,,History Econ Thought,,1.00 ,N,HWC,MWF 0905-1000,HH 413,"Wojick, Paul"
+O,ECON 249,,,Urban Economics,,1.00 ,N,,MWF 0800-0855,HH 413,"Soderlind, Steve"
+O,ECON 261,A,,Macroeconomic Theory,,1.00 ,N,,MWF 0905-1000,RNS 190,"Pernecky, Mark"
+O,ECON 261,B,,Macroeconomic Theory,,1.00 ,N,,MWF 1045-1140,RNS 190,"Pernecky, Mark"
+O,ECON 262,A,,Microeconomic Theory,,1.00 ,N,,T 0800-0925 Th 0800-0920,,"Hodgson, Ashley"
+O,ECON 262,B,,Microeconomic Theory,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,,"Hodgson, Ashley"
+O,ECON 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ECON 298,,,IS/,,1.00 ,N,,,,Staff
+O,ECON 371,,,Econ of Public Policy Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration.,,1.00 ,N,EIN WRI,MWF 1150-1245PM,HH 515,"Judge, Rebecca"
+O,ECON 376,,,Labor Econ/Empl Rel Prerequisite: Completion of BTS-T or permission of instructor.,,1.00 ,N,EIN WRI,MWF 1255-0150PM,OM 20,"Pernecky, Mark"
+O,ECON 382,,,International Econ,,1.00 ,N,WRI,T 1145-0110PM Th 1245-0205PM,HH 302 HH 302,"Pomponio, Xun"
+O,ECON 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ECON 398,,,IR/,,1.00 ,N,,,,Staff
+O,ECON 398,A,,IR/,,1.00 ,N,,,,Staff
+O,ECON 398,B,,IR/,,1.00 ,N,,,,Staff
+O,ECON 399,A,S,Sem: Behavioral Economics,,1.00 ,N,,T 0935-1100 Th 0930-1050,OM 110 OM 110,"Hodgson, Ashley"
+O,ECON 399,B,S,Sem: Welfare Economics,,1.00 ,N,WRI,MWF 0200-0255PM,,"Soderlind, Steve"
+O,EDUC 231,,,Drugs & Alcohol Closed to First-Year Students.,1 ,0.00 ,Y,,Th 0700-0900PM,BMC 101,"Storry, Mark"
+O,EDUC 245,,,Teach/Learn Engl Grammar Closed to first-year students.,2 ,0.50 ,N,,T 0935-1100 Th 0930-1050,TOH 214 TOH 214,"Leer, Elizabeth A."
+O,EDUC 290,,,Educ Psychology Closed to First-Year Students.,,1.00 ,N,HBS,T 0800-0925 Th 0800-0920,TOH 210 TOH 210,"McClure, Robert W."
+O,EDUC 291,A,,Standards/Technology Closed to First-Year Students.,2 ,0.00 ,Y,,M 0630-0830PM,HH 205,"Campbell, Heather"
+O,EDUC 291,B,,Standards/Technology Closed to First-Year Students.,2 ,0.00 ,Y,,Th 0400-0600PM,HH 205,"Campbell, Heather"
+O,EDUC 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,EDUC 298,,,IS/,,1.00 ,N,,,,Staff
+O,EDUC 321,,,Teaching Reading 5-12,1 ,0.50 ,N,,T 0935-1100 Th 0930-1050,TOH 214 TOH 214,"Leer, Elizabeth A."
+O,EDUC 330,,,Principles of Educ Open to Juniors and Seniors only.,,1.00 ,N,ORC,MWF 0905-1000,TOH 214,"Aguilar-Valdez, Jean R."
+O,EDUC 334,,,Social Studies Persp,,1.00 ,N,WRI,MWF 0200-0255PM,TOH 214,"Kelly, Maria L."
+O,EDUC 341,,,"Teaching of Art, K-12",,1.00 ,N,,M 0700-1000PM,,"Hauck, Karna E."
+O,EDUC 345,,,Tchg of Comm Arts/Lit,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,TOH 214 TOH 214,"Leer, Elizabeth A."
+O,EDUC 348,,,Assessment of ESL K-12,,1.00 ,N,,Th 0600-0900PM,TOH 214,"Tesdall, Jessica L."
+O,EDUC 350,,,Tchg of Mathematics,,1.00 ,N,,T 0800-0925 Th 0800-0920,TOH 186 TOH 186,"Matsuura, Ryota"
+O,EDUC 355,,,Tchg Music-Elem Schls,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,CHM 233 CHM 233,"Berger, Linda"
+O,EDUC 364,,,Tchg of Science,,1.00 ,N,,MWF 0800-0855,TOH 214,Staff
+O,EDUC 365,,,Tchg of Soc Studies,,1.00 ,N,,M 0700-1000PM,TOH 214,"McDonald, Sarah S."
+O,EDUC 372,,,Counsel/Comm Schools Closed to First-Year Students.,,0.50 ,N,,Th 1245-0205PM,TOH 316,"Kelly, Maria L."
+O,EDUC 374,,,Reading in Content Area Open to Juniors and Seniors only.,,0.50 ,N,,T 0800-0925,TOH 214,"Campbell, Heather"
+O,EDUC 375,,,Differentiated Instruct,,0.50 ,N,,Th 0800-0920,TOH 214,"Campbell, Heather"
+O,EDUC 381,,,Senior Seminar Educ Open to Seniors only.,,0.50 ,N,,M-F 0800-0400PM,TBA,"Lane-Getaz, Sharon"
+O,EDUC 382,,,Human Relations Open to Seniors only,,0.00 ,Y,,,,"Pfarr-Baker, Rosemary A."
+O,EDUC 385,,,Issues in Education Open to Seniors only.,,0.50 ,N,,M-F 0800-0400PM,TBA,"McClure, Robert W."
+O,EDUC 389,,,Student Teaching Open to Seniors only.,,3.00 ,N,,M-F 0730-0400PM,,"Pfarr-Baker, Rosemary A."
+O,EDUC 391,A,,Student Teach: ESL,,0.50 ,N,,,,"Pfarr-Baker, Rosemary A."
+O,EDUC 391,B,,Student Teach: Social St,,0.50 ,N,,,,"Pfarr-Baker, Rosemary A."
+O,EDUC 391,C,,Student Teach: Music,,0.50 ,N,,,,"Pfarr-Baker, Rosemary A."
+O,EDUC 391,D,,Student Teach: English,,0.50 ,N,,,,"Pfarr-Baker, Rosemary A."
+O,EDUC 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,EDUC 398,,,IR/,,1.00 ,N,,,,Staff
+O,ENGL 150,,,Fund of Creative Writing This course has class year limits.,,1.00 ,N,WRI,T 1145-0110PM Th 1245-0205PM,RML 421 RML 421,"Schwehn, Kaethe"
+O,ENGL 185,A,,Literary Studies Open to first-year students and sophomores only.,,1.00 ,N,ALS-L WRI,MWF 1045-1140,RML 515,"Trull, Mary E."
+O,ENGL 185,B,,Literary Studies Open to first-year students and sophomores only.,,1.00 ,N,ALS-L WRI,MWF 1150-1245PM,RML 515,"Marsalek, Karen E."
+O,ENGL 185,C,,Literary Studies Open to first-year students and sophomores only.,,1.00 ,N,ALS-L WRI,T 0935-1100 Th 0930-1050,RML 421 RML 421,"Holly, Carol"
+O,ENGL 200,,T,Top: Lit Racial Subjectiv,,1.00 ,N,ALS-L,MWF 1045-1140,RML 421,"Gallego, Carlos"
+O,ENGL 204,,,South Asian Literature,,1.00 ,N,ALS-L,T 1145-0110PM Th 1245-0205PM,RML 515 RML 515,"Mbele, Joseph L."
+O,ENGL 223,,,Old & Middle English Lit,,1.00 ,N,ALS-L WRI,MWF 0905-1000,RML 421,"Cherewatuk, Karen"
+O,ENGL 228,,,Romantic/Victorian/Modern,,1.00 ,N,ALS-L WRI,T 0935-1100 Th 0930-1050,RML 421 RML 421,"Postlethwaite, Diana"
+O,ENGL 242,,,Children's Literature,,1.00 ,N,ALS-L,MWF 0200-0255PM,RML 525,"Titus, Mary"
+O,ENGL 250,,,Eng Lang/Linguistics,,1.00 ,N,,MWF 0905-1000,RML 421,"Ito, Rika"
+O,ENGL 260,,T,"Top:Art,Design & Lit 1950",,1.00 ,N,ALS-L,MWF 1150-1245PM,HH 403,"Naito, Jonathan T."
+O,ENGL 266,,,Romanticism & Rock Music,,1.00 ,N,ALS-L,MWF 0800-0855,RML 515,"Allister, Mark"
+O,ENGL 280,,T,Top:19th C American Novel,,1.00 ,N,ALS-L,T 1145-0110PM Th 1245-0205PM,RML 515 RML 515,"Holly, Carol"
+O,ENGL 287,,,Profess/Business Writing,,1.00 ,N,WRI,MWF 1255-0150PM,RML 520,"Richards, Rebecca S."
+O,ENGL 291,,,Creative Wrtg: Non-Fic,,1.00 ,N,WRI,MWF 0905-1000,RML 520,"Kwon Dobbs, Jennifer"
+O,ENGL 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ENGL 298,,,IS/,,1.00 ,N,,,,Staff
+O,ENGL 2XX,,,Placeholder with ALS-L,,1.00 ,N,ALS-L,T 0800-0925 Th 0800-0920,RML 515 RML 515,Staff
+O,ENGL 360,,,Literary Crit/Theory Open to juniors and seniors who have completed English 185 and at least two level-II English courses or by permission of instructor.,,1.00 ,N,,MWF 0200-0255PM,RML 515,"Gallego, Carlos"
+O,ENGL 371,,,Advanced Poetry Wrtg Open to students who have taken a 200-level workshop in that genre or by permission of the instructor.,,1.00 ,N,,MWF 1150-1245PM,RML 515,"Kwon Dobbs, Jennifer"
+O,ENGL 372,,,Advanced Fiction Wrtg Open to students who have taken a 200-level workshop in that genre or by permission of the instructor.,,1.00 ,N,,T 0935-1100 Th 0930-1050,,"Percy, Benjamin"
+O,ENGL 380,,,Shakespeare Open to juniors and seniors who have completed English 185 and at least two level-II English courses or by permission of instructor.,,1.00 ,N,,MWF 1255-0150PM,RML 515,"Trull, Mary E."
+O,ENGL 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ENGL 398,,,IR/,,1.00 ,N,,,,Staff
+O,ENGL 399,,S,Sem: West African Lit Open to juniors and seniors who have completed English 185 and at least two level-II English courses or by permission of instructor.,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,RML 520 RML 520,"Mbele, Joseph L."
+O,ENVST 137,,,Intro: Enviro Studies This course has class year limits.,,1.00 ,N,IST,T 0800-0925 Th 0800-0920,RNS 210 RNS 210,"Schade, John D."
+O,ENVST 222,,,"Campus Ecology This course has class-year limits. Intended for Environmental Studies majors and concentrators, but open to others as well.",,1.00 ,N,,MWF 1045-1140,HH 403,"Farrell, James"
+O,ENVST 245,,,Global Climate Change First-Year Students may register only with permission of instructor.,,1.00 ,N,IST,T 0935-1100 Th 0930-1050,RNS 208 RNS 208,Staff
+O,ENVST 281,A,T,Top: Sustainable Develop,,1.00 ,N,,MWF 0905-1000,RML 520,"Binder, Seth"
+O,ENVST 281,B,T,Top: Sustainable Develop,,1.00 ,N,,MWF 1045-1140,RML 520,"Binder, Seth"
+O,ENVST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ENVST 298,,,IS/,,1.00 ,N,,,,Staff
+O,ENVST 381,,T,Top:Agroecology & StOGROW,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,RML 520 RML 520,"Shea, Kathleen L."
+O,ENVST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ENVST 398,,,IR/,,1.00 ,N,,,,Staff
+O,ENVST 399,,S,Sem: Environ Studies Open to Senior Enviromental Studies majors only. Environmental Studies concentrators may register only with permission of instructor.,,1.00 ,N,,MW 0100-0300PM,RNS 208,"Umbanhowar, Charles Jr."
+O,ES/PS 276,,,Environmental Politics,,1.00 ,N,HBS,T 1145-0110PM Th 1245-0205PM,DC 305 DC 305,"Hofrenning, Daniel"
+O,ESAC 101,,,Archery,,0.25 ,N,SPM,MWF 0800-0855,SAC_FH,"Lundin, Philip"
+O,ESAC 103,A,,Golf,,0.25 ,N,SPM,F 0800-1000,Tostrud Ctr,"Stromme, David A."
+O,ESAC 103,B,,Golf,,0.25 ,N,SPM,F 1200-0200PM,Tostrud Ctr,"Stromme, David A."
+O,ESAC 106,A,,Rock Climbing,,0.25 ,N,SPM,MW 1045-1140,Tostrud Ctr,"Stromayer, Judith"
+O,ESAC 106,B,,Rock Climbing,,0.25 ,N,SPM,TTh 0935-1030,Tostrud Ctr,"Stromayer, Judith"
+O,ESAC 111,,,Basketball,,0.25 ,N,SPM,TTh 0935-1030,SAC Gym North,"Kosmoski, Daniel"
+O,ESAC 117,,,Ultimate Frisbee,,0.25 ,N,SPM,MW 0200-0255PM,SAC FH,"Nesbit, Scott"
+O,ESAC 118,,,Lifetime Sports and Games,,0.25 ,N,SPM,MW 1045-1140,Tostrud Ctr,"Nesbit, Scott"
+O,ESAC 122,,,Lifeguard Training,,0.25 ,N,SPM,TTh 1255-0150PM,SAC_POOL,"Hauck, Robert"
+O,ESAC 128,,,Fly Fishing,,0.25 ,N,SPM,TTh 1255-0150PM,SAC 112,"Nesbit, Scott"
+O,ESAC 130,,,Swim Fitness,,0.25 ,N,SPM,MW 0800-0855,SAC_POOL,"Anderson, Kurt"
+O,ESAC 131,,,Aerobics,,0.25 ,N,SPM,TTh 0935-1030,SAC 103,"Book, Cynthia"
+O,ESAC 133,A,,Individual Fitness.50,,0.50 ,N,SPM,MWF 1045-1140,SAC 103,"Goldsworthy, William Sean"
+O,ESAC 133,B,,Individual Fitness.50,,0.50 ,N,SPM,MWF 1255-0150PM,SAC 112,"Anderson, Kurt"
+O,ESAC 135,,,Jogging/Running,,0.25 ,N,SPM,TTh 0935-1030,Tostrud Ctr,"Stern, Craig D."
+O,ESAC 136,A,,Fitness Walking,,0.25 ,N,SPM,MW 0905-1000,Tostrud Ctr,"Kosmoski, Daniel"
+O,ESAC 136,B,,Fitness Walking,,0.25 ,N,SPM,MW 1255-0150PM,Tostrud Ctr,"Kosmoski, Daniel"
+O,ESAC 141,A,,Wt Training-Men,,0.25 ,N,SPM,TTh 0800-0855,TPH Wt Rm,Staff
+O,ESAC 141,B,,Wt Training-Men,,0.25 ,N,SPM,TTh 0935-1030,TPH Wt Rm,Staff
+O,ESAC 141,C,,Wt Training-Men,,0.25 ,N,SPM,MW 1255-0150PM,Tostrud Ctr,"Ahrar, Shahram"
+O,ESAC 142,A,,Wt Training-Women,,0.25 ,N,SPM,MW 0800-0855,TPH Wt Rm,"McCarthy, Robert K."
+O,ESAC 142,B,,Wt Training-Women,,0.25 ,N,SPM,MW 0905-1000,TPH Wt Rm,"McCarthy, Robert K."
+O,ESAC 151,A,,Badminton,,0.25 ,N,SPM,TTh 1255-0150PM,SAC_GYM_N,"Kosmoski, Daniel"
+O,ESAC 151,B,,Badminton,,0.25 ,N,SPM,MW 1045-1140,SAC N Gym,"Stromme, David A."
+O,ESAC 151,C,,Badminton,,0.25 ,N,SPM,MW 0800-0855,SAC Gym North,"Stromme, David A."
+O,ESAC 153,A,,Racquetball (Wmn),,0.25 ,N,SPM,TTh 0800-0855,SAC Racq Ct,"Stern, Craig D."
+O,ESAC 153,B,,Racquetball (Men),,0.25 ,N,SPM,TTh 0935-1030,SAC Racq Ct,"Anderson, Kurt"
+O,ESAC 157,A,,Tennis,,0.25 ,N,SPM,TTh 0800-0855,Tostrud Ctr,"Stromme, David A."
+O,ESAC 157,B,,Tennis,,0.25 ,N,SPM,MW 0905-1000,Tostrud Ctr,"Stromme, David A."
+O,ESAC 158,,,Intermediate Tennis,,0.25 ,N,SPM,TTh 0935-1035,Tostrud Ctr,"Nesbit, Scott"
+O,ESAC 161,,,Self-Defense,,0.25 ,N,SPM,F 0800-1000,SAC Wr Rm,"Hamilton, Maya"
+O,ESAC 170,,,Intercol Hockey Women,,0.25 ,N,SPM,,,"Bazzachini, John A."
+O,ESAC 171,,,Intercol Skiing Men,,0.25 ,N,SPM,,,"Cook, Kevin"
+O,ESAC 172,,,Intercol Skiing Women,,0.25 ,N,SPM,,,"Cook, Kevin"
+O,ESAC 173,,,Intercol Baseball,,0.25 ,N,SPM,,,"McDonald, Matthew C."
+O,ESAC 174,,,Intercol Basketball M,,0.25 ,N,SPM,,,"Kosmoski, Daniel"
+O,ESAC 175,,,Intercol Basketball W,,0.25 ,N,SPM,,,"Stromme, David A."
+O,ESAC 181,,,Intercol Hockey Men,,0.25 ,N,SPM,,,"Goldsworthy, William Sean"
+O,ESAC 182,,,Intercol CC Skiing M,,0.25 ,N,SPM,,,"Cook, Kevin"
+O,ESAC 183,,,Intercol CC Skiing W,,0.25 ,N,SPM,,,"Cook, Kevin"
+O,ESAC 186,,,Intercol Softball,,0.25 ,N,SPM,,,"Neuger, Ruth B."
+O,ESAC 187,,,Intercol Swimming M,,0.25 ,N,SPM,,,"Hauck, Robert"
+O,ESAC 188,,,Intercol Swimming W,,0.25 ,N,SPM,,,"Hauck, Robert"
+O,ESAC 189,,,Intercol Tennis Men,,0.25 ,N,SPM,,,"Nesbit, Scott"
+O,ESAC 190,,,Intercol Tennis Women,,0.25 ,N,SPM,,,"Nesbit, Scott"
+O,ESAC 191,,,Intercol Track Men,,0.25 ,N,SPM,,,"Lundin, Philip"
+O,ESAC 192,,,Intercol Track Women,,0.25 ,N,SPM,,,"Gelle, Andrea J."
+O,ESAC 194,,,Intercol Wrestling,,0.25 ,N,SPM,,,"Ahrar, Shahram"
+O,ESTH 238,,,Intro to Coaching,2 ,0.50 ,N,,MWF 0905-1000,SAC 103,Staff
+O,ESTH 255,,,Prev/Care Sport Injur Students in ESTH 255 must also register for one lab ESTH 255 AL or BL.,,1.00 ,N,,T 0800-0925 Th 0800-0920,SAC 112 SAC 112,"Hagen, Daniel"
+O,ESTH 255,A,L,    Prev/Care Sport Injur Lab,,0.00 ,N,,W 1150-1245PM,SAC Tr Rm,"Hagen, Daniel"
+O,ESTH 255,B,L,    Prev/Care Sport Injur Lab,,0.00 ,N,,W 1255-0150PM,SAC Tr Rm,"Hagen, Daniel"
+O,ESTH 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ESTH 298,,,IS/,,1.00 ,N,,,,Staff
+O,ESTH 335,,,Coaching Practicum,,0.25 ,N,,,,"Anderson, Kurt"
+O,ESTH 375,,,Physiology/Exercise Students in ESTH 375 must also register for lab ESTH 375 L. Open to Juniors and Seniors only.,,1.00 ,N,,MWF 1045-1140,SAC 103,"Daymont, Christine"
+O,ESTH 375,,L,    Physiology/Exercise Lab,,0.00 ,N,,T 0800-1100,SAC 103,"Daymont, Christine"
+O,ESTH 390,,,Exercise Sci Seminar Open only to seniors.,,1.00 ,N,WRI,MWF 1255-0150PM,SAC 103,"Book, Cynthia"
+O,ESTH 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ESTH 398,,,IR/,,1.00 ,N,,,,Staff
+O,ESTH 398,A,,IR/,,1.00 ,N,,,,Staff
+O,FAMST 242,,,Family Relationships This course has class-year limits. Not open to first-year students.,,1.00 ,N,,MWF 1045-1140,TOH 212,"Manner, Jennifer"
+O,FAMST 253,,,Human Sexuality This course has class year limits. Not open to first year students.,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,HH 403 HH 403,"Manner, Jennifer"
+O,FAMST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,FAMST 298,,,IS/,,1.00 ,N,,,,Staff
+O,FAMST 391,,,Sr Sem: Families in Trans Open to Senior and Junior Family Studies concentrators only.,,1.00 ,N,,T 0935-1100 Th 0930-1050,OM 310 OM 310,"Manner, Jennifer"
+O,FAMST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,FAMST 398,,,IR/,,1.00 ,N,,,,Staff
+O,FILM 000,,,New Course,,1.00 ,N,,MWF 0200-0255PM M 0730-1000PM,,Staff
+O,FILM 101,,,Intro to Film Studies Film screenings Monday evenings.,,1.00 ,N,ALS-A,T 0800-0925 Th 0800-0920 Th 0700-0900PM,HH 403 HH 403 HH 403,Staff
+O,FREN 112,A,,Beginning French II,,1.00 ,N,,MWF 1045-1140,TOH 114,"Bekhechi, Amine R."
+O,FREN 112,B,,Beginning French II,,1.00 ,N,,MWF 1150-1245PM,TOH 110,Staff
+O,FREN 231,,,Intermed French I,,1.00 ,N,,MWF 0905-1000,TOH 114,"Allen, Wendy"
+O,FREN 232,A,,Intermed French II,,1.00 ,N,FOL-F MCG,MWF 0905-1000,TOH 114,"Hoy, Lise R."
+O,FREN 232,B,,Intermed French II,,1.00 ,N,FOL-F MCG,MWF 1255-0150PM,TOH 114,"Hoy, Lise R."
+O,FREN 232,C,,Intermed French II,,1.00 ,N,FOL-F MCG,MWF 0200-0255PM,TOH 212,"Barjasteh, Jolene"
+O,FREN 253,,,Intro Literary Analy,,1.00 ,N,ALS-L FOL-F,T 1145-0110PM Th 1245-0205PM,TOH 114 TOH 114,"Barjasteh, Jolene"
+O,FREN 272,,,Contemporary France,,1.00 ,N,,T 0935-1100 Th 0930-1050,TOH 114 TOH 114,"Allen, Wendy"
+O,FREN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,FREN 298,,,IS/,,1.00 ,N,,,,Staff
+O,FREN 372,,T,Top: Le roman maghrebin,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,TOH 112 TOH 112,"Bekhechi, Amine R."
+O,FREN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,FREN 398,,,IR/,,1.00 ,N,,,,Staff
+O,FREN 398,A,,IR/,,1.00 ,N,,,,Staff
+O,GCON 116,A,,Medieval Synthesis Open to Great Conversations students only.,,1.00 ,N,FYW HWC,MWF 1255-0150PM,RML 420,"Casson, Douglas J."
+O,GCON 116,B,,Medieval Synthesis Open to Great Conversations students only.,,1.00 ,N,FYW HWC,MWF 1255-0150PM,RML 520,"Grenberg, Jeanine"
+O,GCON 116,C,,Medieval Synthesis Open to Great Conversations students only.,,1.00 ,N,FYW HWC,MWF 1255-0150PM,RML 525,"Walter, Gregory A."
+O,GCON 116,D,,Medieval Synthesis Open to Great Conversations students only.,,1.00 ,N,FYW HWC,MWF 1255-0150PM,OM 110,"Ananda-Owens, Kathryn"
+O,GCON 116,E,,Medieval Synthesis Open to Great Conversations students only.,,1.00 ,N,FYW HWC,MWF 1255-0150PM,OM 140,"Kuxhausen, Anna"
+O,GCON 116,F,,Medieval Synthesis Open to Great Conversations students only.,,1.00 ,N,FYW HWC,MWF 1255-0150PM,OM 210,"Willcoxon, Jeanne I."
+O,GCON 218,A,,Dissenters/Defenders Open to Great Conversations students only.,,1.00 ,N,ALS-A HWC ORC WRI,MWF 1150-1245PM,HH 514,"Cherewatuk, Karen"
+O,GCON 218,B,,Dissenters/Defenders Open to Great Conversations students only.,,1.00 ,N,ALS-A HWC ORC WRI,MWF 1150-1245PM,HH 515,"Munoz-Hutchinson, Danny"
+O,GCON 218,C,,Dissenters/Defenders Open to Great Conversations students only.,,1.00 ,N,ALS-A HWC ORC WRI,MWF 1150-1245PM,HH 516,"Ripley, Jason J."
+O,GCON 218,D,,Dissenters/Defenders Open to Great Conversations students only.,,1.00 ,N,ALS-A HWC ORC WRI,MWF 1150-1245PM,RML 420,"Gallego, Carlos"
+O,GCON 218,E,,Dissenters/Defenders Open to Great Conversations students only.,,1.00 ,N,ALS-A HWC ORC WRI,MWF 1150-1245PM,RML 520,"Wilson, Charles"
+O,GCON 218,F,,Dissenters/Defenders Open to Great Conversations students only.,,1.00 ,N,ALS-A HWC ORC WRI,MWF 1150-1245PM,RML 525,"Wojick, Paul"
+O,GERM 111,,,Beginning German I,,1.00 ,N,,MWF 0800-0855,,"Rippley, Lavern"
+O,GERM 112,A,,Beginning German II,,1.00 ,N,,MWF 0800-0855,TOH 310,"Achberger, Karen R."
+O,GERM 112,B,,Beginning German II,,1.00 ,N,,MWF 1045-1140,TOH 310,"Achberger, Karen R."
+O,GERM 231,,,Intermed German I,,1.00 ,N,,MWF 0905-1000,TOH 310,"Rippley, Lavern"
+O,GERM 232,A,,Intermed German II,,1.00 ,N,FOL-G,T 0935-1100 Th 0930-1050,TOH 112 TOH 112,Staff
+O,GERM 232,B,,Intermed German II,,1.00 ,N,FOL-G,T 1145-0110PM Th 1245-0205PM,TOH 108 TOH 108,Staff
+O,GERM 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,GERM 298,,,IS/,,1.00 ,N,,,,Staff
+O,GERM 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,GERM 398,,,IR/,,1.00 ,N,,,,Staff
+O,GREEK 112,,,Beginning Greek II,,1.00 ,N,,MWF 0800-0855,,"May, James"
+O,GREEK 253,,,New Testament Greek,,1.00 ,N,ALS-L FOL-K,MWF 0905-1000,TOH 300,"Reece, Steve T."
+O,GREEK 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,GREEK 298,,,IS/,,1.00 ,N,,,,Staff
+O,GREEK 370,,T,Topics in Greek Lit,,1.00 ,N,FOL-K,T 0120-0245PM Th 0215-0335PM,TOH 300 TOH 300,"Groton, Anne"
+O,GREEK 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,GREEK 398,,,IR/,,1.00 ,N,,,,Staff
+O,HIST 001,,,Placeholder:Cynicism/Hope Open to first-year students only.,,1.00 ,N,,MWF 0200-0255PM,,"Fure-Slocum, Eric J."
+O,HIST 101,,,Ancient Warfare Open to first-year students only.,,1.00 ,N,HWC,MWF 0905-1000,HH 302,"Howe, Timothy R."
+O,HIST 115,,,Courtly Love Mid Ages Open to first-year students only.,,1.00 ,N,HWC WRI,T 1145-0110PM Th 1245-0205PM,,"Carrington, J. L."
+O,HIST 122,,,Europe-Great War Open to first-year students only.,,1.00 ,N,HWC,T 0935-1100 Th 0930-1050,,"Peters, Dolores"
+O,HIST 126,,,Conquest and Colonization Open to first-year students only.,,1.00 ,N,MCG WRI,T 0935-1100 Th 0930-1050,,"DeLaney, Jeane"
+O,HIST 181,,,Civil Rights Revolution Open to first-year students only.,,1.00 ,N,HWC MCD,MWF 1255-0150PM,HH 515,"Fitzgerald, Michael"
+O,HIST 191,,,Eur/Reform/Modern,,1.00 ,N,HWC,MWF 1150-1245PM,HH 501,"Peters, Dolores"
+O,HIST 195,,,Global 1500-Present,,1.00 ,N,MCG,MWF 1045-1140,DC 305,"Iddrisu, Abdulai"
+O,HIST 199,,,America After 1865,,1.00 ,N,HWC MCD,MWF 0905-1000,HH 501,"Kutulas, Judy"
+O,HIST 204,,,Ancient: Rome,,1.00 ,N,HWC,T 0800-0925 Th 0800-0920,HH 501 HH 501,"Howe, Timothy R."
+O,HIST 204,,F,FLC - Latin,,0.25 ,N,,,,"Howe, Timothy R."
+O,HIST 205,,,Ancient: Near East,,1.00 ,N,HWC,T 1145-0110PM Th 1245-0205PM,,"Howe, Timothy R."
+O,HIST 210,,S,"Sem: France in WW II Especially for sophomore history majors, but others may also register.",,1.00 ,N,ALS-L HWC WRI,T 0120-0245PM Th 0215-0335PM,,"Peters, Dolores"
+O,HIST 217,,,Age of Renaissance,,1.00 ,N,HWC ORC,MWF 1150-1245PM,OM 110,"Carrington, J. L."
+O,HIST 222,,,Modern Scandinavia,,1.00 ,N,HWC,T 0935-1100 Th 0930-1050,HH 317 HH 317,"Nichol, Todd W."
+O,HIST 231,,,20th Century Russia,,1.00 ,N,HWC,MWF 1045-1140,,"Kuxhausen, Anna"
+O,HIST 231,,F,FLC - Russian,,0.25 ,N,,,,"Kuxhausen, Anna Walter, Irina"
+O,HIST 242,,,Modern Latin America,,1.00 ,N,MCG,MWF 0200-0255PM,,"DeLaney, Jeane"
+O,HIST 242,,F,FLC - Spanish,,0.25 ,N,,,,"DeLaney, Jeane Barnes-Karol, Gwendolyn"
+O,HIST 270,,S,"Sem: B Franklin's America Especially for sophomore history majors, but others may also register.",,1.00 ,N,WRI,T 0800-0925 Th 0800-0920,,"Hahn, Steven C."
+O,HIST 275,,,Am. Environmental History,,1.00 ,N,HWC,MWF 1255-0150PM,HH 307,"Farrell, James"
+O,HIST 282,,T,Top: West Before L&C,,1.00 ,N,MCD,MWF 0905-1000,,"Hahn, Steven C."
+O,HIST 288,,,Civil War/Reconstruct,,1.00 ,N,HWC MCD,MWF 1045-1140,OM 10,"Fitzgerald, Michael"
+O,HIST 292,,,Muslim Societies/Sub-Saha,,1.00 ,N,MCG,T 1145-0110PM Th 1245-0205PM,TOH 212 TOH 212,"Iddrisu, Abdulai"
+O,HIST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,HIST 298,,,IS/,,1.00 ,N,,,,Staff
+O,HIST 298,A,,IS/,,1.00 ,N,,,,Staff
+O,HIST 315,,S,Sem: Early Modern Europe,,1.00 ,N,WRI,T 0935-1100 Th 0930-1050,HH 516 HH 516,"De Krey, Gary"
+O,HIST 370,,S,Sem: American Rev,,1.00 ,N,WRI,T 1145-0110PM Th 1245-0205PM,HH 515 HH 515,"Hahn, Steven C."
+O,HIST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,HIST 397,,S,Sem: Hist Res Workshop,,1.00 ,N,WRI,T 0120-0245PM Th 0215-0335PM,HH 514 HH 514,"DeLaney, Jeane"
+O,HIST 398,,,IR/,,1.00 ,N,,,,Staff
+O,HIST 398,A,,IR/,,1.00 ,N,,,,Staff
+O,HSPST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,HSPST 298,,,IS/,,1.00 ,N,,,,Staff
+O,HSPST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,HSPST 398,,,IR/,,1.00 ,N,,,,Staff
+O,ID 230,,,Comm Science and Math,,0.25 ,Y,ORC,,,"Hanson, Robert"
+O,ID 294,,,Academic Internship,,0.50 ,Y,,,,Staff
+O,ID 298,,,IS/,,1.00 ,N,,,,Staff
+O,ID 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ID 398,,,IR/,,1.00 ,N,,,,Staff
+O,IDFA 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,IDFA 298,,,IS/,,1.00 ,N,,,,Staff
+O,IDFA 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,IDFA 398,,,IR/,,1.00 ,N,,,,Staff
+O,IS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,IS 298,,,IS/,,1.00 ,N,,,,Staff
+C,IS 392,,,Senior Project II Open to senior majors only. Approval of web portfolio required.,,1.00 ,N,,,,Staff
+C,IS 392,A,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,B,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,C,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,D,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,E,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,F,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,G,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,H,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,I,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,J,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,K,,Senior Project II,,1.00 ,N,,,,Staff
+C,IS 392,L,,Senior Project II,,1.00 ,N,,,,Staff
+O,IS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,IS 398,,,IR/,,1.00 ,N,,,,Staff
+O,JAPAN 112,A,,Beginning Japanese II Students in Japanese 112A and B must also register for one lab Japanese 112 AL or BL.,,1.00 ,N,,MWF 1045-1140,TOH 112,"Ito, Rika"
+O,JAPAN 112,B,,Beginning Japanese II Students in Japanese 112A and B must also register for one lab Japanese 112 AL or BL.,,1.00 ,N,,MWF 1150-1245PM,TOH 112,"Ito, Rika"
+O,JAPAN 112,A,L,    Beginning Japanese II Lab,,0.00 ,N,,Th 0825-0920,TOH 175,"Ito, Rika"
+O,JAPAN 112,B,L,    Beginning Japanese II Lab,,0.00 ,N,,Th 0930-1025,TOH 175,"Ito, Rika"
+O,JAPAN 232,,,Intermed Japanese II Students in Japanese 232 must also register for lab Japanese 232 L.,,1.00 ,N,FOL-J,MWF 0200-0255PM,TOH 112,"Bridges IV, William H."
+O,JAPAN 232,,L,    Intermed Japanese II Lab,,0.00 ,N,,T 0935-1030,TOH 175,"Bridges IV, William H."
+O,JAPAN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,JAPAN 298,,,IS/,,1.00 ,N,,,,Staff
+O,JAPAN 302,,,Advanced Japanese II,,1.00 ,N,FOL-J,MWF 1150-1245PM,TOH 102,"Akimoto, Hiroe"
+O,JAPAN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,JAPAN 398,,,IR/,,1.00 ,N,,,,Staff
+O,LATIN 112,A,,Beginning Latin II,,1.00 ,N,,MWF 0200-0255PM,,"Reece, Steve T."
+O,LATIN 112,B,,Beginning Latin II,,1.00 ,N,,MWF 1255-0150PM,,"Brunelle, Christopher M."
+O,LATIN 235,,,Medieval Latin,,1.00 ,N,ALS-L FOL-L,MWF 1045-1140,,"May, James"
+O,LATIN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,LATIN 298,,,IS/,,1.00 ,N,,,,Staff
+O,LATIN 372,,,Latin Historians,,1.00 ,N,FOL-L,T 0935-1100 Th 0930-1050,TOH 212 TOH 212,"Brunelle, Christopher M."
+O,LATIN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,LATIN 398,,,IR/,,1.00 ,N,,,,Staff
+O,MATH 117,,,Gateways/Mathematics,,1.00 ,N,AQR,T 0935-1100 Th 0930-1050,TOH 186 TOH 186,"Smith, Kay E."
+O,MATH 120,A,,Calculus I Closed during web registration.,,1.00 ,N,AQR,MWF 0905-1000,TOH 186,"Berliner, Adam H."
+O,MATH 120,B,,Calculus I,,1.00 ,N,AQR,MWF 1255-0150PM,RNS 210,"Diveris, Kosmas"
+O,MATH 120,C,,Calculus I,,1.00 ,N,AQR,MWF 0200-0255PM,RNS 310,"Diveris, Kosmas"
+O,MATH 126,A,,Calculus II,,1.00 ,N,AQR,MWF 0800-0855,TOH 210,"Purin, Marju"
+O,MATH 126,B,,Calculus II,,1.00 ,N,AQR,MWF 0905-1000,RNS 190,"Purin, Marju"
+O,MATH 220,A,,Elem Linear Algebra,,1.00 ,N,AQR,MWF 0800-0855,TOH 186,"Ostebee, Arnold"
+O,MATH 220,B,,Elem Linear Algebra,,1.00 ,N,AQR,MWF 1150-1245PM,TOH 186,"Smith, Kay E."
+O,MATH 220,C,,Elem Linear Algebra,,1.00 ,N,AQR,MWF 1255-0150PM,RNS 206,"Smith, Kay E."
+O,MATH 220,D,,Elem Linear Algebra,,1.00 ,N,AQR,T 0935-1100 Th 0930-1050,RNS 206 RNS 206,"Garrett, Kristina"
+O,MATH 220,E,,Elem Linear Algebra,,1.00 ,N,AQR,T 1145-0110PM Th 1245-0205PM,RNS 206 RNS 206,"Richey, Matthew"
+O,MATH 226,A,,Multivariable Calc,,1.00 ,N,,MWF 1045-1140,TOH 184,"Berliner, Adam H."
+O,MATH 226,B,,Multivariable Calc,,1.00 ,N,,MWF 1150-1245PM,TOH 184,"Berliner, Adam H."
+O,MATH 230,A,,Differential Equations I,,1.00 ,N,,MWF 0905-1000,RNS 206,"Ostebee, Arnold"
+O,MATH 230,B,,Differential Equations I,,1.00 ,N,,MWF 1045-1140,RNS 206,"Ostebee, Arnold"
+O,MATH 232,,,Discrete Mathematics,,1.00 ,N,,MWF 0200-0255PM,TOH 184,"Allen, Richard"
+O,MATH 236,,,Math of Biology,,1.00 ,N,,MWF 1255-0150PM,RNS 204,"Vandiver, Rebecca M."
+O,MATH 242,,,Modern Computational Math,,1.00 ,N,,MWF 1150-1245PM,RNS 204,"Vandiver, Rebecca M."
+O,MATH 244,A,,Real Analysis I,,1.00 ,N,WRI,MWF 1255-0150PM,TOH 186,"Hanson, Bruce"
+O,MATH 244,B,,Real Analysis I,,1.00 ,N,WRI,T 0800-0925 Th 0800-0920,RNS 204 RNS 204,"Diveris, Kosmas"
+O,MATH 252,A,,Abstract Algebra I,,1.00 ,N,WRI,MWF 1045-1140,TOH 184,"Purin, Marju"
+O,MATH 252,B,,Abstract Algebra I,,1.00 ,N,WRI,T 0800-0925 Th 0800-0920,TOH 186 TOH 186,"Dietz, Jill"
+O,MATH 262,,,Probability Theory,,1.00 ,N,,MWF 0905-1000,TOH 186,"Roback, Paul J."
+O,MATH 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MATH 298,,,IS/,,1.00 ,N,,,,Staff
+O,MATH 340,,,Complex Analysis,,1.00 ,N,,T 0935-1100 Th 0930-1050,RNS 204 RNS 204,"Hanson, Bruce"
+O,MATH 364,,,Combinatorics,,1.00 ,N,,T 0800-0925 Th 0800-0920,TOH 186 TOH 186,"Garrett, Kristina"
+O,MATH 382,,S,Sem: Algebr Number Theory,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,TOH 184 TOH 184,"Matsuura, Ryota"
+O,MATH 384,,S,Sem: Numerical Simulation,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,TOH 186 TOH 186,"Sanft, Kevin R."
+O,MATH 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MATH 396,,,Research:,,1.00 ,N,,MWF 0800-0855,TOH 186,"Dietz, Jill"
+O,MATH 398,,,IR/,,1.00 ,N,,,,Staff
+O,MATH 398,A,,IR/,,1.00 ,N,,,,Staff
+O,MATH 398,B,,IR/,,1.00 ,N,,,,Staff
+O,MATH 398,C,,IR/,,1.00 ,N,,,,Staff
+O,MATH 398,D,,IR/,,1.00 ,N,,,,Staff
+O,MEDIA 160,A,,Mass Media This course has class year limits.,,1.00 ,N,MCD ORC,T 0935-1100 Th 0930-1050,TB 216 TB 216,"Sonnega, William"
+O,MEDIA 160,B,,Mass Media,,1.00 ,N,MCD,T 1145-0110PM Th 1245-0205PM,,"Sonnega, William"
+O,MEDIA 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MEDIA 298,,,IS/,,1.00 ,N,,,,Staff
+O,MEDIA 360,,T,Top:Media & Globalization,,1.00 ,N,,MWF 0905-1000,TB 216,"Sonnega, William"
+O,MEDIA 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MEDIA 398,,,IR/,,1.00 ,N,,,,Staff
+O,MGMT 225,A,,Principles of Acct Not open to first-year students.,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,RNS 290 RNS 290,"Mader, James"
+O,MGMT 225,B,,Principles of Acct Not open to first-year students.,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,RNS 290 RNS 290,"Mader, James"
+O,MGMT 237,,,Managerial/Cost Acct Not open to first-year students.,,1.00 ,N,,MWF 1255-0150PM,HH 403,"Hirsch, Richard M."
+O,MGMT 250,,,Marketing Not open to first-year students.,,1.00 ,N,HBS,MWF 1045-1140,HH 307,"Muir, Sian E."
+O,MGMT 251,A,,Management Not open to first-year students.,,1.00 ,N,HBS,MWF 1255-0150PM,HH 307,"Goedde, Richard"
+O,MGMT 251,B,,Management Not open to first-year students.,,1.00 ,N,HBS,MWF 0200-0255PM,HH 307,"Goedde, Richard"
+O,MGMT 252,,,Legal Aspects of Bus Not open to first-year students.,,1.00 ,N,,T 0800-0925 Th 0800-0920,HH 307 HH 307,"Ophaug, John M."
+O,MGMT 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MGMT 298,,,IS/,,1.00 ,N,,,,Staff
+O,MGMT 380,,,Investments,,1.00 ,N,,T 0935-1100 Th 0930-1050,HH 307 HH 307,"Goedde, Richard"
+O,MGMT 383,,,Mgmt Policy & Strat,,1.00 ,N,,MWF 0905-1000,HH 307,"Muir, Sian E."
+O,MGMT 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MGMT 398,,,IR/,,1.00 ,N,,,,Staff
+O,MSCS 389,,,Statistical Research,,0.50 ,N,ORC,MWF 0200-0255PM,TOH 182,"Lane-Getaz, Sharon"
+O,MUSIC 114,A,,Theory & Aural Skills II,,1.00 ,N,,MWF 0905-1000 T 0935-1100 Th 0930-1050,CHM 224 CHM 224 CHM 224,"Rodland, Catherine R."
+O,MUSIC 114,B,,Theory & Aural Skills II,,1.00 ,N,,MWF 1045-1140 T 1145-0110PM Th 1245-0205PM,CHM 224 CHM 224 CHM 224,"Amundson, Steven"
+O,MUSIC 114,C,,Theory & Aural Skills II,,1.00 ,N,,MWF 1255-0150PM T 0120-0245PM Th 0215-0335PM,CHM 224 CHM 224 CHM 224,"Ramirez, Catherine"
+O,MUSIC 131,,,The Art of Music,,1.00 ,N,ALS-A,MWF 1255-0150PM,CHM 232,"Carter, David"
+O,MUSIC 162,A,,Piano Class II,,0.25 ,N,,MW 1045-1140,CHM 222,Staff
+O,MUSIC 162,B,,Piano Class II,,0.25 ,N,,MW 1255-0150PM,CHM 222,Staff
+O,MUSIC 162,C,,Piano Class II,,0.25 ,N,,T 1005-1100 Th 0955-1050,CHM 222 CHM 222,"Berger, Linda"
+O,MUSIC 162,D,,Piano Class II,,0.25 ,N,,T 1145-1240PM Th 1245-0140PM,CHM 222 CHM 222,"Berger, Linda"
+O,MUSIC 163,,,Beyond Alexander Tech,,0.25 ,N,,MW 0200-0255PM,CHM 140,"Scholz-Carlson, Miriam"
+O,MUSIC 164,A,,Voice Class,,0.25 ,N,,MW 0905-1000,CHM 233,"Johnson, Sigrid"
+O,MUSIC 164,B,,Voice Class,,0.25 ,N,,MW 1045-1140,CHM 233,"Johnson, Sigrid"
+O,MUSIC 164,C,,Voice Class,,0.25 ,N,,MW 1255-0150PM,CHM 233,"Johnson, Sigrid"
+O,MUSIC 166,,,Brass Methods,,0.25 ,N,,MWF 0905-1000,CHM 140,"Niemisto, Paul"
+O,MUSIC 214,A,,Theory & Aural Skills IV,,1.00 ,N,,MWF 0800-0855 T 0800-0925 Th 0800-0920,CHM 232 CHM 232 CHM 232,"Castro, David R."
+O,MUSIC 214,B,,Theory & Aural Skills IV,,1.00 ,N,,MWF 0200-0255PM T 0120-0245PM Th 0215-0335PM,CHM 232 CHM 232 CHM 232,"Castro, David R."
+O,MUSIC 214,C,,Theory & Aural Skills IV,,1.00 ,N,,MWF 0905-1000 T 1145-0110PM Th 1245-0205PM,CHM 232 CHM 232 CHM 232,Staff
+O,MUSIC 223,,,Composition I,,1.00 ,N,,T 0935-1100 Th 0930-1050,CHM 239 CHM 239,"Mahr, Timothy"
+O,MUSIC 242,A,,Hist & Lit Music II,,1.00 ,N,,MWF 1255-0150PM,CHM 239,"Hanson, Alice"
+O,MUSIC 242,B,,Hist & Lit Music II,,1.00 ,N,,MWF 0200-0255PM,CHM 239,"Hanson, Alice"
+O,MUSIC 242,,F,FLC - German,,0.25 ,N,,F 1150-1245PM,CHM 224,"McWilliams, Kent M."
+O,MUSIC 251,A,,Conducting,,0.50 ,N,,T 0935-1100 Th 0930-1050,CHM 140 CHM 140,"Amundson, Steven"
+O,MUSIC 251,B,,Conducting,,0.50 ,N,,T 0935-1100 Th 0930-1050,CHM 233 CHM 233,Staff
+O,MUSIC 253,,,Instru Conducting,,0.50 ,N,,T 1145-0110PM Th 1245-0205PM,CHM 138 CHM 138,"Mahr, Timothy"
+O,MUSIC 262,A,,Piano Class IV,,0.25 ,N,,MW 0800-0855,CHM 222,"Selvelieva, Ina"
+O,MUSIC 262,B,,Piano Class IV,,0.25 ,N,,MW 0905-1000,CHM 222,"Selvelieva, Ina"
+O,MUSIC 275,,,Instr Chamber Music,,0.25 ,N,,TTh 0800-0855,CHM 140,"Maeda, Dana L."
+O,MUSIC 282,,,Vocal Solo Lit II,,0.25 ,N,,MW 0200-0255PM,CHM 233,"Engleman, Tracey M."
+O,MUSIC 287,,,Choral Lit I,,0.50 ,N,,MWF 1045-1140,CHM 232,"Aspaas, Christopher P."
+O,MUSIC 288,,,Choral Lit II,,0.50 ,N,,T 0120-0245PM Th 0215-0335PM,CHM 140 CHM 140,"Aspaas, Christopher P."
+O,MUSIC 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MUSIC 298,,,IS/,,1.00 ,N,,,,Staff
+O,MUSIC 298,A,,IS/,,1.00 ,N,,,,Staff
+O,MUSIC 299,,T,Msm IS/Topics,,0.25 ,N,,,,"Armstrong, Anton"
+O,MUSIC 314,,,Post-Tonal Analysis,,1.00 ,N,WRI,MWF 1045-1140,CHM 239,"Castro, David R."
+O,MUSIC 324,,,Composition II,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,CHM 239 CHM 239,"Merritt, Justin W."
+O,MUSIC 325,,,Composition III,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,CHM 239 CHM 239,"Merritt, Justin W."
+O,MUSIC 341,,,Music/Renaissance Era,,1.00 ,N,WRI,MWF 0905-1000,CHM 239,"Hoekstra, Gerald"
+O,MUSIC 345,,T,Top: Folk/Pop Influences,,1.00 ,N,WRI,T 0800-0925 Th 0800-0920,CHM 239 CHM 239,"Hanson, Alice"
+O,MUSIC 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MUSIC 398,,,IR/,,1.00 ,N,,,,Staff
+O,NEURO 239,,,Cell/Molec Neuroscience Students in Neuro 239 must also register for one lab Neuro 239 AL or BL.,,1.00 ,N,IST SED,MWF 1045-1140,RNS 210,"Crisp, Kevin M."
+O,NEURO 239,A,L,    Cell/Molec Neuro Lab,,0.00 ,N,,Th 0800-1100,RNS 123,"Crisp, Kevin M."
+O,NEURO 239,B,L,    Cell/Molec Neuro Lab,,0.00 ,N,,Th 1245-0345PM,RNS 123,"Crisp, Kevin M."
+O,NEURO 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NEURO 298,,,IS/,,1.00 ,N,,,,Staff
+O,NEURO 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NEURO 398,,,IR/,,1.00 ,N,,,,Staff
+O,NORW 112,A,,Begin Norwegian II,,1.00 ,N,,MWF 0800-0855,TOH 308,"Haerter, Christine L."
+O,NORW 112,B,,Begin Norwegian II,,1.00 ,N,,MWF 0905-1000,TOH 308,"Krouk, Dean"
+O,NORW 112,C,,Begin Norwegian II,,1.00 ,N,,MWF 1045-1140,TOH 308,"Haerter, Christine L."
+O,NORW 112,D,,Beginning Norwegian II,,1.00 ,N,,MWF 1255-0150PM,TOH 308,"O'Leary, Margaret H."
+O,NORW 130,,,Nordic Film Today,,1.00 ,N,ALS-A,MWF 1150-1245PM,TOH 308,"Lie, Kari"
+O,NORW 130,,F,FLC - Norwegian,,0.25 ,N,,,,"Lie, Kari"
+O,NORW 140,,,Norway: Contin/Change,,1.00 ,N,HBS ORC,T 0120-0245PM Th 0215-0335PM,TOH 308 TOH 308,"O'Leary, Margaret H."
+O,NORW 140,,F,FLC - Norwegian,,0.25 ,N,,,,"O'Leary, Margaret H."
+O,NORW 232,,,Intermed Norwegian II,,1.00 ,N,FOL-N,MWF 0200-0255PM,TOH 308,"Lie, Kari"
+O,NORW 282,,,Ibsen Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.,,1.00 ,N,EIN,T 0935-1100 Th 0930-1050,,"Krouk, Dean"
+O,NORW 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NORW 298,,,IS/,,1.00 ,N,,,,Staff
+O,NORW 372,,,Norsk Lit Etter 1890,,1.00 ,N,ALS-L FOL-N WRI,T 0120-0245PM Th 0215-0335PM,,"Krouk, Dean"
+O,NORW 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NORW 398,,,IR/,,1.00 ,N,,,,Staff
+O,NURS 110,,,Nutrition & Wellness This course is open to all students in all classes.,,1.00 ,N,IST,T 0935-1100 Th 0930-1050,SAC 112 SAC 112,"Hauck, Robert"
+O,NURS 120,,,Images of Wellness This course is open to all students in all classes.,,1.00 ,N,HBS,M 0700-1000PM,HH 307,"Neal, Diana"
+O,NURS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NURS 298,,,IS/,,1.00 ,N,,,,Staff
+O,NURS 298,A,,IS/,,1.00 ,N,,,,Staff
+O,NURS 336,,,Adult Health II Open to Nursing majors only.,,2.00 ,N,,MWF 1150-1245PM MWF 1255-0150PM,HH 301 HH 301,"Morisette, Sandra"
+O,NURS 338,,,Child Health Open to Nursing majors only.,,1.00 ,N,,MWF 1045-1140,HH 301,"Beckmann, Nicole B."
+O,NURS 392,,,Mental Health Open to Nursing majors only.,,1.00 ,N,,MWF 0905-1000,HH 301,"Huehn, Susan L."
+O,NURS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NURS 397,,,Nursing Leadership Open to Nursing majors only.,,1.00 ,N,WRI,MWF 0800-0855,HH 301,"Kuehn, Mary"
+O,NURS 398,,,IR/,,1.00 ,N,,,,Staff
+O,PHIL 118,,,Making of Modern Mind Open to Sophomores and First-Year Students only.,,1.00 ,N,HWC,MWF 0905-1000,HH 319,"Munoz-Hutchinson, Danny"
+O,PHIL 119,A,,Moral Psychology Open to Sophomores and First-Year Students,,1.00 ,N,HBS,MWF 1150-1245PM,HH 319,"Fuerstein, Michael"
+O,PHIL 119,B,,Moral Psychology Open to Sophomores and First-Year Students,,1.00 ,N,HBS,MWF 1255-0150PM,HH 319,"Fuerstein, Michael"
+O,PHIL 233,,,Kierkegaard,,1.00 ,N,HWC WRI,T 0120-0245PM Th 0215-0335PM,RNS 150 RNS 150,"Rudd, Anthony J."
+O,PHIL 236,,,Modern Philosophy,,1.00 ,N,HWC WRI,MWF 1045-1140,HH 516,"Grenberg, Jeanine"
+O,PHIL 240,,,Formal Logic,,1.00 ,N,,MWF 0905-1000,HH 403,"Cunningham, Arthur"
+O,PHIL 244,,,Philosophy of Science,,1.00 ,N,IST WRI,MWF 1045-1140,RNS 208,"Cunningham, Arthur"
+O,PHIL 251,A,,"Science, Ethics, Religion Prerequisite: completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.",,1.00 ,N,EIN WRI,T 1145-0110PM Th 1245-0205PM,OM 310 OM 310,"Marsh, Jason"
+O,PHIL 251,B,,"Science, Ethics, Religion Prerequisite: completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.",,1.00 ,N,EIN WRI,T 0120-0245PM Th 0215-0335PM,OM 310 OM 310,"Marsh, Jason"
+O,PHIL 253,,,Democra:Rule of Ignorant? Prerequisite: completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.,,1.00 ,N,EIN WRI,MWF 0200-0255PM,HH 515,"Fuerstein, Michael"
+O,PHIL 257,A,,Environmental Ethics Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration. Juniors may add on a space- available basis during the drop/add period.,,1.00 ,N,EIN WRI,T 1145-0110PM Th 1245-0205PM,HH 403 HH 403,"Taliaferro, Charles"
+O,PHIL 257,B,,Environmental Ethics Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration. Juniors may add on a space- available basis during the drop/add period.,,1.00 ,N,EIN WRI,T 0120-0245PM Th 0215-0335PM,HH 403 HH 403,"Taliaferro, Charles"
+O,PHIL 259,,,Global Health Ethics Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.,,1.00 ,N,EIN,MWF 0800-0855,HH 413,"Gervais, Karen"
+O,PHIL 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PHIL 298,,,IS/,,1.00 ,N,,,,Staff
+O,PHIL 372,,,"Sem:Metaphysics:Pers Iden Prerequisites: Two courses in Philosophy, one of which must be Phil 235 or Phil 236. Open to rising seniors and juniors only.",,1.00 ,N,WRI,T 0935-1100 Th 0930-1050,HH 516 HH 516,"Rudd, Anthony J."
+O,PHIL 374,,S,"Sem: Hellenistic Phil Prerequisites: Two courses in Philosophy, one of which must be Phil 235 or Phil 236. Open to rising seniors and juniors only.",,1.00 ,N,WRI,MWF 0200-0255PM,HH 516,"Munoz-Hutchinson, Danny"
+O,PHIL 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PHIL 398,,,IR/,,1.00 ,N,,,,Staff
+O,PHYS 112,,,Intro Astronomy,,1.00 ,N,IST,MWF 0905-1000,RNS 210,"Kolan, Amy"
+O,PHYS 125,A,,"Principles Physics II Students in Physics 125 must also register for one lab Physics 125 AL, BL, CL, DL, or EL.",,1.00 ,N,SED,MWF 0800-0855,RNS 210,"Dahl, David"
+O,PHYS 125,B,,"Principles Physics II Students in Physics 125 must also register for one lab Physics 125 AL, BL, CL, DL, or EL.",,1.00 ,N,SED,MWF 1150-1245PM,RNS 210,Staff
+O,PHYS 125,A,L,    Prin Physics II/Lab,,0.00 ,N,,M 0200-0430PM,RNS 292,"Dahl, David"
+O,PHYS 125,B,L,    Prin Physics II/Lab,,0.00 ,N,,T 0830-1100,RNS 292,"Engbrecht, Jason J."
+O,PHYS 125,C,L,    Prin Physics II/Lab,,0.00 ,N,,T 1145-0215PM,RNS 292,Staff
+O,PHYS 125,D,L,    Prin Physics II/Lab,,0.00 ,N,,Th 0225-0455PM,RNS 292,"Christianson, Knut A."
+O,PHYS 125,E,L,    Prin Physics II/Lab,,0.00 ,N,,F 1255-0325PM,RNS 292,Staff
+O,PHYS 131,A,,"Analytical II Students in Physics 131 must also register for one lab Physics 131 AL, BL, or CL",,1.00 ,N,IST SED,MWF 0800-0855,RNS 208,"Nitz, David"
+O,PHYS 131,B,,"Analytical II Students in Physics 131 must also register for one lab Physics 131 AL, BL, or CL",,1.00 ,N,IST SED,MWF 1045-1140,RNS 208,"Nitz, David"
+O,PHYS 131,A,L,    Analytical II Lab,,0.00 ,N,,M 0200-0430PM,RNS 293,"Nitz, David"
+O,PHYS 131,B,L,    Analytical II Lab,,0.00 ,N,,T 1145-0215PM,RNS 293,"Nitz, David"
+O,PHYS 131,C,L,    Analytical II Lab,,0.00 ,N,,T 0225-0455PM,,"Nitz, David"
+O,PHYS 244,,,Modern Physics,,1.00 ,N,,MWF 1045-1140,RNS 210,"Dahl, David"
+O,PHYS 245,A,L,    Modern Phys Lab (244),,0.25 ,N,,M 0200-0500PM,RNS 298,"Demas, James"
+O,PHYS 245,B,L,    Modern Phys Lab (244),,0.25 ,N,,T 0800-1100,RNS 298,"Demas, James"
+O,PHYS 245,C,L,    Modern Phys Lab (244),,0.25 ,N,,T 1145-0245PM,RNS 298,"Larsen, Amy"
+O,PHYS 245,D,L,    Modern Phys Lab (244),,0.25 ,N,,Th 0800-1050,RNS 298,"Larsen, Amy"
+O,PHYS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PHYS 298,,,IS/,,1.00 ,N,,,,Staff
+O,PHYS 298,A,,IS/,,1.00 ,N,,,,Staff
+O,PHYS 375,,,Maxwell's Equations,,1.00 ,N,,MWF 0905-1000,RNS 297,"Engbrecht, Jason J."
+O,PHYS 385,A,L,    Adv Physics Lab (375),,0.25 ,N,,Th 1245-0345PM,RNS 298,"Borovsky, Brian"
+O,PHYS 385,B,L,    Adv Physics Lab (375),,0.25 ,N,,F 0200-0500PM,RNS 298,"Engbrecht, Jason J."
+O,PHYS 390,,T,Top: Non-linear Dynamics,,1.00 ,N,,MWF 1045-1140,RNS 297,"Kolan, Amy"
+O,PHYS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PHYS 398,,,IR/,,1.00 ,N,,,,Staff
+O,PHYS 398,A,,IR/,,1.00 ,N,,,,Staff
+O,PHYS 398,B,,IR/,,1.00 ,N,,,,Staff
+O,PHYS 399,,S,Senior Seminar,,0.25 ,Y,,W 0400-0500PM,RNS 284,Staff
+O,PSCI 113,A,,Intro: Pol Theory,,1.00 ,N,HWC ORC,MWF 0905-1000,,"Casson, Douglas J."
+O,PSCI 113,B,,Intro: Pol Theory,,1.00 ,N,HWC ORC,MWF 1045-1140,,"Casson, Douglas J."
+O,PSCI 115,A,,Global Democracy,,1.00 ,N,HBS ORC,T 0800-0925 Th 0800-0920,,"Tegtmeyer Pak, Katherine S."
+O,PSCI 115,B,,Global Democracy,,1.00 ,N,HBS ORC,T 0935-1100 Th 0930-1050,,"Tegtmeyer Pak, Katherine S."
+O,PSCI 117,A,,Politics Human Rights,,1.00 ,N,HBS,MWF 1045-1140,OM 30,"Thalhammer, Kristina"
+O,PSCI 117,B,,Politics Human Rights,,1.00 ,N,HBS,MWF 1150-1245PM,OM 30,"Thalhammer, Kristina"
+O,PSCI 220,,,Analyzing Politics,,1.00 ,N,,MWF 0905-1000,OM 30,"Hendriks, Henriet"
+O,PSCI 232,,,Am Political Thought,,1.00 ,N,WRI,T 0935-1100 Th 0930-1050,HH 319 HH 319,"Anderson, Joshua"
+O,PSCI 246,,,Intro to Publ Policy,,1.00 ,N,,MWF 0200-0255PM,,"Hendriks, Henriet"
+O,PSCI 258,A,,World Politics,,1.00 ,N,HBS,T 0800-0925 Th 0800-0920,,Staff
+O,PSCI 258,B,,World Politics,,1.00 ,N,HBS,T 1145-0110PM Th 1245-0205PM,,Staff
+O,PSCI 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PSCI 298,,,IS/,,1.00 ,N,,,,Staff
+O,PSCI 299,,T,Top:,,1.00 ,N,,MWF 1255-0150PM,,Staff
+O,PSCI 311,,S,Sem: Am Politics Open only to seniors and juniors during web registration.,,1.00 ,N,WRI,MWF 1150-1245PM,,"Hendriks, Henriet"
+O,PSCI 321,,S,Sem: Intl Relations Open only to seniors and juniors during web registration.,,1.00 ,N,WRI,T 0120-0245PM Th 0215-0335PM,HH 319 HH 319,"Lott, Anthony"
+O,PSCI 370,,S,Sem:Courageous Resistance Open only to seniors and juniors during web registration.,,1.00 ,N,WRI,MWF 0200-0255PM,,"Thalhammer, Kristina"
+O,PSCI 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PSCI 398,,,IR/,,1.00 ,N,,,,Staff
+O,PSYCH 125,A,,Principles: Psych,,1.00 ,N,HBS IST,MWF 1045-1140,RNS 150,"Muir, Gary M."
+O,PSYCH 125,B,,Principles: Psych,,1.00 ,N,HBS IST,T 0935-1100 Th 0930-1050,RNS 150 RNS 150,"Sundby, Mark"
+O,PSYCH 230,A,,Research Methods,,1.00 ,N,WRI,MWF 1150-1245PM,RNS 131,"Kim, John"
+O,PSYCH 230,B,,Research Methods,,1.00 ,N,WRI,MWF 1255-0150PM,RNS 131,"Kim, John"
+O,PSYCH 230,A,L,    Research Methods Lab,,0.00 ,N,,T 0900-1100,,"Kim, John"
+O,PSYCH 230,B,L,    Research Methods Lab,,0.00 ,N,,T 1245-0245PM,,"Kim, John"
+O,PSYCH 235,,,Sensation/Perception,,1.00 ,N,SED,T 1145-0110PM Th 1245-0205PM,RNS 240 RNS 240,"Sherman, Bonnie"
+O,PSYCH 235,,L,    Sensation/Perception Lab,,0.00 ,N,,Th 0900-1100,RNS 240,"Sherman, Bonnie"
+O,PSYCH 237,,,Cognitive Psychology Students in Psych 237 must also register for one lab Psych 237 AL or BL.,,1.00 ,N,SED,MWF 1150-1245PM,RNS 290,"Loebach, Jeremy"
+O,PSYCH 237,A,L,    Cognitive Psychology Lab,,0.00 ,N,,W 0200-0500PM,RNS 240,"Loebach, Jeremy"
+O,PSYCH 237,B,L,    Cognitive Psychology Lab,,0.00 ,N,,F 0100-0400PM,RNS 240,"Loebach, Jeremy"
+O,PSYCH 238,A,,Biopsychology,,1.00 ,N,IST,MWF 0800-0855,RNS 290,"Clark, Rachel"
+O,PSYCH 238,B,,Biopsychology,,1.00 ,N,IST,MWF 0905-1000,RNS 290,"Clark, Rachel"
+O,PSYCH 241,A,,Developmental Psych,,1.00 ,N,HBS,T 0800-0925 Th 0800-0920,RNS 290 RNS 290,"Cho, Grace E."
+O,PSYCH 241,B,,Developmental Psych,,1.00 ,N,HBS,T 0935-1100 Th 0930-1050,RNS 290 RNS 290,"Cho, Grace E."
+O,PSYCH 247,A,,Psychopathology,,1.00 ,N,HBS,T 0800-0925 Th 0800-0920,RNS 190 RNS 190,"Veltri, Carlo O."
+O,PSYCH 247,B,,Psychopathology,,1.00 ,N,HBS,T 0935-1100 Th 0930-1050,RNS 190 RNS 190,"Veltri, Carlo O."
+O,PSYCH 249,A,,Social Psychology,,1.00 ,N,HBS,MWF 0800-0855,TOH 110,"Ori_a, M. Minda"
+O,PSYCH 249,B,,Social Psychology,,1.00 ,N,HBS,MWF 0905-1000,TOH 110,"Ori_a, M. Minda"
+O,PSYCH 249,C,,Social Psychology,,1.00 ,N,HBS,MWF 1045-1140,RNS 210,"Ori_a, M. Minda"
+O,PSYCH 251,,,Sport and Exercise Psych,,1.00 ,N,,MWF 1150-1245PM,,"Hamilton, Maya"
+O,PSYCH 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PSYCH 298,,,IS/,,1.00 ,N,,,,Staff
+O,PSYCH 298,A,,IS/,,1.00 ,N,,,,Staff
+O,PSYCH 298,B,,IS/,,1.00 ,N,,,,Staff
+O,PSYCH 336,,,Neuroscience of Addiction,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,RNS 124 RNS 124,"Dickinson, Shelly D."
+O,PSYCH 341,,,Infant Development,,1.00 ,N,ORC,MWF 1045-1140,RNS 124,"Gross, Dana"
+O,PSYCH 390,A,S,Sem: Forensic Psychology,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,RNS 124 RNS 124,"Veltri, Carlo O."
+O,PSYCH 390,B,S,Sem: Psychology of India,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,RNS 124 RNS 124,"Khosla, Meetu"
+O,PSYCH 391,,T,Top: Psych of Good & Evil Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.,,1.00 ,N,EIN,T 0800-0925 Th 0800-0920,RNS 124 RNS 124,"Huff, Charles"
+O,PSYCH 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+C,PSYCH 396,A,,Res: Auditory Cognition Prerequisite: permission of instructor required. Closed during web registration,,1.00 ,N,,MWF 0905-1000,RNS 124,"Loebach, Jeremy"
+O,PSYCH 396,B,,Res: Gender and Emotion Prerequisite: permission of instructor required. Closed during web registration,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,RNS 131 RNS 131,"Cho, Grace E."
+O,PSYCH 398,,,IR/,,1.00 ,N,,,,Staff
+O,REL 121,A,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 0800-0855,OM 240,"Ripley, Jason J."
+O,REL 121,B,,Bible/Culture/Commun Open to Environmental Conversations students only.,,1.00 ,N,BTS-B,MWF 0905-1000,OM 310,"Booth, David"
+O,REL 121,C,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 0905-1000,OM 240,"Odell, Margaret"
+O,REL 121,D,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 0905-1000,OM 310,"Jothen, Peder J."
+O,REL 121,E,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 1045-1140,OM 210,"Barbour, John"
+O,REL 121,F,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 1045-1140,OM 140,"Santurri, Edmund"
+O,REL 121,G,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 1150-1245PM,OM 305,"Barbour, John"
+O,REL 121,H,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 1150-1245PM,OM 310,"Santurri, Edmund"
+O,REL 121,I,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 1255-0150PM,OM 340,"Wilson, Charles"
+O,REL 121,J,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 1255-0150PM,OM 305,"Reed, Barbara"
+O,REL 121,K,,Bible/Culture/Commun,,1.00 ,N,BTS-B,MWF 0200-0255PM,OM 310,"Reed, Barbara"
+O,REL 121,L,,Bible/Culture/Commun,,1.00 ,N,BTS-B,T 0800-0925 Th 0800-0920,OM 340 OM 340,"Hanson, James"
+O,REL 121,M,,Bible/Culture/Commun,,1.00 ,N,BTS-B,T 0935-1100 Th 0930-1050,OM 210 OM 210,"Alexander, Torin D."
+O,REL 121,N,,Bible/Culture/Commun,,1.00 ,N,BTS-B,T 0935-1100 Th 0930-1050,OM 210 OM 210,"Beckman, Patricia"
+O,REL 121,O,,Bible/Culture/Commun,,1.00 ,N,BTS-B,T 1145-0110PM Th 1245-0205PM,OM 240 OM 240,"Schillinger, Jamie A."
+O,REL 121,P,,Bible/Culture/Commun,,1.00 ,N,BTS-B,T 1145-0110PM Th 1245-0205PM,OM 140 OM 140,"Hanson, James"
+O,REL 121,Q,,Bible/Culture/Commun,,1.00 ,N,BTS-B,T 0120-0245PM Th 0215-0335PM,OM 210 OM 210,"Schillinger, Jamie A."
+O,REL 121,R,,Bible/Culture/Commun,,1.00 ,N,BTS-B,T 0120-0245PM Th 0215-0335PM,OM 210 OM 210,"Beckman, Patricia"
+O,REL 201,A,,Essentials Chr Theol,,1.00 ,N,BTS-T,MWF 1045-1140,,"Walter, Gregory A."
+O,REL 201,B,,Essentials Chr Theol,,1.00 ,N,BTS-T,MWF 1150-1245PM,,"Walter, Gregory A."
+O,REL 207,,,Chr Theol/Moral Life,,1.00 ,N,BTS-T,T 0935-1100 Th 0930-1050,OM 240 OM 240,"Schuurman, Douglas"
+O,REL 212,,,Chr Theol in History,,1.00 ,N,BTS-T,T 0800-0925 Th 0800-0920,,"Beckman, Patricia"
+O,REL 217,,,Christ/Islamic Ethics,,1.00 ,N,EIN,T 0935-1100 Th 0930-1050,,"Schillinger, Jamie A."
+O,REL 218,A,,Pol/Liberation Theol,,1.00 ,N,BTS-T WRI,T 1145-0110PM Th 1245-0205PM,OM 210 OM 210,"Alexander, Torin D."
+O,REL 218,B,,Pol/Liberation Theol,,1.00 ,N,BTS-T WRI,T 0120-0245PM Th 0215-0335PM,,"Alexander, Torin D."
+O,REL 222,,,The Biblical God,,1.00 ,N,BTS-T ORC,MWF 0800-0855,OM 10,"Odell, Margaret"
+O,REL 248,,,Judaism,,1.00 ,N,HWC,T 1145-0110PM Th 1245-0205PM,OM 30 OM 30,"Benjamin, Mara H."
+O,REL 264,,,Theology and Sexuality,,1.00 ,N,BTS-T,T 0120-0245PM Th 0215-0335PM,,"Benjamin, Mara H. Booth, David"
+O,REL 282,,,Obama's Theolog: Niebuhr,,1.00 ,N,BTS-T WRI,MWF 0905-1000,,"Santurri, Edmund"
+O,REL 285,,,What is Religion? Open only to juniors and sophomores.,,1.00 ,N,WRI,MWF 1045-1140,OM 140,"Ripley, Jason J."
+O,REL 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,REL 295,,,Rel Pluralsm/Communit,,1.00 ,N,EIN,T 0800-0925 Th 0800-0920,,"Rambachan, Anantanand"
+O,REL 296,A,,"Love, Justice, Soc Rel Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration. Juniors may add on a space- available basis during the drop/add period.",,1.00 ,N,EIN WRI,T 1145-0110PM Th 1245-0205PM,OM 340 OM 340,"Schuurman, Douglas"
+O,REL 296,B,,"Love, Justice, Soc Rel Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration. Juniors may add on a space- available basis during the drop/add period.",,1.00 ,N,EIN WRI,T 0120-0245PM Th 0215-0335PM,OM 340 OM 340,"Schuurman, Douglas"
+O,REL 297,,,Chr Ethics: Life/Death,,1.00 ,N,EIN,MWF 0200-0255PM,OM 30,"Jothen, Peder J."
+O,REL 298,,,IS/,,1.00 ,N,,,,Staff
+O,REL 304,,,Hist Chr Thought III,,1.00 ,N,BTS-T WRI,T 1145-0110PM Th 1245-0205PM,,"Wilson, Charles"
+O,REL 341,,,Conscience-Critics,,1.00 ,N,EIN,MWF 0905-1000,,"Barbour, John"
+O,REL 391,,S,Sem: Bible,,1.00 ,N,,T 0935-1100 Th 0930-1050,,"Hanson, James"
+O,REL 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,REL 398,,,IR/,,1.00 ,N,,,,Staff
+O,RUSSN 112,A,,Beginning Russian II Students in Russian 112 must also register for one lab Russian 112 AL or BL.,,1.00 ,N,,MWF 1150-1245PM,TOH 312,"Robinson, Marc"
+O,RUSSN 112,B,,Beginning Russian II Students in Russian 112 must also register for one lab Russian 112 AL or BL.,,1.00 ,N,,MWF 0200-0255PM,TOH 312,"Robinson, Marc"
+O,RUSSN 112,A,L,    Beginning Russian II Lab,,0.00 ,N,,T 1150-1245PM,TOH 312,"Robinson, Marc"
+O,RUSSN 112,B,L,    Beginning Russian II Lab,,0.00 ,N,,T 0200-0255PM,TOH 312,"Robinson, Marc"
+O,RUSSN 232,,,Intermed Russian II Students in Russian 232 must also register for Russian 232 L.,,1.00 ,N,FOL-R,MWF 1255-0150PM,TOH 312,"Walter, Irina"
+O,RUSSN 232,,L,    Intermed Russian II Lab,,0.00 ,N,,T 1255-0150PM,TOH 312,"Walter, Irina"
+O,RUSSN 254,,,Russ Culture & Civ,,1.00 ,N,FOL-R,MWF 1150-1245PM,TOH 300,"Walter, Irina"
+O,RUSSN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,RUSSN 298,,,IS/,,1.00 ,N,,,,Staff
+O,RUSSN 371,,,Dostoevsky-Tr,,1.00 ,N,EIN,MWF 1045-1140,,"Robinson, Marc"
+O,RUSSN 372,,,The Russian Press,,1.00 ,N,FOL-R ORC,MWF 0200-0255PM,TOH 110,"Walter, Irina"
+O,RUSSN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,RUSSN 398,,,IR/,,1.00 ,N,,,,Staff
+O,SCICN 217,,,Cultural Context Open to Science Conversation students only.,,1.00 ,N,BTS-T HBS WRI,T 0935-1100 Th 0930-1050,OM 340 OM 340,"Huff, Charles Booth, David"
+O,SOAN 121,A,,Intro to Sociology Open to first-year students only.,,1.00 ,N,HBS MCD,T 0800-0925 Th 0800-0920,,"Sheppard, Ryan R."
+O,SOAN 121,B,,Intro to Sociology Open to first-year students only.,,1.00 ,N,HBS MCD,T 0935-1100 Th 0930-1050,,"Sheppard, Ryan R."
+O,SOAN 121,C,,Intro to Sociology,,1.00 ,N,HBS MCD,T 0800-0925 Th 0800-0920,TOH 114 TOH 114,"Thornhill, Theodore E."
+O,SOAN 128,A,,Int/Cult Anthropology Open to first-year students only.,,1.00 ,N,HBS MCG,MWF 0200-0255PM,OM 340,"Anderson, Carolyn"
+O,SOAN 128,B,,Int/Cult Anthropology Open to first-year students only.,,1.00 ,N,HBS MCG,T 0935-1100 Th 0930-1050,HH 514 HH 514,"Keefe, Susi K."
+O,SOAN 128,C,,Int/Cult Anthropology Open to first-year students only.,,1.00 ,N,HBS MCG,T 1145-0110PM Th 1245-0205PM,HH 514 HH 514,"Keefe, Susi K."
+O,SOAN 246,,,GLBT Lives and Issues This course is pending faculty approval.,,1.00 ,N,HBS,MWF 1255-0150PM,,"Nordstrom-Loeb, Bruce"
+O,SOAN 260,,,Marriage & the Family,,1.00 ,N,HBS MCD,T 0120-0245PM Th 0215-0335PM,HH 317 HH 317,"Sheppard, Ryan R."
+O,SOAN 264,,,Race/Class-Am Culture,,1.00 ,N,HBS MCD,MWF 0200-0255PM,,"Nordstrom-Loeb, Bruce"
+O,SOAN 266,A,,Crime and Inequality,,1.00 ,N,HBS,T 1145-0110PM Th 1245-0205PM,,"Thornhill, Theodore E."
+O,SOAN 266,B,,Crime and Inequality,,1.00 ,N,HBS,T 0120-0245PM Th 0215-0335PM,,"Thornhill, Theodore E."
+O,SOAN 267,,,Medical Anthropology,,1.00 ,N,HBS MCG,T 0120-0245PM Th 0215-0335PM,HH 302 HH 302,"Keefe, Susi K."
+O,SOAN 291,A,,Sociological Theory Open to Sociology/Anthropology majors only.,,1.00 ,N,HWC,MWF 0800-0855,HH 515,"Al Atiyat, Ibtesam"
+O,SOAN 291,B,,Sociological Theory Open to Sociology/Anthropology majors only.,,1.00 ,N,HWC,MWF 0905-1000,HH 302,"Al Atiyat, Ibtesam"
+O,SOAN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SOAN 298,,,IS/,,1.00 ,N,,,,Staff
+O,SOAN 373,A,,Ethnograph Rsch Meth Open to Sociology/Anthropology majors only.,,1.00 ,N,WRI,T 0935-1100 Th 0930-1050,OM 20 OM 20,"Williamson, Thomas A."
+O,SOAN 373,B,,Ethnograph Rsch Meth Open to Sociology/Anthropology majors only.,,1.00 ,N,WRI,T 1145-0110PM Th 1245-0205PM,OM 20 OM 20,"Williamson, Thomas A."
+O,SOAN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SOAN 398,,,IR/,,1.00 ,N,,,,Staff
+O,SOAN 399,A,,Senior Seminar Open to Senior Sociology/Anthropology majors only Prerequisite: Completion of BTS-T or permission of instructor.,,1.00 ,N,EIN,MWF 1045-1140,HH 515,"Anderson, Carolyn"
+O,SOAN 399,B,,Senior Seminar Open to senior majors in Sociology/Anthropology only. Prerequisite: Completion of BTS-T or permission of instructor.,,1.00 ,N,EIN,MWF 1150-1245PM,HH 515,"Anderson, Carolyn"
+O,SPAN 112,A,,Beginning Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,,MWF 0800-0855,TOH 314,"Olson, Barbara"
+O,SPAN 112,B,,Beginning Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,,MWF 1045-1140,TOH 314,"Olson, Barbara"
+O,SPAN 231,A,,Intermed Spanish I Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,,MWF 0800-0855,TOH 314,"Barnes-Karol, Gwendolyn"
+O,SPAN 231,B,,Intermed Spanish I Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,,MWF 1150-1245PM,TOH 312,"Barnes-Karol, Gwendolyn"
+O,SPAN 231,C,,Intermed Spanish I Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,,MWF 0200-0255PM,TOH 314,"Broner, Maggie"
+O,SPAN 232,A,,Intermed Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S MCD,MWF 0800-0855,TOH 312,"Cropsey, Kris A."
+O,SPAN 232,B,,Intermed Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S MCD,MWF 0905-1000,TOH 108,"Cropsey, Kris A."
+O,SPAN 232,C,,Intermed Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S MCD,MWF 1045-1140,TOH 108,"Villate-Isaza, Alberto"
+O,SPAN 232,D,,Intermed Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S MCD,MWF 1150-1245PM,TOH 108,"Villate-Isaza, Alberto"
+O,SPAN 232,E,,Intermed Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S MCD,MWF 1255-0150PM,TOH 108,"Medina-Vilarino, Kristina"
+O,SPAN 232,F,,Intermed Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S MCD,MWF 0200-0255PM,TOH 108,"Medina-Vilarino, Kristina"
+O,SPAN 232,G,,Intermed Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S MCD,T 0800-0925 Th 0800-0920,TOH 314 TOH 314,"Strichartz, Ariel"
+O,SPAN 232,H,,Intermed Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S MCD,T 0935-1100 Th 0930-1050,TOH 312 TOH 312,"Strichartz, Ariel"
+O,SPAN 232,I,,Intermed Spanish II Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S MCD,T 1145-0110PM Th 1245-0205PM,,"Carullo, Sylvia"
+O,SPAN 250,A,,Gateway Sp-Spkng Wrld Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S WRI,T 0935-1100 Th 0930-1050,TOH 312 TOH 312,"Carullo, Sylvia"
+O,SPAN 250,B,,Gateway Sp-Spkng Wrld Prerequisite: completion of Spanish placement test or preceding course.,,1.00 ,N,FOL-S WRI,T 0120-0245PM Th 0215-0335PM,,"O'Conner, Jonathan P."
+O,SPAN 271,,,Heritage Spain,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,TOH 310 TOH 310,"O'Conner, Jonathan P."
+O,SPAN 275,,,Exploring Hispanic Lit,,1.00 ,N,ALS-L,T 0935-1100 Th 0930-1050,TOH 314 TOH 314,"Medina-Vilarino, Kristina"
+O,SPAN 276,,,Spanish 1st/2nd Lang,,1.00 ,N,,MWF 1150-1245PM,,"Broner, Maggie"
+O,SPAN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SPAN 298,,,IS/,,1.00 ,N,,,,Staff
+O,SPAN 312,,T,Voices: Spain,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,TOH 108 TOH 108,"Barnes-Karol, Gwendolyn"
+O,SPAN 314,,T,Lit/Soc/La: Topics,,1.00 ,N,ALS-L,T 0120-0245PM Th 0215-0335PM,,"Strichartz, Ariel"
+O,SPAN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SPAN 398,,,IR/,,1.00 ,N,,,,Staff
+O,STAT 110,,,"Prin of Statistics This course has class year limits. Students in Stat 110 must also register for one lab 110 AL, BL, or CL.",,1.00 ,N,AQR,T 0800-0925 Th 0800-0920,RNS 150 RNS 150,"Lane-Getaz, Sharon"
+O,STAT 110,A,L,    Prin of Statistics Lab,,0.00 ,N,,F 0800-0855,RML 115,"Lane-Getaz, Sharon"
+O,STAT 110,B,L,    Prin of Statistics Lab,,0.00 ,N,,F 0905-1000,RML 115,"Lane-Getaz, Sharon"
+O,STAT 110,C,L,    Prin of Statistics Lab,,0.00 ,N,,F 1045-1140,RML 115,"Lane-Getaz, Sharon"
+O,STAT 212,A,,Statistics for Science This course has class-year limits.,,1.00 ,N,AQR,MWF 0905-1000,TOH 182,"Roback, Paul J."
+O,STAT 212,B,,Statistics for Science This course has class-year limits.,,1.00 ,N,AQR,MWF 1150-1245PM,RNS 354,Staff
+O,STAT 212,C,,Statistics for Science This course has class-year limits.,,1.00 ,N,AQR,MWF 1255-0150PM,TOH 182,Staff
+O,STAT 263,A,,Statistics for Economics,,1.00 ,N,,MWF 1150-1245PM,HH 413,"Becker, Anthony"
+O,STAT 263,B,,Statistics for Economics,,1.00 ,N,,T 0935-1100 Th 0930-1050,HH 413 HH 413,"Pomponio, Xun"
+O,STAT 272,A,,Statistical Modeling,,1.00 ,N,WRI,T 0935-1100 Th 0930-1050,TOH 182 TOH 182,"Ziegler, Kathryn"
+O,STAT 272,B,,Statistical Modeling,,1.00 ,N,WRI,T 1145-0110PM Th 1245-0205PM,TOH 182 TOH 182,Staff
+O,STAT 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,STAT 298,,,IS/,,1.00 ,N,,,,Staff
+O,STAT 316,,,Adv Statistical Model,,1.00 ,N,,MWF 1045-1140,TOH 182,"Ziegler, Kathryn"
+O,STAT 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,STAT 398,,,IR/,,1.00 ,N,,,,Staff
+O,SWRK 221,,,Soc Work/Soc Welfare Not open to first-year students. This course has class year limits.,,1.00 ,N,WRI,MWF 0200-0255PM,,"Carlsen, Mary"
+O,SWRK 258,,,Social Policy This course has class year limits. Not open to First-Year Students.,,1.00 ,N,,MWF 1150-1245PM,HH 317,"Carlsen, Mary"
+O,SWRK 261,,,Incl Pract: Grp/Org/Cm This course has class year limits and is open to majors only.,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,HH 319 HH 319,Staff
+O,SWRK 274,,,Eval/SW Practice/Prog This course is open to Family Studies concentrators and Social Work majors only. This course has class-year limits.,,1.00 ,N,,T 0800-0925 Th 0800-0920,HH 319 HH 319,Staff
+O,SWRK 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SWRK 298,,,IS/,,1.00 ,N,,,,Staff
+O,SWRK 381,,,Soc Worker Professional This course is open to Senior Social Work majors only.,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,TOH 300 TOH 300,"Carlsen, Mary"
+O,SWRK 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SWRK 398,,,IR/,,1.00 ,N,,,,Staff
+O,THEAT 100,,,Oral Interpretation,,1.00 ,N,ALS-A ORC,MWF 1045-1140,TB 216,"Wilson, Karen"
+O,THEAT 110,,,Intro to Theater,,1.00 ,N,ALS-A MCD ORC,MWF 0905-1000,TB Kelsey,"Gisselman, Gary C."
+O,THEAT 115,,,Acting for Non-Majors,,1.00 ,N,ALS-A ORC,MWF 0905-1000,TB Haugen,Staff
+O,THEAT 120,,,Public Speaking,,1.00 ,N,ORC,M 0700-1000PM,TB 216,Staff
+O,THEAT 130,,,Intro to Acting,,1.00 ,N,ALS-A ORC,MWF 1150-1245PM,TB Haugen,"Freeman, Dona W."
+O,THEAT 131,,,Acting-Lyric Stage,,1.00 ,N,ALS-A,T 0935-1100 Th 0930-1050,TB Kelsey TB Kelsey,"McKeel, James Freeman, Dona W."
+O,THEAT 230,,,Intermediate Acting,,1.00 ,N,,T 1145-0110PM Th 1245-0205PM,TB Haugen TB Haugen,"Freeman, Dona W."
+O,THEAT 233,,,Thtr Prac: Act/Direct Registration by permission of instructor only.,,0.25 ,Y,,,,"Gisselman, Gary C."
+O,THEAT 240,,,Scenery & Costume Design,,1.00 ,N,ALS-A,MWF 1150-1245PM,TB Green Rm,"Edwards, Todd F."
+O,THEAT 253,A,,Th Prac: Design/Tech Prod Registration by permission of instructor only.,,0.25 ,Y,,,,"Edwards, Todd F."
+O,THEAT 253,B,,Th Prac: CADD Registration by permission of instructor only.,,0.25 ,Y,,T 0305-0400PM,TB Green Rm,"Bjorklund, Brian"
+O,THEAT 271,,,Hist Theat-Since 1700,,1.00 ,N,ALS-L HWC WRI,T 0935-1100 Th 0930-1050,TB 216 TB 216,"Willcoxon, Jeanne I."
+O,THEAT 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,THEAT 298,,,IS/,,1.00 ,N,,,,Staff
+O,THEAT 338,,,Intermed Stage Direction,,1.00 ,N,,MWF 1045-1140,TB 227,"Gisselman, Gary C."
+O,THEAT 352,,,Adv Design for Perform,,1.00 ,N,,T 0120-0245PM Th 0215-0335PM,TB Haugen TB Haugen,"Bjorklund, Brian"
+O,THEAT 360,,S,Senior Capstone,,1.00 ,N,,MWF 1255-0150PM,TB 227,"Wilson, Karen"
+O,THEAT 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,THEAT 398,,,IR/,,1.00 ,N,,,,Staff
+O,THEAT 398,A,,IR/,,1.00 ,N,,,,Staff
+O,WMGST 121,,,Intro Womens/Gender St,,1.00 ,N,WRI,MWF 1150-1245PM,RML 421,"Richards, Rebecca S."
+O,WMGST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,WMGST 298,,,IS/,,1.00 ,N,,,,Staff
+O,WMGST 298,A,,IS/,,1.00 ,N,,,,Staff
+O,WMGST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,WMGST 398,,,IR/,,1.00 ,N,,,,Staff
+O,WMGST 399,,,"Sem:Transnation Feminisms Open to Junior and Senior Women's and Gender Studies majors only, except by permission of instructor. Prerequisite: Women's and Gender Studies 121.",,1.00 ,N,WRI,MWF 0905-1000,,"Richards, Rebecca S."
+O,WRIT 111,A,,First-Year Writing,,1.00 ,N,FYW,MWF 0800-0855,RML 420,"Hill, Jan C."
+O,WRIT 111,B,,First-Year Writing,,1.00 ,N,FYW,MWF 0905-1000,TOH 212,"Wells, Colin"
+O,WRIT 111,C,,First-Year Writing,,1.00 ,N,FYW,MWF 1045-1140,,"Hill, Jan C."
+O,WRIT 111,D,,First-Year Writing,,1.00 ,N,FYW,MWF 1150-1245PM,RML 515,"Trull, Mary E."
+O,WRIT 111,E,,First-Year Writing,,1.00 ,N,FYW,MWF 1150-1245PM,RML 525,"Naito, Jonathan T."
+O,WRIT 111,F,,First-Year Writing,,1.00 ,N,FYW,MWF 1255-0150PM,OM 210,"Wells, Colin"
+O,WRIT 111,G,,First-Year Writing,,1.00 ,N,FYW,MWF 1255-0150PM,RML 520,"Kwon Dobbs, Jennifer"
+O,WRIT 111,H,,First-Year Writing,,1.00 ,N,FYW,MWF 0200-0255PM,RML 420,"Marsalek, Karen E."
+O,WRIT 111,I,,First-Year Writing,,1.00 ,N,FYW,MWF 0200-0255PM,,"Kelly, Maria L."
+O,WRIT 111,J,,First-Year Writing Open to Environmental Conversations students only.,,1.00 ,N,FYW,T 0800-0925 Th 0800-0920,RML 420 RML 420,"Jackson, Paul T."
+O,WRIT 111,K,,First-Year Writing,,1.00 ,N,FYW,T 0935-1100 Th 0930-1050,RML 420 RML 420,"Schwehn, Kaethe"
+O,WRIT 111,L,,First-Year Writing,,1.00 ,N,FYW,T 1145-0110PM Th 1245-0205PM,RML 520 RML 520,"Mbele, Joseph L."
+O,WRIT 111,M,,First-Year Writing,,1.00 ,N,FYW,T 1145-0110PM Th 1245-0205PM,RML 515 RML 515,"Postlethwaite, Diana"
+O,WRIT 111,N,,First-Year Writing,,1.00 ,N,FYW,T 0120-0245PM Th 0215-0335PM,TOH 114 TOH 114,"Stein, Sarah B."
+O,WRIT 111,O,,First-Year Writing,,1.00 ,N,FYW,T 0120-0245PM Th 0215-0335PM,TOH 114 TOH 114,"Bridges IV, William H."
+O,WRIT 211,,T,Top: Sci in World & Word Prerequisite: completion of FYW requirement.,,1.00 ,N,WRI,MWF 1255-0150PM,RNS 297,"LeBlanc, Diane C."

@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+   This document was automatically created using an XSLT stylesheet by Aubrey Barnard.
+   See www.stolaf.edu/people/barnard/xml/xml.html for additional information.
+   -->
+<html xmlns="http://www.w3.org/TR/xhtml1/strict">
+<head>
+<title>The Major Class Specification</title>
+</head>
+<body bgcolor="white">
+<div class="specification">
+<center>
+<p>
+<big>
+<big>
+<big>
+<big>The Major Class Specification</big>
+</big>
+</big>
+</big>
+</p>
+</center>
+<center>
+<p>
+<big>
+<big>
+<big>This class models a major at St Olaf College.</big>
+</big>
+</big>
+</p>
+</center>
+<center>
+<p>Xandra Best. Wednesday, May 15, 2013</p>
+</center>
+<br/>
+<hr/>
+<br/>
+<br/>
+
+<dl class="class-spec">
+<p>
+<dt>
+<big>
+<strong>CLASS <code> Major, Friend Class: Concentration</code>
+</strong>
+</big>
+</dt>
+<dd>
+
+<dl class="inheritance">
+<p>
+<dt>
+<strong>No superclass.</strong>
+</dt>
+<dd/>
+</p>
+</dl>
+
+<dl class="variables">
+<p>
+<dt>
+<strong>State variables:</strong>
+</dt>
+<dd>
+<dl>
+<p>
+<dt class="var">
+<code>  string name</code>
+</dt>
+<dd>Name of major.</dd>
+</p>
+<p>
+<dt class="var">
+<code>  Department department</code>
+</dt>
+<dd>Associated department of major.</dd>
+</p>
+<p>
+<dt class="var">
+<code>  vector of MajorRequirement requirements</code>
+</dt>
+<dd>Regular requirements in major.</dd>
+</p>
+<p>
+<dt class="var">
+<code>  vector of SpecialRequirement specialRequirements</code>
+</dt>
+<dd>Special requirements in major.</dd>
+</p>
+<p>
+<dt class="var">
+<code>  vector of MajorRequiremnet setRequirements</code>
+</dt>
+<dd>Regular requirements in Special requirements.</dd>
+</p>
+</dl>
+</dd>
+</p>
+</dl>
+
+<dl class="constructors-list">
+<p>
+<dt>
+<strong>Constructors:</strong>
+</dt>
+<dd>
+<dl>
+
+<p>
+<dt class="constructor">
+<code> Major, Friend Class: Concentration</code>
+</dt>
+<dd>
+<dl>
+Default constructor.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>This instance of Major is initialized by setting state varible name to "None" and department to "NONE".</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="constructor">
+<code> Major, Friend Class: Concentration</code>
+</dt>
+<dd>
+<dl>
+Regular constructor.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>Name of major.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>This instance of Major is initialized by calling init.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="constructor">
+<code> Major, Friend Class: Concentration</code>
+</dt>
+<dd>
+<dl>
+Copy constructor.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Major c</code>
+</dt>
+<dd>Reference to a major.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>This instance of Major is initialized as a copy of c by calling copy.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+</dl>
+</dd>
+</p>
+</dl>
+
+<dl class="methods-list">
+<p>
+<dt>
+<strong>Methods:</strong>
+</dt>
+<dd>
+<dl>
+
+<p>
+<dt class="method">
+<code>  copy</code>
+</dt>
+<dd>
+<dl>
+Creates a copy of another Major
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Major c</code>
+</dt>
+<dd>Reference to a major.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>An exact copy of Major c.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  init</code>
+</dt>
+<dd>
+<dl>
+Initializes instance of Major.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>vector of string record</code>
+</dt>
+<dd>A group of majors.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Instances of Major are initialized.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  =</code>
+</dt>
+<dd>
+<dl>
+Equals operator.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>const Major c</code>
+</dt>
+<dd>Reference to a major.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Reference to c.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> ostream getData</code>
+</dt>
+<dd>
+<dl>
+Read in data.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>ostream os</code>
+</dt>
+<dd>Reference to ostream.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>Data in os is read into state variable name.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>os is returned.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code>  display</code>
+</dt>
+<dd>
+<dl>
+Couts name.
+<p>
+<dt class="arguments">No arguments.</dt>
+<dd/>
+</p>
+<p>
+<dt>State change:</dt>
+<dd/>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Couts name of major.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> SpecialRequirement getSpecialRequirement</code>
+</dt>
+<dd>
+<dl>
+Searches through requirement vectors and returns relevant pointer.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>Name of special requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Pointer to the SpecialRequirement object.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> MajorRequirement getMajorRequirement</code>
+</dt>
+<dd>
+<dl>
+Searches through requirement vectors and returns relevant pointer.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>Name of major requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Pointer to the MajorRequirement object.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+<p>
+<dt class="method">
+<code> SetRequirement getSetRequirement</code>
+</dt>
+<dd>
+<dl>
+Searches through requirement vectors and returns relevant pointer.
+<p>
+<dt class="arguments">Arguments:</dt>
+<dd>
+<dl>
+<p>
+<dt class="arg">
+<code>string str</code>
+</dt>
+<dd>Name of set requirement.</dd>
+</p>
+</dl>
+</dd>
+</p>
+<p>
+<dt>State change:</dt>
+<dd>No state change.</dd>
+</p>
+<p>
+<dt>Return value:</dt>
+<dd>Pointer to the SetRequirement object.</dd>
+</p>
+</dl>
+</dd>
+</p>
+
+</dl>
+</dd>
+</p>
+</dl>
+
+</dd>
+<dt>
+<hr/>
+</dt>
+<dd/>
+</p>
+</dl>
+
+</div>
+</body>
+</html>

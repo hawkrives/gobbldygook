@@ -1,0 +1,425 @@
+St,Course #,S,L,Course Name,_,CR ,PN,GE Reqs,Meeting Time(s),Location(s),Instructor(s)
+C,AFAM 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,AFAM 298,,,IS/,,1.00 ,N,,,,Staff
+C,AFAM 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,AFAM 398,,,IR/,,1.00 ,N,,,,Staff
+C,AMST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,AMST 298,,,IS/,,1.00 ,N,,,,Staff
+C,AMST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,AMST 398,,,IR/,,1.00 ,N,,,,Staff
+C,AR/AS 262,,,Sacred Sites/South Asia This is an off-campus course.,,1.00 ,N,ALS-A MCG,,,"Kucera, Karil J."
+C,ARMS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ARMS 294,A,,Academic Internship,,1.00 ,Y,,,,"Gallego, Carlos"
+O,ARMS 298,,,IS/,,1.00 ,N,,,,Staff
+C,ARMS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ARMS 398,,,IR/,,1.00 ,N,,,,Staff
+C,ART 102,,,Foundation 2-D Media This course has class-year limits.,,1.00 ,N,ALS-A,M-F 0900-0300PM,DC 216,"Weeks, Michon"
+C,ART 106,,,Draw from Nature/Islands This is an off-campus course.,,1.00 ,N,ALS-A,,,"Saurer, John"
+C,ART 233,,,Advanced 2D Studio Open to all students who meet the prerequisite.,,1.00 ,N,,M-F 0900-1000 M-F 1040-1200PM M-F 0100-0300PM,DC 214 DC 214 DC 214,"Arneson, Wendell"
+C,ART 240,,,Creating Visual Spectacle Registration by invitation only.,,1.00 ,N,,M-F 0900-1000 M-F 1040-1240PM M-F 0100-0300PM,DC 106 DC 106 DC 106,"Dell, Irve"
+C,ART 251,,,Art 1776-1880,,1.00 ,N,ALS-A HWC,M-F 1040-1240PM,DC 305,"Rohn, Matthew"
+C,ART 253,,,Art Since 1945 Open to first-year students.,,1.00 ,N,ALS-A HWC,M-F 0100-0300PM,DC 305,"Tradowsky, Christopher"
+C,ART 255,,,Ital Art in Context This is an off-campus course.,,1.00 ,N,ALS-A,,,"Thompson, Nancy M."
+C,ART 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ART 294,A,,Academic Internship,,1.00 ,Y,,,,"Dell, Irve"
+O,ART 294,B,,Academic Internship,,1.00 ,Y,,,,"Arneson, Wendell"
+O,ART 298,,,IS/,,1.00 ,N,,,,Staff
+C,ART 298,A,,IS/Mixmedia Oil Painting,,1.00 ,N,,,,"Arneson, Wendell"
+O,ART 298,B,,IS/Early Contemp Ceramics,,1.00 ,N,WRI,,,"Gallas, Ron"
+O,ART 298,C,,IS/Study of 3D Media,,1.00 ,N,,,,"Fisher, Kathryne"
+O,ART 298,D,,IS/Art Criticism,,1.00 ,N,WRI,,,"Rohn, Matthew"
+O,ART 298,E,,IS/Curation Studies,,1.00 ,N,,,,"Tradowsky, Christopher"
+O,ART 298,F,,IS/Art and Identity,,1.00 ,N,,,,"Dell, Irve Williamson, Thomas A."
+C,ART 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ART 398,,,IR/,,1.00 ,N,,,,Staff
+C,ART 398,A,,IR/Art Apprenticeship 2,,1.00 ,N,,,,"Saurer, John"
+C,ART 398,B,,IR/Env in Romantic Art,,1.00 ,N,,,,"Rohn, Matthew"
+C,ART 398,C,,IR/Advanced Oil Painting,,1.00 ,N,,,,"Arneson, Wendell"
+C,ART 398,D,,IR/Graphic Design Prep,,1.00 ,N,,,,"Cameron, Janet C."
+O,ASIAN 126,,,Japanese Lang/Society,,1.00 ,N,MCG,M-F 1040-1240PM,OM 240,"Ito, Rika"
+C,ASIAN 130,,,Japan SciFi/Global Persp New course,,1.00 ,N,ALS-L MCG,M-F 1040-1240PM,TOH 112,"Bridges IV, William H."
+C,ASIAN 215,,,AsianCon2: Encounter Asia Registration restricted to students in the Asian Con program. This is an off-campus course.,,1.00 ,N,,,,"Tegtmeyer Pak, Katherine S. Wan, Pin Pin"
+C,ASIAN 237,,,Modern Chinese Lit & Soc,,1.00 ,N,ALS-L MCG WRI,M-F 1040-1240PM,TOH 316,"Chen, Luying"
+C,ASIAN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ASIAN 298,,,IS/,,1.00 ,N,,,,Staff
+C,ASIAN 298,A,,IS/Geo. of the Opium Wars,,1.00 ,N,,,,"Entenmann, Robert"
+C,ASIAN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ASIAN 398,,,IR/,,1.00 ,N,,,,Staff
+C,BIO 125,,,Cell Bio & Genetics Students in Bio 125 must also register for lab Bio 125 AL or BL.,,1.00 ,N,IST SED,M-F 0100-0300PM,RNS 390,"Zayas, Roberto Lenertz, Lisa Y."
+C,BIO 125,A,L,Cell Bio & Genetics Lab,,0.00 ,N,,M-F 0800-1000 M-F 1040-1200PM,RNS 394 RNS 394,"Zayas, Roberto Lenertz, Lisa Y."
+C,BIO 125,B,L,Cell Bio & Genetics Lab,,0.00 ,N,,M-F 0800-1000 M-F 1040-1200PM,RNS 398 RNS 398,"Zayas, Roberto Lenertz, Lisa Y."
+C,BIO 127,,,"Genetics and Society Students in Bio 127 must also register for lab Bio 127 L. This course has class-year limits. Class will meet on Friday, January 4",,1.00 ,N,IST SED,M-Th 0900-1000 M-Th 1040-1200PM,RNS 290 RNS 290,"Listenberger, Laura"
+C,BIO 127,,L,Genetics and Society Lab,,0.00 ,N,,M-Th 0100-0300PM,RNS 255,"Listenberger, Laura"
+C,BIO 135,,,Thinking & Doing Bio Students in Bio 135 must also register for lab Bio 135 L. This course has class-year limits.,,1.00 ,N,IST SED,M-F 0900-1000,RNS 455,"Giannini, John"
+C,BIO 135,,L,Thinking & Doing Bio Lab,,0.00 ,N,,M-F 1040-0100PM,RNS 455,"Giannini, John"
+X,BIO 281,,,Winter Ecology This is an off-campus course. This course has been canceled.,,1.00 ,N,,,,Staff
+C,BIO 284,,,Peruvian Medical Exp This is an off-campus course.,,1.00 ,N,,,,"Van Wylen, David"
+C,BIO 287,,,Island Biology This is an off-campus course.,,1.00 ,N,,,,"Porterfield, Jean C."
+C,BIO 288,,,Equatorial Biology This is an off-campus course.,,1.00 ,N,,,,"Kandl, Kimberly A."
+C,BIO 294,,,Academic Internship,,1.00 ,Y,,,,"Stromme, David A."
+O,BIO 294,A,,Academic Internship,,1.00 ,Y,,,,"Porterfield, Jean C."
+C,BIO 294,B,,Academic Internship,,1.00 ,Y,,,,"Bowers, Lisa M."
+C,BIO 294,C,,Academic Internship,,1.00 ,Y,,,,"Listenberger, Laura"
+O,BIO 294,D,,Academic Internship,,1.00 ,Y,,,,"Kermott, Louis Henry"
+O,BIO 294,E,,Academic Internship,,1.00 ,Y,,,,"Walter, Anne"
+O,BIO 294,F,,Academic Internship,,1.00 ,Y,,,,"Crisp, Kevin M."
+O,BIO 298,,,IS/,,1.00 ,N,,,,Staff
+C,BIO 298,A,,IS/Population Genetics,,1.00 ,N,,,,"Schade, John D."
+O,BIO 298,B,,IS/Hunting as Deer Cntrol,,1.00 ,N,WRI,,,"Giannini, John"
+O,BIO 298,C,,IS/Stream Biogeochemistry,,1.00 ,N,,,,"Schade, John D."
+C,BIO 385,,,Neuroscience Seminar Note: There are some afternoon field trips. Open to seniors and juniors only.,,1.00 ,N,IST ORC,M-F 1040-1240PM,HH 302,"Walter, Anne"
+C,BIO 386,,,Animal Behavior Students in Bio 386 must also register for lab Bio 386L. Open to seniors and juniors only.,,1.00 ,N,IST SED,M-Th 0900-1000 M-Th 1040-1200PM,RNS 124 RNS 124,"Kermott, Louis Henry"
+C,BIO 386,,L,Animal Behavior Lab,,0.00 ,N,,M-Th 0100-0300PM,RNS 124,"Kermott, Louis Henry"
+C,BIO 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,BIO 394,A,,Academic Internship,,1.00 ,Y,,,,"Abdella, Beth"
+C,BIO 396,,,Res:Bacterial Cell Cycles Registration by permission of instructor. Closed during web registration.,,1.00 ,N,,M-F 1040-1200PM M-F 0100-0300PM,RNS 316 TBA,"Bowers, Lisa M."
+O,BIO 398,,,IR/,,1.00 ,N,,,,Staff
+O,BIO 398,A,,IR/Oyster Life History,,1.00 ,N,,,,"Porterfield, Jean C."
+C,BMOLS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,BMOLS 298,,,IS/,,1.00 ,N,,,,Staff
+C,BMOLS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,BMOLS 398,,,IR/,,1.00 ,N,,,,Staff
+C,CH/BI 126,,,Integrated Chem/Bio II Students in CH/BI 126 must also register for lab CH/BI 126 AL or BL. Open only to those students who have completed CH/BI 125.,,1.00 ,N,,M-F 0800-1000 M-F 1045-1145,RNS 310 RNS 310,"Schwinefus, Jeffrey J."
+C,CH/BI 126,A,L,Integrate Chem/Bio II Lab,,0.00 ,N,,M-Th 1230-0300PM,RNS 355,"Schwinefus, Jeffrey J."
+C,CH/BI 126,B,L,Integrate Chem/Bio II Lab,,0.00 ,N,,M-Th 1230-0300PM,RNS 350,"Abdella, Beth"
+O,CHEM 123,A,,Atom/Molec Structure,,1.00 ,N,,M-F 0800-1000,RNS 390,"Fogarty, Keir"
+C,CHEM 123,B,,Atom/Molec Structure,,1.00 ,N,,M-F 1040-1240PM,RNS 390,"Miessler, Gary"
+O,CHEM 123,C,,Atom/Molec Structure,,1.00 ,N,,M-F 0100-0300PM,RNS 310,"Marlier, Elodie"
+C,CHEM 124,,,A Matter of Environ Students in Chemistry 124 must also register for lab Chemistry 124 L.,,1.00 ,N,IST SED,M-F 0800-1000,RNS 410,"Muth, Gregory W."
+C,CHEM 124,,L,A Matter of Environ Lab,,0.00 ,N,,TWTh 1230-0330PM,RNS 454,"Muth, Gregory W."
+C,CHEM 252,,,Organometallic Chem,,1.00 ,N,WRI,M-F 0100-0300PM,RNS 435,"Kalyani, Dipannita"
+C,CHEM 294,,,Academic Internship,,1.00 ,Y,,,,"Pearson, Wesley"
+O,CHEM 294,A,,Academic Internship,,1.00 ,Y,,,,"Beussman, Douglas J."
+O,CHEM 298,,,IS/MD Simulations,,1.00 ,N,WRI,,,"Schwinefus, Jeffrey J."
+O,CHEM 380,,,Organic Analys/Theory Students in Chemistry 380 must also register for lab Chemistry 380 L.,,1.00 ,N,,M-F 0800-1000,RNS 435,"Pearson, Wesley"
+O,CHEM 380,,L,Organic Analys/Theory Lab,,0.00 ,N,,,,"Pearson, Wesley"
+O,CHEM 384,,,Bioanalytic Chemistry Lab times TBA.,,1.00 ,N,IST SED,M-F 1040-1240PM,RNS 435,"Beussman, Douglas J."
+C,CHEM 394,,,Academic Internship,,1.00 ,Y,,,,"Hanson, Robert"
+O,CHEM 398,,,IR/C-C Bond Formation,,1.00 ,N,,,,"Kalyani, Dipannita"
+C,CHIN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CHIN 298,,,IS/,,1.00 ,N,,,,Staff
+C,CHIN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CHIN 398,,,IR/,,1.00 ,N,,,,Staff
+C,CLASS 126,,,Ancient Comedy-Tr,,1.00 ,N,ALS-L ORC,M-F 1040-1240PM,TOH 212,"Groton, Anne"
+X,CLASS 129,,,The Neverending Myth The course has been canceled.,,1.00 ,N,ALS-L,,,Staff
+C,CLASS 251,,,Class Studies Greece This is an off-campus course.,,1.00 ,N,ALS-A HWC,,,"Reece, Steve T."
+C,CLASS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CLASS 298,,,IS/,,1.00 ,N,,,,Staff
+C,CLASS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CLASS 398,,,IR/,,1.00 ,N,,,,Staff
+O,CSCI 284,,,Mobile Computing Apps,,1.00 ,N,,M-F 0830-1000 M-F 0100-0300PM,RNS 203 RNS 203,"Brown, Richard"
+C,CSCI 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CSCI 298,,,IS/,,1.00 ,N,,,,Staff
+C,CSCI 298,A,,IS/Web-Based Visuals,,1.00 ,N,,,,"McKelvey, Steven"
+C,CSCI 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,CSCI 398,,,IR/,,1.00 ,N,,,,Staff
+C,CSCI 398,A,,IR/Android Course Develop,,1.00 ,N,,,,"Brown, Richard"
+C,DANCE 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+C,DANCE 294,A,,Academic Internship,,1.00 ,Y,,,,"Saterstrom, Sheryl"
+O,DANCE 298,,,IS/,,1.00 ,N,,,,Staff
+C,DANCE 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,DANCE 398,,,IR/,,1.00 ,N,,,,Staff
+C,ECON 115,,,Globalization & Poverty,,1.00 ,N,HBS,M-F 1040-1240PM,HH 413,"Gauto, Victor"
+O,ECON 117,,,Economics Climate Change,,1.00 ,N,HBS,M-F 0100-0300PM,HH 307,"Johnson, Justin A."
+C,ECON 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ECON 298,,,IS/,,1.00 ,N,,,,Staff
+C,ECON 298,A,,IS/Job Creation in Nfld,,1.00 ,N,,,,"Becker, Anthony"
+C,ECON 298,B,,IS/,,1.00 ,N,,,,Staff
+C,ECON 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ECON 398,,,IR/,,1.00 ,N,,,,Staff
+C,ECON 398,A,,IR/Water Mgmt in NW China,,1.00 ,N,,,,"Schodt, David"
+C,EDUC 170,,,Urban Schools/Communities Open to First-Year Students and Sophomores only. Admission by interview.,,1.00 ,Y,MCD,M-F 0800-1000 M-F 1040-1240PM,TOH 214 TOH 214,"McDonald, Eric"
+C,EDUC 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,EDUC 294,A,,Academic Internship,,1.00 ,Y,,,,"McClure, Robert W."
+O,EDUC 294,B,,Academic Internship,,1.00 ,Y,,,,"Ford, Connie"
+O,EDUC 298,,,IS/,,1.00 ,N,,,,Staff
+C,EDUC 298,A,,IS/Stu Activ Higher Educ,,1.00 ,N,,,,"McDonald, Eric"
+O,EDUC 298,B,,IS/Multicultrl Child Lit,,1.00 ,N,,,,"Leer, Elizabeth A."
+O,EDUC 347,,,Teaching ESL K-12,,1.00 ,N,,,,"Tesdall, Jessica L."
+X,EDUC 378,,,Multi-Cultural Ed Hawaii This is an off-campus course. Admission by interview. This course has been canceled.,,1.00 ,Y,MCD,,,Staff
+C,EDUC 379,A,,Urban Sem & Practicum Admission by application.,,1.00 ,Y,MCD,,,"Pfarr-Baker, Rosemary A."
+C,EDUC 379,B,,Urban Sem & Practicum Admission by application.,,1.00 ,Y,MCD,,,"Leer, Elizabeth A."
+C,EDUC 394,,,Academic Internship,,1.00 ,Y,,,,"Kelly, Maria L."
+O,EDUC 398,,,IR/,,1.00 ,N,,,,Staff
+C,ENGL 123,,,Intro to Poetry,,1.00 ,N,ALS-L ORC,M-F 0100-0300PM,RML 515,"Kwon Dobbs, Jennifer"
+C,ENGL 124,,,Intro to Drama,,1.00 ,N,ALS-L ORC,M-F 1040-1240PM,BMC 111,"Marsalek, Karen E."
+C,ENGL 211,,,Hemingway in East Africa This is an off-campus course. New course,,1.00 ,N,ALS-L,,,"Mbele, Joseph L."
+C,ENGL 261,,,Beat Generation,,1.00 ,N,ALS-L,M-F 0100-0300PM,RML 525,"Wells, Colin"
+C,ENGL 264,A,,Topics: Gender and Lit New course,,1.00 ,N,ALS-L WRI,M-F 0100-0300PM,BMC 101,"Richards, Rebecca S."
+C,ENGL 264,B,,Topics: Gender and Lit,,1.00 ,N,ALS-L WRI,M-F 0100-0300PM,BMC 102,"Stein, Sarah B."
+C,ENGL 267,,,Monsters: Myths & Movies New course,,1.00 ,N,ALS-L,M-F 1040-1240PM,RML 525,"Postlethwaite, Diana"
+C,ENGL 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ENGL 298,,,IS/,,1.00 ,N,,,,Staff
+C,ENGL 298,A,,IS/Bloomsbury Group,,1.00 ,N,,,,"Naito, Jonathan T."
+C,ENGL 298,B,,IS/The Odyssey & Ulysses,,1.00 ,N,,,,"Gallego, Carlos"
+C,ENGL 340,,T,"Top: Sex,Madness&Marriage",,1.00 ,N,,M-F 1040-1240PM,RML 520,"Holly, Carol"
+C,ENGL 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ENGL 398,,,IR/,,1.00 ,N,,,,Staff
+O,ENVST 137,,,Intro: Env Studies,,1.00 ,N,IST,M-F 0800-1000 M-F 0100-0300PM,RNS 190 RNS 190,"Jackson, Paul T."
+O,ENVST 281,A,T,Top:What is Nature Worth?,,1.00 ,N,,M-F 1040-1240PM M-F 0100-0300PM,RNS 400 RNS 400,"Keeler, Bonnie L."
+C,ENVST 281,B,T,Top: Winter Ecology This course has class-year limits. Open to first-year students.,,1.00 ,N,,M-Th 0900-1000 TTh 0200-0500PM,RNS 210 RNS 440,"Umbanhowar, Charles Jr."
+C,ENVST 294,,,Academic Internship,,1.00 ,Y,,,,"Farrell, James"
+O,ENVST 294,A,,Academic Internship,,1.00 ,Y,,,,"Listenberger, Laura"
+O,ENVST 294,B,,Academic Internship,,1.00 ,Y,,,,"Jackson, Paul T."
+O,ENVST 298,,,IS/,,1.00 ,N,,,,Staff
+O,ENVST 298,A,,IS/Sustainable Architect,,1.00 ,N,WRI,,,"Farrell, James"
+O,ENVST 298,B,,IS/Sustaining STOGROW,,1.00 ,N,,,,"Farrell, James"
+X,ENVST 381,,T,Top: Ecosystems Research This course has been canceled.,,1.00 ,N,,M-F 1040-1240PM M-F 0100-0300PM,,Staff
+C,ENVST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ENVST 398,,,IR/,,1.00 ,N,,,,Staff
+C,ESTH 294,,,Academic Internship,,1.00 ,Y,,,,"Book, Cynthia"
+C,ESTH 294,A,,Academic Internship,,1.00 ,Y,,,,"Book, Cynthia"
+C,ESTH 294,B,,Academic Internship,,1.00 ,Y,,,,"McDonald, Matthew C."
+O,ESTH 294,C,,Academic Internship,,1.00 ,Y,,,,"Goldsworthy, William Sean"
+O,ESTH 294,D,,Academic Internship,,1.00 ,Y,,,,"Anderson, Kurt"
+O,ESTH 298,,,IS/,,1.00 ,N,,,,Staff
+C,ESTH 298,A,,IS/Kinesiology Research,,1.00 ,N,,,,"Book, Cynthia"
+C,ESTH 298,B,,IS/Exercise as Medicine,,1.00 ,N,,,,"Daymont, Christine"
+C,ESTH 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+C,ESTH 394,A,,Academic Internship,,1.00 ,Y,,,,"Goldsworthy, William Sean"
+O,ESTH 398,,,IR/,,1.00 ,N,,,,Staff
+C,ESTH 398,A,,IR/Mental Toughness Study,,1.00 ,N,,,,"Book, Cynthia"
+C,FAMST 294,,,Academic Internship,,1.00 ,Y,,,,"Gross, Dana"
+O,FAMST 298,,,IS/,,1.00 ,N,,,,Staff
+C,FAMST 394,,,Academic Internship,,1.00 ,Y,,,,"Gross, Dana"
+O,FAMST 398,,,IR/,,1.00 ,N,,,,Staff
+C,FREN 235,,,Fr Lang/Moroccan Culture Open to all students who meet the requirements. This is an off-campus course.,,1.00 ,N,FOL-F MCG,,,"Allen, Wendy"
+O,FREN 250,,,Speaking of French Open to all students who meet the requirements.,,1.00 ,N,FOL-F ORC,M-F 1040-0330PM,TOH 114,"Bekhechi, Amine R."
+C,FREN 275,,,ID French Studies - Paris Open to all students who meet the requirements. This is an off-campus course.,,1.00 ,N,,,,"Barjasteh, Jolene"
+C,FREN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,FREN 298,,,IS/,,1.00 ,N,,,,Staff
+C,FREN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,FREN 398,,,IR/,,1.00 ,N,,,,Staff
+C,GCON 115,A,,Romans & Christians Open to Great Conversations students only.,,1.00 ,N,BTS-B WRI,M-F 1040-1240PM,RML 421,"Cherewatuk, Karen"
+C,GCON 115,B,,Romans & Christians Open to Great Conversations students only.,,1.00 ,N,BTS-B WRI,M-F 1040-1240PM,RML 420,"Munoz-Hutchinson, Danny"
+C,GCON 115,C,,Romans & Christians Open to Great Conversations students only.,,1.00 ,N,BTS-B WRI,M-F 1040-1240PM,RML 515,"Ripley, Jason J."
+C,GCON 115,D,,Romans & Christians Open to Great Conversations students only.,,1.00 ,N,BTS-B WRI,M-F 1040-1240PM,OM 210,"Gallego, Carlos"
+C,GCON 115,E,,Romans & Christians Open to Great Conversations students only.,,1.00 ,N,BTS-B WRI,M-F 1040-1240PM,OM 110,"Wilson, Charles"
+C,GCON 115,F,,Romans & Christians Open to Great Conversations students only.,,1.00 ,N,BTS-B WRI,M-F 1040-1240PM,OM 140,"Wojick, Paul"
+C,GERM 246,,,"Age of Goethe-Tr In English, no prerequisites. This course is open to first-year students.",,1.00 ,N,HWC WRI,M-F 1040-1240PM,TOH 310,"Fink, Karl"
+C,GERM 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,GERM 298,,,IS/,,1.00 ,N,,,,Staff
+C,GERM 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,GERM 398,,,IR/,,1.00 ,N,,,,Staff
+C,GREEK 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,GREEK 298,,,IS/,,1.00 ,N,,,,Staff
+C,GREEK 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,GREEK 398,,,IR/,,1.00 ,N,,,,Staff
+C,HIST 117,,,Elizabethan England Open to first-year students only.,,1.00 ,N,HWC,M-F 1040-1240PM,HH 319,"De Krey, Gary"
+O,HIST 169,,,The Western Home Open to first-year students only.,,1.00 ,N,HWC,M-F 1040-1240PM,HH 514,"Nichol, Todd W."
+C,HIST 237,,,Women/Medieval Europe,,1.00 ,N,HWC,M-F 0100-0300PM,HH 317,"Carrington, J. L."
+C,HIST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,HIST 298,,,IS/,,1.00 ,N,,,,Staff
+C,HIST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,HIST 398,,,IR/,,1.00 ,N,,,,Staff
+C,HIST 398,A,,IR/Modern Confucianism,,1.00 ,N,,,,"Entenmann, Robert"
+C,HSPST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,HSPST 298,,,IS/,,1.00 ,N,,,,Staff
+C,HSPST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,HSPST 398,,,IR/,,1.00 ,N,,,,Staff
+C,ID 249,,,The Mare Balticum This is an off-campus course.,,1.00 ,N,HBS HWC ORC,,,"Rippley, Lavern Soderlind, Steve"
+C,ID 255,,,Hospital Health Care This is an off-campus course.,,1.00 ,Y,,,,"Pearson, Wesley"
+C,ID 256,,,Issues in Global Health This course has class-year limits. New course,,1.00 ,N,IST,MTTh 0900-1000 MTh 1040-1240PM T 1240-0340PM,OM 310 OM 310 OM 310,"Sevcik, Sarah M."
+C,ID 258,,,Theater in London This is an off-campus course.,,1.00 ,N,ALS-A,,,"Gisselman, Gary C."
+C,ID 294,,,Academic Internship,,1.00 ,Y,,,,"Hodgson, Ashley"
+O,ID 294,A,,Academic Internship,,1.00 ,Y,,,,"Jackson, Paul T."
+C,ID 294,B,,Academic Internship,,1.00 ,Y,,,,"Hodgson, Ashley"
+O,ID 298,,,IS/,,1.00 ,N,,,,Staff
+C,ID 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,ID 394,A,,Academic Internship,,1.00 ,Y,,,,"Kelly, Maria L."
+O,ID 396,A,,Research: Mayo Scholars,,1.00 ,N,,M-F 0800-1000 M-F 1040-1240PM M-F 0100-0300PM,RNS 226 RNS 226 RNS 226,"Crisp, Kevin M."
+O,ID 396,B,,Research: Mayo Scholars,,1.00 ,N,,M-F 0800-1000 MTThFW 1040-1240PM M-F 0100-0300PM,RNS 136 RNS 136 RNS 136,"Crisp, Kevin M."
+O,ID 398,,,IR/,,1.00 ,N,,,,Staff
+C,IDFA 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,IDFA 298,,,IS/,,1.00 ,N,,,,Staff
+C,IDFA 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,IDFA 398,,,IR/,,1.00 ,N,,,,Staff
+O,INTD 100,,,No Interim,,0.00 ,N,,,,Staff
+O,INTD 200,,,Interim Exchange,,1.00 ,N,,,,Staff
+C,IS 294,,,Academic Internship,,1.00 ,Y,,,,"Porterfield, Jean C."
+C,IS 294,A,,Academic Internship,,1.00 ,Y,,,,"Barbour, John"
+O,IS 298,,,IS/,,1.00 ,N,,,,Staff
+C,IS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,IS 398,,,IR/,,1.00 ,N,,,,Staff
+C,JAPAN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,JAPAN 298,,,IS/,,1.00 ,N,,,,Staff
+C,JAPAN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,JAPAN 398,,,IR/,,1.00 ,N,,,,Staff
+C,LATIN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,LATIN 298,,,IS/Roman Comedy,,1.00 ,N,,,,"Groton, Anne"
+C,LATIN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,LATIN 398,,,IR/,,1.00 ,N,,,,Staff
+C,MATH 117,,,Gateways/Mathematics,,1.00 ,N,AQR,M-F 0800-1000 M-F 1040-1240PM,RNS 204 RNS 204,"Pierce, Ian"
+C,MATH 218,,,Geometry/Art in Morocco This is an off-campus course.,,1.00 ,N,AQR MCG ORC,,,"Allen, Richard"
+C,MATH 220,,,Elem Linear Algebra First-year students who have completed Math 120 may take Math 220,,1.00 ,N,AQR,M-F 1040-1240PM M-F 0100-0300PM,TOH 186 TOH 186,"Berliner, Adam H."
+C,MATH 239,,,Number Theory - Budapest This is an off-campus course.,,1.00 ,N,,,,"Corzatt, Clifton"
+C,MATH 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MATH 298,,,IS/,,1.00 ,N,,,,Staff
+C,MATH 356,,,Geometry,,1.00 ,N,,M-F 1040-1240PM M-F 0100-0300PM,RNS 208 RNS 208,"Matsuura, Ryota"
+O,MATH 382,,S,Sem: Cryptography,,1.00 ,N,,M-F 1040-1240PM M-F 0100-0300PM,TOH 184 TOH 184,"Smith, Kay E."
+C,MATH 390,,,Mathematics Practicum Registration by permission of instructor only.,,1.00 ,N,ORC,M-F 0900-1000 M-F 1040-1240PM M-F 0100-0500PM,RNS 297 RNS 297 RNS 297,"Vandiver, Rebecca M. McKelvey, Steven"
+C,MATH 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MATH 398,,,IR/,,1.00 ,N,,,,Staff
+C,MATH 398,A,,IR/Adv Number Theory,,1.00 ,N,,,,"Corzatt, Clifton"
+C,MEDIA 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+C,MEDIA 294,A,,Academic Internship,,1.00 ,Y,,,,"Sonnega, William"
+O,MEDIA 294,B,,Academic Internship,,1.00 ,Y,,,,"McClure, Robert W."
+O,MEDIA 298,,,IS/,,1.00 ,N,,,,Staff
+C,MEDIA 298,A,,IS/Culinary Journalism,,1.00 ,N,,,,"Sonnega, William"
+C,MEDIA 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+C,MEDIA 394,A,,Academic Internship,,1.00 ,Y,,,,"Feeney, Megan J."
+O,MEDIA 394,B,,Academic Internship,,1.00 ,Y,,,,"Book, Cynthia"
+O,MEDIA 398,,,IR/,,1.00 ,N,,,,Staff
+C,MEDVL 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MEDVL 298,,,IS/,,1.00 ,N,,,,Staff
+C,MEDVL 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MEDVL 398,,,IR/,,1.00 ,N,,,,Staff
+C,MGMT 231,,,Personal Finance Closed to first-year students.,,1.00 ,N,,M-F 0100-0300PM,HH 501,"Hirsch, Richard M."
+C,MGMT 257,,,New Venture Formulat Closed to first-years.,,1.00 ,N,ORC,M-F 1040-1240PM,HH 317,"Muir, Sian E."
+C,MGMT 294,,,Academic Internship,,1.00 ,Y,,,,"Goedde, Richard"
+C,MGMT 294,A,,Academic Internship,,1.00 ,Y,,,,"Becker, Anthony"
+O,MGMT 294,B,,Academic Internship,,1.00 ,Y,,,,"Muir, Sian E."
+O,MGMT 294,C,,Academic Internship,,1.00 ,Y,,,,"Hirsch, Richard M."
+O,MGMT 298,,,IS/,,1.00 ,N,,,,Staff
+C,MGMT 394,,,Academic Internship,,1.00 ,Y,,,,"Muir, Sian E."
+O,MGMT 398,,,IR/,,1.00 ,N,,,,Staff
+C,MUSIC 130,,,The Music Spectrum,,1.00 ,N,ALS-A,M-F 1040-1130 M-F 1140-1240PM,CHM 222 CHM 233,"Berger, Linda"
+O,MUSIC 132,,,Orchestral Music,,1.00 ,N,ALS-A,M-F 1040-0100PM,CHM 232,"Carter, David"
+C,MUSIC 225,,,Music/Electronic Med,,1.00 ,N,ALS-A,M-F 0100-0300PM,CHM 222,"Merritt, Justin W."
+O,MUSIC 232,,,America's Hit Parade,,1.00 ,N,ALS-A MCD,M-Th 0900-1000 M-Th 1040-1200PM,CHM 239 CHM 239,"Hanson, Alice"
+O,MUSIC 235,,,Music/Chr Worship,,1.00 ,N,ALS-A,MTTh 1040-1240PM MTTh 0130-0300PM,CHM 224 CHM 224,"Westermeyer, Paul"
+C,MUSIC 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MUSIC 298,,,IS/,,1.00 ,N,,,,Staff
+C,MUSIC 298,A,,IS/Organ Pedagogy & Lit,,1.00 ,N,WRI,,,"Rodland, Catherine R."
+C,MUSIC 298,B,,IS/Pedagogy & Literature,,1.00 ,N,,,,"Hodel, Martin"
+C,MUSIC 298,C,,IS/Trumpet History,,1.00 ,N,,,,"Hodel, Martin"
+O,MUSIC 298,D,,IS/Flute Pedagogy,,1.00 ,N,,,,"Ramirez, Catherine"
+O,MUSIC 298,E,,IS/Organ Pedagogy & Lit,,1.00 ,N,,,,"Rodland, Catherine R."
+C,MUSIC 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,MUSIC 398,,,IR/,,1.00 ,N,,,,Staff
+C,NEURO 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NEURO 298,,,IS/,,1.00 ,N,,,,Staff
+C,NEURO 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NEURO 398,,,IR/,,1.00 ,N,,,,Staff
+C,NORW 224,,T,Top: Nordic Crime Fiction Open to first-year students.,,1.00 ,N,ALS-L,M-F 0100-0300PM,TOH 210,"O'Leary, Margaret H."
+C,NORW 244,,,Sami:Tradition/Transition Open to first-year students.,,1.00 ,N,HBS MCG ORC,M-F 0100-0300PM,TOH 308,"Lie, Kari"
+C,NORW 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NORW 298,,,IS/,,1.00 ,N,,,,Staff
+C,NORW 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NORW 398,,,IR/,,1.00 ,N,,,,Staff
+C,NURS 110,A,,Nutrition & Wellness,,1.00 ,N,IST,M-F 1040-1240PM,HH 501,"Kuehn, Mary"
+C,NURS 110,B,,Nutrition & Wellness,,1.00 ,N,IST,M-F 1040-1240PM,HH 501,"Huehn, Susan L."
+C,NURS 110,C,,Nutrition & Wellness,,1.00 ,N,IST,M-F 1040-1240PM,HH 501,"Beckmann, Nicole B."
+C,NURS 110,D,,Nutrition & Wellness,,1.00 ,N,IST,M-F 0100-0300PM,HH 413,"Benedict, Rebecca A."
+C,NURS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NURS 298,,,IS/,,1.00 ,N,,,,Staff
+C,NURS 298,A,,IS/Nursing Education,,1.00 ,N,,,,"Kuehn, Mary"
+C,NURS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,NURS 398,,,IR/,,1.00 ,N,,,,Staff
+C,PHIL 120,,,Philosophy in Lit Open to first-year students and sophomores only.,,1.00 ,N,ALS-L,M-F 1040-1240PM,HH 403,"Rudd, Anthony J."
+C,PHIL 147,,,Death/Meaning of Life,,1.00 ,N,WRI,M-F 0100-0300PM,HH 516,"Langerak, Edward"
+C,PHIL 246,,,Space and Time,,1.00 ,N,IST,M-F 0100-0300PM,HH 403,"Cunningham, Arthur"
+C,PHIL 250,,,Biomedical Ethics Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors and juniors during web registration.,,1.00 ,N,EIN,M-F 0800-1000 M 0700-0930PM,HH 413 HH 413,"Gervais, Karen"
+C,PHIL 257,,,Environmental Ethics Prerequisite: Completion of BTS-T or permission of instructor. Open only to seniors during web registration. Juniors may add on a space- available basis during the drop/add period.,,1.00 ,N,EIN WRI,M-F 1040-1240PM,HH 307,"Taliaferro, Charles"
+C,PHIL 261,,,Freud/Human Behavior Closed to first-year students during web registration.,,1.00 ,N,HBS,M-F 0100-0300PM,RNS 290,"Furchert, Almut"
+C,PHIL 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PHIL 298,,,IS/,,1.00 ,N,,,,Staff
+C,PHIL 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PHIL 398,,,IR/,,1.00 ,N,,,,Staff
+C,PHYS 252,,,Musical Acoustics Students in Physics 252 must also register for lab Physics 252 L. Closed to First-Year Students during web registration.,,1.00 ,N,IST SED,M-F 1040-1210PM,RNS 210,"Borovsky, Brian"
+C,PHYS 252,,L,Musical Acoustics Lab,,0.00 ,N,,M-F 0100-0330PM,RNS 292,"Borovsky, Brian"
+C,PHYS 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+C,PHYS 294,A,,Academic Internship,,1.00 ,Y,,,,"Dahl, David"
+O,PHYS 298,,,IS/,,1.00 ,N,,,,Staff
+C,PHYS 298,A,,IS/,,1.00 ,N,,,,Staff
+C,PHYS 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PHYS 398,,,IR/,,1.00 ,N,,,,Staff
+C,PSCI 111,,,American Politics,,1.00 ,N,HBS MCD,M-F 1040-1240PM,TOH 210,"Anderson, Joshua"
+C,PSCI 211,,,Media and Politics,,1.00 ,N,HBS,M-F 0100-0300PM,TOH 212,"Hendriks, Henriet"
+C,PSCI 240,,,Polit Identity Cent Euro This is an off-campus course.,,1.00 ,N,HBS MCG,,,"Dale, J. Patrick"
+C,PSCI 294,,,Academic Internship,,1.00 ,Y,,,,"Hendriks, Henriet"
+O,PSCI 298,,,IS/,,1.00 ,N,,,,Staff
+O,PSCI 298,A,,IS/Applied Stats Analysis,,1.00 ,N,,,,"Hendriks, Henriet"
+C,PSCI 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PSCI 398,,,IR/,,1.00 ,N,,,,Staff
+C,PSYCH 220,,,SocioEmot Dev/Culture Open to First-Year Students. This course has class year limits.,,1.00 ,N,MCG,M-F 1040-1240PM,RNS 131,"Cho, Grace E."
+C,PSYCH 222,,,Psychology of Hearing Open to first-year students.,,1.00 ,N,IST MCD,M-F 1040-1240PM,RNS 190,"Loebach, Jeremy"
+C,PSYCH 224,,,Community Applications Student's site placement schedules will be determined individually.,,1.00 ,N,WRI,M-F 1040-1240PM M-F 0100-0300PM,RNS 206 RNS 206,"Gross, Dana"
+C,PSYCH 294,,,Academic Internship,,1.00 ,Y,,,,"Huff, Charles"
+O,PSYCH 294,A,,Academic Internship,,1.00 ,Y,,,,"Cho, Grace E."
+O,PSYCH 294,B,,Academic Internship,,1.00 ,Y,,,,"Ori_a, M. Minda"
+O,PSYCH 298,,,IS/,,1.00 ,N,,,,Staff
+C,PSYCH 298,A,,IS/Workplace Motivation,,1.00 ,N,,,,"Veltri, Carlo O."
+C,PSYCH 298,B,,IS/Spatial Cognition,,1.00 ,N,,,,"Muir, Gary M."
+C,PSYCH 298,C,,IS/Psychology of Stroke,,1.00 ,N,,,,"Dickinson, Shelly D."
+C,PSYCH 298,D,,IS/Developmental Stages,,1.00 ,N,,,,"Ori_a, M. Minda"
+O,PSYCH 298,E,,IS/Early Abuse & Intimacy,,1.00 ,N,,,,"Ori_a, M. Minda"
+O,PSYCH 298,F,,IS/Attraction and Arousal,,1.00 ,N,WRI,,,"Ori_a, M. Minda"
+C,PSYCH 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,PSYCH 398,,,IR/,,1.00 ,N,,,,Staff
+C,PSYCH 398,A,,IR/Emotion Socialization,,1.00 ,N,WRI,,,"Cho, Grace E."
+C,PSYCH 398,B,,IR/MMPI Abstract Prep,,1.00 ,N,,,,"Veltri, Carlo O."
+O,PSYCH 398,C,,IR/Advance Stats Alc/Caff,,1.00 ,N,,,,"Dickinson, Shelly D."
+O,PSYCH 398,D,,IR/Speech/Mus w/Coch Impl,,1.00 ,N,,,,"Loebach, Jeremy"
+O,REL 213,,,Lutheran Heritage,,1.00 ,N,BTS-T,M-F 1040-1240PM,BMC 110,"Lagerquist, L. DeAne"
+C,REL 214,,,Reformation Theology,,1.00 ,N,BTS-T,M-F 0800-1000,OM 10,"Anderson, Mary E."
+O,REL 222,,,The Biblical God,,1.00 ,N,BTS-T ORC,M-F 1040-1240PM,OM 30,"Odell, Margaret"
+C,REL 223,,,St. Paul/Letter/Gospel,,1.00 ,N,BTS-T,M-F 0100-0300PM,OM 10,"Stack-Nelson, Judith"
+C,REL 238,,,Quest of Ring/Grail/Cross,,1.00 ,N,BTS-T,M-F 1040-1240PM,OM 10,"Walter, Gregory A."
+C,REL 243,,,Living Faith-Holden Vlg This is an off-campus course.,,1.00 ,N,BTS-T,,,"Jothen, Peder J."
+C,REL 259,,,Religion/Culture/Rome This is an off-campus course.,,1.00 ,N,HWC,,,"Galbraith, Elizabeth C."
+C,REL 271,,,Hist Geog/Bible/Holy Land This is an off-campus course.,,1.00 ,N,HWC,,,Staff
+O,REL 275,,,Hist Geography Bible Thyis is an off-campus course.,,1.00 ,N,HWC,,,"Hanson, James"
+C,REL 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,REL 298,,,IS/,,1.00 ,N,,,,Staff
+C,REL 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,REL 398,,,IR/,,1.00 ,N,,,,Staff
+C,RUSSN 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,RUSSN 298,,,IS/,,1.00 ,N,,,,Staff
+C,RUSSN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,RUSSN 398,,,IR/,,1.00 ,N,,,,Staff
+C,RUSST 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,RUSST 298,,,IS/,,1.00 ,N,,,,Staff
+C,RUSST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,RUSST 398,,,IR/,,1.00 ,N,,,,Staff
+C,SCICN 215,,,Well-Ordered Universe Open to Science Conversation students only.,,1.00 ,N,HWC IST SED,M-F 1040-1210PM M-Th 0130-0430PM,OM 340 OM 340,"Williamson, Thomas A. Dickinson, Shelly D."
+C,SOAN 232,,,"Thailand: Culture, Inst This is an off-campus course.",,1.00 ,N,MCG ORC,,,"Sheppard, Ryan R."
+C,SOAN 294,,,Academic Internship,,1.00 ,Y,,,,"Williamson, Thomas A."
+C,SOAN 294,A,,Academic Internship,,1.00 ,Y,,,,"Chiappari, Christopher L."
+O,SOAN 298,,,IS/,,1.00 ,N,,,,Staff
+C,SOAN 298,A,,IS/Gender in Thailand,,1.00 ,N,,,,"Williamson, Thomas A."
+C,SOAN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SOAN 398,,,IR/,,1.00 ,N,,,,Staff
+C,SPAN 111,,,Beginning Spanish I This course has class year limits. This course is closed to seniors during web registration.,,1.00 ,N,,M-F 0900-1000 M-F 1040-1240PM,TOH 314 TOH 314,"Cropsey, Kris A."
+C,SPAN 231,,,Intermed Spanish I Open to all students who meet the requirements.,,1.00 ,N,,M-F 1040-1140 M-F 0100-0300PM,TOH 108 TOH 108,"Broner, Maggie"
+C,SPAN 232,,,Intermed Spanish II Open to all students who meet the requirements. This course has class year limits.,,1.00 ,N,FOL-S MCD,M-F 0900-1000 M-F 1040-1240PM,TOH 312 TOH 312,"Strichartz, Ariel"
+C,SPAN 233,,,Inter Span II-Ecuador Open to all students who meet the requirements. This is an off-campus course.,,1.00 ,N,FOL-S MCG,,,"Carullo, Sylvia"
+C,SPAN 234,,,Inter Span II-C Rica Open to all students who meet the requirements. This is an off-campus course.,,1.00 ,N,FOL-S MCG,,,"Narvaez, Leon"
+C,SPAN 270,,,Spain's Cult/Ling This is an off-campus course.,,1.00 ,N,ORC,,,"Barnes-Karol, Gwendolyn"
+C,SPAN 294,,,Academic Internship,,1.00 ,Y,,,,"Cropsey, Kris A."
+O,SPAN 298,,,IS/,,1.00 ,N,,,,Staff
+C,SPAN 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SPAN 398,,,IR/,,1.00 ,N,,,,Staff
+O,STAT 212,,,Statistics for Science,,1.00 ,N,AQR,M-Th 1040-1240PM M-Th 0100-0300PM,TOH 182 TOH 182,"Mattson, Heather L."
+C,STAT 294,,,Academic Internship Stat 285 Global Health and Bio Stats not offered 2012-13.,,1.00 ,Y,,,,Staff
+O,STAT 298,,,IS/ Stat 285 Global Health and Bio Stats not offered 2012-13.,,1.00 ,N,,,,Staff
+C,STAT 394,,,Academic Internship Stat 285 Global Health and Bio Stats not offered 2012-13.,,1.00 ,Y,,,,Staff
+O,STAT 398,,,IR/ Stat 285 Global Health and Bio Stats not offered 2012-13.,,1.00 ,N,,,,Staff
+C,SWRK 120,,,I Want to Help People Open only to first-year students.,,1.00 ,N,WRI,T-F 0800-1000 WTh 1040-1240PM WTh 0100-0300PM,TOH 110 TOH 110 TOH 110,"Smalling, Susan E."
+C,SWRK 280,,,Social Realities S Africa This is an off-campus course. New course,,1.00 ,N,MCG,,,"Carlsen, Mary"
+C,SWRK 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SWRK 298,,,IS/,,1.00 ,N,,,,Staff
+C,SWRK 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,SWRK 398,,,IR/,,1.00 ,N,,,,Staff
+C,THEAT 133,,,Prod Theater: Intro Admission by audition/interview.,,1.00 ,Y,ALS-A,M-F 0900-1000 M-F 1040-0500PM M-F 0700-1000PM,TB Kelsey TB Kelsey TB Kelsey,"Edwards, Todd F."
+C,THEAT 200,,,Training Speaking Voice,,1.00 ,N,ORC,M-F 1040-1240PM,TB 227,"Wilson, Karen"
+C,THEAT 234,,,Prod Theater: Advanced Admission by audition/interview.,,1.00 ,Y,,M-F 0900-1000 M-F 1040-0500PM M-F 0700-1000PM,TB Haugen TB Haugen TB Haugen,"Willcoxon, Jeanne I."
+C,THEAT 294,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,THEAT 298,,,IS/,,1.00 ,N,,,,Staff
+C,THEAT 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,THEAT 398,,,IR/,,1.00 ,N,,,,Staff
+C,WMGST 294,,,Academic Internship,,1.00 ,Y,,,,"Richards, Rebecca S."
+O,WMGST 298,,,IS/,,1.00 ,N,,,,Staff
+C,WMGST 298,A,,IS/Young LGBT Voices,,1.00 ,N,,,,"Kelly, Maria L."
+C,WMGST 394,,,Academic Internship,,1.00 ,Y,,,,Staff
+O,WMGST 398,,,IR/,,1.00 ,N,,,,Staff

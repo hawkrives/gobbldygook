@@ -1,0 +1,60 @@
+%YAML 1.1   # Asian Studies Major
+---
+name: Asian Studies
+dept: ASIAN
+
+requirements:
+    IDApproachesToAsia:
+        description: Independent Approaches to Asia
+        needed: 1
+        valid: [ASIAN 275]
+
+    electives:
+        description: Electives
+        needed: 6
+        valid: [
+            ART 259, ASIAN 121, ASIAN 130, ASIAN 156,
+            ASIAN 210, ASIAN 215, ASIAN 220,
+            ASIAN 235, ASIAN 268, ASIAN 270,
+            ASIAN 310,
+            AS/RE 254,
+            ECON 238, HIST 250,
+            HIST 251, HIST 252, HIST 345
+        ]
+
+sets:
+    chinese: &chinese
+        description: Chinese
+        needed: 2
+        valid: [CHIN 231, CHIN 232, CHIN 251, CHIN 252, CHIN 300, CHIN 351]
+
+    japanese: &japanese
+        description: Japanese
+        needed: 2
+        valid: [JAPAN 231, JAPAN 232, JAPAN 251, JAPAN 252, JAPAN 300]
+
+    HumanRightsAsianContext: &humanrightsasiancontext
+        description: Human Rights in an Asian Context
+        needed: 1
+        valid: [ASIAN 397]
+
+    SemAsia: &semasia
+        description: Semester about Asia
+        needed: 1
+        valid: [ASIAN 399]
+
+
+special:
+    seminar:
+        description: Senior Seminar
+        needed: 1
+        valid:
+            - *semasia
+            - *humanrightsasiancontext
+
+    language:
+        description: Asian Language
+        needed: 1
+        valid: 
+            - *chinese
+            - *japanese
