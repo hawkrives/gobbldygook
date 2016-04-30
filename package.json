@@ -16,6 +16,7 @@
     "copy": "mkdirp build/ && cpy 'src/static/*' build/ && npm run copy:icons",
     "copy:icons": "svg-sprite-generate -d src/icons/ionicons/ -o build/ionicons.svg",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "codecov": "codecov",
     "lint": "eslint *.js bin/ scripts/ src/ test/",
     "nyc": "nyc npm test",
     "prebuild": "npm run copy",

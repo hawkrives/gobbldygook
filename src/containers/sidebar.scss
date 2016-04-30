@@ -1,8 +1,10 @@
 @import '../base/variables';
 
 .sidebar {
+	flex: 1;
+
 	@media all and (min-width: $single-column-width) {
-		width: 280px;
+		max-width: 280px;
 		padding-left: $page-edge-padding;
 		padding-right: $page-edge-padding * (2/3);
 	}
