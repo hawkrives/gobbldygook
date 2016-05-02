@@ -55,22 +55,22 @@ routerMiddleware.listenForReplays(store)
 import {AppContainer} from 'react-hot-loader'
 
 render(
-	// (<AppContainer>
+	(<AppContainer>
 		(<Root store={store}>
 			<Router history={history} routes={routes} />
 		</Root>),
-	// </AppContainer>),
+	</AppContainer>),
 	document.getElementById('gobbldygook') )
 
-// if (module.hot) {
-// 	module.hot.accept('./containers/root', () => {
-// 		let Root = require('./containers/root').default
-// 		render(
-// 			(<AppContainer>
-// 				<Root store={store}>
-// 					<Router history={history} routes={routes} />
-// 				</Root>
-// 			</AppContainer>),
-// 			document.getElementById('gobbldygook') )
-// 	})
-// }
+if (module.hot) {
+	module.hot.accept('./containers/root', () => {
+		let Root = require('./containers/root').default
+		render(
+			(<AppContainer>
+				<Root store={store}>
+					<Router history={history} routes={routes} />
+				</Root>
+			</AppContainer>),
+			document.getElementById('gobbldygook') )
+	})
+}
