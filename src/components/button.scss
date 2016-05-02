@@ -1,7 +1,7 @@
-@import '../base/variables';
-@import '../mixins/color';
-@import '../mixins/link-undecorated';
-@import '../mixins/material-shadow';
+@import '../base/variables.scss';
+@import '../mixins/color.scss';
+@import '../mixins/link-undecorated.scss';
+@import '../mixins/material-shadow.scss';
 
 %button {
 	cursor: pointer;

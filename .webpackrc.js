@@ -156,6 +156,7 @@ const config = {
 	},
 
 	postcss: [
+		require('precss'),
 		require('autoprefixer')({
 			browsers: ['last 2 versions', 'Firefox ESR'],
 		}),
@@ -189,26 +190,17 @@ if (isDevelopment) {
 	config.plugins.push(new HotModuleReplacementPlugin())
 
 	// Add style loaders
+	let identName = '[path][name]·[local]·[hash:base64:5]'
 	config.module.loaders.push({
-		test: /\.css$/,
-		loaders: ['style-loader', 'css-loader?localIdentName=[path][name]·[local]·[hash:base64:5]', 'postcss-loader'],
-	})
-
-	config.module.loaders.push({
-		test: /\.s(c|a)ss$/,
-		loaders: ['style-loader', 'css-loader?localIdentName=[path][name]·[local]·[hash:base64:5]', 'postcss-loader', 'sass-loader'],
+		test: /\.s?css$/,
+		loaders: ['style-loader', `css-loader?importLoaders=1&localIdentName=${identName}`, 'postcss-loader'],
 	})
 }
 
 else if (isTest) {
 	config.module.loaders.push({
-		test: /\.css$/,
-		loaders: ['style-loader', 'css-loader', 'postcss-loader'],
-	})
-
-	config.module.loaders.push({
-		test: /\.s(c|a)ss$/,
-		loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+		test: /\.s?css$/,
+		loaders: ['style-loader', 'css-loader?importLoaders=1', 'postcss-loader'],
 	})
 }
 
@@ -235,13 +227,8 @@ else if (isProduction) {
 	])
 
 	config.module.loaders.push({
-		test: /\.css$/,
-		loader: extractor.extract('style-loader', ['css-loader', 'postcss-loader']),
-	})
-
-	config.module.loaders.push({
-		test: /\.s(c|a)ss$/,
-		loader: extractor.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader']),
+		test: /\.s?css$/,
+		loader: extractor.extract('style-loader', ['css-loader?importLoaders=1', 'postcss-loader']),
 	})
 }
 
