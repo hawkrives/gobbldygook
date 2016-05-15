@@ -10,9 +10,10 @@
 		justify-content: center;
 		align-items: center;
 
-		/* display: inline-flex collapses inline whitespace */
-		/* white-space: pre brings it back, although it will */
-		/* also show newlines, so be careful. */
+		/* display: inline-flex collapses inline whitespace
+		 * white-space: pre brings it back, although it will
+		 * also show newlines, so be careful.
+		 */
 		white-space: pre;
 
 		padding: 1ex 2em;
@@ -28,6 +29,8 @@
 		outline: 0;
 		color: currentColor;
 
+		/* Turn off default button styles in webkit */
+		-webkit-appearance: initial !important; /* override normalize's html [type=button] */
 		/* Gets rid of tap active state */
 		-webkit-tap-highlight-color: transparent;
 	}
