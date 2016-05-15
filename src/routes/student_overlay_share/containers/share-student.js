@@ -1,18 +1,18 @@
 import React, {PropTypes} from 'react'
 
-import Button from '../../../components/button'
-import Icon from '../../../components/icon'
-import Toolbar from '../../../components/toolbar'
-import Modal from '../../../components/modal'
-import List from '../../../components/list'
+import Button from 'src/components/button'
+import Icon from 'src/components/icon'
+import Toolbar from 'src/components/toolbar'
+import Modal from 'src/components/modal'
+import List from 'src/components/list'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
-import encodeStudent from '../../../helpers/encode-student'
+import encodeStudent from 'src/helpers/encode-student'
 
-import styles from './share-student.scss'
+import './share-student.css'
 
 export function ShareSheet(props) {
 	let { student } = props
@@ -22,7 +22,7 @@ export function ShareSheet(props) {
 
 	return <Modal
 		into='share-modal'
-		modalClassName={styles.dialog}
+		modalClassName='share-dialog'
 		onClose={boundCloseModal}
 	>
 		<Toolbar className='window-tools'>

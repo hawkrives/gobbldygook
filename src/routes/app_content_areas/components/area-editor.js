@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react'
 
-import Toolbar from '../../../components/toolbar'
-import Button from '../../../components/button'
-import Icon from '../../../components/icon'
-import Separator from '../../../components/separator'
+import Toolbar from 'src/components/toolbar'
+import Button from 'src/components/button'
+import Icon from 'src/components/icon'
+import Separator from 'src/components/separator'
 
 import CodeMirror from 'react-codemirror'
 import 'codemirror/mode/yaml/yaml'
 
-import './area-editor.scss'
+import './area-editor.css'
 
 export default function AreaEditor(props) {
 	const options = {

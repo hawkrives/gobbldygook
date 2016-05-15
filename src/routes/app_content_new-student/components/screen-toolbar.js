@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 
-import Button from '../../../components/button'
-import Toolbar from '../../../components/toolbar'
+import Button from 'src/components/button'
+import Toolbar from 'src/components/toolbar'
 
 export default function ScreenToolbar({onNext, onBack}) {
 	return (

@@ -2,12 +2,12 @@ import React, {PropTypes} from 'react'
 import range from 'lodash/range'
 import map from 'lodash/map'
 
-import InlineCourse from '../../../components/inline-course'
-import List from '../../../components/list'
+import InlineCourse from 'src/components/inline-course'
+import List from 'src/components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 
-import styles from './course-list.scss'
+import './course-list.css'
 
 
 export default function CourseList(props) {
@@ -15,12 +15,12 @@ export default function CourseList(props) {
 	let courseObjects = map(props.schedule.courses, (course, i) =>
 		course.error
 		? (<li key={course.clbid}>
-			<MissingCourse className={styles.course} clbid={course.clbid} error={course.error} />
+			<MissingCourse className='course' clbid={course.clbid} error={course.error} />
 		</li>)
 		: (<li key={course.clbid}>
 			<InlineCourse
 				index={i}
-				className={styles.course}
+				className='course'
 				course={course}
 				conflicts={props.conflicts}
 				scheduleId={props.schedule.id}
@@ -31,11 +31,11 @@ export default function CourseList(props) {
 	let emptySlots = []
 	if (props.creditCount < props.availableCredits) {
 		const minimumExtraCreditRange = range(Math.floor(props.creditCount), props.availableCredits)
-		emptySlots = map(minimumExtraCreditRange, i => <li key={`empty-${i}`}><EmptyCourseSlot className={styles.course} /></li>)
+		emptySlots = map(minimumExtraCreditRange, i => <li key={`empty-${i}`}><EmptyCourseSlot className='course' /></li>)
 	}
 
 	return (
-		<List className={styles.courseList} type='plain'>
+		<List className='course-list' type='plain'>
 			{courseObjects}
 			{emptySlots}
 		</List>

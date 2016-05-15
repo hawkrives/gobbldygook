@@ -4,10 +4,10 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
 import DocumentTitle from 'react-document-title'
-import isCurrentSemester from '../../../helpers/is-current-semester'
-import semesterName from '../../../helpers/semester-name'
+import isCurrentSemester from 'src/helpers/is-current-semester'
+import semesterName from 'src/helpers/semester-name'
 
-import './semester-detail.scss'
+import './semester-detail.css'
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class SemesterDetail extends Component {

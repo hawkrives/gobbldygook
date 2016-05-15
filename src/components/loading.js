@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 
-import './loading.scss'
+import './loading.css'
 
 export default function Loading({className, children}) {
 	return (

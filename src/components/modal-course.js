@@ -11,17 +11,17 @@ import Separator from './separator'
 import Toolbar from './toolbar'
 import Button from './button'
 import CourseTitle from './course-title'
-import buildCourseIdent from '../helpers/build-course-ident'
+import buildCourseIdent from 'src/helpers/build-course-ident'
 
-import semesterName from '../helpers/semester-name'
-import expandYear from '../helpers/expand-year'
-import to12Hour from '../helpers/to-12-hour-time'
+import semesterName from 'src/helpers/semester-name'
+import expandYear from 'src/helpers/expand-year'
+import to12Hour from 'src/helpers/to-12-hour-time'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { addCourse, moveCourse, removeCourse } from '../redux/students/actions/courses'
+import { addCourse, moveCourse, removeCourse } from 'src/redux/students/actions/courses'
 
-import './modal-course.scss'
+import './modal-course.css'
 
 function findSemesterList(student) {
 	let schedules = map(student.schedules, s => ({

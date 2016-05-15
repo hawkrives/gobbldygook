@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import styles from '../../../components/inline-course.scss'
-import {title} from '../../../components/course-title.scss'
+import 'src/components/inline-course.css'
+import 'src/components/course-title.css'
 
 export default function FakeCourse(props) {
 	return (
-		<article className={cx(styles.course, props.className)}>
-			<div className={styles.row}>
-				<h1 className={title}>{props.title}</h1>
-				<p className={styles.summary}>{props.details}</p>
+		<article className={cx('course', props.className)}>
+			<div className={'row'}>
+				<h1 className={'title'}>{props.title}</h1>
+				<p className={'summary'}>{props.details}</p>
 			</div>
 		</article>
 	)

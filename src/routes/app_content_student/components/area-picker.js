@@ -1,17 +1,17 @@
 import React, {Component, PropTypes} from 'react'
 import fuzzysearch from 'fuzzysearch'
-import pluralizeArea from '../../../area-tools/pluralize-area'
+import pluralizeArea from 'src/area-tools/pluralize-area'
 import map from 'lodash/map'
 import reject from 'lodash/reject'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
-import filterAreaList from '../../../helpers/filter-area-list'
+import filterAreaList from 'src/helpers/filter-area-list'
 
-import Button from '../../../components/button'
-import List from '../../../components/list'
-import Toolbar from '../../../components/toolbar'
+import Button from 'src/components/button'
+import List from 'src/components/list'
+import Toolbar from 'src/components/toolbar'
 
-import './area-picker.scss'
+import './area-picker.css'
 
 function AreaPicker(props) {
 	const graduation = props.studentGraduation

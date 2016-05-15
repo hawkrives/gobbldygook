@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 
-import Button from '../../../components/button'
-import Icon from '../../../components/icon'
+import Button from 'src/components/button'
+import Icon from 'src/components/icon'
 import Requirement from './requirement'
-import ProgressBar from '../../../components/progress-bar'
-import compareProps from '../../../helpers/compare-props'
+import ProgressBar from 'src/components/progress-bar'
+import compareProps from 'src/helpers/compare-props'
 
-import './area-of-study.scss'
+import './area-of-study.css'
 
 function AreaOfStudy(props) {
 	const {

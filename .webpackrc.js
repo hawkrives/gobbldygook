@@ -3,6 +3,7 @@
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
+const path = require('path')
 
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
 const DedupePlugin = webpack.optimize.DedupePlugin
@@ -65,6 +66,9 @@ const config = {
 			'.js',
 			'.json',
 		],
+		alias: {
+			src: path.resolve(__dirname, 'src'),
+		},
 	},
 
 	plugins: [
@@ -155,11 +159,32 @@ const config = {
 		],
 	},
 
-	postcss: [
-		require('autoprefixer')({
+	postcss: (webpack) => ([
+		require('postcss-import')({
+			addDependencyTo: webpack,
+			resolve(id, base) {
+				let [firstLevel, ...remaining] = id.split('/')
+				let isAliasedDir = Object.keys(config.resolve.alias).includes(firstLevel)
+
+				let retval = isAliasedDir
+					? path.join(
+						'/',
+						...config.resolve.alias[firstLevel].split('/'),
+						...remaining)
+					: path.join(base, id)
+
+				retval = retval.replace(__dirname, '').substr(1)
+
+				return retval
+			},
+		}),
+		require('postcss-apply'),
+		require('postcss-mixins'),
+		require('postcss-cssnext')({
 			browsers: ['last 2 versions', 'Firefox ESR'],
 		}),
-	],
+		require('postcss-reporter'),
+	]),
 
 	worker: {
 		output: {
@@ -189,26 +214,17 @@ if (isDevelopment) {
 	config.plugins.push(new HotModuleReplacementPlugin())
 
 	// Add style loaders
+	let identName = '[path][name]·[local]·[hash:base64:5]'
 	config.module.loaders.push({
 		test: /\.css$/,
-		loaders: ['style-loader', 'css-loader?localIdentName=[path][name]·[local]·[hash:base64:5]', 'postcss-loader'],
-	})
-
-	config.module.loaders.push({
-		test: /\.s(c|a)ss$/,
-		loaders: ['style-loader', 'css-loader?localIdentName=[path][name]·[local]·[hash:base64:5]', 'postcss-loader', 'sass-loader'],
+		loader: `style-loader!css-loader?importLoaders=1&localIdentName=${identName}!postcss-loader`,
 	})
 }
 
 else if (isTest) {
 	config.module.loaders.push({
 		test: /\.css$/,
-		loaders: ['style-loader', 'css-loader', 'postcss-loader'],
-	})
-
-	config.module.loaders.push({
-		test: /\.s(c|a)ss$/,
-		loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+		loader: 'style-loader!css-loader?importLoaders=1!postcss-loader',
 	})
 }
 
@@ -236,12 +252,7 @@ else if (isProduction) {
 
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: extractor.extract('style-loader', ['css-loader', 'postcss-loader']),
-	})
-
-	config.module.loaders.push({
-		test: /\.s(c|a)ss$/,
-		loader: extractor.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader']),
+		loader: extractor.extract('style-loader', 'css-loader?-import&importLoaders=1!postcss-loader'),
 	})
 }
 

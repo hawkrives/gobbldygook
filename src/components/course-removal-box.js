@@ -6,7 +6,7 @@ import {COURSE} from '../models/item-types'
 
 import Icon from './icon'
 
-import './course-removal-box.scss'
+import './course-removal-box.css'
 
 function CourseRemovalBox(props) {
 	const className = cx('course-removal-box', {

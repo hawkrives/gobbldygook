@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import isString from 'lodash/isString'
 
-import './avatar-letter.scss'
+import './avatar-letter.css'
 
 const AvatarLetter = ({className, value=''}) => (
 	<div className={cx('avatar-letter', className)}>

@@ -6,9 +6,9 @@ import find from 'lodash/find'
 import filter from 'lodash/filter'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { loadAllAreas } from '../../../redux/areas/actions'
+import { loadAllAreas } from 'src/redux/areas/actions'
 
-import Loading from '../../../components/loading'
+import Loading from 'src/components/loading'
 import AreaList from '../components/area-list'
 import AreaEditor from '../components/area-editor'
 

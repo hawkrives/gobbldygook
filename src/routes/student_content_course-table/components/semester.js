@@ -3,18 +3,18 @@ import {findDOMNode} from 'react-dom'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 import plur from 'plur'
-import semesterName from '../../../helpers/semester-name'
-import countCredits from '../../../area-tools/count-credits'
-import {COURSE} from '../../../models/item-types'
+import semesterName from 'src/helpers/semester-name'
+import countCredits from 'src/area-tools/count-credits'
+import {COURSE} from 'src/models/item-types'
 import {DropTarget} from 'react-dnd'
 import includes from 'lodash/includes'
 
-import Button from '../../../components/button'
-import Icon from '../../../components/icon'
-import List from '../../../components/list'
+import Button from 'src/components/button'
+import Icon from 'src/components/icon'
+import List from 'src/components/list'
 
 import CourseList from './course-list'
-import styles from './semester.scss'
+import './semester.css'
 
 export default function Semester(props) {
 	let courseList = null
@@ -45,21 +45,21 @@ export default function Semester(props) {
 		/>
 	}
 
-	const className = cx(styles.semester, {
+	const className = cx('semester', {
 		invalid: validation ? validation.hasConflict : false,
-		[styles.canDrop]: canDrop,
+		'can-drop': canDrop,
 	})
 
 	return (
 		<div className={className} ref={instance => props.connectDropTarget(findDOMNode(instance))}>
-			<header className={styles.title}>
+			<header className={'semester-title'}>
 				<Link
-					className={styles.header}
+					className={'semester-header'}
 					to={`/s/${studentId}/semester/${year}/${semester}`}
 				>
 					<h1>{semesterName(semester)}</h1>
 
-					<List className={styles.info} type='inline'>
+					<List className={'semester-info'} type='inline'>
 						{infoBar}
 					</List>
 				</Link>
@@ -71,7 +71,7 @@ export default function Semester(props) {
 					<Icon name='search' /> Course
 				</Button>
 				<Button
-					className={styles.remove}
+					className={'semester-remove'}
 					onClick={props.removeSemester}
 					title={`Remove ${year} ${semesterName(semester)}`}
 				>

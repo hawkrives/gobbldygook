@@ -1,0 +1,28 @@
+@import 'src/styles/variables.css';
+
+.course-removal-box {
+	padding: 5em 1em;
+	color: var(--gray-500);
+	background-color: white;
+	border-radius: 5px;
+
+	position: fixed;
+	top: calc(var(--page-edge-padding) * 2);
+	left: calc(var(--page-edge-padding) * 2);
+	max-width: 240px;
+
+	display: none;
+	box-shadow: 0 0 10px #444;
+
+	&.can-drop {
+		color: black;
+		display: flex;
+		z-index: calc(var(--z-sidebar) + 1);
+	}
+
+	&.is-over {
+		box-shadow: 0 0 10px var(--red-900);
+		color: var(--red-900);
+		background-color: var(--red-50);
+	}
+}

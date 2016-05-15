@@ -6,16 +6,21 @@ import filter from 'lodash/filter'
 import map from 'lodash/map'
 import sample from 'lodash/sample'
 
-import AvatarLetter from '../../../components/avatar-letter'
-import ContentEditable from '../../../components/content-editable'
+import AvatarLetter from 'src/components/avatar-letter'
+import ContentEditable from 'src/components/content-editable'
 
-import getActiveStudentCourses from '../../../helpers/get-active-student-courses'
-import countCredits from '../../../area-tools/count-credits'
+import getActiveStudentCourses from 'src/helpers/get-active-student-courses'
+import countCredits from 'src/area-tools/count-credits'
 
-import './student-summary.scss'
+import './student-summary.css'
 
-const goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
-const badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
+const goodGraduationMessage =
+	`It looks like you'll make it! Just follow the plan, and go over my output
+	with your advisor a few times.`.split('\n').join(' ')
+
+const badGraduationMessage =
+	`You haven't planned everything out yet. Ask your advisor if you need help
+	fitting everything in.`.split('\n').join(' ')
 
 const welcomeMessages = [
 	'Hi, ',

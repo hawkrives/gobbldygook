@@ -3,7 +3,7 @@ import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 
 import compareProps from '../helpers/compare-props'
-import './button.scss'
+import './button.css'
 
 export default class Button extends Component {
 	static propTypes = {

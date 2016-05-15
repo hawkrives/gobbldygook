@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import Icon from '../../../components/icon'
+import Icon from 'src/components/icon'
 
 export default function ResultIndicator({result}) {
 	return <Icon
