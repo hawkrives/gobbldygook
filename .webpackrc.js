@@ -163,19 +163,23 @@ const config = {
 		require('postcss-import')({
 			addDependencyTo: webpack,
 			resolve(id, base) {
+				// this funciton changes the @import resolution to match require().
+				// that is, if a path begins with ".", it is a relative path.
+				// otherwise, it attempts to look up the path in webpack's list of aliases.
+				// if it doesn't exist, it's still a relative path.
 				let [firstLevel, ...remaining] = id.split('/')
 				let isAliasedDir = Object.keys(config.resolve.alias).includes(firstLevel)
 
-				let retval = isAliasedDir
+				let newpath = isAliasedDir
 					? path.join(
 						'/',
 						...config.resolve.alias[firstLevel].split('/'),
 						...remaining)
 					: path.join(base, id)
 
-				retval = retval.replace(__dirname, '').substr(1)
+				newpath = newpath.replace(__dirname, '').substr(1)
 
-				return retval
+				return newpath
 			},
 		}),
 		require('postcss-apply'),
