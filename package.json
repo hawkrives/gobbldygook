@@ -27,6 +27,7 @@
     "test": "cross-env NODE_ENV=test mocha test/**/*.js",
     "test-students": "./bin/test-student test/example-students",
     "test-watch": "npm run test -- --watch",
+    "travis": "npm run lint && npm run cover && npm run build-ci",
     "view-coverage": "nyc report --reporter=html && open coverage/index.html"
   },
   "dependencies": {

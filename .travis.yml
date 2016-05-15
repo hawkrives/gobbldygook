@@ -7,7 +7,7 @@ sudo: false
 cache:
   directories:
     - $HOME/.npm
-#     - node_modules
+    - node_modules
 
 # Send travis notifications to Slack
 notifications:
@@ -23,11 +23,6 @@ node_js:
   - stable
 
 script:
-  - set -e  # exit the build as soon as one command errors
-  - npm run lint
-  - npm run test-students
-  - npm run cover  # runs mocha with coverage
-  - npm run build-ci
-  - set +e  # reset the setting
+  - npm run travis
 
 after_success: npm run coveralls
