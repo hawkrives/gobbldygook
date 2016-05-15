@@ -16,7 +16,7 @@
     "cover": "nyc npm test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint *.js bin/ scripts/ src/ test/",
-    "x-prebuild": "npm run copy",
+    "prebuild": "npm run copy",
     "prestart": "npm run copy",
     "profile": "cat profile/README.md",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
