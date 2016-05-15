@@ -45,7 +45,7 @@ async function loadDir(dirpath) {
 		.filter(filename => path.extname(filename) === '.json' ||
 							path.extname(filename) === '.yaml')
 		.filter(junk.not)
-		.map(filename => path.resolve(dirpath + filename))
+		.map(filename => path.resolve(dirpath, filename))
 		.map(loadFile)
 	return Promise.all(promises)
 }
