@@ -56,9 +56,9 @@ import {AppContainer} from 'react-hot-loader'
 
 render(
 	(<AppContainer>
-		(<Root store={store}>
+		<Root store={store}>
 			<Router history={history} routes={routes} />
-		</Root>),
+		</Root>
 	</AppContainer>),
 	document.getElementById('gobbldygook') )
 
