@@ -7,17 +7,16 @@ if (DEVELOPMENT) {
 	DevTools = require('./devtools')
 }
 
-const Root = props => {
-	return (
-		<Provider store={props.store}>
-			<div id='app-wrapper'>
-				{cloneElement(props.children)}
-				<Notifications />
-				{DevTools ? <DevTools /> : null}
-			</div>
-		</Provider>
-	)
-}
+const Root = props => (
+	<Provider store={props.store}>
+		<div id='app-wrapper'>
+			{cloneElement(props.children)}
+			<Notifications />
+			{DevTools ? <DevTools /> : null}
+		</div>
+	</Provider>
+)
+
 Root.propTypes = {
 	children: PropTypes.node,
 	store: PropTypes.object.isRequired,
