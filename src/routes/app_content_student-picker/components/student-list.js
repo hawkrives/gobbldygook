@@ -4,10 +4,10 @@ import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import fuzzysearch from 'fuzzysearch'
 
-import List from '../../../components/list'
+import List from 'src/components/list'
 import StudentListItem from './student-list-item'
 
-import './student-list.scss'
+import './student-list.css'
 
 export default function StudentList(props) {
 	const {

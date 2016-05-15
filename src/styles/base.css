@@ -1,0 +1,45 @@
+@import './variables.css';
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	font-family: var(--sans-font-stack);
+	color: var(--text-color);
+
+	box-sizing: border-box;
+
+	background: var(--background);
+	min-height: 100vh;
+
+	line-height: 1.4;
+
+	font-feature-settings: 'liga', 'calt', 'kern';
+	hyphens: auto;
+}
+
+body {
+	height: 100%;
+}
+
+
+menu {
+	padding: 0;
+	margin: 0;
+}
+
+.sidebar, .content {
+	padding-top: var(--page-edge-padding);
+	padding-bottom: 15vh;
+	overflow-y: scroll;
+}
+
+
+/* hide the St. Olaf disclaimer */
+/* TODO: move it somewhere else, instead of hiding it */
+body > p {
+	display: none;
+}

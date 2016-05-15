@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react'
 import FakeCourse from './fake-course'
-import styles from './empty-course-slot.scss'
+import './empty-course-slot.css'
 
 export default function EmptyCourseSlot({className}) {
-	return <FakeCourse title='Empty Slot' className={`${styles.empty} ${className}`} />
+	return <FakeCourse title='Empty Slot' className={`empty-course ${className}`} />
 }
 
 EmptyCourseSlot.propTypes = {

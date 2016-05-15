@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import semesterName from '../../../helpers/semester-name'
-import {shrinkDepartment} from '../../../area-tools/convert-department'
+import semesterName from 'src/helpers/semester-name'
+import {shrinkDepartment} from 'src/area-tools/convert-department'
 
-import './expression--course.scss'
+import './expression--course.css'
 
 export default function CourseExpression(props) {
 	const department = props.department.length > 1

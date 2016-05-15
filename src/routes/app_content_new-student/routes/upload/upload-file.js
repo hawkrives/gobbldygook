@@ -1,14 +1,14 @@
 import React, {Component, PropTypes} from 'react'
 import DropZone from 'react-dropzone'
 import map from 'lodash/map'
-import Button from '../../../../components/button'
-import List from '../../../../components/list'
-import StudentSummary from '../../../app_content_student/components/student-summary'
-import { initStudent } from '../../../../redux/students/actions/init-student'
+import Button from 'src/components/button'
+import List from 'src/components/list'
+import StudentSummary from 'src/routes/app_content_student/components/student-summary'
+import { initStudent } from 'src/redux/students/actions/init-student'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
-import styles from './upload-file.scss'
+import './upload-file.css'
 
 export default class UploadFileScreen extends Component {
 	static propTypes = {
@@ -90,16 +90,16 @@ export default class UploadFileScreen extends Component {
 					onDrop={this.handleFileDrop}
 					multiple
 					disablePreview
-					className={styles.dropzone}
-					activeClassName={styles.canDrop}
-					rejectClassName={styles.canDrop} // HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
+					className='upload-dropzone'
+					activeClassName='canDrop'
+					rejectClassName='canDrop' // HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
 				>
 					<p>
 						Just drop some students here, or click to select some to upload.
 					</p>
 				</DropZone>
 
-				<List type='plain' className={styles.results}>
+				<List type='plain' className='upload-results'>
 					{
 						// eslint-disable-next-line no-confusing-arrow
 						map(students, stu => stu.payload

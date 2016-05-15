@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import CourseSearcher from '../../../containers/course-searcher'
+import CourseSearcher from 'src/containers/course-searcher'
 
 export default function CourseSearcherSidebar(props) {
 	const {studentId} = props.params

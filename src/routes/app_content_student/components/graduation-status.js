@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react'
 import AreaOfStudySidebar from './area-of-study-sidebar'
 import StudentSummary from './student-summary'
 
-import './graduation-status.scss'
+import './graduation-status.css'
 
 export default function GraduationStatus(props) {
 	if (!props.student) {

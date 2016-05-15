@@ -1,15 +1,15 @@
 import React, {PropTypes} from 'react'
 import map from 'lodash/map'
-import pluralizeArea from '../../../area-tools/pluralize-area'
+import pluralizeArea from 'src/area-tools/pluralize-area'
 import capitalize from 'lodash/capitalize'
-import * as areaTypeConstants from '../../../models/area-types'
+import * as areaTypeConstants from 'src/models/area-types'
 import values from 'lodash/values'
 
 import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'
-import Button from '../../../components/button'
+import Button from 'src/components/button'
 
-import './area-of-study-group.scss'
+import './area-of-study-group.css'
 
 export default function AreaOfStudyGroup(props) {
 	const showAreaPicker = props.showAreaPicker || false

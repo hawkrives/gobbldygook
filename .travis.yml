@@ -25,9 +25,9 @@ node_js:
 script:
   - set -e  # exit the build as soon as one command errors
   - npm run lint
-  - npm run test:students
-  - npm run nyc  # runs mocha with coverage
-  - npm run build:ci
+  - npm run test-students
+  - npm run cover  # runs mocha with coverage
+  - npm run build-ci
   - set +e  # reset the setting
 
 after_success: npm run coveralls

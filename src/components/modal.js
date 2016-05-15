@@ -3,7 +3,7 @@ import cx from 'classnames'
 import ReactModal2 from 'react-modal2'
 import {Gateway} from 'react-gateway'
 
-import './modal.scss'
+import './modal.css'
 
 export default function Modal(props) {
 	return (

@@ -1,8 +1,0 @@
-@function gcd($a, $b) {
-	// From: http://rosettacode.org/wiki/Greatest_common_divisor#JavaScript
-	@if ($b != 0) {
-		@return gcd($b, $a % $b);
-	} @else {
-		@return abs($a);
-	}
-}

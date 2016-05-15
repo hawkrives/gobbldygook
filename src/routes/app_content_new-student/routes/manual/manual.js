@@ -1,17 +1,17 @@
 import React, {Component, PropTypes} from 'react'
-import Button from '../../../../components/button'
+import Button from 'src/components/button'
 import cx from 'classnames'
 import Autosize from 'react-input-autosize'
 import Select from 'react-select'
 import {connect} from 'react-redux'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
-import 'react-select/scss/default.scss'
+import 'react-select/dist/react-select.css'
 import { push } from 'react-router-redux'
-import { initStudent } from '../../../../redux/students/actions/init-student'
-import filterAreaList from '../../../../helpers/filter-area-list'
+import { initStudent } from 'src/redux/students/actions/init-student'
+import filterAreaList from 'src/helpers/filter-area-list'
 
-import './manual.scss'
+import './manual.css'
 
 let now = new Date()
 

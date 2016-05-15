@@ -3,14 +3,14 @@ import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 
-import isRequirementName from '../../../area-tools/is-requirement-name'
+import isRequirementName from 'src/area-tools/is-requirement-name'
 
 import Filter from './expression--filter'
 import Expression from './expression'
-import Button from '../../../components/button'
+import Button from 'src/components/button'
 import ResultIndicator from './result-indicator'
 
-import styles from './requirement.scss'
+import './requirement.css'
 
 // function getResultOfRequirement(requirements) {
 // 	return requirementTitle => requirements[requirementTitle].computed ? 'A' : 'B'
@@ -29,27 +29,27 @@ export function Requirement(props) {
 	const extraClasses = [props.overridden ? 'overridden' : '']
 
 	const result = props.result && (
-		<div className={styles.result}>
+		<div className='result'>
 			<Expression expr={props.result} ctx={props} />
 		</div>
 	)
 
 	const message = props.message &&
-		<p className={styles.message}>{props.message}</p>
+		<p className='message'>{props.message}</p>
 	const description = props.description &&
-		<p className={styles.description}>{props.description}</p>
+		<p className='description'>{props.description}</p>
 
 	const filterEl = props.filter && (
-		<div className={styles.filter}>
+		<div className='filter'>
 			Filter: <Filter expr={props.filter} ctx={props} />
 		</div>
 	)
 
 	const title = !topLevel && (
-		<h2 className={styles.heading} title={props.name} onClick={props.onToggleOpen}>
-			<span className={styles.title}>
+		<h2 className='heading' title={props.name} onClick={props.onToggleOpen}>
+			<span className='title'>
 				{` ${props.name}`}
-				<span className={styles.status}>{status}</span>
+				<span className='status'>{status}</span>
 			</span>
 		</h2>
 	)
@@ -65,14 +65,14 @@ export function Requirement(props) {
 		/>)
 
 	const overrideButtons = (props.message && !props.result) && (
-		<span className={`${styles['override-buttons']} button-group`}>
+		<span className='override-buttons  button-group'>
 			<Button onClick={ev => props.onRemoveOverride(props.path, ev)} type='flat'>Not yet…</Button>
 			<Button onClick={ev => props.onAddOverride(props.path, ev)} type='flat'>Done!</Button>
 		</span>
 	)
 
 	let className = [
-		styles.requirement,
+		'requirement',
 		extraClasses.join(' '),
 		computationClassName,
 		props.isOpen ? 'is-open' : 'is-closed',

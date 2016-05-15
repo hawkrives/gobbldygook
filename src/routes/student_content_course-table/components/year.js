@@ -3,14 +3,14 @@ import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 import map from 'lodash/map'
 
-import Button from '../../../components/button'
+import Button from 'src/components/button'
 import Semester from '../containers/semester'
 
-import findFirstAvailableSemester from '../../../helpers/find-first-available-semester'
-import expandYear from '../../../helpers/expand-year'
-import semesterName from '../../../helpers/semester-name'
+import findFirstAvailableSemester from 'src/helpers/find-first-available-semester'
+import expandYear from 'src/helpers/expand-year'
+import semesterName from 'src/helpers/semester-name'
 
-import './year.scss'
+import './year.css'
 
 
 const canAddSemester = (schedules, year) =>

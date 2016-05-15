@@ -10,11 +10,11 @@ import {COURSE} from '../models/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'
-import buildCourseIdent from '../helpers/build-course-ident'
+import buildCourseIdent from 'src/helpers/build-course-ident'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 
-import styles from './inline-course.scss'
+import './inline-course.css'
 
 class InlineCourse extends Component {
 	static propTypes = {
@@ -61,14 +61,14 @@ class InlineCourse extends Component {
 		const warningEls = map(validWarnings, (w, index) =>
 			<li key={index}><Icon name={w.icon} /> {w.msg}</li>)
 
-		let classSet = cx(this.props.className, styles.course, {
-			[styles.expanded]: this.state.isOpen,
-			[styles.hasWarnings]: hasWarnings,
-			[styles.isDragging]: this.props.isDragging,
+		let classSet = cx(this.props.className, 'course', {
+			'expanded': this.state.isOpen,
+			'has-warnings': hasWarnings,
+			'is-dragging': this.props.isDragging,
 		})
 
 		const warningList = warningEls.length && (
-			<List type='inline' className={styles.warnings}>{warningEls}</List>
+			<List type='inline' className='course-warnings'>{warningEls}</List>
 		)
 
 		return this.props.connectDragSource(
@@ -78,21 +78,21 @@ class InlineCourse extends Component {
 			>
 				{warningList || null}
 
-				<CourseTitle className={styles.row} title={course.title} name={course.name} type={course.type} />
-				<div className={styles.row + ' ' + styles.summary}>
-					<span className={styles.identifier}>
+				<CourseTitle className='course-row' title={course.title} name={course.name} type={course.type} />
+				<div className='course-row course-summary'>
+					<span className='course-identifier'>
 						{buildCourseIdent(course)}
 					</span>
-					{course.type !== 'Research' ? <span className={styles.type}>{course.type}</span> : null}
-					{course.gereqs && <ul className={styles.gereqs}>
+					{course.type !== 'Research' ? <span className='course-type'>{course.type}</span> : null}
+					{course.gereqs && <ul className='course-gereqs'>
 						{map(course.gereqs, (ge, idx) =>
 							<li key={ge + idx}>{ge}</li>
 						)}
 					</ul>}
 					{course.prerequisites &&
-						<span className={styles.hasPrerequisite} title={course.prerequisites}>Prereq</span>}
+						<span className='has-prerequisite' title={course.prerequisites}>Prereq</span>}
 				</div>
-				<div className={styles.row + ' ' + styles.summary}>
+				<div className='course-row course-summary'>
 					{course.times}
 				</div>
 

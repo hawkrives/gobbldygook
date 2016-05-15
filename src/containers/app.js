@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react'
 import { DragDropContext } from 'react-dnd'
 import { GatewayProvider, GatewayDest } from 'react-gateway'
 
-import '../index.scss'
+import 'src/index.css'
 
 import ReactModal2 from 'react-modal2'
 ReactModal2.getApplicationElement = () => document.getElementById('content-wrapper')

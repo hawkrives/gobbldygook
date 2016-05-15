@@ -1,0 +1,10 @@
+@import 'src/styles/variables.css';
+
+.empty-course {
+	color: var(--gray-500);
+	user-select: none;
+
+	* {
+		cursor: default;
+	}
+}

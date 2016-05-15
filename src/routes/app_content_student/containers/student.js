@@ -2,15 +2,15 @@ import React, { Component, PropTypes, cloneElement } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { loadStudent } from '../../../redux/students/actions/load-student'
+import { loadStudent } from 'src/redux/students/actions/load-student'
 
-import Sidebar from '../../../containers/sidebar'
-import Loading from '../../../components/loading'
+import Sidebar from 'src/containers/sidebar'
+import Loading from 'src/components/loading'
 
 import CourseTable from '../../student_content_course-table/containers/course-table'
 import GraduationStatus from './graduation-status'
 
-import './student.scss'
+import './student.css'
 
 export class Student extends Component {
 	static propTypes = {
