@@ -117,7 +117,6 @@
     "get-stdin": "5.0.1",
     "glob": "7.0.3",
     "graceful-fs": "4.1.4",
-    "happypack": "2.1.0",
     "js-beautify": "1.6.2",
     "json-loader": "0.5.4",
     "junk": "1.0.2",
