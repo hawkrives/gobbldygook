@@ -1,24 +1,27 @@
-import React, {PropTypes} from 'react'
+const React = require('react')
+const {PropTypes} = React
 
-import difference from 'lodash/difference'
-import filter from 'lodash/filter'
-import find from 'lodash/find'
-import groupBy from 'lodash/groupBy'
-import includes from 'lodash/includes'
-import keys from 'lodash/keys'
-import map from 'lodash/map'
-import mapValues from 'lodash/mapValues'
-import pick from 'lodash/pick'
-import pickBy from 'lodash/pickBy'
-import toPairs from 'lodash/toPairs'
-import union from 'lodash/union'
-import uniq from 'lodash/uniq'
-import values from 'lodash/values'
+import {
+	difference,
+	filter,
+	find,
+	groupBy,
+	includes,
+	keys,
+	map,
+	mapValues,
+	pick,
+	pickBy,
+	toPairs,
+	union,
+	uniq,
+	values,
+} from 'lodash-es'
 
-import sortStudiesByType from 'src/helpers/sort-studies-by-type'
+import sortStudiesByType from '../../../helpers/sort-studies-by-type'
 import AreaOfStudyGroup from './area-of-study-group'
-import Button from 'src/components/button'
-import * as areaTypeConstants from 'src/models/area-types'
+import Button from '../../../components/button'
+import * as areaTypeConstants from '../../../models/area-types'
 
 export default function AreaOfStudySidebar(props) {
 	const {allAreas, student, showAreaPickerFor} = props

@@ -1,6 +1,4 @@
-import forEach from 'lodash/forEach'
-import range from 'lodash/range'
-import size from 'lodash/size'
+import {forEach, range, size} from 'lodash-es'
 
 import Student, {addScheduleToStudent} from '../../../models/student'
 import Schedule from '../../../models/schedule'

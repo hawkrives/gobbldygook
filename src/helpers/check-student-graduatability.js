@@ -1,9 +1,6 @@
-import Bluebird from 'bluebird'
+const Bluebird = require('bluebird')
 
-import filter from 'lodash/filter'
-import size from 'lodash/size'
-import map from 'lodash/map'
-
+import {filter, size, map} from 'lodash-es'
 import checkStudentAgainstArea from './check-student-against-area'
 import countCredits from '../area-tools/count-credits'
 import getActiveStudentCourses from './get-active-student-courses'

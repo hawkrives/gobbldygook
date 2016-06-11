@@ -1,15 +1,14 @@
-import React, {PropTypes} from 'react'
-import map from 'lodash/map'
-import pluralizeArea from 'src/area-tools/pluralize-area'
-import capitalize from 'lodash/capitalize'
-import * as areaTypeConstants from 'src/models/area-types'
-import values from 'lodash/values'
+const React = require('react')
+const {PropTypes} = React
+import pluralizeArea from '../../../area-tools/pluralize-area'
+import * as areaTypeConstants from '../../../models/area-types'
+import {capitalize, values, map} from 'lodash-es'
 
 import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'
-import Button from 'src/components/button'
+import Button from '../../../components/button'
 
-import './area-of-study-group.css'
+// import './area-of-study-group.css'
 
 export default function AreaOfStudyGroup(props) {
 	const showAreaPicker = props.showAreaPicker || false

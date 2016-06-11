@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import filter from 'lodash/filter'
-import map from 'lodash/map'
+import * as React from 'react'
+const {Component, PropTypes} = React
+const { connect } = require('react-redux')
+import {bindActionCreators} from 'redux/es'
+import {filter, map} from 'lodash-es'
 import isCurrentSemester from '../../../helpers/is-current-semester'
 
 import Loading from '../../../components/loading'

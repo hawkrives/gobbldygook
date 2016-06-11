@@ -1,24 +1,23 @@
-import React, {PropTypes} from 'react'
+const React = require('react')
+const {PropTypes} = React
 
-import Button from 'src/components/button'
-import Icon from 'src/components/icon'
-import Toolbar from 'src/components/toolbar'
-import Modal from 'src/components/modal'
-import List from 'src/components/list'
+import Button from '../../../components/button'
+import Icon from '../../../components/icon'
+import Toolbar from '../../../components/toolbar'
+import Modal from '../../../components/modal'
+import List from '../../../components/list'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+const { connect } = require('react-redux')
 
-import encodeStudent from 'src/helpers/encode-student'
+import encodeStudent from '../../../helpers/encode-student'
 
-import './share-student.css'
+// import './share-student.css'
 
 export function ShareSheet(props) {
 	let { student } = props
 	student = student || {}
 
-	const boundCloseModal = () => props.push(`/s/${props.params.studentId}/`)
+	const boundCloseModal = () => props.router.push(`/s/${props.params.studentId}/`)
 
 	return <Modal
 		into='share-modal'
@@ -52,12 +51,12 @@ ShareSheet.propTypes = {
 	params: PropTypes.shape({
 		studentId: PropTypes.string.isRequired,
 	}).isRequired,
-	push: PropTypes.func.isRequired,
+	router: PropTypes.object.isRequired,
 	student: PropTypes.object,
 }
 
 const mapState = (state, ownProps) => {
 	return {student: state.students[ownProps.params.studentId].data.present}
 }
-const mapDispatch = dispatch => bindActionCreators({push}, dispatch)
-export default connect(mapState, mapDispatch)(ShareSheet)
+
+export default connect(mapState)(ShareSheet)

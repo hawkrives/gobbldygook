@@ -1,21 +1,20 @@
-import React, {PropTypes} from 'react'
-import cx from 'classnames'
-import ReactModal2 from 'react-modal2'
-import {Gateway} from 'react-gateway'
+const React = require('react')
+const {PropTypes} = React
+const cx = require('classnames')
+const ReactDumbModal = require('react-dumb-modal')
 
-import './modal.css'
+// import './modal.css'
 
 export default function Modal(props) {
 	return (
-		<Gateway into={props.into}>
-			<ReactModal2
-				onClose={props.onClose}
-				backdropClassName={cx('modal--backdrop', props.backdropClassName)}
-				modalClassName={cx('modal--content', props.modalClassName)}
-			>
-				{props.children}
-			</ReactModal2>
-		</Gateway>
+		<ReactDumbModal
+			dismiss={props.onClose}
+			overlayClassName={cx('modal--backdrop', props.backdropClassName)}
+			modalClassName={cx('modal--content', props.modalClassName)}
+			unstyled={true}
+		>
+			{props.children}
+		</ReactDumbModal>
 	)
 }
 

@@ -1,15 +1,11 @@
-import map from 'lodash/map'
-import flatten from 'lodash/flatten'
-import compact from 'lodash/compact'
-import some from 'lodash/some'
-import zip from 'lodash/zip'
-
-import ordinal from 'ord'
-import {oxford} from 'humanize-plus'
-import plur from 'plur'
-import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
+import {map, flatten, compact, some, zip} from 'lodash-es'
 import expandYear from '../helpers/expand-year'
 import semesterName from '../helpers/semester-name'
+
+const ordinal = require('ord')
+const {oxford} = require('humanize-plus')
+const plur = require('plur')
+const {findScheduleTimeConflicts} = require('sto-sis-time-parser')
 
 export function checkForInvalidYear(course, scheduleYear) {
 	let thisYear = new Date().getFullYear()

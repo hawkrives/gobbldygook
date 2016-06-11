@@ -1,13 +1,14 @@
-import React, {Component, PropTypes} from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+const React = require('react')
+const {Component, PropTypes} = React
+const { connect } = require('react-redux')
+import { bindActionCreators } from 'redux/es'
 
-import has from 'lodash/has'
-import pathToOverride from 'src/area-tools/path-to-override'
+import {has} from 'lodash-es'
+import pathToOverride from '../../../area-tools/path-to-override'
 
-import {changeName, changeMatriculation, changeGraduation} from 'src/redux/students/actions/change'
-import {addArea, removeArea} from 'src/redux/students/actions/areas'
-import {setOverride, removeOverride} from 'src/redux/students/actions/overrides'
+import {changeName, changeMatriculation, changeGraduation} from '../../../redux/students/actions/change'
+import {addArea, removeArea} from '../../../redux/students/actions/areas'
+import {setOverride, removeOverride} from '../../../redux/students/actions/overrides'
 import GraduationStatus from '../components/graduation-status'
 
 export default class GraduationStatusContainer extends Component {

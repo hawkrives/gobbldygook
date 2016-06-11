@@ -1,17 +1,16 @@
-import React, {Component, PropTypes} from 'react'
-import Button from 'src/components/button'
-import cx from 'classnames'
-import Autosize from 'react-input-autosize'
-import Select from 'react-select'
-import {connect} from 'react-redux'
-import map from 'lodash/map'
-import filter from 'lodash/filter'
-import 'react-select/dist/react-select.css'
-import { push } from 'react-router-redux'
-import { initStudent } from 'src/redux/students/actions/init-student'
-import filterAreaList from 'src/helpers/filter-area-list'
+const React = require('react')
+const {Component, PropTypes} = React
+import Button from '../../../../components/button'
+const cx = require('classnames')
+const Autosize = require('react-input-autosize')
+const Select = require('react-select')
+const { connect } = require('react-redux')
+import {map, filter} from 'lodash-es'
 
-import './manual.css'
+import { initStudent } from '../../../../redux/students/actions/init-student'
+import filterAreaList from '../../../../helpers/filter-area-list'
+
+// import './manual.css'
 
 let now = new Date()
 
@@ -20,6 +19,7 @@ class ManualCreationScreen extends Component {
 		areas: PropTypes.array.isRequired, // redux
 		areasLoading: PropTypes.bool.isRequired, // redux
 		dispatch: PropTypes.func.isRequired, // redux
+		router: PropTypes.object.isRequired,
 	};
 
 	state = {
@@ -111,7 +111,7 @@ class ManualCreationScreen extends Component {
 
 		let action = initStudent(rawStudent)
 		this.props.dispatch(action)
-		this.props.dispatch(push(`/s/${action.payload.id}`))
+		this.props.dispatch(this.props.router.push(`/s/${action.payload.id}`))
 	};
 
 	render() {

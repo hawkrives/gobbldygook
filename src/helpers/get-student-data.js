@@ -1,4 +1,4 @@
-import Bluebird from 'bluebird'
+const Bluebird = require('bluebird')
 import embedActiveStudentCourses from './embed-active-student-courses'
 import getStudentStudies from './get-student-studies'
 import fulfillFulfillments from './fulfill-fulfillments'

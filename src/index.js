@@ -52,12 +52,11 @@ loadData()
 console.log('3. 2.. 1... Blast off! 🚀')
 
 const {AppContainer} = require('react-hot-loader')
-const Router = require('react-router/lib/Router')
+import {Router} from 'react-router/es6'
 import history from './history'
 import routes from './routes'
 
 // Create the redux store
-import routerMiddleware from './redux/middleware/router'
 const configureStore = require('./redux')
 import Root from './containers/root'
 const store = configureStore()
@@ -65,7 +64,6 @@ global.dispatch = store.dispatch
 
 import { loadAllAreas } from './redux/areas/actions'
 store.dispatch(loadAllAreas())
-routerMiddleware.listenForReplays(store)
 
 // global.store = store
 

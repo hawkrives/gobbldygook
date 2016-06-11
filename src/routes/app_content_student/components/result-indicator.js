@@ -1,5 +1,6 @@
-import React, {PropTypes} from 'react'
-import Icon from 'src/components/icon'
+const React = require('react')
+const {PropTypes} = React
+import Icon from '../../../components/icon'
 
 export default function ResultIndicator({result}) {
 	return <Icon

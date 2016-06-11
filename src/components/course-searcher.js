@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
+const React = require('react')
+const {PropTypes} = React
 
-import map from 'lodash/map'
-import toPrettyTerm from 'src/helpers/to-pretty-term'
+import {map} from 'lodash-es'
+import toPrettyTerm from '../helpers/to-pretty-term'
 
 import Button from './button'
 import Icon from './icon'
@@ -10,7 +11,7 @@ import CourseResultsList from './course-results-list'
 
 import {SORT_BY, GROUP_BY} from './course-searcher-options'
 
-import './course-searcher.css'
+// import './course-searcher.css'
 
 export default function CourseSearcher(props) {
 	const {

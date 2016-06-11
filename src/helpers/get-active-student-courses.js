@@ -1,6 +1,4 @@
-import uniqBy from 'lodash/uniqBy'
-import filter from 'lodash/filter'
-import flatMap from 'lodash/flatMap'
+import {uniqBy, filter, flatMap} from 'lodash-es'
 
 export default function getActiveStudentCourses(student) {
 	// - At it's core, this method just needs to get the list of courses that a student has chosen.

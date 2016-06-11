@@ -1,13 +1,14 @@
-import React, {PropTypes} from 'react'
+const React = require('react')
+const {PropTypes} = React
 
 import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
 
-import map from 'lodash/map'
-import plur from 'plur'
-import humanizeOperator from 'src/area-tools/humanize-operator'
+import {map} from 'lodash-es'
+const plur = require('plur')
+import humanizeOperator from '../../../area-tools/humanize-operator'
 
-import './expression.css'
+// import './expression.css'
 
 const joiners = {
 	$and: 'AND',

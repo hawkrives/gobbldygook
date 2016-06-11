@@ -1,25 +1,25 @@
-import endsWith from 'lodash/endsWith'
-import filter from 'lodash/filter'
-import flatten from 'lodash/flatten'
-import includes from 'lodash/includes'
-import isArray from 'lodash/isArray'
-import map from 'lodash/map'
-import mapValues from 'lodash/mapValues'
+import {
+	endsWith,
+	filter,
+	flatten,
+	includes,
+	isArray,
+	map,
+	mapValues,
+	startsWith,
+	toPairs,
+	trim,
+	unzip,
+} from 'lodash-es'
 import partitionByIndex from './partition-by-index'
-import startsWith from 'lodash/startsWith'
-import toPairs from 'lodash/toPairs'
-import trim from 'lodash/trim'
-import unzip from 'lodash/unzip'
-
 import quacksLikeDeptNum from './quacks-like-dept-num'
 import splitDeptNum from './split-dept-num'
 import buildDeptNum from './build-dept-num'
-
 import splitParagraph from './split-paragraph'
 import zipToObjectWithArrays from './zip-to-object-with-arrays'
 
-import departmentMapping from 'sto-course-related-data/handmade/to_department_abbreviations.json'
-import gereqMapping from 'sto-course-related-data/handmade/to_gereq_abbreviations.json'
+const departmentMapping = require('sto-course-related-data/handmade/to_department_abbreviations.json')
+const gereqMapping = require('sto-course-related-data/handmade/to_gereq_abbreviations.json')
 
 let semesters = {
 	'fall': 1,
@@ -105,7 +105,7 @@ function organizeValues([key, values], {words=false, profWords=false}={}) {
 		}
 
 		else if (key === 'pf') {
-			val = (val === 'true') ? true : false
+			val = (val === 'true')
 		}
 
 		else if (key === 'credits') {
@@ -191,7 +191,7 @@ export default function buildQueryFromString(queryString='', opts={}) {
 
 	let organized = zipToObjectWithArrays(...paired) // spread the [k, v] pairs into the arguments properly
 
-	let finalized = mapValues(organized, val => {
+	return mapValues(organized, val => {
 		// flatten the results list
 		val = flatten(val)
 
@@ -202,6 +202,4 @@ export default function buildQueryFromString(queryString='', opts={}) {
 
 		return val
 	})
-
-	return finalized
 }

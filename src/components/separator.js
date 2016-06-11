@@ -1,5 +1,6 @@
-import React, {PropTypes} from 'react'
-import cx from 'classnames'
+const React = require('react')
+const {PropTypes} = React
+const cx = require('classnames')
 
 export default function Separator(props) {
 	const {

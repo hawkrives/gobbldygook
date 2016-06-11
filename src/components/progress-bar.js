@@ -1,8 +1,9 @@
-import React, {PropTypes} from 'react'
-import cx from 'classnames'
-import findWordForProgress from 'src/helpers/find-word-for-progress'
+const React = require('react')
+const {PropTypes} = React
+const cx = require('classnames')
+import findWordForProgress from '../helpers/find-word-for-progress'
 
-import './progress-bar.css'
+// import './progress-bar.css'
 
 export default function ProgressBar(props) {
 	const {

@@ -1,14 +1,13 @@
-import React, {Component, PropTypes} from 'react'
-import yaml from 'js-yaml'
-import keymage from 'keymage'
-import omit from 'lodash/omit'
-import find from 'lodash/find'
-import filter from 'lodash/filter'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { loadAllAreas } from 'src/redux/areas/actions'
+const React = require('react')
+const {Component, PropTypes} = React
+const yaml = require('js-yaml')
+const keymage = require('keymage')
+import {omit, find, filter} from 'lodash-es'
+const { connect } = require('react-redux')
+import { bindActionCreators } from 'redux/es'
+import { loadAllAreas } from '../../../redux/areas/actions'
 
-import Loading from 'src/components/loading'
+import Loading from '../../../components/loading'
 import AreaList from '../components/area-list'
 import AreaEditor from '../components/area-editor'
 

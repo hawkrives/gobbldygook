@@ -1,4 +1,4 @@
-import sumBy from 'lodash/sumBy'
+import {sumBy} from 'lodash-es'
 
 /**
  * Sums up the number of credits offered by a set of courses

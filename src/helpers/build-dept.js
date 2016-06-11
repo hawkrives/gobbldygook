@@ -1,4 +1,4 @@
-import departmentNameToAbbr from 'sto-course-related-data/handmade/to_department_abbreviations.json'
+const departmentNameToAbbr = require('sto-course-related-data/handmade/to_department_abbreviations.json')
 
 /**
  * Builds a department string from a course.

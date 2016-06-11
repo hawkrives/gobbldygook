@@ -1,7 +1,8 @@
-import React, {PropTypes} from 'react'
+const React = require('react')
+const {PropTypes} = React
 
-import Button from 'src/components/button'
-import Toolbar from 'src/components/toolbar'
+import Button from '../../../components/button'
+import Toolbar from '../../../components/toolbar'
 
 export default function ScreenToolbar({onNext, onBack}) {
 	return (

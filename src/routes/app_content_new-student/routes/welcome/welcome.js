@@ -1,5 +1,5 @@
-import React from 'react'
-import Button from 'src/components/button'
+const React = require('react')
+import Button from '../../../../components/button'
 
 export default function WelcomeScreen() {
 	return <div>

@@ -1,8 +1,9 @@
-import React, {PropTypes} from 'react'
-import round from 'lodash/round'
+const React = require('react')
+const {PropTypes} = React
+import {round} from 'lodash-es'
 import Button from './button'
 import ProgressBar from './progress-bar'
-import './notification.css'
+// import './notification.css'
 
 export default function Notification(props) {
 	// console.log('Notification#render')

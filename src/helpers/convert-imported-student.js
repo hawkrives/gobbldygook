@@ -1,15 +1,10 @@
 import {getCourse} from './get-courses'
-import Bluebird from 'bluebird'
 import Student from '../models/student'
 import Schedule from '../models/schedule'
-import groupBy from 'lodash/groupBy'
-import map from 'lodash/map'
-import forEach from 'lodash/forEach'
-import uniq from 'lodash/uniq'
-import fromPairs from 'lodash/fromPairs'
-import plur from 'plur'
-import filter from 'lodash/filter'
-import {v4 as uuid} from 'uuid'
+import {groupBy, map, forEach, uniq, fromPairs, filter} from 'lodash-es'
+const Bluebird = require('bluebird')
+const plur = require('plur')
+const {v4: uuid} = require('uuid')
 
 export default async function convertStudent({courses, degrees}) {
 	let {
@@ -22,13 +17,11 @@ export default async function convertStudent({courses, degrees}) {
 
 	let {schedules, fabrications} = schedulesAndFabrications
 
-	let newStudent = Student({
+	return Student({
 		...info,
 		schedules,
 		fabrications,
 	})
-
-	return newStudent
 }
 
 

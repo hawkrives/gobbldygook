@@ -1,7 +1,5 @@
-import Bluebird from 'bluebird'
-import filter from 'lodash/filter'
-import map from 'lodash/map'
-import fromPairs from 'lodash/fromPairs'
+const Bluebird = require('bluebird')
+import {filter, map, fromPairs} from 'lodash-es'
 import {getCourse} from './get-courses'
 
 export default function embedActiveStudentCourses(student, {cache=[]}) {

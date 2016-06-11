@@ -1,4 +1,4 @@
-import takeWhile from 'lodash/takeWhile'
+import {takeWhile} from 'lodash-es'
 import queryCourses from '../helpers/query-courses'
 
 export default function comboHasAllCourses(courses, combinationOfClasses) {

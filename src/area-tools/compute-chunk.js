@@ -6,21 +6,15 @@ import computeCountWithOperator from './compute-count-with-operator'
 import countCourses from './count-courses'
 import countCredits from './count-credits'
 import countDepartments from './count-departments'
-import every from 'lodash/every'
+import {every, forEach, keys, map, some, take, xor} from 'lodash-es'
 import excludeCourse from './exclude-course'
 import filterByWhereClause from './filter-by-where-clause'
 import findCourse from './find-course'
-import forEach from 'lodash/forEach'
 import getMatchesFromChildren from './get-matches-from-children'
 import getMatchesFromFilter from './get-matches-from-filter'
 import getOccurrences from './get-occurrences'
-import keys from 'lodash/keys'
-import map from 'lodash/map'
 import simplifyCourse from './simplify-course'
-import some from 'lodash/some'
-import stringify from 'stabilize'
-import take from 'lodash/take'
-import xor from 'lodash/xor'
+const stringify = require('stabilize')
 
 
 /**

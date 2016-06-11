@@ -1,13 +1,12 @@
-import React, {PropTypes} from 'react'
-import filter from 'lodash/filter'
-import map from 'lodash/map'
-import sortBy from 'lodash/sortBy'
-import fuzzysearch from 'fuzzysearch'
+const React = require('react')
+const {PropTypes} = React
+import {filter, map, sortBy} from 'lodash-es'
+const fuzzysearch = require('fuzzysearch')
 
-import List from 'src/components/list'
+import List from '../../../components/list'
 import StudentListItem from './student-list-item'
 
-import './student-list.css'
+// import './student-list.css'
 
 export default function StudentList(props) {
 	const {

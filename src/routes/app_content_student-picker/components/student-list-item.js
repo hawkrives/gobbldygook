@@ -1,15 +1,15 @@
-import React, {PropTypes} from 'react'
-import cx from 'classnames'
-import Link from 'react-router/lib/Link'
-import groupBy from 'lodash/groupBy'
-import map from 'lodash/map'
-import interpose from 'src/helpers/interpose'
-import sortStudiesByType from 'src/helpers/sort-studies-by-type'
+const React = require('react')
+const {PropTypes} = React
+const cx = require('classnames')
+import {Link} from 'react-router/es6'
+import {groupBy, map} from 'lodash-es'
+import interpose from '../../../helpers/interpose'
+import sortStudiesByType from '../../../helpers/sort-studies-by-type'
 
-import Button from 'src/components/button'
-import Icon from 'src/components/icon'
+import Button from '../../../components/button'
+import Icon from '../../../components/icon'
 
-import './student-list-item.css'
+// import './student-list-item.css'
 
 export default function StudentListItem(props) {
 	const { student, isEditing, destroyStudent } = props

@@ -1,13 +1,13 @@
-import React, {PropTypes} from 'react'
-import range from 'lodash/range'
-import map from 'lodash/map'
+const React = require('react')
+const {PropTypes} = React
+import {range, map} from 'lodash-es'
 
-import InlineCourse from 'src/components/inline-course'
-import List from 'src/components/list'
+import InlineCourse from '../../../components/inline-course'
+import List from '../../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 
-import './course-list.css'
+// import './course-list.css'
 
 
 export default function CourseList(props) {

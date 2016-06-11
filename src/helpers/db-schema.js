@@ -1,4 +1,4 @@
-import treo from 'treo'
+const treo = require('treo')
 
 export default new treo.schema()
 	.version(1)

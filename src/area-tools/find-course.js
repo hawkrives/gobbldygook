@@ -1,4 +1,4 @@
-import find from 'lodash/find'
+import {find} from 'lodash-es'
 import compareCourseToCourse from './compare-course-to-course'
 
 /**

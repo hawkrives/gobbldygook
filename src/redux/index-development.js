@@ -1,15 +1,14 @@
 /* globals module */
-import { applyMiddleware, createStore, compose } from 'redux'
-import { persistState } from 'redux-devtools'
-import promiseMiddleware from 'redux-promise'
-import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
+import { applyMiddleware, createStore, compose } from 'redux/es'
+const { persistState } = require('redux-devtools')
+const promiseMiddleware = require('redux-promise')
+const thunkMiddleware = require('redux-thunk')
+const createLogger = require('redux-logger')
 import checkStudentsMiddleware from './middleware/check-students'
 import saveStudentsMiddleware from './middleware/save-students'
-import routerMiddleware from './middleware/router'
 import rootReducer from './reducer'
 import DevTools from '../containers/devtools'
-import freezingMiddleware from 'redux-freeze'
+const freezingMiddleware = require('redux-freeze')
 
 const loggerMiddleware = createLogger({collapsed: true})
 
@@ -17,7 +16,6 @@ const finalCreateStore = compose(
 	applyMiddleware(
 		promiseMiddleware,
 		thunkMiddleware,
-		routerMiddleware,
 		freezingMiddleware,
 		checkStudentsMiddleware,
 		saveStudentsMiddleware,

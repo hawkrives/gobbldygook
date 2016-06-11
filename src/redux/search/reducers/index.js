@@ -8,22 +8,13 @@ import {
 	SET_PARTIAL_QUERY,
 } from '../constants'
 
-import groupBy from 'lodash/groupBy'
-import sortBy from 'lodash/sortBy'
-
+import {groupBy, sortBy, includes, uniq, flatMap, toPairs, round, map} from 'lodash-es'
 import {SORT_BY, GROUP_BY} from '../../../components/course-searcher-options'
-
-import includes from 'lodash/includes'
-import uniq from 'lodash/uniq'
-import flatMap from 'lodash/flatMap'
-import toPairs from 'lodash/toPairs'
-import round from 'lodash/round'
-import { oxford } from 'humanize-plus'
-import map from 'lodash/map'
-import present from 'present'
-
+const {oxford} = require('humanize-plus')
 import buildDept from '../../../helpers/build-dept'
 import to12Hour from '../../../helpers/to-12-hour-time'
+const present = require('present')
+
 const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
 // eslint-disable-next-line no-confusing-arrow

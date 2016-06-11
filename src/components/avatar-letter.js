@@ -1,8 +1,9 @@
-import React, {PropTypes} from 'react'
-import cx from 'classnames'
-import isString from 'lodash/isString'
+const React = require('react')
+const {PropTypes} = React
+const cx = require('classnames')
+import {isString} from 'lodash-es'
 
-import './avatar-letter.css'
+// import './avatar-letter.css'
 
 const AvatarLetter = ({className, value=''}) => (
 	<div className={cx('avatar-letter', className)}>

@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react'
-import map from 'lodash/map'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { undo, redo } from 'src/redux/students/actions/undo'
-import { loadStudents } from 'src/redux/students/actions/load-students'
+const React = require('react')
+const {PropTypes} = React
+import {map} from 'lodash-es'
+const { connect } = require('react-redux')
+import { bindActionCreators } from 'redux/es'
+import { undo, redo } from '../../../redux/students/actions/undo'
+import { loadStudents } from '../../../redux/students/actions/load-students'
 
 function Student({undo, redo, student}) {
 	if (student.isLoading) {

@@ -1,9 +1,4 @@
-import reject from 'lodash/reject'
-import groupBy from 'lodash/groupBy'
-import flatten from 'lodash/flatten'
-import map from 'lodash/map'
-import filter from 'lodash/filter'
-import sortBy from 'lodash/sortBy'
+import {reject, groupBy, flatten, map, filter, sortBy} from 'lodash-es'
 
 function convertRevisionToYear(rev) {
 	// The +1 is because the year is the beginning of the academic year, but

@@ -1,8 +1,5 @@
-import union from 'lodash/union'
-import reject from 'lodash/reject'
+import {union, reject, mapValues, omit} from 'lodash-es'
 import stringify from 'stabilize'
-import mapValues from 'lodash/mapValues'
-import omit from 'lodash/omit'
 
 export function getIdCache() {
 	return JSON.parse(localStorage.getItem('studentIds') || '[]')

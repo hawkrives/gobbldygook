@@ -1,7 +1,6 @@
-import Bluebird from 'bluebird'
+const Bluebird = require('bluebird')
 import db from './db'
-import map from 'lodash/map'
-import omit from 'lodash/omit'
+import {map, omit} from 'lodash-es'
 
 const courseCache = new Map()
 // Gets a course from the database.

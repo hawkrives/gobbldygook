@@ -1,9 +1,10 @@
-// import mapKeys from 'lodash/mapKeys'
-import forEach from 'lodash/forEach'
-import toPairs from 'lodash/toPairs'
-import fromPairs from 'lodash/fromPairs'
-import filter from 'lodash/filter'
-import includes from 'lodash/includes'
+import {
+	forEach,
+	toPairs,
+	fromPairs,
+	filter,
+	includes,
+} from 'lodash-es'
 
 const whitelist = [
 	'clbid',
@@ -20,10 +21,12 @@ const whitelist = [
 	'type',
 	'year',
 ]
+
 const mapping = {
 	depts: 'department',
 	num: 'number',
 }
+
 export default function alterCourse(course) {
 	course = {...course}
 
@@ -34,14 +37,4 @@ export default function alterCourse(course) {
 	let pairs = toPairs(course)
 	pairs = filter(pairs, ([key]) => includes(whitelist, key))
 	return fromPairs(pairs)
-
-	// return mapKeys(course, (value, key) => {
-	// 	if (key === 'depts') {
-	// 		key = 'department'
-	// 	}
-	// 	else if (key === 'num') {
-	// 		key = 'number'
-	// 	}
-	// 	return key
-	// })
 }

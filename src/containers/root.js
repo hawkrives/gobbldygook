@@ -1,5 +1,6 @@
-import React, { PropTypes, cloneElement } from 'react'
-import {Provider} from 'react-redux'
+const React = require('react')
+const {PropTypes, cloneElement} = React
+const {Provider} = require('react-redux')
 import Notifications from './notifications'
 
 let DevTools
@@ -21,3 +22,5 @@ Root.propTypes = {
 	children: PropTypes.node,
 	store: PropTypes.object.isRequired,
 }
+
+export default Root

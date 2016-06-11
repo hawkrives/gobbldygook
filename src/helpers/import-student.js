@@ -1,19 +1,10 @@
-import Bluebird from 'bluebird'
-import filter from 'lodash/filter'
-import flatten from 'lodash/flatten'
-import forEach from 'lodash/forEach'
-import forOwn from 'lodash/forOwn'
-import fromPairs from 'lodash/fromPairs'
-import includes from 'lodash/includes'
-import map from 'lodash/map'
-import mapKeys from 'lodash/mapKeys'
+const Bluebird = require('bluebird')
+import {filter, flatten, forEach, forOwn, fromPairs, includes, map, mapKeys, uniq, unzip} from 'lodash-es'
 import parseHtml from './parse-html'
 import partitionByIndex from './partition-by-index'
-import uniq from 'lodash/uniq'
-import unzip from 'lodash/unzip'
 import {AuthError, NetworkError} from './errors'
-import {selectAll, selectOne} from 'css-select'
 import {status, text, classifyFetchErrors} from './fetch-helpers'
+const {selectAll, selectOne} = require('css-select')
 
 const COURSES_URL = 'https://www.stolaf.edu/sis/st-courses.cfm'
 const DEGREE_AUDIT_URL = 'https://www.stolaf.edu/sis/st-degreeaudit.cfm'

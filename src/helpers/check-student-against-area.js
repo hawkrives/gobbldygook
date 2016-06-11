@@ -1,7 +1,7 @@
-import Bluebird from 'bluebird'
-import uniqueId from 'lodash/uniqueId'
+const Bluebird = require('bluebird')
+import {uniqueId} from 'lodash-es'
 
-import CheckStudentWorker from './workers/check-student-against-area.worker.js'
+const CheckStudentWorker = require('./workers/check-student-against-area.worker.js')
 const worker = new CheckStudentWorker()
 worker.onerror = msg => console.warn('[main] received error from check-student worker:', msg)
 

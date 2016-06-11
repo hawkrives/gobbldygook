@@ -1,6 +1,6 @@
-import Bluebird from 'bluebird'
+const Bluebird = require('bluebird')
 import db from '../../../helpers/db'
-import map from 'lodash/map'
+import {map} from 'lodash-es'
 import loadArea from '../../../helpers/load-area'
 
 import {

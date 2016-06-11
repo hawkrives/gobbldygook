@@ -1,9 +1,10 @@
-import React, {PropTypes} from 'react'
+const React = require('react')
+const {PropTypes} = React
 
 import AreaOfStudySidebar from './area-of-study-sidebar'
 import StudentSummary from './student-summary'
 
-import './graduation-status.css'
+// import './graduation-status.css'
 
 export default function GraduationStatus(props) {
 	if (!props.student) {

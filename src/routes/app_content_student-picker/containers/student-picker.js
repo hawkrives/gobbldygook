@@ -1,9 +1,10 @@
-import React, {Component, PropTypes} from 'react'
+const React = require('react')
+const {Component, PropTypes} = React
 import StudentPicker from '../components/student-picker'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { destroyStudent } from 'src/redux/students/actions/destroy-student'
-import { loadStudents } from 'src/redux/students/actions/load-students'
+import { bindActionCreators } from 'redux/es'
+const { connect } = require('react-redux')
+import { destroyStudent } from '../../../redux/students/actions/destroy-student'
+import { loadStudents } from '../../../redux/students/actions/load-students'
 
 export default class StudentPickerContainer extends Component {
 	static propTypes = {

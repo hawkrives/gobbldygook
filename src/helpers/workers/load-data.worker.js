@@ -1,30 +1,32 @@
-import Bluebird from 'bluebird'
+const Bluebird = require('bluebird')
 
-import 'isomorphic-fetch'
+require('isomorphic-fetch')
 import {status, json, text} from '../fetch-helpers'
 import stringifyError from '../stringify-error'
 
-import range from 'idb-range'
-import uniq from 'lodash/uniq'
-import forEach from 'lodash/forEach'
-import flatMap from 'lodash/flatMap'
-import filter from 'lodash/filter'
-import size from 'lodash/size'
-import startsWith from 'lodash/startsWith'
-import map from 'lodash/map'
-import groupBy from 'lodash/groupBy'
-import sortBy from 'lodash/sortBy'
-import fromPairs from 'lodash/fromPairs'
-import some from 'lodash/some'
-import round from 'lodash/round'
-import present from 'present'
-import yaml from 'js-yaml'
+import {
+	uniq,
+	forEach,
+	flatMap,
+	filter,
+	size,
+	startsWith,
+	map,
+	groupBy,
+	sortBy,
+	fromPairs,
+	some,
+	round,
+} from 'lodash-es'
+const range = require('idb-range')
+const present = require('present')
+const yaml = require('js-yaml')
 
 import db from '../db'
 import buildDept from '../build-dept'
 import buildDeptNum from '../build-dept-num'
 import splitParagraph from '../split-paragraph'
-import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
+const {convertTimeStringsToOfferings} = require('sto-sis-time-parser')
 
 const debug = console.log.bind(console)
 

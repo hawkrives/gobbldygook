@@ -1,7 +1,8 @@
-import React, {PropTypes} from 'react'
-import cx from 'classnames'
-import 'src/components/inline-course.css'
-import 'src/components/course-title.css'
+const React = require('react')
+const {PropTypes} = React
+const cx = require('classnames')
+// import '../../../components/inline-course.css'
+// import '../../../components/course-title.css'
 
 export default function FakeCourse(props) {
 	return (
