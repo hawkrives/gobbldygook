@@ -11,7 +11,7 @@ const semesters = new Map([
 /**
  * Takes a semester number and returns the associated semester string.
  *
- * @param {Number} semester - the semester (number)
+ * @param {String|Number} semester - the semester (number)
  * @returns {String} - the nice semester name
  */
 export default function semesterName(semester) {

@@ -5,7 +5,7 @@ import filterByWhereClause from './filter-by-where-clause'
 /**
  * Filters a list of courses by way of a filter expression.
  * @private
- * @param {Object.<string, string|number>} expr - the filter expression
+ * @param {Object.<string, String|Number|Array>} expr - the filter expression
  * @param {Course[]} courses - the list of courses
  * @returns {Course[]} filtered - the filtered courses
  */

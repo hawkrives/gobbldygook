@@ -3,7 +3,6 @@
  *
  * @param {Number} year - a year
  * @param {Number} semester - a semester
- * @param {Schedule} schedule - a schedule
  * @returns {Boolean} - is the schedule part of the current semester
  */
 export default function isCurrentSemester(year, semester) {
