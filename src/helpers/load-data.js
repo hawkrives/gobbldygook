@@ -1,6 +1,6 @@
-import Bluebird from 'bluebird'
+const Bluebird = require('bluebird')
+const uniqueId = require('lodash/uniqueId')
 import {status, text} from './fetch-helpers'
-import uniqueId from 'lodash/uniqueId'
 
 import * as notificationActions from '../redux/notifications/actions'
 import * as courseActions from '../redux/courses/actions'
@@ -11,8 +11,8 @@ const actions = {
 	areas: areaActions,
 }
 
-import Worker from './load-data.worker.js'
-const worker = new Worker()
+const LoadDataWorker = require('./workers/load-data.worker.js')
+const worker = new LoadDataWorker()
 worker.onerror = msg => console.warn('[main] received error from load-data worker:', msg)
 worker.onmessage = ({data: [resultId, type, actionInfo]}) => {
 	if (resultId === null && type === 'dispatch') {
@@ -22,7 +22,7 @@ worker.onmessage = ({data: [resultId, type, actionInfo]}) => {
 }
 
 function loadDataFile(url) {
-	return new Bluebird(resolve => {
+	return new Bluebird(async resolve => {
 		const sourceId = uniqueId()
 		const cachebuster = Date.now()
 
@@ -42,11 +42,30 @@ function loadDataFile(url) {
 
 		worker.addEventListener('message', onMessage)
 
-		fetch(url)
-			.then(status)
-			.then(text)
-			.then(path => path.trim())
-			.then(path => worker.postMessage([sourceId, `${path}/info.json?${cachebuster}`, path]))
+		let path = await fetch(url).then(status).then(text)
+		path = path.trim()
+		worker.postMessage([sourceId, `${path}/info.json?${cachebuster}`, path])
+	})
+}
+
+export function checkSupport() {
+	return new Bluebird(async resolve => {
+		let sourceId = '__check-idb-worker-support'
+		// This is inside of the function so that it doesn't get unregistered too early
+		function onMessage({data: [resultId, type, contents]}) {
+			if (resultId === sourceId) {
+				worker.removeEventListener('message', onMessage)
+
+				if (type === 'result') {
+					resolve(contents)
+				}
+				else if (type === 'error') {
+					resolve(contents)
+				}
+			}
+		}
+		worker.addEventListener('message', onMessage)
+		worker.postMessage([sourceId])
 	})
 }
 

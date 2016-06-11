@@ -1,8 +1,8 @@
 import Bluebird from 'bluebird'
 
 import 'isomorphic-fetch'
-import {status, json, text} from './fetch-helpers'
-import stringifyError from './stringify-error'
+import {status, json, text} from '../fetch-helpers'
+import stringifyError from '../stringify-error'
 
 import range from 'idb-range'
 import uniq from 'lodash/uniq'
@@ -20,10 +20,10 @@ import round from 'lodash/round'
 import present from 'present'
 import yaml from 'js-yaml'
 
-import db from './db'
-import buildDept from '../helpers/build-dept'
-import buildDeptNum from '../helpers/build-dept-num'
-import splitParagraph from '../helpers/split-paragraph'
+import db from '../db'
+import buildDept from '../build-dept'
+import buildDeptNum from '../build-dept-num'
+import splitParagraph from '../split-paragraph'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 const debug = console.log.bind(console)
@@ -258,7 +258,7 @@ async function loadFiles(url, infoFileBase) {
 
 	let infoFile
 	try {
-		infoFile = await (fetch(url).then(status).then(json))
+		infoFile = await fetch(url).then(status).then(json)
 	}
 	catch (err) {
 		if (startsWith(err.message, 'Failed to fetch')) {
@@ -325,11 +325,34 @@ async function loadFiles(url, infoFileBase) {
 	return true
 }
 
-self.addEventListener('message', ({data}) => {
+async function checkIdbInWorkerSupport() {
+	if (self.IDBCursor) {
+		return true
+	}
+	return false
+}
+
+const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
+self.addEventListener('message', async ({data}) => {
 	const [id, ...args] = data
 	debug('[load-data] received message:', args)
 
-	loadFiles(...args)
-		.then(result => self.postMessage([id, 'result', result]))
-		.catch(err => self.postMessage([id, 'error', JSON.parse(stringifyError(err))]))
+	if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
+		try {
+			let result = await checkIdbInWorkerSupport()
+			self.postMessage([id, 'result', result])
+		}
+		catch (err) {
+			self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
+		}
+		return
+	}
+
+	try {
+		let result = await loadFiles(...args)
+		self.postMessage([id, 'result', result])
+	}
+	catch (err) {
+		self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
+	}
 })
