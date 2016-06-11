@@ -30,7 +30,7 @@ const config = {
 
 	stats: {},
 
-	entry: ['./src/start.js'],
+	entry: ['./src/index.js'],
 
 	output: {
 		path: outputFolder + '/',

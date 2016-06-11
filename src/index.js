@@ -1,7 +1,23 @@
 /* globals module */
 
+(function redirectIfNeeded() {
+	const canonicalUrl = 'https://www.stolaf.edu/people/rives/g'
+	if (typeof window !== 'undefined') {
+		let {protocol, hostname} = window.location
+		if (hostname === 'localhost') {
+			return
+		}
+		if (hostname !== 'www.stolaf.edu') {
+			window.location = canonicalUrl
+		}
+		if (protocol !== 'https:') {
+			window.location = canonicalUrl
+		}
+	}
+}())
+
 // Set up the default promise implementation as Bluebird
-import Bluebird from 'bluebird'
+const Bluebird = require('bluebird')
 Bluebird.config({
 	warnings: {
 		wForgottenReturn: false,
@@ -12,14 +28,14 @@ Bluebird.config({
 PRODUCTION && require('ohcrash')('ogdR7qSuIqexx4aixXhFKlG2')
 
 // enable svg <use> support in IE 9, 10, 11
-import 'svgxuse'
+require('svgxuse')
 
 // Include fetch
-import 'isomorphic-fetch'
+require('isomorphic-fetch')
 
 // Include React and react-dom.render
-import React from 'react'
-import { render } from 'react-dom'
+const React = require('react')
+const {render} = require('react-dom')
 if (DEVELOPMENT) {
 	global.Perf = require('react-addons-perf')
 }
@@ -35,13 +51,14 @@ loadData()
 // Kick off the GUI
 console.log('3. 2.. 1... Blast off! 🚀')
 
-import Router from 'react-router/lib/Router'
+const {AppContainer} = require('react-hot-loader')
+const Router = require('react-router/lib/Router')
 import history from './history'
 import routes from './routes'
 
 // Create the redux store
 import routerMiddleware from './redux/middleware/router'
-import configureStore from './redux'
+const configureStore = require('./redux')
 import Root from './containers/root'
 const store = configureStore()
 global.dispatch = store.dispatch
@@ -52,25 +69,22 @@ routerMiddleware.listenForReplays(store)
 
 // global.store = store
 
-import {AppContainer} from 'react-hot-loader'
+let renderFunc = Root => {
+	render(
+		<AppContainer>
+			<Root store={store}>
+				<Router history={history} routes={routes} />
+			</Root>
+		</AppContainer>,
+		document.getElementById('gobbldygook'))
+}
 
-render(
-	(<AppContainer>
-		<Root store={store}>
-			<Router history={history} routes={routes} />
-		</Root>
-	</AppContainer>),
-	document.getElementById('gobbldygook') )
+renderFunc(Root)
+
 
 if (module.hot) {
 	module.hot.accept('./containers/root', () => {
 		let Root = require('./containers/root').default
-		render(
-			(<AppContainer>
-				<Root store={store}>
-					<Router history={history} routes={routes} />
-				</Root>
-			</AppContainer>),
-			document.getElementById('gobbldygook') )
+		renderFunc(Root)
 	})
 }
