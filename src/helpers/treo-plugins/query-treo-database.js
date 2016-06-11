@@ -233,10 +233,8 @@ function queryIndex(query, primaryKeysOnly=false) {
 
 function plugin() {
 	return (db, treo) => {
-		let {Store, Index} = treo
-
-		Store.prototype.query = queryStore
-		Index.prototype.query = queryIndex
+		treo.Store.prototype.query = queryStore
+		treo.Index.prototype.query = queryIndex
 	}
 }
 

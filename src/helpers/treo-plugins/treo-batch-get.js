@@ -25,8 +25,6 @@ function batchGet(keys) {
 
 export default function plugin() {
 	return (db, treo) => {
-		let {Store} = treo
-
-		Store.prototype.batchGet = batchGet
+		treo.Store.prototype.batchGet = batchGet
 	}
 }
