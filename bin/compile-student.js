@@ -7,8 +7,7 @@ const enhanceHanson = require('../src/area-tools/enhance-hanson')
 
 function compileStudent(args, data) {
 	let obj = yaml.safeLoad(data)
-	let enhanced = enhanceHanson(obj)
-	return enhanced
+	return enhanceHanson(obj)
 }
 
 module.exports = function cli() {

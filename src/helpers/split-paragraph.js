@@ -7,7 +7,5 @@ export default function splitParagraph(string='') {
 	let noAccents = deburr(lowercase)
 
 	// returns just the words, stripping extra spaces and symbols
-	let justTheWords = words(noAccents)
-
-	return justTheWords
+	return words(noAccents)
 }
