@@ -87,7 +87,7 @@ function convertRowToCourse(term, sisRow) {
 		term,
 		clbid,
 		deptnum: removeInternalWhitespace(getText(tableRow[0])),
-		lab: getText(tableRow[1]) === 'L' ? true : false,
+		lab: getText(tableRow[1]) === 'L',
 		name: getText(tableRow[2]),
 		// halfsemester: tableRow[3],
 		credits: Number(getText(tableRow[4])),
