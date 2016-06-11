@@ -134,12 +134,14 @@ const config = {
 		loaders: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules/,
+				// allow babel to run on lodash-es
+				exclude: /(node_modules)(?!\/lodash-es)/,
 				loaders: ['babel-loader?cacheDirectory'],
 			},
 			{
 				test: /\.worker.js$/,
-				exclude: /node_modules/,
+				// allow babel to run on lodash-es
+				exclude: /(node_modules)(?!\/lodash-es)/,
 				loaders: ['worker-loader', 'babel-loader?cacheDirectory'],
 			},
 			{
