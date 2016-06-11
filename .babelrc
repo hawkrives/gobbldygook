@@ -11,7 +11,7 @@
 				"transform-simplify-comparison-operators",
 
 				"transform-inline-environment-variables",
-                "transform-undefined-to-void",
+				"transform-undefined-to-void",
 			],
 		},
 	},
