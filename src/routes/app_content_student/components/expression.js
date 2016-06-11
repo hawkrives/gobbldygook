@@ -10,7 +10,7 @@ import humanizeOperator from '../../../area-tools/humanize-operator'
 
 // import './expression.css'
 
-const joiners = {
+const JOINERS = {
 	$and: 'AND',
 	$or: 'OR',
 }
@@ -27,7 +27,7 @@ function makeBooleanExpression({expr, ctx}) {
 
 	const contents = expr[kind].reduce((acc, exp, i) => {
 		if (i > 0) {
-			acc.push(<span key={`${i}-joiner`} className='joiner'>{joiners[kind]}</span>)
+			acc.push(<span key={`${i}-joiner`} className='joiner'>{JOINERS[kind]}</span>)
 		}
 
 		acc.push(<Expression key={i} expr={exp} ctx={ctx} />)
