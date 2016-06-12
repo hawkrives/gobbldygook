@@ -3,23 +3,23 @@
 .notification-enter {
 	opacity: 0.01;
 	transition: opacity .5s ease-in;
-	tansform: translateX(0);
+	transform: translateX(0);
 }
 
 .notification-enter.notification-enter-active {
 	opacity: 1;
-	tansform: translateX(-100%);
+	transform: translateX(-100%);
 }
 
 .notification-leave {
 	opacity: 1;
 	transition: .5s ease-in;
-	tansform: translateX(0);
+	transform: translateX(0);
 }
 
 .notification-leave.notification-leave-active {
 	opacity: 0.01;
-	tansform: translateX(-100%);
+	transform: translateX(-100%);
 }
 
 .notification-list {
