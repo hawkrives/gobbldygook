@@ -20,9 +20,10 @@ function tryEvaluate(student, area) {
 
 function checkStudentAgainstArea(student, area) {
 	return new Bluebird(resolve => {
-		if (!area || area._error) {
+		if (!area || area._error || !area._area) {
 			console.error('checkStudentAgainstArea:', (area ? area._error : 'area is null'), area)
 			resolve(area)
+			return
 		}
 
 		student.courses = map(getActiveStudentCourses(student), alterCourse)
@@ -30,6 +31,7 @@ function checkStudentAgainstArea(student, area) {
 		let details = tryEvaluate(student, area._area)
 		if (details._error) {
 			resolve(details)
+			return
 		}
 
 		let result = details.result
