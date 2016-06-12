@@ -1,6 +1,6 @@
 import {map, flatten, compact, some, zip} from 'lodash-es'
-import expandYear from '../helpers/expand-year'
-import semesterName from '../helpers/semester-name'
+import expandYear from './expand-year'
+import semesterName from './semester-name'
 
 const ordinal = require('ord')
 const {oxford} = require('humanize-plus')
