@@ -11,7 +11,7 @@ import {addArea, removeArea} from '../../../redux/students/actions/areas'
 import {setOverride, removeOverride} from '../../../redux/students/actions/overrides'
 import GraduationStatus from '../components/graduation-status'
 
-export default class GraduationStatusContainer extends Component {
+class GraduationStatusContainer extends Component {
 	static propTypes = {
 		addArea: PropTypes.func.isRequired, // redux
 		allAreas: PropTypes.array.isRequired, // redux

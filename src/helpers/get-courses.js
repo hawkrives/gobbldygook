@@ -33,7 +33,7 @@ export async function getCourse({clbid, term}, fabrications={}) {
 
 	return course
 }
-// export default function getCourse({clbid, term}) {
+// export function getCourse({clbid, term}) {
 // 	return db.store('courses')
 // 		.index('clbid')
 // 		.get(clbid)

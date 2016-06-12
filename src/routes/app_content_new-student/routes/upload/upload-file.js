@@ -10,7 +10,7 @@ const { connect } = require('react-redux')
 
 // import './upload-file.css'
 
-export default class UploadFileScreen extends Component {
+class UploadFileScreen extends Component {
 	static propTypes = {
 		dispatch: PropTypes.func.isRequired,
 		router: PropTypes.object.isRequired,

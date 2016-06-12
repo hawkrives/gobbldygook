@@ -3,7 +3,7 @@ const {Component, PropTypes} = React
 const cx = require('classnames')
 
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
-export default class ContentEditable extends Component {
+class ContentEditable extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		multiLine: PropTypes.bool,

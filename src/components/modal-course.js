@@ -89,7 +89,7 @@ SemesterSelector.propTypes = {
 }
 
 
-export default function ModalCourse(props) {
+function ModalCourse(props) {
 	const {
 		course,
 		student,

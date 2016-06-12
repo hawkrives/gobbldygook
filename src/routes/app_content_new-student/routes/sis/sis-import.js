@@ -11,7 +11,7 @@ const RadioGroup = require('react-radio-group')
 import { initStudent } from '../../../../redux/students/actions/init-student'
 const { connect } = require('react-redux')
 
-export default class SISImportScreen extends Component {
+class SISImportScreen extends Component {
 	static propTypes = {
 		dispatch: PropTypes.func.isRequired, // redux
 		router: PropTypes.object.isRequired,

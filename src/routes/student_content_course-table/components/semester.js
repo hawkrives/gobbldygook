@@ -17,7 +17,7 @@ import List from '../../../components/list'
 import CourseList from './course-list'
 // import './semester.css'
 
-export default function Semester(props) {
+function Semester(props) {
 	let courseList = null
 
 	const { studentId, semester, year, canDrop, schedule } = props

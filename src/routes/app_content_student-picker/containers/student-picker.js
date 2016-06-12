@@ -6,7 +6,7 @@ const { connect } = require('react-redux')
 import { destroyStudent } from '../../../redux/students/actions/destroy-student'
 import { loadStudents } from '../../../redux/students/actions/load-students'
 
-export default class StudentPickerContainer extends Component {
+class StudentPickerContainer extends Component {
 	static propTypes = {
 		destroyStudent: PropTypes.func.isRequired,
 		loadStudents: PropTypes.func.isRequired,
