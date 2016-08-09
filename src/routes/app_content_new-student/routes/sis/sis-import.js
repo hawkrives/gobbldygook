@@ -8,7 +8,7 @@ import map from 'lodash/map'
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
 import semesterName from '../../../../helpers/semester-name'
-import RadioGroup from 'react-radio-group'
+import { RadioGroup, Radio } from 'react-radio-group'
 import { initStudent } from '../../../../redux/students/actions/init-student'
 import { connect } from 'react-redux'
 
@@ -98,14 +98,8 @@ class SISImportScreen extends Component {
 
 				{ids.length > 1 ? <div>
 					<p>Hang on one second… we found multiple student IDs. Which one is yours?</p>
-					<RadioGroup name='student-id' value={this.state.selectedId} onChange={this.handleSelectId}>
-						{Radio =>
-							<div>
-								{map(ids, id =>
-									<label><Radio value={id} /> {id}</label>
-								)}
-							</div>
-						}
+					<RadioGroup name='student-id' selectedValue={this.state.selectedId} onChange={this.handleSelectId}>
+						{map(ids, id => <label><Radio value={id} /> {id}</label>)}
 					</RadioGroup>
 				</div> : null}
 
