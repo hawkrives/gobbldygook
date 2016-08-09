@@ -1,21 +1,20 @@
-const React = require('react')
-const {PropTypes} = React
-const {findDOMNode} = require('react-dom')
-const cx = require('classnames')
-import {Link} from 'react-router/es6'
-const plur = require('plur')
+import React, {PropTypes} from 'react'
+import {findDOMNode} from 'react-dom'
+import cx from 'classnames'
+import Link from 'react-router/lib/Link'
+import plur from 'plur'
 import semesterName from '../../../helpers/semester-name'
 import countCredits from '../../../area-tools/count-credits'
 import {COURSE} from '../../../models/item-types'
-const {DropTarget} = require('react-dnd')
-import {includes} from 'lodash-es'
+import {DropTarget} from 'react-dnd'
+import includes from 'lodash/includes'
 
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
 import List from '../../../components/list'
 
 import CourseList from './course-list'
-// import './semester.css'
+import './semester.css'
 
 function Semester(props) {
 	let courseList = null

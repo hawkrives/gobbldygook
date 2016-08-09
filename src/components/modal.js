@@ -1,9 +1,8 @@
-const React = require('react')
-const {PropTypes} = React
-const cx = require('classnames')
-const ReactDumbModal = require('react-dumb-modal')
+import React, {PropTypes} from 'react'
+import cx from 'classnames'
+import ReactDumbModal from 'react-dumb-modal'
 
-// import './modal.css'
+import './modal.css'
 
 export default function Modal(props) {
 	return (

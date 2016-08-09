@@ -1,5 +1,6 @@
-const Bluebird = require('bluebird')
-import {map, uniq} from 'lodash-es'
+import Bluebird from 'bluebird'
+import map from 'lodash/map'
+import uniq from 'lodash/uniq'
 
 import {LOAD_STUDENTS} from '../constants'
 import {loadStudent} from './load-student'

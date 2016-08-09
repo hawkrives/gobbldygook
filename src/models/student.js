@@ -1,18 +1,16 @@
-import {
-	clone,
-	findIndex,
-	findKey,
-	fromPairs,
-	includes,
-	isArray,
-	isNumber,
-	isUndefined,
-	map,
-	mapValues,
-	omit,
-	reject,
-} from 'lodash-es'
-const {v4: uuid} = require('uuid')
+import clone from 'lodash/clone'
+import findIndex from 'lodash/findIndex'
+import findKey from 'lodash/findKey'
+import fromPairs from 'lodash/fromPairs'
+import includes from 'lodash/includes'
+import isArray from 'lodash/isArray'
+import isNumber from 'lodash/isNumber'
+import isUndefined from 'lodash/isUndefined'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import omit from 'lodash/omit'
+import reject from 'lodash/reject'
+import {v4 as uuid} from 'uuid'
 
 import randomChar from '../helpers/random-char'
 

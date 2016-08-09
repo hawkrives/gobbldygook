@@ -1,6 +1,5 @@
-const React = require('react')
-const {Component, PropTypes} = React
-import {map} from 'lodash-es'
+import React, { Component, PropTypes } from 'react'
+import map from 'lodash/map'
 import InlineCourse from './inline-course'
 
 import compareProps from '../helpers/compare-props'

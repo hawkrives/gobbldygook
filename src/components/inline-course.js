@@ -1,9 +1,10 @@
-const React = require('react')
-const {Component, PropTypes} = React
-const cx = require('classnames')
-const ReactDnD = require('react-dnd')
-const {DragSource} = ReactDnD
-import {compact, filter, isNull, map} from 'lodash-es'
+import React, {Component, PropTypes} from 'react'
+import {DragSource} from 'react-dnd'
+import cx from 'classnames'
+import compact from 'lodash/compact'
+import filter from 'lodash/filter'
+import isNull from 'lodash/isNull'
+import map from 'lodash/map'
 
 import {COURSE} from '../models/item-types'
 
@@ -13,7 +14,7 @@ import buildCourseIdent from '../helpers/build-course-ident'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 
-// import './inline-course.css'
+import './inline-course.css'
 
 class InlineCourse extends Component {
 	static propTypes = {

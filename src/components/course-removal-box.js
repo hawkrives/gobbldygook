@@ -1,13 +1,12 @@
-const React = require('react')
-const {PropTypes} = React
-const cx = require('classnames')
+import React, {PropTypes} from 'react'
+import cx from 'classnames'
 import {DropTarget} from 'react-dnd'
 
 import {COURSE} from '../models/item-types'
 
 import Icon from './icon'
 
-// import './course-removal-box.css'
+import './course-removal-box.css'
 
 function CourseRemovalBox(props) {
 	const className = cx('course-removal-box', {

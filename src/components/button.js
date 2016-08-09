@@ -1,10 +1,9 @@
-const React = require('react')
-const {Component, PropTypes} = React
-const cx = require('classnames')
-import {Link} from 'react-router/es6'
+import React, {Component, PropTypes} from 'react'
+import cx from 'classnames'
+import Link from 'react-router/lib/Link'
 
 import compareProps from '../helpers/compare-props'
-// import './button.css'
+import './button.css'
 
 export default class Button extends Component {
 	static propTypes = {

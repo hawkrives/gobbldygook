@@ -1,8 +1,17 @@
-import {cloneDeep, filter, forEach, includes, isString, keys, map, mapValues, some, fromPairs} from 'lodash-es'
+import cloneDeep from 'lodash/cloneDeep'
+import filter from 'lodash/filter'
+import forEach from 'lodash/forEach'
+import includes from 'lodash/includes'
 import isRequirementName from './is-requirement-name'
+import isString from 'lodash/isString'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import some from 'lodash/some'
+import fromPairs from 'lodash/fromPairs'
 import makeAreaSlug from './make-area-slug'
-const {oxford} = require('humanize-plus')
-const {parse} = require('./parse-hanson-string')
+import {oxford} from 'humanize-plus'
+import {parse} from './parse-hanson-string'
 
 const none = (...args) => !some(...args)
 const quote = str => `"${str}"`

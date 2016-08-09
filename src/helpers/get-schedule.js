@@ -1,4 +1,5 @@
-import {find, filter} from 'lodash-es'
+import find from 'lodash/find'
+import filter from 'lodash/filter'
 import isCurrentSemester from './is-current-semester'
 
 export default function getSchedule(student, year, semester) {

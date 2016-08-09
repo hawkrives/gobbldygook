@@ -1,8 +1,8 @@
-const Bluebird = require('bluebird')
+import Bluebird from 'bluebird'
 import * as studentActions from '../students/constants'
-import {filter} from 'lodash-es'
-import {includes} from 'lodash-es'
-import {map} from 'lodash-es'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import map from 'lodash/map'
 import {saveStudent} from '../students/actions/save-student'
 
 const whitelist = [

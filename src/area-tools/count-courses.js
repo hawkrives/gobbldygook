@@ -1,4 +1,5 @@
-import {uniqBy, size} from 'lodash-es'
+import uniqBy from 'lodash/uniqBy'
+import size from 'lodash/size'
 import simplifyCourse from './simplify-course'
 
 /**

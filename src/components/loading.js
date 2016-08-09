@@ -1,8 +1,7 @@
-const React = require('react')
-const {PropTypes} = React
-const cx = require('classnames')
+import React, {PropTypes} from 'react'
+import cx from 'classnames'
 
-// import './loading.css'
+import './loading.css'
 
 export default function Loading({className, children}) {
 	return (

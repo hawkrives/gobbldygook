@@ -1,5 +1,6 @@
-import {sortBy} from 'lodash-es'
-// import {memoize, identity} from 'lodash-es'
+import sortBy from 'lodash/sortBy'
+// import memoize from 'lodash/memoize'
+// import identity from 'lodash/identity'
 
 /**
  * Simplifies a course to just the department/number combo.

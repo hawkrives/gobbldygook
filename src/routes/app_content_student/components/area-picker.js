@@ -1,15 +1,17 @@
-const React = require('react')
-const {Component, PropTypes} = React
-const fuzzysearch = require('fuzzysearch')
+import React, {Component, PropTypes} from 'react'
+import fuzzysearch from 'fuzzysearch'
 import pluralizeArea from '../../../area-tools/pluralize-area'
-import {map, reject, filter, includes} from 'lodash-es'
+import map from 'lodash/map'
+import reject from 'lodash/reject'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
 import filterAreaList from '../../../helpers/filter-area-list'
 
 import Button from '../../../components/button'
 import List from '../../../components/list'
 import Toolbar from '../../../components/toolbar'
 
-// import './area-picker.css'
+import './area-picker.css'
 
 function AreaPicker(props) {
 	const graduation = props.studentGraduation

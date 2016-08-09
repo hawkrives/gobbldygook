@@ -1,5 +1,9 @@
-import {isPlainObject, every, some, isArray, includes} from 'lodash-es'
+import isPlainObject from 'lodash/isPlainObject'
+import isArray from 'lodash/isArray'
+import includes from 'lodash/includes'
 import assertKeys from './assert-keys'
+import every from 'lodash/every'
+import some from 'lodash/some'
 
 /**
  * Compares a course property against a MongoDB-style operator

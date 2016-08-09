@@ -1,15 +1,16 @@
-const React = require('react')
-const {PropTypes} = React
-const cx = require('classnames')
+import React, {PropTypes} from 'react'
+import cx from 'classnames'
 import expandYear from '../../../helpers/expand-year'
 
 import findFirstAvailableYear from '../../../helpers/find-first-available-year'
-import {map, sortBy, groupBy} from 'lodash-es'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
+import groupBy from 'lodash/groupBy'
 
 import Button from '../../../components/button'
 import Year from './year'
 
-// import './course-table.css'
+import './course-table.css'
 
 export default function CourseTable(props) {
 	const { student } = props

@@ -1,7 +1,6 @@
-const React = require('react')
-const {PropTypes} = React
-const {connect} = require('react-redux')
-import {bindActionCreators} from 'redux/es'
+import React, {PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 import Button from '../components/button'
 import Icon from '../components/icon'
@@ -13,7 +12,7 @@ import CourseRemovalBox from '../components/course-removal-box'
 import {undo, redo} from '../redux/students/actions/undo'
 import {removeCourse} from '../redux/students/actions/courses'
 
-// import './sidebar.css'
+import './sidebar.css'
 
 export function Sidebar(props) {
 	const { undo, redo } = props

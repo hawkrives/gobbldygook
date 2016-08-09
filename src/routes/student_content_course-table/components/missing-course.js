@@ -1,5 +1,4 @@
-const React = require('react')
-const {PropTypes} = React
+import React, {PropTypes} from 'react'
 import FakeCourse from './fake-course'
 
 export default function MissingCourse(props) {

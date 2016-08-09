@@ -1,12 +1,13 @@
-const React = require('react')
-const {Component, PropTypes} = React
-const cx = require('classnames')
-import {map, filter, omit} from 'lodash-es'
-const DocumentTitle = require('react-document-title')
+import React, {Component, PropTypes} from 'react'
+import cx from 'classnames'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
+import omit from 'lodash/omit'
+import DocumentTitle from 'react-document-title'
 import isCurrentSemester from '../../../helpers/is-current-semester'
 import semesterName from '../../../helpers/semester-name'
 
-// import './semester-detail.css'
+import './semester-detail.css'
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class SemesterDetail extends Component {

@@ -1,7 +1,8 @@
 import { ga } from '../../../analytics'
 import queryCourseDatabase from '../../../helpers/query-course-database'
-const present = require('present')
-import {round, mapValues} from 'lodash-es'
+import present from 'present'
+import round from 'lodash/round'
+import mapValues from 'lodash/mapValues'
 
 import {
 	UPDATE_QUERY,

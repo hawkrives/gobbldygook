@@ -1,4 +1,4 @@
-import {reject} from 'lodash-es'
+import reject from 'lodash/reject'
 import compareCourseToCourse from './compare-course-to-course'
 
 /**

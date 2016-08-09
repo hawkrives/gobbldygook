@@ -1,10 +1,9 @@
-const React = require('react')
-const {PropTypes} = React
-// import './course-title.css'
+import React, {PropTypes} from 'react'
+import './course-title.css'
 
 const independentRegex = /^I[RS]/
 
-function processTitle({name, title, type}) {
+export default function CourseTitle({name, title, type, className}) {
 	const isIndependent = independentRegex.test(name)
 	let courseName = title || name
 	let subtitle = undefined
@@ -24,11 +23,6 @@ function processTitle({name, title, type}) {
 		subtitle = name
 	}
 
-	return {courseName, subtitle}
-}
-
-export default function CourseTitle({name, title, type, className}) {
-	let {courseName, subtitle} = processTitle({name, title, type})
 	return (
 		<div className={className}>
 			<h1 className='course-title'>{courseName}</h1>

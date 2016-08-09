@@ -1,6 +1,7 @@
 import assertKeys from './assert-keys'
-import {flatMap, uniqBy} from 'lodash-es'
-const stringify = require('stabilize')
+import flatMap from 'lodash/flatMap'
+import uniqBy from 'lodash/uniqBy'
+import stringify from 'stabilize'
 
 /**
  * Collects matched courses from a result object

@@ -1,5 +1,6 @@
 /* globals module */
-import {invert} from 'lodash-es'
+
+const invert = require('lodash/invert')
 
 const shortToLong = {
 	AR: 'ART',

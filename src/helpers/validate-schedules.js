@@ -1,5 +1,5 @@
-const Bluebird = require('bluebird')
-import {mapValues} from 'lodash-es'
+import Bluebird from 'bluebird'
+import mapValues from 'lodash/mapValues'
 import validateSchedule from './validate-schedule'
 
 export default function validateSchedules(student) {

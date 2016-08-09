@@ -1,4 +1,8 @@
-import {isEqualWith, every, keys, filter, includes} from 'lodash-es'
+import isEqualWith from 'lodash/isEqualWith'
+import every from 'lodash/every'
+import keys from 'lodash/keys'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
 
 const baseKeys = [
 	'department',

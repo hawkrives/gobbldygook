@@ -1,5 +1,4 @@
-const React = require('react')
-const {PropTypes} = React
+import React, {PropTypes} from 'react'
 
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
@@ -7,11 +6,11 @@ import Toolbar from '../../../components/toolbar'
 import Modal from '../../../components/modal'
 import List from '../../../components/list'
 
-const { connect } = require('react-redux')
+import { connect } from 'react-redux'
 
 import encodeStudent from '../../../helpers/encode-student'
 
-// import './share-student.css'
+import './share-student.css'
 
 export function ShareSheet(props) {
 	let { student } = props

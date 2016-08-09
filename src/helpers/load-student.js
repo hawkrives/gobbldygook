@@ -1,4 +1,4 @@
-const Bluebird = require('bluebird')
+import Bluebird from 'bluebird'
 
 import Student from '../models/student'
 const log = (...args) => TESTING || /* istanbul ignore next */ console.error(...args)

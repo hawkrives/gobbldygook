@@ -1,6 +1,5 @@
-const React = require('react')
-const {PropTypes, cloneElement} = React
-const {Provider} = require('react-redux')
+import React, { PropTypes, cloneElement } from 'react'
+import {Provider} from 'react-redux'
 import Notifications from './notifications'
 
 let DevTools

@@ -1,8 +1,7 @@
-const React = require('react')
-const {PropTypes} = React
-import {map} from 'lodash-es'
-const { connect } = require('react-redux')
-import { bindActionCreators } from 'redux/es'
+import React, { PropTypes } from 'react'
+import map from 'lodash/map'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { undo, redo } from '../../../redux/students/actions/undo'
 import { loadStudents } from '../../../redux/students/actions/load-students'
 

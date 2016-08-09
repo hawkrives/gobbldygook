@@ -1,10 +1,9 @@
-const React = require('react')
-const {PropTypes} = React
-const cx = require('classnames')
+import React, {PropTypes} from 'react'
+import cx from 'classnames'
 import semesterName from '../../../helpers/semester-name'
 import {shrinkDepartment} from '../../../area-tools/convert-department'
 
-// import './expression--course.css'
+import './expression--course.css'
 
 export default function CourseExpression(props) {
 	const department = props.department.length > 1

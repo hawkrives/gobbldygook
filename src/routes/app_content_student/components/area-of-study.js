@@ -1,6 +1,5 @@
-const React = require('react')
-const {Component, PropTypes} = React
-const cx = require('classnames')
+import React, {Component, PropTypes} from 'react'
+import cx from 'classnames'
 
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
@@ -8,7 +7,7 @@ import Requirement from './requirement'
 import ProgressBar from '../../../components/progress-bar'
 import compareProps from '../../../helpers/compare-props'
 
-// import './area-of-study.css'
+import './area-of-study.css'
 
 function AreaOfStudy(props) {
 	const {

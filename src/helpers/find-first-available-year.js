@@ -1,4 +1,8 @@
-import {uniq, map, sortBy, max, includes} from 'lodash-es'
+import uniq from 'lodash/uniq'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
+import max from 'lodash/max'
+import includes from 'lodash/includes'
 import findMissingNumberBinarySearch from './find-missing-number-binary-search'
 
 /**

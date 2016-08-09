@@ -1,5 +1,5 @@
-import {isString} from 'lodash-es'
-const {v4: uuid} = require('uuid')
+import isString from 'lodash/isString'
+import {v4 as uuid} from 'uuid'
 
 import randomChar from '../helpers/random-char'
 

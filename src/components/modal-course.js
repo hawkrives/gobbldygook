@@ -1,8 +1,10 @@
-const React = require('react')
-const {PropTypes} = React
-import {map, sortBy, groupBy, flatMap} from 'lodash-es'
-const {oxford} = require('humanize-plus')
-const plur = require('plur')
+import React, {PropTypes} from 'react'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
+import groupBy from 'lodash/groupBy'
+import flatMap from 'lodash/flatMap'
+import {oxford} from 'humanize-plus'
+import plur from 'plur'
 
 import Modal from './modal'
 import Separator from './separator'
@@ -19,7 +21,7 @@ import { bindActionCreators } from 'redux/es'
 const { connect } = require('react-redux')
 import { addCourse, moveCourse, removeCourse } from '../redux/students/actions/courses'
 
-// import './modal-course.css'
+import './modal-course.css'
 
 function findSemesterList(student) {
 	let schedules = map(student.schedules, s => ({

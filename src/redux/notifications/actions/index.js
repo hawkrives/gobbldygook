@@ -1,4 +1,4 @@
-const Bluebird = require('bluebird')
+import Bluebird from 'bluebird'
 
 import {
 	LOG_MESSAGE,

@@ -1,6 +1,7 @@
-const React = require('react')
-const {Component, PropTypes} = React
-import {filter, keys, map} from 'lodash-es'
+import React, {PropTypes, Component} from 'react'
+import filter from 'lodash/filter'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
 
 import isRequirementName from '../../../area-tools/is-requirement-name'
 
@@ -9,7 +10,7 @@ import Expression from './expression'
 import Button from '../../../components/button'
 import ResultIndicator from './result-indicator'
 
-// import './requirement.css'
+import './requirement.css'
 
 // function getResultOfRequirement(requirements) {
 // 	return requirementTitle => requirements[requirementTitle].computed ? 'A' : 'B'

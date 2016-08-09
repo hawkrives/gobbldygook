@@ -1,5 +1,4 @@
-const React = require('react')
-const {PropTypes} = React
+import React, {PropTypes} from 'react'
 
 import Button from '../../../components/button'
 import Toolbar from '../../../components/toolbar'

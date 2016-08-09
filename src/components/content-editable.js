@@ -1,6 +1,5 @@
-const React = require('react')
-const {Component, PropTypes} = React
-const cx = require('classnames')
+import React, {PropTypes, Component} from 'react'
+import cx from 'classnames'
 
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 class ContentEditable extends Component {

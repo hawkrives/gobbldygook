@@ -1,17 +1,15 @@
-import {
-	compact,
-	every,
-	has,
-	includes,
-	indexOf,
-	isArray,
-	map,
-	size,
-	some,
-	tail,
-	takeWhile,
-	toPairs,
-} from 'lodash-es'
+import compact from 'lodash/compact'
+import every from 'lodash/every'
+import has from 'lodash/has'
+import includes from 'lodash/includes'
+import indexOf from 'lodash/indexOf'
+import isArray from 'lodash/isArray'
+import map from 'lodash/map'
+import size from 'lodash/size'
+import some from 'lodash/some'
+import tail from 'lodash/tail'
+import takeWhile from 'lodash/takeWhile'
+import toPairs from 'lodash/toPairs'
 
 const checkCourseAgainstQueryBit = course => ([key, values]) => {
 	if (!has(course, key)) {

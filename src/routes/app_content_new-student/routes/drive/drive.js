@@ -1,8 +1,8 @@
-const React = require('react')
+import React, {Component} from 'react'
 import ScreenToolbar from '../../components/screen-toolbar'
 
 // eslint-disable-next-line react/prefer-stateless-function
-export default class DriveLinkScreen extends React.Component {
+export default class DriveLinkScreen extends Component {
 	render() {
 		return <div>
 			<header className='header'>

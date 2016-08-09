@@ -1,5 +1,5 @@
-import {omit} from 'lodash-es'
-const {ActionTypes: UndoableActionTypes} = require('redux-undo')
+import omit from 'lodash/omit'
+import {ActionTypes as UndoableActionTypes} from 'redux-undo'
 
 import {
 	INIT_STUDENT,

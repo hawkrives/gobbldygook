@@ -1,5 +1,5 @@
-const Bluebird = require('bluebird')
-const { request, requestTransaction } = require('idb-request')
+import Bluebird from 'bluebird'
+import { request, requestTransaction } from 'idb-request'
 
 function batchGet(keys) {
 	let results = []

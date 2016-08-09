@@ -1,7 +1,6 @@
-const React = require('react')
-const {Component, PropTypes} = React
-const { connect } = require('react-redux')
-import { bindActionCreators } from 'redux/es'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import compareProps from '../helpers/compare-props'
 import CourseSearcher from '../components/course-searcher'
 

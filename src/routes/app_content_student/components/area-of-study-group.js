@@ -1,14 +1,15 @@
-const React = require('react')
-const {PropTypes} = React
+import React, {PropTypes} from 'react'
+import map from 'lodash/map'
 import pluralizeArea from '../../../area-tools/pluralize-area'
+import capitalize from 'lodash/capitalize'
 import * as areaTypeConstants from '../../../models/area-types'
-import {capitalize, values, map} from 'lodash-es'
+import values from 'lodash/values'
 
 import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'
 import Button from '../../../components/button'
 
-// import './area-of-study-group.css'
+import './area-of-study-group.css'
 
 export default function AreaOfStudyGroup(props) {
 	const showAreaPicker = props.showAreaPicker || false

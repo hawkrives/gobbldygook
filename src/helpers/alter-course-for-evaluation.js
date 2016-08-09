@@ -1,10 +1,8 @@
-import {
-	forEach,
-	toPairs,
-	fromPairs,
-	filter,
-	includes,
-} from 'lodash-es'
+import forEach from 'lodash/forEach'
+import toPairs from 'lodash/toPairs'
+import fromPairs from 'lodash/fromPairs'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
 
 const whitelist = [
 	'clbid',
@@ -21,12 +19,10 @@ const whitelist = [
 	'type',
 	'year',
 ]
-
 const mapping = {
 	depts: 'department',
 	num: 'number',
 }
-
 export default function alterCourse(course) {
 	course = {...course}
 

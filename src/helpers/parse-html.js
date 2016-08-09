@@ -1,4 +1,4 @@
-const htmlparser = require('htmlparser2')
+import htmlparser from 'htmlparser2'
 
 export default function parse(string) {
 	return htmlparser.parseDOM(string, {

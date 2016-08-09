@@ -1,7 +1,13 @@
 import collectMatches from './collect-matches'
-import {filter, flatten, includes, isArray, keys, map, uniqBy} from 'lodash-es'
+import filter from 'lodash/filter'
+import flatten from 'lodash/flatten'
+import includes from 'lodash/includes'
+import isArray from 'lodash/isArray'
 import isRequirementName from './is-requirement-name'
-const stringify = require('stabilize')
+import keys from 'lodash/keys'
+import map from 'lodash/map'
+import stringify from 'stabilize'
+import uniqBy from 'lodash/uniqBy'
 
 /**
  * Extract the matched courses from all children.

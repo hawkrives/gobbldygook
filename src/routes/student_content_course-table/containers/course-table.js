@@ -1,8 +1,8 @@
-const React = require('react')
-const {PropTypes} = React
-const { connect } = require('react-redux')
-import { bindActionCreators } from 'redux/es'
-import {map, filter} from 'lodash-es'
+import React, {PropTypes} from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
 
 import {addSchedule, destroySchedules} from '../../../redux/students/actions/schedules'
 import findFirstAvailableYear from '../../../helpers/find-first-available-year'

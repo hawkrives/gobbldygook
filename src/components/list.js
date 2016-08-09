@@ -1,13 +1,12 @@
-const React = require('react')
-const {
-	Children: ReactChildren,
+import React, {
+	Children as ReactChildren,
 	PropTypes,
 	isValidElement,
 	cloneElement,
-} = React
-const cx = require('classnames')
+} from 'react'
+import cx from 'classnames'
 
-// import './list.css'
+import './list.css'
 
 export default function List(props) {
 	const {

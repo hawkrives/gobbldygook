@@ -1,10 +1,9 @@
-const DocumentTitle = require('react-document-title')
-const HTML5Backend = require('react-dnd-html5-backend')
-const React = require('react')
-const {Component, PropTypes} = React
-const { DragDropContext } = require('react-dnd')
+import DocumentTitle from 'react-document-title'
+import HTML5Backend from 'react-dnd-html5-backend'
+import React, { Component, PropTypes } from 'react'
+import { DragDropContext } from 'react-dnd'
 
-// import '../index.css'
+import '../index.css'
 
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
 // eslint-disable-next-line react/prefer-stateless-function

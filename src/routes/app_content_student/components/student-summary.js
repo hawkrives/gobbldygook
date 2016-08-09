@@ -1,9 +1,10 @@
-const React = require('react')
-const {PropTypes} = React
-const cx = require('classnames')
-const {oxford} = require('humanize-plus')
-const plur = require('plur')
-import {filter, map, sample} from 'lodash-es'
+import React, {PropTypes} from 'react'
+import cx from 'classnames'
+import {oxford} from 'humanize-plus'
+import plur from 'plur'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import sample from 'lodash/sample'
 
 import AvatarLetter from '../../../components/avatar-letter'
 import ContentEditable from '../../../components/content-editable'
@@ -11,7 +12,7 @@ import ContentEditable from '../../../components/content-editable'
 import getActiveStudentCourses from '../../../helpers/get-active-student-courses'
 import countCredits from '../../../area-tools/count-credits'
 
-// import './student-summary.css'
+import './student-summary.css'
 
 const goodGraduationMessage =
 	`It looks like you'll make it! Just follow the plan, and go over my output

@@ -1,7 +1,9 @@
 /* global WorkerGlobalScope */
-const Bluebird = require('bluebird')
-import {map, filter, round} from 'lodash-es'
-const present = require('present')
+import Bluebird from 'bluebird'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
+import round from 'lodash/round'
+import present from 'present'
 
 import stringifyError from '../stringify-error'
 import evaluate from '../../area-tools/evaluate'

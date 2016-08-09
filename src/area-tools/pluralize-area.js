@@ -1,4 +1,4 @@
-const plur = require('plur')
+import plur from 'plur'
 
 /**
  * Pluralizes an area type

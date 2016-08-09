@@ -1,14 +1,14 @@
-const React = require('react')
-const {Component, PropTypes} = React
-const DropZone = require('react-dropzone')
-import { map } from 'lodash-es'
+import React, {Component, PropTypes} from 'react'
+import DropZone from 'react-dropzone'
+import map from 'lodash/map'
 import Button from '../../../../components/button'
 import List from '../../../../components/list'
 import StudentSummary from '../../../../routes/app_content_student/components/student-summary'
 import { initStudent } from '../../../../redux/students/actions/init-student'
-const { connect } = require('react-redux')
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
-// import './upload-file.css'
+import './upload-file.css'
 
 class UploadFileScreen extends Component {
 	static propTypes = {
@@ -93,8 +93,7 @@ class UploadFileScreen extends Component {
 					disablePreview
 					className='upload-dropzone'
 					activeClassName='canDrop'
-					// HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
-					rejectClassName='canDrop'
+					rejectClassName='canDrop' // HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
 				>
 					<p>
 						Just drop some students here, or click to select some to upload.

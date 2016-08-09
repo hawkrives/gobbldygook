@@ -1,6 +1,11 @@
 import db from './db'
 import buildQueryFromString from '../helpers/build-query-from-string'
-import {compact, filter, map, some, toPairs, fromPairs} from 'lodash-es'
+import compact from 'lodash/compact'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import some from 'lodash/some'
+import toPairs from 'lodash/toPairs'
+import fromPairs from 'lodash/fromPairs'
 
 export default function queryCourseDatabase(queryString, baseQuery={}) {
 	let queryObject = buildQueryFromString(queryString, {words: true, profWords: true})

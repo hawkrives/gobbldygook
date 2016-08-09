@@ -1,15 +1,16 @@
-const React = require('react')
-const {Component, PropTypes} = React
-const serializeError = require('serialize-error')
+import React, {Component, PropTypes} from 'react'
+import serializeError from 'serialize-error'
 import Button from '../../../../components/button'
 import getStudentInfo, {checkIfLoggedIn} from '../../../../helpers/import-student'
 import convertStudent from '../../../../helpers/convert-imported-student'
 import StudentSummary from '../../../../routes/app_content_student/components/student-summary'
-import {map, groupBy, sortBy} from 'lodash-es'
+import map from 'lodash/map'
+import groupBy from 'lodash/groupBy'
+import sortBy from 'lodash/sortBy'
 import semesterName from '../../../../helpers/semester-name'
-const RadioGroup = require('react-radio-group')
+import RadioGroup from 'react-radio-group'
 import { initStudent } from '../../../../redux/students/actions/init-student'
-const { connect } = require('react-redux')
+import { connect } from 'react-redux'
 
 class SISImportScreen extends Component {
 	static propTypes = {

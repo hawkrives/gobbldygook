@@ -1,5 +1,5 @@
 const Bluebird = require('bluebird')
-import {uniqueId} from 'lodash-es'
+const uniqueId = require('lodash/uniqueId')
 import {status, text} from './fetch-helpers'
 
 import * as notificationActions from '../redux/notifications/actions'

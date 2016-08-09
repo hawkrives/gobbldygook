@@ -1,23 +1,21 @@
-const Bluebird = require('bluebird')
-import {
-	includes,
-	filter,
-	isString,
-	head,
-	keys as extractKeys,
-	last,
-	map,
-	reject,
-	size,
-	uniq,
-	sortedUniq,
-	flatten,
-	startsWith,
-	sortBy,
-} from 'lodash-es'
+import Bluebird from 'bluebird'
+import includes from 'lodash/includes'
+import filter from 'lodash/filter'
+import head from 'lodash/head'
+import isString from 'lodash/isString'
+import {default as extractKeys} from 'lodash/keys'
+import last from 'lodash/last'
+import map from 'lodash/map'
+import reject from 'lodash/reject'
+import size from 'lodash/size'
+import uniq from 'lodash/uniq'
+import sortedUniq from 'lodash/sortedUniq'
+import flatten from 'lodash/flatten'
+import startsWith from 'lodash/startsWith'
+import sortBy from 'lodash/sortBy'
 
-const idbRange = require('idb-range')
-const {cmp: idbComparison} = require('treo')
+import idbRange from 'idb-range'
+import {cmp as idbComparison} from 'treo'
 import checkAgainstQuery from '../check-course-against-query'
 
 function canAdd({query, value, primaryKey, results}={}) {

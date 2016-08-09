@@ -1,8 +1,7 @@
-const React = require('react')
-const {PropTypes} = React
+import React, {PropTypes} from 'react'
 // import CourseExpression from './expression--course'
 import Expression, {makeWhereQualifier} from './expression'
-import {map} from 'lodash-es'
+import map from 'lodash/map'
 
 function FilterOf({expr, ctx}) {
 	return <div>

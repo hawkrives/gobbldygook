@@ -1,22 +1,19 @@
-const React = require('react')
-const {PropTypes} = React
+import React, {PropTypes} from 'react'
 
-import {
-	difference,
-	filter,
-	find,
-	groupBy,
-	includes,
-	keys,
-	map,
-	mapValues,
-	pick,
-	pickBy,
-	toPairs,
-	union,
-	uniq,
-	values,
-} from 'lodash-es'
+import difference from 'lodash/difference'
+import filter from 'lodash/filter'
+import find from 'lodash/find'
+import groupBy from 'lodash/groupBy'
+import includes from 'lodash/includes'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import pick from 'lodash/pick'
+import pickBy from 'lodash/pickBy'
+import toPairs from 'lodash/toPairs'
+import union from 'lodash/union'
+import uniq from 'lodash/uniq'
+import values from 'lodash/values'
 
 import sortStudiesByType from '../../../helpers/sort-studies-by-type'
 import AreaOfStudyGroup from './area-of-study-group'

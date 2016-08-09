@@ -1,13 +1,12 @@
-const React = require('react')
-const {PropTypes} = React
-import {size} from 'lodash-es'
+import React, {PropTypes} from 'react'
+import size from 'lodash/size'
 
 import Toolbar from '../../../components/toolbar'
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
 import StudentList from './student-list'
 
-// import './student-picker.css'
+import './student-picker.css'
 
 let sortByExpanded = {
 	dateLastModified: 'date last modified',

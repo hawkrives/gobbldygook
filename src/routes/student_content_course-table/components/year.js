@@ -1,6 +1,7 @@
-const React = require('react')
-const {PropTypes} = React
-import {filter, sortBy, map} from 'lodash-es'
+import React, {PropTypes} from 'react'
+import filter from 'lodash/filter'
+import sortBy from 'lodash/sortBy'
+import map from 'lodash/map'
 
 import Button from '../../../components/button'
 import Semester from '../containers/semester'
@@ -9,7 +10,7 @@ import findFirstAvailableSemester from '../../../helpers/find-first-available-se
 import expandYear from '../../../helpers/expand-year'
 import semesterName from '../../../helpers/semester-name'
 
-// import './year.css'
+import './year.css'
 
 
 const canAddSemester = (schedules, year) =>

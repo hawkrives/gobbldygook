@@ -1,4 +1,4 @@
-import {omit} from 'lodash-es'
+import omit from 'lodash/omit'
 
 import {
 	LOG_MESSAGE,

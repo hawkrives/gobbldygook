@@ -1,14 +1,13 @@
-const React = require('react')
-const {PropTypes} = React
+import React, {PropTypes} from 'react'
 
-import { map } from 'lodash-es'
-import { bindActionCreators } from 'redux/es'
-const { connect } = require('react-redux')
+import map from 'lodash/map'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { removeNotification } from '../redux/notifications/actions'
 
 import Notification from '../components/notification'
 
-// import './notifications.css'
+import './notifications.css'
 
 export const Notifications = ({notifications, removeNotification}) => (
 	<ul className='notification-list'>

@@ -1,4 +1,4 @@
-const undoable = require('redux-undo')
+import undoable from 'redux-undo'
 
 import {
 	changeStudentName,

@@ -1,7 +1,7 @@
-const React = require('react')
-const {PropTypes} = React
-import {Link} from 'react-router/es6'
-import {map, sortBy} from 'lodash-es'
+import React, {PropTypes} from 'react'
+import Link from 'react-router/lib/Link'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
 import List from '../../../components/list'
 
 export default function AreaList(props) {
