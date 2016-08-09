@@ -17,7 +17,7 @@ import semesterName from '../helpers/semester-name'
 import expandYear from '../helpers/expand-year'
 import to12Hour from '../helpers/to-12-hour-time'
 
-import { bindActionCreators } from 'redux/es'
+import { bindActionCreators } from 'redux'
 const { connect } = require('react-redux')
 import { addCourse, moveCourse, removeCourse } from '../redux/students/actions/courses'
 

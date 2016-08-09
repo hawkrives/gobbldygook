@@ -5,12 +5,10 @@ import Button from '../../../../components/button'
 import List from '../../../../components/list'
 import StudentSummary from '../../../../routes/app_content_student/components/student-summary'
 import { initStudent } from '../../../../redux/students/actions/init-student'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 
 import './upload-file.css'
 
-class UploadFileScreen extends Component {
+export default class UploadFileScreen extends Component {
 	static propTypes = {
 		dispatch: PropTypes.func.isRequired,
 		router: PropTypes.object.isRequired,
@@ -114,7 +112,3 @@ class UploadFileScreen extends Component {
 		)
 	}
 }
-
-let mapDispatch = dispatch => ({dispatch})
-
-export default connect(undefined, mapDispatch)(UploadFileScreen)

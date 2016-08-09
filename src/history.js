@@ -1,1 +1,1 @@
-export {hashHistory as default} from 'react-router/es6'
+export {hashHistory as default} from 'react-router/lib/hashHistory'
