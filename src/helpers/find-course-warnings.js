@@ -70,9 +70,7 @@ export function findWarnings(courses, schedule) {
 	let nearlyMerged = zip(warningsOfInvalidity, timeConflicts)
 	let warningsWithTimeConflicts = map(nearlyMerged, flatten)
 
-	let allWarnings = warningsWithTimeConflicts
-
-	return allWarnings
+	return warningsWithTimeConflicts
 }
 
 export default findWarnings

@@ -7,9 +7,9 @@ const cx = require('classnames')
 export default function FakeCourse(props) {
 	return (
 		<article className={cx('course', props.className)}>
-			<div className={'row'}>
-				<h1 className={'title'}>{props.title}</h1>
-				<p className={'summary'}>{props.details}</p>
+			<div className='row'>
+				<h1 className='course-title'>{props.title}</h1>
+				<p className='course-summary'>{props.details}</p>
 			</div>
 		</article>
 	)

@@ -13,5 +13,5 @@ export default function expandYear(year, short=false, seperator='—') {
 	if (short) {
 		nextYear = String(nextYear).substr(-2, 2)
 	}
-	return `${year}${seperator}${(nextYear)}`
+	return `${year}${seperator}${nextYear}`
 }
