@@ -12,7 +12,7 @@ import junk from 'junk'
 import evaluate from '../src/area-tools/evaluate'
 import loadStudent from './lib/load-student'
 
-async function testStudent(student, mochaInstance) {
+function testStudent(student, mochaInstance) {
 	let {
 		areas,
 		courses,
@@ -36,7 +36,7 @@ async function testStudent(student, mochaInstance) {
 	})
 }
 
-async function loadFile(filepath) {
+function loadFile(filepath) {
 	return fs.readFileAsync(filepath, 'utf-8')
 }
 

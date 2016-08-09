@@ -4,9 +4,11 @@ import {
 	DESTROY_STUDENT,
 } from '../constants'
 
-export async function destroyStudent(studentId) {
-	removeStudentFromCache(studentId)
-	localStorage.removeItem(studentId)
+export function destroyStudent(studentId) {
+	return new Promise(resolve => {
+		removeStudentFromCache(studentId)
+		localStorage.removeItem(studentId)
 
-	return { type: DESTROY_STUDENT, payload: {studentId} }
+		resolve({ type: DESTROY_STUDENT, payload: {studentId} })
+	})
 }

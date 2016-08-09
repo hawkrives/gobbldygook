@@ -20,7 +20,7 @@ export function loadJsonFile(pathOrUrl) {
 		: fs.readFileAsync(pathOrUrl, {encoding: 'utf-8'}).then(JSON.parse)
 }
 
-export async function loadYamlFile(pathOrUrl) {
+export function loadYamlFile(pathOrUrl) {
 	return startsWith(pathOrUrl, 'http')
 		? fetch(pathOrUrl).then(status).then(text).then(yaml.safeLoad)
 		: fs.readFileAsync(pathOrUrl, {encoding: 'utf-8'}).then(yaml.safeLoad)

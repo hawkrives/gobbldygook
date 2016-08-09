@@ -325,11 +325,11 @@ async function loadFiles(url, infoFileBase) {
 	return true
 }
 
-async function checkIdbInWorkerSupport() {
+function checkIdbInWorkerSupport() {
 	if (self.IDBCursor) {
-		return true
+		return Promise.resolve(true)
 	}
-	return false
+	return Promise.resolve(false)
 }
 
 const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
