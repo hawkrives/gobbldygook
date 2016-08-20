@@ -17,12 +17,18 @@ notifications:
 language: node_js
 
 branches:
-  only: [master, stable]
+  only: [master, stable, /^greenkeeper-.*$/]
 
 node_js:
   - stable
 
+# run each command in parallel
+env:
+  - CMD=lint
+  - CMD=cover
+  - CMD=build-ci
+
 script:
-  - npm run travis
+  - npm run $CMD
 
 after_success: npm run coveralls
