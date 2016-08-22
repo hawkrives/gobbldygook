@@ -146,7 +146,7 @@
     "svg-sprite-generator": "0.0.7",
     "url-loader": "0.5.7",
     "webpack": "1.13.2",
-    "webpack-dev-server": "1.14.1",
+    "webpack-dev-server": "1.15.0",
     "webpack-notifier": "1.4.0",
     "worker-loader": "0.7.1"
   }
