@@ -6,7 +6,7 @@ import Select from 'react-select'
 import {connect} from 'react-redux'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
-import 'react-select/dist/react-select.scss'
+import 'react-select/dist/react-select.css'
 import { initStudent } from '../../../../redux/students/actions/init-student'
 import filterAreaList from '../../../../helpers/filter-area-list'
 

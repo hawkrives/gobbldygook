@@ -9,7 +9,7 @@
 }
 
 .loading-spinner {
-	@mixin loading-spinner;
+	@include loading-spinner();
 }
 
 .loading-message {
