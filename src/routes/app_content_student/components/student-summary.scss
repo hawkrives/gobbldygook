@@ -23,21 +23,21 @@
 	}
 
 	.content {
-		padding: $block-edge-padding * 2);
+		padding: $block-edge-padding * 2;
 
 		.paragraph {
 			margin: 0;
 		}
 
 		.paragraph + .paragraph {
-			margin-top: $block-edge-padding * 2);
+			margin-top: $block-edge-padding * 2;
 		}
 	}
 
 	.student-summary--header {
-		$color: black)
+		color: $black;
 
-		margin: $block-edge-padding * 2);
+		margin: $block-edge-padding * 2;
 		margin-bottom: 0;
 		font-style: italic;
 		line-height: 1.6em;
