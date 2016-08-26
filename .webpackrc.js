@@ -176,11 +176,11 @@ const config = {
 				let remaining = id.split('/').slice(1)
 				let isAliasedDir = Object.keys(config.resolve.alias).includes(firstLevel)
 
+				let wholePath = ['/']
+					.concat(config.resolve.alias[firstLevel].split('/'))
+					.concat(remaining)
 				let newpath = isAliasedDir
-					? path.join(
-						'/',
-						...config.resolve.alias[firstLevel].split('/'),
-						...remaining)
+					? path.join.apply(null, wholePath)
 					: path.join(base, id)
 
 				newpath = newpath.replace(__dirname, '').substr(1)
