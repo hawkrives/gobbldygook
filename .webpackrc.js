@@ -172,7 +172,8 @@ const config = {
 				// that is, if a path begins with ".", it is a relative path.
 				// otherwise, it attempts to look up the path in webpack's list of aliases.
 				// if it doesn't exist, it's still a relative path.
-				let [firstLevel, ...remaining] = id.split('/')
+				let firstLevel = id.split('/')
+				let remaining = id.split('/').slice(1)
 				let isAliasedDir = Object.keys(config.resolve.alias).includes(firstLevel)
 
 				let newpath = isAliasedDir
