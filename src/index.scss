@@ -1,8 +1,8 @@
 /* basic styles; */
-@import "./styles/fonts.css";
-@import "./styles/normalize.css";
-@import "./styles/base.css";
-@import "./styles/mixins.css";
+@import "./styles/fonts.scss";
+@import "./styles/normalize.scss";
+@import "./styles/base.scss";
+@import "./styles/mixins.scss";
 
 /* vendor components; */
 @import "./vendor/react-list-select.css";

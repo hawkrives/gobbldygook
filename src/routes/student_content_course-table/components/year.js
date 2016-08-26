@@ -10,7 +10,7 @@ import findFirstAvailableSemester from '../../../helpers/find-first-available-se
 import expandYear from '../../../helpers/expand-year'
 import semesterName from '../../../helpers/semester-name'
 
-import './year.css'
+import './year.scss'
 
 
 const canAddSemester = (schedules, year) =>

@@ -1,13 +1,11 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
-:root {
-	--year-title-size: 2em;
-	--year-title-width: calc(var(--year-title-size) * 0.75); /* I don't know why this is 0.75 */
-}
+$year-title-size: 2em;
+$year-title-width: calc($year-title-size * 0.75); /* I don't know why this is 0.75 */
 
 .year {
-	margin-bottom: var(--page-edge-padding);
+	margin-bottom: $page-edge-padding;
 
 	.row {
 		display: flex;
@@ -16,7 +14,7 @@
 }
 
 .year-title {
-	@apply --no-select;
+	@include no-select();
 	margin: 0;
 
 	display: flex;
@@ -32,7 +30,7 @@
 }
 
 .year-title h1 {
-	@apply --heading-neutral;
+	@include heading-neutral();
 	white-space: nowrap;
 	flex: 1;
 
@@ -51,7 +49,7 @@
 	font-feature-settings: 'smcp';
 	font-weight: 400;
 
-	color: var(--gray-500);
+	color: $gray-500;
 
 	& + .button {
 		margin-left: 0.1em;
@@ -71,7 +69,7 @@
 
 	// 4px is the semester edge padding
 	// 7.5px is the internal semester padding
-	margin: 0 4px var(--page-edge-padding);
+	margin: 0 4px $page-edge-padding;
 	padding-left: 7.5px;
 
 	&[disabled] {
@@ -80,7 +78,7 @@
 }
 
 .remove-year:hover {
-	color: var(--red-500);
-	background-color: var(--red-50);
-	border: solid 1px var(--red-500);
+	color: $red-500;
+	background-color: $red-50;
+	border: solid 1px $red-500;
 }

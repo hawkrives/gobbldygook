@@ -1,7 +1,7 @@
-@import 'src/styles/mixins.css';
+@import '../../../styles/mixins.scss';
 
 .share-dialog {
-	@apply --card;
+	@include card();
 	flex-flow: column;
 	padding: 1em 2em;
 

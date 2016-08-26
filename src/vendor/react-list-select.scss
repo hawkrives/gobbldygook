@@ -1,8 +1,6 @@
-:root {
-	--react-list-select-accent: blue;
-	--react-list-select-selected: blue;
-	--react-list-select-disabled: gray;
-}
+$react-list-select-accent: blue;
+$react-list-select-selected: blue;
+$react-list-select-disabled: gray;
 
 .react-list-select {
 	margin: 0;
@@ -19,7 +17,7 @@
 				top: 0;
 				bottom: 0;
 				width: 2px;
-				background: var(--react-list-select-accent);
+				background: $react-list-select-accent;
 			}
 			&::before {
 				left: 0;
@@ -38,11 +36,11 @@
 	user-select: none;
 
 	&.is-selected {
-		background: var(--react-list-select-selected);
+		background: $react-list-select-selected;
 		user-select: inherit;
 	}
 	&.is-disabled {
-		background: var(--react-list-select-disabled);
+		background: $react-list-select-disabled;
 		cursor: default;
 	}
 }

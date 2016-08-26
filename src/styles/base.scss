@@ -1,4 +1,4 @@
-@import './variables.css';
+@import './variables.scss';
 
 *,
 *::before,
@@ -7,12 +7,12 @@
 }
 
 html {
-	font-family: var(--sans-font-stack);
-	color: var(--text-color);
+	font-family: $sans-font-stack;
+	color: $text-color;
 
 	box-sizing: border-box;
 
-	background: var(--background);
+	background: $background;
 	min-height: 100vh;
 
 	line-height: 1.4;
@@ -32,7 +32,7 @@ menu {
 }
 
 .sidebar, .content {
-	padding-top: var(--page-edge-padding);
+	padding-top: $page-edge-padding;
 	padding-bottom: 15vh;
 	overflow-y: scroll;
 }

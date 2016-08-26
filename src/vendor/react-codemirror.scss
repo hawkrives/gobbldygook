@@ -1,4 +1,4 @@
-@import 'src/styles/mixins.css';
+@import '../styles/mixins.scss';
 
 
 /* default codemirror styles */
@@ -335,7 +335,7 @@ span.CodeMirror-selectedtext { background: none; }
 /* custom codemirror styles */
 
 .ReactCodeMirror {
-	@apply --material-shadow;
+	@include material-shadow();
 	/* width: 100%; */
 	/* height: 100%; */
 	/* flex: 1; */

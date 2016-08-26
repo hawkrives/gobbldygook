@@ -7,7 +7,7 @@ import DocumentTitle from 'react-document-title'
 import isCurrentSemester from '../../../helpers/is-current-semester'
 import semesterName from '../../../helpers/semester-name'
 
-import './semester-detail.css'
+import './semester-detail.scss'
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class SemesterDetail extends Component {
