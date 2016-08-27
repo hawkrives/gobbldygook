@@ -1,3 +1,5 @@
+// @flow
+import type {Dispatch, Action, State} from 'redux'
 import Bluebird from 'bluebird'
 import db from '../../../helpers/db'
 import map from 'lodash/map'
@@ -10,12 +12,12 @@ import {
 	START_LOAD_AREAS,
 } from '../constants'
 
-export function loadingAreas() {
+export function loadingAreas(): Action {
 	return { type: LOADING_AREAS }
 }
 
 export function loadAllAreas() {
-	return dispatch => {
+	return (dispatch: Dispatch) => {
 		dispatch(loadingAreas())
 		const areasPromise = db.store('areas').getAll()
 		return dispatch({ type: LOAD_ALL_AREAS, payload: areasPromise })
@@ -23,7 +25,7 @@ export function loadAllAreas() {
 }
 
 export function refreshAreas() {
-	return (dispatch, getState) => {
+	return (dispatch: Dispatch, getState: () => State) => {
 		dispatch(loadingAreas())
 		const areas = getState().areas.data
 		dispatch({ type: START_LOAD_AREAS, payload: areas })

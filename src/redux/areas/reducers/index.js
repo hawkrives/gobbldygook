@@ -1,11 +1,15 @@
+// @flow
+import type {Action} from 'redux'
 import {
 	LOAD_ALL_AREAS,
 	LOADING_AREAS,
 } from '../constants'
 
+type AreaOfStudy = {};
+type State = {data: AreaOfStudy[], isLoading: boolean};
 const initialState = {data: [], isLoading: false}
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state: State = initialState, action: Action) {
 	const {type, payload} = action
 
 	switch (type) {
