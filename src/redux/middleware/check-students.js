@@ -1,4 +1,6 @@
+// @flow
 import Bluebird from 'bluebird'
+import type {Middleware} from 'redux'
 
 import * as studentConstants from '../students/constants'
 import * as areaConstants from '../areas/constants'
@@ -44,7 +46,7 @@ function shouldTakeAction({type}) {
 	return includes(whitelist, type)
 }
 
-const checkStudentsMiddleware = store => next => action => {
+const checkStudentsMiddleware: Middleware = store => next => action => {
 	if (!shouldTakeAction(action)) {
 		return next(action)
 	}
