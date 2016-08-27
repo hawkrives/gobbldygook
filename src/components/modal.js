@@ -1,21 +1,19 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import ReactDumbModal from 'react-dumb-modal'
+import BaseModal from 'react-modal'
 
 import './modal.scss'
 
 export default function Modal(props) {
 	return (
-		<ReactDumbModal
-			dismiss={props.onClose}
-			overlayStyle={null}
-			modalStyle={null}
+		<BaseModal
+			onRequestClose={props.onClose}
 			overlayClassName={cx('modal--backdrop', props.backdropClassName)}
-			modalClassName={cx('modal--content', props.modalClassName)}
-			unstyled={true}
+			className={cx('modal--content', props.modalClassName)}
+			isOpen={true}
 		>
 			{props.children}
-		</ReactDumbModal>
+		</BaseModal>
 	)
 }
 
