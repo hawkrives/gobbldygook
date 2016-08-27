@@ -25,7 +25,5 @@
 
 		"external-helpers",
 		"transform-runtime",
-
-		"react-hot-loader/babel",
 	],
 }
