@@ -1,18 +1,21 @@
 #!/bin/bash -ve
 
+SOURCE_BRANCH=master
+DEST_BRANCH=gh-pages
+
 STATUS=$(git status --porcelain)
 if test "$STATUS"; then
     echo 'Repository is not clean. Clean it.'
     exit 1
 fi
 
-git checkout master
+git checkout $SOURCE_BRANCH
 
 # prepare the gh-pages branch
 if test "$(git branch --list gh-pages)"; then
-    git branch -D gh-pages
+    git branch -D $DEST_BRANCH
 fi
-git checkout -B gh-pages master --no-track
+git checkout -B $DEST_BRANCH $SOURCE_BRANCH --no-track
 
 npm run build
 rm -rf bin/ flow-typed/ playground/ screenshots/ scripts/ src/ test/
@@ -24,6 +27,6 @@ rmdir build/
 # and … push
 git add --all ./
 git commit -m "build app" --quiet
-git push -f "https://github.com/hawkrives/gobbldygook.git" gh-pages
+git push -f "https://github.com/hawkrives/gobbldygook.git" $DEST_BRANCH
 
-git checkout master
+git checkout $SOURCE_BRANCH
