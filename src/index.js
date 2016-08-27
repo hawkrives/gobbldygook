@@ -1,21 +1,5 @@
 /* globals module */
 
-(function redirectIfNeeded() {
-	const canonicalUrl = 'https://www.stolaf.edu/people/rives/g'
-	if (typeof window !== 'undefined') {
-		let {protocol, hostname} = window.location
-		if (hostname === 'localhost') {
-			return
-		}
-		if (hostname !== 'www.stolaf.edu') {
-			window.location = canonicalUrl
-		}
-		if (protocol !== 'https:') {
-			window.location = canonicalUrl
-		}
-	}
-}())
-
 // Set up the default promise implementation as Bluebird
 import Bluebird from 'bluebird'
 Bluebird.config({
