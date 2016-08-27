@@ -17,7 +17,7 @@
 }())
 
 // Set up the default promise implementation as Bluebird
-const Bluebird = require('bluebird')
+import Bluebird from 'bluebird'
 Bluebird.config({
 	warnings: {
 		wForgottenReturn: false,
@@ -28,10 +28,10 @@ Bluebird.config({
 PRODUCTION && require('ohcrash')('ogdR7qSuIqexx4aixXhFKlG2')
 
 // enable svg <use> support in IE 9, 10, 11
-require('svgxuse')
+import 'svgxuse'
 
 // Include fetch
-require('isomorphic-fetch')
+import 'isomorphic-fetch'
 
 // Include React and react-dom.render
 const React = require('react')
@@ -51,13 +51,13 @@ loadData()
 // Kick off the GUI
 console.log('3. 2.. 1... Blast off! 🚀')
 
-const {AppContainer} = require('react-hot-loader')
-const Router = require('react-router/lib/Router')
+import {AppContainer} from 'react-hot-loader'
+import {Router} from 'react-router'
 import history from './history'
 import routes from './routes'
 
 // Create the redux store
-const configureStore = require('./redux')
+import configureStore from './redux'
 import Root from './containers/root'
 const store = configureStore()
 global.dispatch = store.dispatch
