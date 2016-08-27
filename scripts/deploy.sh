@@ -22,4 +22,4 @@ mv build/* build/.[^.]* ./
 # and … push
 git add --all ./
 git commit -m "build app" --quiet
-# git push -f "https://$GITHUB_OAUTH@github.com/stodevx/course-data.git" gh-pages
+git push -f "https://github.com/hawkrives/gobbldygook.git" gh-pages
