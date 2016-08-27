@@ -12,6 +12,8 @@ import CourseRemovalBox from '../components/course-removal-box'
 import {undo, redo} from '../redux/students/actions/undo'
 import {removeCourse} from '../redux/students/actions/courses'
 
+import {iosUndo, iosUndoOutline, iosRedo, iosRedoOutline, iosSearch, iosPeopleOutline, iosUploadOutline} from '../icons/ionicons'
+
 import './sidebar.scss'
 
 export function Sidebar(props) {
@@ -24,25 +26,25 @@ export function Sidebar(props) {
 		<aside className='sidebar'>
 			<Toolbar className='student-buttons'>
 				<Button link to='/' title='Students'>
-					<Icon name='ios-people-outline' type='block' />
+					<Icon type='block'>{iosPeopleOutline}</Icon>
 				</Button>
 				<Button link to={`/s/${studentId}/search`} title='Search'>
-					<Icon name='ios-search' type='block' />
+					<Icon type='block'>{iosSearch}</Icon>
 				</Button>
 
 				<Separator type='spacer' />
 
 				<Button title='Undo' onClick={() => undo(studentId)} disabled={!canUndo}>
-					<Icon name={`ios-undo${!canUndo ? '-outline' : ''}`} type='block' />
+					<Icon type='block'>{!canUndo ? iosUndoOutline : iosUndo}</Icon>
 				</Button>
 				<Button title='Redo' onClick={() => redo(studentId)} disabled={!canRedo}>
-					<Icon name={`ios-redo${!canRedo ? '-outline' : ''}`} type='block' />
+					<Icon type='block'>{!canRedo ? iosRedoOutline : iosRedo}</Icon>
 				</Button>
 
 				<Separator type='spacer' />
 
 				<Button link to={`/s/${studentId}/share`} title='Share'>
-					<Icon name='ios-upload-outline' type='block' />
+					<Icon type='block'>{iosUploadOutline}</Icon>
 				</Button>
 			</Toolbar>
 

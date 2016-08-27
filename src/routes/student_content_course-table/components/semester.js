@@ -12,6 +12,7 @@ import includes from 'lodash/includes'
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
 import List from '../../../components/list'
+import {close, search} from '../../../icons/ionicons'
 
 import CourseList from './course-list'
 import './semester.scss'
@@ -68,14 +69,14 @@ function Semester(props) {
 					to={`/s/${studentId}/search/${year}/${semester}`}
 					title='Search for courses'
 				>
-					<Icon name='search' /> Course
+					<Icon>{search}</Icon> Course
 				</Button>
 				<Button
 					className={'semester-remove'}
 					onClick={props.removeSemester}
 					title={`Remove ${year} ${semesterName(semester)}`}
 				>
-					<Icon name='close' />
+					<Icon>{close}</Icon>
 				</Button>
 			</header>
 

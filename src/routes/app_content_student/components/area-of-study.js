@@ -6,6 +6,7 @@ import Icon from '../../../components/icon'
 import Requirement from './requirement'
 import ProgressBar from '../../../components/progress-bar'
 import compareProps from '../../../helpers/compare-props'
+import {close, chevronUp, chevronDown} from '../../../icons/ionicons'
 
 import './area-of-study.scss'
 
@@ -50,12 +51,11 @@ function AreaOfStudy(props) {
 				<span className='icons'>
 					{showCloseButton &&
 					<Button className='area--remove-button' onClick={props.onStartRemovalConfirmation}>
-						<Icon name='close' />
+						<Icon>{close}</Icon>
 					</Button>}
-					<Icon
-						className='area--open-indicator'
-						name={isOpen ? 'chevron-up' : 'chevron-down'}
-					/>
+					<Icon className='area--open-indicator'>
+						{isOpen ? chevronUp : chevronDown}
+					</Icon>
 				</span>
 			</div>
 			<ProgressBar

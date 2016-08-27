@@ -6,6 +6,7 @@ import Toolbar from '../../../components/toolbar'
 import Modal from '../../../components/modal'
 import List from '../../../components/list'
 import withRouter from 'react-router/lib/withRouter'
+import {close} from '../../../icons/ionicons'
 
 import { connect } from 'react-redux'
 
@@ -26,7 +27,7 @@ export function ShareSheet(props) {
 	>
 		<Toolbar className='window-tools'>
 			<Button className='close-modal' onClick={boundCloseModal}>
-				<Icon name='close' />
+				<Icon>{close}</Icon>
 			</Button>
 		</Toolbar>
 

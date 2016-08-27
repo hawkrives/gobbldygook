@@ -8,6 +8,7 @@ import sortStudiesByType from '../../../helpers/sort-studies-by-type'
 
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
+import {iosTrashOutline, iosArrowForward} from '../../../icons/ionicons'
 
 import './student-list-item.scss'
 
@@ -29,7 +30,7 @@ export default function StudentListItem(props) {
 		<li className={classname}>
 			{isEditing &&
 			<Button className='delete' type='flat' onClick={() => destroyStudent(student.data.present.id)}>
-				<Icon name='ios-trash-outline' />
+				<Icon>{iosTrashOutline}</Icon>
 				Delete
 			</Button>}
 			<Link className='student-list-item' to={`/s/${student.data.present.id}/`}>
@@ -44,7 +45,7 @@ export default function StudentListItem(props) {
 					</div>
 				</span>
 
-				<Icon className='student-list-item--go' name='ios-arrow-forward' />
+				<Icon className='student-list-item--go'>{iosArrowForward}</Icon>
 			</Link>
 		</li>
 	)

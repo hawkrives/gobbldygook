@@ -8,6 +8,7 @@ import Separator from '../../../components/separator'
 import CodeMirror from 'react-codemirror'
 import 'codemirror/mode/yaml/yaml'
 
+import {iosArrowLeft, iosDownloadOutline, iosReload, iosUploadOutline} from '../../../icons/ionicons'
 import './area-editor.scss'
 
 export default function AreaEditor(props) {
@@ -20,29 +21,29 @@ export default function AreaEditor(props) {
 		<div>
 			<Toolbar style={{marginBottom: '0.5em'}}>
 				<Button link to='/areas' >
-					<Icon name='ios-arrow-left' />
+					<Icon>{iosArrowLeft}</Icon>
 					{' '}Back
 				</Button>
 
 				<Separator type='flex-spacer' />
 
 				<Button onClick={props.onSave}>
-					<Icon name='ios-download-outline' />
+					<Icon>{iosDownloadOutline}</Icon>
 					{' '}Save
 				</Button>
 				<Button>
-					<Icon name='ios-reload' />
+					<Icon>{iosReload}</Icon>
 					{' '}Revert
 				</Button>
 
 				<Separator type='flex-spacer' />
 
 				<Button>
-					<Icon name='ios-download-outline' />
+					<Icon>{iosDownloadOutline}</Icon>
 					{' '}Download
 				</Button>
 				<Button>
-					<Icon name='ios-upload-outline' />
+					<Icon>{iosUploadOutline}</Icon>
 					{' '}Submit
 				</Button>
 			</Toolbar>
