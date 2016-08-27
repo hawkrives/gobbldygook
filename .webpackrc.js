@@ -1,4 +1,4 @@
-/* global module */
+/* global module, __dirname */
 'use strict'
 
 const pkg = require('./package.json')
