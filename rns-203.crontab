@@ -1,7 +1,0 @@
-# minute  hour  day  month  day-of-week  command
-
-# update and build gobbldygook – twice a day, every day
-0  */12  *  *  *    cd /home/users/rives/src/gobbldygook/ && ./cron.sh
-
-# update course data — every 6 hours from monday to saturday
-0   */6  *  *  1-6  cd /home/users/rives/src/gobbldygook-course-data/ && ./auto-update.sh
