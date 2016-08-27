@@ -1,5 +1,3 @@
-require('../scripts/edit-node-path')
-
 global.Promise = require('bluebird')
 global.debug = require('debug')
 

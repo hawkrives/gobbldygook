@@ -7,7 +7,6 @@ import createLogger from 'redux-logger'
 import checkStudentsMiddleware from './middleware/check-students'
 import saveStudentsMiddleware from './middleware/save-students'
 import rootReducer from './reducer'
-import DevTools from '../containers/devtools'
 import freezingMiddleware from 'redux-freeze'
 
 const loggerMiddleware = createLogger({collapsed: true})
@@ -21,7 +20,6 @@ const finalCreateStore = compose(
 		saveStudentsMiddleware,
 		loggerMiddleware
 	),
-	DevTools.instrument(),
 	persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore)
 
