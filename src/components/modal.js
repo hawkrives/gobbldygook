@@ -8,6 +8,8 @@ export default function Modal(props) {
 	return (
 		<ReactDumbModal
 			dismiss={props.onClose}
+			overlayStyle={null}
+			modalStyle={null}
 			overlayClassName={cx('modal--backdrop', props.backdropClassName)}
 			modalClassName={cx('modal--content', props.modalClassName)}
 			unstyled={true}
