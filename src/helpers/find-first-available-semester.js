@@ -3,8 +3,8 @@ import filter from 'lodash/filter'
 import map from 'lodash/map'
 import uniq from 'lodash/uniq'
 import sortBy from 'lodash/sortBy'
-
 import findMissingNumberBinarySearch from './find-missing-number-binary-search'
+import type {Schedule} from '../models/types'
 
 /**
  * Takes a list of schedules and finds the first open semester.
@@ -16,10 +16,10 @@ import findMissingNumberBinarySearch from './find-missing-number-binary-search'
  * @param {Number} forYear - the year to look within
  * @returns {Number} - the first available semester slot
  */
-export default function findFirstAvailableSemester(schedules, forYear) {
+export default function findFirstAvailableSemester(schedules: Schedule[], forYear: number): number {
 	let thisYear = filter(schedules, {year: forYear})
 
-	let semesters = map(thisYear, s => s.semester)
+	let semesters: number[] = map(thisYear, s => s.semester)
 
 	// stick a 0 at the front so findBinary will start from 1
 	semesters.unshift(0)
