@@ -140,7 +140,7 @@ describe('parse hanson-string', () => {
 		})
 
 		it('requires the lab to be immediately after the number', () => {
-			expect(() => parse('CHEM 125 L')).to.throw('Expected "&", "|" or end of input but "L" found.')
+			expect(() => parse('CHEM 125 L')).to.throw('Expected "&", "|", or end of input but "L" found.')
 			expect(() => parse('CHEM 125IL')).to.not.throw()
 			expect(() => parse('CHEM 125L')).to.not.throw()
 		})
@@ -158,7 +158,7 @@ describe('parse hanson-string', () => {
 		})
 
 		it('requires international labs to be in IL order', () => {
-			expect(() => parse('CSCI 121LI')).to.throw('Expected "&", "|" or end of input but "I" found.')
+			expect(() => parse('CSCI 121LI')).to.throw('Expected "&", "|", or end of input but "I" found.')
 		})
 	})
 
