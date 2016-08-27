@@ -5,6 +5,7 @@ import Icon from '../../../components/icon'
 import Toolbar from '../../../components/toolbar'
 import Modal from '../../../components/modal'
 import List from '../../../components/list'
+import withRouter from 'react-router/lib/withRouter'
 
 import { connect } from 'react-redux'
 
@@ -58,4 +59,4 @@ const mapState = (state, ownProps) => {
 	return {student: state.students[ownProps.params.studentId].data.present}
 }
 
-export default connect(mapState)(ShareSheet)
+export default connect(mapState)(withRouter(ShareSheet))

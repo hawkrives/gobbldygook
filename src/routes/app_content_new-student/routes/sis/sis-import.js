@@ -11,6 +11,7 @@ import semesterName from '../../../../helpers/semester-name'
 import { RadioGroup, Radio } from 'react-radio-group'
 import { initStudent } from '../../../../redux/students/actions/init-student'
 import { connect } from 'react-redux'
+import withRouter from 'react-router/lib/withRouter'
 
 class SISImportScreen extends Component {
 	static propTypes = {
@@ -140,4 +141,4 @@ class SISImportScreen extends Component {
 
 let mapDispatch = dispatch => ({dispatch})
 
-export default connect(undefined, mapDispatch)(SISImportScreen)
+export default connect(undefined, mapDispatch)(withRouter(SISImportScreen))

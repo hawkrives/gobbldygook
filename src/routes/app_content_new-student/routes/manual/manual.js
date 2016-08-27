@@ -4,6 +4,7 @@ import cx from 'classnames'
 import Autosize from 'react-input-autosize'
 import Select from 'react-select'
 import {connect} from 'react-redux'
+import withRouter from 'react-router/lib/withRouter'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import 'react-select/dist/react-select.css'
@@ -201,4 +202,4 @@ let mapState = state => ({
 
 let mapDispatch = dispatch => ({dispatch})
 
-export default connect(mapState, mapDispatch)(ManualCreationScreen)
+export default connect(mapState, mapDispatch)(withRouter(ManualCreationScreen))

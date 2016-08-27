@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
-
+import withRouter from 'react-router/lib/withRouter'
 import CourseSearcher from '../../../containers/course-searcher'
 
-export default function CourseSearcherSidebar(props) {
+function CourseSearcherSidebar(props) {
 	const {studentId} = props.params
 	const boundCloseModal = () => props.router.push({pathname: `/s/${studentId}`})
 
@@ -29,3 +29,5 @@ CourseSearcherSidebar.propTypes = {
 	}).isRequired, // router
 	router: PropTypes.object.isRequired, // redux
 }
+
+export default withRouter(CourseSearcherSidebar)
