@@ -17,7 +17,9 @@ git checkout -B gh-pages master --no-track
 npm run build
 rm -rf bin/ flow-typed/ playground/ screenshots/ scripts/ src/ test/
 find ./ -type f -depth 1 -not -name '.git*' -not -name package.json -delete
-mv build/* build/.[^.]* ./
+mv build/* ./
+rm -f build/.DS_Store
+rmdir build/
 
 # and … push
 git add --all ./
