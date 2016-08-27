@@ -16,7 +16,7 @@ git checkout -B gh-pages master --no-track
 
 npm run build
 rm -rf bin/ flow-typed/ playground/ screenshots/ scripts/ src/ test/
-find ./ -type f -depth 1 -delete
+find ./ -type f -depth 1 -not -name '.git*' -not -name package.json -delete
 mv build/ ./
 
 # and … push
