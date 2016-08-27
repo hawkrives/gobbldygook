@@ -9,7 +9,6 @@ class StudentPickerContainer extends Component {
 	static propTypes = {
 		destroyStudent: PropTypes.func.isRequired,
 		loadStudents: PropTypes.func.isRequired,
-		routing: PropTypes.object.isRequired,
 		students: PropTypes.object.isRequired,
 	};
 
@@ -54,7 +53,6 @@ class StudentPickerContainer extends Component {
 				onOpenSearchOverlay={this.onOpenSearchOverlay}
 				onSortChange={this.onSortChange}
 				onToggleEditing={this.onToggleEditing}
-				routing={this.props.routing}
 				sortBy={this.state.sortBy}
 				students={this.props.students}
 			/>
@@ -65,7 +63,6 @@ class StudentPickerContainer extends Component {
 
 const mapStateToProps = state => ({
 	students: state.students,
-	routing: state.routing,
 })
 
 const mapDispatchToProps = dispatch => ({

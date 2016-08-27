@@ -24,7 +24,6 @@ export class AreaEditScreen extends Component {
 			type: PropTypes.string,
 			revision: PropTypes.string,
 		}).isRequired,  // react-router
-		routing: PropTypes.object.isRequired,  // react-router
 	};
 
 	state = {
@@ -125,7 +124,6 @@ export class AreaEditScreen extends Component {
 
 const mapStateToProps = state => ({
 	areas: state.areas,
-	routing: state.routing,
 })
 
 const mapDispatchToProps = dispatch => ({

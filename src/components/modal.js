@@ -22,7 +22,7 @@ export default function Modal(props) {
 Modal.propTypes = {
 	backdropClassName: PropTypes.string,
 	children: PropTypes.node.isRequired,
-	into: PropTypes.string.isRequired,
+	into: PropTypes.string,
 	modalClassName: PropTypes.string,
 	onClose: PropTypes.func.isRequired,
 }
