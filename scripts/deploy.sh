@@ -2,15 +2,15 @@
 
 STATUS=$(git status --porcelain)
 if test "$STATUS"; then
-	echo 'Repository is not clean. Clean it.'
-	exit 1
+    echo 'Repository is not clean. Clean it.'
+    exit 1
 fi
 
 git checkout master
 
 # prepare the gh-pages branch
 if test "$(git branch --list gh-pages)"; then
-   	git branch -D gh-pages
+    git branch -D gh-pages
 fi
 git checkout -B gh-pages master --no-track
 
