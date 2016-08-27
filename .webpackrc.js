@@ -164,17 +164,17 @@ if (isDevelopment) {
 	config.devtool = 'eval'
 
 	// add dev server and hotloading clientside code
-	config.entry.unshift(
-		'webpack-dev-server/client?http://' + config.hostname + ':' + config.port,
-		'webpack/hot/only-dev-server',
-		'react-hot-loader/patch'
-	)
+	// config.entry.unshift(
+	// 	'react-hot-loader/patch',
+	// 	`webpack-dev-server/client?http://${config.hostname}:${config.port}`,
+	// 	'webpack/hot/only-dev-server'
+	// )
 
 	config.devServer.port = config.port
 	config.devServer.host = config.hostname
 
 	// add dev plugins
-	config.plugins.push(new HotModuleReplacementPlugin())
+	// config.plugins.push(new HotModuleReplacementPlugin())
 
 	// Add style loaders
 	let extractor = new ExtractTextPlugin(config.output.cssFilename, {allChunks: true})
