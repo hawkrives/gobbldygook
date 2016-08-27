@@ -85,6 +85,30 @@ const config = {
 						'<meta charset="UTF-8">',
 						'<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
 						'<title>Gobbldygook</title>',
+						`
+						<!-- Start Single Page Apps for GitHub Pages -->
+						<script type="text/javascript">
+							// Single Page Apps for GitHub Pages
+							// https://github.com/rafrex/spa-github-pages
+							(function(l) {
+								if (l.search) {
+									var query = {}
+									l.search.slice(1).split('&').forEach(function(val) {
+										var a = val.split('=')
+										query[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&')
+									})
+									if (query.p !== undefined) {
+										window.history.replaceState(null, null,
+											l.pathname.slice(0, -1) + (query.p || '') +
+											(query.query ? ('?' + query.query) : '') +
+											l.hash
+										)
+									}
+								}
+							}(window.location))
+						</script>
+						<!-- End Single Page Apps for GitHub Pages -->
+						`,
 						context.css && `<link rel="stylesheet" href="${context.css}">`,
 						'<body>',
 						'  <main id="gobbldygook"></main>',

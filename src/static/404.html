@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Gobbldygook</title>
+<script>
+// from https://github.com/rafrex/spa-github-pages
+// Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+
+// This script takes the current url and converts the path and query
+// string into just a query string, and then redirects the browser
+// to the new url with only a query string and hash fragment.
+
+// Note: This 404.html file must be at least 512 bytes for it to work
+// with Internet Explorer (it is currently > 512 bytes)
+
+var l = window.location
+l.replace(
+	l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+	l.pathname.split('/').slice(0, 2).join('/') + '/?p=/' +
+	l.pathname.slice(1).split('/').slice(1).join('/').replace(/&/g, '~and~') +
+	(l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+	l.hash
+)
+</script>
+</html>
