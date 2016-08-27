@@ -17,7 +17,7 @@ notifications:
 language: node_js
 
 branches:
-  only: [master, stable, /^greenkeeper-.*$/]
+  only: [master, stable, /^travis/]
 
 node_js:
   - stable
