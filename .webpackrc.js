@@ -101,7 +101,7 @@ const config = {
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
 		// tell webpack to ignore it.
-		new NormalModuleReplacementPlugin(/schema\/default_full$/, function(result) {
+		new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
 			result.request = result.request.replace('default_full', 'default_safe')
 		}),
 
