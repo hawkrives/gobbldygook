@@ -29,6 +29,7 @@ env:
   - CMD=build-ci
 
 script:
+  - if [[ $CMD = "cover" ]]; then npm install coveralls; fi
   - npm run $CMD
 
 after_success: npm run coveralls
