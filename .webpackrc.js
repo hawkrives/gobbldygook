@@ -189,26 +189,21 @@ if (isDevelopment) {
 	config.plugins.push(new HotModuleReplacementPlugin())
 
 	// Add style loaders
+	let extractor = new ExtractTextPlugin(config.output.cssFilename, {allChunks: true})
+	config.plugins = config.plugins.concat([extractor])
+	config.module.loaders.push({test: /\.css$/, loader: extractor.extract('style', ['css'])})
+	config.module.loaders.push({test: /\.scss$/, loader: extractor.extract('style', ['css!sass'])})
+
 	let identName = '[path][name]·[local]·[hash:base64:5]'
-	config.module.loaders.push({
-		test: /\.css$/,
-		loader: `style-loader!css-loader`,
-	})
-	config.module.loaders.push({
-		test: /\.scss$/,
-		loader: `style-loader!css-loader!sass-loader`,
-	})
+	config.module.loaders.push({test: /\.module.css$/, loader: extractor.extract('style', [`css?modules&localIdentName=${identName}`])})
+	config.module.loaders.push({test: /\.module.scss$/, loader: extractor.extract('style', [`css?modules&localIdentName=${identName}!sass`])})
 }
 
 else if (isTest) {
-	config.module.loaders.push({
-		test: /\.css$/,
-		loader: 'style-loader!css-loader',
-	})
-	config.module.loaders.push({
-		test: /\.scss$/,
-		loader: 'style-loader!css-loader!sass-loader',
-	})
+	config.module.loaders.push({test: /\.css$/, loader: 'style!css'})
+	config.module.loaders.push({test: /\.module.css$/, loader: 'style!css?modules'})
+	config.module.loaders.push({test: /\.scss$/, loader: 'style!css!sass'})
+	config.module.loaders.push({test: /\.module.scss$/, loader: 'style!css?modules!sass'})
 }
 
 // production
@@ -235,11 +230,20 @@ else if (isProduction) {
 
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: extractor.extract('style-loader', 'css-loader'),
+		loader: extractor.extract('style', ['css']),
 	})
 	config.module.loaders.push({
 		test: /\.scss$/,
-		loader: extractor.extract('style-loader', 'css-loader', 'sass-loader'),
+		loader: extractor.extract('style', ['css', 'sass']),
+	})
+
+	config.module.loaders.push({
+		test: /\.module.css$/,
+		loader: extractor.extract('style', ['css?modules']),
+	})
+	config.module.loaders.push({
+		test: /\.module.scss$/,
+		loader: extractor.extract('style', ['css?modules', 'sass']),
 	})
 }
 
