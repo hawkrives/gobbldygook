@@ -51,7 +51,6 @@ loadData()
 // Kick off the GUI
 console.log('3. 2.. 1... Blast off! 🚀')
 
-// import {AppContainer} from 'react-hot-loader'
 import {Router} from 'react-router'
 import history from './history'
 import routes from './routes'
@@ -69,20 +68,10 @@ store.dispatch(loadAllAreas())
 
 let renderFunc = Root => {
 	render(
-		//<AppContainer>
-			<Root store={store}>
-				<Router history={history} routes={routes} />
-			</Root>,
-		// </AppContainer>,
+		<Root store={store}>
+			<Router history={history} routes={routes} />
+		</Root>,
 		document.getElementById('gobbldygook'))
 }
 
 renderFunc(Root)
-
-
-// if (module.hot) {
-// 	module.hot.accept('./containers/root', () => {
-// 		let Root = require('./containers/root').default
-// 		renderFunc(Root)
-// 	})
-// }
