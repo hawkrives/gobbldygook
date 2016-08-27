@@ -5,6 +5,7 @@ import {DropTarget} from 'react-dnd'
 import {COURSE} from '../models/item-types'
 
 import Icon from './icon'
+import {iosTrashOutline} from '../icons/ionicons'
 
 import './course-removal-box.scss'
 
@@ -16,7 +17,7 @@ function CourseRemovalBox(props) {
 
 	return props.connectDropTarget(
 		<div className={className}>
-			<Icon name='ios-trash-outline' type='block' style={{fontSize: '3em', textAlign: 'center'}} />
+			<Icon type='block' style={{fontSize: '3em', textAlign: 'center'}}>{iosTrashOutline}</Icon>
 			Drop a course here to remove it.
 		</div>
 	)

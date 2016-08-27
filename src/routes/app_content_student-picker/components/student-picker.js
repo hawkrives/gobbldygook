@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import size from 'lodash/size'
 
+import {androidSearch, funnel, androidApps, androidMenu, androidAdd} from '../../../icons/ionicons'
 import Toolbar from '../../../components/toolbar'
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
@@ -38,7 +39,7 @@ export default function StudentPicker(props) {
 			<div className='student-list-toolbar'>
 				<Toolbar className='student-list-buttons'>
 					<Button link to='search/' className='student-list--button'>
-						<Icon name='android-search' />
+						<Icon>{androidSearch}</Icon>
 						Courses
 					</Button>
 
@@ -51,22 +52,22 @@ export default function StudentPicker(props) {
 					/>
 
 					<Button className='student-list--button' onClick={onSortChange}>
-						<Icon name='funnel' />
+						<Icon>{funnel}</Icon>
 						Sort
 					</Button>
 
 					<Button className='student-list--button' onClick={onGroupChange} disabled>
-						<Icon name='android-apps' />
+						<Icon>{androidApps}</Icon>
 						Group
 					</Button>
 
 					<Button className='student-list--button' onClick={onToggleEditing}>
-						<Icon name='android-menu' />
+						<Icon>{androidMenu}</Icon>
 						Edit
 					</Button>
 
 					<Button link to='create/' className='student-list--button'>
-						<Icon name='android-add' />
+						<Icon>{androidAdd}</Icon>
 						New
 					</Button>
 				</Toolbar>

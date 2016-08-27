@@ -7,6 +7,7 @@ import Button from './button'
 import Icon from './icon'
 import Loading from './loading'
 import CourseResultsList from './course-results-list'
+import {androidArrowForward} from '../icons/ionicons'
 
 import {SORT_BY, GROUP_BY} from './course-searcher-options'
 
@@ -98,7 +99,7 @@ export default function CourseSearcher(props) {
 					>
 						{inProgress
 							? [<span key='msg'>Searching…</span>]
-							: [<span key='msg'>Search </span>, <Icon key='icon' name='android-arrow-forward' />]}
+							: [<span key='msg'>Search </span>, <Icon key='icon'>{androidArrowForward}</Icon>]}
 					</Button>
 				</div>
 				{hasQueried &&
