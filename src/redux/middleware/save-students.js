@@ -1,4 +1,6 @@
+// @flow
 import Bluebird from 'bluebird'
+import type {Middleware} from 'redux'
 import * as studentActions from '../students/constants'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
@@ -32,11 +34,11 @@ const whitelist = [
 	studentActions.ADD_FABRICATION,
 	studentActions.REMOVE_FABRICATION,
 ]
-export const shouldTakeAction = ({type}) => {
+const shouldTakeAction = ({type}) => {
 	return includes(whitelist, type)
 }
 
-const saveStudentsMiddleware = store => next => action => {
+const saveStudentsMiddleware: Middleware = store => next => action => {
 	if (!shouldTakeAction(action)) {
 		return next(action)
 	}

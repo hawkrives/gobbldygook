@@ -4,6 +4,7 @@ import sortBy from 'lodash/sortBy'
 import max from 'lodash/max'
 import includes from 'lodash/includes'
 import findMissingNumberBinarySearch from './find-missing-number-binary-search'
+import type {Schedule} from '../models/types'
 
 /**
  * Takes a list of schedules and finds the first open year.
@@ -16,7 +17,7 @@ import findMissingNumberBinarySearch from './find-missing-number-binary-search'
  * @param {Number} matriculation - the year of matriculated
  * @returns {Number} - the first available semester slot
  */
-export default function findFirstAvailableYear(schedules, matriculation) {
+export default function findFirstAvailableYear(schedules: Schedule[], matriculation: number): number {
 	if (schedules && schedules.length === 0 && matriculation === undefined) {
 		return new Date().getFullYear()
 	}

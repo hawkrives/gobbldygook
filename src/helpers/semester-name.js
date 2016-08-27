@@ -1,3 +1,5 @@
+// @flow
+
 const SEMESTERS = {
 	'0': 'Abroad',
 	'1': 'Fall',
@@ -8,13 +10,8 @@ const SEMESTERS = {
 	'9': 'Non-St. Olaf',
 }
 
-/**
- * Takes a semester number and returns the associated semester string.
- *
- * @param {String|Number} semester - the semester (number)
- * @returns {String} - the nice semester name
- */
-export default function semesterName(semester) {
+// Takes a semester number and returns the associated semester string.
+export default function semesterName(semester: string|number): string {
 	if (typeof semester === 'number') {
 		semester = String(semester)
 	}

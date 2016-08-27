@@ -1,4 +1,11 @@
-export default function findWordForProgress(maxProgress, currentProgress) {
+// @flow
+
+type ProgressChunk =
+	'hundred' | 'ninety' | 'eighty' | 'seventy' |
+	'sixty' | 'fifty' | 'forty' | 'thirty' |
+	'twenty' | 'ten' | 'under-ten' | 'zero';
+
+export default function findWordForProgress(maxProgress: number, currentProgress: number): ProgressChunk {
 	const progress = currentProgress / maxProgress
 
 	if (progress >= 1) {
