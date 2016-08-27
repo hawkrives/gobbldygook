@@ -23,9 +23,6 @@ const isTest = (process.env.NODE_ENV === 'test')
 const outputFolder = 'build/'
 const urlLoaderLimit = 10000
 
-const NPM_ES6_EXCEPTIONS = ['lodash-es', 'react-router/es6', 'redux/es'].join('|')
-const BABEL_IGNORE_PATTERN = new RegExp(`(/node_modules/)(?!(${{NPM_ES6_EXCEPTIONS}}))`)
-
 const config = {
 	replace: null,
 	port: 3000,
@@ -138,13 +135,13 @@ const config = {
 			{
 				test: /\.js$/,
 				// allow babel to run on lodash-es
-				exclude: BABEL_IGNORE_PATTERN,
+				exclude: /node_modules/,
 				loaders: ['babel-loader?cacheDirectory'],
 			},
 			{
 				test: /\.worker.js$/,
 				// allow babel to run on lodash-es
-				exclude: BABEL_IGNORE_PATTERN,
+				exclude: /node_modules/,
 				loaders: ['worker-loader', 'babel-loader?cacheDirectory'],
 			},
 			{
