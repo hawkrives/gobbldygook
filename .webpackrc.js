@@ -30,7 +30,10 @@ const config = {
 
 	stats: {},
 
-	entry: ['./src/index.js'],
+	entry: {
+		main: './src/index.js',
+		common: './src/common.js',
+	},
 
 	output: {
 		path: outputFolder + '/',
@@ -112,22 +115,7 @@ const config = {
 
 		new NotifierPlugin({title: `${pkg.name} build`}),
 
-		new CommonsChunkPlugin({
-			minChunks: Infinity,
-			name: 'common',
-			filename: 'commons.[hash].js',
-			chunks: [
-				'react',
-				'bluebird',
-				'redux',
-				'react-redux',
-				'react-dnd',
-				'dnd-core',
-				'react-modal2',
-				'react-gateway',
-				'react-side-effect',
-			],
-		}),
+		new CommonsChunkPlugin('common', 'common.[hash].js'),
 	],
 
 	module: {
