@@ -32,6 +32,7 @@ const config = {
 	entry: {
 		main: './src/index.js',
 		common: './src/common.js',
+		react: './src/react.js',
 	},
 
 	output: {
@@ -89,6 +90,7 @@ const config = {
 						'  <main id="gobbldygook"></main>',
 						'</body>',
 						`<script src="${context.common}"></script>`,
+						`<script src="${context.react}"></script>`,
 						`<script src="${context.main}"></script>`,
 						'</html>',
 					].join('\n'),
@@ -112,7 +114,10 @@ const config = {
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 
-		new CommonsChunkPlugin('common', 'common.[hash].js'),
+		new CommonsChunkPlugin({
+			names: ['react', 'common'],
+			filename: '[name].[hash].js',
+		}),
 	],
 
 	module: {
