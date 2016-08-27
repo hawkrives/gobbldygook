@@ -1,7 +1,7 @@
 #!/bin/bash -ve
 
 STATUS=$(git status --porcelain)
-if [[ -z $STATUS ]]; then
+if test "$STATUS"; then
 	echo 'Repository is not clean. Clean it.'
 	exit 1
 fi
