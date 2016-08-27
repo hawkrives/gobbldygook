@@ -71,8 +71,8 @@ export function checkSupport() {
 
 export default function loadData() {
 	const infoFiles = [
-		'./courseData.url',
-		'./areaData.url',
+		APP_BASE + 'courseData.url',
+		APP_BASE + 'areaData.url',
 	]
 
 	if (navigator.onLine) {

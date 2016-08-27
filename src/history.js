@@ -1,2 +1,2 @@
-import {hashHistory} from 'react-router'
-export default hashHistory
+import browserHistory from 'react-router/lib/browserHistory'
+export default browserHistory

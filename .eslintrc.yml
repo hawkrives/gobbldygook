@@ -25,6 +25,7 @@ globals:
   DEVELOPMENT: false
   PRODUCTION: false
   TESTING: false
+  APP_BASE: false
   debug: false
 
 rules:

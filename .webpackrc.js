@@ -21,11 +21,11 @@ const isTest = (process.env.NODE_ENV === 'test')
 
 const outputFolder = 'build/'
 const urlLoaderLimit = 10000
+const publicPath = isDevelopment ? '/' : '/gobbldygook/'
 
 const config = {
 	replace: null,
-	port: 3000,
-	hostname: 'localhost',
+	port: 3000, // for webpack-dev-server
 
 	stats: {},
 
@@ -36,26 +36,32 @@ const config = {
 	},
 
 	output: {
-		path: outputFolder + '/',
-		publicPath: '',
+		path: outputFolder,
+		publicPath: publicPath,
+		hash: true,
 
 		// extract-text-plugin uses [contenthash], and webpack uses [hash].
 		filename: isDevelopment ? 'app.js' : `${pkg.name}.[hash].js`,
 		cssFilename: isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`,
 		chunkFilename: 'chunk.[name].[chunkhash].js',
 
-		hash: true,
+		// Add /*filename*/ comments to generated require()s in the output.
+		pathinfo: true,
 	},
 
 	devServer: {
-		info: false,
-		historyApiFallback: true,
+		// If these are enabled historyApiFallback doesn't work
+		// info: false,
+		// stats: 'errors-only',
+		contentBase: outputFolder,
+		historyApiFallback: {
+			index: publicPath,
+		},
+
 		// For some reason simply setting this doesn't seem to be enough, which
 		// is why we also do the manual entry above and the manual adding of
 		// the hot module replacment plugin below.
-		hot: true,
-		contentBase: outputFolder,
-		stats: false,
+		// hot: true,
 	},
 
 	node: {
@@ -64,11 +70,7 @@ const config = {
 	},
 
 	resolve: {
-		extensions: [
-			'',
-			'.js',
-			'.json',
-		],
+		extensions: ['', '.js', '.json'],
 		alias: {
 			src: path.resolve(__dirname, 'src'),
 		},
@@ -76,18 +78,17 @@ const config = {
 
 	plugins: [
 		new HtmlPlugin({
-			// To serve a default HTML file, or not to serve, that is the question.
 			html(context) {
 				return {
-					'index.html': [
-						'<!DOCTYPE html>',
-						'<html lang="en-US">',
-						'<meta charset="UTF-8">',
-						'<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
-						'<title>Gobbldygook</title>',
-						`
+					'index.html': `
+						<!DOCTYPE html>
+						<html lang="en-US">
+						<meta charset="UTF-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+						<title>Gobbldygook</title>
+
 						<!-- Start Single Page Apps for GitHub Pages -->
-						<script type="text/javascript">
+						<script>
 							// Single Page Apps for GitHub Pages
 							// https://github.com/rafrex/spa-github-pages
 							(function(l) {
@@ -108,16 +109,14 @@ const config = {
 							}(window.location))
 						</script>
 						<!-- End Single Page Apps for GitHub Pages -->
-						`,
-						context.css && `<link rel="stylesheet" href="${context.css}">`,
-						'<body>',
-						'  <main id="gobbldygook"></main>',
-						'</body>',
-						`<script src="${context.common}"></script>`,
-						`<script src="${context.react}"></script>`,
-						`<script src="${context.main}"></script>`,
-						'</html>',
-					].join('\n'),
+
+						${context.css && `<link rel="stylesheet" href="${publicPath}${context.css}">`}
+						<body><main id="gobbldygook"></main></body>
+						<script src="${publicPath}${context.common}"></script>
+						<script src="${publicPath}${context.react}"></script>
+						<script src="${publicPath}${context.main}"></script>
+						</html>
+					`,
 				}
 			},
 			isDev: isDevelopment,
@@ -135,6 +134,7 @@ const config = {
 			DEVELOPMENT: isDevelopment,
 			PRODUCTION: isProduction,
 			TESTING: isTest,
+			APP_BASE: JSON.stringify(publicPath),
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 
