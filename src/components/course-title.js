@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import './course-title.css'
+import './course-title.scss'
 
 const independentRegex = /^I[RS]/
 

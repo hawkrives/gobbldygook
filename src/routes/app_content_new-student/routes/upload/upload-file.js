@@ -6,7 +6,7 @@ import List from '../../../../components/list'
 import StudentSummary from '../../../../routes/app_content_student/components/student-summary'
 import { initStudent } from '../../../../redux/students/actions/init-student'
 
-import './upload-file.css'
+import './upload-file.scss'
 
 export default class UploadFileScreen extends Component {
 	static propTypes = {

@@ -11,7 +11,7 @@ import Button from '../../../components/button'
 import List from '../../../components/list'
 import Toolbar from '../../../components/toolbar'
 
-import './area-picker.css'
+import './area-picker.scss'
 
 function AreaPicker(props) {
 	const graduation = props.studentGraduation

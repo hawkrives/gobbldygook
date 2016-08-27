@@ -1,4 +1,4 @@
-/* global module */
+/* global module, __dirname */
 'use strict'
 
 const pkg = require('./package.json')
@@ -23,9 +23,6 @@ const isTest = (process.env.NODE_ENV === 'test')
 const outputFolder = 'build/'
 const urlLoaderLimit = 10000
 
-const NPM_ES6_EXCEPTIONS = ['lodash-es', 'react-router/es6', 'redux/es'].join('|')
-const BABEL_IGNORE_PATTERN = new RegExp(`(/node_modules/)(?!(${{NPM_ES6_EXCEPTIONS}}))`)
-
 const config = {
 	replace: null,
 	port: 3000,
@@ -33,7 +30,10 @@ const config = {
 
 	stats: {},
 
-	entry: ['./src/index.js'],
+	entry: {
+		main: './src/index.js',
+		common: './src/common.js',
+	},
 
 	output: {
 		path: outputFolder + '/',
@@ -101,7 +101,7 @@ const config = {
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
 		// tell webpack to ignore it.
-		new NormalModuleReplacementPlugin(/schema\/default_full$/, function(result) {
+		new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
 			result.request = result.request.replace('default_full', 'default_safe')
 		}),
 
@@ -115,22 +115,7 @@ const config = {
 
 		new NotifierPlugin({title: `${pkg.name} build`}),
 
-		new CommonsChunkPlugin({
-			minChunks: Infinity,
-			name: 'common',
-			filename: 'commons.[hash].js',
-			chunks: [
-				'react',
-				'bluebird',
-				'redux',
-				'react-redux',
-				'react-dnd',
-				'dnd-core',
-				'react-modal2',
-				'react-gateway',
-				'react-side-effect',
-			],
-		}),
+		new CommonsChunkPlugin('common', 'common.[hash].js'),
 	],
 
 	module: {
@@ -138,13 +123,13 @@ const config = {
 			{
 				test: /\.js$/,
 				// allow babel to run on lodash-es
-				exclude: BABEL_IGNORE_PATTERN,
+				exclude: /node_modules/,
 				loaders: ['babel-loader?cacheDirectory'],
 			},
 			{
 				test: /\.worker.js$/,
 				// allow babel to run on lodash-es
-				exclude: BABEL_IGNORE_PATTERN,
+				exclude: /node_modules/,
 				loaders: ['worker-loader', 'babel-loader?cacheDirectory'],
 			},
 			{
@@ -164,38 +149,6 @@ const config = {
 		],
 	},
 
-	postcss: (webpack) => ([
-		require('postcss-import')({
-			addDependencyTo: webpack,
-			resolve(id, base) {
-				// this funciton changes the @import resolution to match require().
-				// that is, if a path begins with ".", it is a relative path.
-				// otherwise, it attempts to look up the path in webpack's list of aliases.
-				// if it doesn't exist, it's still a relative path.
-				let firstLevel = id.split('/')[0]
-				let remaining = id.split('/').slice(1)
-				let isAliasedDir = Object.keys(config.resolve.alias).includes(firstLevel)
-
-				let wholePath = ['/']
-					.concat(config.resolve.alias[firstLevel].split('/'))
-					.concat(remaining)
-				let newpath = isAliasedDir
-					? path.join.apply(null, wholePath)
-					: path.join(base, id)
-
-				newpath = newpath.replace(__dirname, '').substr(1)
-
-				return newpath
-			},
-		}),
-		require('postcss-apply'),
-		require('postcss-mixins'),
-		require('postcss-cssnext')({
-			browsers: ['last 2 versions', 'Firefox ESR'],
-		}),
-		require('postcss-reporter'),
-	]),
-
 	worker: {
 		output: {
 			filename: '[hash].worker.js',
@@ -211,31 +164,34 @@ if (isDevelopment) {
 	config.devtool = 'eval'
 
 	// add dev server and hotloading clientside code
-	config.entry.unshift(
-		'webpack-dev-server/client?http://' + config.hostname + ':' + config.port,
-		'webpack/hot/only-dev-server',
-		'react-hot-loader/patch'
-	)
+	// config.entry.unshift(
+	// 	'react-hot-loader/patch',
+	// 	`webpack-dev-server/client?http://${config.hostname}:${config.port}`,
+	// 	'webpack/hot/only-dev-server'
+	// )
 
 	config.devServer.port = config.port
 	config.devServer.host = config.hostname
 
 	// add dev plugins
-	config.plugins.push(new HotModuleReplacementPlugin())
+	// config.plugins.push(new HotModuleReplacementPlugin())
 
 	// Add style loaders
+	let extractor = new ExtractTextPlugin(config.output.cssFilename, {allChunks: true})
+	config.plugins = config.plugins.concat([extractor])
+	config.module.loaders.push({test: /\.css$/, loader: extractor.extract('style', ['css'])})
+	config.module.loaders.push({test: /\.scss$/, loader: extractor.extract('style', ['css!sass'])})
+
 	let identName = '[path][name]·[local]·[hash:base64:5]'
-	config.module.loaders.push({
-		test: /\.css$/,
-		loader: `style-loader!css-loader?importLoaders=1&localIdentName=${identName}!postcss-loader`,
-	})
+	config.module.loaders.push({test: /\.module.css$/, loader: extractor.extract('style', [`css?modules&localIdentName=${identName}`])})
+	config.module.loaders.push({test: /\.module.scss$/, loader: extractor.extract('style', [`css?modules&localIdentName=${identName}!sass`])})
 }
 
 else if (isTest) {
-	config.module.loaders.push({
-		test: /\.css$/,
-		loader: 'style-loader!css-loader?importLoaders=1!postcss-loader',
-	})
+	config.module.loaders.push({test: /\.css$/, loader: 'style!css'})
+	config.module.loaders.push({test: /\.module.css$/, loader: 'style!css?modules'})
+	config.module.loaders.push({test: /\.scss$/, loader: 'style!css!sass'})
+	config.module.loaders.push({test: /\.module.scss$/, loader: 'style!css?modules!sass'})
 }
 
 // production
@@ -262,7 +218,20 @@ else if (isProduction) {
 
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: extractor.extract('style-loader', 'css-loader?-import&importLoaders=1!postcss-loader'),
+		loader: extractor.extract('style', ['css']),
+	})
+	config.module.loaders.push({
+		test: /\.scss$/,
+		loader: extractor.extract('style', ['css', 'sass']),
+	})
+
+	config.module.loaders.push({
+		test: /\.module.css$/,
+		loader: extractor.extract('style', ['css?modules']),
+	})
+	config.module.loaders.push({
+		test: /\.module.scss$/,
+		loader: extractor.extract('style', ['css?modules', 'sass']),
 	})
 }
 

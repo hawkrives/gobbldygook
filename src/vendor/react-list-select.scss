@@ -1,0 +1,46 @@
+$react-list-select-accent: blue;
+$react-list-select-selected: blue;
+$react-list-select-disabled: gray;
+
+.react-list-select {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	&:focus,
+	&:hover {
+		.react-list-select--item.is-focused {
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				width: 2px;
+				background: $react-list-select-accent;
+			}
+			&::before {
+				left: 0;
+			}
+			&::after {
+				right: 0;
+			}
+		}
+	}
+}
+
+.react-list-select--item {
+	position: relative;
+	cursor: pointer;
+	display: block;
+	user-select: none;
+
+	&.is-selected {
+		background: $react-list-select-selected;
+		user-select: inherit;
+	}
+	&.is-disabled {
+		background: $react-list-select-disabled;
+		cursor: default;
+	}
+}

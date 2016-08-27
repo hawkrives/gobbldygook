@@ -1,0 +1,68 @@
+@import '../styles/variables.scss';
+@import '../styles/mixins.scss';
+
+.course p,
+.course ul {
+	margin: 0;
+}
+
+.course {
+	display: block;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $gray-100;
+	}
+}
+
+.course-summary {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 0.75em;
+
+	& > * + *::before {
+		content: " · ";
+	}
+}
+
+
+.course-identifier {
+	font-feature-settings: 'tnum';
+}
+
+.course-row {
+	overflow: hidden;
+	line-height: 1.5;
+}
+
+.course-gereqs {
+	@include list-inline();
+
+	display: inline;
+	li {
+		display: inline;
+	}
+	li + li::before {
+		content: " · ";
+	}
+}
+
+.course-warnings {
+	font-size: 0.85em;
+	font-feature-settings: 'onum';
+	padding-bottom: 2px;
+
+	.list-item {
+		padding: 0.125em 0.35em;
+		border-radius: 0.25em;
+		background-color: $amber-500;
+	}
+	.list-item::before {
+		margin-right: 0.35em;
+	}
+}
+
+.course.is-dragging {
+	opacity: 0.5;
+}

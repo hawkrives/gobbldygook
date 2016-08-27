@@ -9,7 +9,7 @@ import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'
 import Button from '../../../components/button'
 
-import './area-of-study-group.css'
+import './area-of-study-group.scss'
 
 export default function AreaOfStudyGroup(props) {
 	const showAreaPicker = props.showAreaPicker || false

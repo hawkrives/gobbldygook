@@ -3,7 +3,7 @@ import cx from 'classnames'
 import semesterName from '../../../helpers/semester-name'
 import {shrinkDepartment} from '../../../area-tools/convert-department'
 
-import './expression--course.css'
+import './expression--course.scss'
 
 export default function CourseExpression(props) {
 	const department = props.department.length > 1

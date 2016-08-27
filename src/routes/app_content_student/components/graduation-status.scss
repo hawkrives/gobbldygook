@@ -1,0 +1,34 @@
+@import '../../../styles/variables.scss';
+
+.graduation-status {
+	font-size: 0.85em;
+}
+
+.unused-areas-title {
+	margin-right: 0.25em;
+	margin-left: 0.25em;
+}
+
+.unused-areas-of-study {
+	margin-top: 1em;
+	display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+	font-feature-settings: 'smcp';
+	font-size: 0.9em;
+	color: $gray-700;
+}
+
+.unused-areas-buttons {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.add-unused-area-of-study {
+	text-transform: capitalize;
+	display: inline-block;
+	text-decoration: underline;
+	color: inherit;
+
+	padding: 0.125em 0.25em;
+}

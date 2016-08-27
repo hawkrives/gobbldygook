@@ -10,7 +10,6 @@ export class CourseSearcherContainer extends Component {
 	static propTypes = {
 		closeSearcher: PropTypes.func.isRequired,
 		groupResults: PropTypes.func.isRequired,  // redux
-		location: PropTypes.object, // redux
 		partial: PropTypes.shape({year: PropTypes.number, semester: PropTypes.number}),
 		search: PropTypes.shape({
 			error: PropTypes.any.isRequired,
@@ -79,7 +78,6 @@ export class CourseSearcherContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-	location: state.routing.location,
 	search: state.search,
 })
 

@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 
 import encodeStudent from '../../../helpers/encode-student'
 
-import './share-student.css'
+import './share-student.scss'
 
 export function ShareSheet(props) {
 	let { student } = props

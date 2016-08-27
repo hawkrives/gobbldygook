@@ -6,7 +6,7 @@ import Button from '../../../components/button'
 import Icon from '../../../components/icon'
 import StudentList from './student-list'
 
-import './student-picker.css'
+import './student-picker.scss'
 
 let sortByExpanded = {
 	dateLastModified: 'date last modified',

@@ -1,5 +1,5 @@
 export default {
-	component: 'div',
+	component: require('../containers/app').default,
 	childRoutes: [{
 		path: '/',
 
@@ -19,12 +19,6 @@ export default {
 					require('./app_content_student').default, // s/:id
 				])
 			}, 'app.routes')
-		},
-
-		getComponent(location, cb) {
-			require.ensure([], () => {
-				cb(null, require('../containers/app').default)
-			}, 'app.component')
 		},
 	}],
 }

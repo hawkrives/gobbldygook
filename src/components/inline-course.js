@@ -14,7 +14,7 @@ import buildCourseIdent from '../helpers/build-course-ident'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 
-import './inline-course.css'
+import './inline-course.scss'
 
 class InlineCourse extends Component {
 	static propTypes = {

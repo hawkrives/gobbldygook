@@ -1,0 +1,94 @@
+@import '../styles/variables.scss';
+@import '../styles/mixins.scss';
+
+@mixin button() {
+	cursor: pointer;
+
+	min-height: 3ex;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+
+	/* display: inline-flex collapses inline whitespace
+	 * white-space: pre brings it back, although it will
+	 * also show newlines, so be careful.
+	 */
+	white-space: pre;
+
+	padding: 1ex 2em;
+	border: solid 1px transparent;
+
+	transition: all .2s ease-out;
+	border-radius: $base-border-radius;
+	line-height: normal;
+
+	text-align: center;
+	text-transform: uppercase;
+
+	outline: 0;
+	color: currentColor;
+
+	/* Turn off default button styles in webkit */
+	-webkit-appearance: initial !important; /* override normalize's html [type=button] */
+	/* Gets rid of tap active state */
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* Raised Button */
+.button--raised {
+	@include button();
+	@include material-shadow();
+
+	background-color: $white;
+
+	&:hover {
+		background-color: $white;
+	}
+	&:focus {
+		background-color: $blue-50;
+		border-color: $blue-300;
+	}
+
+	&:active {
+		@include material-shadow();
+		background-color: $white;
+	}
+
+	&[disabled] {
+		cursor: default;
+		color: $gray-500;
+	}
+}
+
+/* Flat button */
+.button--flat {
+	@include button();
+
+	background-color: transparent;
+
+	&:hover {
+		background-color: $gray-100;
+		border-color: $gray-400;
+	}
+
+	&:focus {
+		background-color: $blue-50;
+		border-color: $blue-300;
+	}
+
+	&:disabled {
+		cursor: default;
+		color: $disabled-foreground--light;
+
+		&:hover,
+		&:focus,
+		&:active {
+			border-color: transparent;
+			background-color: transparent;
+		}
+	}
+}
+
+a.button {
+	@include link-undecorated();
+}

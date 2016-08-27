@@ -7,7 +7,7 @@ import map from 'lodash/map'
 import plur from 'plur'
 import humanizeOperator from '../../../area-tools/humanize-operator'
 
-import './expression.css'
+import './expression.scss'
 
 const JOINERS = {
 	$and: 'AND',

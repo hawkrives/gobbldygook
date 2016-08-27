@@ -10,7 +10,7 @@ import groupBy from 'lodash/groupBy'
 import Button from '../../../components/button'
 import Year from './year'
 
-import './course-table.css'
+import './course-table.scss'
 
 export default function CourseTable(props) {
 	const { student } = props

@@ -1,0 +1,83 @@
+@import '../styles/variables.scss';
+@import '../styles/mixins.scss';
+
+.notification-capsule {
+	position: relative;
+
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+
+	background: $black;
+	color: #f1f1f1;
+
+	font-size: 0.9em;
+
+	min-height: 46px;
+	min-width: 288px;
+	max-width: 350px;
+
+	padding: 0.9em;
+
+	box-shadow: 0 2px 6px $gray-700;
+	border-radius: 2px;
+
+	& + & {
+		margin-top: 1em;
+	}
+}
+
+.notification-message {
+	font-weight: 500;
+	font-size: 1em;
+	margin: 0;
+}
+
+.notification-content {
+	flex: 1;
+}
+
+.notification-type--message {
+
+}
+
+.notification-type--error {
+	background: $red;
+	color: $white;
+
+	.close-notification:hover {
+		border-color: $red-900;
+		color: $red-900;
+	}
+}
+
+.notification-type--progress {
+	.progress-container {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+	}
+	.progress-bar {
+		flex: 1;
+		height: 10px;
+		overflow: hidden;
+		border: solid 1px $gray-300;
+		background-color: transparent;
+		color: $gray-300;
+	}
+	output {
+		color: $gray-300;
+		margin-left: 0.5em;
+		font-feature-settings: 'lnum';
+	}
+}
+
+.close-notification {
+	margin-left: 0.9em;
+	padding: 2px 6px 1px;
+
+	&:hover {
+		background-color: rgba($white, 85%);
+		color: $black;
+	}
+}

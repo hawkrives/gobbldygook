@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import round from 'lodash/round'
 import Button from './button'
 import ProgressBar from './progress-bar'
-import './notification.css'
+import './notification.scss'
 
 export default function Notification(props) {
 	// console.log('Notification#render')

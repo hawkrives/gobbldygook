@@ -1,0 +1,23 @@
+@import '../styles/variables.scss';
+@import '../styles/spinner.scss';
+
+.loading… {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column nowrap;
+}
+
+.loading-spinner {
+	@include loading-spinner();
+}
+
+.loading-message {
+	font-weight: 300;
+	margin-top: 1em;
+	color: $gray;
+
+	&.info    { color: $green; }
+	&.warning { color: $orange; }
+	&.error   { color: $red; }
+}

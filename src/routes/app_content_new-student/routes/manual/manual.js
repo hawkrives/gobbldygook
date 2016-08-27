@@ -10,7 +10,7 @@ import 'react-select/dist/react-select.css'
 import { initStudent } from '../../../../redux/students/actions/init-student'
 import filterAreaList from '../../../../helpers/filter-area-list'
 
-import './manual.css'
+import './manual.scss'
 
 let now = new Date()
 

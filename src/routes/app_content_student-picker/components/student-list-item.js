@@ -9,7 +9,7 @@ import sortStudiesByType from '../../../helpers/sort-studies-by-type'
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
 
-import './student-list-item.css'
+import './student-list-item.scss'
 
 export default function StudentListItem(props) {
 	const { student, isEditing, destroyStudent } = props

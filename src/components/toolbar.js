@@ -1,6 +1,6 @@
 import React, { PropTypes} from 'react'
 import cx from 'classnames'
-import './toolbar.css'
+import './toolbar.scss'
 
 export default function Toolbar(props) {
 	return (

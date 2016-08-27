@@ -1,0 +1,28 @@
+@import './colors.scss';
+
+
+/* colors */
+$background: #e9eaed;
+$text-color: #2c281f;
+
+/* fonts */
+$sans-font-stack: Fira Sans, Helvetica, Verdana, sans-serif;
+$body-font-stack: $sans-font-stack;
+$heading-font-stack: $sans-font-stack;
+
+/* spacing */
+$page-edge-padding: 15px;
+$block-edge-padding: 5px;
+$area-edge-padding: 0.5em;
+
+/* z-indices */
+$z-sidebar: 3;
+$z-floating-button: 2;
+
+/* media queries */
+$single-column-width: 35em;
+$year-collapse-width: 47.5em;
+
+$material-divider: 1px solid rgba(160, 160, 160, 0.2);
+$base-border-radius: 3px;
+$sidebar-width: 270px;

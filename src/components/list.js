@@ -6,7 +6,7 @@ import React, {
 } from 'react'
 import cx from 'classnames'
 
-import './list.css'
+import './list.scss'
 
 export default function List(props) {
 	const {
