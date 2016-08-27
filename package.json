@@ -15,6 +15,7 @@
     "copy": "rimraf build && mkdirp build/ && cpy 'src/static/*' build/",
     "cover": "nyc npm test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "deploy": "bash scripts/deploy.sh",
     "lint": "eslint *.js bin/ scripts/ src/ test/",
     "prebuild": "npm run copy",
     "prestart": "npm run copy",
