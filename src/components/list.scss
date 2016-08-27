@@ -1,20 +1,18 @@
 .list--number {}
 .list--bullet {}
 
-:root {
-	--plain-list: {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	};
+@mixin plain-list() {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 .list--plain {
-	@apply --plain-list;
+	@include plain-list();
 }
 
 .list--inline {
-	@apply --plain-list;
+	@include plain-list();
 	display: inline-block;
 
 	& > .list-item {

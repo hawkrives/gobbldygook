@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import '../../../components/inline-course.css'
-import '../../../components/course-title.css'
+import '../../../components/inline-course.scss'
+import '../../../components/course-title.scss'
 
 export default function FakeCourse(props) {
 	return (

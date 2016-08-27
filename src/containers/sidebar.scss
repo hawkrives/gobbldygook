@@ -1,12 +1,12 @@
-@import 'src/styles/variables.css';
+@import '../../../styles/variables.scss';
 
 .sidebar {
 	flex: 1;
 
 	@media all and (min-width: 35em) {
 		max-width: 280px;
-		padding-left: var(--page-edge-padding);
-		padding-right: calc(var(--page-edge-padding) * (2/3));
+		padding-left: $page-edge-padding;
+		padding-right: ($page-edge-padding * (2/3));
 	}
 }
 

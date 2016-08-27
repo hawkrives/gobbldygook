@@ -12,7 +12,7 @@ import CourseRemovalBox from '../components/course-removal-box'
 import {undo, redo} from '../redux/students/actions/undo'
 import {removeCourse} from '../redux/students/actions/courses'
 
-import './sidebar.css'
+import './sidebar.scss'
 
 export function Sidebar(props) {
 	const { undo, redo } = props

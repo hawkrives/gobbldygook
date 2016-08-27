@@ -14,7 +14,7 @@ import Icon from '../../../components/icon'
 import List from '../../../components/list'
 
 import CourseList from './course-list'
-import './semester.css'
+import './semester.scss'
 
 function Semester(props) {
 	let courseList = null

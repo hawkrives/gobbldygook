@@ -1,6 +1,4 @@
-:root {
-	--avatar-size: 48px;
-}
+$avatar-size: 48px;
 .avatar-letter {
 	font-family: Fira Sans, Helvetica Neue, Helvetica, Arial, sans-serif !important;
 	font-weight: 200;
@@ -13,10 +11,10 @@
 
 	margin: 0;
 	padding: 0;
-	width: var(--avatar-size);
-	height: var(--avatar-size);
-	line-height: var(--avatar-size);
-	font-size: calc((var(--avatar-size) / 3) * 2);
+	width: $avatar-size;
+	height: $avatar-size;
+	line-height: $avatar-size;
+	font-size: ($avatar-size / 3) * 2;
 
-	border-radius: var(--avatar-size);
+	border-radius: $avatar-size;
 }

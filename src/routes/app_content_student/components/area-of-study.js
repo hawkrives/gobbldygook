@@ -7,7 +7,7 @@ import Requirement from './requirement'
 import ProgressBar from '../../../components/progress-bar'
 import compareProps from '../../../helpers/compare-props'
 
-import './area-of-study.css'
+import './area-of-study.scss'
 
 function AreaOfStudy(props) {
 	const {

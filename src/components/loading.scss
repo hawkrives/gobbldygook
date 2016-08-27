@@ -1,5 +1,5 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/spinner.css';
+@import '../styles/variables.scss';
+@import '../styles/spinner.scss';
 
 .loading… {
 	display: flex;
@@ -15,9 +15,9 @@
 .loading-message {
 	font-weight: 300;
 	margin-top: 1em;
-	color: var(--gray);
+	color: $gray;
 
-	&.info    { color: var(--green); }
-	&.warning { color: var(--orange); }
-	&.error   { color: var(--red); }
+	&.info    { color: $green; }
+	&.warning { color: $orange; }
+	&.error   { color: $red; }
 }

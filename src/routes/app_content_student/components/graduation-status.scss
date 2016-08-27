@@ -1,4 +1,4 @@
-@import 'src/styles/variables.css';
+@import '../../../styles/variables.scss';
 
 .graduation-status {
 	font-size: 0.85em;
@@ -16,7 +16,7 @@
     justify-content: flex-start;
 	font-feature-settings: 'smcp';
 	font-size: 0.9em;
-	color: var(--gray-700);
+	color: $gray-700;
 }
 
 .unused-areas-buttons {

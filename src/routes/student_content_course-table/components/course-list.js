@@ -7,7 +7,7 @@ import List from '../../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 
-import './course-list.css'
+import './course-list.scss'
 
 
 export default function CourseList(props) {

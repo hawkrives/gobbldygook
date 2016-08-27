@@ -1,5 +1,5 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .app-title {
 	margin-top: 3em;
@@ -41,7 +41,7 @@
 }
 
 .student-list-filter {
-	@apply --card;
+	@include card();
 	flex: 3 0 auto;
 	align-self: center;
 	padding: 0.25em 0.5em;
@@ -49,9 +49,9 @@
 	margin-left: 1em; /* only for the search button */
 
 	&:focus {
-		color: var(--blue-900);
-		border-color: var(--blue-500);
-		background-color: var(--blue-50);
+		color: $blue-900;
+		border-color: $blue-500;
+		background-color: $blue-50;
 		outline: none;
 	}
 }

@@ -12,7 +12,7 @@ import ContentEditable from '../../../components/content-editable'
 import getActiveStudentCourses from '../../../helpers/get-active-student-courses'
 import countCredits from '../../../area-tools/count-credits'
 
-import './student-summary.css'
+import './student-summary.scss'
 
 const goodGraduationMessage =
 	`It looks like you'll make it! Just follow the plan, and go over my output

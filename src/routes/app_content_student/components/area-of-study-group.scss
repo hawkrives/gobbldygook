@@ -1,12 +1,12 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .area-of-study-group {
-	@apply --card;
+	@include card();
 	margin-top: 1em;
 
 	.area {
-		border-top: var(--material-divider);
+		border-top: $material-divider;
 	}
 
 	.area:last-child {
@@ -15,7 +15,7 @@
 }
 
 .area-type-heading {
-	@apply --heading-neutral;
+	@include heading-neutral();
 
 	font-size: 0.9em;
 	font-weight: normal;
@@ -32,12 +32,12 @@
 .add-area-of-study {
 	text-decoration: underline;
 
-	padding: 0.25em (var(--block-edge-padding) * 1.5);
+	padding: 0.25em ($block-edge-padding * 1.5);
 	margin-left: 0.5em;
 
 	text-transform: lowercase;
 
-	color: var(--gray-600);
+	color: $gray-600;
 	border: 0;
 
 	&:hover {

@@ -7,7 +7,7 @@ import fuzzysearch from 'fuzzysearch'
 import List from '../../../components/list'
 import StudentListItem from './student-list-item'
 
-import './student-list.css'
+import './student-list.scss'
 
 export default function StudentList(props) {
 	const {

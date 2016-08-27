@@ -1,6 +1,6 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
-@import './variables-expression.css';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+@import './variables-expression.scss';
 
 
 .requirement {
@@ -26,13 +26,13 @@
 }
 
 .requirement .requirement {
-	@include card;
+	@include card();
 }
 
 .override-button {
 	padding: 0.25em 0.5em;
 	margin-right: 0.25em;
-	color: var(--gray-500);
+	color: $gray-500;
 }
 
 .result {
@@ -47,14 +47,14 @@
 .requirement .requirement .requirement .message,
 .requirement .requirement .requirement .description,
 .requirement .requirement .requirement .filter {
-	padding-left: var(--area-edge-padding);
+	padding-left: $area-edge-padding;
 }
 
 .heading {
 	font-size: 1em;
 	font-weight: 500;
 
-	border-bottom: var(--material-divider);
+	border-bottom: $material-divider;
 	padding: 0.2em 0.15em 0.2em 0.25em;
 
 	display: flex;
@@ -79,7 +79,7 @@
 }
 
 .requirement.result-success > .heading {
-	background-color: var(--result-success-background);
+	background-color: $result-success-background;
 }
 
 .status {
@@ -90,7 +90,7 @@
 	}
 }
 .result-success > .heading .status {
-	color: var(--result-success-color);
+	color: $result-success-color;
 }
 
 .requirement .requirement .heading {
@@ -113,8 +113,8 @@
 .description {
 	margin-top: 0;
 	margin-bottom: 0;
-	padding-left: var(--area-edge-padding);
-	padding-right: var(--area-edge-padding);
+	padding-left: $area-edge-padding;
+	padding-right: $area-edge-padding;
 
 	font-feature-settings: 'onum';
 }
@@ -139,7 +139,7 @@
 
 	.button {
 		flex-grow: 1;
-		border: solid 1px var(--gray-500);
+		border: solid 1px $gray-500;
 
 		margin: 0 0.5em 0.5em;
 	}
@@ -185,6 +185,6 @@
 	padding: 0.2em 0.2em 0.2em 0;
 
 	&.result-success {
-		background-color: var(--result-success-background);
+		background-color: $result-success-background;
 	}
 }

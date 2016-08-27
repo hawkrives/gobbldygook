@@ -1,20 +1,20 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
-@import './variables.css';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+@import './variables.scss';
 
 .course-list {
 	min-height: 30px;
 	padding-bottom: 0.25em;
 
 	a {
-		@apply --link-undecorated;
+		@include link-undecorated();
 	}
 
 	&:focus {
 		outline: 0;
 	}
 
-	:global(.list-item):last-child {
+	.list-item:last-child {
 		border-bottom: 0;
 	}
 }
@@ -22,10 +22,10 @@
 
 .course-list .course {
 	display: block;
-	padding: var(--semester-padding);
+	padding: $semester-padding;
 
 	&:hover {
 		cursor: pointer;
-		background-color: var(--gray-100);
+		background-color: $gray-100;
 	}
 }

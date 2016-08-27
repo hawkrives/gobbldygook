@@ -8,7 +8,7 @@ import Separator from '../../../components/separator'
 import CodeMirror from 'react-codemirror'
 import 'codemirror/mode/yaml/yaml'
 
-import './area-editor.css'
+import './area-editor.scss'
 
 export default function AreaEditor(props) {
 	const options = {

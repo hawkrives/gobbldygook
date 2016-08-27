@@ -1,7 +1,7 @@
-@import 'src/styles/mixins.css';
+@import '../../../styles/mixins.scss';
 
 .student-list {
-	@apply --card;
+	@include card();
 	max-width: 35em;
 	width: 100%;
 	margin: 0 auto;

@@ -7,7 +7,7 @@ import { removeNotification } from '../redux/notifications/actions'
 
 import Notification from '../components/notification'
 
-import './notifications.css'
+import './notifications.scss'
 
 export const Notifications = ({notifications, removeNotification}) => (
 	<ul className='notification-list'>

@@ -1,13 +1,13 @@
-@import 'src/styles/variables.css';
+@import '../../../styles/variables.scss';
 
 .manual .autosize-input > input {
 	border: 0;
-	border-bottom: 1px solid var(--gray-400);
+	border-bottom: 1px solid $gray-400;
 	padding: 0 0.125em 0 0;
 
 	&:focus {
 		outline: 0;
-		background-color: var(--gray-50);
+		background-color: $gray-50;
 	}
 }
 

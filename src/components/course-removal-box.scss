@@ -1,14 +1,14 @@
-@import 'src/styles/variables.css';
+@import '../styles/variables.scss';
 
 .course-removal-box {
 	padding: 5em 1em;
-	color: var(--gray-500);
+	color: $gray-500;
 	background-color: white;
 	border-radius: 5px;
 
 	position: fixed;
-	top: calc(var(--page-edge-padding) * 2);
-	left: calc(var(--page-edge-padding) * 2);
+	top: $page-edge-padding * 2;
+	left: $page-edge-padding * 2;
 	max-width: 240px;
 
 	display: none;
@@ -17,12 +17,12 @@
 	&.can-drop {
 		color: black;
 		display: flex;
-		z-index: calc(var(--z-sidebar) + 1);
+		z-index: $z-sidebar + 1;
 	}
 
 	&.is-over {
-		box-shadow: 0 0 10px var(--red-900);
-		color: var(--red-900);
-		background-color: var(--red-50);
+		box-shadow: 0 0 10px $red-900;
+		color: $red-900;
+		background-color: $red-50;
 	}
 }

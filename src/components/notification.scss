@@ -1,5 +1,5 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../styles/variables.scss';
+@import '../styles/mixins.scss';
 
 .notification-capsule {
 	position: relative;
@@ -8,7 +8,7 @@
 	flex-flow: row nowrap;
 	align-items: center;
 
-	background: var(--black);
+	background: $black;
 	color: #f1f1f1;
 
 	font-size: 0.9em;
@@ -19,7 +19,7 @@
 
 	padding: 0.9em;
 
-	box-shadow: 0 2px 6px var(--gray-700);
+	box-shadow: 0 2px 6px $gray-700;
 	border-radius: 2px;
 
 	& + & {
@@ -42,12 +42,12 @@
 }
 
 .notification-type--error {
-	background: var(--red);
-	color: var(--white);
+	background: $red;
+	color: $white;
 
 	.close-notification:hover {
-		border-color: var(--red-900);
-		color: var(--red-900);
+		border-color: $red-900;
+		color: $red-900;
 	}
 }
 
@@ -61,12 +61,12 @@
 		flex: 1;
 		height: 10px;
 		overflow: hidden;
-		border: solid 1px var(--gray-300);
+		border: solid 1px $gray-300;
 		background-color: transparent;
-		color: var(--gray-300);
+		color: $gray-300;
 	}
 	output {
-		color: var(--gray-300);
+		color: $gray-300;
 		margin-left: 0.5em;
 		font-feature-settings: 'lnum';
 	}
@@ -77,7 +77,7 @@
 	padding: 2px 6px 1px;
 
 	&:hover {
-		background-color: color(var(--white) alpha(85%));
-		color: var(--black);
+		background-color: rgba($white, 85%);
+		color: $black;
 	}
 }

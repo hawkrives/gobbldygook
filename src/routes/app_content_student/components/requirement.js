@@ -10,7 +10,7 @@ import Expression from './expression'
 import Button from '../../../components/button'
 import ResultIndicator from './result-indicator'
 
-import './requirement.css'
+import './requirement.scss'
 
 // function getResultOfRequirement(requirements) {
 // 	return requirementTitle => requirements[requirementTitle].computed ? 'A' : 'B'

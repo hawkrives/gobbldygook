@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import ReactDumbModal from 'react-dumb-modal'
 
-import './modal.css'
+import './modal.scss'
 
 export default function Modal(props) {
 	return (

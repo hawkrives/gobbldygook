@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 
 import Modal from '../../../components/modal'
 import CourseSearcher from '../../../containers/course-searcher'
-import './course-searcher-overlay.css'
+import './course-searcher-overlay.scss'
 
 export default function CourseSearcherOverlay(props) {
 	const boundCloseModal = () => props.router.push({pathname: '/'})

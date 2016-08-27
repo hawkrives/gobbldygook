@@ -1,86 +1,84 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../styles/variables.scss';
+@import '../styles/mixins.scss';
 
-:root {
-	--button {
-		cursor: pointer;
+@mixin button() {
+	cursor: pointer;
 
-		min-height: 3ex;
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
+	min-height: 3ex;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
 
-		/* display: inline-flex collapses inline whitespace
-		 * white-space: pre brings it back, although it will
-		 * also show newlines, so be careful.
-		 */
-		white-space: pre;
+	/* display: inline-flex collapses inline whitespace
+	 * white-space: pre brings it back, although it will
+	 * also show newlines, so be careful.
+	 */
+	white-space: pre;
 
-		padding: 1ex 2em;
-		border: solid 1px transparent;
+	padding: 1ex 2em;
+	border: solid 1px transparent;
 
-		transition: all .2s ease-out;
-		border-radius: var(--base-border-radius);
-		line-height: normal;
+	transition: all .2s ease-out;
+	border-radius: $base-border-radius;
+	line-height: normal;
 
-		text-align: center;
-		text-transform: uppercase;
+	text-align: center;
+	text-transform: uppercase;
 
-		outline: 0;
-		color: currentColor;
+	outline: 0;
+	color: currentColor;
 
-		/* Turn off default button styles in webkit */
-		-webkit-appearance: initial !important; /* override normalize's html [type=button] */
-		/* Gets rid of tap active state */
-		-webkit-tap-highlight-color: transparent;
-	}
+	/* Turn off default button styles in webkit */
+	-webkit-appearance: initial !important; /* override normalize's html [type=button] */
+	/* Gets rid of tap active state */
+	-webkit-tap-highlight-color: transparent;
 }
 
 /* Raised Button */
 .button--raised {
-	@apply --button;
-	@apply --material-shadow;
+	@include button();
+	@include material-shadow();
 
-	background-color: var(--white);
+	background-color: $white;
 
 	&:hover {
-		background-color: var(--white);
+		background-color: $white;
 	}
 	&:focus {
-		background-color: var(--blue-50);
-		border-color: var(--blue-300);
+		background-color: $blue-50;
+		border-color: $blue-300;
 	}
 
 	&:active {
-		@apply --material-shadow;
-		background-color: var(--white);
+		@include material-shadow();
+		background-color: $white;
 	}
 
 	&[disabled] {
 		cursor: default;
-		color: var(--gray-500);
+		color: $gray-500;
 	}
 }
 
 /* Flat button */
 .button--flat {
-	@apply --button;
+	@include button();
 
 	background-color: transparent;
 
 	&:hover {
-		background-color: var(--gray-100);
-		border-color: var(--gray-400);
+		background-color: $gray-100;
+		border-color: $gray-400;
 	}
 
 	&:focus {
-		background-color: var(--blue-50);
-		border-color: var(--blue-300);
+		background-color: $blue-50;
+		border-color: $blue-300;
 	}
 
 	&:disabled {
 		cursor: default;
-		color: var(--disabled-foreground--light);
+		color: $disabled-foreground--light;
 
 		&:hover,
 		&:focus,
@@ -92,5 +90,5 @@
 }
 
 a.button {
-	@apply --link-undecorated;
+	@include link-undecorated();
 }

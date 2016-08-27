@@ -10,7 +10,7 @@ import Loading from '../../../components/loading'
 import CourseTable from '../../student_content_course-table/containers/course-table'
 import GraduationStatus from './graduation-status'
 
-import './student.css'
+import './student.scss'
 
 export class Student extends Component {
 	static propTypes = {

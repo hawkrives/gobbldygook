@@ -1,5 +1,5 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../styles/variables.scss';
+@import '../styles/mixins.scss';
 
 .course p,
 .course ul {
@@ -11,7 +11,7 @@
 
 	&:hover {
 		cursor: pointer;
-		background-color: var(--gray-100);
+		background-color: $gray-100;
 	}
 }
 
@@ -37,7 +37,7 @@
 }
 
 .gereqs {
-	@apply --list-inline;
+	@include list-inline();
 
 	display: inline;
 	li {
@@ -56,7 +56,7 @@
 	.list-item {
 		padding: 0.125em 0.35em;
 		border-radius: 0.25em;
-		background-color: var(--amber-500);
+		background-color: $amber-500;
 	}
 	.list-item::before {
 		margin-right: 0.35em;

@@ -10,7 +10,7 @@ import CourseResultsList from './course-results-list'
 
 import {SORT_BY, GROUP_BY} from './course-searcher-options'
 
-import './course-searcher.css'
+import './course-searcher.scss'
 
 export default function CourseSearcher(props) {
 	const {

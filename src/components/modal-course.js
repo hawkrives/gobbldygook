@@ -21,7 +21,7 @@ import { bindActionCreators } from 'redux'
 const { connect } = require('react-redux')
 import { addCourse, moveCourse, removeCourse } from '../redux/students/actions/courses'
 
-import './modal-course.css'
+import './modal-course.scss'
 
 function findSemesterList(student) {
 	let schedules = map(student.schedules, s => ({

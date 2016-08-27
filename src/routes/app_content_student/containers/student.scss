@@ -1,4 +1,4 @@
-@import 'src/styles/variables.css';
+@import '../../../styles/variables.scss';
 
 .student {
 	height: 100vh;
@@ -15,5 +15,5 @@
 .student > .content {
 	flex: 2;
 
-	margin-right: var(--page-edge-padding);
+	margin-right: $page-edge-padding;
 }

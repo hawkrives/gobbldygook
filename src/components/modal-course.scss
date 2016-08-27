@@ -1,5 +1,5 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../styles/variables.scss';
+@import '../styles/mixins.scss';
 
 .course--modal {
 	display: flex;
@@ -36,7 +36,7 @@
 	}
 
 	.tools {
-		border-top: var(--material-divider);
+		border-top: $material-divider;
 		margin-top: 0.5em;
 		padding-top: 0.5em;
 		display: flex;
@@ -46,17 +46,17 @@
 	}
 
 	.remove-course {
-		color: var(--red-500);
+		color: $red-500;
 		padding-left: 0.5em;
 		padding-right: 0.5em;
 		font-size: 0.85em;
 		&:hover {
-			background-color: var(--red-50);
-			border-color: var(--red-500);
+			background-color: $red-50;
+			border-color: $red-500;
 		}
 	}
 	.remove-course[disabled] {
-		color: var(--gray-500);
+		color: $gray-500;
 		&:hover {
 			background-color: transparent;
 			border-color: transparent;
@@ -73,7 +73,7 @@
 }
 
 .course--modal {
-	@apply --card;
+	@include card();
 
 	.info-wrapper,
 	.columns,

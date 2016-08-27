@@ -1,7 +1,7 @@
-@import 'src/styles/variables.css';
+@import '../../../styles/variables.scss';
 
 .empty-course {
-	color: var(--gray-500);
+	color: $gray-500;
 	user-select: none;
 
 	* {

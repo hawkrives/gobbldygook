@@ -1,12 +1,12 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .add-area {
-	padding: var(--area-edge-padding);
-	border-top: var(--material-divider);
+	padding: $area-edge-padding;
+	border-top: $material-divider;
 
 	& > .toolbar {
-		margin-bottom: var(--area-edge-padding);
+		margin-bottom: $area-edge-padding;
 	}
 }
 
@@ -18,13 +18,13 @@
 
 .add-area--filter {
 	flex: 1;
-	border: solid 1px var(--gray-300);
+	border: solid 1px $gray-300;
 	padding: 0.25em;
 	margin-bottom: 0.5em;
 
 	&:focus {
-		background-color: var(--blue-50);
-		border-color: var(--blue-500);
+		background-color: $blue-50;
+		border-color: $blue-500;
 		outline: 0;
 	}
 }

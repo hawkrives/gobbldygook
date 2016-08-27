@@ -1,6 +1,6 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
-@import './variables-expression.css';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+@import './variables-expression.scss';
 
 .expression {
 	display: inline-block;
@@ -30,9 +30,9 @@
 }
 
 .expression.fulfillment {
-	color: var(--orange-700) !important;
-	background-color: var(--orange-50) !important;
-	border-color: var(--orange-100) !important;
+	color: $orange-700 !important;
+	background-color: $orange-50 !important;
+	border-color: $orange-100 !important;
 }
 
 .expression--course.not-used {
@@ -49,7 +49,7 @@
 }
 
 .was-evaluated {
-	/* color: var(--blue-500) !important; */
+	/* color: $blue-500 !important; */
 }
 
 .result-indicator {
@@ -64,8 +64,8 @@
 	margin: 0.2em;
 
 	/* take 1: giant parentheses */
-	border-left: solid 2px var(--gray-400);
-	border-right: solid 2px var(--gray-400);
+	border-left: solid 2px $gray-400;
+	border-right: solid 2px $gray-400;
 
 	border-radius: .55em;
 }
@@ -85,14 +85,14 @@
 	}
 
 	&.evaluated.taken {
-		background-color: var(--result-success-background);
+		background-color: $result-success-background;
 	}
 	&.evaluated .result-indicator--success {
-		color: var(--result-success-color);
+		color: $result-success-color;
 	}
 
 	&.evaluated .result-indicator--failure {
-		color: var(--result-failure-color);
+		color: $result-failure-color;
 		font-weight: bold;
 	}
 }

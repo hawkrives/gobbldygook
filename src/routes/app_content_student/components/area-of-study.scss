@@ -1,9 +1,9 @@
-@import 'src/styles/variables.css';
+@import '../../../styles/variables.scss';
 
 .area {
 	&.errored {
-		background-color: var(--red-50);
-		color: var(--red-900);
+		background-color: $red-50;
+		color: $red-900;
 	}
 
 	&:not(.errored).loading {
@@ -13,10 +13,10 @@
 }
 
 .area .message {
-	padding-left: var(--area-edge-padding);
-	padding-right: var(--area-edge-padding);
+	padding-left: $area-edge-padding;
+	padding-right: $area-edge-padding;
 	margin: 0;
-	margin-bottom: var(--area-edge-padding);
+	margin-bottom: $area-edge-padding;
 }
 
 .area--error {
@@ -39,7 +39,7 @@
 	display: flex;
 	flex-flow: column nowrap;
 
-	padding: var(--area-edge-padding);
+	padding: $area-edge-padding;
 }
 
 .area--confirm-removal {
@@ -54,19 +54,19 @@
 }
 
 .area--actually-remove-area {
-	color: var(--red-500);
+	color: $red-500);
 	&:hover, &:focus {
-		background-color: transparentize(var(--red-50), 0.2);
+		background-color: transparentize($red-50, 0.2);
 	}
 	&:active {
-		background-color: transparentize(var(--red-50), 0.4);
+		background-color: transparentize($red-50, 0.4);
 	}
 }
 
 .area--summary:focus {
-	outline: 1px solid var(--blue-500);
-	color: var(--blue-900);
-	background-color: var(--blue-50);
+	outline: 1px solid $blue-500;
+	color: $blue-900;
+	background-color: $blue-50;
 }
 
 .area--title {
@@ -111,6 +111,6 @@
 	}
 
 	&.error {
-		color: var(--red-100);
+		color: $red-100;
 	}
 }

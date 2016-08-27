@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 
-import './icon.css'
+import './icon.scss'
 
 export default function Icon(props) {
 	return (

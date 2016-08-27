@@ -1,6 +1,6 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
-@import './variables.css';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+@import './variables.scss';
 
 
 .semester-list {
@@ -9,27 +9,27 @@
 	flex-flow: row wrap;
 }
 .semester {
-	@apply --card;
+	@include card();
 	flex: 1 0;
 	min-width: 16em;
-	margin: var(--semester-spacing);
+	margin: $semester-spacing;
 }
 
 .semester.can-drop {
 	cursor: copy;
-	box-shadow: 0 0 4px var(--gray-500);
+	box-shadow: 0 0 4px $gray-500;
 	z-index: 10;
 }
 
 .semester-remove:hover {
-	color: var(--red-500);
-	border-color: var(--red-500);
-	background-color: var(--red-50);
+	color: $red-500;
+	border-color: $red-500;
+	background-color: $red-50;
 }
 
 
 .semester-title {
-	border-bottom: var(--material-divider);
+	border-bottom: $material-divider;
 
 	font-size: 0.85em;
 
@@ -39,13 +39,13 @@
 	font-feature-settings: 'smcp';
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
-	color: var(--gray-500);
+	color: $gray-500;
 
 	overflow: hidden;
 }
 
 .semester-title .button {
-	padding: var(--semester-padding);
+	padding: $semester-padding;
 
 	min-height: 0;
 	font-size: 0.9em;
@@ -61,17 +61,17 @@
 
 
 .semester-header {
-	@apply --link-undecorated;
+	@include link-undecorated();
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 
-	padding-top: var(--semester-top-padding);
-	padding-left: var(--semester-side-padding);
-	padding-bottom: var(--semester-top-padding);
+	padding-top: $semester-top-padding;
+	padding-left: $semester-side-padding;
+	padding-bottom: $semester-top-padding;
 
 	h1 {
-		@apply --heading-neutral;
+		@include heading-neutral();
 		display: inline-block;
 		color: black;
 	}

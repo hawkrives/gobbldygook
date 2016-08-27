@@ -1,12 +1,12 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .student-list-item {
-    @apply --link-undecorated;
+    @include link-undecorated();
 
 	background-color: white;
 	&.is-selected {
-		background-color: var(--blue-50);
+		background-color: $blue-50;
 	}
 
 	flex: 1;
@@ -22,14 +22,14 @@
 }
 
 .student-list-item-container + .student-list-item-container {
-	border-top: var(--material-divider);
+	border-top: $material-divider;
 }
 
 .student-list-item:hover,
 .student-list-item:focus {
 	outline: none;
-	background-color: var(--blue-50);
-	border-color: var(--blue;)
+	background-color: $blue-50;
+	border-color: $blue)
 }
 
 .student-list-item-info {
@@ -42,15 +42,15 @@
 }
 
 .student-list-item-container.loading {
-	border-left-color: var(--blue-300);
+	border-left-color: $blue-300;
 }
 
 .student-list-item-container.can-graduate {
-	border-left-color: var(--green-300);
+	border-left-color: $green-300;
 }
 
 .student-list-item-container.cannot-graduate {
-	border-left-color: var(--red-300);
+	border-left-color: $red-300;
 }
 
 
@@ -101,6 +101,6 @@
 
 .student-list-item-container .delete:hover {
 	color: white;
-	border-color: var(--red-900);
-	background-color: var(--red-500);
+	border-color: $red-900;
+	background-color: $red-500;
 }

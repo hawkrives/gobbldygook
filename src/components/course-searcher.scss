@@ -1,9 +1,9 @@
-@import 'src/styles/variables.css';
-@import 'src/styles/mixins.css';
+@import '../styles/variables.scss';
+@import '../styles/mixins.scss';
 
 .course-search {
 	.course-group {
-		@apply --card;
+		@include card();
 		padding: 0.5em;
 
 		margin-top: 1em;
@@ -11,7 +11,7 @@
 
 	.term-list,
 	.course-list {
-		@apply --list-unstyled;
+		@include list-unstyled();
 	}
 
 	.course-list > li + li {
@@ -22,7 +22,7 @@
 	.no-results {
 		margin-top: 1em;
 		text-align: center;
-		color: var(--gray-500);
+		color: $gray-500;
 		font-size: 0.9em;
 	}
 
@@ -38,7 +38,7 @@
 
 .search-box {
 	border: 0;
-	border-bottom: var(--material-divider);
+	border-bottom: $material-divider;
 
 	flex: 1;
 	box-sizing: inherit;
@@ -51,13 +51,13 @@
 		outline: none;
 	}
 	&:hover {
-		background-color: var(--gray-100);
+		background-color: $gray-100;
 	}
 	&:focus {
-		background-color: var(--blue-50);
-		color: var(--blue-900);
+		background-color: $blue-50;
+		color: $blue-900;
 		&::-webkit-input-placeholder {
-			color: color(var(--light-blue-300) saturation(-75%));
+			color: desaturate($light-blue-300, 75%);
 		}
 	}
 }
@@ -66,7 +66,7 @@
 	border: 0;
 	border-radius: 0;
 
-	color: var(--gray);
+	color: $gray;
 	transition: 0.15s;
 }
 
@@ -83,11 +83,11 @@
 }
 .submit-search-query:hover,
 .submit-search-query:focus {
-	color: var(--green);
-	background-color: var(--green-50);
+	color: $green;
+	background-color: $green-50;
 }
 .submit-search-query:disabled {
-	color: var(--gray);
+	color: $gray;
 	background-color: white;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .search-filters {
-	border-top: var(--material-divider);
+	border-top: $material-divider;
 	padding: 0.35em 1em 0.75em;
 
 	display: flex;

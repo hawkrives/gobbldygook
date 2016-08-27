@@ -164,38 +164,6 @@ const config = {
 		],
 	},
 
-	postcss: (webpack) => ([
-		require('postcss-import')({
-			addDependencyTo: webpack,
-			resolve(id, base) {
-				// this funciton changes the @import resolution to match require().
-				// that is, if a path begins with ".", it is a relative path.
-				// otherwise, it attempts to look up the path in webpack's list of aliases.
-				// if it doesn't exist, it's still a relative path.
-				let firstLevel = id.split('/')[0]
-				let remaining = id.split('/').slice(1)
-				let isAliasedDir = Object.keys(config.resolve.alias).includes(firstLevel)
-
-				let wholePath = ['/']
-					.concat(config.resolve.alias[firstLevel].split('/'))
-					.concat(remaining)
-				let newpath = isAliasedDir
-					? path.join.apply(null, wholePath)
-					: path.join(base, id)
-
-				newpath = newpath.replace(__dirname, '').substr(1)
-
-				return newpath
-			},
-		}),
-		require('postcss-apply'),
-		require('postcss-mixins'),
-		require('postcss-cssnext')({
-			browsers: ['last 2 versions', 'Firefox ESR'],
-		}),
-		require('postcss-reporter'),
-	]),
-
 	worker: {
 		output: {
 			filename: '[hash].worker.js',
@@ -227,14 +195,22 @@ if (isDevelopment) {
 	let identName = '[path][name]·[local]·[hash:base64:5]'
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: `style-loader!css-loader?importLoaders=1&localIdentName=${identName}!postcss-loader`,
+		loader: `style-loader!css-loader`,
+	})
+	config.module.loaders.push({
+		test: /\.scss$/,
+		loader: `style-loader!css-loader!sass-loader`,
 	})
 }
 
 else if (isTest) {
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: 'style-loader!css-loader?importLoaders=1!postcss-loader',
+		loader: 'style-loader!css-loader',
+	})
+	config.module.loaders.push({
+		test: /\.scss$/,
+		loader: 'style-loader!css-loader!sass-loader',
 	})
 }
 
@@ -262,7 +238,11 @@ else if (isProduction) {
 
 	config.module.loaders.push({
 		test: /\.css$/,
-		loader: extractor.extract('style-loader', 'css-loader?-import&importLoaders=1!postcss-loader'),
+		loader: extractor.extract('style-loader', 'css-loader'),
+	})
+	config.module.loaders.push({
+		test: /\.scss$/,
+		loader: extractor.extract('style-loader', 'css-loader', 'sass-loader'),
 	})
 }
 
