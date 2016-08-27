@@ -25,3 +25,5 @@ rmdir build/
 git add --all ./
 git commit -m "build app" --quiet
 git push -f "https://github.com/hawkrives/gobbldygook.git" gh-pages
+
+git checkout master
