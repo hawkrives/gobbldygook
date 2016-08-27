@@ -15,8 +15,9 @@ export default {
 					require('./app_content_areas').default,  // edit-area
 					require('./app_overlay_search').default,  // search
 					require('./app_content_degub').default,  // debug
-					require('./app_content_new-student').default,
+					require('./app_content_new-student').default, // create
 					require('./app_content_student').default, // s/:id
+					require('./not_found').default, // anything else
 				])
 			}, 'app.routes')
 		},
