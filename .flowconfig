@@ -3,10 +3,20 @@
 
 
 [ignore]
+; i don't even know why it checks json files
 .*\.json
 
+; stuffs
 .*/node_modules/fbjs
 .*/node_modules/.*/node_modules/fbjs
+
+; ignore local stuff for when we run `flow server --all`
+./bin/
+./build/
+./config/
+./playground/
+./scripts/
+./test/
 
 
 [libs]
@@ -19,8 +29,13 @@
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
 
-module.name_mapper='^\(.*\)\.css$' -> '<PROJECT_ROOT>/config/flow/css'
-module.name_mapper='^\(.*\)\.scss$' -> '<PROJECT_ROOT>/config/flow/css'
+; this might also need to become `./` so that require('src/something') will
+; actually find the src directory. needs testing.
+module.system.node.resolve_dirname=src
+
+; these allow require'ing non-js files (like webpack does)
+module.name_mapper.extension='css' -> '<PROJECT_ROOT>/config/flow/css'
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/config/flow/css'
 module.name_mapper='^\(.*\)\.\(jpg\|png\|gif\|eot\|otf\|webp\|svg\|ttf\|woff\|woff2\|mp4\|webm\)$' -> '<PROJECT_ROOT>/config/flow/file'
 
 suppress_type=$FlowIssue
