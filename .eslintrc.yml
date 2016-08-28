@@ -26,6 +26,7 @@ globals:
   PRODUCTION: false
   TESTING: false
   APP_BASE: false
+  GOOGLE_APP_ID: false
   debug: false
 
 rules:

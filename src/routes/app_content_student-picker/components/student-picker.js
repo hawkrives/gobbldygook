@@ -6,6 +6,7 @@ import Toolbar from '../../../components/toolbar'
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
 import StudentList from './student-list'
+import GoogleLogin from 'react-google-login'
 
 import './student-picker.scss'
 
@@ -13,6 +14,10 @@ let sortByExpanded = {
 	dateLastModified: 'date last modified',
 	name: 'name',
 	canGraduate: 'can graduate',
+}
+
+function googleLogin(...args) {
+	console.log(...args)
 }
 
 export default function StudentPicker(props) {
@@ -76,16 +81,30 @@ export default function StudentPicker(props) {
 					<span>Sorting by <b>{sortByExpanded[sortBy]}</b> (a-z);</span>{' '}
 					<span>grouping by <b>{groupBy}</b>.</span>
 				</div>
+
+				<GoogleLogin
+					clientId={GOOGLE_APP_ID}
+					buttonText='Login'
+					callback={googleLogin}
+				/>
 			</div>
 
-			{size(students) > 0 ? <StudentList
-				destroyStudent={destroyStudent}
-				filter={filterText}
-				isEditing={isEditing}
-				sortBy={sortBy}
-				groupBy={groupBy}
-				students={students}
-			/> : <Button className='make-student' link type='raised' to='/create'>Add a Student</Button>}
+			{size(students) > 0
+				? <StudentList
+					destroyStudent={destroyStudent}
+					filter={filterText}
+					isEditing={isEditing}
+					sortBy={sortBy}
+					groupBy={groupBy}
+					students={students}
+				/>
+				: <Button
+					className='make-student'
+					link type='raised'
+					to='/create'
+				>
+					Add a Student
+				</Button>}
 		</div>
 	)
 }
