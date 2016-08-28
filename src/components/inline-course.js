@@ -1,3 +1,4 @@
+// @flow
 import React, {Component, PropTypes} from 'react'
 import {DragSource} from 'react-dnd'
 import cx from 'classnames'
@@ -31,6 +32,16 @@ class InlineCourse extends Component {
 	static defaultProps = {
 		conflicts: [],
 	};
+	props: {
+		className?: string,
+		conflicts?: Object[],
+		connectDragSource: () => any,
+		course: Object,
+		index?: number,
+		isDragging: bool,
+		scheduleId?: string,
+		studentId?: string,
+	}
 
 	state = {
 		isOpen: false,
