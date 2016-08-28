@@ -31,8 +31,8 @@ const config = {
 
 	entry: {
 		main: './src/index.js',
-		common: './src/common.js',
-		react: './src/react.js',
+		common: ['bluebird', 'dnd-core', 'isomorphic-fetch', 'redux', 'ohcrash', 'js-yaml'],
+		react: ['react', 'react-dnd', 'react-redux', 'react-router', 'react-side-effect', 'react-modal'],
 	},
 
 	output: {

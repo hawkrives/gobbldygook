@@ -1,7 +1,0 @@
-import 'bluebird'
-import 'dnd-core'
-import 'isomorphic-fetch'
-import 'ohcrash'
-import 'redux'
-import 'svgxuse'
-import 'js-yaml'

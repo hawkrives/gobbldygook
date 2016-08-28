@@ -1,6 +1,0 @@
-import 'react'
-import 'react-dnd'
-import 'react-redux'
-import 'react-router'
-import 'react-side-effect'
-import 'react-modal'
