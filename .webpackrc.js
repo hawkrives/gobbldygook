@@ -237,7 +237,13 @@ else if (isProduction) {
 				screw_ie8: true, // eslint-disable-line camelcase
 				unsafe: true,
 			},
-			output: { comments: false },
+			mangle: {
+				screw_ie8: true, // eslint-disable-line camelcase
+			},
+			output: {
+				comments: false,
+				screw_ie8: true, // eslint-disable-line camelcase
+			},
 		}),
 		extractor,
 	])
