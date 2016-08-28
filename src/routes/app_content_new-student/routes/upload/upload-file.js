@@ -6,6 +6,7 @@ import List from '../../../../components/list'
 import StudentSummary from '../../../../routes/app_content_student/components/student-summary'
 import { initStudent } from '../../../../redux/students/actions/init-student'
 import withRouter from 'react-router/lib/withRouter'
+import { connect } from 'react-redux'
 
 import './upload-file.scss'
 
@@ -114,4 +115,6 @@ class UploadFileScreen extends Component {
 	}
 }
 
-export default withRouter(UploadFileScreen)
+let mapDispatch = dispatch => ({dispatch})
+
+export default connect(undefined, mapDispatch)(withRouter(UploadFileScreen))
