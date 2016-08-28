@@ -9,7 +9,7 @@ const url = require('url')
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
 const DedupePlugin = webpack.optimize.DedupePlugin
 const DefinePlugin = webpack.DefinePlugin
-// const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
+const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
 const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
 const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
@@ -43,7 +43,7 @@ const config = {
 	stats: {},
 
 	entry: {
-		main: './src/index.js',
+		main: ['./src/index.js'],
 		common: ['bluebird', 'dnd-core', 'isomorphic-fetch', 'redux', 'ohcrash', 'js-yaml'],
 		react: ['react', 'react-dnd', 'react-redux', 'react-router', 'react-side-effect', 'react-modal'],
 	},
@@ -75,10 +75,9 @@ const config = {
 			index: publicPath,
 		},
 
-		// For some reason simply setting this doesn't seem to be enough, which
-		// is why we also do the manual entry above and the manual adding of
-		// the hot module replacment plugin below.
-		// hot: true,
+		// We also do the manual entry above and the manual adding of the hot
+		// module replacment plugin below.
+		hot: true,
 	},
 
 	node: {
@@ -216,17 +215,17 @@ if (isDevelopment) {
 	config.devtool = 'eval'
 
 	// add dev server and hotloading clientside code
-	// config.entry.unshift(
-	// 	'react-hot-loader/patch',
-	// 	`webpack-dev-server/client?http://${config.hostname}:${config.port}`,
-	// 	'webpack/hot/only-dev-server'
-	// )
+	config.entry.main.unshift(
+		// 'react-hot-loader/patch',
+		'webpack-dev-server/client?/',
+		'webpack/hot/only-dev-server'
+	)
 
 	config.devServer.port = config.port
 	config.devServer.host = config.hostname
 
 	// add dev plugins
-	// config.plugins.push(new HotModuleReplacementPlugin())
+	config.plugins.push(new HotModuleReplacementPlugin())
 
 	// Add style loaders
 	let extractor = new ExtractTextPlugin(config.output.cssFilename, {allChunks: true})
