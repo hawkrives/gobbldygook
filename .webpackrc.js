@@ -131,7 +131,7 @@ const config = {
 						</script>
 						<!-- End Single Page Apps for GitHub Pages -->
 
-						${context.css && `<link rel="stylesheet" href="${publicPath}${context.css}">`}
+						${context.css ? `<link rel="stylesheet" href="${publicPath}${context.css}">` : ''}
 						<body><main id="gobbldygook"></main></body>
 						<script src="${publicPath}${context.common}"></script>
 						<script src="${publicPath}${context.react}"></script>
