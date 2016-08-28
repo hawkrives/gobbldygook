@@ -4,6 +4,7 @@
 const pkg = require('./package.json')
 const webpack = require('webpack')
 const path = require('path')
+const url = require('url')
 
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
 const DedupePlugin = webpack.optimize.DedupePlugin
@@ -21,7 +22,19 @@ const isTest = (process.env.NODE_ENV === 'test')
 
 const outputFolder = 'build/'
 const urlLoaderLimit = 10000
-const publicPath = isDevelopment ? '/' : '/gobbldygook/'
+const publicPath = '/'
+if (isDevelopment) {
+	// We use "homepage" field to infer "public path" at which the app is served.
+	// Webpack needs to know it to put the right <script> hrefs into HTML even in
+	// single-page apps that may serve index.html for nested URLs like /todos/42.
+	// We can't use a relative path in HTML because we don't want to load something
+	// like /todos/42/static/js/bundle.7289d.js. We have to know the root.
+	publicPath = pkg.homepage ? url.parse(pkg.homepage).pathname : '/'
+	if (!publicPath.endsWith('/')) {
+		// If we don't do this, file assets will get incorrect paths.
+		publicPath += '/'
+	}
+}
 
 const config = {
 	replace: null,

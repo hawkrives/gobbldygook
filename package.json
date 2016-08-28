@@ -2,6 +2,7 @@
   "name": "gobbldygook",
   "version": "3.0.0-beta6",
   "description": "A course scheduling app for St. Olaf College",
+  "homepage": "https://hawkrives.github.io/gobbldygook/",
   "main": "src/index.js",
   "private": true,
   "repository": "hawkrives/gobbldygook",
