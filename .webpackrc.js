@@ -234,14 +234,12 @@ if (isDevelopment) {
 	config.plugins.push(new HotModuleReplacementPlugin())
 
 	// Add style loaders
-	let extractor = new ExtractTextPlugin(config.output.cssFilename, {allChunks: true})
-	config.plugins = config.plugins.concat([extractor])
-	config.module.loaders.push({test: /\.css$/, loader: extractor.extract('style', ['css'])})
-	config.module.loaders.push({test: /\.scss$/, loader: extractor.extract('style', ['css!sass'])})
+	config.module.loaders.push({test: /\.css$/, loaders: ['style', 'css']})
+	config.module.loaders.push({test: /\.scss$/, loaders: ['style', 'css', 'sass']})
 
 	let identName = '[path][name]·[local]·[hash:base64:5]'
-	config.module.loaders.push({test: /\.module.css$/, loader: extractor.extract('style', [`css?modules&localIdentName=${identName}`])})
-	config.module.loaders.push({test: /\.module.scss$/, loader: extractor.extract('style', [`css?modules&localIdentName=${identName}!sass`])})
+	config.module.loaders.push({test: /\.module.css$/, loaders: ['style', `css?modules&localIdentName=${identName}`]})
+	config.module.loaders.push({test: /\.module.scss$/, loaders: ['style', `css?modules&localIdentName=${identName}', 'sass`]})
 }
 
 else if (isTest) {
