@@ -50,6 +50,7 @@ class InlineCourse extends Component {
 	shouldComponentUpdate(nextProps, nextState) {
 		return (
 			this.props.course !== nextProps.course ||
+			this.props.conflicts !== nextProps.conflicts ||
 			this.state.isOpen !== nextState.isOpen ||
 			this.props.isDragging !== nextProps.isDragging
 		)
