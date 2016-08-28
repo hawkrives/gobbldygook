@@ -54,12 +54,17 @@
 	padding-bottom: 2px;
 
 	.list-item {
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+
 		padding: 0.125em 0.35em;
 		border-radius: 0.25em;
-		background-color: $amber-500;
-	}
-	.list-item::before {
-		margin-right: 0.35em;
+		background-color: $amber-200;
+
+		.icon {
+			margin-right: 0.35em;
+		}
 	}
 }
 
