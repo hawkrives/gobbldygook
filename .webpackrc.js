@@ -21,6 +21,7 @@ const isProduction = (process.env.NODE_ENV === 'production')
 const isDevelopment = (process.env.NODE_ENV === 'development')
 const isTest = (process.env.NODE_ENV === 'test')
 
+const GOOGLE_APP_ID = '418758265800-m6c5f81nneo3q0ncige9d5bft66nhk1a.apps.googleusercontent.com'
 const outputFolder = 'build/'
 const urlLoaderLimit = 10000
 let publicPath = '/'
@@ -131,8 +132,6 @@ const config = {
 						</script>
 						<!-- End Single Page Apps for GitHub Pages -->
 
-						<script src="https://apis.google.com/js/platform.js" async defer></script>
-
 						${context.css && `<link rel="stylesheet" href="${publicPath}${context.css}">`}
 						<body><main id="gobbldygook"></main></body>
 						<script src="${publicPath}${context.common}"></script>
@@ -161,7 +160,7 @@ const config = {
 			// APP_BASE is used in react-router, to set its base appropriately
 			// across both local dev and gh-pages.
 			APP_BASE: JSON.stringify(publicPath),
-			GOOGLE_APP_ID: JSON.stringify('418758265800-m6c5f81nneo3q0ncige9d5bft66nhk1a.apps.googleusercontent.com'),
+			GOOGLE_APP_ID: JSON.stringify(GOOGLE_APP_ID),
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 

@@ -24,6 +24,8 @@ if (DEVELOPMENT) {
 // Include google analytics (in production)
 import startAnalytics from './analytics'
 startAnalytics()
+import startGooglePlatform from './google-platform'
+startGooglePlatform()
 
 // Kick off data loading
 import loadData from './helpers/load-data'

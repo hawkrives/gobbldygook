@@ -6,7 +6,8 @@ import Toolbar from '../../../components/toolbar'
 import Button from '../../../components/button'
 import Icon from '../../../components/icon'
 import StudentList from './student-list'
-import GoogleLogin from 'react-google-login'
+import GoogleLogin from 'src/components/google-signin-button'
+import {auth} from 'src/google-platform'
 
 import './student-picker.scss'
 
@@ -16,8 +17,19 @@ let sortByExpanded = {
 	canGraduate: 'can graduate',
 }
 
-function googleLogin(...args) {
-	console.log(...args)
+function googleLogin() {
+	if (auth().isSignedIn.get()) {
+		let profile = auth().currentUser.get().getBasicProfile()
+		console.log('ID:', profile.getId())
+		console.log('Full Name:', profile.getName())
+		console.log('Given Name:', profile.getGivenName())
+		console.log('Family Name:', profile.getFamilyName())
+		console.log('Image URL:', profile.getImageUrl())
+		console.log('Email:', profile.getEmail())
+	}
+	else {
+		console.warn('not logged in!')
+	}
 }
 
 export default function StudentPicker(props) {
@@ -82,11 +94,7 @@ export default function StudentPicker(props) {
 					<span>grouping by <b>{groupBy}</b>.</span>
 				</div>
 
-				<GoogleLogin
-					clientId={GOOGLE_APP_ID}
-					buttonText='Login'
-					callback={googleLogin}
-				/>
+				<GoogleLogin callback={googleLogin}>Login</GoogleLogin>
 			</div>
 
 			{size(students) > 0
