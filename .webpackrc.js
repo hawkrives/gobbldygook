@@ -24,7 +24,7 @@ const isTest = (process.env.NODE_ENV === 'test')
 const outputFolder = 'build/'
 const urlLoaderLimit = 10000
 let publicPath = '/'
-if (isDevelopment) {
+if (isProduction) {
 	// We use "homepage" field to infer "public path" at which the app is served.
 	// Webpack needs to know it to put the right <script> hrefs into HTML even in
 	// single-page apps that may serve index.html for nested URLs like /todos/42.
