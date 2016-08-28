@@ -86,7 +86,7 @@ const config = {
 	},
 
 	resolve: {
-		extensions: ['', '.js', '.json'],
+		extensions: ['.js', '.json', ''],
 		// Allow us to require things from src/ instead of using giant
 		// relative paths everywhere. And, thanks to babel-plugin-webpack-alias,
 		// we can use these aliases in testing, too!
