@@ -20,5 +20,10 @@
 				"transform-inline-environment-variables",
 			],
 		},
+		"test": {
+			"plugins": [
+				[ "webpack-alias", { "config": "./.webpackrc.js" } ]
+			]
+		}
 	},
 }
