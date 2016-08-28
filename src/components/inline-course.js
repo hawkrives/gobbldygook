@@ -29,9 +29,6 @@ class InlineCourse extends Component {
 		studentId: PropTypes.string,
 	};
 
-	static defaultProps = {
-		conflicts: [],
-	};
 	props: {
 		className?: string,
 		conflicts?: Object[],
@@ -50,6 +47,7 @@ class InlineCourse extends Component {
 	shouldComponentUpdate(nextProps, nextState) {
 		return (
 			this.props.course !== nextProps.course ||
+			this.props.conflicts !== nextProps.conflicts ||
 			this.state.isOpen !== nextState.isOpen ||
 			this.props.isDragging !== nextProps.isDragging
 		)
@@ -64,13 +62,13 @@ class InlineCourse extends Component {
 	};
 
 	render() {
-		const { course, conflicts, index, scheduleId, studentId } = this.props
+		const { course, conflicts=[], index, scheduleId, studentId } = this.props
 		const warnings = conflicts[index || 0]
 		const hasWarnings = compact(warnings).length
 
 		const validWarnings = filter(warnings, w => !isNull(w) && w.warning === true)
-		const warningEls = map(validWarnings, (w, index) =>
-			<li key={index}><Icon>{w.icon}</Icon> {w.msg}</li>)
+		const warningEls = map(validWarnings, (w, idx) =>
+			<li key={idx}><Icon>{w.icon}</Icon> {w.msg}</li>)
 
 		let classSet = cx(this.props.className, 'course', {
 			'expanded': this.state.isOpen,

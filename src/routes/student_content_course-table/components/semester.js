@@ -21,7 +21,7 @@ function Semester(props) {
 	let courseList = null
 
 	const { studentId, semester, year, canDrop, schedule } = props
-	const { courses, validation } = schedule
+	const { courses, conflicts, hasConflict } = schedule
 
 	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
 	const recommendedCredits = (semester === 1 || semester === 3) ? 4 : 1
@@ -42,12 +42,12 @@ function Semester(props) {
 			availableCredits={recommendedCredits}
 			studentId={studentId}
 			schedule={schedule}
-			conflicts={validation ? validation.conflicts : []}
+			conflicts={conflicts || []}
 		/>
 	}
 
 	const className = cx('semester', {
-		invalid: validation ? validation.hasConflict : false,
+		invalid: hasConflict,
 		'can-drop': canDrop,
 	})
 
