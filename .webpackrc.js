@@ -63,10 +63,14 @@ const config = {
 	},
 
 	devServer: {
-		// If these are enabled historyApiFallback doesn't work
+		// If these are enabled, then historyApiFallback doesn't work.
 		// info: false,
 		// stats: 'errors-only',
 		contentBase: outputFolder,
+
+		// Makes webpack serve /index.html as the response to any request to
+		// webpack-dev-server, so GET / and GET /s/1234 both get the index
+		// page.
 		historyApiFallback: {
 			index: publicPath,
 		},
@@ -84,12 +88,16 @@ const config = {
 
 	resolve: {
 		extensions: ['', '.js', '.json'],
+		// Allow us to require things from src/ instead of using giant
+		// relative paths everywhere. And, thanks to babel-plugin-webpack-alias,
+		// we can use these aliases in testing, too!
 		alias: {
 			src: path.resolve(__dirname, 'src'),
 		},
 	},
 
 	plugins: [
+		// Generates an index.html for us.
 		new HtmlPlugin({
 			html(context) {
 				return {
@@ -142,15 +150,20 @@ const config = {
 			result.request = result.request.replace('default_full', 'default_safe')
 		}),
 
+		// DefinePlugin makes some variables available to the code.
 		new DefinePlugin({
 			VERSION: JSON.stringify(pkg.version),
 			DEVELOPMENT: isDevelopment,
 			PRODUCTION: isProduction,
 			TESTING: isTest,
+			// APP_BASE is used in react-router, to set its base appropriately
+			// across both local dev and gh-pages.
 			APP_BASE: JSON.stringify(publicPath),
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 
+		// Extract the common libraries into a single file so that the chunks
+		// don't need to individually bundle them.
 		new CommonsChunkPlugin({
 			names: ['react', 'common'],
 			filename: '[name].[hash].js',
