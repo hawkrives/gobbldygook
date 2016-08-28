@@ -67,8 +67,8 @@ class InlineCourse extends Component {
 		const hasWarnings = compact(warnings).length
 
 		const validWarnings = filter(warnings, w => !isNull(w) && w.warning === true)
-		const warningEls = map(validWarnings, (w, index) =>
-			<li key={index}><Icon>{w.icon}</Icon> {w.msg}</li>)
+		const warningEls = map(validWarnings, (w, idx) =>
+			<li key={idx}><Icon>{w.icon}</Icon> {w.msg}</li>)
 
 		let classSet = cx(this.props.className, 'course', {
 			'expanded': this.state.isOpen,
