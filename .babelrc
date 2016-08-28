@@ -12,15 +12,7 @@
 		"transform-object-rest-spread",
 		"transform-react-display-name",
 		"external-helpers",
-		// function* () { yield 42; yield 43; }
-		// async functions are converted by the `latest` preset
-		["transform-regenerator", {"async": false}],
-		// Polyfills the runtime needed for async/await and generators
-		["babel-plugin-transform-runtime", {
-			"helpers": false,
-			"polyfill": false,
-			"regenerator": true,
-		}],
+		"transform-runtime",
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		"lodash",
