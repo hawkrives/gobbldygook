@@ -1,10 +1,11 @@
+// @flow
 import React, {PropTypes} from 'react'
 import Link from 'react-router/lib/Link'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
-import List from '../../../components/list'
+import List from 'src/components/list'
 
-export default function AreaList(props) {
+export default function AreaList(props: {areas: Object[]}) {
 	const areas = sortBy(props.areas, 'type', 'name', 'revision')
 	return (
 		<List type='bullet'>
