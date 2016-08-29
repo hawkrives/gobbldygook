@@ -6,7 +6,6 @@
 *.sublime-workspace
 playground/data
 playground/parse-sis.js
-area-data/area-data
 stats.json
 .eslintcache
 .vscode/

@@ -1,3 +1,2 @@
 node_modules/
-*.min.js
 src/area-tools/parse-hanson-string.js
