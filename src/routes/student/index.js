@@ -8,13 +8,11 @@ export default {
 	},
 
 	getChildRoutes(state, cb) {
-		require.ensure([], () => {
-			cb(null, [
-				require('./routes/share').default, // share, overlay
-				require('./routes/search').default, // search, sidebar
-				require('./routes/semester-detail').default, // :year/:term, content
-			])
-		}, 'student.routes')
+		cb(null, [
+			require('./routes/share').default, // share, overlay
+			require('./routes/search').default, // search, sidebar
+			require('./routes/semester-detail').default, // :year/:term, content
+		])
 	},
 
 	getComponents(location, cb) {
