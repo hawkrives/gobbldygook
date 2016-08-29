@@ -1,0 +1,28 @@
+{
+  "name": "gobbldygook-tools",
+  "version": "3.0.0-beta6",
+  "description": "Tools for Gobbldygook",
+  "homepage": "https://hawkrives.github.io/gobbldygook/",
+  "bin": {},
+  "private": true,
+  "repository": "hawkrives/gobbldygook",
+  "author": "Hawken MacKay Rives",
+  "license": "MIT",
+  "dependencies": {
+    "appdirs": "1.0.0",
+    "chalk": "1.1.3",
+    "get-stdin": "5.0.1",
+    "glob": "7.0.6",
+    "graceful-fs": "4.1.6",
+    "js-yaml": "3.6.1",
+    "junk": "2.0.0",
+    "mkdirp": "0.5.1",
+    "node-fetch": "1.6.0",
+    "nomnom": "1.8.1",
+    "plur": "2.1.2",
+    "pretty-ms": "2.1.0",
+    "sparkly": "3.1.2",
+    "stabilize": "1.0.0",
+    "text-table": "0.2.0"
+  }
+}
