@@ -1,0 +1,19 @@
+@import 'src/styles/variables.scss';
+
+.student {
+	height: 100vh;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+
+	@media all and (max-width: 30em) {
+		flex-flow: column nowrap;
+	}
+}
+
+.student > .content {
+	flex: 2;
+
+	margin-right: $page-edge-padding;
+}

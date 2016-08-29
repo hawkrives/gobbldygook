@@ -1,0 +1,42 @@
+@import 'src/styles/variables.scss';
+
+.manual .autosize-input > input {
+	border: 0;
+	border-bottom: 1px solid $gray-400;
+	padding: 0 0.125em 0 0;
+
+	&:focus {
+		outline: 0;
+		background-color: $gray-50;
+	}
+}
+
+.manual .invalid > input {
+	border-color: red;
+}
+
+.manual .areas {
+	.row {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		margin-bottom: 0.5em;
+	}
+	label {
+		margin-right: 1em;
+	}
+	.Select {
+		flex: 1;
+	}
+}
+
+.manual .intro {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.manual .actions {
+	margin-top: 1em;
+	display: flex;
+	justify-content: center;
+}
