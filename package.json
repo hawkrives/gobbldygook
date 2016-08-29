@@ -107,7 +107,7 @@
     "flow-bin": "0.31.1",
     "get-stdin": "5.0.1",
     "iflow-bluebird": "1.1.18",
-    "iflow-lodash": "1.1.23",
+    "iflow-lodash": "1.1.24",
     "js-beautify": "1.6.3",
     "json-loader": "0.5.4",
     "mocha": "3.0.2",
