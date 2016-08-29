@@ -1,25 +1,21 @@
 export default {
-	component: require('../containers/app').default,
+	component: require('src/containers/app').default,
 	childRoutes: [{
 		path: '/',
 
 		getIndexRoute(location, cb) {
-			require.ensure([], () => {
-				cb(null, {content: require('./app_content_student-picker').default})
-			}, 'app.index')
+			cb(null, {content: require('./index').default})
 		},
 
 		getChildRoutes(state, cb) {
-			require.ensure([], () => {
-				cb(null, [
-					require('./app_content_areas').default,  // edit-area
-					require('./app_overlay_search').default,  // search
-					require('./app_content_degub').default,  // debug
-					require('./app_content_new-student').default, // create
-					require('./app_content_student').default, // s/:id
-					require('./not_found').default, // anything else
-				])
-			}, 'app.routes')
+			cb(null, [
+				require('./edit-area').default, // edit-area
+				require('./degub').default,  // degub
+				require('./create').default, // create
+				require('./student').default, // student
+				require('./search').default, // search
+				require('./not-found').default, // anything else
+			])
 		},
 	}],
 }

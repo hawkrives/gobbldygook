@@ -41,7 +41,7 @@ const config = {
 	replace: null,
 	port: 3000, // for webpack-dev-server
 
-	stats: {},
+	stats: {colors: false},
 
 	entry: {
 		main: ['./src/index.js'],
@@ -64,9 +64,17 @@ const config = {
 	},
 
 	devServer: {
-		// If these are enabled, then historyApiFallback doesn't work.
+		// If `info` is enabled, then historyApiFallback doesn't work.
 		// info: false,
-		// stats: 'errors-only',
+		stats: {
+			colors: false,
+			assets: false,
+			version: false,
+			hash: false,
+			timings: false,
+			chunks: false,
+			chunkModules: false,
+		},
 		contentBase: outputFolder,
 
 		// Makes webpack serve /index.html as the response to any request to

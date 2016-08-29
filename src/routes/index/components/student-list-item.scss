@@ -1,0 +1,106 @@
+@import 'src/styles/variables.scss';
+@import 'src/styles/mixins.scss';
+
+.student-list-item {
+    @include link-undecorated();
+
+	background-color: white;
+	&.is-selected {
+		background-color: $blue-50;
+	}
+
+	flex: 1;
+	display: flex;
+	align-items: center;
+
+	padding: 0.75em 0.5em;
+	position: relative;
+
+	transition: 0.15s;
+
+	cursor: pointer;
+}
+
+.student-list-item-container + .student-list-item-container {
+	border-top: $material-divider;
+}
+
+.student-list-item:hover,
+.student-list-item:focus {
+	outline: none;
+	background-color: $blue-50;
+	border-color: $blue;
+}
+
+.student-list-item-info {
+	flex: 1;
+	margin-left: 0.5em;
+}
+
+.student-list-item-container {
+	border-left: solid 3px transparent;
+}
+
+.student-list-item-container.loading {
+	border-left-color: $blue-300;
+}
+
+.student-list-item-container.can-graduate {
+	border-left-color: $green-300;
+}
+
+.student-list-item-container.cannot-graduate {
+	border-left-color: $red-300;
+}
+
+
+.student-list-item-info .name {
+	line-height: 1.5;
+}
+
+.student-list-item-info .areas {
+	font-size: 0.8em;
+}
+
+.student-list-item-info .area-type .joiner {
+	vertical-align: baseline;
+	display: inline-block;
+
+	margin-left: 0.35em;
+	margin-right: 0.35em;
+}
+
+.student-list-item--go {
+	margin-left: 1em;
+	margin-right: 0.5em;
+}
+
+.student-list-item-container {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: stretch;
+}
+
+.student-list-item-actions {
+	flex: 0 1 auto;
+	margin-right: 0.5em;
+}
+
+.student-list-item-container .delete {
+	flex-direction: column;
+	padding: 0.5em 1em;
+	font-size: 0.9em;
+	border: 0;
+	border-radius: 0;
+
+	.icon {
+		font-size: 2em;
+		margin-bottom: 0.125em;
+	}
+}
+
+.student-list-item-container .delete:hover {
+	color: white;
+	border-color: $red-900;
+	background-color: $red-500;
+}

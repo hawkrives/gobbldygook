@@ -1,5 +1,3 @@
-/* globals module */
-
 // Set up the default promise implementation as Bluebird
 import Bluebird from 'bluebird'
 Bluebird.config({

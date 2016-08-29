@@ -1,0 +1,11 @@
+@import 'src/styles/mixins.scss';
+
+.share-dialog {
+	@include card();
+	flex-flow: column;
+	padding: 1em 2em;
+
+	a {
+		cursor: pointer;
+	}
+}
