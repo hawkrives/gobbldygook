@@ -1,0 +1,16 @@
+{
+  "name": "babel-stdin",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {"babel-stdin": "babel-stdin.js"},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.14.0",
+    "get-stdin": "^5.0.1"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "sto-sis-html-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "hawkrives/gobbldygook",
+  "keywords": [],
+  "author": "Hawken Rives <hawkrives@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.3",
+    "css-select": "^1.2.0",
+    "htmlparser2": "^3.9.1",
+    "lodash": "^4.15.0",
+    "plur": "^2.1.2",
+    "gobbldygook-lib": "^1.0.0",
+    "uuid": "^2.0.2"
+  }
+}

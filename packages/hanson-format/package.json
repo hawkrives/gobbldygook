@@ -1,0 +1,23 @@
+{
+  "name": "gobbldygook-hanson-format",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pegjs < ./parse-hanson-string.pegjs | babel-stdin | js-beautify -f - --end-with-newline --indent-with-tabs > ./parse-hanson-string.js"
+  },
+  "repository": "hawkrives/gobbldygook",
+  "keywords": [],
+  "author": "Hawken Rives <hawkrives@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "humanize-plus": "^1.8.2",
+    "lodash": "^4.15.0",
+    "stabilize": "^1.0.0"
+  },
+  "devDependencies": {
+    "js-beautify": "1.6.3",
+    "pegjs": "^0.10.0"
+  }
+}
