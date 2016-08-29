@@ -1,7 +1,8 @@
+// @flow
 import some from 'lodash/some'
 import filter from 'lodash/filter'
 
-function checkOfferingForTimeConflict(main, alternate) {
+function checkOfferingForTimeConflict(main: offeringT, alternate: offeringT): boolean {
 	// const altStartsAfterMain      = alternate.start >= main.start
 	const altStartsBeforeMainEnds = alternate.start <= main.end
 	const altEndsAfterMainStarts  = alternate.end >= main.start
@@ -14,7 +15,7 @@ function checkOfferingForTimeConflict(main, alternate) {
 	return false
 }
 
-export default function checkCoursesForTimeConflicts(mainCourse, altCourse) {
+export default function checkCoursesForTimeConflicts(mainCourse: courseT, altCourse: courseT): boolean {
 	// Check the offerings from two courses against each other.
 	// Returns *as soon as* two times conflict.
 	return some(mainCourse.offerings, mainOffer =>

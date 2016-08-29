@@ -1,15 +1,11 @@
+// @flow
 import cleanTimeStringSegment from './cleanTimeStringSegment'
 
 const amPmRegex = /([AP])\.?M\.?/i
 
-/**
- * Takes a timestring (800-925) and turns it into an object with 24-hour time
- * {start: 800, end: 925}.
- *
- * @param {String} timestring
- * @returns {Object}
- */
-export default function findTime(timestring) {
+// Takes a timestring  and turns it into an object with 24-hour time.
+// "800-925" => {start: 800, end: 925}
+export default function findTime(timestring: string): timeT {
 	const cleanedTimestring = timestring.replace(/:/g, '') // 8:00-9:25 => 800-925
 
 	let endsInPM = false
@@ -41,8 +37,8 @@ export default function findTime(timestring) {
 	}
 
 	// Turn the string into integers
-	let startTime = parseInt(start, 10)
-	let endTime = parseInt(end, 10)
+	let startTime: number = parseInt(start, 10)
+	let endTime: number = parseInt(end, 10)
 
 	// ASSERT: There are no courses that end at or before 8am.
 	if (endTime <= 800) {

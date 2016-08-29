@@ -1,3 +1,4 @@
+// @flow
 import assign from 'lodash/assign'
 import mergeWith from 'lodash/mergeWith'
 import values from 'lodash/values'
@@ -6,7 +7,7 @@ import findDays from './findDays'
 import findTime from './findTime'
 
 export default function convertTimeStringsToOfferings(course) {
-	let offerings = {}
+	let offerings: offeringT = {}
 
 	zip(course.times, course.locations).forEach(([sisTimestring, location]) => {
 		const [daystring, timestring] = sisTimestring.split(' ')
