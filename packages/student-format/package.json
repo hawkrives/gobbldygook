@@ -1,0 +1,23 @@
+{
+  "name": "gobbldygook-student-format",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "hawkrives/gobbldygook",
+  "keywords": [],
+  "author": "Hawken Rives <hawkrives@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.3",
+    "gobbldygook-lib": "^1.0.0",
+    "humanize-plus": "^1.8.2",
+    "lodash": "^4.15.0",
+    "ord": "^0.1.1",
+    "plur": "^2.1.2",
+    "stabilize": "^1.0.0",
+    "sto-sis-time-parser": "^2.2.8"
+  }
+}
