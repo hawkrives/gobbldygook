@@ -1,6 +1,6 @@
 const parse = require('../src/area-tools/parse-hanson-string').parse
 const nom = require('nomnom')
-const stringify = require('json-stable-stringify')
+const stringify = require('stabilize')
 const yaml = require('js-yaml')
 const util = require('util')
 const getStdin = require('get-stdin')

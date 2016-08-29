@@ -1,5 +1,5 @@
 import bluebird from 'bluebird'
-let fs = require('fs')
+let fs = require('graceful-fs')
 fs = bluebird.promisifyAll(fs)
 import nom from 'nomnom'
 import path from 'path'

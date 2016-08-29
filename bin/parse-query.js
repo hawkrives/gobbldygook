@@ -1,6 +1,6 @@
 import buildQuery from '../src/helpers/build-query-from-string'
 import nom from 'nomnom'
-import stringify from 'json-stable-stringify'
+import stringify from 'stabilize'
 import yaml from 'js-yaml'
 
 export function cli() {
