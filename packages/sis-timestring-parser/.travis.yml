@@ -1,0 +1,16 @@
+# NOTE: This file must use spaces. Travis won't read it otherwise.
+
+# Opt-in to the new Travis infrastructure
+sudo: false
+
+# Send travis notifications to Slack
+notifications:
+  slack:
+    secure: iNz4CfNIkTXwl7G71nTgLMXUKKYMqQJkvQKuBck33Eg+tFy/w6O3bMEyGLdfJZKHO0Q3fE/Wbw+SIp77TBG4i/YQ87/cQWnFv21temZoBnkYPk5IiusUR/5AJPCpFJSnDlB92XDGz06ilL1oFW6R3yGjn5lUqUDy2a+Pj0TUp1w=
+
+language: node_js
+
+node_js:
+  - stable
+
+script: npm run cover && npm run coveralls
