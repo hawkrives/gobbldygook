@@ -1,0 +1,29 @@
+{
+  "name": "stolaf-sis-timestring-parser",
+  "description": "A parser for the St. Olaf SIS timestrings.",
+  "version": "2.2.8",
+  "repository": "hawkrives/gobbldygook",
+  "author": "Hawken M. Rives",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src/ --out-dir lib/",
+    "clean": "rm -rf lib/",
+    "cover": "nyc npm test",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "push": "./bin/publish.sh",
+    "test": "ava"
+  },
+  "ava": {
+    "files": [
+      "test/"
+    ],
+    "failFast": true
+  },
+  "dependencies": {
+    "lodash": "^4.0.0"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.6"
+  }
+}
