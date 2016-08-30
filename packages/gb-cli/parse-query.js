@@ -1,4 +1,4 @@
-import buildQuery from '../src/helpers/build-query-from-string'
+import buildQuery from 'stolaf-deptnum/build-query-from-string'
 import nom from 'nomnom'
 import stringify from 'stabilize'
 import yaml from 'js-yaml'

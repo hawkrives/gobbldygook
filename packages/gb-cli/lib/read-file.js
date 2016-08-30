@@ -1,5 +1,5 @@
 import 'isomorphic-fetch'
-import {status, json, text} from '../../src/helpers/fetch-helpers'
+import {status, json, text} from 'gb-lib/fetch-helpers'
 
 import startsWith from 'lodash/startsWith'
 import yaml from 'js-yaml'

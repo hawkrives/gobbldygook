@@ -3,7 +3,7 @@
 const nom = require('nomnom')
 const fs = require('graceful-fs')
 const yaml = require('js-yaml')
-const enhanceHanson = require('../src/area-tools/enhance-hanson')
+const enhanceHanson = require('hanson-format/enhance-hanson')
 
 function compileStudent(args, data) {
 	let obj = yaml.safeLoad(data)
