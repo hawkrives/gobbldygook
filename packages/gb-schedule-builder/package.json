@@ -1,5 +1,5 @@
 {
-  "name": "schedule-builder",
+  "name": "gb-schedule-builder",
   "version": "1.0.0",
   "description": "",
   "main": "combo-has-courses.js",
@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "gobbldygook-search-queries": "^1.0.0",
+    "gb-search-queries": "^1.0.0",
     "lodash": "^4.15.0"
   }
 }
