@@ -1,5 +1,6 @@
+// TODO: split as much of this away from {db} as possible
 import db from './db'
-import buildQueryFromString from '../helpers/build-query-from-string'
+import buildQueryFromString from './build-query-from-string'
 import compact from 'lodash/compact'
 import filter from 'lodash/filter'
 import map from 'lodash/map'

@@ -16,7 +16,7 @@ import sortBy from 'lodash/sortBy'
 
 import idbRange from 'idb-range'
 import {cmp as idbComparison} from 'treo'
-import checkAgainstQuery from '../check-course-against-query'
+import checkAgainstQuery from './check-course-against-query'
 
 function canAdd({query, value, primaryKey, results}={}) {
 	// Check if we want to add the current value to the results array.

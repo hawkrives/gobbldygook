@@ -11,15 +11,14 @@ import toPairs from 'lodash/toPairs'
 import trim from 'lodash/trim'
 import unzip from 'lodash/unzip'
 
-import quacksLikeDeptNum from './quacks-like-dept-num'
-import splitDeptNum from './split-dept-num'
-import buildDeptNum from './build-dept-num'
+import quacksLikeDeptNum from 'stolaf-deptnums/quacks-like-dept-num'
+import splitDeptNum from 'stolaf-deptnums/split-dept-num'
+import buildDeptNum from 'stolaf-deptnums/build-dept-num'
 
-import splitParagraph from './split-paragraph'
-import zipToObjectWithArrays from './zip-to-object-with-arrays'
+import splitParagraph from 'gb-lib/split-paragraph'
+import zipToObjectWithArrays from 'gb-lib/zip-to-object-with-arrays'
 
-import departmentMapping from 'sto-course-related-data/handmade/to_department_abbreviations.json'
-import gereqMapping from 'sto-course-related-data/handmade/to_gereq_abbreviations.json'
+import {departmentMapping, gereqMapping} from 'stolaf-courses/department-abbreviations'
 
 let semesters = {
 	'fall': 1,
