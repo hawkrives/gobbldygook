@@ -1,4 +1,4 @@
-import {shrinkDepartment} from '../area-tools/convert-department'
+import {shrinkDepartment} from 'hanson-format/convert-department'
 
 // Builds a course identifier ("CSCI 121", "AS/RE 230B") from a course.
 export default function courseIdent({depts, num, sect='', deptnum}) {
