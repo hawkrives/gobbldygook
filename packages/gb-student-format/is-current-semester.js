@@ -1,5 +1,5 @@
 // @flow
-import type {Schedule} from '../models/types'
+import type {Schedule} from './types'
 /**
  * Checks if a schedule is in a certain year and semester.
  *

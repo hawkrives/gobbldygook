@@ -1,7 +1,7 @@
 // @flow
 
 import sortBy from 'lodash/sortBy'
-import type {Study, StudyTypes} from '../models/types'
+import type {Study, StudyTypes} from './types'
 
 const types: StudyTypes[] = ['degree', 'major', 'concentration', 'emphasis']
 export default function sortStudiesByType(studies: Study[]): Study[] {

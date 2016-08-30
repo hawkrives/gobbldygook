@@ -7,10 +7,10 @@ import zip from 'lodash/zip'
 import ordinal from 'ord'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
-import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
-import expandYear from '../helpers/expand-year'
-import semesterName from '../helpers/semester-name'
-import {alertCircled, iosCalendarOutline, iosClockOutline} from '../icons/ionicons'
+import {findScheduleTimeConflicts} from 'sto-sis-timestring-parser'
+import expandYear from 'stolaf-courses/expand-year'
+import semesterName from 'stolaf-courses/semester-name'
+// import {alertCircled, iosCalendarOutline, iosClockOutline} from '../icons/ionicons'
 
 export function checkForInvalidYear(course, scheduleYear) {
 	let thisYear = new Date().getFullYear()
@@ -20,7 +20,7 @@ export function checkForInvalidYear(course, scheduleYear) {
 			warning: true,
 			type: 'invalid-year',
 			msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
-			icon: alertCircled,
+			icon: 'alertCircled',
 		}
 	}
 
@@ -33,7 +33,7 @@ export function checkForInvalidSemester(course, scheduleSemester) {
 			warning: true,
 			type: 'invalid-semester',
 			msg: `Wrong Semester (originally from ${semesterName(course.semester)})`,
-			icon: iosCalendarOutline,
+			icon: 'iosCalendarOutline',
 		}
 	}
 
@@ -53,7 +53,7 @@ export function checkForTimeConflicts(courses) {
 				warning: true,
 				type: 'time-conflict',
 				msg: `Time conflict with the ${oxford(conflicted, {oxfordComma: true})} ${plur('course', conflicts.length)}`,
-				icon: iosClockOutline,
+				icon: 'iosClockOutline',
 			}
 		}
 
