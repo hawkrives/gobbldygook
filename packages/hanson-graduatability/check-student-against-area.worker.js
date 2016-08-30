@@ -5,10 +5,10 @@ import filter from 'lodash/filter'
 import round from 'lodash/round'
 import present from 'present'
 
-import stringifyError from '../stringify-error'
-import evaluate from '../../area-tools/evaluate'
-import getActiveStudentCourses from '../get-active-student-courses'
-import alterCourse from '../alter-course-for-evaluation'
+import stringifyError from 'gb-lib/stringify-error'
+import evaluate from 'hanson-format/evaluate'
+import getActiveStudentCourses from './get-active-student-courses'
+import alterCourse from './alter-course-for-evaluation'
 
 function tryEvaluate(student, area) {
 	try {

@@ -1,5 +1,5 @@
 {
-  "name": "gobbldygook-graduatability",
+  "name": "hanson-graduatability",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,8 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.3",
-    "gobbldygook-hanson-format": "^1.0.0",
-    "gobbldygook-lib": "^1.0.0",
+    "gb-lib": "^1.0.0",
+    "hanson-format": "^1.0.0",
     "lodash": "^4.15.0",
     "present": "^1.0.0"
   }
