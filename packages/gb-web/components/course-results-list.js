@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import map from 'lodash/map'
 import InlineCourse from './inline-course'
 
-import compareProps from '../helpers/compare-props'
-import toPrettyTerm from '../helpers/to-pretty-term'
-import expandYear from '../helpers/expand-year'
-import semesterName from '../helpers/semester-name'
+import compareProps from 'gb-lib/compare-props'
+import toPrettyTerm from 'stolaf-courses/to-pretty-term'
+import expandYear from 'stolaf-courses/expand-year'
+import semesterName from 'stolaf-courses/semester-name'
 
 const GROUP_BY_TO_TITLE = {
 	'Day of Week': days => days,

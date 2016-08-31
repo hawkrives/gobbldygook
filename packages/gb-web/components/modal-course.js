@@ -11,14 +11,14 @@ import Separator from './separator'
 import Toolbar from './toolbar'
 import Button from './button'
 import CourseTitle from './course-title'
-import buildCourseIdent from '../helpers/build-course-ident'
+import buildCourseIdent from 'stolaf-deptnums/build-course-ident'
 
-import semesterName from '../helpers/semester-name'
-import expandYear from '../helpers/expand-year'
-import to12Hour from '../helpers/to-12-hour-time'
+import semesterName from 'stolaf-courses/semester-name'
+import expandYear from 'stolaf-courses/expand-year'
+import to12Hour from 'gb-lib/to-12-hour-time'
 
 import { bindActionCreators } from 'redux'
-const { connect } = require('react-redux')
+import { connect } from 'react-redux'
 import { addCourse, moveCourse, removeCourse } from '../redux/students/actions/courses'
 
 import './modal-course.scss'
