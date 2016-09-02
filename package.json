@@ -121,7 +121,7 @@
     "redux-freeze": "0.1.4",
     "redux-logger": "2.6.1",
     "rimraf": "2.5.4",
-    "sass-loader": "4.0.0",
+    "sass-loader": "4.0.1",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.13.2",
