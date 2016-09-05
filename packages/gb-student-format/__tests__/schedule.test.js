@@ -1,53 +1,50 @@
-import {expect} from 'chai'
+import test from 'ava'
 import stringify from 'json-stable-stringify'
+import Schedule from '../schedule'
 
-const Schedule = require('src/models/schedule').default
+test('does not mutate the passed-in object', t => {
+	const clbids = []
+	const input = {clbids}
+	Schedule(input)
+	t.deepEqual(input.clbids, clbids)
+})
 
-describe('Schedule', () => {
-	it('does not mutate the passed-in object', () => {
-		const clbids = []
-		const input = {clbids}
-		Schedule(input)
-		expect(input.clbids).to.equal(clbids)
+test('uses the ID that you give it', t => {
+	let schedule = Schedule({id: '1'})
+	t.is(schedule.id, '1')
+})
+
+test('throws if the ID is not a string', t => {
+	t.throws(() => Schedule({id: 1}), TypeError)
+})
+
+test('creates a unique ID for each new schedule without an ID prop', t => {
+	let sched1 = Schedule()
+	let sched2 = Schedule()
+	t.not(sched1.id, sched2.id)
+})
+
+test('holds a schedule for a student', t => {
+	let sched = Schedule({
+		id: '1',
+		active: true,
+		year: 1994,
+		semester: 3,
+		index: 2,
+		title: 'My Schedule',
+		clbids: [123, 234, 345],
 	})
+	t.is(sched.id, '1')
+	t.true(sched.active)
+	t.is(sched.year, 1994)
+	t.is(sched.semester, 3)
+	t.is(sched.index, 2)
+	t.is(sched.title, 'My Schedule')
+	t.true(Array.isArray(sched.clbids))
+	t.deepEqual(sched.clbids, [123, 234, 345])
+})
 
-	it('uses the ID that you give it', () => {
-		let schedule = Schedule({id: '1'})
-		expect(schedule.id).to.equal('1')
-	})
-
-	it('throws if the ID is not a string', () => {
-		expect(() => Schedule({id: 1})).to.throw(TypeError)
-	})
-
-	it('creates a unique ID for each new schedule without an ID prop', () => {
-		let sched1 = Schedule()
-		let sched2 = Schedule()
-		expect(sched1.id).not.to.equal(sched2.id)
-	})
-
-	it('holds a schedule for a student', () => {
-		let sched = Schedule({
-			id: '1',
-			active: true,
-			year: 1994,
-			semester: 3,
-			index: 2,
-			title: 'My Schedule',
-			clbids: [123, 234, 345],
-		})
-		expect(sched.id).to.equal('1')
-		expect(sched.active).to.be.true
-		expect(sched.year).to.equal(1994)
-		expect(sched.semester).to.equal(3)
-		expect(sched.index).to.equal(2)
-		expect(sched.title).to.equal('My Schedule')
-		expect(sched.clbids).to.be.an('array')
-		expect(sched.clbids).to.deep.equal([123, 234, 345])
-	})
-
-	it('can turn into JSON', () => {
-		let result = stringify(Schedule())
-		expect(result).to.be.ok
-	})
+test('can turn into JSON', t => {
+	let result = stringify(Schedule())
+	t.truthy(result)
 })
