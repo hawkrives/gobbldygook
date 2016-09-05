@@ -26,6 +26,6 @@
     "gb-lib": "^1.0.0",
     "gb-student-format": "^1.0.0",
     "uuid": "^2.0.2",
-    "gb-hanson-format": "^1.0.0"
+    "hanson-format": "^1.0.0"
   }
 }
