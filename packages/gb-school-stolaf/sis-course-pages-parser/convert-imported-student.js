@@ -6,7 +6,6 @@ import map from 'lodash/map'
 import forEach from 'lodash/forEach'
 import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
-import plur from 'plur'
 import filter from 'lodash/filter'
 import {v4 as uuid} from 'uuid'
 
@@ -89,10 +88,10 @@ function resolveSingularDataPoints(degrees) {
 	forEach(thereShouldOnlyBeOne, (group, name) => {
 		let len = uniq(group).length
 		if (len > 1) {
-			throw new Error(`convertStudent: The student has more than one ${plur(name, 2)}: ${JSON.stringify(group)}`)
+			throw new Error(`convertStudent: The student has more than one ${name}: ${JSON.stringify(group)}`)
 		}
 		else if (!len) {
-			throw new Error(`convertStudent: The student has zero ${plur(name, 0)}: ${JSON.stringify(group)}`)
+			throw new Error(`convertStudent: The student has zero ${name}: ${JSON.stringify(group)}`)
 		}
 	})
 
