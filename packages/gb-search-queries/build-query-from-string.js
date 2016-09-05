@@ -1,24 +1,30 @@
-import endsWith from 'lodash/endsWith'
-import filter from 'lodash/filter'
-import flatten from 'lodash/flatten'
-import includes from 'lodash/includes'
-import isArray from 'lodash/isArray'
-import map from 'lodash/map'
-import mapValues from 'lodash/mapValues'
-import partitionByIndex from './partition-by-index'
-import startsWith from 'lodash/startsWith'
-import toPairs from 'lodash/toPairs'
-import trim from 'lodash/trim'
-import unzip from 'lodash/unzip'
+import {
+	endsWith,
+	filter,
+	flatten,
+	includes,
+	isArray,
+	map,
+	mapValues,
+	startsWith,
+	toPairs,
+	trim,
+	unzip,
+} from 'lodash'
 
-import quacksLikeDeptNum from 'stolaf-deptnums/quacks-like-dept-num'
-import splitDeptNum from 'stolaf-deptnums/split-dept-num'
-import buildDeptNum from 'stolaf-deptnums/build-dept-num'
+import {
+	partitionByIndex,
+	splitParagraph,
+	zipToObjectWithArrays,
+} from 'gb-lib'
 
-import splitParagraph from 'gb-lib/split-paragraph'
-import zipToObjectWithArrays from 'gb-lib/zip-to-object-with-arrays'
-
-import {departmentMapping, gereqMapping} from 'stolaf-courses/department-abbreviations'
+import {
+	quacksLikeDeptNum,
+	splitDeptNum,
+	buildDeptNum,
+	normalizeDepartment,
+	normalizeGereq,
+} from 'gb-school-stolaf'
 
 let semesters = {
 	'fall': 1,
@@ -75,12 +81,12 @@ function organizeValues([key, values], {words=false, profWords=false}={}) {
 
 		else if (key === 'depts') {
 			val = val.toLowerCase()
-			val = departmentMapping[val] || val.toUpperCase()
+			val = normalizeDepartment(val) || val.toUpperCase()
 		}
 
 		else if (key === 'gereqs') {
 			val = val.toLowerCase()
-			val = gereqMapping[val] || val.toUpperCase()
+			val = normalizeGereq(val) || val.toUpperCase()
 		}
 
 		else if (key === 'deptnum') {

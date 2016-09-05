@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "../../node_modules/.bin/ava"
+  },
+  "ava": {
+    "files": "**/__tests__/*.js",
+    "failFast": true,
+    "require": [
+      "babel-register"
+    ]
   },
   "repository": "hawkrives/gobbldygook",
   "keywords": [],
@@ -13,11 +20,10 @@
   "dependencies": {
     "bluebird": "^3.4.3",
     "gb-lib": "^1.0.0",
+    "gb-school-stolaf": "^1.0.0",
     "idb-range": "^3.1.3",
     "idb-request": "^3.2.0",
     "lodash": "^4.15.0",
-    "stolaf-courses": "^1.0.0",
-    "stolaf-deptnums": "^1.0.0",
     "treo": "^0.5.1"
   }
 }
