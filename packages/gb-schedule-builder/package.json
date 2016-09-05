@@ -4,11 +4,11 @@
   "description": "",
   "main": "combo-has-courses.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "gb-search-queries": "^1.0.0",
     "lodash": "^4.15.0"
