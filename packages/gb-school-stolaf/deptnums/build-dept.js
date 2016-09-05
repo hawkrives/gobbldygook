@@ -1,4 +1,4 @@
-import {departmentNameToAbbr} from '../stolaf-courses'
+import {normalizeDepartment} from '../stolaf-courses'
 
 /**
  * Builds a department string from a course.
@@ -10,12 +10,12 @@ import {departmentNameToAbbr} from '../stolaf-courses'
  * @param {Course} course - the course
  * @returns {String} - the department string
  */
-export default function buildDept(course) {
+export default function buildDept(course): string {
 	let departments = course.depts
 
 	departments = departments.map(dept => {
 		dept = dept.toLowerCase()
-		return departmentNameToAbbr[dept] || dept.toUpperCase()
+		return normalizeDepartment(dept) || dept.toUpperCase()
 	})
 
 	return departments.join('/')

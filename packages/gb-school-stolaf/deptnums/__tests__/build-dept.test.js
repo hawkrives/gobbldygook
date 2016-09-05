@@ -21,6 +21,19 @@ test('maintains the order of the departments array', t => {
 	t.is(buildDept(CHBI), 'CHEM/BIO')
 })
 
+test('maintains the order of the departments array even after shrinking', t => {
+	let BICH = {depts: ['BIOLOGY', 'CHEMISTRY']}
+	let CHBI = {depts: ['CHEMISTRY', 'BIOLOGY']}
+
+	t.is(buildDept(BICH), 'BIO/CHEM')
+	t.is(buildDept(CHBI), 'CHEM/BIO')
+})
+
+test('properly condenses department names into abbrs', t => {
+	let course = {depts: ['RELIGION']}
+	t.is(buildDept(course), 'REL')
+})
+
 test('properly expands department short abbrs into abbrs', t => {
 	let course = {depts: ['AS', 'RE']}
 

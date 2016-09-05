@@ -1,1 +1,2 @@
-export {shrinkDepartment, expandDepartment} from './department-names'
+export {normalizeDepartment} from './normalize-department'
+export {normalizeGereq} from './normalize-gereq'
