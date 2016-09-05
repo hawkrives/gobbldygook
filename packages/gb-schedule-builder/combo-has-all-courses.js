@@ -1,7 +1,7 @@
 import takeWhile from 'lodash/takeWhile'
-import queryCourses from 'gb-search-queries/query-courses'
+import {queryCourses} from 'gb-search-queries'
 
-export default function comboHasAllCourses(courses, combinationOfClasses) {
+export function comboHasAllCourses(courses, combinationOfClasses) {
 	const these = takeWhile(courses, course =>
 			queryCourses(course, combinationOfClasses).length >= 1)
 
