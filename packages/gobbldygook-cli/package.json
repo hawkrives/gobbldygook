@@ -5,7 +5,7 @@
   "homepage": "https://hawkrives.github.io/gobbldygook/",
   "bin": {},
   "scripts": {
-    "test": "../../node_modules/.bin/ava"
+    "test": "echo 'No tests!' # ../../node_modules/.bin/ava"
   },
   "ava": {
     "files": "**/__tests__/*.js",
