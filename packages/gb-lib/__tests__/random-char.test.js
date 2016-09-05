@@ -1,9 +1,7 @@
-import {expect} from 'chai'
+import test from 'ava'
 import randomChar from '../random-char'
 
-describe('randomChar', () => {
-	it('finds a random integer between the parameters', () => {
-		expect(randomChar()).to.match(/[a-z0-9]/)
-		expect(randomChar()).to.match(/[a-z0-9]/)
-	})
+test('finds a random integer between the parameters', t => {
+	t.regex(randomChar(), /[a-z0-9]/)
+	t.regex(randomChar(), /[a-z0-9]/)
 })
