@@ -12,13 +12,14 @@
     "cover": "nyc npm test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "push": "./bin/publish.sh",
-    "test": "ava"
+    "test": "../../node_modules/.bin/ava"
   },
   "ava": {
-    "files": [
-      "test/"
-    ],
-    "failFast": true
+    "files": "**/__tests__/*.js",
+    "failFast": true,
+    "require": [
+      "babel-register"
+    ]
   },
   "dependencies": {
     "lodash": "^4.0.0"

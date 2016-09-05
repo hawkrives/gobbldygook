@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "../../node_modules/.bin/ava"
+  },
+  "ava": {
+    "files": "**/__tests__/*.js",
+    "failFast": true,
+    "require": [
+      "babel-register"
+    ]
   },
   "repository": "hawkrives/gobbldygook",
   "keywords": [],

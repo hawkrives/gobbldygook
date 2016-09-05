@@ -24,12 +24,19 @@
     "stats": "cross-env NODE_ENV=production npm run stats-base",
     "stats-base": "webpack --config .webpackrc.js --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
     "stats-dev": "cross-env NODE_ENV=development npm run stats-base",
-    "test": "cross-env NODE_ENV=test mocha test/**/*.js",
+    "test": "../../node_modules/.bin/ava",
     "test-students": "./bin/test-student test/example-students",
     "test-watch": "npm run test -- --watch",
     "travis": "npm run lint && npm run cover && npm run build-ci",
     "view-coverage": "nyc report --reporter=html && open coverage/index.html",
     "watch": "cross-env NODE_ENV=development webpack --watch --config .webpackrc.js --bail --progress --devtool=source-map"
+  },
+  "ava": {
+    "files": "**/__tests__/*.js",
+    "failFast": true,
+    "require": [
+      "babel-register"
+    ]
   },
   "dependencies": {
     "babel-runtime": "6.11.6",

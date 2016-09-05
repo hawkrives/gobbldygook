@@ -4,6 +4,16 @@
   "description": "Tools for Gobbldygook",
   "homepage": "https://hawkrives.github.io/gobbldygook/",
   "bin": {},
+  "scripts": {
+    "test": "../../node_modules/.bin/ava"
+  },
+  "ava": {
+    "files": "**/__tests__/*.js",
+    "failFast": true,
+    "require": [
+      "babel-register"
+    ]
+  },
   "private": true,
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
