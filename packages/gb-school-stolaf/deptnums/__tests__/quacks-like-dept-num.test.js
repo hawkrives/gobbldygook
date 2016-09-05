@@ -1,47 +1,45 @@
-import {expect} from 'chai'
-import quacksLikeDeptNum from '../../src/helpers/quacks-like-dept-num'
+import test from 'ava'
+import quacksLikeDeptNum from '../quacks-like-dept-num'
 
-describe('quacksLikeDeptNum', () => {
-	it('fails on the empty string', () => {
-		expect(quacksLikeDeptNum('')).to.be.false
-	})
+test('fails on the empty string', t => {
+	t.false(quacksLikeDeptNum(''))
+})
 
-	it('handles multi-department courses', () => {
-		expect(quacksLikeDeptNum('AS/RE 250')).to.be.true
-	})
+test('handles multi-department courses', t => {
+	t.true(quacksLikeDeptNum('AS/RE 250'))
+})
 
-	it('handles single-department courses', () => {
-		expect(quacksLikeDeptNum('ASIAN 275')).to.be.true
-	})
+test('handles single-department courses', t => {
+	t.true(quacksLikeDeptNum('ASIAN 275'))
+})
 
-	it('requires that there be a department and a number', () => {
-		expect(quacksLikeDeptNum('AMCON 100')).to.be.true
-	})
+test('requires that there be a department and a number', t => {
+	t.true(quacksLikeDeptNum('AMCON 100'))
+})
 
-	it('requires that the number be comprised entirely of numbers', () => {
-		expect(quacksLikeDeptNum('ASIAN 9XX')).to.be.false
-	})
+test('requires that the number be comprised entirely of numbers', t => {
+	t.false(quacksLikeDeptNum('ASIAN 9XX'))
+})
 
-	it('can also handle sections', () => {
-		expect(quacksLikeDeptNum('ASIAN 220B')).to.be.true
-	})
+test('can also handle sections', t => {
+	t.true(quacksLikeDeptNum('ASIAN 220B'))
+})
 
-	it('expects the section to be a single letter', () => {
-		expect(quacksLikeDeptNum('ASIAN 220B')).to.be.true
-	})
+test('expects the section to be a single letter', t => {
+	t.true(quacksLikeDeptNum('ASIAN 220B'))
+})
 
-	it('handles two-letter departments', () => {
-		expect(quacksLikeDeptNum('ID 220')).to.be.true
-	})
+test('handles two-letter departments', t => {
+	t.true(quacksLikeDeptNum('ID 220'))
+})
 
-	it('cares not how many spaces are between the dept and num', () => {
-		expect(quacksLikeDeptNum('ASIAN    192')).to.be.true
-		expect(quacksLikeDeptNum('ASIAN192')).to.be.true
-	})
+test('cares not how many spaces are between the dept and num', t => {
+	t.true(quacksLikeDeptNum('ASIAN    192'))
+	t.true(quacksLikeDeptNum('ASIAN192'))
+})
 
-	it('cares not how many spaces are between the num and the sect', () => {
-		expect(quacksLikeDeptNum('ASIAN192B')).to.be.true
-		expect(quacksLikeDeptNum('ASIAN192 B')).to.be.true
-		expect(quacksLikeDeptNum('ASIAN192    B')).to.be.true
-	})
+test('cares not how many spaces are between the num and the sect', t => {
+	t.true(quacksLikeDeptNum('ASIAN192B'))
+	t.true(quacksLikeDeptNum('ASIAN192 B'))
+	t.true(quacksLikeDeptNum('ASIAN192    B'))
 })

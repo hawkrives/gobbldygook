@@ -1,53 +1,37 @@
-import {expect} from 'chai'
-import buildDept from '../../src/helpers/build-dept'
+import test from 'ava'
+import buildDept from '../build-dept'
 
-describe('buildDept', () => {
-	it('builds a department string from a single-dept course', () => {
-		let ASIAN = {depts: ['ASIAN']}
+test('builds a department string from a single-dept course', t => {
+	let ASIAN = {depts: ['ASIAN']}
 
-		expect(buildDept(ASIAN)).to.equal('ASIAN')
-	})
+	t.is(buildDept(ASIAN), 'ASIAN')
+})
 
-	it('builds a department string from a multi-department course', () => {
-		let ASRE = {depts: ['ASIAN', 'REL']}
+test('builds a department string from a multi-department course', t => {
+	let ASRE = {depts: ['ASIAN', 'REL']}
 
-		expect(buildDept(ASRE)).to.equal('ASIAN/REL')
-	})
+	t.is(buildDept(ASRE), 'ASIAN/REL')
+})
 
-	it('maintains the order of the departments array', () => {
-		let BICH = {depts: ['BIO', 'CHEM']}
-		let CHBI = {depts: ['CHEM', 'BIO']}
+test('maintains the order of the departments array', t => {
+	let BICH = {depts: ['BIO', 'CHEM']}
+	let CHBI = {depts: ['CHEM', 'BIO']}
 
-		expect(buildDept(BICH)).to.equal('BIO/CHEM')
-		expect(buildDept(CHBI)).to.equal('CHEM/BIO')
-	})
+	t.is(buildDept(BICH), 'BIO/CHEM')
+	t.is(buildDept(CHBI), 'CHEM/BIO')
+})
 
-	it('maintains the order of the departments array even after shrinking', () => {
-		let BICH = {depts: ['BIOLOGY', 'CHEMISTRY']}
-		let CHBI = {depts: ['CHEMISTRY', 'BIOLOGY']}
+test('properly expands department short abbrs into abbrs', t => {
+	let course = {depts: ['AS', 'RE']}
 
-		expect(buildDept(BICH)).to.equal('BIO/CHEM')
-		expect(buildDept(CHBI)).to.equal('CHEM/BIO')
-	})
+	t.is(buildDept(course), 'ASIAN/REL')
+})
 
-	it('properly condenses department names into abbrs', () => {
-		let course = {depts: ['RELIGION']}
+test('doesn\'t modify the depts property', t => {
+	let course = {depts: ['AS', 'RE']}
+	let safecourse = {depts: ['AS', 'RE']}
 
-		expect(buildDept(course)).to.equal('REL')
-	})
+	buildDept(course)
 
-	it('properly expands department short abbrs into abbrs', () => {
-		let course = {depts: ['AS', 'RE']}
-
-		expect(buildDept(course)).to.equal('ASIAN/REL')
-	})
-
-	it('doesn\'t modify the depts property', () => {
-		let course = {depts: ['AS', 'RE']}
-		let safecourse = {depts: ['AS', 'RE']}
-
-		buildDept(course)
-
-		expect(course).to.eql(safecourse)
-	})
+	t.deepEqual(course, safecourse)
 })

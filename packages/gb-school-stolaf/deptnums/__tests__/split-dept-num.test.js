@@ -1,24 +1,22 @@
-import {expect} from 'chai'
-import splitDeptNum from '../../src/helpers/split-dept-num'
+import test from 'ava'
+import splitDeptNum from '../split-dept-num'
 
-describe('splitDeptNum', () => {
-	it('splits multi-department courses into components', () => {
-		let asre = 'AS/RE 250'
-		let asianrel = 'ASIAN/REL 250'
+test('splits multi-department courses into components', t => {
+	let asre = 'AS/RE 250'
+	let asianrel = 'ASIAN/REL 250'
 
-		expect(splitDeptNum(asre)).to.eql({depts: ['AS', 'RE'], num: 250})
-		expect(splitDeptNum(asianrel)).to.eql({depts: ['ASIAN', 'REL'], num: 250})
-	})
+	t.deepEqual(splitDeptNum(asre), {depts: ['AS', 'RE'], num: 250})
+	t.deepEqual(splitDeptNum(asianrel), {depts: ['ASIAN', 'REL'], num: 250})
+})
 
-	it('splits up a single department course into components', () => {
-		let deptnum = 'ASIAN 275'
+test('splits up a single department course into components', t => {
+	let deptnum = 'ASIAN 275'
 
-		expect(splitDeptNum(deptnum)).to.eql({depts: ['ASIAN'], num: 275})
-	})
+	t.deepEqual(splitDeptNum(deptnum), {depts: ['ASIAN'], num: 275})
+})
 
-	it('includes the section, if given', () => {
-		let deptnum = 'ASIAN 275A'
+test('includes the section, if given', t => {
+	let deptnum = 'ASIAN 275A'
 
-		expect(splitDeptNum(deptnum, true)).to.eql({depts: ['ASIAN'], num: 275, sect: 'A'})
-	})
+	t.deepEqual(splitDeptNum(deptnum, true), {depts: ['ASIAN'], num: 275, sect: 'A'})
 })
