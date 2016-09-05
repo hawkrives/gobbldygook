@@ -12,17 +12,27 @@
 		"transform-object-rest-spread",
 		// embeds the react tag name into the component
 		"transform-react-display-name",
-		// these two together prevent us from defining the helpers in every module
-		"external-helpers",
-		"transform-runtime",
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		"lodash",
+		// only transform regenerator to runtime in dev
+		["transform-runtime", {
+			"helpers": false,
+			"polyfill": false,
+			"regenerator": true,
+		}],
 	],
 	"env": {
 		"production": {
 			// "presets": ["babili"],
 			"plugins": [
+				// these two together prevent us from defining the helpers in every module
+				"external-helpers",
+				["transform-runtime", {
+					"helpers": true,
+					"polyfill": false,
+					"regenerator": true,
+				}],
 				"transform-react-constant-elements",
 				"transform-react-inline-elements",
 				"transform-inline-environment-variables",
