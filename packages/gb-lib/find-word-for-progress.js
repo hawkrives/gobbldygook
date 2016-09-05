@@ -5,7 +5,7 @@ type ProgressChunk =
 	'sixty' | 'fifty' | 'forty' | 'thirty' |
 	'twenty' | 'ten' | 'under-ten' | 'zero';
 
-export default function findWordForProgress(maxProgress: number, currentProgress: number): ProgressChunk {
+export function findWordForProgress(maxProgress: number, currentProgress: number): ProgressChunk {
 	const progress = currentProgress / maxProgress
 
 	if (progress >= 1) {
