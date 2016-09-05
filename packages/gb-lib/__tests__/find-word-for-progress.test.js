@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import findWordForProgress from '../../src/helpers/find-word-for-progress'
+import findWordForProgress from '../find-word-for-progress'
 
 describe('findWordForProgress', () => {
 	it('properly handles each tenth of the float', () => {

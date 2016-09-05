@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import findMissingNumberBinarySearch from '../../src/helpers/find-missing-number-binary-search'
+import findMissingNumberBinarySearch from '../find-missing-number-binary-search'
 
 describe('findMissingNumberBinarySearch', () => {
 	it('takes a list of numbers and finds the first gap', () => {
