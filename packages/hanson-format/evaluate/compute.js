@@ -4,7 +4,7 @@ import computeChunk from './compute-chunk'
 import getFulfillment from './get-fulfillment'
 import getOverride from './get-override'
 import hasOverride from './has-override'
-import isRequirementName from './is-requirement-name'
+import isRequirementName from '../lib/is-requirement-name'
 import mapValues from 'lodash/mapValues'
 
 
