@@ -1,5 +1,5 @@
 import test from 'ava'
-import findWordForProgress from '../find-word-for-progress'
+import {findWordForProgress} from '../find-word-for-progress'
 
 test('properly handles each tenth of the float', t => {
 	t.is(findWordForProgress(100, 100), 'hundred')

@@ -1,5 +1,5 @@
 import test from 'ava'
-import splitParagraph from '../split-paragraph'
+import {splitParagraph} from '../split-paragraph'
 
 test('returns and array of the words in the string', t => {
 	let str = 'I am words'

@@ -1,5 +1,5 @@
 import test from 'ava'
-import missing from '../find-missing-number-binary-search'
+import {findMissingNumberBinarySearch as missing} from '../find-missing-number-binary-search'
 
 test('takes a list of numbers and finds the first gap', t => {
 	t.is(missing([1, 2, 3]), null)

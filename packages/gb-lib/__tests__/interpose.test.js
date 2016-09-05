@@ -1,5 +1,5 @@
 import test from 'ava'
-import interpose from '../interpose'
+import {interpose} from '../interpose'
 
 test('finds a random letter/number between the parameters', t => {
 	let actual = interpose([1, 2, 3], 'a')

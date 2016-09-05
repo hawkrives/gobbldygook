@@ -1,5 +1,5 @@
 import test from 'ava'
-import compareProps from '../compare-props'
+import {compareProps} from '../compare-props'
 
 test('compares two prop objects', t => {
 	let propsA = {p: 1}

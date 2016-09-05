@@ -1,5 +1,5 @@
 import test from 'ava'
-import partitionByIndex from '../partition-by-index'
+import {partitionByIndex} from '../partition-by-index'
 
 test('partitions an array based on odd/even indices', t => {
 	let arr = [1, 2, 3, 4, 5]

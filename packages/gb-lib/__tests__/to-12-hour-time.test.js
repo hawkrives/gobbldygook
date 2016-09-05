@@ -1,5 +1,5 @@
 import test from 'ava'
-import to12Hour from '../to-12-hour-time'
+import {to12Hour} from '../to-12-hour-time'
 
 test('converts a 24-hour military-style time string into a 12-hour time string', t => {
 	t.is(to12Hour('1300'), '1:00pm')

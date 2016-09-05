@@ -1,5 +1,5 @@
 import test from 'ava'
-import zipToObjectWithArrays from '../zip-to-object-with-arrays'
+import {zipToObjectWithArrays} from '../zip-to-object-with-arrays'
 
 test('parses area ids', t => {
 	let keys = [4, 3, 2, 1]
