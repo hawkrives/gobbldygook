@@ -1,11 +1,11 @@
 // @flow
-import cleanTimeStringSegment from './cleanTimeStringSegment'
+import cleanTimeStringSegment from './clean-time-string-segment'
 
 const amPmRegex = /([AP])\.?M\.?/i
 
 // Takes a timestring  and turns it into an object with 24-hour time.
 // "800-925" => {start: 800, end: 925}
-export default function findTime(timestring: string): timeT {
+export default function findTime(timestring: string) {
 	const cleanedTimestring = timestring.replace(/:/g, '') // 8:00-9:25 => 800-925
 
 	let endsInPM = false

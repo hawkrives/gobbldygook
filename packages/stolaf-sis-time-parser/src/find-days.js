@@ -1,5 +1,11 @@
 // @flow
-import daysOfTheWeek from './daysOfTheWeek'
+const daysOfTheWeek = {
+	M: 'Mo',
+	T: 'Tu',
+	W: 'We',
+	Th: 'Th',
+	F: 'Fr',
+}
 
 const daySequence = ['M', 'T', 'W', 'Th', 'F']
 

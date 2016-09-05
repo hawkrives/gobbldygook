@@ -3,11 +3,11 @@ import assign from 'lodash/assign'
 import mergeWith from 'lodash/mergeWith'
 import values from 'lodash/values'
 import zip from 'lodash/zip'
-import findDays from './findDays'
-import findTime from './findTime'
+import findDays from './find-days'
+import findTime from './find-time'
 
 export default function convertTimeStringsToOfferings(course) {
-	let offerings: offeringT = {}
+	let offerings = {}
 
 	zip(course.times, course.locations).forEach(([sisTimestring, location]) => {
 		const [daystring, timestring] = sisTimestring.split(' ')
