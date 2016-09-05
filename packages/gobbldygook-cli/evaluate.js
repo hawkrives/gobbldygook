@@ -1,11 +1,11 @@
-import evaluate from 'hanson-format/evaluate'
+import {evaluate} from 'hanson-format'
 import nomnom from 'nomnom'
 import fs from 'graceful-fs'
-import compute from 'hanson-format/compute'
+import {compute} from 'hanson-format'
 import get from 'lodash/get'
 import loadArea from './lib/load-area'
 import yaml from 'js-yaml'
-import isRequirementName from 'hanson-format/is-requirement-name'
+import {isRequirementName} from 'hanson-format'
 import toPairs from 'lodash/toPairs'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
@@ -15,7 +15,7 @@ import keys from 'lodash/keys'
 import sortBy from 'lodash/sortBy'
 import plur from 'plur'
 import chalk from 'chalk'
-import humanizeOperator from 'hanson-format/humanize-operator'
+import {humanizeOperator} from 'hanson-format'
 
 
 function condenseCourse(course) {

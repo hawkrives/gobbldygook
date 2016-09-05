@@ -1,5 +1,5 @@
 import fs from 'graceful-fs'
-import evaluate from 'hanson-format/evaluate'
+import {evaluate} from 'hanson-format'
 import endsWith from 'lodash/endsWith'
 import junk from 'junk'
 import nom from 'nomnom'

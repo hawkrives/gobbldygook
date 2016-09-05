@@ -9,7 +9,7 @@ import {expect} from 'chai'
 import flatten from 'lodash/flatten'
 import junk from 'junk'
 
-import evaluate from 'hanson-format/evaluate'
+import {evaluate} from 'hanson-format'
 import loadStudent from './lib/load-student'
 
 function testStudent(student, mochaInstance) {

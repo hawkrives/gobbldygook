@@ -1,4 +1,4 @@
-const parse = require('hanson-format/parse-hanson-string').parse
+const {parseHansonString: parse} = require('hanson-format')
 const nom = require('nomnom')
 const stringify = require('stabilize')
 const yaml = require('js-yaml')

@@ -1,6 +1,6 @@
 import bluebird from 'bluebird'
 import yaml from 'js-yaml'
-import enhanceHanson from 'hanson-format/enhance-hanson'
+import {enhance as enhanceHanson} from 'hanson-format'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import find from 'lodash/find'
