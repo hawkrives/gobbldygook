@@ -1,6 +1,4 @@
-/* globals module */
-
-const invert = require('lodash/invert')
+import invert from 'lodash/invert'
 
 const shortToLong = {
 	AR: 'ART',
@@ -22,22 +20,16 @@ const shortToLong = {
 
 const longToShort = invert(shortToLong)
 
-function expandDepartment(dept) {
+export function expandDepartment(dept) {
 	if (!(dept in shortToLong)) {
 		throw new TypeError(`expandDepartment(): "${dept}" is not a valid department shorthand`)
 	}
 	return shortToLong[dept]
 }
 
-function shrinkDepartment(dept) {
+export function shrinkDepartment(dept) {
 	if (!(dept in longToShort)) {
 		return dept
 	}
 	return longToShort[dept]
-}
-
-module.exports = {
-	__esModule: true,
-	expandDepartment,
-	shrinkDepartment,
 }

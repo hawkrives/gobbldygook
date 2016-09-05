@@ -1,4 +1,4 @@
-import {departmentNameToAbbr} from 'stolaf-courses'
+import {departmentNameToAbbr} from '../stolaf-courses'
 
 /**
  * Builds a department string from a course.
