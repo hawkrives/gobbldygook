@@ -11,7 +11,7 @@ import {
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
 
-import {SORT_BY, GROUP_BY} from '../../../components/course-searcher-options'
+import {SORT_BY, GROUP_BY} from 'src/components/course-searcher-options'
 
 import includes from 'lodash/includes'
 import uniq from 'lodash/uniq'
@@ -22,8 +22,8 @@ import { oxford } from 'humanize-plus'
 import map from 'lodash/map'
 import present from 'present'
 
-import buildDept from '../../../helpers/build-dept'
-import to12Hour from '../../../helpers/to-12-hour-time'
+import {buildDept} from 'gb-school-stolaf'
+import {to12Hour} from 'gb-lib'
 const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
 // eslint-disable-next-line no-confusing-arrow

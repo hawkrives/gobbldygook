@@ -1,11 +1,11 @@
 import React, {Component, PropTypes} from 'react'
 import fuzzysearch from 'fuzzysearch'
-import pluralizeArea from 'src/area-tools/pluralize-area'
+import {pluralizeArea} from 'hanson-format'
 import map from 'lodash/map'
 import reject from 'lodash/reject'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
-import filterAreaList from 'src/helpers/filter-area-list'
+import {filterAreaList} from 'gb-student-format'
 
 import Button from 'src/components/button'
 import List from 'src/components/list'

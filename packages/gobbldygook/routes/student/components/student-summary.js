@@ -10,7 +10,7 @@ import AvatarLetter from 'src/components/avatar-letter'
 import ContentEditable from 'src/components/content-editable'
 
 import getActiveStudentCourses from 'src/helpers/get-active-student-courses'
-import countCredits from 'src/area-tools/count-credits'
+import {countCredits} from 'hanson-format'
 
 import './student-summary.scss'
 

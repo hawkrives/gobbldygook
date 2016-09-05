@@ -1,4 +1,4 @@
-import Schedule from '../../../models/schedule'
+import {Schedule} from 'gb-student-format'
 
 import {
 	ADD_SCHEDULE,

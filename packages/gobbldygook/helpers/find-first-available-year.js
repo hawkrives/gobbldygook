@@ -3,8 +3,8 @@ import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import max from 'lodash/max'
 import includes from 'lodash/includes'
-import findMissingNumberBinarySearch from './find-missing-number-binary-search'
-import type {Schedule} from '../models/types'
+import {findMissingNumberBinarySearch} from 'gb-lib'
+import type {Schedule} from 'gb-student-format'
 
 /**
  * Takes a list of schedules and finds the first open year.

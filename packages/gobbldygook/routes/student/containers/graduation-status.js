@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import has from 'lodash/has'
-import pathToOverride from 'src/area-tools/path-to-override'
+import {pathToOverride} from 'hanson-format'
 
 import {changeName, changeMatriculation, changeGraduation} from 'src/redux/students/actions/change'
 import {addArea, removeArea} from 'src/redux/students/actions/areas'

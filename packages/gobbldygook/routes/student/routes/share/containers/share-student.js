@@ -10,7 +10,7 @@ import {close} from 'src/icons/ionicons'
 
 import { connect } from 'react-redux'
 
-import encodeStudent from 'src/helpers/encode-student'
+import {encodeStudent} from 'gb-student-format'
 
 import './share-student.scss'
 

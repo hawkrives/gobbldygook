@@ -1,7 +1,7 @@
 import Bluebird from 'bluebird'
 
-import Student from '../models/student'
-const log = (...args) => TESTING || /* istanbul ignore next */ console.error(...args)
+import Student from 'gb-student-format'
+const log = (...args) => /* istanbul ignore next */ console.error(...args)
 
 export default function loadStudent(studentId) {
 	return new Bluebird(resolve => {

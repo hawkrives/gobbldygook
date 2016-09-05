@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import expandYear from 'src/helpers/expand-year'
+import {expandYear} from 'gb-school-stolaf'
 
 import findFirstAvailableYear from 'src/helpers/find-first-available-year'
 import map from 'lodash/map'

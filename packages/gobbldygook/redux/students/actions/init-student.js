@@ -2,8 +2,7 @@ import forEach from 'lodash/forEach'
 import range from 'lodash/range'
 import size from 'lodash/size'
 
-import Student, {addScheduleToStudent} from '../../../models/student'
-import Schedule from '../../../models/schedule'
+import {Schedule, Student, addScheduleToStudent} from 'gb-student-format'
 
 import {
 	INIT_STUDENT,

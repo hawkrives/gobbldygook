@@ -1,4 +1,4 @@
-import saveStudentFunc from '../../../helpers/save-student'
+import saveStudentFunc from 'src/helpers/save-student'
 
 import {SAVE_STUDENT} from '../constants'
 

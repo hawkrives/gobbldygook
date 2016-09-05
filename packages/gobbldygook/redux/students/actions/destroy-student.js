@@ -1,4 +1,4 @@
-import {removeStudentFromCache} from '../../../helpers/save-student'
+import {removeStudentFromCache} from 'src/helpers/save-student'
 
 import {
 	DESTROY_STUDENT,

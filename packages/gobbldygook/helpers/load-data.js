@@ -1,6 +1,6 @@
-const Bluebird = require('bluebird')
-const uniqueId = require('lodash/uniqueId')
-import {status, text} from './fetch-helpers'
+import Bluebird from 'bluebird'
+import uniqueId from 'lodash/uniqueId'
+import {status, text} from 'gb-lib'
 
 import * as notificationActions from '../redux/notifications/actions'
 import * as courseActions from '../redux/courses/actions'

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
 import map from 'lodash/map'
-import toPrettyTerm from 'stolaf-courses/to-pretty-term'
+import {toPrettyTerm} from 'gb-school-stolaf'
 
 import Button from './button'
 import Icon from './icon'

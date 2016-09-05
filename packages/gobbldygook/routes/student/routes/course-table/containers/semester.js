@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
-import isCurrentSemester from 'src/helpers/is-current-semester'
+import {isCurrentSemester} from 'gb-school-stolaf'
 
 import Loading from 'src/components/loading'
 import {destroySchedules} from 'src/redux/students/actions/schedules'

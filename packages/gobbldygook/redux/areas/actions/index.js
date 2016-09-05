@@ -1,9 +1,9 @@
 // @flow
 import type {Dispatch, Action, State} from 'redux'
 import Bluebird from 'bluebird'
-import db from '../../../helpers/db'
+import db from 'src/helpers/db'
 import map from 'lodash/map'
-import loadArea from '../../../helpers/load-area'
+import loadArea from 'src/helpers/load-area'
 
 import {
 	LOAD_ALL_AREAS,

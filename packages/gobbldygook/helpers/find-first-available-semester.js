@@ -3,8 +3,8 @@ import filter from 'lodash/filter'
 import map from 'lodash/map'
 import uniq from 'lodash/uniq'
 import sortBy from 'lodash/sortBy'
-import findMissingNumberBinarySearch from './find-missing-number-binary-search'
-import type {Schedule} from '../models/types'
+import {findMissingNumberBinarySearch} from 'gb-lib'
+import type {Schedule} from 'gb-student-format'
 
 /**
  * Takes a list of schedules and finds the first open semester.

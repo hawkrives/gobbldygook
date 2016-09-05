@@ -5,8 +5,8 @@ import filter from 'lodash/filter'
 import round from 'lodash/round'
 import present from 'present'
 
-import stringifyError from 'gb-lib/stringify-error'
-import evaluate from 'hanson-format/evaluate'
+import {stringifyError} from 'gb-lib'
+import {evaluate} from 'hanson-format'
 import getActiveStudentCourses from './get-active-student-courses'
 import alterCourse from './alter-course-for-evaluation'
 

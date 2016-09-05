@@ -1,5 +1,5 @@
 import db from './db'
-import {enhance as enhanceHanson} from '../area-tools'
+import {enhance as enhanceHanson} from 'hanson-format'
 import some from 'lodash/some'
 import maxBy from 'lodash/maxBy'
 import yaml from 'js-yaml'

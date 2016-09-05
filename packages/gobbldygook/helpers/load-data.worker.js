@@ -1,8 +1,7 @@
 import Bluebird from 'bluebird'
 
 import 'isomorphic-fetch'
-import {status, json, text} from '../fetch-helpers'
-import stringifyError from '../stringify-error'
+import {status, json, text, stringifyError} from 'gb-lib'
 
 import range from 'idb-range'
 import uniq from 'lodash/uniq'
@@ -21,9 +20,9 @@ import present from 'present'
 import yaml from 'js-yaml'
 
 import db from '../db'
-import buildDept from '../build-dept'
-import buildDeptNum from '../build-dept-num'
-import splitParagraph from '../split-paragraph'
+import {buildDept} from 'gb-school-stolaf'
+import {buildDeptNum} from 'gb-school-stolaf'
+import {splitParagraph} from 'gb-lib'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 const debug = console.log.bind(console)

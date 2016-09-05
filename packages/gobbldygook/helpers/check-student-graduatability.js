@@ -5,7 +5,7 @@ import size from 'lodash/size'
 import map from 'lodash/map'
 
 import checkStudentAgainstArea from './check-student-against-area'
-import countCredits from 'hanson-format/count-credits'
+import {countCredits} from 'hanson-format'
 import getActiveStudentCourses from './get-active-student-courses'
 
 

@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
 import withRouter from 'react-router/lib/withRouter'
 
-import Modal from '../../../components/modal'
-import CourseSearcher from '../../../containers/course-searcher'
+import Modal from 'src/components/modal'
+import CourseSearcher from 'src/containers/course-searcher'
 import './course-searcher-overlay.scss'
 
 function CourseSearcherOverlay(props) {

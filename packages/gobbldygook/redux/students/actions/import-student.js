@@ -1,4 +1,4 @@
-import Student from '../../../models/student'
+import {Student} from 'gb-student-format'
 
 import {
 	IMPORT_STUDENT,

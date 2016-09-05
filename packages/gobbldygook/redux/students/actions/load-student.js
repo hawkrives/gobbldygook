@@ -1,4 +1,4 @@
-import loadStudentFunc from '../../../helpers/load-student'
+import loadStudentFunc from 'src/helpers/load-student'
 import { checkStudent } from './check-student'
 
 import {

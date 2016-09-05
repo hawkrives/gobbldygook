@@ -4,8 +4,8 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
 import DocumentTitle from 'react-document-title'
-import isCurrentSemester from 'src/helpers/is-current-semester'
-import semesterName from 'src/helpers/semester-name'
+import {isCurrentSemester} from 'gb-school-stolaf'
+import {semesterName} from 'gb-school-stolaf'
 
 import './semester-detail.scss'
 

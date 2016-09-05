@@ -7,11 +7,12 @@ import filter from 'lodash/filter'
 import isNull from 'lodash/isNull'
 import map from 'lodash/map'
 
-import {COURSE} from 'gb-student-format/item-types'
+import {ITEM_TYPES} from 'gb-student-format'
+const {COURSE} = ITEM_TYPES
 
 import List from './list'
 import CourseTitle from './course-title'
-import buildCourseIdent from 'stolaf-deptnums/build-course-ident'
+import {buildCourseIdent} from 'gb-school-stolaf'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 

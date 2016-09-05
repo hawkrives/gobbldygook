@@ -5,7 +5,7 @@ import Button from 'src/components/button'
 import Icon from 'src/components/icon'
 import Requirement from './requirement'
 import ProgressBar from 'src/components/progress-bar'
-import compareProps from 'src/helpers/compare-props'
+import {compareProps} from 'gb-lib'
 import {close, chevronUp, chevronDown} from 'src/icons/ionicons'
 
 import './area-of-study.scss'

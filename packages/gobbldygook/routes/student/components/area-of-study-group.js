@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
 import map from 'lodash/map'
-import pluralizeArea from 'src/area-tools/pluralize-area'
+import {pluralizeArea} from 'hanson-format'
 import capitalize from 'lodash/capitalize'
-import * as areaTypeConstants from 'src/models/area-types'
+import {areaTypeConstants} from 'gb-student-format'
 import values from 'lodash/values'
 
 import AreaOfStudy from './area-of-study'

@@ -1,8 +1,8 @@
 import treo, {Database} from 'treo'
 treo.Promise = require('bluebird')
 
-import queryTreoDatabase from '../helpers/treo-plugins/query-treo-database'
-import batchGet from '../helpers/treo-plugins/treo-batch-get'
+import {queryTreoDatabase} from 'gb-search-queries'
+import {batchGet} from 'gb-search-queries'
 
 import schema from './db-schema'
 

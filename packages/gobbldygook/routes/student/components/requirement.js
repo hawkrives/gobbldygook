@@ -3,7 +3,7 @@ import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 
-import isRequirementName from 'src/area-tools/is-requirement-name'
+import {isRequirementName} from 'hanson-format'
 
 import Filter from './expression--filter'
 import Expression from './expression'

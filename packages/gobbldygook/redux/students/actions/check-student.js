@@ -1,6 +1,6 @@
-import getStudentDataFunc from '../../../helpers/get-student-data'
-import checkStudentGraduatabilityFunc from '../../../helpers/check-student-graduatability'
-import validateSchedulesFunc from '../../../helpers/validate-schedules'
+import getStudentDataFunc from 'src/helpers/get-student-data'
+import checkStudentGraduatabilityFunc from 'src/helpers/check-student-graduatability'
+import {validateSchedules as validateSchedulesFunc} from 'gb-student-format'
 
 import {
 	BEGIN_GET_STUDENT_DATA,

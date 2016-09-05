@@ -3,9 +3,10 @@ import {findDOMNode} from 'react-dom'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 import plur from 'plur'
-import semesterName from 'src/helpers/semester-name'
-import countCredits from 'src/area-tools/count-credits'
-import {COURSE} from 'src/models/item-types'
+import {semesterName} from 'gb-school-stolaf'
+import {countCredits} from 'hanson-format'
+import {courseTypeConstants} from 'gb-student-format'
+const {COURSE} = courseTypeConstants
 import {DropTarget} from 'react-dnd'
 import includes from 'lodash/includes'
 

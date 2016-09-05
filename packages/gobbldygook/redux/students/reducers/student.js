@@ -22,7 +22,7 @@ import {
 	addCourseToSchedule,
 	removeCourseFromSchedule,
 	reorderCourseInSchedule,
-} from '../../../models/student'
+} from 'gb-student-format'
 
 import {
 	LOAD_STUDENT,

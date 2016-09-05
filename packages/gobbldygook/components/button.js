@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 
-import compareProps from 'gb-lib/compare-props'
+import {compareProps} from 'gb-lib'
 import './button.scss'
 
 export default class Button extends Component {

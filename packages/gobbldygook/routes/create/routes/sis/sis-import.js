@@ -1,13 +1,16 @@
 import React, {Component, PropTypes} from 'react'
 import serializeError from 'serialize-error'
 import Button from 'src/components/button'
-import getStudentInfo, {checkIfLoggedIn} from 'src/helpers/import-student'
-import convertStudent from 'src/helpers/convert-imported-student'
+import {
+	getStudentInfo,
+	checkIfLoggedIn,
+	convertStudent,
+	semesterName,
+} from 'gb-school-stolaf'
 import StudentSummary from 'src/routes/student/components/student-summary'
 import map from 'lodash/map'
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
-import semesterName from 'src/helpers/semester-name'
 import { RadioGroup, Radio } from 'react-radio-group'
 import { initStudent } from 'src/redux/students/actions/init-student'
 import { connect } from 'react-redux'

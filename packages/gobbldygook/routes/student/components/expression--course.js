@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import semesterName from 'src/helpers/semester-name'
-import {shrinkDepartment} from 'src/area-tools/convert-department'
+import {semesterName} from 'gb-school-stolaf'
+import {normalizeDepartment} from 'gb-school-stolaf'
 
 import './expression--course.scss'
 
 export default function CourseExpression(props) {
 	const department = props.department.length > 1
-		? props.department.map(shrinkDepartment).join('/')
+		? props.department.map(normalizeDepartment).join('/')
 		: props.department.join('/')
 
 	const international = props.international &&

@@ -2,7 +2,8 @@ import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {DropTarget} from 'react-dnd'
 
-import {COURSE} from 'gb-student-format/item-types'
+import {ITEM_TYPES} from 'gb-student-format'
+const {COURSE} = ITEM_TYPES
 
 import Icon from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
