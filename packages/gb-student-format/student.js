@@ -13,6 +13,7 @@ import reject from 'lodash/reject'
 import {v4 as uuid} from 'uuid'
 
 import {randomChar} from 'gb-lib'
+import {version} from './package.json'
 
 const now = new Date()
 import Schedule from './schedule'
@@ -21,7 +22,7 @@ export default function Student(data) {
 	const baseStudent = {
 		id: uuid(),
 		name: 'Student ' + randomChar(),
-		version: VERSION,
+		version: version,
 
 		creditsNeeded: 35,
 
@@ -107,7 +108,7 @@ export function addScheduleToStudent(student, newSchedule) {
 }
 
 export function destroyScheduleFromStudent(student, scheduleId) {
-	!TESTING && console.log(`Student.destroySchedule(): removing schedule ${scheduleId}`)
+	console.log(`Student.destroySchedule(): removing schedule ${scheduleId}`)
 
 	if (student.schedules instanceof Array) {
 		throw new TypeError('destroyScheduleFromStudent: schedules must not be an array!')
@@ -152,7 +153,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 		return student
 	}
 
-	!TESTING && console.log(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+	console.log(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	schedule.clbids = schedule.clbids.concat(clbid)
 
@@ -175,7 +176,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 		return student
 	}
 
-	!TESTING && console.log(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+	console.log(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	schedule.clbids = reject(schedule.clbids, id => id === clbid)
 
@@ -183,7 +184,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 }
 
 export function moveCourseToSchedule(student, {fromScheduleId, toScheduleId, clbid}) {
-	!TESTING && console.log(`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+	console.log(`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 
 	student = removeCourseFromSchedule(student, fromScheduleId, clbid)
 	student = addCourseToSchedule(student, toScheduleId, clbid)
