@@ -12,7 +12,7 @@ import omit from 'lodash/omit'
 import reject from 'lodash/reject'
 import {v4 as uuid} from 'uuid'
 
-import randomChar from 'gb-lib/random-char'
+import {randomChar} from 'gb-lib'
 
 const now = new Date()
 import Schedule from './schedule'

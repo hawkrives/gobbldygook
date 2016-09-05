@@ -8,8 +8,8 @@ import ordinal from 'ord'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import {findScheduleTimeConflicts} from 'sto-sis-timestring-parser'
-import expandYear from 'stolaf-courses/expand-year'
-import semesterName from 'stolaf-courses/semester-name'
+import {expandYear} from 'gb-school-stolaf'
+import {semesterName} from 'gb-school-stolaf'
 // import {alertCircled, iosCalendarOutline, iosClockOutline} from '../icons/ionicons'
 
 export function checkForInvalidYear(course, scheduleYear) {

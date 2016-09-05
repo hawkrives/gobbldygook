@@ -1,7 +1,7 @@
 import isString from 'lodash/isString'
 import {v4 as uuid} from 'uuid'
 
-import randomChar from 'gb-lib/random-char'
+import {randomChar} from 'gb-lib'
 
 export default function Schedule(data={}) {
 	const baseSchedule = {
