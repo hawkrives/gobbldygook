@@ -138,6 +138,8 @@ const config = {
 							}(window.location))
 						</script>
 						<!-- End Single Page Apps for GitHub Pages -->
+						
+						<script src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>
 
 						${context.css ? `<link rel="stylesheet" href="${publicPath}${context.css}">` : ''}
 						<body><main id="gobbldygook"></main></body>
