@@ -99,7 +99,7 @@
     "cpy-cli": "1.0.1",
     "cross-env": "2.0.1",
     "css-loader": "0.25.0",
-    "eslint": "3.4.0",
+    "eslint": "3.5.0",
     "eslint-plugin-babel": "3.3.0",
     "eslint-plugin-react": "6.2.0",
     "extract-text-webpack-plugin": "1.0.1",
