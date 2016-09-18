@@ -75,7 +75,7 @@
     "sto-course-related-data": "4.0.2",
     "sto-sis-time-parser": "2.2.8",
     "treo": "0.6.0-rc2",
-    "uuid": "2.0.2"
+    "uuid": "2.0.3"
   },
   "devDependencies": {
     "babel-core": "6.14.0",
