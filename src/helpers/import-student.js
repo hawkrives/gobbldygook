@@ -25,12 +25,12 @@ function html(text) {
 	return parseHtml(text)
 }
 
-function fetchHtml(url, fetchArgs) {
-	if (!global.gobbldygook_extension_version) {
+function fetchHtml(url, fetchArgs={}) {
+	if (!global.gobbldygook_extension) {
 		return Bluebird.reject(new ExtensionNotLoadedError)
 	}
-	if (global.gobbldygook_extension_version < '1.0.0') {
-		return Bluebird.reject(new ExtensionTooOldError(global.gobbldygook_extension_version))
+	if (global.gobbldygook_extension < '1.0.0') {
+		return Bluebird.reject(new ExtensionTooOldError(global.gobbldygook_extension))
 	}
 
 	// now we know the extension is loaded
@@ -60,7 +60,7 @@ function fetchHtml(url, fetchArgs) {
 			id,
 			url,
 			fetchArgs,
-		})
+		}, '*')
 	})
 }
 
@@ -308,11 +308,11 @@ export function getGraduationInformation(dom) {
 
 
 export function checkIfLoggedIn() {
-	if (!global.gobbldygook_extension_version) {
+	if (!global.gobbldygook_extension) {
 		return Bluebird.reject(new ExtensionNotLoadedError('Extension not loaded'))
 	}
-	if (global.gobbldygook_extension_version < '1.0.0') {
-		return Bluebird.reject(new ExtensionTooOldError(global.gobbldygook_extension_version))
+	if (global.gobbldygook_extension < '1.0.0') {
+		return Bluebird.reject(new ExtensionTooOldError(global.gobbldygook_extension))
 	}
 
 	return fetchHtml(COURSES_URL).then(response => {
