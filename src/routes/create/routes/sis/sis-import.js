@@ -97,14 +97,10 @@ class SISImportScreen extends Component {
 				</header>
 
 				<p>
-					Warning! Currently under development. Will most likely be broken.
-				</p>
-
-				<p>
 					{checkingLogin
 						? 'Checking login…'
 						: loggedIn
-							? "Great! You\'re logged in."
+							? "Great! You're logged in."
 							: 'Not logged in. Please log in to the SIS in another tab.'}
 				</p>
 
