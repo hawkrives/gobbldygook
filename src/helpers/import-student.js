@@ -18,8 +18,8 @@ import {selectAll, selectOne} from 'css-select'
 const COURSES_URL = 'https://www.stolaf.edu/sis/st-courses.cfm'
 const DEGREE_AUDIT_URL = 'https://www.stolaf.edu/sis/st-degreeaudit.cfm'
 
-class ExtensionNotLoadedError extends Error {}
-class ExtensionTooOldError extends Error {}
+export class ExtensionNotLoadedError extends Error {}
+export class ExtensionTooOldError extends Error {}
 
 function html(text) {
 	return parseHtml(text)

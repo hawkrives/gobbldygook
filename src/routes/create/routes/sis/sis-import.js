@@ -1,7 +1,11 @@
 import React, {Component, PropTypes} from 'react'
 import serializeError from 'serialize-error'
 import Button from 'src/components/button'
-import getStudentInfo, {checkIfLoggedIn} from 'src/helpers/import-student'
+import getStudentInfo, {
+	checkIfLoggedIn,
+	ExtensionNotLoadedError,
+	ExtensionTooOldError,
+} from 'src/helpers/import-student'
 import convertStudent from 'src/helpers/convert-imported-student'
 import StudentSummary from 'src/routes/student/components/student-summary'
 import map from 'lodash/map'
@@ -42,7 +46,18 @@ class SISImportScreen extends Component {
 					this.setState({loggedIn: true, checkingLogin: false, ids})
 				}
 			})
-			.catch(() => this.setState({loggedIn: false, checkingLogin: false}))
+			.catch(err => {
+				this.setState({loggedIn: false, checkingLogin: false})
+				if (err instanceof ExtensionNotLoadedError) {
+					this.setState({error: 'The extension is not loaded properly.'})
+				}
+				else if (err instanceof ExtensionTooOldError) {
+					this.setState({error: 'The extension is too old.'})
+				}
+				else {
+					this.setState({error: serializeError(err)})
+				}
+			})
 	};
 
 	handleImportData = () => {
