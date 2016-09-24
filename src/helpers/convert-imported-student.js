@@ -90,10 +90,10 @@ function resolveSingularDataPoints(degrees) {
 	forEach(thereShouldOnlyBeOne, (group, name) => {
 		let len = uniq(group).length
 		if (len > 1) {
-			throw new Error(`convertStudent: The student has more than one ${plur(name, 2)}: ${JSON.stringify(group)}`)
+			throw new Error(`convertStudent: The student has more than one ${name}: ${JSON.stringify(group)}`)
 		}
 		else if (!len) {
-			throw new Error(`convertStudent: The student has zero ${plur(name, 0)}: ${JSON.stringify(group)}`)
+			throw new Error(`convertStudent: The student has no ${name}: ${JSON.stringify(group)}`)
 		}
 	})
 
