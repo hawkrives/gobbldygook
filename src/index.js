@@ -6,9 +6,6 @@ Bluebird.config({
 	},
 })
 
-// Enable crash tracking
-PRODUCTION && require('ohcrash')('ogdR7qSuIqexx4aixXhFKlG2')
-
 // Include fetch
 import 'isomorphic-fetch'
 
