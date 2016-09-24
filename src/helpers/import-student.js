@@ -10,20 +10,58 @@ import mapKeys from 'lodash/mapKeys'
 import parseHtml from './parse-html'
 import partitionByIndex from './partition-by-index'
 import uniq from 'lodash/uniq'
+import {v4 as uuid} from 'uuid'
 import unzip from 'lodash/unzip'
 import {AuthError, NetworkError} from './errors'
 import {selectAll, selectOne} from 'css-select'
-import {status, text, classifyFetchErrors} from './fetch-helpers'
 
 const COURSES_URL = 'https://www.stolaf.edu/sis/st-courses.cfm'
 const DEGREE_AUDIT_URL = 'https://www.stolaf.edu/sis/st-degreeaudit.cfm'
 
-const fetch = (url, args={}) => global.fetch(url, {cache: 'no-cache', credentials: 'same-origin', mode: 'same-origin', ...args}).catch(classifyFetchErrors)
-const fetchHtml = (...args) => fetch(...args).then(status).then(text).then(html)
-
+class ExtensionNotLoadedError extends Error {}
+class ExtensionTooOldError extends Error {}
 
 function html(text) {
 	return parseHtml(text)
+}
+
+function fetchHtml(url, fetchArgs) {
+	if (!global.gobbldygook_extension_version) {
+		return Bluebird.reject(new ExtensionNotLoadedError)
+	}
+	if (global.gobbldygook_extension_version < '1.0.0') {
+		return Bluebird.reject(new ExtensionTooOldError(global.gobbldygook_extension_version))
+	}
+
+	// now we know the extension is loaded
+
+	return new Bluebird((resolve, reject) => {
+		const id = uuid()
+
+		global.addEventListener('message', event => {
+			// `event` should have the shape {from, id, text}
+			if (event.data.from !== 'web-ext') {
+				return
+			}
+			if (event.data.id !== id) {
+				return
+			}
+
+			if (event.data.error) {
+				reject(event.data.error)
+			}
+			else {
+				resolve(html(event.data.text))
+			}
+		})
+
+		global.postMessage({
+			from: 'page',
+			id,
+			url,
+			fetchArgs,
+		})
+	})
 }
 
 function buildFormData(obj) {
@@ -270,9 +308,13 @@ export function getGraduationInformation(dom) {
 
 
 export function checkIfLoggedIn() {
-	if (typeof window !== 'undefined' && window.location.hostname !== 'www.stolaf.edu') {
-		return Bluebird.reject(new AuthError('Wrong domain. Student import will only work under the www.stolaf.edu domain.'))
+	if (!global.gobbldygook_extension_version) {
+		return Bluebird.reject(new ExtensionNotLoadedError('Extension not loaded'))
 	}
+	if (global.gobbldygook_extension_version < '1.0.0') {
+		return Bluebird.reject(new ExtensionTooOldError(global.gobbldygook_extension_version))
+	}
+
 	return fetchHtml(COURSES_URL).then(response => {
 		let errorMsg = selectOne('.sis-error', response)
 		let badMsg = 'Sorry, your session has timed out; please login again.'
