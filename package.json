@@ -96,7 +96,7 @@
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "chai": "3.5.0",
     "cpy-cli": "1.0.1",
-    "cross-env": "2.0.1",
+    "cross-env": "3.0.0",
     "css-loader": "0.25.0",
     "eslint": "3.6.0",
     "eslint-plugin-babel": "3.3.0",
