@@ -1,5 +1,4 @@
 global.Promise = require('bluebird')
-global.debug = require('debug')
 
 global.VERSION = String(require('../package.json').version)
 global.DEVELOPMENT = false
