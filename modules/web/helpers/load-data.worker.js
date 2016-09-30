@@ -1,6 +1,6 @@
 import Bluebird from 'bluebird'
 
-import 'isomorphic-fetch'
+import 'whatwg-fetch'
 import {status, json, text} from '../fetch-helpers'
 import stringifyError from '../stringify-error'
 

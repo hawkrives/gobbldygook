@@ -1,4 +1,4 @@
-import 'isomorphic-fetch'
+import 'whatwg-fetch'
 import {status, json, text} from '../../src/helpers/fetch-helpers'
 
 import startsWith from 'lodash/startsWith'

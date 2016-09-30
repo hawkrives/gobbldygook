@@ -7,7 +7,7 @@ Bluebird.config({
 })
 
 // Include fetch
-import 'isomorphic-fetch'
+import 'whatwg-fetch'
 
 // Include React and react-dom.render
 const React = require('react')
