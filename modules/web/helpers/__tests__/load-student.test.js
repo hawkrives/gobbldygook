@@ -1,12 +1,9 @@
 import {expect} from 'chai'
 
-import loadStudent from '../../src/helpers/load-student'
-import demoStudent from '../../src/models/demo-student.json'
+import {loadStudent} from '../load-student'
+import demoStudent from 'modules/student-format/demo-student.json'
 
-import mock from 'mock-require'
-mock('../../src/helpers/get-courses', require('../../../__tests/mocks/get-courses.mock.js').default)
-mock('../../src/helpers/load-area', require('../../../__tests/mocks/load-area.mock.js').default)
-import Student from '../../src/models/student'
+import {Student} from 'modules/core'
 
 describe('loadStudent', () => {
 	let student

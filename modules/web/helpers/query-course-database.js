@@ -1,5 +1,5 @@
 import db from './db'
-import buildQueryFromString from '../helpers/build-query-from-string'
+import {buildQueryFromString} from 'modules/core'
 import compact from 'lodash/compact'
 import filter from 'lodash/filter'
 import map from 'lodash/map'

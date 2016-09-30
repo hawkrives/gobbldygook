@@ -4,9 +4,9 @@ import filter from 'lodash/filter'
 import size from 'lodash/size'
 import map from 'lodash/map'
 
-import checkStudentAgainstArea from './check-student-against-area'
-import countCredits from '../area-tools/count-credits'
-import getActiveStudentCourses from './get-active-student-courses'
+import {checkStudentAgainstArea} from './check-student-against-area'
+import {countCredits} from 'modules/core/examine-student'
+import {getActiveStudentCourses} from './get-active-student-courses'
 
 
 /**
@@ -19,7 +19,7 @@ import getActiveStudentCourses from './get-active-student-courses'
  *    {boolean} canGraduate
  *    {object} details
  */
-export default function checkStudentGraduatability(student) {
+export function checkStudentGraduatability(student) {
 	const areaPromises = map(student.areas, checkStudentAgainstArea(student))
 	return Bluebird.all(areaPromises).then(areaDetails => {
 		const goodAreas = filter(areaDetails, area => area._area && area._area.computed === true)

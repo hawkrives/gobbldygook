@@ -11,11 +11,13 @@ import Separator from './separator'
 import Toolbar from './toolbar'
 import Button from './button'
 import CourseTitle from './course-title'
-import buildCourseIdent from '../helpers/build-course-ident'
+import {
+	buildCourseIdent,
+	semesterName,
+	expandYear,
+} from 'modules/schools/stolaf'
 
-import semesterName from '../helpers/semester-name'
-import expandYear from '../helpers/expand-year'
-import to12Hour from '../helpers/to-12-hour-time'
+import { to12HourTime } from 'modules/lib'
 
 import { bindActionCreators } from 'redux'
 const { connect } = require('react-redux')
@@ -144,7 +146,7 @@ function ModalCourse(props) {
 						<ul>
 							{flatMap(course.offerings, (o, i) =>
 								map(o.times, (t, j) =>
-									<li key={`${i}-${j}`}>{o.day} from {to12Hour(t.start)} to {to12Hour(t.end)}, in {o.location}</li>)
+									<li key={`${i}-${j}`}>{o.day} from {to12HourTime(t.start)} to {to12HourTime(t.end)}, in {o.location}</li>)
 								)}
 						</ul>
 					</div>}

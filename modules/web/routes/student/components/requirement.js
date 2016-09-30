@@ -3,11 +3,11 @@ import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 
-import isRequirementName from 'src/area-tools/is-requirement-name'
+import {isRequirementName} from 'modules/core/examine-student'
 
 import Filter from './expression--filter'
 import Expression from './expression'
-import Button from 'src/components/button'
+import Button from 'modules/web/components/button'
 import ResultIndicator from './result-indicator'
 
 import './requirement.scss'

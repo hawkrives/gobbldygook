@@ -22,8 +22,8 @@ import { oxford } from 'humanize-plus'
 import map from 'lodash/map'
 import present from 'present'
 
-import buildDept from '../../../helpers/build-dept'
-import to12Hour from '../../../helpers/to-12-hour-time'
+import {buildDept} from 'modules/schools/stolaf'
+import {to12HourTime} from 'modules/lib'
 const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
 // eslint-disable-next-line no-confusing-arrow
@@ -34,7 +34,7 @@ const DAY_OF_WEEK = course => course.offerings
 // eslint-disable-next-line no-confusing-arrow
 const TIME_OF_DAY = course => course.offerings
 	? oxford(sortBy(uniq(flatMap(course.offerings, offer =>
-		map(offer.times, time => `${to12Hour(time.start)}-${to12Hour(time.end)}`)))))
+		map(offer.times, time => `${to12HourTime(time.start)}-${to12HourTime(time.end)}`)))))
 	: 'No Times Listed'
 
 // eslint-disable-next-line no-confusing-arrow

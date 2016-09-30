@@ -11,7 +11,7 @@ import {COURSE} from '../../core/student-format/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'
-import buildCourseIdent from '../helpers/build-course-ident'
+import {buildCourseIdent} from 'modules/schools/stolaf'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 
@@ -28,17 +28,6 @@ class InlineCourse extends Component {
 		scheduleId: PropTypes.string,
 		studentId: PropTypes.string,
 	};
-
-	props: {
-		className?: string,
-		conflicts?: Object[],
-		connectDragSource: () => any,
-		course: Object,
-		index?: number,
-		isDragging: bool,
-		scheduleId?: string,
-		studentId?: string,
-	}
 
 	state = {
 		isOpen: false,

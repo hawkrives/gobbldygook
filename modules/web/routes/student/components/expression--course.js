@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import semesterName from 'src/helpers/semester-name'
-import {shrinkDepartment} from 'src/area-tools/convert-department'
+import {semesterName} from 'modules/schools/stolaf'
+import {shrinkDepartment} from 'modules/core/examine-student/convert-department'
 
 import './expression--course.scss'
 

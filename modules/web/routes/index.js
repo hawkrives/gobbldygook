@@ -1,5 +1,5 @@
 export default {
-	component: require('src/containers/app').default,
+	component: require('modules/web/containers/app').default,
 	childRoutes: [{
 		path: '/',
 

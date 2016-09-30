@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 
-import {addSchedule, destroySchedules} from 'src/redux/students/actions/schedules'
-import findFirstAvailableYear from 'src/helpers/find-first-available-year'
-import findFirstAvailableSemester from 'src/helpers/find-first-available-semester'
+import {addSchedule, destroySchedules} from 'modules/web/redux/students/actions/schedules'
+import findFirstAvailableYear from 'modules/web/helpers/find-first-available-year'
+import findFirstAvailableSemester from 'modules/web/helpers/find-first-available-semester'
 
 import CourseTable from '../components/course-table'
 

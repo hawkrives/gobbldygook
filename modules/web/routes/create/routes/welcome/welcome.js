@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from 'src/components/button'
+import Button from 'modules/web/components/button'
 
 export default function WelcomeScreen() {
 	return <div>

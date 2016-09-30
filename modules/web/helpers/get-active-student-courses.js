@@ -2,7 +2,7 @@ import uniqBy from 'lodash/uniqBy'
 import filter from 'lodash/filter'
 import flatMap from 'lodash/flatMap'
 
-export default function getActiveStudentCourses(student) {
+export function getActiveStudentCourses(student) {
 	/*
 	 - At it's core, this method just needs to get the list of courses that a student has chosen.
 	 - Each schedule has a list of courses that are a part of that schedule.

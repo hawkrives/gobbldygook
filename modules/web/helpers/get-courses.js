@@ -52,6 +52,6 @@ export async function getCourse({clbid, term}, fabrications={}) {
  * @returns {Promise} - a promise for the course data
  * @fulfill {Object[]} - the courses.
  */
-export default function getCourses(clbids, fabrications) {
+export function getCourses(clbids, fabrications) {
 	return Bluebird.all(map(clbids, c => getCourse(c, fabrications)))
 }

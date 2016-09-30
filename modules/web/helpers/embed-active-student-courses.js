@@ -4,7 +4,7 @@ import map from 'lodash/map'
 import fromPairs from 'lodash/fromPairs'
 import {getCourse} from './get-courses'
 
-export default function embedActiveStudentCourses(student, {cache=[]}) {
+export function embedActiveStudentCourses(student, {cache=[]}) {
 	// - At it's core, this method just needs to get the list of courses that a student has chosen.
 	// - Each schedule has a list of courses that are a part of that schedule.
 	// - Additionally, we only care about the schedules that are marked as "active".

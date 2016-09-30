@@ -3,12 +3,11 @@ import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 import map from 'lodash/map'
 
-import Button from 'src/components/button'
+import Button from 'modules/web/components/button'
 import Semester from '../containers/semester'
 
-import findFirstAvailableSemester from 'src/helpers/find-first-available-semester'
-import expandYear from 'src/helpers/expand-year'
-import semesterName from 'src/helpers/semester-name'
+import {findFirstAvailableSemester} from 'modules/web/helpers/find-first-available-semester'
+import {expandYear, semesterName} from 'modules/schools/stolaf'
 
 import './year.scss'
 

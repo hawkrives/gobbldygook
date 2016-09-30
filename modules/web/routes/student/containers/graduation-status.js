@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import has from 'lodash/has'
-import pathToOverride from 'src/area-tools/path-to-override'
+import pathToOverride from 'modules/core/examine-student'
 
-import {changeName, changeMatriculation, changeGraduation} from 'src/redux/students/actions/change'
-import {addArea, removeArea} from 'src/redux/students/actions/areas'
-import {setOverride, removeOverride} from 'src/redux/students/actions/overrides'
+import {changeName, changeMatriculation, changeGraduation} from 'modules/web/redux/students/actions/change'
+import {addArea, removeArea} from 'modules/web/redux/students/actions/areas'
+import {setOverride, removeOverride} from 'modules/web/redux/students/actions/overrides'
 import GraduationStatus from '../components/graduation-status'
 
 class GraduationStatusContainer extends Component {

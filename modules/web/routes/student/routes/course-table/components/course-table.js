@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import expandYear from 'src/helpers/expand-year'
+import {expandYear} from 'modules/schools/stolaf'
 
-import findFirstAvailableYear from 'src/helpers/find-first-available-year'
+import findFirstAvailableYear from 'modules/web/helpers/find-first-available-year'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
 
-import Button from 'src/components/button'
+import Button from 'modules/web/components/button'
 import Year from './year'
 
 import './course-table.scss'

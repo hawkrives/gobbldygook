@@ -23,7 +23,7 @@ const mapping = {
 	depts: 'department',
 	num: 'number',
 }
-export default function alterCourse(course) {
+export function alterCourse(course) {
 	course = {...course}
 
 	forEach(mapping, (toKey, fromKey) => {

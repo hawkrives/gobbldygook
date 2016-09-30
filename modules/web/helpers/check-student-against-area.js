@@ -1,7 +1,7 @@
 import Bluebird from 'bluebird'
 import uniqueId from 'lodash/uniqueId'
 
-import CheckStudentWorker from './workers/check-student-against-area.worker.js'
+import CheckStudentWorker from './check-student-against-area.worker.js'
 const worker = new CheckStudentWorker()
 worker.onerror = msg => console.warn('[main] received error from check-student worker:', msg)
 
@@ -15,7 +15,7 @@ worker.onerror = msg => console.warn('[main] received error from check-student w
  * @promise ResultsPromise
  * @fulfill {Object} - The details of the area check.
  */
-const checkStudentAgainstArea = student => area => {
+export const checkStudentAgainstArea = student => area => {
 	return new Bluebird(resolve => {
 		const sourceId = uniqueId()
 
@@ -44,5 +44,3 @@ const checkStudentAgainstArea = student => area => {
 		worker.postMessage(JSON.stringify([sourceId, student, area]))
 	})
 }
-
-export default checkStudentAgainstArea

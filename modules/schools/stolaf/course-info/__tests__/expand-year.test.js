@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import expandYear from '../../src/helpers/expand-year'
+import {expandYear} from '../expand-year'
 
 describe('expandYear', () => {
 	it('expands a year to year-(year+1)', () => {

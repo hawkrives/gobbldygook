@@ -16,7 +16,7 @@ import sortBy from 'lodash/sortBy'
 
 import idbRange from 'idb-range'
 import {cmp as idbComparison} from 'treo'
-import checkAgainstQuery from '../check-course-against-query'
+import {checkCourseAgainstQuery} from 'modules/core'
 
 function canAdd({query, value, primaryKey, results}={}) {
 	// Check if we want to add the current value to the results array.
@@ -24,7 +24,7 @@ function canAdd({query, value, primaryKey, results}={}) {
 	// and then that it's not already in the array.
 	// Note that because JS checks against identity, we use isEqual to
 	// do an equality check against the two objects.
-	return checkAgainstQuery(query)(value) && !includes(results, primaryKey)
+	return checkCourseAgainstQuery(query)(value) && !includes(results, primaryKey)
 }
 
 const preferredKeyOrder = ['deptnum']

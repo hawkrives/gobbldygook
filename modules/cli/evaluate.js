@@ -1,11 +1,11 @@
-import evaluate from '../src/area-tools/evaluate'
+import {evaluate} from 'modules/core/examine-student'
 import nomnom from 'nomnom'
 import fs from 'graceful-fs'
-import compute from '../src/area-tools/compute'
+import {default as compute} from 'modules/core/examine-student/compute'
 import get from 'lodash/get'
 import loadArea from './lib/load-area'
 import yaml from 'js-yaml'
-import isRequirementName from '../src/area-tools/is-requirement-name'
+import {isRequirementName, humanizeOperator} from 'modules/core/examine-student'
 import toPairs from 'lodash/toPairs'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
@@ -15,7 +15,6 @@ import keys from 'lodash/keys'
 import sortBy from 'lodash/sortBy'
 import plur from 'plur'
 import chalk from 'chalk'
-import humanizeOperator from '../src/area-tools/humanize-operator'
 
 
 function condenseCourse(course) {

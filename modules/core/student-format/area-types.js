@@ -1,5 +1,7 @@
-export const DEGREE = 'degree'
-export const MAJOR = 'major'
-export const CONCENTRATION = 'concentration'
-export const EMPHASIS = 'emphasis'
-export const ID = 'interdisciplinary'
+export const areaTypeConstants = {
+	DEGREE: 'degree',
+	MAJOR: 'major',
+	CONCENTRATION: 'concentration',
+	EMPHASIS: 'emphasis',
+	ID: 'interdisciplinary',
+}

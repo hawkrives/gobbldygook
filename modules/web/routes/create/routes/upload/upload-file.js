@@ -1,11 +1,11 @@
 import React, {Component, PropTypes} from 'react'
 import DropZone from 'react-dropzone'
 import map from 'lodash/map'
-import Button from 'src/components/button'
-import List from 'src/components/list'
-// TODO: Move this component to src/components
-import StudentSummary from 'src/routes/student/components/student-summary'
-import { initStudent } from 'src/redux/students/actions/init-student'
+import Button from 'modules/web/components/button'
+import List from 'modules/web/components/list'
+// TODO: Move this component to modules/web/components
+import StudentSummary from 'modules/web/routes/student/components/student-summary'
+import { initStudent } from 'modules/web/redux/students/actions/init-student'
 import withRouter from 'react-router/lib/withRouter'
 import { connect } from 'react-redux'
 

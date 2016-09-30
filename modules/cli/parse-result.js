@@ -1,4 +1,4 @@
-const parse = require('../src/area-tools/parse-hanson-string').parse
+const parse = require('modules/core/examine-student/parse-hanson-string').parse
 const nom = require('nomnom')
 const stringify = require('stabilize')
 const yaml = require('js-yaml')

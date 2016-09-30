@@ -6,6 +6,6 @@ import sumBy from 'lodash/sumBy'
  * @param {Course[]} courses - a list of courses
  * @returns {number} - the sum of the 'credits' properties
  */
-export default function countCredits(courses=[]) {
+export function countCredits(courses=[]) {
 	return sumBy(courses, 'credits') || 0
 }

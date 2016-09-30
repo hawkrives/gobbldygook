@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react'
 import size from 'lodash/size'
 
-import {androidSearch, funnel, androidApps, androidMenu, androidAdd} from 'src/icons/ionicons'
-import Toolbar from 'src/components/toolbar'
-import Button from 'src/components/button'
-import Icon from 'src/components/icon'
+import {androidSearch, funnel, androidApps, androidMenu, androidAdd} from 'modules/web/icons/ionicons'
+import Toolbar from 'modules/web/components/toolbar'
+import Button from 'modules/web/components/button'
+import Icon from 'modules/web/components/icon'
 import StudentList from './student-list'
 
 import './student-picker.scss'

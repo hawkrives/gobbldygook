@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import findFirstAvailableSemester from '../../src/helpers/find-first-available-semester'
+import {findFirstAvailableSemester} from '../find-first-available-semester'
 
 describe('findFirstAvailableSemester', () => {
 	it('takes a list of schedules and finds the first open semester', () => {

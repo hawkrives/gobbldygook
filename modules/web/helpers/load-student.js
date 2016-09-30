@@ -1,9 +1,9 @@
 import Bluebird from 'bluebird'
 
-import Student from '../../core/student-format/student'
+import {Student} from 'modules/core'
 const log = (...args) => TESTING || /* istanbul ignore next */ console.error(...args)
 
-export default function loadStudent(studentId) {
+export function loadStudent(studentId) {
 	return new Bluebird(resolve => {
 		const rawStudent = localStorage.getItem(studentId)
 

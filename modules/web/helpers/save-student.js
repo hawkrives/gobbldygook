@@ -27,7 +27,7 @@ export function removeStudentFromCache(studentId) {
 }
 
 
-export default async function saveStudent(student) {
+export async function saveStudent(student) {
 	// 1. grab the old (still JSON-encoded) student from localstorage
 	// 2. compare it to the current one
 	// 3. if they're different, update dateLastModified, stringify, and save.

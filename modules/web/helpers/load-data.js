@@ -1,6 +1,6 @@
 const Bluebird = require('bluebird')
 const uniqueId = require('lodash/uniqueId')
-import {status, text} from './fetch-helpers'
+import {status, text} from 'modules/lib'
 
 import * as notificationActions from '../redux/notifications/actions'
 import * as courseActions from '../redux/courses/actions'
@@ -11,7 +11,7 @@ const actions = {
 	areas: areaActions,
 }
 
-const LoadDataWorker = require('./workers/load-data.worker.js')
+const LoadDataWorker = require('./load-data.worker.js')
 const worker = new LoadDataWorker()
 worker.onerror = msg => console.warn('[main] received error from load-data worker:', msg)
 worker.onmessage = ({data: [resultId, type, actionInfo]}) => {

@@ -5,7 +5,7 @@ import ResultIndicator from './result-indicator'
 
 import map from 'lodash/map'
 import plur from 'plur'
-import humanizeOperator from 'src/area-tools/humanize-operator'
+import {humanizeOperator} from 'modules/core/examine-student'
 
 import './expression.scss'
 

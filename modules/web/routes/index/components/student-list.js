@@ -4,7 +4,7 @@ import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import fuzzysearch from 'fuzzysearch'
 
-import List from 'src/components/list'
+import List from 'modules/web/components/list'
 import StudentListItem from './student-list-item'
 
 import './student-list.scss'

@@ -1,4 +1,4 @@
-import Student from '../../../../core/student-format/student'
+import {Student} from 'modules/core'
 
 import {
 	IMPORT_STUDENT,

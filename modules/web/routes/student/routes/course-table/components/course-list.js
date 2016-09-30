@@ -2,8 +2,8 @@ import React, {PropTypes} from 'react'
 import range from 'lodash/range'
 import map from 'lodash/map'
 
-import InlineCourse from 'src/components/inline-course'
-import List from 'src/components/list'
+import InlineCourse from 'modules/web/components/inline-course'
+import List from 'modules/web/components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 

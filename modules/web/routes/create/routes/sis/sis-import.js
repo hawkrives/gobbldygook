@@ -1,19 +1,20 @@
 import React, {Component, PropTypes} from 'react'
 import serializeError from 'serialize-error'
-import Button from 'src/components/button'
+import Button from 'modules/web/components/button'
 import getStudentInfo, {
 	checkIfLoggedIn,
 	ExtensionNotLoadedError,
 	ExtensionTooOldError,
-} from 'src/helpers/import-student'
-import convertStudent from 'src/helpers/convert-imported-student'
-import StudentSummary from 'src/routes/student/components/student-summary'
+	convertStudent,
+	semesterName,
+} from 'modules/schools/stolaf'
+import {getCourse} from 'modules/web/helpers/get-courses'
+import StudentSummary from 'modules/web/routes/student/components/student-summary'
 import map from 'lodash/map'
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
-import semesterName from 'src/helpers/semester-name'
 import { RadioGroup, Radio } from 'react-radio-group'
-import { initStudent } from 'src/redux/students/actions/init-student'
+import { initStudent } from 'modules/web/redux/students/actions/init-student'
 import { connect } from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
 
@@ -62,7 +63,7 @@ class SISImportScreen extends Component {
 
 	handleImportData = () => {
 		getStudentInfo(this.state.selectedId)
-			.then(convertStudent)
+			.then(info => convertStudent(info, getCourse))
 			.then(student => this.setState({student}))
 			.catch(err => {
 				console.error(err)

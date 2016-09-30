@@ -1,16 +1,16 @@
 import React, {PropTypes} from 'react'
 
-import Button from 'src/components/button'
-import Icon from 'src/components/icon'
-import Toolbar from 'src/components/toolbar'
-import Modal from 'src/components/modal'
-import List from 'src/components/list'
+import Button from 'modules/web/components/button'
+import Icon from 'modules/web/components/icon'
+import Toolbar from 'modules/web/components/toolbar'
+import Modal from 'modules/web/components/modal'
+import List from 'modules/web/components/list'
 import withRouter from 'react-router/lib/withRouter'
-import {close} from 'src/icons/ionicons'
+import {close} from 'modules/web/icons/ionicons'
 
 import { connect } from 'react-redux'
 
-import encodeStudent from 'src/helpers/encode-student'
+import {encodeStudent} from 'modules/core'
 
 import './share-student.scss'
 

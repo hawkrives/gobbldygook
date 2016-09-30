@@ -3,14 +3,14 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
-import isCurrentSemester from 'src/helpers/is-current-semester'
+import {isCurrentSemester} from 'modules/core'
 
-import Loading from 'src/components/loading'
-import {destroySchedules} from 'src/redux/students/actions/schedules'
-import {moveCourse, addCourse} from 'src/redux/students/actions/courses'
+import Loading from 'modules/web/components/loading'
+import {destroySchedules} from 'modules/web/redux/students/actions/schedules'
+import {moveCourse, addCourse} from 'modules/web/redux/students/actions/courses'
 import Semester from '../components/semester'
 
-import getSchedule from 'src/helpers/get-schedule'
+import getSchedule from 'modules/web/helpers/get-schedule'
 
 
 export class SemesterContainer extends Component {

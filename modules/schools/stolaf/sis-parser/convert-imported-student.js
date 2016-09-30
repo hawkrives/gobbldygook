@@ -1,4 +1,3 @@
-import {getCourse} from './get-courses'
 import Bluebird from 'bluebird'
 import {Student, Schedule} from 'modules/core/student-format'
 import groupBy from 'lodash/groupBy'
@@ -9,12 +8,12 @@ import fromPairs from 'lodash/fromPairs'
 import filter from 'lodash/filter'
 import {v4 as uuid} from 'uuid'
 
-export async function convertStudent({courses, degrees}) {
+export async function convertStudent({courses, degrees}, getCourse) {
 	let {
 		schedulesAndFabrications,
 		info,
 	} = await Bluebird.props({
-		schedulesAndFabrications: processSchedules(courses),
+		schedulesAndFabrications: processSchedules(courses, getCourse),
 		info: processDegrees(degrees),
 	})
 
@@ -28,7 +27,7 @@ export async function convertStudent({courses, degrees}) {
 }
 
 
-async function processSchedules(courses) {
+async function processSchedules(courses, getCourse) {
 	courses = await Bluebird.all(map(courses, course => {
 		return getCourse(course).then(resolvedCourse => {
 			if (resolvedCourse.error) {
