@@ -1,4 +1,0 @@
---compilers js:babel-register
---reporter dot
---ui bdd
---require test/mocha-harness
