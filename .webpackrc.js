@@ -44,7 +44,7 @@ const config = {
 	stats: {colors: false},
 
 	entry: {
-		main: ['./src/index.js'],
+		main: ['./modules/web/index.js'],
 		common: ['bluebird', 'dnd-core', 'whatwg-fetch', 'redux', 'js-yaml'],
 		react: ['react', 'react-dnd', 'react-redux', 'react-router', 'react-side-effect', 'react-modal'],
 	},
@@ -96,7 +96,7 @@ const config = {
 
 	resolve: {
 		extensions: ['.js', '.json', ''],
-		// Allow us to require things from src/ instead of using giant
+		// Allow us to require things from modules/ instead of using giant
 		// relative paths everywhere. And, thanks to babel-plugin-webpack-alias,
 		// we can use these aliases in testing, too!
 		alias: {
