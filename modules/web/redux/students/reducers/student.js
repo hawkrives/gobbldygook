@@ -22,7 +22,7 @@ import {
 	addCourseToSchedule,
 	removeCourseFromSchedule,
 	reorderCourseInSchedule,
-} from '../../../models/student'
+} from '../../../../core/student-format/student'
 
 import {
 	LOAD_STUDENT,

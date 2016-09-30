@@ -1,6 +1,6 @@
 import Bluebird from 'bluebird'
 
-import Student from '../models/student'
+import Student from '../../core/student-format/student'
 const log = (...args) => TESTING || /* istanbul ignore next */ console.error(...args)
 
 export default function loadStudent(studentId) {

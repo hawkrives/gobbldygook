@@ -1,4 +1,4 @@
-import Student from '../../../models/student'
+import Student from '../../../../core/student-format/student'
 
 import {
 	IMPORT_STUDENT,

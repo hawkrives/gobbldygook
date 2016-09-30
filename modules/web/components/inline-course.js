@@ -7,7 +7,7 @@ import filter from 'lodash/filter'
 import isNull from 'lodash/isNull'
 import map from 'lodash/map'
 
-import {COURSE} from '../models/item-types'
+import {COURSE} from '../../core/student-format/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'

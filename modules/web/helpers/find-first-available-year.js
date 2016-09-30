@@ -4,7 +4,7 @@ import sortBy from 'lodash/sortBy'
 import max from 'lodash/max'
 import includes from 'lodash/includes'
 import findMissingNumberBinarySearch from './find-missing-number-binary-search'
-import type {Schedule} from '../models/types'
+import type {Schedule} from '../../core/student-format/types'
 
 /**
  * Takes a list of schedules and finds the first open year.

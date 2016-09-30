@@ -1,4 +1,4 @@
-import Schedule from '../../../models/schedule'
+import Schedule from '../../../../core/student-format/schedule'
 
 import {
 	ADD_SCHEDULE,
