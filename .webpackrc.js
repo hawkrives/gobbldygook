@@ -100,7 +100,7 @@ const config = {
 		// relative paths everywhere. And, thanks to babel-plugin-webpack-alias,
 		// we can use these aliases in testing, too!
 		alias: {
-			src: path.resolve(__dirname, 'src'),
+			modules: path.resolve(__dirname, 'modules'),
 		},
 	},
 
