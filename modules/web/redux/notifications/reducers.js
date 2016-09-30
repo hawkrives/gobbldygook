@@ -8,7 +8,7 @@ import {
 	START_PROGRESS,
 	INCREMENT_PROGRESS,
 	REMOVE_NOTIFICATION,
-} from '../constants'
+} from './constants'
 
 type NotificationType = 'message'|'error'|'progess'
 type ProgressNotification = {message: string, type: NotificationType, value: number, max: number, showButton: boolean};

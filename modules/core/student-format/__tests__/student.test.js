@@ -5,8 +5,8 @@ import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
 import stringify from 'json-stable-stringify'
 
-mock('../../src/helpers/get-courses', require('../mocks/get-courses.mock').default)
-mock('../../src/helpers/load-area', require('../mocks/load-area.mock').default)
+mock('../../src/helpers/get-courses', require('../../../__tests/mocks/get-courses.mock.js').default)
+mock('../../src/helpers/load-area', require('../../../__tests/mocks/load-area.mock.js').default)
 
 const {
 	default: Student,
