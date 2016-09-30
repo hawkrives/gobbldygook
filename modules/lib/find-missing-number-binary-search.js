@@ -1,7 +1,5 @@
-// @flow
-
 // via http://stackoverflow.com/questions/11385896/find-the-first-missing-number-in-a-sorted-list
-export default function findMissingNumberBinarySearch(arr: number[]): number|null {
+export function findMissingNumberBinarySearch(arr) {
 	let len = arr.length
 
 	let first = 0

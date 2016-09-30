@@ -1,4 +1,4 @@
-import deptNumRegex from './dept-num-regex'
+import {deptNumRegex} from './dept-num-regex'
 
 /**
  * Splits a deptnum string (like "AS/RE 230A") into its components,

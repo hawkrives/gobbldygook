@@ -1,15 +1,11 @@
 import {expect} from 'chai'
-import mock from 'mock-require'
-import demoStudent from '../../src/models/demo-student.json'
+import demoStudent from '../demo-student.json'
 import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
-import stringify from 'json-stable-stringify'
+import stringify from 'stabilize'
 
-mock('../../src/helpers/get-courses', require('../../../__tests/mocks/get-courses.mock.js').default)
-mock('../../src/helpers/load-area', require('../../../__tests/mocks/load-area.mock.js').default)
-
-const {
-	default: Student,
+import {
+	Student,
 	changeStudentName,
 	changeStudentAdvisor,
 	changeStudentCreditsNeeded,
@@ -31,9 +27,9 @@ const {
 	reorderScheduleInStudent,
 	renameScheduleInStudent,
 	reorderCourseInSchedule,
-} = require('../../src/models/student')
+} from '../student'
 
-const Schedule = require('../../src/models/schedule').default
+import {Schedule} from '../schedule'
 
 describe('Student', () => {
 	it('returns an object', () => {

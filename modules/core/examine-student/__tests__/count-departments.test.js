@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import countDepartments from '../../src/area-tools/count-departments'
+import countDepartments from '../count-departments'
 
 describe('countDepartments', () => {
 	it('counts the number of distinct departments in an array of courses', () => {

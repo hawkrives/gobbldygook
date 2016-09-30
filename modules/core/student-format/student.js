@@ -12,12 +12,12 @@ import omit from 'lodash/omit'
 import reject from 'lodash/reject'
 import {v4 as uuid} from 'uuid'
 
-import randomChar from '../helpers/random-char'
+import {randomChar} from 'modules/lib'
 
 const now = new Date()
-import Schedule from './schedule'
+import {Schedule} from './schedule'
 
-export default function Student(data) {
+export function Student(data) {
 	const baseStudent = {
 		id: uuid(),
 		name: 'Student ' + randomChar(),

@@ -1,7 +1,6 @@
-// @flow
 import reduce from 'lodash/reduce'
 
-export default function interpose(data: any[], value: any) {
+export function interpose(data, value) {
 	const len = data.length
 	return reduce(data, (arr, item, index) => {
 		if (index < len - 1) {

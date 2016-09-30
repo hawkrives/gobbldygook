@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import zipToObjectWithArrays from '../../src/helpers/zip-to-object-with-arrays'
+import {zipToObjectWithArrays} from '../zip-to-object-with-arrays'
 
 describe('zipToObjectWithArrays', () => {
 	it('parses area ids', () => {

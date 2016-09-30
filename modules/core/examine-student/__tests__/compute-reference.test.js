@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {computeReference} from '../../src/area-tools/compute-chunk'
+import {computeReference} from '../compute-chunk'
 
 describe('computeReference', () => {
 	it('returns the result of the referenced requirement', () => {

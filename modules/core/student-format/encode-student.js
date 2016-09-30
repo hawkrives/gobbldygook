@@ -1,5 +1,5 @@
 import stringify from 'stabilize'
 
-export default function encodeStudent(student) {
+export function encodeStudent(student) {
 	return encodeURIComponent(stringify(student))
 }

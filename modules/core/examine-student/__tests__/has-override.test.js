@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import hasOverride from '../../src/area-tools/has-override'
+import hasOverride from '../has-override'
 
 describe('hasOverride', () => {
 	it('checks if an override exists', () => {

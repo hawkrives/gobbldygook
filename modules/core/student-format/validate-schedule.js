@@ -1,5 +1,5 @@
 import filter from 'lodash/filter'
-import findWarnings from '../helpers/find-course-warnings'
+import {findWarnings} from './find-course-warnings'
 import flatten from 'lodash/flatten'
 import identity from 'lodash/identity'
 import map from 'lodash/map'
@@ -7,7 +7,7 @@ import some from 'lodash/some'
 import reject from 'lodash/reject'
 import isUndefined from 'lodash/isUndefined'
 
-export default function validateSchedule(schedule) {
+export function validateSchedule(schedule) {
 	// Checks to see if the schedule is valid
 	let courses = schedule.courses
 

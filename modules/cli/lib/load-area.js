@@ -1,6 +1,6 @@
 import bluebird from 'bluebird'
 import yaml from 'js-yaml'
-import enhanceHanson from '../../src/area-tools/enhance-hanson'
+import {enhance} from 'modules/hanson-format'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import find from 'lodash/find'
@@ -40,7 +40,7 @@ export default async function loadArea({name, type, revision, source, isCustom})
 	let result
 	try {
 		// console.log(obj)
-		result = enhanceHanson(obj)
+		result = enhance(obj)
 	}
 	catch (err) {
 		console.error(`Problem enhancing area "${name}"`, err)

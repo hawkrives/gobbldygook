@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import compareCourseToCourse from '../../src/area-tools/compare-course-to-course'
+import compareCourseToCourse from '../compare-course-to-course'
 
 describe('compareCourseToCourse', () => {
 	it('compares select keys of courses', () => {

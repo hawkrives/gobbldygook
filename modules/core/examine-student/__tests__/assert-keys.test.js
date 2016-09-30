@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import assertKeys from '../../src/area-tools/assert-keys'
+import assertKeys from '../assert-keys'
 
 describe('assertKeys', () => {
 	it('checks for required keys', () => {

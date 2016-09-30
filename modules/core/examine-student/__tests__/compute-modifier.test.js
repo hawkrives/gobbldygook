@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import cloneDeep from 'lodash/cloneDeep'
-import computeChunk, {computeModifier} from '../../src/area-tools/compute-chunk'
-import applyFilter from '../../src/area-tools/apply-filter'
+import computeChunk, {computeModifier} from '../compute-chunk'
+import applyFilter from '../apply-filter'
 
 describe('computeModifier', () => {
 	it('checks for <things> from all children', () => {

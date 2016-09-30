@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import getOccurrences from '../../src/area-tools/get-occurrences'
+import getOccurrences from '../get-occurrences'
 
 describe('getOccurrences', () => {
 	it('returns a list of occurrences of a course', () => {

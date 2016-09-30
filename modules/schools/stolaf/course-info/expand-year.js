@@ -1,9 +1,7 @@
-// @flow
-
 /* Takes a year and expands it.
  * eg. expendYear('2012') => 2012-13
  */
-export default function expandYear(year: string|number, short?:boolean=false, seperator?:string='—'): string {
+export function expandYear(year, short=false, seperator='—') {
 	if (year === undefined) {
 		return '???'
 	}

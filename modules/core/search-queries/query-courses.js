@@ -1,5 +1,5 @@
 import filter from 'lodash/filter'
-import checkCourseAgainstQuery from './check-course-against-query'
+import {checkCourseAgainstQuery} from './check-course-against-query'
 
 /**
  * Queries the database for courses.
@@ -8,6 +8,6 @@ import checkCourseAgainstQuery from './check-course-against-query'
  * @param {Array<Course>} courses - the courses to query
  * @returns {Array<Course>} - the courses that matched the query
  */
-export default function queryCourses(queryObj, courses) {
+export function queryCourses(queryObj, courses) {
 	return filter(courses, checkCourseAgainstQuery(queryObj))
 }

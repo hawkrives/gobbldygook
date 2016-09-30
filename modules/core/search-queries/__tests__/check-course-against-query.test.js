@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import checkCourseAgainstQuery from '../../src/helpers/check-course-against-query'
+import {checkCourseAgainstQuery} from '../check-course-against-query'
 
 describe('checkCourseAgainstQuery', () => {
 	it('compares a course to a query object', () => {

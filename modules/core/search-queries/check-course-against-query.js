@@ -73,11 +73,9 @@ const checkCourseAgainstQueryBit = course => ([key, values]) => {
 // query: Object | the query object that comes out of buildQueryFromString
 // course: Course | the course to check
 // returns: Boolean | did all query bits pass the check?
-const checkCourseAgainstQuery = query => course => {
+export const checkCourseAgainstQuery = query => course => {
 	let kvPairs = toPairs(query)
 	let matches = takeWhile(kvPairs, checkCourseAgainstQueryBit(course))
 
 	return size(kvPairs) === size(matches) && every(matches)
 }
-
-export default checkCourseAgainstQuery

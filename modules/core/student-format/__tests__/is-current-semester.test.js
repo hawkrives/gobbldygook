@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import isCurrentSemester from '../../src/helpers/is-current-semester'
+import {isCurrentSemester} from '../is-current-semester'
 
 describe('isCurrentSemester', () => {
 	it('checks if a schedule is in the given semester', () => {

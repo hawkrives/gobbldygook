@@ -8,9 +8,8 @@ import ordinal from 'ord'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
-import expandYear from '../helpers/expand-year'
-import semesterName from '../helpers/semester-name'
-import {alertCircled, iosCalendarOutline, iosClockOutline} from '../icons/ionicons'
+import {expandYear, semesterName} from 'modules/schools/stolaf'
+import {alertCircled, iosCalendarOutline, iosClockOutline} from 'modules/web/icons/ionicons'
 
 export function checkForInvalidYear(course, scheduleYear) {
 	let thisYear = new Date().getFullYear()
@@ -77,5 +76,3 @@ export function findWarnings(courses, schedule) {
 
 	return warningsWithTimeConflicts
 }
-
-export default findWarnings

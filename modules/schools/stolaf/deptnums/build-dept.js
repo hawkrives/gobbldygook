@@ -10,7 +10,7 @@ import departmentNameToAbbr from 'sto-course-related-data/handmade/to_department
  * @param {Course} course - the course
  * @returns {String} - the department string
  */
-export default function buildDept(course) {
+export function buildDept(course) {
 	let departments = course.depts
 
 	departments = departments.map(dept => {

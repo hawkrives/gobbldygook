@@ -2,7 +2,7 @@ import reduce from 'lodash/reduce'
 import zip from 'lodash/zip'
 import has from 'lodash/has'
 
-export default function zipToObjectWithArrays(keys, vals) {
+export function zipToObjectWithArrays(keys, vals) {
 	let arr = zip(keys, vals)
 
 	return reduce(arr, (obj, [key, val]) => {

@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import buildQueryFromString from '../../src/helpers/build-query-from-string'
+import {buildQueryFromString} from '../build-query-from-string'
 
 describe('buildQueryFromString', () => {
 	it('builds a query string with multiple keys into a query object', () => {

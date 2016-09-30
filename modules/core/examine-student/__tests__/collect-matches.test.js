@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import collectMatches from '../../src/area-tools/collect-matches'
+import collectMatches from '../collect-matches'
 
 describe('collectMatches', () => {
 	it('throws an error if confronted with an unknown type', () => {

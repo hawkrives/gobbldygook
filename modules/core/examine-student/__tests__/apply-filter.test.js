@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import applyFilter from '../../src/area-tools/apply-filter'
+import applyFilter from '../apply-filter'
 
 describe('applyFilter', () => {
 	it('filters a list of courses', () => {

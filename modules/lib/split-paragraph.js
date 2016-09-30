@@ -1,7 +1,7 @@
 import words from 'lodash/words'
 import deburr from 'lodash/deburr'
 
-export default function splitParagraph(string='') {
+export function splitParagraph(string='') {
 	let lowercase = string.toLowerCase()
 
 	// removes accents and such from ascii chars

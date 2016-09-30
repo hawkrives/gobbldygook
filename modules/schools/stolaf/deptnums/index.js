@@ -1,0 +1,6 @@
+export * from './build-course-ident'
+export * from './build-dept'
+export * from './build-dept-num'
+export * from './dept-num-regex'
+export * from './quacks-like-dept-num'
+export * from './split-dept-num'

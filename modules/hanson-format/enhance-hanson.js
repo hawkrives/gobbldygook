@@ -22,7 +22,7 @@ const baseWhitelist = ['result', 'message', 'declare', 'children share courses']
 const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error'])
 const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description', 'student selected'])
 
-export default function enhanceHanson(data, {topLevel=true}={}) {
+export function enhanceHanson(data, {topLevel=true}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
 	// 3. throws if it encounters any lowercase keys not in the whitelist

@@ -1,5 +1,3 @@
-// @flow
-
 const SEMESTERS = {
 	'0': 'Abroad',
 	'1': 'Fall',
@@ -11,7 +9,7 @@ const SEMESTERS = {
 }
 
 // Takes a semester number and returns the associated semester string.
-export default function semesterName(semester: string|number): string {
+export function semesterName(semester) {
 	if (typeof semester === 'number') {
 		semester = String(semester)
 	}

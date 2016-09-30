@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import getOverride from '../../src/area-tools/get-override'
+import getOverride from '../get-override'
 
 describe('getOverride', () => {
 	// Note: we're using .equal for booleans here to indicate that it's

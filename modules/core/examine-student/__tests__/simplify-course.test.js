@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import simplifyCourse from '../../src/area-tools/simplify-course'
+import simplifyCourse from '../simplify-course'
 
 describe('simplifyCourse', () => {
 	it('only uses department, number, and type', () => {

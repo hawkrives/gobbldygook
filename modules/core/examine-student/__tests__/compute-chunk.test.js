@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import computeChunk from '../../src/area-tools/compute-chunk'
+import computeChunk from '../compute-chunk'
 
 describe('computeChunk', () => {
 	it('requires that the expression be an object', () => {

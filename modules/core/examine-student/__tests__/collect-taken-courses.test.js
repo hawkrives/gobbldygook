@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import collectTakenCourses from '../../src/area-tools/collect-taken-courses'
+import collectTakenCourses from '../collect-taken-courses'
 
 describe('collectTakenCourses', () => {
 	it('collects a list of all of the courses anywhere in this object which have the `_taken` property.', () => {

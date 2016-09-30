@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {computeOf} from '../../src/area-tools/compute-chunk'
+import {computeOf} from '../compute-chunk'
 
 describe('computeOf', () => {
 	it('computes a list of boolean-equivalent expressions against a desired count', () => {

@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import countCredits from '../../src/area-tools/count-credits'
+import countCredits from '../count-credits'
 
 describe('countCredits', () => {
 	it('counts the number of credits in an array of courses', () => {

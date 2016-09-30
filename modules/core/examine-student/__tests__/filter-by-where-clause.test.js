@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import filterByWhereClause from '../../src/area-tools/filter-by-where-clause'
+import filterByWhereClause from '../filter-by-where-clause'
 
 describe('filterByWhereClause', () => {
 	it('filters an array of courses by a where-clause', () => {

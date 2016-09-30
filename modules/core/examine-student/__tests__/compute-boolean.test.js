@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import computeChunk, {computeBoolean} from '../../src/area-tools/compute-chunk'
+import computeChunk, {computeBoolean} from '../compute-chunk'
 
 describe('computeBoolean', () => {
 	it('computes the boolean result of and-clauses', () => {

@@ -1,7 +1,6 @@
-// @flow
-import deptNumRegex from './dept-num-regex'
+import {deptNumRegex} from './dept-num-regex'
 
 // Checks if a string looks like a deptnum.
-export default function quacksLikeDeptNum(deptNumString: string): boolean {
+export function quacksLikeDeptNum(deptNumString) {
 	return deptNumRegex.test(deptNumString)
 }

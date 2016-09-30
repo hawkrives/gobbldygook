@@ -14,8 +14,8 @@ import {checkForStaleData} from './update-local-data-cache'
 import map from 'lodash/map'
 import path from 'path'
 
-import quacksLikeDeptNum from '../../src/helpers/quacks-like-dept-num'
-import splitDeptNum from '../../src/helpers/split-dept-num'
+import {quacksLikeDeptNum} from 'modules/schools/stolaf'
+import {splitDeptNum} from 'modules/schools/stolaf'
 
 import Promise from 'bluebird'
 import fsCallbacks from 'graceful-fs'

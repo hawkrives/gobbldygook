@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import getDepartments from '../../src/area-tools/get-departments'
+import getDepartments from '../get-departments'
 
 describe('getDepartments', () => {
 	it('returns the distinct departments from an array of courses', () => {
