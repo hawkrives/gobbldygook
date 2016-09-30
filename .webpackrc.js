@@ -189,13 +189,11 @@ const config = {
 		loaders: [
 			{
 				test: /\.js$/,
-				// allow babel to run on lodash-es
 				exclude: /node_modules/,
 				loaders: ['babel-loader?cacheDirectory'],
 			},
 			{
 				test: /\.worker.js$/,
-				// allow babel to run on lodash-es
 				exclude: /node_modules/,
 				loaders: ['worker-loader', 'babel-loader?cacheDirectory'],
 			},
