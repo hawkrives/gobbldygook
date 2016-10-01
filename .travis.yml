@@ -16,7 +16,7 @@ notifications:
 
 env:
   global:
-    - ENCRYPTION_LABEL: 25d766a04336
+    - ENCRYPTION_LABEL: 25d766a04336_key
 
 language: node_js
 
