@@ -9,14 +9,13 @@ export class ExtensionTooOldError extends Error {}
 
 export function fetchHtml(url, fetchArgs) {
 	if (!global.gobbldygook_extension_version) {
-		return Bluebird.reject(new ExtensionNotLoadedError)
+		return Bluebird.reject(new ExtensionNotLoadedError('Extension not loaded'))
 	}
 	if (global.gobbldygook_extension_version < '1.0.0') {
-		return Bluebird.reject(new ExtensionTooOldError(global.gobbldygook_extension_version))
+		return Bluebird.reject(new ExtensionTooOldError(`Extension version ${global.gobbldygook_extension_version} is too old.`))
 	}
 
 	// now we know the extension is loaded
-
 	return new Bluebird((resolve, reject) => {
 		const id = uuid()
 
