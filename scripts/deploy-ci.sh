@@ -5,12 +5,6 @@ DEST_BRANCH=gh-pages
 # prepare the gh-pages branch
 git checkout -B $DEST_BRANCH --no-track
 
-rm -rf bin/ config/ flow-typed/ modules/ playground/ screenshots/ scripts/
-find ./ -maxdepth 1 -type f -not -name '.git*' -not -name package.json -delete
-mv build/* ./
-rm -f build/.DS_Store
-rmdir build/
-
 # Get the deploy key by using Travis's stored variables to decrypt config/deploy_key.enc
 ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
 ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
@@ -20,6 +14,13 @@ openssl aes-256-cbc -K "$ENCRYPTED_KEY" -iv "$ENCRYPTED_IV" -in config/deploy_ke
 chmod 600 deploy_key
 eval "${ssh-agent -s}"
 ssh-add deploy_key
+
+# Remove unneeded files
+rm -rf bin/ config/ flow-typed/ modules/ playground/ screenshots/ scripts/
+find ./ -maxdepth 1 -type f -not -name '.git*' -not -name package.json -not -name deploy_key -delete
+mv build/* ./
+rm -f build/.DS_Store
+rmdir build/
 
 # and … push
 git add --all ./
