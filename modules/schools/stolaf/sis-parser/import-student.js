@@ -356,7 +356,7 @@ function flattenData({coursesByTerm, studentInfo}) {
 }
 
 
-export default function getStudentInfo(studentId) {
+export function getStudentInfo(studentId) {
 	if (!navigator.onLine) {
 		return Bluebird.reject(new NetworkError('The network is offline.'))
 	}

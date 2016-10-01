@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import serializeError from 'serialize-error'
 import Button from 'modules/web/components/button'
-import getStudentInfo, {
+import {
+	getStudentInfo,
 	checkIfLoggedIn,
 	ExtensionNotLoadedError,
 	ExtensionTooOldError,

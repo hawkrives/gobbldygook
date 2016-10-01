@@ -7,7 +7,7 @@ import filter from 'lodash/filter'
 import isNull from 'lodash/isNull'
 import map from 'lodash/map'
 
-import {COURSE} from '../../core/student-format/item-types'
+import {IDENT_COURSE} from '../../core/student-format/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'
@@ -124,4 +124,4 @@ function collect(connect, monitor) {
 	}
 }
 
-export default DragSource(COURSE, courseSource, collect)(InlineCourse)
+export default DragSource(IDENT_COURSE, courseSource, collect)(InlineCourse)

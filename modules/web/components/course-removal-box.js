@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {DropTarget} from 'react-dnd'
 
-import {COURSE} from 'modules/core'
+import {IDENT_COURSE} from 'modules/core'
 
 import Icon from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
@@ -59,4 +59,4 @@ function collect(connect, monitor) {
 	}
 }
 
-export default DropTarget(COURSE, removeCourseTarget, collect)(CourseRemovalBox)
+export default DropTarget(IDENT_COURSE, removeCourseTarget, collect)(CourseRemovalBox)
