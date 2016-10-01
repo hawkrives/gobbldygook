@@ -24,7 +24,14 @@ deploy:
     tags: true
 
 branches:
-  only: [master, stable, /^travis/]
+  only:
+    # self-explanatory?
+    - master
+    - stable
+    # travis testing branches
+    - /^travis/
+    # version tags
+    - /v\d+\.\d+[a-z]/
 
 node_js:
   - stable
