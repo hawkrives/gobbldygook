@@ -108,13 +108,14 @@ class SISImportScreen extends Component {
 				</p>
 
 				{error
-					? <div>
-						<p><strong>{error.name}</strong></p>
-						<p>{error.message}</p>
-						<pre className="error-stack">
+					? <details className='error-spot'>
+						<summary>
+							<strong>{error.name}</strong>: {error.message}
+						</summary>
+						<pre className='error-stack'>
 							{error.stack}
 						</pre>
-					</div>
+					</details>
 					: null}
 
 				{!loggedIn ? <Button disabled={checkingLogin} onClick={this.checkLoginState}>Check Again</Button> : null}
