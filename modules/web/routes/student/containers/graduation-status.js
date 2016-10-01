@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import has from 'lodash/has'
-import pathToOverride from 'modules/core/examine-student'
+import {pathToOverride} from 'modules/core/examine-student'
 
 import {changeName, changeMatriculation, changeGraduation} from 'modules/web/redux/students/actions/change'
 import {addArea, removeArea} from 'modules/web/redux/students/actions/areas'
