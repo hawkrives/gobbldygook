@@ -6,13 +6,8 @@ DEST_BRANCH=gh-pages
 git checkout -B $DEST_BRANCH --no-track
 
 # Get the deploy key by using Travis's stored variables to decrypt config/deploy_key.enc
-ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
-ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
-ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
-ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
-openssl aes-256-cbc -K "$ENCRYPTED_KEY" -iv "$ENCRYPTED_IV" -in config/deploy_key.enc -out deploy_key -d
+openssl aes-256-cbc -K "$encrypted_25d766a04336_key" -iv "$encrypted_25d766a04336_iv" -in config/deploy_key.enc -out deploy_key -d
 chmod 600 deploy_key
-ssh-agent -s
 eval `ssh-agent -s`
 ssh-add deploy_key
 
