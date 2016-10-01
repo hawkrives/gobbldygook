@@ -6,7 +6,7 @@ DEST_BRANCH=gh-pages
 git checkout -B $DEST_BRANCH --no-track
 
 rm -rf bin/ config/ flow-typed/ modules/ playground/ screenshots/ scripts/
-find ./ -type f -depth 1 -not -name '.git*' -not -name package.json -delete
+find ./ -maxdepth 1 -type f -not -name '.git*' -not -name package.json -delete
 mv build/* ./
 rm -f build/.DS_Store
 rmdir build/
