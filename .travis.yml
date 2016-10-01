@@ -22,7 +22,8 @@ language: node_js
 
 deploy:
   provider: script
-  script: bash scripts/deploy-ci.sh
+  skip_cleanup: true
+  script: bash -v scripts/deploy-ci.sh
   on:
     branch: master
     tags: true
