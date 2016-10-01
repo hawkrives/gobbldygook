@@ -1,9 +1,0 @@
-@import 'src/styles/mixins.scss';
-
-.student-list {
-	@include card();
-	max-width: 35em;
-	width: 100%;
-	margin: 0 auto;
-	overflow: hidden;
-}

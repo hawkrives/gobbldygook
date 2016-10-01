@@ -1,5 +1,0 @@
-export const COURSE = 'gobbldygook/dnd/course'
-export const AREA = 'gobbldygook/dnd/area'
-export const YEAR = 'gobbldygook/dnd/year'
-export const SEMESTER = 'gobbldygook/dnd/semester'
-export const SCHEDULE = 'gobbldygook/dnd/schedule'

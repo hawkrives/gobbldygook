@@ -44,8 +44,8 @@ const config = {
 	stats: {colors: false},
 
 	entry: {
-		main: ['./src/index.js'],
-		common: ['bluebird', 'dnd-core', 'isomorphic-fetch', 'redux', 'ohcrash', 'js-yaml'],
+		main: ['./modules/web/index.js'],
+		common: ['bluebird', 'dnd-core', 'whatwg-fetch', 'redux', 'js-yaml'],
 		react: ['react', 'react-dnd', 'react-redux', 'react-router', 'react-side-effect', 'react-modal'],
 	},
 
@@ -96,11 +96,11 @@ const config = {
 
 	resolve: {
 		extensions: ['.js', '.json', ''],
-		// Allow us to require things from src/ instead of using giant
+		// Allow us to require things from modules/ instead of using giant
 		// relative paths everywhere. And, thanks to babel-plugin-webpack-alias,
 		// we can use these aliases in testing, too!
 		alias: {
-			src: path.resolve(__dirname, 'src'),
+			modules: path.resolve(__dirname, 'modules'),
 		},
 	},
 
@@ -138,10 +138,15 @@ const config = {
 							}(window.location))
 						</script>
 						<!-- End Single Page Apps for GitHub Pages -->
-						
-						<script src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>
 
-						${context.css ? `<link rel="stylesheet" href="${publicPath}${context.css}">` : ''}
+						${isProduction ?
+							'<script src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
+							: ''}
+
+						${context.css ?
+							`<link rel="stylesheet" href="${publicPath}${context.css}">`
+							: ''}
+
 						<body><main id="gobbldygook"></main></body>
 						<script src="${publicPath}${context.common}"></script>
 						<script src="${publicPath}${context.react}"></script>
@@ -189,13 +194,11 @@ const config = {
 		loaders: [
 			{
 				test: /\.js$/,
-				// allow babel to run on lodash-es
 				exclude: /node_modules/,
 				loaders: ['babel-loader?cacheDirectory'],
 			},
 			{
 				test: /\.worker.js$/,
-				// allow babel to run on lodash-es
 				exclude: /node_modules/,
 				loaders: ['worker-loader', 'babel-loader?cacheDirectory'],
 			},
@@ -306,8 +309,8 @@ else if (isProduction) {
 	})
 }
 
-else {
-	throw new Error('Unknown environment! Not development, production, nor test!')
-}
-
+// else {
+// 	throw new Error('Unknown environment! Not development, production, nor test!')
+// }
+//
 module.exports = config

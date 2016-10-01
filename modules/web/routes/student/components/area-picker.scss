@@ -1,0 +1,56 @@
+@import 'modules/web/styles/variables.scss';
+@import 'modules/web/styles/mixins.scss';
+
+.add-area {
+	padding: $area-edge-padding;
+	border-top: $material-divider;
+
+	& > .toolbar {
+		margin-bottom: $area-edge-padding;
+	}
+}
+
+.close-area-picker.button {
+	margin-left: 0.5em;
+	padding: 0.25em 1em;
+	flex: 0 1 auto;
+}
+
+.add-area--filter {
+	flex: 1;
+	border: solid 1px $gray-300;
+	padding: 0.25em;
+	margin-bottom: 0.5em;
+
+	&:focus {
+		background-color: $blue-50;
+		border-color: $blue-500;
+		outline: 0;
+	}
+}
+
+.area--choice {
+	display: flex;
+
+	justify-content: space-between;
+	align-items: center;
+
+	& + .area--choice {
+		margin-top: 0.5em;
+	}
+}
+.area-listing {
+	flex: 1;
+	display: flex;
+	flex-flow: column nowrap;
+}
+.area-listing .title {
+	font-weight: 500;
+}
+.area-listing .revision {
+	font-size: 0.8em;
+}
+
+.toggle-area {
+	padding: 0.25em 1em;
+}
