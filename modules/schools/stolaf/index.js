@@ -16,12 +16,5 @@ export {
 
 export {
 	convertStudent,
-	ExtensionNotLoadedError,
-	ExtensionTooOldError,
-	extractTermList,
-	extractStudentIds,
-	getCoursesFromHtml,
-	getGraduationInformation,
-	checkIfLoggedIn,
 	getStudentInfo,
 } from './sis-parser'
