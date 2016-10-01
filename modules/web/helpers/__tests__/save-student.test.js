@@ -5,13 +5,13 @@ import omit from 'lodash/omit'
 import {v4 as uuid} from 'uuid'
 
 import {
-	default as saveStudent,
+	saveStudent,
 	addStudentToCache,
 	removeStudentFromCache,
 	getIdCache,
 	setIdCache,
 } from '../save-student'
-import demoStudent from 'modules/student-format/demo-student.json'
+import demoStudent from 'modules/core/student-format/demo-student.json'
 
 const student = cloneDeep(demoStudent)
 student.id = uuid()

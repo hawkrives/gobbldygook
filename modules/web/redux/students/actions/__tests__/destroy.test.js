@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 
-const {destroyStudent} = require('../../src/redux/students/actions/destroy-student')
-const {DESTROY_STUDENT} = require('../../src/redux/students/constants')
+import {destroyStudent} from '../destroy-student'
+import {DESTROY_STUDENT} from '../../constants'
 
 describe('destroyStudent action', () => {
 	beforeEach(() => {

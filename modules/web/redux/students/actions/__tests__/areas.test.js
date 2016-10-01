@@ -1,16 +1,16 @@
 import {expect} from 'chai'
 
-const {
+import {
 	addArea,
 	removeArea,
 	removeAreas,
-} = require('../../src/redux/students/actions/areas')
+} from '../areas'
 
-const {
+import {
 	ADD_AREA,
 	REMOVE_AREA,
 	REMOVE_AREAS,
-} = require('../../src/redux/students/constants')
+} from '../../constants'
 
 describe('addArea action', () => {
 	it('returns an action to add an area to a student', () => {

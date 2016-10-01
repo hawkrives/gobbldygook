@@ -1,7 +1,7 @@
 import {expect} from 'chai'
-import saveStudentsMiddleware, {shouldTakeAction} from '../../src/redux/middleware/save-students'
-import {LOAD_STUDENTS, CHANGE_NAME} from '../../src/redux/students/constants'
-import {LOG_MESSAGE} from '../../src/redux/notifications/constants'
+import saveStudentsMiddleware, {shouldTakeAction} from '../save-students'
+import {LOAD_STUDENTS, CHANGE_NAME} from '../../students/constants'
+import {LOG_MESSAGE} from '../../notifications/constants'
 
 xdescribe('shouldTakeAction', () => {
 	it('should ignore LOAD_STUDENTS', () => {

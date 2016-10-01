@@ -1,11 +1,11 @@
 import {expect} from 'chai'
 
-const {addFabrication, removeFabrication} = require('../../src/redux/students/actions/fabrications')
+import {addFabrication, removeFabrication} from '../fabrications'
 
-const {
+import {
 	ADD_FABRICATION,
 	REMOVE_FABRICATION,
-} = require('../../src/redux/students/constants')
+} from '../../constants'
 
 describe('addFabrication action', () => {
 	it('returns an action to add a fabrication', () => {

@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 
 import {loadStudent} from '../load-student'
-import demoStudent from 'modules/student-format/demo-student.json'
+import demoStudent from 'modules/core/student-format/demo-student.json'
 
 import {Student} from 'modules/core'
 

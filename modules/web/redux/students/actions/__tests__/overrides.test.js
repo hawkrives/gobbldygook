@@ -1,11 +1,11 @@
 import {expect} from 'chai'
 
-const {setOverride, removeOverride} = require('../../src/redux/students/actions/overrides')
+import {setOverride, removeOverride} from '../overrides'
 
-const {
+import {
 	SET_OVERRIDE,
 	REMOVE_OVERRIDE,
-} = require('../../src/redux/students/constants')
+} from '../../constants'
 
 describe('setOverride action', () => {
 	it('returns an action to add an override', () => {

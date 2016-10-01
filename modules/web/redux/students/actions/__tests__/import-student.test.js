@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 
-const {importStudent} = require('../../src/redux/students/actions/import-student')
-const {IMPORT_STUDENT} = require('../../src/redux/students/constants')
+import {importStudent} from '../import-student'
+import {IMPORT_STUDENT} from '../../constants'
 
 describe('importStudent action', () => {
 	it('returns an action to import a student', () => {
@@ -15,6 +15,6 @@ describe('importStudent action', () => {
 		let action = importStudent({data: '^INVALID_JSON^', type: 'application/json'})
 		expect(action).to.have.property('error', true)
 		expect(action).to.have.property('payload')
-		expect(action.payload).to.have.property('message', 'Unexpected token ^')
+		expect(action.payload.message.indexOf('Unexpected token ^')).to.equal(0)
 	})
 })

@@ -9,7 +9,7 @@ import {
 } from './constants'
 
 
-export function removeNotification(id: string, delayBy: number = 0) {
+export function removeNotification(id, delayBy = 0) {
 	if (delayBy) {
 		return {
 			type: REMOVE_NOTIFICATION,
@@ -19,21 +19,21 @@ export function removeNotification(id: string, delayBy: number = 0) {
 	return { type: REMOVE_NOTIFICATION, payload: { id } }
 }
 
-export function logMessage(id: string, message: string) {
+export function logMessage(id, message) {
 	return { type: LOG_MESSAGE, payload: { id, message } }
 }
 
-export function logError({id, error, quiet=false}: {id: string, error: Error, quiet?: boolean}, ...args?: any[]) {
+export function logError({id, error, quiet=false}, ...args) {
 	if (!quiet && !TESTING) {
 		console.error(error, ...args)
 	}
 	return { type: LOG_ERROR, payload: { id, error, quiet, args } }
 }
 
-export function startProgress(id: string, message: string = '', {value=0, max=1, showButton=false}: {value?: number, max?: number, showButton?: boolean} = {}) {
+export function startProgress(id, message = '', {value=0, max=1, showButton=false} = {}) {
 	return { type: START_PROGRESS, payload: { id, message, value, max, showButton } }
 }
 
-export function incrementProgress(id: string, by: number = 1) {
+export function incrementProgress(id, by = 1) {
 	return { type: INCREMENT_PROGRESS, payload: { id, by } }
 }

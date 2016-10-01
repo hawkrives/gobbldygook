@@ -9,7 +9,7 @@ import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import some from 'lodash/some'
 import fromPairs from 'lodash/fromPairs'
-import makeAreaSlug from './make-area-slug'
+import {makeAreaSlug} from './make-area-slug'
 import {oxford} from 'humanize-plus'
 import {parse} from './parse-hanson-string'
 

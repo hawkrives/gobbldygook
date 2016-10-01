@@ -1,18 +1,18 @@
 import {expect} from 'chai'
 
-const {
+import {
 	addCourse,
 	removeCourse,
 	reorderCourse,
 	moveCourse,
-} = require('../../src/redux/students/actions/courses')
+} from '../courses'
 
-const {
+import {
 	ADD_COURSE,
 	REMOVE_COURSE,
 	REORDER_COURSE,
 	MOVE_COURSE,
-} = require('../../src/redux/students/constants')
+} from '../../constants'
 
 describe('addCourse action', () => {
 	it('returns an action to add an override', () => {

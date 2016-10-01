@@ -1,5 +1,3 @@
-// @flow
-import type {Action} from 'redux'
 import omit from 'lodash/omit'
 
 import {
@@ -10,16 +8,9 @@ import {
 	REMOVE_NOTIFICATION,
 } from './constants'
 
-type NotificationType = 'message'|'error'|'progess'
-type ProgressNotification = {message: string, type: NotificationType, value: number, max: number, showButton: boolean};
-type ErrorNotification = {message: string, type: NotificationType};
-type MessageNotification = {message: string, type: NotificationType};
-type Notification = ProgressNotification|ErrorNotification|MessageNotification;
-type State = {[key: string]: Notification};
+const initialState = {}
 
-const initialState: State = {}
-
-export default function reducer(state: State = initialState, action: Action) {
+export default function reducer(state = initialState, action) {
 	const {type, payload} = action
 
 	switch (type) {

@@ -1,22 +1,22 @@
 import {expect} from 'chai'
 
-const {
+import {
 	changeName,
 	changeAdvisor,
 	changeCreditsNeeded,
 	changeMatriculation,
 	changeGraduation,
 	changeSetting,
-} = require('../../src/redux/students/actions/change')
+} from '../change'
 
-const {
+import {
 	CHANGE_NAME,
 	CHANGE_ADVISOR,
 	CHANGE_CREDITS_NEEDED,
 	CHANGE_MATRICULATION,
 	CHANGE_GRADUATION,
 	CHANGE_SETTING,
-} = require('../../src/redux/students/constants')
+} from '../../constants'
 
 describe('changeName action', () => {
 	it('returns an action to change the name of a student', () => {

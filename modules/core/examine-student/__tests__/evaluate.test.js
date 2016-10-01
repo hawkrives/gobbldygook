@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import evaluate from '../evaluate'
+import {evaluate} from '../evaluate'
 
 describe('evaluate', () => {
 	it('evaluates!', () => {

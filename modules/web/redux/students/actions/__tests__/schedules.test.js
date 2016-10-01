@@ -1,22 +1,22 @@
 import {expect} from 'chai'
 
-const {
+import {
 	addSchedule,
 	destroySchedule,
 	destroySchedules,
 	renameSchedule,
 	reorderSchedule,
 	moveSchedule,
-} = require('../../src/redux/students/actions/schedules')
+} from '../schedules'
 
-const {
+import {
 	ADD_SCHEDULE,
 	DESTROY_SCHEDULE,
 	DESTROY_SCHEDULES,
 	RENAME_SCHEDULE,
 	REORDER_SCHEDULE,
 	MOVE_SCHEDULE,
-} = require('../../src/redux/students/constants')
+} from '../../constants'
 
 describe('addSchedule action', () => {
 	it('returns an action to add a schedule to a student', () => {

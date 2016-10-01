@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import splitDeptNum from '../../src/helpers/split-dept-num'
+import {splitDeptNum} from '../split-dept-num'
 
 describe('splitDeptNum', () => {
 	it('splits multi-department courses into components', () => {

@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import convertStudent from '../../src/helpers/convert-imported-student'
+import {convertStudent} from '../convert-imported-student'
 
 const sample = Object.freeze({
 	courses: [

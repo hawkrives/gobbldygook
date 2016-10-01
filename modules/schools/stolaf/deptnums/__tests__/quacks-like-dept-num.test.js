@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import quacksLikeDeptNum from '../../src/helpers/quacks-like-dept-num'
+import {quacksLikeDeptNum} from '../quacks-like-dept-num'
 
 describe('quacksLikeDeptNum', () => {
 	it('fails on the empty string', () => {

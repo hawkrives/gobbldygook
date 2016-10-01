@@ -6,9 +6,9 @@ import {
 	extractStudentIds,
 	getCoursesFromHtml,
 	getGraduationInformation,
-} from '../../src/helpers/import-student'
+} from '../import-student'
 
-import parseHtml from '../../src/helpers/parse-html'
+import {parseHtml} from '../parse-html'
 import fs from 'fs'
 import path from 'path'
 const file = filename => fs.readFileSync(path.join(__dirname, `./_support/import-student.${filename}.html`))

@@ -61,6 +61,9 @@ export function studentReducer(state = initialState, action) {
 
 	switch (type) {
 		case INIT_STUDENT: {
+			if (action.error) {
+				return state
+			}
 			return payload
 		}
 

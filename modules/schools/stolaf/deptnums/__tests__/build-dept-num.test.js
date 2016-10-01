@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import buildDeptNum from '../../src/helpers/build-dept-num'
+import {buildDeptNum} from '../build-dept-num'
 
 describe('buildDeptNum', () => {
 	it('builds a department string from a single-dept course', () => {
