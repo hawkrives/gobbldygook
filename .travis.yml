@@ -16,6 +16,13 @@ notifications:
 
 language: node_js
 
+deploy:
+  provider: script
+  script: npm run deploy
+  on:
+    branch: master
+    tags: true
+
 branches:
   only: [master, stable, /^travis/]
 
