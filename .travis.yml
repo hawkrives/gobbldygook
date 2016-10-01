@@ -29,7 +29,7 @@ env:
   - CMD=build-ci
 
 script:
-  - if [[ $CMD = "cover" ]]; then npm install coveralls codecov; fi
+  - if [[ $CMD = "run-coverage" ]]; then npm install coveralls codecov; fi
   - npm run $CMD
 
 after_success: npm run coveralls; npm run codecov
