@@ -18,7 +18,7 @@ fi
 git checkout -B $DEST_BRANCH $SOURCE_BRANCH --no-track
 
 npm run build
-rm -rf bin/ flow-typed/ playground/ screenshots/ scripts/ src/ test/
+rm -rf bin/ config/ flow-typed/ modules/ playground/ screenshots/ scripts/
 find ./ -type f -depth 1 -not -name '.git*' -not -name package.json -delete
 mv build/* ./
 rm -f build/.DS_Store
