@@ -615,7 +615,26 @@ describe('the undoable students reducer', () => {
 		expect(size(hasOneStudent.present)).to.equal(1)
 	})
 
-	it.only('holds previous states', () => {
+	it('treats INIT_STUDENT as a blank slate', () => {
+		const initial = {}
+
+		const firstStudent = {id: 'xyz'}
+		const hasOneStudent = undoableReducer(initial, {type: INIT_STUDENT, payload: firstStudent})
+
+		// should have the initial state
+		expect(hasOneStudent.past).to.be.ok
+		expect(hasOneStudent.past.length).to.equal(0)
+		expect(hasOneStudent.present).to.deep.equal(firstStudent)
+
+		// should have the initial state and _no trace_ of the previous student
+		const secondStudent = {id: 'abc'}
+		const stillHasOneStudent = undoableReducer(hasOneStudent, {type: INIT_STUDENT, payload: secondStudent})
+		expect(hasOneStudent.past).to.be.ok
+		expect(stillHasOneStudent.past.length).to.equal(0)
+		expect(stillHasOneStudent.present).to.deep.equal(secondStudent)
+	})
+
+	it('holds previous states', () => {
 		const initial = {}
 		const student = {id: 'xyz'}
 		const hasOneStudent = undoableReducer(initial, {type: INIT_STUDENT, payload: student})
@@ -626,23 +645,23 @@ describe('the undoable students reducer', () => {
 		expect(hasOneStudent.present).to.deep.equal(student)
 
 		// should have the initial state *and* the single student state
-		const hasTwoStudents = undoableReducer(hasOneStudent, {type: INIT_STUDENT, payload: {id: 'abc'}})
-		console.log(hasTwoStudents)
+		const hasTwoStudents = undoableReducer(hasOneStudent, {type: CHANGE_NAME, payload: {name: 'test'}})
 		expect(hasTwoStudents.past.length).to.equal(1)
-		expect(hasTwoStudents.past[1]).to.deep.equal(hasOneStudent.present)
+		expect(hasTwoStudents.past[0]).to.deep.equal(hasOneStudent.present)
 	})
 
 	it('allows undoing to a previous state', () => {
 		const initial = {}
 		const hasOneStudent = undoableReducer(initial, {type: INIT_STUDENT, payload: {id: 'xyz'}})
+		const editedStudent = undoableReducer(hasOneStudent, {type: CHANGE_NAME, payload: {name: 'abc'}})
 
-		const shouldBeInitial = undoableReducer(hasOneStudent, undo())
-		expect(shouldBeInitial.present).to.deep.equal(initial)
+		const shouldBeInitial = undoableReducer(editedStudent, undo())
+		expect(shouldBeInitial.present).to.deep.equal(hasOneStudent.present)
 	})
 
 	it('allows redoing to a future state', () => {
-		const initial = {}
-		const hasOneStudent = undoableReducer(initial, {type: INIT_STUDENT, payload: {id: 'xyz'}})
+		const initial = undoableReducer(initial, {type: INIT_STUDENT, payload: {id: 'xyz'}})
+		const hasOneStudent = undoableReducer(initial, {type: CHANGE_NAME, payload: {name: 'abc'}})
 
 		const shouldBeInitial = undoableReducer(hasOneStudent, undo())
 		expect(shouldBeInitial.future).to.be.ok
@@ -651,19 +670,17 @@ describe('the undoable students reducer', () => {
 
 		const shouldHaveOneStudent = undoableReducer(shouldBeInitial, redo())
 		expect(shouldHaveOneStudent.future.length).to.equal(0)
-		expect(shouldHaveOneStudent.present).to.have.property('xyz').and.deep.equal({id: 'xyz'})
+		expect(shouldHaveOneStudent.present).to.deep.equal({id: 'xyz', name: 'abc'})
 		expect(shouldHaveOneStudent.present).to.deep.equal(hasOneStudent.present)
 
 		expect(shouldHaveOneStudent.past.length).to.equal(1)
-		expect(shouldHaveOneStudent.past[0]).to.deep.equal(initial)
+		expect(shouldHaveOneStudent.past[0]).to.deep.equal(initial.present)
 	})
 
 	it('only holds 9 previous states', () => {
-		const initial = {}
-
-		let state = initial
+		let state = {}
 		for (let i of range(15)) {
-			state = undoableReducer(state, {type: INIT_STUDENT, payload: {id: String(i)}})
+			state = undoableReducer(state, {type: CHANGE_NAME, payload: {name: String(i)}})
 		}
 
 		expect(state.past.length).to.equal(9)
