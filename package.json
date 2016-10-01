@@ -26,8 +26,10 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "deploy": "bash scripts/deploy.sh",
+    "deploy-ci": "bash scripts/ci-deploy.sh",
     "lint": "eslint *.js modules/",
     "profile": "cat profile/README.md",
+    "run-coverage": "nyc npm test",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
     "start": "npm run copy && cross-env NODE_ENV=development webpack-dev-server --config .webpackrc.js --progress",
     "stats": "cross-env NODE_ENV=production npm run stats-base",
@@ -37,7 +39,6 @@
     "test-students": "./modules/cli/test-student test/example-students",
     "test-watch": "npm run test -- --watch",
     "travis": "npm run lint && npm run cover && npm run build-ci",
-    "run-coverage": "nyc npm test",
     "view-coverage": "nyc report --reporter=html && open coverage/index.html",
     "watch": "cross-env NODE_ENV=development webpack --watch --config .webpackrc.js --bail --progress --devtool=source-map"
   },

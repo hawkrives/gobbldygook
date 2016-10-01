@@ -18,7 +18,7 @@ language: node_js
 
 deploy:
   provider: script
-  script: npm run deploy
+  script: npm run deploy-ci
   on:
     branch: master
     tags: true
@@ -36,14 +36,10 @@ branches:
 node_js:
   - stable
 
-# run each command in parallel
-env:
-  - CMD=lint
-  - CMD=run-coverage
-  - CMD=build-ci
-
 script:
-  - if [[ $CMD = "run-coverage" ]]; then npm install coveralls codecov; fi
-  - npm run $CMD
+  - npm install coveralls codecov
+  - npm run lint
+  - npm run run-coverage
+  - npm run build-ci
 
 after_success: npm run coveralls; npm run codecov
