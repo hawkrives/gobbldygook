@@ -14,6 +14,10 @@ notifications:
   slack:
     secure: iNz4CfNIkTXwl7G71nTgLMXUKKYMqQJkvQKuBck33Eg+tFy/w6O3bMEyGLdfJZKHO0Q3fE/Wbw+SIp77TBG4i/YQ87/cQWnFv21temZoBnkYPk5IiusUR/5AJPCpFJSnDlB92XDGz06ilL1oFW6R3yGjn5lUqUDy2a+Pj0TUp1w=
 
+env:
+  global:
+    - ENCRYPTION_LABEL: 25d766a04336
+
 language: node_js
 
 deploy:
