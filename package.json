@@ -26,7 +26,6 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "deploy": "bash scripts/deploy.sh",
-    "deploy-ci": "bash scripts/ci-deploy.sh",
     "lint": "eslint *.js modules/",
     "profile": "cat profile/README.md",
     "run-coverage": "nyc npm test",

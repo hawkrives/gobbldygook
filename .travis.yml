@@ -18,7 +18,7 @@ language: node_js
 
 deploy:
   provider: script
-  script: npm run deploy-ci
+  script: bash scripts/deploy-ci.sh
   on:
     branch: master
     tags: true
