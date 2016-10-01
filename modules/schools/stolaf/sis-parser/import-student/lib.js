@@ -1,10 +1,51 @@
+import Bluebird from 'bluebird'
 import {parseHtml} from '../parse-html'
-import {status, text, classifyFetchErrors} from 'modules/lib'
 import forOwn from 'lodash/forOwn'
 import forEach from 'lodash/forEach'
+import {v4 as uuid} from 'uuid'
 
-const fetch = (url, args={}) => global.fetch(url, {cache: 'no-cache', credentials: 'same-origin', mode: 'same-origin', ...args}).catch(classifyFetchErrors)
-export const fetchHtml = (...args) => fetch(...args).then(status).then(text).then(html)
+class ExtensionNotLoadedError extends Error {}
+class ExtensionTooOldError extends Error {}
+
+export function fetchHtml(url, fetchArgs) {
+	if (!global.gobbldygook_extension_version) {
+		return Bluebird.reject(new ExtensionNotLoadedError)
+	}
+	if (global.gobbldygook_extension_version < '1.0.0') {
+		return Bluebird.reject(new ExtensionTooOldError(global.gobbldygook_extension_version))
+	}
+
+	// now we know the extension is loaded
+
+	return new Bluebird((resolve, reject) => {
+		const id = uuid()
+
+		global.addEventListener('message', event => {
+			// `event` should have the shape {from, id, text}
+			if (event.data.from !== 'web-ext') {
+				return
+			}
+			if (event.data.id !== id) {
+				return
+			}
+
+			if (event.data.error) {
+				reject(event.data.error)
+			}
+			else {
+				resolve(html(event.data.text))
+			}
+		})
+
+		global.postMessage({
+			from: 'page',
+			id,
+			url,
+			fetchArgs,
+		})
+	})
+}
+
 
 export function html(text) {
 	return parseHtml(text)
