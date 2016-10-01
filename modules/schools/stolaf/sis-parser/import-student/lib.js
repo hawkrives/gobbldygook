@@ -41,7 +41,7 @@ export function fetchHtml(url, fetchArgs) {
 			id,
 			url,
 			fetchArgs,
-		})
+		}, '*')
 	})
 }
 
