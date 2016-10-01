@@ -30,6 +30,7 @@
 		},
 		"test": {
 			"plugins": [
+				"istanbul",
 				// allows tested files access to the webpack aliases
 				["webpack-alias", { "config": "./.webpackrc.js" }],
 			],
