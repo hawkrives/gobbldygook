@@ -25,7 +25,7 @@ node_js:
 # run each command in parallel
 env:
   - CMD=lint
-  - CMD=cover
+  - CMD=run-coverage
   - CMD=build-ci
 
 script:
