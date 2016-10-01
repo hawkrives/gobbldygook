@@ -24,6 +24,7 @@
     "copy": "rimraf build && mkdirp build/ && cpy 'modules/web/static/*' build/",
     "cover": "npm run run-coverage && npm run view-coverage",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "deploy": "bash scripts/deploy.sh",
     "lint": "eslint *.js modules/",
     "profile": "cat profile/README.md",
