@@ -112,7 +112,7 @@ class ManualCreationScreen extends Component {
 
 		let action = initStudent(rawStudent)
 		this.props.dispatch(action)
-		this.props.dispatch(this.props.router.push(`/s/${action.payload.id}`))
+		this.props.router.push(`/s/${action.payload.id}`)
 	};
 
 	render() {
