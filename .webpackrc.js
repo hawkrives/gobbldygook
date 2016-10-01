@@ -231,7 +231,7 @@ const config = {
 // dev specific stuff
 if (isDevelopment) {
 	// debugging option
-	config.devtool = 'cheap-module-eval-source-map'
+	config.devtool = 'eval'
 
 	// add dev server and hotloading clientside code
 	config.entry.main.unshift(
