@@ -6,10 +6,10 @@ DEST_BRANCH=gh-pages
 git checkout -B $DEST_BRANCH --no-track
 
 # Get the deploy key by using Travis's stored variables to decrypt config/deploy_key.enc
-openssl aes-256-cbc -K "$encrypted_25d766a04336_key" -iv "$encrypted_25d766a04336_iv" -in config/deploy_key.enc -out deploy_key -d
-chmod 600 deploy_key
-eval `ssh-agent -s`
-ssh-add deploy_key
+openssl aes-256-cbc -K "$encrypted_25d766a04336_key" -iv "$encrypted_25d766a04336_iv" -in config/deploy_key.enc -out config/deploy_key -d
+eval "$(ssh-agent -s)"
+chmod 600 config/deploy_key
+ssh-add config/deploy_key
 
 # Remove unneeded files
 rm -rf bin/ config/ flow-typed/ modules/ playground/ screenshots/ scripts/
