@@ -50,6 +50,7 @@ class SISImportScreen extends Component {
 				}
 			})
 			.catch(err => {
+				console.error(err)
 				this.setState({loggedIn: false, checkingLogin: false})
 				if (err instanceof ExtensionNotLoadedError) {
 					this.setState({error: 'The extension is not loaded properly.'})
