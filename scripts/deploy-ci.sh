@@ -12,8 +12,8 @@ ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
 ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
 openssl aes-256-cbc -K "$ENCRYPTED_KEY" -iv "$ENCRYPTED_IV" -in config/deploy_key.enc -out deploy_key -d
 chmod 600 deploy_key
-echo "${ssh-agent -s}"
-eval ${ssh-agent -s}
+ssh-agent -s
+eval `ssh-agent -s`
 ssh-add deploy_key
 
 # Remove unneeded files
