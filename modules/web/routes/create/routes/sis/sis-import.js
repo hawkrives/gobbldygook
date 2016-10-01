@@ -18,6 +18,7 @@ import { RadioGroup, Radio } from 'react-radio-group'
 import { initStudent } from 'modules/web/redux/students/actions/init-student'
 import { connect } from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
+import './sis-import.scss'
 
 class SISImportScreen extends Component {
 	static propTypes = {
@@ -106,7 +107,15 @@ class SISImportScreen extends Component {
 							: 'Not logged in. Please log in to the SIS in another tab.'}
 				</p>
 
-				{error ? <p>{error.message}</p> : null}
+				{error
+					? <div>
+						<p><strong>{error.name}</strong></p>
+						<p>{error.message}</p>
+						<pre className="error-stack">
+							{error.stack}
+						</pre>
+					</div>
+					: null}
 
 				{!loggedIn ? <Button disabled={checkingLogin} onClick={this.checkLoginState}>Check Again</Button> : null}
 
