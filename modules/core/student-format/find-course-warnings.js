@@ -9,7 +9,7 @@ import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {expandYear, semesterName} from 'modules/schools/stolaf'
-import {alertCircled, iosCalendarOutline, iosClockOutline} from 'modules/web/icons/ionicons'
+// import {alertCircled, iosCalendarOutline, iosClockOutline} from 'modules/web/icons/ionicons'
 
 export function checkForInvalidYear(course, scheduleYear) {
 	let thisYear = new Date().getFullYear()
@@ -19,7 +19,7 @@ export function checkForInvalidYear(course, scheduleYear) {
 			warning: true,
 			type: 'invalid-year',
 			msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
-			icon: alertCircled,
+			icon: 'alertCircled',
 		}
 	}
 
@@ -32,7 +32,7 @@ export function checkForInvalidSemester(course, scheduleSemester) {
 			warning: true,
 			type: 'invalid-semester',
 			msg: `Wrong Semester (originally from ${semesterName(course.semester)})`,
-			icon: iosCalendarOutline,
+			icon: 'iosCalendarOutline',
 		}
 	}
 
@@ -52,7 +52,7 @@ export function checkForTimeConflicts(courses) {
 				warning: true,
 				type: 'time-conflict',
 				msg: `Time conflict with the ${oxford(conflicted, {oxfordComma: true})} ${plur('course', conflicts.length)}`,
-				icon: iosClockOutline,
+				icon: 'iosClockOutline',
 			}
 		}
 
