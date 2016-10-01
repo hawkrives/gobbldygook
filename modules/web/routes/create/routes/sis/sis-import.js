@@ -76,7 +76,7 @@ class SISImportScreen extends Component {
 	handleCreateStudent = () => {
 		let action = initStudent(this.state.student)
 		this.props.dispatch(action)
-		this.props.dispatch(this.props.router.push(`/s/${action.payload.id}`))
+		this.props.router.push(`/s/${action.payload.id}`)
 	};
 
 	handleSelectId = value => {
