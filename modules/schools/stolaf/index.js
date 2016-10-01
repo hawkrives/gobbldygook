@@ -17,4 +17,7 @@ export {
 export {
 	convertStudent,
 	getStudentInfo,
+	checkIfLoggedIn,
+	ExtensionNotLoadedError,
+	ExtensionTooOldError,
 } from './sis-parser'
