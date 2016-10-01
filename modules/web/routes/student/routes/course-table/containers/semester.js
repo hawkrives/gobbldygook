@@ -10,7 +10,7 @@ import {destroySchedules} from 'modules/web/redux/students/actions/schedules'
 import {moveCourse, addCourse} from 'modules/web/redux/students/actions/courses'
 import Semester from '../components/semester'
 
-import getSchedule from 'modules/web/helpers/get-schedule'
+import {getSchedule} from 'modules/web/helpers/get-schedule'
 
 
 export class SemesterContainer extends Component {
