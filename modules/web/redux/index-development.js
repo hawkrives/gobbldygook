@@ -20,6 +20,7 @@ const finalCreateStore = compose(
 		saveStudentsMiddleware,
 		loggerMiddleware
 	),
+	(window && window.devToolsExtension) ? window.devToolsExtension() : f => f,
 	persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore)
 

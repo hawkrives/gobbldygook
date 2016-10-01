@@ -11,7 +11,8 @@ const finalCreateStore = compose(
 		thunkMiddleware,
 		checkStudentsMiddleware,
 		saveStudentsMiddleware
-	)
+	),
+	(window && window.devToolsExtension) ? window.devToolsExtension() : f => f
 )(createStore)
 
 export default function configureStore(initialState) {
