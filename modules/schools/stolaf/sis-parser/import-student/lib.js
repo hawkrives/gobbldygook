@@ -34,7 +34,7 @@ export function fetchHtml(url, fetchArgs) {
 				reject(event.data.error)
 			}
 			else {
-				resolve(html(event.data.text))
+				resolve(parseHtml(event.data.text))
 			}
 		}
 
@@ -47,11 +47,6 @@ export function fetchHtml(url, fetchArgs) {
 			fetchArgs,
 		}, '*')
 	})
-}
-
-
-export function html(text) {
-	return parseHtml(text)
 }
 
 export function buildFormData(obj) {
