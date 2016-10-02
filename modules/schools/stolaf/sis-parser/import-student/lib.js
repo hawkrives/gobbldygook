@@ -19,7 +19,7 @@ export function fetchHtml(url, fetchArgs) {
 	return new Bluebird((resolve, reject) => {
 		const id = uuid()
 
-		global.addEventListener('message', event => {
+		function handleResponse(event) {
 			// `event` should have the shape {from, id, text}
 			if (event.data.from !== 'web-ext') {
 				return
@@ -28,13 +28,17 @@ export function fetchHtml(url, fetchArgs) {
 				return
 			}
 
+			global.removeEventListener('message', handleResponse)
+
 			if (event.data.error) {
 				reject(event.data.error)
 			}
 			else {
 				resolve(html(event.data.text))
 			}
-		})
+		}
+
+		global.addEventListener('message', handleResponse)
 
 		global.postMessage({
 			from: 'page',
