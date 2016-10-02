@@ -67,6 +67,7 @@
     "mkdirp": "0.5.1",
     "node-fetch": "1.6.3",
     "nomnom": "1.8.1",
+    "oghliner": "1.1.1",
     "ord": "0.1.1",
     "plur": "2.1.2",
     "present": "1.0.0",

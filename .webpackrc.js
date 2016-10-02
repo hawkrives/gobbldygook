@@ -147,6 +147,8 @@ const config = {
 							`<link rel="stylesheet" href="${publicPath}${context.css}">`
 							: ''}
 
+						<script src="${publicPath}offline-manager.js"></script>
+
 						<body><main id="gobbldygook"></main></body>
 						<script src="${publicPath}${context.common}"></script>
 						<script src="${publicPath}${context.react}"></script>
