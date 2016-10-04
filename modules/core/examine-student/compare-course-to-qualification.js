@@ -64,7 +64,7 @@ function compareCourseToQualificationViaObject(course: Course, {$key, $operator,
 
 function compareCourseToQualificationViaOperator(course: Course, {$key, $operator, $value}: QualifierExpression) {
 	// get the actual course out of the object
-	course = course.$course || course
+	course = (course: any).$course || course
 
 	// it's a static value; a number or string
 	if ($operator === '$eq') {
