@@ -4,8 +4,8 @@ import {filter} from 'lodash'
 import {forEach} from 'lodash'
 import {isPlainObject} from 'lodash'
 import {map} from 'lodash'
-import {_max} from 'lodash'
-import {_min} from 'lodash'
+import {max} from 'lodash'
+import {min} from 'lodash'
 import {take} from 'lodash'
 import simplifyCourse from './simplify-course'
 import {uniqBy} from 'lodash'
@@ -65,8 +65,8 @@ export default function filterByWhereClause(baseList, clause, {distinct, fullLis
 }
 
 const qualificationFunctionLookup = {
-	max: _max,
-	min: _min,
+	max: max,
+	min: min,
 }
 
 export function filterByQualification(list, qualification, {distinct=false, fullList, counter={}}={}) {
