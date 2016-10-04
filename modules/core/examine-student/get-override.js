@@ -1,4 +1,6 @@
+// @flow
 import pathToOverride from './path-to-override'
+import type {OverridesPath, OverridesObject} from './types'
 
 /**
  * Gets an override from an override object
@@ -7,6 +9,6 @@ import pathToOverride from './path-to-override'
  * @param {Object} overrides - the overrides object
  * @returns {*} - the value of the override
  */
-export default function getOverride(path, overrides) {
+export default function getOverride(path: OverridesPath, overrides: OverridesObject) {
 	return overrides[pathToOverride(path)]
 }

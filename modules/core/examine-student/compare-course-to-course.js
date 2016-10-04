@@ -1,8 +1,10 @@
+// @flow
 import {isEqualWith} from 'lodash'
 import {every} from 'lodash'
 import {keys} from 'lodash'
 import {filter} from 'lodash'
 import {includes} from 'lodash'
+import type {Course, CourseExpression} from './types'
 
 const baseKeys = [
 	'department',
@@ -37,8 +39,10 @@ function wildcard(lhs) {
  * @param {Course} other - the course to compare against
  * @returns {boolean} - if the course matched
  */
-export default function compareCourseToCourse(query, other) {
-	query = query.$course || query
+export default function compareCourseToCourse(query: Course|CourseExpression, other: Course|CourseExpression) {
+	if (query.$type) {
+		query = query.$course
+	}
 	other = other.$course || other
 
 	// If the query is more specific than the one being compared to, and

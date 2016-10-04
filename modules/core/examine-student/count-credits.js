@@ -1,4 +1,6 @@
+// @flow
 import {sumBy} from 'lodash'
+import type {Course} from './types'
 
 /**
  * Sums up the number of credits offered by a set of courses
@@ -6,6 +8,6 @@ import {sumBy} from 'lodash'
  * @param {Course[]} courses - a list of courses
  * @returns {number} - the sum of the 'credits' properties
  */
-export function countCredits(courses=[]) {
+export function countCredits(courses: Course[]=[]) {
 	return sumBy(courses, 'credits') || 0
 }

@@ -1,9 +1,11 @@
+// @flow
 import {isPlainObject} from 'lodash'
 import {isArray} from 'lodash'
 import {includes} from 'lodash'
 import assertKeys from './assert-keys'
 import {every} from 'lodash'
 import {some} from 'lodash'
+import type {Course, QualifierExpression} from './types'
 
 /**
  * Compares a course property against a MongoDB-style operator
@@ -14,7 +16,7 @@ import {some} from 'lodash'
  * @param {string} $value - the value compare to
  * @returns {boolean} - whether the course matched or not
  */
-export default function compareCourseToQualification(course, {$key, $operator, $value}) {
+export default function compareCourseToQualification(course: Course, {$key, $operator, $value}: QualifierExpression) {
 	if (isArray($value)) {
 		throw new TypeError("compareCourseToQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)")
 	}
@@ -29,12 +31,16 @@ export default function compareCourseToQualification(course, {$key, $operator, $
 }
 
 
-function compareCourseToQualificationViaObject(course, {$key, $operator, $value}) {
+function compareCourseToQualificationViaObject(course: Course, {$key, $operator, $value}: QualifierExpression) {
+	if (typeof $value !== 'object') {
+		throw new TypeError(`compareCourseToQualification(): $value must be an object; "${typeof $value}" is not an object.`)
+	}
+
 	if ($value.$type === 'function') {
 		// we compute the value of the function-over-where-query style
 		// operators earlier, in the filterByQualification function.
-		assertKeys($value, '$computed-value')
-		const simplifiedOperator = {$key, $operator, $value: $value['$computed-value']}
+		assertKeys($value, '_computed_value')
+		const simplifiedOperator = {$key, $operator, $value: $value._computed_value}
 		return compareCourseToQualification(course, simplifiedOperator)
 	}
 	else if ($value.$type === 'boolean') {
@@ -56,7 +62,7 @@ function compareCourseToQualificationViaObject(course, {$key, $operator, $value}
 }
 
 
-function compareCourseToQualificationViaOperator(course, {$key, $operator, $value}) {
+function compareCourseToQualificationViaOperator(course: Course, {$key, $operator, $value}: QualifierExpression) {
 	// get the actual course out of the object
 	course = course.$course || course
 

@@ -1,3 +1,4 @@
+// @flow
 import applyFilter from './apply-filter'
 import applyFulfillmentToExpression from './apply-fulfillment-to-expression'
 import computeChunk from './compute-chunk'
@@ -6,12 +7,20 @@ import getOverride from './get-override'
 import hasOverride from './has-override'
 import isRequirementName from './is-requirement-name'
 import {mapValues} from 'lodash'
+import type {Requirement, Course, OverridesObject, FulfillmentsObject, crsidT} from './types'
 
 
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.
+type ComputeArguments = {
+	path: string[],
+	courses: Course[],
+	overrides: OverridesObject,
+	fulfillments: FulfillmentsObject,
+	dirty?: Set<crsidT>,
+}
 
-export default function compute(requirement, {path, courses=[], overrides={}, fulfillments={}, dirty=new Set()}) {
+export default function compute(requirement: Requirement, {path, courses=[], overrides={}, fulfillments={}, dirty=new Set()}: ComputeArguments) {
 	let childrenShareCourses = Boolean(requirement['children share courses'])
 
 	requirement = mapValues(requirement, (req, name) => {

@@ -1,3 +1,4 @@
+// @flow
 import {reject} from 'lodash'
 
 /**
@@ -8,7 +9,7 @@ import {reject} from 'lodash'
  * @throws {ReferenceError} Param 'obj' must include all requested keys
  * @returns {void}
  */
-export default function assertKeys(obj, ...listOfKeys) {
+export default function assertKeys(obj: any, ...listOfKeys: string[]) {
 	const missingKeys = reject(listOfKeys, key => key in obj)
 	if (missingKeys.length) {
 		throw new ReferenceError(`assertKeys(): missing ${missingKeys.join(', ')} from ${JSON.stringify(obj)}`)

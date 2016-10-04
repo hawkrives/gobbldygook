@@ -1,5 +1,7 @@
+// @flow
 import {find} from 'lodash'
 import compareCourseToCourse from './compare-course-to-course'
+import type {Course} from './types'
 
 /**
  * Finds a course in a list of courses
@@ -8,6 +10,6 @@ import compareCourseToCourse from './compare-course-to-course'
  * @param {Course[]} courses - the list to look through
  * @returns {Course|undefined} - the found course
  */
-export default function findCourse(query, courses) {
+export default function findCourse(query: Course, courses: Course[]) {
 	return find(courses, course => compareCourseToCourse(query, course))
 }
