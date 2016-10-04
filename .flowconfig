@@ -1,5 +1,5 @@
 [version]
-^0.32.0
+^0.33.0
 
 
 [ignore]
@@ -21,16 +21,16 @@
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
 
-; allow flow to find the modules that we require with src/
-module.name_mapper='^src/\(.*\)' -> '<PROJECT_ROOT>/src/\1'
+; allow flow to find the modules that we require with modules/
+module.name_mapper='^modules/\(.*\)' -> '<PROJECT_ROOT>/modules/\1'
 
 ; allow require'ing non-js files (like webpack does)
 module.name_mapper.extension='css' -> '<PROJECT_ROOT>/config/flow/css'
 module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/config/flow/css'
-module.name_mapper='^\(.*\)\.\(jpg\|png\|gif\|eot\|otf\|webp\|svg\|ttf\|woff\|woff2\|mp4\|webm\)$' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper='^\(.*\)\.\(jpg\|png\|svg\|woff\|woff2\)$' -> '<PROJECT_ROOT>/config/flow/file'
 
-module.system.node.resolve_dirname=node_modules
-module.system.node.resolve_dirname=.
+; module.system.node.resolve_dirname=node_modules
+; module.system.node.resolve_dirname=.
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
