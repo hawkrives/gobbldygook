@@ -1,7 +1,7 @@
 import db from './db'
 import {enhanceHanson} from 'modules/hanson-format'
-import some from 'lodash/some'
-import maxBy from 'lodash/maxBy'
+import {some} from 'lodash'
+import {maxBy} from 'lodash'
 import yaml from 'js-yaml'
 
 function resolveArea(areas, query) {

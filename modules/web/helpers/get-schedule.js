@@ -1,5 +1,5 @@
-import find from 'lodash/find'
-import filter from 'lodash/filter'
+import {find} from 'lodash'
+import {filter} from 'lodash'
 import {isCurrentSemester} from 'modules/core'
 
 export function getSchedule(student, year, semester) {

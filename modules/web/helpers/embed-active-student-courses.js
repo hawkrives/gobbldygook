@@ -1,7 +1,7 @@
 import Bluebird from 'bluebird'
-import filter from 'lodash/filter'
-import map from 'lodash/map'
-import fromPairs from 'lodash/fromPairs'
+import {filter} from 'lodash'
+import {map} from 'lodash'
+import {fromPairs} from 'lodash'
 import {getCourse} from './get-courses'
 
 export function embedActiveStudentCourses(student, {cache=[]}) {

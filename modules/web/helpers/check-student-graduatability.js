@@ -1,8 +1,8 @@
 import Bluebird from 'bluebird'
 
-import filter from 'lodash/filter'
-import size from 'lodash/size'
-import map from 'lodash/map'
+import {filter} from 'lodash'
+import {size} from 'lodash'
+import {map} from 'lodash'
 
 import {checkStudentAgainstArea} from './check-student-against-area'
 import {countCredits} from 'modules/core/examine-student'

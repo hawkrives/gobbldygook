@@ -1,7 +1,7 @@
 // @flow
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import isString from 'lodash/isString'
+import {isString} from 'lodash'
 
 import './avatar-letter.scss'
 

@@ -1,8 +1,8 @@
 import { ga } from '../../../analytics'
 import queryCourseDatabase from '../../../helpers/query-course-database'
 import present from 'present'
-import round from 'lodash/round'
-import mapValues from 'lodash/mapValues'
+import {round} from 'lodash'
+import {mapValues} from 'lodash'
 
 import {
 	UPDATE_QUERY,

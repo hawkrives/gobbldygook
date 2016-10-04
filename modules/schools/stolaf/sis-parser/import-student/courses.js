@@ -1,5 +1,5 @@
 import Bluebird from 'bluebird'
-import map from 'lodash/map'
+import {map} from 'lodash'
 import {
 	fetchHtml,
 	getText,

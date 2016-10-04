@@ -1,4 +1,4 @@
-import reduce from 'lodash/reduce'
+import {reduce} from 'lodash'
 
 export function partitionByIndex(arr) {
 	return reduce(arr, (acc, val, idx) => {

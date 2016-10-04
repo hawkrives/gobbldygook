@@ -1,3 +1,5 @@
+import {has} from 'lodash'
+
 const SEMESTERS = {
 	'0': 'Abroad',
 	'1': 'Fall',
@@ -13,7 +15,7 @@ export function semesterName(semester) {
 	if (typeof semester === 'number') {
 		semester = String(semester)
 	}
-	return SEMESTERS.hasOwnProperty(semester)
+	return has(SEMESTERS, semester)
         ? SEMESTERS[semester]
         : `Unknown (${semester})`
 }

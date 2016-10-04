@@ -1,10 +1,10 @@
-import flatten from 'lodash/flatten'
-import map from 'lodash/map'
-import compact from 'lodash/compact'
+import {flatten} from 'lodash'
+import {map} from 'lodash'
+import {compact} from 'lodash'
 import isRequirementName from './is-requirement-name'
-import isPlainObject from 'lodash/isPlainObject'
-import keys from 'lodash/keys'
-import some from 'lodash/some'
+import {isPlainObject} from 'lodash'
+import {keys} from 'lodash'
+import {some} from 'lodash'
 
 /**
  * Searches recursively through a requirement tree to find all of the

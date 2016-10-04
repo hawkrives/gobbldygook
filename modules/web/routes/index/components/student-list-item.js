@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
-import groupBy from 'lodash/groupBy'
-import map from 'lodash/map'
+import {groupBy} from 'lodash'
+import {map} from 'lodash'
 import {interpose} from 'modules/lib'
 import {sortStudiesByType} from 'modules/core'
 

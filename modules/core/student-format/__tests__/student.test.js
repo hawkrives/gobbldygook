@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import demoStudent from '../demo-student.json'
-import find from 'lodash/find'
-import findIndex from 'lodash/findIndex'
+import {find} from 'lodash'
+import {findIndex} from 'lodash'
 import stringify from 'stabilize'
 
 import {

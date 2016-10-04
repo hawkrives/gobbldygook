@@ -1,12 +1,12 @@
 import fs from 'graceful-fs'
 import {evaluate} from 'modules/core/examine-student'
-import endsWith from 'lodash/endsWith'
+import {endsWith} from 'lodash'
 import junk from 'junk'
 import nom from 'nomnom'
 import ms from 'pretty-ms'
-import range from 'lodash/range'
+import {range} from 'lodash'
 import sparkly from 'sparkly'
-import mean from 'lodash/mean'
+import {mean} from 'lodash'
 import loadArea from './lib/load-area'
 
 function now(other=[]) {

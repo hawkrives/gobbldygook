@@ -1,4 +1,4 @@
-import includes from 'lodash/includes'
+import {includes} from 'lodash'
 import {extractInformationFromDegreeAudit} from './degree-audit'
 import {selectAll} from 'css-select'
 

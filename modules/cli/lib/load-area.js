@@ -1,10 +1,10 @@
 import bluebird from 'bluebird'
 import yaml from 'js-yaml'
 import {enhance} from 'modules/hanson-format'
-import map from 'lodash/map'
-import filter from 'lodash/filter'
-import find from 'lodash/find'
-import maxBy from 'lodash/maxBy'
+import {map} from 'lodash'
+import {filter} from 'lodash'
+import {find} from 'lodash'
+import {maxBy} from 'lodash'
 import findAreas from './find-areas'
 const fs = bluebird.promisifyAll(require('graceful-fs'))
 

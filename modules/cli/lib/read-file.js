@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 import {status, json, text} from 'modules/lib/fetch-helpers'
 
-import startsWith from 'lodash/startsWith'
+import {startsWith} from 'lodash'
 import yaml from 'js-yaml'
 
 import Promise from 'bluebird'

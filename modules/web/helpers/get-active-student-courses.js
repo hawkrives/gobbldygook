@@ -1,6 +1,6 @@
-import uniqBy from 'lodash/uniqBy'
-import filter from 'lodash/filter'
-import flatMap from 'lodash/flatMap'
+import {uniqBy} from 'lodash'
+import {filter} from 'lodash'
+import {flatMap} from 'lodash'
 
 export function getActiveStudentCourses(student) {
 	/*

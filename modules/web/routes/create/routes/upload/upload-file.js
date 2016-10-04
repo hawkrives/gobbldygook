@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import DropZone from 'react-dropzone'
-import map from 'lodash/map'
+import {map} from 'lodash'
 import Button from 'modules/web/components/button'
 import List from 'modules/web/components/list'
 // TODO: Move this component to modules/web/components

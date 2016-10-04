@@ -1,8 +1,8 @@
 // @flow
 import React, {PropTypes} from 'react'
 import Link from 'react-router/lib/Link'
-import map from 'lodash/map'
-import sortBy from 'lodash/sortBy'
+import {map} from 'lodash'
+import {sortBy} from 'lodash'
 import List from 'modules/web/components/list'
 
 export default function AreaList(props: {areas: Object[]}) {

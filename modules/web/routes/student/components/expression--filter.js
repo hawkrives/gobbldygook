@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 // import CourseExpression from './expression--course'
 import Expression, {makeWhereQualifier} from './expression'
-import map from 'lodash/map'
+import {map} from 'lodash'
 
 function FilterOf({expr, ctx}) {
 	return <div>

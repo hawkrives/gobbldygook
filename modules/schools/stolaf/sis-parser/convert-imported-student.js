@@ -1,11 +1,11 @@
 import Bluebird from 'bluebird'
 import {Student, Schedule} from 'modules/core/student-format'
-import groupBy from 'lodash/groupBy'
-import map from 'lodash/map'
-import forEach from 'lodash/forEach'
-import uniq from 'lodash/uniq'
-import fromPairs from 'lodash/fromPairs'
-import filter from 'lodash/filter'
+import {groupBy} from 'lodash'
+import {map} from 'lodash'
+import {forEach} from 'lodash'
+import {uniq} from 'lodash'
+import {fromPairs} from 'lodash'
+import {filter} from 'lodash'
 import {v4 as uuid} from 'uuid'
 
 export async function convertStudent({courses, degrees}, getCourse) {

@@ -1,6 +1,6 @@
 import assertKeys from './assert-keys'
-import flatMap from 'lodash/flatMap'
-import uniqBy from 'lodash/uniqBy'
+import {flatMap} from 'lodash'
+import {uniqBy} from 'lodash'
 import stringify from 'stabilize'
 
 /**

@@ -6,7 +6,7 @@ import path from 'path'
 import Mocha, {Test} from 'mocha'
 import {expect} from 'chai'
 
-import flatten from 'lodash/flatten'
+import {flatten} from 'lodash'
 import junk from 'junk'
 
 import {evaluate} from 'modules/core/examine-student'

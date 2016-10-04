@@ -1,8 +1,8 @@
-import forEach from 'lodash/forEach'
-import toPairs from 'lodash/toPairs'
-import fromPairs from 'lodash/fromPairs'
-import filter from 'lodash/filter'
-import includes from 'lodash/includes'
+import {forEach} from 'lodash'
+import {toPairs} from 'lodash'
+import {fromPairs} from 'lodash'
+import {filter} from 'lodash'
+import {includes} from 'lodash'
 
 const whitelist = [
 	'clbid',

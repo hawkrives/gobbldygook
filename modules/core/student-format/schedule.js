@@ -1,4 +1,4 @@
-import isString from 'lodash/isString'
+import {isString} from 'lodash'
 import {v4 as uuid} from 'uuid'
 
 import {randomChar} from 'modules/lib'

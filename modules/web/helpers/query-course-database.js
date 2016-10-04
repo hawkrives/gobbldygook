@@ -1,11 +1,11 @@
 import db from './db'
 import {buildQueryFromString} from 'modules/core'
-import compact from 'lodash/compact'
-import filter from 'lodash/filter'
-import map from 'lodash/map'
-import some from 'lodash/some'
-import toPairs from 'lodash/toPairs'
-import fromPairs from 'lodash/fromPairs'
+import {compact} from 'lodash'
+import {filter} from 'lodash'
+import {map} from 'lodash'
+import {some} from 'lodash'
+import {toPairs} from 'lodash'
+import {fromPairs} from 'lodash'
 
 export default function queryCourseDatabase(queryString, baseQuery={}) {
 	let queryObject = buildQueryFromString(queryString, {words: true, profWords: true})

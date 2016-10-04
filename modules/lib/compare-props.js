@@ -1,4 +1,4 @@
-import every from 'lodash/every'
+import {every} from 'lodash'
 
 export function compareProps(oldProps, newProps) {
 	return !every(oldProps, (_, key) => oldProps[key] === newProps[key])

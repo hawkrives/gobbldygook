@@ -1,6 +1,6 @@
 import Bluebird from 'bluebird'
-import map from 'lodash/map'
-import uniq from 'lodash/uniq'
+import {map} from 'lodash'
+import {uniq} from 'lodash'
 
 import {LOAD_STUDENTS} from '../constants'
 import {loadStudent} from './load-student'

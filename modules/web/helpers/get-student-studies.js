@@ -1,6 +1,6 @@
 import Bluebird from 'bluebird'
 import loadArea from './load-area'
-import map from 'lodash/map'
+import {map} from 'lodash'
 
 export function getStudentStudies(student, {cache=[], cacheOnly=false}) {
 	const promises = map(student.studies,

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
-import range from 'lodash/range'
-import map from 'lodash/map'
+import {range} from 'lodash'
+import {map} from 'lodash'
 
 import InlineCourse from 'modules/web/components/inline-course'
 import List from 'modules/web/components/list'

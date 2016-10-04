@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import size from 'lodash/size'
+import {size} from 'lodash'
 
 import {androidSearch, funnel, androidApps, androidMenu, androidAdd} from 'modules/web/icons/ionicons'
 import Toolbar from 'modules/web/components/toolbar'

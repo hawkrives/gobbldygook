@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import map from 'lodash/map'
+import {map} from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { undo, redo } from 'modules/web/redux/students/actions/undo'

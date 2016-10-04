@@ -1,5 +1,5 @@
-import uniqBy from 'lodash/uniqBy'
-import size from 'lodash/size'
+import {uniqBy} from 'lodash'
+import {size} from 'lodash'
 import simplifyCourse from './simplify-course'
 
 /**

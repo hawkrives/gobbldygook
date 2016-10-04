@@ -1,5 +1,5 @@
 import Bluebird from 'bluebird'
-import mapValues from 'lodash/mapValues'
+import {mapValues} from 'lodash'
 import {validateSchedule} from './validate-schedule'
 
 export function validateSchedules(student) {

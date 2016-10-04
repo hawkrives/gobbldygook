@@ -1,8 +1,8 @@
-import map from 'lodash/map'
-import flatten from 'lodash/flatten'
-import compact from 'lodash/compact'
-import some from 'lodash/some'
-import zip from 'lodash/zip'
+import {map} from 'lodash'
+import {flatten} from 'lodash'
+import {compact} from 'lodash'
+import {some} from 'lodash'
+import {zip} from 'lodash'
 
 import ordinal from 'ord'
 import {oxford} from 'humanize-plus'

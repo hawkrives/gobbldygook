@@ -3,7 +3,8 @@ import React, {PropTypes} from 'react'
 import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
 
-import map from 'lodash/map'
+import {has} from 'lodash'
+import {map} from 'lodash'
 import plur from 'plur'
 import {humanizeOperator} from 'modules/core/examine-student'
 
@@ -107,7 +108,7 @@ export default function Expression(props) {
 
 	const computationResult = expr._result
 	const isFulfillment = expr._isFulfillment
-	const wasUsed = expr.hasOwnProperty('_result') && computationResult
+	const wasUsed = has(expr, '_result') && computationResult
 	const wasTaken = expr._taken
 	const wasEvaluated = expr._checked
 

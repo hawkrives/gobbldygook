@@ -1,17 +1,17 @@
 import {tryReadJsonFile} from './read-file'
 
-import flatten from 'lodash/flatten'
-import filter from 'lodash/filter'
-import forEach from 'lodash/forEach'
-import uniqBy from 'lodash/uniqBy'
-import isString from 'lodash/isString'
-import sortBy from 'lodash/sortBy'
+import {flatten} from 'lodash'
+import {filter} from 'lodash'
+import {forEach} from 'lodash'
+import {uniqBy} from 'lodash'
+import {isString} from 'lodash'
+import {sortBy} from 'lodash'
 
 import {cacheDir} from './dirs'
 
 import {checkForStaleData} from './update-local-data-cache'
 
-import map from 'lodash/map'
+import {map} from 'lodash'
 import path from 'path'
 
 import {quacksLikeDeptNum} from 'modules/schools/stolaf'

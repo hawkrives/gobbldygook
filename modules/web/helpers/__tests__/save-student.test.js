@@ -1,7 +1,7 @@
 import {expect} from 'chai'
-import cloneDeep from 'lodash/cloneDeep'
-import reject from 'lodash/reject'
-import omit from 'lodash/omit'
+import {cloneDeep} from 'lodash'
+import {reject} from 'lodash'
+import {omit} from 'lodash'
 import {v4 as uuid} from 'uuid'
 
 import {

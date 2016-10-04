@@ -2,10 +2,10 @@
 import React, {Component, PropTypes} from 'react'
 import {DragSource} from 'react-dnd'
 import cx from 'classnames'
-import compact from 'lodash/compact'
-import filter from 'lodash/filter'
-import isNull from 'lodash/isNull'
-import map from 'lodash/map'
+import {compact} from 'lodash'
+import {filter} from 'lodash'
+import {isNull} from 'lodash'
+import {map} from 'lodash'
 
 import {IDENT_COURSE} from '../../core/student-format/item-types'
 

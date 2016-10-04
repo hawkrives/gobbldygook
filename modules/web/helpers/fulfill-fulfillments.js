@@ -1,5 +1,5 @@
 import Bluebird from 'bluebird'
-import mapValues from 'lodash/mapValues'
+import {mapValues} from 'lodash'
 import {getCourse} from './get-courses'
 import {alterCourse} from './alter-course-for-evaluation'
 

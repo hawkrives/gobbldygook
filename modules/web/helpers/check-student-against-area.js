@@ -1,5 +1,5 @@
 import Bluebird from 'bluebird'
-import uniqueId from 'lodash/uniqueId'
+import {uniqueId} from 'lodash'
 
 import CheckStudentWorker from './check-student-against-area.worker.js'
 const worker = new CheckStudentWorker()

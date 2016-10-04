@@ -1,14 +1,14 @@
 import assertKeys from './assert-keys'
 import compareCourseToQualification from './compare-course-to-qualification'
-import filter from 'lodash/filter'
-import forEach from 'lodash/forEach'
-import isPlainObject from 'lodash/isPlainObject'
-import map from 'lodash/map'
-import _max from 'lodash/max'
-import _min from 'lodash/min'
-import take from 'lodash/take'
+import {filter} from 'lodash'
+import {forEach} from 'lodash'
+import {isPlainObject} from 'lodash'
+import {map} from 'lodash'
+import {_max} from 'lodash'
+import {_min} from 'lodash'
+import {take} from 'lodash'
 import simplifyCourse from './simplify-course'
-import uniqBy from 'lodash/uniqBy'
+import {uniqBy} from 'lodash'
 
 export default function filterByWhereClause(baseList, clause, {distinct, fullList, counter}={}) {
 	// When filtering by an and-clause, we need access to both the

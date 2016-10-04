@@ -1,5 +1,5 @@
 import Bluebird from 'bluebird'
-import flatten from 'lodash/flatten'
+import {flatten} from 'lodash'
 import {AuthError, NetworkError} from 'modules/lib'
 import {fetchHtml} from './lib'
 import {extractTermList} from './term-list'
