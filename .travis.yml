@@ -3,18 +3,6 @@
 # Opt-in to the new Travis infrastructure
 sudo: false
 
-# add stuff for oghliner
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
-
-env:
-  global:
-    - CXX=g++-4.8
-
 # Cache node_modules
 cache:
   directories:
