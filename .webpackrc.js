@@ -16,6 +16,7 @@ const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const OfflinePlugin = require('offline-plugin')
 
 const isProduction = (process.env.NODE_ENV === 'production')
 const isDevelopment = (process.env.NODE_ENV === 'development')
@@ -147,8 +148,6 @@ const config = {
 							`<link rel="stylesheet" href="${publicPath}${context.css}">`
 							: ''}
 
-						<script src="${publicPath}offline-manager.js"></script>
-
 						<body><main id="gobbldygook"></main></body>
 						<script src="${publicPath}${context.common}"></script>
 						<script src="${publicPath}${context.react}"></script>
@@ -190,6 +189,14 @@ const config = {
 		// Watcher doesn't work well if you mistype casing in a path so we use
 		// a plugin that prints an error when you attempt to do this.
 		new CaseSensitivePathsPlugin(),
+
+		// Automatically make a service-worker for offline use
+		// new OfflinePlugin({
+		// 	excludes: ['**/.*', '**/*.map', '**/*.woff', '**/*.woff2'],
+		// 	ServiceWorker: {
+		// 		events: true,
+		// 	},
+		// }),
 	],
 
 	module: {
