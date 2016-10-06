@@ -60,18 +60,10 @@ type BooleanExpression = AndExpression | OrExpression
 
 export type CourseExpression = {
 	$type: 'course',
-	$course: {
-		department: string[],
-		number: number,
-		international?: boolean,
-		type?: 'Lab',
-		section: string,
-		year: number,
-		semester: 1|2|3|4|5,
-	}
+	$course: Course,
 }
 
-let sample: QualifierExpression = {
+let sample: QualificationExpression = {
 	$type: 'qualification',
 	$key: 'number',
 	$operator: '$gte',
@@ -79,6 +71,7 @@ let sample: QualifierExpression = {
 		$type: 'function',
 		$name: 'max',
 		$prop: 'number',
+		_computed_value: 1,
 	},
 }
 
@@ -86,23 +79,21 @@ type QualificationFunctionValue = {
 	$type: 'function',
 	$name: string,
 	$prop: string,
+	_computed_value: any,
 }
 type QualificationStaticValue = number|string
-type QualificationListValue = {$type: 'boolean'}
-	& (
-		{$or: QualificationStaticValue[]} |
-		{$and: QualificationStaticValue[]}
-	)
+export type QualificationBooleanOrValue = {$type: 'boolean', $or: QualificationStaticValue[]}
+export type QualificationBooleanAndValue = {$type: 'boolean', $and: QualificationStaticValue[]}
+export type QualificationBooleanValue = QualificationBooleanOrValue | QualificationBooleanAndValue
 
-type QualificationValue = QualificationFunctionValue | QualificationStaticValue | QualificationListValue | CoreQualifierExpression
+type QualificationValue = QualificationFunctionValue | QualificationBooleanValue | QualificationStaticValue
 
-type CoreQualifierExpression = {
+export type UntypedQualificationExpression = {
 	$key: string,
 	$operator: Operator,
 	$value: QualificationValue,
-	_computed_value?: any,
 }
-export type QualifierExpression = ({$type: 'qualification'} & CoreQualifierExpression) | BooleanExpression
+export type QualificationExpression = {$type: 'qualification'} & UntypedQualificationExpression
 
 
 type ModifierFilterExpression = {
@@ -110,7 +101,7 @@ type ModifierFilterExpression = {
 }
 type ModifierFilterWhereExpression = {
 	$from: 'filter-where',
-	$where: QualifierExpression,
+	$where: QualificationExpression,
 }
 type ModifierChildrenExpression = {
 	$from: 'children',
@@ -119,11 +110,11 @@ type ModifierChildrenExpression = {
 type ModifierChildrenWhereExpression = {
 	$from: 'children-where',
 	$children: '$all' | ReferenceExpression[],
-	$where: QualifierExpression,
+	$where: QualificationExpression,
 }
 type ModifierWhereExpression = {
 	$from: 'where',
-	$where: QualifierExpression,
+	$where: QualificationExpression,
 }
 type ModifiedModifierExpression =
 	ModifierWhereExpression |
@@ -157,7 +148,7 @@ type ReferenceExpression = {
 }
 
 type FilterWhereExpression = {
-	$where: QualifierExpression,
+	$where: QualificationExpression,
 }
 type FilterOfExpression = {
 	$of: Expression,
@@ -169,7 +160,7 @@ type FilterExpression = (FilterOfExpression | FilterWhereExpression) & {
 
 type WhereExpression = {
 	$type: 'where',
-	$where: QualifierExpression,
+	$where: QualificationExpression,
 	$count: Counter,
 	$distinct: boolean,
 }
