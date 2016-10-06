@@ -39,8 +39,8 @@ function compareCourseToQualificationViaObject(course: Course, {$key, $operator,
 	if ($value.$type === 'function') {
 		// we compute the value of the function-over-where-query style
 		// operators earlier, in the filterByQualification function.
-		assertKeys($value, '_computed_value')
-		const simplifiedOperator = {$key, $operator, $value: $value._computed_value}
+		assertKeys($value, '$computed-value')
+		const simplifiedOperator = {$key, $operator, $value: $value['$computed-value']}
 		return compareCourseToQualification(course, simplifiedOperator)
 	}
 	else if ($value.$type === 'boolean') {
