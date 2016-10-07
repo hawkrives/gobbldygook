@@ -24,9 +24,8 @@ export function logMessage(id, message) {
 }
 
 export function logError({id, error, quiet=false}, ...args) {
-	if (!quiet && !TESTING) {
-		console.error(error, ...args)
-	}
+	if (!quiet)  console.error(error, ...args)
+	if (window.Bugsnag)  window.Bugsnag.notifyException(error)
 	return { type: LOG_ERROR, payload: { id, error, quiet, args } }
 }
 
