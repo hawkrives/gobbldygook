@@ -63,18 +63,6 @@ export type CourseExpression = {
 	$course: Course,
 }
 
-let sample: QualificationExpression = {
-	$type: 'qualification',
-	$key: 'number',
-	$operator: '$gte',
-	$value: {
-		$type: 'function',
-		$name: 'max',
-		$prop: 'number',
-		_computed_value: 1,
-	},
-}
-
 type QualificationFunctionValue = {
 	$type: 'function',
 	$name: string,

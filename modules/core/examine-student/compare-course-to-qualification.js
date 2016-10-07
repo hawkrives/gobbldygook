@@ -5,7 +5,7 @@ import {includes} from 'lodash'
 import assertKeys from './assert-keys'
 import {every} from 'lodash'
 import {some} from 'lodash'
-import type {Course, QualificationExpression, UntypedQualificationExpression} from './types'
+import type {Course, UntypedQualificationExpression} from './types'
 
 /**
  * Compares a course property against a MongoDB-style operator
@@ -62,7 +62,7 @@ function compareCourseToQualificationViaObject(course: Course, {$key, $operator,
 }
 
 
-function compareCourseToQualificationViaOperator(course: Course, {$key, $operator, $value}: QualifierExpression) {
+function compareCourseToQualificationViaOperator(course: Course, {$key, $operator, $value}: UntypedQualificationExpression) {
 	// get the actual course out of the object
 	course = (course: any).$course || course
 
