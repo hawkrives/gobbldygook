@@ -17,7 +17,7 @@
 		"transform-runtime",
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
-		"lodash",
+		//"lodash",
 	],
 	"env": {
 		"production": {
