@@ -62,6 +62,38 @@ describe('enhanceHanson', () => {
 		})
 	})
 
+	it('parses "result" strings with the Result PEG rule', () => {
+		expect(() => enhanceHanson({
+			result: 'Req',
+			Req: {
+				result: 'only courses from (CSCI 121)',
+			},
+		})).to.throw('enhanceHanson: Expected expression but "o" found.')
+
+		expect(() => enhanceHanson({
+			result: 'Req',
+			Req: {
+				result: 'one of (CSCI 121)',
+			},
+		})).not.to.throw()
+	})
+
+	it('parses "filter" strings with the Filter PEG rule', () => {
+		expect(() => enhanceHanson({
+			result: 'Req',
+			Req: {
+				filter: 'only courses from (CSCI 121)',
+			},
+		})).not.to.throw()
+
+		expect(() => enhanceHanson({
+			result: 'Req',
+			Req: {
+				filter: 'one of (CSCI 121)',
+			},
+		})).to.throw('enhanceHanson: Expected "only" but "o" found.')
+	})
+
 	it('allows defining variables in result', () => {
 		const input = {
 			result: 'Req',
