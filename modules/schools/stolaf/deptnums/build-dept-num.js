@@ -12,7 +12,7 @@ export function buildDeptNum(course, includeSection=false) {
 	let number = course.number
 
 	if (includeSection) {
-		return `${dept} ${number}${course.sect}`
+		return `${dept} ${number}${course.section}`
 	}
 
 	return `${dept} ${number}`

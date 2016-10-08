@@ -2,7 +2,7 @@ import {deptNumRegex} from './dept-num-regex'
 
 /**
  * Splits a deptnum string (like "AS/RE 230A") into its components,
- * like {departments: ['AS', 'RE'], number: 230, sect: 'A'}.
+ * like {departments: ['AS', 'RE'], number: 230, section: 'A'}.
  *
  * @param {String} deptNumString - the deptnum to split
  * @param {Boolean} includeSection - include the section in the result?
@@ -19,7 +19,7 @@ export function splitDeptNum(deptNumString, includeSection=false) {
 	}
 
 	if (includeSection && matches.length >= 6 && matches[5]) {
-		deptNum.sect = matches[5]
+		deptNum.section = matches[5]
 	}
 
 	return deptNum

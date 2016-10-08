@@ -39,7 +39,7 @@ describe('quacksLikeDeptNum', () => {
 		expect(quacksLikeDeptNum('ASIAN192')).to.be.true
 	})
 
-	it('cares not how many spaces are between the num and the sect', () => {
+	it('cares not how many spaces are between the num and the section', () => {
 		expect(quacksLikeDeptNum('ASIAN192B')).to.be.true
 		expect(quacksLikeDeptNum('ASIAN192 B')).to.be.true
 		expect(quacksLikeDeptNum('ASIAN192    B')).to.be.true
