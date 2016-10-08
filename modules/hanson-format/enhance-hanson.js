@@ -1,4 +1,3 @@
-import {cloneDeep} from 'lodash'
 import {filter} from 'lodash'
 import {forEach} from 'lodash'
 import {includes} from 'lodash'
@@ -67,13 +66,14 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 	const titles = fromPairs(map(requirements,
 		req => [req.replace(regex, '$1'), req]))
 
+	// (Variables)
 	// TODO: Remove the need for the global variables object.
-	const oldVariables = cloneDeep(declaredVariables)
-	declaredVariables = {}
-
-	forEach(data.declare || [], (value, key) => {
-		declaredVariables[key] = value
-	})
+	// We take a reference to the outer variable set, because each nesting of
+	// requirements gets its own clean view of the variables. Then we load the
+	// list of variables with the keys listed in the `declare` key into the
+	// declaredVariables map. They're defined as a [string: string] mapping.
+	const oldVariables = declaredVariables
+	declaredVariables = data.declare || {}
 
 	const mutated = mapValues(data, (value, key) => {
 		if (isRequirementName(key)) {
@@ -91,7 +91,11 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		}
 
 		else if (key === 'result' || key === 'filter') {
-			// TODO: Document this loop
+			// (Variables)
+			// Next up, we go through the list of variables and look for any
+			// occurrences of the named variables in the value, prefixed with
+			// a $. So, for instance, the variable defined as "math-level-3"
+			// would be referenced via "$math-level-3".
 			forEach(declaredVariables, (contents, name) => {
 				if (includes(value, '$' + name)) {
 					value = value.split(`$${name}`).join(contents)
@@ -111,6 +115,9 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		return value
 	})
 
+	// Ensure that a result, message, or filter key exists.
+	// If filter's the only one, it's going to filter the list of courses
+	// available to the child requirements when this is evaluated.
 	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
 	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
 		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
@@ -118,9 +125,8 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		throw new TypeError(`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`)
 	}
 
-	forEach(data.declare || [], (value, key) => {
-		delete declaredVariables[key]
-	})
+	// (Variables)
+	// And we set the lsit back to its original value afterwards.
 	declaredVariables = oldVariables
 
 	return mutated
