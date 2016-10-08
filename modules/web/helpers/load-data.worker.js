@@ -272,6 +272,8 @@ async function loadFiles(url, infoFileBase) {
 	let filesToLoad = infoFile.files
 
 	if (type === 'courses') {
+		// only download the json courses
+		filesToLoad = filesToLoad.filter(file => file.type === 'json')
 		// Only get the last four years of data
 		const oldestYear = new Date().getFullYear() - 4
 		filesToLoad = filter(filesToLoad, file => file.year >= oldestYear)
