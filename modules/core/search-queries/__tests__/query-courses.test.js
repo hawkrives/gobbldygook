@@ -4,11 +4,11 @@ import {queryCourses} from '../query-courses'
 describe('queryCourses', () => {
 	it('queries a list of courses', () => {
 		let query = {
-			depts: ['AMCON'],
+			departments: ['AMCON'],
 			year: [2013],
 		}
 		let courses = [
-			{depts: ['AMCON'], year: 2013},
+			{departments: ['AMCON'], year: 2013},
 		]
 		expect(queryCourses(query, courses)).to.eql(courses)
 	})
@@ -18,8 +18,8 @@ describe('queryCourses', () => {
 			year: ['$OR', 2010, 2011, 2012, 2013, 2014],
 		}
 		let courses = [
-			{depts: ['AMCON'], year: 2013},
-			{depts: ['ASIAN'], year: 2012},
+			{departments: ['AMCON'], year: 2013},
+			{departments: ['ASIAN'], year: 2012},
 		]
 		expect(queryCourses(query, courses)).to.eql(courses)
 	})

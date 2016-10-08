@@ -17,7 +17,7 @@ describe('buildQueryFromString', () => {
 	it('builds a query string with multiple keys into a query object', () => {
 		let query = 'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
 		let expectedResult = {
-			depts: ['$AND', 'CSCI', 'ASIAN'],
+			departments: ['$AND', 'CSCI', 'ASIAN'],
 			name: ['Parallel'],
 			level: [300],
 			year: ['$OR', 2013, 2014],
@@ -29,7 +29,7 @@ describe('buildQueryFromString', () => {
 	it('builds a query string with variable-case keys into a query object', () => {
 		let query = 'dept: ASIAN  Dept: Religion  title: "Japan*"  LEVEL: 200  year: 2014  semester: $OR  semester: 3  semester: 1'
 		let expectedResult = {
-			depts: ['$AND', 'ASIAN', 'REL'],
+			departments: ['$AND', 'ASIAN', 'REL'],
 			title: ['"Japan*"'],
 			level: [200],
 			year: [2014],
@@ -42,7 +42,7 @@ describe('buildQueryFromString', () => {
 	it('builds a query string even with somewhat unconventional input', () => {
 		let query = 'department: American Conversations  name: Independence  year: 2014  time: Tuesdays after 12'
 		let expectedResult = {
-			depts: ['AMCON'],
+			departments: ['AMCON'],
 			name: ['Independence'],
 			year: [2014],
 			times: ['TUESDAYS AFTER 12'],

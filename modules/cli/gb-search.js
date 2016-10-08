@@ -4,7 +4,7 @@ import searchCourses from './lib/search-for-courses'
 function printCourse(course) {
 	return [
 		`${course.year}.${course.semester}`,
-		`${course.depts.join('/')} ${course.num}${course.section ? `[${course.section}]` : ''}${course.type && course.type !== 'Research' ? ' (' + course.type + ')' : ''}`,
+		`${course.departments.join('/')} ${course.number}${course.section ? `[${course.section}]` : ''}${course.type && course.type !== 'Research' ? ' (' + course.type + ')' : ''}`,
 		`${course.name}${course.title && course.title !== course.name ? ` [${course.title}]` : ''}`,
 	]
 }

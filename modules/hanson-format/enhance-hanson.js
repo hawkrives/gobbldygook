@@ -53,6 +53,7 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		}
 	}
 
+	// TODO: Document this section
 	const requirements = filter(keys(data), isRequirementName)
 	let regex = /(.*?) +\(([A-Z\-]+)\)$/i
 	const abbreviations = fromPairs(map(requirements,
