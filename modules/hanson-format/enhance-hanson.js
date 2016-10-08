@@ -91,7 +91,12 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 			})
 
 			try {
-				value = parse(value, {abbreviations, titles})
+				if (key === 'result') {
+					value = parse(value, {abbreviations, titles, startRule: 'Result'})
+				}
+				else if (key === 'filter') {
+					value = parse(value, {abbreviations, titles, startRule: 'Filter'})
+				}
 			}
 			catch (e) {
 				throw new SyntaxError(`enhanceHanson: ${e.message} (in '${value}')`)
