@@ -34,6 +34,18 @@ describe('enhanceHanson', () => {
 			.to.throw(/only \[.*\] keys are allowed/)
 	})
 
+	it('assumes that keys starting with a capital letter are requirements', () => {
+		expect(() => enhanceHanson({
+			result: 'Req',
+			Req: 'CSCI 121',
+		})).not.to.throw()
+	})
+
+	it('enforces a whitelist of keys at lower levels', () => {
+		expect(() => enhanceHanson({Xyy: {innerbad: 'zzzz'}}))
+			.to.throw(/only \[.*\] keys are allowed/)
+	})
+
 	it('expands string-only keys into objects with a "result" key', () => {
 		const actual = enhanceHanson({
 			result: 'Requirement',
@@ -48,5 +60,20 @@ describe('enhanceHanson', () => {
 				result: course('CSCI 121'),
 			},
 		})
+	})
+
+	it('allows defining variables', () => {
+		const input = {
+			result: 'Req',
+			Req: {
+				declare: {
+					'math-level-3': 'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
+				},
+				result: 'one of ($math-level-3)',
+			},
+		}
+		const output = enhanceHanson(input)
+
+		expect(output.Req.result.$of.length).to.equal(9)
 	})
 })
