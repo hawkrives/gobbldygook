@@ -56,12 +56,14 @@ export function enhanceHanson(data, {topLevel=true, declaredVariables={}}={}) {
 		}
 	}
 
-	// TODO: Document this section
+	// Create the lists of requirement titles and abbreviations for the parser.
+	// Because we allow both full titles ("Biblical Studies") and shorthand
+	// abbreviations ("BTS-B") all glommed together into one string ("Biblical
+	// Studies (BTS-B)"), we need a method of splitting those apart so the
+	// PEG's ReferenceExpression can correctly reference them.
 	const requirements = filter(keys(data), isRequirementName)
-	const abbreviations = fromPairs(map(requirements,
-		req => [req.replace(requirementNameRegex, '$2'), req]))
-	const titles = fromPairs(map(requirements,
-		req => [req.replace(requirementNameRegex, '$1'), req]))
+	const abbreviations = fromPairs(map(requirements, req => [req.replace(requirementNameRegex, '$2'), req]))
+	const titles = fromPairs(map(requirements, req => [req.replace(requirementNameRegex, '$1'), req]))
 
 	// (Variables)
 	// We load the list of variables with the keys listed in the `declare` key
