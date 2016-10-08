@@ -22,6 +22,11 @@ const baseWhitelist = ['result', 'message', 'declare', 'children share courses']
 const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error'])
 const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description', 'student selected'])
 
+const startRules = {
+	'result': 'Result',
+	'filter': 'Filter',
+}
+
 export function enhanceHanson(data, {topLevel=true}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
@@ -90,13 +95,10 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 				}
 			})
 
+			const startRule = startRules[key]
+
 			try {
-				if (key === 'result') {
-					value = parse(value, {abbreviations, titles, startRule: 'Result'})
-				}
-				else if (key === 'filter') {
-					value = parse(value, {abbreviations, titles, startRule: 'Filter'})
-				}
+				value = parse(value, {abbreviations, titles, startRule})
 			}
 			catch (e) {
 				throw new SyntaxError(`enhanceHanson: ${e.message} (in '${value}')`)
