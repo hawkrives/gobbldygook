@@ -76,4 +76,21 @@ describe('enhanceHanson', () => {
 
 		expect(output.Req.result.$of.length).to.equal(9)
 	})
+
+	it('only persists the variables definition one level deep', () => {
+		const input = {
+			result: 'Req',
+			Parent: {
+				declare: {
+					'math-level-3': 'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
+				},
+				Req: {
+					result: 'one of ($math-level-3)',
+				},
+				result: 'Req',
+			},
+		}
+
+		expect(() => enhanceHanson(input)).to.throw('enhanceHanson: Expected expression but "o" found. (in \'one of ($math-level-3)\')')
+	})
 })
