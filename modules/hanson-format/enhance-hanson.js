@@ -16,8 +16,6 @@ const none = (arr, pred) => !some(arr, pred)
 const quote = str => `"${str}"`
 const quoteAndJoin = list => list.map(quote).join(', ')
 
-let declaredVariables = {}
-
 const baseWhitelist = ['result', 'message', 'declare', 'children share courses']
 const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error'])
 const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description', 'student selected'])
@@ -27,7 +25,7 @@ const startRules = {
 	'filter': 'Filter',
 }
 
-export function enhanceHanson(data, {topLevel=true}={}) {
+export function enhanceHanson(data, {topLevel=true, declaredVariables={}}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
 	// 3. throws if it encounters any lowercase keys not in the whitelist
@@ -66,12 +64,9 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		req => [req.replace(requirementNameRegex, '$1'), req]))
 
 	// (Variables)
-	// TODO: Remove the need for the global variables object.
-	// We take a reference to the outer variable set, because each nesting of
-	// requirements gets its own clean view of the variables. Then we load the
-	// list of variables with the keys listed in the `declare` key into the
-	// declaredVariables map. They're defined as a [string: string] mapping.
-	const oldVariables = declaredVariables
+	// We load the list of variables with the keys listed in the `declare` key
+	// into the declaredVariables map. They're defined as a [string: string]
+	// mapping.
 	declaredVariables = data.declare || {}
 
 	const mutated = mapValues(data, (value, key) => {
@@ -82,7 +77,7 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 			}
 
 			// then run enhance on the resultant object
-			value = enhanceHanson(value, {topLevel: false})
+			value = enhanceHanson(value, {topLevel: false, declaredVariables})
 
 			// also set $type; the PEG can't do it b/c the spec file is YAML
 			// w/ PEG result strings.
@@ -123,10 +118,6 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		let existingKeys = quoteAndJoin(keys(data))
 		throw new TypeError(`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`)
 	}
-
-	// (Variables)
-	// And we set the lsit back to its original value afterwards.
-	declaredVariables = oldVariables
 
 	return mutated
 }
