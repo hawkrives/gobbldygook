@@ -10,9 +10,9 @@ In short,
 
 	<type>(<scope>): <subject>
 	<BLANK LINE>
-	<body>
+	<optional body>
 	<BLANK LINE>
-	<footer>
+	<optional footer>
 
 The subject contains succinct description of the change:
 
