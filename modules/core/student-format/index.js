@@ -2,7 +2,7 @@
 
 export { areaTypeConstants } from './area-types'
 
-export { encodeStudent } from './encode-student'
+export { encodeStudent, prepareStudentForSave } from './encode-student'
 
 export { filterAreaList } from './filter-area-list'
 

@@ -1,8 +1,7 @@
 import {union} from 'lodash'
 import {reject} from 'lodash'
 import stringify from 'stabilize'
-import {mapValues} from 'lodash'
-import {omit} from 'lodash'
+import {prepareStudentForSave} from 'modules/core'
 import debug from 'debug'
 const log = debug('web:save-student')
 
@@ -28,7 +27,6 @@ export function removeStudentFromCache(studentId) {
 	setIdCache(ids)
 }
 
-
 export async function saveStudent(student) {
 	// 1. grab the old (still JSON-encoded) student from localstorage
 	// 2. compare it to the current one
@@ -36,9 +34,7 @@ export async function saveStudent(student) {
 
 	const oldVersion = localStorage.getItem(student.id)
 
-	student = {...student}
-	student = omit(student, ['areas', 'canGraduate', 'fulfilled'])
-	student.schedules = mapValues(student.schedules, s => omit(s, ['courses', 'conflicts', 'hasConflict']))
+	student = prepareStudentForSave(student)
 
 	if (oldVersion !== stringify(student)) {
 		log(`saving student ${student.name} (${student.id})`)

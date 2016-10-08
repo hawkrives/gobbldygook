@@ -49,6 +49,7 @@ export {
 	isCurrentSemester,
 	moveCourseToSchedule,
 	moveScheduleInStudent,
+	prepareStudentForSave,
 	removeAreaFromStudent,
 	removeCourseFromSchedule,
 	removeFabricationFromStudent,
