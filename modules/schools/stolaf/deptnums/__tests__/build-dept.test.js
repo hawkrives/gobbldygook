@@ -39,4 +39,12 @@ describe('buildDeptString', () => {
 
 		expect(depts).to.eql(untouchedDepts)
 	})
+
+	it('returns NONE for empty arguments', () => {
+		expect(buildDeptString()).to.equal('NONE')
+	})
+
+	it('returns NONE for an empty departments list', () => {
+		expect(buildDeptString([])).to.equal('NONE')
+	})
 })
