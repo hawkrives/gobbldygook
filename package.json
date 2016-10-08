@@ -17,6 +17,9 @@
     "sourceMap": false,
     "instrument": false
   },
+  "jest": {
+    "setupFiles": ["config/mocha-harness.js"]
+  },
   "scripts": {
     "build": "npm run copy && cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --production --progress",
     "build-ci": "npm run build -- --no-progress",
@@ -102,6 +105,7 @@
   "devDependencies": {
     "babel-core": "6.17.0",
     "babel-eslint": "7.0.0",
+    "babel-jest": "16.0.0",
     "babel-loader": "6.2.5",
     "babel-plugin-external-helpers": "6.8.0",
     "babel-plugin-istanbul": "2.0.1",
@@ -136,6 +140,7 @@
     "get-stdin": "5.0.1",
     "iflow-bluebird": "1.1.26",
     "iflow-lodash": "1.1.27",
+    "jest": "16.0.1",
     "js-beautify": "1.6.4",
     "json-loader": "0.5.4",
     "mocha": "3.1.2",
