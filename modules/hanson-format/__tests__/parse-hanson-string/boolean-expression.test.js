@@ -1,25 +1,14 @@
 import {expect} from 'chai'
 import {parse} from '../../parse-hanson-string'
+import {course} from './support'
 
 describe('BooleanExpression', () => {
 	it('parses courses seperated by | as being or-d', () => {
 		expect(parse('CSCI 121 | CSCI 125')).to.deep.equal({
 			$type: 'boolean',
 			$or: [
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 125,
-					},
-				},
+				course('CSCI 121'),
+				course('CSCI 125'),
 			],
 		})
 	})
@@ -28,20 +17,8 @@ describe('BooleanExpression', () => {
 		expect(parse('CSCI 121 & CSCI 125')).to.deep.equal({
 			$type: 'boolean',
 			$and: [
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 125,
-					},
-				},
+				course('CSCI 121'),
+				course('CSCI 125'),
 			],
 		})
 	})
@@ -50,20 +27,8 @@ describe('BooleanExpression', () => {
 		expect(parse('CSCI 121 | 125')).to.deep.equal({
 			$type: 'boolean',
 			$or: [
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 125,
-					},
-				},
+				course('CSCI 121'),
+				course('CSCI 125'),
 			],
 		})
 	})
@@ -72,20 +37,8 @@ describe('BooleanExpression', () => {
 		expect(parse('CSCI 121 | PSCI 125')).to.deep.equal({
 			$type: 'boolean',
 			$or: [
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['PSCI'],
-						number: 125,
-					},
-				},
+				course('CSCI 121'),
+				course('PSCI 125'),
 			],
 		})
 	})
@@ -94,34 +47,10 @@ describe('BooleanExpression', () => {
 		expect(parse('CSCI 121 & 125 & 126 & 123')).to.deep.equal({
 			$type: 'boolean',
 			$and: [
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 125,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 126,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 123,
-					},
-				},
+				course('CSCI 121'),
+				course('CSCI 125'),
+				course('CSCI 126'),
+				course('CSCI 123'),
 			],
 		})
 	})
@@ -130,34 +59,10 @@ describe('BooleanExpression', () => {
 		expect(parse('CSCI 121 | 125 | 126 | 123')).to.deep.equal({
 			$type: 'boolean',
 			$or: [
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 125,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 126,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 123,
-					},
-				},
+				course('CSCI 121'),
+				course('CSCI 125'),
+				course('CSCI 126'),
+				course('CSCI 123'),
 			],
 		})
 	})
@@ -166,27 +71,9 @@ describe('BooleanExpression', () => {
 		expect(parse('CSCI 121 | 121 | 125')).to.deep.equal({
 			$type: 'boolean',
 			$or: [
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 125,
-					},
-				},
+				course('CSCI 121'),
+				course('CSCI 121'),
+				course('CSCI 125'),
 			],
 		})
 	})
@@ -198,29 +85,11 @@ describe('BooleanExpression', () => {
 				{
 					$type: 'boolean',
 					$and: [
-						{
-							$type: 'course',
-							$course: {
-								department: ['CSCI'],
-								number: 121,
-							},
-						},
-						{
-							$type: 'course',
-							$course: {
-								department: ['CSCI'],
-								number: 122,
-							},
-						},
+						course('CSCI 121'),
+						course('CSCI 122'),
 					],
 				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 123,
-					},
-				},
+				course('CSCI 123'),
 			],
 		})
 	})
@@ -229,30 +98,12 @@ describe('BooleanExpression', () => {
 		expect(parse('CSCI 121 | 122 & 123')).to.deep.equal({
 			$type: 'boolean',
 			$or: [
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
+				course('CSCI 121'),
 				{
 					$type: 'boolean',
 					$and: [
-						{
-							$type: 'course',
-							$course: {
-								department: ['CSCI'],
-								number: 122,
-							},
-						},
-						{
-							$type: 'course',
-							$course: {
-								department: ['CSCI'],
-								number: 123,
-							},
-						},
+						course('CSCI 122'),
+						course('CSCI 123'),
 					],
 				},
 			],
@@ -266,29 +117,11 @@ describe('BooleanExpression', () => {
 				{
 					$type: 'boolean',
 					$or: [
-						{
-							$type: 'course',
-							$course: {
-								department: ['CSCI'],
-								number: 121,
-							},
-						},
-						{
-							$type: 'course',
-							$course: {
-								department: ['CSCI'],
-								number: 122,
-							},
-						},
+						course('CSCI 121'),
+						course('CSCI 122'),
 					],
 				},
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 123,
-					},
-				},
+				course('CSCI 123'),
 			],
 		})
 	})
