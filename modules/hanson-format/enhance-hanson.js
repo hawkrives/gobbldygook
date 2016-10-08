@@ -13,7 +13,7 @@ import {makeAreaSlug} from './make-area-slug'
 import {oxford} from 'humanize-plus'
 import {parse} from './parse-hanson-string'
 
-const none = (...args) => !some(...args)
+const none = (arr, pred) => !some(arr, pred)
 const quote = str => `"${str}"`
 const quoteAndJoin = list => list.map(quote).join(', ')
 
