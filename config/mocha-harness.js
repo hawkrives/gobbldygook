@@ -5,7 +5,6 @@ global.DEVELOPMENT = false
 global.PRODUCTION = false
 global.TESTING = true
 
-process.env.NODE_ENV = 'test'
 
 let storage = {}
 global.localStorage = {
