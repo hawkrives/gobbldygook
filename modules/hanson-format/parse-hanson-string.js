@@ -810,16 +810,13 @@ function peg$parse(input, options) {
 					if (s2 === peg$FAILED) {
 						s2 = peg$parseWhere();
 						if (s2 === peg$FAILED) {
-							s2 = peg$parseFilter();
+							s2 = peg$parseOccurrence();
 							if (s2 === peg$FAILED) {
-								s2 = peg$parseOccurrence();
+								s2 = peg$parseOf();
 								if (s2 === peg$FAILED) {
-									s2 = peg$parseOf();
+									s2 = peg$parseModifier();
 									if (s2 === peg$FAILED) {
-										s2 = peg$parseModifier();
-										if (s2 === peg$FAILED) {
-											s2 = peg$parseReference();
-										}
+										s2 = peg$parseReference();
 									}
 								}
 							}

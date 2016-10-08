@@ -30,7 +30,6 @@ Expression 'expression'
     / Parenthetical
     / Course
     / Where
-    / Filter
     / Occurrence
     / Of
     / Modifier
