@@ -9,9 +9,9 @@ import {mapValues} from 'lodash'
 import {some} from 'lodash'
 import {fromPairs} from 'lodash'
 import {makeAreaSlug} from './make-area-slug'
-import {oxford} from 'humanize-plus'
 import {parse} from './parse-hanson-string'
 
+const requirementNameRegex = /(.*?) +\(([A-Z\-]+)\)$/i
 const none = (arr, pred) => !some(arr, pred)
 const quote = str => `"${str}"`
 const quoteAndJoin = list => list.map(quote).join(', ')
@@ -60,11 +60,10 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 
 	// TODO: Document this section
 	const requirements = filter(keys(data), isRequirementName)
-	let regex = /(.*?) +\(([A-Z\-]+)\)$/i
 	const abbreviations = fromPairs(map(requirements,
-		req => [req.replace(regex, '$2'), req]))
+		req => [req.replace(requirementNameRegex, '$2'), req]))
 	const titles = fromPairs(map(requirements,
-		req => [req.replace(regex, '$1'), req]))
+		req => [req.replace(requirementNameRegex, '$1'), req]))
 
 	// (Variables)
 	// TODO: Remove the need for the global variables object.
