@@ -20,7 +20,7 @@
 }
 
 
-Start
+Result
   = Or
 
 
@@ -216,7 +216,7 @@ Not
 
 
 Parenthetical
-  = OpenParen _ value:Start _ CloseParen
+  = OpenParen _ value:Result _ CloseParen
     { return value }
 
 Or
@@ -239,8 +239,8 @@ And
 
 OfList
   = OpenParen _ of:(
-      val:Start
-      rest:( _ ',' _ second:Start { return second } )*
+      val:Result
+      rest:( _ ',' _ second:Result { return second } )*
       { return [val].concat(rest) }
     )+ _ ','? _ CloseParen
   { return flatten(of) }

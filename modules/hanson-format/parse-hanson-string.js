@@ -116,10 +116,10 @@ function peg$parse(input, options) {
 	options = options !== void 0 ? options : {};
 	var peg$FAILED = {},
 		peg$startRuleFunctions = {
-			Start: peg$parseStart,
+			Result: peg$parseResult,
 			Filter: peg$parseFilter
 		},
-		peg$startRuleFunction = peg$parseStart,
+		peg$startRuleFunction = peg$parseResult,
 		peg$c0 = peg$otherExpectation("expression"),
 		peg$c1 = function peg$c1(expr) {
 			return expr;
@@ -790,7 +790,7 @@ function peg$parse(input, options) {
 		return new peg$SyntaxError(peg$SyntaxError.buildMessage(expected, found), expected, found, location);
 	}
 
-	function peg$parseStart() {
+	function peg$parseResult() {
 		var s0;
 		s0 = peg$parseOr();
 		return s0;
