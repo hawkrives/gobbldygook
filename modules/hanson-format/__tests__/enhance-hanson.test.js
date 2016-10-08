@@ -29,6 +29,19 @@ describe('enhanceHanson', () => {
 			.to.not.throw()
 	})
 
+	it('requires its input to be an object', () => {
+		expect(() => enhanceHanson(''))
+			.to.throw('enhanceHanson: data was not an object!')
+	})
+
+	it('requires "revision" to be a string, if present', () => {
+		expect(() => enhanceHanson({revision: 2, result: 'CSCI 121'}))
+			.to.throw('enhanceHanson: "revision" must be a string. Try wrapping it in single quotes.')
+
+		expect(() => enhanceHanson({revision: '2', result: 'CSCI 121'}))
+			.not.to.throw()
+	})
+
 	it('enforces a whitelist of keys at the top-level', () => {
 		expect(() => enhanceHanson({xxx: 'yyy'}))
 			.to.throw(/only \[.*\] keys are allowed/)
