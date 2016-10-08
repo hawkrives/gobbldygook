@@ -24,7 +24,7 @@ import present from 'present'
 import debug from 'debug'
 const log = debug('web:redux:search')
 
-import {buildDept} from 'modules/schools/stolaf'
+import {buildDeptString} from 'modules/schools/stolaf'
 import {to12HourTime} from 'modules/lib'
 const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
@@ -40,7 +40,9 @@ const TIME_OF_DAY = course => course.offerings
 	: 'No Times Listed'
 
 // eslint-disable-next-line no-confusing-arrow
-const DEPARTMENT = course => course.departments ? buildDept(course) : 'No Department'
+const DEPARTMENT = course => course.departments
+	? buildDeptString(course.departments)
+	: 'No Department'
 
 // eslint-disable-next-line no-confusing-arrow
 const GEREQ = course => course.gereqs ? oxford(course.gereqs) : 'No GEs'

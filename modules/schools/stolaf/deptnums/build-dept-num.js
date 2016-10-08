@@ -1,4 +1,4 @@
-import {buildDept} from './build-dept'
+import {buildDeptString} from './build-dept'
 
 /**
  * Builds a deptnum string from a course.
@@ -7,13 +7,13 @@ import {buildDept} from './build-dept'
  * @param {Boolean} includeSection - whether or not to include the section in the result
  * @returns {String} - the deptnum string
  */
-export function buildDeptNum(course, includeSection=false) {
-	let dept = buildDept(course)
-	let number = course.number
+export function buildDeptNum({departments, number, section='', deptnum}, includeSection=false) {
+	const dept = buildDeptString(departments)
+	const deptnumString = deptnum || `${dept} ${number}`
 
 	if (includeSection) {
-		return `${dept} ${number}${course.section}`
+		return `${deptnumString}${section}`
 	}
 
-	return `${dept} ${number}`
+	return deptnumString
 }

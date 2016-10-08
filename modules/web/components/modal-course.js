@@ -12,7 +12,7 @@ import Toolbar from './toolbar'
 import Button from './button'
 import CourseTitle from './course-title'
 import {
-	buildCourseIdent,
+	buildDeptNum,
 	semesterName,
 	expandYear,
 } from 'modules/schools/stolaf'
@@ -117,7 +117,7 @@ function ModalCourse(props) {
 
 				<div className='summary'>
 					<span className='identifier'>
-						{buildCourseIdent(course)}
+						{buildDeptNum(course, true)}
 					</span>
 					<span className='type'>{course.type}</span>
 				</div>

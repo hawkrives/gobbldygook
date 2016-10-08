@@ -1,53 +1,42 @@
 import {expect} from 'chai'
-import {buildDept} from '../build-dept'
+import {buildDeptString} from '../build-dept'
 
-describe('buildDept', () => {
+describe('buildDeptString', () => {
 	it('builds a department string from a single-dept course', () => {
-		let ASIAN = {departments: ['ASIAN']}
-
-		expect(buildDept(ASIAN)).to.equal('ASIAN')
+		expect(buildDeptString(['ASIAN'])).to.equal('ASIAN')
 	})
 
 	it('builds a department string from a multi-department course', () => {
-		let ASRE = {departments: ['ASIAN', 'REL']}
-
-		expect(buildDept(ASRE)).to.equal('ASIAN/REL')
+		expect(buildDeptString(['ASIAN', 'REL'])).to.equal('ASIAN/REL')
 	})
 
 	it('maintains the order of the departments array', () => {
-		let BICH = {departments: ['BIO', 'CHEM']}
-		let CHBI = {departments: ['CHEM', 'BIO']}
+		let BICH = ['BIO', 'CHEM']
+		let CHBI = ['CHEM', 'BIO']
 
-		expect(buildDept(BICH)).to.equal('BIO/CHEM')
-		expect(buildDept(CHBI)).to.equal('CHEM/BIO')
+		expect(buildDeptString(BICH)).to.equal('BIO/CHEM')
+		expect(buildDeptString(CHBI)).to.equal('CHEM/BIO')
 	})
 
 	it('maintains the order of the departments array even after shrinking', () => {
-		let BICH = {departments: ['BIOLOGY', 'CHEMISTRY']}
-		let CHBI = {departments: ['CHEMISTRY', 'BIOLOGY']}
-
-		expect(buildDept(BICH)).to.equal('BIO/CHEM')
-		expect(buildDept(CHBI)).to.equal('CHEM/BIO')
+		expect(buildDeptString(['BIOLOGY', 'CHEMISTRY'])).to.equal('BIO/CHEM')
+		expect(buildDeptString(['CHEMISTRY', 'BIOLOGY'])).to.equal('CHEM/BIO')
 	})
 
 	it('properly condenses department names into abbrs', () => {
-		let course = {departments: ['RELIGION']}
-
-		expect(buildDept(course)).to.equal('REL')
+		expect(buildDeptString(['RELIGION'])).to.equal('REL')
 	})
 
 	it('properly expands department short abbrs into abbrs', () => {
-		let course = {departments: ['AS', 'RE']}
-
-		expect(buildDept(course)).to.equal('ASIAN/REL')
+		expect(buildDeptString(['AS', 'RE'])).to.equal('ASIAN/REL')
 	})
 
 	it('doesn\'t modify the departments property', () => {
-		let course = {departments: ['AS', 'RE']}
-		let safecourse = {departments: ['AS', 'RE']}
+		let depts = ['AS', 'RE']
+		let untouchedDepts = ['AS', 'RE']
 
-		buildDept(course)
+		buildDeptString(depts)
 
-		expect(course).to.eql(safecourse)
+		expect(depts).to.eql(untouchedDepts)
 	})
 })

@@ -10,7 +10,7 @@
   }
 
   const flatten = require('lodash/flatten')
-  const expandDepartment = require('./convert-department').expandDepartment
+  const normalizeDepartment = require('./convert-department').normalizeDepartment
 }
 
 
@@ -389,8 +389,8 @@ CourseDepartment
       }
       else if (type === 'seperate') {
         department = {department: [
-          expandDepartment(dept1),
-          expandDepartment(dept2),
+          normalizeDepartment(dept1),
+          normalizeDepartment(dept2),
         ]}
       }
       storeDept(department)

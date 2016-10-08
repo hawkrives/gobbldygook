@@ -6,8 +6,7 @@ export {
 } from './course-info'
 
 export {
-	buildCourseIdent,
-	buildDept,
+	buildDeptString,
 	buildDeptNum,
 	deptNumRegex,
 	quacksLikeDeptNum,

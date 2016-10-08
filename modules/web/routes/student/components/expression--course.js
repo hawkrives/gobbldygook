@@ -1,14 +1,12 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {semesterName} from 'modules/schools/stolaf'
-import {shrinkDepartment} from 'modules/hanson-format'
+import {buildDeptString} from 'modules/schools/stolaf'
 
 import './expression--course.scss'
 
 export default function CourseExpression(props) {
-	const department = props.department.length > 1
-		? props.department.map(shrinkDepartment).join('/')
-		: props.department.join('/')
+	const department = buildDeptString(props.department)
 
 	const international = props.international &&
 		<span className='course--international'>I</span>
