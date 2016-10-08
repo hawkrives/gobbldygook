@@ -5,6 +5,7 @@ global.DEVELOPMENT = false
 global.PRODUCTION = false
 global.TESTING = true
 
+global.fetch = () => Promise.resolve({})
 
 let storage = {}
 global.localStorage = {
