@@ -13,8 +13,8 @@ import {sortBy} from 'lodash'
  * in this case, it's a set of key:value props that are applied as a
  * filter to a list of fully-fledged course objects (which are actually
  * "class" objects, but whatevs.)
- * So, if c1 looks like {dept: A, num: 1}, and c2 looks like
- * {dept: A, num: 1, year: 2015}, c2 is a more specific instance of c1.
+ * So, if c1 looks like {department: A, number: 1}, and c2 looks like
+ * {department: A, number: 1, year: 2015}, c2 is a more specific instance of c1.
  *
  * We also take into account that some courses are FLAC courses. The bugbear
  * with FLAC courses is that they share a deptnum+term with another, non-FLAC

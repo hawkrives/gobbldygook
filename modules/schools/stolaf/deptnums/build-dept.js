@@ -11,7 +11,7 @@ import departmentNameToAbbr from 'sto-course-related-data/handmade/to_department
  * @returns {String} - the department string
  */
 export function buildDept(course) {
-	let departments = course.depts
+	let departments = course.departments
 
 	departments = departments.map(dept => {
 		dept = dept.toLowerCase()

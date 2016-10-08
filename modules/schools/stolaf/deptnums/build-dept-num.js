@@ -9,11 +9,11 @@ import {buildDept} from './build-dept'
  */
 export function buildDeptNum(course, includeSection=false) {
 	let dept = buildDept(course)
-	let num = course.num
+	let number = course.number
 
 	if (includeSection) {
-		return `${dept} ${num}${course.sect}`
+		return `${dept} ${number}${course.sect}`
 	}
 
-	return `${dept} ${num}`
+	return `${dept} ${number}`
 }

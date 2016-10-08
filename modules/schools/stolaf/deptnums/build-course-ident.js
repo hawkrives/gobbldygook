@@ -1,14 +1,14 @@
 import {shrinkDepartment} from 'modules/hanson-format'
 
 // Builds a course identifier ("CSCI 121", "AS/RE 230B") from a course.
-export function buildCourseIdent({depts, num, sect='', deptnum}) {
+export function buildCourseIdent({departments, number, sect='', deptnum}) {
 	let deptString = 'UNKN'
-	if (depts) {
-		deptString = depts.length > 1
-			? depts.map(shrinkDepartment).join('/')
-			: depts[0]
+	if (departments) {
+		deptString = departments.length > 1
+			? departments.map(shrinkDepartment).join('/')
+			: departments[0]
 	}
 
-	deptnum = deptnum || `${deptString} ${num}`
+	deptnum = deptnum || `${deptString} ${number}`
 	return `${deptnum}${sect}`
 }

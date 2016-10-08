@@ -48,9 +48,9 @@ let semesters = {
 let keywordMappings = {
 	'day': 'times',
 	'days': 'times',
-	'department': 'depts',
-	'departments': 'depts',
-	'dept': 'depts',
+	'department': 'departments',
+	'dept': 'departments',
+	'depts': 'departments',
 	'ge': 'gereqs',
 	'gened': 'gereqs',
 	'geneds': 'gereqs',
@@ -59,7 +59,7 @@ let keywordMappings = {
 	'inst': 'instructors',
 	'instructor': 'instructors',
 	'locations': 'location',
-	'number': 'num',
+	'num': 'number',
 	'place': 'location',
 	'places': 'location',
 	'prof': 'instructors',
@@ -78,7 +78,7 @@ function organizeValues([key, values], words=false, profWords=false) {
 			return val.toUpperCase()
 		}
 
-		else if (key === 'depts') {
+		else if (key === 'departments') {
 			val = val.toLowerCase()
 			val = departmentMapping[val] || val.toUpperCase()
 		}
@@ -116,7 +116,7 @@ function organizeValues([key, values], words=false, profWords=false) {
 			val = parseFloat(val)
 		}
 
-		else if (includes(['year', 'term', 'level', 'num', 'groupid', 'clbid', 'crsid'], key)) {
+		else if (includes(['year', 'term', 'level', 'number', 'groupid', 'clbid', 'crsid'], key)) {
 			val = parseInt(val, 10)
 		}
 
@@ -167,8 +167,8 @@ export function buildQueryFromString(queryString='', opts={}) {
 	let [keys, values] = partitionByIndex(cleaned)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
-		let {depts, num} = splitDeptNum(stringThing)
-		let deptnum = buildDeptNum({depts, num})
+		let {departments, number} = splitDeptNum(stringThing)
+		let deptnum = buildDeptNum({departments, number})
 		keys.push('deptnum')
 		values.push(deptnum)
 	}

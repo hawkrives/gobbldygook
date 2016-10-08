@@ -20,8 +20,7 @@ const whitelist = [
 	'year',
 ]
 const mapping = {
-	depts: 'department',
-	num: 'number',
+	departments: 'department',
 }
 export function alterCourse(course) {
 	course = {...course}

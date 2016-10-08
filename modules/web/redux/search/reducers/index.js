@@ -40,7 +40,7 @@ const TIME_OF_DAY = course => course.offerings
 	: 'No Times Listed'
 
 // eslint-disable-next-line no-confusing-arrow
-const DEPARTMENT = course => course.depts ? buildDept(course) : 'No Department'
+const DEPARTMENT = course => course.departments ? buildDept(course) : 'No Department'
 
 // eslint-disable-next-line no-confusing-arrow
 const GEREQ = course => course.gereqs ? oxford(course.gereqs) : 'No GEs'
@@ -60,7 +60,7 @@ const SORT_BY_TO_KEY = {
 	'Year': 'year',
 	'Title': 'title',
 	// eslint-disable-next-line no-confusing-arrow
-	'Department': course => course.depts ? buildDept(course) : 'No Department',
+	'Department': DEPARTMENT,
 	'Day of Week': DAY_OF_WEEK,
 	'Time of Day': TIME_OF_DAY,
 }

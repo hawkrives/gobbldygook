@@ -3,33 +3,33 @@ import {checkCourseAgainstQuery} from '../check-course-against-query'
 
 describe('checkCourseAgainstQuery', () => {
 	it('compares a course to a query object', () => {
-		let query = {depts: ['AMCON'], year: [2013]}
-		let course = {depts: ['AMCON'], year: 2013}
+		let query = {departments: ['AMCON'], year: [2013]}
+		let course = {departments: ['AMCON'], year: 2013}
 		expect(checkCourseAgainstQuery(query, course)).to.be.true
 	})
 
 	it('properly handles a list of five years', () => {
 		let query = {year: ['$OR', 2010, 2011, 2012, 2013, 2014]}
-		let course = {depts: ['ASIAN'], year: 2012}
+		let course = {departments: ['ASIAN'], year: 2012}
 		expect(checkCourseAgainstQuery(query, course)).to.be.true
 	})
 
 	it("handles when a course doesn't have the key", () => {
 		let query = {year: ['$OR', 2010, 2011, 2012, 2013, 2014]}
-		let course = {depts: ['ASIAN']}
+		let course = {departments: ['ASIAN']}
 		expect(checkCourseAgainstQuery(query, course)).to.be.false
 	})
 
 	it('handles complicated queries', () => {
 		let query = {
-			depts: ['$AND', 'ASIAN', 'REL'],
+			departments: ['$AND', 'ASIAN', 'REL'],
 			title: ['Japan'],
 			level: [200],
 			year: [2014],
 			semester: ['$OR', 3, 1],
 		}
 		let course = {
-			depts: ['ASIAN', 'REL'],
+			departments: ['ASIAN', 'REL'],
 			year: 2014,
 			semester: 1,
 			level: 200,
@@ -40,14 +40,14 @@ describe('checkCourseAgainstQuery', () => {
 
 	it('handles complicated queries', () => {
 		let query = {
-			depts: ['$AND', 'ASIAN', 'REL'],
+			departments: ['$AND', 'ASIAN', 'REL'],
 			title: ['Japan'],
 			level: [200],
 			year: [2014],
 			semester: ['$OR', 3, 1],
 		}
 		let course = {
-			depts: ['ASIAN'],
+			departments: ['ASIAN'],
 		}
 		expect(checkCourseAgainstQuery(query, course)).to.be.false
 	})
@@ -103,10 +103,10 @@ describe('checkCourseAgainstQuery', () => {
 	})
 
 	it('handles $XOR queries', () => {
-		const query = {depts: ['$XOR', 'ASIAN', 'ART']}
-		let yesCourse = {depts: ['ASIAN']}
+		const query = {departments: ['$XOR', 'ASIAN', 'ART']}
+		let yesCourse = {departments: ['ASIAN']}
 		expect(checkCourseAgainstQuery(query, yesCourse)).to.be.true
-		let noCourse = {depts: ['ART', 'ASIAN']}
+		let noCourse = {departments: ['ART', 'ASIAN']}
 		expect(checkCourseAgainstQuery(query, noCourse)).to.be.false
 	})
 
