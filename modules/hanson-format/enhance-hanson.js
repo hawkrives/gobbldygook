@@ -15,6 +15,7 @@ import {parse} from './parse-hanson-string'
 
 const none = (...args) => !some(...args)
 const quote = str => `"${str}"`
+const quoteAndJoin = list => list.map(quote).join(', ')
 
 let declaredVariables = {}
 
@@ -41,7 +42,7 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 
 	forEach(keys(data), key => {
 		if (!isRequirementName(key) && !includes(whitelist, key)) {
-			throw new TypeError(`enhanceHanson: only ${oxford(whitelist)} keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`)
+			throw new TypeError(`enhanceHanson: only [${quoteAndJoin(whitelist)}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`)
 		}
 	})
 
@@ -53,7 +54,7 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		// that we'll have a name to use
 		data.slug = data.slug || makeAreaSlug(data.name)
 
-		if (typeof data.revision !== 'string') {
+		if (data.revision && typeof data.revision !== 'string') {
 			throw new TypeError(`enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${data.revision}" is a ${typeof data.revision}.`)
 		}
 	}
@@ -66,6 +67,7 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 	const titles = fromPairs(map(requirements,
 		req => [req.replace(regex, '$1'), req]))
 
+	// TODO: Remove the need for the global variables object.
 	const oldVariables = cloneDeep(declaredVariables)
 	declaredVariables = {}
 
@@ -89,6 +91,7 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		}
 
 		else if (key === 'result' || key === 'filter') {
+			// TODO: Document this loop
 			forEach(declaredVariables, (contents, name) => {
 				if (includes(value, '$' + name)) {
 					value = value.split(`$${name}`).join(contents)
@@ -110,8 +113,8 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 
 	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
 	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
-		let requiredKeys = oneOfTheseKeysMustExist.map(quote).join(', ')
-		let existingKeys = keys(data).map(quote).join(', ')
+		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
+		let existingKeys = quoteAndJoin(keys(data))
 		throw new TypeError(`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`)
 	}
 
