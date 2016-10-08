@@ -12,6 +12,7 @@
     "include": [
       "modules/**"
     ],
+    "exclude": ["test", "test{,-*}.js", "**/*.test.js", "**/__tests__/**", "modules/hanson-format/parse-hanson-string.js"],
     "cache": true,
     "sourceMap": false,
     "instrument": false
