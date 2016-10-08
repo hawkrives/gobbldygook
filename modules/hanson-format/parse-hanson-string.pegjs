@@ -10,11 +10,17 @@
   }
 
   const flatten = require('lodash/flatten')
-  const normalizeDepartment = require('./convert-department').normalizeDepartment
+  const assign = require('lodash/assign')
+  let normalizeDepartment
+  try {
+    normalizeDepartment = require('./convert-department').normalizeDepartment
+  } catch (e) {
+    normalizeDepartment = x => x
+  }
 }
 
 
-Start
+Result
   = Or
 
 
@@ -24,11 +30,9 @@ Expression 'expression'
     / Parenthetical
     / Course
     / Where
-    / Filter
     / Occurrence
     / Of
     / Modifier
-    / Besides
     / Reference
   ) _
   { return expr }
@@ -55,7 +59,7 @@ Filter
       'where' _ where:Qualifier { return {$where: where} }
     / 'from' _ of:OfList { return {$of: of} }
   )
-  { return {...filter, $distinct: distinct, $type: 'filter'} }
+  { return assign({}, filter, {$distinct: distinct, $type: 'filter'}) }
 
 
 Occurrence
@@ -101,7 +105,7 @@ Qualification
   = key:Word _
     op:Operator _
     value:(
-        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return {...f, $where: q} }
+        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return assign({}, f, {$where: q}) }
       / word:QualificationValue
       / list:ParentheticalQualificationValue
     )
@@ -212,7 +216,7 @@ Not
 
 
 Parenthetical
-  = OpenParen _ value:Start _ CloseParen
+  = OpenParen _ value:Result _ CloseParen
     { return value }
 
 Or
@@ -235,8 +239,8 @@ And
 
 OfList
   = OpenParen _ of:(
-      val:Start
-      rest:( _ ',' _ second:Start { return second } )*
+      val:Result
+      rest:( _ ',' _ second:Result { return second } )*
       { return [val].concat(rest) }
     )+ _ ','? _ CloseParen
   { return flatten(of) }
@@ -303,12 +307,11 @@ Modifier
       if (count.$operator !== '$gte' && what !== 'course') {
         throw new Error('can only use at-least style counters with non-course requests')
       }
-      let result = {
-        ...from,
+      let result = assign({}, from, {
         $type: 'modifier',
         $count: count,
         $what: what,
-      }
+      })
       if (besides) {
         result.$besides = besides
       }
@@ -358,17 +361,17 @@ Course
       '.' section:CourseSection sub:(
         '.' year:CourseYear sub:(
           '.' semester:CourseSemester { return {semester} }
-        )? { return {...sub, year} }
-      )? { return {...sub, section} }
+        )? { return assign({}, sub, {year}) }
+      )? { return assign({}, sub, {section}) }
     )?
   {
     return {
       $type: 'course',
-      $course: {
-        ...details,
-        ...(dept || fetchDept()),
-        ...num
-      },
+      $course: assign({},
+        details,
+        (dept || fetchDept()),
+        num
+      ),
     }
   }
 
@@ -377,7 +380,7 @@ CourseDepartment
   = dept1:(c1:UppercaseLetter c2:UppercaseLetter { return c1 + c2 })
     part2:(
       '/' l1:UppercaseLetter l2:UppercaseLetter
-          { return {dept: l1 + l2, type: 'seperate'} }
+          { return {dept: l1 + l2, type: 'separate'} }
       / chars:UppercaseLetter*
           { return {dept: chars.join(''), type: 'joined'} }
     )
@@ -387,7 +390,7 @@ CourseDepartment
       if (type === 'joined') {
         department = {department: [dept1 + dept2]}
       }
-      else if (type === 'seperate') {
+      else if (type === 'separate') {
         department = {department: [
           normalizeDepartment(dept1),
           normalizeDepartment(dept2),
@@ -413,7 +416,7 @@ CourseNumber 'course number'
         result.type = 'Lab'
       }
 
-      return {...result, number}
+      return assign({}, result, {number})
     }
 
 

@@ -1,4 +1,3 @@
-import {cloneDeep} from 'lodash'
 import {filter} from 'lodash'
 import {forEach} from 'lodash'
 import {includes} from 'lodash'
@@ -10,19 +9,23 @@ import {mapValues} from 'lodash'
 import {some} from 'lodash'
 import {fromPairs} from 'lodash'
 import {makeAreaSlug} from './make-area-slug'
-import {oxford} from 'humanize-plus'
 import {parse} from './parse-hanson-string'
 
-const none = (...args) => !some(...args)
+const requirementNameRegex = /(.*?) +\(([A-Z\-]+)\)$/i
+const none = (arr, pred) => !some(arr, pred)
 const quote = str => `"${str}"`
-
-let declaredVariables = {}
+const quoteAndJoin = list => list.map(quote).join(', ')
 
 const baseWhitelist = ['result', 'message', 'declare', 'children share courses']
 const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error'])
 const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description', 'student selected'])
 
-export function enhanceHanson(data, {topLevel=true}={}) {
+const startRules = {
+	'result': 'Result',
+	'filter': 'Filter',
+}
+
+export function enhanceHanson(data, {topLevel=true, declaredVariables={}}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
 	// 3. throws if it encounters any lowercase keys not in the whitelist
@@ -36,7 +39,7 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 
 	forEach(keys(data), key => {
 		if (!isRequirementName(key) && !includes(whitelist, key)) {
-			throw new TypeError(`enhanceHanson: only ${oxford(whitelist)} keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`)
+			throw new TypeError(`enhanceHanson: only [${quoteAndJoin(whitelist)}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`)
 		}
 	})
 
@@ -48,25 +51,25 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		// that we'll have a name to use
 		data.slug = data.slug || makeAreaSlug(data.name)
 
-		if (typeof data.revision !== 'string') {
+		if (data.revision && typeof data.revision !== 'string') {
 			throw new TypeError(`enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${data.revision}" is a ${typeof data.revision}.`)
 		}
 	}
 
-	// TODO: Document this section
+	// Create the lists of requirement titles and abbreviations for the parser.
+	// Because we allow both full titles ("Biblical Studies") and shorthand
+	// abbreviations ("BTS-B") all glommed together into one string ("Biblical
+	// Studies (BTS-B)"), we need a method of splitting those apart so the
+	// PEG's ReferenceExpression can correctly reference them.
 	const requirements = filter(keys(data), isRequirementName)
-	let regex = /(.*?) +\(([A-Z\-]+)\)$/i
-	const abbreviations = fromPairs(map(requirements,
-		req => [req.replace(regex, '$2'), req]))
-	const titles = fromPairs(map(requirements,
-		req => [req.replace(regex, '$1'), req]))
+	const abbreviations = fromPairs(map(requirements, req => [req.replace(requirementNameRegex, '$2'), req]))
+	const titles = fromPairs(map(requirements, req => [req.replace(requirementNameRegex, '$1'), req]))
 
-	const oldVariables = cloneDeep(declaredVariables)
-	declaredVariables = {}
-
-	forEach(data.declare || [], (value, key) => {
-		declaredVariables[key] = value
-	})
+	// (Variables)
+	// We load the list of variables with the keys listed in the `declare` key
+	// into the declaredVariables map. They're defined as a [string: string]
+	// mapping.
+	declaredVariables = data.declare || {}
 
 	const mutated = mapValues(data, (value, key) => {
 		if (isRequirementName(key)) {
@@ -76,7 +79,7 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 			}
 
 			// then run enhance on the resultant object
-			value = enhanceHanson(value, {topLevel: false})
+			value = enhanceHanson(value, {topLevel: false, declaredVariables})
 
 			// also set $type; the PEG can't do it b/c the spec file is YAML
 			// w/ PEG result strings.
@@ -84,14 +87,22 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		}
 
 		else if (key === 'result' || key === 'filter') {
+			// (Variables)
+			// Next up, we go through the list of variables and look for any
+			// occurrences of the named variables in the value, prefixed with
+			// a $. So, for instance, the variable defined as "math-level-3"
+			// would be referenced via "$math-level-3".
 			forEach(declaredVariables, (contents, name) => {
+				// istanbul ignore else
 				if (includes(value, '$' + name)) {
 					value = value.split(`$${name}`).join(contents)
 				}
 			})
 
+			const startRule = startRules[key]
+
 			try {
-				value = parse(value, {abbreviations, titles})
+				value = parse(value, {abbreviations, titles, startRule})
 			}
 			catch (e) {
 				throw new SyntaxError(`enhanceHanson: ${e.message} (in '${value}')`)
@@ -101,17 +112,15 @@ export function enhanceHanson(data, {topLevel=true}={}) {
 		return value
 	})
 
+	// Ensure that a result, message, or filter key exists.
+	// If filter's the only one, it's going to filter the list of courses
+	// available to the child requirements when this is evaluated.
 	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
 	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
-		let requiredKeys = oneOfTheseKeysMustExist.map(quote).join(', ')
-		let existingKeys = keys(data).map(quote).join(', ')
+		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
+		let existingKeys = quoteAndJoin(keys(data))
 		throw new TypeError(`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`)
 	}
-
-	forEach(data.declare || [], (value, key) => {
-		delete declaredVariables[key]
-	})
-	declaredVariables = oldVariables
 
 	return mutated
 }

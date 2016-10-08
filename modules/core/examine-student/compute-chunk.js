@@ -362,7 +362,7 @@ export function computeOf({expr, ctx, courses, dirty, isNeeded}) {
 			has: count,
 		})
 
-		// Now we break into seperate paths.
+		// Now we break into separate paths.
 
 		// Note that none of these exit the loop early, because we have to
 		// look at every chunk. Instead, we note that we don't need to mark
