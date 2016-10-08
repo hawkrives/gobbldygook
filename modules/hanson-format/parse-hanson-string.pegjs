@@ -11,7 +11,12 @@
 
   const flatten = require('lodash/flatten')
   const assign = require('lodash/assign')
-  const normalizeDepartment = require('./convert-department').normalizeDepartment
+  let normalizeDepartment
+  try {
+    normalizeDepartment = require('./convert-department').normalizeDepartment
+  } catch (e) {
+    normalizeDepartment = x => x
+  }
 }
 
 
