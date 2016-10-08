@@ -10,7 +10,7 @@ import {IDENT_COURSE} from '../../core/student-format/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'
-import {buildCourseIdent} from 'modules/schools/stolaf'
+import {buildDeptNum} from 'modules/schools/stolaf'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 
@@ -78,7 +78,7 @@ class InlineCourse extends Component {
 				<CourseTitle className='course-row' title={course.title} name={course.name} type={course.type} />
 				<div className='course-row course-summary'>
 					<span className='course-identifier'>
-						{buildCourseIdent(course)}
+						{buildDeptNum(course, true)}
 					</span>
 					{course.type !== 'Research' ? <span className='course-type'>{course.type}</span> : null}
 					{course.gereqs && <ul className='course-gereqs'>

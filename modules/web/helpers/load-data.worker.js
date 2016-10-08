@@ -20,7 +20,7 @@ import present from 'present'
 import yaml from 'js-yaml'
 
 import db from './db'
-import {buildDept, buildDeptNum} from 'modules/schools/stolaf'
+import {buildDeptString, buildDeptNum} from 'modules/schools/stolaf'
 import {splitParagraph} from 'modules/lib'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
@@ -41,7 +41,7 @@ function prepareCourse(course) {
 
 	return {
 		name: course.name || course.title,
-		dept: course.dept || buildDept(course),
+		dept: course.dept || buildDeptString(course.departments),
 		deptnum: course.deptnum || buildDeptNum(course),
 		offerings: course.offerings || convertTimeStringsToOfferings(course),
 		words: uniq([...nameWords, ...notesWords, ...titleWords, ...descWords]),

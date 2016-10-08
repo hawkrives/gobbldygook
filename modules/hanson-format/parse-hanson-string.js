@@ -579,7 +579,7 @@ function peg$parse(input, options) {
 				};
 			} else if (type === 'seperate') {
 				department = {
-					department: [expandDepartment(dept1), expandDepartment(dept2)]
+					department: [normalizeDepartment(dept1), normalizeDepartment(dept2)]
 				};
 			}
 			storeDept(department);
@@ -3979,7 +3979,7 @@ function peg$parse(input, options) {
 		return globalLastDept;
 	}
 	var flatten = require('lodash/flatten');
-	var expandDepartment = require('./convert-department').expandDepartment;
+	var normalizeDepartment = require('./convert-department').normalizeDepartment;
 	peg$result = peg$startRuleFunction();
 	if (peg$result !== peg$FAILED && peg$currPos === input.length) {
 		return peg$result;

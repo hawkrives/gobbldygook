@@ -1,4 +1,5 @@
-import departmentNameToAbbr from 'sto-course-related-data/handmade/to_department_abbreviations.json'
+// @flow
+import {normalizeDepartment} from 'modules/hanson-format'
 
 /**
  * Builds a department string from a course.
@@ -7,16 +8,13 @@ import departmentNameToAbbr from 'sto-course-related-data/handmade/to_department
  *    ASIAN/REL => ASIAN/REL
  *    ASIAN/RELIGION => ASIAN/REL
  *
- * @param {Course} course - the course
+ * @param {String[]} departments - the course departments
  * @returns {String} - the department string
  */
-export function buildDept(course) {
-	let departments = course.departments
+export function buildDeptString(departments: string[]) {
+	if (!departments) {
+		return 'NONE'
+	}
 
-	departments = departments.map(dept => {
-		dept = dept.toLowerCase()
-		return departmentNameToAbbr[dept] || dept.toUpperCase()
-	})
-
-	return departments.join('/')
+	return departments.map(normalizeDepartment).join('/')
 }
