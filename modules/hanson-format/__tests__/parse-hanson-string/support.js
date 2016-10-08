@@ -1,4 +1,5 @@
 /* globals __dirname */
+/* eslint no-confusing-arrow: 0 */
 
 import peg from 'pegjs'
 import fs from 'fs'
@@ -10,7 +11,24 @@ const grammar = fs.readFileSync(path.join(__dirname, '../../parse-hanson-string.
 export const customParser = (...args) => peg.generate(grammar, ...args).parse
 
 
+export const courseDeclr = deptnum => mapKeys(splitDeptNum(deptnum), (v, k) => k === 'departments' ? 'department' : k)
+
 export const course = deptnum => ({
 	$type: 'course',
-	$course: mapKeys(splitDeptNum(deptnum), (v, k) => k === 'departments' ? 'department' : k),
+	$course: courseDeclr(deptnum),
+})
+
+export const boolean = (type, contents) => ({
+	$type: 'boolean',
+	[`$${type}`]: contents,
+})
+
+export const counter = (type, val) => ({
+	$num: val,
+	$operator: `$${type}`,
+})
+
+export const reference = to => ({
+	$type: 'reference',
+	$requirement: to,
 })
