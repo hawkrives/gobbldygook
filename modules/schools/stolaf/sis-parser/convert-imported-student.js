@@ -27,7 +27,7 @@ export async function convertStudent({courses, degrees}, getCourse) {
 }
 
 
-async function processSchedules(courses, getCourse) {
+export async function processSchedules(courses, getCourse) {
 	courses = await Bluebird.all(map(courses, course => {
 		return getCourse(course).then(resolvedCourse => {
 			if (resolvedCourse.error) {
@@ -58,7 +58,7 @@ async function processSchedules(courses, getCourse) {
 }
 
 
-function processDegrees(degrees) {
+export function processDegrees(degrees) {
 	let singularData = resolveSingularDataPoints(degrees)
 	let studies = []
 
@@ -76,7 +76,7 @@ function processDegrees(degrees) {
 }
 
 
-function resolveSingularDataPoints(degrees) {
+export function resolveSingularDataPoints(degrees) {
 	let thereShouldOnlyBeOne = {
 		names: map(degrees, d => d.name),
 		advisors: map(degrees, d => d.advisor),
