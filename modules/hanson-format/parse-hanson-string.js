@@ -559,7 +559,7 @@ function peg$parse(input, options) {
 		peg$c159 = function peg$c159(dept1, l1, l2) {
 			return {
 				dept: l1 + l2,
-				type: 'seperate'
+				type: 'separate'
 			};
 		},
 		peg$c160 = function peg$c160(dept1, chars) {
@@ -576,7 +576,7 @@ function peg$parse(input, options) {
 				department = {
 					department: [dept1 + dept2]
 				};
-			} else if (type === 'seperate') {
+			} else if (type === 'separate') {
 				department = {
 					department: [normalizeDepartment(dept1), normalizeDepartment(dept2)]
 				};

@@ -81,7 +81,7 @@ describe('OfExpression', () => {
 			.have.property('$of').and.length(3)
 	})
 
-	xit('requires that items be seperated by commas', () => {})
+	xit('requires that items be separated by commas', () => {})
 
 	it('supports trailing commas', () => {
 		expect(parse('one of (121,)')).to.deep.equal({

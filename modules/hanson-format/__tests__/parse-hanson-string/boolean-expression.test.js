@@ -4,7 +4,7 @@ import {customParser} from './support'
 const parse = customParser({allowedStartRules: ['Or']})
 
 describe('BooleanExpression', () => {
-	it('parses courses seperated by | as being or-d', () => {
+	it('parses courses separated by | as being or-d', () => {
 		expect(parse('CSCI 121 | CSCI 125')).to.deep.equal({
 			$type: 'boolean',
 			$or: [
@@ -14,7 +14,7 @@ describe('BooleanExpression', () => {
 		})
 	})
 
-	it('parses courses seperated by & as being and-d', () => {
+	it('parses courses separated by & as being and-d', () => {
 		expect(parse('CSCI 121 & CSCI 125')).to.deep.equal({
 			$type: 'boolean',
 			$and: [
