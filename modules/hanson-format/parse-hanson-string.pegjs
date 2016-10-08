@@ -10,6 +10,7 @@
   }
 
   const flatten = require('lodash/flatten')
+  const assign = require('lodash/assign')
   const normalizeDepartment = require('./convert-department').normalizeDepartment
 }
 
@@ -55,7 +56,7 @@ Filter
       'where' _ where:Qualifier { return {$where: where} }
     / 'from' _ of:OfList { return {$of: of} }
   )
-  { return {...filter, $distinct: distinct, $type: 'filter'} }
+  { return assign({}, filter, {$distinct: distinct, $type: 'filter'}) }
 
 
 Occurrence
@@ -101,7 +102,7 @@ Qualification
   = key:Word _
     op:Operator _
     value:(
-        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return {...f, $where: q} }
+        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return assign({}, f, {$where: q}) }
       / word:QualificationValue
       / list:ParentheticalQualificationValue
     )
@@ -303,12 +304,11 @@ Modifier
       if (count.$operator !== '$gte' && what !== 'course') {
         throw new Error('can only use at-least style counters with non-course requests')
       }
-      let result = {
-        ...from,
+      let result = assign({}, from, {
         $type: 'modifier',
         $count: count,
         $what: what,
-      }
+      })
       if (besides) {
         result.$besides = besides
       }
@@ -358,17 +358,17 @@ Course
       '.' section:CourseSection sub:(
         '.' year:CourseYear sub:(
           '.' semester:CourseSemester { return {semester} }
-        )? { return {...sub, year} }
-      )? { return {...sub, section} }
+        )? { return assign({}, sub, {year}) }
+      )? { return assign({}, sub, {section}) }
     )?
   {
     return {
       $type: 'course',
-      $course: {
-        ...details,
-        ...(dept || fetchDept()),
-        ...num
-      },
+      $course: assign({},
+        details,
+        (dept || fetchDept()),
+        num
+      ),
     }
   }
 
@@ -413,7 +413,7 @@ CourseNumber 'course number'
         result.type = 'Lab'
       }
 
-      return {...result, number}
+      return assign({}, result, {number})
     }
 
 
