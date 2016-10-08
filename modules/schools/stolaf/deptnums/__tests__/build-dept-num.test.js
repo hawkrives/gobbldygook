@@ -23,13 +23,13 @@ describe('buildDeptNum', () => {
 	})
 
 	it('handles sections', () => {
-		let AMCON = {departments: ['AMCON'], number: 201, sect: 'A'}
+		let AMCON = {departments: ['AMCON'], number: 201, section: 'A'}
 
 		expect(buildDeptNum(AMCON, true)).to.equal('AMCON 201A')
 	})
 
 	it('only handles sections when told to', () => {
-		let AMCON = {departments: ['AMCON'], number: 201, sect: 'A'}
+		let AMCON = {departments: ['AMCON'], number: 201, section: 'A'}
 
 		expect(buildDeptNum(AMCON)).to.equal('AMCON 201')
 	})
