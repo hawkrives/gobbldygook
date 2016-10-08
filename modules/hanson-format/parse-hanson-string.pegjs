@@ -34,7 +34,6 @@ Expression 'expression'
     / Occurrence
     / Of
     / Modifier
-    / Besides
     / Reference
   ) _
   { return expr }

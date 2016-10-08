@@ -817,10 +817,7 @@ function peg$parse(input, options) {
 									if (s2 === peg$FAILED) {
 										s2 = peg$parseModifier();
 										if (s2 === peg$FAILED) {
-											s2 = peg$parseBesides();
-											if (s2 === peg$FAILED) {
-												s2 = peg$parseReference();
-											}
+											s2 = peg$parseReference();
 										}
 									}
 								}
