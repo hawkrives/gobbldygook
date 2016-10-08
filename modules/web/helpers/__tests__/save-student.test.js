@@ -35,6 +35,15 @@ describe('saveStudent', () => {
 		let actualStudent = JSON.parse(localStorage.getItem(student.id))
 		expect(omit(actualStudent, 'dateLastModified')).to.deep.equal(expectedStudent)
 	})
+
+	it("doesn't save if the student hasn't changed", () => {
+		saveStudent(student)
+		let s =  JSON.parse(localStorage.getItem(student.id))
+		let lastModified = s.dateLastModified
+		saveStudent(s)
+		let newLastModified = JSON.parse(localStorage.getItem(student.id)).dateLastModified
+		expect(newLastModified).to.equal(lastModified)
+	})
 })
 
 

@@ -39,7 +39,7 @@ export async function saveStudent(student) {
 	student.schedules = mapValues(student.schedules, s => omit(s, ['courses', 'conflicts', 'hasConflict']))
 
 	if (oldVersion !== stringify(student)) {
-		!TESTING && console.log(`saving student ${student.name} (${student.id})`)
+		console.log(`saving student ${student.name} (${student.id})`)
 		student = {...student, dateLastModified: new Date()}
 		localStorage.setItem(student.id, stringify(student))
 		await addStudentToCache(student.id)
