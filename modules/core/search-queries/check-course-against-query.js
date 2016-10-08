@@ -20,7 +20,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 
 	// values is either:
 	// - a 1-long array
-	// - an $AND, $OR, $NOT, or $XOR query
+	// - an $AND, $OR, $NOT, $NOR, or $XOR query
 	// - one of the above, but substring
 
 	let hasBool = indexOf(values[0], '$') === 0
