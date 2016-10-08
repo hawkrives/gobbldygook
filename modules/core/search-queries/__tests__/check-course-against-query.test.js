@@ -102,8 +102,12 @@ describe('checkCourseAgainstQuery', () => {
 
 	})
 
-	xit('handles $XOR queries', () => {
-
+	it('handles $XOR queries', () => {
+		const query = {depts: ['$XOR', 'ASIAN', 'ART']}
+		let yesCourse = {depts: ['ASIAN']}
+		expect(checkCourseAgainstQuery(query, yesCourse)).to.be.true
+		let noCourse = {depts: ['ART', 'ASIAN']}
+		expect(checkCourseAgainstQuery(query, noCourse)).to.be.false
 	})
 
 	it('handles lowercases the checked value for substring matches', () => {
