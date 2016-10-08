@@ -1,9 +1,7 @@
 // via http://stackoverflow.com/questions/11385896/find-the-first-missing-number-in-a-sorted-list
 export function findMissingNumberBinarySearch(arr) {
-	let len = arr.length
-
 	let first = 0
-	let last = len - 1
+	let last = arr.length - 1
 	let middle = Math.floor((first + last) / 2)
 
 	while ( first < last ) {
