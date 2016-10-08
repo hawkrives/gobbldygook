@@ -2,6 +2,18 @@ import {expect} from 'chai'
 import {buildQueryFromString} from '../build-query-from-string'
 
 describe('buildQueryFromString', () => {
+	it('handles an empty string', () => {
+		expect(buildQueryFromString('')).to.eql({})
+	})
+
+	it('handles no arguments as an empty string', () => {
+		expect(buildQueryFromString()).to.eql({})
+	})
+
+	it('handles an invalid second arg', () => {
+		expect(buildQueryFromString('', null)).to.eql({})
+	})
+
 	it('builds a query string with multiple keys into a query object', () => {
 		let query = 'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
 		let expectedResult = {
@@ -152,6 +164,12 @@ describe('buildQueryFromString', () => {
 		let query = 'credits: $OR credits: 1.0 credits: 0.25 credits: .25 credits: 1'
 		let expectedResult = {credits: ['$OR', 1.0, 0.25, 0.25, 1.0]}
 
+		expect(buildQueryFromString(query)).to.eql(expectedResult)
+	})
+
+	it('turns pf from a "true" string into a boolean', () => {
+		let query = 'pf: true'
+		let expectedResult = {pf: [true]}
 		expect(buildQueryFromString(query)).to.eql(expectedResult)
 	})
 })

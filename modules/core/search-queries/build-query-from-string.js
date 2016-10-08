@@ -72,7 +72,7 @@ let keywordMappings = {
 	'time': 'times',
 }
 
-function organizeValues([key, values], {words=false, profWords=false}={}) {
+function organizeValues([key, values], words=false, profWords=false) {
 	let organizedValues = map(values, val => {
 		if (startsWith(val, '$')) {
 			return val.toUpperCase()
@@ -191,7 +191,7 @@ export function buildQueryFromString(queryString='', opts={}) {
 	let zipped = zipToObjectWithArrays(keys, values)
 
 	// Perform initial cleaning of the values, dependent on the keys
-	let paired = unzip(map(toPairs(zipped), kvpairs => organizeValues(kvpairs, opts)))
+	let paired = unzip(map(toPairs(zipped), kvpairs => organizeValues(kvpairs, opts.words, opts.profWords)))
 
 	let organized = zipToObjectWithArrays(...paired) // spread the [k, v] pairs into the arguments properly
 
