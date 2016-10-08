@@ -1,5 +1,7 @@
 import {expect} from 'chai'
-import {parse} from '../../parse-hanson-string'
+import {course, reference, boolean} from './support'
+import {customParser} from './support'
+const parse = customParser({allowedStartRules: ['Of']})
 
 describe('OfExpression', () => {
 	it('supports of statements of the form "n of ()"', () => {
@@ -37,23 +39,14 @@ describe('OfExpression', () => {
 			$type: 'of',
 			$count: {$operator: '$gte', $num: 1},
 			$of: [
-				{
-					$type: 'boolean',
-					$or: [
-						{
-							$type: 'reference',
-							$requirement: 'A',
-						},
-						{
-							$type: 'boolean',
-							$and: [
-								{$type: 'reference', $requirement: 'B'},
-								{$type: 'reference', $requirement: 'C'},
-							],
-						},
-					],
-				},
-				{$type: 'reference', $requirement: 'D'},
+				boolean('or', [
+					reference('A'),
+					boolean('and', [
+						reference('B'),
+						reference('C'),
+					]),
+				]),
+				reference('D'),
 			],
 		})
 	})
@@ -63,13 +56,7 @@ describe('OfExpression', () => {
 			$type: 'of',
 			$count: {$operator: '$gte', $num: 1},
 			$of: [
-				{
-					$type: 'course',
-					$course: {
-						department: ['CSCI'],
-						number: 121,
-					},
-				},
+				course('CSCI 121'),
 			],
 		})
 	})
@@ -107,6 +94,7 @@ describe('OfExpression', () => {
 	})
 
 	it('throws an error if more items are required than are provided', () => {
-		expect(() => parse('three of (CSCI 121, 125)')).to.throw('you requested 3 items, but only gave 2 options ([{"$type":"course","$course":{"department":["CSCI"],"number":121}},{"$type":"course","$course":{"department":["CSCI"],"number":125}}])')
+		expect(() => parse('three of (CSCI 121, 125)'))
+			.to.throw(`you requested 3 items, but only gave 2 options (${JSON.stringify([course('CSCI 121'), course('CSCI 125')])})`)
 	})
 })
