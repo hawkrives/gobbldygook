@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {customParser} from './support'
+import {customParser, reference, qualification} from './support'
 const parse = customParser({allowedStartRules: ['Modifier']})
 
 describe('ModifierExpression', () => {
@@ -55,7 +55,7 @@ describe('ModifierExpression', () => {
 			$count: {$operator: '$gte', $num: 1},
 			$what: 'course',
 			$from: 'children',
-			$children: [{$requirement: 'A', $type: 'reference'}, {$requirement: 'B', $type: 'reference'}],
+			$children: [reference('A'), reference('B')],
 		})
 
 		expect(parse('one course from (BTS-B, B)', {abbreviations: {'BTS-B': 'Bible'}})).to.deep.equal({
@@ -63,7 +63,7 @@ describe('ModifierExpression', () => {
 			$count: {$operator: '$gte', $num: 1},
 			$what: 'course',
 			$from: 'children',
-			$children: [{$requirement: 'Bible', $type: 'reference'}, {$requirement: 'B', $type: 'reference'}],
+			$children: [reference('Bible'), reference('B')],
 		})
 	})
 
@@ -82,12 +82,7 @@ describe('ModifierExpression', () => {
 			$count: {$operator: '$gte', $num: 1},
 			$what: 'course',
 			$from: 'filter-where',
-			$where: {
-				$key: 'a',
-				$operator: '$eq',
-				$type: 'qualification',
-				$value: 'b',
-			},
+			$where: qualification('eq', 'a', 'b'),
 		})
 	})
 
@@ -97,12 +92,7 @@ describe('ModifierExpression', () => {
 			$count: {$operator: '$gte', $num: 1},
 			$what: 'course',
 			$from: 'where',
-			$where: {
-				$type: 'qualification',
-				$key: 'a',
-				$operator: '$eq',
-				$value: 'b',
-			},
+			$where: qualification('eq', 'a', 'b'),
 		})
 	})
 
@@ -113,12 +103,7 @@ describe('ModifierExpression', () => {
 			$what: 'course',
 			$from: 'children-where',
 			$children: '$all',
-			$where: {
-				$type: 'qualification',
-				$key: 'a',
-				$operator: '$eq',
-				$value: 'b',
-			},
+			$where: qualification('eq', 'a', 'b'),
 		})
 	})
 
@@ -129,21 +114,20 @@ describe('ModifierExpression', () => {
 			$what: 'course',
 			$from: 'children-where',
 			$children: [
-				{$requirement: 'A', $type: 'reference'},
-				{$requirement: 'B', $type: 'reference'},
+				reference('A'),
+				reference('B'),
 			],
-			$where: {
-				$type: 'qualification',
-				$key: 'a',
-				$operator: '$eq',
-				$value: 'b',
-			},
+			$where: qualification('eq', 'a', 'b'),
 		})
 	})
 
 	it('will refuse to count anything but courses from children-where', () => {
-		expect(() => parse('one department from children where {a = b}')).to.throw('must use "courses from" with "children where"')
-		expect(() => parse('one credit from children where {a = b}')).to.throw('must use "courses from" with "children where"')
+		expect(() => parse('one department from children where {a = b}'))
+			.to.throw('must use "courses from" with "children where"')
+
+		expect(() => parse('one credit from children where {a = b}'))
+			.to.throw('must use "courses from" with "children where"')
+
 		expect(() => parse('one course from children where {a = b}')).not.to.throw()
 	})
 })
