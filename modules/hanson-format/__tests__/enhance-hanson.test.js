@@ -62,7 +62,7 @@ describe('enhanceHanson', () => {
 		})
 	})
 
-	it('allows defining variables', () => {
+	it('allows defining variables in result', () => {
 		const input = {
 			result: 'Req',
 			Req: {
@@ -75,6 +75,21 @@ describe('enhanceHanson', () => {
 		const output = enhanceHanson(input)
 
 		expect(output.Req.result.$of.length).to.equal(9)
+	})
+
+	it('allows defining variables in filter', () => {
+		const input = {
+			result: 'Req',
+			Req: {
+				declare: {
+					'math-level-3': 'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
+				},
+				filter: 'only courses from ($math-level-3)',
+			},
+		}
+		const output = enhanceHanson(input)
+
+		expect(output.Req.filter.$of.length).to.equal(9)
 	})
 
 	it('only persists the variables definition one level deep', () => {
