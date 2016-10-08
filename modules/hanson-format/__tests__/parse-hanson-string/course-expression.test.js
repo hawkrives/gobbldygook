@@ -1,5 +1,6 @@
 import {expect} from 'chai'
-import {parse} from '../../parse-hanson-string'
+import {customParser} from './support'
+const parse = customParser({allowedStartRules: ['Course']})
 
 describe('CourseExpression', () => {
 	it('parses courses with a single department', () => {
@@ -16,7 +17,7 @@ describe('CourseExpression', () => {
 		expect(parse('AS/ES 121')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['ASIAN', 'ENVST'],
+				department: ['AS', 'ES'],
 				number: 121,
 			},
 		})
@@ -139,7 +140,7 @@ describe('CourseExpression', () => {
 	})
 
 	it('requires the lab to be immediately after the number', () => {
-		expect(() => parse('CHEM 125 L')).to.throw('Expected "&", "|", or end of input but "L" found.')
+		expect(() => parse('CHEM 125 L')).to.throw('SyntaxError: Expected "." or end of input but " " found.')
 		expect(() => parse('CHEM 125IL')).to.not.throw()
 		expect(() => parse('CHEM 125L')).to.not.throw()
 	})
@@ -157,6 +158,6 @@ describe('CourseExpression', () => {
 	})
 
 	it('requires international labs to be in IL order', () => {
-		expect(() => parse('CSCI 121LI')).to.throw('Expected "&", "|", or end of input but "I" found.')
+		expect(() => parse('CSCI 121LI')).to.throw('SyntaxError: Expected "." or end of input but "I" found.')
 	})
 })
