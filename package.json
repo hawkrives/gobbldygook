@@ -21,7 +21,7 @@
     "build-ci": "npm run build -- --no-progress",
     "build-dev": "cross-env NODE_ENV=development webpack --config .webpackrc.js --bail --progress --devtool=source-map",
     "build-peg": "pegjs < modules/hanson-format/parse-hanson-string.pegjs | babel-stdin | js-beautify -f - --end-with-newline --indent-with-tabs > modules/hanson-format/parse-hanson-string.js",
-    "copy": "rimraf build && mkdirp build/ && cpy 'modules/web/static/*' build/",
+    "copy": "rimraf build && mkdirp build/ && cpy \"modules/web/static/*\" build/",
     "cover": "npm run run-coverage && npm run view-coverage",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
