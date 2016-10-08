@@ -2,11 +2,13 @@ import React, {PropTypes} from 'react'
 // import CourseExpression from './expression--course'
 import Expression, {makeWhereQualifier} from './expression'
 import {map} from 'lodash'
+import debug from 'debug'
+const log = debug('web:react')
 
 function FilterOf({expr, ctx}) {
 	return <div>
 		{map(expr.$of, (ex, i) => {
-			console.log(ex)
+			log(ex)
 			return <Expression key={i} expr={ex} ctx={ctx} />
 		})}
 	</div>

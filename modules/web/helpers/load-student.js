@@ -1,7 +1,7 @@
 import Bluebird from 'bluebird'
-
 import {Student} from 'modules/core'
-const log = (...args) => TESTING || /* istanbul ignore next */ console.error(...args)
+import debug from 'debug'
+const log = debug('web:check-student')
 
 export function loadStudent(studentId) {
 	return new Bluebird(resolve => {

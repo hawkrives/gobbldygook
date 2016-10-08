@@ -11,6 +11,8 @@ import {mapValues} from 'lodash'
 import {omit} from 'lodash'
 import {reject} from 'lodash'
 import {v4 as uuid} from 'uuid'
+import debug from 'debug'
+const log = debug('student-format:student')
 
 import {randomChar} from 'modules/lib'
 
@@ -107,7 +109,7 @@ export function addScheduleToStudent(student, newSchedule) {
 }
 
 export function destroyScheduleFromStudent(student, scheduleId) {
-	console.log(`Student.destroySchedule(): removing schedule ${scheduleId}`)
+	log(`Student.destroySchedule(): removing schedule ${scheduleId}`)
 
 	if (student.schedules instanceof Array) {
 		throw new TypeError('destroyScheduleFromStudent: schedules must not be an array!')
@@ -152,7 +154,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 		return student
 	}
 
-	console.log(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+	log(`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	schedule.clbids = schedule.clbids.concat(clbid)
 
@@ -175,7 +177,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 		return student
 	}
 
-	console.log(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
+	log(`removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`)
 
 	schedule.clbids = reject(schedule.clbids, id => id === clbid)
 
@@ -183,7 +185,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 }
 
 export function moveCourseToSchedule(student, {fromScheduleId, toScheduleId, clbid}) {
-	console.log(`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
+	log(`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`)
 
 	student = removeCourseFromSchedule(student, fromScheduleId, clbid)
 	student = addCourseToSchedule(student, toScheduleId, clbid)

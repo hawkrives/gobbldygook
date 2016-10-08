@@ -18,9 +18,11 @@ import {uniq} from 'lodash'
 import {flatMap} from 'lodash'
 import {toPairs} from 'lodash'
 import {round} from 'lodash'
-import { oxford } from 'humanize-plus'
+import {oxford} from 'humanize-plus'
 import {map} from 'lodash'
 import present from 'present'
+import debug from 'debug'
+const log = debug('web:redux:search')
 
 import {buildDept} from 'modules/schools/stolaf'
 import {to12HourTime} from 'modules/lib'
@@ -84,7 +86,7 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 		processed.reverse()
 	}
 
-	console.log('grouping/sorting took', round(present() - start, 2), 'ms')
+	log('grouping/sorting took', round(present() - start, 2), 'ms')
 
 	return processed
 }

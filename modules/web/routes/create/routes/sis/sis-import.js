@@ -14,11 +14,13 @@ import StudentSummary from 'modules/web/routes/student/components/student-summar
 import {map} from 'lodash'
 import {groupBy} from 'lodash'
 import {sortBy} from 'lodash'
-import { RadioGroup, Radio } from 'react-radio-group'
-import { initStudent } from 'modules/web/redux/students/actions/init-student'
-import { connect } from 'react-redux'
+import {RadioGroup, Radio} from 'react-radio-group'
+import {initStudent} from 'modules/web/redux/students/actions/init-student'
+import {connect} from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
 import './sis-import.scss'
+import debug from 'debug'
+const log = debug('web:react')
 
 class SISImportScreen extends Component {
 	static propTypes = {
@@ -50,7 +52,7 @@ class SISImportScreen extends Component {
 				}
 			})
 			.catch(err => {
-				console.error(err)
+				log(err)
 				this.setState({loggedIn: false, checkingLogin: false})
 				if (err instanceof ExtensionNotLoadedError) {
 					this.setState({error: 'The extension is not loaded properly.'})
@@ -69,7 +71,7 @@ class SISImportScreen extends Component {
 			.then(info => convertStudent(info, getCourse))
 			.then(student => this.setState({student}))
 			.catch(err => {
-				console.error(err)
+				log(err)
 				this.setState({error: serializeError(err)})
 			})
 	};

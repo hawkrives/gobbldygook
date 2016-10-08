@@ -1,5 +1,7 @@
 import treo, {Database} from 'treo'
 treo.Promise = require('bluebird')
+import debug from 'debug'
+const log = debug('web:database')
 
 import queryTreoDatabase from '../helpers/treo-plugins/query-treo-database'
 import batchGet from '../helpers/treo-plugins/treo-batch-get'
@@ -16,15 +18,15 @@ export default db
 if (typeof window !== 'undefined') {
 	window.deleteDatabase = () => {
 		const DBDeleteRequest = window.indexedDB.deleteDatabase('gobbldygook')
-		console.log('Commencing database deletion')
-		DBDeleteRequest.onerror = () => console.log('Error deleting database.')
-		DBDeleteRequest.onsuccess = () => console.log('Database deleted successfully')
+		log('Commencing database deletion')
+		DBDeleteRequest.onerror = () => log('Error deleting database.')
+		DBDeleteRequest.onsuccess = () => log('Database deleted successfully')
 	}
 
 	window.eraseStorage = () => {
-		console.log('Commencing storage erasure')
+		log('Commencing storage erasure')
 		window.localStorage.clear()
-		console.log('Storage erased')
+		log('Storage erased')
 	}
 
 	window.eraseDatabase = () => {

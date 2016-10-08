@@ -62,10 +62,10 @@ describe('logError action', () => {
 		const id = 0
 		const expectedAction = {
 			type: LOG_ERROR,
-			payload: {id, error, quiet: true, args: []},
+			payload: {id, error, args: []},
 		}
 
-		expect(logError({id, error, quiet: true})).to.deep.equal(expectedAction)
+		expect(logError({id, error})).to.deep.equal(expectedAction)
 	})
 
 	it('passes along any other arguments', () => {
@@ -73,10 +73,10 @@ describe('logError action', () => {
 		const id = 0
 		const expectedAction = {
 			type: LOG_ERROR,
-			payload: {id, error, quiet: true, args: ['arg']},
+			payload: {id, error, args: ['arg']},
 		}
 
-		expect(logError({id, error, quiet: true}, 'arg')).to.deep.equal(expectedAction)
+		expect(logError({id, error}, 'arg')).to.deep.equal(expectedAction)
 	})
 })
 

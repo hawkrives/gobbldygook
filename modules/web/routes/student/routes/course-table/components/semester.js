@@ -14,6 +14,9 @@ import Icon from 'modules/web/components/icon'
 import List from 'modules/web/components/list'
 import {close, search} from 'modules/web/icons/ionicons'
 
+import debug from 'debug'
+const log = debug('web:react')
+
 import CourseList from './course-list'
 import './semester.scss'
 
@@ -101,7 +104,7 @@ Semester.propTypes = {
 // Implements the drag source contract.
 const semesterTarget = {
 	drop(props, monitor) {
-		console.log('dropped course')
+		log('dropped course')
 		const item = monitor.getItem()
 		const {clbid, fromScheduleId, isFromSchedule} = item
 		const toSchedule = props.schedule

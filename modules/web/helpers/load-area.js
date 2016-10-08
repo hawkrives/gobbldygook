@@ -3,6 +3,8 @@ import {enhanceHanson} from 'modules/hanson-format'
 import {some} from 'lodash'
 import {maxBy} from 'lodash'
 import yaml from 'js-yaml'
+import debug from 'debug'
+const log = debug('worker:load-area')
 
 function resolveArea(areas, query) {
 	if (!('revision' in query)) {
@@ -48,7 +50,7 @@ function loadArea(areaQuery) {
 			return {...areaQuery, _area: enhanceHanson(result)}
 		})
 		.catch(err => {
-			console.error(err)  // we can probably remove this in the future
+			log(err)  // we can probably remove this in the future
 			area._error = `Could not find area ${JSON.stringify(dbQuery)} (error: ${err.message})`
 			return area
 		})
@@ -60,7 +62,7 @@ const promiseCache = new Map()
 export default async function getArea({name, type, revision, source, isCustom}, {cache=[]}) {
 	let cachedArea = find(cache, a => (a.name === name) && (a.type === type) && (revision === 'latest' ? true : a.revision === revision))
 	if (cachedArea) {
-		console.log('loadArea used cached area')
+		log('loadArea used cached area')
 		return cachedArea
 	}
 

@@ -24,7 +24,8 @@ import {buildDept, buildDeptNum} from 'modules/schools/stolaf'
 import {splitParagraph} from 'modules/lib'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
-const debug = console.log.bind(console)
+import debug from 'debug'
+const log = debug('worker:load-data')
 
 
 function dispatch(type, action, ...args) {
@@ -50,7 +51,7 @@ function prepareCourse(course) {
 
 
 function cacheItemHash(path, type, hash) {
-	debug(`cacheItemHash(): ${path}`)
+	log(`cacheItemHash(): ${path}`)
 
 	return db.store(getCacheStoreName(type)).put({id: path, path, hash})
 }
@@ -70,7 +71,7 @@ function getCacheStoreName(type) {
 
 
 function storeCourses(path, data) {
-	debug(`storeCourses(): ${path}`)
+	log(`storeCourses(): ${path}`)
 
 	let coursesToStore = map(data, course => {
 		course.sourcePath = path
@@ -80,7 +81,7 @@ function storeCourses(path, data) {
 	const start = present()
 	return db.store('courses').batch(coursesToStore)
 		.then(() => {
-			debug(`Stored ${size(coursesToStore)} courses in ${round(present() - start, 2)}ms.`)
+			log(`Stored ${size(coursesToStore)} courses in ${round(present() - start, 2)}ms.`)
 		})
 		.catch(err => {
 			const db = err.target.db.name
@@ -99,7 +100,7 @@ function storeCourses(path, data) {
 
 
 function storeArea(path, data) {
-	debug(`storeArea(): ${path}`)
+	log(`storeArea(): ${path}`)
 
 	let area = {
 		...data,
@@ -116,7 +117,7 @@ function storeArea(path, data) {
 
 
 async function cleanPriorData(path, type) {
-	debug(`cleanPriorData(): ${path}`)
+	log(`cleanPriorData(): ${path}`)
 
 	let ops = []
 
@@ -156,7 +157,7 @@ const updateDatabase = async (type, infoFileBase, notificationId, infoFromServer
 	// Append the hash, to act as a sort of cache-busting mechanism
 	const itemUrl = `/${path}?v=${hash}`
 
-	debug(`updateDatabase(): ${path}`)
+	log(`updateDatabase(): ${path}`)
 
 	const url = infoFileBase + itemUrl
 
@@ -166,7 +167,7 @@ const updateDatabase = async (type, infoFileBase, notificationId, infoFromServer
 		rawData = await (fetch(url).then(status).then(text))
 	}
 	catch (err) {
-		console.warn('Could not fetch ${url}')
+		log('Could not fetch ${url}')
 		return false
 	}
 
@@ -199,7 +200,7 @@ const updateDatabase = async (type, infoFileBase, notificationId, infoFromServer
 		throw e
 	}
 
-	debug(`added ${path}`)
+	log(`added ${path}`)
 	dispatch('notifications', 'incrementProgress', notificationId)
 }
 
@@ -252,7 +253,7 @@ async function removeDuplicateAreas() {
 
 
 async function loadFiles(url, infoFileBase) {
-	debug(`loadFiles(): ${url}`)
+	log(`loadFiles(): ${url}`)
 
 	let infoFile
 	try {
@@ -260,7 +261,7 @@ async function loadFiles(url, infoFileBase) {
 	}
 	catch (err) {
 		if (startsWith(err.message, 'Failed to fetch')) {
-			console.warn(`loadFiles(): Failed to fetch ${url}`)
+			log(`loadFiles(): Failed to fetch ${url}`)
 			return false
 		}
 		throw err
@@ -333,7 +334,7 @@ function checkIdbInWorkerSupport() {
 const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
 self.addEventListener('message', async ({data}) => {
 	const [id, ...args] = data
-	debug('[load-data] received message:', args)
+	log('[load-data] received message:', args)
 
 	if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
 		try {

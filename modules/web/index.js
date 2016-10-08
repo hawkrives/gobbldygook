@@ -11,6 +11,9 @@ Bluebird.config({
 // Include fetch
 import 'whatwg-fetch'
 
+import debug from 'debug'
+const log = debug('web')
+
 // Include React and react-dom.render
 const React = require('react')
 const {render} = require('react-dom')
@@ -27,7 +30,7 @@ import loadData from './helpers/load-data'
 loadData()
 
 // Kick off the GUI
-console.log('3. 2.. 1... Blast off! 🚀')
+log('3. 2.. 1... Blast off! 🚀')
 
 import Router from 'react-router/lib/Router'
 import history from './history'

@@ -9,13 +9,15 @@ import {stringifyError} from 'modules/lib'
 import {evaluate} from 'modules/core/examine-student'
 import {getActiveStudentCourses} from './get-active-student-courses'
 import {alterCourse} from './alter-course-for-evaluation'
+import debug from 'debug'
+const log = debug('worker:check-student-against-area')
 
 function tryEvaluate(student, area) {
 	try {
 		return evaluate(student, area)
 	}
 	catch (err) {
-		console.error('checkStudentAgainstArea:', err)
+		log('checkStudentAgainstArea:', err)
 		return {...area, _error: err.message}
 	}
 }
@@ -23,7 +25,7 @@ function tryEvaluate(student, area) {
 function checkStudentAgainstArea(student, area) {
 	return new Bluebird(resolve => {
 		if (!area || area._error || !area._area) {
-			console.error('checkStudentAgainstArea:', (area ? area._error : 'area is null'), area)
+			log('checkStudentAgainstArea:', (area ? area._error : 'area is null'), area)
 			resolve(area)
 			return
 		}
@@ -66,16 +68,16 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScop
 		// > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 
 		const [id, student, area] = JSON.parse(data)
-		// console.log('[check-student] received message:', id, student, area)
+		log('[check-student] received message:', id, student, area)
 
 		checkStudentAgainstArea(student, area)
 			.then(result => {
 				self.postMessage(JSON.stringify([id, 'result', result]))
-				console.log(`[check-student(${student.name}, ${area.name})] took ${round(present() - start)} ms`)
+				log(`[check-student(${student.name}, ${area.name})] took ${round(present() - start)} ms`)
 			})
 			.catch(err => {
 				self.postMessage(JSON.stringify([id, 'error', stringifyError(err)]))
-				console.error(`[check-student(${student.name}, ${area.name}))]`, err)
+				log(`[check-student(${student.name}, ${area.name}))]`, err)
 			})
 	})
 }

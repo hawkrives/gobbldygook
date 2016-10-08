@@ -3,6 +3,8 @@ import {reject} from 'lodash'
 import stringify from 'stabilize'
 import {mapValues} from 'lodash'
 import {omit} from 'lodash'
+import debug from 'debug'
+const log = debug('web:save-student')
 
 export function getIdCache() {
 	return JSON.parse(localStorage.getItem('studentIds') || '[]')
@@ -39,7 +41,7 @@ export async function saveStudent(student) {
 	student.schedules = mapValues(student.schedules, s => omit(s, ['courses', 'conflicts', 'hasConflict']))
 
 	if (oldVersion !== stringify(student)) {
-		console.log(`saving student ${student.name} (${student.id})`)
+		log(`saving student ${student.name} (${student.id})`)
 		student = {...student, dateLastModified: new Date()}
 		localStorage.setItem(student.id, stringify(student))
 		await addStudentToCache(student.id)

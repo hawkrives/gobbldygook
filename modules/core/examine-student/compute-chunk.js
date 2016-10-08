@@ -85,7 +85,6 @@ export default function computeChunk({expr, ctx, courses, dirty, fulfillment, is
 	if (type !== 'course') {
 		if (matches !== undefined) {
 			expr._matches = matches
-			// console.log(expr)
 		}
 		if (counted !== undefined) {
 			expr._counted = counted

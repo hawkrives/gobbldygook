@@ -1,5 +1,7 @@
 import {omit} from 'lodash'
 import {ActionTypes as UndoableActionTypes} from 'redux-undo'
+import debug from 'debug'
+const log = debug('web:redux:student')
 
 import {
 	INIT_STUDENT,
@@ -52,7 +54,7 @@ export default function studentsReducer(state = initialState, action) {
 		case INIT_STUDENT:
 		case IMPORT_STUDENT: {
 			if (error) {
-				console.error(payload)
+				log(payload)
 				return state
 			}
 			return {
@@ -63,7 +65,7 @@ export default function studentsReducer(state = initialState, action) {
 
 		case DESTROY_STUDENT: {
 			if (error) {
-				console.error(payload)
+				log(payload)
 				return state
 			}
 			return omit(state, payload.studentId)
@@ -78,7 +80,7 @@ export default function studentsReducer(state = initialState, action) {
 		case BEGIN_VALIDATE_SCHEDULES:
 		case VALIDATE_SCHEDULES: {
 			if (error) {
-				console.error(payload)
+				log(payload)
 				return state
 			}
 			return {
@@ -111,7 +113,7 @@ export default function studentsReducer(state = initialState, action) {
 		case ADD_FABRICATION:
 		case REMOVE_FABRICATION: {
 			if (error) {
-				console.error(payload)
+				log(payload)
 				return state
 			}
 			const id = payload.studentId
@@ -124,7 +126,7 @@ export default function studentsReducer(state = initialState, action) {
 		case UndoableActionTypes.UNDO:
 		case UndoableActionTypes.REDO: {
 			if (error) {
-				console.error(payload)
+				log(payload)
 				return state
 			}
 			return {

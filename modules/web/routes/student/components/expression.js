@@ -7,6 +7,8 @@ import {has} from 'lodash'
 import {map} from 'lodash'
 import plur from 'plur'
 import {humanizeOperator} from 'modules/core/examine-student'
+import debug from 'debug'
+const log = debug('web:react')
 
 import './expression.scss'
 
@@ -150,8 +152,8 @@ export default function Expression(props) {
 	}
 
 	else {
-		console.warn(`<Expression />: type not handled: ${$type}`)
-		console.log(props)
+		log(`<Expression />: type not handled: ${$type}`)
+		log(props)
 		contents = JSON.stringify(expr, null, 2)
 	}
 

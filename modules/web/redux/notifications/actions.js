@@ -1,4 +1,6 @@
 import Bluebird from 'bluebird'
+import debug from 'debug'
+const log = debug('web:redux:notifications')
 
 import {
 	LOG_MESSAGE,
@@ -24,7 +26,7 @@ export function logMessage(id, message) {
 }
 
 export function logError({id, error}, ...args) {
-	console.error(error, ...args)
+	log(error, ...args)
 	// istanbul ignore if
 	if (global.Bugsnag)  global.Bugsnag.notifyException(error)
 	return { type: LOG_ERROR, payload: { id, error, args } }

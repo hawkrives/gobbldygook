@@ -1,5 +1,7 @@
 import React, {PropTypes, Component} from 'react'
 import cx from 'classnames'
+import debug from 'debug'
+const log = debug('web:react')
 
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 class ContentEditable extends Component {
@@ -43,7 +45,6 @@ class ContentEditable extends Component {
 			this.props.onChange({target: {value}})
 		}
 		if (ev.type === 'blur' && typeof this.props.onBlur === 'function') {
-			// console.log(ev)
 			this.props.onBlur({target: {value}})
 		}
 
@@ -51,7 +52,7 @@ class ContentEditable extends Component {
 	};
 
 	render() {
-		// console.log('ContentEditable#render')
+		log('ContentEditable#render')
 		return <span
 			className={cx('contenteditable', this.props.className)}
 			onInput={this.handleChange}

@@ -13,6 +13,8 @@ import {sortedUniq} from 'lodash'
 import {flatten} from 'lodash'
 import {startsWith} from 'lodash'
 import {sortBy} from 'lodash'
+import debug from 'debug'
+const log = debug('web:database:query')
 
 import idbRange from 'idb-range'
 import {cmp as idbComparison} from 'treo'
@@ -117,7 +119,7 @@ function queryStore(query) {
 
 function queryIndex(query, primaryKeysOnly=false) {
 	let name = this.name
-	// console.log(query)
+	log(query)
 
 	return new Bluebird((resolvePromise, rejectPromise) => {
 		// - takes a query object
@@ -176,23 +178,23 @@ function queryIndex(query, primaryKeysOnly=false) {
 		}
 
 		function iterateIndex(cursor) {
-			// console.log('cursor:', cursor)
-			// console.log('key:', keys[currentIndex], 'idx:', currentIndex, 'size:', keys.length)
-			// console.log('keys:', keys)
+			log('cursor:', cursor)
+			log('key:', keys[currentIndex], 'idx:', currentIndex, 'size:', keys.length)
+			log('keys:', keys)
 
 			if (currentIndex > keys.length) {
-				// console.log('done')
+				log('done')
 				// If we're out of keys, quit.
 				done()
 			}
 
 			else if (cursor.key > keys[currentIndex]) {
-				// console.log('greater')
+				log('greater')
 				// If the cursor's key is "past" the current one, we need to skip
 				// ahead to the next one key in the list of keys.
 				let {value, primaryKey} = cursor
 				if (canAdd({query, value, primaryKey, results})) {
-					// console.log('adding', value)
+					log('adding', value)
 					results.push(primaryKey)
 				}
 				currentIndex += 1
@@ -206,19 +208,19 @@ function queryIndex(query, primaryKeysOnly=false) {
 			}
 
 			else if (cursor.key === keys[currentIndex]) {
-				// console.log('equals')
+				log('equals')
 				// If we've found what we're looking for, add it, and go to
 				// the next result.
 				let {value, primaryKey} = cursor
 				if (canAdd({query, value, primaryKey, results})) {
-					// console.log('adding', value)
+					log('adding', value)
 					results.push(primaryKey)
 				}
 				cursor.continue()
 			}
 
 			else {
-				// console.log('other')
+				log('other')
 				// Otherwise, we're not there yet, and need to skip ahead to the
 				// first occurrence of our current key.
 				cursor.continue(keys[currentIndex])

@@ -1,23 +1,25 @@
 import runtime from 'offline-plugin/runtime'
+import debug from 'debug'
+const log = debug('web:offline')
 
 runtime.install({
 	onUpdating() {
-		console.log('SW Event:', 'onUpdating')
+		log('SW Event:', 'onUpdating')
 	},
 
 	onUpdateReady() {
-		console.log('SW Event:', 'onUpdateReady')
+		log('SW Event:', 'onUpdateReady')
 		// Tells the new SW to take control immediately
 		runtime.applyUpdate()
 	},
 
 	onUpdated() {
-		console.log('SW Event:', 'onUpdated')
+		log('SW Event:', 'onUpdated')
 		// Reload the webpage to load into the new version
 		window.location.reload()
 	},
 
 	onUpdateFailed() {
-		console.log('SW Event:', 'onUpdateFailed')
+		log('SW Event:', 'onUpdateFailed')
 	},
 })

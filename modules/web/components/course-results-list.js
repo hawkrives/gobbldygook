@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import {map} from 'lodash'
 import InlineCourse from './inline-course'
+import debug from 'debug'
+const log = debug('web:react')
 
 import {compareProps} from 'modules/lib'
 import {toPrettyTerm, expandYear, semesterName } from 'modules/schools/stolaf'
@@ -29,7 +31,7 @@ export default class CourseResultsList extends Component {
 	}
 
 	render() {
-		// console.log('CourseResultsList.render')
+		console.log('CourseResultsList.render')
 		const { results, groupBy: groupByValue, studentId } = this.props
 
 		return (

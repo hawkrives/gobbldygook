@@ -6,6 +6,8 @@ import {map} from 'lodash'
 import {some} from 'lodash'
 import {toPairs} from 'lodash'
 import {fromPairs} from 'lodash'
+import debug from 'debug'
+const log = debug('web:database')
 
 export default function queryCourseDatabase(queryString, baseQuery={}) {
 	let queryObject = buildQueryFromString(queryString, {words: true, profWords: true})
@@ -32,7 +34,7 @@ export default function queryCourseDatabase(queryString, baseQuery={}) {
 	query = filter(query, ([_, val]) => val.length)
 	query = fromPairs(query)
 
-	console.log('query object', query)
+	log('query object', query)
 
 	return db
 		.store('courses')

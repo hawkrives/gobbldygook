@@ -1,9 +1,11 @@
 import Bluebird from 'bluebird'
 import {uniqueId} from 'lodash'
+import debug from 'debug'
+const log = debug('worker:check-student-against-area')
 
 import CheckStudentWorker from './check-student-against-area.worker.js'
 const worker = new CheckStudentWorker()
-worker.onerror = msg => console.warn('[main] received error from check-student worker:', msg)
+worker.onerror = msg => log('[main] received error from check-student worker:', msg)
 
 
 /**

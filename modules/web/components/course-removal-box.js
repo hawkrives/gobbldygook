@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {DropTarget} from 'react-dnd'
+import debug from 'debug'
+const log = debug('web:courses')
 
 import {IDENT_COURSE} from 'modules/core'
 
@@ -36,7 +38,7 @@ const removeCourseTarget = {
 		const item = monitor.getItem()
 		const { clbid, fromScheduleId, isFromSchedule } = item
 		if (isFromSchedule) {
-			console.log('dropped course', item)
+			log('dropped course', item)
 			// the studentId is embedded in the passed function
 			props.removeCourse(fromScheduleId, clbid)
 		}

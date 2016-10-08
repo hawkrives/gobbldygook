@@ -9,6 +9,8 @@ import {min} from 'lodash'
 import {take} from 'lodash'
 import simplifyCourse from './simplify-course'
 import {uniqBy} from 'lodash'
+import debug from 'debug'
+const log = debug('examine-student:filter-by-where-clause')
 
 export default function filterByWhereClause(baseList, clause, {distinct, fullList, counter}={}) {
 	// When filtering by an and-clause, we need access to both the
@@ -94,9 +96,9 @@ export function filterByQualification(list, qualification, {distinct=false, full
 			const items = map(filtered, c => c[value.$prop])
 			const computed = func(items)
 
-			// console.log('looked at', completeList)
-			// console.log('reduced to', filtered)
-			// console.log('came up with', computed)
+			log('looked at', completeList)
+			log('reduced to', filtered)
+			log('came up with', computed)
 
 			value['$computed-value'] = computed
 		}

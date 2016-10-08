@@ -3,6 +3,8 @@ import queryCourseDatabase from '../../../helpers/query-course-database'
 import present from 'present'
 import {round} from 'lodash'
 import {mapValues} from 'lodash'
+import debug from 'debug'
+const log = debug('web:redux:search')
 
 import {
 	UPDATE_QUERY,
@@ -59,7 +61,7 @@ export function submitQuery() {
 		dispatch(beginQuery())
 		const payload = queryCourseDatabase(query, partial)
 			.then(results => {
-				console.log(`query took ${round(present() - startQueryTime, 2)}ms.`)
+				log(`query took ${round(present() - startQueryTime, 2)}ms.`)
 				return results
 			})
 

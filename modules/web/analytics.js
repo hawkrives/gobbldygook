@@ -1,3 +1,6 @@
+import debug from 'debug'
+const log = debug('web')
+
 export function isogram() {
 	// todo: add function for tracking events
 	// https://developers.google.com/analytics/devguides/collection/analyticsjs/events
@@ -25,7 +28,7 @@ export function ga(...args) {
 
 export default function start() {
 	if (PRODUCTION) {
-		console.log('Initializing analytics 📊')
+		log('Initializing analytics 📊')
 		isogram()
 	}
 }

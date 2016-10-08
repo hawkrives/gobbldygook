@@ -21,7 +21,6 @@ export function loadCourses() {
 	// return (dispatch, getState) => {
 	// 	let {students, courses} = getState()
 	// 	let schedules = flatten(map(students, student => values(student.data.present.schedules)))
-	// 	console.log('schedules', schedules)
 	// 	let action = { type: LOAD_COURSES, payload: getCoursesFromSchedules(schedules, courses) }
 	// 	return dispatch(action)
 	// }

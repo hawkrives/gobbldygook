@@ -4,6 +4,8 @@ import {map, filter, omit} from 'lodash'
 import DocumentTitle from 'react-document-title'
 import {isCurrentSemester} from 'modules/core'
 import {semesterName} from 'modules/schools/stolaf'
+import debug from 'debug'
+const log = debug('web:react')
 
 import './semester-detail.scss'
 
@@ -29,7 +31,7 @@ export default class SemesterDetail extends Component {
 	}
 
 	render() {
-		// console.log('SemesterDetail#render')
+		log('SemesterDetail#render')
 		const {year, semester} = this.props.params
 		const student = this.props.student.data.present
 
