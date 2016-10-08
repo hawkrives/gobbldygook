@@ -1,6 +1,7 @@
 import {expect} from 'chai'
-import {parse} from '../../parse-hanson-string'
 import {course} from './support'
+import {customParser} from './support'
+const parse = customParser({allowedStartRules: ['Or']})
 
 describe('BooleanExpression', () => {
 	it('parses courses seperated by | as being or-d', () => {
