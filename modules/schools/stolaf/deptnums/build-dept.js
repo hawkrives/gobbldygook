@@ -12,7 +12,7 @@ import {normalizeDepartment} from 'modules/hanson-format'
  * @returns {String} - the department string
  */
 export function buildDeptString(departments: string[]) {
-	if (!departments) {
+	if (!departments || !departments.length) {
 		return 'NONE'
 	}
 
