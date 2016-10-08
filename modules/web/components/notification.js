@@ -7,7 +7,7 @@ import debug from 'debug'
 const log = debug('web:react')
 
 export default function Notification(props) {
-	console.log('Notification#render')
+	log('Notification#render')
 	const progressBar = (props.type === 'progress') && (
 		<div className='progress-container'>
 			<ProgressBar value={props.value} max={props.max} />

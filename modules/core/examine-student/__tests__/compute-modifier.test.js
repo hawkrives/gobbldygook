@@ -203,7 +203,7 @@ describe('computeModifier', () => {
 		]
 		moreGoodCourses = applyFilter(req.filter, moreGoodCourses)
 
-		const {computedResult: three} = computeModifier({expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: badCourses, dirty: new Set()})
+		const {computedResult: three} = computeModifier({expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: moreGoodCourses, dirty: new Set()})
 		expect(three).to.be.true
 	})
 

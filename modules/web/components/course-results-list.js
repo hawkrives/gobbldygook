@@ -31,7 +31,7 @@ export default class CourseResultsList extends Component {
 	}
 
 	render() {
-		console.log('CourseResultsList.render')
+		log('CourseResultsList.render')
 		const { results, groupBy: groupByValue, studentId } = this.props
 
 		return (
