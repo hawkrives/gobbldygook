@@ -93,6 +93,7 @@ export function enhanceHanson(data, {topLevel=true, declaredVariables={}}={}) {
 			// a $. So, for instance, the variable defined as "math-level-3"
 			// would be referenced via "$math-level-3".
 			forEach(declaredVariables, (contents, name) => {
+				// istanbul ignore else
 				if (includes(value, '$' + name)) {
 					value = value.split(`$${name}`).join(contents)
 				}
