@@ -23,10 +23,11 @@ export function logMessage(id, message) {
 	return { type: LOG_MESSAGE, payload: { id, message } }
 }
 
-export function logError({id, error, quiet=false}, ...args) {
-	if (!quiet)  console.error(error, ...args)
+export function logError({id, error}, ...args) {
+	console.error(error, ...args)
+	// istanbul ignore if
 	if (global.Bugsnag)  global.Bugsnag.notifyException(error)
-	return { type: LOG_ERROR, payload: { id, error, quiet, args } }
+	return { type: LOG_ERROR, payload: { id, error, args } }
 }
 
 export function startProgress(id, message = '', {value=0, max=1, showButton=false} = {}) {

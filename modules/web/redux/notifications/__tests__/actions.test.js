@@ -78,17 +78,6 @@ describe('logError action', () => {
 
 		expect(logError({id, error, quiet: true}, 'arg')).to.deep.equal(expectedAction)
 	})
-
-	it('can be marked as "quiet"', () => {
-		const error = new Error('message!')
-		const id = 0
-		const expectedAction = {
-			type: LOG_ERROR,
-			payload: {id, error, quiet: true, args: []},
-		}
-
-		expect(logError({id, error, quiet: true})).to.deep.equal(expectedAction)
-	})
 })
 
 describe('startProgress action', () => {
