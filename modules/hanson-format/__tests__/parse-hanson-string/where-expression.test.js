@@ -1,39 +1,12 @@
 import {expect} from 'chai'
-import {parse} from '../../parse-hanson-string'
+import {customParser} from './support'
+const parseWhere = customParser({allowedStartRules: ['Where']})
+const parseQualifier = customParser({allowedStartRules: ['Qualifier']})
+const parseQualificationValue = customParser({allowedStartRules: ['Where']})
 
 describe('WhereExpression', () => {
-
-})
-
-describe('qualifications', () => {
-	it('can be separated by &', () => {
-		expect(() => parse('one course where {a = b & c = d}')).not.to.throw()
-	})
-	it('can be separated by |', () => {
-		expect(() => parse('one course where {a = b | c = d}')).not.to.throw()
-	})
-	it('can used in boolean logic: a & b | c', () => {
-		expect(() => parse('one course where {a = b & c = d | c = e}')).not.to.throw()
-	})
-	it('can used in boolean logic: a | b & c', () => {
-		expect(() => parse('one course where {a = b | c = d & c = e}')).not.to.throw()
-	})
-	it('boolean logic can be overridden by parens: (a | b) & c', () => {
-		expect(() => parse('four courses where { dept = THEAT & (num = 233 | num = 253) }')).not.to.throw()
-	})
-
-	it('key must be a string', () => {
-		expect(() => parse('one course where {a = b}')).not.to.throw()
-		expect(() => parse('one course where {1 = b}')).to.throw('Expected expression but "o" found.')
-	})
-	it('value may include numbers', () => {
-		expect(() => parse('one course where {a = 1}')).not.to.throw()
-	})
-	it('may require distinct course', () => {
-		expect(() => parse('two distinct courses where {a = 1}')).not.to.throw()
-	})
-	it('if value is an integer, it is coerced to an integer', () => {
-		expect(parse('one course where {a = 1}')).to.deep.equal({
+	it('describes courses "where" a fact is true', () => {
+		expect(parseWhere('one course where {a = 1}')).to.deep.equal({
 			$count: {$num: 1, $operator: '$gte'},
 			$type: 'where',
 			$where: {
@@ -45,21 +18,112 @@ describe('qualifications', () => {
 			$distinct: false,
 		})
 	})
+
+	it('may require distinct course', () => {
+		expect(parseWhere('two distinct courses where {a = 1}')).to.deep.equal({
+			$count: {$num: 2, $operator: '$gte'},
+			$type: 'where',
+			$where: {
+				$key: 'a',
+				$operator: '$eq',
+				$type: 'qualification',
+				$value: 1,
+			},
+			$distinct: true,
+		})
+	})
+})
+
+describe('qualifiers syntax', () => {
+	it('key must be a string', () => {
+		expect(() => parseQualifier('{a = b}')).not.to.throw()
+		expect(() => parseQualifier('{1 = b}')).to.throw('SyntaxError: Expected qualification-or but "1" found.')
+		expect(parseQualifier('{a = b}')).to.deep.equal({
+			$key: 'a',
+			$operator: '$eq',
+			$type: 'qualification',
+			$value: 'b',
+		})
+	})
+	it('value may include numbers', () => {
+		expect(() => parseQualifier('{a = 1}')).not.to.throw()
+	})
+	it('if value is an integer, it is coerced to an integer', () => {
+		expect(parseQualifier('{a = 1}')).to.deep.equal({
+			$key: 'a',
+			$operator: '$eq',
+			$type: 'qualification',
+			$value: 1,
+		})
+	})
 	it('value may include hyphens', () => {
-		expect(() => parse('one course where {a = BTS-B}')).not.to.throw()
+		expect(() => parseQualifier('{a = BTS-B}')).not.to.throw()
 	})
 	it('value may include underscores', () => {
-		expect(() => parse('one course where {a = BTS_B}')).not.to.throw()
+		expect(() => parseQualifier('{a = BTS_B}')).not.to.throw()
 	})
+})
+
+describe('qualification value may be compared by', () => {
+	it('= (single equals)', () => {
+		expect(parseQualifier('{a = b}')).to
+			.have.property('$operator', '$eq')
+	})
+	it('== (double equals)', () => {
+		expect(parseQualifier('{a == b}')).to
+			.have.property('$operator', '$eq')
+	})
+	it('!= (not equal to)', () => {
+		expect(parseQualifier('{a != b}')).to
+			.have.property('$operator', '$ne')
+	})
+	it('< (less than)', () => {
+		expect(parseQualifier('{a < b}')).to
+			.have.property('$operator', '$lt')
+	})
+	it('<= (less than or equal to)', () => {
+		expect(parseQualifier('{a <= b}')).to
+			.have.property('$operator', '$lte')
+	})
+	it('> (greater than)', () => {
+		expect(parseQualifier('{a > b}')).to
+			.have.property('$operator', '$gt')
+	})
+	it('=> (greater than or equal to)', () => {
+		expect(parseQualifier('{a >= b}')).to
+			.have.property('$operator', '$gte')
+	})
+})
+
+describe('qualifiers can use boolean logic', () => {
+	it('can be separated by &', () => {
+		expect(() => parseQualifier('{a = b & c = d}')).not.to.throw()
+	})
+	it('can be separated by |', () => {
+		expect(() => parseQualifier('{a = b | c = d}')).not.to.throw()
+	})
+	it('can used in boolean logic: a & b | c', () => {
+		expect(() => parseQualifier('{a = b & c = d | c = e}')).not.to.throw()
+	})
+	it('can used in boolean logic: a | b & c', () => {
+		expect(() => parseQualifier('{a = b | c = d & c = e}')).not.to.throw()
+	})
+	it('boolean logic can be overridden by parens: (a | b) & c', () => {
+		expect(() => parseQualifier('{ dept = THEAT & (num = 233 | num = 253) }')).not.to.throw()
+	})
+
 
 	it('value may be a boolean and-list', () => {
-		expect(() => parse('four courses where { dept = THEAT & (num = (233 & 253) ) }')).not.to.throw()
+		expect(() => parseWhere('four courses where { dept = THEAT & (num = (233 & 253) ) }')).not.to.throw()
 	})
 	it('value may be a boolean or-list', () => {
-		expect(() => parse('four courses where { dept = THEAT & (num = (233 | 253) ) }')).not.to.throw()
+		expect(() => parseWhere('four courses where { dept = THEAT & (num = (233 | 253) ) }')).not.to.throw()
 	})
+})
 
+describe('nested qualifiers', () => {
 	xit('value may rely on a nested qualifier', () => {})
+
 	it('function may optionally include a space between the name and the paren', () => {
 		const expected = {
 			$type: 'where',
@@ -83,38 +147,7 @@ describe('qualifications', () => {
 			$distinct: false,
 		}
 
-		expect(parse('one course where { year = max (year) from courses where {gereqs=year} }')).to.deep.equal(expected)
-		expect(parse('one course where { year = max(year) from courses where {gereqs=year} }')).to.deep.equal(expected)
-	})
-
-	describe('value may be compared by', () => {
-		it('= (single equals)', () => {
-			expect(parse('one course where {a = b}')).to
-				.have.deep.property('$where.$operator', '$eq')
-		})
-		it('== (double equals)', () => {
-			expect(parse('one course where {a == b}')).to
-				.have.deep.property('$where.$operator', '$eq')
-		})
-		it('!= (not equal to)', () => {
-			expect(parse('one course where {a != b}')).to
-				.have.deep.property('$where.$operator', '$ne')
-		})
-		it('< (less than)', () => {
-			expect(parse('one course where {a < b}')).to
-				.have.deep.property('$where.$operator', '$lt')
-		})
-		it('<= (less than or equal to)', () => {
-			expect(parse('one course where {a <= b}')).to
-				.have.deep.property('$where.$operator', '$lte')
-		})
-		it('> (greater than)', () => {
-			expect(parse('one course where {a > b}')).to
-				.have.deep.property('$where.$operator', '$gt')
-		})
-		it('=> (greater than or equal to)', () => {
-			expect(parse('one course where {a >= b}')).to
-				.have.deep.property('$where.$operator', '$gte')
-		})
+		expect(parseWhere('one course where { year = max (year) from courses where {gereqs=year} }')).to.deep.equal(expected)
+		expect(parseWhere('one course where { year = max(year) from courses where {gereqs=year} }')).to.deep.equal(expected)
 	})
 })
