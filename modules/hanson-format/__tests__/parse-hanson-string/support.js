@@ -32,3 +32,10 @@ export const reference = to => ({
 	$type: 'reference',
 	$requirement: to,
 })
+
+export const qualification = (op, key, val) => ({
+	$key: key,
+	$operator: `$${op}`,
+	$type: 'qualification',
+	$value: val,
+})
