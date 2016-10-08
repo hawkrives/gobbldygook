@@ -13,6 +13,7 @@ describe('findWordForProgress', () => {
 		expect(findWordForProgress(100, 30)).to.equal('thirty')
 		expect(findWordForProgress(100, 20)).to.equal('twenty')
 		expect(findWordForProgress(100, 10)).to.equal('ten')
+		expect(findWordForProgress(100, 5)).to.equal('under-ten')
 		expect(findWordForProgress(100, 0)).to.equal('zero')
 	})
 

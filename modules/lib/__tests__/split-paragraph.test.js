@@ -33,4 +33,8 @@ describe('splitParagraph', () => {
 		let str = '   I    '
 		expect(splitParagraph(str)).to.eql(['i'])
 	})
+
+	it('defaults to processing an empty string', () => {
+		expect(splitParagraph()).to.eql([])
+	})
 })
