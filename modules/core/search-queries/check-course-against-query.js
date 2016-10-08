@@ -11,7 +11,7 @@ import {tail} from 'lodash'
 import {takeWhile} from 'lodash'
 import {toPairs} from 'lodash'
 
-const checkCourseAgainstQueryBit = course => ([key, values]) => {
+function checkCourseAgainstQueryBit(course, [key, values]) {
 	if (!has(course, key)) {
 		return false
 	}
@@ -73,9 +73,9 @@ const checkCourseAgainstQueryBit = course => ([key, values]) => {
 // query: Object | the query object that comes out of buildQueryFromString
 // course: Course | the course to check
 // returns: Boolean | did all query bits pass the check?
-export const checkCourseAgainstQuery = query => course => {
+export function checkCourseAgainstQuery(query, course) {
 	let kvPairs = toPairs(query)
-	let matches = takeWhile(kvPairs, checkCourseAgainstQueryBit(course))
+	let matches = takeWhile(kvPairs, pair => checkCourseAgainstQueryBit(course, pair))
 
 	return size(kvPairs) === size(matches) && every(matches)
 }

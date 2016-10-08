@@ -5,13 +5,13 @@ describe('checkCourseAgainstQuery', () => {
 	it('compares a course to a query object', () => {
 		let query = {depts: ['AMCON'], year: [2013]}
 		let course = {depts: ['AMCON'], year: 2013}
-		expect(checkCourseAgainstQuery(query)(course)).to.be.true
+		expect(checkCourseAgainstQuery(query, course)).to.be.true
 	})
 
 	it('properly handles a list of five years', () => {
 		let query = {year: ['$OR', 2010, 2011, 2012, 2013, 2014]}
 		let course = {depts: ['ASIAN'], year: 2012}
-		expect(checkCourseAgainstQuery(query)(course)).to.be.true
+		expect(checkCourseAgainstQuery(query, course)).to.be.true
 	})
 
 	it('handles complicated queries', () => {
@@ -29,7 +29,7 @@ describe('checkCourseAgainstQuery', () => {
 			level: 200,
 			title: 'Japan',
 		}
-		expect(checkCourseAgainstQuery(query)(course)).to.be.true
+		expect(checkCourseAgainstQuery(query, course)).to.be.true
 	})
 
 	it('handles complicated queries', () => {
@@ -43,7 +43,7 @@ describe('checkCourseAgainstQuery', () => {
 		let course = {
 			depts: ['ASIAN'],
 		}
-		expect(checkCourseAgainstQuery(query)(course)).to.be.false
+		expect(checkCourseAgainstQuery(query, course)).to.be.false
 	})
 
 	it('handles $NOT queries', () => {
@@ -56,6 +56,6 @@ describe('checkCourseAgainstQuery', () => {
 			profWords: ['kristina', 'macpherson', 'karil', 'kucera'],
 		}
 
-		expect(checkCourseAgainstQuery(query)(course)).to.be.true
+		expect(checkCourseAgainstQuery(query, course)).to.be.true
 	})
 })
