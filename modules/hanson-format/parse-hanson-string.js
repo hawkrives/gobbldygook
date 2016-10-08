@@ -116,7 +116,8 @@ function peg$parse(input, options) {
 	options = options !== void 0 ? options : {};
 	var peg$FAILED = {},
 		peg$startRuleFunctions = {
-			Start: peg$parseStart
+			Start: peg$parseStart,
+			Filter: peg$parseFilter
 		},
 		peg$startRuleFunction = peg$parseStart,
 		peg$c0 = peg$otherExpectation("expression"),
