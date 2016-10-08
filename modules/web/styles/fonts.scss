@@ -86,21 +86,3 @@
     font-weight: 600;
     font-style: italic;
 }
-
-
-@font-face {
-    font-family: 'Fira Sans';
-    src: local(Fira Sans Bold),
-         url(./fonts/FiraSans-Bold.woff2) format(woff2),
-         url(./fonts/FiraSans-Bold.woff) format(woff);
-    font-weight: 700;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Fira Sans';
-    src: local(Fira Sans Bold Italic),
-         url(./fonts/FiraSans-BoldItalic.woff2) format(woff2),
-         url(./fonts/FiraSans-BoldItalic.woff) format(woff);
-    font-weight: 700;
-    font-style: italic;
-}

@@ -45,7 +45,7 @@
 	margin-right: 0.75em;
 
 	font-size: 0.6em;
-	font-weight: bold;
+	font-weight: 600;
 }
 
 .was-evaluated {
@@ -93,7 +93,7 @@
 
 	&.evaluated .result-indicator--failure {
 		color: $result-failure-color;
-		font-weight: bold;
+		font-weight: 600;
 	}
 }
 
