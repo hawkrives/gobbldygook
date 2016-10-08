@@ -7,7 +7,7 @@ export type FulfillmentsObject = OverridesObject
 
 export type AreaOfStudy = Requirement & {
 	name: string,
-	type: 'degree'|'major'|'concentration'|'emphasis',
+	type: 'degree' | 'major' | 'concentration' | 'emphasis',
 }
 
 export type Fulfillment = { }
@@ -26,7 +26,7 @@ export type Requirement = {
 export type clbidT = number
 export type crsidT = number
 
-export type CourseType = 'Research'|'FLAC'
+export type CourseType = 'Research' | 'FLAC'
 
 export type Course = {
 	clbid: number,
@@ -45,12 +45,12 @@ export type Course = {
 }
 
 export type Counter = {
-	$operator: '$gte'|'$lte'|'$eq',
+	$operator: '$gte' | '$lte' | '$eq',
 	$num: number,
-	$was?: 'all'|'any'|'none',
+	$was?: 'all' | 'any' | 'none',
 }
 
-type Operator = '$lte'|'$lt'|'$eq'|'$gte'|'$gt'|'$ne'
+type Operator = '$lte' | '$lt' | '$eq' | '$gte' | '$gt' | '$ne'
 
 // type NotExpression = BaseExpression & {$type: 'not', $not: Expression[]}
 type BaseBooleanExpression = {$type: 'boolean'}
@@ -69,7 +69,7 @@ type QualificationFunctionValue = {
 	$prop: string,
 	_computed_value: any,
 }
-type QualificationStaticValue = number|string
+type QualificationStaticValue = number | string
 export type QualificationBooleanOrValue = {$type: 'boolean', $or: QualificationStaticValue[]}
 export type QualificationBooleanAndValue = {$type: 'boolean', $and: QualificationStaticValue[]}
 export type QualificationBooleanValue = QualificationBooleanOrValue | QualificationBooleanAndValue
@@ -114,7 +114,7 @@ type ModifiedModifierExpression =
 type ModifierExpression = ModifiedModifierExpression & {
 	$type: 'modifier',
 	$count: Counter,
-	$what: 'course'|'credit'|'department',
+	$what: 'course' | 'credit' | 'department',
 	$besides: CourseExpression,
 }
 
