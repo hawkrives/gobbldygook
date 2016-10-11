@@ -30,7 +30,7 @@ describe('AvatarLetter', () => {
 	})
 
 	it('uses an empty string if value is not a string', () => {
-		const wrapper = shallow(<AvatarLetter value={3} />)
+		const wrapper = shallow(<AvatarLetter value={null} />)
 		expect(wrapper.text()).to.equal('')
 	})
 })
