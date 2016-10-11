@@ -18,7 +18,17 @@
     "instrument": false
   },
   "jest": {
-    "setupFiles": ["config/mocha-harness.js"]
+    "setupFiles": ["config/mocha-harness.js"],
+    "coverageReporters": ["json", "html", "lcov", "text"],
+    "resetModules": true,
+    "moduleNameMapper": {
+      "^.+\\.(scss|css|less)$": "<rootDir>/config/flow/css.js.flow"
+    },
+    "modulePathIgnorePatterns": [
+      "\\.scss$",
+      "\\.support.js$",
+      "__support__"
+    ]
   },
   "scripts": {
     "build": "npm run copy && cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --production --progress",
@@ -39,6 +49,7 @@
     "stats-base": "webpack --config .webpackrc.js --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
     "stats-dev": "cross-env NODE_ENV=development npm run stats-base",
     "test": "cross-env NODE_ENV=test mocha --reporter dot --ui bdd --require babel-register --require config/mocha-harness modules/**/*.test.js",
+    "jest": "cross-env NODE_ENV=test jest",
     "test-students": "./modules/cli/test-student test/example-students",
     "test-watch": "npm run test -- --watch",
     "travis": "npm run lint && npm run cover && npm run build-ci",
