@@ -65,7 +65,7 @@ history.forward();
     <table width="100%">
       <td class="noprint" valign="top" width="150">
 	<table height="25" width="100%" border="0"><tr><td id="navbarleft" align="center"><b>SIS Menu</b></td></tr></table>
-    	<table width="100%">
+	<table width="100%">
 
 			<tr><td class="sis-leftsideheader">STUDENT</td></tr>
 			<tr><td class="sis-leftsidelinks" nowrap>
@@ -73,22 +73,22 @@ history.forward();
 				&nbsp;<a accesskey="a" href="index.cfm">Holds &amp; Alerts</a>
 
 			<br>
-    			&nbsp;<a class="sis-nounderline" href="st-courses.cfm">Courses &amp; Grades</a><br>
+			&nbsp;<a class="sis-nounderline" href="st-courses.cfm">Courses &amp; Grades</a><br>
 
 			&nbsp;<a class="sis-nounderline" href="st-registration3.cfm">Registration</a><br>
-    			&nbsp;<a class="sis-nounderline" href="st-financials.cfm">Financials</a><br>
-    			&nbsp;<a class="sis-nounderline" href="addresses.cfm">Personal</a><br>
+			&nbsp;<a class="sis-nounderline" href="st-financials.cfm">Financials</a><br>
+			&nbsp;<a class="sis-nounderline" href="addresses.cfm">Personal</a><br>
 
 			&nbsp;<a class="sis-nounderline" href="st-parentaccess.cfm">Permissions</a><br>
 
-    			&nbsp;<a class="sis-nounderline" href="st-forms.cfm">Forms &amp; Links</a><br>
+			&nbsp;<a class="sis-nounderline" href="st-forms.cfm">Forms &amp; Links</a><br>
 			</td></tr>
 
-    	</td></tr>
+	</td></tr>
 
 
 
-    	<tr><td></td></tr>
+	<tr><td></td></tr>
 	<tr><td class="sis-leftsideheader">TOOLS</td></tr>
 	<tr><td class="sis-leftsidelinks" nowrap>
 
@@ -105,7 +105,7 @@ history.forward();
 
 
 
-    	</td></tr>
+	</td></tr>
 
 
 
@@ -127,7 +127,7 @@ history.forward();
 
 <script language="JavaScript">
 	if (document.getElementById('navbarright') != undefined) {
-		document.getElementById('navbarright').innerHTML = '<table width="100%" border="0"><tr><td><table border="0"><tr><td><a style="text-decoration: none;font-size:11px;color:blue;" href="index.cfm">Home</a></td><td nowrap style="font-size:11px;">&nbsp;&raquo;&nbsp;</td><td style="font-size:11px;"><form name="navform1" style="margin: 0; padding: 0;" method="post" action="/sis/st-courses.cfm"><input type="hidden" name="navbarindex" value="1"><input type="hidden" name="LOGIN" value="rives"><input type="hidden" name="R" value="/sis/st-courses.cfm"><input type="hidden" name="FIELDNAMES" value="MESSAGE,FIELDNAMES,R,LOGIN"><input type="hidden" name="MESSAGE" value="Sorry, your session has timed out; please login again."></form><a style="text-decoration: none;color:blue;" href="#" onClick="JavaScript:document.forms.navform1.submit();">Courses for Student M. Name</a></td></td></tr></table></td><td align="right"><b>Advisor:</b> Advisor, Name O.</td></tr></table>';
+		document.getElementById('navbarright').innerHTML = '<table width="100%" border="0"><tr><td><table border="0"><tr><td><a style="text-decoration: none;font-size:11px;color:blue;" href="index.cfm">Home</a></td><td nowrap style="font-size:11px;">&nbsp;&raquo;&nbsp;</td><td style="font-size:11px;"><form name="navform1" style="margin: 0; padding: 0;" method="post" action="/sis/st-courses.cfm"><input type="hidden" name="navbarindex" value="1"><input type="hidden" name="Y" value="8"><input type="hidden" name="STNUM" value="101010 "><input type="hidden" name="SEARCHYEARTERM" value="20153"><input type="hidden" name="X" value="4"><input type="hidden" name="FIELDNAMES" value="STNUM,SEARCHYEARTERM,X,Y"></form><a style="text-decoration: none;color:blue;" href="#" onClick="JavaScript:document.forms.navform1.submit();">Courses for Student M. Name</a></td></td></tr></table></td><td align="right"><b>Advisor:</b> Advisor, Name O.</td></tr></table>';
 	}
 </script>
 
@@ -139,6 +139,8 @@ history.forward();
 			onSubmit="JavaScript:this.action=this.theaction.options[this.theaction.selectedIndex].value;">
 		<input type="hidden" name="stnum" value="101010 ">
 		<input type="hidden" name="preserve" value="noadd">
+
+			<input type="hidden" name="searchyearterm" value="20153">
 
 		<table border="0"><tr><td valign="middle">
 		    <select name="theaction">
@@ -174,13 +176,13 @@ history.forward();
 
 			<option
 
+					selected
+
 				value="20153">2015-2016, Semester 2
 			<option
 
 				value="20152">2015-2016, Interim
 			<option
-
-					selected
 
 				value="20151">2015-2016, Semester 1
 			<option
@@ -230,7 +232,7 @@ history.forward();
 
 <table cellpadding="2" cellspacing="1" width="100%">
   <tr>
-        <td colspan="5" class="sis-termheader" style="font-size: 14px;">Semester 1, 2015-2016</td></tr>
+        <td colspan="5" class="sis-termheader" style="font-size: 14px;">Semester 2, 2015-2016</td></tr>
 
 <tr class="sis-tblheader">
 	<td class="sis-departmentname">Course #</td>
@@ -248,48 +250,99 @@ history.forward();
 
 
   <tr class="sis-line1">
-	<td class="sis-departmentname">CSCI 273 </td>
+	<td class="sis-departmentname">AS/PS 245 </td>
 	<td class="sis-center">&nbsp;</td>
 	<td nowrap class="sis-coursename">
-		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000102748');">Operating Systems                  </a></td>
+		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000103314');">Asian Regionalism                  </a></td>
 	<td class="sis-courselab">&nbsp; </td>
 	<td class="sis-credits">1.00&nbsp;</td>
 
 	<td class="sis-center">Graded</td>
-        <td class="sis-gereqs">&nbsp;</td>
-        <td nowrap class="sis-meetingtime">T     0935-1100  <br>Th    0930-1050  </td>
-        <td nowrap class="sis-meetinglocation">&nbsp;<a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;RNS203&apos;);">RNS 203</a><br><a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;RNS203&apos;);">RNS 203</a></td>
-	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;806&apos;)">Brown, Richard</a></td>
+        <td class="sis-gereqs"><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/HBS.pdf">HBS</a><br><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/MCG.pdf">MCG</a></td>
+        <td nowrap class="sis-meetingtime">T     0120-0245PM<br>Th    0215-0335PM</td>
+        <td nowrap class="sis-meetinglocation">&nbsp;<a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;TOH308&apos;);">TOH 308</a><br><a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;TOH308&apos;);">TOH 308</a></td>
+	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;15754&apos;)">Tegtmeyer Pak, Katherine S.</a></td>
   </tr>
 
 
 
   <tr class="sis-line2">
-	<td class="sis-departmentname">CSCI 390A</td>
+	<td class="sis-departmentname">ASIAN 240 </td>
 	<td class="sis-center">&nbsp;</td>
 	<td nowrap class="sis-coursename">
-		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000100423');">Sem: Senior Capstone               </a></td>
+		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000103404');">Talking in Japan/US                </a></td>
 	<td class="sis-courselab">&nbsp; </td>
 	<td class="sis-credits">1.00&nbsp;</td>
 
 	<td class="sis-center">Graded</td>
-        <td class="sis-gereqs"><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/WRI.pdf">WRI</a></td>
-        <td nowrap class="sis-meetingtime">MWF   0905-1000  </td>
-        <td nowrap class="sis-meetinglocation">&nbsp;<a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;RMS201&apos;);">RMS 201</a></td>
-	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;16583&apos;)">Advisor, Name O.</a></td>
+        <td class="sis-gereqs"><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/HBS.pdf">HBS</a><br><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/MCG.pdf">MCG</a><br><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/ORC.pdf">ORC</a></td>
+        <td nowrap class="sis-meetingtime">MWF   0800-0855  </td>
+        <td nowrap class="sis-meetinglocation">&nbsp;<a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;TOH316&apos;);">TOH 316</a></td>
+	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;27188&apos;)">Boteilho, Caleb</a></td>
   </tr>
 
 
 
   <tr class="sis-line1">
-	<td class="sis-departmentname">DANCE 115 </td>
+	<td class="sis-departmentname">ASIAN 240 </td>
 	<td class="sis-center">&nbsp;</td>
 	<td nowrap class="sis-coursename">
-		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000100346');">Power Play                         </a></td>
+		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000104968');"> FLC - Japanese                    </a></td>
 	<td class="sis-courselab">&nbsp; </td>
 	<td class="sis-credits">0.25&nbsp;</td>
 
-	<td class="sis-center">P/N</td>
+	<td class="sis-center">Graded</td>
+        <td class="sis-gereqs">&nbsp;</td>
+        <td nowrap class="sis-meetingtime">&nbsp;</td>
+        <td nowrap class="sis-meetinglocation">&nbsp;</td>
+	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;27188&apos;)">Boteilho, Caleb</a></td>
+  </tr>
+
+
+
+  <tr class="sis-line2">
+	<td class="sis-departmentname">ASIAN 399 </td>
+	<td class="sis-center">&nbsp;</td>
+	<td nowrap class="sis-coursename">
+		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000102075');">Sem: Asia                          </a></td>
+	<td class="sis-courselab">&nbsp; </td>
+	<td class="sis-credits">1.00&nbsp;</td>
+
+	<td class="sis-center">Graded</td>
+        <td class="sis-gereqs"><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/WRI.pdf">WRI</a></td>
+        <td nowrap class="sis-meetingtime">T     0935-1100  <br>Th    0930-1050  </td>
+        <td nowrap class="sis-meetinglocation">&nbsp;<a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;TOH110&apos;);">TOH 110</a><br><a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;TOH110&apos;);">TOH 110</a></td>
+	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;1821&apos;)">Entenmann, Robert</a></td>
+  </tr>
+
+
+
+  <tr class="sis-line1">
+	<td class="sis-departmentname">CSCI 276A</td>
+	<td class="sis-center">&nbsp;</td>
+	<td nowrap class="sis-coursename">
+		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000103170');">Programming Languages              </a></td>
+	<td class="sis-courselab">&nbsp; </td>
+	<td class="sis-credits">1.00&nbsp;</td>
+
+	<td class="sis-center">Graded</td>
+        <td class="sis-gereqs">&nbsp;</td>
+        <td nowrap class="sis-meetingtime">T     0800-0925  <br>Th    0800-0920  </td>
+        <td nowrap class="sis-meetinglocation">&nbsp;<a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;RNS203&apos;);">RNS 203</a><br><a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;RNS203&apos;);">RNS 203</a></td>
+	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;97&apos;)">Allen, Richard</a></td>
+  </tr>
+
+
+
+  <tr class="sis-line2">
+	<td class="sis-departmentname">DANCE 215 </td>
+	<td class="sis-center">&nbsp;</td>
+	<td nowrap class="sis-coursename">
+		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000103157');">Contact Improvisation              </a></td>
+	<td class="sis-courselab">&nbsp; </td>
+	<td class="sis-credits">0.25&nbsp;</td>
+
+	<td class="sis-center">Graded</td>
         <td class="sis-gereqs"><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/SPM.pdf">SPM</a></td>
         <td nowrap class="sis-meetingtime">T     1145-0110PM<br>Th    1245-0205PM</td>
         <td nowrap class="sis-meetinglocation">&nbsp;<a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;DCStudio3&apos;);">DC Studio 3</a><br><a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;DCStudio3&apos;);">DC Studio 3</a></td>
@@ -298,43 +351,9 @@ history.forward();
 
 
 
-  <tr class="sis-line2">
-	<td class="sis-departmentname">HIST 237 </td>
-	<td class="sis-center">&nbsp;</td>
-	<td nowrap class="sis-coursename">
-		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000103276');">Women/Medieval Europe              </a></td>
-	<td class="sis-courselab">&nbsp; </td>
-	<td class="sis-credits">1.00&nbsp;</td>
-
-	<td class="sis-center">Graded</td>
-        <td class="sis-gereqs"><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/HWC.pdf">HWC</a></td>
-        <td nowrap class="sis-meetingtime">MWF   1045-1140  </td>
-        <td nowrap class="sis-meetinglocation">&nbsp;<a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;RNS190&apos;);">RNS 190</a></td>
-	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;27193&apos;)">Mummey, Kevin</a></td>
-  </tr>
-
-
-
-  <tr class="sis-line1">
-	<td class="sis-departmentname">JAPAN 301 </td>
-	<td class="sis-center">&nbsp;</td>
-	<td nowrap class="sis-coursename">
-		<a class="sis-nounderline" href="JavaScript:sis_coursedesc('0000099504');">Advanced Japanese I                </a></td>
-	<td class="sis-courselab">&nbsp; </td>
-	<td class="sis-credits">1.00&nbsp;</td>
-
-	<td class="sis-center">Audit</td>
-        <td class="sis-gereqs"><a class="sis-nounderline" target="bottom" href="http://wp.stolaf.edu/curriculum-committee/files/2013/12/FOL.pdf">FOL-J</a></td>
-        <td nowrap class="sis-meetingtime">MWF   1150-1245PM</td>
-        <td nowrap class="sis-meetinglocation">&nbsp;<a class="sis-nounderline" href="JavaScript:sis_roominfo_openwindow(&apos;TOH300&apos;);">TOH 300</a></td>
-	<td class="sis-instructorname"><a class="sis-nounderline" href="JavaScript:sis_facinfo_openwindow(&apos;21197&apos;)">Akimoto, Hiroe</a></td>
-  </tr>
-
-
-
 <tr class="sis-tblheader">
 	<td colspan="4" align="right"><b>Total Credits:</b></td>
-	<td class="sis-credits">3.25&nbsp;</td>
+	<td class="sis-credits">4.50&nbsp;</td>
 	<td colspan="5">&nbsp;</td>
 </tr>
 
@@ -346,7 +365,7 @@ history.forward();
 
 
 <form name="showschedule" target="_blank" method="post" action="tool-cal.cfm">
-	<input type="hidden" name="CLBIDLIST" value="0000102748,0000100423,0000100346,0000103276,0000099504">
+	<input type="hidden" name="CLBIDLIST" value="0000103314,0000103404,0000104968,0000102075,0000103170,0000103157">
 </form>
 <a href="JavaScript:document.showschedule.submit();">View Weekly Schedule</a> [Printable In Chrome]
 
@@ -361,4 +380,3 @@ history.forward();
 	<div style="display: none;" id="fusiondebugging">
 	<div id="foo">
 	<div id="baz">
-

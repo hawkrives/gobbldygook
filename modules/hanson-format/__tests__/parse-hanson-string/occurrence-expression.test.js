@@ -1,6 +1,5 @@
 import {expect} from 'chai'
-import {counter, courseDeclr} from './support'
-import {customParser} from './support'
+import {customParser, counter, courseDeclr} from './parse-hanson-string.support'
 const parse = customParser({allowedStartRules: ['Occurrence']})
 
 describe('OccurrenceExpression', () => {

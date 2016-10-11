@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {customParser, course, qualification} from './support'
+import {customParser, course, qualification} from './parse-hanson-string.support'
 const parse = customParser({allowedStartRules: ['Filter']})
 
 describe('FilterExpression', () => {

@@ -1,6 +1,5 @@
 import {expect} from 'chai'
-import {course} from './support'
-import {customParser} from './support'
+import {customParser, course} from './parse-hanson-string.support'
 const parse = customParser({allowedStartRules: ['Or']})
 
 describe('BooleanExpression', () => {

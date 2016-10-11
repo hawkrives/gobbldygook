@@ -6,7 +6,7 @@ import {
 	// processDegrees,
 	// resolveSingularDataPoints,
 } from '../convert-imported-student'
-import {sample} from './_support/sample-student'
+import {sample} from './__support__/sample-student'
 const getCourseMock = async course => course
 
 describe('convertStudent', () => {

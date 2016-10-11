@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {enhanceHanson} from '../enhance-hanson'
-import {reference, course} from './parse-hanson-string/support'
+import {reference, course} from './parse-hanson-string/parse-hanson-string.support'
 
 describe('enhanceHanson', () => {
 	it('adds a "slug" key to the top-level', () => {

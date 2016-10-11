@@ -1,6 +1,5 @@
 import {expect} from 'chai'
-import {course, reference, boolean} from './support'
-import {customParser} from './support'
+import {customParser, course, reference, boolean} from './parse-hanson-string.support'
 const parse = customParser({allowedStartRules: ['Of']})
 
 describe('OfExpression', () => {

@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {loadHtml} from './support'
+import {loadHtml} from './import-student.support'
 import {parseHtml} from '../../parse-html'
 import {extractStudentIds} from '../student-ids'
 

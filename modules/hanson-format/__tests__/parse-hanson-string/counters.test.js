@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {customParser} from './support'
+import {customParser} from './parse-hanson-string.support'
 const parse = customParser({allowedStartRules: ['Counter']})
 
 describe('counters', () => {

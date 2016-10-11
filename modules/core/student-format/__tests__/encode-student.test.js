@@ -4,10 +4,10 @@ import {encodeStudent} from '../encode-student'
 let oldEncode = global.encodeURIComponent
 
 describe('prepareStudentForSave', () => {
-	before(() => {
+	beforeAll(() => {
 		global.encodeURIComponent = require('querystring').stringify
 	})
-	after(() => {
+	afterAll(() => {
 		global.encodeURIComponent = oldEncode
 	})
 
@@ -15,4 +15,3 @@ describe('prepareStudentForSave', () => {
 		expect(encodeStudent({name: 's'})).to.equal('')
 	})
 })
-

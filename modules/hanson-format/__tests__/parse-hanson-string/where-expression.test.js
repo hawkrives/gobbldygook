@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {customParser, qualification, boolean} from './support'
+import {customParser, qualification, boolean} from './parse-hanson-string.support'
 const parseWhere = customParser({allowedStartRules: ['Where']})
 const parseQualifier = customParser({allowedStartRules: ['Qualifier']})
 
