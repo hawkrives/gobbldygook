@@ -3,11 +3,14 @@ import {encodeStudent} from '../encode-student'
 
 let oldEncode = global.encodeURIComponent
 
+let before = global.before || global.beforeAll
+let after = global.after || global.afterAll
+
 describe('prepareStudentForSave', () => {
-	beforeAll(() => {
+	before(() => {
 		global.encodeURIComponent = require('querystring').stringify
 	})
-	afterAll(() => {
+	after(() => {
 		global.encodeURIComponent = oldEncode
 	})
 
