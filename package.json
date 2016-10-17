@@ -12,14 +12,27 @@
     "include": [
       "modules/**"
     ],
-    "exclude": ["test", "test{,-*}.js", "**/*.test.js", "**/__tests__/**", "modules/hanson-format/parse-hanson-string.js"],
+    "exclude": [
+      "test",
+      "test{,-*}.js",
+      "**/*.test.js",
+      "**/__tests__/**",
+      "modules/hanson-format/parse-hanson-string.js"
+    ],
     "cache": true,
     "sourceMap": false,
     "instrument": false
   },
   "jest": {
-    "setupFiles": ["config/mocha-harness.js"],
-    "coverageReporters": ["json", "html", "lcov", "text"],
+    "setupFiles": [
+      "config/mocha-harness.js"
+    ],
+    "coverageReporters": [
+      "json",
+      "html",
+      "lcov",
+      "text"
+    ],
     "resetModules": true,
     "moduleNameMapper": {
       "^.+\\.(scss|css|less)$": "<rootDir>/config/flow/css.js.flow"
