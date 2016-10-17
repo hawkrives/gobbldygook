@@ -1,0 +1,33 @@
+general:
+  branches:
+    only:
+      # self-explanatory?
+      - master
+      - stable
+      # travis testing branches
+      - /^travis/
+      # version tags (from https://github.com/sindresorhus/semver-regex)
+      - /^v?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?$/
+  artifacts:
+    - "artifacts/"
+
+machine:
+  node:
+    version: 6
+
+dependencies:
+  cache_directories:
+    - $HOME/.npm
+    - node_modules
+
+test:
+  pre:
+    - node -v
+    - npm install coveralls codecov
+  override:
+    - npm run lint
+    - npm run run-coverage
+    - npm run build-ci
+  post:
+    - npm run coveralls
+    - npm run codecov
