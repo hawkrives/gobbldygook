@@ -6,8 +6,7 @@ sudo: false
 # Cache node_modules
 cache:
   directories:
-    - $HOME/.npm
-    - node_modules
+    - ~/.yarn-cache
 
 # Send travis notifications to Slack
 notifications:
@@ -37,10 +36,15 @@ branches:
 node_js:
   - stable
 
-script:
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
   - npm install coveralls codecov
+
+script:
   - npm run lint
   - npm run run-coverage
   - npm run build-ci
 
-after_success: npm run coveralls; npm run codecov
+after_success:
+  - npm run coveralls
+  - npm run codecov
