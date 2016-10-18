@@ -46,5 +46,5 @@ script:
   - npm run build-ci
 
 after_success:
-  - npm run coveralls
-  - npm run codecov
+  - nyc report --reporter=text-lcov | coveralls
+  - nyc report --reporter=lcov > coverage.lcov && codecov
