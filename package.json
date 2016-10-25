@@ -146,7 +146,7 @@
     "babel-plugin-webpack-alias": "1.9.0",
     "babel-preset-latest": "6.16.0",
     "babel-preset-react": "6.16.0",
-    "babel-register": "6.16.3",
+    "babel-register": "6.18.0",
     "babel-stdin": "1.0.0",
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "chai": "3.5.0",
