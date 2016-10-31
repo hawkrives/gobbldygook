@@ -5,8 +5,8 @@ import {map} from 'lodash'
 import {filter} from 'lodash'
 
 import {addSchedule, destroySchedules} from 'modules/web/redux/students/actions/schedules'
-import findFirstAvailableYear from 'modules/web/helpers/find-first-available-year'
-import findFirstAvailableSemester from 'modules/web/helpers/find-first-available-semester'
+import {findFirstAvailableYear} from 'modules/web/helpers/find-first-available-year'
+import {findFirstAvailableSemester} from 'modules/web/helpers/find-first-available-semester'
 
 import CourseTable from '../components/course-table'
 
