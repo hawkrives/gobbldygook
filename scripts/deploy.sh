@@ -1,4 +1,5 @@
-#!/bin/bash -ve
+#!/bin/bash
+set -ve
 
 SOURCE_BRANCH=master
 DEST_BRANCH=gh-pages
