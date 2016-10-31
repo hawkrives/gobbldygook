@@ -68,6 +68,15 @@
 	padding: 0.45em 0.25em;
 }
 
+.heading .manual-override {
+
+}
+
+.heading .manual-override button {
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+}
+
 .title,
 .override-text {
 	padding: 0.45em 0.25em;
@@ -103,7 +112,7 @@
 .description,
 .message,
 .filter,
-.override-buttons {
+.required-override-buttons {
 	width: 100%;
 	padding-top: 0.2em;
 	padding-bottom: 0.2em;
@@ -130,7 +139,7 @@
 	/* padding-left: 0; */
 }
 
-.override-buttons {
+.required-override-buttons {
 	display: flex;
 	justify-content: space-around;
 	flex-flow: row wrap;
@@ -187,4 +196,8 @@
 	&.result-success {
 		background-color: $result-success-background;
 	}
+}
+
+.overridden-msg {
+	font-weight: normal;
 }

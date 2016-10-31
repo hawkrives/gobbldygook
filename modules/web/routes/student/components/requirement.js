@@ -5,16 +5,14 @@ import {map} from 'lodash'
 
 import {isRequirementName} from 'modules/core/examine-student'
 
+import Icon from 'modules/web/components/icon'
+import {iosBoltOutline, iosBolt} from 'modules/web/icons/ionicons'
 import Filter from './expression--filter'
 import Expression from './expression'
 import Button from 'modules/web/components/button'
 import ResultIndicator from './result-indicator'
 
 import './requirement.scss'
-
-// function getResultOfRequirement(requirements) {
-// 	return requirementTitle => requirements[requirementTitle].computed ? 'A' : 'B'
-// }
 
 export function Requirement(props) {
 	const {
@@ -48,8 +46,14 @@ export function Requirement(props) {
 	const title = !topLevel && (
 		<h2 className='heading' title={props.name} onClick={props.onToggleOpen}>
 			<span className='title'>
-				{` ${props.name}`}
+				{' '}{props.name}
 				<span className='status'>{status}</span>
+			</span>
+			<span className='manual-override'>
+				<span className='overridden-msg'>{props.overridden ? '(Overridden) ' : ''}</span>
+				<Button title={`${props.overridden ? 'Remove' : 'Apply'} a manual override to this requirement`} onClick={ev => props.onToggleOverride(props.path, ev)} type='flat'>
+					<Icon>{props.overridden ? iosBolt : iosBoltOutline}</Icon>
+				</Button>
 			</span>
 		</h2>
 	)
@@ -65,7 +69,7 @@ export function Requirement(props) {
 		/>)
 
 	const overrideButtons = (props.message && !props.result) && (
-		<span className='override-buttons  button-group'>
+		<span className='required-override-buttons button-group'>
 			<Button onClick={ev => props.onRemoveOverride(props.path, ev)} type='flat'>Not yet…</Button>
 			<Button onClick={ev => props.onAddOverride(props.path, ev)} type='flat'>Done!</Button>
 		</span>

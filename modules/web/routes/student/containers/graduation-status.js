@@ -28,6 +28,7 @@ class GraduationStatusContainer extends Component {
 	};
 
 	handleInitiateAddArea = (type, ev) => {
+		ev.stopPropagation()
 		ev.preventDefault()
 		this.setState(state => ({
 			showAreaPickerFor: {...state.showAreaPickerFor, [type]: true},
@@ -35,6 +36,7 @@ class GraduationStatusContainer extends Component {
 	};
 
 	handleEndAddArea = (type, ev) => {
+		ev.stopPropagation()
 		ev.preventDefault()
 		this.setState(state => ({
 			showAreaPickerFor: {...state.showAreaPickerFor, [type]: false},
@@ -42,23 +44,27 @@ class GraduationStatusContainer extends Component {
 	};
 
 	handleAddArea = (area, ev) => {
+		ev.stopPropagation()
 		ev.preventDefault()
 		this.props.addArea(this.props.student.id, area)
 	};
 
 	handleAddOverride = (path, ev) => {
+		ev.stopPropagation()
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
 		this.props.setOverride(this.props.student.id, codifiedPath, true)
 	};
 
 	handleRemoveOverride = (path, ev) => {
+		ev.stopPropagation()
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
 		this.props.setOverride(this.props.student.id, codifiedPath)
 	};
 
 	handleToggleOverride = (path, ev) => {
+		ev.stopPropagation()
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
 
@@ -71,6 +77,7 @@ class GraduationStatusContainer extends Component {
 	};
 
 	handleRemoveArea = (areaQuery, ev) => {
+		ev.stopPropagation()
 		ev.preventDefault()
 		this.props.removeArea(this.props.student.id, areaQuery)
 	};
