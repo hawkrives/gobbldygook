@@ -82,7 +82,7 @@
     "fuzzysearch": "1.0.3",
     "get-stdin": "5.0.1",
     "glob": "7.1.1",
-    "graceful-fs": "4.1.9",
+    "graceful-fs": "4.1.10",
     "history": "^3.2.1",
     "htmlparser2": "3.9.2",
     "humanize-plus": "1.8.2",
