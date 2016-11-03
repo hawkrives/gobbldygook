@@ -1,4 +1,4 @@
-general:
+$general:
   branches:
     only:
       # self-explanatory?
@@ -41,6 +41,6 @@ test:
           MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
     - npm run build -- --no-progress
 
-  post:
-    - ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls
-    - bash <(curl -s https://codecov.io/bash)
+  #post:
+    #- ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls
+    #- bash <(curl -s https://codecov.io/bash)
