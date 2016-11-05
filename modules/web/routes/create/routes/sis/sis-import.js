@@ -135,13 +135,13 @@ class SISImportScreen extends Component {
 						<StudentSummary student={student} showMessage={false} />
 						<ul>
 							{map(groupBy(student.schedules, 'year'), (schedules, year) =>
-								<li>{year}:
+								<li key={year}>{year}:
 									<ul>
 										{map(sortBy(schedules, 'semester'), schedule =>
-											<li>{semesterName(schedule.semester)}:
+											<li key={schedule.semester}>{semesterName(schedule.semester)}:
 												<ul>
 													{map(schedule.courses, course =>
-														<li>{course.deptnum} – {course.name}</li>
+														<li key={course.deptnum}>{course.deptnum} – {course.name}</li>
 													)}
 												</ul>
 											</li>
