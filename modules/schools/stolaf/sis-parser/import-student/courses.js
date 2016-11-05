@@ -5,7 +5,6 @@ import {
 	getText,
 	removeInternalWhitespace,
 	getTextItems,
-	buildFormData,
 } from './lib'
 import {selectAll, selectOne} from 'css-select'
 import {COURSES_URL} from './urls'
