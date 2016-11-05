@@ -7,7 +7,7 @@ import {v4 as uuid} from 'uuid'
 export class ExtensionNotLoadedError extends Error {}
 export class ExtensionTooOldError extends Error {}
 
-export function fetchHtml(url, fetchArgs) {
+export function fetchHtml(url, fetchArgs, fetchBody) {
 	if (!global.gobbldygook_extension) {
 		return Bluebird.reject(new ExtensionNotLoadedError('Extension not loaded'))
 	}
@@ -45,6 +45,7 @@ export function fetchHtml(url, fetchArgs) {
 			id,
 			url,
 			fetchArgs,
+			fetchBody,
 		}, '*')
 	})
 }

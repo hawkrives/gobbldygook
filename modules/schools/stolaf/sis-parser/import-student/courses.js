@@ -45,9 +45,11 @@ export function getCoursesFromHtml(dom, term) {
 
 
 function getCourses(studentId, term) {
-	let formData = buildFormData({stnum: studentId, searchyearterm: term})
-
-	return fetchHtml(COURSES_URL, {method: 'POST', body: formData})
+	const body = {
+		stnum: studentId,
+		searchyearterm: term,
+	}
+	return fetchHtml(COURSES_URL, {method: 'POST'}, body)
 		.then(response => getCoursesFromHtml(response, term))
 }
 
