@@ -9,6 +9,7 @@ import {
 	convertStudent,
 	semesterName,
 } from 'modules/schools/stolaf'
+import {BrowserExtensionsComponent} from 'modules/web/components/browser-extensions'
 import {getCourse} from 'modules/web/helpers/get-courses'
 import StudentSummary from 'modules/web/routes/student/components/student-summary'
 import {map} from 'lodash'
@@ -101,6 +102,8 @@ class SISImportScreen extends Component {
 				<header className='header'>
 					<h1>Import from the SIS</h1>
 				</header>
+
+				<BrowserExtensionsComponent />
 
 				<p>
 					{checkingLogin
