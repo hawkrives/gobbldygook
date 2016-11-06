@@ -140,6 +140,10 @@ arr-flatten@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arr-flatten/-/arr-flatten-1.0.1.tgz#e5ffe54d45e19f32f216e91eb99c8ce892bb604b"
 
+array-contains@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/array-contains/-/array-contains-0.0.1.tgz#f26cb1af3328636612ad3c5cd6d579c6e80b247a"
+
 array-differ@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/array-differ/-/array-differ-1.0.0.tgz#eff52e3758249d33be402b8bb8e564bb2b5d4031"
@@ -1143,6 +1147,17 @@ browserslist@~1.4.0:
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-1.4.0.tgz#9cfdcf5384d9158f5b70da2aa00b30e8ff019049"
   dependencies:
     caniuse-db "^1.0.30000539"
+
+brwsr:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/brwsr/-/brwsr-1.0.1.tgz#6d42ec16b29f64f78d8572c0671e9b86fc40cdf2"
+  dependencies:
+    is-chrome "^1.0.1"
+    is-edge "^1.0.0"
+    is-firefox "^1.0.1"
+    is-iexplorer "^1.0.0"
+    is-opera "^1.0.1"
+    is-safari "^1.0.0"
 
 bser@^1.0.2:
   version "1.0.2"
@@ -3018,6 +3033,10 @@ is-callable@^1.1.1, is-callable@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/is-callable/-/is-callable-1.1.3.tgz#86eb75392805ddc33af71c92a0eedf74ee7604b2"
 
+is-chrome@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/is-chrome/-/is-chrome-1.0.2.tgz#674bf23f8ae07a44c9cbd6239370ac9ae814c28c"
+
 is-ci@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/is-ci/-/is-ci-1.0.9.tgz#de2c5ffe49ab3237fda38c47c8a3bbfd55bbcca7"
@@ -3029,6 +3048,12 @@ is-date-object@^1.0.1:
 is-dotfile@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-dotfile/-/is-dotfile-1.0.2.tgz#2c132383f39199f8edc268ca01b9b007d205cc4d"
+
+is-edge@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-edge/-/is-edge-1.0.1.tgz#602710fb8887796bfc863c8626f6db6042613e00"
+  dependencies:
+    array-contains "0.0.1"
 
 is-equal-shallow@^0.1.3:
   version "0.1.3"
@@ -3054,6 +3079,10 @@ is-finite@^1.0.0, is-finite@^1.0.1:
   dependencies:
     number-is-nan "^1.0.0"
 
+is-firefox@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/is-firefox/-/is-firefox-1.0.3.tgz#2a2a1567783a417f6e158323108f3861b0918562"
+
 is-fullwidth-code-point@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-1.0.0.tgz#ef9e31386f031a7f0d643af82fde50c457ef00cb"
@@ -3072,6 +3101,10 @@ is-glob@^3.0.0:
   dependencies:
     is-extglob "^2.1.0"
 
+is-iexplorer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-iexplorer/-/is-iexplorer-1.0.0.tgz#1d72bc66d3fe22eaf6170dda8cf10943248cfc76"
+
 is-my-json-valid@^2.10.0, is-my-json-valid@^2.12.4:
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.15.0.tgz#936edda3ca3c211fd98f3b2d3e08da43f7b2915b"
@@ -3086,6 +3119,10 @@ is-number@^2.0.2, is-number@^2.1.0:
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-2.1.0.tgz#01fcbbb393463a548f2f466cce16dece49db908f"
   dependencies:
     kind-of "^3.0.2"
+
+is-opera@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/is-opera/-/is-opera-1.0.2.tgz#86c49f25ff25f9cd89f8b43e11805e5a28e2673c"
 
 is-path-cwd@^1.0.0:
   version "1.0.0"
@@ -3129,7 +3166,7 @@ is-resolvable@^1.0.0:
   dependencies:
     tryit "^1.0.1"
 
-is-safari@1.0.0:
+is-safari@^1.0.0, is-safari@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-safari/-/is-safari-1.0.0.tgz#b4610d5ea75aaf6c7611fda1d0fd3de47de72b9b"
 
