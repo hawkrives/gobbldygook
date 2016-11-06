@@ -7,22 +7,36 @@ import {
 	installFirefoxExtension,
 } from 'modules/web/helpers/extension-helpers'
 
+import {interpose} from 'modules/lib'
+
+import brwsr from 'brwsr'
+
 import './browser-extensions.scss'
 
+function BrowserButton({
+	onClick,
+	browserName,
+	disabled,
+}: {
+	onClick: () => any,
+	browserName: string,
+	disabled: boolean,
+}) {
+	return <button type='button' disabled={disabled} className='browser-button' onClick={onClick}>{browserName}</button>
+}
+BrowserButton.propTypes = {
+	onClick: React.PropTypes.func.isRequired,
+}
+
 export class BrowserExtensionsComponent extends React.Component {
+	static propTypes = {
+		onInstall: React.PropTypes.func.isRequired,
+	}
+
 	state = {
-		extensionInstalled: false,
-		operaInstallState: false,
-		chromeInstallState: false,
-		firefoxInstallState: false,
-		safariInstallState: false,
-		edgeInstallState: false,
+		installAttempted: false,
+		installError: null,
 	}
-
-	componentWillMount() {
-		this.checkExtensionStatus()
-	}
-
 
 	checkExtensionStatus = () => {
 		if (global.gobbldygook_extension >= '1.0.0') {
@@ -30,22 +44,31 @@ export class BrowserExtensionsComponent extends React.Component {
 		}
 	}
 
-	installChromeExtension = () => {
+	installChromeExtension = ev => {
+		ev.preventDefault()
+		ev.stopPropagation()
+
 		installChromeExtension()
-			.then(() => this.setState({chromeInstallState: true}))
-			.reject(err => this.setState({chromeInstallState: err}))
+			.then(this.installSuccess)
+			.catch(this.installFailure)
 	}
 
-	installFirefoxExtension = () => {
+	installFirefoxExtension = ev => {
+		ev.preventDefault()
+		ev.stopPropagation()
+
 		installFirefoxExtension()
-			.then(() => this.setState({firefoxInstallState: true}))
-			.reject(err => this.setState({firefoxInstallState: err}))
+			.then(this.installSuccess)
+			.catch(this.installFailure)
 	}
 
-	installOperaExtension = () => {
+	installOperaExtension = ev => {
+		ev.preventDefault()
+		ev.stopPropagation()
+
 		installOperaExtension()
-			.then(() => this.setState({operaInstallState: true}))
-			.reject(err => this.setState({operaInstallState: err}))
+			.then(this.installSuccess)
+			.catch(this.installFailure)
 	}
 
 	installSafariExtension = () => {
@@ -56,15 +79,75 @@ export class BrowserExtensionsComponent extends React.Component {
 
 	}
 
+	installSuccess = () => {
+		this.setState({installAttempted: true})
+		this.props.onInstall()
+	}
+
+	installFailure = err => {
+		this.setState({installError: err, installAttempted: true})
+	}
+
+	detectBrowser() {
+		return brwsr()
+	}
+
+	flavorText() {
+		let browser = this.detectBrowser()
+		let base = `It looks like you're running ${browser}.`
+		if (browser === 'Internet Explorer') {
+			return `${base} There is no extension available for your browser.`
+		}
+		if (browser === 'Opera' || browser === 'Safari') {
+			return `${base} The extension is under development. Let me know if you would use it.`
+		}
+		return `${base} Use the appropriate link below to install the extension.`
+	}
+
+	buttons() {
+		return [
+			{name: 'Google Chrome', button: <BrowserButton key='chrome' onClick={this.installChromeExtension} browserName='Chrome' />},
+			{name: 'Mozilla Firefox', button: <BrowserButton key='firefox' onClick={this.installFirefoxExtension} browserName='Firefox' />},
+			{name: 'Microsoft Edge', button: <BrowserButton key='edge' disabled onClick={this.installEdgeExtension} browserName='Edge' />},
+			{name: 'Safari', button: <BrowserButton key='safari' disabled onClick={this.installSafariExtension} browserName='Safari' />},
+			{name: 'Opera', button: <BrowserButton key='opera' disabled onClick={this.installOperaExtension} browserName='Opera' />},
+		]
+	}
+
+	primaryButton() {
+		return this.buttons().filter(btn => btn.name === this.detectBrowser()).map(btn => btn.button)[0]
+	}
+
+	secondaryButtons() {
+		return this.buttons().filter(btn => btn.name !== this.detectBrowser()).map(btn => btn.button)
+	}
+
 	render() {
-		const chromeLink = <a onClick={this.installChromeExtension}>Chrome</a>
+		if (this.checkExtensionStatus()) {
+			return <div><p>The extension is installed and active. Let's rock!</p></div>
+		}
 
 		return (
 			<div>
 				<p>
 					Gobbldygook uses a browser extension to import your data from the SIS.
-					Once you have imported your student, you don't need the extension anymore.
+					Once you have imported your information, you don't need the extension anymore.
 				</p>
+
+				<p>
+					{this.flavorText()}
+				</p>
+
+				<p>
+					Install for {this.primaryButton()}.{' '}
+				</p>
+
+				<details>
+					<summary>Not {this.detectBrowser()}?</summary>
+					<p>We also have {interpose(this.secondaryButtons(), ', ')}.</p>
+				</details>
+
+				<p>{this.state.installError ? this.state.installError.message : null}</p>
 			</div>
 		)
 	}

@@ -36,6 +36,7 @@ class SISImportScreen extends Component {
 		ids: [],
 		selectedId: null,
 		student: null,
+		extensionInstalled: false,
 	};
 
 	componentWillMount() {
@@ -103,7 +104,7 @@ class SISImportScreen extends Component {
 					<h1>Import from the SIS</h1>
 				</header>
 
-				<BrowserExtensionsComponent />
+				<BrowserExtensionsComponent onInstall={() => this.setState({extensionInstalled: true})} />
 
 				<p>
 					{checkingLogin
