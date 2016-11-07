@@ -52,7 +52,6 @@
     "cover": "npm run run-coverage && npm run view-coverage",
     "deploy": "bash scripts/deploy.sh",
     "lint": "eslint *.js modules/",
-    "profile": "cat profile/README.md",
     "run-coverage": "nyc npm test",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
     "start": "npm run copy && cross-env NODE_ENV=development webpack-dev-server --config .webpackrc.js --progress",
