@@ -18,7 +18,7 @@ const log = debug('web:database:query')
 
 import idbRange from 'idb-range'
 import {cmp as idbComparison} from 'treo'
-import {checkCourseAgainstQuery} from 'modules/core'
+import {checkCourseAgainstQuery} from 'modules/core/search-queries'
 
 function canAdd({query, value, primaryKey, results}={}) {
 	// Check if we want to add the current value to the results array.
