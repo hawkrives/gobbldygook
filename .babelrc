@@ -35,5 +35,11 @@
 				["webpack-alias", { "config": "./.webpackrc.js" }],
 			],
 		},
+		"debug": {
+			"plugins": [
+				// allows tested files access to the webpack aliases
+				["webpack-alias", { "config": "./.webpackrc.js" }],
+			],
+		},
 	},
 }
