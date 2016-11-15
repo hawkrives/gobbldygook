@@ -132,7 +132,7 @@
   "devDependencies": {
     "babel-core": "6.18.2",
     "babel-eslint": "7.1.0",
-    "babel-jest": "17.0.0",
+    "babel-jest": "17.0.2",
     "babel-loader": "6.2.7",
     "babel-plugin-external-helpers": "6.18.0",
     "babel-plugin-istanbul": "2.0.3",
