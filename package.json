@@ -127,7 +127,7 @@
     "text-table": "0.2.0",
     "treo": "0.6.0-rc2",
     "uuid": "2.0.3",
-    "whatwg-fetch": "1.0.0"
+    "whatwg-fetch": "1.1.0"
   },
   "devDependencies": {
     "babel-core": "6.18.2",
