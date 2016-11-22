@@ -3,11 +3,6 @@
 # Opt-in to the new Travis infrastructure
 sudo: false
 
-# Cache node_modules
-cache:
-  directories:
-    - ~/.yarn-cache
-
 # Send travis notifications to Slack
 notifications:
   slack:
@@ -37,7 +32,6 @@ node_js:
   - 6
 
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
   - npm install coveralls codecov
 
 script:
