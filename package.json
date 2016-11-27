@@ -157,7 +157,7 @@
     "enzyme": "2.6.0",
     "eslint": "3.10.2",
     "eslint-plugin-babel": "3.3.0",
-    "eslint-plugin-flowtype": "2.25.0",
+    "eslint-plugin-flowtype": "2.27.0",
     "eslint-plugin-flowtype-errors": "1.5.0",
     "eslint-plugin-react": "6.7.1",
     "extract-text-webpack-plugin": "1.0.1",
