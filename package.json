@@ -130,7 +130,7 @@
     "whatwg-fetch": "1.1.0"
   },
   "devDependencies": {
-    "babel-core": "6.18.2",
+    "babel-core": "6.20.0",
     "babel-eslint": "7.1.1",
     "babel-jest": "17.0.0",
     "babel-loader": "6.2.9",
