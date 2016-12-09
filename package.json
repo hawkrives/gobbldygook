@@ -68,7 +68,7 @@
   },
   "dependencies": {
     "appdirs": "1.0.0",
-    "babel-runtime": "6.18.0",
+    "babel-runtime": "6.20.0",
     "bluebird": "3.4.6",
     "brwsr": "1.0.1",
     "chalk": "1.1.3",
