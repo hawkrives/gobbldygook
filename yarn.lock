@@ -729,9 +729,9 @@ babel-plugin-transform-inline-environment-variables@6.8.0:
   dependencies:
     babel-runtime "^6.0.0"
 
-babel-plugin-transform-object-rest-spread@6.20.0:
-  version "6.20.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-6.20.0.tgz#a7d96bfbdc984ae73cd8cb5f196abb52afa25da7"
+babel-plugin-transform-object-rest-spread@6.20.1:
+  version "6.20.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-6.20.1.tgz#78005752b9214074c71152c6d4835868817583c7"
   dependencies:
     babel-plugin-syntax-object-rest-spread "^6.8.0"
     babel-runtime "^6.20.0"
