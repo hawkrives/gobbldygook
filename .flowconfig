@@ -13,8 +13,6 @@
 
 [libs]
 ./node_modules/fbjs/flow/lib
-./node_modules/iflow-bluebird/index.js.flow
-./node_modules/iflow-lodash/index.js.flow
 
 
 [options]
