@@ -10,6 +10,7 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
 const DedupePlugin = webpack.optimize.DedupePlugin
 const DefinePlugin = webpack.DefinePlugin
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
+const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin
 const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
 const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
@@ -37,11 +38,10 @@ if (isProduction) {
 	}
 }
 
-const config = {
-	replace: null,
-	port: 3000, // for webpack-dev-server
+let cssFilename = isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`
 
-	stats: {colors: false},
+const config = {
+	stats: {},
 
 	entry: {
 		main: ['./modules/web/index.js'],
@@ -56,7 +56,6 @@ const config = {
 
 		// extract-text-plugin uses [contenthash], and webpack uses [hash].
 		filename: isDevelopment ? 'app.js' : `${pkg.name}.[hash].js`,
-		cssFilename: isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`,
 		chunkFilename: 'chunk.[name].[chunkhash].js',
 
 		// Add /*filename*/ comments to generated require()s in the output.
@@ -190,45 +189,54 @@ const config = {
 		// Watcher doesn't work well if you mistype casing in a path so we use
 		// a plugin that prints an error when you attempt to do this.
 		new CaseSensitivePathsPlugin(),
+
+		new LoaderOptionsPlugin({
+			options: {
+				worker: {
+					output: {
+						filename: '[hash].worker.js',
+						chunkFilename: '[id].[hash].worker.js',
+					},
+				},
+			},
+		}),
 	],
 
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loaders: ['babel-loader?cacheDirectory'],
+				use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
 			},
 			{
 				test: /\.worker.js$/,
 				exclude: /node_modules/,
-				loaders: ['worker-loader', 'babel-loader?cacheDirectory'],
+				use: ['worker-loader', {loader: 'babel-loader', options: {cacheDirectory: true}}],
 			},
 			{
 				test: /\.json$/,
-				loaders: ['json-loader'],
+				use: ['json-loader'],
 			},
 			{
 				test: /\.(otf|eot|ttf|woff2?)$/,
 				loader: 'url-loader',
-				query: {limit: urlLoaderLimit},
+				options: {limit: urlLoaderLimit},
 			},
 			{
 				test: /\.(jpe?g|png|gif)$/,
 				loader: 'url-loader',
-				query: {limit: urlLoaderLimit},
+				options: {limit: urlLoaderLimit},
 			},
 		],
 	},
-
-	worker: {
-		output: {
-			filename: '[hash].worker.js',
-			chunkFilename: '[id].[hash].worker.js',
-		},
-	},
 }
 
+let style = 'style-loader'
+let css = 'css-loader'
+let sass = 'sass-loader'
+let cssModules = {loader: css, query: {modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]'}}
+let cssModulesProduction = {loader: css, query: {modules: true}}
 
 // dev specific stuff
 if (isDevelopment) {
@@ -249,19 +257,18 @@ if (isDevelopment) {
 	config.plugins.push(new HotModuleReplacementPlugin())
 
 	// Add style loaders
-	config.module.loaders.push({test: /\.css$/, loaders: ['style', 'css']})
-	config.module.loaders.push({test: /\.scss$/, loaders: ['style', 'css', 'sass']})
+	config.module.rules.push({test: /\.css$/, use: [style, css]})
+	config.module.rules.push({test: /\.scss$/, use: [style, css, sass]})
 
-	let identName = '[path][name]·[local]·[hash:base64:5]'
-	config.module.loaders.push({test: /\.module.css$/, loaders: ['style', `css?modules&localIdentName=${identName}`]})
-	config.module.loaders.push({test: /\.module.scss$/, loaders: ['style', `css?modules&localIdentName=${identName}', 'sass`]})
+	config.module.rules.push({test: /\.module.css$/, use: [style, cssModules]})
+	config.module.rules.push({test: /\.module.scss$/, use: [style, cssModules, sass]})
 }
 
 else if (isTest) {
-	config.module.loaders.push({test: /\.css$/, loader: 'style!css'})
-	config.module.loaders.push({test: /\.module.css$/, loader: 'style!css?modules'})
-	config.module.loaders.push({test: /\.scss$/, loader: 'style!css!sass'})
-	config.module.loaders.push({test: /\.module.scss$/, loader: 'style!css?modules!sass'})
+	config.module.rules.push({test: /\.css$/, use: [style, css]})
+	config.module.rules.push({test: /\.module.css$/, use: [style, cssModules]})
+	config.module.rules.push({test: /\.scss$/, use: [style, css, sass]})
+	config.module.rules.push({test: /\.module.scss$/, use: [style, cssModules, sass]})
 }
 
 // production
@@ -270,11 +277,10 @@ else if (isProduction) {
 	config.stats.children = false
 
 	// minify in production
-	let extractor = new ExtractTextPlugin(config.output.cssFilename, {allChunks: true})
 	config.plugins = config.plugins.concat([
 		new DedupePlugin(),
-		new OccurenceOrderPlugin(true),
 		new UglifyJsPlugin({
+			sourceMap: true,
 			compress: {
 				warnings: false,
 				pure_getters: true, // eslint-disable-line camelcase
@@ -289,25 +295,31 @@ else if (isProduction) {
 				screw_ie8: true, // eslint-disable-line camelcase
 			},
 		}),
-		extractor,
+		new ExtractTextPlugin({
+			filename: cssFilename,
+			allChunks: true,
+		}),
+		new LoaderOptionsPlugin({
+			minimize: true,
+		}),
 	])
 
-	config.module.loaders.push({
+	config.module.rules.push({
 		test: /\.css$/,
-		loader: extractor.extract('style', ['css']),
+		use: ExtractTextPlugin.extract([style, css]),
 	})
-	config.module.loaders.push({
+	config.module.rules.push({
 		test: /\.scss$/,
-		loader: extractor.extract('style', ['css', 'sass']),
+		use: ExtractTextPlugin.extract([style, css, sass]),
 	})
 
-	config.module.loaders.push({
+	config.module.rules.push({
 		test: /\.module.css$/,
-		loader: extractor.extract('style', ['css?modules']),
+		use: ExtractTextPlugin.extract([style, cssModulesProduction]),
 	})
-	config.module.loaders.push({
+	config.module.rules.push({
 		test: /\.module.scss$/,
-		loader: extractor.extract('style', ['css?modules', 'sass']),
+		use: ExtractTextPlugin.extract([style, cssModulesProduction, sass]),
 	})
 }
 
