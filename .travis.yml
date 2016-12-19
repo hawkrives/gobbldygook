@@ -4,6 +4,9 @@
 sudo: false
 dist: trusty
 
+cache:
+  yarn: true
+
 # Send travis notifications to Slack
 notifications:
   slack:
