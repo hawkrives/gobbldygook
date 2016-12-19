@@ -171,7 +171,6 @@
     "mock-require": "2.0.0",
     "node-sass": "4.1.0",
     "nyc": "10.0.0",
-    "offline-plugin": "3.4.2",
     "pegjs": "0.10.0",
     "react-addons-perf": "15.4.1",
     "react-addons-test-utils": "15.4.1",
