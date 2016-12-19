@@ -14,7 +14,7 @@ import {
 	quacksLikeDeptNum,
 	splitDeptNum,
 	buildDeptNum,
-} from 'modules/schools/stolaf'
+} from 'modules/schools/stolaf/deptnums'
 
 import {
 	partitionByIndex,

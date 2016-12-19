@@ -36,9 +36,13 @@ function shortenPath(path) {
 }
 
 function prettyifyResults(res) {
-	let newKeys = _.mapKeys(res, (v, k) => shortenPath(k))
-	let newVals = _.mapValues(newKeys, v => v.map(shortenPath))
-	return newVals
+	let pairs = _.toPairs(res)
+	let edited = _.map(pairs, ([key, val]) => {
+		key = shortenPath(key)
+		val = val.map(shortenPath)
+		return [key, val]
+	})
+	return _.fromPairs(_.sortBy(edited, ([k]) => k))
 }
 
 function main() {

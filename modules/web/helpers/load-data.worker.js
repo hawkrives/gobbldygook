@@ -1,7 +1,7 @@
 import Bluebird from 'bluebird'
 
 import 'whatwg-fetch'
-import {status, json, text, stringifyError} from 'modules/lib'
+import {status, json, text, stringifyError} from 'modules/lib/fetch-helpers'
 
 import range from 'idb-range'
 import {uniq} from 'lodash'
@@ -20,8 +20,8 @@ import present from 'present'
 import yaml from 'js-yaml'
 
 import db from './db'
-import {buildDeptString, buildDeptNum} from 'modules/schools/stolaf'
-import {splitParagraph} from 'modules/lib'
+import {buildDeptString, buildDeptNum} from 'modules/schools/stolaf/deptnums'
+import {splitParagraph} from 'modules/lib/split-paragraph'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 import debug from 'debug'

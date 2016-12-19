@@ -1,7 +1,3 @@
-[version]
-^0.34.0
-
-
 [ignore]
 ; i don't even know why it checks json files
 .*\.json
@@ -13,8 +9,6 @@
 
 [libs]
 ./node_modules/fbjs/flow/lib
-./node_modules/iflow-bluebird/index.js.flow
-./node_modules/iflow-lodash/index.js.flow
 
 
 [options]

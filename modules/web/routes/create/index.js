@@ -1,9 +1,7 @@
 export default {
 	path: 'create',
 	getIndexRoute(location, cb) {
-		require.ensure([], () => {
-			cb(null, require('./routes/welcome').default)
-		}, 'new-student.index')
+		cb(null, require('./routes/welcome').default)
 	},
 	getChildRoutes(location, cb) {
 		cb(null, [
@@ -14,10 +12,8 @@ export default {
 		])
 	},
 	getComponents(location, cb) {
-		require.ensure([], () => {
-			cb(null, {
-				content: require('./containers/new-student').default,
-			})
-		}, 'new-student.components')
+		cb(null, {
+			content: require('./containers/new-student').default,
+		})
 	},
 }

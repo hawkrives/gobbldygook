@@ -20,8 +20,6 @@ mv build/* ./
 rm -f build/.DS_Store
 rmdir build/
 
-oghliner offline ./ --file-globs '*.js,*.css,*.woff,*.html,*.url'
-
 # and … push
 git add --all ./
 git commit -m "build app" --quiet

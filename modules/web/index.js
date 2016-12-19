@@ -6,8 +6,6 @@ Bluebird.config({
 	},
 })
 
-// import './offline'
-
 // Include fetch
 import 'whatwg-fetch'
 

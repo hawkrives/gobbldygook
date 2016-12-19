@@ -4,7 +4,8 @@ import ordinal from 'ord'
 import {oxford} from 'humanize-plus'
 import plur from 'plur'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
-import {expandYear, semesterName} from 'modules/schools/stolaf'
+// import {expandYear, semesterName} from 'modules/schools/stolaf'
+import {expandYear, semesterName} from 'modules/schools/stolaf/course-info'
 // import {alertCircled, iosCalendarOutline, iosClockOutline} from 'modules/web/icons/ionicons'
 
 export function checkForInvalidYear(course, scheduleYear) {
