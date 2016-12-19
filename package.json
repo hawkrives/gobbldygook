@@ -125,7 +125,7 @@
     "sto-sis-time-parser": "2.2.11",
     "text-table": "0.2.0",
     "treo": "0.6.0-rc2",
-    "uuid": "2.0.3",
+    "uuid": "3.0.1",
     "whatwg-fetch": "2.0.1"
   },
   "devDependencies": {
