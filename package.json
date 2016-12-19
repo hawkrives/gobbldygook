@@ -92,7 +92,6 @@
     "keymage": "1.1.3",
     "lodash": "4.17.2",
     "mkdirp": "0.5.1",
-    "mocha-junit-reporter": "^1.12.1",
     "node-fetch": "1.6.3",
     "nomnom": "1.8.1",
     "ord": "0.1.1",
