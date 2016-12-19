@@ -11,7 +11,7 @@ branches:
 install:
   # install node and npm packages
   - ps: Install-Product node $env:nodejs_version
-  - npm install
+  - yarn
 
 environment:
   nodejs_version: '6'
@@ -20,9 +20,10 @@ environment:
 test_script:
   # Output useful info for debugging.
   - node --version
-  - npm --version
+  - yarn --version
   # run tests
-  - npm run lint
-  - npm test
+  - yarn run lint
+  - yarn test
 
-build_script: 'npm run build-ci'
+build_script:
+  - yarn run build-ci

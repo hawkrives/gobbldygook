@@ -35,9 +35,9 @@ before_install:
   - npm install coveralls codecov
 
 script:
-  - npm run lint
-  - npm run run-coverage
-  - npm run build-ci
+  - yarn run lint
+  - yarn run run-coverage
+  - yarn run build-ci
 
 after_success:
   - nyc report --reporter=text-lcov | coveralls
