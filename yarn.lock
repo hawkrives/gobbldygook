@@ -4894,13 +4894,9 @@ react-dropzone@3.7.3:
   dependencies:
     attr-accept "^1.0.3"
 
-react-input-autosize@1.1.0:
+react-input-autosize@1.1.0, react-input-autosize@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-1.1.0.tgz#3fe1ac832387d8abab85f6051ceab1c9e5570853"
-
-react-input-autosize@^0.6.13:
-  version "0.6.13"
-  resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-0.6.13.tgz#386ff7a9d2c3dc016c265bf2e59d397050f65af7"
 
 react-modal@1.6.4:
   version "1.6.4"
@@ -4943,12 +4939,12 @@ react-router@3.0.0:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
-react-select@1.0.0-beta13:
-  version "1.0.0-beta13"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-beta13.tgz#148f22b74d33b3b6dad10781d4f60cd99a422455"
+react-select@1.0.0-rc.2:
+  version "1.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-rc.2.tgz#9fc11b149a3dc1ac831289d21b40a59742f82f8d"
   dependencies:
     classnames "^2.2.4"
-    react-input-autosize "^0.6.13"
+    react-input-autosize "^1.1.0"
 
 react-side-effect@^1.0.2:
   version "1.0.2"
