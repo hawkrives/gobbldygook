@@ -12,7 +12,6 @@ const DefinePlugin = webpack.DefinePlugin
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
 const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin
 const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
-const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
@@ -22,7 +21,7 @@ const isProduction = (process.env.NODE_ENV === 'production')
 const isDevelopment = (process.env.NODE_ENV === 'development')
 const isTest = (process.env.NODE_ENV === 'test')
 
-const outputFolder = 'build/'
+const outputFolder = __dirname + '/build/'
 const urlLoaderLimit = 10000
 let publicPath = '/'
 if (isProduction) {
@@ -52,7 +51,6 @@ const config = {
 	output: {
 		path: outputFolder,
 		publicPath: publicPath,
-		hash: true,
 
 		// extract-text-plugin uses [contenthash], and webpack uses [hash].
 		filename: isDevelopment ? 'app.js' : `${pkg.name}.[hash].js`,
@@ -63,10 +61,11 @@ const config = {
 	},
 
 	devServer: {
+		port: 3000, // for webpack-dev-server
+
 		// If `info` is enabled, then historyApiFallback doesn't work.
 		// info: false,
 		stats: {
-			colors: false,
 			assets: false,
 			version: false,
 			hash: false,
@@ -79,9 +78,7 @@ const config = {
 		// Makes webpack serve /index.html as the response to any request to
 		// webpack-dev-server, so GET / and GET /s/1234 both get the index
 		// page.
-		historyApiFallback: {
-			index: publicPath,
-		},
+		historyApiFallback: true,
 
 		// We also do the manual entry above and the manual adding of the hot
 		// module replacment plugin below.
@@ -94,7 +91,7 @@ const config = {
 	},
 
 	resolve: {
-		extensions: ['.js', '.json', ''],
+		extensions: ['.js', '.json'],
 		// Allow us to require things from modules/ instead of using giant
 		// relative paths everywhere. And, thanks to babel-plugin-webpack-alias,
 		// we can use these aliases in testing, too!
@@ -249,9 +246,6 @@ if (isDevelopment) {
 		'webpack-dev-server/client?/',
 		'webpack/hot/only-dev-server'
 	)
-
-	config.devServer.port = config.port
-	config.devServer.host = config.hostname
 
 	// add dev plugins
 	config.plugins.push(new HotModuleReplacementPlugin())
