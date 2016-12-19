@@ -30,14 +30,12 @@ branches:
 
 node_js: 7
 
-before_install:
-  - npm install coveralls codecov
-
 script:
   - yarn run lint
   - yarn run run-coverage
   - yarn run build-ci
 
 after_success:
+  - npm install coveralls codecov
   - nyc report --reporter=text-lcov | coveralls
   - nyc report --reporter=lcov > coverage.lcov && codecov
