@@ -2006,15 +2006,14 @@ eslint-plugin-babel@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-babel/-/eslint-plugin-babel-4.0.0.tgz#a92114e2c493ac3034b030d7ecf96e174a76ef3f"
 
-eslint-plugin-flowtype-errors@1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype-errors/-/eslint-plugin-flowtype-errors-1.5.0.tgz#e8031f25b2af4a6bd266d9f19abe28ca51cd7d2b"
+eslint-plugin-flowtype-errors@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype-errors/-/eslint-plugin-flowtype-errors-2.0.1.tgz#7bd6c5bf7f88e1f7537d5a98eb431cd74178c8af"
   dependencies:
     babel-plugin-transform-runtime "^6.15.0"
-    flow-bin "^0.33.0"
     q "^1.4.1"
     ramda "^0.22.1"
-    shelljs "^0.7.4"
+    shelljs "^0.7.5"
     slash "^1.0.0"
 
 eslint-plugin-flowtype@2.29.1:
@@ -2344,10 +2343,6 @@ flatten@^1.0.2:
 flow-bin@0.35.0:
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.35.0.tgz#63d4eb9582ce352541be98e6a424503217141b07"
-
-flow-bin@^0.33.0:
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.33.0.tgz#ef011eace7a6100f1ae08b852db78279032b8750"
 
 flux-standard-action@^0.6.1:
   version "0.6.1"
@@ -5448,7 +5443,7 @@ sha.js@2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/sha.js/-/sha.js-2.2.6.tgz#17ddeddc5f722fb66501658895461977867315ba"
 
-shelljs@^0.7.4, shelljs@^0.7.5:
+shelljs@^0.7.5:
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.5.tgz#2eef7a50a21e1ccf37da00df767ec69e30ad0675"
   dependencies:
