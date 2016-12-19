@@ -1,7 +1,8 @@
 # NOTE: This file must use spaces. Travis won't read it otherwise.
 
-# Opt-in to the new Travis infrastructure
+# Opt-in to Travis infrastructure
 sudo: false
+dist: trusty
 
 # Send travis notifications to Slack
 notifications:
