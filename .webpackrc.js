@@ -5,6 +5,8 @@ const pkg = require('./package.json')
 const webpack = require('webpack')
 const path = require('path')
 const url = require('url')
+const reject = require('lodash/reject')
+const endsWith = require('lodash/endsWith')
 
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
 const DedupePlugin = webpack.optimize.DedupePlugin
@@ -20,6 +22,11 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const isProduction = (process.env.NODE_ENV === 'production')
 const isDevelopment = (process.env.NODE_ENV === 'development')
 const isTest = (process.env.NODE_ENV === 'test')
+
+let style = 'style-loader'
+let css = 'css-loader'
+let sass = 'sass-loader'
+let cssModules = {loader: css, query: {modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]'}}
 
 const outputFolder = __dirname + '/build/'
 const urlLoaderLimit = 10000
@@ -229,15 +236,15 @@ const config = {
 				loader: 'url-loader',
 				options: {limit: urlLoaderLimit},
 			},
+
+			{test: /\.css$/, use: [style, css]},
+			{test: /\.scss$/, use: [style, css, sass]},
+			{test: /\.module.css$/, use: [style, cssModules]},
+			{test: /\.module.scss$/, use: [style, cssModules, sass]},
 		],
 	},
 }
 
-let style = 'style-loader'
-let css = 'css-loader'
-let sass = 'sass-loader'
-let cssModules = {loader: css, query: {modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]'}}
-let cssModulesProduction = {loader: css, query: {modules: true}}
 
 if (isDevelopment) {
 	// add dev server and hotloading clientside code
@@ -249,20 +256,6 @@ if (isDevelopment) {
 
 	// add dev plugins
 	config.plugins.push(new HotModuleReplacementPlugin())
-
-	// Add style loaders
-	config.module.rules.push({test: /\.css$/, use: [style, css]})
-	config.module.rules.push({test: /\.scss$/, use: [style, css, sass]})
-
-	config.module.rules.push({test: /\.module.css$/, use: [style, cssModules]})
-	config.module.rules.push({test: /\.module.scss$/, use: [style, cssModules, sass]})
-}
-
-else if (isTest) {
-	config.module.rules.push({test: /\.css$/, use: [style, css]})
-	config.module.rules.push({test: /\.module.css$/, use: [style, cssModules]})
-	config.module.rules.push({test: /\.scss$/, use: [style, css, sass]})
-	config.module.rules.push({test: /\.module.scss$/, use: [style, cssModules, sass]})
 }
 
 else if (isProduction) {
@@ -296,23 +289,15 @@ else if (isProduction) {
 		}),
 	])
 
-	config.module.rules.push({
-		test: /\.css$/,
-		use: ExtractTextPlugin.extract([style, css]),
-	})
-	config.module.rules.push({
-		test: /\.scss$/,
-		use: ExtractTextPlugin.extract([style, css, sass]),
-	})
-
-	config.module.rules.push({
-		test: /\.module.css$/,
-		use: ExtractTextPlugin.extract([style, cssModulesProduction]),
-	})
-	config.module.rules.push({
-		test: /\.module.scss$/,
-		use: ExtractTextPlugin.extract([style, cssModulesProduction, sass]),
-	})
+	// remove css plugins
+	const endsInCss = rule => endsWith(rule.test.toString(), 'css$/')
+	config.module.rules = reject(config.module.rules, endsInCss)
+	config.module.rules = config.module.rules.concat([
+		{test: /\.css$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [css]})},
+		{test: /\.scss$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [css, sass]})},
+		{test: /\.module.css$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [cssModules]})},
+		{test: /\.module.scss$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [cssModules, sass]})},
+	])
 }
 
 module.exports = config
