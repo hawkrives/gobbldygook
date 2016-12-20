@@ -3,7 +3,7 @@
 		// JSX, Flow
 		"react",
 		// Latest stable ECMAScript features
-		["latest", {"modules": false}],
+		["latest", {"es2015": {"modules": false}}],
 	],
 	"plugins": [
 		// class { handleClick = () => { } }
