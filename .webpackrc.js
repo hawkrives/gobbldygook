@@ -40,6 +40,10 @@ if (isProduction) {
 let cssFilename = isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`
 
 const config = {
+	devtool: isProduction
+		? 'cheap-module-source-map'
+		: 'cheap-module-eval-source-map',
+
 	stats: {},
 
 	entry: {
@@ -235,11 +239,7 @@ let sass = 'sass-loader'
 let cssModules = {loader: css, query: {modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]'}}
 let cssModulesProduction = {loader: css, query: {modules: true}}
 
-// dev specific stuff
 if (isDevelopment) {
-	// debugging option
-	config.devtool = 'eval'
-
 	// add dev server and hotloading clientside code
 	config.entry.main.unshift(
 		// 'react-hot-loader/patch',
@@ -265,9 +265,7 @@ else if (isTest) {
 	config.module.rules.push({test: /\.module.scss$/, use: [style, cssModules, sass]})
 }
 
-// production
 else if (isProduction) {
-	config.devtool = 'source-map'
 	config.stats.children = false
 
 	// minify in production
