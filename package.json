@@ -43,7 +43,7 @@
     ]
   },
   "scripts": {
-    "build": "npm run copy && cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --production --progress",
+    "build": "npm run copy && cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --progress",
     "build-ci": "npm run build -- --no-progress",
     "build-dev": "cross-env NODE_ENV=development webpack --config .webpackrc.js --bail --progress --devtool=source-map",
     "build-peg": "pegjs --allowed-start-rules Result,Filter < modules/hanson-format/parse-hanson-string.pegjs | babel-stdin | js-beautify -f - --end-with-newline --indent-with-tabs > modules/hanson-format/parse-hanson-string.js",
