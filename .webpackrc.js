@@ -74,8 +74,6 @@ const config = {
 	devServer: {
 		port: 3000, // for webpack-dev-server
 
-		// If `info` is enabled, then historyApiFallback doesn't work.
-		// info: false,
 		stats: {
 			assets: false,
 			version: false,
