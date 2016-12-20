@@ -42,6 +42,12 @@
       "__support__"
     ]
   },
+  "greenkeeper": {
+    "ignore": [
+      "history",
+      "babel-plugin-webpack-alias"
+    ]
+  },
   "scripts": {
     "build": "npm run copy && cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --progress",
     "build-ci": "npm run build -- --no-progress",
