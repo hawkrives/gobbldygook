@@ -9,7 +9,6 @@ const reject = require('lodash/reject')
 const endsWith = require('lodash/endsWith')
 
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
-const DedupePlugin = webpack.optimize.DedupePlugin
 const DefinePlugin = webpack.DefinePlugin
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
 const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin
@@ -261,7 +260,6 @@ else if (isProduction) {
 
 	// minify in production
 	config.plugins = config.plugins.concat([
-		new DedupePlugin(),
 		new UglifyJsPlugin({
 			sourceMap: true,
 			compress: {
