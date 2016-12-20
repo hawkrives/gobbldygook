@@ -228,12 +228,12 @@ const config = {
 			},
 			{
 				test: /\.(otf|eot|ttf|woff2?)$/,
-				loader: 'url-loader',
+				use: 'url-loader',
 				options: {limit: urlLoaderLimit},
 			},
 			{
 				test: /\.(jpe?g|png|gif)$/,
-				loader: 'url-loader',
+				use: 'url-loader',
 				options: {limit: urlLoaderLimit},
 			},
 
