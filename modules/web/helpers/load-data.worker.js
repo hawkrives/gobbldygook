@@ -168,7 +168,7 @@ const updateDatabase = async (type, infoFileBase, notificationId, infoFromServer
 		rawData = await (fetch(url).then(status).then(text))
 	}
 	catch (err) {
-		log('Could not fetch ${url}')
+		log(`Could not fetch ${url}`)
 		return false
 	}
 
