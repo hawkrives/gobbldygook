@@ -315,8 +315,4 @@ else if (isProduction) {
 	})
 }
 
-// else {
-// 	throw new Error('Unknown environment! Not development, production, nor test!')
-// }
-//
 module.exports = config
