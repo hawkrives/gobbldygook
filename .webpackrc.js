@@ -225,13 +225,11 @@ const config = {
 			},
 			{
 				test: /\.(otf|eot|ttf|woff2?)$/,
-				use: 'url-loader',
-				options: {limit: urlLoaderLimit},
+				use: [{loader: 'url-loader', options: {limit: urlLoaderLimit}}],
 			},
 			{
 				test: /\.(jpe?g|png|gif)$/,
-				use: 'url-loader',
-				options: {limit: urlLoaderLimit},
+				use: [{loader: 'url-loader', options: {limit: urlLoaderLimit}}],
 			},
 
 			{test: /\.css$/, use: [style, css]},
