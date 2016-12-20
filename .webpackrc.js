@@ -5,13 +5,14 @@ const pkg = require('./package.json')
 const webpack = require('webpack')
 const path = require('path')
 const url = require('url')
+const reject = require('lodash/reject')
+const endsWith = require('lodash/endsWith')
 
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
-const DedupePlugin = webpack.optimize.DedupePlugin
 const DefinePlugin = webpack.DefinePlugin
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
+const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin
 const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
-const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
@@ -21,7 +22,12 @@ const isProduction = (process.env.NODE_ENV === 'production')
 const isDevelopment = (process.env.NODE_ENV === 'development')
 const isTest = (process.env.NODE_ENV === 'test')
 
-const outputFolder = 'build/'
+let style = 'style-loader'
+let css = 'css-loader'
+let sass = 'sass-loader'
+let cssModules = {loader: css, query: {modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]'}}
+
+const outputFolder = __dirname + '/build/'
 const urlLoaderLimit = 10000
 let publicPath = '/'
 if (isProduction) {
@@ -37,26 +43,27 @@ if (isProduction) {
 	}
 }
 
-const config = {
-	replace: null,
-	port: 3000, // for webpack-dev-server
+let cssFilename = isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`
 
-	stats: {colors: false},
+const config = {
+	devtool: isProduction
+		? 'source-map'
+		: 'eval',
+
+	stats: {},
 
 	entry: {
 		main: ['./modules/web/index.js'],
-		common: ['bluebird', 'dnd-core', 'whatwg-fetch', 'redux', 'js-yaml'],
+		common: ['bluebird', 'dnd-core', 'whatwg-fetch', 'redux', 'js-yaml', 'lodash'],
 		react: ['react', 'react-dnd', 'react-redux', 'react-router', 'react-side-effect', 'react-modal'],
 	},
 
 	output: {
 		path: outputFolder,
 		publicPath: publicPath,
-		hash: true,
 
 		// extract-text-plugin uses [contenthash], and webpack uses [hash].
 		filename: isDevelopment ? 'app.js' : `${pkg.name}.[hash].js`,
-		cssFilename: isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`,
 		chunkFilename: 'chunk.[name].[chunkhash].js',
 
 		// Add /*filename*/ comments to generated require()s in the output.
@@ -64,10 +71,9 @@ const config = {
 	},
 
 	devServer: {
-		// If `info` is enabled, then historyApiFallback doesn't work.
-		// info: false,
+		port: 3000, // for webpack-dev-server
+
 		stats: {
-			colors: false,
 			assets: false,
 			version: false,
 			hash: false,
@@ -80,9 +86,7 @@ const config = {
 		// Makes webpack serve /index.html as the response to any request to
 		// webpack-dev-server, so GET / and GET /s/1234 both get the index
 		// page.
-		historyApiFallback: {
-			index: publicPath,
-		},
+		historyApiFallback: true,
 
 		// We also do the manual entry above and the manual adding of the hot
 		// module replacment plugin below.
@@ -95,7 +99,7 @@ const config = {
 	},
 
 	resolve: {
-		extensions: ['.js', '.json', ''],
+		extensions: ['.js', '.json'],
 		// Allow us to require things from modules/ instead of using giant
 		// relative paths everywhere. And, thanks to babel-plugin-webpack-alias,
 		// we can use these aliases in testing, too!
@@ -190,51 +194,54 @@ const config = {
 		// Watcher doesn't work well if you mistype casing in a path so we use
 		// a plugin that prints an error when you attempt to do this.
 		new CaseSensitivePathsPlugin(),
+
+		new LoaderOptionsPlugin({
+			options: {
+				worker: {
+					output: {
+						filename: '[hash].worker.js',
+						chunkFilename: '[id].[hash].worker.js',
+					},
+				},
+			},
+		}),
 	],
 
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loaders: ['babel-loader?cacheDirectory'],
+				use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
 			},
 			{
 				test: /\.worker.js$/,
 				exclude: /node_modules/,
-				loaders: ['worker-loader', 'babel-loader?cacheDirectory'],
+				use: ['worker-loader', {loader: 'babel-loader', options: {cacheDirectory: true}}],
 			},
 			{
 				test: /\.json$/,
-				loaders: ['json-loader'],
+				use: ['json-loader'],
 			},
 			{
 				test: /\.(otf|eot|ttf|woff2?)$/,
-				loader: 'url-loader',
-				query: {limit: urlLoaderLimit},
+				use: [{loader: 'url-loader', options: {limit: urlLoaderLimit}}],
 			},
 			{
 				test: /\.(jpe?g|png|gif)$/,
-				loader: 'url-loader',
-				query: {limit: urlLoaderLimit},
+				use: [{loader: 'url-loader', options: {limit: urlLoaderLimit}}],
 			},
-		],
-	},
 
-	worker: {
-		output: {
-			filename: '[hash].worker.js',
-			chunkFilename: '[id].[hash].worker.js',
-		},
+			{test: /\.css$/, use: [style, css]},
+			{test: /\.scss$/, use: [style, css, sass]},
+			{test: /\.module.css$/, use: [style, cssModules]},
+			{test: /\.module.scss$/, use: [style, cssModules, sass]},
+		],
 	},
 }
 
 
-// dev specific stuff
 if (isDevelopment) {
-	// debugging option
-	config.devtool = 'eval'
-
 	// add dev server and hotloading clientside code
 	config.entry.main.unshift(
 		// 'react-hot-loader/patch',
@@ -242,39 +249,17 @@ if (isDevelopment) {
 		'webpack/hot/only-dev-server'
 	)
 
-	config.devServer.port = config.port
-	config.devServer.host = config.hostname
-
 	// add dev plugins
 	config.plugins.push(new HotModuleReplacementPlugin())
-
-	// Add style loaders
-	config.module.loaders.push({test: /\.css$/, loaders: ['style', 'css']})
-	config.module.loaders.push({test: /\.scss$/, loaders: ['style', 'css', 'sass']})
-
-	let identName = '[path][name]·[local]·[hash:base64:5]'
-	config.module.loaders.push({test: /\.module.css$/, loaders: ['style', `css?modules&localIdentName=${identName}`]})
-	config.module.loaders.push({test: /\.module.scss$/, loaders: ['style', `css?modules&localIdentName=${identName}', 'sass`]})
 }
 
-else if (isTest) {
-	config.module.loaders.push({test: /\.css$/, loader: 'style!css'})
-	config.module.loaders.push({test: /\.module.css$/, loader: 'style!css?modules'})
-	config.module.loaders.push({test: /\.scss$/, loader: 'style!css!sass'})
-	config.module.loaders.push({test: /\.module.scss$/, loader: 'style!css?modules!sass'})
-}
-
-// production
 else if (isProduction) {
-	config.devtool = 'source-map'
 	config.stats.children = false
 
 	// minify in production
-	let extractor = new ExtractTextPlugin(config.output.cssFilename, {allChunks: true})
 	config.plugins = config.plugins.concat([
-		new DedupePlugin(),
-		new OccurenceOrderPlugin(true),
 		new UglifyJsPlugin({
+			sourceMap: true,
 			compress: {
 				warnings: false,
 				pure_getters: true, // eslint-disable-line camelcase
@@ -289,30 +274,24 @@ else if (isProduction) {
 				screw_ie8: true, // eslint-disable-line camelcase
 			},
 		}),
-		extractor,
+		new ExtractTextPlugin({
+			filename: cssFilename,
+			allChunks: true,
+		}),
+		new LoaderOptionsPlugin({
+			minimize: true,
+		}),
 	])
 
-	config.module.loaders.push({
-		test: /\.css$/,
-		loader: extractor.extract('style', ['css']),
-	})
-	config.module.loaders.push({
-		test: /\.scss$/,
-		loader: extractor.extract('style', ['css', 'sass']),
-	})
-
-	config.module.loaders.push({
-		test: /\.module.css$/,
-		loader: extractor.extract('style', ['css?modules']),
-	})
-	config.module.loaders.push({
-		test: /\.module.scss$/,
-		loader: extractor.extract('style', ['css?modules', 'sass']),
-	})
+	// remove css plugins
+	const endsInCss = rule => endsWith(rule.test.toString(), 'css$/')
+	config.module.rules = reject(config.module.rules, endsInCss)
+	config.module.rules = config.module.rules.concat([
+		{test: /\.css$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [css]})},
+		{test: /\.scss$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [css, sass]})},
+		{test: /\.module.css$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [cssModules]})},
+		{test: /\.module.scss$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [cssModules, sass]})},
+	])
 }
 
-// else {
-// 	throw new Error('Unknown environment! Not development, production, nor test!')
-// }
-//
 module.exports = config

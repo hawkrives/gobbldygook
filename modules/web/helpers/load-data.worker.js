@@ -1,21 +1,24 @@
 import Bluebird from 'bluebird'
 
 import 'whatwg-fetch'
-import {status, json, text, stringifyError} from 'modules/lib/fetch-helpers'
+import {status, json, text} from 'modules/lib/fetch-helpers'
+import serializeError from 'serialize-error'
 
 import range from 'idb-range'
-import {uniq} from 'lodash'
-import {forEach} from 'lodash'
-import {flatMap} from 'lodash'
-import {filter} from 'lodash'
-import {size} from 'lodash'
-import {startsWith} from 'lodash'
-import {map} from 'lodash'
-import {groupBy} from 'lodash'
-import {sortBy} from 'lodash'
-import {fromPairs} from 'lodash'
-import {some} from 'lodash'
-import {round} from 'lodash'
+import {
+	filter,
+	flatMap,
+	forEach,
+	fromPairs,
+	groupBy,
+	map,
+	round,
+	size,
+	some,
+	sortBy,
+	startsWith,
+	uniq,
+} from 'lodash'
 import present from 'present'
 import yaml from 'js-yaml'
 
@@ -167,7 +170,7 @@ const updateDatabase = async (type, infoFileBase, notificationId, infoFromServer
 		rawData = await (fetch(url).then(status).then(text))
 	}
 	catch (err) {
-		log('Could not fetch ${url}')
+		log(`Could not fetch ${url}`)
 		return false
 	}
 
@@ -344,7 +347,7 @@ self.addEventListener('message', async ({data}) => {
 			self.postMessage([id, 'result', result])
 		}
 		catch (err) {
-			self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
+			self.postMessage([id, 'error', JSON.parse(serializeError(err))])
 		}
 		return
 	}
@@ -354,6 +357,6 @@ self.addEventListener('message', async ({data}) => {
 		self.postMessage([id, 'result', result])
 	}
 	catch (err) {
-		self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
+		self.postMessage([id, 'error', JSON.parse(serializeError(err))])
 	}
 })
