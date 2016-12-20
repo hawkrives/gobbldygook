@@ -29,6 +29,7 @@
 			],
 		},
 		"test": {
+			"presets": [["latest", {"es2015": {"modules": "commonjs"}}]],
 			"plugins": [
 				"istanbul",
 				// allows tested files access to the webpack aliases
