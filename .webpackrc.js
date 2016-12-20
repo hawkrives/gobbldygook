@@ -54,8 +54,8 @@ const config = {
 
 	entry: {
 		main: ['./modules/web/index.js'],
-		// common: ['bluebird', 'dnd-core', 'whatwg-fetch', 'redux', 'js-yaml'],
-		// react: ['react', 'react-dnd', 'react-redux', 'react-router', 'react-side-effect', 'react-modal'],
+		common: ['bluebird', 'dnd-core', 'whatwg-fetch', 'redux', 'js-yaml', 'lodash'],
+		react: ['react', 'react-dnd', 'react-redux', 'react-router', 'react-side-effect', 'react-modal'],
 	},
 
 	output: {
@@ -154,8 +154,8 @@ const config = {
 							: ''}
 
 						<body><main id="gobbldygook"></main></body>
-						<!--<script src="${publicPath}${context.common}"></script>
-						<script src="${publicPath}${context.react}"></script>-->
+						<script src="${publicPath}${context.common}"></script>
+						<script src="${publicPath}${context.react}"></script>
 						<script src="${publicPath}${context.main}"></script>
 						</html>
 					`,
@@ -185,11 +185,11 @@ const config = {
 
 		// Extract the common libraries into a single file so that the chunks
 		// don't need to individually bundle them.
-		// new CommonsChunkPlugin({
-		// 	names: ['react', 'common'],
-		// 	filename: '[name].[hash].js',
-		// 	minChunks: Infinity,
-		// }),
+		new CommonsChunkPlugin({
+			names: ['react', 'common'],
+			filename: '[name].[hash].js',
+			minChunks: Infinity,
+		}),
 
 		// Watcher doesn't work well if you mistype casing in a path so we use
 		// a plugin that prints an error when you attempt to do this.
