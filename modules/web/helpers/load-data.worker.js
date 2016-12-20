@@ -5,18 +5,20 @@ import {status, json, text} from 'modules/lib/fetch-helpers'
 import serializeError from 'serialize-error'
 
 import range from 'idb-range'
-import {uniq} from 'lodash'
-import {forEach} from 'lodash'
-import {flatMap} from 'lodash'
-import {filter} from 'lodash'
-import {size} from 'lodash'
-import {startsWith} from 'lodash'
-import {map} from 'lodash'
-import {groupBy} from 'lodash'
-import {sortBy} from 'lodash'
-import {fromPairs} from 'lodash'
-import {some} from 'lodash'
-import {round} from 'lodash'
+import {
+	filter,
+	flatMap,
+	forEach,
+	fromPairs,
+	groupBy,
+	map,
+	round,
+	size,
+	some,
+	sortBy,
+	startsWith,
+	uniq,
+} from 'lodash'
 import present from 'present'
 import yaml from 'js-yaml'
 
