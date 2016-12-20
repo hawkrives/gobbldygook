@@ -47,8 +47,8 @@ let cssFilename = isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`
 
 const config = {
 	devtool: isProduction
-		? 'cheap-module-source-map'
-		: 'cheap-module-eval-source-map',
+		? 'source-map'
+		: 'eval',
 
 	stats: {},
 
