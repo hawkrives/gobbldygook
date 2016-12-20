@@ -2,7 +2,7 @@ import Bluebird from 'bluebird'
 
 import 'whatwg-fetch'
 import {status, json, text} from 'modules/lib/fetch-helpers'
-import stringifyError from 'stringify-error'
+import serializeError from 'serialize-error'
 
 import range from 'idb-range'
 import {uniq} from 'lodash'
@@ -345,7 +345,7 @@ self.addEventListener('message', async ({data}) => {
 			self.postMessage([id, 'result', result])
 		}
 		catch (err) {
-			self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
+			self.postMessage([id, 'error', JSON.parse(serializeError(err))])
 		}
 		return
 	}
@@ -355,6 +355,6 @@ self.addEventListener('message', async ({data}) => {
 		self.postMessage([id, 'result', result])
 	}
 	catch (err) {
-		self.postMessage([id, 'error', JSON.parse(stringifyError(err))])
+		self.postMessage([id, 'error', JSON.parse(serializeError(err))])
 	}
 })
