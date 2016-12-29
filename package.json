@@ -166,7 +166,7 @@
     "flow-bin": "0.37.4",
     "iflow-bluebird": "1.1.26",
     "iflow-lodash": "1.1.27",
-    "jest": "18.0.0",
+    "jest": "18.1.0",
     "js-beautify": "1.6.7",
     "json-loader": "0.5.4",
     "mocha": "3.2.0",
