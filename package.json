@@ -95,7 +95,7 @@
     "js-yaml": "3.7.0",
     "junk": "2.0.0",
     "keymage": "1.1.3",
-    "lodash": "4.17.3",
+    "lodash": "4.17.4",
     "mkdirp": "0.5.1",
     "node-fetch": "1.6.3",
     "nomnom": "1.8.1",
