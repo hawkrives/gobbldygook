@@ -167,7 +167,7 @@
     "iflow-bluebird": "1.1.26",
     "iflow-lodash": "1.1.27",
     "jest": "18.1.0",
-    "js-beautify": "1.6.7",
+    "js-beautify": "1.6.8",
     "json-loader": "0.5.4",
     "mocha": "3.2.0",
     "mock-require": "2.0.0",
