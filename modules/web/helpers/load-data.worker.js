@@ -1,4 +1,3 @@
-// @flow
 import 'whatwg-fetch'
 import {status, json, text} from 'modules/lib/fetch-helpers'
 import serializeError from 'serialize-error'
@@ -75,7 +74,7 @@ function getCacheStoreName(type) {
 }
 
 
-function storeCourses(path: string, data) {
+function storeCourses(path, data) {
 	log(`storeCourses(): ${path}`)
 
 	let coursesToStore = map(data, course => ({
@@ -153,7 +152,7 @@ function cleanPriorData(path, type) {
 	})
 }
 
-function storeData(path: string, type: string, data: Object) {
+function storeData(path, type, data) {
 	// store the new data
 	if (type === 'courses') {
 		return storeCourses(path, data)
@@ -163,7 +162,7 @@ function storeData(path: string, type: string, data: Object) {
 	}
 }
 
-function parseData(raw, type): Object {
+function parseData(raw, type) {
 	if (type === 'courses') {
 		return JSON.parse(raw)
 	}
