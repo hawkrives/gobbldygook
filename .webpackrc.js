@@ -105,6 +105,8 @@ const config = {
 		// we can use these aliases in testing, too!
 		alias: {
 			modules: path.resolve(__dirname, 'modules'),
+			react: 'preact-compat',
+			'react-dom': 'preact-compat',
 		},
 	},
 

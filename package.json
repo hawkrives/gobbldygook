@@ -90,6 +90,8 @@
     "nomnom": "1.8.1",
     "ord": "0.1.1",
     "plur": "2.1.2",
+    "preact": "7.1.0",
+    "preact-compat": "3.10.0",
     "present": "1.0.0",
     "pretty-ms": "2.1.0",
     "react": "15.4.2",
