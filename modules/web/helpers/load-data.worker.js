@@ -4,20 +4,18 @@ import serializeError from 'serialize-error'
 import PQueue from 'p-queue'
 
 import range from 'idb-range'
-import {
-	filter,
-	flatMap,
-	forEach,
-	fromPairs,
-	groupBy,
-	map,
-	round,
-	size,
-	some,
-	sortBy,
-	startsWith,
-	uniq,
-} from 'lodash'
+import filter from 'lodash/filter'
+import flatMap from 'lodash/flatMap'
+import forEach from 'lodash/forEach'
+import fromPairs from 'lodash/fromPairs'
+import groupBy from 'lodash/groupBy'
+import map from 'lodash/map'
+import round from 'lodash/round'
+import size from 'lodash/size'
+import some from 'lodash/some'
+import sortBy from 'lodash/sortBy'
+import startsWith from 'lodash/startsWith'
+import uniq from 'lodash/uniq'
 import present from 'present'
 import yaml from 'js-yaml'
 
