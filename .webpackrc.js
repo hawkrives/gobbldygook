@@ -220,7 +220,7 @@ const config = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules/,
+				exclude: /node_modules\/(?!(preact-compat)\/).*/,
 				use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
 			},
 			{
