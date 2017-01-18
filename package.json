@@ -157,7 +157,7 @@
     "css-loader": "0.26.1",
     "enzyme": "2.7.0",
     "eslint": "3.13.1",
-    "eslint-plugin-babel": "4.0.0",
+    "eslint-plugin-babel": "4.0.1",
     "eslint-plugin-flowtype": "2.29.2",
     "eslint-plugin-flowtype-errors": "2.0.3",
     "eslint-plugin-react": "6.8.0",
