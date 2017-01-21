@@ -7,6 +7,7 @@ import getOverride from './get-override'
 import hasOverride from './has-override'
 import isRequirementName from './is-requirement-name'
 import mapValues from 'lodash/mapValues'
+import Set from 'es6-set'
 import type {Requirement, Course, OverridesObject, FulfillmentsObject, crsidT} from './types'
 
 
