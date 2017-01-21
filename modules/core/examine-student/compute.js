@@ -18,7 +18,7 @@ type ComputeArguments = {
 	overrides: OverridesObject,
 	fulfillments: FulfillmentsObject,
 	dirty?: Set<crsidT>,
-}
+};
 
 export default function compute(requirement: Requirement, {path, courses=[], overrides={}, fulfillments={}, dirty=new Set()}: ComputeArguments) {
 	let childrenShareCourses = Boolean(requirement['children share courses'])
