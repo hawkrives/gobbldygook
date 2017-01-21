@@ -1,3 +1,4 @@
+// @flow
 import uniqBy from 'lodash/uniqBy'
 import filter from 'lodash/filter'
 import flatMap from 'lodash/flatMap'

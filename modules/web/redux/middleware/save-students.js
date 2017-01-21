@@ -1,3 +1,4 @@
+// @flow
 import * as studentActions from '../students/constants'
 import {ActionTypes as UndoableActionTypes} from 'redux-undo'
 import filter from 'lodash/filter'

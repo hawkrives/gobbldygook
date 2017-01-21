@@ -1,3 +1,4 @@
+// @flow
 const parse = require('modules/core/examine-student/parse-hanson-string').parse
 const nom = require('nomnom')
 const stringify = require('stabilize')

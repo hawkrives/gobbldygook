@@ -1,3 +1,4 @@
+// @flow
 export const sample = Object.freeze({
 	courses: [
 		{

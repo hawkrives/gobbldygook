@@ -1,3 +1,4 @@
+// @flow
 xdescribe('loadStudent', () => {
 	xit('', () => {})
 })

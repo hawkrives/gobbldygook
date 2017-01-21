@@ -1,3 +1,4 @@
+// @flow
 /**
  * Pluralizes an area type
  * @private

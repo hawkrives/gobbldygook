@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react'
 
 import Button from 'modules/web/components/button'

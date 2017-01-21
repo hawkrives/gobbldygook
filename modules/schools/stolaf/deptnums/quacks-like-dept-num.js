@@ -1,3 +1,4 @@
+// @flow
 import {deptNumRegex} from './dept-num-regex'
 
 // Checks if a string looks like a deptnum.

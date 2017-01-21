@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import compareCourseToCourse from '../compare-course-to-course'
 

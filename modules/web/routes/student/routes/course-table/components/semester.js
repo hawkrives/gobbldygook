@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react'
 import {findDOMNode} from 'react-dom'
 import cx from 'classnames'

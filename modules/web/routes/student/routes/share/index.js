@@ -1,3 +1,4 @@
+// @flow
 export default {
 	path: 'share',
 	getComponents(location, cb) {

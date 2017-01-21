@@ -1,3 +1,4 @@
+// @flow
 import debug from 'debug'
 import delay from 'delay'
 const log = debug('web:redux:notifications')

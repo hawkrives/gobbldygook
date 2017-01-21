@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {quacksLikeDeptNum} from '../quacks-like-dept-num'
 

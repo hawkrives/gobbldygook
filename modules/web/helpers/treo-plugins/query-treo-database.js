@@ -1,3 +1,4 @@
+// @flow
 import includes from 'lodash/includes'
 import filter from 'lodash/filter'
 import head from 'lodash/head'

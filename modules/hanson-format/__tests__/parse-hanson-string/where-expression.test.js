@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {customParser, qualification, boolean} from './parse-hanson-string.support'
 const parseWhere = customParser({allowedStartRules: ['Where']})

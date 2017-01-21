@@ -1,3 +1,4 @@
+// @flow
 import React, {Component, PropTypes} from 'react'
 import cx from 'classnames'
 import map from 'lodash/map'

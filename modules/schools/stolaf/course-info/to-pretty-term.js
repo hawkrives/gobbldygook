@@ -1,3 +1,4 @@
+// @flow
 import {semesterName} from './semester-name'
 import {expandYear} from './expand-year'
 

@@ -1,3 +1,4 @@
+// @flow
 import nomnom from 'nomnom'
 import yaml from 'js-yaml'
 

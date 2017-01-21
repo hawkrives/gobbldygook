@@ -1,3 +1,4 @@
+// @flow
 import map from 'lodash/map'
 import uniq from 'lodash/uniq'
 

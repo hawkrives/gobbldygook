@@ -1,3 +1,4 @@
+// @flow
 import sortBy from 'lodash/sortBy'
 // import memoize from 'lodash/memoize'
 // import identity from 'lodash/identity'

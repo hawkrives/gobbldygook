@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react'
 import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'

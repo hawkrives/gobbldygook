@@ -1,3 +1,4 @@
+// @flow
 import mkdirp from 'mkdirp'
 import find from 'lodash/find'
 import some from 'lodash/some'

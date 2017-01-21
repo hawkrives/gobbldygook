@@ -1,3 +1,4 @@
+// @flow
 import {tryReadJsonFile} from './read-file'
 
 import flatten from 'lodash/flatten'

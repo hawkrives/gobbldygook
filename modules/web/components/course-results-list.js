@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react'
 import map from 'lodash/map'
 import InlineCourse from './inline-course'

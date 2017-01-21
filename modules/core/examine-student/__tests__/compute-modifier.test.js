@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import cloneDeep from 'lodash/cloneDeep'
 import computeChunk, {computeModifier} from '../compute-chunk'

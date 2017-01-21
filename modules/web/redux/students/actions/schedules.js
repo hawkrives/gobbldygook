@@ -1,3 +1,4 @@
+// @flow
 import {Schedule} from 'modules/core'
 
 import {

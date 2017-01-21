@@ -1,3 +1,4 @@
+// @flow
 export const areaTypeConstants = {
 	DEGREE: 'degree',
 	MAJOR: 'major',

@@ -1,3 +1,4 @@
+// @flow
 import db from './db'
 import {buildQueryFromString} from 'modules/core'
 import compact from 'lodash/compact'

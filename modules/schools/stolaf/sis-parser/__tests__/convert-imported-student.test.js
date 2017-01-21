@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import every from 'lodash/every'
 import find from 'lodash/find'

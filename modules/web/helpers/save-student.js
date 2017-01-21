@@ -1,3 +1,4 @@
+// @flow
 import union from 'lodash/union'
 import reject from 'lodash/reject'
 import stringify from 'stabilize'

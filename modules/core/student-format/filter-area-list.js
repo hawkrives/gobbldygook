@@ -1,3 +1,4 @@
+// @flow
 import reject from 'lodash/reject'
 import groupBy from 'lodash/groupBy'
 import flatten from 'lodash/flatten'

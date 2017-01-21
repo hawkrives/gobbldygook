@@ -1,3 +1,4 @@
+// @flow
 import flatten from 'lodash/flatten'
 import includes from 'lodash/includes'
 

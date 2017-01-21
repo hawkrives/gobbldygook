@@ -1,3 +1,4 @@
+// @flow
 export default function applyFulfillmentToExpression(expr, fulfillment) {
 	// If it's a Boolean / course expr, it gets wrapped in an OR.
 	// Otherwise, we don't do anything at this stage.

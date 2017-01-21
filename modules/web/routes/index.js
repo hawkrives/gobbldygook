@@ -1,3 +1,4 @@
+// @flow
 export default {
 	component: require('modules/web/containers/app').default,
 	childRoutes: [{

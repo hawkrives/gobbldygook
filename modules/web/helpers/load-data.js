@@ -1,3 +1,4 @@
+// @flow
 const uniqueId = require('lodash/uniqueId')
 import {status, text} from 'modules/lib'
 import debug from 'debug'

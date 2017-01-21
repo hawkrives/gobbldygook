@@ -1,3 +1,4 @@
+// @flow
 export const SORT_BY = {
 	'year': 'Year',
 	'title': 'Title',

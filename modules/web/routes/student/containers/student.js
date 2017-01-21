@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes, cloneElement } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'

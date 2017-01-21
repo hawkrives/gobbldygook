@@ -1,3 +1,4 @@
+// @flow
 import {NetworkError} from './errors'
 
 export function status(response) {

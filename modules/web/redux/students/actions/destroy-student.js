@@ -1,3 +1,4 @@
+// @flow
 import {removeStudentFromCache} from '../../../helpers/save-student'
 
 import {

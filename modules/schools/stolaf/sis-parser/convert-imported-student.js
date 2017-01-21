@@ -1,3 +1,4 @@
+// @flow
 import {Student, Schedule} from 'modules/core/student-format'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'

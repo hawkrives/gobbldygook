@@ -1,3 +1,4 @@
+// @flow
 export default function humanizeOperator(operator) {
 	if (operator === '$gte') {
 		return ''

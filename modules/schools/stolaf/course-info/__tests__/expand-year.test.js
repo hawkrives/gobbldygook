@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {expandYear, expandYearToFull, expandYearToShort} from '../expand-year'
 

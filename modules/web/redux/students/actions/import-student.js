@@ -1,3 +1,4 @@
+// @flow
 import {Student} from 'modules/core'
 
 import {

@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {buildQueryFromString} from '../build-query-from-string'
 

@@ -1,3 +1,4 @@
+// @flow
 import uniq from 'lodash/uniq'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'

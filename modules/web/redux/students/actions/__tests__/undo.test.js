@@ -1,3 +1,4 @@
+// @flow
 xdescribe('undo', () => {
 	xit('', () => {})
 })

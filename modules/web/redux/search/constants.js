@@ -1,3 +1,4 @@
+// @flow
 export const UPDATE_QUERY = 'gobbldygook/search/UPDATE_QUERY'
 export const SUBMIT_QUERY = 'gobbldygook/search/SUBMIT_QUERY'
 export const SORT_RESULTS = 'gobbldygook/search/SORT_RESULTS'

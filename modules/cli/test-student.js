@@ -1,3 +1,4 @@
+// @flow
 import pify from 'pify'
 const fs = pify(require('graceful-fs'))
 import nom from 'nomnom'

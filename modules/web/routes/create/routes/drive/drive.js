@@ -1,3 +1,4 @@
+// @flow
 import React, {Component} from 'react'
 import ScreenToolbar from '../../components/screen-toolbar'
 

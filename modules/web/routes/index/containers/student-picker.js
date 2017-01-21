@@ -1,3 +1,4 @@
+// @flow
 import React, {Component, PropTypes} from 'react'
 import StudentPicker from '../components/student-picker'
 import { bindActionCreators } from 'redux'

@@ -1,3 +1,4 @@
+// @flow
 import compact from 'lodash/compact'
 import every from 'lodash/every'
 import has from 'lodash/has'

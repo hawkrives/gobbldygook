@@ -1,3 +1,4 @@
+// @flow
 import computeCountWithOperator from './compute-count-with-operator'
 
 export default function applyFulfillmentToResult({fulfillment, expr, computedResult, matches, counted}) {

@@ -1,3 +1,4 @@
+// @flow
 /* globals __dirname */
 /* eslint no-confusing-arrow: 0 */
 

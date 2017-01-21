@@ -1,3 +1,4 @@
+// @flow
 import reduce from 'lodash/reduce'
 import zip from 'lodash/zip'
 import has from 'lodash/has'

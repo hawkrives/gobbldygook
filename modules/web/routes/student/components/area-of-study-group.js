@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react'
 import map from 'lodash/map'
 import {pluralizeArea} from 'modules/core/examine-student'

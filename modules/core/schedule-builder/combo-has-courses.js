@@ -1,3 +1,4 @@
+// @flow
 import takeWhile from 'lodash/takeWhile'
 import {queryCourses} from 'modules/core/search-queries'
 

@@ -1,3 +1,4 @@
+// @flow
 import {evaluate} from 'modules/core/examine-student'
 import nomnom from 'nomnom'
 import fs from 'graceful-fs'

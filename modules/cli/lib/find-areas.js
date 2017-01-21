@@ -1,3 +1,4 @@
+// @flow
 const flatten = require('lodash/flatten')
 const glob = require('glob')
 const junk = require('junk')

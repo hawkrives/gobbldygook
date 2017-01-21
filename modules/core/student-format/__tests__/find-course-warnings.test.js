@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 import {

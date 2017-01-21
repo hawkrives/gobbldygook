@@ -1,3 +1,4 @@
+// @flow
 /* global chrome:false */
 const url = 'https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld'
 

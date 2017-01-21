@@ -1,3 +1,4 @@
+// @flow
 import db from './db'
 import {enhanceHanson} from 'modules/hanson-format'
 import some from 'lodash/some'

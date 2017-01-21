@@ -1,3 +1,4 @@
+// @flow
 import words from 'lodash/words'
 import deburr from 'lodash/deburr'
 

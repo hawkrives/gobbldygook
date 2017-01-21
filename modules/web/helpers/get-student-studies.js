@@ -1,3 +1,4 @@
+// @flow
 import loadArea from './load-area'
 import map from 'lodash/map'
 import debug from 'debug'

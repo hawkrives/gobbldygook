@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {customParser, course, reference, boolean} from './parse-hanson-string.support'
 const parse = customParser({allowedStartRules: ['Of']})

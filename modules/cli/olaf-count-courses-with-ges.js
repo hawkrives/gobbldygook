@@ -1,3 +1,4 @@
+// @flow
 /* olaf-count-courses-with-ges
  * This script takes a list of terms (f.ex. 20151 for Fall 2015) and returns the number of courses
  * with ge requirements, grouped by the number of ge requirements it offeers, per term.

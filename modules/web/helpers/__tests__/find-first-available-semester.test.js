@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {findFirstAvailableSemester} from '../find-first-available-semester'
 

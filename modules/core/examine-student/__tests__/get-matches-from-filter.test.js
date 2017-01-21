@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import getMatchesFromFilter from '../get-matches-from-filter'
 

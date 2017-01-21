@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import getMatchesFromChildren from '../get-matches-from-children'
 

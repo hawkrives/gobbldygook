@@ -1,3 +1,4 @@
+// @flow
 export default {
 	path: 'areas(/:type)(/:name)(/:revision)',
 

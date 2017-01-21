@@ -1,3 +1,4 @@
+// @flow
 import every from 'lodash/every'
 
 export function compareProps(oldProps, newProps) {

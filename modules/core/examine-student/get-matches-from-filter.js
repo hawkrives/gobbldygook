@@ -1,3 +1,4 @@
+// @flow
 import assertKeys from './assert-keys'
 
 /**

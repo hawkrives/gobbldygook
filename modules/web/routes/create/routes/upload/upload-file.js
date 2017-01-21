@@ -1,3 +1,4 @@
+// @flow
 import React, {Component, PropTypes} from 'react'
 import DropZone from 'react-dropzone'
 import map from 'lodash/map'

@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react'
 import Icon from 'modules/web/components/icon'
 import {checkmark, close} from 'modules/web/icons/ionicons'

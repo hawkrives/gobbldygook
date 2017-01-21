@@ -1,3 +1,4 @@
+// @flow
 import {selectAll} from 'css-select'
 import map from 'lodash/map'
 import filter from 'lodash/filter'

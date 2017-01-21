@@ -1,3 +1,4 @@
+// @flow
 import isString from 'lodash/isString'
 import {v4 as uuid} from 'uuid'
 

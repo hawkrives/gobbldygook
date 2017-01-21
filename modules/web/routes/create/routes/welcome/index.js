@@ -1,3 +1,4 @@
+// @flow
 export default {
 	getComponent(location, cb) {
 		require.ensure([], () => {

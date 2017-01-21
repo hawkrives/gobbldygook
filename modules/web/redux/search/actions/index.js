@@ -1,3 +1,4 @@
+// @flow
 import { ga } from '../../../analytics'
 import queryCourseDatabase from '../../../helpers/query-course-database'
 import present from 'present'

@@ -1,3 +1,4 @@
+// @flow
 import filter from 'lodash/filter'
 import forEach from 'lodash/forEach'
 import isPlainObject from 'lodash/isPlainObject'

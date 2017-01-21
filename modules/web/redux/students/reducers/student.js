@@ -1,3 +1,4 @@
+// @flow
 import undoable from 'redux-undo'
 
 import {

@@ -1,3 +1,4 @@
+// @flow
 import props from 'p-props'
 import flatten from 'lodash/flatten'
 import {AuthError, NetworkError} from 'modules/lib'

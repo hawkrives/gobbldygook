@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {to12HourTime} from '../to-12-hour-time'
 

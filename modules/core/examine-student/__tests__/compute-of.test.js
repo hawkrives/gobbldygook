@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {computeOf} from '../compute-chunk'
 

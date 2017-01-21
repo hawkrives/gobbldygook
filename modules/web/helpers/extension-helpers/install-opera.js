@@ -1,3 +1,4 @@
+// @flow
 /* global opr:false */
 const id = '227069'
 

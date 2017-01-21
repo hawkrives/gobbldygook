@@ -1,3 +1,4 @@
+// @flow
 import mapValues from 'lodash/mapValues'
 import {validateSchedule} from './validate-schedule'
 

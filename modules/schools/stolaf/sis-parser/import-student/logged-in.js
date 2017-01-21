@@ -1,3 +1,4 @@
+// @flow
 import {AuthError} from 'modules/lib'
 import {extractStudentIds} from './student-ids'
 import {COURSES_URL} from './urls'

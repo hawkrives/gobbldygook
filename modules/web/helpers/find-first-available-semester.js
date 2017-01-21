@@ -1,3 +1,4 @@
+// @flow
 import max from 'lodash/max'
 import filter from 'lodash/filter'
 import map from 'lodash/map'

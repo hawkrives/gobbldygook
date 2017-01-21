@@ -1,3 +1,4 @@
+// @flow
 import filter from 'lodash/filter'
 import map from 'lodash/map'
 import fromPairs from 'lodash/fromPairs'

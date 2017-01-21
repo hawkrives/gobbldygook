@@ -1,3 +1,4 @@
+// @flow
 /* globals __dirname */
 
 import {parseHtml} from '../../parse-html'

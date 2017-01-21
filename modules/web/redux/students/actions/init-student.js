@@ -1,3 +1,4 @@
+// @flow
 import forEach from 'lodash/forEach'
 import range from 'lodash/range'
 import size from 'lodash/size'

@@ -1,3 +1,4 @@
+// @flow
 import omit from 'lodash/omit'
 import {ActionTypes as UndoableActionTypes} from 'redux-undo'
 import debug from 'debug'

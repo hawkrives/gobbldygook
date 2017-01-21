@@ -1,3 +1,4 @@
+// @flow
 /* globals module */
 import { applyMiddleware, createStore, compose } from 'redux'
 import { persistState } from 'redux-devtools'

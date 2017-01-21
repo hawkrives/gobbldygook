@@ -1,3 +1,4 @@
+// @flow
 import {ActionTypes as UndoableActionTypes} from 'redux-undo'
 
 export function undo(id) {

@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import findCourse from '../find-course'
 

@@ -1,3 +1,4 @@
+// @flow
 export default {
 	path: 'degub',
 	getComponents(state, cb) {

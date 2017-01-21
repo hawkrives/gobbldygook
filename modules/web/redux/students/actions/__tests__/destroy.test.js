@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 
 import {destroyStudent} from '../destroy-student'

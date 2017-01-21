@@ -1,3 +1,4 @@
+// @flow
 import {expect} from 'chai'
 import {sortStudiesByType} from '../sort-studies-by-type'
 

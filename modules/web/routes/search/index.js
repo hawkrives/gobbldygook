@@ -1,3 +1,4 @@
+// @flow
 export default {
 	path: 'search',
 	getComponents(state, cb) {

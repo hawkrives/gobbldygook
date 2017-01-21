@@ -1,3 +1,4 @@
+// @flow
 export default {
 	path: 'semester/:year/:semester',
 	getComponents(location, cb) {

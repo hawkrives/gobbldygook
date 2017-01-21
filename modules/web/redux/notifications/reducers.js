@@ -1,3 +1,4 @@
+// @flow
 import omit from 'lodash/omit'
 
 import {

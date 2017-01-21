@@ -1,3 +1,4 @@
+// @flow
 import mapValues from 'lodash/mapValues'
 import props from 'p-props'
 import {getCourse} from './get-courses'
