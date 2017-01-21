@@ -96,14 +96,14 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 
 const initialState = {
 	error: '',
-	groupBy: GROUP_BY.get('term'),
+	groupBy: GROUP_BY['term'],
 	hasQueried: false,
 	inProgress: false,
 	partial: {},
 	rawResults: [],
 	query: '',
 	results: [],
-	sortBy: SORT_BY.get('year'),
+	sortBy: SORT_BY['year'],
 }
 
 export default function reducer(state = initialState, action) {

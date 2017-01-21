@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
 import map from 'lodash/map'
+import values from 'lodash/values'
 import {toPrettyTerm} from 'modules/schools/stolaf'
 
 import Button from './button'
@@ -107,13 +108,13 @@ export default function CourseSearcher(props) {
 					<span className='filter'>
 						<label htmlFor='sort'>Sort by:</label><br />
 						<select id='sort' value={sortBy} onChange={onSortChange}>
-							{map([...SORT_BY.values()], opt => <option key={opt} value={opt}>{opt}</option>)}
+							{map(SORT_BY, opt => <option key={opt} value={opt}>{opt}</option>)}
 						</select>
 					</span>
 					<span className='filter'>
 						<label htmlFor='group'>Group by:</label><br />
 						<select id='group' value={groupBy} onChange={onGroupByChange}>
-							{map([...GROUP_BY.values()], opt => <option key={opt} value={opt}>{opt}</option>)}
+							{map(GROUP_BY, opt => <option key={opt} value={opt}>{opt}</option>)}
 						</select>
 					</span>
 				</div>}
@@ -126,7 +127,7 @@ export default function CourseSearcher(props) {
 
 CourseSearcher.propTypes = {
 	error: PropTypes.string,
-	groupBy: PropTypes.oneOf([...GROUP_BY.values()]).isRequired,
+	groupBy: PropTypes.oneOf(values(GROUP_BY)).isRequired,
 	hasQueried: PropTypes.bool,
 	inProgress: PropTypes.bool.isRequired,
 	onCloseSearcher: PropTypes.func.isRequired,
@@ -138,6 +139,6 @@ CourseSearcher.propTypes = {
 	partial: PropTypes.object,
 	query: PropTypes.string.isRequired,
 	results: PropTypes.array.isRequired,
-	sortBy: PropTypes.oneOf([...SORT_BY.values()]).isRequired,
+	sortBy: PropTypes.oneOf(values(SORT_BY)).isRequired,
 	studentId: PropTypes.string,
 }
