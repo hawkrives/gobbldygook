@@ -1,5 +1,3 @@
-import plur from 'plur'
-
 /**
  * Pluralizes an area type
  * @private
@@ -7,5 +5,14 @@ import plur from 'plur'
  * @returns {string} - the pluralized type
  */
 export default function pluralizeArea(type) {
-	return plur(type.toLowerCase(), 2)
+  switch (type.toLowerCase()) {
+    case 'degree':
+      return 'degrees'
+    case 'major':
+      return 'majors'
+    case 'concentration':
+      return 'concentrations'
+    case 'emphasis':
+      return 'emphases'
+  }
 }
