@@ -2,7 +2,7 @@ import db from './db'
 import map from 'lodash/map'
 import omit from 'lodash/omit'
 
-const courseCache = new Map()
+const courseCache = Object.create(null)
 // Gets a course from the database.
 // @param {Number} clbid - a class/lab ID
 // @param {Number} term - a course term
@@ -14,8 +14,8 @@ export async function getCourse({clbid, term}, fabrications={}) {
 		return fabrications[clbid]
 	}
 
-	if (courseCache.has(clbid)) {
-		return await courseCache.get(clbid)
+	if (courseCache.hasOwnProperty(clbid)) {
+		return courseCache[clbid]
 	}
 
 	let promise = db.store('courses')
@@ -25,11 +25,11 @@ export async function getCourse({clbid, term}, fabrications={}) {
 		.then(course => omit(course, ['profWords', 'words', 'sourcePath']))
 		.catch(error => ({clbid, term, error: error.message}))
 
-	courseCache.set(clbid, promise)
+	courseCache[clbid] = promise
 
-	let course = await courseCache.get(clbid)
+	let course = await courseCache[clbid]
 
-	courseCache.delete(clbid)
+	delete courseCache[clbid]
 
 	return course
 }
