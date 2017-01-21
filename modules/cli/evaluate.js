@@ -285,8 +285,8 @@ const checkAgainstArea = ({courses, overrides}, args) => areaData => {
 }
 
 function run({courses, overrides, areas}, args) {
-	Promise.all(areas.map(loadArea)).then(areaDatœ => {
-		for (const area of areaDatœ) {
+	Promise.all(areas.map(loadArea)).then(areaData => {
+		for (const area of areaData) {
 			checkAgainstArea({courses, overrides}, args)(area)
 		}
 	})
