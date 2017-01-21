@@ -14,7 +14,9 @@
 		"transform-react-display-name",
 		// these two together prevent us from defining the helpers in every module
 		"external-helpers",
-		"transform-runtime",
+		["transform-runtime", {
+			"polyfill": false, // defaults to true
+		}],
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		// "lodash",
