@@ -57,7 +57,7 @@ function loadArea(areaQuery) {
 }
 
 
-const promiseCache = new Map()
+const promiseCache = Object.create(null)
 
 export default async function getArea({name, type, revision, source, isCustom}, {cache=[]}) {
 	let cachedArea = find(cache, a => (a.name === name) && (a.type === type) && (revision === 'latest' ? true : a.revision === revision))
@@ -67,17 +67,17 @@ export default async function getArea({name, type, revision, source, isCustom}, 
 	}
 
 	let id = `{${name}, ${type}, ${revision}}`
-	if (promiseCache.has(id)) {
-		return promiseCache.get(id)
+	if (promiseCache.hasOwnProperty(id)) {
+		return promiseCache[id]
 	}
 
 	let promise = loadArea({name, type, revision, source, isCustom})
 
-	promiseCache.set(id, promise)
+	promiseCache[id] = promise
 
-	let area = await promiseCache.get(id)
+	let area = await promiseCache[id]
 
-	promiseCache.delete(id)
+	delete promiseCache[id]
 
 	return area
 }
