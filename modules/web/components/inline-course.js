@@ -1,4 +1,3 @@
-// @flow
 import React, {Component} from 'react'
 import {DragSource} from 'react-dnd'
 import cx from 'classnames'
