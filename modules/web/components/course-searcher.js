@@ -55,14 +55,14 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 	const showNoResults = results.length === 0 && hasQueried
 	const showIndicator = inProgress
 
-	let contents = <div className='no-results course-group'>No Results Found</div>
+	let contents = <div className="no-results course-group">No Results Found</div>
 
 	if (error) {
-		contents = <div className='error course-group'>Something broke :-(</div>
+		contents = <div className="error course-group">Something broke :-(</div>
 	}
 
 	else if (showIndicator) {
-		contents = <div className='loading course-group'><Loading>Searching…</Loading></div>
+		contents = <div className="loading course-group"><Loading>Searching…</Loading></div>
 	}
 
 	else if (!showNoResults) {
@@ -85,23 +85,23 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 	}
 
 	return (
-		<div className='course-search'>
-			<header className='sidebar-heading'>
-				<div className='row'>
+		<div className="course-search">
+			<header className="sidebar-heading">
+				<div className="row">
 					<h2>Course Search<br />{placeholderExtension}</h2>
 					<Button
-						className='close-sidebar'
-						title='Close Search'
-						type='flat'
+						className="close-sidebar"
+						title="Close Search"
+						type="flat"
 						onClick={onCloseSearcher}
 					>
 						Close
 					</Button>
 				</div>
-				<div className='row'>
+				<div className="row">
 					<input
-						type='search'
-						className='search-box'
+						type="search"
+						className="search-box"
 						value={query}
 						placeholder={'Search for a course or phrase'}
 						onChange={onQueryChange}
@@ -109,30 +109,30 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						autoFocus={true}
 					/>
 				</div>
-				<div className='row submit'>
+				<div className="row submit">
 					<Button
-						className='submit-search-query'
-						title='Search'
-						type='flat'
+						className="submit-search-query"
+						title="Search"
+						type="flat"
 						onClick={onQuerySubmit}
 						disabled={inProgress}
 					>
 						{inProgress
-							? [<span key='msg'>Searching…</span>]
-							: [<span key='msg'>Search </span>, <Icon key='icon'>{androidArrowForward}</Icon>]}
+							? [<span key="msg">Searching…</span>]
+							: [<span key="msg">Search </span>, <Icon key="icon">{androidArrowForward}</Icon>]}
 					</Button>
 				</div>
 				{hasQueried &&
-				<div className='row search-filters'>
-					<span className='filter'>
-						<label htmlFor='sort'>Sort by:</label><br />
-						<select id='sort' value={sortBy} onChange={onSortChange}>
+				<div className="row search-filters">
+					<span className="filter">
+						<label htmlFor="sort">Sort by:</label><br />
+						<select id="sort" value={sortBy} onChange={onSortChange}>
 							{map(SORT_BY, opt => <option key={opt} value={opt}>{opt}</option>)}
 						</select>
 					</span>
-					<span className='filter'>
-						<label htmlFor='group'>Group by:</label><br />
-						<select id='group' value={groupBy} onChange={onGroupByChange}>
+					<span className="filter">
+						<label htmlFor="group">Group by:</label><br />
+						<select id="group" value={groupBy} onChange={onGroupByChange}>
 							{map(GROUP_BY, opt => <option key={opt} value={opt}>{opt}</option>)}
 						</select>
 					</span>

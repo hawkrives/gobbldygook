@@ -117,7 +117,7 @@ class ManualCreationScreen extends Component {
 
 	render() {
 		let nameEl = <Autosize
-			className='autosize-input'
+			className="autosize-input"
 			value={this.state.name}
 			onChange={this.handleNameChange}
 		/>
@@ -134,47 +134,47 @@ class ManualCreationScreen extends Component {
 			onChange={this.handleGraduationChange}
 		/>
 
-		return <div className='manual'>
-			<header className='header'>
+		return <div className="manual">
+			<header className="header">
 				<h1>Manually Create</h1>
 			</header>
 
-			{this.state.error ? <pre className='errors'>
+			{this.state.error ? <pre className="errors">
 				{this.state.error}
 			</pre> : null}
 
-			<div className='intro'>
+			<div className="intro">
 				Hi! My name is {nameEl}.<br />I matriculated in {matriculationEl},
 				and I plan to graduate in {graduationEl}.
 			</div>
 
-			<div className='areas'>
-				<div className='row'>
-					<label htmlFor='degreeSelector'>Degrees:</label>
+			<div className="areas">
+				<div className="row">
+					<label htmlFor="degreeSelector">Degrees:</label>
 					<Select multi inputProps={{id: 'degreeSelector'}}
 						value={this.state.degree}
 						options={this.getAreaOptions('degree')}
 						onChange={this.handleAreaChange('degree')}
 					/>
 				</div>
-				<div className='row'>
-					<label htmlFor='majorSelector'>Majors:</label>
+				<div className="row">
+					<label htmlFor="majorSelector">Majors:</label>
 					<Select multi inputProps={{id: 'majorSelector'}}
 						value={this.state.major}
 						options={this.getAreaOptions('major')}
 						onChange={this.handleAreaChange('major')}
 					/>
 				</div>
-				<div className='row'>
-					<label htmlFor='concentrationSelector'>Concentrations:</label>
+				<div className="row">
+					<label htmlFor="concentrationSelector">Concentrations:</label>
 					<Select multi inputProps={{id: 'concentrationSelector'}}
 						value={this.state.concentration}
 						options={this.getAreaOptions('concentration')}
 						onChange={this.handleAreaChange('concentration')}
 					/>
 				</div>
-				<div className='row'>
-					<label htmlFor='emphasisSelector'>Areas of Emphasis:</label>
+				<div className="row">
+					<label htmlFor="emphasisSelector">Areas of Emphasis:</label>
 					<Select multi inputProps={{id: 'emphasisSelector'}}
 						value={this.state.emphasis}
 						options={this.getAreaOptions('emphasis')}
@@ -183,7 +183,7 @@ class ManualCreationScreen extends Component {
 				</div>
 			</div>
 
-			<div className='actions'>
+			<div className="actions">
 				<Button
 					disabled={Boolean(this.state.error) || this.state.submitted}
 					onClick={this.onCreateStudent}

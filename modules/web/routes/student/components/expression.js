@@ -29,7 +29,7 @@ function makeBooleanExpression({expr, ctx}) {
 
 	const contents = expr[kind].reduce((acc, exp, i) => {
 		if (i > 0) {
-			acc.push(<span key={`${i}-joiner`} className='joiner'>{JOINERS[kind]}</span>)
+			acc.push(<span key={`${i}-joiner`} className="joiner">{JOINERS[kind]}</span>)
 		}
 
 		acc.push(<Expression key={i} expr={exp} ctx={ctx} />)
@@ -169,11 +169,11 @@ export default function Expression(props) {
 	return (
 		<span className={className}>
 			{description &&
-				<span className='expression--description'>
+				<span className="expression--description">
 					{description}{!props.hideIndicator && result}
 				</span>}
 			{contents &&
-				<span className='expression--contents'>
+				<span className="expression--contents">
 					{contents}
 					{(props.hideIndicator || expr._isFulfillment) ? null : result}
 				</span>}

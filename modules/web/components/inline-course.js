@@ -67,7 +67,7 @@ class InlineCourse extends Component {
 		})
 
 		const warningList = warningEls.length && (
-			<List type='inline' className='course-warnings'>{warningEls}</List>
+			<List type="inline" className="course-warnings">{warningEls}</List>
 		)
 
 		return this.props.connectDragSource(
@@ -77,20 +77,20 @@ class InlineCourse extends Component {
 			>
 				{warningList || null}
 
-				<CourseTitle className='course-row' title={course.title} name={course.name} type={course.type} />
-				<div className='course-row course-summary'>
-					<span className='course-identifier'>
+				<CourseTitle className="course-row" title={course.title} name={course.name} type={course.type} />
+				<div className="course-row course-summary">
+					<span className="course-identifier">
 						{buildDeptNum(course, true)}
 					</span>
-					{course.type !== 'Research' ? <span className='course-type'>{course.type}</span> : null}
-					{course.gereqs && <ul className='course-gereqs'>
+					{course.type !== 'Research' ? <span className="course-type">{course.type}</span> : null}
+					{course.gereqs && <ul className="course-gereqs">
 						{map(course.gereqs, (ge, idx) =>
 							<li key={ge + idx}>{ge}</li>)}
 					</ul>}
 					{course.prerequisites &&
-						<span className='has-prerequisite' title={course.prerequisites}>Prereq</span>}
+						<span className="has-prerequisite" title={course.prerequisites}>Prereq</span>}
 				</div>
-				<div className='course-row course-summary'>
+				<div className="course-row course-summary">
 					{course.times}
 				</div>
 

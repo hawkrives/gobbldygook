@@ -35,25 +35,25 @@ function AreaOfStudy(props) {
 
 	const summary = (
 		<div>
-			<div className='area--summary-row'>
-				<h1 className='area--title'>
+			<div className="area--summary-row">
+				<h1 className="area--title">
 					{slug && !isCustom && isOpen
-						? <a className='catalog-link'
+						? <a className="catalog-link"
 							href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
-							target='_blank'
+							target="_blank"
 							onClick={ev => ev.stopPropagation()}
-							title='View in the St. Olaf Catalog'
+							title="View in the St. Olaf Catalog"
 						>
 							{name}
 						</a>
 						: name}
 				</h1>
-				<span className='icons'>
+				<span className="icons">
 					{showCloseButton &&
-					<Button className='area--remove-button' onClick={props.onStartRemovalConfirmation}>
+					<Button className="area--remove-button" onClick={props.onStartRemovalConfirmation}>
 						<Icon>{close}</Icon>
 					</Button>}
-					<Icon className='area--open-indicator'>
+					<Icon className="area--open-indicator">
 						{isOpen ? chevronUp : chevronDown}
 					</Icon>
 				</span>
@@ -68,11 +68,11 @@ function AreaOfStudy(props) {
 	)
 
 	const removalConfirmation = (
-		<div className='area--confirm-removal'>
+		<div className="area--confirm-removal">
 			<p>Remove <strong>{name}</strong>?</p>
-			<span className='button-group'>
+			<span className="button-group">
 				<Button
-					className='area--actually-remove-area'
+					className="area--actually-remove-area"
 					onClick={ev => props.onRemoveArea({name, type, revision}, ev)}
 				>
 					Remove
@@ -84,10 +84,10 @@ function AreaOfStudy(props) {
 
 	let contents = null
 	if (error) {
-		contents = <p className='message area--error'>{error} {':('}</p>
+		contents = <p className="message area--error">{error} {':('}</p>
 	}
 	else if (!checked) {
-		contents = <p className='message area--loading'>Loading…</p>
+		contents = <p className="message area--loading">Loading…</p>
 	}
 	else {
 		contents = (
@@ -105,7 +105,7 @@ function AreaOfStudy(props) {
 	return (
 		<div className={cx('area', {errored: Boolean(error)}, {loading: !checked})}>
 			<div
-				className='area--summary'
+				className="area--summary"
 				onClick={props.onToggleAreaExpansion}
 			>
 				{showConfirmRemoval

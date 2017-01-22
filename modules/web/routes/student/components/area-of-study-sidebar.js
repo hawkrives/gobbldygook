@@ -62,14 +62,14 @@ export default function AreaOfStudySidebar(props) {
 	const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
 
 	const unusedAreaTypeButtons = unusedTypes.length ? (
-		<section className='unused-areas-of-study'>
-			<span className='unused-areas-title'>Add: </span>
-			<span className='unused-areas-buttons'>
+		<section className="unused-areas-of-study">
+			<span className="unused-areas-title">Add: </span>
+			<span className="unused-areas-buttons">
 				{unusedTypes.map(type => (
 					<Button key={type}
-						className='add-unused-area-of-study'
+						className="add-unused-area-of-study"
 						onClick={ev => props.onInitiateAddArea(type, ev)}
-						type='flat'
+						type="flat"
 					>
 						{type}
 					</Button>

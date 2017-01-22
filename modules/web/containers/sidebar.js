@@ -23,28 +23,28 @@ export function Sidebar(props) {
 	const canRedo = props.student.data.future.length
 
 	return (
-		<aside className='sidebar'>
-			<Toolbar className='student-buttons'>
-				<Button link to='/' title='Students'>
-					<Icon type='block'>{iosPeopleOutline}</Icon>
+		<aside className="sidebar">
+			<Toolbar className="student-buttons">
+				<Button link to="/" title="Students">
+					<Icon type="block">{iosPeopleOutline}</Icon>
 				</Button>
-				<Button link to={`/s/${studentId}/search`} title='Search'>
-					<Icon type='block'>{iosSearch}</Icon>
-				</Button>
-
-				<Separator type='spacer' />
-
-				<Button title='Undo' onClick={() => undo(studentId)} disabled={!canUndo}>
-					<Icon type='block'>{!canUndo ? iosUndoOutline : iosUndo}</Icon>
-				</Button>
-				<Button title='Redo' onClick={() => redo(studentId)} disabled={!canRedo}>
-					<Icon type='block'>{!canRedo ? iosRedoOutline : iosRedo}</Icon>
+				<Button link to={`/s/${studentId}/search`} title="Search">
+					<Icon type="block">{iosSearch}</Icon>
 				</Button>
 
-				<Separator type='spacer' />
+				<Separator type="spacer" />
 
-				<Button link to={`/s/${studentId}/share`} title='Share'>
-					<Icon type='block'>{iosUploadOutline}</Icon>
+				<Button title="Undo" onClick={() => undo(studentId)} disabled={!canUndo}>
+					<Icon type="block">{!canUndo ? iosUndoOutline : iosUndo}</Icon>
+				</Button>
+				<Button title="Redo" onClick={() => redo(studentId)} disabled={!canRedo}>
+					<Icon type="block">{!canRedo ? iosRedoOutline : iosRedo}</Icon>
+				</Button>
+
+				<Separator type="spacer" />
+
+				<Button link to={`/s/${studentId}/share`} title="Share">
+					<Icon type="block">{iosUploadOutline}</Icon>
 				</Button>
 			</Toolbar>
 

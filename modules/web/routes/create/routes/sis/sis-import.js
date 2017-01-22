@@ -100,7 +100,7 @@ class SISImportScreen extends Component {
 
 		return (
 			<div>
-				<header className='header'>
+				<header className="header">
 					<h1>Import from the SIS</h1>
 				</header>
 
@@ -115,11 +115,11 @@ class SISImportScreen extends Component {
 				</p>
 
 				{error
-					? <details className='error-spot'>
+					? <details className="error-spot">
 						<summary>
 							<strong>{error.name}</strong>: {error.message}
 						</summary>
-						<pre className='error-stack'>
+						<pre className="error-stack">
 							{error.stack}
 						</pre>
 					</details>
@@ -129,7 +129,7 @@ class SISImportScreen extends Component {
 
 				{ids.length > 1 ? <div>
 					<p>Hang on one second… we found multiple student IDs. Which one is yours?</p>
-					<RadioGroup name='student-id' selectedValue={this.state.selectedId} onChange={this.handleSelectId}>
+					<RadioGroup name="student-id" selectedValue={this.state.selectedId} onChange={this.handleSelectId}>
 						{map(ids, id => <label><Radio value={id} /> {id}</label>)}
 					</RadioGroup>
 				</div> : null}

@@ -20,12 +20,12 @@ export default function AreaEditor(props) {
 	return (
 		<div>
 			<Toolbar style={{marginBottom: '0.5em'}}>
-				<Button link to='/areas' >
+				<Button link to="/areas" >
 					<Icon>{iosArrowLeft}</Icon>
 					{' '}Back
 				</Button>
 
-				<Separator type='flex-spacer' />
+				<Separator type="flex-spacer" />
 
 				<Button onClick={props.onSave}>
 					<Icon>{iosDownloadOutline}</Icon>
@@ -36,7 +36,7 @@ export default function AreaEditor(props) {
 					{' '}Revert
 				</Button>
 
-				<Separator type='flex-spacer' />
+				<Separator type="flex-spacer" />
 
 				<Button>
 					<Icon>{iosDownloadOutline}</Icon>

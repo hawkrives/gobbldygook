@@ -15,7 +15,7 @@ describe('AvatarLetter', () => {
 	})
 
 	it('accepts other classes via className', () => {
-		const wrapper = shallow(<AvatarLetter className='test-class' />)
+		const wrapper = shallow(<AvatarLetter className="test-class" />)
 		expect(wrapper.hasClass('test-class')).to.be.true
 	})
 

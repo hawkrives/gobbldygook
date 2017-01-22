@@ -34,8 +34,8 @@ export default function CourseTitle({name, title, type, className}: CourseTitleP
 
 	return (
 		<div className={className}>
-			<h1 className='course-title'>{courseName}</h1>
-			{subtitle && subtitle.length && <h2 className='course-subtitle'>{subtitle}</h2>}
+			<h1 className="course-title">{courseName}</h1>
+			{subtitle && subtitle.length && <h2 className="course-subtitle">{subtitle}</h2>}
 		</div>
 	)
 }

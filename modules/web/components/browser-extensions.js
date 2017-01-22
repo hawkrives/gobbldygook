@@ -22,7 +22,7 @@ function BrowserButton({
 	browserName: string,
 	disabled?: boolean,
 }) {
-	return <button type='button' disabled={disabled} className='browser-button' onClick={onClick}>{browserName}</button>
+	return <button type="button" disabled={disabled} className="browser-button" onClick={onClick}>{browserName}</button>
 }
 BrowserButton.propTypes = {
 	onClick: React.PropTypes.func.isRequired,
@@ -111,11 +111,11 @@ export class BrowserExtensionsComponent extends React.Component {
 
 	buttons() {
 		return [
-			{name: 'Google Chrome', button: <BrowserButton key='chrome' onClick={this.installChromeExtension} browserName='Chrome' />},
-			{name: 'Mozilla Firefox', button: <BrowserButton key='firefox' onClick={this.installFirefoxExtension} browserName='Firefox' />},
-			{name: 'Microsoft Edge', button: <BrowserButton key='edge' disabled onClick={this.installEdgeExtension} browserName='Edge' />},
-			{name: 'Safari', button: <BrowserButton key='safari' disabled onClick={this.installSafariExtension} browserName='Safari' />},
-			{name: 'Opera', button: <BrowserButton key='opera' disabled onClick={this.installOperaExtension} browserName='Opera' />},
+			{name: 'Google Chrome', button: <BrowserButton key="chrome" onClick={this.installChromeExtension} browserName="Chrome" />},
+			{name: 'Mozilla Firefox', button: <BrowserButton key="firefox" onClick={this.installFirefoxExtension} browserName="Firefox" />},
+			{name: 'Microsoft Edge', button: <BrowserButton key="edge" disabled onClick={this.installEdgeExtension} browserName="Edge" />},
+			{name: 'Safari', button: <BrowserButton key="safari" disabled onClick={this.installSafariExtension} browserName="Safari" />},
+			{name: 'Opera', button: <BrowserButton key="opera" disabled onClick={this.installOperaExtension} browserName="Opera" />},
 		]
 	}
 

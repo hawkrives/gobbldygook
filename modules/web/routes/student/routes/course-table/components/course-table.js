@@ -21,10 +21,10 @@ export default function CourseTable(props) {
 
 	const nextYearButton = canAddYear && (
 		<Button
-			className='add-year'
-			key='add-year'
-			type='flat'
-			title='Add Year'
+			className="add-year"
+			key="add-year"
+			type="flat"
+			title="Add Year"
 			onClick={props.addYear}
 		>
 			{`Add ${expandYear(nextAvailableYear, false, '–')}`}

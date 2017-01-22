@@ -265,7 +265,7 @@ function loadFiles(url, infoFileBase) {
 
 		// For each file, see if it needs loading.
 		return Promise.all(filesToLoad.map(file => needsUpdate(type, file.path, file.hash)))
-	}, (err) => {
+	}, err => {
 		if (startsWith(err.message, 'Failed to fetch')) {
 			log(`loadFiles(): Failed to fetch ${url}`)
 			return []

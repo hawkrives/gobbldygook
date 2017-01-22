@@ -26,7 +26,7 @@ function CourseRemovalBox(props: CourseRemovalBoxProps) {
 
 	return props.connectDropTarget(
 		<div className={className}>
-			<Icon type='block' style={{fontSize: '3em', textAlign: 'center'}}>{iosTrashOutline}</Icon>
+			<Icon type="block" style={{fontSize: '3em', textAlign: 'center'}}>{iosTrashOutline}</Icon>
 			Drop a course here to remove it.
 		</div>
 	)

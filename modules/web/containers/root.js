@@ -4,7 +4,7 @@ import Notifications from './notifications'
 
 const Root = props => (
 	<Provider store={props.store}>
-		<div id='app-wrapper'>
+		<div id="app-wrapper">
 			{cloneElement(props.children)}
 			<Notifications />
 		</div>

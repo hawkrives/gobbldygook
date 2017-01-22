@@ -25,12 +25,12 @@ function AreaPicker(props) {
 		fuzzysearch(props.filterText, area.name.toLowerCase()))
 
 	const areaList = map(filteredOnName, (area, i) =>
-		<li key={area.name + i} className='area--choice'>
-			<span className='area-listing'>
-				<span className='title'>{area.name}</span>
-				<span className='revision'>{area.revision}</span>
+		<li key={area.name + i} className="area--choice">
+			<span className="area-listing">
+				<span className="title">{area.name}</span>
+				<span className="revision">{area.revision}</span>
 			</span>
-			<Button className='toggle-area' type='flat'
+			<Button className="toggle-area" type="flat"
 				onClick={ev => props.onAddArea(area, ev)}>
 				Add
 			</Button>
@@ -48,17 +48,17 @@ function AreaPicker(props) {
 	}
 
 	return (
-		<div className='add-area'>
+		<div className="add-area">
 			<Toolbar>
 				<input
-					className='add-area--filter'
+					className="add-area--filter"
 					placeholder={`Filter ${pluralizeArea(props.type)}`}
 					value={props.filterText}
 					onChange={props.onFilterChange}
 				/>
 			</Toolbar>
 
-			<List type='plain'>
+			<List type="plain">
 				{areaList.length ? areaList : message}
 			</List>
 		</div>

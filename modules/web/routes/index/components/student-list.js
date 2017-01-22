@@ -39,7 +39,7 @@ export default function StudentList(props) {
 	)
 
 	return (
-		<List className='student-list' type='plain'>
+		<List className="student-list" type="plain">
 			{studentObjects}
 		</List>
 	)

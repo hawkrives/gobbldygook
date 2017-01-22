@@ -28,8 +28,8 @@ export default function ProgressBar(props: ProgressBarProps) {
 
 	return (
 		<div className={classNames}>
-			<div className='progress-bar--track' style={{height: '100%', width: '100%'}}>
-				<div className='progress-bar--value' style={{height: '100%', width: `${width}%`}} />
+			<div className="progress-bar--track" style={{height: '100%', width: '100%'}}>
+				<div className="progress-bar--value" style={{height: '100%', width: `${width}%`}} />
 			</div>
 		</div>
 	)

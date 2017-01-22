@@ -34,8 +34,8 @@ function Semester(props) {
 	if (schedule && courses && courses.length) {
 		const courseCount = courses.length
 
-		infoBar.push(<li key='course-count'>{`${courseCount} ${plur('course', courseCount)}`}</li>)
-		currentCredits && infoBar.push(<li key='credit-count'>{`${currentCredits} ${plur('credit', currentCredits)}`}</li>)
+		infoBar.push(<li key="course-count">{`${courseCount} ${plur('course', courseCount)}`}</li>)
+		currentCredits && infoBar.push(<li key="credit-count">{`${currentCredits} ${plur('credit', currentCredits)}`}</li>)
 	}
 
 	if (schedule) {
@@ -63,14 +63,14 @@ function Semester(props) {
 				>
 					<h1>{semesterName(semester)}</h1>
 
-					<List className={'semester-info'} type='inline'>
+					<List className={'semester-info'} type="inline">
 						{infoBar}
 					</List>
 				</Link>
 
 				<Button link
 					to={`/s/${studentId}/search/${year}/${semester}`}
-					title='Search for courses'
+					title="Search for courses"
 				>
 					<Icon>{search}</Icon> Course
 				</Button>

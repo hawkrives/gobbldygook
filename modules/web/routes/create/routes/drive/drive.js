@@ -5,7 +5,7 @@ import ScreenToolbar from '../../components/screen-toolbar'
 export default class DriveLinkScreen extends Component {
 	render() {
 		return <div>
-			<header className='header'>
+			<header className="header">
 				<h1>Link to Google Drive</h1>
 			</header>
 

@@ -58,7 +58,7 @@ export default function StudentSummary(props) {
 
 	const NameEl = (props.onChangeName
 		? <ContentEditable
-			className='autosize-input'
+			className="autosize-input"
 			onBlur={props.onChangeName}
 			value={String(student.name)}
 		/>
@@ -90,7 +90,7 @@ export default function StudentSummary(props) {
 
 	const graduationEl = (props.onChangeGraduation
 		? <ContentEditable
-			className='autosize-input'
+			className="autosize-input"
 			onBlur={props.onChangeGraduation}
 			value={String(student.graduation)}
 		/>
@@ -99,7 +99,7 @@ export default function StudentSummary(props) {
 
 	const matriculationEl = (props.onChangeMatriculation
 		? <ContentEditable
-			className='autosize-input'
+			className="autosize-input"
 			onBlur={props.onChangeMatriculation}
 			value={String(student.matriculation)}
 		/>
@@ -110,15 +110,15 @@ export default function StudentSummary(props) {
 
 	return (
 		<article className={cx('student-summary', canGraduateClass)}>
-			<header className='student-summary--header'>
+			<header className="student-summary--header">
 				{showAvatar ? <AvatarLetter
 					className={cx('student-letter', canGraduateClass)}
 					value={student.name}
 				/> : null}
-				<div className='intro'>{randomizeHello ? sample(welcomeMessages) : welcomeMessage}{NameEl}!</div>
+				<div className="intro">{randomizeHello ? sample(welcomeMessages) : welcomeMessage}{NameEl}!</div>
 			</header>
-			<div className='content'>
-				<div className='paragraph'>
+			<div className="content">
+				<div className="paragraph">
 					After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
 					{(degrees.length > 0) ? `${degreeEmphasizer}${degreeList} ${degreeWord}` : `no ${degreeWord}`}
 					{(majors.length || concentrations.length || emphases.length) ? (majors.length) && (concentrations.length || emphases.length) ? ', ' : ' and ' : ''}
@@ -130,7 +130,7 @@ export default function StudentSummary(props) {
 					{'. '}
 					{currentCredits ? `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`: ''}
 				</div>
-				{showMessage ? <div className='paragraph graduation-message'>
+				{showMessage ? <div className="paragraph graduation-message">
 					{canGraduate ? goodGraduationMessage : badGraduationMessage}
 				</div>: null}
 			</div>

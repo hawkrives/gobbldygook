@@ -18,12 +18,12 @@ export default function AreaOfStudyGroup(props) {
 		: props.onInitiateAddArea
 
 	return (
-		<section className='area-of-study-group'>
-			<h1 className='area-type-heading'>
+		<section className="area-of-study-group">
+			<h1 className="area-type-heading">
 				{capitalize(pluralizeArea(props.type))}
 				<Button
-					className='add-area-of-study'
-					type='flat'
+					className="add-area-of-study"
+					type="flat"
 					onClick={ev => showOrHidePicker(props.type, ev)}
 				>
 					{showAreaPicker ? 'Close' : 'Add ∙ Edit'}

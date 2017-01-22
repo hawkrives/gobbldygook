@@ -60,7 +60,7 @@ export class Student extends Component {
 
 		return (
 			<DocumentTitle title={`${name} | Gobbldygook`}>
-				<div className='student'>
+				<div className="student">
 					<Sidebar student={this.props.student}>
 						{sidebar}
 					</Sidebar>

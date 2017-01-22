@@ -79,7 +79,7 @@ rules:
   no-self-assign: warn
 
   # react rules – https://github.com/yannickcr/eslint-plugin-react
-  jsx-quotes: [warn, prefer-single]
+  jsx-quotes: [warn, prefer-double]
   react/display-name: off
   react/jsx-curly-spacing: [warn, never]
   react/jsx-indent-props: [warn, tab]

@@ -10,7 +10,7 @@ import Notification from '../components/notification'
 import './notifications.scss'
 
 export const Notifications = ({notifications, removeNotification}) => (
-	<ul className='notification-list'>
+	<ul className="notification-list">
 		{map(notifications, (n, i) =>
 			<Notification {...n} key={i} onClose={() => removeNotification(i)} />
 		)}

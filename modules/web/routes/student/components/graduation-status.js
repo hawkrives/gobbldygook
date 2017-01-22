@@ -11,7 +11,7 @@ export default function GraduationStatus(props) {
 	}
 
 	return (
-		<section className='graduation-status'>
+		<section className="graduation-status">
 			<StudentSummary
 				onChangeGraduation={props.onChangeGraduation}
 				onChangeMatriculation={props.onChangeMatriculation}

@@ -8,7 +8,7 @@ import List from 'modules/web/components/list'
 export default function AreaList(props: {areas: Object[]}) {
 	const areas = sortBy(props.areas, 'type', 'name', 'revision')
 	return (
-		<List type='bullet'>
+		<List type="bullet">
 			{map(areas, a => {
 				const url = `areas/${encodeURIComponent(a.type)}/${encodeURIComponent(a.name)}/${encodeURIComponent(a.revision)}`
 				return (

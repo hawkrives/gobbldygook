@@ -84,26 +84,26 @@ class UploadFileScreen extends Component {
 
 		return (
 			<div>
-				<header className='header'>
+				<header className="header">
 					<h1>Upload a File</h1>
 				</header>
 
 				<DropZone
 					ref={el => (this.dropzone = el)}
-					accept='.gbstudent,.json,.gb-student'
+					accept=".gbstudent,.json,.gb-student"
 					onDrop={this.handleFileDrop}
 					multiple
 					disablePreview
-					className='upload-dropzone'
-					activeClassName='canDrop'
-					rejectClassName='canDrop' // HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
+					className="upload-dropzone"
+					activeClassName="canDrop"
+					rejectClassName="canDrop" // HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
 				>
 					<p>
 						Just drop some students here, or click to select some to upload.
 					</p>
 				</DropZone>
 
-				<List type='plain' className='upload-results'>
+				<List type="plain" className="upload-results">
 					{
 						// eslint-disable-next-line no-confusing-arrow
 						map(students, stu => stu.payload
