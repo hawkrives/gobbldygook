@@ -59,7 +59,6 @@ const config = {
 			'whatwg-fetch',
 			'redux',
 			'js-yaml',
-			'lodash',
 			'p-props',
 		],
 		react: ['react', 'react-dnd', 'react-redux', 'react-router', 'react-side-effect', 'react-modal'],
