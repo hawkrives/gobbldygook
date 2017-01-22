@@ -1,3 +1,4 @@
+// @flow
 import padStart from 'lodash/padStart'
 
 function split24HourTime(time) {
@@ -8,7 +9,7 @@ function split24HourTime(time) {
 	}
 }
 
-export function to12HourTime(time) {
+export function to12HourTime(time: string): string {
 	const {hour, minute} = split24HourTime(time)
 	const paddedMinute = padStart(minute, 2, '0')
 
