@@ -56,8 +56,8 @@ Where
 
 Filter
   = 'only' _ distinct:IsDistinct _ 'courses' _ filter:(
-      'where' _ where:Qualifier { return {$where: where} }
-    / 'from' _ ofList:OfList { return {$of: ofList} }
+      'where' _ where:Qualifier { return {$where: where, $filterType: 'where'} }
+    / 'from' _ ofList:OfList { return {$of: ofList, $filterType: 'of'} }
   )
   { return assign({}, filter, {$distinct: distinct, $type: 'filter'}) }
 

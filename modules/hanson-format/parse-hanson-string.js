@@ -136,14 +136,16 @@ function peg$parse(input, options) {
 		peg$c12 = peg$literalExpectation("courses", false),
 		peg$c13 = function peg$c13(distinct, where) {
 			return {
-				$where: where
+				$where: where,
+				$filterType: 'where'
 			};
 		},
 		peg$c14 = "from",
 		peg$c15 = peg$literalExpectation("from", false),
 		peg$c16 = function peg$c16(distinct, ofList) {
 			return {
-				$of: ofList
+				$of: ofList,
+				$filterType: 'of'
 			};
 		},
 		peg$c17 = function peg$c17(distinct, filter) {

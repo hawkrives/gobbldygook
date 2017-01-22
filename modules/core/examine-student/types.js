@@ -153,16 +153,19 @@ type ReferenceExpression = {
 	$requirement: string,
 };
 
-type FilterWhereExpression = {
-	$where: QualificationExpression,
-};
-type FilterOfExpression = {
-	$of: Expression,
-};
-type FilterExpression = (FilterOfExpression | FilterWhereExpression) & {
+type FilterWhereExpression = BaseExpression & {
 	$type: 'filter',
 	$distinct: boolean,
+	$filterType: 'where',
+	$where: QualificationExpression,
 };
+type FilterOfExpression = BaseExpression & {
+	$type: 'filter',
+	$distinct: boolean,
+	$filterType: 'of',
+	$of: Expression,
+};
+export type FilterExpression =  FilterOfExpression | FilterWhereExpression;
 
 type WhereExpression = {
 	$type: 'where',
