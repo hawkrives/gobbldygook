@@ -9,6 +9,7 @@
 
 [libs]
 ./node_modules/fbjs/flow/lib
+./config/decls
 
 
 [options]
