@@ -63,8 +63,8 @@ rules:
   camelcase: error
   comma-dangle: [warn, always-multiline]
   comma-style: [warn, last]
-  comma-spacing: ['warn', {before: false, after: true}]
-  key-spacing: ['error', {beforeColon: false, afterColon: true}]
+  comma-spacing: [warn, {before: false, after: true}]
+  key-spacing: [error, {beforeColon: false, afterColon: true}]
   quotes: [error, single, avoid-escape]
   consistent-this: [warn, self]
   brace-style: [warn, stroustrup]
@@ -73,7 +73,7 @@ rules:
   arrow-spacing: [warn, {before: true, after: true}]
   array-bracket-spacing: [warn, always]
   object-curly-spacing: [warn, always]
-  no-implicit-coercion: ['error', {boolean: true, number: true, string: true}]
+  no-implicit-coercion: [error, {boolean: true, number: true, string: true}]
   keyword-spacing: warn
   no-confusing-arrow: error
   no-implicit-globals: error
