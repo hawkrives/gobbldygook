@@ -14,5 +14,5 @@
  */
 
 declare module 'es6-set' {
-  declare module.exports: <T>() => Set<T>;
+  declare function exports<T>(): Set<T>;
 }
