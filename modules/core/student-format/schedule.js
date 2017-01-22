@@ -1,5 +1,5 @@
 import isString from 'lodash/isString'
-import { v4 as uuid } from 'uuid'
+import uuid from 'uuid/v4'
 
 import { randomChar } from 'modules/lib'
 

@@ -5,7 +5,7 @@ import forEach from 'lodash/forEach'
 import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
 import filter from 'lodash/filter'
-import { v4 as uuid } from 'uuid'
+import uuid from 'uuid/v4'
 
 export async function convertStudent({ courses, degrees }, getCourse) {
 	let [

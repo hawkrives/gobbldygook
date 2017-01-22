@@ -10,7 +10,7 @@ import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import omit from 'lodash/omit'
 import reject from 'lodash/reject'
-import { v4 as uuid } from 'uuid'
+import uuid from 'uuid/v4'
 import debug from 'debug'
 const log = debug('student-format:student')
 

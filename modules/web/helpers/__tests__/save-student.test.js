@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import cloneDeep from 'lodash/cloneDeep'
 import reject from 'lodash/reject'
 import omit from 'lodash/omit'
-import { v4 as uuid } from 'uuid'
+import uuid from 'uuid/v4'
 
 import {
 	saveStudent,
