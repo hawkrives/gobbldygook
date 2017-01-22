@@ -1,3 +1,4 @@
+// @flow
 import has from 'lodash/has'
 
 const SEMESTERS = {
@@ -11,11 +12,11 @@ const SEMESTERS = {
 }
 
 // Takes a semester number and returns the associated semester string.
-export function semesterName(semester) {
+export function semesterName(semester: string | number): string {
 	if (typeof semester === 'number') {
 		semester = String(semester)
 	}
 	return has(SEMESTERS, semester)
-        ? SEMESTERS[semester]
-        : `Unknown (${semester})`
+    ? SEMESTERS[semester]
+    : `Unknown (${semester})`
 }
