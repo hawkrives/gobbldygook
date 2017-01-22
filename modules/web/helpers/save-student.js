@@ -27,7 +27,7 @@ export function removeStudentFromCache(studentId) {
 	setIdCache(ids)
 }
 
-export async function saveStudent(student) {
+export function saveStudent(student) {
 	// 1. grab the old (still JSON-encoded) student from localstorage
 	// 2. compare it to the current one
 	// 3. if they're different, update dateLastModified, stringify, and save.
@@ -36,12 +36,16 @@ export async function saveStudent(student) {
 
 	student = prepareStudentForSave(student)
 
-	if (oldVersion !== stringify(student)) {
-		log(`saving student ${student.name} (${student.id})`)
-		student = { ...student, dateLastModified: new Date() }
-		localStorage.setItem(student.id, stringify(student))
-		await addStudentToCache(student.id)
-	}
-
-	return student
+	return Promise.resolve()
+		.then(() => {
+			if (oldVersion !== stringify(student)) {
+				log(`saving student ${student.name} (${student.id})`)
+				student = { ...student, dateLastModified: new Date() }
+				localStorage.setItem(student.id, stringify(student))
+				return addStudentToCache(student.id)
+			}
+		})
+		.then(() => {
+			return student
+		})
 }

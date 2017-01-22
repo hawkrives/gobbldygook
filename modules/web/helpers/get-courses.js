@@ -9,7 +9,7 @@ const courseCache = Object.create(null)
 // @param {Object} fabrications - a (clbid, course) object of fabrications
 // @returns {Promise} - TreoDatabasePromise
 // @fulfill {Object} - the course object, potentially with an embedded error message.
-export async function getCourse({ clbid, term }, fabrications={}) {
+export function getCourse({ clbid, term }, fabrications={}) {
 	if (clbid in fabrications) {
 		return fabrications[clbid]
 	}
@@ -27,11 +27,10 @@ export async function getCourse({ clbid, term }, fabrications={}) {
 
 	courseCache[clbid] = promise
 
-	let course = await courseCache[clbid]
-
-	delete courseCache[clbid]
-
-	return course
+	return courseCache[clbid].then(course => {
+		delete courseCache[clbid]
+		return course
+	})
 }
 // export function getCourse({clbid, term}) {
 // 	return db.store('courses')

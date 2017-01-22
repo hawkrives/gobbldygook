@@ -7,27 +7,24 @@ import fromPairs from 'lodash/fromPairs'
 import filter from 'lodash/filter'
 import uuid from 'uuid/v4'
 
-export async function convertStudent({ courses, degrees }, getCourse) {
-	let [
-		schedulesAndFabrications,
-		info,
-	] = await Promise.all([
+export function convertStudent({ courses, degrees }, getCourse) {
+	return Promise.all([
 		processSchedules(courses, getCourse),
 		processDegrees(degrees),
-	])
+	]).then(([ schedulesAndFabrications, info ]) => {
+		let { schedules, fabrications } = schedulesAndFabrications
 
-	let { schedules, fabrications } = schedulesAndFabrications
-
-	return Student({
-		...info,
-		schedules,
-		fabrications,
+		return Student({
+			...info,
+			schedules,
+			fabrications,
+		})
 	})
 }
 
 
-export async function processSchedules(courses, getCourse) {
-	courses = await Promise.all(map(courses, course => {
+export function processSchedules(courses, getCourse) {
+	return Promise.all(map(courses, course => {
 		return getCourse(course).then(resolvedCourse => {
 			if (resolvedCourse.error) {
 				course._fabrication = true
@@ -36,24 +33,24 @@ export async function processSchedules(courses, getCourse) {
 			}
 			return resolvedCourse
 		})
-	}))
+	})).then(courses => {
+		let fabrications = fromPairs(map(filter(courses, '_fabrication'), c => [ c.clbid, c ]))
 
-	let fabrications = fromPairs(map(filter(courses, '_fabrication'), c => [ c.clbid, c ]))
-
-	let schedules = groupBy(courses, 'term')
-	schedules = map(schedules, (courses, term) => {
-		term = String(term)
-		return Schedule({
-			courses,
-			active: true,
-			clbids: map(courses, c => c.clbid),
-			year: parseInt(term.substr(0, 4), 10),
-			semester: parseInt(term.substr(4, 1), 10),
+		let schedules = groupBy(courses, 'term')
+		schedules = map(schedules, (courses, term) => {
+			term = String(term)
+			return Schedule({
+				courses,
+				active: true,
+				clbids: map(courses, c => c.clbid),
+				year: parseInt(term.substr(0, 4), 10),
+				semester: parseInt(term.substr(4, 1), 10),
+			})
 		})
-	})
-	schedules = fromPairs(map(schedules, s => [ s.id, s ]))
+		schedules = fromPairs(map(schedules, s => [ s.id, s ]))
 
-	return { schedules, fabrications }
+		return { schedules, fabrications }
+	})
 }
 
 
