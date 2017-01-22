@@ -14,5 +14,9 @@
  */
 
 declare module 'stabilize' {
-  declare module.exports: any;
+  declare module.exports: (
+    value: any,
+    replacer?: (Array<any> | (key: any, value: any) => any),
+    space?: string | number,
+  ) => string;
 }
