@@ -100,15 +100,21 @@ export function enhanceHanson(data, {topLevel=true, declaredVariables={}}: {topL
 		}
 
 		else if (key === 'result' || key === 'filter') {
+			if (typeof value !== 'string') {
+				throw new Error(`value ${value.toString()} should be a string, not a ${typeof value}`)
+			}
+
 			// (Variables)
 			// Next up, we go through the list of variables and look for any
 			// occurrences of the named variables in the value, prefixed with
 			// a $. So, for instance, the variable defined as "math-level-3"
 			// would be referenced via "$math-level-3".
 			forEach(declaredVariables, (contents, name) => {
+				// _we_ know value is a string here
+				let val = ((value: any): string)
 				// istanbul ignore else
-				if (includes(value, '$' + name)) {
-					value = value.split(`$${name}`).join(contents)
+				if (includes(val, '$' + name)) {
+					value = val.split(`$${name}`).join(contents)
 				}
 			})
 
