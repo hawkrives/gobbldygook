@@ -3,9 +3,9 @@
 
 import nomnom from 'nomnom'
 
-import {loadYamlFile} from './lib/read-file'
+import { loadYamlFile } from './lib/read-file'
 import populateCourses from './lib/populate-courses'
-import {simplifyCourse, evaluate} from 'modules/core/examine-student'
+import { simplifyCourse, evaluate } from 'modules/core/examine-student'
 import loadArea from './lib/load-area'
 import uniqBy from 'lodash/uniqBy'
 import flatten from 'lodash/flatten'
@@ -34,7 +34,7 @@ async function populateStudent(filename) {
 	}
 
 	try {
-		student.studies.push({type: 'degree', name: 'Bachelor of Arts'})
+		student.studies.push({ type: 'degree', name: 'Bachelor of Arts' })
 		student.areas = await Promise.all(student.studies.map(loadArea))
 	}
 	catch (err) {
@@ -58,7 +58,7 @@ function makeHeading(str) {
 
 function evaluateStudentAgainstEachMajor(student) {
 	const degreeEvaluation = evaluate(student, find(student.areas, a => a.type === 'degree'))
-	const countedTowardsDegree = [...degreeEvaluation.result._matches]
+	const countedTowardsDegree = [ ...degreeEvaluation.result._matches ]
 	// console.log(yaml.safeDump(degreeEvaluation))
 
 	let countedTowardsMajors = {}
@@ -72,16 +72,16 @@ function evaluateStudentAgainstEachMajor(student) {
 
 	///
 
-	let [name, coursesUsedInMajor] = head(toPairs(countedTowardsMajors))
+	let [ name, coursesUsedInMajor ] = head(toPairs(countedTowardsMajors))
 
-	let usedCourses = uniqBy([...coursesUsedInMajor, ...countedTowardsDegree], simplifyCourse)
+	let usedCourses = uniqBy([ ...coursesUsedInMajor, ...countedTowardsDegree ], simplifyCourse)
 	let usedClbids = pluck(usedCourses, 'clbid')
 
 	let unusedCourses = reject(
-		uniqBy([...student.courses, ...flatten(countedTowardsMajors), ...countedTowardsDegree], simplifyCourse),
+		uniqBy([ ...student.courses, ...flatten(countedTowardsMajors), ...countedTowardsDegree ], simplifyCourse),
 		c => includes(usedClbids, c.clbid))
 
-	console.log(makeHeading(`${`Used for ${name}… (result: ${find(areas, {name}).computed})`}`))
+	console.log(makeHeading(`${`Used for ${name}… (result: ${find(areas, { name }).computed})`}`))
 	console.log(prettyCourseList(usedCourses))
 	console.log()
 

@@ -1,7 +1,7 @@
 // @flow
 import reject from 'lodash/reject'
 import compareCourseToCourse from './compare-course-to-course'
-import type {Course, CourseExpression} from './types'
+import type { Course, CourseExpression } from './types'
 
 /**
  * Removes a course from a list of courses

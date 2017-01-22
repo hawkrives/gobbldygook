@@ -1,7 +1,7 @@
 // @flow
 import some from 'lodash/some'
 import compareCourseToCourse from './compare-course-to-course'
-import type {Course} from './types'
+import type { Course } from './types'
 
 /**
  * Checks if a course exists in an array of courses

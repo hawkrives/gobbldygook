@@ -1,8 +1,8 @@
-import {AuthError} from 'modules/lib'
-import {extractStudentIds} from './student-ids'
-import {COURSES_URL} from './urls'
-import {fetchHtml, getText} from './lib'
-import {selectOne} from 'css-select'
+import { AuthError } from 'modules/lib'
+import { extractStudentIds } from './student-ids'
+import { COURSES_URL } from './urls'
+import { fetchHtml, getText } from './lib'
+import { selectOne } from 'css-select'
 
 export async function checkPageIsLoggedIn(response) {
 	let errorMsg = selectOne('[style="text-align:center"]', response)

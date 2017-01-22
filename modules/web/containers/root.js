@@ -1,5 +1,5 @@
 import React, { PropTypes, cloneElement } from 'react'
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import Notifications from './notifications'
 
 const Root = props => (

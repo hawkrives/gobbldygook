@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import cx from 'classnames'
-import {semesterName} from 'modules/schools/stolaf'
-import {buildDeptString} from 'modules/schools/stolaf'
+import { semesterName } from 'modules/schools/stolaf'
+import { buildDeptString } from 'modules/schools/stolaf'
 
 import './expression--course.scss'
 
@@ -34,7 +34,7 @@ export default function CourseExpression(props) {
 		</div>)
 
 	return (
-		<span className={cx('course', {matched: props._result, taken: props._taken})} style={props.style}>
+		<span className={cx('course', { matched: props._result, taken: props._taken })} style={props.style}>
 			<div className="basic-identifiers">
 				<span className="course--department">{department}</span>
 				<span>

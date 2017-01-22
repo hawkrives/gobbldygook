@@ -1,5 +1,5 @@
 import fs from 'graceful-fs'
-import {evaluate} from 'modules/core/examine-student'
+import { evaluate } from 'modules/core/examine-student'
 import endsWith from 'lodash/endsWith'
 import junk from 'junk'
 import nom from 'nomnom'
@@ -23,21 +23,21 @@ function loadStudents(dir) {
 		.map(JSON.parse)
 }
 
-async function benchmark({runs, graph}) {
-	for (const {courses=[], overrides={}, areas=[]} of loadStudents('./test/example-students/')) {
+async function benchmark({ runs, graph }) {
+	for (const { courses=[], overrides={}, areas=[] } of loadStudents('./test/example-students/')) {
 		for (const areaInfo of areas) {
 			console.log(`the '${areaInfo.name}' ${areaInfo.type} (${areaInfo.revision})`)
 			const areaData = await loadArea(areaInfo)  // eslint-disable-line babel/no-await-in-loop
 
 			let times = range(runs).map(() => {
 				const start = process.hrtime()
-				evaluate({courses, overrides}, areaData)
+				evaluate({ courses, overrides }, areaData)
 				return now(start)
 			})
 
 			const avg = mean(times)
 			if (graph) {
-				console.log(`  ${sparkly(times, {min: 0})}`)
+				console.log(`  ${sparkly(times, { min: 0 })}`)
 			}
 			console.log(`  average time: ${ms(avg)} (over ${runs} runs)\n`)
 		}
@@ -56,7 +56,7 @@ export function cli() {
 			flag: true,
 			default: true,
 		})
-		.option('debug', {flag: true})
+		.option('debug', { flag: true })
 		.parse()
 
 	if (args.debug) {
@@ -65,7 +65,7 @@ export function cli() {
 
 	const runs = args.runs
 	const graph = args.graph
-	benchmark({runs, graph})
+	benchmark({ runs, graph })
 }
 
 if (require.main === module) {

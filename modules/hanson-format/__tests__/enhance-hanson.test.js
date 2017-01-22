@@ -1,6 +1,6 @@
-import {expect} from 'chai'
-import {enhanceHanson} from '../enhance-hanson'
-import {reference, course} from './parse-hanson-string/parse-hanson-string.support'
+import { expect } from 'chai'
+import { enhanceHanson } from '../enhance-hanson'
+import { reference, course } from './parse-hanson-string/parse-hanson-string.support'
 
 describe('enhanceHanson', () => {
 	it('adds a "slug" key to the top-level', () => {
@@ -22,10 +22,10 @@ describe('enhanceHanson', () => {
 		expect(() => enhanceHanson({}))
 			.to.throw('enhanceHanson(): could not find any of ["result", "message", "filter"] in ["$type", "slug"].')
 
-		expect(() => enhanceHanson({"message": "have a nice day"}))
+		expect(() => enhanceHanson({ "message": "have a nice day" }))
 			.to.not.throw()
 
-		expect(() => enhanceHanson({"result": "CSCI 121"}))
+		expect(() => enhanceHanson({ "result": "CSCI 121" }))
 			.to.not.throw()
 	})
 
@@ -35,15 +35,15 @@ describe('enhanceHanson', () => {
 	})
 
 	it('requires "revision" to be a string, if present', () => {
-		expect(() => enhanceHanson({revision: 2, result: 'CSCI 121'}))
+		expect(() => enhanceHanson({ revision: 2, result: 'CSCI 121' }))
 			.to.throw('enhanceHanson: "revision" must be a string. Try wrapping it in single quotes.')
 
-		expect(() => enhanceHanson({revision: '2', result: 'CSCI 121'}))
+		expect(() => enhanceHanson({ revision: '2', result: 'CSCI 121' }))
 			.not.to.throw()
 	})
 
 	it('enforces a whitelist of keys at the top-level', () => {
-		expect(() => enhanceHanson({xxx: 'yyy'}))
+		expect(() => enhanceHanson({ xxx: 'yyy' }))
 			.to.throw(/only \[.*\] keys are allowed/)
 	})
 
@@ -55,7 +55,7 @@ describe('enhanceHanson', () => {
 	})
 
 	it('enforces a whitelist of keys at lower levels', () => {
-		expect(() => enhanceHanson({Xyy: {innerbad: 'zzzz'}}))
+		expect(() => enhanceHanson({ Xyy: { innerbad: 'zzzz' } }))
 			.to.throw(/only \[.*\] keys are allowed/)
 	})
 

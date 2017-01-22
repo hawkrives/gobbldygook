@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import DropZone from 'react-dropzone'
 import map from 'lodash/map'
 import Button from 'modules/web/components/button'
@@ -36,7 +36,7 @@ class UploadFileScreen extends Component {
 				reader.readAsText(f)
 			}),
 		}))
-		this.setState({files})
+		this.setState({ files })
 		this.convertFilesToStudents(files)
 	};
 
@@ -51,7 +51,7 @@ class UploadFileScreen extends Component {
 				parsed = JSON.parse(data)
 			}
 			catch (err) {
-				return {name: file.name, error: `could not parse "${data}" because "${err.message}"`}
+				return { name: file.name, error: `could not parse "${data}" because "${err.message}"` }
 			}
 
 			let converted
@@ -59,17 +59,17 @@ class UploadFileScreen extends Component {
 				converted = initStudent(parsed)
 			}
 			catch (err) {
-				return {name: file.name, error: err.message}
+				return { name: file.name, error: err.message }
 			}
 
 			return converted
 		}).then(student => {
-			this.setState({students: this.state.students.concat(student)})
+			this.setState({ students: this.state.students.concat(student) })
 		})
 	};
 
 	convertFilesToStudents = files => {
-		this.setState({students: []})
+		this.setState({ students: [] })
 		files.forEach(this.convertOneFile)
 	};
 
@@ -79,7 +79,7 @@ class UploadFileScreen extends Component {
 	};
 
 	render() {
-		let {students} = this.state
+		let { students } = this.state
 		let files = this.state.files.slice(students.length)
 
 		return (
@@ -118,6 +118,6 @@ class UploadFileScreen extends Component {
 	}
 }
 
-let mapDispatch = dispatch => ({dispatch})
+let mapDispatch = dispatch => ({ dispatch })
 
 export default connect(undefined, mapDispatch)(withRouter(UploadFileScreen))

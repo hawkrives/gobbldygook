@@ -1,6 +1,6 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 
-import {setOverride, removeOverride} from '../overrides'
+import { setOverride, removeOverride } from '../overrides'
 
 import {
 	SET_OVERRIDE,

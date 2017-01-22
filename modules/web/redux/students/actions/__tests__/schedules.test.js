@@ -1,4 +1,4 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 
 import {
 	addSchedule,
@@ -20,7 +20,7 @@ import {
 
 describe('addSchedule action', () => {
 	it('returns an action to add a schedule to a student', () => {
-		let action = addSchedule('id', {year: 2012})
+		let action = addSchedule('id', { year: 2012 })
 		expect(action).to.have.property('type', ADD_SCHEDULE)
 		expect(action).to.have.property('payload')
 		expect(action.payload).to.be.an.object
@@ -48,7 +48,7 @@ describe('destroySchedules action', () => {
 		expect(action.payload).to.be.an.object
 		expect(action.payload).to.deep.equal({
 			studentId: 'id',
-			scheduleIds: ['sid', 'sid2'],
+			scheduleIds: [ 'sid', 'sid2' ],
 		})
 	})
 })

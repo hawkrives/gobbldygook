@@ -41,7 +41,7 @@ let semesters = {
 	'late summer': 5,
 	'summer2': 5,
 	'summer 2': 5,
-	'summers': ['$OR', 4, 5],
+	'summers': [ '$OR', 4, 5 ],
 }
 
 let keywordMappings = {
@@ -71,7 +71,7 @@ let keywordMappings = {
 	'time': 'times',
 }
 
-function organizeValues([key, values], words=false, profWords=false) {
+function organizeValues([ key, values ], words=false, profWords=false) {
 	let organizedValues = map(values, val => {
 		if (startsWith(val, '$')) {
 			return val.toUpperCase()
@@ -115,11 +115,11 @@ function organizeValues([key, values], words=false, profWords=false) {
 			val = parseFloat(val)
 		}
 
-		else if (includes(['year', 'term', 'level', 'number', 'groupid', 'clbid', 'crsid'], key)) {
+		else if (includes([ 'year', 'term', 'level', 'number', 'groupid', 'clbid', 'crsid' ], key)) {
 			val = parseInt(val, 10)
 		}
 
-		else if (includes(['title', 'name', 'notes', 'description', 'words'], key)) {
+		else if (includes([ 'title', 'name', 'notes', 'description', 'words' ], key)) {
 			if (words || key === 'words') {
 				val = splitParagraph(val)
 				key = 'words'
@@ -136,7 +136,7 @@ function organizeValues([key, values], words=false, profWords=false) {
 		organizedValues = flatten(organizedValues)
 	}
 
-	return [key, organizedValues]
+	return [ key, organizedValues ]
 }
 
 
@@ -152,7 +152,7 @@ export function buildQueryFromString(queryString='', opts={}) {
 	// expect from a RegExp.
 	// If the regex fails, we grab the string through the end
 	// and build the object from what we assume to be the title.
-	let rexTested = rex.exec(queryString) || {index: queryString.length}
+	let rexTested = rex.exec(queryString) || { index: queryString.length }
 	let stringThing = queryString.substr(0, rexTested.index)
 	queryString = queryString.substring(rexTested.index)
 
@@ -163,11 +163,11 @@ export function buildQueryFromString(queryString='', opts={}) {
 	let cleaned = filter(map(matches, trim), str => str.length > 0)
 
 	// Grab the keys and values from the lists
-	let [keys, values] = partitionByIndex(cleaned)
+	let [ keys, values ] = partitionByIndex(cleaned)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
-		let {departments, number} = splitDeptNum(stringThing)
-		let deptnum = buildDeptNum({departments, number})
+		let { departments, number } = splitDeptNum(stringThing)
+		let deptnum = buildDeptNum({ departments, number })
 		keys.push('deptnum')
 		values.push(deptnum)
 	}

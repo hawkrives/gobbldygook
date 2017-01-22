@@ -1,7 +1,7 @@
 // @flow
 import compact from 'lodash/compact'
 import getDepartments from './get-departments'
-import type {Course} from './types'
+import type { Course } from './types'
 
 /**
  * Counts the number of unique departments in a list of courses

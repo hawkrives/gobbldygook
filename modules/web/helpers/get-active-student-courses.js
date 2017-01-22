@@ -13,7 +13,7 @@ export function getActiveStudentCourses(student) {
 	   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 	 */
 
-	const activeSchedules = filter(student.schedules, {active: true})
+	const activeSchedules = filter(student.schedules, { active: true })
 	let courses = flatMap(activeSchedules, s => s.courses)
 	courses = uniqBy(filter(courses, c => c), course => course.clbid)
 

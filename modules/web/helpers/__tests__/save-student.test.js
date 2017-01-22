@@ -1,8 +1,8 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 import cloneDeep from 'lodash/cloneDeep'
 import reject from 'lodash/reject'
 import omit from 'lodash/omit'
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 import {
 	saveStudent,
@@ -23,12 +23,12 @@ describe('saveStudent', () => {
 	})
 
 	it('returns a promise', () => {
-		expect(saveStudent({id: student.id})).to.be.instanceof(Promise)
+		expect(saveStudent({ id: student.id })).to.be.instanceof(Promise)
 	})
 
 	it('saves a student', () => {
 		saveStudent(student)
-		let expectedStudentIds = [student.id]
+		let expectedStudentIds = [ student.id ]
 		let actualStudentIds = JSON.parse(localStorage.getItem('studentIds'))
 		expect(actualStudentIds).to.deep.equal(expectedStudentIds)
 		let expectedStudent = student
@@ -50,14 +50,14 @@ describe('saveStudent', () => {
 describe('addStudentToCache', () => {
 	let ids
 	beforeEach(() => {
-		ids = ['1', '2', '3']
+		ids = [ '1', '2', '3' ]
 		localStorage.clear()
 		localStorage.setItem('studentIds', JSON.stringify(ids))
 	})
 
 	it('adds an id to the list of student ids', () => {
 		addStudentToCache('5')
-		let expected = ids.concat(['5'])
+		let expected = ids.concat([ '5' ])
 		let actual = JSON.parse(localStorage.getItem('studentIds'))
 		expect(actual).to.deep.equal(expected)
 	})
@@ -73,7 +73,7 @@ describe('addStudentToCache', () => {
 describe('removeStudentFromCache', () => {
 	let ids
 	beforeEach(() => {
-		ids = ['1', '2', '3']
+		ids = [ '1', '2', '3' ]
 		localStorage.clear()
 		localStorage.setItem('studentIds', JSON.stringify(ids))
 	})
@@ -97,7 +97,7 @@ describe('removeStudentFromCache', () => {
 describe('getIdCache', () => {
 	it('gets the list of student ids', () => {
 		localStorage.clear()
-		const ids = ['1', '2', '3']
+		const ids = [ '1', '2', '3' ]
 		localStorage.setItem('studentIds', JSON.stringify(ids))
 		expect(getIdCache()).to.deep.equal(ids)
 	})
@@ -111,7 +111,7 @@ describe('getIdCache', () => {
 describe('setIdCache', () => {
 	it('sets the list of student ids', () => {
 		localStorage.clear()
-		const ids = ['1', '2', '3']
+		const ids = [ '1', '2', '3' ]
 		setIdCache(ids)
 		let actual = JSON.parse(localStorage.getItem('studentIds'))
 		let expected = ids

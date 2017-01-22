@@ -8,12 +8,12 @@ import hasOverride from './has-override'
 import isRequirementName from './is-requirement-name'
 import mapValues from 'lodash/mapValues'
 import Set from 'es6-set'
-import type {Requirement, Course, OverridesObject, FulfillmentsObject} from './types'
+import type { Requirement, Course, OverridesObject, FulfillmentsObject } from './types'
 
 
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.
-export default function compute(outerReq: Requirement, {path, courses=[], overrides={}, fulfillments={}, dirty=new Set()}: {
+export default function compute(outerReq: Requirement, { path, courses=[], overrides={}, fulfillments={}, dirty=new Set() }: {
 	path: string[],
 	courses: Course[],
 	overrides: OverridesObject,
@@ -33,7 +33,7 @@ export default function compute(outerReq: Requirement, {path, courses=[], overri
 			if (childrenShareCourses) {
 				localDirty = new Set()
 			}
-			return compute(req, {path: path.concat([name]), courses, overrides, dirty: localDirty, fulfillments})
+			return compute(req, { path: path.concat([ name ]), courses, overrides, dirty: localDirty, fulfillments })
 		}
 		return req
 	})
@@ -56,7 +56,7 @@ export default function compute(outerReq: Requirement, {path, courses=[], overri
 			requirement.result = applyFulfillmentToExpression(requirement.result, fulfillment)
 		}
 
-		computed = computeChunk({expr: requirement.result, ctx: requirement, courses, dirty, fulfillment})
+		computed = computeChunk({ expr: requirement.result, ctx: requirement, courses, dirty, fulfillment })
 	}
 
 	// or ask for an override

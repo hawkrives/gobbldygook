@@ -1,5 +1,5 @@
 import 'whatwg-fetch'
-import {status, json, text} from 'modules/lib/fetch-helpers'
+import { status, json, text } from 'modules/lib/fetch-helpers'
 import serializeError from 'serialize-error'
 import PQueue from 'p-queue'
 import series from 'p-series'
@@ -21,16 +21,16 @@ import present from 'present'
 import yaml from 'js-yaml'
 
 import db from './db'
-import {buildDeptString, buildDeptNum} from 'modules/schools/stolaf/deptnums'
-import {splitParagraph} from 'modules/lib/split-paragraph'
-import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
+import { buildDeptString, buildDeptNum } from 'modules/schools/stolaf/deptnums'
+import { splitParagraph } from 'modules/lib/split-paragraph'
+import { convertTimeStringsToOfferings } from 'sto-sis-time-parser'
 
 import debug from 'debug'
 const log = debug('worker:load-data')
 
 
 function dispatch(type, action, ...args) {
-	self.postMessage([null, 'dispatch', {type, action, args}])
+	self.postMessage([ null, 'dispatch', { type, action, args } ])
 }
 
 const fetchText = (...args) => fetch(...args).then(status).then(text)
@@ -48,7 +48,7 @@ function prepareCourse(course) {
 		dept: course.dept || buildDeptString(course.departments),
 		deptnum: course.deptnum || buildDeptNum(course),
 		offerings: course.offerings || convertTimeStringsToOfferings(course),
-		words: uniq([...nameWords, ...notesWords, ...titleWords, ...descWords]),
+		words: uniq([ ...nameWords, ...notesWords, ...titleWords, ...descWords ]),
 		profWords: uniq(flatMap(course.instructors, splitParagraph)),
 	}
 }
@@ -57,7 +57,7 @@ function prepareCourse(course) {
 function cacheItemHash(path, type, hash) {
 	log(`cacheItemHash(): ${path}`)
 
-	return db.store(getCacheStoreName(type)).put({id: path, path, hash})
+	return db.store(getCacheStoreName(type)).put({ id: path, path, hash })
 }
 
 
@@ -122,12 +122,12 @@ function storeArea(path, data) {
 
 function cleanPriorCourses(path) {
 	return db.store('courses').index('sourcePath').getAll(range({ eq: path }))
-		.then(oldItems => fromPairs(map(oldItems, item => ([item.clbid, null]))))
+		.then(oldItems => fromPairs(map(oldItems, item => ([ item.clbid, null ]))))
 }
 
 function cleanPriorAreas(path) {
 	return db.store('areas').getAll(range({ eq: path }))
-		.then(oldItems => fromPairs(map(oldItems, item => ([item.sourcePath, null]))))
+		.then(oldItems => fromPairs(map(oldItems, item => ([ item.sourcePath, null ]))))
 }
 
 function cleanPriorData(path, type) {
@@ -176,7 +176,7 @@ function parseData(raw, type) {
 
 function updateDatabase(type, infoFileBase, notificationId, infoFromServer) {
 	// Get the path to the current file and the hash of the file
-	const {path, hash} = infoFromServer
+	const { path, hash } = infoFromServer
 	// Append the hash, to act as a sort of cache-busting mechanism
 	const itemUrl = `/${path}?v=${hash}`
 
@@ -209,7 +209,7 @@ function updateDatabase(type, infoFileBase, notificationId, infoFromServer) {
 
 function needsUpdate(type, path, hash) {
 	return db.store(getCacheStoreName(type)).get(path)
-		.then(({hash: oldHash}) => hash !== oldHash)
+		.then(({ hash: oldHash }) => hash !== oldHash)
 }
 
 
@@ -228,14 +228,14 @@ function removeDuplicateAreas() {
 		forEach(withDuplicates, duplicatesList => {
 			duplicatesList = sortBy(duplicatesList, area => area.sourcePath.length)
 			duplicatesList.shift() // take off the shortest one
-			ops = {...ops, ...fromPairs(map(duplicatesList, item => ([item.sourcePath, null])))}
+			ops = { ...ops, ...fromPairs(map(duplicatesList, item => ([ item.sourcePath, null ]))) }
 		})
 
 		// remove any that are invalid
 		// --- something about any values that aren't objects
 
-		const invalidAreas = filter(allAreas, area => some(['name', 'revision', 'type'], key => area[key] === undefined))
-		ops = {...ops, ...fromPairs(map(invalidAreas, item => ([item.sourcePath, null])))}
+		const invalidAreas = filter(allAreas, area => some([ 'name', 'revision', 'type' ], key => area[key] === undefined))
+		ops = { ...ops, ...fromPairs(map(invalidAreas, item => ([ item.sourcePath, null ]))) }
 
 		return db.store('areas').batch(ops)
 	})
@@ -282,10 +282,10 @@ function loadFiles(url, infoFileBase) {
 		}
 
 		// Fire off the progress bar
-		dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, {max: size(filesToLoad), showButton: true})
+		dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, { max: size(filesToLoad), showButton: true })
 
 		// Load them into the database
-		const q = new PQueue({concurrency: 2})
+		const q = new PQueue({ concurrency: 2 })
 		filesToLoad.forEach(file => {
 			q.add(() => updateDatabase(type, infoFileBase, notificationId, file))
 		})
@@ -319,26 +319,26 @@ function checkIdbInWorkerSupport() {
 }
 
 const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
-self.addEventListener('message', ({data}) => {
-	const [id, ...args] = data
+self.addEventListener('message', ({ data }) => {
+	const [ id, ...args ] = data
 	log('[load-data] received message:', args)
 
 	if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
 		checkIdbInWorkerSupport()
 			.then(result => {
-				self.postMessage([id, 'result', result])
+				self.postMessage([ id, 'result', result ])
 			})
 			.catch(err => {
-				self.postMessage([id, 'error', JSON.parse(serializeError(err))])
+				self.postMessage([ id, 'error', JSON.parse(serializeError(err)) ])
 			})
 	}
 	else {
 		loadFiles(...args)
 			.then(result => {
-				self.postMessage([id, 'result', result])
+				self.postMessage([ id, 'result', result ])
 			})
 			.catch(err => {
-				self.postMessage([id, 'error', JSON.parse(serializeError(err))])
+				self.postMessage([ id, 'error', JSON.parse(serializeError(err)) ])
 			})
 	}
 })

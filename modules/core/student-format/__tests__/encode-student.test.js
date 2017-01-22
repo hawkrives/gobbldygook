@@ -1,5 +1,5 @@
-import {expect} from 'chai'
-import {encodeStudent} from '../encode-student'
+import { expect } from 'chai'
+import { encodeStudent } from '../encode-student'
 
 let oldEncode = global.encodeURIComponent
 
@@ -15,6 +15,6 @@ describe('prepareStudentForSave', () => {
 	})
 
 	it('encodes a student', () => {
-		expect(encodeStudent({name: 's'})).to.equal('')
+		expect(encodeStudent({ name: 's' })).to.equal('')
 	})
 })

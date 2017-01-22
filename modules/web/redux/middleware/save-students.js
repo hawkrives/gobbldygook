@@ -3,7 +3,7 @@ import {ActionTypes as UndoableActionTypes} from 'redux-undo'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 import map from 'lodash/map'
-import {saveStudent} from '../students/actions/save-student'
+import { saveStudent } from '../students/actions/save-student'
 
 const whitelist = [
 	studentActions.INIT_STUDENT,
@@ -34,7 +34,7 @@ const whitelist = [
 	UndoableActionTypes.UNDO,
 	UndoableActionTypes.REDO,
 ]
-export const shouldTakeAction = ({type}) => {
+export const shouldTakeAction = ({ type }) => {
 	return includes(whitelist, type)
 }
 

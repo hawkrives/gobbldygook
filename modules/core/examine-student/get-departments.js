@@ -1,7 +1,7 @@
 // @flow
 import flatMap from 'lodash/flatMap'
 import uniq from 'lodash/uniq'
-import type {Course} from './types'
+import type { Course } from './types'
 
 /**
  * Gets the list of unique departments from a list of courses

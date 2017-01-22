@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import yaml from 'js-yaml'
 import keymage from 'keymage'
 import omit from 'lodash/omit'
@@ -49,7 +49,7 @@ export class AreaEditScreen extends Component {
 			return
 		}
 
-		let {type, name, revision} = props.params
+		let { type, name, revision } = props.params
 
 		if (!type || !name || !revision) {
 			return
@@ -74,7 +74,7 @@ export class AreaEditScreen extends Component {
 	};
 
 	handleChange = newValue => {
-		this.setState({area: newValue})
+		this.setState({ area: newValue })
 	};
 
 	handleSave = () => {};
@@ -87,11 +87,11 @@ export class AreaEditScreen extends Component {
 			keymage.popScope()
 		}
 
-		this.setState({isEditing: focused})
+		this.setState({ isEditing: focused })
 	};
 
 	render() {
-		let {type, name, revision} = this.props.params
+		let { type, name, revision } = this.props.params
 
 		if (this.state.area && (type && name && revision)) {
 			return (<AreaEditor
@@ -110,11 +110,11 @@ export class AreaEditScreen extends Component {
 
 		if (name) {
 			name = decodeURIComponent(name)
-			areas = filter(areas, {name})
+			areas = filter(areas, { name })
 		}
 		if (type) {
 			type = decodeURIComponent(type)
-			areas = filter(areas, {type})
+			areas = filter(areas, { type })
 		}
 
 		return <AreaList areas={areas} />
@@ -127,7 +127,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	...bindActionCreators({loadAllAreas}, dispatch),
+	...bindActionCreators({ loadAllAreas }, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AreaEditScreen)

@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import cx from 'classnames'
 
 import Button from 'modules/web/components/button'
 import Icon from 'modules/web/components/icon'
 import Requirement from './requirement'
 import ProgressBar from 'modules/web/components/progress-bar'
-import {compareProps} from 'modules/lib'
-import {close, chevronUp, chevronDown} from 'modules/web/icons/ionicons'
+import { compareProps } from 'modules/lib'
+import { close, chevronUp, chevronDown } from 'modules/web/icons/ionicons'
 
 import './area-of-study.scss'
 
@@ -59,7 +59,7 @@ function AreaOfStudy(props) {
 				</span>
 			</div>
 			<ProgressBar
-				className={cx('area--progress', {error: error})}
+				className={cx('area--progress', { error: error })}
 				colorful={true}
 				value={progressAt}
 				max={progressOf}
@@ -73,7 +73,7 @@ function AreaOfStudy(props) {
 			<span className="button-group">
 				<Button
 					className="area--actually-remove-area"
-					onClick={ev => props.onRemoveArea({name, type, revision}, ev)}
+					onClick={ev => props.onRemoveArea({ name, type, revision }, ev)}
 				>
 					Remove
 				</Button>
@@ -97,13 +97,13 @@ function AreaOfStudy(props) {
 				onAddOverride={props.onAddOverride}
 				onRemoveOverride={props.onRemoveOverride}
 				onToggleOverride={props.onToggleOverride}
-				path={[type, name]}
+				path={[ type, name ]}
 			/>
 		)
 	}
 
 	return (
-		<div className={cx('area', {errored: Boolean(error)}, {loading: !checked})}>
+		<div className={cx('area', { errored: Boolean(error) }, { loading: !checked })}>
 			<div
 				className="area--summary"
 				onClick={props.onToggleAreaExpansion}
@@ -166,17 +166,17 @@ export default class AreaOfStudyContainer extends Component {
 
 	startRemovalConfirmation = ev => {
 		ev.preventDefault()
-		this.setState({confirmRemoval: true})
+		this.setState({ confirmRemoval: true })
 	};
 
 	endRemovalConfirmation = ev => {
 		ev.preventDefault()
-		this.setState({confirmRemoval: false})
+		this.setState({ confirmRemoval: false })
 	};
 
 	toggleAreaExpansion = ev => {
 		ev.preventDefault()
-		this.setState({isOpen: !this.state.isOpen})
+		this.setState({ isOpen: !this.state.isOpen })
 	};
 
 	render() {

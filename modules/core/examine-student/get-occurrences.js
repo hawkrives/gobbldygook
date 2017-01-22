@@ -1,7 +1,7 @@
 // @flow
 import filter from 'lodash/filter'
 import simplifyCourse from './simplify-course'
-import type {Course} from './types'
+import type { Course } from './types'
 
 // old version; compares course objects instead of simplified versions
 // export default function getOccurrences(course, courses) {

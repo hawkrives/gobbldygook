@@ -1,6 +1,6 @@
-import {saveStudent as saveStudentFunc} from '../../../helpers/save-student'
+import { saveStudent as saveStudentFunc } from '../../../helpers/save-student'
 
-import {SAVE_STUDENT} from '../constants'
+import { SAVE_STUDENT } from '../constants'
 
 export function saveStudent(id) {
 	return (dispatch, getState) => {

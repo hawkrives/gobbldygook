@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import Icon from 'modules/web/components/icon'
-import {checkmark, close} from 'modules/web/icons/ionicons'
+import { checkmark, close } from 'modules/web/icons/ionicons'
 
-export default function ResultIndicator({result}) {
+export default function ResultIndicator({ result }) {
 	return <Icon className={`result-indicator ${result ? 'result-indicator--success' : 'result-indicator--failure'}`}>
 		{result ? checkmark : close}
 	</Icon>

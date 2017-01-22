@@ -21,8 +21,8 @@ export const checkStudentAgainstArea = student => area => {
 		const sourceId = uniqueId()
 
 		// This is inside of the function so that it doesn't get unregistered too early
-		function onMessage({data}) {
-			const [resultId, type, contents] = JSON.parse(data)
+		function onMessage({ data }) {
+			const [ resultId, type, contents ] = JSON.parse(data)
 
 			if (resultId === sourceId) {
 				worker.removeEventListener('message', onMessage)
@@ -31,7 +31,7 @@ export const checkStudentAgainstArea = student => area => {
 					resolve(contents)
 				}
 				else if (type === 'error') {
-					resolve({_error: contents.message})
+					resolve({ _error: contents.message })
 				}
 			}
 		}
@@ -42,6 +42,6 @@ export const checkStudentAgainstArea = student => area => {
 		 * > We know that serialization/deserialization is slow. It's actually faster to
 		 * > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 		 */
-		worker.postMessage(JSON.stringify([sourceId, student, area]))
+		worker.postMessage(JSON.stringify([ sourceId, student, area ]))
 	})
 }

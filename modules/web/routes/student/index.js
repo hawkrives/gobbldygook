@@ -17,7 +17,7 @@ export default {
 
 	getComponents(location, cb) {
 		require.ensure([], () => {
-			cb(null, {content: require('./containers/student').default})
+			cb(null, { content: require('./containers/student').default })
 		}, 'student.components')
 	},
 }

@@ -1,6 +1,6 @@
 // @flow
-import {semesterName} from './semester-name'
-import {expandYear} from './expand-year'
+import { semesterName } from './semester-name'
+import { expandYear } from './expand-year'
 
 /* Takes a term and makes it pretty.
  * eg. {in: 20121, out: Fall 2012-13}

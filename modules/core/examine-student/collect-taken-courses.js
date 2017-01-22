@@ -4,7 +4,7 @@ import filter from 'lodash/filter'
 import isPlainObject from 'lodash/isPlainObject'
 import flattenDeep from 'lodash/flattenDeep'
 import uniq from 'lodash/uniq'
-import type {Expression, Course} from './types'
+import type { Expression, Course } from './types'
 
 export default function collectTakenCourses(expr: Expression): Course[] {
 	// this function needs to end up with a list of all of the courses
@@ -12,7 +12,7 @@ export default function collectTakenCourses(expr: Expression): Course[] {
 
 	// check to see we're on a _taken course
 	if (expr.$type === 'course' && '_taken' in expr && '$course' in expr) {
-		return [expr.$course]
+		return [ expr.$course ]
 	}
 
 	// if not, check all sub-chunks

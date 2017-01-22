@@ -1,9 +1,9 @@
 // @flow
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 
-import {compareProps} from 'modules/lib'
+import { compareProps } from 'modules/lib'
 import './button.scss'
 
 type ButtonProps = {
@@ -40,7 +40,7 @@ export default class Button extends Component {
 			title: this.props.title,
 		}
 		if (this.props.link) {
-			props = {...props, to: this.props.to}
+			props = { ...props, to: this.props.to }
 		}
 		return React.createElement(tag, props, this.props.children)
 	}

@@ -23,13 +23,13 @@ const mapping = {
 	departments: 'department',
 }
 export function alterCourse(course) {
-	course = {...course}
+	course = { ...course }
 
 	forEach(mapping, (toKey, fromKey) => {
 		course[toKey] = course[fromKey]
 	})
 
 	let pairs = toPairs(course)
-	pairs = filter(pairs, ([key]) => includes(whitelist, key))
+	pairs = filter(pairs, ([ key ]) => includes(whitelist, key))
 	return fromPairs(pairs)
 }

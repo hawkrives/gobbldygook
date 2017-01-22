@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
@@ -50,7 +50,7 @@ StudentList.propTypes = {
 	filter: PropTypes.string.isRequired,
 	groupBy: PropTypes.string.isRequired,
 	isEditing: PropTypes.bool.isRequired,
-	sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate']).isRequired,
+	sortBy: PropTypes.oneOf([ 'dateLastModified', 'name', 'canGraduate' ]).isRequired,
 	students: PropTypes.object.isRequired,
 }
 

@@ -7,7 +7,7 @@ import {
 	installFirefoxExtension,
 } from 'modules/web/helpers/extension-helpers'
 
-import {interpose} from 'modules/lib'
+import { interpose } from 'modules/lib'
 
 import brwsr from 'brwsr'
 
@@ -45,7 +45,7 @@ export class BrowserExtensionsComponent extends React.Component {
 
 	checkExtensionStatus = () => {
 		if (global.gobbldygook_extension >= '1.0.0') {
-			this.setState({extensionInstalled: true})
+			this.setState({ extensionInstalled: true })
 		}
 	}
 
@@ -85,12 +85,12 @@ export class BrowserExtensionsComponent extends React.Component {
 	}
 
 	installSuccess = () => {
-		this.setState({installAttempted: true})
+		this.setState({ installAttempted: true })
 		this.props.onInstall()
 	}
 
 	installFailure = (err: Error) => {
-		this.setState({installError: err, installAttempted: true})
+		this.setState({ installError: err, installAttempted: true })
 	}
 
 	detectBrowser() {
@@ -111,11 +111,11 @@ export class BrowserExtensionsComponent extends React.Component {
 
 	buttons() {
 		return [
-			{name: 'Google Chrome', button: <BrowserButton key="chrome" onClick={this.installChromeExtension} browserName="Chrome" />},
-			{name: 'Mozilla Firefox', button: <BrowserButton key="firefox" onClick={this.installFirefoxExtension} browserName="Firefox" />},
-			{name: 'Microsoft Edge', button: <BrowserButton key="edge" disabled onClick={this.installEdgeExtension} browserName="Edge" />},
-			{name: 'Safari', button: <BrowserButton key="safari" disabled onClick={this.installSafariExtension} browserName="Safari" />},
-			{name: 'Opera', button: <BrowserButton key="opera" disabled onClick={this.installOperaExtension} browserName="Opera" />},
+			{ name: 'Google Chrome', button: <BrowserButton key="chrome" onClick={this.installChromeExtension} browserName="Chrome" /> },
+			{ name: 'Mozilla Firefox', button: <BrowserButton key="firefox" onClick={this.installFirefoxExtension} browserName="Firefox" /> },
+			{ name: 'Microsoft Edge', button: <BrowserButton key="edge" disabled onClick={this.installEdgeExtension} browserName="Edge" /> },
+			{ name: 'Safari', button: <BrowserButton key="safari" disabled onClick={this.installSafariExtension} browserName="Safari" /> },
+			{ name: 'Opera', button: <BrowserButton key="opera" disabled onClick={this.installOperaExtension} browserName="Opera" /> },
 		]
 	}
 

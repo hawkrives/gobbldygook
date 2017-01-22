@@ -4,7 +4,7 @@ import every from 'lodash/every'
 import keys from 'lodash/keys'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
-import type {Course, CourseExpression} from './types'
+import type { Course, CourseExpression } from './types'
 
 const baseKeys = [
 	'department',

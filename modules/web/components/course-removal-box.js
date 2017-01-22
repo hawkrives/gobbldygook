@@ -1,14 +1,14 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import {DropTarget} from 'react-dnd'
+import { DropTarget } from 'react-dnd'
 import debug from 'debug'
 const log = debug('web:courses')
 
-import {IDENT_COURSE} from 'modules/core'
+import { IDENT_COURSE } from 'modules/core'
 
 import Icon from './icon'
-import {iosTrashOutline} from '../icons/ionicons'
+import { iosTrashOutline } from '../icons/ionicons'
 
 import './course-removal-box.scss'
 
@@ -26,7 +26,7 @@ function CourseRemovalBox(props: CourseRemovalBoxProps) {
 
 	return props.connectDropTarget(
 		<div className={className}>
-			<Icon type="block" style={{fontSize: '3em', textAlign: 'center'}}>{iosTrashOutline}</Icon>
+			<Icon type="block" style={{ fontSize: '3em', textAlign: 'center' }}>{iosTrashOutline}</Icon>
 			Drop a course here to remove it.
 		</div>
 	)

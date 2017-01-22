@@ -1,7 +1,7 @@
 import union from 'lodash/union'
 import reject from 'lodash/reject'
 import stringify from 'stabilize'
-import {prepareStudentForSave} from 'modules/core'
+import { prepareStudentForSave } from 'modules/core'
 import debug from 'debug'
 const log = debug('web:save-student')
 
@@ -17,7 +17,7 @@ export function setIdCache(ids) {
 
 export function addStudentToCache(studentId) {
 	let ids = getIdCache()
-	ids = union(ids, [studentId])
+	ids = union(ids, [ studentId ])
 	setIdCache(ids)
 }
 
@@ -38,7 +38,7 @@ export async function saveStudent(student) {
 
 	if (oldVersion !== stringify(student)) {
 		log(`saving student ${student.name} (${student.id})`)
-		student = {...student, dateLastModified: new Date()}
+		student = { ...student, dateLastModified: new Date() }
 		localStorage.setItem(student.id, stringify(student))
 		await addStudentToCache(student.id)
 	}

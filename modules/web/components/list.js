@@ -27,7 +27,7 @@ export default function List(props: ListProps) {
 	// eslint-disable-next-line no-confusing-arrow
 	const contents = ReactChildren.map(children, child =>
 		isValidElement(child)
-		? cloneElement(child, {...child.props, className: cx('list-item', child.props.className)})
+		? cloneElement(child, { ...child.props, className: cx('list-item', child.props.className) })
 		: child)
 
 	className = cx('list', `list--${type}`, className)

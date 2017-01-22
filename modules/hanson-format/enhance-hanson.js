@@ -9,17 +9,17 @@ import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import some from 'lodash/some'
 import fromPairs from 'lodash/fromPairs'
-import {makeAreaSlug} from './make-area-slug'
-import {parse} from './parse-hanson-string'
+import { makeAreaSlug } from './make-area-slug'
+import { parse } from './parse-hanson-string'
 
 const requirementNameRegex = /(.*?) +\(([A-Z\-]+)\)$/i
 const none = (arr, pred) => !some(arr, pred)
 const quote = str => `"${str}"`
 const quoteAndJoin = list => list.map(quote).join(', ')
 
-const baseWhitelist = ['result', 'message', 'declare', 'children share courses']
-const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error'])
-const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description', 'student selected'])
+const baseWhitelist = [ 'result', 'message', 'declare', 'children share courses' ]
+const topLevelWhitelist = baseWhitelist.concat([ 'name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error' ])
+const lowerLevelWhitelist = baseWhitelist.concat([ 'filter', 'message', 'description', 'student selected' ])
 
 const startRules = {
 	'result': 'Result',
@@ -28,7 +28,7 @@ const startRules = {
 
 type StringMap = {[key: string]: string};
 
-export function enhanceHanson(data: any, {topLevel=true, declaredVariables={}}: {topLevel: boolean, declaredVariables: StringMap}={}) {
+export function enhanceHanson(data: any, { topLevel=true, declaredVariables={} }: {topLevel: boolean, declaredVariables: StringMap}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
 	// 3. throws if it encounters any lowercase keys not in the whitelist
@@ -41,7 +41,7 @@ export function enhanceHanson(data: any, {topLevel=true, declaredVariables={}}: 
 	// Ensure that a result, message, or filter key exists.
 	// If filter's the only one, it's going to filter the list of courses
 	// available to the child requirements when this is evaluated.
-	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
+	const oneOfTheseKeysMustExist = [ 'result', 'message', 'filter' ]
 	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
 		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
 		let existingKeys = quoteAndJoin(keys(data))
@@ -75,8 +75,8 @@ export function enhanceHanson(data: any, {topLevel=true, declaredVariables={}}: 
 	// Studies (BTS-B)"), we need a method of splitting those apart so the
 	// PEG's ReferenceExpression can correctly reference them.
 	const requirements = filter(keys(data), isRequirementName)
-	const abbreviations = fromPairs(map(requirements, req => [req.replace(requirementNameRegex, '$2'), req]))
-	const titles = fromPairs(map(requirements, req => [req.replace(requirementNameRegex, '$1'), req]))
+	const abbreviations = fromPairs(map(requirements, req => [ req.replace(requirementNameRegex, '$2'), req ]))
+	const titles = fromPairs(map(requirements, req => [ req.replace(requirementNameRegex, '$1'), req ]))
 
 	// (Variables)
 	// We load the list of variables with the keys listed in the `declare` key
@@ -88,11 +88,11 @@ export function enhanceHanson(data: any, {topLevel=true, declaredVariables={}}: 
 		if (isRequirementName(key)) {
 			// expand simple strings into {result: string} objects
 			if (isString(value)) {
-				value = {result: value}
+				value = { result: value }
 			}
 
 			// then run enhance on the resultant object
-			value = enhanceHanson(value, {topLevel: false, declaredVariables})
+			value = enhanceHanson(value, { topLevel: false, declaredVariables })
 
 			// also set $type; the PEG can't do it b/c the spec file is YAML
 			// w/ PEG result strings.
@@ -119,7 +119,7 @@ export function enhanceHanson(data: any, {topLevel=true, declaredVariables={}}: 
 			})
 
 			try {
-				value = parse(value, {abbreviations, titles, startRule: startRules[key]})
+				value = parse(value, { abbreviations, titles, startRule: startRules[key] })
 			}
 			catch (e) {
 				throw new SyntaxError(`enhanceHanson: ${e.message} (in '${value}')`)

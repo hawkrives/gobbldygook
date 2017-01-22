@@ -1,11 +1,11 @@
 import props from 'p-props'
 import flatten from 'lodash/flatten'
-import {AuthError, NetworkError} from 'modules/lib'
-import {fetchHtml} from './lib'
-import {extractTermList} from './term-list'
-import {collectAllCourses} from './courses'
-import {getGraduationInformation} from './graduation-info'
-import {COURSES_URL, DEGREE_AUDIT_URL} from './urls'
+import { AuthError, NetworkError } from 'modules/lib'
+import { fetchHtml } from './lib'
+import { extractTermList } from './term-list'
+import { collectAllCourses } from './courses'
+import { getGraduationInformation } from './graduation-info'
+import { COURSES_URL, DEGREE_AUDIT_URL } from './urls'
 
 
 function loadPages(studentId) {
@@ -17,7 +17,7 @@ function loadPages(studentId) {
 }
 
 
-function beginDataExtraction({id, coursesDom, auditDom}) {
+function beginDataExtraction({ id, coursesDom, auditDom }) {
 	let terms = extractTermList(coursesDom)
 
 	return props({
@@ -27,7 +27,7 @@ function beginDataExtraction({id, coursesDom, auditDom}) {
 }
 
 
-function flattenData({coursesByTerm, studentInfo}) {
+function flattenData({ coursesByTerm, studentInfo }) {
 	return {
 		courses: flatten(coursesByTerm),
 		degrees: studentInfo,

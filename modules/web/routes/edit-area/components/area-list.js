@@ -1,5 +1,5 @@
 // @flow
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import Link from 'react-router/lib/Link'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'

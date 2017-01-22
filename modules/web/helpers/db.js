@@ -1,4 +1,4 @@
-import treo, {Database} from 'treo'
+import treo, { Database } from 'treo'
 treo.Promise = global.Promise
 import debug from 'debug'
 const log = debug('web:database')

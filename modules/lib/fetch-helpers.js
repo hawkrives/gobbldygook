@@ -1,5 +1,5 @@
 // @flow
-import {NetworkError} from './errors'
+import { NetworkError } from './errors'
 
 export function status(response: Response) {
 	if (response.status >= 200 && response.status < 300) {

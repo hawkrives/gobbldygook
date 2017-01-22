@@ -1,4 +1,4 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 import getMatchesFromFilter from '../get-matches-from-filter'
 
 describe('getMatchesFromFilter', () => {
@@ -16,8 +16,8 @@ describe('getMatchesFromFilter', () => {
 					},
 				},
 				_matches: [
-					{department: ['CSCI'], number: 320},
-					{department: ['CSCI'], number: 160},
+					{ department: [ 'CSCI' ], number: 320 },
+					{ department: [ 'CSCI' ], number: 160 },
 				],
 			},
 		}

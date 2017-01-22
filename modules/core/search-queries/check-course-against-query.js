@@ -11,7 +11,7 @@ import tail from 'lodash/tail'
 import takeWhile from 'lodash/takeWhile'
 import toPairs from 'lodash/toPairs'
 
-function checkCourseAgainstQueryBit(course, [key, values]) {
+function checkCourseAgainstQueryBit(course, [ key, values ]) {
 	if (!has(course, key)) {
 		return false
 	}
@@ -36,7 +36,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 		values = tail(values)
 	}
 
-	if (includes(['title', 'name', 'description', 'notes', 'instructors', 'times', 'locations'], key)) {
+	if (includes([ 'title', 'name', 'description', 'notes', 'instructors', 'times', 'locations' ], key)) {
 		substring = true
 	}
 

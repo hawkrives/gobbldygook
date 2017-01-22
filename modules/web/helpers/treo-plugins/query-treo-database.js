@@ -16,10 +16,10 @@ import debug from 'debug'
 const log = debug('web:database:query')
 
 import idbRange from 'idb-range'
-import {cmp as idbComparison} from 'treo'
-import {checkCourseAgainstQuery} from 'modules/core/search-queries'
+import { cmp as idbComparison } from 'treo'
+import { checkCourseAgainstQuery } from 'modules/core/search-queries'
 
-function canAdd({query, value, primaryKey, results}={}) {
+function canAdd({ query, value, primaryKey, results }={}) {
 	// Check if we want to add the current value to the results array.
 	// Essentially, make sure that the current value passes the query,
 	// and then that it's not already in the array.
@@ -28,7 +28,7 @@ function canAdd({query, value, primaryKey, results}={}) {
 	return checkCourseAgainstQuery(query, value) && !includes(results, primaryKey)
 }
 
-const preferredKeyOrder = ['deptnum']
+const preferredKeyOrder = [ 'deptnum' ]
 const sortKeys = key => {
 	let idx = preferredKeyOrder.indexOf(key)
 	if (idx >= 0) {
@@ -103,14 +103,14 @@ function queryStore(query) {
 			}
 
 			let iterateStore = cursor => {
-				let {value, primaryKey} = cursor
-				if (canAdd({query, value, primaryKey, results})) {
+				let { value, primaryKey } = cursor
+				if (canAdd({ query, value, primaryKey, results })) {
 					results.push(primaryKey)
 				}
 				cursor.continue()
 			}
 
-			this.cursor({iterator: iterateStore}).then(done)
+			this.cursor({ iterator: iterateStore }).then(done)
 		}
 	})
 }
@@ -191,8 +191,8 @@ function queryIndex(query, primaryKeysOnly=false) {
 				log('greater')
 				// If the cursor's key is "past" the current one, we need to skip
 				// ahead to the next one key in the list of keys.
-				let {value, primaryKey} = cursor
-				if (canAdd({query, value, primaryKey, results})) {
+				let { value, primaryKey } = cursor
+				if (canAdd({ query, value, primaryKey, results })) {
 					log('adding', value)
 					results.push(primaryKey)
 				}
@@ -210,8 +210,8 @@ function queryIndex(query, primaryKeysOnly=false) {
 				log('equals')
 				// If we've found what we're looking for, add it, and go to
 				// the next result.
-				let {value, primaryKey} = cursor
-				if (canAdd({query, value, primaryKey, results})) {
+				let { value, primaryKey } = cursor
+				if (canAdd({ query, value, primaryKey, results })) {
 					log('adding', value)
 					results.push(primaryKey)
 				}
@@ -226,7 +226,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 			}
 		}
 
-		this.cursor({range, iterator: iterateIndex}).then(done)
+		this.cursor({ range, iterator: iterateIndex }).then(done)
 	})
 }
 

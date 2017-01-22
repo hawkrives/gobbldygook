@@ -1,6 +1,6 @@
 // @flow
-import type {CounterOperatorEnum} from './types'
-export default function computeCountWithOperator({comparator, has, needs}: {comparator: CounterOperatorEnum, has: number, needs: number}): boolean {
+import type { CounterOperatorEnum } from './types'
+export default function computeCountWithOperator({ comparator, has, needs }: {comparator: CounterOperatorEnum, has: number, needs: number}): boolean {
 	// compute the result
 	if (comparator === '$eq') {
 		return has === needs

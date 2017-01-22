@@ -2,9 +2,9 @@ import filter from 'lodash/filter'
 import size from 'lodash/size'
 import map from 'lodash/map'
 
-import {checkStudentAgainstArea} from './check-student-against-area'
-import {countCredits} from 'modules/core/examine-student'
-import {getActiveStudentCourses} from './get-active-student-courses'
+import { checkStudentAgainstArea } from './check-student-against-area'
+import { countCredits } from 'modules/core/examine-student'
+import { getActiveStudentCourses } from './get-active-student-courses'
 
 
 /**

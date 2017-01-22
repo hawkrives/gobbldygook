@@ -1,5 +1,5 @@
-import {expect} from 'chai'
-import {randomChar} from '../random-char'
+import { expect } from 'chai'
+import { randomChar } from '../random-char'
 
 describe('randomChar', () => {
 	it('finds a random integer between the parameters', () => {

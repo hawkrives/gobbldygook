@@ -1,12 +1,12 @@
-import {expect} from 'chai'
-import {customParser, qualification, boolean} from './parse-hanson-string.support'
-const parseWhere = customParser({allowedStartRules: ['Where']})
-const parseQualifier = customParser({allowedStartRules: ['Qualifier']})
+import { expect } from 'chai'
+import { customParser, qualification, boolean } from './parse-hanson-string.support'
+const parseWhere = customParser({ allowedStartRules: [ 'Where' ] })
+const parseQualifier = customParser({ allowedStartRules: [ 'Qualifier' ] })
 
 describe('WhereExpression', () => {
 	it('describes courses "where" a fact is true', () => {
 		expect(parseWhere('one course where {a = 1}')).to.deep.equal({
-			$count: {$num: 1, $operator: '$gte'},
+			$count: { $num: 1, $operator: '$gte' },
 			$type: 'where',
 			$where: {
 				$key: 'a',
@@ -20,7 +20,7 @@ describe('WhereExpression', () => {
 
 	it('may require distinct course', () => {
 		expect(parseWhere('two distinct courses where {a = 1}')).to.deep.equal({
-			$count: {$num: 2, $operator: '$gte'},
+			$count: { $num: 2, $operator: '$gte' },
 			$type: 'where',
 			$where: {
 				$key: 'a',
@@ -142,13 +142,13 @@ describe('qualifiers can use boolean logic', () => {
 	it('value may be a boolean and-list', () => {
 		expect(parseQualifier('{ dept = THEAT & (num = (233 & 253) ) }')).to.deep.equal(boolean('and', [
 			qualification('eq', 'dept', 'THEAT'),
-			qualification('eq', 'num', boolean('and', [233, 253])),
+			qualification('eq', 'num', boolean('and', [ 233, 253 ])),
 		]))
 	})
 	it('value may be a boolean or-list', () => {
 		expect(parseQualifier('{ dept = THEAT & (num = (233 | 253) ) }')).to.deep.equal(boolean('and', [
 			qualification('eq', 'dept', 'THEAT'),
-			qualification('eq', 'num', boolean('or', [233, 253])),
+			qualification('eq', 'num', boolean('or', [ 233, 253 ])),
 		]))
 	})
 })

@@ -1,4 +1,4 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 import humanizeOperator from '../humanize-operator'
 
 describe('humanizeOperator', () => {

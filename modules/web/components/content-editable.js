@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import cx from 'classnames'
 import debug from 'debug'
 const log = debug('web:react')
@@ -47,13 +47,13 @@ class ContentEditable extends Component {
 		const value = ev.target.textContent
 
 		if (value !== this.props.value) {
-			this.props.onChange({target: {value}})
+			this.props.onChange({ target: { value } })
 		}
 		if (ev.type === 'blur' && typeof this.props.onBlur === 'function') {
-			this.props.onBlur({target: {value}})
+			this.props.onBlur({ target: { value } })
 		}
 
-		this.setState({lastValue: value})
+		this.setState({ lastValue: value })
 	};
 
 	render() {
@@ -65,7 +65,7 @@ class ContentEditable extends Component {
 			onKeyDown={this.handleKeyDown}
 			onFocus={this.handleFocus}
 			contentEditable={true}
-			dangerouslySetInnerHTML={{__html: this.props.value}}
+			dangerouslySetInnerHTML={{ __html: this.props.value }}
 		/>
 	}
 }

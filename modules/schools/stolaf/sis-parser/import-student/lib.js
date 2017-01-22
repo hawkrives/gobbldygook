@@ -1,7 +1,7 @@
-import {parseHtml} from '../parse-html'
+import { parseHtml } from '../parse-html'
 import forOwn from 'lodash/forOwn'
 import forEach from 'lodash/forEach'
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 export class ExtensionNotLoadedError extends Error {}
 export class ExtensionTooOldError extends Error {}

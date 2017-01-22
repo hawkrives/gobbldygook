@@ -2,15 +2,15 @@
 import React from 'react'
 
 import map from 'lodash/map'
-import {toPrettyTerm} from 'modules/schools/stolaf'
+import { toPrettyTerm } from 'modules/schools/stolaf'
 
 import Button from './button'
 import Icon from './icon'
 import Loading from './loading'
 import CourseResultsList from './course-results-list'
-import {androidArrowForward} from '../icons/ionicons'
+import { androidArrowForward } from '../icons/ionicons'
 
-import {SORT_BY, GROUP_BY} from './course-searcher-options'
+import { SORT_BY, GROUP_BY } from './course-searcher-options'
 
 import './course-searcher.scss'
 
@@ -117,8 +117,8 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						disabled={inProgress}
 					>
 						{inProgress
-							? [<span key="msg">Searching…</span>]
-							: [<span key="msg">Search </span>, <Icon key="icon">{androidArrowForward}</Icon>]}
+							? [ <span key="msg">Searching…</span> ]
+							: [ <span key="msg">Search </span>, <Icon key="icon">{androidArrowForward}</Icon> ]}
 					</Button>
 				</div>
 				{hasQueried &&

@@ -1,5 +1,5 @@
-import {expect} from 'chai'
-import {normalizeDepartment} from '../convert-department'
+import { expect } from 'chai'
+import { normalizeDepartment } from '../convert-department'
 
 describe('normalizeDepartment', () => {
 	it('expands a short department abbreviation into a long abbreviation', () => {

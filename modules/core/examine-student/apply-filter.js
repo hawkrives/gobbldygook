@@ -2,7 +2,7 @@
 import checkForCourse from './check-for-course'
 import filter from 'lodash/filter'
 import filterByWhereClause from './filter-by-where-clause'
-import type {FilterWhereExpression, FilterOfExpression, Course} from './types'
+import type { FilterWhereExpression, FilterOfExpression, Course } from './types'
 
 /**
  * Filters a list of courses by way of a filter expression.

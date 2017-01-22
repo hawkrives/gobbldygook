@@ -8,7 +8,7 @@ import includes from 'lodash/includes'
 import map from 'lodash/map'
 import toArray from 'lodash/toArray'
 
-import {checkStudent} from '../students/actions/check-student'
+import { checkStudent } from '../students/actions/check-student'
 
 const whitelist = [
 	studentConstants.INIT_STUDENT,
@@ -39,7 +39,7 @@ const whitelist = [
 	// when one of these fires
 	courseConstants.REFRESH_COURSES,
 ]
-function shouldTakeAction({type}: {type?: string}) {
+function shouldTakeAction({ type }: {type?: string}) {
 	return includes(whitelist, type)
 }
 

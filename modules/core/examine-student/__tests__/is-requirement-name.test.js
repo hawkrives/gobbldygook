@@ -1,4 +1,4 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 import isRequirementName from '../is-requirement-name'
 
 describe('isRequirementName checks if a string is a requirement name', () => {

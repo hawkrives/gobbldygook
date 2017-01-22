@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
 import map from 'lodash/map'
 import { bindActionCreators } from 'redux'
@@ -9,7 +9,7 @@ import Notification from '../components/notification'
 
 import './notifications.scss'
 
-export const Notifications = ({notifications, removeNotification}) => (
+export const Notifications = ({ notifications, removeNotification }) => (
 	<ul className="notification-list">
 		{map(notifications, (n, i) =>
 			<Notification {...n} key={i} onClose={() => removeNotification(i)} />
@@ -27,7 +27,7 @@ const selectState = state => ({
 })
 
 const selectDispatch = dispatch => ({
-	...bindActionCreators({removeNotification}, dispatch),
+	...bindActionCreators({ removeNotification }, dispatch),
 })
 
 export default connect(selectState, selectDispatch)(Notifications)

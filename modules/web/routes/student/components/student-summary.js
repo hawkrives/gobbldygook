@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import cx from 'classnames'
-import {oxford} from 'humanize-plus'
+import { oxford } from 'humanize-plus'
 import plur from 'plur'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
@@ -9,8 +9,8 @@ import sample from 'lodash/sample'
 import AvatarLetter from 'modules/web/components/avatar-letter'
 import ContentEditable from 'modules/web/components/content-editable'
 
-import {getActiveStudentCourses} from 'modules/web/helpers/get-active-student-courses'
-import {countCredits} from 'modules/core/examine-student'
+import { getActiveStudentCourses } from 'modules/web/helpers/get-active-student-courses'
+import { countCredits } from 'modules/core/examine-student'
 
 import './student-summary.scss'
 
@@ -54,7 +54,7 @@ export default function StudentSummary(props) {
 		showAvatar=true,
 		randomizeHello=false,
 	} = props
-	const {studies, canGraduate} = student
+	const { studies, canGraduate } = student
 
 	const NameEl = (props.onChangeName
 		? <ContentEditable
@@ -64,10 +64,10 @@ export default function StudentSummary(props) {
 		/>
 		: <span>{String(student.name)}</span>)
 
-	const degrees = filter(studies, {type: 'degree'})
-	const majors = filter(studies, {type: 'major'})
-	const concentrations = filter(studies, {type: 'concentration'})
-	const emphases = filter(studies, {type: 'emphasis'})
+	const degrees = filter(studies, { type: 'degree' })
+	const majors = filter(studies, { type: 'major' })
+	const concentrations = filter(studies, { type: 'concentration' })
+	const emphases = filter(studies, { type: 'emphasis' })
 
 	const degreeWord = plur('degree', degrees.length)
 	const majorWord = plur('major', majors.length)

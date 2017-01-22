@@ -1,6 +1,6 @@
 // @flow
 import computeCountWithOperator from './compute-count-with-operator'
-import type {Fulfillment, Expression, Course} from './types'
+import type { Fulfillment, Expression, Course } from './types'
 
 type ReturnType = {
 	computedResult: boolean,
@@ -8,7 +8,7 @@ type ReturnType = {
 	counted: number,
 };
 
-export default function applyFulfillmentToResult({fulfillment, expr, computedResult, matches, counted}: {
+export default function applyFulfillmentToResult({ fulfillment, expr, computedResult, matches, counted }: {
 	fulfillment: Fulfillment,
 	expr: Expression,
 	computedResult: boolean,
@@ -21,7 +21,7 @@ export default function applyFulfillmentToResult({fulfillment, expr, computedRes
 	counted = counted || 0
 
 	if (expr.$type === 'boolean' || expr.$type === 'course') {
-		return {computedResult, matches, counted}
+		return { computedResult, matches, counted }
 	}
 
 	const counter = expr.hasOwnProperty('$count') ? (expr: any).$count : null
@@ -58,5 +58,5 @@ export default function applyFulfillmentToResult({fulfillment, expr, computedRes
 		throw new Error('Expression needs a fulfillment, but expression is not countable!')
 	}
 
-	return {computedResult, matches, counted}
+	return { computedResult, matches, counted }
 }

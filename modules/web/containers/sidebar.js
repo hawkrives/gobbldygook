@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Button from '../components/button'
 import Icon from '../components/icon'
@@ -9,10 +9,10 @@ import Separator from '../components/separator'
 
 import CourseRemovalBox from '../components/course-removal-box'
 
-import {undo, redo} from '../redux/students/actions/undo'
-import {removeCourse} from '../redux/students/actions/courses'
+import { undo, redo } from '../redux/students/actions/undo'
+import { removeCourse } from '../redux/students/actions/courses'
 
-import {iosUndo, iosUndoOutline, iosRedo, iosRedoOutline, iosSearch, iosPeopleOutline, iosUploadOutline} from '../icons/ionicons'
+import { iosUndo, iosUndoOutline, iosRedo, iosRedoOutline, iosSearch, iosPeopleOutline, iosUploadOutline } from '../icons/ionicons'
 
 import './sidebar.scss'
 
@@ -72,6 +72,6 @@ Sidebar.propTypes = {
 }
 
 
-const mapDispatch = dispatch => bindActionCreators({undo, redo, removeCourse}, dispatch)
+const mapDispatch = dispatch => bindActionCreators({ undo, redo, removeCourse }, dispatch)
 
 export default connect(undefined, mapDispatch)(Sidebar)

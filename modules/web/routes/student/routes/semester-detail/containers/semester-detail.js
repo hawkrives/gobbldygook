@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import cx from 'classnames'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
 import DocumentTitle from 'react-document-title'
-import {isCurrentSemester} from 'modules/core'
-import {semesterName} from 'modules/schools/stolaf'
+import { isCurrentSemester } from 'modules/core'
+import { semesterName } from 'modules/schools/stolaf'
 import debug from 'debug'
 const log = debug('web:react')
 
@@ -34,7 +34,7 @@ export default class SemesterDetail extends Component {
 
 	render() {
 		log('SemesterDetail#render')
-		const {year, semester} = this.props.params
+		const { year, semester } = this.props.params
 		const student = this.props.student.data.present
 
 		const schedules = map(

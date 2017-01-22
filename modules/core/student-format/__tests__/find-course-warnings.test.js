@@ -1,5 +1,5 @@
-import {expect} from 'chai'
-import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
+import { expect } from 'chai'
+import { convertTimeStringsToOfferings } from 'sto-sis-time-parser'
 import {
 	checkForInvalidYear,
 	checkForInvalidSemester,
@@ -9,7 +9,7 @@ import {
 
 describe('checkForInvalidYear', () => {
 	it('checks for an invalid year on a course', () => {
-		expect(checkForInvalidYear({year: 1994}, 2012)).to.deep.equal({
+		expect(checkForInvalidYear({ year: 1994 }, 2012)).to.deep.equal({
 			warning: true,
 			type: 'invalid-year',
 			msg: 'Wrong Year (originally from 1994–95)',
@@ -20,7 +20,7 @@ describe('checkForInvalidYear', () => {
 
 describe('checkForInvalidSemester', () => {
 	it('checks for an invalid semester on a course', () => {
-		expect(checkForInvalidSemester({semester: 2}, 5)).to.deep.equal({
+		expect(checkForInvalidSemester({ semester: 2 }, 5)).to.deep.equal({
 			warning: true,
 			type: 'invalid-semester',
 			msg: 'Wrong Semester (originally from Interim)',

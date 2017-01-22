@@ -1,8 +1,8 @@
-import {expect} from 'chai'
-import {parse} from '../../parse-hanson-string'
+import { expect } from 'chai'
+import { parse } from '../../parse-hanson-string'
 
-const f = str => expect(() => parse(str, {startRule: 'Filter'})).not.to.throw()
-const r = str => expect(() => parse(str, {startRule: 'Result'})).not.to.throw()
+const f = str => expect(() => parse(str, { startRule: 'Filter' })).not.to.throw()
+const r = str => expect(() => parse(str, { startRule: 'Result' })).not.to.throw()
 const t = (str, msg) => expect(() => parse(str)).to.throw(msg)
 
 describe('parse-hanson-string', () => {

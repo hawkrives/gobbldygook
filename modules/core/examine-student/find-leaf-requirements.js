@@ -6,7 +6,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import keys from 'lodash/keys'
 import some from 'lodash/some'
 import isRequirementName from './is-requirement-name'
-import type {Requirement} from './types'
+import type { Requirement } from './types'
 
 /**
  * Searches recursively through a requirement tree to find all of the
@@ -33,7 +33,7 @@ export default function findLeafRequirements(requirement: Requirement) {
 	}
 
 	if (requirement.computed === true) {
-		return [requirement]
+		return [ requirement ]
 	}
 
 	// if there are no keys in this object which are requirement names,

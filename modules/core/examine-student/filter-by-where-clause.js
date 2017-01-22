@@ -9,11 +9,11 @@ import uniqBy from 'lodash/uniqBy'
 import assertKeys from './assert-keys'
 import compareCourseToQualification from './compare-course-to-qualification'
 import simplifyCourse from './simplify-course'
-import type {Course, Qualifier, Qualification, Counter, QualificationFunctionValue} from './types'
+import type { Course, Qualifier, Qualification, Counter, QualificationFunctionValue } from './types'
 import debug from 'debug'
 const log = debug('examine-student:filter-by-where-clause')
 
-export default function filterByWhereClause(baseList: Course[], clause: Qualifier, {distinct, fullList, counter}: {distinct: boolean, fullList?: Course[], counter?: Counter}={}) {
+export default function filterByWhereClause(baseList: Course[], clause: Qualifier, { distinct, fullList, counter }: {distinct: boolean, fullList?: Course[], counter?: Counter}={}) {
 	// When filtering by an and-clause, we need access to both the
 	// entire list of courses, and the result of the prior iteration.
 	// To simplify future invocations, we default to `fullList = list`
@@ -26,7 +26,7 @@ export default function filterByWhereClause(baseList: Course[], clause: Qualifie
 
 	// This function always reduces down to a call to filterByQualification
 	if (clause.$type === 'qualification') {
-		return filterByQualification(baseList, clause, {distinct, fullList, counter})
+		return filterByQualification(baseList, clause, { distinct, fullList, counter })
 	}
 
 	// either an and- or or-clause.
@@ -37,7 +37,7 @@ export default function filterByWhereClause(baseList: Course[], clause: Qualifie
 		if (clause.$booleanType === 'and') {
 			let filtered = baseList
 			forEach(clause.$and, q => {
-				filtered = filterByWhereClause(filtered, q, {distinct, fullList, counter})
+				filtered = filterByWhereClause(filtered, q, { distinct, fullList, counter })
 			})
 			return filtered
 		}
@@ -47,7 +47,7 @@ export default function filterByWhereClause(baseList: Course[], clause: Qualifie
 		else if (clause.$booleanType === 'or') {
 			let filtrations = []
 			forEach(clause.$or, q => {
-				filtrations = filtrations.concat(filterByWhereClause(baseList, q, {distinct, counter}))
+				filtrations = filtrations.concat(filterByWhereClause(baseList, q, { distinct, counter }))
 			})
 
 			// uniquify the list of possibilities by way of turning them into
@@ -72,7 +72,7 @@ const qualificationFunctionLookup = {
 	min: min,
 }
 
-export function filterByQualification(list: Course[], qualification: Qualification, {distinct=false, fullList, counter}: {distinct: boolean, fullList?: Course[], counter?: Counter}={}) {
+export function filterByQualification(list: Course[], qualification: Qualification, { distinct=false, fullList, counter }: {distinct: boolean, fullList?: Course[], counter?: Counter}={}) {
 	assertKeys(qualification, '$key', '$operator', '$value')
 	const value = qualification.$value
 
@@ -83,7 +83,7 @@ export function filterByQualification(list: Course[], qualification: Qualificati
 			}
 		}
 		else if (value.$type === 'function') {
-			applyQualifictionFunction({value, fullList, list})
+			applyQualifictionFunction({ value, fullList, list })
 		}
 		else {
 			throw new TypeError(`filterByQualification: ${value.$type} is not a valid type for a query.`)
@@ -106,7 +106,7 @@ export function filterByQualification(list: Course[], qualification: Qualificati
 	return filtered
 }
 
-function applyQualifictionFunction({value, fullList, list}: {value: QualificationFunctionValue, fullList?: Course[], list: Course[]}) {
+function applyQualifictionFunction({ value, fullList, list }: {value: QualificationFunctionValue, fullList?: Course[], list: Course[]}) {
 	const func = qualificationFunctionLookup[value.$name]
 
 	if (!func) {

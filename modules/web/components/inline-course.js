@@ -1,16 +1,16 @@
-import React, {Component} from 'react'
-import {DragSource} from 'react-dnd'
+import React, { Component } from 'react'
+import { DragSource } from 'react-dnd'
 import cx from 'classnames'
 import compact from 'lodash/compact'
 import filter from 'lodash/filter'
 import isNull from 'lodash/isNull'
 import map from 'lodash/map'
 
-import {IDENT_COURSE} from '../../core/student-format/item-types'
+import { IDENT_COURSE } from '../../core/student-format/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'
-import {buildDeptNum} from 'modules/schools/stolaf'
+import { buildDeptNum } from 'modules/schools/stolaf'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 
@@ -44,11 +44,11 @@ class InlineCourse extends Component {
 	}
 
 	closeModal = () => {
-		this.setState({isOpen: false})
+		this.setState({ isOpen: false })
 	};
 
 	openModal = () => {
-		this.setState({isOpen: true})
+		this.setState({ isOpen: true })
 	};
 
 	render() {

@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import FakeCourse from './fake-course'
 
 export default function MissingCourse(props) {
@@ -12,5 +12,5 @@ export default function MissingCourse(props) {
 MissingCourse.propTypes = {
 	className: PropTypes.string,
 	clbid: PropTypes.number.isRequired,
-	error: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Error)]).isRequired,
+	error: PropTypes.oneOfType([ PropTypes.string, PropTypes.instanceOf(Error) ]).isRequired,
 }

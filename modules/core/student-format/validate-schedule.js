@@ -1,4 +1,4 @@
-import {findWarnings} from './find-course-warnings'
+import { findWarnings } from './find-course-warnings'
 import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
 import identity from 'lodash/identity'
@@ -22,5 +22,5 @@ export function validateSchedule(schedule) {
 	const warnings = map(filtered, c => c.warning)
 	const hasConflict = some(warnings, w => w === true)
 
-	return {...schedule, hasConflict, conflicts}
+	return { ...schedule, hasConflict, conflicts }
 }

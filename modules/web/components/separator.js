@@ -27,13 +27,13 @@ export default function Separator(props: SeparatorProps) {
 	}
 
 	if (type === 'line') {
-		renderedStyle = {...renderedStyle, borderWidth: '1px'}
+		renderedStyle = { ...renderedStyle, borderWidth: '1px' }
 	}
 	else if (type === 'spacer') {
-		renderedStyle = {...renderedStyle, padding: '0 0.5em'}
+		renderedStyle = { ...renderedStyle, padding: '0 0.5em' }
 	}
 	else if (type === 'flex-spacer') {
-		renderedStyle = {...renderedStyle, flex}
+		renderedStyle = { ...renderedStyle, flex }
 	}
 
 	return (

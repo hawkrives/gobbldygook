@@ -1,5 +1,5 @@
 // @flow
-import {normalizeDepartment} from 'modules/hanson-format'
+import { normalizeDepartment } from 'modules/hanson-format'
 
 /**
  * Builds a department string from a course.

@@ -1,5 +1,5 @@
 // @flow
-import type {AreaOfStudyTypeEnum} from './types'
+import type { AreaOfStudyTypeEnum } from './types'
 /**
  * Pluralizes an area type
  * @private

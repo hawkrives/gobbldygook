@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import fuzzysearch from 'fuzzysearch'
-import {pluralizeArea} from 'modules/core/examine-student'
+import { pluralizeArea } from 'modules/core/examine-student'
 import map from 'lodash/map'
 import reject from 'lodash/reject'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
-import {filterAreaList} from 'modules/core'
+import { filterAreaList } from 'modules/core'
 
 import Button from 'modules/web/components/button'
 import List from 'modules/web/components/list'
@@ -19,7 +19,7 @@ function AreaPicker(props) {
 	const currentAreaNames = map(props.currentAreas, a => a.name)
 	let onlyAvailableAreas = reject(props.areaList, area => includes(currentAreaNames, area.name))
 
-	onlyAvailableAreas = filterAreaList(onlyAvailableAreas, {graduation})
+	onlyAvailableAreas = filterAreaList(onlyAvailableAreas, { graduation })
 
 	const filteredOnName = filter(onlyAvailableAreas, area =>
 		fuzzysearch(props.filterText, area.name.toLowerCase()))
@@ -83,7 +83,7 @@ export default class AreaPickerContainer extends Component {
 	render() {
 		return <AreaPicker {...this.props}
 			filterText={this.state.filter}
-			onFilterChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})}
+			onFilterChange={ev => this.setState({ filter: (ev.target.value || '').toLowerCase() })}
 		/>
 	}
 }

@@ -1,12 +1,12 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import withRouter from 'react-router/lib/withRouter'
 import CourseSearcher from 'modules/web/containers/course-searcher'
 
 function CourseSearcherSidebar(props) {
-	const {studentId} = props.params
-	const boundCloseModal = () => props.router.push({pathname: `/s/${studentId}`})
+	const { studentId } = props.params
+	const boundCloseModal = () => props.router.push({ pathname: `/s/${studentId}` })
 
-	let {year, semester} = props.params
+	let { year, semester } = props.params
 	if (year) {
 		year = parseInt(year, 10)
 	}
@@ -17,7 +17,7 @@ function CourseSearcherSidebar(props) {
 	return <CourseSearcher
 		closeSearcher={boundCloseModal}
 		studentId={props.params.studentId}
-		partial={{year, semester}}
+		partial={{ year, semester }}
 	/>
 }
 

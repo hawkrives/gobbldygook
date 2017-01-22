@@ -8,7 +8,7 @@ import keys from 'lodash/keys'
 import map from 'lodash/map'
 import uniqBy from 'lodash/uniqBy'
 import stringify from 'stabilize'
-import type {ModifierChildrenExpression, ModifierChildrenWhereExpression, Requirement, Course} from './types'
+import type { ModifierChildrenExpression, ModifierChildrenWhereExpression, Requirement, Course } from './types'
 
 /**
  * Extract the matched courses from all children.

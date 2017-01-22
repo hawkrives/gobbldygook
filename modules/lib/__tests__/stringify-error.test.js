@@ -1,5 +1,5 @@
-import {expect} from 'chai'
-import {stringifyError} from '../stringify-error'
+import { expect } from 'chai'
+import { stringifyError } from '../stringify-error'
 
 describe('stringifyError', () => {
 	it('should turn an error into a stringifiable object', () => {

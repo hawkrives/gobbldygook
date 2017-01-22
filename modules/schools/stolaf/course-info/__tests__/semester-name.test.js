@@ -1,5 +1,5 @@
-import {expect} from 'chai'
-import {semesterName} from '../semester-name'
+import { expect } from 'chai'
+import { semesterName } from '../semester-name'
 
 describe('semesterName', () => {
 	it('converts a semester number to a semester name', () => {

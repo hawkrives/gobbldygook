@@ -70,7 +70,9 @@ rules:
   brace-style: [warn, stroustrup]
   semi: [error, never]
   arrow-parens: [warn, as-needed]
-  arrow-spacing: ['warn', {before: true, after: true}]
+  arrow-spacing: [warn, {before: true, after: true}]
+  array-bracket-spacing: [warn, always]
+  object-curly-spacing: [warn, always]
   no-implicit-coercion: ['error', {boolean: true, number: true, string: true}]
   keyword-spacing: warn
   no-confusing-arrow: error

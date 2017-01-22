@@ -9,7 +9,7 @@ type LoadingProps = {
 	className?: string,
 };
 
-export default function Loading({className, children}: LoadingProps) {
+export default function Loading({ className, children }: LoadingProps) {
 	return (
 		<figure className="loading…">
 			<div className="loading-spinner"><div /></div>

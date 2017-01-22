@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ScreenToolbar from '../../components/screen-toolbar'
 
 // eslint-disable-next-line react/prefer-stateless-function

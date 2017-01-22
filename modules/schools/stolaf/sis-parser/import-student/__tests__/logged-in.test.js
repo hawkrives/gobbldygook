@@ -1,6 +1,6 @@
-import {expect} from 'chai'
-import {loadHtml} from './import-student.support'
-import {checkIfLoggedIn, checkPageIsLoggedIn} from '../logged-in'
+import { expect } from 'chai'
+import { loadHtml } from './import-student.support'
+import { checkIfLoggedIn, checkPageIsLoggedIn } from '../logged-in'
 
 describe('checkIfLoggedIn', () => {
 	it('returns an error if the extension is not loaded', async () => {
@@ -22,6 +22,6 @@ describe('checkPageIsLoggedIn', () => {
 	it('returns the student ids if the page is logged in', async () => {
 		const actual = await checkPageIsLoggedIn(loadHtml('term-20121')).catch(err => err)
 		expect(actual instanceof Error).to.be.false
-		expect(actual).to.deep.equal([101010])
+		expect(actual).to.deep.equal([ 101010 ])
 	})
 })

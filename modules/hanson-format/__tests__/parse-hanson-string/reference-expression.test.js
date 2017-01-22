@@ -1,7 +1,7 @@
-import {expect} from 'chai'
-import {customParser} from './parse-hanson-string.support'
-const parseReference = customParser({allowedStartRules: ['Reference']})
-const parseRequirementTitle = customParser({allowedStartRules: ['RequirementTitle']})
+import { expect } from 'chai'
+import { customParser } from './parse-hanson-string.support'
+const parseReference = customParser({ allowedStartRules: [ 'Reference' ] })
+const parseRequirementTitle = customParser({ allowedStartRules: [ 'RequirementTitle' ] })
 
 describe('ReferenceExpression', () => {
 	it('can reference a requirement', () => {
@@ -17,12 +17,12 @@ describe('ReferenceExpression', () => {
 	})
 
 	it('returns a full requirement title when given an abbreviation', () => {
-		expect(parseReference('BTS-B', {abbreviations: {'BTS-B': 'Biblical Studies (BTS-B)'}})).to
+		expect(parseReference('BTS-B', { abbreviations: { 'BTS-B': 'Biblical Studies (BTS-B)' } })).to
 			.have.property('$requirement', 'Biblical Studies (BTS-B)')
 	})
 
 	it('returns a full requirement title when given the title-minus-abbreviation', () => {
-		expect(parseReference('Biblical Studies', {titles: {'Biblical Studies': 'Biblical Studies (BTS-B)'}})).to
+		expect(parseReference('Biblical Studies', { titles: { 'Biblical Studies': 'Biblical Studies (BTS-B)' } })).to
 			.have.property('$requirement', 'Biblical Studies (BTS-B)')
 	})
 })

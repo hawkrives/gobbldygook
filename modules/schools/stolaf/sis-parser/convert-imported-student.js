@@ -1,13 +1,13 @@
-import {Student, Schedule} from 'modules/core/student-format'
+import { Student, Schedule } from 'modules/core/student-format'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
 import forEach from 'lodash/forEach'
 import uniq from 'lodash/uniq'
 import fromPairs from 'lodash/fromPairs'
 import filter from 'lodash/filter'
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid'
 
-export async function convertStudent({courses, degrees}, getCourse) {
+export async function convertStudent({ courses, degrees }, getCourse) {
 	let [
 		schedulesAndFabrications,
 		info,
@@ -16,7 +16,7 @@ export async function convertStudent({courses, degrees}, getCourse) {
 		processDegrees(degrees),
 	])
 
-	let {schedules, fabrications} = schedulesAndFabrications
+	let { schedules, fabrications } = schedulesAndFabrications
 
 	return Student({
 		...info,
@@ -38,7 +38,7 @@ export async function processSchedules(courses, getCourse) {
 		})
 	}))
 
-	let fabrications = fromPairs(map(filter(courses, '_fabrication'), c => [c.clbid, c]))
+	let fabrications = fromPairs(map(filter(courses, '_fabrication'), c => [ c.clbid, c ]))
 
 	let schedules = groupBy(courses, 'term')
 	schedules = map(schedules, (courses, term) => {
@@ -51,9 +51,9 @@ export async function processSchedules(courses, getCourse) {
 			semester: parseInt(term.substr(4, 1), 10),
 		})
 	})
-	schedules = fromPairs(map(schedules, s => [s.id, s]))
+	schedules = fromPairs(map(schedules, s => [ s.id, s ]))
 
-	return {schedules, fabrications}
+	return { schedules, fabrications }
 }
 
 
@@ -61,11 +61,11 @@ export function processDegrees(degrees) {
 	let singularData = resolveSingularDataPoints(degrees)
 	let studies = []
 
-	for (let {concentrations, emphases, majors, degree} of degrees) {
-		studies.push({name: degree, type: 'degree', revision: 'latest'})
-		studies = studies.concat(majors.map(name =>         ({name, type: 'major', revision: 'latest'})))
-		studies = studies.concat(concentrations.map(name => ({name, type: 'concentration', revision: 'latest'})))
-		studies = studies.concat(emphases.map(name =>       ({name, type: 'emphasis', revision: 'latest'})))
+	for (let { concentrations, emphases, majors, degree } of degrees) {
+		studies.push({ name: degree, type: 'degree', revision: 'latest' })
+		studies = studies.concat(majors.map(name =>         ({ name, type: 'major', revision: 'latest' })))
+		studies = studies.concat(concentrations.map(name => ({ name, type: 'concentration', revision: 'latest' })))
+		studies = studies.concat(emphases.map(name =>       ({ name, type: 'emphasis', revision: 'latest' })))
 	}
 
 	return {
@@ -98,5 +98,5 @@ export function resolveSingularDataPoints(degrees) {
 	let matriculation = parseInt(thereShouldOnlyBeOne.matriculations[0], 10)
 	let graduation = parseInt(thereShouldOnlyBeOne.graduations[0], 10)
 
-	return {name, advisor, matriculation, graduation}
+	return { name, advisor, matriculation, graduation }
 }

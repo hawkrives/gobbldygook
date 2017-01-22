@@ -9,7 +9,7 @@ import saveStudentsMiddleware from './middleware/save-students'
 import rootReducer from './reducer'
 import freezingMiddleware from 'redux-freeze'
 
-const loggerMiddleware = createLogger({collapsed: true})
+const loggerMiddleware = createLogger({ collapsed: true })
 
 const finalCreateStore = compose(
 	applyMiddleware(

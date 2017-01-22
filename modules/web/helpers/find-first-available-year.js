@@ -3,7 +3,7 @@ import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import max from 'lodash/max'
 import includes from 'lodash/includes'
-import {findMissingNumberBinarySearch} from 'modules/lib'
+import { findMissingNumberBinarySearch } from 'modules/lib'
 
 /**
  * Takes a list of schedules and finds the first open year.

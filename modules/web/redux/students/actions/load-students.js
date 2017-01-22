@@ -1,8 +1,8 @@
 import map from 'lodash/map'
 import uniq from 'lodash/uniq'
 
-import {LOAD_STUDENTS} from '../constants'
-import {loadStudent} from './load-student'
+import { LOAD_STUDENTS } from '../constants'
+import { loadStudent } from './load-student'
 
 export function loadStudents() {
 	return dispatch => {

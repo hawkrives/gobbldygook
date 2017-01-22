@@ -1,13 +1,13 @@
-import {expect} from 'chai'
-import {customParser} from './parse-hanson-string.support'
-const parse = customParser({allowedStartRules: ['Course']})
+import { expect } from 'chai'
+import { customParser } from './parse-hanson-string.support'
+const parse = customParser({ allowedStartRules: [ 'Course' ] })
 
 describe('CourseExpression', () => {
 	it('parses courses with a single department', () => {
 		expect(parse('CSCI 121')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 			},
 		})
@@ -17,7 +17,7 @@ describe('CourseExpression', () => {
 		expect(parse('AS/ES 121')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['AS', 'ES'],
+				department: [ 'AS', 'ES' ],
 				number: 121,
 			},
 		})
@@ -26,7 +26,7 @@ describe('CourseExpression', () => {
 	it('parses courses with no departments as having no department', () => {
 		expect(parse('121')).to.deep.equal({
 			$type: 'course',
-			$course: {number: 121},
+			$course: { number: 121 },
 		})
 	})
 
@@ -34,7 +34,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121.A')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 				section: 'A',
 			},
@@ -51,7 +51,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121.A.2014')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 				section: 'A',
 				year: 2014,
@@ -63,7 +63,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121.A.2014.1')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 				section: 'A',
 				year: 2014,
@@ -85,7 +85,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121.*')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 				section: '*',
 			},
@@ -96,7 +96,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121.*.*')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 				section: '*',
 				year: '*',
@@ -108,7 +108,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121.*.*.*')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 				section: '*',
 				year: '*',
@@ -121,7 +121,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121I')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 				international: true,
 			},
@@ -132,7 +132,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121L')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 				type: 'Lab',
 			},
@@ -149,7 +149,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121IL')).to.deep.equal({
 			$type: 'course',
 			$course: {
-				department: ['CSCI'],
+				department: [ 'CSCI' ],
 				number: 121,
 				international: true,
 				type: 'Lab',

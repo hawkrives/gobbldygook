@@ -5,8 +5,8 @@ import {
 	removeInternalWhitespace,
 	getTextItems,
 } from './lib'
-import {selectAll, selectOne} from 'css-select'
-import {COURSES_URL} from './urls'
+import { selectAll, selectOne } from 'css-select'
+import { COURSES_URL } from './urls'
 
 function convertRowToCourse(term, sisRow) {
 	// the columns go: deptnum, lab, name, halfsemester, credits, passfail, gereqs, times, locations, instructors
@@ -47,7 +47,7 @@ function getCourses(studentId, term) {
 		stnum: studentId,
 		searchyearterm: term,
 	}
-	return fetchHtml(COURSES_URL, {method: 'POST'}, body)
+	return fetchHtml(COURSES_URL, { method: 'POST' }, body)
 		.then(response => getCoursesFromHtml(response, term))
 }
 

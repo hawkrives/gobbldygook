@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
 import AreaOfStudySidebar from './area-of-study-sidebar'
 import StudentSummary from './student-summary'

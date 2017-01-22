@@ -19,7 +19,7 @@ module.exports = function cli() {
 			help: 'the file to process',
 		})
 
-	let data = fs.readFileSync(args.filename, {encoding: 'utf-8'})
+	let data = fs.readFileSync(args.filename, { encoding: 'utf-8' })
 	let student = compileStudent(args, data)
 	console.log(JSON.stringify(student, null, 2))
 }

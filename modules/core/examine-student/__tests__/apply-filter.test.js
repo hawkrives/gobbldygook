@@ -1,4 +1,4 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 import applyFilter from '../apply-filter'
 
 describe('applyFilter', () => {
@@ -14,17 +14,17 @@ describe('applyFilter', () => {
 		}
 
 		const courses = [
-			{department: ['ASIAN'], number: 100},
-			{department: ['CSCI'], number: 121},
-			{department: ['CHEM', 'BIO'], number: 111},
-			{department: ['CHEM', 'BIO'], number: 112},
-			{department: ['ART', 'ASIAN'], number: 121},
+			{ department: [ 'ASIAN' ], number: 100 },
+			{ department: [ 'CSCI' ], number: 121 },
+			{ department: [ 'CHEM', 'BIO' ], number: 111 },
+			{ department: [ 'CHEM', 'BIO' ], number: 112 },
+			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
 		expect(applyFilter(query, courses))
 			.to.deep.equal([
-				{department: ['CSCI'], number: 121},
-				{department: ['ART', 'ASIAN'], number: 121},
+				{ department: [ 'CSCI' ], number: 121 },
+				{ department: [ 'ART', 'ASIAN' ], number: 121 },
 			])
 	})
 
@@ -40,17 +40,17 @@ describe('applyFilter', () => {
 		}
 
 		const courses = [
-			{department: ['ASIAN'], number: 100},
-			{department: ['CSCI'], number: 121},
-			{department: ['CHEM', 'BIO'], number: 111},
-			{department: ['CHEM', 'BIO'], number: 112},
-			{department: ['ART', 'ASIAN'], number: 121},
+			{ department: [ 'ASIAN' ], number: 100 },
+			{ department: [ 'CSCI' ], number: 121 },
+			{ department: [ 'CHEM', 'BIO' ], number: 111 },
+			{ department: [ 'CHEM', 'BIO' ], number: 112 },
+			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
 		expect(applyFilter(query, courses))
 			.to.deep.equal([
-				{department: ['CSCI'], number: 121},
-				{department: ['ART', 'ASIAN'], number: 121},
+				{ department: [ 'CSCI' ], number: 121 },
+				{ department: [ 'ART', 'ASIAN' ], number: 121 },
 			])
 	})
 
@@ -58,22 +58,22 @@ describe('applyFilter', () => {
 		const query = {
 			$type: 'filter',
 			$of: [
-				{$type: 'course', department: ['CSCI'], number: 121},
-				{$type: 'course', department: ['CSCI'], number: 125},
+				{ $type: 'course', department: [ 'CSCI' ], number: 121 },
+				{ $type: 'course', department: [ 'CSCI' ], number: 125 },
 			],
 		}
 
 		const courses = [
-			{department: ['ASIAN'], number: 100},
-			{department: ['CSCI'], number: 121},
-			{department: ['CHEM', 'BIO'], number: 111},
-			{department: ['CHEM', 'BIO'], number: 112},
-			{department: ['ART', 'ASIAN'], number: 121},
+			{ department: [ 'ASIAN' ], number: 100 },
+			{ department: [ 'CSCI' ], number: 121 },
+			{ department: [ 'CHEM', 'BIO' ], number: 111 },
+			{ department: [ 'CHEM', 'BIO' ], number: 112 },
+			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
 		expect(applyFilter(query, courses))
 			.to.deep.equal([
-				{$type: 'course', department: ['CSCI'], number: 121},
+				{ $type: 'course', department: [ 'CSCI' ], number: 121 },
 			])
 	})
 
@@ -89,16 +89,16 @@ describe('applyFilter', () => {
 		}
 
 		const courses = [
-			{department: ['ASIAN'], number: 100},
-			{department: ['CSCI'], number: 121},
-			{department: ['CHEM', 'BIO'], number: 111},
-			{department: ['CHEM', 'BIO'], number: 112},
-			{department: ['ART', 'ASIAN'], number: 121},
+			{ department: [ 'ASIAN' ], number: 100 },
+			{ department: [ 'CSCI' ], number: 121 },
+			{ department: [ 'CHEM', 'BIO' ], number: 111 },
+			{ department: [ 'CHEM', 'BIO' ], number: 112 },
+			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
 		const expectedMatches = [
-			{department: ['CSCI'], number: 121},
-			{department: ['ART', 'ASIAN'], number: 121},
+			{ department: [ 'CSCI' ], number: 121 },
+			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
 		const result = applyFilter(query, courses)
@@ -115,11 +115,11 @@ describe('applyFilter', () => {
 		const query = {}
 
 		const courses = [
-			{department: ['ASIAN'], number: 100},
-			{department: ['CSCI'], number: 121},
-			{department: ['CHEM', 'BIO'], number: 111},
-			{department: ['CHEM', 'BIO'], number: 112},
-			{department: ['ART', 'ASIAN'], number: 121},
+			{ department: [ 'ASIAN' ], number: 100 },
+			{ department: [ 'CSCI' ], number: 121 },
+			{ department: [ 'CHEM', 'BIO' ], number: 111 },
+			{ department: [ 'CHEM', 'BIO' ], number: 112 },
+			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
 		expect(applyFilter(query, courses))

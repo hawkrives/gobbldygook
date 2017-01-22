@@ -1,4 +1,4 @@
-import {tryReadJsonFile} from './read-file'
+import { tryReadJsonFile } from './read-file'
 
 import flatten from 'lodash/flatten'
 import filter from 'lodash/filter'
@@ -8,14 +8,14 @@ import isString from 'lodash/isString'
 import sortBy from 'lodash/sortBy'
 import map from 'lodash/map'
 
-import {cacheDir} from './dirs'
+import { cacheDir } from './dirs'
 
-import {checkForStaleData} from './update-local-data-cache'
+import { checkForStaleData } from './update-local-data-cache'
 
 import path from 'path'
 
-import {quacksLikeDeptNum} from 'modules/schools/stolaf'
-import {splitDeptNum} from 'modules/schools/stolaf'
+import { quacksLikeDeptNum } from 'modules/schools/stolaf'
+import { splitDeptNum } from 'modules/schools/stolaf'
 
 import pify from 'pify'
 const fs = pify(require('graceful-fs'))
@@ -27,7 +27,7 @@ function getDeptNumsFromRiddles(r) {
 	return r
 }
 
-export default async function search({riddles, unique, sort}={}) {
+export default async function search({ riddles, unique, sort }={}) {
 	// check if data has been cached
 	await checkForStaleData()
 

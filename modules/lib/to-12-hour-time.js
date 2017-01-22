@@ -10,7 +10,7 @@ function split24HourTime(time) {
 }
 
 export function to12HourTime(time: string): string {
-	const {hour, minute} = split24HourTime(time)
+	const { hour, minute } = split24HourTime(time)
 	const paddedMinute = padStart(minute, 2, '0')
 
 	const fullHour = ((hour + 11) % 12 + 1)

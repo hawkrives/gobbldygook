@@ -1,12 +1,12 @@
-import React, {PropTypes, Component} from 'react'
+import React, { PropTypes, Component } from 'react'
 import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 
-import {isRequirementName} from 'modules/core/examine-student'
+import { isRequirementName } from 'modules/core/examine-student'
 
 import Icon from 'modules/web/components/icon'
-import {iosBoltOutline, iosBolt} from 'modules/web/icons/ionicons'
+import { iosBoltOutline, iosBolt } from 'modules/web/icons/ionicons'
 import Filter from './expression--filter'
 import Expression from './expression'
 import Button from 'modules/web/components/button'
@@ -24,7 +24,7 @@ export function Requirement(props) {
 	const computationClassName = wasEvaluated ? props.computed ? 'result-success' : 'result-failure' : ''
 	const status = <ResultIndicator result={props.computed} />
 
-	const extraClasses = [props.overridden ? 'overridden' : '']
+	const extraClasses = [ props.overridden ? 'overridden' : '' ]
 
 	const result = props.result && (
 		<div className="result">
@@ -122,7 +122,7 @@ export default class ExpandableRequirement extends Component {
 	};
 
 	handleToggleOpen = () => {
-		this.setState({open: !this.state.open})
+		this.setState({ open: !this.state.open })
 	};
 
 	render() {
