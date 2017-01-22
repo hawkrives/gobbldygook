@@ -41,11 +41,11 @@ const whitelist = [
 	// when one of these fires
 	courseConstants.REFRESH_COURSES,
 ]
-function shouldTakeAction({type}) {
+function shouldTakeAction({type}: {type?: string}) {
 	return includes(whitelist, type)
 }
 
-const checkStudentsMiddleware: Middleware = store => next => action => {
+const checkStudentsMiddleware = (store: any) => (next: any) => (action: any) => {
 	if (!shouldTakeAction(action)) {
 		return next(action)
 	}

@@ -1,6 +1,4 @@
 // @flow
-import type {Action} from 'redux'
-
 import {
 	REFRESH_COURSES,
 	// LOAD_COURSES,
@@ -12,7 +10,7 @@ import {
 // import {getCoursesFromSchedules} from '../../../helpers/get-courses'
 
 
-export function refreshCourses(): Action {
+export function refreshCourses(): {type: string} {
 	return { type: REFRESH_COURSES }
 }
 

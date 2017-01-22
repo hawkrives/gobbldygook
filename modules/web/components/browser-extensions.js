@@ -18,9 +18,9 @@ function BrowserButton({
 	browserName,
 	disabled,
 }: {
-	onClick: () => any,
+	onClick: (any) => any,
 	browserName: string,
-	disabled: boolean,
+	disabled?: boolean,
 }) {
 	return <button type='button' disabled={disabled} className='browser-button' onClick={onClick}>{browserName}</button>
 }
@@ -33,9 +33,14 @@ export class BrowserExtensionsComponent extends React.Component {
 		onInstall: React.PropTypes.func.isRequired,
 	}
 
-	state = {
+	state: {
+		installError: ?Error,
+		installAttempted: boolean,
+		extensionInstalled: boolean,
+	} = {
 		installAttempted: false,
 		installError: null,
+		extensionInstalled: false,
 	}
 
 	checkExtensionStatus = () => {
@@ -44,7 +49,7 @@ export class BrowserExtensionsComponent extends React.Component {
 		}
 	}
 
-	installChromeExtension = ev => {
+	installChromeExtension = (ev: Event) => {
 		ev.preventDefault()
 		ev.stopPropagation()
 
@@ -53,7 +58,7 @@ export class BrowserExtensionsComponent extends React.Component {
 			.catch(this.installFailure)
 	}
 
-	installFirefoxExtension = ev => {
+	installFirefoxExtension = (ev: Event) => {
 		ev.preventDefault()
 		ev.stopPropagation()
 
@@ -62,7 +67,7 @@ export class BrowserExtensionsComponent extends React.Component {
 			.catch(this.installFailure)
 	}
 
-	installOperaExtension = ev => {
+	installOperaExtension = (ev: Event) => {
 		ev.preventDefault()
 		ev.stopPropagation()
 
@@ -84,7 +89,7 @@ export class BrowserExtensionsComponent extends React.Component {
 		this.props.onInstall()
 	}
 
-	installFailure = err => {
+	installFailure = (err: Error) => {
 		this.setState({installError: err, installAttempted: true})
 	}
 
