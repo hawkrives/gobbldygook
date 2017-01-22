@@ -1,5 +1,5 @@
 // @flow
-import React, {PropTypes} from 'react'
+import React from 'react'
 import round from 'lodash/round'
 import Button from './button'
 import ProgressBar from './progress-bar'

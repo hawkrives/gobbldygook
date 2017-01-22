@@ -2,7 +2,6 @@
 import React from 'react'
 
 import map from 'lodash/map'
-import values from 'lodash/values'
 import {toPrettyTerm} from 'modules/schools/stolaf'
 
 import Button from './button'

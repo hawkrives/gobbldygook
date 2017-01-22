@@ -1,6 +1,4 @@
 // @flow
-import type {Middleware} from 'redux'
-
 import * as studentConstants from '../students/constants'
 import * as areaConstants from '../areas/constants'
 import * as courseConstants from '../courses/constants'
