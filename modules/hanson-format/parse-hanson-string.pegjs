@@ -82,6 +82,7 @@ OrQualification 'qualification-or'
   = lhs:AndQualification _ '|' _ rhs:OrQualification
     { return {
       $type: 'boolean',
+      $booleanType: 'or',
       $or: [lhs].concat('$or' in rhs ? rhs.$or : [rhs]),
     } }
   / AndQualification
@@ -91,6 +92,7 @@ AndQualification 'qualification-and'
   = lhs:ParentheticalQualification _ '&' _ rhs:AndQualification
     { return {
       $type: 'boolean',
+      $booleanType: 'and',
       $and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs]),
     } }
   / ParentheticalQualification
@@ -125,6 +127,7 @@ OrQualificationValue
   = lhs:AndQualificationValue _ '|' _ rhs:OrQualificationValue
     { return {
       $type: 'boolean',
+      $booleanType: 'or',
       $or: [lhs].concat(rhs.$or ? rhs.$or : [rhs]),
     } }
   / AndQualificationValue
@@ -134,6 +137,7 @@ AndQualificationValue
   = lhs:QualificationValue _ '&' _ rhs:AndQualificationValue
     { return {
       $type: 'boolean',
+      $booleanType: 'and',
       $and: [lhs].concat(rhs.$and ? rhs.$and : [rhs]),
     } }
   / QualificationValue
@@ -223,6 +227,7 @@ Or
   = lhs:And _ '|' _ rhs:Or
     { return {
       $type: 'boolean',
+      $booleanType: 'or',
       $or: [lhs].concat('$or' in rhs ? rhs.$or : [rhs]),
     } }
   / And
@@ -232,6 +237,7 @@ And
   = lhs:Expression _ '&' _ rhs:And
     { return {
       $type: 'boolean',
+      $booleanType: 'and',
       $and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs]),
     } }
   / Expression

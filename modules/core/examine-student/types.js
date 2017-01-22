@@ -66,9 +66,8 @@ type Operator =
 	| '$ne';
 
 // type NotExpression = BaseExpression & {$type: 'not', $not: Expression[]}
-type BaseBooleanExpression = {$type: 'boolean'};
-type AndExpression = BaseBooleanExpression & {$and: Expression[]};
-type OrExpression = BaseBooleanExpression & {$or: Expression[]};
+type AndExpression = {$type: 'boolean', $booleanType: 'and', $and: Expression[]};
+type OrExpression = {$type: 'boolean', $booleanType: 'or', $or: Expression[]};
 type BooleanExpression = AndExpression | OrExpression;
 
 export type CourseExpression = {
@@ -83,8 +82,8 @@ type QualificationFunctionValue = {
 	'$computed-value': any,
 };
 type QualificationStaticValue = number | string;
-export type QualificationBooleanOrValue = {$type: 'boolean', $or: QualificationStaticValue[]};
-export type QualificationBooleanAndValue = {$type: 'boolean', $and: QualificationStaticValue[]};
+export type QualificationBooleanOrValue = {$type: 'boolean', $booleanType: 'or', $or: QualificationStaticValue[]};
+export type QualificationBooleanAndValue = {$type: 'boolean', $booleanType: 'and', $and: QualificationStaticValue[]};
 export type QualificationBooleanValue =
 	| QualificationBooleanOrValue
 	| QualificationBooleanAndValue;

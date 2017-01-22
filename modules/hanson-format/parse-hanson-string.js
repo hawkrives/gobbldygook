@@ -184,6 +184,7 @@ function peg$parse(input, options) {
 		peg$c31 = function peg$c31(lhs, rhs) {
 			return {
 				$type: 'boolean',
+				$booleanType: 'or',
 				$or: [lhs].concat('$or' in rhs ? rhs.$or : [rhs])
 			};
 		},
@@ -193,6 +194,7 @@ function peg$parse(input, options) {
 		peg$c35 = function peg$c35(lhs, rhs) {
 			return {
 				$type: 'boolean',
+				$booleanType: 'and',
 				$and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs])
 			};
 		},
@@ -215,12 +217,14 @@ function peg$parse(input, options) {
 		peg$c39 = function peg$c39(lhs, rhs) {
 			return {
 				$type: 'boolean',
+				$booleanType: 'or',
 				$or: [lhs].concat(rhs.$or ? rhs.$or : [rhs])
 			};
 		},
 		peg$c40 = function peg$c40(lhs, rhs) {
 			return {
 				$type: 'boolean',
+				$booleanType: 'and',
 				$and: [lhs].concat(rhs.$and ? rhs.$and : [rhs])
 			};
 		},
