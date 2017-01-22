@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react'
 import round from 'lodash/round'
 import Button from './button'
@@ -6,7 +7,16 @@ import './notification.scss'
 import debug from 'debug'
 const log = debug('web:react')
 
-export default function Notification(props) {
+type NotificationProps = {
+	hideButton?: boolean,
+	max: number,
+	message: string,
+	onClose: () => any,
+	type: string,
+	value: number,
+};
+
+export default function Notification(props: NotificationProps) {
 	log('Notification#render')
 	const progressBar = (props.type === 'progress') && (
 		<div className='progress-container'>
@@ -32,12 +42,4 @@ export default function Notification(props) {
 			</Button>}
 		</li>
 	)
-}
-Notification.propTypes = {
-	hideButton: PropTypes.bool,
-	max: PropTypes.number,
-	message: PropTypes.string.isRequired,
-	onClose: PropTypes.func.isRequired,
-	type: PropTypes.string.isRequired,
-	value: PropTypes.number,
 }

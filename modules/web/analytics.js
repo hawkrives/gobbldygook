@@ -1,3 +1,4 @@
+// @flow
 import debug from 'debug'
 const log = debug('web')
 
@@ -17,7 +18,7 @@ export function isogram() {
 	document.body.appendChild(script)
 }
 
-export function ga(...args) {
+export function ga(...args: any[]) {
 	if (PRODUCTION) {
 		try {
 			window.ga(...args)

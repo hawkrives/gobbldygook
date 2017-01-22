@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+// @flow
+import React, {Component} from 'react'
 import {DragSource} from 'react-dnd'
 import cx from 'classnames'
 import compact from 'lodash/compact'
@@ -16,23 +17,25 @@ import ModalCourse from './modal-course'
 
 import './inline-course.scss'
 
+type InlineCourseProps = {
+	className?: string,
+	conflicts?: any[],
+	connectDragSource: () => any,  // react-dnd
+	course: Object,
+	index?: number,
+	isDragging: boolean,  // react-dnd
+	scheduleId?: string,
+	studentId?: string,
+};
+
 class InlineCourse extends Component {
-	static propTypes = {
-		className: PropTypes.string,
-		conflicts: PropTypes.array,
-		connectDragSource: PropTypes.func.isRequired,  // react-dnd
-		course: PropTypes.object.isRequired,
-		index: PropTypes.number,
-		isDragging: PropTypes.bool.isRequired,  // react-dnd
-		scheduleId: PropTypes.string,
-		studentId: PropTypes.string,
-	};
+	props: InlineCourseProps;
 
 	state = {
 		isOpen: false,
 	};
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps: InlineCourseProps, nextState) {
 		return (
 			this.props.course !== nextProps.course ||
 			this.props.conflicts !== nextProps.conflicts ||
@@ -83,8 +86,7 @@ class InlineCourse extends Component {
 					{course.type !== 'Research' ? <span className='course-type'>{course.type}</span> : null}
 					{course.gereqs && <ul className='course-gereqs'>
 						{map(course.gereqs, (ge, idx) =>
-							<li key={ge + idx}>{ge}</li>
-						)}
+							<li key={ge + idx}>{ge}</li>)}
 					</ul>}
 					{course.prerequisites &&
 						<span className='has-prerequisite' title={course.prerequisites}>Prereq</span>}

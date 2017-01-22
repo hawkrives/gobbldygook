@@ -1,9 +1,15 @@
-import React, {PropTypes} from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
 
 import './loading.scss'
 
-export default function Loading({className, children}) {
+type LoadingProps = {
+	children?: any,
+	className?: string,
+};
+
+export default function Loading({className, children}: LoadingProps) {
 	return (
 		<figure className='loading…'>
 			<div className='loading-spinner'><div /></div>
@@ -12,9 +18,4 @@ export default function Loading({className, children}) {
 			</figcaption>
 		</figure>
 	)
-}
-
-Loading.propTypes = {
-	children: PropTypes.node,
-	className: PropTypes.string,
 }

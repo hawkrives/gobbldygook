@@ -1,10 +1,18 @@
-import React, {PropTypes} from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
 import {findWordForProgress} from 'modules/lib'
 
 import './progress-bar.scss'
 
-export default function ProgressBar(props) {
+type ProgressBarProps =  {
+	className?: string,
+	colorful?: boolean,
+	max?: number,
+	value: number,
+};
+
+export default function ProgressBar(props: ProgressBarProps) {
 	const {
 		value,
 		max = 1,
@@ -25,11 +33,4 @@ export default function ProgressBar(props) {
 			</div>
 		</div>
 	)
-}
-
-ProgressBar.propTypes = {
-	className: PropTypes.string,
-	colorful: PropTypes.bool,
-	max: PropTypes.number,
-	value: PropTypes.number,
 }

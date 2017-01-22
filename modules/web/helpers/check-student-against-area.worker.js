@@ -1,4 +1,5 @@
 /* global WorkerGlobalScope */
+// @flow
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import round from 'lodash/round'
@@ -21,7 +22,7 @@ function tryEvaluate(student, area) {
 	}
 }
 
-function checkStudentAgainstArea(student, area) {
+function checkStudentAgainstArea(student: any, area: any) {
 	return new Promise(resolve => {
 		if (!area || area._error || !area._area) {
 			log('checkStudentAgainstArea:', (area ? area._error : 'area is null'), area)
@@ -38,7 +39,16 @@ function checkStudentAgainstArea(student, area) {
 		}
 
 		let result = details.result
-		let bits = result.$of || result.$and || result.$or
+		let bits = []
+		if (result.$type === 'of') {
+			bits = result.$of
+		}
+		else if (result.$type === 'boolean' && result.$booleanType === 'and') {
+			bits = result.$and
+		}
+		else if (result.$type === 'boolean' && result.$booleanType === 'or') {
+			bits = result.$or
+		}
 		let finalReqs = map(bits, b => b._result)
 
 		const maxProgress = finalReqs.length

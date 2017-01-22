@@ -97,7 +97,7 @@ rules:
   react/prop-types: error  # prevent missing proptypes in a react component definition
   react/react-in-jsx-scope: error
   react/self-closing-comp: warn  # prevent extra closing tags for components without children
-  react/sort-comp: warn
+  # react/sort-comp: warn
   react/sort-prop-types: warn
   react/wrap-multilines: off
   react/prefer-stateless-function: warn
