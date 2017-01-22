@@ -305,7 +305,7 @@ Modifier
     )
     {
       if (from.$from === 'where' && what === 'department') {
-        throw new Error('cannot use a modifier with "departments"')
+        throw new Error('cannot use a modifier with "departments" or "department"')
       }
       if (from.$from === 'children-where' && what !== 'course') {
         throw new Error('must use "courses from" with "children where"')
