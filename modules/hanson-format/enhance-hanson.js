@@ -1,4 +1,4 @@
-import isRequirementName from './is-requirement-name'
+import isRequirementName from 'modules/core/examine-student/is-requirement-name'
 import filter from 'lodash/filter'
 import forEach from 'lodash/forEach'
 import includes from 'lodash/includes'
