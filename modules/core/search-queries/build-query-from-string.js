@@ -1,4 +1,3 @@
-// @flow
 import endsWith from 'lodash/endsWith'
 import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'

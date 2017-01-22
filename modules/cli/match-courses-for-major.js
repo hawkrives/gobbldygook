@@ -1,4 +1,3 @@
-// @flow
 import applyFilter from '../core/examine-student/apply-filter'
 import excludeCourse from '../core/examine-student/exclude-course'
 import filterByWhereClause from '../core/examine-student/filter-by-where-clause'

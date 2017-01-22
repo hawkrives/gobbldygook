@@ -1,4 +1,3 @@
-// @flow
 import loadArea from './load-area'
 import {readFileSync} from 'graceful-fs'
 import yaml from 'js-yaml'

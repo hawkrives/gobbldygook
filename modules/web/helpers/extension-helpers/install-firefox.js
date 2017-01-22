@@ -1,4 +1,3 @@
-// @flow
 /* global InstallTrigger:false */
 const url = '/gobbldygook/gobbldygook_sis_integration-1.0.0-fx+an.xpi'
 

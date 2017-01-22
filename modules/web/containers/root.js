@@ -1,4 +1,3 @@
-// @flow
 import React, { PropTypes, cloneElement } from 'react'
 import {Provider} from 'react-redux'
 import Notifications from './notifications'

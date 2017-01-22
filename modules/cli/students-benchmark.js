@@ -1,4 +1,3 @@
-// @flow
 import fs from 'graceful-fs'
 import {evaluate} from 'modules/core/examine-student'
 import endsWith from 'lodash/endsWith'

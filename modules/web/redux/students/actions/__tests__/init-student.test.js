@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 
 import {initStudent} from '../init-student'

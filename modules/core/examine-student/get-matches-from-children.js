@@ -1,4 +1,3 @@
-// @flow
 import collectMatches from './collect-matches'
 import isRequirementName from './is-requirement-name'
 import filter from 'lodash/filter'

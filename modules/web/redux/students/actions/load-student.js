@@ -1,4 +1,3 @@
-// @flow
 import { loadStudent as loadStudentFunc } from '../../../helpers/load-student'
 import { checkStudent } from './check-student'
 

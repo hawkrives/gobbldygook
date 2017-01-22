@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import isRequirementName from '../is-requirement-name'
 

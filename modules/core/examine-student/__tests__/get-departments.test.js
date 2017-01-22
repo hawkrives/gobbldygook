@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import getDepartments from '../get-departments'
 

@@ -1,4 +1,3 @@
-// @flow
 import isRequirementName from './is-requirement-name'
 import filter from 'lodash/filter'
 import forEach from 'lodash/forEach'

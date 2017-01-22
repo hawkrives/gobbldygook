@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import {findWordForProgress} from '../find-word-for-progress'
 

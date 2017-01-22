@@ -1,4 +1,3 @@
-// @flow
 'use strict'
 
 const nom = require('nomnom')

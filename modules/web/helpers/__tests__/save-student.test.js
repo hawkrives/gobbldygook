@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import cloneDeep from 'lodash/cloneDeep'
 import reject from 'lodash/reject'

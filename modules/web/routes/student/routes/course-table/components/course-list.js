@@ -1,4 +1,3 @@
-// @flow
 import React, {PropTypes} from 'react'
 import range from 'lodash/range'
 import map from 'lodash/map'

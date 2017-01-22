@@ -1,4 +1,3 @@
-// @flow
 import some from 'lodash/some'
 import compareCourseToCourse from './compare-course-to-course'
 

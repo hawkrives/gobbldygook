@@ -1,4 +1,3 @@
-// @flow
 import treo, {Database} from 'treo'
 treo.Promise = global.Promise
 import debug from 'debug'

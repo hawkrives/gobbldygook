@@ -1,4 +1,3 @@
-// @flow
 import htmlparser from 'htmlparser2'
 
 export function parseHtml(string) {

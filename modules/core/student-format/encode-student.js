@@ -1,4 +1,3 @@
-// @flow
 import stringify from 'stabilize'
 import omit from 'lodash/omit'
 import mapValues from 'lodash/mapValues'

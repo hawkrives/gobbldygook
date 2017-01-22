@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import pluralizeArea from '../pluralize-area'
 

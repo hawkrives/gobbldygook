@@ -1,4 +1,3 @@
-// @flow
 import map from 'lodash/map'
 import {
 	fetchHtml,

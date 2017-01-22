@@ -1,4 +1,3 @@
-// @flow
 import {
 	SET_OVERRIDE,
 	REMOVE_OVERRIDE,

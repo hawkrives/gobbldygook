@@ -1,4 +1,3 @@
-// @flow
 import React, {PropTypes} from 'react'
 import FakeCourse from './fake-course'
 import './empty-course-slot.scss'

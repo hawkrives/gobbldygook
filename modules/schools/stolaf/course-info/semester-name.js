@@ -1,4 +1,3 @@
-// @flow
 import has from 'lodash/has'
 
 const SEMESTERS = {

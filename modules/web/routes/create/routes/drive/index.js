@@ -1,4 +1,3 @@
-// @flow
 export default {
 	path: 'drive',
 	getComponent(location, cb) {

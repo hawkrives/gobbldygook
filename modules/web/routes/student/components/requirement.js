@@ -1,4 +1,3 @@
-// @flow
 import React, {PropTypes, Component} from 'react'
 import filter from 'lodash/filter'
 import keys from 'lodash/keys'

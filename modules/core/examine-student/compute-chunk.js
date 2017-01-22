@@ -1,4 +1,3 @@
-// @flow
 import every from 'lodash/every'
 import forEach from 'lodash/forEach'
 import keys from 'lodash/keys'

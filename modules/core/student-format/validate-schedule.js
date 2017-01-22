@@ -1,4 +1,3 @@
-// @flow
 import {findWarnings} from './find-course-warnings'
 import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'

@@ -1,4 +1,3 @@
-// @flow
 import padStart from 'lodash/padStart'
 
 function split24HourTime(time) {

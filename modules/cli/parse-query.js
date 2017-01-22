@@ -1,4 +1,3 @@
-// @flow
 import buildQuery from '../src/helpers/build-query-from-string'
 import nom from 'nomnom'
 import stringify from 'stabilize'

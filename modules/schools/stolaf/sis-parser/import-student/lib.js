@@ -1,4 +1,3 @@
-// @flow
 import {parseHtml} from '../parse-html'
 import forOwn from 'lodash/forOwn'
 import forEach from 'lodash/forEach'

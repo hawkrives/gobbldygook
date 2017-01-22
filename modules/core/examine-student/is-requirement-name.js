@@ -1,4 +1,3 @@
-// @flow
 const isRequirementNameRegex = /^[A-Z0-9][A-Za-z0-9_\- /]*/
 
 /**

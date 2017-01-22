@@ -1,4 +1,3 @@
-// @flow
 import React, {
 	Children as ReactChildren,
 	PropTypes,

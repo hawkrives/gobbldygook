@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import {loadHtml} from './import-student.support'
 import {getCoursesFromHtml} from '../courses'

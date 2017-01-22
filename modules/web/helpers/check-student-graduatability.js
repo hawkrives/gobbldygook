@@ -1,4 +1,3 @@
-// @flow
 import filter from 'lodash/filter'
 import size from 'lodash/size'
 import map from 'lodash/map'

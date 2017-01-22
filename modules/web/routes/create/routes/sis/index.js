@@ -1,4 +1,3 @@
-// @flow
 export default {
 	path: 'sis',
 	getComponent(location, cb) {

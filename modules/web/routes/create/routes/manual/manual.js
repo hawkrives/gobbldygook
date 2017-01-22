@@ -1,4 +1,3 @@
-// @flow
 import React, {Component, PropTypes} from 'react'
 import Button from 'modules/web/components/button'
 import cx from 'classnames'

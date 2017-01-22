@@ -1,4 +1,3 @@
-// @flow
 import {
 	BEGIN_VALIDATE_SCHEDULES,
 	VALIDATE_SCHEDULES,

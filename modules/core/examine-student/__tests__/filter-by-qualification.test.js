@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import {filterByQualification} from '../filter-by-where-clause'
 

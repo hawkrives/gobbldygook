@@ -1,4 +1,3 @@
-// @flow
 import includes from 'lodash/includes'
 import {extractInformationFromDegreeAudit} from './degree-audit'
 import {selectAll} from 'css-select'

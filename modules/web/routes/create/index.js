@@ -1,4 +1,3 @@
-// @flow
 export default {
 	path: 'create',
 	getIndexRoute(location, cb) {

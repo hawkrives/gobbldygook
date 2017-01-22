@@ -1,4 +1,3 @@
-// @flow
 import find from 'lodash/find'
 import filter from 'lodash/filter'
 import {isCurrentSemester} from 'modules/core'

@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import size from 'lodash/size'
 import range from 'lodash/range'

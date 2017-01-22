@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import Button from 'modules/web/components/button'
 

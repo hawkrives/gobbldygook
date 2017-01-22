@@ -1,4 +1,3 @@
-// @flow
 import React, {Component, PropTypes} from 'react'
 import fuzzysearch from 'fuzzysearch'
 import {pluralizeArea} from 'modules/core/examine-student'

@@ -1,4 +1,3 @@
-// @flow
 export const IDENT_COURSE = 'gobbldygook/dnd/course'
 export const IDENT_AREA = 'gobbldygook/dnd/area'
 export const IDENT_YEAR = 'gobbldygook/dnd/year'

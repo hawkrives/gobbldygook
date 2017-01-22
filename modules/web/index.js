@@ -1,4 +1,3 @@
-// @flow
 // Include fetch
 import 'whatwg-fetch'
 

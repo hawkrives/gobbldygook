@@ -1,4 +1,3 @@
-// @flow
 import pify from 'pify'
 import yaml from 'js-yaml'
 import {enhance} from 'modules/hanson-format'

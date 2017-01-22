@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import {isCurrentSemester} from '../is-current-semester'
 

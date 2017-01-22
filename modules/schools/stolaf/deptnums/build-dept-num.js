@@ -1,4 +1,3 @@
-// @flow
 import {buildDeptString} from './build-dept'
 
 /**

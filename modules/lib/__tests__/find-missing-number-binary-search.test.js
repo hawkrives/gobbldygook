@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import {findMissingNumberBinarySearch} from '../find-missing-number-binary-search'
 

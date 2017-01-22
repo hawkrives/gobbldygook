@@ -1,4 +1,3 @@
-// @flow
 import React, {PropTypes} from 'react'
 import round from 'lodash/round'
 import Button from './button'

@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import computeCountWithOperator from '../compute-count-with-operator'
 

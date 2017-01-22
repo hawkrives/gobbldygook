@@ -1,4 +1,3 @@
-// @flow
 import {deptNumRegex} from './dept-num-regex'
 
 /**

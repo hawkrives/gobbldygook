@@ -1,4 +1,3 @@
-// @flow
 import {
 	ADD_COURSE,
 	REMOVE_COURSE,

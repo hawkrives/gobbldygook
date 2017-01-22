@@ -1,4 +1,3 @@
-// @flow
 /* globals module */
 
 if (PRODUCTION) {

@@ -1,4 +1,3 @@
-// @flow
 import {
 	ADD_FABRICATION,
 	REMOVE_FABRICATION,

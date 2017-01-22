@@ -1,4 +1,3 @@
-// @flow
 /**
  * Checks if a schedule is in a certain year and semester.
  *

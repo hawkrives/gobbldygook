@@ -1,4 +1,3 @@
-// @flow
 import reduce from 'lodash/reduce'
 
 export function partitionByIndex(arr) {

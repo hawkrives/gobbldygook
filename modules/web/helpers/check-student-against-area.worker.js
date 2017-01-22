@@ -1,4 +1,3 @@
-// @flow
 /* global WorkerGlobalScope */
 import map from 'lodash/map'
 import filter from 'lodash/filter'

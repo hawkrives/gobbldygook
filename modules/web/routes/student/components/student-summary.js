@@ -1,4 +1,3 @@
-// @flow
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {oxford} from 'humanize-plus'

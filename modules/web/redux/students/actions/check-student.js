@@ -1,4 +1,3 @@
-// @flow
 import {getStudentData as getStudentDataFunc} from '../../../helpers/get-student-data'
 import {checkStudentGraduatability as checkStudentGraduatabilityFunc} from '../../../helpers/check-student-graduatability'
 import {validateSchedules as validateSchedulesFunc} from 'modules/core'

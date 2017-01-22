@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import getOccurrences from '../get-occurrences'
 

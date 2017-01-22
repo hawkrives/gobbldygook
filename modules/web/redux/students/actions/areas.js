@@ -1,4 +1,3 @@
-// @flow
 import {
 	ADD_AREA,
 	REMOVE_AREA,

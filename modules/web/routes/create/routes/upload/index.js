@@ -1,4 +1,3 @@
-// @flow
 export default {
 	path: 'upload',
 	getComponent(location, cb) {

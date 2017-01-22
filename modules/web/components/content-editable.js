@@ -1,4 +1,3 @@
-// @flow
 import React, {PropTypes, Component} from 'react'
 import cx from 'classnames'
 import debug from 'debug'

@@ -1,4 +1,3 @@
-// @flow
 import map from 'lodash/map'
 import fromPairs from 'lodash/fromPairs'
 import mapKeys from 'lodash/mapKeys'

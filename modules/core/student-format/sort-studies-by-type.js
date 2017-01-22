@@ -1,4 +1,3 @@
-// @flow
 import sortBy from 'lodash/sortBy'
 
 const types = ['degree', 'major', 'concentration', 'emphasis']

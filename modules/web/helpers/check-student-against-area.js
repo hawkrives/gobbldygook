@@ -1,4 +1,3 @@
-// @flow
 import uniqueId from 'lodash/uniqueId'
 import debug from 'debug'
 const log = debug('worker:check-student-against-area')

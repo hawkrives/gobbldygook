@@ -1,4 +1,3 @@
-// @flow
 import 'whatwg-fetch'
 import {status, json, text} from 'modules/lib/fetch-helpers'
 

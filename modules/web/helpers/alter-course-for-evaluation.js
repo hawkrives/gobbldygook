@@ -1,4 +1,3 @@
-// @flow
 import forEach from 'lodash/forEach'
 import toPairs from 'lodash/toPairs'
 import fromPairs from 'lodash/fromPairs'

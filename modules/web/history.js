@@ -1,4 +1,3 @@
-// @flow
 import createHistory from 'history/lib/createBrowserHistory'
 import useRouterHistory from 'react-router/lib/useRouterHistory'
 

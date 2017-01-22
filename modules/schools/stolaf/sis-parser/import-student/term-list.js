@@ -1,4 +1,3 @@
-// @flow
 import {selectOne, selectAll} from 'css-select'
 
 export function extractTermList(dom) {

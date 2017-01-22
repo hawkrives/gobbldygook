@@ -1,4 +1,3 @@
-// @flow
 import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
 import findKey from 'lodash/findKey'

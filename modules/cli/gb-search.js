@@ -1,4 +1,3 @@
-// @flow
 import table from 'text-table'
 import searchCourses from './lib/search-for-courses'
 

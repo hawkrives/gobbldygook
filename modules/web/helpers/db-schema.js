@@ -1,4 +1,3 @@
-// @flow
 import treo from 'treo'
 
 export default new treo.schema()

@@ -1,4 +1,3 @@
-// @flow
 import {
 	CHANGE_NAME,
 	CHANGE_ADVISOR,

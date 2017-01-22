@@ -1,4 +1,3 @@
-// @flow
 export default function computeCountWithOperator({comparator, has, needs}) {
 	// compute the result
 	if (comparator === '$eq') {

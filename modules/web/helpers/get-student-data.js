@@ -1,4 +1,3 @@
-// @flow
 import props from 'p-props'
 import {embedActiveStudentCourses} from './embed-active-student-courses'
 import {getStudentStudies} from './get-student-studies'

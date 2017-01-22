@@ -1,4 +1,3 @@
-// @flow
 import {
 	UPDATE_QUERY,
 	SUBMIT_QUERY,

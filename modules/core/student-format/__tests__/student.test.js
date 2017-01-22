@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import demoStudent from '../demo-student.json'
 import find from 'lodash/find'

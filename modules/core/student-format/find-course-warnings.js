@@ -1,4 +1,3 @@
-// @flow
 import map from 'lodash/map'
 import flatten from 'lodash/flatten'
 import compact from 'lodash/compact'

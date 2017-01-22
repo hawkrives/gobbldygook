@@ -1,4 +1,3 @@
-// @flow
 import assertKeys from './assert-keys'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'

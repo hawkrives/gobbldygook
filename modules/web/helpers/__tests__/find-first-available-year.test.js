@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import {findFirstAvailableYear} from '../find-first-available-year'
 

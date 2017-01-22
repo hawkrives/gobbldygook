@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import {enhanceHanson} from '../enhance-hanson'
 import {reference, course} from './parse-hanson-string/parse-hanson-string.support'

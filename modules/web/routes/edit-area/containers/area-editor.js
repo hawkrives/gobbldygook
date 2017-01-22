@@ -1,4 +1,3 @@
-// @flow
 import React, {Component, PropTypes} from 'react'
 import yaml from 'js-yaml'
 import keymage from 'keymage'

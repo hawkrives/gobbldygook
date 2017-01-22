@@ -1,4 +1,3 @@
-// @flow
 export default {
 	path: 'search(/:year)(/:semester)',
 	getComponents(location, cb) {

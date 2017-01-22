@@ -1,4 +1,3 @@
-// @flow
 import {expect} from 'chai'
 import saveStudentsMiddleware, {shouldTakeAction} from '../save-students'
 import {LOAD_STUDENTS, CHANGE_NAME} from '../../students/constants'

@@ -1,4 +1,3 @@
-// @flow
 import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
 import React, { Component, PropTypes } from 'react'
