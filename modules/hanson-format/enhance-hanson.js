@@ -28,7 +28,7 @@ const startRules = {
 
 type StringMap = {[key: string]: string};
 
-export function enhanceHanson(data, {topLevel=true, declaredVariables={}}: {topLevel: boolean, declaredVariables: StringMap}={}) {
+export function enhanceHanson(data: any, {topLevel=true, declaredVariables={}}: {topLevel: boolean, declaredVariables: StringMap}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
 	// 3. throws if it encounters any lowercase keys not in the whitelist
