@@ -3,7 +3,7 @@ import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
 import flatMap from 'lodash/flatMap'
-import { oxford } from 'humanize-plus'
+import oxford from 'listify'
 import plur from 'plur'
 
 import Modal from './modal'

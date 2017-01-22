@@ -5,7 +5,7 @@ import some from 'lodash/some'
 import zip from 'lodash/zip'
 
 import ordinal from 'ord'
-import { oxford } from 'humanize-plus'
+import oxford from 'listify'
 import plur from 'plur'
 import { findScheduleTimeConflicts } from 'sto-sis-time-parser'
 // import {expandYear, semesterName} from 'modules/schools/stolaf'
@@ -52,7 +52,7 @@ export function checkForTimeConflicts(courses) {
       return {
         warning: true,
         type: 'time-conflict',
-        msg: `Time conflict with the ${oxford(conflicted, { oxfordComma: true })} ${plur('course', conflicts.length)}`,
+        msg: `Time conflict with the ${oxford(conflicted)} ${plur('course', conflicts.length)}`,
         icon: 'iosClockOutline',
       }
     }

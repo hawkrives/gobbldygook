@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import cx from 'classnames'
-import { oxford } from 'humanize-plus'
+import oxford from 'listify'
 import plur from 'plur'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
