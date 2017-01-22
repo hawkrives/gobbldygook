@@ -44,11 +44,11 @@ function compareCourseToQualificationViaObject(course: Course, {$key, $operator,
 		return compareCourseToQualification(course, simplifiedOperator)
 	}
 	else if ($value.$type === 'boolean') {
-		if ('$or' in $value) {
+		if ($value.$booleanType === 'or') {
 			return some($value.$or, val =>
 				compareCourseToQualification(course, {$key, $operator, $value: val}))
 		}
-		else if ('$and' in $value) {
+		else if ($value.$booleanType === 'and') {
 			return every($value.$and, val =>
 				compareCourseToQualification(course, {$key, $operator, $value: val}))
 		}
