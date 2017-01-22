@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 
 import map from 'lodash/map'
 import values from 'lodash/values'
@@ -14,7 +15,25 @@ import {SORT_BY, GROUP_BY} from './course-searcher-options'
 
 import './course-searcher.scss'
 
-export default function CourseSearcher(props) {
+type CourseSearcherProps = {
+	error?: string,
+	groupBy: string,
+	hasQueried?: boolean,
+	inProgress: boolean,
+	onCloseSearcher: () => any,
+	onGroupByChange: () => any,
+	onKeyDown: () => any,
+	onQueryChange: () => any,
+	onQuerySubmit: () => any,
+	onSortChange: () => any,
+	partial?: Object,
+	query: string,
+	results: any[],
+	sortBy: string,
+	studentId?: string,
+};
+
+export default function CourseSearcher(props: CourseSearcherProps) {
 	const {
 		error='',
 		groupBy,
@@ -123,22 +142,4 @@ export default function CourseSearcher(props) {
 			{contents}
 		</div>
 	)
-}
-
-CourseSearcher.propTypes = {
-	error: PropTypes.string,
-	groupBy: PropTypes.oneOf(values(GROUP_BY)).isRequired,
-	hasQueried: PropTypes.bool,
-	inProgress: PropTypes.bool.isRequired,
-	onCloseSearcher: PropTypes.func.isRequired,
-	onGroupByChange: PropTypes.func.isRequired,
-	onKeyDown: PropTypes.func.isRequired,
-	onQueryChange: PropTypes.func.isRequired,
-	onQuerySubmit: PropTypes.func.isRequired,
-	onSortChange: PropTypes.func.isRequired,
-	partial: PropTypes.object,
-	query: PropTypes.string.isRequired,
-	results: PropTypes.array.isRequired,
-	sortBy: PropTypes.oneOf(values(SORT_BY)).isRequired,
-	studentId: PropTypes.string,
 }

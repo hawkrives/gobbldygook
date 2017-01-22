@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
 import {DropTarget} from 'react-dnd'
@@ -11,7 +12,13 @@ import {iosTrashOutline} from '../icons/ionicons'
 
 import './course-removal-box.scss'
 
-function CourseRemovalBox(props) {
+type CourseRemovalBoxProps = {
+	canDrop: boolean,  // react-dnd
+	connectDropTarget: () => any,  // react-dnd
+	isOver: boolean,  // react-dnd
+	removeCourse: () => any,  // studentId is embedded in the passed function
+};
+function CourseRemovalBox(props: CourseRemovalBoxProps) {
 	const className = cx('course-removal-box', {
 		'can-drop': props.canDrop,
 		'is-over': props.isOver,
@@ -24,17 +31,11 @@ function CourseRemovalBox(props) {
 		</div>
 	)
 }
-CourseRemovalBox.propTypes = {
-	canDrop: PropTypes.bool.isRequired,  // react-dnd
-	connectDropTarget: PropTypes.func.isRequired,  // react-dnd
-	isOver: PropTypes.bool.isRequired,  // react-dnd
-	removeCourse: PropTypes.func.isRequired,  // studentId is embedded in the passed function
-}
 
 
 // Implements the drag source contract.
 const removeCourseTarget = {
-	drop(props, monitor) {
+	drop(props, monitor: any) {
 		const item = monitor.getItem()
 		const { clbid, fromScheduleId, isFromSchedule } = item
 		if (isFromSchedule) {
@@ -43,7 +44,7 @@ const removeCourseTarget = {
 			props.removeCourse(fromScheduleId, clbid)
 		}
 	},
-	canDrop(props, monitor) {
+	canDrop(props, monitor: any) {
 		const { isFromSearch } = monitor.getItem()
 		if (!isFromSearch) {
 			return true

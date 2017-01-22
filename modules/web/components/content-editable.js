@@ -1,19 +1,20 @@
-import React, {PropTypes, Component} from 'react'
+// @flow
+import React, {Component} from 'react'
 import cx from 'classnames'
 import debug from 'debug'
 const log = debug('web:react')
 
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 class ContentEditable extends Component {
-	static propTypes = {
-		className: PropTypes.string,
-		multiLine: PropTypes.bool,
-		onBlur: PropTypes.func,
-		onChange: PropTypes.func.isRequired,
-		onFocus: PropTypes.func,
-		onKeyDown: PropTypes.func,
-		placeholder: PropTypes.string,
-		value: PropTypes.string,
+	props: {
+		className?: string,
+		multiLine?: boolean,
+		onBlur?: () => any,
+		onChange: () => any,
+		onFocus?: () => any,
+		onKeyDown?: () => any,
+		placeholder?: string,
+		value?: string,
 	};
 
 	static defaultProps = {
@@ -22,14 +23,18 @@ class ContentEditable extends Component {
 		value: '',
 	};
 
-	handleKeyDown = ev => {
+	state = {
+		lastValue: this.props.value,
+	};
+
+	handleKeyDown = (ev: KeyboardEvent) => {
 		if (!this.props.multiLine && ev.keyCode === 13) {
 			ev.preventDefault()
 		}
 		this.props.onKeyDown && this.props.onKeyDown(ev)
 	};
 
-	handleFocus = ev => {
+	handleFocus = (ev: Event) => {
 		this.props.onFocus && this.props.onFocus(ev)
 		// this.ref.placeholder.style.display = 'none'
 	};
@@ -38,7 +43,7 @@ class ContentEditable extends Component {
 		// this.ref.placeholder.style.display = 'inline'
 	};
 
-	handleChange = ev => {
+	handleChange = (ev: any) => {
 		const value = ev.target.textContent
 
 		if (value !== this.props.value) {
