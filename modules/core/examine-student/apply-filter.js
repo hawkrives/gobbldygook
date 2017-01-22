@@ -1,6 +1,8 @@
+// @flow
 import checkForCourse from './check-for-course'
 import filter from 'lodash/filter'
 import filterByWhereClause from './filter-by-where-clause'
+import type {FilterWhereExpression, FilterOfExpression, Course} from './types'
 
 /**
  * Filters a list of courses by way of a filter expression.
@@ -9,17 +11,16 @@ import filterByWhereClause from './filter-by-where-clause'
  * @param {Course[]} courses - the list of courses
  * @returns {Course[]} filtered - the filtered courses
  */
-export default function applyFilter(expr, courses) {
+export default function applyFilter(expr: FilterWhereExpression | FilterOfExpression, courses: Course[]): Course[] {
 	// default to an empty array
-	let filtered = []
+	let filtered: Course[] = []
 
 	// a filter will be either a where-style query or a list of courses
-	if ('$where' in expr) {
+	if (expr.$type === 'where') {
 		filtered = filterByWhereClause(courses, expr.$where)
 	}
-	else if ('$of' in expr) {
-		filtered = filter(expr.$of, course =>
-			checkForCourse(course, courses))
+	else if (expr.$type === '$of') {
+		filtered = filter(expr.$of, course => checkForCourse(course, courses))
 	}
 
 	// grab the matches

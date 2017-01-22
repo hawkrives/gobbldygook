@@ -9,6 +9,6 @@ import type {OverridesPath, OverridesObject} from './types'
  * @param {Object} overrides - the overrides object
  * @returns {*} - the value of the override
  */
-export default function getOverride(path: OverridesPath, overrides: OverridesObject) {
+export default function getOverride(path: OverridesPath, overrides: OverridesObject): boolean {
 	return overrides[pathToOverride(path)]
 }

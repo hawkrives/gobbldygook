@@ -2,7 +2,6 @@ import endsWith from 'lodash/endsWith'
 import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
 import includes from 'lodash/includes'
-import isArray from 'lodash/isArray'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import startsWith from 'lodash/startsWith'
@@ -133,7 +132,7 @@ function organizeValues([key, values], words=false, profWords=false) {
 		return val
 	})
 
-	if (organizedValues.length && isArray(organizedValues[0])) {
+	if (organizedValues.length && Array.isArray(organizedValues[0])) {
 		organizedValues = flatten(organizedValues)
 	}
 

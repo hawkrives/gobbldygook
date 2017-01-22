@@ -1,7 +1,9 @@
+// @flow
 import assertKeys from './assert-keys'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
 import stringify from 'stabilize'
+import type {Expression, Course} from './types'
 
 /**
  * Collects matched courses from a result object
@@ -9,9 +11,8 @@ import stringify from 'stabilize'
  * @param {Result} expr - the result object to extract matches from
  * @returns {Course[]} matches - the list of matched courses
  */
-export default function collectMatches(expr) {
+export default function collectMatches(expr: Expression): Course[] {
 	assertKeys(expr, '$type')
-	const type = expr.$type
 
 	// start off with absolutely no matches
 	let matches = undefined
@@ -20,7 +21,7 @@ export default function collectMatches(expr) {
 	// an array. returning in an array allows the higher-level expressions to
 	// just run `flatten()` to collect all of the courses.
 	// this is the "base case."
-	if (type === 'course') {
+	if (expr.$type === 'course') {
 		/* istanbul ignore else: doesn't matter */
 		if (expr._result === true) {
 			matches = [expr.$course || expr]
@@ -28,7 +29,7 @@ export default function collectMatches(expr) {
 	}
 
 	// next, we have the "run collectMatches on all my children" cases.
-	else if (type === 'requirement') {
+	else if (expr.$type === 'requirement') {
 		if ('result' in expr) {
 			matches = collectMatches(expr.result)
 		}
@@ -36,29 +37,34 @@ export default function collectMatches(expr) {
 			matches = []
 		}
 	}
-	else if (type === 'boolean') {
-		matches = flatMap(expr.$and || expr.$or, collectMatches)
+	else if (expr.$type === 'boolean') {
+		if (expr.$booleanType === 'and') {
+			matches = flatMap(expr.$and, collectMatches)
+		}
+		else {
+			matches = flatMap(expr.$or, collectMatches)
+		}
 	}
-	else if (type === 'of') {
+	else if (expr.$type === 'of') {
 		matches = flatMap(expr.$of, collectMatches)
 	}
 
 	// finally, we have the "pre-computed _matches" cases, where the evaluation
 	// of the expression attached the matches to the expression itself.
-	else if (type === 'modifier') {
+	else if (expr.$type === 'modifier') {
 		matches = expr._matches
 	}
-	else if (type === 'occurrence') {
+	else if (expr.$type === 'occurrence') {
 		matches = expr._matches
 	}
-	else if (type === 'reference') {
+	else if (expr.$type === 'reference') {
 		matches = expr._matches
 	}
-	else if (type === 'where') {
+	else if (expr.$type === 'where') {
 		matches = expr._matches
 	}
 	else {
-		throw new TypeError(`collectMatches(): unknown expression type "${type}"`)
+		throw new TypeError(`collectMatches(): unknown expression type "${expr.$type}"`)
 	}
 
 	// then we either return the matches, or an empty array if it's falsy

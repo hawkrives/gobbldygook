@@ -1,6 +1,8 @@
+// @flow
 import sortBy from 'lodash/sortBy'
 // import memoize from 'lodash/memoize'
 // import identity from 'lodash/identity'
+import type {Course} from './types'
 
 /**
  * Simplifies a course to just the department/number combo.
@@ -28,7 +30,7 @@ import sortBy from 'lodash/sortBy'
  * @param {Course} course - the course to simplify
  * @returns {string} - the stringified, simplified course
  */
-function simplifyCourse(course) {
+function simplifyCourse(course: Course): string {
 	return `${sortBy(course.department).join('/')} ${course.number} ${course.type}`
 }
 
