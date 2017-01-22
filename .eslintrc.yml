@@ -69,7 +69,7 @@ rules:
   consistent-this: [warn, self]
   brace-style: [warn, stroustrup]
   semi: [error, never]
-  babel/arrow-parens: [warn, as-needed]
+  arrow-parens: [warn, as-needed]
   arrow-spacing: ['warn', {before: true, after: true}]
   no-implicit-coercion: ['error', {boolean: true, number: true, string: true}]
   keyword-spacing: warn
