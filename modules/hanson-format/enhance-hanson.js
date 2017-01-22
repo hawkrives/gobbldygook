@@ -1,3 +1,4 @@
+// @flow
 import isRequirementName from 'modules/core/examine-student/is-requirement-name'
 import filter from 'lodash/filter'
 import forEach from 'lodash/forEach'
@@ -25,7 +26,9 @@ const startRules = {
 	'filter': 'Filter',
 }
 
-export function enhanceHanson(data, {topLevel=true, declaredVariables={}}={}) {
+type StringMap = {[key: string]: string};
+
+export function enhanceHanson(data, {topLevel=true, declaredVariables={}}: {topLevel: boolean, declaredVariables: StringMap}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
 	// 3. throws if it encounters any lowercase keys not in the whitelist
@@ -33,6 +36,16 @@ export function enhanceHanson(data, {topLevel=true, declaredVariables={}}={}) {
 
 	if (typeof data !== 'object') {
 		throw new Error('enhanceHanson: data was not an object!')
+	}
+
+	// Ensure that a result, message, or filter key exists.
+	// If filter's the only one, it's going to filter the list of courses
+	// available to the child requirements when this is evaluated.
+	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
+	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
+		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
+		let existingKeys = quoteAndJoin(keys(data))
+		throw new TypeError(`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`)
 	}
 
 	const whitelist = topLevel ? topLevelWhitelist : lowerLevelWhitelist
@@ -99,10 +112,8 @@ export function enhanceHanson(data, {topLevel=true, declaredVariables={}}={}) {
 				}
 			})
 
-			const startRule = startRules[key]
-
 			try {
-				value = parse(value, {abbreviations, titles, startRule})
+				value = parse(value, {abbreviations, titles, startRule: startRules[key]})
 			}
 			catch (e) {
 				throw new SyntaxError(`enhanceHanson: ${e.message} (in '${value}')`)
@@ -111,16 +122,6 @@ export function enhanceHanson(data, {topLevel=true, declaredVariables={}}={}) {
 
 		return value
 	})
-
-	// Ensure that a result, message, or filter key exists.
-	// If filter's the only one, it's going to filter the list of courses
-	// available to the child requirements when this is evaluated.
-	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
-	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
-		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
-		let existingKeys = quoteAndJoin(keys(data))
-		throw new TypeError(`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`)
-	}
 
 	return mutated
 }
