@@ -57,7 +57,7 @@ Where
 Filter
   = 'only' _ distinct:IsDistinct _ 'courses' _ filter:(
       'where' _ where:Qualifier { return {$where: where} }
-    / 'from' _ of:OfList { return {$of: of} }
+    / 'from' _ ofList:OfList { return {$of: ofList} }
   )
   { return assign({}, filter, {$distinct: distinct, $type: 'filter'}) }
 
@@ -244,12 +244,12 @@ And
 
 
 OfList
-  = OpenParen _ of:(
+  = OpenParen _ ofItems:(
       val:Result
       rest:( _ ',' _ second:Result { return second } )*
       { return [val].concat(rest) }
     )+ _ ','? _ CloseParen
-  { return flatten(of) }
+  { return flatten(ofItems) }
 
 
 Of
@@ -259,20 +259,20 @@ Of
       / 'any'  { return { $operator: '$gte', $num: 1, $was: 'any' } }
       / 'none' { return { $operator: '$eq', $num: 0, $was: 'none' } }
     )
-    _ 'of' _ of:OfList
+    _ 'of' _ ofList:OfList
     {
       if (count.$was === 'all') {
-        count.$num = of.length
+        count.$num = ofList.length
       }
 
-      if (of.length < count.$num) {
-        throw new Error(`you requested ${count.$num} items, but only gave ${of.length} options (${JSON.stringify(of)}).`)
+      if (ofList.length < count.$num) {
+        throw new Error(`you requested ${count.$num} items, but only gave ${ofList.length} options (${JSON.stringify(ofList)}).`)
       }
 
       return {
         $type: 'of',
         $count: count,
-        $of: of,
+        $of: ofList,
       }
     }
 
