@@ -171,7 +171,7 @@
     "json-loader": "0.5.4",
     "mocha": "3.2.0",
     "mock-require": "2.0.1",
-    "node-sass": "4.3.0",
+    "node-sass": "4.4.0",
     "nyc": "10.1.0",
     "pegjs": "0.10.0",
     "prettier": "0.0.10",
