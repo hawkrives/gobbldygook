@@ -39,7 +39,7 @@ node_js: 7
 
 script:
   - yarn run lint
-  - yarn run test -- --coverage
+  - yarn run test -- --coverage --runInBand
   - yarn run build-ci
 
 after_success:
