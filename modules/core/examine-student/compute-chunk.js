@@ -61,56 +61,56 @@ export default function computeChunk({ expr, ctx, courses, dirty, fulfillment, i
 	fulfillment?: Fulfillment,
 	isNeeded?: boolean,
 }) {
-	if (typeof expr !== 'object') {
-		throw new TypeError(`computeChunk(): the expr \`${stringify(expr)}\` must be an object, not a ${typeof expr}`)
-	}
-	assertKeys(expr, '$type')
+  if (typeof expr !== 'object') {
+    throw new TypeError(`computeChunk(): the expr \`${stringify(expr)}\` must be an object, not a ${typeof expr}`)
+  }
+  assertKeys(expr, '$type')
 
-	let computedResult = false
-	let matches: ?Course[] = undefined
-	let counted: ?number = undefined
+  let computedResult = false
+  let matches: ?Course[] = undefined
+  let counted: ?number = undefined
 
 	// Modifiers, occurrences, references, and wheres don't need isNeeded,
 	// because they don't result in recursive calls to computeChunk.
-	if (expr.$type === 'boolean') {
-		({ computedResult, matches } = computeBoolean({ expr, ctx, courses, dirty, isNeeded }))
-	}
-	else if (expr.$type === 'course') {
-		({ computedResult } = computeCourse({ expr, courses, dirty, isNeeded }))
-	}
-	else if (expr.$type === 'modifier') {
-		({ computedResult, matches, counted } = computeModifier({ expr, ctx, courses }))
-	}
-	else if (expr.$type === 'occurrence') {
-		({ computedResult, matches, counted } = computeOccurrence({ expr, courses }))
-	}
-	else if (expr.$type === 'of') {
-		({ computedResult, matches, counted } = computeOf({ expr, ctx, courses, dirty, isNeeded }))
-	}
-	else if (expr.$type === 'reference') {
-		({ computedResult, matches } = computeReference({ expr, ctx }))
-	}
-	else if (expr.$type === 'where') {
-		({ computedResult, matches, counted } = computeWhere({ expr, courses }))
-	}
-	else {
-		throw new TypeError(`computeChunk(): the type "${expr.$type}" is not a valid expression type.`)
-	}
+  if (expr.$type === 'boolean') {
+    ({ computedResult, matches } = computeBoolean({ expr, ctx, courses, dirty, isNeeded }))
+  }
+  else if (expr.$type === 'course') {
+    ({ computedResult } = computeCourse({ expr, courses, dirty, isNeeded }))
+  }
+  else if (expr.$type === 'modifier') {
+    ({ computedResult, matches, counted } = computeModifier({ expr, ctx, courses }))
+  }
+  else if (expr.$type === 'occurrence') {
+    ({ computedResult, matches, counted } = computeOccurrence({ expr, courses }))
+  }
+  else if (expr.$type === 'of') {
+    ({ computedResult, matches, counted } = computeOf({ expr, ctx, courses, dirty, isNeeded }))
+  }
+  else if (expr.$type === 'reference') {
+    ({ computedResult, matches } = computeReference({ expr, ctx }))
+  }
+  else if (expr.$type === 'where') {
+    ({ computedResult, matches, counted } = computeWhere({ expr, courses }))
+  }
+  else {
+    throw new TypeError(`computeChunk(): the type "${expr.$type}" is not a valid expression type.`)
+  }
 
-	if (fulfillment) {
-		({ computedResult, matches, counted } = applyFulfillmentToResult({ fulfillment, expr, computedResult, matches, counted }))
-	}
+  if (fulfillment) {
+    ({ computedResult, matches, counted } = applyFulfillmentToResult({ fulfillment, expr, computedResult, matches, counted }))
+  }
 
-	expr._result = computedResult
+  expr._result = computedResult
 
-	if (expr.$type !== 'course') {
-		if (matches !== undefined && matches !== null) {
-			expr._matches = matches
-		}
-		if (counted !== undefined && matches !== null) {
-			expr._counted = counted
-		}
-	}
+  if (expr.$type !== 'course') {
+    if (matches !== undefined && matches !== null) {
+      expr._matches = matches
+    }
+    if (counted !== undefined && matches !== null) {
+      expr._counted = counted
+    }
+  }
 
 	// No matter how specific the matched course is, be it just dept/num or
 	// all of dept/num/sect/year/sem, it still needs to resolve down to an
@@ -128,14 +128,14 @@ export default function computeChunk({ expr, ctx, courses, dirty, fulfillment, i
 	// to `false`, we will go through it's composite parts, and remove all of
 	// the contained courses from `dirty`.
 
-	if (!computedResult) {
-		let identifiers = map(collectTakenCourses(expr), simplifyCourse)
-		forEach(identifiers, crsid => dirty.delete(crsid))
-	}
+  if (!computedResult) {
+    let identifiers = map(collectTakenCourses(expr), simplifyCourse)
+    forEach(identifiers, crsid => dirty.delete(crsid))
+  }
 
-	expr._checked = true
+  expr._checked = true
 
-	return computedResult
+  return computedResult
 }
 
 
@@ -154,46 +154,46 @@ export function computeBoolean({ expr, ctx, courses, dirty, isNeeded }: {
 	dirty: Set<StringifiedCourse>,
 	isNeeded: boolean,
 }) {
-	let computedResult = false
+  let computedResult = false
 
-	if (expr.$booleanType === 'or') {
+  if (expr.$booleanType === 'or') {
 		// we only want this to use the first "true" result. we don't need to
 		// continue to look after we find one, because this is an or-clause
 
 		// `haveAnyBeenTrue` tells us if we need to mark any further courses as dirty.
 		// If it's true, then we don't actually need any more courses; we're just looking.
-		let haveAnyBeenTrue = false
-		const results = map(expr.$or, req => {
+    let haveAnyBeenTrue = false
+    const results = map(expr.$or, req => {
 			// we check the next chunk of the requirement:
 
 			// isNeeded is set to the negated `haveAnyBeenTrue`, because
 			// that's how we check if we need to flag any further courses.
-			let thisResult = computeChunk({ expr: req, ctx, courses, dirty, isNeeded: !haveAnyBeenTrue })
+      let thisResult = computeChunk({ expr: req, ctx, courses, dirty, isNeeded: !haveAnyBeenTrue })
 
 			// now, if we just found one, we set haveAnyBeenTrue; otherwise,
 			// we leave it at its prior value.
-			haveAnyBeenTrue = thisResult || haveAnyBeenTrue
+      haveAnyBeenTrue = thisResult || haveAnyBeenTrue
 
 			// and we're collecting an array of the results, so we'll return
 			// the result.
-			return thisResult
-		})
-		computedResult = some(results)
-	}
+      return thisResult
+    })
+    computedResult = some(results)
+  }
 
-	else if (expr.$booleanType === 'and') {
-		const results = map(expr.$and, req => computeChunk({ expr: req, ctx, courses, dirty, isNeeded }))
-		computedResult = every(results)
-	}
+  else if (expr.$booleanType === 'and') {
+    const results = map(expr.$and, req => computeChunk({ expr: req, ctx, courses, dirty, isNeeded }))
+    computedResult = every(results)
+  }
 
-	else {
-		throw new TypeError(`computeBoolean(): neither $or nor $and could be found in ${stringify(expr)}`)
-	}
+  else {
+    throw new TypeError(`computeBoolean(): neither $or nor $and could be found in ${stringify(expr)}`)
+  }
 
-	return {
-		computedResult,
-		matches: collectMatches(expr),
-	}
+  return {
+    computedResult,
+    matches: collectMatches(expr),
+  }
 }
 
 
@@ -210,35 +210,35 @@ export function computeCourse({ expr, courses, dirty, isNeeded }: {
 	dirty: Set<StringifiedCourse>,
 	isNeeded: boolean,
 }) {
-	assertKeys(expr, '$course')
-	const foundCourse = findCourse(expr.$course, courses)
+  assertKeys(expr, '$course')
+  const foundCourse = findCourse(expr.$course, courses)
 
-	if (!foundCourse) {
-		return { computedResult: false }
-	}
+  if (!foundCourse) {
+    return { computedResult: false }
+  }
 
-	const keysNotFromQuery = xor(keys(expr.$course), keys(foundCourse))
-	if (keysNotFromQuery.length) {
-		expr.$course._extraKeys = keysNotFromQuery
-	}
+  const keysNotFromQuery = xor(keys(expr.$course), keys(foundCourse))
+  if (keysNotFromQuery.length) {
+    expr.$course._extraKeys = keysNotFromQuery
+  }
 
-	expr._request = expr.$course
-	expr.$course = { ...expr.$course, ...foundCourse }
-	let match = expr.$course
-	const crsident = simplifyCourse(match)
+  expr._request = expr.$course
+  expr.$course = { ...expr.$course, ...foundCourse }
+  let match = expr.$course
+  const crsident = simplifyCourse(match)
 
-	if (dirty.has(crsident)) {
-		return { computedResult: false, match }
-	}
+  if (dirty.has(crsident)) {
+    return { computedResult: false, match }
+  }
 
-	expr._taken = true
-	if (isNeeded) {
-		dirty.add(crsident)
-		return { computedResult: true, match }
-	}
-	else {
-		return { computedResult: false, match }
-	}
+  expr._taken = true
+  if (isNeeded) {
+    dirty.add(crsident)
+    return { computedResult: true, match }
+  }
+  else {
+    return { computedResult: false, match }
+  }
 }
 
 
@@ -254,47 +254,47 @@ export function computeModifier({ expr, ctx, courses }: {
 	ctx: Requirement,
 	courses: Course[],
 }) {
-	assertKeys(expr, '$what', '$count', '$from')
-	const what = expr.$what
+  assertKeys(expr, '$what', '$count', '$from')
+  const what = expr.$what
 
-	if (what !== 'course' && what !== 'credit' && what !== 'department') {
-		throw new TypeError(`computeModifier(): "${what}" is not a valid source for a modifier`)
-	}
+  if (what !== 'course' && what !== 'credit' && what !== 'department') {
+    throw new TypeError(`computeModifier(): "${what}" is not a valid source for a modifier`)
+  }
 
-	let filtered = []
-	let numCounted = undefined
+  let filtered = []
+  let numCounted = undefined
 
 	// get matches
-	if (expr.$from === 'children') {
-		assertKeys(expr, '$children')
-		filtered = getMatchesFromChildren(expr, ctx)
-	}
+  if (expr.$from === 'children') {
+    assertKeys(expr, '$children')
+    filtered = getMatchesFromChildren(expr, ctx)
+  }
 
-	else if (expr.$from === 'filter') {
-		assertKeys(ctx, 'filter')
-		filtered = getMatchesFromFilter(ctx)
-	}
+  else if (expr.$from === 'filter') {
+    assertKeys(ctx, 'filter')
+    filtered = getMatchesFromFilter(ctx)
+  }
 
-	else if (expr.$from === 'filter-where') {
-		assertKeys(expr, '$where')
-		filtered = getMatchesFromFilter(ctx)
-		filtered = filterByWhereClause(filtered, expr.$where)
-	}
+  else if (expr.$from === 'filter-where') {
+    assertKeys(expr, '$where')
+    filtered = getMatchesFromFilter(ctx)
+    filtered = filterByWhereClause(filtered, expr.$where)
+  }
 
-	else if (expr.$from === 'where') {
-		assertKeys(expr, '$where')
-		filtered = filterByWhereClause(courses, expr.$where)
-	}
+  else if (expr.$from === 'where') {
+    assertKeys(expr, '$where')
+    filtered = filterByWhereClause(courses, expr.$where)
+  }
 
-	else if (expr.$from === 'children-where') {
-		assertKeys(expr, '$where', '$children')
-		filtered = getMatchesFromChildren(expr, ctx)
-		filtered = filterByWhereClause(filtered, expr.$where)
-	}
+  else if (expr.$from === 'children-where') {
+    assertKeys(expr, '$where', '$children')
+    filtered = getMatchesFromChildren(expr, ctx)
+    filtered = filterByWhereClause(filtered, expr.$where)
+  }
 
-	else {
-		throw new TypeError(`computeModifier: "${expr.$from}" is not a valid $from value`)
-	}
+  else {
+    throw new TypeError(`computeModifier: "${expr.$from}" is not a valid $from value`)
+  }
 
 
 	// normally, you're allowed to count courses, or departments, or credits,
@@ -303,46 +303,46 @@ export function computeModifier({ expr, ctx, courses }: {
 	// departments'.
 	// thus, if we have a limit on the number of courses, then only return the
 	// number that we're allowed to accept.
-	if (expr.$count.$operator === '$lte' || expr.$count.$operator === '$eq') {
-		filtered = take(filtered, expr.$count.$num)
-	}
+  if (expr.$count.$operator === '$lte' || expr.$count.$operator === '$eq') {
+    filtered = take(filtered, expr.$count.$num)
+  }
 
 	// eslint-disable-next-line no-confusing-arrow
-	filtered = map(filtered, course =>
+  filtered = map(filtered, course =>
 		'$course' in course ? course.$course : course)
 
 
-	if (expr.$besides) {
-		filtered = excludeCourse(expr.$besides, filtered)
-	}
+  if (expr.$besides) {
+    filtered = excludeCourse(expr.$besides, filtered)
+  }
 
 	// count things
-	if (what === 'course') {
-		numCounted = countCourses(filtered)
-	}
+  if (what === 'course') {
+    numCounted = countCourses(filtered)
+  }
 
-	else if (what === 'department') {
-		numCounted = countDepartments(filtered)
-	}
+  else if (what === 'department') {
+    numCounted = countDepartments(filtered)
+  }
 
-	else if (what === 'credit') {
-		numCounted = countCredits(filtered)
-	}
+  else if (what === 'credit') {
+    numCounted = countCredits(filtered)
+  }
 
-	else {
-		throw new TypeError(`computeModifier: "${what}" is not a valid thing to count`)
-	}
+  else {
+    throw new TypeError(`computeModifier: "${what}" is not a valid thing to count`)
+  }
 
 
-	return {
-		computedResult: computeCountWithOperator({
-			comparator: expr.$count.$operator,
-			has: numCounted,
-			needs: expr.$count.$num,
-		}),
-		counted: numCounted,
-		matches: filtered,
-	}
+  return {
+    computedResult: computeCountWithOperator({
+      comparator: expr.$count.$operator,
+      has: numCounted,
+      needs: expr.$count.$num,
+    }),
+    counted: numCounted,
+    matches: filtered,
+  }
 }
 
 
@@ -356,20 +356,20 @@ export function computeOccurrence({ expr, courses }: {
 	expr: OccurrenceExpression,
 	courses: Course[],
 }) {
-	assertKeys(expr, '$course', '$count')
+  assertKeys(expr, '$course', '$count')
 
-	let filtered = getOccurrences(expr.$course, courses)
+  let filtered = getOccurrences(expr.$course, courses)
 	// If we have a limit on the number of courses, then only return the
 	// number that we're allowed to accept.
-	if (expr.$count.$operator === '$lte' || expr.$count.$operator === '$eq') {
-		filtered = take(filtered, expr.$count.$num)
-	}
+  if (expr.$count.$operator === '$lte' || expr.$count.$operator === '$eq') {
+    filtered = take(filtered, expr.$count.$num)
+  }
 
-	return {
-		computedResult: computeCountWithOperator({ comparator: expr.$count.$operator, has: filtered.length, needs: expr.$count.$num }),
-		counted: filtered.length,
-		matches: filtered,
-	}
+  return {
+    computedResult: computeCountWithOperator({ comparator: expr.$count.$operator, has: filtered.length, needs: expr.$count.$num }),
+    counted: filtered.length,
+    matches: filtered,
+  }
 }
 
 
@@ -388,64 +388,64 @@ export function computeOf({ expr, ctx, courses, dirty, isNeeded }: {
 	dirty: Set<StringifiedCourse>,
 	isNeeded: boolean,
 }) {
-	assertKeys(expr, '$of', '$count')
+  assertKeys(expr, '$of', '$count')
 
 	// Go through $of, incrementing count if result of the thing is true.
-	let count = 0
-	forEach(expr.$of, req => {
+  let count = 0
+  forEach(expr.$of, req => {
 		// computeChunk return a boolean.
 		// Number() converts that to a 0 or a 1, which then is added to `count`.
-		let thisResult = computeChunk({ expr: req, ctx, courses, dirty, isNeeded })
-		if (isNeeded) {
-			count += Number(thisResult)
-		}
+    let thisResult = computeChunk({ expr: req, ctx, courses, dirty, isNeeded })
+    if (isNeeded) {
+      count += Number(thisResult)
+    }
 
 		// We compute didPass out here so that it's in a more standard place
-		let didPass = computeCountWithOperator({
-			comparator: expr.$count.$operator,
-			needs: expr.$count.$num,
-			has: count,
-		})
+    let didPass = computeCountWithOperator({
+      comparator: expr.$count.$operator,
+      needs: expr.$count.$num,
+      has: count,
+    })
 
 		// Now we break into separate paths.
 
 		// Note that none of these exit the loop early, because we have to
 		// look at every chunk. Instead, we note that we don't need to mark
 		// any other courses as being dirty once we've passed the check.
-		if (expr.$count.$operator === '$gte') {
+    if (expr.$count.$operator === '$gte') {
 			// If we've amassed enough matches, stop checking.
-			if (didPass) {
-				isNeeded = false
-			}
-		}
-		else if (expr.$count.$operator === '$eq') {
+      if (didPass) {
+        isNeeded = false
+      }
+    }
+    else if (expr.$count.$operator === '$eq') {
 			// If we have exactly the right number, stop.
-			if (didPass) {
-				isNeeded = false
-			}
-		}
-		else if (expr.$count.$operator === '$lte') {
+      if (didPass) {
+        isNeeded = false
+      }
+    }
+    else if (expr.$count.$operator === '$lte') {
 			// We can't use computeCountWithOperator here, because 0 <= N for all N.
 			// Instead, we check to see if the next step would cause us to go over our limit.
 			// If it would, we stop the loop.
-			if (count + 1 >= expr.$count.$num) {
-				isNeeded = false
-			}
-		}
-		else {
-			throw new TypeError(`computeOf: not sure what to do with a "${expr.$count.$operator}" operator`)
-		}
-	})
+      if (count + 1 >= expr.$count.$num) {
+        isNeeded = false
+      }
+    }
+    else {
+      throw new TypeError(`computeOf: not sure what to do with a "${expr.$count.$operator}" operator`)
+    }
+  })
 
-	return {
-		computedResult: computeCountWithOperator({
-			comparator: expr.$count.$operator,
-			needs: expr.$count.$num,
-			has: count,
-		}),
-		counted: count,
-		matches: collectMatches(expr),
-	}
+  return {
+    computedResult: computeCountWithOperator({
+      comparator: expr.$count.$operator,
+      needs: expr.$count.$num,
+      has: count,
+    }),
+    counted: count,
+    matches: collectMatches(expr),
+  }
 }
 
 
@@ -460,25 +460,25 @@ export function computeReference({ expr, ctx }: {
 	expr: ReferenceExpression,
 	ctx: Requirement,
 }): ComputeReferenceResult {
-	assertKeys(expr, '$requirement')
+  assertKeys(expr, '$requirement')
 
-	if (!(expr.$requirement in ctx)) {
-		throw new ReferenceError(`computeReference(): the requirement "${expr.$requirement}" does not exist in the provided requirement context`)
-	}
+  if (!(expr.$requirement in ctx)) {
+    throw new ReferenceError(`computeReference(): the requirement "${expr.$requirement}" does not exist in the provided requirement context`)
+  }
 
-	const target = ctx[expr.$requirement]
+  const target = ctx[expr.$requirement]
 
-	let resultObj: ComputeReferenceResult = { computedResult: target.computed, matches: null }
+  let resultObj: ComputeReferenceResult = { computedResult: target.computed, matches: null }
 
 	// this needs to be checked because of the possibility of message-only keys.
 	// they don't have a `result` key.
-	if ('result' in target) {
-		resultObj.matches = collectMatches(target.result)
-	}
+  if ('result' in target) {
+    resultObj.matches = collectMatches(target.result)
+  }
 
-	expr._checked = target._checked
+  expr._checked = target._checked
 
-	return resultObj
+  return resultObj
 }
 
 
@@ -492,17 +492,17 @@ export function computeWhere({ expr, courses }: {
 	expr: WhereExpression,
 	courses: Course[],
 }) {
-	assertKeys(expr, '$where', '$count', '$distinct')
+  assertKeys(expr, '$where', '$count', '$distinct')
 
-	const filtered = filterByWhereClause(courses, expr.$where, { distinct: expr.$distinct, counter: expr.$count })
+  const filtered = filterByWhereClause(courses, expr.$where, { distinct: expr.$distinct, counter: expr.$count })
 
-	return {
-		computedResult: computeCountWithOperator({
-			comparator: expr.$count.$operator,
-			has: filtered.length,
-			needs: expr.$count.$num,
-		}),
-		matches: filtered,
-		counted: filtered.length,
-	}
+  return {
+    computedResult: computeCountWithOperator({
+      comparator: expr.$count.$operator,
+      has: filtered.length,
+      needs: expr.$count.$num,
+    }),
+    matches: filtered,
+    counted: filtered.length,
+  }
 }

@@ -12,8 +12,8 @@ const Root = props => (
 )
 
 Root.propTypes = {
-	children: PropTypes.node,
-	store: PropTypes.object.isRequired,
+  children: PropTypes.node,
+  store: PropTypes.object.isRequired,
 }
 
 export default Root

@@ -1,23 +1,23 @@
 export default {
-	component: require('modules/web/containers/app').default,
-	childRoutes: [ {
-		path: '/',
+  component: require('modules/web/containers/app').default,
+  childRoutes: [ {
+    path: '/',
 
-		getIndexRoute(location, cb) {
-			cb(null, { content: require('./index').default })
-		},
+    getIndexRoute(location, cb) {
+      cb(null, { content: require('./index').default })
+    },
 
-		getChildRoutes(state, cb) {
-			cb(null, [
-				require('./edit-area').default, // edit-area
-				require('./degub').default,  // degub
-				require('./create').default, // create
-				require('./student').default, // student
-				require('./search').default, // search
-				require('./not-found').default, // anything else
-			])
-		},
-	} ],
+    getChildRoutes(state, cb) {
+      cb(null, [
+        require('./edit-area').default, // edit-area
+        require('./degub').default,  // degub
+        require('./create').default, // create
+        require('./student').default, // student
+        require('./search').default, // search
+        require('./not-found').default, // anything else
+      ])
+    },
+  } ],
 }
 
 // /

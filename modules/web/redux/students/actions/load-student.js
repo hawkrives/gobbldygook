@@ -8,37 +8,37 @@ import {
 
 
 function beginLoading(id) {
-	return { type: BEGIN_LOAD_STUDENT, payload: { id } }
+  return { type: BEGIN_LOAD_STUDENT, payload: { id } }
 }
 
 function actuallyLoadStudent(id) {
-	return { type: LOAD_STUDENT, payload: loadStudentFunc(id) }
+  return { type: LOAD_STUDENT, payload: loadStudentFunc(id) }
 }
 
 function shouldLoad(state, id) {
-	if (!(id in state.students)) {
-		return true
-	}
+  if (!(id in state.students)) {
+    return true
+  }
 
-	let savedStudent = JSON.parse(localStorage.getItem(id))
-	let thisStudent = state.students[id]
+  let savedStudent = JSON.parse(localStorage.getItem(id))
+  let thisStudent = state.students[id]
 
-	if (thisStudent.isLoading || savedStudent.dateLastModified === thisStudent.data.present.dateLastModified) {
-		return false
-	}
+  if (thisStudent.isLoading || savedStudent.dateLastModified === thisStudent.data.present.dateLastModified) {
+    return false
+  }
 
-	return true
+  return true
 }
 
 export function loadStudent(id) {
-	return (dispatch, getState) => {
-		if (!shouldLoad(getState(), id)) {
-			return
-		}
+  return (dispatch, getState) => {
+    if (!shouldLoad(getState(), id)) {
+      return
+    }
 
-		dispatch(beginLoading(id))
+    dispatch(beginLoading(id))
 
-		return dispatch(actuallyLoadStudent(id))
+    return dispatch(actuallyLoadStudent(id))
 			.then(() => dispatch(checkStudent(id)))
-	}
+  }
 }

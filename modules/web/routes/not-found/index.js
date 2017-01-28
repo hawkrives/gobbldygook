@@ -1,7 +1,7 @@
 export default {
-	path: '*',
+  path: '*',
 
-	components: {
-		content: require('./not-found').default,
-	},
+  components: {
+    content: require('./not-found').default,
+  },
 }

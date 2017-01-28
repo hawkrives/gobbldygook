@@ -36,653 +36,653 @@ import { ActionCreators } from 'redux-undo'
 const { undo, redo } = ActionCreators
 
 describe('students reducer', () => {
-	it('returns the initial state', () => {
-		const expected = {}
-		const actual = reducer(undefined, {})
-		expect(actual).to.deep.equal(expected)
-	})
+  it('returns the initial state', () => {
+    const expected = {}
+    const actual = reducer(undefined, {})
+    expect(actual).to.deep.equal(expected)
+  })
 })
 
 describe('students reducer', () => {
-	it('handles INIT_STUDENT', () => {
-		let initialState = {}
+  it('handles INIT_STUDENT', () => {
+    let initialState = {}
 
-		let student = { id: 'xyz' }
-		let action = { type: INIT_STUDENT, payload: student }
+    let student = { id: 'xyz' }
+    let action = { type: INIT_STUDENT, payload: student }
 
-		let expected = student
-		let actual = reducer(initialState, action)
+    let expected = student
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-	})
-	it('returns existing state if INIT_STUDENT has an error', () => {
-		let initialState = {}
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+  })
+  it('returns existing state if INIT_STUDENT has an error', () => {
+    let initialState = {}
 
-		let action = { type: INIT_STUDENT, payload: new Error(), error: true }
+    let action = { type: INIT_STUDENT, payload: new Error(), error: true }
 
-		let expected = initialState
-		let actual = reducer(initialState, action)
+    let expected = initialState
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.equal(expected)
-	})
+    expect(actual).to.equal(expected)
+  })
 
-	it('returns existing state if IMPORT_STUDENT has an error', () => {
-		let initialState = {}
+  it('returns existing state if IMPORT_STUDENT has an error', () => {
+    let initialState = {}
 
-		let action = { type: IMPORT_STUDENT, payload: new Error(), error: true }
+    let action = { type: IMPORT_STUDENT, payload: new Error(), error: true }
 
-		let expected = initialState
-		let actual = reducer(initialState, action)
+    let expected = initialState
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.equal(expected)
-	})
+    expect(actual).to.equal(expected)
+  })
 
-	it.skip('handles DESTROY_STUDENT', () => {
+  it.skip('handles DESTROY_STUDENT', () => {
 		// TODO: This needs to test the student-wrapper reducer
-		let student = { id: 'xyz' }
-		let initialState = student
+    let student = { id: 'xyz' }
+    let initialState = student
 
-		let action = { type: DESTROY_STUDENT, payload: { studentId: student.id } }
+    let action = { type: DESTROY_STUDENT, payload: { studentId: student.id } }
 
-		let expected = {}
-		let actual = reducer(initialState, action)
+    let expected = {}
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+  })
 
-	it('handles CHANGE_NAME', () => {
-		let student = { id: 'xyz', name: 'first' }
-		let initialState = student
+  it('handles CHANGE_NAME', () => {
+    let student = { id: 'xyz', name: 'first' }
+    let initialState = student
 
-		let action = { type: CHANGE_NAME, payload: {
-			studentId: student.id,
-			name: 'second',
-		} }
+    let action = { type: CHANGE_NAME, payload: {
+      studentId: student.id,
+      name: 'second',
+    } }
 
-		let expected = { ...student, name: 'second' }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, name: 'second' }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual['xyz']).to.not.equal(student)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual['xyz']).to.not.equal(student)
+  })
 
-	it('handles CHANGE_ADVISOR', () => {
-		let student = { id: 'xyz', advisor: 'first' }
-		let initialState = student
+  it('handles CHANGE_ADVISOR', () => {
+    let student = { id: 'xyz', advisor: 'first' }
+    let initialState = student
 
-		let action = { type: CHANGE_ADVISOR, payload: {
-			studentId: student.id,
-			advisor: 'second',
-		} }
+    let action = { type: CHANGE_ADVISOR, payload: {
+      studentId: student.id,
+      advisor: 'second',
+    } }
 
-		let expected = { ...student, advisor: 'second' }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, advisor: 'second' }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual['xyz']).to.not.equal(student)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual['xyz']).to.not.equal(student)
+  })
 
-	it('handles CHANGE_CREDITS_NEEDED', () => {
-		let student = { id: 'xyz', creditsNeeded: 30 }
-		let initialState = student
+  it('handles CHANGE_CREDITS_NEEDED', () => {
+    let student = { id: 'xyz', creditsNeeded: 30 }
+    let initialState = student
 
-		let action = { type: CHANGE_CREDITS_NEEDED, payload: {
-			studentId: student.id,
-			credits: 20,
-		} }
+    let action = { type: CHANGE_CREDITS_NEEDED, payload: {
+      studentId: student.id,
+      credits: 20,
+    } }
 
-		let expected = { ...student, creditsNeeded: 20 }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, creditsNeeded: 20 }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual['xyz']).to.not.equal(student)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual['xyz']).to.not.equal(student)
+  })
 
-	it('handles CHANGE_MATRICULATION', () => {
-		let student = { id: 'xyz', matriculation: 1800 }
-		let initialState = student
+  it('handles CHANGE_MATRICULATION', () => {
+    let student = { id: 'xyz', matriculation: 1800 }
+    let initialState = student
 
-		let action = { type: CHANGE_MATRICULATION, payload: {
-			studentId: student.id,
-			matriculation: 2100,
-		} }
+    let action = { type: CHANGE_MATRICULATION, payload: {
+      studentId: student.id,
+      matriculation: 2100,
+    } }
 
-		let expected = { ...student, matriculation: 2100 }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, matriculation: 2100 }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual['xyz']).to.not.equal(student)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual['xyz']).to.not.equal(student)
+  })
 
-	it('handles CHANGE_GRADUATION', () => {
-		let student = { id: 'xyz', graduation: 30 }
-		let initialState = student
+  it('handles CHANGE_GRADUATION', () => {
+    let student = { id: 'xyz', graduation: 30 }
+    let initialState = student
 
-		let action = { type: CHANGE_GRADUATION, payload: {
-			studentId: student.id,
-			graduation: 20,
-		} }
+    let action = { type: CHANGE_GRADUATION, payload: {
+      studentId: student.id,
+      graduation: 20,
+    } }
 
-		let expected = { ...student, graduation: 20 }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, graduation: 20 }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual['xyz']).to.not.equal(student)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual['xyz']).to.not.equal(student)
+  })
 
-	it('handles CHANGE_SETTING', () => {
-		let student = { id: 'xyz', settings: { name: 'nothing' } }
-		let initialState = student
+  it('handles CHANGE_SETTING', () => {
+    let student = { id: 'xyz', settings: { name: 'nothing' } }
+    let initialState = student
 
-		let action = { type: CHANGE_SETTING, payload: {
-			studentId: student.id,
-			key: 'key',
-			value: 'value',
-		} }
+    let action = { type: CHANGE_SETTING, payload: {
+      studentId: student.id,
+      key: 'key',
+      value: 'value',
+    } }
 
-		let expected = { ...student, settings: { ...student.settings, key: 'value' } }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, settings: { ...student.settings, key: 'value' } }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual['xyz']).to.not.equal(student)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual['xyz']).to.not.equal(student)
+  })
 
-	it('handles ADD_AREA', () => {
-		let student = { id: 'xyz', studies: [] }
-		let initialState = student
+  it('handles ADD_AREA', () => {
+    let student = { id: 'xyz', studies: [] }
+    let initialState = student
 
-		let area = { name: `I'm an area` }
-		let action = { type: ADD_AREA, payload: {
-			studentId: student.id,
-			area: area,
-		} }
+    let area = { name: `I'm an area` }
+    let action = { type: ADD_AREA, payload: {
+      studentId: student.id,
+      area: area,
+    } }
 
-		let expected = { ...student, studies: [ { name: `I'm an area` } ] }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, studies: [ { name: `I'm an area` } ] }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual['xyz']).to.not.equal(student)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual['xyz']).to.not.equal(student)
+  })
 
-	it('handles REMOVE_AREA', () => {
-		let student = { id: 'xyz', studies: [
+  it('handles REMOVE_AREA', () => {
+    let student = { id: 'xyz', studies: [
 			{ name: 'Exercise Science', type: 'major' },
 			{ name: 'Asian Studies', type: 'major' },
-		] }
-		let initialState = student
+    ] }
+    let initialState = student
 
-		let action = { type: REMOVE_AREA, payload: {
-			studentId: student.id,
-			areaQuery: { name: 'Exercise Science', type: 'major' },
-		} }
+    let action = { type: REMOVE_AREA, payload: {
+      studentId: student.id,
+      areaQuery: { name: 'Exercise Science', type: 'major' },
+    } }
 
-		let expected = { ...student, studies: [ { name: 'Asian Studies', type: 'major' } ] }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, studies: [ { name: 'Asian Studies', type: 'major' } ] }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual['xyz']).to.not.equal(student)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual['xyz']).to.not.equal(student)
+  })
 
-	it('handles REMOVE_AREAS', () => {
-		let student = { id: 'xyz', studies: [
+  it('handles REMOVE_AREAS', () => {
+    let student = { id: 'xyz', studies: [
 			{ name: 'Exercise Science', type: 'major' },
 			{ name: 'Computer Science', type: 'major' },
 			{ name: 'Asian Studies', type: 'major' },
-		] }
-		let initialState = student
+    ] }
+    let initialState = student
 
-		let action = { type: REMOVE_AREAS, payload: {
-			studentId: student.id,
-			areaQueries: [
+    let action = { type: REMOVE_AREAS, payload: {
+      studentId: student.id,
+      areaQueries: [
 				{ name: 'Exercise Science', type: 'major' },
 				{ name: 'Computer Science', type: 'major' },
-			],
-		} }
+      ],
+    } }
 
-		let expected = { ...student, studies: [ { name: 'Asian Studies', type: 'major' } ] }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, studies: [ { name: 'Asian Studies', type: 'major' } ] }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual['xyz']).to.not.equal(student)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual['xyz']).to.not.equal(student)
+  })
 
-	it('handles ADD_SCHEDULE', () => {
-		let student = { id: 'xyz', schedules: {} }
-		let initialState = student
+  it('handles ADD_SCHEDULE', () => {
+    let student = { id: 'xyz', schedules: {} }
+    let initialState = student
 
-		let action = { type: ADD_SCHEDULE, payload: {
-			studentId: student.id,
-			schedule: { id: 's', title: `I'm a schedule` },
-		} }
+    let action = { type: ADD_SCHEDULE, payload: {
+      studentId: student.id,
+      schedule: { id: 's', title: `I'm a schedule` },
+    } }
 
-		let expected = { ...student, schedules: { s: { id: 's', title: `I'm a schedule` } } }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, schedules: { s: { id: 's', title: `I'm a schedule` } } }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+  })
 
-	it('handles DESTROY_SCHEDULE', () => {
-		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', title: 'Schedule!!!' },
-			'2': { id: '2', title: 'Schedule???' },
-		} }
-		let initialState = student
+  it('handles DESTROY_SCHEDULE', () => {
+    let student = { id: 'xyz', schedules: {
+      '1': { id: '1', title: 'Schedule!!!' },
+      '2': { id: '2', title: 'Schedule???' },
+    } }
+    let initialState = student
 
-		let action = { type: DESTROY_SCHEDULE, payload: {
-			studentId: student.id,
-			scheduleId: '1',
-		} }
+    let action = { type: DESTROY_SCHEDULE, payload: {
+      studentId: student.id,
+      scheduleId: '1',
+    } }
 
-		let expected = {
-			...student,
-			schedules: { '2': { id: '2', title: 'Schedule???' } },
-		}
-		let actual = reducer(initialState, action)
+    let expected = {
+      ...student,
+      schedules: { '2': { id: '2', title: 'Schedule???' } },
+    }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+  })
 
-	it('handles DESTROY_SCHEDULES', () => {
-		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', title: 'Schedule!!!' },
-			'2': { id: '2', title: 'Schedule???' },
-			'3': { id: '3', title: 'Schedule!!!???' },
-		} }
-		let initialState = student
+  it('handles DESTROY_SCHEDULES', () => {
+    let student = { id: 'xyz', schedules: {
+      '1': { id: '1', title: 'Schedule!!!' },
+      '2': { id: '2', title: 'Schedule???' },
+      '3': { id: '3', title: 'Schedule!!!???' },
+    } }
+    let initialState = student
 
-		let action = { type: DESTROY_SCHEDULES, payload: {
-			studentId: student.id,
-			scheduleIds: [ '1', '3' ],
-		} }
+    let action = { type: DESTROY_SCHEDULES, payload: {
+      studentId: student.id,
+      scheduleIds: [ '1', '3' ],
+    } }
 
-		let expected = {
-			...student,
-			schedules: { '2': { id: '2', title: 'Schedule???' } },
-		}
-		let actual = reducer(initialState, action)
+    let expected = {
+      ...student,
+      schedules: { '2': { id: '2', title: 'Schedule???' } },
+    }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+  })
 
-	it('handles RENAME_SCHEDULE', () => {
-		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', title: 'Schedule!!!' },
-		} }
-		let initialState = student
+  it('handles RENAME_SCHEDULE', () => {
+    let student = { id: 'xyz', schedules: {
+      '1': { id: '1', title: 'Schedule!!!' },
+    } }
+    let initialState = student
 
-		let action = { type: RENAME_SCHEDULE, payload: {
-			studentId: student.id,
-			scheduleId: '1',
-			newTitle: `I am too a schedule! How dare you!`,
-		} }
+    let action = { type: RENAME_SCHEDULE, payload: {
+      studentId: student.id,
+      scheduleId: '1',
+      newTitle: `I am too a schedule! How dare you!`,
+    } }
 
-		let expected = {
-			...student,
-			schedules: {
-				'1': { id: '1', title: `I am too a schedule! How dare you!` },
-			},
-		}
-		let actual = reducer(initialState, action)
+    let expected = {
+      ...student,
+      schedules: {
+        '1': { id: '1', title: `I am too a schedule! How dare you!` },
+      },
+    }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-		expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+    expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+  })
 
-	it('handles REORDER_SCHEDULE', () => {
-		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', title: 'Schedule!!!', index: 1 },
-		} }
-		let initialState = student
+  it('handles REORDER_SCHEDULE', () => {
+    let student = { id: 'xyz', schedules: {
+      '1': { id: '1', title: 'Schedule!!!', index: 1 },
+    } }
+    let initialState = student
 
-		let action = { type: REORDER_SCHEDULE, payload: {
-			studentId: student.id,
-			scheduleId: '1',
-			newIndex: 5,
-		} }
+    let action = { type: REORDER_SCHEDULE, payload: {
+      studentId: student.id,
+      scheduleId: '1',
+      newIndex: 5,
+    } }
 
-		let expected = {
-			...student,
-			schedules: {
-				'1': { id: '1', index: 5, title: 'Schedule!!!' },
-			},
-		}
-		let actual = reducer(initialState, action)
+    let expected = {
+      ...student,
+      schedules: {
+        '1': { id: '1', index: 5, title: 'Schedule!!!' },
+      },
+    }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-		expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+    expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+  })
 
-	it('handles MOVE_SCHEDULE', () => {
-		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', year: 0, semester: 0 },
-		} }
-		let initialState = student
+  it('handles MOVE_SCHEDULE', () => {
+    let student = { id: 'xyz', schedules: {
+      '1': { id: '1', year: 0, semester: 0 },
+    } }
+    let initialState = student
 
-		let action = { type: MOVE_SCHEDULE, payload: {
-			studentId: student.id,
-			scheduleId: '1',
-			year: 2015,
-			semester: 1,
-		} }
+    let action = { type: MOVE_SCHEDULE, payload: {
+      studentId: student.id,
+      scheduleId: '1',
+      year: 2015,
+      semester: 1,
+    } }
 
-		let expected = {
-			...student,
-			schedules: {
-				'1': { id: '1', year: 2015, semester: 1 },
-			},
-		}
-		let actual = reducer(initialState, action)
+    let expected = {
+      ...student,
+      schedules: {
+        '1': { id: '1', year: 2015, semester: 1 },
+      },
+    }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-		expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+    expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+  })
 
-	it('handles ADD_COURSE', () => {
-		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', clbids: [ 123 ] },
-		} }
-		let initialState = student
+  it('handles ADD_COURSE', () => {
+    let student = { id: 'xyz', schedules: {
+      '1': { id: '1', clbids: [ 123 ] },
+    } }
+    let initialState = student
 
-		let action = { type: ADD_COURSE, payload: {
-			studentId: student.id,
-			scheduleId: '1',
-			clbid: 789,
-		} }
+    let action = { type: ADD_COURSE, payload: {
+      studentId: student.id,
+      scheduleId: '1',
+      clbid: 789,
+    } }
 
-		let expected = {
-			...student,
-			schedules: { '1': { id: '1', clbids: [ 123, 789 ] } },
-		}
-		let actual = reducer(initialState, action)
+    let expected = {
+      ...student,
+      schedules: { '1': { id: '1', clbids: [ 123, 789 ] } },
+    }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-		expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-		expect(actual.schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+    expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+    expect(actual.schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
+  })
 
-	it('handles REMOVE_COURSE', () => {
-		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', clbids: [ 123, 789 ] },
-		} }
-		let initialState = student
+  it('handles REMOVE_COURSE', () => {
+    let student = { id: 'xyz', schedules: {
+      '1': { id: '1', clbids: [ 123, 789 ] },
+    } }
+    let initialState = student
 
-		let action = { type: REMOVE_COURSE, payload: {
-			studentId: student.id,
-			scheduleId: '1',
-			clbid: 123,
-		} }
+    let action = { type: REMOVE_COURSE, payload: {
+      studentId: student.id,
+      scheduleId: '1',
+      clbid: 123,
+    } }
 
-		let expected = {
-			...student,
-			schedules: { '1': { id: '1', clbids: [ 789 ] } },
-		}
-		let actual = reducer(initialState, action)
+    let expected = {
+      ...student,
+      schedules: { '1': { id: '1', clbids: [ 789 ] } },
+    }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-		expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-		expect(actual.schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+    expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+    expect(actual.schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
+  })
 
-	it('handles REORDER_COURSE', () => {
-		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', clbids: [ 123, 789 ] },
-		} }
-		let initialState = student
+  it('handles REORDER_COURSE', () => {
+    let student = { id: 'xyz', schedules: {
+      '1': { id: '1', clbids: [ 123, 789 ] },
+    } }
+    let initialState = student
 
-		let action = { type: REORDER_COURSE, payload: {
-			studentId: student.id,
-			scheduleId: '1',
-			clbid: 789,
-			index: 0,
-		} }
+    let action = { type: REORDER_COURSE, payload: {
+      studentId: student.id,
+      scheduleId: '1',
+      clbid: 789,
+      index: 0,
+    } }
 
-		let expected = {
-			...student,
-			schedules: { '1': { id: '1', clbids: [ 789, 123 ] } },
-		}
-		let actual = reducer(initialState, action)
+    let expected = {
+      ...student,
+      schedules: { '1': { id: '1', clbids: [ 789, 123 ] } },
+    }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-		expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-		expect(actual.schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+    expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+    expect(actual.schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
+  })
 
-	it('handles MOVE_COURSE', () => {
-		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', clbids: [ 123 ] },
-			'2': { id: '2', clbids: [ 789 ] },
-		} }
-		let initialState = student
+  it('handles MOVE_COURSE', () => {
+    let student = { id: 'xyz', schedules: {
+      '1': { id: '1', clbids: [ 123 ] },
+      '2': { id: '2', clbids: [ 789 ] },
+    } }
+    let initialState = student
 
-		let action = { type: MOVE_COURSE, payload: {
-			studentId: student.id,
-			scheduleId: '1',
-			clbid: 123,
-			fromScheduleId: '1',
-			toScheduleId: '2',
-		} }
+    let action = { type: MOVE_COURSE, payload: {
+      studentId: student.id,
+      scheduleId: '1',
+      clbid: 123,
+      fromScheduleId: '1',
+      toScheduleId: '2',
+    } }
 
-		let expected = {
-			...student,
-			schedules: {
-				'1': { id: '1', clbids: [] },
-				'2': { id: '2', clbids: [ 789, 123 ] },
-			},
-		}
-		let actual = reducer(initialState, action)
+    let expected = {
+      ...student,
+      schedules: {
+        '1': { id: '1', clbids: [] },
+        '2': { id: '2', clbids: [ 789, 123 ] },
+      },
+    }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.schedules).to.not.equal(student.schedules)
-		expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-		expect(actual.schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.schedules).to.not.equal(student.schedules)
+    expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+    expect(actual.schedules['1'].clbids).to.not.equal(student.schedules['1'].clbids)
+  })
 
-	it('handles SET_OVERRIDE', () => {
-		let student = { id: 'xyz', overrides: {} }
-		let initialState = student
+  it('handles SET_OVERRIDE', () => {
+    let student = { id: 'xyz', overrides: {} }
+    let initialState = student
 
-		let action = { type: SET_OVERRIDE, payload: {
-			studentId: student.id,
-			key: 'path.to.override',
-			value: 'strings!',
-		} }
+    let action = { type: SET_OVERRIDE, payload: {
+      studentId: student.id,
+      key: 'path.to.override',
+      value: 'strings!',
+    } }
 
-		let expected = { ...student, overrides: { 'path.to.override': 'strings!' } }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, overrides: { 'path.to.override': 'strings!' } }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.overrides).to.not.equal(student.overrides)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.overrides).to.not.equal(student.overrides)
+  })
 
-	it('handles REMOVE_OVERRIDE', () => {
-		let student = { id: 'xyz', overrides: { 'path.to.override': true } }
-		let initialState = student
+  it('handles REMOVE_OVERRIDE', () => {
+    let student = { id: 'xyz', overrides: { 'path.to.override': true } }
+    let initialState = student
 
-		let action = { type: REMOVE_OVERRIDE, payload: {
-			studentId: student.id,
-			override: 'path.to.override',
-		} }
+    let action = { type: REMOVE_OVERRIDE, payload: {
+      studentId: student.id,
+      override: 'path.to.override',
+    } }
 
-		let expected = { ...student, overrides: {} }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, overrides: {} }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.overrides).to.not.equal(student.overrides)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.overrides).to.not.equal(student.overrides)
+  })
 
-	it('handles ADD_FABRICATION', () => {
-		let student = { id: 'xyz', fabrications: {} }
-		let initialState = student
+  it('handles ADD_FABRICATION', () => {
+    let student = { id: 'xyz', fabrications: {} }
+    let initialState = student
 
-		let action = { type: ADD_FABRICATION, payload: {
-			studentId: student.id,
-			fabrication: { clbid: '1', something: 'um…' },
-		} }
+    let action = { type: ADD_FABRICATION, payload: {
+      studentId: student.id,
+      fabrication: { clbid: '1', something: 'um…' },
+    } }
 
-		let expected = { ...student, fabrications: { '1': { clbid: '1', something: 'um…' } } }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, fabrications: { '1': { clbid: '1', something: 'um…' } } }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.fabrications).to.not.equal(student.fabrications)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.fabrications).to.not.equal(student.fabrications)
+  })
 
-	it('handles REMOVE_FABRICATION', () => {
-		let student = { id: 'xyz', fabrications: { '1': { clbid: '1', something: 'um…' } } }
-		let initialState = student
+  it('handles REMOVE_FABRICATION', () => {
+    let student = { id: 'xyz', fabrications: { '1': { clbid: '1', something: 'um…' } } }
+    let initialState = student
 
-		let action = { type: REMOVE_FABRICATION, payload: {
-			studentId: student.id,
-			fabricationId: '1',
-		} }
+    let action = { type: REMOVE_FABRICATION, payload: {
+      studentId: student.id,
+      fabricationId: '1',
+    } }
 
-		let expected = { ...student, fabrications: {} }
-		let actual = reducer(initialState, action)
+    let expected = { ...student, fabrications: {} }
+    let actual = reducer(initialState, action)
 
-		expect(actual).to.deep.equal(expected)
-		expect(actual).to.not.equal(initialState)
-		expect(actual).to.not.equal(student)
-		expect(actual.fabrications).to.not.equal(student.fabrications)
-	})
+    expect(actual).to.deep.equal(expected)
+    expect(actual).to.not.equal(initialState)
+    expect(actual).to.not.equal(student)
+    expect(actual.fabrications).to.not.equal(student.fabrications)
+  })
 })
 
 
 describe('the undoable students reducer', () => {
-	it('returns the initial state', () => {
-		const expected = {
-			past: [],
-			present: {},
-			future: [],
-		}
+  it('returns the initial state', () => {
+    const expected = {
+      past: [],
+      present: {},
+      future: [],
+    }
 
-		const actual = undoableReducer(undefined, {})
-		expect(actual.past).to.deep.equal(expected.past)
-		expect(actual.present).to.deep.equal(expected.present)
-		expect(actual.future).to.deep.equal(expected.future)
-	})
+    const actual = undoableReducer(undefined, {})
+    expect(actual.past).to.deep.equal(expected.past)
+    expect(actual.present).to.deep.equal(expected.present)
+    expect(actual.future).to.deep.equal(expected.future)
+  })
 
-	it('returns a new object with changes', () => {
-		const initial = {}
-		const hasOneStudent = undoableReducer(initial, { type: INIT_STUDENT, payload: { id: 'xyz' } })
+  it('returns a new object with changes', () => {
+    const initial = {}
+    const hasOneStudent = undoableReducer(initial, { type: INIT_STUDENT, payload: { id: 'xyz' } })
 
-		expect(hasOneStudent).to.be.ok
-		expect(hasOneStudent.present).to.be.ok
-		expect(size(hasOneStudent.present)).to.equal(1)
-	})
+    expect(hasOneStudent).to.be.ok
+    expect(hasOneStudent.present).to.be.ok
+    expect(size(hasOneStudent.present)).to.equal(1)
+  })
 
-	it('treats INIT_STUDENT as a blank slate', () => {
-		const initial = {}
+  it('treats INIT_STUDENT as a blank slate', () => {
+    const initial = {}
 
-		const firstStudent = { id: 'xyz' }
-		const hasOneStudent = undoableReducer(initial, { type: INIT_STUDENT, payload: firstStudent })
+    const firstStudent = { id: 'xyz' }
+    const hasOneStudent = undoableReducer(initial, { type: INIT_STUDENT, payload: firstStudent })
 
 		// should have the initial state
-		expect(hasOneStudent.past).to.be.ok
-		expect(hasOneStudent.past.length).to.equal(0)
-		expect(hasOneStudent.present).to.deep.equal(firstStudent)
+    expect(hasOneStudent.past).to.be.ok
+    expect(hasOneStudent.past.length).to.equal(0)
+    expect(hasOneStudent.present).to.deep.equal(firstStudent)
 
 		// should have the initial state and _no trace_ of the previous student
-		const secondStudent = { id: 'abc' }
-		const stillHasOneStudent = undoableReducer(hasOneStudent, { type: INIT_STUDENT, payload: secondStudent })
-		expect(hasOneStudent.past).to.be.ok
-		expect(stillHasOneStudent.past.length).to.equal(0)
-		expect(stillHasOneStudent.present).to.deep.equal(secondStudent)
-	})
+    const secondStudent = { id: 'abc' }
+    const stillHasOneStudent = undoableReducer(hasOneStudent, { type: INIT_STUDENT, payload: secondStudent })
+    expect(hasOneStudent.past).to.be.ok
+    expect(stillHasOneStudent.past.length).to.equal(0)
+    expect(stillHasOneStudent.present).to.deep.equal(secondStudent)
+  })
 
-	it('holds previous states', () => {
-		const initial = {}
-		const student = { id: 'xyz' }
-		const hasOneStudent = undoableReducer(initial, { type: INIT_STUDENT, payload: student })
+  it('holds previous states', () => {
+    const initial = {}
+    const student = { id: 'xyz' }
+    const hasOneStudent = undoableReducer(initial, { type: INIT_STUDENT, payload: student })
 
 		// should have the initial state
-		expect(hasOneStudent.past).to.be.ok
-		expect(hasOneStudent.past.length).to.equal(0)
-		expect(hasOneStudent.present).to.deep.equal(student)
+    expect(hasOneStudent.past).to.be.ok
+    expect(hasOneStudent.past.length).to.equal(0)
+    expect(hasOneStudent.present).to.deep.equal(student)
 
 		// should have the initial state *and* the single student state
-		const hasTwoStudents = undoableReducer(hasOneStudent, { type: CHANGE_NAME, payload: { name: 'test' } })
-		expect(hasTwoStudents.past.length).to.equal(1)
-		expect(hasTwoStudents.past[0]).to.deep.equal(hasOneStudent.present)
-	})
+    const hasTwoStudents = undoableReducer(hasOneStudent, { type: CHANGE_NAME, payload: { name: 'test' } })
+    expect(hasTwoStudents.past.length).to.equal(1)
+    expect(hasTwoStudents.past[0]).to.deep.equal(hasOneStudent.present)
+  })
 
-	it('allows undoing to a previous state', () => {
-		const initial = {}
-		const hasOneStudent = undoableReducer(initial, { type: INIT_STUDENT, payload: { id: 'xyz' } })
-		const editedStudent = undoableReducer(hasOneStudent, { type: CHANGE_NAME, payload: { name: 'abc' } })
+  it('allows undoing to a previous state', () => {
+    const initial = {}
+    const hasOneStudent = undoableReducer(initial, { type: INIT_STUDENT, payload: { id: 'xyz' } })
+    const editedStudent = undoableReducer(hasOneStudent, { type: CHANGE_NAME, payload: { name: 'abc' } })
 
-		const shouldBeInitial = undoableReducer(editedStudent, undo())
-		expect(shouldBeInitial.present).to.deep.equal(hasOneStudent.present)
-	})
+    const shouldBeInitial = undoableReducer(editedStudent, undo())
+    expect(shouldBeInitial.present).to.deep.equal(hasOneStudent.present)
+  })
 
-	it('allows redoing to a future state', () => {
-		const initial = undoableReducer(initial, { type: INIT_STUDENT, payload: { id: 'xyz' } })
-		const hasOneStudent = undoableReducer(initial, { type: CHANGE_NAME, payload: { name: 'abc' } })
+  it('allows redoing to a future state', () => {
+    const initial = undoableReducer(initial, { type: INIT_STUDENT, payload: { id: 'xyz' } })
+    const hasOneStudent = undoableReducer(initial, { type: CHANGE_NAME, payload: { name: 'abc' } })
 
-		const shouldBeInitial = undoableReducer(hasOneStudent, undo())
-		expect(shouldBeInitial.future).to.be.ok
-		expect(shouldBeInitial.future.length).to.equal(1)
-		expect(shouldBeInitial.future[0]).to.deep.equal(hasOneStudent.present)
+    const shouldBeInitial = undoableReducer(hasOneStudent, undo())
+    expect(shouldBeInitial.future).to.be.ok
+    expect(shouldBeInitial.future.length).to.equal(1)
+    expect(shouldBeInitial.future[0]).to.deep.equal(hasOneStudent.present)
 
-		const shouldHaveOneStudent = undoableReducer(shouldBeInitial, redo())
-		expect(shouldHaveOneStudent.future.length).to.equal(0)
-		expect(shouldHaveOneStudent.present).to.deep.equal({ id: 'xyz', name: 'abc' })
-		expect(shouldHaveOneStudent.present).to.deep.equal(hasOneStudent.present)
+    const shouldHaveOneStudent = undoableReducer(shouldBeInitial, redo())
+    expect(shouldHaveOneStudent.future.length).to.equal(0)
+    expect(shouldHaveOneStudent.present).to.deep.equal({ id: 'xyz', name: 'abc' })
+    expect(shouldHaveOneStudent.present).to.deep.equal(hasOneStudent.present)
 
-		expect(shouldHaveOneStudent.past.length).to.equal(1)
-		expect(shouldHaveOneStudent.past[0]).to.deep.equal(initial.present)
-	})
+    expect(shouldHaveOneStudent.past.length).to.equal(1)
+    expect(shouldHaveOneStudent.past[0]).to.deep.equal(initial.present)
+  })
 
-	it('only holds 9 previous states', () => {
-		let state = {}
-		for (let i of range(15)) {
-			state = undoableReducer(state, { type: CHANGE_NAME, payload: { name: String(i) } })
-		}
+  it('only holds 9 previous states', () => {
+    let state = {}
+    for (let i of range(15)) {
+      state = undoableReducer(state, { type: CHANGE_NAME, payload: { name: String(i) } })
+    }
 
-		expect(state.past.length).to.equal(9)
-	})
+    expect(state.past.length).to.equal(9)
+  })
 })

@@ -25,12 +25,12 @@ const finalCreateStore = compose(
 )(createStore)
 
 export default function configureStore(initialState) {
-	const store = finalCreateStore(rootReducer, initialState)
+  const store = finalCreateStore(rootReducer, initialState)
 
-	if (module.hot) {
-		module.hot.accept('./reducer', () =>
+  if (module.hot) {
+    module.hot.accept('./reducer', () =>
 			store.replaceReducer(require('./reducer').default))
-	}
+  }
 
-	return store
+  return store
 }

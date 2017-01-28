@@ -4,36 +4,36 @@ import { v4 as uuid } from 'uuid'
 import { randomChar } from 'modules/lib'
 
 export function Schedule(data={}) {
-	const baseSchedule = {
-		id: uuid(),
-		active: false,
+  const baseSchedule = {
+    id: uuid(),
+    active: false,
 
-		index: 1,
-		title: `Schedule ${randomChar().toUpperCase()}`,
+    index: 1,
+    title: `Schedule ${randomChar().toUpperCase()}`,
 
-		clbids: [],
-		year: 0,
-		semester: 0,
+    clbids: [],
+    year: 0,
+    semester: 0,
 
-		metadata: {},
-	}
+    metadata: {},
+  }
 
-	let schedule = {
-		...baseSchedule,
-		...data,
-	}
+  let schedule = {
+    ...baseSchedule,
+    ...data,
+  }
 
-	if (!isString(schedule.id)) {
-		throw new TypeError('Schedule id must be a string.')
-	}
+  if (!isString(schedule.id)) {
+    throw new TypeError('Schedule id must be a string.')
+  }
 
-	if (typeof schedule.year === 'string') {
-		schedule.year = parseInt(schedule.year, 10)
-	}
+  if (typeof schedule.year === 'string') {
+    schedule.year = parseInt(schedule.year, 10)
+  }
 
-	if (typeof schedule.semester === 'string') {
-		schedule.semester = parseInt(schedule.semester, 10)
-	}
+  if (typeof schedule.semester === 'string') {
+    schedule.semester = parseInt(schedule.semester, 10)
+  }
 
-	return schedule
+  return schedule
 }

@@ -12,12 +12,12 @@ import { iosArrowLeft, iosDownloadOutline, iosReload, iosUploadOutline } from 'm
 import './area-editor.scss'
 
 export default function AreaEditor(props) {
-	const options = {
-		lineNumbers: true,
-		mode: 'yaml',
-	}
+  const options = {
+    lineNumbers: true,
+    mode: 'yaml',
+  }
 
-	return (
+  return (
 		<div>
 			<Toolbar style={{ marginBottom: '0.5em' }}>
 				<Button link to="/areas" >
@@ -49,18 +49,18 @@ export default function AreaEditor(props) {
 			</Toolbar>
 
 			<CodeMirror
-				value={props.value}
-				onChange={props.onChange}
-				options={options}
-				onFocusChange={props.onFocusChange}
+  value={props.value}
+  onChange={props.onChange}
+  options={options}
+  onFocusChange={props.onFocusChange}
 			/>
 		</div>
-	)
+  )
 }
 
 AreaEditor.propTypes = {
-	onChange: PropTypes.func.isRequired,
-	onFocusChange: PropTypes.func.isRequired,
-	onSave: PropTypes.func.isRequired,
-	value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onFocusChange: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 }

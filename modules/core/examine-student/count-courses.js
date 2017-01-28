@@ -12,5 +12,5 @@ import type { Course } from './types'
  * @returns {number} - the number of unique courses
  */
 export default function countCourses(courses: Course[]) {
-	return size(uniqBy(courses, simplifyCourse))
+  return size(uniqBy(courses, simplifyCourse))
 }

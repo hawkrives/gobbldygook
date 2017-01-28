@@ -26,49 +26,49 @@ import { addCourse, moveCourse, removeCourse } from '../redux/students/actions/c
 import './modal-course.scss'
 
 function findSemesterList(student) {
-	let schedules = map(student.schedules, s => ({
-		...s, title: `${semesterName(s.semester)} – ${s.title}`,
-	}))
+  let schedules = map(student.schedules, s => ({
+    ...s, title: `${semesterName(s.semester)} – ${s.title}`,
+  }))
 
-	let sorted = sortBy(schedules, [ 'year', 'semester' ])
-	let byYear = groupBy(sorted, 'year')
+  let sorted = sortBy(schedules, [ 'year', 'semester' ])
+  let byYear = groupBy(sorted, 'year')
 
-	return byYear
+  return byYear
 }
 
 const removeFromSemester = ({ studentId, removeCourse, clbid, scheduleId }) => () => {
-	if (studentId) {
-		removeCourse(studentId, scheduleId, clbid)
-	}
+  if (studentId) {
+    removeCourse(studentId, scheduleId, clbid)
+  }
 }
 
 function moveToSchedule({ moveCourse, addCourse, removeCourse, scheduleId, studentId, clbid }) {
-	return ev => {
-		const targetScheduleId = ev.target.value
-		if (targetScheduleId === '$none') {
-			return
-		}
-		else if (targetScheduleId === '$remove') {
-			return removeCourse(studentId, scheduleId, clbid)
-		}
+  return ev => {
+    const targetScheduleId = ev.target.value
+    if (targetScheduleId === '$none') {
+      return
+    }
+    else if (targetScheduleId === '$remove') {
+      return removeCourse(studentId, scheduleId, clbid)
+    }
 
-		if (scheduleId) {
-			return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
-		}
-		else {
-			return addCourse(studentId, targetScheduleId, clbid)
-		}
-	}
+    if (scheduleId) {
+      return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
+    }
+    else {
+      return addCourse(studentId, targetScheduleId, clbid)
+    }
+  }
 }
 
 
 function SemesterSelector({ scheduleId, student, moveCourse, addCourse, removeCourse, clbid }) {
-	return (
+  return (
 		<select
-			className="semester-select"
-			value={scheduleId || 'none'}
-			disabled={!student || !clbid}
-			onChange={moveToSchedule({ moveCourse, addCourse, removeCourse, scheduleId, studentId: student.id, clbid })}
+  className="semester-select"
+  value={scheduleId || 'none'}
+  disabled={!student || !clbid}
+  onChange={moveToSchedule({ moveCourse, addCourse, removeCourse, scheduleId, studentId: student.id, clbid })}
 		>
 			{scheduleId
 				? <option value="$remove">Remove from Schedule</option>
@@ -80,21 +80,21 @@ function SemesterSelector({ scheduleId, student, moveCourse, addCourse, removeCo
 				</optgroup>
 			)) : null}
 		</select>
-	)
+  )
 }
 
 SemesterSelector.propTypes = {
-	addCourse: PropTypes.func.isRequired,
-	clbid: PropTypes.number,
-	moveCourse: PropTypes.func.isRequired,
-	removeCourse: PropTypes.func.isRequired,
-	scheduleId: PropTypes.string,
-	student: PropTypes.object,
+  addCourse: PropTypes.func.isRequired,
+  clbid: PropTypes.number,
+  moveCourse: PropTypes.func.isRequired,
+  removeCourse: PropTypes.func.isRequired,
+  scheduleId: PropTypes.string,
+  student: PropTypes.object,
 }
 
 
 function ModalCourse(props) {
-	const {
+  const {
 		course,
 		student,
 		studentId,
@@ -105,7 +105,7 @@ function ModalCourse(props) {
 		onClose,
 	} = props
 
-	return (
+  return (
 		<Modal onClose={onClose} into="course-modal">
 		<div className="course--modal">
 			<Toolbar>
@@ -169,42 +169,42 @@ function ModalCourse(props) {
 
 			<div className="tools">
 				<SemesterSelector
-					scheduleId={scheduleId}
-					student={student}
-					moveCourse={moveCourse}
-					addCourse={addCourse}
-					removeCourse={removeCourse}
-					clbid={course.clbid}
+  scheduleId={scheduleId}
+  student={student}
+  moveCourse={moveCourse}
+  addCourse={addCourse}
+  removeCourse={removeCourse}
+  clbid={course.clbid}
 				/>
 				<Button className="remove-course"
-					onClick={removeFromSemester({ studentId, removeCourse, clbid: course.clbid, scheduleId })}
-					disabled={!scheduleId || !student}>
+  onClick={removeFromSemester({ studentId, removeCourse, clbid: course.clbid, scheduleId })}
+  disabled={!scheduleId || !student}>
 					Remove Course
 				</Button>
 			</div>
 		</div>
 		</Modal>
-	)
+  )
 }
 
 ModalCourse.propTypes = {
-	addCourse: PropTypes.func,  // redux
-	course: PropTypes.object.isRequired,  // parent
-	moveCourse: PropTypes.func,  // redux
-	onClose: PropTypes.func.isRequired, // parent
-	removeCourse: PropTypes.func,  // redux
-	scheduleId: PropTypes.string,  // parent
-	student: PropTypes.object,  // redux
-	studentId: PropTypes.string,  // parent
+  addCourse: PropTypes.func,  // redux
+  course: PropTypes.object.isRequired,  // parent
+  moveCourse: PropTypes.func,  // redux
+  onClose: PropTypes.func.isRequired, // parent
+  removeCourse: PropTypes.func,  // redux
+  scheduleId: PropTypes.string,  // parent
+  student: PropTypes.object,  // redux
+  studentId: PropTypes.string,  // parent
 }
 
 const mapState = (state, ownProps) => {
-	if (ownProps.studentId) {
-		return {
-			student: state.students[ownProps.studentId].data.present,
-		}
-	}
-	return {}
+  if (ownProps.studentId) {
+    return {
+      student: state.students[ownProps.studentId].data.present,
+    }
+  }
+  return {}
 }
 
 const mapDispatch = dispatch => bindActionCreators({ addCourse, moveCourse, removeCourse }, dispatch)

@@ -23,26 +23,26 @@ export default function findLeafRequirements(requirement: Requirement) {
 	// It should eventually return an array of all of the leaf children.
 
 	// if it's not an object, return instantly.
-	if (!isPlainObject(requirement)) {
-		return null
-	}
+  if (!isPlainObject(requirement)) {
+    return null
+  }
 
 	// we've gone too far down!
-	if (requirement.$type !== 'requirement') {
-		return null
-	}
+  if (requirement.$type !== 'requirement') {
+    return null
+  }
 
-	if (requirement.computed === true) {
-		return [ requirement ]
-	}
+  if (requirement.computed === true) {
+    return [ requirement ]
+  }
 
 	// if there are no keys in this object which are requirement names,
 	// then we've found a leaf requirement! return it.
-	if (!some(keys(requirement), isRequirementName)) {
-		return requirement
-	}
+  if (!some(keys(requirement), isRequirementName)) {
+    return requirement
+  }
 
 	// otherwise, run findLeafRequirements over the object, to descend further
 	// down the tree of madness.
-	return compact(flatten(map(requirement, findLeafRequirements)))
+  return compact(flatten(map(requirement, findLeafRequirements)))
 }

@@ -12,61 +12,61 @@ import takeWhile from 'lodash/takeWhile'
 import toPairs from 'lodash/toPairs'
 
 function checkCourseAgainstQueryBit(course, [ key, values ]) {
-	if (!has(course, key)) {
-		return false
-	}
+  if (!has(course, key)) {
+    return false
+  }
 
-	let substring = false
+  let substring = false
 
 	// values is either:
 	// - a 1-long array
 	// - an $AND, $OR, $NOT, $NOR, or $XOR query
 	// - one of the above, but substring
 
-	let hasBool = indexOf(values[0], '$') === 0
-	let OR  = values[0] === '$OR'
-	let NOR = values[0] === '$NOR'
-	let AND = values[0] === '$AND'
-	let NOT = values[0] === '$NOT'
-	let XOR = values[0] === '$XOR'
+  let hasBool = indexOf(values[0], '$') === 0
+  let OR  = values[0] === '$OR'
+  let NOR = values[0] === '$NOR'
+  let AND = values[0] === '$AND'
+  let NOT = values[0] === '$NOT'
+  let XOR = values[0] === '$XOR'
 
-	if (hasBool) {
+  if (hasBool) {
 		// remove the first value from the array
 		// by returning all but the first element
-		values = tail(values)
-	}
+    values = tail(values)
+  }
 
-	if (includes([ 'title', 'name', 'description', 'notes', 'instructors', 'times', 'locations' ], key)) {
-		substring = true
-	}
+  if (includes([ 'title', 'name', 'description', 'notes', 'instructors', 'times', 'locations' ], key)) {
+    substring = true
+  }
 
-	let internalMatches = map(values, val => {
+  let internalMatches = map(values, val => {
 		// dept, gereqs, etc.
-		if (isArray(course[key]) && !substring) {
-			return includes(course[key], val)
-		}
-		else if (isArray(course[key]) && substring) {
-			return some(map(course[key], item => includes(item.toLowerCase(), val.toLowerCase())))
-		}
-		else if (substring) {
-			return includes(course[key].toLowerCase(), val.toLowerCase())
-		}
-		return course[key] === val
-	})
+    if (isArray(course[key]) && !substring) {
+      return includes(course[key], val)
+    }
+    else if (isArray(course[key]) && substring) {
+      return some(map(course[key], item => includes(item.toLowerCase(), val.toLowerCase())))
+    }
+    else if (substring) {
+      return includes(course[key].toLowerCase(), val.toLowerCase())
+    }
+    return course[key] === val
+  })
 
-	if (!hasBool) {
-		return every(internalMatches)
-	}
+  if (!hasBool) {
+    return every(internalMatches)
+  }
 
-	let result = false
+  let result = false
 
-	if (OR)   result = some(internalMatches)
-	if (NOR)  result = !some(internalMatches)
-	if (AND)  result = every(internalMatches)
-	if (NOT)  result = !every(internalMatches)
-	if (XOR)  result = compact(internalMatches).length === 1
+  if (OR)   result = some(internalMatches)
+  if (NOR)  result = !some(internalMatches)
+  if (AND)  result = every(internalMatches)
+  if (NOT)  result = !every(internalMatches)
+  if (XOR)  result = compact(internalMatches).length === 1
 
-	return result
+  return result
 }
 
 // Checks if a course passes a query check.
@@ -74,8 +74,8 @@ function checkCourseAgainstQueryBit(course, [ key, values ]) {
 // course: Course | the course to check
 // returns: Boolean | did all query bits pass the check?
 export function checkCourseAgainstQuery(query, course) {
-	let kvPairs = toPairs(query)
-	let matches = takeWhile(kvPairs, pair => checkCourseAgainstQueryBit(course, pair))
+  let kvPairs = toPairs(query)
+  let matches = takeWhile(kvPairs, pair => checkCourseAgainstQueryBit(course, pair))
 
-	return size(kvPairs) === size(matches) && every(matches)
+  return size(kvPairs) === size(matches) && every(matches)
 }

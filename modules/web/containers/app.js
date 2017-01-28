@@ -11,26 +11,26 @@ import '../index.scss'
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
 // eslint-disable-next-line react/prefer-stateless-function
 export class App extends Component {
-	static defaultProps = {
-		content: <StudentPicker />,
-	};
+  static defaultProps = {
+    content: <StudentPicker />,
+  };
 
-	static propTypes = {
-		content: PropTypes.node.isRequired,
-		overlay: PropTypes.node,
-	};
+  static propTypes = {
+    content: PropTypes.node.isRequired,
+    overlay: PropTypes.node,
+  };
 
-	render() {
-		let { content, overlay } = this.props
-		return (
+  render() {
+    let { content, overlay } = this.props
+    return (
 			<DocumentTitle title="Gobbldygook">
 				<div id="gateway-wrapper">
 					<div id="content-wrapper">{content}</div>
 					{overlay}
 				</div>
 			</DocumentTitle>
-		)
-	}
+    )
+  }
 }
 
 export default DragDropContext(HTML5Backend)(App)

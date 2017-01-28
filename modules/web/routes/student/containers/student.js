@@ -13,52 +13,52 @@ import GraduationStatus from './graduation-status'
 import './student.scss'
 
 export class Student extends Component {
-	static propTypes = {
-		content: PropTypes.node,  // from react-router
-		loadStudent: PropTypes.func.isRequired,
-		overlay: PropTypes.node,
-		params: PropTypes.object,  // react-router
-		processed: PropTypes.object,  // redux
-		sidebar: PropTypes.node,  // from react-router
-		student: PropTypes.object,  // redux
-	};
+  static propTypes = {
+    content: PropTypes.node,  // from react-router
+    loadStudent: PropTypes.func.isRequired,
+    overlay: PropTypes.node,
+    params: PropTypes.object,  // react-router
+    processed: PropTypes.object,  // redux
+    sidebar: PropTypes.node,  // from react-router
+    student: PropTypes.object,  // redux
+  };
 
-	componentWillMount() {
-		this.loadStudent(this.props)
-	}
+  componentWillMount() {
+    this.loadStudent(this.props)
+  }
 
-	componentWillReceiveProps(nextProps) {
-		this.loadStudent(nextProps)
-	}
+  componentWillReceiveProps(nextProps) {
+    this.loadStudent(nextProps)
+  }
 
-	loadStudent = props => {
-		if (!props.student || props.params.studentId !== this.props.params.studentId)  {
-			props.loadStudent(props.params.studentId)
-		}
-	};
+  loadStudent = props => {
+    if (!props.student || props.params.studentId !== this.props.params.studentId)  {
+      props.loadStudent(props.params.studentId)
+    }
+  };
 
-	render() {
-		if (!this.props.student) {
-			return <div>Student {this.props.params.studentId} could not be loaded.</div>
-		}
+  render() {
+    if (!this.props.student) {
+      return <div>Student {this.props.params.studentId} could not be loaded.</div>
+    }
 
-		if (this.props.student.isLoading){
-			return <Loading>Loading Student…</Loading>
-		}
+    if (this.props.student.isLoading){
+      return <Loading>Loading Student…</Loading>
+    }
 
-		const name = this.props.student ? this.props.student.data.present.name : 'Loading…'
+    const name = this.props.student ? this.props.student.data.present.name : 'Loading…'
 
-		const contentProps = { student: this.props.student, className: 'content' }
-		const contents = this.props.content
+    const contentProps = { student: this.props.student, className: 'content' }
+    const contents = this.props.content
 			? cloneElement(this.props.content, contentProps)
 			: <CourseTable {...contentProps} />
 
-		const sidebarProps = { student: this.props.student.data.present }
-		const sidebar = this.props.sidebar
+    const sidebarProps = { student: this.props.student.data.present }
+    const sidebar = this.props.sidebar
 			? cloneElement(this.props.sidebar, sidebarProps)
 			: <GraduationStatus {...sidebarProps} />
 
-		return (
+    return (
 			<DocumentTitle title={`${name} | Gobbldygook`}>
 				<div className="student">
 					<Sidebar student={this.props.student}>
@@ -68,13 +68,13 @@ export class Student extends Component {
 					{this.props.overlay || null}
 				</div>
 			</DocumentTitle>
-		)
-	}
+    )
+  }
 }
 
 
 const mapStateToProps = (state, ownProps) => ({
-	student: state.students[ownProps.params.studentId],
+  student: state.students[ownProps.params.studentId],
 })
 
 const mapDispatchToProps = dispatch =>

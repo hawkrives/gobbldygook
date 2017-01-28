@@ -16,23 +16,23 @@ export default db
 
 
 if (typeof window !== 'undefined') {
-	window.deleteDatabase = () => {
-		const DBDeleteRequest = window.indexedDB.deleteDatabase('gobbldygook')
-		log('Commencing database deletion')
-		DBDeleteRequest.onerror = () => log('Error deleting database.')
-		DBDeleteRequest.onsuccess = () => log('Database deleted successfully')
-	}
+  window.deleteDatabase = () => {
+    const DBDeleteRequest = window.indexedDB.deleteDatabase('gobbldygook')
+    log('Commencing database deletion')
+    DBDeleteRequest.onerror = () => log('Error deleting database.')
+    DBDeleteRequest.onsuccess = () => log('Database deleted successfully')
+  }
 
-	window.eraseStorage = () => {
-		log('Commencing storage erasure')
-		window.localStorage.clear()
-		log('Storage erased')
-	}
+  window.eraseStorage = () => {
+    log('Commencing storage erasure')
+    window.localStorage.clear()
+    log('Storage erased')
+  }
 
-	window.eraseDatabase = () => {
-		window.deleteDatabase()
-		window.eraseStorage()
-	}
+  window.eraseDatabase = () => {
+    window.deleteDatabase()
+    window.eraseStorage()
+  }
 
-	window.database = db
+  window.database = db
 }

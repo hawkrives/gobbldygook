@@ -23,97 +23,97 @@ const badGraduationMessage =
 	fitting everything in.`.split('\n').join(' ')
 
 const welcomeMessages = [
-	'Hi, ',
-	'Hi there, ',
-	'Hello, ',
-	'こんにちは、', // japanese
-	'ようこそ、', // japanese
-	'Fram! Fram! ',
-	'Salut, ',
-	'Aloha, ',
-	'Привет, ',
-	'Вітаю, ',
-	'Sawubona, ',
-	'Hei, ',
-	'Hola, ', // spanish
-	'Bonjour, ', // french
-	'Hallo, ', // german
-	'nyob zoo ', // hmong
-	'你好，', // mandarin
-	'안녕하세요 ', // korean
-	'สวัสดี ', // thai
-	'halo, ', // indonesian
+  'Hi, ',
+  'Hi there, ',
+  'Hello, ',
+  'こんにちは、', // japanese
+  'ようこそ、', // japanese
+  'Fram! Fram! ',
+  'Salut, ',
+  'Aloha, ',
+  'Привет, ',
+  'Вітаю, ',
+  'Sawubona, ',
+  'Hei, ',
+  'Hola, ', // spanish
+  'Bonjour, ', // french
+  'Hallo, ', // german
+  'nyob zoo ', // hmong
+  '你好，', // mandarin
+  '안녕하세요 ', // korean
+  'สวัสดี ', // thai
+  'halo, ', // indonesian
 ]
 
 const welcomeMessage = sample(welcomeMessages)
 
 export default function StudentSummary(props) {
-	const {
+  const {
 		student,
 		showMessage=true,
 		showAvatar=true,
 		randomizeHello=false,
 	} = props
-	const { studies, canGraduate } = student
+  const { studies, canGraduate } = student
 
-	const NameEl = (props.onChangeName
+  const NameEl = (props.onChangeName
 		? <ContentEditable
-			className="autosize-input"
-			onBlur={props.onChangeName}
-			value={String(student.name)}
+  className="autosize-input"
+  onBlur={props.onChangeName}
+  value={String(student.name)}
 		/>
 		: <span>{String(student.name)}</span>)
 
-	const degrees = filter(studies, { type: 'degree' })
-	const majors = filter(studies, { type: 'major' })
-	const concentrations = filter(studies, { type: 'concentration' })
-	const emphases = filter(studies, { type: 'emphasis' })
+  const degrees = filter(studies, { type: 'degree' })
+  const majors = filter(studies, { type: 'major' })
+  const concentrations = filter(studies, { type: 'concentration' })
+  const emphases = filter(studies, { type: 'emphasis' })
 
-	const degreeWord = plur('degree', degrees.length)
-	const majorWord = plur('major', majors.length)
-	const concentrationWord = plur('concentration', concentrations.length)
-	const emphasisWord = plur('emphasis', emphases.length)
+  const degreeWord = plur('degree', degrees.length)
+  const majorWord = plur('major', majors.length)
+  const concentrationWord = plur('concentration', concentrations.length)
+  const emphasisWord = plur('emphasis', emphases.length)
 
-	const degreeEmphasizer = (degrees.length === 1) ? 'a ' : ''
-	const majorEmphasizer = (majors.length === 1) ? 'a ' : ''
-	const concentrationEmphasizer = (concentrations.length === 1) ? 'a ' : ''
-	const emphasisEmphasizer = (emphases.length === 1) ? 'an ' : ''
+  const degreeEmphasizer = (degrees.length === 1) ? 'a ' : ''
+  const majorEmphasizer = (majors.length === 1) ? 'a ' : ''
+  const concentrationEmphasizer = (concentrations.length === 1) ? 'a ' : ''
+  const emphasisEmphasizer = (emphases.length === 1) ? 'an ' : ''
 
-	const degreeList = oxford(map(degrees, d => d.name))
-	const majorList = oxford(map(majors, m => m.name))
-	const concentrationList = oxford(map(concentrations, c => c.name))
-	const emphasisList = oxford(map(emphases, e => e.name))
+  const degreeList = oxford(map(degrees, d => d.name))
+  const majorList = oxford(map(majors, m => m.name))
+  const concentrationList = oxford(map(concentrations, c => c.name))
+  const emphasisList = oxford(map(emphases, e => e.name))
 
-	const currentCredits = countCredits(getActiveStudentCourses(student))
-	const neededCredits = student.creditsNeeded
-	const enoughCredits = currentCredits >= neededCredits
+  const currentCredits = countCredits(getActiveStudentCourses(student))
+  const neededCredits = student.creditsNeeded
+  const enoughCredits = currentCredits >= neededCredits
 
-	const graduationEl = (props.onChangeGraduation
+  const graduationEl = (props.onChangeGraduation
 		? <ContentEditable
-			className="autosize-input"
-			onBlur={props.onChangeGraduation}
-			value={String(student.graduation)}
+  className="autosize-input"
+  onBlur={props.onChangeGraduation}
+  value={String(student.graduation)}
 		/>
 		: <span>{String(student.graduation)}</span>
 	)
 
-	const matriculationEl = (props.onChangeMatriculation
+  const matriculationEl = (props.onChangeMatriculation
 		? <ContentEditable
-			className="autosize-input"
-			onBlur={props.onChangeMatriculation}
-			value={String(student.matriculation)}
+  className="autosize-input"
+  onBlur={props.onChangeMatriculation}
+  value={String(student.matriculation)}
 		/>
 		: <span>{String(student.matriculation)}</span>
 	)
 
-	const canGraduateClass = canGraduate ? 'can-graduate' : 'cannot-graduate'
+  const canGraduateClass = canGraduate ? 'can-graduate' : 'cannot-graduate'
 
-	return (
+  return (
 		<article className={cx('student-summary', canGraduateClass)}>
 			<header className="student-summary--header">
 				{showAvatar ? <AvatarLetter
-					className={cx('student-letter', canGraduateClass)}
-					value={student.name}
+  className={cx('student-letter', canGraduateClass)}
+  value={student.name}
 				/> : null}
 				<div className="intro">{randomizeHello ? sample(welcomeMessages) : welcomeMessage}{NameEl}!</div>
 			</header>
@@ -135,15 +135,15 @@ export default function StudentSummary(props) {
 				</div>: null}
 			</div>
 		</article>
-	)
+  )
 }
 
 StudentSummary.propTypes = {
-	onChangeGraduation: PropTypes.func,
-	onChangeMatriculation: PropTypes.func,
-	onChangeName: PropTypes.func,
-	randomizeHello: PropTypes.bool,
-	showAvatar: PropTypes.bool,
-	showMessage: PropTypes.bool,
-	student: PropTypes.object.isRequired,
+  onChangeGraduation: PropTypes.func,
+  onChangeMatriculation: PropTypes.func,
+  onChangeName: PropTypes.func,
+  randomizeHello: PropTypes.bool,
+  showAvatar: PropTypes.bool,
+  showMessage: PropTypes.bool,
+  student: PropTypes.object.isRequired,
 }

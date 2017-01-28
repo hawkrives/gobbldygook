@@ -13,18 +13,18 @@ import type { FilterWhereExpression, FilterOfExpression, Course } from './types'
  */
 export default function applyFilter(expr: FilterWhereExpression | FilterOfExpression, courses: Course[]): Course[] {
 	// default to an empty array
-	let filtered: Course[] = []
+  let filtered: Course[] = []
 
 	// a filter will be either a where-style query or a list of courses
-	if (expr.$type === 'where') {
-		filtered = filterByWhereClause(courses, expr.$where)
-	}
-	else if (expr.$type === '$of') {
-		filtered = filter(expr.$of, course => checkForCourse(course, courses))
-	}
+  if (expr.$type === 'where') {
+    filtered = filterByWhereClause(courses, expr.$where)
+  }
+  else if (expr.$type === '$of') {
+    filtered = filter(expr.$of, course => checkForCourse(course, courses))
+  }
 
 	// grab the matches
-	expr._matches = filtered
+  expr._matches = filtered
 
-	return filtered
+  return filtered
 }

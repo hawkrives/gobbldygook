@@ -21,33 +21,33 @@ import pify from 'pify'
 const fs = pify(require('graceful-fs'))
 
 function getDeptNumsFromRiddles(r) {
-	if (isString(r) && quacksLikeDeptNum(r)) {
-		return splitDeptNum(r)
-	}
-	return r
+  if (isString(r) && quacksLikeDeptNum(r)) {
+    return splitDeptNum(r)
+  }
+  return r
 }
 
 export default async function search({ riddles, unique, sort }={}) {
 	// check if data has been cached
-	await checkForStaleData()
+  await checkForStaleData()
 
-	let base = `${cacheDir}/Courses/`
-	let courses = flatten(map(fs.readdirSync(base), fn => (tryReadJsonFile(path.join(base, fn)) || [])))
+  let base = `${cacheDir}/Courses/`
+  let courses = flatten(map(fs.readdirSync(base), fn => (tryReadJsonFile(path.join(base, fn)) || [])))
 
-	riddles	= riddles.map(getDeptNumsFromRiddles)
+  riddles	= riddles.map(getDeptNumsFromRiddles)
 
-	let filtered = courses
-	forEach(riddles, riddle => {
-		filtered = filter(filtered, riddle)
-	})
+  let filtered = courses
+  forEach(riddles, riddle => {
+    filtered = filter(filtered, riddle)
+  })
 
-	if (unique) {
-		filtered = uniqBy(filtered, unique)
-	}
+  if (unique) {
+    filtered = uniqBy(filtered, unique)
+  }
 
-	if (sort) {
-		filtered = sortBy(filtered, flatten(sort))
-	}
+  if (sort) {
+    filtered = sortBy(filtered, flatten(sort))
+  }
 
-	return filtered
+  return filtered
 }

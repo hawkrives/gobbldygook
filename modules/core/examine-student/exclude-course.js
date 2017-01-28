@@ -11,5 +11,5 @@ import type { Course, CourseExpression } from './types'
  * @returns {Course[]} - the filtered list of courses
  */
 export default function excludeCourse(query: CourseExpression | Course, courses: Course[]) {
-	return reject(courses, course => compareCourseToCourse(query, course))
+  return reject(courses, course => compareCourseToCourse(query, course))
 }

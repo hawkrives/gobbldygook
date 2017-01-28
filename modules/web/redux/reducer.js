@@ -7,8 +7,8 @@ import search from './search/reducers'
 import students from './students/reducers'
 
 export default combineReducers({
-	areas,
-	notifications,
-	students,
-	search,
+  areas,
+  notifications,
+  students,
+  search,
 })

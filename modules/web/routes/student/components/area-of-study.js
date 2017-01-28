@@ -11,14 +11,14 @@ import { close, chevronUp, chevronDown } from 'modules/web/icons/ionicons'
 import './area-of-study.scss'
 
 function AreaOfStudy(props) {
-	const {
+  const {
 		area,
 		isOpen,
 		showCloseButton,
 		showConfirmRemoval,
 	} = props
 
-	const {
+  const {
 		type = '???',
 		revision = '0000-00',
 		slug,
@@ -30,19 +30,19 @@ function AreaOfStudy(props) {
 		_checked: checked = false,
 	} = area
 
-	const progressAt = typeof progress === 'object' ? progress.at : 0
-	const progressOf = typeof progress === 'object' ? progress.of : 1
+  const progressAt = typeof progress === 'object' ? progress.at : 0
+  const progressOf = typeof progress === 'object' ? progress.of : 1
 
-	const summary = (
+  const summary = (
 		<div>
 			<div className="area--summary-row">
 				<h1 className="area--title">
 					{slug && !isCustom && isOpen
 						? <a className="catalog-link"
-							href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
-							target="_blank"
-							onClick={ev => ev.stopPropagation()}
-							title="View in the St. Olaf Catalog"
+  href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
+  target="_blank"
+  onClick={ev => ev.stopPropagation()}
+  title="View in the St. Olaf Catalog"
 						>
 							{name}
 						</a>
@@ -59,21 +59,21 @@ function AreaOfStudy(props) {
 				</span>
 			</div>
 			<ProgressBar
-				className={cx('area--progress', { error: error })}
-				colorful={true}
-				value={progressAt}
-				max={progressOf}
+  className={cx('area--progress', { error: error })}
+  colorful={true}
+  value={progressAt}
+  max={progressOf}
 			/>
 		</div>
 	)
 
-	const removalConfirmation = (
+  const removalConfirmation = (
 		<div className="area--confirm-removal">
 			<p>Remove <strong>{name}</strong>?</p>
 			<span className="button-group">
 				<Button
-					className="area--actually-remove-area"
-					onClick={ev => props.onRemoveArea({ name, type, revision }, ev)}
+  className="area--actually-remove-area"
+  onClick={ev => props.onRemoveArea({ name, type, revision }, ev)}
 				>
 					Remove
 				</Button>
@@ -82,31 +82,31 @@ function AreaOfStudy(props) {
 		</div>
 	)
 
-	let contents = null
-	if (error) {
-		contents = <p className="message area--error">{error} {':('}</p>
-	}
-	else if (!checked) {
-		contents = <p className="message area--loading">Loading…</p>
-	}
-	else {
-		contents = (
+  let contents = null
+  if (error) {
+    contents = <p className="message area--error">{error} {':('}</p>
+  }
+  else if (!checked) {
+    contents = <p className="message area--loading">Loading…</p>
+  }
+  else {
+    contents = (
 			<Requirement
-				{...areaDetails}
-				topLevel
-				onAddOverride={props.onAddOverride}
-				onRemoveOverride={props.onRemoveOverride}
-				onToggleOverride={props.onToggleOverride}
-				path={[ type, name ]}
+  {...areaDetails}
+  topLevel
+  onAddOverride={props.onAddOverride}
+  onRemoveOverride={props.onRemoveOverride}
+  onToggleOverride={props.onToggleOverride}
+  path={[ type, name ]}
 			/>
 		)
-	}
+  }
 
-	return (
+  return (
 		<div className={cx('area', { errored: Boolean(error) }, { loading: !checked })}>
 			<div
-				className="area--summary"
-				onClick={props.onToggleAreaExpansion}
+  className="area--summary"
+  onClick={props.onToggleAreaExpansion}
 			>
 				{showConfirmRemoval
 					? removalConfirmation
@@ -114,86 +114,86 @@ function AreaOfStudy(props) {
 			</div>
 			{isOpen && !showConfirmRemoval && contents}
 		</div>
-	)
+  )
 }
 AreaOfStudy.propTypes = {
-	area: PropTypes.shape({
-		_area: PropTypes.object,
-		_checked: PropTypes.bool,
-		_error: PropTypes.string,
-		_progress: PropTypes.shape({
-			at: PropTypes.number.isRequired,
-			of: PropTypes.number.isRequired,
-		}),
-		isCustom: PropTypes.bool,
-		name: PropTypes.string.isRequired,
-		revision: PropTypes.string.isRequired,
-		slug: PropTypes.string,
-		type: PropTypes.string.isRequired,
-	}).isRequired,
-	isOpen: PropTypes.bool.isRequired,
-	onAddOverride: PropTypes.func.isRequired,
-	onEndRemovalConfirmation: PropTypes.func.isRequired,
-	onRemoveArea: PropTypes.func.isRequired,
-	onRemoveOverride: PropTypes.func.isRequired,
-	onStartRemovalConfirmation: PropTypes.func.isRequired,
-	onToggleAreaExpansion: PropTypes.func.isRequired,
-	onToggleOverride: PropTypes.func.isRequired,
-	showCloseButton: PropTypes.bool.isRequired,
-	showConfirmRemoval: PropTypes.bool.isRequired,
+  area: PropTypes.shape({
+    _area: PropTypes.object,
+    _checked: PropTypes.bool,
+    _error: PropTypes.string,
+    _progress: PropTypes.shape({
+      at: PropTypes.number.isRequired,
+      of: PropTypes.number.isRequired,
+    }),
+    isCustom: PropTypes.bool,
+    name: PropTypes.string.isRequired,
+    revision: PropTypes.string.isRequired,
+    slug: PropTypes.string,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onAddOverride: PropTypes.func.isRequired,
+  onEndRemovalConfirmation: PropTypes.func.isRequired,
+  onRemoveArea: PropTypes.func.isRequired,
+  onRemoveOverride: PropTypes.func.isRequired,
+  onStartRemovalConfirmation: PropTypes.func.isRequired,
+  onToggleAreaExpansion: PropTypes.func.isRequired,
+  onToggleOverride: PropTypes.func.isRequired,
+  showCloseButton: PropTypes.bool.isRequired,
+  showConfirmRemoval: PropTypes.bool.isRequired,
 }
 
 export default class AreaOfStudyContainer extends Component {
-	static propTypes = {
-		area: PropTypes.object.isRequired,
-		onAddOverride: PropTypes.func.isRequired,
-		onRemoveArea: PropTypes.func.isRequired,
-		onRemoveOverride: PropTypes.func.isRequired,
-		onToggleOverride: PropTypes.func.isRequired,
-		showCloseButton: PropTypes.bool.isRequired,
-		showEditButton: PropTypes.bool.isRequired,
-		studentId: PropTypes.string.isRequired,
-	};
+  static propTypes = {
+    area: PropTypes.object.isRequired,
+    onAddOverride: PropTypes.func.isRequired,
+    onRemoveArea: PropTypes.func.isRequired,
+    onRemoveOverride: PropTypes.func.isRequired,
+    onToggleOverride: PropTypes.func.isRequired,
+    showCloseButton: PropTypes.bool.isRequired,
+    showEditButton: PropTypes.bool.isRequired,
+    studentId: PropTypes.string.isRequired,
+  };
 
-	state = {
-		isOpen: false,
-		confirmRemoval: false,
-	};
+  state = {
+    isOpen: false,
+    confirmRemoval: false,
+  };
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return compareProps(this.props, nextProps) || compareProps(this.state, nextState)
-	}
+  shouldComponentUpdate(nextProps, nextState) {
+    return compareProps(this.props, nextProps) || compareProps(this.state, nextState)
+  }
 
-	startRemovalConfirmation = ev => {
-		ev.preventDefault()
-		this.setState({ confirmRemoval: true })
-	};
+  startRemovalConfirmation = ev => {
+    ev.preventDefault()
+    this.setState({ confirmRemoval: true })
+  };
 
-	endRemovalConfirmation = ev => {
-		ev.preventDefault()
-		this.setState({ confirmRemoval: false })
-	};
+  endRemovalConfirmation = ev => {
+    ev.preventDefault()
+    this.setState({ confirmRemoval: false })
+  };
 
-	toggleAreaExpansion = ev => {
-		ev.preventDefault()
-		this.setState({ isOpen: !this.state.isOpen })
-	};
+  toggleAreaExpansion = ev => {
+    ev.preventDefault()
+    this.setState({ isOpen: !this.state.isOpen })
+  };
 
-	render() {
-		return (
+  render() {
+    return (
 			<AreaOfStudy
-				area={this.props.area}
-				isOpen={this.state.isOpen}
-				onAddOverride={this.props.onAddOverride}
-				onEndRemovalConfirmation={this.endRemovalConfirmation}
-				onRemoveArea={this.props.onRemoveArea}
-				onRemoveOverride={this.props.onRemoveOverride}
-				onStartRemovalConfirmation={this.startRemovalConfirmation}
-				onToggleAreaExpansion={this.toggleAreaExpansion}
-				onToggleOverride={this.props.onToggleOverride}
-				showCloseButton={this.props.showCloseButton}
-				showConfirmRemoval={this.state.confirmRemoval}
+  area={this.props.area}
+  isOpen={this.state.isOpen}
+  onAddOverride={this.props.onAddOverride}
+  onEndRemovalConfirmation={this.endRemovalConfirmation}
+  onRemoveArea={this.props.onRemoveArea}
+  onRemoveOverride={this.props.onRemoveOverride}
+  onStartRemovalConfirmation={this.startRemovalConfirmation}
+  onToggleAreaExpansion={this.toggleAreaExpansion}
+  onToggleOverride={this.props.onToggleOverride}
+  showCloseButton={this.props.showCloseButton}
+  showConfirmRemoval={this.state.confirmRemoval}
 			/>
-		)
-	}
+    )
+  }
 }

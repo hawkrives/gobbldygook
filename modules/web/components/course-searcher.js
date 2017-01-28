@@ -33,7 +33,7 @@ type CourseSearcherProps = {
 };
 
 export default function CourseSearcher(props: CourseSearcherProps) {
-	const {
+  const {
 		error='',
 		groupBy,
 		hasQueried,
@@ -51,70 +51,70 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 		studentId,
 	} = props
 
-	const showNoResults = results.length === 0 && hasQueried
-	const showIndicator = inProgress
+  const showNoResults = results.length === 0 && hasQueried
+  const showIndicator = inProgress
 
-	let contents = <div className="no-results course-group">No Results Found</div>
+  let contents = <div className="no-results course-group">No Results Found</div>
 
-	if (error) {
-		contents = <div className="error course-group">Something broke :-(</div>
-	}
+  if (error) {
+    contents = <div className="error course-group">Something broke :-(</div>
+  }
 
-	else if (showIndicator) {
-		contents = <div className="loading course-group"><Loading>Searching…</Loading></div>
-	}
+  else if (showIndicator) {
+    contents = <div className="loading course-group"><Loading>Searching…</Loading></div>
+  }
 
-	else if (!showNoResults) {
-		contents = <CourseResultsList
-			groupBy={groupBy}
-			sortBy={sortBy}
-			results={results}
-			studentId={studentId}
+  else if (!showNoResults) {
+    contents = <CourseResultsList
+      groupBy={groupBy}
+      sortBy={sortBy}
+      results={results}
+      studentId={studentId}
 		/>
-	}
+  }
 
-	let placeholderExtension = ''
-	if (partial) {
-		if (partial.year && partial.semester) {
-			placeholderExtension = `(${toPrettyTerm(`${partial.year}${partial.semester}`)})`
-		}
-		else if (partial.year) {
-			placeholderExtension = `(${partial.year})`
-		}
-	}
+  let placeholderExtension = ''
+  if (partial) {
+    if (partial.year && partial.semester) {
+      placeholderExtension = `(${toPrettyTerm(`${partial.year}${partial.semester}`)})`
+    }
+    else if (partial.year) {
+      placeholderExtension = `(${partial.year})`
+    }
+  }
 
-	return (
+  return (
 		<div className="course-search">
 			<header className="sidebar-heading">
 				<div className="row">
 					<h2>Course Search<br />{placeholderExtension}</h2>
 					<Button
-						className="close-sidebar"
-						title="Close Search"
-						type="flat"
-						onClick={onCloseSearcher}
+  className="close-sidebar"
+  title="Close Search"
+  type="flat"
+  onClick={onCloseSearcher}
 					>
 						Close
 					</Button>
 				</div>
 				<div className="row">
 					<input
-						type="search"
-						className="search-box"
-						value={query}
-						placeholder={'Search for a course or phrase'}
-						onChange={onQueryChange}
-						onKeyDown={onKeyDown}
-						autoFocus={true}
+  type="search"
+  className="search-box"
+  value={query}
+  placeholder={'Search for a course or phrase'}
+  onChange={onQueryChange}
+  onKeyDown={onKeyDown}
+  autoFocus={true}
 					/>
 				</div>
 				<div className="row submit">
 					<Button
-						className="submit-search-query"
-						title="Search"
-						type="flat"
-						onClick={onQuerySubmit}
-						disabled={inProgress}
+  className="submit-search-query"
+  title="Search"
+  type="flat"
+  onClick={onQuerySubmit}
+  disabled={inProgress}
 					>
 						{inProgress
 							? [ <span key="msg">Searching…</span> ]
@@ -140,5 +140,5 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 
 			{contents}
 		</div>
-	)
+  )
 }

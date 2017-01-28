@@ -10,12 +10,12 @@ type LoadingProps = {
 };
 
 export default function Loading({ className, children }: LoadingProps) {
-	return (
+  return (
 		<figure className="loading…">
 			<div className="loading-spinner"><div /></div>
 			<figcaption className={cx('loading-message', className)}>
 				{children}
 			</figcaption>
 		</figure>
-	)
+  )
 }
