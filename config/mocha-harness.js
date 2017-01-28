@@ -1,10 +1,3 @@
-global.Promise = require('bluebird')
-
-global.VERSION = String(require('../package.json').version)
-global.DEVELOPMENT = false
-global.PRODUCTION = false
-global.TESTING = true
-
 global.fetch = () => Promise.resolve({})
 
 let storage = {}
@@ -28,12 +21,4 @@ global.localStorage = {
 	clear: () => {
 		storage = {}
 	},
-}
-
-require.extensions['.scss'] = function () {
-	return null
-}
-
-require.extensions['.css'] = function () {
-	return null
 }

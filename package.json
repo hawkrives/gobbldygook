@@ -7,37 +7,28 @@
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
-  "nyc": {
-    "include": [
-      "modules/**"
-    ],
-    "exclude": [
-      "test",
-      "test{,-*}.js",
-      "**/*.test.js",
-      "**/__tests__/**",
-      "modules/hanson-format/parse-hanson-string.js"
-    ],
-    "cache": true,
-    "sourceMap": false,
-    "instrument": false
-  },
   "jest": {
     "setupFiles": [
-      "config/mocha-harness.js"
+      "./config/mocha-harness.js"
     ],
-    "coverageReporters": [
-      "json",
-      "html",
-      "lcov",
-      "text"
+    "collectCoverageFrom": [
+      "modules/**/*.js"
     ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/modules/hanson-format/parse-hanson-string.js"
+    ],
+    "globals": {
+      "DEVELOPMENT": false,
+      "PRODUCTION": false,
+      "TESTING": true,
+      "VERSION": "3.0.0-test"
+    },
     "resetModules": true,
     "moduleNameMapper": {
-      "^.+\\.(scss|css|less)$": "<rootDir>/config/flow/css.js.flow"
+      "^.+\\.scss$": "<rootDir>/config/flow/css.js.flow"
     },
-    "modulePathIgnorePatterns": [
-      "\\.scss$",
+    "testPathIgnorePatterns": [
       "\\.support.js$",
       "__support__"
     ]
@@ -57,14 +48,12 @@
     "cover": "npm run run-coverage && npm run view-coverage",
     "deploy": "bash scripts/deploy.sh",
     "lint": "eslint *.js modules/",
-    "run-coverage": "nyc npm test",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
     "start": "npm run copy && cross-env NODE_ENV=development webpack-dev-server --config .webpackrc.js --progress",
     "stats": "cross-env NODE_ENV=production npm run stats-base",
     "stats-base": "webpack --config .webpackrc.js --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
     "stats-dev": "cross-env NODE_ENV=development npm run stats-base",
-    "test": "cross-env NODE_ENV=test mocha --reporter dot --ui bdd --require babel-register --require config/mocha-harness modules/**/*.test.js",
-    "jest": "cross-env NODE_ENV=test jest",
+    "test": "jest",
     "test-students": "./modules/cli/test-student test/example-students",
     "test-watch": "npm run test -- --watch",
     "travis": "npm run lint && npm run cover && npm run build-ci",
@@ -169,7 +158,6 @@
     "jest": "18.1.0",
     "js-beautify": "1.6.8",
     "json-loader": "0.5.4",
-    "mocha": "3.2.0",
     "mock-require": "2.0.1",
     "node-sass": "4.3.0",
     "nyc": "10.1.2",
