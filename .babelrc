@@ -31,7 +31,8 @@
 		"test": {
 			"presets": [["latest", {"es2015": {"modules": "commonjs"}}]],
 			"plugins": [
-				"istanbul",
+				"transform-class-properties",
+				"transform-object-rest-spread",
 				// allows tested files access to the webpack aliases
 				["webpack-alias", { "config": "./.webpackrc.js" }],
 			],
