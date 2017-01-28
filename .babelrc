@@ -20,6 +20,13 @@
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		// "lodash",
+		["module-resolver", {
+			"alias": {
+				"modules": "./modules",
+				"react": "preact-compat",
+				"react-dom": "preact-compat",
+			}
+		}],
 	],
 	"env": {
 		"production": {
@@ -35,14 +42,13 @@
 			"plugins": [
 				"transform-class-properties",
 				"transform-object-rest-spread",
-				// allows tested files access to the webpack aliases
-				["webpack-alias", { "config": "./.webpackrc.js" }],
-			],
-		},
-		"debug": {
-			"plugins": [
-				// allows tested files access to the webpack aliases
-				["webpack-alias", { "config": "./.webpackrc.js" }],
+				// ["module-resolver", {
+				// 	"root": ["./modules"],
+				// 	"alias": {
+				// 		"react": "preact-compat",
+				// 		"react-dom": "preact-compat",
+				// 	}
+				// }],
 			],
 		},
 	},

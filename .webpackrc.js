@@ -140,18 +140,6 @@ const config = {
 		Buffer: false,
 	},
 
-	resolve: {
-		extensions: [ '.js', '.json' ],
-		// Allow us to require things from modules/ instead of using giant
-		// relative paths everywhere. And, thanks to babel-plugin-webpack-alias,
-		// we can use these aliases in testing, too!
-		alias: {
-			modules: path.resolve(__dirname, 'modules'),
-			react: 'preact-compat',
-			'react-dom': 'preact-compat',
-		},
-	},
-
 	plugins: [
 		// Generates an index.html for us.
 		new HtmlPlugin({
