@@ -1,8 +1,0 @@
----
-env:
-  mocha: true
-
-rules:
-  no-empty: off
-  no-unused-expressions: off
-  quotes: off
