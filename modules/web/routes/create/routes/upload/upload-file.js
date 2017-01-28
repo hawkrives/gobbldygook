@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import DropZone from 'react-dropzone'
-import {map} from 'lodash'
+import map from 'lodash/map'
 import Button from 'modules/web/components/button'
 import List from 'modules/web/components/list'
 // TODO: Move StudentSummary to modules/web/components

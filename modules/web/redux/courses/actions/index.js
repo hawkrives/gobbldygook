@@ -6,9 +6,9 @@ import {
 	// LOAD_COURSES,
 } from '../constants'
 
-// import {flatten} from 'lodash'
-// import {values} from 'lodash'
-// import {map} from 'lodash'
+// import flatten from 'lodash/flatten'
+// import values from 'lodash/values'
+// import map from 'lodash/map'
 // import {getCoursesFromSchedules} from '../../../helpers/get-courses'
 
 

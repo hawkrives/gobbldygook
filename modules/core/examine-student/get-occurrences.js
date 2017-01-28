@@ -1,5 +1,5 @@
 // @flow
-import {filter} from 'lodash'
+import filter from 'lodash/filter'
 import simplifyCourse from './simplify-course'
 import type {Course} from './types'
 

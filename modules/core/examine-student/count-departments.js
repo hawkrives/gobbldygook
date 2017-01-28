@@ -1,5 +1,5 @@
 // @flow
-import {compact} from 'lodash'
+import compact from 'lodash/compact'
 import getDepartments from './get-departments'
 import type {Course} from './types'
 

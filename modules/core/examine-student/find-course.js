@@ -1,5 +1,5 @@
 // @flow
-import {find} from 'lodash'
+import find from 'lodash/find'
 import compareCourseToCourse from './compare-course-to-course'
 import type {Course} from './types'
 

@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {filter, map} from 'lodash'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
 import {isCurrentSemester} from 'modules/core'
 
 import Loading from 'modules/web/components/loading'

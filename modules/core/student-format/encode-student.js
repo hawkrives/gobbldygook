@@ -1,5 +1,6 @@
 import stringify from 'stabilize'
-import {omit, mapValues} from 'lodash'
+import omit from 'lodash/omit'
+import mapValues from 'lodash/mapValues'
 
 export function prepareStudentForSave(student) {
 	student = {...student}

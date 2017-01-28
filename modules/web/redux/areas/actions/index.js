@@ -1,7 +1,7 @@
 // @flow
 import type {Dispatch, Action, State} from 'redux'
 import db from '../../../helpers/db'
-import {map} from 'lodash'
+import map from 'lodash/map'
 import loadArea from '../../../helpers/load-area'
 
 import {

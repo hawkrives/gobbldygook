@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react'
-import {filter} from 'lodash'
-import {keys} from 'lodash'
-import {map} from 'lodash'
+import filter from 'lodash/filter'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
 
 import {isRequirementName} from 'modules/core/examine-student'
 

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import {map} from 'lodash'
+import map from 'lodash/map'
 import InlineCourse from './inline-course'
 import debug from 'debug'
 const log = debug('web:react')

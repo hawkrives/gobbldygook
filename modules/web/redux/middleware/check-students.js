@@ -5,10 +5,10 @@ import * as studentConstants from '../students/constants'
 import * as areaConstants from '../areas/constants'
 import * as courseConstants from '../courses/constants'
 
-import {filter} from 'lodash'
-import {includes} from 'lodash'
-import {map} from 'lodash'
-import {toArray} from 'lodash'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import map from 'lodash/map'
+import toArray from 'lodash/toArray'
 
 import {checkStudent} from '../students/actions/check-student'
 

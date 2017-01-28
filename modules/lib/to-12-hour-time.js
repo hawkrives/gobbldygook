@@ -1,4 +1,4 @@
-import {padStart} from 'lodash'
+import padStart from 'lodash/padStart'
 
 function split24HourTime(time) {
 	time = padStart(time, 4, '0')

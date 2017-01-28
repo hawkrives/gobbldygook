@@ -1,4 +1,4 @@
-import {mapValues} from 'lodash'
+import mapValues from 'lodash/mapValues'
 import {validateSchedule} from './validate-schedule'
 
 export function validateSchedules(student) {

@@ -1,5 +1,5 @@
 // @flow
-import {reject} from 'lodash'
+import reject from 'lodash/reject'
 import compareCourseToCourse from './compare-course-to-course'
 import type {Course} from './types'
 

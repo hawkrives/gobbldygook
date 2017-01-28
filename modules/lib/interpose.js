@@ -1,4 +1,4 @@
-import {reduce} from 'lodash'
+import reduce from 'lodash/reduce'
 
 export function interpose(data, value) {
 	const len = data.length

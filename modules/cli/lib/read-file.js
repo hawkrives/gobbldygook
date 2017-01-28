@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 import {status, json, text} from 'modules/lib/fetch-helpers'
 
-import {startsWith} from 'lodash'
+import startsWith from 'lodash/startsWith'
 import yaml from 'js-yaml'
 import pify from 'pify'
 

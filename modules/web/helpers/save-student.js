@@ -1,5 +1,5 @@
-import {union} from 'lodash'
-import {reject} from 'lodash'
+import union from 'lodash/union'
+import reject from 'lodash/reject'
 import stringify from 'stabilize'
 import {prepareStudentForSave} from 'modules/core'
 import debug from 'debug'

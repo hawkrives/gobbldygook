@@ -1,8 +1,8 @@
 // @flow
 import React, {PropTypes} from 'react'
 import Link from 'react-router/lib/Link'
-import {map} from 'lodash'
-import {sortBy} from 'lodash'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
 import List from 'modules/web/components/list'
 
 export default function AreaList(props: {areas: Object[]}) {
@@ -15,7 +15,8 @@ export default function AreaList(props: {areas: Object[]}) {
 					<li key={url}>
 						<Link to={url}>{a.name} {a.type}, {a.revision}</Link>
 					</li>
-				)})}
+				)
+			})}
 		</List>
 	)
 }

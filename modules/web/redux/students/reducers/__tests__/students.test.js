@@ -1,6 +1,6 @@
 import {expect} from 'chai'
-import {size} from 'lodash'
-import {range} from 'lodash'
+import size from 'lodash/size'
+import range from 'lodash/range'
 
 import {
 	INIT_STUDENT,

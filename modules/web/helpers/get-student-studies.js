@@ -1,5 +1,5 @@
 import loadArea from './load-area'
-import {map} from 'lodash'
+import map from 'lodash/map'
 import debug from 'debug'
 const log = debug('web:load-student')
 

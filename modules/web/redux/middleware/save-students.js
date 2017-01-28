@@ -1,8 +1,8 @@
 import * as studentActions from '../students/constants'
 import {ActionTypes as UndoableActionTypes} from 'redux-undo'
-import {filter} from 'lodash'
-import {includes} from 'lodash'
-import {map} from 'lodash'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import map from 'lodash/map'
 import {saveStudent} from '../students/actions/save-student'
 
 const whitelist = [

@@ -3,9 +3,9 @@ import cx from 'classnames'
 import {expandYear} from 'modules/schools/stolaf'
 
 import {findFirstAvailableYear} from 'modules/web/helpers/find-first-available-year'
-import {map} from 'lodash'
-import {sortBy} from 'lodash'
-import {groupBy} from 'lodash'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
+import groupBy from 'lodash/groupBy'
 
 import Button from 'modules/web/components/button'
 import Year from './year'

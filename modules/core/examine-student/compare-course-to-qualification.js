@@ -1,10 +1,10 @@
 // @flow
-import {isPlainObject} from 'lodash'
-import {isArray} from 'lodash'
-import {includes} from 'lodash'
+import isPlainObject from 'lodash/isPlainObject'
+import isArray from 'lodash/isArray'
+import includes from 'lodash/includes'
+import every from 'lodash/every'
+import some from 'lodash/some'
 import assertKeys from './assert-keys'
-import {every} from 'lodash'
-import {some} from 'lodash'
 import type {Course, UntypedQualificationExpression} from './types'
 
 /**

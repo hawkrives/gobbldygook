@@ -5,10 +5,10 @@
 
 import nomnom from 'nomnom'
 import search from './lib/search-for-courses'
-import {map} from 'lodash'
-import {mapValues} from 'lodash'
-import {fromPairs} from 'lodash'
-import {groupBy} from 'lodash'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import fromPairs from 'lodash/fromPairs'
+import groupBy from 'lodash/groupBy'
 import yaml from 'js-yaml'
 
 function findCoursesWithGes(term) {

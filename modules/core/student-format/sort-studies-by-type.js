@@ -1,4 +1,4 @@
-import {sortBy} from 'lodash'
+import sortBy from 'lodash/sortBy'
 
 const types = ['degree', 'major', 'concentration', 'emphasis']
 export function sortStudiesByType(studies) {

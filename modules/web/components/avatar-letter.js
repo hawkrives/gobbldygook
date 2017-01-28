@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames'
-import {isString} from 'lodash'
+import isString from 'lodash/isString'
 
 import './avatar-letter.scss'
 

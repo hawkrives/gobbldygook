@@ -1,5 +1,6 @@
 import {expect} from 'chai'
-import {every, find} from 'lodash'
+import every from 'lodash/every'
+import find from 'lodash/find'
 import {
 	convertStudent,
 	// processSchedules,

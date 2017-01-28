@@ -1,5 +1,5 @@
 // @flow
-import {sumBy} from 'lodash'
+import sumBy from 'lodash/sumBy'
 import type {Course} from './types'
 
 /**

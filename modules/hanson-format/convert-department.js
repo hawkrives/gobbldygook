@@ -1,5 +1,5 @@
 // @flow
-import {forEach} from 'lodash'
+import forEach from 'lodash/forEach'
 
 const shortDepartmentAbbreviationsToFullDepartmentAbbreviations = {
 	AR: 'ART',

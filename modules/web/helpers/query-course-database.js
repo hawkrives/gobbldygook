@@ -1,11 +1,11 @@
 import db from './db'
 import {buildQueryFromString} from 'modules/core'
-import {compact} from 'lodash'
-import {filter} from 'lodash'
-import {map} from 'lodash'
-import {some} from 'lodash'
-import {toPairs} from 'lodash'
-import {fromPairs} from 'lodash'
+import compact from 'lodash/compact'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import some from 'lodash/some'
+import toPairs from 'lodash/toPairs'
+import fromPairs from 'lodash/fromPairs'
 import debug from 'debug'
 const log = debug('web:database')
 

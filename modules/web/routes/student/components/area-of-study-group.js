@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react'
-import {map} from 'lodash'
+import map from 'lodash/map'
 import {pluralizeArea} from 'modules/core/examine-student'
-import {capitalize} from 'lodash'
+import capitalize from 'lodash/capitalize'
 import {areaTypeConstants} from 'modules/core'
-import {values} from 'lodash'
+import values from 'lodash/values'
 
 import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'

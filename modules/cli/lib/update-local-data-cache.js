@@ -1,7 +1,7 @@
 import mkdirp from 'mkdirp'
-import {find} from 'lodash'
-import {some} from 'lodash'
-import {startsWith} from 'lodash'
+import find from 'lodash/find'
+import some from 'lodash/some'
+import startsWith from 'lodash/startsWith'
 import path from 'path'
 
 import {

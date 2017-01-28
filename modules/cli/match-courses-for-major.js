@@ -7,14 +7,12 @@ import getMatchesFromFilter from '../core/examine-student/get-matches-from-filte
 import getOccurrences from '../core/examine-student/get-occurrences'
 import isRequirementName from '../core/examine-student/is-requirement-name'
 // import simplifyCourse from '../core/examine-student/simplify-course'
-import {
-	flatMap,
-	map,
-	mapValues,
-	padStart,
-	uniqBy,
-	sortBy,
-} from 'lodash'
+import flatMap from 'lodash/flatMap'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import padStart from 'lodash/padStart'
+import uniqBy from 'lodash/uniqBy'
+import sortBy from 'lodash/sortBy'
 
 function simplifyCourse(course) {
 	if (course.section) {

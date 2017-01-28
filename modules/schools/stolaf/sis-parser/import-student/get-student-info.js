@@ -1,5 +1,5 @@
 import props from 'p-props'
-import {flatten} from 'lodash'
+import flatten from 'lodash/flatten'
 import {AuthError, NetworkError} from 'modules/lib'
 import {fetchHtml} from './lib'
 import {extractTermList} from './term-list'

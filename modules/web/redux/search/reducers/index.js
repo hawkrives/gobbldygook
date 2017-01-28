@@ -8,18 +8,18 @@ import {
 	SET_PARTIAL_QUERY,
 } from '../constants'
 
-import {groupBy} from 'lodash'
-import {sortBy} from 'lodash'
+import groupBy from 'lodash/groupBy'
+import sortBy from 'lodash/sortBy'
 
 import {SORT_BY, GROUP_BY} from '../../../components/course-searcher-options'
 
-import {includes} from 'lodash'
-import {uniq} from 'lodash'
-import {flatMap} from 'lodash'
-import {toPairs} from 'lodash'
-import {round} from 'lodash'
+import includes from 'lodash/includes'
+import uniq from 'lodash/uniq'
+import flatMap from 'lodash/flatMap'
+import toPairs from 'lodash/toPairs'
+import round from 'lodash/round'
 import {oxford} from 'humanize-plus'
-import {map} from 'lodash'
+import map from 'lodash/map'
 import present from 'present'
 import debug from 'debug'
 const log = debug('web:redux:search')

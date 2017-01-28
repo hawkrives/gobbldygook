@@ -1,7 +1,7 @@
 /* global WorkerGlobalScope */
-import {map} from 'lodash'
-import {filter} from 'lodash'
-import {round} from 'lodash'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
+import round from 'lodash/round'
 import present from 'present'
 
 import {stringifyError} from 'modules/lib'

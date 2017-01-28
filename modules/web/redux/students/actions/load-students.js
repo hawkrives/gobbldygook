@@ -1,5 +1,5 @@
-import {map} from 'lodash'
-import {uniq} from 'lodash'
+import map from 'lodash/map'
+import uniq from 'lodash/uniq'
 
 import {LOAD_STUDENTS} from '../constants'
 import {loadStudent} from './load-student'

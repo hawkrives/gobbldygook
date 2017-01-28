@@ -1,5 +1,5 @@
-import {flatten} from 'lodash'
-import {includes} from 'lodash'
+import flatten from 'lodash/flatten'
+import includes from 'lodash/includes'
 
 import searchForCourses from './search-for-courses'
 

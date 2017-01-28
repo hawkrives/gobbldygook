@@ -1,6 +1,6 @@
 // @flow
-import {flatMap} from 'lodash'
-import {uniq} from 'lodash'
+import flatMap from 'lodash/flatMap'
+import uniq from 'lodash/uniq'
 import type {Course} from './types'
 
 /**

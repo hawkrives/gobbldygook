@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 
-import {map} from 'lodash'
+import map from 'lodash/map'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { removeNotification } from '../redux/notifications/actions'

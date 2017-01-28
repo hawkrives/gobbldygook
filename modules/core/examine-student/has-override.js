@@ -1,5 +1,5 @@
 // @flow
-import {has} from 'lodash'
+import has from 'lodash/has'
 import pathToOverride from './path-to-override'
 import type {OverridesObject, OverridesPath} from './types'
 

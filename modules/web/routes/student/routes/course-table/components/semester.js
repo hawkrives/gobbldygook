@@ -7,7 +7,7 @@ import {semesterName} from 'modules/schools/stolaf'
 import {countCredits} from 'modules/core/examine-student'
 import {IDENT_COURSE} from 'modules/core'
 import {DropTarget} from 'react-dnd'
-import {includes} from 'lodash'
+import includes from 'lodash/includes'
 
 import Button from 'modules/web/components/button'
 import Icon from 'modules/web/components/icon'

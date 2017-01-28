@@ -1,4 +1,4 @@
-import {mapValues} from 'lodash'
+import mapValues from 'lodash/mapValues'
 import props from 'p-props'
 import {getCourse} from './get-courses'
 import {alterCourse} from './alter-course-for-evaluation'
