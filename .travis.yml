@@ -14,13 +14,23 @@ notifications:
 
 language: node_js
 
+before_deploy:
+  - rm -rf bin/ config/ flow-typed/ modules/ playground/ screenshots/ scripts/
+  - find ./ -type f -depth 1 -not -name '.git*' -not -name package.json -delete
+  - mv build/* ./
+  - rm -f build/.DS_Store
+  - rmdir build/
+
 deploy:
-  provider: script
+  provider: pages
   skip_cleanup: true
-  script: bash -v scripts/deploy-ci.sh
+  github_token: $GITHUB_TOKEN
   on:
     branch: master
     tags: true
+
+after_deploy:
+  - curl -d "apiKey=7e393deddaeb885f5b140b4320ecef6b" -d "repository=https://github.com/hawkrives/gobbldygook" -d "revision=$(git rev-parse --verify HEAD)" 'https://notify.bugsnag.com/deploy'
 
 branches:
   only:
@@ -36,10 +46,10 @@ node_js: 7
 
 script:
   - yarn run lint
-  - yarn run run-coverage
+  - yarn run test -- --coverage --runInBand
   - yarn run build-ci
 
 after_success:
   - npm install coveralls codecov
-  - nyc report --reporter=text-lcov | coveralls
-  - nyc report --reporter=lcov > coverage.lcov && codecov
+  - ./node_modules/.bin/coveralls < ./coverage/lcov.info
+  - ./node_modules/.bin/codecov -f ./coverage/lcov.info
