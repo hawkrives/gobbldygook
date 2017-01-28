@@ -22,10 +22,10 @@ describe('enhanceHanson', () => {
 		expect(() => enhanceHanson({}))
 			.to.throw('enhanceHanson(): could not find any of ["result", "message", "filter"] in ["$type", "slug"].')
 
-		expect(() => enhanceHanson({ "message": "have a nice day" }))
+		expect(() => enhanceHanson({ 'message': 'have a nice day' }))
 			.to.not.throw()
 
-		expect(() => enhanceHanson({ "result": "CSCI 121" }))
+		expect(() => enhanceHanson({ 'result': 'CSCI 121' }))
 			.to.not.throw()
 	})
 

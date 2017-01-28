@@ -1,5 +1,5 @@
 import * as studentActions from '../students/constants'
-import {ActionTypes as UndoableActionTypes} from 'redux-undo'
+import { ActionTypes as UndoableActionTypes } from 'redux-undo'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 import map from 'lodash/map'
@@ -31,8 +31,8 @@ const whitelist = [
 	studentActions.REMOVE_OVERRIDE,
 	studentActions.ADD_FABRICATION,
 	studentActions.REMOVE_FABRICATION,
-  UndoableActionTypes.UNDO,
-  UndoableActionTypes.REDO,
+	UndoableActionTypes.UNDO,
+	UndoableActionTypes.REDO,
 ]
 export const shouldTakeAction = ({ type }) => {
 	return includes(whitelist, type)

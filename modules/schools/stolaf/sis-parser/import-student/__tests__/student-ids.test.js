@@ -11,7 +11,7 @@ describe('extractStudentIds', () => {
 		expect(actual).to.deep.equal(expected)
 	})
 
-	it(`returns an empty list if no student ids were found`, () => {
+	it('returns an empty list if no student ids were found', () => {
 		const html = parseHtml('<html />')
 		const actual = extractStudentIds(html)
 		const expected = []
