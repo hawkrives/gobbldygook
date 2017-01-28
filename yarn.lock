@@ -977,7 +977,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@3.4.7, bluebird@^3.0.5:
+bluebird@^3.0.5:
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.4.7.tgz#f72d760be09b7f76d08ed8fae98b289a8d05fab3"
 
@@ -2005,7 +2005,7 @@ es6-map@^0.1.3:
     es6-symbol "~3.1.0"
     event-emitter "~0.3.4"
 
-es6-set@~0.1.3:
+es6-set@0.1.4, es6-set@~0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/es6-set/-/es6-set-0.1.4.tgz#9516b6761c2964b92ff479456233a247dc707ce8"
   dependencies:
@@ -2796,10 +2796,6 @@ https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
 
-humanize-plus@1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/humanize-plus/-/humanize-plus-1.8.2.tgz#a65b34459ad6367adbb3707a82a3c9f916167030"
-
 iconv-lite@0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
@@ -2841,14 +2837,6 @@ idb-schema@^2.0.0:
 ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
-
-iflow-bluebird@1.1.26:
-  version "1.1.26"
-  resolved "https://registry.yarnpkg.com/iflow-bluebird/-/iflow-bluebird-1.1.26.tgz#60801b3a2afe171c0acbf6b144470553243f387c"
-
-iflow-lodash@1.1.27:
-  version "1.1.27"
-  resolved "https://registry.yarnpkg.com/iflow-lodash/-/iflow-lodash-1.1.27.tgz#0af626ce584ef95ccaa5ff564f76c7e6ad3ff17d"
 
 ignore@^3.2.0:
   version "3.2.0"
@@ -3573,6 +3561,10 @@ levn@^0.3.0, levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
+
+listify@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/listify/-/listify-1.0.0.tgz#03ca7ba2d150d4267773f74e57558d1053d2bee3"
 
 load-json-file@^1.0.0:
   version "1.1.0"
@@ -4321,6 +4313,34 @@ osenv@0:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
+p-props@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-props/-/p-props-1.0.0.tgz#55f44d96563f87c61f75e19a822e7b8df5b53a55"
+
+p-queue@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-1.0.0.tgz#698cde72cc9f57aa3bc7d30ad8019cd736aaed3e"
+
+p-reduce@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-reduce/-/p-reduce-1.0.0.tgz#18c2b0dd936a4690a529f8231f58a0fdb6a47dfa"
+
+p-reflect@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-reflect/-/p-reflect-1.0.0.tgz#f4fa1ee1bb546d8eb3ec0321148dfe0a79137bb8"
+
+p-series@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-series/-/p-series-1.0.0.tgz#7ec9e7b4406cc32066298a6f9860e55e91b36e07"
+  dependencies:
+    p-reduce "^1.0.0"
+
+p-settle@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/p-settle/-/p-settle-2.0.0.tgz#b6cda5ab86e7173639164909b526adcc42b87733"
+  dependencies:
+    p-reflect "^1.0.0"
+
 pako@~0.2.0:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
@@ -4412,7 +4432,7 @@ pegjs@0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/pegjs/-/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
 
-pify@^2.0.0, pify@^2.3.0:
+pify@2.3.0, pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
 
@@ -4689,6 +4709,29 @@ postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0
     source-map "^0.5.6"
     supports-color "^3.1.2"
 
+preact-compat@3.11.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/preact-compat/-/preact-compat-3.11.0.tgz#be6348945e0c4f2e5b9ed7afb33b1bc095e6c829"
+  dependencies:
+    preact-render-to-string "^3.2.1"
+    preact-transition-group "^1.1.0"
+    proptypes "^0.14.3"
+    standalone-react-addons-pure-render-mixin "^0.1.1"
+
+preact-render-to-string@^3.2.1:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-3.5.0.tgz#35c741d4683e95404a94170ec7251ea5f71037b6"
+  dependencies:
+    pretty-format "^3.5.1"
+
+preact-transition-group@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/preact-transition-group/-/preact-transition-group-1.1.0.tgz#97d0beff0790d721faecd2560c02cd30d5426f23"
+
+preact@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-7.1.0.tgz#119cf65963abff28038b2330601adde969990a8d"
+
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -4725,6 +4768,10 @@ pretty-format@^18.1.0:
   dependencies:
     ansi-styles "^2.2.1"
 
+pretty-format@^3.5.1:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
+
 pretty-ms@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-2.1.0.tgz#4257c256df3fb0b451d6affaab021884126981dc"
@@ -4754,6 +4801,10 @@ promise@^7.0.3, promise@^7.1.1:
   resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
   dependencies:
     asap "~2.0.3"
+
+proptypes@^0.14.3:
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/proptypes/-/proptypes-0.14.3.tgz#948d47f0ef1b501e34d934e42b39d60d26a8bf9d"
 
 proto-list@~1.2.1:
   version "1.2.4"
@@ -5510,6 +5561,10 @@ stabilize@1.0.0:
   resolved "https://registry.yarnpkg.com/stabilize/-/stabilize-1.0.0.tgz#01f29fc70735b9078e8bbe87b7e97dde6088e7e0"
   dependencies:
     jsonify "~0.0.0"
+
+standalone-react-addons-pure-render-mixin@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/standalone-react-addons-pure-render-mixin/-/standalone-react-addons-pure-render-mixin-0.1.1.tgz#3c7409f4c79c40de9ac72c616cf679a994f37551"
 
 "statuses@>= 1.3.1 < 2", statuses@~1.3.0:
   version "1.3.1"
