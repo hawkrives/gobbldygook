@@ -150,7 +150,7 @@
     "eslint-plugin-flowtype": "2.30.0",
     "eslint-plugin-flowtype-errors": "2.0.3",
     "eslint-plugin-react": "6.9.0",
-    "extract-text-webpack-plugin": "2.0.0-beta.4",
+    "extract-text-webpack-plugin": "2.2.0-rc.1",
     "file-loader": "0.10.0",
     "flow-bin": "0.38.0",
     "iflow-bluebird": "1.1.26",
@@ -172,8 +172,8 @@
     "sass-loader": "4.1.1",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
-    "webpack": "2.2.0-rc.0",
-    "webpack-dev-server": "2.2.0-rc.0",
+    "webpack": "2.2.0",
+    "webpack-dev-server": "2.2.0",
     "worker-loader": "0.7.1"
   }
 }
