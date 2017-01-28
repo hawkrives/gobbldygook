@@ -3,7 +3,6 @@
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
-const path = require('path')
 const url = require('url')
 const reject = require('lodash/reject')
 const endsWith = require('lodash/endsWith')
