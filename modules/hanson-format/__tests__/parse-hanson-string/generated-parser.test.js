@@ -1,9 +1,8 @@
-import { expect } from 'chai'
 import { parse } from '../../parse-hanson-string'
 
-const f = str => expect(() => parse(str, { startRule: 'Filter' })).not.to.throw()
-const r = str => expect(() => parse(str, { startRule: 'Result' })).not.to.throw()
-const t = (str, msg) => expect(() => parse(str)).to.throw(msg)
+const f = str => expect(() => parse(str, { startRule: 'Filter' })).not.toThrow()
+const r = str => expect(() => parse(str, { startRule: 'Result' })).not.toThrow()
+const t = (str, msg) => expect(() => parse(str)).toThrow(msg)
 
 describe('parse-hanson-string', () => {
 	it('should not throw', () => {

@@ -1,11 +1,10 @@
-import { expect } from 'chai'
 import { customParser, qualification, boolean } from './parse-hanson-string.support'
 const parseWhere = customParser({ allowedStartRules: [ 'Where' ] })
 const parseQualifier = customParser({ allowedStartRules: [ 'Qualifier' ] })
 
 describe('WhereExpression', () => {
 	it('describes courses "where" a fact is true', () => {
-		expect(parseWhere('one course where {a = 1}')).to.deep.equal({
+		expect(parseWhere('one course where {a = 1}')).toEqual({
 			$count: { $num: 1, $operator: '$gte' },
 			$type: 'where',
 			$where: {
@@ -19,7 +18,7 @@ describe('WhereExpression', () => {
 	})
 
 	it('may require distinct course', () => {
-		expect(parseWhere('two distinct courses where {a = 1}')).to.deep.equal({
+		expect(parseWhere('two distinct courses where {a = 1}')).toEqual({
 			$count: { $num: 2, $operator: '$gte' },
 			$type: 'where',
 			$where: {
@@ -35,12 +34,12 @@ describe('WhereExpression', () => {
 
 describe('qualifiers syntax', () => {
 	it('key must be a string', () => {
-		expect(() => parseQualifier('{a = b}')).not.to.throw()
-		expect(() => parseQualifier('{1 = b}')).to.throw('SyntaxError: Expected qualification-or but "1" found.')
+		expect(() => parseQualifier('{a = b}')).not.toThrow()
+		expect(() => parseQualifier('{1 = b}')).toThrow('SyntaxError: Expected qualification-or but "1" found.')
 	})
 
 	it('value may be a number (coerced to integers)', () => {
-		expect(parseQualifier('{a = 1}')).to.deep.equal({
+		expect(parseQualifier('{a = 1}')).toEqual({
 			$key: 'a',
 			$operator: '$eq',
 			$type: 'qualification',
@@ -49,7 +48,7 @@ describe('qualifiers syntax', () => {
 	})
 
 	it('value may include hyphens', () => {
-		expect(parseQualifier('{a = BTS-B}')).to.deep.equal({
+		expect(parseQualifier('{a = BTS-B}')).toEqual({
 			$key: 'a',
 			$operator: '$eq',
 			$type: 'qualification',
@@ -58,7 +57,7 @@ describe('qualifiers syntax', () => {
 	})
 
 	it('value may include underscores', () => {
-		expect(parseQualifier('{a = BTS_B}')).to.deep.equal({
+		expect(parseQualifier('{a = BTS_B}')).toEqual({
 			$key: 'a',
 			$operator: '$eq',
 			$type: 'qualification',
@@ -69,49 +68,49 @@ describe('qualifiers syntax', () => {
 
 describe('qualification value may be compared by', () => {
 	it('= (single equals)', () => {
-		expect(parseQualifier('{a = b}')).to.deep.equal(qualification('eq', 'a', 'b'))
+		expect(parseQualifier('{a = b}')).toEqual(qualification('eq', 'a', 'b'))
 	})
 
 	it('== (double equals)', () => {
-		expect(parseQualifier('{a == b}')).to.deep.equal(qualification('eq', 'a', 'b'))
+		expect(parseQualifier('{a == b}')).toEqual(qualification('eq', 'a', 'b'))
 	})
 
 	it('!= (not equal to)', () => {
-		expect(parseQualifier('{a != b}')).to.deep.equal(qualification('ne', 'a', 'b'))
+		expect(parseQualifier('{a != b}')).toEqual(qualification('ne', 'a', 'b'))
 	})
 
 	it('< (less than)', () => {
-		expect(parseQualifier('{a < b}')).to.deep.equal(qualification('lt', 'a', 'b'))
+		expect(parseQualifier('{a < b}')).toEqual(qualification('lt', 'a', 'b'))
 	})
 
 	it('<= (less than or equal to)', () => {
-		expect(parseQualifier('{a <= b}')).to.deep.equal(qualification('lte', 'a', 'b'))
+		expect(parseQualifier('{a <= b}')).toEqual(qualification('lte', 'a', 'b'))
 	})
 
 	it('> (greater than)', () => {
-		expect(parseQualifier('{a > b}')).to.deep.equal(qualification('gt', 'a', 'b'))
+		expect(parseQualifier('{a > b}')).toEqual(qualification('gt', 'a', 'b'))
 	})
 
 	it('=> (greater than or equal to)', () => {
-		expect(parseQualifier('{a >= b}')).to.deep.equal(qualification('gte', 'a', 'b'))
+		expect(parseQualifier('{a >= b}')).toEqual(qualification('gte', 'a', 'b'))
 	})
 })
 
 describe('qualifiers can use boolean logic', () => {
 	it('can be separated by &', () => {
-		expect(parseQualifier('{a = b & c = d}')).to.deep.equal(boolean('and', [
+		expect(parseQualifier('{a = b & c = d}')).toEqual(boolean('and', [
 			qualification('eq', 'a', 'b'),
 			qualification('eq', 'c', 'd'),
 		]))
 	})
 	it('can be separated by |', () => {
-		expect(parseQualifier('{a = b | c = d}')).to.deep.equal(boolean('or', [
+		expect(parseQualifier('{a = b | c = d}')).toEqual(boolean('or', [
 			qualification('eq', 'a', 'b'),
 			qualification('eq', 'c', 'd'),
 		]))
 	})
 	it('can used in boolean logic: a & b | c', () => {
-		expect(parseQualifier('{a = b & c = d | c = e}')).to.deep.equal(boolean('or', [
+		expect(parseQualifier('{a = b & c = d | c = e}')).toEqual(boolean('or', [
 			boolean('and', [
 				qualification('eq', 'a', 'b'),
 				qualification('eq', 'c', 'd'),
@@ -120,7 +119,7 @@ describe('qualifiers can use boolean logic', () => {
 		]))
 	})
 	it('can used in boolean logic: a | b & c', () => {
-		expect(parseQualifier('{a = b | c = d & c = e}')).to.deep.equal(boolean('or', [
+		expect(parseQualifier('{a = b | c = d & c = e}')).toEqual(boolean('or', [
 			qualification('eq', 'a', 'b'),
 			boolean('and', [
 				qualification('eq', 'c', 'd'),
@@ -129,7 +128,7 @@ describe('qualifiers can use boolean logic', () => {
 		]))
 	})
 	it('boolean logic can be overridden by parens: (a | b) & c', () => {
-		expect(parseQualifier('{ dept = THEAT & (num = 233 | num = 253) }')).to.deep.equal(boolean('and', [
+		expect(parseQualifier('{ dept = THEAT & (num = 233 | num = 253) }')).toEqual(boolean('and', [
 			qualification('eq', 'dept', 'THEAT'),
 			boolean('or', [
 				qualification('eq', 'num', 233),
@@ -140,13 +139,13 @@ describe('qualifiers can use boolean logic', () => {
 
 
 	it('value may be a boolean and-list', () => {
-		expect(parseQualifier('{ dept = THEAT & (num = (233 & 253) ) }')).to.deep.equal(boolean('and', [
+		expect(parseQualifier('{ dept = THEAT & (num = (233 & 253) ) }')).toEqual(boolean('and', [
 			qualification('eq', 'dept', 'THEAT'),
 			qualification('eq', 'num', boolean('and', [ 233, 253 ])),
 		]))
 	})
 	it('value may be a boolean or-list', () => {
-		expect(parseQualifier('{ dept = THEAT & (num = (233 | 253) ) }')).to.deep.equal(boolean('and', [
+		expect(parseQualifier('{ dept = THEAT & (num = (233 | 253) ) }')).toEqual(boolean('and', [
 			qualification('eq', 'dept', 'THEAT'),
 			qualification('eq', 'num', boolean('or', [ 233, 253 ])),
 		]))
@@ -174,7 +173,7 @@ describe('nested qualifiers', () => {
 			},
 		}
 
-		expect(parseQualifier('{ year = max (year) from courses where {gereqs=year} }')).to.deep.equal(expected)
-		expect(parseQualifier('{ year = max(year) from courses where {gereqs=year} }')).to.deep.equal(expected)
+		expect(parseQualifier('{ year = max (year) from courses where {gereqs=year} }')).toEqual(expected)
+		expect(parseQualifier('{ year = max(year) from courses where {gereqs=year} }')).toEqual(expected)
 	})
 })

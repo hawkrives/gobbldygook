@@ -1,57 +1,59 @@
-import { expect } from 'chai'
 import { customParser } from './parse-hanson-string.support'
 const parseReference = customParser({ allowedStartRules: [ 'Reference' ] })
 const parseRequirementTitle = customParser({ allowedStartRules: [ 'RequirementTitle' ] })
 
 describe('ReferenceExpression', () => {
 	it('can reference a requirement', () => {
-		expect(parseReference('BTS-B')).to.deep.equal({
+		expect(parseReference('BTS-B')).toEqual({
 			$type: 'reference',
 			$requirement: 'BTS-B',
 		})
 	})
 
 	it('handles a full requirement title', () => {
-		expect(parseReference('Biblical Studies (BTS-B)')).to
-			.have.property('$requirement', 'Biblical Studies (BTS-B)')
+		const actual = parseReference('Biblical Studies (BTS-B)')
+		expect(actual.$requirement).toBeDefined()
+		expect(actual.$requirement).toBe('Biblical Studies (BTS-B)')
 	})
 
 	it('returns a full requirement title when given an abbreviation', () => {
-		expect(parseReference('BTS-B', { abbreviations: { 'BTS-B': 'Biblical Studies (BTS-B)' } })).to
-			.have.property('$requirement', 'Biblical Studies (BTS-B)')
+		const actual = parseReference('BTS-B', { abbreviations: { 'BTS-B': 'Biblical Studies (BTS-B)' } })
+		expect(actual.$requirement).toBeDefined()
+		expect(actual.$requirement).toBe('Biblical Studies (BTS-B)')
 	})
 
 	it('returns a full requirement title when given the title-minus-abbreviation', () => {
-		expect(parseReference('Biblical Studies', { titles: { 'Biblical Studies': 'Biblical Studies (BTS-B)' } })).to
-			.have.property('$requirement', 'Biblical Studies (BTS-B)')
+		const actual = parseReference('Biblical Studies', { titles: { 'Biblical Studies': 'Biblical Studies (BTS-B)' } })
+		expect(actual.$requirement).toBeDefined()
+		expect(actual.$requirement).toBe('Biblical Studies (BTS-B)')
 	})
 })
 
 describe('titles may include', () => {
 	it('letters "A-Z"', () => {
-		expect(() => parseRequirementTitle('ABC')).not.to.throw()
-		expect(() => parseRequirementTitle('A')).not.to.throw()
+		expect(() => parseRequirementTitle('ABC')).not.toThrow()
+		expect(() => parseRequirementTitle('A')).not.toThrow()
 	})
 
 	it('numbers "0-9"', () => {
-		expect(() => parseRequirementTitle('A0')).not.to.throw()
-		expect(() => parseRequirementTitle('0')).not.to.throw()
-		expect(() => parseRequirementTitle('0A')).not.to.throw()
+		expect(() => parseRequirementTitle('A0')).not.toThrow()
+		expect(() => parseRequirementTitle('0')).not.toThrow()
+		expect(() => parseRequirementTitle('0A')).not.toThrow()
 	})
 
 	it('hyphen "-"', () => {
-		expect(() => parseRequirementTitle('ABC-D')).not.to.throw()
+		expect(() => parseRequirementTitle('ABC-D')).not.toThrow()
 	})
 
 	it('underscore "_"', () => {
-		expect(() => parseRequirementTitle('ABC_D')).not.to.throw()
+		expect(() => parseRequirementTitle('ABC_D')).not.toThrow()
 	})
 
 	it('may only begin with a letter or number', () => {
-		expect(() => parseRequirementTitle('0A')).not.to.throw()
-		expect(() => parseRequirementTitle('A0')).not.to.throw()
-		expect(() => parseRequirementTitle('_A0')).to.throw('SyntaxError: Expected [A-Z0-9] but "_" found.')
-		expect(() => parseRequirementTitle('-A0')).to.throw('SyntaxError: Expected [A-Z0-9] but "-" found.')
+		expect(() => parseRequirementTitle('0A')).not.toThrow()
+		expect(() => parseRequirementTitle('A0')).not.toThrow()
+		expect(() => parseRequirementTitle('_A0')).toThrow('SyntaxError: Expected [A-Z0-9] but "_" found.')
+		expect(() => parseRequirementTitle('-A0')).toThrow('SyntaxError: Expected [A-Z0-9] but "-" found.')
 		expect(parseRequirementTitle('A0')).to.equal('A0')
 	})
 })
