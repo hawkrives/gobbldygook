@@ -1,5 +1,4 @@
 /* global WorkerGlobalScope */
-import Bluebird from 'bluebird'
 import {map} from 'lodash'
 import {filter} from 'lodash'
 import {round} from 'lodash'
@@ -23,7 +22,7 @@ function tryEvaluate(student, area) {
 }
 
 function checkStudentAgainstArea(student, area) {
-	return new Bluebird(resolve => {
+	return new Promise(resolve => {
 		if (!area || area._error || !area._area) {
 			log('checkStudentAgainstArea:', (area ? area._error : 'area is null'), area)
 			resolve(area)

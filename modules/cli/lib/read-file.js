@@ -3,10 +3,9 @@ import {status, json, text} from 'modules/lib/fetch-helpers'
 
 import {startsWith} from 'lodash'
 import yaml from 'js-yaml'
+import pify from 'pify'
 
-import Promise from 'bluebird'
-import fsCallbacks from 'graceful-fs'
-const fs = Promise.promisifyAll(fsCallbacks)
+const fs = pify(require('graceful-fs'))
 
 export function loadFile(pathOrUrl) {
 	return startsWith(pathOrUrl, 'http')

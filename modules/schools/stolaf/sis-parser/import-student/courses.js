@@ -1,4 +1,3 @@
-import Bluebird from 'bluebird'
 import {map} from 'lodash'
 import {
 	fetchHtml,
@@ -54,5 +53,5 @@ function getCourses(studentId, term) {
 
 
 export function collectAllCourses(studentId, terms) {
-	return Bluebird.all(map(terms, term => getCourses(studentId, term)))
+	return Promise.all(map(terms, term => getCourses(studentId, term)))
 }

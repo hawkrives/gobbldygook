@@ -1,11 +1,3 @@
-// Set up the default promise implementation as Bluebird
-import Bluebird from 'bluebird'
-Bluebird.config({
-	warnings: {
-		wForgottenReturn: false,
-	},
-})
-
 // Include fetch
 import 'whatwg-fetch'
 

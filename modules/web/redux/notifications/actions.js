@@ -1,5 +1,5 @@
-import Bluebird from 'bluebird'
 import debug from 'debug'
+import delay from 'delay'
 const log = debug('web:redux:notifications')
 
 import {
@@ -15,7 +15,7 @@ export function removeNotification(id, delayBy = 0) {
 	if (delayBy) {
 		return {
 			type: REMOVE_NOTIFICATION,
-			payload: Bluebird.delay(delayBy, { id }),
+			payload: delay(delayBy, { id }),
 		}
 	}
 	return { type: REMOVE_NOTIFICATION, payload: { id } }

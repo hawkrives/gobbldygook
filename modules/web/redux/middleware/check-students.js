@@ -1,5 +1,4 @@
 // @flow
-import Bluebird from 'bluebird'
 import type {Middleware} from 'redux'
 
 import * as studentConstants from '../students/constants'
@@ -84,7 +83,7 @@ const checkStudentsMiddleware: Middleware = store => next => action => {
 	const promises = map(affectedStudents, s =>
 		store.dispatch(checkStudent(s.data.present.id)))
 
-	return Bluebird.all(promises).then(() => result)
+	return Promise.all(promises).then(() => result)
 }
 
 export default checkStudentsMiddleware

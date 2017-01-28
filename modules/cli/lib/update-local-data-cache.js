@@ -11,9 +11,9 @@ import {
 } from './read-file'
 import {cacheDir} from './dirs'
 
-import Promise from 'bluebird'
-import fsCallbacks from 'graceful-fs'
-const fs = Promise.promisifyAll(fsCallbacks)
+import pify from 'pify'
+
+const fs = pify(require('graceful-fs'))
 
 const COURSE_INFO_LOCATION = process.env.COURSE_INFO || 'https://stolaf.edu/people/rives/courses/info.json'
 // const AREA_INFO_LOCATION = process.env.AREA_INFO || 'https://stolaf.edu/people/rives/areas/info.json'

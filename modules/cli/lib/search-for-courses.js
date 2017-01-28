@@ -17,9 +17,8 @@ import path from 'path'
 import {quacksLikeDeptNum} from 'modules/schools/stolaf'
 import {splitDeptNum} from 'modules/schools/stolaf'
 
-import Promise from 'bluebird'
-import fsCallbacks from 'graceful-fs'
-const fs = Promise.promisifyAll(fsCallbacks)
+import pify from 'pify'
+const fs = pify(require('graceful-fs'))
 
 function getDeptNumsFromRiddles(r) {
 	if (isString(r) && quacksLikeDeptNum(r)) {

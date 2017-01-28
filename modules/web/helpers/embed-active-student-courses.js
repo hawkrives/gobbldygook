@@ -1,4 +1,3 @@
-import Bluebird from 'bluebird'
 import {filter} from 'lodash'
 import {map} from 'lodash'
 import {fromPairs} from 'lodash'
@@ -20,12 +19,12 @@ export function embedActiveStudentCourses(student, {cache=[]}) {
 			return cache[clbid] || getCourse({clbid, term: parseInt(`${schedule.year}${schedule.semester}`)}, student.fabrications)
 		})
 
-		return Bluebird.all(courses).then(fulfilledCourses => {
+		return Promise.all(courses).then(fulfilledCourses => {
 			return [schedule.id, {...schedule, courses: fulfilledCourses}]
 		})
 	})
 
-	return Bluebird.all(enhanced).then(fulfilled => {
+	return Promise.all(enhanced).then(fulfilled => {
 		return fromPairs(fulfilled)
 	})
 }

@@ -1,4 +1,3 @@
-const Bluebird = require('bluebird')
 const uniqueId = require('lodash/uniqueId')
 import {status, text} from 'modules/lib'
 import debug from 'debug'
@@ -24,7 +23,7 @@ worker.onmessage = ({data: [resultId, type, actionInfo]}) => {
 }
 
 function loadDataFile(url) {
-	return new Bluebird(async resolve => {
+	return new Promise((resolve, reject) => {
 		const sourceId = uniqueId()
 		const cachebuster = Date.now()
 
@@ -44,14 +43,19 @@ function loadDataFile(url) {
 
 		worker.addEventListener('message', onMessage)
 
-		let path = await fetch(url).then(status).then(text)
-		path = path.trim()
-		worker.postMessage([sourceId, `${path}/info.json?${cachebuster}`, path])
+		fetch(url)
+			.then(status)
+			.then(text)
+			.then(path => path.trim())
+			.then(path => {
+				worker.postMessage([sourceId, `${path}/info.json?${cachebuster}`, path])
+			})
+			.catch(reject)
 	})
 }
 
 export function checkSupport() {
-	return new Bluebird(async resolve => {
+	return new Promise(resolve => {
 		let sourceId = '__check-idb-worker-support'
 		// This is inside of the function so that it doesn't get unregistered too early
 		function onMessage({data: [resultId, type, contents]}) {
@@ -78,9 +82,9 @@ export default function loadData() {
 	]
 
 	if (navigator.onLine) {
-		return Bluebird.map(infoFiles, loadDataFile)
+		return Promise.all(infoFiles.map(loadDataFile))
 	}
 	else {
-		return Bluebird.resolve(null)
+		return Promise.resolve(null)
 	}
 }

@@ -1,4 +1,3 @@
-import Bluebird from 'bluebird'
 import loadArea from './load-area'
 import {map} from 'lodash'
 import debug from 'debug'
@@ -8,5 +7,5 @@ export function getStudentStudies(student, {cache=[], cacheOnly=false}) {
 	const promises = map(student.studies,
 		study => loadArea(study, {cache, cacheOnly}).catch(err => log(err)))
 
-	return Bluebird.all(promises)
+	return Promise.all(promises)
 }

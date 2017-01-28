@@ -1,4 +1,3 @@
-import Bluebird from 'bluebird'
 import {includes} from 'lodash'
 import {filter} from 'lodash'
 import {head} from 'lodash'
@@ -39,7 +38,7 @@ const sortKeys = key => {
 }
 
 function queryStore(query) {
-	return new Bluebird((resolvePromise, rejectPromise) => {
+	return new Promise((resolvePromise, rejectPromise) => {
 		// Take a query object.
 		// Grab a key out of it to operate on an index.
 		// Set up a range from the low and high value from the values for that key.
@@ -76,7 +75,7 @@ function queryStore(query) {
 				indexName => this.index(indexName).query(query, true))
 
 			// Wait for all indices to finish querying before getting their results
-			const allFoundKeys = Bluebird.all(resultPromises)
+			const allFoundKeys = Promise.all(resultPromises)
 
 			// Once we have the primary keys, we need to fetch the actual data:
 			let allValues = allFoundKeys
@@ -121,7 +120,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 	let name = this.name
 	log(query)
 
-	return new Bluebird((resolvePromise, rejectPromise) => {
+	return new Promise((resolvePromise, rejectPromise) => {
 		// - takes a query object
 		// - filters down the props to just the current index's name
 		// - if there aren't any keys to look for under the current index, return []

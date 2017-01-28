@@ -1,4 +1,3 @@
-import Bluebird from 'bluebird'
 import {uniqueId} from 'lodash'
 import debug from 'debug'
 const log = debug('worker:check-student-against-area')
@@ -18,7 +17,7 @@ worker.onerror = msg => log('[main] received error from check-student worker:', 
  * @fulfill {Object} - The details of the area check.
  */
 export const checkStudentAgainstArea = student => area => {
-	return new Bluebird(resolve => {
+	return new Promise(resolve => {
 		const sourceId = uniqueId()
 
 		// This is inside of the function so that it doesn't get unregistered too early

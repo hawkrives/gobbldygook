@@ -1,6 +1,5 @@
 // @flow
 import type {Dispatch, Action, State} from 'redux'
-import Bluebird from 'bluebird'
 import db from '../../../helpers/db'
 import {map} from 'lodash'
 import loadArea from '../../../helpers/load-area'
@@ -29,7 +28,7 @@ export function refreshAreas() {
 		dispatch(loadingAreas())
 		const areas = getState().areas.data
 		dispatch({ type: START_LOAD_AREAS, payload: areas })
-		const areaPromises = Bluebird.all(map(areas, loadArea))
+		const areaPromises = Promise.all(map(areas, loadArea))
 		return dispatch({ type: REFRESH_AREAS, payload: areaPromises })
 	}
 }

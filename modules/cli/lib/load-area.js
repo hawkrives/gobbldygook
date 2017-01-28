@@ -1,4 +1,4 @@
-import bluebird from 'bluebird'
+import pify from 'pify'
 import yaml from 'js-yaml'
 import {enhance} from 'modules/hanson-format'
 import {map} from 'lodash'
@@ -6,7 +6,7 @@ import {filter} from 'lodash'
 import {find} from 'lodash'
 import {maxBy} from 'lodash'
 import findAreas from './find-areas'
-const fs = bluebird.promisifyAll(require('graceful-fs'))
+const fs = pify(require('graceful-fs'))
 
 export async function getArea({name, type, revision}) {
 	type = type.toLowerCase()

@@ -1,6 +1,5 @@
-import bluebird from 'bluebird'
-let fs = require('graceful-fs')
-fs = bluebird.promisifyAll(fs)
+import pify from 'pify'
+const fs = pify(require('graceful-fs'))
 import nom from 'nomnom'
 import path from 'path'
 import Mocha, {Test} from 'mocha'

@@ -1,8 +1,7 @@
-import Bluebird from 'bluebird'
-
 import 'whatwg-fetch'
 import {status, json, text} from 'modules/lib/fetch-helpers'
 import serializeError from 'serialize-error'
+import PQueue from 'p-queue'
 
 import range from 'idb-range'
 import {
@@ -283,7 +282,7 @@ async function loadFiles(url, infoFileBase) {
 	}
 
 	// For each file, see if it needs loading.
-	const fileNeedsLoading = await Bluebird.map(filesToLoad, file => needsUpdate(type, file.path, file.hash))
+	const fileNeedsLoading = await Promise.all(filesToLoad.map(file => needsUpdate(type, file.path, file.hash)))
 
 	// Cross-reference each file to load with the list of files that need loading
 	filesToLoad = filter(filesToLoad, (file, index) => fileNeedsLoading[index])
@@ -298,10 +297,11 @@ async function loadFiles(url, infoFileBase) {
 
 	// Load them into the database
 	try {
-		await Bluebird.map(
-			filesToLoad,
-			file => updateDatabase(type, infoFileBase, notificationId, file),
-			{concurrency: 2})
+		const q = new PQueue({concurrency: 2})
+		filesToLoad.forEach(file => {
+			q.add(() => updateDatabase(type, infoFileBase, notificationId, file))
+		})
+		await q.onEmpty()
 	}
 	catch (err) {
 		throw err
@@ -310,7 +310,7 @@ async function loadFiles(url, infoFileBase) {
 	// Clean up the database a bit
 	try {
 		if (type === 'areas') {
-			removeDuplicateAreas()
+			await removeDuplicateAreas()
 		}
 	}
 	catch (err) {
