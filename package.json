@@ -47,6 +47,7 @@
     "copy": "rimraf build && mkdirp build/ && cpy \"modules/web/static/*\" build/",
     "cover": "npm run run-coverage && npm run view-coverage",
     "deploy": "bash scripts/deploy.sh",
+    "flow": "flow check",
     "lint": "eslint *.js modules/",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
     "start": "npm run copy && cross-env NODE_ENV=development webpack-dev-server --config .webpackrc.js --progress",

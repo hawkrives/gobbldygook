@@ -43,6 +43,7 @@ node_js: 7
 
 script:
   - yarn run lint
+  - yarn run flow
   - yarn run test -- --coverage --runInBand
   - yarn run build-ci
 
