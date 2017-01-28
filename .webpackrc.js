@@ -256,7 +256,7 @@ const config = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules\/(?!preact-compat|p-.*\/).*/,
+				exclude: /node_modules\/(?!p-.*\/).*/,
 				use: [ { loader: 'babel-loader', options: { cacheDirectory: true } } ],
 			},
 			{
