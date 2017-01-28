@@ -7,10 +7,10 @@ let before = global.before || global.beforeAll
 let after = global.after || global.afterAll
 
 describe('prepareStudentForSave', () => {
-	before(() => {
+	beforeAll(() => {
 		global.encodeURIComponent = require('querystring').stringify
 	})
-	after(() => {
+	afterAll(() => {
 		global.encodeURIComponent = oldEncode
 	})
 
