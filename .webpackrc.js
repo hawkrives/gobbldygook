@@ -17,6 +17,7 @@ const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
 
 const isProduction = (process.env.NODE_ENV === 'production')
 const isDevelopment = (process.env.NODE_ENV === 'development')
@@ -250,6 +251,8 @@ const config = {
 				},
 			},
 		}),
+
+		new ChunkManifestPlugin(),
 	],
 
 	module: {
