@@ -2270,7 +2270,7 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-extract-text-webpack-plugin@2.2.0-rc.1:
+extract-text-webpack-plugin@2.0.0-rc.1:
   version "2.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-2.0.0-rc.1.tgz#4d31550bdb3fd747008efa31d2150422128a3703"
   dependencies:
