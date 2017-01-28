@@ -174,7 +174,7 @@
     "node-sass": "4.3.0",
     "nyc": "10.1.0",
     "pegjs": "0.10.0",
-    "prettier": "0.0.10",
+    "prettier": "0.13.1",
     "react-addons-perf": "15.4.2",
     "react-addons-test-utils": "15.4.2",
     "redux-devtools": "3.3.2",
