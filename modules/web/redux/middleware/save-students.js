@@ -1,5 +1,6 @@
 import Bluebird from 'bluebird'
 import * as studentActions from '../students/constants'
+import {ActionTypes as UndoableActionTypes} from 'redux-undo'
 import {filter} from 'lodash'
 import {includes} from 'lodash'
 import {map} from 'lodash'
@@ -31,6 +32,8 @@ const whitelist = [
 	studentActions.REMOVE_OVERRIDE,
 	studentActions.ADD_FABRICATION,
 	studentActions.REMOVE_FABRICATION,
+	UndoableActionTypes.UNDO,
+	UndoableActionTypes.REDO,
 ]
 export const shouldTakeAction = ({type}) => {
 	return includes(whitelist, type)
