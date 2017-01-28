@@ -9,5 +9,5 @@ import type { Course } from './types'
  * @returns {number} - the sum of the 'credits' properties
  */
 export function countCredits(courses: Course[]=[]) {
-  return sumBy(courses, 'credits') || 0
+	return sumBy(courses, 'credits') || 0
 }

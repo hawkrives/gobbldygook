@@ -7,14 +7,14 @@ import includes from 'lodash/includes'
 import type { Course, CourseExpression } from './types'
 
 const baseKeys = [
-  'department',
-  'international',
-  'level',
-  'number',
-  'section',
-  'semester',
-  'type',
-  'year',
+	'department',
+	'international',
+	'level',
+	'number',
+	'section',
+	'semester',
+	'type',
+	'year',
 ]
 
 /**
@@ -27,9 +27,9 @@ const baseKeys = [
  * @returns {boolean} - if lhs was a wildcard
  */
 function wildcard(lhs) {
-  if (lhs === '*') {
-    return true
-  }
+	if (lhs === '*') {
+		return true
+	}
 }
 
 /**
@@ -41,8 +41,8 @@ function wildcard(lhs) {
  */
 export default function compareCourseToCourse(query: CourseExpression | Course, other: CourseExpression | Course) {
 	// TODO: Remove the need to cast as `any` here
-  query = (query: any).$course || query
-  other = (other: any).$course || other
+	query = (query: any).$course || query
+	other = (other: any).$course || other
 
 	// If the query is more specific than the one being compared to, and
 	// things don't match, return false.
@@ -56,9 +56,9 @@ export default function compareCourseToCourse(query: CourseExpression | Course, 
 	// this should accomplish the same effect as
 	// `intersection(keys(query), baseKeys)`,
 	// but it benchmarks quite a bit faster.
-  const keysToCheck = filter(keys(query), key => includes(baseKeys, key))
+	const keysToCheck = filter(keys(query), key => includes(baseKeys, key))
 
 	// We only check the specified keys.
 	// If any of them are not equal, we return false.
-  return every(keysToCheck, key => isEqualWith(query[key], other[key], wildcard))
+	return every(keysToCheck, key => isEqualWith(query[key], other[key], wildcard))
 }

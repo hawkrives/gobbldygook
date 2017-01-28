@@ -6,19 +6,19 @@ import { buildDeptString } from 'modules/schools/stolaf'
 import './expression--course.scss'
 
 export default function CourseExpression(props) {
-  const department = buildDeptString(props.department)
+	const department = buildDeptString(props.department)
 
-  const international = props.international &&
+	const international = props.international &&
 		<span className="course--international">I</span>
-  const lab = props.lab || props.type === 'Lab' &&
+	const lab = props.lab || props.type === 'Lab' &&
 		<span className="course--lab">L</span>
 
-  const section = props.section && props.section !== '*' &&
+	const section = props.section && props.section !== '*' &&
 		<span className="course--section">[{props.section}]</span>
 
-  const year = props.year &&
+	const year = props.year &&
 		<span className="course--year">{props.year}</span>
-  const semester = props.semester &&
+	const semester = props.semester &&
 		<span className="course--semester">
 			{props.semester === '*'
 				? 'ANY'
@@ -27,13 +27,13 @@ export default function CourseExpression(props) {
 
 	/////
 
-  const temporalIdentifiers = (semester || year) &&
+	const temporalIdentifiers = (semester || year) &&
 		(<div className="temporal">
 			{semester}
 			{year}
 		</div>)
 
-  return (
+	return (
 		<span className={cx('course', { matched: props._result, taken: props._taken })} style={props.style}>
 			<div className="basic-identifiers">
 				<span className="course--department">{department}</span>
@@ -47,20 +47,20 @@ export default function CourseExpression(props) {
 			</div>
 			{temporalIdentifiers}
 		</span>
-  )
+	)
 }
 
 CourseExpression.propTypes = {
-  _result: PropTypes.bool,
-  _taken: PropTypes.bool,
-  department: PropTypes.arrayOf(PropTypes.string).isRequired,
-  international: PropTypes.bool,
-  lab: PropTypes.bool,
-  level: PropTypes.number,
-  number: PropTypes.number,
-  section: PropTypes.string,
-  semester: PropTypes.number,
-  style: PropTypes.object,
-  type: PropTypes.string,
-  year: PropTypes.number,
+	_result: PropTypes.bool,
+	_taken: PropTypes.bool,
+	department: PropTypes.arrayOf(PropTypes.string).isRequired,
+	international: PropTypes.bool,
+	lab: PropTypes.bool,
+	level: PropTypes.number,
+	number: PropTypes.number,
+	section: PropTypes.string,
+	semester: PropTypes.number,
+	style: PropTypes.object,
+	type: PropTypes.string,
+	year: PropTypes.number,
 }

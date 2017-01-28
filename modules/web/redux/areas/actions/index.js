@@ -11,23 +11,23 @@ import {
 } from '../constants'
 
 export function loadingAreas(): {type: string} {
-  return { type: LOADING_AREAS }
+	return { type: LOADING_AREAS }
 }
 
 export function loadAllAreas() {
-  return (dispatch: () => {}) => {
-    dispatch(loadingAreas())
-    const areasPromise = db.store('areas').getAll()
-    return dispatch({ type: LOAD_ALL_AREAS, payload: areasPromise })
-  }
+	return (dispatch: () => {}) => {
+		dispatch(loadingAreas())
+		const areasPromise = db.store('areas').getAll()
+		return dispatch({ type: LOAD_ALL_AREAS, payload: areasPromise })
+	}
 }
 
 export function refreshAreas() {
-  return (dispatch: () => {}, getState: () => any) => {
-    dispatch(loadingAreas())
-    const areas = getState().areas.data
-    dispatch({ type: START_LOAD_AREAS, payload: areas })
-    const areaPromises = Promise.all(map(areas, loadArea))
-    return dispatch({ type: REFRESH_AREAS, payload: areaPromises })
-  }
+	return (dispatch: () => {}, getState: () => any) => {
+		dispatch(loadingAreas())
+		const areas = getState().areas.data
+		dispatch({ type: START_LOAD_AREAS, payload: areas })
+		const areaPromises = Promise.all(map(areas, loadArea))
+		return dispatch({ type: REFRESH_AREAS, payload: areaPromises })
+	}
 }

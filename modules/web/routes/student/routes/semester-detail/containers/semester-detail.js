@@ -13,35 +13,35 @@ import './semester-detail.scss'
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class SemesterDetail extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    location: PropTypes.shape({ // react-router
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-    }),
-    params: PropTypes.object, // react-router
-    student: PropTypes.object,
-  };
+	static propTypes = {
+		className: PropTypes.string,
+		location: PropTypes.shape({ // react-router
+			pathname: PropTypes.string,
+			search: PropTypes.string,
+		}),
+		params: PropTypes.object, // react-router
+		student: PropTypes.object,
+	};
 
-  constructor() {
-    super()
-    this.state = {
-      year: null,
-      semester: null,
-      schedules: [],
-    }
-  }
+	constructor() {
+		super()
+		this.state = {
+			year: null,
+			semester: null,
+			schedules: [],
+		}
+	}
 
-  render() {
-    log('SemesterDetail#render')
-    const { year, semester } = this.props.params
-    const student = this.props.student.data.present
+	render() {
+		log('SemesterDetail#render')
+		const { year, semester } = this.props.params
+		const student = this.props.student.data.present
 
-    const schedules = map(
+		const schedules = map(
 			filter(student.schedules, isCurrentSemester(year, semester)),
 			sched => omit(sched, 'courses'))
 
-    return (
+		return (
 			<DocumentTitle title={`${semesterName(semester)} ${year} • ${student.name} | Gobbldygook`}>
 				<div className={cx('semester-detail', this.props.className)}>
 					<pre>
@@ -50,6 +50,6 @@ export default class SemesterDetail extends Component {
 					</pre>
 				</div>
 			</DocumentTitle>
-    )
-  }
+		)
+	}
 }

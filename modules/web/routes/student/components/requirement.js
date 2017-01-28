@@ -15,35 +15,35 @@ import ResultIndicator from './result-indicator'
 import './requirement.scss'
 
 export function Requirement(props) {
-  const {
+	const {
 		topLevel = false,
 	} = props
-  const childKeys = filter(keys(props), isRequirementName)
+	const childKeys = filter(keys(props), isRequirementName)
 
-  const wasEvaluated = props.result && props.result._checked
-  const computationClassName = wasEvaluated ? props.computed ? 'result-success' : 'result-failure' : ''
-  const status = <ResultIndicator result={props.computed} />
+	const wasEvaluated = props.result && props.result._checked
+	const computationClassName = wasEvaluated ? props.computed ? 'result-success' : 'result-failure' : ''
+	const status = <ResultIndicator result={props.computed} />
 
-  const extraClasses = [ props.overridden ? 'overridden' : '' ]
+	const extraClasses = [ props.overridden ? 'overridden' : '' ]
 
-  const result = props.result && (
+	const result = props.result && (
 		<div className="result">
 			<Expression expr={props.result} ctx={props} />
 		</div>
 	)
 
-  const message = props.message &&
+	const message = props.message &&
 		<p className="message">{props.message}</p>
-  const description = props.description &&
+	const description = props.description &&
 		<p className="description">{props.description}</p>
 
-  const filterEl = props.filter && (
+	const filterEl = props.filter && (
 		<div className="filter">
 			Filter: <Filter expr={props.filter} ctx={props} />
 		</div>
 	)
 
-  const title = !topLevel && (
+	const title = !topLevel && (
 		<h2 className="heading" title={props.name} onClick={props.onToggleOpen}>
 			<span className="title">
 				{' '}{props.name}
@@ -58,31 +58,31 @@ export function Requirement(props) {
 		</h2>
 	)
 
-  const children = map(childKeys, key =>
+	const children = map(childKeys, key =>
 		<ExpandableRequirement key={key}
-  name={key}
-  {...props[key]}
-  path={props.path.concat(key)}
-  onAddOverride={props.onAddOverride}
-  onToggleOverride={props.onToggleOverride}
-  onRemoveOverride={props.onRemoveOverride}
+			name={key}
+			{...props[key]}
+			path={props.path.concat(key)}
+			onAddOverride={props.onAddOverride}
+			onToggleOverride={props.onToggleOverride}
+			onRemoveOverride={props.onRemoveOverride}
 		/>)
 
-  const overrideButtons = (props.message && !props.result) && (
+	const overrideButtons = (props.message && !props.result) && (
 		<span className="required-override-buttons button-group">
 			<Button onClick={ev => props.onRemoveOverride(props.path, ev)} type="flat">Not yet…</Button>
 			<Button onClick={ev => props.onAddOverride(props.path, ev)} type="flat">Done!</Button>
 		</span>
 	)
 
-  let className = [
-    'requirement',
-    extraClasses.join(' '),
-    computationClassName,
-    props.isOpen ? 'is-open' : 'is-closed',
-  ].join(' ')
+	let className = [
+		'requirement',
+		extraClasses.join(' '),
+		computationClassName,
+		props.isOpen ? 'is-open' : 'is-closed',
+	].join(' ')
 
-  return (
+	return (
 		<div className={className}>
 			{title}
 			{description}
@@ -94,38 +94,38 @@ export function Requirement(props) {
 				? <div className="children">{children}</div>
 				: null}
 		</div>
-  )
+	)
 }
 Requirement.propTypes = {
-  computed: PropTypes.bool,
-  description: PropTypes.string,
-  filter: PropTypes.object,
-  isOpen: PropTypes.bool,
-  message: PropTypes.string,
-  name: PropTypes.string,
-  onAddOverride: PropTypes.func.isRequired,
-  onRemoveOverride: PropTypes.func.isRequired,
-  onToggleOpen: PropTypes.func.isRequired,
-  onToggleOverride: PropTypes.func.isRequired,
-  overridden: PropTypes.bool,
-  path: PropTypes.array.isRequired,
-  result: PropTypes.object,
-  topLevel: PropTypes.bool,
+	computed: PropTypes.bool,
+	description: PropTypes.string,
+	filter: PropTypes.object,
+	isOpen: PropTypes.bool,
+	message: PropTypes.string,
+	name: PropTypes.string,
+	onAddOverride: PropTypes.func.isRequired,
+	onRemoveOverride: PropTypes.func.isRequired,
+	onToggleOpen: PropTypes.func.isRequired,
+	onToggleOverride: PropTypes.func.isRequired,
+	overridden: PropTypes.bool,
+	path: PropTypes.array.isRequired,
+	result: PropTypes.object,
+	topLevel: PropTypes.bool,
 }
 Requirement.defaultProps = {
-  onToggleOpen: () => {},
+	onToggleOpen: () => {},
 }
 
 export default class ExpandableRequirement extends Component {
-  state = {
-    open: true,
-  };
+	state = {
+		open: true,
+	};
 
-  handleToggleOpen = () => {
-    this.setState({ open: !this.state.open })
-  };
+	handleToggleOpen = () => {
+		this.setState({ open: !this.state.open })
+	};
 
-  render() {
-    return <Requirement {...this.props} isOpen={this.state.open} onToggleOpen={this.handleToggleOpen} />
-  }
+	render() {
+		return <Requirement {...this.props} isOpen={this.state.open} onToggleOpen={this.handleToggleOpen} />
+	}
 }

@@ -11,107 +11,107 @@ import { setOverride, removeOverride } from 'modules/web/redux/students/actions/
 import GraduationStatus from '../components/graduation-status'
 
 class GraduationStatusContainer extends Component {
-  static propTypes = {
-    addArea: PropTypes.func.isRequired, // redux
-    allAreas: PropTypes.array.isRequired, // redux
-    changeGraduation: PropTypes.func.isRequired, // redux
-    changeMatriculation: PropTypes.func.isRequired, // redux
-    changeName: PropTypes.func.isRequired, // redux
-    removeArea: PropTypes.func.isRequired, // redux
-    removeOverride: PropTypes.func.isRequired, // redux
-    setOverride: PropTypes.func.isRequired, // redux
-    student: PropTypes.object.isRequired,
-  };
+	static propTypes = {
+		addArea: PropTypes.func.isRequired, // redux
+		allAreas: PropTypes.array.isRequired, // redux
+		changeGraduation: PropTypes.func.isRequired, // redux
+		changeMatriculation: PropTypes.func.isRequired, // redux
+		changeName: PropTypes.func.isRequired, // redux
+		removeArea: PropTypes.func.isRequired, // redux
+		removeOverride: PropTypes.func.isRequired, // redux
+		setOverride: PropTypes.func.isRequired, // redux
+		student: PropTypes.object.isRequired,
+	};
 
-  state = {
-    showAreaPickerFor: {},
-  };
+	state = {
+		showAreaPickerFor: {},
+	};
 
-  handleInitiateAddArea = (type, ev) => {
-    ev.stopPropagation()
-    ev.preventDefault()
-    this.setState(state => ({
-      showAreaPickerFor: { ...state.showAreaPickerFor, [type]: true },
-    }))
-  };
+	handleInitiateAddArea = (type, ev) => {
+		ev.stopPropagation()
+		ev.preventDefault()
+		this.setState(state => ({
+			showAreaPickerFor: { ...state.showAreaPickerFor, [type]: true },
+		}))
+	};
 
-  handleEndAddArea = (type, ev) => {
-    ev.stopPropagation()
-    ev.preventDefault()
-    this.setState(state => ({
-      showAreaPickerFor: { ...state.showAreaPickerFor, [type]: false },
-    }))
-  };
+	handleEndAddArea = (type, ev) => {
+		ev.stopPropagation()
+		ev.preventDefault()
+		this.setState(state => ({
+			showAreaPickerFor: { ...state.showAreaPickerFor, [type]: false },
+		}))
+	};
 
-  handleAddArea = (area, ev) => {
-    ev.stopPropagation()
-    ev.preventDefault()
-    this.props.addArea(this.props.student.id, area)
-  };
+	handleAddArea = (area, ev) => {
+		ev.stopPropagation()
+		ev.preventDefault()
+		this.props.addArea(this.props.student.id, area)
+	};
 
-  handleAddOverride = (path, ev) => {
-    ev.stopPropagation()
-    ev.preventDefault()
-    const codifiedPath = pathToOverride(path)
-    this.props.setOverride(this.props.student.id, codifiedPath, true)
-  };
+	handleAddOverride = (path, ev) => {
+		ev.stopPropagation()
+		ev.preventDefault()
+		const codifiedPath = pathToOverride(path)
+		this.props.setOverride(this.props.student.id, codifiedPath, true)
+	};
 
-  handleRemoveOverride = (path, ev) => {
-    ev.stopPropagation()
-    ev.preventDefault()
-    const codifiedPath = pathToOverride(path)
-    this.props.setOverride(this.props.student.id, codifiedPath)
-  };
+	handleRemoveOverride = (path, ev) => {
+		ev.stopPropagation()
+		ev.preventDefault()
+		const codifiedPath = pathToOverride(path)
+		this.props.setOverride(this.props.student.id, codifiedPath)
+	};
 
-  handleToggleOverride = (path, ev) => {
-    ev.stopPropagation()
-    ev.preventDefault()
-    const codifiedPath = pathToOverride(path)
+	handleToggleOverride = (path, ev) => {
+		ev.stopPropagation()
+		ev.preventDefault()
+		const codifiedPath = pathToOverride(path)
 
-    if (has(this.props.student.overrides, codifiedPath)) {
-      this.props.removeOverride(this.props.student.id, codifiedPath)
-    }
-    else {
-      this.props.setOverride(this.props.student.id, codifiedPath, true)
-    }
-  };
+		if (has(this.props.student.overrides, codifiedPath)) {
+			this.props.removeOverride(this.props.student.id, codifiedPath)
+		}
+		else {
+			this.props.setOverride(this.props.student.id, codifiedPath, true)
+		}
+	};
 
-  handleRemoveArea = (areaQuery, ev) => {
-    ev.stopPropagation()
-    ev.preventDefault()
-    this.props.removeArea(this.props.student.id, areaQuery)
-  };
+	handleRemoveArea = (areaQuery, ev) => {
+		ev.stopPropagation()
+		ev.preventDefault()
+		this.props.removeArea(this.props.student.id, areaQuery)
+	};
 
-  handleChangeGraduation = ev => {
-    this.props.changeGraduation(this.props.student.id, parseInt(ev.target.value) || 0)
-  };
-  handleChangeMatriculation = ev => {
-    this.props.changeMatriculation(this.props.student.id, parseInt(ev.target.value) || 0)
-  };
-  handleChangeName = ev => {
-    this.props.changeName(this.props.student.id, ev.target.value)
-  };
+	handleChangeGraduation = ev => {
+		this.props.changeGraduation(this.props.student.id, parseInt(ev.target.value) || 0)
+	};
+	handleChangeMatriculation = ev => {
+		this.props.changeMatriculation(this.props.student.id, parseInt(ev.target.value) || 0)
+	};
+	handleChangeName = ev => {
+		this.props.changeName(this.props.student.id, ev.target.value)
+	};
 
-  render() {
-    const student = this.props.student
-    return (
+	render() {
+		const student = this.props.student
+		return (
 			<GraduationStatus
-  allAreas={this.props.allAreas}
-  onAddArea={this.handleAddArea}
-  onAddOverride={this.handleAddOverride}
-  onChangeGraduation={this.handleChangeGraduation}
-  onChangeMatriculation={this.handleChangeMatriculation}
-  onChangeName={this.handleChangeName}
-  onEndAddArea={this.handleEndAddArea}
-  onInitiateAddArea={this.handleInitiateAddArea}
-  onRemoveArea={this.handleRemoveArea}
-  onRemoveOverride={this.handleRemoveOverride}
-  onToggleOverride={this.handleToggleOverride}
-  showAreaPickerFor={this.state.showAreaPickerFor}
-  student={student}
+				allAreas={this.props.allAreas}
+				onAddArea={this.handleAddArea}
+				onAddOverride={this.handleAddOverride}
+				onChangeGraduation={this.handleChangeGraduation}
+				onChangeMatriculation={this.handleChangeMatriculation}
+				onChangeName={this.handleChangeName}
+				onEndAddArea={this.handleEndAddArea}
+				onInitiateAddArea={this.handleInitiateAddArea}
+				onRemoveArea={this.handleRemoveArea}
+				onRemoveOverride={this.handleRemoveOverride}
+				onToggleOverride={this.handleToggleOverride}
+				showAreaPickerFor={this.state.showAreaPickerFor}
+				student={student}
 			/>
-    )
-  }
+		)
+	}
 }
 
 const mapDispatch = dispatch =>

@@ -9,12 +9,12 @@ import { buildDeptString } from './build-dept'
  * @returns {String} - the deptnum string
  */
 export function buildDeptNum({ departments, number, section='', deptnum }: {departments: string[], number: number, section?: string, deptnum?: string}, includeSection?: boolean=false) {
-  const dept = buildDeptString(departments)
-  const deptnumString = deptnum || `${dept} ${number}`
+	const dept = buildDeptString(departments)
+	const deptnumString = deptnum || `${dept} ${number}`
 
-  if (includeSection) {
-    return `${deptnumString}${section}`
-  }
+	if (includeSection) {
+		return `${deptnumString}${section}`
+	}
 
-  return deptnumString
+	return deptnumString
 }

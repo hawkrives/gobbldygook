@@ -12,38 +12,38 @@ import groupBy from 'lodash/groupBy'
 import yaml from 'js-yaml'
 
 function findCoursesWithGes(term) {
-  return search({ riddles: [ { term } ] })
+	return search({ riddles: [ { term } ] })
 }
 
 export async function cli() {
-  const args = nomnom()
+	const args = nomnom()
 		.script('olaf-count-courses-with-ges')
 		.option('terms', { position: 0, list: true, required: true, help: 'the years or terms to search for: 2015, or 20141, etc.' })
 		.parse()
 
-  args.terms = args.terms.reduce((list, term) => {
-    let stringterm = String(term)
-    if (stringterm.length === 4) {
-      return list.concat([ 1, 2, 3, 4, 5 ].map(s => parseInt(`${stringterm}${s}`)))
-    }
-    return list.concat(term)
-  }, [])
+	args.terms = args.terms.reduce((list, term) => {
+		let stringterm = String(term)
+		if (stringterm.length === 4) {
+			return list.concat([ 1, 2, 3, 4, 5 ].map(s => parseInt(`${stringterm}${s}`)))
+		}
+		return list.concat(term)
+	}, [])
 
-  const courses = fromPairs(
+	const courses = fromPairs(
 		await Promise.all(
 			map(
 				args.terms,
 				async term => [
-  term,
-  await findCoursesWithGes(term),
-])))
+					term,
+					await findCoursesWithGes(term),
+				])))
 
-  const groupedByGeCount = mapValues(
+	const groupedByGeCount = mapValues(
 		courses,
 		list => mapValues({
-  ...groupBy(list, c => c.gereqs && c.gereqs.length || 0),
-  total: list,
-}, l => l.length))
+			...groupBy(list, c => c.gereqs && c.gereqs.length || 0),
+			total: list,
+		}, l => l.length))
 
-  console.log(yaml.safeDump(groupedByGeCount))
+	console.log(yaml.safeDump(groupedByGeCount))
 }

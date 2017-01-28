@@ -30,7 +30,7 @@ const log = debug('worker:load-data')
 
 
 function dispatch(type, action, ...args) {
-  self.postMessage([ null, 'dispatch', { type, action, args } ])
+	self.postMessage([ null, 'dispatch', { type, action, args } ])
 }
 
 const fetchText = (...args) => fetch(...args).then(status).then(text)
@@ -38,307 +38,307 @@ const fetchJson = (...args) => fetch(...args).then(status).then(json)
 
 
 function prepareCourse(course) {
-  const nameWords = splitParagraph(course.name)
-  const notesWords = splitParagraph(course.notes)
-  const titleWords = splitParagraph(course.title)
-  const descWords = splitParagraph(course.desc)
+	const nameWords = splitParagraph(course.name)
+	const notesWords = splitParagraph(course.notes)
+	const titleWords = splitParagraph(course.title)
+	const descWords = splitParagraph(course.desc)
 
-  return {
-    name: course.name || course.title,
-    dept: course.dept || buildDeptString(course.departments),
-    deptnum: course.deptnum || buildDeptNum(course),
-    offerings: course.offerings || convertTimeStringsToOfferings(course),
-    words: uniq([ ...nameWords, ...notesWords, ...titleWords, ...descWords ]),
-    profWords: uniq(flatMap(course.instructors, splitParagraph)),
-  }
+	return {
+		name: course.name || course.title,
+		dept: course.dept || buildDeptString(course.departments),
+		deptnum: course.deptnum || buildDeptNum(course),
+		offerings: course.offerings || convertTimeStringsToOfferings(course),
+		words: uniq([ ...nameWords, ...notesWords, ...titleWords, ...descWords ]),
+		profWords: uniq(flatMap(course.instructors, splitParagraph)),
+	}
 }
 
 
 function cacheItemHash(path, type, hash) {
-  log(`cacheItemHash(): ${path}`)
+	log(`cacheItemHash(): ${path}`)
 
-  return db.store(getCacheStoreName(type)).put({ id: path, path, hash })
+	return db.store(getCacheStoreName(type)).put({ id: path, path, hash })
 }
 
 
 function getCacheStoreName(type) {
-  if (type === 'courses') {
-    return 'courseCache'
-  }
-  else if (type === 'areas') {
-    return 'areaCache'
-  }
-  else {
-    throw new TypeError(`needsUpdate(): "${type}" is not a valid store type`)
-  }
+	if (type === 'courses') {
+		return 'courseCache'
+	}
+	else if (type === 'areas') {
+		return 'areaCache'
+	}
+	else {
+		throw new TypeError(`needsUpdate(): "${type}" is not a valid store type`)
+	}
 }
 
 
 function storeCourses(path, data) {
-  log(`storeCourses(): ${path}`)
+	log(`storeCourses(): ${path}`)
 
-  let coursesToStore = map(data, course => ({
-    ...course,
-    ...prepareCourse(course),
-    sourcePath: path,
-  }))
+	let coursesToStore = map(data, course => ({
+		...course,
+		...prepareCourse(course),
+		sourcePath: path,
+	}))
 
-  const start = present()
-  return db.store('courses').batch(coursesToStore)
+	const start = present()
+	return db.store('courses').batch(coursesToStore)
 		.then(() => {
-  log(`Stored ${size(coursesToStore)} courses in ${round(present() - start, 2)}ms.`)
-})
+			log(`Stored ${size(coursesToStore)} courses in ${round(present() - start, 2)}ms.`)
+		})
 		.catch(err => {
-  const db = err.target.db.name
-  const errorName = err.target.error.name
+			const db = err.target.db.name
+			const errorName = err.target.error.name
 
-  if (errorName === 'QuotaExceededError') {
-    dispatch('notifications', 'logError', {
-      id: 'db-storage-quota-exceeded',
-      message: `The database "${db}" has exceeded its storage quota.`,
-    })
-  }
+			if (errorName === 'QuotaExceededError') {
+				dispatch('notifications', 'logError', {
+					id: 'db-storage-quota-exceeded',
+					message: `The database "${db}" has exceeded its storage quota.`,
+				})
+			}
 
-  throw err
-})
+			throw err
+		})
 }
 
 
 function storeArea(path, data) {
-  log(`storeArea(): ${path}`)
+	log(`storeArea(): ${path}`)
 
-  let area = {
-    ...data,
-    type: data.type.toLowerCase(),
-    sourcePath: path,
-    dateAdded: new Date(),
-  }
+	let area = {
+		...data,
+		type: data.type.toLowerCase(),
+		sourcePath: path,
+		dateAdded: new Date(),
+	}
 
-  return db.store('areas').put(area).catch(err => {
-    throw err
-  })
+	return db.store('areas').put(area).catch(err => {
+		throw err
+	})
 }
 
 
 function cleanPriorCourses(path) {
-  return db.store('courses').index('sourcePath').getAll(range({ eq: path }))
+	return db.store('courses').index('sourcePath').getAll(range({ eq: path }))
 		.then(oldItems => fromPairs(map(oldItems, item => ([ item.clbid, null ]))))
 }
 
 function cleanPriorAreas(path) {
-  return db.store('areas').getAll(range({ eq: path }))
+	return db.store('areas').getAll(range({ eq: path }))
 		.then(oldItems => fromPairs(map(oldItems, item => ([ item.sourcePath, null ]))))
 }
 
 function cleanPriorData(path, type) {
-  log(`cleanPriorData(): ${path}`)
+	log(`cleanPriorData(): ${path}`)
 
-  let ps
-  if (type === 'courses') {
-    ps = cleanPriorCourses(path)
-  }
-  else if (type === 'areas') {
-    ps = cleanPriorAreas(path)
-  }
-  else {
-    throw new TypeError(`cleanPriorData(): "${type}" is not a valid store type`)
-  }
+	let ps
+	if (type === 'courses') {
+		ps = cleanPriorCourses(path)
+	}
+	else if (type === 'areas') {
+		ps = cleanPriorAreas(path)
+	}
+	else {
+		throw new TypeError(`cleanPriorData(): "${type}" is not a valid store type`)
+	}
 
-  return ps.then(ops => series([
-    db.store(type).batch(ops),
-    db.store(getCacheStoreName(type)).del(path),
-  ])).catch(err => {
-    throw err
-  })
+	return ps.then(ops => series([
+		db.store(type).batch(ops),
+		db.store(getCacheStoreName(type)).del(path),
+	])).catch(err => {
+		throw err
+	})
 }
 
 function storeData(path, type, data) {
 	// store the new data
-  if (type === 'courses') {
-    return storeCourses(path, data)
-  }
-  else if (type === 'areas') {
-    return storeArea(path, data)
-  }
+	if (type === 'courses') {
+		return storeCourses(path, data)
+	}
+	else if (type === 'areas') {
+		return storeArea(path, data)
+	}
 }
 
 function parseData(raw, type) {
-  if (type === 'courses') {
-    return JSON.parse(raw)
-  }
-  else if (type === 'areas') {
-    let data = yaml.safeLoad(raw)
-    data.source = raw
-    return data
-  }
-  return {}
+	if (type === 'courses') {
+		return JSON.parse(raw)
+	}
+	else if (type === 'areas') {
+		let data = yaml.safeLoad(raw)
+		data.source = raw
+		return data
+	}
+	return {}
 }
 
 function updateDatabase(type, infoFileBase, notificationId, infoFromServer) {
 	// Get the path to the current file and the hash of the file
-  const { path, hash } = infoFromServer
+	const { path, hash } = infoFromServer
 	// Append the hash, to act as a sort of cache-busting mechanism
-  const itemUrl = `/${path}?v=${hash}`
+	const itemUrl = `/${path}?v=${hash}`
 
-  log(`updateDatabase(): ${path}`)
+	log(`updateDatabase(): ${path}`)
 
-  const url = infoFileBase + itemUrl
+	const url = infoFileBase + itemUrl
 
 	// go fetch the data!
-  fetchText(url).then(rawData => {
+	fetchText(url).then(rawData => {
 		// now parse the data into a usable form
-    const data = parseData(rawData, type)
+		const data = parseData(rawData, type)
 
-    return series([
+		return series([
 			// clear out any old data
-      cleanPriorData(path, type),
+			cleanPriorData(path, type),
 			// store the new data
-      storeData(path, type, data),
+			storeData(path, type, data),
 			// record that we stored the new data
-      cacheItemHash(path, type, hash),
-    ])
-  }, () => {
-    log(`Could not fetch ${url}`)
-    return false
-  }).then(() => {
-    log(`added ${path}`)
-    dispatch('notifications', 'incrementProgress', notificationId)
-  })
+			cacheItemHash(path, type, hash),
+		])
+	}, () => {
+		log(`Could not fetch ${url}`)
+		return false
+	}).then(() => {
+		log(`added ${path}`)
+		dispatch('notifications', 'incrementProgress', notificationId)
+	})
 }
 
 
 function needsUpdate(type, path, hash) {
-  return db.store(getCacheStoreName(type)).get(path)
+	return db.store(getCacheStoreName(type)).get(path)
 		.then(({ hash: oldHash }) => hash !== oldHash)
 }
 
 
 function removeDuplicateAreas() {
-  db.store('areas').getAll().then(allAreas => {
+	db.store('areas').getAll().then(allAreas => {
 		// now de-duplicate, based on name, type, and revision
 		// reasons for duplicates:
 		// - a major adds a new revision
 		// 		- the old one will have already been replaced by the new one, because of cleanPriorData
 		// - a major … are there any other cases?
 
-    const grouped = groupBy(allAreas, area => `{${area.name}, ${area.type}, ${area.revision}}`)
-    const withDuplicates = filter(grouped, list => list.length > 1)
+		const grouped = groupBy(allAreas, area => `{${area.name}, ${area.type}, ${area.revision}}`)
+		const withDuplicates = filter(grouped, list => list.length > 1)
 
-    let ops = {}
-    forEach(withDuplicates, duplicatesList => {
-      duplicatesList = sortBy(duplicatesList, area => area.sourcePath.length)
-      duplicatesList.shift() // take off the shortest one
-      ops = { ...ops, ...fromPairs(map(duplicatesList, item => ([ item.sourcePath, null ]))) }
-    })
+		let ops = {}
+		forEach(withDuplicates, duplicatesList => {
+			duplicatesList = sortBy(duplicatesList, area => area.sourcePath.length)
+			duplicatesList.shift() // take off the shortest one
+			ops = { ...ops, ...fromPairs(map(duplicatesList, item => ([ item.sourcePath, null ]))) }
+		})
 
 		// remove any that are invalid
 		// --- something about any values that aren't objects
 
-    const invalidAreas = filter(allAreas, area => some([ 'name', 'revision', 'type' ], key => area[key] === undefined))
-    ops = { ...ops, ...fromPairs(map(invalidAreas, item => ([ item.sourcePath, null ]))) }
+		const invalidAreas = filter(allAreas, area => some([ 'name', 'revision', 'type' ], key => area[key] === undefined))
+		ops = { ...ops, ...fromPairs(map(invalidAreas, item => ([ item.sourcePath, null ]))) }
 
-    return db.store('areas').batch(ops)
-  })
+		return db.store('areas').batch(ops)
+	})
 }
 
 
 function loadFiles(url, infoFileBase) {
-  log(`loadFiles(): ${url}`)
+	log(`loadFiles(): ${url}`)
 
 	// bad hawken?
-  let type
-  let notificationId
-  let filesToLoad
+	let type
+	let notificationId
+	let filesToLoad
 
-  return fetchJson(url).then(infoFile => {
-    type = infoFile.type
-    notificationId = type
-    filesToLoad = infoFile.files
+	return fetchJson(url).then(infoFile => {
+		type = infoFile.type
+		notificationId = type
+		filesToLoad = infoFile.files
 
-    if (type === 'courses') {
+		if (type === 'courses') {
 			// only download the json courses
-      filesToLoad = filesToLoad.filter(file => file.type === 'json')
+			filesToLoad = filesToLoad.filter(file => file.type === 'json')
 			// Only get the last four years of data
-      const oldestYear = new Date().getFullYear() - 4
-      filesToLoad = filter(filesToLoad, file => file.year >= oldestYear)
-    }
+			const oldestYear = new Date().getFullYear() - 4
+			filesToLoad = filter(filesToLoad, file => file.year >= oldestYear)
+		}
 
 		// For each file, see if it needs loading.
-    return Promise.all(filesToLoad.map(file => needsUpdate(type, file.path, file.hash)))
-  }, err => {
-    if (startsWith(err.message, 'Failed to fetch')) {
-      log(`loadFiles(): Failed to fetch ${url}`)
-      return []
-    }
-    throw err
-  })
+		return Promise.all(filesToLoad.map(file => needsUpdate(type, file.path, file.hash)))
+	}, err => {
+		if (startsWith(err.message, 'Failed to fetch')) {
+			log(`loadFiles(): Failed to fetch ${url}`)
+			return []
+		}
+		throw err
+	})
 	.then(filesNeedLoading => {
 		// Cross-reference each file to load with the list of files that need loading
-  filesToLoad = filter(filesToLoad, (file, index) => filesNeedLoading[index])
+		filesToLoad = filter(filesToLoad, (file, index) => filesNeedLoading[index])
 
 		// Exit early if nothing needs to happen
-  if (filesToLoad.length === 0) {
-    return true
-  }
+		if (filesToLoad.length === 0) {
+			return true
+		}
 
 		// Fire off the progress bar
-  dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, { max: size(filesToLoad), showButton: true })
+		dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, { max: size(filesToLoad), showButton: true })
 
 		// Load them into the database
-  const q = new PQueue({ concurrency: 2 })
-  filesToLoad.forEach(file => {
-    q.add(() => updateDatabase(type, infoFileBase, notificationId, file))
-  })
-  return q.onEmpty()
-})
+		const q = new PQueue({ concurrency: 2 })
+		filesToLoad.forEach(file => {
+			q.add(() => updateDatabase(type, infoFileBase, notificationId, file))
+		})
+		return q.onEmpty()
+	})
 	.then(() => {
 		// Clean up the database a bit
-  if (type === 'areas') {
-    return removeDuplicateAreas()
-  }
-})
+		if (type === 'areas') {
+			return removeDuplicateAreas()
+		}
+	})
 	.then(() => {
 		// Remove the progress bar after 1.5 seconds
-  dispatch('notifications', 'removeNotification', notificationId, 1500)
-  if (type === 'courses') {
-    dispatch('courses', 'refreshCourses')
-  }
-  else if (type === 'areas') {
-    dispatch('areas', 'refreshAreas')
-  }
+		dispatch('notifications', 'removeNotification', notificationId, 1500)
+		if (type === 'courses') {
+			dispatch('courses', 'refreshCourses')
+		}
+		else if (type === 'areas') {
+			dispatch('areas', 'refreshAreas')
+		}
 
-  return true
-})
+		return true
+	})
 }
 
 function checkIdbInWorkerSupport() {
-  if (self.IDBCursor) {
-    return Promise.resolve(true)
-  }
-  return Promise.resolve(false)
+	if (self.IDBCursor) {
+		return Promise.resolve(true)
+	}
+	return Promise.resolve(false)
 }
 
 const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
 self.addEventListener('message', ({ data }) => {
-  const [ id, ...args ] = data
-  log('[load-data] received message:', args)
+	const [ id, ...args ] = data
+	log('[load-data] received message:', args)
 
-  if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
-    checkIdbInWorkerSupport()
+	if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
+		checkIdbInWorkerSupport()
 			.then(result => {
-  self.postMessage([ id, 'result', result ])
-})
+				self.postMessage([ id, 'result', result ])
+			})
 			.catch(err => {
-  self.postMessage([ id, 'error', JSON.parse(serializeError(err)) ])
-})
-  }
-  else {
-    loadFiles(...args)
+				self.postMessage([ id, 'error', JSON.parse(serializeError(err)) ])
+			})
+	}
+	else {
+		loadFiles(...args)
 			.then(result => {
-  self.postMessage([ id, 'result', result ])
-})
+				self.postMessage([ id, 'result', result ])
+			})
 			.catch(err => {
-  self.postMessage([ id, 'error', JSON.parse(serializeError(err)) ])
-})
-  }
+				self.postMessage([ id, 'error', JSON.parse(serializeError(err)) ])
+			})
+	}
 })

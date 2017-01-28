@@ -16,22 +16,22 @@ import { findMissingNumberBinarySearch } from 'modules/lib'
  * @returns {Number} - the first available semester slot
  */
 export function findFirstAvailableSemester(schedules, forYear) {
-  let thisYear = filter(schedules, { year: forYear })
+	let thisYear = filter(schedules, { year: forYear })
 
-  let semesters = map(thisYear, s => s.semester)
+	let semesters = map(thisYear, s => s.semester)
 
 	// stick a 0 at the front so findBinary will start from 1
-  semesters.unshift(0)
+	semesters.unshift(0)
 
 	// uniq the list after we're done messing with the contents
-  semesters = uniq(semesters)
+	semesters = uniq(semesters)
 
-  let sortedSemesters = sortBy(semesters)
+	let sortedSemesters = sortBy(semesters)
 
-  let missingNo = findMissingNumberBinarySearch(sortedSemesters)
-  if (missingNo !== null) {
-    return missingNo
-  }
+	let missingNo = findMissingNumberBinarySearch(sortedSemesters)
+	if (missingNo !== null) {
+		return missingNo
+	}
 
-  return max(sortedSemesters) + 1
+	return max(sortedSemesters) + 1
 }

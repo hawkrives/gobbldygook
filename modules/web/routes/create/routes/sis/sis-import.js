@@ -24,73 +24,73 @@ import debug from 'debug'
 const log = debug('web:react')
 
 class SISImportScreen extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired, // redux
-    router: PropTypes.object.isRequired,
-  };
+	static propTypes = {
+		dispatch: PropTypes.func.isRequired, // redux
+		router: PropTypes.object.isRequired,
+	};
 
-  state = {
-    loggedIn: null,
-    checkingLogin: true,
-    error: null,
-    ids: [],
-    selectedId: null,
-    student: null,
-    extensionInstalled: false,
-  };
+	state = {
+		loggedIn: null,
+		checkingLogin: true,
+		error: null,
+		ids: [],
+		selectedId: null,
+		student: null,
+		extensionInstalled: false,
+	};
 
-  componentWillMount() {
-    this.checkLoginState()
-  }
+	componentWillMount() {
+		this.checkLoginState()
+	}
 
-  checkLoginState = () => {
-    checkIfLoggedIn()
+	checkLoginState = () => {
+		checkIfLoggedIn()
 			.then(ids => {
-  if (ids.length === 1) {
-    this.setState({ loggedIn: true, checkingLogin: false, selectedId: ids[0] })
-  }
-  else {
-    this.setState({ loggedIn: true, checkingLogin: false, ids })
-  }
-})
+				if (ids.length === 1) {
+					this.setState({ loggedIn: true, checkingLogin: false, selectedId: ids[0] })
+				}
+				else {
+					this.setState({ loggedIn: true, checkingLogin: false, ids })
+				}
+			})
 			.catch(err => {
-  log(err)
-  this.setState({ loggedIn: false, checkingLogin: false })
-  if (err instanceof ExtensionNotLoadedError) {
-    this.setState({ error: 'The extension is not loaded properly.' })
-  }
-  else if (err instanceof ExtensionTooOldError) {
-    this.setState({ error: 'The extension is too old.' })
-  }
-  else {
-    this.setState({ error: serializeError(err) })
-  }
-})
-  };
+				log(err)
+				this.setState({ loggedIn: false, checkingLogin: false })
+				if (err instanceof ExtensionNotLoadedError) {
+					this.setState({ error: 'The extension is not loaded properly.' })
+				}
+				else if (err instanceof ExtensionTooOldError) {
+					this.setState({ error: 'The extension is too old.' })
+				}
+				else {
+					this.setState({ error: serializeError(err) })
+				}
+			})
+	};
 
-  handleImportData = () => {
-    getStudentInfo(this.state.selectedId)
+	handleImportData = () => {
+		getStudentInfo(this.state.selectedId)
 			.then(info => convertStudent(info, getCourse))
 			.then(student => this.setState({ student }))
 			.catch(err => {
-  log(err)
-  this.setState({ error: serializeError(err) })
-})
-  };
+				log(err)
+				this.setState({ error: serializeError(err) })
+			})
+	};
 
-  handleCreateStudent = () => {
-    let action = initStudent(this.state.student)
-    this.props.dispatch(action)
-    this.props.router.push(`/s/${action.payload.id}`)
-  };
+	handleCreateStudent = () => {
+		let action = initStudent(this.state.student)
+		this.props.dispatch(action)
+		this.props.router.push(`/s/${action.payload.id}`)
+	};
 
-  handleSelectId = value => {
-    this.setState({ selectedId: value })
-    this.handleImportData()
-  };
+	handleSelectId = value => {
+		this.setState({ selectedId: value })
+		this.handleImportData()
+	};
 
-  render() {
-    let {
+	render() {
+		let {
 			student,
 			checkingLogin,
 			loggedIn,
@@ -98,7 +98,7 @@ class SISImportScreen extends Component {
 			ids,
 		} = this.state
 
-    return (
+		return (
 			<div>
 				<header className="header">
 					<h1>Import from the SIS</h1>
@@ -164,8 +164,8 @@ class SISImportScreen extends Component {
 					: null}
 				</div>
 			</div>
-    )
-  }
+		)
+	}
 }
 
 

@@ -17,12 +17,12 @@ import { iosUndo, iosUndoOutline, iosRedo, iosRedoOutline, iosSearch, iosPeopleO
 import './sidebar.scss'
 
 export function Sidebar(props) {
-  const { undo, redo } = props
-  const studentId = props.student.data.present.id
-  const canUndo = props.student.data.past.length
-  const canRedo = props.student.data.future.length
+	const { undo, redo } = props
+	const studentId = props.student.data.present.id
+	const canUndo = props.student.data.past.length
+	const canRedo = props.student.data.future.length
 
-  return (
+	return (
 		<aside className="sidebar">
 			<Toolbar className="student-buttons">
 				<Button link to="/" title="Students">
@@ -49,26 +49,26 @@ export function Sidebar(props) {
 			</Toolbar>
 
 			<CourseRemovalBox
-  removeCourse={(scheduleId, clbid) => props.removeCourse(studentId, scheduleId, clbid)}
+				removeCourse={(scheduleId, clbid) => props.removeCourse(studentId, scheduleId, clbid)}
 			/>
 
 			{props.children}
 		</aside>
-  )
+	)
 }
 
 Sidebar.propTypes = {
-  children: PropTypes.node.isRequired,
-  redo: PropTypes.func.isRequired,
-  removeCourse: PropTypes.func.isRequired,
-  student: PropTypes.shape({
-    data: PropTypes.shape({
-      past: PropTypes.array.isRequired,
-      present: PropTypes.object.isRequired,
-      future: PropTypes.array.isRequired,
-    }).isRequired,
-  }).isRequired,
-  undo: PropTypes.func.isRequired,
+	children: PropTypes.node.isRequired,
+	redo: PropTypes.func.isRequired,
+	removeCourse: PropTypes.func.isRequired,
+	student: PropTypes.shape({
+		data: PropTypes.shape({
+			past: PropTypes.array.isRequired,
+			present: PropTypes.object.isRequired,
+			future: PropTypes.array.isRequired,
+		}).isRequired,
+	}).isRequired,
+	undo: PropTypes.func.isRequired,
 }
 
 

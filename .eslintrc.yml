@@ -59,7 +59,7 @@ rules:
 
   # stylistic issues
   new-cap: off
-  indent: [warn, 2, {SwitchCase: 1}]
+  indent: ['warn', 'tab', {SwitchCase: 1}]
   camelcase: error
   comma-dangle: [warn, always-multiline]
   comma-style: [warn, last]
@@ -84,7 +84,7 @@ rules:
   jsx-quotes: [warn, prefer-double]
   react/display-name: off
   react/jsx-curly-spacing: [warn, never]
-  react/jsx-indent-props: [warn, 2]
+  react/jsx-indent-props: [warn, tab]
   react/jsx-no-duplicate-props: warn
   react/jsx-no-undef: error
   react/jsx-space-before-closing: error

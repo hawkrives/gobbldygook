@@ -18,16 +18,16 @@ export const Notifications = ({ notifications, removeNotification }) => (
 )
 
 Notifications.propTypes = {
-  notifications: PropTypes.object.isRequired,
-  removeNotification: PropTypes.func.isRequired,
+	notifications: PropTypes.object.isRequired,
+	removeNotification: PropTypes.func.isRequired,
 }
 
 const selectState = state => ({
-  notifications: state.notifications,
+	notifications: state.notifications,
 })
 
 const selectDispatch = dispatch => ({
-  ...bindActionCreators({ removeNotification }, dispatch),
+	...bindActionCreators({ removeNotification }, dispatch),
 })
 
 export default connect(selectState, selectDispatch)(Notifications)

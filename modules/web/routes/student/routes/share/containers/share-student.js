@@ -15,15 +15,15 @@ import { encodeStudent } from 'modules/core'
 import './share-student.scss'
 
 export function ShareSheet(props) {
-  let { student } = props
-  student = student || {}
+	let { student } = props
+	student = student || {}
 
-  const boundCloseModal = () => props.router.push(`/s/${props.params.studentId}/`)
+	const boundCloseModal = () => props.router.push(`/s/${props.params.studentId}/`)
 
-  return <Modal
-    into="share-modal"
-    modalClassName="share-dialog"
-    onClose={boundCloseModal}
+	return <Modal
+		into="share-modal"
+		modalClassName="share-dialog"
+		onClose={boundCloseModal}
 	>
 		<Toolbar className="window-tools">
 			<Button className="close-modal" onClick={boundCloseModal}>
@@ -37,8 +37,8 @@ export function ShareSheet(props) {
 				<li>Google Drive (not implemented)</li>
 				<li>
 					<a
-  download={`${student.name}.gbstudent`}
-  href={`data:text/json;charset=utf-8,${encodeStudent(student)}`}
+						download={`${student.name}.gbstudent`}
+						href={`data:text/json;charset=utf-8,${encodeStudent(student)}`}
 					>
 						Download file
 					</a>
@@ -49,15 +49,15 @@ export function ShareSheet(props) {
 }
 
 ShareSheet.propTypes = {
-  params: PropTypes.shape({
-    studentId: PropTypes.string.isRequired,
-  }).isRequired,
-  router: PropTypes.object.isRequired,
-  student: PropTypes.object,
+	params: PropTypes.shape({
+		studentId: PropTypes.string.isRequired,
+	}).isRequired,
+	router: PropTypes.object.isRequired,
+	student: PropTypes.object,
 }
 
 const mapState = (state, ownProps) => {
-  return { student: state.students[ownProps.params.studentId].data.present }
+	return { student: state.students[ownProps.params.studentId].data.present }
 }
 
 export default connect(mapState)(withRouter(ShareSheet))

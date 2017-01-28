@@ -13,24 +13,24 @@ type ProgressBarProps =  {
 };
 
 export default function ProgressBar(props: ProgressBarProps) {
-  const {
+	const {
 		value,
 		max = 1,
 		colorful,
 		className,
 	} = props
 
-  const width = 100 * (value / max)
-  const progressWord = findWordForProgress(max, value)
-  const classNames = cx('progress-bar',
+	const width = 100 * (value / max)
+	const progressWord = findWordForProgress(max, value)
+	const classNames = cx('progress-bar',
 		className,
 		{ [progressWord]: colorful })
 
-  return (
+	return (
 		<div className={classNames}>
 			<div className="progress-bar--track" style={{ height: '100%', width: '100%' }}>
 				<div className="progress-bar--value" style={{ height: '100%', width: `${width}%` }} />
 			</div>
 		</div>
-  )
+	)
 }

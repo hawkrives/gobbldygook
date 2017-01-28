@@ -14,28 +14,28 @@ export const customParser = (...args) => peg.generate(grammar, ...args).parse
 export const courseDeclr = deptnum => mapKeys(splitDeptNum(deptnum), (v, k) => k === 'departments' ? 'department' : k)
 
 export const course = deptnum => ({
-  $type: 'course',
-  $course: courseDeclr(deptnum),
+	$type: 'course',
+	$course: courseDeclr(deptnum),
 })
 
 export const boolean = (type, contents) => ({
-  $type: 'boolean',
-  [`$${type}`]: contents,
+	$type: 'boolean',
+	[`$${type}`]: contents,
 })
 
 export const counter = (type, val) => ({
-  $num: val,
-  $operator: `$${type}`,
+	$num: val,
+	$operator: `$${type}`,
 })
 
 export const reference = to => ({
-  $type: 'reference',
-  $requirement: to,
+	$type: 'reference',
+	$requirement: to,
 })
 
 export const qualification = (op, key, val) => ({
-  $key: key,
-  $operator: `$${op}`,
-  $type: 'qualification',
-  $value: val,
+	$key: key,
+	$operator: `$${op}`,
+	$type: 'qualification',
+	$value: val,
 })

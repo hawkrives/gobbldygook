@@ -11,5 +11,5 @@ import type { Course } from './types'
  */
 export default function countDepartments(courses: Course[]) {
 	// getDepartments does a uniq
-  return compact(getDepartments(courses)).length
+	return compact(getDepartments(courses)).length
 }

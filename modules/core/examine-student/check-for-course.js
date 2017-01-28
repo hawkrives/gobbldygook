@@ -11,5 +11,5 @@ import type { Course } from './types'
  * @returns {Boolean} - if the course was found or not
  */
 export default function checkForCourse(query: Course, courses: Course[]) {
-  return some(courses, course => compareCourseToCourse(query, course))
+	return some(courses, course => compareCourseToCourse(query, course))
 }

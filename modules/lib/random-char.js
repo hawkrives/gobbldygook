@@ -5,5 +5,5 @@
  */
 
 export function randomChar(): string {
-  return Math.random().toString(36).slice(2, 3)
+	return Math.random().toString(36).slice(2, 3)
 }

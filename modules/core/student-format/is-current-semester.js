@@ -6,5 +6,5 @@
  * @returns {Boolean} - is the schedule part of the current semester
  */
 export function isCurrentSemester(year, semester) {
-  return schedule => (schedule.year === year) && (schedule.semester === semester)
+	return schedule => (schedule.year === year) && (schedule.semester === semester)
 }

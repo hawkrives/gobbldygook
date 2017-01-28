@@ -5,7 +5,7 @@ const uniq = require('lodash/uniq')
 const path = require('path')
 
 module.exports = function findAreas(dir, filetype) {
-  filetype = filetype || 'yaml'
-  const sources = uniq(flatten(glob.sync(path.join(dir, `**/*.${filetype}`))))
-  return sources.filter(junk.not)
+	filetype = filetype || 'yaml'
+	const sources = uniq(flatten(glob.sync(path.join(dir, `**/*.${filetype}`))))
+	return sources.filter(junk.not)
 }
