@@ -23,9 +23,7 @@
 		["module-resolver", {
 			"alias": {
 				"modules": "./modules",
-				"react": "preact-compat",
-				"react-dom": "preact-compat",
-			}
+			},
 		}],
 	],
 	"env": {
@@ -42,13 +40,11 @@
 			"plugins": [
 				"transform-class-properties",
 				"transform-object-rest-spread",
-				// ["module-resolver", {
-				// 	"root": ["./modules"],
-				// 	"alias": {
-				// 		"react": "preact-compat",
-				// 		"react-dom": "preact-compat",
-				// 	}
-				// }],
+				["module-resolver", {
+					"alias": {
+						"modules": "./modules",
+					},
+				}],
 			],
 		},
 	},

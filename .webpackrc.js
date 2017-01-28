@@ -68,8 +68,6 @@ const entries = {
 		'classnames',
 		'dnd-core',
 		'history',
-		'preact',
-		'preact-compat',
 		'react',
 		'react-dnd',
 		'react-dnd-html5-backend',
