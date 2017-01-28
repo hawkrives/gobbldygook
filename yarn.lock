@@ -232,9 +232,9 @@ ast-types@0.8.18:
   version "0.8.18"
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.8.18.tgz#c8b98574898e8914e9d8de74b947564a9fe929af"
 
-"ast-types@git+https://github.com/jlongster/ast-types.git":
-  version "0.9.3"
-  resolved "git+https://github.com/jlongster/ast-types.git#4b373d7e710105b07b22a12389ef2d8e1bcf2412"
+ast-types@0.9.4:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.9.4.tgz#410d1f81890aeb8e0a38621558ba5869ae53c91b"
 
 async-each@^1.0.0:
   version "1.0.1"
@@ -3433,6 +3433,15 @@ jest-util@^18.1.0:
     jest-mock "^18.0.0"
     mkdirp "^0.5.1"
 
+jest-validate@18.2.0:
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/jest-validate/-/jest-validate-18.2.0.tgz#01f93ac78f23901cf9889808e2bbb931ffc58d86"
+  dependencies:
+    chalk "^1.1.1"
+    jest-matcher-utils "^18.1.0"
+    leven "^2.0.0"
+    pretty-format "^18.1.0"
+
 jest@18.1.0:
   version "18.1.0"
   resolved "https://registry.yarnpkg.com/jest/-/jest-18.1.0.tgz#bcebf1e203dee5c2ad2091c805300a343d9e6c7d"
@@ -3589,6 +3598,10 @@ lcid@^1.0.0:
   resolved "https://registry.yarnpkg.com/lcid/-/lcid-1.0.0.tgz#308accafa0bc483a3867b4b6f2b9506251d1b835"
   dependencies:
     invert-kv "^1.0.0"
+
+leven@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/leven/-/leven-2.0.0.tgz#74c45744439550da185801912829f61d22071bc1"
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
@@ -4782,17 +4795,18 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-0.11.0.tgz#23bceac71fc7591da393aa341cd237488c51cfe5"
+prettier@0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-0.13.1.tgz#2c96cbdc15d098709f874e59efef48cb0c47c615"
   dependencies:
-    ast-types "git+https://github.com/jlongster/ast-types.git"
+    ast-types "0.9.4"
     babel-code-frame "6.22.0"
     babylon "6.15.0"
     esutils "2.0.2"
     flow-parser "0.38.0"
     get-stdin "5.0.1"
     glob "7.1.1"
+    jest-validate "18.2.0"
     minimist "1.2.0"
 
 pretty-format@^18.1.0:
