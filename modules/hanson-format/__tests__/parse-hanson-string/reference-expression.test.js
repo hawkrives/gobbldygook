@@ -52,8 +52,8 @@ describe('titles may include', () => {
 	it('may only begin with a letter or number', () => {
 		expect(() => parseRequirementTitle('0A')).not.toThrow()
 		expect(() => parseRequirementTitle('A0')).not.toThrow()
-		expect(() => parseRequirementTitle('_A0')).toThrow('SyntaxError: Expected [A-Z0-9] but "_" found.')
-		expect(() => parseRequirementTitle('-A0')).toThrow('SyntaxError: Expected [A-Z0-9] but "-" found.')
-		expect(parseRequirementTitle('A0')).to.equal('A0')
+		expect(() => parseRequirementTitle('_A0')).toThrowError('Expected [A-Z0-9] but "_" found.')
+		expect(() => parseRequirementTitle('-A0')).toThrowError('Expected [A-Z0-9] but "-" found.')
+		expect(parseRequirementTitle('A0')).toBe('A0')
 	})
 })

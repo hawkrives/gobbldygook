@@ -35,7 +35,7 @@ describe('WhereExpression', () => {
 describe('qualifiers syntax', () => {
 	it('key must be a string', () => {
 		expect(() => parseQualifier('{a = b}')).not.toThrow()
-		expect(() => parseQualifier('{1 = b}')).toThrow('SyntaxError: Expected qualification-or but "1" found.')
+		expect(() => parseQualifier('{1 = b}')).toThrowError('Expected qualification-or but "1" found.')
 	})
 
 	it('value may be a number (coerced to integers)', () => {

@@ -20,7 +20,7 @@ describe('OfExpression', () => {
 
 	it('if n is "all", it is the number of items in the of-parens', () => {
 		const result = parse('all of (A, B, C)')
-		expect(result).to.have.property('$count')
+		expect(result.$count).toBeDefined()
 		expect(result.$count).toEqual({ $operator: '$eq', $num: 3, $was: 'all' })
 	})
 

@@ -20,6 +20,7 @@ export const course = deptnum => ({
 
 export const boolean = (type, contents) => ({
 	$type: 'boolean',
+	$booleanType: type,
 	[`$${type}`]: contents,
 })
 
