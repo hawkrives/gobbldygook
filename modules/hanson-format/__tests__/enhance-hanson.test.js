@@ -1,5 +1,4 @@
 import { enhanceHanson } from '../enhance-hanson'
-import { reference, course } from './parse-hanson-string/parse-hanson-string.support'
 
 describe('enhanceHanson', () => {
 	it('adds a "slug" key to the top-level', () => {
@@ -7,6 +6,7 @@ describe('enhanceHanson', () => {
 			name: 'test',
 			message: 'have a nice day',
 		})
+		expect(actual).toMatchSnapshot()
 		expect(actual.slug).toBe('test')
 	})
 
@@ -14,6 +14,7 @@ describe('enhanceHanson', () => {
 		const actual = enhanceHanson({
 			message: 'have a nice day',
 		})
+		expect(actual).toMatchSnapshot()
 		expect(actual.$type).toBe('requirement')
 	})
 
@@ -21,9 +22,11 @@ describe('enhanceHanson', () => {
 		expect(() => enhanceHanson({ $type: 'a', slug: 'nope' }))
 			.toThrowError('enhanceHanson(): could not find any of ["result", "message", "filter"] in ["$type", "slug"].')
 
-		expect(() => enhanceHanson({ 'message': 'have a nice day' })).not.toThrow()
+		expect(() => enhanceHanson({ 'message': 'have a nice day' }))
+			.not.toThrow()
 
-		expect(() => enhanceHanson({ 'result': 'CSCI 121' })).not.toThrow()
+		expect(() => enhanceHanson({ 'result': 'CSCI 121' }))
+			.not.toThrow()
 	})
 
 	it('requires its input to be an object', () => {
@@ -61,15 +64,7 @@ describe('enhanceHanson', () => {
 			result: 'Requirement',
 			Requirement: 'CSCI 121',
 		})
-		expect(actual).toEqual({
-			slug: '',
-			result: reference('Requirement'),
-			$type: 'requirement',
-			Requirement: {
-				$type: 'requirement',
-				result: course('CSCI 121'),
-			},
-		})
+		expect(actual).toMatchSnapshot()
 	})
 
 	it('parses "result" strings with the Result PEG rule', () => {
@@ -86,6 +81,13 @@ describe('enhanceHanson', () => {
 				result: 'one of (CSCI 121)',
 			},
 		})).not.toThrow()
+
+		expect(enhanceHanson({
+			result: 'Req',
+			Req: {
+				result: 'one of (CSCI 121)',
+			},
+		})).toMatchSnapshot()
 	})
 
 	it('parses "filter" strings with the Filter PEG rule', () => {
@@ -95,6 +97,13 @@ describe('enhanceHanson', () => {
 				filter: 'only courses from (CSCI 121)',
 			},
 		})).not.toThrow()
+
+		expect(enhanceHanson({
+			result: 'Req',
+			Req: {
+				filter: 'only courses from (CSCI 121)',
+			},
+		})).toMatchSnapshot()
 
 		expect(() => enhanceHanson({
 			result: 'Req',
@@ -117,9 +126,11 @@ describe('enhanceHanson', () => {
 		const output = enhanceHanson(input)
 
 		expect(output.Req.result.$of.length).toBe(9)
+
+		expect(output).toMatchSnapshot()
 	})
 
-	it('allows defining variables in filter', () => {
+	it('allows using variables in the filter', () => {
 		const input = {
 			result: 'Req',
 			Req: {
@@ -132,9 +143,10 @@ describe('enhanceHanson', () => {
 		const output = enhanceHanson(input)
 
 		expect(output.Req.filter.$of.length).toBe(9)
+		expect(output).toMatchSnapshot()
 	})
 
-	it('only persists the variables definition one level deep', () => {
+	it('only allows the variables to be used where they are declared', () => {
 		const input = {
 			result: 'Req',
 			Parent: {
