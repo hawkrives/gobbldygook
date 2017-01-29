@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { evaluate } from '../evaluate'
 
 describe('evaluate', () => {
@@ -23,6 +22,6 @@ describe('evaluate', () => {
 		const courses = []
 		const overrides = {}
 
-		expect(() => evaluate({ courses, overrides }, area)).not.to.throw()
+		expect(() => evaluate({ courses, overrides }, area)).not.toThrow()
 	})
 })

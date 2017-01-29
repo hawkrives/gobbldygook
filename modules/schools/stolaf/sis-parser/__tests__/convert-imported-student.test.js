@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import every from 'lodash/every'
 import find from 'lodash/find'
 import {
@@ -128,35 +127,36 @@ describe('convertStudent', () => {
 			},
 		]
 
-		expect(actual).to.have.property('id')
-		expect(actual).to.have.property('name')
-		expect(actual).to.have.property('version')
-		expect(actual).to.have.property('creditsNeeded')
-		expect(actual).to.have.property('matriculation')
-		expect(actual).to.have.property('graduation')
-		expect(actual).to.have.property('advisor')
-		expect(actual).to.have.property('dateLastModified')
-		expect(actual).to.have.property('dateCreated')
-		expect(actual).to.have.property('studies')
-		expect(actual).to.have.property('schedules')
-		expect(actual).to.have.property('overrides')
-		expect(actual).to.have.property('fabrications')
-		expect(actual).to.have.property('settings')
+		expect(actual.id).toBeDefined()
+		expect(actual.name).toBeDefined()
+		expect(actual.version).toBeDefined()
+		expect(actual.creditsNeeded).toBeDefined()
+		expect(actual.matriculation).toBeDefined()
+		expect(actual.graduation).toBeDefined()
+		expect(actual.advisor).toBeDefined()
+		expect(actual.dateLastModified).toBeDefined()
+		expect(actual.dateCreated).toBeDefined()
+		expect(actual.studies).toBeDefined()
+		expect(actual.schedules).toBeDefined()
+		expect(actual.overrides).toBeDefined()
+		expect(actual.fabrications).toBeDefined()
+		expect(actual.settings).toBeDefined()
 
 		for (let study of actual.studies) {
-			expect(study).to.have.property('name')
-			expect(study).to.have.property('type')
-			expect(study).to.have.property('revision', 'latest')
+			expect(study.name).toBeDefined()
+			expect(study.type).toBeDefined()
+			expect(study.revision).toBeDefined()
+			expect(study.revision).toBe('latest')
 		}
 
 		for (let schedule of Object.values(actual.schedules)) {
-			expect(schedule).to.have.property('id')
-			expect(schedule).to.have.property('active')
-			expect(schedule).to.have.property('index')
-			expect(schedule).to.have.property('title')
-			expect(schedule).to.have.property('clbids')
-			expect(schedule).to.have.property('year')
-			expect(schedule).to.have.property('semester')
+			expect(schedule.id).toBeDefined()
+			expect(schedule.active).toBeDefined()
+			expect(schedule.index).toBeDefined()
+			expect(schedule.title).toBeDefined()
+			expect(schedule.clbids).toBeDefined()
+			expect(schedule.year).toBeDefined()
+			expect(schedule.semester).toBeDefined()
 		}
 
 		expect(every(expectedStudies, study => find(actual.studies, study)))

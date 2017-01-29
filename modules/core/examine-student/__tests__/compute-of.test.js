@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { computeOf } from '../compute-chunk'
 
 describe('computeOf', () => {
@@ -26,16 +25,16 @@ describe('computeOf', () => {
 		const { computedResult, matches, counted } = computeOf({ expr, ctx: req, courses, dirty, isNeeded: true })
 
 		expect(computedResult)
-			.to.be.true
+			.toBe(true)
 		expect(matches)
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'CSCI' ], number: 121 },
 				{ department: [ 'CSCI' ], number: 125 },
 			])
 		expect(counted)
-			.to.equal(2)
+			.toBe(2)
 
-		expect(expr).to.deep.equal({
+		expect(expr).toEqual({
 			$type: 'of',
 			$count: { $operator: '$gte', $num: 2 },
 			$of: [

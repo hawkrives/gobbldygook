@@ -1,0 +1,139 @@
+exports[`collectMatches collects matches from "courses" modifiers 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 121,
+  },
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+]
+`;
+
+exports[`collectMatches collects matches from boolean expressions 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 121,
+  },
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+]
+`;
+
+exports[`collectMatches collects matches from child requirements 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 121,
+  },
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+]
+`;
+
+exports[`collectMatches collects matches from course expressions 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 121,
+  },
+]
+`;
+
+exports[`collectMatches collects matches from occurrences 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 121,
+    "year": 2014,
+  },
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 121,
+    "year": 2015,
+  },
+]
+`;
+
+exports[`collectMatches collects matches from of-expressions 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 121,
+  },
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+  Object {
+    "department": Array [
+      "MUSIC",
+    ],
+    "number": 121,
+  },
+  Object {
+    "department": Array [
+      "ESTH",
+    ],
+    "number": 121,
+  },
+]
+`;
+
+exports[`collectMatches collects matches from requirement references 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 121,
+  },
+]
+`;
+
+exports[`collectMatches collects matches from where-expressions 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 121,
+  },
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+]
+`;
+
+exports[`collectMatches does not try to collect matches from requirements with no result key 1`] = `Array []`;

@@ -1,20 +1,17 @@
-import { expect } from 'chai'
 import { encodeStudent } from '../encode-student'
 
-let oldEncode = global.encodeURIComponent
-
-let before = global.before || global.beforeAll
-let after = global.after || global.afterAll
+const newEncode = require('querystring').stringify
+const oldEncode = global.encodeURIComponent
 
 describe('prepareStudentForSave', () => {
 	beforeAll(() => {
-		global.encodeURIComponent = require('querystring').stringify
+		global.encodeURIComponent = newEncode
 	})
 	afterAll(() => {
 		global.encodeURIComponent = oldEncode
 	})
 
 	it('encodes a student', () => {
-		expect(encodeStudent({ name: 's' })).to.equal('')
+		expect(encodeStudent({ name: 's' })).toBe('')
 	})
 })

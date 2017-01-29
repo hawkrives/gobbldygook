@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import findLeafRequirements from '../find-leaf-requirements'
 
 describe('findLeafRequirements', () => {
@@ -527,8 +526,6 @@ describe('findLeafRequirements', () => {
 			'computed': true,
 		}
 
-		expect(findLeafRequirements(tree)).to.deep.equal([
-			tree,
-		])
+		expect(findLeafRequirements(tree)).toEqual([ tree ])
 	})
 })

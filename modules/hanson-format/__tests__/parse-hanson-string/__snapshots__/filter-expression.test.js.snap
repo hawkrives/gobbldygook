@@ -1,0 +1,69 @@
+exports[`FilterExpression allows a "distinct" modifier 1`] = `
+Object {
+  "$distinct": true,
+  "$filterType": "of",
+  "$of": Array [
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "$type": "course",
+    },
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "$type": "course",
+    },
+  ],
+  "$type": "filter",
+}
+`;
+
+exports[`FilterExpression allows filtering by a list of valid courses 1`] = `
+Object {
+  "$distinct": false,
+  "$filterType": "of",
+  "$of": Array [
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "$type": "course",
+    },
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "$type": "course",
+    },
+  ],
+  "$type": "filter",
+}
+`;
+
+exports[`FilterExpression allows filtering by a where-expression 1`] = `
+Object {
+  "$distinct": false,
+  "$filterType": "where",
+  "$type": "filter",
+  "$where": Object {
+    "$key": "dept",
+    "$operator": "$eq",
+    "$type": "qualification",
+    "$value": "ASIAN",
+  },
+}
+`;

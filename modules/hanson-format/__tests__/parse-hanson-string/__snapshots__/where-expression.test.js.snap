@@ -1,0 +1,358 @@
+exports[`WhereExpression describes courses "where" a fact is true 1`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$distinct": false,
+  "$type": "where",
+  "$where": Object {
+    "$key": "a",
+    "$operator": "$eq",
+    "$type": "qualification",
+    "$value": 1,
+  },
+}
+`;
+
+exports[`WhereExpression may require distinct course 1`] = `
+Object {
+  "$count": Object {
+    "$num": 2,
+    "$operator": "$gte",
+  },
+  "$distinct": true,
+  "$type": "where",
+  "$where": Object {
+    "$key": "a",
+    "$operator": "$eq",
+    "$type": "qualification",
+    "$value": 1,
+  },
+}
+`;
+
+exports[`nested qualifiers function may optionally include a space between the name and the paren 1`] = `
+Object {
+  "$key": "year",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": Object {
+    "$name": "max",
+    "$prop": "year",
+    "$type": "function",
+    "$where": Object {
+      "$key": "gereqs",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "year",
+    },
+  },
+}
+`;
+
+exports[`nested qualifiers function may optionally include a space between the name and the paren 2`] = `
+Object {
+  "$key": "year",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": Object {
+    "$name": "max",
+    "$prop": "year",
+    "$type": "function",
+    "$where": Object {
+      "$key": "gereqs",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "year",
+    },
+  },
+}
+`;
+
+exports[`qualification value may be compared by != (not equal to) 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$ne",
+  "$type": "qualification",
+  "$value": "b",
+}
+`;
+
+exports[`qualification value may be compared by < (less than) 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$lt",
+  "$type": "qualification",
+  "$value": "b",
+}
+`;
+
+exports[`qualification value may be compared by <= (less than or equal to) 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$lte",
+  "$type": "qualification",
+  "$value": "b",
+}
+`;
+
+exports[`qualification value may be compared by = (single equals) 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": "b",
+}
+`;
+
+exports[`qualification value may be compared by == (double equals) 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": "b",
+}
+`;
+
+exports[`qualification value may be compared by => (greater than or equal to) 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$gte",
+  "$type": "qualification",
+  "$value": "b",
+}
+`;
+
+exports[`qualification value may be compared by > (greater than) 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$gt",
+  "$type": "qualification",
+  "$value": "b",
+}
+`;
+
+exports[`qualifiers can use boolean logic boolean logic can be overridden by parens: (a | b) & c 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$key": "dept",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "THEAT",
+    },
+    Object {
+      "$booleanType": "or",
+      "$or": Array [
+        Object {
+          "$key": "num",
+          "$operator": "$eq",
+          "$type": "qualification",
+          "$value": 233,
+        },
+        Object {
+          "$key": "num",
+          "$operator": "$eq",
+          "$type": "qualification",
+          "$value": 253,
+        },
+      ],
+      "$type": "boolean",
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`qualifiers can use boolean logic can be separated by & 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$key": "a",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "b",
+    },
+    Object {
+      "$key": "c",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "d",
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`qualifiers can use boolean logic can be separated by | 1`] = `
+Object {
+  "$booleanType": "or",
+  "$or": Array [
+    Object {
+      "$key": "a",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "b",
+    },
+    Object {
+      "$key": "c",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "d",
+    },
+  ],
+  "$type": "boolean",
+}
+`;
+
+exports[`qualifiers can use boolean logic can used in boolean logic: a & b | c 1`] = `
+Object {
+  "$booleanType": "or",
+  "$or": Array [
+    Object {
+      "$and": Array [
+        Object {
+          "$key": "a",
+          "$operator": "$eq",
+          "$type": "qualification",
+          "$value": "b",
+        },
+        Object {
+          "$key": "c",
+          "$operator": "$eq",
+          "$type": "qualification",
+          "$value": "d",
+        },
+      ],
+      "$booleanType": "and",
+      "$type": "boolean",
+    },
+    Object {
+      "$key": "c",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "e",
+    },
+  ],
+  "$type": "boolean",
+}
+`;
+
+exports[`qualifiers can use boolean logic can used in boolean logic: a | b & c 1`] = `
+Object {
+  "$booleanType": "or",
+  "$or": Array [
+    Object {
+      "$key": "a",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "b",
+    },
+    Object {
+      "$and": Array [
+        Object {
+          "$key": "c",
+          "$operator": "$eq",
+          "$type": "qualification",
+          "$value": "d",
+        },
+        Object {
+          "$key": "c",
+          "$operator": "$eq",
+          "$type": "qualification",
+          "$value": "e",
+        },
+      ],
+      "$booleanType": "and",
+      "$type": "boolean",
+    },
+  ],
+  "$type": "boolean",
+}
+`;
+
+exports[`qualifiers can use boolean logic value may be a boolean and-list 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$key": "dept",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "THEAT",
+    },
+    Object {
+      "$key": "num",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": Object {
+        "$and": Array [
+          233,
+          253,
+        ],
+        "$booleanType": "and",
+        "$type": "boolean",
+      },
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`qualifiers can use boolean logic value may be a boolean or-list 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$key": "dept",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": "THEAT",
+    },
+    Object {
+      "$key": "num",
+      "$operator": "$eq",
+      "$type": "qualification",
+      "$value": Object {
+        "$booleanType": "or",
+        "$or": Array [
+          233,
+          253,
+        ],
+        "$type": "boolean",
+      },
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`qualifiers syntax value may be a number (coerced to integers) 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": 1,
+}
+`;
+
+exports[`qualifiers syntax value may include hyphens 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": "BTS-B",
+}
+`;
+
+exports[`qualifiers syntax value may include underscores 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": "BTS_B",
+}
+`;

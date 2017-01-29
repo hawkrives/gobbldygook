@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { countCredits } from '../count-credits'
 
 describe('countCredits', () => {
@@ -8,6 +7,15 @@ describe('countCredits', () => {
 			{ credits: 1.5 },
 			{ credits: 1.5 },
 		]
-		expect(countCredits(courses)).to.equal(4.0)
+		expect(countCredits(courses)).toBe(4)
+	})
+
+	it('can return floating point values', () => {
+		const courses = [
+			{ credits: 1.5 },
+			{ credits: 1.5 },
+			{ credits: 1.5 },
+		]
+		expect(countCredits(courses)).toBe(4.5)
 	})
 })

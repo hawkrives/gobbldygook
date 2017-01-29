@@ -1,0 +1,849 @@
+exports[`computeBoolean can compute the result of several course expressions 1`] = `
+Object {
+  "$booleanType": "or",
+  "$or": Array [
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "$type": "course",
+      "_checked": true,
+      "_result": false,
+    },
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "$type": "course",
+      "_checked": true,
+      "_request": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "_result": true,
+      "_taken": true,
+    },
+  ],
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean can compute the result of several course expressions 2`] = `
+Array [
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 125,
+  },
+]
+`;
+
+exports[`computeBoolean can compute the result of several modifier expressions 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$children": "$all",
+      "$count": Object {
+        "$num": 3,
+        "$operator": "$gte",
+      },
+      "$from": "children",
+      "$type": "modifier",
+      "$what": "course",
+      "_checked": true,
+      "_counted": 3,
+      "_matches": Array [
+        Object {
+          "_extraKeys": Array [
+            "credits",
+          ],
+          "credits": 1,
+          "department": Array [
+            "ART",
+          ],
+          "number": 120,
+        },
+        Object {
+          "_extraKeys": Array [
+            "credits",
+          ],
+          "credits": 1,
+          "department": Array [
+            "ART",
+          ],
+          "number": 104,
+        },
+        Object {
+          "_extraKeys": Array [
+            "credits",
+          ],
+          "credits": 1,
+          "department": Array [
+            "ART",
+          ],
+          "number": 105,
+        },
+      ],
+      "_result": true,
+    },
+    Object {
+      "$children": Array [
+        Object {
+          "$requirement": "A",
+          "$type": "reference",
+        },
+        Object {
+          "$requirement": "C",
+          "$type": "reference",
+        },
+      ],
+      "$count": Object {
+        "$num": 2,
+        "$operator": "$gte",
+      },
+      "$from": "children",
+      "$type": "modifier",
+      "$what": "credit",
+      "_checked": true,
+      "_counted": 3,
+      "_matches": Array [
+        Object {
+          "_extraKeys": Array [
+            "credits",
+          ],
+          "credits": 1,
+          "department": Array [
+            "ART",
+          ],
+          "number": 120,
+        },
+        Object {
+          "_extraKeys": Array [
+            "credits",
+          ],
+          "credits": 1,
+          "department": Array [
+            "ART",
+          ],
+          "number": 104,
+        },
+        Object {
+          "_extraKeys": Array [
+            "credits",
+          ],
+          "credits": 1,
+          "department": Array [
+            "ART",
+          ],
+          "number": 105,
+        },
+      ],
+      "_result": true,
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean can compute the result of several modifier expressions 2`] = `
+Array [
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "ART",
+    ],
+    "number": 120,
+  },
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "ART",
+    ],
+    "number": 104,
+  },
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "ART",
+    ],
+    "number": 105,
+  },
+]
+`;
+
+exports[`computeBoolean can compute the result of several occurrence expressions 1`] = `
+Object {
+  "$booleanType": "or",
+  "$or": Array [
+    Object {
+      "$count": Object {
+        "$num": 1,
+        "$operator": "$gte",
+      },
+      "$course": Object {
+        "department": Array [
+          "THEAT",
+        ],
+        "number": 222,
+      },
+      "$type": "occurrence",
+      "_checked": true,
+      "_counted": 0,
+      "_matches": Array [],
+      "_result": false,
+    },
+    Object {
+      "$count": Object {
+        "$num": 3,
+        "$operator": "$gte",
+      },
+      "$course": Object {
+        "department": Array [
+          "THEAT",
+        ],
+        "number": 266,
+      },
+      "$type": "occurrence",
+      "_checked": true,
+      "_counted": 3,
+      "_matches": Array [
+        Object {
+          "department": Array [
+            "THEAT",
+          ],
+          "number": 266,
+          "semester": 1,
+          "year": 2014,
+        },
+        Object {
+          "department": Array [
+            "THEAT",
+          ],
+          "number": 266,
+          "semester": 3,
+          "year": 2014,
+        },
+        Object {
+          "department": Array [
+            "THEAT",
+          ],
+          "number": 266,
+          "semester": 1,
+          "year": 2015,
+        },
+      ],
+      "_result": true,
+    },
+  ],
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean can compute the result of several occurrence expressions 2`] = `
+Array [
+  Object {
+    "department": Array [
+      "THEAT",
+    ],
+    "number": 266,
+    "semester": 1,
+    "year": 2014,
+  },
+  Object {
+    "department": Array [
+      "THEAT",
+    ],
+    "number": 266,
+    "semester": 3,
+    "year": 2014,
+  },
+  Object {
+    "department": Array [
+      "THEAT",
+    ],
+    "number": 266,
+    "semester": 1,
+    "year": 2015,
+  },
+]
+`;
+
+exports[`computeBoolean can compute the result of several of-expressions 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$count": Object {
+        "$num": 1,
+        "$operator": "$gte",
+      },
+      "$of": Array [
+        Object {
+          "$course": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 121,
+          },
+          "$type": "course",
+          "_checked": true,
+          "_result": false,
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 125,
+          },
+          "$type": "course",
+          "_checked": true,
+          "_request": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 125,
+          },
+          "_result": true,
+          "_taken": true,
+        },
+      ],
+      "$type": "of",
+      "_checked": true,
+      "_counted": 1,
+      "_matches": Array [
+        Object {
+          "department": Array [
+            "CSCI",
+          ],
+          "number": 125,
+        },
+      ],
+      "_result": true,
+    },
+    Object {
+      "$count": Object {
+        "$num": 1,
+        "$operator": "$gte",
+      },
+      "$of": Array [
+        Object {
+          "$course": Object {
+            "department": Array [
+              "ART",
+            ],
+            "number": 102,
+          },
+          "$type": "course",
+          "_checked": true,
+          "_request": Object {
+            "department": Array [
+              "ART",
+            ],
+            "number": 102,
+          },
+          "_result": true,
+          "_taken": true,
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "ART",
+            ],
+            "number": 103,
+          },
+          "$type": "course",
+          "_checked": true,
+          "_result": false,
+        },
+      ],
+      "$type": "of",
+      "_checked": true,
+      "_counted": 1,
+      "_matches": Array [
+        Object {
+          "department": Array [
+            "ART",
+          ],
+          "number": 102,
+        },
+      ],
+      "_result": true,
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean can compute the result of several of-expressions 2`] = `
+Array [
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 125,
+  },
+  Object {
+    "department": Array [
+      "ART",
+    ],
+    "number": 102,
+  },
+]
+`;
+
+exports[`computeBoolean can compute the result of several other boolean expressions 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$booleanType": "or",
+      "$or": Array [
+        Object {
+          "$course": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 121,
+          },
+          "$type": "course",
+          "_checked": true,
+          "_result": false,
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 125,
+          },
+          "$type": "course",
+          "_checked": true,
+          "_request": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 125,
+          },
+          "_result": true,
+          "_taken": true,
+        },
+      ],
+      "$type": "boolean",
+      "_checked": true,
+      "_matches": Array [
+        Object {
+          "department": Array [
+            "CSCI",
+          ],
+          "number": 125,
+        },
+      ],
+      "_result": true,
+    },
+    Object {
+      "$booleanType": "or",
+      "$or": Array [
+        Object {
+          "$course": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 130,
+          },
+          "$type": "course",
+          "_checked": true,
+          "_request": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 130,
+          },
+          "_result": true,
+          "_taken": true,
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 131,
+          },
+          "$type": "course",
+          "_checked": true,
+          "_result": false,
+        },
+      ],
+      "$type": "boolean",
+      "_checked": true,
+      "_matches": Array [
+        Object {
+          "department": Array [
+            "CSCI",
+          ],
+          "number": 130,
+        },
+      ],
+      "_result": true,
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean can compute the result of several other boolean expressions 2`] = `
+Array [
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 125,
+  },
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 130,
+  },
+]
+`;
+
+exports[`computeBoolean can compute the result of several requirement references 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$requirement": "A",
+      "$type": "reference",
+      "_checked": true,
+      "_matches": Array [
+        Object {
+          "department": Array [
+            "ART",
+          ],
+          "number": 120,
+        },
+      ],
+      "_result": true,
+    },
+    Object {
+      "$requirement": "C",
+      "$type": "reference",
+      "_checked": true,
+      "_matches": Array [
+        Object {
+          "department": Array [
+            "ART",
+          ],
+          "number": 104,
+        },
+        Object {
+          "department": Array [
+            "ART",
+          ],
+          "number": 105,
+        },
+      ],
+      "_result": true,
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean can compute the result of several requirement references 2`] = `
+Array [
+  Object {
+    "department": Array [
+      "ART",
+    ],
+    "number": 120,
+  },
+  Object {
+    "department": Array [
+      "ART",
+    ],
+    "number": 104,
+  },
+  Object {
+    "department": Array [
+      "ART",
+    ],
+    "number": 105,
+  },
+]
+`;
+
+exports[`computeBoolean can compute the result of several where-expressions 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$count": Object {
+        "$num": 1,
+        "$operator": "$gte",
+      },
+      "$distinct": false,
+      "$type": "where",
+      "$where": Object {
+        "$key": "gereqs",
+        "$operator": "$eq",
+        "$type": "qualification",
+        "$value": "WRI",
+      },
+      "_checked": true,
+      "_counted": 1,
+      "_matches": Array [
+        Object {
+          "department": Array [
+            "CSCI",
+          ],
+          "gereqs": Array [
+            "WRI",
+          ],
+          "number": 125,
+        },
+      ],
+      "_result": true,
+    },
+    Object {
+      "$count": Object {
+        "$num": 1,
+        "$operator": "$gte",
+      },
+      "$distinct": false,
+      "$type": "where",
+      "$where": Object {
+        "$key": "gereqs",
+        "$operator": "$eq",
+        "$type": "qualification",
+        "$value": "BTS-T",
+      },
+      "_checked": true,
+      "_counted": 1,
+      "_matches": Array [
+        Object {
+          "department": Array [
+            "ART",
+          ],
+          "gereqs": Array [
+            "BTS-T",
+          ],
+          "number": 102,
+        },
+      ],
+      "_result": true,
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean can compute the result of several where-expressions 2`] = `
+Array [
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "gereqs": Array [
+      "WRI",
+    ],
+    "number": 125,
+  },
+  Object {
+    "department": Array [
+      "ART",
+    ],
+    "gereqs": Array [
+      "BTS-T",
+    ],
+    "number": 102,
+  },
+]
+`;
+
+exports[`computeBoolean computes an or-clause even if the first item is false 1`] = `
+Object {
+  "$booleanType": "or",
+  "$or": Array [
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "$type": "course",
+      "_checked": true,
+      "_result": false,
+    },
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "$type": "course",
+      "_checked": true,
+      "_request": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "_result": true,
+      "_taken": true,
+    },
+  ],
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean computes an or-clause even if the first item is false 2`] = `
+Array [
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 125,
+  },
+]
+`;
+
+exports[`computeBoolean computes the boolean result of and-clauses 1`] = `
+Object {
+  "$and": Array [
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "$type": "course",
+      "_checked": true,
+      "_request": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "_result": true,
+      "_taken": true,
+    },
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "$type": "course",
+      "_checked": true,
+      "_request": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "_result": true,
+      "_taken": true,
+    },
+  ],
+  "$booleanType": "and",
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean computes the boolean result of and-clauses 2`] = `
+Array [
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 125,
+  },
+]
+`;
+
+exports[`computeBoolean computes the boolean result of or-clauses 1`] = `
+Object {
+  "$booleanType": "or",
+  "$or": Array [
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "$type": "course",
+      "_checked": true,
+      "_request": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "_result": true,
+      "_taken": true,
+    },
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "$type": "course",
+      "_checked": true,
+      "_request": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "_result": false,
+      "_taken": true,
+    },
+  ],
+  "$type": "boolean",
+}
+`;
+
+exports[`computeBoolean computes the boolean result of or-clauses 2`] = `
+Array [
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+]
+`;

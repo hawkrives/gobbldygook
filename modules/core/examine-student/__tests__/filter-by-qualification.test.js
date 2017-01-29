@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { filterByQualification } from '../filter-by-where-clause'
 
 describe('filterByQualification', () => {
@@ -18,7 +17,7 @@ describe('filterByQualification', () => {
 			{ department: [ 'REL' ], number: 115, gereqs: [ 'BTS-T' ], year: 2013 },
 		]
 
-		expect(filterByQualification(courses, basicQualification)).to.deep.equal([
+		expect(filterByQualification(courses, basicQualification)).toEqual([
 			{ department: [ 'CSCI' ], number: 375, gereqs: [ 'EIN' ], year: 2013 },
 		])
 	})
@@ -39,7 +38,7 @@ describe('filterByQualification', () => {
 			{ department: [ 'REL' ], number: 115, gereqs: [ 'BTS-T' ], year: 2013 },
 		]
 
-		expect(filterByQualification(courses, basicQualification)).to.deep.equal([
+		expect(filterByQualification(courses, basicQualification)).toEqual([
 			{ department: [ 'CSCI' ], number: 375, gereqs: [ 'EIN' ], year: 2013 },
 			{ department: [ 'REL' ], number: 111, section: 'C', gereqs: [ 'BTS-T' ], year: 2012 },
 			{ department: [ 'REL' ], number: 115, gereqs: [ 'BTS-T' ], year: 2013 },
@@ -62,7 +61,7 @@ describe('filterByQualification', () => {
 			{ department: [ 'REL' ], number: 115, gereqs: [ 'BTS-T' ], year: 2013 },
 		]
 
-		expect(() => filterByQualification(courses, basicQualification)).to.throw(TypeError)
+		expect(() => filterByQualification(courses, basicQualification)).toThrowError(TypeError)
 	})
 
 	it('filters an array based on a nested where-query with the max function', () => {
@@ -91,7 +90,7 @@ describe('filterByQualification', () => {
 			{ department: [ 'REL' ], number: 115, gereqs: [ 'BTS-T' ], year: 2013 },
 		]
 
-		expect(filterByQualification(courses, advancedQualificationMax)).to.deep.equal([
+		expect(filterByQualification(courses, advancedQualificationMax)).toEqual([
 			{ department: [ 'ART', 'ASIAN' ], number: 310, lab: true, year: 2012 },
 			{ department: [ 'CSCI' ], number: 375, gereqs: [ 'EIN' ], year: 2013 },
 			{ department: [ 'REL' ], number: 111, section: 'C', gereqs: [ 'BTS-T' ], year: 2012 },
@@ -125,7 +124,7 @@ describe('filterByQualification', () => {
 			{ department: [ 'REL' ], number: 115, gereqs: [ 'BTS-T' ], year: 2013 },
 		]
 
-		expect(filterByQualification(courses, advancedQualificationMin)).to.deep.equal([
+		expect(filterByQualification(courses, advancedQualificationMin)).toEqual([
 			{ department: [ 'ART', 'ASIAN' ], number: 310, lab: true, year: 2012 },
 			{ department: [ 'REL' ], number: 111, section: 'C', gereqs: [ 'BTS-T' ], year: 2012 },
 		])
@@ -158,7 +157,7 @@ describe('filterByQualification', () => {
 		]
 
 		expect(() => filterByQualification(courses, advancedQualificationBad))
-			.to.throw(ReferenceError)
+			.toThrowError(ReferenceError)
 	})
 
 	it('must specify a function when utilizing a nested where-query', () => {
@@ -188,7 +187,7 @@ describe('filterByQualification', () => {
 		]
 
 		expect(() => filterByQualification(courses, advancedQualificationBad))
-			.to.throw(TypeError)
+			.toThrowError(TypeError)
 	})
 
 	it('can require that the courses be distinct', () => {
@@ -207,7 +206,7 @@ describe('filterByQualification', () => {
 		const expected = [ courses[0] ]
 		const actual = filterByQualification(courses, clause, { distinct: true })
 
-		expect(actual).to.deep.equal(expected)
+		expect(actual).toEqual(expected)
 	})
 
 	it('does not count things that don\'t count when matching "distinct"', () => {
@@ -226,6 +225,6 @@ describe('filterByQualification', () => {
 		const expected = [ courses[1] ]
 		const actual = filterByQualification(courses, clause, { distinct: true })
 
-		expect(actual).to.deep.equal(expected)
+		expect(actual).toEqual(expected)
 	})
 })

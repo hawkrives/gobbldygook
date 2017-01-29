@@ -1,0 +1,71 @@
+exports[`collectTakenCourses can go down many layers deep 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+  Object {
+    "department": Array [
+      "ART",
+      "ASIAN",
+    ],
+    "number": 170,
+  },
+  Object {
+    "department": Array [
+      "ART",
+      "ASIAN",
+    ],
+    "number": 175,
+  },
+  Object {
+    "department": Array [
+      "ART",
+      "ASIAN",
+    ],
+    "number": 190,
+  },
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 210,
+  },
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 215,
+  },
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 220,
+  },
+]
+`;
+
+exports[`collectTakenCourses can go down one layer deep 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 120,
+  },
+]
+`;
+
+exports[`collectTakenCourses collects a list of all of the courses anywhere in this object which have the \`_taken\` property. 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "ASIAN",
+    ],
+    "number": 120,
+  },
+]
+`;

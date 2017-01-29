@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import getOccurrences from '../get-occurrences'
 
 describe('getOccurrences', () => {
@@ -11,7 +10,7 @@ describe('getOccurrences', () => {
 
 		const lookingFor = { department: [ 'THEAT' ], number: 222 }
 
-		expect(getOccurrences(lookingFor, courses)).to.deep.equal([
+		expect(getOccurrences(lookingFor, courses)).toEqual([
 			{ department: [ 'THEAT' ], number: 222 },
 			{ department: [ 'THEAT' ], number: 222 },
 		])
@@ -26,7 +25,7 @@ describe('getOccurrences', () => {
 
 		const lookingFor = { department: [ 'THEAT' ], number: 222 }
 
-		expect(getOccurrences(lookingFor, courses)).to.deep.equal([
+		expect(getOccurrences(lookingFor, courses)).toEqual([
 			{ department: [ 'THEAT' ], number: 222, section: 'A' },
 			{ department: [ 'THEAT' ], number: 222, section: 'B' },
 		])

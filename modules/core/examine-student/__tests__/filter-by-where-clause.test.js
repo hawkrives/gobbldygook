@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import filterByWhereClause from '../filter-by-where-clause'
 
 describe('filterByWhereClause', () => {
@@ -18,7 +17,7 @@ describe('filterByWhereClause', () => {
 			{ department: [ 'REL' ], number: 115, gereqs: [ 'BTS-T' ], year: 2015 },
 		]
 
-		expect(filterByWhereClause(courses, clause)).to.deep.equal([
+		expect(filterByWhereClause(courses, clause)).toEqual([
 			{ department: [ 'ASIAN' ], number: 155, gereqs: [ 'EIN' ], year: 2016 },
 			{ department: [ 'CSCI' ], number: 375, gereqs: [ 'EIN' ], year: 2015 },
 		])
@@ -27,7 +26,7 @@ describe('filterByWhereClause', () => {
 	it('throws if confronted with an unknown type', () => {
 		const clause = { $type: 'bad' }
 
-		expect(() => filterByWhereClause([], clause)).to.throw(TypeError)
+		expect(() => filterByWhereClause([], clause)).toThrowError(TypeError)
 	})
 
 	it('filters an array of courses by an and-joined where-clause', () => {
@@ -68,7 +67,7 @@ describe('filterByWhereClause', () => {
 			{ department: [ 'REL' ], number: 115, gereqs: [ 'BTS-T' ], year: 2015 },
 		]
 
-		expect(filterByWhereClause(courses, clause)).to.deep.equal([
+		expect(filterByWhereClause(courses, clause)).toEqual([
 			{ department: [ 'CSCI' ], number: 375, gereqs: [ 'EIN' ], year: 2015 },
 		])
 	})
@@ -91,7 +90,7 @@ describe('filterByWhereClause', () => {
 			{ department: [ 'REL' ], number: 115, gereqs: [ 'BTS-T' ], year: 2015 },
 		]
 
-		expect(filterByWhereClause(courses, clause)).to.deep.equal([
+		expect(filterByWhereClause(courses, clause)).toEqual([
 			{ department: [ 'ASIAN' ], number: 155, gereqs: [ 'EIN' ], year: 2016 },
 			{ department: [ 'CSCI' ], number: 375, gereqs: [ 'EIN' ], year: 2015 },
 			{ department: [ 'ART', 'ASIAN' ], number: 310, lab: true, year: 2012 },
@@ -110,7 +109,7 @@ describe('filterByWhereClause', () => {
 			{ department: [ 'ART', 'ASIAN' ], number: 310, lab: true, year: 2012 },
 		]
 
-		expect(() => filterByWhereClause(courses, clause)).to.throw(TypeError)
+		expect(() => filterByWhereClause(courses, clause)).toThrow(TypeError)
 	})
 
 	it('can require that the courses be distinct', () => {
@@ -129,7 +128,7 @@ describe('filterByWhereClause', () => {
 		const expected = [ courses[0] ]
 		const actual = filterByWhereClause(courses, clause, { distinct: true })
 
-		expect(actual).to.deep.equal(expected)
+		expect(actual).toEqual(expected)
 	})
 
 	it('does not count things that don\'t count when matching "distinct"', () => {
@@ -148,6 +147,6 @@ describe('filterByWhereClause', () => {
 		const expected = [ courses[1] ]
 		const actual = filterByWhereClause(courses, clause, { distinct: true })
 
-		expect(actual).to.deep.equal(expected)
+		expect(actual).toEqual(expected)
 	})
 })

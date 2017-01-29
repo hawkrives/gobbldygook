@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { sortStudiesByType } from '../sort-studies-by-type'
 
 describe('sortStudiesByType', () => {
@@ -9,13 +8,8 @@ describe('sortStudiesByType', () => {
 			{ type: 'emphasis' },
 			{ type: 'major' },
 		]
-		const expected = [
-			{ type: 'degree' },
-			{ type: 'major' },
-			{ type: 'concentration' },
-			{ type: 'emphasis' },
-		]
-		expect(sortStudiesByType(input)).to.deep.equal(expected)
+
+		expect(sortStudiesByType(input)).toMatchSnapshot()
 	})
 })
 
