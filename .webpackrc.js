@@ -257,8 +257,13 @@ const config = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules\/(?!p-.*\/).*/,
+				exclude: /node_modules/,
 				use: [ { loader: 'babel-loader', options: { cacheDirectory: true } } ],
+			},
+			{
+				test: /\.js$/,
+				include: /node_modules[/]p-.*[/].*[.]js$/,
+				use: [ { loader: 'babel-loader', options: { plugins: [ 'transform-es2015-modules-commonjs' ], cacheDirectory: true } } ],
 			},
 			{
 				test: /\.worker.js$/,
