@@ -39,20 +39,10 @@ describe('computeModifier', () => {
 
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
-		expect(computedResult)
-			.toBe(true)
-		expect(matches)
-			.toEqual([ { department: [ 'REL' ], number: 111 } ])
-		expect(counted)
-			.toBe(1)
-
-		expect(modifier).toEqual({
-			$type: 'modifier',
-			$count: { $operator: '$gte', $num: 1 },
-			$what: 'course',
-			$from: 'children',
-			$children: '$all',
-		})
+		expect(computedResult).toBe(true)
+		expect(matches).toMatchSnapshot()
+		expect(counted).toBe(1)
+		expect(modifier).toMatchSnapshot()
 	})
 
 	it('checks for <things> from specified children', () => {
@@ -91,20 +81,10 @@ describe('computeModifier', () => {
 
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
-		expect(computedResult)
-			.toBe(true)
-		expect(matches)
-			.toEqual([ { department: [ 'REL' ], number: 111 } ])
-		expect(counted)
-			.toBe(1)
-
-		expect(modifier).toEqual({
-			$type: 'modifier',
-			$count: { $operator: '$gte', $num: 1 },
-			$what: 'course',
-			$from: 'children',
-			$children: [ { $type: 'reference', $requirement: 'Bible' } ],
-		})
+		expect(computedResult).toBe(true)
+		expect(matches).toMatchSnapshot()
+		expect(counted).toBe(1)
+		expect(modifier).toMatchSnapshot()
 	})
 
 	it('checks for <things> from the filter', () => {
@@ -140,22 +120,10 @@ describe('computeModifier', () => {
 
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
-		expect(computedResult)
-			.toBe(true)
-		expect(matches)
-			.toEqual([
-				{ department: [ 'REL' ], number: 111 },
-				{ department: [ 'REL' ], number: 112 },
-			])
-		expect(counted)
-			.toBe(2)
-
-		expect(modifier).toEqual({
-			$type: 'modifier',
-			$count: { $operator: '$gte', $num: 1 },
-			$what: 'course',
-			$from: 'filter',
-		})
+		expect(computedResult).toBe(true)
+		expect(matches).toMatchSnapshot()
+		expect(counted).toBe(2)
+		expect(modifier).toMatchSnapshot()
 	})
 
 	it('counts, excluding a given course', () => {
@@ -236,28 +204,11 @@ describe('computeModifier', () => {
 
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
-		expect(computedResult)
-			.toBe(true)
-		expect(matches)
-			.toEqual([
-				{ department: [ 'REL' ], number: 111 },
-				{ department: [ 'REL' ], number: 112 },
-			])
-		expect(counted)
-			.toBe(2)
+		expect(computedResult).toBe(true)
+		expect(matches).toMatchSnapshot()
+		expect(counted).toBe(2)
 
-		expect(modifier).toEqual({
-			$type: 'modifier',
-			$count: { $operator: '$gte', $num: 1 },
-			$what: 'course',
-			$from: 'where',
-			$where: {
-				$type: 'qualification',
-				$key: 'department',
-				$operator: '$eq',
-				$value: 'REL',
-			},
-		})
+		expect(modifier).toMatchSnapshot()
 	})
 
 	it('supports counting courses', () => {
@@ -303,23 +254,10 @@ describe('computeModifier', () => {
 
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
-		expect(computedResult)
-			.toBe(true)
-		expect(matches).toEqual([
-			{ department: [ 'REL' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
-			{ department: [ 'REL' ], number: 112, credits: 1.0, _extraKeys: [ 'credits' ] },
-			{ department: [ 'CSCI' ], number: 251, credits: 1.0, _extraKeys: [ 'credits' ] },
-		])
-		expect(counted)
-			.toBe(3)
-
-		expect(modifier).toEqual({
-			$type: 'modifier',
-			$count: { $operator: '$gte', $num: 3 },
-			$what: 'course',
-			$from: 'children',
-			$children: '$all',
-		})
+		expect(computedResult).toBe(true)
+		expect(matches).toMatchSnapshot()
+		expect(counted).toBe(3)
+		expect(modifier).toMatchSnapshot()
 	})
 
 	it('supports counting departments', () => {
@@ -365,23 +303,10 @@ describe('computeModifier', () => {
 
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
-		expect(computedResult)
-			.toBe(true)
-		expect(matches).toEqual([
-			{ department: [ 'CHEM', 'BIO' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
-			{ department: [ 'CHEM', 'BIO' ], number: 112, credits: 1.0, _extraKeys: [ 'credits' ] },
-			{ department: [ 'CSCI' ], number: 251, credits: 1.0, _extraKeys: [ 'credits' ] },
-		])
-		expect(counted)
-			.toBe(3)
-
-		expect(modifier).toEqual({
-			$type: 'modifier',
-			$count: { $operator: '$gte', $num: 3 },
-			$what: 'department',
-			$from: 'children',
-			$children: '$all',
-		})
+		expect(computedResult).toBe(true)
+		expect(matches).toMatchSnapshot()
+		expect(counted).toBe(3)
+		expect(modifier).toMatchSnapshot()
 	})
 
 	it('supports counting credits', () => {
@@ -428,22 +353,10 @@ describe('computeModifier', () => {
 
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
-		expect(computedResult)
-			.toBe(true)
-		expect(matches).toEqual([
-			{ department: [ 'REL' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
-			{ department: [ 'CSCI' ], number: 251, credits: 1.0, _extraKeys: [ 'credits' ] },
-		])
-		expect(counted)
-			.toBe(2)
-
-		expect(modifier).toEqual({
-			$type: 'modifier',
-			$count: { $operator: '$gte', $num: 2 },
-			$what: 'credit',
-			$from: 'children',
-			$children: '$all',
-		})
+		expect(computedResult).toBe(true)
+		expect(matches).toMatchSnapshot()
+		expect(counted).toBe(2)
+		expect(modifier).toMatchSnapshot()
 	})
 
 	it('can be used to ensure that the student has taken two courses across two departments', () => {
@@ -519,23 +432,13 @@ describe('computeModifier', () => {
 			],
 		})
 
-		expect(courseResults.computedResult)
-			.toBe(true)
-		expect(courseResults.matches).toEqual([
-			{ department: [ 'CHEM', 'BIO' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
-			{ department: [ 'CHEM', 'BIO' ], number: 112, credits: 1.0, _extraKeys: [ 'credits' ] },
-		])
-		expect(courseResults.counted)
-			.toBe(2)
+		expect(courseResults.computedResult).toBe(true)
+		expect(courseResults.matches).toMatchSnapshot()
+		expect(courseResults.counted).toBe(2)
 
-		expect(departmentResults.computedResult)
-			.toBe(true)
-		expect(departmentResults.matches).toEqual([
-			{ department: [ 'CHEM', 'BIO' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
-			{ department: [ 'CHEM', 'BIO' ], number: 112, credits: 1.0, _extraKeys: [ 'credits' ] },
-		])
-		expect(departmentResults.counted)
-			.toBe(2)
+		expect(departmentResults.computedResult).toBe(true)
+		expect(departmentResults.matches).toMatchSnapshot()
+		expect(departmentResults.counted).toBe(2)
 	})
 
 	it('throws when $what is none of "course", "credit", nor "department"', () => {

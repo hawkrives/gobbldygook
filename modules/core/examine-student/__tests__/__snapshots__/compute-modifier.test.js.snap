@@ -1,0 +1,306 @@
+exports[`computeModifier can be used to ensure that the student has taken two courses across two departments 1`] = `
+Array [
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "CHEM",
+      "BIO",
+    ],
+    "number": 111,
+  },
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "CHEM",
+      "BIO",
+    ],
+    "number": 112,
+  },
+]
+`;
+
+exports[`computeModifier can be used to ensure that the student has taken two courses across two departments 2`] = `
+Array [
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "CHEM",
+      "BIO",
+    ],
+    "number": 111,
+  },
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "CHEM",
+      "BIO",
+    ],
+    "number": 112,
+  },
+]
+`;
+
+exports[`computeModifier checks for <things> from all children 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "REL",
+    ],
+    "number": 111,
+  },
+]
+`;
+
+exports[`computeModifier checks for <things> from all children 2`] = `
+Object {
+  "$children": "$all",
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "course",
+}
+`;
+
+exports[`computeModifier checks for <things> from specified children 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "REL",
+    ],
+    "number": 111,
+  },
+]
+`;
+
+exports[`computeModifier checks for <things> from specified children 2`] = `
+Object {
+  "$children": Array [
+    Object {
+      "$requirement": "Bible",
+      "$type": "reference",
+    },
+  ],
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "course",
+}
+`;
+
+exports[`computeModifier checks for <things> from the filter 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "REL",
+    ],
+    "number": 111,
+  },
+  Object {
+    "department": Array [
+      "REL",
+    ],
+    "number": 112,
+  },
+]
+`;
+
+exports[`computeModifier checks for <things> from the filter 2`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "filter",
+  "$type": "modifier",
+  "$what": "course",
+}
+`;
+
+exports[`computeModifier checks for <things> from the given where-clause 1`] = `
+Array [
+  Object {
+    "department": Array [
+      "REL",
+    ],
+    "number": 111,
+  },
+  Object {
+    "department": Array [
+      "REL",
+    ],
+    "number": 112,
+  },
+]
+`;
+
+exports[`computeModifier checks for <things> from the given where-clause 2`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "where",
+  "$type": "modifier",
+  "$what": "course",
+  "$where": Object {
+    "$key": "department",
+    "$operator": "$eq",
+    "$type": "qualification",
+    "$value": "REL",
+  },
+}
+`;
+
+exports[`computeModifier supports counting courses 1`] = `
+Array [
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "REL",
+    ],
+    "number": 111,
+  },
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "REL",
+    ],
+    "number": 112,
+  },
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 251,
+  },
+]
+`;
+
+exports[`computeModifier supports counting courses 2`] = `
+Object {
+  "$children": "$all",
+  "$count": Object {
+    "$num": 3,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "course",
+}
+`;
+
+exports[`computeModifier supports counting credits 1`] = `
+Array [
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "REL",
+    ],
+    "number": 111,
+  },
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 251,
+  },
+]
+`;
+
+exports[`computeModifier supports counting credits 2`] = `
+Object {
+  "$children": "$all",
+  "$count": Object {
+    "$num": 2,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "credit",
+}
+`;
+
+exports[`computeModifier supports counting departments 1`] = `
+Array [
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "CHEM",
+      "BIO",
+    ],
+    "number": 111,
+  },
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "CHEM",
+      "BIO",
+    ],
+    "number": 112,
+  },
+  Object {
+    "_extraKeys": Array [
+      "credits",
+    ],
+    "credits": 1,
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 251,
+  },
+]
+`;
+
+exports[`computeModifier supports counting departments 2`] = `
+Object {
+  "$children": "$all",
+  "$count": Object {
+    "$num": 3,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "department",
+}
+`;
