@@ -248,8 +248,6 @@ const config = {
 				},
 			},
 		}),
-
-		new DuplicatePackageCheckerPlugin(),
 	],
 
 	module: {
@@ -326,6 +324,7 @@ else if (isProduction) {
 		new LoaderOptionsPlugin({
 			minimize: true,
 		}),
+		new DuplicatePackageCheckerPlugin(),
 	])
 
 	// remove css plugins
