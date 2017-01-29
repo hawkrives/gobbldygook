@@ -97,6 +97,31 @@ Object {
 }
 `;
 
+exports[`OfExpression if n is "all", it is the number of items in the of-parens 1`] = `
+Object {
+  "$count": Object {
+    "$num": 3,
+    "$operator": "$eq",
+    "$was": "all",
+  },
+  "$of": Array [
+    Object {
+      "$requirement": "A",
+      "$type": "reference",
+    },
+    Object {
+      "$requirement": "B",
+      "$type": "reference",
+    },
+    Object {
+      "$requirement": "C",
+      "$type": "reference",
+    },
+  ],
+  "$type": "of",
+}
+`;
+
 exports[`OfExpression supports boolean statements within the parens 1`] = `
 Object {
   "$count": Object {
