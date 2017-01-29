@@ -1,4 +1,4 @@
-import { customParser, course, qualification } from './parse-hanson-string.support'
+import { customParser } from './parse-hanson-string.support'
 const parse = customParser({ allowedStartRules: [ 'Filter' ] })
 
 describe('FilterExpression', () => {
