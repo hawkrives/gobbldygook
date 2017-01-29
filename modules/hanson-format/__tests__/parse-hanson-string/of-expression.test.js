@@ -1,17 +1,19 @@
-import { customParser, course, reference, boolean } from './parse-hanson-string.support'
+import { customParser, course } from './parse-hanson-string.support'
 const parse = customParser({ allowedStartRules: [ 'Of' ] })
 
 describe('OfExpression', () => {
-	it('supports of statements of the form "n of ()"', () => {
+	it('supports of-statements of the form "n of ()"', () => {
 		expect(() => parse('one of (CHEM 121)')).not.toThrow()
+		expect(parse('one of (CHEM 121)')).toMatchSnapshot()
 	})
 
-	xit('allows "n" to be a number', () => {
-		expect(() => parse('1 of (A, B, C)')).not.toThrow()
+	it('prohibits "n" from being a number', () => {
+		expect(() => parse('1 of (A, B, C)')).toThrow()
 	})
 
 	it('allows "n" to be a counter', () => {
 		expect(() => parse('three of (A, B, C)')).not.toThrow()
+		expect(parse('three of (A, B, C)')).toMatchSnapshot()
 	})
 
 	it('allows "n" to be "all"', () => {
@@ -33,30 +35,11 @@ describe('OfExpression', () => {
 	})
 
 	it('supports boolean statements within the parens', () => {
-		expect(parse('one of (A | B & C, D)')).toEqual({
-			$type: 'of',
-			$count: { $operator: '$gte', $num: 1 },
-			$of: [
-				boolean('or', [
-					reference('A'),
-					boolean('and', [
-						reference('B'),
-						reference('C'),
-					]),
-				]),
-				reference('D'),
-			],
-		})
+		expect(parse('one of (A | B & C, D)')).toMatchSnapshot()
 	})
 
 	it('supports courses within the parens', () => {
-		expect(parse('one of (CSCI 121)')).toEqual({
-			$type: 'of',
-			$count: { $operator: '$gte', $num: 1 },
-			$of: [
-				course('CSCI 121'),
-			],
-		})
+		expect(parse('one of (CSCI 121)')).toMatchSnapshot()
 	})
 
 	it('supports where-clauses within the parens', () => {
@@ -86,13 +69,7 @@ describe('OfExpression', () => {
 	xit('requires that items be separated by commas', () => {})
 
 	it('supports trailing commas', () => {
-		expect(parse('one of (121,)')).toEqual({
-			$type: 'of',
-			$count: { $operator: '$gte', $num: 1 },
-			$of: [
-				{ $type: 'course', $course: { number: 121 } },
-			],
-		})
+		expect(parse('one of (121,)')).toMatchSnapshot()
 	})
 
 	it('throws an error if more items are required than are provided', () => {

@@ -1,0 +1,123 @@
+exports[`OfExpression allows "n" to be a counter 1`] = `
+Object {
+  "$count": Object {
+    "$num": 3,
+    "$operator": "$gte",
+  },
+  "$of": Array [
+    Object {
+      "$requirement": "A",
+      "$type": "reference",
+    },
+    Object {
+      "$requirement": "B",
+      "$type": "reference",
+    },
+    Object {
+      "$requirement": "C",
+      "$type": "reference",
+    },
+  ],
+  "$type": "of",
+}
+`;
+
+exports[`OfExpression supports boolean statements within the parens 1`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$of": Array [
+    Object {
+      "$booleanType": "or",
+      "$or": Array [
+        Object {
+          "$requirement": "A",
+          "$type": "reference",
+        },
+        Object {
+          "$and": Array [
+            Object {
+              "$requirement": "B",
+              "$type": "reference",
+            },
+            Object {
+              "$requirement": "C",
+              "$type": "reference",
+            },
+          ],
+          "$booleanType": "and",
+          "$type": "boolean",
+        },
+      ],
+      "$type": "boolean",
+    },
+    Object {
+      "$requirement": "D",
+      "$type": "reference",
+    },
+  ],
+  "$type": "of",
+}
+`;
+
+exports[`OfExpression supports courses within the parens 1`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$of": Array [
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "$type": "course",
+    },
+  ],
+  "$type": "of",
+}
+`;
+
+exports[`OfExpression supports of-statements of the form "n of ()" 1`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$of": Array [
+    Object {
+      "$course": Object {
+        "department": Array [
+          "CHEM",
+        ],
+        "number": 121,
+      },
+      "$type": "course",
+    },
+  ],
+  "$type": "of",
+}
+`;
+
+exports[`OfExpression supports trailing commas 1`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$of": Array [
+    Object {
+      "$course": Object {
+        "number": 121,
+      },
+      "$type": "course",
+    },
+  ],
+  "$type": "of",
+}
+`;
