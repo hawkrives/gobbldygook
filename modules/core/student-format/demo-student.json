@@ -3,6 +3,10 @@
 	"matriculation": 2012,
 	"graduation": 2016,
 
+	"id": "demo",
+	"dateCreated": "2017-01-29T20:21:22.411Z",
+	"dateLastModified": "2017-01-29T20:21:22.411Z",
+
 	"studies": [
 		{"type": "degree", "name": "Bachelor of Arts", "revision": "latest"},
 		{"type": "major", "name": "Computer Science", "revision": "latest"},
