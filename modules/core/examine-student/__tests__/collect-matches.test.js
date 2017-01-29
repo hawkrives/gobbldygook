@@ -37,11 +37,7 @@ describe('collectMatches', () => {
 			},
 		}
 
-		expect(collectMatches(expr))
-			.toEqual([
-				{ department: [ 'ASIAN' ], number: 121 },
-				{ department: [ 'CSCI' ], number: 121 },
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('does not try to collect matches from requirements with no result key', () => {
@@ -50,7 +46,7 @@ describe('collectMatches', () => {
 			message: 'hi',
 		}
 
-		expect(collectMatches(expr)).toEqual([])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from boolean expressions', () => {
@@ -72,11 +68,7 @@ describe('collectMatches', () => {
 			},
 		}
 
-		expect(collectMatches(expr))
-			.toEqual([
-				{ department: [ 'ASIAN' ], number: 121 },
-				{ department: [ 'CSCI' ], number: 121 },
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from course expressions', () => {
@@ -85,10 +77,7 @@ describe('collectMatches', () => {
 			result: { _result: true, $type: 'course', $course: { department: [ 'ASIAN' ], number: 121 } },
 		}
 
-		expect(collectMatches(expr))
-			.toEqual([
-				{ department: [ 'ASIAN' ], number: 121 },
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from "courses" modifiers', () => {
@@ -106,11 +95,7 @@ describe('collectMatches', () => {
 			},
 		}
 
-		expect(collectMatches(expr))
-			.toEqual([
-				{ department: [ 'ASIAN' ], number: 121 },
-				{ department: [ 'CSCI' ], number: 121 },
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from occurrences', () => {
@@ -127,11 +112,7 @@ describe('collectMatches', () => {
 			},
 		}
 
-		expect(collectMatches(expr))
-			.toEqual([
-				{ department: [ 'ASIAN' ], number: 121, year: 2014 },
-				{ department: [ 'ASIAN' ], number: 121, year: 2015 },
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from of-expressions', () => {
@@ -169,13 +150,7 @@ describe('collectMatches', () => {
 			},
 		}
 
-		expect(collectMatches(expr))
-			.toEqual([
-				{ department: [ 'ASIAN' ], number: 121 },
-				{ department: [ 'CSCI' ], number: 121 },
-				{ department: [ 'MUSIC' ], number: 121 },
-				{ department: [ 'ESTH' ], number: 121 },
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from where-expressions', () => {
@@ -192,11 +167,7 @@ describe('collectMatches', () => {
 			},
 		}
 
-		expect(collectMatches(expr))
-			.toEqual([
-				{ department: [ 'ASIAN' ], number: 121 },
-				{ department: [ 'CSCI' ], number: 121 },
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from requirement references', () => {
@@ -211,9 +182,6 @@ describe('collectMatches', () => {
 			},
 		}
 
-		expect(collectMatches(expr))
-			.toEqual([
-				{ department: [ 'ASIAN' ], number: 121 },
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 })
