@@ -3,72 +3,33 @@ const parse = customParser({ allowedStartRules: [ 'Course' ] })
 
 describe('CourseExpression', () => {
 	it('parses courses with a single department', () => {
-		expect(parse('CSCI 121')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-			},
-		})
+		expect(parse('CSCI 121')).toMatchSnapshot()
 	})
 
 	it('parses courses with a two departments', () => {
-		expect(parse('AS/ES 121')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'AS', 'ES' ],
-				number: 121,
-			},
-		})
+		expect(parse('AS/ES 121')).toMatchSnapshot()
 	})
 
 	it('parses courses with no departments as having no department', () => {
-		expect(parse('121')).toEqual({
-			$type: 'course',
-			$course: { number: 121 },
-		})
+		expect(parse('121')).toMatchSnapshot()
 	})
 
 	it('parses courses with sections', () => {
-		expect(parse('CSCI 121.A')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-				section: 'A',
-			},
-		})
+		expect(parse('CSCI 121.A')).toMatchSnapshot()
 	})
 
-	it('requires that sections be an uppercase letter or apostrophe', () => {
+	it('requires that sections be an uppercase letter or asterisk', () => {
 		expect(() => parse('CSCI 121.A')).not.toThrow()
 		expect(() => parse('CSCI 121.*')).not.toThrow()
 		expect(() => parse('CSCI 121.a')).toThrowError('A course section must be either an uppercase letter [A-Z] or an asterisk [*].')
 	})
 
 	it('parses courses with years', () => {
-		expect(parse('CSCI 121.A.2014')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-				section: 'A',
-				year: 2014,
-			},
-		})
+		expect(parse('CSCI 121.A.2014')).toMatchSnapshot()
 	})
 
 	it('parses courses with semesters', () => {
-		expect(parse('CSCI 121.A.2014.1')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-				section: 'A',
-				year: 2014,
-				semester: 1,
-			},
-		})
+		expect(parse('CSCI 121.A.2014.1')).toMatchSnapshot()
 	})
 
 	it('requires section to be present if year is', () => {
@@ -81,61 +42,23 @@ describe('CourseExpression', () => {
 	})
 
 	it('supports wildcard sections', () => {
-		expect(parse('CSCI 121.*')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-				section: '*',
-			},
-		})
+		expect(parse('CSCI 121.*')).toMatchSnapshot()
 	})
 
 	it('supports wildcard years', () => {
-		expect(parse('CSCI 121.*.*')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-				section: '*',
-				year: '*',
-			},
-		})
+		expect(parse('CSCI 121.*.*')).toMatchSnapshot()
 	})
 
 	it('supports wildcard semesters', () => {
-		expect(parse('CSCI 121.*.*.*')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-				section: '*',
-				year: '*',
-				semester: '*',
-			},
-		})
+		expect(parse('CSCI 121.*.*.*')).toMatchSnapshot()
 	})
 
 	it('supports international courses', () => {
-		expect(parse('CSCI 121I')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-				international: true,
-			},
-		})
+		expect(parse('CSCI 121I')).toMatchSnapshot()
 	})
 
 	it('supports labs', () => {
-		expect(parse('CSCI 121L')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-				type: 'Lab',
-			},
-		})
+		expect(parse('CSCI 121L')).toMatchSnapshot()
 	})
 
 	it('requires the lab to be immediately after the number', () => {
@@ -145,15 +68,7 @@ describe('CourseExpression', () => {
 	})
 
 	it('supports international labs', () => {
-		expect(parse('CSCI 121IL')).toEqual({
-			$type: 'course',
-			$course: {
-				department: [ 'CSCI' ],
-				number: 121,
-				international: true,
-				type: 'Lab',
-			},
-		})
+		expect(parse('CSCI 121IL')).toMatchSnapshot()
 	})
 
 	it('requires international labs to be in IL order', () => {

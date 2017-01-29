@@ -1,0 +1,157 @@
+exports[`CourseExpression parses courses with a single department 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression parses courses with a two departments 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "AS",
+      "ES",
+    ],
+    "number": 121,
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression parses courses with no departments as having no department 1`] = `
+Object {
+  "$course": Object {
+    "number": 121,
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression parses courses with sections 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+    "section": "A",
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression parses courses with semesters 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+    "section": "A",
+    "semester": 1,
+    "year": 2014,
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression parses courses with years 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+    "section": "A",
+    "year": 2014,
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression supports international courses 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "international": true,
+    "number": 121,
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression supports international labs 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "international": true,
+    "number": 121,
+    "type": "Lab",
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression supports labs 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+    "type": "Lab",
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression supports wildcard sections 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+    "section": "*",
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression supports wildcard semesters 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+    "section": "*",
+    "semester": "*",
+    "year": "*",
+  },
+  "$type": "course",
+}
+`;
+
+exports[`CourseExpression supports wildcard years 1`] = `
+Object {
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+    "section": "*",
+    "year": "*",
+  },
+  "$type": "course",
+}
+`;
