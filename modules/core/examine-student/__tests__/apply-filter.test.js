@@ -21,11 +21,7 @@ describe('applyFilter', () => {
 			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
-		expect(applyFilter(query, courses))
-			.toEqual([
-				{ department: [ 'CSCI' ], number: 121 },
-				{ department: [ 'ART', 'ASIAN' ], number: 121 },
-			])
+		expect(applyFilter(query, courses)).toMatchSnapshot()
 	})
 
 	it('filters by where-style queries', () => {
@@ -48,11 +44,7 @@ describe('applyFilter', () => {
 			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
-		expect(applyFilter(query, courses))
-			.toEqual([
-				{ department: [ 'CSCI' ], number: 121 },
-				{ department: [ 'ART', 'ASIAN' ], number: 121 },
-			])
+		expect(applyFilter(query, courses)).toMatchSnapshot()
 	})
 
 	it('filters by list-of-valid-courses queries', () => {
@@ -73,10 +65,7 @@ describe('applyFilter', () => {
 			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
-		expect(applyFilter(query, courses))
-			.toEqual([
-				{ $type: 'course', department: [ 'CSCI' ], number: 121 },
-			])
+		expect(applyFilter(query, courses)).toMatchSnapshot()
 	})
 
 	it('returns the matches on the expression', () => {
@@ -99,17 +88,10 @@ describe('applyFilter', () => {
 			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
-		const expectedMatches = [
-			{ department: [ 'CSCI' ], number: 121 },
-			{ department: [ 'ART', 'ASIAN' ], number: 121 },
-		]
-
 		const result = applyFilter(query, courses)
 
-		expect(result).toEqual(expectedMatches)
-
-		expect(query._matches).toBeDefined()
-		expect(query._matches).toEqual(expectedMatches)
+		expect(result).toMatchSnapshot()
+		expect(query._matches).toMatchSnapshot()
 	})
 
 	it('returns an empty list when not presented with a filter', () => {
@@ -123,6 +105,6 @@ describe('applyFilter', () => {
 			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
-		expect(applyFilter(query, courses)).toEqual([])
+		expect(applyFilter(query, courses)).toMatchSnapshot()
 	})
 })
