@@ -1,9 +1,9 @@
-import { customParser, course } from './parse-hanson-string.support'
+import { customParser } from './parse-hanson-string.support'
 const parse = customParser({ allowedStartRules: [ 'Of' ] })
+const course = customParser({ allowedStartRules: [ 'Course' ] })
 
 describe('OfExpression', () => {
 	it('supports of-statements of the form "n of ()"', () => {
-		expect(() => parse('one of (CHEM 121)')).not.toThrow()
 		expect(parse('one of (CHEM 121)')).toMatchSnapshot()
 	})
 
@@ -12,12 +12,11 @@ describe('OfExpression', () => {
 	})
 
 	it('allows "n" to be a counter', () => {
-		expect(() => parse('three of (A, B, C)')).not.toThrow()
 		expect(parse('three of (A, B, C)')).toMatchSnapshot()
 	})
 
 	it('allows "n" to be "all"', () => {
-		expect(() => parse('all of (A, B, C)')).not.toThrow()
+		expect(parse('all of (A, B, C)')).toMatchSnapshot()
 	})
 
 	it('if n is "all", it is the number of items in the of-parens', () => {
@@ -27,11 +26,11 @@ describe('OfExpression', () => {
 	})
 
 	it('allows "n" to be "any"', () => {
-		expect(() => parse('any of (A, B, C)')).not.toThrow()
+		expect(parse('any of (A, B, C)')).toMatchSnapshot()
 	})
 
 	it('allows "n" to be "none"', () => {
-		expect(() => parse('none of (A, B, C)')).not.toThrow()
+		expect(parse('none of (A, B, C)')).toMatchSnapshot()
 	})
 
 	it('supports boolean statements within the parens', () => {
@@ -43,25 +42,33 @@ describe('OfExpression', () => {
 	})
 
 	it('supports where-clauses within the parens', () => {
-		const actual = parse('one of (CSSCI 121, one course where {gereqs = WRI})')
+		const actual = parse('one of (CSCI 121, one course where {gereqs = WRI})')
+		expect(actual).toMatchSnapshot()
+
 		expect(actual.$of).toBeDefined()
 		expect(actual.$of).toHaveLength(2)
 	})
 
 	it('supports occurrences within the parens', () => {
 		const actual = parse('one of (two occurrences of CSCI 121, CSCI 308)')
+		expect(actual).toMatchSnapshot()
+
 		expect(actual.$of).toBeDefined()
 		expect(actual.$of).toHaveLength(2)
 	})
 
 	it('supports references within the parens', () => {
 		const actual = parse('one of (A, B, C, D)')
+		expect(actual).toMatchSnapshot()
+
 		expect(actual.$of).toBeDefined()
 		expect(actual.$of).toHaveLength(4)
 	})
 
 	it('supports modifiers within the parens', () => {
 		const actual = parse('one of (two courses from children, two courses from filter, two credits from courses where {year <= 2016})')
+		expect(actual).toMatchSnapshot()
+
 		expect(actual.$of).toBeDefined()
 		expect(actual.$of).toHaveLength(3)
 	})
