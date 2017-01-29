@@ -9,7 +9,6 @@ export function getIdCache() {
 	return JSON.parse(localStorage.getItem('studentIds') || '[]')
 }
 
-
 export function setIdCache(ids) {
 	localStorage.setItem('studentIds', JSON.stringify(ids))
 }
@@ -34,18 +33,19 @@ export function saveStudent(student) {
 
 	const oldVersion = localStorage.getItem(student.id)
 
-	student = prepareStudentForSave(student)
+	let prepared = prepareStudentForSave(student)
 
 	return Promise.resolve()
 		.then(() => {
-			if (oldVersion !== stringify(student)) {
-				log(`saving student ${student.name} (${student.id})`)
-				student = { ...student, dateLastModified: new Date() }
-				localStorage.setItem(student.id, stringify(student))
-				return addStudentToCache(student.id)
+			if (oldVersion === stringify(prepared)) {
+				return
 			}
+			log(`saving student ${prepared.name} (${prepared.id})`)
+			prepared = { ...prepared, dateLastModified: new Date() }
+			localStorage.setItem(prepared.id, stringify(prepared))
+			return addStudentToCache(prepared.id)
 		})
 		.then(() => {
-			return student
+			return prepared
 		})
 }
