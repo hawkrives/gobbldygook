@@ -4,26 +4,29 @@ const parseRequirementTitle = customParser({ allowedStartRules: [ 'RequirementTi
 
 describe('ReferenceExpression', () => {
 	it('can reference a requirement', () => {
-		expect(parseReference('BTS-B')).toEqual({
-			$type: 'reference',
-			$requirement: 'BTS-B',
-		})
+		expect(parseReference('BTS-B')).toMatchSnapshot()
 	})
 
 	it('handles a full requirement title', () => {
 		const actual = parseReference('Biblical Studies (BTS-B)')
+		expect(actual).toMatchSnapshot()
+
 		expect(actual.$requirement).toBeDefined()
 		expect(actual.$requirement).toBe('Biblical Studies (BTS-B)')
 	})
 
 	it('returns a full requirement title when given an abbreviation', () => {
 		const actual = parseReference('BTS-B', { abbreviations: { 'BTS-B': 'Biblical Studies (BTS-B)' } })
+		expect(actual).toMatchSnapshot()
+
 		expect(actual.$requirement).toBeDefined()
 		expect(actual.$requirement).toBe('Biblical Studies (BTS-B)')
 	})
 
 	it('returns a full requirement title when given the title-minus-abbreviation', () => {
 		const actual = parseReference('Biblical Studies', { titles: { 'Biblical Studies': 'Biblical Studies (BTS-B)' } })
+		expect(actual).toMatchSnapshot()
+
 		expect(actual.$requirement).toBeDefined()
 		expect(actual.$requirement).toBe('Biblical Studies (BTS-B)')
 	})
