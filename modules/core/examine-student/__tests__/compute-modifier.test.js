@@ -18,6 +18,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'boolean',
+					$booleanType: 'or',
 					$or: [
 						{ $type: 'course', $course: { department: [ 'REL' ], number: 111 } },
 						{ $type: 'course', $course: { department: [ 'REL' ], number: 112 } },
@@ -69,6 +70,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'boolean',
+					$booleanType: 'or',
 					$or: [
 						{ $type: 'course', $course: { department: [ 'REL' ], number: 111 } },
 						{ $type: 'course', $course: { department: [ 'REL' ], number: 112 } },
@@ -117,6 +119,7 @@ describe('computeModifier', () => {
 		const req = {
 			filter: {
 				$type: 'filter',
+				$filterType: 'where',
 				$where: {
 					$type: 'qualification',
 					$key: 'department',
@@ -168,6 +171,7 @@ describe('computeModifier', () => {
 		const req = {
 			filter: {
 				$type: 'filter',
+				$filterType: 'where',
 				$where: {
 					$type: 'qualification',
 					$key: 'department',
@@ -175,6 +179,7 @@ describe('computeModifier', () => {
 					$value: {
 						$or: [ 'CHEM', 'REL' ],
 						$type: 'boolean',
+						$booleanType: 'or',
 					},
 				},
 			},
@@ -270,6 +275,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'boolean',
+					$booleanType: 'and',
 					$and: [
 						{ $type: 'course', $course: { department: [ 'REL' ], number: 111 } },
 						{ $type: 'course', $course: { department: [ 'REL' ], number: 112 } },
@@ -331,6 +337,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'boolean',
+					$booleanType: 'and',
 					$and: [
 						{ $type: 'course', $course: { department: [ 'CHEM', 'BIO' ], number: 111 } },
 						{ $type: 'course', $course: { department: [ 'CHEM', 'BIO' ], number: 112 } },
@@ -392,6 +399,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'boolean',
+					$booleanType: 'or',
 					$or: [
 						{ $type: 'course', $course: { department: [ 'REL' ], number: 111 } },
 						{ $type: 'course', $course: { department: [ 'REL' ], number: 112 } },
@@ -442,6 +450,7 @@ describe('computeModifier', () => {
 	it('can be used to ensure that the student has taken two courses across two departments', () => {
 		const modifier = {
 			$type: 'boolean',
+			$booleanType: 'and',
 			$and: [
 				{
 					$type: 'modifier',
@@ -492,6 +501,7 @@ describe('computeModifier', () => {
 
 		expect(modifier).to.deep.equal({
 			$type: 'boolean',
+			$booleanType: 'and',
 			$and: [
 				{
 					$type: 'modifier',

@@ -27,7 +27,7 @@ describe('filterByQualification', () => {
 		const basicQualification = {
 			$type: 'qualification',
 			$key: 'gereqs',
-			$value: { $type: 'boolean', $or: [ 'EIN', 'BTS-T' ] },
+			$value: { $type: 'boolean', $booleanType: 'or', $or: [ 'EIN', 'BTS-T' ] },
 			$operator: '$eq',
 		}
 
@@ -50,7 +50,7 @@ describe('filterByQualification', () => {
 		const basicQualification = {
 			$type: 'qualification',
 			$key: 'gereqs',
-			$value: { $type: 'boolean', $xor: [ 'EIN', 'BTS-T' ] },
+			$value: { $type: 'boolean', $booleanType: 'xor', $xor: [ 'EIN', 'BTS-T' ] },
 			$operator: '$eq',
 		}
 

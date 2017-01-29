@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import collectTakenCourses from '../collect-taken-courses'
 
 describe('collectTakenCourses', () => {
@@ -12,12 +11,14 @@ describe('collectTakenCourses', () => {
 			_taken: true,
 		}
 
-		expect(collectTakenCourses(obj)).to.equal(obj.$course)
+		expect(collectTakenCourses(obj)).toEqual([ obj.$course ])
+		expect(collectTakenCourses(obj)[0]).toBe(obj.$course)
 	})
 
-	it('can go down several layers deep', () => {
+	it('can go down one layer deep', () => {
 		const obj = {
 			$type: 'boolean',
+			$booleanType: 'or',
 			$or: [
 				{
 					$type: 'course',
@@ -37,7 +38,7 @@ describe('collectTakenCourses', () => {
 			],
 		}
 
-		expect(collectTakenCourses(obj)).to.deep.equal([
+		expect(collectTakenCourses(obj)).toEqual([
 			obj.$or[0].$course,
 		])
 	})
@@ -130,7 +131,7 @@ describe('collectTakenCourses', () => {
 			],
 		}
 
-		expect(collectTakenCourses(obj)).to.deep.equal([
+		expect(collectTakenCourses(obj)).toEqual([
 			{ department: [ 'CSCI' ], number: 121 },
 			{ department: [ 'ART', 'ASIAN' ], number: 170 },
 			{ department: [ 'ART', 'ASIAN' ], number: 175 },

@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import collectMatches from '../collect-matches'
 
 describe('collectMatches', () => {
@@ -10,7 +9,7 @@ describe('collectMatches', () => {
 			},
 		}
 
-		expect(() => collectMatches(expr)).to.throw(TypeError)
+		expect(() => collectMatches(expr)).toThrowError(TypeError)
 	})
 
 	it('collects matches from child requirements', () => {
@@ -18,6 +17,7 @@ describe('collectMatches', () => {
 			$type: 'requirement',
 			result: {
 				$type: 'boolean',
+				$booleanType: 'and',
 				$and: [
 					{
 						$type: 'reference',
@@ -38,7 +38,7 @@ describe('collectMatches', () => {
 		}
 
 		expect(collectMatches(expr))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'ASIAN' ], number: 121 },
 				{ department: [ 'CSCI' ], number: 121 },
 			])
@@ -50,7 +50,7 @@ describe('collectMatches', () => {
 			message: 'hi',
 		}
 
-		expect(collectMatches(expr)).to.deep.equal([])
+		expect(collectMatches(expr)).toEqual([])
 	})
 
 	it('collects matches from boolean expressions', () => {
@@ -58,6 +58,7 @@ describe('collectMatches', () => {
 			$type: 'requirement',
 			result: {
 				$type: 'boolean',
+				$booleanType: 'and',
 				$and: [
 					{ _result: true, $type: 'course', $course: { department: [ 'ASIAN' ], number: 121 } },
 					{
@@ -72,7 +73,7 @@ describe('collectMatches', () => {
 		}
 
 		expect(collectMatches(expr))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'ASIAN' ], number: 121 },
 				{ department: [ 'CSCI' ], number: 121 },
 			])
@@ -85,7 +86,7 @@ describe('collectMatches', () => {
 		}
 
 		expect(collectMatches(expr))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'ASIAN' ], number: 121 },
 			])
 	})
@@ -106,7 +107,7 @@ describe('collectMatches', () => {
 		}
 
 		expect(collectMatches(expr))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'ASIAN' ], number: 121 },
 				{ department: [ 'CSCI' ], number: 121 },
 			])
@@ -127,7 +128,7 @@ describe('collectMatches', () => {
 		}
 
 		expect(collectMatches(expr))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'ASIAN' ], number: 121, year: 2014 },
 				{ department: [ 'ASIAN' ], number: 121, year: 2015 },
 			])
@@ -142,6 +143,7 @@ describe('collectMatches', () => {
 				$of: [
 					{
 						$type: 'boolean',
+						$booleanType: 'and',
 						$and: [
 							{ $type: 'course', _result: true, $course: { department: [ 'ASIAN' ], number: 121 } },
 							{
@@ -168,7 +170,7 @@ describe('collectMatches', () => {
 		}
 
 		expect(collectMatches(expr))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'ASIAN' ], number: 121 },
 				{ department: [ 'CSCI' ], number: 121 },
 				{ department: [ 'MUSIC' ], number: 121 },
@@ -191,7 +193,7 @@ describe('collectMatches', () => {
 		}
 
 		expect(collectMatches(expr))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'ASIAN' ], number: 121 },
 				{ department: [ 'CSCI' ], number: 121 },
 			])
@@ -210,7 +212,7 @@ describe('collectMatches', () => {
 		}
 
 		expect(collectMatches(expr))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'ASIAN' ], number: 121 },
 			])
 	})

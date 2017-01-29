@@ -1,10 +1,10 @@
-import { expect } from 'chai'
 import applyFilter from '../apply-filter'
 
 describe('applyFilter', () => {
 	it('filters a list of courses', () => {
 		const query = {
 			$type: 'filter',
+			$filterType: 'where',
 			$where: {
 				$type: 'qualification',
 				$key: 'number',
@@ -22,7 +22,7 @@ describe('applyFilter', () => {
 		]
 
 		expect(applyFilter(query, courses))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'CSCI' ], number: 121 },
 				{ department: [ 'ART', 'ASIAN' ], number: 121 },
 			])
@@ -31,6 +31,7 @@ describe('applyFilter', () => {
 	it('filters by where-style queries', () => {
 		const query = {
 			$type: 'filter',
+			$filterType: 'where',
 			$where: {
 				$type: 'qualification',
 				$key: 'number',
@@ -48,7 +49,7 @@ describe('applyFilter', () => {
 		]
 
 		expect(applyFilter(query, courses))
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'CSCI' ], number: 121 },
 				{ department: [ 'ART', 'ASIAN' ], number: 121 },
 			])
@@ -57,6 +58,7 @@ describe('applyFilter', () => {
 	it('filters by list-of-valid-courses queries', () => {
 		const query = {
 			$type: 'filter',
+			$filterType: 'of',
 			$of: [
 				{ $type: 'course', department: [ 'CSCI' ], number: 121 },
 				{ $type: 'course', department: [ 'CSCI' ], number: 125 },
@@ -72,7 +74,7 @@ describe('applyFilter', () => {
 		]
 
 		expect(applyFilter(query, courses))
-			.to.deep.equal([
+			.toEqual([
 				{ $type: 'course', department: [ 'CSCI' ], number: 121 },
 			])
 	})
@@ -80,6 +82,7 @@ describe('applyFilter', () => {
 	it('returns the matches on the expression', () => {
 		const query = {
 			$type: 'filter',
+			$filterType: 'where',
 			$where: {
 				$type: 'qualification',
 				$key: 'number',
@@ -103,12 +106,10 @@ describe('applyFilter', () => {
 
 		const result = applyFilter(query, courses)
 
-		expect(result)
-			.to.deep.equal(expectedMatches)
+		expect(result).toEqual(expectedMatches)
 
-		expect(query)
-			.to.have.property('_matches')
-			.that.deep.equals(expectedMatches)
+		expect(query._matches).toBeDefined()
+		expect(query._matches).toEqual(expectedMatches)
 	})
 
 	it('returns an empty list when not presented with a filter', () => {
@@ -122,7 +123,6 @@ describe('applyFilter', () => {
 			{ department: [ 'ART', 'ASIAN' ], number: 121 },
 		]
 
-		expect(applyFilter(query, courses))
-			.to.deep.equal([])
+		expect(applyFilter(query, courses)).toEqual([])
 	})
 })

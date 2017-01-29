@@ -33,6 +33,7 @@ describe('filterByWhereClause', () => {
 	it('filters an array of courses by an and-joined where-clause', () => {
 		const clause = {
 			$type: 'boolean',
+			$booleanType: 'and',
 			$and: [
 				{
 					$type: 'qualification',
@@ -75,6 +76,7 @@ describe('filterByWhereClause', () => {
 	it('filters an array of courses by an or-joined where-clause', () => {
 		const clause = {
 			$type: 'boolean',
+			$booleanType: 'or',
 			$or: [
 				{ $type: 'qualification', $key: 'gereqs', $operator: '$eq', $value: 'EIN' },
 				{ $type: 'qualification', $key: 'year', $operator: '$eq', $value: 2012 },
@@ -100,6 +102,7 @@ describe('filterByWhereClause', () => {
 	it('must filter by either "and" or "or"', () => {
 		const clause = {
 			$type: 'boolean',
+			$booleanType: 'xor',
 			$xor: [],
 		}
 

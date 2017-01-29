@@ -5,6 +5,7 @@ describe('computeBoolean', () => {
 	it('computes the boolean result of and-clauses', () => {
 		const clause = {
 			$type: 'boolean',
+			$booleanType: 'and',
 			$and: [
 				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 121 } },
 				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 125 } },
@@ -19,6 +20,7 @@ describe('computeBoolean', () => {
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
 		expect(clause).to.deep.equal({
 			$type: 'boolean',
+			$booleanType: 'and',
 			$and: [
 				{
 					_result: true,
@@ -48,6 +50,7 @@ describe('computeBoolean', () => {
 	it('computes the boolean result of or-clauses', () => {
 		const clause = {
 			$type: 'boolean',
+			$booleanType: 'or',
 			$or: [
 				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 121 } },
 				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 125 } },
@@ -62,6 +65,7 @@ describe('computeBoolean', () => {
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
 		expect(clause).to.deep.equal({
 			$type: 'boolean',
+			$booleanType: 'or',
 			$or: [
 				{
 					_taken: true,
@@ -90,6 +94,7 @@ describe('computeBoolean', () => {
 	it('computes an or-clause even if the first item is false', () => {
 		const clause = {
 			$type: 'boolean',
+			$booleanType: 'or',
 			$or: [
 				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 121 } },
 				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 125 } },
@@ -104,6 +109,7 @@ describe('computeBoolean', () => {
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
 		expect(clause).to.deep.equal({
 			$type: 'boolean',
+			$booleanType: 'or',
 			$or: [
 				{
 					_result: false,
@@ -130,9 +136,11 @@ describe('computeBoolean', () => {
 	it('can compute the result of several other boolean expressions', () => {
 		const clause = {
 			$type: 'boolean',
+			$booleanType: 'and',
 			$and: [
 				{
 					$type: 'boolean',
+					$booleanType: 'or',
 					$or: [
 						{ $type: 'course', $course: { department: [ 'CSCI' ], number: 121 } },
 						{ $type: 'course', $course: { department: [ 'CSCI' ], number: 125 } },
@@ -140,6 +148,7 @@ describe('computeBoolean', () => {
 				},
 				{
 					$type: 'boolean',
+					$booleanType: 'or',
 					$or: [
 						{ $type: 'course', $course: { department: [ 'CSCI' ], number: 130 } },
 						{ $type: 'course', $course: { department: [ 'CSCI' ], number: 131 } },
@@ -175,6 +184,7 @@ describe('computeBoolean', () => {
 						},
 					],
 					$type: 'boolean',
+					$booleanType: 'or',
 					_result: true,
 					_checked: true,
 					_matches: [
@@ -199,6 +209,7 @@ describe('computeBoolean', () => {
 						},
 					],
 					$type: 'boolean',
+					$booleanType: 'or',
 					_result: true,
 					_checked: true,
 					_matches: [
@@ -207,6 +218,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'and',
 		})
 		expect(computedResult).to.be.true
 		expect(matches).to.deep.equal([
@@ -222,6 +234,7 @@ describe('computeBoolean', () => {
 				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 125 } },
 			],
 			$type: 'boolean',
+			$booleanType: 'or',
 		}
 		const requirement = { result: clause }
 
@@ -249,6 +262,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'or',
 		})
 		expect(computedResult).to.be.true
 		expect(matches).to.deep.equal([
@@ -284,6 +298,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'and',
 		}
 		const requirement = {
 			A: { $type: 'requirement', result: {
@@ -350,6 +365,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'and',
 		})
 		expect(computedResult).to.be.true
 		expect(matches).to.deep.equal([
@@ -374,6 +390,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'or',
 		}
 
 		const requirement = { result: clause }
@@ -411,6 +428,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'or',
 		})
 		expect(computedResult).to.be.true
 		expect(matches).to.deep.equal([
@@ -441,6 +459,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'and',
 		}
 
 		const requirement = { result: clause }
@@ -507,6 +526,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'and',
 		})
 		expect(computedResult).to.be.true
 		expect(matches).to.deep.equal([
@@ -522,6 +542,7 @@ describe('computeBoolean', () => {
 				{ $requirement: 'C', $type: 'reference' },
 			],
 			$type: 'boolean',
+			$booleanType: 'and',
 		}
 		const requirement = {
 			A: { $type: 'requirement', result: {
@@ -573,6 +594,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'and',
 		})
 		expect(computedResult).to.be.true
 		expect(matches).to.deep.equal([
@@ -609,6 +631,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'and',
 		}
 
 		const requirement = { result: clause }
@@ -657,6 +680,7 @@ describe('computeBoolean', () => {
 				},
 			],
 			$type: 'boolean',
+			$booleanType: 'and',
 		})
 		expect(computedResult).to.be.true
 		expect(matches).to.deep.equal([
