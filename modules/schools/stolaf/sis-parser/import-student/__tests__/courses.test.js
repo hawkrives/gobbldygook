@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { loadHtml } from './import-student.support'
 import { getCoursesFromHtml } from '../courses'
 
@@ -73,6 +72,6 @@ describe('getCoursesFromHtml', () => {
 				instructors: [ 'Akimoto, Hiroe' ],
 			},
 		]
-		expect(actual).to.deep.equal(expected)
+		expect(actual).toEqual(expected)
 	})
 })
