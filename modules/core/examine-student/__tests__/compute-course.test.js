@@ -18,8 +18,7 @@ describe('computeCourse', () => {
 		})
 
 		expect(computedResult).toBe(true)
-
-		expect(match).toEqual({ department: [ 'ART' ], number: 250 })
+		expect(match).toMatchSnapshot()
 	})
 
 	it('adds the course to the dirty set if it matches', () => {
@@ -30,9 +29,7 @@ describe('computeCourse', () => {
 
 		computeCourse({ expr: query, courses, dirty, isNeeded: true })
 
-		expect(dirty.size).toBe(1)
-
-		expect([ ...dirty ]).toEqual([ 'ART 130 Research' ])
+		expect(dirty).toMatchSnapshot()
 	})
 
 	it('does not add the course to the dirty set if it did not match', () => {
@@ -43,9 +40,7 @@ describe('computeCourse', () => {
 
 		computeCourse({ expr: query, courses, dirty, isNeeded: true })
 
-		expect(dirty.size).toBe(0)
-
-		expect([ ...dirty ]).toEqual([])
+		expect(dirty).toMatchSnapshot()
 	})
 
 	it('returns false if the course is in the dirty set', () => {
@@ -57,8 +52,7 @@ describe('computeCourse', () => {
 		const { computedResult, match } = computeCourse({ expr: query, courses, dirty, isNeeded: true })
 
 		expect(computedResult).toBe(false)
-
-		expect(match).toEqual({ department: [ 'ART' ], number: 130, type: 'Research' })
+		expect(match).toMatchSnapshot()
 	})
 
 	it('merges a query and the found course', () => {
@@ -78,11 +72,6 @@ describe('computeCourse', () => {
 		})
 
 		expect(computedResult).toBe(true)
-		expect(match).toEqual({
-			department: [ 'ART' ],
-			number: 250,
-			crsid: 20951,
-			_extraKeys: [ 'crsid' ],
-		})
+		expect(match).toMatchSnapshot()
 	})
 })
