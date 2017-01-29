@@ -117,6 +117,7 @@ function ModalCourse(props) {
 					<span className="identifier">
 						{buildDeptNum(course, true)}
 					</span>
+					{' • '}
 					<span className="type">{course.type}</span>
 				</div>
 			</div>
