@@ -17,28 +17,28 @@ describe('counters', () => {
 	})
 
 	it('returns numerical values for the parsed properties', () => {
-		expect(parse('zero')).toEqual({ $num: 0, $operator: '$gte' })
-		expect(parse('one')).toEqual({ $num: 1, $operator: '$gte' })
-		expect(parse('two')).toEqual({ $num: 2, $operator: '$gte' })
-		expect(parse('three')).toEqual({ $num: 3, $operator: '$gte' })
-		expect(parse('four')).toEqual({ $num: 4, $operator: '$gte' })
-		expect(parse('five')).toEqual({ $num: 5, $operator: '$gte' })
-		expect(parse('six')).toEqual({ $num: 6, $operator: '$gte' })
-		expect(parse('seven')).toEqual({ $num: 7, $operator: '$gte' })
-		expect(parse('eight')).toEqual({ $num: 8, $operator: '$gte' })
-		expect(parse('nine')).toEqual({ $num: 9, $operator: '$gte' })
-		expect(parse('ten')).toEqual({ $num: 10, $operator: '$gte' })
+		expect(parse('zero')).toMatchSnapshot()
+		expect(parse('one')).toMatchSnapshot()
+		expect(parse('two')).toMatchSnapshot()
+		expect(parse('three')).toMatchSnapshot()
+		expect(parse('four')).toMatchSnapshot()
+		expect(parse('five')).toMatchSnapshot()
+		expect(parse('six')).toMatchSnapshot()
+		expect(parse('seven')).toMatchSnapshot()
+		expect(parse('eight')).toMatchSnapshot()
+		expect(parse('nine')).toMatchSnapshot()
+		expect(parse('ten')).toMatchSnapshot()
 	})
 
 	it('may be prefixed by "at most" (≤)', () => {
-		expect(parse('at most ten')).toEqual({ $num: 10, $operator: '$lte' })
+		expect(parse('at most ten')).toMatchSnapshot()
 	})
 
 	it('may be prefixed by "exactly" (==)', () => {
-		expect(parse('exactly ten')).toEqual({ $num: 10, $operator: '$eq' })
+		expect(parse('exactly ten')).toMatchSnapshot()
 	})
 
 	it('with no prefix are assumed to be ≥', () => {
-		expect(parse('ten')).toEqual({ $num: 10, $operator: '$gte' })
+		expect(parse('ten')).toMatchSnapshot()
 	})
 })

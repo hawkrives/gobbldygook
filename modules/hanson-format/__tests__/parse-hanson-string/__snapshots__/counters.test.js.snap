@@ -1,0 +1,97 @@
+exports[`counters may be prefixed by "at most" (≤) 1`] = `
+Object {
+  "$num": 10,
+  "$operator": "$lte",
+}
+`;
+
+exports[`counters may be prefixed by "exactly" (==) 1`] = `
+Object {
+  "$num": 10,
+  "$operator": "$eq",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 1`] = `
+Object {
+  "$num": 0,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 2`] = `
+Object {
+  "$num": 1,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 3`] = `
+Object {
+  "$num": 2,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 4`] = `
+Object {
+  "$num": 3,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 5`] = `
+Object {
+  "$num": 4,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 6`] = `
+Object {
+  "$num": 5,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 7`] = `
+Object {
+  "$num": 6,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 8`] = `
+Object {
+  "$num": 7,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 9`] = `
+Object {
+  "$num": 8,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 10`] = `
+Object {
+  "$num": 9,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters returns numerical values for the parsed properties 11`] = `
+Object {
+  "$num": 10,
+  "$operator": "$gte",
+}
+`;
+
+exports[`counters with no prefix are assumed to be ≥ 1`] = `
+Object {
+  "$num": 10,
+  "$operator": "$gte",
+}
+`;
