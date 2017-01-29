@@ -11,8 +11,7 @@ describe('collectTakenCourses', () => {
 			_taken: true,
 		}
 
-		expect(collectTakenCourses(obj)).toEqual([ obj.$course ])
-		expect(collectTakenCourses(obj)[0]).toBe(obj.$course)
+		expect(collectTakenCourses(obj)).toMatchSnapshot()
 	})
 
 	it('can go down one layer deep', () => {
@@ -38,9 +37,7 @@ describe('collectTakenCourses', () => {
 			],
 		}
 
-		expect(collectTakenCourses(obj)).toEqual([
-			obj.$or[0].$course,
-		])
+		expect(collectTakenCourses(obj)).toMatchSnapshot()
 	})
 
 	it('can go down many layers deep', () => {
@@ -131,14 +128,6 @@ describe('collectTakenCourses', () => {
 			],
 		}
 
-		expect(collectTakenCourses(obj)).toEqual([
-			{ department: [ 'CSCI' ], number: 121 },
-			{ department: [ 'ART', 'ASIAN' ], number: 170 },
-			{ department: [ 'ART', 'ASIAN' ], number: 175 },
-			{ department: [ 'ART', 'ASIAN' ], number: 190 },
-			{ department: [ 'ASIAN' ], number: 210 },
-			{ department: [ 'ASIAN' ], number: 215 },
-			{ department: [ 'ASIAN' ], number: 220 },
-		])
+		expect(collectTakenCourses(obj)).toMatchSnapshot()
 	})
 })
