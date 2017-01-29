@@ -19,30 +19,15 @@ describe('qualifiers syntax', () => {
 	})
 
 	it('value may be a number (coerced to integers)', () => {
-		expect(parseQualifier('{a = 1}')).toEqual({
-			$key: 'a',
-			$operator: '$eq',
-			$type: 'qualification',
-			$value: 1,
-		})
+		expect(parseQualifier('{a = 1}')).toMatchSnapshot()
 	})
 
 	it('value may include hyphens', () => {
-		expect(parseQualifier('{a = BTS-B}')).toEqual({
-			$key: 'a',
-			$operator: '$eq',
-			$type: 'qualification',
-			$value: 'BTS-B',
-		})
+		expect(parseQualifier('{a = BTS-B}')).toMatchSnapshot()
 	})
 
 	it('value may include underscores', () => {
-		expect(parseQualifier('{a = BTS_B}')).toEqual({
-			$key: 'a',
-			$operator: '$eq',
-			$type: 'qualification',
-			$value: 'BTS_B',
-		})
+		expect(parseQualifier('{a = BTS_B}')).toMatchSnapshot()
 	})
 })
 

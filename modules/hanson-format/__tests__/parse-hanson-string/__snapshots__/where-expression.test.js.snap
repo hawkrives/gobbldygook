@@ -329,3 +329,30 @@ Object {
   "$type": "boolean",
 }
 `;
+
+exports[`qualifiers syntax value may be a number (coerced to integers) 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": 1,
+}
+`;
+
+exports[`qualifiers syntax value may include hyphens 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": "BTS-B",
+}
+`;
+
+exports[`qualifiers syntax value may include underscores 1`] = `
+Object {
+  "$key": "a",
+  "$operator": "$eq",
+  "$type": "qualification",
+  "$value": "BTS_B",
+}
+`;
