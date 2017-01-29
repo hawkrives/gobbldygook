@@ -42,22 +42,20 @@ const removeFromSemester = ({ studentId, removeCourse, clbid, scheduleId }) => (
 	}
 }
 
-function moveToSchedule({ moveCourse, addCourse, removeCourse, scheduleId, studentId, clbid }) {
-	return ev => {
-		const targetScheduleId = ev.target.value
-		if (targetScheduleId === '$none') {
-			return
-		}
-		else if (targetScheduleId === '$remove') {
-			return removeCourse(studentId, scheduleId, clbid)
-		}
+function moveToSchedule({ ev, moveCourse, addCourse, removeCourse, scheduleId, studentId, clbid }) {
+	const targetScheduleId = ev.target.value
+	if (targetScheduleId === '$none') {
+		return
+	}
+	else if (targetScheduleId === '$remove') {
+		return removeCourse(studentId, scheduleId, clbid)
+	}
 
-		if (scheduleId) {
-			return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
-		}
-		else {
-			return addCourse(studentId, targetScheduleId, clbid)
-		}
+	if (scheduleId) {
+		return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
+	}
+	else {
+		return addCourse(studentId, targetScheduleId, clbid)
 	}
 }
 
@@ -68,7 +66,7 @@ function SemesterSelector({ scheduleId, student, moveCourse, addCourse, removeCo
 			className="semester-select"
 			value={scheduleId || 'none'}
 			disabled={!student || !clbid}
-			onChange={moveToSchedule({ moveCourse, addCourse, removeCourse, scheduleId, studentId: student.id, clbid })}
+			onChange={ev => moveToSchedule({ ev, moveCourse, addCourse, removeCourse, scheduleId, studentId: student.id, clbid })}
 		>
 			{scheduleId
 				? <option value="$remove">Remove from Schedule</option>
