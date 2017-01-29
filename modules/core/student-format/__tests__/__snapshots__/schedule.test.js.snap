@@ -1,0 +1,18 @@
+exports[`Schedule can turn into JSON 1`] = `"{\"active\":false,\"clbids\":[],\"id\":\"1\",\"index\":1,\"metadata\":{},\"semester\":0,\"title\":\"Schedule 6\",\"year\":0}"`;
+
+exports[`Schedule holds a schedule for a student 1`] = `
+Object {
+  "active": true,
+  "clbids": Array [
+    123,
+    234,
+    345,
+  ],
+  "id": "1",
+  "index": 2,
+  "metadata": Object {},
+  "semester": 3,
+  "title": "My Schedule",
+  "year": 1994,
+}
+`;
