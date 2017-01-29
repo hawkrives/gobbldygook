@@ -1,12 +1,11 @@
-import { expect } from 'chai'
 import computeChunk from '../compute-chunk'
 
 describe('computeChunk', () => {
 	it('requires that the expression be an object', () => {
-		expect(() => computeChunk({ expr: 'string' })).to.throw(TypeError)
+		expect(() => computeChunk({ expr: 'string' })).toThrow(TypeError)
 	})
 
 	it('throws when encountering an unknown type', () => {
-		expect(() => computeChunk({ expr: { $type: 'invalid' } })).to.throw(TypeError)
+		expect(() => computeChunk({ expr: { $type: 'invalid' } })).toThrow(TypeError)
 	})
 })

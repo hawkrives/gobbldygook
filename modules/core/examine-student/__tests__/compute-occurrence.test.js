@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { computeOccurrence } from '../compute-chunk'
 
 describe('computeOccurrence', () => {
@@ -17,14 +16,14 @@ describe('computeOccurrence', () => {
 		const { computedResult, matches, counted } = computeOccurrence({ expr, courses })
 
 		expect(computedResult)
-			.to.be.true
+			.toBe(true)
 		expect(matches)
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'THEAT' ], number: 222 },
 				{ department: [ 'THEAT' ], number: 222 },
 			])
 		expect(counted)
-			.to.equal(2)
+			.toBe(2)
 	})
 
 	it('ignores anything besides department and number via simplifyCourse', () => {
@@ -41,13 +40,13 @@ describe('computeOccurrence', () => {
 
 		const { computedResult, matches, counted } = computeOccurrence({ expr, courses })
 		expect(computedResult)
-			.to.be.true
+			.toBe(true)
 		expect(matches)
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'THEAT' ], number: 222, year: 2014, semester: 1 },
 				{ department: [ 'THEAT' ], number: 222, year: 2014, semester: 3 },
 			])
 		expect(counted)
-			.to.equal(2)
+			.toBe(2)
 	})
 })

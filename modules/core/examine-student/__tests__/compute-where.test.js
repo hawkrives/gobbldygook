@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { computeWhere } from '../compute-chunk'
 
 describe('computeWhere', () => {
@@ -28,7 +27,7 @@ describe('computeWhere', () => {
 
 		const actual = computeWhere({ expr, courses })
 
-		expect(actual).to.deep.equal(expected)
+		expect(actual).toEqual(expected)
 
 		const altCourses = [
 			{ department: [ 'ESTH' ], number: 182, year: 2012, gereqs: [ 'SPM' ] },
@@ -43,6 +42,6 @@ describe('computeWhere', () => {
 
 		let actual2 = computeWhere({ expr, courses: altCourses })
 
-		expect(actual2).to.deep.equal(expected2)
+		expect(actual2).toEqual(expected2)
 	})
 })
