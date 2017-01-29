@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { computeCourse } from '../compute-chunk'
 
 describe('computeCourse', () => {
@@ -18,11 +17,9 @@ describe('computeCourse', () => {
 			expr: query, courses, dirty: new Set(), isNeeded: true,
 		})
 
-		expect(computedResult)
-			.to.be.true
+		expect(computedResult).toBe(true)
 
-		expect(match)
-			.to.deep.equal({ department: [ 'ART' ], number: 250 })
+		expect(match).toEqual({ department: [ 'ART' ], number: 250 })
 	})
 
 	it('adds the course to the dirty set if it matches', () => {
@@ -33,11 +30,9 @@ describe('computeCourse', () => {
 
 		computeCourse({ expr: query, courses, dirty, isNeeded: true })
 
-		expect(dirty)
-			.to.have.property('size', 1)
+		expect(dirty.size).toBe(1)
 
-		expect([ ...dirty ])
-			.to.deep.equal([ 'ART 130 Research' ])
+		expect([ ...dirty ]).toEqual([ 'ART 130 Research' ])
 	})
 
 	it('does not add the course to the dirty set if it did not match', () => {
@@ -48,11 +43,9 @@ describe('computeCourse', () => {
 
 		computeCourse({ expr: query, courses, dirty, isNeeded: true })
 
-		expect(dirty)
-			.to.have.property('size', 0)
+		expect(dirty.size).toBe(0)
 
-		expect([ ...dirty ])
-			.to.deep.equal([])
+		expect([ ...dirty ]).toEqual([])
 	})
 
 	it('returns false if the course is in the dirty set', () => {
@@ -63,11 +56,9 @@ describe('computeCourse', () => {
 
 		const { computedResult, match } = computeCourse({ expr: query, courses, dirty, isNeeded: true })
 
-		expect(computedResult)
-			.to.be.false
+		expect(computedResult).toBe(false)
 
-		expect(match)
-			.to.deep.equal({ department: [ 'ART' ], number: 130, type: 'Research' })
+		expect(match).toEqual({ department: [ 'ART' ], number: 130, type: 'Research' })
 	})
 
 	it('merges a query and the found course', () => {
@@ -86,14 +77,12 @@ describe('computeCourse', () => {
 			expr: query, courses, dirty: new Set(), isNeeded: true,
 		})
 
-		expect(computedResult)
-			.to.be.true
-		expect(match)
-			.to.deep.equal({
-				department: [ 'ART' ],
-				number: 250,
-				crsid: 20951,
-				_extraKeys: [ 'crsid' ],
-			})
+		expect(computedResult).toBe(true)
+		expect(match).toEqual({
+			department: [ 'ART' ],
+			number: 250,
+			crsid: 20951,
+			_extraKeys: [ 'crsid' ],
+		})
 	})
 })
