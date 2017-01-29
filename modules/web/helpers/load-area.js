@@ -67,7 +67,7 @@ export default function getArea({ name, type, revision, source, isCustom }, { ca
 	}
 
 	let id = `{${name}, ${type}, ${revision}}`
-	if (promiseCache.hasOwnProperty(id)) {
+	if (id in promiseCache) {
 		return promiseCache[id]
 	}
 

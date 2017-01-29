@@ -14,7 +14,7 @@ export function getCourse({ clbid, term }, fabrications={}) {
 		return fabrications[clbid]
 	}
 
-	if (courseCache.hasOwnProperty(clbid)) {
+	if (clbid in courseCache) {
 		return courseCache[clbid]
 	}
 
