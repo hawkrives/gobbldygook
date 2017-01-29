@@ -9,7 +9,7 @@ describe('queryCourses', () => {
 		let courses = [
 			{ departments: [ 'AMCON' ], year: 2013 },
 		]
-		expect(queryCourses(query, courses)).toEqual(courses)
+		expect(queryCourses(query, courses)).toMatchSnapshot()
 	})
 
 	it('properly handles a list of five years', () => {
@@ -20,6 +20,6 @@ describe('queryCourses', () => {
 			{ departments: [ 'AMCON' ], year: 2013 },
 			{ departments: [ 'ASIAN' ], year: 2012 },
 		]
-		expect(queryCourses(query, courses)).toEqual(courses)
+		expect(queryCourses(query, courses)).toMatchSnapshot()
 	})
 })
