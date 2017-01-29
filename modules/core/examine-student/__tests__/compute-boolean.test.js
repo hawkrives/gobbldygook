@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import computeChunk, { computeBoolean } from '../compute-chunk'
 
 describe('computeBoolean', () => {
@@ -18,7 +17,7 @@ describe('computeBoolean', () => {
 		]
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$type: 'boolean',
 			$booleanType: 'and',
 			$and: [
@@ -40,8 +39,8 @@ describe('computeBoolean', () => {
 				},
 			],
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'CSCI' ], number: 121 },
 			{ department: [ 'CSCI' ], number: 125 },
 		])
@@ -63,7 +62,7 @@ describe('computeBoolean', () => {
 		]
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$type: 'boolean',
 			$booleanType: 'or',
 			$or: [
@@ -85,8 +84,8 @@ describe('computeBoolean', () => {
 				},
 			],
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'CSCI' ], number: 121 },
 		])
 	})
@@ -107,7 +106,7 @@ describe('computeBoolean', () => {
 		]
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$type: 'boolean',
 			$booleanType: 'or',
 			$or: [
@@ -127,8 +126,8 @@ describe('computeBoolean', () => {
 				},
 			],
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'CSCI' ], number: 125 },
 		])
 	})
@@ -164,7 +163,7 @@ describe('computeBoolean', () => {
 		]
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$and: [
 				{
 					$or: [
@@ -220,8 +219,8 @@ describe('computeBoolean', () => {
 			$type: 'boolean',
 			$booleanType: 'and',
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'CSCI' ], number: 125 },
 			{ department: [ 'CSCI' ], number: 130 },
 		])
@@ -244,7 +243,7 @@ describe('computeBoolean', () => {
 		]
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$or: [
 				{
 					_result: false,
@@ -264,8 +263,8 @@ describe('computeBoolean', () => {
 			$type: 'boolean',
 			$booleanType: 'or',
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'CSCI' ], number: 125 },
 		])
 	})
@@ -328,7 +327,7 @@ describe('computeBoolean', () => {
 		requirement.C.computed = computeChunk({ expr: requirement.C.result, ctx: requirement, courses, dirty })
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty, isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$and: [
 				{
 					$children: '$all',
@@ -367,8 +366,8 @@ describe('computeBoolean', () => {
 			$type: 'boolean',
 			$booleanType: 'and',
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'ART' ], number: 120, credits: 1.0, _extraKeys: [ 'credits' ] },
 			{ department: [ 'ART' ], number: 104, credits: 1.0, _extraKeys: [ 'credits' ] },
 			{ department: [ 'ART' ], number: 105, credits: 1.0, _extraKeys: [ 'credits' ] },
@@ -402,7 +401,7 @@ describe('computeBoolean', () => {
 		]
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$or: [
 				{
 					$count: { $operator: '$gte', $num: 1 },
@@ -430,8 +429,8 @@ describe('computeBoolean', () => {
 			$type: 'boolean',
 			$booleanType: 'or',
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'THEAT' ], number: 266, year: 2014, semester: 1 },
 			{ department: [ 'THEAT' ], number: 266, year: 2014, semester: 3 },
 			{ department: [ 'THEAT' ], number: 266, year: 2015, semester: 1 },
@@ -470,7 +469,7 @@ describe('computeBoolean', () => {
 		]
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$and: [
 				{
 					$count: { $operator: '$gte', $num: 1 },
@@ -528,8 +527,8 @@ describe('computeBoolean', () => {
 			$type: 'boolean',
 			$booleanType: 'and',
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'CSCI' ], number: 125 },
 			{ department: [ 'ART' ], number: 102 },
 		])
@@ -571,7 +570,7 @@ describe('computeBoolean', () => {
 		requirement.C.computed = computeChunk({ expr: requirement.C.result, ctx: requirement, courses, dirty })
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty, isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$and: [
 				{
 					$requirement: 'A',
@@ -596,8 +595,8 @@ describe('computeBoolean', () => {
 			$type: 'boolean',
 			$booleanType: 'and',
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'ART' ], number: 120 },
 			{ department: [ 'ART' ], number: 104 },
 			{ department: [ 'ART' ], number: 105 },
@@ -642,7 +641,7 @@ describe('computeBoolean', () => {
 		]
 
 		const { computedResult, matches } = computeBoolean({ expr: clause, ctx: requirement, courses, dirty: new Set(), isNeeded: true })
-		expect(clause).to.deep.equal({
+		expect(clause).toEqual({
 			$and: [
 				{
 					$count: { $operator: '$gte', $num: 1 },
@@ -682,14 +681,14 @@ describe('computeBoolean', () => {
 			$type: 'boolean',
 			$booleanType: 'and',
 		})
-		expect(computedResult).to.be.true
-		expect(matches).to.deep.equal([
+		expect(computedResult).toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'CSCI' ], number: 125, gereqs: [ 'WRI' ] },
 			{ department: [ 'ART' ], number: 102, gereqs: [ 'BTS-T' ] },
 		])
 	})
 
 	it('throws when neither $and nor $or were present', () => {
-		expect(() => computeBoolean({ expr: { $neither: [] }, isNeeded: true })).to.throw(TypeError)
+		expect(() => computeBoolean({ expr: { $neither: [] }, isNeeded: true })).toThrowError(TypeError)
 	})
 })
