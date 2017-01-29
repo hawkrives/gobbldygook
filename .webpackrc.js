@@ -270,11 +270,11 @@ const config = {
 				use: [ 'json-loader' ],
 			},
 			{
-				test: /\.(otf|eot|ttf|woff2?)$/,
+				test: /\.otf|eot|ttf|woff2?$/,
 				use: [ { loader: 'url-loader', options: { limit: urlLoaderLimit } } ],
 			},
 			{
-				test: /\.(jpe?g|png|gif)$/,
+				test: /\.jpe?g|png|gif$/,
 				use: [ { loader: 'url-loader', options: { limit: urlLoaderLimit } } ],
 			},
 
