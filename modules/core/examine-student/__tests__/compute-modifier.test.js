@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import cloneDeep from 'lodash/cloneDeep'
 import computeChunk, { computeModifier } from '../compute-chunk'
 import applyFilter from '../apply-filter'
@@ -41,13 +40,13 @@ describe('computeModifier', () => {
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
 		expect(computedResult)
-			.to.be.true
+			.toBe(true)
 		expect(matches)
-			.to.deep.equal([ { department: [ 'REL' ], number: 111 } ])
+			.toEqual([ { department: [ 'REL' ], number: 111 } ])
 		expect(counted)
-			.to.equal(1)
+			.toBe(1)
 
-		expect(modifier).to.deep.equal({
+		expect(modifier).toEqual({
 			$type: 'modifier',
 			$count: { $operator: '$gte', $num: 1 },
 			$what: 'course',
@@ -93,13 +92,13 @@ describe('computeModifier', () => {
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
 		expect(computedResult)
-			.to.be.true
+			.toBe(true)
 		expect(matches)
-			.to.deep.equal([ { department: [ 'REL' ], number: 111 } ])
+			.toEqual([ { department: [ 'REL' ], number: 111 } ])
 		expect(counted)
-			.to.equal(1)
+			.toBe(1)
 
-		expect(modifier).to.deep.equal({
+		expect(modifier).toEqual({
 			$type: 'modifier',
 			$count: { $operator: '$gte', $num: 1 },
 			$what: 'course',
@@ -142,16 +141,16 @@ describe('computeModifier', () => {
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
 		expect(computedResult)
-			.to.be.true
+			.toBe(true)
 		expect(matches)
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'REL' ], number: 111 },
 				{ department: [ 'REL' ], number: 112 },
 			])
 		expect(counted)
-			.to.equal(2)
+			.toBe(2)
 
-		expect(modifier).to.deep.equal({
+		expect(modifier).toEqual({
 			$type: 'modifier',
 			$count: { $operator: '$gte', $num: 1 },
 			$what: 'course',
@@ -192,7 +191,7 @@ describe('computeModifier', () => {
 		goodCourses = applyFilter(req.filter, goodCourses)
 
 		const { computedResult: one } = computeModifier({ expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: goodCourses, dirty: new Set() })
-		expect(one).to.be.true
+		expect(one).toBe(true)
 
 		let badCourses = [
 			{ department: [ 'CHEM' ], number: 398 },
@@ -200,7 +199,7 @@ describe('computeModifier', () => {
 		badCourses = applyFilter(req.filter, badCourses)
 
 		const { computedResult: two } = computeModifier({ expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: badCourses, dirty: new Set() })
-		expect(two).to.be.false
+		expect(two).toBe(false)
 
 		let moreGoodCourses = [
 			{ department: [ 'CHEM' ], number: 398 },
@@ -209,7 +208,7 @@ describe('computeModifier', () => {
 		moreGoodCourses = applyFilter(req.filter, moreGoodCourses)
 
 		const { computedResult: three } = computeModifier({ expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: moreGoodCourses, dirty: new Set() })
-		expect(three).to.be.true
+		expect(three).toBe(true)
 	})
 
 	it('checks for <things> from the given where-clause', () => {
@@ -238,16 +237,16 @@ describe('computeModifier', () => {
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
 		expect(computedResult)
-			.to.be.true
+			.toBe(true)
 		expect(matches)
-			.to.deep.equal([
+			.toEqual([
 				{ department: [ 'REL' ], number: 111 },
 				{ department: [ 'REL' ], number: 112 },
 			])
 		expect(counted)
-			.to.equal(2)
+			.toBe(2)
 
-		expect(modifier).to.deep.equal({
+		expect(modifier).toEqual({
 			$type: 'modifier',
 			$count: { $operator: '$gte', $num: 1 },
 			$what: 'course',
@@ -305,16 +304,16 @@ describe('computeModifier', () => {
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
 		expect(computedResult)
-			.to.be.true
-		expect(matches).to.deep.equal([
+			.toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'REL' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
 			{ department: [ 'REL' ], number: 112, credits: 1.0, _extraKeys: [ 'credits' ] },
 			{ department: [ 'CSCI' ], number: 251, credits: 1.0, _extraKeys: [ 'credits' ] },
 		])
 		expect(counted)
-			.to.equal(3)
+			.toBe(3)
 
-		expect(modifier).to.deep.equal({
+		expect(modifier).toEqual({
 			$type: 'modifier',
 			$count: { $operator: '$gte', $num: 3 },
 			$what: 'course',
@@ -367,16 +366,16 @@ describe('computeModifier', () => {
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
 		expect(computedResult)
-			.to.be.true
-		expect(matches).to.deep.equal([
+			.toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'CHEM', 'BIO' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
 			{ department: [ 'CHEM', 'BIO' ], number: 112, credits: 1.0, _extraKeys: [ 'credits' ] },
 			{ department: [ 'CSCI' ], number: 251, credits: 1.0, _extraKeys: [ 'credits' ] },
 		])
 		expect(counted)
-			.to.equal(3)
+			.toBe(3)
 
-		expect(modifier).to.deep.equal({
+		expect(modifier).toEqual({
 			$type: 'modifier',
 			$count: { $operator: '$gte', $num: 3 },
 			$what: 'department',
@@ -430,15 +429,15 @@ describe('computeModifier', () => {
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
 
 		expect(computedResult)
-			.to.be.true
-		expect(matches).to.deep.equal([
+			.toBe(true)
+		expect(matches).toEqual([
 			{ department: [ 'REL' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
 			{ department: [ 'CSCI' ], number: 251, credits: 1.0, _extraKeys: [ 'credits' ] },
 		])
 		expect(counted)
-			.to.equal(2)
+			.toBe(2)
 
-		expect(modifier).to.deep.equal({
+		expect(modifier).toEqual({
 			$type: 'modifier',
 			$count: { $operator: '$gte', $num: 2 },
 			$what: 'credit',
@@ -499,7 +498,7 @@ describe('computeModifier', () => {
 		const courseResults = computeModifier({ expr: modifier.$and[0], ctx: req, courses, dirty })
 		const departmentResults = computeModifier({ expr: modifier.$and[1], ctx: req, courses, dirty })
 
-		expect(modifier).to.deep.equal({
+		expect(modifier).toEqual({
 			$type: 'boolean',
 			$booleanType: 'and',
 			$and: [
@@ -521,25 +520,25 @@ describe('computeModifier', () => {
 		})
 
 		expect(courseResults.computedResult)
-			.to.be.true
-		expect(courseResults.matches).to.deep.equal([
+			.toBe(true)
+		expect(courseResults.matches).toEqual([
 			{ department: [ 'CHEM', 'BIO' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
 			{ department: [ 'CHEM', 'BIO' ], number: 112, credits: 1.0, _extraKeys: [ 'credits' ] },
 		])
 		expect(courseResults.counted)
-			.to.equal(2)
+			.toBe(2)
 
 		expect(departmentResults.computedResult)
-			.to.be.true
-		expect(departmentResults.matches).to.deep.equal([
+			.toBe(true)
+		expect(departmentResults.matches).toEqual([
 			{ department: [ 'CHEM', 'BIO' ], number: 111, credits: 1.0, _extraKeys: [ 'credits' ] },
 			{ department: [ 'CHEM', 'BIO' ], number: 112, credits: 1.0, _extraKeys: [ 'credits' ] },
 		])
 		expect(departmentResults.counted)
-			.to.equal(2)
+			.toBe(2)
 	})
 
 	it('throws when $what is none of "course", "credit", nor "department"', () => {
-		expect(() => computeModifier({ expr: { $what: 'invalid', $from: {}, $count: {} } })).to.throw(TypeError)
+		expect(() => computeModifier({ expr: { $what: 'invalid', $from: {}, $count: {} } })).toThrowError(TypeError)
 	})
 })
