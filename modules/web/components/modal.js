@@ -8,7 +8,6 @@ import './modal.scss'
 type ModalProps = {
 	backdropClassName?: string,
 	children?: any,
-	into?: string,
 	modalClassName?: string,
 	onClose: () => any,
 };
@@ -20,6 +19,7 @@ export default function Modal(props: ModalProps) {
 			overlayClassName={cx('modal--backdrop', props.backdropClassName)}
 			className={cx('modal--content', props.modalClassName)}
 			isOpen={true}
+			{...props}
 		>
 			{props.children}
 		</BaseModal>

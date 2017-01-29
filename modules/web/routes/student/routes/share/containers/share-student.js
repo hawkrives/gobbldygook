@@ -21,9 +21,9 @@ export function ShareSheet(props) {
 	const boundCloseModal = () => props.router.push(`/s/${props.params.studentId}/`)
 
 	return <Modal
-		into="share-modal"
 		modalClassName="share-dialog"
 		onClose={boundCloseModal}
+		contentLabel="Share"
 	>
 		<Toolbar className="window-tools">
 			<Button className="close-modal" onClick={boundCloseModal}>

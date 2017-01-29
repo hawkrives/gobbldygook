@@ -104,7 +104,7 @@ function ModalCourse(props) {
 	} = props
 
 	return (
-		<Modal onClose={onClose} into="course-modal">
+		<Modal onClose={onClose} contentLabel="Course">
 		<div className="course--modal">
 			<Toolbar>
 				<Separator type="flex-spacer" flex={3} />
