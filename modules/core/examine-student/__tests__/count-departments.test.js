@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import countDepartments from '../count-departments'
 
 describe('countDepartments', () => {
@@ -8,6 +7,6 @@ describe('countDepartments', () => {
 			{ department: [ 'ART', 'ASIAN' ] },
 			{ department: [ 'CHEM', 'BIO' ] },
 		]
-		expect(countDepartments(courses)).to.equal(4)
+		expect(countDepartments(courses)).toBe(4)
 	})
 })

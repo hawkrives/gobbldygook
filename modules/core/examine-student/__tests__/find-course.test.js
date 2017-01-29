@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import findCourse from '../find-course'
 
 describe('findCourse', () => {
@@ -11,7 +10,7 @@ describe('findCourse', () => {
 
 		const lookingFor = { department: [ 'THEAT' ], number: 222, section: 'A' }
 
-		expect(findCourse(lookingFor, courses)).to.equal(courses[0])
+		expect(findCourse(lookingFor, courses)).toBe(courses[0])
 	})
 
 	it('requires the found course to have at least all of the properties of the query', () => {
@@ -23,6 +22,6 @@ describe('findCourse', () => {
 
 		const lookingFor = { department: [ 'THEAT' ], number: 222 }
 
-		expect(findCourse(lookingFor, courses)).to.equal(courses[0])
+		expect(findCourse(lookingFor, courses)).toBe(courses[0])
 	})
 })

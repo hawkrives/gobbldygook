@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import getDepartments from '../get-departments'
 
 describe('getDepartments', () => {
@@ -9,6 +8,6 @@ describe('getDepartments', () => {
 			{ department: [ 'CHEM', 'BIO' ] },
 		]
 
-		expect(getDepartments(courses)).to.deep.equal([ 'ART', 'ASIAN', 'CHEM', 'BIO' ])
+		expect(getDepartments(courses)).toEqual([ 'ART', 'ASIAN', 'CHEM', 'BIO' ])
 	})
 })

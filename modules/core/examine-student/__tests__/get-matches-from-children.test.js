@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import getMatchesFromChildren from '../get-matches-from-children'
 
 describe('getMatchesFromChildren', () => {
@@ -57,7 +56,7 @@ describe('getMatchesFromChildren', () => {
 			},
 		}
 
-		expect(getMatchesFromChildren(requirement.result, requirement)).to.deep.equal(requirement.Child.result._matches)
+		expect(getMatchesFromChildren(requirement.result, requirement)).toEqual(requirement.Child.result._matches)
 	})
 
 	it('de-duplicates matched courses', () => {
@@ -118,7 +117,7 @@ describe('getMatchesFromChildren', () => {
 			},
 		}
 
-		expect(getMatchesFromChildren(requirement.result, requirement)).to.deep.equal([
+		expect(getMatchesFromChildren(requirement.result, requirement)).toEqual([
 			{ $type: 'course', department: [ 'CSCI' ], gereqs: [ 'AQR' ], number: 121, _result: true },
 			{ $type: 'course', department: [ 'ASIAN' ], number: 130, _result: true },
 			{ $type: 'course', department: [ 'ASIAN' ], number: 275, _result: true },

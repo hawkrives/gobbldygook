@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import countCourses from '../count-courses'
 
 describe('countCourses', () => {
@@ -8,7 +7,7 @@ describe('countCourses', () => {
 			{ department: [ 'ASIAN', 'ART' ], number: 112 },
 		]
 
-		expect(countCourses(courses)).to.equal(2)
+		expect(countCourses(courses)).toBe(2)
 	})
 
 	it('does not just return the number of courses in the array', () => {
@@ -17,6 +16,6 @@ describe('countCourses', () => {
 			{ department: [ 'ASIAN', 'ART' ], number: 111 },
 		]
 
-		expect(countCourses(courses)).to.equal(1)
+		expect(countCourses(courses)).toBe(1)
 	})
 })

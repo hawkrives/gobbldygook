@@ -1,8 +1,7 @@
-import { expect } from 'chai'
 import getMatchesFromFilter from '../get-matches-from-filter'
 
 describe('getMatchesFromFilter', () => {
-	it('returns the matches from the requirement\s filter property', () => {
+	it('returns the matches from the requirement\'s filter property', () => {
 		const requirement = {
 			$type: 'requirement',
 			filter: {
@@ -22,6 +21,6 @@ describe('getMatchesFromFilter', () => {
 			},
 		}
 
-		expect(getMatchesFromFilter(requirement)).to.equal(requirement.filter._matches)
+		expect(getMatchesFromFilter(requirement)).toBe(requirement.filter._matches)
 	})
 })

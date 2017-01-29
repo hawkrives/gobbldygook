@@ -1,20 +1,19 @@
-import { expect } from 'chai'
 import humanizeOperator from '../humanize-operator'
 
 describe('humanizeOperator', () => {
 	it('handles $gte', () => {
-		expect(humanizeOperator('$gte')).to.equal('')
+		expect(humanizeOperator('$gte')).toBe('')
 	})
 
 	it('handles $lte', () => {
-		expect(humanizeOperator('$lte')).to.equal('at most')
+		expect(humanizeOperator('$lte')).toBe('at most')
 	})
 
 	it('handles $eq', () => {
-		expect(humanizeOperator('$eq')).to.equal('exactly')
+		expect(humanizeOperator('$eq')).toBe('exactly')
 	})
 
 	it('throws on unexpected values', () => {
-		expect(() => humanizeOperator('$')).to.throw()
+		expect(() => humanizeOperator('$')).toThrow()
 	})
 })
