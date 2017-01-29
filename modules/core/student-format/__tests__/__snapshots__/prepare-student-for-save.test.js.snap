@@ -1,0 +1,17 @@
+exports[`prepareStudentForSave removes extraneous properties from a student object 1`] = `
+Object {
+  "name": "a",
+  "schedules": Object {},
+}
+`;
+
+exports[`prepareStudentForSave removes extraneous properties from schedules 1`] = `
+Object {
+  "name": "a",
+  "schedules": Object {
+    "x": Object {
+      "id": "x",
+    },
+  },
+}
+`;
