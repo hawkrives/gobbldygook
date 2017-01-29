@@ -12,6 +12,7 @@ const DefinePlugin = webpack.DefinePlugin
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
 const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin
 const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
+const NamedModulesPlugin = webpack.NamedModulesPlugin
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
@@ -248,6 +249,8 @@ const config = {
 				},
 			},
 		}),
+
+		new NamedModulesPlugin(),
 	],
 
 	module: {
