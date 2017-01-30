@@ -329,7 +329,7 @@ self.addEventListener('message', ({ data }) => {
 				self.postMessage([ id, 'result', result ])
 			})
 			.catch(err => {
-				self.postMessage([ id, 'error', JSON.parse(serializeError(err)) ])
+				self.postMessage([ id, 'error', serializeError(err) ])
 			})
 	}
 	else {
@@ -338,7 +338,7 @@ self.addEventListener('message', ({ data }) => {
 				self.postMessage([ id, 'result', result ])
 			})
 			.catch(err => {
-				self.postMessage([ id, 'error', JSON.parse(serializeError(err)) ])
+				self.postMessage([ id, 'error', serializeError(err) ])
 			})
 	}
 })
