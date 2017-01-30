@@ -190,11 +190,11 @@ function updateDatabase(type, infoFileBase, notificationId, infoFromServer) {
 
 		return series([
 			// clear out any old data
-			cleanPriorData(path, type),
+			() => cleanPriorData(path, type),
 			// store the new data
-			storeData(path, type, data),
+			() => storeData(path, type, data),
 			// record that we stored the new data
-			cacheItemHash(path, type, hash),
+			() => cacheItemHash(path, type, hash),
 		])
 	}, () => {
 		log(`Could not fetch ${url}`)
@@ -285,7 +285,7 @@ function loadFiles(url, infoFileBase) {
 
 		// Load them into the database
 		return series(filesToLoad.map(file => {
-			return updateDatabase(type, infoFileBase, notificationId, file)
+			return () => updateDatabase(type, infoFileBase, notificationId, file)
 		}))
 	})
 	.then(() => {
