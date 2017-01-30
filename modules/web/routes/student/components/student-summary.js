@@ -63,9 +63,9 @@ export default function StudentSummary({
 	showMessage?: boolean,
 	showAvatar?: boolean,
 	randomizeHello?: boolean,
-	onChangeName?: (ev: Event) => any,
-	onChangeGraduation?: (ev: Event) => any,
-	onChangeMatriculation?: (ev: Event) => any,
+	onChangeName?: (value: string) => any,
+	onChangeGraduation?: (value: string) => any,
+	onChangeMatriculation?: (value: string) => any,
 }) {
 	const { studies, canGraduate } = student
 

@@ -9,8 +9,8 @@ class ContentEditable extends Component {
 	props: {
 		className?: string,
 		multiLine?: boolean,
-		onBlur?: (ev: Event) => any,
-		onChange: (ev: Event) => any,
+		onBlur?: (value: string) => any,
+		onChange: (value: string) => any,
 		onFocus?: (ev: Event) => any,
 		onKeyDown?: (ev: Event) => any,
 		placeholder?: string,
@@ -47,10 +47,10 @@ class ContentEditable extends Component {
 		const value = ev.target.textContent
 
 		if (value !== this.props.value) {
-			this.props.onChange({ target: { value } })
+			this.props.onChange(value)
 		}
 		if (ev.type === 'blur' && typeof this.props.onBlur === 'function') {
-			this.props.onBlur({ target: { value } })
+			this.props.onBlur(value)
 		}
 
 		this.setState({ lastValue: value })

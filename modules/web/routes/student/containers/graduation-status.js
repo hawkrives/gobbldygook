@@ -82,14 +82,14 @@ class GraduationStatusContainer extends Component {
 		this.props.removeArea(this.props.student.id, areaQuery)
 	};
 
-	handleChangeGraduation = ev => {
-		this.props.changeGraduation(this.props.student.id, parseInt(ev.target.value) || 0)
+	handleChangeGraduation = (value: string) => {
+		this.props.changeGraduation(this.props.student.id, parseInt(value) || 0)
 	};
-	handleChangeMatriculation = ev => {
-		this.props.changeMatriculation(this.props.student.id, parseInt(ev.target.value) || 0)
+	handleChangeMatriculation = (value: string) => {
+		this.props.changeMatriculation(this.props.student.id, parseInt(value) || 0)
 	};
-	handleChangeName = ev => {
-		this.props.changeName(this.props.student.id, ev.target.value)
+	handleChangeName = (value: string) => {
+		this.props.changeName(this.props.student.id, value)
 	};
 
 	render() {
