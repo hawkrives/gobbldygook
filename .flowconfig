@@ -4,7 +4,7 @@
 
 ; stuffs
 .*/node_modules/fbjs
-.*/node_modules/.*/node_modules/fbjs
+.*/node_modules/jest-validate
 
 
 [libs]
@@ -23,9 +23,6 @@ module.name_mapper='^modules/\(.*\)' -> '<PROJECT_ROOT>/modules/\1'
 module.name_mapper.extension='css' -> '<PROJECT_ROOT>/config/flow/css'
 module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/config/flow/css'
 module.name_mapper='^\(.*\)\.\(jpg\|png\|svg\|woff\|woff2\)$' -> '<PROJECT_ROOT>/config/flow/file'
-
-; module.system.node.resolve_dirname=node_modules
-; module.system.node.resolve_dirname=.
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
