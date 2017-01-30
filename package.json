@@ -18,6 +18,11 @@
       "<rootDir>/node_modules/",
       "<rootDir>/modules/hanson-format/parse-hanson-string.js"
     ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text-summary"
+    ],
     "globals": {
       "DEVELOPMENT": false,
       "PRODUCTION": false,
