@@ -1,7 +1,6 @@
 import 'whatwg-fetch'
 import { status, json, text } from 'modules/lib/fetch-helpers'
 import serializeError from 'serialize-error'
-import PQueue from 'p-queue'
 import series from 'p-series'
 
 import range from 'idb-range'
@@ -285,11 +284,9 @@ function loadFiles(url, infoFileBase) {
 		dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, { max: size(filesToLoad), showButton: true })
 
 		// Load them into the database
-		const q = new PQueue({ concurrency: 2 })
-		filesToLoad.forEach(file => {
-			q.add(() => updateDatabase(type, infoFileBase, notificationId, file))
-		})
-		return q.onEmpty()
+		return series(filesToLoad.map(file => {
+			return updateDatabase(type, infoFileBase, notificationId, file)
+		}))
 	})
 	.then(() => {
 		// Clean up the database a bit
