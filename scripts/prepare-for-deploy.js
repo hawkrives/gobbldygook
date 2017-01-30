@@ -9,8 +9,8 @@ const cpy = require('cpy')
 const isDir = path => fs.statSync(path).isDirectory()
 const inWhitelist = whitelist => filename => whitelist.some(pattern => pattern.test(filename))
 const remove = path => {
-  console.log(path)
-  del.sync(path)
+	console.log(path)
+	del.sync(path)
 }
 
 // remove extra top-level folders
@@ -33,9 +33,9 @@ console.log('removed top-level files')
 
 // move build/* to ./, and remove build/
 cpy('build/*', './').then(() => {
-  console.log('moved build/* to build')
-  return del('build/')
+	console.log('moved build/* to build')
+	return del('build/')
 }).then(() => {
-  console.log('removed build/')
-  console.log('done')
+	console.log('removed build/')
+	console.log('done')
 })
