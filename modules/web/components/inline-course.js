@@ -1,38 +1,40 @@
-import React, {Component, PropTypes} from 'react'
-import {DragSource} from 'react-dnd'
+import React, { Component } from 'react'
+import { DragSource } from 'react-dnd'
 import cx from 'classnames'
-import {compact} from 'lodash'
-import {filter} from 'lodash'
-import {isNull} from 'lodash'
-import {map} from 'lodash'
+import compact from 'lodash/compact'
+import filter from 'lodash/filter'
+import isNull from 'lodash/isNull'
+import map from 'lodash/map'
 
-import {IDENT_COURSE} from '../../core/student-format/item-types'
+import { IDENT_COURSE } from '../../core/student-format/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'
-import {buildDeptNum} from 'modules/schools/stolaf'
+import { buildDeptNum } from 'modules/schools/stolaf'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 
 import './inline-course.scss'
 
+type InlineCourseProps = {
+	className?: string,
+	conflicts?: any[],
+	connectDragSource: () => any,  // react-dnd
+	course: Object,
+	index?: number,
+	isDragging: boolean,  // react-dnd
+	scheduleId?: string,
+	studentId?: string,
+};
+
 class InlineCourse extends Component {
-	static propTypes = {
-		className: PropTypes.string,
-		conflicts: PropTypes.array,
-		connectDragSource: PropTypes.func.isRequired,  // react-dnd
-		course: PropTypes.object.isRequired,
-		index: PropTypes.number,
-		isDragging: PropTypes.bool.isRequired,  // react-dnd
-		scheduleId: PropTypes.string,
-		studentId: PropTypes.string,
-	};
+	props: InlineCourseProps;
 
 	state = {
 		isOpen: false,
 	};
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps: InlineCourseProps, nextState) {
 		return (
 			this.props.course !== nextProps.course ||
 			this.props.conflicts !== nextProps.conflicts ||
@@ -42,11 +44,11 @@ class InlineCourse extends Component {
 	}
 
 	closeModal = () => {
-		this.setState({isOpen: false})
+		this.setState({ isOpen: false })
 	};
 
 	openModal = () => {
-		this.setState({isOpen: true})
+		this.setState({ isOpen: true })
 	};
 
 	render() {
@@ -65,7 +67,7 @@ class InlineCourse extends Component {
 		})
 
 		const warningList = warningEls.length && (
-			<List type='inline' className='course-warnings'>{warningEls}</List>
+			<List type="inline" className="course-warnings">{warningEls}</List>
 		)
 
 		return this.props.connectDragSource(
@@ -75,21 +77,20 @@ class InlineCourse extends Component {
 			>
 				{warningList || null}
 
-				<CourseTitle className='course-row' title={course.title} name={course.name} type={course.type} />
-				<div className='course-row course-summary'>
-					<span className='course-identifier'>
+				<CourseTitle className="course-row" title={course.title} name={course.name} type={course.type} />
+				<div className="course-row course-summary">
+					<span className="course-identifier">
 						{buildDeptNum(course, true)}
 					</span>
-					{course.type !== 'Research' ? <span className='course-type'>{course.type}</span> : null}
-					{course.gereqs && <ul className='course-gereqs'>
+					{course.type !== 'Research' ? <span className="course-type">{course.type}</span> : null}
+					{course.gereqs && <ul className="course-gereqs">
 						{map(course.gereqs, (ge, idx) =>
-							<li key={ge + idx}>{ge}</li>
-						)}
+							<li key={ge + idx}>{ge}</li>)}
 					</ul>}
 					{course.prerequisites &&
-						<span className='has-prerequisite' title={course.prerequisites}>Prereq</span>}
+						<span className="has-prerequisite" title={course.prerequisites}>Prereq</span>}
 				</div>
-				<div className='course-row course-summary'>
+				<div className="course-row course-summary">
 					{course.times}
 				</div>
 

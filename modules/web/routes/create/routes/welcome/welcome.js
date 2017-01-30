@@ -3,11 +3,11 @@ import Button from 'modules/web/components/button'
 
 export default function WelcomeScreen() {
 	return <div>
-		<header className='header'>
+		<header className="header">
 			<h1>Hi there!</h1>
 			<h2>I don't know anything about you. Care to enlighten me?</h2>
 		</header>
-		<section className='body'>
+		<section className="body">
 			<p>
 				We need to know:
 			</p>
@@ -24,25 +24,25 @@ export default function WelcomeScreen() {
 				or you can just fill everything out manually.
 			</p>
 		</section>
-		<section className='choices'>
-			<Button link type='raised'
-				to='/create/sis'
+		<section className="choices">
+			<Button link type="raised"
+				to="/create/sis"
 			>
 				Import from the SIS
 			</Button>
-			<Button disabled link type='raised'
-				to='/create/drive'
+			<Button disabled link type="raised"
+				to="/create/drive"
 				onClick={ev => ev.preventDefault()}
 			>
 				Link to Google Drive
 			</Button>
-			<Button link type='raised'
-				to='/create/upload'
+			<Button link type="raised"
+				to="/create/upload"
 			>
 				Upload a File
 			</Button>
-			<Button link type='raised'
-				to='/create/manual'
+			<Button link type="raised"
+				to="/create/manual"
 			>
 				Create Manually
 			</Button>

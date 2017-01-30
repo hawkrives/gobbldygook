@@ -1,22 +1,21 @@
-import Bluebird from 'bluebird'
-import {parseHtml} from '../parse-html'
-import {forOwn} from 'lodash'
-import {forEach} from 'lodash'
-import {v4 as uuid} from 'uuid'
+import { parseHtml } from '../parse-html'
+import forOwn from 'lodash/forOwn'
+import forEach from 'lodash/forEach'
+import uuid from 'uuid/v4'
 
 export class ExtensionNotLoadedError extends Error {}
 export class ExtensionTooOldError extends Error {}
 
 export function fetchHtml(url, fetchArgs, fetchBody) {
 	if (!global.gobbldygook_extension) {
-		return Bluebird.reject(new ExtensionNotLoadedError('Extension not loaded'))
+		return Promise.reject(new ExtensionNotLoadedError('Extension not loaded'))
 	}
 	if (global.gobbldygook_extension < '1.0.0') {
-		return Bluebird.reject(new ExtensionTooOldError(`Extension version ${global.gobbldygook_extension_version} is too old.`))
+		return Promise.reject(new ExtensionTooOldError(`Extension version ${global.gobbldygook_extension_version} is too old.`))
 	}
 
 	// now we know the extension is loaded
-	return new Bluebird((resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		const id = uuid()
 
 		function handleResponse(event) {

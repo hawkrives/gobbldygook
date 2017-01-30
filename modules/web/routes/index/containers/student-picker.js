@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import StudentPicker from '../components/student-picker'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -24,20 +24,20 @@ class StudentPickerContainer extends Component {
 	}
 
 	onFilterChange = ev => {
-		this.setState({filterText: ev.target.value.toLowerCase()})
+		this.setState({ filterText: ev.target.value.toLowerCase() })
 	};
 
 	onGroupChange = () => {};
 
 	onSortChange = () => {
-		const options = ['dateLastModified', 'name', 'canGraduate']
+		const options = [ 'dateLastModified', 'name', 'canGraduate' ]
 		const currentIndex = options.indexOf(this.state.sortBy)
 		const nextIndex = (currentIndex + 1) % options.length
-		this.setState({sortBy: options[nextIndex]})
+		this.setState({ sortBy: options[nextIndex] })
 	};
 
 	onToggleEditing = () => {
-		this.setState({isEditing: !this.state.isEditing})
+		this.setState({ isEditing: !this.state.isEditing })
 	};
 
 	render() {
@@ -66,7 +66,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	...bindActionCreators({destroyStudent, loadStudents}, dispatch),
+	...bindActionCreators({ destroyStudent, loadStudents }, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentPickerContainer)

@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 // import CourseExpression from './expression--course'
-import Expression, {makeWhereQualifier} from './expression'
-import {map} from 'lodash'
+import Expression, { makeWhereQualifier } from './expression'
+import map from 'lodash/map'
 import debug from 'debug'
 const log = debug('web:react')
 
-function FilterOf({expr, ctx}) {
+function FilterOf({ expr, ctx }) {
 	return <div>
 		{map(expr.$of, (ex, i) => {
 			log(ex)
@@ -20,7 +20,7 @@ FilterOf.propTypes = {
 	}),
 }
 
-function FilterWhere({expr}) {
+function FilterWhere({ expr }) {
 	const qualifier = makeWhereQualifier(expr.$where)
 	const description = `only courses where ${qualifier}`
 

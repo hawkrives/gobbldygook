@@ -1,12 +1,12 @@
-import React, {PropTypes, Component} from 'react'
-import {filter} from 'lodash'
-import {keys} from 'lodash'
-import {map} from 'lodash'
+import React, { PropTypes, Component } from 'react'
+import filter from 'lodash/filter'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
 
-import {isRequirementName} from 'modules/core/examine-student'
+import { isRequirementName } from 'modules/core/examine-student'
 
 import Icon from 'modules/web/components/icon'
-import {iosBoltOutline, iosBolt} from 'modules/web/icons/ionicons'
+import { iosBoltOutline, iosBolt } from 'modules/web/icons/ionicons'
 import Filter from './expression--filter'
 import Expression from './expression'
 import Button from 'modules/web/components/button'
@@ -24,34 +24,34 @@ export function Requirement(props) {
 	const computationClassName = wasEvaluated ? props.computed ? 'result-success' : 'result-failure' : ''
 	const status = <ResultIndicator result={props.computed} />
 
-	const extraClasses = [props.overridden ? 'overridden' : '']
+	const extraClasses = [ props.overridden ? 'overridden' : '' ]
 
 	const result = props.result && (
-		<div className='result'>
+		<div className="result">
 			<Expression expr={props.result} ctx={props} />
 		</div>
 	)
 
 	const message = props.message &&
-		<p className='message'>{props.message}</p>
+		<p className="message">{props.message}</p>
 	const description = props.description &&
-		<p className='description'>{props.description}</p>
+		<p className="description">{props.description}</p>
 
 	const filterEl = props.filter && (
-		<div className='filter'>
+		<div className="filter">
 			Filter: <Filter expr={props.filter} ctx={props} />
 		</div>
 	)
 
 	const title = !topLevel && (
-		<h2 className='heading' title={props.name} onClick={props.onToggleOpen}>
-			<span className='title'>
+		<h2 className="heading" title={props.name} onClick={props.onToggleOpen}>
+			<span className="title">
 				{' '}{props.name}
-				<span className='status'>{status}</span>
+				<span className="status">{status}</span>
 			</span>
-			<span className='manual-override'>
-				<span className='overridden-msg'>{props.overridden ? '(Overridden) ' : ''}</span>
-				<Button title={`${props.overridden ? 'Remove' : 'Apply'} a manual override to this requirement`} onClick={ev => props.onToggleOverride(props.path, ev)} type='flat'>
+			<span className="manual-override">
+				<span className="overridden-msg">{props.overridden ? '(Overridden) ' : ''}</span>
+				<Button title={`${props.overridden ? 'Remove' : 'Apply'} a manual override to this requirement`} onClick={ev => props.onToggleOverride(props.path, ev)} type="flat">
 					<Icon>{props.overridden ? iosBolt : iosBoltOutline}</Icon>
 				</Button>
 			</span>
@@ -69,9 +69,9 @@ export function Requirement(props) {
 		/>)
 
 	const overrideButtons = (props.message && !props.result) && (
-		<span className='required-override-buttons button-group'>
-			<Button onClick={ev => props.onRemoveOverride(props.path, ev)} type='flat'>Not yet…</Button>
-			<Button onClick={ev => props.onAddOverride(props.path, ev)} type='flat'>Done!</Button>
+		<span className="required-override-buttons button-group">
+			<Button onClick={ev => props.onRemoveOverride(props.path, ev)} type="flat">Not yet…</Button>
+			<Button onClick={ev => props.onAddOverride(props.path, ev)} type="flat">Done!</Button>
 		</span>
 	)
 
@@ -91,7 +91,7 @@ export function Requirement(props) {
 			{filterEl}
 			{result}
 			{children.length
-				? <div className='children'>{children}</div>
+				? <div className="children">{children}</div>
 				: null}
 		</div>
 	)
@@ -122,7 +122,7 @@ export default class ExpandableRequirement extends Component {
 	};
 
 	handleToggleOpen = () => {
-		this.setState({open: !this.state.open})
+		this.setState({ open: !this.state.open })
 	};
 
 	render() {

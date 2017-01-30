@@ -63,15 +63,17 @@ rules:
   camelcase: error
   comma-dangle: [warn, always-multiline]
   comma-style: [warn, last]
-  comma-spacing: ['warn', {before: false, after: true}]
-  key-spacing: ['error', {beforeColon: false, afterColon: true}]
+  comma-spacing: [warn, {before: false, after: true}]
+  key-spacing: [error, {beforeColon: false, afterColon: true}]
   quotes: [error, single, avoid-escape]
   consistent-this: [warn, self]
   brace-style: [warn, stroustrup]
   semi: [error, never]
-  babel/arrow-parens: [warn, as-needed]
-  arrow-spacing: ['warn', {before: true, after: true}]
-  no-implicit-coercion: ['error', {boolean: true, number: true, string: true}]
+  arrow-parens: [warn, as-needed]
+  arrow-spacing: [warn, {before: true, after: true}]
+  array-bracket-spacing: [warn, always]
+  object-curly-spacing: [warn, always]
+  no-implicit-coercion: [error, {boolean: true, number: true, string: true}]
   keyword-spacing: warn
   no-confusing-arrow: error
   no-implicit-globals: error
@@ -79,7 +81,7 @@ rules:
   no-self-assign: warn
 
   # react rules – https://github.com/yannickcr/eslint-plugin-react
-  jsx-quotes: [warn, prefer-single]
+  jsx-quotes: [warn, prefer-double]
   react/display-name: off
   react/jsx-curly-spacing: [warn, never]
   react/jsx-indent-props: [warn, tab]
@@ -97,7 +99,7 @@ rules:
   react/prop-types: error  # prevent missing proptypes in a react component definition
   react/react-in-jsx-scope: error
   react/self-closing-comp: warn  # prevent extra closing tags for components without children
-  react/sort-comp: warn
+  # react/sort-comp: warn
   react/sort-prop-types: warn
   react/wrap-multilines: off
   react/prefer-stateless-function: warn

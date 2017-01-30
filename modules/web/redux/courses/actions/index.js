@@ -1,18 +1,16 @@
 // @flow
-import type {Action} from 'redux'
-
 import {
 	REFRESH_COURSES,
 	// LOAD_COURSES,
 } from '../constants'
 
-// import {flatten} from 'lodash'
-// import {values} from 'lodash'
-// import {map} from 'lodash'
+// import flatten from 'lodash/flatten'
+// import values from 'lodash/values'
+// import map from 'lodash/map'
 // import {getCoursesFromSchedules} from '../../../helpers/get-courses'
 
 
-export function refreshCourses(): Action {
+export function refreshCourses(): {type: string} {
 	return { type: REFRESH_COURSES }
 }
 

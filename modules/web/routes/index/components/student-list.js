@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react'
-import {filter} from 'lodash'
-import {map} from 'lodash'
-import {sortBy} from 'lodash'
+import React, { PropTypes } from 'react'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
 import fuzzysearch from 'fuzzysearch'
 
 import List from 'modules/web/components/list'
@@ -39,7 +39,7 @@ export default function StudentList(props) {
 	)
 
 	return (
-		<List className='student-list' type='plain'>
+		<List className="student-list" type="plain">
 			{studentObjects}
 		</List>
 	)
@@ -50,7 +50,7 @@ StudentList.propTypes = {
 	filter: PropTypes.string.isRequired,
 	groupBy: PropTypes.string.isRequired,
 	isEditing: PropTypes.bool.isRequired,
-	sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate']).isRequired,
+	sortBy: PropTypes.oneOf([ 'dateLastModified', 'name', 'canGraduate' ]).isRequired,
 	students: PropTypes.object.isRequired,
 }
 

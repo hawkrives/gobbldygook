@@ -1,9 +1,18 @@
-import React, {PropTypes} from 'react'
+// @flow
+import React from 'react'
 import './course-title.scss'
 
 const independentRegex = /^I[RS]/
 
-export default function CourseTitle({name, title, type, className}) {
+type CourseTitleProps = {
+	className?: string,
+	name: string,
+	title?: string,
+	type?: string,
+};
+
+
+export default function CourseTitle({ name, title, type, className }: CourseTitleProps) {
 	const isIndependent = independentRegex.test(name)
 	let courseName = title || name
 	let subtitle = undefined
@@ -25,15 +34,8 @@ export default function CourseTitle({name, title, type, className}) {
 
 	return (
 		<div className={className}>
-			<h1 className='course-title'>{courseName}</h1>
-			{subtitle && subtitle.length && <h2 className='course-subtitle'>{subtitle}</h2>}
+			<h1 className="course-title">{courseName}</h1>
+			{subtitle && subtitle.length && <h2 className="course-subtitle">{subtitle}</h2>}
 		</div>
 	)
-}
-
-CourseTitle.propTypes = {
-	className: PropTypes.string,
-	name: PropTypes.string.isRequired,
-	title: PropTypes.string,
-	type: PropTypes.string,
 }

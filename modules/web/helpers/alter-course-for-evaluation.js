@@ -1,8 +1,8 @@
-import {forEach} from 'lodash'
-import {toPairs} from 'lodash'
-import {fromPairs} from 'lodash'
-import {filter} from 'lodash'
-import {includes} from 'lodash'
+import forEach from 'lodash/forEach'
+import toPairs from 'lodash/toPairs'
+import fromPairs from 'lodash/fromPairs'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
 
 const whitelist = [
 	'clbid',
@@ -23,13 +23,13 @@ const mapping = {
 	departments: 'department',
 }
 export function alterCourse(course) {
-	course = {...course}
+	course = { ...course }
 
 	forEach(mapping, (toKey, fromKey) => {
 		course[toKey] = course[fromKey]
 	})
 
 	let pairs = toPairs(course)
-	pairs = filter(pairs, ([key]) => includes(whitelist, key))
+	pairs = filter(pairs, ([ key ]) => includes(whitelist, key))
 	return fromPairs(pairs)
 }

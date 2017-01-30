@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import yaml from 'js-yaml'
 import keymage from 'keymage'
-import {omit} from 'lodash'
-import {find} from 'lodash'
-import {filter} from 'lodash'
+import omit from 'lodash/omit'
+import find from 'lodash/find'
+import filter from 'lodash/filter'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { loadAllAreas } from 'modules/web/redux/areas/actions'
@@ -49,7 +49,7 @@ export class AreaEditScreen extends Component {
 			return
 		}
 
-		let {type, name, revision} = props.params
+		let { type, name, revision } = props.params
 
 		if (!type || !name || !revision) {
 			return
@@ -74,7 +74,7 @@ export class AreaEditScreen extends Component {
 	};
 
 	handleChange = newValue => {
-		this.setState({area: newValue})
+		this.setState({ area: newValue })
 	};
 
 	handleSave = () => {};
@@ -87,11 +87,11 @@ export class AreaEditScreen extends Component {
 			keymage.popScope()
 		}
 
-		this.setState({isEditing: focused})
+		this.setState({ isEditing: focused })
 	};
 
 	render() {
-		let {type, name, revision} = this.props.params
+		let { type, name, revision } = this.props.params
 
 		if (this.state.area && (type && name && revision)) {
 			return (<AreaEditor
@@ -110,11 +110,11 @@ export class AreaEditScreen extends Component {
 
 		if (name) {
 			name = decodeURIComponent(name)
-			areas = filter(areas, {name})
+			areas = filter(areas, { name })
 		}
 		if (type) {
 			type = decodeURIComponent(type)
-			areas = filter(areas, {type})
+			areas = filter(areas, { type })
 		}
 
 		return <AreaList areas={areas} />
@@ -127,7 +127,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	...bindActionCreators({loadAllAreas}, dispatch),
+	...bindActionCreators({ loadAllAreas }, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AreaEditScreen)

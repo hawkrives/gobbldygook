@@ -1,6 +1,6 @@
-import {includes} from 'lodash'
-import {extractInformationFromDegreeAudit} from './degree-audit'
-import {selectAll} from 'css-select'
+import includes from 'lodash/includes'
+import { extractInformationFromDegreeAudit } from './degree-audit'
+import { selectAll } from 'css-select'
 
 export function getGraduationInformation(dom) {
 	// #bigbodymainstyle

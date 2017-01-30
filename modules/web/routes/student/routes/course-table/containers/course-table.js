@@ -1,12 +1,12 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {map} from 'lodash'
-import {filter} from 'lodash'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
 
-import {addSchedule, destroySchedules} from 'modules/web/redux/students/actions/schedules'
-import {findFirstAvailableYear} from 'modules/web/helpers/find-first-available-year'
-import {findFirstAvailableSemester} from 'modules/web/helpers/find-first-available-semester'
+import { addSchedule, destroySchedules } from 'modules/web/redux/students/actions/schedules'
+import { findFirstAvailableYear } from 'modules/web/helpers/find-first-available-year'
+import { findFirstAvailableSemester } from 'modules/web/helpers/find-first-available-semester'
 
 import CourseTable from '../components/course-table'
 
@@ -58,6 +58,6 @@ CourseTableContainer.propTypes = {
 
 
 const mapDispatchToProps = dispatch =>
-	bindActionCreators({addSchedule, destroySchedules}, dispatch)
+	bindActionCreators({ addSchedule, destroySchedules }, dispatch)
 
 export default connect(undefined, mapDispatchToProps)(CourseTableContainer)

@@ -1,10 +1,10 @@
-import {Student} from 'modules/core'
+import { Student } from 'modules/core'
 
 import {
 	IMPORT_STUDENT,
 } from '../constants'
 
-export function importStudent({data, type}={}) {
+export function importStudent({ data, type }={}) {
 	let stu = undefined
 	if (type === 'application/json') {
 		try {

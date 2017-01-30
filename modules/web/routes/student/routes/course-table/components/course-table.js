@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import cx from 'classnames'
-import {expandYear} from 'modules/schools/stolaf'
+import { expandYear } from 'modules/schools/stolaf'
 
-import {findFirstAvailableYear} from 'modules/web/helpers/find-first-available-year'
-import {map} from 'lodash'
-import {sortBy} from 'lodash'
-import {groupBy} from 'lodash'
+import { findFirstAvailableYear } from 'modules/web/helpers/find-first-available-year'
+import map from 'lodash/map'
+import sortBy from 'lodash/sortBy'
+import groupBy from 'lodash/groupBy'
 
 import Button from 'modules/web/components/button'
 import Year from './year'
@@ -21,10 +21,10 @@ export default function CourseTable(props) {
 
 	const nextYearButton = canAddYear && (
 		<Button
-			className='add-year'
-			key='add-year'
-			type='flat'
-			title='Add Year'
+			className="add-year"
+			key="add-year"
+			type="flat"
+			title="Add Year"
 			onClick={props.addYear}
 		>
 			{`Add ${expandYear(nextAvailableYear, false, '–')}`}

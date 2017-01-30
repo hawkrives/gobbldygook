@@ -1,10 +1,12 @@
-import {flatten} from 'lodash'
-import {map} from 'lodash'
-import {compact} from 'lodash'
+// @flow
+import flatten from 'lodash/flatten'
+import map from 'lodash/map'
+import compact from 'lodash/compact'
+import isPlainObject from 'lodash/isPlainObject'
+import keys from 'lodash/keys'
+import some from 'lodash/some'
 import isRequirementName from './is-requirement-name'
-import {isPlainObject} from 'lodash'
-import {keys} from 'lodash'
-import {some} from 'lodash'
+import type { Requirement } from './types'
 
 /**
  * Searches recursively through a requirement tree to find all of the
@@ -13,7 +15,7 @@ import {some} from 'lodash'
  * @param {Requirement} requirement - the root requirement
  * @returns {Course[]} - the leaf children
  */
-export default function findLeafRequirements(requirement) {
+export default function findLeafRequirements(requirement: Requirement) {
 	// Time to muse. Just what is a "requirement with no children?"
 	// I think that it's just that – a requirement with no children;
 	// that is, one with no properties that pass the isRequirementName check.
@@ -31,7 +33,7 @@ export default function findLeafRequirements(requirement) {
 	}
 
 	if (requirement.computed === true) {
-		return [requirement]
+		return [ requirement ]
 	}
 
 	// if there are no keys in this object which are requirement names,

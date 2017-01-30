@@ -1,18 +1,19 @@
+// @flow
+import filter from 'lodash/filter'
+import forEach from 'lodash/forEach'
+import map from 'lodash/map'
+import max from 'lodash/max'
+import min from 'lodash/min'
+import take from 'lodash/take'
+import uniqBy from 'lodash/uniqBy'
 import assertKeys from './assert-keys'
 import compareCourseToQualification from './compare-course-to-qualification'
-import {filter} from 'lodash'
-import {forEach} from 'lodash'
-import {isPlainObject} from 'lodash'
-import {map} from 'lodash'
-import {max} from 'lodash'
-import {min} from 'lodash'
-import {take} from 'lodash'
 import simplifyCourse from './simplify-course'
-import {uniqBy} from 'lodash'
+import type { Course, Qualifier, Qualification, Counter, QualificationFunctionValue } from './types'
 import debug from 'debug'
 const log = debug('examine-student:filter-by-where-clause')
 
-export default function filterByWhereClause(baseList, clause, {distinct, fullList, counter}={}) {
+export default function filterByWhereClause(baseList: Course[], clause: Qualifier, { distinct, fullList, counter }: {distinct: boolean, fullList?: Course[], counter?: Counter}={}) {
 	// When filtering by an and-clause, we need access to both the
 	// entire list of courses, and the result of the prior iteration.
 	// To simplify future invocations, we default to `fullList = list`
@@ -25,7 +26,7 @@ export default function filterByWhereClause(baseList, clause, {distinct, fullLis
 
 	// This function always reduces down to a call to filterByQualification
 	if (clause.$type === 'qualification') {
-		return filterByQualification(baseList, clause, {distinct, fullList, counter})
+		return filterByQualification(baseList, clause, { distinct, fullList, counter })
 	}
 
 	// either an and- or or-clause.
@@ -33,20 +34,20 @@ export default function filterByWhereClause(baseList, clause, {distinct, fullLis
 		// and-clauses become the result of applying each invocation to the
 		// result of the prior one. they are the list of unique courses which
 		// meet all of the qualifications.
-		if ('$and' in clause) {
+		if (clause.$booleanType === 'and') {
 			let filtered = baseList
 			forEach(clause.$and, q => {
-				filtered = filterByWhereClause(filtered, q, {distinct, fullList, counter})
+				filtered = filterByWhereClause(filtered, q, { distinct, fullList, counter })
 			})
 			return filtered
 		}
 
 		// or-clauses are the list of unique courses that meet one or more
 		// of the qualifications.
-		else if ('$or' in clause) {
+		else if (clause.$booleanType === 'or') {
 			let filtrations = []
 			forEach(clause.$or, q => {
-				filtrations = filtrations.concat(filterByWhereClause(baseList, q, {distinct, counter}))
+				filtrations = filtrations.concat(filterByWhereClause(baseList, q, { distinct, counter }))
 			})
 
 			// uniquify the list of possibilities by way of turning them into
@@ -71,36 +72,18 @@ const qualificationFunctionLookup = {
 	min: min,
 }
 
-export function filterByQualification(list, qualification, {distinct=false, fullList, counter={}}={}) {
+export function filterByQualification(list: Course[], qualification: Qualification, { distinct=false, fullList, counter }: {distinct: boolean, fullList?: Course[], counter?: Counter}={}) {
 	assertKeys(qualification, '$key', '$operator', '$value')
 	const value = qualification.$value
 
-	if (isPlainObject(value)) {
+	if (typeof value === 'object' && !Array.isArray(value)) {
 		if (value.$type === 'boolean') {
 			if (!('$or' in value) && !('$and' in value)) {
 				throw new TypeError(`filterByQualification: neither $or nor $and were present in ${JSON.stringify(value)}`)
 			}
 		}
 		else if (value.$type === 'function') {
-			const func = qualificationFunctionLookup[value.$name]
-
-			if (!func) {
-				throw new ReferenceError(`filterByQualification: ${value.$name} is not a valid function name.`)
-			}
-
-			const completeList = fullList || list
-			// we're not passing distinct or counter back to filterByWhereClause here,
-			// because this call is not affected by how the results need to be qualified,
-			// since it's finding the matches to get a value from.
-			const filtered = filterByWhereClause(completeList, value.$where)
-			const items = map(filtered, c => c[value.$prop])
-			const computed = func(items)
-
-			log('looked at', completeList)
-			log('reduced to', filtered)
-			log('came up with', computed)
-
-			value['$computed-value'] = computed
+			applyQualifictionFunction({ value, fullList, list })
 		}
 		else {
 			throw new TypeError(`filterByQualification: ${value.$type} is not a valid type for a query.`)
@@ -116,38 +99,31 @@ export function filterByQualification(list, qualification, {distinct=false, full
 		filtered = take(filtered, counter.$num)
 	}
 
-	/* if (counter.$operator === '$gte') {
-		filtered = filter(list, course =>
-			compareCourseToQualification(course, qualification))
-	}
-	else {
-		let count = 0
-		forEach(list, course =>  {
-			if (compareCourseToQualification(course, qualification)) {
-				filtered.push(course)
-				count += 1
-				if (counter.$operator === '$lte') {
-					// We can't use computeCountWithOperator here, because 0
-					// <= N for all N. Instead, we check to see if the next
-					// step would cause us to go over our limit. If it would,
-					// we stop the loop.
-					if (count + 1 >= counter.$num) {
-						return false // exit now
-					}
-				}
-				else if (counter.$operator === '$eq') {
-					// If we have exactly the right number, stop.
-					if (count === counter.$num) {
-						return false // exit now
-					}
-				}
-			}
-		})
-	} */
-
 	if (distinct) {
 		filtered = uniqBy(filtered, simplifyCourse)
 	}
 
 	return filtered
+}
+
+function applyQualifictionFunction({ value, fullList, list }: {value: QualificationFunctionValue, fullList?: Course[], list: Course[]}) {
+	const func = qualificationFunctionLookup[value.$name]
+
+	if (!func) {
+		throw new ReferenceError(`applyQualifictionFunction: ${value.$name} is not a valid function name.`)
+	}
+
+	const completeList = fullList || list
+	// we're not passing distinct or counter back to filterByWhereClause here,
+	// because this call is not affected by how the results need to be qualified,
+	// since it's finding the matches to get a value from.
+	const filtered = filterByWhereClause(completeList, value.$where)
+	const items = map(filtered, c => c[value.$prop])
+	const computed = func(items)
+
+	log('looked at', completeList)
+	log('reduced to', filtered)
+	log('came up with', computed)
+
+	value['$computed-value'] = computed
 }

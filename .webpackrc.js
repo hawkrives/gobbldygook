@@ -3,7 +3,6 @@
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
-const path = require('path')
 const url = require('url')
 const reject = require('lodash/reject')
 const endsWith = require('lodash/endsWith')
@@ -13,10 +12,12 @@ const DefinePlugin = webpack.DefinePlugin
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
 const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin
 const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
+const NamedModulesPlugin = webpack.NamedModulesPlugin
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 
 const isProduction = (process.env.NODE_ENV === 'production')
 const isDevelopment = (process.env.NODE_ENV === 'development')
@@ -25,7 +26,7 @@ const isTest = (process.env.NODE_ENV === 'test')
 let style = 'style-loader'
 let css = 'css-loader'
 let sass = 'sass-loader'
-let cssModules = {loader: css, query: {modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]'}}
+let cssModules = { loader: css, query: { modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]' } }
 
 const outputFolder = __dirname + '/build/'
 const urlLoaderLimit = 10000
@@ -43,6 +44,46 @@ if (isProduction) {
 	}
 }
 
+const entries = {
+	bfr: 'buffer',
+	hanson: './modules/hanson-format',
+	common: [
+		'debug',
+		'delay',
+		'listify',
+		'ord',
+		'p-props',
+		'p-queue',
+		'p-series',
+		'p-settle',
+		'plur',
+		'redux',
+		'redux-promise',
+		'redux-thunk',
+		'redux-undo',
+		'serialize-error',
+		'stabilize',
+		'whatwg-fetch',
+	],
+	react: [
+		'classnames',
+		'dnd-core',
+		'history',
+		'react',
+		'react-dnd',
+		'react-dnd-html5-backend',
+		'react-dom',
+		'react-modal',
+		'react-redux',
+		'react-router',
+		'react-side-effect',
+	],
+	yaml: [ 'js-yaml' ],
+	idb: [ 'treo', 'idb-range', 'idb-request' ],
+	cm: [ 'codemirror' ],
+	html: [ 'htmlparser2', 'css-select' ],
+}
+
 let cssFilename = isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`
 
 const config = {
@@ -52,11 +93,11 @@ const config = {
 
 	stats: {},
 
-	entry: {
-		main: ['./modules/web/index.js'],
-		common: ['bluebird', 'dnd-core', 'whatwg-fetch', 'redux', 'js-yaml', 'lodash'],
-		react: ['react', 'react-dnd', 'react-redux', 'react-router', 'react-side-effect', 'react-modal'],
-	},
+	entry: Object.assign(
+		{},
+		{ main: [ './modules/web/index.js' ] },
+		entries
+	),
 
 	output: {
 		path: outputFolder,
@@ -96,16 +137,6 @@ const config = {
 	node: {
 		process: false,
 		Buffer: false,
-	},
-
-	resolve: {
-		extensions: ['.js', '.json'],
-		// Allow us to require things from modules/ instead of using giant
-		// relative paths everywhere. And, thanks to babel-plugin-webpack-alias,
-		// we can use these aliases in testing, too!
-		alias: {
-			modules: path.resolve(__dirname, 'modules'),
-		},
 	},
 
 	plugins: [
@@ -154,8 +185,11 @@ const config = {
 							: ''}
 
 						<body><main id="gobbldygook"></main></body>
-						<script src="${publicPath}${context.common}"></script>
-						<script src="${publicPath}${context.react}"></script>
+
+						<script src="${publicPath}${context.manifest}"></script>
+						${Object.keys(entries)
+							.map(k => `<script src="${publicPath}${context[k]}"></script>`)
+							.join('\n')}
 						<script src="${publicPath}${context.main}"></script>
 						</html>
 					`,
@@ -186,7 +220,17 @@ const config = {
 		// Extract the common libraries into a single file so that the chunks
 		// don't need to individually bundle them.
 		new CommonsChunkPlugin({
-			names: ['react', 'common'],
+			names: [
+				'react',
+				'common',
+				'yaml',
+				'cm',
+				'html',
+				'idb',
+				'hanson',
+				'bfr',
+				'manifest',
+			],
 			filename: '[name].[hash].js',
 			minChunks: Infinity,
 		}),
@@ -205,6 +249,8 @@ const config = {
 				},
 			},
 		}),
+
+		new NamedModulesPlugin(),
 	],
 
 	module: {
@@ -212,30 +258,35 @@ const config = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
+				use: [ { loader: 'babel-loader', options: { cacheDirectory: true } } ],
+			},
+			{
+				test: /\.js$/,
+				include: /node_modules[/]p-.*[/].*[.]js$/,
+				use: [ { loader: 'babel-loader', options: { plugins: [ 'transform-es2015-modules-commonjs' ], cacheDirectory: true } } ],
 			},
 			{
 				test: /\.worker.js$/,
 				exclude: /node_modules/,
-				use: ['worker-loader', {loader: 'babel-loader', options: {cacheDirectory: true}}],
+				use: [ 'worker-loader', { loader: 'babel-loader', options: { cacheDirectory: true } } ],
 			},
 			{
 				test: /\.json$/,
-				use: ['json-loader'],
+				use: [ 'json-loader' ],
 			},
 			{
-				test: /\.(otf|eot|ttf|woff2?)$/,
-				use: [{loader: 'url-loader', options: {limit: urlLoaderLimit}}],
+				test: /\.otf|eot|ttf|woff2?$/,
+				use: [ { loader: 'url-loader', options: { limit: urlLoaderLimit } } ],
 			},
 			{
-				test: /\.(jpe?g|png|gif)$/,
-				use: [{loader: 'url-loader', options: {limit: urlLoaderLimit}}],
+				test: /\.jpe?g|png|gif$/,
+				use: [ { loader: 'url-loader', options: { limit: urlLoaderLimit } } ],
 			},
 
-			{test: /\.css$/, use: [style, css]},
-			{test: /\.scss$/, use: [style, css, sass]},
-			{test: /\.module.css$/, use: [style, cssModules]},
-			{test: /\.module.scss$/, use: [style, cssModules, sass]},
+			{ test: /\.css$/, use: [ style, css ] },
+			{ test: /\.scss$/, use: [ style, css, sass ] },
+			{ test: /\.module.css$/, use: [ style, cssModules ] },
+			{ test: /\.module.scss$/, use: [ style, cssModules, sass ] },
 		],
 	},
 }
@@ -281,16 +332,17 @@ else if (isProduction) {
 		new LoaderOptionsPlugin({
 			minimize: true,
 		}),
+		new DuplicatePackageCheckerPlugin(),
 	])
 
 	// remove css plugins
 	const endsInCss = rule => endsWith(rule.test.toString(), 'css$/')
 	config.module.rules = reject(config.module.rules, endsInCss)
 	config.module.rules = config.module.rules.concat([
-		{test: /\.css$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [css]})},
-		{test: /\.scss$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [css, sass]})},
-		{test: /\.module.css$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [cssModules]})},
-		{test: /\.module.scss$/, loader: ExtractTextPlugin.extract({fallbackLoader: style, loader: [cssModules, sass]})},
+		{ test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css ] }) },
+		{ test: /\.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css, sass ] }) },
+		{ test: /\.module.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ cssModules ] }) },
+		{ test: /\.module.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ cssModules, sass ] }) },
 	])
 }
 

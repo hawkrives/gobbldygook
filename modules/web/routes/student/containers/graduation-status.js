@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import {has} from 'lodash'
-import {pathToOverride} from 'modules/core/examine-student'
+import has from 'lodash/has'
+import { pathToOverride } from 'modules/core/examine-student'
 
-import {changeName, changeMatriculation, changeGraduation} from 'modules/web/redux/students/actions/change'
-import {addArea, removeArea} from 'modules/web/redux/students/actions/areas'
-import {setOverride, removeOverride} from 'modules/web/redux/students/actions/overrides'
+import { changeName, changeMatriculation, changeGraduation } from 'modules/web/redux/students/actions/change'
+import { addArea, removeArea } from 'modules/web/redux/students/actions/areas'
+import { setOverride, removeOverride } from 'modules/web/redux/students/actions/overrides'
 import GraduationStatus from '../components/graduation-status'
 
 class GraduationStatusContainer extends Component {
@@ -31,7 +31,7 @@ class GraduationStatusContainer extends Component {
 		ev.stopPropagation()
 		ev.preventDefault()
 		this.setState(state => ({
-			showAreaPickerFor: {...state.showAreaPickerFor, [type]: true},
+			showAreaPickerFor: { ...state.showAreaPickerFor, [type]: true },
 		}))
 	};
 
@@ -39,7 +39,7 @@ class GraduationStatusContainer extends Component {
 		ev.stopPropagation()
 		ev.preventDefault()
 		this.setState(state => ({
-			showAreaPickerFor: {...state.showAreaPickerFor, [type]: false},
+			showAreaPickerFor: { ...state.showAreaPickerFor, [type]: false },
 		}))
 	};
 
@@ -115,8 +115,8 @@ class GraduationStatusContainer extends Component {
 }
 
 const mapDispatch = dispatch =>
-	bindActionCreators({addArea, setOverride, removeOverride, removeArea, changeName, changeMatriculation, changeGraduation}, dispatch)
+	bindActionCreators({ addArea, setOverride, removeOverride, removeArea, changeName, changeMatriculation, changeGraduation }, dispatch)
 
-const mapState = state => ({allAreas: state.areas.data})
+const mapState = state => ({ allAreas: state.areas.data })
 
 export default connect(mapState, mapDispatch)(GraduationStatusContainer)

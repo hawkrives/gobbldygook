@@ -1,17 +1,14 @@
 // @flow
-import Bluebird from 'bluebird'
-import type {Middleware} from 'redux'
-
 import * as studentConstants from '../students/constants'
 import * as areaConstants from '../areas/constants'
 import * as courseConstants from '../courses/constants'
 
-import {filter} from 'lodash'
-import {includes} from 'lodash'
-import {map} from 'lodash'
-import {toArray} from 'lodash'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import map from 'lodash/map'
+import toArray from 'lodash/toArray'
 
-import {checkStudent} from '../students/actions/check-student'
+import { checkStudent } from '../students/actions/check-student'
 
 const whitelist = [
 	studentConstants.INIT_STUDENT,
@@ -42,11 +39,11 @@ const whitelist = [
 	// when one of these fires
 	courseConstants.REFRESH_COURSES,
 ]
-function shouldTakeAction({type}) {
+function shouldTakeAction({ type }: {type?: string}) {
 	return includes(whitelist, type)
 }
 
-const checkStudentsMiddleware: Middleware = store => next => action => {
+const checkStudentsMiddleware = (store: any) => (next: any) => (action: any) => {
 	if (!shouldTakeAction(action)) {
 		return next(action)
 	}
@@ -84,7 +81,7 @@ const checkStudentsMiddleware: Middleware = store => next => action => {
 	const promises = map(affectedStudents, s =>
 		store.dispatch(checkStudent(s.data.present.id)))
 
-	return Bluebird.all(promises).then(() => result)
+	return Promise.all(promises).then(() => result)
 }
 
 export default checkStudentsMiddleware

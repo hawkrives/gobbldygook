@@ -13,22 +13,22 @@ function parseString(args, string) {
 	const parsed = parse(string)
 
 	if (args.json) {
-		console.log(stringify(parsed, {space: 4}))
+		console.log(stringify(parsed, { space: 4 }))
 	}
 	else if (args.yaml) {
 		console.log(yaml.safeDump(parsed))
 	}
 	else {
-		console.log(util.inspect(parsed, {depth: null}))
+		console.log(util.inspect(parsed, { depth: null }))
 	}
 }
 
 module.exports.cli = function cli() {
 	const args = nom
-		.option('json', {flag: true, help: 'Print the result as valid JSON'})
-		.option('yaml', {flag: true, help: 'Print the result as YAML'})
-		.option('stdin', {flag: true, help: 'Take input via STDIN'})
-		.option('string', {position: 0})
+		.option('json', { flag: true, help: 'Print the result as valid JSON' })
+		.option('yaml', { flag: true, help: 'Print the result as YAML' })
+		.option('stdin', { flag: true, help: 'Take input via STDIN' })
+		.option('string', { position: 0 })
 		.parse()
 
 	if (args.stdin) {

@@ -1,5 +1,5 @@
-import {filter} from 'lodash'
-import {checkCourseAgainstQuery} from './check-course-against-query'
+import filter from 'lodash/filter'
+import { checkCourseAgainstQuery } from './check-course-against-query'
 
 /**
  * Queries the database for courses.

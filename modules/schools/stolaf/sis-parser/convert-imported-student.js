@@ -1,34 +1,30 @@
-import Bluebird from 'bluebird'
-import {Student, Schedule} from 'modules/core/student-format'
-import {groupBy} from 'lodash'
-import {map} from 'lodash'
-import {forEach} from 'lodash'
-import {uniq} from 'lodash'
-import {fromPairs} from 'lodash'
-import {filter} from 'lodash'
-import {v4 as uuid} from 'uuid'
+import { Student, Schedule } from 'modules/core/student-format'
+import groupBy from 'lodash/groupBy'
+import map from 'lodash/map'
+import forEach from 'lodash/forEach'
+import uniq from 'lodash/uniq'
+import fromPairs from 'lodash/fromPairs'
+import filter from 'lodash/filter'
+import uuid from 'uuid/v4'
 
-export async function convertStudent({courses, degrees}, getCourse) {
-	let {
-		schedulesAndFabrications,
-		info,
-	} = await Bluebird.props({
-		schedulesAndFabrications: processSchedules(courses, getCourse),
-		info: processDegrees(degrees),
-	})
+export function convertStudent({ courses, degrees }, getCourse) {
+	return Promise.all([
+		processSchedules(courses, getCourse),
+		processDegrees(degrees),
+	]).then(([ schedulesAndFabrications, info ]) => {
+		let { schedules, fabrications } = schedulesAndFabrications
 
-	let {schedules, fabrications} = schedulesAndFabrications
-
-	return Student({
-		...info,
-		schedules,
-		fabrications,
+		return Student({
+			...info,
+			schedules,
+			fabrications,
+		})
 	})
 }
 
 
-export async function processSchedules(courses, getCourse) {
-	courses = await Bluebird.all(map(courses, course => {
+export function processSchedules(courses, getCourse) {
+	return Promise.all(map(courses, course => {
 		return getCourse(course).then(resolvedCourse => {
 			if (resolvedCourse.error) {
 				course._fabrication = true
@@ -37,24 +33,24 @@ export async function processSchedules(courses, getCourse) {
 			}
 			return resolvedCourse
 		})
-	}))
+	})).then(courses => {
+		let fabrications = fromPairs(map(filter(courses, '_fabrication'), c => [ c.clbid, c ]))
 
-	let fabrications = fromPairs(map(filter(courses, '_fabrication'), c => [c.clbid, c]))
-
-	let schedules = groupBy(courses, 'term')
-	schedules = map(schedules, (courses, term) => {
-		term = String(term)
-		return Schedule({
-			courses,
-			active: true,
-			clbids: map(courses, c => c.clbid),
-			year: parseInt(term.substr(0, 4), 10),
-			semester: parseInt(term.substr(4, 1), 10),
+		let schedules = groupBy(courses, 'term')
+		schedules = map(schedules, (courses, term) => {
+			term = String(term)
+			return Schedule({
+				courses,
+				active: true,
+				clbids: map(courses, c => c.clbid),
+				year: parseInt(term.substr(0, 4), 10),
+				semester: parseInt(term.substr(4, 1), 10),
+			})
 		})
-	})
-	schedules = fromPairs(map(schedules, s => [s.id, s]))
+		schedules = fromPairs(map(schedules, s => [ s.id, s ]))
 
-	return {schedules, fabrications}
+		return { schedules, fabrications }
+	})
 }
 
 
@@ -62,11 +58,11 @@ export function processDegrees(degrees) {
 	let singularData = resolveSingularDataPoints(degrees)
 	let studies = []
 
-	for (let {concentrations, emphases, majors, degree} of degrees) {
-		studies.push({name: degree, type: 'degree', revision: 'latest'})
-		studies = studies.concat(majors.map(name =>         ({name, type: 'major', revision: 'latest'})))
-		studies = studies.concat(concentrations.map(name => ({name, type: 'concentration', revision: 'latest'})))
-		studies = studies.concat(emphases.map(name =>       ({name, type: 'emphasis', revision: 'latest'})))
+	for (let { concentrations, emphases, majors, degree } of degrees) {
+		studies.push({ name: degree, type: 'degree', revision: 'latest' })
+		studies = studies.concat(majors.map(name =>         ({ name, type: 'major', revision: 'latest' })))
+		studies = studies.concat(concentrations.map(name => ({ name, type: 'concentration', revision: 'latest' })))
+		studies = studies.concat(emphases.map(name =>       ({ name, type: 'emphasis', revision: 'latest' })))
 	}
 
 	return {
@@ -99,5 +95,5 @@ export function resolveSingularDataPoints(degrees) {
 	let matriculation = parseInt(thereShouldOnlyBeOne.matriculations[0], 10)
 	let graduation = parseInt(thereShouldOnlyBeOne.graduations[0], 10)
 
-	return {name, advisor, matriculation, graduation}
+	return { name, advisor, matriculation, graduation }
 }

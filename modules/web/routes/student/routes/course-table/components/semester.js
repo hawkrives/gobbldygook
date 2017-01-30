@@ -1,18 +1,18 @@
-import React, {PropTypes} from 'react'
-import {findDOMNode} from 'react-dom'
+import React, { PropTypes } from 'react'
+import { findDOMNode } from 'react-dom'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 import plur from 'plur'
-import {semesterName} from 'modules/schools/stolaf'
-import {countCredits} from 'modules/core/examine-student'
-import {IDENT_COURSE} from 'modules/core'
-import {DropTarget} from 'react-dnd'
-import {includes} from 'lodash'
+import { semesterName } from 'modules/schools/stolaf'
+import { countCredits } from 'modules/core/examine-student'
+import { IDENT_COURSE } from 'modules/core'
+import { DropTarget } from 'react-dnd'
+import includes from 'lodash/includes'
 
 import Button from 'modules/web/components/button'
 import Icon from 'modules/web/components/icon'
 import List from 'modules/web/components/list'
-import {close, search} from 'modules/web/icons/ionicons'
+import { close, search } from 'modules/web/icons/ionicons'
 
 import debug from 'debug'
 const log = debug('web:react')
@@ -34,8 +34,8 @@ function Semester(props) {
 	if (schedule && courses && courses.length) {
 		const courseCount = courses.length
 
-		infoBar.push(<li key='course-count'>{`${courseCount} ${plur('course', courseCount)}`}</li>)
-		currentCredits && infoBar.push(<li key='credit-count'>{`${currentCredits} ${plur('credit', currentCredits)}`}</li>)
+		infoBar.push(<li key="course-count">{`${courseCount} ${plur('course', courseCount)}`}</li>)
+		currentCredits && infoBar.push(<li key="credit-count">{`${currentCredits} ${plur('credit', currentCredits)}`}</li>)
 	}
 
 	if (schedule) {
@@ -63,14 +63,14 @@ function Semester(props) {
 				>
 					<h1>{semesterName(semester)}</h1>
 
-					<List className={'semester-info'} type='inline'>
+					<List className={'semester-info'} type="inline">
 						{infoBar}
 					</List>
 				</Link>
 
 				<Button link
 					to={`/s/${studentId}/search/${year}/${semester}`}
-					title='Search for courses'
+					title="Search for courses"
 				>
 					<Icon>{search}</Icon> Course
 				</Button>
@@ -106,7 +106,7 @@ const semesterTarget = {
 	drop(props, monitor) {
 		log('dropped course')
 		const item = monitor.getItem()
-		const {clbid, fromScheduleId, isFromSchedule} = item
+		const { clbid, fromScheduleId, isFromSchedule } = item
 		const toSchedule = props.schedule
 
 		if (isFromSchedule) {

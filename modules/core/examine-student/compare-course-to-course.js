@@ -1,10 +1,10 @@
 // @flow
-import {isEqualWith} from 'lodash'
-import {every} from 'lodash'
-import {keys} from 'lodash'
-import {filter} from 'lodash'
-import {includes} from 'lodash'
-import type {Course, CourseExpression} from './types'
+import isEqualWith from 'lodash/isEqualWith'
+import every from 'lodash/every'
+import keys from 'lodash/keys'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import type { Course, CourseExpression } from './types'
 
 const baseKeys = [
 	'department',

@@ -1,10 +1,4 @@
-// Set up the default promise implementation as Bluebird
-import Bluebird from 'bluebird'
-Bluebird.config({
-	warnings: {
-		wForgottenReturn: false,
-	},
-})
+// @flow
 
 // Include fetch
 import 'whatwg-fetch'
@@ -14,7 +8,7 @@ const log = debug('web')
 
 // Include React and react-dom.render
 const React = require('react')
-const {render} = require('react-dom')
+const { render } = require('react-dom')
 if (DEVELOPMENT) {
 	global.Perf = require('react-addons-perf')
 }

@@ -1,11 +1,15 @@
-import {map, flatten, compact, some, zip} from 'lodash'
+import map from 'lodash/map'
+import flatten from 'lodash/flatten'
+import compact from 'lodash/compact'
+import some from 'lodash/some'
+import zip from 'lodash/zip'
 
 import ordinal from 'ord'
-import {oxford} from 'humanize-plus'
+import oxford from 'listify'
 import plur from 'plur'
-import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
+import { findScheduleTimeConflicts } from 'sto-sis-time-parser'
 // import {expandYear, semesterName} from 'modules/schools/stolaf'
-import {expandYear, semesterName} from 'modules/schools/stolaf/course-info'
+import { expandYear, semesterName } from 'modules/schools/stolaf/course-info'
 // import {alertCircled, iosCalendarOutline, iosClockOutline} from 'modules/web/icons/ionicons'
 
 export function checkForInvalidYear(course, scheduleYear) {
@@ -48,7 +52,7 @@ export function checkForTimeConflicts(courses) {
 			return {
 				warning: true,
 				type: 'time-conflict',
-				msg: `Time conflict with the ${oxford(conflicted, {oxfordComma: true})} ${plur('course', conflicts.length)}`,
+				msg: `Time conflict with the ${oxford(conflicted, { oxfordComma: true })} ${plur('course', conflicts.length)}`,
 				icon: 'iosClockOutline',
 			}
 		}
@@ -63,7 +67,7 @@ export function findWarnings(courses, schedule) {
 	let warningsOfInvalidity = map(courses, course => {
 		let invalidYear = checkForInvalidYear(course, schedule.year)
 		let invalidSemester = checkForInvalidSemester(course, schedule.semester)
-		return [invalidYear, invalidSemester]
+		return [ invalidYear, invalidSemester ]
 	})
 
 	let timeConflicts = checkForTimeConflicts(courses)

@@ -1,7 +1,7 @@
 import mkdirp from 'mkdirp'
-import {find} from 'lodash'
-import {some} from 'lodash'
-import {startsWith} from 'lodash'
+import find from 'lodash/find'
+import some from 'lodash/some'
+import startsWith from 'lodash/startsWith'
 import path from 'path'
 
 import {
@@ -9,11 +9,11 @@ import {
 	loadFile,
 	loadJsonFile,
 } from './read-file'
-import {cacheDir} from './dirs'
+import { cacheDir } from './dirs'
 
-import Promise from 'bluebird'
-import fsCallbacks from 'graceful-fs'
-const fs = Promise.promisifyAll(fsCallbacks)
+import pify from 'pify'
+
+const fs = pify(require('graceful-fs'))
 
 const COURSE_INFO_LOCATION = process.env.COURSE_INFO || 'https://stolaf.edu/people/rives/courses/info.json'
 // const AREA_INFO_LOCATION = process.env.AREA_INFO || 'https://stolaf.edu/people/rives/areas/info.json'
@@ -72,7 +72,7 @@ export async function cache() {
 		fs.writeFileSync(`${cacheDir}/Courses/info.json`, JSON.stringify(courseInfo))
 	}
 
-	return Promise.all([courseInfo])
+	return Promise.all([ courseInfo ])
 }
 
 export async function checkForStaleData() {

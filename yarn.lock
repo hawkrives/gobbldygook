@@ -500,6 +500,14 @@ babel-plugin-lodash@3.2.11:
     glob "^7.1.1"
     lodash "^4.17.2"
 
+babel-plugin-module-resolver@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-2.4.0.tgz#b7b66e1494ebf955d5f6d83d59d3f282d7c1d71f"
+  dependencies:
+    find-babel-config "^1.0.1"
+    glob "^7.1.1"
+    resolve "^1.1.7"
+
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-async-functions/-/babel-plugin-syntax-async-functions-6.13.0.tgz#cad9cad1191b5ad634bf30ae0872391e0647be95"
@@ -937,13 +945,9 @@ babel-types@^6.15.0, babel-types@^6.18.0, babel-types@^6.19.0, babel-types@^6.22
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babylon@6.15.0, babylon@^6.15.0:
+babylon@6.15.0, babylon@^6.11.0, babylon@^6.13.0, babylon@^6.15.0:
   version "6.15.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.15.0.tgz#ba65cfa1a80e1759b0e89fb562e27dccae70348e"
-
-babylon@^6.11.0, babylon@^6.13.0:
-  version "6.14.1"
-  resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.14.1.tgz#956275fab72753ad9b3435d7afe58f8bf0a29815"
 
 balanced-match@^0.4.1, balanced-match@^0.4.2:
   version "0.4.2"
@@ -977,7 +981,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@3.4.7, bluebird@^3.0.5:
+bluebird@^3.0.5:
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.4.7.tgz#f72d760be09b7f76d08ed8fae98b289a8d05fab3"
 
@@ -1877,6 +1881,14 @@ domutils@1.5.1, domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
+duplicate-package-checker-webpack-plugin@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/duplicate-package-checker-webpack-plugin/-/duplicate-package-checker-webpack-plugin-1.0.1.tgz#e034ee158df61e25c9deea1b8db4faeacac33855"
+  dependencies:
+    chalk "^1.1.3"
+    find-root "^1.0.0"
+    lodash "^4.17.4"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
@@ -2005,7 +2017,7 @@ es6-map@^0.1.3:
     es6-symbol "~3.1.0"
     event-emitter "~0.3.4"
 
-es6-set@~0.1.3:
+es6-set@0.1.4, es6-set@~0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/es6-set/-/es6-set-0.1.4.tgz#9516b6761c2964b92ff479456233a247dc707ce8"
   dependencies:
@@ -2262,7 +2274,7 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-extract-text-webpack-plugin@2.2.0-rc.1:
+extract-text-webpack-plugin@2.0.0-rc.1:
   version "2.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-2.0.0-rc.1.tgz#4d31550bdb3fd747008efa31d2150422128a3703"
   dependencies:
@@ -2370,6 +2382,13 @@ finalhandler@0.5.0:
     statuses "~1.3.0"
     unpipe "~1.0.0"
 
+find-babel-config@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/find-babel-config/-/find-babel-config-1.0.1.tgz#179fa7b36bf3e94b487410855df448b6f853b9ec"
+  dependencies:
+    json5 "^0.5.0"
+    path-exists "^3.0.0"
+
 find-cache-dir@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-0.1.1.tgz#c8defae57c8a52a8a784f9e31c57c742e993a0b9"
@@ -2377,6 +2396,10 @@ find-cache-dir@^0.1.1:
     commondir "^1.0.1"
     mkdirp "^0.5.1"
     pkg-dir "^1.0.0"
+
+find-root@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/find-root/-/find-root-1.0.0.tgz#962ff211aab25c6520feeeb8d6287f8f6e95807a"
 
 find-up@^1.0.0, find-up@^1.1.2:
   version "1.1.2"
@@ -2796,10 +2819,6 @@ https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
 
-humanize-plus@1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/humanize-plus/-/humanize-plus-1.8.2.tgz#a65b34459ad6367adbb3707a82a3c9f916167030"
-
 iconv-lite@0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
@@ -2841,14 +2860,6 @@ idb-schema@^2.0.0:
 ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
-
-iflow-bluebird@1.1.26:
-  version "1.1.26"
-  resolved "https://registry.yarnpkg.com/iflow-bluebird/-/iflow-bluebird-1.1.26.tgz#60801b3a2afe171c0acbf6b144470553243f387c"
-
-iflow-lodash@1.1.27:
-  version "1.1.27"
-  resolved "https://registry.yarnpkg.com/iflow-lodash/-/iflow-lodash-1.1.27.tgz#0af626ce584ef95ccaa5ff564f76c7e6ad3ff17d"
 
 ignore@^3.2.0:
   version "3.2.0"
@@ -2917,7 +2928,7 @@ interpret@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.1.tgz#d579fb7f693b858004947af39fa0db49f795602c"
 
-invariant@^2.0.0, invariant@^2.1.0, invariant@^2.2.0, invariant@^2.2.1:
+invariant@2.2.2, invariant@^2.0.0, invariant@^2.1.0, invariant@^2.2.0, invariant@^2.2.1:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -3574,6 +3585,10 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+listify@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/listify/-/listify-1.0.0.tgz#03ca7ba2d150d4267773f74e57558d1053d2bee3"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -3774,7 +3789,7 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "~3.0.0"
 
-lodash@4.17.4, lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
+lodash@4.17.4, lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -4321,6 +4336,34 @@ osenv@0:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
+p-props@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-props/-/p-props-1.0.0.tgz#55f44d96563f87c61f75e19a822e7b8df5b53a55"
+
+p-queue@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-1.0.0.tgz#698cde72cc9f57aa3bc7d30ad8019cd736aaed3e"
+
+p-reduce@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-reduce/-/p-reduce-1.0.0.tgz#18c2b0dd936a4690a529f8231f58a0fdb6a47dfa"
+
+p-reflect@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-reflect/-/p-reflect-1.0.0.tgz#f4fa1ee1bb546d8eb3ec0321148dfe0a79137bb8"
+
+p-series@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-series/-/p-series-1.0.0.tgz#7ec9e7b4406cc32066298a6f9860e55e91b36e07"
+  dependencies:
+    p-reduce "^1.0.0"
+
+p-settle@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/p-settle/-/p-settle-2.0.0.tgz#b6cda5ab86e7173639164909b526adcc42b87733"
+  dependencies:
+    p-reflect "^1.0.0"
+
 pako@~0.2.0:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
@@ -4378,6 +4421,10 @@ path-exists@^2.0.0:
   dependencies:
     pinkie-promise "^2.0.0"
 
+path-exists@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
+
 path-is-absolute@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
@@ -4412,7 +4459,7 @@ pegjs@0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/pegjs/-/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
 
-pify@^2.0.0, pify@^2.3.0:
+pify@2.3.0, pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
 
@@ -5055,11 +5102,11 @@ reduce-function-call@^1.0.1:
     balanced-match "^0.4.2"
 
 redux-devtools-instrument@^1.0.1:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/redux-devtools-instrument/-/redux-devtools-instrument-1.3.3.tgz#4a17c80cc23465646460b2da3ee438a4ac0b28ae"
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/redux-devtools-instrument/-/redux-devtools-instrument-1.6.0.tgz#a16678a6c3338db10cd5e0b8801e294c52466eb8"
   dependencies:
     lodash "^4.2.0"
-    symbol-observable "^0.2.4"
+    symbol-observable "^1.0.2"
 
 redux-devtools@3.3.2:
   version "3.3.2"
@@ -5220,7 +5267,7 @@ resolve@1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
-resolve@^1.1.6, resolve@^1.2.0:
+resolve@^1.1.6, resolve@^1.1.7, resolve@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.2.0.tgz#9589c3f2f6149d1417a40becc1663db6ec6bc26c"
 
@@ -5644,10 +5691,6 @@ svgo@^0.7.0:
     mkdirp "~0.5.1"
     sax "~1.2.1"
     whet.extend "~0.9.9"
-
-symbol-observable@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-0.2.4.tgz#95a83db26186d6af7e7a18dbd9760a2f86d08f40"
 
 symbol-observable@^1.0.2:
   version "1.0.4"

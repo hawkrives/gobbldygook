@@ -8,25 +8,25 @@ import {
 	SET_PARTIAL_QUERY,
 } from '../constants'
 
-import {groupBy} from 'lodash'
-import {sortBy} from 'lodash'
+import groupBy from 'lodash/groupBy'
+import sortBy from 'lodash/sortBy'
 
-import {SORT_BY, GROUP_BY} from '../../../components/course-searcher-options'
+import { SORT_BY, GROUP_BY } from '../../../components/course-searcher-options'
 
-import {includes} from 'lodash'
-import {uniq} from 'lodash'
-import {flatMap} from 'lodash'
-import {toPairs} from 'lodash'
-import {round} from 'lodash'
-import {oxford} from 'humanize-plus'
-import {map} from 'lodash'
+import includes from 'lodash/includes'
+import uniq from 'lodash/uniq'
+import flatMap from 'lodash/flatMap'
+import toPairs from 'lodash/toPairs'
+import round from 'lodash/round'
+import oxford from 'listify'
+import map from 'lodash/map'
 import present from 'present'
 import debug from 'debug'
 const log = debug('web:redux:search')
 
-import {buildDeptString} from 'modules/schools/stolaf'
-import {to12HourTime} from 'modules/lib'
-const REVERSE_ORDER = ['Year', 'Term', 'Semester']
+import { buildDeptString } from 'modules/schools/stolaf'
+import { to12HourTime } from 'modules/lib'
+const REVERSE_ORDER = [ 'Year', 'Term', 'Semester' ]
 
 // eslint-disable-next-line no-confusing-arrow
 const DAY_OF_WEEK = course => course.offerings
@@ -68,12 +68,12 @@ const SORT_BY_TO_KEY = {
 }
 
 
-function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
+function sortAndGroup({ sortBy: sorting, groupBy: grouping, rawResults }) {
 	const start = present()
 
 	// TODO: Speed this up! This preperation stuff takes ~230ms by itself,
 	// with enough courses rendered. (like, say, {year: 2012})
-	const sortByArgs = ['year', 'deptnum', 'semester', 'section'].concat(SORT_BY_TO_KEY[sorting])
+	const sortByArgs = [ 'year', 'deptnum', 'semester', 'section' ].concat(SORT_BY_TO_KEY[sorting])
 	const sorted = sortBy(rawResults, sortByArgs)
 
 	// Group them by term, then turn the object into an array of pairs.
@@ -96,42 +96,42 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 
 const initialState = {
 	error: '',
-	groupBy: GROUP_BY.get('term'),
+	groupBy: GROUP_BY['term'],
 	hasQueried: false,
 	inProgress: false,
 	partial: {},
 	rawResults: [],
 	query: '',
 	results: [],
-	sortBy: SORT_BY.get('year'),
+	sortBy: SORT_BY['year'],
 }
 
 export default function reducer(state = initialState, action) {
-	const {type, payload} = action
+	const { type, payload } = action
 
 	switch (type) {
 		case UPDATE_QUERY: {
-			return {...state, query: payload}
+			return { ...state, query: payload }
 		}
 
 		case SET_PARTIAL_QUERY: {
-			return {...state, partial: payload}
+			return { ...state, partial: payload }
 		}
 
 		case BEGIN_QUERY: {
-			return {...state, inProgress: true}
+			return { ...state, inProgress: true }
 		}
 
 		case SORT_RESULTS: {
-			state = {...state, sortBy: payload}
+			state = { ...state, sortBy: payload }
 			const results = sortAndGroup(state)
-			return {...state, results}
+			return { ...state, results }
 		}
 
 		case GROUP_RESULTS: {
-			state = {...state, groupBy: payload}
+			state = { ...state, groupBy: payload }
 			const results = sortAndGroup(state)
-			return {...state, results}
+			return { ...state, results }
 		}
 
 		case SUBMIT_QUERY: {
@@ -142,11 +142,11 @@ export default function reducer(state = initialState, action) {
 				hasQueried: true,
 			}
 			const results = sortAndGroup(state)
-			return {...state, results}
+			return { ...state, results }
 		}
 
 		case CLEAR_RESULTS: {
-			return {...state, results: [], rawResults: [], inProgress: false}
+			return { ...state, results: [], rawResults: [], inProgress: false }
 		}
 
 		default: {

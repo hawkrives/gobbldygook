@@ -1,0 +1,15 @@
+exports[`OccurrenceExpression requires a course to check for occurrences of 1`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$course": Object {
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+  "$type": "occurrence",
+}
+`;

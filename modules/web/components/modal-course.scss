@@ -2,6 +2,8 @@
 @import '../styles/mixins.scss';
 
 .course--modal {
+	@include card();
+
 	display: flex;
 	flex-flow: column;
 
@@ -70,10 +72,6 @@
 	.offerings > span {
 		display: block;
 	}
-}
-
-.course--modal {
-	@include card();
 
 	.info-wrapper,
 	.columns,
@@ -107,5 +105,9 @@
 
 	.description {
 		hyphens: auto;
+	}
+
+	p, ul, ol {
+		margin-top: 0;
 	}
 }

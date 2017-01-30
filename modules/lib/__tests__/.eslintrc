@@ -1,8 +1,1 @@
----
-env:
-  jest: true
-
-rules:
-  no-empty: off
-  no-unused-expressions: off
-  quotes: off
+../../../.test.eslintrc.yaml

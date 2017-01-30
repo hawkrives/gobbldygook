@@ -1,25 +1,24 @@
-import {tryReadJsonFile} from './read-file'
+import { tryReadJsonFile } from './read-file'
 
-import {flatten} from 'lodash'
-import {filter} from 'lodash'
-import {forEach} from 'lodash'
-import {uniqBy} from 'lodash'
-import {isString} from 'lodash'
-import {sortBy} from 'lodash'
+import flatten from 'lodash/flatten'
+import filter from 'lodash/filter'
+import forEach from 'lodash/forEach'
+import uniqBy from 'lodash/uniqBy'
+import isString from 'lodash/isString'
+import sortBy from 'lodash/sortBy'
+import map from 'lodash/map'
 
-import {cacheDir} from './dirs'
+import { cacheDir } from './dirs'
 
-import {checkForStaleData} from './update-local-data-cache'
+import { checkForStaleData } from './update-local-data-cache'
 
-import {map} from 'lodash'
 import path from 'path'
 
-import {quacksLikeDeptNum} from 'modules/schools/stolaf'
-import {splitDeptNum} from 'modules/schools/stolaf'
+import { quacksLikeDeptNum } from 'modules/schools/stolaf'
+import { splitDeptNum } from 'modules/schools/stolaf'
 
-import Promise from 'bluebird'
-import fsCallbacks from 'graceful-fs'
-const fs = Promise.promisifyAll(fsCallbacks)
+import pify from 'pify'
+const fs = pify(require('graceful-fs'))
 
 function getDeptNumsFromRiddles(r) {
 	if (isString(r) && quacksLikeDeptNum(r)) {
@@ -28,7 +27,7 @@ function getDeptNumsFromRiddles(r) {
 	return r
 }
 
-export default async function search({riddles, unique, sort}={}) {
+export default async function search({ riddles, unique, sort }={}) {
 	// check if data has been cached
 	await checkForStaleData()
 

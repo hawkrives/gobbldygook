@@ -3,16 +3,39 @@
 # Opt-in to Travis infrastructure
 sudo: false
 dist: trusty
-
-cache:
-  yarn: true
-
-# Send travis notifications to Slack
-notifications:
-  slack:
-    secure: iNz4CfNIkTXwl7G71nTgLMXUKKYMqQJkvQKuBck33Eg+tFy/w6O3bMEyGLdfJZKHO0Q3fE/Wbw+SIp77TBG4i/YQ87/cQWnFv21temZoBnkYPk5IiusUR/5AJPCpFJSnDlB92XDGz06ilL1oFW6R3yGjn5lUqUDy2a+Pj0TUp1w=
-
 language: node_js
+node_js: 7
+
+env:
+  - {task: lint}
+  - {task: test}
+  - {task: build}
+
+branches:
+  only:
+    - master
+    - stable
+    # travis testing branches
+    - /^travis/
+    # version tags (from https://github.com/sindresorhus/semver-regex)
+    - /^v?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?$/
+
+script:
+  - if [[ "$task" == "lint" ]]; then
+      yarn run lint;
+    fi
+  - if [[ "$task" == "test" ]]; then
+      yarn run flow;
+      yarn run test -- --coverage --runInBand;
+    fi
+  - if [[ "$task" == "build" ]]; then
+      yarn run build-ci;
+    fi
+
+after_success:
+  - npm install coveralls codecov
+  - ./node_modules/.bin/coveralls < ./coverage/lcov.info
+  - ./node_modules/.bin/codecov -f ./coverage/lcov.info
 
 before_deploy:
   - rm -rf bin/ config/ flow-typed/ modules/ playground/ screenshots/ scripts/
@@ -32,24 +55,7 @@ deploy:
 after_deploy:
   - curl -d "apiKey=7e393deddaeb885f5b140b4320ecef6b" -d "repository=https://github.com/hawkrives/gobbldygook" -d "revision=$(git rev-parse --verify HEAD)" 'https://notify.bugsnag.com/deploy'
 
-branches:
-  only:
-    # self-explanatory?
-    - master
-    - stable
-    # travis testing branches
-    - /^travis/
-    # version tags (from https://github.com/sindresorhus/semver-regex)
-    - /^v?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?$/
-
-node_js: 7
-
-script:
-  - yarn run lint
-  - yarn run test -- --coverage --runInBand
-  - yarn run build-ci
-
-after_success:
-  - npm install coveralls codecov
-  - ./node_modules/.bin/coveralls < ./coverage/lcov.info
-  - ./node_modules/.bin/codecov -f ./coverage/lcov.info
+# Send travis notifications to Slack
+notifications:
+  slack:
+    secure: iNz4CfNIkTXwl7G71nTgLMXUKKYMqQJkvQKuBck33Eg+tFy/w6O3bMEyGLdfJZKHO0Q3fE/Wbw+SIp77TBG4i/YQ87/cQWnFv21temZoBnkYPk5IiusUR/5AJPCpFJSnDlB92XDGz06ilL1oFW6R3yGjn5lUqUDy2a+Pj0TUp1w=

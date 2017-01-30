@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react'
-import {size} from 'lodash'
+import React, { PropTypes } from 'react'
+import size from 'lodash/size'
 
-import {androidSearch, funnel, androidApps, androidMenu, androidAdd} from 'modules/web/icons/ionicons'
+import { androidSearch, funnel, androidApps, androidMenu, androidAdd } from 'modules/web/icons/ionicons'
 import Toolbar from 'modules/web/components/toolbar'
 import Button from 'modules/web/components/button'
 import Icon from 'modules/web/components/icon'
@@ -30,43 +30,43 @@ export default function StudentPicker(props) {
 	} = props
 
 	return (
-		<div className='students-overview'>
-			<heading className='app-title'>
+		<div className="students-overview">
+			<heading className="app-title">
 				<h1>GobbldygooK</h1>
 				<h2>A Course Scheduling Helper</h2>
 			</heading>
 
-			<div className='student-list-toolbar'>
-				<Toolbar className='student-list-buttons'>
-					<Button link to='search/' className='student-list--button'>
+			<div className="student-list-toolbar">
+				<Toolbar className="student-list-buttons">
+					<Button link to="search/" className="student-list--button">
 						<Icon>{androidSearch}</Icon>
 						Courses
 					</Button>
 
 					<input
-						type='search'
-						className='student-list-filter'
-						placeholder='Filter students'
+						type="search"
+						className="student-list-filter"
+						placeholder="Filter students"
 						value={filterText}
 						onChange={onFilterChange}
 					/>
 
-					<Button className='student-list--button' onClick={onSortChange}>
+					<Button className="student-list--button" onClick={onSortChange}>
 						<Icon>{funnel}</Icon>
 						Sort
 					</Button>
 
-					<Button className='student-list--button' onClick={onGroupChange} disabled>
+					<Button className="student-list--button" onClick={onGroupChange} disabled>
 						<Icon>{androidApps}</Icon>
 						Group
 					</Button>
 
-					<Button className='student-list--button' onClick={onToggleEditing}>
+					<Button className="student-list--button" onClick={onToggleEditing}>
 						<Icon>{androidMenu}</Icon>
 						Edit
 					</Button>
 
-					<Button link to='create/' className='student-list--button'>
+					<Button link to="create/" className="student-list--button">
 						<Icon>{androidAdd}</Icon>
 						New
 					</Button>
@@ -85,7 +85,7 @@ export default function StudentPicker(props) {
 				sortBy={sortBy}
 				groupBy={groupBy}
 				students={students}
-			/> : <Button className='make-student' link type='raised' to='/create'>Add a Student</Button>}
+			/> : <Button className="make-student" link type="raised" to="/create">Add a Student</Button>}
 		</div>
 	)
 }

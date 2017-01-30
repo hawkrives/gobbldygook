@@ -1,8 +1,8 @@
 import { ga } from '../../../analytics'
 import queryCourseDatabase from '../../../helpers/query-course-database'
 import present from 'present'
-import {round} from 'lodash'
-import {mapValues} from 'lodash'
+import round from 'lodash/round'
+import mapValues from 'lodash/mapValues'
 import debug from 'debug'
 const log = debug('web:redux:search')
 
@@ -23,10 +23,10 @@ export function updateQuery(newQuery) {
 export function setPartialQuery(partial) {
 	if (partial) {
 		// eslint-disable-next-line no-confusing-arrow
-		partial = mapValues(partial, val => Array.isArray(val) ? val : [val])
+		partial = mapValues(partial, val => Array.isArray(val) ? val : [ val ])
 		return { type: SET_PARTIAL_QUERY, payload: partial }
 	}
-	return {type: SET_PARTIAL_QUERY, payload: {}}
+	return { type: SET_PARTIAL_QUERY, payload: {} }
 }
 
 export function clearResults() {

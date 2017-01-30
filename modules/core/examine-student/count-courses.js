@@ -1,8 +1,8 @@
 // @flow
-import {uniqBy} from 'lodash'
-import {size} from 'lodash'
+import uniqBy from 'lodash/uniqBy'
+import size from 'lodash/size'
 import simplifyCourse from './simplify-course'
-import type {Course} from './types'
+import type { Course } from './types'
 
 /**
  * Counts the number of unique courses in a list of courses

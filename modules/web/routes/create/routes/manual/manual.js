@@ -1,15 +1,15 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import Button from 'modules/web/components/button'
 import cx from 'classnames'
 import Autosize from 'react-input-autosize'
 import Select from 'react-select'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
-import {map} from 'lodash'
-import {filter} from 'lodash'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
 import 'react-select/dist/react-select.css'
 import { initStudent } from 'modules/web/redux/students/actions/init-student'
-import {filterAreaList} from 'modules/core'
+import { filterAreaList } from 'modules/core'
 
 import './manual.scss'
 
@@ -38,30 +38,30 @@ class ManualCreationScreen extends Component {
 	};
 
 	getAreaOptions = type => {
-		let {graduation} = this.state
+		let { graduation } = this.state
 
-		let filtered = filterAreaList(this.props.areas, {graduation})
-		filtered = filter(filtered, {type})
-		let options = map(filtered, ({name, type, revision}) =>
-			({name, type, revision, value: `${name} (${revision})`, label: `${name} (${revision})`}))
+		let filtered = filterAreaList(this.props.areas, { graduation })
+		filtered = filter(filtered, { type })
+		let options = map(filtered, ({ name, type, revision }) =>
+			({ name, type, revision, value: `${name} (${revision})`, label: `${name} (${revision})` }))
 		return options
 	};
 
 	handleAreaChange = type => values => {
-		this.setState({[type]: values})
+		this.setState({ [type]: values })
 	};
 
 	handleNameChange = ev => {
-		this.setState({name: ev.target.value})
+		this.setState({ name: ev.target.value })
 	};
 
 	handleMatriculationChange = ev => {
 		let val = Number(ev.target.value)
 		if (!val || ev.target.value.length !== 4) {
-			this.setState({matriculationIsValid: false, matriculation: val})
+			this.setState({ matriculationIsValid: false, matriculation: val })
 		}
 		else {
-			this.setState({matriculationIsValid: true, matriculation: val})
+			this.setState({ matriculationIsValid: true, matriculation: val })
 		}
 		this.checkValidity()
 	};
@@ -69,10 +69,10 @@ class ManualCreationScreen extends Component {
 	handleGraduationChange = ev => {
 		let val = Number(ev.target.value)
 		if (!val || ev.target.value.length !== 4) {
-			this.setState({graduationIsValid: false, graduation: val})
+			this.setState({ graduationIsValid: false, graduation: val })
 		}
 		else {
-			this.setState({graduationIsValid: true, graduation: val})
+			this.setState({ graduationIsValid: true, graduation: val })
 		}
 		this.checkValidity()
 	};
@@ -88,20 +88,20 @@ class ManualCreationScreen extends Component {
 		}
 
 		if (errors.length) {
-			this.setState({error: errors.join('\n')})
+			this.setState({ error: errors.join('\n') })
 		}
 		else {
-			this.setState({error: ''})
+			this.setState({ error: '' })
 		}
 	};
 
 	onCreateStudent = () => {
-		this.setState({submitted: true})
+		this.setState({ submitted: true })
 
 		let studies = [].concat(this.state.degree, this.state.major, this.state.concentration, this.state.emphasis)
 
 		// pick out only the values that we want
-		studies = map(studies, ({name, revision, type}) => ({name, revision, type}))
+		studies = map(studies, ({ name, revision, type }) => ({ name, revision, type }))
 
 		let rawStudent = {
 			name: this.state.name,
@@ -117,65 +117,65 @@ class ManualCreationScreen extends Component {
 
 	render() {
 		let nameEl = <Autosize
-			className='autosize-input'
+			className="autosize-input"
 			value={this.state.name}
 			onChange={this.handleNameChange}
 		/>
 
 		let matriculationEl = <Autosize
-			className={cx('autosize-input', {invalid: !this.state.matriculationIsValid})}
+			className={cx('autosize-input', { invalid: !this.state.matriculationIsValid })}
 			value={String(this.state.matriculation)}
 			onChange={this.handleMatriculationChange}
 		/>
 
 		let graduationEl = <Autosize
-			className={cx('autosize-input', {invalid: !this.state.graduationIsValid})}
+			className={cx('autosize-input', { invalid: !this.state.graduationIsValid })}
 			value={String(this.state.graduation)}
 			onChange={this.handleGraduationChange}
 		/>
 
-		return <div className='manual'>
-			<header className='header'>
+		return <div className="manual">
+			<header className="header">
 				<h1>Manually Create</h1>
 			</header>
 
-			{this.state.error ? <pre className='errors'>
+			{this.state.error ? <pre className="errors">
 				{this.state.error}
 			</pre> : null}
 
-			<div className='intro'>
+			<div className="intro">
 				Hi! My name is {nameEl}.<br />I matriculated in {matriculationEl},
 				and I plan to graduate in {graduationEl}.
 			</div>
 
-			<div className='areas'>
-				<div className='row'>
-					<label htmlFor='degreeSelector'>Degrees:</label>
-					<Select multi inputProps={{id: 'degreeSelector'}}
+			<div className="areas">
+				<div className="row">
+					<label htmlFor="degreeSelector">Degrees:</label>
+					<Select multi inputProps={{ id: 'degreeSelector' }}
 						value={this.state.degree}
 						options={this.getAreaOptions('degree')}
 						onChange={this.handleAreaChange('degree')}
 					/>
 				</div>
-				<div className='row'>
-					<label htmlFor='majorSelector'>Majors:</label>
-					<Select multi inputProps={{id: 'majorSelector'}}
+				<div className="row">
+					<label htmlFor="majorSelector">Majors:</label>
+					<Select multi inputProps={{ id: 'majorSelector' }}
 						value={this.state.major}
 						options={this.getAreaOptions('major')}
 						onChange={this.handleAreaChange('major')}
 					/>
 				</div>
-				<div className='row'>
-					<label htmlFor='concentrationSelector'>Concentrations:</label>
-					<Select multi inputProps={{id: 'concentrationSelector'}}
+				<div className="row">
+					<label htmlFor="concentrationSelector">Concentrations:</label>
+					<Select multi inputProps={{ id: 'concentrationSelector' }}
 						value={this.state.concentration}
 						options={this.getAreaOptions('concentration')}
 						onChange={this.handleAreaChange('concentration')}
 					/>
 				</div>
-				<div className='row'>
-					<label htmlFor='emphasisSelector'>Areas of Emphasis:</label>
-					<Select multi inputProps={{id: 'emphasisSelector'}}
+				<div className="row">
+					<label htmlFor="emphasisSelector">Areas of Emphasis:</label>
+					<Select multi inputProps={{ id: 'emphasisSelector' }}
 						value={this.state.emphasis}
 						options={this.getAreaOptions('emphasis')}
 						onChange={this.handleAreaChange('emphasis')}
@@ -183,7 +183,7 @@ class ManualCreationScreen extends Component {
 				</div>
 			</div>
 
-			<div className='actions'>
+			<div className="actions">
 				<Button
 					disabled={Boolean(this.state.error) || this.state.submitted}
 					onClick={this.onCreateStudent}
@@ -200,6 +200,6 @@ let mapState = state => ({
 	areasLoading: state.areas.isLoading,
 })
 
-let mapDispatch = dispatch => ({dispatch})
+let mapDispatch = dispatch => ({ dispatch })
 
 export default connect(mapState, mapDispatch)(withRouter(ManualCreationScreen))
