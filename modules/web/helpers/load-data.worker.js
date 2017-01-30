@@ -260,7 +260,7 @@ function loadFiles(url, infoFileBase) {
 			// only download the json courses
 			filesToLoad = filesToLoad.filter(file => file.type === 'json')
 			// Only get the last four years of data
-			const oldestYear = new Date().getFullYear() - 4
+			const oldestYear = new Date().getFullYear() - 5
 			filesToLoad = filter(filesToLoad, file => file.year >= oldestYear)
 		}
 
