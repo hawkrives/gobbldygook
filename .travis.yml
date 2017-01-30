@@ -21,15 +21,15 @@ branches:
     - /^v?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?$/
 
 script:
-  - if [[ $task == "lint" ]]; then
-      yarn run lint
+  - if [[ "$task" == "lint" ]]; then
+      yarn run lint;
     fi
-  - if [[ $task == "test" ]]; then
-      yarn run flow
-      yarn run test -- --coverage --runInBand
+  - if [[ "$task" == "test" ]]; then
+      yarn run flow;
+      yarn run test -- --coverage --runInBand;
     fi
-  - if [[ $task == "build" ]]; then
-      yarn run build-ci
+  - if [[ "$task" == "build" ]]; then
+      yarn run build-ci;
     fi
 
 after_success:
