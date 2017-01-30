@@ -9,10 +9,10 @@ class ContentEditable extends Component {
 	props: {
 		className?: string,
 		multiLine?: boolean,
-		onBlur?: () => any,
-		onChange: () => any,
-		onFocus?: () => any,
-		onKeyDown?: () => any,
+		onBlur?: (ev: Event) => any,
+		onChange: (ev: Event) => any,
+		onFocus?: (ev: Event) => any,
+		onKeyDown?: (ev: Event) => any,
 		placeholder?: string,
 		value?: string,
 	};
