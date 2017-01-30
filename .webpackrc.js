@@ -22,6 +22,7 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 const isProduction = (process.env.NODE_ENV === 'production')
 const isDevelopment = (process.env.NODE_ENV === 'development')
 const isTest = (process.env.NODE_ENV === 'test')
+const isCI = Boolean(process.env.CI)
 
 let style = 'style-loader'
 let css = 'css-loader'
@@ -258,17 +259,17 @@ const config = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				use: [ { loader: 'babel-loader', options: { cacheDirectory: true } } ],
+				use: [ { loader: 'babel-loader', options: { cacheDirectory: !isCI } } ],
 			},
 			{
 				test: /\.js$/,
 				include: /node_modules[/]p-.*[/].*[.]js$/,
-				use: [ { loader: 'babel-loader', options: { plugins: [ 'transform-es2015-modules-commonjs' ], cacheDirectory: true } } ],
+				use: [ { loader: 'babel-loader', options: { plugins: [ 'transform-es2015-modules-commonjs' ], cacheDirectory: !isCI } } ],
 			},
 			{
 				test: /\.worker.js$/,
 				exclude: /node_modules/,
-				use: [ 'worker-loader', { loader: 'babel-loader', options: { cacheDirectory: true } } ],
+				use: [ 'worker-loader', { loader: 'babel-loader', options: { cacheDirectory: !isCI } } ],
 			},
 			{
 				test: /\.json$/,
