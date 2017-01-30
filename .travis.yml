@@ -29,11 +29,7 @@ after_success:
   - ./node_modules/.bin/codecov -f ./coverage/lcov.info
 
 before_deploy:
-  - rm -rf bin/ config/ flow-typed/ modules/ playground/ screenshots/ scripts/
-  - find ./ -depth 1 -type f -not -name '.git*' -not -name package.json -delete
-  - mv build/* ./
-  - rm -f build/.DS_Store
-  - rmdir build/
+  - node scripts/prepare-for-deploy.js
 
 deploy:
   provider: pages
