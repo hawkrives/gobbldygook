@@ -159,7 +159,7 @@
     "json-loader": "0.5.4",
     "junk": "2.0.0",
     "mkdirp": "0.5.1",
-    "node-fetch": "2.0.0-alpha.1",
+    "node-fetch": "2.0.0-alpha.3",
     "node-sass": "4.3.0",
     "nomnom": "1.8.1",
     "pegjs": "0.10.0",
