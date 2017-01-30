@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
 import oxford from 'listify'
 import plur from 'plur'
@@ -47,19 +48,29 @@ const welcomeMessages = [
 
 const welcomeMessage = sample(welcomeMessages)
 
-export default function StudentSummary(props) {
-	const {
-		student,
-		showMessage=true,
-		showAvatar=true,
-		randomizeHello=false,
-	} = props
+export default function StudentSummary({
+	student,
+	showMessage=true,
+	showAvatar=true,
+	randomizeHello=false,
+	onChangeName,
+	onChangeGraduation,
+	onChangeMatriculation,
+}: {
+	student: Object,
+	showMessage?: boolean,
+	showAvatar?: boolean,
+	randomizeHello?: boolean,
+	onChangeName?: (ev: Event) => any,
+	onChangeGraduation?: (ev: Event) => any,
+	onChangeMatriculation?: (ev: Event) => any,
+}) {
 	const { studies, canGraduate } = student
 
-	const NameEl = (props.onChangeName
+	const NameEl = (onChangeName
 		? <ContentEditable
 			className="autosize-input"
-			onBlur={props.onChangeName}
+			onBlur={onChangeName}
 			value={String(student.name)}
 		/>
 		: <span>{String(student.name)}</span>)
@@ -88,19 +99,19 @@ export default function StudentSummary(props) {
 	const neededCredits = student.creditsNeeded
 	const enoughCredits = currentCredits >= neededCredits
 
-	const graduationEl = (props.onChangeGraduation
+	const graduationEl = (onChangeGraduation
 		? <ContentEditable
 			className="autosize-input"
-			onBlur={props.onChangeGraduation}
+			onBlur={onChangeGraduation}
 			value={String(student.graduation)}
 		/>
 		: <span>{String(student.graduation)}</span>
 	)
 
-	const matriculationEl = (props.onChangeMatriculation
+	const matriculationEl = (onChangeMatriculation
 		? <ContentEditable
 			className="autosize-input"
-			onBlur={props.onChangeMatriculation}
+			onBlur={onChangeMatriculation}
 			value={String(student.matriculation)}
 		/>
 		: <span>{String(student.matriculation)}</span>
@@ -136,14 +147,4 @@ export default function StudentSummary(props) {
 			</div>
 		</article>
 	)
-}
-
-StudentSummary.propTypes = {
-	onChangeGraduation: PropTypes.func,
-	onChangeMatriculation: PropTypes.func,
-	onChangeName: PropTypes.func,
-	randomizeHello: PropTypes.bool,
-	showAvatar: PropTypes.bool,
-	showMessage: PropTypes.bool,
-	student: PropTypes.object.isRequired,
 }
