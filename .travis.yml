@@ -4,6 +4,11 @@ dist: trusty
 language: node_js
 node_js: 7
 
+env:
+  - {task: lint}
+  - {task: test}
+  - {task: build}
+
 branches:
   only:
     - master
@@ -18,10 +23,16 @@ cache:
     - node_modules
 
 script:
-  - yarn run lint
-  - yarn run flow
-  - yarn run test -- --coverage --runInBand
-  - yarn run build-ci
+  - if [[ "$task" == "lint" ]]; then
+      yarn run lint;
+    fi
+  - if [[ "$task" == "test" ]]; then
+      yarn run flow;
+      yarn run test -- --coverage --runInBand;
+    fi
+  - if [[ "$task" == "build" ]]; then
+      yarn run build-ci;
+    fi
 
 after_success:
   - npm install coveralls codecov
@@ -36,7 +47,9 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   on:
+    # only deploy on master, from the "build" job
     branch: master
+    condition: $task = "build"
 
 after_deploy:
   - curl -d "apiKey=7e393deddaeb885f5b140b4320ecef6b" -d "repository=https://github.com/hawkrives/gobbldygook" -d "revision=$(git rev-parse --verify HEAD)" 'https://notify.bugsnag.com/deploy'
