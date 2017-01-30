@@ -19,7 +19,7 @@ startAnalytics()
 
 // Kick off data loading
 import loadData from './helpers/load-data'
-loadData()
+loadData().catch(err => console.error(err))
 
 // Kick off the GUI
 log('3. 2.. 1... Blast off! 🚀')
