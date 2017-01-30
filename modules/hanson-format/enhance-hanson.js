@@ -19,7 +19,7 @@ const quoteAndJoin = list => list.map(quote).join(', ')
 
 const baseWhitelist = [ 'result', 'message', 'declare', 'children share courses' ]
 const topLevelWhitelist = baseWhitelist.concat([ 'name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error' ])
-const lowerLevelWhitelist = baseWhitelist.concat([ 'filter', 'message', 'description', 'student selected' ])
+const lowerLevelWhitelist = baseWhitelist.concat([ 'filter', 'message', 'description', 'student selected', 'contract' ])
 
 const startRules = {
 	'result': 'Result',
