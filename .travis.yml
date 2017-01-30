@@ -14,6 +14,8 @@ branches:
 
 cache:
   yarn: true
+  directories:
+    - node_modules
 
 script:
   - yarn run lint
@@ -39,7 +41,6 @@ deploy:
   github_token: $GITHUB_TOKEN
   on:
     branch: master
-    tags: true
 
 after_deploy:
   - curl -d "apiKey=7e393deddaeb885f5b140b4320ecef6b" -d "repository=https://github.com/hawkrives/gobbldygook" -d "revision=$(git rev-parse --verify HEAD)" 'https://notify.bugsnag.com/deploy'
