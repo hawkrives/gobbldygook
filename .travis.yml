@@ -30,7 +30,7 @@ after_success:
 
 before_deploy:
   - rm -rf bin/ config/ flow-typed/ modules/ playground/ screenshots/ scripts/
-  - find ./ -type f -depth 1 -not -name '.git*' -not -name package.json -delete
+  - find ./ -depth 1 -type f -not -name '.git*' -not -name package.json -delete
   - mv build/* ./
   - rm -f build/.DS_Store
   - rmdir build/
