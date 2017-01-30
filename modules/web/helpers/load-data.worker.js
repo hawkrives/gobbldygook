@@ -208,7 +208,9 @@ function updateDatabase(type, infoFileBase, notificationId, infoFromServer) {
 
 function needsUpdate(type, path, hash) {
 	return db.store(getCacheStoreName(type)).get(path)
-		.then(({ hash: oldHash }) => hash !== oldHash)
+		.then(dbresult => {
+			return dbresult ? dbresult.hash !== hash : true
+		})
 }
 
 
