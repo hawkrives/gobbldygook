@@ -14,23 +14,20 @@ const remove = path => {
 }
 
 // remove extra top-level folders
-const files = glob.sync('*')
-
-const folderWhitelist = [/^build$/]
-files
-  .filter(isDir)
-  .filter(negate(inWhitelist(folderWhitelist)))
-  .forEach(remove)
+const folderWhitelist = [ /^build$/ ]
+glob.sync('*')
+	.filter(isDir)
+	.filter(negate(inWhitelist(folderWhitelist)))
+	.forEach(remove)
 
 console.log('removed top-level folders')
 
 // remove extra top-level files
-const filesWhitelist = [/^\.git.*/, /^package\.json$/]
-
-files
-  .filter(negate(isDir))
-  .filter(negate(inWhitelist(filesWhitelist)))
-  .forEach(remove)
+const filesWhitelist = [ /^\.git.*/, /^package\.json$/ ]
+glob.sync('*')
+	.filter(negate(isDir))
+	.filter(negate(inWhitelist(filesWhitelist)))
+	.forEach(remove)
 
 console.log('removed top-level files')
 
