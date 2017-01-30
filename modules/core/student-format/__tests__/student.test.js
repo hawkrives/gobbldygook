@@ -43,7 +43,6 @@ describe('Student', () => {
 
 	it('holds a student', () => {
 		const stu = Student(demoStudent)
-		expect(stu).toMatchSnapshot()
 
 		expect(stu).toBeDefined()
 		expect(stu.id).toBeDefined()
