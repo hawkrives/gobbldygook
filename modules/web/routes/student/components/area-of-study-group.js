@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react'
-import {map} from 'lodash'
-import {pluralizeArea} from 'modules/core/examine-student'
-import {capitalize} from 'lodash'
-import {areaTypeConstants} from 'modules/core'
-import {values} from 'lodash'
+import React, { PropTypes } from 'react'
+import map from 'lodash/map'
+import { pluralizeArea } from 'modules/core/examine-student'
+import capitalize from 'lodash/capitalize'
+import { areaTypeConstants } from 'modules/core'
+import values from 'lodash/values'
 
 import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'
@@ -18,12 +18,12 @@ export default function AreaOfStudyGroup(props) {
 		: props.onInitiateAddArea
 
 	return (
-		<section className='area-of-study-group'>
-			<h1 className='area-type-heading'>
+		<section className="area-of-study-group">
+			<h1 className="area-type-heading">
 				{capitalize(pluralizeArea(props.type))}
 				<Button
-					className='add-area-of-study'
-					type='flat'
+					className="add-area-of-study"
+					type="flat"
 					onClick={ev => showOrHidePicker(props.type, ev)}
 				>
 					{showAreaPicker ? 'Close' : 'Add ∙ Edit'}

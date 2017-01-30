@@ -1,10 +1,10 @@
-import {flatten} from 'lodash'
-import {includes} from 'lodash'
+import flatten from 'lodash/flatten'
+import includes from 'lodash/includes'
 
 import searchForCourses from './search-for-courses'
 
 export function getCoursesByClbid(clbids) {
-	return searchForCourses({riddles: [course => includes(clbids, course.clbid)]})
+	return searchForCourses({ riddles: [ course => includes(clbids, course.clbid) ] })
 }
 
 export default async function populateCourses(student) {

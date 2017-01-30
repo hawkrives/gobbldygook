@@ -7,14 +7,12 @@ import getMatchesFromFilter from '../core/examine-student/get-matches-from-filte
 import getOccurrences from '../core/examine-student/get-occurrences'
 import isRequirementName from '../core/examine-student/is-requirement-name'
 // import simplifyCourse from '../core/examine-student/simplify-course'
-import {
-	flatMap,
-	map,
-	mapValues,
-	padStart,
-	uniqBy,
-	sortBy,
-} from 'lodash'
+import flatMap from 'lodash/flatMap'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import padStart from 'lodash/padStart'
+import uniqBy from 'lodash/uniqBy'
+import sortBy from 'lodash/sortBy'
 
 function simplifyCourse(course) {
 	if (course.section) {
@@ -25,21 +23,21 @@ function simplifyCourse(course) {
 
 let indent = 0
 
-export function cli({courses, area}) {
+export function cli({ courses, area }) {
 	// console.log(area)
 	// console.log(courses.length)
 	// console.log(courses.find(c => c.department[0] === 'CSCI' && c.number === 251))
-	const {name, type} = area
-	console.log(evaluate(area, {path: [type, name], courses}).map(simplifyCourse))
+	const { name, type } = area
+	console.log(evaluate(area, { path: [ type, name ], courses }).map(simplifyCourse))
 }
 
 
-function evaluate(requirement, {path, courses=[], allMatched=[]}) {
+function evaluate(requirement, { path, courses=[], allMatched=[] }) {
 	indent++
 	console.log(padStart('', indent), 'evalute start:', path.join(' > '))
 	requirement = mapValues(requirement, (req, name) => {
 		if (isRequirementName(name)) {
-			let matched = evaluate(req, {path: path.concat([name]), courses, allMatched})
+			let matched = evaluate(req, { path: path.concat([ name ]), courses, allMatched })
 			allMatched = uniqBy(allMatched.concat(matched), x => x.clbid)
 			return req
 		}
@@ -53,7 +51,7 @@ function evaluate(requirement, {path, courses=[], allMatched=[]}) {
 
 	// Now check for results
 	if ('result' in requirement) {
-		allMatched = uniqBy(allMatched.concat(evaluateChunk({expr: requirement.result, ctx: requirement, courses, allMatched})), x => x.clbid)
+		allMatched = uniqBy(allMatched.concat(evaluateChunk({ expr: requirement.result, ctx: requirement, courses, allMatched })), x => x.clbid)
 	}
 
 	console.log(padStart('', indent), 'evalute end:', path.join(' > '), allMatched.length)
@@ -62,7 +60,7 @@ function evaluate(requirement, {path, courses=[], allMatched=[]}) {
 }
 
 
-function evaluateChunk({expr, ctx, courses, allMatched}) {
+function evaluateChunk({ expr, ctx, courses, allMatched }) {
 	indent++
 	console.log(padStart('', indent), 'evaluateChunk', '$' + expr.$type)
 
@@ -70,25 +68,25 @@ function evaluateChunk({expr, ctx, courses, allMatched}) {
 	// because they don't result in recursive calls to evaluateChunk.
 	let res = []
 	if (expr.$type === 'boolean') {
-		res = allMatched.concat(evaluateBoolean({expr, ctx, courses, allMatched}))
+		res = allMatched.concat(evaluateBoolean({ expr, ctx, courses, allMatched }))
 	}
 	else if (expr.$type === 'course') {
-		res = allMatched.concat(evaluateCourse({expr, courses, allMatched}))
+		res = allMatched.concat(evaluateCourse({ expr, courses, allMatched }))
 	}
 	else if (expr.$type === 'modifier') {
-		res = allMatched.concat(evaluateModifier({expr, ctx, courses, allMatched}))
+		res = allMatched.concat(evaluateModifier({ expr, ctx, courses, allMatched }))
 	}
 	else if (expr.$type === 'occurrence') {
-		res = allMatched.concat(evaluateOccurrence({expr, courses, allMatched}))
+		res = allMatched.concat(evaluateOccurrence({ expr, courses, allMatched }))
 	}
 	else if (expr.$type === 'of') {
-		res = allMatched.concat(evaluateOf({expr, ctx, courses, allMatched}))
+		res = allMatched.concat(evaluateOf({ expr, ctx, courses, allMatched }))
 	}
 	else if (expr.$type === 'reference') {
 		res = allMatched
 	}
 	else if (expr.$type === 'where') {
-		res = allMatched.concat(evaluateWhere({expr, courses, allMatched}))
+		res = allMatched.concat(evaluateWhere({ expr, courses, allMatched }))
 	}
 	console.log(padStart('', indent), 'evaluateChunk done', res.length)
 
@@ -97,15 +95,15 @@ function evaluateChunk({expr, ctx, courses, allMatched}) {
 }
 
 
-function evaluateBoolean({expr, ctx, courses, allMatched}) {
+function evaluateBoolean({ expr, ctx, courses, allMatched }) {
 	indent++
 	console.log(padStart('', indent), 'evaluateBoolean')
 	let res = []
 	if ('$or' in expr) {
-		res = flatMap(expr.$or, req => evaluateChunk({expr: req, ctx, courses, allMatched}))
+		res = flatMap(expr.$or, req => evaluateChunk({ expr: req, ctx, courses, allMatched }))
 	}
 	else if ('$and' in expr) {
-		res = flatMap(expr.$and, req => evaluateChunk({expr: req, ctx, courses, allMatched}))
+		res = flatMap(expr.$and, req => evaluateChunk({ expr: req, ctx, courses, allMatched }))
 	}
 	console.log(padStart('', indent), 'evaluateBoolean done', res.length)
 
@@ -114,7 +112,7 @@ function evaluateBoolean({expr, ctx, courses, allMatched}) {
 }
 
 
-function evaluateCourse({expr, courses}) {
+function evaluateCourse({ expr, courses }) {
 	indent++
 	console.log(padStart('', indent), 'evaluateCourse start')
 	const foundCourse = findCourse(expr.$course, courses)
@@ -128,11 +126,11 @@ function evaluateCourse({expr, courses}) {
 	console.log(padStart('', indent), 'evaluateCourse done: success')
 
 	indent--
-	return [foundCourse]
+	return [ foundCourse ]
 }
 
 
-function evaluateModifier({expr, ctx, courses}) {
+function evaluateModifier({ expr, ctx, courses }) {
 	indent++
 	console.log(padStart('', indent), 'evaluateModifier')
 	let filtered = []
@@ -172,7 +170,7 @@ function evaluateModifier({expr, ctx, courses}) {
 }
 
 
-function evaluateOccurrence({expr, courses}) {
+function evaluateOccurrence({ expr, courses }) {
 	indent++
 	console.log(padStart('', indent), 'evaluateOccurrence start')
 	let result = getOccurrences(expr.$course, courses)
@@ -182,20 +180,20 @@ function evaluateOccurrence({expr, courses}) {
 }
 
 
-function evaluateOf({expr, ctx, courses, allMatched}) {
+function evaluateOf({ expr, ctx, courses, allMatched }) {
 	indent++
 	console.log(padStart('', indent), 'evaluateOf start')
-	let result = flatMap(expr.$of, req => evaluateChunk({expr: req, ctx, courses, allMatched}))
+	let result = flatMap(expr.$of, req => evaluateChunk({ expr: req, ctx, courses, allMatched }))
 	console.log(padStart('', indent), 'evaluateOf done', result.length)
 	indent--
 	return result
 }
 
 
-function evaluateWhere({expr, courses}) {
+function evaluateWhere({ expr, courses }) {
 	indent++
 	console.log(padStart('', indent), 'evaluateWhere start')
-	let result = filterByWhereClause(courses, expr.$where, {distinct: expr.$distinct, counter: expr.$count})
+	let result = filterByWhereClause(courses, expr.$where, { distinct: expr.$distinct, counter: expr.$count })
 	console.log(padStart('', indent), 'evaluateWhere done', result.length)
 	indent--
 	return result

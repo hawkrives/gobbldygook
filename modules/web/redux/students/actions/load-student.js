@@ -8,7 +8,7 @@ import {
 
 
 function beginLoading(id) {
-	return { type: BEGIN_LOAD_STUDENT, payload: {id} }
+	return { type: BEGIN_LOAD_STUDENT, payload: { id } }
 }
 
 function actuallyLoadStudent(id) {

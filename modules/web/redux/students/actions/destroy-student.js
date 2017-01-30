@@ -1,4 +1,4 @@
-import {removeStudentFromCache} from '../../../helpers/save-student'
+import { removeStudentFromCache } from '../../../helpers/save-student'
 
 import {
 	DESTROY_STUDENT,
@@ -9,6 +9,6 @@ export function destroyStudent(studentId) {
 		removeStudentFromCache(studentId)
 		localStorage.removeItem(studentId)
 
-		resolve({ type: DESTROY_STUDENT, payload: {studentId} })
+		resolve({ type: DESTROY_STUDENT, payload: { studentId } })
 	})
 }

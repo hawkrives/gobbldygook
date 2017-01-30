@@ -1,7 +1,15 @@
-import React, {PropTypes} from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
 
-export default function Separator(props) {
+type SeparatorProps = {
+	className?: string,
+	flex?: number,
+	style?: Object,
+	type?: 'spacer' | 'line' | 'flex-spacer',
+};
+
+export default function Separator(props: SeparatorProps) {
 	const {
 		className,
 		flex = 1,
@@ -19,13 +27,13 @@ export default function Separator(props) {
 	}
 
 	if (type === 'line') {
-		renderedStyle = {...renderedStyle, borderWidth: '1px'}
+		renderedStyle = { ...renderedStyle, borderWidth: '1px' }
 	}
 	else if (type === 'spacer') {
-		renderedStyle = {...renderedStyle, padding: '0 0.5em'}
+		renderedStyle = { ...renderedStyle, padding: '0 0.5em' }
 	}
 	else if (type === 'flex-spacer') {
-		renderedStyle = {...renderedStyle, flex}
+		renderedStyle = { ...renderedStyle, flex }
 	}
 
 	return (
@@ -34,11 +42,4 @@ export default function Separator(props) {
 			style={renderedStyle}
 		/>
 	)
-}
-
-Separator.propTypes = {
-	className: PropTypes.string,
-	flex: PropTypes.number,
-	style: PropTypes.object,
-	type: PropTypes.oneOf(['spacer', 'line', 'flex-spacer']),
 }

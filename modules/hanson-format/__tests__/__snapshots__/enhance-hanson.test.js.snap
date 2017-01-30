@@ -1,0 +1,313 @@
+exports[`enhanceHanson adds a "slug" key to the top-level 1`] = `
+Object {
+  "$type": "requirement",
+  "message": "have a nice day",
+  "name": "test",
+  "slug": "test",
+}
+`;
+
+exports[`enhanceHanson allows defining variables in result 1`] = `
+Object {
+  "$type": "requirement",
+  "Req": Object {
+    "$type": "requirement",
+    "declare": Object {
+      "math-level-3": "MATH 330, 340, 344, 348, 351, 356, 364, 382, 384",
+    },
+    "result": Object {
+      "$count": Object {
+        "$num": 1,
+        "$operator": "$gte",
+      },
+      "$of": Array [
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 330,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 340,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 344,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 348,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 351,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 356,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 364,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 382,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 384,
+          },
+          "$type": "course",
+        },
+      ],
+      "$type": "of",
+    },
+  },
+  "result": Object {
+    "$requirement": "Req",
+    "$type": "reference",
+  },
+  "slug": "",
+}
+`;
+
+exports[`enhanceHanson allows using variables in the filter 1`] = `
+Object {
+  "$type": "requirement",
+  "Req": Object {
+    "$type": "requirement",
+    "declare": Object {
+      "math-level-3": "MATH 330, 340, 344, 348, 351, 356, 364, 382, 384",
+    },
+    "filter": Object {
+      "$distinct": false,
+      "$filterType": "of",
+      "$of": Array [
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 330,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 340,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 344,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 348,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 351,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 356,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 364,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 382,
+          },
+          "$type": "course",
+        },
+        Object {
+          "$course": Object {
+            "department": Array [
+              "MATH",
+            ],
+            "number": 384,
+          },
+          "$type": "course",
+        },
+      ],
+      "$type": "filter",
+    },
+  },
+  "result": Object {
+    "$requirement": "Req",
+    "$type": "reference",
+  },
+  "slug": "",
+}
+`;
+
+exports[`enhanceHanson expands string-only keys into objects with a "result" key 1`] = `
+Object {
+  "$type": "requirement",
+  "Requirement": Object {
+    "$type": "requirement",
+    "result": Object {
+      "$course": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "$type": "course",
+    },
+  },
+  "result": Object {
+    "$requirement": "Requirement",
+    "$type": "reference",
+  },
+  "slug": "",
+}
+`;
+
+exports[`enhanceHanson marks the top-level as a "requirement" 1`] = `
+Object {
+  "$type": "requirement",
+  "message": "have a nice day",
+  "slug": "",
+}
+`;
+
+exports[`enhanceHanson parses "filter" strings with the Filter PEG rule 1`] = `
+Object {
+  "$type": "requirement",
+  "Req": Object {
+    "$type": "requirement",
+    "filter": Object {
+      "$distinct": false,
+      "$filterType": "of",
+      "$of": Array [
+        Object {
+          "$course": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 121,
+          },
+          "$type": "course",
+        },
+      ],
+      "$type": "filter",
+    },
+  },
+  "result": Object {
+    "$requirement": "Req",
+    "$type": "reference",
+  },
+  "slug": "",
+}
+`;
+
+exports[`enhanceHanson parses "result" strings with the Result PEG rule 1`] = `
+Object {
+  "$type": "requirement",
+  "Req": Object {
+    "$type": "requirement",
+    "result": Object {
+      "$count": Object {
+        "$num": 1,
+        "$operator": "$gte",
+      },
+      "$of": Array [
+        Object {
+          "$course": Object {
+            "department": Array [
+              "CSCI",
+            ],
+            "number": 121,
+          },
+          "$type": "course",
+        },
+      ],
+      "$type": "of",
+    },
+  },
+  "result": Object {
+    "$requirement": "Req",
+    "$type": "reference",
+  },
+  "slug": "",
+}
+`;

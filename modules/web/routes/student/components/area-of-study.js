@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import cx from 'classnames'
 
 import Button from 'modules/web/components/button'
 import Icon from 'modules/web/components/icon'
 import Requirement from './requirement'
 import ProgressBar from 'modules/web/components/progress-bar'
-import {compareProps} from 'modules/lib'
-import {close, chevronUp, chevronDown} from 'modules/web/icons/ionicons'
+import { compareProps } from 'modules/lib'
+import { close, chevronUp, chevronDown } from 'modules/web/icons/ionicons'
 
 import './area-of-study.scss'
 
@@ -35,31 +35,31 @@ function AreaOfStudy(props) {
 
 	const summary = (
 		<div>
-			<div className='area--summary-row'>
-				<h1 className='area--title'>
+			<div className="area--summary-row">
+				<h1 className="area--title">
 					{slug && !isCustom && isOpen
-						? <a className='catalog-link'
+						? <a className="catalog-link"
 							href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
-							target='_blank'
+							target="_blank"
 							onClick={ev => ev.stopPropagation()}
-							title='View in the St. Olaf Catalog'
+							title="View in the St. Olaf Catalog"
 						>
 							{name}
 						</a>
 						: name}
 				</h1>
-				<span className='icons'>
+				<span className="icons">
 					{showCloseButton &&
-					<Button className='area--remove-button' onClick={props.onStartRemovalConfirmation}>
+					<Button className="area--remove-button" onClick={props.onStartRemovalConfirmation}>
 						<Icon>{close}</Icon>
 					</Button>}
-					<Icon className='area--open-indicator'>
+					<Icon className="area--open-indicator">
 						{isOpen ? chevronUp : chevronDown}
 					</Icon>
 				</span>
 			</div>
 			<ProgressBar
-				className={cx('area--progress', {error: error})}
+				className={cx('area--progress', { error: error })}
 				colorful={true}
 				value={progressAt}
 				max={progressOf}
@@ -68,12 +68,12 @@ function AreaOfStudy(props) {
 	)
 
 	const removalConfirmation = (
-		<div className='area--confirm-removal'>
+		<div className="area--confirm-removal">
 			<p>Remove <strong>{name}</strong>?</p>
-			<span className='button-group'>
+			<span className="button-group">
 				<Button
-					className='area--actually-remove-area'
-					onClick={ev => props.onRemoveArea({name, type, revision}, ev)}
+					className="area--actually-remove-area"
+					onClick={ev => props.onRemoveArea({ name, type, revision }, ev)}
 				>
 					Remove
 				</Button>
@@ -84,10 +84,10 @@ function AreaOfStudy(props) {
 
 	let contents = null
 	if (error) {
-		contents = <p className='message area--error'>{error} {':('}</p>
+		contents = <p className="message area--error">{error} {':('}</p>
 	}
 	else if (!checked) {
-		contents = <p className='message area--loading'>Loading…</p>
+		contents = <p className="message area--loading">Loading…</p>
 	}
 	else {
 		contents = (
@@ -97,15 +97,15 @@ function AreaOfStudy(props) {
 				onAddOverride={props.onAddOverride}
 				onRemoveOverride={props.onRemoveOverride}
 				onToggleOverride={props.onToggleOverride}
-				path={[type, name]}
+				path={[ type, name ]}
 			/>
 		)
 	}
 
 	return (
-		<div className={cx('area', {errored: Boolean(error)}, {loading: !checked})}>
+		<div className={cx('area', { errored: Boolean(error) }, { loading: !checked })}>
 			<div
-				className='area--summary'
+				className="area--summary"
 				onClick={props.onToggleAreaExpansion}
 			>
 				{showConfirmRemoval
@@ -166,17 +166,17 @@ export default class AreaOfStudyContainer extends Component {
 
 	startRemovalConfirmation = ev => {
 		ev.preventDefault()
-		this.setState({confirmRemoval: true})
+		this.setState({ confirmRemoval: true })
 	};
 
 	endRemovalConfirmation = ev => {
 		ev.preventDefault()
-		this.setState({confirmRemoval: false})
+		this.setState({ confirmRemoval: false })
 	};
 
 	toggleAreaExpansion = ev => {
 		ev.preventDefault()
-		this.setState({isOpen: !this.state.isOpen})
+		this.setState({ isOpen: !this.state.isOpen })
 	};
 
 	render() {

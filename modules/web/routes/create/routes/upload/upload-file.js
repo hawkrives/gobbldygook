@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import DropZone from 'react-dropzone'
-import {map} from 'lodash'
+import map from 'lodash/map'
 import Button from 'modules/web/components/button'
 import List from 'modules/web/components/list'
 // TODO: Move StudentSummary to modules/web/components
@@ -36,7 +36,7 @@ class UploadFileScreen extends Component {
 				reader.readAsText(f)
 			}),
 		}))
-		this.setState({files})
+		this.setState({ files })
 		this.convertFilesToStudents(files)
 	};
 
@@ -51,7 +51,7 @@ class UploadFileScreen extends Component {
 				parsed = JSON.parse(data)
 			}
 			catch (err) {
-				return {name: file.name, error: `could not parse "${data}" because "${err.message}"`}
+				return { name: file.name, error: `could not parse "${data}" because "${err.message}"` }
 			}
 
 			let converted
@@ -59,17 +59,17 @@ class UploadFileScreen extends Component {
 				converted = initStudent(parsed)
 			}
 			catch (err) {
-				return {name: file.name, error: err.message}
+				return { name: file.name, error: err.message }
 			}
 
 			return converted
 		}).then(student => {
-			this.setState({students: this.state.students.concat(student)})
+			this.setState({ students: this.state.students.concat(student) })
 		})
 	};
 
 	convertFilesToStudents = files => {
-		this.setState({students: []})
+		this.setState({ students: [] })
 		files.forEach(this.convertOneFile)
 	};
 
@@ -79,31 +79,31 @@ class UploadFileScreen extends Component {
 	};
 
 	render() {
-		let {students} = this.state
+		let { students } = this.state
 		let files = this.state.files.slice(students.length)
 
 		return (
 			<div>
-				<header className='header'>
+				<header className="header">
 					<h1>Upload a File</h1>
 				</header>
 
 				<DropZone
 					ref={el => (this.dropzone = el)}
-					accept='.gbstudent,.json,.gb-student'
+					accept=".gbstudent,.json,.gb-student"
 					onDrop={this.handleFileDrop}
 					multiple
 					disablePreview
-					className='upload-dropzone'
-					activeClassName='canDrop'
-					rejectClassName='canDrop' // HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
+					className="upload-dropzone"
+					activeClassName="canDrop"
+					rejectClassName="canDrop" // HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
 				>
 					<p>
 						Just drop some students here, or click to select some to upload.
 					</p>
 				</DropZone>
 
-				<List type='plain' className='upload-results'>
+				<List type="plain" className="upload-results">
 					{
 						// eslint-disable-next-line no-confusing-arrow
 						map(students, stu => stu.payload
@@ -118,6 +118,6 @@ class UploadFileScreen extends Component {
 	}
 }
 
-let mapDispatch = dispatch => ({dispatch})
+let mapDispatch = dispatch => ({ dispatch })
 
 export default connect(undefined, mapDispatch)(withRouter(UploadFileScreen))

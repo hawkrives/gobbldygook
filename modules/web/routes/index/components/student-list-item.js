@@ -1,14 +1,14 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
-import {groupBy} from 'lodash'
-import {map} from 'lodash'
-import {interpose} from 'modules/lib'
-import {sortStudiesByType} from 'modules/core'
+import groupBy from 'lodash/groupBy'
+import map from 'lodash/map'
+import { interpose } from 'modules/lib'
+import { sortStudiesByType } from 'modules/core'
 
 import Button from 'modules/web/components/button'
 import Icon from 'modules/web/components/icon'
-import {iosTrashOutline, iosArrowForward} from 'modules/web/icons/ionicons'
+import { iosTrashOutline, iosArrowForward } from 'modules/web/icons/ionicons'
 
 import './student-list-item.scss'
 
@@ -16,7 +16,7 @@ export default function StudentListItem(props) {
 	const { student, isEditing, destroyStudent } = props
 
 	const isLoading = student.isLoading || student.isFetching || student.isValdiating || student.isChecking
-	let opts = {loading: isLoading}
+	let opts = { loading: isLoading }
 	if (!isLoading) {
 		opts['can-graduate'] = student.data.present.canGraduate
 		opts['cannot-graduate'] = !student.data.present.canGraduate
@@ -29,23 +29,23 @@ export default function StudentListItem(props) {
 	return (
 		<li className={classname}>
 			{isEditing &&
-			<Button className='delete' type='flat' onClick={() => destroyStudent(student.data.present.id)}>
+			<Button className="delete" type="flat" onClick={() => destroyStudent(student.data.present.id)}>
 				<Icon>{iosTrashOutline}</Icon>
 				Delete
 			</Button>}
-			<Link className='student-list-item' to={`/s/${student.data.present.id}/`}>
-				<span className='student-list-item-info'>
-					<div className='name'>{`${student.data.present.name} ${DEVELOPMENT ? '('+student.data.present.id+')' : ''}` || ''}</div>
-					<div className='areas'>
+			<Link className="student-list-item" to={`/s/${student.data.present.id}/`}>
+				<span className="student-list-item-info">
+					<div className="name">{`${student.data.present.name} ${DEVELOPMENT ? '('+student.data.present.id+')' : ''}` || ''}</div>
+					<div className="areas">
 						{map(
 							interpose(
 								map(groupedStudies, group => group.map(s => s.name).join(' · ')),
-								<span className='joiner'>|</span>),
-							(group, i) => <span className='area-type' key={i}>{group}</span>)}
+								<span className="joiner">|</span>),
+							(group, i) => <span className="area-type" key={i}>{group}</span>)}
 					</div>
 				</span>
 
-				<Icon className='student-list-item--go'>{iosArrowForward}</Icon>
+				<Icon className="student-list-item--go">{iosArrowForward}</Icon>
 			</Link>
 		</li>
 	)

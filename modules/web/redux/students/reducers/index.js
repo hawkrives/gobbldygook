@@ -1,5 +1,5 @@
-import {omit} from 'lodash'
-import {ActionTypes as UndoableActionTypes} from 'redux-undo'
+import omit from 'lodash/omit'
+import { ActionTypes as UndoableActionTypes } from 'redux-undo'
 import debug from 'debug'
 const log = debug('web:redux:student')
 
@@ -48,7 +48,7 @@ import studentWrapperReducer from './student-wrapper'
 const initialState = {}
 
 export default function studentsReducer(state = initialState, action) {
-	const {type, payload, error} = action
+	const { type, payload, error } = action
 
 	switch (type) {
 		case INIT_STUDENT:

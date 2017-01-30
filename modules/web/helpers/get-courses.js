@@ -1,38 +1,36 @@
-import Bluebird from 'bluebird'
 import db from './db'
-import {map} from 'lodash'
-import {omit} from 'lodash'
+import map from 'lodash/map'
+import omit from 'lodash/omit'
 
-const courseCache = new Map()
+const courseCache = Object.create(null)
 // Gets a course from the database.
 // @param {Number} clbid - a class/lab ID
 // @param {Number} term - a course term
 // @param {Object} fabrications - a (clbid, course) object of fabrications
 // @returns {Promise} - TreoDatabasePromise
 // @fulfill {Object} - the course object, potentially with an embedded error message.
-export async function getCourse({clbid, term}, fabrications={}) {
+export function getCourse({ clbid, term }, fabrications={}) {
 	if (clbid in fabrications) {
 		return fabrications[clbid]
 	}
 
-	if (courseCache.has(clbid)) {
-		return await courseCache.get(clbid)
+	if (clbid in courseCache) {
+		return courseCache[clbid]
 	}
 
 	let promise = db.store('courses')
 		.index('clbid')
 		.get(clbid)
-		.then(course => course || {clbid, term, error: `Could not find ${clbid}`})
-		.then(course => omit(course, ['profWords', 'words', 'sourcePath']))
-		.catch(error => ({clbid, term, error: error.message}))
+		.then(course => course || { clbid, term, error: `Could not find ${clbid}` })
+		.then(course => omit(course, [ 'profWords', 'words', 'sourcePath' ]))
+		.catch(error => ({ clbid, term, error: error.message }))
 
-	courseCache.set(clbid, promise)
+	courseCache[clbid] = promise
 
-	let course = await courseCache.get(clbid)
-
-	courseCache.delete(clbid)
-
-	return course
+	return courseCache[clbid].then(course => {
+		delete courseCache[clbid]
+		return course
+	})
 }
 // export function getCourse({clbid, term}) {
 // 	return db.store('courses')
@@ -53,5 +51,5 @@ export async function getCourse({clbid, term}, fabrications={}) {
  * @fulfill {Object[]} - the courses.
  */
 export function getCourses(clbids, fabrications) {
-	return Bluebird.all(map(clbids, c => getCourse(c, fabrications)))
+	return Promise.all(map(clbids, c => getCourse(c, fabrications)))
 }

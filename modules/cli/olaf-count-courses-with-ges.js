@@ -5,26 +5,26 @@
 
 import nomnom from 'nomnom'
 import search from './lib/search-for-courses'
-import {map} from 'lodash'
-import {mapValues} from 'lodash'
-import {fromPairs} from 'lodash'
-import {groupBy} from 'lodash'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import fromPairs from 'lodash/fromPairs'
+import groupBy from 'lodash/groupBy'
 import yaml from 'js-yaml'
 
 function findCoursesWithGes(term) {
-	return search({riddles: [{term}]})
+	return search({ riddles: [ { term } ] })
 }
 
 export async function cli() {
 	const args = nomnom()
 		.script('olaf-count-courses-with-ges')
-		.option('terms', {position: 0, list: true, required: true, help: 'the years or terms to search for: 2015, or 20141, etc.'})
+		.option('terms', { position: 0, list: true, required: true, help: 'the years or terms to search for: 2015, or 20141, etc.' })
 		.parse()
 
 	args.terms = args.terms.reduce((list, term) => {
 		let stringterm = String(term)
 		if (stringterm.length === 4) {
-			return list.concat([1, 2, 3, 4, 5].map(s => parseInt(`${stringterm}${s}`)))
+			return list.concat([ 1, 2, 3, 4, 5 ].map(s => parseInt(`${stringterm}${s}`)))
 		}
 		return list.concat(term)
 	}, [])

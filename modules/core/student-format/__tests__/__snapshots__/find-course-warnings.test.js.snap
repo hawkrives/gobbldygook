@@ -1,0 +1,17 @@
+exports[`checkForInvalidSemester checks for an invalid semester on a course 1`] = `
+Object {
+  "icon": "iosCalendarOutline",
+  "msg": "Wrong Semester (originally from Interim)",
+  "type": "invalid-semester",
+  "warning": true,
+}
+`;
+
+exports[`checkForInvalidYear checks for an invalid year on a course 1`] = `
+Object {
+  "icon": "alertCircled",
+  "msg": "Wrong Year (originally from 1994–95)",
+  "type": "invalid-year",
+  "warning": true,
+}
+`;

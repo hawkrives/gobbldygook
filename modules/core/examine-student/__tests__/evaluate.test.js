@@ -1,5 +1,4 @@
-import {expect} from 'chai'
-import {evaluate} from '../evaluate'
+import { evaluate } from '../evaluate'
 
 describe('evaluate', () => {
 	it('evaluates!', () => {
@@ -7,13 +6,13 @@ describe('evaluate', () => {
 			name: 'Sample Area',
 			type: 'major',
 			revision: '0000-01',
-			result: {$type: 'reference', $requirement: 'Req'},
+			result: { $type: 'reference', $requirement: 'Req' },
 			Req: {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
 					$course: {
-						department: ['ASIAN'],
+						department: [ 'ASIAN' ],
 						number: 100,
 					},
 				},
@@ -23,6 +22,6 @@ describe('evaluate', () => {
 		const courses = []
 		const overrides = {}
 
-		expect(() => evaluate({courses, overrides}, area)).not.to.throw()
+		expect(() => evaluate({ courses, overrides }, area)).not.toThrow()
 	})
 })

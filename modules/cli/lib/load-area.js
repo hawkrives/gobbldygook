@@ -1,14 +1,14 @@
-import bluebird from 'bluebird'
+import pify from 'pify'
 import yaml from 'js-yaml'
-import {enhance} from 'modules/hanson-format'
-import {map} from 'lodash'
-import {filter} from 'lodash'
-import {find} from 'lodash'
-import {maxBy} from 'lodash'
+import { enhance } from 'modules/hanson-format'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
+import find from 'lodash/find'
+import maxBy from 'lodash/maxBy'
 import findAreas from './find-areas'
-const fs = bluebird.promisifyAll(require('graceful-fs'))
+const fs = pify(require('graceful-fs'))
 
-export async function getArea({name, type, revision}) {
+export async function getArea({ name, type, revision }) {
 	type = type.toLowerCase()
 	name = name.toLowerCase()
 
@@ -29,13 +29,13 @@ export async function getArea({name, type, revision}) {
 		return maxBy(filteredAreas, area => Number(area.revision.split('-')[0]))
 	}
 
-	return find(filteredAreas, {revision})
+	return find(filteredAreas, { revision })
 }
 
-export default async function loadArea({name, type, revision, source, isCustom}) {
+export default async function loadArea({ name, type, revision, source, isCustom }) {
 	let obj = isCustom
 		? yaml.safeLoad(source)
-		: await getArea({name, type, revision})
+		: await getArea({ name, type, revision })
 
 	let result
 	try {

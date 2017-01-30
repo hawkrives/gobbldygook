@@ -1,4 +1,4 @@
-import {selectOne, selectAll} from 'css-select'
+import { selectOne, selectAll } from 'css-select'
 
 export function extractTermList(dom) {
 	const termSelector = selectOne('[name=searchyearterm]', dom)

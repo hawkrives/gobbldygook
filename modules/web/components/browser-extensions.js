@@ -7,7 +7,7 @@ import {
 	installFirefoxExtension,
 } from 'modules/web/helpers/extension-helpers'
 
-import {interpose} from 'modules/lib'
+import { interpose } from 'modules/lib'
 
 import brwsr from 'brwsr'
 
@@ -18,11 +18,11 @@ function BrowserButton({
 	browserName,
 	disabled,
 }: {
-	onClick: () => any,
+	onClick: (any) => any,
 	browserName: string,
-	disabled: boolean,
+	disabled?: boolean,
 }) {
-	return <button type='button' disabled={disabled} className='browser-button' onClick={onClick}>{browserName}</button>
+	return <button type="button" disabled={disabled} className="browser-button" onClick={onClick}>{browserName}</button>
 }
 BrowserButton.propTypes = {
 	onClick: React.PropTypes.func.isRequired,
@@ -33,18 +33,23 @@ export class BrowserExtensionsComponent extends React.Component {
 		onInstall: React.PropTypes.func.isRequired,
 	}
 
-	state = {
+	state: {
+		installError: ?Error,
+		installAttempted: boolean,
+		extensionInstalled: boolean,
+	} = {
 		installAttempted: false,
 		installError: null,
+		extensionInstalled: false,
 	}
 
 	checkExtensionStatus = () => {
 		if (global.gobbldygook_extension >= '1.0.0') {
-			this.setState({extensionInstalled: true})
+			this.setState({ extensionInstalled: true })
 		}
 	}
 
-	installChromeExtension = ev => {
+	installChromeExtension = (ev: Event) => {
 		ev.preventDefault()
 		ev.stopPropagation()
 
@@ -53,7 +58,7 @@ export class BrowserExtensionsComponent extends React.Component {
 			.catch(this.installFailure)
 	}
 
-	installFirefoxExtension = ev => {
+	installFirefoxExtension = (ev: Event) => {
 		ev.preventDefault()
 		ev.stopPropagation()
 
@@ -62,7 +67,7 @@ export class BrowserExtensionsComponent extends React.Component {
 			.catch(this.installFailure)
 	}
 
-	installOperaExtension = ev => {
+	installOperaExtension = (ev: Event) => {
 		ev.preventDefault()
 		ev.stopPropagation()
 
@@ -80,12 +85,12 @@ export class BrowserExtensionsComponent extends React.Component {
 	}
 
 	installSuccess = () => {
-		this.setState({installAttempted: true})
+		this.setState({ installAttempted: true })
 		this.props.onInstall()
 	}
 
-	installFailure = err => {
-		this.setState({installError: err, installAttempted: true})
+	installFailure = (err: Error) => {
+		this.setState({ installError: err, installAttempted: true })
 	}
 
 	detectBrowser() {
@@ -106,11 +111,11 @@ export class BrowserExtensionsComponent extends React.Component {
 
 	buttons() {
 		return [
-			{name: 'Google Chrome', button: <BrowserButton key='chrome' onClick={this.installChromeExtension} browserName='Chrome' />},
-			{name: 'Mozilla Firefox', button: <BrowserButton key='firefox' onClick={this.installFirefoxExtension} browserName='Firefox' />},
-			{name: 'Microsoft Edge', button: <BrowserButton key='edge' disabled onClick={this.installEdgeExtension} browserName='Edge' />},
-			{name: 'Safari', button: <BrowserButton key='safari' disabled onClick={this.installSafariExtension} browserName='Safari' />},
-			{name: 'Opera', button: <BrowserButton key='opera' disabled onClick={this.installOperaExtension} browserName='Opera' />},
+			{ name: 'Google Chrome', button: <BrowserButton key="chrome" onClick={this.installChromeExtension} browserName="Chrome" /> },
+			{ name: 'Mozilla Firefox', button: <BrowserButton key="firefox" onClick={this.installFirefoxExtension} browserName="Firefox" /> },
+			{ name: 'Microsoft Edge', button: <BrowserButton key="edge" disabled onClick={this.installEdgeExtension} browserName="Edge" /> },
+			{ name: 'Safari', button: <BrowserButton key="safari" disabled onClick={this.installSafariExtension} browserName="Safari" /> },
+			{ name: 'Opera', button: <BrowserButton key="opera" disabled onClick={this.installOperaExtension} browserName="Opera" /> },
 		]
 	}
 

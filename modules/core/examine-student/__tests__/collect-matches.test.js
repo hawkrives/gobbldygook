@@ -1,4 +1,3 @@
-import {expect} from 'chai'
 import collectMatches from '../collect-matches'
 
 describe('collectMatches', () => {
@@ -10,7 +9,7 @@ describe('collectMatches', () => {
 			},
 		}
 
-		expect(() => collectMatches(expr)).to.throw(TypeError)
+		expect(() => collectMatches(expr)).toThrowError(TypeError)
 	})
 
 	it('collects matches from child requirements', () => {
@@ -18,30 +17,27 @@ describe('collectMatches', () => {
 			$type: 'requirement',
 			result: {
 				$type: 'boolean',
+				$booleanType: 'and',
 				$and: [
 					{
 						$type: 'reference',
 						requirement: 'Child',
 						_matches: [
-							{department: ['ASIAN'], number: 121},
+							{ department: [ 'ASIAN' ], number: 121 },
 						],
 					},
 					{
 						$type: 'reference',
 						requirement: 'Child2',
 						_matches: [
-							{department: ['CSCI'], number: 121},
+							{ department: [ 'CSCI' ], number: 121 },
 						],
 					},
 				],
 			},
 		}
 
-		expect(collectMatches(expr))
-			.to.deep.equal([
-				{department: ['ASIAN'], number: 121},
-				{department: ['CSCI'], number: 121},
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('does not try to collect matches from requirements with no result key', () => {
@@ -50,7 +46,7 @@ describe('collectMatches', () => {
 			message: 'hi',
 		}
 
-		expect(collectMatches(expr)).to.deep.equal([])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from boolean expressions', () => {
@@ -58,36 +54,30 @@ describe('collectMatches', () => {
 			$type: 'requirement',
 			result: {
 				$type: 'boolean',
+				$booleanType: 'and',
 				$and: [
-					{_result: true, $type: 'course', $course: {department: ['ASIAN'], number: 121}},
+					{ _result: true, $type: 'course', $course: { department: [ 'ASIAN' ], number: 121 } },
 					{
 						$type: 'reference',
 						requirement: 'Child2',
 						_matches: [
-							{department: ['CSCI'], number: 121},
+							{ department: [ 'CSCI' ], number: 121 },
 						],
 					},
 				],
 			},
 		}
 
-		expect(collectMatches(expr))
-			.to.deep.equal([
-				{department: ['ASIAN'], number: 121},
-				{department: ['CSCI'], number: 121},
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from course expressions', () => {
 		const expr = {
 			$type: 'requirement',
-			result: {_result: true, $type: 'course', $course: {department: ['ASIAN'], number: 121}},
+			result: { _result: true, $type: 'course', $course: { department: [ 'ASIAN' ], number: 121 } },
 		}
 
-		expect(collectMatches(expr))
-			.to.deep.equal([
-				{department: ['ASIAN'], number: 121},
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from "courses" modifiers', () => {
@@ -95,21 +85,17 @@ describe('collectMatches', () => {
 			$type: 'requirement',
 			result: {
 				$type: 'modifier',
-				$count: {$operator: '$gte', $num: 2},
+				$count: { $operator: '$gte', $num: 2 },
 				$what: 'children',
 				$children: 'all',
 				_matches: [
-					{department: ['ASIAN'], number: 121},
-					{department: ['CSCI'], number: 121},
+					{ department: [ 'ASIAN' ], number: 121 },
+					{ department: [ 'CSCI' ], number: 121 },
 				],
 			},
 		}
 
-		expect(collectMatches(expr))
-			.to.deep.equal([
-				{department: ['ASIAN'], number: 121},
-				{department: ['CSCI'], number: 121},
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from occurrences', () => {
@@ -120,17 +106,13 @@ describe('collectMatches', () => {
 				// the occurrence is empty because the _matches are calculated
 				// in computeOccurrence
 				_matches: [
-					{department: ['ASIAN'], number: 121, year: 2014},
-					{department: ['ASIAN'], number: 121, year: 2015},
+					{ department: [ 'ASIAN' ], number: 121, year: 2014 },
+					{ department: [ 'ASIAN' ], number: 121, year: 2015 },
 				],
 			},
 		}
 
-		expect(collectMatches(expr))
-			.to.deep.equal([
-				{department: ['ASIAN'], number: 121, year: 2014},
-				{department: ['ASIAN'], number: 121, year: 2015},
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from of-expressions', () => {
@@ -138,42 +120,37 @@ describe('collectMatches', () => {
 			$type: 'requirement',
 			result: {
 				$type: 'of',
-				$count: {$operator: '$gte', $num: 1},
+				$count: { $operator: '$gte', $num: 1 },
 				$of: [
 					{
 						$type: 'boolean',
+						$booleanType: 'and',
 						$and: [
-							{$type: 'course', _result: true, $course: {department: ['ASIAN'], number: 121}},
+							{ $type: 'course', _result: true, $course: { department: [ 'ASIAN' ], number: 121 } },
 							{
 								$type: 'reference',
 								requirement: 'Child2',
 								_matches: [
-									{department: ['CSCI'], number: 121},
+									{ department: [ 'CSCI' ], number: 121 },
 								],
 							},
 						],
 					},
 					{
 						$type: 'modifier',
-						$count: {$operator: '$gte', $num: 2},
+						$count: { $operator: '$gte', $num: 2 },
 						$what: 'children',
 						$children: 'all',
 						_matches: [
-							{department: ['MUSIC'], number: 121},
-							{department: ['ESTH'], number: 121},
+							{ department: [ 'MUSIC' ], number: 121 },
+							{ department: [ 'ESTH' ], number: 121 },
 						],
 					},
 				],
 			},
 		}
 
-		expect(collectMatches(expr))
-			.to.deep.equal([
-				{department: ['ASIAN'], number: 121},
-				{department: ['CSCI'], number: 121},
-				{department: ['MUSIC'], number: 121},
-				{department: ['ESTH'], number: 121},
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from where-expressions', () => {
@@ -184,17 +161,13 @@ describe('collectMatches', () => {
 				// $where is empty because the _matches are calculated in computeWhere
 				$where: {},
 				_matches: [
-					{department: ['ASIAN'], number: 121},
-					{department: ['CSCI'], number: 121},
+					{ department: [ 'ASIAN' ], number: 121 },
+					{ department: [ 'CSCI' ], number: 121 },
 				],
 			},
 		}
 
-		expect(collectMatches(expr))
-			.to.deep.equal([
-				{department: ['ASIAN'], number: 121},
-				{department: ['CSCI'], number: 121},
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 
 	it('collects matches from requirement references', () => {
@@ -204,14 +177,11 @@ describe('collectMatches', () => {
 				$type: 'reference',
 				requirement: 'Child',
 				_matches: [
-					{department: ['ASIAN'], number: 121},
+					{ department: [ 'ASIAN' ], number: 121 },
 				],
 			},
 		}
 
-		expect(collectMatches(expr))
-			.to.deep.equal([
-				{department: ['ASIAN'], number: 121},
-			])
+		expect(collectMatches(expr)).toMatchSnapshot()
 	})
 })

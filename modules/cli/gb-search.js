@@ -9,9 +9,9 @@ function printCourse(course) {
 	]
 }
 
-export default function search({riddles, unique, sort, ...opts}={}) {
+export default function search({ riddles, unique, sort, ...opts }={}) {
 	// check if data has been cached
-	searchCourses({riddles, unique, sort}).then(filtered => {
+	searchCourses({ riddles, unique, sort }).then(filtered => {
 		if (opts.list) {
 			console.log(table(filtered.map(printCourse)))
 		}

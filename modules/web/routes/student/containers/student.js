@@ -48,19 +48,19 @@ export class Student extends Component {
 
 		const name = this.props.student ? this.props.student.data.present.name : 'Loading…'
 
-		const contentProps = {student: this.props.student, className: 'content'}
+		const contentProps = { student: this.props.student, className: 'content' }
 		const contents = this.props.content
 			? cloneElement(this.props.content, contentProps)
 			: <CourseTable {...contentProps} />
 
-		const sidebarProps = {student: this.props.student.data.present}
+		const sidebarProps = { student: this.props.student.data.present }
 		const sidebar = this.props.sidebar
 			? cloneElement(this.props.sidebar, sidebarProps)
 			: <GraduationStatus {...sidebarProps} />
 
 		return (
 			<DocumentTitle title={`${name} | Gobbldygook`}>
-				<div className='student'>
+				<div className="student">
 					<Sidebar student={this.props.student}>
 						{sidebar}
 					</Sidebar>
@@ -78,6 +78,6 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch =>
-	bindActionCreators({loadStudent}, dispatch)
+	bindActionCreators({ loadStudent }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Student)

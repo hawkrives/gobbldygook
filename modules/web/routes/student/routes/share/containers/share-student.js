@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
 import Button from 'modules/web/components/button'
 import Icon from 'modules/web/components/icon'
@@ -6,11 +6,11 @@ import Toolbar from 'modules/web/components/toolbar'
 import Modal from 'modules/web/components/modal'
 import List from 'modules/web/components/list'
 import withRouter from 'react-router/lib/withRouter'
-import {close} from 'modules/web/icons/ionicons'
+import { close } from 'modules/web/icons/ionicons'
 
 import { connect } from 'react-redux'
 
-import {encodeStudent} from 'modules/core'
+import { encodeStudent } from 'modules/core'
 
 import './share-student.scss'
 
@@ -21,19 +21,19 @@ export function ShareSheet(props) {
 	const boundCloseModal = () => props.router.push(`/s/${props.params.studentId}/`)
 
 	return <Modal
-		into='share-modal'
-		modalClassName='share-dialog'
+		modalClassName="share-dialog"
 		onClose={boundCloseModal}
+		contentLabel="Share"
 	>
-		<Toolbar className='window-tools'>
-			<Button className='close-modal' onClick={boundCloseModal}>
+		<Toolbar className="window-tools">
+			<Button className="close-modal" onClick={boundCloseModal}>
 				<Icon>{close}</Icon>
 			</Button>
 		</Toolbar>
 
 		<div>
 			Share "{student.name}" via:
-			<List type='bullet'>
+			<List type="bullet">
 				<li>Google Drive (not implemented)</li>
 				<li>
 					<a
@@ -57,7 +57,7 @@ ShareSheet.propTypes = {
 }
 
 const mapState = (state, ownProps) => {
-	return {student: state.students[ownProps.params.studentId].data.present}
+	return { student: state.students[ownProps.params.studentId].data.present }
 }
 
 export default connect(mapState)(withRouter(ShareSheet))

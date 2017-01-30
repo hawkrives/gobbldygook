@@ -1,13 +1,14 @@
+// @flow
 import collectMatches from './collect-matches'
-import {filter} from 'lodash'
-import {flatten} from 'lodash'
-import {includes} from 'lodash'
-import {isArray} from 'lodash'
 import isRequirementName from './is-requirement-name'
-import {keys} from 'lodash'
-import {map} from 'lodash'
+import filter from 'lodash/filter'
+import flatten from 'lodash/flatten'
+import includes from 'lodash/includes'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
+import uniqBy from 'lodash/uniqBy'
 import stringify from 'stabilize'
-import {uniqBy} from 'lodash'
+import type { ModifierChildrenExpression, ModifierChildrenWhereExpression, Requirement, Course } from './types'
 
 /**
  * Extract the matched courses from all children.
@@ -16,7 +17,11 @@ import {uniqBy} from 'lodash'
  * @param {Requirement} ctx - the host requirement
  * @returns {Course[]} - the list of matched courses
  */
-export default function getMatchesFromChildren(expr, ctx) {
+export default function getMatchesFromChildren(expr: ModifierChildrenExpression | ModifierChildrenWhereExpression, ctx: Requirement): Course[] {
+	if (expr.$type !== 'modifier') {
+		return []
+	}
+
 	// grab all the child requirement names from this requirement
 	let childKeys = filter(keys(ctx), isRequirementName)
 
@@ -26,7 +31,7 @@ export default function getMatchesFromChildren(expr, ctx) {
 	}
 
 	// or just use some of them (those listed in expr.$children)
-	else if (isArray(expr.$children)) {
+	else if (Array.isArray(expr.$children)) {
 		const requested = map(expr.$children, c => c.$requirement)
 		childKeys = filter(childKeys, key => includes(requested, key))
 	}

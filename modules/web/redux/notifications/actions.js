@@ -1,5 +1,5 @@
-import Bluebird from 'bluebird'
 import debug from 'debug'
+import delay from 'delay'
 const log = debug('web:redux:notifications')
 
 import {
@@ -15,7 +15,7 @@ export function removeNotification(id, delayBy = 0) {
 	if (delayBy) {
 		return {
 			type: REMOVE_NOTIFICATION,
-			payload: Bluebird.delay(delayBy, { id }),
+			payload: delay(delayBy, { id }),
 		}
 	}
 	return { type: REMOVE_NOTIFICATION, payload: { id } }
@@ -25,14 +25,14 @@ export function logMessage(id, message) {
 	return { type: LOG_MESSAGE, payload: { id, message } }
 }
 
-export function logError({id, error}, ...args) {
+export function logError({ id, error }, ...args) {
 	log(error, ...args)
 	// istanbul ignore if
 	if (global.Bugsnag)  global.Bugsnag.notifyException(error)
 	return { type: LOG_ERROR, payload: { id, error, args } }
 }
 
-export function startProgress(id, message = '', {value=0, max=1, showButton=false} = {}) {
+export function startProgress(id, message = '', { value=0, max=1, showButton=false } = {}) {
 	return { type: START_PROGRESS, payload: { id, message, value, max, showButton } }
 }
 

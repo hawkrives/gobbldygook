@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import serializeError from 'serialize-error'
 import Button from 'modules/web/components/button'
 import {
@@ -9,15 +9,15 @@ import {
 	convertStudent,
 	semesterName,
 } from 'modules/schools/stolaf'
-import {BrowserExtensionsComponent} from 'modules/web/components/browser-extensions'
-import {getCourse} from 'modules/web/helpers/get-courses'
+import { BrowserExtensionsComponent } from 'modules/web/components/browser-extensions'
+import { getCourse } from 'modules/web/helpers/get-courses'
 import StudentSummary from 'modules/web/routes/student/components/student-summary'
-import {map} from 'lodash'
-import {groupBy} from 'lodash'
-import {sortBy} from 'lodash'
-import {RadioGroup, Radio} from 'react-radio-group'
-import {initStudent} from 'modules/web/redux/students/actions/init-student'
-import {connect} from 'react-redux'
+import map from 'lodash/map'
+import groupBy from 'lodash/groupBy'
+import sortBy from 'lodash/sortBy'
+import { RadioGroup, Radio } from 'react-radio-group'
+import { initStudent } from 'modules/web/redux/students/actions/init-student'
+import { connect } from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
 import './sis-import.scss'
 import debug from 'debug'
@@ -47,23 +47,23 @@ class SISImportScreen extends Component {
 		checkIfLoggedIn()
 			.then(ids => {
 				if (ids.length === 1) {
-					this.setState({loggedIn: true, checkingLogin: false, selectedId: ids[0]})
+					this.setState({ loggedIn: true, checkingLogin: false, selectedId: ids[0] })
 				}
 				else {
-					this.setState({loggedIn: true, checkingLogin: false, ids})
+					this.setState({ loggedIn: true, checkingLogin: false, ids })
 				}
 			})
 			.catch(err => {
 				log(err)
-				this.setState({loggedIn: false, checkingLogin: false})
+				this.setState({ loggedIn: false, checkingLogin: false })
 				if (err instanceof ExtensionNotLoadedError) {
-					this.setState({error: 'The extension is not loaded properly.'})
+					this.setState({ error: 'The extension is not loaded properly.' })
 				}
 				else if (err instanceof ExtensionTooOldError) {
-					this.setState({error: 'The extension is too old.'})
+					this.setState({ error: 'The extension is too old.' })
 				}
 				else {
-					this.setState({error: serializeError(err)})
+					this.setState({ error: serializeError(err) })
 				}
 			})
 	};
@@ -71,10 +71,10 @@ class SISImportScreen extends Component {
 	handleImportData = () => {
 		getStudentInfo(this.state.selectedId)
 			.then(info => convertStudent(info, getCourse))
-			.then(student => this.setState({student}))
+			.then(student => this.setState({ student }))
 			.catch(err => {
 				log(err)
-				this.setState({error: serializeError(err)})
+				this.setState({ error: serializeError(err) })
 			})
 	};
 
@@ -85,7 +85,7 @@ class SISImportScreen extends Component {
 	};
 
 	handleSelectId = value => {
-		this.setState({selectedId: value})
+		this.setState({ selectedId: value })
 		this.handleImportData()
 	};
 
@@ -100,11 +100,11 @@ class SISImportScreen extends Component {
 
 		return (
 			<div>
-				<header className='header'>
+				<header className="header">
 					<h1>Import from the SIS</h1>
 				</header>
 
-				<BrowserExtensionsComponent onInstall={() => this.setState({extensionInstalled: true})} />
+				<BrowserExtensionsComponent onInstall={() => this.setState({ extensionInstalled: true })} />
 
 				<p>
 					{checkingLogin
@@ -115,11 +115,11 @@ class SISImportScreen extends Component {
 				</p>
 
 				{error
-					? <details className='error-spot'>
+					? <details className="error-spot">
 						<summary>
 							<strong>{error.name}</strong>: {error.message}
 						</summary>
-						<pre className='error-stack'>
+						<pre className="error-stack">
 							{error.stack}
 						</pre>
 					</details>
@@ -129,7 +129,7 @@ class SISImportScreen extends Component {
 
 				{ids.length > 1 ? <div>
 					<p>Hang on one second… we found multiple student IDs. Which one is yours?</p>
-					<RadioGroup name='student-id' selectedValue={this.state.selectedId} onChange={this.handleSelectId}>
+					<RadioGroup name="student-id" selectedValue={this.state.selectedId} onChange={this.handleSelectId}>
 						{map(ids, id => <label><Radio value={id} /> {id}</label>)}
 					</RadioGroup>
 				</div> : null}
@@ -169,6 +169,6 @@ class SISImportScreen extends Component {
 }
 
 
-let mapDispatch = dispatch => ({dispatch})
+let mapDispatch = dispatch => ({ dispatch })
 
 export default connect(undefined, mapDispatch)(withRouter(SISImportScreen))

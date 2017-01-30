@@ -57,7 +57,7 @@ import {
 const initialState = {}
 
 export function studentReducer(state = initialState, action) {
-	const {type, payload} = action
+	const { type, payload } = action
 
 	switch (type) {
 		case INIT_STUDENT: {
@@ -118,7 +118,7 @@ export function studentReducer(state = initialState, action) {
 			return reorderScheduleInStudent(state, payload.scheduleId, payload.newIndex)
 		}
 		case MOVE_SCHEDULE: {
-			return moveScheduleInStudent(state, payload.scheduleId, {year: payload.year, semester: payload.semester})
+			return moveScheduleInStudent(state, payload.scheduleId, { year: payload.year, semester: payload.semester })
 		}
 
 		case ADD_COURSE: {
@@ -128,7 +128,7 @@ export function studentReducer(state = initialState, action) {
 			return removeCourseFromSchedule(state, payload.scheduleId, payload.clbid)
 		}
 		case REORDER_COURSE: {
-			return reorderCourseInSchedule(state, payload.scheduleId, {clbid: payload.clbid, index: payload.index})
+			return reorderCourseInSchedule(state, payload.scheduleId, { clbid: payload.clbid, index: payload.index })
 		}
 		case MOVE_COURSE: {
 			return moveCourseToSchedule(state, {
@@ -167,5 +167,5 @@ export default undoable(studentReducer, {
 	},
 
 	// treat LOAD_STUDENTS as the beginning of history
-	initTypes: ['@@redux/INIT', '@@INIT', LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT],
+	initTypes: [ '@@redux/INIT', '@@INIT', LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT ],
 })

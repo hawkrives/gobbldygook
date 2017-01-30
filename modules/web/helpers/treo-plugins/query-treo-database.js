@@ -1,26 +1,25 @@
-import Bluebird from 'bluebird'
-import {includes} from 'lodash'
-import {filter} from 'lodash'
-import {head} from 'lodash'
-import {isString} from 'lodash'
-import {keys as extractKeys} from 'lodash'
-import {last} from 'lodash'
-import {map} from 'lodash'
-import {reject} from 'lodash'
-import {size} from 'lodash'
-import {uniq} from 'lodash'
-import {sortedUniq} from 'lodash'
-import {flatten} from 'lodash'
-import {startsWith} from 'lodash'
-import {sortBy} from 'lodash'
+import includes from 'lodash/includes'
+import filter from 'lodash/filter'
+import head from 'lodash/head'
+import isString from 'lodash/isString'
+import extractKeys from 'lodash/keys'
+import last from 'lodash/last'
+import map from 'lodash/map'
+import reject from 'lodash/reject'
+import size from 'lodash/size'
+import uniq from 'lodash/uniq'
+import sortedUniq from 'lodash/sortedUniq'
+import flatten from 'lodash/flatten'
+import startsWith from 'lodash/startsWith'
+import sortBy from 'lodash/sortBy'
 import debug from 'debug'
 const log = debug('web:database:query')
 
 import idbRange from 'idb-range'
-import {cmp as idbComparison} from 'treo'
-import {checkCourseAgainstQuery} from 'modules/core/search-queries'
+import { cmp as idbComparison } from 'treo'
+import { checkCourseAgainstQuery } from 'modules/core/search-queries'
 
-function canAdd({query, value, primaryKey, results}={}) {
+function canAdd({ query, value, primaryKey, results }={}) {
 	// Check if we want to add the current value to the results array.
 	// Essentially, make sure that the current value passes the query,
 	// and then that it's not already in the array.
@@ -29,7 +28,7 @@ function canAdd({query, value, primaryKey, results}={}) {
 	return checkCourseAgainstQuery(query, value) && !includes(results, primaryKey)
 }
 
-const preferredKeyOrder = ['deptnum']
+const preferredKeyOrder = [ 'deptnum' ]
 const sortKeys = key => {
 	let idx = preferredKeyOrder.indexOf(key)
 	if (idx >= 0) {
@@ -39,7 +38,7 @@ const sortKeys = key => {
 }
 
 function queryStore(query) {
-	return new Bluebird((resolvePromise, rejectPromise) => {
+	return new Promise((resolvePromise, rejectPromise) => {
 		// Take a query object.
 		// Grab a key out of it to operate on an index.
 		// Set up a range from the low and high value from the values for that key.
@@ -76,7 +75,7 @@ function queryStore(query) {
 				indexName => this.index(indexName).query(query, true))
 
 			// Wait for all indices to finish querying before getting their results
-			const allFoundKeys = Bluebird.all(resultPromises)
+			const allFoundKeys = Promise.all(resultPromises)
 
 			// Once we have the primary keys, we need to fetch the actual data:
 			let allValues = allFoundKeys
@@ -104,14 +103,14 @@ function queryStore(query) {
 			}
 
 			let iterateStore = cursor => {
-				let {value, primaryKey} = cursor
-				if (canAdd({query, value, primaryKey, results})) {
+				let { value, primaryKey } = cursor
+				if (canAdd({ query, value, primaryKey, results })) {
 					results.push(primaryKey)
 				}
 				cursor.continue()
 			}
 
-			this.cursor({iterator: iterateStore}).then(done)
+			this.cursor({ iterator: iterateStore }).then(done)
 		}
 	})
 }
@@ -121,7 +120,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 	let name = this.name
 	log(query)
 
-	return new Bluebird((resolvePromise, rejectPromise) => {
+	return new Promise((resolvePromise, rejectPromise) => {
 		// - takes a query object
 		// - filters down the props to just the current index's name
 		// - if there aren't any keys to look for under the current index, return []
@@ -192,8 +191,8 @@ function queryIndex(query, primaryKeysOnly=false) {
 				log('greater')
 				// If the cursor's key is "past" the current one, we need to skip
 				// ahead to the next one key in the list of keys.
-				let {value, primaryKey} = cursor
-				if (canAdd({query, value, primaryKey, results})) {
+				let { value, primaryKey } = cursor
+				if (canAdd({ query, value, primaryKey, results })) {
 					log('adding', value)
 					results.push(primaryKey)
 				}
@@ -211,8 +210,8 @@ function queryIndex(query, primaryKeysOnly=false) {
 				log('equals')
 				// If we've found what we're looking for, add it, and go to
 				// the next result.
-				let {value, primaryKey} = cursor
-				if (canAdd({query, value, primaryKey, results})) {
+				let { value, primaryKey } = cursor
+				if (canAdd({ query, value, primaryKey, results })) {
 					log('adding', value)
 					results.push(primaryKey)
 				}
@@ -227,7 +226,7 @@ function queryIndex(query, primaryKeysOnly=false) {
 			}
 		}
 
-		this.cursor({range, iterator: iterateIndex}).then(done)
+		this.cursor({ range, iterator: iterateIndex }).then(done)
 	})
 }
 

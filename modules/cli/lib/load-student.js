@@ -1,8 +1,8 @@
 import loadArea from './load-area'
-import {readFileSync} from 'graceful-fs'
+import { readFileSync } from 'graceful-fs'
 import yaml from 'js-yaml'
 
-export default async function loadStudent(filename, {isFile=true}={}) {
+export default async function loadStudent(filename, { isFile=true }={}) {
 	let contents
 	if (isFile) {
 		contents = readFileSync(filename, 'utf-8')

@@ -1,7 +1,7 @@
 // @flow
-import {find} from 'lodash'
+import find from 'lodash/find'
 import compareCourseToCourse from './compare-course-to-course'
-import type {Course} from './types'
+import type { Course } from './types'
 
 /**
  * Finds a course in a list of courses

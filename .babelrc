@@ -14,10 +14,17 @@
 		"transform-react-display-name",
 		// these two together prevent us from defining the helpers in every module
 		"external-helpers",
-		"transform-runtime",
+		["transform-runtime", {
+			"polyfill": false, // defaults to true
+		}],
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		// "lodash",
+		["module-resolver", {
+			"alias": {
+				"modules": "./modules",
+			},
+		}],
 	],
 	"env": {
 		"production": {
@@ -31,15 +38,13 @@
 		"test": {
 			"presets": [["latest", {"es2015": {"modules": "commonjs"}}]],
 			"plugins": [
-				"istanbul",
-				// allows tested files access to the webpack aliases
-				["webpack-alias", { "config": "./.webpackrc.js" }],
-			],
-		},
-		"debug": {
-			"plugins": [
-				// allows tested files access to the webpack aliases
-				["webpack-alias", { "config": "./.webpackrc.js" }],
+				"transform-class-properties",
+				"transform-object-rest-spread",
+				["module-resolver", {
+					"alias": {
+						"modules": "./modules",
+					},
+				}],
 			],
 		},
 	},

@@ -1,5 +1,4 @@
 // @flow
-import type {Action} from 'redux'
 import {
 	LOAD_ALL_AREAS,
 	LOADING_AREAS,
@@ -7,18 +6,18 @@ import {
 
 type AreaOfStudy = {};
 type State = {data: AreaOfStudy[], isLoading: boolean};
-const initialState = {data: [], isLoading: false}
+const initialState = { data: [], isLoading: false }
 
-export default function reducer(state: State = initialState, action: Action) {
-	const {type, payload} = action
+export default function reducer(state: State = initialState, action: {type: string, payload: any[]}) {
+	const { type, payload } = action
 
 	switch (type) {
 		case LOADING_AREAS: {
-			return {...state, isLoading: true}
+			return { ...state, isLoading: true }
 		}
 
 		case LOAD_ALL_AREAS: {
-			return {...state, data: payload, isLoading: false}
+			return { ...state, data: payload, isLoading: false }
 		}
 
 		default: {

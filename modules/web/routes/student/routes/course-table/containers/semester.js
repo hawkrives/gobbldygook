@@ -1,15 +1,16 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import {filter, map} from 'lodash'
-import {isCurrentSemester} from 'modules/core'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import { isCurrentSemester } from 'modules/core'
 
 import Loading from 'modules/web/components/loading'
-import {destroySchedules} from 'modules/web/redux/students/actions/schedules'
-import {moveCourse, addCourse} from 'modules/web/redux/students/actions/courses'
+import { destroySchedules } from 'modules/web/redux/students/actions/schedules'
+import { moveCourse, addCourse } from 'modules/web/redux/students/actions/courses'
 import Semester from '../components/semester'
 
-import {getSchedule} from 'modules/web/helpers/get-schedule'
+import { getSchedule } from 'modules/web/helpers/get-schedule'
 
 
 export class SemesterContainer extends Component {
@@ -62,7 +63,7 @@ export class SemesterContainer extends Component {
 
 
 const mapDispatchToProps = dispatch =>
-	bindActionCreators({destroySchedules, moveCourse, addCourse}, dispatch)
+	bindActionCreators({ destroySchedules, moveCourse, addCourse }, dispatch)
 
 const connected = connect(undefined, mapDispatchToProps)(SemesterContainer)
 

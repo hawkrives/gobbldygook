@@ -1,27 +1,27 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
-import {difference} from 'lodash'
-import {filter} from 'lodash'
-import {find} from 'lodash'
-import {groupBy} from 'lodash'
-import {includes} from 'lodash'
-import {keys} from 'lodash'
-import {map} from 'lodash'
-import {mapValues} from 'lodash'
-import {pick} from 'lodash'
-import {pickBy} from 'lodash'
-import {toPairs} from 'lodash'
-import {union} from 'lodash'
-import {uniq} from 'lodash'
-import {values} from 'lodash'
+import difference from 'lodash/difference'
+import filter from 'lodash/filter'
+import find from 'lodash/find'
+import groupBy from 'lodash/groupBy'
+import includes from 'lodash/includes'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import pick from 'lodash/pick'
+import pickBy from 'lodash/pickBy'
+import toPairs from 'lodash/toPairs'
+import union from 'lodash/union'
+import uniq from 'lodash/uniq'
+import values from 'lodash/values'
 
-import {sortStudiesByType} from 'modules/core'
+import { sortStudiesByType } from 'modules/core'
 import AreaOfStudyGroup from './area-of-study-group'
 import Button from 'modules/web/components/button'
-import {areaTypeConstants} from 'modules/core'
+import { areaTypeConstants } from 'modules/core'
 
 export default function AreaOfStudySidebar(props) {
-	const {allAreas, student, showAreaPickerFor} = props
+	const { allAreas, student, showAreaPickerFor } = props
 	const allAreasGrouped = groupBy(allAreas, 'type')
 
 	const sortedStudies = sortStudiesByType(student.studies)
@@ -32,7 +32,7 @@ export default function AreaOfStudySidebar(props) {
 	// pull out the results
 	const studyResults = mapValues(groupedStudies, group =>
 		map(group, area =>
-			find(student.areas, pick(area, ['name', 'type', 'revision'])) || area))
+			find(student.areas, pick(area, [ 'name', 'type', 'revision' ])) || area))
 
 	// and then render them
 	const sections = map(studyResults, (areas, areaType) =>
@@ -62,14 +62,14 @@ export default function AreaOfStudySidebar(props) {
 	const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
 
 	const unusedAreaTypeButtons = unusedTypes.length ? (
-		<section className='unused-areas-of-study'>
-			<span className='unused-areas-title'>Add: </span>
-			<span className='unused-areas-buttons'>
+		<section className="unused-areas-of-study">
+			<span className="unused-areas-title">Add: </span>
+			<span className="unused-areas-buttons">
 				{unusedTypes.map(type => (
 					<Button key={type}
-						className='add-unused-area-of-study'
+						className="add-unused-area-of-study"
 						onClick={ev => props.onInitiateAddArea(type, ev)}
-						type='flat'
+						type="flat"
 					>
 						{type}
 					</Button>
@@ -79,9 +79,9 @@ export default function AreaOfStudySidebar(props) {
 	) : null
 
 	const unusedTypesToShow = filter(toPairs(showAreaPickerFor),
-		([type, toShow]) => toShow === true && !includes(usedAreaTypes, type))
+		([ type, toShow ]) => toShow === true && !includes(usedAreaTypes, type))
 
-	const unusedTypesToShowComponents = map(unusedTypesToShow, ([type, shouldShow]) =>
+	const unusedTypesToShowComponents = map(unusedTypesToShow, ([ type, shouldShow ]) =>
 		<AreaOfStudyGroup key={type}
 			allAreasOfType={allAreasGrouped[type] || []}
 			areas={[]}

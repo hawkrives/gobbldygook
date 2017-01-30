@@ -1,28 +1,31 @@
-import React, {Component, PropTypes} from 'react'
+// @flow
+import React, { Component } from 'react'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 
-import {compareProps} from 'modules/lib'
+import { compareProps } from 'modules/lib'
 import './button.scss'
 
+type ButtonProps = {
+	children?: any,
+	className?: string,
+	disabled?: boolean,
+	link?: boolean,
+	onClick?: () => any,
+	style?: Object,
+	title?: string,
+	to?: string | Object,
+	type: 'flat' | 'raised',
+};
+
 export default class Button extends Component {
-	static propTypes = {
-		children: PropTypes.any.isRequired,
-		className: PropTypes.string,
-		disabled: PropTypes.bool,
-		link: PropTypes.bool,
-		onClick: PropTypes.func,
-		style: PropTypes.object,
-		title: PropTypes.string,
-		to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-		type: PropTypes.oneOf(['flat', 'raised']).isRequired,
-	};
+	props: ButtonProps;
 
 	static defaultProps = {
 		type: 'flat',
 	};
 
-	shouldComponentUpdate(nextProps) {
+	shouldComponentUpdate(nextProps: ButtonProps) {
 		return compareProps(this.props, nextProps)
 	}
 
@@ -37,7 +40,7 @@ export default class Button extends Component {
 			title: this.props.title,
 		}
 		if (this.props.link) {
-			props = {...props, to: this.props.to}
+			props = { ...props, to: this.props.to }
 		}
 		return React.createElement(tag, props, this.props.children)
 	}

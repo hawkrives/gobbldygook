@@ -1,0 +1,27 @@
+exports[`queryCourses properly handles a list of five years 1`] = `
+Array [
+  Object {
+    "departments": Array [
+      "AMCON",
+    ],
+    "year": 2013,
+  },
+  Object {
+    "departments": Array [
+      "ASIAN",
+    ],
+    "year": 2012,
+  },
+]
+`;
+
+exports[`queryCourses queries a list of courses 1`] = `
+Array [
+  Object {
+    "departments": Array [
+      "AMCON",
+    ],
+    "year": 2013,
+  },
+]
+`;

@@ -1,0 +1,190 @@
+exports[`ModifierExpression can count courses 1`] = `
+Object {
+  "$children": "$all",
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "course",
+}
+`;
+
+exports[`ModifierExpression can count credits 1`] = `
+Object {
+  "$children": "$all",
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "credit",
+}
+`;
+
+exports[`ModifierExpression can count departments 1`] = `
+Object {
+  "$children": "$all",
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "department",
+}
+`;
+
+exports[`ModifierExpression can count from a where-statement 1`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "where",
+  "$type": "modifier",
+  "$what": "course",
+  "$where": Object {
+    "$key": "a",
+    "$operator": "$eq",
+    "$type": "qualification",
+    "$value": "b",
+  },
+}
+`;
+
+exports[`ModifierExpression can count from a where-statement, with the input filtered by all children 1`] = `
+Object {
+  "$children": "$all",
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children-where",
+  "$type": "modifier",
+  "$what": "course",
+  "$where": Object {
+    "$key": "a",
+    "$operator": "$eq",
+    "$type": "qualification",
+    "$value": "b",
+  },
+}
+`;
+
+exports[`ModifierExpression can count from a where-statement, with the input filtered by some children 1`] = `
+Object {
+  "$children": Array [
+    Object {
+      "$requirement": "A",
+      "$type": "reference",
+    },
+    Object {
+      "$requirement": "B",
+      "$type": "reference",
+    },
+  ],
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children-where",
+  "$type": "modifier",
+  "$what": "course",
+  "$where": Object {
+    "$key": "a",
+    "$operator": "$eq",
+    "$type": "qualification",
+    "$value": "b",
+  },
+}
+`;
+
+exports[`ModifierExpression can count from children 1`] = `
+Object {
+  "$children": "$all",
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "course",
+}
+`;
+
+exports[`ModifierExpression can count from filter 1`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "filter",
+  "$type": "modifier",
+  "$what": "course",
+}
+`;
+
+exports[`ModifierExpression can count from filter, then apply a where-clause 1`] = `
+Object {
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "filter-where",
+  "$type": "modifier",
+  "$what": "course",
+  "$where": Object {
+    "$key": "a",
+    "$operator": "$eq",
+    "$type": "qualification",
+    "$value": "b",
+  },
+}
+`;
+
+exports[`ModifierExpression can count from specified children 1`] = `
+Object {
+  "$children": Array [
+    Object {
+      "$requirement": "A",
+      "$type": "reference",
+    },
+    Object {
+      "$requirement": "B",
+      "$type": "reference",
+    },
+  ],
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "course",
+}
+`;
+
+exports[`ModifierExpression can count from specified children 2`] = `
+Object {
+  "$children": Array [
+    Object {
+      "$requirement": "Bible",
+      "$type": "reference",
+    },
+    Object {
+      "$requirement": "B",
+      "$type": "reference",
+    },
+  ],
+  "$count": Object {
+    "$num": 1,
+    "$operator": "$gte",
+  },
+  "$from": "children",
+  "$type": "modifier",
+  "$what": "course",
+}
+`;

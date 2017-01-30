@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import fuzzysearch from 'fuzzysearch'
-import {pluralizeArea} from 'modules/core/examine-student'
-import {map} from 'lodash'
-import {reject} from 'lodash'
-import {filter} from 'lodash'
-import {includes} from 'lodash'
-import {filterAreaList} from 'modules/core'
+import { pluralizeArea } from 'modules/core/examine-student'
+import map from 'lodash/map'
+import reject from 'lodash/reject'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import { filterAreaList } from 'modules/core'
 
 import Button from 'modules/web/components/button'
 import List from 'modules/web/components/list'
@@ -19,18 +19,18 @@ function AreaPicker(props) {
 	const currentAreaNames = map(props.currentAreas, a => a.name)
 	let onlyAvailableAreas = reject(props.areaList, area => includes(currentAreaNames, area.name))
 
-	onlyAvailableAreas = filterAreaList(onlyAvailableAreas, {graduation})
+	onlyAvailableAreas = filterAreaList(onlyAvailableAreas, { graduation })
 
 	const filteredOnName = filter(onlyAvailableAreas, area =>
 		fuzzysearch(props.filterText, area.name.toLowerCase()))
 
 	const areaList = map(filteredOnName, (area, i) =>
-		<li key={area.name + i} className='area--choice'>
-			<span className='area-listing'>
-				<span className='title'>{area.name}</span>
-				<span className='revision'>{area.revision}</span>
+		<li key={area.name + i} className="area--choice">
+			<span className="area-listing">
+				<span className="title">{area.name}</span>
+				<span className="revision">{area.revision}</span>
 			</span>
-			<Button className='toggle-area' type='flat'
+			<Button className="toggle-area" type="flat"
 				onClick={ev => props.onAddArea(area, ev)}>
 				Add
 			</Button>
@@ -48,17 +48,17 @@ function AreaPicker(props) {
 	}
 
 	return (
-		<div className='add-area'>
+		<div className="add-area">
 			<Toolbar>
 				<input
-					className='add-area--filter'
+					className="add-area--filter"
 					placeholder={`Filter ${pluralizeArea(props.type)}`}
 					value={props.filterText}
 					onChange={props.onFilterChange}
 				/>
 			</Toolbar>
 
-			<List type='plain'>
+			<List type="plain">
 				{areaList.length ? areaList : message}
 			</List>
 		</div>
@@ -83,7 +83,7 @@ export default class AreaPickerContainer extends Component {
 	render() {
 		return <AreaPicker {...this.props}
 			filterText={this.state.filter}
-			onFilterChange={ev => this.setState({filter: (ev.target.value || '').toLowerCase()})}
+			onFilterChange={ev => this.setState({ filter: (ev.target.value || '').toLowerCase() })}
 		/>
 	}
 }

@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
 import Toolbar from 'modules/web/components/toolbar'
 import Button from 'modules/web/components/button'
@@ -8,7 +8,7 @@ import Separator from 'modules/web/components/separator'
 import CodeMirror from 'react-codemirror'
 import 'codemirror/mode/yaml/yaml'
 
-import {iosArrowLeft, iosDownloadOutline, iosReload, iosUploadOutline} from 'modules/web/icons/ionicons'
+import { iosArrowLeft, iosDownloadOutline, iosReload, iosUploadOutline } from 'modules/web/icons/ionicons'
 import './area-editor.scss'
 
 export default function AreaEditor(props) {
@@ -19,13 +19,13 @@ export default function AreaEditor(props) {
 
 	return (
 		<div>
-			<Toolbar style={{marginBottom: '0.5em'}}>
-				<Button link to='/areas' >
+			<Toolbar style={{ marginBottom: '0.5em' }}>
+				<Button link to="/areas" >
 					<Icon>{iosArrowLeft}</Icon>
 					{' '}Back
 				</Button>
 
-				<Separator type='flex-spacer' />
+				<Separator type="flex-spacer" />
 
 				<Button onClick={props.onSave}>
 					<Icon>{iosDownloadOutline}</Icon>
@@ -36,7 +36,7 @@ export default function AreaEditor(props) {
 					{' '}Revert
 				</Button>
 
-				<Separator type='flex-spacer' />
+				<Separator type="flex-spacer" />
 
 				<Button>
 					<Icon>{iosDownloadOutline}</Icon>

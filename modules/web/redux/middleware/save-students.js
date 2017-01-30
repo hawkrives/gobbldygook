@@ -1,9 +1,9 @@
-import Bluebird from 'bluebird'
 import * as studentActions from '../students/constants'
-import {filter} from 'lodash'
-import {includes} from 'lodash'
-import {map} from 'lodash'
-import {saveStudent} from '../students/actions/save-student'
+import { ActionTypes as UndoableActionTypes } from 'redux-undo'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import map from 'lodash/map'
+import { saveStudent } from '../students/actions/save-student'
 
 const whitelist = [
 	studentActions.INIT_STUDENT,
@@ -31,8 +31,10 @@ const whitelist = [
 	studentActions.REMOVE_OVERRIDE,
 	studentActions.ADD_FABRICATION,
 	studentActions.REMOVE_FABRICATION,
+	UndoableActionTypes.UNDO,
+	UndoableActionTypes.REDO,
 ]
-export const shouldTakeAction = ({type}) => {
+export const shouldTakeAction = ({ type }) => {
 	return includes(whitelist, type)
 }
 
@@ -69,7 +71,7 @@ const saveStudentsMiddleware = store => next => action => {
 	const promises = map(studentsToSave, stu =>
 		store.dispatch(saveStudent(stu.data.present.id)))
 
-	return Bluebird.all(promises).then(() => result)
+	return Promise.all(promises).then(() => result)
 }
 
 export default saveStudentsMiddleware

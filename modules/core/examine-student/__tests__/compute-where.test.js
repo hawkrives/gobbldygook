@@ -1,5 +1,4 @@
-import {expect} from 'chai'
-import {computeWhere} from '../compute-chunk'
+import { computeWhere } from '../compute-chunk'
 
 describe('computeWhere', () => {
 	it('requires "distinct" courses to be different courses', () => {
@@ -16,23 +15,23 @@ describe('computeWhere', () => {
 		}
 
 		const courses = [
-			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM']},
-			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
+			{ department: [ 'ESTH' ], number: 182, year: 2012, gereqs: [ 'SPM' ] },
+			{ department: [ 'ESTH' ], number: 182, year: 2013, gereqs: [ 'SPM' ] },
 		]
 
 		const expected = {
 			computedResult: false,
-			matches: [courses[0]],
+			matches: [ courses[0] ],
 			counted: 1,
 		}
 
-		const actual = computeWhere({expr, courses})
+		const actual = computeWhere({ expr, courses })
 
-		expect(actual).to.deep.equal(expected)
+		expect(actual).toEqual(expected)
 
 		const altCourses = [
-			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM']},
-			{department: ['ESTH'], number: 187, year: 2013, gereqs: ['SPM']},
+			{ department: [ 'ESTH' ], number: 182, year: 2012, gereqs: [ 'SPM' ] },
+			{ department: [ 'ESTH' ], number: 187, year: 2013, gereqs: [ 'SPM' ] },
 		]
 
 		let expected2 = {
@@ -41,8 +40,8 @@ describe('computeWhere', () => {
 			counted: 2,
 		}
 
-		let actual2 = computeWhere({expr, courses: altCourses})
+		let actual2 = computeWhere({ expr, courses: altCourses })
 
-		expect(actual2).to.deep.equal(expected2)
+		expect(actual2).toEqual(expected2)
 	})
 })

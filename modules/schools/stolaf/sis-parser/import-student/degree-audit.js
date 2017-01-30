@@ -1,11 +1,11 @@
-import {map} from 'lodash'
-import {fromPairs} from 'lodash'
-import {mapKeys} from 'lodash'
-import {unzip} from 'lodash'
-import {filter} from 'lodash'
-import {selectAll, selectOne} from 'css-select'
-import {partitionByIndex} from 'modules/lib'
-import {getText} from './lib'
+import map from 'lodash/map'
+import fromPairs from 'lodash/fromPairs'
+import mapKeys from 'lodash/mapKeys'
+import unzip from 'lodash/unzip'
+import filter from 'lodash/filter'
+import { selectAll, selectOne } from 'css-select'
+import { partitionByIndex } from 'modules/lib'
+import { getText } from './lib'
 
 function extractInformationFromInfoTable(table) {
 	// So "info" is the first table; it's essentially key-value pairs, in column-row fashion.
@@ -55,7 +55,7 @@ function extractInformationFromAreaTable(table) {
 }
 
 export function extractInformationFromDegreeAudit(auditInfo, infoElement) {
-	let [degreeType] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
+	let [ degreeType ] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
 	if (degreeType === 'B.A.') {
 		degreeType = 'Bachelor of Arts'
 	}
@@ -65,7 +65,7 @@ export function extractInformationFromDegreeAudit(auditInfo, infoElement) {
 
 	// There are two tables that are children of another table
 	// yay, tables for layout.
-	let [infoTable, areaTable] = selectAll('table table', infoElement)
+	let [ infoTable, areaTable ] = selectAll('table table', infoElement)
 
 	let info = extractInformationFromInfoTable(infoTable)
 	let areas = extractInformationFromAreaTable(areaTable)

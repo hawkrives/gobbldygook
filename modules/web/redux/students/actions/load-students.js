@@ -1,9 +1,8 @@
-import Bluebird from 'bluebird'
-import {map} from 'lodash'
-import {uniq} from 'lodash'
+import map from 'lodash/map'
+import uniq from 'lodash/uniq'
 
-import {LOAD_STUDENTS} from '../constants'
-import {loadStudent} from './load-student'
+import { LOAD_STUDENTS } from '../constants'
+import { loadStudent } from './load-student'
 
 export function loadStudents() {
 	return dispatch => {
@@ -13,7 +12,7 @@ export function loadStudents() {
 
 		return dispatch({
 			type: LOAD_STUDENTS,
-			payload: Bluebird.all(map(studentIds, id => dispatch(loadStudent(id)))),
+			payload: Promise.all(map(studentIds, id => dispatch(loadStudent(id)))),
 		})
 	}
 }

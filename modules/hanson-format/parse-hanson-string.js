@@ -4,14 +4,6 @@
  * http://pegjs.org/
  */
 "use strict";
-var _stringify = require("babel-runtime/core-js/json/stringify");
-var _stringify2 = _interopRequireDefault(_stringify);
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : {
-		default: obj
-	};
-}
 
 function peg$subclass(child, parent) {
 	function ctor() {
@@ -144,14 +136,16 @@ function peg$parse(input, options) {
 		peg$c12 = peg$literalExpectation("courses", false),
 		peg$c13 = function peg$c13(distinct, where) {
 			return {
-				$where: where
+				$where: where,
+				$filterType: 'where'
 			};
 		},
 		peg$c14 = "from",
 		peg$c15 = peg$literalExpectation("from", false),
-		peg$c16 = function peg$c16(distinct, of) {
+		peg$c16 = function peg$c16(distinct, ofList) {
 			return {
-				$of: of
+				$of: ofList,
+				$filterType: 'of'
 			};
 		},
 		peg$c17 = function peg$c17(distinct, filter) {
@@ -184,6 +178,7 @@ function peg$parse(input, options) {
 		peg$c31 = function peg$c31(lhs, rhs) {
 			return {
 				$type: 'boolean',
+				$booleanType: 'or',
 				$or: [lhs].concat('$or' in rhs ? rhs.$or : [rhs])
 			};
 		},
@@ -193,6 +188,7 @@ function peg$parse(input, options) {
 		peg$c35 = function peg$c35(lhs, rhs) {
 			return {
 				$type: 'boolean',
+				$booleanType: 'and',
 				$and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs])
 			};
 		},
@@ -215,12 +211,14 @@ function peg$parse(input, options) {
 		peg$c39 = function peg$c39(lhs, rhs) {
 			return {
 				$type: 'boolean',
+				$booleanType: 'or',
 				$or: [lhs].concat(rhs.$or ? rhs.$or : [rhs])
 			};
 		},
 		peg$c40 = function peg$c40(lhs, rhs) {
 			return {
 				$type: 'boolean',
+				$booleanType: 'and',
 				$and: [lhs].concat(rhs.$and ? rhs.$and : [rhs])
 			};
 		},
@@ -366,8 +364,8 @@ function peg$parse(input, options) {
 		peg$c107 = function peg$c107(val, rest) {
 			return [val].concat(rest);
 		},
-		peg$c108 = function peg$c108(of) {
-			return flatten(of);
+		peg$c108 = function peg$c108(ofItems) {
+			return flatten(ofItems);
 		},
 		peg$c109 = "all",
 		peg$c110 = peg$literalExpectation("all", false),
@@ -395,17 +393,17 @@ function peg$parse(input, options) {
 				$was: 'none'
 			};
 		},
-		peg$c118 = function peg$c118(count, of) {
+		peg$c118 = function peg$c118(count, ofList) {
 			if (count.$was === 'all') {
-				count.$num = of.length;
+				count.$num = ofList.length;
 			}
-			if (of.length < count.$num) {
-				throw new Error("you requested " + count.$num + " items, but only gave " + of.length + " options (" + (0, _stringify2.default)(of) + ").");
+			if (ofList.length < count.$num) {
+				throw new Error("you requested " + count.$num + " items, but only gave " + ofList.length + " options (" + JSON.stringify(ofList) + ").");
 			}
 			return {
 				$type: 'of',
 				$count: count,
-				$of: of
+				$of: ofList
 			};
 		},
 		peg$c119 = function peg$c119(reqs) {
@@ -470,7 +468,7 @@ function peg$parse(input, options) {
 		},
 		peg$c136 = function peg$c136(count, what, besides, from) {
 			if (from.$from === 'where' && what === 'department') {
-				throw new Error('cannot use a modifier with "departments"');
+				throw new Error('cannot use a modifier with "departments" or "department"');
 			}
 			if (from.$from === 'children-where' && what !== 'course') {
 				throw new Error('must use "courses from" with "children where"');
@@ -569,8 +567,8 @@ function peg$parse(input, options) {
 			};
 		},
 		peg$c161 = function peg$c161(dept1, part2) {
-			var type = part2.type;
-			var dept2 = part2.dept;
+			var type = part2.type,
+				dept2 = part2.dept;
 			var department = void 0;
 			if (type === 'joined') {
 				department = {

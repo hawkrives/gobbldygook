@@ -1,0 +1,27 @@
+exports[`ReferenceExpression can reference a requirement 1`] = `
+Object {
+  "$requirement": "BTS-B",
+  "$type": "reference",
+}
+`;
+
+exports[`ReferenceExpression handles a full requirement title 1`] = `
+Object {
+  "$requirement": "Biblical Studies (BTS-B)",
+  "$type": "reference",
+}
+`;
+
+exports[`ReferenceExpression returns a full requirement title when given an abbreviation 1`] = `
+Object {
+  "$requirement": "Biblical Studies (BTS-B)",
+  "$type": "reference",
+}
+`;
+
+exports[`ReferenceExpression returns a full requirement title when given the title-minus-abbreviation 1`] = `
+Object {
+  "$requirement": "Biblical Studies (BTS-B)",
+  "$type": "reference",
+}
+`;

@@ -1,7 +1,7 @@
 import db from './db'
-import {enhanceHanson} from 'modules/hanson-format'
-import {some} from 'lodash'
-import {maxBy} from 'lodash'
+import { enhanceHanson } from 'modules/hanson-format'
+import some from 'lodash/some'
+import maxBy from 'lodash/maxBy'
 import yaml from 'js-yaml'
 import debug from 'debug'
 const log = debug('worker:load-area')
@@ -19,22 +19,22 @@ function resolveArea(areas, query) {
 }
 
 function loadArea(areaQuery) {
-	const {name, type, revision, source, isCustom} = areaQuery
+	const { name, type, revision, source, isCustom } = areaQuery
 
-	let area = {...areaQuery}
+	let area = { ...areaQuery }
 	if (isCustom && source) {
-		return Promise.resolve({...areaQuery, _area: enhanceHanson(yaml.safeLoad(source))})
+		return Promise.resolve({ ...areaQuery, _area: enhanceHanson(yaml.safeLoad(source)) })
 	}
 
-	let dbQuery = {name: [name], type: [type]}
+	let dbQuery = { name: [ name ], type: [ type ] }
 	if (revision && revision !== 'latest') {
-		dbQuery.revision = [revision]
+		dbQuery.revision = [ revision ]
 	}
 
 	return db.store('areas').query(dbQuery)
 		.then(result => {
 			if (result === undefined) {
-				return {...areaQuery, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`}
+				return { ...areaQuery, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}` }
 			}
 
 			if (result.length === 1) {
@@ -44,10 +44,10 @@ function loadArea(areaQuery) {
 				result = resolveArea(result, dbQuery)
 			}
 			else {
-				return {name, type, revision, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`}
+				return { name, type, revision, _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}` }
 			}
 
-			return {...areaQuery, _area: enhanceHanson(result)}
+			return { ...areaQuery, _area: enhanceHanson(result) }
 		})
 		.catch(err => {
 			log(err)  // we can probably remove this in the future
@@ -57,9 +57,9 @@ function loadArea(areaQuery) {
 }
 
 
-const promiseCache = new Map()
+const promiseCache = Object.create(null)
 
-export default async function getArea({name, type, revision, source, isCustom}, {cache=[]}) {
+export default function getArea({ name, type, revision, source, isCustom }, { cache=[] }) {
 	let cachedArea = find(cache, a => (a.name === name) && (a.type === type) && (revision === 'latest' ? true : a.revision === revision))
 	if (cachedArea) {
 		log('loadArea used cached area')
@@ -67,17 +67,16 @@ export default async function getArea({name, type, revision, source, isCustom}, 
 	}
 
 	let id = `{${name}, ${type}, ${revision}}`
-	if (promiseCache.has(id)) {
-		return promiseCache.get(id)
+	if (id in promiseCache) {
+		return promiseCache[id]
 	}
 
-	let promise = loadArea({name, type, revision, source, isCustom})
+	let promise = loadArea({ name, type, revision, source, isCustom })
 
-	promiseCache.set(id, promise)
+	promiseCache[id] = promise
 
-	let area = await promiseCache.get(id)
-
-	promiseCache.delete(id)
-
-	return area
+	return promiseCache[id].then(area => {
+		delete promiseCache[id]
+		return area
+	})
 }

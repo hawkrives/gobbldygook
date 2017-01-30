@@ -1,16 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {compareProps} from 'modules/lib'
+import { compareProps } from 'modules/lib'
 import CourseSearcher from '../components/course-searcher'
 
-import {groupResults, sortResults, submitQuery, updateQuery, setPartialQuery} from '../redux/search/actions'
+import { groupResults, sortResults, submitQuery, updateQuery, setPartialQuery } from '../redux/search/actions'
 
 export class CourseSearcherContainer extends Component {
 	static propTypes = {
 		closeSearcher: PropTypes.func.isRequired,
 		groupResults: PropTypes.func.isRequired,  // redux
-		partial: PropTypes.shape({year: PropTypes.number, semester: PropTypes.number}),
+		partial: PropTypes.shape({ year: PropTypes.number, semester: PropTypes.number }),
 		search: PropTypes.shape({
 			error: PropTypes.any.isRequired,
 			groupBy: PropTypes.string.isRequired,
@@ -82,6 +82,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch =>
-	bindActionCreators({groupResults, sortResults, submitQuery, updateQuery, setPartialQuery}, dispatch)
+	bindActionCreators({ groupResults, sortResults, submitQuery, updateQuery, setPartialQuery }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseSearcherContainer)

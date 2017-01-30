@@ -1,13 +1,13 @@
-import React, {PropTypes} from 'react'
-import {filter} from 'lodash'
-import {sortBy} from 'lodash'
-import {map} from 'lodash'
+import React, { PropTypes } from 'react'
+import filter from 'lodash/filter'
+import sortBy from 'lodash/sortBy'
+import map from 'lodash/map'
 
 import Button from 'modules/web/components/button'
 import Semester from '../containers/semester'
 
-import {findFirstAvailableSemester} from 'modules/web/helpers/find-first-available-semester'
-import {expandYear, semesterName} from 'modules/schools/stolaf'
+import { findFirstAvailableSemester } from 'modules/web/helpers/find-first-available-semester'
+import { expandYear, semesterName } from 'modules/schools/stolaf'
 
 import './year.scss'
 
@@ -20,7 +20,7 @@ export default function Year(props) {
 	const { student, year } = props
 	const { schedules } = student
 
-	let valid = filter(schedules, {active: true, year: year})
+	let valid = filter(schedules, { active: true, year: year })
 	let sorted = sortBy(valid, 'semester')
 	let terms = map(sorted, schedule =>
 		<Semester
@@ -36,24 +36,24 @@ export default function Year(props) {
 	const isAddSemesterDisabled = !(canAddSemester(schedules, year))
 
 	return (
-		<div className='year'>
-			<header className='year-title'>
+		<div className="year">
+			<header className="year-title">
 				<h1>{niceYear}</h1>
 
-				<span className='buttons'>
+				<span className="buttons">
 					{!isAddSemesterDisabled &&
 					<Button
-						className='add-semester'
-						type='flat'
-						title='Add Semester'
+						className="add-semester"
+						type="flat"
+						title="Add Semester"
 						disabled={isAddSemesterDisabled}
 						onClick={props.addSemester}
 					>
 						{`Add ‘${semesterName(nextAvailableSemester)}’`}
 					</Button>}
 					<Button
-						className='remove-year'
-						type='flat'
+						className="remove-year"
+						type="flat"
 						title={`Remove the year ${niceYear}`}
 						onClick={props.removeYear}
 					>
@@ -61,7 +61,7 @@ export default function Year(props) {
 					</Button>
 				</span>
 			</header>
-			<div className='row semester-list'>
+			<div className="row semester-list">
 				{terms}
 			</div>
 		</div>

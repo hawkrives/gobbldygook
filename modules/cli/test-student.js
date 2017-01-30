@@ -1,15 +1,14 @@
-import bluebird from 'bluebird'
-let fs = require('graceful-fs')
-fs = bluebird.promisifyAll(fs)
+import pify from 'pify'
+const fs = pify(require('graceful-fs'))
 import nom from 'nomnom'
 import path from 'path'
-import Mocha, {Test} from 'mocha'
-import {expect} from 'chai'
+import Mocha, { Test } from 'mocha'
+import { expect } from 'chai'
 
-import {flatten} from 'lodash'
+import flatten from 'lodash/flatten'
 import junk from 'junk'
 
-import {evaluate} from 'modules/core/examine-student'
+import { evaluate } from 'modules/core/examine-student'
 import loadStudent from './lib/load-student'
 
 function testStudent(student, mochaInstance) {
@@ -30,7 +29,7 @@ function testStudent(student, mochaInstance) {
 
 	areas.forEach(data => {
 		suiteInstance.addTest(new Test(`${expectation ? 'should' : 'should not'} pass ${data.name}`, () => {
-			let result = evaluate({courses, overrides}, data)
+			let result = evaluate({ courses, overrides }, data)
 			expect(result).to.have.property('computed', expectation)
 		}))
 	})
@@ -61,7 +60,7 @@ async function loadDirOrFile(path) {
 async function loadInput(paths) {
 	let filePromises = paths.map(loadDirOrFile)
 	let files = flatten(await Promise.all(filePromises))
-	let loaded = await Promise.all(files.map(data => loadStudent(data, {isFile: false})))
+	let loaded = await Promise.all(files.map(data => loadStudent(data, { isFile: false })))
 	return loaded
 }
 
@@ -71,7 +70,7 @@ export async function cli() {
 			required: true,
 			position: 0,
 			list: true,
-			default: ['./test/example-students/'],
+			default: [ './test/example-students/' ],
 			help: 'a student file or folder of student files, or stdin',
 		})
 		.parse()
