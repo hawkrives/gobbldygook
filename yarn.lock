@@ -4378,10 +4378,6 @@ p-props@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/p-props/-/p-props-1.0.0.tgz#55f44d96563f87c61f75e19a822e7b8df5b53a55"
 
-p-queue@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-1.0.0.tgz#698cde72cc9f57aa3bc7d30ad8019cd736aaed3e"
-
 p-reduce@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/p-reduce/-/p-reduce-1.0.0.tgz#18c2b0dd936a4690a529f8231f58a0fdb6a47dfa"

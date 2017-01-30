@@ -54,7 +54,6 @@ const entries = {
 		'listify',
 		'ord',
 		'p-props',
-		'p-queue',
 		'p-series',
 		'p-settle',
 		'plur',
