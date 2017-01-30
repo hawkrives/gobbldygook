@@ -184,7 +184,7 @@ function updateDatabase(type, infoFileBase, notificationId, infoFromServer) {
 	const url = infoFileBase + itemUrl
 
 	// go fetch the data!
-	fetchText(url).then(rawData => {
+	return fetchText(url).then(rawData => {
 		// now parse the data into a usable form
 		const data = parseData(rawData, type)
 
@@ -213,7 +213,7 @@ function needsUpdate(type, path, hash) {
 
 
 function removeDuplicateAreas() {
-	db.store('areas').getAll().then(allAreas => {
+	return db.store('areas').getAll().then(allAreas => {
 		// now de-duplicate, based on name, type, and revision
 		// reasons for duplicates:
 		// - a major adds a new revision
