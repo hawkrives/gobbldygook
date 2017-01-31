@@ -26,13 +26,7 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 
 const isCI = Boolean(process.env.CI)
 
-const style = 'style-loader'
-const css = 'css-loader'
-const sass = 'sass-loader'
-const cssModules = { loader: css, query: { modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]' } }
-
 const outputFolder = __dirname + '/build/'
-const urlLoaderLimit = 10000
 
 const entries = {
 	bfr: 'buffer',
@@ -158,7 +152,7 @@ function config() {
 		Buffer: false,
 	}
 
-	let plugins = [
+	const plugins = [
 		// Generates an index.html for us.
 		new HtmlPlugin({
 			html(context) {
@@ -263,32 +257,30 @@ function config() {
 
 	if (isProduction) {
 		// minify in production
-		plugins = plugins.concat([
-			new UglifyJsPlugin({
-				sourceMap: true,
-				compress: {
-					warnings: false,
-					pure_getters: true, // eslint-disable-line camelcase
-					screw_ie8: true, // eslint-disable-line camelcase
-					unsafe: true,
-				},
-				mangle: {
-					screw_ie8: true, // eslint-disable-line camelcase
-				},
-				output: {
-					comments: false,
-					screw_ie8: true, // eslint-disable-line camelcase
-				},
-			}),
-			new ExtractTextPlugin({
-				filename: cssFilename,
-				allChunks: true,
-			}),
-			new LoaderOptionsPlugin({
-				minimize: true,
-			}),
-			new DuplicatePackageCheckerPlugin(),
-		])
+		plugins.push(new UglifyJsPlugin({
+			sourceMap: true,
+			compress: {
+				warnings: false,
+				pure_getters: true, // eslint-disable-line camelcase
+				screw_ie8: true, // eslint-disable-line camelcase
+				unsafe: true,
+			},
+			mangle: {
+				screw_ie8: true, // eslint-disable-line camelcase
+			},
+			output: {
+				comments: false,
+				screw_ie8: true, // eslint-disable-line camelcase
+			},
+		}))
+		plugins.push(new ExtractTextPlugin({
+			filename: cssFilename,
+			allChunks: true,
+		}))
+		plugins.push(new LoaderOptionsPlugin({
+			minimize: true,
+		}))
+		plugins.push(new DuplicatePackageCheckerPlugin())
 	}
 
 	if (isDevelopment) {
@@ -296,22 +288,25 @@ function config() {
 		plugins.push(new HotModuleReplacementPlugin())
 	}
 
+	const babelLoader = { loader: 'babel-loader', options: { cacheDirectory: !isCI } }
+	const babelForNodeModules =  { loader: 'babel-loader', options: { cacheDirectory: !isCI, plugins: [ 'transform-es2015-modules-commonjs' ] } }
+	const urlLoader = { loader: 'url-loader', options: { limit: 10000 } }
 	const module = {
 		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				use: [ { loader: 'babel-loader', options: { cacheDirectory: !isCI } } ],
+				use: [ babelLoader ],
 			},
 			{
 				test: /\.js$/,
 				include: /node_modules[/]p-.*[/].*[.]js$/,
-				use: [ { loader: 'babel-loader', options: { plugins: [ 'transform-es2015-modules-commonjs' ], cacheDirectory: !isCI } } ],
+				use: [ babelForNodeModules ],
 			},
 			{
 				test: /\.worker.js$/,
 				exclude: /node_modules/,
-				use: [ 'worker-loader', { loader: 'babel-loader', options: { cacheDirectory: !isCI } } ],
+				use: [ 'worker-loader', babelLoader ],
 			},
 			{
 				test: /\.json$/,
@@ -319,24 +314,21 @@ function config() {
 			},
 			{
 				test: /\.otf|eot|ttf|woff2?$/,
-				use: [ { loader: 'url-loader', options: { limit: urlLoaderLimit } } ],
+				use: [ urlLoader ],
 			},
 			{
 				test: /\.jpe?g|png|gif$/,
-				use: [ { loader: 'url-loader', options: { limit: urlLoaderLimit } } ],
+				use: [ urlLoader ],
 			},
-
-			{ test: /\.css$/, use: [ style, css ] },
-			{ test: /\.scss$/, use: [ style, css, sass ] },
-			{ test: /\.module.css$/, use: [ style, cssModules ] },
-			{ test: /\.module.scss$/, use: [ style, cssModules, sass ] },
 		],
 	}
 
+	const style = 'style-loader'
+	const css = 'css-loader'
+	const sass = 'sass-loader'
+	const cssModules = { loader: css, query: { modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]' } }
+
 	if (isProduction) {
-		// remove css plugins
-		const endsInCss = rule => endsWith(rule.test.toString(), 'css$/')
-		module.rules = reject(module.rules, endsInCss)
 		module.rules = module.rules.concat([
 			{ test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css ] }) },
 			{ test: /\.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css, sass ] }) },
@@ -344,8 +336,17 @@ function config() {
 			{ test: /\.module.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ cssModules, sass ] }) },
 		])
 	}
+	else {
+		module.rules = module.rules.concat([
+			{ test: /\.css$/, use: [ style, css ] },
+			{ test: /\.scss$/, use: [ style, css, sass ] },
+			{ test: /\.module.css$/, use: [ style, cssModules ] },
+			{ test: /\.module.scss$/, use: [ style, cssModules, sass ] },
+		])
+	}
 
 	return {
+		target: 'web',
 		devtool,
 		stats,
 		entry,
