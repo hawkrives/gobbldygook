@@ -77,8 +77,8 @@ const bundleNames = [
 ]
 
 const allBundleNames = Object.keys(entries)
-const missingNames = allBundleNames.filter(name => !bundleNames.include(name))
-const extraNames = bundleNames.filter(name => !allBundleNames.include(name))
+const missingNames = allBundleNames.filter(name => !bundleNames.includes(name))
+const extraNames = bundleNames.filter(name => !allBundleNames.includes(name))
 if (missingNames.length) {
 	throw new Error(`'bundleNames' is missing ${missingNames.join(', ')}`)
 }
