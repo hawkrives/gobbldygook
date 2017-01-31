@@ -291,6 +291,10 @@ function config() {
 	const babelLoader = { loader: 'babel-loader', options: { cacheDirectory: !isCI } }
 	const babelForNodeModules =  { loader: 'babel-loader', options: { cacheDirectory: !isCI, plugins: [ 'transform-es2015-modules-commonjs' ] } }
 	const urlLoader = { loader: 'url-loader', options: { limit: 10000 } }
+	const cssLoader = isProduction
+		? ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: [ 'css-loader', 'sass-loader' ] })
+		: [ 'style-loader', 'css-loader', 'sass-loader' ]
+
 	const module = {
 		rules: [
 			{
@@ -320,29 +324,11 @@ function config() {
 				test: /\.jpe?g|png|gif$/,
 				use: [ urlLoader ],
 			},
+			{
+				test: /\.scss$/,
+				use: cssLoader,
+			},
 		],
-	}
-
-	const style = 'style-loader'
-	const css = 'css-loader'
-	const sass = 'sass-loader'
-	const cssModules = { loader: css, query: { modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]' } }
-
-	if (isProduction) {
-		module.rules = module.rules.concat([
-			{ test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css ] }) },
-			{ test: /\.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css, sass ] }) },
-			{ test: /\.module.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ cssModules ] }) },
-			{ test: /\.module.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ cssModules, sass ] }) },
-		])
-	}
-	else {
-		module.rules = module.rules.concat([
-			{ test: /\.css$/, use: [ style, css ] },
-			{ test: /\.scss$/, use: [ style, css, sass ] },
-			{ test: /\.module.css$/, use: [ style, cssModules ] },
-			{ test: /\.module.scss$/, use: [ style, cssModules, sass ] },
-		])
 	}
 
 	return {
