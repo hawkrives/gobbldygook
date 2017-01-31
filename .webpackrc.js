@@ -221,14 +221,7 @@ const config = {
 		// don't need to individually bundle them.
 		new CommonsChunkPlugin({
 			names: [
-				'react',
-				'common',
-				'yaml',
-				'cm',
-				'html',
-				'idb',
-				'hanson',
-				'bfr',
+				...Object.keys(entries),
 				'manifest',
 			],
 			filename: '[name].[hash].js',
