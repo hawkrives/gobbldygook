@@ -35,7 +35,7 @@ export default function StudentListItem(props) {
 			</Button>}
 			<Link className="student-list-item" to={`/s/${student.data.present.id}/`}>
 				<span className="student-list-item-info">
-					<div className="name">{`${student.data.present.name} ${DEVELOPMENT ? '('+student.data.present.id+')' : ''}` || ''}</div>
+					<div className="name">{`${student.data.present.name} ${process.env.NODE_ENV !== 'production' ? '('+student.data.present.id+')' : ''}` || ''}</div>
 					<div className="areas">
 						{map(
 							interpose(

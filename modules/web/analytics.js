@@ -19,7 +19,7 @@ export function isogram() {
 }
 
 export function ga(...args: any[]) {
-	if (PRODUCTION) {
+	if (process.env.NODE_ENV === 'production') {
 		try {
 			window.ga(...args)
 		}
@@ -28,7 +28,7 @@ export function ga(...args: any[]) {
 }
 
 export default function start() {
-	if (PRODUCTION) {
+	if (process.env.NODE_ENV === 'production') {
 		log('Initializing analytics 📊')
 		isogram()
 	}

@@ -213,9 +213,6 @@ const config = {
 		// DefinePlugin makes some variables available to the code.
 		new DefinePlugin({
 			VERSION: JSON.stringify(pkg.version),
-			DEVELOPMENT: isDevelopment,
-			PRODUCTION: isProduction,
-			TESTING: isTest,
 			// APP_BASE is used in react-router, to set its base appropriately
 			// across both local dev and gh-pages.
 			APP_BASE: JSON.stringify(publicPath),
