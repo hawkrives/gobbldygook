@@ -24,9 +24,6 @@ const HtmlPlugin = require('./scripts/webpack/html-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 
-const isProduction = (process.env.NODE_ENV === 'production')
-const isDevelopment = (process.env.NODE_ENV === 'development')
-const isTest = (process.env.NODE_ENV === 'test')
 const isCI = Boolean(process.env.CI)
 
 const style = 'style-loader'
@@ -36,19 +33,6 @@ const cssModules = { loader: css, query: { modules: true, localIdentName: '[path
 
 const outputFolder = __dirname + '/build/'
 const urlLoaderLimit = 10000
-let publicPath = '/'
-if (isProduction) {
-	// We use "homepage" field to infer "public path" at which the app is served.
-	// Webpack needs to know it to put the right <script> hrefs into HTML even in
-	// single-page apps that may serve index.html for nested URLs like /todos/42.
-	// We can't use a relative path in HTML because we don't want to load something
-	// like /todos/42/static/js/bundle.7289d.js. We have to know the root.
-	publicPath = pkg.homepage ? url.parse(pkg.homepage).pathname : '/'
-	if (!publicPath.endsWith('/')) {
-		// If we don't do this, file assets will get incorrect paths.
-		publicPath += '/'
-	}
-}
 
 const entries = {
 	bfr: 'buffer',
@@ -89,22 +73,52 @@ const entries = {
 	html: [ 'htmlparser2', 'css-select' ],
 }
 
-let cssFilename = isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`
 
-const config = {
-	devtool: isProduction
+function config() {
+	const isProduction = (process.env.NODE_ENV === 'production')
+	const isDevelopment = !isProduction
+
+	const cssFilename = isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`
+
+	let publicPath = '/'
+	if (isProduction) {
+		// We use "homepage" field to infer "public path" at which the app is served.
+		// Webpack needs to know it to put the right <script> hrefs into HTML even in
+		// single-page apps that may serve index.html for nested URLs like /todos/42.
+		// We can't use a relative path in HTML because we don't want to load something
+		// like /todos/42/static/js/bundle.7289d.js. We have to know the root.
+		publicPath = pkg.homepage ? url.parse(pkg.homepage).pathname : '/'
+		if (!publicPath.endsWith('/')) {
+			// If we don't do this, file assets will get incorrect paths.
+			publicPath += '/'
+		}
+	}
+
+	const devtool = isProduction
 		? 'source-map'
-		: 'eval',
+		: 'eval'
 
-	stats: {},
+	const stats = {}
+	if (isProduction) {
+		stats.children = false
+	}
 
-	entry: Object.assign(
+	const entry = Object.assign(
 		{},
 		{ main: [ './modules/web/index.js' ] },
 		entries
-	),
+	)
 
-	output: {
+	if (isDevelopment) {
+		// add dev server and hotloading clientside code
+		entry.main.unshift(
+			// 'react-hot-loader/patch',
+			'webpack-dev-server/client?/',
+			'webpack/hot/only-dev-server'
+		)
+	}
+
+	const output = {
 		path: outputFolder,
 		publicPath: publicPath,
 
@@ -114,9 +128,9 @@ const config = {
 
 		// Add /*filename*/ comments to generated require()s in the output.
 		pathinfo: true,
-	},
+	}
 
-	devServer: {
+	const devServer = {
 		port: 3000, // for webpack-dev-server
 
 		stats: {
@@ -137,14 +151,14 @@ const config = {
 		// We also do the manual entry above and the manual adding of the hot
 		// module replacment plugin below.
 		hot: true,
-	},
+	}
 
-	node: {
+	const node = {
 		process: false,
 		Buffer: false,
-	},
+	}
 
-	plugins: [
+	let plugins = [
 		// Generates an index.html for us.
 		new HtmlPlugin({
 			html(context) {
@@ -200,7 +214,6 @@ const config = {
 					`,
 				}
 			},
-			isDev: isDevelopment,
 		}),
 
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
@@ -246,9 +259,44 @@ const config = {
 		}),
 
 		new NamedModulesPlugin(),
-	],
+	]
 
-	module: {
+	if (isProduction) {
+		// minify in production
+		plugins = plugins.concat([
+			new UglifyJsPlugin({
+				sourceMap: true,
+				compress: {
+					warnings: false,
+					pure_getters: true, // eslint-disable-line camelcase
+					screw_ie8: true, // eslint-disable-line camelcase
+					unsafe: true,
+				},
+				mangle: {
+					screw_ie8: true, // eslint-disable-line camelcase
+				},
+				output: {
+					comments: false,
+					screw_ie8: true, // eslint-disable-line camelcase
+				},
+			}),
+			new ExtractTextPlugin({
+				filename: cssFilename,
+				allChunks: true,
+			}),
+			new LoaderOptionsPlugin({
+				minimize: true,
+			}),
+			new DuplicatePackageCheckerPlugin(),
+		])
+	}
+
+	if (isDevelopment) {
+		// add dev plugins
+		plugins.push(new HotModuleReplacementPlugin())
+	}
+
+	const module = {
 		rules: [
 			{
 				test: /\.js$/,
@@ -283,62 +331,30 @@ const config = {
 			{ test: /\.module.css$/, use: [ style, cssModules ] },
 			{ test: /\.module.scss$/, use: [ style, cssModules, sass ] },
 		],
-	},
-}
+	}
 
+	if (isProduction) {
+		// remove css plugins
+		const endsInCss = rule => endsWith(rule.test.toString(), 'css$/')
+		module.rules = reject(module.rules, endsInCss)
+		module.rules = module.rules.concat([
+			{ test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css ] }) },
+			{ test: /\.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css, sass ] }) },
+			{ test: /\.module.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ cssModules ] }) },
+			{ test: /\.module.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ cssModules, sass ] }) },
+		])
+	}
 
-if (isDevelopment) {
-	// add dev server and hotloading clientside code
-	config.entry.main.unshift(
-		// 'react-hot-loader/patch',
-		'webpack-dev-server/client?/',
-		'webpack/hot/only-dev-server'
-	)
-
-	// add dev plugins
-	config.plugins.push(new HotModuleReplacementPlugin())
-}
-
-else if (isProduction) {
-	config.stats.children = false
-
-	// minify in production
-	config.plugins = config.plugins.concat([
-		new UglifyJsPlugin({
-			sourceMap: true,
-			compress: {
-				warnings: false,
-				pure_getters: true, // eslint-disable-line camelcase
-				screw_ie8: true, // eslint-disable-line camelcase
-				unsafe: true,
-			},
-			mangle: {
-				screw_ie8: true, // eslint-disable-line camelcase
-			},
-			output: {
-				comments: false,
-				screw_ie8: true, // eslint-disable-line camelcase
-			},
-		}),
-		new ExtractTextPlugin({
-			filename: cssFilename,
-			allChunks: true,
-		}),
-		new LoaderOptionsPlugin({
-			minimize: true,
-		}),
-		new DuplicatePackageCheckerPlugin(),
-	])
-
-	// remove css plugins
-	const endsInCss = rule => endsWith(rule.test.toString(), 'css$/')
-	config.module.rules = reject(config.module.rules, endsInCss)
-	config.module.rules = config.module.rules.concat([
-		{ test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css ] }) },
-		{ test: /\.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ css, sass ] }) },
-		{ test: /\.module.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ cssModules ] }) },
-		{ test: /\.module.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: style, loader: [ cssModules, sass ] }) },
-	])
+	return {
+		devtool,
+		stats,
+		entry,
+		output,
+		devServer,
+		node,
+		plugins,
+		module,
+	}
 }
 
 module.exports = config
