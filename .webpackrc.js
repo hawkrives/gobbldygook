@@ -7,13 +7,18 @@ const url = require('url')
 const reject = require('lodash/reject')
 const endsWith = require('lodash/endsWith')
 
-const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
-const DefinePlugin = webpack.DefinePlugin
-const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
-const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin
-const NormalModuleReplacementPlugin = webpack.NormalModuleReplacementPlugin
-const NamedModulesPlugin = webpack.NamedModulesPlugin
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
+const {
+	DefinePlugin,
+	HotModuleReplacementPlugin,
+	LoaderOptionsPlugin,
+	NormalModuleReplacementPlugin,
+	NamedModulesPlugin,
+	optimize: {
+		CommonsChunkPlugin,
+		UglifyJsPlugin,
+	},
+} = webpack
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
