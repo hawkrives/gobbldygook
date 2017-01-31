@@ -4,13 +4,13 @@
 const forEach = require('lodash/forEach')
 
 // Main export
-function HJSPlugin(options) {
-	this.config = options || {}
-	this.filename = options.filename || 'index.html'
+function HJSPlugin(renderFunc) {
+	this.render = renderFunc
+	this.filename = 'index.html'
 }
 
 HJSPlugin.prototype.apply = function(compiler) {
-	const htmlFunction = this.config.html
+	const htmlFunction = this.render
 
 	// let user pass `true` to use the simple default.
 	// Same if `isDev` and `serveCustomHtmlInDev` is falsy
@@ -27,9 +27,6 @@ HJSPlugin.prototype.apply = function(compiler) {
 
 		// access to stats
 		context.stats = this.stats
-
-		// expose `isDev` flag to html function context
-		context.isDev = this.config.isDev
 
 		this.addAssets(compiler, htmlFunction(context))
 		callback()

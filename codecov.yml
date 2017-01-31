@@ -2,3 +2,8 @@ coverage:
   parsers:
     javascript:
       enable_partials: yes
+  status:
+    project:
+      default:
+        target: 0%
+        threshold: 100%
