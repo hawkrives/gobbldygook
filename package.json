@@ -46,20 +46,19 @@
   "scripts": {
     "build": "npm run copy && cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --progress",
     "build-ci": "npm run build -- --no-progress",
-    "build-dev": "cross-env NODE_ENV=development webpack --config .webpackrc.js --bail --progress --devtool=source-map",
+    "build-dev": "webpack --config .webpackrc.js --bail --progress --devtool=source-map",
     "build-peg": "pegjs --allowed-start-rules Result,Filter < modules/hanson-format/parse-hanson-string.pegjs | babel-stdin | js-beautify -f - --end-with-newline --indent-with-tabs > modules/hanson-format/parse-hanson-string.js",
     "copy": "rimraf build && cpy 'modules/web/static/*' build/",
     "cover": "jest --coverage && open coverage/index.html",
     "flow": "flow check",
     "lint": "eslint *.js modules/",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
-    "start": "npm run copy && cross-env NODE_ENV=development webpack-dev-server --config .webpackrc.js --progress",
-    "stats": "cross-env NODE_ENV=production npm run stats-base",
-    "stats-base": "webpack --config .webpackrc.js --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
-    "stats-dev": "cross-env NODE_ENV=development npm run stats-base",
+    "start": "npm run copy && webpack-dev-server --config .webpackrc.js --progress",
+    "stats": "cross-env NODE_ENV=production npm run stats-dev",
+    "stats-dev": "webpack --config .webpackrc.js --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
     "test": "jest",
     "test-students": "./modules/cli/test-student test/example-students",
-    "watch": "cross-env NODE_ENV=development webpack --watch --config .webpackrc.js --bail --progress --devtool=source-map"
+    "watch": "webpack --watch --config .webpackrc.js --bail --progress --devtool=source-map"
   },
   "dependencies": {
     "babel-runtime": "6.22.0",
