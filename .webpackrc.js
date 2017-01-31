@@ -24,10 +24,10 @@ const isDevelopment = (process.env.NODE_ENV === 'development')
 const isTest = (process.env.NODE_ENV === 'test')
 const isCI = Boolean(process.env.CI)
 
-let style = 'style-loader'
-let css = 'css-loader'
-let sass = 'sass-loader'
-let cssModules = { loader: css, query: { modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]' } }
+const style = 'style-loader'
+const css = 'css-loader'
+const sass = 'sass-loader'
+const cssModules = { loader: css, query: { modules: true, localIdentName: '[path][name]·[local]·[hash:base64:5]' } }
 
 const outputFolder = __dirname + '/build/'
 const urlLoaderLimit = 10000
