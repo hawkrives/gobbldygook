@@ -50,7 +50,6 @@
     "build-peg": "pegjs --allowed-start-rules Result,Filter < modules/hanson-format/parse-hanson-string.pegjs | babel-stdin | js-beautify -f - --end-with-newline --indent-with-tabs > modules/hanson-format/parse-hanson-string.js",
     "copy": "rimraf build && cpy 'modules/web/static/*' build/",
     "cover": "jest --coverage && open coverage/index.html",
-    "deploy": "bash scripts/deploy.sh",
     "flow": "flow check",
     "lint": "eslint *.js modules/",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
