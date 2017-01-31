@@ -59,8 +59,6 @@
     "stats-dev": "cross-env NODE_ENV=development npm run stats-base",
     "test": "jest",
     "test-students": "./modules/cli/test-student test/example-students",
-    "test-watch": "npm run test -- --watch",
-    "travis": "npm run lint && npm run cover && npm run build-ci",
     "watch": "cross-env NODE_ENV=development webpack --watch --config .webpackrc.js --bail --progress --devtool=source-map"
   },
   "dependencies": {
