@@ -64,6 +64,28 @@ const entries = {
 	html: [ 'htmlparser2', 'css-select' ],
 }
 
+// We have to manually list these so they are loaded in the correct order.
+const bundleNames = [
+	'react',
+	'common',
+	'yaml',
+	'cm',
+	'html',
+	'idb',
+	'hanson',
+	'bfr',
+]
+
+const allBundleNames = Object.keys(entries)
+const missingNames = allBundleNames.filter(name => !bundleNames.include(name))
+const extraNames = bundleNames.filter(name => !allBundleNames.include(name))
+if (missingNames.length) {
+	throw new Error(`'bundleNames' is missing ${missingNames.join(', ')}`)
+}
+else if (extraNames.length) {
+	throw new Error(`'bundleNames' has too many names! ${extraNames.join(', ')}`)
+}
+
 
 function config() {
 	const isProduction = (process.env.NODE_ENV === 'production')
@@ -219,14 +241,7 @@ function config() {
 		// don't need to individually bundle them.
 		new CommonsChunkPlugin({
 			names: [
-				'react',
-				'common',
-				'yaml',
-				'cm',
-				'html',
-				'idb',
-				'hanson',
-				'bfr',
+				...bundleNames,
 				'manifest',
 			],
 			filename: '[name].[hash].js',
