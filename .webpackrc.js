@@ -4,8 +4,6 @@
 const pkg = require('./package.json')
 const webpack = require('webpack')
 const url = require('url')
-const reject = require('lodash/reject')
-const endsWith = require('lodash/endsWith')
 
 const {
 	DefinePlugin,
@@ -25,7 +23,6 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
-
 const outputFolder = __dirname + '/build/'
 
 const entries = {
@@ -71,8 +68,6 @@ const entries = {
 function config() {
 	const isProduction = (process.env.NODE_ENV === 'production')
 	const isDevelopment = !isProduction
-
-	const cssFilename = isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`
 
 	let publicPath = '/'
 	if (isProduction) {
@@ -274,7 +269,7 @@ function config() {
 			},
 		}))
 		plugins.push(new ExtractTextPlugin({
-			filename: cssFilename,
+			filename: isDevelopment ? 'app.css' : `${pkg.name}.[contenthash].css`,
 			allChunks: true,
 		}))
 		plugins.push(new LoaderOptionsPlugin({
