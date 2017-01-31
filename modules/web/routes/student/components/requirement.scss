@@ -94,7 +94,7 @@
 .status {
 	margin-left: 0.5em;
 
-	:global(.result-indicator) {
+	.result-indicator {
 		margin-left: 0;
 	}
 }
