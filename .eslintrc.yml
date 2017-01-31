@@ -23,7 +23,6 @@ globals:
   # webpack.DefinePlugin
   VERSION: false
   APP_BASE: false
-  debug: false
 
 rules:
   # best practices
