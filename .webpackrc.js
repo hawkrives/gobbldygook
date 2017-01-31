@@ -149,61 +149,55 @@ function config() {
 
 	const plugins = [
 		// Generates an index.html for us.
-		new HtmlPlugin({
-			html(context) {
-				return {
-					'index.html': `
-						<!DOCTYPE html>
-						<html lang="en-US">
-						<meta charset="UTF-8">
-						<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-						<title>Gobbldygook</title>
+		new HtmlPlugin(context => `
+			<!DOCTYPE html>
+			<html lang="en-US">
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<title>Gobbldygook</title>
 
-						<!-- Start Single Page Apps for GitHub Pages -->
-						<script>
-							// Single Page Apps for GitHub Pages
-							// https://github.com/rafrex/spa-github-pages
-							(function(l) {
-								if (l.search) {
-									var query = {}
-									l.search.slice(1).split('&').forEach(function(val) {
-										var a = val.split('=')
-										query[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&')
-									})
-									if (query.p !== undefined) {
-										window.history.replaceState(null, null,
-											l.pathname.slice(0, -1) + (query.p || '') +
-											(query.query ? ('?' + query.query) : '') +
-											l.hash
-										)
-									}
-								}
-							}(window.location))
-						</script>
-						<!-- End Single Page Apps for GitHub Pages -->
+			<!-- Start Single Page Apps for GitHub Pages -->
+			<script>
+				// Single Page Apps for GitHub Pages
+				// https://github.com/rafrex/spa-github-pages
+				(function(l) {
+					if (l.search) {
+						var query = {}
+						l.search.slice(1).split('&').forEach(function(val) {
+							var a = val.split('=')
+							query[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&')
+						})
+						if (query.p !== undefined) {
+							window.history.replaceState(null, null,
+								l.pathname.slice(0, -1) + (query.p || '') +
+								(query.query ? ('?' + query.query) : '') +
+								l.hash
+							)
+						}
+					}
+				}(window.location))
+			</script>
+			<!-- End Single Page Apps for GitHub Pages -->
 
-						<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
+			<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-						${isProduction ?
-							'<script src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
-							: ''}
+			${isProduction ?
+				'<script src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
+				: ''}
 
-						${context.css ?
-							`<link rel="stylesheet" href="${publicPath}${context.css}">`
-							: ''}
+			${context.css ?
+				`<link rel="stylesheet" href="${publicPath}${context.css}">`
+				: ''}
 
-						<body><main id="gobbldygook"></main></body>
+			<body><main id="gobbldygook"></main></body>
 
-						<script src="${publicPath}${context.manifest}"></script>
-						${Object.keys(entries)
-							.map(k => `<script src="${publicPath}${context[k]}"></script>`)
-							.join('\n')}
-						<script src="${publicPath}${context.main}"></script>
-						</html>
-					`,
-				}
-			},
-		}),
+			<script src="${publicPath}${context.manifest}"></script>
+			${Object.keys(entries)
+				.map(k => `<script src="${publicPath}${context[k]}"></script>`)
+				.join('\n')}
+			<script src="${publicPath}${context.main}"></script>
+			</html>
+		`),
 
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
