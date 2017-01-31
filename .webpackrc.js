@@ -314,7 +314,7 @@ function config() {
 				use: [ urlLoader ],
 			},
 			{
-				test: /\.scss$/,
+				test: /\.s?css$/,
 				use: cssLoader,
 			},
 		],
