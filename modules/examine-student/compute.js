@@ -33,7 +33,7 @@ export default function compute(outerReq: Requirement, { path, courses=[], overr
 			if (childrenShareCourses) {
 				localDirty = new Set()
 			}
-			return compute(req, { path: path.concat([ name ]), courses, overrides, dirty: localDirty, fulfillments })
+			return compute(req, { path: path.concat([name]), courses, overrides, dirty: localDirty, fulfillments })
 		}
 		return req
 	})

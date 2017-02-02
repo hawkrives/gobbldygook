@@ -205,7 +205,7 @@ describe('students reducer', () => {
 			area: area,
 		} }
 
-		let expected = { ...student, studies: [ { name: `I'm an area` } ] }
+		let expected = { ...student, studies: [{ name: `I'm an area` }] }
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
@@ -225,7 +225,7 @@ describe('students reducer', () => {
 			areaQuery: { name: 'Exercise Science', type: 'major' },
 		} }
 
-		let expected = { ...student, studies: [ { name: 'Asian Studies', type: 'major' } ] }
+		let expected = { ...student, studies: [{ name: 'Asian Studies', type: 'major' }] }
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
@@ -249,7 +249,7 @@ describe('students reducer', () => {
 			],
 		} }
 
-		let expected = { ...student, studies: [ { name: 'Asian Studies', type: 'major' } ] }
+		let expected = { ...student, studies: [{ name: 'Asian Studies', type: 'major' }] }
 		let actual = reducer(initialState, action)
 
 		expect(actual).to.deep.equal(expected)
@@ -309,7 +309,7 @@ describe('students reducer', () => {
 
 		let action = { type: DESTROY_SCHEDULES, payload: {
 			studentId: student.id,
-			scheduleIds: [ '1', '3' ],
+			scheduleIds: ['1', '3'],
 		} }
 
 		let expected = {
@@ -408,7 +408,7 @@ describe('students reducer', () => {
 
 	it('handles ADD_COURSE', () => {
 		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', clbids: [ 123 ] },
+			'1': { id: '1', clbids: [123] },
 		} }
 		let initialState = student
 
@@ -420,7 +420,7 @@ describe('students reducer', () => {
 
 		let expected = {
 			...student,
-			schedules: { '1': { id: '1', clbids: [ 123, 789 ] } },
+			schedules: { '1': { id: '1', clbids: [123, 789] } },
 		}
 		let actual = reducer(initialState, action)
 
@@ -434,7 +434,7 @@ describe('students reducer', () => {
 
 	it('handles REMOVE_COURSE', () => {
 		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', clbids: [ 123, 789 ] },
+			'1': { id: '1', clbids: [123, 789] },
 		} }
 		let initialState = student
 
@@ -446,7 +446,7 @@ describe('students reducer', () => {
 
 		let expected = {
 			...student,
-			schedules: { '1': { id: '1', clbids: [ 789 ] } },
+			schedules: { '1': { id: '1', clbids: [789] } },
 		}
 		let actual = reducer(initialState, action)
 
@@ -460,7 +460,7 @@ describe('students reducer', () => {
 
 	it('handles REORDER_COURSE', () => {
 		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', clbids: [ 123, 789 ] },
+			'1': { id: '1', clbids: [123, 789] },
 		} }
 		let initialState = student
 
@@ -473,7 +473,7 @@ describe('students reducer', () => {
 
 		let expected = {
 			...student,
-			schedules: { '1': { id: '1', clbids: [ 789, 123 ] } },
+			schedules: { '1': { id: '1', clbids: [789, 123] } },
 		}
 		let actual = reducer(initialState, action)
 
@@ -487,8 +487,8 @@ describe('students reducer', () => {
 
 	it('handles MOVE_COURSE', () => {
 		let student = { id: 'xyz', schedules: {
-			'1': { id: '1', clbids: [ 123 ] },
-			'2': { id: '2', clbids: [ 789 ] },
+			'1': { id: '1', clbids: [123] },
+			'2': { id: '2', clbids: [789] },
 		} }
 		let initialState = student
 
@@ -504,7 +504,7 @@ describe('students reducer', () => {
 			...student,
 			schedules: {
 				'1': { id: '1', clbids: [] },
-				'2': { id: '2', clbids: [ 789, 123 ] },
+				'2': { id: '2', clbids: [789, 123] },
 			},
 		}
 		let actual = reducer(initialState, action)

@@ -30,7 +30,7 @@ class StudentPickerContainer extends Component {
 	onGroupChange = () => {};
 
 	onSortChange = () => {
-		const options = [ 'dateLastModified', 'name', 'canGraduate' ]
+		const options = ['dateLastModified', 'name', 'canGraduate']
 		const currentIndex = options.indexOf(this.state.sortBy)
 		const nextIndex = (currentIndex + 1) % options.length
 		this.setState({ sortBy: options[nextIndex] })

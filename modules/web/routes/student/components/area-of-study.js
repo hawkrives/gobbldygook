@@ -97,7 +97,7 @@ function AreaOfStudy(props) {
 				onAddOverride={props.onAddOverride}
 				onRemoveOverride={props.onRemoveOverride}
 				onToggleOverride={props.onToggleOverride}
-				path={[ type, name ]}
+				path={[type, name]}
 			/>
 		)
 	}

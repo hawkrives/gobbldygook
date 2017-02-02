@@ -28,7 +28,7 @@ export function cli({ courses, area }) {
 	// console.log(courses.length)
 	// console.log(courses.find(c => c.department[0] === 'CSCI' && c.number === 251))
 	const { name, type } = area
-	console.log(evaluate(area, { path: [ type, name ], courses }).map(simplifyCourse))
+	console.log(evaluate(area, { path: [type, name], courses }).map(simplifyCourse))
 }
 
 
@@ -37,7 +37,7 @@ function evaluate(requirement, { path, courses=[], allMatched=[] }) {
 	console.log(padStart('', indent), 'evalute start:', path.join(' > '))
 	requirement = mapValues(requirement, (req, name) => {
 		if (isRequirementName(name)) {
-			let matched = evaluate(req, { path: path.concat([ name ]), courses, allMatched })
+			let matched = evaluate(req, { path: path.concat([name]), courses, allMatched })
 			allMatched = uniqBy(allMatched.concat(matched), x => x.clbid)
 			return req
 		}
@@ -126,7 +126,7 @@ function evaluateCourse({ expr, courses }) {
 	console.log(padStart('', indent), 'evaluateCourse done: success')
 
 	indent--
-	return [ foundCourse ]
+	return [foundCourse]
 }
 
 

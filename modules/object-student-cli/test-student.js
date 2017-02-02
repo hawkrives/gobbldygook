@@ -70,7 +70,7 @@ export async function cli() {
 			required: true,
 			position: 0,
 			list: true,
-			default: [ './test/example-students/' ],
+			default: ['./test/example-students/'],
 			help: 'a student file or folder of student files, or stdin',
 		})
 		.parse()

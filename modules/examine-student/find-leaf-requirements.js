@@ -33,7 +33,7 @@ export default function findLeafRequirements(requirement: Requirement) {
 	}
 
 	if (requirement.computed === true) {
-		return [ requirement ]
+		return [requirement]
 	}
 
 	// if there are no keys in this object which are requirement names,

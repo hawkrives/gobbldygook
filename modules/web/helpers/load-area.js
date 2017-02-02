@@ -26,9 +26,9 @@ function loadArea(areaQuery) {
 		return Promise.resolve({ ...areaQuery, _area: enhanceHanson(yaml.safeLoad(source)) })
 	}
 
-	let dbQuery = { name: [ name ], type: [ type ] }
+	let dbQuery = { name: [name], type: [type] }
 	if (revision && revision !== 'latest') {
-		dbQuery.revision = [ revision ]
+		dbQuery.revision = [revision]
 	}
 
 	return db.store('areas').query(dbQuery)

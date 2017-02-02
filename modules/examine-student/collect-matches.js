@@ -24,7 +24,7 @@ export default function collectMatches(expr: Expression): Course[] {
 	if (expr.$type === 'course') {
 		/* istanbul ignore else: doesn't matter */
 		if (expr._result === true) {
-			matches = [ expr.$course || expr ]
+			matches = [expr.$course || expr]
 		}
 	}
 

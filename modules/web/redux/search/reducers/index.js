@@ -26,7 +26,7 @@ const log = debug('web:redux:search')
 
 import { buildDeptString } from 'modules/school-st-olaf-college'
 import { to12HourTime } from 'modules/lib'
-const REVERSE_ORDER = [ 'Year', 'Term', 'Semester' ]
+const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
 // eslint-disable-next-line no-confusing-arrow
 const DAY_OF_WEEK = course => course.offerings
@@ -73,7 +73,7 @@ function sortAndGroup({ sortBy: sorting, groupBy: grouping, rawResults }) {
 
 	// TODO: Speed this up! This preperation stuff takes ~230ms by itself,
 	// with enough courses rendered. (like, say, {year: 2012})
-	const sortByArgs = [ 'year', 'deptnum', 'semester', 'section' ].concat(SORT_BY_TO_KEY[sorting])
+	const sortByArgs = ['year', 'deptnum', 'semester', 'section'].concat(SORT_BY_TO_KEY[sorting])
 	const sorted = sortBy(rawResults, sortByArgs)
 
 	// Group them by term, then turn the object into an array of pairs.

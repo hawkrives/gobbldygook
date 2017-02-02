@@ -10,6 +10,6 @@ describe('checkPageIsLoggedIn', () => {
 	it('returns the student ids if the page is logged in', async () => {
 		expect(() => checkPageIsLoggedIn(loadHtml('term-20121'))).not.toThrowError()
 		const val = await checkPageIsLoggedIn(loadHtml('term-20121'))
-		expect(val).toEqual([ 101010 ])
+		expect(val).toEqual([101010])
 	})
 })

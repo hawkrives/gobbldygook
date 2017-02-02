@@ -1,6 +1,6 @@
 export default {
 	component: require('modules/web/containers/app').default,
-	childRoutes: [ {
+	childRoutes: [{
 		path: '/',
 
 		getIndexRoute(location, cb) {
@@ -17,7 +17,7 @@ export default {
 				require('./not-found').default, // anything else
 			])
 		},
-	} ],
+	}],
 }
 
 // /

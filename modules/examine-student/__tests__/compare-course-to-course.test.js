@@ -2,7 +2,7 @@ import compareCourseToCourse from '../compare-course-to-course'
 
 describe('compareCourseToCourse', () => {
 	it('compares select keys of courses', () => {
-		expect(compareCourseToCourse({ department: [ 'ART' ], number: 310 }, { department: [ 'ART' ], number: 310 }))
+		expect(compareCourseToCourse({ department: ['ART'], number: 310 }, { department: ['ART'], number: 310 }))
 			.toBe(true)
 	})
 
@@ -12,22 +12,22 @@ describe('compareCourseToCourse', () => {
 
 	describe('compares the "department" prop', () => {
 		it('the same department is equal to itself', () => {
-			expect(compareCourseToCourse({ department: [ 'ART' ] }, { department: [ 'ART' ] }))
+			expect(compareCourseToCourse({ department: ['ART'] }, { department: ['ART'] }))
 				.toBe(true)
 		})
 
 		it('multiple departments are not the same as a single department', () => {
-			expect(compareCourseToCourse({ department: [ 'ART' ] }, { department: [ 'ART', 'ASIAN' ] }))
+			expect(compareCourseToCourse({ department: ['ART'] }, { department: ['ART', 'ASIAN'] }))
 				.toBe(false)
 		})
 
 		it('different departments are not equal', () => {
-			expect(compareCourseToCourse({ department: [ 'ASIAN' ] }, { department: [ 'ART' ] }))
+			expect(compareCourseToCourse({ department: ['ASIAN'] }, { department: ['ART'] }))
 				.toBe(false)
 		})
 
 		it('order is significant', () => {
-			expect(compareCourseToCourse({ department: [ 'CHEM', 'BIO' ] }, { department: [ 'BIO', 'CHEM' ] }))
+			expect(compareCourseToCourse({ department: ['CHEM', 'BIO'] }, { department: ['BIO', 'CHEM'] }))
 				.toBe(false)
 		})
 	})
@@ -123,10 +123,10 @@ describe('compareCourseToCourse', () => {
 	})
 
 	it('returns false if the query is more specific than the possibility', () => {
-		expect(compareCourseToCourse({ department: [ 'ASIAN' ], number: 310, section: 'A' }, { department: [ 'ASIAN' ], number: 310 })).toBe(false)
+		expect(compareCourseToCourse({ department: ['ASIAN'], number: 310, section: 'A' }, { department: ['ASIAN'], number: 310 })).toBe(false)
 	})
 
 	it('returns true if the query is less specific than the possibility', () => {
-		expect(compareCourseToCourse({ department: [ 'ASIAN' ], number: 310 }, { department: [ 'ASIAN' ], number: 310, section: 'A' })).toBe(true)
+		expect(compareCourseToCourse({ department: ['ASIAN'], number: 310 }, { department: ['ASIAN'], number: 310, section: 'A' })).toBe(true)
 	})
 })

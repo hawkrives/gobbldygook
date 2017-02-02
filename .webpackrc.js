@@ -58,10 +58,10 @@ const entries = {
 		'react-router',
 		'react-side-effect',
 	],
-	yaml: [ 'js-yaml' ],
-	idb: [ 'treo', 'idb-range', 'idb-request' ],
-	cm: [ 'codemirror' ],
-	html: [ 'htmlparser2', 'css-select' ],
+	yaml: ['js-yaml'],
+	idb: ['treo', 'idb-range', 'idb-request'],
+	cm: ['codemirror'],
+	html: ['htmlparser2', 'css-select'],
 }
 
 // We have to manually list these so they are loaded in the correct order.
@@ -116,7 +116,7 @@ function config() {
 
 	const entry = Object.assign(
 		{},
-		{ main: [ './modules/web/index.js' ] },
+		{ main: ['./modules/web/index.js'] },
 		entries
 	)
 
@@ -300,40 +300,40 @@ function config() {
 	}
 
 	const babelLoader = { loader: 'babel-loader', options: { cacheDirectory: !isCI } }
-	const babelForNodeModules =  { loader: 'babel-loader', options: { cacheDirectory: !isCI, plugins: [ 'transform-es2015-modules-commonjs' ] } }
+	const babelForNodeModules =  { loader: 'babel-loader', options: { cacheDirectory: !isCI, plugins: ['transform-es2015-modules-commonjs'] } }
 	const urlLoader = { loader: 'url-loader', options: { limit: 10000 } }
 	const cssLoader = isProduction
-		? ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: [ 'css-loader', 'sass-loader' ] })
-		: [ 'style-loader', 'css-loader', 'sass-loader' ]
+		? ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader', 'sass-loader'] })
+		: ['style-loader', 'css-loader', 'sass-loader']
 
 	const module = {
 		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				use: [ babelLoader ],
+				use: [babelLoader],
 			},
 			{
 				test: /\.js$/,
 				include: /node_modules[/]p-.*[/].*[.]js$/,
-				use: [ babelForNodeModules ],
+				use: [babelForNodeModules],
 			},
 			{
 				test: /\.worker.js$/,
 				exclude: /node_modules/,
-				use: [ 'worker-loader', babelLoader ],
+				use: ['worker-loader', babelLoader],
 			},
 			{
 				test: /\.json$/,
-				use: [ 'json-loader' ],
+				use: ['json-loader'],
 			},
 			{
 				test: /\.otf|eot|ttf|woff2?$/,
-				use: [ urlLoader ],
+				use: [urlLoader],
 			},
 			{
 				test: /\.jpe?g|png|gif$/,
-				use: [ urlLoader ],
+				use: [urlLoader],
 			},
 			{
 				test: /\.s?css$/,

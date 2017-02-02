@@ -72,7 +72,7 @@ export async function cache() {
 		fs.writeFileSync(`${cacheDir}/Courses/info.json`, JSON.stringify(courseInfo))
 	}
 
-	return Promise.all([ courseInfo ])
+	return Promise.all([courseInfo])
 }
 
 export async function checkForStaleData() {

@@ -12,7 +12,7 @@ export default function collectTakenCourses(expr: Expression): Course[] {
 
 	// check to see we're on a _taken course
 	if (expr.$type === 'course' && '_taken' in expr && '$course' in expr) {
-		return [ expr.$course ]
+		return [expr.$course]
 	}
 
 	// if not, check all sub-chunks

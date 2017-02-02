@@ -49,7 +49,7 @@ export function Student(data) {
 	}
 
 	if (isArray(student.schedules)) {
-		student.schedules = fromPairs(map(student.schedules, s => [ String(s.id), { ...s, id: String(s.id) } ]))
+		student.schedules = fromPairs(map(student.schedules, s => [String(s.id), { ...s, id: String(s.id) }]))
 	}
 
 	student.schedules = mapValues(student.schedules, Schedule)
@@ -195,7 +195,7 @@ export function moveCourseToSchedule(student, { fromScheduleId, toScheduleId, cl
 
 
 export function addAreaToStudent(student, areaOfStudy) {
-	return { ...student, studies: [ ...student.studies, areaOfStudy ] }
+	return { ...student, studies: [...student.studies, areaOfStudy] }
 }
 
 export function removeAreaFromStudent(student, areaQuery) {
@@ -304,7 +304,7 @@ export function reorderCourseInSchedule(student, scheduleId, { clbid, index }) {
 		throw new ReferenceError(`reorderCourseInSchedule: ${clbid} is not in schedule "${scheduleId}"`)
 	}
 
-	schedule.clbids = [ ...schedule.clbids ]
+	schedule.clbids = [...schedule.clbids]
 	schedule.clbids.splice(oldIndex, 1)
 	schedule.clbids.splice(index, 0, clbid)
 

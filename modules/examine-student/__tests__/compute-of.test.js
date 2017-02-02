@@ -6,9 +6,9 @@ describe('computeOf', () => {
 			$type: 'of',
 			$count: { $operator: '$gte', $num: 2 },
 			$of: [
-				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 121 } },
-				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 125 } },
-				{ $type: 'course', $course: { department: [ 'CSCI' ], number: 150 } },
+				{ $type: 'course', $course: { department: ['CSCI'], number: 121 } },
+				{ $type: 'course', $course: { department: ['CSCI'], number: 125 } },
+				{ $type: 'course', $course: { department: ['CSCI'], number: 150 } },
 			],
 		}
 		const req = {
@@ -18,8 +18,8 @@ describe('computeOf', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{ department: [ 'CSCI' ], number: 121 },
-			{ department: [ 'CSCI' ], number: 125 },
+			{ department: ['CSCI'], number: 121 },
+			{ department: ['CSCI'], number: 125 },
 		]
 
 		const { computedResult, matches, counted } = computeOf({ expr, ctx: req, courses, dirty, isNeeded: true })
@@ -28,8 +28,8 @@ describe('computeOf', () => {
 			.toBe(true)
 		expect(matches)
 			.toEqual([
-				{ department: [ 'CSCI' ], number: 121 },
-				{ department: [ 'CSCI' ], number: 125 },
+				{ department: ['CSCI'], number: 121 },
+				{ department: ['CSCI'], number: 125 },
 			])
 		expect(counted)
 			.toBe(2)
@@ -43,22 +43,22 @@ describe('computeOf', () => {
 					_taken: true,
 					_result: true,
 					$type: 'course',
-					_request: { department: [ 'CSCI' ], number: 121 },
-					$course: { department: [ 'CSCI' ], number: 121 },
+					_request: { department: ['CSCI'], number: 121 },
+					$course: { department: ['CSCI'], number: 121 },
 				},
 				{
 					_checked: true,
 					_taken: true,
 					_result: true,
 					$type: 'course',
-					_request: { department: [ 'CSCI' ], number: 125 },
-					$course: { department: [ 'CSCI' ], number: 125 },
+					_request: { department: ['CSCI'], number: 125 },
+					$course: { department: ['CSCI'], number: 125 },
 				},
 				{
 					_result: false,
 					_checked: true,
 					$type: 'course',
-					$course: { department: [ 'CSCI' ], number: 150 },
+					$course: { department: ['CSCI'], number: 150 },
 				},
 			],
 		})

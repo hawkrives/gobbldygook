@@ -12,7 +12,7 @@ import groupBy from 'lodash/groupBy'
 import yaml from 'js-yaml'
 
 function findCoursesWithGes(term) {
-	return search({ riddles: [ { term } ] })
+	return search({ riddles: [{ term }] })
 }
 
 export async function cli() {
@@ -24,7 +24,7 @@ export async function cli() {
 	args.terms = args.terms.reduce((list, term) => {
 		let stringterm = String(term)
 		if (stringterm.length === 4) {
-			return list.concat([ 1, 2, 3, 4, 5 ].map(s => parseInt(`${stringterm}${s}`)))
+			return list.concat([1, 2, 3, 4, 5].map(s => parseInt(`${stringterm}${s}`)))
 		}
 		return list.concat(term)
 	}, [])

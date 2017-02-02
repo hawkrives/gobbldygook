@@ -1,5 +1,5 @@
 import { customParser } from './parse-hanson-string.support'
-const parse = customParser({ allowedStartRules: [ 'Filter' ] })
+const parse = customParser({ allowedStartRules: ['Filter'] })
 
 describe('FilterExpression', () => {
 	it('allows filtering by a list of valid courses', () => {

@@ -39,7 +39,7 @@ export default class CourseResultsList extends Component {
 
 		return (
 			<ul className="term-list">
-				{map(results, ([ groupTitle, courses ]) => {
+				{map(results, ([groupTitle, courses]) => {
 					const title = GROUP_BY_TO_TITLE[groupByValue](groupTitle)
 					return <li key={groupTitle} className="course-group">
 						{title && <p className="course-group-title">{title}</p>}

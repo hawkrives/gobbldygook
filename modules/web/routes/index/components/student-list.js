@@ -50,7 +50,7 @@ StudentList.propTypes = {
 	filter: PropTypes.string.isRequired,
 	groupBy: PropTypes.string.isRequired,
 	isEditing: PropTypes.bool.isRequired,
-	sortBy: PropTypes.oneOf([ 'dateLastModified', 'name', 'canGraduate' ]).isRequired,
+	sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate']).isRequired,
 	students: PropTypes.object.isRequired,
 }
 
