@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import round from 'lodash/round'
-import Button from './button'
-import ProgressBar from './progress-bar'
+import Button from '../../components/button'
+import ProgressBar from '../../components/progress-bar'
 import './notification.scss'
 import debug from 'debug'
 const log = debug('web:react')

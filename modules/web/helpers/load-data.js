@@ -3,7 +3,7 @@ import { status, text } from '../../lib/fetch-helpers'
 import debug from 'debug'
 const log = debug('worker:load-data')
 
-import * as notificationActions from '../redux/notifications/actions'
+import * as notificationActions from '../modules/notifications/redux/actions'
 import * as courseActions from '../redux/courses/actions'
 import * as areaActions from '../redux/areas/actions'
 const actions = {
