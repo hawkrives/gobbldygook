@@ -10,7 +10,7 @@ import loadArea from '../cli/lib/load-area'
 import uniqBy from 'lodash/uniqBy'
 import flatten from 'lodash/flatten'
 import reject from 'lodash/reject'
-import pluck from 'lodash/pluck'
+import map from 'lodash/map'
 import includes from 'lodash/includes'
 import repeat from 'lodash/repeat'
 import find from 'lodash/find'
@@ -75,7 +75,7 @@ function evaluateStudentAgainstEachMajor(student) {
 	let [name, coursesUsedInMajor] = head(toPairs(countedTowardsMajors))
 
 	let usedCourses = uniqBy([...coursesUsedInMajor, ...countedTowardsDegree], simplifyCourse)
-	let usedClbids = pluck(usedCourses, 'clbid')
+	let usedClbids = map(usedCourses, c => c.clbid)
 
 	let unusedCourses = reject(
 		uniqBy([...student.courses, ...flatten(countedTowardsMajors), ...countedTowardsDegree], simplifyCourse),
