@@ -1,14 +1,9 @@
 # Files to ignore
 *.log
-.nyc_output/
 .DS_Store
 .idea/
 *.sublime-workspace
-playground/data
-playground/parse-sis.js
-area-data/area-data
 stats.json
-.eslintcache
 .vscode/
 
 # Temp folders
@@ -20,5 +15,5 @@ stats.json
 node_modules
 
 # The build artifacts
-build
-coverage
+build*
+coverage/
