@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Button from '../../../components/button'
+import Button from '../../../../components/button'
 import cx from 'classnames'
 import Autosize from 'react-input-autosize'
 import Select from 'react-select'

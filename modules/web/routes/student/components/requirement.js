@@ -24,7 +24,7 @@ export function Requirement(props) {
 	const computationClassName = wasEvaluated ? props.computed ? 'result-success' : 'result-failure' : ''
 	const status = <ResultIndicator result={props.computed} />
 
-	const extraClasses = [ props.overridden ? 'overridden' : '' ]
+	const extraClasses = [props.overridden ? 'overridden' : '']
 
 	const result = props.result && (
 		<div className="result">
