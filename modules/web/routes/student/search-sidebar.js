@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import withRouter from 'react-router/lib/withRouter'
-import CourseSearcher from '../../../../modules/course-searcher/course-searcher-container'
+import CourseSearcher from '../../modules/course-searcher'
 
 function CourseSearcherSidebar(props) {
 	const { studentId } = props.params

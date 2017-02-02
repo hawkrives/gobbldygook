@@ -3,21 +3,50 @@ export default {
 
 	getIndexRoute(location, cb) {
 		require.ensure([], () => {
-			cb(null, require('./routes/course-table').default)
-		}, 'student.index')
+			cb(null, {
+				content: require('../../modules/course-table').default,
+			})
+		}, 'course-table.components')
 	},
 
 	getChildRoutes(state, cb) {
 		cb(null, [
-			require('./routes/share').default, // share, overlay
-			require('./routes/search').default, // search, sidebar
-			require('./routes/semester-detail').default, // :year/:term, content
+			{
+				path: 'search(/:year)(/:semester)',
+				getComponents(location, cb) {
+					require.ensure([], () => {
+						cb(null, {
+							sidebar: require('./search-sidebar').default,
+						})
+					}, 'search-sidebar.components')
+				},
+			},
+			{
+				path: 'share',
+				getComponents(location, cb) {
+					require.ensure([], () => {
+						cb(null, {
+							overlay: require('./share-student').default,
+						})
+					}, 'share-student.components')
+				},
+			},
+			{
+				path: 'semester/:year/:semester',
+				getComponents(location, cb) {
+					require.ensure([], () => {
+						cb(null, {
+							content: require('../../modules/semester-detail').default,
+						})
+					}, 'semester-detail.components')
+				},
+			},
 		])
 	},
 
 	getComponents(location, cb) {
 		require.ensure([], () => {
-			cb(null, { content: require('./../../modules/student').default })
+			cb(null, { content: require('../../modules/student').default })
 		}, 'student.components')
 	},
 }
