@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import StudentPicker from '../components/student-picker'
+import StudentPicker from './student-picker'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { destroyStudent } from '../../../redux/students/actions/destroy-student'
-import { loadStudents } from '../../../redux/students/actions/load-students'
+import { destroyStudent } from '../../redux/students/actions/destroy-student'
+import { loadStudents } from '../../redux/students/actions/load-students'
 
 class StudentPickerContainer extends Component {
 	static propTypes = {

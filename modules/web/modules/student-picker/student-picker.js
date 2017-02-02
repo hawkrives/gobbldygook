@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import size from 'lodash/size'
 
-import { androidSearch, funnel, androidApps, androidMenu, androidAdd } from '../../../icons/ionicons'
-import Toolbar from '../../../components/toolbar'
-import Button from '../../../components/button'
-import Icon from '../../../components/icon'
+import { androidSearch, funnel, androidApps, androidMenu, androidAdd } from '../../icons/ionicons'
+import Toolbar from '../../components/toolbar'
+import Button from '../../components/button'
+import Icon from '../../components/icon'
 import StudentList from './student-list'
 
 import './student-picker.scss'

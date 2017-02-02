@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import range from 'lodash/range'
 import map from 'lodash/map'
 
-import InlineCourse from '../../components/inline-course'
+import InlineCourse from '../course/inline-course'
 import List from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'

@@ -6,10 +6,10 @@ import flatMap from 'lodash/flatMap'
 import oxford from 'listify'
 import plur from 'plur'
 
-import Modal from './modal'
-import Separator from './separator'
-import Toolbar from './toolbar'
-import Button from './button'
+import Modal from '../../components/modal'
+import Separator from '../../components/separator'
+import Toolbar from '../../components/toolbar'
+import Button from '../../components/button'
 import CourseTitle from './course-title'
 import {
 	semesterName,
@@ -21,7 +21,7 @@ import { to12HourTime } from '../../lib'
 
 import { bindActionCreators } from 'redux'
 const { connect } = require('react-redux')
-import { addCourse, moveCourse, removeCourse } from '../redux/students/actions/courses'
+import { addCourse, moveCourse, removeCourse } from '../../redux/students/actions/courses'
 
 import './modal-course.scss'
 
