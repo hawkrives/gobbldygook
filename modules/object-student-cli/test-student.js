@@ -1,14 +1,14 @@
-import pify from 'pify'
-const fs = pify(require('graceful-fs'))
-import nom from 'nomnom'
-import path from 'path'
-
-import flatten from 'lodash/flatten'
-import junk from 'junk'
-
-import { evaluate } from '../examine-student'
-import loadStudent from '../cli/lib/load-student'
-
+// import pify from 'pify'
+// const fs = pify(require('graceful-fs'))
+// import nom from 'nomnom'
+// import path from 'path'
+//
+// import flatten from 'lodash/flatten'
+// import junk from 'junk'
+//
+// import { evaluate } from '../examine-student'
+// import loadStudent from '../cli/lib/load-student'
+//
 // function testStudent(student, mochaInstance) {
 // 	let {
 // 		areas,
