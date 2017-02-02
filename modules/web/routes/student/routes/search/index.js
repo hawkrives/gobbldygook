@@ -3,7 +3,7 @@ export default {
 	getComponents(location, cb) {
 		require.ensure([], () => {
 			cb(null, {
-				sidebar: require('./containers/search-sidebar').default,
+				sidebar: require('./search-sidebar').default,
 			})
 		}, 'search-sidebar.components')
 	},

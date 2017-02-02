@@ -3,7 +3,7 @@ export default {
 	getComponents(location, cb) {
 		require.ensure([], () => {
 			cb(null, {
-				content: require('./containers/semester-detail').default,
+				content: require('../../../../modules/semester-detail').default,
 			})
 		}, 'semester-detail.components')
 	},
