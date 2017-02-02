@@ -15,9 +15,9 @@ import {
 	buildDeptNum,
 	semesterName,
 	expandYear,
-} from 'modules/school-st-olaf-college'
+} from '../../school-st-olaf-college/course-info'
 
-import { to12HourTime } from 'modules/lib'
+import { to12HourTime } from '../../lib'
 
 import { bindActionCreators } from 'redux'
 const { connect } = require('react-redux')

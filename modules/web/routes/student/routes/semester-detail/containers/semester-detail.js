@@ -4,8 +4,8 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
 import DocumentTitle from 'react-document-title'
-import { isCurrentSemester } from 'modules/core'
-import { semesterName } from 'modules/school-st-olaf-college'
+import { isCurrentSemester } from '../../../../../../object-student/is-current-semester'
+import { semesterName } from '../../../../../../school-st-olaf-college/course-info'
 import debug from 'debug'
 const log = debug('web:react')
 

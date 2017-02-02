@@ -1,4 +1,4 @@
-import { Student, Schedule } from 'modules/object-student'
+import { Student, Schedule } from '../../object-student'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
 import forEach from 'lodash/forEach'

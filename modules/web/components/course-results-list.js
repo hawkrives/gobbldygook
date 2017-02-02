@@ -5,8 +5,8 @@ import InlineCourse from './inline-course'
 import debug from 'debug'
 const log = debug('web:react')
 
-import { compareProps } from 'modules/lib'
-import { toPrettyTerm, expandYear, semesterName } from 'modules/school-st-olaf-college'
+import { compareProps } from '../../lib'
+import { toPrettyTerm, expandYear, semesterName } from '../../school-st-olaf-college/course-info'
 
 const GROUP_BY_TO_TITLE = {
 	'Day of Week': days => days,

@@ -1,6 +1,6 @@
 import { getStudentData as getStudentDataFunc } from '../../../helpers/get-student-data'
 import { checkStudentGraduatability as checkStudentGraduatabilityFunc } from '../../../helpers/check-student-graduatability'
-import { validateSchedules as validateSchedulesFunc } from 'modules/core'
+import { validateSchedules as validateSchedulesFunc } from '../../../../object-student'
 
 import {
 	BEGIN_GET_STUDENT_DATA,

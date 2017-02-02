@@ -1,4 +1,4 @@
-import { Schedule } from 'modules/core'
+import { Schedule } from '../../../../object-student'
 
 import {
 	ADD_SCHEDULE,

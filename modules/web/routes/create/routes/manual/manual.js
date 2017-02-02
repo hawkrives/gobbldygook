@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Button from 'modules/web/components/button'
+import Button from '../../../components/button'
 import cx from 'classnames'
 import Autosize from 'react-input-autosize'
 import Select from 'react-select'
@@ -8,8 +8,8 @@ import withRouter from 'react-router/lib/withRouter'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import 'react-select/dist/react-select.css'
-import { initStudent } from 'modules/web/redux/students/actions/init-student'
-import { filterAreaList } from 'modules/core'
+import { initStudent } from '../../../../redux/students/actions/init-student'
+import { filterAreaList } from '../../../../../object-student'
 
 import './manual.scss'
 

@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react'
 import map from 'lodash/map'
-import { pluralizeArea } from 'modules/examine-student'
+import { pluralizeArea } from '../../../../examine-student/pluralize-area'
 import capitalize from 'lodash/capitalize'
-import { areaTypeConstants } from 'modules/core'
+import { areaTypeConstants } from '../../../../object-student/area-types'
 import values from 'lodash/values'
 
 import AreaOfStudy from './area-of-study'
 import AreaPicker from './area-picker'
-import Button from 'modules/web/components/button'
+import Button from '../../../components/button'
 
 import './area-of-study-group.scss'
 

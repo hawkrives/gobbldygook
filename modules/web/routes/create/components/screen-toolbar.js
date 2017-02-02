@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
-import Button from 'modules/web/components/button'
-import Toolbar from 'modules/web/components/toolbar'
+import Button from '../../../components/button'
+import Toolbar from '../../../components/toolbar'
 
 export default function ScreenToolbar({ onNext, onBack }) {
 	return (

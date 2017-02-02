@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { findWordForProgress } from 'modules/lib'
+import { findWordForProgress } from '../../lib'
 
 import './progress-bar.scss'
 

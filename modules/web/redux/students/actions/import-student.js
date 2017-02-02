@@ -1,4 +1,4 @@
-import { Student } from 'modules/core'
+import { Student } from '../../../../object-student'
 
 import {
 	IMPORT_STUDENT,

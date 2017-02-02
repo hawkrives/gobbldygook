@@ -8,9 +8,8 @@ import ordinal from 'ord'
 import oxford from 'listify'
 import plur from 'plur'
 import { findScheduleTimeConflicts } from 'sto-sis-time-parser'
-// import {expandYear, semesterName} from 'modules/school-st-olaf-college'
-import { expandYear, semesterName } from 'modules/school-st-olaf-college/course-info'
-// import {alertCircled, iosCalendarOutline, iosClockOutline} from 'modules/web/icons/ionicons'
+import { expandYear, semesterName } from '../school-st-olaf-college/course-info'
+// import {alertCircled, iosCalendarOutline, iosClockOutline} from '../web/icons/ionicons'
 
 export function checkForInvalidYear(course, scheduleYear) {
 	let thisYear = new Date().getFullYear()

@@ -4,7 +4,7 @@ import mapKeys from 'lodash/mapKeys'
 import unzip from 'lodash/unzip'
 import filter from 'lodash/filter'
 import { selectAll, selectOne } from 'css-select'
-import { partitionByIndex } from 'modules/lib'
+import { partitionByIndex } from '../../../lib'
 import { getText } from './lib'
 
 function extractInformationFromInfoTable(table) {

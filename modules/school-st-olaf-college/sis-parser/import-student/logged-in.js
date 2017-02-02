@@ -1,4 +1,4 @@
-import { AuthError } from 'modules/lib'
+import { AuthError } from '../../../lib'
 import { extractStudentIds } from './student-ids'
 import { COURSES_URL } from './urls'
 import { fetchHtml, getText } from './lib'

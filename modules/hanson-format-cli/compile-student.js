@@ -3,7 +3,7 @@
 const nom = require('nomnom')
 const fs = require('graceful-fs')
 const yaml = require('js-yaml')
-const enhanceHanson = require('modules/hanson-format').enhanceHanson
+const enhanceHanson = require('../hanson-format').enhanceHanson
 
 function compileStudent(args, data) {
 	let obj = yaml.safeLoad(data)

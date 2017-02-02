@@ -1,6 +1,6 @@
 import pify from 'pify'
 import yaml from 'js-yaml'
-import { enhance } from 'modules/hanson-format'
+import { enhanceHanson as enhance } from '../../hanson-format'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import find from 'lodash/find'
