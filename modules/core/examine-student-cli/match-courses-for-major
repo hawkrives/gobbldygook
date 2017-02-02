@@ -24,5 +24,5 @@ const courses = JSON.parse(fs.readFileSync(args.courses, 'utf-8')).map(c => {
 })
 const area = JSON.parse(fs.readFileSync(args.area, 'utf-8'))
 
-require('./lib/init')
+require('./../../cli/lib/init')
 require('./match-courses-for-major.js').cli({courses, area})

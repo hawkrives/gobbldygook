@@ -4,7 +4,7 @@
  */
 
 import nomnom from 'nomnom'
-import search from './lib/search-for-courses'
+import search from '../../cli/lib/search-for-courses'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import fromPairs from 'lodash/fromPairs'

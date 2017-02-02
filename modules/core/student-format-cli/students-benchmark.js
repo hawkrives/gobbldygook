@@ -1,5 +1,5 @@
 import fs from 'graceful-fs'
-import { evaluate } from 'modules/core/examine-student'
+import { evaluate } from '../examine-student'
 import endsWith from 'lodash/endsWith'
 import junk from 'junk'
 import nom from 'nomnom'
@@ -7,7 +7,7 @@ import ms from 'pretty-ms'
 import range from 'lodash/range'
 import sparkly from 'sparkly'
 import mean from 'lodash/mean'
-import loadArea from './lib/load-area'
+import loadArea from '../../cli/lib/load-area'
 
 function now(other=[]) {
 	let time = process.hrtime(other)

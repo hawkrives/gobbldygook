@@ -1,4 +1,0 @@
-#!/usr/bin/env node
-
-require('./lib/init')
-require('./olaf-convert-semi-to-json.js')

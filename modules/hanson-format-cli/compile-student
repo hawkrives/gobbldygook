@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-require('./lib/init')
+require('./../cli/lib/init')
 require('./compile-student.js').cli()

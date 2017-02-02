@@ -1,4 +1,4 @@
-import buildQuery from '../src/helpers/build-query-from-string'
+import { buildQueryFromString } from '../search-queries/build-query-from-string'
 import nom from 'nomnom'
 import stringify from 'stabilize'
 import yaml from 'js-yaml'
@@ -10,7 +10,7 @@ export function cli() {
 		.option('query', { position: 0, required: true })
 		.parse()
 
-	const query = buildQuery(args.query)
+	const query = buildQueryFromString(args.query)
 
 	if (args.json) {
 		console.log(stringify(query, { space: 4 }))

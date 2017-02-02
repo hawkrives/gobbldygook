@@ -9,7 +9,7 @@ import flatten from 'lodash/flatten'
 import junk from 'junk'
 
 import { evaluate } from 'modules/core/examine-student'
-import loadStudent from './lib/load-student'
+import loadStudent from '../../cli/lib/load-student'
 
 function testStudent(student, mochaInstance) {
 	let {
