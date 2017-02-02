@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 
-import { addSchedule, destroySchedules } from '../../../../../redux/students/actions/schedules'
-import { findFirstAvailableYear } from '../../../../../helpers/find-first-available-year'
-import { findFirstAvailableSemester } from '../../../../../helpers/find-first-available-semester'
+import { addSchedule, destroySchedules } from '../../redux/students/actions/schedules'
+import { findFirstAvailableYear } from '../../helpers/find-first-available-year'
+import { findFirstAvailableSemester } from '../../helpers/find-first-available-semester'
 
-import CourseTable from '../components/course-table'
+import CourseTable from './course-table'
 
 const addYear = (addSchedule, student) => {
 	addSchedule(student.id, {

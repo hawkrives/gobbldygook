@@ -2,7 +2,7 @@ export default {
 	getComponents(location, cb) {
 		require.ensure([], () => {
 			cb(null, {
-				content: require('./containers/course-table').default,
+				content: require('../../../../modules/course-table').default,
 			})
 		}, 'course-table.components')
 	},

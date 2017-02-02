@@ -3,11 +3,11 @@ import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 import map from 'lodash/map'
 
-import Button from '../../../../../components/button'
-import Semester from '../containers/semester'
+import Button from '../../components/button'
+import Semester from '../../routes/student/routes/course-table/containers/semester'
 
-import { findFirstAvailableSemester } from '../../../../../helpers/find-first-available-semester'
-import { expandYear, semesterName } from '../../../../../../school-st-olaf-college/course-info'
+import { findFirstAvailableSemester } from '../../helpers/find-first-available-semester'
+import { expandYear, semesterName } from '../../../school-st-olaf-college/course-info'
 
 import './year.scss'
 
