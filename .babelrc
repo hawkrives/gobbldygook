@@ -20,11 +20,6 @@
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		// "lodash",
-		["module-resolver", {
-			"alias": {
-				"modules": "./modules",
-			},
-		}],
 	],
 	"env": {
 		"production": {
@@ -40,11 +35,6 @@
 			"plugins": [
 				"transform-class-properties",
 				"transform-object-rest-spread",
-				["module-resolver", {
-					"alias": {
-						"modules": "./modules",
-					},
-				}],
 			],
 		},
 	},
