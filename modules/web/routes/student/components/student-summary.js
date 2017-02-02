@@ -10,7 +10,7 @@ import AvatarLetter from 'modules/web/components/avatar-letter'
 import ContentEditable from 'modules/web/components/content-editable'
 
 import { getActiveStudentCourses } from 'modules/web/helpers/get-active-student-courses'
-import { countCredits } from 'modules/core/examine-student'
+import { countCredits } from 'modules/examine-student'
 
 import './student-summary.scss'
 

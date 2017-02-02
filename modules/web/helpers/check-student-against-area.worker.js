@@ -6,7 +6,7 @@ import round from 'lodash/round'
 import present from 'present'
 
 import { stringifyError } from 'modules/lib'
-import { evaluate } from 'modules/core/examine-student'
+import { evaluate } from 'modules/examine-student'
 import { getActiveStudentCourses } from './get-active-student-courses'
 import { alterCourse } from './alter-course-for-evaluation'
 import debug from 'debug'

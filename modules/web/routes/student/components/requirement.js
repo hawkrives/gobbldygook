@@ -3,7 +3,7 @@ import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 
-import { isRequirementName } from 'modules/core/examine-student'
+import { isRequirementName } from 'modules/examine-student'
 
 import Icon from 'modules/web/components/icon'
 import { iosBoltOutline, iosBolt } from 'modules/web/icons/ionicons'

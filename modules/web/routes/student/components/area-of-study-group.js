@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import map from 'lodash/map'
-import { pluralizeArea } from 'modules/core/examine-student'
+import { pluralizeArea } from 'modules/examine-student'
 import capitalize from 'lodash/capitalize'
 import { areaTypeConstants } from 'modules/core'
 import values from 'lodash/values'

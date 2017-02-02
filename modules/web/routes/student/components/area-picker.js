@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import fuzzysearch from 'fuzzysearch'
-import { pluralizeArea } from 'modules/core/examine-student'
+import { pluralizeArea } from 'modules/examine-student'
 import map from 'lodash/map'
 import reject from 'lodash/reject'
 import filter from 'lodash/filter'

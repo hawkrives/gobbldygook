@@ -6,7 +6,7 @@ import ResultIndicator from './result-indicator'
 import has from 'lodash/has'
 import map from 'lodash/map'
 import plur from 'plur'
-import { humanizeOperator } from 'modules/core/examine-student'
+import { humanizeOperator } from 'modules/examine-student'
 import debug from 'debug'
 const log = debug('web:react')
 
