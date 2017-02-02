@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import cx from 'classnames'
-import { expandYear } from 'modules/schools/stolaf'
+import { expandYear } from 'modules/school-st-olaf-college'
 
 import { findFirstAvailableYear } from 'modules/web/helpers/find-first-available-year'
 import map from 'lodash/map'

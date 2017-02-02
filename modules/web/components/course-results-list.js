@@ -6,7 +6,7 @@ import debug from 'debug'
 const log = debug('web:react')
 
 import { compareProps } from 'modules/lib'
-import { toPrettyTerm, expandYear, semesterName } from 'modules/schools/stolaf'
+import { toPrettyTerm, expandYear, semesterName } from 'modules/school-st-olaf-college'
 
 const GROUP_BY_TO_TITLE = {
 	'Day of Week': days => days,

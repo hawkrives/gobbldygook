@@ -20,7 +20,7 @@ import present from 'present'
 import yaml from 'js-yaml'
 
 import db from './db'
-import { buildDeptString, buildDeptNum } from 'modules/schools/stolaf/deptnums'
+import { buildDeptString, buildDeptNum } from 'modules/school-st-olaf-college/deptnums'
 import { splitParagraph } from 'modules/lib/split-paragraph'
 import { convertTimeStringsToOfferings } from 'sto-sis-time-parser'
 

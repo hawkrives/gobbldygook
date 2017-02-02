@@ -15,7 +15,7 @@ import {
 	buildDeptNum,
 	semesterName,
 	expandYear,
-} from 'modules/schools/stolaf'
+} from 'modules/school-st-olaf-college'
 
 import { to12HourTime } from 'modules/lib'
 

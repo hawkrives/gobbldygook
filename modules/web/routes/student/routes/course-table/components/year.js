@@ -7,7 +7,7 @@ import Button from 'modules/web/components/button'
 import Semester from '../containers/semester'
 
 import { findFirstAvailableSemester } from 'modules/web/helpers/find-first-available-semester'
-import { expandYear, semesterName } from 'modules/schools/stolaf'
+import { expandYear, semesterName } from 'modules/school-st-olaf-college'
 
 import './year.scss'
 

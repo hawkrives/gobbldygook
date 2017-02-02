@@ -13,7 +13,7 @@ import {
 	quacksLikeDeptNum,
 	splitDeptNum,
 	buildDeptNum,
-} from 'modules/schools/stolaf/deptnums'
+} from 'modules/school-st-olaf-college/deptnums'
 
 import {
 	partitionByIndex,

@@ -8,7 +8,7 @@ import {
 	ExtensionTooOldError,
 	convertStudent,
 	semesterName,
-} from 'modules/schools/stolaf'
+} from 'modules/school-st-olaf-college'
 import { BrowserExtensionsComponent } from 'modules/web/components/browser-extensions'
 import { getCourse } from 'modules/web/helpers/get-courses'
 import StudentSummary from 'modules/web/routes/student/components/student-summary'

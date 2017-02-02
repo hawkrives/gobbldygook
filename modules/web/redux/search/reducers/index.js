@@ -24,7 +24,7 @@ import present from 'present'
 import debug from 'debug'
 const log = debug('web:redux:search')
 
-import { buildDeptString } from 'modules/schools/stolaf'
+import { buildDeptString } from 'modules/school-st-olaf-college'
 import { to12HourTime } from 'modules/lib'
 const REVERSE_ORDER = [ 'Year', 'Term', 'Semester' ]
 

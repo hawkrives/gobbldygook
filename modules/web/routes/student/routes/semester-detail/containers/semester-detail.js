@@ -5,7 +5,7 @@ import filter from 'lodash/filter'
 import omit from 'lodash/omit'
 import DocumentTitle from 'react-document-title'
 import { isCurrentSemester } from 'modules/core'
-import { semesterName } from 'modules/schools/stolaf'
+import { semesterName } from 'modules/school-st-olaf-college'
 import debug from 'debug'
 const log = debug('web:react')
 
