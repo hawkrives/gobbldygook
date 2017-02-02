@@ -29,6 +29,7 @@ const entries = {
 	bfr: 'buffer',
 	hanson: './modules/hanson-format',
 	common: [
+		'classnames',
 		'debug',
 		'delay',
 		'listify',
@@ -46,17 +47,18 @@ const entries = {
 		'whatwg-fetch',
 	],
 	react: [
-		'classnames',
-		'dnd-core',
-		'history',
 		'react',
-		'react-dnd',
-		'react-dnd-html5-backend',
 		'react-dom',
+		'react-router',
+		'history',
+	],
+	reactCommon: [
 		'react-modal',
 		'react-redux',
-		'react-router',
 		'react-side-effect',
+		'dnd-core',
+		'react-dnd',
+		'react-dnd-html5-backend',
 	],
 	yaml: ['js-yaml'],
 	idb: ['treo', 'idb-range', 'idb-request'],
@@ -74,6 +76,7 @@ const bundleNames = [
 	'idb',
 	'hanson',
 	'bfr',
+	'reactCommon',
 ]
 
 const allBundleNames = Object.keys(entries)
