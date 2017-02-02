@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ScreenToolbar from '../../components/screen-toolbar'
+import ScreenToolbar from './screen-toolbar'
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class DriveLinkScreen extends Component {

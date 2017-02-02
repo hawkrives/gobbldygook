@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import serializeError from 'serialize-error'
-import Button from '../../../../components/button'
+import Button from '../../components/button'
 import {
 	getStudentInfo,
 	checkIfLoggedIn,
@@ -9,14 +9,14 @@ import {
 	convertStudent,
 	semesterName,
 } from '../../../../../school-st-olaf-college'
-import { BrowserExtensionsComponent } from '../../../../components/browser-extensions'
-import { getCourse } from '../../../../helpers/get-courses'
-import StudentSummary from '../../../../modules/student/student-summary'
+import { BrowserExtensionsComponent } from '../../components/browser-extensions'
+import { getCourse } from '../../helpers/get-courses'
+import StudentSummary from '../../modules/student/student-summary'
 import map from 'lodash/map'
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
 import { RadioGroup, Radio } from 'react-radio-group'
-import { initStudent } from '../../../../redux/students/actions/init-student'
+import { initStudent } from '../../redux/students/actions/init-student'
 import { connect } from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
 import './sis-import.scss'
