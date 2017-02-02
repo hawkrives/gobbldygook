@@ -14,7 +14,7 @@ import {
 	GROUP_RESULTS,
 	CLEAR_RESULTS,
 	SET_PARTIAL_QUERY,
-} from '../constants'
+} from './constants'
 
 export function updateQuery(newQuery) {
 	return { type: UPDATE_QUERY, payload: newQuery }

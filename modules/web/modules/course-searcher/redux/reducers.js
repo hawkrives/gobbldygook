@@ -6,12 +6,12 @@ import {
 	GROUP_RESULTS,
 	CLEAR_RESULTS,
 	SET_PARTIAL_QUERY,
-} from '../constants'
+} from './constants'
 
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
 
-import { SORT_BY, GROUP_BY } from '../../../components/course-searcher-options'
+import { SORT_BY, GROUP_BY } from '../../../modules/course-searcher/course-searcher-options'
 
 import includes from 'lodash/includes'
 import uniq from 'lodash/uniq'

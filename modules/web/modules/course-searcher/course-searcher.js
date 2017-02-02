@@ -4,11 +4,11 @@ import React from 'react'
 import map from 'lodash/map'
 import { toPrettyTerm } from '../../school-st-olaf-college'
 
-import Button from './button'
-import Icon from './icon'
-import Loading from './loading'
+import Button from '../../components/button'
+import Icon from '../../components/icon'
+import Loading from '../../components/loading'
 import CourseResultsList from './course-results-list'
-import { androidArrowForward } from '../icons/ionicons'
+import { androidArrowForward } from '../../icons/ionicons'
 
 import { SORT_BY, GROUP_BY } from './course-searcher-options'
 
