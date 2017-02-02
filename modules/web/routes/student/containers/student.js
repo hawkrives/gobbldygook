@@ -7,7 +7,7 @@ import { loadStudent } from '../../../redux/students/actions/load-student'
 import Sidebar from '../../../containers/sidebar'
 import Loading from '../../../components/loading'
 
-import CourseTable from '../routes/course-table/containers/course-table'
+import CourseTable from '../../../modules/course-table'
 import GraduationStatus from './graduation-status'
 
 import './student.scss'

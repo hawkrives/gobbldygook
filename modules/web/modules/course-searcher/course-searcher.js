@@ -2,7 +2,7 @@
 import React from 'react'
 
 import map from 'lodash/map'
-import { toPrettyTerm } from '../../school-st-olaf-college'
+import { toPrettyTerm } from '../../../school-st-olaf-college'
 
 import Button from '../../components/button'
 import Icon from '../../components/icon'

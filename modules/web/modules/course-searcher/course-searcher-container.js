@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { compareProps } from '../../lib'
+import { compareProps } from '../../../lib'
 import CourseSearcher from './course-searcher'
 
-import { groupResults, sortResults, submitQuery, updateQuery, setPartialQuery } from './search/actions'
+import { groupResults, sortResults, submitQuery, updateQuery, setPartialQuery } from './redux/actions'
 
 export class CourseSearcherContainer extends Component {
 	static propTypes = {
