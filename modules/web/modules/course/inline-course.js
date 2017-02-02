@@ -10,7 +10,7 @@ import { IDENT_COURSE } from '../../../object-student/item-types'
 
 import List from '../../components/list'
 import CourseTitle from './course-title'
-import { buildDeptNum } from '../../school-st-olaf-college/deptnums'
+import { buildDeptNum } from '../../../school-st-olaf-college/deptnums'
 import Icon from '../../components/icon'
 import ModalCourse from './modal-course'
 

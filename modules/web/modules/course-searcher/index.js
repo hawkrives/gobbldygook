@@ -1,1 +1,1 @@
-export {default} from './course-searcher-container'
+export { default } from './course-searcher-container'

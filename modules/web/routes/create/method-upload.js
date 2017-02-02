@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import debug from 'debug'
 const log = debug('web:react')
 
-import './upload-file.scss'
+import './method-upload.scss'
 
 class UploadFileScreen extends Component {
 	static propTypes = {

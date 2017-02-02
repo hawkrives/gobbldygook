@@ -11,13 +11,10 @@ import Separator from '../../components/separator'
 import Toolbar from '../../components/toolbar'
 import Button from '../../components/button'
 import CourseTitle from './course-title'
-import {
-	semesterName,
-	expandYear,
-} from '../../school-st-olaf-college/course-info'
-import { buildDeptNum } from '../../school-st-olaf-college/deptnums'
+import { semesterName, expandYear } from '../../../school-st-olaf-college/course-info'
+import { buildDeptNum } from '../../../school-st-olaf-college/deptnums'
 
-import { to12HourTime } from '../../lib'
+import { to12HourTime } from '../../../lib'
 
 import { bindActionCreators } from 'redux'
 const { connect } = require('react-redux')
