@@ -10,7 +10,7 @@ import {
 	getIdCache,
 	setIdCache,
 } from '../save-student'
-import demoStudent from 'modules/core/student-format/demo-student.json'
+import demoStudent from 'modules/object-student/demo-student.json'
 
 const student = cloneDeep(demoStudent)
 student.id = uuid()

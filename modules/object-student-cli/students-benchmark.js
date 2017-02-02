@@ -7,7 +7,7 @@ import ms from 'pretty-ms'
 import range from 'lodash/range'
 import sparkly from 'sparkly'
 import mean from 'lodash/mean'
-import loadArea from '../../cli/lib/load-area'
+import loadArea from '../cli/lib/load-area'
 
 function now(other=[]) {
 	let time = process.hrtime(other)

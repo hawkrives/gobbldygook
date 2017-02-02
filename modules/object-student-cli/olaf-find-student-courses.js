@@ -3,10 +3,10 @@
 
 import nomnom from 'nomnom'
 
-import { loadYamlFile } from '../../cli/lib/read-file'
-import populateCourses from '../../cli/lib/populate-courses'
+import { loadYamlFile } from '../cli/lib/read-file'
+import populateCourses from '../cli/lib/populate-courses'
 import { simplifyCourse, evaluate } from '../examine-student'
-import loadArea from '../../cli/lib/load-area'
+import loadArea from '../cli/lib/load-area'
 import uniqBy from 'lodash/uniqBy'
 import flatten from 'lodash/flatten'
 import reject from 'lodash/reject'
