@@ -1,2 +1,2 @@
 ---
-extends: ../../cli/.eslintrc.yml
+extends: ../cli/.eslintrc.yml
