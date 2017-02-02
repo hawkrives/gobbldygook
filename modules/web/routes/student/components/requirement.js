@@ -3,7 +3,7 @@ import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 
-import { isRequirementName } from '../../../../examine-student/is-requirement-name'
+import isRequirementName from '../../../../examine-student/is-requirement-name'
 
 import Icon from '../../../components/icon'
 import { iosBoltOutline, iosBolt } from '../../../icons/ionicons'

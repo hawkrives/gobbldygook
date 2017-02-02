@@ -12,10 +12,10 @@ import Toolbar from './toolbar'
 import Button from './button'
 import CourseTitle from './course-title'
 import {
-	buildDeptNum,
 	semesterName,
 	expandYear,
 } from '../../school-st-olaf-college/course-info'
+import { buildDeptNum } from '../../school-st-olaf-college/deptnums'
 
 import { to12HourTime } from '../../lib'
 

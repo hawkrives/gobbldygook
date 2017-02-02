@@ -10,7 +10,7 @@ import { IDENT_COURSE } from '../../object-student/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'
-import { buildDeptNum } from '../../school-st-olaf-college/course-info'
+import { buildDeptNum } from '../../school-st-olaf-college/deptnums'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 
