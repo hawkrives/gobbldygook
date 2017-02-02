@@ -24,8 +24,7 @@ import { buildDeptString, buildDeptNum } from 'modules/schools/stolaf/deptnums'
 import { splitParagraph } from 'modules/lib/split-paragraph'
 import { convertTimeStringsToOfferings } from 'sto-sis-time-parser'
 
-import debug from 'debug'
-const log = debug('worker:load-data')
+const log = (...args) => console.log('worker:load-data', ...args)
 
 
 function dispatch(type, action, ...args) {

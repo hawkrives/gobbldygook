@@ -9,8 +9,8 @@ import { stringifyError } from 'modules/lib'
 import { evaluate } from 'modules/core/examine-student'
 import { getActiveStudentCourses } from './get-active-student-courses'
 import { alterCourse } from './alter-course-for-evaluation'
-import debug from 'debug'
-const log = debug('worker:check-student-against-area')
+
+const log = (...args) => console.log('worker:check-student-against-area', ...args)
 
 function tryEvaluate(student, area) {
 	try {
