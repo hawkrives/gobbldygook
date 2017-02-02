@@ -102,7 +102,7 @@ describe('checkCourseAgainstQuery', () => {
 			dept: [ '$AND', 'CHEM', 'BIO' ],
 		}
 		let course = {
-			dept: ['BIO', 'CHEM'],
+			dept: [ 'BIO', 'CHEM' ],
 		}
 
 		expect(checkCourseAgainstQuery(query, course)).toBe(true)

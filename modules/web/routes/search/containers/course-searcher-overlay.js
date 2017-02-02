@@ -9,7 +9,7 @@ function CourseSearcherOverlay(props) {
 	const boundCloseModal = () => props.router.push({ pathname: '/' })
 
 	return (
-		<Modal onClose={boundCloseModal} contentLabel='Search'>
+		<Modal onClose={boundCloseModal} contentLabel="Search">
 			<CourseSearcher closeSearcher={boundCloseModal} />
 		</Modal>
 	)
