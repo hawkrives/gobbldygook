@@ -6,11 +6,11 @@ import filter from 'lodash/filter'
 import map from 'lodash/map'
 import sample from 'lodash/sample'
 
-import AvatarLetter from '../../../components/avatar-letter'
-import ContentEditable from '../../../components/content-editable'
+import AvatarLetter from '../../components/avatar-letter'
+import ContentEditable from '../../components/content-editable'
 
-import { getActiveStudentCourses } from '../../../helpers/get-active-student-courses'
-import { countCredits } from '../../../../examine-student/count-credits'
+import { getActiveStudentCourses } from '../../helpers/get-active-student-courses'
+import { countCredits } from '../../../examine-student/count-credits'
 
 import './student-summary.scss'
 

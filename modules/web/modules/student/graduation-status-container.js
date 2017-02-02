@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import has from 'lodash/has'
-import pathToOverride from '../../../../examine-student/path-to-override'
+import pathToOverride from '../../../examine-student/path-to-override'
 
-import { changeName, changeMatriculation, changeGraduation } from '../../../redux/students/actions/change'
-import { addArea, removeArea } from '../../../redux/students/actions/areas'
-import { setOverride, removeOverride } from '../../../redux/students/actions/overrides'
-import GraduationStatus from '../components/graduation-status'
+import { changeName, changeMatriculation, changeGraduation } from '../../redux/students/actions/change'
+import { addArea, removeArea } from '../../redux/students/actions/areas'
+import { setOverride, removeOverride } from '../../redux/students/actions/overrides'
+import GraduationStatus from './graduation-status'
 
 class GraduationStatusContainer extends Component {
 	static propTypes = {

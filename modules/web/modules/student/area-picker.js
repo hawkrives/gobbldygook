@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import fuzzysearch from 'fuzzysearch'
-import pluralizeArea from '../../../../examine-student/pluralize-area'
+import pluralizeArea from '../../../examine-student/pluralize-area'
 import map from 'lodash/map'
 import reject from 'lodash/reject'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
-import { filterAreaList } from '../../../../object-student/filter-area-list'
+import { filterAreaList } from '../../../object-student/filter-area-list'
 
-import Button from '../../../components/button'
-import List from '../../../components/list'
-import Toolbar from '../../../components/toolbar'
+import Button from '../../components/button'
+import List from '../../components/list'
+import Toolbar from '../../components/toolbar'
 
 import './area-picker.scss'
 

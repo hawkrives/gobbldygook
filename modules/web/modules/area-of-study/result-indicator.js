@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import Icon from '../../../components/icon'
-import { checkmark, close } from '../../../icons/ionicons'
+import Icon from '../../components/icon'
+import { checkmark, close } from '../../icons/ionicons'
 
 export default function ResultIndicator({ result }) {
 	return <Icon className={`result-indicator ${result ? 'result-indicator--success' : 'result-indicator--failure'}`}>
