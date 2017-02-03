@@ -10,7 +10,7 @@ import { evaluate } from '../../examine-student/evaluate'
 import { getActiveStudentCourses } from './get-active-student-courses'
 import { alterCourse } from './alter-course-for-evaluation'
 
-const log = (...args) => console.log('worker:check-student-against-area', ...args)
+const log = (...args) => args.length && console.log('worker:check-student-against-area', ...args)
 
 function tryEvaluate(student, area) {
 	try {

@@ -24,7 +24,7 @@ import { buildDeptString, buildDeptNum } from '../../school-st-olaf-college/dept
 import { splitParagraph } from '../../lib/split-paragraph'
 import { convertTimeStringsToOfferings } from 'sto-sis-time-parser'
 
-const log = (...args) => console.log('worker:load-data', ...args)
+const log = (...args) => args.length && console.log('worker:load-data', ...args)
 
 
 function dispatch(type, action, ...args) {
@@ -278,8 +278,11 @@ function loadFiles(url, infoFileBase) {
 
 		// Exit early if nothing needs to happen
 		if (filesToLoad.length === 0) {
+			log(`[${type}] no files need loading`)
 			return true
 		}
+
+		log(`[${type}] these files need loading:`, ...filesNeedLoading)
 
 		// Fire off the progress bar
 		dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, { max: size(filesToLoad), showButton: true })
@@ -294,8 +297,12 @@ function loadFiles(url, infoFileBase) {
 		if (type === 'areas') {
 			return removeDuplicateAreas()
 		}
+	}, err => {
+		throw err
 	})
 	.then(() => {
+		log(`[${type}] done loading`)
+
 		// Remove the progress bar after 1.5 seconds
 		dispatch('notifications', 'removeNotification', notificationId, 1500)
 		if (type === 'courses') {
@@ -319,24 +326,16 @@ function checkIdbInWorkerSupport() {
 const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
 self.addEventListener('message', ({ data }) => {
 	const [id, ...args] = data
-	log('[load-data] received message:', args)
+	log('[load-data] received message:', ...args)
 
 	if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
 		checkIdbInWorkerSupport()
-			.then(result => {
-				self.postMessage([id, 'result', result])
-			})
-			.catch(err => {
-				self.postMessage([id, 'error', serializeError(err)])
-			})
+			.then(result => self.postMessage([id, 'result', result]))
+			.catch(err => self.postMessage([id, 'error', serializeError(err)]))
+		return
 	}
-	else {
-		loadFiles(...args)
-			.then(result => {
-				self.postMessage([id, 'result', result])
-			})
-			.catch(err => {
-				self.postMessage([id, 'error', serializeError(err)])
-			})
-	}
+
+	loadFiles(...args)
+		.then(result => self.postMessage([id, 'result', result]))
+		.catch(err => self.postMessage([id, 'error', serializeError(err)]))
 })
