@@ -3,9 +3,14 @@
 		// JSX, Flow
 		"react",
 		// Latest stable ECMAScript features
-		["env", {"targets": {
-			"browsers": "last 2 versions, Android > 7, Explorer > 12, Firefox ESR, Safari 10, iOS 10.1, ExplorerMobile > 12",
-		}, "modules": false}],
+		["env", {
+			"targets": {
+				"ie": 12,
+				"browsers": "last 2 versions, Firefox ESR",
+			},
+			"modules": false,
+			"debug": true,
+		}],
 	],
 	"plugins": [
 		"transform-class-properties",
@@ -26,7 +31,12 @@
 			],
 		},
 		"test": {
-			"presets": [["env", {"targets": {"node": true}, "modules": "commonjs"}]],
+			"presets": [
+				["env", {
+					"targets": {"node": true},
+					"modules": "commonjs",
+				}]
+			],
 		},
 	},
 }
