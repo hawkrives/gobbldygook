@@ -33,7 +33,7 @@ describe('Schedule', () => {
 			semester: 3,
 			index: 2,
 			title: 'My Schedule',
-			clbids: [ 123, 234, 345 ],
+			clbids: [123, 234, 345],
 		})
 		expect(sched).toMatchSnapshot()
 		expect(sched.id).toBe('1')
@@ -43,7 +43,7 @@ describe('Schedule', () => {
 		expect(sched.index).toBe(2)
 		expect(sched.title).toBe('My Schedule')
 		expect(Array.isArray(sched.clbids)).toBe(true)
-		expect(sched.clbids).toEqual([ 123, 234, 345 ])
+		expect(sched.clbids).toEqual([123, 234, 345])
 	})
 
 	it('can turn into JSON', () => {

@@ -30,6 +30,6 @@ export function alterCourse(course) {
 	})
 
 	let pairs = toPairs(course)
-	pairs = filter(pairs, ([ key ]) => includes(whitelist, key))
+	pairs = filter(pairs, ([key]) => includes(whitelist, key))
 	return fromPairs(pairs)
 }

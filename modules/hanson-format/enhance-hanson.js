@@ -17,9 +17,9 @@ const none = (arr, pred) => !some(arr, pred)
 const quote = str => `"${str}"`
 const quoteAndJoin = list => list.map(quote).join(', ')
 
-const baseWhitelist = [ 'result', 'message', 'declare', 'children share courses' ]
-const topLevelWhitelist = baseWhitelist.concat([ 'name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error' ])
-const lowerLevelWhitelist = baseWhitelist.concat([ 'filter', 'message', 'description', 'student selected', 'contract' ])
+const baseWhitelist = ['result', 'message', 'declare', 'children share courses']
+const topLevelWhitelist = baseWhitelist.concat(['name', 'revision', 'type', 'sourcePath', 'slug', 'source', 'dateAdded', 'available through', '_error'])
+const lowerLevelWhitelist = baseWhitelist.concat(['filter', 'message', 'description', 'student selected', 'contract'])
 
 const startRules = {
 	'result': 'Result',
@@ -41,7 +41,7 @@ export function enhanceHanson(data: any, { topLevel=true, declaredVariables={} }
 	// Ensure that a result, message, or filter key exists.
 	// If filter's the only one, it's going to filter the list of courses
 	// available to the child requirements when this is evaluated.
-	const oneOfTheseKeysMustExist = [ 'result', 'message', 'filter' ]
+	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
 	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
 		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
 		let existingKeys = quoteAndJoin(keys(data))
@@ -75,8 +75,8 @@ export function enhanceHanson(data: any, { topLevel=true, declaredVariables={} }
 	// Studies (BTS-B)"), we need a method of splitting those apart so the
 	// PEG's ReferenceExpression can correctly reference them.
 	const requirements = filter(keys(data), isRequirementName)
-	const abbreviations = fromPairs(map(requirements, req => [ req.replace(requirementNameRegex, '$2'), req ]))
-	const titles = fromPairs(map(requirements, req => [ req.replace(requirementNameRegex, '$1'), req ]))
+	const abbreviations = fromPairs(map(requirements, req => [req.replace(requirementNameRegex, '$2'), req]))
+	const titles = fromPairs(map(requirements, req => [req.replace(requirementNameRegex, '$1'), req]))
 
 	// (Variables)
 	// We load the list of variables with the keys listed in the `declare` key

@@ -117,8 +117,8 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						disabled={inProgress}
 					>
 						{inProgress
-							? [ <span key="msg">Searching…</span> ]
-							: [ <span key="msg">Search </span>, <Icon key="icon">{androidArrowForward}</Icon> ]}
+							? [<span key="msg">Searching…</span>]
+							: [<span key="msg">Search </span>, <Icon key="icon">{androidArrowForward}</Icon>]}
 					</Button>
 				</div>
 				{hasQueried &&

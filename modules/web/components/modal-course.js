@@ -30,7 +30,7 @@ function findSemesterList(student) {
 		...s, title: `${semesterName(s.semester)} – ${s.title}`,
 	}))
 
-	let sorted = sortBy(schedules, [ 'year', 'semester' ])
+	let sorted = sortBy(schedules, ['year', 'semester'])
 	let byYear = groupBy(sorted, 'year')
 
 	return byYear

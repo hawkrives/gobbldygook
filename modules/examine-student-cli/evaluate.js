@@ -23,9 +23,9 @@ function condenseCourse(course) {
 
 function summarize(requirement, name, path, depth=0) {
 	let prose = ''
-	const subReqs = filter(toPairs(requirement), ([ k, _ ]) => isRequirementName(k))
+	const subReqs = filter(toPairs(requirement), ([k, _]) => isRequirementName(k))
 	if (subReqs.length) {
-		prose = '\n' + map(subReqs, ([ k, v ]) => {
+		prose = '\n' + map(subReqs, ([k, v]) => {
 			return summarize(v, k, path.concat(k), depth + 1)
 		}).join('\n')
 	}
@@ -219,8 +219,8 @@ function proseify(requirement, name, path, depth=0) {
 	let prose = ''
 	const hasChildren = some(keys(requirement), isRequirementName)
 	if (hasChildren) {
-		const subReqs = filter(toPairs(requirement), ([ k, _ ]) => isRequirementName(k))
-		prose = map(subReqs, ([ k, v ]) => {
+		const subReqs = filter(toPairs(requirement), ([k, _]) => isRequirementName(k))
+		prose = map(subReqs, ([k, v]) => {
 			return proseify(v, k, path.concat(k), depth + 1)
 		}).join('\n')
 	}
@@ -249,7 +249,7 @@ const checkAgainstArea = ({ courses, overrides }, args) => areaData => {
 	let result = {}
 	let path = []
 	if (args.path) {
-		path = [ areaData.type, areaData.name ].concat(args.path.split('.'))
+		path = [areaData.type, areaData.name].concat(args.path.split('.'))
 		result = compute(
 			get(areaData, args.path),
 			{
@@ -262,7 +262,7 @@ const checkAgainstArea = ({ courses, overrides }, args) => areaData => {
 
 	else {
 		result = evaluate({ courses, overrides }, areaData)
-		path = [ areaData.type, areaData.name ]
+		path = [areaData.type, areaData.name]
 	}
 
 	if (args.json) {

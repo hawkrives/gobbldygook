@@ -28,7 +28,7 @@ function canAdd({ query, value, primaryKey, results }={}) {
 	return checkCourseAgainstQuery(query, value) && !includes(results, primaryKey)
 }
 
-const preferredKeyOrder = [ 'deptnum' ]
+const preferredKeyOrder = ['deptnum']
 const sortKeys = key => {
 	let idx = preferredKeyOrder.indexOf(key)
 	if (idx >= 0) {

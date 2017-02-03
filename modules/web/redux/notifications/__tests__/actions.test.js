@@ -73,7 +73,7 @@ describe('logError action', () => {
 		const id = 0
 		const expectedAction = {
 			type: LOG_ERROR,
-			payload: { id, error, args: [ 'arg' ] },
+			payload: { id, error, args: ['arg'] },
 		}
 
 		expect(logError({ id, error }, 'arg')).to.deep.equal(expectedAction)

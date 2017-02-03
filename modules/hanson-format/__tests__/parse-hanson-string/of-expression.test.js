@@ -1,6 +1,6 @@
 import { customParser } from './parse-hanson-string.support'
-const parse = customParser({ allowedStartRules: [ 'Of' ] })
-const course = customParser({ allowedStartRules: [ 'Course' ] })
+const parse = customParser({ allowedStartRules: ['Of'] })
+const course = customParser({ allowedStartRules: ['Course'] })
 
 describe('OfExpression', () => {
 	it('supports of-statements of the form "n of ()"', () => {
@@ -82,6 +82,6 @@ describe('OfExpression', () => {
 
 	it('throws an error if more items are required than are provided', () => {
 		expect(() => parse('three of (CSCI 121, 125)'))
-			.toThrow(`you requested 3 items, but only gave 2 options (${JSON.stringify([ course('CSCI 121'), course('CSCI 125') ])})`)
+			.toThrow(`you requested 3 items, but only gave 2 options (${JSON.stringify([course('CSCI 121'), course('CSCI 125')])})`)
 	})
 })

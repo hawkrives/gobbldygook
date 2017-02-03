@@ -27,7 +27,7 @@ describe('saveStudent', () => {
 
 	it('saves a student', async () => {
 		await saveStudent(student)
-		let expectedStudentIds = [ student.id ]
+		let expectedStudentIds = [student.id]
 		let actualStudentIds = JSON.parse(localStorage.getItem('studentIds'))
 		expect(actualStudentIds).toEqual(expectedStudentIds)
 		let expectedStudent = student
@@ -49,14 +49,14 @@ describe('saveStudent', () => {
 describe('addStudentToCache', () => {
 	let ids
 	beforeEach(() => {
-		ids = [ '1', '2', '3' ]
+		ids = ['1', '2', '3']
 		localStorage.clear()
 		localStorage.setItem('studentIds', JSON.stringify(ids))
 	})
 
 	it('adds an id to the list of student ids', () => {
 		addStudentToCache('5')
-		let expected = ids.concat([ '5' ])
+		let expected = ids.concat(['5'])
 		let actual = JSON.parse(localStorage.getItem('studentIds'))
 		expect(actual).toEqual(expected)
 	})
@@ -72,7 +72,7 @@ describe('addStudentToCache', () => {
 describe('removeStudentFromCache', () => {
 	let ids
 	beforeEach(() => {
-		ids = [ '1', '2', '3' ]
+		ids = ['1', '2', '3']
 		localStorage.clear()
 		localStorage.setItem('studentIds', JSON.stringify(ids))
 	})
@@ -96,7 +96,7 @@ describe('removeStudentFromCache', () => {
 describe('getIdCache', () => {
 	it('gets the list of student ids', () => {
 		localStorage.clear()
-		const ids = [ '1', '2', '3' ]
+		const ids = ['1', '2', '3']
 		localStorage.setItem('studentIds', JSON.stringify(ids))
 		expect(getIdCache()).toEqual(ids)
 	})
@@ -110,7 +110,7 @@ describe('getIdCache', () => {
 describe('setIdCache', () => {
 	it('sets the list of student ids', () => {
 		localStorage.clear()
-		const ids = [ '1', '2', '3' ]
+		const ids = ['1', '2', '3']
 		setIdCache(ids)
 		let actual = JSON.parse(localStorage.getItem('studentIds'))
 		let expected = ids

@@ -63,7 +63,7 @@ describe('Student', () => {
 	})
 
 	it('migrates an array of schedules into an object', () => {
-		const schedules = [ Schedule({ id: '1' }), Schedule({ id: '2' }) ]
+		const schedules = [Schedule({ id: '1' }), Schedule({ id: '2' })]
 		const stu = Student({ schedules })
 		expect('2' in stu.schedules).toBe(true)
 		expect(stu.schedules['2']).toEqual(schedules[1])
@@ -211,7 +211,7 @@ describe('destroyScheduleFromStudent', () => {
 
 	it(`requires that the student's schedules not be in an array`, () => {
 		const sched = Schedule()
-		const stu = { schedules: [ sched ] }
+		const stu = { schedules: [sched] }
 		let shouldThrowBecauseArray = () => destroyScheduleFromStudent(stu, sched.id)
 		expect(shouldThrowBecauseArray).toThrowError(TypeError)
 	})
@@ -446,13 +446,13 @@ describe('addCourseToSchedule', () => {
 	})
 
 	it('returns the same student if the clbid already exists in the schedule', () => {
-		const sched = Schedule({ clbids: [ 456 ] })
+		const sched = Schedule({ clbids: [456] })
 		const stu = addScheduleToStudent(Student(), sched)
 		expect(addCourseToSchedule(stu, sched.id, 456)).toBe(stu)
 	})
 
 	it('throws an error if the schedule cannot be found', () => {
-		let sched = Schedule({ clbids: [ 456 ] })
+		let sched = Schedule({ clbids: [456] })
 		let stu = addScheduleToStudent(Student(), sched)
 		expect(() => addCourseToSchedule(stu, sched.id + 'bad', 456))
 			.toThrowError(ReferenceError)
@@ -461,21 +461,21 @@ describe('addCourseToSchedule', () => {
 
 describe('removeCourseFromSchedule', () => {
 	it('removes a course', () => {
-		const sched = Schedule({ clbids: [ 123 ] })
+		const sched = Schedule({ clbids: [123] })
 		const stu = addScheduleToStudent(Student(), sched)
 		let removedCourse = removeCourseFromSchedule(stu, sched.id, 123)
 		expect(removedCourse.schedules[sched.id].clbids).not.toContain(123)
 	})
 
 	it('refuses to remove non-number clbids', () => {
-		const sched = Schedule({ clbids: [ 123 ] })
+		const sched = Schedule({ clbids: [123] })
 		const stu = addScheduleToStudent(Student(), sched)
 		expect(() => removeCourseFromSchedule(stu, sched.id, '918'))
 			.toThrowError(TypeError)
 	})
 
 	it('returns a new object', () => {
-		const sched = Schedule({ clbids: [ 123 ] })
+		const sched = Schedule({ clbids: [123] })
 		const stu = addScheduleToStudent(Student(), sched)
 		const actual = removeCourseFromSchedule(stu, sched.id, 123)
 		expect(actual).not.toBe(stu)
@@ -490,7 +490,7 @@ describe('removeCourseFromSchedule', () => {
 	})
 
 	it('throws an error if the schedule cannot be found', () => {
-		let sched = Schedule({ clbids: [ 456 ] })
+		let sched = Schedule({ clbids: [456] })
 		let stu = addScheduleToStudent(Student(), sched)
 		expect(() => removeCourseFromSchedule(stu, sched.id + 'bad', 456))
 			.toThrowError(ReferenceError)
@@ -499,21 +499,21 @@ describe('removeCourseFromSchedule', () => {
 
 describe('reorderCourseInSchedule', () => {
 	it('rearranges courses', () => {
-		const sched = Schedule({ clbids: [ 123, 456, 789 ] })
+		const sched = Schedule({ clbids: [123, 456, 789] })
 		const stu = addScheduleToStudent(Student(), sched)
 		let rearranged = reorderCourseInSchedule(stu, sched.id, { clbid: 123, index: 1 })
-		expect(rearranged.schedules[sched.id].clbids).not.toEqual([ 123, 456, 789 ])
-		expect(rearranged.schedules[sched.id].clbids).toEqual([ 456, 123, 789 ])
+		expect(rearranged.schedules[sched.id].clbids).not.toEqual([123, 456, 789])
+		expect(rearranged.schedules[sched.id].clbids).toEqual([456, 123, 789])
 	})
 
 	it('requires that the clbid be a number', () => {
-		const sched = Schedule({ clbids: [ 123, 456, 789 ] })
+		const sched = Schedule({ clbids: [123, 456, 789] })
 		const stu = addScheduleToStudent(Student(), sched)
 		expect(() => reorderCourseInSchedule(stu, sched.id, { clbid: '123', index: 1 })).toThrowError(TypeError)
 	})
 
 	it('returns a new object', () => {
-		const sched = Schedule({ clbids: [ 123, 456, 789 ] })
+		const sched = Schedule({ clbids: [123, 456, 789] })
 		const stu = addScheduleToStudent(Student(), sched)
 		let actual = reorderCourseInSchedule(stu, sched.id, { clbid: 123, index: 1 })
 		expect(actual).not.toBe(stu)
@@ -522,35 +522,35 @@ describe('reorderCourseInSchedule', () => {
 	})
 
 	it('requires that the clbid to be moved actually appear in the list of clbids', () => {
-		const sched = Schedule({ clbids: [ 123, 456, 789 ] })
+		const sched = Schedule({ clbids: [123, 456, 789] })
 		const stu = addScheduleToStudent(Student(), sched)
 		expect(() => reorderCourseInSchedule(stu, sched.id, { clbid: 123456789, index: 0 }))
 			.toThrowError(ReferenceError)
 	})
 
 	it('throws if the schedule id cannot be found', () => {
-		let sched = Schedule({ clbids: [ 123456789, 123 ] })
+		let sched = Schedule({ clbids: [123456789, 123] })
 		let stu = { schedules: { [sched.id]: sched } }
 		expect(() => reorderCourseInSchedule(stu, sched.id + 'bad', { clbid: 123, index: 0 }))
 			.toThrowError(ReferenceError)
 	})
 
 	it('truncates the requested index if it is greater than the number of courses', () => {
-		let sched = Schedule({ clbids: [ 123456789, 123 ] })
+		let sched = Schedule({ clbids: [123456789, 123] })
 		let stu = { schedules: { [sched.id]: sched } }
 		let reordered = reorderCourseInSchedule(stu, sched.id, { clbid: 123456789, index: 10 })
 		expect(findIndex(reordered.schedules[sched.id].clbids, c => c === 123456789)).toBe(1)
 	})
 
 	it('truncates the requested index if it is Infinity', () => {
-		let sched = Schedule({ clbids: [ 123456789, 123 ] })
+		let sched = Schedule({ clbids: [123456789, 123] })
 		let stu = { schedules: { [sched.id]: sched } }
 		let reordered = reorderCourseInSchedule(stu, sched.id, { clbid: 123456789, index: Infinity })
 		expect(findIndex(reordered.schedules[sched.id].clbids, c => c === 123456789)).toBe(1)
 	})
 
 	it('truncates the requested index if it is less than 0', () => {
-		let sched = Schedule({ clbids: [ 123456789, 123 ] })
+		let sched = Schedule({ clbids: [123456789, 123] })
 		let stu = { schedules: { [sched.id]: sched } }
 		let reordered = reorderCourseInSchedule(stu, sched.id, { clbid: 123, index: -10 })
 		expect(findIndex(reordered.schedules[sched.id].clbids, c => c === 123)).toBe(0)

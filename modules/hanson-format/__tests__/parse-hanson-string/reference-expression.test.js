@@ -1,6 +1,6 @@
 import { customParser } from './parse-hanson-string.support'
-const parseReference = customParser({ allowedStartRules: [ 'Reference' ] })
-const parseRequirementTitle = customParser({ allowedStartRules: [ 'RequirementTitle' ] })
+const parseReference = customParser({ allowedStartRules: ['Reference'] })
+const parseRequirementTitle = customParser({ allowedStartRules: ['RequirementTitle'] })
 
 describe('ReferenceExpression', () => {
 	it('can reference a requirement', () => {

@@ -15,8 +15,8 @@ describe('getMatchesFromFilter', () => {
 					},
 				},
 				_matches: [
-					{ department: [ 'CSCI' ], number: 320 },
-					{ department: [ 'CSCI' ], number: 160 },
+					{ department: ['CSCI'], number: 320 },
+					{ department: ['CSCI'], number: 160 },
 				],
 			},
 		}

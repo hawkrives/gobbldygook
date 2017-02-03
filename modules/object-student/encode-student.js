@@ -4,8 +4,8 @@ import mapValues from 'lodash/mapValues'
 
 export function prepareStudentForSave(student) {
 	student = { ...student }
-	student = omit(student, [ 'areas', 'canGraduate', 'fulfilled' ])
-	student.schedules = mapValues(student.schedules, s => omit(s, [ 'courses', 'conflicts', 'hasConflict' ]))
+	student = omit(student, ['areas', 'canGraduate', 'fulfilled'])
+	student.schedules = mapValues(student.schedules, s => omit(s, ['courses', 'conflicts', 'hasConflict']))
 	return student
 }
 

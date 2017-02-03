@@ -19,9 +19,9 @@ describe('computeModifier', () => {
 					$type: 'boolean',
 					$booleanType: 'or',
 					$or: [
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 111 } },
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 112 } },
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 251 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 111 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 112 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 251 } },
 					],
 				},
 			},
@@ -30,9 +30,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{ department: [ 'REL' ], number: 111 },
-			{ department: [ 'REL' ], number: 112 },
-			{ department: [ 'CSCI' ], number: 251 },
+			{ department: ['REL'], number: 111 },
+			{ department: ['REL'], number: 112 },
+			{ department: ['CSCI'], number: 251 },
 		]
 
 		req.Bible.computed = computeChunk({ expr: req.Bible.result, ctx: req, courses, dirty })
@@ -51,7 +51,7 @@ describe('computeModifier', () => {
 			$count: { $operator: '$gte', $num: 1 },
 			$what: 'course',
 			$from: 'children',
-			$children: [ { $type: 'reference', $requirement: 'Bible' } ],
+			$children: [{ $type: 'reference', $requirement: 'Bible' }],
 		}
 
 		const req = {
@@ -61,9 +61,9 @@ describe('computeModifier', () => {
 					$type: 'boolean',
 					$booleanType: 'or',
 					$or: [
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 111 } },
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 112 } },
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 251 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 111 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 112 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 251 } },
 					],
 				},
 			},
@@ -72,9 +72,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{ department: [ 'REL' ], number: 111 },
-			{ department: [ 'REL' ], number: 112 },
-			{ department: [ 'CSCI' ], number: 251 },
+			{ department: ['REL'], number: 111 },
+			{ department: ['REL'], number: 112 },
+			{ department: ['CSCI'], number: 251 },
 		]
 
 		req.Bible.computed = computeChunk({ expr: req.Bible.result, ctx: req, courses, dirty })
@@ -111,9 +111,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		let courses = [
-			{ department: [ 'REL' ], number: 111 },
-			{ department: [ 'REL' ], number: 112 },
-			{ department: [ 'CSCI' ], number: 251 },
+			{ department: ['REL'], number: 111 },
+			{ department: ['REL'], number: 112 },
+			{ department: ['CSCI'], number: 251 },
 		]
 
 		courses = applyFilter(req.filter, courses)
@@ -128,7 +128,7 @@ describe('computeModifier', () => {
 
 	it('counts, excluding a given course', () => {
 		const modifier = {
-			$besides: { $type: 'course', $course: { 'department': [ 'CHEM' ], 'number': 398 } },
+			$besides: { $type: 'course', $course: { 'department': ['CHEM'], 'number': 398 } },
 			$count: { $num: 1, $operator: '$gte' },
 			$from: 'filter',
 			$type: 'modifier',
@@ -144,7 +144,7 @@ describe('computeModifier', () => {
 					$key: 'department',
 					$operator: '$eq',
 					$value: {
-						$or: [ 'CHEM', 'REL' ],
+						$or: ['CHEM', 'REL'],
 						$type: 'boolean',
 						$booleanType: 'or',
 					},
@@ -154,7 +154,7 @@ describe('computeModifier', () => {
 		}
 
 		let goodCourses = [
-			{ department: [ 'REL' ], number: 111 },
+			{ department: ['REL'], number: 111 },
 		]
 		goodCourses = applyFilter(req.filter, goodCourses)
 
@@ -162,7 +162,7 @@ describe('computeModifier', () => {
 		expect(one).toBe(true)
 
 		let badCourses = [
-			{ department: [ 'CHEM' ], number: 398 },
+			{ department: ['CHEM'], number: 398 },
 		]
 		badCourses = applyFilter(req.filter, badCourses)
 
@@ -170,8 +170,8 @@ describe('computeModifier', () => {
 		expect(two).toBe(false)
 
 		let moreGoodCourses = [
-			{ department: [ 'CHEM' ], number: 398 },
-			{ department: [ 'REL' ], number: 111 },
+			{ department: ['CHEM'], number: 398 },
+			{ department: ['REL'], number: 111 },
 		]
 		moreGoodCourses = applyFilter(req.filter, moreGoodCourses)
 
@@ -197,9 +197,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{ department: [ 'REL' ], number: 111 },
-			{ department: [ 'REL' ], number: 112 },
-			{ department: [ 'CSCI' ], number: 251 },
+			{ department: ['REL'], number: 111 },
+			{ department: ['REL'], number: 112 },
+			{ department: ['CSCI'], number: 251 },
 		]
 
 		const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
@@ -227,8 +227,8 @@ describe('computeModifier', () => {
 					$type: 'boolean',
 					$booleanType: 'and',
 					$and: [
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 111 } },
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 112 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 111 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 112 } },
 					],
 				},
 			},
@@ -236,7 +236,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: { department: [ 'CSCI' ], number: 251 },
+					$course: { department: ['CSCI'], number: 251 },
 				},
 			},
 			result: modifier,
@@ -244,9 +244,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{ department: [ 'REL' ], number: 111, credits: 1.0 },
-			{ department: [ 'REL' ], number: 112, credits: 1.0 },
-			{ department: [ 'CSCI' ], number: 251, credits: 1.0 },
+			{ department: ['REL'], number: 111, credits: 1.0 },
+			{ department: ['REL'], number: 112, credits: 1.0 },
+			{ department: ['CSCI'], number: 251, credits: 1.0 },
 		]
 
 		req.Bible.computed = computeChunk({ expr: req.Bible.result, ctx: req, courses, dirty })
@@ -276,8 +276,8 @@ describe('computeModifier', () => {
 					$type: 'boolean',
 					$booleanType: 'and',
 					$and: [
-						{ $type: 'course', $course: { department: [ 'CHEM', 'BIO' ], number: 111 } },
-						{ $type: 'course', $course: { department: [ 'CHEM', 'BIO' ], number: 112 } },
+						{ $type: 'course', $course: { department: ['CHEM', 'BIO'], number: 111 } },
+						{ $type: 'course', $course: { department: ['CHEM', 'BIO'], number: 112 } },
 					],
 				},
 			},
@@ -285,7 +285,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: { department: [ 'CSCI' ], number: 251 },
+					$course: { department: ['CSCI'], number: 251 },
 				},
 			},
 			result: modifier,
@@ -293,9 +293,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{ department: [ 'CHEM', 'BIO' ], number: 111, credits: 1.0 },
-			{ department: [ 'CHEM', 'BIO' ], number: 112, credits: 1.0 },
-			{ department: [ 'CSCI' ], number: 251, credits: 1.0 },
+			{ department: ['CHEM', 'BIO'], number: 111, credits: 1.0 },
+			{ department: ['CHEM', 'BIO'], number: 112, credits: 1.0 },
+			{ department: ['CSCI'], number: 251, credits: 1.0 },
 		]
 
 		req.CHBI.computed = computeChunk({ expr: req.CHBI.result, ctx: req, courses, dirty })
@@ -325,9 +325,9 @@ describe('computeModifier', () => {
 					$type: 'boolean',
 					$booleanType: 'or',
 					$or: [
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 111 } },
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 112 } },
-						{ $type: 'course', $course: { department: [ 'REL' ], number: 251 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 111 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 112 } },
+						{ $type: 'course', $course: { department: ['REL'], number: 251 } },
 					],
 				},
 			},
@@ -335,7 +335,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: { department: [ 'CSCI' ], number: 251 },
+					$course: { department: ['CSCI'], number: 251 },
 				},
 			},
 			result: modifier,
@@ -343,9 +343,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{ department: [ 'REL' ], number: 111, credits: 1.0 },
-			{ department: [ 'REL' ], number: 112, credits: 1.0 },
-			{ department: [ 'CSCI' ], number: 251, credits: 1.0 },
+			{ department: ['REL'], number: 111, credits: 1.0 },
+			{ department: ['REL'], number: 112, credits: 1.0 },
+			{ department: ['CSCI'], number: 251, credits: 1.0 },
 		]
 
 		req.Bible.computed = computeChunk({ expr: req.Bible.result, ctx: req, courses, dirty })
@@ -386,14 +386,14 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: { department: [ 'CHEM', 'BIO' ], number: 111 },
+					$course: { department: ['CHEM', 'BIO'], number: 111 },
 				},
 			},
 			B: {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: { department: [ 'CHEM', 'BIO' ], number: 112 },
+					$course: { department: ['CHEM', 'BIO'], number: 112 },
 				},
 			},
 			result: modifier,
@@ -401,8 +401,8 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{ department: [ 'CHEM', 'BIO' ], number: 111, credits: 1.0 },
-			{ department: [ 'CHEM', 'BIO' ], number: 112, credits: 1.0 },
+			{ department: ['CHEM', 'BIO'], number: 111, credits: 1.0 },
+			{ department: ['CHEM', 'BIO'], number: 112, credits: 1.0 },
 		]
 
 		req.A.computed = computeChunk({ expr: req.A.result, ctx: req, courses, dirty })

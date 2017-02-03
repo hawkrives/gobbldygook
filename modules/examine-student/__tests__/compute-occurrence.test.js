@@ -5,12 +5,12 @@ describe('computeOccurrence', () => {
 		const expr = {
 			$type: 'occurrence',
 			$count: { $operator: '$gte', $num: 2 },
-			$course: { $type: 'course', department: [ 'THEAT' ], number: 222 },
+			$course: { $type: 'course', department: ['THEAT'], number: 222 },
 		}
 
 		const courses = [
-			{ department: [ 'THEAT' ], number: 222 },
-			{ department: [ 'THEAT' ], number: 222 },
+			{ department: ['THEAT'], number: 222 },
+			{ department: ['THEAT'], number: 222 },
 		]
 
 		const { computedResult, matches, counted } = computeOccurrence({ expr, courses })
@@ -19,8 +19,8 @@ describe('computeOccurrence', () => {
 			.toBe(true)
 		expect(matches)
 			.toEqual([
-				{ department: [ 'THEAT' ], number: 222 },
-				{ department: [ 'THEAT' ], number: 222 },
+				{ department: ['THEAT'], number: 222 },
+				{ department: ['THEAT'], number: 222 },
 			])
 		expect(counted)
 			.toBe(2)
@@ -30,12 +30,12 @@ describe('computeOccurrence', () => {
 		const expr = {
 			$type: 'occurrence',
 			$count: { $operator: '$gte', $num: 2 },
-			$course: { $type: 'course', department: [ 'THEAT' ], number: 222 },
+			$course: { $type: 'course', department: ['THEAT'], number: 222 },
 		}
 
 		const courses = [
-			{ department: [ 'THEAT' ], number: 222, year: 2014, semester: 1 },
-			{ department: [ 'THEAT' ], number: 222, year: 2014, semester: 3 },
+			{ department: ['THEAT'], number: 222, year: 2014, semester: 1 },
+			{ department: ['THEAT'], number: 222, year: 2014, semester: 3 },
 		]
 
 		const { computedResult, matches, counted } = computeOccurrence({ expr, courses })
@@ -43,8 +43,8 @@ describe('computeOccurrence', () => {
 			.toBe(true)
 		expect(matches)
 			.toEqual([
-				{ department: [ 'THEAT' ], number: 222, year: 2014, semester: 1 },
-				{ department: [ 'THEAT' ], number: 222, year: 2014, semester: 3 },
+				{ department: ['THEAT'], number: 222, year: 2014, semester: 1 },
+				{ department: ['THEAT'], number: 222, year: 2014, semester: 3 },
 			])
 		expect(counted)
 			.toBe(2)

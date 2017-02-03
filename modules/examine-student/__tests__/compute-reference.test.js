@@ -21,10 +21,10 @@ describe('computeReference', () => {
 
 	xit('returns the list of matches, if present', () => {
 		const expr = { $requirement: 'Req Name' }
-		const ctx = { 'Req Name': { computed: true, matches: [ 'Match' ], result: '' } }
+		const ctx = { 'Req Name': { computed: true, matches: ['Match'], result: '' } }
 		expect(computeReference({ expr, ctx })).toEqual({
 			computedResult: true,
-			matches: [ 'Match' ],
+			matches: ['Match'],
 		})
 	})
 

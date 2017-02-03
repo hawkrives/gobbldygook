@@ -1,5 +1,5 @@
 import { customParser } from './parse-hanson-string.support'
-const parse = customParser({ allowedStartRules: [ 'Course' ] })
+const parse = customParser({ allowedStartRules: ['Course'] })
 
 describe('CourseExpression', () => {
 	it('parses courses with a single department', () => {

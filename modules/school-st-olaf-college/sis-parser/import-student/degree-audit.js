@@ -55,7 +55,7 @@ function extractInformationFromAreaTable(table) {
 }
 
 export function extractInformationFromDegreeAudit(auditInfo, infoElement) {
-	let [ degreeType ] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
+	let [degreeType] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
 	if (degreeType === 'B.A.') {
 		degreeType = 'Bachelor of Arts'
 	}
@@ -65,7 +65,7 @@ export function extractInformationFromDegreeAudit(auditInfo, infoElement) {
 
 	// There are two tables that are children of another table
 	// yay, tables for layout.
-	let [ infoTable, areaTable ] = selectAll('table table', infoElement)
+	let [infoTable, areaTable] = selectAll('table table', infoElement)
 
 	let info = extractInformationFromInfoTable(infoTable)
 	let areas = extractInformationFromAreaTable(areaTable)

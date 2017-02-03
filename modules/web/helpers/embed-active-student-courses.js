@@ -20,7 +20,7 @@ export function embedActiveStudentCourses(student, { cache=[] }) {
 		})
 
 		return Promise.all(courses).then(fulfilledCourses => {
-			return [ schedule.id, { ...schedule, courses: fulfilledCourses } ]
+			return [schedule.id, { ...schedule, courses: fulfilledCourses }]
 		})
 	})
 

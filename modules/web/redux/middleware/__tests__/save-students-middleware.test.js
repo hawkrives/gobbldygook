@@ -18,7 +18,7 @@ xdescribe('shouldTakeAction', () => {
 describe('saveStudentsMiddleware', () => {
 	const doDispatch = () => {}
 	const doGetState = () => ({ students: { '123': { data: { past: [], future: [], present: {} } } } })
-	const doNextAction = (...args) => [ ...args ]
+	const doNextAction = (...args) => [...args]
 	const nextHandler = saveStudentsMiddleware({ dispatch: doDispatch, getState: doGetState })
 
 	it('must return a function to handle `next`', () => {

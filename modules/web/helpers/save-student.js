@@ -16,7 +16,7 @@ export function setIdCache(ids) {
 
 export function addStudentToCache(studentId) {
 	let ids = getIdCache()
-	ids = union(ids, [ studentId ])
+	ids = union(ids, [studentId])
 	setIdCache(ids)
 }
 

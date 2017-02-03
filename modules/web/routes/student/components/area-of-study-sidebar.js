@@ -32,7 +32,7 @@ export default function AreaOfStudySidebar(props) {
 	// pull out the results
 	const studyResults = mapValues(groupedStudies, group =>
 		map(group, area =>
-			find(student.areas, pick(area, [ 'name', 'type', 'revision' ])) || area))
+			find(student.areas, pick(area, ['name', 'type', 'revision'])) || area))
 
 	// and then render them
 	const sections = map(studyResults, (areas, areaType) =>
@@ -79,9 +79,9 @@ export default function AreaOfStudySidebar(props) {
 	) : null
 
 	const unusedTypesToShow = filter(toPairs(showAreaPickerFor),
-		([ type, toShow ]) => toShow === true && !includes(usedAreaTypes, type))
+		([type, toShow]) => toShow === true && !includes(usedAreaTypes, type))
 
-	const unusedTypesToShowComponents = map(unusedTypesToShow, ([ type, shouldShow ]) =>
+	const unusedTypesToShowComponents = map(unusedTypesToShow, ([type, shouldShow]) =>
 		<AreaOfStudyGroup key={type}
 			allAreasOfType={allAreasGrouped[type] || []}
 			areas={[]}

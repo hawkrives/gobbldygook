@@ -19,7 +19,7 @@ export function splitDeptNum(deptNumString: string, includeSection?: boolean=fal
 		number: number,
 		section?: string,
 	} = {
-		departments: matches[1].indexOf('/') !== -1 ? [ matches[2], matches[3] ] : [ matches[1] ],
+		departments: matches[1].indexOf('/') !== -1 ? [matches[2], matches[3]] : [matches[1]],
 		number: parseInt(matches[4], 10),
 	}
 

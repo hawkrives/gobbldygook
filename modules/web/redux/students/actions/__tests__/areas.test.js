@@ -42,7 +42,7 @@ describe('removeAreas action', () => {
 		expect(action.payload).to.be.an.object
 		expect(action.payload).to.deep.equal({
 			studentId: 'id',
-			areaQueries: [ { name: 'Area', type: 'Study?' } ],
+			areaQueries: [{ name: 'Area', type: 'Study?' }],
 		})
 	})
 })
