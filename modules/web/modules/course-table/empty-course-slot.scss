@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.empty-course {
+	color: $gray-500;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+
+	* {
+		cursor: default;
+	}
+}

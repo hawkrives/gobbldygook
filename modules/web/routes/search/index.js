@@ -3,7 +3,7 @@ export default {
 	getComponents(state, cb) {
 		require.ensure([], () => {
 			cb(null, {
-				overlay: require('./containers/course-searcher-overlay').default,
+				overlay: require('./course-searcher-overlay').default,
 			})
 		}, 'course-overlay.components')
 	},

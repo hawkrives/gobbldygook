@@ -1,0 +1,106 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+@import './variables-expression.scss';
+
+.expression {
+	display: inline-block;
+}
+
+.expression--contents {
+	display: inline-flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.expression--description {
+	text-align: center;
+	display: inline-block;
+	margin: 0;
+}
+
+.expression--description:not(:only-child) {
+	display: block;
+	width: 100%;
+	margin-bottom: 0.35em;
+}
+
+.expression .expression {
+	margin: 0.1em;
+}
+
+.expression.fulfillment {
+	color: $orange-700 !important;
+	background-color: $orange-50 !important;
+	border-color: $orange-100 !important;
+}
+
+.expression--course.not-used {
+	opacity: 0.5;
+}
+
+.expression .joiner {
+	text-align: center;
+	margin-left: 0.75em;
+	margin-right: 0.75em;
+
+	font-size: 0.6em;
+	font-weight: 600;
+}
+
+.was-evaluated {
+	/* color: $blue-500 !important; */
+}
+
+.result-indicator {
+	display: inline-block;
+	margin-left: 0.2em;
+	font-size: 0.8em;
+}
+
+.expression--boolean:not(:only-child),
+.expression--of:not(:only-child) {
+	padding: 0.1em 0.2em 0.2em;
+	margin: 0.2em;
+
+	/* take 1: giant parentheses */
+	border-left: solid 2px $gray-400;
+	border-right: solid 2px $gray-400;
+
+	border-radius: .55em;
+}
+
+.expression--course,
+.expression--modifier,
+.expression--reference {
+	border: solid 1px #ccc;
+	background-color: #f2f2f2;
+	border-radius: 3px;
+
+	font-size: 0.9em;
+	padding: 0.125em 0.25em;
+
+	&.evaluated .result-indicator {
+		margin-left: 0.5em;
+	}
+
+	&.evaluated.taken {
+		background-color: $result-success-background;
+	}
+	&.evaluated .result-indicator--success {
+		color: $result-success-color;
+	}
+
+	&.evaluated .result-indicator--failure {
+		color: $result-failure-color;
+		font-weight: 600;
+	}
+}
+
+
+.expression--reference {
+	display: inline;
+}
+.expression--reference > .expression--contents {
+	display: inline;
+}

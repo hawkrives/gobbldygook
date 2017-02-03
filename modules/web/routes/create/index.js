@@ -1,19 +1,52 @@
 export default {
 	path: 'create',
+
 	getIndexRoute(location, cb) {
-		cb(null, require('./routes/welcome').default)
+		require.ensure([], () => {
+			cb(null, require('./welcome').default)
+		}, 'new-student.welcome.component')
 	},
+
 	getChildRoutes(location, cb) {
 		cb(null, [
-			require('./routes/sis').default,    // create/sis
-			require('./routes/manual').default, // create/manual
-			require('./routes/drive').default,  // create/drive
-			require('./routes/upload').default, // create/upload
+			{
+				path: 'sis',
+				getComponent(location, cb) {
+					require.ensure([], () => {
+						cb(null, require('./method-import').default)
+					}, 'new-student.import.component')
+				},
+			},
+			{
+				path: 'manual',
+				getComponent(location, cb) {
+					require.ensure([], () => {
+						cb(null, require('./method-manual').default)
+					}, 'new-student.manual.component')
+				},
+			},
+			{
+				path: 'drive',
+				getComponent(location, cb) {
+					require.ensure([], () => {
+						cb(null, require('./method-drive').default)
+					}, 'new-student.drive.component')
+				},
+			},
+			{
+				path: 'upload',
+				getComponent(location, cb) {
+					require.ensure([], () => {
+						cb(null, require('./method-upload').default)
+					}, 'new-student.upload.component')
+				},
+			},
 		])
 	},
+
 	getComponents(location, cb) {
 		cb(null, {
-			content: require('./containers/new-student').default,
+			content: require('./new-student').default,
 		})
 	},
 }

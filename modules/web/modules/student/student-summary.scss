@@ -1,0 +1,75 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.student-summary {
+	@include card();
+
+	text-align: center;
+	hyphens: auto;
+	font-feature-settings: 'onum', 'tnum';
+	text-shadow: 0 1px rgba(white, 0.5);
+
+	&.cannot-graduate .graduation-message {
+		color: $deep-orange-500;
+	}
+	&.can-graduate .graduation-message {
+		color: $light-green-800;
+	}
+	&.can-graduate {
+		background-color: $light-green-50;
+		&::selection {
+			background-color: $light-green-900;
+		}
+	}
+
+	.content {
+		padding: $block-edge-padding * 2;
+
+		.paragraph {
+			margin: 0;
+		}
+
+		.paragraph + .paragraph {
+			margin-top: $block-edge-padding * 2;
+		}
+	}
+
+	.student-summary--header {
+		color: $black;
+
+		margin: $block-edge-padding * 2;
+		margin-bottom: 0;
+		font-style: italic;
+		line-height: 1.6em;
+	}
+
+	.autosize-input {
+		border-bottom: 1px solid $gray-400;
+		padding: 0 0.125em 0 0;
+
+		&:focus {
+			outline: 0;
+			background-color: $blue-50;
+			border-color: $blue-500;
+		}
+	}
+}
+
+.student-letter {
+	display: block;
+	margin: $block-edge-padding auto ($block-edge-padding * 2);
+
+	border: solid 1px;
+	background-color: white;
+
+	&.cannot-graduate {
+		color: $deep-orange-500;
+	}
+
+	&.can-graduate {
+		color: $light-green-800;
+		box-shadow:
+			0 0 0 5px white,
+			0 0 0 6px $light-green-100;
+	}
+}
