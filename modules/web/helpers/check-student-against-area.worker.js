@@ -5,8 +5,8 @@ import filter from 'lodash/filter'
 import round from 'lodash/round'
 import present from 'present'
 
-import { stringifyError } from 'modules/lib'
-import { evaluate } from 'modules/core/examine-student'
+import { stringifyError } from '../../lib/stringify-error'
+import { evaluate } from '../../examine-student/evaluate'
 import { getActiveStudentCourses } from './get-active-student-courses'
 import { alterCourse } from './alter-course-for-evaluation'
 
@@ -76,16 +76,16 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScop
 		// > We know that serialization/deserialization is slow. It's actually faster to
 		// > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 
-		const [ id, student, area ] = JSON.parse(data)
+		const [id, student, area] = JSON.parse(data)
 		log('[check-student] received message:', id, student, area)
 
 		checkStudentAgainstArea(student, area)
 			.then(result => {
-				self.postMessage(JSON.stringify([ id, 'result', result ]))
+				self.postMessage(JSON.stringify([id, 'result', result]))
 				log(`[check-student(${student.name}, ${area.name})] took ${round(present() - start)} ms`)
 			})
 			.catch(err => {
-				self.postMessage(JSON.stringify([ id, 'error', stringifyError(err) ]))
+				self.postMessage(JSON.stringify([id, 'error', stringifyError(err)]))
 				log(`[check-student(${student.name}, ${area.name}))]`, err)
 			})
 	})

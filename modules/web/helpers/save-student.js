@@ -1,7 +1,7 @@
 import union from 'lodash/union'
 import reject from 'lodash/reject'
 import stringify from 'stabilize'
-import { prepareStudentForSave } from 'modules/core'
+import { prepareStudentForSave } from '../../object-student'
 import debug from 'debug'
 const log = debug('web:save-student')
 
@@ -16,7 +16,7 @@ export function setIdCache(ids) {
 
 export function addStudentToCache(studentId) {
 	let ids = getIdCache()
-	ids = union(ids, [ studentId ])
+	ids = union(ids, [studentId])
 	setIdCache(ids)
 }
 

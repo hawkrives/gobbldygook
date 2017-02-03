@@ -1,5 +1,5 @@
 import { customParser } from './parse-hanson-string.support'
-const parse = customParser({ allowedStartRules: [ 'Occurrence' ] })
+const parse = customParser({ allowedStartRules: ['Occurrence'] })
 
 describe('OccurrenceExpression', () => {
 	it('requires a course to check for occurrences of', () => {

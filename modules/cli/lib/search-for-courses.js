@@ -14,8 +14,7 @@ import { checkForStaleData } from './update-local-data-cache'
 
 import path from 'path'
 
-import { quacksLikeDeptNum } from 'modules/schools/stolaf'
-import { splitDeptNum } from 'modules/schools/stolaf'
+import { quacksLikeDeptNum, splitDeptNum } from '../../school-st-olaf-college'
 
 import pify from 'pify'
 const fs = pify(require('graceful-fs'))

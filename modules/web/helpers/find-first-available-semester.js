@@ -3,7 +3,7 @@ import filter from 'lodash/filter'
 import map from 'lodash/map'
 import uniq from 'lodash/uniq'
 import sortBy from 'lodash/sortBy'
-import { findMissingNumberBinarySearch } from 'modules/lib'
+import { findMissingNumberBinarySearch } from '../../lib'
 
 /**
  * Takes a list of schedules and finds the first open semester.

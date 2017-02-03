@@ -1,5 +1,5 @@
 import { customParser } from './parse-hanson-string.support'
-const parse = customParser({ allowedStartRules: [ 'Counter' ] })
+const parse = customParser({ allowedStartRules: ['Counter'] })
 
 describe('counters', () => {
 	it('n may be in english from "zero" to "ten"', () => {

@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+const nom = require('nomnom')
+const fs = require('fs')
+
+const args = nom()
+		.script('match-courses-for-major')
+		.option('courses', {
+			required: true,
+			help: 'path to json courses file',
+		})
+		.option('area', {
+			required: true,
+			help: 'path to json area file',
+		})
+		.parse()
+
+const courses = JSON.parse(fs.readFileSync(args.courses, 'utf-8')).map(c => {
+	c.department = c.departments
+	delete c.departments
+	delete c.description
+	delete c.prerequisites
+	return c
+})
+const area = JSON.parse(fs.readFileSync(args.area, 'utf-8'))
+
+require('./../../cli/lib/init')
+require('./match-courses-for-major.js').cli({courses, area})

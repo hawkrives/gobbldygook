@@ -48,7 +48,7 @@ describe('destroySchedules action', () => {
 		expect(action.payload).to.be.an.object
 		expect(action.payload).to.deep.equal({
 			studentId: 'id',
-			scheduleIds: [ 'sid', 'sid2' ],
+			scheduleIds: ['sid', 'sid2'],
 		})
 	})
 })

@@ -22,7 +22,7 @@ import {
 	addCourseToSchedule,
 	removeCourseFromSchedule,
 	reorderCourseInSchedule,
-} from '../../../../core/student-format/student'
+} from '../../../../object-student/student'
 
 import {
 	LOAD_STUDENT,
@@ -167,5 +167,5 @@ export default undoable(studentReducer, {
 	},
 
 	// treat LOAD_STUDENTS as the beginning of history
-	initTypes: [ '@@redux/INIT', '@@INIT', LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT ],
+	initTypes: ['@@redux/INIT', '@@INIT', LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT],
 })

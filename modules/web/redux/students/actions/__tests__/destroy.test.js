@@ -6,7 +6,7 @@ import { DESTROY_STUDENT } from '../../constants'
 describe('destroyStudent action', () => {
 	beforeEach(() => {
 		localStorage.setItem('student', JSON.stringify({ id: 'student' }))
-		localStorage.setItem('studentIds', JSON.stringify([ 'student' ]))
+		localStorage.setItem('studentIds', JSON.stringify(['student']))
 	})
 	afterEach(() => {
 		localStorage.clear()

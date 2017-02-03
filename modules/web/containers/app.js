@@ -4,7 +4,7 @@ import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
 import React, { Component, PropTypes } from 'react'
 import { DragDropContext } from 'react-dnd'
-import StudentPicker from '../routes/index/containers/student-picker'
+import StudentPicker from '../modules/student-picker'
 
 import '../index.scss'
 

@@ -1,5 +1,5 @@
 import 'whatwg-fetch'
-import { status, json, text } from 'modules/lib/fetch-helpers'
+import { status, json, text } from '../../lib/fetch-helpers'
 import serializeError from 'serialize-error'
 import series from 'p-series'
 
@@ -20,15 +20,15 @@ import present from 'present'
 import yaml from 'js-yaml'
 
 import db from './db'
-import { buildDeptString, buildDeptNum } from 'modules/schools/stolaf/deptnums'
-import { splitParagraph } from 'modules/lib/split-paragraph'
+import { buildDeptString, buildDeptNum } from '../../school-st-olaf-college/deptnums'
+import { splitParagraph } from '../../lib/split-paragraph'
 import { convertTimeStringsToOfferings } from 'sto-sis-time-parser'
 
 const log = (...args) => console.log('worker:load-data', ...args)
 
 
 function dispatch(type, action, ...args) {
-	self.postMessage([ null, 'dispatch', { type, action, args } ])
+	self.postMessage([null, 'dispatch', { type, action, args }])
 }
 
 const fetchText = (...args) => fetch(...args).then(status).then(text)
@@ -46,7 +46,7 @@ function prepareCourse(course) {
 		dept: course.dept || buildDeptString(course.departments),
 		deptnum: course.deptnum || buildDeptNum(course),
 		offerings: course.offerings || convertTimeStringsToOfferings(course),
-		words: uniq([ ...nameWords, ...notesWords, ...titleWords, ...descWords ]),
+		words: uniq([...nameWords, ...notesWords, ...titleWords, ...descWords]),
 		profWords: uniq(flatMap(course.instructors, splitParagraph)),
 	}
 }
@@ -120,12 +120,12 @@ function storeArea(path, data) {
 
 function cleanPriorCourses(path) {
 	return db.store('courses').index('sourcePath').getAll(range({ eq: path }))
-		.then(oldItems => fromPairs(map(oldItems, item => ([ item.clbid, null ]))))
+		.then(oldItems => fromPairs(map(oldItems, item => ([item.clbid, null]))))
 }
 
 function cleanPriorAreas(path) {
 	return db.store('areas').getAll(range({ eq: path }))
-		.then(oldItems => fromPairs(map(oldItems, item => ([ item.sourcePath, null ]))))
+		.then(oldItems => fromPairs(map(oldItems, item => ([item.sourcePath, null]))))
 }
 
 function cleanPriorData(path, type) {
@@ -228,14 +228,14 @@ function removeDuplicateAreas() {
 		forEach(withDuplicates, duplicatesList => {
 			duplicatesList = sortBy(duplicatesList, area => area.sourcePath.length)
 			duplicatesList.shift() // take off the shortest one
-			ops = { ...ops, ...fromPairs(map(duplicatesList, item => ([ item.sourcePath, null ]))) }
+			ops = { ...ops, ...fromPairs(map(duplicatesList, item => ([item.sourcePath, null]))) }
 		})
 
 		// remove any that are invalid
 		// --- something about any values that aren't objects
 
-		const invalidAreas = filter(allAreas, area => some([ 'name', 'revision', 'type' ], key => area[key] === undefined))
-		ops = { ...ops, ...fromPairs(map(invalidAreas, item => ([ item.sourcePath, null ]))) }
+		const invalidAreas = filter(allAreas, area => some(['name', 'revision', 'type'], key => area[key] === undefined))
+		ops = { ...ops, ...fromPairs(map(invalidAreas, item => ([item.sourcePath, null]))) }
 
 		return db.store('areas').batch(ops)
 	})
@@ -318,25 +318,25 @@ function checkIdbInWorkerSupport() {
 
 const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
 self.addEventListener('message', ({ data }) => {
-	const [ id, ...args ] = data
+	const [id, ...args] = data
 	log('[load-data] received message:', args)
 
 	if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
 		checkIdbInWorkerSupport()
 			.then(result => {
-				self.postMessage([ id, 'result', result ])
+				self.postMessage([id, 'result', result])
 			})
 			.catch(err => {
-				self.postMessage([ id, 'error', serializeError(err) ])
+				self.postMessage([id, 'error', serializeError(err)])
 			})
 	}
 	else {
 		loadFiles(...args)
 			.then(result => {
-				self.postMessage([ id, 'result', result ])
+				self.postMessage([id, 'result', result])
 			})
 			.catch(err => {
-				self.postMessage([ id, 'error', serializeError(err) ])
+				self.postMessage([id, 'error', serializeError(err)])
 			})
 	}
 })

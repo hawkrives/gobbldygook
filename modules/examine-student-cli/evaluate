@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+require('./../../cli/lib/init')
+require('./evaluate.js').cli()

@@ -30,7 +30,7 @@ describe('findFirstAvailableSemester', () => {
 	})
 
 	it('handles years of 0', () => {
-		let schedules = [ { year: 0, semester: 0, active: true, title: 'New Schedule', index: 1 } ]
+		let schedules = [{ year: 0, semester: 0, active: true, title: 'New Schedule', index: 1 }]
 
 		expect(findFirstAvailableSemester(schedules, 0)).to.equal(1)
 	})

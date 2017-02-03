@@ -1,5 +1,5 @@
-import { customParser, reference, qualification } from './parse-hanson-string.support'
-const parse = customParser({ allowedStartRules: [ 'Modifier' ] })
+import { customParser } from './parse-hanson-string.support'
+const parse = customParser({ allowedStartRules: ['Modifier'] })
 
 describe('ModifierExpression', () => {
 	it('can count courses', () => {

@@ -3,28 +3,23 @@
 		// JSX, Flow
 		"react",
 		// Latest stable ECMAScript features
-		["latest", {"es2015": {"modules": false}}],
+		["env", {
+			"targets": {
+				"ie": 12,
+				"browsers": "last 2 versions, Firefox ESR",
+			},
+			"modules": false,
+			"debug": true,
+		}],
 	],
 	"plugins": [
-		// class { handleClick = () => { } }
 		"transform-class-properties",
-		// { ...todo, completed: true }
 		"transform-object-rest-spread",
-		// embeds the react tag name into the component
 		"transform-react-display-name",
-		// these two together prevent us from defining the helpers in every module
-		"external-helpers",
-		["transform-runtime", {
-			"polyfill": false, // defaults to true
-		}],
+		["transform-runtime", {"polyfill": false}],
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		// "lodash",
-		["module-resolver", {
-			"alias": {
-				"modules": "./modules",
-			},
-		}],
 	],
 	"env": {
 		"production": {
@@ -36,15 +31,11 @@
 			],
 		},
 		"test": {
-			"presets": [["latest", {"es2015": {"modules": "commonjs"}}]],
-			"plugins": [
-				"transform-class-properties",
-				"transform-object-rest-spread",
-				["module-resolver", {
-					"alias": {
-						"modules": "./modules",
-					},
-				}],
+			"presets": [
+				["env", {
+					"targets": {"node": true},
+					"modules": "commonjs",
+				}]
 			],
 		},
 	},

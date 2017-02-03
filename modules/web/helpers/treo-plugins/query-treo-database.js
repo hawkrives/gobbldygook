@@ -17,7 +17,7 @@ const log = debug('web:database:query')
 
 import idbRange from 'idb-range'
 import { cmp as idbComparison } from 'treo'
-import { checkCourseAgainstQuery } from 'modules/core/search-queries'
+import { checkCourseAgainstQuery } from '../../../search-queries'
 
 function canAdd({ query, value, primaryKey, results }={}) {
 	// Check if we want to add the current value to the results array.
@@ -28,7 +28,7 @@ function canAdd({ query, value, primaryKey, results }={}) {
 	return checkCourseAgainstQuery(query, value) && !includes(results, primaryKey)
 }
 
-const preferredKeyOrder = [ 'deptnum' ]
+const preferredKeyOrder = ['deptnum']
 const sortKeys = key => {
 	let idx = preferredKeyOrder.indexOf(key)
 	if (idx >= 0) {

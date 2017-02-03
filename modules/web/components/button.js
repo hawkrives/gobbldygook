@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 
-import { compareProps } from 'modules/lib'
+import { compareProps } from '../../lib'
 import './button.scss'
 
 type ButtonProps = {

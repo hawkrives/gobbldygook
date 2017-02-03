@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import saveStudentsMiddleware, { shouldTakeAction } from '../save-students'
 import { LOAD_STUDENTS, CHANGE_NAME } from '../../students/constants'
-import { LOG_MESSAGE } from '../../notifications/constants'
+import { LOG_MESSAGE } from '../../../modules/notifications/redux/constants'
 
 xdescribe('shouldTakeAction', () => {
 	it('should ignore LOAD_STUDENTS', () => {
@@ -18,7 +18,7 @@ xdescribe('shouldTakeAction', () => {
 describe('saveStudentsMiddleware', () => {
 	const doDispatch = () => {}
 	const doGetState = () => ({ students: { '123': { data: { past: [], future: [], present: {} } } } })
-	const doNextAction = (...args) => [ ...args ]
+	const doNextAction = (...args) => [...args]
 	const nextHandler = saveStudentsMiddleware({ dispatch: doDispatch, getState: doGetState })
 
 	it('must return a function to handle `next`', () => {

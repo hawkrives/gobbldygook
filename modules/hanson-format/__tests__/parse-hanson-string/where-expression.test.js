@@ -1,6 +1,6 @@
 import { customParser } from './parse-hanson-string.support'
-const parseWhere = customParser({ allowedStartRules: [ 'Where' ] })
-const parseQualifier = customParser({ allowedStartRules: [ 'Qualifier' ] })
+const parseWhere = customParser({ allowedStartRules: ['Where'] })
+const parseQualifier = customParser({ allowedStartRules: ['Qualifier'] })
 
 describe('WhereExpression', () => {
 	it('describes courses "where" a fact is true', () => {

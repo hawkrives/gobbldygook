@@ -1,5 +1,5 @@
 import db from './db'
-import { buildQueryFromString } from 'modules/core'
+import { buildQueryFromString } from '../../search-queries'
 import compact from 'lodash/compact'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
@@ -22,16 +22,16 @@ export default function queryCourseDatabase(queryString, baseQuery={}) {
 
 	// make sure that all values are wrapped in arrays
 	query = toPairs(query)
-	query = map(query, ([ key, val ]) => {
+	query = map(query, ([key, val]) => {
 		if (!Array.isArray(val)) {
-			val = [ val ]
+			val = [val]
 		}
 		if (some(val, v => v === undefined)) {
 			val = compact(val)
 		}
-		return [ key, val ]
+		return [key, val]
 	})
-	query = filter(query, ([ _, val ]) => val.length)
+	query = filter(query, ([_, val]) => val.length)
 	query = fromPairs(query)
 
 	log('query object', query)

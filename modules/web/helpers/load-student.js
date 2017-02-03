@@ -1,4 +1,4 @@
-import { Student } from 'modules/core'
+import { Student } from '../../object-student'
 import debug from 'debug'
 const log = debug('web:check-student')
 

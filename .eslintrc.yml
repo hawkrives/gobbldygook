@@ -1,14 +1,18 @@
 %YAML 1.2
 ---
 parser: babel-eslint
-extends: ['eslint:recommended', 'plugin:flowtype/recommended']
-plugins: [babel, react, flowtype, flowtype-errors]
 
-parserOptions:
-  sourceType: 'module'
-  ecmaFeatures:
-    globalReturn: true  # allow return statements in the global scope
-    jsx: true  # enable JSX
+extends:
+  - eslint:recommended
+  - plugin:flowtype/recommended
+  - plugin:import/errors
+  - plugin:import/warnings
+
+plugins:
+  - babel
+  - react
+  - flowtype
+  - flowtype-errors
 
 env:
   browser: true
@@ -67,7 +71,7 @@ rules:
   semi: [error, never]
   arrow-parens: [warn, as-needed]
   arrow-spacing: [warn, {before: true, after: true}]
-  array-bracket-spacing: [warn, always]
+  array-bracket-spacing: [warn, never]
   object-curly-spacing: [warn, always]
   no-implicit-coercion: [error, {boolean: true, number: true, string: true}]
   keyword-spacing: warn
