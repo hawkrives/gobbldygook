@@ -23,7 +23,7 @@ glob.sync('*')
 console.log('removed top-level folders')
 
 // remove extra top-level files
-const filesWhitelist = [ /^\.git.*/, /^package\.json$/ ]
+const filesWhitelist = [ /^\.git.*/, /^package\.json$/, /^circle.yml$/ ]
 glob.sync('*')
 	.filter(negate(isDir))
 	.filter(negate(inWhitelist(filesWhitelist)))
