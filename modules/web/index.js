@@ -30,14 +30,15 @@ import routes from './routes'
 
 // Create the redux store
 import configureStore from './redux'
-import Root from './containers/root'
+import ReduxWrapper from './redux-wrapper'
 const store = configureStore()
-global.dispatch = store.dispatch
 
 import { loadAllAreas } from './redux/areas/actions'
 store.dispatch(loadAllAreas())
 
-// global.store = store
+// for debugging
+global._dispatch = store.dispatch
+global._store = store
 
 let renderFunc = Root => {
 	render(
@@ -47,4 +48,4 @@ let renderFunc = Root => {
 		document.getElementById('gobbldygook'))
 }
 
-renderFunc(Root)
+renderFunc(ReduxWrapper)

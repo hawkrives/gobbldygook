@@ -1,8 +1,8 @@
 import React, { PropTypes, cloneElement } from 'react'
 import { Provider } from 'react-redux'
-import Notifications from '../modules/notifications/notifications'
+import Notifications from './modules/notifications'
 
-const Root = props => (
+const ReduxWrapper = props => (
 	<Provider store={props.store}>
 		<div id="app-wrapper">
 			{cloneElement(props.children)}
@@ -11,9 +11,9 @@ const Root = props => (
 	</Provider>
 )
 
-Root.propTypes = {
+ReduxWrapper.propTypes = {
 	children: PropTypes.node,
 	store: PropTypes.object.isRequired,
 }
 
-export default Root
+export default ReduxWrapper

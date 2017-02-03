@@ -4,9 +4,9 @@ import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
 import React, { Component, PropTypes } from 'react'
 import { DragDropContext } from 'react-dnd'
-import StudentPicker from '../modules/student-picker'
+import StudentPicker from './modules/student-picker'
 
-import '../index.scss'
+import './index.scss'
 
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
 // eslint-disable-next-line react/prefer-stateless-function

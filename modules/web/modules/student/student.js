@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { loadStudent } from '../../redux/students/actions/load-student'
 
-import Sidebar from '../../containers/sidebar'
+import Sidebar from '../../components/sidebar'
 import Loading from '../../components/loading'
 
 import CourseTable from '../course-table'

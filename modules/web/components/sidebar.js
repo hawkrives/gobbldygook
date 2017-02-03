@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import Button from '../components/button'
-import Icon from '../components/icon'
-import Toolbar from '../components/toolbar'
-import Separator from '../components/separator'
+import Button from './button'
+import Icon from './icon'
+import Toolbar from './toolbar'
+import Separator from './separator'
 
-import CourseRemovalBox from '../components/course-removal-box'
+import CourseRemovalBox from './course-removal-box'
 
 import { undo, redo } from '../redux/students/actions/undo'
 import { removeCourse } from '../redux/students/actions/courses'

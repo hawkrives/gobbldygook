@@ -1,10 +1,22 @@
+import AppContainer from '../app-container'
+
 export default {
-	component: require('../containers/app').default,
+	component: AppContainer,
 	childRoutes: [{
 		path: '/',
 
 		getIndexRoute(location, cb) {
-			cb(null, { content: require('./index').default })
+			cb(null, {
+				content: {
+					getComponents(location, cb) {
+						require.ensure([], () => {
+							cb(null, {
+								content: require('../modules/student-picker').default,
+							})
+						}, 'student-picker.components')
+					},
+				},
+			})
 		},
 
 		getChildRoutes(state, cb) {
