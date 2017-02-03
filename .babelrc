@@ -12,6 +12,8 @@
 		"transform-object-rest-spread",
 		// embeds the react tag name into the component
 		"transform-react-display-name",
+		// enable <style jsx> tags
+		"styled-jsx/babel",
 		// these two together prevent us from defining the helpers in every module
 		"external-helpers",
 		["transform-runtime", {

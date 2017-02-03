@@ -9,7 +9,6 @@ import CodeMirror from 'react-codemirror'
 import 'codemirror/mode/yaml/yaml'
 
 import { iosArrowLeft, iosDownloadOutline, iosReload, iosUploadOutline } from 'modules/web/icons/ionicons'
-import './area-editor.scss'
 
 export default function AreaEditor(props) {
 	const options = {

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
 import oxford from 'listify'
 import plur from 'plur'
@@ -12,7 +13,9 @@ import ContentEditable from 'modules/web/components/content-editable'
 import { getActiveStudentCourses } from 'modules/web/helpers/get-active-student-courses'
 import { countCredits } from 'modules/core/examine-student'
 
-import './student-summary.scss'
+import * as colors from 'modules/web/styles/colors'
+import * as variables from 'modules/web/styles/variables'
+import * as mixins from 'modules/web/styles/mixins'
 
 const goodGraduationMessage =
 	`It looks like you'll make it! Just follow the plan, and go over my output
@@ -47,19 +50,29 @@ const welcomeMessages = [
 
 const welcomeMessage = sample(welcomeMessages)
 
-export default function StudentSummary(props) {
-	const {
-		student,
-		showMessage=true,
-		showAvatar=true,
-		randomizeHello=false,
-	} = props
+export default function StudentSummary({
+	student,
+	showMessage=true,
+	showAvatar=true,
+	randomizeHello=false,
+	onChangeName,
+	onChangeGraduation,
+	onChangeMatriculation,
+}: {
+	student: Object,
+	showMessage?: boolean,
+	showAvatar?: boolean,
+	randomizeHello?: boolean,
+	onChangeName?: (value: string) => any,
+	onChangeGraduation?: (value: string) => any,
+	onChangeMatriculation?: (value: string) => any,
+}) {
 	const { studies, canGraduate } = student
 
-	const NameEl = (props.onChangeName
+	const NameEl = (onChangeName
 		? <ContentEditable
 			className="autosize-input"
-			onBlur={props.onChangeName}
+			onBlur={onChangeName}
 			value={String(student.name)}
 		/>
 		: <span>{String(student.name)}</span>)
@@ -88,19 +101,19 @@ export default function StudentSummary(props) {
 	const neededCredits = student.creditsNeeded
 	const enoughCredits = currentCredits >= neededCredits
 
-	const graduationEl = (props.onChangeGraduation
+	const graduationEl = (onChangeGraduation
 		? <ContentEditable
 			className="autosize-input"
-			onBlur={props.onChangeGraduation}
+			onBlur={onChangeGraduation}
 			value={String(student.graduation)}
 		/>
 		: <span>{String(student.graduation)}</span>
 	)
 
-	const matriculationEl = (props.onChangeMatriculation
+	const matriculationEl = (onChangeMatriculation
 		? <ContentEditable
 			className="autosize-input"
-			onBlur={props.onChangeMatriculation}
+			onBlur={onChangeMatriculation}
 			value={String(student.matriculation)}
 		/>
 		: <span>{String(student.matriculation)}</span>
@@ -110,15 +123,17 @@ export default function StudentSummary(props) {
 
 	return (
 		<article className={cx('student-summary', canGraduateClass)}>
-			<header className="student-summary--header">
+			<header>
 				{showAvatar ? <AvatarLetter
 					className={cx('student-letter', canGraduateClass)}
 					value={student.name}
 				/> : null}
-				<div className="intro">{randomizeHello ? sample(welcomeMessages) : welcomeMessage}{NameEl}!</div>
+				<div className="intro">
+					{randomizeHello ? sample(welcomeMessages) : welcomeMessage}{NameEl}!
+				</div>
 			</header>
 			<div className="content">
-				<div className="paragraph">
+				<p>
 					After matriculating in {matriculationEl}, you are planning to graduate in {graduationEl}, with {' '}
 					{(degrees.length > 0) ? `${degreeEmphasizer}${degreeList} ${degreeWord}` : `no ${degreeWord}`}
 					{(majors.length || concentrations.length || emphases.length) ? (majors.length) && (concentrations.length || emphases.length) ? ', ' : ' and ' : ''}
@@ -129,21 +144,86 @@ export default function StudentSummary(props) {
 					{(emphases.length > 0) && `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
 					{'. '}
 					{currentCredits ? `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`: ''}
-				</div>
-				{showMessage ? <div className="paragraph graduation-message">
+				</p>
+				{showMessage ? <p className="graduation-message">
 					{canGraduate ? goodGraduationMessage : badGraduationMessage}
-				</div>: null}
+				</p>: null}
 			</div>
+			<style jsx>{`
+				.student-summary {
+					${mixins.card}
+
+					text-align: center;
+					hyphens: auto;
+					font-feature-settings: 'onum', 'tnum';
+					text-shadow: 0 1px ${colors.white_transparent_50};
+				}
+
+				.student-summary.cannot-graduate .graduation-message {
+					color: ${colors.deep_orange_500};
+				}
+
+				.student-summary.can-graduate .graduation-message {
+					color: ${colors.light_green_800};
+				}
+				.student-summary.can-graduate {
+					background-color: ${colors.light_green_50};
+				}
+				.student-summary.can-graduate::selection {
+					background-color: ${colors.light_green_900};
+				}
+
+				.content {
+					padding: calc(${variables.block_edge_padding} * 2);
+				}
+
+				.content p {
+					margin: 0;
+				}
+
+				.content p + p {
+					margin-top: calc(${variables.block_edge_padding} * 2);
+				}
+
+				header {
+					color: ${colors.black};
+
+					margin: calc(${variables.block_edge_padding} * 2);
+					margin-bottom: 0;
+					font-style: italic;
+					line-height: 1.6em;
+				}
+
+				:global(.autosize-input) {
+					border-bottom: 1px solid ${colors.gray_400};
+					padding: 0 0.125em 0 0;
+				}
+
+				:global(.autosize-input):focus {
+					outline: 0;
+					background-color: ${colors.blue_50};
+					border-color: ${colors.blue_500};
+				}
+
+				.student-letter {
+					display: block;
+					margin: ${variables.block_edge_padding} auto calc(${variables.block_edge_padding} * 2);
+
+					border: solid 1px;
+					background-color: ${colors.white};
+				}
+
+				.student-letter.cannot-graduate {
+					color: ${colors.deep_orange_500};
+				}
+
+				.student-letter.can-graduate {
+					color: ${colors.light_green_800};
+					box-shadow:
+						0 0 0 5px ${colors.white},
+						0 0 0 6px ${colors.light_green_100};
+				}
+			`}</style>
 		</article>
 	)
-}
-
-StudentSummary.propTypes = {
-	onChangeGraduation: PropTypes.func,
-	onChangeMatriculation: PropTypes.func,
-	onChangeName: PropTypes.func,
-	randomizeHello: PropTypes.bool,
-	showAvatar: PropTypes.bool,
-	showMessage: PropTypes.bool,
-	student: PropTypes.object.isRequired,
 }
