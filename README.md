@@ -9,11 +9,8 @@ We have a [trello board](https://trello.com/b/cviTwkre) where we track which are
 
 
 ## Playing
-1. Visit https://hawkrives.github.io/gobbldygook
-    – Gobbldygook currently supports every major browser, except for Safari (so Chrome, Firefox, Internet Explorer 11, and Microsoft Edge). (Addendum: IE support is currently broken. Unsure why. It's on the TODO list.)
-    – Let's just say that Safari's database support is … a bit lacking.
-    – On iOS devices, every browser is required to use Safari internally, which means that Chrome, Opera, and Safari on iOS all have the same terrible database support.
-    – In short: you can't use Safari, iPhone, iPad, or Apple Watch to access Gobbldygook. :-(
+1. Visit [https://hawkrives.github.io/gobbldygook](https://hawkrives.github.io/gobbldygook)
+    – Gobbldygook currently supports every major browser, except for IE (e.g., Chrome, Firefox, Safari 10+, and Microsoft Edge).
 
 2. Push "New Student": you can either choose to import your data from the SIS, write down your information manually, or import a previously-exported student file.
 
@@ -22,8 +19,17 @@ We have a [trello board](https://trello.com/b/cviTwkre) where we track which are
     – If you use the "search" button on a semester, it will automatically limit your search to just that semester, which might be helpful.
 
 
+## Techincal Requirements
+A browser needs to support:
+
+- IndexedDB
+- Promises
+- ES6 Map, Set
+- ES6 Generator Functions
+
+
 ## Hacking
-- Prerequisites: [node.js, at least v6](https://nodejs.org) and [git](https://git-scm.com).
+- Prerequisites: [node.js, at least v7](https://nodejs.org) and [git](https://git-scm.com).
 - `git clone https://github.com/hawkrives/gobbldygook.git`
 - `cd gobbldygook`
 - `npm install`
