@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import cx from 'classnames'
 
-import Button from 'modules/web/components/button'
-import Icon from 'modules/web/components/icon'
+import Button from '../../../components/button'
+import Icon from '../../../components/icon'
 import Requirement from './requirement'
-import ProgressBar from 'modules/web/components/progress-bar'
-import { compareProps } from 'modules/lib'
-import { close, chevronUp, chevronDown } from 'modules/web/icons/ionicons'
+import ProgressBar from '../../../components/progress-bar'
+import { compareProps } from '../../../../lib'
+import { close, chevronUp, chevronDown } from '../../../icons/ionicons'
 
 import './area-of-study.scss'
 

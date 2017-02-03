@@ -1,5 +1,5 @@
 const uniqueId = require('lodash/uniqueId')
-import { status, text } from 'modules/lib'
+import { status, text } from '../../lib/fetch-helpers'
 import debug from 'debug'
 const log = debug('worker:load-data')
 

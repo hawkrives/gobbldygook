@@ -5,9 +5,9 @@ import {
 	installOperaExtension,
 	installChromeExtension,
 	installFirefoxExtension,
-} from 'modules/web/helpers/extension-helpers'
+} from '../../web/helpers/extension-helpers'
 
-import { interpose } from 'modules/lib'
+import { interpose } from '../../lib'
 
 import brwsr from 'brwsr'
 

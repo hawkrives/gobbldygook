@@ -2,7 +2,7 @@ import forEach from 'lodash/forEach'
 import range from 'lodash/range'
 import size from 'lodash/size'
 
-import { Student, Schedule, addScheduleToStudent } from 'modules/core'
+import { Student, Schedule, addScheduleToStudent } from '../../../../object-student'
 
 import {
 	INIT_STUDENT,

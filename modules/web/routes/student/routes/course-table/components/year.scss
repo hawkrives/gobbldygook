@@ -1,5 +1,5 @@
-@import 'modules/web/styles/variables.scss';
-@import 'modules/web/styles/mixins.scss';
+@import '../../../../../styles/variables.scss';
+@import '../../../../../styles/mixins.scss';
 
 $year-title-size: 2em;
 $year-title-width: $year-title-size * 0.75; /* I don't know why this is 0.75 */

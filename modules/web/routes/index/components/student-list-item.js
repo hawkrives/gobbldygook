@@ -3,12 +3,12 @@ import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
-import { interpose } from 'modules/lib'
-import { sortStudiesByType } from 'modules/core'
+import { interpose } from '../../../../lib/interpose'
+import { sortStudiesByType } from '../../../../object-student'
 
-import Button from 'modules/web/components/button'
-import Icon from 'modules/web/components/icon'
-import { iosTrashOutline, iosArrowForward } from 'modules/web/icons/ionicons'
+import Button from '../../../components/button'
+import Icon from '../../../components/icon'
+import { iosTrashOutline, iosArrowForward } from '../../../icons/ionicons'
 
 import './student-list-item.scss'
 

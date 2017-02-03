@@ -3,13 +3,13 @@ import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 
-import { isRequirementName } from 'modules/examine-student'
+import isRequirementName from '../../../../examine-student/is-requirement-name'
 
-import Icon from 'modules/web/components/icon'
-import { iosBoltOutline, iosBolt } from 'modules/web/icons/ionicons'
+import Icon from '../../../components/icon'
+import { iosBoltOutline, iosBolt } from '../../../icons/ionicons'
 import Filter from './expression--filter'
 import Expression from './expression'
-import Button from 'modules/web/components/button'
+import Button from '../../../components/button'
 import ResultIndicator from './result-indicator'
 
 import './requirement.scss'

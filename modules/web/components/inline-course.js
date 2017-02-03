@@ -6,11 +6,11 @@ import filter from 'lodash/filter'
 import isNull from 'lodash/isNull'
 import map from 'lodash/map'
 
-import { IDENT_COURSE } from 'modules/object-student/item-types'
+import { IDENT_COURSE } from '../../object-student/item-types'
 
 import List from './list'
 import CourseTitle from './course-title'
-import { buildDeptNum } from 'modules/school-st-olaf-college'
+import { buildDeptNum } from '../../school-st-olaf-college/deptnums'
 import Icon from './icon'
 import ModalCourse from './modal-course'
 

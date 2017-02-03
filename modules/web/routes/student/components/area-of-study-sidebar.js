@@ -15,10 +15,10 @@ import union from 'lodash/union'
 import uniq from 'lodash/uniq'
 import values from 'lodash/values'
 
-import { sortStudiesByType } from 'modules/core'
+import { sortStudiesByType } from '../../../../object-student/sort-studies-by-type'
 import AreaOfStudyGroup from './area-of-study-group'
-import Button from 'modules/web/components/button'
-import { areaTypeConstants } from 'modules/core'
+import Button from '../../../components/button'
+import { areaTypeConstants } from '../../../../object-student/area-types'
 
 export default function AreaOfStudySidebar(props) {
 	const { allAreas, student, showAreaPickerFor } = props

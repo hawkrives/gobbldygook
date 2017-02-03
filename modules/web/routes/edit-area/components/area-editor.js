@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react'
 
-import Toolbar from 'modules/web/components/toolbar'
-import Button from 'modules/web/components/button'
-import Icon from 'modules/web/components/icon'
-import Separator from 'modules/web/components/separator'
+import Toolbar from '../../../components/toolbar'
+import Button from '../../../components/button'
+import Icon from '../../../components/icon'
+import Separator from '../../../components/separator'
 
 import CodeMirror from 'react-codemirror'
 import 'codemirror/mode/yaml/yaml'
 
-import { iosArrowLeft, iosDownloadOutline, iosReload, iosUploadOutline } from 'modules/web/icons/ionicons'
+import { iosArrowLeft, iosDownloadOutline, iosReload, iosUploadOutline } from '../../../icons/ionicons'
 import './area-editor.scss'
 
 export default function AreaEditor(props) {

@@ -12,12 +12,12 @@ import Toolbar from './toolbar'
 import Button from './button'
 import CourseTitle from './course-title'
 import {
-	buildDeptNum,
 	semesterName,
 	expandYear,
-} from 'modules/school-st-olaf-college'
+} from '../../school-st-olaf-college/course-info'
+import { buildDeptNum } from '../../school-st-olaf-college/deptnums'
 
-import { to12HourTime } from 'modules/lib'
+import { to12HourTime } from '../../lib'
 
 import { bindActionCreators } from 'redux'
 const { connect } = require('react-redux')

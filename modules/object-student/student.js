@@ -14,7 +14,7 @@ import uuid from 'uuid/v4'
 import debug from 'debug'
 const log = debug('student-format:student')
 
-import { randomChar } from 'modules/lib'
+import { randomChar } from '../lib/random-char'
 
 const now = new Date()
 import { Schedule } from './schedule'

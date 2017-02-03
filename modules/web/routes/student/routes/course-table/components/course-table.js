@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react'
 import cx from 'classnames'
-import { expandYear } from 'modules/school-st-olaf-college'
+import { expandYear } from '../../../../../../school-st-olaf-college/course-info'
 
-import { findFirstAvailableYear } from 'modules/web/helpers/find-first-available-year'
+import { findFirstAvailableYear } from '../../../../../helpers/find-first-available-year'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
 
-import Button from 'modules/web/components/button'
+import Button from '../../../../../components/button'
 import Year from './year'
 
 import './course-table.scss'

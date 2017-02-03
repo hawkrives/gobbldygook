@@ -24,8 +24,8 @@ import present from 'present'
 import debug from 'debug'
 const log = debug('web:redux:search')
 
-import { buildDeptString } from 'modules/school-st-olaf-college'
-import { to12HourTime } from 'modules/lib'
+import { buildDeptString } from '../../../../school-st-olaf-college/deptnums'
+import { to12HourTime } from '../../../../lib/to-12-hour-time'
 const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
 // eslint-disable-next-line no-confusing-arrow

@@ -1,8 +1,16 @@
 %YAML 1.2
 ---
 parser: babel-eslint
-extends: ['eslint:recommended', 'plugin:flowtype/recommended']
-plugins: [babel, react, flowtype, flowtype-errors]
+extends:
+  - eslint:recommended
+  - plugin:flowtype/recommended
+  - plugin:import/errors
+  - plugin:import/warnings
+plugins:
+  - babel
+  - react
+  - flowtype
+  - flowtype-errors
 
 parserOptions:
   sourceType: 'module'

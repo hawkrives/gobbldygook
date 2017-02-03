@@ -5,7 +5,7 @@ import { DropTarget } from 'react-dnd'
 import debug from 'debug'
 const log = debug('web:courses')
 
-import { IDENT_COURSE } from 'modules/core'
+import { IDENT_COURSE } from '../../object-student'
 
 import Icon from './icon'
 import { iosTrashOutline } from '../icons/ionicons'

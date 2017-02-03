@@ -1,9 +1,9 @@
 import { expect } from 'chai'
 
 import { loadStudent } from '../load-student'
-import demoStudent from 'modules/object-student/demo-student.json'
+import demoStudent from '../../../object-student/demo-student.json'
 
-import { Student } from 'modules/core'
+import { Student } from '../../../object-student'
 
 describe('loadStudent', () => {
 	let student
