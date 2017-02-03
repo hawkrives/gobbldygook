@@ -9,7 +9,6 @@
 				"browsers": "last 2 versions, Firefox ESR",
 			},
 			"modules": false,
-			"debug": true,
 		}],
 	],
 	"plugins": [

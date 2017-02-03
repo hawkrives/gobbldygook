@@ -68,6 +68,7 @@ const entries = {
 
 // We have to manually list these so they are loaded in the correct order.
 const bundleNames = [
+	'reactCommon',
 	'react',
 	'common',
 	'yaml',
@@ -76,7 +77,6 @@ const bundleNames = [
 	'idb',
 	'hanson',
 	'bfr',
-	'reactCommon',
 ]
 
 const allBundleNames = Object.keys(entries)
