@@ -164,7 +164,7 @@
     "nomnom": "1.8.1",
     "pegjs": "0.10.0",
     "pify": "2.3.0",
-    "prettier": "0.15.0",
+    "prettier": "0.16.0",
     "react-addons-perf": "15.4.2",
     "react-addons-test-utils": "15.4.2",
     "redux-devtools": "3.3.2",
