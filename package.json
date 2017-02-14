@@ -61,7 +61,7 @@
     "watch": "webpack --watch --config .webpackrc.js --bail --progress --devtool=source-map"
   },
   "dependencies": {
-    "babel-runtime": "6.22.0",
+    "babel-runtime": "6.23.0",
     "brwsr": "1.0.1",
     "classnames": "2.2.5",
     "codemirror": "5.23.0",
