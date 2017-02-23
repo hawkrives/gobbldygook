@@ -154,7 +154,7 @@
     "get-stdin": "5.0.1",
     "glob": "7.1.1",
     "graceful-fs": "4.1.11",
-    "jest": "18.1.0",
+    "jest": "19.0.2",
     "js-beautify": "1.6.11",
     "json-loader": "0.5.4",
     "junk": "2.0.0",
