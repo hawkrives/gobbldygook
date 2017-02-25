@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`counters may be prefixed by "at most" (≤) 1`] = `
 Object {
   "$num": 10,

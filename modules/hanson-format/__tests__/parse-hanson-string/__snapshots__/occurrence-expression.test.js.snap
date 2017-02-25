@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`OccurrenceExpression requires a course to check for occurrences of 1`] = `
 Object {
   "$count": Object {

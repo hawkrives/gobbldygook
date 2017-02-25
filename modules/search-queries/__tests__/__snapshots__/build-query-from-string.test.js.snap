@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`buildQueryFromString builds a query string even with no keys 1`] = `
 Object {
   "words": Array [
@@ -79,7 +81,7 @@ Object {
     1,
   ],
   "title": Array [
-    "\"Japan*\"",
+    "\\"Japan*\\"",
   ],
   "year": Array [
     2014,

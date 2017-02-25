@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`enhanceHanson adds a "slug" key to the top-level 1`] = `
 Object {
   "$type": "requirement",

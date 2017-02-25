@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`queryCourses properly handles a list of five years 1`] = `
 Array [
   Object {
