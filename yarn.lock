@@ -317,7 +317,7 @@ babel-core@6.23.1, babel-core@^6.0.0, babel-core@^6.14.0, babel-core@^6.22.0, ba
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-eslint@7.1.1, babel-eslint@^7.1.1:
+babel-eslint@7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.1.1.tgz#8a6a884f085aa7060af69cfc77341c2f99370fb2"
   dependencies:
@@ -1864,7 +1864,7 @@ disposables@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/disposables/-/disposables-1.0.1.tgz#064727a25b54f502bd82b89aa2dfb8df9f1b39e3"
 
-dnd-core@^2.1.0:
+dnd-core@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-2.2.3.tgz#91acba9e1a377be1e9a02e890dcd9907ac9eb829"
   dependencies:
@@ -5015,19 +5015,18 @@ react-codemirror@0.3.0:
     codemirror "^5.18.2"
     lodash.debounce "^4.0.8"
 
-react-dnd-html5-backend@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-2.1.2.tgz#bcff5866629c335b310b1062fe6537af35073c66"
+react-dnd-html5-backend@2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-2.2.3.tgz#96cb65a0df5968b8ef5cf5afb4da02daaefe5681"
   dependencies:
     lodash "^4.2.0"
 
-react-dnd@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-2.2.0.tgz#23b8c985e15fda52f79846a70d3127a28af28779"
+react-dnd@2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-2.2.3.tgz#75f6a66081fb32a41afa500755b4252fe5dd7a42"
   dependencies:
-    babel-eslint "^7.1.1"
     disposables "^1.0.1"
-    dnd-core "^2.1.0"
+    dnd-core "^2.2.3"
     hoist-non-react-statics "^1.2.0"
     invariant "^2.1.0"
     lodash "^4.2.0"
