@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`computeBoolean can compute the result of several course expressions 1`] = `
 Object {
   "$booleanType": "or",

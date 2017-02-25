@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`OfExpression allows "n" to be "all" 1`] = `
 Object {
   "$count": Object {

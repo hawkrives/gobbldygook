@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`sortStudiesByType sorts a list of areas of study by type 1`] = `
 Array [
   Object {

@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`BooleanExpression allows a & b | c – boolean logic for courses 1`] = `
 Object {
   "$booleanType": "or",

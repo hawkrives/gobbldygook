@@ -1,4 +1,6 @@
-exports[`Schedule can turn into JSON 1`] = `"{\"active\":false,\"clbids\":[],\"id\":\"1\",\"index\":1,\"metadata\":{},\"semester\":0,\"title\":\"Schedule 6\",\"year\":0}"`;
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Schedule can turn into JSON 1`] = `"{\\"active\\":false,\\"clbids\\":[],\\"id\\":\\"1\\",\\"index\\":1,\\"metadata\\":{},\\"semester\\":0,\\"title\\":\\"Schedule 6\\",\\"year\\":0}"`;
 
 exports[`Schedule holds a schedule for a student 1`] = `
 Object {

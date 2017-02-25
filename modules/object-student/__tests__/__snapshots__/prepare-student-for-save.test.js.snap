@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`prepareStudentForSave removes extraneous properties from a student object 1`] = `
 Object {
   "name": "a",

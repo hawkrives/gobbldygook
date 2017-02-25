@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`WhereExpression describes courses "where" a fact is true 1`] = `
 Object {
   "$count": Object {

@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`computeModifier can be used to ensure that the student has taken two courses across two departments 1`] = `
 Array [
   Object {

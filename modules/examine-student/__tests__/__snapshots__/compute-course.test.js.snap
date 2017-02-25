@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`computeCourse adds the course to the dirty set if it matches 1`] = `
 Set {
   "ART 130 Research",

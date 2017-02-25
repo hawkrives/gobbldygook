@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`checkForInvalidSemester checks for an invalid semester on a course 1`] = `
 Object {
   "icon": "iosCalendarOutline",

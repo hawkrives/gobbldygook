@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`ReferenceExpression can reference a requirement 1`] = `
 Object {
   "$requirement": "BTS-B",
