@@ -157,7 +157,7 @@
     "jest": "19.0.2",
     "js-beautify": "1.6.11",
     "json-loader": "0.5.4",
-    "junk": "2.0.0",
+    "junk": "2.1.0",
     "mkdirp": "0.5.1",
     "node-fetch": "2.0.0-alpha.3",
     "node-sass": "4.5.0",
