@@ -103,6 +103,9 @@ rules:
   react/sort-prop-types: warn
   react/wrap-multilines: off
   react/prefer-stateless-function: warn
+  
+  flowtype/space-after-type-colon: 'off'
+  flowtype/space-before-type-colon: 'off'
 
   # jsdoc
   valid-jsdoc:
