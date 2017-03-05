@@ -150,7 +150,7 @@
     "eslint-plugin-react": "6.10.0",
     "extract-text-webpack-plugin": "2.0.0",
     "file-loader": "0.10.1",
-    "flow-bin": "0.40.0",
+    "flow-bin": "0.41.0",
     "get-stdin": "5.0.1",
     "glob": "7.1.1",
     "graceful-fs": "4.1.11",
