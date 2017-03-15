@@ -11,20 +11,22 @@ import type { FilterExpression, Course } from './types'
  * @param {Course[]} courses - the list of courses
  * @returns {Course[]} filtered - the filtered courses
  */
-export default function applyFilter(expr: FilterExpression, courses: Course[]): Course[] {
-	// default to an empty array
-	let filtered: Course[] = []
+export default function applyFilter(
+    expr: FilterExpression,
+    courses: Course[]
+): Course[] {
+    // default to an empty array
+    let filtered: Course[] = []
 
-	// a filter will be either a where-style query or a list of courses
-	if (expr.$filterType === 'where') {
-		filtered = filterByWhereClause(courses, expr.$where)
-	}
-	else if (expr.$filterType === 'of') {
-		filtered = filter(expr.$of, course => checkForCourse(course, courses))
-	}
+    // a filter will be either a where-style query or a list of courses
+    if (expr.$filterType === 'where') {
+        filtered = filterByWhereClause(courses, expr.$where)
+    } else if (expr.$filterType === 'of') {
+        filtered = filter(expr.$of, course => checkForCourse(course, courses))
+    }
 
-	// grab the matches
-	expr._matches = filtered
+    // grab the matches
+    expr._matches = filtered
 
-	return filtered
+    return filtered
 }

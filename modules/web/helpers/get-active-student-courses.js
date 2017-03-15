@@ -3,7 +3,7 @@ import filter from 'lodash/filter'
 import flatMap from 'lodash/flatMap'
 
 export function getActiveStudentCourses(student) {
-	/*
+    /*
 	 - At it's core, this method just needs to get the list of courses that a student has chosen.
 	 - Each schedule has a list of courses that are a part of that schedule.
 	 - Additionally, we only care about the schedules that are marked as "active".
@@ -13,9 +13,9 @@ export function getActiveStudentCourses(student) {
 	   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 	 */
 
-	const activeSchedules = filter(student.schedules, { active: true })
-	let courses = flatMap(activeSchedules, s => s.courses)
-	courses = uniqBy(filter(courses, c => c), course => course.clbid)
+    const activeSchedules = filter(student.schedules, { active: true })
+    let courses = flatMap(activeSchedules, s => s.courses)
+    courses = uniqBy(filter(courses, c => c), course => course.clbid)
 
-	return courses
+    return courses
 }

@@ -17,26 +17,26 @@ import { findMissingNumberBinarySearch } from '../../lib'
  * @returns {Number} - the first available semester slot
  */
 export function findFirstAvailableYear(schedules, matriculation) {
-	if (schedules && schedules.length === 0 && matriculation === undefined) {
-		return new Date().getFullYear()
-	}
+    if (schedules && schedules.length === 0 && matriculation === undefined) {
+        return new Date().getFullYear()
+    }
 
-	let years = map(schedules, s => s.year)
+    let years = map(schedules, s => s.year)
 
-	// put the matriculation year at the front to give a starting point
-	if (matriculation !== undefined && !includes(years, matriculation)) {
-		years.unshift(matriculation - 1)
-	}
+    // put the matriculation year at the front to give a starting point
+    if (matriculation !== undefined && !includes(years, matriculation)) {
+        years.unshift(matriculation - 1)
+    }
 
-	years = sortBy(years)
+    years = sortBy(years)
 
-	// only uniq after we're done messing with the contents
-	years = uniq(years)
+    // only uniq after we're done messing with the contents
+    years = uniq(years)
 
-	let missingNo = findMissingNumberBinarySearch(years)
-	if (missingNo !== null) {
-		return missingNo
-	}
+    let missingNo = findMissingNumberBinarySearch(years)
+    if (missingNo !== null) {
+        return missingNo
+    }
 
-	return max(years) + 1
+    return max(years) + 1
 }

@@ -12,25 +12,25 @@ import freezingMiddleware from 'redux-freeze'
 const loggerMiddleware = createLogger({ collapsed: true })
 
 const finalCreateStore = compose(
-	applyMiddleware(
-		promiseMiddleware,
-		thunkMiddleware,
-		freezingMiddleware,
-		checkStudentsMiddleware,
-		saveStudentsMiddleware,
-		loggerMiddleware
-	),
-	(window && window.devToolsExtension) ? window.devToolsExtension() : f => f,
-	persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+    applyMiddleware(
+        promiseMiddleware,
+        thunkMiddleware,
+        freezingMiddleware,
+        checkStudentsMiddleware,
+        saveStudentsMiddleware,
+        loggerMiddleware
+    ),
+    window && window.devToolsExtension ? window.devToolsExtension() : f => f,
+    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore)
 
 export default function configureStore(initialState) {
-	const store = finalCreateStore(rootReducer, initialState)
+    const store = finalCreateStore(rootReducer, initialState)
 
-	if (module.hot) {
-		module.hot.accept('./reducer', () =>
-			store.replaceReducer(require('./reducer').default))
-	}
+    if (module.hot) {
+        module.hot.accept('./reducer', () =>
+            store.replaceReducer(require('./reducer').default))
+    }
 
-	return store
+    return store
 }

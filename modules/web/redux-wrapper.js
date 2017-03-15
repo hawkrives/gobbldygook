@@ -3,17 +3,17 @@ import { Provider } from 'react-redux'
 import Notifications from './modules/notifications'
 
 const ReduxWrapper = props => (
-	<Provider store={props.store}>
-		<div id="app-wrapper">
-			{cloneElement(props.children)}
-			<Notifications />
-		</div>
-	</Provider>
+    <Provider store={props.store}>
+        <div id="app-wrapper">
+            {cloneElement(props.children)}
+            <Notifications />
+        </div>
+    </Provider>
 )
 
 ReduxWrapper.propTypes = {
-	children: PropTypes.node,
-	store: PropTypes.object.isRequired,
+    children: PropTypes.node,
+    store: PropTypes.object.isRequired,
 }
 
 export default ReduxWrapper

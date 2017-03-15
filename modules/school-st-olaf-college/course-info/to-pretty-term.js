@@ -8,11 +8,11 @@ const { expandYear } = require('./expand-year')
  * eg. {in: 20121, out: Fall 2012-13}
  */
 function toPrettyTerm(term: number): string {
-	const strterm = String(term)
-	const year = strterm.substr(0, 4)
-	const sem = strterm.substr(4, 1)
+    const strterm = String(term)
+    const year = strterm.substr(0, 4)
+    const sem = strterm.substr(4, 1)
 
-	return `${semesterName(sem)} ${expandYear(year)}`
+    return `${semesterName(sem)} ${expandYear(year)}`
 }
 
 module.exports.toPrettyTerm = toPrettyTerm

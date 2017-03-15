@@ -8,6 +8,6 @@ import type { Course } from './types'
  * @param {Course[]} courses - a list of courses
  * @returns {number} - the sum of the 'credits' properties
  */
-export function countCredits(courses: Course[]=[]) {
-	return sumBy(courses, 'credits') || 0
+export function countCredits(courses: Course[] = []) {
+    return sumBy(courses, 'credits') || 0
 }

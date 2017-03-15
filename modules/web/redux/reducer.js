@@ -7,8 +7,8 @@ import search from '../modules/course-searcher/redux/reducers'
 import students from './students/reducers'
 
 export default combineReducers({
-	areas,
-	notifications,
-	students,
-	search,
+    areas,
+    notifications,
+    students,
+    search,
 })

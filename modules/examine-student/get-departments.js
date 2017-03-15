@@ -10,5 +10,5 @@ import type { Course } from './types'
  * @returns {string[]} - the list of unique departments
  */
 export default function getDepartments(courses: Course[]) {
-	return uniq(flatMap(courses, c => c.department))
+    return uniq(flatMap(courses, c => c.department))
 }

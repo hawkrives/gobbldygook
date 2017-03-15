@@ -16,33 +16,33 @@ import type { Requirement } from './types'
  * @returns {Course[]} - the leaf children
  */
 export default function findLeafRequirements(requirement: Requirement) {
-	// Time to muse. Just what is a "requirement with no children?"
-	// I think that it's just that – a requirement with no children;
-	// that is, one with no properties that pass the isRequirementName check.
-	// If there are any children, then we call this func on each of them.
-	// It should eventually return an array of all of the leaf children.
+    // Time to muse. Just what is a "requirement with no children?"
+    // I think that it's just that – a requirement with no children;
+    // that is, one with no properties that pass the isRequirementName check.
+    // If there are any children, then we call this func on each of them.
+    // It should eventually return an array of all of the leaf children.
 
-	// if it's not an object, return instantly.
-	if (!isPlainObject(requirement)) {
-		return null
-	}
+    // if it's not an object, return instantly.
+    if (!isPlainObject(requirement)) {
+        return null
+    }
 
-	// we've gone too far down!
-	if (requirement.$type !== 'requirement') {
-		return null
-	}
+    // we've gone too far down!
+    if (requirement.$type !== 'requirement') {
+        return null
+    }
 
-	if (requirement.computed === true) {
-		return [requirement]
-	}
+    if (requirement.computed === true) {
+        return [requirement]
+    }
 
-	// if there are no keys in this object which are requirement names,
-	// then we've found a leaf requirement! return it.
-	if (!some(keys(requirement), isRequirementName)) {
-		return requirement
-	}
+    // if there are no keys in this object which are requirement names,
+    // then we've found a leaf requirement! return it.
+    if (!some(keys(requirement), isRequirementName)) {
+        return requirement
+    }
 
-	// otherwise, run findLeafRequirements over the object, to descend further
-	// down the tree of madness.
-	return compact(flatten(map(requirement, findLeafRequirements)))
+    // otherwise, run findLeafRequirements over the object, to descend further
+    // down the tree of madness.
+    return compact(flatten(map(requirement, findLeafRequirements)))
 }

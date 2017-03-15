@@ -9,6 +9,6 @@ import type { Requirement } from './types'
  * @returns {Course[]} - the already-computed matches from the filter property
  */
 export default function getMatchesFromFilter(ctx: Requirement) {
-	assertKeys(ctx, 'filter')
-	return ctx.filter._matches || []
+    assertKeys(ctx, 'filter')
+    return ctx.filter._matches || []
 }
