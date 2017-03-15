@@ -44,6 +44,9 @@
       "history"
     ]
   },
+  "config": {
+    "prettier": "--trailing-comma es5 --tab-width 4 --single-quote"
+  },
   "scripts": {
     "build": "npm run copy && cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --progress",
     "build-ci": "npm run build -- --no-progress",
@@ -53,6 +56,9 @@
     "cover": "jest --coverage && open coverage/index.html",
     "flow": "flow check",
     "lint": "eslint *.js modules/",
+    "prettier": "prettier --write $npm_package_config_prettier 'source/**/*.js' '*.js' && eslint --cache --fix 'source/' '*.js'",
+    "prettier:changed": "FILES=$(git diff --name-only | grep '\\.js$'); prettier --write $npm_package_config_prettier $FILES; eslint --cache --fix $FILES",
+    "prettier:since-master": "FILES=$(git diff --name-only master | grep '\\.js$'); prettier --write $npm_package_config_prettier $FILES; eslint --cache --fix $FILES",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
     "start": "npm run copy && webpack-dev-server --config .webpackrc.js --progress",
     "stats": "cross-env NODE_ENV=production npm run stats-dev",
