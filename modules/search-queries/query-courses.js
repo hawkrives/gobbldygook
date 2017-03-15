@@ -9,5 +9,5 @@ import { checkCourseAgainstQuery } from './check-course-against-query'
  * @returns {Array<Course>} - the courses that matched the query
  */
 export function queryCourses(queryObj, courses) {
-	return filter(courses, c => checkCourseAgainstQuery(queryObj, c))
+    return filter(courses, c => checkCourseAgainstQuery(queryObj, c))
 }
