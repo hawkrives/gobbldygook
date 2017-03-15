@@ -6,12 +6,14 @@ import debug from 'debug'
 const log = debug('web:react')
 
 function FilterOf({ expr, ctx }) {
-    return <div>
-		{map(expr.$of, (ex, i) => {
-    log(ex)
-    return <Expression key={i} expr={ex} ctx={ctx} />
-})}
-	</div>
+    return (
+        <div>
+            {map(expr.$of, (ex, i) => {
+                log(ex)
+                return <Expression key={i} expr={ex} ctx={ctx} />
+            })}
+        </div>
+    )
 }
 FilterOf.propTypes = {
     ctx: PropTypes.object,

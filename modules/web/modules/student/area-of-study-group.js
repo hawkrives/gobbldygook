@@ -14,42 +14,46 @@ import './area-of-study-group.scss'
 export default function AreaOfStudyGroup(props) {
     const showAreaPicker = props.showAreaPicker || false
     const showOrHidePicker = showAreaPicker
-		? props.onEndAddArea
-		: props.onInitiateAddArea
+        ? props.onEndAddArea
+        : props.onInitiateAddArea
 
     return (
-		<section className="area-of-study-group">
-			<h1 className="area-type-heading">
-				{capitalize(pluralizeArea(props.type))}
-				<Button
-    className="add-area-of-study"
-    type="flat"
-    onClick={ev => showOrHidePicker(props.type, ev)}
-				>
-					{showAreaPicker ? 'Close' : 'Add ∙ Edit'}
-				</Button>
-			</h1>
+        <section className="area-of-study-group">
+            <h1 className="area-type-heading">
+                {capitalize(pluralizeArea(props.type))}
+                <Button
+                    className="add-area-of-study"
+                    type="flat"
+                    onClick={ev => showOrHidePicker(props.type, ev)}
+                >
+                    {showAreaPicker ? 'Close' : 'Add ∙ Edit'}
+                </Button>
+            </h1>
 
-			{showAreaPicker ? <AreaPicker
-    areaList={props.allAreasOfType}
-    currentAreas={props.areas}
-    onAddArea={props.onAddArea}
-    studentGraduation={props.studentGraduation}
-    type={props.type}
-			/> : null}
+            {showAreaPicker
+                ? <AreaPicker
+                    areaList={props.allAreasOfType}
+                    currentAreas={props.areas}
+                    onAddArea={props.onAddArea}
+                    studentGraduation={props.studentGraduation}
+                    type={props.type}
+                  />
+                : null}
 
-			{map(props.areas, (area, i) =>
-				<AreaOfStudy area={area}
-    key={i + area.name ? area.name : ''}
-    onAddOverride={props.onAddOverride}
-    onRemoveArea={props.onRemoveArea}
-    onRemoveOverride={props.onRemoveOverride}
-    onToggleOverride={props.onToggleOverride}
-    showCloseButton={showAreaPicker}
-    showEditButton={showAreaPicker}
-    studentId={props.studentId}
-				/>)}
-		</section>
+            {map(props.areas, (area, i) => (
+                <AreaOfStudy
+                    area={area}
+                    key={i + area.name ? area.name : ''}
+                    onAddOverride={props.onAddOverride}
+                    onRemoveArea={props.onRemoveArea}
+                    onRemoveOverride={props.onRemoveOverride}
+                    onToggleOverride={props.onToggleOverride}
+                    showCloseButton={showAreaPicker}
+                    showEditButton={showAreaPicker}
+                    studentId={props.studentId}
+                />
+            ))}
+        </section>
     )
 }
 

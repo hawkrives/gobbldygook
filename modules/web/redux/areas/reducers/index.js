@@ -1,14 +1,14 @@
 // @flow
-import {
-	LOAD_ALL_AREAS,
-	LOADING_AREAS,
-} from '../constants'
+import { LOAD_ALL_AREAS, LOADING_AREAS } from '../constants'
 
 type AreaOfStudy = {};
-type State = {data: AreaOfStudy[], isLoading: boolean};
+type State = { data: AreaOfStudy[], isLoading: boolean };
 const initialState = { data: [], isLoading: false }
 
-export default function reducer(state: State = initialState, action: {type: string, payload: any[]}) {
+export default function reducer(
+    state: State = initialState,
+    action: { type: string, payload: any[] }
+) {
     const { type, payload } = action
 
     switch (type) {

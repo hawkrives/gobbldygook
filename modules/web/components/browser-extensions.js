@@ -2,9 +2,9 @@
 import React from 'react'
 
 import {
-	installOperaExtension,
-	installChromeExtension,
-	installFirefoxExtension,
+    installOperaExtension,
+    installChromeExtension,
+    installFirefoxExtension,
 } from '../../web/helpers/extension-helpers'
 
 import { interpose } from '../../lib'
@@ -13,16 +13,27 @@ import brwsr from 'brwsr'
 
 import './browser-extensions.scss'
 
-function BrowserButton({
-	onClick,
-	browserName,
-	disabled,
-}: {
-	onClick: (any) => any,
-	browserName: string,
-	disabled?: boolean,
-}) {
-    return <button type="button" disabled={disabled} className="browser-button" onClick={onClick}>{browserName}</button>
+function BrowserButton(
+    {
+        onClick,
+        browserName,
+        disabled,
+    }: {
+        onClick: (any) => any,
+        browserName: string,
+        disabled?: boolean,
+    }
+) {
+    return (
+        <button
+            type="button"
+            disabled={disabled}
+            className="browser-button"
+            onClick={onClick}
+        >
+            {browserName}
+        </button>
+    )
 }
 BrowserButton.propTypes = {
     onClick: React.PropTypes.func.isRequired,
@@ -31,67 +42,63 @@ BrowserButton.propTypes = {
 export class BrowserExtensionsComponent extends React.Component {
     static propTypes = {
         onInstall: React.PropTypes.func.isRequired,
-    }
+    };
 
     state: {
-		installError: ?Error,
-		installAttempted: boolean,
-		extensionInstalled: boolean,
-	} = {
-    installAttempted: false,
-    installError: null,
-    extensionInstalled: false,
-}
+        installError: ?Error,
+        installAttempted: boolean,
+        extensionInstalled: boolean,
+    } = {
+        installAttempted: false,
+        installError: null,
+        extensionInstalled: false,
+    };
 
     checkExtensionStatus = () => {
         if (global.gobbldygook_extension >= '1.0.0') {
             this.setState({ extensionInstalled: true })
         }
-    }
+    };
 
     installChromeExtension = (ev: Event) => {
         ev.preventDefault()
         ev.stopPropagation()
 
         installChromeExtension()
-			.then(this.installSuccess)
-			.catch(this.installFailure)
-    }
+            .then(this.installSuccess)
+            .catch(this.installFailure)
+    };
 
     installFirefoxExtension = (ev: Event) => {
         ev.preventDefault()
         ev.stopPropagation()
 
         installFirefoxExtension()
-			.then(this.installSuccess)
-			.catch(this.installFailure)
-    }
+            .then(this.installSuccess)
+            .catch(this.installFailure)
+    };
 
     installOperaExtension = (ev: Event) => {
         ev.preventDefault()
         ev.stopPropagation()
 
         installOperaExtension()
-			.then(this.installSuccess)
-			.catch(this.installFailure)
-    }
+            .then(this.installSuccess)
+            .catch(this.installFailure)
+    };
 
-    installSafariExtension = () => {
+    installSafariExtension = () => {};
 
-    }
-
-    installEdgeExtension = () => {
-
-    }
+    installEdgeExtension = () => {};
 
     installSuccess = () => {
         this.setState({ installAttempted: true })
         this.props.onInstall()
-    }
+    };
 
     installFailure = (err: Error) => {
         this.setState({ installError: err, installAttempted: true })
-    }
+    };
 
     detectBrowser() {
         return brwsr()
@@ -111,49 +118,111 @@ export class BrowserExtensionsComponent extends React.Component {
 
     buttons() {
         return [
-			{ name: 'Google Chrome', button: <BrowserButton key="chrome" onClick={this.installChromeExtension} browserName="Chrome" /> },
-			{ name: 'Mozilla Firefox', button: <BrowserButton key="firefox" onClick={this.installFirefoxExtension} browserName="Firefox" /> },
-			{ name: 'Microsoft Edge', button: <BrowserButton key="edge" disabled onClick={this.installEdgeExtension} browserName="Edge" /> },
-			{ name: 'Safari', button: <BrowserButton key="safari" disabled onClick={this.installSafariExtension} browserName="Safari" /> },
-			{ name: 'Opera', button: <BrowserButton key="opera" disabled onClick={this.installOperaExtension} browserName="Opera" /> },
+            {
+                name: 'Google Chrome',
+                button: (
+                    <BrowserButton
+                        key="chrome"
+                        onClick={this.installChromeExtension}
+                        browserName="Chrome"
+                    />
+                ),
+            },
+            {
+                name: 'Mozilla Firefox',
+                button: (
+                    <BrowserButton
+                        key="firefox"
+                        onClick={this.installFirefoxExtension}
+                        browserName="Firefox"
+                    />
+                ),
+            },
+            {
+                name: 'Microsoft Edge',
+                button: (
+                    <BrowserButton
+                        key="edge"
+                        disabled
+                        onClick={this.installEdgeExtension}
+                        browserName="Edge"
+                    />
+                ),
+            },
+            {
+                name: 'Safari',
+                button: (
+                    <BrowserButton
+                        key="safari"
+                        disabled
+                        onClick={this.installSafariExtension}
+                        browserName="Safari"
+                    />
+                ),
+            },
+            {
+                name: 'Opera',
+                button: (
+                    <BrowserButton
+                        key="opera"
+                        disabled
+                        onClick={this.installOperaExtension}
+                        browserName="Opera"
+                    />
+                ),
+            },
         ]
     }
 
     primaryButton() {
-        return this.buttons().filter(btn => btn.name === this.detectBrowser()).map(btn => btn.button)[0]
+        return this.buttons()
+            .filter(btn => btn.name === this.detectBrowser())
+            .map(btn => btn.button)[0]
     }
 
     secondaryButtons() {
-        return this.buttons().filter(btn => btn.name !== this.detectBrowser()).map(btn => btn.button)
+        return this.buttons()
+            .filter(btn => btn.name !== this.detectBrowser())
+            .map(btn => btn.button)
     }
 
     render() {
         if (this.checkExtensionStatus()) {
-            return <div><p>The extension is installed and active. Let's rock!</p></div>
+            return (
+                <div>
+                    <p>The extension is installed and active. Let's rock!</p>
+                </div>
+            )
         }
 
         return (
-			<div>
-				<p>
-					Gobbldygook uses a browser extension to import your data from the SIS.
-					Once you have imported your information, you don't need the extension anymore.
-				</p>
+            <div>
+                <p>
+                    Gobbldygook uses a browser extension to import your data from the SIS.
+                    Once you have imported your information, you don't need the extension anymore.
+                </p>
 
-				<p>
-					{this.flavorText()}
-				</p>
+                <p>
+                    {this.flavorText()}
+                </p>
 
-				<p>
-					Install for {this.primaryButton()}.{' '}
-				</p>
+                <p>
+                    Install for {this.primaryButton()}.{' '}
+                </p>
 
-				<details>
-					<summary>Not {this.detectBrowser()}?</summary>
-					<p>We also have {interpose(this.secondaryButtons(), ', ')}.</p>
-				</details>
+                <details>
+                    <summary>Not {this.detectBrowser()}?</summary>
+                    <p>
+                        We also have {interpose(this.secondaryButtons(), ', ')}.
+                    </p>
+                </details>
 
-				<p>{this.state.installError ? this.state.installError.message : null}</p>
-			</div>
+                <p>
+                    {this.state.installError
+                        ? this.state.installError.message
+                        : null}
+                </p>
+            </div>
         )
     }
 }

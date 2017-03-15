@@ -10,33 +10,49 @@ export default {
             {
                 path: 'sis',
                 getComponent(location, cb) {
-                    require.ensure([], () => {
-                        cb(null, require('./method-import').default)
-                    }, 'new-student.import.component')
+                    require.ensure(
+                        [],
+                        () => {
+                            cb(null, require('./method-import').default)
+                        },
+                        'new-student.import.component'
+                    )
                 },
             },
             {
                 path: 'manual',
                 getComponent(location, cb) {
-                    require.ensure([], () => {
-                        cb(null, require('./method-manual').default)
-                    }, 'new-student.manual.component')
+                    require.ensure(
+                        [],
+                        () => {
+                            cb(null, require('./method-manual').default)
+                        },
+                        'new-student.manual.component'
+                    )
                 },
             },
             {
                 path: 'drive',
                 getComponent(location, cb) {
-                    require.ensure([], () => {
-                        cb(null, require('./method-drive').default)
-                    }, 'new-student.drive.component')
+                    require.ensure(
+                        [],
+                        () => {
+                            cb(null, require('./method-drive').default)
+                        },
+                        'new-student.drive.component'
+                    )
                 },
             },
             {
                 path: 'upload',
                 getComponent(location, cb) {
-                    require.ensure([], () => {
-                        cb(null, require('./method-upload').default)
-                    }, 'new-student.upload.component')
+                    require.ensure(
+                        [],
+                        () => {
+                            cb(null, require('./method-upload').default)
+                        },
+                        'new-student.upload.component'
+                    )
                 },
             },
         ])

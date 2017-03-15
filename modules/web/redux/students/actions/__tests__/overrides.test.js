@@ -2,10 +2,7 @@ import { expect } from 'chai'
 
 import { setOverride, removeOverride } from '../overrides'
 
-import {
-	SET_OVERRIDE,
-	REMOVE_OVERRIDE,
-} from '../../constants'
+import { SET_OVERRIDE, REMOVE_OVERRIDE } from '../../constants'
 
 describe('setOverride action', () => {
     it('returns an action to add an override', () => {

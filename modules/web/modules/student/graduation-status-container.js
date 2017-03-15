@@ -5,9 +5,16 @@ import { bindActionCreators } from 'redux'
 import has from 'lodash/has'
 import pathToOverride from '../../../examine-student/path-to-override'
 
-import { changeName, changeMatriculation, changeGraduation } from '../../redux/students/actions/change'
+import {
+    changeName,
+    changeMatriculation,
+    changeGraduation,
+} from '../../redux/students/actions/change'
 import { addArea, removeArea } from '../../redux/students/actions/areas'
-import { setOverride, removeOverride } from '../../redux/students/actions/overrides'
+import {
+    setOverride,
+    removeOverride,
+} from '../../redux/students/actions/overrides'
 import GraduationStatus from './graduation-status'
 
 class GraduationStatusContainer extends Component {
@@ -83,10 +90,16 @@ class GraduationStatusContainer extends Component {
     };
 
     handleChangeGraduation = ev => {
-        this.props.changeGraduation(this.props.student.id, parseInt(ev.target.value) || 0)
+        this.props.changeGraduation(
+            this.props.student.id,
+            parseInt(ev.target.value) || 0
+        )
     };
     handleChangeMatriculation = ev => {
-        this.props.changeMatriculation(this.props.student.id, parseInt(ev.target.value) || 0)
+        this.props.changeMatriculation(
+            this.props.student.id,
+            parseInt(ev.target.value) || 0
+        )
     };
     handleChangeName = ev => {
         this.props.changeName(this.props.student.id, ev.target.value)
@@ -95,27 +108,38 @@ class GraduationStatusContainer extends Component {
     render() {
         const student = this.props.student
         return (
-			<GraduationStatus
-    allAreas={this.props.allAreas}
-    onAddArea={this.handleAddArea}
-    onAddOverride={this.handleAddOverride}
-    onChangeGraduation={this.handleChangeGraduation}
-    onChangeMatriculation={this.handleChangeMatriculation}
-    onChangeName={this.handleChangeName}
-    onEndAddArea={this.handleEndAddArea}
-    onInitiateAddArea={this.handleInitiateAddArea}
-    onRemoveArea={this.handleRemoveArea}
-    onRemoveOverride={this.handleRemoveOverride}
-    onToggleOverride={this.handleToggleOverride}
-    showAreaPickerFor={this.state.showAreaPickerFor}
-    student={student}
-			/>
+            <GraduationStatus
+                allAreas={this.props.allAreas}
+                onAddArea={this.handleAddArea}
+                onAddOverride={this.handleAddOverride}
+                onChangeGraduation={this.handleChangeGraduation}
+                onChangeMatriculation={this.handleChangeMatriculation}
+                onChangeName={this.handleChangeName}
+                onEndAddArea={this.handleEndAddArea}
+                onInitiateAddArea={this.handleInitiateAddArea}
+                onRemoveArea={this.handleRemoveArea}
+                onRemoveOverride={this.handleRemoveOverride}
+                onToggleOverride={this.handleToggleOverride}
+                showAreaPickerFor={this.state.showAreaPickerFor}
+                student={student}
+            />
         )
     }
 }
 
 const mapDispatch = dispatch =>
-	bindActionCreators({ addArea, setOverride, removeOverride, removeArea, changeName, changeMatriculation, changeGraduation }, dispatch)
+    bindActionCreators(
+        {
+            addArea,
+            setOverride,
+            removeOverride,
+            removeArea,
+            changeName,
+            changeMatriculation,
+            changeGraduation,
+        },
+        dispatch
+    )
 
 const mapState = state => ({ allAreas: state.areas.data })
 

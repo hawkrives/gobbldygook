@@ -7,13 +7,13 @@ import debug from 'debug'
 const log = debug('web:redux:search')
 
 import {
-	UPDATE_QUERY,
-	SUBMIT_QUERY,
-	BEGIN_QUERY,
-	SORT_RESULTS,
-	GROUP_RESULTS,
-	CLEAR_RESULTS,
-	SET_PARTIAL_QUERY,
+    UPDATE_QUERY,
+    SUBMIT_QUERY,
+    BEGIN_QUERY,
+    SORT_RESULTS,
+    GROUP_RESULTS,
+    CLEAR_RESULTS,
+    SET_PARTIAL_QUERY,
 } from './constants'
 
 export function updateQuery(newQuery) {
@@ -22,7 +22,7 @@ export function updateQuery(newQuery) {
 
 export function setPartialQuery(partial) {
     if (partial) {
-		// eslint-disable-next-line no-confusing-arrow
+        // eslint-disable-next-line no-confusing-arrow
         partial = mapValues(partial, val => Array.isArray(val) ? val : [val])
         return { type: SET_PARTIAL_QUERY, payload: partial }
     }
@@ -59,11 +59,10 @@ export function submitQuery() {
         const startQueryTime = present()
 
         dispatch(beginQuery())
-        const payload = queryCourseDatabase(query, partial)
-			.then(results => {
-    log(`query took ${round(present() - startQueryTime, 2)}ms.`)
-    return results
-})
+        const payload = queryCourseDatabase(query, partial).then(results => {
+            log(`query took ${round(present() - startQueryTime, 2)}ms.`)
+            return results
+        })
 
         return dispatch({ type: SUBMIT_QUERY, payload })
     }

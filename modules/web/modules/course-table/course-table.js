@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react'
 import cx from 'classnames'
 import { expandYear } from '../../../school-st-olaf-college/course-info'
 
-import { findFirstAvailableYear } from '../../helpers/find-first-available-year'
+import {
+    findFirstAvailableYear,
+} from '../../helpers/find-first-available-year'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
@@ -17,37 +19,37 @@ export default function CourseTable(props) {
     const { schedules, matriculation, graduation } = student
 
     const nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
-    const canAddYear = (graduation > nextAvailableYear)
+    const canAddYear = graduation > nextAvailableYear
 
-    const nextYearButton = canAddYear && (
-		<Button
-    className="add-year"
-    key="add-year"
-    type="flat"
-    title="Add Year"
-    onClick={props.addYear}
-		>
-			{`Add ${expandYear(nextAvailableYear, false, '–')}`}
-		</Button>
-	)
+    const nextYearButton = canAddYear &&
+        <Button
+            className="add-year"
+            key="add-year"
+            type="flat"
+            title="Add Year"
+            onClick={props.addYear}
+        >
+            {`Add ${expandYear(nextAvailableYear, false, '–')}`}
+        </Button>
 
     let sorted = sortBy(schedules, 'year')
     let grouped = groupBy(sorted, 'year')
 
-    let years = map(grouped, (schedules, year) =>
-		<Year
-    key={year}
-    year={Number(year)}
-    student={student}
-    addSemester={() => props.addSemester(Number(year))}
-    removeYear={() => props.removeYear(Number(year))}
-		/>)
+    let years = map(grouped, (schedules, year) => (
+        <Year
+            key={year}
+            year={Number(year)}
+            student={student}
+            addSemester={() => props.addSemester(Number(year))}
+            removeYear={() => props.removeYear(Number(year))}
+        />
+    ))
     years.splice(nextAvailableYear - matriculation, 0, nextYearButton)
 
     return (
-		<div className={cx('course-table', props.className)}>
-			{years}
-		</div>
+        <div className={cx('course-table', props.className)}>
+            {years}
+        </div>
     )
 }
 

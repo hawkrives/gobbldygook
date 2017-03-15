@@ -12,7 +12,15 @@ import CourseRemovalBox from './course-removal-box'
 import { undo, redo } from '../redux/students/actions/undo'
 import { removeCourse } from '../redux/students/actions/courses'
 
-import { iosUndo, iosUndoOutline, iosRedo, iosRedoOutline, iosSearch, iosPeopleOutline, iosUploadOutline } from '../icons/ionicons'
+import {
+    iosUndo,
+    iosUndoOutline,
+    iosRedo,
+    iosRedoOutline,
+    iosSearch,
+    iosPeopleOutline,
+    iosUploadOutline,
+} from '../icons/ionicons'
 
 import './sidebar.scss'
 
@@ -23,37 +31,50 @@ export function Sidebar(props) {
     const canRedo = props.student.data.future.length
 
     return (
-		<aside className="sidebar">
-			<Toolbar className="student-buttons">
-				<Button link to="/" title="Students">
-					<Icon type="block">{iosPeopleOutline}</Icon>
-				</Button>
-				<Button link to={`/s/${studentId}/search`} title="Search">
-					<Icon type="block">{iosSearch}</Icon>
-				</Button>
+        <aside className="sidebar">
+            <Toolbar className="student-buttons">
+                <Button link to="/" title="Students">
+                    <Icon type="block">{iosPeopleOutline}</Icon>
+                </Button>
+                <Button link to={`/s/${studentId}/search`} title="Search">
+                    <Icon type="block">{iosSearch}</Icon>
+                </Button>
 
-				<Separator type="spacer" />
+                <Separator type="spacer" />
 
-				<Button title="Undo" onClick={() => undo(studentId)} disabled={!canUndo}>
-					<Icon type="block">{!canUndo ? iosUndoOutline : iosUndo}</Icon>
-				</Button>
-				<Button title="Redo" onClick={() => redo(studentId)} disabled={!canRedo}>
-					<Icon type="block">{!canRedo ? iosRedoOutline : iosRedo}</Icon>
-				</Button>
+                <Button
+                    title="Undo"
+                    onClick={() => undo(studentId)}
+                    disabled={!canUndo}
+                >
+                    <Icon type="block">
+                        {!canUndo ? iosUndoOutline : iosUndo}
+                    </Icon>
+                </Button>
+                <Button
+                    title="Redo"
+                    onClick={() => redo(studentId)}
+                    disabled={!canRedo}
+                >
+                    <Icon type="block">
+                        {!canRedo ? iosRedoOutline : iosRedo}
+                    </Icon>
+                </Button>
 
-				<Separator type="spacer" />
+                <Separator type="spacer" />
 
-				<Button link to={`/s/${studentId}/share`} title="Share">
-					<Icon type="block">{iosUploadOutline}</Icon>
-				</Button>
-			</Toolbar>
+                <Button link to={`/s/${studentId}/share`} title="Share">
+                    <Icon type="block">{iosUploadOutline}</Icon>
+                </Button>
+            </Toolbar>
 
-			<CourseRemovalBox
-    removeCourse={(scheduleId, clbid) => props.removeCourse(studentId, scheduleId, clbid)}
-			/>
+            <CourseRemovalBox
+                removeCourse={(scheduleId, clbid) =>
+                    props.removeCourse(studentId, scheduleId, clbid)}
+            />
 
-			{props.children}
-		</aside>
+            {props.children}
+        </aside>
     )
 }
 
@@ -71,7 +92,7 @@ Sidebar.propTypes = {
     undo: PropTypes.func.isRequired,
 }
 
-
-const mapDispatch = dispatch => bindActionCreators({ undo, redo, removeCourse }, dispatch)
+const mapDispatch = dispatch =>
+    bindActionCreators({ undo, redo, removeCourse }, dispatch)
 
 export default connect(undefined, mapDispatch)(Sidebar)

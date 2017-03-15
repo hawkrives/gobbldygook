@@ -23,12 +23,12 @@ export class App extends Component {
     render() {
         let { content, overlay } = this.props
         return (
-			<DocumentTitle title="Gobbldygook">
-				<div id="gateway-wrapper">
-					<div id="content-wrapper">{content}</div>
-					{overlay}
-				</div>
-			</DocumentTitle>
+            <DocumentTitle title="Gobbldygook">
+                <div id="gateway-wrapper">
+                    <div id="content-wrapper">{content}</div>
+                    {overlay}
+                </div>
+            </DocumentTitle>
         )
     }
 }

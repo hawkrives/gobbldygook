@@ -6,7 +6,6 @@ import { checkStudentAgainstArea } from './check-student-against-area'
 import { countCredits } from '../../examine-student'
 import { getActiveStudentCourses } from './get-active-student-courses'
 
-
 /**
  * Checks a student objects graduation possibilities against all of its areas of study.
  *
@@ -20,13 +19,16 @@ import { getActiveStudentCourses } from './get-active-student-courses'
 export function checkStudentGraduatability(student) {
     const areaPromises = map(student.areas, checkStudentAgainstArea(student))
     return Promise.all(areaPromises).then(areaDetails => {
-        const goodAreas = filter(areaDetails, area => area._area && area._area.computed === true)
-        const allAreasPass = (size(goodAreas) === size(areaDetails))
+        const goodAreas = filter(
+            areaDetails,
+            area => area._area && area._area.computed === true
+        )
+        const allAreasPass = size(goodAreas) === size(areaDetails)
 
         const currentCredits = countCredits(getActiveStudentCourses(student))
-        const hasEnoughCredits = (currentCredits >= student.creditsNeeded)
+        const hasEnoughCredits = currentCredits >= student.creditsNeeded
 
-        const graduatability = (allAreasPass && hasEnoughCredits)
+        const graduatability = allAreasPass && hasEnoughCredits
 
         return {
             ...student,

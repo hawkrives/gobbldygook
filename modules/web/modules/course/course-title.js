@@ -5,14 +5,15 @@ import './course-title.scss'
 const independentRegex = /^I[RS]/
 
 type CourseTitleProps = {
-	className?: string,
-	name: string,
-	title?: string,
-	type?: string,
+    className?: string,
+    name: string,
+    title?: string,
+    type?: string,
 };
 
-
-export default function CourseTitle({ name, title, type, className }: CourseTitleProps) {
+export default function CourseTitle(
+    { name, title, type, className }: CourseTitleProps
+) {
     const isIndependent = independentRegex.test(name)
     let courseName = title || name
     let subtitle = undefined
@@ -33,9 +34,11 @@ export default function CourseTitle({ name, title, type, className }: CourseTitl
     }
 
     return (
-		<div className={className}>
-			<h1 className="course-title">{courseName}</h1>
-			{subtitle && subtitle.length && <h2 className="course-subtitle">{subtitle}</h2>}
-		</div>
+        <div className={className}>
+            <h1 className="course-title">{courseName}</h1>
+            {subtitle &&
+                subtitle.length &&
+                <h2 className="course-subtitle">{subtitle}</h2>}
+        </div>
     )
 }

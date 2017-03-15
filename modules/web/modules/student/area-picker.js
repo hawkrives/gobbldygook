@@ -17,24 +17,29 @@ function AreaPicker(props) {
     const graduation = props.studentGraduation
 
     const currentAreaNames = map(props.currentAreas, a => a.name)
-    let onlyAvailableAreas = reject(props.areaList, area => includes(currentAreaNames, area.name))
+    let onlyAvailableAreas = reject(props.areaList, area =>
+        includes(currentAreaNames, area.name))
 
     onlyAvailableAreas = filterAreaList(onlyAvailableAreas, { graduation })
 
     const filteredOnName = filter(onlyAvailableAreas, area =>
-		fuzzysearch(props.filterText, area.name.toLowerCase()))
+        fuzzysearch(props.filterText, area.name.toLowerCase()))
 
-    const areaList = map(filteredOnName, (area, i) =>
-		<li key={area.name + i} className="area--choice">
-			<span className="area-listing">
-				<span className="title">{area.name}</span>
-				<span className="revision">{area.revision}</span>
-			</span>
-			<Button className="toggle-area" type="flat"
-    onClick={ev => props.onAddArea(area, ev)}>
-				Add
-			</Button>
-		</li>)
+    const areaList = map(filteredOnName, (area, i) => (
+        <li key={area.name + i} className="area--choice">
+            <span className="area-listing">
+                <span className="title">{area.name}</span>
+                <span className="revision">{area.revision}</span>
+            </span>
+            <Button
+                className="toggle-area"
+                type="flat"
+                onClick={ev => props.onAddArea(area, ev)}
+            >
+                Add
+            </Button>
+        </li>
+    ))
 
     let message = <li>Oh! We need a new message here!</li>
     if (props.filterText) {
@@ -48,20 +53,20 @@ function AreaPicker(props) {
     }
 
     return (
-		<div className="add-area">
-			<Toolbar>
-				<input
-    className="add-area--filter"
-    placeholder={`Filter ${pluralizeArea(props.type)}`}
-    value={props.filterText}
-    onChange={props.onFilterChange}
-				/>
-			</Toolbar>
+        <div className="add-area">
+            <Toolbar>
+                <input
+                    className="add-area--filter"
+                    placeholder={`Filter ${pluralizeArea(props.type)}`}
+                    value={props.filterText}
+                    onChange={props.onFilterChange}
+                />
+            </Toolbar>
 
-			<List type="plain">
-				{areaList.length ? areaList : message}
-			</List>
-		</div>
+            <List type="plain">
+                {areaList.length ? areaList : message}
+            </List>
+        </div>
     )
 }
 
@@ -81,9 +86,15 @@ export default class AreaPickerContainer extends Component {
     };
 
     render() {
-        return <AreaPicker {...this.props}
-            filterText={this.state.filter}
-            onFilterChange={ev => this.setState({ filter: (ev.target.value || '').toLowerCase() })}
-		/>
+        return (
+            <AreaPicker
+                {...this.props}
+                filterText={this.state.filter}
+                onFilterChange={ev =>
+                    this.setState({
+                        filter: (ev.target.value || '').toLowerCase(),
+                    })}
+            />
+        )
     }
 }

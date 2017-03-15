@@ -1,16 +1,8 @@
 import { expect } from 'chai'
 
-import {
-	addArea,
-	removeArea,
-	removeAreas,
-} from '../areas'
+import { addArea, removeArea, removeAreas } from '../areas'
 
-import {
-	ADD_AREA,
-	REMOVE_AREA,
-	REMOVE_AREAS,
-} from '../../constants'
+import { ADD_AREA, REMOVE_AREA, REMOVE_AREAS } from '../../constants'
 
 describe('addArea action', () => {
     it('returns an action to add an area to a student', () => {

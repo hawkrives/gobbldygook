@@ -15,21 +15,30 @@ describe('importStudent action', () => {
         let action = importStudent()
         expect(action).to.have.property('error', true)
         expect(action).to.have.property('payload')
-        expect(action.payload.message).to.equal('importStudent: undefined is an invalid data type')
+        expect(action.payload.message).to.equal(
+            'importStudent: undefined is an invalid data type'
+        )
     })
 
     it('includes an "error" property if there is an error', () => {
-        let action = importStudent({ data: '^INVALID_JSON^', type: 'application/json' })
+        let action = importStudent({
+            data: '^INVALID_JSON^',
+            type: 'application/json',
+        })
         expect(action).to.have.property('error', true)
         expect(action).to.have.property('payload')
-        expect(action.payload.message.indexOf('Unexpected token ^')).to.equal(0)
+        expect(action.payload.message.indexOf('Unexpected token ^')).to.equal(
+            0
+        )
     })
 
     it('includes an "error" property if the student is not json', () => {
         let action = importStudent({ data: '', type: 'text/html' })
         expect(action).to.have.property('error', true)
         expect(action).to.have.property('payload')
-        expect(action.payload.message).to.equal('importStudent: text/html is an invalid data type')
+        expect(action.payload.message).to.equal(
+            'importStudent: text/html is an invalid data type'
+        )
     })
 
     it('includes an "error" property if there was no student in the json', () => {

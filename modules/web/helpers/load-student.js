@@ -11,8 +11,8 @@ export function loadStudent(studentId) {
             resolve(null)
         }
 
-		// basicStudent defaults to an empty object so that the constructor has
-		// something to build from.
+        // basicStudent defaults to an empty object so that the constructor has
+        // something to build from.
         let basicStudent = {}
 
         try {
@@ -24,5 +24,4 @@ export function loadStudent(studentId) {
 
         resolve(Student(basicStudent))
     })
-
 }

@@ -9,44 +9,53 @@ export default function CourseExpression(props) {
     const department = buildDeptString(props.department)
 
     const international = props.international &&
-		<span className="course--international">I</span>
-    const lab = props.lab || props.type === 'Lab' &&
-		<span className="course--lab">L</span>
+        <span className="course--international">I</span>
+    const lab = props.lab ||
+        (props.type === 'Lab' && <span className="course--lab">L</span>)
 
-    const section = props.section && props.section !== '*' &&
-		<span className="course--section">[{props.section}]</span>
+    const section = props.section &&
+        props.section !== '*' &&
+        <span className="course--section">[{props.section}]</span>
 
     const year = props.year &&
-		<span className="course--year">{props.year}</span>
+        <span className="course--year">{props.year}</span>
     const semester = props.semester &&
-		<span className="course--semester">
-			{props.semester === '*'
-				? 'ANY'
-				: semesterName(props.semester).toUpperCase()}
-		</span>
+        <span className="course--semester">
+            {props.semester === '*'
+                ? 'ANY'
+                : semesterName(props.semester).toUpperCase()}
+        </span>
 
-	/////
+    /////
 
     const temporalIdentifiers = (semester || year) &&
-		(<div className="temporal">
-			{semester}
-			{year}
-		</div>)
+        <div className="temporal">
+            {semester}
+            {year}
+        </div>
 
     return (
-		<span className={cx('course', { matched: props._result, taken: props._taken })} style={props.style}>
-			<div className="basic-identifiers">
-				<span className="course--department">{department}</span>
-				<span>
-					<span className="course--number">{props.number || String(props.level)[0] + 'XX'}</span>
-					{international}
-					{lab ? 'L' : null}
-					{' '}
-					{section}
-				</span>
-			</div>
-			{temporalIdentifiers}
-		</span>
+        <span
+            className={cx('course', {
+                matched: props._result,
+                taken: props._taken,
+            })}
+            style={props.style}
+        >
+            <div className="basic-identifiers">
+                <span className="course--department">{department}</span>
+                <span>
+                    <span className="course--number">
+                        {props.number || String(props.level)[0] + 'XX'}
+                    </span>
+                    {international}
+                    {lab ? 'L' : null}
+                    {' '}
+                    {section}
+                </span>
+            </div>
+            {temporalIdentifiers}
+        </span>
     )
 }
 

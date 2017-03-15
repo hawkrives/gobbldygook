@@ -1,7 +1,4 @@
-import {
-	ADD_FABRICATION,
-	REMOVE_FABRICATION,
-} from '../constants'
+import { ADD_FABRICATION, REMOVE_FABRICATION } from '../constants'
 
 export function addFabrication(studentId, fabrication) {
     return { type: ADD_FABRICATION, payload: { studentId, fabrication } }

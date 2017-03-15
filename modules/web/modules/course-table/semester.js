@@ -26,27 +26,40 @@ function Semester(props) {
     const { studentId, semester, year, canDrop, schedule } = props
     const { courses, conflicts, hasConflict } = schedule
 
-	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
-    const recommendedCredits = (semester === 1 || semester === 3) ? 4 : 1
-    const currentCredits = courses && courses.length ? countCredits(courses) : 0
+    // `recommendedCredits` is 4 for fall/spring and 1 for everything else
+    const recommendedCredits = semester === 1 || semester === 3 ? 4 : 1
+    const currentCredits = courses && courses.length
+        ? countCredits(courses)
+        : 0
 
     let infoBar = []
     if (schedule && courses && courses.length) {
         const courseCount = courses.length
 
-        infoBar.push(<li key="course-count">{`${courseCount} ${plur('course', courseCount)}`}</li>)
-        currentCredits && infoBar.push(<li key="credit-count">{`${currentCredits} ${plur('credit', currentCredits)}`}</li>)
+        infoBar.push(
+            <li key="course-count">
+                {`${courseCount} ${plur('course', courseCount)}`}
+            </li>
+        )
+        currentCredits &&
+            infoBar.push(
+                <li key="credit-count">
+                    {`${currentCredits} ${plur('credit', currentCredits)}`}
+                </li>
+            )
     }
 
     if (schedule) {
-        courseList = <CourseList
-            courses={courses}
-            creditCount={currentCredits}
-            availableCredits={recommendedCredits}
-            studentId={studentId}
-            schedule={schedule}
-            conflicts={conflicts || []}
-		/>
+        courseList = (
+            <CourseList
+                courses={courses}
+                creditCount={currentCredits}
+                availableCredits={recommendedCredits}
+                studentId={studentId}
+                schedule={schedule}
+                conflicts={conflicts || []}
+            />
+        )
     }
 
     const className = cx('semester', {
@@ -55,41 +68,45 @@ function Semester(props) {
     })
 
     return (
-		<div className={className} ref={instance => props.connectDropTarget(findDOMNode(instance))}>
-			<header className={'semester-title'}>
-				<Link
-    className={'semester-header'}
-    to={`/s/${studentId}/semester/${year}/${semester}`}
-				>
-					<h1>{semesterName(semester)}</h1>
+        <div
+            className={className}
+            ref={instance => props.connectDropTarget(findDOMNode(instance))}
+        >
+            <header className={'semester-title'}>
+                <Link
+                    className={'semester-header'}
+                    to={`/s/${studentId}/semester/${year}/${semester}`}
+                >
+                    <h1>{semesterName(semester)}</h1>
 
-					<List className={'semester-info'} type="inline">
-						{infoBar}
-					</List>
-				</Link>
+                    <List className={'semester-info'} type="inline">
+                        {infoBar}
+                    </List>
+                </Link>
 
-				<Button link
-    to={`/s/${studentId}/search/${year}/${semester}`}
-    title="Search for courses"
-				>
-					<Icon>{search}</Icon> Course
-				</Button>
-				<Button
-    className={'semester-remove'}
-    onClick={props.removeSemester}
-    title={`Remove ${year} ${semesterName(semester)}`}
-				>
-					<Icon>{close}</Icon>
-				</Button>
-			</header>
+                <Button
+                    link
+                    to={`/s/${studentId}/search/${year}/${semester}`}
+                    title="Search for courses"
+                >
+                    <Icon>{search}</Icon> Course
+                </Button>
+                <Button
+                    className={'semester-remove'}
+                    onClick={props.removeSemester}
+                    title={`Remove ${year} ${semesterName(semester)}`}
+                >
+                    <Icon>{close}</Icon>
+                </Button>
+            </header>
 
-			{courseList}
-		</div>
+            {courseList}
+        </div>
     )
 }
 
 Semester.propTypes = {
-    addCourse: PropTypes.func.isRequired,  // redux
+    addCourse: PropTypes.func.isRequired, // redux
     canDrop: PropTypes.bool.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
@@ -110,7 +127,12 @@ const semesterTarget = {
         const toSchedule = props.schedule
 
         if (isFromSchedule) {
-            props.moveCourse(props.studentId, fromScheduleId, toSchedule.id, clbid)
+            props.moveCourse(
+                props.studentId,
+                fromScheduleId,
+                toSchedule.id,
+                clbid
+            )
         }
         else {
             props.addCourse(props.studentId, toSchedule.id, clbid)

@@ -1,21 +1,21 @@
 import { expect } from 'chai'
 
 import {
-	addSchedule,
-	destroySchedule,
-	destroySchedules,
-	renameSchedule,
-	reorderSchedule,
-	moveSchedule,
+    addSchedule,
+    destroySchedule,
+    destroySchedules,
+    renameSchedule,
+    reorderSchedule,
+    moveSchedule,
 } from '../schedules'
 
 import {
-	ADD_SCHEDULE,
-	DESTROY_SCHEDULE,
-	DESTROY_SCHEDULES,
-	RENAME_SCHEDULE,
-	REORDER_SCHEDULE,
-	MOVE_SCHEDULE,
+    ADD_SCHEDULE,
+    DESTROY_SCHEDULE,
+    DESTROY_SCHEDULES,
+    RENAME_SCHEDULE,
+    REORDER_SCHEDULE,
+    MOVE_SCHEDULE,
 } from '../../constants'
 
 describe('addSchedule action', () => {

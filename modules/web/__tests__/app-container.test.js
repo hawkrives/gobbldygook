@@ -14,10 +14,10 @@ debug.enable('foo')
 
 test('AppContainer renders', () => {
     mount(
-		<ReduxWrapper store={configureStore()}>
-			<Router history={createMemoryHistory()} routes={routes} />
-		</ReduxWrapper>
-	)
+        <ReduxWrapper store={configureStore()}>
+            <Router history={createMemoryHistory()} routes={routes} />
+        </ReduxWrapper>
+    )
 })
 
 test('AppContainer can navigate to /create', () => {
@@ -25,10 +25,10 @@ test('AppContainer can navigate to /create', () => {
     const history = createMemoryHistory()
 
     const app = mount(
-		<ReduxWrapper store={store}>
-			<Router history={history} routes={routes} />
-		</ReduxWrapper>
-	)
+        <ReduxWrapper store={store}>
+            <Router history={history} routes={routes} />
+        </ReduxWrapper>
+    )
 
     history.push('/create')
 

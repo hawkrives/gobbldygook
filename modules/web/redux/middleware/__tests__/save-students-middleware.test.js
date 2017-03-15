@@ -17,9 +17,14 @@ xdescribe('shouldTakeAction', () => {
 
 describe('saveStudentsMiddleware', () => {
     const doDispatch = () => {}
-    const doGetState = () => ({ students: { '123': { data: { past: [], future: [], present: {} } } } })
+    const doGetState = () => ({
+        students: { '123': { data: { past: [], future: [], present: {} } } },
+    })
     const doNextAction = (...args) => [...args]
-    const nextHandler = saveStudentsMiddleware({ dispatch: doDispatch, getState: doGetState })
+    const nextHandler = saveStudentsMiddleware({
+        dispatch: doDispatch,
+        getState: doGetState,
+    })
 
     it('must return a function to handle `next`', () => {
         expect(typeof nextHandler).to.equal('function')
@@ -37,26 +42,36 @@ describe('saveStudentsMiddleware', () => {
         describe('handle action', () => {
             it('should return a promise', () => {
                 const actionHandler = nextHandler(doNextAction)
-                expect(actionHandler({ type: CHANGE_NAME }).then).to.be.a.function
+                expect(
+                    actionHandler({ type: CHANGE_NAME }).then
+                ).to.be.a.function
             })
 
             xit('should save a student if something has changed', () => {
                 const date = Date.now()
                 const customDoNextAction = ({ studentId }) => {
-                    return { students: { present: { [studentId]: { id: studentId, dateLastModified: date } } } }
+                    return {
+                        students: {
+                            present: {
+                                [studentId]: {
+                                    id: studentId,
+                                    dateLastModified: date,
+                                },
+                            },
+                        },
+                    }
                 }
 
                 const actionHandler = nextHandler(customDoNextAction)
 
                 return actionHandler({ type: CHANGE_NAME }).then(() => {
-                    expect(JSON.parse(localStorage.getItem('a')))
-						.to.deep.equal({ id: 'a', dateLastModified: date })
+                    expect(
+                        JSON.parse(localStorage.getItem('a'))
+                    ).to.deep.equal({ id: 'a', dateLastModified: date })
                 })
             })
 
-            xit('should not save a student if nothing has changed', () => {
-
-            })
+            xit('should not save a student if nothing has changed', () => {})
         })
     })
 })

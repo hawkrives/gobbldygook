@@ -1,19 +1,19 @@
 import { expect } from 'chai'
 
 import {
-	incrementProgress,
-	logError,
-	logMessage,
-	removeNotification,
-	startProgress,
+    incrementProgress,
+    logError,
+    logMessage,
+    removeNotification,
+    startProgress,
 } from '../actions'
 
 import {
-	INCREMENT_PROGRESS,
-	LOG_ERROR,
-	LOG_MESSAGE,
-	REMOVE_NOTIFICATION,
-	START_PROGRESS,
+    INCREMENT_PROGRESS,
+    LOG_ERROR,
+    LOG_MESSAGE,
+    REMOVE_NOTIFICATION,
+    START_PROGRESS,
 } from '../constants'
 
 describe('removeNotification action', () => {

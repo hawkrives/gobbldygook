@@ -11,26 +11,26 @@ export default function GraduationStatus(props) {
     }
 
     return (
-		<section className="graduation-status">
-			<StudentSummary
-    onChangeGraduation={props.onChangeGraduation}
-    onChangeMatriculation={props.onChangeMatriculation}
-    onChangeName={props.onChangeName}
-    student={props.student}
-			/>
-			<AreaOfStudySidebar
-    allAreas={props.allAreas}
-    showAreaPickerFor={props.showAreaPickerFor}
-    onAddArea={props.onAddArea}
-    onAddOverride={props.onAddOverride}
-    onEndAddArea={props.onEndAddArea}
-    onInitiateAddArea={props.onInitiateAddArea}
-    onRemoveArea={props.onRemoveArea}
-    onRemoveOverride={props.onRemoveOverride}
-    onToggleOverride={props.onToggleOverride}
-    student={props.student}
-			/>
-		</section>
+        <section className="graduation-status">
+            <StudentSummary
+                onChangeGraduation={props.onChangeGraduation}
+                onChangeMatriculation={props.onChangeMatriculation}
+                onChangeName={props.onChangeName}
+                student={props.student}
+            />
+            <AreaOfStudySidebar
+                allAreas={props.allAreas}
+                showAreaPickerFor={props.showAreaPickerFor}
+                onAddArea={props.onAddArea}
+                onAddOverride={props.onAddOverride}
+                onEndAddArea={props.onEndAddArea}
+                onInitiateAddArea={props.onInitiateAddArea}
+                onRemoveArea={props.onRemoveArea}
+                onRemoveOverride={props.onRemoveOverride}
+                onToggleOverride={props.onToggleOverride}
+                student={props.student}
+            />
+        </section>
     )
 }
 

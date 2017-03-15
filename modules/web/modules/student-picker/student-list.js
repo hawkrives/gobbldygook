@@ -11,37 +11,42 @@ import './student-list.scss'
 
 export default function StudentList(props) {
     const {
-		isEditing,
-		destroyStudent,
-		students,
-	} = props
+        isEditing,
+        destroyStudent,
+        students,
+    } = props
 
     let {
-		filter: filterText,
-		sortBy: sortByKey,
-		// groupBy: groupByKey,
-	} = props
+        filter: filterText,
+        sortBy: sortByKey,
+        // groupBy: groupByKey,
+    } = props
 
     filterText = filterText.toLowerCase()
 
     const studentObjects = map(
-		sortBy(
-			filter(students, s =>
-				fuzzysearch(filterText, (s.data.present.name || '').toLowerCase())),
-			s => s.data.present[sortByKey]),
-		(student, i) =>
-			<StudentListItem
-    key={student.data.present.id || i}
-    student={student}
-    destroyStudent={destroyStudent}
-    isEditing={isEditing}
-			/>
-	)
+        sortBy(
+            filter(students, s =>
+                fuzzysearch(
+                    filterText,
+                    (s.data.present.name || '').toLowerCase()
+                )),
+            s => s.data.present[sortByKey]
+        ),
+        (student, i) => (
+            <StudentListItem
+                key={student.data.present.id || i}
+                student={student}
+                destroyStudent={destroyStudent}
+                isEditing={isEditing}
+            />
+        )
+    )
 
     return (
-		<List className="student-list" type="plain">
-			{studentObjects}
-		</List>
+        <List className="student-list" type="plain">
+            {studentObjects}
+        </List>
     )
 }
 
@@ -50,7 +55,11 @@ StudentList.propTypes = {
     filter: PropTypes.string.isRequired,
     groupBy: PropTypes.string.isRequired,
     isEditing: PropTypes.bool.isRequired,
-    sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate']).isRequired,
+    sortBy: PropTypes.oneOf([
+        'dateLastModified',
+        'name',
+        'canGraduate',
+    ]).isRequired,
     students: PropTypes.object.isRequired,
 }
 

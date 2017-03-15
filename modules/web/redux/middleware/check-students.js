@@ -31,57 +31,60 @@ const whitelist = [
     studentConstants.ADD_FABRICATION,
     studentConstants.REMOVE_FABRICATION,
 
-	// need to check everyone with one of the new areas
-	// when one of these fires
+    // need to check everyone with one of the new areas
+    // when one of these fires
     areaConstants.REFRESH_AREAS,
 
-	// need to check everyone with one of these courses
-	// when one of these fires
+    // need to check everyone with one of these courses
+    // when one of these fires
     courseConstants.REFRESH_COURSES,
 ]
-function shouldTakeAction({ type }: {type?: string}) {
+function shouldTakeAction({ type }: { type?: string }) {
     return includes(whitelist, type)
 }
 
-const checkStudentsMiddleware = (store: any) => (next: any) => (action: any) => {
-    if (!shouldTakeAction(action)) {
-        return next(action)
-    }
-
-	// save a copy of the old state
-    const oldState = store.getState()
-    const oldStudents = oldState.students
-
-	// dispatch the action along the chain
-	// this is what actually changes the state
-    const result = next(action)
-
-	// grab a copy of the *new* state
-    const newState = store.getState()
-    const newStudents = newState.students
-
-    let affectedStudents = []
-
-    if (action.type === areaConstants.REFRESH_AREAS) {
-        affectedStudents = toArray(newStudents)
-    }
-    else if (action.type === courseConstants.REFRESH_COURSES) {
-        affectedStudents = toArray(newStudents)
-    }
-    else {
-        affectedStudents = filter(newStudents, (_, id) => {
-            if (!(id in oldStudents)) {
-                return true
+const checkStudentsMiddleware = (store: any) =>
+    (next: any) =>
+        (action: any) => {
+            if (!shouldTakeAction(action)) {
+                return next(action)
             }
-            return newStudents[id].data.present !== oldStudents[id].data.present
-        })
-    }
 
-	// check them
-    const promises = map(affectedStudents, s =>
-		store.dispatch(checkStudent(s.data.present.id)))
+            // save a copy of the old state
+            const oldState = store.getState()
+            const oldStudents = oldState.students
 
-    return Promise.all(promises).then(() => result)
-}
+            // dispatch the action along the chain
+            // this is what actually changes the state
+            const result = next(action)
+
+            // grab a copy of the *new* state
+            const newState = store.getState()
+            const newStudents = newState.students
+
+            let affectedStudents = []
+
+            if (action.type === areaConstants.REFRESH_AREAS) {
+                affectedStudents = toArray(newStudents)
+            }
+            else if (action.type === courseConstants.REFRESH_COURSES) {
+                affectedStudents = toArray(newStudents)
+            }
+            else {
+                affectedStudents = filter(newStudents, (_, id) => {
+                    if (!(id in oldStudents)) {
+                        return true
+                    }
+                    return newStudents[id].data.present !==
+                        oldStudents[id].data.present
+                })
+            }
+
+            // check them
+            const promises = map(affectedStudents, s =>
+                store.dispatch(checkStudent(s.data.present.id)))
+
+            return Promise.all(promises).then(() => result)
+        }
 
 export default checkStudentsMiddleware

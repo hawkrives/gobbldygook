@@ -23,14 +23,14 @@ export function findFirstAvailableYear(schedules, matriculation) {
 
     let years = map(schedules, s => s.year)
 
-	// put the matriculation year at the front to give a starting point
+    // put the matriculation year at the front to give a starting point
     if (matriculation !== undefined && !includes(years, matriculation)) {
         years.unshift(matriculation - 1)
     }
 
     years = sortBy(years)
 
-	// only uniq after we're done messing with the contents
+    // only uniq after we're done messing with the contents
     years = uniq(years)
 
     let missingNo = findMissingNumberBinarySearch(years)

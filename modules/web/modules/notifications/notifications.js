@@ -10,11 +10,15 @@ import Notification from './notification'
 import './notifications.scss'
 
 export const Notifications = ({ notifications, removeNotification }) => (
-	<ul className="notification-list">
-		{map(notifications, (n, i) =>
-			<Notification {...n} key={i} onClose={() => removeNotification(i)} />
-		)}
-	</ul>
+    <ul className="notification-list">
+        {map(notifications, (n, i) => (
+            <Notification
+                {...n}
+                key={i}
+                onClose={() => removeNotification(i)}
+            />
+        ))}
+    </ul>
 )
 
 Notifications.propTypes = {

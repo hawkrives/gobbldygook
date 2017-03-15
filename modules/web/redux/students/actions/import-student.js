@@ -1,10 +1,8 @@
 import { Student } from '../../../../object-student'
 
-import {
-	IMPORT_STUDENT,
-} from '../constants'
+import { IMPORT_STUDENT } from '../constants'
 
-export function importStudent({ data, type }={}) {
+export function importStudent({ data, type } = {}) {
     let stu = undefined
     if (type === 'application/json') {
         try {
@@ -22,7 +20,9 @@ export function importStudent({ data, type }={}) {
         return {
             type: IMPORT_STUDENT,
             error: true,
-            payload: new TypeError(`importStudent: ${type} is an invalid data type`),
+            payload: new TypeError(
+                `importStudent: ${type} is an invalid data type`
+            ),
         }
     }
 

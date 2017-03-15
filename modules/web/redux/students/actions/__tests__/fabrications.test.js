@@ -2,10 +2,7 @@ import { expect } from 'chai'
 
 import { addFabrication, removeFabrication } from '../fabrications'
 
-import {
-	ADD_FABRICATION,
-	REMOVE_FABRICATION,
-} from '../../constants'
+import { ADD_FABRICATION, REMOVE_FABRICATION } from '../../constants'
 
 describe('addFabrication action', () => {
     it('returns an action to add a fabrication', () => {

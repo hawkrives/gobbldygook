@@ -18,12 +18,12 @@ export class AreaEditScreen extends Component {
             data: PropTypes.arrayOf(PropTypes.object).isRequired,
             isLoading: PropTypes.bool.isRequired,
         }).isRequired, // redux
-        loadAllAreas: PropTypes.func.isRequired,  // redux
+        loadAllAreas: PropTypes.func.isRequired, // redux
         params: PropTypes.shape({
             name: PropTypes.string,
             type: PropTypes.string,
             revision: PropTypes.string,
-        }).isRequired,  // react-router
+        }).isRequired, // react-router
     };
 
     state = {
@@ -57,8 +57,13 @@ export class AreaEditScreen extends Component {
 
         const allAreas = props.areas.data
 
-        const area = find(allAreas, area =>
-			area.type === type && area.name === name && area.revision === revision)
+        const area = find(
+            allAreas,
+            area =>
+                area.type === type &&
+                area.name === name &&
+                area.revision === revision
+        )
 
         let data = omit(area, 'sourcePath')
         if ('source' in data && typeof data.source === 'string') {
@@ -94,12 +99,14 @@ export class AreaEditScreen extends Component {
         let { type, name, revision } = this.props.params
 
         if (this.state.area && (type && name && revision)) {
-            return (<AreaEditor
-                onSave={this.handleSave}
-                value={this.state.area}
-                onChange={this.handleChange}
-                onFocusChange={this.handleFocusChange}
-			/>)
+            return (
+                <AreaEditor
+                    onSave={this.handleSave}
+                    value={this.state.area}
+                    onChange={this.handleChange}
+                    onFocusChange={this.handleFocusChange}
+                />
+            )
         }
 
         if (this.props.areas.isLoading) {
@@ -120,7 +127,6 @@ export class AreaEditScreen extends Component {
         return <AreaList areas={areas} />
     }
 }
-
 
 const mapStateToProps = state => ({
     areas: state.areas,

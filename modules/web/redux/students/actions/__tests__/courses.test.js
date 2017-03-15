@@ -1,17 +1,12 @@
 import { expect } from 'chai'
 
-import {
-	addCourse,
-	removeCourse,
-	reorderCourse,
-	moveCourse,
-} from '../courses'
+import { addCourse, removeCourse, reorderCourse, moveCourse } from '../courses'
 
 import {
-	ADD_COURSE,
-	REMOVE_COURSE,
-	REORDER_COURSE,
-	MOVE_COURSE,
+    ADD_COURSE,
+    REMOVE_COURSE,
+    REORDER_COURSE,
+    MOVE_COURSE,
 } from '../../constants'
 
 describe('addCourse action', () => {

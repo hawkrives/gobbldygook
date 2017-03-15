@@ -17,14 +17,14 @@ import ModalCourse from './modal-course'
 import './inline-course.scss'
 
 type InlineCourseProps = {
-	className?: string,
-	conflicts?: any[],
-	connectDragSource: () => any,  // react-dnd
-	course: Object,
-	index?: number,
-	isDragging: boolean,  // react-dnd
-	scheduleId?: string,
-	studentId?: string,
+    className?: string,
+    conflicts?: any[],
+    connectDragSource: () => any, // react-dnd
+    course: Object,
+    index?: number,
+    isDragging: boolean, // react-dnd
+    scheduleId?: string,
+    studentId?: string,
 };
 
 class InlineCourse extends Component {
@@ -35,12 +35,10 @@ class InlineCourse extends Component {
     };
 
     shouldComponentUpdate(nextProps: InlineCourseProps, nextState) {
-        return (
-			this.props.course !== nextProps.course ||
-			this.props.conflicts !== nextProps.conflicts ||
-			this.state.isOpen !== nextState.isOpen ||
-			this.props.isDragging !== nextProps.isDragging
-        )
+        return this.props.course !== nextProps.course ||
+            this.props.conflicts !== nextProps.conflicts ||
+            this.state.isOpen !== nextState.isOpen ||
+            this.props.isDragging !== nextProps.isDragging
     }
 
     closeModal = () => {
@@ -52,53 +50,78 @@ class InlineCourse extends Component {
     };
 
     render() {
-        const { course, conflicts=[], index, scheduleId, studentId } = this.props
+        const {
+            course,
+            conflicts = [],
+            index,
+            scheduleId,
+            studentId,
+        } = this.props
         const warnings = conflicts[index || 0]
         const hasWarnings = compact(warnings).length
 
-        const validWarnings = filter(warnings, w => !isNull(w) && w.warning === true)
-        const warningEls = map(validWarnings, (w, idx) =>
-			<li key={idx}><Icon>{w.icon}</Icon> {w.msg}</li>)
+        const validWarnings = filter(
+            warnings,
+            w => !isNull(w) && w.warning === true
+        )
+        const warningEls = map(validWarnings, (w, idx) => (
+            <li key={idx}><Icon>{w.icon}</Icon> {w.msg}</li>
+        ))
 
         let classSet = cx(this.props.className, 'course', {
-            'expanded': this.state.isOpen,
+            expanded: this.state.isOpen,
             'has-warnings': hasWarnings,
             'is-dragging': this.props.isDragging,
         })
 
-        const warningList = warningEls.length && (
-			<List type="inline" className="course-warnings">{warningEls}</List>
-		)
+        const warningList = warningEls.length &&
+            <List type="inline" className="course-warnings">{warningEls}</List>
 
         return this.props.connectDragSource(
-			<article
-    className={classSet}
-    onClick={this.openModal}
-			>
-				{warningList || null}
+            <article className={classSet} onClick={this.openModal}>
+                {warningList || null}
 
-				<CourseTitle className="course-row" title={course.title} name={course.name} type={course.type} />
-				<div className="course-row course-summary">
-					<span className="course-identifier">
-						{buildDeptNum(course, true)}
-					</span>
-					{course.type !== 'Research' ? <span className="course-type">{course.type}</span> : null}
-					{course.gereqs && <ul className="course-gereqs">
-						{map(course.gereqs, (ge, idx) =>
-							<li key={ge + idx}>{ge}</li>)}
-					</ul>}
-					{course.prerequisites &&
-						<span className="has-prerequisite" title={course.prerequisites}>Prereq</span>}
-				</div>
-				<div className="course-row course-summary">
-					{course.times}
-				</div>
+                <CourseTitle
+                    className="course-row"
+                    title={course.title}
+                    name={course.name}
+                    type={course.type}
+                />
+                <div className="course-row course-summary">
+                    <span className="course-identifier">
+                        {buildDeptNum(course, true)}
+                    </span>
+                    {course.type !== 'Research'
+                        ? <span className="course-type">{course.type}</span>
+                        : null}
+                    {course.gereqs &&
+                        <ul className="course-gereqs">
+                            {map(course.gereqs, (ge, idx) => (
+                                <li key={ge + idx}>{ge}</li>
+                            ))}
+                        </ul>}
+                    {course.prerequisites &&
+                        <span
+                            className="has-prerequisite"
+                            title={course.prerequisites}
+                        >
+                            Prereq
+                        </span>}
+                </div>
+                <div className="course-row course-summary">
+                    {course.times}
+                </div>
 
-				{this.state.isOpen
-					? <ModalCourse onClose={this.closeModal} course={course} scheduleId={scheduleId} studentId={studentId} />
-					: null}
-			</article>
-		)
+                {this.state.isOpen
+                    ? <ModalCourse
+                        onClose={this.closeModal}
+                        course={course}
+                        scheduleId={scheduleId}
+                        studentId={studentId}
+                      />
+                    : null}
+            </article>
+        )
     }
 }
 

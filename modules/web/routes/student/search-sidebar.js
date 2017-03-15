@@ -4,7 +4,8 @@ import CourseSearcher from '../../modules/course-searcher'
 
 function CourseSearcherSidebar(props) {
     const { studentId } = props.params
-    const boundCloseModal = () => props.router.push({ pathname: `/s/${studentId}` })
+    const boundCloseModal = () =>
+        props.router.push({ pathname: `/s/${studentId}` })
 
     let { year, semester } = props.params
     if (year) {
@@ -14,11 +15,13 @@ function CourseSearcherSidebar(props) {
         semester = parseInt(semester, 10)
     }
 
-    return <CourseSearcher
-        closeSearcher={boundCloseModal}
-        studentId={props.params.studentId}
-        partial={{ year, semester }}
-	/>
+    return (
+        <CourseSearcher
+            closeSearcher={boundCloseModal}
+            studentId={props.params.studentId}
+            partial={{ year, semester }}
+        />
+    )
 }
 
 CourseSearcherSidebar.propTypes = {

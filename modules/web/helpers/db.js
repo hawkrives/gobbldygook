@@ -9,11 +9,10 @@ import batchGet from '../helpers/treo-plugins/treo-batch-get'
 import schema from './db-schema'
 
 const db = new Database('gobbldygook', schema)
-	.use(queryTreoDatabase())
-	.use(batchGet())
+    .use(queryTreoDatabase())
+    .use(batchGet())
 
 export default db
-
 
 if (typeof window !== 'undefined') {
     window.deleteDatabase = () => {

@@ -20,12 +20,15 @@ import present from 'present'
 import yaml from 'js-yaml'
 
 import db from './db'
-import { buildDeptString, buildDeptNum } from '../../school-st-olaf-college/deptnums'
+import {
+    buildDeptString,
+    buildDeptNum,
+} from '../../school-st-olaf-college/deptnums'
 import { splitParagraph } from '../../lib/split-paragraph'
 import { convertTimeStringsToOfferings } from 'sto-sis-time-parser'
 
-const log = (...args) => args.length && console.log('worker:load-data', ...args)
-
+const log = (...args) =>
+    args.length && console.log('worker:load-data', ...args)
 
 function dispatch(type, action, ...args) {
     self.postMessage([null, 'dispatch', { type, action, args }])
@@ -33,7 +36,6 @@ function dispatch(type, action, ...args) {
 
 const fetchText = (...args) => fetch(...args).then(status).then(text)
 const fetchJson = (...args) => fetch(...args).then(status).then(json)
-
 
 function prepareCourse(course) {
     const nameWords = splitParagraph(course.name)
@@ -51,13 +53,11 @@ function prepareCourse(course) {
     }
 }
 
-
 function cacheItemHash(path, type, hash) {
     log(`cacheItemHash(): ${path}`)
 
     return db.store(getCacheStoreName(type)).put({ id: path, path, hash })
 }
-
 
 function getCacheStoreName(type) {
     if (type === 'courses') {
@@ -67,10 +67,11 @@ function getCacheStoreName(type) {
         return 'areaCache'
     }
     else {
-        throw new TypeError(`needsUpdate(): "${type}" is not a valid store type`)
+        throw new TypeError(
+            `needsUpdate(): "${type}" is not a valid store type`
+        )
     }
 }
-
 
 function storeCourses(path, data) {
     log(`storeCourses(): ${path}`)
@@ -82,25 +83,28 @@ function storeCourses(path, data) {
     }))
 
     const start = present()
-    return db.store('courses').batch(coursesToStore)
-		.then(() => {
-    log(`Stored ${size(coursesToStore)} courses in ${round(present() - start, 2)}ms.`)
-})
-		.catch(err => {
-    const db = err.target.db.name
-    const errorName = err.target.error.name
-
-    if (errorName === 'QuotaExceededError') {
-        dispatch('notifications', 'logError', {
-            id: 'db-storage-quota-exceeded',
-            message: `The database "${db}" has exceeded its storage quota.`,
+    return db
+        .store('courses')
+        .batch(coursesToStore)
+        .then(() => {
+            log(
+                `Stored ${size(coursesToStore)} courses in ${round(present() - start, 2)}ms.`
+            )
         })
-    }
+        .catch(err => {
+            const db = err.target.db.name
+            const errorName = err.target.error.name
 
-    throw err
-})
+            if (errorName === 'QuotaExceededError') {
+                dispatch('notifications', 'logError', {
+                    id: 'db-storage-quota-exceeded',
+                    message: `The database "${db}" has exceeded its storage quota.`,
+                })
+            }
+
+            throw err
+        })
 }
-
 
 function storeArea(path, data) {
     log(`storeArea(): ${path}`)
@@ -117,15 +121,20 @@ function storeArea(path, data) {
     })
 }
 
-
 function cleanPriorCourses(path) {
-    return db.store('courses').index('sourcePath').getAll(range({ eq: path }))
-		.then(oldItems => fromPairs(map(oldItems, item => ([item.clbid, null]))))
+    return db
+        .store('courses')
+        .index('sourcePath')
+        .getAll(range({ eq: path }))
+        .then(oldItems => fromPairs(map(oldItems, item => [item.clbid, null])))
 }
 
 function cleanPriorAreas(path) {
-    return db.store('areas').getAll(range({ eq: path }))
-		.then(oldItems => fromPairs(map(oldItems, item => ([item.sourcePath, null]))))
+    return db
+        .store('areas')
+        .getAll(range({ eq: path }))
+        .then(oldItems =>
+            fromPairs(map(oldItems, item => [item.sourcePath, null])))
 }
 
 function cleanPriorData(path, type) {
@@ -139,19 +148,24 @@ function cleanPriorData(path, type) {
         ps = cleanPriorAreas(path)
     }
     else {
-        throw new TypeError(`cleanPriorData(): "${type}" is not a valid store type`)
+        throw new TypeError(
+            `cleanPriorData(): "${type}" is not a valid store type`
+        )
     }
 
-    return ps.then(ops => series([
-        db.store(type).batch(ops),
-        db.store(getCacheStoreName(type)).del(path),
-    ])).catch(err => {
-        throw err
-    })
+    return ps
+        .then(ops =>
+            series([
+                db.store(type).batch(ops),
+                db.store(getCacheStoreName(type)).del(path),
+            ]))
+        .catch(err => {
+            throw err
+        })
 }
 
 function storeData(path, type, data) {
-	// store the new data
+    // store the new data
     if (type === 'courses') {
         return storeCourses(path, data)
     }
@@ -173,147 +187,200 @@ function parseData(raw, type) {
 }
 
 function updateDatabase(type, infoFileBase, notificationId, infoFromServer) {
-	// Get the path to the current file and the hash of the file
+    // Get the path to the current file and the hash of the file
     const { path, hash } = infoFromServer
-	// Append the hash, to act as a sort of cache-busting mechanism
+    // Append the hash, to act as a sort of cache-busting mechanism
     const itemUrl = `/${path}?v=${hash}`
 
     log(`updateDatabase(): ${path}`)
 
     const url = infoFileBase + itemUrl
 
-	// go fetch the data!
-    return fetchText(url).then(rawData => {
-		// now parse the data into a usable form
-        const data = parseData(rawData, type)
+    // go fetch the data!
+    return fetchText(url)
+        .then(
+            rawData => {
+                // now parse the data into a usable form
+                const data = parseData(rawData, type)
 
-        return series([
-			// clear out any old data
-            () => cleanPriorData(path, type),
-			// store the new data
-            () => storeData(path, type, data),
-			// record that we stored the new data
-            () => cacheItemHash(path, type, hash),
-        ])
-    }, () => {
-        log(`Could not fetch ${url}`)
-        return false
-    }).then(() => {
-        log(`added ${path}`)
-        dispatch('notifications', 'incrementProgress', notificationId)
+                return series([
+                    // clear out any old data
+                    () => cleanPriorData(path, type),
+                    // store the new data
+                    () => storeData(path, type, data),
+                    // record that we stored the new data
+                    () => cacheItemHash(path, type, hash),
+                ])
+            },
+            () => {
+                log(`Could not fetch ${url}`)
+                return false
+            }
+        )
+        .then(() => {
+            log(`added ${path}`)
+            dispatch('notifications', 'incrementProgress', notificationId)
+        })
+}
+
+function needsUpdate(type, path, hash) {
+    return db.store(getCacheStoreName(type)).get(path).then(dbresult => {
+        return dbresult ? dbresult.hash !== hash : true
     })
 }
 
-
-function needsUpdate(type, path, hash) {
-    return db.store(getCacheStoreName(type)).get(path)
-		.then(dbresult => {
-    return dbresult ? dbresult.hash !== hash : true
-})
-}
-
-
 function removeDuplicateAreas() {
     return db.store('areas').getAll().then(allAreas => {
-		// now de-duplicate, based on name, type, and revision
-		// reasons for duplicates:
-		// - a major adds a new revision
-		// 		- the old one will have already been replaced by the new one, because of cleanPriorData
-		// - a major … are there any other cases?
+        // now de-duplicate, based on name, type, and revision
+        // reasons for duplicates:
+        // - a major adds a new revision
+        // 		- the old one will have already been replaced by the new one, because of cleanPriorData
+        // - a major … are there any other cases?
 
-        const grouped = groupBy(allAreas, area => `{${area.name}, ${area.type}, ${area.revision}}`)
+        const grouped = groupBy(
+            allAreas,
+            area => `{${area.name}, ${area.type}, ${area.revision}}`
+        )
         const withDuplicates = filter(grouped, list => list.length > 1)
 
         let ops = {}
         forEach(withDuplicates, duplicatesList => {
-            duplicatesList = sortBy(duplicatesList, area => area.sourcePath.length)
+            duplicatesList = sortBy(
+                duplicatesList,
+                area => area.sourcePath.length
+            )
             duplicatesList.shift() // take off the shortest one
-            ops = { ...ops, ...fromPairs(map(duplicatesList, item => ([item.sourcePath, null]))) }
+            ops = {
+                ...ops,
+                ...fromPairs(
+                    map(duplicatesList, item => [item.sourcePath, null])
+                ),
+            }
         })
 
-		// remove any that are invalid
-		// --- something about any values that aren't objects
+        // remove any that are invalid
+        // --- something about any values that aren't objects
 
-        const invalidAreas = filter(allAreas, area => some(['name', 'revision', 'type'], key => area[key] === undefined))
-        ops = { ...ops, ...fromPairs(map(invalidAreas, item => ([item.sourcePath, null]))) }
+        const invalidAreas = filter(allAreas, area =>
+            some(['name', 'revision', 'type'], key => area[key] === undefined))
+        ops = {
+            ...ops,
+            ...fromPairs(map(invalidAreas, item => [item.sourcePath, null])),
+        }
 
         return db.store('areas').batch(ops)
     })
 }
 
-
 function loadFiles(url, infoFileBase) {
     log(`loadFiles(): ${url}`)
 
-	// bad hawken?
+    // bad hawken?
     let type
     let notificationId
     let filesToLoad
 
-    return fetchJson(url).then(infoFile => {
-        type = infoFile.type
-        notificationId = type
-        filesToLoad = infoFile.files
+    return fetchJson(url)
+        .then(
+            infoFile => {
+                type = infoFile.type
+                notificationId = type
+                filesToLoad = infoFile.files
 
-        if (type === 'courses') {
-			// only download the json courses
-            filesToLoad = filesToLoad.filter(file => file.type === 'json')
-			// Only get the last four years of data
-            const oldestYear = new Date().getFullYear() - 5
-            filesToLoad = filter(filesToLoad, file => file.year >= oldestYear)
-        }
+                if (type === 'courses') {
+                    // only download the json courses
+                    filesToLoad = filesToLoad.filter(
+                        file => file.type === 'json'
+                    )
+                    // Only get the last four years of data
+                    const oldestYear = new Date().getFullYear() - 5
+                    filesToLoad = filter(
+                        filesToLoad,
+                        file => file.year >= oldestYear
+                    )
+                }
 
-		// For each file, see if it needs loading.
-        return Promise.all(filesToLoad.map(file => needsUpdate(type, file.path, file.hash)))
-    }, err => {
-        if (startsWith(err.message, 'Failed to fetch')) {
-            log(`loadFiles(): Failed to fetch ${url}`)
-            return []
-        }
-        throw err
-    })
-	.then(filesNeedLoading => {
-		// Cross-reference each file to load with the list of files that need loading
-    filesToLoad = filter(filesToLoad, (file, index) => filesNeedLoading[index])
+                // For each file, see if it needs loading.
+                return Promise.all(
+                    filesToLoad.map(file =>
+                        needsUpdate(type, file.path, file.hash))
+                )
+            },
+            err => {
+                if (startsWith(err.message, 'Failed to fetch')) {
+                    log(`loadFiles(): Failed to fetch ${url}`)
+                    return []
+                }
+                throw err
+            }
+        )
+        .then(filesNeedLoading => {
+            // Cross-reference each file to load with the list of files that need loading
+            filesToLoad = filter(
+                filesToLoad,
+                (file, index) => filesNeedLoading[index]
+            )
 
-		// Exit early if nothing needs to happen
-    if (filesToLoad.length === 0) {
-        log(`[${type}] no files need loading`)
-        return true
-    }
+            // Exit early if nothing needs to happen
+            if (filesToLoad.length === 0) {
+                log(`[${type}] no files need loading`)
+                return true
+            }
 
-    log(`[${type}] these files need loading:`, ...filesNeedLoading)
+            log(`[${type}] these files need loading:`, ...filesNeedLoading)
 
-		// Fire off the progress bar
-    dispatch('notifications', 'startProgress', notificationId, `Loading ${type}`, { max: size(filesToLoad), showButton: true })
+            // Fire off the progress bar
+            dispatch(
+                'notifications',
+                'startProgress',
+                notificationId,
+                `Loading ${type}`,
+                { max: size(filesToLoad), showButton: true }
+            )
 
-		// Load them into the database
-    return series(filesToLoad.map(file => {
-        return () => updateDatabase(type, infoFileBase, notificationId, file)
-    }))
-})
-	.then(() => {
-		// Clean up the database a bit
-    if (type === 'areas') {
-        return removeDuplicateAreas()
-    }
-}, err => {
-    throw err
-})
-	.then(() => {
-    log(`[${type}] done loading`)
+            // Load them into the database
+            return series(
+                filesToLoad.map(file => {
+                    return () =>
+                        updateDatabase(
+                            type,
+                            infoFileBase,
+                            notificationId,
+                            file
+                        )
+                })
+            )
+        })
+        .then(
+            () => {
+                // Clean up the database a bit
+                if (type === 'areas') {
+                    return removeDuplicateAreas()
+                }
+            },
+            err => {
+                throw err
+            }
+        )
+        .then(() => {
+            log(`[${type}] done loading`)
 
-		// Remove the progress bar after 1.5 seconds
-    dispatch('notifications', 'removeNotification', notificationId, 1500)
-    if (type === 'courses') {
-        dispatch('courses', 'refreshCourses')
-    }
-    else if (type === 'areas') {
-        dispatch('areas', 'refreshAreas')
-    }
+            // Remove the progress bar after 1.5 seconds
+            dispatch(
+                'notifications',
+                'removeNotification',
+                notificationId,
+                1500
+            )
+            if (type === 'courses') {
+                dispatch('courses', 'refreshCourses')
+            }
+            else if (type === 'areas') {
+                dispatch('areas', 'refreshAreas')
+            }
 
-    return true
-})
+            return true
+        })
 }
 
 function checkIdbInWorkerSupport() {
@@ -330,12 +397,12 @@ self.addEventListener('message', ({ data }) => {
 
     if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
         checkIdbInWorkerSupport()
-			.then(result => self.postMessage([id, 'result', result]))
-			.catch(err => self.postMessage([id, 'error', serializeError(err)]))
+            .then(result => self.postMessage([id, 'result', result]))
+            .catch(err => self.postMessage([id, 'error', serializeError(err)]))
         return
     }
 
     loadFiles(...args)
-		.then(result => self.postMessage([id, 'result', result]))
-		.catch(err => self.postMessage([id, 'error', serializeError(err)]))
+        .then(result => self.postMessage([id, 'result', result]))
+        .catch(err => self.postMessage([id, 'error', serializeError(err)]))
 })

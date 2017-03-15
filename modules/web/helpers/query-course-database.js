@@ -9,8 +9,11 @@ import fromPairs from 'lodash/fromPairs'
 import debug from 'debug'
 const log = debug('web:database')
 
-export default function queryCourseDatabase(queryString, baseQuery={}) {
-    let queryObject = buildQueryFromString(queryString, { words: true, profWords: true })
+export default function queryCourseDatabase(queryString, baseQuery = {}) {
+    let queryObject = buildQueryFromString(queryString, {
+        words: true,
+        profWords: true,
+    })
 
     let query = {}
     if ('year' in queryObject || 'semester' in queryObject) {
@@ -20,7 +23,7 @@ export default function queryCourseDatabase(queryString, baseQuery={}) {
         query = { ...baseQuery, ...queryObject }
     }
 
-	// make sure that all values are wrapped in arrays
+    // make sure that all values are wrapped in arrays
     query = toPairs(query)
     query = map(query, ([key, val]) => {
         if (!Array.isArray(val)) {
@@ -37,7 +40,12 @@ export default function queryCourseDatabase(queryString, baseQuery={}) {
     log('query object', query)
 
     return db
-		.store('courses')
-		.query(query)
-		.catch(err => new Error(`course query failed on "${queryString}" with error "${err}"`))
+        .store('courses')
+        .query(query)
+        .catch(
+            err =>
+                new Error(
+                    `course query failed on "${queryString}" with error "${err}"`
+                )
+        )
 }

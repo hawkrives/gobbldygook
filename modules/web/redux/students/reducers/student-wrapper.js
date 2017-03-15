@@ -1,14 +1,13 @@
 import {
-	BEGIN_VALIDATE_SCHEDULES,
-	VALIDATE_SCHEDULES,
-	BEGIN_GET_STUDENT_DATA,
-	GET_STUDENT_DATA,
-	BEGIN_CHECK_GRADUATABILITY,
-	CHECK_GRADUATABILITY,
-	BEGIN_LOAD_STUDENT,
-	LOAD_STUDENT,
+    BEGIN_VALIDATE_SCHEDULES,
+    VALIDATE_SCHEDULES,
+    BEGIN_GET_STUDENT_DATA,
+    GET_STUDENT_DATA,
+    BEGIN_CHECK_GRADUATABILITY,
+    CHECK_GRADUATABILITY,
+    BEGIN_LOAD_STUDENT,
+    LOAD_STUDENT,
 } from '../constants'
-
 
 import studentReducer from './student'
 
@@ -31,7 +30,10 @@ export default function studentWrapperReducer(state = initialState, action) {
         return {
             ...state,
             isLoading: false,
-            data: studentReducer({ ...state.data, present: payload }, action),
+            data: studentReducer(
+                    { ...state.data, present: payload },
+                    action
+                ),
         }
     }
 
@@ -41,7 +43,10 @@ export default function studentWrapperReducer(state = initialState, action) {
     case GET_STUDENT_DATA: {
         return {
             ...state,
-            data: studentReducer({ ...state.data, present: payload }, action),
+            data: studentReducer(
+                    { ...state.data, present: payload },
+                    action
+                ),
             isFetching: false,
         }
     }
@@ -52,7 +57,10 @@ export default function studentWrapperReducer(state = initialState, action) {
     case CHECK_GRADUATABILITY: {
         return {
             ...state,
-            data: studentReducer({ ...state.data, present: payload }, action),
+            data: studentReducer(
+                    { ...state.data, present: payload },
+                    action
+                ),
             isChecking: false,
         }
     }
@@ -63,7 +71,10 @@ export default function studentWrapperReducer(state = initialState, action) {
     case VALIDATE_SCHEDULES: {
         return {
             ...state,
-            data: studentReducer({ ...state.data, present: payload }, action),
+            data: studentReducer(
+                    { ...state.data, present: payload },
+                    action
+                ),
             isValdiating: false,
         }
     }

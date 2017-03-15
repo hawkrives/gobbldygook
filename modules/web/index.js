@@ -42,10 +42,11 @@ global._store = store
 
 let renderFunc = Root => {
     render(
-		<Root store={store}>
-			<Router history={history} routes={routes} />
-		</Root>,
-		document.getElementById('gobbldygook'))
+        <Root store={store}>
+            <Router history={history} routes={routes} />
+        </Root>,
+        document.getElementById('gobbldygook')
+    )
 }
 
 renderFunc(ReduxWrapper)

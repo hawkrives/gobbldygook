@@ -1,8 +1,4 @@
-import {
-	ADD_AREA,
-	REMOVE_AREA,
-	REMOVE_AREAS,
-} from '../constants'
+import { ADD_AREA, REMOVE_AREA, REMOVE_AREAS } from '../constants'
 
 export function addArea(studentId, area) {
     return { type: ADD_AREA, payload: { studentId, area } }

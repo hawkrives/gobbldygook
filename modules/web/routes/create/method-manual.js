@@ -42,14 +42,20 @@ class ManualCreationScreen extends Component {
 
         let filtered = filterAreaList(this.props.areas, { graduation })
         filtered = filter(filtered, { type })
-        let options = map(filtered, ({ name, type, revision }) =>
-			({ name, type, revision, value: `${name} (${revision})`, label: `${name} (${revision})` }))
+        let options = map(filtered, ({ name, type, revision }) => ({
+            name,
+            type,
+            revision,
+            value: `${name} (${revision})`,
+            label: `${name} (${revision})`,
+        }))
         return options
     };
 
-    handleAreaChange = type => values => {
-        this.setState({ [type]: values })
-    };
+    handleAreaChange = type =>
+        values => {
+            this.setState({ [type]: values })
+        };
 
     handleNameChange = ev => {
         this.setState({ name: ev.target.value })
@@ -98,10 +104,19 @@ class ManualCreationScreen extends Component {
     onCreateStudent = () => {
         this.setState({ submitted: true })
 
-        let studies = [].concat(this.state.degree, this.state.major, this.state.concentration, this.state.emphasis)
+        let studies = [].concat(
+            this.state.degree,
+            this.state.major,
+            this.state.concentration,
+            this.state.emphasis
+        )
 
-		// pick out only the values that we want
-        studies = map(studies, ({ name, revision, type }) => ({ name, revision, type }))
+        // pick out only the values that we want
+        studies = map(studies, ({ name, revision, type }) => ({
+            name,
+            revision,
+            type,
+        }))
 
         let rawStudent = {
             name: this.state.name,
@@ -116,82 +131,118 @@ class ManualCreationScreen extends Component {
     };
 
     render() {
-        let nameEl = <Autosize
-            className="autosize-input"
-            value={this.state.name}
-            onChange={this.handleNameChange}
-		/>
+        let nameEl = (
+            <Autosize
+                className="autosize-input"
+                value={this.state.name}
+                onChange={this.handleNameChange}
+            />
+        )
 
-        let matriculationEl = <Autosize
-            className={cx('autosize-input', { invalid: !this.state.matriculationIsValid })}
-            value={String(this.state.matriculation)}
-            onChange={this.handleMatriculationChange}
-		/>
+        let matriculationEl = (
+            <Autosize
+                className={cx('autosize-input', {
+                    invalid: !this.state.matriculationIsValid,
+                })}
+                value={String(this.state.matriculation)}
+                onChange={this.handleMatriculationChange}
+            />
+        )
 
-        let graduationEl = <Autosize
-            className={cx('autosize-input', { invalid: !this.state.graduationIsValid })}
-            value={String(this.state.graduation)}
-            onChange={this.handleGraduationChange}
-		/>
+        let graduationEl = (
+            <Autosize
+                className={cx('autosize-input', {
+                    invalid: !this.state.graduationIsValid,
+                })}
+                value={String(this.state.graduation)}
+                onChange={this.handleGraduationChange}
+            />
+        )
 
-        return <div className="manual">
-			<header className="header">
-				<h1>Manually Create</h1>
-			</header>
+        return (
+            <div className="manual">
+                <header className="header">
+                    <h1>Manually Create</h1>
+                </header>
 
-			{this.state.error ? <pre className="errors">
-				{this.state.error}
-			</pre> : null}
+                {this.state.error
+                    ? <pre className="errors">
+                          {this.state.error}
+                      </pre>
+                    : null}
 
-			<div className="intro">
-				Hi! My name is {nameEl}.<br />I matriculated in {matriculationEl},
-				and I plan to graduate in {graduationEl}.
-			</div>
+                <div className="intro">
+                    Hi! My name is
+                    {' '}
+                    {nameEl}
+                    .
+                    <br />
+                    I matriculated in
+                    {' '}
+                    {matriculationEl}
+                    ,
+                    and I plan to graduate in {graduationEl}.
+                </div>
 
-			<div className="areas">
-				<div className="row">
-					<label htmlFor="degreeSelector">Degrees:</label>
-					<Select multi inputProps={{ id: 'degreeSelector' }}
-    value={this.state.degree}
-    options={this.getAreaOptions('degree')}
-    onChange={this.handleAreaChange('degree')}
-					/>
-				</div>
-				<div className="row">
-					<label htmlFor="majorSelector">Majors:</label>
-					<Select multi inputProps={{ id: 'majorSelector' }}
-    value={this.state.major}
-    options={this.getAreaOptions('major')}
-    onChange={this.handleAreaChange('major')}
-					/>
-				</div>
-				<div className="row">
-					<label htmlFor="concentrationSelector">Concentrations:</label>
-					<Select multi inputProps={{ id: 'concentrationSelector' }}
-    value={this.state.concentration}
-    options={this.getAreaOptions('concentration')}
-    onChange={this.handleAreaChange('concentration')}
-					/>
-				</div>
-				<div className="row">
-					<label htmlFor="emphasisSelector">Areas of Emphasis:</label>
-					<Select multi inputProps={{ id: 'emphasisSelector' }}
-    value={this.state.emphasis}
-    options={this.getAreaOptions('emphasis')}
-    onChange={this.handleAreaChange('emphasis')}
-					/>
-				</div>
-			</div>
+                <div className="areas">
+                    <div className="row">
+                        <label htmlFor="degreeSelector">Degrees:</label>
+                        <Select
+                            multi
+                            inputProps={{ id: 'degreeSelector' }}
+                            value={this.state.degree}
+                            options={this.getAreaOptions('degree')}
+                            onChange={this.handleAreaChange('degree')}
+                        />
+                    </div>
+                    <div className="row">
+                        <label htmlFor="majorSelector">Majors:</label>
+                        <Select
+                            multi
+                            inputProps={{ id: 'majorSelector' }}
+                            value={this.state.major}
+                            options={this.getAreaOptions('major')}
+                            onChange={this.handleAreaChange('major')}
+                        />
+                    </div>
+                    <div className="row">
+                        <label htmlFor="concentrationSelector">
+                            Concentrations:
+                        </label>
+                        <Select
+                            multi
+                            inputProps={{ id: 'concentrationSelector' }}
+                            value={this.state.concentration}
+                            options={this.getAreaOptions('concentration')}
+                            onChange={this.handleAreaChange('concentration')}
+                        />
+                    </div>
+                    <div className="row">
+                        <label htmlFor="emphasisSelector">
+                            Areas of Emphasis:
+                        </label>
+                        <Select
+                            multi
+                            inputProps={{ id: 'emphasisSelector' }}
+                            value={this.state.emphasis}
+                            options={this.getAreaOptions('emphasis')}
+                            onChange={this.handleAreaChange('emphasis')}
+                        />
+                    </div>
+                </div>
 
-			<div className="actions">
-				<Button
-    disabled={Boolean(this.state.error) || this.state.submitted}
-    onClick={this.onCreateStudent}
-				>
-					{!this.state.error ? "Let's go!" : 'Hmm…'}
-				</Button>
-			</div>
-		</div>
+                <div className="actions">
+                    <Button
+                        disabled={
+                            Boolean(this.state.error) || this.state.submitted
+                        }
+                        onClick={this.onCreateStudent}
+                    >
+                        {!this.state.error ? "Let's go!" : 'Hmm…'}
+                    </Button>
+                </div>
+            </div>
+        )
     }
 }
 

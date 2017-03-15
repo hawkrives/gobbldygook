@@ -1,58 +1,57 @@
 import undoable from 'redux-undo'
 
 import {
-	changeStudentName,
-	changeStudentAdvisor,
-	changeStudentCreditsNeeded,
-	changeStudentMatriculation,
-	changeStudentGraduation,
-	changeStudentSetting,
-	addAreaToStudent,
-	removeAreaFromStudent,
-	addScheduleToStudent,
-	destroyScheduleFromStudent,
-	moveCourseToSchedule,
-	setOverrideOnStudent,
-	removeOverrideFromStudent,
-	addFabricationToStudent,
-	removeFabricationFromStudent,
-	renameScheduleInStudent,
-	reorderScheduleInStudent,
-	moveScheduleInStudent,
-	addCourseToSchedule,
-	removeCourseFromSchedule,
-	reorderCourseInSchedule,
+    changeStudentName,
+    changeStudentAdvisor,
+    changeStudentCreditsNeeded,
+    changeStudentMatriculation,
+    changeStudentGraduation,
+    changeStudentSetting,
+    addAreaToStudent,
+    removeAreaFromStudent,
+    addScheduleToStudent,
+    destroyScheduleFromStudent,
+    moveCourseToSchedule,
+    setOverrideOnStudent,
+    removeOverrideFromStudent,
+    addFabricationToStudent,
+    removeFabricationFromStudent,
+    renameScheduleInStudent,
+    reorderScheduleInStudent,
+    moveScheduleInStudent,
+    addCourseToSchedule,
+    removeCourseFromSchedule,
+    reorderCourseInSchedule,
 } from '../../../../object-student/student'
 
 import {
-	LOAD_STUDENT,
-	INIT_STUDENT,
-	IMPORT_STUDENT,
-	CHANGE_NAME,
-	CHANGE_ADVISOR,
-	CHANGE_CREDITS_NEEDED,
-	CHANGE_MATRICULATION,
-	CHANGE_GRADUATION,
-	CHANGE_SETTING,
-	ADD_AREA,
-	REMOVE_AREA,
-	REMOVE_AREAS,
-	ADD_SCHEDULE,
-	DESTROY_SCHEDULE,
-	DESTROY_SCHEDULES,
-	RENAME_SCHEDULE,
-	REORDER_SCHEDULE,
-	MOVE_SCHEDULE,
-	ADD_COURSE,
-	REMOVE_COURSE,
-	REORDER_COURSE,
-	MOVE_COURSE,
-	SET_OVERRIDE,
-	REMOVE_OVERRIDE,
-	ADD_FABRICATION,
-	REMOVE_FABRICATION,
+    LOAD_STUDENT,
+    INIT_STUDENT,
+    IMPORT_STUDENT,
+    CHANGE_NAME,
+    CHANGE_ADVISOR,
+    CHANGE_CREDITS_NEEDED,
+    CHANGE_MATRICULATION,
+    CHANGE_GRADUATION,
+    CHANGE_SETTING,
+    ADD_AREA,
+    REMOVE_AREA,
+    REMOVE_AREAS,
+    ADD_SCHEDULE,
+    DESTROY_SCHEDULE,
+    DESTROY_SCHEDULES,
+    RENAME_SCHEDULE,
+    REORDER_SCHEDULE,
+    MOVE_SCHEDULE,
+    ADD_COURSE,
+    REMOVE_COURSE,
+    REORDER_COURSE,
+    MOVE_COURSE,
+    SET_OVERRIDE,
+    REMOVE_OVERRIDE,
+    ADD_FABRICATION,
+    REMOVE_FABRICATION,
 } from '../constants'
-
 
 const initialState = {}
 
@@ -112,23 +111,45 @@ export function studentReducer(state = initialState, action) {
         return state
     }
     case RENAME_SCHEDULE: {
-        return renameScheduleInStudent(state, payload.scheduleId, payload.newTitle)
+        return renameScheduleInStudent(
+                state,
+                payload.scheduleId,
+                payload.newTitle
+            )
     }
     case REORDER_SCHEDULE: {
-        return reorderScheduleInStudent(state, payload.scheduleId, payload.newIndex)
+        return reorderScheduleInStudent(
+                state,
+                payload.scheduleId,
+                payload.newIndex
+            )
     }
     case MOVE_SCHEDULE: {
-        return moveScheduleInStudent(state, payload.scheduleId, { year: payload.year, semester: payload.semester })
+        return moveScheduleInStudent(state, payload.scheduleId, {
+            year: payload.year,
+            semester: payload.semester,
+        })
     }
 
     case ADD_COURSE: {
-        return addCourseToSchedule(state, payload.scheduleId, payload.clbid)
+        return addCourseToSchedule(
+                state,
+                payload.scheduleId,
+                payload.clbid
+            )
     }
     case REMOVE_COURSE: {
-        return removeCourseFromSchedule(state, payload.scheduleId, payload.clbid)
+        return removeCourseFromSchedule(
+                state,
+                payload.scheduleId,
+                payload.clbid
+            )
     }
     case REORDER_COURSE: {
-        return reorderCourseInSchedule(state, payload.scheduleId, { clbid: payload.clbid, index: payload.index })
+        return reorderCourseInSchedule(state, payload.scheduleId, {
+            clbid: payload.clbid,
+            index: payload.index,
+        })
     }
     case MOVE_COURSE: {
         return moveCourseToSchedule(state, {
@@ -157,15 +178,20 @@ export function studentReducer(state = initialState, action) {
     }
 }
 
-
 export default undoable(studentReducer, {
     limit: 10,
 
     filter(action, currentState, previousState) {
-		// only save history when something has changed.
-        return (currentState !== previousState)
+        // only save history when something has changed.
+        return currentState !== previousState
     },
 
-	// treat LOAD_STUDENTS as the beginning of history
-    initTypes: ['@@redux/INIT', '@@INIT', LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT],
+    // treat LOAD_STUDENTS as the beginning of history
+    initTypes: [
+        '@@redux/INIT',
+        '@@INIT',
+        LOAD_STUDENT,
+        INIT_STUDENT,
+        IMPORT_STUDENT,
+    ],
 })

@@ -13,10 +13,10 @@ import { iosTrashOutline } from '../icons/ionicons'
 import './course-removal-box.scss'
 
 type CourseRemovalBoxProps = {
-	canDrop: boolean,  // react-dnd
-	connectDropTarget: () => any,  // react-dnd
-	isOver: boolean,  // react-dnd
-	removeCourse: () => any,  // studentId is embedded in the passed function
+    canDrop: boolean, // react-dnd
+    connectDropTarget: () => any, // react-dnd
+    isOver: boolean, // react-dnd
+    removeCourse: () => any, // studentId is embedded in the passed function
 };
 function CourseRemovalBox(props: CourseRemovalBoxProps) {
     const className = cx('course-removal-box', {
@@ -25,13 +25,14 @@ function CourseRemovalBox(props: CourseRemovalBoxProps) {
     })
 
     return props.connectDropTarget(
-		<div className={className}>
-			<Icon type="block" style={{ fontSize: '3em', textAlign: 'center' }}>{iosTrashOutline}</Icon>
-			Drop a course here to remove it.
-		</div>
-	)
+        <div className={className}>
+            <Icon type="block" style={{ fontSize: '3em', textAlign: 'center' }}>
+                {iosTrashOutline}
+            </Icon>
+            Drop a course here to remove it.
+        </div>
+    )
 }
-
 
 // Implements the drag source contract.
 const removeCourseTarget = {
@@ -40,7 +41,7 @@ const removeCourseTarget = {
         const { clbid, fromScheduleId, isFromSchedule } = item
         if (isFromSchedule) {
             log('dropped course', item)
-			// the studentId is embedded in the passed function
+            // the studentId is embedded in the passed function
             props.removeCourse(fromScheduleId, clbid)
         }
     },
@@ -62,4 +63,6 @@ function collect(connect, monitor) {
     }
 }
 
-export default DropTarget(IDENT_COURSE, removeCourseTarget, collect)(CourseRemovalBox)
+export default DropTarget(IDENT_COURSE, removeCourseTarget, collect)(
+    CourseRemovalBox
+)

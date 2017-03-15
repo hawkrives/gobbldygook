@@ -7,15 +7,15 @@ import { compareProps } from '../../lib'
 import './button.scss'
 
 type ButtonProps = {
-	children?: any,
-	className?: string,
-	disabled?: boolean,
-	link?: boolean,
-	onClick?: () => any,
-	style?: Object,
-	title?: string,
-	to?: string | Object,
-	type: 'flat' | 'raised',
+    children?: any,
+    className?: string,
+    disabled?: boolean,
+    link?: boolean,
+    onClick?: () => any,
+    style?: Object,
+    title?: string,
+    to?: string | Object,
+    type: 'flat' | 'raised',
 };
 
 export default class Button extends Component {
@@ -33,7 +33,11 @@ export default class Button extends Component {
         let tag = this.props.link ? Link : 'button'
         let props = {
             type: 'button',
-            className: cx('button', `button--${this.props.type}`, this.props.className),
+            className: cx(
+                'button',
+                `button--${this.props.type}`,
+                this.props.className
+            ),
             disabled: this.props.disabled,
             onClick: this.props.onClick,
             style: this.props.style,

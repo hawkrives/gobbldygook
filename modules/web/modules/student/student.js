@@ -14,13 +14,13 @@ import './student.scss'
 
 export class Student extends Component {
     static propTypes = {
-        content: PropTypes.node,  // from react-router
+        content: PropTypes.node, // from react-router
         loadStudent: PropTypes.func.isRequired,
         overlay: PropTypes.node,
-        params: PropTypes.object,  // react-router
-        processed: PropTypes.object,  // redux
-        sidebar: PropTypes.node,  // from react-router
-        student: PropTypes.object,  // redux
+        params: PropTypes.object, // react-router
+        processed: PropTypes.object, // redux
+        sidebar: PropTypes.node, // from react-router
+        student: PropTypes.object, // redux
     };
 
     componentWillMount() {
@@ -32,52 +32,63 @@ export class Student extends Component {
     }
 
     loadStudent = props => {
-        if (!props.student || props.params.studentId !== this.props.params.studentId)  {
+        if (
+            !props.student ||
+            props.params.studentId !== this.props.params.studentId
+        ) {
             props.loadStudent(props.params.studentId)
         }
     };
 
     render() {
         if (!this.props.student) {
-            return <div>Student {this.props.params.studentId} could not be loaded.</div>
+            return (
+                <div>
+                    Student {this.props.params.studentId} could not be loaded.
+                </div>
+            )
         }
 
-        if (this.props.student.isLoading){
+        if (this.props.student.isLoading) {
             return <Loading>Loading Student…</Loading>
         }
 
-        const name = this.props.student ? this.props.student.data.present.name : 'Loading…'
+        const name = this.props.student
+            ? this.props.student.data.present.name
+            : 'Loading…'
 
-        const contentProps = { student: this.props.student, className: 'content' }
+        const contentProps = {
+            student: this.props.student,
+            className: 'content',
+        }
         const contents = this.props.content
-			? cloneElement(this.props.content, contentProps)
-			: <CourseTable {...contentProps} />
+            ? cloneElement(this.props.content, contentProps)
+            : <CourseTable {...contentProps} />
 
         const sidebarProps = { student: this.props.student.data.present }
         const sidebar = this.props.sidebar
-			? cloneElement(this.props.sidebar, sidebarProps)
-			: <GraduationStatus {...sidebarProps} />
+            ? cloneElement(this.props.sidebar, sidebarProps)
+            : <GraduationStatus {...sidebarProps} />
 
         return (
-			<DocumentTitle title={`${name} | Gobbldygook`}>
-				<div className="student">
-					<Sidebar student={this.props.student}>
-						{sidebar}
-					</Sidebar>
-					{contents}
-					{this.props.overlay || null}
-				</div>
-			</DocumentTitle>
+            <DocumentTitle title={`${name} | Gobbldygook`}>
+                <div className="student">
+                    <Sidebar student={this.props.student}>
+                        {sidebar}
+                    </Sidebar>
+                    {contents}
+                    {this.props.overlay || null}
+                </div>
+            </DocumentTitle>
         )
     }
 }
-
 
 const mapStateToProps = (state, ownProps) => ({
     student: state.students[ownProps.params.studentId],
 })
 
 const mapDispatchToProps = dispatch =>
-	bindActionCreators({ loadStudent }, dispatch)
+    bindActionCreators({ loadStudent }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Student)

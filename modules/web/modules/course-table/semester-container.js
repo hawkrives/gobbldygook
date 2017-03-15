@@ -12,10 +12,9 @@ import Semester from './semester'
 
 import { getSchedule } from '../../helpers/get-schedule'
 
-
 export class SemesterContainer extends Component {
     static propTypes = {
-        addCourse: PropTypes.func.isRequired,  // redux
+        addCourse: PropTypes.func.isRequired, // redux
         destroySchedules: PropTypes.func.isRequired, // redux
         moveCourse: PropTypes.func.isRequired, // redux
         semester: PropTypes.number.isRequired,
@@ -24,17 +23,18 @@ export class SemesterContainer extends Component {
     };
 
     shouldComponentUpdate(nextProps) {
-        return (
-			nextProps.student !== this.props.student ||
-			nextProps.addCourse !== this.props.addCourse ||
-			nextProps.moveCourse !== this.props.moveCourse ||
-			nextProps.destroySchedules !== this.props.destroySchedules
-        )
+        return nextProps.student !== this.props.student ||
+            nextProps.addCourse !== this.props.addCourse ||
+            nextProps.moveCourse !== this.props.moveCourse ||
+            nextProps.destroySchedules !== this.props.destroySchedules
     }
 
     removeSemester = () => {
         const { student, semester, year } = this.props
-        const thisSemesterSchedules = filter(student.schedules, isCurrentSemester(year, semester))
+        const thisSemesterSchedules = filter(
+            student.schedules,
+            isCurrentSemester(year, semester)
+        )
         const scheduleIds = map(thisSemesterSchedules, s => s.id)
         this.props.destroySchedules(student.id, ...scheduleIds)
     };
@@ -48,24 +48,22 @@ export class SemesterContainer extends Component {
         }
 
         return (
-			<Semester
-    addCourse={addCourse}
-    moveCourse={moveCourse}
-    removeSemester={this.removeSemester}
-    schedule={schedule}
-    semester={semester}
-    studentId={student.id}
-    year={year}
-			/>
+            <Semester
+                addCourse={addCourse}
+                moveCourse={moveCourse}
+                removeSemester={this.removeSemester}
+                schedule={schedule}
+                semester={semester}
+                studentId={student.id}
+                year={year}
+            />
         )
     }
 }
 
-
 const mapDispatchToProps = dispatch =>
-	bindActionCreators({ destroySchedules, moveCourse, addCourse }, dispatch)
+    bindActionCreators({ destroySchedules, moveCourse, addCourse }, dispatch)
 
 const connected = connect(undefined, mapDispatchToProps)(SemesterContainer)
-
 
 export default connected

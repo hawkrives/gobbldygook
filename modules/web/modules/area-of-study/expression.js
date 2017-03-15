@@ -27,15 +27,22 @@ function makeBooleanExpression({ expr, ctx }) {
         kind = '$or'
     }
 
-    const contents = expr[kind].reduce((acc, exp, i) => {
-        if (i > 0) {
-            acc.push(<span key={`${i}-joiner`} className="joiner">{JOINERS[kind]}</span>)
-        }
+    const contents = expr[kind].reduce(
+        (acc, exp, i) => {
+            if (i > 0) {
+                acc.push(
+                    <span key={`${i}-joiner`} className="joiner">
+                        {JOINERS[kind]}
+                    </span>
+                )
+            }
 
-        acc.push(<Expression key={i} expr={exp} ctx={ctx} />)
+            acc.push(<Expression key={i} expr={exp} ctx={ctx} />)
 
-        return acc
-    }, [])
+            return acc
+        },
+        []
+    )
 
     return { contents }
 }
@@ -47,11 +54,13 @@ const ofLookup = {
 }
 
 function makeOfExpression({ expr, ctx }) {
-    const description = ofLookup[expr.$count.$was] || `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
+    const description = ofLookup[expr.$count.$was] ||
+        `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
 
-	// const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
-    const contents = map(expr.$of, (ex, i) =>
-		<Expression key={i} expr={ex} ctx={ctx} />)
+    // const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
+    const contents = map(expr.$of, (ex, i) => (
+        <Expression key={i} expr={ex} ctx={ctx} />
+    ))
 
     return { description, contents }
 }
@@ -82,8 +91,13 @@ export function makeWhereExpression({ expr }) {
     const qualifier = makeWhereQualifier(expr.$where)
     const description = `${expr._counted} of ${needs} ${expr.$distinct ? 'distinct' : ''} ${plur('course', expr.$count.$num)} from courses where ${qualifier}`
 
-    let contents = map(expr._matches, (course, i) =>
-		<Expression key={i} expr={{ $type: 'course', $course: course }} hideIndicator />)
+    let contents = map(expr._matches, (course, i) => (
+        <Expression
+            key={i}
+            expr={{ $type: 'course', $course: course }}
+            hideIndicator
+        />
+    ))
 
     if (!contents.length) {
         contents = null
@@ -121,36 +135,34 @@ export default function Expression(props) {
     if ($type === 'boolean') {
         ({ contents } = makeBooleanExpression(props))
     }
-
     else if ($type === 'course') {
-		// _request is the original course that was written in the spec.
-		// $course is the matched course. It's used mostly by where-expressions and the like.
-        contents = <CourseExpression {...expr._request || expr.$course} _taken={expr._taken} />
-        result = <ResultIndicator result={wasTaken}  />
+        // _request is the original course that was written in the spec.
+        // $course is the matched course. It's used mostly by where-expressions and the like.
+        contents = (
+            <CourseExpression
+                {...expr._request || expr.$course}
+                _taken={expr._taken}
+            />
+        )
+        result = <ResultIndicator result={wasTaken} />
     }
-
     else if ($type === 'reference') {
         contents = expr.$requirement
-        result = <ResultIndicator result={computationResult}  />
+        result = <ResultIndicator result={computationResult} />
     }
-
     else if ($type === 'of') {
         ({ contents, description } = makeOfExpression(props))
     }
-
     else if ($type === 'modifier') {
         ({ description } = makeModifierExpression(props))
-        result = <ResultIndicator result={computationResult}  />
+        result = <ResultIndicator result={computationResult} />
     }
-
     else if ($type === 'where') {
         ({ description, contents } = makeWhereExpression(props))
     }
-
     else if ($type === 'occurrence') {
         ({ description, contents } = makeOccurrenceExpression(props))
     }
-
     else {
         log(`<Expression />: type not handled: ${$type}`)
         log(props)
@@ -167,17 +179,17 @@ export default function Expression(props) {
     ].join(' ')
 
     return (
-		<span className={className}>
-			{description &&
-				<span className="expression--description">
-					{description}{!props.hideIndicator && result}
-				</span>}
-			{contents &&
-				<span className="expression--contents">
-					{contents}
-					{(props.hideIndicator || expr._isFulfillment) ? null : result}
-				</span>}
-		</span>
+        <span className={className}>
+            {description &&
+                <span className="expression--description">
+                    {description}{!props.hideIndicator && result}
+                </span>}
+            {contents &&
+                <span className="expression--contents">
+                    {contents}
+                    {props.hideIndicator || expr._isFulfillment ? null : result}
+                </span>}
+        </span>
     )
 }
 

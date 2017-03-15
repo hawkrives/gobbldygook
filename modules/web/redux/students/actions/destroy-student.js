@@ -1,8 +1,6 @@
 import { removeStudentFromCache } from '../../../helpers/save-student'
 
-import {
-	DESTROY_STUDENT,
-} from '../constants'
+import { DESTROY_STUDENT } from '../constants'
 
 export function destroyStudent(studentId) {
     return new Promise(resolve => {

@@ -38,40 +38,43 @@ export const shouldTakeAction = ({ type }) => {
     return includes(whitelist, type)
 }
 
-const saveStudentsMiddleware = store => next => action => {
-    if (!shouldTakeAction(action)) {
-        return next(action)
-    }
+const saveStudentsMiddleware = store =>
+    next =>
+        action => {
+            if (!shouldTakeAction(action)) {
+                return next(action)
+            }
 
-	// save a copy of the old state
-    const oldState = store.getState()
-    const oldStudents = oldState.students
+            // save a copy of the old state
+            const oldState = store.getState()
+            const oldStudents = oldState.students
 
-	// dispatch the action along the chain
-	// this is what actually changes the state
-    const result = next(action)
+            // dispatch the action along the chain
+            // this is what actually changes the state
+            const result = next(action)
 
-	// grab a copy of the *new* state
-    const newState = store.getState()
-    const newStudents = newState.students
+            // grab a copy of the *new* state
+            const newState = store.getState()
+            const newStudents = newState.students
 
-    if (oldStudents === newStudents) {
-        return result
-    }
+            if (oldStudents === newStudents) {
+                return result
+            }
 
-	// get any student objects whose identity has changed
-    const studentsToSave = filter(newStudents, (_, id) => {
-        if (!(id in oldStudents)) {
-            return true
+            // get any student objects whose identity has changed
+            const studentsToSave = filter(newStudents, (_, id) => {
+                if (!(id in oldStudents)) {
+                    return true
+                }
+                return newStudents[id].data.present !==
+                    oldStudents[id].data.present
+            })
+
+            // save them
+            const promises = map(studentsToSave, stu =>
+                store.dispatch(saveStudent(stu.data.present.id)))
+
+            return Promise.all(promises).then(() => result)
         }
-        return newStudents[id].data.present !== oldStudents[id].data.present
-    })
-
-	// save them
-    const promises = map(studentsToSave, stu =>
-		store.dispatch(saveStudent(stu.data.present.id)))
-
-    return Promise.all(promises).then(() => result)
-}
 
 export default saveStudentsMiddleware

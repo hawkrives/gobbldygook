@@ -4,11 +4,11 @@ import omit from 'lodash/omit'
 import uuid from 'uuid/v4'
 
 import {
-	saveStudent,
-	addStudentToCache,
-	removeStudentFromCache,
-	getIdCache,
-	setIdCache,
+    saveStudent,
+    addStudentToCache,
+    removeStudentFromCache,
+    getIdCache,
+    setIdCache,
 } from '../save-student'
 import demoStudent from '../../../object-student/demo-student.json'
 
@@ -32,19 +32,22 @@ describe('saveStudent', () => {
         expect(actualStudentIds).toEqual(expectedStudentIds)
         let expectedStudent = student
         let actualStudent = JSON.parse(localStorage.getItem(student.id))
-        expect(omit(actualStudent, 'dateLastModified')).toEqual(expectedStudent)
+        expect(omit(actualStudent, 'dateLastModified')).toEqual(
+            expectedStudent
+        )
     })
 
     it("doesn't save if the student hasn't changed", async () => {
         await saveStudent(student)
-        let s =  JSON.parse(localStorage.getItem(student.id))
+        let s = JSON.parse(localStorage.getItem(student.id))
         let lastModified = s.dateLastModified
         await saveStudent(s)
-        let newLastModified = JSON.parse(localStorage.getItem(student.id)).dateLastModified
+        let newLastModified = JSON.parse(
+            localStorage.getItem(student.id)
+        ).dateLastModified
         expect(newLastModified).toBe(lastModified)
     })
 })
-
 
 describe('addStudentToCache', () => {
     let ids
@@ -91,7 +94,6 @@ describe('removeStudentFromCache', () => {
         expect(actual).toEqual(expected)
     })
 })
-
 
 describe('getIdCache', () => {
     it('gets the list of student ids', () => {

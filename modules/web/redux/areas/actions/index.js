@@ -4,13 +4,13 @@ import map from 'lodash/map'
 import loadArea from '../../../helpers/load-area'
 
 import {
-	LOAD_ALL_AREAS,
-	LOADING_AREAS,
-	REFRESH_AREAS,
-	START_LOAD_AREAS,
+    LOAD_ALL_AREAS,
+    LOADING_AREAS,
+    REFRESH_AREAS,
+    START_LOAD_AREAS,
 } from '../constants'
 
-export function loadingAreas(): {type: string} {
+export function loadingAreas(): { type: string } {
     return { type: LOADING_AREAS }
 }
 

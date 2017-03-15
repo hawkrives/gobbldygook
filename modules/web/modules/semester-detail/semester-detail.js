@@ -15,7 +15,8 @@ import './semester-detail.scss'
 export default class SemesterDetail extends Component {
     static propTypes = {
         className: PropTypes.string,
-        location: PropTypes.shape({ // react-router
+        location: PropTypes.shape({
+            // react-router
             pathname: PropTypes.string,
             search: PropTypes.string,
         }),
@@ -38,18 +39,23 @@ export default class SemesterDetail extends Component {
         const student = this.props.student.data.present
 
         const schedules = map(
-			filter(student.schedules, isCurrentSemester(year, semester)),
-			sched => omit(sched, 'courses'))
+            filter(student.schedules, isCurrentSemester(year, semester)),
+            sched => omit(sched, 'courses')
+        )
 
         return (
-			<DocumentTitle title={`${semesterName(semester)} ${year} • ${student.name} | Gobbldygook`}>
-				<div className={cx('semester-detail', this.props.className)}>
-					<pre>
-						{this.props.location.pathname}{'\n'}
-						{JSON.stringify(schedules, null, 2)}
-					</pre>
-				</div>
-			</DocumentTitle>
+            <DocumentTitle
+                title={
+                    `${semesterName(semester)} ${year} • ${student.name} | Gobbldygook`
+                }
+            >
+                <div className={cx('semester-detail', this.props.className)}>
+                    <pre>
+                        {this.props.location.pathname}{'\n'}
+                        {JSON.stringify(schedules, null, 2)}
+                    </pre>
+                </div>
+            </DocumentTitle>
         )
     }
 }

@@ -7,15 +7,15 @@ const log = debug('web:react')
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 class ContentEditable extends Component {
     props: {
-		className?: string,
-		multiLine?: boolean,
-		onBlur?: () => any,
-		onChange: () => any,
-		onFocus?: () => any,
-		onKeyDown?: () => any,
-		placeholder?: string,
-		value?: string,
-	};
+        className?: string,
+        multiLine?: boolean,
+        onBlur?: () => any,
+        onChange: () => any,
+        onFocus?: () => any,
+        onKeyDown?: () => any,
+        placeholder?: string,
+        value?: string,
+    };
 
     static defaultProps = {
         onChange: () => {},
@@ -36,11 +36,11 @@ class ContentEditable extends Component {
 
     handleFocus = (ev: Event) => {
         this.props.onFocus && this.props.onFocus(ev)
-		// this.ref.placeholder.style.display = 'none'
+        // this.ref.placeholder.style.display = 'none'
     };
 
     handleBlur = () => {
-		// this.ref.placeholder.style.display = 'inline'
+        // this.ref.placeholder.style.display = 'inline'
     };
 
     handleChange = (ev: any) => {
@@ -58,15 +58,17 @@ class ContentEditable extends Component {
 
     render() {
         log('ContentEditable#render')
-        return <span
-            className={cx('contenteditable', this.props.className)}
-            onInput={this.handleChange}
-            onBlur={this.handleChange}
-            onKeyDown={this.handleKeyDown}
-            onFocus={this.handleFocus}
-            contentEditable={true}
-            dangerouslySetInnerHTML={{ __html: this.props.value }}
-		/>
+        return (
+            <span
+                className={cx('contenteditable', this.props.className)}
+                onInput={this.handleChange}
+                onBlur={this.handleChange}
+                onKeyDown={this.handleKeyDown}
+                onFocus={this.handleFocus}
+                contentEditable={true}
+                dangerouslySetInnerHTML={{ __html: this.props.value }}
+            />
+        )
     }
 }
 

@@ -18,34 +18,39 @@ export function ShareSheet(props) {
     let { student } = props
     student = student || {}
 
-    const boundCloseModal = () => props.router.push(`/s/${props.params.studentId}/`)
+    const boundCloseModal = () =>
+        props.router.push(`/s/${props.params.studentId}/`)
 
-    return <Modal
-        modalClassName="share-dialog"
-        onClose={boundCloseModal}
-        contentLabel="Share"
-	>
-		<Toolbar className="window-tools">
-			<Button className="close-modal" onClick={boundCloseModal}>
-				<Icon>{close}</Icon>
-			</Button>
-		</Toolbar>
+    return (
+        <Modal
+            modalClassName="share-dialog"
+            onClose={boundCloseModal}
+            contentLabel="Share"
+        >
+            <Toolbar className="window-tools">
+                <Button className="close-modal" onClick={boundCloseModal}>
+                    <Icon>{close}</Icon>
+                </Button>
+            </Toolbar>
 
-		<div>
-			Share "{student.name}" via:
-			<List type="bullet">
-				<li>Google Drive (not implemented)</li>
-				<li>
-					<a
-    download={`${student.name}.gbstudent`}
-    href={`data:text/json;charset=utf-8,${encodeStudent(student)}`}
-					>
-						Download file
-					</a>
-				</li>
-			</List>
-		</div>
-	</Modal>
+            <div>
+                Share "{student.name}" via:
+                <List type="bullet">
+                    <li>Google Drive (not implemented)</li>
+                    <li>
+                        <a
+                            download={`${student.name}.gbstudent`}
+                            href={
+                                `data:text/json;charset=utf-8,${encodeStudent(student)}`
+                            }
+                        >
+                            Download file
+                        </a>
+                    </li>
+                </List>
+            </div>
+        </Modal>
+    )
 }
 
 ShareSheet.propTypes = {

@@ -42,24 +42,23 @@ class StudentPickerContainer extends Component {
 
     render() {
         return (
-			<StudentPicker
-    destroyStudent={this.props.destroyStudent}
-    filterText={this.state.filterText}
-    groupBy={this.state.groupBy}
-    isEditing={this.state.isEditing}
-    onAddStudent={this.onAddStudent}
-    onFilterChange={this.onFilterChange}
-    onGroupChange={this.onGroupChange}
-    onOpenSearchOverlay={this.onOpenSearchOverlay}
-    onSortChange={this.onSortChange}
-    onToggleEditing={this.onToggleEditing}
-    sortBy={this.state.sortBy}
-    students={this.props.students}
-			/>
+            <StudentPicker
+                destroyStudent={this.props.destroyStudent}
+                filterText={this.state.filterText}
+                groupBy={this.state.groupBy}
+                isEditing={this.state.isEditing}
+                onAddStudent={this.onAddStudent}
+                onFilterChange={this.onFilterChange}
+                onGroupChange={this.onGroupChange}
+                onOpenSearchOverlay={this.onOpenSearchOverlay}
+                onSortChange={this.onSortChange}
+                onToggleEditing={this.onToggleEditing}
+                sortBy={this.state.sortBy}
+                students={this.props.students}
+            />
         )
     }
 }
-
 
 const mapStateToProps = state => ({
     students: state.students,
@@ -69,4 +68,6 @@ const mapDispatchToProps = dispatch => ({
     ...bindActionCreators({ destroyStudent, loadStudents }, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentPickerContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(
+    StudentPickerContainer
+)

@@ -1,21 +1,21 @@
 import { expect } from 'chai'
 
 import {
-	changeName,
-	changeAdvisor,
-	changeCreditsNeeded,
-	changeMatriculation,
-	changeGraduation,
-	changeSetting,
+    changeName,
+    changeAdvisor,
+    changeCreditsNeeded,
+    changeMatriculation,
+    changeGraduation,
+    changeSetting,
 } from '../change'
 
 import {
-	CHANGE_NAME,
-	CHANGE_ADVISOR,
-	CHANGE_CREDITS_NEEDED,
-	CHANGE_MATRICULATION,
-	CHANGE_GRADUATION,
-	CHANGE_SETTING,
+    CHANGE_NAME,
+    CHANGE_ADVISOR,
+    CHANGE_CREDITS_NEEDED,
+    CHANGE_MATRICULATION,
+    CHANGE_GRADUATION,
+    CHANGE_SETTING,
 } from '../../constants'
 
 describe('changeName action', () => {

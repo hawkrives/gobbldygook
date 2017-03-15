@@ -10,7 +10,8 @@ import { evaluate } from '../../examine-student/evaluate'
 import { getActiveStudentCourses } from './get-active-student-courses'
 import { alterCourse } from './alter-course-for-evaluation'
 
-const log = (...args) => args.length && console.log('worker:check-student-against-area', ...args)
+const log = (...args) =>
+    args.length && console.log('worker:check-student-against-area', ...args)
 
 function tryEvaluate(student, area) {
     try {
@@ -25,7 +26,11 @@ function tryEvaluate(student, area) {
 function checkStudentAgainstArea(student: any, area: any) {
     return new Promise(resolve => {
         if (!area || area._error || !area._area) {
-            log('checkStudentAgainstArea:', (area ? area._error : 'area is null'), area)
+            log(
+                'checkStudentAgainstArea:',
+                area ? area._error : 'area is null',
+                area
+            )
             resolve(area)
             return
         }
@@ -43,7 +48,9 @@ function checkStudentAgainstArea(student: any, area: any) {
         if (result.$type === 'of') {
             bits = result.$of
         }
-        else if (result.$type === 'boolean' && result.$booleanType === 'and') {
+        else if (
+            result.$type === 'boolean' && result.$booleanType === 'and'
+        ) {
             bits = result.$and
         }
         else if (result.$type === 'boolean' && result.$booleanType === 'or') {
@@ -68,25 +75,32 @@ function checkStudentAgainstArea(student: any, area: any) {
 
 export default checkStudentAgainstArea
 
-if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
+if (
+    typeof WorkerGlobalScope !== 'undefined' &&
+    self instanceof WorkerGlobalScope
+) {
     self.addEventListener('message', ({ data }) => {
         const start = present()
 
-		// why stringify? https://code.google.com/p/chromium/issues/detail?id=536620#c11
-		// > We know that serialization/deserialization is slow. It's actually faster to
-		// > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
+        // why stringify? https://code.google.com/p/chromium/issues/detail?id=536620#c11
+        // > We know that serialization/deserialization is slow. It's actually faster to
+        // > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 
         const [id, student, area] = JSON.parse(data)
         log('[check-student] received message:', id, student, area)
 
         checkStudentAgainstArea(student, area)
-			.then(result => {
-    self.postMessage(JSON.stringify([id, 'result', result]))
-    log(`[check-student(${student.name}, ${area.name})] took ${round(present() - start)} ms`)
-})
-			.catch(err => {
-    self.postMessage(JSON.stringify([id, 'error', stringifyError(err)]))
-    log(`[check-student(${student.name}, ${area.name}))]`, err)
-})
+            .then(result => {
+                self.postMessage(JSON.stringify([id, 'result', result]))
+                log(
+                    `[check-student(${student.name}, ${area.name})] took ${round(present() - start)} ms`
+                )
+            })
+            .catch(err => {
+                self.postMessage(
+                    JSON.stringify([id, 'error', stringifyError(err)])
+                )
+                log(`[check-student(${student.name}, ${area.name}))]`, err)
+            })
     })
 }

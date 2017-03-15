@@ -1,11 +1,7 @@
 import { loadStudent as loadStudentFunc } from '../../../helpers/load-student'
 import { checkStudent } from './check-student'
 
-import {
-	LOAD_STUDENT,
-	BEGIN_LOAD_STUDENT,
-} from '../constants'
-
+import { LOAD_STUDENT, BEGIN_LOAD_STUDENT } from '../constants'
 
 function beginLoading(id) {
     return { type: BEGIN_LOAD_STUDENT, payload: { id } }
@@ -23,7 +19,11 @@ function shouldLoad(state, id) {
     let savedStudent = JSON.parse(localStorage.getItem(id))
     let thisStudent = state.students[id]
 
-    if (thisStudent.isLoading || savedStudent.dateLastModified === thisStudent.data.present.dateLastModified) {
+    if (
+        thisStudent.isLoading ||
+        savedStudent.dateLastModified ===
+            thisStudent.data.present.dateLastModified
+    ) {
         return false
     }
 
@@ -38,7 +38,7 @@ export function loadStudent(id) {
 
         dispatch(beginLoading(id))
 
-        return dispatch(actuallyLoadStudent(id))
-			.then(() => dispatch(checkStudent(id)))
+        return dispatch(actuallyLoadStudent(id)).then(() =>
+            dispatch(checkStudent(id)))
     }
 }
