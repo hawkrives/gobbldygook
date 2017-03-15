@@ -8,8 +8,8 @@ const {
 } = require('./lib')
 
 module.exports = {
-	getStudentInfo,
-	checkIfLoggedIn,
-	ExtensionNotLoadedError,
-	ExtensionTooOldError,
+    getStudentInfo,
+    checkIfLoggedIn,
+    ExtensionNotLoadedError,
+    ExtensionTooOldError,
 }

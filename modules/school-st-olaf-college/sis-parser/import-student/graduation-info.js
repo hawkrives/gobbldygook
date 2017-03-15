@@ -49,23 +49,23 @@ function getGraduationInformation(dom) {
 	// htmlparser2 appears to have a different algorithm for correcting HTML than browsers do.
 	// Thus, the <td> that we want isn't contained within the table, but within the container div itself.
 	// Se we'll just collect everything underneath it.
-	let elements = selectAll('#bigbodymainstyle > td:first-of-type > *', dom)
-	let tagNames = elements.map(el => el.name)
+    let elements = selectAll('#bigbodymainstyle > td:first-of-type > *', dom)
+    let tagNames = elements.map(el => el.name)
 
-	let degrees = []
+    let degrees = []
 	// I believe that, if you have two degrees, there are two anchors: degree1 and degree2.
-	while (includes(tagNames, 'a')) {
-		let degreeAnchorIndex = tagNames.indexOf('a')
-		let degreeAuditInfo = elements[degreeAnchorIndex+2]
-		let degreeInfoTable = elements[degreeAnchorIndex+3]
-		let degree = extractInformationFromDegreeAudit(degreeAuditInfo, degreeInfoTable)
-		degrees.push(degree)
+    while (includes(tagNames, 'a')) {
+        let degreeAnchorIndex = tagNames.indexOf('a')
+        let degreeAuditInfo = elements[degreeAnchorIndex+2]
+        let degreeInfoTable = elements[degreeAnchorIndex+3]
+        let degree = extractInformationFromDegreeAudit(degreeAuditInfo, degreeInfoTable)
+        degrees.push(degree)
 
 		// Once we've collected a degree, we remove every tag name up past the index of the currect <a>.
-		tagNames = tagNames.slice(degreeAnchorIndex + 1)
-		elements = elements.slice(degreeAnchorIndex + 1)
+        tagNames = tagNames.slice(degreeAnchorIndex + 1)
+        elements = elements.slice(degreeAnchorIndex + 1)
 		// If there's another degree, then let's do it again!
-	}
+    }
 
-	return degrees
+    return degrees
 }

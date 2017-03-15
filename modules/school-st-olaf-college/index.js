@@ -23,19 +23,19 @@ const {
 } = require('./sis-parser')
 
 module.exports = {
-	expandYear,
-	semesterName,
-	toPrettyTerm,
+    expandYear,
+    semesterName,
+    toPrettyTerm,
 
-	buildDeptString,
-	buildDeptNum,
-	deptNumRegex,
-	quacksLikeDeptNum,
-	splitDeptNum,
+    buildDeptString,
+    buildDeptNum,
+    deptNumRegex,
+    quacksLikeDeptNum,
+    splitDeptNum,
 
-	convertStudent,
-	getStudentInfo,
-	checkIfLoggedIn,
-	ExtensionNotLoadedError,
-	ExtensionTooOldError,
+    convertStudent,
+    getStudentInfo,
+    checkIfLoggedIn,
+    ExtensionNotLoadedError,
+    ExtensionTooOldError,
 }

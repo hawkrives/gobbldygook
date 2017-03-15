@@ -10,10 +10,10 @@ const {
 } = require('./import-student')
 
 module.exports = {
-	convertStudent,
+    convertStudent,
 
-	getStudentInfo,
-	checkIfLoggedIn,
-	ExtensionNotLoadedError,
-	ExtensionTooOldError,
+    getStudentInfo,
+    checkIfLoggedIn,
+    ExtensionNotLoadedError,
+    ExtensionTooOldError,
 }
