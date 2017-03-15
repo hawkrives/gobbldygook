@@ -4,9 +4,13 @@ parser: babel-eslint
 
 extends:
   - eslint:recommended
+  - plugin:react/recommended
   - plugin:flowtype/recommended
   - plugin:import/errors
   - plugin:import/warnings
+  - prettier
+  - prettier/flowtype
+  - prettier/react
 
 plugins:
   - babel
@@ -31,78 +35,48 @@ globals:
 
 rules:
   # best practices
+  array-callback-return: warn
+  camelcase: error
+  consistent-this: [warn, self]
   curly: [error, multi-line]
-  guard-for-in: error
   default-case: error
-  no-fallthrough: error
+  guard-for-in: error
+  new-cap: off
+  no-await-in-loop: warn
   no-case-declarations: error
+  no-class-assign: error
+  no-console: off
+  no-const-assign: error
   no-div-regex: error
   no-eq-null: error
-  wrap-iife: error
-  no-undef-init: off
-  no-unused-vars: ['warn', {args: 'after-used', argsIgnorePattern: '^_$'}]
-  no-console: off
-  no-underscore-dangle: off
-  no-redeclare: ['error', {builtinGlobals: true}]
-  no-class-assign: error
-  no-const-assign: error
-  prefer-spread: warn
-  no-var: error
-  no-restricted-syntax: [error, WithStatement]
-  no-await-in-loop: warn
-  array-callback-return: warn
   no-extra-label: error
-  no-unmodified-loop-condition: error
-  no-unused-labels: error
-  no-useless-constructor: error
-  no-whitespace-before-property: error
-  one-var-declaration-per-line: error
-
-  # stylistic issues
-  new-cap: off
-  indent: [warn, 4]
-  camelcase: error
-  comma-dangle: [warn, always-multiline]
-  comma-style: [warn, last]
-  comma-spacing: [warn, {before: false, after: true}]
-  key-spacing: [error, {beforeColon: false, afterColon: true}]
-  quotes: [error, single, avoid-escape]
-  consistent-this: [warn, self]
-  brace-style: [warn, stroustrup]
-  semi: [error, never]
-  arrow-parens: [warn, as-needed]
-  arrow-spacing: [warn, {before: true, after: true}]
-  array-bracket-spacing: [warn, never]
-  object-curly-spacing: [warn, always]
+  no-fallthrough: error
   no-implicit-coercion: [error, {boolean: true, number: true, string: true}]
-  keyword-spacing: warn
   no-implicit-globals: error
   no-new-symbol: error
+  no-redeclare: ['error', {builtinGlobals: true}]
+  no-restricted-syntax: [error, WithStatement]
   no-self-assign: warn
+  no-undef-init: off
+  no-underscore-dangle: off
+  no-unmodified-loop-condition: error
+  no-unused-labels: error
+  no-unused-vars: ['warn', {args: 'after-used', argsIgnorePattern: '^_$'}]
+  no-useless-constructor: error
+  no-var: error
+  prefer-spread: warn
+  quotes: [error, single, avoid-escape]
+  semi: [error, never]
 
   # react rules – https://github.com/yannickcr/eslint-plugin-react
-  jsx-quotes: [warn, prefer-double]
   react/display-name: off
-  react/jsx-curly-spacing: [warn, never]
-  react/jsx-indent-props: [warn, 4]
-  react/jsx-no-duplicate-props: warn
-  react/jsx-no-undef: error
-  react/jsx-space-before-closing: error
-  react/jsx-uses-react: error
-  react/jsx-uses-vars: error
-  react/no-deprecated: error
   react/no-did-mount-set-state: warn
   react/no-did-update-set-state: warn
-  react/no-direct-mutation-state: error
   react/no-multi-comp: off  # prevent multiple component definition per file
-  react/no-unknown-property: warn
-  react/prop-types: error  # prevent missing proptypes in a react component definition
-  react/react-in-jsx-scope: error
   react/self-closing-comp: warn  # prevent extra closing tags for components without children
   # react/sort-comp: warn
   react/sort-prop-types: warn
   react/wrap-multilines: off
-  react/prefer-stateless-function: warn
 
   # jsdoc
   valid-jsdoc:
