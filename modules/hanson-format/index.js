@@ -5,9 +5,9 @@ const { makeAreaSlug } = require('./make-area-slug')
 const { parse } = require('./parse-hanson-string')
 
 module.exports = {
-	expandDepartment,
-	normalizeDepartment,
-	enhanceHanson,
-	makeAreaSlug,
-	parse,
+    expandDepartment,
+    normalizeDepartment,
+    enhanceHanson,
+    makeAreaSlug,
+    parse,
 }
