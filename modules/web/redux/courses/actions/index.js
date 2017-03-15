@@ -11,11 +11,11 @@ import {
 
 
 export function refreshCourses(): {type: string} {
-	return { type: REFRESH_COURSES }
+    return { type: REFRESH_COURSES }
 }
 
 export function loadCourses() {
-	throw new Error('This function does not work.')
+    throw new Error('This function does not work.')
 	// return (dispatch, getState) => {
 	// 	let {students, courses} = getState()
 	// 	let schedules = flatten(map(students, student => values(student.data.present.schedules)))

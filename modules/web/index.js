@@ -10,7 +10,7 @@ const log = debug('web')
 const React = require('react')
 const { render } = require('react-dom')
 if (process.env.NODE_ENV !== 'production') {
-	global.Perf = require('react-addons-perf')
+    global.Perf = require('react-addons-perf')
 }
 
 // Include google analytics (in production)
@@ -41,7 +41,7 @@ global._dispatch = store.dispatch
 global._store = store
 
 let renderFunc = Root => {
-	render(
+    render(
 		<Root store={store}>
 			<Router history={history} routes={routes} />
 		</Root>,

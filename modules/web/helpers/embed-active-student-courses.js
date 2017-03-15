@@ -12,19 +12,19 @@ export function embedActiveStudentCourses(student, { cache=[] }) {
 	// - Finally, remember that a given `clbid` might not exist in the database, in which case we get back 'undefined'.
 	//   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 
-	const active = filter(student.schedules, { active: true })
+    const active = filter(student.schedules, { active: true })
 
-	const enhanced = map(active, schedule => {
-		let courses = map(schedule.clbids, clbid => {
-			return cache[clbid] || getCourse({ clbid, term: parseInt(`${schedule.year}${schedule.semester}`) }, student.fabrications)
-		})
+    const enhanced = map(active, schedule => {
+        let courses = map(schedule.clbids, clbid => {
+            return cache[clbid] || getCourse({ clbid, term: parseInt(`${schedule.year}${schedule.semester}`) }, student.fabrications)
+        })
 
-		return Promise.all(courses).then(fulfilledCourses => {
-			return [schedule.id, { ...schedule, courses: fulfilledCourses }]
-		})
-	})
+        return Promise.all(courses).then(fulfilledCourses => {
+            return [schedule.id, { ...schedule, courses: fulfilledCourses }]
+        })
+    })
 
-	return Promise.all(enhanced).then(fulfilled => {
-		return fromPairs(fulfilled)
-	})
+    return Promise.all(enhanced).then(fulfilled => {
+        return fromPairs(fulfilled)
+    })
 }

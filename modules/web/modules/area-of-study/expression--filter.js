@@ -6,44 +6,44 @@ import debug from 'debug'
 const log = debug('web:react')
 
 function FilterOf({ expr, ctx }) {
-	return <div>
+    return <div>
 		{map(expr.$of, (ex, i) => {
-			log(ex)
-			return <Expression key={i} expr={ex} ctx={ctx} />
-		})}
+    log(ex)
+    return <Expression key={i} expr={ex} ctx={ctx} />
+})}
 	</div>
 }
 FilterOf.propTypes = {
-	ctx: PropTypes.object,
-	expr: PropTypes.shape({
-		$of: PropTypes.array,
-	}),
+    ctx: PropTypes.object,
+    expr: PropTypes.shape({
+        $of: PropTypes.array,
+    }),
 }
 
 function FilterWhere({ expr }) {
-	const qualifier = makeWhereQualifier(expr.$where)
-	const description = `only courses where ${qualifier}`
+    const qualifier = makeWhereQualifier(expr.$where)
+    const description = `only courses where ${qualifier}`
 
-	return <div><p>{description}</p></div>
+    return <div><p>{description}</p></div>
 }
 FilterWhere.propTypes = {
-	ctx: PropTypes.object,
-	expr: PropTypes.shape({
-		$where: PropTypes.object,
-	}),
+    ctx: PropTypes.object,
+    expr: PropTypes.shape({
+        $where: PropTypes.object,
+    }),
 }
 
 export default function Filter(props) {
-	if (props.expr.$of) {
-		return <FilterOf {...props} />
-	}
-	else if (props.expr.$where) {
-		return <FilterWhere {...props} />
-	}
-	return <div>{JSON.stringify(props, null, 2)}</div>
+    if (props.expr.$of) {
+        return <FilterOf {...props} />
+    }
+    else if (props.expr.$where) {
+        return <FilterWhere {...props} />
+    }
+    return <div>{JSON.stringify(props, null, 2)}</div>
 }
 
 Filter.propTypes = {
-	ctx: PropTypes.object,
-	expr: PropTypes.object,
+    ctx: PropTypes.object,
+    expr: PropTypes.object,
 }

@@ -13,7 +13,7 @@ import debug from 'debug'
 debug.enable('foo')
 
 test('AppContainer renders', () => {
-	mount(
+    mount(
 		<ReduxWrapper store={configureStore()}>
 			<Router history={createMemoryHistory()} routes={routes} />
 		</ReduxWrapper>
@@ -21,16 +21,16 @@ test('AppContainer renders', () => {
 })
 
 test('AppContainer can navigate to /create', () => {
-	const store = configureStore()
-	const history = createMemoryHistory()
+    const store = configureStore()
+    const history = createMemoryHistory()
 
-	const app = mount(
+    const app = mount(
 		<ReduxWrapper store={store}>
 			<Router history={history} routes={routes} />
 		</ReduxWrapper>
 	)
 
-	history.push('/create')
+    history.push('/create')
 
-	expect(app.find('h1').text()).toEqual('Hi there!')
+    expect(app.find('h1').text()).toEqual('Hi there!')
 })

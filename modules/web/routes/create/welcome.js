@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../../components/button'
 
 export default function WelcomeScreen() {
-	return <div>
+    return <div>
 		<header className="header">
 			<h1>Hi there!</h1>
 			<h2>I don't know anything about you. Care to enlighten me?</h2>
@@ -26,23 +26,23 @@ export default function WelcomeScreen() {
 		</section>
 		<section className="choices">
 			<Button link type="raised"
-				to="/create/sis"
+    to="/create/sis"
 			>
 				Import from the SIS
 			</Button>
 			<Button disabled link type="raised"
-				to="/create/drive"
-				onClick={ev => ev.preventDefault()}
+    to="/create/drive"
+    onClick={ev => ev.preventDefault()}
 			>
 				Link to Google Drive
 			</Button>
 			<Button link type="raised"
-				to="/create/upload"
+    to="/create/upload"
 			>
 				Upload a File
 			</Button>
 			<Button link type="raised"
-				to="/create/manual"
+    to="/create/manual"
 			>
 				Create Manually
 			</Button>

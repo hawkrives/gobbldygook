@@ -4,10 +4,10 @@ import { getCourse } from './get-courses'
 import { alterCourse } from './alter-course-for-evaluation'
 
 export function fulfillFulfillments(student, { cache=[] }) {
-	let promises = mapValues(student.fulfillments,
+    let promises = mapValues(student.fulfillments,
 		clbid => cache[clbid] || getCourse({ clbid }, student.fabrications))
-	return props(promises)
+    return props(promises)
 		.then(result => mapValues(result, r => {
-			return { $type: 'course', $course: alterCourse(r), _isFulfillment: true }
-		}))
+    return { $type: 'course', $course: alterCourse(r), _isFulfillment: true }
+}))
 }

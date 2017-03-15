@@ -17,31 +17,31 @@ worker.onerror = msg => log('[main] received error from check-student worker:', 
  * @fulfill {Object} - The details of the area check.
  */
 export const checkStudentAgainstArea = student => area => {
-	return new Promise(resolve => {
-		const sourceId = uniqueId()
+    return new Promise(resolve => {
+        const sourceId = uniqueId()
 
 		// This is inside of the function so that it doesn't get unregistered too early
-		function onMessage({ data }) {
-			const [resultId, type, contents] = JSON.parse(data)
+        function onMessage({ data }) {
+            const [resultId, type, contents] = JSON.parse(data)
 
-			if (resultId === sourceId) {
-				worker.removeEventListener('message', onMessage)
+            if (resultId === sourceId) {
+                worker.removeEventListener('message', onMessage)
 
-				if (type === 'result') {
-					resolve(contents)
-				}
-				else if (type === 'error') {
-					resolve({ _error: contents.message })
-				}
-			}
-		}
+                if (type === 'result') {
+                    resolve(contents)
+                }
+                else if (type === 'error') {
+                    resolve({ _error: contents.message })
+                }
+            }
+        }
 
-		worker.addEventListener('message', onMessage)
+        worker.addEventListener('message', onMessage)
 
 		/* why stringify? from https://code.google.com/p/chromium/issues/detail?id=536620#c11:
 		 * > We know that serialization/deserialization is slow. It's actually faster to
 		 * > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 		 */
-		worker.postMessage(JSON.stringify([sourceId, student, area]))
-	})
+        worker.postMessage(JSON.stringify([sourceId, student, area]))
+    })
 }

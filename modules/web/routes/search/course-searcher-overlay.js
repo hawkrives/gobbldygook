@@ -6,17 +6,17 @@ import CourseSearcher from '../../modules/course-searcher/course-searcher-contai
 import './course-searcher-overlay.scss'
 
 function CourseSearcherOverlay(props) {
-	const boundCloseModal = () => props.router.push({ pathname: '/' })
+    const boundCloseModal = () => props.router.push({ pathname: '/' })
 
-	return (
+    return (
 		<Modal onClose={boundCloseModal} contentLabel="Search">
 			<CourseSearcher closeSearcher={boundCloseModal} />
 		</Modal>
-	)
+    )
 }
 
 CourseSearcherOverlay.propTypes = {
-	router: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
 }
 
 export default withRouter(CourseSearcherOverlay)

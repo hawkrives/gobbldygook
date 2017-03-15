@@ -13,15 +13,15 @@ type ModalProps = {
 };
 
 export default function Modal(props: ModalProps) {
-	return (
+    return (
 		<BaseModal
-			onRequestClose={props.onClose}
-			overlayClassName={cx('modal--backdrop', props.backdropClassName)}
-			className={cx('modal--content', props.modalClassName)}
-			isOpen={true}
-			{...props}
+    onRequestClose={props.onClose}
+    overlayClassName={cx('modal--backdrop', props.backdropClassName)}
+    className={cx('modal--content', props.modalClassName)}
+    isOpen={true}
+    {...props}
 		>
 			{props.children}
 		</BaseModal>
-	)
+    )
 }

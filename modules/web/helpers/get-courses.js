@@ -10,27 +10,27 @@ const courseCache = Object.create(null)
 // @returns {Promise} - TreoDatabasePromise
 // @fulfill {Object} - the course object, potentially with an embedded error message.
 export function getCourse({ clbid, term }, fabrications={}) {
-	if (clbid in fabrications) {
-		return fabrications[clbid]
-	}
+    if (clbid in fabrications) {
+        return fabrications[clbid]
+    }
 
-	if (clbid in courseCache) {
-		return courseCache[clbid]
-	}
+    if (clbid in courseCache) {
+        return courseCache[clbid]
+    }
 
-	let promise = db.store('courses')
+    let promise = db.store('courses')
 		.index('clbid')
 		.get(clbid)
 		.then(course => course || { clbid, term, error: `Could not find ${clbid}` })
 		.then(course => omit(course, ['profWords', 'words', 'sourcePath']))
 		.catch(error => ({ clbid, term, error: error.message }))
 
-	courseCache[clbid] = promise
+    courseCache[clbid] = promise
 
-	return courseCache[clbid].then(course => {
-		delete courseCache[clbid]
-		return course
-	})
+    return courseCache[clbid].then(course => {
+        delete courseCache[clbid]
+        return course
+    })
 }
 // export function getCourse({clbid, term}) {
 // 	return db.store('courses')
@@ -51,5 +51,5 @@ export function getCourse({ clbid, term }, fabrications={}) {
  * @fulfill {Object[]} - the courses.
  */
 export function getCourses(clbids, fabrications) {
-	return Promise.all(map(clbids, c => getCourse(c, fabrications)))
+    return Promise.all(map(clbids, c => getCourse(c, fabrications)))
 }

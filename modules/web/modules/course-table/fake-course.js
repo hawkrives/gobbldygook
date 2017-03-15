@@ -4,7 +4,7 @@ import '../course/inline-course.scss'
 import '../course/course-title.scss'
 
 export default function FakeCourse(props) {
-	return (
+    return (
 		<article className={cx('course', props.className)}>
 			<div className="course-row">
 				<h1 className="course-title">{props.title}</h1>
@@ -13,15 +13,15 @@ export default function FakeCourse(props) {
 				<p>{props.details}</p>
 			</div>
 		</article>
-	)
+    )
 }
 
 FakeCourse.propTypes = {
-	className: PropTypes.string.isRequired,
-	details: PropTypes.string,
-	title: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
+    details: PropTypes.string,
+    title: PropTypes.string.isRequired,
 }
 
 FakeCourse.defaultProps = {
-	details: 'no details',
+    details: 'no details',
 }

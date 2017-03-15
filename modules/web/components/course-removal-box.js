@@ -19,12 +19,12 @@ type CourseRemovalBoxProps = {
 	removeCourse: () => any,  // studentId is embedded in the passed function
 };
 function CourseRemovalBox(props: CourseRemovalBoxProps) {
-	const className = cx('course-removal-box', {
-		'can-drop': props.canDrop,
-		'is-over': props.isOver,
-	})
+    const className = cx('course-removal-box', {
+        'can-drop': props.canDrop,
+        'is-over': props.isOver,
+    })
 
-	return props.connectDropTarget(
+    return props.connectDropTarget(
 		<div className={className}>
 			<Icon type="block" style={{ fontSize: '3em', textAlign: 'center' }}>{iosTrashOutline}</Icon>
 			Drop a course here to remove it.
@@ -35,31 +35,31 @@ function CourseRemovalBox(props: CourseRemovalBoxProps) {
 
 // Implements the drag source contract.
 const removeCourseTarget = {
-	drop(props, monitor: any) {
-		const item = monitor.getItem()
-		const { clbid, fromScheduleId, isFromSchedule } = item
-		if (isFromSchedule) {
-			log('dropped course', item)
+    drop(props, monitor: any) {
+        const item = monitor.getItem()
+        const { clbid, fromScheduleId, isFromSchedule } = item
+        if (isFromSchedule) {
+            log('dropped course', item)
 			// the studentId is embedded in the passed function
-			props.removeCourse(fromScheduleId, clbid)
-		}
-	},
-	canDrop(props, monitor: any) {
-		const { isFromSearch } = monitor.getItem()
-		if (!isFromSearch) {
-			return true
-		}
-		return false
-	},
+            props.removeCourse(fromScheduleId, clbid)
+        }
+    },
+    canDrop(props, monitor: any) {
+        const { isFromSearch } = monitor.getItem()
+        if (!isFromSearch) {
+            return true
+        }
+        return false
+    },
 }
 
 // Specifies the props to inject into your component.
 function collect(connect, monitor) {
-	return {
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver(),
-		canDrop: monitor.canDrop(),
-	}
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver(),
+        canDrop: monitor.canDrop(),
+    }
 }
 
 export default DropTarget(IDENT_COURSE, removeCourseTarget, collect)(CourseRemovalBox)

@@ -13,121 +13,121 @@ import AreaList from './area-list'
 import AreaEditor from './area-editor'
 
 export class AreaEditScreen extends Component {
-	static propTypes = {
-		areas: PropTypes.shape({
-			data: PropTypes.arrayOf(PropTypes.object).isRequired,
-			isLoading: PropTypes.bool.isRequired,
-		}).isRequired, // redux
-		loadAllAreas: PropTypes.func.isRequired,  // redux
-		params: PropTypes.shape({
-			name: PropTypes.string,
-			type: PropTypes.string,
-			revision: PropTypes.string,
-		}).isRequired,  // react-router
-	};
+    static propTypes = {
+        areas: PropTypes.shape({
+            data: PropTypes.arrayOf(PropTypes.object).isRequired,
+            isLoading: PropTypes.bool.isRequired,
+        }).isRequired, // redux
+        loadAllAreas: PropTypes.func.isRequired,  // redux
+        params: PropTypes.shape({
+            name: PropTypes.string,
+            type: PropTypes.string,
+            revision: PropTypes.string,
+        }).isRequired,  // react-router
+    };
 
-	state = {
-		area: null,
-		code: '',
-		isEditing: false,
-	};
+    state = {
+        area: null,
+        code: '',
+        isEditing: false,
+    };
 
-	componentWillMount() {
-		this.props.loadAllAreas()
-	}
+    componentWillMount() {
+        this.props.loadAllAreas()
+    }
 
-	componentDidMount() {
-		this.handleNewData(this.props)
-	}
+    componentDidMount() {
+        this.handleNewData(this.props)
+    }
 
-	componentWillReceiveProps(nextProps) {
-		this.handleNewData(nextProps)
-	}
+    componentWillReceiveProps(nextProps) {
+        this.handleNewData(nextProps)
+    }
 
-	handleNewData = props => {
-		if (this.state.isEditing) {
-			return
-		}
+    handleNewData = props => {
+        if (this.state.isEditing) {
+            return
+        }
 
-		let { type, name, revision } = props.params
+        let { type, name, revision } = props.params
 
-		if (!type || !name || !revision) {
-			return
-		}
+        if (!type || !name || !revision) {
+            return
+        }
 
-		const allAreas = props.areas.data
+        const allAreas = props.areas.data
 
-		const area = find(allAreas, area =>
+        const area = find(allAreas, area =>
 			area.type === type && area.name === name && area.revision === revision)
 
-		let data = omit(area, 'sourcePath')
-		if ('source' in data && typeof data.source === 'string') {
-			data = data.source
-		}
-		else {
-			data = yaml.safeDump(data)
-		}
+        let data = omit(area, 'sourcePath')
+        if ('source' in data && typeof data.source === 'string') {
+            data = data.source
+        }
+        else {
+            data = yaml.safeDump(data)
+        }
 
-		this.setState({
-			area: data,
-		})
-	};
+        this.setState({
+            area: data,
+        })
+    };
 
-	handleChange = newValue => {
-		this.setState({ area: newValue })
-	};
+    handleChange = newValue => {
+        this.setState({ area: newValue })
+    };
 
-	handleSave = () => {};
+    handleSave = () => {};
 
-	handleFocusChange = focused => {
-		if (focused) {
-			keymage.pushScope('edit-area')
-		}
-		else {
-			keymage.popScope()
-		}
+    handleFocusChange = focused => {
+        if (focused) {
+            keymage.pushScope('edit-area')
+        }
+        else {
+            keymage.popScope()
+        }
 
-		this.setState({ isEditing: focused })
-	};
+        this.setState({ isEditing: focused })
+    };
 
-	render() {
-		let { type, name, revision } = this.props.params
+    render() {
+        let { type, name, revision } = this.props.params
 
-		if (this.state.area && (type && name && revision)) {
-			return (<AreaEditor
-				onSave={this.handleSave}
-				value={this.state.area}
-				onChange={this.handleChange}
-				onFocusChange={this.handleFocusChange}
+        if (this.state.area && (type && name && revision)) {
+            return (<AreaEditor
+                onSave={this.handleSave}
+                value={this.state.area}
+                onChange={this.handleChange}
+                onFocusChange={this.handleFocusChange}
 			/>)
-		}
+        }
 
-		if (this.props.areas.isLoading) {
-			return <Loading>Loading areas…</Loading>
-		}
+        if (this.props.areas.isLoading) {
+            return <Loading>Loading areas…</Loading>
+        }
 
-		let areas = this.props.areas.data
+        let areas = this.props.areas.data
 
-		if (name) {
-			name = decodeURIComponent(name)
-			areas = filter(areas, { name })
-		}
-		if (type) {
-			type = decodeURIComponent(type)
-			areas = filter(areas, { type })
-		}
+        if (name) {
+            name = decodeURIComponent(name)
+            areas = filter(areas, { name })
+        }
+        if (type) {
+            type = decodeURIComponent(type)
+            areas = filter(areas, { type })
+        }
 
-		return <AreaList areas={areas} />
-	}
+        return <AreaList areas={areas} />
+    }
 }
 
 
 const mapStateToProps = state => ({
-	areas: state.areas,
+    areas: state.areas,
 })
 
 const mapDispatchToProps = dispatch => ({
-	...bindActionCreators({ loadAllAreas }, dispatch),
+    ...bindActionCreators({ loadAllAreas }, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AreaEditScreen)

@@ -17,17 +17,17 @@ type NotificationProps = {
 };
 
 export default function Notification(props: NotificationProps) {
-	log('Notification#render')
-	const progressBar = (props.type === 'progress') && (
+    log('Notification#render')
+    const progressBar = (props.type === 'progress') && (
 		<div className="progress-container">
 			<ProgressBar value={props.value} max={props.max} />
 			<output>{round((props.value / props.max) * 100, 0)}%</output>
 		</div>
 	)
 
-	return (
+    return (
 		<li className={`notification-capsule notification-type--${props.type}`}
-			onClick={props.onClose}>
+    onClick={props.onClose}>
 			<div className="notification-content">
 				<h1 className="notification-message">
 					{props.message}
@@ -36,10 +36,10 @@ export default function Notification(props: NotificationProps) {
 			</div>
 			{!props.hideButton &&
 			<Button className="close-notification"
-				type="flat"
-				title="Close">
+    type="flat"
+    title="Close">
 				×
 			</Button>}
 		</li>
-	)
+    )
 }

@@ -1,35 +1,35 @@
 import AppContainer from '../app-container'
 
 export default {
-	component: AppContainer,
-	childRoutes: [{
-		path: '/',
+    component: AppContainer,
+    childRoutes: [{
+        path: '/',
 
-		getIndexRoute(location, cb) {
-			cb(null, {
-				content: {
-					getComponents(location, cb) {
-						require.ensure([], () => {
-							cb(null, {
-								content: require('../modules/student-picker').default,
-							})
-						}, 'student-picker.components')
-					},
-				},
-			})
-		},
+        getIndexRoute(location, cb) {
+            cb(null, {
+                content: {
+                    getComponents(location, cb) {
+                        require.ensure([], () => {
+                            cb(null, {
+                                content: require('../modules/student-picker').default,
+                            })
+                        }, 'student-picker.components')
+                    },
+                },
+            })
+        },
 
-		getChildRoutes(state, cb) {
-			cb(null, [
-				require('./edit-area').default, // edit-area
-				require('./degub').default,  // degub
-				require('./create').default, // create
-				require('./student').default, // student
-				require('./search').default, // search
-				require('./not-found').default, // anything else
-			])
-		},
-	}],
+        getChildRoutes(state, cb) {
+            cb(null, [
+                require('./edit-area').default, // edit-area
+                require('./degub').default,  // degub
+                require('./create').default, // create
+                require('./student').default, // student
+                require('./search').default, // search
+                require('./not-found').default, // anything else
+            ])
+        },
+    }],
 }
 
 // /
