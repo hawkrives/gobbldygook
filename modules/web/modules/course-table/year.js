@@ -4,7 +4,7 @@ import sortBy from 'lodash/sortBy'
 import map from 'lodash/map'
 
 import Button from '../../components/button'
-import Semester from './semester'
+import Semester from './semester-container'
 
 import { findFirstAvailableSemester } from '../../helpers/find-first-available-semester'
 import { expandYear, semesterName } from '../../../school-st-olaf-college/course-info'

@@ -8,7 +8,7 @@ import Sidebar from '../../components/sidebar'
 import Loading from '../../components/loading'
 
 import CourseTable from '../course-table'
-import GraduationStatus from './graduation-status'
+import GraduationStatus from './graduation-status-container'
 
 import './student.scss'
 
