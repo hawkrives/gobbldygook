@@ -1,7 +1,11 @@
 // @flow
 'use strict'
 
-function stringifyError(err: any, filter?: (Array<any> | (key: any, value: any) => any), space?: string | number) {
+function stringifyError(
+    err: any,
+    filter?: Array<any> | ((key: any, value: any) => any),
+    space?: string | number
+) {
     let plainObject = {}
     Object.getOwnPropertyNames(err).forEach(key => {
         plainObject[key] = err[key]

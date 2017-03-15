@@ -1,7 +1,10 @@
 // @flow
 'use strict'
 
-function findWordForProgress(maxProgress: number, currentProgress: number): string {
+function findWordForProgress(
+    maxProgress: number,
+    currentProgress: number
+): string {
     const progress = currentProgress / maxProgress
 
     if (progress >= 1) {

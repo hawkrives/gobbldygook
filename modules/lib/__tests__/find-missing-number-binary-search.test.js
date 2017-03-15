@@ -1,4 +1,6 @@
-import { findMissingNumberBinarySearch } from '../find-missing-number-binary-search'
+import {
+    findMissingNumberBinarySearch,
+} from '../find-missing-number-binary-search'
 
 describe('findMissingNumberBinarySearch', () => {
     it('takes a list of numbers and finds the first gap', () => {
@@ -16,7 +18,7 @@ describe('findMissingNumberBinarySearch', () => {
     })
 
     it('returns the high-end of a multi-number gap', () => {
-		// I mean, ideally this would return 1, but for now...
+        // I mean, ideally this would return 1, but for now...
         expect(findMissingNumberBinarySearch([0, 3, 4])).toBe(2)
         expect(findMissingNumberBinarySearch([0, 3, 4])).not.toBe(1)
     })

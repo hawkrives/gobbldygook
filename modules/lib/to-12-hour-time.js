@@ -14,7 +14,7 @@ function to12HourTime(time: string): string {
     const { hour, minute } = split24HourTime(time)
     const paddedMinute = padStart(minute, 2, '0')
 
-    const fullHour = ((hour + 11) % 12 + 1)
+    const fullHour = (hour + 11) % 12 + 1
     const meridian = hour < 12 ? 'am' : 'pm'
 
     return `${fullHour}:${paddedMinute}${meridian}`

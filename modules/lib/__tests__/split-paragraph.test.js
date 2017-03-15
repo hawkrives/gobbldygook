@@ -13,7 +13,16 @@ describe('splitParagraph', () => {
 
     it('removes accents and special chars', () => {
         let str = '   I am a string  , with punctuation  & spécial   chars.    '
-        expect(splitParagraph(str)).toEqual(['i', 'am', 'a', 'string', 'with', 'punctuation', 'special', 'chars'])
+        expect(splitParagraph(str)).toEqual([
+            'i',
+            'am',
+            'a',
+            'string',
+            'with',
+            'punctuation',
+            'special',
+            'chars',
+        ])
     })
 
     it('removes punctuation', () => {
