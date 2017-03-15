@@ -148,7 +148,7 @@
     "eslint-plugin-flowtype-errors": "3.0.1",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-react": "6.10.0",
-    "extract-text-webpack-plugin": "2.0.0",
+    "extract-text-webpack-plugin": "2.1.0",
     "file-loader": "0.10.1",
     "flow-bin": "0.41.0",
     "get-stdin": "5.0.1",
