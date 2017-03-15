@@ -1,11 +1,9 @@
 import every from 'lodash/every'
 import find from 'lodash/find'
-import {
-	convertStudent,
-	// processSchedules,
-	// processDegrees,
-	// resolveSingularDataPoints,
-} from '../convert-imported-student'
+import { convertStudent } from // processSchedules,
+// processDegrees,
+// resolveSingularDataPoints,
+'../convert-imported-student'
 import { sample } from './__support__/sample-student'
 const getCourseMock = async course => course
 
@@ -14,10 +12,14 @@ describe('convertStudent', () => {
         const actual = await convertStudent(sample, getCourseMock)
 
         const expectedStudies = [
-			{ 'name': 'Bachelor of Arts', 'type': 'degree', 'revision': 'latest' },
-			{ 'name': 'Computer Science', 'type': 'major', 'revision': 'latest' },
-			{ 'name': 'Asian Studies', 'type': 'major', 'revision': 'latest' },
-			{ 'name': 'Japan Studies', 'type': 'concentration', 'revision': 'latest' },
+            { name: 'Bachelor of Arts', type: 'degree', revision: 'latest' },
+            { name: 'Computer Science', type: 'major', revision: 'latest' },
+            { name: 'Asian Studies', type: 'major', revision: 'latest' },
+            {
+                name: 'Japan Studies',
+                type: 'concentration',
+                revision: 'latest',
+            },
         ]
 
         const expectedPartialSchedules = [
@@ -160,10 +162,12 @@ describe('convertStudent', () => {
         }
 
         expect(every(expectedStudies, study => find(actual.studies, study)))
-        expect(every(expectedPartialSchedules, sched => find(actual.schedules, sched)))
+        expect(
+            every(expectedPartialSchedules, sched =>
+                find(actual.schedules, sched))
+        )
     })
 })
-
 
 xdescribe('processSchedules', () => {})
 xdescribe('processDegrees', () => {})

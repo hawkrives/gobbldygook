@@ -12,18 +12,24 @@ module.exports.ExtensionTooOldError = ExtensionTooOldError
 module.exports.fetchHtml = fetchHtml
 function fetchHtml(url, fetchArgs, fetchBody) {
     if (!global.gobbldygook_extension) {
-        return Promise.reject(new ExtensionNotLoadedError('Extension not loaded'))
+        return Promise.reject(
+            new ExtensionNotLoadedError('Extension not loaded')
+        )
     }
     if (global.gobbldygook_extension < '1.0.0') {
-        return Promise.reject(new ExtensionTooOldError(`Extension version ${global.gobbldygook_extension_version} is too old.`))
+        return Promise.reject(
+            new ExtensionTooOldError(
+                `Extension version ${global.gobbldygook_extension_version} is too old.`
+            )
+        )
     }
 
-	// now we know the extension is loaded
+    // now we know the extension is loaded
     return new Promise((resolve, reject) => {
         const id = uuid()
 
         function handleResponse(event) {
-			// `event` should have the shape {from, id, text}
+            // `event` should have the shape {from, id, text}
             if (event.data.from !== 'web-ext') {
                 return
             }
@@ -43,13 +49,16 @@ function fetchHtml(url, fetchArgs, fetchBody) {
 
         global.addEventListener('message', handleResponse)
 
-        global.postMessage({
-            from: 'page',
-            id,
-            url,
-            fetchArgs,
-            fetchBody,
-        }, '*')
+        global.postMessage(
+            {
+                from: 'page',
+                id,
+                url,
+                fetchArgs,
+                fetchBody,
+            },
+            '*'
+        )
     })
 }
 

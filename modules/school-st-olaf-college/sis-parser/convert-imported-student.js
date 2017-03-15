@@ -16,26 +16,32 @@ function convertStudent({ courses, degrees }, getCourse) {
     ]).then(([schedulesAndFabrications, info]) => {
         let { schedules, fabrications } = schedulesAndFabrications
 
-        return Student(Object.assign({}, info, {
-            schedules,
-            fabrications,
-        }))
+        return Student(
+            Object.assign({}, info, {
+                schedules,
+                fabrications,
+            })
+        )
     })
 }
 
 module.exports.processSchedules = processSchedules
 function processSchedules(courses, getCourse) {
-    return Promise.all(map(courses, course => {
-        return getCourse(course).then(resolvedCourse => {
-            if (resolvedCourse.error) {
-                course._fabrication = true
-                course.clbid = course.clbid || uuid()
-                return course
-            }
-            return resolvedCourse
+    return Promise.all(
+        map(courses, course => {
+            return getCourse(course).then(resolvedCourse => {
+                if (resolvedCourse.error) {
+                    course._fabrication = true
+                    course.clbid = course.clbid || uuid()
+                    return course
+                }
+                return resolvedCourse
+            })
         })
-    })).then(courses => {
-        let fabrications = fromPairs(map(filter(courses, '_fabrication'), c => [c.clbid, c]))
+    ).then(courses => {
+        let fabrications = fromPairs(
+            map(filter(courses, '_fabrication'), c => [c.clbid, c])
+        )
 
         let schedules = groupBy(courses, 'term')
         schedules = map(schedules, (courses, term) => {
@@ -54,7 +60,6 @@ function processSchedules(courses, getCourse) {
     })
 }
 
-
 module.exports.processDegrees = processDegrees
 function processDegrees(degrees) {
     let singularData = resolveSingularDataPoints(degrees)
@@ -62,14 +67,27 @@ function processDegrees(degrees) {
 
     for (let { concentrations, emphases, majors, degree } of degrees) {
         studies.push({ name: degree, type: 'degree', revision: 'latest' })
-        studies = studies.concat(majors.map(name =>         ({ name, type: 'major', revision: 'latest' })))
-        studies = studies.concat(concentrations.map(name => ({ name, type: 'concentration', revision: 'latest' })))
-        studies = studies.concat(emphases.map(name =>       ({ name, type: 'emphasis', revision: 'latest' })))
+        studies = studies.concat(
+            majors.map(name => ({ name, type: 'major', revision: 'latest' }))
+        )
+        studies = studies.concat(
+            concentrations.map(name => ({
+                name,
+                type: 'concentration',
+                revision: 'latest',
+            }))
+        )
+        studies = studies.concat(
+            emphases.map(name => ({
+                name,
+                type: 'emphasis',
+                revision: 'latest',
+            }))
+        )
     }
 
     return Object.assign({}, singularData, { studies })
 }
-
 
 module.exports.resolveSingularDataPoints = resolveSingularDataPoints
 function resolveSingularDataPoints(degrees) {
@@ -83,10 +101,14 @@ function resolveSingularDataPoints(degrees) {
     forEach(thereShouldOnlyBeOne, (group, name) => {
         let len = uniq(group).length
         if (len > 1) {
-            throw new Error(`convertStudent: The student has more than one ${name}: ${JSON.stringify(group)}`)
+            throw new Error(
+                `convertStudent: The student has more than one ${name}: ${JSON.stringify(group)}`
+            )
         }
         else if (!len) {
-            throw new Error(`convertStudent: The student has no ${name}: ${JSON.stringify(group)}`)
+            throw new Error(
+                `convertStudent: The student has no ${name}: ${JSON.stringify(group)}`
+            )
         }
     })
 

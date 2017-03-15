@@ -8,15 +8,15 @@ describe('getGraduationInformation', () => {
         const actual = getGraduationInformation(html)
         const expected = [
             {
-                'name': 'Student M. Name',
-                'advisor': 'Advisor, Name O.',
+                name: 'Student M. Name',
+                advisor: 'Advisor, Name O.',
                 'academic standing': 'Good',
-                'degree': 'Bachelor of Arts',
-                'majors': ['Computer Science', 'Asian Studies'],
-                'concentrations': ['Japan Studies'],
-                'emphases': [],
-                'matriculation': 2012,
-                'graduation': 2016,
+                degree: 'Bachelor of Arts',
+                majors: ['Computer Science', 'Asian Studies'],
+                concentrations: ['Japan Studies'],
+                emphases: [],
+                matriculation: 2012,
+                graduation: 2016,
             },
         ]
         expect(actual).to.deep.equal(expected)

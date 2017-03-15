@@ -2,7 +2,11 @@
 'use strict'
 
 module.exports.expandYear = expandYear
-function expandYear(year: string | number, short?: boolean=false, separator?: string='—') {
+function expandYear(
+    year: string | number,
+    short?: boolean = false,
+    separator?: string = '—'
+) {
     if (typeof year === 'string') {
         year = parseInt(year, 10)
     }
@@ -15,7 +19,7 @@ function expandYear(year: string | number, short?: boolean=false, separator?: st
 
 // 2012 => 2012-2013
 module.exports.expandYearToFull = expandYearToFull
-function expandYearToFull(year: ?number, separator?: string='—') {
+function expandYearToFull(year: ?number, separator?: string = '—') {
     if (year === undefined || year === null) {
         return '???'
     }
@@ -25,7 +29,7 @@ function expandYearToFull(year: ?number, separator?: string='—') {
 
 // 2012 => 2012-13
 module.exports.expandYearToShort = expandYearToShort
-function expandYearToShort(year: ?number, separator?: string='—') {
+function expandYearToShort(year: ?number, separator?: string = '—') {
     if (year === undefined || year === null) {
         return '???'
     }

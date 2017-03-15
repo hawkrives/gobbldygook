@@ -8,7 +8,6 @@ const { collectAllCourses } = require('./courses')
 const { getGraduationInformation } = require('./graduation-info')
 const { COURSES_URL, DEGREE_AUDIT_URL } = require('./urls')
 
-
 function loadPages(studentId) {
     return props({
         id: studentId,
@@ -16,7 +15,6 @@ function loadPages(studentId) {
         auditDom: fetchHtml(DEGREE_AUDIT_URL),
     })
 }
-
 
 function beginDataExtraction({ id, coursesDom, auditDom }) {
     let terms = extractTermList(coursesDom)
@@ -27,14 +25,12 @@ function beginDataExtraction({ id, coursesDom, auditDom }) {
     })
 }
 
-
 function flattenData({ coursesByTerm, studentInfo }) {
     return {
         courses: flatten(coursesByTerm),
         degrees: studentInfo,
     }
 }
-
 
 module.exports.getStudentInfo = getStudentInfo
 function getStudentInfo(studentId) {
@@ -43,15 +39,15 @@ function getStudentInfo(studentId) {
     }
 
     return loadPages(studentId)
-		.then(beginDataExtraction)
-		.then(flattenData)
-		.catch(err => {
-    if (err instanceof AuthError) {
-        throw new AuthError('Could not log in to the SIS.')
-    }
-    if (err instanceof NetworkError) {
-        throw new NetworkError('Could not reach the SIS.')
-    }
-    throw err
-})
+        .then(beginDataExtraction)
+        .then(flattenData)
+        .catch(err => {
+            if (err instanceof AuthError) {
+                throw new AuthError('Could not log in to the SIS.')
+            }
+            if (err instanceof NetworkError) {
+                throw new NetworkError('Could not reach the SIS.')
+            }
+            throw err
+        })
 }

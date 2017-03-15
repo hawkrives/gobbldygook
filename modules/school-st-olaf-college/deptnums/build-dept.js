@@ -1,7 +1,9 @@
 // @flow
 'use strict'
 
-const { normalizeDepartment } = require('../../hanson-format/convert-department')
+const {
+    normalizeDepartment,
+} = require('../../hanson-format/convert-department')
 
 /**
  * Builds a department string from a course.

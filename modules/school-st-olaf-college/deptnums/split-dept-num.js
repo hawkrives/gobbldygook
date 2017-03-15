@@ -11,19 +11,21 @@ const { deptNumRegex } = require('./dept-num-regex')
  * @param {Boolean} includeSection - include the section in the result?
  * @returns {Object} - the result
  */
-function splitDeptNum(deptNumString: string, includeSection?: boolean=false) {
-	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
-	// -> {departments: ['AS', 'RE'], number: 230}
+function splitDeptNum(deptNumString: string, includeSection?: boolean = false) {
+    // "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
+    // -> {departments: ['AS', 'RE'], number: 230}
     let matches = deptNumRegex.exec(deptNumString)
 
     let deptNum: {
-		departments: string[],
-		number: number,
-		section?: string,
-	} = {
-    departments: matches[1].indexOf('/') !== -1 ? [matches[2], matches[3]] : [matches[1]],
-    number: parseInt(matches[4], 10),
-}
+        departments: string[],
+        number: number,
+        section?: string,
+    } = {
+        departments: matches[1].indexOf('/') !== -1
+            ? [matches[2], matches[3]]
+            : [matches[1]],
+        number: parseInt(matches[4], 10),
+    }
 
     if (includeSection && matches.length >= 6 && matches[5]) {
         deptNum.section = matches[5]

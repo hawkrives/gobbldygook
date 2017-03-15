@@ -19,8 +19,8 @@ function semesterName(semester: string | number): string {
         semester = String(semester)
     }
     return has(SEMESTERS, semester)
-    ? SEMESTERS[semester]
-    : `Unknown (${semester})`
+        ? SEMESTERS[semester]
+        : `Unknown (${semester})`
 }
 
 module.exports.semesterName = semesterName
