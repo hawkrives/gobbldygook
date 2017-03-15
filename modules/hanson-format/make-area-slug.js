@@ -1,6 +1,9 @@
 // @flow
-import kebabCase from 'lodash/kebabCase'
+'use strict'
+const kebabCase = require('lodash/kebabCase')
 
-export function makeAreaSlug(name: string): string {
+function makeAreaSlug(name: string): string {
 	return kebabCase((name || '').replace("'", '')).toLowerCase()
 }
+
+module.exports.makeAreaSlug = makeAreaSlug

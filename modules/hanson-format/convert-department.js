@@ -1,5 +1,6 @@
 // @flow
-import forEach from 'lodash/forEach'
+'use strict'
+const forEach = require('lodash/forEach')
 
 const shortDepartmentAbbreviationsToFullDepartmentAbbreviations = {
 	AR: 'ART',
@@ -88,8 +89,8 @@ const fullDepartmentNamesToFullDepartmentAbbreviations = {
 	'STATISTICS': 'STAT',
 	'THEATER': 'THEAT',
 	'UNKNOWN DEPARTMENT': 'NONE',
-	'WOMEN\'S AND GENDER STUDIES': 'WMGST',
-	'WOMEN\'S STUDIES': 'WMGST',
+	"WOMEN'S AND GENDER STUDIES": 'WMGST',
+	"WOMEN'S STUDIES": 'WMGST',
 	'WOMENS AND GENDER STUDIES': 'WMGST',
 	'WOMENS STUDIES': 'WMGST',
 	'WRI': 'WRIT',
@@ -218,15 +219,14 @@ const courseTypesMapping = {
 }
 
 
-const toDepartmentAbbreviations = {
-	...shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
-	...fullDepartmentNamesToFullDepartmentAbbreviations,
-}
-const toDepartmentNames = {
-	...departmentAbbreviationsToNames,
-}
+const toDepartmentAbbreviations = Object.assign({},
+	shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
+	fullDepartmentNamesToFullDepartmentAbbreviations)
+const toDepartmentNames = Object.assign({},
+	departmentAbbreviationsToNames)
 
-export function expandDepartment(dept: string) {
+module.exports.expandDepartment = expandDepartment
+function expandDepartment(dept: string) {
 	dept = dept.toUpperCase()
 	if (!(dept in toDepartmentNames)) {
 		throw new TypeError(`expandDepartment(): '${dept}' is not a valid department shorthand`)
@@ -234,7 +234,8 @@ export function expandDepartment(dept: string) {
 	return toDepartmentNames[dept]
 }
 
-export function normalizeDepartment(dept: string) {
+module.exports.normalizeDepartment = normalizeDepartment
+function normalizeDepartment(dept: string) {
 	dept = dept.toUpperCase()
 	if (!(dept in toDepartmentAbbreviations)) {
 		return dept
