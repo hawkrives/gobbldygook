@@ -60,7 +60,7 @@ rules:
 
   # stylistic issues
   new-cap: off
-  indent: ['warn', 'tab', {SwitchCase: 1}]
+  indent: [warn, 4]
   camelcase: error
   comma-dangle: [warn, always-multiline]
   comma-style: [warn, last]
@@ -85,7 +85,7 @@ rules:
   jsx-quotes: [warn, prefer-double]
   react/display-name: off
   react/jsx-curly-spacing: [warn, never]
-  react/jsx-indent-props: [warn, tab]
+  react/jsx-indent-props: [warn, 4]
   react/jsx-no-duplicate-props: warn
   react/jsx-no-undef: error
   react/jsx-space-before-closing: error
@@ -104,9 +104,6 @@ rules:
   react/sort-prop-types: warn
   react/wrap-multilines: off
   react/prefer-stateless-function: warn
-
-  flowtype/space-after-type-colon: 'off'
-  flowtype/space-before-type-colon: 'off'
 
   # jsdoc
   valid-jsdoc:
