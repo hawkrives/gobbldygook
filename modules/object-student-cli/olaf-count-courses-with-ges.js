@@ -17,33 +17,45 @@ function findCoursesWithGes(term) {
 
 export async function cli() {
     const args = nomnom()
-		.script('olaf-count-courses-with-ges')
-		.option('terms', { position: 0, list: true, required: true, help: 'the years or terms to search for: 2015, or 20141, etc.' })
-		.parse()
+        .script('olaf-count-courses-with-ges')
+        .option('terms', {
+            position: 0,
+            list: true,
+            required: true,
+            help: 'the years or terms to search for: 2015, or 20141, etc.',
+        })
+        .parse()
 
-    args.terms = args.terms.reduce((list, term) => {
-        let stringterm = String(term)
-        if (stringterm.length === 4) {
-            return list.concat([1, 2, 3, 4, 5].map(s => parseInt(`${stringterm}${s}`)))
-        }
-        return list.concat(term)
-    }, [])
+    args.terms = args.terms.reduce(
+        (list, term) => {
+            let stringterm = String(term)
+            if (stringterm.length === 4) {
+                return list.concat(
+                    [1, 2, 3, 4, 5].map(s => parseInt(`${stringterm}${s}`))
+                )
+            }
+            return list.concat(term)
+        },
+        []
+    )
 
     const courses = fromPairs(
-		await Promise.all(
-			map(
-				args.terms,
-				async term => [
-    term,
-    await findCoursesWithGes(term),
-])))
+        await Promise.all(
+            map(args.terms, async term => [
+                term,
+                await findCoursesWithGes(term),
+            ])
+        )
+    )
 
-    const groupedByGeCount = mapValues(
-		courses,
-		list => mapValues({
-    ...groupBy(list, c => c.gereqs && c.gereqs.length || 0),
-    total: list,
-}, l => l.length))
+    const groupedByGeCount = mapValues(courses, list =>
+        mapValues(
+            {
+                ...groupBy(list, c => (c.gereqs && c.gereqs.length) || 0),
+                total: list,
+            },
+            l => l.length
+        ))
 
     console.log(yaml.safeDump(groupedByGeCount))
 }
