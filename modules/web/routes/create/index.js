@@ -1,10 +1,8 @@
 export default {
 	path: 'create',
 
-	getIndexRoute(location, cb) {
-		require.ensure([], () => {
-			cb(null, require('./welcome').default)
-		}, 'new-student.welcome.component')
+	indexRoute: {
+		component: require('./welcome').default,
 	},
 
 	getChildRoutes(location, cb) {
