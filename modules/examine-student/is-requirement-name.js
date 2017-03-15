@@ -12,5 +12,5 @@ export default function isRequirementName(name: string) {
 	// with either an uppercase letter or number. They may then contain any
 	// combination of upper- and lower-case letters, numbers, underscores,
 	// hyphens, and forward-slashes.
-	return isRequirementNameRegex.test(name)
+    return isRequirementNameRegex.test(name)
 }

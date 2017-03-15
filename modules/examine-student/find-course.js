@@ -11,5 +11,5 @@ import type { Course } from './types'
  * @returns {Course|undefined} - the found course
  */
 export default function findCourse(query: Course, courses: Course[]): (Course | void) {
-	return find(courses, course => compareCourseToCourse(query, course))
+    return find(courses, course => compareCourseToCourse(query, course))
 }
