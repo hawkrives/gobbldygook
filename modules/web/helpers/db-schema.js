@@ -1,5 +1,6 @@
 import treo from 'treo'
 
+// prettier-ignore
 export default new treo.schema()
 	.version(1)
 		.addStore('courses', { key: 'clbid' })
