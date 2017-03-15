@@ -1,6 +1,5 @@
 // @flow
-import { REFRESH_COURSES } from // LOAD_COURSES,
-'../constants'
+import { REFRESH_COURSES } from '../constants'
 
 // import flatten from 'lodash/flatten'
 // import values from 'lodash/values'

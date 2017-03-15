@@ -1,9 +1,6 @@
 import every from 'lodash/every'
 import find from 'lodash/find'
-import { convertStudent } from // processSchedules,
-// processDegrees,
-// resolveSingularDataPoints,
-'../convert-imported-student'
+import { convertStudent } from '../convert-imported-student'
 import { sample } from './__support__/sample-student'
 const getCourseMock = async course => course
 
