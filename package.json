@@ -159,6 +159,7 @@
     "extract-text-webpack-plugin": "2.1.0",
     "file-loader": "0.10.1",
     "flow-bin": "0.41.0",
+    "flow-remove-types": "1.2.0",
     "get-stdin": "5.0.1",
     "glob": "7.1.1",
     "graceful-fs": "4.1.11",
