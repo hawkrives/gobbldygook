@@ -76,7 +76,6 @@ rules:
   object-curly-spacing: [warn, always]
   no-implicit-coercion: [error, {boolean: true, number: true, string: true}]
   keyword-spacing: warn
-  no-confusing-arrow: error
   no-implicit-globals: error
   no-new-symbol: error
   no-self-assign: warn
