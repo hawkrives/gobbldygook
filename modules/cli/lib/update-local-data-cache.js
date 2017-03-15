@@ -6,9 +6,9 @@ const startsWith = require('lodash/startsWith')
 const path = require('path')
 
 const {
-	tryReadJsonFile,
-	loadFile,
-	loadJsonFile,
+    tryReadJsonFile,
+    loadFile,
+    loadJsonFile,
 } = require('./read-file')
 const { cacheDir } = require('./dirs')
 
@@ -16,7 +16,8 @@ const pify = require('pify')
 
 const fs = pify(require('graceful-fs'))
 
-const COURSE_INFO_LOCATION = process.env.COURSE_INFO || 'https://stolaf.edu/people/rives/courses/info.json'
+const COURSE_INFO_LOCATION = process.env.COURSE_INFO ||
+    'https://stolaf.edu/people/rives/courses/info.json'
 // const AREA_INFO_LOCATION = process.env.AREA_INFO || 'https://stolaf.edu/people/rives/areas/info.json'
 
 const COURSES_ARE_REMOTE = startsWith(COURSE_INFO_LOCATION, 'https')
@@ -31,8 +32,10 @@ module.exports.cache = cache
 async function cache() {
     prepareDirs()
 
-    const priorCourseInfo = tryReadJsonFile(`${cacheDir}/Courses/info.prior.json`) || {}
-	// const priorAreaInfo = tryReadJsonFile(`${cacheDir}/Areas/info.prior.json`) || {}
+    const priorCourseInfo = tryReadJsonFile(
+        `${cacheDir}/Courses/info.prior.json`
+    ) || {}
+    // const priorAreaInfo = tryReadJsonFile(`${cacheDir}/Areas/info.prior.json`) || {}
 
     mkdirp.sync(`${cacheDir}/Courses/`)
 
@@ -45,32 +48,42 @@ async function cache() {
     const base = path.join(...location.split('/').slice(0, -1))
 
     const infoFiles = courseInfo.files
-		.filter(file => {
-    const oldEntry = find(priorCourseInfo.files, file)
-    return Boolean(oldEntry) && (oldEntry.hash === file.hash)
-})
-		.map(file => {
-    let fullPath = path.normalize(`${base}/${file.path}`)
-    if (COURSES_ARE_REMOTE) {
-        fullPath = `https://${fullPath}`
-    }
+        .filter(file => {
+            const oldEntry = find(priorCourseInfo.files, file)
+            return Boolean(oldEntry) && oldEntry.hash === file.hash
+        })
+        .map(file => {
+            let fullPath = path.normalize(`${base}/${file.path}`)
+            if (COURSES_ARE_REMOTE) {
+                fullPath = `https://${fullPath}`
+            }
 
-    return Object.assign({}, file, {
-        fullPath,
-        data: loadFile(fullPath),
-    })
-})
+            return Object.assign({}, file, {
+                fullPath,
+                data: loadFile(fullPath),
+            })
+        })
 
+    await Promise.all(
+        infoFiles.map(async file => {
+            return await fs.writeFileAsync(
+                `${cacheDir}/Courses/${path.basename(file.path)}`,
+                await file.data
+            )
+        })
+    )
 
-    await Promise.all(infoFiles.map(async file => {
-        return await fs.writeFileAsync(`${cacheDir}/Courses/${path.basename(file.path)}`, await file.data)
-    }))
-
-    await fs.writeFileAsync(`${cacheDir}/Courses/info.prior.json`, JSON.stringify(courseInfo))
+    await fs.writeFileAsync(
+        `${cacheDir}/Courses/info.prior.json`,
+        JSON.stringify(courseInfo)
+    )
 
     const infoFileExists = fs.existsSync(`${cacheDir}/Courses/info.json`)
     if (!infoFileExists) {
-        fs.writeFileSync(`${cacheDir}/Courses/info.json`, JSON.stringify(courseInfo))
+        fs.writeFileSync(
+            `${cacheDir}/Courses/info.json`,
+            JSON.stringify(courseInfo)
+        )
     }
 
     return Promise.all([courseInfo])
@@ -90,8 +103,10 @@ async function checkForStaleData() {
 
     const needsUpdate = some(newCourseInfo.files, file => {
         const oldEntry = find(courseInfo.files, file)
-        const isCached = fs.existsSync(`${cacheDir}/Courses/${path.basename(file.path)}`)
-        return (Boolean(oldEntry) && (oldEntry.hash !== file.hash)) || !isCached
+        const isCached = fs.existsSync(
+            `${cacheDir}/Courses/${path.basename(file.path)}`
+        )
+        return (Boolean(oldEntry) && oldEntry.hash !== file.hash) || !isCached
     })
 
     if (needsUpdate) {

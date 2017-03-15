@@ -22,14 +22,16 @@ async function getArea({ name, type, revision }) {
 
     const areas = map(areaData, yaml.safeLoad)
 
-    const filteredAreas = filter(areas, area => (
-		area.type.toLowerCase() === type &&
-		area.name.toLowerCase() === name
-	))
+    const filteredAreas = filter(
+        areas,
+        area =>
+            area.type.toLowerCase() === type && area.name.toLowerCase() === name
+    )
 
     if (!revision) {
-		// maxBy returns the entire object that it matched
-        return maxBy(filteredAreas, area => Number(area.revision.split('-')[0]))
+        // maxBy returns the entire object that it matched
+        return maxBy(filteredAreas, area =>
+            Number(area.revision.split('-')[0]))
     }
 
     return find(filteredAreas, { revision })
@@ -37,12 +39,12 @@ async function getArea({ name, type, revision }) {
 
 async function loadArea({ name, type, revision, source, isCustom }) {
     let obj = isCustom
-		? yaml.safeLoad(source)
-		: await getArea({ name, type, revision })
+        ? yaml.safeLoad(source)
+        : await getArea({ name, type, revision })
 
     let result
     try {
-		// console.log(obj)
+        // console.log(obj)
         result = enhance(obj)
     }
     catch (err) {

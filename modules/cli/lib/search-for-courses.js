@@ -15,7 +15,10 @@ const { checkForStaleData } = require('./update-local-data-cache')
 
 const path = require('path')
 
-const { quacksLikeDeptNum, splitDeptNum } = require('../../school-st-olaf-college')
+const {
+    quacksLikeDeptNum,
+    splitDeptNum,
+} = require('../../school-st-olaf-college')
 
 const pify = require('pify')
 const fs = pify(require('graceful-fs'))
@@ -27,14 +30,19 @@ function getDeptNumsFromRiddles(r) {
     return r
 }
 
-module.exports = async function search({ riddles, unique, sort }={}) {
-	// check if data has been cached
+module.exports = async function search({ riddles, unique, sort } = {}) {
+    // check if data has been cached
     await checkForStaleData()
 
     let base = `${cacheDir}/Courses/`
-    let courses = flatten(map(fs.readdirSync(base), fn => (tryReadJsonFile(path.join(base, fn)) || [])))
+    let courses = flatten(
+        map(
+            fs.readdirSync(base),
+            fn => tryReadJsonFile(path.join(base, fn)) || []
+        )
+    )
 
-    riddles	= riddles.map(getDeptNumsFromRiddles)
+    riddles = riddles.map(getDeptNumsFromRiddles)
 
     let filtered = courses
     forEach(riddles, riddle => {
