@@ -5,6 +5,7 @@
 *.sublime-workspace
 stats.json
 .vscode/
+.eslintcache
 
 # Temp folders
 .sass-cache
