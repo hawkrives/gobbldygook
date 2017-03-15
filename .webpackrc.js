@@ -1,4 +1,5 @@
 /* global module, __dirname */
+/* eslint-disable camelcase */
 'use strict'
 
 const pkg = require('./package.json')
@@ -212,10 +213,8 @@ function config() {
 
 			<script src="${publicPath}${context.manifest}"></script>
 			${Object.keys(entries)
-                    .map(
-                        k =>
-                            `<script src="${publicPath}${context[k]}"></script>`
-                    )
+                    .map(k => `${publicPath}${context[k]}`)
+                    .map(path => `<script src="${path}"></script>`)
                     .join('\n')}
 			<script src="${publicPath}${context.main}"></script>
 			</html>
@@ -274,16 +273,16 @@ function config() {
                 sourceMap: true,
                 compress: {
                     warnings: false,
-                    pure_getters: true, // eslint-disable-line camelcase
-                    screw_ie8: true, // eslint-disable-line camelcase
+                    pure_getters: true,
+                    screw_ie8: true,
                     unsafe: true,
                 },
                 mangle: {
-                    screw_ie8: true, // eslint-disable-line camelcase
+                    screw_ie8: true,
                 },
                 output: {
                     comments: false,
-                    screw_ie8: true, // eslint-disable-line camelcase
+                    screw_ie8: true,
                 },
             })
         )
