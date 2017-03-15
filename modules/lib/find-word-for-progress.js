@@ -1,5 +1,7 @@
 // @flow
-export function findWordForProgress(maxProgress: number, currentProgress: number): string {
+'use strict'
+
+function findWordForProgress(maxProgress: number, currentProgress: number): string {
 	const progress = currentProgress / maxProgress
 
 	if (progress >= 1) {
@@ -38,3 +40,5 @@ export function findWordForProgress(maxProgress: number, currentProgress: number
 
 	return 'zero'
 }
+
+module.exports.findWordForProgress = findWordForProgress

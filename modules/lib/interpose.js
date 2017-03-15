@@ -1,7 +1,8 @@
 // @flow
-import reduce from 'lodash/reduce'
+'use strict'
+const reduce = require('lodash/reduce')
 
-export function interpose<T, U>(data: T[], value: U): (T | U)[] {
+function interpose<T, U>(data: T[], value: U): (T | U)[] {
 	const len = data.length
 	return reduce(data, (arr, item, index) => {
 		if (index < len - 1) {
@@ -10,3 +11,5 @@ export function interpose<T, U>(data: T[], value: U): (T | U)[] {
 		return arr.concat(item)
 	}, [])
 }
+
+module.exports.interpose = interpose
