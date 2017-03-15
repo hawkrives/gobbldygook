@@ -1,10 +1,12 @@
-import { AuthError } from '../../../lib'
-import { extractStudentIds } from './student-ids'
-import { COURSES_URL } from './urls'
-import { fetchHtml, getText } from './lib'
-import { selectOne } from 'css-select'
+'use strict'
+const { AuthError } = require('../../../lib')
+const { extractStudentIds } = require('./student-ids')
+const { COURSES_URL } = require('./urls')
+const { fetchHtml, getText } = require('./lib')
+const { selectOne } = require('css-select')
 
-export function checkPageIsLoggedIn(response) {
+module.exports.checkPageIsLoggedIn = checkPageIsLoggedIn
+function checkPageIsLoggedIn(response) {
 	let errorMsg = selectOne('[style="text-align:center"]', response)
 	let badMsg = 'Please use your St. Olaf Google account when accessing SIS.'
 	if (errorMsg && getText(errorMsg) === badMsg) {
@@ -16,6 +18,7 @@ export function checkPageIsLoggedIn(response) {
 	return extractStudentIds(response)
 }
 
-export function checkIfLoggedIn() {
+module.exports.checkIfLoggedIn = checkIfLoggedIn
+function checkIfLoggedIn() {
 	return fetchHtml(COURSES_URL).then(checkPageIsLoggedIn)
 }

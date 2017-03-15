@@ -1,5 +1,8 @@
 // @flow
-export function expandYear(year: string | number, short?: boolean=false, separator?: string='—') {
+'use strict'
+
+module.exports.expandYear = expandYear
+function expandYear(year: string | number, short?: boolean=false, separator?: string='—') {
 	if (typeof year === 'string') {
 		year = parseInt(year, 10)
 	}
@@ -11,7 +14,8 @@ export function expandYear(year: string | number, short?: boolean=false, separat
 }
 
 // 2012 => 2012-2013
-export function expandYearToFull(year: ?number, separator?: string='—') {
+module.exports.expandYearToFull = expandYearToFull
+function expandYearToFull(year: ?number, separator?: string='—') {
 	if (year === undefined || year === null) {
 		return '???'
 	}
@@ -20,7 +24,8 @@ export function expandYearToFull(year: ?number, separator?: string='—') {
 }
 
 // 2012 => 2012-13
-export function expandYearToShort(year: ?number, separator?: string='—') {
+module.exports.expandYearToShort = expandYearToShort
+function expandYearToShort(year: ?number, separator?: string='—') {
 	if (year === undefined || year === null) {
 		return '???'
 	}

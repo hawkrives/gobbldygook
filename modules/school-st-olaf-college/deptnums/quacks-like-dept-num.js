@@ -1,7 +1,11 @@
 // @flow
-import { deptNumRegex } from './dept-num-regex'
+'use strict'
+
+const { deptNumRegex } = require('./dept-num-regex')
 
 // Checks if a string looks like a deptnum.
-export function quacksLikeDeptNum(deptNumString: string) {
+function quacksLikeDeptNum(deptNumString: string) {
 	return deptNumRegex.test(deptNumString)
 }
+
+module.exports.quacksLikeDeptNum = quacksLikeDeptNum

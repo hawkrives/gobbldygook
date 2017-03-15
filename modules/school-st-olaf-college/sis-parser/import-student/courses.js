@@ -1,12 +1,13 @@
-import map from 'lodash/map'
-import {
+'use strict'
+const map = require('lodash/map')
+const {
 	fetchHtml,
 	getText,
 	removeInternalWhitespace,
 	getTextItems,
-} from './lib'
-import { selectAll, selectOne } from 'css-select'
-import { COURSES_URL } from './urls'
+} = require('./lib')
+const { selectAll, selectOne } = require('css-select')
+const { COURSES_URL } = require('./urls')
 
 function convertRowToCourse(term, sisRow) {
 	// the columns go: deptnum, lab, name, halfsemester, credits, passfail, gereqs, times, locations, instructors
@@ -31,7 +32,8 @@ function convertRowToCourse(term, sisRow) {
 }
 
 
-export function getCoursesFromHtml(dom, term) {
+module.exports.getCoursesFromHtml = getCoursesFromHtml
+function getCoursesFromHtml(dom, term) {
 	let courseRows = selectAll('.sis-line1, .sis-line2', dom)
 
 	if (!courseRows.length) {
@@ -52,6 +54,7 @@ function getCourses(studentId, term) {
 }
 
 
-export function collectAllCourses(studentId, terms) {
+module.exports.collectAllCourses = collectAllCourses
+function collectAllCourses(studentId, terms) {
 	return Promise.all(map(terms, term => getCourses(studentId, term)))
 }

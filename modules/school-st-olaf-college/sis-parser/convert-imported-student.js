@@ -1,29 +1,30 @@
-import { Student, Schedule } from '../../object-student'
-import groupBy from 'lodash/groupBy'
-import map from 'lodash/map'
-import forEach from 'lodash/forEach'
-import uniq from 'lodash/uniq'
-import fromPairs from 'lodash/fromPairs'
-import filter from 'lodash/filter'
-import uuid from 'uuid/v4'
+'use strict'
+const { Student, Schedule } = require('../../object-student')
+const groupBy = require('lodash/groupBy')
+const map = require('lodash/map')
+const forEach = require('lodash/forEach')
+const uniq = require('lodash/uniq')
+const fromPairs = require('lodash/fromPairs')
+const filter = require('lodash/filter')
+const uuid = require('uuid/v4')
 
-export function convertStudent({ courses, degrees }, getCourse) {
+module.exports.convertStudent = convertStudent
+function convertStudent({ courses, degrees }, getCourse) {
 	return Promise.all([
 		processSchedules(courses, getCourse),
 		processDegrees(degrees),
 	]).then(([schedulesAndFabrications, info]) => {
 		let { schedules, fabrications } = schedulesAndFabrications
 
-		return Student({
-			...info,
+		return Student(Object.assign({}, info, {
 			schedules,
 			fabrications,
-		})
+		}))
 	})
 }
 
-
-export function processSchedules(courses, getCourse) {
+module.exports.processSchedules = processSchedules
+function processSchedules(courses, getCourse) {
 	return Promise.all(map(courses, course => {
 		return getCourse(course).then(resolvedCourse => {
 			if (resolvedCourse.error) {
@@ -54,7 +55,8 @@ export function processSchedules(courses, getCourse) {
 }
 
 
-export function processDegrees(degrees) {
+module.exports.processDegrees = processDegrees
+function processDegrees(degrees) {
 	let singularData = resolveSingularDataPoints(degrees)
 	let studies = []
 
@@ -65,14 +67,12 @@ export function processDegrees(degrees) {
 		studies = studies.concat(emphases.map(name =>       ({ name, type: 'emphasis', revision: 'latest' })))
 	}
 
-	return {
-		...singularData,
-		studies,
-	}
+	return Object.assign({}, singularData, { studies })
 }
 
 
-export function resolveSingularDataPoints(degrees) {
+module.exports.resolveSingularDataPoints = resolveSingularDataPoints
+function resolveSingularDataPoints(degrees) {
 	let thereShouldOnlyBeOne = {
 		names: map(degrees, d => d.name),
 		advisors: map(degrees, d => d.advisor),

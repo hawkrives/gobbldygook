@@ -1,6 +1,8 @@
-import htmlparser from 'htmlparser2'
+// @flow
+'use strict'
+const htmlparser = require('htmlparser2')
 
-export function parseHtml(string) {
+function parseHtml(string: string) {
 	return htmlparser.parseDOM(string, {
 		withDomLvl1: true,
 		normalizeWhitespace: false,
@@ -8,3 +10,5 @@ export function parseHtml(string) {
 		decodeEntities: true,
 	})
 }
+
+module.exports.parseHtml = parseHtml
