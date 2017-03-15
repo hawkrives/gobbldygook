@@ -16,18 +16,19 @@ import sortBy from 'lodash/sortBy'
 import plur from 'plur'
 import chalk from 'chalk'
 
-
 function condenseCourse(course) {
     return `${sortBy(course.department).join('/')} ${'number' in course ? course.number : `${String(course.level)[0]}XX`}`
 }
 
-function summarize(requirement, name, path, depth=0) {
+function summarize(requirement, name, path, depth = 0) {
     let prose = ''
-    const subReqs = filter(toPairs(requirement), ([k, _]) => isRequirementName(k))
+    const subReqs = filter(toPairs(requirement), ([k, _]) =>
+        isRequirementName(k))
     if (subReqs.length) {
-        prose = '\n' + map(subReqs, ([k, v]) => {
-            return summarize(v, k, path.concat(k), depth + 1)
-        }).join('\n')
+        prose = '\n' +
+            map(subReqs, ([k, v]) => {
+                return summarize(v, k, path.concat(k), depth + 1)
+            }).join('\n')
     }
 
     return `${repeat(' ', depth * 2)}${name}: ${requirement.computed}${prose}`
@@ -76,7 +77,8 @@ function stringifyBoolean(expr) {
         return `(${map(expr.$or, req => stringifyChunk(req)).join(` ${OR} `)})`
     }
     else if ('$and' in expr) {
-        return `(${map(expr.$and, req => stringifyChunk(req)).join(` ${AND} `)})`
+        return `(${map(expr.$and, req =>
+            stringifyChunk(req)).join(` ${AND} `)})`
     }
 }
 
@@ -88,7 +90,8 @@ function stringifyChildren(expr) {
     if (expr.$children === '$all') {
         return 'all children'
     }
-    return `(${map(expr.$children, child => stringifyReference(child)).join(', ')})`
+    return `(${map(expr.$children, child =>
+        stringifyReference(child)).join(', ')})`
 }
 
 function stringifyModifier(expr) {
@@ -96,19 +99,15 @@ function stringifyModifier(expr) {
     if (expr.$from === 'children') {
         modifier = `${stringifyChildren(expr)}`
     }
-
     else if (expr.$from === 'filter') {
         modifier = 'filter'
     }
-
     else if (expr.$from === 'filter-where') {
         modifier = `filter, where {${stringifyWhereClause(expr.$where)}}`
     }
-
     else if (expr.$from === 'where') {
         modifier = `where {${stringifyWhereClause(expr.$where)}}`
     }
-
     else if (expr.$from === 'children-where') {
         modifier = `${stringifyChildren(expr)}, where {${stringifyWhereClause(expr.$where)}}`
     }
@@ -120,7 +119,10 @@ function stringifyOccurrence(expr) {
 }
 
 function stringifyOf(expr) {
-    return `${expr.$count.$num} of${humanizeOperator(expr.$count.$operator)} (${map(expr.$of, req => stringifyChunk(req)).join(', ')})`
+    return `${expr.$count.$num} of${humanizeOperator(expr.$count.$operator)} (${map(
+        expr.$of,
+        req => stringifyChunk(req)
+    ).join(', ')})`
 }
 
 function stringifyReference(expr) {
@@ -129,32 +131,50 @@ function stringifyReference(expr) {
 
 function stringifyQualification({ $key, $operator, $value }) {
     if ($value instanceof Array) {
-        throw new TypeError("stringifyQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)")
+        throw new TypeError(
+            "stringifyQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)"
+        )
     }
-
     else if ($value instanceof Object) {
         if ($value.$type === 'function') {
-            const simplifiedOperator = { $key, $operator, $value: $value['$computed-value'] }
+            const simplifiedOperator = {
+                $key,
+                $operator,
+                $value: $value['$computed-value'],
+            }
             return stringifyQualification(simplifiedOperator)
         }
         else if ($value.$type === 'boolean') {
             if ('$or' in $value) {
-                return map($value.$or, val => stringifyQualification({ $key, $operator, $value: val })).join(` ${OR} `)
+                return map($value.$or, val =>
+                    stringifyQualification({
+                        $key,
+                        $operator,
+                        $value: val,
+                    })).join(` ${OR} `)
             }
             else if ('$and' in $value) {
-                return map($value.$and, val => stringifyQualification({ $key, $operator, $value: val })).join(` ${AND} `)
+                return map($value.$and, val =>
+                    stringifyQualification({
+                        $key,
+                        $operator,
+                        $value: val,
+                    })).join(` ${AND} `)
             }
             else {
-                throw new TypeError(`stringifyQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`)
+                throw new TypeError(
+                    `stringifyQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`
+                )
             }
         }
         else {
-            throw new TypeError(`stringifyQualification(): "${$value.$type}" is not a valid type for a qualification's value.`)
+            throw new TypeError(
+                `stringifyQualification(): "${$value.$type}" is not a valid type for a qualification's value.`
+            )
         }
     }
-
     else {
-		// it's a static value; a number or string
+        // it's a static value; a number or string
         if ($operator === '$eq') {
             return `${$key} = ${$value}`
         }
@@ -175,7 +195,9 @@ function stringifyQualification({ $key, $operator, $value }) {
         }
     }
 
-    throw new TypeError(`stringifyQualification: "${$operator} is not a valid operator"`)
+    throw new TypeError(
+        `stringifyQualification: "${$operator} is not a valid operator"`
+    )
 }
 
 function stringifyWhereClause(clause) {
@@ -186,7 +208,6 @@ function stringifyWhereClause(clause) {
         if ('$and' in clause) {
             return map(clause.$and, stringifyWhereClause).join(' AND ')
         }
-
         else if ('$or' in clause) {
             return map(clause.$or, stringifyWhereClause).join(' | ')
         }
@@ -200,12 +221,13 @@ function stringifyWhere(expr) {
 function stringifyFilter(filter) {
     let resultString = 'Filter: '
 
-	// a filter will be either a where-style query or a list of courses
+    // a filter will be either a where-style query or a list of courses
     if ('$where' in filter) {
         resultString += `only courses where {${stringifyWhereClause(filter.$where)}}`
     }
     else if ('$of' in filter) {
-        resultString += `only (${map(filter.$of, req => stringifyChunk(req)).join(', ')})`
+        resultString += `only (${map(filter.$of, req =>
+            stringifyChunk(req)).join(', ')})`
     }
 
     return resultString
@@ -215,11 +237,12 @@ function indent(indentWith, string) {
     return string.split('\n').map(line => indentWith + line).join('\n')
 }
 
-function proseify(requirement, name, path, depth=0) {
+function proseify(requirement, name, path, depth = 0) {
     let prose = ''
     const hasChildren = some(keys(requirement), isRequirementName)
     if (hasChildren) {
-        const subReqs = filter(toPairs(requirement), ([k, _]) => isRequirementName(k))
+        const subReqs = filter(toPairs(requirement), ([k, _]) =>
+            isRequirementName(k))
         prose = map(subReqs, ([k, v]) => {
             return proseify(v, k, path.concat(k), depth + 1)
         }).join('\n')
@@ -231,57 +254,52 @@ function proseify(requirement, name, path, depth=0) {
         resultString += stringifyFilter(requirement.filter) + '\n'
     }
 
-	// Now check for results
+    // Now check for results
     if ('result' in requirement) {
         resultString += stringifyChunk(requirement.result) + '\n'
     }
-
-	// or ask for an override
     else if ('message' in requirement) {
+        // or ask for an override
         resultString += requirement.message + '\n'
     }
 
     return indent(depth ? '  ' : '', `${resultString}${prose}`)
 }
 
-
-const checkAgainstArea = ({ courses, overrides }, args) => areaData => {
-    let result = {}
-    let path = []
-    if (args.path) {
-        path = [areaData.type, areaData.name].concat(args.path.split('.'))
-        result = compute(
-			get(areaData, args.path),
-            {
+const checkAgainstArea = ({ courses, overrides }, args) =>
+    areaData => {
+        let result = {}
+        let path = []
+        if (args.path) {
+            path = [areaData.type, areaData.name].concat(args.path.split('.'))
+            result = compute(get(areaData, args.path), {
                 path,
                 courses,
                 overrides,
-            }
-		)
-    }
+            })
+        }
+        else {
+            result = evaluate({ courses, overrides }, areaData)
+            path = [areaData.type, areaData.name]
+        }
 
-    else {
-        result = evaluate({ courses, overrides }, areaData)
-        path = [areaData.type, areaData.name]
-    }
+        if (args.json) {
+            console.log(JSON.stringify(result, null, 2))
+        }
+        else if (args.yaml) {
+            console.log(yaml.safeDump(result))
+        }
+        else if (args.prose) {
+            console.log(proseify(result, areaData.name, path))
+        }
+        else if (args.summary) {
+            console.log(summarize(result, areaData.name, path))
+        }
 
-    if (args.json) {
-        console.log(JSON.stringify(result, null, 2))
+        if (!result.computed) {
+            process.exit(1)
+        }
     }
-    else if (args.yaml) {
-        console.log(yaml.safeDump(result))
-    }
-    else if (args.prose) {
-        console.log(proseify(result, areaData.name, path))
-    }
-    else if (args.summary) {
-        console.log(summarize(result, areaData.name, path))
-    }
-
-    if (!result.computed) {
-        process.exit(1)
-    }
-}
 
 function run({ courses, overrides, areas }, args) {
     Promise.all(areas.map(loadArea)).then(areaData => {
@@ -293,37 +311,37 @@ function run({ courses, overrides, areas }, args) {
 
 export function cli() {
     const args = nomnom()
-		.option('json', {
-    flag: true,
-    help: 'print raw json output',
-})
-		.option('yaml', {
-    flag: true,
-    help: 'print yaml-formatted json output',
-})
-		.option('prose', {
-    flag: true,
-    help: 'print prose output',
-})
-		.option('summary', {
-    flag: true,
-    help: 'print summarized output',
-})
-		.option('status', {
-    flag: true,
-    help: 'no output; only use exit code',
-})
-		.option('path', {
-    type: 'text',
-    help: 'change the root of the evaluation',
-})
-		.option('studentFile', {
-    required: true,
-    metavar: 'FILE',
-    help: 'The file to process',
-    position: 0,
-})
-		.parse()
+        .option('json', {
+            flag: true,
+            help: 'print raw json output',
+        })
+        .option('yaml', {
+            flag: true,
+            help: 'print yaml-formatted json output',
+        })
+        .option('prose', {
+            flag: true,
+            help: 'print prose output',
+        })
+        .option('summary', {
+            flag: true,
+            help: 'print summarized output',
+        })
+        .option('status', {
+            flag: true,
+            help: 'no output; only use exit code',
+        })
+        .option('path', {
+            type: 'text',
+            help: 'change the root of the evaluation',
+        })
+        .option('studentFile', {
+            required: true,
+            metavar: 'FILE',
+            help: 'The file to process',
+            position: 0,
+        })
+        .parse()
 
     run(JSON.parse(fs.readFileSync(args.studentFile, 'utf-8')), args)
 }
