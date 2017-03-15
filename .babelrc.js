@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"presets": [
 		// JSX, Flow
 		"react",
