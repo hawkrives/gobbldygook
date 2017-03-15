@@ -5,37 +5,37 @@ const uuid = require('uuid/v4')
 const { randomChar } = require('../lib/random-char')
 
 function Schedule(data={}) {
-	const baseSchedule = {
-		id: uuid(),
-		active: false,
+    const baseSchedule = {
+        id: uuid(),
+        active: false,
 
-		index: 1,
-		title: `Schedule ${randomChar().toUpperCase()}`,
+        index: 1,
+        title: `Schedule ${randomChar().toUpperCase()}`,
 
-		clbids: [],
-		year: 0,
-		semester: 0,
+        clbids: [],
+        year: 0,
+        semester: 0,
 
-		metadata: {},
-	}
+        metadata: {},
+    }
 
-	let schedule = Object.assign({},
+    let schedule = Object.assign({},
 		baseSchedule,
 		data)
 
-	if (!isString(schedule.id)) {
-		throw new TypeError('Schedule id must be a string.')
-	}
+    if (!isString(schedule.id)) {
+        throw new TypeError('Schedule id must be a string.')
+    }
 
-	if (typeof schedule.year === 'string') {
-		schedule.year = parseInt(schedule.year, 10)
-	}
+    if (typeof schedule.year === 'string') {
+        schedule.year = parseInt(schedule.year, 10)
+    }
 
-	if (typeof schedule.semester === 'string') {
-		schedule.semester = parseInt(schedule.semester, 10)
-	}
+    if (typeof schedule.semester === 'string') {
+        schedule.semester = parseInt(schedule.semester, 10)
+    }
 
-	return schedule
+    return schedule
 }
 
 module.exports.Schedule = Schedule
