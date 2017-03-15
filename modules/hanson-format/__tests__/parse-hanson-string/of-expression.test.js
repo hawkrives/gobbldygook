@@ -23,7 +23,11 @@ describe('OfExpression', () => {
         const result = parse('all of (A, B, C)')
         expect(result).toMatchSnapshot()
         expect(result.$count).toBeDefined()
-        expect(result.$count).toEqual({ $operator: '$eq', $num: 3, $was: 'all' })
+        expect(result.$count).toEqual({
+            $operator: '$eq',
+            $num: 3,
+            $was: 'all',
+        })
     })
 
     it('allows "n" to be "any"', () => {
@@ -43,7 +47,9 @@ describe('OfExpression', () => {
     })
 
     it('supports where-clauses within the parens', () => {
-        const actual = parse('one of (CSCI 121, one course where {gereqs = WRI})')
+        const actual = parse(
+            'one of (CSCI 121, one course where {gereqs = WRI})'
+        )
         expect(actual).toMatchSnapshot()
 
         expect(actual.$of).toBeDefined()
@@ -67,7 +73,9 @@ describe('OfExpression', () => {
     })
 
     it('supports modifiers within the parens', () => {
-        const actual = parse('one of (two courses from children, two courses from filter, two credits from courses where {year <= 2016})')
+        const actual = parse(
+            'one of (two courses from children, two courses from filter, two credits from courses where {year <= 2016})'
+        )
         expect(actual).toMatchSnapshot()
 
         expect(actual.$of).toBeDefined()
@@ -81,7 +89,11 @@ describe('OfExpression', () => {
     })
 
     it('throws an error if more items are required than are provided', () => {
-        expect(() => parse('three of (CSCI 121, 125)'))
-			.toThrow(`you requested 3 items, but only gave 2 options (${JSON.stringify([course('CSCI 121'), course('CSCI 125')])})`)
+        expect(() => parse('three of (CSCI 121, 125)')).toThrow(
+            `you requested 3 items, but only gave 2 options (${JSON.stringify([
+                course('CSCI 121'),
+                course('CSCI 125'),
+            ])})`
+        )
     })
 })
