@@ -14,22 +14,21 @@ import type { Expression, Course } from './types'
 export default function collectMatches(expr: Expression): Course[] {
     assertKeys(expr, '$type')
 
-	// start off with absolutely no matches
+    // start off with absolutely no matches
     let matches = undefined
 
-	// if a course expression, and the course was used, return the course in
-	// an array. returning in an array allows the higher-level expressions to
-	// just run `flatten()` to collect all of the courses.
-	// this is the "base case."
+    // if a course expression, and the course was used, return the course in
+    // an array. returning in an array allows the higher-level expressions to
+    // just run `flatten()` to collect all of the courses.
+    // this is the "base case."
     if (expr.$type === 'course') {
-		/* istanbul ignore else: doesn't matter */
+        /* istanbul ignore else: doesn't matter */
         if (expr._result === true) {
             matches = [expr.$course || expr]
         }
     }
-
-	// next, we have the "run collectMatches on all my children" cases.
     else if (expr.$type === 'requirement') {
+        // next, we have the "run collectMatches on all my children" cases.
         if ('result' in expr) {
             matches = collectMatches(expr.result)
         }
@@ -48,10 +47,9 @@ export default function collectMatches(expr: Expression): Course[] {
     else if (expr.$type === 'of') {
         matches = flatMap(expr.$of, collectMatches)
     }
-
-	// finally, we have the "pre-computed _matches" cases, where the evaluation
-	// of the expression attached the matches to the expression itself.
     else if (expr.$type === 'modifier') {
+        // finally, we have the "pre-computed _matches" cases, where the evaluation
+        // of the expression attached the matches to the expression itself.
         matches = expr._matches
     }
     else if (expr.$type === 'occurrence') {
@@ -64,9 +62,11 @@ export default function collectMatches(expr: Expression): Course[] {
         matches = expr._matches
     }
     else {
-        throw new TypeError(`collectMatches(): unknown expression type "${expr.$type}"`)
+        throw new TypeError(
+            `collectMatches(): unknown expression type "${expr.$type}"`
+        )
     }
 
-	// then we either return the matches, or an empty array if it's falsy
+    // then we either return the matches, or an empty array if it's falsy
     return matches ? uniqBy(matches, stringify) : []
 }

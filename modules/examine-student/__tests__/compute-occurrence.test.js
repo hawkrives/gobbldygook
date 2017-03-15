@@ -9,21 +9,21 @@ describe('computeOccurrence', () => {
         }
 
         const courses = [
-			{ department: ['THEAT'], number: 222 },
-			{ department: ['THEAT'], number: 222 },
+            { department: ['THEAT'], number: 222 },
+            { department: ['THEAT'], number: 222 },
         ]
 
-        const { computedResult, matches, counted } = computeOccurrence({ expr, courses })
+        const { computedResult, matches, counted } = computeOccurrence({
+            expr,
+            courses,
+        })
 
-        expect(computedResult)
-			.toBe(true)
-        expect(matches)
-			.toEqual([
-				{ department: ['THEAT'], number: 222 },
-				{ department: ['THEAT'], number: 222 },
-])
-        expect(counted)
-			.toBe(2)
+        expect(computedResult).toBe(true)
+        expect(matches).toEqual([
+            { department: ['THEAT'], number: 222 },
+            { department: ['THEAT'], number: 222 },
+        ])
+        expect(counted).toBe(2)
     })
 
     it('ignores anything besides department and number via simplifyCourse', () => {
@@ -34,19 +34,19 @@ describe('computeOccurrence', () => {
         }
 
         const courses = [
-			{ department: ['THEAT'], number: 222, year: 2014, semester: 1 },
-			{ department: ['THEAT'], number: 222, year: 2014, semester: 3 },
+            { department: ['THEAT'], number: 222, year: 2014, semester: 1 },
+            { department: ['THEAT'], number: 222, year: 2014, semester: 3 },
         ]
 
-        const { computedResult, matches, counted } = computeOccurrence({ expr, courses })
-        expect(computedResult)
-			.toBe(true)
-        expect(matches)
-			.toEqual([
-				{ department: ['THEAT'], number: 222, year: 2014, semester: 1 },
-				{ department: ['THEAT'], number: 222, year: 2014, semester: 3 },
-])
-        expect(counted)
-			.toBe(2)
+        const { computedResult, matches, counted } = computeOccurrence({
+            expr,
+            courses,
+        })
+        expect(computedResult).toBe(true)
+        expect(matches).toEqual([
+            { department: ['THEAT'], number: 222, year: 2014, semester: 1 },
+            { department: ['THEAT'], number: 222, year: 2014, semester: 3 },
+        ])
+        expect(counted).toBe(2)
     })
 })

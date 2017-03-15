@@ -10,5 +10,7 @@ export default function humanizeOperator(operator: CounterOperatorEnum) {
     else if (operator === '$eq') {
         return 'exactly'
     }
-    throw new TypeError(`humanizeOperator does not recognize "${operator}" as being an operator.`)
+    throw new TypeError(
+        `humanizeOperator does not recognize "${operator}" as being an operator.`
+    )
 }

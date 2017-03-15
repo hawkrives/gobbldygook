@@ -15,8 +15,8 @@ describe('computeWhere', () => {
         }
 
         const courses = [
-			{ department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM'] },
-			{ department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM'] },
+            { department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM'] },
+            { department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM'] },
         ]
 
         const expected = {
@@ -30,8 +30,8 @@ describe('computeWhere', () => {
         expect(actual).toEqual(expected)
 
         const altCourses = [
-			{ department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM'] },
-			{ department: ['ESTH'], number: 187, year: 2013, gereqs: ['SPM'] },
+            { department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM'] },
+            { department: ['ESTH'], number: 187, year: 2013, gereqs: ['SPM'] },
         ]
 
         let expected2 = {

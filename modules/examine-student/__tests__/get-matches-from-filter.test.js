@@ -1,7 +1,7 @@
 import getMatchesFromFilter from '../get-matches-from-filter'
 
 describe('getMatchesFromFilter', () => {
-    it('returns the matches from the requirement\'s filter property', () => {
+    it("returns the matches from the requirement's filter property", () => {
         const requirement = {
             $type: 'requirement',
             filter: {
@@ -15,12 +15,14 @@ describe('getMatchesFromFilter', () => {
                     },
                 },
                 _matches: [
-					{ department: ['CSCI'], number: 320 },
-					{ department: ['CSCI'], number: 160 },
+                    { department: ['CSCI'], number: 320 },
+                    { department: ['CSCI'], number: 160 },
                 ],
             },
         }
 
-        expect(getMatchesFromFilter(requirement)).toBe(requirement.filter._matches)
+        expect(getMatchesFromFilter(requirement)).toBe(
+            requirement.filter._matches
+        )
     })
 })

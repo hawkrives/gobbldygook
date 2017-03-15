@@ -10,6 +10,9 @@ import type { Course, CourseExpression } from './types'
  * @param {Course[]} courses - the list to look through
  * @returns {Course[]} - the filtered list of courses
  */
-export default function excludeCourse(query: CourseExpression | Course, courses: Course[]) {
+export default function excludeCourse(
+    query: CourseExpression | Course,
+    courses: Course[]
+) {
     return reject(courses, course => compareCourseToCourse(query, course))
 }

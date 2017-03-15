@@ -22,16 +22,12 @@ describe('collectMatches', () => {
                     {
                         $type: 'reference',
                         requirement: 'Child',
-                        _matches: [
-							{ department: ['ASIAN'], number: 121 },
-                        ],
+                        _matches: [{ department: ['ASIAN'], number: 121 }],
                     },
                     {
                         $type: 'reference',
                         requirement: 'Child2',
-                        _matches: [
-							{ department: ['CSCI'], number: 121 },
-                        ],
+                        _matches: [{ department: ['CSCI'], number: 121 }],
                     },
                 ],
             },
@@ -56,13 +52,15 @@ describe('collectMatches', () => {
                 $type: 'boolean',
                 $booleanType: 'and',
                 $and: [
-					{ _result: true, $type: 'course', $course: { department: ['ASIAN'], number: 121 } },
+                    {
+                        _result: true,
+                        $type: 'course',
+                        $course: { department: ['ASIAN'], number: 121 },
+                    },
                     {
                         $type: 'reference',
                         requirement: 'Child2',
-                        _matches: [
-							{ department: ['CSCI'], number: 121 },
-                        ],
+                        _matches: [{ department: ['CSCI'], number: 121 }],
                     },
                 ],
             },
@@ -74,7 +72,11 @@ describe('collectMatches', () => {
     it('collects matches from course expressions', () => {
         const expr = {
             $type: 'requirement',
-            result: { _result: true, $type: 'course', $course: { department: ['ASIAN'], number: 121 } },
+            result: {
+                _result: true,
+                $type: 'course',
+                $course: { department: ['ASIAN'], number: 121 },
+            },
         }
 
         expect(collectMatches(expr)).toMatchSnapshot()
@@ -89,8 +91,8 @@ describe('collectMatches', () => {
                 $what: 'children',
                 $children: 'all',
                 _matches: [
-					{ department: ['ASIAN'], number: 121 },
-					{ department: ['CSCI'], number: 121 },
+                    { department: ['ASIAN'], number: 121 },
+                    { department: ['CSCI'], number: 121 },
                 ],
             },
         }
@@ -103,11 +105,11 @@ describe('collectMatches', () => {
             $type: 'requirement',
             result: {
                 $type: 'occurrence',
-				// the occurrence is empty because the _matches are calculated
-				// in computeOccurrence
+                // the occurrence is empty because the _matches are calculated
+                // in computeOccurrence
                 _matches: [
-					{ department: ['ASIAN'], number: 121, year: 2014 },
-					{ department: ['ASIAN'], number: 121, year: 2015 },
+                    { department: ['ASIAN'], number: 121, year: 2014 },
+                    { department: ['ASIAN'], number: 121, year: 2015 },
                 ],
             },
         }
@@ -126,12 +128,16 @@ describe('collectMatches', () => {
                         $type: 'boolean',
                         $booleanType: 'and',
                         $and: [
-							{ $type: 'course', _result: true, $course: { department: ['ASIAN'], number: 121 } },
+                            {
+                                $type: 'course',
+                                _result: true,
+                                $course: { department: ['ASIAN'], number: 121 },
+                            },
                             {
                                 $type: 'reference',
                                 requirement: 'Child2',
                                 _matches: [
-									{ department: ['CSCI'], number: 121 },
+                                    { department: ['CSCI'], number: 121 },
                                 ],
                             },
                         ],
@@ -142,8 +148,8 @@ describe('collectMatches', () => {
                         $what: 'children',
                         $children: 'all',
                         _matches: [
-							{ department: ['MUSIC'], number: 121 },
-							{ department: ['ESTH'], number: 121 },
+                            { department: ['MUSIC'], number: 121 },
+                            { department: ['ESTH'], number: 121 },
                         ],
                     },
                 ],
@@ -158,11 +164,11 @@ describe('collectMatches', () => {
             $type: 'requirement',
             result: {
                 $type: 'where',
-				// $where is empty because the _matches are calculated in computeWhere
+                // $where is empty because the _matches are calculated in computeWhere
                 $where: {},
                 _matches: [
-					{ department: ['ASIAN'], number: 121 },
-					{ department: ['CSCI'], number: 121 },
+                    { department: ['ASIAN'], number: 121 },
+                    { department: ['CSCI'], number: 121 },
                 ],
             },
         }
@@ -176,9 +182,7 @@ describe('collectMatches', () => {
             result: {
                 $type: 'reference',
                 requirement: 'Child',
-                _matches: [
-					{ department: ['ASIAN'], number: 121 },
-                ],
+                _matches: [{ department: ['ASIAN'], number: 121 }],
             },
         }
 

@@ -10,6 +10,9 @@ import type { OverridesObject, OverridesPath } from './types'
  * @param {Object} overrides - the overrides object
  * @returns {boolean} - whether there is a matching path in the overrides list
  */
-export default function hasOverride(path: OverridesPath, overrides: OverridesObject) {
+export default function hasOverride(
+    path: OverridesPath,
+    overrides: OverridesObject
+) {
     return has(overrides, pathToOverride(path))
 }

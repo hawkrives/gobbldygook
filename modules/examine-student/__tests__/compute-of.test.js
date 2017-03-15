@@ -6,9 +6,18 @@ describe('computeOf', () => {
             $type: 'of',
             $count: { $operator: '$gte', $num: 2 },
             $of: [
-				{ $type: 'course', $course: { department: ['CSCI'], number: 121 } },
-				{ $type: 'course', $course: { department: ['CSCI'], number: 125 } },
-				{ $type: 'course', $course: { department: ['CSCI'], number: 150 } },
+                {
+                    $type: 'course',
+                    $course: { department: ['CSCI'], number: 121 },
+                },
+                {
+                    $type: 'course',
+                    $course: { department: ['CSCI'], number: 125 },
+                },
+                {
+                    $type: 'course',
+                    $course: { department: ['CSCI'], number: 150 },
+                },
             ],
         }
         const req = {
@@ -18,21 +27,24 @@ describe('computeOf', () => {
 
         const dirty = new Set()
         const courses = [
-			{ department: ['CSCI'], number: 121 },
-			{ department: ['CSCI'], number: 125 },
+            { department: ['CSCI'], number: 121 },
+            { department: ['CSCI'], number: 125 },
         ]
 
-        const { computedResult, matches, counted } = computeOf({ expr, ctx: req, courses, dirty, isNeeded: true })
+        const { computedResult, matches, counted } = computeOf({
+            expr,
+            ctx: req,
+            courses,
+            dirty,
+            isNeeded: true,
+        })
 
-        expect(computedResult)
-			.toBe(true)
-        expect(matches)
-			.toEqual([
-				{ department: ['CSCI'], number: 121 },
-				{ department: ['CSCI'], number: 125 },
-])
-        expect(counted)
-			.toBe(2)
+        expect(computedResult).toBe(true)
+        expect(matches).toEqual([
+            { department: ['CSCI'], number: 121 },
+            { department: ['CSCI'], number: 125 },
+        ])
+        expect(counted).toBe(2)
 
         expect(expr).toEqual({
             $type: 'of',

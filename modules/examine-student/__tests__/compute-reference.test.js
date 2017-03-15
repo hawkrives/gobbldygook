@@ -21,16 +21,20 @@ describe('computeReference', () => {
 
     xit('returns the list of matches, if present', () => {
         const expr = { $requirement: 'Req Name' }
-        const ctx = { 'Req Name': { computed: true, matches: ['Match'], result: '' } }
+        const ctx = {
+            'Req Name': { computed: true, matches: ['Match'], result: '' },
+        }
         expect(computeReference({ expr, ctx })).toEqual({
             computedResult: true,
             matches: ['Match'],
         })
     })
 
-    it('throws a ReferenceError if the referenced requirement doesn\'t exist', () => {
+    it("throws a ReferenceError if the referenced requirement doesn't exist", () => {
         const expr = { $requirement: 'A' }
         const ctx = { ONLY: {} }
-        expect(() => computeReference({ expr, ctx })).toThrowError(ReferenceError)
+        expect(() => computeReference({ expr, ctx })).toThrowError(
+            ReferenceError
+        )
     })
 })

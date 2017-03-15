@@ -19,9 +19,18 @@ describe('computeModifier', () => {
                     $type: 'boolean',
                     $booleanType: 'or',
                     $or: [
-						{ $type: 'course', $course: { department: ['REL'], number: 111 } },
-						{ $type: 'course', $course: { department: ['REL'], number: 112 } },
-						{ $type: 'course', $course: { department: ['REL'], number: 251 } },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 111 },
+                        },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 112 },
+                        },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 251 },
+                        },
                     ],
                 },
             },
@@ -30,14 +39,24 @@ describe('computeModifier', () => {
 
         const dirty = new Set()
         const courses = [
-			{ department: ['REL'], number: 111 },
-			{ department: ['REL'], number: 112 },
-			{ department: ['CSCI'], number: 251 },
+            { department: ['REL'], number: 111 },
+            { department: ['REL'], number: 112 },
+            { department: ['CSCI'], number: 251 },
         ]
 
-        req.Bible.computed = computeChunk({ expr: req.Bible.result, ctx: req, courses, dirty })
+        req.Bible.computed = computeChunk({
+            expr: req.Bible.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
-        const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
+        const { computedResult, matches, counted } = computeModifier({
+            expr: modifier,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
         expect(computedResult).toBe(true)
         expect(matches).toMatchSnapshot()
@@ -61,9 +80,18 @@ describe('computeModifier', () => {
                     $type: 'boolean',
                     $booleanType: 'or',
                     $or: [
-						{ $type: 'course', $course: { department: ['REL'], number: 111 } },
-						{ $type: 'course', $course: { department: ['REL'], number: 112 } },
-						{ $type: 'course', $course: { department: ['REL'], number: 251 } },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 111 },
+                        },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 112 },
+                        },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 251 },
+                        },
                     ],
                 },
             },
@@ -72,14 +100,24 @@ describe('computeModifier', () => {
 
         const dirty = new Set()
         const courses = [
-			{ department: ['REL'], number: 111 },
-			{ department: ['REL'], number: 112 },
-			{ department: ['CSCI'], number: 251 },
+            { department: ['REL'], number: 111 },
+            { department: ['REL'], number: 112 },
+            { department: ['CSCI'], number: 251 },
         ]
 
-        req.Bible.computed = computeChunk({ expr: req.Bible.result, ctx: req, courses, dirty })
+        req.Bible.computed = computeChunk({
+            expr: req.Bible.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
-        const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
+        const { computedResult, matches, counted } = computeModifier({
+            expr: modifier,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
         expect(computedResult).toBe(true)
         expect(matches).toMatchSnapshot()
@@ -111,14 +149,19 @@ describe('computeModifier', () => {
 
         const dirty = new Set()
         let courses = [
-			{ department: ['REL'], number: 111 },
-			{ department: ['REL'], number: 112 },
-			{ department: ['CSCI'], number: 251 },
+            { department: ['REL'], number: 111 },
+            { department: ['REL'], number: 112 },
+            { department: ['CSCI'], number: 251 },
         ]
 
         courses = applyFilter(req.filter, courses)
 
-        const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
+        const { computedResult, matches, counted } = computeModifier({
+            expr: modifier,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
         expect(computedResult).toBe(true)
         expect(matches).toMatchSnapshot()
@@ -128,7 +171,10 @@ describe('computeModifier', () => {
 
     it('counts, excluding a given course', () => {
         const modifier = {
-            $besides: { $type: 'course', $course: { 'department': ['CHEM'], 'number': 398 } },
+            $besides: {
+                $type: 'course',
+                $course: { department: ['CHEM'], number: 398 },
+            },
             $count: { $num: 1, $operator: '$gte' },
             $from: 'filter',
             $type: 'modifier',
@@ -153,29 +199,40 @@ describe('computeModifier', () => {
             result: modifier,
         }
 
-        let goodCourses = [
-			{ department: ['REL'], number: 111 },
-        ]
+        let goodCourses = [{ department: ['REL'], number: 111 }]
         goodCourses = applyFilter(req.filter, goodCourses)
 
-        const { computedResult: one } = computeModifier({ expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: goodCourses, dirty: new Set() })
+        const { computedResult: one } = computeModifier({
+            expr: cloneDeep(modifier),
+            ctx: cloneDeep(req),
+            courses: goodCourses,
+            dirty: new Set(),
+        })
         expect(one).toBe(true)
 
-        let badCourses = [
-			{ department: ['CHEM'], number: 398 },
-        ]
+        let badCourses = [{ department: ['CHEM'], number: 398 }]
         badCourses = applyFilter(req.filter, badCourses)
 
-        const { computedResult: two } = computeModifier({ expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: badCourses, dirty: new Set() })
+        const { computedResult: two } = computeModifier({
+            expr: cloneDeep(modifier),
+            ctx: cloneDeep(req),
+            courses: badCourses,
+            dirty: new Set(),
+        })
         expect(two).toBe(false)
 
         let moreGoodCourses = [
-			{ department: ['CHEM'], number: 398 },
-			{ department: ['REL'], number: 111 },
+            { department: ['CHEM'], number: 398 },
+            { department: ['REL'], number: 111 },
         ]
         moreGoodCourses = applyFilter(req.filter, moreGoodCourses)
 
-        const { computedResult: three } = computeModifier({ expr: cloneDeep(modifier), ctx: cloneDeep(req), courses: moreGoodCourses, dirty: new Set() })
+        const { computedResult: three } = computeModifier({
+            expr: cloneDeep(modifier),
+            ctx: cloneDeep(req),
+            courses: moreGoodCourses,
+            dirty: new Set(),
+        })
         expect(three).toBe(true)
     })
 
@@ -197,12 +254,17 @@ describe('computeModifier', () => {
 
         const dirty = new Set()
         const courses = [
-			{ department: ['REL'], number: 111 },
-			{ department: ['REL'], number: 112 },
-			{ department: ['CSCI'], number: 251 },
+            { department: ['REL'], number: 111 },
+            { department: ['REL'], number: 112 },
+            { department: ['CSCI'], number: 251 },
         ]
 
-        const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
+        const { computedResult, matches, counted } = computeModifier({
+            expr: modifier,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
         expect(computedResult).toBe(true)
         expect(matches).toMatchSnapshot()
@@ -227,8 +289,14 @@ describe('computeModifier', () => {
                     $type: 'boolean',
                     $booleanType: 'and',
                     $and: [
-						{ $type: 'course', $course: { department: ['REL'], number: 111 } },
-						{ $type: 'course', $course: { department: ['REL'], number: 112 } },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 111 },
+                        },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 112 },
+                        },
                     ],
                 },
             },
@@ -244,15 +312,30 @@ describe('computeModifier', () => {
 
         const dirty = new Set()
         const courses = [
-			{ department: ['REL'], number: 111, credits: 1.0 },
-			{ department: ['REL'], number: 112, credits: 1.0 },
-			{ department: ['CSCI'], number: 251, credits: 1.0 },
+            { department: ['REL'], number: 111, credits: 1.0 },
+            { department: ['REL'], number: 112, credits: 1.0 },
+            { department: ['CSCI'], number: 251, credits: 1.0 },
         ]
 
-        req.Bible.computed = computeChunk({ expr: req.Bible.result, ctx: req, courses, dirty })
-        req.A.computed = computeChunk({ expr: req.A.result, ctx: req, courses, dirty })
+        req.Bible.computed = computeChunk({
+            expr: req.Bible.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
+        req.A.computed = computeChunk({
+            expr: req.A.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
-        const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
+        const { computedResult, matches, counted } = computeModifier({
+            expr: modifier,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
         expect(computedResult).toBe(true)
         expect(matches).toMatchSnapshot()
@@ -276,8 +359,20 @@ describe('computeModifier', () => {
                     $type: 'boolean',
                     $booleanType: 'and',
                     $and: [
-						{ $type: 'course', $course: { department: ['CHEM', 'BIO'], number: 111 } },
-						{ $type: 'course', $course: { department: ['CHEM', 'BIO'], number: 112 } },
+                        {
+                            $type: 'course',
+                            $course: {
+                                department: ['CHEM', 'BIO'],
+                                number: 111,
+                            },
+                        },
+                        {
+                            $type: 'course',
+                            $course: {
+                                department: ['CHEM', 'BIO'],
+                                number: 112,
+                            },
+                        },
                     ],
                 },
             },
@@ -293,15 +388,30 @@ describe('computeModifier', () => {
 
         const dirty = new Set()
         const courses = [
-			{ department: ['CHEM', 'BIO'], number: 111, credits: 1.0 },
-			{ department: ['CHEM', 'BIO'], number: 112, credits: 1.0 },
-			{ department: ['CSCI'], number: 251, credits: 1.0 },
+            { department: ['CHEM', 'BIO'], number: 111, credits: 1.0 },
+            { department: ['CHEM', 'BIO'], number: 112, credits: 1.0 },
+            { department: ['CSCI'], number: 251, credits: 1.0 },
         ]
 
-        req.CHBI.computed = computeChunk({ expr: req.CHBI.result, ctx: req, courses, dirty })
-        req.A.computed = computeChunk({ expr: req.A.result, ctx: req, courses, dirty })
+        req.CHBI.computed = computeChunk({
+            expr: req.CHBI.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
+        req.A.computed = computeChunk({
+            expr: req.A.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
-        const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
+        const { computedResult, matches, counted } = computeModifier({
+            expr: modifier,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
         expect(computedResult).toBe(true)
         expect(matches).toMatchSnapshot()
@@ -325,9 +435,18 @@ describe('computeModifier', () => {
                     $type: 'boolean',
                     $booleanType: 'or',
                     $or: [
-						{ $type: 'course', $course: { department: ['REL'], number: 111 } },
-						{ $type: 'course', $course: { department: ['REL'], number: 112 } },
-						{ $type: 'course', $course: { department: ['REL'], number: 251 } },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 111 },
+                        },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 112 },
+                        },
+                        {
+                            $type: 'course',
+                            $course: { department: ['REL'], number: 251 },
+                        },
                     ],
                 },
             },
@@ -343,15 +462,30 @@ describe('computeModifier', () => {
 
         const dirty = new Set()
         const courses = [
-			{ department: ['REL'], number: 111, credits: 1.0 },
-			{ department: ['REL'], number: 112, credits: 1.0 },
-			{ department: ['CSCI'], number: 251, credits: 1.0 },
+            { department: ['REL'], number: 111, credits: 1.0 },
+            { department: ['REL'], number: 112, credits: 1.0 },
+            { department: ['CSCI'], number: 251, credits: 1.0 },
         ]
 
-        req.Bible.computed = computeChunk({ expr: req.Bible.result, ctx: req, courses, dirty })
-        req.A.computed = computeChunk({ expr: req.A.result, ctx: req, courses, dirty })
+        req.Bible.computed = computeChunk({
+            expr: req.Bible.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
+        req.A.computed = computeChunk({
+            expr: req.A.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
-        const { computedResult, matches, counted } = computeModifier({ expr: modifier, ctx: req, courses, dirty })
+        const { computedResult, matches, counted } = computeModifier({
+            expr: modifier,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
         expect(computedResult).toBe(true)
         expect(matches).toMatchSnapshot()
@@ -401,15 +535,35 @@ describe('computeModifier', () => {
 
         const dirty = new Set()
         const courses = [
-			{ department: ['CHEM', 'BIO'], number: 111, credits: 1.0 },
-			{ department: ['CHEM', 'BIO'], number: 112, credits: 1.0 },
+            { department: ['CHEM', 'BIO'], number: 111, credits: 1.0 },
+            { department: ['CHEM', 'BIO'], number: 112, credits: 1.0 },
         ]
 
-        req.A.computed = computeChunk({ expr: req.A.result, ctx: req, courses, dirty })
-        req.A.computed = computeChunk({ expr: req.B.result, ctx: req, courses, dirty })
+        req.A.computed = computeChunk({
+            expr: req.A.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
+        req.A.computed = computeChunk({
+            expr: req.B.result,
+            ctx: req,
+            courses,
+            dirty,
+        })
 
-        const courseResults = computeModifier({ expr: modifier.$and[0], ctx: req, courses, dirty })
-        const departmentResults = computeModifier({ expr: modifier.$and[1], ctx: req, courses, dirty })
+        const courseResults = computeModifier({
+            expr: modifier.$and[0],
+            ctx: req,
+            courses,
+            dirty,
+        })
+        const departmentResults = computeModifier({
+            expr: modifier.$and[1],
+            ctx: req,
+            courses,
+            dirty,
+        })
 
         expect(modifier).toEqual({
             $type: 'boolean',
@@ -442,6 +596,9 @@ describe('computeModifier', () => {
     })
 
     it('throws when $what is none of "course", "credit", nor "department"', () => {
-        expect(() => computeModifier({ expr: { $what: 'invalid', $from: {}, $count: {} } })).toThrowError(TypeError)
+        expect(() =>
+            computeModifier({
+                expr: { $what: 'invalid', $from: {}, $count: {} },
+            })).toThrowError(TypeError)
     })
 })
