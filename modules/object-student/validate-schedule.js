@@ -9,13 +9,13 @@ const reject = require('lodash/reject')
 const isUndefined = require('lodash/isUndefined')
 
 function validateSchedule(schedule) {
-	// Checks to see if the schedule is valid
+    // Checks to see if the schedule is valid
     let courses = schedule.courses
 
-	// only check the courses that have data
+    // only check the courses that have data
     courses = reject(courses, isUndefined)
 
-	// Step one: do any times conflict?
+    // Step one: do any times conflict?
     const conflicts = findWarnings(courses, schedule)
 
     const flattened = flatten(conflicts)

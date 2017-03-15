@@ -4,7 +4,7 @@ const uuid = require('uuid/v4')
 
 const { randomChar } = require('../lib/random-char')
 
-function Schedule(data={}) {
+function Schedule(data = {}) {
     const baseSchedule = {
         id: uuid(),
         active: false,
@@ -19,9 +19,7 @@ function Schedule(data={}) {
         metadata: {},
     }
 
-    let schedule = Object.assign({},
-		baseSchedule,
-		data)
+    let schedule = Object.assign({}, baseSchedule, data)
 
     if (!isString(schedule.id)) {
         throw new TypeError('Schedule id must be a string.')

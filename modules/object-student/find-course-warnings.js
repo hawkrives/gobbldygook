@@ -9,7 +9,10 @@ const ordinal = require('ord')
 const oxford = require('listify')
 const plur = require('plur')
 const { findScheduleTimeConflicts } = require('sto-sis-time-parser')
-const { expandYear, semesterName } = require('../school-st-olaf-college/course-info')
+const {
+    expandYear,
+    semesterName,
+} = require('../school-st-olaf-college/course-info')
 // import {alertCircled, iosCalendarOutline, iosClockOutline} from '../web/icons/ionicons'
 
 module.exports.checkForInvalidYear = checkForInvalidYear
@@ -48,14 +51,21 @@ function checkForTimeConflicts(courses) {
 
     conflicts = map(conflicts, conflictSet => {
         if (some(conflictSet)) {
-			// +1 to the indices because humans don't 0-index lists
-			// eslint-disable-next-line no-confusing-arrow
-            const conflicts = compact(map(conflictSet, (possibility, i) => (possibility === true) ? i + 1 : false))
+            // +1 to the indices because humans don't 0-index lists
+            // eslint-disable-next-line no-confusing-arrow
+            const conflicts = compact(
+                map(
+                    conflictSet,
+                    (possibility, i) => possibility === true ? i + 1 : false
+                )
+            )
             const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
             return {
                 warning: true,
                 type: 'time-conflict',
-                msg: `Time conflict with the ${oxford(conflicted, { oxfordComma: true })} ${plur('course', conflicts.length)}`,
+                msg: `Time conflict with the ${oxford(conflicted, {
+                    oxfordComma: true,
+                })} ${plur('course', conflicts.length)}`,
                 icon: 'iosClockOutline',
             }
         }
@@ -70,7 +80,10 @@ module.exports.findWarnings = findWarnings
 function findWarnings(courses, schedule) {
     let warningsOfInvalidity = map(courses, course => {
         let invalidYear = checkForInvalidYear(course, schedule.year)
-        let invalidSemester = checkForInvalidSemester(course, schedule.semester)
+        let invalidSemester = checkForInvalidSemester(
+            course,
+            schedule.semester
+        )
         return [invalidYear, invalidSemester]
     })
 

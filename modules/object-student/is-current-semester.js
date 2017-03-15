@@ -7,7 +7,7 @@
  * @returns {Boolean} - is the schedule part of the current semester
  */
 function isCurrentSemester(year, semester) {
-    return schedule => (schedule.year === year) && (schedule.semester === semester)
+    return schedule => schedule.year === year && schedule.semester === semester
 }
 
 module.exports.isCurrentSemester = isCurrentSemester
