@@ -6,13 +6,13 @@
 .*/node_modules/fbjs
 .*/node_modules/jest-validate
 
-
 [libs]
 ./node_modules/fbjs/flow/lib
 ./config/decls
 
-
 [options]
+emoji=true
+
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
 
