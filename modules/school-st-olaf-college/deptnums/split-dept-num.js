@@ -1,5 +1,7 @@
 // @flow
-import { deptNumRegex } from './dept-num-regex'
+'use strict'
+
+const { deptNumRegex } = require('./dept-num-regex')
 
 /**
  * Splits a deptnum string (like "AS/RE 230A") into its components,
@@ -9,7 +11,7 @@ import { deptNumRegex } from './dept-num-regex'
  * @param {Boolean} includeSection - include the section in the result?
  * @returns {Object} - the result
  */
-export function splitDeptNum(deptNumString: string, includeSection?: boolean=false) {
+function splitDeptNum(deptNumString: string, includeSection?: boolean=false) {
 	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
 	// -> {departments: ['AS', 'RE'], number: 230}
 	let matches = deptNumRegex.exec(deptNumString)
@@ -29,3 +31,5 @@ export function splitDeptNum(deptNumString: string, includeSection?: boolean=fal
 
 	return deptNum
 }
+
+module.exports.splitDeptNum = splitDeptNum

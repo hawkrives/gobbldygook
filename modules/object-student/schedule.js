@@ -1,9 +1,10 @@
-import isString from 'lodash/isString'
-import uuid from 'uuid/v4'
+'use strict'
+const isString = require('lodash/isString')
+const uuid = require('uuid/v4')
 
-import { randomChar } from '../lib/random-char'
+const { randomChar } = require('../lib/random-char')
 
-export function Schedule(data={}) {
+function Schedule(data={}) {
 	const baseSchedule = {
 		id: uuid(),
 		active: false,
@@ -18,10 +19,9 @@ export function Schedule(data={}) {
 		metadata: {},
 	}
 
-	let schedule = {
-		...baseSchedule,
-		...data,
-	}
+	let schedule = Object.assign({},
+		baseSchedule,
+		data)
 
 	if (!isString(schedule.id)) {
 		throw new TypeError('Schedule id must be a string.')
@@ -37,3 +37,5 @@ export function Schedule(data={}) {
 
 	return schedule
 }
+
+module.exports.Schedule = Schedule

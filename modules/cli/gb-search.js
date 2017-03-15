@@ -1,5 +1,6 @@
-import table from 'text-table'
-import searchCourses from './lib/search-for-courses'
+'use strict'
+const table = require('text-table')
+const searchCourses = require('./lib/search-for-courses')
 
 function printCourse(course) {
 	return [
@@ -9,10 +10,11 @@ function printCourse(course) {
 	]
 }
 
-export default function search({ riddles, unique, sort, ...opts }={}) {
+module.exports = function search(args={}) {
+	const { riddles, unique, sort } = args
 	// check if data has been cached
 	searchCourses({ riddles, unique, sort }).then(filtered => {
-		if (opts.list) {
+		if (args.list) {
 			console.log(table(filtered.map(printCourse)))
 		}
 		else {

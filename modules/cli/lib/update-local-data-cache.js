@@ -1,17 +1,18 @@
-import mkdirp from 'mkdirp'
-import find from 'lodash/find'
-import some from 'lodash/some'
-import startsWith from 'lodash/startsWith'
-import path from 'path'
+'use strict'
+const mkdirp = require('mkdirp')
+const find = require('lodash/find')
+const some = require('lodash/some')
+const startsWith = require('lodash/startsWith')
+const path = require('path')
 
-import {
+const {
 	tryReadJsonFile,
 	loadFile,
 	loadJsonFile,
-} from './read-file'
-import { cacheDir } from './dirs'
+} = require('./read-file')
+const { cacheDir } = require('./dirs')
 
-import pify from 'pify'
+const pify = require('pify')
 
 const fs = pify(require('graceful-fs'))
 
@@ -26,7 +27,8 @@ function prepareDirs() {
 	mkdirp.sync(`${cacheDir}/Areas of Study/`)
 }
 
-export async function cache() {
+module.exports.cache = cache
+async function cache() {
 	prepareDirs()
 
 	const priorCourseInfo = tryReadJsonFile(`${cacheDir}/Courses/info.prior.json`) || {}
@@ -53,11 +55,10 @@ export async function cache() {
 				fullPath = `https://${fullPath}`
 			}
 
-			return {
-				...file,
+			return Object.assign({}, file, {
 				fullPath,
 				data: loadFile(fullPath),
-			}
+			})
 		})
 
 
@@ -75,7 +76,8 @@ export async function cache() {
 	return Promise.all([courseInfo])
 }
 
-export async function checkForStaleData() {
+module.exports.checkForStaleData = checkForStaleData
+async function checkForStaleData() {
 	prepareDirs()
 
 	const newCourseInfo = await loadJsonFile(COURSE_INFO_LOCATION)

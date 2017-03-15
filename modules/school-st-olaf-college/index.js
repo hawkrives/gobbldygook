@@ -1,22 +1,41 @@
-// can't use export * with babel: see https://github.com/babel/babel/issues/4446
-export {
+'use strict'
+
+const {
 	expandYear,
 	semesterName,
 	toPrettyTerm,
-} from './course-info'
+} = require('./course-info')
 
-export {
+const {
 	buildDeptString,
 	buildDeptNum,
 	deptNumRegex,
 	quacksLikeDeptNum,
 	splitDeptNum,
-} from './deptnums'
+} = require('./deptnums')
 
-export {
+const {
 	convertStudent,
 	getStudentInfo,
 	checkIfLoggedIn,
 	ExtensionNotLoadedError,
 	ExtensionTooOldError,
-} from './sis-parser'
+} = require('./sis-parser')
+
+module.exports = {
+	expandYear,
+	semesterName,
+	toPrettyTerm,
+
+	buildDeptString,
+	buildDeptNum,
+	deptNumRegex,
+	quacksLikeDeptNum,
+	splitDeptNum,
+
+	convertStudent,
+	getStudentInfo,
+	checkIfLoggedIn,
+	ExtensionNotLoadedError,
+	ExtensionTooOldError,
+}

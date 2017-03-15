@@ -1,33 +1,33 @@
-// can't use export * with babel: see https://github.com/babel/babel/issues/4446
+'use strict'
 
-export { areaTypeConstants } from './area-types'
+const { areaTypeConstants } = require('./area-types')
 
-export { encodeStudent, prepareStudentForSave } from './encode-student'
+const { encodeStudent, prepareStudentForSave } = require('./encode-student')
 
-export { filterAreaList } from './filter-area-list'
+const { filterAreaList } = require('./filter-area-list')
 
-export {
+const {
 	findWarnings,
 	checkForInvalidYear,
 	checkForInvalidSemester,
 	checkForTimeConflicts,
-} from './find-course-warnings'
+} = require('./find-course-warnings')
 
-export { isCurrentSemester } from './is-current-semester'
+const { isCurrentSemester } = require('./is-current-semester')
 
-export {
+const {
 	IDENT_COURSE,
 	IDENT_AREA,
 	IDENT_YEAR,
 	IDENT_SEMESTER,
 	IDENT_SCHEDULE,
-} from './item-types'
+} = require('./item-types')
 
-export { Schedule } from './schedule'
+const { Schedule } = require('./schedule')
 
-export { sortStudiesByType } from './sort-studies-by-type'
+const { sortStudiesByType } = require('./sort-studies-by-type')
 
-export {
+const {
 	Student,
 	changeStudentName,
 	changeStudentAdvisor,
@@ -50,8 +50,51 @@ export {
 	reorderScheduleInStudent,
 	renameScheduleInStudent,
 	reorderCourseInSchedule,
-} from './student'
+} = require('./student')
 
-export { validateSchedule } from './validate-schedule'
+const { validateSchedule } = require('./validate-schedule')
 
-export { validateSchedules } from './validate-schedules'
+const { validateSchedules } = require('./validate-schedules')
+
+module.exports = {
+	areaTypeConstants,
+	encodeStudent,
+	prepareStudentForSave,
+	filterAreaList,
+	findWarnings,
+	checkForInvalidYear,
+	checkForInvalidSemester,
+	checkForTimeConflicts,
+	isCurrentSemester,
+	Schedule,
+	sortStudiesByType,
+	IDENT_COURSE,
+	IDENT_AREA,
+	IDENT_YEAR,
+	IDENT_SEMESTER,
+	IDENT_SCHEDULE,
+	validateSchedule,
+	validateSchedules,
+	Student,
+	changeStudentName,
+	changeStudentAdvisor,
+	changeStudentCreditsNeeded,
+	changeStudentMatriculation,
+	changeStudentGraduation,
+	changeStudentSetting,
+	addScheduleToStudent,
+	destroyScheduleFromStudent,
+	addCourseToSchedule,
+	removeCourseFromSchedule,
+	moveCourseToSchedule,
+	addAreaToStudent,
+	removeAreaFromStudent,
+	setOverrideOnStudent,
+	removeOverrideFromStudent,
+	addFabricationToStudent,
+	removeFabricationFromStudent,
+	moveScheduleInStudent,
+	reorderScheduleInStudent,
+	renameScheduleInStudent,
+	reorderCourseInSchedule,
+}

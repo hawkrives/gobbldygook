@@ -1,13 +1,14 @@
-import { findWarnings } from './find-course-warnings'
-import filter from 'lodash/filter'
-import flatten from 'lodash/flatten'
-import identity from 'lodash/identity'
-import map from 'lodash/map'
-import some from 'lodash/some'
-import reject from 'lodash/reject'
-import isUndefined from 'lodash/isUndefined'
+'use strict'
+const { findWarnings } = require('./find-course-warnings')
+const filter = require('lodash/filter')
+const flatten = require('lodash/flatten')
+const identity = require('lodash/identity')
+const map = require('lodash/map')
+const some = require('lodash/some')
+const reject = require('lodash/reject')
+const isUndefined = require('lodash/isUndefined')
 
-export function validateSchedule(schedule) {
+function validateSchedule(schedule) {
 	// Checks to see if the schedule is valid
 	let courses = schedule.courses
 
@@ -22,5 +23,7 @@ export function validateSchedule(schedule) {
 	const warnings = map(filtered, c => c.warning)
 	const hasConflict = some(warnings, w => w === true)
 
-	return { ...schedule, hasConflict, conflicts }
+	return Object.assign({}, schedule, { hasConflict, conflicts })
 }
+
+module.exports.validateSchedule = validateSchedule

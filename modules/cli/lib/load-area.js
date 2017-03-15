@@ -1,14 +1,17 @@
-import pify from 'pify'
-import yaml from 'js-yaml'
-import { enhanceHanson as enhance } from '../../hanson-format'
-import map from 'lodash/map'
-import filter from 'lodash/filter'
-import find from 'lodash/find'
-import maxBy from 'lodash/maxBy'
-import findAreas from './find-areas'
+'use strict'
+const pify = require('pify')
+const yaml = require('js-yaml')
+const { enhanceHanson: enhance } = require('../../hanson-format')
+
+const map = require('lodash/map')
+const filter = require('lodash/filter')
+const find = require('lodash/find')
+const maxBy = require('lodash/maxBy')
+
+const findAreas = require('./find-areas')
 const fs = pify(require('graceful-fs'))
 
-export async function getArea({ name, type, revision }) {
+async function getArea({ name, type, revision }) {
 	type = type.toLowerCase()
 	name = name.toLowerCase()
 
@@ -32,7 +35,7 @@ export async function getArea({ name, type, revision }) {
 	return find(filteredAreas, { revision })
 }
 
-export default async function loadArea({ name, type, revision, source, isCustom }) {
+async function loadArea({ name, type, revision, source, isCustom }) {
 	let obj = isCustom
 		? yaml.safeLoad(source)
 		: await getArea({ name, type, revision })
@@ -48,3 +51,6 @@ export default async function loadArea({ name, type, revision, source, isCustom 
 
 	return result
 }
+
+module.exports = loadArea
+module.exports.getArea = getArea

@@ -1,8 +1,9 @@
 // @flow
-import words from 'lodash/words'
-import deburr from 'lodash/deburr'
+'use strict'
+const words = require('lodash/words')
+const deburr = require('lodash/deburr')
 
-export function splitParagraph(string: string=''): string {
+function splitParagraph(string: string=''): string {
 	let lowercase = string.toLowerCase()
 
 	// removes accents and such from ascii chars
@@ -11,3 +12,5 @@ export function splitParagraph(string: string=''): string {
 	// returns just the words, stripping extra spaces and symbols
 	return words(noAccents)
 }
+
+module.exports.splitParagraph = splitParagraph

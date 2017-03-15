@@ -1,4 +1,5 @@
-export const areaTypeConstants = {
+'use strict'
+module.exports.areaTypeConstants = {
 	DEGREE: 'degree',
 	MAJOR: 'major',
 	CONCENTRATION: 'concentration',

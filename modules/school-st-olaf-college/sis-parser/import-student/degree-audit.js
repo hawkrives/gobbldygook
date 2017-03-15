@@ -1,11 +1,13 @@
-import map from 'lodash/map'
-import fromPairs from 'lodash/fromPairs'
-import mapKeys from 'lodash/mapKeys'
-import unzip from 'lodash/unzip'
-import filter from 'lodash/filter'
-import { selectAll, selectOne } from 'css-select'
-import { partitionByIndex } from '../../../lib'
-import { getText } from './lib'
+'use strict'
+
+const map = require('lodash/map')
+const fromPairs = require('lodash/fromPairs')
+const mapKeys = require('lodash/mapKeys')
+const unzip = require('lodash/unzip')
+const filter = require('lodash/filter')
+const { selectAll, selectOne } = require('css-select')
+const { partitionByIndex } = require('../../../lib')
+const { getText } = require('./lib')
 
 function extractInformationFromInfoTable(table) {
 	// So "info" is the first table; it's essentially key-value pairs, in column-row fashion.
@@ -54,7 +56,8 @@ function extractInformationFromAreaTable(table) {
 	}
 }
 
-export function extractInformationFromDegreeAudit(auditInfo, infoElement) {
+module.exports.extractInformationFromDegreeAudit = extractInformationFromDegreeAudit
+function extractInformationFromDegreeAudit(auditInfo, infoElement) {
 	let [degreeType] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
 	if (degreeType === 'B.A.') {
 		degreeType = 'Bachelor of Arts'
@@ -70,9 +73,5 @@ export function extractInformationFromDegreeAudit(auditInfo, infoElement) {
 	let info = extractInformationFromInfoTable(infoTable)
 	let areas = extractInformationFromAreaTable(areaTable)
 
-	return {
-		...info,
-		...areas,
-		degree: degreeType,
-	}
+	return Object.assign({}, info, areas, { degree: degreeType })
 }

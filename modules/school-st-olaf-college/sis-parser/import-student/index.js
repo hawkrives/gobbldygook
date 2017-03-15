@@ -1,6 +1,15 @@
-export { getStudentInfo } from './get-student-info'
-export { checkIfLoggedIn } from './logged-in'
-export {
+'use strict'
+
+const { getStudentInfo } = require('./get-student-info')
+const { checkIfLoggedIn } = require('./logged-in')
+const {
 	ExtensionNotLoadedError,
 	ExtensionTooOldError,
-} from './lib'
+} = require('./lib')
+
+module.exports = {
+	getStudentInfo,
+	checkIfLoggedIn,
+	ExtensionNotLoadedError,
+	ExtensionTooOldError,
+}

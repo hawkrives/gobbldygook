@@ -1,12 +1,14 @@
-import nomnom from 'nomnom'
-import yaml from 'js-yaml'
+#!/usr/bin/env node
+'use strict'
+const nomnom = require('nomnom')
+const yaml = require('js-yaml')
 
-import update from './gb-update'
-import search from './gb-search'
-import check from './gb-check'
-import lint from './gb-lint'
+const update = require('./gb-update')
+const search = require('./gb-search')
+const check = require('./gb-check')
+const lint = require('./gb-lint')
 
-export function cli() {
+module.exports.cli = function cli() {
 	process.on('unhandledRejection', (reason, p) => {
 		console.error('Unhandled rejection in', p)
 		console.error('Reason:', reason)

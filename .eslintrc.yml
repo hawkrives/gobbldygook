@@ -23,6 +23,7 @@ globals:
   global: false
   require: false
   process: false
+  module: false
 
   # webpack.DefinePlugin
   VERSION: false
@@ -103,7 +104,7 @@ rules:
   react/sort-prop-types: warn
   react/wrap-multilines: off
   react/prefer-stateless-function: warn
-  
+
   flowtype/space-after-type-colon: 'off'
   flowtype/space-before-type-colon: 'off'
 

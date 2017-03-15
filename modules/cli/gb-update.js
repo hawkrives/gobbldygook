@@ -1,6 +1,7 @@
-import { checkForStaleData } from './lib/update-local-data-cache'
+'use strict'
+const { checkForStaleData } = require('./lib/update-local-data-cache')
 
-export default function update() {
+module.exports = function update() {
 	// grab info.json
 	// apply loadData's algorithm to it
 	return checkForStaleData()

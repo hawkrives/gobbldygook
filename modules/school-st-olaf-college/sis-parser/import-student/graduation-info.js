@@ -1,8 +1,10 @@
-import includes from 'lodash/includes'
-import { extractInformationFromDegreeAudit } from './degree-audit'
-import { selectAll } from 'css-select'
+'use strict'
+const includes = require('lodash/includes')
+const { extractInformationFromDegreeAudit } = require('./degree-audit')
+const { selectAll } = require('css-select')
 
-export function getGraduationInformation(dom) {
+module.exports.getGraduationInformation = getGraduationInformation
+function getGraduationInformation(dom) {
 	// #bigbodymainstyle
 	//   table  (top navigation)
 	//   form

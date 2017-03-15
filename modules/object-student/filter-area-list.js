@@ -1,9 +1,10 @@
-import reject from 'lodash/reject'
-import groupBy from 'lodash/groupBy'
-import flatten from 'lodash/flatten'
-import map from 'lodash/map'
-import filter from 'lodash/filter'
-import sortBy from 'lodash/sortBy'
+'use strict'
+const reject = require('lodash/reject')
+const groupBy = require('lodash/groupBy')
+const flatten = require('lodash/flatten')
+const map = require('lodash/map')
+const filter = require('lodash/filter')
+const sortBy = require('lodash/sortBy')
 
 function convertRevisionToYear(rev) {
 	// The +1 is because the year is the beginning of the academic year, but
@@ -26,7 +27,7 @@ function convertRevisionToYear(rev) {
 // You can only enroll in a major if there isn't a newer one, unless your
 // class year is between the previous one and the newest.
 
-export function filterAreaList(areas, { graduation }) {
+function filterAreaList(areas, { graduation }) {
 	// Remove all areas that are closed to new class years.
 	let onlyAvailableAreas = reject(areas,
 		area => area['available through'] && area['available through'] <= graduation)
@@ -70,3 +71,5 @@ export function filterAreaList(areas, { graduation }) {
 
 	return onlyAvailableAreas
 }
+
+module.exports.filterAreaList = filterAreaList

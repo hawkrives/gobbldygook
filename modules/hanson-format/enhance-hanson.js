@@ -1,16 +1,17 @@
 // @flow
-import isRequirementName from '../examine-student/is-requirement-name'
-import filter from 'lodash/filter'
-import forEach from 'lodash/forEach'
-import includes from 'lodash/includes'
-import isString from 'lodash/isString'
-import keys from 'lodash/keys'
-import map from 'lodash/map'
-import mapValues from 'lodash/mapValues'
-import some from 'lodash/some'
-import fromPairs from 'lodash/fromPairs'
-import { makeAreaSlug } from './make-area-slug'
-import { parse } from './parse-hanson-string'
+'use strict'
+const { default: isRequirementName } = require('../examine-student/is-requirement-name')
+const filter = require('lodash/filter')
+const forEach = require('lodash/forEach')
+const includes = require('lodash/includes')
+const isString = require('lodash/isString')
+const keys = require('lodash/keys')
+const map = require('lodash/map')
+const mapValues = require('lodash/mapValues')
+const some = require('lodash/some')
+const fromPairs = require('lodash/fromPairs')
+const { makeAreaSlug } = require('./make-area-slug')
+const { parse } = require('./parse-hanson-string')
 
 const requirementNameRegex = /(.*?) +\(([A-Z\-]+)\)$/i
 const none = (arr, pred) => !some(arr, pred)
@@ -28,7 +29,8 @@ const startRules = {
 
 type StringMap = {[key: string]: string};
 
-export function enhanceHanson(data: any, { topLevel=true, declaredVariables={} }: {topLevel: boolean, declaredVariables: StringMap}={}) {
+module.exports.enhanceHanson = enhanceHanson
+function enhanceHanson(data: any, { topLevel=true, declaredVariables={} }: {topLevel: boolean, declaredVariables: StringMap}={}) {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
 	// 3. throws if it encounters any lowercase keys not in the whitelist

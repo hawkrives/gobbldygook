@@ -1,12 +1,16 @@
-import { parseHtml } from '../parse-html'
-import forOwn from 'lodash/forOwn'
-import forEach from 'lodash/forEach'
-import uuid from 'uuid/v4'
+'use strict'
+const { parseHtml } = require('../parse-html')
+const forOwn = require('lodash/forOwn')
+const forEach = require('lodash/forEach')
+const uuid = require('uuid/v4')
 
-export class ExtensionNotLoadedError extends Error {}
-export class ExtensionTooOldError extends Error {}
+class ExtensionNotLoadedError extends Error {}
+class ExtensionTooOldError extends Error {}
+module.exports.ExtensionNotLoadedError = ExtensionNotLoadedError
+module.exports.ExtensionTooOldError = ExtensionTooOldError
 
-export function fetchHtml(url, fetchArgs, fetchBody) {
+module.exports.fetchHtml = fetchHtml
+function fetchHtml(url, fetchArgs, fetchBody) {
 	if (!global.gobbldygook_extension) {
 		return Promise.reject(new ExtensionNotLoadedError('Extension not loaded'))
 	}
@@ -49,7 +53,8 @@ export function fetchHtml(url, fetchArgs, fetchBody) {
 	})
 }
 
-export function buildFormData(obj) {
+module.exports.buildFormData = buildFormData
+function buildFormData(obj) {
 	let formData = new FormData()
 	forOwn(obj, (val, key) => {
 		formData.append(key, val)
@@ -57,11 +62,13 @@ export function buildFormData(obj) {
 	return formData
 }
 
-export function getText(elems) {
+module.exports.getText = getText
+function getText(elems) {
 	return getTextItems(elems).join('')
 }
 
-export function getTextItems(elems) {
+module.exports.getTextItems = getTextItems
+function getTextItems(elems) {
 	if (elems.children) {
 		elems = elems.children
 	}
@@ -83,6 +90,7 @@ export function getTextItems(elems) {
 	return ret.filter(s => s.length)
 }
 
-export function removeInternalWhitespace(text) {
+module.exports.removeInternalWhitespace = removeInternalWhitespace
+function removeInternalWhitespace(text) {
 	return text.split(/\s+/).join(' ')
 }

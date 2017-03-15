@@ -1,13 +1,14 @@
-import flatten from 'lodash/flatten'
-import includes from 'lodash/includes'
+'use strict'
+const flatten = require('lodash/flatten')
+const includes = require('lodash/includes')
 
-import searchForCourses from './search-for-courses'
+const searchForCourses = require('./search-for-courses')
 
-export function getCoursesByClbid(clbids) {
+function getCoursesByClbid(clbids) {
 	return searchForCourses({ riddles: [course => includes(clbids, course.clbid)] })
 }
 
-export default async function populateCourses(student) {
+async function populateCourses(student) {
 	const clbids = student.clbids || flatten(student.schedules.filter(s => s.active).map(s => s.clbids))
 	let courses = await getCoursesByClbid(clbids)
 	courses = courses.map(c => {
@@ -16,3 +17,6 @@ export default async function populateCourses(student) {
 	})
 	return courses
 }
+
+module.exports = populateCourses
+module.exports.getCoursesByClbid = getCoursesByClbid
