@@ -16,11 +16,9 @@ export function cli() {
 
     if (args.json) {
         console.log(stringify(query, { space: 4 }))
-    }
-    else if (args.yaml) {
+    } else if (args.yaml) {
         console.log(yaml.safeDump(query))
-    }
-    else {
+    } else {
         console.dir(query)
     }
 }

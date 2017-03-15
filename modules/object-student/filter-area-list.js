@@ -70,8 +70,7 @@ function filterAreaList(areas, { graduation }) {
                     )
                     return revision <= graduation &&
                         graduation <= nextAreaRevision
-                }
-                else {
+                } else {
                     // the last revision is always available
                     return revision <= graduation
                 }

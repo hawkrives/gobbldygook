@@ -66,11 +66,9 @@ const checkStudentsMiddleware = (store: any) =>
 
             if (action.type === areaConstants.REFRESH_AREAS) {
                 affectedStudents = toArray(newStudents)
-            }
-            else if (action.type === courseConstants.REFRESH_COURSES) {
+            } else if (action.type === courseConstants.REFRESH_COURSES) {
                 affectedStudents = toArray(newStudents)
-            }
-            else {
+            } else {
                 affectedStudents = filter(newStudents, (_, id) => {
                     if (!(id in oldStudents)) {
                         return true

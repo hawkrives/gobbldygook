@@ -126,47 +126,47 @@ export default function reducer(state = initialState, action) {
     const { type, payload } = action
 
     switch (type) {
-    case UPDATE_QUERY: {
-        return { ...state, query: payload }
-    }
-
-    case SET_PARTIAL_QUERY: {
-        return { ...state, partial: payload }
-    }
-
-    case BEGIN_QUERY: {
-        return { ...state, inProgress: true }
-    }
-
-    case SORT_RESULTS: {
-        state = { ...state, sortBy: payload }
-        const results = sortAndGroup(state)
-        return { ...state, results }
-    }
-
-    case GROUP_RESULTS: {
-        state = { ...state, groupBy: payload }
-        const results = sortAndGroup(state)
-        return { ...state, results }
-    }
-
-    case SUBMIT_QUERY: {
-        state = {
-            ...state,
-            rawResults: payload,
-            inProgress: false,
-            hasQueried: true,
+        case UPDATE_QUERY: {
+            return { ...state, query: payload }
         }
-        const results = sortAndGroup(state)
-        return { ...state, results }
-    }
 
-    case CLEAR_RESULTS: {
-        return { ...state, results: [], rawResults: [], inProgress: false }
-    }
+        case SET_PARTIAL_QUERY: {
+            return { ...state, partial: payload }
+        }
 
-    default: {
-        return state
-    }
+        case BEGIN_QUERY: {
+            return { ...state, inProgress: true }
+        }
+
+        case SORT_RESULTS: {
+            state = { ...state, sortBy: payload }
+            const results = sortAndGroup(state)
+            return { ...state, results }
+        }
+
+        case GROUP_RESULTS: {
+            state = { ...state, groupBy: payload }
+            const results = sortAndGroup(state)
+            return { ...state, results }
+        }
+
+        case SUBMIT_QUERY: {
+            state = {
+                ...state,
+                rawResults: payload,
+                inProgress: false,
+                hasQueried: true,
+            }
+            const results = sortAndGroup(state)
+            return { ...state, results }
+        }
+
+        case CLEAR_RESULTS: {
+            return { ...state, results: [], rawResults: [], inProgress: false }
+        }
+
+        default: {
+            return state
+        }
     }
 }

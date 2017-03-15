@@ -23,12 +23,10 @@ export default function CourseTitle(
         if (courseName.length > 3) {
             courseName = courseName.substring(3)
         }
-    }
-    else if (type === 'Topic') {
+    } else if (type === 'Topic') {
         courseName = `${name.replace(/top.*: */gi, '')}`
         subtitle = title
-    }
-    else if (type === 'Seminar') {
+    } else if (type === 'Seminar') {
         courseName = title
         subtitle = name
     }

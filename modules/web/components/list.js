@@ -30,9 +30,9 @@ export default function List(props: ListProps) {
         child =>
             isValidElement(child)
                 ? cloneElement(child, {
-                    ...child.props,
-                    className: cx('list-item', child.props.className),
-                })
+                      ...child.props,
+                      className: cx('list-item', child.props.className),
+                  })
                 : child
     )
 

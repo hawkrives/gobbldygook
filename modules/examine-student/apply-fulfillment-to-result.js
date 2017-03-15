@@ -41,8 +41,7 @@ export default function applyFulfillmentToResult(
             // TODO: um... actually, we might not want this. we'll have to see.
             counter.$num += 1
             needsFulfillment = true
-        }
-        else if (computedResult === true) {
+        } else if (computedResult === true) {
             // if we already have enough matches in an 'at-most' query, don't add
             // another one
             needsFulfillment = false
@@ -63,8 +62,7 @@ export default function applyFulfillmentToResult(
             has: counted,
             needs: counter.$num,
         })
-    }
-    else {
+    } else {
         throw new Error(
             'Expression needs a fulfillment, but expression is not countable!'
         )

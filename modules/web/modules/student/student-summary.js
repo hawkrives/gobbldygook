@@ -62,9 +62,9 @@ export default function StudentSummary(props) {
 
     const NameEl = props.onChangeName
         ? <ContentEditable
-            className="autosize-input"
-            onBlur={props.onChangeName}
-            value={String(student.name)}
+              className="autosize-input"
+              onBlur={props.onChangeName}
+              value={String(student.name)}
           />
         : <span>{String(student.name)}</span>
 
@@ -94,17 +94,17 @@ export default function StudentSummary(props) {
 
     const graduationEl = props.onChangeGraduation
         ? <ContentEditable
-            className="autosize-input"
-            onBlur={props.onChangeGraduation}
-            value={String(student.graduation)}
+              className="autosize-input"
+              onBlur={props.onChangeGraduation}
+              value={String(student.graduation)}
           />
         : <span>{String(student.graduation)}</span>
 
     const matriculationEl = props.onChangeMatriculation
         ? <ContentEditable
-            className="autosize-input"
-            onBlur={props.onChangeMatriculation}
-            value={String(student.matriculation)}
+              className="autosize-input"
+              onBlur={props.onChangeMatriculation}
+              value={String(student.matriculation)}
           />
         : <span>{String(student.matriculation)}</span>
 
@@ -115,8 +115,8 @@ export default function StudentSummary(props) {
             <header className="student-summary--header">
                 {showAvatar
                     ? <AvatarLetter
-                        className={cx('student-letter', canGraduateClass)}
-                        value={student.name}
+                          className={cx('student-letter', canGraduateClass)}
+                          value={student.name}
                       />
                     : null}
                 <div className="intro">

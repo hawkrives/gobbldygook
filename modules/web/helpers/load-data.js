@@ -37,8 +37,7 @@ function loadDataFile(url) {
 
                 if (type === 'result') {
                     resolve(contents)
-                }
-                else if (type === 'error') {
+                } else if (type === 'error') {
                     resolve(contents)
                 }
             }
@@ -71,8 +70,7 @@ export function checkSupport() {
 
                 if (type === 'result') {
                     resolve(contents)
-                }
-                else if (type === 'error') {
+                } else if (type === 'error') {
                     resolve(contents)
                 }
             }
@@ -87,8 +85,7 @@ export default function loadData() {
 
     if (navigator.onLine) {
         return Promise.all(infoFiles.map(loadDataFile))
-    }
-    else {
+    } else {
         return Promise.resolve(null)
     }
 }

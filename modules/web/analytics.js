@@ -22,8 +22,7 @@ export function ga(...args: any[]) {
     if (process.env.NODE_ENV === 'production') {
         try {
             window.ga(...args)
-        }
-        catch (e) {} // eslint-disable-line no-empty
+        } catch (e) {} // eslint-disable-line no-empty
     }
 }
 

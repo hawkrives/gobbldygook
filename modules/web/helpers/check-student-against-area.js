@@ -30,8 +30,7 @@ export const checkStudentAgainstArea = student =>
 
                     if (type === 'result') {
                         resolve(contents)
-                    }
-                    else if (type === 'error') {
+                    } else if (type === 'error') {
                         resolve({ _error: contents.message })
                     }
                 }

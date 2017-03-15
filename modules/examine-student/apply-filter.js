@@ -21,8 +21,7 @@ export default function applyFilter(
     // a filter will be either a where-style query or a list of courses
     if (expr.$filterType === 'where') {
         filtered = filterByWhereClause(courses, expr.$where)
-    }
-    else if (expr.$filterType === 'of') {
+    } else if (expr.$filterType === 'of') {
         filtered = filter(expr.$of, course => checkForCourse(course, courses))
     }
 

@@ -39,13 +39,13 @@ function AreaOfStudy(props) {
                 <h1 className="area--title">
                     {slug && !isCustom && isOpen
                         ? <a
-                            className="catalog-link"
-                            href={
+                              className="catalog-link"
+                              href={
                                   `http://catalog.stolaf.edu/academic-programs/${slug}/`
                               }
-                            target="_blank"
-                            onClick={ev => ev.stopPropagation()}
-                            title="View in the St. Olaf Catalog"
+                              target="_blank"
+                              onClick={ev => ev.stopPropagation()}
+                              title="View in the St. Olaf Catalog"
                           >
                               {name}
                           </a>
@@ -92,11 +92,9 @@ function AreaOfStudy(props) {
     let contents = null
     if (error) {
         contents = <p className="message area--error">{error} {':('}</p>
-    }
-    else if (!checked) {
+    } else if (!checked) {
         contents = <p className="message area--loading">Loading…</p>
-    }
-    else {
+    } else {
         contents = (
             <Requirement
                 {...areaDetails}

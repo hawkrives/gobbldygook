@@ -77,8 +77,7 @@ class GraduationStatusContainer extends Component {
 
         if (has(this.props.student.overrides, codifiedPath)) {
             this.props.removeOverride(this.props.student.id, codifiedPath)
-        }
-        else {
+        } else {
             this.props.setOverride(this.props.student.id, codifiedPath, true)
         }
     };

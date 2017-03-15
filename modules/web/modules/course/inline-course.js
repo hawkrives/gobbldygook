@@ -114,10 +114,10 @@ class InlineCourse extends Component {
 
                 {this.state.isOpen
                     ? <ModalCourse
-                        onClose={this.closeModal}
-                        course={course}
-                        scheduleId={scheduleId}
-                        studentId={studentId}
+                          onClose={this.closeModal}
+                          course={course}
+                          scheduleId={scheduleId}
+                          studentId={studentId}
                       />
                     : null}
             </article>

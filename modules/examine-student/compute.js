@@ -90,12 +90,10 @@ export default function compute(
             dirty,
             fulfillment,
         })
-    }
-    else if ('message' in requirement) {
+    } else if ('message' in requirement) {
         // or ask for an override
         computed = false
-    }
-    else {
+    } else {
         // or throw an error
         throw new TypeError(
             'compute(): either `message` or `result` is required'

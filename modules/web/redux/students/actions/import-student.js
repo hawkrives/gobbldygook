@@ -7,16 +7,14 @@ export function importStudent({ data, type } = {}) {
     if (type === 'application/json') {
         try {
             stu = JSON.parse(data)
-        }
-        catch (err) {
+        } catch (err) {
             return {
                 type: IMPORT_STUDENT,
                 error: true,
                 payload: err,
             }
         }
-    }
-    else {
+    } else {
         return {
             type: IMPORT_STUDENT,
             error: true,

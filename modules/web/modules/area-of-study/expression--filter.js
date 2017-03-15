@@ -38,8 +38,7 @@ FilterWhere.propTypes = {
 export default function Filter(props) {
     if (props.expr.$of) {
         return <FilterOf {...props} />
-    }
-    else if (props.expr.$where) {
+    } else if (props.expr.$where) {
         return <FilterWhere {...props} />
     }
     return <div>{JSON.stringify(props, null, 2)}</div>

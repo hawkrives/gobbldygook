@@ -10,8 +10,7 @@ export default function applyFulfillmentToExpression(
     if (expr.$type === 'boolean' && expr.$booleanType === 'or') {
         expr._fulfillment = fulfillment
         expr.$or.push(fulfillment)
-    }
-    else if (
+    } else if (
         (expr.$type === 'boolean' && expr.$booleanType === 'and') ||
         expr.$type === 'course'
     ) {

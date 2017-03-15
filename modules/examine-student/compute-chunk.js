@@ -91,29 +91,25 @@ export default function computeChunk(
             dirty,
             isNeeded,
         }))
-    }
-    else if (expr.$type === 'course') {
+    } else if (expr.$type === 'course') {
         ({ computedResult } = computeCourse({
             expr,
             courses,
             dirty,
             isNeeded,
         }))
-    }
-    else if (expr.$type === 'modifier') {
+    } else if (expr.$type === 'modifier') {
         ({ computedResult, matches, counted } = computeModifier({
             expr,
             ctx,
             courses,
         }))
-    }
-    else if (expr.$type === 'occurrence') {
+    } else if (expr.$type === 'occurrence') {
         ({ computedResult, matches, counted } = computeOccurrence({
             expr,
             courses,
         }))
-    }
-    else if (expr.$type === 'of') {
+    } else if (expr.$type === 'of') {
         ({ computedResult, matches, counted } = computeOf({
             expr,
             ctx,
@@ -121,17 +117,14 @@ export default function computeChunk(
             dirty,
             isNeeded,
         }))
-    }
-    else if (expr.$type === 'reference') {
+    } else if (expr.$type === 'reference') {
         ({ computedResult, matches } = computeReference({ expr, ctx }))
-    }
-    else if (expr.$type === 'where') {
+    } else if (expr.$type === 'where') {
         ({ computedResult, matches, counted } = computeWhere({
             expr,
             courses,
         }))
-    }
-    else {
+    } else {
         throw new TypeError(
             `computeChunk(): the type "${expr.$type}" is not a valid expression type.`
         )
@@ -238,13 +231,11 @@ export function computeBoolean(
             return thisResult
         })
         computedResult = some(results)
-    }
-    else if (expr.$booleanType === 'and') {
+    } else if (expr.$booleanType === 'and') {
         const results = map(expr.$and, req =>
             computeChunk({ expr: req, ctx, courses, dirty, isNeeded }))
         computedResult = every(results)
-    }
-    else {
+    } else {
         throw new TypeError(
             `computeBoolean(): neither $or nor $and could be found in ${stringify(expr)}`
         )
@@ -301,8 +292,7 @@ export function computeCourse(
     if (isNeeded) {
         dirty.add(crsident)
         return { computedResult: true, match }
-    }
-    else {
+    } else {
         return { computedResult: false, match }
     }
 }
@@ -341,26 +331,21 @@ export function computeModifier(
     if (expr.$from === 'children') {
         assertKeys(expr, '$children')
         filtered = getMatchesFromChildren(expr, ctx)
-    }
-    else if (expr.$from === 'filter') {
+    } else if (expr.$from === 'filter') {
         assertKeys(ctx, 'filter')
         filtered = getMatchesFromFilter(ctx)
-    }
-    else if (expr.$from === 'filter-where') {
+    } else if (expr.$from === 'filter-where') {
         assertKeys(expr, '$where')
         filtered = getMatchesFromFilter(ctx)
         filtered = filterByWhereClause(filtered, expr.$where)
-    }
-    else if (expr.$from === 'where') {
+    } else if (expr.$from === 'where') {
         assertKeys(expr, '$where')
         filtered = filterByWhereClause(courses, expr.$where)
-    }
-    else if (expr.$from === 'children-where') {
+    } else if (expr.$from === 'children-where') {
         assertKeys(expr, '$where', '$children')
         filtered = getMatchesFromChildren(expr, ctx)
         filtered = filterByWhereClause(filtered, expr.$where)
-    }
-    else {
+    } else {
         throw new TypeError(
             `computeModifier: "${expr.$from}" is not a valid $from value`
         )
@@ -389,14 +374,11 @@ export function computeModifier(
     // count things
     if (what === 'course') {
         numCounted = countCourses(filtered)
-    }
-    else if (what === 'department') {
+    } else if (what === 'department') {
         numCounted = countDepartments(filtered)
-    }
-    else if (what === 'credit') {
+    } else if (what === 'credit') {
         numCounted = countCredits(filtered)
-    }
-    else {
+    } else {
         throw new TypeError(
             `computeModifier: "${what}" is not a valid thing to count`
         )
@@ -506,22 +488,19 @@ export function computeOf(
             if (didPass) {
                 isNeeded = false
             }
-        }
-        else if (expr.$count.$operator === '$eq') {
+        } else if (expr.$count.$operator === '$eq') {
             // If we have exactly the right number, stop.
             if (didPass) {
                 isNeeded = false
             }
-        }
-        else if (expr.$count.$operator === '$lte') {
+        } else if (expr.$count.$operator === '$lte') {
             // We can't use computeCountWithOperator here, because 0 <= N for all N.
             // Instead, we check to see if the next step would cause us to go over our limit.
             // If it would, we stop the loop.
             if (count + 1 >= expr.$count.$num) {
                 isNeeded = false
             }
-        }
-        else {
+        } else {
             throw new TypeError(
                 `computeOf: not sure what to do with a "${expr.$count.$operator}" operator`
             )

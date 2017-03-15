@@ -12,16 +12,16 @@ export default function reducer(
     const { type, payload } = action
 
     switch (type) {
-    case LOADING_AREAS: {
-        return { ...state, isLoading: true }
-    }
+        case LOADING_AREAS: {
+            return { ...state, isLoading: true }
+        }
 
-    case LOAD_ALL_AREAS: {
-        return { ...state, data: payload, isLoading: false }
-    }
+        case LOAD_ALL_AREAS: {
+            return { ...state, data: payload, isLoading: false }
+        }
 
-    default: {
-        return state
-    }
+        default: {
+            return state
+        }
     }
 }

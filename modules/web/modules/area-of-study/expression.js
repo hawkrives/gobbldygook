@@ -22,8 +22,7 @@ function makeBooleanExpression({ expr, ctx }) {
 
     if ('$and' in expr) {
         kind = '$and'
-    }
-    else if ('$or' in expr) {
+    } else if ('$or' in expr) {
         kind = '$or'
     }
 
@@ -134,8 +133,7 @@ export default function Expression(props) {
 
     if ($type === 'boolean') {
         ({ contents } = makeBooleanExpression(props))
-    }
-    else if ($type === 'course') {
+    } else if ($type === 'course') {
         // _request is the original course that was written in the spec.
         // $course is the matched course. It's used mostly by where-expressions and the like.
         contents = (
@@ -145,25 +143,19 @@ export default function Expression(props) {
             />
         )
         result = <ResultIndicator result={wasTaken} />
-    }
-    else if ($type === 'reference') {
+    } else if ($type === 'reference') {
         contents = expr.$requirement
         result = <ResultIndicator result={computationResult} />
-    }
-    else if ($type === 'of') {
+    } else if ($type === 'of') {
         ({ contents, description } = makeOfExpression(props))
-    }
-    else if ($type === 'modifier') {
+    } else if ($type === 'modifier') {
         ({ description } = makeModifierExpression(props))
         result = <ResultIndicator result={computationResult} />
-    }
-    else if ($type === 'where') {
+    } else if ($type === 'where') {
         ({ description, contents } = makeWhereExpression(props))
-    }
-    else if ($type === 'occurrence') {
+    } else if ($type === 'occurrence') {
         ({ description, contents } = makeOccurrenceExpression(props))
-    }
-    else {
+    } else {
         log(`<Expression />: type not handled: ${$type}`)
         log(props)
         contents = JSON.stringify(expr, null, 2)

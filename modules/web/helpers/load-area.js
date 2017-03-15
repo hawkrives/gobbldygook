@@ -9,11 +9,9 @@ const log = debug('worker:load-area')
 function resolveArea(areas, query) {
     if (!('revision' in query)) {
         return maxBy(areas, 'revision')
-    }
-    else if (some(areas, possibility => 'dateAdded' in possibility)) {
+    } else if (some(areas, possibility => 'dateAdded' in possibility)) {
         return maxBy(areas, 'dateAdded')
-    }
-    else {
+    } else {
         return maxBy(areas, possibility => possibility.sourcePath.length)
     }
 }
@@ -47,11 +45,9 @@ function loadArea(areaQuery) {
 
             if (result.length === 1) {
                 result = result[0]
-            }
-            else if (result.length >= 2) {
+            } else if (result.length >= 2) {
                 result = resolveArea(result, dbQuery)
-            }
-            else {
+            } else {
                 return {
                     name,
                     type,

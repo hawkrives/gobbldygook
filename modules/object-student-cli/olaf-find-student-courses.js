@@ -21,23 +21,20 @@ async function populateStudent(filename) {
     let student
     try {
         student = await loadYamlFile(filename)
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Problem loading student', err)
     }
 
     try {
         student.courses = await populateCourses(student)
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Problem populating courses', err)
     }
 
     try {
         student.studies.push({ type: 'degree', name: 'Bachelor of Arts' })
         student.areas = await Promise.all(student.studies.map(loadArea))
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Problem loading areas', err)
     }
 

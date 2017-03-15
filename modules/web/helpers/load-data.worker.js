@@ -62,11 +62,9 @@ function cacheItemHash(path, type, hash) {
 function getCacheStoreName(type) {
     if (type === 'courses') {
         return 'courseCache'
-    }
-    else if (type === 'areas') {
+    } else if (type === 'areas') {
         return 'areaCache'
-    }
-    else {
+    } else {
         throw new TypeError(
             `needsUpdate(): "${type}" is not a valid store type`
         )
@@ -143,11 +141,9 @@ function cleanPriorData(path, type) {
     let ps
     if (type === 'courses') {
         ps = cleanPriorCourses(path)
-    }
-    else if (type === 'areas') {
+    } else if (type === 'areas') {
         ps = cleanPriorAreas(path)
-    }
-    else {
+    } else {
         throw new TypeError(
             `cleanPriorData(): "${type}" is not a valid store type`
         )
@@ -168,8 +164,7 @@ function storeData(path, type, data) {
     // store the new data
     if (type === 'courses') {
         return storeCourses(path, data)
-    }
-    else if (type === 'areas') {
+    } else if (type === 'areas') {
         return storeArea(path, data)
     }
 }
@@ -177,8 +172,7 @@ function storeData(path, type, data) {
 function parseData(raw, type) {
     if (type === 'courses') {
         return JSON.parse(raw)
-    }
-    else if (type === 'areas') {
+    } else if (type === 'areas') {
         let data = yaml.safeLoad(raw)
         data.source = raw
         return data
@@ -374,8 +368,7 @@ function loadFiles(url, infoFileBase) {
             )
             if (type === 'courses') {
                 dispatch('courses', 'refreshCourses')
-            }
-            else if (type === 'areas') {
+            } else if (type === 'areas') {
                 dispatch('areas', 'refreshAreas')
             }
 

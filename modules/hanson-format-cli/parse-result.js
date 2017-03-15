@@ -14,11 +14,9 @@ function parseString(args, string) {
 
     if (args.json) {
         console.log(stringify(parsed, { space: 4 }))
-    }
-    else if (args.yaml) {
+    } else if (args.yaml) {
         console.log(yaml.safeDump(parsed))
-    }
-    else {
+    } else {
         console.log(util.inspect(parsed, { depth: null }))
     }
 }
@@ -35,8 +33,7 @@ module.exports.cli = function cli() {
         getStdin().then(string => parseString(args, string)).catch(err => {
             throw err
         })
-    }
-    else {
+    } else {
         parseString(args, args.string)
     }
 }

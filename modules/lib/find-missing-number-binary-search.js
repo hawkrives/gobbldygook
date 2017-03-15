@@ -13,15 +13,13 @@ function findMissingNumberBinarySearch(arr: number[]): ?number {
                 return arr[middle] - 1
             }
             last = middle
-        }
-        else if (arr[last] - arr[middle] !== last - middle) {
+        } else if (arr[last] - arr[middle] !== last - middle) {
             // there is a hole in the second half
             if (last - middle === 1 && arr[last] - arr[middle] > 1) {
                 return arr[middle] + 1
             }
             first = middle
-        }
-        else {
+        } else {
             return null
         }
 

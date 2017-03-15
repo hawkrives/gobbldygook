@@ -61,8 +61,7 @@ function extractInformationFromDegreeAudit(auditInfo, infoElement) {
     let [degreeType] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
     if (degreeType === 'B.A.') {
         degreeType = 'Bachelor of Arts'
-    }
-    else if (degreeType === 'B.M.') {
+    } else if (degreeType === 'B.M.') {
         degreeType = 'Bachelor of Music'
     }
 

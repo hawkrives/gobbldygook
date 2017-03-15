@@ -49,8 +49,7 @@ class UploadFileScreen extends Component {
                 let parsed
                 try {
                     parsed = JSON.parse(data)
-                }
-                catch (err) {
+                } catch (err) {
                     return {
                         name: file.name,
                         error: `could not parse "${data}" because "${err.message}"`,
@@ -60,8 +59,7 @@ class UploadFileScreen extends Component {
                 let converted
                 try {
                     converted = initStudent(parsed)
-                }
-                catch (err) {
+                } catch (err) {
                     return { name: file.name, error: err.message }
                 }
 

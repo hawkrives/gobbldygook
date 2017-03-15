@@ -41,8 +41,7 @@ function fetchHtml(url, fetchArgs, fetchBody) {
 
             if (event.data.error) {
                 reject(event.data.error)
-            }
-            else {
+            } else {
                 resolve(parseHtml(event.data.text))
             }
         }
@@ -90,8 +89,7 @@ function getTextItems(elems) {
     forEach(elems, elem => {
         if (elem.type === 'text') {
             ret = ret.concat(elem.data.trim())
-        }
-        else if (elem.children && elem.type !== 'comment') {
+        } else if (elem.children && elem.type !== 'comment') {
             ret = ret.concat(getText(elem.children))
         }
     })

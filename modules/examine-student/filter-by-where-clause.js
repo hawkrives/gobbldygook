@@ -45,8 +45,7 @@ export default function filterByWhereClause(
             fullList,
             counter,
         })
-    }
-    else if (clause.$type === 'boolean') {
+    } else if (clause.$type === 'boolean') {
         // either an and- or or-clause.
         // and-clauses become the result of applying each invocation to the
         // result of the prior one. they are the list of unique courses which
@@ -61,8 +60,7 @@ export default function filterByWhereClause(
                 })
             })
             return filtered
-        }
-        else if (clause.$booleanType === 'or') {
+        } else if (clause.$booleanType === 'or') {
             // or-clauses are the list of unique courses that meet one or more
             // of the qualifications.
             let filtrations = []
@@ -75,15 +73,13 @@ export default function filterByWhereClause(
             // uniquify the list of possibilities by way of turning them into
             // the simplified representations.
             return uniqBy(filtrations, simplifyCourse)
-        }
-        else {
+        } else {
             // only 'and' and 'or' are currently supported.
             throw new TypeError(
                 `filterByWhereClause: neither $or nor $and were present in ${JSON.stringify(clause)}`
             )
         }
-    }
-    else {
+    } else {
         // where-clauses *must* be either a 'boolean' or a 'qualification'
         throw new TypeError(
             `filterByWhereClause: wth kind of type is a "${clause.$type}" clause?`
@@ -115,11 +111,9 @@ export function filterByQualification(
                     `filterByQualification: neither $or nor $and were present in ${JSON.stringify(value)}`
                 )
             }
-        }
-        else if (value.$type === 'function') {
+        } else if (value.$type === 'function') {
             applyQualifictionFunction({ value, fullList, list })
-        }
-        else {
+        } else {
             throw new TypeError(
                 `filterByQualification: ${value.$type} is not a valid type for a query.`
             )

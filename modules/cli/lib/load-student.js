@@ -7,8 +7,7 @@ module.exports = async function loadStudent(filename, { isFile = true } = {}) {
     let contents
     if (isFile) {
         contents = readFileSync(filename, 'utf-8')
-    }
-    else {
+    } else {
         contents = filename
     }
     let data = yaml.safeLoad(contents)

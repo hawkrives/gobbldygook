@@ -91,27 +91,21 @@ function evaluateChunk({ expr, ctx, courses, allMatched }) {
         res = allMatched.concat(
             evaluateBoolean({ expr, ctx, courses, allMatched })
         )
-    }
-    else if (expr.$type === 'course') {
+    } else if (expr.$type === 'course') {
         res = allMatched.concat(evaluateCourse({ expr, courses, allMatched }))
-    }
-    else if (expr.$type === 'modifier') {
+    } else if (expr.$type === 'modifier') {
         res = allMatched.concat(
             evaluateModifier({ expr, ctx, courses, allMatched })
         )
-    }
-    else if (expr.$type === 'occurrence') {
+    } else if (expr.$type === 'occurrence') {
         res = allMatched.concat(
             evaluateOccurrence({ expr, courses, allMatched })
         )
-    }
-    else if (expr.$type === 'of') {
+    } else if (expr.$type === 'of') {
         res = allMatched.concat(evaluateOf({ expr, ctx, courses, allMatched }))
-    }
-    else if (expr.$type === 'reference') {
+    } else if (expr.$type === 'reference') {
         res = allMatched
-    }
-    else if (expr.$type === 'where') {
+    } else if (expr.$type === 'where') {
         res = allMatched.concat(evaluateWhere({ expr, courses, allMatched }))
     }
     console.log(padStart('', indent), 'evaluateChunk done', res.length)
@@ -127,8 +121,7 @@ function evaluateBoolean({ expr, ctx, courses, allMatched }) {
     if ('$or' in expr) {
         res = flatMap(expr.$or, req =>
             evaluateChunk({ expr: req, ctx, courses, allMatched }))
-    }
-    else if ('$and' in expr) {
+    } else if ('$and' in expr) {
         res = flatMap(expr.$and, req =>
             evaluateChunk({ expr: req, ctx, courses, allMatched }))
     }
@@ -163,18 +156,14 @@ function evaluateModifier({ expr, ctx, courses }) {
     // get matches
     if (expr.$from === 'children') {
         filtered = getMatchesFromChildren(expr, ctx)
-    }
-    else if (expr.$from === 'filter') {
+    } else if (expr.$from === 'filter') {
         filtered = getMatchesFromFilter(ctx)
-    }
-    else if (expr.$from === 'filter-where') {
+    } else if (expr.$from === 'filter-where') {
         filtered = getMatchesFromFilter(ctx)
         filtered = filterByWhereClause(filtered, expr.$where)
-    }
-    else if (expr.$from === 'where') {
+    } else if (expr.$from === 'where') {
         filtered = filterByWhereClause(courses, expr.$where)
-    }
-    else if (expr.$from === 'children-where') {
+    } else if (expr.$from === 'children-where') {
         filtered = getMatchesFromChildren(expr, ctx)
         filtered = filterByWhereClause(filtered, expr.$where)
     }

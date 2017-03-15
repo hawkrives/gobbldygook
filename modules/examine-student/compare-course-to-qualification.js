@@ -23,16 +23,14 @@ export default function compareCourseToQualification(
         throw new TypeError(
             "compareCourseToQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)"
         )
-    }
-    else if (isPlainObject($value)) {
+    } else if (isPlainObject($value)) {
         return compareCourseToQualificationViaObject(course, {
             $key,
             $operator,
             $value,
             $type,
         })
-    }
-    else {
+    } else {
         return compareCourseToQualificationViaOperator(course, {
             $key,
             $operator,
@@ -63,8 +61,7 @@ function compareCourseToQualificationViaObject(
             $type: 'qualification',
         }
         return compareCourseToQualification(course, simplifiedOperator)
-    }
-    else if ($value.$type === 'boolean') {
+    } else if ($value.$type === 'boolean') {
         if ($value.$booleanType === 'or') {
             return some($value.$or, val =>
                 compareCourseToQualification(course, {
@@ -73,8 +70,7 @@ function compareCourseToQualificationViaObject(
                     $value: val,
                     $type,
                 }))
-        }
-        else if ($value.$booleanType === 'and') {
+        } else if ($value.$booleanType === 'and') {
             return every($value.$and, val =>
                 compareCourseToQualification(course, {
                     $key,
@@ -82,14 +78,12 @@ function compareCourseToQualificationViaObject(
                     $value: val,
                     $type,
                 }))
-        }
-        else {
+        } else {
             throw new TypeError(
                 `compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`
             )
         }
-    }
-    else {
+    } else {
         throw new TypeError(
             `compareCourseToQualification(): "${$value.$type}" is not a valid type for a qualification's value.`
         )
@@ -109,26 +103,20 @@ function compareCourseToQualificationViaOperator(
             return includes(course[$key], $value)
         }
         return course[$key] === $value
-    }
-    else if ($operator === '$ne') {
+    } else if ($operator === '$ne') {
         if (Array.isArray(course[$key])) {
             return !includes(course[$key], $value)
         }
         return course[$key] !== $value
-    }
-    else if ($operator === '$lt') {
+    } else if ($operator === '$lt') {
         return course[$key] < $value
-    }
-    else if ($operator === '$lte') {
+    } else if ($operator === '$lte') {
         return course[$key] <= $value
-    }
-    else if ($operator === '$gt') {
+    } else if ($operator === '$gt') {
         return course[$key] > $value
-    }
-    else if ($operator === '$gte') {
+    } else if ($operator === '$gte') {
         return course[$key] >= $value
-    }
-    else {
+    } else {
         throw new TypeError(
             `compareCourseToQualificationViaOperator: "${$operator} is not a valid operator"`
         )

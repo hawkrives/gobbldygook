@@ -16,8 +16,7 @@ const log = (...args) =>
 function tryEvaluate(student, area) {
     try {
         return evaluate(student, area)
-    }
-    catch (err) {
+    } catch (err) {
         log('checkStudentAgainstArea:', err)
         return { ...area, _error: err.message }
     }
@@ -47,13 +46,11 @@ function checkStudentAgainstArea(student: any, area: any) {
         let bits = []
         if (result.$type === 'of') {
             bits = result.$of
-        }
-        else if (
+        } else if (
             result.$type === 'boolean' && result.$booleanType === 'and'
         ) {
             bits = result.$and
-        }
-        else if (result.$type === 'boolean' && result.$booleanType === 'or') {
+        } else if (result.$type === 'boolean' && result.$booleanType === 'or') {
             bits = result.$or
         }
         let finalReqs = map(bits, b => b._result)

@@ -99,18 +99,18 @@ export default function StudentPicker(props) {
 
             {size(students) > 0
                 ? <StudentList
-                    destroyStudent={destroyStudent}
-                    filter={filterText}
-                    isEditing={isEditing}
-                    sortBy={sortBy}
-                    groupBy={groupBy}
-                    students={students}
+                      destroyStudent={destroyStudent}
+                      filter={filterText}
+                      isEditing={isEditing}
+                      sortBy={sortBy}
+                      groupBy={groupBy}
+                      students={students}
                   />
                 : <Button
-                    className="make-student"
-                    link
-                    type="raised"
-                    to="/create"
+                      className="make-student"
+                      link
+                      type="raised"
+                      to="/create"
                   >
                       Add a Student
                   </Button>}

@@ -26,42 +26,32 @@ export default function collectMatches(expr: Expression): Course[] {
         if (expr._result === true) {
             matches = [expr.$course || expr]
         }
-    }
-    else if (expr.$type === 'requirement') {
+    } else if (expr.$type === 'requirement') {
         // next, we have the "run collectMatches on all my children" cases.
         if ('result' in expr) {
             matches = collectMatches(expr.result)
-        }
-        else {
+        } else {
             matches = []
         }
-    }
-    else if (expr.$type === 'boolean') {
+    } else if (expr.$type === 'boolean') {
         if (expr.$booleanType === 'and') {
             matches = flatMap(expr.$and, collectMatches)
-        }
-        else {
+        } else {
             matches = flatMap(expr.$or, collectMatches)
         }
-    }
-    else if (expr.$type === 'of') {
+    } else if (expr.$type === 'of') {
         matches = flatMap(expr.$of, collectMatches)
-    }
-    else if (expr.$type === 'modifier') {
+    } else if (expr.$type === 'modifier') {
         // finally, we have the "pre-computed _matches" cases, where the evaluation
         // of the expression attached the matches to the expression itself.
         matches = expr._matches
-    }
-    else if (expr.$type === 'occurrence') {
+    } else if (expr.$type === 'occurrence') {
         matches = expr._matches
-    }
-    else if (expr.$type === 'reference') {
+    } else if (expr.$type === 'reference') {
         matches = expr._matches
-    }
-    else if (expr.$type === 'where') {
+    } else if (expr.$type === 'where') {
         matches = expr._matches
-    }
-    else {
+    } else {
         throw new TypeError(
             `collectMatches(): unknown expression type "${expr.$type}"`
         )

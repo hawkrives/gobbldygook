@@ -133,8 +133,7 @@ const semesterTarget = {
                 toSchedule.id,
                 clbid
             )
-        }
-        else {
+        } else {
             props.addCourse(props.studentId, toSchedule.id, clbid)
         }
     },

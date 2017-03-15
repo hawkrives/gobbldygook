@@ -68,8 +68,7 @@ export class AreaEditScreen extends Component {
         let data = omit(area, 'sourcePath')
         if ('source' in data && typeof data.source === 'string') {
             data = data.source
-        }
-        else {
+        } else {
             data = yaml.safeDump(data)
         }
 
@@ -87,8 +86,7 @@ export class AreaEditScreen extends Component {
     handleFocusChange = focused => {
         if (focused) {
             keymage.pushScope('edit-area')
-        }
-        else {
+        } else {
             keymage.popScope()
         }
 

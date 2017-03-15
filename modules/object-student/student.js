@@ -389,8 +389,7 @@ function reorderCourseInSchedule(student, scheduleId, { clbid, index }) {
 
     if (index < 0) {
         index = 0
-    }
-    else if (index >= schedule.clbids.length) {
+    } else if (index >= schedule.clbids.length) {
         index = schedule.clbids.length - 1
     }
 

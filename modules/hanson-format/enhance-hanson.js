@@ -141,8 +141,7 @@ function enhanceHanson(
             // also set $type; the PEG can't do it b/c the spec file is YAML
             // w/ PEG result strings.
             value.$type = 'requirement'
-        }
-        else if (key === 'result' || key === 'filter') {
+        } else if (key === 'result' || key === 'filter') {
             if (typeof value !== 'string') {
                 throw new Error(
                     `value ${value.toString()} should be a string, not a ${typeof value}`
@@ -169,8 +168,7 @@ function enhanceHanson(
                     titles,
                     startRule: startRules[key],
                 })
-            }
-            catch (e) {
+            } catch (e) {
                 throw new SyntaxError(
                     `enhanceHanson: ${e.message} (in '${value}')`
                 )

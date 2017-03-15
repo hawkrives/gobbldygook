@@ -54,15 +54,13 @@ function moveToSchedule(
     const targetScheduleId = ev.target.value
     if (targetScheduleId === '$none') {
         return
-    }
-    else if (targetScheduleId === '$remove') {
+    } else if (targetScheduleId === '$remove') {
         return removeCourse(studentId, scheduleId, clbid)
     }
 
     if (scheduleId) {
         return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
-    }
-    else {
+    } else {
         return addCourse(studentId, targetScheduleId, clbid)
     }
 }

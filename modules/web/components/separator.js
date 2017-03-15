@@ -28,11 +28,9 @@ export default function Separator(props: SeparatorProps) {
 
     if (type === 'line') {
         renderedStyle = { ...renderedStyle, borderWidth: '1px' }
-    }
-    else if (type === 'spacer') {
+    } else if (type === 'spacer') {
         renderedStyle = { ...renderedStyle, padding: '0 0.5em' }
-    }
-    else if (type === 'flex-spacer') {
+    } else if (type === 'flex-spacer') {
         renderedStyle = { ...renderedStyle, flex }
     }
 

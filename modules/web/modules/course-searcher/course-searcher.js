@@ -62,15 +62,13 @@ export default function CourseSearcher(props: CourseSearcherProps) {
         contents = (
             <div className="error course-group">Something broke :-(</div>
         )
-    }
-    else if (showIndicator) {
+    } else if (showIndicator) {
         contents = (
             <div className="loading course-group">
                 <Loading>Searching…</Loading>
             </div>
         )
-    }
-    else if (!showNoResults) {
+    } else if (!showNoResults) {
         contents = (
             <CourseResultsList
                 groupBy={groupBy}
@@ -85,8 +83,7 @@ export default function CourseSearcher(props: CourseSearcherProps) {
     if (partial) {
         if (partial.year && partial.semester) {
             placeholderExtension = `(${toPrettyTerm(`${partial.year}${partial.semester}`)})`
-        }
-        else if (partial.year) {
+        } else if (partial.year) {
             placeholderExtension = `(${partial.year})`
         }
     }
@@ -127,9 +124,9 @@ export default function CourseSearcher(props: CourseSearcherProps) {
                         {inProgress
                             ? [<span key="msg">Searching…</span>]
                             : [
-                                <span key="msg">Search </span>,
-                                <Icon key="icon">{androidArrowForward}</Icon>,
-                            ]}
+                                  <span key="msg">Search </span>,
+                                  <Icon key="icon">{androidArrowForward}</Icon>,
+                              ]}
                     </Button>
                 </div>
                 {hasQueried &&

@@ -77,38 +77,29 @@ function organizeValues([key, values], words = false, profWords = false) {
     let organizedValues = map(values, val => {
         if (startsWith(val, '$')) {
             return val.toUpperCase()
-        }
-        else if (key === 'departments') {
+        } else if (key === 'departments') {
             val = val.toLowerCase()
             val = departmentMapping[val] || val.toUpperCase()
-        }
-        else if (key === 'gereqs') {
+        } else if (key === 'gereqs') {
             val = val.toLowerCase()
             val = gereqMapping[val] || val.toUpperCase()
-        }
-        else if (key === 'deptnum') {
+        } else if (key === 'deptnum') {
             val = val.toUpperCase()
-        }
-        else if (key === 'semester') {
+        } else if (key === 'semester') {
             val = val.toLowerCase()
             val = semesters[val] || parseInt(val, 10)
-        }
-        else if (key === 'instructors') {
+        } else if (key === 'instructors') {
             if (profWords) {
                 val = splitParagraph(val)
                 key = 'profWords'
             }
-        }
-        else if (key === 'times' || key === 'locations') {
+        } else if (key === 'times' || key === 'locations') {
             val = val.toUpperCase()
-        }
-        else if (key === 'pf') {
+        } else if (key === 'pf') {
             val = val === 'true'
-        }
-        else if (key === 'credits') {
+        } else if (key === 'credits') {
             val = parseFloat(val)
-        }
-        else if (
+        } else if (
             includes(
                 [
                     'year',
@@ -123,15 +114,13 @@ function organizeValues([key, values], words = false, profWords = false) {
             )
         ) {
             val = parseInt(val, 10)
-        }
-        else if (
+        } else if (
             includes(['title', 'name', 'notes', 'description', 'words'], key)
         ) {
             if (words || key === 'words') {
                 val = splitParagraph(val)
                 key = 'words'
-            }
-            else {
+            } else {
                 val = trim(val)
             }
         }
@@ -176,8 +165,7 @@ export function buildQueryFromString(queryString = '', opts = {}) {
         let deptnum = buildDeptNum({ departments, number })
         keys.push('deptnum')
         values.push(deptnum)
-    }
-    else if (stringThing) {
+    } else if (stringThing) {
         keys.push('title')
         values.push(stringThing)
     }

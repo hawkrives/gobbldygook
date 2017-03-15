@@ -44,11 +44,9 @@ function AreaPicker(props) {
     let message = <li>Oh! We need a new message here!</li>
     if (props.filterText) {
         message = <li>No matching ${pluralizeArea(props.type)}.</li>
-    }
-    else if (currentAreaNames.size) {
+    } else if (currentAreaNames.size) {
         message = <li>All ${pluralizeArea(props.type)} have been added.</li>
-    }
-    else {
+    } else {
         message = <li>No {pluralizeArea(props.type)} are available.</li>
     }
 

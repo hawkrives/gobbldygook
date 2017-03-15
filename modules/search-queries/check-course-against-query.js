@@ -57,14 +57,12 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
         // dept, gereqs, etc.
         if (isArray(course[key]) && !substring) {
             return includes(course[key], val)
-        }
-        else if (isArray(course[key]) && substring) {
+        } else if (isArray(course[key]) && substring) {
             return some(
                 map(course[key], item =>
                     includes(item.toLowerCase(), val.toLowerCase()))
             )
-        }
-        else if (substring) {
+        } else if (substring) {
             return includes(course[key].toLowerCase(), val.toLowerCase())
         }
         return course[key] === val

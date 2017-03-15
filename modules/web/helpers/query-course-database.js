@@ -18,8 +18,7 @@ export default function queryCourseDatabase(queryString, baseQuery = {}) {
     let query = {}
     if ('year' in queryObject || 'semester' in queryObject) {
         query = queryObject
-    }
-    else {
+    } else {
         query = { ...baseQuery, ...queryObject }
     }
 

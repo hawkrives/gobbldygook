@@ -65,8 +65,7 @@ class ManualCreationScreen extends Component {
         let val = Number(ev.target.value)
         if (!val || ev.target.value.length !== 4) {
             this.setState({ matriculationIsValid: false, matriculation: val })
-        }
-        else {
+        } else {
             this.setState({ matriculationIsValid: true, matriculation: val })
         }
         this.checkValidity()
@@ -76,8 +75,7 @@ class ManualCreationScreen extends Component {
         let val = Number(ev.target.value)
         if (!val || ev.target.value.length !== 4) {
             this.setState({ graduationIsValid: false, graduation: val })
-        }
-        else {
+        } else {
             this.setState({ graduationIsValid: true, graduation: val })
         }
         this.checkValidity()
@@ -95,8 +93,7 @@ class ManualCreationScreen extends Component {
 
         if (errors.length) {
             this.setState({ error: errors.join('\n') })
-        }
-        else {
+        } else {
             this.setState({ error: '' })
         }
     };

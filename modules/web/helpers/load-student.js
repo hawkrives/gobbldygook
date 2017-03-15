@@ -17,8 +17,7 @@ export function loadStudent(studentId) {
 
         try {
             basicStudent = JSON.parse(rawStudent)
-        }
-        catch (e) {
+        } catch (e) {
             log(e)
         }
 

@@ -46,8 +46,7 @@ async function loadArea({ name, type, revision, source, isCustom }) {
     try {
         // console.log(obj)
         result = enhance(obj)
-    }
-    catch (err) {
+    } catch (err) {
         console.error(`Problem enhancing area "${name}"`, err)
     }
 

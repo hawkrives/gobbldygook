@@ -94,8 +94,7 @@ function queryStore(query) {
 
             // Once they've been fetched, resolve the promise with the results.
             allValues.then(resolvePromise)
-        }
-        else {
+        } else {
             // Otherwise, if the current store doesn't have an index for any of
             // the requested keys, iterate over the entire store.
             const done = err => {
@@ -164,11 +163,9 @@ function queryIndex(query, primaryKeysOnly = false) {
         let done = err => {
             if (err) {
                 rejectPromise(err)
-            }
-            else if (primaryKeysOnly) {
+            } else if (primaryKeysOnly) {
                 resolvePromise(results)
-            }
-            else {
+            } else {
                 this.store.batchGet(results).then(resolvePromise)
             }
         }
@@ -189,8 +186,7 @@ function queryIndex(query, primaryKeysOnly = false) {
                 log('done')
                 // If we're out of keys, quit.
                 done()
-            }
-            else if (cursor.key > keys[currentIndex]) {
+            } else if (cursor.key > keys[currentIndex]) {
                 log('greater')
                 // If the cursor's key is "past" the current one, we need to skip
                 // ahead to the next one key in the list of keys.
@@ -209,8 +205,7 @@ function queryIndex(query, primaryKeysOnly = false) {
                     ? undefined
                     : keys[currentIndex]
                 cursor.continue(nextKey)
-            }
-            else if (cursor.key === keys[currentIndex]) {
+            } else if (cursor.key === keys[currentIndex]) {
                 log('equals')
                 // If we've found what we're looking for, add it, and go to
                 // the next result.
@@ -220,8 +215,7 @@ function queryIndex(query, primaryKeysOnly = false) {
                     results.push(primaryKey)
                 }
                 cursor.continue()
-            }
-            else {
+            } else {
                 log('other')
                 // Otherwise, we're not there yet, and need to skip ahead to the
                 // first occurrence of our current key.

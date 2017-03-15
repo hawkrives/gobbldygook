@@ -10,11 +10,9 @@ export default function computeCountWithOperator(
     // compute the result
     if (comparator === '$eq') {
         return has === needs
-    }
-    else if (comparator === '$lte') {
+    } else if (comparator === '$lte') {
         return has <= needs
-    }
-    else if (comparator === '$gte') {
+    } else if (comparator === '$gte') {
         return has >= needs
     }
 

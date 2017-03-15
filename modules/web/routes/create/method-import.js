@@ -54,8 +54,7 @@ class SISImportScreen extends Component {
                         checkingLogin: false,
                         selectedId: ids[0],
                     })
-                }
-                else {
+                } else {
                     this.setState({
                         loggedIn: true,
                         checkingLogin: false,
@@ -70,11 +69,9 @@ class SISImportScreen extends Component {
                     this.setState({
                         error: 'The extension is not loaded properly.',
                     })
-                }
-                else if (err instanceof ExtensionTooOldError) {
+                } else if (err instanceof ExtensionTooOldError) {
                     this.setState({ error: 'The extension is too old.' })
-                }
-                else {
+                } else {
                     this.setState({ error: serializeError(err) })
                 }
             })
@@ -142,8 +139,8 @@ class SISImportScreen extends Component {
 
                 {!loggedIn
                     ? <Button
-                        disabled={checkingLogin}
-                        onClick={this.checkLoginState}
+                          disabled={checkingLogin}
+                          onClick={this.checkLoginState}
                       >
                           Check Again
                       </Button>
@@ -231,8 +228,8 @@ class SISImportScreen extends Component {
                                     Import Student
                                 </Button>
                               : <Button
-                                  disabled={!loggedIn}
-                                  onClick={this.handleImportData}
+                                    disabled={!loggedIn}
+                                    onClick={this.handleImportData}
                                 >
                                     Fetch Student
                                 </Button>

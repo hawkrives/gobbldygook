@@ -104,8 +104,7 @@ function resolveSingularDataPoints(degrees) {
             throw new Error(
                 `convertStudent: The student has more than one ${name}: ${JSON.stringify(group)}`
             )
-        }
-        else if (!len) {
+        } else if (!len) {
             throw new Error(
                 `convertStudent: The student has no ${name}: ${JSON.stringify(group)}`
             )

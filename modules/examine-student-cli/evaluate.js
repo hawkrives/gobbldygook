@@ -37,29 +37,29 @@ function summarize(requirement, name, path, depth = 0) {
 function stringifyChunk(expr) {
     let resultString = ''
     switch (expr.$type) {
-    case 'boolean':
-        resultString = stringifyBoolean(expr)
-        break
-    case 'course':
-        resultString = stringifyCourse(expr)
-        break
-    case 'modifier':
-        resultString = stringifyModifier(expr)
-        break
-    case 'occurrence':
-        resultString = stringifyOccurrence(expr)
-        break
-    case 'of':
-        resultString = stringifyOf(expr)
-        break
-    case 'reference':
-        resultString = stringifyReference(expr)
-        break
-    case 'where':
-        resultString = stringifyWhere(expr)
-        break
-    default:
-        throw new Error(`uh oh! unknown type "${expr.$type}"`)
+        case 'boolean':
+            resultString = stringifyBoolean(expr)
+            break
+        case 'course':
+            resultString = stringifyCourse(expr)
+            break
+        case 'modifier':
+            resultString = stringifyModifier(expr)
+            break
+        case 'occurrence':
+            resultString = stringifyOccurrence(expr)
+            break
+        case 'of':
+            resultString = stringifyOf(expr)
+            break
+        case 'reference':
+            resultString = stringifyReference(expr)
+            break
+        case 'where':
+            resultString = stringifyWhere(expr)
+            break
+        default:
+            throw new Error(`uh oh! unknown type "${expr.$type}"`)
     }
 
     if ('_result' in expr) {
@@ -75,8 +75,7 @@ const OR = chalk.bold('OR')
 function stringifyBoolean(expr) {
     if ('$or' in expr) {
         return `(${map(expr.$or, req => stringifyChunk(req)).join(` ${OR} `)})`
-    }
-    else if ('$and' in expr) {
+    } else if ('$and' in expr) {
         return `(${map(expr.$and, req =>
             stringifyChunk(req)).join(` ${AND} `)})`
     }
@@ -98,17 +97,13 @@ function stringifyModifier(expr) {
     let modifier
     if (expr.$from === 'children') {
         modifier = `${stringifyChildren(expr)}`
-    }
-    else if (expr.$from === 'filter') {
+    } else if (expr.$from === 'filter') {
         modifier = 'filter'
-    }
-    else if (expr.$from === 'filter-where') {
+    } else if (expr.$from === 'filter-where') {
         modifier = `filter, where {${stringifyWhereClause(expr.$where)}}`
-    }
-    else if (expr.$from === 'where') {
+    } else if (expr.$from === 'where') {
         modifier = `where {${stringifyWhereClause(expr.$where)}}`
-    }
-    else if (expr.$from === 'children-where') {
+    } else if (expr.$from === 'children-where') {
         modifier = `${stringifyChildren(expr)}, where {${stringifyWhereClause(expr.$where)}}`
     }
     return `${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} ${expr.$besides ? `[besides ${condenseCourse(expr.$besides.$course)}] ` : ''}from ${modifier}`
@@ -134,8 +129,7 @@ function stringifyQualification({ $key, $operator, $value }) {
         throw new TypeError(
             "stringifyQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)"
         )
-    }
-    else if ($value instanceof Object) {
+    } else if ($value instanceof Object) {
         if ($value.$type === 'function') {
             const simplifiedOperator = {
                 $key,
@@ -143,8 +137,7 @@ function stringifyQualification({ $key, $operator, $value }) {
                 $value: $value['$computed-value'],
             }
             return stringifyQualification(simplifiedOperator)
-        }
-        else if ($value.$type === 'boolean') {
+        } else if ($value.$type === 'boolean') {
             if ('$or' in $value) {
                 return map($value.$or, val =>
                     stringifyQualification({
@@ -152,45 +145,36 @@ function stringifyQualification({ $key, $operator, $value }) {
                         $operator,
                         $value: val,
                     })).join(` ${OR} `)
-            }
-            else if ('$and' in $value) {
+            } else if ('$and' in $value) {
                 return map($value.$and, val =>
                     stringifyQualification({
                         $key,
                         $operator,
                         $value: val,
                     })).join(` ${AND} `)
-            }
-            else {
+            } else {
                 throw new TypeError(
                     `stringifyQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`
                 )
             }
-        }
-        else {
+        } else {
             throw new TypeError(
                 `stringifyQualification(): "${$value.$type}" is not a valid type for a qualification's value.`
             )
         }
-    }
-    else {
+    } else {
         // it's a static value; a number or string
         if ($operator === '$eq') {
             return `${$key} = ${$value}`
-        }
-        else if ($operator === '$ne') {
+        } else if ($operator === '$ne') {
             return `${$key} != ${$value}`
-        }
-        else if ($operator === '$lt') {
+        } else if ($operator === '$lt') {
             return `${$key} < ${$value}`
-        }
-        else if ($operator === '$lte') {
+        } else if ($operator === '$lte') {
             return `${$key} <= ${$value}`
-        }
-        else if ($operator === '$gt') {
+        } else if ($operator === '$gt') {
             return `${$key} > ${$value}`
-        }
-        else if ($operator === '$gte') {
+        } else if ($operator === '$gte') {
             return `${$key} >= ${$value}`
         }
     }
@@ -203,12 +187,10 @@ function stringifyQualification({ $key, $operator, $value }) {
 function stringifyWhereClause(clause) {
     if (clause.$type === 'qualification') {
         return stringifyQualification(clause)
-    }
-    else if (clause.$type === 'boolean') {
+    } else if (clause.$type === 'boolean') {
         if ('$and' in clause) {
             return map(clause.$and, stringifyWhereClause).join(' AND ')
-        }
-        else if ('$or' in clause) {
+        } else if ('$or' in clause) {
             return map(clause.$or, stringifyWhereClause).join(' | ')
         }
     }
@@ -224,8 +206,7 @@ function stringifyFilter(filter) {
     // a filter will be either a where-style query or a list of courses
     if ('$where' in filter) {
         resultString += `only courses where {${stringifyWhereClause(filter.$where)}}`
-    }
-    else if ('$of' in filter) {
+    } else if ('$of' in filter) {
         resultString += `only (${map(filter.$of, req =>
             stringifyChunk(req)).join(', ')})`
     }
@@ -257,8 +238,7 @@ function proseify(requirement, name, path, depth = 0) {
     // Now check for results
     if ('result' in requirement) {
         resultString += stringifyChunk(requirement.result) + '\n'
-    }
-    else if ('message' in requirement) {
+    } else if ('message' in requirement) {
         // or ask for an override
         resultString += requirement.message + '\n'
     }
@@ -277,22 +257,18 @@ const checkAgainstArea = ({ courses, overrides }, args) =>
                 courses,
                 overrides,
             })
-        }
-        else {
+        } else {
             result = evaluate({ courses, overrides }, areaData)
             path = [areaData.type, areaData.name]
         }
 
         if (args.json) {
             console.log(JSON.stringify(result, null, 2))
-        }
-        else if (args.yaml) {
+        } else if (args.yaml) {
             console.log(yaml.safeDump(result))
-        }
-        else if (args.prose) {
+        } else if (args.prose) {
             console.log(proseify(result, areaData.name, path))
-        }
-        else if (args.summary) {
+        } else if (args.summary) {
             console.log(summarize(result, areaData.name, path))
         }
 

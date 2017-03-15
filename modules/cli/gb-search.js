@@ -16,8 +16,7 @@ module.exports = function search(args = {}) {
     searchCourses({ riddles, unique, sort }).then(filtered => {
         if (args.list) {
             console.log(table(filtered.map(printCourse)))
-        }
-        else {
+        } else {
             filtered.map(printCourse).forEach(console.log.bind(console))
         }
     })

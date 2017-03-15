@@ -23,67 +23,67 @@ export default function studentWrapperReducer(state = initialState, action) {
     const { type, payload } = action
 
     switch (type) {
-    case BEGIN_LOAD_STUDENT: {
-        return { ...state, isLoading: true }
-    }
-    case LOAD_STUDENT: {
-        return {
-            ...state,
-            isLoading: false,
-            data: studentReducer(
+        case BEGIN_LOAD_STUDENT: {
+            return { ...state, isLoading: true }
+        }
+        case LOAD_STUDENT: {
+            return {
+                ...state,
+                isLoading: false,
+                data: studentReducer(
                     { ...state.data, present: payload },
                     action
                 ),
+            }
         }
-    }
 
-    case BEGIN_GET_STUDENT_DATA: {
-        return { ...state, isFetching: true }
-    }
-    case GET_STUDENT_DATA: {
-        return {
-            ...state,
-            data: studentReducer(
+        case BEGIN_GET_STUDENT_DATA: {
+            return { ...state, isFetching: true }
+        }
+        case GET_STUDENT_DATA: {
+            return {
+                ...state,
+                data: studentReducer(
                     { ...state.data, present: payload },
                     action
                 ),
-            isFetching: false,
+                isFetching: false,
+            }
         }
-    }
 
-    case BEGIN_CHECK_GRADUATABILITY: {
-        return { ...state, isChecking: true }
-    }
-    case CHECK_GRADUATABILITY: {
-        return {
-            ...state,
-            data: studentReducer(
+        case BEGIN_CHECK_GRADUATABILITY: {
+            return { ...state, isChecking: true }
+        }
+        case CHECK_GRADUATABILITY: {
+            return {
+                ...state,
+                data: studentReducer(
                     { ...state.data, present: payload },
                     action
                 ),
-            isChecking: false,
+                isChecking: false,
+            }
         }
-    }
 
-    case BEGIN_VALIDATE_SCHEDULES: {
-        return { ...state, isValdiating: true }
-    }
-    case VALIDATE_SCHEDULES: {
-        return {
-            ...state,
-            data: studentReducer(
+        case BEGIN_VALIDATE_SCHEDULES: {
+            return { ...state, isValdiating: true }
+        }
+        case VALIDATE_SCHEDULES: {
+            return {
+                ...state,
+                data: studentReducer(
                     { ...state.data, present: payload },
                     action
                 ),
-            isValdiating: false,
+                isValdiating: false,
+            }
         }
-    }
 
-    default: {
-        return {
-            ...state,
-            data: studentReducer(state.data, action),
+        default: {
+            return {
+                ...state,
+                data: studentReducer(state.data, action),
+            }
         }
-    }
     }
 }

@@ -32,11 +32,11 @@ export default function AreaOfStudyGroup(props) {
 
             {showAreaPicker
                 ? <AreaPicker
-                    areaList={props.allAreasOfType}
-                    currentAreas={props.areas}
-                    onAddArea={props.onAddArea}
-                    studentGraduation={props.studentGraduation}
-                    type={props.type}
+                      areaList={props.allAreasOfType}
+                      currentAreas={props.areas}
+                      onAddArea={props.onAddArea}
+                      studentGraduation={props.studentGraduation}
+                      type={props.type}
                   />
                 : null}
 

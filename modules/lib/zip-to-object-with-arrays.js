@@ -15,8 +15,7 @@ function zipToObjectWithArrays<T>(
         (obj, [key, val]) => {
             if (has(obj, key)) {
                 obj[key].push(val)
-            }
-            else {
+            } else {
                 obj[key] = [val]
             }
 

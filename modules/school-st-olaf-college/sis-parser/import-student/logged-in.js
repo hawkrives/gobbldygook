@@ -13,8 +13,7 @@ function checkPageIsLoggedIn(response) {
         throw new AuthError(
             'Not logged in. Please log into the SIS in another tab, then try again.'
         )
-    }
-    else if (errorMsg) {
+    } else if (errorMsg) {
         throw new Error(errorMsg)
     }
     return extractStudentIds(response)

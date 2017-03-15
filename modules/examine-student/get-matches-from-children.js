@@ -37,8 +37,7 @@ export default function getMatchesFromChildren(
     if (expr.$children === '$all') {
         // eslint-disable-line no-empty
         // do nothing; the default case.
-    }
-    else if (Array.isArray(expr.$children)) {
+    } else if (Array.isArray(expr.$children)) {
         // or just use some of them (those listed in expr.$children)
         const requested = map(expr.$children, c => c.$requirement)
         childKeys = filter(childKeys, key => includes(requested, key))
