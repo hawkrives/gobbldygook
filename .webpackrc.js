@@ -5,6 +5,9 @@ const pkg = require('./package.json')
 const webpack = require('webpack')
 const url = require('url')
 
+// TODO: remove me after upgrading to babel-loader@7
+process.noDeprecation = true
+
 const {
 	DefinePlugin,
 	HotModuleReplacementPlugin,
