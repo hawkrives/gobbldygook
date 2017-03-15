@@ -1,3 +1,4 @@
+'use strict'
 const flatten = require('lodash/flatten')
 const glob = require('glob')
 const junk = require('junk')

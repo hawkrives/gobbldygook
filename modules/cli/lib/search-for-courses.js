@@ -1,22 +1,23 @@
-import { tryReadJsonFile } from './read-file'
+'use strict'
+const { tryReadJsonFile } = require('./read-file')
 
-import flatten from 'lodash/flatten'
-import filter from 'lodash/filter'
-import forEach from 'lodash/forEach'
-import uniqBy from 'lodash/uniqBy'
-import isString from 'lodash/isString'
-import sortBy from 'lodash/sortBy'
-import map from 'lodash/map'
+const flatten = require('lodash/flatten')
+const filter = require('lodash/filter')
+const forEach = require('lodash/forEach')
+const uniqBy = require('lodash/uniqBy')
+const isString = require('lodash/isString')
+const sortBy = require('lodash/sortBy')
+const map = require('lodash/map')
 
-import { cacheDir } from './dirs'
+const { cacheDir } = require('./dirs')
 
-import { checkForStaleData } from './update-local-data-cache'
+const { checkForStaleData } = require('./update-local-data-cache')
 
-import path from 'path'
+const path = require('path')
 
-import { quacksLikeDeptNum, splitDeptNum } from '../../school-st-olaf-college'
+const { quacksLikeDeptNum, splitDeptNum } = require('../../school-st-olaf-college')
 
-import pify from 'pify'
+const pify = require('pify')
 const fs = pify(require('graceful-fs'))
 
 function getDeptNumsFromRiddles(r) {
@@ -26,7 +27,7 @@ function getDeptNumsFromRiddles(r) {
 	return r
 }
 
-export default async function search({ riddles, unique, sort }={}) {
+module.exports = async function search({ riddles, unique, sort }={}) {
 	// check if data has been cached
 	await checkForStaleData()
 

@@ -1,1 +1,2 @@
-export default function check() {}
+'use strict'
+module.exports = function check() {}

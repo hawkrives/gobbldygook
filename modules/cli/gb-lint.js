@@ -1,1 +1,2 @@
-export default function lint() {}
+'use strict'
+module.exports = function lint() {}
