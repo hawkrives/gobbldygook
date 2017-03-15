@@ -25,18 +25,16 @@ function parseString(args, string) {
 
 module.exports.cli = function cli() {
     const args = nom
-		.option('json', { flag: true, help: 'Print the result as valid JSON' })
-		.option('yaml', { flag: true, help: 'Print the result as YAML' })
-		.option('stdin', { flag: true, help: 'Take input via STDIN' })
-		.option('string', { position: 0 })
-		.parse()
+        .option('json', { flag: true, help: 'Print the result as valid JSON' })
+        .option('yaml', { flag: true, help: 'Print the result as YAML' })
+        .option('stdin', { flag: true, help: 'Take input via STDIN' })
+        .option('string', { position: 0 })
+        .parse()
 
     if (args.stdin) {
-        getStdin()
-			.then(string => parseString(args, string))
-			.catch(err => {
-    throw err
-})
+        getStdin().then(string => parseString(args, string)).catch(err => {
+            throw err
+        })
     }
     else {
         parseString(args, args.string)
