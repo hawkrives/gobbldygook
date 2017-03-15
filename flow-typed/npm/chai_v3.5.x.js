@@ -1,5 +1,5 @@
-// flow-typed signature: 9e3d57d259619cd3fcf8c7c3eced99f5
-// flow-typed version: 60acee2512/chai_v3.5.x/flow_>=v0.24.0
+// flow-typed signature: 0bb5177083bf69296bdda98e783b4462
+// flow-typed version: 3a256f81e9/chai_v3.5.x/flow_>=v0.24.0
 
 declare module "chai" {
 
@@ -93,6 +93,14 @@ declare module "chai" {
         calledWith: (...args: Array<mixed>) => ExpectChain<T>,
         calledWithMatch: (...args: Array<mixed>) => ExpectChain<T>,
         calledWithExactly: (...args: Array<mixed>) => ExpectChain<T>,
+
+        // chai-as-promised
+        eventually: ExpectChain<T>,
+        resolvedWith: (value: mixed) => Promise<mixed> & ExpectChain<T>,
+        resolved: () => Promise<mixed> & ExpectChain<T>,
+        rejectedWith: (value: mixed) => Promise<mixed> & ExpectChain<T>,
+        rejected: () => Promise<mixed> & ExpectChain<T>,
+        notify: (callback: () => mixed) => ExpectChain<T>,
     };
 
     declare function expect<T>(actual: T): ExpectChain<T>;
