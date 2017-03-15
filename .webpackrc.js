@@ -309,7 +309,7 @@ function config() {
 	const babelForNodeModules =  { loader: 'babel-loader', options: { cacheDirectory: !isCI, plugins: ['transform-es2015-modules-commonjs'] } }
 	const urlLoader = { loader: 'url-loader', options: { limit: 10000 } }
 	const cssLoader = isProduction
-		? ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader', 'sass-loader'] })
+		? ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] })
 		: ['style-loader', 'css-loader', 'sass-loader']
 
 	const module = {
