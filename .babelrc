@@ -8,7 +8,6 @@
 				"ie": 12,
 				"browsers": "last 2 versions, Firefox ESR",
 			},
-			"modules": false,
 		}],
 	],
 	"plugins": [
