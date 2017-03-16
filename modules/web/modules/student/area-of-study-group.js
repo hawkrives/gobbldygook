@@ -88,13 +88,7 @@ class AreaOfStudyGroup extends React.PureComponent {
 }
 
 const mapDispatch = dispatch =>
-    bindActionCreators(
-        {
-            addArea,
-            removeArea,
-        },
-        dispatch
-    )
+    bindActionCreators({ addArea, removeArea }, dispatch)
 
 // $FlowFixMe
 export default connect(null, mapDispatch)(AreaOfStudyGroup)
