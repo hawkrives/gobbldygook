@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 import map from 'lodash/map'
 import pluralizeArea from '../../../examine-student/pluralize-area'
 import capitalize from 'lodash/capitalize'
-import { areaTypeConstants } from '../../../object-student/area-types'
-import values from 'lodash/values'
+import type { AreaOfStudyTypeEnum } from '../../../examine-student/types'
 
 import AreaOfStudy from '../area-of-study'
 import AreaPicker from './area-picker'
@@ -11,7 +11,24 @@ import Button from '../../components/button'
 
 import './area-of-study-group.scss'
 
-export default function AreaOfStudyGroup(props) {
+type AreaOfStudyType = Object;
+type PropTypes = {
+    allAreasOfType: AreaOfStudyType[],
+    areas: AreaOfStudyType[],
+    onAddArea: (AreaOfStudyType, Event) => any,
+    onAddOverride: (string[], Event) => any,
+    onEndAddArea: (string, Event) => any,
+    onInitiateAddArea: (string, Event) => any,
+    onRemoveArea: (Object, Event) => any,
+    onRemoveOverride: (string[], Event) => any, // was optional
+    onToggleOverride: (string[], Event) => any,
+    showAreaPicker: boolean,
+    studentGraduation: number,
+    studentId: string,
+    type: AreaOfStudyTypeEnum,
+};
+
+export default function AreaOfStudyGroup(props: PropTypes) {
     const showAreaPicker = props.showAreaPicker || false
     const showOrHidePicker = showAreaPicker
         ? props.onEndAddArea
@@ -55,20 +72,4 @@ export default function AreaOfStudyGroup(props) {
             ))}
         </section>
     )
-}
-
-AreaOfStudyGroup.propTypes = {
-    allAreasOfType: PropTypes.arrayOf(PropTypes.object).isRequired,
-    areas: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onAddArea: PropTypes.func.isRequired,
-    onAddOverride: PropTypes.func.isRequired,
-    onEndAddArea: PropTypes.func.isRequired,
-    onInitiateAddArea: PropTypes.func.isRequired,
-    onRemoveArea: PropTypes.func.isRequired,
-    onRemoveOverride: PropTypes.func,
-    onToggleOverride: PropTypes.func.isRequired,
-    showAreaPicker: PropTypes.bool.isRequired,
-    studentGraduation: PropTypes.number.isRequired,
-    studentId: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(values(areaTypeConstants)).isRequired,
 }
