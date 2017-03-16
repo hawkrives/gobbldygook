@@ -340,7 +340,7 @@ function config() {
                 use: [babelForNodeModules],
             },
             {
-                test: /\.worker.js$/,
+                test: /worker\..*\.js$/,
                 exclude: /node_modules/,
                 use: ['worker-loader', babelLoader],
             },
