@@ -34,7 +34,7 @@ type PropTypes = {
     onRemoveArea: (Object, Event) => any,
     onRemoveOverride: (string[], Event) => any,
     onToggleOverride: (string[], Event) => any,
-    showAreaPickerFor: {[key: string]: boolean},
+    showAreaPickerFor: { [key: string]: boolean },
     student: Student,
 };
 

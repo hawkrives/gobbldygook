@@ -38,7 +38,7 @@ class GraduationStatusContainer extends Component {
     };
 
     state: {
-        showAreaPickerFor: {[key: string]: boolean},
+        showAreaPickerFor: { [key: string]: boolean },
     } = {
         showAreaPickerFor: {},
     };
@@ -121,8 +121,8 @@ class GraduationStatusContainer extends Component {
     render() {
         const student = this.props.student
         if (!student) {
-        return null
-    }
+            return null
+        }
 
         return (
             <section className="graduation-status">
