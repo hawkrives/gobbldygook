@@ -94,8 +94,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
                 onRemoveOverride={props.onRemoveOverride}
                 onToggleOverride={props.onToggleOverride}
                 showAreaPicker={showAreaPickerFor[areaType] || false}
-                studentGraduation={student.graduation}
-                studentId={student.id}
+                student={student}
                 type={areaType}
             />
         ))
@@ -148,8 +147,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
                 onRemoveOverride={props.onRemoveOverride}
                 onToggleOverride={props.onToggleOverride}
                 showAreaPicker={shouldShow || false}
-                studentGraduation={student.graduation}
-                studentId={student.id}
+                student={student}
                 type={type}
             />
         ))

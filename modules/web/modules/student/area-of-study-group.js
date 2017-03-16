@@ -14,6 +14,7 @@ import Button from '../../components/button'
 import './area-of-study-group.scss'
 
 type AreaOfStudyType = Object;
+type Student = Object;
 type PropTypes = {
     addArea: (string, AreaOfStudyType) => any,
     allAreasOfType: AreaOfStudyType[],
@@ -25,8 +26,7 @@ type PropTypes = {
     onToggleOverride: (string[], Event) => any,
     removeArea: (string, Object) => any,
     showAreaPicker: boolean,
-    studentGraduation: number,
-    studentId: string,
+    student: Student,
     type: AreaOfStudyTypeEnum,
 };
 
@@ -36,13 +36,13 @@ class AreaOfStudyGroup extends React.PureComponent {
     onAddArea = (area: AreaOfStudy, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
-        this.props.addArea(this.props.studentId, area)
+        this.props.addArea(this.props.student.id, area)
     };
 
     onRemoveArea = (areaQuery: any, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
-        this.props.removeArea(this.props.studentId, areaQuery)
+        this.props.removeArea(this.props.student.id, areaQuery)
     };
 
     render() {
@@ -70,7 +70,7 @@ class AreaOfStudyGroup extends React.PureComponent {
                           areaList={props.allAreasOfType}
                           currentAreas={props.areas}
                           onAddArea={this.onAddArea}
-                          studentGraduation={props.studentGraduation}
+                          studentGraduation={props.student.graduation}
                           type={props.type}
                       />
                     : null}
@@ -85,7 +85,7 @@ class AreaOfStudyGroup extends React.PureComponent {
                         onToggleOverride={props.onToggleOverride}
                         showCloseButton={showAreaPicker}
                         showEditButton={showAreaPicker}
-                        studentId={props.studentId}
+                        student={props.student}
                     />
                 ))}
             </section>

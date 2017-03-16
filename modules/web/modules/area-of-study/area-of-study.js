@@ -11,6 +11,7 @@ import { close, chevronUp, chevronDown } from '../../icons/ionicons'
 
 import './area-of-study.scss'
 
+type Student = Object;
 type AreaOfStudyType = {
     _area?: Object,
     _checked?: boolean,
@@ -32,7 +33,7 @@ export default class AreaOfStudyContainer extends Component {
         onToggleOverride: (string[], Event) => any,
         showCloseButton: boolean,
         showEditButton: boolean,
-        studentId: string,
+        student: Student,
     };
 
     state = {
