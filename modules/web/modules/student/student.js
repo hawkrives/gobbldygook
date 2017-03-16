@@ -18,9 +18,7 @@ export class Student extends Component {
     props: {
         content: React$Element<any>, // from react-router
         overlay: ?React$Element<any>,
-        params: { // react-router
-            studentId: string,
-        },
+        params: { studentId: string }, // react-router
         sidebar: ?React$Element<any>, // from react-router
         student: StudentType, // redux
     };

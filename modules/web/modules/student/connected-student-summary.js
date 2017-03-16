@@ -20,19 +20,19 @@ class WrappedStudentSummary extends React.PureComponent {
         changeMatriculation: (string) => any,
         changeName: (string) => any,
         student: Student,
-    }
+    };
 
-    handleChangeGraduation = (value: string)  => {
+    handleChangeGraduation = (value: string) => {
         const newGraduation = parseInt(value) || 0
         this.props.changeGraduation(this.props.student.id, newGraduation)
     };
 
-    handleChangeMatriculation = (value: string)  => {
+    handleChangeMatriculation = (value: string) => {
         const newMatriculation = parseInt(value) || 0
         this.props.changeMatriculation(this.props.student.id, newMatriculation)
     };
 
-    handleChangeName = (value: string)  => {
+    handleChangeName = (value: string) => {
         this.props.changeName(this.props.student.id, value)
     };
 
@@ -48,7 +48,6 @@ class WrappedStudentSummary extends React.PureComponent {
     }
 }
 
-
 const mapDispatch = dispatch =>
     bindActionCreators(
         {
@@ -60,5 +59,6 @@ const mapDispatch = dispatch =>
     )
 
 // $FlowFixMe
-export const ConnectedStudentSummary = connect(null, mapDispatch)(WrappedStudentSummary)
-
+export const ConnectedStudentSummary = connect(null, mapDispatch)(
+    WrappedStudentSummary
+)
