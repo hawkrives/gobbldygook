@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, cloneElement } from 'react'
+// @flow
+import React, { Component, cloneElement } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -8,36 +9,20 @@ import Sidebar from '../../components/sidebar'
 import Loading from '../../components/loading'
 
 import CourseTable from '../course-table'
-import GraduationStatus from './graduation-status-container'
+import GraduationStatus from './graduation-status'
 
 import './student.scss'
 
+type StudentType = Object;
 export class Student extends Component {
-    static propTypes = {
-        content: PropTypes.node, // from react-router
-        loadStudent: PropTypes.func.isRequired,
-        overlay: PropTypes.node,
-        params: PropTypes.object, // react-router
-        processed: PropTypes.object, // redux
-        sidebar: PropTypes.node, // from react-router
-        student: PropTypes.object, // redux
-    };
-
-    componentWillMount() {
-        this.loadStudent(this.props)
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.loadStudent(nextProps)
-    }
-
-    loadStudent = props => {
-        if (
-            !props.student ||
-            props.params.studentId !== this.props.params.studentId
-        ) {
-            props.loadStudent(props.params.studentId)
-        }
+    props: {
+        content: React$Element<any>, // from react-router
+        overlay: ?React$Element<any>,
+        params: { // react-router
+            studentId: string,
+        },
+        sidebar: ?React$Element<any>, // from react-router
+        student: StudentType, // redux
     };
 
     render() {
@@ -91,4 +76,5 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators({ loadStudent }, dispatch)
 
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(Student)
