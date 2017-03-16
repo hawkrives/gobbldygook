@@ -11,7 +11,7 @@ import {
     setOverride,
     removeOverride,
 } from '../../redux/students/actions/overrides'
-import AreaOfStudySidebar from './area-of-study-sidebar'
+import { AreaOfStudySidebar } from './area-of-study-sidebar'
 import { ConnectedStudentSummary } from './connected-student-summary'
 
 import './graduation-status.scss'
