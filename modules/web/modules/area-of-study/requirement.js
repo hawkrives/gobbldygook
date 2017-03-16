@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+// @flow
+import React, { Component } from 'react'
 import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
@@ -14,10 +15,25 @@ import ResultIndicator from './result-indicator'
 
 import './requirement.scss'
 
-export function Requirement(props) {
-    const {
-        topLevel = false,
-    } = props
+type PropTypes = {
+    computed?: boolean,
+    description?: string,
+    filter?: Object,
+    isOpen?: boolean,
+    message?: string,
+    name?: string,
+    onAddOverride: (string[], Event) => any,
+    onRemoveOverride: (string[], Event) => any,
+    onToggleOpen: () => any,
+    onToggleOverride: (string[], Event) => any,
+    overridden?: boolean,
+    path: string[],
+    result?: Object,
+    topLevel?: boolean,
+};
+
+function Requirement(props: PropTypes) {
+    const { topLevel = false } = props
     const childKeys = filter(keys(props), isRequirementName)
 
     const wasEvaluated = props.result && props.result._checked
@@ -113,25 +129,6 @@ export function Requirement(props) {
                 : null}
         </div>
     )
-}
-Requirement.propTypes = {
-    computed: PropTypes.bool,
-    description: PropTypes.string,
-    filter: PropTypes.object,
-    isOpen: PropTypes.bool,
-    message: PropTypes.string,
-    name: PropTypes.string,
-    onAddOverride: PropTypes.func.isRequired,
-    onRemoveOverride: PropTypes.func.isRequired,
-    onToggleOpen: PropTypes.func.isRequired,
-    onToggleOverride: PropTypes.func.isRequired,
-    overridden: PropTypes.bool,
-    path: PropTypes.array.isRequired,
-    result: PropTypes.object,
-    topLevel: PropTypes.bool,
-}
-Requirement.defaultProps = {
-    onToggleOpen: () => {},
 }
 
 export default class ExpandableRequirement extends Component {
