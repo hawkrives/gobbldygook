@@ -14,14 +14,17 @@ import GraduationStatus from './graduation-status'
 import './student.scss'
 
 type StudentType = Object;
+type PropTypes = {
+    content: React$Element<any>, // from react-router
+    loadStudent: (string) => any, // redux
+    overlay: ?React$Element<any>,
+    params: { studentId: string }, // react-router
+    sidebar: ?React$Element<any>, // from react-router
+    student: StudentType, // redux
+};
+
 export class Student extends Component {
-    props: {
-        content: React$Element<any>, // from react-router
-        overlay: ?React$Element<any>,
-        params: { studentId: string }, // react-router
-        sidebar: ?React$Element<any>, // from react-router
-        student: StudentType, // redux
-    };
+    props: PropTypes;
 
     render() {
         if (!this.props.student) {
