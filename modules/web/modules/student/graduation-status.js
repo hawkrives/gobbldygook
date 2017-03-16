@@ -1,11 +1,30 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 
 import AreaOfStudySidebar from './area-of-study-sidebar'
 import StudentSummary from './student-summary'
 
 import './graduation-status.scss'
 
-export default function GraduationStatus(props) {
+type AreaOfStudy = Object;
+type Student = Object;
+type PropTypes = {
+    allAreas: AreaOfStudy[],
+    onAddArea: (AreaOfStudy, Event) => any,
+    onAddOverride: (string[], Event) => any,
+    onChangeGraduation: (Event) => any,
+    onChangeMatriculation: (Event) => any,
+    onChangeName: (Event) => any,
+    onEndAddArea: (string, Event) => any,
+    onInitiateAddArea: (string, Event) => any,
+    onRemoveArea: (Object, Event) => any,
+    onRemoveOverride: (string[], Event) => any,
+    onToggleOverride: (string[], Event) => any,
+    showAreaPickerFor: {[key: string]: boolean},
+    student: Student,
+};
+
+export default function GraduationStatus(props: PropTypes) {
     if (!props.student) {
         return null
     }
@@ -32,20 +51,4 @@ export default function GraduationStatus(props) {
             />
         </section>
     )
-}
-
-GraduationStatus.propTypes = {
-    allAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onAddArea: PropTypes.func.isRequired,
-    onAddOverride: PropTypes.func.isRequired,
-    onChangeGraduation: PropTypes.func.isRequired,
-    onChangeMatriculation: PropTypes.func.isRequired,
-    onChangeName: PropTypes.func.isRequired,
-    onEndAddArea: PropTypes.func.isRequired,
-    onInitiateAddArea: PropTypes.func.isRequired,
-    onRemoveArea: PropTypes.func.isRequired,
-    onRemoveOverride: PropTypes.func.isRequired,
-    onToggleOverride: PropTypes.func.isRequired,
-    showAreaPickerFor: PropTypes.object.isRequired,
-    student: PropTypes.object.isRequired,
 }

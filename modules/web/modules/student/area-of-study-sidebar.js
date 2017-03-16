@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 
 import difference from 'lodash/difference'
 import filter from 'lodash/filter'
@@ -22,7 +23,22 @@ import AreaOfStudyGroup from './area-of-study-group'
 import Button from '../../components/button'
 import { areaTypeConstants } from '../../../object-student/area-types'
 
-export default function AreaOfStudySidebar(props) {
+type AreaOfStudy = Object;
+type Student = Object;
+type PropTypes = {
+    allAreas: AreaOfStudy[],
+    onAddArea: (AreaOfStudy, Event) => any,
+    onAddOverride: (string[], Event) => any,
+    onEndAddArea: (string, Event) => any,
+    onInitiateAddArea: (string, Event) => any,
+    onRemoveArea: (Object, Event) => any,
+    onRemoveOverride: (string[], Event) => any,
+    onToggleOverride: (string[], Event) => any,
+    showAreaPickerFor: {[key: string]: boolean},
+    student: Student,
+};
+
+export default function AreaOfStudySidebar(props: PropTypes) {
     const { allAreas, student, showAreaPickerFor } = props
     const allAreasGrouped = groupBy(allAreas, 'type')
 
@@ -66,7 +82,7 @@ export default function AreaOfStudySidebar(props) {
 
     const areaTypesToShowButtonsFor = union(
         usedAreaTypes,
-        keys(pickBy(showAreaPickerFor, k => k === true))
+        keys(pickBy(showAreaPickerFor, v => v === true))
     )
 
     const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
@@ -122,16 +138,4 @@ export default function AreaOfStudySidebar(props) {
             {unusedAreaTypeButtons}
         </div>
     )
-}
-AreaOfStudySidebar.propTypes = {
-    allAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onAddArea: PropTypes.func.isRequired,
-    onAddOverride: PropTypes.func.isRequired,
-    onEndAddArea: PropTypes.func.isRequired,
-    onInitiateAddArea: PropTypes.func.isRequired,
-    onRemoveArea: PropTypes.func.isRequired,
-    onRemoveOverride: PropTypes.func.isRequired,
-    onToggleOverride: PropTypes.func.isRequired,
-    showAreaPickerFor: PropTypes.object.isRequired,
-    student: PropTypes.object.isRequired,
 }

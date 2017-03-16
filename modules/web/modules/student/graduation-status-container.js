@@ -1,5 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+// @flow
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import type {MapStateToProps, MapDispatchToProps} from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import has from 'lodash/has'
@@ -17,24 +19,29 @@ import {
 } from '../../redux/students/actions/overrides'
 import GraduationStatus from './graduation-status'
 
+type AreaOfStudy = Object;
+type Student = Object;
+
 class GraduationStatusContainer extends Component {
-    static propTypes = {
-        addArea: PropTypes.func.isRequired, // redux
-        allAreas: PropTypes.array.isRequired, // redux
-        changeGraduation: PropTypes.func.isRequired, // redux
-        changeMatriculation: PropTypes.func.isRequired, // redux
-        changeName: PropTypes.func.isRequired, // redux
-        removeArea: PropTypes.func.isRequired, // redux
-        removeOverride: PropTypes.func.isRequired, // redux
-        setOverride: PropTypes.func.isRequired, // redux
-        student: PropTypes.object.isRequired,
+    props: {
+        addArea: (string, AreaOfStudy) => any, // redux
+        allAreas: AreaOfStudy[], // redux
+        changeGraduation: () => any, // redux
+        changeMatriculation: () => any, // redux
+        changeName: () => any, // redux
+        removeArea: () => any, // redux
+        removeOverride: () => any, // redux
+        setOverride: () => any, // redux
+        student: Student,
     };
 
-    state = {
+    state: {
+        showAreaPickerFor: {[key: string]: boolean},
+    } = {
         showAreaPickerFor: {},
     };
 
-    handleInitiateAddArea = (type, ev) => {
+    handleInitiateAddArea = (type: string, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         this.setState(state => ({
@@ -42,7 +49,7 @@ class GraduationStatusContainer extends Component {
         }))
     };
 
-    handleEndAddArea = (type, ev) => {
+    handleEndAddArea = (type: string, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         this.setState(state => ({
@@ -50,27 +57,27 @@ class GraduationStatusContainer extends Component {
         }))
     };
 
-    handleAddArea = (area, ev) => {
+    handleAddArea = (area: AreaOfStudy, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         this.props.addArea(this.props.student.id, area)
     };
 
-    handleAddOverride = (path, ev) => {
+    handleAddOverride = (path: string[], ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         const codifiedPath = pathToOverride(path)
         this.props.setOverride(this.props.student.id, codifiedPath, true)
     };
 
-    handleRemoveOverride = (path, ev) => {
+    handleRemoveOverride = (path: string[], ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         const codifiedPath = pathToOverride(path)
         this.props.setOverride(this.props.student.id, codifiedPath)
     };
 
-    handleToggleOverride = (path, ev) => {
+    handleToggleOverride = (path: string[], ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         const codifiedPath = pathToOverride(path)
@@ -82,25 +89,30 @@ class GraduationStatusContainer extends Component {
         }
     };
 
-    handleRemoveArea = (areaQuery, ev) => {
+    handleRemoveArea = (areaQuery: any, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         this.props.removeArea(this.props.student.id, areaQuery)
     };
 
-    handleChangeGraduation = ev => {
-        this.props.changeGraduation(
-            this.props.student.id,
-            parseInt(ev.target.value) || 0
-        )
+    handleChangeGraduation = (ev: Event) => {
+        if (!(ev.target instanceof HTMLInputElement)) {
+            return
+        }
+        const newGraduation = parseInt(ev.target.value) || 0
+        this.props.changeGraduation(this.props.student.id, newGraduation)
     };
-    handleChangeMatriculation = ev => {
-        this.props.changeMatriculation(
-            this.props.student.id,
-            parseInt(ev.target.value) || 0
-        )
+    handleChangeMatriculation = (ev: Event) => {
+        if (!(ev.target instanceof HTMLInputElement)) {
+            return
+        }
+        const newMatriculation = parseInt(ev.target.value) || 0
+        this.props.changeMatriculation(this.props.student.id, newMatriculation)
     };
-    handleChangeName = ev => {
+    handleChangeName = (ev: Event) => {
+        if (!(ev.target instanceof HTMLInputElement)) {
+            return
+        }
         this.props.changeName(this.props.student.id, ev.target.value)
     };
 
