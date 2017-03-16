@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux'
 import has from 'lodash/has'
 import pathToOverride from '../../../examine-student/path-to-override'
 
-import { addArea, removeArea } from '../../redux/students/actions/areas'
 import {
     setOverride,
     removeOverride,
@@ -26,12 +25,6 @@ class GraduationStatusContainer extends Component {
         removeOverride: () => any, // redux
         setOverride: () => any, // redux
         student: Student,
-    };
-
-    handleAddArea = (area: AreaOfStudy, ev: Event) => {
-        ev.stopPropagation()
-        ev.preventDefault()
-        this.props.addArea(this.props.student.id, area)
     };
 
     handleAddOverride = (path: string[], ev: Event) => {
@@ -60,12 +53,6 @@ class GraduationStatusContainer extends Component {
         }
     };
 
-    handleRemoveArea = (areaQuery: any, ev: Event) => {
-        ev.stopPropagation()
-        ev.preventDefault()
-        this.props.removeArea(this.props.student.id, areaQuery)
-    };
-
     render() {
         const student = this.props.student
         if (!student) {
@@ -76,9 +63,7 @@ class GraduationStatusContainer extends Component {
             <section className="graduation-status">
                 <ConnectedStudentSummary student={student} />
                 <AreaOfStudySidebar
-                    onAddArea={this.handleAddArea}
                     onAddOverride={this.handleAddOverride}
-                    onRemoveArea={this.handleRemoveArea}
                     onRemoveOverride={this.handleRemoveOverride}
                     onToggleOverride={this.handleToggleOverride}
                     student={student}
@@ -91,10 +76,8 @@ class GraduationStatusContainer extends Component {
 const mapDispatch = dispatch =>
     bindActionCreators(
         {
-            addArea,
             setOverride,
             removeOverride,
-            removeArea,
         },
         dispatch
     )
