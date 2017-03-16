@@ -29,21 +29,41 @@ type PropTypes = {
     allAreas: AreaOfStudy[],
     onAddArea: (AreaOfStudy, Event) => any,
     onAddOverride: (string[], Event) => any,
-    onEndAddArea: (string, Event) => any,
-    onInitiateAddArea: (string, Event) => any,
     onRemoveArea: (Object, Event) => any,
     onRemoveOverride: (string[], Event) => any,
     onToggleOverride: (string[], Event) => any,
-    showAreaPickerFor: { [key: string]: boolean },
     student: Student,
 };
 
 export class AreaOfStudySidebar extends React.PureComponent {
     props: PropTypes;
 
+    state: {
+        showAreaPickerFor: { [key: string]: boolean },
+    } = {
+        showAreaPickerFor: {},
+    };
+
+    showAreaPicker = (type: string, ev: Event) => {
+        ev.stopPropagation()
+        ev.preventDefault()
+        this.setState(state => ({
+            showAreaPickerFor: { ...state.showAreaPickerFor, [type]: true },
+        }))
+    };
+
+    hideAreaPicker = (type: string, ev: Event) => {
+        ev.stopPropagation()
+        ev.preventDefault()
+        this.setState(state => ({
+            showAreaPickerFor: { ...state.showAreaPickerFor, [type]: false },
+        }))
+    };
+
     render() {
         const props = this.props
-        const { allAreas, student, showAreaPickerFor } = props
+        const { allAreas, student } = props
+        const { showAreaPickerFor } = this.state
         const allAreasGrouped = groupBy(allAreas, 'type')
 
         const sortedStudies = sortStudiesByType(student.studies)
@@ -71,8 +91,8 @@ export class AreaOfStudySidebar extends React.PureComponent {
                 areas={areas}
                 onAddArea={props.onAddArea}
                 onAddOverride={props.onAddOverride}
-                onEndAddArea={props.onEndAddArea}
-                onInitiateAddArea={props.onInitiateAddArea}
+                onEndAddArea={this.hideAreaPicker}
+                onInitiateAddArea={this.showAreaPicker}
                 onRemoveArea={props.onRemoveArea}
                 onRemoveOverride={props.onRemoveOverride}
                 onToggleOverride={props.onToggleOverride}
@@ -101,7 +121,7 @@ export class AreaOfStudySidebar extends React.PureComponent {
                           <Button
                               key={type}
                               className="add-unused-area-of-study"
-                              onClick={ev => props.onInitiateAddArea(type, ev)}
+                              onClick={ev => this.showAreaPicker(type, ev)}
                               type="flat"
                           >
                               {type}
@@ -127,8 +147,8 @@ export class AreaOfStudySidebar extends React.PureComponent {
                 areas={[]}
                 onAddArea={props.onAddArea}
                 onAddOverride={props.onAddOverride}
-                onEndAddArea={props.onEndAddArea}
-                onInitiateAddArea={props.onInitiateAddArea}
+                onEndAddArea={this.hideAreaPicker}
+                onInitiateAddArea={this.showAreaPicker}
                 onRemoveArea={props.onRemoveArea}
                 onRemoveOverride={props.onRemoveOverride}
                 onToggleOverride={props.onToggleOverride}

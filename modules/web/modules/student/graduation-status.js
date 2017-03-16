@@ -29,28 +29,6 @@ class GraduationStatusContainer extends Component {
         student: Student,
     };
 
-    state: {
-        showAreaPickerFor: { [key: string]: boolean },
-    } = {
-        showAreaPickerFor: {},
-    };
-
-    handleInitiateAddArea = (type: string, ev: Event) => {
-        ev.stopPropagation()
-        ev.preventDefault()
-        this.setState(state => ({
-            showAreaPickerFor: { ...state.showAreaPickerFor, [type]: true },
-        }))
-    };
-
-    handleEndAddArea = (type: string, ev: Event) => {
-        ev.stopPropagation()
-        ev.preventDefault()
-        this.setState(state => ({
-            showAreaPickerFor: { ...state.showAreaPickerFor, [type]: false },
-        }))
-    };
-
     handleAddArea = (area: AreaOfStudy, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
@@ -100,11 +78,8 @@ class GraduationStatusContainer extends Component {
                 <ConnectedStudentSummary student={student} />
                 <AreaOfStudySidebar
                     allAreas={this.props.allAreas}
-                    showAreaPickerFor={this.state.showAreaPickerFor}
                     onAddArea={this.handleAddArea}
                     onAddOverride={this.handleAddOverride}
-                    onEndAddArea={this.handleEndAddArea}
-                    onInitiateAddArea={this.handleInitiateAddArea}
                     onRemoveArea={this.handleRemoveArea}
                     onRemoveOverride={this.handleRemoveOverride}
                     onToggleOverride={this.handleToggleOverride}
