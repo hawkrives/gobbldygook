@@ -63,10 +63,6 @@ export default class AreaOfStudyContainer extends Component {
     render() {
         const props = this.props
         const {
-            area,
-            showCloseButton,
-        } = props
-        const {
             isOpen,
             confirmRemoval: showConfirmRemoval,
         } = this.state
@@ -81,7 +77,7 @@ export default class AreaOfStudyContainer extends Component {
             _progress: progress,
             _error: error = '',
             _checked: checked = false,
-        } = area
+        } = props.area
 
         const progressAt = typeof progress === 'object' ? progress.at : 0
         const progressOf = typeof progress === 'object' ? progress.of : 1
@@ -105,7 +101,7 @@ export default class AreaOfStudyContainer extends Component {
                             : name}
                     </h1>
                     <span className="icons">
-                        {showCloseButton &&
+                        {props.showCloseButton &&
                             <Button
                                 className="area--remove-button"
                                 onClick={this.startRemovalConfirmation}
@@ -162,14 +158,13 @@ export default class AreaOfStudyContainer extends Component {
             )
         }
 
+        const className = cx('area', {
+            errored: Boolean(error),
+            loading: !checked,
+        })
+
         return (
-            <div
-                className={cx(
-                    'area',
-                    { errored: Boolean(error) },
-                    { loading: !checked }
-                )}
-            >
+            <div className={className}>
                 <div
                     className="area--summary"
                     onClick={this.toggleAreaExpansion}
