@@ -11,7 +11,7 @@ type ButtonProps = {
     className?: string,
     disabled?: boolean,
     link?: boolean,
-    onClick?: () => any,
+    onClick?: (Event) => any,
     style?: Object,
     title?: string,
     to?: string | Object,
