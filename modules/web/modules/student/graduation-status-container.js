@@ -142,4 +142,5 @@ const mapDispatch = dispatch =>
 
 const mapState = state => ({ allAreas: state.areas.data })
 
+// $FlowFixMe
 export default connect(mapState, mapDispatch)(GraduationStatusContainer)
