@@ -26,6 +26,25 @@ type PropTypes = {
 export class Student extends Component {
     props: PropTypes;
 
+    componentWillMount() {
+        this.loadStudent(this.props)
+    }
+
+    componentWillReceiveProps(nextProps: PropTypes) {
+        this.loadStudent(nextProps)
+    }
+
+    loadStudent = (props: PropTypes) => {
+        // We have to be able to load the student here because we only load
+        // students on-demand into the redux store
+        const didStudentChange = props.params.studentId !==
+            this.props.params.studentId
+
+        if (!props.student || didStudentChange) {
+            props.loadStudent(props.params.studentId)
+        }
+    };
+
     render() {
         if (!this.props.student) {
             return (
