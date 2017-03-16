@@ -22,7 +22,6 @@ type Student = Object;
 class GraduationStatusContainer extends Component {
     props: {
         addArea: (string, AreaOfStudy) => any, // redux
-        allAreas: AreaOfStudy[], // redux
         removeArea: () => any, // redux
         removeOverride: () => any, // redux
         setOverride: () => any, // redux
@@ -77,7 +76,6 @@ class GraduationStatusContainer extends Component {
             <section className="graduation-status">
                 <ConnectedStudentSummary student={student} />
                 <AreaOfStudySidebar
-                    allAreas={this.props.allAreas}
                     onAddArea={this.handleAddArea}
                     onAddOverride={this.handleAddOverride}
                     onRemoveArea={this.handleRemoveArea}
@@ -101,7 +99,5 @@ const mapDispatch = dispatch =>
         dispatch
     )
 
-const mapState = state => ({ allAreas: state.areas.data })
-
 // $FlowFixMe
-export default connect(mapState, mapDispatch)(GraduationStatusContainer)
+export default connect(null, mapDispatch)(GraduationStatusContainer)

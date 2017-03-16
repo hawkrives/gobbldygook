@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import { connect } from 'react-redux'
 
 import difference from 'lodash/difference'
 import filter from 'lodash/filter'
@@ -35,7 +36,7 @@ type PropTypes = {
     student: Student,
 };
 
-export class AreaOfStudySidebar extends React.PureComponent {
+class AreaOfStudySidebarComponent extends React.PureComponent {
     props: PropTypes;
 
     state: {
@@ -168,3 +169,9 @@ export class AreaOfStudySidebar extends React.PureComponent {
         )
     }
 }
+
+const mapState = state => ({ allAreas: state.areas.data })
+
+export const AreaOfStudySidebar = connect(mapState)(
+    AreaOfStudySidebarComponent
+)
