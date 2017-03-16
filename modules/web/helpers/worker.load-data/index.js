@@ -228,7 +228,7 @@ function removeDuplicateAreas() {
         // now de-duplicate, based on name, type, and revision
         // reasons for duplicates:
         // - a major adds a new revision
-        // 		- the old one will have already been replaced by the new one, because of cleanPriorData
+        //      - the old one will have already been replaced by the new one, because of cleanPriorData
         // - a major … are there any other cases?
 
         const grouped = groupBy(
