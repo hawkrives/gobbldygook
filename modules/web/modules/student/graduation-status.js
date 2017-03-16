@@ -6,18 +6,13 @@ import { bindActionCreators } from 'redux'
 import has from 'lodash/has'
 import pathToOverride from '../../../examine-student/path-to-override'
 
-import {
-    changeName,
-    changeMatriculation,
-    changeGraduation,
-} from '../../redux/students/actions/change'
 import { addArea, removeArea } from '../../redux/students/actions/areas'
 import {
     setOverride,
     removeOverride,
 } from '../../redux/students/actions/overrides'
 import AreaOfStudySidebar from './area-of-study-sidebar'
-import StudentSummary from './student-summary'
+import { ConnectedStudentSummary } from './connected-student-summary'
 
 import './graduation-status.scss'
 
@@ -28,9 +23,6 @@ class GraduationStatusContainer extends Component {
     props: {
         addArea: (string, AreaOfStudy) => any, // redux
         allAreas: AreaOfStudy[], // redux
-        changeGraduation: () => any, // redux
-        changeMatriculation: () => any, // redux
-        changeName: () => any, // redux
         removeArea: () => any, // redux
         removeOverride: () => any, // redux
         setOverride: () => any, // redux
@@ -97,18 +89,6 @@ class GraduationStatusContainer extends Component {
         this.props.removeArea(this.props.student.id, areaQuery)
     };
 
-    handleChangeGraduation = (value: string) => {
-        const newGraduation = parseInt(value) || 0
-        this.props.changeGraduation(this.props.student.id, newGraduation)
-    };
-    handleChangeMatriculation = (value: string) => {
-        const newMatriculation = parseInt(value) || 0
-        this.props.changeMatriculation(this.props.student.id, newMatriculation)
-    };
-    handleChangeName = (value: string) => {
-        this.props.changeName(this.props.student.id, value)
-    };
-
     render() {
         const student = this.props.student
         if (!student) {
@@ -117,12 +97,7 @@ class GraduationStatusContainer extends Component {
 
         return (
             <section className="graduation-status">
-                <StudentSummary
-                    onChangeGraduation={this.handleChangeGraduation}
-                    onChangeMatriculation={this.handleChangeMatriculation}
-                    onChangeName={this.handleChangeName}
-                    student={student}
-                />
+                <ConnectedStudentSummary student={student} />
                 <AreaOfStudySidebar
                     allAreas={this.props.allAreas}
                     showAreaPickerFor={this.state.showAreaPickerFor}
@@ -147,9 +122,6 @@ const mapDispatch = dispatch =>
             setOverride,
             removeOverride,
             removeArea,
-            changeName,
-            changeMatriculation,
-            changeGraduation,
         },
         dispatch
     )

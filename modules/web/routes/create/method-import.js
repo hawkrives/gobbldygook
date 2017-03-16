@@ -13,7 +13,7 @@ import {
     BrowserExtensionsComponent,
 } from '../../components/browser-extensions'
 import { getCourse } from '../../helpers/get-courses'
-import StudentSummary from '../../modules/student/student-summary'
+import { StudentSummary } from '../../modules/student/student-summary'
 import map from 'lodash/map'
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'

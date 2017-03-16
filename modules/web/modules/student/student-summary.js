@@ -54,16 +54,16 @@ const welcomeMessage = sample(welcomeMessages)
 
 type Student = Object;
 type PropTypes = {
-    onChangeGraduation: (string) => any,
-    onChangeMatriculation: (string) => any,
-    onChangeName: (string) => any,
+    onChangeGraduation?: (string) => any,
+    onChangeMatriculation?: (string) => any,
+    onChangeName?: (string) => any,
     randomizeHello?: boolean,
     showAvatar?: boolean,
     showMessage?: boolean,
     student: Student,
 };
 
-export default function StudentSummary(props: PropTypes) {
+export function StudentSummary(props: PropTypes) {
     const {
         student,
         showMessage = true,
