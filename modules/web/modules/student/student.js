@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, cloneElement } from 'react'
+// @flow
+import React, { Component, cloneElement } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -8,34 +9,38 @@ import Sidebar from '../../components/sidebar'
 import Loading from '../../components/loading'
 
 import CourseTable from '../course-table'
-import GraduationStatus from './graduation-status-container'
+import GraduationStatus from './graduation-status'
 
 import './student.scss'
 
+type StudentType = Object;
+type PropTypes = {
+    content: React$Element<any>, // from react-router
+    loadStudent: (string) => any, // redux
+    overlay: ?React$Element<any>,
+    params: { studentId: string }, // react-router
+    sidebar: ?React$Element<any>, // from react-router
+    student: StudentType, // redux
+};
+
 export class Student extends Component {
-    static propTypes = {
-        content: PropTypes.node, // from react-router
-        loadStudent: PropTypes.func.isRequired,
-        overlay: PropTypes.node,
-        params: PropTypes.object, // react-router
-        processed: PropTypes.object, // redux
-        sidebar: PropTypes.node, // from react-router
-        student: PropTypes.object, // redux
-    };
+    props: PropTypes;
 
     componentWillMount() {
         this.loadStudent(this.props)
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: PropTypes) {
         this.loadStudent(nextProps)
     }
 
-    loadStudent = props => {
-        if (
-            !props.student ||
-            props.params.studentId !== this.props.params.studentId
-        ) {
+    loadStudent = (props: PropTypes) => {
+        // We have to be able to load the student here because we only load
+        // students on-demand into the redux store
+        const didStudentChange = props.params.studentId !==
+            this.props.params.studentId
+
+        if (!props.student || didStudentChange) {
             props.loadStudent(props.params.studentId)
         }
     };
@@ -91,4 +96,5 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators({ loadStudent }, dispatch)
 
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(Student)

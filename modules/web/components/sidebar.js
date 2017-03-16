@@ -1,17 +1,14 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import Button from './button'
 import Icon from './icon'
 import Toolbar from './toolbar'
 import Separator from './separator'
-
 import CourseRemovalBox from './course-removal-box'
-
 import { undo, redo } from '../redux/students/actions/undo'
 import { removeCourse } from '../redux/students/actions/courses'
-
 import {
     iosUndo,
     iosUndoOutline,
@@ -24,11 +21,26 @@ import {
 
 import './sidebar.scss'
 
-export function Sidebar(props) {
+type StudentType = Object;
+type PropTypes = {
+    children: React$Element<any>,
+    redo: () => any,
+    removeCourse: Function,
+    student: {
+        data: {
+            past: StudentType[],
+            present: StudentType,
+            future: StudentType[],
+        },
+    },
+    undo: () => any,
+};
+
+function Sidebar(props: PropTypes) {
     const { undo, redo } = props
     const studentId = props.student.data.present.id
-    const canUndo = props.student.data.past.length
-    const canRedo = props.student.data.future.length
+    const canUndo = props.student.data.past.length > 0
+    const canRedo = props.student.data.future.length > 0
 
     return (
         <aside className="sidebar">
@@ -78,21 +90,8 @@ export function Sidebar(props) {
     )
 }
 
-Sidebar.propTypes = {
-    children: PropTypes.node.isRequired,
-    redo: PropTypes.func.isRequired,
-    removeCourse: PropTypes.func.isRequired,
-    student: PropTypes.shape({
-        data: PropTypes.shape({
-            past: PropTypes.array.isRequired,
-            present: PropTypes.object.isRequired,
-            future: PropTypes.array.isRequired,
-        }).isRequired,
-    }).isRequired,
-    undo: PropTypes.func.isRequired,
-}
-
 const mapDispatch = dispatch =>
     bindActionCreators({ undo, redo, removeCourse }, dispatch)
 
+// $FlowFixMe
 export default connect(undefined, mapDispatch)(Sidebar)

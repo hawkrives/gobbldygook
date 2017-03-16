@@ -9,7 +9,8 @@ export type AreaOfStudyTypeEnum =
     | 'degree'
     | 'major'
     | 'concentration'
-    | 'emphasis';
+    | 'emphasis'
+    | 'interdisciplinary';
 export type AreaOfStudy = Requirement & {
     name: string,
     type: AreaOfStudyTypeEnum,

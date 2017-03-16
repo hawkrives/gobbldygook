@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
+import { connect } from 'react-redux'
 
 import difference from 'lodash/difference'
 import filter from 'lodash/filter'
@@ -15,123 +17,144 @@ import union from 'lodash/union'
 import uniq from 'lodash/uniq'
 import values from 'lodash/values'
 
-import {
-    sortStudiesByType,
-} from '../../../object-student/sort-studies-by-type'
 import AreaOfStudyGroup from './area-of-study-group'
 import Button from '../../components/button'
-import { areaTypeConstants } from '../../../object-student/area-types'
+const {
+    sortStudiesByType,
+} = require('../../../object-student/sort-studies-by-type')
+const { areaTypeConstants } = require('../../../object-student/area-types')
 
-export default function AreaOfStudySidebar(props) {
-    const { allAreas, student, showAreaPickerFor } = props
-    const allAreasGrouped = groupBy(allAreas, 'type')
+type AreaOfStudy = Object;
+type Student = Object;
+type PropTypes = {
+    allAreas: AreaOfStudy[],
+    student: Student,
+};
 
-    const sortedStudies = sortStudiesByType(student.studies)
+class AreaOfStudySidebarComponent extends React.PureComponent {
+    props: PropTypes;
 
-    // group the studies by their type
-    const groupedStudies = groupBy(sortedStudies, study =>
-        study.type.toLowerCase())
+    state: {
+        showAreaPickerFor: { [key: string]: boolean },
+    } = {
+        showAreaPickerFor: {},
+    };
 
-    // pull out the results
-    const studyResults = mapValues(groupedStudies, group =>
-        map(
-            group,
-            area =>
-                find(student.areas, pick(area, ['name', 'type', 'revision'])) ||
-                area
+    showAreaPicker = (type: string, ev: Event) => {
+        ev.stopPropagation()
+        ev.preventDefault()
+        this.setState(state => ({
+            showAreaPickerFor: { ...state.showAreaPickerFor, [type]: true },
+        }))
+    };
+
+    hideAreaPicker = (type: string, ev: Event) => {
+        ev.stopPropagation()
+        ev.preventDefault()
+        this.setState(state => ({
+            showAreaPickerFor: { ...state.showAreaPickerFor, [type]: false },
+        }))
+    };
+
+    render() {
+        const props = this.props
+        const { allAreas, student } = props
+        const { showAreaPickerFor } = this.state
+        const allAreasGrouped = groupBy(allAreas, 'type')
+
+        const sortedStudies = sortStudiesByType(student.studies)
+
+        // group the studies by their type
+        const groupedStudies = groupBy(sortedStudies, study =>
+            study.type.toLowerCase())
+
+        // pull out the results
+        const studyResults = mapValues(groupedStudies, group =>
+            map(
+                group,
+                area =>
+                    find(
+                        student.areas,
+                        pick(area, ['name', 'type', 'revision'])
+                    ) || area
+            ))
+
+        // and then render them
+        const sections = map(studyResults, (areas, areaType) => (
+            <AreaOfStudyGroup
+                key={areaType}
+                allAreasOfType={allAreasGrouped[areaType] || []}
+                areas={areas}
+                onEndAddArea={this.hideAreaPicker}
+                onInitiateAddArea={this.showAreaPicker}
+                showAreaPicker={showAreaPickerFor[areaType] || false}
+                student={student}
+                type={areaType}
+            />
         ))
 
-    // and then render them
-    const sections = map(studyResults, (areas, areaType) => (
-        <AreaOfStudyGroup
-            key={areaType}
-            allAreasOfType={allAreasGrouped[areaType] || []}
-            areas={areas}
-            onAddArea={props.onAddArea}
-            onAddOverride={props.onAddOverride}
-            onEndAddArea={props.onEndAddArea}
-            onInitiateAddArea={props.onInitiateAddArea}
-            onRemoveArea={props.onRemoveArea}
-            onRemoveOverride={props.onRemoveOverride}
-            onToggleOverride={props.onToggleOverride}
-            showAreaPicker={showAreaPickerFor[areaType] || false}
-            studentGraduation={student.graduation}
-            studentId={student.id}
-            type={areaType}
-        />
-    ))
+        const allAreaTypes = values(areaTypeConstants)
+        const usedAreaTypes = uniq(map(student.studies, s => s.type))
 
-    const allAreaTypes = values(areaTypeConstants)
-    const usedAreaTypes = uniq(map(student.studies, s => s.type))
+        const areaTypesToShowButtonsFor = union(
+            usedAreaTypes,
+            keys(pickBy(showAreaPickerFor, v => v === true))
+        )
 
-    const areaTypesToShowButtonsFor = union(
-        usedAreaTypes,
-        keys(pickBy(showAreaPickerFor, k => k === true))
-    )
+        const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
 
-    const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
+        const unusedAreaTypeButtons = unusedTypes.length
+            ? <section className="unused-areas-of-study">
+                  <span className="unused-areas-title">Add: </span>
+                  <span className="unused-areas-buttons">
+                      {unusedTypes.map(type => (
+                          <Button
+                              key={type}
+                              className="add-unused-area-of-study"
+                              onClick={ev => this.showAreaPicker(type, ev)}
+                              type="flat"
+                          >
+                              {type}
+                          </Button>
+                      ))}
+                  </span>
+              </section>
+            : null
 
-    const unusedAreaTypeButtons = unusedTypes.length
-        ? <section className="unused-areas-of-study">
-              <span className="unused-areas-title">Add: </span>
-              <span className="unused-areas-buttons">
-                  {unusedTypes.map(type => (
-                      <Button
-                          key={type}
-                          className="add-unused-area-of-study"
-                          onClick={ev => props.onInitiateAddArea(type, ev)}
-                          type="flat"
-                      >
-                          {type}
-                      </Button>
-                  ))}
-              </span>
-          </section>
-        : null
+        const unusedTypesToShow = filter(
+            toPairs(showAreaPickerFor),
+            ([type, toShow]) =>
+                toShow === true && !includes(usedAreaTypes, type)
+        )
 
-    const unusedTypesToShow = filter(
-        toPairs(showAreaPickerFor),
-        ([type, toShow]) => toShow === true && !includes(usedAreaTypes, type)
-    )
+        const unusedTypesToShowComponents = map(unusedTypesToShow, ([
+            type,
+            shouldShow,
+        ]) => (
+            <AreaOfStudyGroup
+                key={type}
+                allAreasOfType={allAreasGrouped[type] || []}
+                areas={[]}
+                onEndAddArea={this.hideAreaPicker}
+                onInitiateAddArea={this.showAreaPicker}
+                showAreaPicker={shouldShow || false}
+                student={student}
+                type={type}
+            />
+        ))
 
-    const unusedTypesToShowComponents = map(unusedTypesToShow, ([
-        type,
-        shouldShow,
-    ]) => (
-        <AreaOfStudyGroup
-            key={type}
-            allAreasOfType={allAreasGrouped[type] || []}
-            areas={[]}
-            onAddArea={props.onAddArea}
-            onAddOverride={props.onAddOverride}
-            onEndAddArea={props.onEndAddArea}
-            onInitiateAddArea={props.onInitiateAddArea}
-            onRemoveArea={props.onRemoveArea}
-            onToggleOverride={props.onToggleOverride}
-            showAreaPicker={shouldShow || false}
-            studentGraduation={student.graduation}
-            studentId={student.id}
-            type={type}
-        />
-    ))
-
-    return (
-        <div>
-            {sections}
-            {unusedTypesToShowComponents}
-            {unusedAreaTypeButtons}
-        </div>
-    )
+        return (
+            <div>
+                {sections}
+                {unusedTypesToShowComponents}
+                {unusedAreaTypeButtons}
+            </div>
+        )
+    }
 }
-AreaOfStudySidebar.propTypes = {
-    allAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onAddArea: PropTypes.func.isRequired,
-    onAddOverride: PropTypes.func.isRequired,
-    onEndAddArea: PropTypes.func.isRequired,
-    onInitiateAddArea: PropTypes.func.isRequired,
-    onRemoveArea: PropTypes.func.isRequired,
-    onRemoveOverride: PropTypes.func.isRequired,
-    onToggleOverride: PropTypes.func.isRequired,
-    showAreaPickerFor: PropTypes.object.isRequired,
-    student: PropTypes.object.isRequired,
-}
+
+const mapState = state => ({ allAreas: state.areas.data })
+
+export const AreaOfStudySidebar = connect(mapState)(
+    AreaOfStudySidebarComponent
+)

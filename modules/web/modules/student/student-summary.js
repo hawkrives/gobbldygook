@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
 import oxford from 'listify'
 import plur from 'plur'
@@ -51,7 +52,18 @@ const welcomeMessages = [
 
 const welcomeMessage = sample(welcomeMessages)
 
-export default function StudentSummary(props) {
+type Student = Object;
+type PropTypes = {
+    onChangeGraduation?: (string) => any,
+    onChangeMatriculation?: (string) => any,
+    onChangeName?: (string) => any,
+    randomizeHello?: boolean,
+    showAvatar?: boolean,
+    showMessage?: boolean,
+    student: Student,
+};
+
+export function StudentSummary(props: PropTypes) {
     const {
         student,
         showMessage = true,
@@ -170,14 +182,4 @@ export default function StudentSummary(props) {
             </div>
         </article>
     )
-}
-
-StudentSummary.propTypes = {
-    onChangeGraduation: PropTypes.func,
-    onChangeMatriculation: PropTypes.func,
-    onChangeName: PropTypes.func,
-    randomizeHello: PropTypes.bool,
-    showAvatar: PropTypes.bool,
-    showMessage: PropTypes.bool,
-    student: PropTypes.object.isRequired,
 }

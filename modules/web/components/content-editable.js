@@ -9,10 +9,10 @@ class ContentEditable extends Component {
     props: {
         className?: string,
         multiLine?: boolean,
-        onBlur?: () => any,
-        onChange: () => any,
-        onFocus?: () => any,
-        onKeyDown?: () => any,
+        onBlur?: (string) => any,
+        onChange: (string) => any,
+        onFocus?: (string) => any,
+        onKeyDown?: (string) => any,
         placeholder?: string,
         value?: string,
     };
@@ -28,14 +28,20 @@ class ContentEditable extends Component {
     };
 
     handleKeyDown = (ev: KeyboardEvent) => {
+        if (!(ev.target instanceof HTMLInputElement)) {
+            return
+        }
         if (!this.props.multiLine && ev.keyCode === 13) {
             ev.preventDefault()
         }
-        this.props.onKeyDown && this.props.onKeyDown(ev)
+        this.props.onKeyDown && this.props.onKeyDown(ev.target.textContent)
     };
 
     handleFocus = (ev: Event) => {
-        this.props.onFocus && this.props.onFocus(ev)
+        if (!(ev.target instanceof HTMLInputElement)) {
+            return
+        }
+        this.props.onFocus && this.props.onFocus(ev.target.textContent)
         // this.ref.placeholder.style.display = 'none'
     };
 
@@ -43,14 +49,17 @@ class ContentEditable extends Component {
         // this.ref.placeholder.style.display = 'inline'
     };
 
-    handleChange = (ev: any) => {
+    handleChange = (ev: Event) => {
+        if (!(ev.target instanceof HTMLInputElement)) {
+            return
+        }
         const value = ev.target.textContent
 
         if (value !== this.props.value) {
-            this.props.onChange({ target: { value } })
+            this.props.onChange(value)
         }
         if (ev.type === 'blur' && typeof this.props.onBlur === 'function') {
-            this.props.onBlur({ target: { value } })
+            this.props.onBlur(value)
         }
 
         this.setState({ lastValue: value })

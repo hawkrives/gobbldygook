@@ -15,9 +15,6 @@
 [options]
 emoji=true
 
-esproposal.class_static_fields=enable
-esproposal.class_instance_fields=enable
-
 ; allow flow to find the modules that we require with modules/
 module.name_mapper='^modules/\(.*\)' -> '<PROJECT_ROOT>/modules/\1'
 
