@@ -2,8 +2,9 @@ import uniqueId from 'lodash/uniqueId'
 import debug from 'debug'
 const log = debug('worker:check-student-against-area')
 
-import CheckStudentWorker from './check-student-against-area.worker.js'
+import CheckStudentWorker from './worker.check-student-against-area'
 const worker = new CheckStudentWorker()
+
 worker.onerror = msg =>
     log('[main] received error from check-student worker:', msg)
 
