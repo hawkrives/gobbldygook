@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react'
 import cx from 'classnames'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Button from '../../components/button'
 import Icon from '../../components/icon'
@@ -8,6 +10,12 @@ import Requirement from './requirement'
 import ProgressBar from '../../components/progress-bar'
 import { compareProps } from '../../../lib'
 import { close, chevronUp, chevronDown } from '../../icons/ionicons'
+import has from 'lodash/has'
+import pathToOverride from '../../../examine-student/path-to-override'
+import {
+    setOverride,
+    removeOverride,
+} from '../../redux/students/actions/overrides'
 
 import './area-of-study.scss'
 
@@ -24,13 +32,12 @@ type AreaOfStudyType = {
     type: string,
 };
 
-export default class AreaOfStudyContainer extends Component {
+class AreaOfStudyContainer extends Component {
     props: {
         area: AreaOfStudyType,
-        onAddOverride: (string[], Event) => any,
+        setOverride: (string, string, boolean) => any,
         onRemoveArea: (Object, Event) => any,
-        onRemoveOverride: (string[], Event) => any,
-        onToggleOverride: (string[], Event) => any,
+        removeOverride: (string, string) => any,
         showCloseButton: boolean,
         showEditButton: boolean,
         student: Student,
@@ -59,6 +66,32 @@ export default class AreaOfStudyContainer extends Component {
     toggleAreaExpansion = (ev: Event) => {
         ev.preventDefault()
         this.setState({ isOpen: !this.state.isOpen })
+    };
+
+    addOverride = (path: string[], ev: Event) => {
+        ev.stopPropagation()
+        ev.preventDefault()
+        const codifiedPath = pathToOverride(path)
+        this.props.setOverride(this.props.student.id, codifiedPath, true)
+    };
+
+    removeOverride = (path: string[], ev: Event) => {
+        ev.stopPropagation()
+        ev.preventDefault()
+        const codifiedPath = pathToOverride(path)
+        this.props.removeOverride(this.props.student.id, codifiedPath)
+    };
+
+    toggleOverride = (path: string[], ev: Event) => {
+        ev.stopPropagation()
+        ev.preventDefault()
+        const codifiedPath = pathToOverride(path)
+
+        if (has(this.props.student.overrides, codifiedPath)) {
+            this.props.removeOverride(this.props.student.id, codifiedPath)
+        } else {
+            this.props.setOverride(this.props.student.id, codifiedPath, true)
+        }
     };
 
     render() {
@@ -151,9 +184,9 @@ export default class AreaOfStudyContainer extends Component {
                 <Requirement
                     {...areaDetails}
                     topLevel
-                    onAddOverride={props.onAddOverride}
-                    onRemoveOverride={props.onRemoveOverride}
-                    onToggleOverride={props.onToggleOverride}
+                    onAddOverride={this.addOverride}
+                    onRemoveOverride={this.removeOverride}
+                    onToggleOverride={this.toggleOverride}
                     path={[type, name]}
                 />
             )
@@ -177,3 +210,9 @@ export default class AreaOfStudyContainer extends Component {
         )
     }
 }
+
+const mapDispatch = dispatch =>
+    bindActionCreators({ setOverride, removeOverride }, dispatch)
+
+// $FlowFixMe
+export default connect(null, mapDispatch)(AreaOfStudyContainer)

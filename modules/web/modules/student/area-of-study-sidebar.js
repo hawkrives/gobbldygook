@@ -28,9 +28,6 @@ type AreaOfStudy = Object;
 type Student = Object;
 type PropTypes = {
     allAreas: AreaOfStudy[],
-    onAddOverride: (string[], Event) => any,
-    onRemoveOverride: (string[], Event) => any,
-    onToggleOverride: (string[], Event) => any,
     student: Student,
 };
 
@@ -88,11 +85,8 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
                 key={areaType}
                 allAreasOfType={allAreasGrouped[areaType] || []}
                 areas={areas}
-                onAddOverride={props.onAddOverride}
                 onEndAddArea={this.hideAreaPicker}
                 onInitiateAddArea={this.showAreaPicker}
-                onRemoveOverride={props.onRemoveOverride}
-                onToggleOverride={props.onToggleOverride}
                 showAreaPicker={showAreaPickerFor[areaType] || false}
                 student={student}
                 type={areaType}
@@ -141,11 +135,8 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
                 key={type}
                 allAreasOfType={allAreasGrouped[type] || []}
                 areas={[]}
-                onAddOverride={props.onAddOverride}
                 onEndAddArea={this.hideAreaPicker}
                 onInitiateAddArea={this.showAreaPicker}
-                onRemoveOverride={props.onRemoveOverride}
-                onToggleOverride={props.onToggleOverride}
                 showAreaPicker={shouldShow || false}
                 student={student}
                 type={type}

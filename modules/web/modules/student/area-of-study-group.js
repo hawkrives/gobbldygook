@@ -19,11 +19,8 @@ type PropTypes = {
     addArea: (string, AreaOfStudyType) => any,
     allAreasOfType: AreaOfStudyType[],
     areas: AreaOfStudyType[],
-    onAddOverride: (string[], Event) => any,
     onEndAddArea: (string, Event) => any,
     onInitiateAddArea: (string, Event) => any,
-    onRemoveOverride: (string[], Event) => any, // was optional
-    onToggleOverride: (string[], Event) => any,
     removeArea: (string, Object) => any,
     showAreaPicker: boolean,
     student: Student,
@@ -79,10 +76,7 @@ class AreaOfStudyGroup extends React.PureComponent {
                     <AreaOfStudy
                         area={area}
                         key={i + area.name ? area.name : ''}
-                        onAddOverride={props.onAddOverride}
                         onRemoveArea={this.onRemoveArea}
-                        onRemoveOverride={props.onRemoveOverride}
-                        onToggleOverride={props.onToggleOverride}
                         showCloseButton={showAreaPicker}
                         showEditButton={showAreaPicker}
                         student={props.student}
