@@ -5,10 +5,10 @@ import filter from 'lodash/filter'
 import round from 'lodash/round'
 import present from 'present'
 
-import { stringifyError } from '../../lib/stringify-error'
-import { evaluate } from '../../examine-student/evaluate'
-import { getActiveStudentCourses } from './get-active-student-courses'
-import { alterCourse } from './alter-course-for-evaluation'
+import { stringifyError } from '../../../lib/stringify-error'
+import { evaluate } from '../../../examine-student/evaluate'
+import { getActiveStudentCourses } from '../get-active-student-courses'
+import { alterCourse } from '../alter-course-for-evaluation'
 
 const log = (...args) =>
     args.length && console.log('worker:check-student-against-area', ...args)

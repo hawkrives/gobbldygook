@@ -1,5 +1,5 @@
 import 'whatwg-fetch'
-import { status, json, text } from '../../lib/fetch-helpers'
+import { status, json, text } from '../../../lib/fetch-helpers'
 import serializeError from 'serialize-error'
 import series from 'p-series'
 
@@ -19,12 +19,12 @@ import uniq from 'lodash/uniq'
 import present from 'present'
 import yaml from 'js-yaml'
 
-import db from './db'
+import db from '../db'
 import {
     buildDeptString,
     buildDeptNum,
-} from '../../school-st-olaf-college/deptnums'
-import { splitParagraph } from '../../lib/split-paragraph'
+} from '../../../school-st-olaf-college/deptnums'
+import { splitParagraph } from '../../../lib/split-paragraph'
 import { convertTimeStringsToOfferings } from 'sto-sis-time-parser'
 
 const log = (...args) =>
