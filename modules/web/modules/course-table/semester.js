@@ -38,13 +38,15 @@ function Semester(props) {
 
         infoBar.push(
             <li key="course-count">
-                {`${courseCount} ${plur('course', courseCount)}`}
+                {courseCount} {courseCount === 1 ? 'course' : 'courses'}
             </li>
         )
         currentCredits &&
             infoBar.push(
                 <li key="credit-count">
-                    {`${currentCredits} ${plur('credit', currentCredits)}`}
+                    {currentCredits}
+                    {' '}
+                    {currentCredits === 1 ? 'credit' : 'credits'}
                 </li>
             )
     }

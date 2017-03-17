@@ -88,7 +88,7 @@ export function makeWhereQualifier(where) {
 export function makeWhereExpression({ expr }) {
     const needs = `${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num}`
     const qualifier = makeWhereQualifier(expr.$where)
-    const description = `${expr._counted} of ${needs} ${expr.$distinct ? 'distinct' : ''} ${plur('course', expr.$count.$num)} from courses where ${qualifier}`
+    const description = `${expr._counted} of ${needs} ${expr.$distinct ? 'distinct' : ''} ${expr.$count.$num === 1 ? 'course' : 'courses'} from courses where ${qualifier}`
 
     let contents = map(expr._matches, (course, i) => (
         <Expression
@@ -106,7 +106,7 @@ export function makeWhereExpression({ expr }) {
 }
 
 function makeOccurrenceExpression({ expr }) {
-    const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${plur('occurrence', expr.$count.$num)} of `
+    const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${expr.$count.$num === 1 ? 'occurrence' : 'occurrences'} of `
 
     const contents = <Expression expr={{ ...expr, type: 'course' }} />
 
