@@ -19,6 +19,13 @@ import {
 
 import './area-of-study.scss'
 
+import styled from 'styled-components'
+
+const AreaOfStudyOpenIndicator = styled(Icon)`
+    margin-right: 0.5em;
+    cursor: pointer;
+`
+
 type Student = Object;
 type AreaOfStudyType = {
     _area?: Object,
@@ -142,9 +149,9 @@ class AreaOfStudyContainer extends Component {
                             >
                                 <Icon>{close}</Icon>
                             </Button>}
-                        <Icon className="area--open-indicator">
+                        <AreaOfStudyOpenIndicator>
                             {isOpen ? chevronUp : chevronDown}
-                        </Icon>
+                        </AreaOfStudyOpenIndicator>
                     </span>
                 </div>
                 <ProgressBar

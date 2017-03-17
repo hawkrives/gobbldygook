@@ -46,10 +46,10 @@ function Sidebar(props: PropTypes) {
         <aside className="sidebar">
             <Toolbar className="student-buttons">
                 <Button link to="/" title="Students">
-                    <Icon type="block">{iosPeopleOutline}</Icon>
+                    <Icon block>{iosPeopleOutline}</Icon>
                 </Button>
                 <Button link to={`/s/${studentId}/search`} title="Search">
-                    <Icon type="block">{iosSearch}</Icon>
+                    <Icon block>{iosSearch}</Icon>
                 </Button>
 
                 <Separator type="spacer" />
@@ -59,7 +59,7 @@ function Sidebar(props: PropTypes) {
                     onClick={() => undo(studentId)}
                     disabled={!canUndo}
                 >
-                    <Icon type="block">
+                    <Icon block>
                         {!canUndo ? iosUndoOutline : iosUndo}
                     </Icon>
                 </Button>
@@ -68,7 +68,7 @@ function Sidebar(props: PropTypes) {
                     onClick={() => redo(studentId)}
                     disabled={!canRedo}
                 >
-                    <Icon type="block">
+                    <Icon block>
                         {!canRedo ? iosRedoOutline : iosRedo}
                     </Icon>
                 </Button>
@@ -76,7 +76,7 @@ function Sidebar(props: PropTypes) {
                 <Separator type="spacer" />
 
                 <Button link to={`/s/${studentId}/share`} title="Share">
-                    <Icon type="block">{iosUploadOutline}</Icon>
+                    <Icon block>{iosUploadOutline}</Icon>
                 </Button>
             </Toolbar>
 
