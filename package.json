@@ -34,6 +34,9 @@
     "moduleNameMapper": {
       "^.+\\.scss$": "<rootDir>/config/flow/css.js.flow"
     },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "testPathIgnorePatterns": [
       "\\.support.js$",
       "__support__"
@@ -149,6 +152,7 @@
     "del": "2.2.2",
     "duplicate-package-checker-webpack-plugin": "1.1.0",
     "enzyme": "2.7.1",
+    "enzyme-to-json": "1.5.0",
     "eslint": "3.17.1",
     "eslint-config-prettier": "1.5.0",
     "eslint-plugin-babel": "4.1.1",
