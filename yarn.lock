@@ -5079,20 +5079,15 @@ react-dom@15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-dropzone@3.12.1:
-  version "3.12.1"
-  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.12.1.tgz#c705d94b21a607857d14bd0a3c2cab1603547a91"
+react-dropzone@3.12.2:
+  version "3.12.2"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.12.2.tgz#7e66a37322a80cf26a205d749ecf8cad0d90aa6f"
   dependencies:
     attr-accept "^1.0.3"
-    react-is-deprecated "^0.1.2"
 
 react-input-autosize@1.1.0, react-input-autosize@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-1.1.0.tgz#3fe1ac832387d8abab85f6051ceab1c9e5570853"
-
-react-is-deprecated@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/react-is-deprecated/-/react-is-deprecated-0.1.2.tgz#301148f86ea428fe8e673eca7a372160b7579dbd"
 
 react-modal@1.7.3:
   version "1.7.3"
