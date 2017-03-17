@@ -16,6 +16,10 @@ const {
 
 module.exports.checkForInvalidYear = checkForInvalidYear
 function checkForInvalidYear(course, scheduleYear) {
+    if (course.semester === 9 || course.semester === undefined) {
+        return null
+    }
+
     let thisYear = new Date().getFullYear()
 
     if (course.year !== scheduleYear && scheduleYear <= thisYear) {
@@ -31,6 +35,10 @@ function checkForInvalidYear(course, scheduleYear) {
 
 module.exports.checkForInvalidSemester = checkForInvalidSemester
 function checkForInvalidSemester(course, scheduleSemester) {
+    if (course.semester === undefined) {
+        return null
+    }
+
     if (course.semester !== scheduleSemester) {
         return {
             warning: true,
