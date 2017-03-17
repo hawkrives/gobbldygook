@@ -10,6 +10,8 @@ const mockStudent = () =>
     Student({
         name: 'test',
         id: '0xabadidea',
+        matriculation: 2015,
+        graduation: 2019,
         dateCreated: new Date('2017-03-17T02:03:33.974Z'),
         dateLastModified: new Date('2017-03-17T02:03:33.974Z'),
     })
@@ -79,4 +81,3 @@ test('Year can remove a semester', () => {
 
     expect(tree).toMatchSnapshot()
 })
-
