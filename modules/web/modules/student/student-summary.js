@@ -1,10 +1,8 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import oxford from 'listify'
-import plur from 'plur'
-import filter from 'lodash/filter'
-import map from 'lodash/map'
+import listify from 'listify'
+import groupBy from 'lodash/groupBy'
 import sample from 'lodash/sample'
 
 import AvatarLetter from '../../components/avatar-letter'
@@ -16,16 +14,6 @@ import {
 import { countCredits } from '../../../examine-student/count-credits'
 
 import './student-summary.scss'
-
-const goodGraduationMessage = `It looks like you'll make it! Just follow the plan, and go over my output
-	with your advisor a few times.`
-    .split('\n')
-    .join(' ')
-
-const badGraduationMessage = `You haven't planned everything out yet. Ask your advisor if you need help
-	fitting everything in.`
-    .split('\n')
-    .join(' ')
 
 const welcomeMessages = [
     'Hi, ',
@@ -53,133 +41,245 @@ const welcomeMessages = [
 const welcomeMessage = sample(welcomeMessages)
 
 type Student = Object;
-type PropTypes = {
-    onChangeGraduation?: (string) => any,
-    onChangeMatriculation?: (string) => any,
-    onChangeName?: (string) => any,
-    randomizeHello?: boolean,
-    showAvatar?: boolean,
-    showMessage?: boolean,
-    student: Student,
-};
 
-export function StudentSummary(props: PropTypes) {
-    const {
-        student,
-        showMessage = true,
-        showAvatar = true,
-        randomizeHello = false,
-    } = props
-    const { studies, canGraduate } = student
+export class StudentSummary extends React.PureComponent {
+    props: {
+        onChangeGraduation?: (string) => any,
+        onChangeMatriculation?: (string) => any,
+        onChangeName?: (string) => any,
+        randomizeHello?: boolean,
+        showAvatar?: boolean,
+        showMessage?: boolean,
+        student: Student,
+    };
 
-    const NameEl = props.onChangeName
-        ? <ContentEditable
-              className="autosize-input"
-              onBlur={props.onChangeName}
-              value={String(student.name)}
-          />
-        : <span>{String(student.name)}</span>
+    render() {
+        const {
+            student,
+            showMessage = true,
+            showAvatar = true,
+            randomizeHello = false,
+            ...props
+        } = this.props
+        const { studies, canGraduate } = student
 
-    const degrees = filter(studies, { type: 'degree' })
-    const majors = filter(studies, { type: 'major' })
-    const concentrations = filter(studies, { type: 'concentration' })
-    const emphases = filter(studies, { type: 'emphasis' })
+        const className = canGraduate ? 'can-graduate' : 'cannot-graduate'
 
-    const degreeWord = plur('degree', degrees.length)
-    const majorWord = plur('major', majors.length)
-    const concentrationWord = plur('concentration', concentrations.length)
-    const emphasisWord = plur('emphasis', emphases.length)
+        const currentCredits = countCredits(getActiveStudentCourses(student))
+        const neededCredits = student.creditsNeeded
 
-    const degreeEmphasizer = degrees.length === 1 ? 'a ' : ''
-    const majorEmphasizer = majors.length === 1 ? 'a ' : ''
-    const concentrationEmphasizer = concentrations.length === 1 ? 'a ' : ''
-    const emphasisEmphasizer = emphases.length === 1 ? 'an ' : ''
+        return (
+            <article className={cx('student-summary', className)}>
+                <Header
+                    canGraduate={canGraduate}
+                    name={student.name}
+                    onChangeName={props.onChangeName}
+                    randomizeHello={randomizeHello}
+                    showAvatar={showAvatar}
+                />
+                <div className="content">
+                    <DateSummary
+                        onChangeGraduation={props.onChangeGraduation}
+                        onChangeMatriculation={props.onChangeMatriculation}
+                        matriculation={student.matriculation}
+                        graduation={student.graduation}
+                    />
 
-    const degreeList = oxford(map(degrees, d => d.name))
-    const majorList = oxford(map(majors, m => m.name))
-    const concentrationList = oxford(map(concentrations, c => c.name))
-    const emphasisList = oxford(map(emphases, e => e.name))
+                    <DegreeSummary studies={studies} />
 
-    const currentCredits = countCredits(getActiveStudentCourses(student))
-    const neededCredits = student.creditsNeeded
-    const enoughCredits = currentCredits >= neededCredits
+                    <CreditSummary
+                        currentCredits={currentCredits}
+                        neededCredits={neededCredits}
+                    />
 
-    const graduationEl = props.onChangeGraduation
-        ? <ContentEditable
-              className="autosize-input"
-              onBlur={props.onChangeGraduation}
-              value={String(student.graduation)}
-          />
-        : <span>{String(student.graduation)}</span>
+                    {showMessage ? <Footer canGraduate={canGraduate} /> : null}
+                </div>
+            </article>
+        )
+    }
+}
 
-    const matriculationEl = props.onChangeMatriculation
-        ? <ContentEditable
-              className="autosize-input"
-              onBlur={props.onChangeMatriculation}
-              value={String(student.matriculation)}
-          />
-        : <span>{String(student.matriculation)}</span>
+class Header extends React.PureComponent {
+    props: {
+        canGraduate: boolean,
+        name: string,
+        onChangeName: (string) => any,
+        randomizeHello: boolean,
+        showAvatar: boolean,
+    };
 
-    const canGraduateClass = canGraduate ? 'can-graduate' : 'cannot-graduate'
+    render() {
+        const props = this.props
 
-    return (
-        <article className={cx('student-summary', canGraduateClass)}>
+        const className = props.canGraduate
+            ? 'can-graduate'
+            : 'cannot-graduate'
+
+        const avatar = props.showAvatar
+            ? <AvatarLetter
+                  className={cx('student-letter', className)}
+                  value={props.name}
+              />
+            : null
+
+        const message = props.randomizeHello
+            ? sample(welcomeMessages)
+            : welcomeMessage
+
+        const name = (
+            <ContentEditable
+                editable={Boolean(props.onChangeName)}
+                className="autosize-input"
+                onBlur={props.onChangeName}
+                value={String(props.name)}
+            />
+        )
+
+        return (
             <header className="student-summary--header">
-                {showAvatar
-                    ? <AvatarLetter
-                          className={cx('student-letter', canGraduateClass)}
-                          value={student.name}
-                      />
-                    : null}
+                {avatar}
+
                 <div className="intro">
-                    {randomizeHello ? sample(welcomeMessages) : welcomeMessage}
-                    {NameEl}
-                    !
+                    {message}{name}!
                 </div>
             </header>
-            <div className="content">
-                <div className="paragraph">
-                    After matriculating in
-                    {' '}
-                    {matriculationEl}
-                    , you are planning to graduate in
-                    {' '}
-                    {graduationEl}
-                    , with
-                    {' '}
-                    {' '}
-                    {degrees.length > 0
-                        ? `${degreeEmphasizer}${degreeList} ${degreeWord}`
-                        : `no ${degreeWord}`}
-                    {majors.length || concentrations.length || emphases.length
-                        ? majors.length &&
-                              (concentrations.length || emphases.length)
-                              ? ', '
-                              : ' and '
-                        : ''}
-                    {majors.length > 0 &&
-                        `${majorEmphasizer}${majorWord} in ${majorList}`}
-                    {majors.length && concentrations.length ? ', and ' : ''}
-                    {concentrations.length > 0 &&
-                        `${concentrationEmphasizer}${concentrationWord} in ${concentrationList}`}
-                    {(majors.length || concentrations.length) && emphases.length
-                        ? ', '
-                        : ''}
-                    {emphases.length > 0 &&
-                        `not to mention ${emphasisEmphasizer}${emphasisWord} in ${emphasisList}`}
-                    {'. '}
-                    {currentCredits
-                        ? `You have currently planned for ${currentCredits} of your ${neededCredits} required credits. ${enoughCredits ? 'Good job!' : ''}`
-                        : ''}
-                </div>
-                {showMessage
-                    ? <div className="paragraph graduation-message">
-                          {canGraduate
-                              ? goodGraduationMessage
-                              : badGraduationMessage}
-                      </div>
-                    : null}
+        )
+    }
+}
+
+class Footer extends React.PureComponent {
+    goodGraduationMessage = [
+        "It looks like you'll make it! Just follow the plan, and",
+        'go over my output with your advisor a few times.',
+    ].join(' ');
+
+    badGraduationMessage = [
+        "You haven't planned everything out yet.",
+        'Ask your advisor if you need help fitting everything in.',
+    ].join(' ');
+
+    props: {
+        canGraduate: boolean,
+    };
+
+    render() {
+        const msg = this.props.canGraduate
+            ? this.goodGraduationMessage
+            : this.badGraduationMessage
+
+        return (
+            <div className="paragraph graduation-message">
+                {msg}
             </div>
-        </article>
-    )
+        )
+    }
+}
+
+class DateSummary extends React.PureComponent {
+    props: {
+        onChangeGraduation: (string) => any,
+        onChangeMatriculation: (string) => any,
+        matriculation: string,
+        graduation: string,
+    };
+
+    render() {
+        const props = this.props
+
+        const matriculation = (
+            <ContentEditable
+                editable={Boolean(props.onChangeMatriculation)}
+                className="autosize-input"
+                onBlur={props.onChangeMatriculation}
+                value={String(props.matriculation)}
+            />
+        )
+
+        const graduation = (
+            <ContentEditable
+                editable={Boolean(props.onChangeGraduation)}
+                className="autosize-input"
+                onBlur={props.onChangeGraduation}
+                value={String(props.graduation)}
+            />
+        )
+
+        return (
+            <p className="paragraph">
+                After matriculating in {matriculation}, you are
+                planning to graduate in {graduation}.
+            </p>
+        )
+    }
+}
+
+class DegreeSummary extends React.PureComponent {
+    props: {
+        studies: any[],
+    };
+
+    render() {
+        const {
+            degree: dS = [],
+            major: mS = [],
+            concentration: cS = [],
+            emphasis: eS = [],
+        } = groupBy(this.props.studies, s => s.type)
+
+        const dCount = dS.length
+        const mCount = mS.length
+        const cCount = cS.length
+        const eCount = eS.length
+
+        const dWord = dCount === 1 ? 'degree' : 'degrees'
+        const mWord = mCount === 1 ? 'major' : 'majors'
+        const cWord = cCount === 1 ? 'concentration' : 'concentrations'
+        const eWord = eCount === 1 ? 'emphasis' : 'emphases'
+
+        const dEmph = dCount === 1 ? 'a ' : ''
+        const mEmph = mCount === 1 ? 'a ' : ''
+        const cEmph = cCount === 1 ? 'a ' : ''
+        const eEmph = eCount === 1 ? 'an ' : ''
+
+        const dList = listify(dS.map(d => d.name))
+        const mList = listify(mS.map(m => m.name))
+        const cList = listify(cS.map(c => c.name))
+        const eList = listify(eS.map(e => e.name))
+
+        return (
+            <p className="paragraph">
+                You are planning on{' '}
+                {dCount > 0 ? `${dEmph}${dList} ${dWord}` : `no ${dWord}`}
+                {mCount || cCount || eCount
+                    ? mCount && (cCount || eCount) ? ', ' : ' and '
+                    : ''}
+                {mCount && `${mEmph}${mWord} in ${mList}`}
+                {mCount && cCount ? ', and ' : ''}
+                {cCount > 0 && `${cEmph}${cWord} in ${cList}`}
+                {(mCount || cCount) && eCount ? ', ' : ''}
+                {eCount > 0 && `not to mention ${eEmph}${eWord} in ${eList}`}
+                {'. '}
+            </p>
+        )
+    }
+}
+
+class CreditSummary extends React.PureComponent {
+    props: {
+        currentCredits: number,
+        neededCredits: number,
+    };
+
+    render() {
+        const { currentCredits, neededCredits } = this.props
+        const enoughCredits = currentCredits >= neededCredits
+
+        return (
+            <p className="paragraph">
+                You have currently planned for {currentCredits}{' '}
+                of your {neededCredits} required credits.
+                {enoughCredits ? ' Good job!' : ''}
+            </p>
+        )
+    }
 }
