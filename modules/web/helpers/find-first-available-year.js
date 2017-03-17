@@ -3,7 +3,7 @@ import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import max from 'lodash/max'
 import includes from 'lodash/includes'
-import { findMissingNumberBinarySearch } from '../../lib'
+import { findMissingNumber } from '../../lib/find-missing-number'
 
 /**
  * Takes a list of schedules and finds the first open year.
@@ -33,7 +33,7 @@ export function findFirstAvailableYear(schedules, matriculation) {
     // only uniq after we're done messing with the contents
     years = uniq(years)
 
-    let missingNo = findMissingNumberBinarySearch(years)
+    let missingNo = findMissingNumber(years)
     if (missingNo !== null) {
         return missingNo
     }
