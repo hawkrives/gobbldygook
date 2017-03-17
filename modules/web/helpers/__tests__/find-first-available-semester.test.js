@@ -59,6 +59,7 @@ describe('findFirstAvailableSemester', () => {
                 year: 0,
                 semester: 0,
                 active: true,
+                id: 8,
                 title: 'New Schedule',
                 index: 1,
             },
