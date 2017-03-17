@@ -1,6 +1,8 @@
 // @flow
 import max from 'lodash/max'
 import uniq from 'lodash/uniq'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 import { findMissingNumber } from '../../lib/find-missing-number'
 
@@ -24,8 +26,8 @@ export function findFirstAvailableSemester(
     schedules: Schedule[],
     forYear: number
 ) {
-    const thisYear = schedules.filter(s => s.year === forYear)
-    const semesters = thisYear.map(s => s.semester)
+    const thisYear = filter(schedules, s => s.year === forYear)
+    const semesters = map(thisYear, s => s.semester)
 
     // stick a 0 at the front so findBinary will start from 1
     semesters.unshift(0)
