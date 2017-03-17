@@ -13,10 +13,13 @@ const {
     expandYear,
     semesterName,
 } = require('../school-st-olaf-college/course-info')
-// import {alertCircled, iosCalendarOutline, iosClockOutline} from '../web/icons/ionicons'
 
 module.exports.checkForInvalidYear = checkForInvalidYear
 function checkForInvalidYear(course, scheduleYear) {
+    if (course.semester === 9 || course.semester === undefined) {
+        return null
+    }
+
     let thisYear = new Date().getFullYear()
 
     if (course.year !== scheduleYear && scheduleYear <= thisYear) {
@@ -24,7 +27,6 @@ function checkForInvalidYear(course, scheduleYear) {
             warning: true,
             type: 'invalid-year',
             msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
-            icon: 'alertCircled',
         }
     }
 
@@ -33,12 +35,15 @@ function checkForInvalidYear(course, scheduleYear) {
 
 module.exports.checkForInvalidSemester = checkForInvalidSemester
 function checkForInvalidSemester(course, scheduleSemester) {
+    if (course.semester === undefined) {
+        return null
+    }
+
     if (course.semester !== scheduleSemester) {
         return {
             warning: true,
             type: 'invalid-semester',
             msg: `Wrong Semester (originally from ${semesterName(course.semester)})`,
-            icon: 'iosCalendarOutline',
         }
     }
 
@@ -52,7 +57,6 @@ function checkForTimeConflicts(courses) {
     conflicts = map(conflicts, conflictSet => {
         if (some(conflictSet)) {
             // +1 to the indices because humans don't 0-index lists
-            // eslint-disable-next-line no-confusing-arrow
             const conflicts = compact(
                 map(
                     conflictSet,
@@ -66,7 +70,6 @@ function checkForTimeConflicts(courses) {
                 msg: `Time conflict with the ${oxford(conflicted, {
                     oxfordComma: true,
                 })} ${plur('course', conflicts.length)}`,
-                icon: 'iosClockOutline',
             }
         }
 

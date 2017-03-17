@@ -21,7 +21,7 @@
 	overflow: hidden;
 	font-size: 0.75em;
 
-	& > * + *::before {
+	& > * + *:not(:empty)::before {
 		content: " · ";
 	}
 }
@@ -44,7 +44,7 @@
 		display: inline;
 	}
 	li + li::before {
-		content: " · ";
+		content: " + ";
 	}
 }
 

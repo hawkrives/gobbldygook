@@ -14,6 +14,12 @@ import { buildDeptNum } from '../../../school-st-olaf-college/deptnums'
 import Icon from '../../components/icon'
 import ModalCourse from './modal-course'
 
+import {
+    iosClockOutline,
+    iosCalendarOutline,
+    alertCircled,
+} from '../../icons/ionicons'
+
 import './inline-course.scss'
 
 type InlineCourseProps = {
@@ -26,6 +32,12 @@ type InlineCourseProps = {
     scheduleId?: string,
     studentId?: string,
 };
+
+const warningsMap = {
+    'time-conflict': iosClockOutline,
+    'invalid-semester': iosCalendarOutline,
+    'invalid-year': alertCircled,
+}
 
 class InlineCourse extends Component {
     props: InlineCourseProps;
@@ -65,7 +77,7 @@ class InlineCourse extends Component {
             w => !isNull(w) && w.warning === true
         )
         const warningEls = map(validWarnings, (w, idx) => (
-            <li key={idx}><Icon>{w.icon}</Icon> {w.msg}</li>
+            <li key={idx}><Icon>{warningsMap[w.type]}</Icon> {w.msg}</li>
         ))
 
         let classSet = cx(this.props.className, 'course', {
@@ -109,7 +121,7 @@ class InlineCourse extends Component {
                         </span>}
                 </div>
                 <div className="course-row course-summary">
-                    {course.times}
+                    {map(course.times, (timestring, i) => <span key={i}>{timestring}</span>)}
                 </div>
 
                 {this.state.isOpen

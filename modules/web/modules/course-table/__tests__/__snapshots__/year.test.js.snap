@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Year can add a semester 1`] = `
+<div
+  className="year"
+>
+  <header
+    className="year-title"
+  >
+    <h1>
+      2016—2017
+    </h1>
+    <span
+      className="buttons"
+    >
+      <Button
+        className="add-semester"
+        disabled={false}
+        onClick={[Function]}
+        title="Add Semester"
+        type="flat"
+      >
+        Add ‘
+        Fall
+        ’
+      </Button>
+      <Button
+        className="remove-year"
+        onClick={[Function]}
+        title="Remove the year 2016—2017"
+        type="flat"
+      >
+        Remove Year
+      </Button>
+    </span>
+  </header>
+  <div
+    className="row semester-list"
+  />
+</div>
+`;
+
+exports[`Year can add a semester 2`] = `
+<div
+  className="year"
+>
+  <header
+    className="year-title"
+  >
+    <h1>
+      2016—2017
+    </h1>
+    <span
+      className="buttons"
+    >
+      <Button
+        className="add-semester"
+        disabled={false}
+        onClick={[Function]}
+        title="Add Semester"
+        type="flat"
+      >
+        Add ‘
+        Fall
+        ’
+      </Button>
+      <Button
+        className="remove-year"
+        onClick={[Function]}
+        title="Remove the year 2016—2017"
+        type="flat"
+      >
+        Remove Year
+      </Button>
+    </span>
+  </header>
+  <div
+    className="row semester-list"
+  />
+</div>
+`;
+
+exports[`Year can remove a semester 1`] = `
+<div
+  className="year"
+>
+  <header
+    className="year-title"
+  >
+    <h1>
+      2016—2017
+    </h1>
+    <span
+      className="buttons"
+    >
+      <Button
+        className="add-semester"
+        disabled={false}
+        onClick={[Function]}
+        title="Add Semester"
+        type="flat"
+      >
+        Add ‘
+        Fall
+        ’
+      </Button>
+      <Button
+        className="remove-year"
+        onClick={[Function]}
+        title="Remove the year 2016—2017"
+        type="flat"
+      >
+        Remove Year
+      </Button>
+    </span>
+  </header>
+  <div
+    className="row semester-list"
+  />
+</div>
+`;
+
+exports[`Year can remove a semester 2`] = `
+<div
+  className="year"
+>
+  <header
+    className="year-title"
+  >
+    <h1>
+      2016—2017
+    </h1>
+    <span
+      className="buttons"
+    >
+      <Button
+        className="add-semester"
+        disabled={false}
+        onClick={[Function]}
+        title="Add Semester"
+        type="flat"
+      >
+        Add ‘
+        Fall
+        ’
+      </Button>
+      <Button
+        className="remove-year"
+        onClick={[Function]}
+        title="Remove the year 2016—2017"
+        type="flat"
+      >
+        Remove Year
+      </Button>
+    </span>
+  </header>
+  <div
+    className="row semester-list"
+  />
+</div>
+`;
+
+exports[`Year renders shallowly 1`] = `
+<div
+  className="year"
+>
+  <header
+    className="year-title"
+  >
+    <h1>
+      2016—2017
+    </h1>
+    <span
+      className="buttons"
+    >
+      <button
+        className="button button--flat add-semester"
+        disabled={false}
+        onClick={[Function]}
+        style={undefined}
+        title="Add Semester"
+        type="button"
+      >
+        Add ‘
+        Fall
+        ’
+      </button>
+      <button
+        className="button button--flat remove-year"
+        disabled={undefined}
+        onClick={[Function]}
+        style={undefined}
+        title="Remove the year 2016—2017"
+        type="button"
+      >
+        Remove Year
+      </button>
+    </span>
+  </header>
+  <div
+    className="row semester-list"
+  />
+</div>
+`;

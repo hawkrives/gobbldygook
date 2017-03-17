@@ -2,9 +2,7 @@
 const { compareProps } = require('./compare-props')
 const { AuthError, NetworkError } = require('./errors')
 const { status, classifyFetchErrors, json, text } = require('./fetch-helpers')
-const {
-    findMissingNumberBinarySearch,
-} = require('./find-missing-number-binary-search')
+const { findMissingNumber } = require('./find-missing-number')
 const { findWordForProgress } = require('./find-word-for-progress')
 const { interpose } = require('./interpose')
 const { partitionByIndex } = require('./partition-by-index')
@@ -22,7 +20,7 @@ module.exports = {
     classifyFetchErrors,
     json,
     text,
-    findMissingNumberBinarySearch,
+    findMissingNumber,
     findWordForProgress,
     interpose,
     partitionByIndex,

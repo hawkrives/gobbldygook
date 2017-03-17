@@ -53,7 +53,7 @@ export default function Year(props) {
                             disabled={isAddSemesterDisabled}
                             onClick={props.addSemester}
                         >
-                            {`Add ‘${semesterName(nextAvailableSemester)}’`}
+                            Add ‘{semesterName(nextAvailableSemester)}’
                         </Button>}
                     <Button
                         className="remove-year"
