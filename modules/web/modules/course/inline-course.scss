@@ -44,7 +44,7 @@
 		display: inline;
 	}
 	li + li::before {
-		content: " · ";
+		content: " + ";
 	}
 }
 
