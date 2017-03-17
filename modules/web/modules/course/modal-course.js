@@ -4,7 +4,6 @@ import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
 import flatMap from 'lodash/flatMap'
 import oxford from 'listify'
-import plur from 'plur'
 
 import Modal from '../../components/modal'
 import Separator from '../../components/separator'
@@ -20,7 +19,7 @@ import { buildDeptNum } from '../../../school-st-olaf-college/deptnums'
 import { to12HourTime } from '../../../lib'
 
 import { bindActionCreators } from 'redux'
-const { connect } = require('react-redux')
+import { connect } from 'react-redux'
 import {
     addCourse,
     moveCourse,
@@ -156,9 +155,11 @@ function ModalCourse(props) {
                             {semesterName(course.semester)}
                             {' '}
                             {course.year}
-                            .
+                            {'. '}
+                            {course.credits}
                             {' '}
-                            {course.credits} {plur('credit', course.credits)}.
+                            {course.credits === 1 ? 'credit' : 'credits'}
+                            .
                         </p>
                     </div>
                     <div className="column">
@@ -171,23 +172,19 @@ function ModalCourse(props) {
                         {course.times &&
                             <div>
                                 <h2>
-                                    {plur('Offering', course.offerings.length)}
+                                    {course.offerings.length === 1
+                                        ? 'Offering'
+                                        : 'Offerings'}
                                 </h2>
                                 <ul>
                                     {flatMap(course.offerings, (o, i) =>
                                         map(o.times, (t, j) => (
                                             <li key={`${i}-${j}`}>
-                                                {o.day}
-                                                {' '}
-                                                from
-                                                {' '}
+                                                {o.day}{' from '}
                                                 {to12HourTime(t.start)}
-                                                {' '}
-                                                to
-                                                {' '}
+                                                {' to '}
                                                 {to12HourTime(t.end)}
-                                                , in
-                                                {' '}
+                                                {', in '}
                                                 {o.location}
                                             </li>
                                         )))}
@@ -197,10 +194,9 @@ function ModalCourse(props) {
                         {course.instructors &&
                             <div>
                                 <h2>
-                                    {plur(
-                                        'Instructor',
-                                        course.instructors.length
-                                    )}
+                                    {course.instructors.length === 1
+                                        ? 'Instructor'
+                                        : 'Instructors'}
                                 </h2>
                                 <div>{oxford(course.instructors)}</div>
                             </div>}
