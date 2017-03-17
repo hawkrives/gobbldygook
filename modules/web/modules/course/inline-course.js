@@ -121,7 +121,7 @@ class InlineCourse extends Component {
                         </span>}
                 </div>
                 <div className="course-row course-summary">
-                    {course.times}
+                    {map(course.times, (timestring, i) => <span key={i}>{timestring}</span>)}
                 </div>
 
                 {this.state.isOpen
