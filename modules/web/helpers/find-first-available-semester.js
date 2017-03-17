@@ -1,9 +1,14 @@
+// @flow
 import max from 'lodash/max'
-import filter from 'lodash/filter'
-import map from 'lodash/map'
 import uniq from 'lodash/uniq'
 import sortBy from 'lodash/sortBy'
 import { findMissingNumber } from '../../lib/find-missing-number'
+
+type Schedule = {
+    id: any,
+    year: number,
+    semester: number,
+};
 
 /**
  * Takes a list of schedules and finds the first open semester.
@@ -15,18 +20,18 @@ import { findMissingNumber } from '../../lib/find-missing-number'
  * @param {Number} forYear - the year to look within
  * @returns {Number} - the first available semester slot
  */
-export function findFirstAvailableSemester(schedules, forYear) {
-    let thisYear = filter(schedules, { year: forYear })
-
-    let semesters = map(thisYear, s => s.semester)
+export function findFirstAvailableSemester(
+    schedules: Schedule[],
+    forYear: number
+) {
+    const thisYear = schedules.filter(s => s.year === forYear)
+    const semesters = thisYear.map(s => s.semester)
 
     // stick a 0 at the front so findBinary will start from 1
     semesters.unshift(0)
 
     // uniq the list after we're done messing with the contents
-    semesters = uniq(semesters)
-
-    let sortedSemesters = sortBy(semesters)
+    const sortedSemesters = sortBy(uniq(semesters))
 
     const missingNo = findMissingNumber(sortedSemesters)
     if (missingNo !== null) {
