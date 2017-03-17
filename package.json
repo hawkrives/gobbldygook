@@ -177,6 +177,7 @@
     "prettier": "0.22.0",
     "react-addons-perf": "15.4.2",
     "react-addons-test-utils": "15.4.2",
+    "react-test-renderer": "15.4.2",
     "redux-devtools": "3.3.2",
     "redux-freeze": "0.1.5",
     "redux-logger": "2.8.2",
