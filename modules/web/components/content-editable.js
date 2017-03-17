@@ -8,6 +8,7 @@ const log = debug('web:react')
 class ContentEditable extends Component {
     props: {
         className?: string,
+        editable?: boolean,
         multiLine?: boolean,
         onBlur?: (string) => any,
         onChange: (string) => any,
@@ -18,6 +19,7 @@ class ContentEditable extends Component {
     };
 
     static defaultProps = {
+        editable: true,
         onChange: () => {},
         multiLine: false,
         value: '',
@@ -74,7 +76,7 @@ class ContentEditable extends Component {
                 onBlur={this.handleChange}
                 onKeyDown={this.handleKeyDown}
                 onFocus={this.handleFocus}
-                contentEditable={true}
+                contentEditable={this.props.editable}
                 dangerouslySetInnerHTML={{ __html: this.props.value }}
             />
         )
