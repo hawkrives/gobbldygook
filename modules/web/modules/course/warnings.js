@@ -44,10 +44,14 @@ type WarningType = {
 
 export class CourseWarnings extends React.PureComponent {
     props: {
-        warnings: WarningType[],
+        warnings: ?Array<WarningType>,
     };
 
     render() {
+        if (!this.props.warnings) {
+            return null
+        }
+
         const warnings = this.props.warnings
             .filter(Boolean)
             .filter(w => w.warning === true)
