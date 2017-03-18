@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { DragSource } from 'react-dnd'
 import cx from 'classnames'
-import compact from 'lodash/compact'
 import filter from 'lodash/filter'
 import isNull from 'lodash/isNull'
 import map from 'lodash/map'
-
+import styled from 'styled-components'
 import { IDENT_COURSE } from '../../../object-student/item-types'
 
 import List from '../../components/list'
@@ -20,7 +19,76 @@ import {
     alertCircled,
 } from '../../icons/ionicons'
 
-import './draggable.scss'
+const Container = styled.article`
+    display: block;
+
+    & p,
+    & ul {
+        margin: 0;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: ${props => props.theme.gray100};
+    }
+
+    &.is-dragging {
+        opacity: 0.5;
+    }
+`
+
+const Row = `
+    overflow: hidden;
+    line-height: 1.5;
+`
+
+const Title = styled(CourseTitle)`
+    ${Row}
+`
+
+const SummaryRow = styled.div`
+    ${Row}
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0.75em;
+
+    & > * + *:not(:empty)::before {
+        content: " · ";
+    }
+`
+
+const GeReqsList = styled(List)`
+    li + li::before {
+        content: " + ";
+    }
+`
+
+const Identifier = styled.span`
+    font-feature-settings: "tnum";
+`
+
+const Type = styled.span``
+const Prereqs = styled.span``
+
+const Warnings = styled(List)`
+    font-size: 0.85em;
+    font-feature-settings: "onum";
+    padding-bottom: 2px;
+
+    & .list-item {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+
+        padding: 0.125em 0.35em;
+        border-radius: 0.25em;
+        background-color: ${props => props.theme.amber200};
+    }
+    & .icon {
+        margin-right: 0.35em;
+    }
+`
 
 type PropTypes = {
     className?: string,
@@ -69,62 +137,56 @@ class DraggableCourse extends Component {
             scheduleId,
             studentId,
         } = this.props
-        const warnings = conflicts[index || 0]
-        const hasWarnings = compact(warnings).length
 
-        const validWarnings = filter(
-            warnings,
-            w => !isNull(w) && w.warning === true
-        )
-        const warningEls = map(validWarnings, (w, idx) => (
-            <li key={idx}><Icon>{warningsMap[w.type]}</Icon> {w.msg}</li>
-        ))
-
-        let classSet = cx(this.props.className, 'course', {
-            expanded: this.state.isOpen,
-            'has-warnings': hasWarnings,
+        const classSet = cx(this.props.className, {
             'is-dragging': this.props.isDragging,
         })
 
-        const warningList = warningEls.length &&
-            <List type="inline" className="course-warnings">{warningEls}</List>
+        const warnings = filter(
+            conflicts[index || 0],
+            w => !isNull(w) && w.warning === true
+        )
+        const warningList = warnings.length &&
+            <Warnings type="inline">
+                {map(warnings, (w, idx) => (
+                    <li key={idx}>
+                        <Icon>{warningsMap[w.type]}</Icon> {w.msg}
+                    </li>
+                ))}
+            </Warnings>
 
         return this.props.connectDragSource(
-            <article className={classSet} onClick={this.openModal}>
+            <Container className={classSet} onClick={this.openModal}>
                 {warningList || null}
 
-                <CourseTitle
-                    className="course-row"
+                <Title
                     title={course.title}
                     name={course.name}
                     type={course.type}
                 />
-                <div className="course-row course-summary">
-                    <span className="course-identifier">
+                <SummaryRow>
+                    <Identifier>
                         {buildDeptNum(course, true)}
-                    </span>
+                    </Identifier>
                     {course.type !== 'Research'
-                        ? <span className="course-type">{course.type}</span>
+                        ? <Type>{course.type}</Type>
                         : null}
                     {course.gereqs &&
-                        <ul className="course-gereqs">
+                        <GeReqsList type="inline">
                             {map(course.gereqs, (ge, idx) => (
                                 <li key={ge + idx}>{ge}</li>
                             ))}
-                        </ul>}
+                        </GeReqsList>}
                     {course.prerequisites &&
-                        <span
-                            className="has-prerequisite"
-                            title={course.prerequisites}
-                        >
+                        <Prereqs title={course.prerequisites}>
                             Prereq
-                        </span>}
-                </div>
-                <div className="course-row course-summary">
+                        </Prereqs>}
+                </SummaryRow>
+                <SummaryRow>
                     {map(course.times, (timestring, i) => (
                         <span key={i}>{timestring}</span>
                     ))}
-                </div>
+                </SummaryRow>
 
                 {this.state.isOpen
                     ? <ModalCourse
@@ -134,7 +196,7 @@ class DraggableCourse extends Component {
                           studentId={studentId}
                       />
                     : null}
-            </article>
+            </Container>
         )
     }
 }
