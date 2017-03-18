@@ -6,9 +6,9 @@ const log = debug('web:react')
 
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 class ContentEditable extends Component {
-    props: {
+    props: {|
         className?: string,
-        editable?: boolean,
+        disabled?: boolean,
         multiLine?: boolean,
         onBlur?: (string) => any,
         onChange: (string) => any,
@@ -16,10 +16,10 @@ class ContentEditable extends Component {
         onKeyDown?: (string) => any,
         placeholder?: string,
         value?: string,
-    };
+    |};
 
     static defaultProps = {
-        editable: true,
+        disabled: false,
         onChange: () => {},
         multiLine: false,
         value: '',
@@ -76,7 +76,7 @@ class ContentEditable extends Component {
                 onBlur={this.handleChange}
                 onKeyDown={this.handleKeyDown}
                 onFocus={this.handleFocus}
-                contentEditable={this.props.editable}
+                contentEditable={!this.props.disabled}
                 dangerouslySetInnerHTML={{ __html: this.props.value }}
             />
         )

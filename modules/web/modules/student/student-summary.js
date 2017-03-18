@@ -128,7 +128,7 @@ export class Header extends React.PureComponent {
 
         const name = (
             <ContentEditable
-                editable={Boolean(props.onChangeName)}
+                disabled={!props.onChangeName}
                 className="autosize-input"
                 onBlur={props.onChangeName}
                 value={String(props.name)}
@@ -188,7 +188,7 @@ export class DateSummary extends React.PureComponent {
 
         const matriculation = (
             <ContentEditable
-                editable={Boolean(props.onChangeMatriculation)}
+                disabled={!props.onChangeMatriculation}
                 className="autosize-input"
                 onBlur={props.onChangeMatriculation}
                 value={String(props.matriculation)}
@@ -197,7 +197,7 @@ export class DateSummary extends React.PureComponent {
 
         const graduation = (
             <ContentEditable
-                editable={Boolean(props.onChangeGraduation)}
+                disabled={!props.onChangeGraduation}
                 className="autosize-input"
                 onBlur={props.onChangeGraduation}
                 value={String(props.graduation)}
