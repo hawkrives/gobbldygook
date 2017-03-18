@@ -8,7 +8,7 @@ import './modal.scss'
 type ModalProps = {
     backdropClassName?: string,
     children?: any,
-    modalClassName?: string,
+    className?: string,
     onClose: () => any,
 };
 
@@ -17,7 +17,7 @@ export default function Modal(props: ModalProps) {
         <BaseModal
             onRequestClose={props.onClose}
             overlayClassName={cx('modal--backdrop', props.backdropClassName)}
-            className={cx('modal--content', props.modalClassName)}
+            className={cx('modal--content', props.className)}
             isOpen={true}
             {...props}
         >
