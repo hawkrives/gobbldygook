@@ -144,7 +144,7 @@ class ExpandedCourse extends React.PureComponent {
 
                 <p>
                     {course.credits || 0}
-                    {course.credits === 1 ? ' credit.' : ' credits.'}
+                    {` ${course.credits === 1 ? 'credit' : 'credits'}.`}
                 </p>
             </div>
         )
