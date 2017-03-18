@@ -1,23 +1,15 @@
 import React, { Component } from 'react'
 import { DragSource } from 'react-dnd'
 import cx from 'classnames'
-import filter from 'lodash/filter'
-import isNull from 'lodash/isNull'
 import map from 'lodash/map'
 import styled from 'styled-components'
 import { IDENT_COURSE } from '../../../object-student/item-types'
 
-import List from '../../components/list'
+import { InlineList, InlineListItem } from '../../components/list'
 import CourseTitle from './course-title'
 import { buildDeptNum } from '../../../school-st-olaf-college/deptnums'
-import Icon from '../../components/icon'
 import ModalCourse from './modal'
-
-import {
-    iosClockOutline,
-    iosCalendarOutline,
-    alertCircled,
-} from '../../icons/ionicons'
+import { CourseWarnings } from './warnings'
 
 const Container = styled.article`
     display: block;
@@ -58,9 +50,11 @@ const SummaryRow = styled.div`
     }
 `
 
-const GeReqsList = styled(List)`
-    li + li::before {
-        content: " + ";
+const GeReqsList = styled(InlineList)``
+
+const GeReqItem = styled(InlineListItem)`
+    & + &::before {
+        content: " + ";
     }
 `
 
@@ -70,25 +64,6 @@ const Identifier = styled.span`
 
 const Type = styled.span``
 const Prereqs = styled.span``
-
-const Warnings = styled(List)`
-    font-size: 0.85em;
-    font-feature-settings: "onum";
-    padding-bottom: 2px;
-
-    & .list-item {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: center;
-
-        padding: 0.125em 0.35em;
-        border-radius: 0.25em;
-        background-color: ${props => props.theme.amber200};
-    }
-    & .icon {
-        margin-right: 0.35em;
-    }
-`
 
 type PropTypes = {
     className?: string,
@@ -100,12 +75,6 @@ type PropTypes = {
     scheduleId?: string,
     studentId?: string,
 };
-
-const warningsMap = {
-    'time-conflict': iosClockOutline,
-    'invalid-semester': iosCalendarOutline,
-    'invalid-year': alertCircled,
-}
 
 class DraggableCourse extends Component {
     props: PropTypes;
@@ -142,22 +111,9 @@ class DraggableCourse extends Component {
             'is-dragging': this.props.isDragging,
         })
 
-        const warnings = filter(
-            conflicts[index || 0],
-            w => !isNull(w) && w.warning === true
-        )
-        const warningList = warnings.length &&
-            <Warnings type="inline">
-                {map(warnings, (w, idx) => (
-                    <li key={idx}>
-                        <Icon>{warningsMap[w.type]}</Icon> {w.msg}
-                    </li>
-                ))}
-            </Warnings>
-
         return this.props.connectDragSource(
             <Container className={classSet} onClick={this.openModal}>
-                {warningList || null}
+                <CourseWarnings warnings={conflicts[index || 0]} />
 
                 <Title
                     title={course.title}
@@ -172,9 +128,9 @@ class DraggableCourse extends Component {
                         ? <Type>{course.type}</Type>
                         : null}
                     {course.gereqs &&
-                        <GeReqsList type="inline">
-                            {map(course.gereqs, (ge, idx) => (
-                                <li key={ge + idx}>{ge}</li>
+                        <GeReqsList>
+                            {map(course.gereqs, ge => (
+                                <GeReqItem key={ge}>{ge}</GeReqItem>
                             ))}
                         </GeReqsList>}
                     {course.prerequisites &&
@@ -183,8 +139,8 @@ class DraggableCourse extends Component {
                         </Prereqs>}
                 </SummaryRow>
                 <SummaryRow>
-                    {map(course.times, (timestring, i) => (
-                        <span key={i}>{timestring}</span>
+                    {map(course.times, timestring => (
+                        <span key={timestring}>{timestring}</span>
                     ))}
                 </SummaryRow>
 
