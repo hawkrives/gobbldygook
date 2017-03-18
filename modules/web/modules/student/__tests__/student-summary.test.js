@@ -98,7 +98,7 @@ describe('DateSummary', () => {
         expect(tree.find('ContentEditable').at(1).prop('disabled')).toBe(true)
     })
 
-    it('allows editing the matriculation year if onChangeMatriculation is not given', () => {
+    it('allows editing the matriculation year if onChangeMatriculation is given', () => {
         const onChangeMatriculation = jest.fn()
         const tree = shallow(
             <DateSummary
@@ -112,7 +112,7 @@ describe('DateSummary', () => {
         expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(false)
     })
 
-    it('allows editing the graduation year if onChangeGraduation is not given', () => {
+    it('allows editing the graduation year if onChangeGraduation is given', () => {
         const onChangeGraduation = jest.fn()
         const tree = shallow(
             <DateSummary
