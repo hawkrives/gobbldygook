@@ -1,6 +1,29 @@
 // @flow
 import React from 'react'
-import './course-title.scss'
+import styled from 'styled-components'
+
+const Base = `
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.2;
+    padding: 0 0 1px;
+    font-size: 1em;
+    font-weight: 500;
+`
+
+const Title = styled.h1`
+    ${Base}
+    font-feature-settings: 'onum';
+`
+
+const Subtitle = styled.h2`
+    ${Base}
+    font-size: 0.75em;
+`
 
 const independentRegex = /^I[RS]/
 
@@ -33,10 +56,8 @@ export default function CourseTitle(
 
     return (
         <div className={className}>
-            <h1 className="course-title">{courseName}</h1>
-            {subtitle &&
-                subtitle.length &&
-                <h2 className="course-subtitle">{subtitle}</h2>}
+            <Title>{courseName}</Title>
+            {subtitle && subtitle.length && <Subtitle>{subtitle}</Subtitle>}
         </div>
     )
 }
