@@ -68,13 +68,17 @@ export class StudentSummary extends React.PureComponent {
         const currentCredits = countCredits(getActiveStudentCourses(student))
         const neededCredits = student.creditsNeeded
 
+        const message = randomizeHello
+            ? sample(welcomeMessages)
+            : welcomeMessage
+
         return (
             <article className={cx('student-summary', className)}>
                 <Header
                     canGraduate={canGraduate}
                     name={student.name}
                     onChangeName={props.onChangeName}
-                    randomizeHello={randomizeHello}
+                    helloMessage={message}
                     showAvatar={showAvatar}
                 />
                 <div className="content">
@@ -102,9 +106,9 @@ export class StudentSummary extends React.PureComponent {
 export class Header extends React.PureComponent {
     props: {
         canGraduate: boolean,
+        helloMessage: string,
         name: string,
         onChangeName?: (string) => any,
-        randomizeHello: boolean,
         showAvatar: boolean,
     };
 
@@ -122,10 +126,6 @@ export class Header extends React.PureComponent {
               />
             : null
 
-        const message = props.randomizeHello
-            ? sample(welcomeMessages)
-            : welcomeMessage
-
         const name = (
             <ContentEditable
                 disabled={!props.onChangeName}
@@ -140,7 +140,7 @@ export class Header extends React.PureComponent {
                 {avatar}
 
                 <div className="intro">
-                    {message}{name}!
+                    {props.helloMessage}{name}!
                 </div>
             </header>
         )
