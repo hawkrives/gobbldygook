@@ -1,14 +1,42 @@
 // @flow
 import React from 'react'
-import cx from 'classnames'
-import './toolbar.scss'
+import styled from 'styled-components'
+import Button from './button'
+import Icon from './icon'
 
-type PropTypes = { children?: any, className?: string, style?: Object };
+const BaseToolbar = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: stretch;
 
-export default function Toolbar(props: PropTypes) {
-    return (
-        <div className={cx('toolbar', props.className)} style={props.style}>
-            {props.children}
-        </div>
-    )
-}
+    /* TODO: remove this chunk */
+    & .button {
+        flex: 1 0 auto;
+        padding-left: 0.25em;
+        padding-right: 0.25em;
+    }
+
+    & .icon {
+        font-size: 1.5em;
+    }
+`
+
+const Toolbar = (props: any) => (
+    <BaseToolbar className={`toolbar ${props.className || ''}`}>
+        {props.children}
+    </BaseToolbar>
+)
+
+export default Toolbar
+
+export const ToolbarButton = styled(Button)`
+    flex: 1 0 auto;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+`
+
+export const ToolbarIcon = styled(Icon)`
+    flex: 1 0 auto;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+`
