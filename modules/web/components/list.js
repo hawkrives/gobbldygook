@@ -10,6 +10,10 @@ import styled from 'styled-components'
 const BaseList = `
     margin: 0;
     padding: 0;
+`
+
+export const PlainList = styled.ul`
+    ${BaseList}
     list-style: none;
 `
 
@@ -56,11 +60,13 @@ export default function List(props: ListProps) {
                 : child
     )
 
-    let ListType = BulletedList
+    let ListType = PlainList
     if (type === 'inline') {
         ListType = InlineList
     } else if (type === 'number') {
         ListType = NumberedList
+    } else if (type === 'bullet') {
+        ListType = BulletedList
     }
 
     return <ListType className={className}>{contents}</ListType>
