@@ -21,7 +21,6 @@ cache:
   yarn: true
 
 script:
-  - bash scripts/update-yarn-lock-file.sh
   - if [[ "$task" == "lint" ]]; then
       yarn run lint;
     fi
@@ -34,8 +33,9 @@ script:
     fi
 
 after_success:
-  - if [[ "$task" == "test" ]]; then
-      npm install coveralls;
+  - |
+    if [[ "$task" == "test" ]]; then
+      npm install coveralls
       ./node_modules/.bin/coveralls < ./coverage/lcov.info
       bash <(curl -s https://codecov.io/bash) -f coverage/coverage.json
     fi
