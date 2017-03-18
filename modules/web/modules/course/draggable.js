@@ -124,9 +124,7 @@ class DraggableCourse extends Component {
                     <Identifier>
                         {buildDeptNum(course, true)}
                     </Identifier>
-                    {course.type !== 'Research'
-                        ? <Type>{course.type}</Type>
-                        : null}
+                    {course.type !== 'Research' && <Type>{course.type}</Type>}
                     {course.gereqs &&
                         <GeReqsList>
                             {map(course.gereqs, ge => (
@@ -144,14 +142,13 @@ class DraggableCourse extends Component {
                     ))}
                 </SummaryRow>
 
-                {this.state.isOpen
-                    ? <ModalCourse
-                          onClose={this.closeModal}
-                          course={course}
-                          scheduleId={scheduleId}
-                          studentId={studentId}
-                      />
-                    : null}
+                {this.state.isOpen &&
+                    <ModalCourse
+                        onClose={this.closeModal}
+                        course={course}
+                        scheduleId={scheduleId}
+                        studentId={studentId}
+                    />}
             </Container>
         )
     }
