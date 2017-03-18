@@ -12,7 +12,7 @@ import List from '../../components/list'
 import CourseTitle from './course-title'
 import { buildDeptNum } from '../../../school-st-olaf-college/deptnums'
 import Icon from '../../components/icon'
-import ModalCourse from './modal-course'
+import ModalCourse from './modal'
 
 import {
     iosClockOutline,
@@ -20,7 +20,7 @@ import {
     alertCircled,
 } from '../../icons/ionicons'
 
-import './inline-course.scss'
+import './draggable.scss'
 
 type InlineCourseProps = {
     className?: string,

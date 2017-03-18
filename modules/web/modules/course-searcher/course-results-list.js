@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import map from 'lodash/map'
-import InlineCourse from '../course/inline-course'
+import DraggableCourse from '../course/draggable'
 import debug from 'debug'
 const log = debug('web:react')
 
@@ -52,7 +52,7 @@ export default class CourseResultsList extends Component {
                             <ul className="course-list">
                                 {map(courses, (course, index) => (
                                     <li key={index}>
-                                        <InlineCourse
+                                        <DraggableCourse
                                             course={course}
                                             studentId={studentId}
                                         />

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import range from 'lodash/range'
 import map from 'lodash/map'
 
-import InlineCourse from '../course/inline-course'
+import DraggableCourse from '../course/draggable'
 import List from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
@@ -23,7 +23,7 @@ export default function CourseList(props) {
                       />
                   </li>
                 : <li key={course.clbid}>
-                      <InlineCourse
+                      <DraggableCourse
                           index={i}
                           className="course"
                           course={course}
