@@ -215,12 +215,12 @@ export class DateSummary extends React.PureComponent {
 
 export class DegreeSummary extends React.PureComponent {
     props: {
-        studies: {type: string, name: string}[],
+        studies: { type: string, name: string }[],
     };
 
     render() {
         const grouped: {
-            [key: string]: {type: string, name: string}[],
+            [key: string]: { type: string, name: string }[],
         } = groupBy(this.props.studies, s => s.type)
 
         const {
