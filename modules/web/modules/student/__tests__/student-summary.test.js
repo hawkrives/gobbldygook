@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { CreditSummary, DateSummary, Footer } from '../student-summary'
+import { CreditSummary, DateSummary, Footer, Header } from '../student-summary'
 import { shallow } from 'enzyme'
 
 describe('CreditSummary', () => {
@@ -180,5 +180,120 @@ describe('Footer', () => {
         expect(tree).toMatchSnapshot()
         expect(tree.text()).toContain(badMessage)
         expect(tree.text()).not.toContain(goodMessage)
+    })
+})
+
+describe('Header', () => {
+    it('renders', () => {
+        const tree = shallow(
+            <Header
+                canGraduate={true}
+                name="Susan"
+                helloMessage="Welcome, "
+                showAvatar={true}
+            />
+        )
+
+        expect(tree).toMatchSnapshot()
+    })
+
+    describe('with an avatar', () => {
+        it('handles the "can graduate" status', () => {
+            const tree = shallow(
+                <Header
+                    canGraduate={true}
+                    name="Susan"
+                    helloMessage="Welcome, "
+                    showAvatar={true}
+                />
+            )
+
+            expect(tree).toMatchSnapshot()
+        })
+        it('handles the "cannot graduate" status', () => {
+            const tree = shallow(
+                <Header
+                    canGraduate={false}
+                    name="Susan"
+                    helloMessage="Welcome, "
+                    showAvatar={true}
+                />
+            )
+
+            expect(tree).toMatchSnapshot()
+        })
+    })
+
+    describe('without an avatar', () => {
+        it('handles the "can graduate" status', () => {
+            const tree = shallow(
+                <Header
+                    canGraduate={true}
+                    name="Susan"
+                    helloMessage="Welcome, "
+                    showAvatar={false}
+                />
+            )
+
+            expect(tree).toMatchSnapshot()
+        })
+        it('handles the "cannot graduate" status', () => {
+            const tree = shallow(
+                <Header
+                    canGraduate={false}
+                    name="Susan"
+                    helloMessage="Welcome, "
+                    showAvatar={false}
+                />
+            )
+
+            expect(tree).toMatchSnapshot()
+        })
+    })
+
+    it('disables editing the name if onChangeName is not given', () => {
+        const tree = shallow(
+            <Header
+                canGraduate={false}
+                name="Natasha"
+                helloMessage="Welcome, "
+                showAvatar={true}
+            />
+        )
+
+        expect(tree).toMatchSnapshot()
+        expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(true)
+    })
+    it('allows editing the name if onChangeName is given', () => {
+        const onChangeName = jest.fn()
+        const tree = shallow(
+            <Header
+                canGraduate={false}
+                onChangeName={onChangeName}
+                name="Natasha"
+                helloMessage="Welcome, "
+                showAvatar={true}
+            />
+        )
+
+        expect(tree).toMatchSnapshot()
+        expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(false)
+    })
+
+    it('calls onChangeName when the name is changed', () => {
+        const onChangeName = jest.fn()
+        const tree = shallow(
+            <Header
+                canGraduate={false}
+                onChangeName={onChangeName}
+                name="Natasha"
+                helloMessage="Welcome, "
+                showAvatar={true}
+            />
+        )
+
+        expect(tree).toMatchSnapshot()
+        tree.find('ContentEditable').at(0).simulate('blur', 'Black Widow')
+        expect(onChangeName).toHaveBeenCalledWith('Black Widow')
     })
 })

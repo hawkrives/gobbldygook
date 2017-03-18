@@ -369,3 +369,189 @@ exports[`Footer renders 1`] = `
   It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times.
 </div>
 `;
+
+exports[`Header allows editing the name if onChangeName is given 1`] = `
+<header
+  className="student-summary--header"
+>
+  <AvatarLetter
+    className="student-letter cannot-graduate"
+    value="Natasha"
+  />
+  <div
+    className="intro"
+  >
+    Welcome, 
+    <ContentEditable
+      className="autosize-input"
+      disabled={false}
+      multiLine={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      value="Natasha"
+    />
+    !
+  </div>
+</header>
+`;
+
+exports[`Header calls onChangeName when the name is changed 1`] = `
+<header
+  className="student-summary--header"
+>
+  <AvatarLetter
+    className="student-letter cannot-graduate"
+    value="Natasha"
+  />
+  <div
+    className="intro"
+  >
+    Welcome, 
+    <ContentEditable
+      className="autosize-input"
+      disabled={false}
+      multiLine={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      value="Natasha"
+    />
+    !
+  </div>
+</header>
+`;
+
+exports[`Header disables editing the name if onChangeName is not given 1`] = `
+<header
+  className="student-summary--header"
+>
+  <AvatarLetter
+    className="student-letter cannot-graduate"
+    value="Natasha"
+  />
+  <div
+    className="intro"
+  >
+    Welcome, 
+    <ContentEditable
+      className="autosize-input"
+      disabled={true}
+      multiLine={false}
+      onChange={[Function]}
+      value="Natasha"
+    />
+    !
+  </div>
+</header>
+`;
+
+exports[`Header renders 1`] = `
+<header
+  className="student-summary--header"
+>
+  <AvatarLetter
+    className="student-letter can-graduate"
+    value="Susan"
+  />
+  <div
+    className="intro"
+  >
+    Welcome, 
+    <ContentEditable
+      className="autosize-input"
+      disabled={true}
+      multiLine={false}
+      onChange={[Function]}
+      value="Susan"
+    />
+    !
+  </div>
+</header>
+`;
+
+exports[`Header with an avatar handles the "can graduate" status 1`] = `
+<header
+  className="student-summary--header"
+>
+  <AvatarLetter
+    className="student-letter can-graduate"
+    value="Susan"
+  />
+  <div
+    className="intro"
+  >
+    Welcome, 
+    <ContentEditable
+      className="autosize-input"
+      disabled={true}
+      multiLine={false}
+      onChange={[Function]}
+      value="Susan"
+    />
+    !
+  </div>
+</header>
+`;
+
+exports[`Header with an avatar handles the "cannot graduate" status 1`] = `
+<header
+  className="student-summary--header"
+>
+  <AvatarLetter
+    className="student-letter cannot-graduate"
+    value="Susan"
+  />
+  <div
+    className="intro"
+  >
+    Welcome, 
+    <ContentEditable
+      className="autosize-input"
+      disabled={true}
+      multiLine={false}
+      onChange={[Function]}
+      value="Susan"
+    />
+    !
+  </div>
+</header>
+`;
+
+exports[`Header without an avatar handles the "can graduate" status 1`] = `
+<header
+  className="student-summary--header"
+>
+  <div
+    className="intro"
+  >
+    Welcome, 
+    <ContentEditable
+      className="autosize-input"
+      disabled={true}
+      multiLine={false}
+      onChange={[Function]}
+      value="Susan"
+    />
+    !
+  </div>
+</header>
+`;
+
+exports[`Header without an avatar handles the "cannot graduate" status 1`] = `
+<header
+  className="student-summary--header"
+>
+  <div
+    className="intro"
+  >
+    Welcome, 
+    <ContentEditable
+      className="autosize-input"
+      disabled={true}
+      multiLine={false}
+      onChange={[Function]}
+      value="Susan"
+    />
+    !
+  </div>
+</header>
+`;
