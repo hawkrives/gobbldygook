@@ -1,5 +1,4 @@
 @import '../../styles/variables';
-@import '../../styles/mixins';
 
 .add-area {
 	padding: $area-edge-padding;
@@ -8,12 +7,6 @@
 	& > .toolbar {
 		margin-bottom: $area-edge-padding;
 	}
-}
-
-.close-area-picker.button {
-	margin-left: 0.5em;
-	padding: 0.25em 1em;
-	flex: 0 1 auto;
 }
 
 .add-area--filter {
