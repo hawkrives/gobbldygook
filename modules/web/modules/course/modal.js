@@ -298,4 +298,5 @@ const mapState = (state, ownProps) => {
 const mapDispatch = dispatch =>
     bindActionCreators({ addCourse, moveCourse, removeCourse }, dispatch)
 
+// $FlowFixMe
 export default connect(mapState, mapDispatch)(ModalCourse)
