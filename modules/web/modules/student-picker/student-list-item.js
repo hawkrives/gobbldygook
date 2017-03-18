@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 import groupBy from 'lodash/groupBy'
@@ -12,20 +13,26 @@ import { iosTrashOutline, iosArrowForward } from '../../icons/ionicons'
 
 import './student-list-item.scss'
 
-export default function StudentListItem(props) {
+type PropTypes = {
+    destroyStudent: (string) => any,
+    isEditing: boolean,
+    student: Object,
+};
+
+export default function StudentListItem(props: PropTypes) {
     const { student, isEditing, destroyStudent } = props
 
     const isLoading = student.isLoading ||
         student.isFetching ||
         student.isValdiating ||
         student.isChecking
-    let opts = { loading: isLoading }
+    let classes: any = { loading: isLoading }
     if (!isLoading) {
-        opts['can-graduate'] = student.data.present.canGraduate
-        opts['cannot-graduate'] = !student.data.present.canGraduate
+        classes['can-graduate'] = student.data.present.canGraduate
+        classes['cannot-graduate'] = !student.data.present.canGraduate
     }
 
-    const classname = cx('student-list-item-container', opts)
+    const classname = cx('student-list-item-container', classes)
 
     let sortedStudies = sortStudiesByType(student.data.present.studies)
     const groupedStudies = groupBy(sortedStudies, s => s.type)
@@ -69,10 +76,4 @@ export default function StudentListItem(props) {
             </Link>
         </li>
     )
-}
-
-StudentListItem.propTypes = {
-    destroyStudent: PropTypes.func.isRequired,
-    isEditing: PropTypes.bool.isRequired,
-    student: PropTypes.object.isRequired,
 }
