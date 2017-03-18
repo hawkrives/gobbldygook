@@ -258,7 +258,7 @@ export class DegreeSummary extends React.PureComponent {
                 {cCount > 0 && `${cEmph}${cWord} in ${cList}`}
                 {(mCount || cCount) && eCount ? ', ' : ''}
                 {eCount > 0 && `not to mention ${eEmph}${eWord} in ${eList}`}
-                {'. '}
+                {'.'}
             </p>
         )
     }

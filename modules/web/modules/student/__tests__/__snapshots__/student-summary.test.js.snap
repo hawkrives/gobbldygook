@@ -346,7 +346,7 @@ exports[`DateSummary renders 1`] = `
 </p>
 `;
 
-exports[`DegreeSummary handles no studies 1`] = `"You are planning on no degrees0. "`;
+exports[`DegreeSummary handles no studies 1`] = `"You are planning on no degrees0."`;
 
 exports[`DegreeSummary renders 1`] = `
 <p
@@ -356,7 +356,7 @@ exports[`DegreeSummary renders 1`] = `
    
   no degrees
   0
-  . 
+  .
 </p>
 `;
 
