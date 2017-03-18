@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
