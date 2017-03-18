@@ -17,9 +17,7 @@ export function getCourseFromNetwork(clbid: number) {
 
     const path = `${baseUrl}/courses/${dir}/${id}.json`
 
-    const promise = fetch(path).then(status).then(json)
-
-    networkCache[clbid] = promise
+    networkCache[clbid] = fetch(path).then(status).then(json)
 
     return networkCache[clbid]
 }
@@ -30,13 +28,11 @@ export function getCourseFromDatabase(clbid: number) {
         return courseCache[clbid]
     }
 
-    const promise = db
+    courseCache[clbid] = db
         .store('courses')
         .index('clbid')
         .get(clbid)
         .then(course => omit(course, ['profWords', 'words', 'sourcePath']))
-
-    courseCache[clbid] = promise
 
     return courseCache[clbid].then(course => {
         delete courseCache[clbid]
