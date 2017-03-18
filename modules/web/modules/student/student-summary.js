@@ -177,8 +177,8 @@ export class Footer extends React.PureComponent {
 
 export class DateSummary extends React.PureComponent {
     props: {
-        onChangeGraduation: (string) => any,
-        onChangeMatriculation: (string) => any,
+        onChangeGraduation?: (string) => any,
+        onChangeMatriculation?: (string) => any,
         matriculation: string,
         graduation: string,
     };
