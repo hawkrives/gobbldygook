@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { DragSource } from 'react-dnd'
 import cx from 'classnames'
 import { IDENT_COURSE } from '../../../object-student/item-types'
@@ -10,6 +11,12 @@ type PropTypes = {
     isDragging: boolean, // react-dnd
 };
 
+const Draggable = styled(CourseWithModal)`
+    &:hover {
+        cursor: pointer;
+    }
+`
+
 class DraggableCourse extends React.PureComponent {
     props: PropTypes;
 
@@ -20,7 +27,7 @@ class DraggableCourse extends React.PureComponent {
 
         return this.props.connectDragSource(
             <div>
-                <CourseWithModal className={classSet} {...this.props} />
+                <Draggable className={classSet} {...this.props} />
             </div>
         )
     }
