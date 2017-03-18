@@ -4,9 +4,9 @@ import styled from 'styled-components'
 import map from 'lodash/map'
 import flatMap from 'lodash/flatMap'
 import oxford from 'listify'
-import {BulletedList, ListItem} from '../../components/list'
+import { BulletedList, ListItem } from '../../components/list'
 import CourseTitle from './course-title'
-import {semesterName} from '../../../school-st-olaf-college/course-info'
+import { semesterName } from '../../../school-st-olaf-college/course-info'
 import { buildDeptNum } from '../../../school-st-olaf-college/deptnums'
 import { to12HourTime } from '../../../lib'
 
@@ -47,7 +47,6 @@ const ColumnsWrapper = styled.div`
 const SummaryThing = styled.div`
     white-space: normal;
 `
-
 
 export default class ExpandedCourse extends React.PureComponent {
     props: {

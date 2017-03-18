@@ -69,7 +69,8 @@ export const truncate = `
     text-overflow: ellipsis;
 `
 
-export const truncateWidth = (width: string) => `
+export const truncateWidth = (width: string) =>
+    `
     ${truncate}
     width: ${width};
 `
