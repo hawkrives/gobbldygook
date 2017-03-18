@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+// @flow
+import React from 'react'
 import fuzzysearch from 'fuzzysearch'
 import pluralizeArea from '../../../examine-student/pluralize-area'
 import map from 'lodash/map'
@@ -6,14 +7,25 @@ import reject from 'lodash/reject'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 import { filterAreaList } from '../../../object-student/filter-area-list'
-
+import type { AreaOfStudyTypeEnum } from '../../../examine-student/types'
 import Button from '../../components/button'
 import List from '../../components/list'
 import Toolbar from '../../components/toolbar'
 
 import './area-picker.scss'
 
-function AreaPicker(props) {
+type AreaOfStudy = Object;
+type PropTypes = {
+    areaList: AreaOfStudy[],
+    currentAreas: AreaOfStudy[],
+    filterText: string,
+    onAddArea: (AreaOfStudy, Event) => any,
+    onFilterChange: (Event) => any,
+    studentGraduation: number,
+    type: AreaOfStudyTypeEnum,
+};
+
+function AreaPicker(props: PropTypes) {
     const graduation = props.studentGraduation
 
     const currentAreaNames = map(props.currentAreas, a => a.name)
@@ -41,13 +53,13 @@ function AreaPicker(props) {
         </li>
     ))
 
-    let message = <li>Oh! We need a new message here!</li>
+    let message
     if (props.filterText) {
-        message = <li>No matching ${pluralizeArea(props.type)}.</li>
+        message = `No matching ${pluralizeArea(props.type)}.`
     } else if (currentAreaNames.size) {
-        message = <li>All ${pluralizeArea(props.type)} have been added.</li>
+        message = `All ${pluralizeArea(props.type)} have been added.`
     } else {
-        message = <li>No {pluralizeArea(props.type)} are available.</li>
+        message = `No ${pluralizeArea(props.type)} are available.`
     }
 
     return (
@@ -62,23 +74,13 @@ function AreaPicker(props) {
             </Toolbar>
 
             <List type="plain">
-                {areaList.length ? areaList : message}
+                {areaList.length ? areaList : <li>{message}</li>}
             </List>
         </div>
     )
 }
 
-AreaPicker.propTypes = {
-    areaList: PropTypes.arrayOf(PropTypes.object).isRequired,
-    currentAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
-    filterText: PropTypes.string.isRequired,
-    onAddArea: PropTypes.func.isRequired,
-    onFilterChange: PropTypes.func.isRequired,
-    studentGraduation: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-}
-
-export default class AreaPickerContainer extends Component {
+export default class AreaPickerContainer extends React.PureComponent {
     state = {
         filter: '',
     };
@@ -89,9 +91,9 @@ export default class AreaPickerContainer extends Component {
                 {...this.props}
                 filterText={this.state.filter}
                 onFilterChange={ev =>
-                    this.setState({
+                    this.setState(() => ({
                         filter: (ev.target.value || '').toLowerCase(),
-                    })}
+                    }))}
             />
         )
     }
