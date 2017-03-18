@@ -9,7 +9,7 @@ import CourseTitle from './course-title'
 import { buildDeptNum } from '../../../school-st-olaf-college/deptnums'
 import CourseWarnings from './warnings'
 
-const Container = styled.article`
+export const Container = styled.article`
     display: block;
 
     &:hover {
@@ -27,11 +27,11 @@ const Row = `
     line-height: 1.5;
 `
 
-const Title = styled(CourseTitle)`
+export const Title = styled(CourseTitle)`
     ${Row}
 `
 
-const SummaryRow = styled.div`
+export const SummaryRow = styled.div`
     ${Row}
     text-overflow: ellipsis;
     white-space: nowrap;

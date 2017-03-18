@@ -1,26 +1,20 @@
-import React, { PropTypes } from 'react'
-import cx from 'classnames'
-import styled from 'styled-components'
+// @flow
+import React from 'react'
+import { Container, Title, SummaryRow } from '../course/compact'
 
-export default function FakeCourse(props) {
+type PropTypes = {
+    className: string,
+    details?: string,
+    title: string,
+};
+
+export default function FakeCourse(props: PropTypes) {
     return (
-        <article className={cx('course', props.className)}>
-            <div className="course-row">
-                <h1 className="course-title">{props.title}</h1>
-            </div>
-            <div className="course-row course-summary">
-                <p>{props.details}</p>
-            </div>
-        </article>
+        <Container className={props.className}>
+            <Title name={props.title} />
+            <SummaryRow>
+                {props.details || 'no details'}
+            </SummaryRow>
+        </Container>
     )
-}
-
-FakeCourse.propTypes = {
-    className: PropTypes.string.isRequired,
-    details: PropTypes.string,
-    title: PropTypes.string.isRequired,
-}
-
-FakeCourse.defaultProps = {
-    details: 'no details',
 }
