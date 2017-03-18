@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { CreditSummary, DateSummary, Footer, Header } from '../student-summary'
+import { CreditSummary, DateSummary, DegreeSummary, Footer, Header } from '../student-summary'
 import { shallow } from 'enzyme'
 
 describe('CreditSummary', () => {
@@ -154,6 +154,18 @@ describe('DateSummary', () => {
         expect(tree).toMatchSnapshot()
         tree.find('ContentEditable').at(1).simulate('blur', '2018')
         expect(onChangeGraduation).toHaveBeenCalledWith('2018')
+    })
+})
+
+describe('DegreeSummary', () => {
+    it('renders', () => {
+        const tree = shallow(<DegreeSummary studies={[]} />)
+        expect(tree).toMatchSnapshot()
+    })
+
+    it('handles no studies', () => {
+        const tree = shallow(<DegreeSummary studies={[]} />)
+        expect(tree.text()).toMatchSnapshot()
     })
 })
 

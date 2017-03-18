@@ -346,6 +346,20 @@ exports[`DateSummary renders 1`] = `
 </p>
 `;
 
+exports[`DegreeSummary handles no studies 1`] = `"You are planning on no degrees0. "`;
+
+exports[`DegreeSummary renders 1`] = `
+<p
+  className="paragraph"
+>
+  You are planning on
+   
+  no degrees
+  0
+  . 
+</p>
+`;
+
 exports[`Footer handles the "can graduate" status 1`] = `
 <div
   className="paragraph graduation-message"
