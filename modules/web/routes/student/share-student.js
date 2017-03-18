@@ -7,12 +7,24 @@ import Modal from '../../components/modal'
 import List from '../../components/list'
 import withRouter from 'react-router/lib/withRouter'
 import { close } from '../../icons/ionicons'
-
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { encodeStudent } from '../../../object-student'
 
-import './share-student.scss'
+const ShareModal = styled(Modal)`
+    ${props => props.theme.card}
+    flex-flow: column;
+    padding: 1em 2em;
+
+    & a {
+        cursor: pointer;
+    }
+`
+
+const WindowTools = styled(Toolbar)``
+
+const CloseModal = styled(Button)``
 
 export function ShareSheet(props) {
     let { student } = props
@@ -21,17 +33,15 @@ export function ShareSheet(props) {
     const boundCloseModal = () =>
         props.router.push(`/s/${props.params.studentId}/`)
 
+    const encodedStudentUrl = `data:text/json;charset=utf-8,${encodeStudent(student)}`
+
     return (
-        <Modal
-            modalClassName="share-dialog"
-            onClose={boundCloseModal}
-            contentLabel="Share"
-        >
-            <Toolbar className="window-tools">
-                <Button className="close-modal" onClick={boundCloseModal}>
+        <ShareModal onClose={boundCloseModal} contentLabel="Share">
+            <WindowTools>
+                <CloseModal onClick={boundCloseModal}>
                     <Icon>{close}</Icon>
-                </Button>
-            </Toolbar>
+                </CloseModal>
+            </WindowTools>
 
             <div>
                 Share "{student.name}" via:
@@ -40,16 +50,14 @@ export function ShareSheet(props) {
                     <li>
                         <a
                             download={`${student.name}.gbstudent`}
-                            href={
-                                `data:text/json;charset=utf-8,${encodeStudent(student)}`
-                            }
+                            href={encodedStudentUrl}
                         >
                             Download file
                         </a>
                     </li>
                 </List>
             </div>
-        </Modal>
+        </ShareModal>
     )
 }
 
