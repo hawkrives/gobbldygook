@@ -13,7 +13,7 @@ const BaseList = `
     list-style: none;
 `
 
-const InlineList = styled.ul`
+export const InlineList = styled.ul`
     ${BaseList}
     display: inline-block;
 
@@ -22,12 +22,18 @@ const InlineList = styled.ul`
     }
 `
 
-const BulletedList = styled.ul`
+export const BulletedList = styled.ul`
     ${BaseList}
 `
 
-const NumberedList = styled.ol`
+export const NumberedList = styled.ol`
     ${BaseList}
+`
+
+export const ListItem = styled.li``
+
+export const InlineListItem = styled.li`
+    display: inline-block;
 `
 
 type ListProps = {
