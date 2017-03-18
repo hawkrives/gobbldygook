@@ -59,6 +59,7 @@
     "flow": "flow check",
     "lint": "eslint --cache *.js modules/",
     "prettier": "prettier --write $npm_package_config_prettier 'modules/**/*.js' '*.js' '.*.js' && eslint --cache --fix 'modules/' '*.js' '.*.js'",
+    "prettier-only": "prettier --write $npm_package_config_prettier",
     "prettier:changed": "FILES=$(git diff --name-only | grep '\\.js$'); prettier --write $npm_package_config_prettier $FILES; eslint --cache --fix $FILES",
     "prettier:since-master": "FILES=$(git diff --name-only master | grep '\\.js$'); prettier --write $npm_package_config_prettier $FILES; eslint --cache --fix $FILES",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
