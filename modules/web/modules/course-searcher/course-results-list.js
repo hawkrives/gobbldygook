@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import map from 'lodash/map'
-import DraggableCourse from '../course/draggable'
+import { DraggableCourse } from '../course'
 import debug from 'debug'
 const log = debug('web:react')
 
