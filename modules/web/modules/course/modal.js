@@ -4,6 +4,7 @@ import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
 import flatMap from 'lodash/flatMap'
+import noop from 'lodash/noop'
 import oxford from 'listify'
 
 import Modal from '../../components/modal'
@@ -244,9 +245,9 @@ function ModalCourse(
         student,
         studentId,
         scheduleId,
-        removeCourse,
-        addCourse,
-        moveCourse,
+        removeCourse = noop,
+        addCourse = noop,
+        moveCourse = noop,
         onClose,
     } = props
 
