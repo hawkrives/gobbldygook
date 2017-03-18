@@ -103,7 +103,7 @@ export class Header extends React.PureComponent {
     props: {
         canGraduate: boolean,
         name: string,
-        onChangeName: (string) => any,
+        onChangeName?: (string) => any,
         randomizeHello: boolean,
         showAvatar: boolean,
     };
