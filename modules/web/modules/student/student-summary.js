@@ -38,7 +38,7 @@ const welcomeMessages = [
     'halo, ', // indonesian
 ]
 
-const welcomeMessage = sample(welcomeMessages)
+const welcomeMessage = welcomeMessages[2]
 
 type Student = Object;
 
