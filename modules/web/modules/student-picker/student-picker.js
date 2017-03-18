@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 import size from 'lodash/size'
 
 import {
@@ -39,7 +40,20 @@ let sortByExpanded = {
     canGraduate: 'can graduate',
 }
 
-export default function StudentPicker(props) {
+type PropTypes = {
+    destroyStudent: () => any,
+    filterText: string,
+    groupBy: string,
+    isEditing: boolean,
+    onFilterChange: () => any,
+    onGroupChange: () => any,
+    onSortChange: () => any,
+    onToggleEditing: () => any,
+    sortBy: string,
+    students: Object,
+};
+
+export default function StudentPicker(props: PropTypes) {
     const {
         destroyStudent,
         filterText,
@@ -124,17 +138,4 @@ export default function StudentPicker(props) {
                   </Button>}
         </div>
     )
-}
-
-StudentPicker.propTypes = {
-    destroyStudent: PropTypes.func.isRequired,
-    filterText: PropTypes.string.isRequired,
-    groupBy: PropTypes.string.isRequired,
-    isEditing: PropTypes.bool.isRequired,
-    onFilterChange: PropTypes.func.isRequired,
-    onGroupChange: PropTypes.func.isRequired,
-    onSortChange: PropTypes.func.isRequired,
-    onToggleEditing: PropTypes.func.isRequired,
-    sortBy: PropTypes.string.isRequired,
-    students: PropTypes.object.isRequired,
 }
