@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react'
 
+import styled from 'styled-components'
+import CodeMirror from 'react-codemirror'
+import 'codemirror/mode/yaml/yaml'
 import Toolbar from '../../components/toolbar'
 import Button from '../../components/button'
 import Icon from '../../components/icon'
 import Separator from '../../components/separator'
-
-import CodeMirror from 'react-codemirror'
-import 'codemirror/mode/yaml/yaml'
 
 import {
     iosArrowLeft,
@@ -14,17 +14,13 @@ import {
     iosReload,
     iosUploadOutline,
 } from '../../icons/ionicons'
-import './area-editor.scss'
+
+const TopToolbar = styled(Toolbar)`margin-bottom: 0.5em;`
 
 export default function AreaEditor(props) {
-    const options = {
-        lineNumbers: true,
-        mode: 'yaml',
-    }
-
     return (
         <div>
-            <Toolbar style={{ marginBottom: '0.5em' }}>
+            <TopToolbar>
                 <Button link to="/areas">
                     <Icon>{iosArrowLeft}</Icon>
                     {' '}Back
@@ -51,12 +47,15 @@ export default function AreaEditor(props) {
                     <Icon>{iosUploadOutline}</Icon>
                     {' '}Submit
                 </Button>
-            </Toolbar>
+            </TopToolbar>
 
             <CodeMirror
                 value={props.value}
                 onChange={props.onChange}
-                options={options}
+                options={{
+                    lineNumbers: true,
+                    mode: 'yaml',
+                }}
                 onFocusChange={props.onFocusChange}
             />
         </div>
