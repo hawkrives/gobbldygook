@@ -28,7 +28,11 @@ import {
 
 import './modal.scss'
 
-function findSemesterList(student) {
+function findSemesterList(student: ?Object) {
+    if (!student) {
+        return {}
+    }
+
     let schedules = map(student.schedules, s => ({
         ...s,
         title: `${semesterName(s.semester)} – ${s.title}`,
