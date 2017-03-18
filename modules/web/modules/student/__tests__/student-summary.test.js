@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { CreditSummary, DateSummary } from '../student-summary'
+import { CreditSummary, DateSummary, Footer } from '../student-summary'
 import { shallow } from 'enzyme'
 
 describe('CreditSummary', () => {
@@ -154,5 +154,31 @@ describe('DateSummary', () => {
         expect(tree).toMatchSnapshot()
         tree.find('ContentEditable').at(1).simulate('blur', '2018')
         expect(onChangeGraduation).toHaveBeenCalledWith('2018')
+    })
+})
+
+describe('Footer', () => {
+    const goodMessage = "It looks like you'll make it!"
+    const badMessage = "You haven't planned everything out yet."
+    it('renders', () => {
+        const tree = shallow(<Footer canGraduate={true} />)
+
+        expect(tree).toMatchSnapshot()
+    })
+
+    it('handles the "can graduate" status', () => {
+        const tree = shallow(<Footer canGraduate={true} />)
+
+        expect(tree).toMatchSnapshot()
+        expect(tree.text()).toContain(goodMessage)
+        expect(tree.text()).not.toContain(badMessage)
+    })
+
+    it('handles the "cannot graduate" status', () => {
+        const tree = shallow(<Footer canGraduate={false} />)
+
+        expect(tree).toMatchSnapshot()
+        expect(tree.text()).toContain(badMessage)
+        expect(tree.text()).not.toContain(goodMessage)
     })
 })

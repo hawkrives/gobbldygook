@@ -345,3 +345,27 @@ exports[`DateSummary renders 1`] = `
   .
 </p>
 `;
+
+exports[`Footer handles the "can graduate" status 1`] = `
+<div
+  className="paragraph graduation-message"
+>
+  It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times.
+</div>
+`;
+
+exports[`Footer handles the "cannot graduate" status 1`] = `
+<div
+  className="paragraph graduation-message"
+>
+  You haven't planned everything out yet. Ask your advisor if you need help fitting everything in.
+</div>
+`;
+
+exports[`Footer renders 1`] = `
+<div
+  className="paragraph graduation-message"
+>
+  It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times.
+</div>
+`;
