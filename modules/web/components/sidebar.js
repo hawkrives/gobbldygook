@@ -19,7 +19,7 @@ import {
     iosUploadOutline,
 } from '../icons/ionicons'
 
-import './sidebar.scss'
+import styled from 'styled-components'
 
 type StudentType = Object;
 type PropTypes = {
@@ -36,6 +36,20 @@ type PropTypes = {
     undo: () => any,
 };
 
+const StudentButtonsToolbar = styled(Toolbar)`margin-bottom: 0.5em;`
+
+const SidebarElement = styled.aside`
+    ${props => props.theme.contentBlockSpacing}
+
+    flex: 1;
+
+    @media all and (min-width: 35em) {
+        max-width: 280px;
+        padding-left: ${props => props.theme.pageEdgePadding};
+        padding-right: calc(${props => props.theme.pageEdgePadding} * (2/3));
+    }
+`
+
 function Sidebar(props: PropTypes) {
     const { undo, redo } = props
     const studentId = props.student.data.present.id
@@ -43,8 +57,8 @@ function Sidebar(props: PropTypes) {
     const canRedo = props.student.data.future.length > 0
 
     return (
-        <aside className="sidebar">
-            <Toolbar className="student-buttons">
+        <SidebarElement>
+            <StudentButtonsToolbar>
                 <Button link to="/" title="Students">
                     <Icon type="block">{iosPeopleOutline}</Icon>
                 </Button>
@@ -78,7 +92,7 @@ function Sidebar(props: PropTypes) {
                 <Button link to={`/s/${studentId}/share`} title="Share">
                     <Icon type="block">{iosUploadOutline}</Icon>
                 </Button>
-            </Toolbar>
+            </StudentButtonsToolbar>
 
             <CourseRemovalBox
                 removeCourse={(scheduleId, clbid) =>
@@ -86,7 +100,7 @@ function Sidebar(props: PropTypes) {
             />
 
             {props.children}
-        </aside>
+        </SidebarElement>
     )
 }
 
