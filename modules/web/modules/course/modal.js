@@ -172,7 +172,8 @@ function ModalCourse(props) {
                         {course.times &&
                             <div>
                                 <h2>
-                                    {course.offerings.length === 1
+                                    {course.offerings &&
+                                        course.offerings.length === 1
                                         ? 'Offering'
                                         : 'Offerings'}
                                 </h2>
@@ -194,7 +195,8 @@ function ModalCourse(props) {
                         {course.instructors &&
                             <div>
                                 <h2>
-                                    {course.instructors.length === 1
+                                    {course.instructors &&
+                                        course.instructors.length === 1
                                         ? 'Instructor'
                                         : 'Instructors'}
                                 </h2>
