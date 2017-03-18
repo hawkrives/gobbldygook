@@ -19,8 +19,6 @@ branches:
 
 cache:
   yarn: true
-  directories:
-    - node_modules
 
 script:
   - bash scripts/update-yarn-lock-file.sh
