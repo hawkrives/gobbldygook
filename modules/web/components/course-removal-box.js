@@ -2,7 +2,6 @@
 import React from 'react'
 import cx from 'classnames'
 import { DropTarget } from 'react-dnd'
-import styled from 'styled-components'
 import debug from 'debug'
 const log = debug('web:courses')
 
@@ -12,11 +11,6 @@ import Icon from './icon'
 import { iosTrashOutline } from '../icons/ionicons'
 
 import './course-removal-box.scss'
-
-const RemovalIcon = styled(Icon)`
-    font-size: 3em;
-    text-align: center;
-`
 
 type CourseRemovalBoxProps = {
     canDrop: boolean, // react-dnd
@@ -32,9 +26,9 @@ function CourseRemovalBox(props: CourseRemovalBoxProps) {
 
     return props.connectDropTarget(
         <div className={className}>
-            <RemovalIcon block>
+            <Icon type="block" style={{ fontSize: '3em', textAlign: 'center' }}>
                 {iosTrashOutline}
-            </RemovalIcon>
+            </Icon>
             Drop a course here to remove it.
         </div>
     )
