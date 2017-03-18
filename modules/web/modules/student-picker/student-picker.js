@@ -14,7 +14,6 @@ import Button from '../../components/button'
 import Icon from '../../components/icon'
 import StudentList from './student-list'
 import styled from 'styled-components'
-import './student-picker.scss'
 
 const StudentListToolbar = styled(Toolbar)`
     width: 100%;
@@ -31,6 +30,62 @@ const StudentListButton = styled(Button)`
     & .icon {
         font-size: 1.5em;
         margin-bottom: 0.25em;
+    }
+`
+
+const Overview = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-width: 45em;
+    margin: 0 auto;
+`
+
+const StudentListToolbarWrapper = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1em;
+`
+
+const AppTitle = styled.header`
+    margin-top: 3em;
+    text-align: center;
+
+    & h1, & h2 {
+        margin: 0;
+        font-feature-settings: 'smcp';
+    }
+
+    & h1 {
+        font-weight: 300;
+    }
+
+    & h2 {
+        margin-bottom: 1em;
+        font-weight: 400;
+        font-size: 1em;
+    }
+`
+
+const MakeStudentButton = styled(Button)`
+    max-width: 10em;
+    margin: 0 auto;
+`
+
+const Filter = styled.input`
+    ${props => props.theme.card}
+    flex: 3 0 auto;
+    align-self: center;
+    padding: 0.25em 0.5em;
+    margin-right: 1em;
+    margin-left: 1em; /* only for the search button */
+
+    &:focus {
+        color: $blue-900;
+        border-color: $blue-500;
+        background-color: $blue-50;
+        outline: none;
     }
 `
 
@@ -68,22 +123,21 @@ export default function StudentPicker(props: PropTypes) {
     } = props
 
     return (
-        <div className="students-overview">
-            <heading className="app-title">
+        <Overview>
+            <AppTitle>
                 <h1>GobbldygooK</h1>
                 <h2>A Course Scheduling Helper</h2>
-            </heading>
+            </AppTitle>
 
-            <div className="student-list-toolbar">
+            <StudentListToolbarWrapper>
                 <StudentListToolbar>
                     <StudentListButton link to="search/">
                         <Icon>{androidSearch}</Icon>
                         Courses
                     </StudentListButton>
 
-                    <input
+                    <Filter
                         type="search"
-                        className="student-list-filter"
                         placeholder="Filter students"
                         value={filterText}
                         onChange={onFilterChange}
@@ -117,7 +171,7 @@ export default function StudentPicker(props: PropTypes) {
                     {' '}
                     <span>grouping by <b>{groupBy}</b>.</span>
                 </div>
-            </div>
+            </StudentListToolbarWrapper>
 
             {size(students) > 0
                 ? <StudentList
@@ -128,14 +182,9 @@ export default function StudentPicker(props: PropTypes) {
                       groupBy={groupBy}
                       students={students}
                   />
-                : <Button
-                      className="make-student"
-                      link
-                      type="raised"
-                      to="/create"
-                  >
+                : <MakeStudentButton link type="raised" to="/create">
                       Add a Student
-                  </Button>}
-        </div>
+                  </MakeStudentButton>}
+        </Overview>
     )
 }
