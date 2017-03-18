@@ -7,6 +7,7 @@ import flatMap from 'lodash/flatMap'
 import oxford from 'listify'
 
 import Modal from '../../components/modal'
+import {BulletedList, ListItem} from '../../components/list'
 import Separator from '../../components/separator'
 import Toolbar from '../../components/toolbar'
 import Button from '../../components/button'
