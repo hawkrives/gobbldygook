@@ -8,7 +8,9 @@ import {
 
 describe('checkForInvalidYear', () => {
     it('checks for an invalid year on a course', () => {
-        expect(checkForInvalidYear({ year: 1994, semester: 1 }, 2012)).toMatchSnapshot()
+        expect(
+            checkForInvalidYear({ year: 1994, semester: 1 }, 2012)
+        ).toMatchSnapshot()
     })
 
     it('returns null if no semester is present', () => {
@@ -16,7 +18,9 @@ describe('checkForInvalidYear', () => {
     })
 
     it('returns null if the semester is "not from stolaf"', () => {
-        expect(checkForInvalidYear({ year: 1994, semester: 9 }, 2012)).toBe(null)
+        expect(checkForInvalidYear({ year: 1994, semester: 9 }, 2012)).toBe(
+            null
+        )
     })
 })
 
