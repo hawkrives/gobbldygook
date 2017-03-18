@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+// @flow
+import React from 'react'
 
 import Button from '../../components/button'
 import Icon from '../../components/icon'
@@ -26,7 +27,15 @@ const WindowTools = styled(Toolbar)``
 
 const CloseModal = styled(Button)``
 
-export function ShareSheet(props) {
+type PropTypes = {
+    params: {
+        studentId: string,
+    },
+    router: Object,
+    student?: Object,
+};
+
+export function ShareSheet(props: PropTypes) {
     let { student } = props
     student = student || {}
 
@@ -59,14 +68,6 @@ export function ShareSheet(props) {
             </div>
         </ShareModal>
     )
-}
-
-ShareSheet.propTypes = {
-    params: PropTypes.shape({
-        studentId: PropTypes.string.isRequired,
-    }).isRequired,
-    router: PropTypes.object.isRequired,
-    student: PropTypes.object,
 }
 
 const mapState = (state, ownProps) => {
