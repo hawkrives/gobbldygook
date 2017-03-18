@@ -99,7 +99,7 @@ export class StudentSummary extends React.PureComponent {
     }
 }
 
-class Header extends React.PureComponent {
+export class Header extends React.PureComponent {
     props: {
         canGraduate: boolean,
         name: string,
@@ -147,7 +147,7 @@ class Header extends React.PureComponent {
     }
 }
 
-class Footer extends React.PureComponent {
+export class Footer extends React.PureComponent {
     goodGraduationMessage = [
         "It looks like you'll make it! Just follow the plan, and",
         'go over my output with your advisor a few times.',
@@ -175,7 +175,7 @@ class Footer extends React.PureComponent {
     }
 }
 
-class DateSummary extends React.PureComponent {
+export class DateSummary extends React.PureComponent {
     props: {
         onChangeGraduation: (string) => any,
         onChangeMatriculation: (string) => any,
@@ -213,7 +213,7 @@ class DateSummary extends React.PureComponent {
     }
 }
 
-class DegreeSummary extends React.PureComponent {
+export class DegreeSummary extends React.PureComponent {
     props: {
         studies: any[],
     };
@@ -264,7 +264,7 @@ class DegreeSummary extends React.PureComponent {
     }
 }
 
-class CreditSummary extends React.PureComponent {
+export class CreditSummary extends React.PureComponent {
     props: {
         currentCredits: number,
         neededCredits: number,
