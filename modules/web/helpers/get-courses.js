@@ -51,8 +51,10 @@ export function getCourse({ clbid, term }: {clbid: number, term: number}, fabric
         return fabrications[clbid]
     }
 
-    const getCourseFrom = getCourseFromDatabase
-    // const getCourseFrom = getCourseFromNetwork
+    let getCourseFrom = getCourseFromDatabase
+    if (global.useNetworkOnly) {
+        getCourseFrom = getCourseFromNetwork
+    }
 
     return getCourseFrom(clbid)
         .then(course => course || { clbid, term, error: `Could not find ${clbid}` })

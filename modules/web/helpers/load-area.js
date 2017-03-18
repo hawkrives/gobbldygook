@@ -119,7 +119,12 @@ export default function getArea(
         return promiseCache[id]
     }
 
-    promiseCache[id] = loadAreaFromDatabase({ name, type, revision, source, isCustom })
+    let getAreaFrom = loadAreaFromDatabase
+    if (global.useNetworkOnly) {
+        getAreaFrom = loadAreaFromNetwork
+    }
+
+    promiseCache[id] = getAreaFrom({ name, type, revision, source, isCustom })
 
     return promiseCache[id].then(area => {
         console.log(area)
