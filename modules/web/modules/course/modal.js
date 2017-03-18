@@ -6,7 +6,7 @@ import groupBy from 'lodash/groupBy'
 import flatMap from 'lodash/flatMap'
 import noop from 'lodash/noop'
 import oxford from 'listify'
-
+import styled from 'styled-components'
 import Modal from '../../components/modal'
 import {BulletedList, ListItem} from '../../components/list'
 import Separator from '../../components/separator'
@@ -29,7 +29,92 @@ import {
     removeCourse,
 } from '../../redux/students/actions/courses'
 
-import './modal.scss'
+const Container = styled.div`
+    ${props => props.theme.card}
+
+    display: flex;
+    flex-flow: column;
+    max-width: 45em;
+
+    p, ul, ol {
+        margin: 0;
+    }
+`
+
+const VerticalSegment = `
+    padding: 0 20px;
+`
+
+const BottomToolbar = styled.div`
+    ${VerticalSegment}
+
+    border-top: ${props => props.theme.materialDivider};
+    margin-top: 0.5em;
+    padding-top: 0.5em;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+`
+
+const RemoveCourseButton = styled(Button)`
+    color: ${props => props.theme.red500};
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 0.85em;
+    &:hover {
+        background-color: ${props => props.theme.red50};
+        border-color: ${props => props.theme.red500};
+    }
+
+    &[disabled] {
+        color: ${props => props.theme.gray500};
+    }
+    &[disabled]:hover {
+        background-color: transparent;
+        border-color: transparent;
+    }
+`
+
+const Heading = styled.h2`
+    font-weight: 500;
+    font-feature-settings: "smcp";
+    font-size: 1em;
+    margin-bottom: 0;
+`
+
+const Description = styled.div`
+    hyphens: auto;
+`
+
+
+const Column = styled.div`
+    flex: 1;
+
+    @media screen and (min-width: 45em) {
+        & + & {
+            margin-left: 3em;
+        }
+    }
+`
+
+const InfoSegment = styled.div`
+    ${VerticalSegment}
+`
+
+const ColumnsWrapper = styled.div`
+    ${VerticalSegment}
+    display: flex;
+    flex-flow: row nowrap;
+
+    @media screen and (max-width: 45em) {
+        flex-flow: column;
+    }
+`
+
+const SummaryThing = styled.div`
+    white-space: normal;
+`
 
 function findSemesterList(student: ?Object) {
     if (!student) {
@@ -132,12 +217,12 @@ class ExpandedCourse extends React.PureComponent {
         const { course } = this.props
 
         const infoColumn = (
-            <div className="column">
+            <Column>
                 {course.description &&
-                    <div className="description">
-                        <h2>Description</h2>
+                    <Description>
+                        <Heading>Description</Heading>
                         <p>{course.description}</p>
-                    </div>}
+                    </Description>}
 
                 <p>
                     Offered in {semesterName(course.semester)} {course.year}.
@@ -147,24 +232,24 @@ class ExpandedCourse extends React.PureComponent {
                     {course.credits || 0}
                     {` ${course.credits === 1 ? 'credit' : 'credits'}.`}
                 </p>
-            </div>
+            </Column>
         )
 
         const detailColumn = (
-            <div className="column">
+            <Column>
                 {course.prerequisites &&
                     <div>
-                        <h2>Prerequisites</h2>
+                        <Heading>Prerequisites</Heading>
                         <p>{course.prerequisites}</p>
                     </div>}
 
                 {course.times &&
                     <div>
-                        <h2>
+                        <Heading>
                             {course.offerings && course.offerings.length === 1
                                 ? 'Offering'
                                 : 'Offerings'}
-                        </h2>
+                        </Heading>
                         <BulletedList>
                             {flatMap(course.offerings, offering =>
                                 map(offering.times, time => {
@@ -184,45 +269,45 @@ class ExpandedCourse extends React.PureComponent {
 
                 {course.instructors &&
                     <div>
-                        <h2>
+                        <Heading>
                             {course.instructors &&
                                 course.instructors.length === 1
                                 ? 'Instructor'
                                 : 'Instructors'}
-                        </h2>
+                        </Heading>
                         <div>{oxford(course.instructors)}</div>
                     </div>}
 
                 {course.gereqs &&
                     <div>
-                        <h2>G.E. Requirements</h2>
+                        <Heading>G.E. Requirements</Heading>
                         <BulletedList>
                             {map(course.gereqs, ge => (
                                 <ListItem key={ge}>{ge}</ListItem>
                             ))}
                         </BulletedList>
                     </div>}
-            </div>
+            </Column>
         )
 
         return (
             <div>
-                <div className="info-wrapper">
+                <InfoSegment>
                     <CourseTitle {...course} />
 
-                    <div className="summary">
+                    <SummaryThing>
                         <span className="identifier">
                             {buildDeptNum(course, true)}
                         </span>
                         {' • '}
                         <span className="type">{course.type}</span>
-                    </div>
-                </div>
+                    </SummaryThing>
+                </InfoSegment>
 
-                <div className="columns">
+                <ColumnsWrapper>
                     {infoColumn}
                     {detailColumn}
-                </div>
+                </ColumnsWrapper>
             </div>
         )
     }
@@ -253,7 +338,7 @@ function ModalCourse(
 
     return (
         <Modal onClose={onClose} contentLabel="Course">
-            <div className="course--modal">
+            <Container>
                 <Toolbar>
                     <Separator type="flex-spacer" flex={3} />
                     <Button type="raised" onClick={onClose}>Close</Button>
@@ -261,7 +346,7 @@ function ModalCourse(
 
                 <ExpandedCourse course={course} />
 
-                <div className="tools">
+                <BottomToolbar>
                     <SemesterSelector
                         scheduleId={scheduleId}
                         student={student}
@@ -270,8 +355,7 @@ function ModalCourse(
                         removeCourse={removeCourse}
                         clbid={course.clbid}
                     />
-                    <Button
-                        className="remove-course"
+                    <RemoveCourseButton
                         onClick={removeFromSemester({
                             studentId,
                             removeCourse,
@@ -281,9 +365,9 @@ function ModalCourse(
                         disabled={!scheduleId || !student}
                     >
                         Remove Course
-                    </Button>
-                </div>
-            </div>
+                    </RemoveCourseButton>
+                </BottomToolbar>
+            </Container>
         </Modal>
     )
 }
