@@ -58,7 +58,7 @@ export class StudentSummary extends React.PureComponent {
             student,
             showMessage = true,
             showAvatar = true,
-            randomizeHello = false,
+            randomizeHello = true,
             ...props
         } = this.props
         const { studies, canGraduate } = student

@@ -1106,3 +1106,34 @@ exports[`StudentSummary renders 1`] = `
   </div>
 </article>
 `;
+
+exports[`StudentSummary renders a student with canGraduate=false 1`] = `
+<article
+  className="student-summary cannot-graduate"
+>
+  <Header
+    canGraduate={false}
+    helloMessage="Hello, "
+    name="test"
+    showAvatar={true}
+  />
+  <div
+    className="content"
+  >
+    <DateSummary
+      graduation={2019}
+      matriculation={2015}
+    />
+    <DegreeSummary
+      studies={Array []}
+    />
+    <CreditSummary
+      currentCredits={0}
+      neededCredits={35}
+    />
+    <Footer
+      canGraduate={false}
+    />
+  </div>
+</article>
+`;
