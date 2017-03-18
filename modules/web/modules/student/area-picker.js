@@ -11,8 +11,58 @@ import type { AreaOfStudyTypeEnum } from '../../../examine-student/types'
 import Button from '../../components/button'
 import List from '../../components/list'
 import Toolbar from '../../components/toolbar'
+import styled from 'styled-components'
 
-import './area-picker.scss'
+const AddAreaBlock = styled.div`
+    padding: ${({ theme }) => theme.areaEdgePadding};
+    border-top: ${({ theme }) => theme.materialDivider};
+`
+
+const AddAreaToolbar = styled(Toolbar)`
+    margin-bottom: ${({ theme }) => theme.areaEdgePadding};
+`
+
+const AreaChoice = styled.li`
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    & + & {
+        margin-top: 0.5em;
+    }
+`
+
+const AreaListing = styled.span`
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+`
+
+const AreaListingTitle = styled.span`
+    font-weight: 500;
+`
+
+const AreaListingRevision = styled.span`
+    font-size: 0.8em;
+`
+
+const ToggleAreaButton = styled(Button)`
+    padding: 0.25em 1em;
+`
+
+const AddAreaFilter = styled.input`
+    flex: 1;
+    border: solid 1px ${({ theme }) => theme.gray300};
+    padding: 0.25em;
+    margin-bottom: 0.5em;
+
+    &:focus {
+        background-color: ${({ theme }) => theme.blue50};
+        border-color: ${({ theme }) => theme.blue500};
+        outline: 0;
+    }
+`
 
 type AreaOfStudy = Object;
 type PropTypes = {
@@ -38,19 +88,18 @@ function AreaPicker(props: PropTypes) {
         fuzzysearch(props.filterText, area.name.toLowerCase()))
 
     const areaList = map(filteredOnName, (area, i) => (
-        <li key={area.name + i} className="area--choice">
-            <span className="area-listing">
-                <span className="title">{area.name}</span>
-                <span className="revision">{area.revision}</span>
-            </span>
-            <Button
-                className="toggle-area"
+        <AreaChoice key={area.name + i}>
+            <AreaListing>
+                <AreaListingTitle>{area.name}</AreaListingTitle>
+                <AreaListingRevision>{area.revision}</AreaListingRevision>
+            </AreaListing>
+            <ToggleAreaButton
                 type="flat"
                 onClick={ev => props.onAddArea(area, ev)}
             >
                 Add
-            </Button>
-        </li>
+            </ToggleAreaButton>
+        </AreaChoice>
     ))
 
     let message
@@ -63,20 +112,19 @@ function AreaPicker(props: PropTypes) {
     }
 
     return (
-        <div className="add-area">
-            <Toolbar>
-                <input
-                    className="add-area--filter"
+        <AddAreaBlock>
+            <AddAreaToolbar>
+                <AddAreaFilter
                     placeholder={`Filter ${pluralizeArea(props.type)}`}
                     value={props.filterText}
                     onChange={props.onFilterChange}
                 />
-            </Toolbar>
+            </AddAreaToolbar>
 
             <List type="plain">
                 {areaList.length ? areaList : <li>{message}</li>}
             </List>
-        </div>
+        </AddAreaBlock>
     )
 }
 
