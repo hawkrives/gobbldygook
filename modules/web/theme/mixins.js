@@ -62,3 +62,14 @@ export const noSelect = `
     user-select: none;
     cursor: default;
 `
+
+export const truncate = `
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`
+
+export const truncateWidth = (width: string) => `
+    ${truncate}
+    width: ${width};
+`
