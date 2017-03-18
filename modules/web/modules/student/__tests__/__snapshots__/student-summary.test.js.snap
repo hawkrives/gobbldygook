@@ -346,7 +346,517 @@ exports[`DateSummary renders 1`] = `
 </p>
 `;
 
-exports[`DegreeSummary handles no studies 1`] = `"You are planning on no degrees0."`;
+exports[`DegreeSummary handles 0 degrees, 0 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on no degrees."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on no degrees and not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on no degrees and not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on no degrees and not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on no degrees and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on no degrees and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on no degrees and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on no degrees and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on no degrees and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on no degrees and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on no degrees and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on no degrees and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on no degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on no degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on no degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 0 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on no degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on no degrees and a major in Asian Studies."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 1 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on no degrees and majors in Asian Studies and Biology."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 2 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on no degrees and majors in Asian Studies, Biology, and Computer Science."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 0 degrees, 3 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on no degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree and not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree and not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree and not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 0 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree and a major in Asian Studies."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 1 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree and majors in Asian Studies and Biology."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 2 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree and majors in Asian Studies, Biology, and Computer Science."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 1 degrees, 3 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on a Bachelor of Science degree, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 0 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and a major in Asian Studies."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 1 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and majors in Asian Studies and Biology."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 2 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees and majors in Asian Studies, Biology, and Computer Science."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 2 degrees, 3 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science and Bachelor of Music degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 0 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and a major in Asian Studies."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 1 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, a major in Asian Studies, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and majors in Asian Studies and Biology."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 2 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies and Biology, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 0 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees and majors in Asian Studies, Biology, and Computer Science."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 0 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 0 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 0 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 1 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 1 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 1 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 1 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and a concentration in Africa and the Americas, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 2 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 2 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 2 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 2 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas and Biomolecular Science, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 3 concentrations, and 0 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 3 concentrations, and 1 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention an emphasis in Emphasis 1."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 3 concentrations, and 2 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1 and Emphasis 2."`;
+
+exports[`DegreeSummary handles 3 degrees, 3 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
 
 exports[`DegreeSummary renders 1`] = `
 <p
@@ -355,7 +865,6 @@ exports[`DegreeSummary renders 1`] = `
   You are planning on
    
   no degrees
-  0
   .
 </p>
 `;

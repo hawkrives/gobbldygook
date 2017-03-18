@@ -9,6 +9,7 @@ import {
     Header,
     StudentSummary,
 } from '../student-summary'
+import take from 'lodash/take'
 import { Student } from '../../../../../modules/object-student/student'
 import { shallow } from 'enzyme'
 
@@ -176,15 +177,46 @@ describe('DateSummary', () => {
 })
 
 describe('DegreeSummary', () => {
+    const studies = [
+        {type: 'degree', name: 'Bachelor of Science'},
+        {type: 'degree', name: 'Bachelor of Music'},
+        {type: 'degree', name: 'Bachelor of Arts'},
+        {type: 'major', name: 'Asian Studies'},
+        {type: 'major', name: 'Biology'},
+        {type: 'major', name: 'Computer Science'},
+        {type: 'concentration', name: 'Africa and the Americas'},
+        {type: 'concentration', name: 'Biomolecular Science'},
+        {type: 'concentration', name: 'China Studies'},
+        {type: 'emphasis', name: 'Emphasis 1'},
+        {type: 'emphasis', name: 'Emphasis 2'},
+        {type: 'emphasis', name: 'Emphasis 3'},
+    ]
+
     it('renders', () => {
         const tree = shallow(<DegreeSummary studies={[]} />)
         expect(tree).toMatchSnapshot()
     })
 
-    it('handles no studies', () => {
-        const tree = shallow(<DegreeSummary studies={[]} />)
-        expect(tree.text()).toMatchSnapshot()
-    })
+    for (const degreeCount of [0, 1, 2, 3]) {
+        for (const majorCount of [0, 1, 2, 3]) {
+            for (const concentrationCount of [0, 1, 2, 3]) {
+                for (const emphasisCount of [0, 1, 2, 3]) {
+                    it(`handles ${degreeCount} degrees, ${majorCount} majors, ${concentrationCount} concentrations, and ${emphasisCount} emphases`, () => {
+                        const tree = shallow(<DegreeSummary
+                            studies={[
+                                ...studies.filter(s => s.type === 'degree').slice(0, degreeCount),
+                                ...studies.filter(s => s.type === 'major').slice(0, majorCount),
+                                ...studies.filter(s => s.type === 'concentration').slice(0, concentrationCount),
+                                ...studies.filter(s => s.type === 'emphasis').slice(0, emphasisCount),
+                            ]}
+                        />)
+
+                        expect(tree.text()).toMatchSnapshot()
+                    })
+                }
+            }
+        }
+    }
 })
 
 describe('Footer', () => {
