@@ -19,10 +19,9 @@ class DraggableCourse extends React.PureComponent {
         })
 
         return this.props.connectDragSource(
-            <CourseWithModal
-                className={classSet}
-                {...this.props}
-            />
+            <div>
+                <CourseWithModal className={classSet} {...this.props} />
+            </div>
         )
     }
 }
