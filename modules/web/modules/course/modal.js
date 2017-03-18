@@ -17,7 +17,7 @@ import {
 } from '../../redux/students/actions/courses'
 
 const ContainerModal = styled(Modal)`
-    ${props => props.theme.card}
+    ${props => props.theme.baseCard}
 
     display: flex;
     flex-flow: column;
