@@ -47,56 +47,71 @@ const removeFromSemester = ({ studentId, removeCourse, clbid, scheduleId }) =>
         }
     }
 
-function moveToSchedule(
-    { ev, moveCourse, addCourse, removeCourse, scheduleId, studentId, clbid }
-) {
-    const targetScheduleId = ev.target.value
-    if (targetScheduleId === '$none') {
-        return
-    } else if (targetScheduleId === '$remove') {
-        return removeCourse(studentId, scheduleId, clbid)
-    }
+const moveToSchedule = (
+    { moveCourse, addCourse, removeCourse, scheduleId, studentId, clbid }
+) =>
+    ev => {
+        const targetScheduleId = ev.target.value
+        if (targetScheduleId === '$none') {
+            return
+        } else if (targetScheduleId === '$remove') {
+            return removeCourse(studentId, scheduleId, clbid)
+        }
 
-    if (scheduleId) {
-        return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
-    } else {
-        return addCourse(studentId, targetScheduleId, clbid)
+        if (scheduleId) {
+            return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
+        } else {
+            return addCourse(studentId, targetScheduleId, clbid)
+        }
     }
-}
 
 function SemesterSelector(
-    { scheduleId, student, moveCourse, addCourse, removeCourse, clbid }
+    {
+        scheduleId,
+        student,
+        moveCourse,
+        addCourse,
+        removeCourse,
+        clbid,
+    }: {
+        addCourse: () => any,
+        clbid?: number,
+        moveCourse: () => any,
+        removeCourse: () => any,
+        scheduleId?: string,
+        student?: Object,
+    }
 ) {
+    const studentId = student ? student.id : null
+    const specialOption = scheduleId
+        ? <option value="$remove">Remove from Schedule</option>
+        : <option value="$none">No Schedule</option>
+
+    const options = map(findSemesterList(student), (group, year) => (
+        <optgroup key={year} label={expandYear(year, true, '–')}>
+            {map(group, schedule => (
+                <option value={schedule.id} key={schedule.id}>
+                    {schedule.title}
+                </option>
+            ))}
+        </optgroup>
+    ))
+
     return (
         <select
-            className="semester-select"
             value={scheduleId || 'none'}
             disabled={!student || !clbid}
-            onChange={ev =>
-                moveToSchedule({
-                    ev,
-                    moveCourse,
-                    addCourse,
-                    removeCourse,
-                    scheduleId,
-                    studentId: student.id,
-                    clbid,
-                })}
+            onChange={moveToSchedule({
+                moveCourse,
+                addCourse,
+                removeCourse,
+                scheduleId,
+                studentId,
+                clbid,
+            })}
         >
-            {scheduleId
-                ? <option value="$remove">Remove from Schedule</option>
-                : <option value="$none">No Schedule</option>}
-            {student
-                ? map(findSemesterList(student), (group, key) => (
-                      <optgroup key={key} label={expandYear(key, true, '–')}>
-                          {map(group, sched => (
-                              <option value={sched.id} key={sched.id}>
-                                  {sched.title}
-                              </option>
-                          ))}
-                      </optgroup>
-                  ))
-                : null}
+            {specialOption}
+            {options}
         </select>
     )
 }
