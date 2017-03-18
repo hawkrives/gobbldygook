@@ -1,7 +1,13 @@
 // @flow
 
 import React from 'react'
-import { CreditSummary, DateSummary, DegreeSummary, Footer, Header } from '../student-summary'
+import {
+    CreditSummary,
+    DateSummary,
+    DegreeSummary,
+    Footer,
+    Header,
+} from '../student-summary'
 import { shallow } from 'enzyme'
 
 describe('CreditSummary', () => {
