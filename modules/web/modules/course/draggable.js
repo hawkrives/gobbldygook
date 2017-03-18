@@ -22,7 +22,7 @@ import {
 
 import './draggable.scss'
 
-type InlineCourseProps = {
+type PropTypes = {
     className?: string,
     conflicts?: any[],
     connectDragSource: () => any, // react-dnd
@@ -39,14 +39,14 @@ const warningsMap = {
     'invalid-year': alertCircled,
 }
 
-class InlineCourse extends Component {
-    props: InlineCourseProps;
+class DraggableCourse extends Component {
+    props: PropTypes;
 
     state = {
         isOpen: false,
     };
 
-    shouldComponentUpdate(nextProps: InlineCourseProps, nextState) {
+    shouldComponentUpdate(nextProps: PropTypes, nextState) {
         return this.props.course !== nextProps.course ||
             this.props.conflicts !== nextProps.conflicts ||
             this.state.isOpen !== nextState.isOpen ||
@@ -161,4 +161,4 @@ function collect(connect, monitor) {
     }
 }
 
-export default DragSource(IDENT_COURSE, courseSource, collect)(InlineCourse)
+export default DragSource(IDENT_COURSE, courseSource, collect)(DraggableCourse)
