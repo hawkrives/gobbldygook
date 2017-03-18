@@ -2,7 +2,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { InlineList, InlineListItem } from '../../components/list'
+import { PlainList, ListItem } from '../../components/list'
 import Icon from '../../components/icon'
 import {
     iosClockOutline,
@@ -10,24 +10,31 @@ import {
     alertCircled,
 } from '../../icons/ionicons'
 
-const WarningList = styled(InlineList)`
+const WarningList = styled(PlainList)`
     font-size: 0.85em;
     font-feature-settings: "onum";
-    padding-bottom: 2px;
 `
 
-const WarningItem = styled(InlineListItem)`
-    display: flex;
-    flex-flow: row wrap;
+const WarningItem = styled(ListItem)`
+    display: inline-flex;
+    flex-flow: row nowrap;
     align-items: center;
+    max-width: 100%;
 
     padding: 0.125em 0.35em;
+    margin-bottom: 0.1em;
     border-radius: 0.25em;
     background-color: ${props => props.theme.amber200};
 `
 
 const WarningIcon = styled(Icon)`
     margin-right: 0.35em;
+    flex-shrink: 0;
+`
+
+const WarningMessage = styled.span`
+    flex: 1
+    ${props => props.theme.truncate}
 `
 
 const icons = {
@@ -64,7 +71,8 @@ export class CourseWarnings extends React.PureComponent {
             <WarningList>
                 {warnings.map(w => (
                     <WarningItem key={w.msg}>
-                        <WarningIcon>{icons[w.type]}</WarningIcon> {w.msg}
+                        <WarningIcon>{icons[w.type]}</WarningIcon>
+                        <WarningMessage>{w.msg}</WarningMessage>
                     </WarningItem>
                 ))}
             </WarningList>
