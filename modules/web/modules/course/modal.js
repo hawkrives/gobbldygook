@@ -40,10 +40,10 @@ function findSemesterList(student: ?Object) {
         title: `${semesterName(s.semester)} – ${s.title}`,
     }))
 
-    let sorted = sortBy(schedules, ['year', 'semester'])
-    let byYear = groupBy(sorted, 'year')
-
-    return byYear
+    return groupBy(
+        sortBy(schedules, [s => s.year, s => s.semester]),
+        s => s.year
+    )
 }
 
 const removeFromSemester = ({ studentId, removeCourse, clbid, scheduleId }) =>
