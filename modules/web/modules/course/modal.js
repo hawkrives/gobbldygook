@@ -120,14 +120,6 @@ function SemesterSelector(
     )
 }
 
-SemesterSelector.propTypes = {
-    addCourse: PropTypes.func.isRequired,
-    clbid: PropTypes.number,
-    moveCourse: PropTypes.func.isRequired,
-    removeCourse: PropTypes.func.isRequired,
-    scheduleId: PropTypes.string,
-    student: PropTypes.object,
-}
 
 function ModalCourse(props) {
     const {
