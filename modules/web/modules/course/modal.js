@@ -26,7 +26,7 @@ import {
     removeCourse,
 } from '../../redux/students/actions/courses'
 
-import './modal-course.scss'
+import './modal.scss'
 
 function findSemesterList(student) {
     let schedules = map(student.schedules, s => ({
