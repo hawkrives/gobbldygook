@@ -12,8 +12,26 @@ import Toolbar from '../../components/toolbar'
 import Button from '../../components/button'
 import Icon from '../../components/icon'
 import StudentList from './student-list'
-
+import styled from 'styled-components'
 import './student-picker.scss'
+
+const StudentListToolbar = styled(Toolbar)`
+    width: 100%;
+    justify-content: center;
+`
+
+const StudentListButton = styled(Button)`
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
+    margin: 0 0.125em;
+    flex-direction: column;
+    flex: 0 1 auto !important;
+
+    & .icon {
+        font-size: 1.5em;
+        margin-bottom: 0.25em;
+    }
+`
 
 let sortByExpanded = {
     dateLastModified: 'date last modified',
@@ -43,11 +61,11 @@ export default function StudentPicker(props) {
             </heading>
 
             <div className="student-list-toolbar">
-                <Toolbar className="student-list-buttons">
-                    <Button link to="search/" className="student-list--button">
+                <StudentListToolbar>
+                    <StudentListButton link to="search/">
                         <Icon>{androidSearch}</Icon>
                         Courses
-                    </Button>
+                    </StudentListButton>
 
                     <input
                         type="search"
@@ -57,36 +75,26 @@ export default function StudentPicker(props) {
                         onChange={onFilterChange}
                     />
 
-                    <Button
-                        className="student-list--button"
-                        onClick={onSortChange}
-                    >
+                    <StudentListButton onClick={onSortChange}>
                         <Icon>{funnel}</Icon>
                         Sort
-                    </Button>
+                    </StudentListButton>
 
-                    <Button
-                        className="student-list--button"
-                        onClick={onGroupChange}
-                        disabled
-                    >
+                    <StudentListButton disabled onClick={onGroupChange}>
                         <Icon>{androidApps}</Icon>
                         Group
-                    </Button>
+                    </StudentListButton>
 
-                    <Button
-                        className="student-list--button"
-                        onClick={onToggleEditing}
-                    >
+                    <StudentListButton onClick={onToggleEditing}>
                         <Icon>{androidMenu}</Icon>
                         Edit
-                    </Button>
+                    </StudentListButton>
 
-                    <Button link to="create/" className="student-list--button">
+                    <StudentListButton link to="create/">
                         <Icon>{androidAdd}</Icon>
                         New
-                    </Button>
-                </Toolbar>
+                    </StudentListButton>
+                </StudentListToolbar>
 
                 <div>
                     <span>
