@@ -32,7 +32,7 @@ script:
       yarn run test -- --coverage --runInBand;
     fi
   - if [[ "$task" == "build" ]]; then
-      yarn run build-ci;
+      yarn run build;
     fi
 
 after_success:
