@@ -121,6 +121,110 @@ function SemesterSelector(
     )
 }
 
+class ExpandedCourse extends React.PureComponent {
+    props: {
+        course: Object,
+    };
+
+    render() {
+        const { course } = this.props
+
+        const infoColumn = (
+            <div className="column">
+                {course.description &&
+                    <div className="description">
+                        <h2>Description</h2>
+                        <p>{course.description}</p>
+                    </div>}
+
+                <p>
+                    Offered in {semesterName(course.semester)} {course.year}.
+                </p>
+
+                <p>
+                    {course.credits || 0}
+                    {course.credits === 1 ? ' credit.' : ' credits.'}
+                </p>
+            </div>
+        )
+
+        const detailColumn = (
+            <div className="column">
+                {course.prerequisites &&
+                    <div>
+                        <h2>Prerequisites</h2>
+                        <p>{course.prerequisites}</p>
+                    </div>}
+
+                {course.times &&
+                    <div>
+                        <h2>
+                            {course.offerings && course.offerings.length === 1
+                                ? 'Offering'
+                                : 'Offerings'}
+                        </h2>
+                        <BulletedList>
+                            {flatMap(course.offerings, offering =>
+                                map(offering.times, time => {
+                                    const key = `${offering.day}-${time.start}-${time.end}`
+                                    return (
+                                        <ListItem key={key}>
+                                            {offering.day}{' from '}
+                                            {to12HourTime(time.start)}
+                                            {' to '}{to12HourTime(time.end)}
+                                            {', in '}
+                                            {offering.location}
+                                        </ListItem>
+                                    )
+                                }))}
+                        </BulletedList>
+                    </div>}
+
+                {course.instructors &&
+                    <div>
+                        <h2>
+                            {course.instructors &&
+                                course.instructors.length === 1
+                                ? 'Instructor'
+                                : 'Instructors'}
+                        </h2>
+                        <div>{oxford(course.instructors)}</div>
+                    </div>}
+
+                {course.gereqs &&
+                    <div>
+                        <h2>G.E. Requirements</h2>
+                        <BulletedList>
+                            {map(course.gereqs, ge => (
+                                <ListItem key={ge}>{ge}</ListItem>
+                            ))}
+                        </BulletedList>
+                    </div>}
+            </div>
+        )
+
+        return (
+            <div>
+                <div className="info-wrapper">
+                    <CourseTitle {...course} />
+
+                    <div className="summary">
+                        <span className="identifier">
+                            {buildDeptNum(course, true)}
+                        </span>
+                        {' • '}
+                        <span className="type">{course.type}</span>
+                    </div>
+                </div>
+
+                <div className="columns">
+                    {infoColumn}
+                    {detailColumn}
+                </div>
+            </div>
+        )
+    }
+}
 
 function ModalCourse(
     props: {
@@ -152,91 +256,8 @@ function ModalCourse(
                     <Separator type="flex-spacer" flex={3} />
                     <Button type="raised" onClick={onClose}>Close</Button>
                 </Toolbar>
-                <div className="info-wrapper">
-                    <CourseTitle {...course} />
 
-                    <div className="summary">
-                        <span className="identifier">
-                            {buildDeptNum(course, true)}
-                        </span>
-                        {' • '}
-                        <span className="type">{course.type}</span>
-                    </div>
-                </div>
-
-                <div className="columns">
-                    <div className="column">
-                        {course.desc &&
-                            <div className="description">
-                                <h2>Description</h2>
-                                <p>{course.desc}</p>
-                            </div>}
-
-                        <p>
-                            Offered in
-                            {' '}
-                            {semesterName(course.semester)}
-                            {' '}
-                            {course.year}
-                            {'. '}
-                            {course.credits}
-                            {' '}
-                            {course.credits === 1 ? 'credit' : 'credits'}
-                            .
-                        </p>
-                    </div>
-                    <div className="column">
-                        {course.prerequisites &&
-                            <div>
-                                <h2>Prerequisites</h2>
-                                <p>{course.prerequisites}</p>
-                            </div>}
-
-                        {course.times &&
-                            <div>
-                                <h2>
-                                    {course.offerings &&
-                                        course.offerings.length === 1
-                                        ? 'Offering'
-                                        : 'Offerings'}
-                                </h2>
-                                <ul>
-                                    {flatMap(course.offerings, (o, i) =>
-                                        map(o.times, (t, j) => (
-                                            <li key={`${i}-${j}`}>
-                                                {o.day}{' from '}
-                                                {to12HourTime(t.start)}
-                                                {' to '}
-                                                {to12HourTime(t.end)}
-                                                {', in '}
-                                                {o.location}
-                                            </li>
-                                        )))}
-                                </ul>
-                            </div>}
-
-                        {course.instructors &&
-                            <div>
-                                <h2>
-                                    {course.instructors &&
-                                        course.instructors.length === 1
-                                        ? 'Instructor'
-                                        : 'Instructors'}
-                                </h2>
-                                <div>{oxford(course.instructors)}</div>
-                            </div>}
-
-                        {course.gereqs &&
-                            <div>
-                                <h2>G.E. Requirements</h2>
-                                <ul className="gereqs">
-                                    {map(course.gereqs, (ge, idx) => (
-                                        <li key={ge + idx}>{ge}</li>
-                                    ))}
-                                </ul>
-                            </div>}
-                    </div>
-                </div>
+                <ExpandedCourse course={course} />
 
                 <div className="tools">
                     <SemesterSelector
