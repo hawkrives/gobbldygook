@@ -371,7 +371,25 @@ describe('Header', () => {
 
 describe('StudentSummary', () => {
     it('renders', () => {
-        const tree = shallow(<StudentSummary student={mockStudent()} />)
+        const tree = shallow(
+            <StudentSummary randomizeHello={false} student={mockStudent()} />
+        )
         expect(tree).toMatchSnapshot()
+    })
+
+    it('renders a student with canGraduate=false', () => {
+        const student = { ...mockStudent(), canGraduate: false }
+        const tree = shallow(
+            <StudentSummary randomizeHello={false} student={student} />
+        )
+        expect(tree).toMatchSnapshot()
+    })
+
+    it('renders a student with randomizeHello=true', () => {
+        const student = { ...mockStudent(), canGraduate: false }
+        const tree = shallow(
+            <StudentSummary randomizeHello={true} student={student} />
+        )
+        expect(tree.find('Header').at(0).prop('helloMessage')).toBeTruthy()
     })
 })
