@@ -7,8 +7,20 @@ import {
     DegreeSummary,
     Footer,
     Header,
+    StudentSummary,
 } from '../student-summary'
+import { Student } from '../../../../../modules/object-student/student'
 import { shallow } from 'enzyme'
+
+const mockStudent = () =>
+    Student({
+        name: 'test',
+        id: '0xabadidea',
+        matriculation: 2015,
+        graduation: 2019,
+        dateCreated: new Date('2017-03-17T02:03:33.974Z'),
+        dateLastModified: new Date('2017-03-17T02:03:33.974Z'),
+    })
 
 describe('CreditSummary', () => {
     it('renders shallowly', () => {
@@ -313,5 +325,12 @@ describe('Header', () => {
         expect(tree).toMatchSnapshot()
         tree.find('ContentEditable').at(0).simulate('blur', 'Black Widow')
         expect(onChangeName).toHaveBeenCalledWith('Black Widow')
+    })
+})
+
+describe('StudentSummary', () => {
+    it('renders', () => {
+        const tree = shallow(<StudentSummary student={mockStudent()} />)
+        expect(tree).toMatchSnapshot()
     })
 })

@@ -569,3 +569,31 @@ exports[`Header without an avatar handles the "cannot graduate" status 1`] = `
   </div>
 </header>
 `;
+
+exports[`StudentSummary renders 1`] = `
+<article
+  className="student-summary cannot-graduate"
+>
+  <Header
+    helloMessage="Hello, "
+    name="test"
+    showAvatar={true}
+  />
+  <div
+    className="content"
+  >
+    <DateSummary
+      graduation={2019}
+      matriculation={2015}
+    />
+    <DegreeSummary
+      studies={Array []}
+    />
+    <CreditSummary
+      currentCredits={0}
+      neededCredits={35}
+    />
+    <Footer />
+  </div>
+</article>
+`;
