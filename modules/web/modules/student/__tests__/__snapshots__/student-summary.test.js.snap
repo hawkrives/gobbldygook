@@ -53,3 +53,295 @@ exports[`CreditSummary renders shallowly 1`] = `
    required credits.
 </p>
 `;
+
+exports[`DateSummary allows editing the graduation year if onChangeGraduation is not given 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2012"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={false}
+    multiLine={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    value="2016"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary allows editing the matriculation year if onChangeMatriculation is not given 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={false}
+    multiLine={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    value="2012"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2016"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary calls onChangeGraduation when the graduation year is changed 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2012"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={false}
+    multiLine={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    value="2016"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary calls onChangeMatriculation when the matriculation year is changed 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={false}
+    multiLine={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    value="2012"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2016"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary disables editing the graduation year if onChangeGraduation is not given 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2012"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2016"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary disables editing the matriculation year if onChangeMatriculation is not given 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2012"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2016"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary handles graduating before matriculation 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2016"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2012"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary handles graduating in five years 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2000"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2005"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary handles graduating in four years 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2000"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2004"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary handles graduating in six years 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2000"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2006"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary handles graduating in three years 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2000"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2003"
+  />
+  .
+</p>
+`;
+
+exports[`DateSummary renders 1`] = `
+<p
+  className="paragraph"
+>
+  After matriculating in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2012"
+  />
+  , you are planning to graduate in 
+  <ContentEditable
+    className="autosize-input"
+    disabled={true}
+    multiLine={false}
+    onChange={[Function]}
+    value="2016"
+  />
+  .
+</p>
+`;
