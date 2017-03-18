@@ -49,7 +49,7 @@ type WarningType = {
     warning: boolean,
 };
 
-export class CourseWarnings extends React.PureComponent {
+export default class CourseWarnings extends React.PureComponent {
     props: {
         warnings: ?Array<WarningType>,
     };
