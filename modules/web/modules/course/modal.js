@@ -121,7 +121,18 @@ function SemesterSelector(
 }
 
 
-function ModalCourse(props) {
+function ModalCourse(
+    props: {
+        addCourse?: () => any, // redux
+        course: Object, // parent
+        moveCourse?: () => any, // redux
+        onClose: () => any, // parent
+        removeCourse?: () => any, // redux
+        scheduleId?: string, // parent
+        student?: Object, // redux
+        studentId?: string, // parent
+    }
+) {
     const {
         course,
         student,
@@ -251,17 +262,6 @@ function ModalCourse(props) {
             </div>
         </Modal>
     )
-}
-
-ModalCourse.propTypes = {
-    addCourse: PropTypes.func, // redux
-    course: PropTypes.object.isRequired, // parent
-    moveCourse: PropTypes.func, // redux
-    onClose: PropTypes.func.isRequired, // parent
-    removeCourse: PropTypes.func, // redux
-    scheduleId: PropTypes.string, // parent
-    student: PropTypes.object, // redux
-    studentId: PropTypes.string, // parent
 }
 
 const mapState = (state, ownProps) => {
