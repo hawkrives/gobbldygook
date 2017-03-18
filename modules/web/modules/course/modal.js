@@ -16,7 +16,7 @@ import {
     removeCourse,
 } from '../../redux/students/actions/courses'
 
-const Container = styled.div`
+const ContainerModal = styled(Modal)`
     ${props => props.theme.card}
 
     display: flex;
@@ -98,38 +98,36 @@ function ModalCourse(
     } = props
 
     return (
-        <Modal onClose={onClose} contentLabel="Course">
-            <Container>
-                <Toolbar>
-                    <Separator type="flex-spacer" flex={3} />
-                    <Button type="raised" onClick={onClose}>Close</Button>
-                </Toolbar>
+        <ContainerModal onClose={onClose} contentLabel="Course">
+            <Toolbar>
+                <Separator type="flex-spacer" flex={3} />
+                <Button type="raised" onClick={onClose}>Close</Button>
+            </Toolbar>
 
-                <Course course={course} />
+            <Course course={course} />
 
-                <BottomToolbar>
-                    <SemesterSelector
-                        scheduleId={scheduleId}
-                        student={student}
-                        moveCourse={moveCourse}
-                        addCourse={addCourse}
-                        removeCourse={removeCourse}
-                        clbid={course.clbid}
-                    />
-                    <RemoveCourseButton
-                        onClick={removeFromSemester({
-                            studentId,
-                            removeCourse,
-                            clbid: course.clbid,
-                            scheduleId,
-                        })}
-                        disabled={!scheduleId || !student}
-                    >
-                        Remove Course
-                    </RemoveCourseButton>
-                </BottomToolbar>
-            </Container>
-        </Modal>
+            <BottomToolbar>
+                <SemesterSelector
+                    scheduleId={scheduleId}
+                    student={student}
+                    moveCourse={moveCourse}
+                    addCourse={addCourse}
+                    removeCourse={removeCourse}
+                    clbid={course.clbid}
+                />
+                <RemoveCourseButton
+                    onClick={removeFromSemester({
+                        studentId,
+                        removeCourse,
+                        clbid: course.clbid,
+                        scheduleId,
+                    })}
+                    disabled={!scheduleId || !student}
+                >
+                    Remove Course
+                </RemoveCourseButton>
+            </BottomToolbar>
+        </ContainerModal>
     )
 }
 
