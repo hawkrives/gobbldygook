@@ -38,7 +38,7 @@ const welcomeMessages = [
     'halo, ', // indonesian
 ]
 
-const welcomeMessage = sample(welcomeMessages)
+const welcomeMessage = welcomeMessages[2]
 
 type Student = Object;
 
@@ -68,13 +68,17 @@ export class StudentSummary extends React.PureComponent {
         const currentCredits = countCredits(getActiveStudentCourses(student))
         const neededCredits = student.creditsNeeded
 
+        const message = randomizeHello
+            ? sample(welcomeMessages)
+            : welcomeMessage
+
         return (
             <article className={cx('student-summary', className)}>
                 <Header
                     canGraduate={canGraduate}
                     name={student.name}
                     onChangeName={props.onChangeName}
-                    randomizeHello={randomizeHello}
+                    helloMessage={message}
                     showAvatar={showAvatar}
                 />
                 <div className="content">
@@ -99,12 +103,12 @@ export class StudentSummary extends React.PureComponent {
     }
 }
 
-class Header extends React.PureComponent {
+export class Header extends React.PureComponent {
     props: {
         canGraduate: boolean,
+        helloMessage: string,
         name: string,
-        onChangeName: (string) => any,
-        randomizeHello: boolean,
+        onChangeName?: (string) => any,
         showAvatar: boolean,
     };
 
@@ -122,13 +126,9 @@ class Header extends React.PureComponent {
               />
             : null
 
-        const message = props.randomizeHello
-            ? sample(welcomeMessages)
-            : welcomeMessage
-
         const name = (
             <ContentEditable
-                editable={Boolean(props.onChangeName)}
+                disabled={!props.onChangeName}
                 className="autosize-input"
                 onBlur={props.onChangeName}
                 value={String(props.name)}
@@ -140,14 +140,14 @@ class Header extends React.PureComponent {
                 {avatar}
 
                 <div className="intro">
-                    {message}{name}!
+                    {props.helloMessage}{name}!
                 </div>
             </header>
         )
     }
 }
 
-class Footer extends React.PureComponent {
+export class Footer extends React.PureComponent {
     goodGraduationMessage = [
         "It looks like you'll make it! Just follow the plan, and",
         'go over my output with your advisor a few times.',
@@ -175,10 +175,10 @@ class Footer extends React.PureComponent {
     }
 }
 
-class DateSummary extends React.PureComponent {
+export class DateSummary extends React.PureComponent {
     props: {
-        onChangeGraduation: (string) => any,
-        onChangeMatriculation: (string) => any,
+        onChangeGraduation?: (string) => any,
+        onChangeMatriculation?: (string) => any,
         matriculation: string,
         graduation: string,
     };
@@ -188,7 +188,7 @@ class DateSummary extends React.PureComponent {
 
         const matriculation = (
             <ContentEditable
-                editable={Boolean(props.onChangeMatriculation)}
+                disabled={!props.onChangeMatriculation}
                 className="autosize-input"
                 onBlur={props.onChangeMatriculation}
                 value={String(props.matriculation)}
@@ -197,7 +197,7 @@ class DateSummary extends React.PureComponent {
 
         const graduation = (
             <ContentEditable
-                editable={Boolean(props.onChangeGraduation)}
+                disabled={!props.onChangeGraduation}
                 className="autosize-input"
                 onBlur={props.onChangeGraduation}
                 value={String(props.graduation)}
@@ -213,18 +213,22 @@ class DateSummary extends React.PureComponent {
     }
 }
 
-class DegreeSummary extends React.PureComponent {
+export class DegreeSummary extends React.PureComponent {
     props: {
-        studies: any[],
+        studies: { type: string, name: string }[],
     };
 
     render() {
+        const grouped: {
+            [key: string]: { type: string, name: string }[],
+        } = groupBy(this.props.studies, s => s.type)
+
         const {
             degree: dS = [],
             major: mS = [],
             concentration: cS = [],
             emphasis: eS = [],
-        } = groupBy(this.props.studies, s => s.type)
+        } = grouped
 
         const dCount = dS.length
         const mCount = mS.length
@@ -253,18 +257,18 @@ class DegreeSummary extends React.PureComponent {
                 {mCount || cCount || eCount
                     ? mCount && (cCount || eCount) ? ', ' : ' and '
                     : ''}
-                {mCount && `${mEmph}${mWord} in ${mList}`}
+                {mCount ? `${mEmph}${mWord} in ${mList}` : ''}
                 {mCount && cCount ? ', and ' : ''}
-                {cCount > 0 && `${cEmph}${cWord} in ${cList}`}
+                {cCount ? `${cEmph}${cWord} in ${cList}` : ''}
                 {(mCount || cCount) && eCount ? ', ' : ''}
-                {eCount > 0 && `not to mention ${eEmph}${eWord} in ${eList}`}
-                {'. '}
+                {eCount ? `not to mention ${eEmph}${eWord} in ${eList}` : ''}
+                {'.'}
             </p>
         )
     }
 }
 
-class CreditSummary extends React.PureComponent {
+export class CreditSummary extends React.PureComponent {
     props: {
         currentCredits: number,
         neededCredits: number,
