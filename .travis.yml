@@ -36,9 +36,11 @@ script:
     fi
 
 after_success:
-  - npm install coveralls
-  - ./node_modules/.bin/coveralls < ./coverage/lcov.info
-  - bash <(curl -s https://codecov.io/bash) -f coverage/coverage.json
+  - if [[ "$task" == "test" ]]; then
+      npm install coveralls;
+      ./node_modules/.bin/coveralls < ./coverage/lcov.info
+      bash <(curl -s https://codecov.io/bash) -f coverage/coverage.json
+    fi
 
 before_deploy:
   - node scripts/prepare-for-deploy.js
