@@ -13,10 +13,10 @@ export const materialShadow = `
     border-color: #e5e6e9 #dfe0e4 #d0d1d5;
 `
 
-export const card = `
+export const card = css`
     ${materialShadow}
     background-color: white;
-    border-radius: $base-border-radius;
+    border-radius: ${props => props.theme.baseBorderRadius};
 `
 
 export const cardContent = `
