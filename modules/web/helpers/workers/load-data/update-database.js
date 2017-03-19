@@ -10,7 +10,7 @@ import cleanPriorData from './clean-prior-data'
 import storeData from './store-data'
 import cacheItemHash from './cache-item-hash'
 
-import type { InfoFileTypeEnum } from './types'
+import type { InfoFileTypeEnum, InfoFileRef } from './types'
 
 const log = debug('worker:load-data:update-database')
 const fetchText = (...args) => fetch(...args).then(status).then(text)
@@ -19,8 +19,7 @@ export default function updateDatabase(
     type: InfoFileTypeEnum,
     infoFileBase: string,
     notificationId: string,
-    // Get the path to the current file and the hash of the file
-    { path, hash }: { path: string, hash: string }
+    { path, hash }: InfoFileRef
 ) {
     log(path)
 
