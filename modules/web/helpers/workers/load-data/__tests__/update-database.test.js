@@ -1,7 +1,17 @@
 /* eslint-env jest */
 
 jest.mock('../../../db')
-jest.mock('../lib-dispatch', () => jest.fn())
+jest.mock('../lib-dispatch', () => {
+    const NotificationMock = jest.fn(() => ({
+        start: jest.fn(),
+        increment: jest.fn(),
+        remove: jest.fn(),
+    }))
+    return {
+        quotaExceededError: jest.fn(),
+        Notification: NotificationMock,
+    }
+})
 jest.mock('../clean-prior-data', () => jest.fn())
 jest.mock('../store-data', () => jest.fn())
 jest.mock('../parse-data', () => jest.fn())
@@ -19,7 +29,7 @@ global.fetch = jest.fn(() => {
 
 import db from '../../../db'
 import cleanPriorData from '../clean-prior-data'
-import dispatch from '../lib-dispatch'
+import * as dispatch from '../lib-dispatch'
 import storeData from '../store-data'
 import cacheItemHash from '../cache-item-hash'
 import updateDatabase from '../update-database'
@@ -29,7 +39,7 @@ beforeEach(async () => {
     goodFetch.mockClear()
     badFetch.mockClear()
     cleanPriorData.mockClear()
-    dispatch.mockClear()
+    dispatch.quotaExceededError.mockClear()
     storeData.mockClear()
     cacheItemHash.mockClear()
 })
@@ -37,10 +47,15 @@ beforeEach(async () => {
 describe('updateDatabase', () => {
     test('calls fetch with an url', async () => {
         global.fetch.mockImplementationOnce(goodFetch)
-        await updateDatabase('courses', 'http://unique.com/', '1', {
-            path: 'folder/file.json',
-            hash: 'badidea',
-        })
+        await updateDatabase(
+            'courses',
+            'http://unique.com/',
+            dispatch.Notification(),
+            {
+                path: 'folder/file.json',
+                hash: 'badidea',
+            }
+        )
         expect(global.fetch).toHaveBeenLastCalledWith(
             'http://unique.com//folder/file.json?v=badidea'
         )
@@ -52,7 +67,7 @@ describe('updateDatabase', () => {
             const result = await updateDatabase(
                 'courses',
                 'http://i.am.an.url/',
-                '1',
+                dispatch.Notification(),
                 { path: 'terms/20161.json', hash: 'deadbeef' }
             )
 
@@ -65,7 +80,7 @@ describe('updateDatabase', () => {
             const result = await updateDatabase(
                 'courses',
                 'http://i.am.an.url/',
-                '1',
+                dispatch.Notification(),
                 { path: 'terms/20161.json', hash: 'deadbeef' }
             )
 
@@ -74,33 +89,40 @@ describe('updateDatabase', () => {
         })
     })
 
-    describe('calls dispatch', () => {
+    describe('increments the notification', () => {
         test('even if the fetch works', async () => {
             global.fetch.mockImplementationOnce(goodFetch)
-            await updateDatabase('courses', 'http://i.am.an.url/', '1', {
+            const n = dispatch.Notification()
+            await updateDatabase('courses', 'http://i.am.an.url/', n, {
                 path: 'terms/20161.json',
                 hash: 'deadbeef',
             })
-            expect(dispatch).toHaveBeenCalledTimes(1)
+            expect(n.increment).toHaveBeenCalledTimes(1)
         })
 
         test('even if the fetch fails', async () => {
             global.fetch.mockImplementationOnce(badFetch)
-            await updateDatabase('courses', 'http://i.am.an.url/', '1', {
+            const n = dispatch.Notification()
+            await updateDatabase('courses', 'http://i.am.an.url/', n, {
                 path: 'terms/20161.json',
                 hash: 'deadbeef',
             })
-            expect(dispatch).toHaveBeenCalledTimes(1)
+            expect(n.increment).toHaveBeenCalledTimes(1)
         })
     })
 
     test('calls a sequence of functions', async () => {
         global.fetch.mockImplementationOnce(goodFetch)
 
-        await updateDatabase('courses', 'http://i.am.an.url/', '1', {
-            path: 'terms/20161.json',
-            hash: 'deadbeef',
-        })
+        await updateDatabase(
+            'courses',
+            'http://i.am.an.url/',
+            dispatch.Notification(),
+            {
+                path: 'terms/20161.json',
+                hash: 'deadbeef',
+            }
+        )
 
         expect(cleanPriorData).toHaveBeenCalledTimes(1)
         expect(storeData).toHaveBeenCalledTimes(1)
@@ -113,10 +135,15 @@ describe('updateDatabase', () => {
             Promise.reject(new Error('problem')))
         expect.assertions(3)
 
-        await updateDatabase('courses', 'http://i.am.an.url/', '1', {
-            path: 'terms/20161.json',
-            hash: 'deadbeef',
-        })
+        await updateDatabase(
+            'courses',
+            'http://i.am.an.url/',
+            dispatch.Notification(),
+            {
+                path: 'terms/20161.json',
+                hash: 'deadbeef',
+            }
+        )
 
         expect(cleanPriorData).toHaveBeenCalledTimes(1)
         expect(storeData).not.toHaveBeenCalled()
@@ -129,7 +156,7 @@ describe('updateDatabase', () => {
             const value = await updateDatabase(
                 'courses',
                 'http://i.am.an.url/',
-                '1',
+                dispatch.Notification(),
                 {
                     path: 'terms/20161.json',
                     hash: 'deadbeef',
@@ -145,7 +172,7 @@ describe('updateDatabase', () => {
             const value = await updateDatabase(
                 'courses',
                 'http://i.am.an.url/',
-                '1',
+                dispatch.Notification(),
                 {
                     path: 'terms/20161.json',
                     hash: 'deadbeef',
@@ -159,7 +186,7 @@ describe('updateDatabase', () => {
             const value = await updateDatabase(
                 'courses',
                 'http://i.am.an.url/',
-                '1',
+                dispatch.Notification(),
                 {
                     path: 'terms/20161.json',
                     hash: 'deadbeef',
