@@ -38,7 +38,7 @@ export default function updateDatabase(
             () => storeData(path, type, data),
             // record that we stored the new data
             () => cacheItemHash(path, type, hash),
-        ])
+        ]).then(() => true)
     }
 
     const onFailure = () => {
@@ -46,16 +46,14 @@ export default function updateDatabase(
         return false
     }
 
-    const onSuccess = () => {
+    const onSuccess = lastStepStatus => {
         log(`added ${path}`)
         dispatch('notifications', 'incrementProgress', notificationId)
+        return lastStepStatus
     }
 
     // go fetch the data!
     return fetchText(url)
-        .then(
-            nextStep,
-            onFailure
-        )
+        .then(nextStep, onFailure)
         .then(onSuccess)
 }
