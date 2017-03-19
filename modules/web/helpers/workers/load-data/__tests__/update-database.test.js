@@ -2,11 +2,12 @@
 
 jest.mock('../../../db')
 jest.mock('../../../../../lib/fetch-helpers', () => {
-    return {status: x => x, text: x => x}
+    return { status: x => x, text: x => x }
 })
 
 jest.mock('../clean-prior-data', () => {
-    return jest.fn()
+    return jest
+        .fn()
         .mockReturnValueOnce(() => Promise.reject())
         .mockReturnValueOnce(() => Promise.resolve())
 })
@@ -20,8 +21,7 @@ jest.mock('../cache-item-hash', () => {
     return jest.fn().mockReturnValue(() => Promise.resolve())
 })
 
-global.fetch = jest.fn(url =>
-    Promise.resolve(JSON.stringify({foo:2, url})))
+global.fetch = jest.fn(url => Promise.resolve(JSON.stringify({ foo: 2, url })))
 
 import db from '../../../db'
 import cleanPriorData from '../clean-prior-data'
@@ -39,7 +39,10 @@ test('updateDatabase florp', async () => {
 })
 
 test('updateDatabase returns false if any step fails', async () => {
-    const value = await updateDatabase('courses', 'http://i.am.an.url/', '1', {path: 'terms/20161.json', hash: 'deadbeef'})
+    const value = await updateDatabase('courses', 'http://i.am.an.url/', '1', {
+        path: 'terms/20161.json',
+        hash: 'deadbeef',
+    })
     expect(cleanPriorData).toHaveBeenCalled()
     console.log(cleanPriorData.mock.calls)
     console.log(fetch.mock.calls)

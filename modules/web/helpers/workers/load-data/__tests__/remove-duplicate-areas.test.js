@@ -9,7 +9,7 @@ import removeDuplicateAreas, {
     buildRemoveAreaOps,
 } from '../remove-duplicate-areas'
 
-import {mockArea} from './area.support'
+import { mockArea } from './area.support'
 
 beforeEach(async () => {
     await db.__clear()

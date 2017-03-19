@@ -4,10 +4,10 @@
 jest.mock('../../../db')
 
 import db from '../../../db'
-import storeData, {storeArea, storeCourses} from '../store-data'
+import storeData, { storeArea, storeCourses } from '../store-data'
 
-import {mockArea} from './area.support'
-import {mockCourse} from './course.support'
+import { mockArea } from './area.support'
+import { mockCourse } from './course.support'
 
 beforeEach(async () => {
     await db.__clear()
@@ -15,7 +15,7 @@ beforeEach(async () => {
 
 describe('storeArea', () => {
     test('stores the passed area', async () => {
-        const area = mockArea('CSCI','major', '2012-13' )
+        const area = mockArea('CSCI', 'major', '2012-13')
         await storeArea(area.sourcePath, area)
 
         const actual = (await db.store('areas').getAll())[0]
@@ -26,10 +26,10 @@ describe('storeArea', () => {
 describe('storeCourses', () => {
     test('stores the given courses', async () => {
         const courses = [
-            mockCourse({clbid: 1, number: 101, name: 'florp'}),
-            mockCourse({clbid: 2, number: 102, name: 'bord'}),
-            mockCourse({clbid: 3, title: 'bar'}),
-            mockCourse({clbid: 4, times: ['T 1130-1230']}),
+            mockCourse({ clbid: 1, number: 101, name: 'florp' }),
+            mockCourse({ clbid: 2, number: 102, name: 'bord' }),
+            mockCourse({ clbid: 3, title: 'bar' }),
+            mockCourse({ clbid: 4, times: ['T 1130-1230'] }),
         ]
 
         await storeCourses('terms/20161.json', courses)
@@ -60,7 +60,7 @@ describe('storeData', () => {
         const handleError = jest.fn()
 
         try {
-            const area = mockArea('CSCI','major', '2012-13' )
+            const area = mockArea('CSCI', 'major', '2012-13')
             await storeData('majors/csci.yaml', 'areas', area)
         } catch (err) {
             handleError()

@@ -20,7 +20,7 @@ export default function updateDatabase(
     infoFileBase: string,
     notificationId: string,
     // Get the path to the current file and the hash of the file
-    { path, hash }: {path: string, hash: string}
+    { path, hash }: { path: string, hash: string }
 ) {
     log(path)
 
@@ -38,7 +38,7 @@ export default function updateDatabase(
             () => storeData(path, type, data),
             // record that we stored the new data
             () => cacheItemHash(path, type, hash),
-        ]).then(() => true)
+        ]).then(() => true, () => false)
     }
 
     const onFailure = () => {
@@ -53,7 +53,5 @@ export default function updateDatabase(
     }
 
     // go fetch the data!
-    return fetchText(url)
-        .then(nextStep, onFailure)
-        .then(onSuccess)
+    return fetchText(url).then(nextStep, onFailure).then(onSuccess)
 }

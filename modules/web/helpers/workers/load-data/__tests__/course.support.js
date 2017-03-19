@@ -1,4 +1,4 @@
-export function mockCourse(data={}) {
+export function mockCourse(data = {}) {
     return {
         clbid: 1,
         departments: ['DEPT'],
