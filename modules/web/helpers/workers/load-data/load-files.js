@@ -14,11 +14,12 @@ const log = debug('worker:load-data:load-files')
 const filterByTruthiness = arr => arr.filter(Boolean)
 const fetchJson = (...args) => fetch(...args).then(status).then(json)
 
-type Args = {
-    type: InfoFileTypeEnum,
-    notification: Notification,
+type Args = {|
     baseUrl: string,
-};
+    notification: Notification,
+    oldestYear: number,
+    type: InfoFileTypeEnum,
+|};
 
 export default function loadFiles(url: string, baseUrl: string) {
     log(url)
@@ -31,23 +32,24 @@ export default function loadFiles(url: string, baseUrl: string) {
 export function proceedWithUpdate(baseUrl: string, data: InfoIndexFile) {
     const type: InfoFileTypeEnum = data.type
     const notification = new Notification(type)
+    const oldestYear = new Date().getFullYear() - 5
+    const args = { type, notification, baseUrl, oldestYear }
 
-    const args = { type, notification, baseUrl }
-
-    return getFilesToLoad(data)
+    return getFilesToLoad(args, data)
         .then(files => filterFiles(args, files))
         .then(files => slurpIntoDatabase(args, files))
         .then(() => deduplicateAreas(args))
         .then(() => finishUp(args))
 }
 
-export function getFilesToLoad(data: InfoIndexFile) {
-    const type = data.type
+export function getFilesToLoad(
+    { type, oldestYear }: Args,
+    data: InfoIndexFile
+) {
     let files = data.files
 
     if (type === 'courses') {
-        const oldestYear = new Date().getFullYear() - 5
-        files = files.filter(f => filterForCourses(f, oldestYear))
+        files = files.filter(f => filterForRecentCourses(f, oldestYear))
     }
 
     return Promise.resolve(files)
@@ -103,7 +105,7 @@ export function finishUp({ type, notification }: Args) {
     }
 }
 
-export function handleErrors(err: Error, url: string) {
+function handleErrors(err: Error, url: string) {
     if (startsWith(err.message, 'Failed to fetch')) {
         log(`Failed to fetch ${url}`)
         return
@@ -111,7 +113,7 @@ export function handleErrors(err: Error, url: string) {
     throw err
 }
 
-export function filterForCourses(file: InfoFileRef, oldestYear: number) {
+export function filterForRecentCourses(file: InfoFileRef, oldestYear: number) {
     // Only download the json courses
     const isJson = file.type === 'json'
 
