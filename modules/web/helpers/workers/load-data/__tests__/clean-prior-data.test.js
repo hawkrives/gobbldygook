@@ -63,4 +63,15 @@ describe('cleanPriorData', () => {
 
         expect(await db.store('areas').getAll()).toHaveLength(0)
     })
+
+    test('throws on an unknown type', async () => {
+        expect.assertions(1)
+
+        try {
+            // $FlowFixMe
+            await cleanPriorData('path', 'invalid_type')
+        } catch (err) {
+            expect(err.message).toMatchSnapshot()
+        }
+    })
 })
