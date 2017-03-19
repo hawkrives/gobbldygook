@@ -1,126 +1,122 @@
 // @flow
 
-import filter from 'lodash/filter'
 import startsWith from 'lodash/startsWith'
-import size from 'lodash/size'
 import series from 'p-series'
 import { status, json } from '../../../../lib/fetch-helpers'
 import debug from 'debug'
-import dispatch from './lib-dispatch'
+import { refreshCourses, refreshAreas, Notification } from './lib-dispatch'
 import needsUpdate from './needs-update'
 import updateDatabase from './update-database'
 import removeDuplicateAreas from './remove-duplicate-areas'
-import type { InfoFileTypeEnum } from './types'
+import type { InfoFileTypeEnum, InfoFileRef, InfoIndexFile } from './types'
 const log = debug('worker:load-data:load-files')
 
+const filterByTruthiness = arr => arr.filter(Boolean)
 const fetchJson = (...args) => fetch(...args).then(status).then(json)
 
-export default function loadFiles(url: string, infoFileBase: string) {
+type Args = {
+    type: InfoFileTypeEnum,
+    notification: Notification,
+    baseUrl: string,
+};
+
+export default function loadFiles(url: string, baseUrl: string) {
     log(url)
 
-    // bad hawken?
-    let type: InfoFileTypeEnum
-    let notificationId: string
-    let filesToLoad
-
     return fetchJson(url)
-        .then(
-            infoFile => {
-                type = infoFile.type
-                notificationId = type
-                filesToLoad = infoFile.files
+        .then(data => proceedWithUpdate(baseUrl, data))
+        .catch(err => handleErrors(err, url))
+}
 
-                if (type === 'courses') {
-                    // only download the json courses
-                    filesToLoad = filesToLoad.filter(
-                        file => file.type === 'json'
-                    )
-                    // Only get the last four years of data
-                    const oldestYear = new Date().getFullYear() - 5
-                    filesToLoad = filter(
-                        filesToLoad,
-                        file => file.year >= oldestYear
-                    )
-                }
+export function proceedWithUpdate(baseUrl: string, data: InfoIndexFile) {
+    const type: InfoFileTypeEnum = data.type
+    const notification = new Notification(type)
 
-                // For each file, see if it needs loading.
-                return Promise.all(
-                    filesToLoad.map(file =>
-                        needsUpdate(type, file.path, file.hash))
-                )
-            },
-            err => {
-                if (startsWith(err.message, 'Failed to fetch')) {
-                    log(`Failed to fetch ${url}`)
-                    return []
-                }
-                throw err
-            }
-        )
-        .then(filesNeedLoading => {
-            // Cross-reference each file to load with the list of files that need loading
-            filesToLoad = filter(
-                filesToLoad,
-                (file, index) => filesNeedLoading[index]
-            )
+    const args = { type, notification, baseUrl }
 
-            // Exit early if nothing needs to happen
-            if (filesToLoad.length === 0) {
-                log(`[${type}] no files need loading`)
-                return true
-            }
+    return getFilesToLoad(data)
+        .then(files => filterFiles(args, files))
+        .then(files => slurpIntoDatabase(args, files))
+        .then(() => deduplicateAreas(args))
+        .then(() => finishUp(args))
+}
 
-            log(`[${type}] these files need loading:`, ...filesNeedLoading)
+export function getFilesToLoad(data: InfoIndexFile) {
+    const type = data.type
+    let files = data.files
 
-            // Fire off the progress bar
-            dispatch(
-                'notifications',
-                'startProgress',
-                notificationId,
-                `Loading ${type}`,
-                { max: size(filesToLoad), showButton: true }
-            )
+    if (type === 'courses') {
+        const oldestYear = new Date().getFullYear() - 5
+        files = files.filter(f => filterForCourses(f, oldestYear))
+    }
 
-            // Load them into the database
-            return series(
-                filesToLoad.map(file => {
-                    return () =>
-                        updateDatabase(
-                            type,
-                            infoFileBase,
-                            notificationId,
-                            file
-                        )
-                })
-            )
-        })
-        .then(
-            () => {
-                // Clean up the database a bit
-                if (type === 'areas') {
-                    return removeDuplicateAreas()
-                }
-            },
-            err => {
-                throw err
-            }
-        )
-        .then(() => {
-            log(`[${type}] done loading`)
+    return Promise.resolve(files)
+}
 
-            // Remove the progress bar after 1.5 seconds
-            dispatch(
-                'notifications',
-                'removeNotification',
-                notificationId,
-                1500
-            )
-            if (type === 'courses') {
-                dispatch('courses', 'refreshCourses')
-            } else if (type === 'areas') {
-                dispatch('areas', 'refreshAreas')
-            }
+export function filterFiles({ type }: Args, files: InfoFileRef[]) {
+    // For each file, see if it needs loading. We then update each promise
+    // with either the path or `null`.
+    const filesToLoad = files.map(({ path, hash }) =>
+        needsUpdate(type, path, hash).then(update => update ? path : null))
 
-            return true
-        })
+    // Finally, we filter the items
+    return Promise.all(filesToLoad).then(filterByTruthiness)
+}
+
+export function slurpIntoDatabase(
+    { type, baseUrl, notification }: Args,
+    files: InfoFileRef[]
+) {
+    // Exit early if nothing needs to happen
+    if (files.length === 0) {
+        log(`[${type}] no files need loading`)
+        return Promise.resolve([])
+    }
+
+    log(`[${type}] these files need loading:`, ...files)
+
+    // Fire off the progress bar
+    notification.start(files.length)
+
+    // Load them into the database
+    const runUpdate = file => updateDatabase(type, baseUrl, notification, file)
+    return series(files.map(runUpdate))
+}
+
+export function deduplicateAreas({ type }: Args) {
+    // Clean up the database a bit
+    if (type === 'areas') {
+        return removeDuplicateAreas()
+    }
+}
+
+export function finishUp({ type, notification }: Args) {
+    log(`[${type}] done loading`)
+
+    // Remove the progress bar after 1.5 seconds
+    notification.remove()
+
+    if (type === 'courses') {
+        refreshCourses()
+    } else if (type === 'areas') {
+        refreshAreas()
+    }
+}
+
+export function handleErrors(err: Error, url: string) {
+    if (startsWith(err.message, 'Failed to fetch')) {
+        log(`Failed to fetch ${url}`)
+        return
+    }
+    throw err
+}
+
+export function filterForCourses(file: InfoFileRef, oldestYear: number) {
+    // Only download the json courses
+    const isJson = file.type === 'json'
+
+    // Only get the last four years of data
+    const isRecent = file.year >= oldestYear
+
+    return isJson && isRecent
 }
