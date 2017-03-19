@@ -3,12 +3,12 @@
 import series from 'p-series'
 import debug from 'debug'
 import { status, text } from '../../../../lib/fetch-helpers'
-import dispatch from './lib-dispatch'
 
 import parseData from './parse-data'
 import cleanPriorData from './clean-prior-data'
 import storeData from './store-data'
 import cacheItemHash from './cache-item-hash'
+import { Notification } from './lib-dispatch'
 
 import type { InfoFileTypeEnum, InfoFileRef } from './types'
 
@@ -18,7 +18,7 @@ const fetchText = (...args) => fetch(...args).then(status).then(text)
 export default function updateDatabase(
     type: InfoFileTypeEnum,
     infoFileBase: string,
-    notificationId: string,
+    notification: Notification,
     { path, hash }: InfoFileRef
 ) {
     log(path)
@@ -42,13 +42,13 @@ export default function updateDatabase(
 
     const onFailure = () => {
         log(`Could not fetch ${url}`)
-        dispatch('notifications', 'incrementProgress', notificationId)
+        notification.increment()
         return false
     }
 
     const onSuccess = () => {
         log(`added ${path}`)
-        dispatch('notifications', 'incrementProgress', notificationId)
+        notification.increment()
         return true
     }
 
