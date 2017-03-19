@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseData can parse json 1`] = `
+Object {
+  "foo": 2,
+}
+`;
+
+exports[`parseData can parse yaml 1`] = `
+Object {
+  "foo": 2,
+  "source": "foo: 2",
+}
+`;
+
+exports[`parseData returns a blank object if it can't parse 1`] = `Object {}`;
+
+exports[`parseData returns a blank object if it can't parse 2`] = `Object {}`;
+
+exports[`parseData returns a blank object if it can't parse 3`] = `Object {}`;
