@@ -9,14 +9,7 @@ import removeDuplicateAreas, {
     buildRemoveAreaOps,
 } from '../remove-duplicate-areas'
 
-function mockArea(name, type, revision, sourcePath = null) {
-    return {
-        name,
-        type,
-        revision,
-        sourcePath: sourcePath || `${type}/${name}.yaml`,
-    }
-}
+import {mockArea} from './area.support'
 
 beforeEach(async () => {
     await db.__clear()
