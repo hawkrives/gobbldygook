@@ -5,7 +5,7 @@ import fromPairs from 'lodash/fromPairs'
 import map from 'lodash/map'
 import series from 'p-series'
 
-import db from '../db'
+import db from '../../db'
 import log from './lib-log'
 import getCacheStoreName from './get-cache-store-name'
 import type { InfoFileTypeEnum } from './types'

@@ -4,7 +4,7 @@ import filter from 'lodash/filter'
 import startsWith from 'lodash/startsWith'
 import size from 'lodash/size'
 import series from 'p-series'
-import { status, json } from '../../../lib/fetch-helpers'
+import { status, json } from '../../../../lib/fetch-helpers'
 
 import dispatch from './lib-dispatch'
 import log from './lib-log'

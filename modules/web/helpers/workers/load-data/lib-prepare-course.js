@@ -5,8 +5,8 @@ import uniq from 'lodash/uniq'
 import {
     buildDeptString,
     buildDeptNum,
-} from '../../../school-st-olaf-college/deptnums'
-import { splitParagraph } from '../../../lib/split-paragraph'
+} from '../../../../school-st-olaf-college/deptnums'
+import { splitParagraph } from '../../../../lib/split-paragraph'
 import { convertTimeStringsToOfferings } from 'sto-sis-time-parser'
 
 export default function prepareCourse(course: any) {

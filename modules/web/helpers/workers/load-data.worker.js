@@ -3,8 +3,8 @@
 import 'whatwg-fetch'
 import serializeError from 'serialize-error'
 
-import log from './lib-log'
-import loadFiles from './load-files'
+import log from './load-data/lib-log'
+import loadFiles from './load-data/load-files'
 
 function checkIdbInWorkerSupport() {
     if (self.IDBCursor) {

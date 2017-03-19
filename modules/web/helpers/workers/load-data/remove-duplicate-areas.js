@@ -7,7 +7,7 @@ import fromPairs from 'lodash/fromPairs'
 import sortBy from 'lodash/sortBy'
 import map from 'lodash/map'
 
-import db from '../db'
+import db from '../../db'
 
 export default function removeDuplicateAreas() {
     return db.store('areas').getAll().then(allAreas => {

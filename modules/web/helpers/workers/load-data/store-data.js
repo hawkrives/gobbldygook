@@ -7,7 +7,7 @@ import present from 'present'
 import prepareCourse from './lib-prepare-course'
 import log from './lib-log'
 import dispatch from './lib-dispatch'
-import db from '../db'
+import db from '../../db'
 import type { InfoFileTypeEnum } from './types'
 
 function storeCourses(path, data) {

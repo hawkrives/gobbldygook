@@ -1,7 +1,7 @@
 // @flow
 
 import series from 'p-series'
-import { status, text } from '../../../lib/fetch-helpers'
+import { status, text } from '../../../../lib/fetch-helpers'
 import dispatch from './lib-dispatch'
 import log from './lib-log'
 
