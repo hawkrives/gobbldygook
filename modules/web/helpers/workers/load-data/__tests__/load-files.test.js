@@ -15,8 +15,8 @@ jest.mock('../lib-dispatch', () => {
     }
 })
 jest.mock('../needs-update', () => jest.fn(() => Promise.resolve()))
-jest.mock('../update-database', () => jest.fn())
-jest.mock('../remove-duplicate-areas', () => jest.fn())
+jest.mock('../update-database', () => jest.fn(() => Promise.resolve()))
+jest.mock('../remove-duplicate-areas', () => jest.fn(() => Promise.resolve()))
 jest.mock('../../../../../lib/fetch-helpers', () => {
     return { status: x => x, text: x => x }
 })
@@ -194,17 +194,115 @@ describe('filterFiles', () => {
 })
 
 describe('getFilesToLoad', () => {
-    test('returns the input array if loading areas')
-    test('filters the input array if loading courses')
+    test('returns the input array if loading areas', async () => {
+        const args = mockArgs('areas')
+        const index = {
+            type: 'areas',
+            files: [
+                { type: 'yaml', path: '1.json', hash: '' },
+                { type: 'yaml', path: '2.json', hash: '' },
+                { type: 'yaml', path: '3.json', hash: '' },
+                { type: 'yaml', path: '4.json', hash: '' },
+            ],
+        }
+        const actual = await load.getFilesToLoad(args, index)
+        expect(actual).toBe(index.files)
+    })
+
+    test('filters the input array if loading courses', async () => {
+        const args = mockArgs('courses')
+        args.oldestYear = 2002
+        const index = {
+            type: 'courses',
+            files: [
+                { type: 'json', year: 2000, path: '1.json', hash: '' },
+                { type: 'json', year: 2001, path: '2.json', hash: '' },
+                { type: 'json', year: 2002, path: '3.json', hash: '' },
+                { type: 'json', year: 2003, path: '4.json', hash: '' },
+            ],
+        }
+        const actual = await load.getFilesToLoad(args, index)
+        const expected = index.files.filter(f => f.year >= 2002)
+        expect(actual).toEqual(expected)
+    })
 })
 
 describe('proceedWithUpdate', () => {
-    test('calls the sequence of functions')
-    test('rejects if one fails')
+    test('calls the sequence of functions', async () => {
+        const baseUrl = 'remote'
+        const index = {
+            type: 'areas',
+            files: [
+                { type: 'yaml', path: '1.json', hash: '' },
+                { type: 'yaml', path: '2.json', hash: '' },
+                { type: 'yaml', path: '3.json', hash: '' },
+                { type: 'yaml', path: '4.json', hash: '' },
+            ],
+        }
+        await load.proceedWithUpdate(baseUrl, index)
+        expect(needsUpdate).toHaveBeenCalled()
+        expect(updateDatabase).toHaveBeenCalled()
+        expect(removeDuplicateAreas).toHaveBeenCalled()
+    })
+
+    test('rejects if any fail', async () => {
+        needsUpdate.mockImplementationOnce(() => Promise.reject(new Error('mock error')))
+
+        const baseUrl = 'remote'
+        const index = {
+            type: 'areas',
+            files: [
+                { type: 'yaml', path: '1.json', hash: '' },
+                { type: 'yaml', path: '2.json', hash: '' },
+                { type: 'yaml', path: '3.json', hash: '' },
+                { type: 'yaml', path: '4.json', hash: '' },
+            ],
+        }
+
+        expect.assertions(3)
+
+        try {
+            await load.proceedWithUpdate(baseUrl, index)
+        } catch (err) {
+            expect(needsUpdate).toHaveBeenCalled()
+            expect(updateDatabase).not.toHaveBeenCalled()
+            expect(removeDuplicateAreas).not.toHaveBeenCalled()
+        }
+    })
 })
 
 describe('loadFiles', () => {
-    test('calls fetch with the input url')
-    test('calls proceedWithUpdate if the fetch succeeds')
-    test('calls handleErrors if the fetch fails')
+    test('calls fetch with the input url', async () => {
+        const fetchResult = {
+            type: 'areas',
+            files: [
+                { type: 'yaml', path: '1.json', hash: '' },
+                { type: 'yaml', path: '2.json', hash: '' },
+                { type: 'yaml', path: '3.json', hash: '' },
+                { type: 'yaml', path: '4.json', hash: '' },
+            ],
+        }
+        global.fetch.mockImplementationOnce(() => Promise.resolve(fetchResult))
+        await loadFiles('some-url', 'another-one')
+        expect(global.fetch).toHaveBeenCalledWith('some-url')
+    })
+
+    test('rejects if the fetch fails', async () => {
+        global.fetch.mockImplementationOnce(() => Promise.reject(new Error('Other Error')))
+        expect.assertions(1)
+        try {
+            await loadFiles('some-url', 'another-one')
+        } catch (err) {
+            expect(global.fetch).toHaveBeenCalled()
+        }
+    })
+
+    test('does not reject if the fetch fails with an offline error', async () => {
+        global.fetch.mockImplementationOnce(() => Promise.reject(new Error('Failed to fetch URL')))
+        expect.assertions(1)
+
+        await loadFiles('some-url', 'another-one')
+
+        expect(global.fetch).toHaveBeenCalled()
+    })
 })
