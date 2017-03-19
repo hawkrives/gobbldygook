@@ -5,7 +5,7 @@ import round from 'lodash/round'
 import present from 'present'
 import debug from 'debug'
 import prepareCourse from './lib-prepare-course'
-import dispatch from './lib-dispatch'
+import { quotaExceededError } from './lib-dispatch'
 import db from '../../db'
 import type { InfoFileTypeEnum } from './types'
 const coursesLog = debug('worker:load-data:store-data:courses')
@@ -37,10 +37,7 @@ export function storeCourses(path: string, data: BasicCourse[]) {
 
         // istanbul ignore else
         if (errorName === 'QuotaExceededError') {
-            dispatch('notifications', 'logError', {
-                id: 'db-storage-quota-exceeded',
-                message: `The database "${db}" has exceeded its storage quota.`,
-            })
+            quotaExceededError(db)
         }
 
         throw err
