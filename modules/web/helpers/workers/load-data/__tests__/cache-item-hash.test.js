@@ -16,6 +16,6 @@ test('cacheItemHash runs', () => {
 })
 
 test('cacheItemHash stores data', async () => {
-    cacheItemHash('folder/file', 'courses', 'deadbeef')
+    await cacheItemHash('folder/file', 'courses', 'deadbeef')
     expect(await db.store('courseCache').get('folder/file')).toMatchSnapshot()
 })
