@@ -72,7 +72,7 @@ export function slurpIntoDatabase(
     // Exit early if nothing needs to happen
     if (files.length === 0) {
         log(`[${type}] no files need loading`)
-        return Promise.resolve([])
+        return
     }
 
     log(`[${type}] these files need loading:`, ...files)
