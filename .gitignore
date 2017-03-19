@@ -6,7 +6,7 @@
 stats.json
 .vscode/
 .eslintcache
-D_gobbldygook
+/D_*
 
 # Temp folders
 .sass-cache
