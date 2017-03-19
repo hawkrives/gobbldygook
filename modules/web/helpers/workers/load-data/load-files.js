@@ -98,6 +98,7 @@ export function finishUp({ type, notification }: Args) {
     // Remove the progress bar after 1.5 seconds
     notification.remove()
 
+    // istanbul ignore else
     if (type === 'courses') {
         refreshCourses()
     } else if (type === 'areas') {
