@@ -8,8 +8,8 @@ export type InfoIndexFile = {
 };
 
 export type InfoFileRef = {
-    type: 'json' | 'xml' | 'csv',
-    year: number,
+    type: 'json' | 'xml' | 'csv' | 'yaml',
+    year?: number,
     path: string,
     hash: string,
 };
