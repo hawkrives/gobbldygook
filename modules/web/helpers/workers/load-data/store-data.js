@@ -2,7 +2,6 @@
 
 import map from 'lodash/map'
 import round from 'lodash/round'
-import size from 'lodash/size'
 import present from 'present'
 import debug from 'debug'
 import prepareCourse from './lib-prepare-course'
@@ -22,41 +21,41 @@ function storeCourses(path, data) {
     }))
 
     const start = present()
-    return db
-        .store('courses')
-        .batch(coursesToStore)
-        .then(() => {
-            const time = round(present() - start, 2)
-            coursesLog(`Stored ${size(coursesToStore)} courses in ${time}ms.`)
-        })
-        .catch(err => {
-            const db = err.target.db.name
-            const errorName = err.target.error.name
 
-            if (errorName === 'QuotaExceededError') {
-                dispatch('notifications', 'logError', {
-                    id: 'db-storage-quota-exceeded',
-                    message: `The database "${db}" has exceeded its storage quota.`,
-                })
-            }
+    const onSuccess = () => {
+        const time = round(present() - start, 2)
+        coursesLog(`Stored ${coursesToStore.length} courses in ${time}ms.`)
+    }
 
-            throw err
-        })
+    const onFailure = err => {
+        const db = err.target.db.name
+        const errorName = err.target.error.name
+
+        // istanbul ignore else
+        if (errorName === 'QuotaExceededError') {
+            dispatch('notifications', 'logError', {
+                id: 'db-storage-quota-exceeded',
+                message: `The database "${db}" has exceeded its storage quota.`,
+            })
+        }
+
+        throw err
+    }
+
+    return db.store('courses').batch(coursesToStore).then(onSuccess, onFailure)
 }
 
 function storeArea(path, data) {
     areasLog(path)
 
-    let area = {
+    const area = {
         ...data,
         type: data.type.toLowerCase(),
         sourcePath: path,
         dateAdded: new Date(),
     }
 
-    return db.store('areas').put(area).catch(err => {
-        throw err
-    })
+    return db.store('areas').put(area)
 }
 
 export default function storeData(
