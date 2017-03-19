@@ -2,7 +2,8 @@ import uniqueId from 'lodash/uniqueId'
 import debug from 'debug'
 const log = debug('worker:check-student-against-area')
 
-import CheckStudentWorker from './worker.check-student-against-area'
+// eslint-disable-next-line import/default
+import CheckStudentWorker from './workers/check-student-against-area.worker'
 const worker = new CheckStudentWorker()
 
 worker.onerror = msg =>
