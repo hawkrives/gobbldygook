@@ -58,7 +58,8 @@ export function generateOps(allAreas: AreaOfStudy[]) {
 }
 
 export default function removeDuplicateAreas() {
-    return db.store('areas')
+    return db
+        .store('areas')
         .getAll()
         .then(generateOps)
         .then(ops => db.store('areas').batch(ops))

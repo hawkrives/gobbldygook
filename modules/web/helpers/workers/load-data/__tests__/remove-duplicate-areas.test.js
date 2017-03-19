@@ -4,10 +4,18 @@
 jest.mock('../../../db')
 
 import db from '../../../db'
-import removeDuplicateAreas, {generateOps, buildRemoveAreaOps} from '../remove-duplicate-areas'
+import removeDuplicateAreas, {
+    generateOps,
+    buildRemoveAreaOps,
+} from '../remove-duplicate-areas'
 
-function mockArea(name, type, revision, sourcePath=null) {
-    return {name, type, revision, sourcePath: sourcePath || `${type}/${name}.yaml`}
+function mockArea(name, type, revision, sourcePath = null) {
+    return {
+        name,
+        type,
+        revision,
+        sourcePath: sourcePath || `${type}/${name}.yaml`,
+    }
 }
 
 beforeEach(async () => {

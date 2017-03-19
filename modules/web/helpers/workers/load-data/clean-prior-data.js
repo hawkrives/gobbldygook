@@ -36,9 +36,9 @@ export default function cleanPriorData(path: string, type: InfoFileTypeEnum) {
         future = getPriorAreas(path)
     } else {
         log(`"${type}" is not a valid store type`)
-        future = Promise.reject(new TypeError(
-            `cleanPriorData: "${type}" is not a valid store type`
-        ))
+        future = Promise.reject(
+            new TypeError(`cleanPriorData: "${type}" is not a valid store type`)
+        )
     }
 
     return future.then(

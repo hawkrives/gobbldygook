@@ -15,9 +15,8 @@ describe('getPriorCourses', () => {
     })
 
     test('foop', async () => {
-        await db.store('courses').batch([
-            {sourcePath: 'dir/file', clbid: '1'},
-        ])
+        const actions = [{ sourcePath: 'dir/file', clbid: '1' }]
+        await db.store('courses').batch(actions)
         expect(Object.keys(await getPriorCourses('dir/file'))).toHaveLength(1)
     })
 })
@@ -28,9 +27,8 @@ describe('getPriorAreas', () => {
     })
 
     test('foop', async () => {
-        await db.store('areas').batch([
-            {sourcePath: 'dir/file'},
-        ])
+        const actions = [{ sourcePath: 'dir/file' }]
+        await db.store('areas').batch(actions)
         expect(Object.keys(await getPriorAreas('dir/file'))).toHaveLength(1)
     })
 })
@@ -41,9 +39,8 @@ describe('cleanPriorData', () => {
     })
 
     test('clears courses', async () => {
-        await db.store('courses').batch([
-            {sourcePath: 'dir/file', clbid: '1'},
-        ])
+        const actions = [{ sourcePath: 'dir/file', clbid: '1' }]
+        await db.store('courses').batch(actions)
 
         expect(await db.store('courses').getAll()).toHaveLength(1)
 
@@ -53,9 +50,8 @@ describe('cleanPriorData', () => {
     })
 
     test('clears areas', async () => {
-        await db.store('areas').batch([
-            {sourcePath: 'dir/file'},
-        ])
+        const actions = [{ sourcePath: 'dir/file' }]
+        await db.store('areas').batch(actions)
 
         expect(await db.store('areas').getAll()).toHaveLength(1)
 
