@@ -10,7 +10,7 @@ import getCacheStoreName from './get-cache-store-name'
 import type { InfoFileTypeEnum } from './types'
 const log = debug('worker:load-data:clean-prior-data')
 
-function cleanPriorCourses(path) {
+export function getPriorCourses(path: string) {
     return db
         .store('courses')
         .index('sourcePath')
@@ -18,7 +18,7 @@ function cleanPriorCourses(path) {
         .then(oldItems => fromPairs(map(oldItems, item => [item.clbid, null])))
 }
 
-function cleanPriorAreas(path) {
+export function getPriorAreas(path: string) {
     return db
         .store('areas')
         .getAll(range({ eq: path }))
@@ -31,9 +31,9 @@ export default function cleanPriorData(path: string, type: InfoFileTypeEnum) {
 
     let future
     if (type === 'courses') {
-        future = cleanPriorCourses(path)
+        future = getPriorCourses(path)
     } else if (type === 'areas') {
-        future = cleanPriorAreas(path)
+        future = getPriorAreas(path)
     } else {
         log(`"${type}" is not a valid store type`)
         throw new TypeError(
