@@ -2,9 +2,9 @@
 
 import 'whatwg-fetch'
 import serializeError from 'serialize-error'
-
-import log from './load-data/lib-log'
+import debug from 'debug'
 import loadFiles from './load-data/load-files'
+const log = debug('worker:load-data:listener')
 
 function checkIdbInWorkerSupport() {
     if (self.IDBCursor) {
@@ -16,7 +16,7 @@ function checkIdbInWorkerSupport() {
 const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
 self.addEventListener('message', ({ data }) => {
     const [id, ...args] = data
-    log('[load-data] received message:', ...args)
+    log('received message:', ...args)
 
     if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
         checkIdbInWorkerSupport()
