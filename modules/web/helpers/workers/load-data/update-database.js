@@ -19,40 +19,43 @@ export default function updateDatabase(
     type: InfoFileTypeEnum,
     infoFileBase: string,
     notificationId: string,
-    infoFromServer: any
-) {
     // Get the path to the current file and the hash of the file
-    const { path, hash } = infoFromServer
-    // Append the hash, to act as a sort of cache-busting mechanism
-    const itemUrl = `/${path}?v=${hash}`
-
+    { path, hash }: {path: string, hash: string}
+) {
     log(path)
 
-    const url = infoFileBase + itemUrl
+    // Append the hash, to act as a sort of cache-busting mechanism
+    const url = `${infoFileBase}/${path}?v=${hash}`
+
+    const nextStep = rawData => {
+        // now parse the data into a usable form
+        const data = parseData(rawData, type)
+
+        return series([
+            // clear out any old data
+            () => cleanPriorData(path, type),
+            // store the new data
+            () => storeData(path, type, data),
+            // record that we stored the new data
+            () => cacheItemHash(path, type, hash),
+        ])
+    }
+
+    const onFailure = () => {
+        log(`Could not fetch ${url}`)
+        return false
+    }
+
+    const onSuccess = () => {
+        log(`added ${path}`)
+        dispatch('notifications', 'incrementProgress', notificationId)
+    }
 
     // go fetch the data!
     return fetchText(url)
         .then(
-            rawData => {
-                // now parse the data into a usable form
-                const data = parseData(rawData, type)
-
-                return series([
-                    // clear out any old data
-                    () => cleanPriorData(path, type),
-                    // store the new data
-                    () => storeData(path, type, data),
-                    // record that we stored the new data
-                    () => cacheItemHash(path, type, hash),
-                ])
-            },
-            () => {
-                log(`Could not fetch ${url}`)
-                return false
-            }
+            nextStep,
+            onFailure
         )
-        .then(() => {
-            log(`added ${path}`)
-            dispatch('notifications', 'incrementProgress', notificationId)
-        })
+        .then(onSuccess)
 }
