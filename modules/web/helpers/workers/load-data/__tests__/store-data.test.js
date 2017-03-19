@@ -3,21 +3,11 @@
 
 jest.mock('../../../db')
 
-import sortBy from 'lodash/sortBy'
 import db from '../../../db'
 import storeData, {storeArea, storeCourses} from '../store-data'
 
 import {mockArea} from './area.support'
-
-function mockCourse(data={}) {
-    return {
-        clbid: 1,
-        departments: ['DEPT'],
-        number: 101,
-        instructors: ['B. Name'],
-        ...data,
-    }
-}
+import {mockCourse} from './course.support'
 
 beforeEach(async () => {
     await db.__clear()
