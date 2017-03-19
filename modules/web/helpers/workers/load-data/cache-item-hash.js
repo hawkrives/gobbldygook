@@ -1,6 +1,6 @@
 // @flow
 
-import db from '../db'
+import db from '../../db'
 import log from './lib-log'
 import getCacheStoreName from './get-cache-store-name'
 import type { InfoFileTypeEnum } from './types'
