@@ -14,7 +14,7 @@ jest.mock('../lib-dispatch', () => {
         Notification: NotificationMock,
     }
 })
-jest.mock('../needs-update', () => jest.fn())
+jest.mock('../needs-update', () => jest.fn(() => Promise.resolve()))
 jest.mock('../update-database', () => jest.fn())
 jest.mock('../remove-duplicate-areas', () => jest.fn())
 jest.mock('../../../../../lib/fetch-helpers', () => {
@@ -152,8 +152,38 @@ describe('slurpIntoDatabase', () => {
 })
 
 describe('filterFiles', () => {
-    test('calls needsUpdate once per file')
-    test('returns only files that needsUpdate says need updates')
+    test('calls needsUpdate once per file', async () => {
+        needsUpdate.mockImplementation(() => Promise.resolve(true))
+        const args = mockArgs('courses')
+        const fileRefs = [
+            {type: 'json', year: 2000, path: '', hash: ''},
+            {type: 'json', year: 2001, path: '', hash: ''},
+            {type: 'json', year: 2002, path: '', hash: ''},
+            {type: 'json', year: 2003, path: '', hash: ''},
+        ]
+        await load.filterFiles(args, fileRefs)
+        expect(needsUpdate).toHaveBeenCalledTimes(fileRefs.length)
+    })
+
+    test('returns only files that needsUpdate says need updates', async () => {
+        needsUpdate
+            .mockImplementationOnce(() => Promise.resolve(true))
+            .mockImplementationOnce(() => Promise.resolve(false))
+            .mockImplementationOnce(() => Promise.resolve(true))
+            .mockImplementationOnce(() => Promise.resolve(false))
+
+        const args = mockArgs('courses')
+        const fileRefs = [
+            {type: 'json', year: 2000, path: '1.json', hash: ''},
+            {type: 'json', year: 2001, path: '2.json', hash: ''},
+            {type: 'json', year: 2002, path: '3.json', hash: ''},
+            {type: 'json', year: 2003, path: '4.json', hash: ''},
+        ]
+        const actual = await load.filterFiles(args, fileRefs)
+        const expected = [fileRefs[0], fileRefs[2]].map(f => f.path)
+        expect(actual).toEqual(expected)
+        expect(needsUpdate).toHaveBeenCalledTimes(4)
+    })
 })
 
 describe('getFilesToLoad', () => {
