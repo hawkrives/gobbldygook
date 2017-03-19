@@ -1,27 +1,21 @@
 /* eslint-env jest */
 // @flow
 
-import setGlobals from 'indexeddbshim'
-let def
-setGlobals(global, (function() {
-    def = Object.defineProperty
-    // $FlowFixMe
-    Object.defineProperty = null
-})())
 // $FlowFixMe
-Object.defineProperty = def
+import setGlobals from 'indexeddbshim'
+let dfn = Object.defineProperty
+// $FlowFixMe
+Object.defineProperty = null
+global.window = global
+setGlobals(global.window)
+// $FlowFixMe
+Object.defineProperty = dfn
 
 // $FlowFixMe
 const {default: db} = require.requireActual('../db')
 
-db.__clear = async function clearDatabase() {
-    return Promise.all([
-        db.store('courses').clear(),
-        db.store('areas').clear(),
-        db.store('students').clear(),
-        db.store('courseCache').clear(),
-        db.store('areaCache').clear(),
-    ])
+db.__clear = function clearDatabase() {
+    return Promise.all(db.stores.map(s => db.store(s).clear()))
 }
 
 export default db
