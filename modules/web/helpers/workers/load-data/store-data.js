@@ -11,7 +11,10 @@ import type { InfoFileTypeEnum } from './types'
 const coursesLog = debug('worker:load-data:store-data:courses')
 const areasLog = debug('worker:load-data:store-data:areas')
 
-function storeCourses(path, data) {
+type BasicCourse = Object;
+type BasicArea = { type: string };
+
+export function storeCourses(path: string, data: BasicCourse[]) {
     coursesLog(path)
 
     let coursesToStore = map(data, course => ({
@@ -27,6 +30,7 @@ function storeCourses(path, data) {
         coursesLog(`Stored ${coursesToStore.length} courses in ${time}ms.`)
     }
 
+    // istanbul ignore next
     const onFailure = err => {
         const db = err.target.db.name
         const errorName = err.target.error.name
@@ -45,7 +49,7 @@ function storeCourses(path, data) {
     return db.store('courses').batch(coursesToStore).then(onSuccess, onFailure)
 }
 
-function storeArea(path, data) {
+export function storeArea(path: string, data: BasicArea) {
     areasLog(path)
 
     const area = {
@@ -63,7 +67,7 @@ export default function storeData(
     type: InfoFileTypeEnum,
     data: any
 ) {
-    // store the new data
+    // istanbul ignore else
     if (type === 'courses') {
         return storeCourses(path, data)
     } else if (type === 'areas') {
