@@ -9,6 +9,8 @@ import map from 'lodash/map'
 
 import db from '../../db'
 
+// TODO: add logging to this function
+
 export default function removeDuplicateAreas() {
     return db.store('areas').getAll().then(allAreas => {
         // now de-duplicate, based on name, type, and revision

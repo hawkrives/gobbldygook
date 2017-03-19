@@ -4,14 +4,16 @@ import map from 'lodash/map'
 import round from 'lodash/round'
 import size from 'lodash/size'
 import present from 'present'
+import debug from 'debug'
 import prepareCourse from './lib-prepare-course'
-import log from './lib-log'
 import dispatch from './lib-dispatch'
 import db from '../../db'
 import type { InfoFileTypeEnum } from './types'
+const coursesLog = debug('worker:load-data:store-data:courses')
+const areasLog = debug('worker:load-data:store-data:areas')
 
 function storeCourses(path, data) {
-    log(`storeCourses(): ${path}`)
+    coursesLog(path)
 
     let coursesToStore = map(data, course => ({
         ...course,
@@ -24,9 +26,8 @@ function storeCourses(path, data) {
         .store('courses')
         .batch(coursesToStore)
         .then(() => {
-            log(
-                `Stored ${size(coursesToStore)} courses in ${round(present() - start, 2)}ms.`
-            )
+            const time = round(present() - start, 2)
+            coursesLog(`Stored ${size(coursesToStore)} courses in ${time}ms.`)
         })
         .catch(err => {
             const db = err.target.db.name
@@ -44,7 +45,7 @@ function storeCourses(path, data) {
 }
 
 function storeArea(path, data) {
-    log(`storeArea(): ${path}`)
+    areasLog(path)
 
     let area = {
         ...data,

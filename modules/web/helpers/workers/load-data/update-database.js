@@ -1,9 +1,9 @@
 // @flow
 
 import series from 'p-series'
+import debug from 'debug'
 import { status, text } from '../../../../lib/fetch-helpers'
 import dispatch from './lib-dispatch'
-import log from './lib-log'
 
 import parseData from './parse-data'
 import cleanPriorData from './clean-prior-data'
@@ -12,6 +12,7 @@ import cacheItemHash from './cache-item-hash'
 
 import type { InfoFileTypeEnum } from './types'
 
+const log = debug('worker:load-data:update-database')
 const fetchText = (...args) => fetch(...args).then(status).then(text)
 
 export default function updateDatabase(
@@ -25,7 +26,7 @@ export default function updateDatabase(
     // Append the hash, to act as a sort of cache-busting mechanism
     const itemUrl = `/${path}?v=${hash}`
 
-    log(`updateDatabase(): ${path}`)
+    log(path)
 
     const url = infoFileBase + itemUrl
 

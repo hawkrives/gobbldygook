@@ -4,11 +4,11 @@ import range from 'idb-range'
 import fromPairs from 'lodash/fromPairs'
 import map from 'lodash/map'
 import series from 'p-series'
-
+import debug from 'debug'
 import db from '../../db'
-import log from './lib-log'
 import getCacheStoreName from './get-cache-store-name'
 import type { InfoFileTypeEnum } from './types'
+const log = debug('worker:load-data:clean-prior-data')
 
 function cleanPriorCourses(path) {
     return db
@@ -27,7 +27,7 @@ function cleanPriorAreas(path) {
 }
 
 export default function cleanPriorData(path: string, type: InfoFileTypeEnum) {
-    log(`cleanPriorData(): ${path}`)
+    log(path)
 
     let future
     if (type === 'courses') {
@@ -35,8 +35,9 @@ export default function cleanPriorData(path: string, type: InfoFileTypeEnum) {
     } else if (type === 'areas') {
         future = cleanPriorAreas(path)
     } else {
+        log(`"${type}" is not a valid store type`)
         throw new TypeError(
-            `cleanPriorData(): "${type}" is not a valid store type`
+            `cleanPriorData: "${type}" is not a valid store type`
         )
     }
 

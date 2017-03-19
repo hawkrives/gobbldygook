@@ -5,18 +5,18 @@ import startsWith from 'lodash/startsWith'
 import size from 'lodash/size'
 import series from 'p-series'
 import { status, json } from '../../../../lib/fetch-helpers'
-
+import debug from 'debug'
 import dispatch from './lib-dispatch'
-import log from './lib-log'
 import needsUpdate from './needs-update'
 import updateDatabase from './update-database'
 import removeDuplicateAreas from './remove-duplicate-areas'
 import type { InfoFileTypeEnum } from './types'
+const log = debug('worker:load-data:load-files')
 
 const fetchJson = (...args) => fetch(...args).then(status).then(json)
 
 export default function loadFiles(url: string, infoFileBase: string) {
-    log(`loadFiles(): ${url}`)
+    log(url)
 
     // bad hawken?
     let type: InfoFileTypeEnum
@@ -51,7 +51,7 @@ export default function loadFiles(url: string, infoFileBase: string) {
             },
             err => {
                 if (startsWith(err.message, 'Failed to fetch')) {
-                    log(`loadFiles(): Failed to fetch ${url}`)
+                    log(`Failed to fetch ${url}`)
                     return []
                 }
                 throw err
