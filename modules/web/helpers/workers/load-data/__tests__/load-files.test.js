@@ -246,7 +246,8 @@ describe('proceedWithUpdate', () => {
     })
 
     test('rejects if any fail', async () => {
-        needsUpdate.mockImplementationOnce(() => Promise.reject(new Error('mock error')))
+        needsUpdate.mockImplementationOnce(() =>
+            Promise.reject(new Error('mock error')))
 
         const baseUrl = 'remote'
         const index = {
@@ -288,7 +289,8 @@ describe('loadFiles', () => {
     })
 
     test('rejects if the fetch fails', async () => {
-        global.fetch.mockImplementationOnce(() => Promise.reject(new Error('Other Error')))
+        global.fetch.mockImplementationOnce(() =>
+            Promise.reject(new Error('Other Error')))
         expect.assertions(1)
         try {
             await loadFiles('some-url', 'another-one')
@@ -298,7 +300,8 @@ describe('loadFiles', () => {
     })
 
     test('does not reject if the fetch fails with an offline error', async () => {
-        global.fetch.mockImplementationOnce(() => Promise.reject(new Error('Failed to fetch URL')))
+        global.fetch.mockImplementationOnce(() =>
+            Promise.reject(new Error('Failed to fetch URL')))
         expect.assertions(1)
 
         await loadFiles('some-url', 'another-one')
