@@ -1,5 +1,7 @@
 import treo, { Database } from 'treo'
-treo.Promise = global.Promise
+
+import Promise from 'es6-promise'
+treo.Promise = Promise
 
 import debug from 'debug'
 const log = debug('web:database')
