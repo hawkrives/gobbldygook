@@ -45,27 +45,23 @@ describe('storeCourses', () => {
 
 describe('storeData', () => {
     test('does not throw when storing "courses"', async () => {
-        const handleError = jest.fn()
+        expect.assertions(0)
 
         try {
             await storeData('terms/20161.json', 'courses', [])
         } catch (err) {
-            handleError()
+            expect(err).toBeTruthy()
         }
-
-        expect(handleError).not.toHaveBeenCalled()
     })
 
     test('does not throw when storing "areas"', async () => {
-        const handleError = jest.fn()
+        expect.assertions(0)
 
         try {
             const area = mockArea('CSCI', 'major', '2012-13')
             await storeData('majors/csci.yaml', 'areas', area)
         } catch (err) {
-            handleError()
+            expect(err).toBeTruthy()
         }
-
-        expect(handleError).not.toHaveBeenCalled()
     })
 })

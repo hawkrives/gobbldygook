@@ -14,7 +14,7 @@ describe('getPriorCourses', () => {
         await db.__clear()
     })
 
-    test('foop', async () => {
+    test('returns the deletion batch', async () => {
         const actions = [{ sourcePath: 'dir/file', clbid: '1' }]
         await db.store('courses').batch(actions)
         expect(Object.keys(await getPriorCourses('dir/file'))).toHaveLength(1)
@@ -26,7 +26,7 @@ describe('getPriorAreas', () => {
         await db.__clear()
     })
 
-    test('foop', async () => {
+    test('returns the deletion batch', async () => {
         const actions = [{ sourcePath: 'dir/file' }]
         await db.store('areas').batch(actions)
         expect(Object.keys(await getPriorAreas('dir/file'))).toHaveLength(1)
