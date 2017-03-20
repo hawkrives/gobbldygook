@@ -187,7 +187,7 @@ describe('filterFiles', () => {
             { type: 'json', year: 2003, path: '4.json', hash: '' },
         ]
         const actual = await load.filterFiles(args, fileRefs)
-        const expected = [fileRefs[0], fileRefs[2]].map(f => f.path)
+        const expected = [fileRefs[0], fileRefs[2]]
         expect(actual).toEqual(expected)
         expect(needsUpdate).toHaveBeenCalledTimes(4)
     })
