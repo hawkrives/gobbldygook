@@ -1,13 +1,13 @@
 import uniqueId from 'lodash/uniqueId'
 import debug from 'debug'
-const log = debug('worker:check-student-against-area')
+const log = debug('worker:check-student:main')
 
 // eslint-disable-next-line import/default
 import CheckStudentWorker from './workers/check-student-against-area.worker'
 const worker = new CheckStudentWorker()
 
 worker.onerror = msg =>
-    log('[main] received error from check-student worker:', msg)
+    log('received error from check-student worker:', msg)
 
 /**
  * Checks a student object against an area of study.

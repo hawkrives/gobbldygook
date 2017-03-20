@@ -1,11 +1,12 @@
 /* global WorkerGlobalScope */
 // @flow
 
+import debug from 'debug'
 import round from 'lodash/round'
 import present from 'present'
 import { stringifyError } from '../../../lib/stringify-error'
 import checkStudentAgainstArea from './check-student-against-area'
-import log from './check-student-against-area/lib-log'
+const log = debug('worker:check-student:listener')
 
 if (
     typeof WorkerGlobalScope !== 'undefined' &&
@@ -19,20 +20,20 @@ if (
         // > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 
         const [id, student, area] = JSON.parse(data)
-        log('[check-student] received message:', id, student, area)
+        log('received message:', id, student, area)
 
         checkStudentAgainstArea(student, area)
             .then(result => {
                 self.postMessage(JSON.stringify([id, 'result', result]))
                 log(
-                    `[check-student(${student.name}, ${area.name})] took ${round(present() - start)} ms`
+                    `(${student.name}, ${area.name}) took ${round(present() - start)} ms`
                 )
             })
             .catch(err => {
                 self.postMessage(
                     JSON.stringify([id, 'error', stringifyError(err)])
                 )
-                log(`[check-student(${student.name}, ${area.name}))]`, err)
+                log(`(${student.name}, ${area.name})`, err)
             })
     })
 }

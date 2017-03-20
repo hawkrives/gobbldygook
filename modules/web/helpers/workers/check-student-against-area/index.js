@@ -1,11 +1,12 @@
 // @flow
 import map from 'lodash/map'
 import filter from 'lodash/filter'
+import debug from 'debug'
 
 import { evaluate } from '../../../../examine-student/evaluate'
 import { getActiveStudentCourses } from '../../get-active-student-courses'
 import { alterCourse } from '../../alter-course-for-evaluation'
-import log from './lib-log'
+const log = debug('worker:check-student:worker')
 
 function tryEvaluate(student, area) {
     try {
