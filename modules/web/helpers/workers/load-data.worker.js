@@ -29,3 +29,5 @@ self.addEventListener('message', ({ data }) => {
         .then(result => self.postMessage([id, 'result', result]))
         .catch(err => self.postMessage([id, 'error', serializeError(err)]))
 })
+
+export default class {}

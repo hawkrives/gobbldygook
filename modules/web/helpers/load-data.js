@@ -12,7 +12,6 @@ const actions = {
     areas: areaActions,
 }
 
-// eslint-disable-next-line import/default
 import LoadDataWorker from './workers/load-data.worker.js'
 const worker = new LoadDataWorker()
 

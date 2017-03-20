@@ -37,3 +37,5 @@ if (
             })
     })
 }
+
+export default class {}
