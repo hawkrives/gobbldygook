@@ -24,7 +24,7 @@ worker.onmessage = ({ data: [resultId, type, actionInfo] }) => {
         const action = actions[actionInfo.type][actionInfo.action](
             ...actionInfo.args
         )
-        global.dispatch && global.dispatch(action)
+        global._dispatch && global._dispatch(action)
     }
 }
 
