@@ -58,8 +58,8 @@ export function getFilesToLoad(
 export function filterFiles({ type }: Args, files: InfoFileRef[]) {
     // For each file, see if it needs loading. We then update each promise
     // with either the path or `null`.
-    const filesToLoad = files.map(({ path, hash }) =>
-        needsUpdate(type, path, hash).then(update => update ? path : null))
+    const filesToLoad = files.map(file =>
+        needsUpdate(type, file.path, file.hash).then(update => update ? file : null))
 
     // Finally, we filter the items
     return Promise.all(filesToLoad).then(filterByTruthiness)
