@@ -12,16 +12,18 @@ const actions = {
     areas: areaActions,
 }
 
-const LoadDataWorker = require('./load-data.worker.js')
+import LoadDataWorker from './workers/load-data.worker.js'
 const worker = new LoadDataWorker()
+
 worker.onerror = msg =>
     log('[main] received error from load-data worker:', msg)
+
 worker.onmessage = ({ data: [resultId, type, actionInfo] }) => {
     if (resultId === null && type === 'dispatch') {
         const action = actions[actionInfo.type][actionInfo.action](
             ...actionInfo.args
         )
-        global.dispatch && global.dispatch(action)
+        global._dispatch && global._dispatch(action)
     }
 }
 

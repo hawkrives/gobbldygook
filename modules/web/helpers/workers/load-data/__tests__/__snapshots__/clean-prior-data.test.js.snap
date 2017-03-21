@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cleanPriorData throws on an unknown type 1`] = `"cleanPriorData: \\"invalid_type\\" is not a valid store type"`;

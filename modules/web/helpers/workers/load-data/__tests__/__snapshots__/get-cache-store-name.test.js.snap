@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCacheStoreName handles courses 1`] = `"courseCache"`;
+
+exports[`getCacheStoreName runs 1`] = `"areaCache"`;
+
+exports[`getCacheStoreName throws an error on unexpected values 1`] = `"getCacheStoreName(): \\"invalid\\" is not a valid store type"`;
