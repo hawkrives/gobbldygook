@@ -168,7 +168,7 @@
     "graceful-fs": "4.1.11",
     "jest": "19.0.2",
     "jest-enzyme": "2.1.2",
-    "js-beautify": "1.6.11",
+    "js-beautify": "1.6.12",
     "json-loader": "0.5.4",
     "junk": "2.1.0",
     "mkdirp": "0.5.1",
