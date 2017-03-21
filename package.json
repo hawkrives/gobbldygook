@@ -173,7 +173,7 @@
     "junk": "2.1.0",
     "mkdirp": "0.5.1",
     "node-fetch": "2.0.0-alpha.3",
-    "node-sass": "4.5.0",
+    "node-sass": "4.5.1",
     "nomnom": "1.8.1",
     "pegjs": "0.10.0",
     "pify": "2.3.0",
