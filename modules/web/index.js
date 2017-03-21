@@ -19,10 +19,6 @@ startAnalytics()
 
 // Kick off data loading
 import loadData from './helpers/load-data'
-import isSafari from 'is-safari'
-if (isSafari) {
-    global.useNetworkOnly = true
-}
 loadData().catch(err => console.error(err))
 
 // Kick off the GUI
