@@ -192,7 +192,7 @@
     "style-loader": "0.16.0",
     "text-table": "0.2.0",
     "url-loader": "0.5.8",
-    "webpack": "2.2.1",
+    "webpack": "2.3.1",
     "webpack-dev-server": "2.4.2",
     "worker-loader": "0.8.0"
   }
