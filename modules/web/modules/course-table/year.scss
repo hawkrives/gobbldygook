@@ -56,27 +56,6 @@ $year-title-width: $year-title-size * 0.75; /* I don't know why this is 0.75 */
 	}
 }
 
-.add-year {
-	font-feature-settings: 'smcp';
-
-	display: block;
-	text-transform: none;
-
-	text-align: left;
-
-	font-weight: 500;
-	font-size: 0.9em;
-
-	// 4px is the semester edge padding
-	// 7.5px is the internal semester padding
-	margin: 0 4px $page-edge-padding;
-	padding-left: 7.5px;
-
-	&[disabled] {
-		text-decoration: line-through;
-	}
-}
-
 .remove-year:hover {
 	color: $red-500;
 	background-color: $red-50;

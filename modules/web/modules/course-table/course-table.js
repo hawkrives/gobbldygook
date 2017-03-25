@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react'
-import cx from 'classnames'
+import React from 'react'
+import styled from 'styled-components'
 import { expandYear } from '../../../school-st-olaf-college/course-info'
 
 import {
@@ -12,9 +12,38 @@ import groupBy from 'lodash/groupBy'
 import Button from '../../components/button'
 import Year from './year'
 
-import './course-table.scss'
+const AddYearButton = styled(Button)`
+    font-feature-settings: 'smcp';
 
-export default function CourseTable(props) {
+    display: block;
+    text-transform: none;
+
+    text-align: left;
+
+    font-weight: 500;
+    font-size: 0.9em;
+
+    // 4px is the semester edge padding
+    // 7.5px is the internal semester padding
+    margin: 0 4px ${props => props.theme.pageEdgePadding};
+    padding-left: 7.5px;
+
+    &[disabled] {
+        text-decoration: line-through;
+    }
+`
+
+const Container = styled.div``
+
+type PropTypes = {
+    addSemester: PropTypes.func.isRequired,
+    addYear: PropTypes.func.isRequired,
+    className?: string,
+    removeYear: PropTypes.func.isRequired,
+    student: Object,
+};
+
+export default function CourseTable(props: PropTypes) {
     const { student } = props
     const { schedules, matriculation, graduation } = student
 
@@ -22,15 +51,14 @@ export default function CourseTable(props) {
     const canAddYear = graduation > nextAvailableYear
 
     const nextYearButton = canAddYear &&
-        <Button
-            className="add-year"
+        <AddYearButton
             key="add-year"
             type="flat"
             title="Add Year"
             onClick={props.addYear}
         >
-            {`Add ${expandYear(nextAvailableYear, false, '–')}`}
-        </Button>
+            Add {expandYear(nextAvailableYear, false, '–')}
+        </AddYearButton>
 
     let sorted = sortBy(schedules, 'year')
     let grouped = groupBy(sorted, 'year')
@@ -47,16 +75,8 @@ export default function CourseTable(props) {
     years.splice(nextAvailableYear - matriculation, 0, nextYearButton)
 
     return (
-        <div className={cx('course-table', props.className)}>
+        <Container className={props.className}>
             {years}
-        </div>
+        </Container>
     )
-}
-
-CourseTable.propTypes = {
-    addSemester: PropTypes.func.isRequired,
-    addYear: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    removeYear: PropTypes.func.isRequired,
-    student: PropTypes.object.isRequired,
 }
