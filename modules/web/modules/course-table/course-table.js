@@ -72,7 +72,7 @@ export default function CourseTable(props: PropTypes) {
             removeYear={() => props.removeYear(Number(year))}
         />
     ))
-    years.splice(nextAvailableYear - matriculation, 0, nextYearButton)
+    years.splice(nextAvailableYear - matriculation + 1, 0, nextYearButton)
 
     return (
         <Container className={props.className}>
