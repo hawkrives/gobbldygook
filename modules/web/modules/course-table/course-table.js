@@ -68,8 +68,8 @@ export default function CourseTable(props: PropTypes) {
             key={year}
             year={Number(year)}
             student={student}
-            addSemester={() => props.addSemester(Number(year))}
-            removeYear={() => props.removeYear(Number(year))}
+            addSemester={props.addSemester}
+            removeYear={props.removeYear}
         />
     ))
     years.splice(nextAvailableYear - matriculation + 1, 0, nextYearButton)
