@@ -43,7 +43,7 @@ const TitleButton = styled(Button)`
     border-radius: 0;
     transition: 0.15s;
 
-    & + .button {
+    & + & {
         margin-left: 0.1em;
     }
 `
