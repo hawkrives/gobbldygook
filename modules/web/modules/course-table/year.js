@@ -33,15 +33,15 @@ export default class Year extends React.PureComponent {
         removeYear: PropTypes.func.isRequired,
         student: PropTypes.object.isRequired,
         year: PropTypes.number.isRequired,
-    }
+    };
 
     addSemester = () => {
         this.props.addSemester(this.props.year)
-    }
+    };
 
     removeYear = () => {
         this.props.removeYear(this.props.year)
-    }
+    };
 
     render() {
         const { student, year } = this.props
@@ -60,7 +60,10 @@ export default class Year extends React.PureComponent {
 
         const niceYear = expandYear(year)
 
-        const nextAvailableSemester = findFirstAvailableSemester(schedules, year)
+        const nextAvailableSemester = findFirstAvailableSemester(
+            schedules,
+            year
+        )
         const isAddSemesterDisabled = !canAddSemester(schedules, year)
 
         return (
