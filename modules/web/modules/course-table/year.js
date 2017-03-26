@@ -77,7 +77,6 @@ export default class Year extends React.PureComponent {
                                 className="add-semester"
                                 type="flat"
                                 title="Add Semester"
-                                disabled={isAddSemesterDisabled}
                                 onClick={this.addSemester}
                             >
                                 Add ‘{semesterName(nextAvailableSemester)}’
