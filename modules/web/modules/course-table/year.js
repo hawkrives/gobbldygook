@@ -15,12 +15,71 @@ import {
 } from '../../../school-st-olaf-college/course-info'
 
 import styled from 'styled-components'
-import './year.scss'
+
+const Container = styled.div`
+    margin-bottom: ${props => props.theme.pageEdgePadding};
+`
+
+const row = `
+    display: flex;
+    flex-flow: row wrap;
+`
+
+const Header = styled.header`
+    ${props => props.theme.noSelect}
+    margin: 0;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    font-feature-settings: "tnum";
+
+    line-height: 1em;
+    font-weight: 500;
+    font-size: 0.9em;
+`
+
+const TitleText = styled.h1`
+    ${props => props.theme.headingNeutral}
+    white-space: nowrap;
+    flex: 1;
+
+    /* 4px is the semester edge padding */
+    /* 7.5px is the internal semester padding */
+    /* TODO: replace this with variable references */
+    margin-left: 4px + 7.5px;
+`
+
+const TitleButton = styled(Button)`
+    transition: 0.15s;
+
+    min-height: 0;
+    padding: 0 0.5em;
+
+    text-transform: none;
+    font-feature-settings: "smcp";
+    font-weight: 400;
+
+    color: ${props => props.theme.gray500};
+
+    & + & {
+        margin-left: 0.1em;
+    }
+`
+
+const RemoveYearButton = styled(TitleButton)`
+    &:hover {
+        color: ${props => props.theme.red500};
+        background-color: ${props => props.theme.red50};
+        border: solid 1px ${props => props.theme.red500};
+    }
+`
 
 const SemesterList = styled.div`
     flex: 1;
-    display: flex;
-    flex-flow: row wrap;
+    ${row}
 `
 
 const canAddSemester = (schedules, year) =>
@@ -67,34 +126,32 @@ export default class Year extends React.PureComponent {
         const isAddSemesterDisabled = !canAddSemester(schedules, year)
 
         return (
-            <div className="year">
-                <header className="year-title">
-                    <h1>{niceYear}</h1>
+            <Container>
+                <Header>
+                    <TitleText>{niceYear}</TitleText>
 
-                    <span className="buttons">
+                    <span>
                         {!isAddSemesterDisabled &&
-                            <Button
-                                className="add-semester"
+                            <TitleButton
                                 type="flat"
                                 title="Add Semester"
                                 onClick={this.addSemester}
                             >
                                 Add ‘{semesterName(nextAvailableSemester)}’
-                            </Button>}
-                        <Button
-                            className="remove-year"
+                            </TitleButton>}
+                        <RemoveYearButton
                             type="flat"
                             title={`Remove the year ${niceYear}`}
                             onClick={this.removeYear}
                         >
                             Remove Year
-                        </Button>
+                        </RemoveYearButton>
                     </span>
-                </header>
-                <SemesterList className="row">
+                </Header>
+                <SemesterList>
                     {terms}
                 </SemesterList>
-            </div>
+            </Container>
         )
     }
 }
