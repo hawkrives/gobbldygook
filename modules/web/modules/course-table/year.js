@@ -14,7 +14,14 @@ import {
     semesterName,
 } from '../../../school-st-olaf-college/course-info'
 
+import styled from 'styled-components'
 import './year.scss'
+
+const SemesterList = styled.div`
+    flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+`
 
 const canAddSemester = (schedules, year) =>
     findFirstAvailableSemester(schedules, year) <= 5
@@ -82,9 +89,9 @@ export default class Year extends React.PureComponent {
                         </Button>
                     </span>
                 </header>
-                <div className="row semester-list">
+                <SemesterList className="row">
                     {terms}
-                </div>
+                </SemesterList>
             </div>
         )
     }

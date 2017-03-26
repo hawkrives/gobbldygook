@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
-import plur from 'plur'
 import { semesterName } from '../../../school-st-olaf-college/course-info'
 import { countCredits } from '../../../examine-student/count-credits'
 import { IDENT_COURSE } from '../../../object-student/item-types'
@@ -11,18 +10,104 @@ import includes from 'lodash/includes'
 
 import Button from '../../components/button'
 import Icon from '../../components/icon'
-import List from '../../components/list'
+import { InlineList, InlineListItem } from '../../components/list'
 import { close, search } from '../../icons/ionicons'
 
 import debug from 'debug'
 const log = debug('web:react')
 
 import CourseList from './course-list'
-import './semester.scss'
+import styled from 'styled-components'
+import * as variables from './variables'
+
+const Container = styled.div`
+    ${props => props.theme.card}
+    flex: 1 0;
+    min-width: 16em;
+    margin: ${variables.semesterSpacing};
+
+    &.can-drop {
+        cursor: copy;
+        box-shadow: 0 0 4px ${props => props.theme.gray500};
+        z-index: 10;
+    }
+`
+
+const TitleButton = styled(Button)`
+    ${variables.semesterPadding}
+
+    min-height: 0;
+    font-size: 0.9em;
+
+    border: 0;
+    border-radius: 0;
+    transition: 0.15s;
+
+    & + .button {
+        margin-left: 0.1em;
+    }
+`
+
+const RemoveSemesterButton = styled(TitleButton)`
+    &:hover {
+        color: ${props => props.theme.red500};
+        border-color: ${props => props.theme.red500};
+        background-color: ${props => props.theme.red50};
+    }
+`
+
+const Header = styled.header`
+    border-bottom: ${props => props.theme.materialDivider};
+
+    font-size: 0.85em;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    font-feature-settings: 'smcp';
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    color: ${props => props.theme.gray500};
+
+    overflow: hidden;
+`
+
+const InfoList = styled(InlineList)`
+    font-size: 0.8em;
+`
+
+const InfoItem = styled(InlineListItem)`
+    font-feature-settings: 'onum';
+
+    & + &::before {
+        content: " – ";
+        padding-left: 0.25em;
+    }
+`
+
+const Title = styled(Link)`
+    ${props => props.theme.linkUndecorated}
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    padding-top: ${props => props.theme.semesterTopPadding};
+    padding-left: ${props => props.theme.semesterSidePadding};
+    padding-bottom: ${props => props.theme.semesterTopPadding};
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+`
+
+const TitleText = styled.h1`
+    ${props => props.theme.headingNeutral}
+    display: inline-block;
+    color: black;
+`
 
 function Semester(props) {
-    let courseList = null
-
     const { studentId, semester, year, canDrop, schedule } = props
     const { courses, conflicts, hasConflict } = schedule
 
@@ -32,36 +117,23 @@ function Semester(props) {
         ? countCredits(courses)
         : 0
 
-    let infoBar = []
+    const infoBar = []
     if (schedule && courses && courses.length) {
         const courseCount = courses.length
 
         infoBar.push(
-            <li key="course-count">
+            <InfoItem key="course-count">
                 {courseCount} {courseCount === 1 ? 'course' : 'courses'}
-            </li>
+            </InfoItem>
         )
         currentCredits &&
             infoBar.push(
-                <li key="credit-count">
+                <InfoItem key="credit-count">
                     {currentCredits}
                     {' '}
                     {currentCredits === 1 ? 'credit' : 'credits'}
-                </li>
+                </InfoItem>
             )
-    }
-
-    if (schedule) {
-        courseList = (
-            <CourseList
-                courses={courses}
-                creditCount={currentCredits}
-                availableCredits={recommendedCredits}
-                studentId={studentId}
-                schedule={schedule}
-                conflicts={conflicts || []}
-            />
-        )
     }
 
     const className = cx('semester', {
@@ -70,40 +142,43 @@ function Semester(props) {
     })
 
     return (
-        <div
+        <Container
             className={className}
-            ref={instance => props.connectDropTarget(findDOMNode(instance))}
+            innerRef={ref => props.connectDropTarget(findDOMNode(ref))}
         >
-            <header className={'semester-title'}>
-                <Link
-                    className={'semester-header'}
-                    to={`/s/${studentId}/semester/${year}/${semester}`}
-                >
-                    <h1>{semesterName(semester)}</h1>
+            <Header>
+                <Title to={`/s/${studentId}/semester/${year}/${semester}`}>
+                    <TitleText>{semesterName(semester)}</TitleText>
+                    <InfoList>{infoBar}</InfoList>
+                </Title>
 
-                    <List className={'semester-info'} type="inline">
-                        {infoBar}
-                    </List>
-                </Link>
-
-                <Button
+                <TitleButton
                     link
                     to={`/s/${studentId}/search/${year}/${semester}`}
                     title="Search for courses"
                 >
                     <Icon>{search}</Icon> Course
-                </Button>
-                <Button
-                    className={'semester-remove'}
+                </TitleButton>
+
+                <RemoveSemesterButton
                     onClick={props.removeSemester}
                     title={`Remove ${year} ${semesterName(semester)}`}
                 >
                     <Icon>{close}</Icon>
-                </Button>
-            </header>
+                </RemoveSemesterButton>
+            </Header>
 
-            {courseList}
-        </div>
+            {schedule
+                ? <CourseList
+                      courses={courses}
+                      creditCount={currentCredits}
+                      availableCredits={recommendedCredits}
+                      studentId={studentId}
+                      schedule={schedule}
+                      conflicts={conflicts || []}
+                  />
+                : null}
+        </Container>
     )
 }
 
