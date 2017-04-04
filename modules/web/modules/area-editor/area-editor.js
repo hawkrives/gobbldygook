@@ -15,7 +15,9 @@ import {
     iosUploadOutline,
 } from '../../icons/ionicons'
 
-const TopToolbar = styled(Toolbar)`margin-bottom: 0.5em;`
+const TopToolbar = styled(Toolbar)`
+    margin-bottom: 0.5em;
+`
 
 export default function AreaEditor(props) {
     return (
