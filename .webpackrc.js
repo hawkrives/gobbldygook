@@ -336,7 +336,7 @@ function config() {
             },
             {
                 test: /\.js$/,
-                include: /node_modules[/]p-.*[/].*[.]js$/,
+                include: /node_modules[/](p-.*|debug)[/].*[.]js$/,
                 use: [babelForNodeModules],
             },
             {
