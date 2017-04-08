@@ -167,7 +167,7 @@
     "get-stdin": "5.0.1",
     "glob": "7.1.1",
     "graceful-fs": "4.1.11",
-    "indexeddbshim": "https://github.com/axemclion/IndexedDBShim#42961a5d54781f3fa030f33f35dd8fd2ae9cc3cc",
+    "indexeddbshim": "https://github.com/axemclion/IndexedDBShim#3c3365876d366e8ae81d2b015d92bcfc31d7c209",
     "jest": "19.0.2",
     "jest-enzyme": "3.0.0",
     "js-beautify": "1.6.12",

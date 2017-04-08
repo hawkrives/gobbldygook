@@ -3016,9 +3016,9 @@ indent-string@^2.1.0:
   dependencies:
     repeating "^2.0.0"
 
-"indexeddbshim@https://github.com/axemclion/IndexedDBShim#42961a5d54781f3fa030f33f35dd8fd2ae9cc3cc":
+"indexeddbshim@https://github.com/axemclion/IndexedDBShim#3c3365876d366e8ae81d2b015d92bcfc31d7c209":
   version "2.2.1"
-  resolved "https://github.com/axemclion/IndexedDBShim#42961a5d54781f3fa030f33f35dd8fd2ae9cc3cc"
+  resolved "https://github.com/axemclion/IndexedDBShim#3c3365876d366e8ae81d2b015d92bcfc31d7c209"
   dependencies:
     websql "https://github.com/brettz9/node-websql#configurable"
 
