@@ -127,7 +127,7 @@ export default function getArea(
     promiseCache[id] = getAreaFrom({ name, type, revision, source, isCustom })
 
     return promiseCache[id].then(area => {
-        console.log(area)
+        // console.log(area)
         delete promiseCache[id]
         return area
     })
