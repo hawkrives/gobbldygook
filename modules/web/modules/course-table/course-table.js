@@ -20,7 +20,7 @@ export default function CourseTable(props) {
     const { schedules, matriculation, graduation } = student
 
     const nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
-    const canAddYear = graduation > nextAvailableYear
+    const canAddYear = true // graduation > nextAvailableYear
 
     const nextYearButton = canAddYear &&
         <Button
