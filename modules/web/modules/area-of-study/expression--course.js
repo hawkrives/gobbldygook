@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { semesterName } from '../../../school-st-olaf-college/course-info'
 import { buildDeptString } from '../../../school-st-olaf-college/deptnums'

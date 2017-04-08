@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+
 import DropZone from 'react-dropzone'
 import map from 'lodash/map'
 import Button from '../../components/button'
@@ -12,7 +14,7 @@ const log = debug('web:react')
 
 import './method-upload.scss'
 
-class UploadFileScreen extends Component {
+class UploadFileScreen extends React.Component {
     static propTypes = {
         dispatch: PropTypes.func.isRequired,
         router: PropTypes.object.isRequired,

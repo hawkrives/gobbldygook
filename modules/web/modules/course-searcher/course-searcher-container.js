@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { compareProps } from '../../../lib'
@@ -12,7 +13,7 @@ import {
     setPartialQuery,
 } from './redux/actions'
 
-export class CourseSearcherContainer extends Component {
+export class CourseSearcherContainer extends React.Component {
     static propTypes = {
         closeSearcher: PropTypes.func.isRequired,
         groupResults: PropTypes.func.isRequired, // redux

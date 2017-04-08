@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import serializeError from 'serialize-error'
 import Button from '../../components/button'
 import {
@@ -25,7 +26,7 @@ import './method-import.scss'
 import debug from 'debug'
 const log = debug('web:react')
 
-class SISImportScreen extends Component {
+class SISImportScreen extends React.Component {
     static propTypes = {
         dispatch: PropTypes.func.isRequired, // redux
         router: PropTypes.object.isRequired,

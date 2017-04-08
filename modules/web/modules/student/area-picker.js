@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import fuzzysearch from 'fuzzysearch'
 import pluralizeArea from '../../../examine-student/pluralize-area'
 import map from 'lodash/map'
@@ -78,7 +79,7 @@ AreaPicker.propTypes = {
     type: PropTypes.string.isRequired,
 }
 
-export default class AreaPickerContainer extends Component {
+export default class AreaPickerContainer extends React.Component {
     state = {
         filter: '',
     };

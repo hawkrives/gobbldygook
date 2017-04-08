@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import filter from 'lodash/filter'
@@ -12,7 +13,7 @@ import Semester from './semester'
 
 import { getSchedule } from '../../helpers/get-schedule'
 
-export class SemesterContainer extends Component {
+export class SemesterContainer extends React.Component {
     static propTypes = {
         addCourse: PropTypes.func.isRequired, // redux
         destroySchedules: PropTypes.func.isRequired, // redux

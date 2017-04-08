@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import {
     installOperaExtension,
@@ -36,12 +37,12 @@ function BrowserButton(
     )
 }
 BrowserButton.propTypes = {
-    onClick: React.PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
 }
 
 export class BrowserExtensionsComponent extends React.Component {
     static propTypes = {
-        onInstall: React.PropTypes.func.isRequired,
+        onInstall: PropTypes.func.isRequired,
     };
 
     state: {

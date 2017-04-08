@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
@@ -11,8 +12,7 @@ const log = debug('web:react')
 
 import './semester-detail.scss'
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class SemesterDetail extends Component {
+export default class SemesterDetail extends React.Component {
     static propTypes = {
         className: PropTypes.string,
         location: PropTypes.shape({

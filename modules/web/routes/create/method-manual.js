@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import Button from '../../components/button'
 import cx from 'classnames'
 import Autosize from 'react-input-autosize'
@@ -15,7 +16,7 @@ import './method-manual.scss'
 
 let now = new Date()
 
-class ManualCreationScreen extends Component {
+class ManualCreationScreen extends React.Component {
     static propTypes = {
         areas: PropTypes.array.isRequired, // redux
         areasLoading: PropTypes.bool.isRequired, // redux

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import yaml from 'js-yaml'
 import keymage from 'keymage'
 import omit from 'lodash/omit'
@@ -12,7 +13,7 @@ import Loading from '../../components/loading'
 import AreaList from './area-list'
 import AreaEditor from './area-editor'
 
-export class AreaEditScreen extends Component {
+export class AreaEditScreen extends React.Component {
     static propTypes = {
         areas: PropTypes.shape({
             data: PropTypes.arrayOf(PropTypes.object).isRequired,
