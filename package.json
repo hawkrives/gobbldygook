@@ -182,7 +182,7 @@
     "prettier": "0.22.0",
     "prop-types": "15.5.4",
     "react-addons-perf": "15.4.2",
-    "react-addons-test-utils": "15.5.0",
+    "react-addons-test-utils": "15.5.1",
     "react-test-renderer": "15.5.3",
     "redux-devtools": "3.3.2",
     "redux-freeze": "0.1.5",
