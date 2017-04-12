@@ -102,7 +102,7 @@
     "react-codemirror": "0.3.0",
     "react-dnd": "2.3.0",
     "react-dnd-html5-backend": "2.3.0",
-    "react-document-title": "2.0.2",
+    "react-document-title": "2.0.3",
     "react-dom": "15.5.3",
     "react-dropzone": "3.12.3",
     "react-input-autosize": "1.1.0",
