@@ -44,9 +44,9 @@ type Student = Object;
 
 export class StudentSummary extends React.PureComponent {
     props: {
-        onChangeGraduation?: (string) => any,
-        onChangeMatriculation?: (string) => any,
-        onChangeName?: (string) => any,
+        onChangeGraduation?: string => any,
+        onChangeMatriculation?: string => any,
+        onChangeName?: string => any,
         randomizeHello?: boolean,
         showAvatar?: boolean,
         showMessage?: boolean,
@@ -108,7 +108,7 @@ export class Header extends React.PureComponent {
         canGraduate: boolean,
         helloMessage: string,
         name: string,
-        onChangeName?: (string) => any,
+        onChangeName?: string => any,
         showAvatar: boolean,
     };
 
@@ -177,8 +177,8 @@ export class Footer extends React.PureComponent {
 
 export class DateSummary extends React.PureComponent {
     props: {
-        onChangeGraduation?: (string) => any,
-        onChangeMatriculation?: (string) => any,
+        onChangeGraduation?: string => any,
+        onChangeMatriculation?: string => any,
         matriculation: string,
         graduation: string,
     };

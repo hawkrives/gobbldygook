@@ -24,7 +24,8 @@ describe('enhanceHanson', () => {
         )
 
         expect(() =>
-            enhanceHanson({ message: 'have a nice day' })).not.toThrow()
+            enhanceHanson({ message: 'have a nice day' })
+        ).not.toThrow()
 
         expect(() => enhanceHanson({ result: 'CSCI 121' })).not.toThrow()
     })
@@ -37,12 +38,14 @@ describe('enhanceHanson', () => {
 
     it('requires "revision" to be a string, if present', () => {
         expect(() =>
-            enhanceHanson({ revision: 2, result: 'CSCI 121' })).toThrowError(
+            enhanceHanson({ revision: 2, result: 'CSCI 121' })
+        ).toThrowError(
             'enhanceHanson: "revision" must be a string. Try wrapping it in single quotes.'
         )
 
         expect(() =>
-            enhanceHanson({ revision: '2', result: 'CSCI 121' })).not.toThrow()
+            enhanceHanson({ revision: '2', result: 'CSCI 121' })
+        ).not.toThrow()
     })
 
     it('enforces a whitelist of keys at the top-level', () => {
@@ -56,15 +59,14 @@ describe('enhanceHanson', () => {
             enhanceHanson({
                 result: 'Req',
                 Req: 'CSCI 121',
-            })).not.toThrow()
+            })
+        ).not.toThrow()
     })
 
     it('enforces a whitelist of keys at lower levels', () => {
         expect(() =>
-            enhanceHanson(
-                { result: '', innerbad: 'zzzz' },
-                { topLevel: false }
-            )).toThrow(/only \[.*\] keys are allowed/)
+            enhanceHanson({ result: '', innerbad: 'zzzz' }, { topLevel: false })
+        ).toThrow(/only \[.*\] keys are allowed/)
     })
 
     it('expands string-only keys into objects with a "result" key', () => {
@@ -82,9 +84,8 @@ describe('enhanceHanson', () => {
                 Req: {
                     result: 'only courses from (CSCI 121)',
                 },
-            })).toThrowError(
-            'enhanceHanson: Expected expression but "o" found.'
-        )
+            })
+        ).toThrowError('enhanceHanson: Expected expression but "o" found.')
 
         expect(() =>
             enhanceHanson({
@@ -92,7 +93,8 @@ describe('enhanceHanson', () => {
                 Req: {
                     result: 'one of (CSCI 121)',
                 },
-            })).not.toThrow()
+            })
+        ).not.toThrow()
 
         expect(
             enhanceHanson({
@@ -111,7 +113,8 @@ describe('enhanceHanson', () => {
                 Req: {
                     filter: 'only courses from (CSCI 121)',
                 },
-            })).not.toThrow()
+            })
+        ).not.toThrow()
 
         expect(
             enhanceHanson({
@@ -128,7 +131,8 @@ describe('enhanceHanson', () => {
                 Req: {
                     filter: 'one of (CSCI 121)',
                 },
-            })).toThrowError('enhanceHanson: Expected "only" but "o" found.')
+            })
+        ).toThrowError('enhanceHanson: Expected "only" but "o" found.')
     })
 
     it('allows defining variables in result', () => {

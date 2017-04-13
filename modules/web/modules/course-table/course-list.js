@@ -15,7 +15,7 @@ export default function CourseList(props) {
     let courseObjects = map(
         props.schedule.courses,
         (course, i) =>
-            course.error
+            (course.error
                 ? <li key={course.clbid}>
                       <MissingCourse
                           className="course"
@@ -32,7 +32,7 @@ export default function CourseList(props) {
                           scheduleId={props.schedule.id}
                           studentId={props.studentId}
                       />
-                  </li>
+                  </li>)
     )
 
     let emptySlots = []

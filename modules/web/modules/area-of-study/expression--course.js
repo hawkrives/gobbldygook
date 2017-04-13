@@ -9,18 +9,21 @@ import './expression--course.scss'
 export default function CourseExpression(props) {
     const department = buildDeptString(props.department)
 
-    const international = props.international &&
-        <span className="course--international">I</span>
-    const lab = props.lab ||
+    const international =
+        props.international && <span className="course--international">I</span>
+    const lab =
+        props.lab ||
         (props.type === 'Lab' && <span className="course--lab">L</span>)
 
-    const section = props.section &&
+    const section =
+        props.section &&
         props.section !== '*' &&
         <span className="course--section">[{props.section}]</span>
 
-    const year = props.year &&
-        <span className="course--year">{props.year}</span>
-    const semester = props.semester &&
+    const year =
+        props.year && <span className="course--year">{props.year}</span>
+    const semester =
+        props.semester &&
         <span className="course--semester">
             {props.semester === '*'
                 ? 'ANY'
@@ -29,7 +32,8 @@ export default function CourseExpression(props) {
 
     /////
 
-    const temporalIdentifiers = (semester || year) &&
+    const temporalIdentifiers =
+        (semester || year) &&
         <div className="temporal">
             {semester}
             {year}

@@ -38,8 +38,10 @@ export class CourseSearcherContainer extends React.Component {
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        return compareProps(this.props, nextProps) ||
+        return (
+            compareProps(this.props, nextProps) ||
             compareProps(this.state !== nextState)
+        )
     }
 
     handleQuerySubmit = () => {

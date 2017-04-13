@@ -23,7 +23,8 @@ export function getPriorAreas(path: string) {
         .store('areas')
         .getAll(range({ eq: path }))
         .then(oldItems =>
-            fromPairs(map(oldItems, item => [item.sourcePath, null])))
+            fromPairs(map(oldItems, item => [item.sourcePath, null]))
+        )
 }
 
 export default function cleanPriorData(path: string, type: InfoFileTypeEnum) {

@@ -64,5 +64,6 @@ export default function compareCourseToCourse(
     // We only check the specified keys.
     // If any of them are not equal, we return false.
     return every(keysToCheck, key =>
-        isEqualWith(query[key], other[key], wildcard))
+        isEqualWith(query[key], other[key], wildcard)
+    )
 }

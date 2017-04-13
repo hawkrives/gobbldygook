@@ -8,21 +8,19 @@ type ReturnType = {
     counted: number,
 };
 
-export default function applyFulfillmentToResult(
-    {
-        fulfillment,
-        expr,
-        computedResult,
-        matches,
-        counted,
-    }: {
-        fulfillment: Fulfillment,
-        expr: Expression,
-        computedResult: boolean,
-        matches: ?(Course[]),
-        counted: ?number,
-    }
-): ReturnType {
+export default function applyFulfillmentToResult({
+    fulfillment,
+    expr,
+    computedResult,
+    matches,
+    counted,
+}: {
+    fulfillment: Fulfillment,
+    expr: Expression,
+    computedResult: boolean,
+    matches: ?(Course[]),
+    counted: ?number,
+}): ReturnType {
     let needsFulfillment = true
 
     matches = matches || []

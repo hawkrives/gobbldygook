@@ -53,10 +53,9 @@ class ManualCreationScreen extends React.Component {
         return options
     };
 
-    handleAreaChange = type =>
-        values => {
-            this.setState({ [type]: values })
-        };
+    handleAreaChange = type => values => {
+        this.setState({ [type]: values })
+    };
 
     handleNameChange = ev => {
         this.setState({ name: ev.target.value })

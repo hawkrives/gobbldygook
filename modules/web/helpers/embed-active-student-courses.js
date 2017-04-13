@@ -16,7 +16,8 @@ export function embedActiveStudentCourses(student, { cache = [] }) {
 
     const enhanced = map(active, schedule => {
         let courses = map(schedule.clbids, clbid => {
-            return cache[clbid] ||
+            return (
+                cache[clbid] ||
                 getCourse(
                     {
                         clbid,
@@ -24,6 +25,7 @@ export function embedActiveStudentCourses(student, { cache = [] }) {
                     },
                     student.fabrications
                 )
+            )
         })
 
         return Promise.all(courses).then(fulfilledCourses => {

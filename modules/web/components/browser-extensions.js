@@ -14,17 +14,15 @@ import brwsr from 'brwsr'
 
 import './browser-extensions.scss'
 
-function BrowserButton(
-    {
-        onClick,
-        browserName,
-        disabled,
-    }: {
-        onClick: (any) => any,
-        browserName: string,
-        disabled?: boolean,
-    }
-) {
+function BrowserButton({
+    onClick,
+    browserName,
+    disabled,
+}: {
+    onClick: any => any,
+    browserName: string,
+    disabled?: boolean,
+}) {
     return (
         <button
             type="button"

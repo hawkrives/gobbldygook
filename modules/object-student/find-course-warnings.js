@@ -60,7 +60,7 @@ function checkForTimeConflicts(courses) {
             const conflicts = compact(
                 map(
                     conflictSet,
-                    (possibility, i) => possibility === true ? i + 1 : false
+                    (possibility, i) => (possibility === true ? i + 1 : false)
                 )
             )
             const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)

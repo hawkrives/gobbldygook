@@ -52,7 +52,8 @@ export function generateOps(allAreas: AreaOfStudy[]) {
     // --- something about any values that aren't objects
     const requiredKeys = ['name', 'revision', 'type']
     const invalidAreas = filter(allAreas, area =>
-        requiredKeys.some(key => area[key] === undefined))
+        requiredKeys.some(key => area[key] === undefined)
+    )
 
     return { ...ops, ...buildRemoveAreaOps(invalidAreas) }
 }

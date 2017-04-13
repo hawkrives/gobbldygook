@@ -132,7 +132,8 @@ describe('updateDatabase', () => {
     test('aborts the sequence if one rejects', async () => {
         global.fetch.mockImplementationOnce(goodFetch)
         cleanPriorData.mockImplementationOnce(() =>
-            Promise.reject(new Error('problem')))
+            Promise.reject(new Error('problem'))
+        )
         expect.assertions(3)
 
         await updateDatabase(
@@ -168,7 +169,8 @@ describe('updateDatabase', () => {
         test('false if any step fails', async () => {
             global.fetch.mockImplementationOnce(goodFetch)
             storeData.mockImplementationOnce(() =>
-                Promise.reject(new Error('problem')))
+                Promise.reject(new Error('problem'))
+            )
             const value = await updateDatabase(
                 'courses',
                 'http://i.am.an.url/',

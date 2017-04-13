@@ -66,7 +66,8 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
 
         // group the studies by their type
         const groupedStudies = groupBy(sortedStudies, study =>
-            study.type.toLowerCase())
+            study.type.toLowerCase()
+        )
 
         // pull out the results
         const studyResults = mapValues(groupedStudies, group =>
@@ -77,7 +78,8 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
                         student.areas,
                         pick(area, ['name', 'type', 'revision'])
                     ) || area
-            ))
+            )
+        )
 
         // and then render them
         const sections = map(studyResults, (areas, areaType) => (

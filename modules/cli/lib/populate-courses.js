@@ -11,7 +11,8 @@ function getCoursesByClbid(clbids) {
 }
 
 async function populateCourses(student) {
-    const clbids = student.clbids ||
+    const clbids =
+        student.clbids ||
         flatten(student.schedules.filter(s => s.active).map(s => s.clbids))
     let courses = await getCoursesByClbid(clbids)
     courses = courses.map(c => {

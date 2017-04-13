@@ -8,7 +8,8 @@ export const DESTROY_STUDENT = 'gobbldygook/students/DESTROY_STUDENT'
 
 export const CHANGE_NAME = 'gobbldygook/students/CHANGE_NAME'
 export const CHANGE_ADVISOR = 'gobbldygook/students/CHANGE_ADVISOR'
-export const CHANGE_CREDITS_NEEDED = 'gobbldygook/students/CHANGE_CREDITS_NEEDED'
+export const CHANGE_CREDITS_NEEDED =
+    'gobbldygook/students/CHANGE_CREDITS_NEEDED'
 export const CHANGE_MATRICULATION = 'gobbldygook/students/CHANGE_MATRICULATION'
 export const CHANGE_GRADUATION = 'gobbldygook/students/CHANGE_GRADUATION'
 export const CHANGE_SETTING = 'gobbldygook/students/CHANGE_SETTING'
@@ -35,11 +36,15 @@ export const REMOVE_OVERRIDE = 'gobbldygook/students/REMOVE_OVERRIDE'
 export const ADD_FABRICATION = 'gobbldygook/students/ADD_FABRICATION'
 export const REMOVE_FABRICATION = 'gobbldygook/students/REMOVE_FABRICATION'
 
-export const BEGIN_GET_STUDENT_DATA = 'gobbldygook/processed/BEGIN_GET_STUDENT_DATA'
+export const BEGIN_GET_STUDENT_DATA =
+    'gobbldygook/processed/BEGIN_GET_STUDENT_DATA'
 export const GET_STUDENT_DATA = 'gobbldygook/processed/GET_STUDENT_DATA'
-export const BEGIN_CHECK_GRADUATABILITY = 'gobbldygook/processed/BEGIN_CHECK_GRADUATABILITY'
-export const CHECK_GRADUATABILITY = 'gobbldygook/processed/CHECK_GRADUATABILITY'
-export const BEGIN_VALIDATE_SCHEDULES = 'gobbldygook/processed/BEGIN_VALIDATE_SCHEDULES'
+export const BEGIN_CHECK_GRADUATABILITY =
+    'gobbldygook/processed/BEGIN_CHECK_GRADUATABILITY'
+export const CHECK_GRADUATABILITY =
+    'gobbldygook/processed/CHECK_GRADUATABILITY'
+export const BEGIN_VALIDATE_SCHEDULES =
+    'gobbldygook/processed/BEGIN_VALIDATE_SCHEDULES'
 export const VALIDATE_SCHEDULES = 'gobbldygook/processed/VALIDATE_SCHEDULES'
 
 export const SAVE_STUDENT = 'gobbldygook/processed/SAVE_STUDENT'

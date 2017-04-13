@@ -42,9 +42,8 @@ describe('saveStudentsMiddleware', () => {
         describe('handle action', () => {
             it('should return a promise', () => {
                 const actionHandler = nextHandler(doNextAction)
-                expect(
-                    actionHandler({ type: CHANGE_NAME }).then
-                ).to.be.a.function
+                expect(actionHandler({ type: CHANGE_NAME }).then).to.be.a
+                    .function
             })
 
             xit('should save a student if something has changed', () => {

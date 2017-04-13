@@ -100,13 +100,7 @@ class SISImportScreen extends React.Component {
     };
 
     render() {
-        let {
-            student,
-            checkingLogin,
-            loggedIn,
-            error,
-            ids,
-        } = this.state
+        let { student, checkingLogin, loggedIn, error, ids } = this.state
 
         return (
             <div>

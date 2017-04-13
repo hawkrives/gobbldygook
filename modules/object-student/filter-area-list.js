@@ -68,8 +68,9 @@ function filterAreaList(areas, { graduation }) {
                     let nextAreaRevision = convertRevisionToYear(
                         list[i + 1].revision
                     )
-                    return revision <= graduation &&
-                        graduation <= nextAreaRevision
+                    return (
+                        revision <= graduation && graduation <= nextAreaRevision
+                    )
                 } else {
                     // the last revision is always available
                     return revision <= graduation

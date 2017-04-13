@@ -45,9 +45,7 @@ export default class SemesterDetail extends React.Component {
 
         return (
             <DocumentTitle
-                title={
-                    `${semesterName(semester)} ${year} • ${student.name} | Gobbldygook`
-                }
+                title={`${semesterName(semester)} ${year} • ${student.name} | Gobbldygook`}
             >
                 <div className={cx('semester-detail', this.props.className)}>
                     <pre>

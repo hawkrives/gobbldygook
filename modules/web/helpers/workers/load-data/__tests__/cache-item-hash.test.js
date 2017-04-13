@@ -12,7 +12,8 @@ beforeEach(async () => {
 
 test('cacheItemHash runs', () => {
     expect(() =>
-        cacheItemHash('folder/file', 'courses', 'deadbeef')).not.toThrow()
+        cacheItemHash('folder/file', 'courses', 'deadbeef')
+    ).not.toThrow()
 })
 
 test('cacheItemHash stores data', async () => {

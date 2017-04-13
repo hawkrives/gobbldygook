@@ -15,10 +15,7 @@ const {
     LoaderOptionsPlugin,
     NormalModuleReplacementPlugin,
     NamedModulesPlugin,
-    optimize: {
-        CommonsChunkPlugin,
-        UglifyJsPlugin,
-    },
+    optimize: { CommonsChunkPlugin, UglifyJsPlugin },
 } = webpack
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
