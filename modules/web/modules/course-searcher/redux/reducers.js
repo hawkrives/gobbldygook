@@ -57,9 +57,7 @@ const TIME_OF_DAY = course =>
 
 // eslint-disable-next-line no-confusing-arrow
 const DEPARTMENT = course =>
-    (course.departments
-        ? buildDeptString(course.departments)
-        : 'No Department')
+    (course.departments ? buildDeptString(course.departments) : 'No Department')
 
 // eslint-disable-next-line no-confusing-arrow
 const GEREQ = course => (course.gereqs ? oxford(course.gereqs) : 'No GEs')
@@ -95,9 +93,7 @@ function sortAndGroup({ sortBy: sorting, groupBy: grouping, rawResults }) {
     const sorted = sortBy(rawResults, sortByArgs)
 
     // Group them by term, then turn the object into an array of pairs.
-    const groupedAndPaired = toPairs(
-        groupBy(sorted, GROUP_BY_TO_KEY[grouping])
-    )
+    const groupedAndPaired = toPairs(groupBy(sorted, GROUP_BY_TO_KEY[grouping]))
 
     // Sort the result arrays by the first element, the term, because
     // object keys don't have an implicit sort.

@@ -11,14 +11,14 @@ class StudentPickerContainer extends React.Component {
         destroyStudent: PropTypes.func.isRequired,
         loadStudents: PropTypes.func.isRequired,
         students: PropTypes.object.isRequired,
-    };
+    }
 
     state = {
         filterText: '',
         isEditing: false,
         sortBy: 'dateLastModified',
         groupBy: 'nothing',
-    };
+    }
 
     componentWillMount() {
         this.props.loadStudents()
@@ -26,20 +26,20 @@ class StudentPickerContainer extends React.Component {
 
     onFilterChange = ev => {
         this.setState({ filterText: ev.target.value.toLowerCase() })
-    };
+    }
 
-    onGroupChange = () => {};
+    onGroupChange = () => {}
 
     onSortChange = () => {
         const options = ['dateLastModified', 'name', 'canGraduate']
         const currentIndex = options.indexOf(this.state.sortBy)
         const nextIndex = (currentIndex + 1) % options.length
         this.setState({ sortBy: options[nextIndex] })
-    };
+    }
 
     onToggleEditing = () => {
         this.setState({ isEditing: !this.state.isEditing })
-    };
+    }
 
     render() {
         return (

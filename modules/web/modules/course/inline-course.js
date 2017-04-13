@@ -31,7 +31,7 @@ type InlineCourseProps = {
     isDragging: boolean, // react-dnd
     scheduleId?: string,
     studentId?: string,
-};
+}
 
 const warningsMap = {
     'time-conflict': iosClockOutline,
@@ -40,11 +40,11 @@ const warningsMap = {
 }
 
 class InlineCourse extends Component {
-    props: InlineCourseProps;
+    props: InlineCourseProps
 
     state = {
         isOpen: false,
-    };
+    }
 
     shouldComponentUpdate(nextProps: InlineCourseProps, nextState) {
         return (
@@ -57,11 +57,11 @@ class InlineCourse extends Component {
 
     closeModal = () => {
         this.setState({ isOpen: false })
-    };
+    }
 
     openModal = () => {
         this.setState({ isOpen: true })
-    };
+    }
 
     render() {
         const { course, conflicts = [], index, scheduleId, studentId } = this

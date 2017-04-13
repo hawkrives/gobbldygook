@@ -14,12 +14,12 @@ import './index.scss'
 export class App extends React.Component {
     static defaultProps = {
         content: <StudentPicker />,
-    };
+    }
 
     static propTypes = {
         content: PropTypes.node.isRequired,
         overlay: PropTypes.node,
-    };
+    }
 
     render() {
         let { content, overlay } = this.props

@@ -83,10 +83,7 @@ module.exports.findWarnings = findWarnings
 function findWarnings(courses, schedule) {
     let warningsOfInvalidity = map(courses, course => {
         let invalidYear = checkForInvalidYear(course, schedule.year)
-        let invalidSemester = checkForInvalidSemester(
-            course,
-            schedule.semester
-        )
+        let invalidSemester = checkForInvalidSemester(course, schedule.semester)
         return [invalidYear, invalidSemester]
     })
 

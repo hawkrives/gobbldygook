@@ -14,7 +14,7 @@ type NotificationProps = {
     onClose: () => any,
     type: string,
     value: number,
-};
+}
 
 export default function Notification(props: NotificationProps) {
     log('Notification#render')

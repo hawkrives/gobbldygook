@@ -9,7 +9,7 @@ type IconProps = {
     className?: string,
     style?: Object,
     type?: 'block' | 'inline',
-};
+}
 
 export default function Icon({
     className,

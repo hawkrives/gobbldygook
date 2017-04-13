@@ -10,7 +10,7 @@ type ProgressBarProps = {
     colorful?: boolean,
     max?: number,
     value: number,
-};
+}
 
 export default function ProgressBar(props: ProgressBarProps) {
     const { value, max = 1, colorful, className } = props

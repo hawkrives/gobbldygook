@@ -30,7 +30,7 @@ type CourseSearcherProps = {
     results: any[],
     sortBy: string,
     studentId?: string,
-};
+}
 
 export default function CourseSearcher(props: CourseSearcherProps) {
     const {
@@ -59,9 +59,7 @@ export default function CourseSearcher(props: CourseSearcherProps) {
     )
 
     if (error) {
-        contents = (
-            <div className="error course-group">Something broke :-(</div>
-        )
+        contents = <div className="error course-group">Something broke :-(</div>
     } else if (showIndicator) {
         contents = (
             <div className="loading course-group">

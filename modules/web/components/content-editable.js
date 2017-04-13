@@ -16,18 +16,18 @@ class ContentEditable extends Component {
         onKeyDown?: string => any,
         placeholder?: string,
         value?: string,
-    |};
+    |}
 
     static defaultProps = {
         disabled: false,
         onChange: () => {},
         multiLine: false,
         value: '',
-    };
+    }
 
     state = {
         lastValue: this.props.value,
-    };
+    }
 
     handleKeyDown = (ev: KeyboardEvent) => {
         if (!(ev.target instanceof HTMLInputElement)) {
@@ -37,7 +37,7 @@ class ContentEditable extends Component {
             ev.preventDefault()
         }
         this.props.onKeyDown && this.props.onKeyDown(ev.target.textContent)
-    };
+    }
 
     handleFocus = (ev: Event) => {
         if (!(ev.target instanceof HTMLInputElement)) {
@@ -45,11 +45,11 @@ class ContentEditable extends Component {
         }
         this.props.onFocus && this.props.onFocus(ev.target.textContent)
         // this.ref.placeholder.style.display = 'none'
-    };
+    }
 
     handleBlur = () => {
         // this.ref.placeholder.style.display = 'inline'
-    };
+    }
 
     handleChange = (ev: Event) => {
         if (!(ev.target instanceof HTMLInputElement)) {
@@ -65,7 +65,7 @@ class ContentEditable extends Component {
         }
 
         this.setState({ lastValue: value })
-    };
+    }
 
     render() {
         log('ContentEditable#render')

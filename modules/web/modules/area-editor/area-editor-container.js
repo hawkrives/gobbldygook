@@ -25,13 +25,13 @@ export class AreaEditScreen extends React.Component {
             type: PropTypes.string,
             revision: PropTypes.string,
         }).isRequired, // react-router
-    };
+    }
 
     state = {
         area: null,
         code: '',
         isEditing: false,
-    };
+    }
 
     componentWillMount() {
         this.props.loadAllAreas()
@@ -76,13 +76,13 @@ export class AreaEditScreen extends React.Component {
         this.setState({
             area: data,
         })
-    };
+    }
 
     handleChange = newValue => {
         this.setState({ area: newValue })
-    };
+    }
 
-    handleSave = () => {};
+    handleSave = () => {}
 
     handleFocusChange = focused => {
         if (focused) {
@@ -92,7 +92,7 @@ export class AreaEditScreen extends React.Component {
         }
 
         this.setState({ isEditing: focused })
-    };
+    }
 
     render() {
         let { type, name, revision } = this.props.params

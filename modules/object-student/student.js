@@ -310,9 +310,7 @@ function moveScheduleInStudent(student, scheduleId, { year, semester } = {}) {
         throw new TypeError('moveScheduleInStudent: year must be a number.')
     }
     if (!isUndefined(semester) && !isNumber(semester)) {
-        throw new TypeError(
-            'moveScheduleInStudent: semester must be a number.'
-        )
+        throw new TypeError('moveScheduleInStudent: semester must be a number.')
     }
 
     if (!(scheduleId in student.schedules)) {

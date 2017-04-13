@@ -73,9 +73,7 @@ const checkStudentsMiddleware = (store: any) => (next: any) => (
             if (!(id in oldStudents)) {
                 return true
             }
-            return (
-                newStudents[id].data.present !== oldStudents[id].data.present
-            )
+            return newStudents[id].data.present !== oldStudents[id].data.present
         })
     }
 

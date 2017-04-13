@@ -1,9 +1,7 @@
 import { parse } from '../../parse-hanson-string'
 
-const f = str =>
-    expect(() => parse(str, { startRule: 'Filter' })).not.toThrow()
-const r = str =>
-    expect(() => parse(str, { startRule: 'Result' })).not.toThrow()
+const f = str => expect(() => parse(str, { startRule: 'Filter' })).not.toThrow()
+const r = str => expect(() => parse(str, { startRule: 'Result' })).not.toThrow()
 const t = (str, msg) => expect(() => parse(str)).toThrow(msg)
 
 describe('parse-hanson-string', () => {

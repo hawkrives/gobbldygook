@@ -14,7 +14,7 @@ type AreaOfStudy = {
     type: string,
     revision: string,
     sourcePath: string,
-};
+}
 
 export function buildRemoveAreaOps(areas: AreaOfStudy[]) {
     return fromPairs(map(areas, item => [item.sourcePath, null]))

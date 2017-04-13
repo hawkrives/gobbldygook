@@ -84,7 +84,7 @@ AreaPicker.propTypes = {
 export default class AreaPickerContainer extends React.Component {
     state = {
         filter: '',
-    };
+    }
 
     render() {
         return (

@@ -41,7 +41,7 @@ BrowserButton.propTypes = {
 export class BrowserExtensionsComponent extends React.Component {
     static propTypes = {
         onInstall: PropTypes.func.isRequired,
-    };
+    }
 
     state: {
         installError: ?Error,
@@ -51,13 +51,13 @@ export class BrowserExtensionsComponent extends React.Component {
         installAttempted: false,
         installError: null,
         extensionInstalled: false,
-    };
+    }
 
     checkExtensionStatus = () => {
         if (global.gobbldygook_extension >= '1.0.0') {
             this.setState({ extensionInstalled: true })
         }
-    };
+    }
 
     installChromeExtension = (ev: Event) => {
         ev.preventDefault()
@@ -66,7 +66,7 @@ export class BrowserExtensionsComponent extends React.Component {
         installChromeExtension()
             .then(this.installSuccess)
             .catch(this.installFailure)
-    };
+    }
 
     installFirefoxExtension = (ev: Event) => {
         ev.preventDefault()
@@ -75,7 +75,7 @@ export class BrowserExtensionsComponent extends React.Component {
         installFirefoxExtension()
             .then(this.installSuccess)
             .catch(this.installFailure)
-    };
+    }
 
     installOperaExtension = (ev: Event) => {
         ev.preventDefault()
@@ -84,20 +84,20 @@ export class BrowserExtensionsComponent extends React.Component {
         installOperaExtension()
             .then(this.installSuccess)
             .catch(this.installFailure)
-    };
+    }
 
-    installSafariExtension = () => {};
+    installSafariExtension = () => {}
 
-    installEdgeExtension = () => {};
+    installEdgeExtension = () => {}
 
     installSuccess = () => {
         this.setState({ installAttempted: true })
         this.props.onInstall()
-    };
+    }
 
     installFailure = (err: Error) => {
         this.setState({ installError: err, installAttempted: true })
-    };
+    }
 
     detectBrowser() {
         return brwsr()

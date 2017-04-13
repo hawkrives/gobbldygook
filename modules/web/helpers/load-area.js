@@ -31,7 +31,7 @@ type AreaQueryType = {
     revision: string,
     source: string,
     isCustom: string,
-};
+}
 
 const baseUrl = 'https://hawkrives.github.io/gobbldygook-area-data'
 const networkCache = Object.create(null)

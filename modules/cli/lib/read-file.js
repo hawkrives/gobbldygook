@@ -26,9 +26,7 @@ module.exports.loadYamlFile = loadYamlFile
 function loadYamlFile(pathOrUrl) {
     return startsWith(pathOrUrl, 'http')
         ? fetch(pathOrUrl).then(status).then(text).then(yaml.safeLoad)
-        : fs
-              .readFileAsync(pathOrUrl, { encoding: 'utf-8' })
-              .then(yaml.safeLoad)
+        : fs.readFileAsync(pathOrUrl, { encoding: 'utf-8' }).then(yaml.safeLoad)
 }
 
 module.exports.tryReadFile = tryReadFile

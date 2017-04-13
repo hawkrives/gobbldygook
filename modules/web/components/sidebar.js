@@ -21,7 +21,7 @@ import {
 
 import './sidebar.scss'
 
-type StudentType = Object;
+type StudentType = Object
 type PropTypes = {
     children: React$Element<any>,
     redo: () => any,
@@ -34,7 +34,7 @@ type PropTypes = {
         },
     },
     undo: () => any,
-};
+}
 
 function Sidebar(props: PropTypes) {
     const { undo, redo } = props

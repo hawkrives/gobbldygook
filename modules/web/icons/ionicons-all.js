@@ -53,17 +53,13 @@ export const androidArrowDropdownCircle = (
         <path d="M256 48C141.125 48 48 141.125 48 256s93.125 208 208 208 208-93.125 208-208S370.875 48 256 48zm0 272l-96-96h192l-96 96z" />
     </g>
 )
-export const androidArrowDropdown = (
-    <g><path d="M128 192l128 128 128-128" /></g>
-)
+export const androidArrowDropdown = <g><path d="M128 192l128 128 128-128" /></g>
 export const androidArrowDropleftCircle = (
     <g>
         <path d="M464 256c0-114.875-93.125-208-208-208S48 141.125 48 256s93.125 208 208 208 208-93.125 208-208zm-272 0l96-96v192l-96-96z" />
     </g>
 )
-export const androidArrowDropleft = (
-    <g><path d="M320 128L192 256l128 128" /></g>
-)
+export const androidArrowDropleft = <g><path d="M320 128L192 256l128 128" /></g>
 export const androidArrowDroprightCircle = (
     <g>
         <path d="M256 464c114.875 0 208-93.125 208-208S370.875 48 256 48 48 141.125 48 256s93.125 208 208 208zm-32-112V160l96 96-96 96z" />

@@ -45,9 +45,7 @@ describe('ModifierExpression', () => {
     })
 
     it('can count from a where-statement', () => {
-        expect(
-            parse('one course from courses where {a = b}')
-        ).toMatchSnapshot()
+        expect(parse('one course from courses where {a = b}')).toMatchSnapshot()
     })
 
     it('can count from a where-statement, with the input filtered by all children', () => {
