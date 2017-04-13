@@ -12,7 +12,7 @@ type ListProps = {
     children?: any,
     className?: string,
     type?: 'inline' | 'number' | 'bullet' | 'plain',
-};
+}
 
 export default function List(props: ListProps) {
     const { children, type = 'inline' } = props

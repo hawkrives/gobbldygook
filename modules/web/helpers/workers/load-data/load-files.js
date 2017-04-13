@@ -19,7 +19,7 @@ type Args = {|
     notification: Notification,
     oldestYear: number,
     type: InfoFileTypeEnum,
-|};
+|}
 
 export default function loadFiles(url: string, baseUrl: string) {
     log(url)

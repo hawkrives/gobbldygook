@@ -9,7 +9,7 @@ type CourseTitleProps = {
     name: string,
     title?: string,
     type?: string,
-};
+}
 
 export default function CourseTitle({
     name,

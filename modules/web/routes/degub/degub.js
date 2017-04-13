@@ -71,7 +71,7 @@ Degub.propTypes = {
 class DegubContainer extends React.Component {
     static propTypes = {
         loadStudents: PropTypes.func.isRequired,
-    };
+    }
     componentWillMount() {
         this.props.loadStudents()
     }

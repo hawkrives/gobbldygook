@@ -1,8 +1,4 @@
-import {
-    expandYear,
-    expandYearToFull,
-    expandYearToShort,
-} from '../expand-year'
+import { expandYear, expandYearToFull, expandYearToShort } from '../expand-year'
 
 describe('expandYear', () => {
     it('expands a year to year-(year+1)', () => {

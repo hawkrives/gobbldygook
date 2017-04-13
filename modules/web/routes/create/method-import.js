@@ -10,9 +10,7 @@ import {
     convertStudent,
     semesterName,
 } from '../../../school-st-olaf-college'
-import {
-    BrowserExtensionsComponent,
-} from '../../components/browser-extensions'
+import { BrowserExtensionsComponent } from '../../components/browser-extensions'
 import { getCourse } from '../../helpers/get-courses'
 import { StudentSummary } from '../../modules/student/student-summary'
 import map from 'lodash/map'
@@ -30,7 +28,7 @@ class SISImportScreen extends React.Component {
     static propTypes = {
         dispatch: PropTypes.func.isRequired, // redux
         router: PropTypes.object.isRequired,
-    };
+    }
 
     state = {
         loggedIn: null,
@@ -40,7 +38,7 @@ class SISImportScreen extends React.Component {
         selectedId: null,
         student: null,
         extensionInstalled: false,
-    };
+    }
 
     componentWillMount() {
         this.checkLoginState()
@@ -76,7 +74,7 @@ class SISImportScreen extends React.Component {
                     this.setState({ error: serializeError(err) })
                 }
             })
-    };
+    }
 
     handleImportData = () => {
         getStudentInfo(this.state.selectedId)
@@ -86,18 +84,18 @@ class SISImportScreen extends React.Component {
                 log(err)
                 this.setState({ error: serializeError(err) })
             })
-    };
+    }
 
     handleCreateStudent = () => {
         let action = initStudent(this.state.student)
         this.props.dispatch(action)
         this.props.router.push(`/s/${action.payload.id}`)
-    };
+    }
 
     handleSelectId = value => {
         this.setState({ selectedId: value })
         this.handleImportData()
-    };
+    }
 
     render() {
         let { student, checkingLogin, loggedIn, error, ids } = this.state

@@ -7,7 +7,7 @@ import './loading.scss'
 type LoadingProps = {
     children?: any,
     className?: string,
-};
+}
 
 export default function Loading({ className, children }: LoadingProps) {
     return (

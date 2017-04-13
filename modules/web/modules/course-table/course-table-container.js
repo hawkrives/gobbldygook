@@ -9,9 +9,7 @@ import {
     addSchedule,
     destroySchedules,
 } from '../../redux/students/actions/schedules'
-import {
-    findFirstAvailableYear,
-} from '../../helpers/find-first-available-year'
+import { findFirstAvailableYear } from '../../helpers/find-first-available-year'
 import {
     findFirstAvailableSemester,
 } from '../../helpers/find-first-available-semester'

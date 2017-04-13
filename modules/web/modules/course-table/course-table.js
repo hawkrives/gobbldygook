@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { expandYear } from '../../../school-st-olaf-college/course-info'
 
-import {
-    findFirstAvailableYear,
-} from '../../helpers/find-first-available-year'
+import { findFirstAvailableYear } from '../../helpers/find-first-available-year'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'

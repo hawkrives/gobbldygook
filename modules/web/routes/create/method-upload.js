@@ -18,12 +18,12 @@ class UploadFileScreen extends React.Component {
     static propTypes = {
         dispatch: PropTypes.func.isRequired,
         router: PropTypes.object.isRequired,
-    };
+    }
 
     state = {
         files: [],
         students: [],
-    };
+    }
 
     handleFileDrop = files => {
         log(files)
@@ -39,11 +39,11 @@ class UploadFileScreen extends React.Component {
         }))
         this.setState({ files })
         this.convertFilesToStudents(files)
-    };
+    }
 
     handleOpenPicker = () => {
         this.dropzone.open()
-    };
+    }
 
     convertOneFile = file => {
         file.data
@@ -72,17 +72,17 @@ class UploadFileScreen extends React.Component {
                     students: this.state.students.concat(student),
                 })
             })
-    };
+    }
 
     convertFilesToStudents = files => {
         this.setState({ students: [] })
         files.forEach(this.convertOneFile)
-    };
+    }
 
     handleImportStudents = () => {
         this.state.students.forEach(this.props.dispatch)
         this.props.dispatch(this.props.router.push('/'))
-    };
+    }
 
     render() {
         let { students } = this.state

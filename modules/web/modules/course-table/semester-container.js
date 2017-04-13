@@ -21,7 +21,7 @@ export class SemesterContainer extends React.Component {
         semester: PropTypes.number.isRequired,
         student: PropTypes.object.isRequired,
         year: PropTypes.number.isRequired,
-    };
+    }
 
     shouldComponentUpdate(nextProps) {
         return (
@@ -40,7 +40,7 @@ export class SemesterContainer extends React.Component {
         )
         const scheduleIds = map(thisSemesterSchedules, s => s.id)
         this.props.destroySchedules(student.id, ...scheduleIds)
-    };
+    }
 
     render() {
         const { student, semester, year, addCourse, moveCourse } = this.props

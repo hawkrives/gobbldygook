@@ -13,8 +13,8 @@ import Button from '../../components/button'
 
 import './area-of-study-group.scss'
 
-type AreaOfStudyType = Object;
-type Student = Object;
+type AreaOfStudyType = Object
+type Student = Object
 type PropTypes = {
     addArea: (string, AreaOfStudyType) => any,
     allAreasOfType: AreaOfStudyType[],
@@ -25,22 +25,22 @@ type PropTypes = {
     showAreaPicker: boolean,
     student: Student,
     type: AreaOfStudyTypeEnum,
-};
+}
 
 class AreaOfStudyGroup extends React.PureComponent {
-    props: PropTypes;
+    props: PropTypes
 
     onAddArea = (area: AreaOfStudy, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         this.props.addArea(this.props.student.id, area)
-    };
+    }
 
     onRemoveArea = (areaQuery: any, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         this.props.removeArea(this.props.student.id, areaQuery)
-    };
+    }
 
     render() {
         const props = this.props

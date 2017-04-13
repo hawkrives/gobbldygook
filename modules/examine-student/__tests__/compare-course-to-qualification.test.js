@@ -213,9 +213,7 @@ describe('compareCourseToQualification', () => {
                 $and: [2013, 2013],
             },
         }
-        expect(compareCourseToQualification(course2, qualification2)).toBe(
-            true
-        )
+        expect(compareCourseToQualification(course2, qualification2)).toBe(true)
     })
 
     it('throws if $value is a boolean but neither $and nor $or', () => {

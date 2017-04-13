@@ -22,7 +22,7 @@ class ManualCreationScreen extends React.Component {
         areasLoading: PropTypes.bool.isRequired, // redux
         dispatch: PropTypes.func.isRequired, // redux
         router: PropTypes.object.isRequired,
-    };
+    }
 
     state = {
         error: '',
@@ -36,7 +36,7 @@ class ManualCreationScreen extends React.Component {
         concentration: [],
         emphasis: [],
         sumitted: false,
-    };
+    }
 
     getAreaOptions = type => {
         let { graduation } = this.state
@@ -51,15 +51,15 @@ class ManualCreationScreen extends React.Component {
             label: `${name} (${revision})`,
         }))
         return options
-    };
+    }
 
     handleAreaChange = type => values => {
         this.setState({ [type]: values })
-    };
+    }
 
     handleNameChange = ev => {
         this.setState({ name: ev.target.value })
-    };
+    }
 
     handleMatriculationChange = ev => {
         let val = Number(ev.target.value)
@@ -69,7 +69,7 @@ class ManualCreationScreen extends React.Component {
             this.setState({ matriculationIsValid: true, matriculation: val })
         }
         this.checkValidity()
-    };
+    }
 
     handleGraduationChange = ev => {
         let val = Number(ev.target.value)
@@ -79,7 +79,7 @@ class ManualCreationScreen extends React.Component {
             this.setState({ graduationIsValid: true, graduation: val })
         }
         this.checkValidity()
-    };
+    }
 
     checkValidity = () => {
         let errors = []
@@ -96,7 +96,7 @@ class ManualCreationScreen extends React.Component {
         } else {
             this.setState({ error: '' })
         }
-    };
+    }
 
     onCreateStudent = () => {
         this.setState({ submitted: true })
@@ -125,7 +125,7 @@ class ManualCreationScreen extends React.Component {
         let action = initStudent(rawStudent)
         this.props.dispatch(action)
         this.props.router.push(`/s/${action.payload.id}`)
-    };
+    }
 
     render() {
         let nameEl = (

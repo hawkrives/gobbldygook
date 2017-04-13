@@ -17,7 +17,7 @@ type CourseRemovalBoxProps = {
     connectDropTarget: () => any, // react-dnd
     isOver: boolean, // react-dnd
     removeCourse: () => any, // studentId is embedded in the passed function
-};
+}
 function CourseRemovalBox(props: CourseRemovalBoxProps) {
     const className = cx('course-removal-box', {
         'can-drop': props.canDrop,

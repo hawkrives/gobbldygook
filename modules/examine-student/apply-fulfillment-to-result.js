@@ -6,7 +6,7 @@ type ReturnType = {
     computedResult: boolean,
     matches: Course[],
     counted: number,
-};
+}
 
 export default function applyFulfillmentToResult({
     fulfillment,

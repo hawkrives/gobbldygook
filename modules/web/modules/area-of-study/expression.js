@@ -130,7 +130,7 @@ export default function Expression(props) {
     let result = null
 
     if ($type === 'boolean') {
-        ({ contents } = makeBooleanExpression(props))
+        ;({ contents } = makeBooleanExpression(props))
     } else if ($type === 'course') {
         // _request is the original course that was written in the spec.
         // $course is the matched course. It's used mostly by where-expressions and the like.
@@ -145,14 +145,14 @@ export default function Expression(props) {
         contents = expr.$requirement
         result = <ResultIndicator result={computationResult} />
     } else if ($type === 'of') {
-        ({ contents, description } = makeOfExpression(props))
+        ;({ contents, description } = makeOfExpression(props))
     } else if ($type === 'modifier') {
-        ({ description } = makeModifierExpression(props))
+        ;({ description } = makeModifierExpression(props))
         result = <ResultIndicator result={computationResult} />
     } else if ($type === 'where') {
-        ({ description, contents } = makeWhereExpression(props))
+        ;({ description, contents } = makeWhereExpression(props))
     } else if ($type === 'occurrence') {
-        ({ description, contents } = makeOccurrenceExpression(props))
+        ;({ description, contents } = makeOccurrenceExpression(props))
     } else {
         log(`<Expression />: type not handled: ${$type}`)
         log(props)

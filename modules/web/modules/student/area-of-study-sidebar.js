@@ -24,21 +24,21 @@ const {
 } = require('../../../object-student/sort-studies-by-type')
 const { areaTypeConstants } = require('../../../object-student/area-types')
 
-type AreaOfStudy = Object;
-type Student = Object;
+type AreaOfStudy = Object
+type Student = Object
 type PropTypes = {
     allAreas: AreaOfStudy[],
     student: Student,
-};
+}
 
 class AreaOfStudySidebarComponent extends React.PureComponent {
-    props: PropTypes;
+    props: PropTypes
 
     state: {
         showAreaPickerFor: { [key: string]: boolean },
     } = {
         showAreaPickerFor: {},
-    };
+    }
 
     showAreaPicker = (type: string, ev: Event) => {
         ev.stopPropagation()
@@ -46,7 +46,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
         this.setState(state => ({
             showAreaPickerFor: { ...state.showAreaPickerFor, [type]: true },
         }))
-    };
+    }
 
     hideAreaPicker = (type: string, ev: Event) => {
         ev.stopPropagation()
@@ -54,7 +54,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
         this.setState(state => ({
             showAreaPickerFor: { ...state.showAreaPickerFor, [type]: false },
         }))
-    };
+    }
 
     render() {
         const props = this.props
@@ -157,6 +157,4 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
 
 const mapState = state => ({ allAreas: state.areas.data })
 
-export const AreaOfStudySidebar = connect(mapState)(
-    AreaOfStudySidebarComponent
-)
+export const AreaOfStudySidebar = connect(mapState)(AreaOfStudySidebarComponent)

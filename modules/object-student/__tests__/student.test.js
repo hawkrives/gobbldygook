@@ -351,9 +351,7 @@ describe('changeStudentSetting', () => {
 
 describe('moveScheduleInStudent', () => {
     it('throws if not given anywhere to move to', () => {
-        expect(() => moveScheduleInStudent({}, '', {})).toThrowError(
-            RangeError
-        )
+        expect(() => moveScheduleInStudent({}, '', {})).toThrowError(RangeError)
     })
 
     it('moves just a year', () => {

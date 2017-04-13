@@ -30,7 +30,7 @@ type PropTypes = {
     path: string[],
     result?: Object,
     topLevel?: boolean,
-};
+}
 
 function Requirement(props: PropTypes) {
     const { topLevel = false } = props
@@ -136,11 +136,11 @@ function Requirement(props: PropTypes) {
 export default class ExpandableRequirement extends Component {
     state = {
         open: true,
-    };
+    }
 
     handleToggleOpen = () => {
         this.setState({ open: !this.state.open })
-    };
+    }
 
     render() {
         return (

@@ -40,7 +40,7 @@ const welcomeMessages = [
 
 const welcomeMessage = welcomeMessages[2]
 
-type Student = Object;
+type Student = Object
 
 export class StudentSummary extends React.PureComponent {
     props: {
@@ -51,7 +51,7 @@ export class StudentSummary extends React.PureComponent {
         showAvatar?: boolean,
         showMessage?: boolean,
         student: Student,
-    };
+    }
 
     render() {
         const {
@@ -110,14 +110,12 @@ export class Header extends React.PureComponent {
         name: string,
         onChangeName?: string => any,
         showAvatar: boolean,
-    };
+    }
 
     render() {
         const props = this.props
 
-        const className = props.canGraduate
-            ? 'can-graduate'
-            : 'cannot-graduate'
+        const className = props.canGraduate ? 'can-graduate' : 'cannot-graduate'
 
         const avatar = props.showAvatar
             ? <AvatarLetter
@@ -151,16 +149,16 @@ export class Footer extends React.PureComponent {
     goodGraduationMessage = [
         "It looks like you'll make it! Just follow the plan, and",
         'go over my output with your advisor a few times.',
-    ].join(' ');
+    ].join(' ')
 
     badGraduationMessage = [
         "You haven't planned everything out yet.",
         'Ask your advisor if you need help fitting everything in.',
-    ].join(' ');
+    ].join(' ')
 
     props: {
         canGraduate: boolean,
-    };
+    }
 
     render() {
         const msg = this.props.canGraduate
@@ -181,7 +179,7 @@ export class DateSummary extends React.PureComponent {
         onChangeMatriculation?: string => any,
         matriculation: string,
         graduation: string,
-    };
+    }
 
     render() {
         const props = this.props
@@ -216,7 +214,7 @@ export class DateSummary extends React.PureComponent {
 export class DegreeSummary extends React.PureComponent {
     props: {
         studies: { type: string, name: string }[],
-    };
+    }
 
     render() {
         const grouped: {
@@ -272,7 +270,7 @@ export class CreditSummary extends React.PureComponent {
     props: {
         currentCredits: number,
         neededCredits: number,
-    };
+    }
 
     render() {
         const { currentCredits, neededCredits } = this.props

@@ -10,7 +10,7 @@ type ModalProps = {
     children?: any,
     modalClassName?: string,
     onClose: () => any,
-};
+}
 
 export default function Modal(props: ModalProps) {
     return (

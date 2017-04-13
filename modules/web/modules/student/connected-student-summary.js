@@ -12,7 +12,7 @@ import {
 
 import { StudentSummary } from './student-summary'
 
-type Student = Object;
+type Student = Object
 
 class WrappedStudentSummary extends React.PureComponent {
     props: {
@@ -20,21 +20,21 @@ class WrappedStudentSummary extends React.PureComponent {
         changeMatriculation: string => any,
         changeName: string => any,
         student: Student,
-    };
+    }
 
     handleChangeGraduation = (value: string) => {
         const newGraduation = parseInt(value) || 0
         this.props.changeGraduation(this.props.student.id, newGraduation)
-    };
+    }
 
     handleChangeMatriculation = (value: string) => {
         const newMatriculation = parseInt(value) || 0
         this.props.changeMatriculation(this.props.student.id, newMatriculation)
-    };
+    }
 
     handleChangeName = (value: string) => {
         this.props.changeName(this.props.student.id, value)
-    };
+    }
 
     render() {
         return (

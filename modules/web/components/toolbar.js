@@ -3,7 +3,7 @@ import React from 'react'
 import cx from 'classnames'
 import './toolbar.scss'
 
-type PropTypes = { children?: any, className?: string, style?: Object };
+type PropTypes = { children?: any, className?: string, style?: Object }
 
 export default function Toolbar(props: PropTypes) {
     return (

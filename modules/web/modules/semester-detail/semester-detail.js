@@ -22,7 +22,7 @@ export default class SemesterDetail extends React.Component {
         }),
         params: PropTypes.object, // react-router
         student: PropTypes.object,
-    };
+    }
 
     constructor() {
         super()

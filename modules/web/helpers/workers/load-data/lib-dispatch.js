@@ -20,10 +20,10 @@ export const quotaExceededError = (dbName: string) => {
 }
 
 export class Notification {
-    id: string;
-    type: string;
-    length = 1;
-    store = 'notifications';
+    id: string
+    type: string
+    length = 1
+    store = 'notifications'
 
     constructor(notificationType: string) {
         this.id = notificationType

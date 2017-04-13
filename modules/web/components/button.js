@@ -16,14 +16,14 @@ type ButtonProps = {
     title?: string,
     to?: string | Object,
     type: 'flat' | 'raised',
-};
+}
 
 export default class Button extends Component {
-    props: ButtonProps;
+    props: ButtonProps
 
     static defaultProps = {
         type: 'flat',
-    };
+    }
 
     shouldComponentUpdate(nextProps: ButtonProps) {
         return compareProps(this.props, nextProps)

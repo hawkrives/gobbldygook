@@ -13,7 +13,7 @@ import GraduationStatus from './graduation-status'
 
 import './student.scss'
 
-type StudentType = Object;
+type StudentType = Object
 type PropTypes = {
     content: React$Element<any>, // from react-router
     loadStudent: string => any, // redux
@@ -21,10 +21,10 @@ type PropTypes = {
     params: { studentId: string }, // react-router
     sidebar: ?React$Element<any>, // from react-router
     student: StudentType, // redux
-};
+}
 
 export class Student extends Component {
-    props: PropTypes;
+    props: PropTypes
 
     componentWillMount() {
         this.loadStudent(this.props)
@@ -43,7 +43,7 @@ export class Student extends Component {
         if (!props.student || didStudentChange) {
             props.loadStudent(props.params.studentId)
         }
-    };
+    }
 
     render() {
         if (!this.props.student) {

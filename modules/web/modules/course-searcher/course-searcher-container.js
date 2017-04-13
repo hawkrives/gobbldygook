@@ -35,7 +35,7 @@ export class CourseSearcherContainer extends React.Component {
         studentId: PropTypes.string,
         submitQuery: PropTypes.func.isRequired, // redux
         updateQuery: PropTypes.func.isRequired, // redux
-    };
+    }
 
     shouldComponentUpdate(nextProps, nextState) {
         return (
@@ -47,25 +47,25 @@ export class CourseSearcherContainer extends React.Component {
     handleQuerySubmit = () => {
         this.props.setPartialQuery(this.props.partial)
         this.props.submitQuery()
-    };
+    }
 
     handleQueryChange = ev => {
         this.props.updateQuery(ev.target.value)
-    };
+    }
 
     handleKeyDown = ev => {
         if (ev.keyCode === 13) {
             this.handleQuerySubmit()
         }
-    };
+    }
 
     handleSortChange = ev => {
         this.props.sortResults(ev.target.value)
-    };
+    }
 
     handleGroupByChange = ev => {
         this.props.groupResults(ev.target.value)
-    };
+    }
 
     render() {
         return (
