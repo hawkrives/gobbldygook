@@ -25,8 +25,9 @@ function canAdd({ query, value, primaryKey, results } = {}) {
     // and then that it's not already in the array.
     // Note that because JS checks against identity, we use isEqual to
     // do an equality check against the two objects.
-    return checkCourseAgainstQuery(query, value) &&
-        !includes(results, primaryKey)
+    return (
+        checkCourseAgainstQuery(query, value) && !includes(results, primaryKey)
+    )
 }
 
 const preferredKeyOrder = ['deptnum']
@@ -60,7 +61,8 @@ function queryStore(query) {
 
         // Filter down to just the requested keys that also have indices
         let keysWithIndices = filter(indexKeys, key =>
-            includes(this.indexes, key))
+            includes(this.indexes, key)
+        )
 
         // Prioritize some keys over others
         keysWithIndices = sortBy(keysWithIndices, sortKeys)
@@ -70,11 +72,13 @@ function queryStore(query) {
         if (size(keysWithIndices)) {
             // We only want to search some indices
             const indices = filter(this.indexes, index =>
-                includes(keysWithIndices, index))
+                includes(keysWithIndices, index)
+            )
 
             // Run the queries
             const resultPromises = map(indices, indexName =>
-                this.index(indexName).query(query, true))
+                this.index(indexName).query(query, true)
+            )
 
             // Wait for all indices to finish querying before getting their results
             const allFoundKeys = Promise.all(resultPromises)

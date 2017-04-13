@@ -41,16 +41,26 @@ function findSemesterList(student) {
     return byYear
 }
 
-const removeFromSemester = ({ studentId, removeCourse, clbid, scheduleId }) =>
-    () => {
-        if (studentId) {
-            removeCourse(studentId, scheduleId, clbid)
-        }
+const removeFromSemester = ({
+    studentId,
+    removeCourse,
+    clbid,
+    scheduleId,
+}) => () => {
+    if (studentId) {
+        removeCourse(studentId, scheduleId, clbid)
     }
+}
 
-function moveToSchedule(
-    { ev, moveCourse, addCourse, removeCourse, scheduleId, studentId, clbid }
-) {
+function moveToSchedule({
+    ev,
+    moveCourse,
+    addCourse,
+    removeCourse,
+    scheduleId,
+    studentId,
+    clbid,
+}) {
     const targetScheduleId = ev.target.value
     if (targetScheduleId === '$none') {
         return
@@ -65,9 +75,14 @@ function moveToSchedule(
     }
 }
 
-function SemesterSelector(
-    { scheduleId, student, moveCourse, addCourse, removeCourse, clbid }
-) {
+function SemesterSelector({
+    scheduleId,
+    student,
+    moveCourse,
+    addCourse,
+    removeCourse,
+    clbid,
+}) {
     return (
         <select
             className="semester-select"
@@ -188,7 +203,8 @@ function ModalCourse(props) {
                                                 {', in '}
                                                 {o.location}
                                             </li>
-                                        )))}
+                                        ))
+                                    )}
                                 </ul>
                             </div>}
 

@@ -114,20 +114,24 @@ peg$SyntaxError.buildMessage = function(expected, found) {
             case 2:
                 return descriptions[0] + ' or ' + descriptions[1];
             default:
-                return descriptions.slice(0, -1).join(', ') +
+                return (
+                    descriptions.slice(0, -1).join(', ') +
                     ', or ' +
-                    descriptions[descriptions.length - 1];
+                    descriptions[descriptions.length - 1]
+                );
         }
     }
 
     function describeFound(found) {
         return found ? '"' + literalEscape(found) + '"' : 'end of input';
     }
-    return 'Expected ' +
+    return (
+        'Expected ' +
         describeExpected(expected) +
         ' but ' +
         describeFound(found) +
-        ' found.';
+        ' found.'
+    );
 };
 
 function peg$parse(input, options) {
@@ -373,8 +377,7 @@ function peg$parse(input, options) {
                 return 9;
             } else if (num === 'ten') {
                 return 10;
-            } else
-                throw new Error('invalid number "' + num + '"');
+            } else throw new Error('invalid number "' + num + '"');
         },
         peg$c101 = '!',
         peg$c102 = peg$literalExpectation('!', false),
@@ -4261,7 +4264,8 @@ function peg$parse(input, options) {
     var assign = require('lodash/assign');
     var normalizeDepartment = void 0;
     try {
-        normalizeDepartment = require('./convert-department').normalizeDepartment;
+        normalizeDepartment = require('./convert-department')
+            .normalizeDepartment;
     } catch (e) {
         normalizeDepartment = function normalizeDepartment(x) {
             return x;

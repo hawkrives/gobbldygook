@@ -116,9 +116,8 @@ describe('removeFabricationFromStudent', () => {
             title: "I'm a fabrication!",
         })
         expect(() =>
-            removeFabricationFromStudent(stuWithFab, 123)).toThrowError(
-            TypeError
-        )
+            removeFabricationFromStudent(stuWithFab, 123)
+        ).toThrowError(TypeError)
     })
 })
 
@@ -388,7 +387,8 @@ describe('moveScheduleInStudent', () => {
         expect(() =>
             moveScheduleInStudent(stu, sched.id, {
                 year: '2014',
-            })).toThrowError(TypeError)
+            })
+        ).toThrowError(TypeError)
     })
 
     it('throws if semester is not a number', () => {
@@ -397,7 +397,8 @@ describe('moveScheduleInStudent', () => {
         expect(() =>
             moveScheduleInStudent(stu, sched.id, {
                 semester: '5',
-            })).toThrowError(TypeError)
+            })
+        ).toThrowError(TypeError)
     })
 
     it('returns a new object', () => {
@@ -414,9 +415,8 @@ describe('moveScheduleInStudent', () => {
         let sched = Schedule()
         let stu = { schedules: {} }
         expect(() =>
-            moveScheduleInStudent(stu, sched.id, { year: 2000 })).toThrowError(
-            ReferenceError
-        )
+            moveScheduleInStudent(stu, sched.id, { year: 2000 })
+        ).toThrowError(ReferenceError)
     })
 })
 
@@ -465,9 +465,8 @@ describe('renameScheduleInStudent', () => {
         let sched = Schedule()
         let stu = { schedules: {} }
         expect(() =>
-            renameScheduleInStudent(stu, sched.id, 'third')).toThrowError(
-            ReferenceError
-        )
+            renameScheduleInStudent(stu, sched.id, 'third')
+        ).toThrowError(ReferenceError)
     })
 })
 
@@ -506,9 +505,8 @@ describe('addCourseToSchedule', () => {
         let sched = Schedule({ clbids: [456] })
         let stu = addScheduleToStudent(Student(), sched)
         expect(() =>
-            addCourseToSchedule(stu, sched.id + 'bad', 456)).toThrowError(
-            ReferenceError
-        )
+            addCourseToSchedule(stu, sched.id + 'bad', 456)
+        ).toThrowError(ReferenceError)
     })
 })
 
@@ -524,9 +522,8 @@ describe('removeCourseFromSchedule', () => {
         const sched = Schedule({ clbids: [123] })
         const stu = addScheduleToStudent(Student(), sched)
         expect(() =>
-            removeCourseFromSchedule(stu, sched.id, '918')).toThrowError(
-            TypeError
-        )
+            removeCourseFromSchedule(stu, sched.id, '918')
+        ).toThrowError(TypeError)
     })
 
     it('returns a new object', () => {
@@ -548,9 +545,8 @@ describe('removeCourseFromSchedule', () => {
         let sched = Schedule({ clbids: [456] })
         let stu = addScheduleToStudent(Student(), sched)
         expect(() =>
-            removeCourseFromSchedule(stu, sched.id + 'bad', 456)).toThrowError(
-            ReferenceError
-        )
+            removeCourseFromSchedule(stu, sched.id + 'bad', 456)
+        ).toThrowError(ReferenceError)
     })
 })
 
@@ -577,7 +573,8 @@ describe('reorderCourseInSchedule', () => {
             reorderCourseInSchedule(stu, sched.id, {
                 clbid: '123',
                 index: 1,
-            })).toThrowError(TypeError)
+            })
+        ).toThrowError(TypeError)
     })
 
     it('returns a new object', () => {
@@ -599,7 +596,8 @@ describe('reorderCourseInSchedule', () => {
             reorderCourseInSchedule(stu, sched.id, {
                 clbid: 123456789,
                 index: 0,
-            })).toThrowError(ReferenceError)
+            })
+        ).toThrowError(ReferenceError)
     })
 
     it('throws if the schedule id cannot be found', () => {
@@ -609,7 +607,8 @@ describe('reorderCourseInSchedule', () => {
             reorderCourseInSchedule(stu, sched.id + 'bad', {
                 clbid: 123,
                 index: 0,
-            })).toThrowError(ReferenceError)
+            })
+        ).toThrowError(ReferenceError)
     })
 
     it('truncates the requested index if it is greater than the number of courses', () => {

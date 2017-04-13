@@ -19,12 +19,14 @@ function AreaPicker(props) {
 
     const currentAreaNames = map(props.currentAreas, a => a.name)
     let onlyAvailableAreas = reject(props.areaList, area =>
-        includes(currentAreaNames, area.name))
+        includes(currentAreaNames, area.name)
+    )
 
     onlyAvailableAreas = filterAreaList(onlyAvailableAreas, { graduation })
 
     const filteredOnName = filter(onlyAvailableAreas, area =>
-        fuzzysearch(props.filterText, area.name.toLowerCase()))
+        fuzzysearch(props.filterText, area.name.toLowerCase())
+    )
 
     const areaList = map(filteredOnName, (area, i) => (
         <li key={area.name + i} className="area--choice">

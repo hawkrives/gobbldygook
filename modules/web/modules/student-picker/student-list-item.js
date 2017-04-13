@@ -16,7 +16,8 @@ import './student-list-item.scss'
 export default function StudentListItem(props) {
     const { student, isEditing, destroyStudent } = props
 
-    const isLoading = student.isLoading ||
+    const isLoading =
+        student.isLoading ||
         student.isFetching ||
         student.isValdiating ||
         student.isChecking
@@ -54,7 +55,8 @@ export default function StudentListItem(props) {
                         {map(
                             interpose(
                                 map(groupedStudies, group =>
-                                    group.map(s => s.name).join(' · ')),
+                                    group.map(s => s.name).join(' · ')
+                                ),
                                 <span className="joiner">|</span>
                             ),
                             (group, i) => (

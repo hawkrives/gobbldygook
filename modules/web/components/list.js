@@ -15,25 +15,20 @@ type ListProps = {
 };
 
 export default function List(props: ListProps) {
-    const {
-        children,
-        type = 'inline',
-    } = props
+    const { children, type = 'inline' } = props
 
-    let {
-        className,
-    } = props
+    let { className } = props
 
     // eslint-disable-next-line no-confusing-arrow
     const contents = ReactChildren.map(
         children,
         child =>
-            isValidElement(child)
+            (isValidElement(child)
                 ? cloneElement(child, {
                       ...child.props,
                       className: cx('list-item', child.props.className),
                   })
-                : child
+                : child)
     )
 
     className = cx('list', `list--${type}`, className)

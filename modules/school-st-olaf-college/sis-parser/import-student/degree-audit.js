@@ -56,7 +56,8 @@ function extractInformationFromAreaTable(table) {
     }
 }
 
-module.exports.extractInformationFromDegreeAudit = extractInformationFromDegreeAudit
+module.exports
+    .extractInformationFromDegreeAudit = extractInformationFromDegreeAudit
 function extractInformationFromDegreeAudit(auditInfo, infoElement) {
     let [degreeType] = getText(selectOne('h3', auditInfo)).match(/B\.[AM]\./)
     if (degreeType === 'B.A.') {

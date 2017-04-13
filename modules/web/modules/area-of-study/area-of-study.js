@@ -49,8 +49,10 @@ class AreaOfStudyContainer extends Component {
     };
 
     shouldComponentUpdate(nextProps: any, nextState: any) {
-        return compareProps(this.props, nextProps) ||
+        return (
+            compareProps(this.props, nextProps) ||
             compareProps(this.state, nextState)
+        )
     }
 
     startRemovalConfirmation = (ev: Event) => {
@@ -96,10 +98,7 @@ class AreaOfStudyContainer extends Component {
 
     render() {
         const props = this.props
-        const {
-            isOpen,
-            confirmRemoval: showConfirmRemoval,
-        } = this.state
+        const { isOpen, confirmRemoval: showConfirmRemoval } = this.state
 
         const {
             type = '???',
@@ -111,7 +110,8 @@ class AreaOfStudyContainer extends Component {
             _progress: progress,
             _error: error = '',
             _checked: checked = false,
-        } = props.area
+        } =
+            props.area
 
         const progressAt = typeof progress === 'object' ? progress.at : 0
         const progressOf = typeof progress === 'object' ? progress.of : 1
@@ -123,9 +123,7 @@ class AreaOfStudyContainer extends Component {
                         {slug && !isCustom && isOpen
                             ? <a
                                   className="catalog-link"
-                                  href={
-                                      `http://catalog.stolaf.edu/academic-programs/${slug}/`
-                                  }
+                                  href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
                                   target="_blank"
                                   onClick={ev => ev.stopPropagation()}
                                   title="View in the St. Olaf Catalog"

@@ -5,18 +5,15 @@ const some = require('lodash/some')
 const startsWith = require('lodash/startsWith')
 const path = require('path')
 
-const {
-    tryReadJsonFile,
-    loadFile,
-    loadJsonFile,
-} = require('./read-file')
+const { tryReadJsonFile, loadFile, loadJsonFile } = require('./read-file')
 const { cacheDir } = require('./dirs')
 
 const pify = require('pify')
 
 const fs = pify(require('graceful-fs'))
 
-const COURSE_INFO_LOCATION = process.env.COURSE_INFO ||
+const COURSE_INFO_LOCATION =
+    process.env.COURSE_INFO ||
     'https://stolaf.edu/people/rives/courses/info.json'
 // const AREA_INFO_LOCATION = process.env.AREA_INFO || 'https://stolaf.edu/people/rives/areas/info.json'
 

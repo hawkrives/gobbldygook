@@ -24,10 +24,12 @@ export class SemesterContainer extends React.Component {
     };
 
     shouldComponentUpdate(nextProps) {
-        return nextProps.student !== this.props.student ||
+        return (
+            nextProps.student !== this.props.student ||
             nextProps.addCourse !== this.props.addCourse ||
             nextProps.moveCourse !== this.props.moveCourse ||
             nextProps.destroySchedules !== this.props.destroySchedules
+        )
     }
 
     removeSemester = () => {

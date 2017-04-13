@@ -42,9 +42,8 @@ describe('saveStudent', () => {
         let s = JSON.parse(localStorage.getItem(student.id))
         let lastModified = s.dateLastModified
         await saveStudent(s)
-        let newLastModified = JSON.parse(
-            localStorage.getItem(student.id)
-        ).dateLastModified
+        let newLastModified = JSON.parse(localStorage.getItem(student.id))
+            .dateLastModified
         expect(newLastModified).toBe(lastModified)
     })
 })

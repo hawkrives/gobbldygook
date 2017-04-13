@@ -60,8 +60,9 @@ export function filterFiles({ type }: Args, files: InfoFileRef[]) {
     // with either the path or `null`.
     const filesToLoad = files.map(file =>
         needsUpdate(type, file.path, file.hash).then(
-            update => update ? file : null
-        ))
+            update => (update ? file : null)
+        )
+    )
 
     // Finally, we filter the items
     return Promise.all(filesToLoad).then(filterByTruthiness)

@@ -26,22 +26,19 @@ function makeBooleanExpression({ expr, ctx }) {
         kind = '$or'
     }
 
-    const contents = expr[kind].reduce(
-        (acc, exp, i) => {
-            if (i > 0) {
-                acc.push(
-                    <span key={`${i}-joiner`} className="joiner">
-                        {JOINERS[kind]}
-                    </span>
-                )
-            }
+    const contents = expr[kind].reduce((acc, exp, i) => {
+        if (i > 0) {
+            acc.push(
+                <span key={`${i}-joiner`} className="joiner">
+                    {JOINERS[kind]}
+                </span>
+            )
+        }
 
-            acc.push(<Expression key={i} expr={exp} ctx={ctx} />)
+        acc.push(<Expression key={i} expr={exp} ctx={ctx} />)
 
-            return acc
-        },
-        []
-    )
+        return acc
+    }, [])
 
     return { contents }
 }
@@ -53,7 +50,8 @@ const ofLookup = {
 }
 
 function makeOfExpression({ expr, ctx }) {
-    const description = ofLookup[expr.$count.$was] ||
+    const description =
+        ofLookup[expr.$count.$was] ||
         `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
 
     // const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>

@@ -41,9 +41,7 @@ export function ShareSheet(props) {
                     <li>
                         <a
                             download={`${student.name}.gbstudent`}
-                            href={
-                                `data:text/json;charset=utf-8,${encodeStudent(student)}`
-                            }
+                            href={`data:text/json;charset=utf-8,${encodeStudent(student)}`}
                         >
                             Download file
                         </a>

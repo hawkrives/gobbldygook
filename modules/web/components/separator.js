@@ -10,12 +10,7 @@ type SeparatorProps = {
 };
 
 export default function Separator(props: SeparatorProps) {
-    const {
-        className,
-        flex = 1,
-        style,
-        type = 'spacer',
-    } = props
+    const { className, flex = 1, style, type = 'spacer' } = props
 
     let renderedStyle = {
         ...style,

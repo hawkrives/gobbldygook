@@ -14,25 +14,29 @@ describe('buildQueryFromString', () => {
     })
 
     it('builds a query string with multiple keys into a query object', () => {
-        let query = 'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
+        let query =
+            'dept: Computer Science  dept: Asian Studies  name: Parallel  level: 300  year: $OR year:2013 year: 2014'
 
         expect(buildQueryFromString(query)).toMatchSnapshot()
     })
 
     it('builds a query string with variable-case keys into a query object', () => {
-        let query = 'dept: ASIAN  Dept: Religion  title: "Japan*"  LEVEL: 200  year: 2014  semester: $OR  semester: 3  semester: 1'
+        let query =
+            'dept: ASIAN  Dept: Religion  title: "Japan*"  LEVEL: 200  year: 2014  semester: $OR  semester: 3  semester: 1'
 
         expect(buildQueryFromString(query)).toMatchSnapshot()
     })
 
     it('builds a query string even with somewhat unconventional input', () => {
-        let query = 'department: American Conversations  name: Independence  year: 2014  time: Tuesdays after 12'
+        let query =
+            'department: American Conversations  name: Independence  year: 2014  time: Tuesdays after 12'
 
         expect(buildQueryFromString(query)).toMatchSnapshot()
     })
 
     it('builds a query string while deduplicating synonyms of keys', () => {
-        let query = 'ges: $AND  geneds: history of western culture gened: HBS  semester: Spring  year: 2014'
+        let query =
+            'ges: $AND  geneds: history of western culture gened: HBS  semester: Spring  year: 2014'
 
         expect(buildQueryFromString(query)).toMatchSnapshot()
     })
@@ -88,7 +92,8 @@ describe('buildQueryFromString', () => {
     })
 
     it('sorts a five-year token string correctly', () => {
-        let query = 'year: $OR year: 2010 year: 2011 year: 2012 year: 2013 year: 2014'
+        let query =
+            'year: $OR year: 2010 year: 2011 year: 2012 year: 2013 year: 2014'
 
         expect(buildQueryFromString(query)).toMatchSnapshot()
     })
@@ -123,7 +128,8 @@ describe('buildQueryFromString', () => {
     })
 
     it('parses credits correctly', () => {
-        let query = 'credits: $OR credits: 1.0 credits: 0.25 credits: .25 credits: 1'
+        let query =
+            'credits: $OR credits: 1.0 credits: 0.25 credits: .25 credits: 1'
 
         expect(buildQueryFromString(query)).toMatchSnapshot()
     })

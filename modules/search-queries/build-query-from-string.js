@@ -186,7 +186,8 @@ export function buildQueryFromString(queryString = '', opts = {}) {
     // Perform initial cleaning of the values, dependent on the keys
     let paired = unzip(
         map(toPairs(zipped), kvpairs =>
-            organizeValues(kvpairs, opts.words, opts.profWords))
+            organizeValues(kvpairs, opts.words, opts.profWords)
+        )
     )
 
     let organized = zipToObjectWithArrays(...paired) // spread the [k, v] pairs into the arguments properly

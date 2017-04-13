@@ -22,7 +22,8 @@ export default function CourseTable(props) {
     const nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
     const canAddYear = true // graduation > nextAvailableYear
 
-    const nextYearButton = canAddYear &&
+    const nextYearButton =
+        canAddYear &&
         <Button
             className="add-year"
             key="add-year"

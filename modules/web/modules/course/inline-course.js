@@ -47,10 +47,12 @@ class InlineCourse extends Component {
     };
 
     shouldComponentUpdate(nextProps: InlineCourseProps, nextState) {
-        return this.props.course !== nextProps.course ||
+        return (
+            this.props.course !== nextProps.course ||
             this.props.conflicts !== nextProps.conflicts ||
             this.state.isOpen !== nextState.isOpen ||
             this.props.isDragging !== nextProps.isDragging
+        )
     }
 
     closeModal = () => {
@@ -62,13 +64,8 @@ class InlineCourse extends Component {
     };
 
     render() {
-        const {
-            course,
-            conflicts = [],
-            index,
-            scheduleId,
-            studentId,
-        } = this.props
+        const { course, conflicts = [], index, scheduleId, studentId } = this
+            .props
         const warnings = conflicts[index || 0]
         const hasWarnings = compact(warnings).length
 
@@ -86,7 +83,8 @@ class InlineCourse extends Component {
             'is-dragging': this.props.isDragging,
         })
 
-        const warningList = warningEls.length &&
+        const warningList =
+            warningEls.length &&
             <List type="inline" className="course-warnings">{warningEls}</List>
 
         return this.props.connectDragSource(

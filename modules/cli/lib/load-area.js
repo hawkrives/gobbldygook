@@ -31,7 +31,8 @@ async function getArea({ name, type, revision }) {
     if (!revision) {
         // maxBy returns the entire object that it matched
         return maxBy(filteredAreas, area =>
-            Number(area.revision.split('-')[0]))
+            Number(area.revision.split('-')[0])
+        )
     }
 
     return find(filteredAreas, { revision })

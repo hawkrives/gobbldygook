@@ -11,9 +11,12 @@ type IconProps = {
     type?: 'block' | 'inline',
 };
 
-export default function Icon(
-    { className, style, children, type = 'inline' }: IconProps
-) {
+export default function Icon({
+    className,
+    style,
+    children,
+    type = 'inline',
+}: IconProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"

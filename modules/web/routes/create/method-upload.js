@@ -33,7 +33,7 @@ class UploadFileScreen extends React.Component {
             data: new Promise((resolve, reject) => {
                 let reader = new FileReader()
                 reader.onload = ev => resolve(ev.target.result)
-                reader.onerror = (reader.onabort = reject)
+                reader.onerror = reader.onabort = reject
                 reader.readAsText(f)
             }),
         }))
@@ -114,7 +114,7 @@ class UploadFileScreen extends React.Component {
                     map(
                         students,
                         stu =>
-                            stu.payload
+                            (stu.payload
                                 ? <li key={stu.payload.id}>
                                       <StudentSummary
                                           student={stu.payload}
@@ -129,7 +129,7 @@ class UploadFileScreen extends React.Component {
                                       returned the error "
                                       {stu.error}
                                       "
-                                  </li>
+                                  </li>)
                     )}
                     {map(files, file => <li key={file.name}>{file.name}</li>)}
                 </List>

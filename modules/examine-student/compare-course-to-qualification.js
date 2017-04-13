@@ -69,7 +69,8 @@ function compareCourseToQualificationViaObject(
                     $operator,
                     $value: val,
                     $type,
-                }))
+                })
+            )
         } else if ($value.$booleanType === 'and') {
             return every($value.$and, val =>
                 compareCourseToQualification(course, {
@@ -77,7 +78,8 @@ function compareCourseToQualificationViaObject(
                     $operator,
                     $value: val,
                     $type,
-                }))
+                })
+            )
         } else {
             throw new TypeError(
                 `compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`

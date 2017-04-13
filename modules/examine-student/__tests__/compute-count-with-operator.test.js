@@ -3,9 +3,8 @@ import computeCountWithOperator from '../compute-count-with-operator'
 describe('computeCountWithOperator', () => {
     it('throws on operators other than $eq, $lte, or $gte', () => {
         expect(() =>
-            computeCountWithOperator({ comparator: '$invalid' })).toThrowError(
-            TypeError
-        )
+            computeCountWithOperator({ comparator: '$invalid' })
+        ).toThrowError(TypeError)
     })
 
     it('computes $lte', () => {

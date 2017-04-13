@@ -161,7 +161,8 @@ describe('convertStudent', () => {
         expect(every(expectedStudies, study => find(actual.studies, study)))
         expect(
             every(expectedPartialSchedules, sched =>
-                find(actual.schedules, sched))
+                find(actual.schedules, sched)
+            )
         )
     })
 })

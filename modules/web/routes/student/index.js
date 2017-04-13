@@ -50,7 +50,8 @@ export default {
                         [],
                         () => {
                             cb(null, {
-                                content: require('../../modules/semester-detail').default,
+                                content: require('../../modules/semester-detail')
+                                    .default,
                             })
                         },
                         'semester-detail.components'

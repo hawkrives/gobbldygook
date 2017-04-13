@@ -14,7 +14,8 @@ export default {
                                 [],
                                 () => {
                                     cb(null, {
-                                        content: require('../modules/student-picker').default,
+                                        content: require('../modules/student-picker')
+                                            .default,
                                     })
                                 },
                                 'student-picker.components'
