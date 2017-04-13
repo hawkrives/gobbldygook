@@ -308,9 +308,9 @@ babel-core@6.24.1, babel-core@^6.0.0, babel-core@^6.14.0, babel-core@^6.24.1:
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-eslint@7.2.1:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.2.1.tgz#079422eb73ba811e3ca0865ce87af29327f8c52f"
+babel-eslint@7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.2.2.tgz#0da2cbe6554fd0fb069f19674f2db2f9c59270ff"
   dependencies:
     babel-code-frame "^6.22.0"
     babel-traverse "^6.23.1"
@@ -1540,6 +1540,13 @@ create-hmac@^1.1.0, create-hmac@^1.1.2:
     create-hash "^1.1.0"
     inherits "^2.0.1"
 
+create-react-class@^15.5.1:
+  version "15.5.2"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.5.2.tgz#6a8758348df660b88326a0e764d569f274aad681"
+  dependencies:
+    fbjs "^0.8.9"
+    object-assign "^4.1.1"
+
 cross-env@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-4.0.0.tgz#16083862d08275a4628b0b243b121bedaa55dd80"
@@ -1980,9 +1987,9 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-enzyme-matchers@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/enzyme-matchers/-/enzyme-matchers-2.1.2.tgz#da2c20c3d55b128db3de6a5016f2531066b8061f"
+enzyme-matchers@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/enzyme-matchers/-/enzyme-matchers-3.0.1.tgz#302e2302a3f6de7335976cab2e6832357847878e"
   dependencies:
     deep-equal-ident "^1.1.1"
 
@@ -1998,9 +2005,9 @@ enzyme-to-json@1.5.0, enzyme-to-json@^1.5.0:
     object-values "^1.0.0"
     object.entries "^1.0.3"
 
-enzyme@2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/enzyme/-/enzyme-2.8.0.tgz#86cc1fc96e5cbd7695766dd6e89deb13a0aead51"
+enzyme@2.8.1:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/enzyme/-/enzyme-2.8.1.tgz#53891a75c8fe4d56582c113b3da45713b8215738"
   dependencies:
     cheerio "^0.22.0"
     function.prototype.name "^1.0.0"
@@ -2010,6 +2017,7 @@ enzyme@2.8.0:
     object.assign "^4.0.4"
     object.entries "^1.0.3"
     object.values "^1.0.3"
+    prop-types "^15.5.4"
     uuid "^2.0.3"
 
 "errno@>=0.1.1 <0.2.0-0", errno@^0.1.3:
@@ -3464,11 +3472,11 @@ jest-environment-node@^19.0.2:
     jest-mock "^19.0.0"
     jest-util "^19.0.2"
 
-jest-enzyme@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/jest-enzyme/-/jest-enzyme-3.0.0.tgz#662ea177f22af26a956482e6990621c026720a80"
+jest-enzyme@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/jest-enzyme/-/jest-enzyme-3.0.1.tgz#635f47cd043ee130f7bfb452ef6f4f593af3bc3a"
   dependencies:
-    enzyme-matchers "^2.1.2"
+    enzyme-matchers "^3.0.1"
     enzyme-to-json "^1.5.0"
 
 jest-file-exists@^19.0.0:
@@ -4378,7 +4386,7 @@ oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
-object-assign@^4.0.1, object-assign@^4.1.0:
+object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
@@ -5001,9 +5009,9 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.5.4, prop-types@^15.5.2, prop-types@~15.5.0:
-  version "15.5.4"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.4.tgz#2ed3692716a5060f8cc020946d8238e7419d92c0"
+prop-types@15.5.8, prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@~15.5.7:
+  version "15.5.8"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
   dependencies:
     fbjs "^0.8.9"
 
@@ -5102,9 +5110,9 @@ react-addons-perf@15.4.2:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
-react-addons-test-utils@15.5.0:
-  version "15.5.0"
-  resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.5.0.tgz#d09f7475ba7728bcdb288303a687b64c75b31a5c"
+react-addons-test-utils@15.5.1:
+  version "15.5.1"
+  resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.5.1.tgz#e0d258cda2a122ad0dff69f838260d0c3958f5f7"
   dependencies:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
@@ -5133,20 +5141,21 @@ react-dnd@2.3.0:
     invariant "^2.1.0"
     lodash "^4.2.0"
 
-react-document-title@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/react-document-title/-/react-document-title-2.0.2.tgz#1e42b672d300f8f90d8d05544b0d71f0ca7860aa"
+react-document-title@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-document-title/-/react-document-title-2.0.3.tgz#bbf922a0d71412fc948245e4283b2412df70f2b9"
   dependencies:
+    prop-types "^15.5.6"
     react-side-effect "^1.0.2"
 
-react-dom@15.5.3:
-  version "15.5.3"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.3.tgz#2ee127ce942df55da53111ae303316e68072b5c5"
+react-dom@15.5.4:
+  version "15.5.4"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
   dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
-    prop-types "~15.5.0"
+    prop-types "~15.5.7"
 
 react-dropzone@3.12.3:
   version "3.12.3"
@@ -5170,15 +5179,17 @@ react-radio-group@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-radio-group/-/react-radio-group-3.0.1.tgz#b8890cc7c159de4522a918e548dde38bc2493bc1"
 
-react-redux@5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.3.tgz#86c3b68d56e74294a42e2a740ab66117ef6c019f"
+react-redux@5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.4.tgz#1563babadcfb2672f57f9ceaa439fb16bf85d55b"
   dependencies:
+    create-react-class "^15.5.1"
     hoist-non-react-statics "^1.0.3"
     invariant "^2.0.0"
     lodash "^4.2.0"
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
+    prop-types "^15.0.0"
 
 react-router@3.0.2:
   version "3.0.2"
@@ -5204,21 +5215,21 @@ react-side-effect@^1.0.2:
     exenv "^1.2.1"
     shallowequal "^0.2.2"
 
-react-test-renderer@15.5.3:
-  version "15.5.3"
-  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.5.3.tgz#1171b11ae820d39ace6f79f49b6b9d36ea090885"
+react-test-renderer@15.5.4:
+  version "15.5.4"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.5.4.tgz#d4ebb23f613d685ea8f5390109c2d20fbf7c83bc"
   dependencies:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
 
-react@15.5.3:
-  version "15.5.3"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.5.3.tgz#84055382c025dec4e3b902bb61a8697cc79c1258"
+react@15.5.4:
+  version "15.5.4"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
   dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
-    prop-types "^15.5.2"
+    prop-types "^15.5.7"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
