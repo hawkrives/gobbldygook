@@ -64,8 +64,13 @@ class InlineCourse extends Component {
     }
 
     render() {
-        const { course, conflicts = [], index, scheduleId, studentId } = this
-            .props
+        const {
+            course,
+            conflicts = [],
+            index,
+            scheduleId,
+            studentId,
+        } = this.props
         const warnings = conflicts[index || 0]
         const hasWarnings = compact(warnings).length
 
