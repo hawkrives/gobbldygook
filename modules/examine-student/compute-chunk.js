@@ -36,7 +36,7 @@ import type {
     WhereExpression,
 } from './types'
 
-type StringifiedCourse = string;
+type StringifiedCourse = string
 
 /**
  * Computes the result of an expression.
@@ -82,7 +82,7 @@ export default function computeChunk({
     // Modifiers, occurrences, references, and wheres don't need isNeeded,
     // because they don't result in recursive calls to computeChunk.
     if (expr.$type === 'boolean') {
-        ({ computedResult, matches } = computeBoolean({
+        ;({ computedResult, matches } = computeBoolean({
             expr,
             ctx,
             courses,
@@ -90,25 +90,25 @@ export default function computeChunk({
             isNeeded,
         }))
     } else if (expr.$type === 'course') {
-        ({ computedResult } = computeCourse({
+        ;({ computedResult } = computeCourse({
             expr,
             courses,
             dirty,
             isNeeded,
         }))
     } else if (expr.$type === 'modifier') {
-        ({ computedResult, matches, counted } = computeModifier({
+        ;({ computedResult, matches, counted } = computeModifier({
             expr,
             ctx,
             courses,
         }))
     } else if (expr.$type === 'occurrence') {
-        ({ computedResult, matches, counted } = computeOccurrence({
+        ;({ computedResult, matches, counted } = computeOccurrence({
             expr,
             courses,
         }))
     } else if (expr.$type === 'of') {
-        ({ computedResult, matches, counted } = computeOf({
+        ;({ computedResult, matches, counted } = computeOf({
             expr,
             ctx,
             courses,
@@ -116,9 +116,9 @@ export default function computeChunk({
             isNeeded,
         }))
     } else if (expr.$type === 'reference') {
-        ({ computedResult, matches } = computeReference({ expr, ctx }))
+        ;({ computedResult, matches } = computeReference({ expr, ctx }))
     } else if (expr.$type === 'where') {
-        ({ computedResult, matches, counted } = computeWhere({
+        ;({ computedResult, matches, counted } = computeWhere({
             expr,
             courses,
         }))
@@ -129,7 +129,7 @@ export default function computeChunk({
     }
 
     if (fulfillment) {
-        ({ computedResult, matches, counted } = applyFulfillmentToResult({
+        ;({ computedResult, matches, counted } = applyFulfillmentToResult({
             fulfillment,
             expr,
             computedResult,
@@ -513,7 +513,7 @@ export function computeOf({
  * @param {Requirement} ctx - the requirement context
  * @returns {boolean} - the result of the reference expression
  */
-type ComputeReferenceResult = { matches: ?(Course[]), computedResult: boolean };
+type ComputeReferenceResult = { matches: ?(Course[]), computedResult: boolean }
 export function computeReference({
     expr,
     ctx,

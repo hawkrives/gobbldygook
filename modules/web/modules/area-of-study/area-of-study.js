@@ -110,8 +110,7 @@ class AreaOfStudyContainer extends Component {
             _progress: progress,
             _error: error = '',
             _checked: checked = false,
-        } =
-            props.area
+        } = props.area
 
         const progressAt = typeof progress === 'object' ? progress.at : 0
         const progressOf = typeof progress === 'object' ? progress.of : 1
