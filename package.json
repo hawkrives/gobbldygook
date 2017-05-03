@@ -169,7 +169,7 @@
     "graceful-fs": "4.1.11",
     "indexeddbshim": "https://github.com/axemclion/IndexedDBShim#42961a5d54781f3fa030f33f35dd8fd2ae9cc3cc",
     "jest": "19.0.2",
-    "jest-enzyme": "3.0.1",
+    "jest-enzyme": "3.1.0",
     "js-beautify": "1.6.12",
     "json-loader": "0.5.4",
     "junk": "2.1.0",
