@@ -89,11 +89,9 @@ describe('OfExpression', () => {
     })
 
     it('throws an error if more items are required than are provided', () => {
-        expect(() => parse('three of (CSCI 121, 125)')).toThrow(
-            `you requested 3 items, but only gave 2 options (${JSON.stringify([
-                course('CSCI 121'),
-                course('CSCI 125'),
-            ])})`
-        )
+        expect(() => parse('three of (CSCI 121, 125)'))
+            .toThrow(`you requested 3 items, but only gave 2 options (${JSON.stringify(
+            [course('CSCI 121'), course('CSCI 125')]
+        )})`)
     })
 })

@@ -31,8 +31,7 @@ describe('parse-hanson-string', () => {
         r('at most one course where { x = y }')
         r('at most three courses from children')
         r('three courses where {department = HIST & level = 300}')
-        r(
-            `one of (
+        r(`one of (
             HIST 101, 111, 115, 117, 121,
                  122, 126, 140, 151, 169,
 
@@ -56,15 +55,12 @@ describe('parse-hanson-string', () => {
                  299.*.2013.3,
                  299.A.2015.3,
                  299.B.2015.3,
-        )`
-        )
-        r(
-            `
+        )`)
+        r(`
             Basic & Transitions & Perspectives & Level III & Sequence & Electives &
             seven courses from (Transitions, Perspectives, Level III, Sequence, Electives) &
             at most two courses from children where { department != MATH }
-		`
-        )
+		`)
         r('one course where { dept = (CSCI | ASIAN) & num >= 130 }')
         r(
             'one of (MATH 230, 242,  236, 262, 266, (STAT 212 & 214 & 272), STAT 316, MATH 330)'
@@ -127,16 +123,14 @@ describe('parse-hanson-string', () => {
 
         r('one of (AS/RE 121)')
 
-        r(
-            `
+        r(`
 			one course where {
                 gereqs = EIN &
                 year >= min (year) from courses where {
                     gereqs = BTS-T
                 }
             }
-		`
-        )
+		`)
 
         r('Biblical Studies (BTS-B)')
 

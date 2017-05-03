@@ -169,8 +169,7 @@ function config() {
     const plugins = [
         // Generates an index.html for us.
         new HtmlPlugin(
-            context =>
-                `
+            context => `
             <!DOCTYPE html>
             <html lang="en-US">
             <meta charset="UTF-8">
@@ -211,9 +210,9 @@ function config() {
 
             <script src="${publicPath}${context.manifest}"></script>
             ${Object.keys(entries)
-                    .map(k => `${publicPath}${context[k]}`)
-                    .map(path => `<script src="${path}"></script>`)
-                    .join('\n')}
+                .map(k => `${publicPath}${context[k]}`)
+                .map(path => `<script src="${path}"></script>`)
+                .join('\n')}
             <script src="${publicPath}${context.main}"></script>
             </html>
         `

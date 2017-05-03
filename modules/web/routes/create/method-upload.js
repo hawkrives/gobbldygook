@@ -95,7 +95,7 @@ class UploadFileScreen extends React.Component {
                 </header>
 
                 <DropZone
-                    ref={el => this.dropzone = el}
+                    ref={el => (this.dropzone = el)}
                     accept=".gbstudent,.json,.gb-student"
                     onDrop={this.handleFileDrop}
                     multiple
@@ -114,7 +114,7 @@ class UploadFileScreen extends React.Component {
                     map(
                         students,
                         stu =>
-                            (stu.payload
+                            stu.payload
                                 ? <li key={stu.payload.id}>
                                       <StudentSummary
                                           student={stu.payload}
@@ -129,7 +129,7 @@ class UploadFileScreen extends React.Component {
                                       returned the error "
                                       {stu.error}
                                       "
-                                  </li>)
+                                  </li>
                     )}
                     {map(files, file => <li key={file.name}>{file.name}</li>)}
                 </List>

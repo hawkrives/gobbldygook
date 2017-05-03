@@ -33,31 +33,30 @@ const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
 // eslint-disable-next-line no-confusing-arrow
 const DAY_OF_WEEK = course =>
-    (course.offerings
+    course.offerings
         ? map(course.offerings, offer => offer.day).join('/')
-        : 'No Days Listed')
+        : 'No Days Listed'
 
 // eslint-disable-next-line no-confusing-arrow
 const TIME_OF_DAY = course =>
-    (course.offerings
+    course.offerings
         ? oxford(
               sortBy(
                   uniq(
                       flatMap(course.offerings, offer =>
                           map(
                               offer.times,
-                              time =>
-                                  `${to12HourTime(time.start)}-${to12HourTime(time.end)}`
+                              time => `${to12HourTime(time.start)}-${to12HourTime(time.end)}`
                           )
                       )
                   )
               )
           )
-        : 'No Times Listed')
+        : 'No Times Listed'
 
 // eslint-disable-next-line no-confusing-arrow
 const DEPARTMENT = course =>
-    (course.departments ? buildDeptString(course.departments) : 'No Department')
+    course.departments ? buildDeptString(course.departments) : 'No Department'
 
 // eslint-disable-next-line no-confusing-arrow
 const GEREQ = course => (course.gereqs ? oxford(course.gereqs) : 'No GEs')

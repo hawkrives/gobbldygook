@@ -129,21 +129,21 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
                 toShow === true && !includes(usedAreaTypes, type)
         )
 
-        const unusedTypesToShowComponents = map(unusedTypesToShow, ([
-            type,
-            shouldShow,
-        ]) => (
-            <AreaOfStudyGroup
-                key={type}
-                allAreasOfType={allAreasGrouped[type] || []}
-                areas={[]}
-                onEndAddArea={this.hideAreaPicker}
-                onInitiateAddArea={this.showAreaPicker}
-                showAreaPicker={shouldShow || false}
-                student={student}
-                type={type}
-            />
-        ))
+        const unusedTypesToShowComponents = map(
+            unusedTypesToShow,
+            ([type, shouldShow]) => (
+                <AreaOfStudyGroup
+                    key={type}
+                    allAreasOfType={allAreasGrouped[type] || []}
+                    areas={[]}
+                    onEndAddArea={this.hideAreaPicker}
+                    onInitiateAddArea={this.showAreaPicker}
+                    showAreaPicker={shouldShow || false}
+                    student={student}
+                    type={type}
+                />
+            )
+        )
 
         return (
             <div>

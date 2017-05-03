@@ -127,7 +127,8 @@ export function filterByQualification(
     // If we have a limit on the number of courses, then only return the
     // number that we're allowed to accept.
     if (
-        counter && (counter.$operator === '$lte' || counter.$operator === '$eq')
+        counter &&
+        (counter.$operator === '$lte' || counter.$operator === '$eq')
     ) {
         filtered = take(filtered, counter.$num)
     }

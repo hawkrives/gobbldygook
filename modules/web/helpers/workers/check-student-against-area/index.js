@@ -42,7 +42,8 @@ export default function checkStudentAgainstArea(student: any, area: any) {
         if (result.$type === 'of') {
             bits = result.$of
         } else if (
-            result.$type === 'boolean' && result.$booleanType === 'and'
+            result.$type === 'boolean' &&
+            result.$booleanType === 'and'
         ) {
             bits = result.$and
         } else if (result.$type === 'boolean' && result.$booleanType === 'or') {

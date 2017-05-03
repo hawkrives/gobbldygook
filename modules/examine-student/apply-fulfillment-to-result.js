@@ -32,7 +32,8 @@ export default function applyFulfillmentToResult({
 
     const counter = expr.hasOwnProperty('$count') ? (expr: any).$count : null
     if (
-        counter && (counter.$operator === '$lte' || counter.$operator === '$eq')
+        counter &&
+        (counter.$operator === '$lte' || counter.$operator === '$eq')
     ) {
         if (expr.$type === 'of' && counter.$was === 'all') {
             // if we have a query that used to be 'all of', then we still need it to be 'all of'?

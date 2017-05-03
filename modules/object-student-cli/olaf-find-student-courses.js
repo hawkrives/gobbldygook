@@ -93,9 +93,9 @@ function evaluateStudentAgainstEachMajor(student) {
     )
 
     console.log(
-        makeHeading(
-            `${`Used for ${name}… (result: ${find(areas, { name }).computed})`}`
-        )
+        makeHeading(`${`Used for ${name}… (result: ${find(areas, {
+            name,
+        }).computed})`}`)
     )
     console.log(prettyCourseList(usedCourses))
     console.log()

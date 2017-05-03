@@ -23,12 +23,12 @@ export default function List(props: ListProps) {
     const contents = ReactChildren.map(
         children,
         child =>
-            (isValidElement(child)
+            isValidElement(child)
                 ? cloneElement(child, {
                       ...child.props,
                       className: cx('list-item', child.props.className),
                   })
-                : child)
+                : child
     )
 
     className = cx('list', `list--${type}`, className)

@@ -8,7 +8,10 @@ import './avatar-letter.scss'
 const AvatarLetter = ({
     className,
     value = '',
-}: { className?: string, value: string }) => (
+}: {
+    className?: string,
+    value: string,
+}) => (
     <div className={cx('avatar-letter', className)}>
         {isString(value) ? value[0] : ''}
     </div>

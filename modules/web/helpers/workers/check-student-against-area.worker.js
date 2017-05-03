@@ -25,9 +25,7 @@ if (
         checkStudentAgainstArea(student, area)
             .then(result => {
                 self.postMessage(JSON.stringify([id, 'result', result]))
-                log(
-                    `(${student.name}, ${area.name}) took ${round(present() - start)} ms`
-                )
+                log(`(${student.name}, ${area.name}) took ${round(present() - start)} ms`)
             })
             .catch(err => {
                 self.postMessage(

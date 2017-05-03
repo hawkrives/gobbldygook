@@ -29,9 +29,7 @@ async function benchmark({ runs, graph }) {
         './test/example-students/'
     )) {
         for (const areaInfo of areas) {
-            console.log(
-                `the '${areaInfo.name}' ${areaInfo.type} (${areaInfo.revision})`
-            )
+            console.log(`the '${areaInfo.name}' ${areaInfo.type} (${areaInfo.revision})`)
             const areaData = await loadArea(areaInfo) // eslint-disable-line no-await-in-loop
 
             let times = range(runs).map(() => {
