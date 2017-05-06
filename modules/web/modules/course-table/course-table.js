@@ -15,7 +15,7 @@ import './course-table.scss'
 
 export default function CourseTable(props) {
     const { student } = props
-    const { schedules, matriculation, graduation } = student
+    const { schedules, matriculation } = student
 
     const nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
     const canAddYear = true // graduation > nextAvailableYear

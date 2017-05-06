@@ -124,6 +124,7 @@ class AreaOfStudyContainer extends Component {
                                   className="catalog-link"
                                   href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
                                   target="_blank"
+                                  rel="noopener noreferrer"
                                   onClick={ev => ev.stopPropagation()}
                                   title="View in the St. Olaf Catalog"
                               >
