@@ -46,7 +46,8 @@ const TIME_OF_DAY = course =>
                       flatMap(course.offerings, offer =>
                           map(
                               offer.times,
-                              time => `${to12HourTime(time.start)}-${to12HourTime(time.end)}`
+                              time =>
+                                  `${to12HourTime(time.start)}-${to12HourTime(time.end)}`
                           )
                       )
                   )
