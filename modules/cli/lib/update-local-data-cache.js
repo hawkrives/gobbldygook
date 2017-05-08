@@ -29,7 +29,9 @@ module.exports.cache = cache
 async function cache() {
     prepareDirs()
 
-    const priorCourseInfo = tryReadJsonFile(`${cacheDir}/Courses/info.prior.json`) || {}
+    const priorCourseInfo = tryReadJsonFile(
+        `${cacheDir}/Courses/info.prior.json`
+    ) || {}
     // const priorAreaInfo = tryReadJsonFile(`${cacheDir}/Areas/info.prior.json`) || {}
 
     mkdirp.sync(`${cacheDir}/Courses/`)
@@ -98,7 +100,9 @@ async function checkForStaleData() {
 
     const needsUpdate = some(newCourseInfo.files, file => {
         const oldEntry = find(courseInfo.files, file)
-        const isCached = fs.existsSync(`${cacheDir}/Courses/${path.basename(file.path)}`)
+        const isCached = fs.existsSync(
+            `${cacheDir}/Courses/${path.basename(file.path)}`
+        )
         return (Boolean(oldEntry) && oldEntry.hash !== file.hash) || !isCached
     })
 
