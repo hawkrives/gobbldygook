@@ -23,7 +23,7 @@ const welcomeMessages = [
     'ようこそ、', // japanese
     'Fram! Fram! ',
     'Salut, ',
-    'Aloha, ',
+    'Aloha, ', // hawaiian
     'Привет, ',
     'Вітаю, ',
     'Sawubona, ',
@@ -36,6 +36,8 @@ const welcomeMessages = [
     '안녕하세요 ', // korean
     'สวัสดี ', // thai
     'halo, ', // indonesian
+    'Salve, ', // latin
+    'Χαῖρε! ', // ancient greek
 ]
 
 const welcomeMessage = welcomeMessages[2]
