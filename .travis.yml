@@ -18,24 +18,29 @@ branches:
     - /^v?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?$/
 
 cache:
-  yarn: true
+  directories: 
+    - $HOME/.npm
+
+install:
+  - npm i -g npm5
+  - npm5 install
 
 script:
   - if [[ "$task" == "lint" ]]; then
-      yarn run lint;
+      npm5 run lint;
     fi
   - if [[ "$task" == "test" ]]; then
-      yarn run flow;
-      yarn run test -- --coverage --runInBand;
+      npm5 run flow;
+      npm5 run test -- --coverage --runInBand;
     fi
   - if [[ "$task" == "build" ]]; then
-      yarn run build;
+      npm5 run build;
     fi
 
 after_success:
   - |
     if [[ "$task" == "test" ]]; then
-      npm install coveralls
+      npm5 install coveralls
       ./node_modules/.bin/coveralls < ./coverage/lcov.info
       bash <(curl -s https://codecov.io/bash) -f coverage/coverage.json
     fi
@@ -53,4 +58,7 @@ deploy:
     condition: $task = "build"
 
 after_deploy:
-  - curl -d "apiKey=7e393deddaeb885f5b140b4320ecef6b" -d "repository=https://github.com/hawkrives/gobbldygook" -d "revision=$(git rev-parse --verify HEAD)" 'https://notify.bugsnag.com/deploy'
+  - curl https://notify.bugsnag.com/deploy
+      -d apiKey=7e393deddaeb885f5b140b4320ecef6b
+      -d repository=https://github.com/hawkrives/gobbldygook
+      -d "revision=$(git rev-parse --verify HEAD)" 
