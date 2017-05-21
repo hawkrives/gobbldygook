@@ -1,8 +1,8 @@
 // @flow
 import { LOAD_ALL_AREAS, LOADING_AREAS } from '../constants'
 
-type AreaOfStudy = {};
-type State = { data: AreaOfStudy[], isLoading: boolean };
+type AreaOfStudy = {}
+type State = { data: AreaOfStudy[], isLoading: boolean }
 const initialState = { data: [], isLoading: false }
 
 export default function reducer(

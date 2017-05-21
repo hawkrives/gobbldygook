@@ -8,7 +8,7 @@ import kebabCase from 'lodash/kebabCase'
 import yaml from 'js-yaml'
 import debug from 'debug'
 import pluralizeArea from '../../examine-student/pluralize-area'
-import {status, text} from '../../lib/fetch-helpers'
+import { status, text } from '../../lib/fetch-helpers'
 const log = debug('worker:load-area')
 
 function resolveArea(areas, query) {
@@ -31,11 +31,11 @@ type AreaQueryType = {
     revision: string,
     source: string,
     isCustom: string,
-};
+}
 
 const baseUrl = 'https://hawkrives.github.io/gobbldygook-area-data'
 const networkCache = Object.create(null)
-function loadAreaFromNetwork({name, type, revision}: AreaQueryType) {
+function loadAreaFromNetwork({ name, type, revision }: AreaQueryType) {
     const id = `{${name}, ${type}, ${revision}}`
     if (id in networkCache) {
         return networkCache[id]
@@ -47,7 +47,10 @@ function loadAreaFromNetwork({name, type, revision}: AreaQueryType) {
 
     return networkCache[id].then(area => {
         return {
-            name, type, revision, _area: area,
+            name,
+            type,
+            revision,
+            _area: area,
         }
     })
 }
@@ -92,7 +95,7 @@ const promiseCache = Object.create(null)
 
 export default function getArea(
     areaQuery: AreaQueryType,
-    { cache = [] }: {cache: any[]}
+    { cache = [] }: { cache: any[] }
 ) {
     const { name, type, revision, source, isCustom } = areaQuery
     let cachedArea = find(
@@ -127,7 +130,7 @@ export default function getArea(
     promiseCache[id] = getAreaFrom({ name, type, revision, source, isCustom })
 
     return promiseCache[id].then(area => {
-        console.log(area)
+        // console.log(area)
         delete promiseCache[id]
         return area
     })

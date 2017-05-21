@@ -32,11 +32,14 @@ type CourseTitleProps = {
     name: string,
     title?: string,
     type?: string,
-};
+}
 
-export default function CourseTitle(
-    { name, title, type, className }: CourseTitleProps
-) {
+export default function CourseTitle({
+    name,
+    title,
+    type,
+    className,
+}: CourseTitleProps) {
     const isIndependent = independentRegex.test(name)
     let courseName = title || name
     let subtitle = undefined

@@ -112,7 +112,8 @@ type PropTypes = {
 export default function StudentListItem(props: PropTypes) {
     const { student, isEditing, destroyStudent } = props
 
-    const isLoading = student.isLoading ||
+    const isLoading =
+        student.isLoading ||
         student.isFetching ||
         student.isValdiating ||
         student.isChecking
@@ -142,7 +143,6 @@ export default function StudentListItem(props: PropTypes) {
                     <Icon>{iosTrashOutline}</Icon>
                     Delete
                 </DeleteButton>}
-
             <ListItemLink to={`/s/${student.data.present.id}/`}>
                 <StudentInfo>
                     <StudentName>

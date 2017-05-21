@@ -5,7 +5,7 @@ export function installFirefoxExtension() {
     if (typeof InstallTrigger === 'undefined') {
         return Promise.reject('The `InstallTrigger` global does not exist')
     }
-    return new Promise(resolve => {
+    return new Promise(() => {
         InstallTrigger.install({
             Gobbldygook: {
                 URL: url,

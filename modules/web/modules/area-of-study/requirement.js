@@ -30,7 +30,7 @@ type PropTypes = {
     path: string[],
     result?: Object,
     topLevel?: boolean,
-};
+}
 
 function Requirement(props: PropTypes) {
     const { topLevel = false } = props
@@ -44,21 +44,24 @@ function Requirement(props: PropTypes) {
 
     const extraClasses = [props.overridden ? 'overridden' : '']
 
-    const result = props.result &&
+    const result =
+        props.result &&
         <div className="result">
             <Expression expr={props.result} ctx={props} />
         </div>
 
     const message = props.message && <p className="message">{props.message}</p>
-    const description = props.description &&
-        <p className="description">{props.description}</p>
+    const description =
+        props.description && <p className="description">{props.description}</p>
 
-    const filterEl = props.filter &&
+    const filterEl =
+        props.filter &&
         <div className="filter">
             Filter: <Filter expr={props.filter} ctx={props} />
         </div>
 
-    const title = !topLevel &&
+    const title =
+        !topLevel &&
         <h2 className="heading" title={props.name} onClick={props.onToggleOpen}>
             <span className="title">
                 {' '}{props.name}
@@ -69,9 +72,7 @@ function Requirement(props: PropTypes) {
                     {props.overridden ? '(Overridden) ' : ''}
                 </span>
                 <Button
-                    title={
-                        `${props.overridden ? 'Remove' : 'Apply'} a manual override to this requirement`
-                    }
+                    title={`${props.overridden ? 'Remove' : 'Apply'} a manual override to this requirement`}
                     onClick={ev => props.onToggleOverride(props.path, ev)}
                     type="flat"
                 >
@@ -92,7 +93,8 @@ function Requirement(props: PropTypes) {
         />
     ))
 
-    const overrideButtons = props.message &&
+    const overrideButtons =
+        props.message &&
         !props.result &&
         <span className="required-override-buttons button-group">
             <Button
@@ -134,11 +136,11 @@ function Requirement(props: PropTypes) {
 export default class ExpandableRequirement extends Component {
     state = {
         open: true,
-    };
+    }
 
     handleToggleOpen = () => {
         this.setState({ open: !this.state.open })
-    };
+    }
 
     render() {
         return (

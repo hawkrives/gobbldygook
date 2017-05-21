@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { compareProps } from '../../../lib'
@@ -12,7 +13,7 @@ import {
     setPartialQuery,
 } from './redux/actions'
 
-export class CourseSearcherContainer extends Component {
+export class CourseSearcherContainer extends React.Component {
     static propTypes = {
         closeSearcher: PropTypes.func.isRequired,
         groupResults: PropTypes.func.isRequired, // redux
@@ -34,35 +35,37 @@ export class CourseSearcherContainer extends Component {
         studentId: PropTypes.string,
         submitQuery: PropTypes.func.isRequired, // redux
         updateQuery: PropTypes.func.isRequired, // redux
-    };
+    }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return compareProps(this.props, nextProps) ||
+        return (
+            compareProps(this.props, nextProps) ||
             compareProps(this.state !== nextState)
+        )
     }
 
     handleQuerySubmit = () => {
         this.props.setPartialQuery(this.props.partial)
         this.props.submitQuery()
-    };
+    }
 
     handleQueryChange = ev => {
         this.props.updateQuery(ev.target.value)
-    };
+    }
 
     handleKeyDown = ev => {
         if (ev.keyCode === 13) {
             this.handleQuerySubmit()
         }
-    };
+    }
 
     handleSortChange = ev => {
         this.props.sortResults(ev.target.value)
-    };
+    }
 
     handleGroupByChange = ev => {
         this.props.groupResults(ev.target.value)
-    };
+    }
 
     render() {
         return (

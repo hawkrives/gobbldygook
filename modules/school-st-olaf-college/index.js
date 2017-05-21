@@ -1,10 +1,6 @@
 'use strict'
 
-const {
-    expandYear,
-    semesterName,
-    toPrettyTerm,
-} = require('./course-info')
+const { expandYear, semesterName, toPrettyTerm } = require('./course-info')
 
 const {
     buildDeptString,

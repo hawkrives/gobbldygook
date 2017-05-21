@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
@@ -113,9 +114,7 @@ function Semester(props) {
 
     // `recommendedCredits` is 4 for fall/spring and 1 for everything else
     const recommendedCredits = semester === 1 || semester === 3 ? 4 : 1
-    const currentCredits = courses && courses.length
-        ? countCredits(courses)
-        : 0
+    const currentCredits = courses && courses.length ? countCredits(courses) : 0
 
     const infoBar = []
     if (schedule && courses && courses.length) {

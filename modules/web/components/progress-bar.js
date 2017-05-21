@@ -10,15 +10,10 @@ type ProgressBarProps = {
     colorful?: boolean,
     max?: number,
     value: number,
-};
+}
 
 export default function ProgressBar(props: ProgressBarProps) {
-    const {
-        value,
-        max = 1,
-        colorful,
-        className,
-    } = props
+    const { value, max = 1, colorful, className } = props
 
     const width = 100 * (value / max)
     const progressWord = findWordForProgress(max, value)

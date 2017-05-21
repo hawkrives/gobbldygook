@@ -26,18 +26,15 @@ export async function cli() {
         })
         .parse()
 
-    args.terms = args.terms.reduce(
-        (list, term) => {
-            let stringterm = String(term)
-            if (stringterm.length === 4) {
-                return list.concat(
-                    [1, 2, 3, 4, 5].map(s => parseInt(`${stringterm}${s}`))
-                )
-            }
-            return list.concat(term)
-        },
-        []
-    )
+    args.terms = args.terms.reduce((list, term) => {
+        let stringterm = String(term)
+        if (stringterm.length === 4) {
+            return list.concat(
+                [1, 2, 3, 4, 5].map(s => parseInt(`${stringterm}${s}`))
+            )
+        }
+        return list.concat(term)
+    }, [])
 
     const courses = fromPairs(
         await Promise.all(
@@ -55,7 +52,8 @@ export async function cli() {
                 total: list,
             },
             l => l.length
-        ))
+        )
+    )
 
     console.log(yaml.safeDump(groupedByGeCount))
 }

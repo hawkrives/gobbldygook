@@ -20,12 +20,7 @@ const none = (arr, pred) => !some(arr, pred)
 const quote = str => `"${str}"`
 const quoteAndJoin = list => list.map(quote).join(', ')
 
-const baseWhitelist = [
-    'result',
-    'message',
-    'declare',
-    'children share courses',
-]
+const baseWhitelist = ['result', 'message', 'declare', 'children share courses']
 const topLevelWhitelist = baseWhitelist.concat([
     'name',
     'revision',
@@ -50,7 +45,7 @@ const startRules = {
     filter: 'Filter',
 }
 
-type StringMap = { [key: string]: string };
+type StringMap = { [key: string]: string }
 
 module.exports.enhanceHanson = enhanceHanson
 function enhanceHanson(

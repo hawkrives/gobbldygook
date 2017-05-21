@@ -39,6 +39,7 @@ export function loadStudent(id) {
         dispatch(beginLoading(id))
 
         return dispatch(actuallyLoadStudent(id)).then(() =>
-            dispatch(checkStudent(id)))
+            dispatch(checkStudent(id))
+        )
     }
 }

@@ -60,7 +60,7 @@ function checkForTimeConflicts(courses) {
             const conflicts = compact(
                 map(
                     conflictSet,
-                    (possibility, i) => possibility === true ? i + 1 : false
+                    (possibility, i) => (possibility === true ? i + 1 : false)
                 )
             )
             const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
@@ -83,10 +83,7 @@ module.exports.findWarnings = findWarnings
 function findWarnings(courses, schedule) {
     let warningsOfInvalidity = map(courses, course => {
         let invalidYear = checkForInvalidYear(course, schedule.year)
-        let invalidSemester = checkForInvalidSemester(
-            course,
-            schedule.semester
-        )
+        let invalidSemester = checkForInvalidSemester(course, schedule.semester)
         return [invalidYear, invalidSemester]
     })
 

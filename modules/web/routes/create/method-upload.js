@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+
 import DropZone from 'react-dropzone'
 import map from 'lodash/map'
 import Button from '../../components/button'
@@ -12,16 +14,16 @@ const log = debug('web:react')
 
 import './method-upload.scss'
 
-class UploadFileScreen extends Component {
+class UploadFileScreen extends React.Component {
     static propTypes = {
         dispatch: PropTypes.func.isRequired,
         router: PropTypes.object.isRequired,
-    };
+    }
 
     state = {
         files: [],
         students: [],
-    };
+    }
 
     handleFileDrop = files => {
         log(files)
@@ -31,17 +33,17 @@ class UploadFileScreen extends Component {
             data: new Promise((resolve, reject) => {
                 let reader = new FileReader()
                 reader.onload = ev => resolve(ev.target.result)
-                reader.onerror = (reader.onabort = reject)
+                reader.onerror = reader.onabort = reject
                 reader.readAsText(f)
             }),
         }))
         this.setState({ files })
         this.convertFilesToStudents(files)
-    };
+    }
 
     handleOpenPicker = () => {
         this.dropzone.open()
-    };
+    }
 
     convertOneFile = file => {
         file.data
@@ -70,17 +72,17 @@ class UploadFileScreen extends Component {
                     students: this.state.students.concat(student),
                 })
             })
-    };
+    }
 
     convertFilesToStudents = files => {
         this.setState({ students: [] })
         files.forEach(this.convertOneFile)
-    };
+    }
 
     handleImportStudents = () => {
         this.state.students.forEach(this.props.dispatch)
         this.props.dispatch(this.props.router.push('/'))
-    };
+    }
 
     render() {
         let { students } = this.state
@@ -93,7 +95,7 @@ class UploadFileScreen extends Component {
                 </header>
 
                 <DropZone
-                    ref={el => this.dropzone = el}
+                    ref={el => (this.dropzone = el)}
                     accept=".gbstudent,.json,.gb-student"
                     onDrop={this.handleFileDrop}
                     multiple

@@ -1,23 +1,24 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import StudentPicker from './student-picker'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { destroyStudent } from '../../redux/students/actions/destroy-student'
 import { loadStudents } from '../../redux/students/actions/load-students'
 
-class StudentPickerContainer extends Component {
+class StudentPickerContainer extends React.Component {
     static propTypes = {
         destroyStudent: PropTypes.func.isRequired,
         loadStudents: PropTypes.func.isRequired,
         students: PropTypes.object.isRequired,
-    };
+    }
 
     state = {
         filterText: '',
         isEditing: false,
         sortBy: 'dateLastModified',
         groupBy: 'nothing',
-    };
+    }
 
     componentWillMount() {
         this.props.loadStudents()
@@ -25,20 +26,20 @@ class StudentPickerContainer extends Component {
 
     onFilterChange = ev => {
         this.setState({ filterText: ev.target.value.toLowerCase() })
-    };
+    }
 
-    onGroupChange = () => {};
+    onGroupChange = () => {}
 
     onSortChange = () => {
         const options = ['dateLastModified', 'name', 'canGraduate']
         const currentIndex = options.indexOf(this.state.sortBy)
         const nextIndex = (currentIndex + 1) % options.length
         this.setState({ sortBy: options[nextIndex] })
-    };
+    }
 
     onToggleEditing = () => {
         this.setState({ isEditing: !this.state.isEditing })
-    };
+    }
 
     render() {
         return (

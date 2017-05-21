@@ -62,7 +62,7 @@ export default function CourseList(props: PropTypes) {
     const usedCredits = Math.floor(props.creditCount)
     const emptySlots = range(usedCredits, props.availableCredits)
         .filter(n => n >= 0)
-        .map(() => <Empty />)
+        .map(n => <Empty key={n} />)
 
     return (
         <List className="course-list">

@@ -53,7 +53,8 @@ function getCourses(studentId, term) {
         searchyearterm: term,
     }
     return fetchHtml(COURSES_URL, { method: 'POST' }, body).then(response =>
-        getCoursesFromHtml(response, term))
+        getCoursesFromHtml(response, term)
+    )
 }
 
 module.exports.collectAllCourses = collectAllCourses

@@ -32,9 +32,7 @@ describe('saveStudent', () => {
         expect(actualStudentIds).toEqual(expectedStudentIds)
         let expectedStudent = student
         let actualStudent = JSON.parse(localStorage.getItem(student.id))
-        expect(omit(actualStudent, 'dateLastModified')).toEqual(
-            expectedStudent
-        )
+        expect(omit(actualStudent, 'dateLastModified')).toEqual(expectedStudent)
     })
 
     it("doesn't save if the student hasn't changed", async () => {
@@ -42,9 +40,8 @@ describe('saveStudent', () => {
         let s = JSON.parse(localStorage.getItem(student.id))
         let lastModified = s.dateLastModified
         await saveStudent(s)
-        let newLastModified = JSON.parse(
-            localStorage.getItem(student.id)
-        ).dateLastModified
+        let newLastModified = JSON.parse(localStorage.getItem(student.id))
+            .dateLastModified
         expect(newLastModified).toBe(lastModified)
     })
 })

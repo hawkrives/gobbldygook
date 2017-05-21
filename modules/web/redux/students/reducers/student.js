@@ -132,11 +132,7 @@ export function studentReducer(state = initialState, action) {
         }
 
         case ADD_COURSE: {
-            return addCourseToSchedule(
-                state,
-                payload.scheduleId,
-                payload.clbid
-            )
+            return addCourseToSchedule(state, payload.scheduleId, payload.clbid)
         }
         case REMOVE_COURSE: {
             return removeCourseFromSchedule(

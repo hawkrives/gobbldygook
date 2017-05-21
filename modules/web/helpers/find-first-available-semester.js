@@ -10,7 +10,7 @@ type Schedule = {
     id: any,
     year: number,
     semester: number,
-};
+}
 
 /**
  * Takes a list of schedules and finds the first open semester.

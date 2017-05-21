@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import map from 'lodash/map'
@@ -8,9 +9,7 @@ import {
     addSchedule,
     destroySchedules,
 } from '../../redux/students/actions/schedules'
-import {
-    findFirstAvailableYear,
-} from '../../helpers/find-first-available-year'
+import { findFirstAvailableYear } from '../../helpers/find-first-available-year'
 import {
     findFirstAvailableSemester,
 } from '../../helpers/find-first-available-semester'

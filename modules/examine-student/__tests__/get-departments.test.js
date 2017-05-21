@@ -8,11 +8,6 @@ describe('getDepartments', () => {
             { department: ['CHEM', 'BIO'] },
         ]
 
-        expect(getDepartments(courses)).toEqual([
-            'ART',
-            'ASIAN',
-            'CHEM',
-            'BIO',
-        ])
+        expect(getDepartments(courses)).toEqual(['ART', 'ASIAN', 'CHEM', 'BIO'])
     })
 })

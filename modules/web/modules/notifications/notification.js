@@ -14,11 +14,12 @@ type NotificationProps = {
     onClose: () => any,
     type: string,
     value: number,
-};
+}
 
 export default function Notification(props: NotificationProps) {
     log('Notification#render')
-    const progressBar = props.type === 'progress' &&
+    const progressBar =
+        props.type === 'progress' &&
         <div className="progress-container">
             <ProgressBar value={props.value} max={props.max} />
             <output>{round(props.value / props.max * 100, 0)}%</output>

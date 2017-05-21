@@ -7,15 +7,10 @@ type SeparatorProps = {
     flex?: number,
     style?: Object,
     type?: 'spacer' | 'line' | 'flex-spacer',
-};
+}
 
 export default function Separator(props: SeparatorProps) {
-    const {
-        className,
-        flex = 1,
-        style,
-        type = 'spacer',
-    } = props
+    const { className, flex = 1, style, type = 'spacer' } = props
 
     let renderedStyle = {
         ...style,

@@ -36,7 +36,7 @@ import type {
     WhereExpression,
 } from './types'
 
-type StringifiedCourse = string;
+type StringifiedCourse = string
 
 /**
  * Computes the result of an expression.
@@ -53,23 +53,21 @@ type StringifiedCourse = string;
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the expression
  */
-export default function computeChunk(
-    {
-        expr,
-        ctx,
-        courses,
-        dirty,
-        fulfillment,
-        isNeeded = true,
-    }: {
-        expr: Expression,
-        ctx: Requirement,
-        courses: Course[],
-        dirty: Set<StringifiedCourse>,
-        fulfillment?: Fulfillment,
-        isNeeded?: boolean,
-    }
-) {
+export default function computeChunk({
+    expr,
+    ctx,
+    courses,
+    dirty,
+    fulfillment,
+    isNeeded = true,
+}: {
+    expr: Expression,
+    ctx: Requirement,
+    courses: Course[],
+    dirty: Set<StringifiedCourse>,
+    fulfillment?: Fulfillment,
+    isNeeded?: boolean,
+}) {
     if (typeof expr !== 'object') {
         throw new TypeError(
             `computeChunk(): the expr \`${stringify(expr)}\` must be an object, not a ${typeof expr}`
@@ -84,7 +82,7 @@ export default function computeChunk(
     // Modifiers, occurrences, references, and wheres don't need isNeeded,
     // because they don't result in recursive calls to computeChunk.
     if (expr.$type === 'boolean') {
-        ({ computedResult, matches } = computeBoolean({
+        ;({ computedResult, matches } = computeBoolean({
             expr,
             ctx,
             courses,
@@ -92,25 +90,25 @@ export default function computeChunk(
             isNeeded,
         }))
     } else if (expr.$type === 'course') {
-        ({ computedResult } = computeCourse({
+        ;({ computedResult } = computeCourse({
             expr,
             courses,
             dirty,
             isNeeded,
         }))
     } else if (expr.$type === 'modifier') {
-        ({ computedResult, matches, counted } = computeModifier({
+        ;({ computedResult, matches, counted } = computeModifier({
             expr,
             ctx,
             courses,
         }))
     } else if (expr.$type === 'occurrence') {
-        ({ computedResult, matches, counted } = computeOccurrence({
+        ;({ computedResult, matches, counted } = computeOccurrence({
             expr,
             courses,
         }))
     } else if (expr.$type === 'of') {
-        ({ computedResult, matches, counted } = computeOf({
+        ;({ computedResult, matches, counted } = computeOf({
             expr,
             ctx,
             courses,
@@ -118,9 +116,9 @@ export default function computeChunk(
             isNeeded,
         }))
     } else if (expr.$type === 'reference') {
-        ({ computedResult, matches } = computeReference({ expr, ctx }))
+        ;({ computedResult, matches } = computeReference({ expr, ctx }))
     } else if (expr.$type === 'where') {
-        ({ computedResult, matches, counted } = computeWhere({
+        ;({ computedResult, matches, counted } = computeWhere({
             expr,
             courses,
         }))
@@ -131,7 +129,7 @@ export default function computeChunk(
     }
 
     if (fulfillment) {
-        ({ computedResult, matches, counted } = applyFulfillmentToResult({
+        ;({ computedResult, matches, counted } = applyFulfillmentToResult({
             fulfillment,
             expr,
             computedResult,
@@ -185,21 +183,19 @@ export default function computeChunk(
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the modifier
  */
-export function computeBoolean(
-    {
-        expr,
-        ctx,
-        courses,
-        dirty,
-        isNeeded,
-    }: {
-        expr: BooleanExpression,
-        ctx: Requirement,
-        courses: Course[],
-        dirty: Set<StringifiedCourse>,
-        isNeeded: boolean,
-    }
-) {
+export function computeBoolean({
+    expr,
+    ctx,
+    courses,
+    dirty,
+    isNeeded,
+}: {
+    expr: BooleanExpression,
+    ctx: Requirement,
+    courses: Course[],
+    dirty: Set<StringifiedCourse>,
+    isNeeded: boolean,
+}) {
     let computedResult = false
 
     if (expr.$booleanType === 'or') {
@@ -233,7 +229,8 @@ export function computeBoolean(
         computedResult = some(results)
     } else if (expr.$booleanType === 'and') {
         const results = map(expr.$and, req =>
-            computeChunk({ expr: req, ctx, courses, dirty, isNeeded }))
+            computeChunk({ expr: req, ctx, courses, dirty, isNeeded })
+        )
         computedResult = every(results)
     } else {
         throw new TypeError(
@@ -254,19 +251,17 @@ export function computeBoolean(
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - if the course was found or not
  */
-export function computeCourse(
-    {
-        expr,
-        courses,
-        dirty,
-        isNeeded,
-    }: {
-        expr: CourseExpression,
-        courses: Course[],
-        dirty: Set<StringifiedCourse>,
-        isNeeded: boolean,
-    }
-) {
+export function computeCourse({
+    expr,
+    courses,
+    dirty,
+    isNeeded,
+}: {
+    expr: CourseExpression,
+    courses: Course[],
+    dirty: Set<StringifiedCourse>,
+    isNeeded: boolean,
+}) {
     assertKeys(expr, '$course')
     const foundCourse = findCourse(expr.$course, courses)
 
@@ -304,17 +299,15 @@ export function computeCourse(
  * @param {Course[]} courses - the list of courses to search
  * @returns {boolean} - the result of the modifier
  */
-export function computeModifier(
-    {
-        expr,
-        ctx,
-        courses,
-    }: {
-        expr: ModifierExpression,
-        ctx: Requirement,
-        courses: Course[],
-    }
-) {
+export function computeModifier({
+    expr,
+    ctx,
+    courses,
+}: {
+    expr: ModifierExpression,
+    ctx: Requirement,
+    courses: Course[],
+}) {
     assertKeys(expr, '$what', '$count', '$from')
     const what = expr.$what
 
@@ -364,7 +357,7 @@ export function computeModifier(
     // eslint-disable-next-line no-confusing-arrow
     filtered = map(
         filtered,
-        course => '$course' in course ? course.$course : course
+        course => ('$course' in course ? course.$course : course)
     )
 
     if (expr.$besides) {
@@ -401,15 +394,13 @@ export function computeModifier(
  * @param {Course[]} courses - the list of courses to search
  * @returns {boolean} - the result of the occurrence
  */
-export function computeOccurrence(
-    {
-        expr,
-        courses,
-    }: {
-        expr: OccurrenceExpression,
-        courses: Course[],
-    }
-) {
+export function computeOccurrence({
+    expr,
+    courses,
+}: {
+    expr: OccurrenceExpression,
+    courses: Course[],
+}) {
     assertKeys(expr, '$course', '$count')
 
     let filtered = getOccurrences(expr.$course, courses)
@@ -438,21 +429,19 @@ export function computeOccurrence(
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the of-expression
  */
-export function computeOf(
-    {
-        expr,
-        ctx,
-        courses,
-        dirty,
-        isNeeded,
-    }: {
-        expr: OfExpression,
-        ctx: Requirement,
-        courses: Course[],
-        dirty: Set<StringifiedCourse>,
-        isNeeded: boolean,
-    }
-) {
+export function computeOf({
+    expr,
+    ctx,
+    courses,
+    dirty,
+    isNeeded,
+}: {
+    expr: OfExpression,
+    ctx: Requirement,
+    courses: Course[],
+    dirty: Set<StringifiedCourse>,
+    isNeeded: boolean,
+}) {
     assertKeys(expr, '$of', '$count')
 
     // Go through $of, incrementing count if result of the thing is true.
@@ -524,16 +513,14 @@ export function computeOf(
  * @param {Requirement} ctx - the requirement context
  * @returns {boolean} - the result of the reference expression
  */
-type ComputeReferenceResult = { matches: ?(Course[]), computedResult: boolean };
-export function computeReference(
-    {
-        expr,
-        ctx,
-    }: {
-        expr: ReferenceExpression,
-        ctx: Requirement,
-    }
-): ComputeReferenceResult {
+type ComputeReferenceResult = { matches: ?(Course[]), computedResult: boolean }
+export function computeReference({
+    expr,
+    ctx,
+}: {
+    expr: ReferenceExpression,
+    ctx: Requirement,
+}): ComputeReferenceResult {
     assertKeys(expr, '$requirement')
 
     if (!(expr.$requirement in ctx)) {
@@ -566,15 +553,13 @@ export function computeReference(
  * @param {Course[]} courses - the list of courses to search
  * @returns {boolean} - the result of the where-expression
  */
-export function computeWhere(
-    {
-        expr,
-        courses,
-    }: {
-        expr: WhereExpression,
-        courses: Course[],
-    }
-) {
+export function computeWhere({
+    expr,
+    courses,
+}: {
+    expr: WhereExpression,
+    courses: Course[],
+}) {
     assertKeys(expr, '$where', '$count', '$distinct')
 
     const filtered = filterByWhereClause(courses, expr.$where, {

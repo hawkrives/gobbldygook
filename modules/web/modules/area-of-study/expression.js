@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react'
-
+import React from 'react'
+import PropTypes from 'prop-types'
 import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
 
@@ -26,22 +26,19 @@ function makeBooleanExpression({ expr, ctx }) {
         kind = '$or'
     }
 
-    const contents = expr[kind].reduce(
-        (acc, exp, i) => {
-            if (i > 0) {
-                acc.push(
-                    <span key={`${i}-joiner`} className="joiner">
-                        {JOINERS[kind]}
-                    </span>
-                )
-            }
+    const contents = expr[kind].reduce((acc, exp, i) => {
+        if (i > 0) {
+            acc.push(
+                <span key={`${i}-joiner`} className="joiner">
+                    {JOINERS[kind]}
+                </span>
+            )
+        }
 
-            acc.push(<Expression key={i} expr={exp} ctx={ctx} />)
+        acc.push(<Expression key={i} expr={exp} ctx={ctx} />)
 
-            return acc
-        },
-        []
-    )
+        return acc
+    }, [])
 
     return { contents }
 }
@@ -53,7 +50,8 @@ const ofLookup = {
 }
 
 function makeOfExpression({ expr, ctx }) {
-    const description = ofLookup[expr.$count.$was] ||
+    const description =
+        ofLookup[expr.$count.$was] ||
         `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
 
     // const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
@@ -132,7 +130,7 @@ export default function Expression(props) {
     let result = null
 
     if ($type === 'boolean') {
-        ({ contents } = makeBooleanExpression(props))
+        ;({ contents } = makeBooleanExpression(props))
     } else if ($type === 'course') {
         // _request is the original course that was written in the spec.
         // $course is the matched course. It's used mostly by where-expressions and the like.
@@ -147,14 +145,14 @@ export default function Expression(props) {
         contents = expr.$requirement
         result = <ResultIndicator result={computationResult} />
     } else if ($type === 'of') {
-        ({ contents, description } = makeOfExpression(props))
+        ;({ contents, description } = makeOfExpression(props))
     } else if ($type === 'modifier') {
-        ({ description } = makeModifierExpression(props))
+        ;({ description } = makeModifierExpression(props))
         result = <ResultIndicator result={computationResult} />
     } else if ($type === 'where') {
-        ({ description, contents } = makeWhereExpression(props))
+        ;({ description, contents } = makeWhereExpression(props))
     } else if ($type === 'occurrence') {
-        ({ description, contents } = makeOccurrenceExpression(props))
+        ;({ description, contents } = makeOccurrenceExpression(props))
     } else {
         log(`<Expression />: type not handled: ${$type}`)
         log(props)

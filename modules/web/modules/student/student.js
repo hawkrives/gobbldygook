@@ -13,18 +13,18 @@ import GraduationStatus from './graduation-status'
 
 import './student.scss'
 
-type StudentType = Object;
+type StudentType = Object
 type PropTypes = {
     content: React$Element<any>, // from react-router
-    loadStudent: (string) => any, // redux
+    loadStudent: string => any, // redux
     overlay: ?React$Element<any>,
     params: { studentId: string }, // react-router
     sidebar: ?React$Element<any>, // from react-router
     student: StudentType, // redux
-};
+}
 
 export class Student extends Component {
-    props: PropTypes;
+    props: PropTypes
 
     componentWillMount() {
         this.loadStudent(this.props)
@@ -37,13 +37,13 @@ export class Student extends Component {
     loadStudent = (props: PropTypes) => {
         // We have to be able to load the student here because we only load
         // students on-demand into the redux store
-        const didStudentChange = props.params.studentId !==
-            this.props.params.studentId
+        const didStudentChange =
+            props.params.studentId !== this.props.params.studentId
 
         if (!props.student || didStudentChange) {
             props.loadStudent(props.params.studentId)
         }
-    };
+    }
 
     render() {
         if (!this.props.student) {

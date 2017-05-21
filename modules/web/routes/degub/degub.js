@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import map from 'lodash/map'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -70,7 +71,7 @@ Degub.propTypes = {
 class DegubContainer extends React.Component {
     static propTypes = {
         loadStudents: PropTypes.func.isRequired,
-    };
+    }
     componentWillMount() {
         this.props.loadStudents()
     }

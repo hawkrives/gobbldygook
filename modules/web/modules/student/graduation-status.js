@@ -6,12 +6,12 @@ import { ConnectedStudentSummary } from './connected-student-summary'
 
 import './graduation-status.scss'
 
-type Student = Object;
+type Student = Object
 
 export default class GraduationStatusContainer extends React.PureComponent {
     props: {
         student: Student,
-    };
+    }
 
     render() {
         const student = this.props.student

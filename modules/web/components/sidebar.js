@@ -21,7 +21,7 @@ import {
 
 import styled from 'styled-components'
 
-type StudentType = Object;
+type StudentType = Object
 type PropTypes = {
     children: React$Element<any>,
     redo: () => any,
@@ -34,7 +34,7 @@ type PropTypes = {
         },
     },
     undo: () => any,
-};
+}
 
 const StudentButtonsToolbar = styled(Toolbar)`margin-bottom: 0.5em;`
 

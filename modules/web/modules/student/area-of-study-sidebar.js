@@ -24,21 +24,21 @@ const {
 } = require('../../../object-student/sort-studies-by-type')
 const { areaTypeConstants } = require('../../../object-student/area-types')
 
-type AreaOfStudy = Object;
-type Student = Object;
+type AreaOfStudy = Object
+type Student = Object
 type PropTypes = {
     allAreas: AreaOfStudy[],
     student: Student,
-};
+}
 
 class AreaOfStudySidebarComponent extends React.PureComponent {
-    props: PropTypes;
+    props: PropTypes
 
     state: {
         showAreaPickerFor: { [key: string]: boolean },
     } = {
         showAreaPickerFor: {},
-    };
+    }
 
     showAreaPicker = (type: string, ev: Event) => {
         ev.stopPropagation()
@@ -46,7 +46,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
         this.setState(state => ({
             showAreaPickerFor: { ...state.showAreaPickerFor, [type]: true },
         }))
-    };
+    }
 
     hideAreaPicker = (type: string, ev: Event) => {
         ev.stopPropagation()
@@ -54,7 +54,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
         this.setState(state => ({
             showAreaPickerFor: { ...state.showAreaPickerFor, [type]: false },
         }))
-    };
+    }
 
     render() {
         const props = this.props
@@ -66,7 +66,8 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
 
         // group the studies by their type
         const groupedStudies = groupBy(sortedStudies, study =>
-            study.type.toLowerCase())
+            study.type.toLowerCase()
+        )
 
         // pull out the results
         const studyResults = mapValues(groupedStudies, group =>
@@ -77,7 +78,8 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
                         student.areas,
                         pick(area, ['name', 'type', 'revision'])
                     ) || area
-            ))
+            )
+        )
 
         // and then render them
         const sections = map(studyResults, (areas, areaType) => (
@@ -127,21 +129,21 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
                 toShow === true && !includes(usedAreaTypes, type)
         )
 
-        const unusedTypesToShowComponents = map(unusedTypesToShow, ([
-            type,
-            shouldShow,
-        ]) => (
-            <AreaOfStudyGroup
-                key={type}
-                allAreasOfType={allAreasGrouped[type] || []}
-                areas={[]}
-                onEndAddArea={this.hideAreaPicker}
-                onInitiateAddArea={this.showAreaPicker}
-                showAreaPicker={shouldShow || false}
-                student={student}
-                type={type}
-            />
-        ))
+        const unusedTypesToShowComponents = map(
+            unusedTypesToShow,
+            ([type, shouldShow]) => (
+                <AreaOfStudyGroup
+                    key={type}
+                    allAreasOfType={allAreasGrouped[type] || []}
+                    areas={[]}
+                    onEndAddArea={this.hideAreaPicker}
+                    onInitiateAddArea={this.showAreaPicker}
+                    showAreaPicker={shouldShow || false}
+                    student={student}
+                    type={type}
+                />
+            )
+        )
 
         return (
             <div>
@@ -155,6 +157,4 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
 
 const mapState = state => ({ allAreas: state.areas.data })
 
-export const AreaOfStudySidebar = connect(mapState)(
-    AreaOfStudySidebarComponent
-)
+export const AreaOfStudySidebar = connect(mapState)(AreaOfStudySidebarComponent)

@@ -15,5 +15,6 @@ export function fulfillFulfillments(student, { cache = [] }) {
                 $course: alterCourse(r),
                 _isFulfillment: true,
             }
-        }))
+        })
+    )
 }

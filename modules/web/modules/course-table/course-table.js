@@ -2,9 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { expandYear } from '../../../school-st-olaf-college/course-info'
 
-import {
-    findFirstAvailableYear,
-} from '../../helpers/find-first-available-year'
+import { findFirstAvailableYear } from '../../helpers/find-first-available-year'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
@@ -36,19 +34,19 @@ const AddYearButton = styled(Button)`
 const Container = styled.div``
 
 type PropTypes = {
-    addSemester: PropTypes.func.isRequired,
-    addYear: PropTypes.func.isRequired,
+    addSemester: () => any,
+    addYear: () => any,
     className?: string,
-    removeYear: PropTypes.func.isRequired,
+    removeYear: () => any,
     student: Object,
 };
 
 export default function CourseTable(props: PropTypes) {
     const { student } = props
-    const { schedules, matriculation, graduation } = student
+    const { schedules, matriculation } = student
 
     const nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
-    const canAddYear = graduation > nextAvailableYear
+    const canAddYear = true // graduation > nextAvailableYear
 
     const nextYearButton = canAddYear &&
         <AddYearButton

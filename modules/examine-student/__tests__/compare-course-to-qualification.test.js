@@ -160,9 +160,8 @@ describe('compareCourseToQualification', () => {
             $value: [2016],
         }
         expect(() =>
-            compareCourseToQualification(course, qualification)).toThrowError(
-            TypeError
-        )
+            compareCourseToQualification(course, qualification)
+        ).toThrowError(TypeError)
     })
 
     it('throws if $value is an object and has an unknown type', () => {
@@ -173,9 +172,8 @@ describe('compareCourseToQualification', () => {
             $value: { $type: 'unknown' },
         }
         expect(() =>
-            compareCourseToQualification(course, qualification)).toThrowError(
-            TypeError
-        )
+            compareCourseToQualification(course, qualification)
+        ).toThrowError(TypeError)
     })
 
     it('handles $or boolean values', () => {
@@ -215,9 +213,7 @@ describe('compareCourseToQualification', () => {
                 $and: [2013, 2013],
             },
         }
-        expect(compareCourseToQualification(course2, qualification2)).toBe(
-            true
-        )
+        expect(compareCourseToQualification(course2, qualification2)).toBe(true)
     })
 
     it('throws if $value is a boolean but neither $and nor $or', () => {
@@ -228,8 +224,7 @@ describe('compareCourseToQualification', () => {
             $value: { $type: 'boolean', $booleanType: 'xor', $xor: [] },
         }
         expect(() =>
-            compareCourseToQualification(course, qualification)).toThrowError(
-            TypeError
-        )
+            compareCourseToQualification(course, qualification)
+        ).toThrowError(TypeError)
     })
 })

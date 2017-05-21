@@ -169,9 +169,8 @@ forEach(
     (val, key) => {
         // given the 'es' => 'envst' mapping, add a 'es' => departmentAbbreviationsToNames['envst']
         // mapping
-        departmentAbbreviationsToNames[key] = departmentAbbreviationsToNames[
-            val
-        ]
+        departmentAbbreviationsToNames[key] =
+            departmentAbbreviationsToNames[val]
     }
 )
 

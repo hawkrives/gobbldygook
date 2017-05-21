@@ -121,12 +121,14 @@ export function filterByQualification(
     }
 
     let filtered = filter(list, course =>
-        compareCourseToQualification(course, qualification))
+        compareCourseToQualification(course, qualification)
+    )
 
     // If we have a limit on the number of courses, then only return the
     // number that we're allowed to accept.
     if (
-        counter && (counter.$operator === '$lte' || counter.$operator === '$eq')
+        counter &&
+        (counter.$operator === '$lte' || counter.$operator === '$eq')
     ) {
         filtered = take(filtered, counter.$num)
     }
@@ -138,17 +140,15 @@ export function filterByQualification(
     return filtered
 }
 
-function applyQualifictionFunction(
-    {
-        value,
-        fullList,
-        list,
-    }: {
-        value: QualificationFunctionValue,
-        fullList?: Course[],
-        list: Course[],
-    }
-) {
+function applyQualifictionFunction({
+    value,
+    fullList,
+    list,
+}: {
+    value: QualificationFunctionValue,
+    fullList?: Course[],
+    list: Course[],
+}) {
     const func = qualificationFunctionLookup[value.$name]
 
     if (!func) {

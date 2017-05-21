@@ -77,6 +77,9 @@ rules:
   # react/sort-comp: warn
   react/sort-prop-types: warn
   react/wrap-multilines: off
+  react/no-unescaped-entities: off
+  
+  flowtype/no-types-missing-file-annotation: off
 
   # jsdoc
   valid-jsdoc:

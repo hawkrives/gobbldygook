@@ -44,11 +44,10 @@ type ListProps = {
     children?: any,
     className?: string,
     type?: 'inline' | 'number' | 'bullet' | 'plain',
-};
+}
 
 export default function List(props: ListProps) {
     const { className, children, type = 'inline' } = props
-
     const contents = ReactChildren.map(
         children,
         child =>

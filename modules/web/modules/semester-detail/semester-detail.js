@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
@@ -14,8 +15,7 @@ const DetailText = styled.pre`
     margin: 0;
 `
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class SemesterDetail extends Component {
+export default class SemesterDetail extends React.Component {
     static propTypes = {
         className: PropTypes.string,
         location: PropTypes.shape({
@@ -25,7 +25,7 @@ export default class SemesterDetail extends Component {
         }),
         params: PropTypes.object, // react-router
         student: PropTypes.object,
-    };
+    }
 
     state = {
         year: null,

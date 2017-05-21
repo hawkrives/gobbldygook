@@ -23,9 +23,11 @@ function condenseCourse(course) {
 function summarize(requirement, name, path, depth = 0) {
     let prose = ''
     const subReqs = filter(toPairs(requirement), ([k, _]) =>
-        isRequirementName(k))
+        isRequirementName(k)
+    )
     if (subReqs.length) {
-        prose = '\n' +
+        prose =
+            '\n' +
             map(subReqs, ([k, v]) => {
                 return summarize(v, k, path.concat(k), depth + 1)
             }).join('\n')
@@ -77,7 +79,8 @@ function stringifyBoolean(expr) {
         return `(${map(expr.$or, req => stringifyChunk(req)).join(` ${OR} `)})`
     } else if ('$and' in expr) {
         return `(${map(expr.$and, req =>
-            stringifyChunk(req)).join(` ${AND} `)})`
+            stringifyChunk(req)
+        ).join(` ${AND} `)})`
     }
 }
 
@@ -90,7 +93,8 @@ function stringifyChildren(expr) {
         return 'all children'
     }
     return `(${map(expr.$children, child =>
-        stringifyReference(child)).join(', ')})`
+        stringifyReference(child)
+    ).join(', ')})`
 }
 
 function stringifyModifier(expr) {
@@ -144,14 +148,16 @@ function stringifyQualification({ $key, $operator, $value }) {
                         $key,
                         $operator,
                         $value: val,
-                    })).join(` ${OR} `)
+                    })
+                ).join(` ${OR} `)
             } else if ('$and' in $value) {
                 return map($value.$and, val =>
                     stringifyQualification({
                         $key,
                         $operator,
                         $value: val,
-                    })).join(` ${AND} `)
+                    })
+                ).join(` ${AND} `)
             } else {
                 throw new TypeError(
                     `stringifyQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`
@@ -208,7 +214,8 @@ function stringifyFilter(filter) {
         resultString += `only courses where {${stringifyWhereClause(filter.$where)}}`
     } else if ('$of' in filter) {
         resultString += `only (${map(filter.$of, req =>
-            stringifyChunk(req)).join(', ')})`
+            stringifyChunk(req)
+        ).join(', ')})`
     }
 
     return resultString
@@ -223,7 +230,8 @@ function proseify(requirement, name, path, depth = 0) {
     const hasChildren = some(keys(requirement), isRequirementName)
     if (hasChildren) {
         const subReqs = filter(toPairs(requirement), ([k, _]) =>
-            isRequirementName(k))
+            isRequirementName(k)
+        )
         prose = map(subReqs, ([k, v]) => {
             return proseify(v, k, path.concat(k), depth + 1)
         }).join('\n')
@@ -246,36 +254,35 @@ function proseify(requirement, name, path, depth = 0) {
     return indent(depth ? '  ' : '', `${resultString}${prose}`)
 }
 
-const checkAgainstArea = ({ courses, overrides }, args) =>
-    areaData => {
-        let result = {}
-        let path = []
-        if (args.path) {
-            path = [areaData.type, areaData.name].concat(args.path.split('.'))
-            result = compute(get(areaData, args.path), {
-                path,
-                courses,
-                overrides,
-            })
-        } else {
-            result = evaluate({ courses, overrides }, areaData)
-            path = [areaData.type, areaData.name]
-        }
-
-        if (args.json) {
-            console.log(JSON.stringify(result, null, 2))
-        } else if (args.yaml) {
-            console.log(yaml.safeDump(result))
-        } else if (args.prose) {
-            console.log(proseify(result, areaData.name, path))
-        } else if (args.summary) {
-            console.log(summarize(result, areaData.name, path))
-        }
-
-        if (!result.computed) {
-            process.exit(1)
-        }
+const checkAgainstArea = ({ courses, overrides }, args) => areaData => {
+    let result = {}
+    let path = []
+    if (args.path) {
+        path = [areaData.type, areaData.name].concat(args.path.split('.'))
+        result = compute(get(areaData, args.path), {
+            path,
+            courses,
+            overrides,
+        })
+    } else {
+        result = evaluate({ courses, overrides }, areaData)
+        path = [areaData.type, areaData.name]
     }
+
+    if (args.json) {
+        console.log(JSON.stringify(result, null, 2))
+    } else if (args.yaml) {
+        console.log(yaml.safeDump(result))
+    } else if (args.prose) {
+        console.log(proseify(result, areaData.name, path))
+    } else if (args.summary) {
+        console.log(summarize(result, areaData.name, path))
+    }
+
+    if (!result.computed) {
+        process.exit(1)
+    }
+}
 
 function run({ courses, overrides, areas }, args) {
     Promise.all(areas.map(loadArea)).then(areaData => {

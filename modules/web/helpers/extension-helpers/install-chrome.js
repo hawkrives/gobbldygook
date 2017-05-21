@@ -1,5 +1,6 @@
 /* global chrome:false */
-const url = 'https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld'
+const url =
+    'https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld'
 
 export function installChromeExtension() {
     if (typeof chrome === 'undefined') {

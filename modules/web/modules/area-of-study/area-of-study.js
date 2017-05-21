@@ -19,7 +19,7 @@ import {
 
 import './area-of-study.scss'
 
-type Student = Object;
+type Student = Object
 type AreaOfStudyType = {
     _area?: Object,
     _checked?: boolean,
@@ -30,7 +30,7 @@ type AreaOfStudyType = {
     revision: string,
     slug?: string,
     type: string,
-};
+}
 
 class AreaOfStudyContainer extends Component {
     props: {
@@ -41,46 +41,48 @@ class AreaOfStudyContainer extends Component {
         showCloseButton: boolean,
         showEditButton: boolean,
         student: Student,
-    };
+    }
 
     state = {
         isOpen: false,
         confirmRemoval: false,
-    };
+    }
 
     shouldComponentUpdate(nextProps: any, nextState: any) {
-        return compareProps(this.props, nextProps) ||
+        return (
+            compareProps(this.props, nextProps) ||
             compareProps(this.state, nextState)
+        )
     }
 
     startRemovalConfirmation = (ev: Event) => {
         ev.preventDefault()
         this.setState({ confirmRemoval: true })
-    };
+    }
 
     endRemovalConfirmation = (ev: Event) => {
         ev.preventDefault()
         this.setState({ confirmRemoval: false })
-    };
+    }
 
     toggleAreaExpansion = (ev: Event) => {
         ev.preventDefault()
         this.setState({ isOpen: !this.state.isOpen })
-    };
+    }
 
     addOverride = (path: string[], ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         const codifiedPath = pathToOverride(path)
         this.props.setOverride(this.props.student.id, codifiedPath, true)
-    };
+    }
 
     removeOverride = (path: string[], ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()
         const codifiedPath = pathToOverride(path)
         this.props.removeOverride(this.props.student.id, codifiedPath)
-    };
+    }
 
     toggleOverride = (path: string[], ev: Event) => {
         ev.stopPropagation()
@@ -92,14 +94,11 @@ class AreaOfStudyContainer extends Component {
         } else {
             this.props.setOverride(this.props.student.id, codifiedPath, true)
         }
-    };
+    }
 
     render() {
         const props = this.props
-        const {
-            isOpen,
-            confirmRemoval: showConfirmRemoval,
-        } = this.state
+        const { isOpen, confirmRemoval: showConfirmRemoval } = this.state
 
         const {
             type = '???',
@@ -123,10 +122,9 @@ class AreaOfStudyContainer extends Component {
                         {slug && !isCustom && isOpen
                             ? <a
                                   className="catalog-link"
-                                  href={
-                                      `http://catalog.stolaf.edu/academic-programs/${slug}/`
-                                  }
+                                  href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
                                   target="_blank"
+                                  rel="noopener noreferrer"
                                   onClick={ev => ev.stopPropagation()}
                                   title="View in the St. Olaf Catalog"
                               >

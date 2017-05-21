@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import Button from '../../components/button'
 import cx from 'classnames'
 import Autosize from 'react-input-autosize'
@@ -15,13 +16,13 @@ import './method-manual.scss'
 
 let now = new Date()
 
-class ManualCreationScreen extends Component {
+class ManualCreationScreen extends React.Component {
     static propTypes = {
         areas: PropTypes.array.isRequired, // redux
         areasLoading: PropTypes.bool.isRequired, // redux
         dispatch: PropTypes.func.isRequired, // redux
         router: PropTypes.object.isRequired,
-    };
+    }
 
     state = {
         error: '',
@@ -35,7 +36,7 @@ class ManualCreationScreen extends Component {
         concentration: [],
         emphasis: [],
         sumitted: false,
-    };
+    }
 
     getAreaOptions = type => {
         let { graduation } = this.state
@@ -50,16 +51,15 @@ class ManualCreationScreen extends Component {
             label: `${name} (${revision})`,
         }))
         return options
-    };
+    }
 
-    handleAreaChange = type =>
-        values => {
-            this.setState({ [type]: values })
-        };
+    handleAreaChange = type => values => {
+        this.setState({ [type]: values })
+    }
 
     handleNameChange = ev => {
         this.setState({ name: ev.target.value })
-    };
+    }
 
     handleMatriculationChange = ev => {
         let val = Number(ev.target.value)
@@ -69,7 +69,7 @@ class ManualCreationScreen extends Component {
             this.setState({ matriculationIsValid: true, matriculation: val })
         }
         this.checkValidity()
-    };
+    }
 
     handleGraduationChange = ev => {
         let val = Number(ev.target.value)
@@ -79,7 +79,7 @@ class ManualCreationScreen extends Component {
             this.setState({ graduationIsValid: true, graduation: val })
         }
         this.checkValidity()
-    };
+    }
 
     checkValidity = () => {
         let errors = []
@@ -96,7 +96,7 @@ class ManualCreationScreen extends Component {
         } else {
             this.setState({ error: '' })
         }
-    };
+    }
 
     onCreateStudent = () => {
         this.setState({ submitted: true })
@@ -125,7 +125,7 @@ class ManualCreationScreen extends Component {
         let action = initStudent(rawStudent)
         this.props.dispatch(action)
         this.props.router.push(`/s/${action.payload.id}`)
-    };
+    }
 
     render() {
         let nameEl = (

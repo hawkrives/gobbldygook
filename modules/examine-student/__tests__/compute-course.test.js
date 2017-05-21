@@ -25,9 +25,7 @@ describe('computeCourse', () => {
     })
 
     it('adds the course to the dirty set if it matches', () => {
-        const courses = [
-            { department: ['ART'], number: 130, type: 'Research' },
-        ]
+        const courses = [{ department: ['ART'], number: 130, type: 'Research' }]
         const query = {
             $type: 'course',
             $course: { department: ['ART'], number: 130, type: 'Research' },
@@ -57,9 +55,7 @@ describe('computeCourse', () => {
     })
 
     it('returns false if the course is in the dirty set', () => {
-        const courses = [
-            { department: ['ART'], number: 130, type: 'Research' },
-        ]
+        const courses = [{ department: ['ART'], number: 130, type: 'Research' }]
         const query = {
             $type: 'course',
             $course: { department: ['ART'], number: 130, type: 'Research' },

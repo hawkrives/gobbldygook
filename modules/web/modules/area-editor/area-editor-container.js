@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import yaml from 'js-yaml'
 import keymage from 'keymage'
 import omit from 'lodash/omit'
@@ -12,7 +13,7 @@ import Loading from '../../components/loading'
 import AreaList from './area-list'
 import AreaEditor from './area-editor'
 
-export class AreaEditScreen extends Component {
+export class AreaEditScreen extends React.Component {
     static propTypes = {
         areas: PropTypes.shape({
             data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -24,13 +25,13 @@ export class AreaEditScreen extends Component {
             type: PropTypes.string,
             revision: PropTypes.string,
         }).isRequired, // react-router
-    };
+    }
 
     state = {
         area: null,
         code: '',
         isEditing: false,
-    };
+    }
 
     componentWillMount() {
         this.props.loadAllAreas()
@@ -75,13 +76,13 @@ export class AreaEditScreen extends Component {
         this.setState({
             area: data,
         })
-    };
+    }
 
     handleChange = newValue => {
         this.setState({ area: newValue })
-    };
+    }
 
-    handleSave = () => {};
+    handleSave = () => {}
 
     handleFocusChange = focused => {
         if (focused) {
@@ -91,7 +92,7 @@ export class AreaEditScreen extends Component {
         }
 
         this.setState({ isEditing: focused })
-    };
+    }
 
     render() {
         let { type, name, revision } = this.props.params

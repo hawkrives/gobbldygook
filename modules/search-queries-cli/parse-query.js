@@ -1,6 +1,4 @@
-import {
-    buildQueryFromString,
-} from '../search-queries/build-query-from-string'
+import { buildQueryFromString } from '../search-queries/build-query-from-string'
 import nom from 'nomnom'
 import stringify from 'stabilize'
 import yaml from 'js-yaml'

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import filter from 'lodash/filter'
@@ -12,7 +13,7 @@ import Semester from './semester'
 
 import { getSchedule } from '../../helpers/get-schedule'
 
-export class SemesterContainer extends Component {
+export class SemesterContainer extends React.Component {
     static propTypes = {
         addCourse: PropTypes.func.isRequired, // redux
         destroySchedules: PropTypes.func.isRequired, // redux
@@ -20,13 +21,15 @@ export class SemesterContainer extends Component {
         semester: PropTypes.number.isRequired,
         student: PropTypes.object.isRequired,
         year: PropTypes.number.isRequired,
-    };
+    }
 
     shouldComponentUpdate(nextProps) {
-        return nextProps.student !== this.props.student ||
+        return (
+            nextProps.student !== this.props.student ||
             nextProps.addCourse !== this.props.addCourse ||
             nextProps.moveCourse !== this.props.moveCourse ||
             nextProps.destroySchedules !== this.props.destroySchedules
+        )
     }
 
     removeSemester = () => {
@@ -37,7 +40,7 @@ export class SemesterContainer extends Component {
         )
         const scheduleIds = map(thisSemesterSchedules, s => s.id)
         this.props.destroySchedules(student.id, ...scheduleIds)
-    };
+    }
 
     render() {
         const { student, semester, year, addCourse, moveCourse } = this.props

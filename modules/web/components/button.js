@@ -11,19 +11,19 @@ type ButtonProps = {
     className?: string,
     disabled?: boolean,
     link?: boolean,
-    onClick?: (Event) => any,
+    onClick?: Event => any,
     style?: Object,
     title?: string,
     to?: string | Object,
     type: 'flat' | 'raised',
-};
+}
 
 export default class Button extends Component {
-    props: ButtonProps;
+    props: ButtonProps
 
     static defaultProps = {
         type: 'flat',
-    };
+    }
 
     shouldComponentUpdate(nextProps: ButtonProps) {
         return compareProps(this.props, nextProps)

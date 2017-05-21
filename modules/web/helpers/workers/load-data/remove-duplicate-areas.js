@@ -14,7 +14,7 @@ type AreaOfStudy = {
     type: string,
     revision: string,
     sourcePath: string,
-};
+}
 
 export function buildRemoveAreaOps(areas: AreaOfStudy[]) {
     return fromPairs(map(areas, item => [item.sourcePath, null]))
@@ -52,7 +52,8 @@ export function generateOps(allAreas: AreaOfStudy[]) {
     // --- something about any values that aren't objects
     const requiredKeys = ['name', 'revision', 'type']
     const invalidAreas = filter(allAreas, area =>
-        requiredKeys.some(key => area[key] === undefined))
+        requiredKeys.some(key => area[key] === undefined)
+    )
 
     return { ...ops, ...buildRemoveAreaOps(invalidAreas) }
 }

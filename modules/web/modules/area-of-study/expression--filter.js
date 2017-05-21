@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 // import CourseExpression from './expression--course'
 import Expression, { makeWhereQualifier } from './expression'
 import map from 'lodash/map'

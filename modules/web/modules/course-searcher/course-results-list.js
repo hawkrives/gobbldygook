@@ -28,10 +28,10 @@ type CourseResultsListProps = {
     results: any[],
     sortBy?: string,
     studentId?: string,
-};
+}
 
 export default class CourseResultsList extends Component {
-    props: CourseResultsListProps;
+    props: CourseResultsListProps
 
     shouldComponentUpdate(nextProps: CourseResultsListProps) {
         return compareProps(this.props, nextProps)

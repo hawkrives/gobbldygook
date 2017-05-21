@@ -11,8 +11,8 @@ import type { InfoFileTypeEnum } from './types'
 const coursesLog = debug('worker:load-data:store-data:courses')
 const areasLog = debug('worker:load-data:store-data:areas')
 
-type BasicCourse = Object;
-type BasicArea = { type: string };
+type BasicCourse = Object
+type BasicArea = { type: string }
 
 export function storeCourses(path: string, data: BasicCourse[]) {
     coursesLog(path)

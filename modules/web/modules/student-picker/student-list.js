@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
@@ -16,11 +17,7 @@ const ListOfStudents = styled(List)`
 `
 
 export default function StudentList(props) {
-    const {
-        isEditing,
-        destroyStudent,
-        students,
-    } = props
+    const { isEditing, destroyStudent, students } = props
 
     let {
         filter: filterText,
@@ -36,7 +33,8 @@ export default function StudentList(props) {
                 fuzzysearch(
                     filterText,
                     (s.data.present.name || '').toLowerCase()
-                )),
+                )
+            ),
             s => s.data.present[sortByKey]
         ),
         (student, i) => (
@@ -61,11 +59,8 @@ StudentList.propTypes = {
     filter: PropTypes.string.isRequired,
     groupBy: PropTypes.string.isRequired,
     isEditing: PropTypes.bool.isRequired,
-    sortBy: PropTypes.oneOf([
-        'dateLastModified',
-        'name',
-        'canGraduate',
-    ]).isRequired,
+    sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate'])
+        .isRequired,
     students: PropTypes.object.isRequired,
 }
 

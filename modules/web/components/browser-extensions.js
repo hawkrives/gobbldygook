@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import {
     installOperaExtension,
@@ -13,17 +14,15 @@ import brwsr from 'brwsr'
 
 import './browser-extensions.scss'
 
-function BrowserButton(
-    {
-        onClick,
-        browserName,
-        disabled,
-    }: {
-        onClick: (any) => any,
-        browserName: string,
-        disabled?: boolean,
-    }
-) {
+function BrowserButton({
+    onClick,
+    browserName,
+    disabled,
+}: {
+    onClick: any => any,
+    browserName: string,
+    disabled?: boolean,
+}) {
     return (
         <button
             type="button"
@@ -36,13 +35,13 @@ function BrowserButton(
     )
 }
 BrowserButton.propTypes = {
-    onClick: React.PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
 }
 
 export class BrowserExtensionsComponent extends React.Component {
     static propTypes = {
-        onInstall: React.PropTypes.func.isRequired,
-    };
+        onInstall: PropTypes.func.isRequired,
+    }
 
     state: {
         installError: ?Error,
@@ -52,13 +51,13 @@ export class BrowserExtensionsComponent extends React.Component {
         installAttempted: false,
         installError: null,
         extensionInstalled: false,
-    };
+    }
 
     checkExtensionStatus = () => {
         if (global.gobbldygook_extension >= '1.0.0') {
             this.setState({ extensionInstalled: true })
         }
-    };
+    }
 
     installChromeExtension = (ev: Event) => {
         ev.preventDefault()
@@ -67,7 +66,7 @@ export class BrowserExtensionsComponent extends React.Component {
         installChromeExtension()
             .then(this.installSuccess)
             .catch(this.installFailure)
-    };
+    }
 
     installFirefoxExtension = (ev: Event) => {
         ev.preventDefault()
@@ -76,7 +75,7 @@ export class BrowserExtensionsComponent extends React.Component {
         installFirefoxExtension()
             .then(this.installSuccess)
             .catch(this.installFailure)
-    };
+    }
 
     installOperaExtension = (ev: Event) => {
         ev.preventDefault()
@@ -85,20 +84,20 @@ export class BrowserExtensionsComponent extends React.Component {
         installOperaExtension()
             .then(this.installSuccess)
             .catch(this.installFailure)
-    };
+    }
 
-    installSafariExtension = () => {};
+    installSafariExtension = () => {}
 
-    installEdgeExtension = () => {};
+    installEdgeExtension = () => {}
 
     installSuccess = () => {
         this.setState({ installAttempted: true })
         this.props.onInstall()
-    };
+    }
 
     installFailure = (err: Error) => {
         this.setState({ installError: err, installAttempted: true })
-    };
+    }
 
     detectBrowser() {
         return brwsr()

@@ -23,7 +23,7 @@ const welcomeMessages = [
     'ようこそ、', // japanese
     'Fram! Fram! ',
     'Salut, ',
-    'Aloha, ',
+    'Aloha, ', // hawaiian
     'Привет, ',
     'Вітаю, ',
     'Sawubona, ',
@@ -36,22 +36,24 @@ const welcomeMessages = [
     '안녕하세요 ', // korean
     'สวัสดี ', // thai
     'halo, ', // indonesian
+    'Salve, ', // latin
+    'Χαῖρε! ', // ancient greek
 ]
 
 const welcomeMessage = welcomeMessages[2]
 
-type Student = Object;
+type Student = Object
 
 export class StudentSummary extends React.PureComponent {
     props: {
-        onChangeGraduation?: (string) => any,
-        onChangeMatriculation?: (string) => any,
-        onChangeName?: (string) => any,
+        onChangeGraduation?: string => any,
+        onChangeMatriculation?: string => any,
+        onChangeName?: string => any,
         randomizeHello?: boolean,
         showAvatar?: boolean,
         showMessage?: boolean,
         student: Student,
-    };
+    }
 
     render() {
         const {
@@ -108,16 +110,14 @@ export class Header extends React.PureComponent {
         canGraduate: boolean,
         helloMessage: string,
         name: string,
-        onChangeName?: (string) => any,
+        onChangeName?: string => any,
         showAvatar: boolean,
-    };
+    }
 
     render() {
         const props = this.props
 
-        const className = props.canGraduate
-            ? 'can-graduate'
-            : 'cannot-graduate'
+        const className = props.canGraduate ? 'can-graduate' : 'cannot-graduate'
 
         const avatar = props.showAvatar
             ? <AvatarLetter
@@ -151,16 +151,16 @@ export class Footer extends React.PureComponent {
     goodGraduationMessage = [
         "It looks like you'll make it! Just follow the plan, and",
         'go over my output with your advisor a few times.',
-    ].join(' ');
+    ].join(' ')
 
     badGraduationMessage = [
         "You haven't planned everything out yet.",
         'Ask your advisor if you need help fitting everything in.',
-    ].join(' ');
+    ].join(' ')
 
     props: {
         canGraduate: boolean,
-    };
+    }
 
     render() {
         const msg = this.props.canGraduate
@@ -177,11 +177,11 @@ export class Footer extends React.PureComponent {
 
 export class DateSummary extends React.PureComponent {
     props: {
-        onChangeGraduation?: (string) => any,
-        onChangeMatriculation?: (string) => any,
+        onChangeGraduation?: string => any,
+        onChangeMatriculation?: string => any,
         matriculation: string,
         graduation: string,
-    };
+    }
 
     render() {
         const props = this.props
@@ -216,7 +216,7 @@ export class DateSummary extends React.PureComponent {
 export class DegreeSummary extends React.PureComponent {
     props: {
         studies: { type: string, name: string }[],
-    };
+    }
 
     render() {
         const grouped: {
@@ -272,7 +272,7 @@ export class CreditSummary extends React.PureComponent {
     props: {
         currentCredits: number,
         neededCredits: number,
-    };
+    }
 
     render() {
         const { currentCredits, neededCredits } = this.props
