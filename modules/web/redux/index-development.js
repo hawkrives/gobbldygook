@@ -9,16 +9,13 @@ import saveStudentsMiddleware from './middleware/save-students'
 import rootReducer from './reducer'
 import freezingMiddleware from 'redux-freeze'
 
-const loggerMiddleware = createLogger({ collapsed: true })
-
 const finalCreateStore = compose(
     applyMiddleware(
         promiseMiddleware,
         thunkMiddleware,
         freezingMiddleware,
         checkStudentsMiddleware,
-        saveStudentsMiddleware,
-        loggerMiddleware
+        saveStudentsMiddleware
     ),
     window && window.devToolsExtension ? window.devToolsExtension() : f => f,
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
