@@ -148,7 +148,7 @@
     "cpy": "5.0.0",
     "cpy-cli": "1.0.1",
     "cross-env": "5.0.0",
-    "css-loader": "0.28.2",
+    "css-loader": "0.28.3",
     "del": "2.2.2",
     "duplicate-package-checker-webpack-plugin": "1.2.4",
     "enzyme": "2.8.2",
