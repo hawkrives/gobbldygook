@@ -25,10 +25,25 @@ function findSemesterList(student: ?Object) {
     )
 }
 
-const moveToSchedule = (
-    { moveCourse, addCourse, removeCourse, scheduleId, studentId, clbid }
-) =>
-    ev => {
+const moveToSchedule = ({
+    moveCourse,
+    addCourse,
+    removeCourse,
+    scheduleId,
+    studentId,
+    clbid,
+}: {
+    moveCourse: Function,
+    addCourse: Function,
+    removeCourse: Function,
+    scheduleId: ?string,
+    studentId: ?string,
+    clbid: ?number,
+}) => {
+    if (!studentId || !scheduleId || clbid === null || clbid === undefined) {
+        return () => {}
+    }
+    return ev => {
         const targetScheduleId = ev.target.value
         if (targetScheduleId === '$none') {
             return
@@ -42,24 +57,23 @@ const moveToSchedule = (
             return addCourse(studentId, targetScheduleId, clbid)
         }
     }
+}
 
-export default function SemesterSelector(
-    {
-        scheduleId,
-        student,
-        moveCourse,
-        addCourse,
-        removeCourse,
-        clbid,
-    }: {
-        addCourse: () => any,
-        clbid?: number,
-        moveCourse: () => any,
-        removeCourse: () => any,
-        scheduleId?: string,
-        student?: Object,
-    }
-) {
+export default function SemesterSelector({
+    scheduleId,
+    student,
+    moveCourse,
+    addCourse,
+    removeCourse,
+    clbid,
+}: {
+    addCourse: (string, string, number) => any,
+    clbid?: number,
+    moveCourse: (string, string, string, number) => any,
+    removeCourse: (string, string, number) => any,
+    scheduleId?: string,
+    student?: Object,
+}) {
     const studentId = student ? student.id : null
     const specialOption = scheduleId
         ? <option value="$remove">Remove from Schedule</option>

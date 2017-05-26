@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+// @flow
+import React from 'react'
 import PropTypes from 'prop-types'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
@@ -16,22 +17,32 @@ const DetailText = styled.pre`
 `
 
 export default class SemesterDetail extends React.Component {
-    static propTypes = {
-        className: PropTypes.string,
-        location: PropTypes.shape({
+    props: {
+        className?: string,
+        location: {
             // react-router
-            pathname: PropTypes.string,
-            search: PropTypes.string,
-        }),
-        params: PropTypes.object, // react-router
-        student: PropTypes.object,
+            pathname: string,
+            search: string,
+        },
+        params: {
+            // react-router
+            year: number,
+            semester: number,
+        },
+        student: {
+            data: {
+                past: Object,
+                present: Object,
+                future: Object,
+            },
+        },
     }
 
     state = {
         year: null,
         semester: null,
         schedules: [],
-    };
+    }
 
     render() {
         log('SemesterDetail#render')

@@ -67,25 +67,32 @@ const Course = styled(ExpandedCourse)`
     ${VerticalSegment}
 `
 
-const removeFromSemester = ({ studentId, removeCourse, clbid, scheduleId }) =>
-    () => {
-        if (studentId) {
-            removeCourse(studentId, scheduleId, clbid)
-        }
+const removeFromSemester = ({
+    studentId,
+    removeCourse,
+    clbid,
+    scheduleId,
+}: {
+    studentId: ?string,
+    removeCourse: Function,
+    clbid: ?number,
+    scheduleId: ?string,
+}) => () => {
+    if (studentId && scheduleId && clbid !== null && clbid !== undefined) {
+        removeCourse(studentId, scheduleId, clbid)
     }
+}
 
-function ModalCourse(
-    props: {
-        addCourse?: () => any, // redux
-        course: Object, // parent
-        moveCourse?: () => any, // redux
-        onClose: () => any, // parent
-        removeCourse?: () => any, // redux
-        scheduleId?: string, // parent
-        student?: Object, // redux
-        studentId?: string, // parent
-    }
-) {
+function ModalCourse(props: {
+    addCourse?: () => any, // redux
+    course: Object, // parent
+    moveCourse?: () => any, // redux
+    onClose: () => any, // parent
+    removeCourse?: (string, string, number) => any, // redux
+    scheduleId?: string, // parent
+    student?: Object, // redux
+    studentId?: string, // parent
+}) {
     const {
         course,
         student,
