@@ -57,7 +57,7 @@
     "copy": "rimraf build && cpy 'modules/web/static/*' build/",
     "cover": "jest --coverage && open coverage/index.html",
     "flow": "flow check",
-    "lint": "eslint *.js modules/",
+    "lint": "eslint --cache *.js .*.js modules/",
     "prettier": "prettier --write $npm_package_config_prettier 'modules/**/*.js' '*.js' '.*.js'",
     "prettier:changed": "FILES=$(git diff --name-only | grep '\\.js$'); prettier --write $npm_package_config_prettier $FILES",
     "prettier:since-master": "FILES=$(git diff --name-only master | grep '\\.js$'); prettier --write $npm_package_config_prettier $FILES",
