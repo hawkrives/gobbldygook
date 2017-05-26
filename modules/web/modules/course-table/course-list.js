@@ -1,62 +1,74 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import range from 'lodash/range'
 import map from 'lodash/map'
-
-import InlineCourse from '../course/inline-course'
-import List from '../../components/list'
+import styled, { css } from 'styled-components'
+import { DraggableCourse } from '../course'
+import { PlainList, ListItem } from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
+import { semesterPadding } from './variables'
 
-import './course-list.scss'
+const courseStyles = css`
+    ${semesterPadding}
 
-export default function CourseList(props) {
-    // eslint-disable-next-line no-confusing-arrow
-    let courseObjects = map(
+    &:hover {
+        background-color: ${props => props.theme.gray100};
+    }
+`
+
+const List = styled(PlainList)`
+    min-height: 30px;
+    padding-bottom: 0.25em;
+
+    &:focus {
+        outline: 0;
+    }
+`
+
+const Item = styled(ListItem)`
+    &:last-child {
+        border-bottom: 0;
+    }
+`
+
+const Missing = styled(MissingCourse)`${courseStyles}`
+const Course = styled(DraggableCourse)`${courseStyles}`
+const Empty = styled(EmptyCourseSlot)`${courseStyles}`
+
+type PropTypes = {
+    availableCredits: number,
+    conflicts: Object[],
+    creditCount: number,
+    schedule: Object,
+    studentId: string,
+}
+
+export default function CourseList(props: PropTypes) {
+    const courseObjects = map(
         props.schedule.courses,
         (course, i) =>
             course.error
-                ? <li key={course.clbid}>
-                      <MissingCourse
-                          className="course"
-                          clbid={course.clbid}
-                          error={course.error}
-                      />
-                  </li>
-                : <li key={course.clbid}>
-                      <InlineCourse
-                          index={i}
-                          className="course"
-                          course={course}
-                          conflicts={props.conflicts}
-                          scheduleId={props.schedule.id}
-                          studentId={props.studentId}
-                      />
-                  </li>
+                ? <Missing clbid={course.clbid} error={course.error} />
+                : <Course
+                      index={i}
+                      course={course}
+                      conflicts={props.conflicts}
+                      scheduleId={props.schedule.id}
+                      studentId={props.studentId}
+                  />
     )
 
-    let emptySlots = []
-    if (props.creditCount < props.availableCredits) {
-        const minimumExtraCreditRange = range(
-            Math.floor(props.creditCount),
-            props.availableCredits
-        )
-        emptySlots = map(minimumExtraCreditRange, i => (
-            <li key={`empty-${i}`}><EmptyCourseSlot className="course" /></li>
-        ))
-    }
+    const usedCredits = Math.floor(props.creditCount)
+    const emptySlots = range(usedCredits, props.availableCredits)
+        .filter(n => n >= 0)
+        .map(n => <Empty key={n} />)
 
     return (
-        <List className="course-list" type="plain">
-            {courseObjects}
-            {emptySlots}
+        <List className="course-list">
+            {[...courseObjects, ...emptySlots].map((child, i) => (
+                <Item key={i}>{child}</Item>
+            ))}
         </List>
     )
-}
-CourseList.propTypes = {
-    availableCredits: PropTypes.number.isRequired,
-    conflicts: PropTypes.array.isRequired,
-    creditCount: PropTypes.number.isRequired,
-    schedule: PropTypes.object.isRequired,
-    studentId: PropTypes.string.isRequired,
 }

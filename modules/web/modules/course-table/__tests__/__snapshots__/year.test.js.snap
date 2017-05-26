@@ -1,21 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Year can add a semester 1`] = `
-<div
-  className="year"
->
-  <header
-    className="year-title"
-  >
-    <h1>
+
+
+<styled.div>
+  <styled.header>
+    <styled.h1>
       2016—2017
-    </h1>
-    <span
-      className="buttons"
-    >
-      <Button
-        className="add-semester"
-        disabled={false}
+    </styled.h1>
+    <span>
+      <Styled(Button)
         onClick={[Function]}
         title="Add Semester"
         type="flat"
@@ -23,39 +17,30 @@ exports[`Year can add a semester 1`] = `
         Add ‘
         Fall
         ’
-      </Button>
-      <Button
-        className="remove-year"
+      </Styled(Button)>
+      <Styled(Button)
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Button>
+      </Styled(Button)>
     </span>
-  </header>
-  <div
-    className="row semester-list"
-  />
-</div>
+  </styled.header>
+  <styled.div />
+</styled.div>
 `;
 
 exports[`Year can add a semester 2`] = `
-<div
-  className="year"
->
-  <header
-    className="year-title"
-  >
-    <h1>
+
+
+<styled.div>
+  <styled.header>
+    <styled.h1>
       2016—2017
-    </h1>
-    <span
-      className="buttons"
-    >
-      <Button
-        className="add-semester"
-        disabled={false}
+    </styled.h1>
+    <span>
+      <Styled(Button)
         onClick={[Function]}
         title="Add Semester"
         type="flat"
@@ -63,39 +48,30 @@ exports[`Year can add a semester 2`] = `
         Add ‘
         Fall
         ’
-      </Button>
-      <Button
-        className="remove-year"
+      </Styled(Button)>
+      <Styled(Button)
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Button>
+      </Styled(Button)>
     </span>
-  </header>
-  <div
-    className="row semester-list"
-  />
-</div>
+  </styled.header>
+  <styled.div />
+</styled.div>
 `;
 
 exports[`Year can remove a semester 1`] = `
-<div
-  className="year"
->
-  <header
-    className="year-title"
-  >
-    <h1>
+
+
+<styled.div>
+  <styled.header>
+    <styled.h1>
       2016—2017
-    </h1>
-    <span
-      className="buttons"
-    >
-      <Button
-        className="add-semester"
-        disabled={false}
+    </styled.h1>
+    <span>
+      <Styled(Button)
         onClick={[Function]}
         title="Add Semester"
         type="flat"
@@ -103,39 +79,30 @@ exports[`Year can remove a semester 1`] = `
         Add ‘
         Fall
         ’
-      </Button>
-      <Button
-        className="remove-year"
+      </Styled(Button)>
+      <Styled(Button)
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Button>
+      </Styled(Button)>
     </span>
-  </header>
-  <div
-    className="row semester-list"
-  />
-</div>
+  </styled.header>
+  <styled.div />
+</styled.div>
 `;
 
 exports[`Year can remove a semester 2`] = `
-<div
-  className="year"
->
-  <header
-    className="year-title"
-  >
-    <h1>
+
+
+<styled.div>
+  <styled.header>
+    <styled.h1>
       2016—2017
-    </h1>
-    <span
-      className="buttons"
-    >
-      <Button
-        className="add-semester"
-        disabled={false}
+    </styled.h1>
+    <span>
+      <Styled(Button)
         onClick={[Function]}
         title="Add Semester"
         type="flat"
@@ -143,39 +110,38 @@ exports[`Year can remove a semester 2`] = `
         Add ‘
         Fall
         ’
-      </Button>
-      <Button
-        className="remove-year"
+      </Styled(Button)>
+      <Styled(Button)
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Button>
+      </Styled(Button)>
     </span>
-  </header>
-  <div
-    className="row semester-list"
-  />
-</div>
+  </styled.header>
+  <styled.div />
+</styled.div>
 `;
 
 exports[`Year renders shallowly 1`] = `
+
+
 <div
-  className="year"
+  className="jGXOTq"
 >
   <header
-    className="year-title"
+    className="brAfmU"
   >
-    <h1>
+    <h1
+      className="jBbibS"
+    >
       2016—2017
     </h1>
-    <span
-      className="buttons"
-    >
+    <span>
       <button
-        className="button button--flat add-semester"
-        disabled={false}
+        className="button button--flat bDreTM"
+        disabled={undefined}
         onClick={[Function]}
         style={undefined}
         title="Add Semester"
@@ -186,7 +152,7 @@ exports[`Year renders shallowly 1`] = `
         ’
       </button>
       <button
-        className="button button--flat remove-year"
+        className="button button--flat jIQrdF"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -198,7 +164,7 @@ exports[`Year renders shallowly 1`] = `
     </span>
   </header>
   <div
-    className="row semester-list"
+    className="gwcmEI"
   />
 </div>
 `;

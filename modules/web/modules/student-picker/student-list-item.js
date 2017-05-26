@@ -1,19 +1,115 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
-import { interpose } from '../../../lib/interpose'
 import { sortStudiesByType } from '../../../object-student'
-
+import styled from 'styled-components'
 import Button from '../../components/button'
 import Icon from '../../components/icon'
 import { iosTrashOutline, iosArrowForward } from '../../icons/ionicons'
 
-import './student-list-item.scss'
+const Container = styled.li`
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
 
-export default function StudentListItem(props) {
+    & + & {
+        border-top: ${props => props.theme.materialDivider};
+    }
+
+    border-left: solid 3px transparent;
+    &.loading {
+        border-left-color: ${props => props.theme.blue300};
+    }
+    &.can-graduate {
+        border-left-color: ${props => props.theme.green300};
+    }
+    &.cannot-graduate {
+        border-left-color: ${props => props.theme.red300};
+    }
+`
+
+const DeleteButton = styled(Button)`
+    flex-direction: column;
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    border: 0;
+    border-radius: 0;
+
+    & .icon {
+        font-size: 2em;
+        margin-bottom: 0.125em;
+    }
+
+    &:hover {
+        color: white;
+        border-color: $red-900;
+        background-color: $red-500;
+    }
+`
+
+const GoIcon = styled(Icon)`
+    margin-left: 1em;
+    margin-right: 0.5em;
+`
+
+const StudentName = styled.div`
+    line-height: 1.5;
+`
+
+const StudentAreas = styled.div`
+    font-size: 0.8em;
+`
+
+const AreaGrouping = styled.span`
+    & + &::before { content: " | "; }
+`
+
+const AreaName = styled.span`
+    & + &::before { content: " • "; }
+`
+
+const StudentInfo = styled.span`
+    flex: 1;
+    margin-left: 0.5em;
+`
+
+const ListItemLink = styled(Link)`
+    ${props => props.theme.linkUndecorated}
+
+    background-color: white;
+    &.is-selected {
+        background-color: ${props => props.theme.blue50};
+    }
+
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    padding: 0.75em 0.5em;
+    position: relative;
+
+    transition: 0.15s;
+
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        background-color: ${props => props.theme.blue50};
+        border-color: ${props => props.theme.blue};
+    }
+`
+
+type PropTypes = {
+    destroyStudent: string => any,
+    isEditing: boolean,
+    student: Object,
+}
+
+export default function StudentListItem(props: PropTypes) {
     const { student, isEditing, destroyStudent } = props
 
     const isLoading =
@@ -21,61 +117,47 @@ export default function StudentListItem(props) {
         student.isFetching ||
         student.isValdiating ||
         student.isChecking
-    let opts = { loading: isLoading }
+
+    const classes: any = { loading: isLoading }
     if (!isLoading) {
-        opts['can-graduate'] = student.data.present.canGraduate
-        opts['cannot-graduate'] = !student.data.present.canGraduate
+        classes['can-graduate'] = student.data.present.canGraduate
+        classes['cannot-graduate'] = !student.data.present.canGraduate
     }
 
-    const classname = cx('student-list-item-container', opts)
-
-    let sortedStudies = sortStudiesByType(student.data.present.studies)
+    const sortedStudies = sortStudiesByType(student.data.present.studies)
     const groupedStudies = groupBy(sortedStudies, s => s.type)
+
+    const areas = map(groupedStudies, (group, type) => (
+        <AreaGrouping key={type}>
+            {group.map(s => <AreaName key={s.name}>{s.name}</AreaName>)}
+        </AreaGrouping>
+    ))
+
     return (
-        <li className={classname}>
+        <Container className={cx(classes)}>
             {isEditing &&
-                <Button
-                    className="delete"
+                <DeleteButton
                     type="flat"
                     onClick={() => destroyStudent(student.data.present.id)}
                 >
                     <Icon>{iosTrashOutline}</Icon>
                     Delete
-                </Button>}
-            <Link
-                className="student-list-item"
-                to={`/s/${student.data.present.id}/`}
-            >
-                <span className="student-list-item-info">
-                    <div className="name">
-                        {`${student.data.present.name} ${process.env.NODE_ENV !== 'production' ? '(' + student.data.present.id + ')' : ''}` ||
-                            ''}
-                    </div>
-                    <div className="areas">
-                        {map(
-                            interpose(
-                                map(groupedStudies, group =>
-                                    group.map(s => s.name).join(' · ')
-                                ),
-                                <span className="joiner">|</span>
-                            ),
-                            (group, i) => (
-                                <span className="area-type" key={i}>
-                                    {group}
-                                </span>
-                            )
-                        )}
-                    </div>
-                </span>
+                </DeleteButton>}
+            <ListItemLink to={`/s/${student.data.present.id}/`}>
+                <StudentInfo>
+                    <StudentName>
+                        {student.data.present.name}
+                        {process.env.NODE_ENV !== 'production'
+                            ? ` (${student.data.present.id})`
+                            : ''}
+                    </StudentName>
+                    <StudentAreas>
+                        {areas}
+                    </StudentAreas>
+                </StudentInfo>
 
-                <Icon className="student-list-item--go">{iosArrowForward}</Icon>
-            </Link>
-        </li>
+                <GoIcon>{iosArrowForward}</GoIcon>
+            </ListItemLink>
+        </Container>
     )
-}
-
-StudentListItem.propTypes = {
-    destroyStudent: PropTypes.func.isRequired,
-    isEditing: PropTypes.bool.isRequired,
-    student: PropTypes.object.isRequired,
 }

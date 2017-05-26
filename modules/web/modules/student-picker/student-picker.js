@@ -1,5 +1,5 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import size from 'lodash/size'
 
 import {
@@ -13,8 +13,81 @@ import Toolbar from '../../components/toolbar'
 import Button from '../../components/button'
 import Icon from '../../components/icon'
 import StudentList from './student-list'
+import styled from 'styled-components'
 
-import './student-picker.scss'
+const StudentListToolbar = styled(Toolbar)`
+    width: 100%;
+    justify-content: center;
+`
+
+const StudentListButton = styled(Button)`
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
+    margin: 0 0.125em;
+    flex-direction: column;
+    flex: 0 1 auto !important;
+
+    & .icon {
+        font-size: 1.5em;
+        margin-bottom: 0.25em;
+    }
+`
+
+const Overview = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-width: 45em;
+    margin: 0 auto;
+`
+
+const StudentListToolbarWrapper = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1em;
+`
+
+const AppTitle = styled.header`
+    margin-top: 3em;
+    text-align: center;
+
+    & h1, & h2 {
+        margin: 0;
+        font-feature-settings: 'smcp';
+    }
+
+    & h1 {
+        font-weight: 300;
+    }
+
+    & h2 {
+        margin-bottom: 1em;
+        font-weight: 400;
+        font-size: 1em;
+    }
+`
+
+const MakeStudentButton = styled(Button)`
+    max-width: 10em;
+    margin: 0 auto;
+`
+
+const Filter = styled.input`
+    ${props => props.theme.card}
+    flex: 3 0 auto;
+    align-self: center;
+    padding: 0.25em 0.5em;
+    margin-right: 1em;
+    margin-left: 1em; /* only for the search button */
+
+    &:focus {
+        color: $blue-900;
+        border-color: $blue-500;
+        background-color: $blue-50;
+        outline: none;
+    }
+`
 
 let sortByExpanded = {
     dateLastModified: 'date last modified',
@@ -22,7 +95,20 @@ let sortByExpanded = {
     canGraduate: 'can graduate',
 }
 
-export default function StudentPicker(props) {
+type PropTypes = {
+    destroyStudent: () => any,
+    filterText: string,
+    groupBy: string,
+    isEditing: boolean,
+    onFilterChange: () => any,
+    onGroupChange: () => any,
+    onSortChange: () => any,
+    onToggleEditing: () => any,
+    sortBy: string,
+    students: Object,
+}
+
+export default function StudentPicker(props: PropTypes) {
     const {
         destroyStudent,
         filterText,
@@ -37,57 +123,46 @@ export default function StudentPicker(props) {
     } = props
 
     return (
-        <div className="students-overview">
-            <heading className="app-title">
+        <Overview>
+            <AppTitle>
                 <h1>GobbldygooK</h1>
                 <h2>A Course Scheduling Helper</h2>
-            </heading>
+            </AppTitle>
 
-            <div className="student-list-toolbar">
-                <Toolbar className="student-list-buttons">
-                    <Button link to="search/" className="student-list--button">
+            <StudentListToolbarWrapper>
+                <StudentListToolbar>
+                    <StudentListButton link to="search/">
                         <Icon>{androidSearch}</Icon>
                         Courses
-                    </Button>
+                    </StudentListButton>
 
-                    <input
+                    <Filter
                         type="search"
-                        className="student-list-filter"
                         placeholder="Filter students"
                         value={filterText}
                         onChange={onFilterChange}
                     />
 
-                    <Button
-                        className="student-list--button"
-                        onClick={onSortChange}
-                    >
+                    <StudentListButton onClick={onSortChange}>
                         <Icon>{funnel}</Icon>
                         Sort
-                    </Button>
+                    </StudentListButton>
 
-                    <Button
-                        className="student-list--button"
-                        onClick={onGroupChange}
-                        disabled
-                    >
+                    <StudentListButton disabled onClick={onGroupChange}>
                         <Icon>{androidApps}</Icon>
                         Group
-                    </Button>
+                    </StudentListButton>
 
-                    <Button
-                        className="student-list--button"
-                        onClick={onToggleEditing}
-                    >
+                    <StudentListButton onClick={onToggleEditing}>
                         <Icon>{androidMenu}</Icon>
                         Edit
-                    </Button>
+                    </StudentListButton>
 
-                    <Button link to="create/" className="student-list--button">
+                    <StudentListButton link to="create/">
                         <Icon>{androidAdd}</Icon>
                         New
-                    </Button>
-                </Toolbar>
+                    </StudentListButton>
+                </StudentListToolbar>
 
                 <div>
                     <span>
@@ -96,7 +171,7 @@ export default function StudentPicker(props) {
                     {' '}
                     <span>grouping by <b>{groupBy}</b>.</span>
                 </div>
-            </div>
+            </StudentListToolbarWrapper>
 
             {size(students) > 0
                 ? <StudentList
@@ -107,27 +182,9 @@ export default function StudentPicker(props) {
                       groupBy={groupBy}
                       students={students}
                   />
-                : <Button
-                      className="make-student"
-                      link
-                      type="raised"
-                      to="/create"
-                  >
+                : <MakeStudentButton link type="raised" to="/create">
                       Add a Student
-                  </Button>}
-        </div>
+                  </MakeStudentButton>}
+        </Overview>
     )
-}
-
-StudentPicker.propTypes = {
-    destroyStudent: PropTypes.func.isRequired,
-    filterText: PropTypes.string.isRequired,
-    groupBy: PropTypes.string.isRequired,
-    isEditing: PropTypes.bool.isRequired,
-    onFilterChange: PropTypes.func.isRequired,
-    onGroupChange: PropTypes.func.isRequired,
-    onSortChange: PropTypes.func.isRequired,
-    onToggleEditing: PropTypes.func.isRequired,
-    sortBy: PropTypes.string.isRequired,
-    students: PropTypes.object.isRequired,
 }

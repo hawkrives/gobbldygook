@@ -4,11 +4,17 @@ import filter from 'lodash/filter'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import fuzzysearch from 'fuzzysearch'
-
+import styled from 'styled-components'
 import List from '../../components/list'
 import StudentListItem from './student-list-item'
 
-import './student-list.scss'
+const ListOfStudents = styled(List)`
+    ${props => props.theme.card}
+    max-width: 35em;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+`
 
 export default function StudentList(props) {
     const { isEditing, destroyStudent, students } = props
@@ -42,9 +48,9 @@ export default function StudentList(props) {
     )
 
     return (
-        <List className="student-list" type="plain">
+        <ListOfStudents type="plain">
             {studentObjects}
-        </List>
+        </ListOfStudents>
     )
 }
 

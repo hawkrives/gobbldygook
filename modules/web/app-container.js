@@ -5,7 +5,9 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { DragDropContext } from 'react-dnd'
+import { ThemeProvider } from 'styled-components'
 import StudentPicker from './modules/student-picker'
+import * as theme from './theme'
 
 import './index.scss'
 
@@ -25,10 +27,12 @@ export class App extends React.Component {
         let { content, overlay } = this.props
         return (
             <DocumentTitle title="Gobbldygook">
-                <div id="gateway-wrapper">
-                    <div id="content-wrapper">{content}</div>
-                    {overlay}
-                </div>
+                <ThemeProvider theme={theme}>
+                    <div id="gateway-wrapper">
+                        <div id="content-wrapper">{content}</div>
+                        {overlay}
+                    </div>
+                </ThemeProvider>
             </DocumentTitle>
         )
     }

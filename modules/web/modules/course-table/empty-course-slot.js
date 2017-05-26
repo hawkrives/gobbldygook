@@ -1,17 +1,17 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import FakeCourse from './fake-course'
-import './empty-course-slot.scss'
+import styled from 'styled-components'
 
-export default function EmptyCourseSlot({ className }) {
-    return (
-        <FakeCourse
-            title="Empty Slot"
-            className={`empty-course ${className}`}
-        />
-    )
-}
+const Course = styled(FakeCourse)`
+    color: ${props => props.theme.gray500};
+    user-select: none;
 
-EmptyCourseSlot.propTypes = {
-    className: PropTypes.string,
+    * {
+        cursor: default;
+    }
+`
+
+export default function EmptyCourseSlot(props: { className: string }) {
+    return <Course title="Empty Slot" className={props.className} />
 }

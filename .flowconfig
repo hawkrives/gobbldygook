@@ -6,12 +6,16 @@
 .*/node_modules/jest-validate
 .*/node_modules/jest-enzyme
 .*/node_modules/enzyme-matchers
+.*/node_modules/styled-components/.*
 
 [libs]
 ./config/decls
 
 [options]
 emoji=true
+
+; styled-components needs this
+unsafe.enable_getters_and_setters=true
 
 ; allow requiring non-js files (like webpack does)
 module.name_mapper='^\(.*\)\.\(css\|scss\)$' -> '<PROJECT_ROOT>/config/flow/css'
