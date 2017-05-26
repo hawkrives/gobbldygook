@@ -6,21 +6,10 @@
 .*/node_modules/jest-validate
 .*/node_modules/jest-enzyme
 .*/node_modules/enzyme-matchers
-.*/node_modules/styled-components/src/.*
-.*/node_modules/styled-components/dangerfile.js
+.*/node_modules/styled-components/.*
 
 [libs]
 ./config/decls
-
-; These declarations are super explicit...
-; We want to show what libdef files we need to make flow understand all
-; external dependencies.
-; If you have similar dependencies, you will need to check which libdef files
-; are covered by your flow-typed directory!
-node_modules/styled-components/flow-typed/react-native.js
-node_modules/styled-components/flow-typed/glamor_vx.x.x.js
-node_modules/styled-components/flow-typed/inline-style-prefixer_vx.x.x.js
-node_modules/styled-components/flow-typed/npm/css-to-react-native_v1.x.x.js
 
 [options]
 emoji=true
