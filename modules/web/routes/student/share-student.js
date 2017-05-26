@@ -33,7 +33,7 @@ type PropTypes = {
     },
     router: Object,
     student?: Object,
-};
+}
 
 export function ShareSheet(props: PropTypes) {
     let { student } = props

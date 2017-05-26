@@ -6,7 +6,7 @@ type PropTypes = {
     className: string,
     details?: string,
     title: string,
-};
+}
 
 export default function FakeCourse(props: PropTypes) {
     return (

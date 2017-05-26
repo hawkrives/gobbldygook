@@ -93,15 +93,15 @@ export default class Year extends React.PureComponent {
         removeYear: PropTypes.func.isRequired,
         student: PropTypes.object.isRequired,
         year: PropTypes.number.isRequired,
-    };
+    }
 
     addSemester = () => {
         this.props.addSemester(this.props.year)
-    };
+    }
 
     removeYear = () => {
         this.props.removeYear(this.props.year)
-    };
+    }
 
     render() {
         const { student, year } = this.props

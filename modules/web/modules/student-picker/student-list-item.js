@@ -104,10 +104,10 @@ const ListItemLink = styled(Link)`
 `
 
 type PropTypes = {
-    destroyStudent: (string) => any,
+    destroyStudent: string => any,
     isEditing: boolean,
     student: Object,
-};
+}
 
 export default function StudentListItem(props: PropTypes) {
     const { student, isEditing, destroyStudent } = props

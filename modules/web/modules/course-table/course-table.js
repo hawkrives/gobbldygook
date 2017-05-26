@@ -39,7 +39,7 @@ type PropTypes = {
     className?: string,
     removeYear: () => any,
     student: Object,
-};
+}
 
 export default function CourseTable(props: PropTypes) {
     const { student } = props
@@ -48,7 +48,8 @@ export default function CourseTable(props: PropTypes) {
     const nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
     const canAddYear = true // graduation > nextAvailableYear
 
-    const nextYearButton = canAddYear &&
+    const nextYearButton =
+        canAddYear &&
         <AddYearButton
             key="add-year"
             type="flat"

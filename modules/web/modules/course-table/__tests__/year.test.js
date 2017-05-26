@@ -48,7 +48,7 @@ test('Year can add a semester', () => {
 
     expect(tree).toMatchStyledComponentsSnapshot()
 
-    tree.find({title: "Add Semester"}).simulate('click')
+    tree.find({ title: 'Add Semester' }).simulate('click')
 
     expect(addSemester).toHaveBeenCalled()
     expect(removeYear).not.toHaveBeenCalled()
@@ -73,7 +73,7 @@ test('Year can remove a semester', () => {
 
     expect(tree).toMatchStyledComponentsSnapshot()
 
-    tree.find({title: "Remove the year 2016—2017"}).simulate('click')
+    tree.find({ title: 'Remove the year 2016—2017' }).simulate('click')
 
     expect(addSemester).not.toHaveBeenCalled()
     expect(removeYear).toHaveBeenCalled()

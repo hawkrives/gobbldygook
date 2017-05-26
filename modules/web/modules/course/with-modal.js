@@ -4,9 +4,9 @@ import ModalCourse from './modal'
 import CompactCourse from './compact'
 
 export default class CourseWithModal extends React.PureComponent {
-    state = { isOpen: false };
-    closeModal = () => this.setState(() => ({ isOpen: false }));
-    openModal = () => this.setState(() => ({ isOpen: true }));
+    state = { isOpen: false }
+    closeModal = () => this.setState(() => ({ isOpen: false }))
+    openModal = () => this.setState(() => ({ isOpen: true }))
 
     render() {
         return (

@@ -9,7 +9,7 @@ type PropTypes = {
     className?: string,
     connectDragSource: () => any, // react-dnd
     isDragging: boolean, // react-dnd
-};
+}
 
 const Draggable = styled(CourseWithModal)`
     &:hover {
@@ -18,7 +18,7 @@ const Draggable = styled(CourseWithModal)`
 `
 
 class DraggableCourse extends React.PureComponent {
-    props: PropTypes;
+    props: PropTypes
 
     render() {
         const classSet = cx(this.props.className, {

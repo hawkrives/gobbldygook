@@ -47,12 +47,12 @@ type WarningType = {
     type: string,
     msg: string,
     warning: boolean,
-};
+}
 
 export default class CourseWarnings extends React.PureComponent {
     props: {
         warnings: ?Array<WarningType>,
-    };
+    }
 
     render() {
         if (!this.props.warnings) {

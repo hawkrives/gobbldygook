@@ -52,7 +52,7 @@ export default class ExpandedCourse extends React.PureComponent {
     props: {
         className?: string,
         course: Object,
-    };
+    }
 
     render() {
         const { course, className } = this.props
@@ -104,7 +104,8 @@ export default class ExpandedCourse extends React.PureComponent {
                                             {offering.location}
                                         </ListItem>
                                     )
-                                }))}
+                                })
+                            )}
                         </BulletedList>
                     </div>}
 

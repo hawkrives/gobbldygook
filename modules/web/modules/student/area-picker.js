@@ -64,16 +64,16 @@ const AddAreaFilter = styled.input`
     }
 `
 
-type AreaOfStudy = Object;
+type AreaOfStudy = Object
 type PropTypes = {
     areaList: AreaOfStudy[],
     currentAreas: AreaOfStudy[],
     filterText: string,
     onAddArea: (AreaOfStudy, Event) => any,
-    onFilterChange: (Event) => any,
+    onFilterChange: Event => any,
     studentGraduation: number,
     type: AreaOfStudyTypeEnum,
-};
+}
 
 function AreaPicker(props: PropTypes) {
     const graduation = props.studentGraduation

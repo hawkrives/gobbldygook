@@ -42,7 +42,7 @@ type PropTypes = {
     creditCount: number,
     schedule: Object,
     studentId: string,
-};
+}
 
 export default function CourseList(props: PropTypes) {
     const courseObjects = map(

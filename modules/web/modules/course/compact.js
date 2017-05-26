@@ -64,16 +64,11 @@ export default class CompactCourse extends React.PureComponent {
         conflicts?: any[],
         course: Object,
         index?: number,
-        onClick?: (Event) => any,
-    };
+        onClick?: Event => any,
+    }
 
     render() {
-        const {
-            course,
-            conflicts = [],
-            index,
-            onClick = noop,
-        } = this.props
+        const { course, conflicts = [], index, onClick = noop } = this.props
 
         return (
             <Container className={this.props.className} onClick={onClick}>

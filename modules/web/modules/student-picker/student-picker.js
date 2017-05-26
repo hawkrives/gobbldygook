@@ -106,7 +106,7 @@ type PropTypes = {
     onToggleEditing: () => any,
     sortBy: string,
     students: Object,
-};
+}
 
 export default function StudentPicker(props: PropTypes) {
     const {
