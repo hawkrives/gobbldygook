@@ -18,18 +18,19 @@ branches:
     - /^v?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?$/
 
 cache:
-  yarn: true
+  directories:
+    - ~/.npm
 
 script:
   - if [[ "$task" == "lint" ]]; then
-      yarn run lint;
+      npm run lint;
     fi
   - if [[ "$task" == "test" ]]; then
-      yarn run flow;
-      yarn run test -- --coverage --runInBand;
+      npm run flow;
+      npm run test -- --coverage --runInBand;
     fi
   - if [[ "$task" == "build" ]]; then
-      yarn run build;
+      npm run build;
     fi
 
 after_success:

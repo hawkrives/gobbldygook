@@ -12,10 +12,10 @@ machine:
 
 dependencies:
   override:
-    - yarn
+    - npm i
   cache_directories:
-    - ~/.cache/yarn
+    - ~/.npm
 
 test:
   override:
-    - yarn test -- --runInBand
+    - npm test -- --runInBand
