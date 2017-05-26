@@ -5,6 +5,7 @@
 ; stuffs
 .*/node_modules/jest-validate
 .*/node_modules/jest-enzyme
+.*/node_modules/enzyme-matchers
 
 [libs]
 ./config/decls
