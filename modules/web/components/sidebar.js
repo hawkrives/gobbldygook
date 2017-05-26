@@ -24,7 +24,7 @@ import styled from 'styled-components'
 type StudentType = Object
 type PropTypes = {
     children: React$Element<any>,
-    redo: () => any,
+    redo: string => any,
     removeCourse: Function,
     student: {
         data: {
@@ -33,7 +33,7 @@ type PropTypes = {
             future: StudentType[],
         },
     },
-    undo: () => any,
+    undo: string => any,
 }
 
 const StudentButtonsToolbar = styled(Toolbar)`margin-bottom: 0.5em;`

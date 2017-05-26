@@ -1,5 +1,6 @@
 /* global module, __dirname */
 /* eslint-disable camelcase */
+// @flow
 'use strict'
 
 const pkg = require('./package.json')
@@ -22,6 +23,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('./scripts/webpack/html-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
@@ -167,6 +170,9 @@ function config() {
     }
 
     const plugins = [
+        // clean out the build folder between builds
+        new CleanWebpackPlugin([outputFolder]),
+
         // Generates an index.html for us.
         new HtmlPlugin(
             context => `
@@ -261,6 +267,11 @@ function config() {
         }),
 
         new NamedModulesPlugin(),
+
+        // copy files – into the webpack {output} directory
+        new CopyWebpackPlugin([
+            { from: 'modules/web/static/*' }
+        ])
     ]
 
     if (isProduction) {

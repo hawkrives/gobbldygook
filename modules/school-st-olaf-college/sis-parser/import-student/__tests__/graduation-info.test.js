@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { loadHtml } from './import-student.support'
 import { getGraduationInformation } from '../graduation-info'
 
@@ -19,6 +18,6 @@ describe('getGraduationInformation', () => {
                 graduation: 2016,
             },
         ]
-        expect(actual).to.deep.equal(expected)
+        expect(actual).toEqual(expected)
     })
 })

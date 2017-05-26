@@ -1,7 +1,5 @@
-import { expect } from 'chai'
-
 import { loadStudent } from '../load-student'
-import demoStudent from '../../../object-student/demo-student.json'
+import * as demoStudent from '../../../object-student/demo-student.json'
 
 import { Student } from '../../../object-student'
 
@@ -13,31 +11,27 @@ describe('loadStudent', () => {
         localStorage.setItem(student.id, JSON.stringify(student))
     })
 
-    it('returns a promise', () => {
-        expect(loadStudent(student.id)).to.have.property('then')
-    })
-
     it('loads a student', async () => {
         const actual = await loadStudent(student.id)
-        expect(actual).to.be.ok
-        expect(actual).to.be.an.object
+        expect(actual).toBeTruthy()
+        expect(actual).toHaveProperty('id')
     })
 
     it(`removes the student if it is null`, async () => {
         localStorage.removeItem(student.id)
         const actual = await loadStudent(student.id)
-        expect(actual).to.equal(null)
+        expect(actual).toBe(null)
     })
 
     it(`removes the student if it is the string [Object object]`, async () => {
         localStorage.setItem(student.id, String(student))
         const actual = await loadStudent(student.id)
-        expect(actual).to.equal(null)
+        expect(actual).toBe(null)
     })
 
     it('returns a fresh student if JSON errors are encountered', async () => {
         localStorage.setItem(student.id, 'hello!')
         const actual = await loadStudent(student.id)
-        expect(actual).to.be.an.object
+        expect(actual).toHaveProperty('id')
     })
 })

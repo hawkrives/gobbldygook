@@ -1,5 +1,3 @@
-import { expect } from 'chai'
-
 import {
     incrementProgress,
     logError,
@@ -24,7 +22,7 @@ describe('removeNotification action', () => {
             payload: { id },
         }
 
-        expect(removeNotification(id)).to.deep.equal(expectedAction)
+        expect(removeNotification(id)).toEqual(expectedAction)
     })
 
     it('creates an action to remove a notification after a delay', async () => {
@@ -35,11 +33,11 @@ describe('removeNotification action', () => {
         }
 
         let actual = removeNotification(id, 10)
-        expect(actual.type).to.equal(expectedAction.type)
+        expect(actual.type).toBe(expectedAction.type)
 
         let actualPayload = await actual.payload
         let expectedPayload = await expectedAction.payload
-        expect(actualPayload).to.deep.equal(expectedPayload)
+        expect(actualPayload).toEqual(expectedPayload)
     })
 })
 
@@ -52,7 +50,7 @@ describe('logMessage action', () => {
             payload: { id, message },
         }
 
-        expect(logMessage(id, message)).to.deep.equal(expectedAction)
+        expect(logMessage(id, message)).toEqual(expectedAction)
     })
 })
 
@@ -65,7 +63,7 @@ describe('logError action', () => {
             payload: { id, error, args: [] },
         }
 
-        expect(logError({ id, error })).to.deep.equal(expectedAction)
+        expect(logError({ id, error })).toEqual(expectedAction)
     })
 
     it('passes along any other arguments', () => {
@@ -76,7 +74,7 @@ describe('logError action', () => {
             payload: { id, error, args: ['arg'] },
         }
 
-        expect(logError({ id, error }, 'arg')).to.deep.equal(expectedAction)
+        expect(logError({ id, error }, 'arg')).toEqual(expectedAction)
     })
 })
 
@@ -89,7 +87,7 @@ describe('startProgress action', () => {
             payload: { id, message, max: 1, value: 0, showButton: false },
         }
 
-        expect(startProgress(id, message)).to.deep.equal(expectedAction)
+        expect(startProgress(id, message)).toEqual(expectedAction)
     })
 
     it('defaults "message" to an empty string', () => {
@@ -99,7 +97,7 @@ describe('startProgress action', () => {
             payload: { id, message: '', max: 1, value: 0, showButton: false },
         }
 
-        expect(startProgress(id)).to.deep.equal(expectedAction)
+        expect(startProgress(id)).toEqual(expectedAction)
     })
 
     it('defaults "value" to 0', () => {
@@ -109,7 +107,7 @@ describe('startProgress action', () => {
             payload: { id, message: '', max: 1, value: 0, showButton: false },
         }
 
-        expect(startProgress(id)).to.deep.equal(expectedAction)
+        expect(startProgress(id)).toEqual(expectedAction)
     })
 
     it('defaults "max" to 1', () => {
@@ -119,7 +117,7 @@ describe('startProgress action', () => {
             payload: { id, message: '', max: 1, value: 0, showButton: false },
         }
 
-        expect(startProgress(id)).to.deep.equal(expectedAction)
+        expect(startProgress(id)).toEqual(expectedAction)
     })
 })
 
@@ -131,7 +129,7 @@ describe('incrementProgress action', () => {
             payload: { id, by: 1 },
         }
 
-        expect(incrementProgress(id)).to.deep.equal(expectedAction)
+        expect(incrementProgress(id)).toEqual(expectedAction)
     })
 
     it('increments their progress by an arbitrary amount', () => {
@@ -142,6 +140,6 @@ describe('incrementProgress action', () => {
             payload: { id, by },
         }
 
-        expect(incrementProgress(id, by)).to.deep.equal(expectedAction)
+        expect(incrementProgress(id, by)).toEqual(expectedAction)
     })
 })
