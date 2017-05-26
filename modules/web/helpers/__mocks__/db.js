@@ -1,15 +1,13 @@
 /* eslint-env jest */
 // @flow
 
-// $FlowFixMe
-import setGlobals from 'indexeddbshim'
-let dfn = Object.defineProperty
-// $FlowFixMe
-Object.defineProperty = null
-global.window = global
-setGlobals(global.window)
-// $FlowFixMe
-Object.defineProperty = dfn
+// Use fake-indexeddb if real IndexedDB is not available (Node.js), but use real IndexedDB when possible (browser)
+if (typeof indexedDB === 'undefined') {
+    global.indexedDB = require('fake-indexeddb')
+    global.IDBIndex = require('fake-indexeddb/lib/FDBIndex')
+    global.IDBKeyRange = require('fake-indexeddb/lib/FDBKeyRange')
+    global.IDBObjectStore = require('fake-indexeddb/lib/FDBObjectStore')
+}
 
 // $FlowFixMe
 const { default: db } = require.requireActual('../db')
