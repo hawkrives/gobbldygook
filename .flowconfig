@@ -3,24 +3,17 @@
 .*\.json
 
 ; stuffs
-.*/node_modules/fbjs
 .*/node_modules/jest-validate
 .*/node_modules/jest-enzyme
-.*/node_modules/enzyme-matchers
 
 [libs]
-./node_modules/fbjs/flow/lib
 ./config/decls
 
 [options]
 emoji=true
 
-; allow flow to find the modules that we require with modules/
-module.name_mapper='^modules/\(.*\)' -> '<PROJECT_ROOT>/modules/\1'
-
-; allow require'ing non-js files (like webpack does)
-module.name_mapper.extension='css' -> '<PROJECT_ROOT>/config/flow/css'
-module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/config/flow/css'
+; allow requiring non-js files (like webpack does)
+module.name_mapper='^\(.*\)\.\(css\|scss\)$' -> '<PROJECT_ROOT>/config/flow/css'
 module.name_mapper='^\(.*\)\.\(jpg\|png\|svg\|woff\|woff2\)$' -> '<PROJECT_ROOT>/config/flow/file'
 
 suppress_type=$FlowIssue
