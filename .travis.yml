@@ -1,8 +1,3 @@
-# Opt-in to Travis' Trusty Tahr infrastructure
-sudo: false
-dist: trusty
-language: node_js
-node_js: 7
 
 branches:
   only:
@@ -18,13 +13,18 @@ cache:
 
 jobs:
   include:
-    - stage: test
+    - &job
+      stage: test
+      sudo: false
+      dist: trusty
+      language: node_js
+      node_js: 7
       install: npm install
       script:
         - npm run lint
 
-    - stage: test
-      install: npm install
+    - <<: *job
+      stage: test
       script:
         - npm run flow
         - npm run test -- --coverage --runInBand
@@ -33,8 +33,8 @@ jobs:
         - ./node_modules/.bin/coveralls < ./coverage/lcov.info
         - bash <(curl -s https://codecov.io/bash) -f coverage/coverage.json
 
-    - stage: build + deploy
-      install: npm install
+    - <<: *job
+      stage: build + deploy
       script:
         - npm run build
       before_deploy:
