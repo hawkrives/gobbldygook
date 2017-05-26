@@ -840,9 +840,7 @@ describe('the undoable students reducer', () => {
             id: 'xyz',
             name: 'abc',
         })
-        expect(shouldHaveOneStudent.present).toEqual(
-            hasOneStudent.present
-        )
+        expect(shouldHaveOneStudent.present).toEqual(hasOneStudent.present)
 
         expect(shouldHaveOneStudent.past.length).toBe(1)
         expect(shouldHaveOneStudent.past[0]).toEqual(initial.present)

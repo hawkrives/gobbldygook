@@ -24,7 +24,7 @@ import './sidebar.scss'
 type StudentType = Object
 type PropTypes = {
     children: React$Element<any>,
-    redo: (string) => any,
+    redo: string => any,
     removeCourse: Function,
     student: {
         data: {
@@ -33,7 +33,7 @@ type PropTypes = {
             future: StudentType[],
         },
     },
-    undo: (string) => any,
+    undo: string => any,
 }
 
 function Sidebar(props: PropTypes) {

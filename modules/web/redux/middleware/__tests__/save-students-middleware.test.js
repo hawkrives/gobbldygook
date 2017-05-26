@@ -41,7 +41,9 @@ describe('saveStudentsMiddleware', () => {
         describe('handle action', () => {
             it('should return a promise', () => {
                 const actionHandler = nextHandler(doNextAction)
-                expect(typeof actionHandler({ type: CHANGE_NAME }).then).toBe('function')
+                expect(typeof actionHandler({ type: CHANGE_NAME }).then).toBe(
+                    'function'
+                )
             })
 
             xit('should save a student if something has changed', async () => {
@@ -62,8 +64,10 @@ describe('saveStudentsMiddleware', () => {
                 const actionHandler = nextHandler(customDoNextAction)
 
                 await actionHandler({ type: CHANGE_NAME })
-                expect(JSON.parse(localStorage.getItem('a')))
-                    .toBe({ id: 'a', dateLastModified: date })
+                expect(JSON.parse(localStorage.getItem('a'))).toBe({
+                    id: 'a',
+                    dateLastModified: date,
+                })
             })
 
             xit('should not save a student if nothing has changed', () => {})
