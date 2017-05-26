@@ -1,13 +1,8 @@
-# Opt-in to Travis infrastructure
+# Opt-in to Travis' Trusty Tahr infrastructure
 sudo: false
 dist: trusty
 language: node_js
 node_js: 7
-
-env:
-  - {task: lint}
-  - {task: test}
-  - {task: build}
 
 branches:
   only:
@@ -21,37 +16,33 @@ cache:
   directories:
     - ~/.npm
 
-script:
-  - if [[ "$task" == "lint" ]]; then
-      npm run lint;
-    fi
-  - if [[ "$task" == "test" ]]; then
-      npm run flow;
-      npm run test -- --coverage --runInBand;
-    fi
-  - if [[ "$task" == "build" ]]; then
-      npm run build;
-    fi
+jobs:
+  include:
+    - stage: test
+      install: npm install
+      script:
+        - npm run lint
 
-after_success:
-  - |
-    if [[ "$task" == "test" ]]; then
-      npm install coveralls
-      ./node_modules/.bin/coveralls < ./coverage/lcov.info
-      bash <(curl -s https://codecov.io/bash) -f coverage/coverage.json
-    fi
+    - stage: test
+      install: npm install
+      script:
+        - npm run flow
+        - npm run test -- --coverage --runInBand
+      after_success:
+        - npm install coveralls
+        - ./node_modules/.bin/coveralls < ./coverage/lcov.info
+        - bash <(curl -s https://codecov.io/bash) -f coverage/coverage.json
 
-before_deploy:
-  - node scripts/prepare-for-deploy.js
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  on:
-    # only deploy on master, from the "build" job
-    branch: master
-    condition: $task = "build"
-
-after_deploy:
-  - curl -d "apiKey=7e393deddaeb885f5b140b4320ecef6b" -d "repository=https://github.com/hawkrives/gobbldygook" -d "revision=$(git rev-parse --verify HEAD)" 'https://notify.bugsnag.com/deploy'
+    - stage: build + deploy
+      install: npm install
+      script:
+        - npm run build
+      before_deploy:
+        - node scripts/prepare-for-deploy.js
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN
+        on: {branch: master}
+      after_deploy:
+        - curl -d "apiKey=7e393deddaeb885f5b140b4320ecef6b" -d "repository=https://github.com/hawkrives/gobbldygook" -d "revision=$(git rev-parse --verify HEAD)" 'https://notify.bugsnag.com/deploy'
