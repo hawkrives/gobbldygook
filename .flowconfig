@@ -25,6 +25,9 @@ node_modules/styled-components/flow-typed/npm/css-to-react-native_v1.x.x.js
 [options]
 emoji=true
 
+; styled-components needs this
+unsafe.enable_getters_and_setters=true
+
 ; allow requiring non-js files (like webpack does)
 module.name_mapper='^\(.*\)\.\(css\|scss\)$' -> '<PROJECT_ROOT>/config/flow/css'
 module.name_mapper='^\(.*\)\.\(jpg\|png\|svg\|woff\|woff2\)$' -> '<PROJECT_ROOT>/config/flow/file'
