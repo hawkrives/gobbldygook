@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { findFirstAvailableYear } from '../find-first-available-year'
 
 describe('findFirstAvailableYear', () => {
@@ -9,8 +8,8 @@ describe('findFirstAvailableYear', () => {
             { id: 1, year: 2015 },
         ]
 
-        expect(findFirstAvailableYear(schedules)).to.equal(2014)
-        expect(findFirstAvailableYear(schedules)).to.not.equal(2016)
+        expect(findFirstAvailableYear(schedules)).toBe(2014)
+        expect(findFirstAvailableYear(schedules)).not.toBe(2016)
     })
 
     it('accomodates a matriculation date before the schedules', () => {
@@ -21,7 +20,7 @@ describe('findFirstAvailableYear', () => {
         ]
         let matriculation = 2012
 
-        expect(findFirstAvailableYear(schedules, matriculation)).to.equal(2012)
+        expect(findFirstAvailableYear(schedules, matriculation)).toBe(2012)
     })
 
     it('does not add the matriculation year if it is already in the list of schedules', () => {
@@ -32,11 +31,11 @@ describe('findFirstAvailableYear', () => {
         ]
         let matriculation = 2013
 
-        expect(findFirstAvailableYear(schedules, matriculation)).to.equal(2016)
+        expect(findFirstAvailableYear(schedules, matriculation)).toBe(2016)
     })
 
     it('uses the current year as the matriculation year if not given, and no schedules available', () => {
         let expected = new Date().getFullYear()
-        expect(findFirstAvailableYear([])).to.equal(expected)
+        expect(findFirstAvailableYear([])).toBe(expected)
     })
 })

@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import size from 'lodash/size'
 import range from 'lodash/range'
 
@@ -42,7 +41,7 @@ describe('students reducer', () => {
     it('returns the initial state', () => {
         const expected = {}
         const actual = reducer(undefined, {})
-        expect(actual).to.deep.equal(expected)
+        expect(actual).toEqual(expected)
     })
 })
 
@@ -56,8 +55,8 @@ describe('students reducer', () => {
         let expected = student
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
     })
     it('returns existing state if INIT_STUDENT has an error', () => {
         let initialState = {}
@@ -67,7 +66,7 @@ describe('students reducer', () => {
         let expected = initialState
         let actual = reducer(initialState, action)
 
-        expect(actual).to.equal(expected)
+        expect(actual).toBe(expected)
     })
 
     it('returns existing state if IMPORT_STUDENT has an error', () => {
@@ -82,7 +81,7 @@ describe('students reducer', () => {
         let expected = initialState
         let actual = reducer(initialState, action)
 
-        expect(actual).to.equal(expected)
+        expect(actual).toBe(expected)
     })
 
     it.skip('handles DESTROY_STUDENT', () => {
@@ -98,8 +97,8 @@ describe('students reducer', () => {
         let expected = {}
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
     })
 
     it('handles CHANGE_NAME', () => {
@@ -117,9 +116,9 @@ describe('students reducer', () => {
         let expected = { ...student, name: 'second' }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual['xyz']).to.not.equal(student)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual['xyz']).not.toBe(student)
     })
 
     it('handles CHANGE_ADVISOR', () => {
@@ -137,9 +136,9 @@ describe('students reducer', () => {
         let expected = { ...student, advisor: 'second' }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual['xyz']).to.not.equal(student)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual['xyz']).not.toBe(student)
     })
 
     it('handles CHANGE_CREDITS_NEEDED', () => {
@@ -157,9 +156,9 @@ describe('students reducer', () => {
         let expected = { ...student, creditsNeeded: 20 }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual['xyz']).to.not.equal(student)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual['xyz']).not.toBe(student)
     })
 
     it('handles CHANGE_MATRICULATION', () => {
@@ -177,9 +176,9 @@ describe('students reducer', () => {
         let expected = { ...student, matriculation: 2100 }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual['xyz']).to.not.equal(student)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual['xyz']).not.toBe(student)
     })
 
     it('handles CHANGE_GRADUATION', () => {
@@ -197,9 +196,9 @@ describe('students reducer', () => {
         let expected = { ...student, graduation: 20 }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual['xyz']).to.not.equal(student)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual['xyz']).not.toBe(student)
     })
 
     it('handles CHANGE_SETTING', () => {
@@ -221,9 +220,9 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual['xyz']).to.not.equal(student)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual['xyz']).not.toBe(student)
     })
 
     it('handles ADD_AREA', () => {
@@ -242,9 +241,9 @@ describe('students reducer', () => {
         let expected = { ...student, studies: [{ name: `I'm an area` }] }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual['xyz']).to.not.equal(student)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual['xyz']).not.toBe(student)
     })
 
     it('handles REMOVE_AREA', () => {
@@ -271,9 +270,9 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual['xyz']).to.not.equal(student)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual['xyz']).not.toBe(student)
     })
 
     it('handles REMOVE_AREAS', () => {
@@ -304,9 +303,9 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual['xyz']).to.not.equal(student)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual['xyz']).not.toBe(student)
     })
 
     it('handles ADD_SCHEDULE', () => {
@@ -327,10 +326,10 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
     })
 
     it('handles DESTROY_SCHEDULE', () => {
@@ -357,10 +356,10 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
     })
 
     it('handles DESTROY_SCHEDULES', () => {
@@ -388,10 +387,10 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
     })
 
     it('handles RENAME_SCHEDULE', () => {
@@ -420,11 +419,11 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
-        expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
+        expect(actual.schedules['1']).not.toBe(student.schedules['1'])
     })
 
     it('handles REORDER_SCHEDULE', () => {
@@ -453,11 +452,11 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
-        expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
+        expect(actual.schedules['1']).not.toBe(student.schedules['1'])
     })
 
     it('handles MOVE_SCHEDULE', () => {
@@ -487,11 +486,11 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
-        expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
+        expect(actual.schedules['1']).not.toBe(student.schedules['1'])
     })
 
     it('handles ADD_COURSE', () => {
@@ -518,12 +517,12 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
-        expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-        expect(actual.schedules['1'].clbids).to.not.equal(
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
+        expect(actual.schedules['1']).not.toBe(student.schedules['1'])
+        expect(actual.schedules['1'].clbids).not.toBe(
             student.schedules['1'].clbids
         )
     })
@@ -552,12 +551,12 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
-        expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-        expect(actual.schedules['1'].clbids).to.not.equal(
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
+        expect(actual.schedules['1']).not.toBe(student.schedules['1'])
+        expect(actual.schedules['1'].clbids).not.toBe(
             student.schedules['1'].clbids
         )
     })
@@ -587,12 +586,12 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
-        expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-        expect(actual.schedules['1'].clbids).to.not.equal(
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
+        expect(actual.schedules['1']).not.toBe(student.schedules['1'])
+        expect(actual.schedules['1'].clbids).not.toBe(
             student.schedules['1'].clbids
         )
     })
@@ -627,12 +626,12 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.schedules).to.not.equal(student.schedules)
-        expect(actual.schedules['1']).to.not.equal(student.schedules['1'])
-        expect(actual.schedules['1'].clbids).to.not.equal(
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.schedules).not.toBe(student.schedules)
+        expect(actual.schedules['1']).not.toBe(student.schedules['1'])
+        expect(actual.schedules['1'].clbids).not.toBe(
             student.schedules['1'].clbids
         )
     })
@@ -656,10 +655,10 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.overrides).to.not.equal(student.overrides)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.overrides).not.toBe(student.overrides)
     })
 
     it('handles REMOVE_OVERRIDE', () => {
@@ -677,10 +676,10 @@ describe('students reducer', () => {
         let expected = { ...student, overrides: {} }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.overrides).to.not.equal(student.overrides)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.overrides).not.toBe(student.overrides)
     })
 
     it('handles ADD_FABRICATION', () => {
@@ -701,10 +700,10 @@ describe('students reducer', () => {
         }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.fabrications).to.not.equal(student.fabrications)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.fabrications).not.toBe(student.fabrications)
     })
 
     it('handles REMOVE_FABRICATION', () => {
@@ -725,10 +724,10 @@ describe('students reducer', () => {
         let expected = { ...student, fabrications: {} }
         let actual = reducer(initialState, action)
 
-        expect(actual).to.deep.equal(expected)
-        expect(actual).to.not.equal(initialState)
-        expect(actual).to.not.equal(student)
-        expect(actual.fabrications).to.not.equal(student.fabrications)
+        expect(actual).toEqual(expected)
+        expect(actual).not.toBe(initialState)
+        expect(actual).not.toBe(student)
+        expect(actual.fabrications).not.toBe(student.fabrications)
     })
 })
 
@@ -741,9 +740,9 @@ describe('the undoable students reducer', () => {
         }
 
         const actual = undoableReducer(undefined, {})
-        expect(actual.past).to.deep.equal(expected.past)
-        expect(actual.present).to.deep.equal(expected.present)
-        expect(actual.future).to.deep.equal(expected.future)
+        expect(actual.past).toEqual(expected.past)
+        expect(actual.present).toEqual(expected.present)
+        expect(actual.future).toEqual(expected.future)
     })
 
     it('returns a new object with changes', () => {
@@ -753,9 +752,9 @@ describe('the undoable students reducer', () => {
             payload: { id: 'xyz' },
         })
 
-        expect(hasOneStudent).to.be.ok
-        expect(hasOneStudent.present).to.be.ok
-        expect(size(hasOneStudent.present)).to.equal(1)
+        expect(hasOneStudent).toBeTruthy()
+        expect(hasOneStudent.present).toBeTruthy()
+        expect(size(hasOneStudent.present)).toBe(1)
     })
 
     it('treats INIT_STUDENT as a blank slate', () => {
@@ -768,9 +767,9 @@ describe('the undoable students reducer', () => {
         })
 
         // should have the initial state
-        expect(hasOneStudent.past).to.be.ok
-        expect(hasOneStudent.past.length).to.equal(0)
-        expect(hasOneStudent.present).to.deep.equal(firstStudent)
+        expect(hasOneStudent.past).toBeTruthy()
+        expect(hasOneStudent.past.length).toBe(0)
+        expect(hasOneStudent.present).toEqual(firstStudent)
 
         // should have the initial state and _no trace_ of the previous student
         const secondStudent = { id: 'abc' }
@@ -778,9 +777,9 @@ describe('the undoable students reducer', () => {
             type: INIT_STUDENT,
             payload: secondStudent,
         })
-        expect(hasOneStudent.past).to.be.ok
-        expect(stillHasOneStudent.past.length).to.equal(0)
-        expect(stillHasOneStudent.present).to.deep.equal(secondStudent)
+        expect(hasOneStudent.past).toBeTruthy()
+        expect(stillHasOneStudent.past.length).toBe(0)
+        expect(stillHasOneStudent.present).toEqual(secondStudent)
     })
 
     it('holds previous states', () => {
@@ -792,17 +791,17 @@ describe('the undoable students reducer', () => {
         })
 
         // should have the initial state
-        expect(hasOneStudent.past).to.be.ok
-        expect(hasOneStudent.past.length).to.equal(0)
-        expect(hasOneStudent.present).to.deep.equal(student)
+        expect(hasOneStudent.past).toBeTruthy()
+        expect(hasOneStudent.past.length).toBe(0)
+        expect(hasOneStudent.present).toEqual(student)
 
         // should have the initial state *and* the single student state
         const hasTwoStudents = undoableReducer(hasOneStudent, {
             type: CHANGE_NAME,
             payload: { name: 'test' },
         })
-        expect(hasTwoStudents.past.length).to.equal(1)
-        expect(hasTwoStudents.past[0]).to.deep.equal(hasOneStudent.present)
+        expect(hasTwoStudents.past.length).toBe(1)
+        expect(hasTwoStudents.past[0]).toEqual(hasOneStudent.present)
     })
 
     it('allows undoing to a previous state', () => {
@@ -817,7 +816,7 @@ describe('the undoable students reducer', () => {
         })
 
         const shouldBeInitial = undoableReducer(editedStudent, undo())
-        expect(shouldBeInitial.present).to.deep.equal(hasOneStudent.present)
+        expect(shouldBeInitial.present).toEqual(hasOneStudent.present)
     })
 
     it('allows redoing to a future state', () => {
@@ -831,22 +830,22 @@ describe('the undoable students reducer', () => {
         })
 
         const shouldBeInitial = undoableReducer(hasOneStudent, undo())
-        expect(shouldBeInitial.future).to.be.ok
-        expect(shouldBeInitial.future.length).to.equal(1)
-        expect(shouldBeInitial.future[0]).to.deep.equal(hasOneStudent.present)
+        expect(shouldBeInitial.future).toBeTruthy()
+        expect(shouldBeInitial.future.length).toBe(1)
+        expect(shouldBeInitial.future[0]).toEqual(hasOneStudent.present)
 
         const shouldHaveOneStudent = undoableReducer(shouldBeInitial, redo())
-        expect(shouldHaveOneStudent.future.length).to.equal(0)
-        expect(shouldHaveOneStudent.present).to.deep.equal({
+        expect(shouldHaveOneStudent.future.length).toBe(0)
+        expect(shouldHaveOneStudent.present).toEqual({
             id: 'xyz',
             name: 'abc',
         })
-        expect(shouldHaveOneStudent.present).to.deep.equal(
+        expect(shouldHaveOneStudent.present).toEqual(
             hasOneStudent.present
         )
 
-        expect(shouldHaveOneStudent.past.length).to.equal(1)
-        expect(shouldHaveOneStudent.past[0]).to.deep.equal(initial.present)
+        expect(shouldHaveOneStudent.past.length).toBe(1)
+        expect(shouldHaveOneStudent.past[0]).toEqual(initial.present)
     })
 
     it('only holds 9 previous states', () => {
@@ -858,6 +857,6 @@ describe('the undoable students reducer', () => {
             })
         }
 
-        expect(state.past.length).to.equal(9)
+        expect(state.past.length).toBe(9)
     })
 })

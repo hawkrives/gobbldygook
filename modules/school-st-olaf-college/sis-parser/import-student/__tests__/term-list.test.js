@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { loadHtml } from './import-student.support'
 import { parseHtml } from '../../parse-html'
 import { extractTermList } from '../term-list'
@@ -22,13 +21,13 @@ describe('extractTermList', () => {
             20121,
             20119,
         ]
-        expect(actual).to.deep.equal(expected)
+        expect(actual).toEqual(expected)
     })
 
     it('returns an empty list when no term list selectors are found', () => {
         const actual = extractTermList(parseHtml(''))
         const expected = []
-        expect(actual).to.deep.equal(expected)
+        expect(actual).toEqual(expected)
     })
 
     it('returns an empty list when no term options are found', () => {
@@ -36,6 +35,6 @@ describe('extractTermList', () => {
             parseHtml('<select name=searchyearterm></select>')
         )
         const expected = []
-        expect(actual).to.deep.equal(expected)
+        expect(actual).toEqual(expected)
     })
 })

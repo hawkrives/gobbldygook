@@ -1,5 +1,3 @@
-import { expect } from 'chai'
-
 import { addCourse, removeCourse, reorderCourse, moveCourse } from '../courses'
 
 import {
@@ -12,10 +10,8 @@ import {
 describe('addCourse action', () => {
     it('returns an action to add an override', () => {
         let action = addCourse('id', 'sid', 123)
-        expect(action).to.have.property('type', ADD_COURSE)
-        expect(action).to.have.property('payload')
-        expect(action.payload).to.be.an.object
-        expect(action.payload).to.deep.equal({
+        expect(action).toHaveProperty('type', ADD_COURSE)
+        expect(action.payload).toEqual({
             studentId: 'id',
             scheduleId: 'sid',
             clbid: 123,
@@ -26,10 +22,8 @@ describe('addCourse action', () => {
 describe('removeCourse action', () => {
     it('returns an action to add an override', () => {
         let action = removeCourse('id', 'sid', 123)
-        expect(action).to.have.property('type', REMOVE_COURSE)
-        expect(action).to.have.property('payload')
-        expect(action.payload).to.be.an.object
-        expect(action.payload).to.deep.equal({
+        expect(action).toHaveProperty('type', REMOVE_COURSE)
+        expect(action.payload).toEqual({
             studentId: 'id',
             scheduleId: 'sid',
             clbid: 123,
@@ -40,10 +34,8 @@ describe('removeCourse action', () => {
 describe('reorderCourse action', () => {
     it('returns an action to add an override', () => {
         let action = reorderCourse('id', 'sid', 123, 2)
-        expect(action).to.have.property('type', REORDER_COURSE)
-        expect(action).to.have.property('payload')
-        expect(action.payload).to.be.an.object
-        expect(action.payload).to.deep.equal({
+        expect(action).toHaveProperty('type', REORDER_COURSE)
+        expect(action.payload).toEqual({
             studentId: 'id',
             scheduleId: 'sid',
             clbid: 123,
@@ -55,10 +47,8 @@ describe('reorderCourse action', () => {
 describe('moveCourse action', () => {
     it('returns an action to add an override', () => {
         let action = moveCourse('id', 'fsid', 'tsid', 123)
-        expect(action).to.have.property('type', MOVE_COURSE)
-        expect(action).to.have.property('payload')
-        expect(action.payload).to.be.an.object
-        expect(action.payload).to.deep.equal({
+        expect(action).toHaveProperty('type', MOVE_COURSE)
+        expect(action.payload).toEqual({
             studentId: 'id',
             fromScheduleId: 'fsid',
             toScheduleId: 'tsid',

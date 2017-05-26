@@ -1,5 +1,3 @@
-import { expect } from 'chai'
-
 import {
     INCREMENT_PROGRESS,
     LOG_ERROR,
@@ -13,7 +11,7 @@ describe('notifications reducer', () => {
     it('returns the initial state', () => {
         const expected = {}
         const actual = reducer(undefined, {})
-        expect(actual).to.deep.equal(expected)
+        expect(actual).toEqual(expected)
     })
 
     it('handles LOG_MESSAGE', () => {
@@ -25,7 +23,7 @@ describe('notifications reducer', () => {
         })
         const expectedState = { 0: { message, type: 'message' } }
 
-        expect(actualState).to.deep.equal(expectedState)
+        expect(actualState).toEqual(expectedState)
     })
 
     it('handles LOG_ERROR', () => {
@@ -37,7 +35,7 @@ describe('notifications reducer', () => {
         })
         const expectedState = { 0: { message: error.message, type: 'error' } }
 
-        expect(actualState).to.deep.equal(expectedState)
+        expect(actualState).toEqual(expectedState)
     })
 
     it('handles REMOVE_NOTIFICATION', () => {
@@ -50,7 +48,7 @@ describe('notifications reducer', () => {
         const expectedState = {}
         const actualState = reducer(initialState, action)
 
-        expect(actualState).to.deep.equal(expectedState)
+        expect(actualState).toEqual(expectedState)
     })
 
     it('handles START_PROGRESS', () => {
@@ -68,7 +66,7 @@ describe('notifications reducer', () => {
             [id]: { message, value, max, showButton, type: 'progress' },
         }
 
-        expect(actualState).to.deep.equal(expectedState)
+        expect(actualState).toEqual(expectedState)
     })
 
     it('handles INCREMENT_PROGRESS', () => {
@@ -95,7 +93,7 @@ describe('notifications reducer', () => {
         }
         const actualState = reducer(initialState, action)
 
-        expect(actualState).to.deep.equal(expectedState)
+        expect(actualState).toEqual(expectedState)
     })
 
     it('does not let INCREMENT_PROGRESS go past "max"', () => {
@@ -116,7 +114,7 @@ describe('notifications reducer', () => {
         }
         const actualState = reducer(initialState, action)
 
-        expect(actualState).to.deep.equal(expectedState)
+        expect(actualState).toEqual(expectedState)
     })
 
     it('allows custom values for INCREMENT_PROGRESS', () => {
@@ -143,7 +141,7 @@ describe('notifications reducer', () => {
         }
         const actualState = reducer(initialState, action)
 
-        expect(actualState).to.deep.equal(expectedState)
+        expect(actualState).toEqual(expectedState)
     })
 
     it('does not mutate the progress item during INCREMENT_PROGRESS', () => {
@@ -161,6 +159,6 @@ describe('notifications reducer', () => {
         const initialState = { [id]: notification }
         const actualState = reducer(initialState, action)
 
-        expect(initialState[id]).not.to.equal(actualState[id])
+        expect(initialState[id]).not.toBe(actualState[id])
     })
 })
