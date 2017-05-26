@@ -53,7 +53,7 @@
   "scripts": {
     "build": "npm run copy && cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --progress",
     "build-dev": "webpack --config .webpackrc.js --bail --progress --devtool=source-map",
-    "build-peg": "pegjs --allowed-start-rules Result,Filter < modules/hanson-format/parse-hanson-string.pegjs | babel-stdin | js-beautify -f - --end-with-newline --indent-with-tabs > modules/hanson-format/parse-hanson-string.js",
+    "build-peg": "pegjs --allowed-start-rules Result,Filter < modules/hanson-format/parse-hanson-string.pegjs | babel-stdin | prettier $npm_package_config_prettier --stdin > modules/hanson-format/parse-hanson-string.js",
     "copy": "rimraf build && cpy 'modules/web/static/*' build/",
     "cover": "jest --coverage && open coverage/index.html",
     "flow": "flow check",
