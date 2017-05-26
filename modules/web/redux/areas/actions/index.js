@@ -15,7 +15,7 @@ export function loadingAreas(): { type: string } {
 }
 
 export function loadAllAreas() {
-    return (dispatch: () => {}) => {
+    return (dispatch: ({type: string}) => any) => {
         dispatch(loadingAreas())
         const areasPromise = db.store('areas').getAll()
         return dispatch({ type: LOAD_ALL_AREAS, payload: areasPromise })
@@ -23,7 +23,7 @@ export function loadAllAreas() {
 }
 
 export function refreshAreas() {
-    return (dispatch: () => {}, getState: () => any) => {
+    return (dispatch: ({type: string}) => any, getState: () => any) => {
         dispatch(loadingAreas())
         const areas = getState().areas.data
         dispatch({ type: START_LOAD_AREAS, payload: areas })

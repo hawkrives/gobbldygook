@@ -16,9 +16,9 @@ type Student = Object
 
 class WrappedStudentSummary extends React.PureComponent {
     props: {
-        changeGraduation: string => any,
-        changeMatriculation: string => any,
-        changeName: string => any,
+        changeGraduation: (string, number) => any,
+        changeMatriculation: (string, number) => any,
+        changeName: (string, string) => any,
         student: Student,
     }
 
