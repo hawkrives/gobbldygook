@@ -17,7 +17,7 @@ const courseStyles = css`
     }
 `
 
-const List = styled(PlainList)`
+const List = PlainList.extend`
     min-height: 30px;
     padding-bottom: 0.25em;
 
@@ -26,7 +26,7 @@ const List = styled(PlainList)`
     }
 `
 
-const Item = styled(ListItem)`
+const Item = ListItem.extend`
     &:last-child {
         border-bottom: 0;
     }

@@ -44,7 +44,7 @@ export const SummaryRow = styled.div`
     }
 `
 
-const GeReqItem = styled(InlineListItem)`
+const GeReqItem = InlineListItem.extend`
     & + &::before {
         margin: 0 0.2em;
         content: "+";

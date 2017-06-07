@@ -10,12 +10,12 @@ import {
     alertCircled,
 } from '../../icons/ionicons'
 
-const WarningList = styled(PlainList)`
+const WarningList = PlainList.extend`
     font-size: 0.85em;
     font-feature-settings: "onum";
 `
 
-const WarningItem = styled(ListItem)`
+const WarningItem = ListItem.extend`
     display: inline-flex;
     flex-flow: row nowrap;
     align-items: center;

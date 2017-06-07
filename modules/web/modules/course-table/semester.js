@@ -49,7 +49,7 @@ const TitleButton = styled(Button)`
     }
 `
 
-const RemoveSemesterButton = styled(TitleButton)`
+const RemoveSemesterButton = TitleButton.extend`
     &:hover {
         color: ${props => props.theme.red500};
         border-color: ${props => props.theme.red500};
@@ -73,11 +73,11 @@ const Header = styled.header`
     overflow: hidden;
 `
 
-const InfoList = styled(InlineList)`
+const InfoList = InlineList.extend`
     font-size: 0.8em;
 `
 
-const InfoItem = styled(InlineListItem)`
+const InfoItem = InlineListItem.extend`
     font-feature-settings: 'onum';
 
     & + &::before {
