@@ -1,4 +1,5 @@
 // @flow
+import { css } from 'styled-components'
 
 // colors
 export const background = '#e9eaed'
@@ -25,3 +26,17 @@ export const yearCollapseWidth = '47.5em'
 export const materialDivider = '1px solid rgba(160, 160, 160, 0.2)'
 export const baseBorderRadius = '3px'
 export const sidebarWidth = '270px'
+
+// semesters
+export const semesterSpacing = '4px'
+
+export const semesterTopPadding = css`
+    ${props => props.theme.blockEdgePadding}
+`
+export const semesterSidePadding = css`
+    calc(${props => props.theme.blockEdgePadding} * 1.5)
+`
+
+export const semesterPadding = css`
+    padding: ${semesterTopPadding} ${semesterSidePadding};
+`
