@@ -70,7 +70,7 @@ const TitleButton = styled(Button)`
     }
 `
 
-const RemoveYearButton = styled(TitleButton)`
+const RemoveYearButton = TitleButton.extend`
     &:hover {
         color: ${props => props.theme.red500};
         background-color: ${props => props.theme.red50};

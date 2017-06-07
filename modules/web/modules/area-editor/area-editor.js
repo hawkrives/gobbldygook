@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import styled from 'styled-components'
 import CodeMirror from 'react-codemirror'
 import 'codemirror/mode/yaml/yaml'
 import Toolbar from '../../components/toolbar'

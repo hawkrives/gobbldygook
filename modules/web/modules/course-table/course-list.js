@@ -7,17 +7,16 @@ import { DraggableCourse } from '../course'
 import { PlainList, ListItem } from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
-import { semesterPadding } from './variables'
 
 const courseStyles = css`
-    ${semesterPadding}
+    ${props => props.theme.semesterPadding}
 
     &:hover {
         background-color: ${props => props.theme.gray100};
     }
 `
 
-const List = styled(PlainList)`
+const List = PlainList.extend`
     min-height: 30px;
     padding-bottom: 0.25em;
 
@@ -26,7 +25,7 @@ const List = styled(PlainList)`
     }
 `
 
-const Item = styled(ListItem)`
+const Item = ListItem.extend`
     &:last-child {
         border-bottom: 0;
     }

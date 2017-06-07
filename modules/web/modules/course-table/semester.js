@@ -19,13 +19,12 @@ const log = debug('web:react')
 
 import CourseList from './course-list'
 import styled from 'styled-components'
-import * as variables from './variables'
 
 const Container = styled.div`
     ${props => props.theme.card}
     flex: 1 0;
     min-width: 16em;
-    margin: ${variables.semesterSpacing};
+    margin: ${props => props.theme.semesterSpacing};
 
     &.can-drop {
         cursor: copy;
@@ -35,7 +34,7 @@ const Container = styled.div`
 `
 
 const TitleButton = styled(Button)`
-    ${variables.semesterPadding}
+    ${props => props.theme.semesterPadding}
 
     min-height: 0;
     font-size: 0.9em;
@@ -49,7 +48,7 @@ const TitleButton = styled(Button)`
     }
 `
 
-const RemoveSemesterButton = styled(TitleButton)`
+const RemoveSemesterButton = TitleButton.extend`
     &:hover {
         color: ${props => props.theme.red500};
         border-color: ${props => props.theme.red500};
@@ -73,11 +72,11 @@ const Header = styled.header`
     overflow: hidden;
 `
 
-const InfoList = styled(InlineList)`
+const InfoList = InlineList.extend`
     font-size: 0.8em;
 `
 
-const InfoItem = styled(InlineListItem)`
+const InfoItem = InlineListItem.extend`
     font-feature-settings: 'onum';
 
     & + &::before {
@@ -92,14 +91,11 @@ const Title = styled(Link)`
     display: flex;
     flex-direction: column;
 
-    padding-top: ${props => props.theme.semesterTopPadding};
-    padding-left: ${props => props.theme.semesterSidePadding};
-    padding-bottom: ${props => props.theme.semesterTopPadding};
+    ${props => props.theme.semesterPadding}
 
     &:hover {
         text-decoration: underline;
     }
-}
 `
 
 const TitleText = styled.h1`
