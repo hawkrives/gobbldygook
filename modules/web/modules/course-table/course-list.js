@@ -7,10 +7,9 @@ import { DraggableCourse } from '../course'
 import { PlainList, ListItem } from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
-import { semesterPadding } from './variables'
 
 const courseStyles = css`
-    ${semesterPadding}
+    ${props => props.theme.semesterPadding}
 
     &:hover {
         background-color: ${props => props.theme.gray100};
