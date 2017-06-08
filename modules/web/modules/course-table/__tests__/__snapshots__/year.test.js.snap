@@ -1,8 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Year can add a semester 1`] = `
-
-
 <styled.div>
   <styled.header>
     <styled.h1>
@@ -18,13 +16,13 @@ exports[`Year can add a semester 1`] = `
         Fall
         ’
       </Styled(Button)>
-      <Styled(Button)
+      <Styled(Styled(Button))
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Styled(Button)>
+      </Styled(Styled(Button))>
     </span>
   </styled.header>
   <styled.div />
@@ -32,8 +30,6 @@ exports[`Year can add a semester 1`] = `
 `;
 
 exports[`Year can add a semester 2`] = `
-
-
 <styled.div>
   <styled.header>
     <styled.h1>
@@ -49,13 +45,13 @@ exports[`Year can add a semester 2`] = `
         Fall
         ’
       </Styled(Button)>
-      <Styled(Button)
+      <Styled(Styled(Button))
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Styled(Button)>
+      </Styled(Styled(Button))>
     </span>
   </styled.header>
   <styled.div />
@@ -63,8 +59,6 @@ exports[`Year can add a semester 2`] = `
 `;
 
 exports[`Year can remove a semester 1`] = `
-
-
 <styled.div>
   <styled.header>
     <styled.h1>
@@ -80,13 +74,13 @@ exports[`Year can remove a semester 1`] = `
         Fall
         ’
       </Styled(Button)>
-      <Styled(Button)
+      <Styled(Styled(Button))
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Styled(Button)>
+      </Styled(Styled(Button))>
     </span>
   </styled.header>
   <styled.div />
@@ -94,8 +88,6 @@ exports[`Year can remove a semester 1`] = `
 `;
 
 exports[`Year can remove a semester 2`] = `
-
-
 <styled.div>
   <styled.header>
     <styled.h1>
@@ -111,13 +103,13 @@ exports[`Year can remove a semester 2`] = `
         Fall
         ’
       </Styled(Button)>
-      <Styled(Button)
+      <Styled(Styled(Button))
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Styled(Button)>
+      </Styled(Styled(Button))>
     </span>
   </styled.header>
   <styled.div />
@@ -125,22 +117,20 @@ exports[`Year can remove a semester 2`] = `
 `;
 
 exports[`Year renders shallowly 1`] = `
-
-
 <div
-  className="jGXOTq"
+  className="sc-jhAzac jHxpTp"
 >
   <header
-    className="brAfmU"
+    className="sc-fBuWsC hJifQM"
   >
     <h1
-      className="jBbibS"
+      className="sc-fMiknA lvJZL"
     >
       2016—2017
     </h1>
     <span>
       <button
-        className="button button--flat bDreTM"
+        className="button button--flat sc-dVhcbM fvKlhn"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -152,7 +142,7 @@ exports[`Year renders shallowly 1`] = `
         ’
       </button>
       <button
-        className="button button--flat jIQrdF"
+        className="button button--flat sc-eqIVtm gjViaw sc-dVhcbM fvKlhn"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -164,7 +154,7 @@ exports[`Year renders shallowly 1`] = `
     </span>
   </header>
   <div
-    className="gwcmEI"
+    className="sc-fAjcbJ kuQnpu"
   />
 </div>
 `;
