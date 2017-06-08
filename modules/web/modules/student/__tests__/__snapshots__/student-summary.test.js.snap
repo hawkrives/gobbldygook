@@ -1,8 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreditSummary handles having exactly the right number of credits 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -17,8 +15,6 @@ exports[`CreditSummary handles having exactly the right number of credits 1`] = 
 `;
 
 exports[`CreditSummary handles having fewer credits than needed 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -32,8 +28,6 @@ exports[`CreditSummary handles having fewer credits than needed 1`] = `
 `;
 
 exports[`CreditSummary handles having more credits than needed 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -48,8 +42,6 @@ exports[`CreditSummary handles having more credits than needed 1`] = `
 `;
 
 exports[`CreditSummary renders shallowly 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -63,8 +55,6 @@ exports[`CreditSummary renders shallowly 1`] = `
 `;
 
 exports[`DateSummary allows editing the graduation year if onChangeGraduation is given 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -90,8 +80,6 @@ exports[`DateSummary allows editing the graduation year if onChangeGraduation is
 `;
 
 exports[`DateSummary allows editing the matriculation year if onChangeMatriculation is given 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -117,8 +105,6 @@ exports[`DateSummary allows editing the matriculation year if onChangeMatriculat
 `;
 
 exports[`DateSummary calls onChangeGraduation when the graduation year is changed 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -144,8 +130,6 @@ exports[`DateSummary calls onChangeGraduation when the graduation year is change
 `;
 
 exports[`DateSummary calls onChangeMatriculation when the matriculation year is changed 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -171,8 +155,6 @@ exports[`DateSummary calls onChangeMatriculation when the matriculation year is 
 `;
 
 exports[`DateSummary disables editing the graduation year if onChangeGraduation is not given 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -197,8 +179,6 @@ exports[`DateSummary disables editing the graduation year if onChangeGraduation 
 `;
 
 exports[`DateSummary disables editing the matriculation year if onChangeMatriculation is not given 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -223,8 +203,6 @@ exports[`DateSummary disables editing the matriculation year if onChangeMatricul
 `;
 
 exports[`DateSummary handles graduating before matriculation 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -249,8 +227,6 @@ exports[`DateSummary handles graduating before matriculation 1`] = `
 `;
 
 exports[`DateSummary handles graduating in five years 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -275,8 +251,6 @@ exports[`DateSummary handles graduating in five years 1`] = `
 `;
 
 exports[`DateSummary handles graduating in four years 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -301,8 +275,6 @@ exports[`DateSummary handles graduating in four years 1`] = `
 `;
 
 exports[`DateSummary handles graduating in six years 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -327,8 +299,6 @@ exports[`DateSummary handles graduating in six years 1`] = `
 `;
 
 exports[`DateSummary handles graduating in three years 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -353,8 +323,6 @@ exports[`DateSummary handles graduating in three years 1`] = `
 `;
 
 exports[`DateSummary renders 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -891,8 +859,6 @@ exports[`DegreeSummary handles 3 degrees, 3 majors, 3 concentrations, and 2 emph
 exports[`DegreeSummary handles 3 degrees, 3 majors, 3 concentrations, and 3 emphases 1`] = `"You are planning on Bachelor of Science, Bachelor of Music, and Bachelor of Arts degrees, majors in Asian Studies, Biology, and Computer Science, and concentrations in Africa and the Americas, Biomolecular Science, and China Studies, not to mention emphases in Emphasis 1, Emphasis 2, and Emphasis 3."`;
 
 exports[`DegreeSummary renders 1`] = `
-
-
 <p
   className="paragraph"
 >
@@ -904,8 +870,6 @@ exports[`DegreeSummary renders 1`] = `
 `;
 
 exports[`Footer handles the "can graduate" status 1`] = `
-
-
 <div
   className="paragraph graduation-message"
 >
@@ -914,8 +878,6 @@ exports[`Footer handles the "can graduate" status 1`] = `
 `;
 
 exports[`Footer handles the "cannot graduate" status 1`] = `
-
-
 <div
   className="paragraph graduation-message"
 >
@@ -924,8 +886,6 @@ exports[`Footer handles the "cannot graduate" status 1`] = `
 `;
 
 exports[`Footer renders 1`] = `
-
-
 <div
   className="paragraph graduation-message"
 >
@@ -934,8 +894,6 @@ exports[`Footer renders 1`] = `
 `;
 
 exports[`Header allows editing the name if onChangeName is given 1`] = `
-
-
 <header
   className="student-summary--header"
 >
@@ -961,8 +919,6 @@ exports[`Header allows editing the name if onChangeName is given 1`] = `
 `;
 
 exports[`Header calls onChangeName when the name is changed 1`] = `
-
-
 <header
   className="student-summary--header"
 >
@@ -988,8 +944,6 @@ exports[`Header calls onChangeName when the name is changed 1`] = `
 `;
 
 exports[`Header disables editing the name if onChangeName is not given 1`] = `
-
-
 <header
   className="student-summary--header"
 >
@@ -1014,8 +968,6 @@ exports[`Header disables editing the name if onChangeName is not given 1`] = `
 `;
 
 exports[`Header renders 1`] = `
-
-
 <header
   className="student-summary--header"
 >
@@ -1040,8 +992,6 @@ exports[`Header renders 1`] = `
 `;
 
 exports[`Header with an avatar handles the "can graduate" status 1`] = `
-
-
 <header
   className="student-summary--header"
 >
@@ -1066,8 +1016,6 @@ exports[`Header with an avatar handles the "can graduate" status 1`] = `
 `;
 
 exports[`Header with an avatar handles the "cannot graduate" status 1`] = `
-
-
 <header
   className="student-summary--header"
 >
@@ -1092,8 +1040,6 @@ exports[`Header with an avatar handles the "cannot graduate" status 1`] = `
 `;
 
 exports[`Header without an avatar handles the "can graduate" status 1`] = `
-
-
 <header
   className="student-summary--header"
 >
@@ -1114,8 +1060,6 @@ exports[`Header without an avatar handles the "can graduate" status 1`] = `
 `;
 
 exports[`Header without an avatar handles the "cannot graduate" status 1`] = `
-
-
 <header
   className="student-summary--header"
 >
@@ -1136,8 +1080,6 @@ exports[`Header without an avatar handles the "cannot graduate" status 1`] = `
 `;
 
 exports[`StudentSummary renders 1`] = `
-
-
 <article
   className="student-summary cannot-graduate"
 >
@@ -1166,8 +1108,6 @@ exports[`StudentSummary renders 1`] = `
 `;
 
 exports[`StudentSummary renders a student with canGraduate=false 1`] = `
-
-
 <article
   className="student-summary cannot-graduate"
 >

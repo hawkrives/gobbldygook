@@ -3,7 +3,6 @@ import Year from '../year'
 import { Student } from '../../../../../modules/object-student/student'
 import renderer from 'react-test-renderer'
 import { shallow } from 'enzyme'
-import 'jest-styled-components'
 
 const mockStudent = () =>
     Student({
@@ -28,7 +27,7 @@ test('Year renders shallowly', () => {
         />
     )
 
-    expect(tree).toMatchStyledComponentsSnapshot()
+    expect(tree).toMatchSnapshot()
 })
 
 test('Year can add a semester', () => {
@@ -46,14 +45,14 @@ test('Year can add a semester', () => {
         />
     )
 
-    expect(tree).toMatchStyledComponentsSnapshot()
+    expect(tree).toMatchSnapshot()
 
     tree.find({ title: 'Add Semester' }).simulate('click')
 
     expect(addSemester).toHaveBeenCalled()
     expect(removeYear).not.toHaveBeenCalled()
 
-    expect(tree).toMatchStyledComponentsSnapshot()
+    expect(tree).toMatchSnapshot()
 })
 
 test('Year can remove a semester', () => {
@@ -71,12 +70,12 @@ test('Year can remove a semester', () => {
         />
     )
 
-    expect(tree).toMatchStyledComponentsSnapshot()
+    expect(tree).toMatchSnapshot()
 
     tree.find({ title: 'Remove the year 2016—2017' }).simulate('click')
 
     expect(addSemester).not.toHaveBeenCalled()
     expect(removeYear).toHaveBeenCalled()
 
-    expect(tree).toMatchStyledComponentsSnapshot()
+    expect(tree).toMatchSnapshot()
 })

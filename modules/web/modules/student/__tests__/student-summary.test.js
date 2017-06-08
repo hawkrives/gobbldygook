@@ -9,7 +9,6 @@ import {
 } from '../student-summary'
 import { Student } from '../../../../../modules/object-student/student'
 import { shallow } from 'enzyme'
-import 'jest-styled-components'
 
 const mockStudent = () =>
     Student({
@@ -27,7 +26,7 @@ describe('CreditSummary', () => {
             <CreditSummary currentCredits={5} neededCredits={10} />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
     })
 
     it('handles having fewer credits than needed', () => {
@@ -35,7 +34,7 @@ describe('CreditSummary', () => {
             <CreditSummary currentCredits={5} neededCredits={10} />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.text()).not.toContain('Good job!')
     })
 
@@ -44,7 +43,7 @@ describe('CreditSummary', () => {
             <CreditSummary currentCredits={10} neededCredits={10} />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.text()).toContain('Good job!')
     })
 
@@ -53,7 +52,7 @@ describe('CreditSummary', () => {
             <CreditSummary currentCredits={15} neededCredits={10} />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.text()).toContain('Good job!')
     })
 })
@@ -64,37 +63,37 @@ describe('DateSummary', () => {
             <DateSummary matriculation="2012" graduation="2016" />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
     })
 
     it('handles graduating before matriculation', () => {
         expect(
             shallow(<DateSummary matriculation="2016" graduation="2012" />)
-        ).toMatchStyledComponentsSnapshot()
+        ).toMatchSnapshot()
     })
 
     it('handles graduating in three years', () => {
         expect(
             shallow(<DateSummary matriculation="2000" graduation="2003" />)
-        ).toMatchStyledComponentsSnapshot()
+        ).toMatchSnapshot()
     })
 
     it('handles graduating in four years', () => {
         expect(
             shallow(<DateSummary matriculation="2000" graduation="2004" />)
-        ).toMatchStyledComponentsSnapshot()
+        ).toMatchSnapshot()
     })
 
     it('handles graduating in five years', () => {
         expect(
             shallow(<DateSummary matriculation="2000" graduation="2005" />)
-        ).toMatchStyledComponentsSnapshot()
+        ).toMatchSnapshot()
     })
 
     it('handles graduating in six years', () => {
         expect(
             shallow(<DateSummary matriculation="2000" graduation="2006" />)
-        ).toMatchStyledComponentsSnapshot()
+        ).toMatchSnapshot()
     })
 
     it('disables editing the matriculation year if onChangeMatriculation is not given', () => {
@@ -102,7 +101,7 @@ describe('DateSummary', () => {
             <DateSummary matriculation="2012" graduation="2016" />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(true)
     })
 
@@ -111,7 +110,7 @@ describe('DateSummary', () => {
             <DateSummary matriculation="2012" graduation="2016" />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.find('ContentEditable').at(1).prop('disabled')).toBe(true)
     })
 
@@ -125,7 +124,7 @@ describe('DateSummary', () => {
             />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(false)
     })
 
@@ -139,7 +138,7 @@ describe('DateSummary', () => {
             />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.find('ContentEditable').at(1).prop('disabled')).toBe(false)
     })
 
@@ -153,7 +152,7 @@ describe('DateSummary', () => {
             />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         tree.find('ContentEditable').at(0).simulate('blur', '2010')
         expect(onChangeMatriculation).toHaveBeenCalledWith('2010')
     })
@@ -168,7 +167,7 @@ describe('DateSummary', () => {
             />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         tree.find('ContentEditable').at(1).simulate('blur', '2018')
         expect(onChangeGraduation).toHaveBeenCalledWith('2018')
     })
@@ -192,7 +191,7 @@ describe('DegreeSummary', () => {
 
     it('renders', () => {
         const tree = shallow(<DegreeSummary studies={[]} />)
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
     })
 
     for (const degreeCount of [0, 1, 2, 3]) {
@@ -219,7 +218,7 @@ describe('DegreeSummary', () => {
                             />
                         )
 
-                        expect(tree.text()).toMatchStyledComponentsSnapshot()
+                        expect(tree.text()).toMatchSnapshot()
                     })
                 }
             }
@@ -233,13 +232,13 @@ describe('Footer', () => {
     it('renders', () => {
         const tree = shallow(<Footer canGraduate={true} />)
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
     })
 
     it('handles the "can graduate" status', () => {
         const tree = shallow(<Footer canGraduate={true} />)
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.text()).toContain(goodMessage)
         expect(tree.text()).not.toContain(badMessage)
     })
@@ -247,7 +246,7 @@ describe('Footer', () => {
     it('handles the "cannot graduate" status', () => {
         const tree = shallow(<Footer canGraduate={false} />)
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.text()).toContain(badMessage)
         expect(tree.text()).not.toContain(goodMessage)
     })
@@ -264,7 +263,7 @@ describe('Header', () => {
             />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
     })
 
     describe('with an avatar', () => {
@@ -278,7 +277,7 @@ describe('Header', () => {
                 />
             )
 
-            expect(tree).toMatchStyledComponentsSnapshot()
+            expect(tree).toMatchSnapshot()
         })
         it('handles the "cannot graduate" status', () => {
             const tree = shallow(
@@ -290,7 +289,7 @@ describe('Header', () => {
                 />
             )
 
-            expect(tree).toMatchStyledComponentsSnapshot()
+            expect(tree).toMatchSnapshot()
         })
     })
 
@@ -305,7 +304,7 @@ describe('Header', () => {
                 />
             )
 
-            expect(tree).toMatchStyledComponentsSnapshot()
+            expect(tree).toMatchSnapshot()
         })
         it('handles the "cannot graduate" status', () => {
             const tree = shallow(
@@ -317,7 +316,7 @@ describe('Header', () => {
                 />
             )
 
-            expect(tree).toMatchStyledComponentsSnapshot()
+            expect(tree).toMatchSnapshot()
         })
     })
 
@@ -331,7 +330,7 @@ describe('Header', () => {
             />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(true)
     })
     it('allows editing the name if onChangeName is given', () => {
@@ -346,7 +345,7 @@ describe('Header', () => {
             />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(false)
     })
 
@@ -362,7 +361,7 @@ describe('Header', () => {
             />
         )
 
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
         tree.find('ContentEditable').at(0).simulate('blur', 'Black Widow')
         expect(onChangeName).toHaveBeenCalledWith('Black Widow')
     })
@@ -373,7 +372,7 @@ describe('StudentSummary', () => {
         const tree = shallow(
             <StudentSummary randomizeHello={false} student={mockStudent()} />
         )
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
     })
 
     it('renders a student with canGraduate=false', () => {
@@ -381,7 +380,7 @@ describe('StudentSummary', () => {
         const tree = shallow(
             <StudentSummary randomizeHello={false} student={student} />
         )
-        expect(tree).toMatchStyledComponentsSnapshot()
+        expect(tree).toMatchSnapshot()
     })
 
     it('renders a student with randomizeHello=true', () => {
