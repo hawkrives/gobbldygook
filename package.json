@@ -157,7 +157,7 @@
     "eslint-plugin-flowtype-errors": "3.3.0",
     "eslint-plugin-import": "2.3.0",
     "eslint-plugin-react": "7.0.1",
-    "extract-text-webpack-plugin": "2.1.0",
+    "extract-text-webpack-plugin": "2.1.1",
     "fake-indexeddb": "2.0.3",
     "file-loader": "0.11.2",
     "flow-bin": "0.47.0",
