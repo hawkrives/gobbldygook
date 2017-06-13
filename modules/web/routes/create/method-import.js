@@ -47,9 +47,9 @@ class SISImportScreen extends React.Component {
         extensionInstalled: false,
     }
 
-    //componentWillMount() {
-    //    this.checkLoginState()
-    //}
+    componentWillMount() {
+       this.checkLoginState()
+    }
 
     checkLoginState = () => {
         checkIfLoggedIn()
