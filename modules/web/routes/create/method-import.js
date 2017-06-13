@@ -113,7 +113,7 @@ class SISImportScreen extends React.Component {
                     <h1>Import from the SIS</h1>
                 </header>
 
-            {/*<BrowserExtensionsComponent
+            <BrowserExtensionsComponent
                     onInstall={() =>
                         this.setState({ extensionInstalled: true })}
                 />
@@ -163,7 +163,7 @@ class SISImportScreen extends React.Component {
                       </div>
                     : null}
 
-                {student
+                {/*{student
                     ? <div>
                           <StudentSummary
                               student={student}
@@ -219,7 +219,7 @@ class SISImportScreen extends React.Component {
                               )}
                           </ul>
                       </div>
-                    : null}
+                    : null}*/}
 
                 <div>
                     {loggedIn
@@ -235,7 +235,6 @@ class SISImportScreen extends React.Component {
                                 </Button>
                         : null}
                 </div>
-                */}
             </div>
         )
     }
