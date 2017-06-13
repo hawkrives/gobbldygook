@@ -32,6 +32,7 @@ globals:
   # webpack.DefinePlugin
   VERSION: false
   APP_BASE: false
+  COMMIT_HASH: false
 
 rules:
   # best practices
