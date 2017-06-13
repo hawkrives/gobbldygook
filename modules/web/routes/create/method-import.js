@@ -24,6 +24,13 @@ import './method-import.scss'
 import debug from 'debug'
 const log = debug('web:react')
 
+global.stolaf = {getStudentInfo,
+    checkIfLoggedIn,
+    ExtensionNotLoadedError,
+    ExtensionTooOldError,
+    convertStudent,
+    semesterName}
+
 class SISImportScreen extends React.Component {
     static propTypes = {
         dispatch: PropTypes.func.isRequired, // redux
@@ -40,9 +47,9 @@ class SISImportScreen extends React.Component {
         extensionInstalled: false,
     }
 
-    componentWillMount() {
-        this.checkLoginState()
-    }
+    //componentWillMount() {
+    //    this.checkLoginState()
+    //}
 
     checkLoginState = () => {
         checkIfLoggedIn()
@@ -106,7 +113,7 @@ class SISImportScreen extends React.Component {
                     <h1>Import from the SIS</h1>
                 </header>
 
-                <BrowserExtensionsComponent
+            {/*<BrowserExtensionsComponent
                     onInstall={() =>
                         this.setState({ extensionInstalled: true })}
                 />
@@ -228,6 +235,7 @@ class SISImportScreen extends React.Component {
                                 </Button>
                         : null}
                 </div>
+                */}
             </div>
         )
     }
