@@ -28,6 +28,7 @@
       "DEVELOPMENT": false,
       "PRODUCTION": false,
       "TESTING": true,
+      "COMMIT_HASH": "abad1dea",
       "VERSION": "3.0.0-test"
     },
     "resetModules": true,
