@@ -13,7 +13,7 @@ export default function prepareCourse(course: any) {
     const nameWords = splitParagraph(course.name)
     const notesWords = splitParagraph((course.notes || []).join('\n'))
     const titleWords = splitParagraph(course.title)
-    const descWords = splitParagraph((course.desc || []).join('\n'))
+    const descWords = splitParagraph((course.description || []).join('\n'))
 
     return {
         name: course.name || course.title,
