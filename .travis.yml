@@ -28,7 +28,7 @@ jobs:
         - ./node_modules/.bin/coveralls < ./coverage/lcov.info
         - bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json
 
-   - <<: *job
+    - <<: *job
       stage: build + deploy
       script:
         - npm run build
