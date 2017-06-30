@@ -127,6 +127,7 @@ export default function StudentPicker(props: PropTypes) {
             <AppTitle>
                 <h1>GobbldygooK</h1>
                 <h2>A Course Scheduling Helper</h2>
+                <small><code>{process.env.TRAVIS_COMMIT}</code></small>
             </AppTitle>
 
             <StudentListToolbarWrapper>

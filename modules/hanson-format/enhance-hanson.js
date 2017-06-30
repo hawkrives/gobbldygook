@@ -15,7 +15,7 @@ const fromPairs = require('lodash/fromPairs')
 const { makeAreaSlug } = require('./make-area-slug')
 const { parse } = require('./parse-hanson-string')
 
-const requirementNameRegex = /(.*?) +\(([A-Z\-]+)\)$/i
+const requirementNameRegex = /(.*?) +\(([A-Z-]+)\)$/i
 const none = (arr, pred) => !some(arr, pred)
 const quote = str => `"${str}"`
 const quoteAndJoin = list => list.map(quote).join(', ')

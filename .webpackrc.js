@@ -240,6 +240,7 @@ function config() {
             // APP_BASE is used in react-router, to set its base appropriately
             // across both local dev and gh-pages.
             APP_BASE: JSON.stringify(publicPath),
+            'process.env.TRAVIS_COMMIT': JSON.stringify(process.env.TRAVIS_COMMIT),
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
 

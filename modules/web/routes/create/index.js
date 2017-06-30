@@ -15,6 +15,11 @@ export default {
                         () => {
                             cb(null, require('./method-import').default)
                         },
+                        (err) => {
+                            console.error('yikes')
+                            console.error(err)
+                            throw err
+                        },
                         'new-student.import.component'
                     )
                 },
