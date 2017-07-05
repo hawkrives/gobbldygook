@@ -192,6 +192,6 @@
     "url-loader": "0.5.8",
     "webpack": "3.0.0",
     "webpack-dev-server": "2.5.0",
-    "worker-loader": "0.8.0"
+    "worker-loader": "0.8.1"
   }
 }
