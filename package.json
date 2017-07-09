@@ -150,7 +150,7 @@
     "del": "3.0.0",
     "duplicate-package-checker-webpack-plugin": "1.2.4",
     "enzyme": "2.9.1",
-    "eslint": "4.1.1",
+    "eslint": "4.2.0",
     "eslint-config-prettier": "2.3.0",
     "eslint-plugin-babel": "4.1.1",
     "eslint-plugin-flowtype": "2.34.1",
