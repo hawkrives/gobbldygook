@@ -14,8 +14,8 @@ stats.json
 ~
 
 # Node stuff
-node_modules
+node_modules/
 
 # The build artifacts
-build*
+build*/
 coverage/
