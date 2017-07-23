@@ -23,7 +23,7 @@ jobs:
       stage: test
       script:
         - npm run flow -- check
-        - npm run test -- --coverage --runInBand
+        - npm run test -- --coverage
       after_success:
         - ./node_modules/.bin/coveralls < ./coverage/lcov.info
         - bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json
