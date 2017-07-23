@@ -2,6 +2,3 @@
 base = "build"
 publish = "build"
 command = "npm run netlify"
-
-[environment]
-NODE_VERSION = "8"
