@@ -22,22 +22,8 @@ jobs:
     - <<: *job
       stage: test
       script:
-        - npm run flow
+        - npm run flow -- check
         - npm run test -- --coverage --runInBand
       after_success:
         - ./node_modules/.bin/coveralls < ./coverage/lcov.info
         - bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json
-
-    - <<: *job
-      stage: build + deploy
-      script:
-        - npm run build
-      before_deploy:
-        - node scripts/prepare-for-deploy.js
-      deploy:
-        provider: pages
-        skip_cleanup: true
-        github_token: $GITHUB_TOKEN
-        on: {branch: master}
-      after_deploy:
-        - curl -d "apiKey=7e393deddaeb885f5b140b4320ecef6b" -d "repository=https://github.com/hawkrives/gobbldygook" -d "revision=$(git rev-parse --verify HEAD)" 'https://notify.bugsnag.com/deploy'
