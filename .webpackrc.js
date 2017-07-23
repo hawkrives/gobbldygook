@@ -100,7 +100,11 @@ function config() {
         // single-page apps that may serve index.html for nested URLs like /todos/42.
         // We can't use a relative path in HTML because we don't want to load something
         // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
-        publicPath = pkg.homepage ? url.parse(pkg.homepage).pathname : '/'
+        if (process.env.CONTEXT && process.env.CONTEXT !== 'production') {
+          publicPath = '/'
+        } else {
+          publicPath = pkg.homepage ? url.parse(pkg.homepage).pathname : '/'
+        }
         if (!publicPath.endsWith('/')) {
             // If we don't do this, file assets will get incorrect paths.
             publicPath += '/'
@@ -182,29 +186,6 @@ function config() {
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>Gobbldygook</title>
 
-            <!-- Start Single Page Apps for GitHub Pages -->
-            <script>
-                // Single Page Apps for GitHub Pages
-                // https://github.com/rafrex/spa-github-pages
-                (function(l) {
-                    if (l.search) {
-                        var query = {}
-                        l.search.slice(1).split('&').forEach(function(val) {
-                            var a = val.split('=')
-                            query[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&')
-                        })
-                        if (query.p !== undefined) {
-                            window.history.replaceState(null, null,
-                                l.pathname.slice(0, -1) + (query.p || '') +
-                                (query.query ? ('?' + query.query) : '') +
-                                l.hash
-                            )
-                        }
-                    }
-                }(window.location))
-            </script>
-            <!-- End Single Page Apps for GitHub Pages -->
-
             <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
             ${isProduction ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>' : ''}
@@ -240,7 +221,7 @@ function config() {
             // APP_BASE is used in react-router, to set its base appropriately
             // across both local dev and gh-pages.
             APP_BASE: JSON.stringify(publicPath),
-            'process.env.TRAVIS_COMMIT': JSON.stringify(process.env.TRAVIS_COMMIT),
+            'process.env.TRAVIS_COMMIT': JSON.stringify(process.env.TRAVIS_COMMIT || process.env.COMMIT_REF),
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
 
