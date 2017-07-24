@@ -101,7 +101,7 @@ function config() {
         // We can't use a relative path in HTML because we don't want to load something
         // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
         if (process.env.CONTEXT && process.env.CONTEXT !== 'production') {
-          publicPath = process.env.DEPLOY_URL
+          publicPath = process.env.DEPLOY_PRIME_URL
         } else {
           publicPath = pkg.homepage ? url.parse(pkg.homepage).pathname : '/'
         }
