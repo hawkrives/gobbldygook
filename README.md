@@ -9,7 +9,7 @@ We have a [trello board](https://trello.com/b/cviTwkre) where we track which are
 
 
 ## Playing
-1. Visit [https://hawkrives.github.io/gobbldygook](https://hawkrives.github.io/gobbldygook)
+1. Visit [https://gobbldygook.site](https://gobbldygook.site)
     – Gobbldygook currently supports every major browser, except for IE (e.g., Chrome, Firefox, Safari 10+, and Microsoft Edge).
 
 2. Push "New Student": you can either choose to import your data from the SIS, write down your information manually, or import a previously-exported student file.
