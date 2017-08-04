@@ -117,7 +117,7 @@
     "stabilize": "1.0.0",
     "sto-course-related-data": "4.0.2",
     "sto-sis-time-parser": "2.2.11",
-    "styled-components": "2.1.1",
+    "styled-components": "2.1.2",
     "treo": "0.6.0-rc2",
     "uuid": "3.1.0",
     "whatwg-fetch": "2.0.3"
