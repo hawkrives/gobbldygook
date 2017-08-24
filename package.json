@@ -71,7 +71,7 @@
     "babel-runtime": "6.26.0",
     "brwsr": "1.0.1",
     "classnames": "2.2.5",
-    "codemirror": "5.28.0",
+    "codemirror": "5.29.0",
     "css-select": "1.2.0",
     "debug": "3.0.0",
     "dedent": "0.7.0",
