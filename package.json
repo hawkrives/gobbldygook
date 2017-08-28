@@ -44,9 +44,12 @@
       "history"
     ]
   },
-  "config": {
-    "prettier": "--trailing-comma es5 --tab-width 4 --single-quote --no-semi"
-  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth: 4,
+    "singleQuote": true,
+    "semi": false
+  }
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --progress",
     "build-dev": "webpack --config .webpackrc.js --bail --progress --devtool=source-map",
@@ -56,9 +59,9 @@
     "flow": "flow",
     "lint": "eslint --cache *.js .*.js modules/",
     "netlify": "npm run build && npm run bugsnag",
-    "prettier": "prettier --write $npm_package_config_prettier 'modules/**/*.js' '*.js' '.*.js'",
-    "prettier:changed": "FILES=$(git diff --name-only | grep '\\.js$'); prettier --write $npm_package_config_prettier $FILES",
-    "prettier:since-master": "FILES=$(git diff --name-only master | grep '\\.js$'); prettier --write $npm_package_config_prettier $FILES",
+    "prettier": "prettier --write 'modules/**/*.js' '*.js' '.*.js'",
+    "prettier:changed": "FILES=$(git diff --name-only | grep '\\.js$'); prettier --write $FILES",
+    "prettier:since-master": "FILES=$(git diff --name-only master | grep '\\.js$'); prettier --write $FILES",
     "serve-production": "cross-env NODE_ENV=production webpack-dev-server --config .webpackrc.js --progress",
     "start": "webpack-dev-server --config .webpackrc.js --progress",
     "stats": "cross-env NODE_ENV=production npm run stats-dev",
