@@ -27,13 +27,15 @@ peg$SyntaxError.buildMessage = function(expected, found) {
             return '"' + literalEscape(expectation.text) + '"'
         },
         class: function _class(expectation) {
-            var escapedParts = '', i
+            var escapedParts = '',
+                i
             for (i = 0; i < expectation.parts.length; i++) {
-                escapedParts += expectation.parts[i] instanceof Array
-                    ? classEscape(expectation.parts[i][0]) +
+                escapedParts +=
+                    expectation.parts[i] instanceof Array
+                        ? classEscape(expectation.parts[i][0]) +
                           '-' +
                           classEscape(expectation.parts[i][1])
-                    : classEscape(expectation.parts[i])
+                        : classEscape(expectation.parts[i])
             }
             return '[' + (expectation.inverted ? '^' : '') + escapedParts + ']'
         },
@@ -48,7 +50,10 @@ peg$SyntaxError.buildMessage = function(expected, found) {
         },
     }
     function hex(ch) {
-        return ch.charCodeAt(0).toString(16).toUpperCase()
+        return ch
+            .charCodeAt(0)
+            .toString(16)
+            .toUpperCase()
     }
     function literalEscape(s) {
         return s
@@ -86,13 +91,15 @@ peg$SyntaxError.buildMessage = function(expected, found) {
         return DESCRIBE_EXPECTATION_FNS[expectation.type](expectation)
     }
     function describeExpected(expected) {
-        var descriptions = new Array(expected.length), i, j
+        var descriptions = new Array(expected.length),
+            i,
+            j
         for (i = 0; i < expected.length; i++) {
             descriptions[i] = describeExpectation(expected[i])
         }
         descriptions.sort()
         if (descriptions.length > 0) {
-            for ((i = 1), (j = 1); i < descriptions.length; i++) {
+            for (i = 1, j = 1; i < descriptions.length; i++) {
                 if (descriptions[i - 1] !== descriptions[i]) {
                     descriptions[j] = descriptions[i]
                     j++
@@ -515,7 +522,8 @@ function peg$parse(input, options) {
             return { dept: chars.join(''), type: 'joined' }
         },
         peg$c161 = function peg$c161(dept1, part2) {
-            var type = part2.type, dept2 = part2.dept
+            var type = part2.type,
+                dept2 = part2.dept
             var department = void 0
             if (type === 'joined') {
                 department = { department: [dept1 + dept2] }
@@ -618,9 +626,10 @@ function peg$parse(input, options) {
         return peg$computeLocation(peg$savedPos, peg$currPos)
     }
     function expected(description, location) {
-        location = location !== void 0
-            ? location
-            : peg$computeLocation(peg$savedPos, peg$currPos)
+        location =
+            location !== void 0
+                ? location
+                : peg$computeLocation(peg$savedPos, peg$currPos)
         throw peg$buildStructuredError(
             [peg$otherExpectation(description)],
             input.substring(peg$savedPos, peg$currPos),
@@ -628,9 +637,10 @@ function peg$parse(input, options) {
         )
     }
     function error(message, location) {
-        location = location !== void 0
-            ? location
-            : peg$computeLocation(peg$savedPos, peg$currPos)
+        location =
+            location !== void 0
+                ? location
+                : peg$computeLocation(peg$savedPos, peg$currPos)
         throw peg$buildSimpleError(message, location)
     }
     function peg$literalExpectation(text, ignoreCase) {
@@ -654,7 +664,8 @@ function peg$parse(input, options) {
         return { type: 'other', description: description }
     }
     function peg$computePosDetails(pos) {
-        var details = peg$posDetailsCache[pos], p
+        var details = peg$posDetailsCache[pos],
+            p
         if (details) {
             return details
         } else {

@@ -8,9 +8,7 @@ import sample from 'lodash/sample'
 import AvatarLetter from '../../components/avatar-letter'
 import ContentEditable from '../../components/content-editable'
 
-import {
-    getActiveStudentCourses,
-} from '../../helpers/get-active-student-courses'
+import { getActiveStudentCourses } from '../../helpers/get-active-student-courses'
 import { countCredits } from '../../../examine-student/count-credits'
 
 import './student-summary.scss'
@@ -119,12 +117,12 @@ export class Header extends React.PureComponent {
 
         const className = props.canGraduate ? 'can-graduate' : 'cannot-graduate'
 
-        const avatar = props.showAvatar
-            ? <AvatarLetter
-                  className={cx('student-letter', className)}
-                  value={props.name}
-              />
-            : null
+        const avatar = props.showAvatar ? (
+            <AvatarLetter
+                className={cx('student-letter', className)}
+                value={props.name}
+            />
+        ) : null
 
         const name = (
             <ContentEditable
@@ -140,7 +138,8 @@ export class Header extends React.PureComponent {
                 {avatar}
 
                 <div className="intro">
-                    {props.helloMessage}{name}!
+                    {props.helloMessage}
+                    {name}!
                 </div>
             </header>
         )
@@ -167,11 +166,7 @@ export class Footer extends React.PureComponent {
             ? this.goodGraduationMessage
             : this.badGraduationMessage
 
-        return (
-            <div className="paragraph graduation-message">
-                {msg}
-            </div>
-        )
+        return <div className="paragraph graduation-message">{msg}</div>
     }
 }
 
@@ -206,8 +201,8 @@ export class DateSummary extends React.PureComponent {
 
         return (
             <p className="paragraph">
-                After matriculating in {matriculation}, you are
-                planning to graduate in {graduation}.
+                After matriculating in {matriculation}, you are planning to
+                graduate in {graduation}.
             </p>
         )
     }
@@ -254,9 +249,13 @@ export class DegreeSummary extends React.PureComponent {
             <p className="paragraph">
                 You are planning on{' '}
                 {dCount > 0 ? `${dEmph}${dList} ${dWord}` : `no ${dWord}`}
-                {mCount || cCount || eCount
-                    ? mCount && (cCount || eCount) ? ', ' : ' and '
-                    : ''}
+                {mCount || cCount || eCount ? mCount && (cCount || eCount) ? (
+                    ', '
+                ) : (
+                    ' and '
+                ) : (
+                    ''
+                )}
                 {mCount ? `${mEmph}${mWord} in ${mList}` : ''}
                 {mCount && cCount ? ', and ' : ''}
                 {cCount ? `${cEmph}${cWord} in ${cList}` : ''}
@@ -280,8 +279,8 @@ export class CreditSummary extends React.PureComponent {
 
         return (
             <p className="paragraph">
-                You have currently planned for {currentCredits}{' '}
-                of your {neededCredits} required credits.
+                You have currently planned for {currentCredits} of your{' '}
+                {neededCredits} required credits.
                 {enoughCredits ? ' Good job!' : ''}
             </p>
         )

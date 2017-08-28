@@ -6,7 +6,9 @@ export const alertCircled = (
     </g>
 )
 export const alert = (
-    <g><path d="M320 480H192v-96h128v96zm-16-160h-96L192 32h128l-16 288z" /></g>
+    <g>
+        <path d="M320 480H192v-96h128v96zm-16-160h-96L192 32h128l-16 288z" />
+    </g>
 )
 export const androidAddCircle = (
     <g>
@@ -53,27 +55,41 @@ export const androidArrowDropdownCircle = (
         <path d="M256 48C141.125 48 48 141.125 48 256s93.125 208 208 208 208-93.125 208-208S370.875 48 256 48zm0 272l-96-96h192l-96 96z" />
     </g>
 )
-export const androidArrowDropdown = <g><path d="M128 192l128 128 128-128" /></g>
+export const androidArrowDropdown = (
+    <g>
+        <path d="M128 192l128 128 128-128" />
+    </g>
+)
 export const androidArrowDropleftCircle = (
     <g>
         <path d="M464 256c0-114.875-93.125-208-208-208S48 141.125 48 256s93.125 208 208 208 208-93.125 208-208zm-272 0l96-96v192l-96-96z" />
     </g>
 )
-export const androidArrowDropleft = <g><path d="M320 128L192 256l128 128" /></g>
+export const androidArrowDropleft = (
+    <g>
+        <path d="M320 128L192 256l128 128" />
+    </g>
+)
 export const androidArrowDroprightCircle = (
     <g>
         <path d="M256 464c114.875 0 208-93.125 208-208S370.875 48 256 48 48 141.125 48 256s93.125 208 208 208zm-32-112V160l96 96-96 96z" />
     </g>
 )
 export const androidArrowDropright = (
-    <g><path d="M192 128l128 128-128 128" /></g>
+    <g>
+        <path d="M192 128l128 128-128 128" />
+    </g>
 )
 export const androidArrowDropupCircle = (
     <g>
         <path d="M464 256c0-114.875-93.125-208-208-208S48 141.125 48 256s93.125 208 208 208 208-93.125 208-208zm-112 32H160l96-96 96 96z" />
     </g>
 )
-export const androidArrowDropup = <g><path d="M128 320l128-128 128 128" /></g>
+export const androidArrowDropup = (
+    <g>
+        <path d="M128 320l128-128 128 128" />
+    </g>
+)
 export const androidArrowForward = (
     <g>
         <path d="M85 277.375h259.704L225.002 397.077 256 427l171-171L256 85l-29.922 29.924 118.626 119.7H85v42.75z" />
@@ -350,7 +366,9 @@ export const androidHappy = (
     </g>
 )
 export const androidHome = (
-    <g><path d="M208 448V320h96v128h97.6V256H464L256 64 48 256h62.4v192" /></g>
+    <g>
+        <path d="M208 448V320h96v128h97.6V256H464L256 64 48 256h62.4v192" />
+    </g>
 )
 export const androidImage = (
     <g>
@@ -514,7 +532,11 @@ export const androidRemoveCircle = (
         <path d="M256 48C141.125 48 48 141.125 48 256s93.125 208 208 208 208-93.125 208-208S370.875 48 256 48zm107 229H149v-42h214v42z" />
     </g>
 )
-export const androidRemove = <g><path d="M96 235h320v42H96z" /></g>
+export const androidRemove = (
+    <g>
+        <path d="M96 235h320v42H96z" />
+    </g>
+)
 export const androidRestaurant = (
     <g>
         <path d="M164.852 279.94l61.834-60.252L73.72 71.706c-33.626 32.764-33.626 86.677 0 119.44l91.132 88.793z" />
@@ -534,7 +556,9 @@ export const androidSearch = (
     </g>
 )
 export const androidSend = (
-    <g><path d="M48 448l416-192L48 64v149.333L346 256 48 298.667" /></g>
+    <g>
+        <path d="M48 448l416-192L48 64v149.333L346 256 48 298.667" />
+    </g>
 )
 export const androidSettings = (
     <g>
@@ -625,7 +649,9 @@ export const androidVolumeDown = (
     </g>
 )
 export const androidVolumeMute = (
-    <g><path d="M64 192v128h85.334L256 431.543V80.458L149.334 192H64z" /></g>
+    <g>
+        <path d="M64 192v128h85.334L256 431.543V80.458L149.334 192H64z" />
+    </g>
 )
 export const androidVolumeOff = (
     <g>
@@ -671,7 +697,9 @@ export const archive = (
     </g>
 )
 export const arrowDownA = (
-    <g><path d="M256.5 448.5l192-192h-112v-192h-160v192h-112" /></g>
+    <g>
+        <path d="M256.5 448.5l192-192h-112v-192h-160v192h-112" />
+    </g>
 )
 export const arrowDownB = (
     <g>
@@ -709,7 +737,9 @@ export const arrowGraphUpRight = (
     </g>
 )
 export const arrowLeftA = (
-    <g><path d="M64.5 256.5l192 192v-112h192v-160h-192v-112" /></g>
+    <g>
+        <path d="M64.5 256.5l192 192v-112h192v-160h-192v-112" />
+    </g>
 )
 export const arrowLeftB = (
     <g>
@@ -742,7 +772,9 @@ export const arrowReturnRight = (
     </g>
 )
 export const arrowRightA = (
-    <g><path d="M448.5 256.5l-192-192v112h-192v160h192v112" /></g>
+    <g>
+        <path d="M448.5 256.5l-192-192v112h-192v160h192v112" />
+    </g>
 )
 export const arrowRightB = (
     <g>
@@ -765,7 +797,9 @@ export const arrowSwap = (
     </g>
 )
 export const arrowUpA = (
-    <g><path d="M256.5 64.5l-192 192h112v192h160v-192h112" /></g>
+    <g>
+        <path d="M256.5 64.5l-192 192h112v192h160v-192h112" />
+    </g>
 )
 export const arrowUpB = (
     <g>
@@ -1086,7 +1120,9 @@ export const document = (
     </g>
 )
 export const drag = (
-    <g><path d="M0 144h512v32H0zM0 240h512v32H0zM0 336h512v32H0z" /></g>
+    <g>
+        <path d="M0 144h512v32H0zM0 240h512v32H0zM0 336h512v32H0z" />
+    </g>
 )
 export const earth = (
     <g>
@@ -1192,7 +1228,9 @@ export const flashOff = (
     </g>
 )
 export const flash = (
-    <g><path d="M96 288h147l-51.1 192L416 224H269l51-192" /></g>
+    <g>
+        <path d="M96 288h147l-51.1 192L416 224H269l51-192" />
+    </g>
 )
 export const folder = (
     <g>
@@ -1297,7 +1335,9 @@ export const help = (
     </g>
 )
 export const home = (
-    <g><path d="M448 288L256 64 64 288h48v160h96V320h96v128h96V288" /></g>
+    <g>
+        <path d="M448 288L256 64 64 288h48v160h96V320h96v128h96V288" />
+    </g>
 )
 export const icecream = (
     <g>
@@ -1493,7 +1533,9 @@ export const iosBoltOutline = (
     </g>
 )
 export const iosBolt = (
-    <g><path d="M302.7 64L143 288h95.8l-29.5 160L369 224h-95.8l29.5-160z" /></g>
+    <g>
+        <path d="M302.7 64L143 288h95.8l-29.5 160L369 224h-95.8l29.5-160z" />
+    </g>
 )
 export const iosBookOutline = (
     <g>
@@ -1847,7 +1889,9 @@ export const iosDownload = (
     </g>
 )
 export const iosDrag = (
-    <g><path d="M80 304h352v16H80zM80 248h352v16H80zM80 192h352v16H80z" /></g>
+    <g>
+        <path d="M80 304h352v16H80zM80 248h352v16H80zM80 192h352v16H80z" />
+    </g>
 )
 export const iosEmailOutline = (
     <g>
@@ -1879,7 +1923,9 @@ export const iosFastforwardOutline = (
     </g>
 )
 export const iosFastforward = (
-    <g><path d="M256 128v123.2L32 128v256l224-123.2V384l224-128-224-128z" /></g>
+    <g>
+        <path d="M256 128v123.2L32 128v256l224-123.2V384l224-128-224-128z" />
+    </g>
 )
 export const iosFilingOutline = (
     <g>
@@ -2205,7 +2251,11 @@ export const iosMic = (
         <path d="M367 192v79.7c0 60.2-49.8 109.2-110 109.2s-110-49-110-109.2V192h-19v79.7c0 67.2 53 122.6 120 127.5V462h-73v18h161v-18h-69v-62.8c66-4.9 117-60.3 117-127.5V192h-17z" />
     </g>
 )
-export const iosMinusEmpty = <g><path d="M384 265H128v-17h256v17z" /></g>
+export const iosMinusEmpty = (
+    <g>
+        <path d="M384 265H128v-17h256v17z" />
+    </g>
+)
 export const iosMinusOutline = (
     <g>
         <path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48zm0 398.7c-105.1 0-190.7-85.5-190.7-190.7 0-105.1 85.5-190.7 190.7-190.7 105.1 0 190.7 85.5 190.7 190.7 0 105.1-85.6 190.7-190.7 190.7z" />
@@ -2296,7 +2346,9 @@ export const iosPaperplaneOutline = (
     </g>
 )
 export const iosPaperplane = (
-    <g><path d="M96 249.6l106 46.7L416 96M416 96L217.9 311.7 269.8 416" /></g>
+    <g>
+        <path d="M96 249.6l106 46.7L416 96M416 96L217.9 311.7 269.8 416" />
+    </g>
 )
 export const iosPartlySunnyOutline = (
     <g>
@@ -2330,7 +2382,9 @@ export const iosPauseOutline = (
     </g>
 )
 export const iosPause = (
-    <g><path d="M128 96h79v320h-79zM305 96h79v320h-79z" /></g>
+    <g>
+        <path d="M128 96h79v320h-79zM305 96h79v320h-79z" />
+    </g>
 )
 export const iosPawOutline = (
     <g>
@@ -2415,9 +2469,15 @@ export const iosPlayOutline = (
         <path d="M144 124.9L353.8 256 144 387.1V124.9M128 96v320l256-160L128 96z" />
     </g>
 )
-export const iosPlay = <g><path d="M128 96v320l256-160L128 96z" /></g>
+export const iosPlay = (
+    <g>
+        <path d="M128 96v320l256-160L128 96z" />
+    </g>
+)
 export const iosPlusEmpty = (
-    <g><path d="M384 265H264v119h-17V265H128v-17h119V128h17v120h120v17z" /></g>
+    <g>
+        <path d="M384 265H264v119h-17V265H128v-17h119V128h17v120h120v17z" />
+    </g>
 )
 export const iosPlusOutline = (
     <g>
@@ -2553,7 +2613,9 @@ export const iosRewindOutline = (
     </g>
 )
 export const iosRewind = (
-    <g><path d="M256 128L32 256l224 128V260.8L480 384V128L256 251.2V128z" /></g>
+    <g>
+        <path d="M256 128L32 256l224 128V260.8L480 384V128L256 251.2V128z" />
+    </g>
 )
 export const iosRoseOutline = (
     <g>
@@ -2603,7 +2665,9 @@ export const iosSkipbackwardOutline = (
     </g>
 )
 export const iosSkipbackward = (
-    <g><path d="M96 96v320h79V274.2L416 416V96L175 237.8V96H96z" /></g>
+    <g>
+        <path d="M96 96v320h79V274.2L416 416V96L175 237.8V96H96z" />
+    </g>
 )
 export const iosSkipforwardOutline = (
     <g>
@@ -2611,7 +2675,9 @@ export const iosSkipforwardOutline = (
     </g>
 )
 export const iosSkipforward = (
-    <g><path d="M337 96v141.8L96 96v320l241-141.8V416h79V96h-79z" /></g>
+    <g>
+        <path d="M337 96v141.8L96 96v320l241-141.8V416h79V96h-79z" />
+    </g>
 )
 export const iosSnowy = (
     <g>
@@ -2841,7 +2907,9 @@ export const iosVolumeHigh = (
     </g>
 )
 export const iosVolumeLow = (
-    <g><path d="M249.9 216H192v80h57.9l70.1 56V160" /></g>
+    <g>
+        <path d="M249.9 216H192v80h57.9l70.1 56V160" />
+    </g>
 )
 export const iosWineglassOutline = (
     <g>
@@ -3042,7 +3110,11 @@ export const minusRound = (
         <path d="M417.4 224H94.6C77.7 224 64 238.3 64 256s13.7 32 30.6 32h322.8c16.9 0 30.6-14.3 30.6-32s-13.7-32-30.6-32z" />
     </g>
 )
-export const minus = <g><path d="M64 224h384v64H64z" /></g>
+export const minus = (
+    <g>
+        <path d="M64 224h384v64H64z" />
+    </g>
+)
 export const modelS = (
     <g>
         <path d="M508.8 390.9c-.6 4.1-1.6 8.1-3.1 11.2-2.7 5.5-5.3 6-15.5 5.5-13.2-.6-32.1 0-52.1.8 0 5.5.2 8.1.2 8.1 1.3 15.1 8.1 15.6 10.8 15.6h43s7.3 0 10-1.8c3.5-2.3 5-9 6.3-20.7.2-1.7.3-3.9.4-6.5v-.1c0-.8.1-1.8.1-2.9V399c0-2.7 0-5.7-.1-8.1zM3 390.9c.6 4.1 1.6 8.1 3.1 11.2 2.7 5.5 5.3 6 15.5 5.5 13.2-.6 32.1 0 52.1.8 0 5.5-.2 8.1-.2 8.1-1.3 15.1-8.1 15.6-10.8 15.6h-43s-7 0-10-1.8c-3.6-2.1-5-9-6.3-20.7-.2-1.7-.3-3.9-.4-6.5v-.1c0-.8-.1-1.8-.1-2.9V399c.1-2.7.1-5.7.1-8.1z" />
@@ -3076,9 +3148,15 @@ export const naviconRound = (
     </g>
 )
 export const navicon = (
-    <g><path d="M96 241h320v32H96zM96 145h320v32H96zM96 337h320v32H96z" /></g>
+    <g>
+        <path d="M96 241h320v32H96zM96 145h320v32H96zM96 337h320v32H96z" />
+    </g>
 )
-export const navigate = <g><path d="M480 32L32 224h256v256" /></g>
+export const navigate = (
+    <g>
+        <path d="M480 32L32 224h256v256" />
+    </g>
+)
 export const network = (
     <g>
         <path d="M448 96c0-35.29-28.71-64-64-64s-64 28.71-64 64c0 23.637 12.89 44.307 32 55.39v52.833l-96 48-96-48V151.39c19.11-11.083 32-31.753 32-55.39 0-35.29-28.71-64-64-64S64 60.71 64 96c0 23.637 12.89 44.307 32 55.39v92.388l128 64v52.832c-19.11 11.084-32 31.754-32 55.39 0 35.29 28.71 64 64 64s64-28.71 64-64c0-23.636-12.89-44.306-32-55.39v-52.832l128-64V151.39c19.11-11.083 32-31.753 32-55.39zM128 64c17.673 0 32 14.327 32 32s-14.327 32-32 32-32-14.327-32-32 14.327-32 32-32zm128 384c-17.673 0-32-14.327-32-32s14.327-32 32-32 32 14.327 32 32-14.327 32-32 32zm128-320c-17.673 0-32-14.327-32-32s14.327-32 32-32 32 14.327 32 32-14.327 32-32 32z" />
@@ -3226,7 +3304,9 @@ export const plusRound = (
     </g>
 )
 export const plus = (
-    <g><path d="M448 224H288V64h-64v160H64v64h160v160h64V288h160" /></g>
+    <g>
+        <path d="M448 224H288V64h-64v160H64v64h160v160h64V288h160" />
+    </g>
 )
 export const podium = (
     <g>

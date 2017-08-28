@@ -14,8 +14,7 @@ import { connect } from 'react-redux'
 import { encodeStudent } from '../../../object-student'
 
 const ShareModal = styled(Modal)`
-    ${props => props.theme.card}
-    flex-flow: column;
+    ${props => props.theme.card} flex-flow: column;
     padding: 1em 2em;
 
     & a {
@@ -42,7 +41,9 @@ export function ShareSheet(props: PropTypes) {
     const boundCloseModal = () =>
         props.router.push(`/s/${props.params.studentId}/`)
 
-    const encodedStudentUrl = `data:text/json;charset=utf-8,${encodeStudent(student)}`
+    const encodedStudentUrl = `data:text/json;charset=utf-8,${encodeStudent(
+        student
+    )}`
 
     return (
         <ShareModal onClose={boundCloseModal} contentLabel="Share">

@@ -140,7 +140,8 @@ describe('enhanceHanson', () => {
             result: 'Req',
             Req: {
                 declare: {
-                    'math-level-3': 'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
+                    'math-level-3':
+                        'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
                 },
                 result: 'one of ($math-level-3)',
             },
@@ -157,7 +158,8 @@ describe('enhanceHanson', () => {
             result: 'Req',
             Req: {
                 declare: {
-                    'math-level-3': 'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
+                    'math-level-3':
+                        'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
                 },
                 filter: 'only courses from ($math-level-3)',
             },
@@ -173,7 +175,8 @@ describe('enhanceHanson', () => {
             result: 'Req',
             Parent: {
                 declare: {
-                    'math-level-3': 'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
+                    'math-level-3':
+                        'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
                 },
                 Req: {
                     result: 'one of ($math-level-3)',

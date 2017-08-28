@@ -26,7 +26,11 @@ function checkForInvalidYear(course, scheduleYear) {
         return {
             warning: true,
             type: 'invalid-year',
-            msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
+            msg: `Wrong Year (originally from ${expandYear(
+                course.year,
+                true,
+                '–'
+            )})`,
         }
     }
 
@@ -43,7 +47,9 @@ function checkForInvalidSemester(course, scheduleSemester) {
         return {
             warning: true,
             type: 'invalid-semester',
-            msg: `Wrong Semester (originally from ${semesterName(course.semester)})`,
+            msg: `Wrong Semester (originally from ${semesterName(
+                course.semester
+            )})`,
         }
     }
 

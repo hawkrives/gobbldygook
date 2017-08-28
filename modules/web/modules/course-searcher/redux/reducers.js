@@ -47,7 +47,9 @@ const TIME_OF_DAY = course =>
                           map(
                               offer.times,
                               time =>
-                                  `${to12HourTime(time.start)}-${to12HourTime(time.end)}`
+                                  `${to12HourTime(time.start)}-${to12HourTime(
+                                      time.end
+                                  )}`
                           )
                       )
                   )

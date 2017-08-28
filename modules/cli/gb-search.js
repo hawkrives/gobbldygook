@@ -5,8 +5,14 @@ const searchCourses = require('./lib/search-for-courses')
 function printCourse(course) {
     return [
         `${course.year}.${course.semester}`,
-        `${course.departments.join('/')} ${course.number}${course.section ? `[${course.section}]` : ''}${course.type && course.type !== 'Research' ? ' (' + course.type + ')' : ''}`,
-        `${course.name}${course.title && course.title !== course.name ? ` [${course.title}]` : ''}`,
+        `${course.departments.join('/')} ${course.number}${course.section
+            ? `[${course.section}]`
+            : ''}${course.type && course.type !== 'Research'
+            ? ' (' + course.type + ')'
+            : ''}`,
+        `${course.name}${course.title && course.title !== course.name
+            ? ` [${course.title}]`
+            : ''}`,
     ]
 }
 

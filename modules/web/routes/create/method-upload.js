@@ -105,7 +105,8 @@ class UploadFileScreen extends React.Component {
                     rejectClassName="canDrop" // HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
                 >
                     <p>
-                        Just drop some students here, or click to select some to upload.
+                        Just drop some students here, or click to select some to
+                        upload.
                     </p>
                 </DropZone>
 
@@ -114,22 +115,22 @@ class UploadFileScreen extends React.Component {
                     map(
                         students,
                         stu =>
-                            stu.payload
-                                ? <li key={stu.payload.id}>
-                                      <StudentSummary
-                                          student={stu.payload}
-                                          showMessage={false}
-                                          showAvatar={false}
-                                          randomizeHello
-                                      />
-                                  </li>
-                                : <li key={stu.name}>
-                                      {stu.name}
-                                      {' '}
-                                      returned the error "
-                                      {stu.error}
-                                      "
-                                  </li>
+                            stu.payload ? (
+                                <li key={stu.payload.id}>
+                                    <StudentSummary
+                                        student={stu.payload}
+                                        showMessage={false}
+                                        showAvatar={false}
+                                        randomizeHello
+                                    />
+                                </li>
+                            ) : (
+                                <li key={stu.name}>
+                                    {stu.name} returned the error "
+                                    {stu.error}
+                                    "
+                                </li>
+                            )
                     )}
                     {map(files, file => <li key={file.name}>{file.name}</li>)}
                 </List>

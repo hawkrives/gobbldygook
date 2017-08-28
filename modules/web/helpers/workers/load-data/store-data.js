@@ -43,7 +43,10 @@ export function storeCourses(path: string, data: BasicCourse[]) {
         throw err
     }
 
-    return db.store('courses').batch(coursesToStore).then(onSuccess, onFailure)
+    return db
+        .store('courses')
+        .batch(coursesToStore)
+        .then(onSuccess, onFailure)
 }
 
 export function storeArea(path: string, data: BasicArea) {

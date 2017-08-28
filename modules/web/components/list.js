@@ -12,33 +12,23 @@ const BaseList = `
     padding: 0;
 `
 
-export const PlainList = styled.ul`
-    ${BaseList}
-    list-style: none;
-`
+export const PlainList = styled.ul`${BaseList} list-style: none;`
 
 export const InlineList = styled.ul`
-    ${BaseList}
-    display: inline-block;
+    ${BaseList} display: inline-block;
 
     & > .list-item {
         display: inline-block;
     }
 `
 
-export const BulletedList = styled.ul`
-    ${BaseList}
-`
+export const BulletedList = styled.ul`${BaseList};`
 
-export const NumberedList = styled.ol`
-    ${BaseList}
-`
+export const NumberedList = styled.ol`${BaseList};`
 
 export const ListItem = styled.li``
 
-export const InlineListItem = styled.li`
-    display: inline-block;
-`
+export const InlineListItem = styled.li`display: inline-block;`
 
 type ListProps = {
     children?: any,

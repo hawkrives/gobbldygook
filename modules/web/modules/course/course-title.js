@@ -15,15 +15,9 @@ const Base = `
     font-weight: 500;
 `
 
-const Title = styled.h1`
-    ${Base}
-    font-feature-settings: 'onum';
-`
+const Title = styled.h1`${Base} font-feature-settings: 'onum';`
 
-const Subtitle = styled.h2`
-    ${Base}
-    font-size: 0.75em;
-`
+const Subtitle = styled.h2`${Base} font-size: 0.75em;`
 
 const independentRegex = /^I[RS]/
 

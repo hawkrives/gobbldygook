@@ -205,9 +205,10 @@ function queryIndex(query, primaryKeysOnly = false) {
                 // to the current cursor.key, IDB throws an error.
                 // Therefore, if the current key equals the current key, we
                 // just go forward by one.
-                let nextKey = keys[currentIndex] <= cursor.key
-                    ? undefined
-                    : keys[currentIndex]
+                let nextKey =
+                    keys[currentIndex] <= cursor.key
+                        ? undefined
+                        : keys[currentIndex]
                 cursor.continue(nextKey)
             } else if (cursor.key === keys[currentIndex]) {
                 log('equals')

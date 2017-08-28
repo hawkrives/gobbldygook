@@ -24,12 +24,14 @@ import './method-import.scss'
 import debug from 'debug'
 const log = debug('web:react')
 
-global.stolaf = {getStudentInfo,
+global.stolaf = {
+    getStudentInfo,
     checkIfLoggedIn,
     ExtensionNotLoadedError,
     ExtensionTooOldError,
     convertStudent,
-    semesterName}
+    semesterName,
+}
 
 class SISImportScreen extends React.Component {
     static propTypes = {
@@ -48,7 +50,7 @@ class SISImportScreen extends React.Component {
     }
 
     componentWillMount() {
-       this.checkLoginState()
+        this.checkLoginState()
     }
 
     checkLoginState = () => {
@@ -113,127 +115,115 @@ class SISImportScreen extends React.Component {
                     <h1>Import from the SIS</h1>
                 </header>
 
-            {/*<BrowserExtensionsComponent
+                {/*<BrowserExtensionsComponent
                     onInstall={() =>
                         this.setState({ extensionInstalled: true })}
                 />*/}
 
                 <p>
-                    {checkingLogin
-                        ? 'Checking login…'
-                        : loggedIn
-                              ? "Great! You're logged in."
-                              : 'Not logged in. Please log in to the SIS in another tab.'}
+                    {checkingLogin ? (
+                        'Checking login…'
+                    ) : loggedIn ? (
+                        "Great! You're logged in."
+                    ) : (
+                        'Not logged in. Please log in to the SIS in another tab.'
+                    )}
                 </p>
 
-                {error
-                    ? <details className="error-spot">
-                          <summary>
-                              <strong>{error.name}</strong>: {error.message}
-                          </summary>
-                          <pre className="error-stack">
-                              {error.stack}
-                          </pre>
-                      </details>
-                    : null}
+                {error ? (
+                    <details className="error-spot">
+                        <summary>
+                            <strong>{error.name}</strong>: {error.message}
+                        </summary>
+                        <pre className="error-stack">{error.stack}</pre>
+                    </details>
+                ) : null}
 
-                {!loggedIn
-                    ? <Button
-                          disabled={checkingLogin}
-                          onClick={this.checkLoginState}
-                      >
-                          Check Again
-                      </Button>
-                    : null}
+                {!loggedIn ? (
+                    <Button
+                        disabled={checkingLogin}
+                        onClick={this.checkLoginState}
+                    >
+                        Check Again
+                    </Button>
+                ) : null}
 
-                {ids.length > 1
-                    ? <div>
-                          <p>
-                              Hang on one second… we found multiple student IDs. Which one is yours?
-                          </p>
-                          <RadioGroup
-                              name="student-id"
-                              selectedValue={this.state.selectedId}
-                              onChange={this.handleSelectId}
-                          >
-                              {map(ids, id => (
-                                  <label><Radio value={id} /> {id}</label>
-                              ))}
-                          </RadioGroup>
-                      </div>
-                    : null}
+                {ids.length > 1 ? (
+                    <div>
+                        <p>
+                            Hang on one second… we found multiple student IDs.
+                            Which one is yours?
+                        </p>
+                        <RadioGroup
+                            name="student-id"
+                            selectedValue={this.state.selectedId}
+                            onChange={this.handleSelectId}
+                        >
+                            {map(ids, id => (
+                                <label>
+                                    <Radio value={id} /> {id}
+                                </label>
+                            ))}
+                        </RadioGroup>
+                    </div>
+                ) : null}
 
-                {student
-                    ? <div>
-                          <StudentSummary
-                              student={student}
-                              showMessage={false}
-                          />
-                          <ul>
-                              {map(
-                                  groupBy(student.schedules, 'year'),
-                                  (schedules, year) => (
-                                      <li key={year}>
-                                          {year}:
-                                          <ul>
-                                              {map(
-                                                  sortBy(schedules, 'semester'),
-                                                  schedule => (
-                                                      <li
-                                                          key={
-                                                              schedule.semester
-                                                          }
-                                                      >
-                                                          {semesterName(
-                                                              schedule.semester
-                                                          )}
-                                                          :
-                                                          <ul>
-                                                              {map(
-                                                                  schedule.courses,
-                                                                  course => (
-                                                                      <li
-                                                                          key={
-                                                                              course.deptnum
-                                                                          }
-                                                                      >
-                                                                          {
-                                                                              course.deptnum
-                                                                          }
-                                                                          {' '}
-                                                                          –
-                                                                          {' '}
-                                                                          {
-                                                                              course.name
-                                                                          }
-                                                                      </li>
-                                                                  )
-                                                              )}
-                                                          </ul>
-                                                      </li>
-                                                  )
-                                              )}
-                                          </ul>
-                                      </li>
-                                  )
-                              )}
-                          </ul>
-                      </div>
-                    : null}
+                {student ? (
+                    <div>
+                        <StudentSummary student={student} showMessage={false} />
+                        <ul>
+                            {map(
+                                groupBy(student.schedules, 'year'),
+                                (schedules, year) => (
+                                    <li key={year}>
+                                        {year}:
+                                        <ul>
+                                            {map(
+                                                sortBy(schedules, 'semester'),
+                                                schedule => (
+                                                    <li key={schedule.semester}>
+                                                        {semesterName(schedule.semester)}
+                                                        :
+                                                        <ul>
+                                                            {map(
+                                                                schedule.courses,
+                                                                course => (
+                                                                    <li
+                                                                        key={
+                                                                            course.deptnum
+                                                                        }
+                                                                    >
+                                                                        {course.deptnum}{' '}
+                                                                        –{' '}
+                                                                        {course.name}
+                                                                    </li>
+                                                                )
+                                                            )}
+                                                        </ul>
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </li>
+                                )
+                            )}
+                        </ul>
+                    </div>
+                ) : null}
 
                 <div>
-                    {loggedIn
-                        ? student
-                              ? <Button onClick={this.handleCreateStudent}>
-                                    Import Student
-                                </Button>
-                              : <Button
-                                    disabled={!loggedIn}
-                                    onClick={this.handleImportData}
-                                >
-                                    Fetch Student
-                                </Button>
-                        : null}
+                    {loggedIn ? student ? (
+                        <Button onClick={this.handleCreateStudent}>
+                            Import Student
+                        </Button>
+                    ) : (
+                        <Button
+                            disabled={!loggedIn}
+                            onClick={this.handleImportData}
+                        >
+                            Fetch Student
+                        </Button>
+                    ) : null}
                 </div>
             </div>
         )

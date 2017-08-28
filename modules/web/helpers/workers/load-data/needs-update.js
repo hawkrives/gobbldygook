@@ -9,7 +9,10 @@ export default function needsUpdate(
     path: string,
     hash: string
 ) {
-    return db.store(getCacheStoreName(type)).get(path).then(dbresult => {
-        return dbresult ? dbresult.hash !== hash : true
-    })
+    return db
+        .store(getCacheStoreName(type))
+        .get(path)
+        .then(dbresult => {
+            return dbresult ? dbresult.hash !== hash : true
+        })
 }

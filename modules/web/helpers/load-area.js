@@ -43,7 +43,10 @@ function loadAreaFromNetwork({ name, type, revision }: AreaQueryType) {
 
     const path = `${baseUrl}/${pluralizeArea(type)}/${kebabCase(name)}.yaml`
 
-    networkCache[id] = fetch(path).then(status).then(text).then(transform)
+    networkCache[id] = fetch(path)
+        .then(status)
+        .then(text)
+        .then(transform)
 
     return networkCache[id].then(area => {
         return {
@@ -70,7 +73,9 @@ function loadAreaFromDatabase(areaQuery: AreaQueryType) {
             if (!result || !result.length) {
                 return {
                     ...areaQuery,
-                    _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(dbQuery)}`,
+                    _error: `the area "${name}" (${type}) could not be found with the query ${JSON.stringify(
+                        dbQuery
+                    )}`,
                 }
             }
 
@@ -86,7 +91,9 @@ function loadAreaFromDatabase(areaQuery: AreaQueryType) {
             log(err) // we can probably remove this in the future
             return {
                 ...areaQuery,
-                _error: `Could not find area ${JSON.stringify(dbQuery)} (error: ${err.message})`,
+                _error: `Could not find area ${JSON.stringify(
+                    dbQuery
+                )} (error: ${err.message})`,
             }
         })
 }

@@ -12,7 +12,7 @@ import {
 
 const WarningList = styled(PlainList)`
     font-size: 0.85em;
-    font-feature-settings: "onum";
+    font-feature-settings: 'onum';
 `
 
 const WarningItem = styled(ListItem)`
@@ -32,10 +32,7 @@ const WarningIcon = styled(Icon)`
     flex-shrink: 0;
 `
 
-const WarningMessage = styled.span`
-    flex: 1
-    ${props => props.theme.truncate}
-`
+const WarningMessage = styled.span`flex: 1 ${props => props.theme.truncate};`
 
 const icons = {
     'time-conflict': iosClockOutline,

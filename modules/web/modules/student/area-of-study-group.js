@@ -62,15 +62,15 @@ class AreaOfStudyGroup extends React.PureComponent {
                     </Button>
                 </h1>
 
-                {showAreaPicker
-                    ? <AreaPicker
-                          areaList={props.allAreasOfType}
-                          currentAreas={props.areas}
-                          onAddArea={this.onAddArea}
-                          studentGraduation={props.student.graduation}
-                          type={props.type}
-                      />
-                    : null}
+                {showAreaPicker ? (
+                    <AreaPicker
+                        areaList={props.allAreasOfType}
+                        currentAreas={props.areas}
+                        onAddArea={this.onAddArea}
+                        studentGraduation={props.student.graduation}
+                        type={props.type}
+                    />
+                ) : null}
 
                 {map(props.areas, (area, i) => (
                     <AreaOfStudy

@@ -9,8 +9,7 @@ import List from '../../components/list'
 import StudentListItem from './student-list-item'
 
 const ListOfStudents = styled(List)`
-    ${props => props.theme.card}
-    max-width: 35em;
+    ${props => props.theme.card} max-width: 35em;
     width: 100%;
     margin: 0 auto;
     overflow: hidden;
@@ -47,11 +46,7 @@ export default function StudentList(props) {
         )
     )
 
-    return (
-        <ListOfStudents type="plain">
-            {studentObjects}
-        </ListOfStudents>
-    )
+    return <ListOfStudents type="plain">{studentObjects}</ListOfStudents>
 }
 
 StudentList.propTypes = {

@@ -55,20 +55,20 @@ const GoIcon = styled(Icon)`
     margin-right: 0.5em;
 `
 
-const StudentName = styled.div`
-    line-height: 1.5;
-`
+const StudentName = styled.div`line-height: 1.5;`
 
-const StudentAreas = styled.div`
-    font-size: 0.8em;
-`
+const StudentAreas = styled.div`font-size: 0.8em;`
 
 const AreaGrouping = styled.span`
-    & + &::before { content: " | "; }
+    & + &::before {
+        content: ' | ';
+    }
 `
 
 const AreaName = styled.span`
-    & + &::before { content: " • "; }
+    & + &::before {
+        content: ' • ';
+    }
 `
 
 const StudentInfo = styled.span`
@@ -77,9 +77,7 @@ const StudentInfo = styled.span`
 `
 
 const ListItemLink = styled(Link)`
-    ${props => props.theme.linkUndecorated}
-
-    background-color: white;
+    ${props => props.theme.linkUndecorated} background-color: white;
     &.is-selected {
         background-color: ${props => props.theme.blue50};
     }
@@ -135,25 +133,26 @@ export default function StudentListItem(props: PropTypes) {
 
     return (
         <Container className={cx(classes)}>
-            {isEditing &&
+            {isEditing && (
                 <DeleteButton
                     type="flat"
                     onClick={() => destroyStudent(student.data.present.id)}
                 >
                     <Icon>{iosTrashOutline}</Icon>
                     Delete
-                </DeleteButton>}
+                </DeleteButton>
+            )}
             <ListItemLink to={`/s/${student.data.present.id}/`}>
                 <StudentInfo>
                     <StudentName>
                         {student.data.present.name}
-                        {process.env.NODE_ENV !== 'production'
-                            ? ` (${student.data.present.id})`
-                            : ''}
+                        {process.env.NODE_ENV !== 'production' ? (
+                            ` (${student.data.present.id})`
+                        ) : (
+                            ''
+                        )}
                     </StudentName>
-                    <StudentAreas>
-                        {areas}
-                    </StudentAreas>
+                    <StudentAreas>{areas}</StudentAreas>
                 </StudentInfo>
 
                 <GoIcon>{iosArrowForward}</GoIcon>

@@ -12,9 +12,7 @@ export default function FakeCourse(props: PropTypes) {
     return (
         <Container className={props.className}>
             <Title name={props.title} />
-            <SummaryRow>
-                {props.details || 'no details'}
-            </SummaryRow>
+            <SummaryRow>{props.details || 'no details'}</SummaryRow>
         </Container>
     )
 }

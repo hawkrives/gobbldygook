@@ -17,7 +17,9 @@ import plur from 'plur'
 import chalk from 'chalk'
 
 function condenseCourse(course) {
-    return `${sortBy(course.department).join('/')} ${'number' in course ? course.number : `${String(course.level)[0]}XX`}`
+    return `${sortBy(course.department).join('/')} ${'number' in course
+        ? course.number
+        : `${String(course.level)[0]}XX`}`
 }
 
 function summarize(requirement, name, path, depth = 0) {
@@ -78,9 +80,9 @@ function stringifyBoolean(expr) {
     if ('$or' in expr) {
         return `(${map(expr.$or, req => stringifyChunk(req)).join(` ${OR} `)})`
     } else if ('$and' in expr) {
-        return `(${map(expr.$and, req =>
-            stringifyChunk(req)
-        ).join(` ${AND} `)})`
+        return `(${map(expr.$and, req => stringifyChunk(req)).join(
+            ` ${AND} `
+        )})`
     }
 }
 
@@ -92,9 +94,9 @@ function stringifyChildren(expr) {
     if (expr.$children === '$all') {
         return 'all children'
     }
-    return `(${map(expr.$children, child =>
-        stringifyReference(child)
-    ).join(', ')})`
+    return `(${map(expr.$children, child => stringifyReference(child)).join(
+        ', '
+    )})`
 }
 
 function stringifyModifier(expr) {
@@ -108,20 +110,29 @@ function stringifyModifier(expr) {
     } else if (expr.$from === 'where') {
         modifier = `where {${stringifyWhereClause(expr.$where)}}`
     } else if (expr.$from === 'children-where') {
-        modifier = `${stringifyChildren(expr)}, where {${stringifyWhereClause(expr.$where)}}`
+        modifier = `${stringifyChildren(expr)}, where {${stringifyWhereClause(
+            expr.$where
+        )}}`
     }
-    return `${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} ${expr.$besides ? `[besides ${condenseCourse(expr.$besides.$course)}] ` : ''}from ${modifier}`
+    return `${expr.$count.$num} ${plur(
+        expr.$what,
+        expr.$count.$num
+    )} ${expr.$besides
+        ? `[besides ${condenseCourse(expr.$besides.$course)}] `
+        : ''}from ${modifier}`
 }
 
 function stringifyOccurrence(expr) {
-    return `${expr.$count.$num} ${plur('occurrence', expr.$count.$num)} of ${condenseCourse(expr.$course)}`
+    return `${expr.$count.$num} ${plur(
+        'occurrence',
+        expr.$count.$num
+    )} of ${condenseCourse(expr.$course)}`
 }
 
 function stringifyOf(expr) {
-    return `${expr.$count.$num} of${humanizeOperator(expr.$count.$operator)} (${map(
-        expr.$of,
-        req => stringifyChunk(req)
-    ).join(', ')})`
+    return `${expr.$count.$num} of${humanizeOperator(
+        expr.$count.$operator
+    )} (${map(expr.$of, req => stringifyChunk(req)).join(', ')})`
 }
 
 function stringifyReference(expr) {
@@ -160,7 +171,9 @@ function stringifyQualification({ $key, $operator, $value }) {
                 ).join(` ${AND} `)
             } else {
                 throw new TypeError(
-                    `stringifyQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`
+                    `stringifyQualification(): neither $or nor $and could be found in ${JSON.stringify(
+                        $value
+                    )}`
                 )
             }
         } else {
@@ -203,7 +216,10 @@ function stringifyWhereClause(clause) {
 }
 
 function stringifyWhere(expr) {
-    return `${expr.$count.$num} ${plur('course', expr.$count.$num)} where {${stringifyWhereClause(expr.$where)}}`
+    return `${expr.$count.$num} ${plur(
+        'course',
+        expr.$count.$num
+    )} where {${stringifyWhereClause(expr.$where)}}`
 }
 
 function stringifyFilter(filter) {
@@ -211,7 +227,9 @@ function stringifyFilter(filter) {
 
     // a filter will be either a where-style query or a list of courses
     if ('$where' in filter) {
-        resultString += `only courses where {${stringifyWhereClause(filter.$where)}}`
+        resultString += `only courses where {${stringifyWhereClause(
+            filter.$where
+        )}}`
     } else if ('$of' in filter) {
         resultString += `only (${map(filter.$of, req =>
             stringifyChunk(req)
@@ -222,7 +240,10 @@ function stringifyFilter(filter) {
 }
 
 function indent(indentWith, string) {
-    return string.split('\n').map(line => indentWith + line).join('\n')
+    return string
+        .split('\n')
+        .map(line => indentWith + line)
+        .join('\n')
 }
 
 function proseify(requirement, name, path, depth = 0) {

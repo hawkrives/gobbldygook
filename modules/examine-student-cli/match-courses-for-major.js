@@ -2,8 +2,7 @@ import applyFilter from '../examine-student/apply-filter'
 import excludeCourse from '../examine-student/exclude-course'
 import filterByWhereClause from '../examine-student/filter-by-where-clause'
 import findCourse from '../examine-student/find-course'
-import getMatchesFromChildren
-    from '../examine-student/get-matches-from-children'
+import getMatchesFromChildren from '../examine-student/get-matches-from-children'
 import getMatchesFromFilter from '../examine-student/get-matches-from-filter'
 import getOccurrences from '../examine-student/get-occurrences'
 import isRequirementName from '../examine-student/is-requirement-name'
@@ -17,9 +16,13 @@ import sortBy from 'lodash/sortBy'
 
 function simplifyCourse(course) {
     if (course.section) {
-        return `${sortBy(course.department).join('/')} ${course.number}${course.section} ${course.type}`
+        return `${sortBy(course.department).join(
+            '/'
+        )} ${course.number}${course.section} ${course.type}`
     }
-    return `${sortBy(course.department).join('/')} ${course.number} ${course.type}`
+    return `${sortBy(course.department).join(
+        '/'
+    )} ${course.number} ${course.type}`
 }
 
 let indent = 0

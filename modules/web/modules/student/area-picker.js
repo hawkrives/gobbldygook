@@ -39,17 +39,11 @@ const AreaListing = styled.span`
     flex-flow: column nowrap;
 `
 
-const AreaListingTitle = styled.span`
-    font-weight: 500;
-`
+const AreaListingTitle = styled.span`font-weight: 500;`
 
-const AreaListingRevision = styled.span`
-    font-size: 0.8em;
-`
+const AreaListingRevision = styled.span`font-size: 0.8em;`
 
-const ToggleAreaButton = styled(Button)`
-    padding: 0.25em 1em;
-`
+const ToggleAreaButton = styled(Button)`padding: 0.25em 1em;`
 
 const AddAreaFilter = styled.input`
     flex: 1;

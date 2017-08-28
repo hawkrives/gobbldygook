@@ -12,14 +12,12 @@ import { to12HourTime } from '../../../lib'
 
 const Heading = styled.h2`
     font-weight: 500;
-    font-feature-settings: "smcp";
+    font-feature-settings: 'smcp';
     font-size: 1em;
     margin-bottom: 0;
 `
 
-const Description = styled.div`
-    hyphens: auto;
-`
+const Description = styled.div`hyphens: auto;`
 
 const Column = styled.div`
     flex: 1;
@@ -31,9 +29,7 @@ const Column = styled.div`
     }
 `
 
-const InfoSegment = styled.div`
-    padding-bottom: 20px
-`
+const InfoSegment = styled.div`padding-bottom: 20px;`
 
 const ColumnsWrapper = styled.div`
     display: flex;
@@ -44,9 +40,7 @@ const ColumnsWrapper = styled.div`
     }
 `
 
-const SummaryThing = styled.div`
-    white-space: normal;
-`
+const SummaryThing = styled.div`white-space: normal;`
 
 export default class ExpandedCourse extends React.PureComponent {
     props: {
@@ -59,11 +53,12 @@ export default class ExpandedCourse extends React.PureComponent {
 
         const infoColumn = (
             <Column>
-                {course.description &&
+                {course.description && (
                     <Description>
                         <Heading>Description</Heading>
                         <p>{course.description}</p>
-                    </Description>}
+                    </Description>
+                )}
 
                 <p>
                     Offered in {semesterName(course.semester)} {course.year}.
@@ -78,18 +73,22 @@ export default class ExpandedCourse extends React.PureComponent {
 
         const detailColumn = (
             <Column>
-                {course.prerequisites &&
+                {course.prerequisites && (
                     <div>
                         <Heading>Prerequisites</Heading>
                         <p>{course.prerequisites}</p>
-                    </div>}
+                    </div>
+                )}
 
-                {course.times &&
+                {course.times && (
                     <div>
                         <Heading>
-                            {course.offerings && course.offerings.length === 1
-                                ? 'Offering'
-                                : 'Offerings'}
+                            {course.offerings &&
+                            course.offerings.length === 1 ? (
+                                'Offering'
+                            ) : (
+                                'Offerings'
+                            )}
                         </Heading>
                         <BulletedList>
                             {flatMap(course.offerings, offering =>
@@ -97,9 +96,11 @@ export default class ExpandedCourse extends React.PureComponent {
                                     const key = `${offering.day}-${time.start}-${time.end}`
                                     return (
                                         <ListItem key={key}>
-                                            {offering.day}{' from '}
+                                            {offering.day}
+                                            {' from '}
                                             {to12HourTime(time.start)}
-                                            {' to '}{to12HourTime(time.end)}
+                                            {' to '}
+                                            {to12HourTime(time.end)}
                                             {', in '}
                                             {offering.location}
                                         </ListItem>
@@ -107,20 +108,24 @@ export default class ExpandedCourse extends React.PureComponent {
                                 })
                             )}
                         </BulletedList>
-                    </div>}
+                    </div>
+                )}
 
-                {course.instructors &&
+                {course.instructors && (
                     <div>
                         <Heading>
                             {course.instructors &&
-                                course.instructors.length === 1
-                                ? 'Instructor'
-                                : 'Instructors'}
+                            course.instructors.length === 1 ? (
+                                'Instructor'
+                            ) : (
+                                'Instructors'
+                            )}
                         </Heading>
                         <div>{oxford(course.instructors)}</div>
-                    </div>}
+                    </div>
+                )}
 
-                {course.gereqs &&
+                {course.gereqs && (
                     <div>
                         <Heading>G.E. Requirements</Heading>
                         <BulletedList>
@@ -128,7 +133,8 @@ export default class ExpandedCourse extends React.PureComponent {
                                 <ListItem key={ge}>{ge}</ListItem>
                             ))}
                         </BulletedList>
-                    </div>}
+                    </div>
+                )}
             </Column>
         )
 

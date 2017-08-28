@@ -70,7 +70,9 @@ export default function computeChunk({
 }) {
     if (typeof expr !== 'object') {
         throw new TypeError(
-            `computeChunk(): the expr \`${stringify(expr)}\` must be an object, not a ${typeof expr}`
+            `computeChunk(): the expr \`${stringify(
+                expr
+            )}\` must be an object, not a ${typeof expr}`
         )
     }
     assertKeys(expr, '$type')
@@ -234,7 +236,9 @@ export function computeBoolean({
         computedResult = every(results)
     } else {
         throw new TypeError(
-            `computeBoolean(): neither $or nor $and could be found in ${stringify(expr)}`
+            `computeBoolean(): neither $or nor $and could be found in ${stringify(
+                expr
+            )}`
         )
     }
 
@@ -491,7 +495,8 @@ export function computeOf({
             }
         } else {
             throw new TypeError(
-                `computeOf: not sure what to do with a "${expr.$count.$operator}" operator`
+                `computeOf: not sure what to do with a "${expr.$count
+                    .$operator}" operator`
             )
         }
     })

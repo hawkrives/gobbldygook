@@ -44,27 +44,28 @@ function Requirement(props: PropTypes) {
 
     const extraClasses = [props.overridden ? 'overridden' : '']
 
-    const result =
-        props.result &&
+    const result = props.result && (
         <div className="result">
             <Expression expr={props.result} ctx={props} />
         </div>
+    )
 
     const message = props.message && <p className="message">{props.message}</p>
-    const description =
-        props.description && <p className="description">{props.description}</p>
+    const description = props.description && (
+        <p className="description">{props.description}</p>
+    )
 
-    const filterEl =
-        props.filter &&
+    const filterEl = props.filter && (
         <div className="filter">
             Filter: <Filter expr={props.filter} ctx={props} />
         </div>
+    )
 
-    const title =
-        !topLevel &&
+    const title = !topLevel && (
         <h2 className="heading" title={props.name} onClick={props.onToggleOpen}>
             <span className="title">
-                {' '}{props.name}
+                {' '}
+                {props.name}
                 <span className="status">{status}</span>
             </span>
             <span className="manual-override">
@@ -72,7 +73,9 @@ function Requirement(props: PropTypes) {
                     {props.overridden ? '(Overridden) ' : ''}
                 </span>
                 <Button
-                    title={`${props.overridden ? 'Remove' : 'Apply'} a manual override to this requirement`}
+                    title={`${props.overridden
+                        ? 'Remove'
+                        : 'Apply'} a manual override to this requirement`}
                     onClick={ev => props.onToggleOverride(props.path, ev)}
                     type="flat"
                 >
@@ -80,6 +83,7 @@ function Requirement(props: PropTypes) {
                 </Button>
             </span>
         </h2>
+    )
 
     const children = map(childKeys, key => (
         <ExpandableRequirement
@@ -93,9 +97,8 @@ function Requirement(props: PropTypes) {
         />
     ))
 
-    const overrideButtons =
-        props.message &&
-        !props.result &&
+    const overrideButtons = props.message &&
+    !props.result && (
         <span className="required-override-buttons button-group">
             <Button
                 onClick={ev => props.onRemoveOverride(props.path, ev)}
@@ -110,6 +113,7 @@ function Requirement(props: PropTypes) {
                 Done!
             </Button>
         </span>
+    )
 
     let className = [
         'requirement',
@@ -126,9 +130,9 @@ function Requirement(props: PropTypes) {
             {overrideButtons}
             {filterEl}
             {result}
-            {children.length
-                ? <div className="children">{children}</div>
-                : null}
+            {children.length ? (
+                <div className="children">{children}</div>
+            ) : null}
         </div>
     )
 }

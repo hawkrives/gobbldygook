@@ -185,7 +185,8 @@ describe('findLeafRequirements', () => {
                 computed: true,
             },
             Electives: {
-                message: 'You may not count more than four courses about any one country. At least two of the level II and III courses must be taken on-campus.',
+                message:
+                    'You may not count more than four courses about any one country. At least two of the level II and III courses must be taken on-campus.',
                 'Level I': {
                     result: {
                         $type: 'of',

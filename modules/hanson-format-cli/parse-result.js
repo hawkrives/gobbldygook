@@ -30,9 +30,11 @@ module.exports.cli = function cli() {
         .parse()
 
     if (args.stdin) {
-        getStdin().then(string => parseString(args, string)).catch(err => {
-            throw err
-        })
+        getStdin()
+            .then(string => parseString(args, string))
+            .catch(err => {
+                throw err
+            })
     } else {
         parseString(args, args.string)
     }

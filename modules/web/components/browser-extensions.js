@@ -197,17 +197,14 @@ export class BrowserExtensionsComponent extends React.Component {
         return (
             <div>
                 <p>
-                    Gobbldygook uses a browser extension to import your data from the SIS.
-                    Once you have imported your information, you don't need the extension anymore.
+                    Gobbldygook uses a browser extension to import your data
+                    from the SIS. Once you have imported your information, you
+                    don't need the extension anymore.
                 </p>
 
-                <p>
-                    {this.flavorText()}
-                </p>
+                <p>{this.flavorText()}</p>
 
-                <p>
-                    Install for {this.primaryButton()}.{' '}
-                </p>
+                <p>Install for {this.primaryButton()}. </p>
 
                 <details>
                     <summary>Not {this.detectBrowser()}?</summary>
@@ -217,9 +214,9 @@ export class BrowserExtensionsComponent extends React.Component {
                 </details>
 
                 <p>
-                    {this.state.installError
-                        ? this.state.installError.message
-                        : null}
+                    {this.state.installError ? (
+                        this.state.installError.message
+                    ) : null}
                 </p>
             </div>
         )

@@ -9,9 +9,7 @@ import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 
 const courseStyles = css`
-    ${props => props.theme.semesterPadding}
-
-    &:hover {
+    ${props => props.theme.semesterPadding} &:hover {
         background-color: ${props => props.theme.gray100};
     }
 `
@@ -31,9 +29,9 @@ const Item = styled(ListItem)`
     }
 `
 
-const Missing = styled(MissingCourse)`${courseStyles}`
-const Course = styled(DraggableCourse)`${courseStyles}`
-const Empty = styled(EmptyCourseSlot)`${courseStyles}`
+const Missing = styled(MissingCourse)`${courseStyles};`
+const Course = styled(DraggableCourse)`${courseStyles};`
+const Empty = styled(EmptyCourseSlot)`${courseStyles};`
 
 type PropTypes = {
     availableCredits: number,
@@ -47,15 +45,17 @@ export default function CourseList(props: PropTypes) {
     const courseObjects = map(
         props.schedule.courses,
         (course, i) =>
-            course.error
-                ? <Missing clbid={course.clbid} error={course.error} />
-                : <Course
-                      index={i}
-                      course={course}
-                      conflicts={props.conflicts}
-                      scheduleId={props.schedule.id}
-                      studentId={props.studentId}
-                  />
+            course.error ? (
+                <Missing clbid={course.clbid} error={course.error} />
+            ) : (
+                <Course
+                    index={i}
+                    course={course}
+                    conflicts={props.conflicts}
+                    scheduleId={props.schedule.id}
+                    studentId={props.studentId}
+                />
+            )
     )
 
     const usedCredits = Math.floor(props.creditCount)

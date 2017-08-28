@@ -81,7 +81,9 @@ function enhanceHanson(
     forEach(keys(data), key => {
         if (!isRequirementName(key) && !includes(whitelist, key)) {
             throw new TypeError(
-                `enhanceHanson: only [${quoteAndJoin(whitelist)}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`
+                `enhanceHanson: only [${quoteAndJoin(
+                    whitelist
+                )}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`
             )
         }
     })

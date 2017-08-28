@@ -18,10 +18,7 @@ export const baseCard = css`
     border-radius: ${props => props.theme.baseBorderRadius};
 `
 
-export const card = css`
-    ${materialShadow}
-    ${baseCard}
-`
+export const card = css`${materialShadow} ${baseCard};`
 
 export const cardContent = `
     padding: 1em;

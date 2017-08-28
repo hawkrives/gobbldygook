@@ -13,7 +13,10 @@ import { Notification } from './lib-dispatch'
 import type { InfoFileTypeEnum, InfoFileRef } from './types'
 
 const log = debug('worker:load-data:update-database')
-const fetchText = (...args) => fetch(...args).then(status).then(text)
+const fetchText = (...args) =>
+    fetch(...args)
+        .then(status)
+        .then(text)
 
 export default function updateDatabase(
     type: InfoFileTypeEnum,
@@ -53,5 +56,8 @@ export default function updateDatabase(
     }
 
     // go fetch the data!
-    return fetchText(url).then(nextStep).then(onSuccess).catch(onFailure)
+    return fetchText(url)
+        .then(nextStep)
+        .then(onSuccess)
+        .catch(onFailure)
 }

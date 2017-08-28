@@ -26,7 +26,9 @@ if (
             .then(result => {
                 self.postMessage(JSON.stringify([id, 'result', result]))
                 log(
-                    `(${student.name}, ${area.name}) took ${round(present() - start)} ms`
+                    `(${student.name}, ${area.name}) took ${round(
+                        present() - start
+                    )} ms`
                 )
             })
             .catch(err => {

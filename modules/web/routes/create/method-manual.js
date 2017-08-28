@@ -162,23 +162,16 @@ class ManualCreationScreen extends React.Component {
                     <h1>Manually Create</h1>
                 </header>
 
-                {this.state.error
-                    ? <pre className="errors">
-                          {this.state.error}
-                      </pre>
-                    : null}
+                {this.state.error ? (
+                    <pre className="errors">{this.state.error}</pre>
+                ) : null}
 
                 <div className="intro">
-                    Hi! My name is
-                    {' '}
-                    {nameEl}
+                    Hi! My name is {nameEl}
                     .
                     <br />
-                    I matriculated in
-                    {' '}
-                    {matriculationEl}
-                    ,
-                    and I plan to graduate in {graduationEl}.
+                    I matriculated in {matriculationEl}
+                    , and I plan to graduate in {graduationEl}.
                 </div>
 
                 <div className="areas">

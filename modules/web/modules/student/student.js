@@ -66,21 +66,23 @@ export class Student extends Component {
             student: this.props.student,
             className: 'content',
         }
-        const contents = this.props.content
-            ? cloneElement(this.props.content, contentProps)
-            : <CourseTable {...contentProps} />
+        const contents = this.props.content ? (
+            cloneElement(this.props.content, contentProps)
+        ) : (
+            <CourseTable {...contentProps} />
+        )
 
         const sidebarProps = { student: this.props.student.data.present }
-        const sidebar = this.props.sidebar
-            ? cloneElement(this.props.sidebar, sidebarProps)
-            : <GraduationStatus {...sidebarProps} />
+        const sidebar = this.props.sidebar ? (
+            cloneElement(this.props.sidebar, sidebarProps)
+        ) : (
+            <GraduationStatus {...sidebarProps} />
+        )
 
         return (
             <DocumentTitle title={`${name} | Gobbldygook`}>
                 <div className="student">
-                    <Sidebar student={this.props.student}>
-                        {sidebar}
-                    </Sidebar>
+                    <Sidebar student={this.props.student}>{sidebar}</Sidebar>
                     {contents}
                     {this.props.overlay || null}
                 </div>

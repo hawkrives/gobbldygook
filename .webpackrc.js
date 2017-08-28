@@ -101,9 +101,9 @@ function config() {
         // We can't use a relative path in HTML because we don't want to load something
         // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
         if (process.env.CONTEXT && process.env.CONTEXT !== 'production') {
-          publicPath = '/'
+            publicPath = '/'
         } else {
-          publicPath = pkg.homepage ? url.parse(pkg.homepage).pathname : '/'
+            publicPath = pkg.homepage ? url.parse(pkg.homepage).pathname : '/'
         }
         if (!publicPath.endsWith('/')) {
             // If we don't do this, file assets will get incorrect paths.
@@ -188,10 +188,16 @@ function config() {
 
             <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-            ${isProduction ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>' : ''}
-            ${isProduction ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>' : ''}
+            ${isProduction
+                ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
+                : ''}
+            ${isProduction
+                ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
+                : ''}
 
-            ${context.css ? `<link rel="stylesheet" href="${publicPath}${context.css}">` : ''}
+            ${context.css
+                ? `<link rel="stylesheet" href="${publicPath}${context.css}">`
+                : ''}
 
             <body><main id="gobbldygook"></main></body>
 
@@ -221,7 +227,9 @@ function config() {
             // APP_BASE is used in react-router, to set its base appropriately
             // across both local dev and gh-pages.
             APP_BASE: JSON.stringify(publicPath),
-            'process.env.TRAVIS_COMMIT': JSON.stringify(process.env.TRAVIS_COMMIT || process.env.COMMIT_REF),
+            'process.env.TRAVIS_COMMIT': JSON.stringify(
+                process.env.TRAVIS_COMMIT || process.env.COMMIT_REF
+            ),
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
 
@@ -252,8 +260,8 @@ function config() {
 
         // copy files – into the webpack {output} directory
         new CopyWebpackPlugin([
-            { from: 'modules/web/static/*', flatten: true }
-        ])
+            { from: 'modules/web/static/*', flatten: true },
+        ]),
     ]
 
     if (isProduction) {

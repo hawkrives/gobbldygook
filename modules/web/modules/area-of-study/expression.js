@@ -52,7 +52,9 @@ const ofLookup = {
 function makeOfExpression({ expr, ctx }) {
     const description =
         ofLookup[expr.$count.$was] ||
-        `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} from among`
+        `${expr._counted || 0} of ${humanizeOperator(
+            expr.$count.$operator
+        )} ${expr.$count.$num} from among`
 
     // const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
     const contents = map(expr.$of, (ex, i) => (
@@ -63,7 +65,8 @@ function makeOfExpression({ expr, ctx }) {
 }
 
 function makeModifierExpression({ expr }) {
-    const needs = `${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)}`
+    const needs = `${humanizeOperator(expr.$count.$operator)} ${expr.$count
+        .$num} ${plur(expr.$what, expr.$count.$num)}`
     const description = `${expr._counted} of ${needs} from ${expr.$from}`
 
     return { description }
@@ -84,9 +87,14 @@ export function makeWhereQualifier(where) {
 }
 
 export function makeWhereExpression({ expr }) {
-    const needs = `${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num}`
+    const needs = `${humanizeOperator(expr.$count.$operator)} ${expr.$count
+        .$num}`
     const qualifier = makeWhereQualifier(expr.$where)
-    const description = `${expr._counted} of ${needs} ${expr.$distinct ? 'distinct' : ''} ${expr.$count.$num === 1 ? 'course' : 'courses'} from courses where ${qualifier}`
+    const description = `${expr._counted} of ${needs} ${expr.$distinct
+        ? 'distinct'
+        : ''} ${expr.$count.$num === 1
+        ? 'course'
+        : 'courses'} from courses where ${qualifier}`
 
     let contents = map(expr._matches, (course, i) => (
         <Expression
@@ -104,7 +112,11 @@ export function makeWhereExpression({ expr }) {
 }
 
 function makeOccurrenceExpression({ expr }) {
-    const description = `${expr._counted} of ${humanizeOperator(expr.$count.$operator)} ${expr.$count.$num} ${expr.$count.$num === 1 ? 'occurrence' : 'occurrences'} of `
+    const description = `${expr._counted} of ${humanizeOperator(
+        expr.$count.$operator
+    )} ${expr.$count.$num} ${expr.$count.$num === 1
+        ? 'occurrence'
+        : 'occurrences'} of `
 
     const contents = <Expression expr={{ ...expr, type: 'course' }} />
 
@@ -170,15 +182,18 @@ export default function Expression(props) {
 
     return (
         <span className={className}>
-            {description &&
+            {description && (
                 <span className="expression--description">
-                    {description}{!props.hideIndicator && result}
-                </span>}
-            {contents &&
+                    {description}
+                    {!props.hideIndicator && result}
+                </span>
+            )}
+            {contents && (
                 <span className="expression--contents">
                     {contents}
                     {props.hideIndicator || expr._isFulfillment ? null : result}
-                </span>}
+                </span>
+            )}
         </span>
     )
 }

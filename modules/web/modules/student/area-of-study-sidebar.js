@@ -105,23 +105,23 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
 
         const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
 
-        const unusedAreaTypeButtons = unusedTypes.length
-            ? <section className="unused-areas-of-study">
-                  <span className="unused-areas-title">Add: </span>
-                  <span className="unused-areas-buttons">
-                      {unusedTypes.map(type => (
-                          <Button
-                              key={type}
-                              className="add-unused-area-of-study"
-                              onClick={ev => this.showAreaPicker(type, ev)}
-                              type="flat"
-                          >
-                              {type}
-                          </Button>
-                      ))}
-                  </span>
-              </section>
-            : null
+        const unusedAreaTypeButtons = unusedTypes.length ? (
+            <section className="unused-areas-of-study">
+                <span className="unused-areas-title">Add: </span>
+                <span className="unused-areas-buttons">
+                    {unusedTypes.map(type => (
+                        <Button
+                            key={type}
+                            className="add-unused-area-of-study"
+                            onClick={ev => this.showAreaPicker(type, ev)}
+                            type="flat"
+                        >
+                            {type}
+                        </Button>
+                    ))}
+                </span>
+            </section>
+        ) : null
 
         const unusedTypesToShow = filter(
             toPairs(showAreaPickerFor),

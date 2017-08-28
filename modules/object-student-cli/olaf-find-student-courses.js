@@ -42,7 +42,9 @@ async function populateStudent(filename) {
 }
 
 function prettyCourse(c) {
-    return `${c.department.join('/')} ${c.number}${c.gereqs ? ` [${c.gereqs.join(' ')}]` : ''}`
+    return `${c.department.join('/')} ${c.number}${c.gereqs
+        ? ` [${c.gereqs.join(' ')}]`
+        : ''}`
 }
 
 function prettyCourseList(list) {

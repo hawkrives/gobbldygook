@@ -21,8 +21,7 @@ import CourseList from './course-list'
 import styled from 'styled-components'
 
 const Container = styled.div`
-    ${props => props.theme.card}
-    flex: 1 0;
+    ${props => props.theme.card} flex: 1 0;
     min-width: 16em;
     margin: ${props => props.theme.semesterSpacing};
 
@@ -34,9 +33,7 @@ const Container = styled.div`
 `
 
 const TitleButton = styled(Button)`
-    ${props => props.theme.semesterPadding}
-
-    min-height: 0;
+    ${props => props.theme.semesterPadding} min-height: 0;
     font-size: 0.9em;
 
     border: 0;
@@ -72,35 +69,29 @@ const Header = styled.header`
     overflow: hidden;
 `
 
-const InfoList = styled(InlineList)`
-    font-size: 0.8em;
-`
+const InfoList = styled(InlineList)`font-size: 0.8em;`
 
 const InfoItem = styled(InlineListItem)`
     font-feature-settings: 'onum';
 
     & + &::before {
-        content: " – ";
+        content: ' – ';
         padding-left: 0.25em;
     }
 `
 
 const Title = styled(Link)`
-    ${props => props.theme.linkUndecorated}
-    flex: 1;
+    ${props => props.theme.linkUndecorated} flex: 1;
     display: flex;
     flex-direction: column;
 
-    ${props => props.theme.semesterPadding}
-
-    &:hover {
+    ${props => props.theme.semesterPadding} &:hover {
         text-decoration: underline;
     }
 `
 
 const TitleText = styled.h1`
-    ${props => props.theme.headingNeutral}
-    display: inline-block;
+    ${props => props.theme.headingNeutral} display: inline-block;
     color: black;
 `
 
@@ -124,8 +115,7 @@ function Semester(props) {
         currentCredits &&
             infoBar.push(
                 <InfoItem key="credit-count">
-                    {currentCredits}
-                    {' '}
+                    {currentCredits}{' '}
                     {currentCredits === 1 ? 'credit' : 'credits'}
                 </InfoItem>
             )
@@ -163,16 +153,16 @@ function Semester(props) {
                 </RemoveSemesterButton>
             </Header>
 
-            {schedule
-                ? <CourseList
-                      courses={courses}
-                      creditCount={currentCredits}
-                      availableCredits={recommendedCredits}
-                      studentId={studentId}
-                      schedule={schedule}
-                      conflicts={conflicts || []}
-                  />
-                : null}
+            {schedule ? (
+                <CourseList
+                    courses={courses}
+                    creditCount={currentCredits}
+                    availableCredits={recommendedCredits}
+                    studentId={studentId}
+                    schedule={schedule}
+                    conflicts={conflicts || []}
+                />
+            ) : null}
         </Container>
     )
 }

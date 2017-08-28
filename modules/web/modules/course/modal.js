@@ -17,13 +17,13 @@ import {
 } from '../../redux/students/actions/courses'
 
 const ContainerModal = styled(Modal)`
-    ${props => props.theme.baseCard}
-
-    display: flex;
+    ${props => props.theme.baseCard} display: flex;
     flex-flow: column;
     max-width: 45em;
 
-    p, ul, ol {
+    p,
+    ul,
+    ol {
         margin: 0;
     }
 `
@@ -33,9 +33,7 @@ const VerticalSegment = `
 `
 
 const BottomToolbar = styled.div`
-    ${VerticalSegment}
-
-    border-top: ${props => props.theme.materialDivider};
+    ${VerticalSegment} border-top: ${props => props.theme.materialDivider};
     margin-top: 0.5em;
     padding-top: 0.5em;
     display: flex;
@@ -63,9 +61,7 @@ const RemoveCourseButton = styled(Button)`
     }
 `
 
-const Course = styled(ExpandedCourse)`
-    ${VerticalSegment}
-`
+const Course = styled(ExpandedCourse)`${VerticalSegment};`
 
 const removeFromSemester = ({
     studentId,
@@ -108,7 +104,9 @@ function ModalCourse(props: {
         <ContainerModal onClose={onClose} contentLabel="Course">
             <Toolbar>
                 <Separator type="flex-spacer" flex={3} />
-                <Button type="raised" onClick={onClose}>Close</Button>
+                <Button type="raised" onClick={onClose}>
+                    Close
+                </Button>
             </Toolbar>
 
             <Course course={course} />

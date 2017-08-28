@@ -39,9 +39,7 @@ type PropTypes = {
 const StudentButtonsToolbar = styled(Toolbar)`margin-bottom: 0.5em;`
 
 const SidebarElement = styled.aside`
-    ${props => props.theme.contentBlockSpacing}
-
-    flex: 1;
+    ${props => props.theme.contentBlockSpacing} flex: 1;
 
     @media all and (min-width: 35em) {
         max-width: 280px;

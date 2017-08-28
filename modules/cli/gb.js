@@ -16,11 +16,20 @@ module.exports.cli = function cli() {
 
     const nom = nomnom()
 
-    nom.command('check').callback(check).help('check a student')
+    nom
+        .command('check')
+        .callback(check)
+        .help('check a student')
 
-    nom.command('lint').callback(lint).help('lint (syntax-check) an area file')
+    nom
+        .command('lint')
+        .callback(lint)
+        .help('lint (syntax-check) an area file')
 
-    nom.command('update').callback(update).help('update local data cache')
+    nom
+        .command('update')
+        .callback(update)
+        .help('update local data cache')
 
     nom
         .command('search')
@@ -44,7 +53,8 @@ module.exports.cli = function cli() {
             metavar: 'KEY',
             type: 'string',
             transform: yaml.safeLoad,
-            help: 'Run a uniqing filter over the list of found courses, based on the given key',
+            help:
+                'Run a uniqing filter over the list of found courses, based on the given key',
         })
         .option('sort', {
             type: 'string',

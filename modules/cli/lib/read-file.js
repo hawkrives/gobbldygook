@@ -11,21 +11,28 @@ const fs = pify(require('graceful-fs'))
 module.exports.loadFile = loadFile
 function loadFile(pathOrUrl) {
     return startsWith(pathOrUrl, 'http')
-        ? fetch(pathOrUrl).then(status).then(text)
+        ? fetch(pathOrUrl)
+              .then(status)
+              .then(text)
         : fs.readFileAsync(pathOrUrl, { encoding: 'utf-8' })
 }
 
 module.exports.loadJsonFile = loadJsonFile
 function loadJsonFile(pathOrUrl) {
     return startsWith(pathOrUrl, 'http')
-        ? fetch(pathOrUrl).then(status).then(json)
+        ? fetch(pathOrUrl)
+              .then(status)
+              .then(json)
         : fs.readFileAsync(pathOrUrl, { encoding: 'utf-8' }).then(JSON.parse)
 }
 
 module.exports.loadYamlFile = loadYamlFile
 function loadYamlFile(pathOrUrl) {
     return startsWith(pathOrUrl, 'http')
-        ? fetch(pathOrUrl).then(status).then(text).then(yaml.safeLoad)
+        ? fetch(pathOrUrl)
+              .then(status)
+              .then(text)
+              .then(yaml.safeLoad)
         : fs.readFileAsync(pathOrUrl, { encoding: 'utf-8' }).then(yaml.safeLoad)
 }
 

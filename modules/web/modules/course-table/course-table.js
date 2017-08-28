@@ -48,8 +48,7 @@ export default function CourseTable(props: PropTypes) {
     const nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
     const canAddYear = true // graduation > nextAvailableYear
 
-    const nextYearButton =
-        canAddYear &&
+    const nextYearButton = canAddYear && (
         <AddYearButton
             key="add-year"
             type="flat"
@@ -58,6 +57,7 @@ export default function CourseTable(props: PropTypes) {
         >
             Add {expandYear(nextAvailableYear, false, '–')}
         </AddYearButton>
+    )
 
     let sorted = sortBy(schedules, 'year')
     let grouped = groupBy(sorted, 'year')
@@ -73,9 +73,5 @@ export default function CourseTable(props: PropTypes) {
     ))
     years.splice(nextAvailableYear - matriculation + 1, 0, nextYearButton)
 
-    return (
-        <Container className={props.className}>
-            {years}
-        </Container>
-    )
+    return <Container className={props.className}>{years}</Container>
 }

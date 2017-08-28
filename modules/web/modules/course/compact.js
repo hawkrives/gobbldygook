@@ -27,33 +27,28 @@ const Row = `
     line-height: 1.5;
 `
 
-export const Title = styled(CourseTitle)`
-    ${Row}
-`
+export const Title = styled(CourseTitle)`${Row};`
 
 export const SummaryRow = styled.div`
-    ${Row}
-    text-overflow: ellipsis;
+    ${Row} text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     font-size: 0.75em;
 
     & > * + *:not(:empty)::before {
         margin: 0 0.2em;
-        content: "·";
+        content: '·';
     }
 `
 
 const GeReqItem = styled(InlineListItem)`
     & + &::before {
         margin: 0 0.2em;
-        content: "+";
+        content: '+';
     }
 `
 
-const Identifier = styled.span`
-    font-feature-settings: "tnum";
-`
+const Identifier = styled.span`font-feature-settings: 'tnum';`
 
 const Type = styled.span``
 const Prereqs = styled.span``
@@ -81,20 +76,18 @@ export default class CompactCourse extends React.PureComponent {
                 />
 
                 <SummaryRow>
-                    <Identifier>
-                        {buildDeptNum(course, true)}
-                    </Identifier>
+                    <Identifier>{buildDeptNum(course, true)}</Identifier>
                     {course.type !== 'Research' && <Type>{course.type}</Type>}
-                    {course.gereqs &&
+                    {course.gereqs && (
                         <InlineList>
                             {map(course.gereqs, ge => (
                                 <GeReqItem key={ge}>{ge}</GeReqItem>
                             ))}
-                        </InlineList>}
-                    {course.prerequisites &&
-                        <Prereqs title={course.prerequisites}>
-                            Prereq
-                        </Prereqs>}
+                        </InlineList>
+                    )}
+                    {course.prerequisites && (
+                        <Prereqs title={course.prerequisites}>Prereq</Prereqs>
+                    )}
                 </SummaryRow>
                 <SummaryRow>
                     {map(course.times, timestring => (

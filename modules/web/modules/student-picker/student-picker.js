@@ -52,7 +52,8 @@ const AppTitle = styled.header`
     margin-top: 3em;
     text-align: center;
 
-    & h1, & h2 {
+    & h1,
+    & h2 {
         margin: 0;
         font-feature-settings: 'smcp';
     }
@@ -74,8 +75,7 @@ const MakeStudentButton = styled(Button)`
 `
 
 const Filter = styled.input`
-    ${props => props.theme.card}
-    flex: 3 0 auto;
+    ${props => props.theme.card} flex: 3 0 auto;
     align-self: center;
     padding: 0.25em 0.5em;
     margin-right: 1em;
@@ -127,7 +127,9 @@ export default function StudentPicker(props: PropTypes) {
             <AppTitle>
                 <h1>GobbldygooK</h1>
                 <h2>A Course Scheduling Helper</h2>
-                <small><code>{process.env.TRAVIS_COMMIT}</code></small>
+                <small>
+                    <code>{process.env.TRAVIS_COMMIT}</code>
+                </small>
             </AppTitle>
 
             <StudentListToolbarWrapper>
@@ -168,24 +170,27 @@ export default function StudentPicker(props: PropTypes) {
                 <div>
                     <span>
                         Sorting by <b>{sortByExpanded[sortBy]}</b> (a-z);
+                    </span>{' '}
+                    <span>
+                        grouping by <b>{groupBy}</b>.
                     </span>
-                    {' '}
-                    <span>grouping by <b>{groupBy}</b>.</span>
                 </div>
             </StudentListToolbarWrapper>
 
-            {size(students) > 0
-                ? <StudentList
-                      destroyStudent={destroyStudent}
-                      filter={filterText}
-                      isEditing={isEditing}
-                      sortBy={sortBy}
-                      groupBy={groupBy}
-                      students={students}
-                  />
-                : <MakeStudentButton link type="raised" to="/create">
-                      Add a Student
-                  </MakeStudentButton>}
+            {size(students) > 0 ? (
+                <StudentList
+                    destroyStudent={destroyStudent}
+                    filter={filterText}
+                    isEditing={isEditing}
+                    sortBy={sortBy}
+                    groupBy={groupBy}
+                    students={students}
+                />
+            ) : (
+                <MakeStudentButton link type="raised" to="/create">
+                    Add a Student
+                </MakeStudentButton>
+            )}
         </Overview>
     )
 }

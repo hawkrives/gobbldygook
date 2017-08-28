@@ -10,9 +10,7 @@ import {
     destroySchedules,
 } from '../../redux/students/actions/schedules'
 import { findFirstAvailableYear } from '../../helpers/find-first-available-year'
-import {
-    findFirstAvailableSemester,
-} from '../../helpers/find-first-available-semester'
+import { findFirstAvailableSemester } from '../../helpers/find-first-available-semester'
 
 import CourseTable from './course-table'
 

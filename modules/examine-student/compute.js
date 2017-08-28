@@ -70,7 +70,9 @@ export default function compute(
     if ('result' in requirement) {
         if (requirement.result === '') {
             throw new SyntaxError(
-                `compute(): requirement.result must not be empty (in ${JSON.stringify(requirement)})`
+                `compute(): requirement.result must not be empty (in ${JSON.stringify(
+                    requirement
+                )})`
             )
         }
 
