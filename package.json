@@ -166,7 +166,7 @@
     "get-stdin": "5.0.1",
     "glob": "7.1.2",
     "graceful-fs": "4.1.11",
-    "jest": "21.0.2",
+    "jest": "21.1.0",
     "jest-enzyme": "3.8.2",
     "jest-matcher-utils": "21.0.2",
     "js-beautify": "1.6.14",
