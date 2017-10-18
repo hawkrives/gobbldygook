@@ -162,7 +162,7 @@
     "fake-indexeddb": "2.0.3",
     "file-loader": "1.1.5",
     "flow-bin": "0.52.0",
-    "flow-remove-types": "1.2.1",
+    "flow-remove-types": "1.2.2",
     "get-stdin": "5.0.1",
     "glob": "7.1.2",
     "graceful-fs": "4.1.11",
