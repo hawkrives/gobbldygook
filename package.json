@@ -191,7 +191,7 @@
     "text-table": "0.2.0",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
-    "webpack-dev-server": "2.9.2",
+    "webpack-dev-server": "2.9.3",
     "worker-loader": "1.0.0"
   }
 }
