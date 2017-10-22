@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { findDOMNode } from 'react-dom'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 import { semesterName } from '../../../school-st-olaf-college/course-info'
@@ -136,7 +135,7 @@ function Semester(props) {
     return (
         <Container
             className={className}
-            innerRef={ref => props.connectDropTarget(findDOMNode(ref))}
+            innerRef={ref => props.connectDropTarget(ref)}
         >
             <Header>
                 <Title to={`/s/${studentId}/semester/${year}/${semester}`}>
