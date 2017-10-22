@@ -119,27 +119,30 @@ class AreaOfStudyContainer extends Component {
             <div>
                 <div className="area--summary-row">
                     <h1 className="area--title">
-                        {slug && !isCustom && isOpen
-                            ? <a
-                                  className="catalog-link"
-                                  href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  onClick={ev => ev.stopPropagation()}
-                                  title="View in the St. Olaf Catalog"
-                              >
-                                  {name}
-                              </a>
-                            : name}
+                        {slug && !isCustom && isOpen ? (
+                            <a
+                                className="catalog-link"
+                                href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={ev => ev.stopPropagation()}
+                                title="View in the St. Olaf Catalog"
+                            >
+                                {name}
+                            </a>
+                        ) : (
+                            name
+                        )}
                     </h1>
                     <span className="icons">
-                        {props.showCloseButton &&
+                        {props.showCloseButton && (
                             <Button
                                 className="area--remove-button"
                                 onClick={this.startRemovalConfirmation}
                             >
                                 <Icon>{close}</Icon>
-                            </Button>}
+                            </Button>
+                        )}
                         <Icon className="area--open-indicator">
                             {isOpen ? chevronUp : chevronDown}
                         </Icon>
@@ -156,7 +159,9 @@ class AreaOfStudyContainer extends Component {
 
         const removalConfirmation = (
             <div className="area--confirm-removal">
-                <p>Remove <strong>{name}</strong>?</p>
+                <p>
+                    Remove <strong>{name}</strong>?
+                </p>
                 <span className="button-group">
                     <Button
                         className="area--actually-remove-area"
@@ -174,7 +179,11 @@ class AreaOfStudyContainer extends Component {
 
         let contents = null
         if (error) {
-            contents = <p className="message area--error">{error} {':('}</p>
+            contents = (
+                <p className="message area--error">
+                    {error} {':('}
+                </p>
+            )
         } else if (!checked) {
             contents = <p className="message area--loading">Loading…</p>
         } else {

@@ -17,7 +17,9 @@ import plur from 'plur'
 import chalk from 'chalk'
 
 function condenseCourse(course) {
-    return `${sortBy(course.department).join('/')} ${'number' in course ? course.number : `${String(course.level)[0]}XX`}`
+    const num =
+        'number' in course ? course.number : `${String(course.level)[0]}XX`
+    return `${sortBy(course.department).join('/')} ${num}`
 }
 
 function summarize(requirement, name, path, depth = 0) {
@@ -76,11 +78,11 @@ const OR = chalk.bold('OR')
 
 function stringifyBoolean(expr) {
     if ('$or' in expr) {
-        return `(${map(expr.$or, req => stringifyChunk(req)).join(` ${OR} `)})`
+        const str = map(expr.$or, req => stringifyChunk(req)).join(` ${OR} `)
+        return `(${str})`
     } else if ('$and' in expr) {
-        return `(${map(expr.$and, req =>
-            stringifyChunk(req)
-        ).join(` ${AND} `)})`
+        const str = map(expr.$and, req => stringifyChunk(req)).join(` ${AND} `)
+        return `(${str})`
     }
 }
 
@@ -92,9 +94,8 @@ function stringifyChildren(expr) {
     if (expr.$children === '$all') {
         return 'all children'
     }
-    return `(${map(expr.$children, child =>
-        stringifyReference(child)
-    ).join(', ')})`
+    const str = map(expr.$children, stringifyReference).join(', ')
+    return `(${str})`
 }
 
 function stringifyModifier(expr) {
@@ -108,20 +109,27 @@ function stringifyModifier(expr) {
     } else if (expr.$from === 'where') {
         modifier = `where {${stringifyWhereClause(expr.$where)}}`
     } else if (expr.$from === 'children-where') {
-        modifier = `${stringifyChildren(expr)}, where {${stringifyWhereClause(expr.$where)}}`
+        modifier = `${stringifyChildren(expr)}, where {${stringifyWhereClause(
+            expr.$where
+        )}}`
     }
-    return `${expr.$count.$num} ${plur(expr.$what, expr.$count.$num)} ${expr.$besides ? `[besides ${condenseCourse(expr.$besides.$course)}] ` : ''}from ${modifier}`
+
+    const word = plur(expr.$what, expr.$count.$num)
+    const besides = expr.$besides
+        ? `[besides ${condenseCourse(expr.$besides.$course)}] `
+        : ''
+    return `${expr.$count.$num} ${word} ${besides}from ${modifier}`
 }
 
 function stringifyOccurrence(expr) {
-    return `${expr.$count.$num} ${plur('occurrence', expr.$count.$num)} of ${condenseCourse(expr.$course)}`
+    const word = expr.$count.$num === 1 ? 'occurrence' : 'occurrences'
+    return `${expr.$count.$num} ${word} of ${condenseCourse(expr.$course)}`
 }
 
 function stringifyOf(expr) {
-    return `${expr.$count.$num} of${humanizeOperator(expr.$count.$operator)} (${map(
-        expr.$of,
-        req => stringifyChunk(req)
-    ).join(', ')})`
+    const op = humanizeOperator(expr.$count.$operator)
+    const ofs = map(expr.$of, req => stringifyChunk(req)).join(', ')
+    return `${expr.$count.$num} of${op} (${ofs})`
 }
 
 function stringifyReference(expr) {
@@ -130,9 +138,9 @@ function stringifyReference(expr) {
 
 function stringifyQualification({ $key, $operator, $value }) {
     if ($value instanceof Array) {
-        throw new TypeError(
+        const msg =
             "stringifyQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)"
-        )
+        throw new TypeError(msg)
     } else if ($value instanceof Object) {
         if ($value.$type === 'function') {
             const simplifiedOperator = {
@@ -142,31 +150,25 @@ function stringifyQualification({ $key, $operator, $value }) {
             }
             return stringifyQualification(simplifiedOperator)
         } else if ($value.$type === 'boolean') {
+            let ds = []
+            let conjunction = ''
             if ('$or' in $value) {
-                return map($value.$or, val =>
-                    stringifyQualification({
-                        $key,
-                        $operator,
-                        $value: val,
-                    })
-                ).join(` ${OR} `)
+                ds = $value.$or
+                conjunction = ` ${OR} `
             } else if ('$and' in $value) {
-                return map($value.$and, val =>
-                    stringifyQualification({
-                        $key,
-                        $operator,
-                        $value: val,
-                    })
-                ).join(` ${AND} `)
+                ds = $value.$and
+                conjunction = ` ${AND} `
             } else {
-                throw new TypeError(
-                    `stringifyQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`
-                )
+                const val = JSON.stringify($value)
+                const msg = `stringifyQualification(): neither $or nor $and could be found in ${val}`
+                throw new TypeError(msg)
             }
+            return map(ds, val =>
+                stringifyQualification({ $key, $operator, $value: val })
+            ).join(conjunction)
         } else {
-            throw new TypeError(
-                `stringifyQualification(): "${$value.$type}" is not a valid type for a qualification's value.`
-            )
+            const msg = `stringifyQualification(): "${$value.$type}" is not a valid type for a qualification's value.`
+            throw new TypeError(msg)
         }
     } else {
         // it's a static value; a number or string
@@ -203,7 +205,9 @@ function stringifyWhereClause(clause) {
 }
 
 function stringifyWhere(expr) {
-    return `${expr.$count.$num} ${plur('course', expr.$count.$num)} where {${stringifyWhereClause(expr.$where)}}`
+    const word = plur('course', expr.$count.$num)
+    const where = stringifyWhereClause(expr.$where)
+    return `${expr.$count.$num} ${word} where {${where}}`
 }
 
 function stringifyFilter(filter) {
@@ -211,27 +215,32 @@ function stringifyFilter(filter) {
 
     // a filter will be either a where-style query or a list of courses
     if ('$where' in filter) {
-        resultString += `only courses where {${stringifyWhereClause(filter.$where)}}`
+        const where = stringifyWhereClause(filter.$where)
+        resultString += `only courses where {${where}}`
     } else if ('$of' in filter) {
-        resultString += `only (${map(filter.$of, req =>
-            stringifyChunk(req)
-        ).join(', ')})`
+        const ofs = map(filter.$of, req => stringifyChunk(req)).join(', ')
+        resultString += `only (${ofs})`
     }
 
     return resultString
 }
 
 function indent(indentWith, string) {
-    return string.split('\n').map(line => indentWith + line).join('\n')
+    return string
+        .split('\n')
+        .map(line => indentWith + line)
+        .join('\n')
 }
 
 function proseify(requirement, name, path, depth = 0) {
     let prose = ''
+
     const hasChildren = some(keys(requirement), isRequirementName)
     if (hasChildren) {
         const subReqs = filter(toPairs(requirement), ([k, _]) =>
             isRequirementName(k)
         )
+
         prose = map(subReqs, ([k, v]) => {
             return proseify(v, k, path.concat(k), depth + 1)
         }).join('\n')

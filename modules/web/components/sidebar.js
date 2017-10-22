@@ -36,11 +36,12 @@ type PropTypes = {
     undo: string => any,
 }
 
-const StudentButtonsToolbar = styled(Toolbar)`margin-bottom: 0.5em;`
+const StudentButtonsToolbar = styled(Toolbar)`
+    margin-bottom: 0.5em;
+`
 
 const SidebarElement = styled.aside`
-    ${props => props.theme.contentBlockSpacing}
-
+    ${props => props.theme.contentBlockSpacing};
     flex: 1;
 
     @media all and (min-width: 35em) {

@@ -7,9 +7,7 @@ import map from 'lodash/map'
 import Button from '../../components/button'
 import Semester from './semester-container'
 
-import {
-    findFirstAvailableSemester,
-} from '../../helpers/find-first-available-semester'
+import { findFirstAvailableSemester } from '../../helpers/find-first-available-semester'
 import {
     expandYear,
     semesterName,
@@ -27,7 +25,7 @@ const row = `
 `
 
 const Header = styled.header`
-    ${props => props.theme.noSelect}
+    ${props => props.theme.noSelect};
     margin: 0;
 
     display: flex;
@@ -35,7 +33,7 @@ const Header = styled.header`
     justify-content: space-between;
     align-items: center;
 
-    font-feature-settings: "tnum";
+    font-feature-settings: 'tnum';
 
     line-height: 1em;
     font-weight: 500;
@@ -43,7 +41,7 @@ const Header = styled.header`
 `
 
 const TitleText = styled.h1`
-    ${props => props.theme.headingNeutral}
+    ${props => props.theme.headingNeutral};
     white-space: nowrap;
     flex: 1;
 
@@ -60,7 +58,7 @@ const TitleButton = styled(Button)`
     padding: 0 0.5em;
 
     text-transform: none;
-    font-feature-settings: "smcp";
+    font-feature-settings: 'smcp';
     font-weight: 400;
 
     color: ${props => props.theme.gray500};
@@ -80,7 +78,7 @@ const RemoveYearButton = styled(TitleButton)`
 
 const SemesterList = styled.div`
     flex: 1;
-    ${row}
+    ${row};
 `
 
 const canAddSemester = (schedules, year) =>
@@ -132,14 +130,15 @@ export default class Year extends React.PureComponent {
                     <TitleText>{niceYear}</TitleText>
 
                     <span>
-                        {!isAddSemesterDisabled &&
+                        {!isAddSemesterDisabled && (
                             <TitleButton
                                 type="flat"
                                 title="Add Semester"
                                 onClick={this.addSemester}
                             >
                                 Add ‘{semesterName(nextAvailableSemester)}’
-                            </TitleButton>}
+                            </TitleButton>
+                        )}
                         <RemoveYearButton
                             type="flat"
                             title={`Remove the year ${niceYear}`}
@@ -149,9 +148,7 @@ export default class Year extends React.PureComponent {
                         </RemoveYearButton>
                     </span>
                 </Header>
-                <SemesterList>
-                    {terms}
-                </SemesterList>
+                <SemesterList>{terms}</SemesterList>
             </Container>
         )
     }

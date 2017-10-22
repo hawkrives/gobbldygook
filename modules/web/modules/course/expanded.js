@@ -12,7 +12,7 @@ import { to12HourTime } from '../../../lib'
 
 const Heading = styled.h2`
     font-weight: 500;
-    font-feature-settings: "smcp";
+    font-feature-settings: 'smcp';
     font-size: 1em;
     margin-bottom: 0;
 `
@@ -32,7 +32,7 @@ const Column = styled.div`
 `
 
 const InfoSegment = styled.div`
-    padding-bottom: 20px
+    padding-bottom: 20px;
 `
 
 const ColumnsWrapper = styled.div`
@@ -59,11 +59,12 @@ export default class ExpandedCourse extends React.PureComponent {
 
         const infoColumn = (
             <Column>
-                {course.description &&
+                {course.description && (
                     <Description>
                         <Heading>Description</Heading>
                         <p>{course.description}</p>
-                    </Description>}
+                    </Description>
+                )}
 
                 <p>
                     Offered in {semesterName(course.semester)} {course.year}.
@@ -78,13 +79,14 @@ export default class ExpandedCourse extends React.PureComponent {
 
         const detailColumn = (
             <Column>
-                {course.prerequisites &&
+                {course.prerequisites && (
                     <div>
                         <Heading>Prerequisites</Heading>
                         <p>{course.prerequisites}</p>
-                    </div>}
+                    </div>
+                )}
 
-                {course.times &&
+                {course.times && (
                     <div>
                         <Heading>
                             {course.offerings && course.offerings.length === 1
@@ -97,9 +99,11 @@ export default class ExpandedCourse extends React.PureComponent {
                                     const key = `${offering.day}-${time.start}-${time.end}`
                                     return (
                                         <ListItem key={key}>
-                                            {offering.day}{' from '}
+                                            {offering.day}
+                                            {' from '}
                                             {to12HourTime(time.start)}
-                                            {' to '}{to12HourTime(time.end)}
+                                            {' to '}
+                                            {to12HourTime(time.end)}
                                             {', in '}
                                             {offering.location}
                                         </ListItem>
@@ -107,20 +111,22 @@ export default class ExpandedCourse extends React.PureComponent {
                                 })
                             )}
                         </BulletedList>
-                    </div>}
+                    </div>
+                )}
 
-                {course.instructors &&
+                {course.instructors && (
                     <div>
                         <Heading>
                             {course.instructors &&
-                                course.instructors.length === 1
+                            course.instructors.length === 1
                                 ? 'Instructor'
                                 : 'Instructors'}
                         </Heading>
                         <div>{oxford(course.instructors)}</div>
-                    </div>}
+                    </div>
+                )}
 
-                {course.gereqs &&
+                {course.gereqs && (
                     <div>
                         <Heading>G.E. Requirements</Heading>
                         <BulletedList>
@@ -128,7 +134,8 @@ export default class ExpandedCourse extends React.PureComponent {
                                 <ListItem key={ge}>{ge}</ListItem>
                             ))}
                         </BulletedList>
-                    </div>}
+                    </div>
+                )}
             </Column>
         )
 

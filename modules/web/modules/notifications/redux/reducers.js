@@ -51,9 +51,8 @@ export default function reducer(state = initialState, action) {
             // make a copy of the previous item
             const progress = { ...state[payload.id] }
             progress.value += payload.by
-            progress.value = progress.value <= progress.max
-                ? progress.value
-                : progress.max
+            progress.value =
+                progress.value <= progress.max ? progress.value : progress.max
 
             return { ...state, [payload.id]: progress }
         }

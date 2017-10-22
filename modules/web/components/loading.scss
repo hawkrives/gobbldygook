@@ -17,7 +17,13 @@
 	margin-top: 1em;
 	color: $gray;
 
-	&.info    { color: $green; }
-	&.warning { color: $orange; }
-	&.error   { color: $red; }
+	&.info {
+		color: $green;
+	}
+	&.warning {
+		color: $orange;
+	}
+	&.error {
+		color: $red;
+	}
 }

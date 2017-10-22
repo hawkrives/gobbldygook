@@ -82,7 +82,9 @@ function compareCourseToQualificationViaObject(
             )
         } else {
             throw new TypeError(
-                `compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`
+                `compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify(
+                    $value
+                )}`
             )
         }
     } else {

@@ -71,7 +71,9 @@ export const iosBoltOutline = (
     </g>
 )
 export const iosBolt = (
-    <g><path d="M302.7 64L143 288h95.8l-29.5 160L369 224h-95.8l29.5-160z" /></g>
+    <g>
+        <path d="M302.7 64L143 288h95.8l-29.5 160L369 224h-95.8l29.5-160z" />
+    </g>
 )
 export const iosCalendarOutline = (
     <g>

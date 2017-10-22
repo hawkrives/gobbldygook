@@ -3,10 +3,18 @@ const table = require('text-table')
 const searchCourses = require('./lib/search-for-courses')
 
 function printCourse(course) {
+    const sect = course.section ? `[${course.section}]` : ''
+
+    const type =
+        course.type && course.type !== 'Research' ? ` (${course.type})` : ''
+
+    const title =
+        course.title && course.title !== course.name ? ` [${course.title}]` : ''
+
     return [
         `${course.year}.${course.semester}`,
-        `${course.departments.join('/')} ${course.number}${course.section ? `[${course.section}]` : ''}${course.type && course.type !== 'Research' ? ' (' + course.type + ')' : ''}`,
-        `${course.name}${course.title && course.title !== course.name ? ` [${course.title}]` : ''}`,
+        `${course.departments.join('/')} ${course.number}${sect}${type}`,
+        `${course.name}${title}`,
     ]
 }
 

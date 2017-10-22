@@ -75,9 +75,11 @@ export default function SemesterSelector({
     student?: Object,
 }) {
     const studentId = student ? student.id : null
-    const specialOption = scheduleId
-        ? <option value="$remove">Remove from Schedule</option>
-        : <option value="$none">No Schedule</option>
+    const specialOption = scheduleId ? (
+        <option value="$remove">Remove from Schedule</option>
+    ) : (
+        <option value="$none">No Schedule</option>
+    )
 
     const options = map(findSemesterList(student), (group, year) => (
         <optgroup key={year} label={expandYear(year, true, '–')}>

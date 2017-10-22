@@ -16,12 +16,12 @@ const Base = `
 `
 
 const Title = styled.h1`
-    ${Base}
+    ${Base};
     font-feature-settings: 'onum';
 `
 
 const Subtitle = styled.h2`
-    ${Base}
+    ${Base};
     font-size: 0.75em;
 `
 
