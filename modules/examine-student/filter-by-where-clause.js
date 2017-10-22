@@ -76,7 +76,9 @@ export default function filterByWhereClause(
         } else {
             // only 'and' and 'or' are currently supported.
             throw new TypeError(
-                `filterByWhereClause: neither $or nor $and were present in ${JSON.stringify(clause)}`
+                `filterByWhereClause: neither $or nor $and were present in ${JSON.stringify(
+                    clause
+                )}`
             )
         }
     } else {
@@ -108,7 +110,9 @@ export function filterByQualification(
         if (value.$type === 'boolean') {
             if (!('$or' in value) && !('$and' in value)) {
                 throw new TypeError(
-                    `filterByQualification: neither $or nor $and were present in ${JSON.stringify(value)}`
+                    `filterByQualification: neither $or nor $and were present in ${JSON.stringify(
+                        value
+                    )}`
                 )
             }
         } else if (value.$type === 'function') {
