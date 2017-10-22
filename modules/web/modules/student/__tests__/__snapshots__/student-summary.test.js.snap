@@ -6,8 +6,8 @@ exports[`CreditSummary handles having exactly the right number of credits 1`] = 
 >
   You have currently planned for 
   10
+   of your
    
-  of your 
   10
    required credits.
    Good job!
@@ -20,8 +20,8 @@ exports[`CreditSummary handles having fewer credits than needed 1`] = `
 >
   You have currently planned for 
   5
+   of your
    
-  of your 
   10
    required credits.
 </p>
@@ -33,8 +33,8 @@ exports[`CreditSummary handles having more credits than needed 1`] = `
 >
   You have currently planned for 
   15
+   of your
    
-  of your 
   10
    required credits.
    Good job!
@@ -47,8 +47,8 @@ exports[`CreditSummary renders shallowly 1`] = `
 >
   You have currently planned for 
   5
+   of your
    
-  of your 
   10
    required credits.
 </p>
