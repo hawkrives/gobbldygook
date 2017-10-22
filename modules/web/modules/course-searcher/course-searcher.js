@@ -80,7 +80,8 @@ export default function CourseSearcher(props: CourseSearcherProps) {
     let placeholderExtension = ''
     if (partial) {
         if (partial.year && partial.semester) {
-            placeholderExtension = `(${toPrettyTerm(`${partial.year}${partial.semester}`)})`
+            const prettyTerm = toPrettyTerm(`${partial.year}${partial.semester}`)
+            placeholderExtension = `(${prettyTerm})`
         } else if (partial.year) {
             placeholderExtension = `(${partial.year})`
         }

@@ -11,7 +11,10 @@ export default function AreaList(props: { areas: Object[] }) {
     return (
         <List type="bullet">
             {map(areas, a => {
-                const url = `areas/${encodeURIComponent(a.type)}/${encodeURIComponent(a.name)}/${encodeURIComponent(a.revision)}`
+                const type = encodeURIComponent(a.type)
+                const name = encodeURIComponent(a.name)
+                const rev = encodeURIComponent(a.revision)
+                const url = `areas/${type}/${name}/${rev}`
                 return (
                     <li key={url}>
                         <Link to={url}>

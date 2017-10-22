@@ -23,10 +23,11 @@ function checkForInvalidYear(course, scheduleYear) {
     let thisYear = new Date().getFullYear()
 
     if (course.year !== scheduleYear && scheduleYear <= thisYear) {
+        const yearString = expandYear(course.year, true, '–')
         return {
             warning: true,
             type: 'invalid-year',
-            msg: `Wrong Year (originally from ${expandYear(course.year, true, '–')})`,
+            msg: `Wrong Year (originally from ${yearString})`,
         }
     }
 
@@ -40,10 +41,11 @@ function checkForInvalidSemester(course, scheduleSemester) {
     }
 
     if (course.semester !== scheduleSemester) {
+        const semString = semesterName(course.semester)
         return {
             warning: true,
             type: 'invalid-semester',
-            msg: `Wrong Semester (originally from ${semesterName(course.semester)})`,
+            msg: `Wrong Semester (originally from ${semString})`,
         }
     }
 
@@ -64,12 +66,13 @@ function checkForTimeConflicts(courses) {
                 )
             )
             const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
+
+            const conflictsStr = oxford(conflicted, { oxfordComma: true })
+            const word = conflicts.length === 1 ? 'course' : 'courses'
             return {
                 warning: true,
                 type: 'time-conflict',
-                msg: `Time conflict with the ${oxford(conflicted, {
-                    oxfordComma: true,
-                })} ${plur('course', conflicts.length)}`,
+                msg: `Time conflict with the ${conflictsStr} ${word}`,
             }
         }
 

@@ -41,8 +41,7 @@ const StudentButtonsToolbar = styled(Toolbar)`
 `
 
 const SidebarElement = styled.aside`
-    ${props => props.theme.contentBlockSpacing}
-
+    ${props => props.theme.contentBlockSpacing};
     flex: 1;
 
     @media all and (min-width: 35em) {
