@@ -17,10 +17,8 @@ import {
 
 import { partitionByIndex, splitParagraph, zipToObjectWithArrays } from '../lib'
 
-import departmentMapping
-    from 'sto-course-related-data/handmade/to_department_abbreviations.json'
-import gereqMapping
-    from 'sto-course-related-data/handmade/to_gereq_abbreviations.json'
+import departmentMapping from 'sto-course-related-data/handmade/to_department_abbreviations.json'
+import gereqMapping from 'sto-course-related-data/handmade/to_gereq_abbreviations.json'
 
 let semesters = {
     fall: 1,

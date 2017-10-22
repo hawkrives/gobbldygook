@@ -43,7 +43,10 @@ function loadAreaFromNetwork({ name, type, revision }: AreaQueryType) {
 
     const path = `${baseUrl}/${pluralizeArea(type)}/${kebabCase(name)}.yaml`
 
-    networkCache[id] = fetch(path).then(status).then(text).then(transform)
+    networkCache[id] = fetch(path)
+        .then(status)
+        .then(text)
+        .then(transform)
 
     return networkCache[id].then(area => {
         return {

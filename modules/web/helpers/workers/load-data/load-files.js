@@ -12,7 +12,10 @@ import type { InfoFileTypeEnum, InfoFileRef, InfoIndexFile } from './types'
 const log = debug('worker:load-data:load-files')
 
 const filterByTruthiness = arr => arr.filter(Boolean)
-const fetchJson = (...args) => fetch(...args).then(status).then(json)
+const fetchJson = (...args) =>
+    fetch(...args)
+        .then(status)
+        .then(json)
 
 type Args = {|
     baseUrl: string,

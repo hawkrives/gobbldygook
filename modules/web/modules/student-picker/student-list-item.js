@@ -64,11 +64,15 @@ const StudentAreas = styled.div`
 `
 
 const AreaGrouping = styled.span`
-    & + &::before { content: " | "; }
+    & + &::before {
+        content: ' | ';
+    }
 `
 
 const AreaName = styled.span`
-    & + &::before { content: " • "; }
+    & + &::before {
+        content: ' • ';
+    }
 `
 
 const StudentInfo = styled.span`
@@ -77,8 +81,7 @@ const StudentInfo = styled.span`
 `
 
 const ListItemLink = styled(Link)`
-    ${props => props.theme.linkUndecorated}
-
+    ${props => props.theme.linkUndecorated};
     background-color: white;
     &.is-selected {
         background-color: ${props => props.theme.blue50};
@@ -135,14 +138,15 @@ export default function StudentListItem(props: PropTypes) {
 
     return (
         <Container className={cx(classes)}>
-            {isEditing &&
+            {isEditing && (
                 <DeleteButton
                     type="flat"
                     onClick={() => destroyStudent(student.data.present.id)}
                 >
                     <Icon>{iosTrashOutline}</Icon>
                     Delete
-                </DeleteButton>}
+                </DeleteButton>
+            )}
             <ListItemLink to={`/s/${student.data.present.id}/`}>
                 <StudentInfo>
                     <StudentName>
@@ -151,9 +155,7 @@ export default function StudentListItem(props: PropTypes) {
                             ? ` (${student.data.present.id})`
                             : ''}
                     </StudentName>
-                    <StudentAreas>
-                        {areas}
-                    </StudentAreas>
+                    <StudentAreas>{areas}</StudentAreas>
                 </StudentInfo>
 
                 <GoIcon>{iosArrowForward}</GoIcon>

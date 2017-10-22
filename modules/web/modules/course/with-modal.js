@@ -12,8 +12,9 @@ export default class CourseWithModal extends React.PureComponent {
         return (
             <div>
                 <CompactCourse onClick={this.openModal} {...this.props} />
-                {this.state.isOpen &&
-                    <ModalCourse onClose={this.closeModal} {...this.props} />}
+                {this.state.isOpen && (
+                    <ModalCourse onClose={this.closeModal} {...this.props} />
+                )}
             </div>
         )
     }

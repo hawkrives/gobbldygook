@@ -30,8 +30,7 @@ function Student({ undo, redo, student }) {
                 style={{ color: canRedo ? '#444' : '#888' }}
             >
                 Redo
-            </button>
-            {' '}
+            </button>{' '}
             <code>{present.id}</code> {present.name}
         </div>
     )

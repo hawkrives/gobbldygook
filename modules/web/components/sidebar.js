@@ -36,7 +36,9 @@ type PropTypes = {
     undo: string => any,
 }
 
-const StudentButtonsToolbar = styled(Toolbar)`margin-bottom: 0.5em;`
+const StudentButtonsToolbar = styled(Toolbar)`
+    margin-bottom: 0.5em;
+`
 
 const SidebarElement = styled.aside`
     ${props => props.theme.contentBlockSpacing}

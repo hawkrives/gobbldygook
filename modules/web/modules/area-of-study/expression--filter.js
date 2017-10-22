@@ -27,7 +27,11 @@ function FilterWhere({ expr }) {
     const qualifier = makeWhereQualifier(expr.$where)
     const description = `only courses where ${qualifier}`
 
-    return <div><p>{description}</p></div>
+    return (
+        <div>
+            <p>{description}</p>
+        </div>
+    )
 }
 FilterWhere.propTypes = {
     ctx: PropTypes.object,
