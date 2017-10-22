@@ -189,7 +189,7 @@ class SISImportScreen extends React.Component {
     }
 }
 
-const StudentInfo = ({ student }) => (
+const StudentInfo = ({ student }: { student: mixed }) => (
     <div>
         <StudentSummary student={student} showMessage={false} />
         <ul>

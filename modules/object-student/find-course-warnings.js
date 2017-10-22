@@ -7,7 +7,6 @@ const zip = require('lodash/zip')
 
 const ordinal = require('ord')
 const oxford = require('listify')
-const plur = require('plur')
 const { findScheduleTimeConflicts } = require('sto-sis-time-parser')
 const {
     expandYear,

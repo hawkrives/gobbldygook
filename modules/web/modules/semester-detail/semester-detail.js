@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
