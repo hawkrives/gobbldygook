@@ -1,5 +1,7 @@
 @keyframes spin {
-	to { transform: rotate(1turn); }
+	to {
+		transform: rotate(1turn);
+	}
 }
 
 @mixin loading-spinner($size: 5em, $segment-width: 0.5em, $segment-length: 1.5em, $font-size: 24px) {
@@ -7,7 +9,7 @@
 	display: inline-block;
 	width: $size;
 	height: $size;
-	margin: 0 .5em;
+	margin: 0 0.5em;
 	font-size: $font-size;
 	animation: spin 1s infinite steps(8);
 
@@ -22,13 +24,13 @@
 		content: '';
 		position: absolute;
 		top: 0;
-		left: ($size - $segment-width) / 2;  /* (container width - part width) / 2 */
+		left: ($size - $segment-width) / 2; /* (container width - part width) / 2 */
 		width: $segment-width;
 		height: $segment-length;
-		border-radius: .2em;
+		border-radius: 0.2em;
 		background: #ddd;
-		box-shadow: 0 ($size - $segment-length) #ddd;  /* container height - part height */
-		transform-origin: 50% ($size / 2);  /* container height / 2 */
+		box-shadow: 0 ($size - $segment-length) #ddd; /* container height - part height */
+		transform-origin: 50% ($size / 2); /* container height / 2 */
 	}
 
 	&::before {
