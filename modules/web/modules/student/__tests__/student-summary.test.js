@@ -102,7 +102,12 @@ describe('DateSummary', () => {
         )
 
         expect(tree).toMatchSnapshot()
-        expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(true)
+        expect(
+            tree
+                .find('ContentEditable')
+                .at(0)
+                .prop('disabled')
+        ).toBe(true)
     })
 
     it('disables editing the graduation year if onChangeGraduation is not given', () => {
@@ -111,7 +116,12 @@ describe('DateSummary', () => {
         )
 
         expect(tree).toMatchSnapshot()
-        expect(tree.find('ContentEditable').at(1).prop('disabled')).toBe(true)
+        expect(
+            tree
+                .find('ContentEditable')
+                .at(1)
+                .prop('disabled')
+        ).toBe(true)
     })
 
     it('allows editing the matriculation year if onChangeMatriculation is given', () => {
@@ -125,7 +135,12 @@ describe('DateSummary', () => {
         )
 
         expect(tree).toMatchSnapshot()
-        expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(false)
+        expect(
+            tree
+                .find('ContentEditable')
+                .at(0)
+                .prop('disabled')
+        ).toBe(false)
     })
 
     it('allows editing the graduation year if onChangeGraduation is given', () => {
@@ -139,7 +154,12 @@ describe('DateSummary', () => {
         )
 
         expect(tree).toMatchSnapshot()
-        expect(tree.find('ContentEditable').at(1).prop('disabled')).toBe(false)
+        expect(
+            tree
+                .find('ContentEditable')
+                .at(1)
+                .prop('disabled')
+        ).toBe(false)
     })
 
     it('calls onChangeMatriculation when the matriculation year is changed', () => {
@@ -153,7 +173,10 @@ describe('DateSummary', () => {
         )
 
         expect(tree).toMatchSnapshot()
-        tree.find('ContentEditable').at(0).simulate('blur', '2010')
+        tree
+            .find('ContentEditable')
+            .at(0)
+            .simulate('blur', '2010')
         expect(onChangeMatriculation).toHaveBeenCalledWith('2010')
     })
 
@@ -168,7 +191,10 @@ describe('DateSummary', () => {
         )
 
         expect(tree).toMatchSnapshot()
-        tree.find('ContentEditable').at(1).simulate('blur', '2018')
+        tree
+            .find('ContentEditable')
+            .at(1)
+            .simulate('blur', '2018')
         expect(onChangeGraduation).toHaveBeenCalledWith('2018')
     })
 })
@@ -331,7 +357,12 @@ describe('Header', () => {
         )
 
         expect(tree).toMatchSnapshot()
-        expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(true)
+        expect(
+            tree
+                .find('ContentEditable')
+                .at(0)
+                .prop('disabled')
+        ).toBe(true)
     })
     it('allows editing the name if onChangeName is given', () => {
         const onChangeName = jest.fn()
@@ -346,7 +377,12 @@ describe('Header', () => {
         )
 
         expect(tree).toMatchSnapshot()
-        expect(tree.find('ContentEditable').at(0).prop('disabled')).toBe(false)
+        expect(
+            tree
+                .find('ContentEditable')
+                .at(0)
+                .prop('disabled')
+        ).toBe(false)
     })
 
     it('calls onChangeName when the name is changed', () => {
@@ -362,7 +398,10 @@ describe('Header', () => {
         )
 
         expect(tree).toMatchSnapshot()
-        tree.find('ContentEditable').at(0).simulate('blur', 'Black Widow')
+        tree
+            .find('ContentEditable')
+            .at(0)
+            .simulate('blur', 'Black Widow')
         expect(onChangeName).toHaveBeenCalledWith('Black Widow')
     })
 })
@@ -388,6 +427,11 @@ describe('StudentSummary', () => {
         const tree = shallow(
             <StudentSummary randomizeHello={true} student={student} />
         )
-        expect(tree.find('Header').at(0).prop('helloMessage')).toBeTruthy()
+        expect(
+            tree
+                .find('Header')
+                .at(0)
+                .prop('helloMessage')
+        ).toBeTruthy()
     })
 })

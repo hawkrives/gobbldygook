@@ -19,8 +19,8 @@ export const baseCard = css`
 `
 
 export const card = css`
-    ${materialShadow}
-    ${baseCard}
+    ${materialShadow};
+    ${baseCard};
 `
 
 export const cardContent = `

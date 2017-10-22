@@ -17,7 +17,9 @@ export function getCourseFromNetwork(clbid: number) {
 
     const path = `${baseUrl}/courses/${dir}/${id}.json`
 
-    networkCache[clbid] = fetch(path).then(status).then(json)
+    networkCache[clbid] = fetch(path)
+        .then(status)
+        .then(json)
 
     return networkCache[clbid]
 }

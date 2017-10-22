@@ -29,9 +29,8 @@ module.exports.cache = cache
 async function cache() {
     prepareDirs()
 
-    const priorCourseInfo = tryReadJsonFile(
-        `${cacheDir}/Courses/info.prior.json`
-    ) || {}
+    const priorCourseInfo =
+        tryReadJsonFile(`${cacheDir}/Courses/info.prior.json`) || {}
     // const priorAreaInfo = tryReadJsonFile(`${cacheDir}/Areas/info.prior.json`) || {}
 
     mkdirp.sync(`${cacheDir}/Courses/`)

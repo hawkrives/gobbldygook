@@ -28,7 +28,7 @@ import debug from 'debug'
 const log = debug('web:redux:search')
 
 import { buildDeptString } from '../../../../school-st-olaf-college/deptnums'
-import { to12HourTime } from '../../../../lib/to-12-hour-time'
+import { to12HourTime as to12 } from '../../../../lib/to-12-hour-time'
 const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
 // eslint-disable-next-line no-confusing-arrow
@@ -46,8 +46,7 @@ const TIME_OF_DAY = course =>
                       flatMap(course.offerings, offer =>
                           map(
                               offer.times,
-                              time =>
-                                  `${to12HourTime(time.start)}-${to12HourTime(time.end)}`
+                              time => `${to12(time.start)}-${to12(time.end)}`
                           )
                       )
                   )

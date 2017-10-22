@@ -15,7 +15,7 @@ export default {
                         () => {
                             cb(null, require('./method-import').default)
                         },
-                        (err) => {
+                        err => {
                             console.error('yikes')
                             console.error(err)
                             throw err

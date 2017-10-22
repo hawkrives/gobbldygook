@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
@@ -54,12 +53,14 @@ export default class SemesterDetail extends React.Component {
             sched => omit(sched, 'courses')
         )
 
-        const title = `${semesterName(semester)} ${year} • ${student.name} | Gobbldygook`
+        const sem = semesterName(semester)
+        const title = `${sem} ${year} • ${student.name} | Gobbldygook`
 
         return (
             <DocumentTitle title={title}>
                 <DetailText>
-                    {this.props.location.pathname}{'\n'}
+                    {this.props.location.pathname}
+                    {'\n'}
                     {JSON.stringify(schedules, null, 2)}
                 </DetailText>
             </DocumentTitle>

@@ -55,7 +55,8 @@
 
 .area--actually-remove-area {
 	color: $red-500;
-	&:hover, &:focus {
+	&:hover,
+	&:focus {
 		background-color: transparentize($red-50, 0.2);
 	}
 	&:active {
@@ -85,7 +86,6 @@
 	}
 }
 
-
 .area--summary-row .icons {
 	.button {
 		min-height: 0;
@@ -99,14 +99,12 @@
 	}
 }
 
-
 .area--progress {
 	width: 99%;
 	height: 4px;
 	margin: 0 auto;
 
-	@nest .area--summary:focus &,
-	      .area--summary:active & {
+	@nest .area--summary:focus &, .area--summary:active & {
 		box-shadow: 0 0 0 2px white;
 	}
 

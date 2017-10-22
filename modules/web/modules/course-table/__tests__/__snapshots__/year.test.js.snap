@@ -121,16 +121,16 @@ exports[`Year renders shallowly 1`] = `
   className="sc-jhAzac jHxpTp"
 >
   <header
-    className="sc-fBuWsC hJifQM"
+    className="sc-fBuWsC eOpDzX"
   >
     <h1
-      className="sc-fMiknA lvJZL"
+      className="sc-fMiknA cSUeav"
     >
       2016—2017
     </h1>
     <span>
       <button
-        className="button button--flat sc-dVhcbM fvKlhn"
+        className="button button--flat sc-dVhcbM kaDoaS"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -142,7 +142,7 @@ exports[`Year renders shallowly 1`] = `
         ’
       </button>
       <button
-        className="button button--flat sc-eqIVtm gjViaw sc-dVhcbM fvKlhn"
+        className="button button--flat sc-eqIVtm gjViaw sc-dVhcbM kaDoaS"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -154,7 +154,7 @@ exports[`Year renders shallowly 1`] = `
     </span>
   </header>
   <div
-    className="sc-fAjcbJ kuQnpu"
+    className="sc-fAjcbJ dIHEBF"
   />
 </div>
 `;

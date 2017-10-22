@@ -80,7 +80,10 @@ export default function CourseSearcher(props: CourseSearcherProps) {
     let placeholderExtension = ''
     if (partial) {
         if (partial.year && partial.semester) {
-            placeholderExtension = `(${toPrettyTerm(`${partial.year}${partial.semester}`)})`
+            const prettyTerm = toPrettyTerm(
+                `${partial.year}${partial.semester}`
+            )
+            placeholderExtension = `(${prettyTerm})`
         } else if (partial.year) {
             placeholderExtension = `(${partial.year})`
         }
@@ -90,7 +93,10 @@ export default function CourseSearcher(props: CourseSearcherProps) {
         <div className="course-search">
             <header className="sidebar-heading">
                 <div className="row">
-                    <h2>Course Search<br />{placeholderExtension}</h2>
+                    <h2>
+                        Course Search<br />
+                        {placeholderExtension}
+                    </h2>
                     <Button
                         className="close-sidebar"
                         title="Close Search"
@@ -127,33 +133,40 @@ export default function CourseSearcher(props: CourseSearcherProps) {
                               ]}
                     </Button>
                 </div>
-                {hasQueried &&
+                {hasQueried && (
                     <div className="row search-filters">
                         <span className="filter">
-                            <label htmlFor="sort">Sort by:</label><br />
+                            <label htmlFor="sort">Sort by:</label>
+                            <br />
                             <select
                                 id="sort"
                                 value={sortBy}
                                 onChange={onSortChange}
                             >
                                 {map(SORT_BY, opt => (
-                                    <option key={opt} value={opt}>{opt}</option>
+                                    <option key={opt} value={opt}>
+                                        {opt}
+                                    </option>
                                 ))}
                             </select>
                         </span>
                         <span className="filter">
-                            <label htmlFor="group">Group by:</label><br />
+                            <label htmlFor="group">Group by:</label>
+                            <br />
                             <select
                                 id="group"
                                 value={groupBy}
                                 onChange={onGroupByChange}
                             >
                                 {map(GROUP_BY, opt => (
-                                    <option key={opt} value={opt}>{opt}</option>
+                                    <option key={opt} value={opt}>
+                                        {opt}
+                                    </option>
                                 ))}
                             </select>
                         </span>
-                    </div>}
+                    </div>
+                )}
             </header>
 
             {contents}

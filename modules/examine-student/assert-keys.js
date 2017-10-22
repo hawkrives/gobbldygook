@@ -12,8 +12,9 @@ import reject from 'lodash/reject'
 export default function assertKeys(obj: any, ...listOfKeys: string[]) {
     const missingKeys = reject(listOfKeys, key => key in obj)
     if (missingKeys.length) {
+        const missing = missingKeys.join(', ')
         throw new ReferenceError(
-            `assertKeys(): missing ${missingKeys.join(', ')} from ${JSON.stringify(obj)}`
+            `assertKeys(): missing ${missing} from ${JSON.stringify(obj)}`
         )
     }
 }

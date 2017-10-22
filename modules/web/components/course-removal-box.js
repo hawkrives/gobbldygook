@@ -14,7 +14,7 @@ import './course-removal-box.scss'
 
 type CourseRemovalBoxProps = {
     canDrop: boolean, // react-dnd
-    connectDropTarget: React$Element<*> => any, // react-dnd
+    connectDropTarget: (React$Element<*>) => any, // react-dnd
     isOver: boolean, // react-dnd
     removeCourse: (string, number) => any, // studentId is embedded in the passed function
 }

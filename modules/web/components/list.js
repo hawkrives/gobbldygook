@@ -13,12 +13,12 @@ const BaseList = `
 `
 
 export const PlainList = styled.ul`
-    ${BaseList}
+    ${BaseList};
     list-style: none;
 `
 
 export const InlineList = styled.ul`
-    ${BaseList}
+    ${BaseList};
     display: inline-block;
 
     & > .list-item {
@@ -27,11 +27,11 @@ export const InlineList = styled.ul`
 `
 
 export const BulletedList = styled.ul`
-    ${BaseList}
+    ${BaseList};
 `
 
 export const NumberedList = styled.ol`
-    ${BaseList}
+    ${BaseList};
 `
 
 export const ListItem = styled.li``

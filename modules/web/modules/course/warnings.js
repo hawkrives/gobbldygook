@@ -12,7 +12,7 @@ import {
 
 const WarningList = styled(PlainList)`
     font-size: 0.85em;
-    font-feature-settings: "onum";
+    font-feature-settings: 'onum';
 `
 
 const WarningItem = styled(ListItem)`
@@ -33,8 +33,8 @@ const WarningIcon = styled(Icon)`
 `
 
 const WarningMessage = styled.span`
-    flex: 1
-    ${props => props.theme.truncate}
+    flex: 1;
+    ${props => props.theme.truncate};
 `
 
 const icons = {
