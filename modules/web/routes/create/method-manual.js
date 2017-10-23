@@ -62,23 +62,21 @@ class ManualCreationScreen extends React.Component {
     }
 
     handleMatriculationChange = ev => {
-        let val = Number(ev.target.value)
-        if (!val || ev.target.value.length !== 4) {
-            this.setState({ matriculationIsValid: false, matriculation: val })
-        } else {
-            this.setState({ matriculationIsValid: true, matriculation: val })
-        }
-        this.checkValidity()
+        let val = parseInt(ev.target.value)
+        let isValid = val && ev.target.value.length === 4
+        this.setState(() => ({
+            matriculation: val,
+            matriculationIsValid: isValid
+        }), this.checkValidity)
     }
 
     handleGraduationChange = ev => {
-        let val = Number(ev.target.value)
-        if (!val || ev.target.value.length !== 4) {
-            this.setState({ graduationIsValid: false, graduation: val })
-        } else {
-            this.setState({ graduationIsValid: true, graduation: val })
-        }
-        this.checkValidity()
+        let val = parseInt(ev.target.value)
+        let isValid = val && ev.target.value.length === 4
+        this.setState(() => ({
+            graduation: val,
+            graduationIsValid: isValid
+        }), this.checkValidity)
     }
 
     checkValidity = () => {
@@ -91,11 +89,7 @@ class ManualCreationScreen extends React.Component {
             errors.push('Graduation is invalid.')
         }
 
-        if (errors.length) {
-            this.setState({ error: errors.join('\n') })
-        } else {
-            this.setState({ error: '' })
-        }
+        this.setState(() => ({ error: errors.join('\n') }))
     }
 
     onCreateStudent = () => {
