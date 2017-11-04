@@ -194,7 +194,7 @@ class AreaOfStudyContainer extends Component<Props, State> {
         } else {
             contents = (
                 <Requirement
-                    {...areaDetails}
+                    info={areaDetails}
                     topLevel
                     onAddOverride={this.addOverride}
                     onRemoveOverride={this.removeOverride}
