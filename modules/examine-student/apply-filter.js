@@ -1,6 +1,5 @@
 // @flow
 import checkForCourse from './check-for-course'
-import filter from 'lodash/filter'
 import filterByWhereClause from './filter-by-where-clause'
 import type { FilterExpression, Course } from './types'
 
@@ -22,7 +21,7 @@ export default function applyFilter(
     if (expr.$filterType === 'where') {
         filtered = filterByWhereClause(courses, expr.$where)
     } else if (expr.$filterType === 'of') {
-        filtered = filter(expr.$of, course => checkForCourse(course, courses))
+        filtered = expr.$of.filter(course => checkForCourse(course, courses))
     }
 
     // grab the matches
