@@ -192,7 +192,7 @@
     "node-sass": "^4.6.0",
     "nomnom": "^1.8.1",
     "pegjs": "^0.10.0",
-    "pify": "^2.3.0",
+    "pify": "^3.0.0",
     "prettier": "^1.7.4",
     "prop-types": "^15.6.0",
     "react-addons-perf": "^15.4.2",
