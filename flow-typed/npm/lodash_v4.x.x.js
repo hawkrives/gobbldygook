@@ -1,5 +1,5 @@
-// flow-typed signature: d0845211d98beac45e4c84e7194cffc2
-// flow-typed version: 50f25cb3dc/lodash_v4.x.x/flow_>=v0.47.x <=v0.54.x
+// flow-typed signature: 554384bc1c2235537d0c15bf2acefe99
+// flow-typed version: c5a8c20937/lodash_v4.x.x/flow_>=v0.55.x
 
 declare module "lodash" {
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
@@ -134,80 +134,6 @@ declare module "lodash" {
 
   declare type UnaryFn<A, R> = (a: A) => R;
 
-  declare type Flow = (<A, B, C, D, E, F, G>(
-    ab: UnaryFn<A, B>,
-    bc: UnaryFn<B, C>,
-    cd: UnaryFn<C, D>,
-    de: UnaryFn<D, E>,
-    ef: UnaryFn<E, F>,
-    fg: UnaryFn<F, G>,
-    ...rest: Array<void>
-  ) => UnaryFn<A, G>) &
-    (<A, B, C, D, E, F>(
-      ab: UnaryFn<A, B>,
-      bc: UnaryFn<B, C>,
-      cd: UnaryFn<C, D>,
-      de: UnaryFn<D, E>,
-      ef: UnaryFn<E, F>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, F>) &
-    (<A, B, C, D, E>(
-      ab: UnaryFn<A, B>,
-      bc: UnaryFn<B, C>,
-      cd: UnaryFn<C, D>,
-      de: UnaryFn<D, E>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, E>) &
-    (<A, B, C, D>(
-      ab: UnaryFn<A, B>,
-      bc: UnaryFn<B, C>,
-      cd: UnaryFn<C, D>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, D>) &
-    (<A, B, C>(
-      ab: UnaryFn<A, B>,
-      bc: UnaryFn<B, C>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, C>) &
-    (<A, B>(ab: UnaryFn<A, B>, ...rest: Array<void>) => UnaryFn<A, B>);
-
-  declare type FlowRight = (<A, B, C, D, E, F, G>(
-    fg: UnaryFn<F, G>,
-    ef: UnaryFn<E, F>,
-    de: UnaryFn<D, E>,
-    cd: UnaryFn<C, D>,
-    bc: UnaryFn<B, C>,
-    ab: UnaryFn<A, B>,
-    ...rest: Array<void>
-  ) => UnaryFn<A, G>) &
-    (<A, B, C, D, E, F>(
-      ef: UnaryFn<E, F>,
-      de: UnaryFn<D, E>,
-      cd: UnaryFn<C, D>,
-      bc: UnaryFn<B, C>,
-      ab: UnaryFn<A, B>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, F>) &
-    (<A, B, C, D, E>(
-      de: UnaryFn<D, E>,
-      cd: UnaryFn<C, D>,
-      bc: UnaryFn<B, C>,
-      ab: UnaryFn<A, B>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, E>) &
-    (<A, B, C, D>(
-      cd: UnaryFn<C, D>,
-      bc: UnaryFn<B, C>,
-      ab: UnaryFn<A, B>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, D>) &
-    (<A, B, C>(
-      bc: UnaryFn<B, C>,
-      ab: UnaryFn<A, B>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, C>) &
-    (<A, B>(ab: UnaryFn<A, B>, ...rest: Array<void>) => UnaryFn<A, B>);
-
   declare type TemplateSettings = {
     escape?: RegExp,
     evaluate?: RegExp,
@@ -303,12 +229,12 @@ declare module "lodash" {
       end?: number
     ): Array<T | U>;
     findIndex<T>(
-      array: ?Array<T>,
+      array: ?$ReadOnlyArray<T>,
       predicate?: Predicate<T>,
       fromIndex?: number
     ): number;
     findLastIndex<T>(
-      array: ?Array<T>,
+      array: ?$ReadOnlyArray<T>,
       predicate?: Predicate<T>,
       fromIndex?: number
     ): number;
@@ -539,7 +465,7 @@ declare module "lodash" {
       predicate?: OPredicate<A, T>
     ): Array<A>;
     find<T>(
-      array: ?Array<T>,
+      array: ?$ReadOnlyArray<T>,
       predicate?: Predicate<T>,
       fromIndex?: number
     ): T | void;
@@ -549,7 +475,7 @@ declare module "lodash" {
       fromIndex?: number
     ): V;
     findLast<T>(
-      array: ?Array<T>,
+      array: ?$ReadOnlyArray<T>,
       predicate?: Predicate<T>,
       fromIndex?: number
     ): T | void;
@@ -707,15 +633,11 @@ declare module "lodash" {
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce(
-      func: Function,
-      wait?: number,
-      options?: DebounceOptions
-    ): Function;
+    debounce<F: Function>(func: F, wait?: number, options?: DebounceOptions): F;
     defer(func: Function, ...args?: Array<any>): number;
     delay(func: Function, wait: number, ...args?: Array<any>): number;
     flip(func: Function): Function;
-    memoize(func: Function, resolver?: Function): Function;
+    memoize<F: Function>(func: F, resolver?: Function): F;
     negate(predicate: Function): Function;
     once(func: Function): Function;
     overArgs(func: Function, ...transforms: Array<Function>): Function;
@@ -1207,9 +1129,9 @@ declare module "lodash" {
     // NaN is a number instead of its own type, otherwise it would behave like null/void
     defaultTo<T1: number, T2>(value: T1, defaultValue: T2): T1 | T2;
     defaultTo<T1: void | null, T2>(value: T1, defaultValue: T2): T2;
-    flow: Flow;
+    flow: $ComposeReverse;
     flow(funcs?: Array<Function>): Function;
-    flowRight: FlowRight;
+    flowRight: $Compose;
     flowRight(funcs?: Array<Function>): Function;
     identity<T>(value: T): T;
     iteratee(func?: any): Function;
@@ -1390,80 +1312,6 @@ declare module "lodash/fp" {
 
   declare type UnaryFn<A, R> = (a: A) => R;
 
-  declare type Flow = (<A, B, C, D, E, F, G>(
-    ab: UnaryFn<A, B>,
-    bc: UnaryFn<B, C>,
-    cd: UnaryFn<C, D>,
-    de: UnaryFn<D, E>,
-    ef: UnaryFn<E, F>,
-    fg: UnaryFn<F, G>,
-    ...rest: Array<void>
-  ) => UnaryFn<A, G>) &
-    (<A, B, C, D, E, F>(
-      ab: UnaryFn<A, B>,
-      bc: UnaryFn<B, C>,
-      cd: UnaryFn<C, D>,
-      de: UnaryFn<D, E>,
-      ef: UnaryFn<E, F>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, F>) &
-    (<A, B, C, D, E>(
-      ab: UnaryFn<A, B>,
-      bc: UnaryFn<B, C>,
-      cd: UnaryFn<C, D>,
-      de: UnaryFn<D, E>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, E>) &
-    (<A, B, C, D>(
-      ab: UnaryFn<A, B>,
-      bc: UnaryFn<B, C>,
-      cd: UnaryFn<C, D>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, D>) &
-    (<A, B, C>(
-      ab: UnaryFn<A, B>,
-      bc: UnaryFn<B, C>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, C>) &
-    (<A, B>(ab: UnaryFn<A, B>, ...rest: Array<void>) => UnaryFn<A, B>);
-
-  declare type FlowRight = (<A, B, C, D, E, F, G>(
-    fg: UnaryFn<F, G>,
-    ef: UnaryFn<E, F>,
-    de: UnaryFn<D, E>,
-    cd: UnaryFn<C, D>,
-    bc: UnaryFn<B, C>,
-    ab: UnaryFn<A, B>,
-    ...rest: Array<void>
-  ) => UnaryFn<A, G>) &
-    (<A, B, C, D, E, F>(
-      ef: UnaryFn<E, F>,
-      de: UnaryFn<D, E>,
-      cd: UnaryFn<C, D>,
-      bc: UnaryFn<B, C>,
-      ab: UnaryFn<A, B>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, F>) &
-    (<A, B, C, D, E>(
-      de: UnaryFn<D, E>,
-      cd: UnaryFn<C, D>,
-      bc: UnaryFn<B, C>,
-      ab: UnaryFn<A, B>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, E>) &
-    (<A, B, C, D>(
-      cd: UnaryFn<C, D>,
-      bc: UnaryFn<B, C>,
-      ab: UnaryFn<A, B>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, D>) &
-    (<A, B, C>(
-      bc: UnaryFn<B, C>,
-      ab: UnaryFn<A, B>,
-      ...rest: Array<void>
-    ) => UnaryFn<A, C>) &
-    (<A, B>(ab: UnaryFn<A, B>, ...rest: Array<void>) => UnaryFn<A, B>);
-
   declare type TemplateSettings = {
     escape?: RegExp,
     evaluate?: RegExp,
@@ -1599,35 +1447,37 @@ declare module "lodash/fp" {
       value: U,
       array: Array<T>
     ): Array<T | U>;
-    findIndex<T>(predicate: Predicate<T>): (array: Array<T>) => number;
-    findIndex<T>(predicate: Predicate<T>, array: Array<T>): number;
+    findIndex<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => number;
+    findIndex<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): number;
     findIndexFrom<T>(
       predicate: Predicate<T>
-    ): ((fromIndex: number) => (array: Array<T>) => number) &
-      ((fromIndex: number, array: Array<T>) => number);
+    ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
+      ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
     findIndexFrom<T>(
       predicate: Predicate<T>,
       fromIndex: number
-    ): (array: Array<T>) => number;
+    ): (array: $ReadOnlyArray<T>) => number;
     findIndexFrom<T>(
       predicate: Predicate<T>,
       fromIndex: number,
-      array: Array<T>
+      array: $ReadOnlyArray<T>
     ): number;
-    findLastIndex<T>(predicate: Predicate<T>): (array: Array<T>) => number;
-    findLastIndex<T>(predicate: Predicate<T>, array: Array<T>): number;
+    findLastIndex<T>(
+      predicate: Predicate<T>
+    ): (array: $ReadOnlyArray<T>) => number;
+    findLastIndex<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): number;
     findLastIndexFrom<T>(
       predicate: Predicate<T>
-    ): ((fromIndex: number) => (array: Array<T>) => number) &
-      ((fromIndex: number, array: Array<T>) => number);
+    ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
+      ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
     findLastIndexFrom<T>(
       predicate: Predicate<T>,
       fromIndex: number
-    ): (array: Array<T>) => number;
+    ): (array: $ReadOnlyArray<T>) => number;
     findLastIndexFrom<T>(
       predicate: Predicate<T>,
       fromIndex: number,
-      array: Array<T>
+      array: $ReadOnlyArray<T>
     ): number;
     // alias of _.head
     first<T>(array: Array<T>): T;
@@ -1937,19 +1787,19 @@ declare module "lodash/fp" {
     ): Array<T>;
     find<T>(
       predicate: Predicate<T> | OPredicate<T>
-    ): (collection: Array<T> | { [id: any]: T }) => T | void;
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void;
     find<T>(
       predicate: Predicate<T> | OPredicate<T>,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): T | void;
     findFrom<T>(
       predicate: Predicate<T> | OPredicate<T>
     ): ((
       fromIndex: number
-    ) => (collection: Array<T> | { [id: any]: T }) => T | void) &
+    ) => (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void) &
       ((
         fromIndex: number,
-        collection: Array<T> | { [id: any]: T }
+        collection: $ReadOnlyArray<T> | { [id: any]: T }
       ) => T | void);
     findFrom<T>(
       predicate: Predicate<T> | OPredicate<T>,
@@ -1958,32 +1808,32 @@ declare module "lodash/fp" {
     findFrom<T>(
       predicate: Predicate<T> | OPredicate<T>,
       fromIndex: number,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): T | void;
     findLast<T>(
       predicate: Predicate<T> | OPredicate<T>
-    ): (collection: Array<T> | { [id: any]: T }) => T | void;
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void;
     findLast<T>(
       predicate: Predicate<T> | OPredicate<T>,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): T | void;
     findLastFrom<T>(
       predicate: Predicate<T> | OPredicate<T>
     ): ((
       fromIndex: number
-    ) => (collection: Array<T> | { [id: any]: T }) => T | void) &
+    ) => (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void) &
       ((
         fromIndex: number,
-        collection: Array<T> | { [id: any]: T }
+        collection: $ReadOnlyArray<T> | { [id: any]: T }
       ) => T | void);
     findLastFrom<T>(
       predicate: Predicate<T> | OPredicate<T>,
       fromIndex: number
-    ): (collection: Array<T> | { [id: any]: T }) => T | void;
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void;
     findLastFrom<T>(
       predicate: Predicate<T> | OPredicate<T>,
       fromIndex: number,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): T | void;
     flatMap<T, U>(
       iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
@@ -2223,13 +2073,13 @@ declare module "lodash/fp" {
     curryRight(func: Function): Function;
     curryRightN(arity: number): (func: Function) => Function;
     curryRightN(arity: number, func: Function): Function;
-    debounce(wait: number): (func: Function) => Function;
-    debounce(wait: number, func: Function): Function;
+    debounce(wait: number): <F: Function>(func: F) => F;
+    debounce<F: Function>(wait: number, func: F): F;
     defer(func: Function): number;
     delay(wait: number): (func: Function) => number;
     delay(wait: number, func: Function): number;
     flip(func: Function): Function;
-    memoize(func: Function): Function;
+    memoize<F: Function>(func: F): F;
     negate(predicate: Function): Function;
     complement(predicate: Function): Function;
     once(func: Function): Function;
@@ -3030,13 +2880,13 @@ declare module "lodash/fp" {
     defaultTo<T1: number, T2>(defaultValue: T2, value: T1): T1 | T2;
     defaultTo<T1: void | null, T2>(defaultValue: T2): (value: T1) => T2;
     defaultTo<T1: void | null, T2>(defaultValue: T2, value: T1): T2;
-    flow: Flow;
+    flow: $ComposeReverse;
     flow(funcs: Array<Function>): Function;
-    pipe: Flow;
+    pipe: $ComposeReverse;
     pipe(funcs: Array<Function>): Function;
-    flowRight: FlowRight;
+    flowRight: $Compose;
     flowRight(funcs: Array<Function>): Function;
-    compose: FlowRight;
+    compose: $Compose;
     compose(funcs: Array<Function>): Function;
     identity<T>(value: T): T;
     iteratee(func: any): Function;
