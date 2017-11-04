@@ -43,8 +43,8 @@ type Props = {
 }
 
 type State = {
-  isOpen: boolean,
-  confirmRemoval: boolean,
+    isOpen: boolean,
+    confirmRemoval: boolean,
 }
 
 class AreaOfStudyContainer extends Component<Props, State> {

@@ -50,8 +50,8 @@ type WarningType = {
 }
 
 type Props = {
-        warnings: ?Array<WarningType>,
-    }
+    warnings: ?Array<WarningType>,
+}
 
 export default class CourseWarnings extends React.PureComponent<Props> {
     render() {
@@ -59,8 +59,9 @@ export default class CourseWarnings extends React.PureComponent<Props> {
             return null
         }
 
-        const warnings = this.props.warnings
-            .filter(w => w && w.warning === true)
+        const warnings = this.props.warnings.filter(
+            w => w && w.warning === true
+        )
 
         if (!warnings.length) {
             return null

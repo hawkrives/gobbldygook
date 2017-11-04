@@ -8,7 +8,7 @@ const log = debug('web')
 
 // Include React and react-dom.render
 import React from 'react'
-import {render} from 'react-dom'
+import { render } from 'react-dom'
 
 // Include google analytics (in production)
 import startAnalytics from './analytics'

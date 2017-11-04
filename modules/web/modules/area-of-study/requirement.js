@@ -55,7 +55,9 @@ function Requirement(props: RequirementProps) {
         </div>
     )
 
-    const message = props.info.message && <p className="message">{props.info.message}</p>
+    const message = props.info.message && (
+        <p className="message">{props.info.message}</p>
+    )
     const description = props.info.description && (
         <p className="description">{props.info.description}</p>
     )
@@ -67,7 +69,11 @@ function Requirement(props: RequirementProps) {
     )
 
     const title = !topLevel && (
-        <h2 className="heading" title={props.info.name} onClick={props.onToggleOpen}>
+        <h2
+            className="heading"
+            title={props.info.name}
+            onClick={props.onToggleOpen}
+        >
             <span className="title">
                 {' '}
                 {props.info.name}
