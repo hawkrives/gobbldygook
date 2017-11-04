@@ -65,17 +65,20 @@ const AddAreaFilter = styled.input`
 `
 
 type AreaOfStudy = Object
-type PropTypes = {
+type Props = {
     areaList: AreaOfStudy[],
     currentAreas: AreaOfStudy[],
-    filterText: string,
     onAddArea: (AreaOfStudy, Event) => any,
-    onFilterChange: Event => any,
     studentGraduation: number,
     type: AreaOfStudyTypeEnum,
 }
 
-function AreaPicker(props: PropTypes) {
+type AreaPickerProps = Props & {
+    filterText: string,
+    onFilterChange: (SyntheticInputEvent<HTMLInputElement>) => any,
+}
+
+function AreaPicker(props: AreaPickerProps) {
     const graduation = props.studentGraduation
 
     const currentAreaNames = map(props.currentAreas, a => a.name)
@@ -130,7 +133,16 @@ function AreaPicker(props: PropTypes) {
     )
 }
 
-export default class AreaPickerContainer extends React.PureComponent {
+type AreaPickerContainerProps = Props
+
+type AreaPickerContainerState = {
+    filter: string,
+}
+
+export default class AreaPickerContainer extends React.PureComponent<
+    AreaPickerContainerProps,
+    AreaPickerContainerState
+> {
     state = {
         filter: '',
     }
