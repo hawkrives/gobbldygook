@@ -1,5 +1,5 @@
-// flow-typed signature: debef4fe00d2e67c0881da08ae771f37
-// flow-typed version: d36c0aa1ec/react-dnd_v2.x.x/flow_>=v0.23.x
+// flow-typed signature: a141f30e4f5df476d6d2e9d7afec2aa8
+// flow-typed version: 19506e57e6/react-dnd_v2.x.x/flow_>=v0.22.x <=v0.52.x
 
 // Shared
 // ----------------------------------------------------------------------
@@ -210,6 +210,9 @@ declare module 'react-dnd' {
     DragSource: DragSource,
     DropTarget: DropTarget,
     DragLayer: DragLayer,
-    DragDropContext: DragDropContext
+    DragDropContext: DragDropContext,
+    ConnectDragSource: ConnectDragSource,
+    ConnectDragPreview: ConnectDragPreview,
+    ConnectDropTarget: ConnectDropTarget
   }
 }

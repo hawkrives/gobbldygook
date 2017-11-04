@@ -1,5 +1,5 @@
-// flow-typed signature: 1a52ea1276f27756fa7db5e3eebdc107
-// flow-typed version: 94e9f7e0a4/get-stdin_v5.x.x/flow_>=v0.28.x
+// flow-typed signature: 95596051d0a57cf80949ae52d6e517c5
+// flow-typed version: b43dff3e0e/get-stdin_v5.x.x/flow_>=v0.25.x
 
 declare module 'get-stdin' {
   declare module.exports: {
