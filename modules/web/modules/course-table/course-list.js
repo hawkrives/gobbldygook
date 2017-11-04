@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import range from 'lodash/range'
-import map from 'lodash/map'
 import styled, { css } from 'styled-components'
 import { DraggableCourse } from '../course'
 import { PlainList, ListItem } from '../../components/list'
@@ -50,8 +49,7 @@ type PropTypes = {
 }
 
 export default function CourseList(props: PropTypes) {
-    const courseObjects = map(
-        props.schedule.courses,
+    const courseObjects = props.schedule.courses.map(
         (course, i) =>
             course.error ? (
                 <Missing clbid={course.clbid} error={course.error} />

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Button from './button'
@@ -23,7 +23,7 @@ import styled from 'styled-components'
 
 type StudentType = Object
 type PropTypes = {
-    children: React$Element<any>,
+    children: React.Node,
     redo: string => any,
     removeCourse: Function,
     student: {

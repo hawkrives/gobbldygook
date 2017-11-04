@@ -19,7 +19,7 @@ function BrowserButton({
     browserName,
     disabled,
 }: {
-    onClick: any => any,
+    onClick: (SyntheticInputEvent<HTMLButtonElement>) => any,
     browserName: string,
     disabled?: boolean,
 }) {
@@ -34,20 +34,18 @@ function BrowserButton({
         </button>
     )
 }
-BrowserButton.propTypes = {
-    onClick: PropTypes.func.isRequired,
+
+type Props = {
+    onInstall: () => any,
+}
+type State = {
+    installError: ?Error,
+    installAttempted: boolean,
+    extensionInstalled: boolean,
 }
 
-export class BrowserExtensionsComponent extends React.Component {
-    static propTypes = {
-        onInstall: PropTypes.func.isRequired,
-    }
-
-    state: {
-        installError: ?Error,
-        installAttempted: boolean,
-        extensionInstalled: boolean,
-    } = {
+export class BrowserExtensionsComponent extends React.Component<Props, State> {
+    state = {
         installAttempted: false,
         installError: null,
         extensionInstalled: false,
@@ -59,7 +57,7 @@ export class BrowserExtensionsComponent extends React.Component {
         }
     }
 
-    installChromeExtension = (ev: Event) => {
+    installChromeExtension = (ev: SyntheticEvent<>) => {
         ev.preventDefault()
         ev.stopPropagation()
 
@@ -68,7 +66,7 @@ export class BrowserExtensionsComponent extends React.Component {
             .catch(this.installFailure)
     }
 
-    installFirefoxExtension = (ev: Event) => {
+    installFirefoxExtension = (ev: SyntheticEvent<>) => {
         ev.preventDefault()
         ev.stopPropagation()
 
@@ -77,7 +75,7 @@ export class BrowserExtensionsComponent extends React.Component {
             .catch(this.installFailure)
     }
 
-    installOperaExtension = (ev: Event) => {
+    installOperaExtension = (ev: SyntheticEvent<>) => {
         ev.preventDefault()
         ev.stopPropagation()
 
@@ -86,9 +84,11 @@ export class BrowserExtensionsComponent extends React.Component {
             .catch(this.installFailure)
     }
 
-    installSafariExtension = () => {}
+    // eslint-disable-next-line no-unused-vars
+    installSafariExtension = (ev: SyntheticEvent<>) => {}
 
-    installEdgeExtension = () => {}
+    // eslint-disable-next-line no-unused-vars
+    installEdgeExtension = (ev: SyntheticEvent<>) => {}
 
     installSuccess = () => {
         this.setState({ installAttempted: true })

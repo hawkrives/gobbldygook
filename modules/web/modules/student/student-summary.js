@@ -42,17 +42,17 @@ const welcomeMessage = welcomeMessages[2]
 
 type Student = Object
 
-export class StudentSummary extends React.PureComponent {
-    props: {
-        onChangeGraduation?: string => any,
-        onChangeMatriculation?: string => any,
-        onChangeName?: string => any,
-        randomizeHello?: boolean,
-        showAvatar?: boolean,
-        showMessage?: boolean,
-        student: Student,
-    }
+type Props = {
+    onChangeGraduation?: string => any,
+    onChangeMatriculation?: string => any,
+    onChangeName?: string => any,
+    randomizeHello?: boolean,
+    showAvatar?: boolean,
+    showMessage?: boolean,
+    student: Student,
+}
 
+export class StudentSummary extends React.PureComponent<Props> {
     render() {
         const {
             student,
@@ -103,15 +103,15 @@ export class StudentSummary extends React.PureComponent {
     }
 }
 
-export class Header extends React.PureComponent {
-    props: {
-        canGraduate: boolean,
-        helloMessage: string,
-        name: string,
-        onChangeName?: string => any,
-        showAvatar: boolean,
-    }
+type HeaderProps = {
+    canGraduate: boolean,
+    helloMessage: string,
+    name: string,
+    onChangeName?: string => any,
+    showAvatar: boolean,
+}
 
+export class Header extends React.PureComponent<HeaderProps> {
     render() {
         const props = this.props
 
@@ -146,20 +146,14 @@ export class Header extends React.PureComponent {
     }
 }
 
-export class Footer extends React.PureComponent {
-    goodGraduationMessage = [
-        "It looks like you'll make it! Just follow the plan, and",
-        'go over my output with your advisor a few times.',
-    ].join(' ')
+type FooterProps = {
+    canGraduate: boolean,
+}
 
-    badGraduationMessage = [
-        "You haven't planned everything out yet.",
-        'Ask your advisor if you need help fitting everything in.',
-    ].join(' ')
+export class Footer extends React.PureComponent<FooterProps> {
+    goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
 
-    props: {
-        canGraduate: boolean,
-    }
+    badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
     render() {
         const msg = this.props.canGraduate
@@ -170,14 +164,14 @@ export class Footer extends React.PureComponent {
     }
 }
 
-export class DateSummary extends React.PureComponent {
-    props: {
-        onChangeGraduation?: string => any,
-        onChangeMatriculation?: string => any,
-        matriculation: string,
-        graduation: string,
-    }
+type DateSummaryProps = {
+    onChangeGraduation?: string => any,
+    onChangeMatriculation?: string => any,
+    matriculation: string,
+    graduation: string,
+}
 
+export class DateSummary extends React.PureComponent<DateSummaryProps> {
     render() {
         const props = this.props
 
@@ -208,11 +202,11 @@ export class DateSummary extends React.PureComponent {
     }
 }
 
-export class DegreeSummary extends React.PureComponent {
-    props: {
-        studies: { type: string, name: string }[],
-    }
+type DegreeSummaryProps = {
+    studies: { type: string, name: string }[],
+}
 
+export class DegreeSummary extends React.PureComponent<DegreeSummaryProps> {
     render() {
         const grouped: {
             [key: string]: { type: string, name: string }[],
@@ -263,12 +257,12 @@ export class DegreeSummary extends React.PureComponent {
     }
 }
 
-export class CreditSummary extends React.PureComponent {
-    props: {
-        currentCredits: number,
-        neededCredits: number,
-    }
+type CreditSummaryProps = {
+    currentCredits: number,
+    neededCredits: number,
+}
 
+export class CreditSummary extends React.PureComponent<CreditSummaryProps> {
     render() {
         const { currentCredits, neededCredits } = this.props
         const enoughCredits = currentCredits >= neededCredits

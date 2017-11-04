@@ -6,7 +6,7 @@ import Link from 'react-router/lib/Link'
 import { compareProps } from '../../lib'
 import './button.scss'
 
-type ButtonProps = {
+type Props = {
     children?: any,
     className?: string,
     disabled?: boolean,
@@ -18,14 +18,12 @@ type ButtonProps = {
     type: 'flat' | 'raised',
 }
 
-export default class Button extends Component {
-    props: ButtonProps
-
+export default class Button extends Component<Props> {
     static defaultProps = {
         type: 'flat',
     }
 
-    shouldComponentUpdate(nextProps: ButtonProps) {
+    shouldComponentUpdate(nextProps: Props) {
         return compareProps(this.props, nextProps)
     }
 
