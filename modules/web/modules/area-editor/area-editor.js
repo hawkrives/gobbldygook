@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
-import CodeMirror from 'react-codemirror2'
+import {Uncontrolled as CodeMirror} from 'react-codemirror2'
 import 'codemirror/mode/yaml/yaml'
 import Toolbar from '../../components/toolbar'
 import Button from '../../components/button'
