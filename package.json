@@ -198,7 +198,7 @@
     "react-addons-perf": "15.4.2",
     "react-addons-test-utils": "15.6.2",
     "react-test-renderer": "15.6.2",
-    "redux-devtools": "3.4.0",
+    "redux-devtools": "3.4.1",
     "redux-freeze": "0.1.5",
     "redux-logger": "3.0.6",
     "sass-loader": "6.0.6",
