@@ -166,7 +166,7 @@
     "cross-env": "5.1.1",
     "css-loader": "0.28.7",
     "del": "3.0.0",
-    "duplicate-package-checker-webpack-plugin": "2.0.1",
+    "duplicate-package-checker-webpack-plugin": "2.0.2",
     "enzyme": "2.9.1",
     "eslint": "4.12.0",
     "eslint-config-prettier": "2.9.0",
