@@ -1,3 +1,3 @@
-declare var DEVELOPMENT: boolean;
-declare var PRODUCTION: boolean;
-declare var APP_BASE: string;
+declare var DEVELOPMENT: boolean
+declare var PRODUCTION: boolean
+declare var APP_BASE: string
