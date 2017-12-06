@@ -52,9 +52,9 @@ const ofLookup = {
 function makeOfExpression({ expr, ctx }) {
     const description =
         ofLookup[expr.$count.$was] ||
-        `${expr._counted || 0} of ${humanizeOperator(
-            expr.$count.$operator
-        )} ${expr.$count.$num} from among`
+        `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${
+            expr.$count.$num
+        } from among`
 
     // const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
     const contents = map(expr.$of, (ex, i) => (
@@ -93,7 +93,8 @@ export function makeWhereExpression({ expr }) {
     const qualifier = makeWhereQualifier(expr.$where)
     const distinct = expr.$distinct ? 'distinct ' : ''
     const word = expr.$count.$num === 1 ? 'course' : 'courses'
-    const description = `${expr._counted} of ${needs} ${distinct}${word} from courses where ${qualifier}`
+    const counted = expr._counted
+    const description = `${counted} of ${needs} ${distinct}${word} from courses where ${qualifier}`
 
     let contents = map(expr._matches, (course, i) => (
         <Expression

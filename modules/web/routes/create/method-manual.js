@@ -64,19 +64,25 @@ class ManualCreationScreen extends React.Component {
     handleMatriculationChange = ev => {
         let val = parseInt(ev.target.value)
         let isValid = val && ev.target.value.length === 4
-        this.setState(() => ({
-            matriculation: val,
-            matriculationIsValid: isValid
-        }), this.checkValidity)
+        this.setState(
+            () => ({
+                matriculation: val,
+                matriculationIsValid: isValid,
+            }),
+            this.checkValidity
+        )
     }
 
     handleGraduationChange = ev => {
         let val = parseInt(ev.target.value)
         let isValid = val && ev.target.value.length === 4
-        this.setState(() => ({
-            graduation: val,
-            graduationIsValid: isValid
-        }), this.checkValidity)
+        this.setState(
+            () => ({
+                graduation: val,
+                graduationIsValid: isValid,
+            }),
+            this.checkValidity
+        )
     }
 
     checkValidity = () => {

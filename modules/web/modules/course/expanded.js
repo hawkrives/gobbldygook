@@ -96,9 +96,12 @@ export default class ExpandedCourse extends React.PureComponent {
                         <BulletedList>
                             {flatMap(course.offerings, offering =>
                                 map(offering.times, time => {
-                                    const key = `${offering.day}-${time.start}-${time.end}`
+                                    const day = offering.day
+                                    const { start, end } = time
                                     return (
-                                        <ListItem key={key}>
+                                        <ListItem
+                                            key={`${day}-${start}-${end}`}
+                                        >
                                             {offering.day}
                                             {' from '}
                                             {to12HourTime(time.start)}
