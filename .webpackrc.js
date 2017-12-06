@@ -16,7 +16,7 @@ const {
     LoaderOptionsPlugin,
     NormalModuleReplacementPlugin,
     NamedModulesPlugin,
-    optimize: { CommonsChunkPlugin, UglifyJsPlugin },
+    optimize: { CommonsChunkPlugin },
 } = webpack
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -25,6 +25,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
@@ -276,19 +277,12 @@ function config() {
         // minify in production
         plugins.push(
             new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
                 sourceMap: true,
-                compress: {
+                uglifyOptions: {
+                    ecma: 8,
                     warnings: false,
-                    pure_getters: true,
-                    screw_ie8: true,
-                    unsafe: true,
-                },
-                mangle: {
-                    screw_ie8: true,
-                },
-                output: {
-                    comments: false,
-                    screw_ie8: true,
                 },
             })
         )
