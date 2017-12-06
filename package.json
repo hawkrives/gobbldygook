@@ -212,6 +212,7 @@
     "worker-loader": "1.1.0"
   },
   "resolutions": {
+    "css-select/domutils": "^1.5.1",
     "treo/idb-schema/component-type": "^1.2.1"
   }
 }
