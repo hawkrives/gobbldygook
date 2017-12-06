@@ -331,11 +331,6 @@ function config() {
                 use: [babelLoader],
             },
             {
-                test: /\.js$/,
-                include: /node_modules[/]p-.*[/].*[.]js$/,
-                use: [babelForNodeModules],
-            },
-            {
                 test: /\.worker\.js$/,
                 exclude: /node_modules/,
                 use: ['worker-loader', babelLoader],
