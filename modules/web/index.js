@@ -9,9 +9,6 @@ const log = debug('web')
 // Include React and react-dom.render
 const React = require('react')
 const { render } = require('react-dom')
-if (process.env.NODE_ENV !== 'production') {
-    global.Perf = require('react-addons-perf')
-}
 
 // Include google analytics (in production)
 import startAnalytics from './analytics'

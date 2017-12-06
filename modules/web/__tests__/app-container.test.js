@@ -20,7 +20,7 @@ test('AppContainer renders', () => {
     )
 })
 
-test('AppContainer can navigate to /create', () => {
+xtest('AppContainer can navigate to /create', () => {
     const store = configureStore()
     const history = createMemoryHistory()
 
