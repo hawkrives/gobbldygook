@@ -161,7 +161,7 @@
     "chalk": "^2.3.0",
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.2.3",
-    "coveralls": "^2.13.3",
+    "coveralls": "^3.0.0",
     "cpy": "^6.0.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
