@@ -212,6 +212,6 @@
     "worker-loader": "1.1.0"
   },
   "resolutions": {
-    "treo/idb-schema/component-type": "1.2.1"
+    "treo/idb-schema/component-type": "^1.2.1"
   }
 }
