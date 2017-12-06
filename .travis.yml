@@ -34,13 +34,17 @@ jobs:
         - npm run lint
 
     - stage: Test
-      env: [EXEC=tests]
+      env: [EXEC=jest]
       script:
         - npm run test -- --coverage --runInBand
-        - npm run flow -- check
       after_success:
         - ./node_modules/.bin/coveralls < ./coverage/lcov.info
         - bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json
+
+    - stage: Test
+      env: [EXEC=flow]
+      script:
+        - npm run flow -- check
 
     - stage: Test
       env: [EXEC=build]
