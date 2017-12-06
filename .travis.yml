@@ -36,7 +36,7 @@ jobs:
     - stage: Test
       env: [EXEC=jest]
       script:
-        - npm run test -- --coverage --runInBand
+        - npm run test -- --coverage --maxWorkers=2
       after_success:
         - ./node_modules/.bin/coveralls < ./coverage/lcov.info
         - bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json
