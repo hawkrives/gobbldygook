@@ -52,9 +52,10 @@ class UploadFileScreen extends React.Component {
                 try {
                     parsed = JSON.parse(data)
                 } catch (err) {
+                    const msg = err.message
                     return {
                         name: file.name,
-                        error: `could not parse "${data}" because "${err.message}"`,
+                        error: `could not parse "${data}" because "${msg}"`,
                     }
                 }
 

@@ -97,7 +97,9 @@ function enhanceHanson(
 
         if (data.revision && typeof data.revision !== 'string') {
             throw new TypeError(
-                `enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${data.revision}" is a ${typeof data.revision}.`
+                `enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${
+                    data.revision
+                }" is a ${typeof data.revision}.`
             )
         }
     }

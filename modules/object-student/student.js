@@ -186,7 +186,9 @@ function addCourseToSchedule(student, scheduleId, clbid) {
     }
 
     log(
-        `adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`
+        `adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${
+            schedule.semester
+        }.${schedule.index})`
     )
 
     schedule.clbids = schedule.clbids.concat(clbid)
@@ -220,7 +222,9 @@ function removeCourseFromSchedule(student, scheduleId, clbid) {
     }
 
     log(
-        `removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`
+        `removing clbid ${clbid} from schedule ${schedule.id} (${
+            schedule.year
+        }-${schedule.semester}.${schedule.index})`
     )
 
     schedule.clbids = reject(schedule.clbids, id => id === clbid)
