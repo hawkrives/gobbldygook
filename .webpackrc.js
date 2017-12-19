@@ -174,43 +174,43 @@ function config() {
         // Generates an index.html for us.
         new HtmlPlugin(
             context => `
-            <!DOCTYPE html>
-            <html lang="en-US">
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Gobbldygook</title>
+                <!DOCTYPE html>
+                <html lang="en-US">
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Gobbldygook</title>
 
-            <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
+                <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-            ${
-                isProduction
-                    ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
-                    : ''
-            }
-            ${
-                isProduction
-                    ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
-                    : ''
-            }
+                ${
+                    isProduction
+                        ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
+                        : ''
+                }
+                ${
+                    isProduction
+                        ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
+                        : ''
+                }
 
-            ${
-                context.css
-                    ? `<link rel="stylesheet" href="${publicPath}${
-                          context.css
-                      }">`
-                    : ''
-            }
+                ${
+                    context.css
+                        ? `<link rel="stylesheet" href="${publicPath}${
+                              context.css
+                          }">`
+                        : ''
+                }
 
-            <body><main id="gobbldygook"></main></body>
+                <body><main id="gobbldygook"></main></body>
 
-            <script src="${publicPath}${context.manifest}"></script>
-            ${Object.keys(entries)
-                .map(k => `${publicPath}${context[k]}`)
-                .map(path => `<script src="${path}"></script>`)
-                .join('\n')}
-            <script src="${publicPath}${context.main}"></script>
-            </html>
-        `
+                <script src="${publicPath}${context.manifest}"></script>
+                ${Object.keys(entries)
+                    .map(k => `${publicPath}${context[k]}`)
+                    .map(path => `<script src="${path}"></script>`)
+                    .join('\n')}
+                <script src="${publicPath}${context.main}"></script>
+                </html>
+            `
         ),
 
         // Ignore the "full" schema in js-yaml's module, because it brings in esprima
