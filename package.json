@@ -12,6 +12,7 @@
     "tabWidth": 4,
     "singleQuote": true,
     "semi": false,
+    "bracketSpacing": false,
     "overrides": [
       {
         "files": "*.scss",
