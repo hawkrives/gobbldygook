@@ -4,11 +4,11 @@ import withRouter from 'react-router/lib/withRouter'
 import CourseSearcher from '../../modules/course-searcher'
 
 function CourseSearcherSidebar(props) {
-    const { studentId } = props.params
+    const {studentId} = props.params
     const boundCloseModal = () =>
-        props.router.push({ pathname: `/s/${studentId}` })
+        props.router.push({pathname: `/s/${studentId}`})
 
-    let { year, semester } = props.params
+    let {year, semester} = props.params
     if (year) {
         year = parseInt(year, 10)
     }
@@ -20,7 +20,7 @@ function CourseSearcherSidebar(props) {
         <CourseSearcher
             closeSearcher={boundCloseModal}
             studentId={props.params.studentId}
-            partial={{ year, semester }}
+            partial={{year, semester}}
         />
     )
 }

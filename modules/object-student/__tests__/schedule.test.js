@@ -1,22 +1,22 @@
 import stringify from 'stabilize'
 
-import { Schedule } from '../schedule'
+import {Schedule} from '../schedule'
 
 describe('Schedule', () => {
     it('does not mutate the passed-in object', () => {
         const clbids = []
-        const input = { clbids }
+        const input = {clbids}
         Schedule(input)
         expect(input.clbids).toBe(clbids)
     })
 
     it('uses the ID that you give it', () => {
-        let schedule = Schedule({ id: '1' })
+        let schedule = Schedule({id: '1'})
         expect(schedule.id).toBe('1')
     })
 
     it('throws if the ID is not a string', () => {
-        expect(() => Schedule({ id: 1 })).toThrow(TypeError)
+        expect(() => Schedule({id: 1})).toThrow(TypeError)
     })
 
     it('creates a unique ID for each new schedule without an ID prop', () => {
@@ -47,7 +47,7 @@ describe('Schedule', () => {
     })
 
     it('can turn into JSON', () => {
-        let result = stringify(Schedule({ id: '1', title: 'Schedule 6' }))
+        let result = stringify(Schedule({id: '1', title: 'Schedule 6'}))
         expect(result).toMatchSnapshot()
     })
 })

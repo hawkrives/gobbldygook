@@ -1,5 +1,5 @@
-import { customParser } from './parse-hanson-string.support'
-const parseReference = customParser({ allowedStartRules: ['Reference'] })
+import {customParser} from './parse-hanson-string.support'
+const parseReference = customParser({allowedStartRules: ['Reference']})
 const parseRequirementTitle = customParser({
     allowedStartRules: ['RequirementTitle'],
 })
@@ -19,7 +19,7 @@ describe('ReferenceExpression', () => {
 
     it('returns a full requirement title when given an abbreviation', () => {
         const actual = parseReference('BTS-B', {
-            abbreviations: { 'BTS-B': 'Biblical Studies (BTS-B)' },
+            abbreviations: {'BTS-B': 'Biblical Studies (BTS-B)'},
         })
         expect(actual).toMatchSnapshot()
 
@@ -29,7 +29,7 @@ describe('ReferenceExpression', () => {
 
     it('returns a full requirement title when given the title-minus-abbreviation', () => {
         const actual = parseReference('Biblical Studies', {
-            titles: { 'Biblical Studies': 'Biblical Studies (BTS-B)' },
+            titles: {'Biblical Studies': 'Biblical Studies (BTS-B)'},
         })
         expect(actual).toMatchSnapshot()
 

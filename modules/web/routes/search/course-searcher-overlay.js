@@ -7,7 +7,7 @@ import CourseSearcher from '../../modules/course-searcher/course-searcher-contai
 import './course-searcher-overlay.scss'
 
 function CourseSearcherOverlay(props) {
-    const boundCloseModal = () => props.router.push({ pathname: '/' })
+    const boundCloseModal = () => props.router.push({pathname: '/'})
 
     return (
         <Modal onClose={boundCloseModal} contentLabel="Search">

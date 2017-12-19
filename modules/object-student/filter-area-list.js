@@ -27,7 +27,7 @@ function convertRevisionToYear(rev) {
 // You can only enroll in a major if there isn't a newer one, unless your
 // class year is between the previous one and the newest.
 
-function filterAreaList(areas, { graduation }) {
+function filterAreaList(areas, {graduation}) {
     // Remove all areas that are closed to new class years.
     let onlyAvailableAreas = reject(
         areas,

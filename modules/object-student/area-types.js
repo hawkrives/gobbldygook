@@ -1,7 +1,7 @@
 // @flow
 'use strict'
 
-import type { AreaOfStudyTypeEnum } from '../examine-student/types'
+import type {AreaOfStudyTypeEnum} from '../examine-student/types'
 
 const areaTypeConstants: {
     [key: string]: AreaOfStudyTypeEnum,

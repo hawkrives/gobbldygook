@@ -8,7 +8,7 @@ import {
     installFirefoxExtension,
 } from '../../web/helpers/extension-helpers'
 
-import { interpose } from '../../lib'
+import {interpose} from '../../lib'
 
 import brwsr from 'brwsr'
 
@@ -53,7 +53,7 @@ export class BrowserExtensionsComponent extends React.Component<Props, State> {
 
     checkExtensionStatus = () => {
         if (global.gobbldygook_extension >= '1.0.0') {
-            this.setState({ extensionInstalled: true })
+            this.setState({extensionInstalled: true})
         }
     }
 
@@ -91,12 +91,12 @@ export class BrowserExtensionsComponent extends React.Component<Props, State> {
     installEdgeExtension = (ev: SyntheticEvent<>) => {}
 
     installSuccess = () => {
-        this.setState({ installAttempted: true })
+        this.setState({installAttempted: true})
         this.props.onInstall()
     }
 
     installFailure = (err: Error) => {
-        this.setState({ installError: err, installAttempted: true })
+        this.setState({installError: err, installAttempted: true})
     }
 
     detectBrowser() {

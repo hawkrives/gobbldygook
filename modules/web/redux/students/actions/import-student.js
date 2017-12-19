@@ -1,8 +1,8 @@
-import { Student } from '../../../../object-student'
+import {Student} from '../../../../object-student'
 
-import { IMPORT_STUDENT } from '../constants'
+import {IMPORT_STUDENT} from '../constants'
 
-export function importStudent({ data, type } = {}) {
+export function importStudent({data, type} = {}) {
     let stu = undefined
     if (type === 'application/json') {
         try {
@@ -33,5 +33,5 @@ export function importStudent({ data, type } = {}) {
     }
 
     const fleshedStudent = new Student(stu)
-    return { type: IMPORT_STUDENT, payload: fleshedStudent }
+    return {type: IMPORT_STUDENT, payload: fleshedStudent}
 }

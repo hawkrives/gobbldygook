@@ -5,7 +5,7 @@ import * as courseConstants from '../courses/constants'
 
 import toArray from 'lodash/toArray'
 
-import { checkStudent } from '../students/actions/check-student'
+import {checkStudent} from '../students/actions/check-student'
 
 const whitelist = new Set([
     studentConstants.INIT_STUDENT,
@@ -35,10 +35,10 @@ const whitelist = new Set([
     // need to check everyone with one of these courses
     // when one of these fires
     courseConstants.REFRESH_COURSES,
-])
+]
 
-function shouldTakeAction({ type }: { type?: string }) {
-    return whitelist.has(type)
+function shouldTakeAction({type}: {type?: string}) {
+    return includes(whitelist, type)
 }
 
 const checkMiddleware = (store: any) => (next: any) => async (action: any) => {

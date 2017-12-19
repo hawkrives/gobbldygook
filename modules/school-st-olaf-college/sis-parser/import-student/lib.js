@@ -1,5 +1,5 @@
 'use strict'
-const { parseHtml } = require('../parse-html')
+const {parseHtml} = require('../parse-html')
 const forOwn = require('lodash/forOwn')
 const forEach = require('lodash/forEach')
 const uuid = require('uuid/v4')
@@ -17,10 +17,9 @@ function fetchHtml(url, fetchArgs, fetchBody) {
         )
     }
     if (global.gobbldygook_extension < '1.0.0') {
+        const ver = global.gobbldygook_extension_version
         return Promise.reject(
-            new ExtensionTooOldError(
-                `Extension version ${global.gobbldygook_extension_version} is too old.`
-            )
+            new ExtensionTooOldError(`Extension version ${ver} is too old.`)
         )
     }
 

@@ -3,9 +3,9 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import debug from 'debug'
 
-import { evaluate } from '../../../../examine-student/evaluate'
-import { getActiveStudentCourses } from '../../get-active-student-courses'
-import { alterCourse } from '../../alter-course-for-evaluation'
+import {evaluate} from '../../../../examine-student/evaluate'
+import {getActiveStudentCourses} from '../../get-active-student-courses'
+import {alterCourse} from '../../alter-course-for-evaluation'
 const log = debug('worker:check-student:worker')
 
 function tryEvaluate(student, area) {
@@ -13,7 +13,7 @@ function tryEvaluate(student, area) {
         return evaluate(student, area)
     } catch (err) {
         log('checkStudentAgainstArea:', err)
-        return { ...area, _error: err.message }
+        return {...area, _error: err.message}
     }
 }
 

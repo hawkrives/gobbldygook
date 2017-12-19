@@ -21,7 +21,7 @@ export const checkStudentAgainstArea = student => area => {
         const sourceId = uniqueId()
 
         // This is inside of the function so that it doesn't get unregistered too early
-        function onMessage({ data }) {
+        function onMessage({data}) {
             const [resultId, type, contents] = JSON.parse(data)
 
             if (resultId === sourceId) {
@@ -30,7 +30,7 @@ export const checkStudentAgainstArea = student => area => {
                 if (type === 'result') {
                     resolve(contents)
                 } else if (type === 'error') {
-                    resolve({ _error: contents.message })
+                    resolve({_error: contents.message})
                 }
             }
         }

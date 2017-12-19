@@ -14,7 +14,7 @@ function checkIdbInWorkerSupport() {
 }
 
 const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
-self.addEventListener('message', ({ data }) => {
+self.addEventListener('message', ({data}) => {
     const [id, ...args] = data
     log('received message:', ...args)
 

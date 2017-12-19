@@ -1,9 +1,9 @@
-import { importStudent } from '../import-student'
-import { IMPORT_STUDENT } from '../../constants'
+import {importStudent} from '../import-student'
+import {IMPORT_STUDENT} from '../../constants'
 
 describe('importStudent action', () => {
     it('returns an action to import a student', () => {
-        let action = importStudent({ data: '{}', type: 'application/json' })
+        let action = importStudent({data: '{}', type: 'application/json'})
 
         expect(action).toHaveProperty('type', IMPORT_STUDENT)
         expect(action).toHaveProperty('payload')
@@ -29,7 +29,7 @@ describe('importStudent action', () => {
     })
 
     it('includes an "error" property if the student is not json', () => {
-        let action = importStudent({ data: '', type: 'text/html' })
+        let action = importStudent({data: '', type: 'text/html'})
         expect(action).toHaveProperty('error', true)
         expect(action).toHaveProperty('payload')
         expect(action.payload.message).toBe(
@@ -38,7 +38,7 @@ describe('importStudent action', () => {
     })
 
     it('includes an "error" property if there was no student in the json', () => {
-        let action = importStudent({ data: 'null', type: 'application/json' })
+        let action = importStudent({data: 'null', type: 'application/json'})
         expect(action).toHaveProperty('error', true)
         expect(action).toHaveProperty('payload')
         expect(action.payload.message).toBe('Could not process data: null')

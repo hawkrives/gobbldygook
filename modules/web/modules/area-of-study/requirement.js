@@ -1,10 +1,10 @@
 // @flow
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 import isRequirementName from '../../../examine-student/is-requirement-name'
 
 import Icon from '../../components/icon'
-import { iosBoltOutline, iosBolt } from '../../icons/ionicons'
+import {iosBoltOutline, iosBolt} from '../../icons/ionicons'
 import Filter from './expression--filter'
 import Expression from './expression'
 import Button from '../../components/button'
@@ -38,7 +38,7 @@ type RequirementProps = Props & {
 }
 
 function Requirement(props: RequirementProps) {
-    const { topLevel = false } = props
+    const {topLevel = false} = props
     const childKeys = Object.keys(props).filter(isRequirementName)
 
     const wasEvaluated = props.result && props.result._checked
@@ -84,9 +84,9 @@ function Requirement(props: RequirementProps) {
                     {props.overridden ? '(Overridden) ' : ''}
                 </span>
                 <Button
-                    title={`${props.overridden
-                        ? 'Remove'
-                        : 'Apply'} a manual override to this requirement`}
+                    title={`${
+                        props.overridden ? 'Remove' : 'Apply'
+                    } a manual override to this requirement`}
                     onClick={ev => props.onToggleOverride(props.path, ev)}
                     type="flat"
                 >
@@ -158,7 +158,7 @@ export default class ExpandableRequirement extends Component<Props, State> {
     }
 
     handleToggleOpen = () => {
-        this.setState({ open: !this.state.open })
+        this.setState({open: !this.state.open})
     }
 
     render() {

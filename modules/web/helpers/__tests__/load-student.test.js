@@ -1,7 +1,7 @@
-import { loadStudent } from '../load-student'
+import {loadStudent} from '../load-student'
 import * as demoStudent from '../../../object-student/demo-student.json'
 
-import { Student } from '../../../object-student'
+import {Student} from '../../../object-student'
 
 describe('loadStudent', () => {
     let student

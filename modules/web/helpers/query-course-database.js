@@ -1,5 +1,5 @@
 import db from './db'
-import { buildQueryFromString } from '../../search-queries'
+import {buildQueryFromString} from '../../search-queries'
 import compact from 'lodash/compact'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
@@ -19,7 +19,7 @@ export default function queryCourseDatabase(queryString, baseQuery = {}) {
     if ('year' in queryObject || 'semester' in queryObject) {
         query = queryObject
     } else {
-        query = { ...baseQuery, ...queryObject }
+        query = {...baseQuery, ...queryObject}
     }
 
     // make sure that all values are wrapped in arrays

@@ -3,9 +3,9 @@
 
 import nomnom from 'nomnom'
 
-import { loadYamlFile } from '../cli/lib/read-file'
+import {loadYamlFile} from '../cli/lib/read-file'
 import populateCourses from '../cli/lib/populate-courses'
-import { simplifyCourse, evaluate } from '../examine-student'
+import {simplifyCourse, evaluate} from '../examine-student'
 import loadArea from '../cli/lib/load-area'
 import uniqBy from 'lodash/uniqBy'
 import flatten from 'lodash/flatten'
@@ -32,7 +32,7 @@ async function populateStudent(filename) {
     }
 
     try {
-        student.studies.push({ type: 'degree', name: 'Bachelor of Arts' })
+        student.studies.push({type: 'degree', name: 'Bachelor of Arts'})
         student.areas = await Promise.all(student.studies.map(loadArea))
     } catch (err) {
         console.error('Problem loading areas', err)
@@ -95,7 +95,7 @@ function evaluateStudentAgainstEachMajor(student) {
 
     console.log(
         makeHeading(
-            `${`Used for ${name}… (result: ${find(areas, { name }).computed})`}`
+            `${`Used for ${name}… (result: ${find(areas, {name}).computed})`}`
         )
     )
     console.log(prettyCourseList(usedCourses))

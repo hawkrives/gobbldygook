@@ -1,7 +1,7 @@
 import every from 'lodash/every'
 import find from 'lodash/find'
-import { convertStudent } from '../convert-imported-student'
-import { sample } from './__support__/sample-student'
+import {convertStudent} from '../convert-imported-student'
+import {sample} from './__support__/sample-student'
 const getCourseMock = async course => course
 
 describe('convertStudent', () => {
@@ -9,9 +9,9 @@ describe('convertStudent', () => {
         const actual = await convertStudent(sample, getCourseMock)
 
         const expectedStudies = [
-            { name: 'Bachelor of Arts', type: 'degree', revision: 'latest' },
-            { name: 'Computer Science', type: 'major', revision: 'latest' },
-            { name: 'Asian Studies', type: 'major', revision: 'latest' },
+            {name: 'Bachelor of Arts', type: 'degree', revision: 'latest'},
+            {name: 'Computer Science', type: 'major', revision: 'latest'},
+            {name: 'Asian Studies', type: 'major', revision: 'latest'},
             {
                 name: 'Japan Studies',
                 type: 'concentration',

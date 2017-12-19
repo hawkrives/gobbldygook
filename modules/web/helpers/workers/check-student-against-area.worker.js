@@ -4,7 +4,7 @@
 import debug from 'debug'
 import round from 'lodash/round'
 import present from 'present'
-import { stringifyError } from '../../../lib/stringify-error'
+import {stringifyError} from '../../../lib/stringify-error'
 import checkStudentAgainstArea from './check-student-against-area'
 const log = debug('worker:check-student:listener')
 
@@ -12,7 +12,7 @@ if (
     typeof WorkerGlobalScope !== 'undefined' &&
     self instanceof WorkerGlobalScope
 ) {
-    self.addEventListener('message', ({ data }) => {
+    self.addEventListener('message', ({data}) => {
         const start = present()
 
         // why stringify? https://code.google.com/p/chromium/issues/detail?id=536620#c11

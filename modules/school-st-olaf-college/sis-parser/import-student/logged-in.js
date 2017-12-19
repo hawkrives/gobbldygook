@@ -1,9 +1,9 @@
 'use strict'
-const { AuthError } = require('../../../lib')
-const { extractStudentIds } = require('./student-ids')
-const { COURSES_URL } = require('./urls')
-const { fetchHtml, getText } = require('./lib')
-const { selectOne } = require('css-select')
+const {AuthError} = require('../../../lib')
+const {extractStudentIds} = require('./student-ids')
+const {COURSES_URL} = require('./urls')
+const {fetchHtml, getText} = require('./lib')
+const {selectOne} = require('css-select')
 
 module.exports.checkPageIsLoggedIn = checkPageIsLoggedIn
 function checkPageIsLoggedIn(response) {

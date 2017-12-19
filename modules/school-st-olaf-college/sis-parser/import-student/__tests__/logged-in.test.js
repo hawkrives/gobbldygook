@@ -1,5 +1,5 @@
-import { loadHtml } from './import-student.support'
-import { checkPageIsLoggedIn } from '../logged-in'
+import {loadHtml} from './import-student.support'
+import {checkPageIsLoggedIn} from '../logged-in'
 
 describe('checkPageIsLoggedIn', () => {
     it('returns an error if the student is not logged in', () => {

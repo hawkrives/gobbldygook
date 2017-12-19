@@ -5,9 +5,9 @@ import keymage from 'keymage'
 import omit from 'lodash/omit'
 import find from 'lodash/find'
 import filter from 'lodash/filter'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { loadAllAreas } from '../../redux/areas/actions'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {loadAllAreas} from '../../redux/areas/actions'
 
 import Loading from '../../components/loading'
 import AreaList from './area-list'
@@ -50,7 +50,7 @@ export class AreaEditScreen extends React.Component {
             return
         }
 
-        let { type, name, revision } = props.params
+        let {type, name, revision} = props.params
 
         if (!type || !name || !revision) {
             return
@@ -79,7 +79,7 @@ export class AreaEditScreen extends React.Component {
     }
 
     handleChange = newValue => {
-        this.setState({ area: newValue })
+        this.setState({area: newValue})
     }
 
     handleSave = () => {}
@@ -91,11 +91,11 @@ export class AreaEditScreen extends React.Component {
             keymage.popScope()
         }
 
-        this.setState({ isEditing: focused })
+        this.setState({isEditing: focused})
     }
 
     render() {
-        let { type, name, revision } = this.props.params
+        let {type, name, revision} = this.props.params
 
         if (this.state.area && (type && name && revision)) {
             return (
@@ -116,11 +116,11 @@ export class AreaEditScreen extends React.Component {
 
         if (name) {
             name = decodeURIComponent(name)
-            areas = filter(areas, { name })
+            areas = filter(areas, {name})
         }
         if (type) {
             type = decodeURIComponent(type)
-            areas = filter(areas, { type })
+            areas = filter(areas, {type})
         }
 
         return <AreaList areas={areas} />
@@ -132,7 +132,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    ...bindActionCreators({ loadAllAreas }, dispatch),
+    ...bindActionCreators({loadAllAreas}, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AreaEditScreen)

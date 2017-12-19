@@ -5,14 +5,14 @@ import round from 'lodash/round'
 import present from 'present'
 import debug from 'debug'
 import prepareCourse from './lib-prepare-course'
-import { quotaExceededError } from './lib-dispatch'
+import {quotaExceededError} from './lib-dispatch'
 import db from '../../db'
-import type { InfoFileTypeEnum } from './types'
+import type {InfoFileTypeEnum} from './types'
 const coursesLog = debug('worker:load-data:store-data:courses')
 const areasLog = debug('worker:load-data:store-data:areas')
 
 type BasicCourse = Object
-type BasicArea = { type: string }
+type BasicArea = {type: string}
 
 export function storeCourses(path: string, data: BasicCourse[]) {
     coursesLog(path)

@@ -4,7 +4,7 @@ import debug from 'debug'
 const log = debug('worker:load-data:dispatch')
 
 function dispatch(type: string, action: string, ...args: any[]) {
-    const toDispatch = [null, 'dispatch', { type, action, args }]
+    const toDispatch = [null, 'dispatch', {type, action, args}]
 
     log(toDispatch)
     self.postMessage(toDispatch)
@@ -34,7 +34,7 @@ export class Notification {
         this.length = length
 
         const msg = `Loading ${this.type}`
-        const args = { max: this.length, showButton: true }
+        const args = {max: this.length, showButton: true}
         dispatch(this.store, 'startProgress', this.id, msg, args)
     }
 

@@ -1,9 +1,9 @@
 // @flow
-import React, { Component, cloneElement } from 'react'
+import React, {Component, cloneElement} from 'react'
 import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { loadStudent } from '../../redux/students/actions/load-student'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {loadStudent} from '../../redux/students/actions/load-student'
 
 import Sidebar from '../../components/sidebar'
 import Loading from '../../components/loading'
@@ -18,7 +18,7 @@ type Props = {
     content: React$Element<any>, // from react-router
     loadStudent: string => any, // redux
     overlay: ?React$Element<any>,
-    params: { studentId: string }, // react-router
+    params: {studentId: string}, // react-router
     sidebar: ?React$Element<any>, // from react-router
     student: StudentType, // redux
 }
@@ -70,7 +70,7 @@ export class Student extends Component<Props> {
             <CourseTable {...contentProps} />
         )
 
-        const sidebarProps = { student: this.props.student.data.present }
+        const sidebarProps = {student: this.props.student.data.present}
         const sidebar = this.props.sidebar ? (
             cloneElement(this.props.sidebar, sidebarProps)
         ) : (
@@ -94,6 +94,6 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ loadStudent }, dispatch)
+    bindActionCreators({loadStudent}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Student)

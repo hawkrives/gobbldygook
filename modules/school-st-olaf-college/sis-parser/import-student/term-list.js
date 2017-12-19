@@ -1,5 +1,5 @@
 'use strict'
-const { selectOne, selectAll } = require('css-select')
+const {selectOne, selectAll} = require('css-select')
 
 module.exports.extractTermList = extractTermList
 function extractTermList(dom) {

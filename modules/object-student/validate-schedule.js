@@ -1,5 +1,5 @@
 'use strict'
-const { findWarnings } = require('./find-course-warnings')
+const {findWarnings} = require('./find-course-warnings')
 const filter = require('lodash/filter')
 const flatten = require('lodash/flatten')
 const identity = require('lodash/identity')
@@ -23,7 +23,7 @@ function validateSchedule(schedule) {
     const warnings = map(filtered, c => c.warning)
     const hasConflict = some(warnings, w => w === true)
 
-    return Object.assign({}, schedule, { hasConflict, conflicts })
+    return Object.assign({}, schedule, {hasConflict, conflicts})
 }
 
 module.exports.validateSchedule = validateSchedule

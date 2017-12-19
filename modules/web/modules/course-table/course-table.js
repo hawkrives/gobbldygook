@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { expandYear } from '../../../school-st-olaf-college/course-info'
+import {expandYear} from '../../../school-st-olaf-college/course-info'
 
-import { findFirstAvailableYear } from '../../helpers/find-first-available-year'
+import {findFirstAvailableYear} from '../../helpers/find-first-available-year'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
@@ -42,8 +42,8 @@ type PropTypes = {
 }
 
 export default function CourseTable(props: PropTypes) {
-    const { student } = props
-    const { schedules, matriculation } = student
+    const {student} = props
+    const {schedules, matriculation} = student
 
     const nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
     const canAddYear = true // graduation > nextAvailableYear

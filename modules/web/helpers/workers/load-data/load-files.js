@@ -2,13 +2,13 @@
 
 import startsWith from 'lodash/startsWith'
 import series from 'p-series'
-import { status, json } from '../../../../lib/fetch-helpers'
+import {status, json} from '../../../../lib/fetch-helpers'
 import debug from 'debug'
-import { refreshCourses, refreshAreas, Notification } from './lib-dispatch'
+import {refreshCourses, refreshAreas, Notification} from './lib-dispatch'
 import needsUpdate from './needs-update'
 import updateDatabase from './update-database'
 import removeDuplicateAreas from './remove-duplicate-areas'
-import type { InfoFileTypeEnum, InfoFileRef, InfoIndexFile } from './types'
+import type {InfoFileTypeEnum, InfoFileRef, InfoIndexFile} from './types'
 const log = debug('worker:load-data:load-files')
 
 const fetchJson = (...args) =>
@@ -35,7 +35,7 @@ export async function proceedWithUpdate(baseUrl: string, data: InfoIndexFile) {
     const type: InfoFileTypeEnum = data.type
     const notification = new Notification(type)
     const oldestYear = new Date().getFullYear() - 5
-    const args = { type, notification, baseUrl, oldestYear }
+    const args = {type, notification, baseUrl, oldestYear}
 
     const files = await getFilesToLoad(args, data)
     const filtered = await filterFiles(args, files)
@@ -45,10 +45,7 @@ export async function proceedWithUpdate(baseUrl: string, data: InfoIndexFile) {
     await finishUp(args)
 }
 
-export async function getFilesToLoad(
-    { type, oldestYear }: Args,
-    data: InfoIndexFile
-) {
+export function getFilesToLoad({type, oldestYear}: Args, data: InfoIndexFile) {
     let files = data.files
 
     if (type === 'courses') {
@@ -58,10 +55,7 @@ export async function getFilesToLoad(
     return files
 }
 
-export async function filterFiles(
-    { type }: Args,
-    files: InfoFileRef[]
-): Promise<Array<InfoFileRef>> {
+export function filterFiles({type}: Args, files: InfoFileRef[]): Promise<Array<InfoFileRef>> {
     // For each file, see if it needs loading. We then update each promise
     // with either the path or `null`.
     const promises = files.map(async (file: InfoFileRef) => {
@@ -77,7 +71,7 @@ export async function filterFiles(
 }
 
 export function slurpIntoDatabase(
-    { type, baseUrl, notification }: Args,
+    {type, baseUrl, notification}: Args,
     files: Array<InfoFileRef>
 ) {
     // Exit early if nothing needs to happen
@@ -96,14 +90,14 @@ export function slurpIntoDatabase(
     return series(files.map(runUpdate))
 }
 
-export function deduplicateAreas({ type }: Args) {
+export function deduplicateAreas({type}: Args) {
     // Clean up the database a bit
     if (type === 'areas') {
         return removeDuplicateAreas()
     }
 }
 
-export function finishUp({ type, notification }: Args) {
+export function finishUp({type, notification}: Args) {
     log(`[${type}] done loading`)
 
     // Remove the progress bar after 1.5 seconds

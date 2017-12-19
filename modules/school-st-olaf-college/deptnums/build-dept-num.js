@@ -1,7 +1,7 @@
 // @flow
 'use strict'
 
-const { buildDeptString } = require('./build-dept')
+const {buildDeptString} = require('./build-dept')
 
 /**
  * Builds a deptnum string from a course.

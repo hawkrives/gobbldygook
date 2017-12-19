@@ -71,7 +71,7 @@ exports[`DateSummary allows editing the graduation year if onChangeGraduation is
     className="autosize-input"
     disabled={false}
     multiLine={false}
-    onBlur={[Function]}
+    onBlur={[MockFunction]}
     onChange={[Function]}
     value="2016"
   />
@@ -88,7 +88,7 @@ exports[`DateSummary allows editing the matriculation year if onChangeMatriculat
     className="autosize-input"
     disabled={false}
     multiLine={false}
-    onBlur={[Function]}
+    onBlur={[MockFunction]}
     onChange={[Function]}
     value="2012"
   />
@@ -121,7 +121,7 @@ exports[`DateSummary calls onChangeGraduation when the graduation year is change
     className="autosize-input"
     disabled={false}
     multiLine={false}
-    onBlur={[Function]}
+    onBlur={[MockFunction]}
     onChange={[Function]}
     value="2016"
   />
@@ -138,7 +138,7 @@ exports[`DateSummary calls onChangeMatriculation when the matriculation year is 
     className="autosize-input"
     disabled={false}
     multiLine={false}
-    onBlur={[Function]}
+    onBlur={[MockFunction]}
     onChange={[Function]}
     value="2012"
   />
@@ -909,7 +909,7 @@ exports[`Header allows editing the name if onChangeName is given 1`] = `
       className="autosize-input"
       disabled={false}
       multiLine={false}
-      onBlur={[Function]}
+      onBlur={[MockFunction]}
       onChange={[Function]}
       value="Natasha"
     />
@@ -934,7 +934,7 @@ exports[`Header calls onChangeName when the name is changed 1`] = `
       className="autosize-input"
       disabled={false}
       multiLine={false}
-      onBlur={[Function]}
+      onBlur={[MockFunction]}
       onChange={[Function]}
       value="Natasha"
     />

@@ -1,11 +1,11 @@
 // @flow
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import map from 'lodash/map'
-import { DraggableCourse } from '../course'
+import {DraggableCourse} from '../course'
 import debug from 'debug'
 const log = debug('web:react')
 
-import { compareProps } from '../../../lib'
+import {compareProps} from '../../../lib'
 import {
     toPrettyTerm,
     expandYear,
@@ -37,7 +37,7 @@ export default class CourseResultsList extends Component<Props> {
 
     render() {
         log('CourseResultsList.render')
-        const { results, groupBy: groupByValue, studentId } = this.props
+        const {results, groupBy: groupByValue, studentId} = this.props
 
         return (
             <ul className="term-list">

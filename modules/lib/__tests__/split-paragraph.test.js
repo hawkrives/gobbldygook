@@ -1,4 +1,4 @@
-import { splitParagraph } from '../split-paragraph'
+import {splitParagraph} from '../split-paragraph'
 
 describe('splitParagraph', () => {
     it('returns and array of the words in the string', () => {

@@ -1,16 +1,16 @@
 'use strict'
-const { compareProps } = require('./compare-props')
-const { AuthError, NetworkError } = require('./errors')
-const { status, classifyFetchErrors, json, text } = require('./fetch-helpers')
-const { findMissingNumber } = require('./find-missing-number')
-const { findWordForProgress } = require('./find-word-for-progress')
-const { interpose } = require('./interpose')
-const { partitionByIndex } = require('./partition-by-index')
-const { randomChar } = require('./random-char')
-const { splitParagraph } = require('./split-paragraph')
-const { stringifyError } = require('./stringify-error')
-const { to12HourTime } = require('./to-12-hour-time')
-const { zipToObjectWithArrays } = require('./zip-to-object-with-arrays')
+const {compareProps} = require('./compare-props')
+const {AuthError, NetworkError} = require('./errors')
+const {status, classifyFetchErrors, json, text} = require('./fetch-helpers')
+const {findMissingNumber} = require('./find-missing-number')
+const {findWordForProgress} = require('./find-word-for-progress')
+const {interpose} = require('./interpose')
+const {partitionByIndex} = require('./partition-by-index')
+const {randomChar} = require('./random-char')
+const {splitParagraph} = require('./split-paragraph')
+const {stringifyError} = require('./stringify-error')
+const {to12HourTime} = require('./to-12-hour-time')
+const {zipToObjectWithArrays} = require('./zip-to-object-with-arrays')
 
 module.exports = {
     compareProps,

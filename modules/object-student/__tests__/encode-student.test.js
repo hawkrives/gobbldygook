@@ -1,4 +1,4 @@
-import { encodeStudent } from '../encode-student'
+import {encodeStudent} from '../encode-student'
 
 const newEncode = require('querystring').stringify
 const oldEncode = global.encodeURIComponent
@@ -12,6 +12,6 @@ describe('prepareStudentForSave', () => {
     })
 
     it('encodes a student', () => {
-        expect(encodeStudent({ name: 's' })).toBe('')
+        expect(encodeStudent({name: 's'})).toBe('')
     })
 })

@@ -1,4 +1,4 @@
-import { validateSchedules } from '../validate-schedules'
+import {validateSchedules} from '../validate-schedules'
 
 xdescribe('validateSchedules', () => {
     xit('', () => {})

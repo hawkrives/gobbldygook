@@ -1,6 +1,6 @@
-import { initStudent } from '../init-student'
+import {initStudent} from '../init-student'
 
-import { INIT_STUDENT } from '../../constants'
+import {INIT_STUDENT} from '../../constants'
 
 describe('initStudent action', () => {
     it('returns an action to create a student', () => {

@@ -1,5 +1,5 @@
 /* globals module */
-import { applyMiddleware, createStore, compose } from 'redux'
+import {applyMiddleware, createStore, compose} from 'redux'
 import promiseMiddleware from 'redux-promise'
 import thunkMiddleware from 'redux-thunk'
 import checkStudentsMiddleware from './middleware/check-students'

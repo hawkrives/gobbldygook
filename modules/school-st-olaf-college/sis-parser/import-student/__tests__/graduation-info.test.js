@@ -1,5 +1,5 @@
-import { loadHtml } from './import-student.support'
-import { getGraduationInformation } from '../graduation-info'
+import {loadHtml} from './import-student.support'
+import {getGraduationInformation} from '../graduation-info'
 
 describe('getGraduationInformation', () => {
     it('extracts information about the degrees', () => {

@@ -5,9 +5,9 @@ const fromPairs = require('lodash/fromPairs')
 const mapKeys = require('lodash/mapKeys')
 const unzip = require('lodash/unzip')
 const filter = require('lodash/filter')
-const { selectAll, selectOne } = require('css-select')
-const { partitionByIndex } = require('../../../lib')
-const { getText } = require('./lib')
+const {selectAll, selectOne} = require('css-select')
+const {partitionByIndex} = require('../../../lib')
+const {getText} = require('./lib')
 
 function extractInformationFromInfoTable(table) {
     // So "info" is the first table; it's essentially key-value pairs, in column-row fashion.
@@ -72,5 +72,5 @@ function extractInformationFromDegreeAudit(auditInfo, infoElement) {
     let info = extractInformationFromInfoTable(infoTable)
     let areas = extractInformationFromAreaTable(areaTable)
 
-    return Object.assign({}, info, areas, { degree: degreeType })
+    return Object.assign({}, info, areas, {degree: degreeType})
 }

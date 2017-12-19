@@ -68,7 +68,7 @@ class ContentEditable extends React.Component<Props, State> {
             this.props.onBlur(value)
         }
 
-        this.setState({ lastValue: value })
+        this.setState({lastValue: value})
     }
 
     render() {
@@ -81,7 +81,7 @@ class ContentEditable extends React.Component<Props, State> {
                 onKeyDown={this.handleKeyDown}
                 onFocus={this.handleFocus}
                 contentEditable={!this.props.disabled}
-                dangerouslySetInnerHTML={{ __html: this.props.value }}
+                dangerouslySetInnerHTML={{__html: this.props.value}}
             />
         )
     }

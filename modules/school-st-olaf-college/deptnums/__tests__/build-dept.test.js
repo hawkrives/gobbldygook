@@ -1,4 +1,4 @@
-import { buildDeptString } from '../build-dept'
+import {buildDeptString} from '../build-dept'
 
 describe('buildDeptString', () => {
     it('builds a department string from a single-dept course', () => {

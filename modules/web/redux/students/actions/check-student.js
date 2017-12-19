@@ -1,6 +1,6 @@
-import { getStudentData as getStudentDataFunc } from '../../../helpers/get-student-data'
-import { checkStudentGraduatability as checkStudentGraduatabilityFunc } from '../../../helpers/check-student-graduatability'
-import { validateSchedules as validateSchedulesFunc } from '../../../../object-student'
+import {getStudentData as getStudentDataFunc} from '../../../helpers/get-student-data'
+import {checkStudentGraduatability as checkStudentGraduatabilityFunc} from '../../../helpers/check-student-graduatability'
+import {validateSchedules as validateSchedulesFunc} from '../../../../object-student'
 
 import {
     BEGIN_GET_STUDENT_DATA,
@@ -20,7 +20,7 @@ function getStudent(state, studentId) {
 
 export function getStudentData(studentId) {
     return (dispatch, getState) => {
-        dispatch({ type: BEGIN_GET_STUDENT_DATA, payload: { id: studentId } })
+        dispatch({type: BEGIN_GET_STUDENT_DATA, payload: {id: studentId}})
         const state = getState()
         const student = getStudent(state, studentId)
         return dispatch({
@@ -34,7 +34,7 @@ export function checkStudentGraduatability(studentId) {
     return (dispatch, getState) => {
         dispatch({
             type: BEGIN_CHECK_GRADUATABILITY,
-            payload: { id: studentId },
+            payload: {id: studentId},
         })
         const student = getStudent(getState(), studentId)
         return dispatch({
@@ -48,7 +48,7 @@ export function validateSchedules(studentId) {
     return (dispatch, getState) => {
         dispatch({
             type: BEGIN_VALIDATE_SCHEDULES,
-            payload: { id: studentId },
+            payload: {id: studentId},
         })
         const student = getStudent(getState(), studentId)
         return dispatch({

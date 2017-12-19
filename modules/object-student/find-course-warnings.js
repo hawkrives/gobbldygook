@@ -7,7 +7,7 @@ const zip = require('lodash/zip')
 
 const ordinal = require('ord')
 const oxford = require('listify')
-const { findScheduleTimeConflicts } = require('sto-sis-time-parser')
+const {findScheduleTimeConflicts} = require('sto-sis-time-parser')
 const {
     expandYear,
     semesterName,
@@ -66,7 +66,7 @@ function checkForTimeConflicts(courses) {
             )
             const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
 
-            const conflictsStr = oxford(conflicted, { oxfordComma: true })
+            const conflictsStr = oxford(conflicted, {oxfordComma: true})
             const word = conflicts.length === 1 ? 'course' : 'courses'
             return {
                 warning: true,

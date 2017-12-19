@@ -1,5 +1,5 @@
 'use strict'
-const { Student, Schedule } = require('../../object-student')
+const {Student, Schedule} = require('../../object-student')
 const groupBy = require('lodash/groupBy')
 const map = require('lodash/map')
 const forEach = require('lodash/forEach')
@@ -9,12 +9,12 @@ const filter = require('lodash/filter')
 const uuid = require('uuid/v4')
 
 module.exports.convertStudent = convertStudent
-function convertStudent({ courses, degrees }, getCourse) {
+function convertStudent({courses, degrees}, getCourse) {
     return Promise.all([
         processSchedules(courses, getCourse),
         processDegrees(degrees),
     ]).then(([schedulesAndFabrications, info]) => {
-        let { schedules, fabrications } = schedulesAndFabrications
+        let {schedules, fabrications} = schedulesAndFabrications
 
         return Student(
             Object.assign({}, info, {
@@ -56,7 +56,7 @@ function processSchedules(courses, getCourse) {
         })
         schedules = fromPairs(map(schedules, s => [s.id, s]))
 
-        return { schedules, fabrications }
+        return {schedules, fabrications}
     })
 }
 
@@ -65,10 +65,10 @@ function processDegrees(degrees) {
     let singularData = resolveSingularDataPoints(degrees)
     let studies = []
 
-    for (let { concentrations, emphases, majors, degree } of degrees) {
-        studies.push({ name: degree, type: 'degree', revision: 'latest' })
+    for (let {concentrations, emphases, majors, degree} of degrees) {
+        studies.push({name: degree, type: 'degree', revision: 'latest'})
         studies = studies.concat(
-            majors.map(name => ({ name, type: 'major', revision: 'latest' }))
+            majors.map(name => ({name, type: 'major', revision: 'latest'}))
         )
         studies = studies.concat(
             concentrations.map(name => ({
@@ -86,7 +86,7 @@ function processDegrees(degrees) {
         )
     }
 
-    return Object.assign({}, singularData, { studies })
+    return Object.assign({}, singularData, {studies})
 }
 
 module.exports.resolveSingularDataPoints = resolveSingularDataPoints
@@ -120,5 +120,5 @@ function resolveSingularDataPoints(degrees) {
     let matriculation = parseInt(thereShouldOnlyBeOne.matriculations[0], 10)
     let graduation = parseInt(thereShouldOnlyBeOne.graduations[0], 10)
 
-    return { name, advisor, matriculation, graduation }
+    return {name, advisor, matriculation, graduation}
 }

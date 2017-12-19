@@ -1,4 +1,4 @@
-import { to12HourTime } from '../to-12-hour-time'
+import {to12HourTime} from '../to-12-hour-time'
 
 describe('to12HourTime', () => {
     it('should convert a 4-digit 24-hour number into a 12-hour timestring', () => {

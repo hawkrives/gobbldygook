@@ -5,8 +5,8 @@ const some = require('lodash/some')
 const startsWith = require('lodash/startsWith')
 const path = require('path')
 
-const { tryReadJsonFile, loadFile, loadJsonFile } = require('./read-file')
-const { cacheDir } = require('./dirs')
+const {tryReadJsonFile, loadFile, loadJsonFile} = require('./read-file')
+const {cacheDir} = require('./dirs')
 
 const pify = require('pify')
 

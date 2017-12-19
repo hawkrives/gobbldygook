@@ -19,7 +19,7 @@ describe('removeNotification action', () => {
         const id = 1
         const expectedAction = {
             type: REMOVE_NOTIFICATION,
-            payload: { id },
+            payload: {id},
         }
 
         expect(removeNotification(id)).toEqual(expectedAction)
@@ -29,7 +29,7 @@ describe('removeNotification action', () => {
         const id = 1
         const expectedAction = {
             type: REMOVE_NOTIFICATION,
-            payload: Promise.resolve({ id }),
+            payload: Promise.resolve({id}),
         }
 
         let actual = removeNotification(id, 10)
@@ -47,7 +47,7 @@ describe('logMessage action', () => {
         const id = 0
         const expectedAction = {
             type: LOG_MESSAGE,
-            payload: { id, message },
+            payload: {id, message},
         }
 
         expect(logMessage(id, message)).toEqual(expectedAction)
@@ -60,10 +60,10 @@ describe('logError action', () => {
         const id = 0
         const expectedAction = {
             type: LOG_ERROR,
-            payload: { id, error, args: [] },
+            payload: {id, error, args: []},
         }
 
-        expect(logError({ id, error })).toEqual(expectedAction)
+        expect(logError({id, error})).toEqual(expectedAction)
     })
 
     it('passes along any other arguments', () => {
@@ -71,10 +71,10 @@ describe('logError action', () => {
         const id = 0
         const expectedAction = {
             type: LOG_ERROR,
-            payload: { id, error, args: ['arg'] },
+            payload: {id, error, args: ['arg']},
         }
 
-        expect(logError({ id, error }, 'arg')).toEqual(expectedAction)
+        expect(logError({id, error}, 'arg')).toEqual(expectedAction)
     })
 })
 
@@ -84,7 +84,7 @@ describe('startProgress action', () => {
         const id = 0
         const expectedAction = {
             type: START_PROGRESS,
-            payload: { id, message, max: 1, value: 0, showButton: false },
+            payload: {id, message, max: 1, value: 0, showButton: false},
         }
 
         expect(startProgress(id, message)).toEqual(expectedAction)
@@ -94,7 +94,7 @@ describe('startProgress action', () => {
         const id = 0
         const expectedAction = {
             type: START_PROGRESS,
-            payload: { id, message: '', max: 1, value: 0, showButton: false },
+            payload: {id, message: '', max: 1, value: 0, showButton: false},
         }
 
         expect(startProgress(id)).toEqual(expectedAction)
@@ -104,7 +104,7 @@ describe('startProgress action', () => {
         const id = 0
         const expectedAction = {
             type: START_PROGRESS,
-            payload: { id, message: '', max: 1, value: 0, showButton: false },
+            payload: {id, message: '', max: 1, value: 0, showButton: false},
         }
 
         expect(startProgress(id)).toEqual(expectedAction)
@@ -114,7 +114,7 @@ describe('startProgress action', () => {
         const id = 0
         const expectedAction = {
             type: START_PROGRESS,
-            payload: { id, message: '', max: 1, value: 0, showButton: false },
+            payload: {id, message: '', max: 1, value: 0, showButton: false},
         }
 
         expect(startProgress(id)).toEqual(expectedAction)
@@ -126,7 +126,7 @@ describe('incrementProgress action', () => {
         const id = 1
         const expectedAction = {
             type: INCREMENT_PROGRESS,
-            payload: { id, by: 1 },
+            payload: {id, by: 1},
         }
 
         expect(incrementProgress(id)).toEqual(expectedAction)
@@ -137,7 +137,7 @@ describe('incrementProgress action', () => {
         const by = 10
         const expectedAction = {
             type: INCREMENT_PROGRESS,
-            payload: { id, by },
+            payload: {id, by},
         }
 
         expect(incrementProgress(id, by)).toEqual(expectedAction)

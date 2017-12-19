@@ -162,15 +162,15 @@ function peg$parse(input, options) {
         peg$c11 = 'courses',
         peg$c12 = peg$literalExpectation('courses', false),
         peg$c13 = function peg$c13(distinct, where) {
-            return { $where: where, $filterType: 'where' }
+            return {$where: where, $filterType: 'where'}
         },
         peg$c14 = 'from',
         peg$c15 = peg$literalExpectation('from', false),
         peg$c16 = function peg$c16(distinct, ofList) {
-            return { $of: ofList, $filterType: 'of' }
+            return {$of: ofList, $filterType: 'of'}
         },
         peg$c17 = function peg$c17(distinct, filter) {
-            return assign({}, filter, { $distinct: distinct, $type: 'filter' })
+            return assign({}, filter, {$distinct: distinct, $type: 'filter'})
         },
         peg$c18 = 'occurrence',
         peg$c19 = peg$literalExpectation('occurrence', false),
@@ -211,7 +211,7 @@ function peg$parse(input, options) {
             }
         },
         peg$c36 = function peg$c36(key, op, f, q) {
-            return assign({}, f, { $where: q })
+            return assign({}, f, {$where: q})
         },
         peg$c37 = function peg$c37(key, op, value) {
             return {
@@ -251,7 +251,7 @@ function peg$parse(input, options) {
             return word.join('')
         },
         peg$c45 = function peg$c45(name, prop) {
-            return { $name: name, $prop: prop, $type: 'function' }
+            return {$name: name, $prop: prop, $type: 'function'}
         },
         peg$c46 = '<=',
         peg$c47 = peg$literalExpectation('<=', false),
@@ -289,17 +289,17 @@ function peg$parse(input, options) {
         peg$c67 = /^[ \n\t\r]/,
         peg$c68 = peg$classExpectation([' ', '\n', '\t', '\r'], false, false),
         peg$c69 = function peg$c69(count) {
-            return { $operator: '$gte', $num: count }
+            return {$operator: '$gte', $num: count}
         },
         peg$c70 = 'at most',
         peg$c71 = peg$literalExpectation('at most', false),
         peg$c72 = function peg$c72(count) {
-            return { $operator: '$lte', $num: count }
+            return {$operator: '$lte', $num: count}
         },
         peg$c73 = 'exactly',
         peg$c74 = peg$literalExpectation('exactly', false),
         peg$c75 = function peg$c75(count) {
-            return { $operator: '$eq', $num: count }
+            return {$operator: '$eq', $num: count}
         },
         peg$c76 = 'zero',
         peg$c77 = peg$literalExpectation('zero', false),
@@ -355,7 +355,7 @@ function peg$parse(input, options) {
         peg$c101 = '!',
         peg$c102 = peg$literalExpectation('!', false),
         peg$c103 = function peg$c103(value) {
-            return { $type: 'boolean', $not: value }
+            return {$type: 'boolean', $not: value}
         },
         peg$c104 = ',',
         peg$c105 = peg$literalExpectation(',', false),
@@ -371,17 +371,17 @@ function peg$parse(input, options) {
         peg$c109 = 'all',
         peg$c110 = peg$literalExpectation('all', false),
         peg$c111 = function peg$c111() {
-            return { $operator: '$eq', $was: 'all' }
+            return {$operator: '$eq', $was: 'all'}
         },
         peg$c112 = 'any',
         peg$c113 = peg$literalExpectation('any', false),
         peg$c114 = function peg$c114() {
-            return { $operator: '$gte', $num: 1, $was: 'any' }
+            return {$operator: '$gte', $num: 1, $was: 'any'}
         },
         peg$c115 = 'none',
         peg$c116 = peg$literalExpectation('none', false),
         peg$c117 = function peg$c117() {
-            return { $operator: '$eq', $num: 0, $was: 'none' }
+            return {$operator: '$eq', $num: 0, $was: 'none'}
         },
         peg$c118 = function peg$c118(count, ofList) {
             if (count.$was === 'all') {
@@ -398,7 +398,7 @@ function peg$parse(input, options) {
                         ').'
                 )
             }
-            return { $type: 'of', $count: count, $of: ofList }
+            return {$type: 'of', $count: count, $of: ofList}
         },
         peg$c119 = function peg$c119(reqs) {
             return flatten(reqs)
@@ -410,30 +410,30 @@ function peg$parse(input, options) {
         peg$c124 = 'children',
         peg$c125 = peg$literalExpectation('children', false),
         peg$c126 = function peg$c126(count, what, besides, where) {
-            return { $from: 'children-where', $where: where, $children: '$all' }
+            return {$from: 'children-where', $where: where, $children: '$all'}
         },
         peg$c127 = function peg$c127(count, what, besides) {
-            return { $from: 'children', $children: '$all' }
+            return {$from: 'children', $children: '$all'}
         },
         peg$c128 = 'filter',
         peg$c129 = peg$literalExpectation('filter', false),
         peg$c130 = function peg$c130(count, what, besides, where) {
-            return { $from: 'filter-where', $where: where }
+            return {$from: 'filter-where', $where: where}
         },
         peg$c131 = function peg$c131(count, what, besides) {
-            return { $from: 'filter' }
+            return {$from: 'filter'}
         },
         peg$c132 = function peg$c132(count, what, besides, where) {
-            return { $from: 'where', $where: where }
+            return {$from: 'where', $where: where}
         },
         peg$c133 = function peg$c133(count, what, besides, c, w) {
-            return { $from: 'children-where', $where: w, $children: c }
+            return {$from: 'children-where', $where: w, $children: c}
         },
         peg$c134 = function peg$c134(count, what, besides, children) {
-            return { $from: 'children', $children: children }
+            return {$from: 'children', $children: children}
         },
         peg$c135 = function peg$c135(count, what, besides, child) {
-            return { $from: 'children', $children: [child] }
+            return {$from: 'children', $children: [child]}
         },
         peg$c136 = function peg$c136(count, what, besides, from) {
             if (from.$from === 'where' && what === 'department') {
@@ -491,18 +491,18 @@ function peg$parse(input, options) {
             } else if (options.titles && title in options.titles) {
                 title = options.titles[title]
             }
-            return { $type: 'reference', $requirement: title }
+            return {$type: 'reference', $requirement: title}
         },
         peg$c150 = '.',
         peg$c151 = peg$literalExpectation('.', false),
         peg$c152 = function peg$c152(dept, num, section, year, semester) {
-            return { semester: semester }
+            return {semester: semester}
         },
         peg$c153 = function peg$c153(dept, num, section, year, sub) {
-            return assign({}, sub, { year: year })
+            return assign({}, sub, {year: year})
         },
         peg$c154 = function peg$c154(dept, num, section, sub) {
-            return assign({}, sub, { section: section })
+            return assign({}, sub, {section: section})
         },
         peg$c155 = function peg$c155(dept, num, details) {
             return {
@@ -516,17 +516,17 @@ function peg$parse(input, options) {
         peg$c157 = '/',
         peg$c158 = peg$literalExpectation('/', false),
         peg$c159 = function peg$c159(dept1, l1, l2) {
-            return { dept: l1 + l2, type: 'separate' }
+            return {dept: l1 + l2, type: 'separate'}
         },
         peg$c160 = function peg$c160(dept1, chars) {
-            return { dept: chars.join(''), type: 'joined' }
+            return {dept: chars.join(''), type: 'joined'}
         },
         peg$c161 = function peg$c161(dept1, part2) {
             var type = part2.type,
                 dept2 = part2.dept
             var department = void 0
             if (type === 'joined') {
-                department = { department: [dept1 + dept2] }
+                department = {department: [dept1 + dept2]}
             } else if (type === 'separate') {
                 department = {
                     department: [
@@ -552,7 +552,7 @@ function peg$parse(input, options) {
             if (lab) {
                 result.type = 'Lab'
             }
-            return assign({}, result, { number: number })
+            return assign({}, result, {number: number})
         },
         peg$c168 = function peg$c168() {
             throw new SyntaxError(
@@ -606,7 +606,7 @@ function peg$parse(input, options) {
         },
         peg$currPos = 0,
         peg$savedPos = 0,
-        peg$posDetailsCache = [{ line: 1, column: 1 }],
+        peg$posDetailsCache = [{line: 1, column: 1}],
         peg$maxFailPos = 0,
         peg$maxFailExpected = [],
         peg$silentFails = 0,
@@ -644,7 +644,7 @@ function peg$parse(input, options) {
         throw peg$buildSimpleError(message, location)
     }
     function peg$literalExpectation(text, ignoreCase) {
-        return { type: 'literal', text: text, ignoreCase: ignoreCase }
+        return {type: 'literal', text: text, ignoreCase: ignoreCase}
     }
     function peg$classExpectation(parts, inverted, ignoreCase) {
         return {
@@ -655,13 +655,13 @@ function peg$parse(input, options) {
         }
     }
     function peg$anyExpectation() {
-        return { type: 'any' }
+        return {type: 'any'}
     }
     function peg$endExpectation() {
-        return { type: 'end' }
+        return {type: 'end'}
     }
     function peg$otherExpectation(description) {
-        return { type: 'other', description: description }
+        return {type: 'other', description: description}
     }
     function peg$computePosDetails(pos) {
         var details = peg$posDetailsCache[pos],
@@ -674,7 +674,7 @@ function peg$parse(input, options) {
                 p--
             }
             details = peg$posDetailsCache[p]
-            details = { line: details.line, column: details.column }
+            details = {line: details.line, column: details.column}
             while (p < pos) {
                 if (input.charCodeAt(p) === 10) {
                     details.line++
@@ -4104,4 +4104,4 @@ function peg$parse(input, options) {
         )
     }
 }
-module.exports = { SyntaxError: peg$SyntaxError, parse: peg$parse }
+module.exports = {SyntaxError: peg$SyntaxError, parse: peg$parse}

@@ -6,20 +6,20 @@ import map from 'lodash/map'
 import reject from 'lodash/reject'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
-import { filterAreaList } from '../../../object-student/filter-area-list'
-import type { AreaOfStudyTypeEnum } from '../../../examine-student/types'
+import {filterAreaList} from '../../../object-student/filter-area-list'
+import type {AreaOfStudyTypeEnum} from '../../../examine-student/types'
 import Button from '../../components/button'
 import List from '../../components/list'
 import Toolbar from '../../components/toolbar'
 import styled from 'styled-components'
 
 const AddAreaBlock = styled.div`
-    padding: ${({ theme }) => theme.areaEdgePadding};
-    border-top: ${({ theme }) => theme.materialDivider};
+    padding: ${({theme}) => theme.areaEdgePadding};
+    border-top: ${({theme}) => theme.materialDivider};
 `
 
 const AddAreaToolbar = styled(Toolbar)`
-    margin-bottom: ${({ theme }) => theme.areaEdgePadding};
+    margin-bottom: ${({theme}) => theme.areaEdgePadding};
 `
 
 const AreaChoice = styled.li`
@@ -53,13 +53,13 @@ const ToggleAreaButton = styled(Button)`
 
 const AddAreaFilter = styled.input`
     flex: 1;
-    border: solid 1px ${({ theme }) => theme.gray300};
+    border: solid 1px ${({theme}) => theme.gray300};
     padding: 0.25em;
     margin-bottom: 0.5em;
 
     &:focus {
-        background-color: ${({ theme }) => theme.blue50};
-        border-color: ${({ theme }) => theme.blue500};
+        background-color: ${({theme}) => theme.blue50};
+        border-color: ${({theme}) => theme.blue500};
         outline: 0;
     }
 `
@@ -86,7 +86,7 @@ function AreaPicker(props: AreaPickerProps) {
         includes(currentAreaNames, area.name)
     )
 
-    onlyAvailableAreas = filterAreaList(onlyAvailableAreas, { graduation })
+    onlyAvailableAreas = filterAreaList(onlyAvailableAreas, {graduation})
 
     const filteredOnName = filter(onlyAvailableAreas, area =>
         fuzzysearch(props.filterText, area.name.toLowerCase())
@@ -155,7 +155,8 @@ export default class AreaPickerContainer extends React.PureComponent<
                 onFilterChange={ev =>
                     this.setState(() => ({
                         filter: (ev.target.value || '').toLowerCase(),
-                    }))}
+                    }))
+                }
             />
         )
     }

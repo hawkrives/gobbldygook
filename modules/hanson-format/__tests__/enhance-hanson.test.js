@@ -1,4 +1,4 @@
-import { enhanceHanson } from '../enhance-hanson'
+import {enhanceHanson} from '../enhance-hanson'
 
 describe('enhanceHanson', () => {
     it('adds a "slug" key to the top-level', () => {
@@ -19,15 +19,13 @@ describe('enhanceHanson', () => {
     })
 
     it('requires the top-level to have certain keys', () => {
-        expect(() => enhanceHanson({ $type: 'a', slug: 'nope' })).toThrowError(
+        expect(() => enhanceHanson({$type: 'a', slug: 'nope'})).toThrowError(
             'enhanceHanson(): could not find any of ["result", "message", "filter"] in ["$type", "slug"].'
         )
 
-        expect(() =>
-            enhanceHanson({ message: 'have a nice day' })
-        ).not.toThrow()
+        expect(() => enhanceHanson({message: 'have a nice day'})).not.toThrow()
 
-        expect(() => enhanceHanson({ result: 'CSCI 121' })).not.toThrow()
+        expect(() => enhanceHanson({result: 'CSCI 121'})).not.toThrow()
     })
 
     it('requires its input to be an object', () => {
@@ -38,18 +36,18 @@ describe('enhanceHanson', () => {
 
     it('requires "revision" to be a string, if present', () => {
         expect(() =>
-            enhanceHanson({ revision: 2, result: 'CSCI 121' })
+            enhanceHanson({revision: 2, result: 'CSCI 121'})
         ).toThrowError(
             'enhanceHanson: "revision" must be a string. Try wrapping it in single quotes.'
         )
 
         expect(() =>
-            enhanceHanson({ revision: '2', result: 'CSCI 121' })
+            enhanceHanson({revision: '2', result: 'CSCI 121'})
         ).not.toThrow()
     })
 
     it('enforces a whitelist of keys at the top-level', () => {
-        expect(() => enhanceHanson({ result: '', xxx: 'yyy' })).toThrowError(
+        expect(() => enhanceHanson({result: '', xxx: 'yyy'})).toThrowError(
             /only \[.*\] keys are allowed/
         )
     })
@@ -65,7 +63,7 @@ describe('enhanceHanson', () => {
 
     it('enforces a whitelist of keys at lower levels', () => {
         expect(() =>
-            enhanceHanson({ result: '', innerbad: 'zzzz' }, { topLevel: false })
+            enhanceHanson({result: '', innerbad: 'zzzz'}, {topLevel: false})
         ).toThrow(/only \[.*\] keys are allowed/)
     })
 

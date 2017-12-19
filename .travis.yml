@@ -10,19 +10,43 @@ sudo: false
 dist: trusty
 language: node_js
 node_js: 8
-install: npm install
+install: yarn
 
-matrix:
+stages:
+  - name: Greenkeeper
+    if: branch =~ ^greenkeeper\/
+  - name: Test
+
+jobs:
+  # We define default before_install, install, and before_script steps.
+  # To skip the default step, use `step_name: skip`.
   include:
-    - script:
+    # Run greenkeeper stuff
+    - stage: Greenkeeper
+      env: [EXEC=greenkeeper]
+      install: npm install -g greenkeeper-lockfile@1
+      script: greenkeeper-lockfile-update
+      after_script: greenkeeper-lockfile-upload
+
+    - stage: Test
+      env: [EXEC=lint]
+      script:
         - npm run lint
- 
-    - script:
-        - npm run test -- --coverage --runInBand
-        - npm run flow -- check
+
+    - stage: Test
+      env: [EXEC=jest]
+      script:
+        - npm run test -- --coverage --maxWorkers=2
       after_success:
         - ./node_modules/.bin/coveralls < ./coverage/lcov.info
         - bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json
 
-    - script:
+    - stage: Test
+      env: [EXEC=flow]
+      script:
+        - npm run flow -- check
+
+    - stage: Test
+      env: [EXEC=build]
+      script:
         - npm run build

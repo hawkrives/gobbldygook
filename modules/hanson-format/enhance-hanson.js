@@ -12,8 +12,8 @@ const map = require('lodash/map')
 const mapValues = require('lodash/mapValues')
 const some = require('lodash/some')
 const fromPairs = require('lodash/fromPairs')
-const { makeAreaSlug } = require('./make-area-slug')
-const { parse } = require('./parse-hanson-string')
+const {makeAreaSlug} = require('./make-area-slug')
+const {parse} = require('./parse-hanson-string')
 
 const requirementNameRegex = /(.*?) +\(([A-Z-]+)\)$/i
 const none = (arr, pred) => !some(arr, pred)
@@ -45,7 +45,7 @@ const startRules = {
     filter: 'Filter',
 }
 
-type StringMap = { [key: string]: string }
+type StringMap = {[key: string]: string}
 
 module.exports.enhanceHanson = enhanceHanson
 function enhanceHanson(
@@ -53,7 +53,7 @@ function enhanceHanson(
     {
         topLevel = true,
         declaredVariables = {},
-    }: { topLevel: boolean, declaredVariables: StringMap } = {}
+    }: {topLevel: boolean, declaredVariables: StringMap} = {}
 ) {
     // 1. adds 'result' key, if missing
     // 2. parses the 'result' and 'filter' keys
@@ -97,7 +97,9 @@ function enhanceHanson(
 
         if (data.revision && typeof data.revision !== 'string') {
             throw new TypeError(
-                `enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${data.revision}" is a ${typeof data.revision}.`
+                `enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${
+                    data.revision
+                }" is a ${typeof data.revision}.`
             )
         }
     }
@@ -125,7 +127,7 @@ function enhanceHanson(
         if (isRequirementName(key)) {
             // expand simple strings into {result: string} objects
             if (isString(value)) {
-                value = { result: value }
+                value = {result: value}
             }
 
             // then run enhance on the resultant object

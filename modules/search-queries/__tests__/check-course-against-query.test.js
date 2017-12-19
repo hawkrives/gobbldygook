@@ -1,21 +1,21 @@
-import { checkCourseAgainstQuery } from '../check-course-against-query'
+import {checkCourseAgainstQuery} from '../check-course-against-query'
 
 describe('checkCourseAgainstQuery', () => {
     it('compares a course to a query object', () => {
-        let query = { departments: ['AMCON'], year: [2013] }
-        let course = { departments: ['AMCON'], year: 2013 }
+        let query = {departments: ['AMCON'], year: [2013]}
+        let course = {departments: ['AMCON'], year: 2013}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
     })
 
     it('properly handles a list of five years', () => {
-        let query = { year: ['$OR', 2010, 2011, 2012, 2013, 2014] }
-        let course = { departments: ['ASIAN'], year: 2012 }
+        let query = {year: ['$OR', 2010, 2011, 2012, 2013, 2014]}
+        let course = {departments: ['ASIAN'], year: 2012}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
     })
 
     it("handles when a course doesn't have the key", () => {
-        let query = { year: ['$OR', 2010, 2011, 2012, 2013, 2014] }
-        let course = { departments: ['ASIAN'] }
+        let query = {year: ['$OR', 2010, 2011, 2012, 2013, 2014]}
+        let course = {departments: ['ASIAN']}
         expect(checkCourseAgainstQuery(query, course)).toBe(false)
     })
 
@@ -109,66 +109,66 @@ describe('checkCourseAgainstQuery', () => {
     })
 
     it('handles $XOR queries', () => {
-        const query = { departments: ['$XOR', 'ASIAN', 'ART'] }
-        let yesCourse = { departments: ['ASIAN'] }
+        const query = {departments: ['$XOR', 'ASIAN', 'ART']}
+        let yesCourse = {departments: ['ASIAN']}
         expect(checkCourseAgainstQuery(query, yesCourse)).toBe(true)
-        let noCourse = { departments: ['ART', 'ASIAN'] }
+        let noCourse = {departments: ['ART', 'ASIAN']}
         expect(checkCourseAgainstQuery(query, noCourse)).toBe(false)
     })
 
     it('handles lowercases the checked value for substring matches', () => {
-        const query = { title: 'needle' }
-        const course = { title: 'NEEDLE' }
+        const query = {title: 'needle'}
+        const course = {title: 'NEEDLE'}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
     })
 
     it('handles substring matches on "title"', () => {
-        const query = { title: 'needle' }
-        const course = { title: 'needle in a haystack' }
+        const query = {title: 'needle'}
+        const course = {title: 'needle in a haystack'}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
-        const falsecourse = { title: '… in a haystack' }
+        const falsecourse = {title: '… in a haystack'}
         expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
     })
     it('handles substring matches on "name"', () => {
-        const query = { name: 'needle' }
-        const course = { name: 'needle in a haystack' }
+        const query = {name: 'needle'}
+        const course = {name: 'needle in a haystack'}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
-        const falsecourse = { name: '… in a haystack' }
+        const falsecourse = {name: '… in a haystack'}
         expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
     })
     it('handles substring matches on "description"', () => {
-        const query = { description: 'needle' }
-        const course = { description: 'needle in a haystack' }
+        const query = {description: 'needle'}
+        const course = {description: 'needle in a haystack'}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
-        const falsecourse = { description: '… in a haystack' }
+        const falsecourse = {description: '… in a haystack'}
         expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
     })
     it('handles substring matches on "notes"', () => {
-        const query = { notes: 'needle' }
-        const course = { notes: 'needle in a haystack' }
+        const query = {notes: 'needle'}
+        const course = {notes: 'needle in a haystack'}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
-        const falsecourse = { notes: '… in a haystack' }
+        const falsecourse = {notes: '… in a haystack'}
         expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
     })
     it('handles substring matches on "instructors"', () => {
-        const query = { instructors: 'needle' }
-        const course = { instructors: ['Haystack, Needle III'] }
+        const query = {instructors: 'needle'}
+        const course = {instructors: ['Haystack, Needle III']}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
-        const falsecourse = { instructors: '… in a haystack' }
+        const falsecourse = {instructors: '… in a haystack'}
         expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
     })
     it('handles substring matches on "times"', () => {
-        const query = { times: '300' }
-        const course = { times: ['1200-300pm'] }
+        const query = {times: '300'}
+        const course = {times: ['1200-300pm']}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
-        const falsecourse = { times: '… in a haystack' }
+        const falsecourse = {times: '… in a haystack'}
         expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
     })
     it('handles substring matches on "locations"', () => {
-        const query = { locations: '250A' }
-        const course = { locations: ['CHM 250A'] }
+        const query = {locations: '250A'}
+        const course = {locations: ['CHM 250A']}
         expect(checkCourseAgainstQuery(query, course)).toBe(true)
-        const falsecourse = { locations: '… in a haystack' }
+        const falsecourse = {locations: '… in a haystack'}
         expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
     })
 })

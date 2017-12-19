@@ -1,4 +1,4 @@
-import { toPrettyTerm } from '../to-pretty-term'
+import {toPrettyTerm} from '../to-pretty-term'
 
 describe('toPrettyTerm', () => {
     it('converts a term id to a year and semester', () => {

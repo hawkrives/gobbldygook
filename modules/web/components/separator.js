@@ -10,7 +10,7 @@ type SeparatorProps = {
 }
 
 export default function Separator(props: SeparatorProps) {
-    const { className, flex = 1, style, type = 'spacer' } = props
+    const {className, flex = 1, style, type = 'spacer'} = props
 
     let renderedStyle = {
         ...style,
@@ -22,11 +22,11 @@ export default function Separator(props: SeparatorProps) {
     }
 
     if (type === 'line') {
-        renderedStyle = { ...renderedStyle, borderWidth: '1px' }
+        renderedStyle = {...renderedStyle, borderWidth: '1px'}
     } else if (type === 'spacer') {
-        renderedStyle = { ...renderedStyle, padding: '0 0.5em' }
+        renderedStyle = {...renderedStyle, padding: '0 0.5em'}
     } else if (type === 'flex-spacer') {
-        renderedStyle = { ...renderedStyle, flex }
+        renderedStyle = {...renderedStyle, flex}
     }
 
     return <hr className={cx('separator', className)} style={renderedStyle} />

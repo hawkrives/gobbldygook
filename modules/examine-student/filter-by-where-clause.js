@@ -26,7 +26,7 @@ export default function filterByWhereClause(
         distinct,
         fullList,
         counter,
-    }: { distinct: boolean, fullList?: Course[], counter?: Counter } = {}
+    }: {distinct: boolean, fullList?: Course[], counter?: Counter} = {}
 ) {
     // When filtering by an and-clause, we need access to both the
     // entire list of courses, and the result of the prior iteration.
@@ -66,7 +66,7 @@ export default function filterByWhereClause(
             let filtrations = []
             forEach(clause.$or, q => {
                 filtrations = filtrations.concat(
-                    filterByWhereClause(baseList, q, { distinct, counter })
+                    filterByWhereClause(baseList, q, {distinct, counter})
                 )
             })
 
@@ -84,7 +84,9 @@ export default function filterByWhereClause(
     } else {
         // where-clauses *must* be either a 'boolean' or a 'qualification'
         throw new TypeError(
-            `filterByWhereClause: wth kind of type is a "${clause.$type}" clause?`
+            `filterByWhereClause: wth kind of type is a "${
+                clause.$type
+            }" clause?`
         )
     }
 }
@@ -101,7 +103,7 @@ export function filterByQualification(
         distinct = false,
         fullList,
         counter,
-    }: { distinct: boolean, fullList?: Course[], counter?: Counter } = {}
+    }: {distinct: boolean, fullList?: Course[], counter?: Counter} = {}
 ) {
     assertKeys(qualification, '$key', '$operator', '$value')
     const value = qualification.$value
@@ -116,10 +118,12 @@ export function filterByQualification(
                 )
             }
         } else if (value.$type === 'function') {
-            applyQualifictionFunction({ value, fullList, list })
+            applyQualifictionFunction({value, fullList, list})
         } else {
             throw new TypeError(
-                `filterByQualification: ${value.$type} is not a valid type for a query.`
+                `filterByQualification: ${
+                    value.$type
+                } is not a valid type for a query.`
             )
         }
     }
@@ -157,7 +161,9 @@ function applyQualifictionFunction({
 
     if (!func) {
         throw new ReferenceError(
-            `applyQualifictionFunction: ${value.$name} is not a valid function name.`
+            `applyQualifictionFunction: ${
+                value.$name
+            } is not a valid function name.`
         )
     }
 

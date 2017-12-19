@@ -23,7 +23,7 @@ const mapping = {
     departments: 'department',
 }
 export function alterCourse(course) {
-    course = { ...course }
+    course = {...course}
 
     forEach(mapping, (toKey, fromKey) => {
         course[toKey] = course[fromKey]

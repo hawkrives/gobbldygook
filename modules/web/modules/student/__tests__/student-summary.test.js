@@ -7,8 +7,8 @@ import {
     Header,
     StudentSummary,
 } from '../student-summary'
-import { Student } from '../../../../../modules/object-student/student'
-import { shallow } from 'enzyme'
+import {Student} from '../../../../../modules/object-student/student'
+import {shallow} from 'enzyme'
 
 const mockStudent = () =>
     Student({
@@ -201,18 +201,18 @@ describe('DateSummary', () => {
 
 describe('DegreeSummary', () => {
     const studies = [
-        { type: 'degree', name: 'Bachelor of Science' },
-        { type: 'degree', name: 'Bachelor of Music' },
-        { type: 'degree', name: 'Bachelor of Arts' },
-        { type: 'major', name: 'Asian Studies' },
-        { type: 'major', name: 'Biology' },
-        { type: 'major', name: 'Computer Science' },
-        { type: 'concentration', name: 'Africa and the Americas' },
-        { type: 'concentration', name: 'Biomolecular Science' },
-        { type: 'concentration', name: 'China Studies' },
-        { type: 'emphasis', name: 'Emphasis 1' },
-        { type: 'emphasis', name: 'Emphasis 2' },
-        { type: 'emphasis', name: 'Emphasis 3' },
+        {type: 'degree', name: 'Bachelor of Science'},
+        {type: 'degree', name: 'Bachelor of Music'},
+        {type: 'degree', name: 'Bachelor of Arts'},
+        {type: 'major', name: 'Asian Studies'},
+        {type: 'major', name: 'Biology'},
+        {type: 'major', name: 'Computer Science'},
+        {type: 'concentration', name: 'Africa and the Americas'},
+        {type: 'concentration', name: 'Biomolecular Science'},
+        {type: 'concentration', name: 'China Studies'},
+        {type: 'emphasis', name: 'Emphasis 1'},
+        {type: 'emphasis', name: 'Emphasis 2'},
+        {type: 'emphasis', name: 'Emphasis 3'},
     ]
 
     it('renders', () => {
@@ -415,7 +415,7 @@ describe('StudentSummary', () => {
     })
 
     it('renders a student with canGraduate=false', () => {
-        const student = { ...mockStudent(), canGraduate: false }
+        const student = {...mockStudent(), canGraduate: false}
         const tree = shallow(
             <StudentSummary randomizeHello={false} student={student} />
         )
@@ -423,7 +423,7 @@ describe('StudentSummary', () => {
     })
 
     it('renders a student with randomizeHello=true', () => {
-        const student = { ...mockStudent(), canGraduate: false }
+        const student = {...mockStudent(), canGraduate: false}
         const tree = shallow(
             <StudentSummary randomizeHello={true} student={student} />
         )

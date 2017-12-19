@@ -15,7 +15,7 @@ import {
     buildDeptNum,
 } from '../school-st-olaf-college/deptnums'
 
-import { partitionByIndex, splitParagraph, zipToObjectWithArrays } from '../lib'
+import {partitionByIndex, splitParagraph, zipToObjectWithArrays} from '../lib'
 
 import departmentMapping from 'sto-course-related-data/handmade/to_department_abbreviations.json'
 import gereqMapping from 'sto-course-related-data/handmade/to_gereq_abbreviations.json'
@@ -141,7 +141,7 @@ export function buildQueryFromString(queryString = '', opts = {}) {
     // expect from a RegExp.
     // If the regex fails, we grab the string through the end
     // and build the object from what we assume to be the title.
-    let rexTested = rex.exec(queryString) || { index: queryString.length }
+    let rexTested = rex.exec(queryString) || {index: queryString.length}
     let stringThing = queryString.substr(0, rexTested.index)
     queryString = queryString.substring(rexTested.index)
 
@@ -155,8 +155,8 @@ export function buildQueryFromString(queryString = '', opts = {}) {
     let [keys, values] = partitionByIndex(cleaned)
 
     if (stringThing && quacksLikeDeptNum(stringThing)) {
-        let { departments, number } = splitDeptNum(stringThing)
-        let deptnum = buildDeptNum({ departments, number })
+        let {departments, number} = splitDeptNum(stringThing)
+        let deptnum = buildDeptNum({departments, number})
         keys.push('deptnum')
         values.push(deptnum)
     } else if (stringThing) {

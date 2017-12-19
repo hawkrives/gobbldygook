@@ -4,7 +4,7 @@ import includes from 'lodash/includes'
 import every from 'lodash/every'
 import some from 'lodash/some'
 import assertKeys from './assert-keys'
-import type { Course, Qualification } from './types'
+import type {Course, Qualification} from './types'
 
 /**
  * Compares a course property against a MongoDB-style operator
@@ -17,7 +17,7 @@ import type { Course, Qualification } from './types'
  */
 export default function compareCourseToQualification(
     course: Course,
-    { $key, $operator, $value, $type }: Qualification
+    {$key, $operator, $value, $type}: Qualification
 ) {
     if (Array.isArray($value)) {
         throw new TypeError(
@@ -42,7 +42,7 @@ export default function compareCourseToQualification(
 
 function compareCourseToQualificationViaObject(
     course: Course,
-    { $key, $operator, $value, $type }: Qualification
+    {$key, $operator, $value, $type}: Qualification
 ) {
     if (typeof $value !== 'object') {
         throw new TypeError(
@@ -89,14 +89,16 @@ function compareCourseToQualificationViaObject(
         }
     } else {
         throw new TypeError(
-            `compareCourseToQualification(): "${$value.$type}" is not a valid type for a qualification's value.`
+            `compareCourseToQualification(): "${
+                $value.$type
+            }" is not a valid type for a qualification's value.`
         )
     }
 }
 
 function compareCourseToQualificationViaOperator(
     course: Course,
-    { $key, $operator, $value }: Qualification
+    {$key, $operator, $value}: Qualification
 ) {
     // get the actual course out of the object
     course = (course: any).$course || course

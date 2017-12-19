@@ -1,14 +1,14 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { DropTarget } from 'react-dnd'
+import {DropTarget} from 'react-dnd'
 import debug from 'debug'
 const log = debug('web:courses')
 
-import { IDENT_COURSE } from '../../object-student'
+import {IDENT_COURSE} from '../../object-student'
 
 import Icon from './icon'
-import { iosTrashOutline } from '../icons/ionicons'
+import {iosTrashOutline} from '../icons/ionicons'
 
 import './course-removal-box.scss'
 
@@ -26,7 +26,7 @@ function CourseRemovalBox(props: CourseRemovalBoxProps) {
 
     return props.connectDropTarget(
         <div className={className}>
-            <Icon type="block" style={{ fontSize: '3em', textAlign: 'center' }}>
+            <Icon type="block" style={{fontSize: '3em', textAlign: 'center'}}>
                 {iosTrashOutline}
             </Icon>
             Drop a course here to remove it.
@@ -38,7 +38,7 @@ function CourseRemovalBox(props: CourseRemovalBoxProps) {
 const removeCourseTarget = {
     drop(props, monitor: any) {
         const item = monitor.getItem()
-        const { clbid, fromScheduleId, isFromSchedule } = item
+        const {clbid, fromScheduleId, isFromSchedule} = item
         if (isFromSchedule) {
             log('dropped course', item)
             // the studentId is embedded in the passed function
@@ -46,7 +46,7 @@ const removeCourseTarget = {
         }
     },
     canDrop(props, monitor: any) {
-        const { isFromSearch } = monitor.getItem()
+        const {isFromSearch} = monitor.getItem()
         if (!isFromSearch) {
             return true
         }

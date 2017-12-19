@@ -1,7 +1,7 @@
 // @flow
 
 import debug from 'debug'
-import type { InfoFileTypeEnum } from './types'
+import type {InfoFileTypeEnum} from './types'
 const log = debug('worker:load-data:get-cache-store-name')
 
 export default function getCacheStoreName(type: InfoFileTypeEnum) {

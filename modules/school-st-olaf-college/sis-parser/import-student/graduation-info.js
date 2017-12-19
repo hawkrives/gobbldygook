@@ -1,7 +1,7 @@
 'use strict'
 const includes = require('lodash/includes')
-const { extractInformationFromDegreeAudit } = require('./degree-audit')
-const { selectAll } = require('css-select')
+const {extractInformationFromDegreeAudit} = require('./degree-audit')
+const {selectAll} = require('css-select')
 
 module.exports.getGraduationInformation = getGraduationInformation
 function getGraduationInformation(dom) {

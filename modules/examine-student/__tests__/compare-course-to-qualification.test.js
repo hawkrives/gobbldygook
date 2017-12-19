@@ -2,7 +2,7 @@ import compareCourseToQualification from '../compare-course-to-qualification'
 
 describe('compareCourseToQualification', () => {
     it('compares a course property against an operator', () => {
-        const course = { department: ['ART'], number: 310 }
+        const course = {department: ['ART'], number: 310}
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
@@ -13,7 +13,7 @@ describe('compareCourseToQualification', () => {
     })
 
     it('supports $eq', () => {
-        const course = { department: ['ART'], number: 310 }
+        const course = {department: ['ART'], number: 310}
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
@@ -24,7 +24,7 @@ describe('compareCourseToQualification', () => {
     })
 
     it('supports $ne', () => {
-        const course = { department: ['ART'], number: 310 }
+        const course = {department: ['ART'], number: 310}
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
@@ -42,7 +42,7 @@ describe('compareCourseToQualification', () => {
     })
 
     it('supports $lt', () => {
-        const course = { department: ['ART'], number: 200 }
+        const course = {department: ['ART'], number: 200}
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
@@ -60,7 +60,7 @@ describe('compareCourseToQualification', () => {
     })
 
     it('supports $lte', () => {
-        const course = { department: ['ART'], number: 310 }
+        const course = {department: ['ART'], number: 310}
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
@@ -78,7 +78,7 @@ describe('compareCourseToQualification', () => {
     })
 
     it('supports $gt', () => {
-        const course = { department: ['ART'], number: 300 }
+        const course = {department: ['ART'], number: 300}
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
@@ -96,7 +96,7 @@ describe('compareCourseToQualification', () => {
     })
 
     it('supports $gte', () => {
-        const course = { department: ['ART'], number: 310 }
+        const course = {department: ['ART'], number: 310}
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
@@ -114,7 +114,7 @@ describe('compareCourseToQualification', () => {
     })
 
     it('compares checks for items within arrays', () => {
-        const course = { department: ['ART', 'ASIAN'], number: 310 }
+        const course = {department: ['ART', 'ASIAN'], number: 310}
         expect(
             compareCourseToQualification(course, {
                 $key: 'department',
@@ -132,7 +132,7 @@ describe('compareCourseToQualification', () => {
     })
 
     it('$ne checks if an item does not exist within an array', () => {
-        const course = { department: ['ART', 'ASIAN'], number: 310 }
+        const course = {department: ['ART', 'ASIAN'], number: 310}
         expect(
             compareCourseToQualification(course, {
                 $key: 'department',
@@ -143,17 +143,17 @@ describe('compareCourseToQualification', () => {
     })
 
     it('compares courses against a pre-determined query', () => {
-        const course = { department: ['ART', 'ASIAN'], year: 2015 }
+        const course = {department: ['ART', 'ASIAN'], year: 2015}
         const qualification = {
             $key: 'year',
             $operator: '$lte',
-            $value: { '$computed-value': 2016, $type: 'function' },
+            $value: {'$computed-value': 2016, $type: 'function'},
         }
         expect(compareCourseToQualification(course, qualification)).toBe(true)
     })
 
     it('refuses to compare against an array', () => {
-        const course = { department: ['ART', 'ASIAN'], year: 2015 }
+        const course = {department: ['ART', 'ASIAN'], year: 2015}
         const qualification = {
             $key: 'year',
             $operator: '$lte',
@@ -165,11 +165,11 @@ describe('compareCourseToQualification', () => {
     })
 
     it('throws if $value is an object and has an unknown type', () => {
-        const course = { department: ['ART', 'ASIAN'], year: 2015 }
+        const course = {department: ['ART', 'ASIAN'], year: 2015}
         const qualification = {
             $key: 'year',
             $operator: '$lte',
-            $value: { $type: 'unknown' },
+            $value: {$type: 'unknown'},
         }
         expect(() =>
             compareCourseToQualification(course, qualification)
@@ -177,19 +177,19 @@ describe('compareCourseToQualification', () => {
     })
 
     it('handles $or boolean values', () => {
-        const course1 = { department: ['ART', 'ASIAN'], year: 2015 }
-        const course2 = { department: ['ART', 'ASIAN'], year: 2013 }
+        const course1 = {department: ['ART', 'ASIAN'], year: 2015}
+        const course2 = {department: ['ART', 'ASIAN'], year: 2013}
         const qualification = {
             $key: 'year',
             $operator: '$lte',
-            $value: { $type: 'boolean', $booleanType: 'or', $or: [2013, 2015] },
+            $value: {$type: 'boolean', $booleanType: 'or', $or: [2013, 2015]},
         }
         expect(compareCourseToQualification(course1, qualification)).toBe(true)
         expect(compareCourseToQualification(course2, qualification)).toBe(true)
     })
 
     it('handles $and boolean values', () => {
-        const course1 = { department: ['ART', 'ASIAN'], year: 2015 }
+        const course1 = {department: ['ART', 'ASIAN'], year: 2015}
         const qualification1 = {
             $key: 'year',
             $operator: '$lte',
@@ -203,7 +203,7 @@ describe('compareCourseToQualification', () => {
             false
         )
 
-        const course2 = { department: ['ART', 'ASIAN'], year: 2013 }
+        const course2 = {department: ['ART', 'ASIAN'], year: 2013}
         const qualification2 = {
             $key: 'year',
             $operator: '$lte',
@@ -217,11 +217,11 @@ describe('compareCourseToQualification', () => {
     })
 
     it('throws if $value is a boolean but neither $and nor $or', () => {
-        const course = { department: ['ART', 'ASIAN'], year: 2015 }
+        const course = {department: ['ART', 'ASIAN'], year: 2015}
         const qualification = {
             $key: 'year',
             $operator: '$lte',
-            $value: { $type: 'boolean', $booleanType: 'xor', $xor: [] },
+            $value: {$type: 'boolean', $booleanType: 'xor', $xor: []},
         }
         expect(() =>
             compareCourseToQualification(course, qualification)

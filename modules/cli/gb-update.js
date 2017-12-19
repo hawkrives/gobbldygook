@@ -1,5 +1,5 @@
 'use strict'
-const { checkForStaleData } = require('./lib/update-local-data-cache')
+const {checkForStaleData} = require('./lib/update-local-data-cache')
 
 module.exports = function update() {
     // grab info.json

@@ -15,10 +15,10 @@ const uuid = require('uuid/v4')
 const debug = require('debug')
 const log = debug('student-format:student')
 
-const { randomChar } = require('../lib/random-char')
+const {randomChar} = require('../lib/random-char')
 
 const now = new Date()
-const { Schedule } = require('./schedule')
+const {Schedule} = require('./schedule')
 
 module.exports.Student = Student
 function Student(data) {
@@ -51,7 +51,7 @@ function Student(data) {
         student.schedules = fromPairs(
             map(student.schedules, s => [
                 String(s.id),
-                Object.assign({}, s, { id: String(s.id) }),
+                Object.assign({}, s, {id: String(s.id)}),
             ])
         )
     }
@@ -70,35 +70,35 @@ function changeStudentName(student, newName) {
     if (student.name === newName) {
         return student
     }
-    return Object.assign({}, student, { name: newName })
+    return Object.assign({}, student, {name: newName})
 }
 module.exports.changeStudentAdvisor = changeStudentAdvisor
 function changeStudentAdvisor(student, newAdvisor) {
     if (student.advisor === newAdvisor) {
         return student
     }
-    return Object.assign({}, student, { advisor: newAdvisor })
+    return Object.assign({}, student, {advisor: newAdvisor})
 }
 module.exports.changeStudentCreditsNeeded = changeStudentCreditsNeeded
 function changeStudentCreditsNeeded(student, newCreditsNeeded) {
     if (student.creditsNeeded === newCreditsNeeded) {
         return student
     }
-    return Object.assign({}, student, { creditsNeeded: newCreditsNeeded })
+    return Object.assign({}, student, {creditsNeeded: newCreditsNeeded})
 }
 module.exports.changeStudentMatriculation = changeStudentMatriculation
 function changeStudentMatriculation(student, newMatriculation) {
     if (student.matriculation === newMatriculation) {
         return student
     }
-    return Object.assign({}, student, { matriculation: newMatriculation })
+    return Object.assign({}, student, {matriculation: newMatriculation})
 }
 module.exports.changeStudentGraduation = changeStudentGraduation
 function changeStudentGraduation(student, newGraduation) {
     if (student.graduation === newGraduation) {
         return student
     }
-    return Object.assign({}, student, { graduation: newGraduation })
+    return Object.assign({}, student, {graduation: newGraduation})
 }
 module.exports.changeStudentSetting = changeStudentSetting
 function changeStudentSetting(student, key, value) {
@@ -106,7 +106,7 @@ function changeStudentSetting(student, key, value) {
         return student
     }
     return Object.assign({}, student, {
-        settings: Object.assign({}, student.settings, { [key]: value }),
+        settings: Object.assign({}, student.settings, {[key]: value}),
     })
 }
 
@@ -158,12 +158,12 @@ function destroyScheduleFromStudent(student, scheduleId) {
             schedules[otherSchedKey] = Object.assign(
                 {},
                 schedules[otherSchedKey],
-                { active: true }
+                {active: true}
             )
         }
     }
 
-    return Object.assign({}, student, { schedules })
+    return Object.assign({}, student, {schedules})
 }
 
 module.exports.addCourseToSchedule = addCourseToSchedule
@@ -186,7 +186,9 @@ function addCourseToSchedule(student, scheduleId, clbid) {
     }
 
     log(
-        `adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`
+        `adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${
+            schedule.semester
+        }.${schedule.index})`
     )
 
     schedule.clbids = schedule.clbids.concat(clbid)
@@ -220,7 +222,9 @@ function removeCourseFromSchedule(student, scheduleId, clbid) {
     }
 
     log(
-        `removing clbid ${clbid} from schedule ${schedule.id} (${schedule.year}-${schedule.semester}.${schedule.index})`
+        `removing clbid ${clbid} from schedule ${schedule.id} (${
+            schedule.year
+        }-${schedule.semester}.${schedule.index})`
     )
 
     schedule.clbids = reject(schedule.clbids, id => id === clbid)
@@ -233,10 +237,7 @@ function removeCourseFromSchedule(student, scheduleId, clbid) {
 }
 
 module.exports.moveCourseToSchedule = moveCourseToSchedule
-function moveCourseToSchedule(
-    student,
-    { fromScheduleId, toScheduleId, clbid }
-) {
+function moveCourseToSchedule(student, {fromScheduleId, toScheduleId, clbid}) {
     log(
         `moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`
     )
@@ -265,13 +266,13 @@ module.exports.setOverrideOnStudent = setOverrideOnStudent
 function setOverrideOnStudent(student, key, value) {
     let overrides = Object.assign({}, student.overrides)
     overrides[key] = value
-    return Object.assign({}, student, { overrides })
+    return Object.assign({}, student, {overrides})
 }
 
 module.exports.removeOverrideFromStudent = removeOverrideFromStudent
 function removeOverrideFromStudent(student, key) {
     let overrides = omit(student.overrides, key)
-    return Object.assign({}, student, { overrides })
+    return Object.assign({}, student, {overrides})
 }
 
 module.exports.addFabricationToStudent = addFabricationToStudent
@@ -287,7 +288,7 @@ function addFabricationToStudent(student, fabrication) {
     let fabrications = Object.assign({}, student.fabrications, {
         [fabrication.clbid]: fabrication,
     })
-    return Object.assign({}, student, { fabrications })
+    return Object.assign({}, student, {fabrications})
 }
 
 module.exports.removeFabricationFromStudent = removeFabricationFromStudent
@@ -296,11 +297,11 @@ function removeFabricationFromStudent(student, fabricationId) {
         throw new TypeError('removeCourseFromSchedule: clbid must be a string')
     }
     let fabrications = omit(student.fabrications, fabricationId)
-    return Object.assign({}, student, { fabrications })
+    return Object.assign({}, student, {fabrications})
 }
 
 module.exports.moveScheduleInStudent = moveScheduleInStudent
-function moveScheduleInStudent(student, scheduleId, { year, semester } = {}) {
+function moveScheduleInStudent(student, scheduleId, {year, semester} = {}) {
     if (year === undefined && semester === undefined) {
         throw new RangeError(
             'moveScheduleInStudent: Either year or semester must be provided.'
@@ -372,7 +373,7 @@ function renameScheduleInStudent(student, scheduleId, title) {
 }
 
 module.exports.reorderCourseInSchedule = reorderCourseInSchedule
-function reorderCourseInSchedule(student, scheduleId, { clbid, index }) {
+function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
     if (!isNumber(clbid)) {
         throw new TypeError('reorderCourse(): clbid must be a number')
     }

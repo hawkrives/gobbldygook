@@ -4,13 +4,13 @@ import Button from '../../components/button'
 import cx from 'classnames'
 import Autosize from 'react-input-autosize'
 import Select from 'react-select'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import 'react-select/dist/react-select.css'
-import { initStudent } from '../../redux/students/actions/init-student'
-import { filterAreaList } from '../../../object-student'
+import {initStudent} from '../../redux/students/actions/init-student'
+import {filterAreaList} from '../../../object-student'
 
 import './method-manual.scss'
 
@@ -39,11 +39,11 @@ class ManualCreationScreen extends React.Component {
     }
 
     getAreaOptions = type => {
-        let { graduation } = this.state
+        let {graduation} = this.state
 
-        let filtered = filterAreaList(this.props.areas, { graduation })
-        filtered = filter(filtered, { type })
-        let options = map(filtered, ({ name, type, revision }) => ({
+        let filtered = filterAreaList(this.props.areas, {graduation})
+        filtered = filter(filtered, {type})
+        let options = map(filtered, ({name, type, revision}) => ({
             name,
             type,
             revision,
@@ -54,11 +54,11 @@ class ManualCreationScreen extends React.Component {
     }
 
     handleAreaChange = type => values => {
-        this.setState({ [type]: values })
+        this.setState({[type]: values})
     }
 
     handleNameChange = ev => {
-        this.setState({ name: ev.target.value })
+        this.setState({name: ev.target.value})
     }
 
     handleMatriculationChange = ev => {
@@ -95,11 +95,11 @@ class ManualCreationScreen extends React.Component {
             errors.push('Graduation is invalid.')
         }
 
-        this.setState(() => ({ error: errors.join('\n') }))
+        this.setState(() => ({error: errors.join('\n')}))
     }
 
     onCreateStudent = () => {
-        this.setState({ submitted: true })
+        this.setState({submitted: true})
 
         let studies = [].concat(
             this.state.degree,
@@ -109,7 +109,7 @@ class ManualCreationScreen extends React.Component {
         )
 
         // pick out only the values that we want
-        studies = map(studies, ({ name, revision, type }) => ({
+        studies = map(studies, ({name, revision, type}) => ({
             name,
             revision,
             type,
@@ -178,7 +178,7 @@ class ManualCreationScreen extends React.Component {
                         <label htmlFor="degreeSelector">Degrees:</label>
                         <Select
                             multi
-                            inputProps={{ id: 'degreeSelector' }}
+                            inputProps={{id: 'degreeSelector'}}
                             value={this.state.degree}
                             options={this.getAreaOptions('degree')}
                             onChange={this.handleAreaChange('degree')}
@@ -188,7 +188,7 @@ class ManualCreationScreen extends React.Component {
                         <label htmlFor="majorSelector">Majors:</label>
                         <Select
                             multi
-                            inputProps={{ id: 'majorSelector' }}
+                            inputProps={{id: 'majorSelector'}}
                             value={this.state.major}
                             options={this.getAreaOptions('major')}
                             onChange={this.handleAreaChange('major')}
@@ -200,7 +200,7 @@ class ManualCreationScreen extends React.Component {
                         </label>
                         <Select
                             multi
-                            inputProps={{ id: 'concentrationSelector' }}
+                            inputProps={{id: 'concentrationSelector'}}
                             value={this.state.concentration}
                             options={this.getAreaOptions('concentration')}
                             onChange={this.handleAreaChange('concentration')}
@@ -212,7 +212,7 @@ class ManualCreationScreen extends React.Component {
                         </label>
                         <Select
                             multi
-                            inputProps={{ id: 'emphasisSelector' }}
+                            inputProps={{id: 'emphasisSelector'}}
                             value={this.state.emphasis}
                             options={this.getAreaOptions('emphasis')}
                             onChange={this.handleAreaChange('emphasis')}
@@ -240,6 +240,6 @@ let mapState = state => ({
     areasLoading: state.areas.isLoading,
 })
 
-let mapDispatch = dispatch => ({ dispatch })
+let mapDispatch = dispatch => ({dispatch})
 
 export default connect(mapState, mapDispatch)(withRouter(ManualCreationScreen))

@@ -1,8 +1,8 @@
 // @flow
 'use strict'
 
-const { semesterName } = require('./semester-name')
-const { expandYear } = require('./expand-year')
+const {semesterName} = require('./semester-name')
+const {expandYear} = require('./expand-year')
 
 /* Takes a term and makes it pretty.
  * eg. {in: 20121, out: Fall 2012-13}

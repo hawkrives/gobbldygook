@@ -1,4 +1,4 @@
-import { findWordForProgress } from '../find-word-for-progress'
+import {findWordForProgress} from '../find-word-for-progress'
 
 describe('findWordForProgress', () => {
     it('properly handles each tenth of the float', () => {

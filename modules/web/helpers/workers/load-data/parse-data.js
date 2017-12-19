@@ -1,7 +1,7 @@
 // @flow
 
 import yaml from 'js-yaml'
-import type { InfoFileTypeEnum } from './types'
+import type {InfoFileTypeEnum} from './types'
 
 export default function parseData(raw: string, type: InfoFileTypeEnum) {
     try {

@@ -1,10 +1,10 @@
-import { evaluate } from '../examine-student/evaluate'
+import {evaluate} from '../examine-student/evaluate'
 import nomnom from 'nomnom'
 import fs from 'graceful-fs'
-import { default as compute } from '../examine-student/compute'
+import {default as compute} from '../examine-student/compute'
 import loadArea from '../cli/lib/load-area'
 import yaml from 'js-yaml'
-import { isRequirementName, humanizeOperator } from '../examine-student'
+import {isRequirementName, humanizeOperator} from '../examine-student'
 import get from 'lodash/get'
 import toPairs from 'lodash/toPairs'
 import map from 'lodash/map'
@@ -136,7 +136,7 @@ function stringifyReference(expr) {
     return `*${expr.$requirement}`
 }
 
-function stringifyQualification({ $key, $operator, $value }) {
+function stringifyQualification({$key, $operator, $value}) {
     if ($value instanceof Array) {
         const msg =
             "stringifyQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)"
@@ -164,10 +164,12 @@ function stringifyQualification({ $key, $operator, $value }) {
                 throw new TypeError(msg)
             }
             return map(ds, val =>
-                stringifyQualification({ $key, $operator, $value: val })
+                stringifyQualification({$key, $operator, $value: val})
             ).join(conjunction)
         } else {
-            const msg = `stringifyQualification(): "${$value.$type}" is not a valid type for a qualification's value.`
+            const msg = `stringifyQualification(): "${
+                $value.$type
+            }" is not a valid type for a qualification's value.`
             throw new TypeError(msg)
         }
     } else {
@@ -263,7 +265,7 @@ function proseify(requirement, name, path, depth = 0) {
     return indent(depth ? '  ' : '', `${resultString}${prose}`)
 }
 
-const checkAgainstArea = ({ courses, overrides }, args) => areaData => {
+const checkAgainstArea = ({courses, overrides}, args) => areaData => {
     let result = {}
     let path = []
     if (args.path) {
@@ -274,7 +276,7 @@ const checkAgainstArea = ({ courses, overrides }, args) => areaData => {
             overrides,
         })
     } else {
-        result = evaluate({ courses, overrides }, areaData)
+        result = evaluate({courses, overrides}, areaData)
         path = [areaData.type, areaData.name]
     }
 
@@ -293,10 +295,10 @@ const checkAgainstArea = ({ courses, overrides }, args) => areaData => {
     }
 }
 
-function run({ courses, overrides, areas }, args) {
+function run({courses, overrides, areas}, args) {
     Promise.all(areas.map(loadArea)).then(areaData => {
         for (const area of areaData) {
-            checkAgainstArea({ courses, overrides }, args)(area)
+            checkAgainstArea({courses, overrides}, args)(area)
         }
     })
 }

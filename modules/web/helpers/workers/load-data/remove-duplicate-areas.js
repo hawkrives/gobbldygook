@@ -45,7 +45,7 @@ export function generateOps(allAreas: AreaOfStudy[]) {
         // remove the longest-pathed one from the list
         const toRemove = list.slice(0, -1)
 
-        ops = { ...ops, ...buildRemoveAreaOps(toRemove) }
+        ops = {...ops, ...buildRemoveAreaOps(toRemove)}
     })
 
     // remove any that are invalid
@@ -55,7 +55,7 @@ export function generateOps(allAreas: AreaOfStudy[]) {
         requiredKeys.some(key => area[key] === undefined)
     )
 
-    return { ...ops, ...buildRemoveAreaOps(invalidAreas) }
+    return {...ops, ...buildRemoveAreaOps(invalidAreas)}
 }
 
 export default function removeDuplicateAreas() {

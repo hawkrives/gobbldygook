@@ -1,7 +1,7 @@
 // @flow
 import checkForCourse from './check-for-course'
 import filterByWhereClause from './filter-by-where-clause'
-import type { FilterExpression, Course } from './types'
+import type {FilterExpression, Course} from './types'
 
 /**
  * Filters a list of courses by way of a filter expression.

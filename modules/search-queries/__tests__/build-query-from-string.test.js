@@ -1,4 +1,4 @@
-import { buildQueryFromString } from '../build-query-from-string'
+import {buildQueryFromString} from '../build-query-from-string'
 
 describe('buildQueryFromString', () => {
     it('handles an empty string', () => {
@@ -44,7 +44,7 @@ describe('buildQueryFromString', () => {
     it('builds a query string even with no keys', () => {
         let query = 'History of Asia'
 
-        expect(buildQueryFromString(query, { words: true })).toMatchSnapshot()
+        expect(buildQueryFromString(query, {words: true})).toMatchSnapshot()
     })
 
     it('can also search for deptnums even with no keys', () => {
@@ -107,7 +107,7 @@ describe('buildQueryFromString', () => {
     it('maps multiple multi-word queries to the same words array', () => {
         let query = 'title: Japan description: Otaku'
 
-        expect(buildQueryFromString(query, { words: true })).toMatchSnapshot()
+        expect(buildQueryFromString(query, {words: true})).toMatchSnapshot()
     })
 
     it('makes professors properly title-cased', () => {
@@ -123,7 +123,7 @@ describe('buildQueryFromString', () => {
             buildQueryFromString('prof: olaf a. hall-holt')
         ).toMatchSnapshot()
         expect(
-            buildQueryFromString('prof: olaf a. hall-holt', { profWords: true })
+            buildQueryFromString('prof: olaf a. hall-holt', {profWords: true})
         ).toMatchSnapshot()
     })
 

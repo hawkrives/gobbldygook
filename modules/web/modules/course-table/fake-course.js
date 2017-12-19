@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { Container, Title, SummaryRow } from '../course/compact'
+import {Container, Title, SummaryRow} from '../course/compact'
 
 type PropTypes = {
     className: string,

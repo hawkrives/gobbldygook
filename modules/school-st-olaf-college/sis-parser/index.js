@@ -1,6 +1,6 @@
 'use strict'
 
-const { convertStudent } = require('./convert-imported-student')
+const {convertStudent} = require('./convert-imported-student')
 
 const {
     getStudentInfo,

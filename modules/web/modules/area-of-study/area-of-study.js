@@ -1,15 +1,15 @@
 // @flow
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import cx from 'classnames'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 import Button from '../../components/button'
 import Icon from '../../components/icon'
 import Requirement from './requirement'
 import ProgressBar from '../../components/progress-bar'
-import { compareProps } from '../../../lib'
-import { close, chevronUp, chevronDown } from '../../icons/ionicons'
+import {compareProps} from '../../../lib'
+import {close, chevronUp, chevronDown} from '../../icons/ionicons'
 import has from 'lodash/has'
 import pathToOverride from '../../../examine-student/path-to-override'
 import {
@@ -24,7 +24,7 @@ type AreaOfStudyType = {
     _area: Object,
     _checked?: boolean,
     _error?: string,
-    _progress?: { at: number, of: number },
+    _progress?: {at: number, of: number},
     isCustom?: boolean,
     name: string,
     revision: string,
@@ -62,17 +62,17 @@ class AreaOfStudyContainer extends Component<Props, State> {
 
     startRemovalConfirmation = (ev: Event) => {
         ev.preventDefault()
-        this.setState({ confirmRemoval: true })
+        this.setState({confirmRemoval: true})
     }
 
     endRemovalConfirmation = (ev: Event) => {
         ev.preventDefault()
-        this.setState({ confirmRemoval: false })
+        this.setState({confirmRemoval: false})
     }
 
     toggleAreaExpansion = (ev: Event) => {
         ev.preventDefault()
-        this.setState({ isOpen: !this.state.isOpen })
+        this.setState({isOpen: !this.state.isOpen})
     }
 
     addOverride = (path: string[], ev: Event) => {
@@ -103,7 +103,7 @@ class AreaOfStudyContainer extends Component<Props, State> {
 
     render() {
         const props = this.props
-        const { isOpen, confirmRemoval: showConfirmRemoval } = this.state
+        const {isOpen, confirmRemoval: showConfirmRemoval} = this.state
 
         const {
             type = '???',
@@ -154,7 +154,7 @@ class AreaOfStudyContainer extends Component<Props, State> {
                     </span>
                 </div>
                 <ProgressBar
-                    className={cx('area--progress', { error: Boolean(error) })}
+                    className={cx('area--progress', {error: Boolean(error)})}
                     colorful={true}
                     value={progressAt}
                     max={progressOf}
@@ -171,7 +171,8 @@ class AreaOfStudyContainer extends Component<Props, State> {
                     <Button
                         className="area--actually-remove-area"
                         onClick={ev =>
-                            props.onRemoveArea({ name, type, revision }, ev)}
+                            props.onRemoveArea({name, type, revision}, ev)
+                        }
                     >
                         Remove
                     </Button>
@@ -224,7 +225,7 @@ class AreaOfStudyContainer extends Component<Props, State> {
 }
 
 const mapDispatch = dispatch =>
-    bindActionCreators({ setOverride, removeOverride }, dispatch)
+    bindActionCreators({setOverride, removeOverride}, dispatch)
 
 // $FlowFixMe
 export default connect(null, mapDispatch)(AreaOfStudyContainer)

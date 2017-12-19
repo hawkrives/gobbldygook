@@ -7,16 +7,13 @@ const pkg = require('./package.json')
 const webpack = require('webpack')
 const url = require('url')
 
-// TODO: remove me after upgrading to babel-loader@7
-process.noDeprecation = true
-
 const {
     DefinePlugin,
     HotModuleReplacementPlugin,
     LoaderOptionsPlugin,
     NormalModuleReplacementPlugin,
     NamedModulesPlugin,
-    optimize: { CommonsChunkPlugin, UglifyJsPlugin },
+    optimize: {CommonsChunkPlugin},
 } = webpack
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -25,6 +22,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
@@ -118,11 +116,7 @@ function config() {
         stats.children = false
     }
 
-    const entry = Object.assign(
-        {},
-        { main: ['./modules/web/index.js'] },
-        entries
-    )
+    const entry = Object.assign({}, {main: ['./modules/web/index.js']}, entries)
 
     if (isDevelopment) {
         // add dev server and hotloading clientside code
@@ -188,16 +182,24 @@ function config() {
 
             <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-            ${isProduction
-                ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
-                : ''}
-            ${isProduction
-                ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
-                : ''}
+            ${
+                isProduction
+                    ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
+                    : ''
+            }
+            ${
+                isProduction
+                    ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
+                    : ''
+            }
 
-            ${context.css
-                ? `<link rel="stylesheet" href="${publicPath}${context.css}">`
-                : ''}
+            ${
+                context.css
+                    ? `<link rel="stylesheet" href="${publicPath}${
+                          context.css
+                      }">`
+                    : ''
+            }
 
             <body><main id="gobbldygook"></main></body>
 
@@ -259,28 +261,19 @@ function config() {
         new NamedModulesPlugin(),
 
         // copy files – into the webpack {output} directory
-        new CopyWebpackPlugin([
-            { from: 'modules/web/static/*', flatten: true },
-        ]),
+        new CopyWebpackPlugin([{from: 'modules/web/static/*', flatten: true}]),
     ]
 
     if (isProduction) {
         // minify in production
         plugins.push(
             new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
                 sourceMap: true,
-                compress: {
+                uglifyOptions: {
+                    ecma: 8,
                     warnings: false,
-                    pure_getters: true,
-                    screw_ie8: true,
-                    unsafe: true,
-                },
-                mangle: {
-                    screw_ie8: true,
-                },
-                output: {
-                    comments: false,
-                    screw_ie8: true,
                 },
             })
         )
@@ -307,7 +300,7 @@ function config() {
 
     const babelLoader = {
         loader: 'babel-loader',
-        options: { cacheDirectory: !isCI },
+        options: {cacheDirectory: !isCI},
     }
     const babelForNodeModules = {
         loader: 'babel-loader',
@@ -316,7 +309,7 @@ function config() {
             plugins: ['transform-es2015-modules-commonjs'],
         },
     }
-    const urlLoader = { loader: 'url-loader', options: { limit: 10000 } }
+    const urlLoader = {loader: 'url-loader', options: {limit: 10000}}
     const cssLoader = isProduction
         ? ExtractTextPlugin.extract({
               fallback: 'style-loader',
@@ -330,11 +323,6 @@ function config() {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: [babelLoader],
-            },
-            {
-                test: /\.js$/,
-                include: /node_modules[/](p-.*|pify|delay)[/].*[.]js$/,
-                use: [babelForNodeModules],
             },
             {
                 test: /\.worker\.js$/,

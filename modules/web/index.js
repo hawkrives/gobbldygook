@@ -8,7 +8,7 @@ const log = debug('web')
 
 // Include React and react-dom.render
 import React from 'react'
-import { render } from 'react-dom'
+import {render} from 'react-dom'
 
 // Include google analytics (in production)
 import startAnalytics from './analytics'
@@ -30,7 +30,7 @@ import configureStore from './redux'
 import ReduxWrapper from './redux-wrapper'
 const store = configureStore()
 
-import { loadAllAreas } from './redux/areas/actions'
+import {loadAllAreas} from './redux/areas/actions'
 store.dispatch(loadAllAreas())
 
 // for debugging

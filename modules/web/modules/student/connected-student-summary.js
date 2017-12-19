@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 import {
     changeName,
@@ -8,7 +8,7 @@ import {
     changeGraduation,
 } from '../../redux/students/actions/change'
 
-import { StudentSummary } from './student-summary'
+import {StudentSummary} from './student-summary'
 
 type Student = Object
 

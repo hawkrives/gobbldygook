@@ -1,5 +1,5 @@
 // @flow
-import { css } from 'styled-components'
+import {css} from 'styled-components'
 
 // colors
 export const background = '#e9eaed'

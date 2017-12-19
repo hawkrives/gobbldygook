@@ -1,5 +1,5 @@
 const uniqueId = require('lodash/uniqueId')
-import { status, text } from '../../lib/fetch-helpers'
+import {status, text} from '../../lib/fetch-helpers'
 import debug from 'debug'
 const log = debug('worker:load-data')
 
@@ -17,7 +17,7 @@ const worker = new LoadDataWorker()
 
 worker.onerror = msg => log('[main] received error from load-data worker:', msg)
 
-worker.onmessage = ({ data: [resultId, type, actionInfo] }) => {
+worker.onmessage = ({data: [resultId, type, actionInfo]}) => {
     if (resultId === null && type === 'dispatch') {
         const action = actions[actionInfo.type][actionInfo.action](
             ...actionInfo.args
@@ -32,7 +32,7 @@ function loadDataFile(url) {
         const cachebuster = Date.now()
 
         // This is inside of the function so that it doesn't get unregistered too early
-        function onMessage({ data: [resultId, type, contents] }) {
+        function onMessage({data: [resultId, type, contents]}) {
             if (resultId === sourceId) {
                 worker.removeEventListener('message', onMessage)
 
@@ -65,7 +65,7 @@ export function checkSupport() {
     return new Promise(resolve => {
         let sourceId = '__check-idb-worker-support'
         // This is inside of the function so that it doesn't get unregistered too early
-        function onMessage({ data: [resultId, type, contents] }) {
+        function onMessage({data: [resultId, type, contents]}) {
             if (resultId === sourceId) {
                 worker.removeEventListener('message', onMessage)
 

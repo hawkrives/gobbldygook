@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import map from 'lodash/map'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { undo, redo } from '../../redux/students/actions/undo'
-import { loadStudents } from '../../redux/students/actions/load-students'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {undo, redo} from '../../redux/students/actions/undo'
+import {loadStudents} from '../../redux/students/actions/load-students'
 
-function Student({ undo, redo, student }) {
+function Student({undo, redo, student}) {
     if (student.isLoading) {
         return <div>Loading student…</div>
     }
@@ -20,14 +20,14 @@ function Student({ undo, redo, student }) {
             <button
                 disabled={!canUndo}
                 onClick={undo}
-                style={{ color: canUndo ? '#444' : '#888' }}
+                style={{color: canUndo ? '#444' : '#888'}}
             >
                 Undo
             </button>
             <button
                 disabled={!canRedo}
                 onClick={redo}
-                style={{ color: canRedo ? '#444' : '#888' }}
+                style={{color: canRedo ? '#444' : '#888'}}
             >
                 Redo
             </button>{' '}
@@ -84,6 +84,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ undo, redo, loadStudents }, dispatch)
+    bindActionCreators({undo, redo, loadStudents}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(DegubContainer)

@@ -2,13 +2,15 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import Button from './button'
 import Icon from './icon'
 import Toolbar from './toolbar'
 import Separator from './separator'
 import CourseRemovalBox from './course-removal-box'
-import { undo, redo } from '../redux/students/actions/undo'
-import { removeCourse } from '../redux/students/actions/courses'
+import {undo, redo} from '../redux/students/actions/undo'
+import {removeCourse} from '../redux/students/actions/courses'
 import {
     iosUndo,
     iosUndoOutline,
@@ -52,7 +54,7 @@ const SidebarElement = styled.aside`
 `
 
 function Sidebar(props: PropTypes) {
-    const { undo, redo } = props
+    const {undo, redo} = props
     const studentId = props.student.data.present.id
     const canUndo = props.student.data.past.length > 0
     const canRedo = props.student.data.future.length > 0
@@ -97,7 +99,8 @@ function Sidebar(props: PropTypes) {
 
             <CourseRemovalBox
                 removeCourse={(scheduleId, clbid) =>
-                    props.removeCourse(studentId, scheduleId, clbid)}
+                    props.removeCourse(studentId, scheduleId, clbid)
+                }
             />
 
             {props.children}
@@ -106,7 +109,7 @@ function Sidebar(props: PropTypes) {
 }
 
 const mapDispatch = dispatch =>
-    bindActionCreators({ undo, redo, removeCourse }, dispatch)
+    bindActionCreators({undo, redo, removeCourse}, dispatch)
 
 // $FlowFixMe
 export default connect(undefined, mapDispatch)(Sidebar)

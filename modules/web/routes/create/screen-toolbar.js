@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Button from '../../components/button'
 import Toolbar from '../../components/toolbar'
 
-export default function ScreenToolbar({ onNext, onBack }) {
+export default function ScreenToolbar({onNext, onBack}) {
     return (
         <Toolbar>
             <Button type="raised" disabled={!onBack} onClick={onBack}>

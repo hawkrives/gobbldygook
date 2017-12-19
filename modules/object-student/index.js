@@ -1,10 +1,10 @@
 'use strict'
 
-const { areaTypeConstants } = require('./area-types')
+const {areaTypeConstants} = require('./area-types')
 
-const { encodeStudent, prepareStudentForSave } = require('./encode-student')
+const {encodeStudent, prepareStudentForSave} = require('./encode-student')
 
-const { filterAreaList } = require('./filter-area-list')
+const {filterAreaList} = require('./filter-area-list')
 
 const {
     findWarnings,
@@ -13,7 +13,7 @@ const {
     checkForTimeConflicts,
 } = require('./find-course-warnings')
 
-const { isCurrentSemester } = require('./is-current-semester')
+const {isCurrentSemester} = require('./is-current-semester')
 
 const {
     IDENT_COURSE,
@@ -23,9 +23,9 @@ const {
     IDENT_SCHEDULE,
 } = require('./item-types')
 
-const { Schedule } = require('./schedule')
+const {Schedule} = require('./schedule')
 
-const { sortStudiesByType } = require('./sort-studies-by-type')
+const {sortStudiesByType} = require('./sort-studies-by-type')
 
 const {
     Student,
@@ -52,9 +52,9 @@ const {
     reorderCourseInSchedule,
 } = require('./student')
 
-const { validateSchedule } = require('./validate-schedule')
+const {validateSchedule} = require('./validate-schedule')
 
-const { validateSchedules } = require('./validate-schedules')
+const {validateSchedules} = require('./validate-schedules')
 
 module.exports = {
     areaTypeConstants,

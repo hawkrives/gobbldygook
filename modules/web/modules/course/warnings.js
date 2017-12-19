@@ -2,7 +2,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { PlainList, ListItem } from '../../components/list'
+import {PlainList, ListItem} from '../../components/list'
 import Icon from '../../components/icon'
 import {
     iosClockOutline,
