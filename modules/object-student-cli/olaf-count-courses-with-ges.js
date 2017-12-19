@@ -12,7 +12,7 @@ import groupBy from 'lodash/groupBy'
 import yaml from 'js-yaml'
 
 function findCoursesWithGes(term) {
-    return search({ riddles: [{ term }] })
+    return search({riddles: [{term}]})
 }
 
 export async function cli() {

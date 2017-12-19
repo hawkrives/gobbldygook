@@ -47,7 +47,7 @@ type ListProps = {
 }
 
 export default function List(props: ListProps) {
-    const { className, children, type = 'inline' } = props
+    const {className, children, type = 'inline'} = props
     const contents = ReactChildren.map(
         children,
         child =>

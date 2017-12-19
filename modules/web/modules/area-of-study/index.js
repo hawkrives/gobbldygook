@@ -1,1 +1,1 @@
-export { default } from './area-of-study'
+export {default} from './area-of-study'

@@ -13,7 +13,7 @@ import collectMatches from './collect-matches'
 import collectTakenCourses from './collect-taken-courses'
 import computeCountWithOperator from './compute-count-with-operator'
 import countCourses from './count-courses'
-import { countCredits } from './count-credits'
+import {countCredits} from './count-credits'
 import countDepartments from './count-departments'
 import excludeCourse from './exclude-course'
 import filterByWhereClause from './filter-by-where-clause'
@@ -84,7 +84,7 @@ export default function computeChunk({
     // Modifiers, occurrences, references, and wheres don't need isNeeded,
     // because they don't result in recursive calls to computeChunk.
     if (expr.$type === 'boolean') {
-        ;({ computedResult, matches } = computeBoolean({
+        ;({computedResult, matches} = computeBoolean({
             expr,
             ctx,
             courses,
@@ -92,25 +92,25 @@ export default function computeChunk({
             isNeeded,
         }))
     } else if (expr.$type === 'course') {
-        ;({ computedResult } = computeCourse({
+        ;({computedResult} = computeCourse({
             expr,
             courses,
             dirty,
             isNeeded,
         }))
     } else if (expr.$type === 'modifier') {
-        ;({ computedResult, matches, counted } = computeModifier({
+        ;({computedResult, matches, counted} = computeModifier({
             expr,
             ctx,
             courses,
         }))
     } else if (expr.$type === 'occurrence') {
-        ;({ computedResult, matches, counted } = computeOccurrence({
+        ;({computedResult, matches, counted} = computeOccurrence({
             expr,
             courses,
         }))
     } else if (expr.$type === 'of') {
-        ;({ computedResult, matches, counted } = computeOf({
+        ;({computedResult, matches, counted} = computeOf({
             expr,
             ctx,
             courses,
@@ -118,9 +118,9 @@ export default function computeChunk({
             isNeeded,
         }))
     } else if (expr.$type === 'reference') {
-        ;({ computedResult, matches } = computeReference({ expr, ctx }))
+        ;({computedResult, matches} = computeReference({expr, ctx}))
     } else if (expr.$type === 'where') {
-        ;({ computedResult, matches, counted } = computeWhere({
+        ;({computedResult, matches, counted} = computeWhere({
             expr,
             courses,
         }))
@@ -133,7 +133,7 @@ export default function computeChunk({
     }
 
     if (fulfillment) {
-        ;({ computedResult, matches, counted } = applyFulfillmentToResult({
+        ;({computedResult, matches, counted} = applyFulfillmentToResult({
             fulfillment,
             expr,
             computedResult,
@@ -233,7 +233,7 @@ export function computeBoolean({
         computedResult = some(results)
     } else if (expr.$booleanType === 'and') {
         const results = map(expr.$and, req =>
-            computeChunk({ expr: req, ctx, courses, dirty, isNeeded })
+            computeChunk({expr: req, ctx, courses, dirty, isNeeded})
         )
         computedResult = every(results)
     } else {
@@ -272,7 +272,7 @@ export function computeCourse({
     const foundCourse = findCourse(expr.$course, courses)
 
     if (!foundCourse) {
-        return { computedResult: false }
+        return {computedResult: false}
     }
 
     const keysNotFromQuery = xor(keys(expr.$course), keys(foundCourse))
@@ -281,20 +281,20 @@ export function computeCourse({
     }
 
     expr._request = expr.$course
-    expr.$course = { ...expr.$course, ...foundCourse }
+    expr.$course = {...expr.$course, ...foundCourse}
     let match = expr.$course
     const crsident = simplifyCourse(match)
 
     if (dirty.has(crsident)) {
-        return { computedResult: false, match }
+        return {computedResult: false, match}
     }
 
     expr._taken = true
     if (isNeeded) {
         dirty.add(crsident)
-        return { computedResult: true, match }
+        return {computedResult: true, match}
     } else {
-        return { computedResult: false, match }
+        return {computedResult: false, match}
     }
 }
 
@@ -520,7 +520,7 @@ export function computeOf({
  * @param {Requirement} ctx - the requirement context
  * @returns {boolean} - the result of the reference expression
  */
-type ComputeReferenceResult = { matches: ?(Course[]), computedResult: boolean }
+type ComputeReferenceResult = {matches: ?(Course[]), computedResult: boolean}
 export function computeReference({
     expr,
     ctx,

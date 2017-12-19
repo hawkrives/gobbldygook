@@ -7,7 +7,7 @@ const has = require('lodash/has')
 function zipToObjectWithArrays<T>(
     keys: string[],
     vals: T[]
-): { [key: string]: Array<T> } {
+): {[key: string]: Array<T>} {
     let arr = zip(keys, vals)
 
     return reduce(

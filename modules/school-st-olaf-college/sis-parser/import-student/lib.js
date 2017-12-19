@@ -1,5 +1,5 @@
 'use strict'
-const { parseHtml } = require('../parse-html')
+const {parseHtml} = require('../parse-html')
 const forOwn = require('lodash/forOwn')
 const forEach = require('lodash/forEach')
 const uuid = require('uuid/v4')

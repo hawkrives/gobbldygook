@@ -1,6 +1,6 @@
 // @flow
 
-import { css } from 'styled-components'
+import {css} from 'styled-components'
 
 export const contentBlockSpacing = css`
     padding-top: ${props => props.theme.pageEdgePadding};

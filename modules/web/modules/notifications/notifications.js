@@ -2,15 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import map from 'lodash/map'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { removeNotification } from './redux/actions'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import {removeNotification} from './redux/actions'
 
 import Notification from './notification'
 
 import './notifications.scss'
 
-export const Notifications = ({ notifications, removeNotification }) => (
+export const Notifications = ({notifications, removeNotification}) => (
     <ul className="notification-list">
         {map(notifications, (n, i) => (
             <Notification
@@ -32,7 +32,7 @@ const selectState = state => ({
 })
 
 const selectDispatch = dispatch => ({
-    ...bindActionCreators({ removeNotification }, dispatch),
+    ...bindActionCreators({removeNotification}, dispatch),
 })
 
 export default connect(selectState, selectDispatch)(Notifications)

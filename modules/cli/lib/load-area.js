@@ -1,7 +1,7 @@
 'use strict'
 const pify = require('pify')
 const yaml = require('js-yaml')
-const { enhanceHanson: enhance } = require('../../hanson-format')
+const {enhanceHanson: enhance} = require('../../hanson-format')
 
 const map = require('lodash/map')
 const filter = require('lodash/filter')
@@ -11,7 +11,7 @@ const maxBy = require('lodash/maxBy')
 const findAreas = require('./find-areas')
 const fs = pify(require('graceful-fs'))
 
-async function getArea({ name, type, revision }) {
+async function getArea({name, type, revision}) {
     type = type.toLowerCase()
     name = name.toLowerCase()
 
@@ -33,13 +33,13 @@ async function getArea({ name, type, revision }) {
         return maxBy(filteredAreas, area => Number(area.revision.split('-')[0]))
     }
 
-    return find(filteredAreas, { revision })
+    return find(filteredAreas, {revision})
 }
 
-async function loadArea({ name, type, revision, source, isCustom }) {
+async function loadArea({name, type, revision, source, isCustom}) {
     let obj = isCustom
         ? yaml.safeLoad(source)
-        : await getArea({ name, type, revision })
+        : await getArea({name, type, revision})
 
     let result
     try {

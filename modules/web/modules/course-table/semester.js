@@ -2,16 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
-import { semesterName } from '../../../school-st-olaf-college/course-info'
-import { countCredits } from '../../../examine-student/count-credits'
-import { IDENT_COURSE } from '../../../object-student/item-types'
-import { DropTarget } from 'react-dnd'
+import {semesterName} from '../../../school-st-olaf-college/course-info'
+import {countCredits} from '../../../examine-student/count-credits'
+import {IDENT_COURSE} from '../../../object-student/item-types'
+import {DropTarget} from 'react-dnd'
 import includes from 'lodash/includes'
 
 import Button from '../../components/button'
 import Icon from '../../components/icon'
-import { InlineList, InlineListItem } from '../../components/list'
-import { close, search } from '../../icons/ionicons'
+import {InlineList, InlineListItem} from '../../components/list'
+import {close, search} from '../../icons/ionicons'
 
 import debug from 'debug'
 const log = debug('web:react')
@@ -102,8 +102,8 @@ const TitleText = styled.h1`
 `
 
 function Semester(props) {
-    const { studentId, semester, year, canDrop, schedule } = props
-    const { courses, conflicts, hasConflict } = schedule
+    const {studentId, semester, year, canDrop, schedule} = props
+    const {courses, conflicts, hasConflict} = schedule
 
     // `recommendedCredits` is 4 for fall/spring and 1 for everything else
     const recommendedCredits = semester === 1 || semester === 3 ? 4 : 1
@@ -191,7 +191,7 @@ const semesterTarget = {
     drop(props, monitor) {
         log('dropped course')
         const item = monitor.getItem()
-        const { clbid, fromScheduleId, isFromSchedule } = item
+        const {clbid, fromScheduleId, isFromSchedule} = item
         const toSchedule = props.schedule
 
         if (isFromSchedule) {

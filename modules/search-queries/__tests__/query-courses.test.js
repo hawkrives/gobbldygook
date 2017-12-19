@@ -1,4 +1,4 @@
-import { queryCourses } from '../query-courses'
+import {queryCourses} from '../query-courses'
 
 describe('queryCourses', () => {
     it('queries a list of courses', () => {
@@ -6,7 +6,7 @@ describe('queryCourses', () => {
             departments: ['AMCON'],
             year: [2013],
         }
-        let courses = [{ departments: ['AMCON'], year: 2013 }]
+        let courses = [{departments: ['AMCON'], year: 2013}]
         expect(queryCourses(query, courses)).toMatchSnapshot()
     })
 
@@ -15,8 +15,8 @@ describe('queryCourses', () => {
             year: ['$OR', 2010, 2011, 2012, 2013, 2014],
         }
         let courses = [
-            { departments: ['AMCON'], year: 2013 },
-            { departments: ['ASIAN'], year: 2012 },
+            {departments: ['AMCON'], year: 2013},
+            {departments: ['ASIAN'], year: 2012},
         ]
         expect(queryCourses(query, courses)).toMatchSnapshot()
     })

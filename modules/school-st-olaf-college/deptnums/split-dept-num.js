@@ -1,7 +1,7 @@
 // @flow
 'use strict'
 
-const { deptNumRegex } = require('./dept-num-regex')
+const {deptNumRegex} = require('./dept-num-regex')
 
 /**
  * Splits a deptnum string (like "AS/RE 230A") into its components,

@@ -1,14 +1,14 @@
-import { loadStudent as loadStudentFunc } from '../../../helpers/load-student'
-import { checkStudent } from './check-student'
+import {loadStudent as loadStudentFunc} from '../../../helpers/load-student'
+import {checkStudent} from './check-student'
 
-import { LOAD_STUDENT, BEGIN_LOAD_STUDENT } from '../constants'
+import {LOAD_STUDENT, BEGIN_LOAD_STUDENT} from '../constants'
 
 function beginLoading(id) {
-    return { type: BEGIN_LOAD_STUDENT, payload: { id } }
+    return {type: BEGIN_LOAD_STUDENT, payload: {id}}
 }
 
 function actuallyLoadStudent(id) {
-    return { type: LOAD_STUDENT, payload: loadStudentFunc(id) }
+    return {type: LOAD_STUDENT, payload: loadStudentFunc(id)}
 }
 
 function shouldLoad(state, id) {

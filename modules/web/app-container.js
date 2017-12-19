@@ -4,8 +4,8 @@ import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DragDropContext } from 'react-dnd'
-import { ThemeProvider } from 'styled-components'
+import {DragDropContext} from 'react-dnd'
+import {ThemeProvider} from 'styled-components'
 import StudentPicker from './modules/student-picker'
 import * as theme from './theme'
 
@@ -24,7 +24,7 @@ export class App extends React.Component {
     }
 
     render() {
-        let { content, overlay } = this.props
+        let {content, overlay} = this.props
         return (
             <DocumentTitle title="Gobbldygook">
                 <ThemeProvider theme={theme}>

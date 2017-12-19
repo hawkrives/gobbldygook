@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
-import { isCurrentSemester } from '../../../object-student/is-current-semester'
+import {isCurrentSemester} from '../../../object-student/is-current-semester'
 
 import Loading from '../../components/loading'
-import { destroySchedules } from '../../redux/students/actions/schedules'
-import { moveCourse, addCourse } from '../../redux/students/actions/courses'
+import {destroySchedules} from '../../redux/students/actions/schedules'
+import {moveCourse, addCourse} from '../../redux/students/actions/courses'
 import Semester from './semester'
 
-import { getSchedule } from '../../helpers/get-schedule'
+import {getSchedule} from '../../helpers/get-schedule'
 
 export class SemesterContainer extends React.Component {
     static propTypes = {
@@ -33,7 +33,7 @@ export class SemesterContainer extends React.Component {
     }
 
     removeSemester = () => {
-        const { student, semester, year } = this.props
+        const {student, semester, year} = this.props
         const thisSemesterSchedules = filter(
             student.schedules,
             isCurrentSemester(year, semester)
@@ -43,7 +43,7 @@ export class SemesterContainer extends React.Component {
     }
 
     render() {
-        const { student, semester, year, addCourse, moveCourse } = this.props
+        const {student, semester, year, addCourse, moveCourse} = this.props
         const schedule = getSchedule(student, year, semester)
 
         if (schedule.isValidating) {
@@ -65,7 +65,7 @@ export class SemesterContainer extends React.Component {
 }
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ destroySchedules, moveCourse, addCourse }, dispatch)
+    bindActionCreators({destroySchedules, moveCourse, addCourse}, dispatch)
 
 const connected = connect(undefined, mapDispatchToProps)(SemesterContainer)
 

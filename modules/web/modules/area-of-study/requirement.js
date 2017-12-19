@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import filter from 'lodash/filter'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
@@ -7,7 +7,7 @@ import map from 'lodash/map'
 import isRequirementName from '../../../examine-student/is-requirement-name'
 
 import Icon from '../../components/icon'
-import { iosBoltOutline, iosBolt } from '../../icons/ionicons'
+import {iosBoltOutline, iosBolt} from '../../icons/ionicons'
 import Filter from './expression--filter'
 import Expression from './expression'
 import Button from '../../components/button'
@@ -33,7 +33,7 @@ type PropTypes = {
 }
 
 function Requirement(props: PropTypes) {
-    const { topLevel = false } = props
+    const {topLevel = false} = props
     const childKeys = filter(keys(props), isRequirementName)
 
     const wasEvaluated = props.result && props.result._checked
@@ -143,7 +143,7 @@ export default class ExpandableRequirement extends Component {
     }
 
     handleToggleOpen = () => {
-        this.setState({ open: !this.state.open })
+        this.setState({open: !this.state.open})
     }
 
     render() {

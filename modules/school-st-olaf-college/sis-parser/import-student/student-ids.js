@@ -1,5 +1,5 @@
 'use strict'
-const { selectAll } = require('css-select')
+const {selectAll} = require('css-select')
 const map = require('lodash/map')
 const filter = require('lodash/filter')
 const uniq = require('lodash/uniq')

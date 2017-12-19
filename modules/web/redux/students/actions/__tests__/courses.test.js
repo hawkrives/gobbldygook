@@ -1,4 +1,4 @@
-import { addCourse, removeCourse, reorderCourse, moveCourse } from '../courses'
+import {addCourse, removeCourse, reorderCourse, moveCourse} from '../courses'
 
 import {
     ADD_COURSE,

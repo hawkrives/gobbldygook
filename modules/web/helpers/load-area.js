@@ -1,6 +1,6 @@
 // @flow
 import db from './db'
-import { enhanceHanson } from '../../hanson-format'
+import {enhanceHanson} from '../../hanson-format'
 import some from 'lodash/some'
 import maxBy from 'lodash/maxBy'
 import find from 'lodash/find'
@@ -8,7 +8,7 @@ import kebabCase from 'lodash/kebabCase'
 import yaml from 'js-yaml'
 import debug from 'debug'
 import pluralizeArea from '../../examine-student/pluralize-area'
-import { status, text } from '../../lib/fetch-helpers'
+import {status, text} from '../../lib/fetch-helpers'
 const log = debug('worker:load-area')
 
 function resolveArea(areas, query) {
@@ -36,7 +36,7 @@ type AreaQueryType = {
 
 const baseUrl = 'https://hawkrives.github.io/gobbldygook-area-data'
 const networkCache = Object.create(null)
-function loadAreaFromNetwork({ name, type, revision }: AreaQueryType) {
+function loadAreaFromNetwork({name, type, revision}: AreaQueryType) {
     const id = `{${name}, ${type}, ${revision}}`
     if (id in networkCache) {
         return networkCache[id]
@@ -60,9 +60,9 @@ function loadAreaFromNetwork({ name, type, revision }: AreaQueryType) {
 }
 
 function loadAreaFromDatabase(areaQuery: AreaQueryType) {
-    const { name, type, revision } = areaQuery
+    const {name, type, revision} = areaQuery
 
-    let dbQuery: any = { name: [name], type: [type] }
+    let dbQuery: any = {name: [name], type: [type]}
     if (revision && revision !== 'latest') {
         dbQuery.revision = [revision]
     }
@@ -85,7 +85,7 @@ function loadAreaFromDatabase(areaQuery: AreaQueryType) {
                 result = resolveArea(result, dbQuery)
             }
 
-            return { ...areaQuery, _area: enhanceHanson(result) }
+            return {...areaQuery, _area: enhanceHanson(result)}
         })
         .catch(err => {
             log(err) // we can probably remove this in the future
@@ -101,9 +101,9 @@ const promiseCache = Object.create(null)
 
 export default function getArea(
     areaQuery: AreaQueryType,
-    { cache = [] }: { cache: any[] }
+    {cache = []}: {cache: any[]}
 ) {
-    const { name, type, revision, source, isCustom } = areaQuery
+    const {name, type, revision, source, isCustom} = areaQuery
     let cachedArea = find(
         cache,
         a =>
@@ -133,7 +133,7 @@ export default function getArea(
         getAreaFrom = loadAreaFromNetwork
     }
 
-    promiseCache[id] = getAreaFrom({ name, type, revision, source, isCustom })
+    promiseCache[id] = getAreaFrom({name, type, revision, source, isCustom})
 
     return promiseCache[id].then(area => {
         // console.log(area)

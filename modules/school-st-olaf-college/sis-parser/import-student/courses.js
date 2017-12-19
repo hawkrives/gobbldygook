@@ -6,8 +6,8 @@ const {
     removeInternalWhitespace,
     getTextItems,
 } = require('./lib')
-const { selectAll, selectOne } = require('css-select')
-const { COURSES_URL } = require('./urls')
+const {selectAll, selectOne} = require('css-select')
+const {COURSES_URL} = require('./urls')
 
 function convertRowToCourse(term, sisRow) {
     // the columns go: deptnum, lab, name, halfsemester, credits, passfail, gereqs, times, locations, instructors
@@ -52,7 +52,7 @@ function getCourses(studentId, term) {
         stnum: studentId,
         searchyearterm: term,
     }
-    return fetchHtml(COURSES_URL, { method: 'POST' }, body).then(response =>
+    return fetchHtml(COURSES_URL, {method: 'POST'}, body).then(response =>
         getCoursesFromHtml(response, term)
     )
 }

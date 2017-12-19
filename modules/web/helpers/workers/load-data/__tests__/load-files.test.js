@@ -18,10 +18,10 @@ jest.mock('../needs-update', () => jest.fn(() => Promise.resolve()))
 jest.mock('../update-database', () => jest.fn(() => Promise.resolve()))
 jest.mock('../remove-duplicate-areas', () => jest.fn(() => Promise.resolve()))
 jest.mock('../../../../../lib/fetch-helpers', () => {
-    return { status: x => x, text: x => x }
+    return {status: x => x, text: x => x}
 })
 
-const goodFetch = jest.fn(url => Promise.resolve(JSON.stringify({ url })))
+const goodFetch = jest.fn(url => Promise.resolve(JSON.stringify({url})))
 const badFetch = jest.fn(() => Promise.reject(new Error('could not fetch')))
 
 global.fetch = jest.fn(() => {
@@ -59,10 +59,10 @@ const mockArgs = type => {
 describe('filterForRecentCourses', () => {
     test('only returns json filerefs', () => {
         const fileRefs = [
-            { type: 'json', year: 2000, path: '', hash: '' },
-            { type: 'xml', year: 2000, path: '', hash: '' },
-            { type: 'csv', year: 2000, path: '', hash: '' },
-            { type: 'json', year: 2000, path: '', hash: '' },
+            {type: 'json', year: 2000, path: '', hash: ''},
+            {type: 'xml', year: 2000, path: '', hash: ''},
+            {type: 'csv', year: 2000, path: '', hash: ''},
+            {type: 'json', year: 2000, path: '', hash: ''},
         ]
         const actual = fileRefs.filter(f =>
             load.filterForRecentCourses(f, 2000)
@@ -73,11 +73,11 @@ describe('filterForRecentCourses', () => {
 
     test('only returns filerefs since $year', () => {
         const fileRefs = [
-            { type: 'json', year: 2000, path: '', hash: '' },
-            { type: 'json', year: 2001, path: '', hash: '' },
-            { type: 'json', year: 2002, path: '', hash: '' },
-            { type: 'json', year: 2003, path: '', hash: '' },
-            { type: 'json', year: 2004, path: '', hash: '' },
+            {type: 'json', year: 2000, path: '', hash: ''},
+            {type: 'json', year: 2001, path: '', hash: ''},
+            {type: 'json', year: 2002, path: '', hash: ''},
+            {type: 'json', year: 2003, path: '', hash: ''},
+            {type: 'json', year: 2004, path: '', hash: ''},
         ]
         const year = 2002
         const actual = fileRefs.filter(f =>
@@ -90,27 +90,27 @@ describe('filterForRecentCourses', () => {
 
 describe('finishUp', () => {
     test('calls refreshCourses if working on a course index', () => {
-        const { type, notification } = mockArgs('courses')
+        const {type, notification} = mockArgs('courses')
 
-        load.finishUp({ type, notification })
+        load.finishUp({type, notification})
 
         expect(dispatch.refreshCourses).toHaveBeenCalledTimes(1)
         expect(dispatch.refreshAreas).not.toHaveBeenCalled()
     })
 
     test('calls refreshAreas if working on an area index', () => {
-        const { type, notification } = mockArgs('areas')
+        const {type, notification} = mockArgs('areas')
 
-        load.finishUp({ type, notification })
+        load.finishUp({type, notification})
 
         expect(dispatch.refreshAreas).toHaveBeenCalledTimes(1)
         expect(dispatch.refreshCourses).not.toHaveBeenCalled()
     })
 
     test('removes the notification', () => {
-        const { type, notification } = mockArgs('areas')
+        const {type, notification} = mockArgs('areas')
 
-        load.finishUp({ type, notification })
+        load.finishUp({type, notification})
 
         expect(notification.remove).toHaveBeenCalledTimes(1)
     })
@@ -139,8 +139,8 @@ describe('slurpIntoDatabase', () => {
     test('starts the notification', async () => {
         const args = mockArgs('courses')
         const fileRefs = [
-            { type: 'json', year: 2000, path: '', hash: '' },
-            { type: 'json', year: 2001, path: '', hash: '' },
+            {type: 'json', year: 2000, path: '', hash: ''},
+            {type: 'json', year: 2001, path: '', hash: ''},
         ]
         await load.slurpIntoDatabase(args, fileRefs)
         expect(args.notification.start).toHaveBeenCalledTimes(1)
@@ -150,10 +150,10 @@ describe('slurpIntoDatabase', () => {
     test('calls updateDatabase once for each file given', async () => {
         const args = mockArgs('courses')
         const fileRefs = [
-            { type: 'json', year: 2000, path: '', hash: '' },
-            { type: 'json', year: 2001, path: '', hash: '' },
-            { type: 'json', year: 2002, path: '', hash: '' },
-            { type: 'json', year: 2003, path: '', hash: '' },
+            {type: 'json', year: 2000, path: '', hash: ''},
+            {type: 'json', year: 2001, path: '', hash: ''},
+            {type: 'json', year: 2002, path: '', hash: ''},
+            {type: 'json', year: 2003, path: '', hash: ''},
         ]
         await load.slurpIntoDatabase(args, fileRefs)
         expect(updateDatabase).toHaveBeenCalledTimes(fileRefs.length)
@@ -165,10 +165,10 @@ describe('filterFiles', () => {
         needsUpdate.mockImplementation(() => Promise.resolve(true))
         const args = mockArgs('courses')
         const fileRefs = [
-            { type: 'json', year: 2000, path: '', hash: '' },
-            { type: 'json', year: 2001, path: '', hash: '' },
-            { type: 'json', year: 2002, path: '', hash: '' },
-            { type: 'json', year: 2003, path: '', hash: '' },
+            {type: 'json', year: 2000, path: '', hash: ''},
+            {type: 'json', year: 2001, path: '', hash: ''},
+            {type: 'json', year: 2002, path: '', hash: ''},
+            {type: 'json', year: 2003, path: '', hash: ''},
         ]
         await load.filterFiles(args, fileRefs)
         expect(needsUpdate).toHaveBeenCalledTimes(fileRefs.length)
@@ -183,10 +183,10 @@ describe('filterFiles', () => {
 
         const args = mockArgs('courses')
         const fileRefs = [
-            { type: 'json', year: 2000, path: '1.json', hash: '' },
-            { type: 'json', year: 2001, path: '2.json', hash: '' },
-            { type: 'json', year: 2002, path: '3.json', hash: '' },
-            { type: 'json', year: 2003, path: '4.json', hash: '' },
+            {type: 'json', year: 2000, path: '1.json', hash: ''},
+            {type: 'json', year: 2001, path: '2.json', hash: ''},
+            {type: 'json', year: 2002, path: '3.json', hash: ''},
+            {type: 'json', year: 2003, path: '4.json', hash: ''},
         ]
         const actual = await load.filterFiles(args, fileRefs)
         const expected = [fileRefs[0], fileRefs[2]]
@@ -201,10 +201,10 @@ describe('getFilesToLoad', () => {
         const index = {
             type: 'areas',
             files: [
-                { type: 'yaml', path: '1.json', hash: '' },
-                { type: 'yaml', path: '2.json', hash: '' },
-                { type: 'yaml', path: '3.json', hash: '' },
-                { type: 'yaml', path: '4.json', hash: '' },
+                {type: 'yaml', path: '1.json', hash: ''},
+                {type: 'yaml', path: '2.json', hash: ''},
+                {type: 'yaml', path: '3.json', hash: ''},
+                {type: 'yaml', path: '4.json', hash: ''},
             ],
         }
         const actual = await load.getFilesToLoad(args, index)
@@ -217,10 +217,10 @@ describe('getFilesToLoad', () => {
         const index = {
             type: 'courses',
             files: [
-                { type: 'json', year: 2000, path: '1.json', hash: '' },
-                { type: 'json', year: 2001, path: '2.json', hash: '' },
-                { type: 'json', year: 2002, path: '3.json', hash: '' },
-                { type: 'json', year: 2003, path: '4.json', hash: '' },
+                {type: 'json', year: 2000, path: '1.json', hash: ''},
+                {type: 'json', year: 2001, path: '2.json', hash: ''},
+                {type: 'json', year: 2002, path: '3.json', hash: ''},
+                {type: 'json', year: 2003, path: '4.json', hash: ''},
             ],
         }
         const actual = await load.getFilesToLoad(args, index)
@@ -235,10 +235,10 @@ describe('proceedWithUpdate', () => {
         const index = {
             type: 'areas',
             files: [
-                { type: 'yaml', path: '1.json', hash: '' },
-                { type: 'yaml', path: '2.json', hash: '' },
-                { type: 'yaml', path: '3.json', hash: '' },
-                { type: 'yaml', path: '4.json', hash: '' },
+                {type: 'yaml', path: '1.json', hash: ''},
+                {type: 'yaml', path: '2.json', hash: ''},
+                {type: 'yaml', path: '3.json', hash: ''},
+                {type: 'yaml', path: '4.json', hash: ''},
             ],
         }
         await load.proceedWithUpdate(baseUrl, index)
@@ -256,10 +256,10 @@ describe('proceedWithUpdate', () => {
         const index = {
             type: 'areas',
             files: [
-                { type: 'yaml', path: '1.json', hash: '' },
-                { type: 'yaml', path: '2.json', hash: '' },
-                { type: 'yaml', path: '3.json', hash: '' },
-                { type: 'yaml', path: '4.json', hash: '' },
+                {type: 'yaml', path: '1.json', hash: ''},
+                {type: 'yaml', path: '2.json', hash: ''},
+                {type: 'yaml', path: '3.json', hash: ''},
+                {type: 'yaml', path: '4.json', hash: ''},
             ],
         }
 
@@ -280,10 +280,10 @@ describe('loadFiles', () => {
         const fetchResult = {
             type: 'areas',
             files: [
-                { type: 'yaml', path: '1.json', hash: '' },
-                { type: 'yaml', path: '2.json', hash: '' },
-                { type: 'yaml', path: '3.json', hash: '' },
-                { type: 'yaml', path: '4.json', hash: '' },
+                {type: 'yaml', path: '1.json', hash: ''},
+                {type: 'yaml', path: '2.json', hash: ''},
+                {type: 'yaml', path: '3.json', hash: ''},
+                {type: 'yaml', path: '4.json', hash: ''},
             ],
         }
         global.fetch.mockImplementationOnce(() => Promise.resolve(fetchResult))

@@ -1,1 +1,1 @@
-export { default } from './semester-detail'
+export {default} from './semester-detail'

@@ -7,7 +7,7 @@ import map from 'lodash/map'
 import Button from '../../components/button'
 import Semester from './semester-container'
 
-import { findFirstAvailableSemester } from '../../helpers/find-first-available-semester'
+import {findFirstAvailableSemester} from '../../helpers/find-first-available-semester'
 import {
     expandYear,
     semesterName,
@@ -102,10 +102,10 @@ export default class Year extends React.PureComponent {
     }
 
     render() {
-        const { student, year } = this.props
-        const { schedules } = student
+        const {student, year} = this.props
+        const {schedules} = student
 
-        let valid = filter(schedules, { active: true, year: year })
+        let valid = filter(schedules, {active: true, year: year})
         let sorted = sortBy(valid, 'semester')
         let terms = map(sorted, schedule => (
             <Semester

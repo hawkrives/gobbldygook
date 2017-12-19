@@ -4,9 +4,9 @@ import map from 'lodash/map'
 import noop from 'lodash/noop'
 import styled from 'styled-components'
 
-import { InlineList, InlineListItem } from '../../components/list'
+import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
-import { buildDeptNum } from '../../../school-st-olaf-college/deptnums'
+import {buildDeptNum} from '../../../school-st-olaf-college/deptnums'
 import CourseWarnings from './warnings'
 
 export const Container = styled.article`
@@ -68,7 +68,7 @@ export default class CompactCourse extends React.PureComponent {
     }
 
     render() {
-        const { course, conflicts = [], index, onClick = noop } = this.props
+        const {course, conflicts = [], index, onClick = noop} = this.props
 
         return (
             <Container className={this.props.className} onClick={onClick}>

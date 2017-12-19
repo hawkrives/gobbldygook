@@ -10,15 +10,15 @@ import {
     convertStudent,
     semesterName,
 } from '../../../school-st-olaf-college'
-import { BrowserExtensionsComponent } from '../../components/browser-extensions'
-import { getCourse } from '../../helpers/get-courses'
-import { StudentSummary } from '../../modules/student/student-summary'
+import {BrowserExtensionsComponent} from '../../components/browser-extensions'
+import {getCourse} from '../../helpers/get-courses'
+import {StudentSummary} from '../../modules/student/student-summary'
 import map from 'lodash/map'
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
-import { RadioGroup, Radio } from 'react-radio-group'
-import { initStudent } from '../../redux/students/actions/init-student'
-import { connect } from 'react-redux'
+import {RadioGroup, Radio} from 'react-radio-group'
+import {initStudent} from '../../redux/students/actions/init-student'
+import {connect} from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
 import './method-import.scss'
 import debug from 'debug'
@@ -72,15 +72,15 @@ class SISImportScreen extends React.Component {
             })
             .catch(err => {
                 log(err)
-                this.setState({ loggedIn: false, checkingLogin: false })
+                this.setState({loggedIn: false, checkingLogin: false})
                 if (err instanceof ExtensionNotLoadedError) {
                     this.setState({
                         error: 'The extension is not loaded properly.',
                     })
                 } else if (err instanceof ExtensionTooOldError) {
-                    this.setState({ error: 'The extension is too old.' })
+                    this.setState({error: 'The extension is too old.'})
                 } else {
-                    this.setState({ error: serializeError(err) })
+                    this.setState({error: serializeError(err)})
                 }
             })
     }
@@ -88,10 +88,10 @@ class SISImportScreen extends React.Component {
     handleImportData = () => {
         getStudentInfo(this.state.selectedId)
             .then(info => convertStudent(info, getCourse))
-            .then(student => this.setState({ student }))
+            .then(student => this.setState({student}))
             .catch(err => {
                 log(err)
-                this.setState({ error: serializeError(err) })
+                this.setState({error: serializeError(err)})
             })
     }
 
@@ -102,12 +102,12 @@ class SISImportScreen extends React.Component {
     }
 
     handleSelectId = value => {
-        this.setState({ selectedId: value })
+        this.setState({selectedId: value})
         this.handleImportData()
     }
 
     render() {
-        let { student, checkingLogin, loggedIn, error, ids } = this.state
+        let {student, checkingLogin, loggedIn, error, ids} = this.state
 
         return (
             <div>
@@ -189,7 +189,7 @@ class SISImportScreen extends React.Component {
     }
 }
 
-const StudentInfo = ({ student }: { student: mixed }) => (
+const StudentInfo = ({student}: {student: mixed}) => (
     <div>
         <StudentSummary student={student} showMessage={false} />
         <ul>
@@ -216,6 +216,6 @@ const StudentInfo = ({ student }: { student: mixed }) => (
     </div>
 )
 
-let mapDispatch = dispatch => ({ dispatch })
+let mapDispatch = dispatch => ({dispatch})
 
 export default connect(undefined, mapDispatch)(withRouter(SISImportScreen))

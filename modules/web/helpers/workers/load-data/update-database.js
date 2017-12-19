@@ -2,15 +2,15 @@
 
 import series from 'p-series'
 import debug from 'debug'
-import { status, text } from '../../../../lib/fetch-helpers'
+import {status, text} from '../../../../lib/fetch-helpers'
 
 import parseData from './parse-data'
 import cleanPriorData from './clean-prior-data'
 import storeData from './store-data'
 import cacheItemHash from './cache-item-hash'
-import { Notification } from './lib-dispatch'
+import {Notification} from './lib-dispatch'
 
-import type { InfoFileTypeEnum, InfoFileRef } from './types'
+import type {InfoFileTypeEnum, InfoFileRef} from './types'
 
 const log = debug('worker:load-data:update-database')
 const fetchText = (...args) =>
@@ -22,7 +22,7 @@ export default function updateDatabase(
     type: InfoFileTypeEnum,
     infoFileBase: string,
     notification: Notification,
-    { path, hash }: InfoFileRef
+    {path, hash}: InfoFileRef
 ) {
     log(path)
 

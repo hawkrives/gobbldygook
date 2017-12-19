@@ -4,8 +4,8 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
 import DocumentTitle from 'react-document-title'
-import { isCurrentSemester } from '../../../object-student/is-current-semester'
-import { semesterName } from '../../../school-st-olaf-college/course-info'
+import {isCurrentSemester} from '../../../object-student/is-current-semester'
+import {semesterName} from '../../../school-st-olaf-college/course-info'
 import debug from 'debug'
 const log = debug('web:react')
 import styled from 'styled-components'
@@ -45,7 +45,7 @@ export default class SemesterDetail extends React.Component {
 
     render() {
         log('SemesterDetail#render')
-        const { year, semester } = this.props.params
+        const {year, semester} = this.props.params
         const student = this.props.student.data.present
 
         const schedules = map(

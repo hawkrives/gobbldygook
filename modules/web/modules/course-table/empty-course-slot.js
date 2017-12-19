@@ -12,6 +12,6 @@ const Course = styled(FakeCourse)`
     }
 `
 
-export default function EmptyCourseSlot(props: { className: string }) {
+export default function EmptyCourseSlot(props: {className: string}) {
     return <Course title="Empty Slot" className={props.className} />
 }

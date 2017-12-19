@@ -1,13 +1,13 @@
 // @flow
-import { REFRESH_COURSES } from '../constants'
+import {REFRESH_COURSES} from '../constants'
 
 // import flatten from 'lodash/flatten'
 // import values from 'lodash/values'
 // import map from 'lodash/map'
 // import {getCoursesFromSchedules} from '../../../helpers/get-courses'
 
-export function refreshCourses(): { type: string } {
-    return { type: REFRESH_COURSES }
+export function refreshCourses(): {type: string} {
+    return {type: REFRESH_COURSES}
 }
 
 export function loadCourses() {

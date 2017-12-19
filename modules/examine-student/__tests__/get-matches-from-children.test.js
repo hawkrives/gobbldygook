@@ -5,7 +5,7 @@ describe('getMatchesFromChildren', () => {
         const requirement = {
             result: {
                 $type: 'modifier',
-                $count: { $operator: '$gte', $num: 2 },
+                $count: {$operator: '$gte', $num: 2},
                 $what: 'course',
                 $from: 'children',
                 $children: '$all',
@@ -14,7 +14,7 @@ describe('getMatchesFromChildren', () => {
                 $type: 'requirement',
                 result: {
                     $type: 'of',
-                    $count: { $operator: '$gte', $num: 2 },
+                    $count: {$operator: '$gte', $num: 2},
                     $of: [
                         {
                             $type: 'course',
@@ -24,7 +24,7 @@ describe('getMatchesFromChildren', () => {
                         },
                         {
                             $type: 'of',
-                            $count: { $operator: '$gte', $num: 2 },
+                            $count: {$operator: '$gte', $num: 2},
                             $of: [
                                 {
                                     $type: 'course',
@@ -42,17 +42,17 @@ describe('getMatchesFromChildren', () => {
                         },
                         {
                             $type: 'where',
-                            $count: { $operator: '$gte', $num: 1 },
+                            $count: {$operator: '$gte', $num: 1},
                             $where: {
                                 $type: 'qualification',
                                 $key: 'gereqs',
-                                $value: { $eq: 'EIN', $type: 'operator' },
+                                $value: {$eq: 'EIN', $type: 'operator'},
                             },
                             _matches: [],
                         },
                         {
                             $type: 'occurrence',
-                            $count: { $operator: '$gte', $num: 2 },
+                            $count: {$operator: '$gte', $num: 2},
                             course: {
                                 $type: 'course',
                                 department: ['THEAT'],
@@ -123,7 +123,7 @@ describe('getMatchesFromChildren', () => {
         const requirement = {
             result: {
                 $type: 'modifier',
-                $count: { $operator: '$gte', $num: 2 },
+                $count: {$operator: '$gte', $num: 2},
                 $what: 'course',
                 $from: 'children',
                 $children: '$all',
@@ -132,7 +132,7 @@ describe('getMatchesFromChildren', () => {
                 $type: 'requirement',
                 result: {
                     $type: 'of',
-                    $count: { $operator: '$gte', $num: 2 },
+                    $count: {$operator: '$gte', $num: 2},
                     $of: [
                         {
                             $type: 'course',
@@ -143,7 +143,7 @@ describe('getMatchesFromChildren', () => {
                         },
                         {
                             $type: 'of',
-                            $count: { $operator: '$gte', $num: 2 },
+                            $count: {$operator: '$gte', $num: 2},
                             $of: [
                                 {
                                     $type: 'course',
@@ -161,11 +161,11 @@ describe('getMatchesFromChildren', () => {
                         },
                         {
                             $type: 'where',
-                            $count: { $operator: '$gte', $num: 1 },
+                            $count: {$operator: '$gte', $num: 1},
                             $where: {
                                 $type: 'qualification',
                                 $key: 'gereqs',
-                                $value: { $eq: 'AQR', $type: 'operator' },
+                                $value: {$eq: 'AQR', $type: 'operator'},
                             },
                             _matches: [
                                 {
@@ -179,7 +179,7 @@ describe('getMatchesFromChildren', () => {
                         },
                         {
                             $type: 'occurrence',
-                            $count: { $operator: '$gte', $num: 2 },
+                            $count: {$operator: '$gte', $num: 2},
                             course: {
                                 $type: 'course',
                                 department: ['THEAT'],

@@ -1,7 +1,7 @@
 import union from 'lodash/union'
 import reject from 'lodash/reject'
 import stringify from 'stabilize'
-import { prepareStudentForSave } from '../../object-student'
+import {prepareStudentForSave} from '../../object-student'
 import debug from 'debug'
 const log = debug('web:save-student')
 
@@ -40,7 +40,7 @@ export function saveStudent(student) {
                 return
             }
             log(`saving student ${prepared.name} (${prepared.id})`)
-            prepared = { ...prepared, dateLastModified: new Date() }
+            prepared = {...prepared, dateLastModified: new Date()}
             localStorage.setItem(prepared.id, stringify(prepared))
             return addStudentToCache(prepared.id)
         })

@@ -65,7 +65,7 @@ export default {
         require.ensure(
             [],
             () => {
-                cb(null, { content: require('../../modules/student').default })
+                cb(null, {content: require('../../modules/student').default})
             },
             'student.components'
         )

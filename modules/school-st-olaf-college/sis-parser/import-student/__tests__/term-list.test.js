@@ -1,6 +1,6 @@
-import { loadHtml } from './import-student.support'
-import { parseHtml } from '../../parse-html'
-import { extractTermList } from '../term-list'
+import {loadHtml} from './import-student.support'
+import {parseHtml} from '../../parse-html'
+import {extractTermList} from '../term-list'
 
 describe('extractTermList', () => {
     it('returns the list of terms', () => {

@@ -21,7 +21,7 @@ export function evaluate(
     area: AreaOfStudy
 ) {
     assertKeys(area, 'name', 'result', 'type', 'revision')
-    const { name, type } = area
+    const {name, type} = area
     return compute(area, {
         path: [type, name],
         courses,

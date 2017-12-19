@@ -6,7 +6,7 @@ import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import List from '../../components/list'
 
-export default function AreaList(props: { areas: Object[] }) {
+export default function AreaList(props: {areas: Object[]}) {
     const areas = sortBy(props.areas, 'type', 'name', 'revision')
     return (
         <List type="bullet">

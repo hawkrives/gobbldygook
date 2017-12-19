@@ -2,9 +2,9 @@
 import React from 'react'
 import range from 'lodash/range'
 import map from 'lodash/map'
-import styled, { css } from 'styled-components'
-import { DraggableCourse } from '../course'
-import { PlainList, ListItem } from '../../components/list'
+import styled, {css} from 'styled-components'
+import {DraggableCourse} from '../course'
+import {PlainList, ListItem} from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 

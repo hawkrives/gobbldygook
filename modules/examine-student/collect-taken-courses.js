@@ -4,7 +4,7 @@ import filter from 'lodash/filter'
 import isPlainObject from 'lodash/isPlainObject'
 import flattenDeep from 'lodash/flattenDeep'
 import uniq from 'lodash/uniq'
-import type { Expression, Course } from './types'
+import type {Expression, Course} from './types'
 
 export default function collectTakenCourses(expr: Expression): Course[] {
     // this function needs to end up with a list of all of the courses

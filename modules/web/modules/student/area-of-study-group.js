@@ -1,12 +1,12 @@
 // @flow
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import map from 'lodash/map'
 import pluralizeArea from '../../../examine-student/pluralize-area'
 import capitalize from 'lodash/capitalize'
-import type { AreaOfStudyTypeEnum } from '../../../examine-student/types'
-import { addArea, removeArea } from '../../redux/students/actions/areas'
+import type {AreaOfStudyTypeEnum} from '../../../examine-student/types'
+import {addArea, removeArea} from '../../redux/students/actions/areas'
 import AreaOfStudy from '../area-of-study'
 import AreaPicker from './area-picker'
 import Button from '../../components/button'
@@ -88,7 +88,7 @@ class AreaOfStudyGroup extends React.PureComponent {
 }
 
 const mapDispatch = dispatch =>
-    bindActionCreators({ addArea, removeArea }, dispatch)
+    bindActionCreators({addArea, removeArea}, dispatch)
 
 // $FlowFixMe
 export default connect(null, mapDispatch)(AreaOfStudyGroup)

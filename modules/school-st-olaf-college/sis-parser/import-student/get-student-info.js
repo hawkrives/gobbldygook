@@ -1,12 +1,12 @@
 'use strict'
 const props = require('p-props')
 const flatten = require('lodash/flatten')
-const { AuthError, NetworkError } = require('../../../lib')
-const { fetchHtml } = require('./lib')
-const { extractTermList } = require('./term-list')
-const { collectAllCourses } = require('./courses')
-const { getGraduationInformation } = require('./graduation-info')
-const { COURSES_URL, DEGREE_AUDIT_URL } = require('./urls')
+const {AuthError, NetworkError} = require('../../../lib')
+const {fetchHtml} = require('./lib')
+const {extractTermList} = require('./term-list')
+const {collectAllCourses} = require('./courses')
+const {getGraduationInformation} = require('./graduation-info')
+const {COURSES_URL, DEGREE_AUDIT_URL} = require('./urls')
 
 function loadPages(studentId) {
     return props({
@@ -16,7 +16,7 @@ function loadPages(studentId) {
     })
 }
 
-function beginDataExtraction({ id, coursesDom, auditDom }) {
+function beginDataExtraction({id, coursesDom, auditDom}) {
     let terms = extractTermList(coursesDom)
 
     return props({
@@ -25,7 +25,7 @@ function beginDataExtraction({ id, coursesDom, auditDom }) {
     })
 }
 
-function flattenData({ coursesByTerm, studentInfo }) {
+function flattenData({coursesByTerm, studentInfo}) {
     return {
         courses: flatten(coursesByTerm),
         degrees: studentInfo,

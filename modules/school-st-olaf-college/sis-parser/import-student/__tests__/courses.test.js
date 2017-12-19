@@ -1,5 +1,5 @@
-import { loadHtml } from './import-student.support'
-import { getCoursesFromHtml } from '../courses'
+import {loadHtml} from './import-student.support'
+import {getCoursesFromHtml} from '../courses'
 
 describe('getCoursesFromHtml', () => {
     it('returns the list of courses', () => {

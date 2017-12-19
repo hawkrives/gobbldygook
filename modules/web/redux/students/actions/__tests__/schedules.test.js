@@ -18,7 +18,7 @@ import {
 
 describe('addSchedule action', () => {
     it('returns an action to add a schedule to a student', () => {
-        let action = addSchedule('id', { year: 2012 })
+        let action = addSchedule('id', {year: 2012})
         expect(action).toHaveProperty('type', ADD_SCHEDULE)
         expect(typeof action.payload).toBe('object')
     })

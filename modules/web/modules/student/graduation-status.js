@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 
-import { AreaOfStudySidebar } from './area-of-study-sidebar'
-import { ConnectedStudentSummary } from './connected-student-summary'
+import {AreaOfStudySidebar} from './area-of-study-sidebar'
+import {ConnectedStudentSummary} from './connected-student-summary'
 
 import './graduation-status.scss'
 

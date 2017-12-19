@@ -2,7 +2,7 @@
 const isString = require('lodash/isString')
 const uuid = require('uuid/v4')
 
-const { randomChar } = require('../lib/random-char')
+const {randomChar} = require('../lib/random-char')
 
 function Schedule(data = {}) {
     const baseSchedule = {

@@ -8,8 +8,8 @@ import sample from 'lodash/sample'
 import AvatarLetter from '../../components/avatar-letter'
 import ContentEditable from '../../components/content-editable'
 
-import { getActiveStudentCourses } from '../../helpers/get-active-student-courses'
-import { countCredits } from '../../../examine-student/count-credits'
+import {getActiveStudentCourses} from '../../helpers/get-active-student-courses'
+import {countCredits} from '../../../examine-student/count-credits'
 
 import './student-summary.scss'
 
@@ -61,7 +61,7 @@ export class StudentSummary extends React.PureComponent {
             randomizeHello = true,
             ...props
         } = this.props
-        const { studies, canGraduate } = student
+        const {studies, canGraduate} = student
 
         const className = canGraduate ? 'can-graduate' : 'cannot-graduate'
 
@@ -210,12 +210,12 @@ export class DateSummary extends React.PureComponent {
 
 export class DegreeSummary extends React.PureComponent {
     props: {
-        studies: { type: string, name: string }[],
+        studies: {type: string, name: string}[],
     }
 
     render() {
         const grouped: {
-            [key: string]: { type: string, name: string }[],
+            [key: string]: {type: string, name: string}[],
         } = groupBy(this.props.studies, s => s.type)
 
         const {
@@ -270,7 +270,7 @@ export class CreditSummary extends React.PureComponent {
     }
 
     render() {
-        const { currentCredits, neededCredits } = this.props
+        const {currentCredits, neededCredits} = this.props
         const enoughCredits = currentCredits >= neededCredits
 
         return (

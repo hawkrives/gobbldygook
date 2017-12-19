@@ -1,4 +1,4 @@
-import computeChunk, { computeBoolean } from '../compute-chunk'
+import computeChunk, {computeBoolean} from '../compute-chunk'
 
 describe('computeBoolean', () => {
     it('computes the boolean result of and-clauses', () => {
@@ -8,21 +8,21 @@ describe('computeBoolean', () => {
             $and: [
                 {
                     $type: 'course',
-                    $course: { department: ['CSCI'], number: 121 },
+                    $course: {department: ['CSCI'], number: 121},
                 },
                 {
                     $type: 'course',
-                    $course: { department: ['CSCI'], number: 125 },
+                    $course: {department: ['CSCI'], number: 125},
                 },
             ],
         }
-        const requirement = { result: clause }
+        const requirement = {result: clause}
         const courses = [
-            { department: ['CSCI'], number: 121 },
-            { department: ['CSCI'], number: 125 },
+            {department: ['CSCI'], number: 121},
+            {department: ['CSCI'], number: 125},
         ]
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -41,21 +41,21 @@ describe('computeBoolean', () => {
             $or: [
                 {
                     $type: 'course',
-                    $course: { department: ['CSCI'], number: 121 },
+                    $course: {department: ['CSCI'], number: 121},
                 },
                 {
                     $type: 'course',
-                    $course: { department: ['CSCI'], number: 125 },
+                    $course: {department: ['CSCI'], number: 125},
                 },
             ],
         }
-        const requirement = { result: clause }
+        const requirement = {result: clause}
         const courses = [
-            { department: ['CSCI'], number: 121 },
-            { department: ['CSCI'], number: 125 },
+            {department: ['CSCI'], number: 121},
+            {department: ['CSCI'], number: 125},
         ]
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -74,21 +74,21 @@ describe('computeBoolean', () => {
             $or: [
                 {
                     $type: 'course',
-                    $course: { department: ['CSCI'], number: 121 },
+                    $course: {department: ['CSCI'], number: 121},
                 },
                 {
                     $type: 'course',
-                    $course: { department: ['CSCI'], number: 125 },
+                    $course: {department: ['CSCI'], number: 125},
                 },
             ],
         }
-        const requirement = { result: clause }
+        const requirement = {result: clause}
         const courses = [
-            { department: ['CSCI'], number: 151 },
-            { department: ['CSCI'], number: 125 },
+            {department: ['CSCI'], number: 151},
+            {department: ['CSCI'], number: 125},
         ]
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -111,11 +111,11 @@ describe('computeBoolean', () => {
                     $or: [
                         {
                             $type: 'course',
-                            $course: { department: ['CSCI'], number: 121 },
+                            $course: {department: ['CSCI'], number: 121},
                         },
                         {
                             $type: 'course',
-                            $course: { department: ['CSCI'], number: 125 },
+                            $course: {department: ['CSCI'], number: 125},
                         },
                     ],
                 },
@@ -125,24 +125,24 @@ describe('computeBoolean', () => {
                     $or: [
                         {
                             $type: 'course',
-                            $course: { department: ['CSCI'], number: 130 },
+                            $course: {department: ['CSCI'], number: 130},
                         },
                         {
                             $type: 'course',
-                            $course: { department: ['CSCI'], number: 131 },
+                            $course: {department: ['CSCI'], number: 131},
                         },
                     ],
                 },
             ],
         }
-        const requirement = { result: clause }
+        const requirement = {result: clause}
 
         const courses = [
-            { department: ['CSCI'], number: 130 },
-            { department: ['CSCI'], number: 125 },
+            {department: ['CSCI'], number: 130},
+            {department: ['CSCI'], number: 125},
         ]
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -159,24 +159,24 @@ describe('computeBoolean', () => {
             $or: [
                 {
                     $type: 'course',
-                    $course: { department: ['CSCI'], number: 121 },
+                    $course: {department: ['CSCI'], number: 121},
                 },
                 {
                     $type: 'course',
-                    $course: { department: ['CSCI'], number: 125 },
+                    $course: {department: ['CSCI'], number: 125},
                 },
             ],
             $type: 'boolean',
             $booleanType: 'or',
         }
-        const requirement = { result: clause }
+        const requirement = {result: clause}
 
         const courses = [
-            { department: ['CSCI'], number: 130 },
-            { department: ['CSCI'], number: 125 },
+            {department: ['CSCI'], number: 130},
+            {department: ['CSCI'], number: 125},
         ]
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -193,7 +193,7 @@ describe('computeBoolean', () => {
             $and: [
                 {
                     $children: '$all',
-                    $count: { $operator: '$gte', $num: 3 },
+                    $count: {$operator: '$gte', $num: 3},
                     $from: 'children',
                     $type: 'modifier',
                     $what: 'course',
@@ -209,7 +209,7 @@ describe('computeBoolean', () => {
                             $type: 'reference',
                         },
                     ],
-                    $count: { $operator: '$gte', $num: 2 },
+                    $count: {$operator: '$gte', $num: 2},
                     $from: 'children',
                     $type: 'modifier',
                     $what: 'credit',
@@ -223,25 +223,25 @@ describe('computeBoolean', () => {
                 $type: 'requirement',
                 result: {
                     $type: 'course',
-                    $course: { department: ['ART'], number: 120 },
+                    $course: {department: ['ART'], number: 120},
                 },
             },
             C: {
                 $type: 'requirement',
                 result: {
-                    $count: { $operator: '$gte', $num: 2 },
+                    $count: {$operator: '$gte', $num: 2},
                     $of: [
                         {
                             $type: 'course',
-                            $course: { department: ['ART'], number: 103 },
+                            $course: {department: ['ART'], number: 103},
                         },
                         {
                             $type: 'course',
-                            $course: { department: ['ART'], number: 104 },
+                            $course: {department: ['ART'], number: 104},
                         },
                         {
                             $type: 'course',
-                            $course: { department: ['ART'], number: 105 },
+                            $course: {department: ['ART'], number: 105},
                         },
                     ],
                     $type: 'of',
@@ -251,9 +251,9 @@ describe('computeBoolean', () => {
         }
 
         const courses = [
-            { department: ['ART'], number: 120, credits: 1.0 },
-            { department: ['ART'], number: 104, credits: 1.0 },
-            { department: ['ART'], number: 105, credits: 1.0 },
+            {department: ['ART'], number: 120, credits: 1.0},
+            {department: ['ART'], number: 104, credits: 1.0},
+            {department: ['ART'], number: 105, credits: 1.0},
         ]
         const dirty = new Set()
 
@@ -270,7 +270,7 @@ describe('computeBoolean', () => {
             dirty,
         })
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -286,13 +286,13 @@ describe('computeBoolean', () => {
         const clause = {
             $or: [
                 {
-                    $count: { $operator: '$gte', $num: 1 },
-                    $course: { department: ['THEAT'], number: 222 },
+                    $count: {$operator: '$gte', $num: 1},
+                    $course: {department: ['THEAT'], number: 222},
                     $type: 'occurrence',
                 },
                 {
-                    $count: { $operator: '$gte', $num: 3 },
-                    $course: { department: ['THEAT'], number: 266 },
+                    $count: {$operator: '$gte', $num: 3},
+                    $course: {department: ['THEAT'], number: 266},
                     $type: 'occurrence',
                 },
             ],
@@ -300,15 +300,15 @@ describe('computeBoolean', () => {
             $booleanType: 'or',
         }
 
-        const requirement = { result: clause }
+        const requirement = {result: clause}
 
         const courses = [
-            { department: ['THEAT'], number: 266, year: 2014, semester: 1 },
-            { department: ['THEAT'], number: 266, year: 2014, semester: 3 },
-            { department: ['THEAT'], number: 266, year: 2015, semester: 1 },
+            {department: ['THEAT'], number: 266, year: 2014, semester: 1},
+            {department: ['THEAT'], number: 266, year: 2014, semester: 3},
+            {department: ['THEAT'], number: 266, year: 2015, semester: 1},
         ]
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -324,28 +324,28 @@ describe('computeBoolean', () => {
         const clause = {
             $and: [
                 {
-                    $count: { $operator: '$gte', $num: 1 },
+                    $count: {$operator: '$gte', $num: 1},
                     $of: [
                         {
-                            $course: { department: ['CSCI'], number: 121 },
+                            $course: {department: ['CSCI'], number: 121},
                             $type: 'course',
                         },
                         {
-                            $course: { department: ['CSCI'], number: 125 },
+                            $course: {department: ['CSCI'], number: 125},
                             $type: 'course',
                         },
                     ],
                     $type: 'of',
                 },
                 {
-                    $count: { $operator: '$gte', $num: 1 },
+                    $count: {$operator: '$gte', $num: 1},
                     $of: [
                         {
-                            $course: { department: ['ART'], number: 102 },
+                            $course: {department: ['ART'], number: 102},
                             $type: 'course',
                         },
                         {
-                            $course: { department: ['ART'], number: 103 },
+                            $course: {department: ['ART'], number: 103},
                             $type: 'course',
                         },
                     ],
@@ -356,14 +356,14 @@ describe('computeBoolean', () => {
             $booleanType: 'and',
         }
 
-        const requirement = { result: clause }
+        const requirement = {result: clause}
 
         const courses = [
-            { department: ['CSCI'], number: 125 },
-            { department: ['ART'], number: 102 },
+            {department: ['CSCI'], number: 125},
+            {department: ['ART'], number: 102},
         ]
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -378,8 +378,8 @@ describe('computeBoolean', () => {
     it('can compute the result of several requirement references', () => {
         const clause = {
             $and: [
-                { $requirement: 'A', $type: 'reference' },
-                { $requirement: 'C', $type: 'reference' },
+                {$requirement: 'A', $type: 'reference'},
+                {$requirement: 'C', $type: 'reference'},
             ],
             $type: 'boolean',
             $booleanType: 'and',
@@ -389,25 +389,25 @@ describe('computeBoolean', () => {
                 $type: 'requirement',
                 result: {
                     $type: 'course',
-                    $course: { department: ['ART'], number: 120 },
+                    $course: {department: ['ART'], number: 120},
                 },
             },
             C: {
                 $type: 'requirement',
                 result: {
-                    $count: { $operator: '$gte', $num: 2 },
+                    $count: {$operator: '$gte', $num: 2},
                     $of: [
                         {
                             $type: 'course',
-                            $course: { department: ['ART'], number: 103 },
+                            $course: {department: ['ART'], number: 103},
                         },
                         {
                             $type: 'course',
-                            $course: { department: ['ART'], number: 104 },
+                            $course: {department: ['ART'], number: 104},
                         },
                         {
                             $type: 'course',
-                            $course: { department: ['ART'], number: 105 },
+                            $course: {department: ['ART'], number: 105},
                         },
                     ],
                     $type: 'of',
@@ -417,9 +417,9 @@ describe('computeBoolean', () => {
         }
 
         const courses = [
-            { department: ['ART'], number: 120 },
-            { department: ['ART'], number: 104 },
-            { department: ['ART'], number: 105 },
+            {department: ['ART'], number: 120},
+            {department: ['ART'], number: 104},
+            {department: ['ART'], number: 105},
         ]
         const dirty = new Set()
 
@@ -436,7 +436,7 @@ describe('computeBoolean', () => {
             dirty,
         })
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -452,7 +452,7 @@ describe('computeBoolean', () => {
         const clause = {
             $and: [
                 {
-                    $count: { $operator: '$gte', $num: 1 },
+                    $count: {$operator: '$gte', $num: 1},
                     $type: 'where',
                     $where: {
                         $key: 'gereqs',
@@ -463,7 +463,7 @@ describe('computeBoolean', () => {
                     $distinct: false,
                 },
                 {
-                    $count: { $operator: '$gte', $num: 1 },
+                    $count: {$operator: '$gte', $num: 1},
                     $type: 'where',
                     $where: {
                         $key: 'gereqs',
@@ -478,14 +478,14 @@ describe('computeBoolean', () => {
             $booleanType: 'and',
         }
 
-        const requirement = { result: clause }
+        const requirement = {result: clause}
 
         const courses = [
-            { department: ['CSCI'], number: 125, gereqs: ['WRI'] },
-            { department: ['ART'], number: 102, gereqs: ['BTS-T'] },
+            {department: ['CSCI'], number: 125, gereqs: ['WRI']},
+            {department: ['ART'], number: 102, gereqs: ['BTS-T']},
         ]
 
-        const { computedResult, matches } = computeBoolean({
+        const {computedResult, matches} = computeBoolean({
             expr: clause,
             ctx: requirement,
             courses,
@@ -500,7 +500,7 @@ describe('computeBoolean', () => {
     it('throws when neither $and nor $or were present', () => {
         expect(() =>
             computeBoolean({
-                expr: { $neither: [] },
+                expr: {$neither: []},
                 isNeeded: true,
             })
         ).toThrowError(TypeError)

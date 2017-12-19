@@ -27,8 +27,8 @@ import present from 'present'
 import debug from 'debug'
 const log = debug('web:redux:search')
 
-import { buildDeptString } from '../../../../school-st-olaf-college/deptnums'
-import { to12HourTime as to12 } from '../../../../lib/to-12-hour-time'
+import {buildDeptString} from '../../../../school-st-olaf-college/deptnums'
+import {to12HourTime as to12} from '../../../../lib/to-12-hour-time'
 const REVERSE_ORDER = ['Year', 'Term', 'Semester']
 
 // eslint-disable-next-line no-confusing-arrow
@@ -81,7 +81,7 @@ const SORT_BY_TO_KEY = {
     'Time of Day': TIME_OF_DAY,
 }
 
-function sortAndGroup({ sortBy: sorting, groupBy: grouping, rawResults }) {
+function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
     const start = present()
 
     // TODO: Speed this up! This preperation stuff takes ~230ms by itself,
@@ -121,31 +121,31 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action) {
-    const { type, payload } = action
+    const {type, payload} = action
 
     switch (type) {
         case UPDATE_QUERY: {
-            return { ...state, query: payload }
+            return {...state, query: payload}
         }
 
         case SET_PARTIAL_QUERY: {
-            return { ...state, partial: payload }
+            return {...state, partial: payload}
         }
 
         case BEGIN_QUERY: {
-            return { ...state, inProgress: true }
+            return {...state, inProgress: true}
         }
 
         case SORT_RESULTS: {
-            state = { ...state, sortBy: payload }
+            state = {...state, sortBy: payload}
             const results = sortAndGroup(state)
-            return { ...state, results }
+            return {...state, results}
         }
 
         case GROUP_RESULTS: {
-            state = { ...state, groupBy: payload }
+            state = {...state, groupBy: payload}
             const results = sortAndGroup(state)
-            return { ...state, results }
+            return {...state, results}
         }
 
         case SUBMIT_QUERY: {
@@ -156,11 +156,11 @@ export default function reducer(state = initialState, action) {
                 hasQueried: true,
             }
             const results = sortAndGroup(state)
-            return { ...state, results }
+            return {...state, results}
         }
 
         case CLEAR_RESULTS: {
-            return { ...state, results: [], rawResults: [], inProgress: false }
+            return {...state, results: [], rawResults: [], inProgress: false}
         }
 
         default: {

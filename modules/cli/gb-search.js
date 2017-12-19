@@ -19,9 +19,9 @@ function printCourse(course) {
 }
 
 module.exports = function search(args = {}) {
-    const { riddles, unique, sort } = args
+    const {riddles, unique, sort} = args
     // check if data has been cached
-    searchCourses({ riddles, unique, sort }).then(filtered => {
+    searchCourses({riddles, unique, sort}).then(filtered => {
         if (args.list) {
             console.log(table(filtered.map(printCourse)))
         } else {

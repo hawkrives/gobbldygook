@@ -1,4 +1,4 @@
-import { prepareStudentForSave } from '../encode-student'
+import {prepareStudentForSave} from '../encode-student'
 
 describe('prepareStudentForSave', () => {
     it('removes extraneous properties from a student object', () => {
@@ -18,7 +18,7 @@ describe('prepareStudentForSave', () => {
         let s = {
             name: 'a',
             schedules: {
-                x: { id: 'x', courses: [], conflicts: [], hasConflict: false },
+                x: {id: 'x', courses: [], conflicts: [], hasConflict: false},
             },
         }
         const actual = prepareStudentForSave(s)

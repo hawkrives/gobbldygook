@@ -1,1 +1,1 @@
-export { default } from './course-table-container'
+export {default} from './course-table-container'

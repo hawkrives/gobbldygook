@@ -10,7 +10,7 @@ if (typeof global.indexedDB === 'undefined') {
 }
 
 // $FlowFixMe
-const { default: db } = require.requireActual('../db')
+const {default: db} = require.requireActual('../db')
 
 db.__clear = function clearDatabase() {
     return Promise.all(db.stores.map(s => db.store(s).clear()))

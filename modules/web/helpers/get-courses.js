@@ -3,7 +3,7 @@ import db from './db'
 import map from 'lodash/map'
 import omit from 'lodash/omit'
 import padStart from 'lodash/padStart'
-import { status, json } from '../../lib/fetch-helpers'
+import {status, json} from '../../lib/fetch-helpers'
 
 const baseUrl = 'https://stodevx.github.io/course-data'
 const networkCache = Object.create(null)
@@ -49,7 +49,7 @@ export function getCourseFromDatabase(clbid: number) {
 // @returns {Promise} - TreoDatabasePromise
 // @fulfill {Object} - the course object, potentially with an embedded error message.
 export function getCourse(
-    { clbid, term }: { clbid: number, term: number },
+    {clbid, term}: {clbid: number, term: number},
     fabrications: any = {}
 ) {
     if (clbid in fabrications) {
@@ -63,10 +63,9 @@ export function getCourse(
 
     return getCourseFrom(clbid)
         .then(
-            course =>
-                course || { clbid, term, error: `Could not find ${clbid}` }
+            course => course || {clbid, term, error: `Could not find ${clbid}`}
         )
-        .catch(error => ({ clbid, term, error: error.message }))
+        .catch(error => ({clbid, term, error: error.message}))
 }
 
 /**

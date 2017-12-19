@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 import difference from 'lodash/difference'
 import filter from 'lodash/filter'
@@ -22,7 +22,7 @@ import Button from '../../components/button'
 const {
     sortStudiesByType,
 } = require('../../../object-student/sort-studies-by-type')
-const { areaTypeConstants } = require('../../../object-student/area-types')
+const {areaTypeConstants} = require('../../../object-student/area-types')
 
 type AreaOfStudy = Object
 type Student = Object
@@ -35,7 +35,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
     props: PropTypes
 
     state: {
-        showAreaPickerFor: { [key: string]: boolean },
+        showAreaPickerFor: {[key: string]: boolean},
     } = {
         showAreaPickerFor: {},
     }
@@ -44,7 +44,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
         ev.stopPropagation()
         ev.preventDefault()
         this.setState(state => ({
-            showAreaPickerFor: { ...state.showAreaPickerFor, [type]: true },
+            showAreaPickerFor: {...state.showAreaPickerFor, [type]: true},
         }))
     }
 
@@ -52,14 +52,14 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
         ev.stopPropagation()
         ev.preventDefault()
         this.setState(state => ({
-            showAreaPickerFor: { ...state.showAreaPickerFor, [type]: false },
+            showAreaPickerFor: {...state.showAreaPickerFor, [type]: false},
         }))
     }
 
     render() {
         const props = this.props
-        const { allAreas, student } = props
-        const { showAreaPickerFor } = this.state
+        const {allAreas, student} = props
+        const {showAreaPickerFor} = this.state
         const allAreasGrouped = groupBy(allAreas, 'type')
 
         const sortedStudies = sortStudiesByType(student.studies)
@@ -155,6 +155,6 @@ class AreaOfStudySidebarComponent extends React.PureComponent {
     }
 }
 
-const mapState = state => ({ allAreas: state.areas.data })
+const mapState = state => ({allAreas: state.areas.data})
 
 export const AreaOfStudySidebar = connect(mapState)(AreaOfStudySidebarComponent)

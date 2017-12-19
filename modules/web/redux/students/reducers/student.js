@@ -56,7 +56,7 @@ import {
 const initialState = {}
 
 export function studentReducer(state = initialState, action) {
-    const { type, payload } = action
+    const {type, payload} = action
 
     switch (type) {
         case INIT_STUDENT: {

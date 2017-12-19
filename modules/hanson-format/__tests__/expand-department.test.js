@@ -1,4 +1,4 @@
-import { expandDepartment } from '../convert-department'
+import {expandDepartment} from '../convert-department'
 
 describe('expandDepartment', () => {
     it('expands a short department abbreviation into a long abbreviation', () => {

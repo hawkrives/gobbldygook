@@ -1,4 +1,4 @@
-import { request, requestTransaction } from 'idb-request'
+import {request, requestTransaction} from 'idb-request'
 
 function batchGet(keys) {
     let results = []

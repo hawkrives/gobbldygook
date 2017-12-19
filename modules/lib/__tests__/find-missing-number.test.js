@@ -1,5 +1,5 @@
 // @flow
-import { findMissingNumber } from '../find-missing-number'
+import {findMissingNumber} from '../find-missing-number'
 
 describe('findMissingNumber', () => {
     it('takes a list of numbers and finds the first gap', () => {

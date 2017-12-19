@@ -17,7 +17,7 @@ const JOINERS = {
     $or: 'OR',
 }
 
-function makeBooleanExpression({ expr, ctx }) {
+function makeBooleanExpression({expr, ctx}) {
     let kind = '$invalid'
 
     if ('$and' in expr) {
@@ -40,7 +40,7 @@ function makeBooleanExpression({ expr, ctx }) {
         return acc
     }, [])
 
-    return { contents }
+    return {contents}
 }
 
 const ofLookup = {
@@ -49,7 +49,7 @@ const ofLookup = {
     none: 'None of',
 }
 
-function makeOfExpression({ expr, ctx }) {
+function makeOfExpression({expr, ctx}) {
     const description =
         ofLookup[expr.$count.$was] ||
         `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${
@@ -61,15 +61,15 @@ function makeOfExpression({ expr, ctx }) {
         <Expression key={i} expr={ex} ctx={ctx} />
     ))
 
-    return { description, contents }
+    return {description, contents}
 }
 
-function makeModifierExpression({ expr }) {
+function makeModifierExpression({expr}) {
     const op = humanizeOperator(expr.$count.$operator)
     const num = expr.$count.$num
     const needs = `${op} ${num} ${plur(expr.$what, expr.$count.$num)}`
     const description = `${expr._counted} of ${needs} from ${expr.$from}`
-    return { description }
+    return {description}
 }
 
 let operators = {
@@ -86,7 +86,7 @@ export function makeWhereQualifier(where) {
     return `${key} ${operator} ${where.$value}`
 }
 
-export function makeWhereExpression({ expr }) {
+export function makeWhereExpression({expr}) {
     const op = humanizeOperator(expr.$count.$operator)
     const num = expr.$count.$num
     const needs = `${op} ${num}`
@@ -99,7 +99,7 @@ export function makeWhereExpression({ expr }) {
     let contents = map(expr._matches, (course, i) => (
         <Expression
             key={i}
-            expr={{ $type: 'course', $course: course }}
+            expr={{$type: 'course', $course: course}}
             hideIndicator
         />
     ))
@@ -108,23 +108,23 @@ export function makeWhereExpression({ expr }) {
         contents = null
     }
 
-    return { description, contents }
+    return {description, contents}
 }
 
-function makeOccurrenceExpression({ expr }) {
+function makeOccurrenceExpression({expr}) {
     const op = humanizeOperator(expr.$count.$operator)
     const word = expr.$count.$num === 1 ? 'occurrence' : 'occurrences'
     const num = expr.$count.$num
     const description = `${expr._counted} of ${op} ${num} ${word} of `
 
-    const contents = <Expression expr={{ ...expr, type: 'course' }} />
+    const contents = <Expression expr={{...expr, type: 'course'}} />
 
-    return { description, contents }
+    return {description, contents}
 }
 
 export default function Expression(props) {
-    const { expr } = props
-    const { $type } = expr
+    const {expr} = props
+    const {$type} = expr
 
     if (!$type) {
         return null
@@ -141,7 +141,7 @@ export default function Expression(props) {
     let result = null
 
     if ($type === 'boolean') {
-        ;({ contents } = makeBooleanExpression(props))
+        ;({contents} = makeBooleanExpression(props))
     } else if ($type === 'course') {
         // _request is the original course that was written in the spec.
         // $course is the matched course. It's used mostly by where-expressions and the like.
@@ -156,14 +156,14 @@ export default function Expression(props) {
         contents = expr.$requirement
         result = <ResultIndicator result={computationResult} />
     } else if ($type === 'of') {
-        ;({ contents, description } = makeOfExpression(props))
+        ;({contents, description} = makeOfExpression(props))
     } else if ($type === 'modifier') {
-        ;({ description } = makeModifierExpression(props))
+        ;({description} = makeModifierExpression(props))
         result = <ResultIndicator result={computationResult} />
     } else if ($type === 'where') {
-        ;({ description, contents } = makeWhereExpression(props))
+        ;({description, contents} = makeWhereExpression(props))
     } else if ($type === 'occurrence') {
-        ;({ description, contents } = makeOccurrenceExpression(props))
+        ;({description, contents} = makeOccurrenceExpression(props))
     } else {
         log(`<Expression />: type not handled: ${$type}`)
         log(props)

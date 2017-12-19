@@ -7,11 +7,11 @@ import Toolbar from '../../components/toolbar'
 import Modal from '../../components/modal'
 import List from '../../components/list'
 import withRouter from 'react-router/lib/withRouter'
-import { close } from '../../icons/ionicons'
+import {close} from '../../icons/ionicons'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
-import { encodeStudent } from '../../../object-student'
+import {encodeStudent} from '../../../object-student'
 
 const ShareModal = styled(Modal)`
     ${props => props.theme.card};
@@ -36,7 +36,7 @@ type PropTypes = {
 }
 
 export function ShareSheet(props: PropTypes) {
-    let { student } = props
+    let {student} = props
     student = student || {}
 
     const boundCloseModal = () =>
@@ -73,7 +73,7 @@ export function ShareSheet(props: PropTypes) {
 }
 
 const mapState = (state, ownProps) => {
-    return { student: state.students[ownProps.params.studentId].data.present }
+    return {student: state.students[ownProps.params.studentId].data.present}
 }
 
 export default connect(mapState)(withRouter(ShareSheet))

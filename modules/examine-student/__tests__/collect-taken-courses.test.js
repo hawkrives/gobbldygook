@@ -43,30 +43,30 @@ describe('collectTakenCourses', () => {
     it('can go down many layers deep', () => {
         const obj = {
             $type: 'of',
-            $count: { $operator: '$gte', $num: 3 },
+            $count: {$operator: '$gte', $num: 3},
             $of: [
                 {
                     $type: 'of',
-                    $count: { $operator: '$gte', $num: 1 },
+                    $count: {$operator: '$gte', $num: 1},
                     $of: [
                         {
-                            $course: { department: ['CSCI'], number: 120 },
+                            $course: {department: ['CSCI'], number: 120},
                             $type: 'course',
                         },
                         {
-                            $course: { department: ['CSCI'], number: 121 },
+                            $course: {department: ['CSCI'], number: 121},
                             $type: 'course',
                             _taken: true,
                         },
                         {
-                            $course: { department: ['CSCI'], number: 122 },
+                            $course: {department: ['CSCI'], number: 122},
                             $type: 'course',
                         },
                     ],
                 },
                 {
                     $type: 'where',
-                    $count: { $operator: '$gte', $num: 2 },
+                    $count: {$operator: '$gte', $num: 2},
                     $where: {
                         $key: 'gereq',
                         $operator: '$eq',
@@ -76,12 +76,12 @@ describe('collectTakenCourses', () => {
                 },
                 {
                     $type: 'occurrence',
-                    $count: { $operator: '$gte', $num: 2 },
-                    $course: { department: ['CHEM'], number: 121 },
+                    $count: {$operator: '$gte', $num: 2},
+                    $course: {department: ['CHEM'], number: 121},
                 },
                 {
                     $type: 'of',
-                    $count: { $operator: '$gte', $num: 3 },
+                    $count: {$operator: '$gte', $num: 3},
                     $of: [
                         {
                             $course: {
@@ -118,20 +118,20 @@ describe('collectTakenCourses', () => {
                 },
                 {
                     $type: 'of',
-                    $count: { $operator: '$gte', $num: 3 },
+                    $count: {$operator: '$gte', $num: 3},
                     $of: [
                         {
-                            $course: { department: ['ASIAN'], number: 210 },
+                            $course: {department: ['ASIAN'], number: 210},
                             $type: 'course',
                             _taken: true,
                         },
                         {
-                            $course: { department: ['ASIAN'], number: 215 },
+                            $course: {department: ['ASIAN'], number: 215},
                             $type: 'course',
                             _taken: true,
                         },
                         {
-                            $course: { department: ['ASIAN'], number: 220 },
+                            $course: {department: ['ASIAN'], number: 220},
                             $type: 'course',
                             _taken: true,
                         },

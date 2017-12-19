@@ -11,7 +11,7 @@ import {
 const initialState = {}
 
 export default function reducer(state = initialState, action) {
-    const { type, payload } = action
+    const {type, payload} = action
 
     switch (type) {
         case LOG_MESSAGE: {
@@ -49,12 +49,12 @@ export default function reducer(state = initialState, action) {
 
         case INCREMENT_PROGRESS: {
             // make a copy of the previous item
-            const progress = { ...state[payload.id] }
+            const progress = {...state[payload.id]}
             progress.value += payload.by
             progress.value =
                 progress.value <= progress.max ? progress.value : progress.max
 
-            return { ...state, [payload.id]: progress }
+            return {...state, [payload.id]: progress}
         }
 
         case REMOVE_NOTIFICATION: {

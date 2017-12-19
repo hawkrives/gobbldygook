@@ -1,1 +1,1 @@
-export { default } from './area-editor-container'
+export {default} from './area-editor-container'

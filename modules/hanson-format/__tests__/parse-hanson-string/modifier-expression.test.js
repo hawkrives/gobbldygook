@@ -1,5 +1,5 @@
-import { customParser } from './parse-hanson-string.support'
-const parse = customParser({ allowedStartRules: ['Modifier'] })
+import {customParser} from './parse-hanson-string.support'
+const parse = customParser({allowedStartRules: ['Modifier']})
 
 describe('ModifierExpression', () => {
     it('can count courses', () => {
@@ -31,7 +31,7 @@ describe('ModifierExpression', () => {
 
         expect(
             parse('one course from (BTS-B, B)', {
-                abbreviations: { 'BTS-B': 'Bible' },
+                abbreviations: {'BTS-B': 'Bible'},
             })
         ).toMatchSnapshot()
     })

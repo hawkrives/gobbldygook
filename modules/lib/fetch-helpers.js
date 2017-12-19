@@ -1,6 +1,6 @@
 // @flow
 'use strict'
-const { NetworkError } = require('./errors')
+const {NetworkError} = require('./errors')
 
 module.exports.status = status
 function status(response /*: Response*/) {

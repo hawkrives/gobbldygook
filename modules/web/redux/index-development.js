@@ -1,6 +1,6 @@
 /* globals module */
-import { applyMiddleware, createStore, compose } from 'redux'
-import { persistState } from 'redux-devtools'
+import {applyMiddleware, createStore, compose} from 'redux'
+import {persistState} from 'redux-devtools'
 import promiseMiddleware from 'redux-promise'
 import thunkMiddleware from 'redux-thunk'
 import checkStudentsMiddleware from './middleware/check-students'

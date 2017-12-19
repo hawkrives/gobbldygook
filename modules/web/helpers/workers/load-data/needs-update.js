@@ -2,7 +2,7 @@
 
 import db from '../../db'
 import getCacheStoreName from './get-cache-store-name'
-import type { InfoFileTypeEnum } from './types'
+import type {InfoFileTypeEnum} from './types'
 
 export default function needsUpdate(
     type: InfoFileTypeEnum,

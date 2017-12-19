@@ -1,9 +1,9 @@
 import filter from 'lodash/filter'
 import map from 'lodash/map'
 import fromPairs from 'lodash/fromPairs'
-import { getCourse } from './get-courses'
+import {getCourse} from './get-courses'
 
-export function embedActiveStudentCourses(student, { cache = [] }) {
+export function embedActiveStudentCourses(student, {cache = []}) {
     // - At it's core, this method just needs to get the list of courses that a student has chosen.
     // - Each schedule has a list of courses that are a part of that schedule.
     // - Additionally, we only care about the schedules that are marked as "active".
@@ -12,7 +12,7 @@ export function embedActiveStudentCourses(student, { cache = [] }) {
     // - Finally, remember that a given `clbid` might not exist in the database, in which case we get back 'undefined'.
     //   In this case, we need to know where the `clbid` came from, so that we can render an error in the correct location.
 
-    const active = filter(student.schedules, { active: true })
+    const active = filter(student.schedules, {active: true})
 
     const enhanced = map(active, schedule => {
         let courses = map(schedule.clbids, clbid => {
@@ -29,7 +29,7 @@ export function embedActiveStudentCourses(student, { cache = [] }) {
         })
 
         return Promise.all(courses).then(fulfilledCourses => {
-            return [schedule.id, { ...schedule, courses: fulfilledCourses }]
+            return [schedule.id, {...schedule, courses: fulfilledCourses}]
         })
     })
 

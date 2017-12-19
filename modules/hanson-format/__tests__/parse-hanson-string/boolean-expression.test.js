@@ -1,5 +1,5 @@
-import { customParser } from './parse-hanson-string.support'
-const parse = customParser({ allowedStartRules: ['Or'] })
+import {customParser} from './parse-hanson-string.support'
+const parse = customParser({allowedStartRules: ['Or']})
 
 describe('BooleanExpression', () => {
     it('parses courses separated by | as being or-d', () => {

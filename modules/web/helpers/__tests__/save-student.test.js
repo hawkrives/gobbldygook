@@ -22,7 +22,7 @@ describe('saveStudent', () => {
     })
 
     it('returns a promise', () => {
-        expect(saveStudent({ id: student.id }).then).toBeDefined()
+        expect(saveStudent({id: student.id}).then).toBeDefined()
     })
 
     it('saves a student', async () => {

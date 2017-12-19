@@ -17,10 +17,10 @@ jest.mock('../store-data', () => jest.fn())
 jest.mock('../parse-data', () => jest.fn())
 jest.mock('../cache-item-hash', () => jest.fn())
 jest.mock('../../../../../lib/fetch-helpers', () => {
-    return { status: x => x, text: x => x }
+    return {status: x => x, text: x => x}
 })
 
-const goodFetch = jest.fn(url => Promise.resolve(JSON.stringify({ url })))
+const goodFetch = jest.fn(url => Promise.resolve(JSON.stringify({url})))
 const badFetch = jest.fn(() => Promise.reject(new Error('could not fetch')))
 
 global.fetch = jest.fn(() => {
@@ -68,7 +68,7 @@ describe('updateDatabase', () => {
                 'courses',
                 'http://i.am.an.url/',
                 dispatch.Notification(),
-                { path: 'terms/20161.json', hash: 'deadbeef' }
+                {path: 'terms/20161.json', hash: 'deadbeef'}
             )
 
             expect(global.fetch).toHaveBeenCalledTimes(1)
@@ -81,7 +81,7 @@ describe('updateDatabase', () => {
                 'courses',
                 'http://i.am.an.url/',
                 dispatch.Notification(),
-                { path: 'terms/20161.json', hash: 'deadbeef' }
+                {path: 'terms/20161.json', hash: 'deadbeef'}
             )
 
             expect(global.fetch).toHaveBeenCalledTimes(1)

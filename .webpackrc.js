@@ -13,7 +13,7 @@ const {
     LoaderOptionsPlugin,
     NormalModuleReplacementPlugin,
     NamedModulesPlugin,
-    optimize: { CommonsChunkPlugin },
+    optimize: {CommonsChunkPlugin},
 } = webpack
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -116,11 +116,7 @@ function config() {
         stats.children = false
     }
 
-    const entry = Object.assign(
-        {},
-        { main: ['./modules/web/index.js'] },
-        entries
-    )
+    const entry = Object.assign({}, {main: ['./modules/web/index.js']}, entries)
 
     if (isDevelopment) {
         // add dev server and hotloading clientside code
@@ -265,9 +261,7 @@ function config() {
         new NamedModulesPlugin(),
 
         // copy files – into the webpack {output} directory
-        new CopyWebpackPlugin([
-            { from: 'modules/web/static/*', flatten: true },
-        ]),
+        new CopyWebpackPlugin([{from: 'modules/web/static/*', flatten: true}]),
     ]
 
     if (isProduction) {
@@ -306,7 +300,7 @@ function config() {
 
     const babelLoader = {
         loader: 'babel-loader',
-        options: { cacheDirectory: !isCI },
+        options: {cacheDirectory: !isCI},
     }
     const babelForNodeModules = {
         loader: 'babel-loader',
@@ -315,7 +309,7 @@ function config() {
             plugins: ['transform-es2015-modules-commonjs'],
         },
     }
-    const urlLoader = { loader: 'url-loader', options: { limit: 10000 } }
+    const urlLoader = {loader: 'url-loader', options: {limit: 10000}}
     const cssLoader = isProduction
         ? ExtractTextPlugin.extract({
               fallback: 'style-loader',

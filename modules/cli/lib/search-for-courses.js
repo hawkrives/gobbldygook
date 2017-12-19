@@ -1,5 +1,5 @@
 'use strict'
-const { tryReadJsonFile } = require('./read-file')
+const {tryReadJsonFile} = require('./read-file')
 
 const flatten = require('lodash/flatten')
 const filter = require('lodash/filter')
@@ -9,9 +9,9 @@ const isString = require('lodash/isString')
 const sortBy = require('lodash/sortBy')
 const map = require('lodash/map')
 
-const { cacheDir } = require('./dirs')
+const {cacheDir} = require('./dirs')
 
-const { checkForStaleData } = require('./update-local-data-cache')
+const {checkForStaleData} = require('./update-local-data-cache')
 
 const path = require('path')
 
@@ -30,7 +30,7 @@ function getDeptNumsFromRiddles(r) {
     return r
 }
 
-module.exports = async function search({ riddles, unique, sort } = {}) {
+module.exports = async function search({riddles, unique, sort} = {}) {
     // check if data has been cached
     await checkForStaleData()
 

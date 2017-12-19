@@ -5,10 +5,10 @@ import DropZone from 'react-dropzone'
 import map from 'lodash/map'
 import Button from '../../components/button'
 import List from '../../components/list'
-import { StudentSummary } from '../../modules/student/student-summary'
-import { initStudent } from '../../redux/students/actions/init-student'
+import {StudentSummary} from '../../modules/student/student-summary'
+import {initStudent} from '../../redux/students/actions/init-student'
 import withRouter from 'react-router/lib/withRouter'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import debug from 'debug'
 const log = debug('web:react')
 
@@ -37,7 +37,7 @@ class UploadFileScreen extends React.Component {
                 reader.readAsText(f)
             }),
         }))
-        this.setState({ files })
+        this.setState({files})
         this.convertFilesToStudents(files)
     }
 
@@ -63,7 +63,7 @@ class UploadFileScreen extends React.Component {
                 try {
                     converted = initStudent(parsed)
                 } catch (err) {
-                    return { name: file.name, error: err.message }
+                    return {name: file.name, error: err.message}
                 }
 
                 return converted
@@ -76,7 +76,7 @@ class UploadFileScreen extends React.Component {
     }
 
     convertFilesToStudents = files => {
-        this.setState({ students: [] })
+        this.setState({students: []})
         files.forEach(this.convertOneFile)
     }
 
@@ -86,7 +86,7 @@ class UploadFileScreen extends React.Component {
     }
 
     render() {
-        let { students } = this.state
+        let {students} = this.state
         let files = this.state.files.slice(students.length)
 
         return (
@@ -144,6 +144,6 @@ class UploadFileScreen extends React.Component {
     }
 }
 
-let mapDispatch = dispatch => ({ dispatch })
+let mapDispatch = dispatch => ({dispatch})
 
 export default connect(undefined, mapDispatch)(withRouter(UploadFileScreen))

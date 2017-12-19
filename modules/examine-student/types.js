@@ -1,9 +1,9 @@
 // @flow
 
 export type OverridesPath = string[]
-export type OverridesObject = { [key: string]: any }
+export type OverridesObject = {[key: string]: any}
 export type FulfillmentsPath = OverridesPath
-export type FulfillmentsObject = { [key: string]: Fulfillment }
+export type FulfillmentsObject = {[key: string]: Fulfillment}
 
 export type AreaOfStudyTypeEnum =
     | 'degree'

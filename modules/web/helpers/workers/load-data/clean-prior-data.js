@@ -7,21 +7,21 @@ import series from 'p-series'
 import debug from 'debug'
 import db from '../../db'
 import getCacheStoreName from './get-cache-store-name'
-import type { InfoFileTypeEnum } from './types'
+import type {InfoFileTypeEnum} from './types'
 const log = debug('worker:load-data:clean-prior-data')
 
 export function getPriorCourses(path: string) {
     return db
         .store('courses')
         .index('sourcePath')
-        .getAll(range({ eq: path }))
+        .getAll(range({eq: path}))
         .then(oldItems => fromPairs(map(oldItems, item => [item.clbid, null])))
 }
 
 export function getPriorAreas(path: string) {
     return db
         .store('areas')
-        .getAll(range({ eq: path }))
+        .getAll(range({eq: path}))
         .then(oldItems =>
             fromPairs(map(oldItems, item => [item.sourcePath, null]))
         )

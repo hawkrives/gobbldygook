@@ -30,12 +30,9 @@ import {
     REMOVE_FABRICATION,
 } from '../../constants'
 
-import {
-    default as undoableReducer,
-    studentReducer as reducer,
-} from '../student'
-import { ActionCreators } from 'redux-undo'
-const { undo, redo } = ActionCreators
+import {default as undoableReducer, studentReducer as reducer} from '../student'
+import {ActionCreators} from 'redux-undo'
+const {undo, redo} = ActionCreators
 
 describe('students reducer', () => {
     it('returns the initial state', () => {
@@ -49,8 +46,8 @@ describe('students reducer', () => {
     it('handles INIT_STUDENT', () => {
         let initialState = {}
 
-        let student = { id: 'xyz' }
-        let action = { type: INIT_STUDENT, payload: student }
+        let student = {id: 'xyz'}
+        let action = {type: INIT_STUDENT, payload: student}
 
         let expected = student
         let actual = reducer(initialState, action)
@@ -61,7 +58,7 @@ describe('students reducer', () => {
     it('returns existing state if INIT_STUDENT has an error', () => {
         let initialState = {}
 
-        let action = { type: INIT_STUDENT, payload: new Error(), error: true }
+        let action = {type: INIT_STUDENT, payload: new Error(), error: true}
 
         let expected = initialState
         let actual = reducer(initialState, action)
@@ -86,12 +83,12 @@ describe('students reducer', () => {
 
     it.skip('handles DESTROY_STUDENT', () => {
         // TODO: This needs to test the student-wrapper reducer
-        let student = { id: 'xyz' }
+        let student = {id: 'xyz'}
         let initialState = student
 
         let action = {
             type: DESTROY_STUDENT,
-            payload: { studentId: student.id },
+            payload: {studentId: student.id},
         }
 
         let expected = {}
@@ -102,7 +99,7 @@ describe('students reducer', () => {
     })
 
     it('handles CHANGE_NAME', () => {
-        let student = { id: 'xyz', name: 'first' }
+        let student = {id: 'xyz', name: 'first'}
         let initialState = student
 
         let action = {
@@ -113,7 +110,7 @@ describe('students reducer', () => {
             },
         }
 
-        let expected = { ...student, name: 'second' }
+        let expected = {...student, name: 'second'}
         let actual = reducer(initialState, action)
 
         expect(actual).toEqual(expected)
@@ -122,7 +119,7 @@ describe('students reducer', () => {
     })
 
     it('handles CHANGE_ADVISOR', () => {
-        let student = { id: 'xyz', advisor: 'first' }
+        let student = {id: 'xyz', advisor: 'first'}
         let initialState = student
 
         let action = {
@@ -133,7 +130,7 @@ describe('students reducer', () => {
             },
         }
 
-        let expected = { ...student, advisor: 'second' }
+        let expected = {...student, advisor: 'second'}
         let actual = reducer(initialState, action)
 
         expect(actual).toEqual(expected)
@@ -142,7 +139,7 @@ describe('students reducer', () => {
     })
 
     it('handles CHANGE_CREDITS_NEEDED', () => {
-        let student = { id: 'xyz', creditsNeeded: 30 }
+        let student = {id: 'xyz', creditsNeeded: 30}
         let initialState = student
 
         let action = {
@@ -153,7 +150,7 @@ describe('students reducer', () => {
             },
         }
 
-        let expected = { ...student, creditsNeeded: 20 }
+        let expected = {...student, creditsNeeded: 20}
         let actual = reducer(initialState, action)
 
         expect(actual).toEqual(expected)
@@ -162,7 +159,7 @@ describe('students reducer', () => {
     })
 
     it('handles CHANGE_MATRICULATION', () => {
-        let student = { id: 'xyz', matriculation: 1800 }
+        let student = {id: 'xyz', matriculation: 1800}
         let initialState = student
 
         let action = {
@@ -173,7 +170,7 @@ describe('students reducer', () => {
             },
         }
 
-        let expected = { ...student, matriculation: 2100 }
+        let expected = {...student, matriculation: 2100}
         let actual = reducer(initialState, action)
 
         expect(actual).toEqual(expected)
@@ -182,7 +179,7 @@ describe('students reducer', () => {
     })
 
     it('handles CHANGE_GRADUATION', () => {
-        let student = { id: 'xyz', graduation: 30 }
+        let student = {id: 'xyz', graduation: 30}
         let initialState = student
 
         let action = {
@@ -193,7 +190,7 @@ describe('students reducer', () => {
             },
         }
 
-        let expected = { ...student, graduation: 20 }
+        let expected = {...student, graduation: 20}
         let actual = reducer(initialState, action)
 
         expect(actual).toEqual(expected)
@@ -202,7 +199,7 @@ describe('students reducer', () => {
     })
 
     it('handles CHANGE_SETTING', () => {
-        let student = { id: 'xyz', settings: { name: 'nothing' } }
+        let student = {id: 'xyz', settings: {name: 'nothing'}}
         let initialState = student
 
         let action = {
@@ -216,7 +213,7 @@ describe('students reducer', () => {
 
         let expected = {
             ...student,
-            settings: { ...student.settings, key: 'value' },
+            settings: {...student.settings, key: 'value'},
         }
         let actual = reducer(initialState, action)
 
@@ -226,10 +223,10 @@ describe('students reducer', () => {
     })
 
     it('handles ADD_AREA', () => {
-        let student = { id: 'xyz', studies: [] }
+        let student = {id: 'xyz', studies: []}
         let initialState = student
 
-        let area = { name: `I'm an area` }
+        let area = {name: `I'm an area`}
         let action = {
             type: ADD_AREA,
             payload: {
@@ -238,7 +235,7 @@ describe('students reducer', () => {
             },
         }
 
-        let expected = { ...student, studies: [{ name: `I'm an area` }] }
+        let expected = {...student, studies: [{name: `I'm an area`}]}
         let actual = reducer(initialState, action)
 
         expect(actual).toEqual(expected)
@@ -250,8 +247,8 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             studies: [
-                { name: 'Exercise Science', type: 'major' },
-                { name: 'Asian Studies', type: 'major' },
+                {name: 'Exercise Science', type: 'major'},
+                {name: 'Asian Studies', type: 'major'},
             ],
         }
         let initialState = student
@@ -260,13 +257,13 @@ describe('students reducer', () => {
             type: REMOVE_AREA,
             payload: {
                 studentId: student.id,
-                areaQuery: { name: 'Exercise Science', type: 'major' },
+                areaQuery: {name: 'Exercise Science', type: 'major'},
             },
         }
 
         let expected = {
             ...student,
-            studies: [{ name: 'Asian Studies', type: 'major' }],
+            studies: [{name: 'Asian Studies', type: 'major'}],
         }
         let actual = reducer(initialState, action)
 
@@ -279,9 +276,9 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             studies: [
-                { name: 'Exercise Science', type: 'major' },
-                { name: 'Computer Science', type: 'major' },
-                { name: 'Asian Studies', type: 'major' },
+                {name: 'Exercise Science', type: 'major'},
+                {name: 'Computer Science', type: 'major'},
+                {name: 'Asian Studies', type: 'major'},
             ],
         }
         let initialState = student
@@ -291,15 +288,15 @@ describe('students reducer', () => {
             payload: {
                 studentId: student.id,
                 areaQueries: [
-                    { name: 'Exercise Science', type: 'major' },
-                    { name: 'Computer Science', type: 'major' },
+                    {name: 'Exercise Science', type: 'major'},
+                    {name: 'Computer Science', type: 'major'},
                 ],
             },
         }
 
         let expected = {
             ...student,
-            studies: [{ name: 'Asian Studies', type: 'major' }],
+            studies: [{name: 'Asian Studies', type: 'major'}],
         }
         let actual = reducer(initialState, action)
 
@@ -309,20 +306,20 @@ describe('students reducer', () => {
     })
 
     it('handles ADD_SCHEDULE', () => {
-        let student = { id: 'xyz', schedules: {} }
+        let student = {id: 'xyz', schedules: {}}
         let initialState = student
 
         let action = {
             type: ADD_SCHEDULE,
             payload: {
                 studentId: student.id,
-                schedule: { id: 's', title: `I'm a schedule` },
+                schedule: {id: 's', title: `I'm a schedule`},
             },
         }
 
         let expected = {
             ...student,
-            schedules: { s: { id: 's', title: `I'm a schedule` } },
+            schedules: {s: {id: 's', title: `I'm a schedule`}},
         }
         let actual = reducer(initialState, action)
 
@@ -336,8 +333,8 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             schedules: {
-                '1': { id: '1', title: 'Schedule!!!' },
-                '2': { id: '2', title: 'Schedule???' },
+                '1': {id: '1', title: 'Schedule!!!'},
+                '2': {id: '2', title: 'Schedule???'},
             },
         }
         let initialState = student
@@ -352,7 +349,7 @@ describe('students reducer', () => {
 
         let expected = {
             ...student,
-            schedules: { '2': { id: '2', title: 'Schedule???' } },
+            schedules: {'2': {id: '2', title: 'Schedule???'}},
         }
         let actual = reducer(initialState, action)
 
@@ -366,9 +363,9 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             schedules: {
-                '1': { id: '1', title: 'Schedule!!!' },
-                '2': { id: '2', title: 'Schedule???' },
-                '3': { id: '3', title: 'Schedule!!!???' },
+                '1': {id: '1', title: 'Schedule!!!'},
+                '2': {id: '2', title: 'Schedule???'},
+                '3': {id: '3', title: 'Schedule!!!???'},
             },
         }
         let initialState = student
@@ -383,7 +380,7 @@ describe('students reducer', () => {
 
         let expected = {
             ...student,
-            schedules: { '2': { id: '2', title: 'Schedule???' } },
+            schedules: {'2': {id: '2', title: 'Schedule???'}},
         }
         let actual = reducer(initialState, action)
 
@@ -397,7 +394,7 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             schedules: {
-                '1': { id: '1', title: 'Schedule!!!' },
+                '1': {id: '1', title: 'Schedule!!!'},
             },
         }
         let initialState = student
@@ -414,7 +411,7 @@ describe('students reducer', () => {
         let expected = {
             ...student,
             schedules: {
-                '1': { id: '1', title: `I am too a schedule! How dare you!` },
+                '1': {id: '1', title: `I am too a schedule! How dare you!`},
             },
         }
         let actual = reducer(initialState, action)
@@ -430,7 +427,7 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             schedules: {
-                '1': { id: '1', title: 'Schedule!!!', index: 1 },
+                '1': {id: '1', title: 'Schedule!!!', index: 1},
             },
         }
         let initialState = student
@@ -447,7 +444,7 @@ describe('students reducer', () => {
         let expected = {
             ...student,
             schedules: {
-                '1': { id: '1', index: 5, title: 'Schedule!!!' },
+                '1': {id: '1', index: 5, title: 'Schedule!!!'},
             },
         }
         let actual = reducer(initialState, action)
@@ -463,7 +460,7 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             schedules: {
-                '1': { id: '1', year: 0, semester: 0 },
+                '1': {id: '1', year: 0, semester: 0},
             },
         }
         let initialState = student
@@ -481,7 +478,7 @@ describe('students reducer', () => {
         let expected = {
             ...student,
             schedules: {
-                '1': { id: '1', year: 2015, semester: 1 },
+                '1': {id: '1', year: 2015, semester: 1},
             },
         }
         let actual = reducer(initialState, action)
@@ -497,7 +494,7 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             schedules: {
-                '1': { id: '1', clbids: [123] },
+                '1': {id: '1', clbids: [123]},
             },
         }
         let initialState = student
@@ -513,7 +510,7 @@ describe('students reducer', () => {
 
         let expected = {
             ...student,
-            schedules: { '1': { id: '1', clbids: [123, 789] } },
+            schedules: {'1': {id: '1', clbids: [123, 789]}},
         }
         let actual = reducer(initialState, action)
 
@@ -531,7 +528,7 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             schedules: {
-                '1': { id: '1', clbids: [123, 789] },
+                '1': {id: '1', clbids: [123, 789]},
             },
         }
         let initialState = student
@@ -547,7 +544,7 @@ describe('students reducer', () => {
 
         let expected = {
             ...student,
-            schedules: { '1': { id: '1', clbids: [789] } },
+            schedules: {'1': {id: '1', clbids: [789]}},
         }
         let actual = reducer(initialState, action)
 
@@ -565,7 +562,7 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             schedules: {
-                '1': { id: '1', clbids: [123, 789] },
+                '1': {id: '1', clbids: [123, 789]},
             },
         }
         let initialState = student
@@ -582,7 +579,7 @@ describe('students reducer', () => {
 
         let expected = {
             ...student,
-            schedules: { '1': { id: '1', clbids: [789, 123] } },
+            schedules: {'1': {id: '1', clbids: [789, 123]}},
         }
         let actual = reducer(initialState, action)
 
@@ -600,8 +597,8 @@ describe('students reducer', () => {
         let student = {
             id: 'xyz',
             schedules: {
-                '1': { id: '1', clbids: [123] },
-                '2': { id: '2', clbids: [789] },
+                '1': {id: '1', clbids: [123]},
+                '2': {id: '2', clbids: [789]},
             },
         }
         let initialState = student
@@ -620,8 +617,8 @@ describe('students reducer', () => {
         let expected = {
             ...student,
             schedules: {
-                '1': { id: '1', clbids: [] },
-                '2': { id: '2', clbids: [789, 123] },
+                '1': {id: '1', clbids: []},
+                '2': {id: '2', clbids: [789, 123]},
             },
         }
         let actual = reducer(initialState, action)
@@ -637,7 +634,7 @@ describe('students reducer', () => {
     })
 
     it('handles SET_OVERRIDE', () => {
-        let student = { id: 'xyz', overrides: {} }
+        let student = {id: 'xyz', overrides: {}}
         let initialState = student
 
         let action = {
@@ -651,7 +648,7 @@ describe('students reducer', () => {
 
         let expected = {
             ...student,
-            overrides: { 'path.to.override': 'strings!' },
+            overrides: {'path.to.override': 'strings!'},
         }
         let actual = reducer(initialState, action)
 
@@ -662,7 +659,7 @@ describe('students reducer', () => {
     })
 
     it('handles REMOVE_OVERRIDE', () => {
-        let student = { id: 'xyz', overrides: { 'path.to.override': true } }
+        let student = {id: 'xyz', overrides: {'path.to.override': true}}
         let initialState = student
 
         let action = {
@@ -673,7 +670,7 @@ describe('students reducer', () => {
             },
         }
 
-        let expected = { ...student, overrides: {} }
+        let expected = {...student, overrides: {}}
         let actual = reducer(initialState, action)
 
         expect(actual).toEqual(expected)
@@ -683,20 +680,20 @@ describe('students reducer', () => {
     })
 
     it('handles ADD_FABRICATION', () => {
-        let student = { id: 'xyz', fabrications: {} }
+        let student = {id: 'xyz', fabrications: {}}
         let initialState = student
 
         let action = {
             type: ADD_FABRICATION,
             payload: {
                 studentId: student.id,
-                fabrication: { clbid: '1', something: 'um…' },
+                fabrication: {clbid: '1', something: 'um…'},
             },
         }
 
         let expected = {
             ...student,
-            fabrications: { '1': { clbid: '1', something: 'um…' } },
+            fabrications: {'1': {clbid: '1', something: 'um…'}},
         }
         let actual = reducer(initialState, action)
 
@@ -709,7 +706,7 @@ describe('students reducer', () => {
     it('handles REMOVE_FABRICATION', () => {
         let student = {
             id: 'xyz',
-            fabrications: { '1': { clbid: '1', something: 'um…' } },
+            fabrications: {'1': {clbid: '1', something: 'um…'}},
         }
         let initialState = student
 
@@ -721,7 +718,7 @@ describe('students reducer', () => {
             },
         }
 
-        let expected = { ...student, fabrications: {} }
+        let expected = {...student, fabrications: {}}
         let actual = reducer(initialState, action)
 
         expect(actual).toEqual(expected)
@@ -749,7 +746,7 @@ describe('the undoable students reducer', () => {
         const initial = {}
         const hasOneStudent = undoableReducer(initial, {
             type: INIT_STUDENT,
-            payload: { id: 'xyz' },
+            payload: {id: 'xyz'},
         })
 
         expect(hasOneStudent).toBeTruthy()
@@ -760,7 +757,7 @@ describe('the undoable students reducer', () => {
     it('treats INIT_STUDENT as a blank slate', () => {
         const initial = {}
 
-        const firstStudent = { id: 'xyz' }
+        const firstStudent = {id: 'xyz'}
         const hasOneStudent = undoableReducer(initial, {
             type: INIT_STUDENT,
             payload: firstStudent,
@@ -772,7 +769,7 @@ describe('the undoable students reducer', () => {
         expect(hasOneStudent.present).toEqual(firstStudent)
 
         // should have the initial state and _no trace_ of the previous student
-        const secondStudent = { id: 'abc' }
+        const secondStudent = {id: 'abc'}
         const stillHasOneStudent = undoableReducer(hasOneStudent, {
             type: INIT_STUDENT,
             payload: secondStudent,
@@ -784,7 +781,7 @@ describe('the undoable students reducer', () => {
 
     it('holds previous states', () => {
         const initial = {}
-        const student = { id: 'xyz' }
+        const student = {id: 'xyz'}
         const hasOneStudent = undoableReducer(initial, {
             type: INIT_STUDENT,
             payload: student,
@@ -798,7 +795,7 @@ describe('the undoable students reducer', () => {
         // should have the initial state *and* the single student state
         const hasTwoStudents = undoableReducer(hasOneStudent, {
             type: CHANGE_NAME,
-            payload: { name: 'test' },
+            payload: {name: 'test'},
         })
         expect(hasTwoStudents.past.length).toBe(1)
         expect(hasTwoStudents.past[0]).toEqual(hasOneStudent.present)
@@ -808,11 +805,11 @@ describe('the undoable students reducer', () => {
         const initial = {}
         const hasOneStudent = undoableReducer(initial, {
             type: INIT_STUDENT,
-            payload: { id: 'xyz' },
+            payload: {id: 'xyz'},
         })
         const editedStudent = undoableReducer(hasOneStudent, {
             type: CHANGE_NAME,
-            payload: { name: 'abc' },
+            payload: {name: 'abc'},
         })
 
         const shouldBeInitial = undoableReducer(editedStudent, undo())
@@ -822,11 +819,11 @@ describe('the undoable students reducer', () => {
     it('allows redoing to a future state', () => {
         const initial = undoableReducer(initial, {
             type: INIT_STUDENT,
-            payload: { id: 'xyz' },
+            payload: {id: 'xyz'},
         })
         const hasOneStudent = undoableReducer(initial, {
             type: CHANGE_NAME,
-            payload: { name: 'abc' },
+            payload: {name: 'abc'},
         })
 
         const shouldBeInitial = undoableReducer(hasOneStudent, undo())
@@ -851,7 +848,7 @@ describe('the undoable students reducer', () => {
         for (let i of range(15)) {
             state = undoableReducer(state, {
                 type: CHANGE_NAME,
-                payload: { name: String(i) },
+                payload: {name: String(i)},
             })
         }
 

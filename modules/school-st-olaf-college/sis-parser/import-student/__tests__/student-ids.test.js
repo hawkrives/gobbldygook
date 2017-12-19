@@ -1,6 +1,6 @@
-import { loadHtml } from './import-student.support'
-import { parseHtml } from '../../parse-html'
-import { extractStudentIds } from '../student-ids'
+import {loadHtml} from './import-student.support'
+import {parseHtml} from '../../parse-html'
+import {extractStudentIds} from '../student-ids'
 
 describe('extractStudentIds', () => {
     it('returns the student id', () => {

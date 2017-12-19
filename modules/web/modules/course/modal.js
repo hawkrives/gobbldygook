@@ -8,8 +8,8 @@ import Toolbar from '../../components/toolbar'
 import Button from '../../components/button'
 import SemesterSelector from './semester-selector'
 import ExpandedCourse from './expanded'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 import {
     addCourse,
     moveCourse,
@@ -150,7 +150,7 @@ const mapState = (state, ownProps) => {
 }
 
 const mapDispatch = dispatch =>
-    bindActionCreators({ addCourse, moveCourse, removeCourse }, dispatch)
+    bindActionCreators({addCourse, moveCourse, removeCourse}, dispatch)
 
 // $FlowFixMe
 export default connect(mapState, mapDispatch)(ModalCourse)

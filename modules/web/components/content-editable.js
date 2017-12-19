@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import cx from 'classnames'
 import debug from 'debug'
 const log = debug('web:react')
@@ -64,7 +64,7 @@ class ContentEditable extends Component {
             this.props.onBlur(value)
         }
 
-        this.setState({ lastValue: value })
+        this.setState({lastValue: value})
     }
 
     render() {
@@ -77,7 +77,7 @@ class ContentEditable extends Component {
                 onKeyDown={this.handleKeyDown}
                 onFocus={this.handleFocus}
                 contentEditable={!this.props.disabled}
-                dangerouslySetInnerHTML={{ __html: this.props.value }}
+                dangerouslySetInnerHTML={{__html: this.props.value}}
             />
         )
     }

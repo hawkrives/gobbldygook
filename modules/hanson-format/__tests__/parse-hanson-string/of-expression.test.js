@@ -1,6 +1,6 @@
-import { customParser } from './parse-hanson-string.support'
-const parse = customParser({ allowedStartRules: ['Of'] })
-const course = customParser({ allowedStartRules: ['Course'] })
+import {customParser} from './parse-hanson-string.support'
+const parse = customParser({allowedStartRules: ['Of']})
+const course = customParser({allowedStartRules: ['Course']})
 
 describe('OfExpression', () => {
     it('supports of-statements of the form "n of ()"', () => {

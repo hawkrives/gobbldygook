@@ -4,11 +4,11 @@ import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
-import { sortStudiesByType } from '../../../object-student'
+import {sortStudiesByType} from '../../../object-student'
 import styled from 'styled-components'
 import Button from '../../components/button'
 import Icon from '../../components/icon'
-import { iosTrashOutline, iosArrowForward } from '../../icons/ionicons'
+import {iosTrashOutline, iosArrowForward} from '../../icons/ionicons'
 
 const Container = styled.li`
     display: flex;
@@ -113,7 +113,7 @@ type PropTypes = {
 }
 
 export default function StudentListItem(props: PropTypes) {
-    const { student, isEditing, destroyStudent } = props
+    const {student, isEditing, destroyStudent} = props
 
     const isLoading =
         student.isLoading ||
@@ -121,7 +121,7 @@ export default function StudentListItem(props: PropTypes) {
         student.isValdiating ||
         student.isChecking
 
-    const classes: any = { loading: isLoading }
+    const classes: any = {loading: isLoading}
     if (!isLoading) {
         classes['can-graduate'] = student.data.present.canGraduate
         classes['cannot-graduate'] = !student.data.present.canGraduate

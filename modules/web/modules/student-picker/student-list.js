@@ -17,7 +17,7 @@ const ListOfStudents = styled(List)`
 `
 
 export default function StudentList(props) {
-    const { isEditing, destroyStudent, students } = props
+    const {isEditing, destroyStudent, students} = props
 
     let {
         filter: filterText,
