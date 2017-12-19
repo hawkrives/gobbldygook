@@ -56,8 +56,7 @@ export function CourseTableContainer(props) {
             addYear={() => addYear(props.addSchedule, student)}
             addSemester={year => addSemester(props.addSchedule, student, year)}
             removeYear={year =>
-                removeYear(props.destroySchedules, student, year)
-            }
+                removeYear(props.destroySchedules, student, year)}
         />
     )
 }

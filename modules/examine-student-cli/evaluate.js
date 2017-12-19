@@ -167,9 +167,7 @@ function stringifyQualification({$key, $operator, $value}) {
                 stringifyQualification({$key, $operator, $value: val})
             ).join(conjunction)
         } else {
-            const msg = `stringifyQualification(): "${
-                $value.$type
-            }" is not a valid type for a qualification's value.`
+            const msg = `stringifyQualification(): "${$value.$type}" is not a valid type for a qualification's value.`
             throw new TypeError(msg)
         }
     } else {

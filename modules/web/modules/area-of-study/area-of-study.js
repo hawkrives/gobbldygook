@@ -166,8 +166,7 @@ class AreaOfStudyContainer extends Component {
                     <Button
                         className="area--actually-remove-area"
                         onClick={ev =>
-                            props.onRemoveArea({name, type, revision}, ev)
-                        }
+                            props.onRemoveArea({name, type, revision}, ev)}
                     >
                         Remove
                     </Button>

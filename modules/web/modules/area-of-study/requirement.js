@@ -73,9 +73,9 @@ function Requirement(props: PropTypes) {
                     {props.overridden ? '(Overridden) ' : ''}
                 </span>
                 <Button
-                    title={`${
-                        props.overridden ? 'Remove' : 'Apply'
-                    } a manual override to this requirement`}
+                    title={`${props.overridden
+                        ? 'Remove'
+                        : 'Apply'} a manual override to this requirement`}
                     onClick={ev => props.onToggleOverride(props.path, ev)}
                     type="flat"
                 >
