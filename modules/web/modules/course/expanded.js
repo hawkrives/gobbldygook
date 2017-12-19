@@ -48,12 +48,12 @@ const SummaryThing = styled.div`
     white-space: normal;
 `
 
-export default class ExpandedCourse extends React.PureComponent {
-    props: {
-        className?: string,
-        course: Object,
-    }
+type Props = {
+    className?: string,
+    course: Object,
+}
 
+export default class ExpandedCourse extends React.PureComponent<Props> {
     render() {
         const { course, className } = this.props
 

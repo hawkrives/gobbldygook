@@ -36,13 +36,12 @@ const whitelist = new Set([
     // when one of these fires
     courseConstants.REFRESH_COURSES,
 ])
+
 function shouldTakeAction({ type }: { type?: string }) {
     return whitelist.has(type)
 }
 
-const checkStudentsMiddleware = (store: any) => (next: any) => (
-    action: any
-) => {
+const checkMiddleware = (store: any) => (next: any) => async (action: any) => {
     if (!shouldTakeAction(action)) {
         return next(action)
     }
@@ -79,7 +78,9 @@ const checkStudentsMiddleware = (store: any) => (next: any) => (
         store.dispatch(checkStudent(s.data.present.id))
     )
 
-    return Promise.all(promises).then(() => result)
+    await Promise.all(promises)
+
+    return result
 }
 
-export default checkStudentsMiddleware
+export default checkMiddleware

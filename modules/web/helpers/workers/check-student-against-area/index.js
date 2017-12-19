@@ -39,17 +39,23 @@ export default function checkStudentAgainstArea(student: any, area: any) {
 
         let result = details.result
         let bits = []
-        if (result.$type === 'of') {
-            bits = result.$of
-        } else if (
-            result.$type === 'boolean' &&
-            result.$booleanType === 'and'
-        ) {
-            bits = result.$and
-        } else if (result.$type === 'boolean' && result.$booleanType === 'or') {
-            bits = result.$or
+        switch (result.$type) {
+            case 'of':
+                bits = result.$of
+                break
+            case 'boolean': {
+                if (result.$booleanType === 'and') {
+                    bits = result.$and
+                } else if (result.$booleanType === 'or') {
+                    bits = result.$or
+                }
+                break
+            }
+            default:
+                break
         }
-        let finalReqs = map(bits, b => b._result)
+
+        const finalReqs = bits.map(b => '_result' in b ? b._result : false)
 
         const maxProgress = finalReqs.length
         const currentProgress = filter(finalReqs, Boolean).length

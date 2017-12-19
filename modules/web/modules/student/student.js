@@ -14,7 +14,7 @@ import GraduationStatus from './graduation-status'
 import './student.scss'
 
 type StudentType = Object
-type PropTypes = {
+type Props = {
     content: React$Element<any>, // from react-router
     loadStudent: string => any, // redux
     overlay: ?React$Element<any>,
@@ -23,18 +23,16 @@ type PropTypes = {
     student: StudentType, // redux
 }
 
-export class Student extends Component {
-    props: PropTypes
-
+export class Student extends Component<Props> {
     componentWillMount() {
         this.loadStudent(this.props)
     }
 
-    componentWillReceiveProps(nextProps: PropTypes) {
+    componentWillReceiveProps(nextProps: Props) {
         this.loadStudent(nextProps)
     }
 
-    loadStudent = (props: PropTypes) => {
+    loadStudent = (props: Props) => {
         // We have to be able to load the student here because we only load
         // students on-demand into the redux store
         const didStudentChange =
@@ -98,5 +96,4 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators({ loadStudent }, dispatch)
 
-// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(Student)

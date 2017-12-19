@@ -21,7 +21,7 @@ import './area-of-study.scss'
 
 type Student = Object
 type AreaOfStudyType = {
-    _area?: Object,
+    _area: Object,
     _checked?: boolean,
     _error?: string,
     _progress?: { at: number, of: number },
