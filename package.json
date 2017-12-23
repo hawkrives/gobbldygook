@@ -184,7 +184,7 @@
     "get-stdin": "5.0.1",
     "glob": "7.1.2",
     "graceful-fs": "4.1.11",
-    "jest": "22.0.3",
+    "jest": "22.0.4",
     "jest-enzyme": "4.0.1",
     "jest-matcher-utils": "22.0.3",
     "json-loader": "0.5.7",
