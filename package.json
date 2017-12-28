@@ -185,7 +185,7 @@
     "glob": "7.1.2",
     "graceful-fs": "4.1.11",
     "jest": "22.0.3",
-    "jest-enzyme": "4.0.1",
+    "jest-enzyme": "4.0.2",
     "jest-matcher-utils": "22.0.3",
     "json-loader": "0.5.7",
     "junk": "2.1.0",
