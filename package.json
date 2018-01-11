@@ -120,7 +120,7 @@
     "react-document-title": "2.0.3",
     "react-dom": "16.2.0",
     "react-dropzone": "4.2.3",
-    "react-input-autosize": "2.2.0",
+    "react-input-autosize": "2.2.1",
     "react-modal": "3.1.10",
     "react-radio-group": "3.0.2",
     "react-redux": "5.0.6",
