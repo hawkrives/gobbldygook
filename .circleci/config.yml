@@ -1,0 +1,99 @@
+---
+version: 2
+
+x-config:
+  - &save-cache-yarn
+    key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
+    paths: [~/.cache/yarn]
+  - &restore-cache-yarn
+    key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
+  
+workflows:
+  version: 2
+  build:
+    jobs:
+      - cache-yarn
+      - flow: {requires: [cache-yarn]}
+      - jest: {requires: [cache-yarn]}
+      - prettier: {requires: [cache-yarn]}
+      - eslint: {requires: [cache-yarn]}
+      - build: {requires: [cache-yarn]}
+
+jobs:
+  cache-yarn:
+    docker: [{image: 'circleci/node:8'}]
+    steps:
+      - checkout
+      - restore_cache: *restore-cache-yarn
+      - run: yarn install
+      - run: yarn --version
+      - save_cache: *save-cache-yarn
+
+  flow:
+    docker: [{image: 'circleci/node:8'}]
+    environment:
+      task: flow
+    steps:
+      - checkout
+      - restore_cache: *restore-cache-yarn
+      - run: yarn install
+      - save_cache: *save-cache-yarn
+      - run: yarn run --silent flow check --quiet
+
+  jest:
+    docker: [{image: 'circleci/node:8'}]
+    environment:
+      task: jest
+      JEST_JUNIT_OUTPUT: ./test-results/jest/junit.xml
+    steps:
+      - checkout
+      - restore_cache: *restore-cache-yarn
+      - run: yarn install
+      - save_cache: *save-cache-yarn
+      - run: yarn run --silent test --coverage
+      - run:
+          name: coveralls
+          command: |
+            export PATH=$PATH:$(yarn global bin)
+            export COVERALLS_SERVICE_NAME=CircleCI
+            export COVERALLS_SERVICE_JOB_ID=$CIRCLE_BUILD_NUM
+            yarn global add coveralls
+            coveralls < ./coverage/lcov.info
+
+  prettier:
+    docker: [{image: 'circleci/node:8'}]
+    environment:
+      task: prettier
+    steps:
+      - checkout
+      - restore_cache: *restore-cache-yarn
+      - run: yarn install
+      - save_cache: *save-cache-yarn
+      - run: yarn run prettier
+      - run: git diff .*.js modules/
+
+  eslint:
+    docker: [{image: 'circleci/node:8'}]
+    environment:
+      task: lint
+    steps:
+      - checkout
+      - restore_cache: *restore-cache-yarn
+      - run: yarn install
+      - save_cache: *save-cache-yarn
+      - run: mkdir -p test-results/eslint/
+      - run: yarn run --silent lint
+      - run: yarn run --silent lint --format junit > test-results/eslint/junit.xml
+      - store_test_results:
+          path: ./test-results
+
+  build:
+    docker: [{image: 'circleci/node:8'}]
+    environment:
+      task: build
+    steps:
+      - checkout
+      - restore_cache: *restore-cache-yarn
+      - run: yarn install
+      - save_cache: *save-cache-yarn
+      - run: yarn run --silent build
