@@ -5,11 +5,46 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import React from 'react'
 import PropTypes from 'prop-types'
 import {DragDropContext} from 'react-dnd'
-import {ThemeProvider} from 'styled-components'
+import {ThemeProvider, injectGlobal} from 'styled-components'
 import StudentPicker from './modules/student-picker'
 import * as theme from './theme'
+import * as v from './theme/variables'
 
-import './index.scss'
+injectGlobal`
+    *, *::before, *::after {
+        box-sizing: inherit;
+    }
+
+    html {
+        font-family: ${v.sansFontStack};
+        color: ${v.textColor};
+
+        box-sizing: border-box;
+
+        background: ${v.background};
+        min-height: 100vh;
+
+        line-height: 1.4;
+
+        font-feature-settings: 'liga', 'calt', 'kern';
+        hyphens: auto;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    menu {
+        padding: 0;
+        margin: 0;
+    }
+
+    .content {
+        padding-top: ${v.pageEdgePadding};
+        padding-bottom: 15vh;
+        overflow-y: scroll;
+    }
+`
 
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
 // eslint-disable-next-line react/prefer-stateless-function
