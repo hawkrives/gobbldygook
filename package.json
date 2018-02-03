@@ -190,7 +190,7 @@
     "json-loader": "0.5.7",
     "junk": "2.1.0",
     "mkdirp": "0.5.1",
-    "node-fetch": "2.0.0-alpha.7",
+    "node-fetch": "2.0.0",
     "node-sass": "4.7.2",
     "nomnom": "1.8.1",
     "pegjs": "0.10.0",
