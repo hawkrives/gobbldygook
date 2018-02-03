@@ -36,8 +36,7 @@ type PropTypes = {
 }
 
 export function ShareSheet(props: PropTypes) {
-    let {student} = props
-    student = student || {}
+    let {student = {}} = props
 
     const boundCloseModal = () =>
         props.router.push(`/s/${props.params.studentId}/`)
@@ -72,7 +71,7 @@ export function ShareSheet(props: PropTypes) {
     )
 }
 
-const mapState = (state, ownProps) => {
+const mapState = (state, ownProps): {student: Object} => {
     return {student: state.students[ownProps.params.studentId].data.present}
 }
 

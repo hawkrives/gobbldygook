@@ -67,16 +67,3 @@ export function getCourse(
         )
         .catch(error => ({clbid, term, error: error.message}))
 }
-
-/**
- * Takes a list of clbids, and returns a list of the course objects for those
- * clbids.
- *
- * @param {Number[]} clbids - a list of class/lab IDs
- * @param {Object} fabrications - a list of fabrications
- * @returns {Promise} - a promise for the course data
- * @fulfill {Object[]} - the courses.
- */
-export function getCourses(clbids: number[], fabrications: any) {
-    return Promise.all(map(clbids, c => getCourse(c, fabrications)))
-}

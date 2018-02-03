@@ -154,6 +154,8 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
     }
 }
 
-const mapState = state => ({allAreas: state.areas.data})
+const mapState = (state): {allAreas: Array<AreaOfStudy>} => ({
+    allAreas: state.areas.data,
+})
 
 export const AreaOfStudySidebar = connect(mapState)(AreaOfStudySidebarComponent)
