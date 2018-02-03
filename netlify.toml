@@ -5,6 +5,7 @@
     command = "npm run netlify"
     [build.environment]
         NODE_VERSION = "8"
+        YARN_VERSION = "1.3.2"
 
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
