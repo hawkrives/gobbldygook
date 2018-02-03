@@ -33,11 +33,7 @@ function config() {
 
     let publicPath = '/'
     if (isProduction) {
-        if (process.env.CONTEXT === 'production') {
-            publicPath = process.env.URL
-        } else {
-            publicPath = process.env.DEPLOY_PRIME_URL || ''
-        }
+        publicPath = process.env.URL || process.env.DEPLOY_PRIME_URL || '/'
 
         if (!publicPath.endsWith('/')) {
             // If we don't do this, file assets will get incorrect paths.
