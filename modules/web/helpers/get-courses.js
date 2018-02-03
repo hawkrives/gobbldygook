@@ -1,6 +1,5 @@
 // @flow
 import db from './db'
-import map from 'lodash/map'
 import omit from 'lodash/omit'
 import padStart from 'lodash/padStart'
 import {status, json} from '../../lib/fetch-helpers'

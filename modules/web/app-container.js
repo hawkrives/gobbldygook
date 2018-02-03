@@ -3,7 +3,6 @@
 import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import {DragDropContext} from 'react-dnd'
 import {ThemeProvider, injectGlobal} from 'styled-components'
 import StudentPicker from './modules/student-picker'
