@@ -1,6 +1,8 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import {interpose} from '../../lib'
+import brwsr from 'brwsr'
 
 import {
     installOperaExtension,
@@ -8,46 +10,44 @@ import {
     installFirefoxExtension,
 } from '../../web/helpers/extension-helpers'
 
-import {interpose} from '../../lib'
+const Button = styled`
+    display: inline-block;
+`
 
-import brwsr from 'brwsr'
-
-import './browser-extensions.scss'
-
-function BrowserButton({
-    onClick,
-    browserName,
-    disabled,
-}: {
-    onClick: any => any,
+type ButtonProps = {
+    onClick: Event => any,
     browserName: string,
     disabled?: boolean,
-}) {
+}
+
+function BrowserButton({onClick, browserName, disabled}: ButtonProps) {
     return (
-        <button
+        <Button
             type="button"
             disabled={disabled}
-            className="browser-button"
             onClick={onClick}
         >
             {browserName}
-        </button>
+        </Button>
     )
 }
-BrowserButton.propTypes = {
-    onClick: PropTypes.func.isRequired,
+
+type Props = {
+    onInstall: () => any,
 }
 
-export class BrowserExtensionsComponent extends React.Component {
-    static propTypes = {
-        onInstall: PropTypes.func.isRequired,
-    }
+type State = {
+    installError: ?Error,
+    installAttempted: boolean,
+    extensionInstalled: boolean,
+}
 
-    state: {
-        installError: ?Error,
-        installAttempted: boolean,
-        extensionInstalled: boolean,
-    } = {
+export class BrowserExtensionsComponent extends React.Component<
+    any,
+    Props,
+    State
+> {
+    state = {
         installAttempted: false,
         installError: null,
         extensionInstalled: false,
