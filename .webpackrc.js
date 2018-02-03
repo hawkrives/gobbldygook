@@ -36,7 +36,7 @@ function config() {
         if (process.env.CONTEXT === 'production') {
             publicPath = process.env.URL
         } else {
-            publicPath = process.env.DEPLOY_URL
+            publicPath = process.env.DEPLOY_PRIME_URL || ''
         }
 
         if (!publicPath.endsWith('/')) {
