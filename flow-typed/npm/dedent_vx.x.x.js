@@ -16,17 +16,3 @@
 declare module 'dedent' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-declare module 'dedent/dist/dedent' {
-  declare module.exports: any;
-}
-
-// Filename aliases
-declare module 'dedent/dist/dedent.js' {
-  declare module.exports: $Exports<'dedent/dist/dedent'>;
-}

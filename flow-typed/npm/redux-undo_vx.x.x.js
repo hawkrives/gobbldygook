@@ -16,17 +16,3 @@
 declare module 'redux-undo' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-declare module 'redux-undo/lib/index' {
-  declare module.exports: any;
-}
-
-// Filename aliases
-declare module 'redux-undo/lib/index.js' {
-  declare module.exports: $Exports<'redux-undo/lib/index'>;
-}

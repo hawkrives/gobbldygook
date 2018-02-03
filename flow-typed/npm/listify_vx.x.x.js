@@ -16,23 +16,3 @@
 declare module 'listify' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-declare module 'listify/test' {
-  declare module.exports: any;
-}
-
-// Filename aliases
-declare module 'listify/index' {
-  declare module.exports: $Exports<'listify'>;
-}
-declare module 'listify/index.js' {
-  declare module.exports: $Exports<'listify'>;
-}
-declare module 'listify/test.js' {
-  declare module.exports: $Exports<'listify/test'>;
-}

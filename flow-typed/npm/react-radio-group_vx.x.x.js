@@ -16,31 +16,3 @@
 declare module 'react-radio-group' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-declare module 'react-radio-group/lib/index' {
-  declare module.exports: any;
-}
-
-declare module 'react-radio-group/umd/index' {
-  declare module.exports: any;
-}
-
-declare module 'react-radio-group/webpack.config' {
-  declare module.exports: any;
-}
-
-// Filename aliases
-declare module 'react-radio-group/lib/index.js' {
-  declare module.exports: $Exports<'react-radio-group/lib/index'>;
-}
-declare module 'react-radio-group/umd/index.js' {
-  declare module.exports: $Exports<'react-radio-group/umd/index'>;
-}
-declare module 'react-radio-group/webpack.config.js' {
-  declare module.exports: $Exports<'react-radio-group/webpack.config'>;
-}

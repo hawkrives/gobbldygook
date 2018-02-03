@@ -16,18 +16,3 @@
 declare module 'sto-course-related-data' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-
-
-// Filename aliases
-declare module 'sto-course-related-data/index' {
-  declare module.exports: $Exports<'sto-course-related-data'>;
-}
-declare module 'sto-course-related-data/index.js' {
-  declare module.exports: $Exports<'sto-course-related-data'>;
-}

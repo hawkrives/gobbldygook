@@ -16,17 +16,3 @@
 declare module 'idb-range' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-declare module 'idb-range/lib/index' {
-  declare module.exports: any;
-}
-
-// Filename aliases
-declare module 'idb-range/lib/index.js' {
-  declare module.exports: $Exports<'idb-range/lib/index'>;
-}

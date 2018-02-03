@@ -16,18 +16,3 @@
 declare module 'serialize-error' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-
-
-// Filename aliases
-declare module 'serialize-error/index' {
-  declare module.exports: $Exports<'serialize-error'>;
-}
-declare module 'serialize-error/index.js' {
-  declare module.exports: $Exports<'serialize-error'>;
-}

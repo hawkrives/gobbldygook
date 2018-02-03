@@ -16,18 +16,3 @@
 declare module 'delay' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-
-
-// Filename aliases
-declare module 'delay/index' {
-  declare module.exports: $Exports<'delay'>;
-}
-declare module 'delay/index.js' {
-  declare module.exports: $Exports<'delay'>;
-}

@@ -16,23 +16,3 @@
 declare module 'flow-remove-types' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-declare module 'flow-remove-types/register' {
-  declare module.exports: any;
-}
-
-// Filename aliases
-declare module 'flow-remove-types/index' {
-  declare module.exports: $Exports<'flow-remove-types'>;
-}
-declare module 'flow-remove-types/index.js' {
-  declare module.exports: $Exports<'flow-remove-types'>;
-}
-declare module 'flow-remove-types/register.js' {
-  declare module.exports: $Exports<'flow-remove-types/register'>;
-}

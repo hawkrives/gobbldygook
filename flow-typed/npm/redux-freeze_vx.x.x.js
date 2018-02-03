@@ -16,17 +16,3 @@
 declare module 'redux-freeze' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-declare module 'redux-freeze/lib/middleware' {
-  declare module.exports: any;
-}
-
-// Filename aliases
-declare module 'redux-freeze/lib/middleware.js' {
-  declare module.exports: $Exports<'redux-freeze/lib/middleware'>;
-}
