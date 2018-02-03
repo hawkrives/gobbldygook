@@ -1,12 +1,100 @@
 // @flow
-import React, {Component} from 'react'
-import cx from 'classnames'
+import * as React from 'react'
 import Link from 'react-router/lib/Link'
+import styled from 'styled-components'
+import * as c from '../styles/colors'
+import * as m from '../styles/mixins'
+import * as v from '../styles/variables'
 
-import {compareProps} from '../../lib'
-import './button.scss'
+const BaseButton = styled.button`
+    cursor: pointer;
 
-type ButtonProps = {
+    min-height: 3ex;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    // display: inline-flex collapses inline whitespace
+    // white-space: pre brings it back, although it will
+    // also show newlines, so be careful.
+    white-space: pre;
+
+    padding: 1ex 2em;
+    border: solid 1px transparent;
+
+    transition: all 0.2s ease-out;
+    border-radius: ${v.baseBorderRadius};
+    line-height: normal;
+
+    text-align: center;
+    text-transform: uppercase;
+
+    outline: 0;
+    color: currentColor;
+
+    // Turn off default button styles in webkit
+    -webkit-appearance: initial !important; // override normalize's html [type=button]
+
+    // Gets rid of tap active state
+    -webkit-tap-highlight-color: transparent;
+`
+
+const RaisedButton = BaseButton.extend`
+    ${m.materialShadow} background-color: ${c.white};
+
+    &:hover {
+        background-color: ${c.white};
+    }
+    &:focus {
+        background-color: ${c.blue50};
+        border-color: ${c.blue300};
+    }
+
+    &:active {
+        ${m.materialShadow} background-color: ${c.white};
+    }
+
+    &[disabled] {
+        cursor: default;
+        color: ${c.gray500};
+    }
+`
+
+const FlatButton = BaseButton.extend`
+    background-color: transparent;
+
+    &:hover {
+        background-color: ${c.gray100};
+        border-color: ${c.gray400};
+    }
+
+    &:focus {
+        background-color: ${c.blue50};
+        border-color: ${c.blue300};
+    }
+
+    &[disabled] {
+        cursor: default;
+        color: ${c.disabledForegroundLight};
+
+        &:hover,
+        &:focus,
+        &:active {
+            border-color: transparent;
+            background-color: transparent;
+        }
+    }
+`
+
+const FlatLinkButton = FlatButton.withComponent(Link).extend`
+    ${m.linkUndecorated}
+`
+
+const RaisedLinkButton = RaisedButton.withComponent(Link).extend`
+    ${m.linkUndecorated}
+`
+
+type Props = {
     children?: any,
     className?: string,
     disabled?: boolean,
@@ -18,34 +106,41 @@ type ButtonProps = {
     type: 'flat' | 'raised',
 }
 
-export default class Button extends Component {
-    props: ButtonProps
-
+class Button extends React.Component<any, Props, void> {
     static defaultProps = {
         type: 'flat',
     }
 
-    shouldComponentUpdate(nextProps: ButtonProps) {
-        return compareProps(this.props, nextProps)
-    }
-
     render() {
-        let tag = this.props.link ? Link : 'button'
-        let props = {
-            type: 'button',
-            className: cx(
-                'button',
-                `button--${this.props.type}`,
-                this.props.className
-            ),
-            disabled: this.props.disabled,
-            onClick: this.props.onClick,
-            style: this.props.style,
-            title: this.props.title,
-        }
-        if (this.props.link) {
-            props = {...props, to: this.props.to}
-        }
-        return React.createElement(tag, props, this.props.children)
+        const {
+            className,
+            disabled,
+            onClick,
+            style,
+            title,
+            to,
+            link,
+            type,
+        } = this.props
+
+        const Tag = link
+            ? type === 'flat' ? FlatLinkButton : RaisedLinkButton
+            : type === 'flat' ? FlatButton : RaisedButton
+
+        return (
+            <Tag
+                type="button"
+                className={className}
+                disabled={disabled}
+                onClick={onClick}
+                style={style}
+                title={title}
+                to={to}
+            >
+                {this.props.children}
+            </Tag>
+        )
     }
 }
+
+export default Button

@@ -9,13 +9,6 @@ const BaseToolbar = styled.div`
     flex-flow: row wrap;
     justify-content: stretch;
 
-    /* TODO: remove this chunk */
-    & .button {
-        flex: 1 0 auto;
-        padding-left: 0.25em;
-        padding-right: 0.25em;
-    }
-
     & .icon {
         font-size: 1.5em;
     }
