@@ -22,11 +22,7 @@ type ButtonProps = {
 
 function BrowserButton({onClick, browserName, disabled}: ButtonProps) {
     return (
-        <Button
-            type="button"
-            disabled={disabled}
-            onClick={onClick}
-        >
+        <Button type="button" disabled={disabled} onClick={onClick}>
             {browserName}
         </Button>
     )

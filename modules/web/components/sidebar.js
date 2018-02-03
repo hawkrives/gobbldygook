@@ -1,7 +1,5 @@
 // @flow
 import * as React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import Icon from './icon'
@@ -64,7 +62,11 @@ function Sidebar(props: PropTypes) {
                 <ToolbarButton link to="/" title="Students">
                     <Icon type="block">{iosPeopleOutline}</Icon>
                 </ToolbarButton>
-                <ToolbarButton link to={`/s/${studentId}/search`} title="Search">
+                <ToolbarButton
+                    link
+                    to={`/s/${studentId}/search`}
+                    title="Search"
+                >
                     <Icon type="block">{iosSearch}</Icon>
                 </ToolbarButton>
 

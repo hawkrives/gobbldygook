@@ -24,17 +24,20 @@ const Box = styled.div`
     display: none;
     box-shadow: 0 0 10px #444;
 
-    ${props => props.canDrop && css`
-        color: black;
-        display: flex;
-        z-index: $z-sidebar + 1;
-    `}
-
-    ${props => props.isOver && css`
-        box-shadow: 0 0 10px $red-900;
-        color: $red-900;
-        background-color: $red-50;
-    `}
+    ${props =>
+        props.canDrop &&
+        css`
+            color: black;
+            display: flex;
+            z-index: $z-sidebar + 1;
+        `};
+    ${props =>
+        props.isOver &&
+        css`
+            box-shadow: 0 0 10px $red-900;
+            color: $red-900;
+            background-color: $red-50;
+        `};
 `
 
 type Props = {
@@ -47,7 +50,10 @@ function CourseRemovalBox(props: Props) {
     return props.connectDropTarget(
         <div>
             <Box isOver={props.isOver} canDrop={props.canDrop}>
-                <Icon type="block" style={{fontSize: '3em', textAlign: 'center'}}>
+                <Icon
+                    type="block"
+                    style={{fontSize: '3em', textAlign: 'center'}}
+                >
                     {iosTrashOutline}
                 </Icon>
                 Drop a course here to remove it.

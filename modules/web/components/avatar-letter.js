@@ -23,7 +23,7 @@ const Wrapper = styled.div`
         font-size: ${size / 3 * 2}px;
 
         border-radius: ${size}px;
-    `}
+    `};
 `
 
 type Props = {
@@ -31,8 +31,6 @@ type Props = {
     value: string,
 }
 
-export const AvatarLetter = ({className, value = '', }: Props) => (
-    <Wrapper className={className}>
-        {isString(value) ? value[0] : ''}
-    </Wrapper>
+export const AvatarLetter = ({className, value = ''}: Props) => (
+    <Wrapper className={className}>{isString(value) ? value[0] : ''}</Wrapper>
 )

@@ -55,7 +55,10 @@ export function getFilesToLoad({type, oldestYear}: Args, data: InfoIndexFile) {
     return files
 }
 
-export function filterFiles({type}: Args, files: InfoFileRef[]): Promise<Array<InfoFileRef>> {
+export async function filterFiles(
+    {type}: Args,
+    files: InfoFileRef[]
+): Promise<Array<InfoFileRef>> {
     // For each file, see if it needs loading. We then update each promise
     // with either the path or `null`.
     const promises = files.map(async (file: InfoFileRef) => {

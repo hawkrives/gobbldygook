@@ -55,7 +55,7 @@ export default function checkStudentAgainstArea(student: any, area: any) {
                 break
         }
 
-        const finalReqs = bits.map(b => '_result' in b ? b._result : false)
+        const finalReqs = bits.map(b => ('_result' in b ? b._result : false))
 
         const maxProgress = finalReqs.length
         const currentProgress = filter(finalReqs, Boolean).length

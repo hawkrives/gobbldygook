@@ -203,7 +203,7 @@ export class DateSummary extends React.PureComponent<DateSummaryProps> {
 }
 
 type DegreeSummaryProps = {
-    studies: { type: string, name: string }[],
+    studies: {type: string, name: string}[],
 }
 
 export class DegreeSummary extends React.PureComponent<DegreeSummaryProps> {

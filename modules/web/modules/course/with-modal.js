@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import ModalCourse from './modal'
-import CompactCourse, { type Props as MiniProps } from './compact'
+import CompactCourse, {type Props as MiniProps} from './compact'
 
 type State = {
     isOpen: boolean,

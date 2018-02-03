@@ -31,7 +31,7 @@ type Props = {
     student: Student,
 }
 type State = {
-    showAreaPickerFor: { [key: string]: boolean },
+    showAreaPickerFor: {[key: string]: boolean},
 }
 
 class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
