@@ -143,7 +143,8 @@ export default class AreaPickerContainer extends React.PureComponent {
                 onFilterChange={ev =>
                     this.setState(() => ({
                         filter: (ev.target.value || '').toLowerCase(),
-                    }))}
+                    }))
+                }
             />
         )
     }

@@ -89,7 +89,9 @@ function compareCourseToQualificationViaObject(
         }
     } else {
         throw new TypeError(
-            `compareCourseToQualification(): "${$value.$type}" is not a valid type for a qualification's value.`
+            `compareCourseToQualification(): "${
+                $value.$type
+            }" is not a valid type for a qualification's value.`
         )
     }
 }

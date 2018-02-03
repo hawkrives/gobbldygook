@@ -52,9 +52,9 @@ const ofLookup = {
 function makeOfExpression({expr, ctx}) {
     const description =
         ofLookup[expr.$count.$was] ||
-        `${expr._counted || 0} of ${humanizeOperator(
-            expr.$count.$operator
-        )} ${expr.$count.$num} from among`
+        `${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${
+            expr.$count.$num
+        } from among`
 
     // const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
     const contents = map(expr.$of, (ex, i) => (

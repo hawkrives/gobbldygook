@@ -249,42 +249,42 @@ describe('getMatchesFromChildren', () => {
             },
         }
 
-        expect(
-            getMatchesFromChildren(requirement.result, requirement)
-        ).toEqual([
-            {
-                $type: 'course',
-                department: ['CSCI'],
-                gereqs: ['AQR'],
-                number: 121,
-                _result: true,
-            },
-            {
-                $type: 'course',
-                department: ['ASIAN'],
-                number: 130,
-                _result: true,
-            },
-            {
-                $type: 'course',
-                department: ['ASIAN'],
-                number: 275,
-                _result: true,
-            },
-            {
-                $type: 'course',
-                department: ['THEAT'],
-                number: 222,
-                _result: true,
-                year: 2014,
-            },
-            {
-                $type: 'course',
-                department: ['THEAT'],
-                number: 222,
-                _result: true,
-                year: 2015,
-            },
-        ])
+        expect(getMatchesFromChildren(requirement.result, requirement)).toEqual(
+            [
+                {
+                    $type: 'course',
+                    department: ['CSCI'],
+                    gereqs: ['AQR'],
+                    number: 121,
+                    _result: true,
+                },
+                {
+                    $type: 'course',
+                    department: ['ASIAN'],
+                    number: 130,
+                    _result: true,
+                },
+                {
+                    $type: 'course',
+                    department: ['ASIAN'],
+                    number: 275,
+                    _result: true,
+                },
+                {
+                    $type: 'course',
+                    department: ['THEAT'],
+                    number: 222,
+                    _result: true,
+                    year: 2014,
+                },
+                {
+                    $type: 'course',
+                    department: ['THEAT'],
+                    number: 222,
+                    _result: true,
+                    year: 2015,
+                },
+            ]
+        )
     })
 })

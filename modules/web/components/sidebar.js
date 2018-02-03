@@ -97,7 +97,8 @@ function Sidebar(props: PropTypes) {
 
             <CourseRemovalBox
                 removeCourse={(scheduleId, clbid) =>
-                    props.removeCourse(studentId, scheduleId, clbid)}
+                    props.removeCourse(studentId, scheduleId, clbid)
+                }
             />
 
             {props.children}
