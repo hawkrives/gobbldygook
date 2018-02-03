@@ -26,6 +26,7 @@ export const ToolbarButton = styled(Button)`
     flex: 1 0 auto;
     padding-left: 0.25em;
     padding-right: 0.25em;
+    font-size: 1rem;
 `
 
 export const ToolbarIcon = styled(Icon)`
