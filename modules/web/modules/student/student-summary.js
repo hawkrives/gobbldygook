@@ -5,7 +5,7 @@ import listify from 'listify'
 import groupBy from 'lodash/groupBy'
 import sample from 'lodash/sample'
 
-import AvatarLetter from '../../components/avatar-letter'
+import {AvatarLetter} from '../../components/avatar-letter'
 import ContentEditable from '../../components/content-editable'
 
 import {getActiveStudentCourses} from '../../helpers/get-active-student-courses'
