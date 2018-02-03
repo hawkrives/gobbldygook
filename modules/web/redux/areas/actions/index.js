@@ -1,6 +1,5 @@
 // @flow
 import db from '../../../helpers/db'
-import map from 'lodash/map'
 import loadArea from '../../../helpers/load-area'
 
 import {
@@ -27,7 +26,7 @@ export function refreshAreas() {
         dispatch(loadingAreas())
         const areas = getState().areas.data
         dispatch({type: START_LOAD_AREAS, payload: areas})
-        const areaPromises = Promise.all(map(areas, loadArea))
+        const areaPromises = Promise.all(areas.map(loadArea))
         return dispatch({type: REFRESH_AREAS, payload: areaPromises})
     }
 }

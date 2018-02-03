@@ -11,7 +11,9 @@ export type AreaOfStudyTypeEnum =
     | 'concentration'
     | 'emphasis'
     | 'interdisciplinary'
-export type AreaOfStudy = Requirement & {
+
+export type AreaOfStudy = {
+    ...Requirement,
     name: string,
     type: AreaOfStudyTypeEnum,
 }
@@ -40,7 +42,7 @@ export type Course = {
     clbid: clbidT,
     credits: number,
     crsid: crsidT,
-    department: string[],
+    department: Array<string>,
     gereqs: string[],
     groupid: number,
     level: number,
@@ -50,7 +52,7 @@ export type Course = {
     semester: number,
     type: CourseType,
     year: number,
-    _extraKeys?: string[],
+    _extraKeys?: Array<string>,
 }
 
 export type CounterOperatorEnum = '$gte' | '$lte' | '$eq'
@@ -64,26 +66,30 @@ type Operator = '$lte' | '$lt' | '$eq' | '$gte' | '$gt' | '$ne'
 
 type BaseExpression = {
     _fulfillment?: Fulfillment,
-    _matches?: Course[],
-    _matched?: Course[],
+    _matches?: Array<Course>,
+    _matched?: Array<Course>,
     _result?: boolean,
     _checked?: boolean,
+    _counted?: number,
 }
 
 // type NotExpression = BaseExpression & {$type: 'not', $not: Expression[]}
-export type OrExpression = BaseExpression & {
+export type OrExpression = {
+    ...BaseExpression,
     $type: 'boolean',
     $booleanType: 'or',
-    $or: (Expression | Fulfillment)[],
+    $or: Array<Expression | Fulfillment>,
 }
-export type AndExpression = BaseExpression & {
+export type AndExpression = {
+    ...BaseExpression,
     $type: 'boolean',
     $booleanType: 'and',
-    $and: (Expression | Fulfillment)[],
+    $and: Array<Expression | Fulfillment>,
 }
 export type BooleanExpression = OrExpression | AndExpression
 
-export type CourseExpression = BaseExpression & {
+export type CourseExpression = {
+    ...BaseExpression,
     _request?: Course,
     _taken?: boolean,
     $type: 'course',
@@ -101,12 +107,12 @@ type QualificationStaticValue = number | string
 export type QualificationBooleanOrValue = {
     $type: 'boolean',
     $booleanType: 'or',
-    $or: QualificationStaticValue[],
+    $or: Array<QualificationStaticValue>,
 }
 export type QualificationBooleanAndValue = {
     $type: 'boolean',
     $booleanType: 'and',
-    $and: QualificationStaticValue[],
+    $and: Array<QualificationStaticValue>,
 }
 export type QualificationBooleanValue =
     | QualificationBooleanOrValue
@@ -117,22 +123,25 @@ type QualificationValue =
     | QualificationBooleanValue
     | QualificationStaticValue
 
-export type Qualification = BaseExpression & {
+export type Qualification = {
+    ...BaseExpression,
     $type: 'qualification',
     $key: string,
     $operator: Operator,
     $value: QualificationValue,
 }
 
-export type OrQualification = BaseExpression & {
+export type OrQualification = {
+    ...BaseExpression,
     $type: 'boolean',
     $booleanType: 'or',
-    $or: Qualifier[],
+    $or: Array<Qualifier>,
 }
-export type AndQualification = BaseExpression & {
+export type AndQualification = {
+    ...BaseExpression,
     $type: 'boolean',
     $booleanType: 'and',
-    $and: Qualifier[],
+    $and: Array<Qualifier>,
 }
 export type BooleanQualification = OrQualification | AndQualification
 export type Qualifier = BooleanQualification | Qualification
@@ -140,32 +149,38 @@ export type Qualifier = BooleanQualification | Qualification
 type ModifierWhatEnum = 'course' | 'credit' | 'department'
 type BaseModifierExpression = {
     _fulfillment?: Fulfillment,
-    _matches?: Course[],
-    _matched?: Course[],
+    _matches?: Array<Course>,
+    _matched?: Array<Course>,
     _result?: boolean,
     _checked?: boolean,
+    _counted?: number,
     $type: 'modifier',
     $count: Counter,
     $what: ModifierWhatEnum,
     $besides?: CourseExpression,
 }
-export type ModifierFilterExpression = BaseModifierExpression & {
+export type ModifierFilterExpression = {
+    ...BaseModifierExpression,
     $from: 'filter',
 }
-export type ModifierFilterWhereExpression = BaseModifierExpression & {
+export type ModifierFilterWhereExpression = {
+    ...BaseModifierExpression,
     $from: 'filter-where',
     $where: Qualifier,
 }
-export type ModifierChildrenExpression = BaseModifierExpression & {
+export type ModifierChildrenExpression = {
+    ...BaseModifierExpression,
     $from: 'children',
-    $children: '$all' | ReferenceExpression[],
+    $children: '$all' | Array<ReferenceExpression>,
 }
-export type ModifierChildrenWhereExpression = BaseModifierExpression & {
+export type ModifierChildrenWhereExpression = {
+    ...BaseModifierExpression,
     $from: 'children-where',
-    $children: '$all' | ReferenceExpression[],
+    $children: '$all' | Array<ReferenceExpression>,
     $where: Qualifier,
 }
-export type ModifierWhereExpression = BaseModifierExpression & {
+export type ModifierWhereExpression = {
+    ...BaseModifierExpression,
     $from: 'where',
     $where: Qualifier,
 }
@@ -176,38 +191,45 @@ export type ModifierExpression =
     | ModifierChildrenExpression
     | ModifierChildrenWhereExpression
 
-export type OccurrenceExpression = BaseExpression & {
+export type OccurrenceExpression = {
+    ...BaseExpression,
     $type: 'occurrence',
     $count: Counter,
     $course: Course,
 }
 
-export type OfExpression = BaseExpression & {
+export type OfExpression = {
+    ...BaseExpression,
     $type: 'of',
     $count: Counter,
-    $of: (Expression | Fulfillment)[],
+    $of: Array<Expression | Fulfillment>,
 }
 
-export type ReferenceExpression = BaseExpression & {
+export type ReferenceExpression = {
+    ...BaseExpression,
     $type: 'reference',
     $requirement: string,
 }
 
-type BaseFilterExpression = BaseExpression & {
+type BaseFilterExpression = {
+    ...BaseExpression,
     $type: 'filter',
     $distinct: boolean,
 }
-export type FilterWhereExpression = BaseFilterExpression & {
+export type FilterWhereExpression = {
+    ...BaseFilterExpression,
     $filterType: 'where',
     $where: Qualifier,
 }
-export type FilterOfExpression = BaseFilterExpression & {
+export type FilterOfExpression = {
+    ...BaseFilterExpression,
     $filterType: 'of',
-    $of: Expression,
+    $of: Array<Course>,
 }
 export type FilterExpression = FilterOfExpression | FilterWhereExpression
 
-export type WhereExpression = BaseExpression & {
+export type WhereExpression = {
+    ...BaseExpression,
     $type: 'where',
     $where: Qualifier,
     $count: Counter,

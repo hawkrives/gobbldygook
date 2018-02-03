@@ -57,7 +57,7 @@ Where
 Filter
   = 'only' _ distinct:IsDistinct _ 'courses' _ filter:(
       'where' _ where:Qualifier { return {$where: where, $filterType: 'where'} }
-    / 'from' _ ofList:OfList { return {$of: ofList, $filterType: 'of'} }
+    / 'from' _ ofList:OfCourseList { return {$of: ofList, $filterType: 'of'} }
   )
   { return assign({}, filter, {$distinct: distinct, $type: 'filter'}) }
 
@@ -241,6 +241,15 @@ And
       $and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs]),
     } }
   / Expression
+
+
+OfCourseList
+  = OpenParen _ ofItems:(
+      val:Course
+      rest:( _ ',' _ second:Course { return second } )*
+      { return [val].concat(rest) }
+    )+ _ ','? _ CloseParen
+  { return flatten(ofItems) }
 
 
 OfList

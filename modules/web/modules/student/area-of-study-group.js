@@ -15,7 +15,7 @@ import './area-of-study-group.scss'
 
 type AreaOfStudyType = Object
 type Student = Object
-type PropTypes = {
+type Props = {
     addArea: (string, AreaOfStudyType) => any,
     allAreasOfType: AreaOfStudyType[],
     areas: AreaOfStudyType[],
@@ -27,9 +27,7 @@ type PropTypes = {
     type: AreaOfStudyTypeEnum,
 }
 
-class AreaOfStudyGroup extends React.PureComponent {
-    props: PropTypes
-
+class AreaOfStudyGroup extends React.PureComponent<Props> {
     onAddArea = (area: AreaOfStudy, ev: Event) => {
         ev.stopPropagation()
         ev.preventDefault()

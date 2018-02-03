@@ -102,7 +102,7 @@ const promiseCache = Object.create(null)
 export default function getArea(
     areaQuery: AreaQueryType,
     {cache = []}: {cache: any[]}
-) {
+): any {
     const {name, type, revision, source, isCustom} = areaQuery
     let cachedArea = find(
         cache,

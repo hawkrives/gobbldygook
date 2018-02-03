@@ -51,7 +51,7 @@ export default function getMatchesFromChildren(
     // (I opted for passing iteratee to uniq, rather than mapping, to let lodash optimize a bit.)
 
     // finally, collect the matching courses from the requested children
-    const matches = map(childKeys, key => collectMatches(ctx[key]))
+    const matches = map(childKeys, key => collectMatches((ctx: any)[key]))
     const flatMatches = flatten(matches)
     const uniquedMatches = uniqBy(flatMatches, stringify)
 

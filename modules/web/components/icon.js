@@ -1,32 +1,43 @@
 // @flow
 import React from 'react'
-import cx from 'classnames'
+import styled from 'styled-components'
 
-import './icon.scss'
+const BaseIcon = styled.svg`
+    width: 1em;
+    height: 1em;
 
-type IconProps = {
+    fill: currentColor;
+    display: inline-block;
+    vertical-align: middle;
+
+    margin: auto;
+`
+
+const BlockIcon = BaseIcon.extend`
+    display: block;
+`
+
+type Props = {
     children?: any,
     className?: string,
     style?: Object,
     type?: 'block' | 'inline',
 }
 
-export default function Icon({
-    className,
-    style,
-    children,
-    type = 'inline',
-}: IconProps) {
+export default function Icon(props: Props) {
+    const {className, style, children, type = 'inline'} = props
+    const Tag = type === 'block' ? BlockIcon : BaseIcon
+
     return (
-        <svg
+        <Tag
             xmlns="http://www.w3.org/2000/svg"
             width="512"
             height="512"
             viewBox="0 0 512 512"
-            className={cx('icon', `icon--${type}`, className)}
+            className={`icon icon--${type} ${className || ''}`}
             style={style}
         >
             {children}
-        </svg>
+        </Tag>
     )
 }

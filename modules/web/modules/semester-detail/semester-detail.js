@@ -15,28 +15,37 @@ const DetailText = styled.pre`
     margin: 0;
 `
 
-export default class SemesterDetail extends React.Component {
-    props: {
-        className?: string,
-        location: {
-            // react-router
-            pathname: string,
-            search: string,
-        },
-        params: {
-            // react-router
-            year: number,
-            semester: number,
-        },
-        student: {
-            data: {
-                past: Object,
-                present: Object,
-                future: Object,
-            },
-        },
-    }
+type RouterProps = {
+    location: {
+        pathname: string,
+        search: string,
+    },
+    params: {
+        year: number,
+        semester: number,
+    },
+}
 
+type ReactProps = {
+    className?: string,
+    student: {
+        data: {
+            past: Object,
+            present: Object,
+            future: Object,
+        },
+    },
+}
+
+type Props = RouterProps & ReactProps
+
+type State = {
+    year: ?number,
+    semester: ?number,
+    schedules: Array<Object>,
+}
+
+export default class SemesterDetail extends React.Component<Props, State> {
     state = {
         year: null,
         semester: null,

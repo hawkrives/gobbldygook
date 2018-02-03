@@ -1,10 +1,9 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import Button from './button'
 import Icon from './icon'
-import Toolbar from './toolbar'
+import Toolbar, {ToolbarButton} from './toolbar'
 import Separator from './separator'
 import CourseRemovalBox from './course-removal-box'
 import {undo, redo} from '../redux/students/actions/undo'
@@ -23,7 +22,7 @@ import styled from 'styled-components'
 
 type StudentType = Object
 type PropTypes = {
-    children: React$Element<any>,
+    children: React.Node,
     redo: string => any,
     removeCourse: Function,
     student: {
@@ -60,16 +59,20 @@ function Sidebar(props: PropTypes) {
     return (
         <SidebarElement>
             <StudentButtonsToolbar>
-                <Button link to="/" title="Students">
+                <ToolbarButton link to="/" title="Students">
                     <Icon type="block">{iosPeopleOutline}</Icon>
-                </Button>
-                <Button link to={`/s/${studentId}/search`} title="Search">
+                </ToolbarButton>
+                <ToolbarButton
+                    link
+                    to={`/s/${studentId}/search`}
+                    title="Search"
+                >
                     <Icon type="block">{iosSearch}</Icon>
-                </Button>
+                </ToolbarButton>
 
                 <Separator type="spacer" />
 
-                <Button
+                <ToolbarButton
                     title="Undo"
                     onClick={() => undo(studentId)}
                     disabled={!canUndo}
@@ -77,8 +80,8 @@ function Sidebar(props: PropTypes) {
                     <Icon type="block">
                         {!canUndo ? iosUndoOutline : iosUndo}
                     </Icon>
-                </Button>
-                <Button
+                </ToolbarButton>
+                <ToolbarButton
                     title="Redo"
                     onClick={() => redo(studentId)}
                     disabled={!canRedo}
@@ -86,13 +89,13 @@ function Sidebar(props: PropTypes) {
                     <Icon type="block">
                         {!canRedo ? iosRedoOutline : iosRedo}
                     </Icon>
-                </Button>
+                </ToolbarButton>
 
                 <Separator type="spacer" />
 
-                <Button link to={`/s/${studentId}/share`} title="Share">
+                <ToolbarButton link to={`/s/${studentId}/share`} title="Share">
                     <Icon type="block">{iosUploadOutline}</Icon>
-                </Button>
+                </ToolbarButton>
             </StudentButtonsToolbar>
 
             <CourseRemovalBox

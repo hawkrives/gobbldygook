@@ -7,8 +7,8 @@ import debug from 'debug'
 const log = debug('web')
 
 // Include React and react-dom.render
-const React = require('react')
-const {render} = require('react-dom')
+import React from 'react'
+import {render} from 'react-dom'
 
 // Include google analytics (in production)
 import startAnalytics from './analytics'
@@ -38,11 +38,15 @@ global._dispatch = store.dispatch
 global._store = store
 
 let renderFunc = Root => {
+    let renderEl = document.getElementById('gobbldygook')
+    if (!renderEl) {
+        return
+    }
     render(
         <Root store={store}>
             <Router history={history} routes={routes} />
         </Root>,
-        document.getElementById('gobbldygook')
+        renderEl
     )
 }
 

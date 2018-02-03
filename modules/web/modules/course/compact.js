@@ -58,15 +58,15 @@ const Identifier = styled.span`
 const Type = styled.span``
 const Prereqs = styled.span``
 
-export default class CompactCourse extends React.PureComponent {
-    props: {
-        className?: string,
-        conflicts?: any[],
-        course: Object,
-        index?: number,
-        onClick?: Event => any,
-    }
+export type Props = {
+    className?: string,
+    conflicts?: any[],
+    course: Object,
+    index?: number,
+    onClick?: Event => any,
+}
 
+export default class CompactCourse extends React.PureComponent<Props> {
     render() {
         const {course, conflicts = [], index, onClick = noop} = this.props
 

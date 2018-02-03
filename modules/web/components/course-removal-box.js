@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
-import cx from 'classnames'
 import {DropTarget} from 'react-dnd'
 import debug from 'debug'
+import styled, {css} from 'styled-components'
 const log = debug('web:courses')
 
 import {IDENT_COURSE} from '../../object-student'
@@ -10,26 +10,54 @@ import {IDENT_COURSE} from '../../object-student'
 import Icon from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
 
-import './course-removal-box.scss'
+const Box = styled.div`
+    padding: 5em 1em;
+    color: $gray-500;
+    background-color: white;
+    border-radius: 5px;
 
-type CourseRemovalBoxProps = {
+    position: fixed;
+    top: $page-edge-padding * 2;
+    left: $page-edge-padding * 2;
+    max-width: 240px;
+
+    display: none;
+    box-shadow: 0 0 10px #444;
+
+    ${props =>
+        props.canDrop &&
+        css`
+            color: black;
+            display: flex;
+            z-index: $z-sidebar + 1;
+        `};
+    ${props =>
+        props.isOver &&
+        css`
+            box-shadow: 0 0 10px $red-900;
+            color: $red-900;
+            background-color: $red-50;
+        `};
+`
+
+type Props = {
     canDrop: boolean, // react-dnd
     connectDropTarget: (React$Element<*>) => any, // react-dnd
     isOver: boolean, // react-dnd
     removeCourse: (string, number) => any, // studentId is embedded in the passed function
 }
-function CourseRemovalBox(props: CourseRemovalBoxProps) {
-    const className = cx('course-removal-box', {
-        'can-drop': props.canDrop,
-        'is-over': props.isOver,
-    })
-
+function CourseRemovalBox(props: Props) {
     return props.connectDropTarget(
-        <div className={className}>
-            <Icon type="block" style={{fontSize: '3em', textAlign: 'center'}}>
-                {iosTrashOutline}
-            </Icon>
-            Drop a course here to remove it.
+        <div>
+            <Box isOver={props.isOver} canDrop={props.canDrop}>
+                <Icon
+                    type="block"
+                    style={{fontSize: '3em', textAlign: 'center'}}
+                >
+                    {iosTrashOutline}
+                </Icon>
+                Drop a course here to remove it.
+            </Box>
         </div>
     )
 }

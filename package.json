@@ -25,6 +25,24 @@
         "options": {
           "requirePragma": true
         }
+      },
+      {
+        "files": "*.md",
+        "options": {
+          "requirePragma": true
+        }
+      },
+      {
+        "files": "flow-typed/**/*.js",
+        "options": {
+          "requirePragma": true
+        }
+      },
+      {
+        "files": "package.json",
+        "options": {
+          "requirePragma": true
+        }
       }
     ]
   },
@@ -70,6 +88,7 @@
     "build-dev": "webpack --config .webpackrc.js --bail --progress --devtool=source-map",
     "build-peg": "pegjs --allowed-start-rules Result,Filter < modules/hanson-format/parse-hanson-string.pegjs | babel-stdin | prettier $npm_package_config_prettier --stdin > modules/hanson-format/parse-hanson-string.js",
     "bugsnag": "curl -d 'apiKey=7e393deddaeb885f5b140b4320ecef6b' -d 'repository=https://github.com/hawkrives/gobbldygook' -d 'revision=$(git rev-parse --verify HEAD)' 'https://notify.bugsnag.com/deploy'",
+    "count": "echo $(fd -e scss | wc -l) files && echo $(fd -e scss | xargs wc -l | gsort | tail -n1) lines",
     "cover": "jest --coverage && open coverage/index.html",
     "flow": "flow",
     "lint": "eslint --cache *.js .*.js modules/",
@@ -89,12 +108,12 @@
     "babel-runtime": "6.26.0",
     "brwsr": "1.0.1",
     "classnames": "2.2.5",
-    "codemirror": "5.33.0",
+    "codemirror": "5.34.0",
     "css-select": "1.2.0",
     "debug": "3.1.0",
     "dedent": "0.7.0",
-    "delay": "1.3.1",
-    "es6-promise": "4.2.2",
+    "delay": "2.0.0",
+    "es6-promise": "4.2.4",
     "fuzzysearch": "1.0.3",
     "history": "3.3.0",
     "htmlparser2": "3.9.2",
@@ -111,6 +130,7 @@
     "p-series": "1.0.0",
     "p-settle": "2.0.0",
     "plur": "2.1.2",
+    "polished": "1.9.0",
     "present": "1.0.0",
     "pretty-ms": "3.1.0",
     "react": "16.2.0",
@@ -134,7 +154,7 @@
     "stabilize": "1.0.0",
     "sto-course-related-data": "4.0.2",
     "sto-sis-time-parser": "2.2.11",
-    "styled-components": "2.4.0",
+    "styled-components": "3.1.6",
     "treo": "0.6.0-rc2",
     "uuid": "3.2.1",
     "whatwg-fetch": "2.0.3"
@@ -160,32 +180,31 @@
     "babel-stdin": "1.1.1",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "2.3.0",
-    "clean-webpack-plugin": "0.1.17",
+    "clean-webpack-plugin": "0.1.18",
     "copy-webpack-plugin": "4.3.1",
     "coveralls": "3.0.0",
-    "cpy": "6.0.0",
     "cross-env": "5.1.3",
     "css-loader": "0.28.9",
     "del": "3.0.0",
     "duplicate-package-checker-webpack-plugin": "2.1.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
-    "eslint": "4.16.0",
+    "eslint": "4.17.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-babel": "4.1.2",
-    "eslint-plugin-flowtype": "2.41.0",
+    "eslint-plugin-flowtype": "2.42.0",
     "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-react": "7.5.1",
+    "eslint-plugin-react": "7.6.1",
     "extract-text-webpack-plugin": "3.0.2",
     "fake-indexeddb": "2.0.3",
     "file-loader": "1.1.6",
-    "flow-bin": "0.52.0",
+    "flow-bin": "0.64.0",
     "flow-remove-types": "1.2.3",
     "get-stdin": "5.0.1",
     "glob": "7.1.2",
     "graceful-fs": "4.1.11",
     "jest": "22.1.4",
-    "jest-enzyme": "4.0.2",
+    "jest-enzyme": "4.1.1",
     "jest-matcher-utils": "22.1.0",
     "json-loader": "0.5.7",
     "junk": "2.1.0",
@@ -194,18 +213,18 @@
     "node-sass": "4.7.2",
     "nomnom": "1.8.1",
     "pegjs": "0.10.0",
-    "pify": "2.3.0",
+    "pify": "3.0.0",
     "prettier": "1.10.2",
+    "pretty-quick": "1.2.3",
     "prop-types": "15.6.0",
     "react-test-renderer": "16.2.0",
-    "redux-devtools": "3.4.1",
     "redux-freeze": "0.1.5",
     "redux-logger": "3.0.6",
     "sass-loader": "6.0.6",
     "sparkly": "3.1.2",
-    "style-loader": "0.19.1",
+    "style-loader": "0.20.1",
     "text-table": "0.2.0",
-    "uglifyjs-webpack-plugin": "1.1.6",
+    "uglifyjs-webpack-plugin": "1.1.8",
     "url-loader": "0.6.2",
     "webpack": "3.10.0",
     "webpack-dev-server": "2.11.1",

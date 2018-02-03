@@ -11,7 +11,6 @@ import removeDuplicateAreas from './remove-duplicate-areas'
 import type {InfoFileTypeEnum, InfoFileRef, InfoIndexFile} from './types'
 const log = debug('worker:load-data:load-files')
 
-const filterByTruthiness = arr => arr.filter(Boolean)
 const fetchJson = (...args) =>
     fetch(...args)
         .then(status)
@@ -32,17 +31,18 @@ export default function loadFiles(url: string, baseUrl: string) {
         .catch(err => handleErrors(err, url))
 }
 
-export function proceedWithUpdate(baseUrl: string, data: InfoIndexFile) {
+export async function proceedWithUpdate(baseUrl: string, data: InfoIndexFile) {
     const type: InfoFileTypeEnum = data.type
     const notification = new Notification(type)
     const oldestYear = new Date().getFullYear() - 5
     const args = {type, notification, baseUrl, oldestYear}
 
-    return getFilesToLoad(args, data)
-        .then(files => filterFiles(args, files))
-        .then(files => slurpIntoDatabase(args, files))
-        .then(() => deduplicateAreas(args))
-        .then(() => finishUp(args))
+    const files = await getFilesToLoad(args, data)
+    const filtered = await filterFiles(args, files)
+    await slurpIntoDatabase(args, filtered)
+
+    await deduplicateAreas(args)
+    await finishUp(args)
 }
 
 export function getFilesToLoad({type, oldestYear}: Args, data: InfoIndexFile) {
@@ -52,25 +52,30 @@ export function getFilesToLoad({type, oldestYear}: Args, data: InfoIndexFile) {
         files = files.filter(f => filterForRecentCourses(f, oldestYear))
     }
 
-    return Promise.resolve(files)
+    return files
 }
 
-export function filterFiles({type}: Args, files: InfoFileRef[]) {
+export async function filterFiles(
+    {type}: Args,
+    files: InfoFileRef[]
+): Promise<Array<InfoFileRef>> {
     // For each file, see if it needs loading. We then update each promise
     // with either the path or `null`.
-    const filesToLoad = files.map(file =>
-        needsUpdate(type, file.path, file.hash).then(
-            update => (update ? file : null)
-        )
-    )
+    const promises = files.map(async (file: InfoFileRef) => {
+        if (await needsUpdate(type, file.path, file.hash)) {
+            return file
+        }
+        return null
+    })
 
     // Finally, we filter the items
-    return Promise.all(filesToLoad).then(filterByTruthiness)
+    // $FlowFixMe
+    return (await Promise.all(promises)).filter(Boolean)
 }
 
 export function slurpIntoDatabase(
     {type, baseUrl, notification}: Args,
-    files: InfoFileRef[]
+    files: Array<InfoFileRef>
 ) {
     // Exit early if nothing needs to happen
     if (files.length === 0) {
@@ -103,9 +108,9 @@ export function finishUp({type, notification}: Args) {
 
     // istanbul ignore else
     if (type === 'courses') {
-        refreshCourses()
+        return refreshCourses()
     } else if (type === 'areas') {
-        refreshAreas()
+        return refreshAreas()
     }
 }
 

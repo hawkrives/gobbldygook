@@ -8,19 +8,21 @@ type ReturnType = {
     counted: number,
 }
 
+type Args = {
+    fulfillment: Fulfillment,
+    expr: Expression,
+    computedResult: boolean,
+    matches: ?(Course[]),
+    counted: ?number,
+}
+
 export default function applyFulfillmentToResult({
     fulfillment,
     expr,
     computedResult,
     matches,
     counted,
-}: {
-    fulfillment: Fulfillment,
-    expr: Expression,
-    computedResult: boolean,
-    matches: ?(Course[]),
-    counted: ?number,
-}): ReturnType {
+}: Args): ReturnType {
     let needsFulfillment = true
 
     matches = matches || []
@@ -30,7 +32,7 @@ export default function applyFulfillmentToResult({
         return {computedResult, matches, counted}
     }
 
-    const counter = expr.hasOwnProperty('$count') ? (expr: any).$count : null
+    const counter = '$count' in expr ? (expr: any).$count : null
     if (
         counter &&
         (counter.$operator === '$lte' || counter.$operator === '$eq')

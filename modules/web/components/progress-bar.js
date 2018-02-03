@@ -1,37 +1,62 @@
 // @flow
 import React from 'react'
-import cx from 'classnames'
+import styled from 'styled-components'
 import {findWordForProgress} from '../../lib'
 
-import './progress-bar.scss'
+const colorMap = {
+    hundred: theme => theme.green300,
+    ninety: theme => theme.orange300,
+    eighty: theme => theme.orange300,
+    seventy: theme => theme.orange300,
+    sixty: theme => theme.yellow700,
+    fifty: theme => theme.yellow600,
+    forty: theme => theme.yellow600,
+    thirty: theme => theme.amber500,
+    twenty: theme => theme.red300,
+    ten: theme => theme.red300,
+    'under-ten': theme => theme.red300,
+}
 
-type ProgressBarProps = {
+const Bar = styled.div`
+    border: 1px solid currentColor;
+    border-radius: ${props => props.theme.baseBorderRadius};
+    background-color: white;
+
+    color: ${props =>
+        props.colorful && colorMap[props.percent]
+            ? colorMap[props.percent](props.theme)
+            : props.theme.gray300};
+`
+
+const BarTrack = styled.div`
+    height: 100%;
+    width: 100%;
+`
+
+const BarFill = styled.div`
+    background-color: currentColor;
+    max-width: 100%;
+    height: 100%;
+`
+
+type Props = {
     className?: string,
     colorful?: boolean,
     max?: number,
     value: number,
 }
 
-export default function ProgressBar(props: ProgressBarProps) {
+export default function ProgressBar(props: Props) {
     const {value, max = 1, colorful, className} = props
 
     const width = 100 * (value / max)
     const progressWord = findWordForProgress(max, value)
-    const classNames = cx('progress-bar', className, {
-        [progressWord]: colorful,
-    })
 
     return (
-        <div className={classNames}>
-            <div
-                className="progress-bar--track"
-                style={{height: '100%', width: '100%'}}
-            >
-                <div
-                    className="progress-bar--value"
-                    style={{height: '100%', width: `${width}%`}}
-                />
-            </div>
-        </div>
+        <Bar className={className} percent={progressWord} colorful={colorful}>
+            <BarTrack style={{height: '100%', width: '100%'}}>
+                <BarFill style={{width: `${width}%`}} />
+            </BarTrack>
+        </Bar>
     )
 }

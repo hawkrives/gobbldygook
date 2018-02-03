@@ -3,7 +3,7 @@ import assertKeys from './assert-keys'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
 import stringify from 'stabilize'
-import type {Expression, Course} from './types'
+import type {Expression, Requirement, Course} from './types'
 
 /**
  * Collects matched courses from a result object
@@ -11,7 +11,9 @@ import type {Expression, Course} from './types'
  * @param {Result} expr - the result object to extract matches from
  * @returns {Course[]} matches - the list of matched courses
  */
-export default function collectMatches(expr: Expression): Course[] {
+export default function collectMatches(
+    expr: Expression | Requirement
+): Course[] {
     assertKeys(expr, '$type')
 
     // start off with absolutely no matches
@@ -53,7 +55,8 @@ export default function collectMatches(expr: Expression): Course[] {
         matches = expr._matches
     } else {
         throw new TypeError(
-            `collectMatches(): unknown expression type "${expr.$type}"`
+            `collectMatches(): unknown expression type "${expr.$type ||
+                'undefined'}"`
         )
     }
 

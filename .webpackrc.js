@@ -5,7 +5,6 @@
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
-const url = require('url')
 
 const {
     DefinePlugin,

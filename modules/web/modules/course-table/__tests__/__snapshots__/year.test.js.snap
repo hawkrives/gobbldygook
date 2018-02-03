@@ -118,23 +118,24 @@ exports[`Year can remove a semester 2`] = `
 
 exports[`Year renders shallowly 1`] = `
 <div
-  className="sc-jhAzac jHxpTp"
+  className="sc-ksYbfQ gNgWYm"
 >
   <header
-    className="sc-fBuWsC eOpDzX"
+    className="sc-hmzhuo dSCbhF"
   >
     <h1
-      className="sc-fMiknA cSUeav"
+      className="sc-frDJqD bBADex"
     >
       2016—2017
     </h1>
     <span>
       <button
-        className="button button--flat sc-dVhcbM kaDoaS"
+        className="sc-kvZOFW kfMkbr sc-htpNat fDMkYA"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
         title="Add Semester"
+        to={undefined}
         type="button"
       >
         Add ‘
@@ -142,11 +143,12 @@ exports[`Year renders shallowly 1`] = `
         ’
       </button>
       <button
-        className="button button--flat sc-eqIVtm gjViaw sc-dVhcbM kaDoaS"
+        className="sc-hqyNC gMHiyL sc-kvZOFW kfMkbr sc-htpNat fDMkYA"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
         title="Remove the year 2016—2017"
+        to={undefined}
         type="button"
       >
         Remove Year
@@ -154,7 +156,7 @@ exports[`Year renders shallowly 1`] = `
     </span>
   </header>
   <div
-    className="sc-fAjcbJ dIHEBF"
+    className="sc-jbKcbu jxnyiB"
   />
 </div>
 `;

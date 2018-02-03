@@ -1,33 +1,45 @@
 // @flow
 import React from 'react'
-import cx from 'classnames'
+import styled from 'styled-components'
 
-type SeparatorProps = {
+const Rule = styled.hr`
+    display: flex
+    height: 100%;
+    align-self: stretch;
+    margin: 0;
+    border-width: 0;
+`
+
+const LineRule = Rule.extend`
+    border-width: 1px;
+`
+
+const SpacerRule = Rule.extend`
+    padding: 0 0.5em;
+`
+
+const FlexSpacerRule = Rule.extend`
+    flex: ${props => props.flex};
+`
+
+type Props = {
     className?: string,
     flex?: number,
     style?: Object,
     type?: 'spacer' | 'line' | 'flex-spacer',
 }
 
-export default function Separator(props: SeparatorProps) {
+export default function Separator(props: Props) {
     const {className, flex = 1, style, type = 'spacer'} = props
 
-    let renderedStyle = {
-        ...style,
-        display: 'flex',
-        height: '100%',
-        alignSelf: 'stretch',
-        margin: 0,
-        borderWidth: 0,
-    }
-
+    let ChosenRule = Rule
     if (type === 'line') {
-        renderedStyle = {...renderedStyle, borderWidth: '1px'}
+        ChosenRule = LineRule
     } else if (type === 'spacer') {
-        renderedStyle = {...renderedStyle, padding: '0 0.5em'}
+        ChosenRule = SpacerRule
     } else if (type === 'flex-spacer') {
-        renderedStyle = {...renderedStyle, flex}
+        ChosenRule = FlexSpacerRule
     }
 
-    return <hr className={cx('separator', className)} style={renderedStyle} />
+    return <ChosenRule flex={flex} className={className} style={style} />
 }

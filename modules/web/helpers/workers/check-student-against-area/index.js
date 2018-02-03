@@ -17,51 +17,60 @@ function tryEvaluate(student, area) {
     }
 }
 
-export default function checkStudentAgainstArea(student: any, area: any) {
-    return new Promise(resolve => {
-        if (!area || area._error || !area._area) {
-            log(
-                'checkStudentAgainstArea:',
-                area ? area._error : 'area is null',
-                area
-            )
-            resolve(area)
-            return
-        }
+function doWork(student: any, area: any) {
+    student.courses = map(getActiveStudentCourses(student), alterCourse)
 
-        student.courses = map(getActiveStudentCourses(student), alterCourse)
+    let details = tryEvaluate(student, area._area)
+    if (details._error) {
+        return details
+    }
 
-        let details = tryEvaluate(student, area._area)
-        if (details._error) {
-            resolve(details)
-            return
-        }
-
-        let result = details.result
-        let bits = []
-        if (result.$type === 'of') {
+    let result = details.result
+    let bits = []
+    switch (result.$type) {
+        case 'of':
             bits = result.$of
-        } else if (
-            result.$type === 'boolean' &&
-            result.$booleanType === 'and'
-        ) {
-            bits = result.$and
-        } else if (result.$type === 'boolean' && result.$booleanType === 'or') {
-            bits = result.$or
+            break
+        case 'boolean': {
+            if (result.$booleanType === 'and') {
+                bits = result.$and
+            } else if (result.$booleanType === 'or') {
+                bits = result.$or
+            }
+            break
         }
-        let finalReqs = map(bits, b => b._result)
+        default:
+            break
+    }
 
-        const maxProgress = finalReqs.length
-        const currentProgress = filter(finalReqs, Boolean).length
+    const finalReqs = bits.map(b => ('_result' in b ? (b: any)._result : false))
 
-        resolve({
-            ...area,
-            _area: details,
-            _checked: true,
-            _progress: {
-                at: currentProgress,
-                of: maxProgress,
-            },
-        })
-    })
+    const maxProgress = finalReqs.length
+    const currentProgress = filter(finalReqs, Boolean).length
+
+    return {
+        ...area,
+        _area: details,
+        _checked: true,
+        _progress: {
+            at: currentProgress,
+            of: maxProgress,
+        },
+    }
+}
+
+export default async function checkStudentAgainstArea(
+    student: any,
+    area: any
+): any {
+    if (!area || area._error || !area._area) {
+        log(
+            'checkStudentAgainstArea:',
+            area ? area._error : 'area is null',
+            area
+        )
+        return area
+    }
+
+    return doWork(student, area)
 }

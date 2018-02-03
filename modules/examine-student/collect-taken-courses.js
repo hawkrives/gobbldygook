@@ -1,9 +1,8 @@
 // @flow
-import map from 'lodash/map'
-import filter from 'lodash/filter'
 import isPlainObject from 'lodash/isPlainObject'
 import flattenDeep from 'lodash/flattenDeep'
 import uniq from 'lodash/uniq'
+import values from 'lodash/values'
 import type {Expression, Course} from './types'
 
 export default function collectTakenCourses(expr: Expression): Course[] {
@@ -16,11 +15,11 @@ export default function collectTakenCourses(expr: Expression): Course[] {
     }
 
     // if not, check all sub-chunks
-    const onlyChildItems = filter(
-        expr,
-        thing => isPlainObject(thing) || Array.isArray(thing)
+    const tuples = values(expr)
+    const onlyChildItems = tuples.filter(
+        value => isPlainObject(value) || Array.isArray(value)
     )
-    const children = map(onlyChildItems, collectTakenCourses)
+    const children = onlyChildItems.map(collectTakenCourses)
 
     // flatten the list
     const courses = flattenDeep(children)

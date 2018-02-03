@@ -27,29 +27,26 @@ export function getPriorAreas(path: string) {
         )
 }
 
-export default function cleanPriorData(path: string, type: InfoFileTypeEnum) {
+export default async function cleanPriorData(
+    path: string,
+    type: InfoFileTypeEnum
+) {
     log(path)
 
-    let future
+    let operations
     if (type === 'courses') {
-        future = getPriorCourses(path)
+        operations = await getPriorCourses(path)
     } else if (type === 'areas') {
-        future = getPriorAreas(path)
+        operations = await getPriorAreas(path)
     } else {
         log(`"${type}" is not a valid store type`)
-        future = Promise.reject(
-            new TypeError(`cleanPriorData: "${type}" is not a valid store type`)
+        throw new TypeError(
+            `cleanPriorData: "${type}" is not a valid store type`
         )
     }
 
-    return future.then(
-        ops =>
-            series([
-                db.store(type).batch(ops),
-                db.store(getCacheStoreName(type)).del(path),
-            ]),
-        err => {
-            throw err
-        }
-    )
+    return series([
+        db.store(type).batch(operations),
+        db.store(getCacheStoreName(type)).del(path),
+    ])
 }

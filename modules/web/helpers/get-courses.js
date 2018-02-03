@@ -1,6 +1,5 @@
 // @flow
 import db from './db'
-import map from 'lodash/map'
 import omit from 'lodash/omit'
 import padStart from 'lodash/padStart'
 import {status, json} from '../../lib/fetch-helpers'
@@ -66,17 +65,4 @@ export function getCourse(
             course => course || {clbid, term, error: `Could not find ${clbid}`}
         )
         .catch(error => ({clbid, term, error: error.message}))
-}
-
-/**
- * Takes a list of clbids, and returns a list of the course objects for those
- * clbids.
- *
- * @param {Number[]} clbids - a list of class/lab IDs
- * @param {Object} fabrications - a list of fabrications
- * @returns {Promise} - a promise for the course data
- * @fulfill {Object[]} - the courses.
- */
-export function getCourses(clbids: number[], fabrications: any) {
-    return Promise.all(map(clbids, c => getCourse(c, fabrications)))
 }
