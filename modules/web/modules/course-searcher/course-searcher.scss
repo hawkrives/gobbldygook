@@ -81,6 +81,10 @@
 	font-size: 0.8em;
 	padding: 1em 1em;
 	flex: 1;
+
+	span {
+		flex: 1;
+	}
 }
 .submit-search-query:hover,
 .submit-search-query:focus {
