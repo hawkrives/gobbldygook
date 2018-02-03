@@ -25,6 +25,18 @@
         "options": {
           "requirePragma": true
         }
+      },
+      {
+        "files": "flow-typed/**/*.js",
+        "options": {
+          "requirePragma": true
+        }
+      },
+      {
+        "files": "package.json",
+        "options": {
+          "requirePragma": true
+        }
       }
     ]
   },
