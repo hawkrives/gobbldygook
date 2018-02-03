@@ -14,7 +14,7 @@
  */
 
 declare module 'stabilize' {
-  declare function exports(
+  declare export default function stringify(
     value: any,
     replacer?: (Array<any> | (key: any, value: any) => any),
     space?: string | number,
