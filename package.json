@@ -27,6 +27,12 @@
         }
       },
       {
+        "files": "*.md",
+        "options": {
+          "requirePragma": true
+        }
+      },
+      {
         "files": "flow-typed/**/*.js",
         "options": {
           "requirePragma": true
