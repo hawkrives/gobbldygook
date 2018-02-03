@@ -1,4 +1,5 @@
 // @flow
+import {rgba} from 'polished'
 
 export const red50 = '#ffebee'
 export const red100 = '#ffcdd2'
@@ -308,7 +309,7 @@ export const uiCaption = gray600
 export const uiMenu = gray900
 export const uiButton = gray900
 
-export const disabledBackgroundDark = ' rgba(#fff, 0.12)'
-export const disabledForegroundDark = ' rgba(#fff, 0.30)'
-export const disabledBackgroundLight = ' rgba(#000, 0.12)'
-export const disabledForegroundLight = ' rgba(#000, 0.26)'
+export const disabledBackgroundDark = rgba('#fff', 0.12)
+export const disabledForegroundDark = rgba('#fff', 0.3)
+export const disabledBackgroundLight = rgba('#000', 0.12)
+export const disabledForegroundLight = rgba('#000', 0.26)
