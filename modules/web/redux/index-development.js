@@ -1,6 +1,5 @@
 /* globals module */
 import {applyMiddleware, createStore, compose} from 'redux'
-import {persistState} from 'redux-devtools'
 import promiseMiddleware from 'redux-promise'
 import thunkMiddleware from 'redux-thunk'
 import checkStudentsMiddleware from './middleware/check-students'
@@ -16,8 +15,7 @@ const finalCreateStore = compose(
         checkStudentsMiddleware,
         saveStudentsMiddleware
     ),
-    window && window.devToolsExtension ? window.devToolsExtension() : f => f,
-    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+    window && window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore)
 
 export default function configureStore(initialState) {

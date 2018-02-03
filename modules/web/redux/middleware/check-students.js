@@ -3,14 +3,11 @@ import * as studentConstants from '../students/constants'
 import * as areaConstants from '../areas/constants'
 import * as courseConstants from '../courses/constants'
 
-import filter from 'lodash/filter'
-import includes from 'lodash/includes'
-import map from 'lodash/map'
 import toArray from 'lodash/toArray'
 
 import {checkStudent} from '../students/actions/check-student'
 
-const whitelist = [
+const whitelist = new Set([
     studentConstants.INIT_STUDENT,
     studentConstants.IMPORT_STUDENT,
     studentConstants.CHANGE_CREDITS_NEEDED,
@@ -38,14 +35,13 @@ const whitelist = [
     // need to check everyone with one of these courses
     // when one of these fires
     courseConstants.REFRESH_COURSES,
-]
+])
+
 function shouldTakeAction({type}: {type?: string}) {
-    return includes(whitelist, type)
+    return whitelist.has(type)
 }
 
-const checkStudentsMiddleware = (store: any) => (next: any) => (
-    action: any
-) => {
+const checkMiddleware = (store: any) => (next: any) => async (action: any) => {
     if (!shouldTakeAction(action)) {
         return next(action)
     }
@@ -69,7 +65,7 @@ const checkStudentsMiddleware = (store: any) => (next: any) => (
     } else if (action.type === courseConstants.REFRESH_COURSES) {
         affectedStudents = toArray(newStudents)
     } else {
-        affectedStudents = filter(newStudents, (_, id) => {
+        affectedStudents = toArray(newStudents).filter((_, id) => {
             if (!(id in oldStudents)) {
                 return true
             }
@@ -78,11 +74,13 @@ const checkStudentsMiddleware = (store: any) => (next: any) => (
     }
 
     // check them
-    const promises = map(affectedStudents, s =>
+    const promises = affectedStudents.map(s =>
         store.dispatch(checkStudent(s.data.present.id))
     )
 
-    return Promise.all(promises).then(() => result)
+    await Promise.all(promises)
+
+    return result
 }
 
-export default checkStudentsMiddleware
+export default checkMiddleware

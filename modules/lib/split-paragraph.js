@@ -3,7 +3,7 @@
 const words = require('lodash/words')
 const deburr = require('lodash/deburr')
 
-function splitParagraph(string: string = ''): string {
+function splitParagraph(string: string = ''): Array<string> {
     let lowercase = string.toLowerCase()
 
     // removes accents and such from ascii chars

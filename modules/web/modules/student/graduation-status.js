@@ -8,11 +8,13 @@ import './graduation-status.scss'
 
 type Student = Object
 
-export default class GraduationStatusContainer extends React.PureComponent {
-    props: {
-        student: Student,
-    }
+type Props = {
+    student: Student,
+}
 
+export default class GraduationStatusContainer extends React.PureComponent<
+    Props
+> {
     render() {
         const student = this.props.student
         if (!student) {

@@ -23,17 +23,15 @@ const GROUP_BY_TO_TITLE = {
     None: () => '',
 }
 
-type CourseResultsListProps = {
+type Props = {
     groupBy: string,
     results: any[],
     sortBy?: string,
     studentId?: string,
 }
 
-export default class CourseResultsList extends Component {
-    props: CourseResultsListProps
-
-    shouldComponentUpdate(nextProps: CourseResultsListProps) {
+export default class CourseResultsList extends Component<Props> {
+    shouldComponentUpdate(nextProps: Props) {
         return compareProps(this.props, nextProps)
     }
 
@@ -51,7 +49,7 @@ export default class CourseResultsList extends Component {
                                 <p className="course-group-title">{title}</p>
                             )}
                             <ul className="course-list">
-                                {map(courses, (course, index) => (
+                                {courses.map((course, index) => (
                                     <li key={index}>
                                         <DraggableCourse
                                             course={course}

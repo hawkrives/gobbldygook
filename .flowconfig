@@ -1,7 +1,4 @@
 [ignore]
-; i don't even know why it checks json files
-.*\.json
-
 ; stuffs
 .*/node_modules/jest-validate
 .*/node_modules/jest-enzyme

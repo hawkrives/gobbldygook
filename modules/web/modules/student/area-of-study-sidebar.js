@@ -26,17 +26,16 @@ const {areaTypeConstants} = require('../../../object-student/area-types')
 
 type AreaOfStudy = Object
 type Student = Object
-type PropTypes = {
+type Props = {
     allAreas: AreaOfStudy[],
     student: Student,
 }
+type State = {
+    showAreaPickerFor: { [key: string]: boolean },
+}
 
-class AreaOfStudySidebarComponent extends React.PureComponent {
-    props: PropTypes
-
-    state: {
-        showAreaPickerFor: {[key: string]: boolean},
-    } = {
+class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
+    state = {
         showAreaPickerFor: {},
     }
 

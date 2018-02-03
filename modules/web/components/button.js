@@ -105,7 +105,7 @@ type Props = {
     type: 'flat' | 'raised',
 }
 
-class Button extends React.Component<any, Props, void> {
+class Button extends Component<Props> {
     static defaultProps = {
         type: 'flat',
     }

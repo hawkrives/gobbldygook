@@ -15,7 +15,7 @@ const Button = styled`
 `
 
 type ButtonProps = {
-    onClick: Event => any,
+    onClick: (SyntheticInputEvent<HTMLButtonElement>) => any,
     browserName: string,
     disabled?: boolean,
 }
@@ -42,11 +42,7 @@ type State = {
     extensionInstalled: boolean,
 }
 
-export class BrowserExtensionsComponent extends React.Component<
-    any,
-    Props,
-    State
-> {
+export class BrowserExtensionsComponent extends React.Component<Props, State> {
     state = {
         installAttempted: false,
         installError: null,
@@ -59,7 +55,7 @@ export class BrowserExtensionsComponent extends React.Component<
         }
     }
 
-    installChromeExtension = (ev: Event) => {
+    installChromeExtension = (ev: SyntheticEvent<>) => {
         ev.preventDefault()
         ev.stopPropagation()
 
@@ -68,7 +64,7 @@ export class BrowserExtensionsComponent extends React.Component<
             .catch(this.installFailure)
     }
 
-    installFirefoxExtension = (ev: Event) => {
+    installFirefoxExtension = (ev: SyntheticEvent<>) => {
         ev.preventDefault()
         ev.stopPropagation()
 
@@ -77,7 +73,7 @@ export class BrowserExtensionsComponent extends React.Component<
             .catch(this.installFailure)
     }
 
-    installOperaExtension = (ev: Event) => {
+    installOperaExtension = (ev: SyntheticEvent<>) => {
         ev.preventDefault()
         ev.stopPropagation()
 
@@ -86,9 +82,11 @@ export class BrowserExtensionsComponent extends React.Component<
             .catch(this.installFailure)
     }
 
-    installSafariExtension = () => {}
+    // eslint-disable-next-line no-unused-vars
+    installSafariExtension = (ev: SyntheticEvent<>) => {}
 
-    installEdgeExtension = () => {}
+    // eslint-disable-next-line no-unused-vars
+    installEdgeExtension = (ev: SyntheticEvent<>) => {}
 
     installSuccess = () => {
         this.setState({installAttempted: true})

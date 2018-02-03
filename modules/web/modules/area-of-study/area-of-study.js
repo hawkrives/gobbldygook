@@ -21,7 +21,7 @@ import './area-of-study.scss'
 
 type Student = Object
 type AreaOfStudyType = {
-    _area?: Object,
+    _area: Object,
     _checked?: boolean,
     _error?: string,
     _progress?: {at: number, of: number},
@@ -32,17 +32,22 @@ type AreaOfStudyType = {
     type: string,
 }
 
-class AreaOfStudyContainer extends Component {
-    props: {
-        area: AreaOfStudyType,
-        setOverride: (string, string, boolean) => any,
-        onRemoveArea: (Object, Event) => any,
-        removeOverride: (string, string) => any,
-        showCloseButton: boolean,
-        showEditButton: boolean,
-        student: Student,
-    }
+type Props = {
+    area: AreaOfStudyType,
+    setOverride: (string, string, boolean) => any,
+    onRemoveArea: (Object, Event) => any,
+    removeOverride: (string, string) => any,
+    showCloseButton: boolean,
+    showEditButton: boolean,
+    student: Student,
+}
 
+type State = {
+    isOpen: boolean,
+    confirmRemoval: boolean,
+}
+
+class AreaOfStudyContainer extends Component<Props, State> {
     state = {
         isOpen: false,
         confirmRemoval: false,
@@ -190,7 +195,7 @@ class AreaOfStudyContainer extends Component {
         } else {
             contents = (
                 <Requirement
-                    {...areaDetails}
+                    info={areaDetails}
                     topLevel
                     onAddOverride={this.addOverride}
                     onRemoveOverride={this.removeOverride}
