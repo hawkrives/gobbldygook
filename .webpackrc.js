@@ -141,7 +141,6 @@ function config() {
 
                 <body><main id="gobbldygook"></main></body>
 
-                <script src="${publicPath}${context.manifest}"></script>
                 <script src="${publicPath}${context.main}"></script>
                 </html>
             `
