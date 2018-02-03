@@ -1,0 +1,35 @@
+[build]
+    # the directory to publish (relative to root of your repo)
+    publish = "build/"
+    # the build command
+    command = "npm run netlify"
+    [build.environment]
+        NODE_VERSION = "8"
+
+# Production context: All deploys to the main
+# repository branch will inherit these settings.
+[context.production]
+    command = "npm run netlify"
+    [context.production.environment]
+        NODE_ENV = "production"
+
+# respond to all requests with the SPA
+[[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
+
+# allow requesting data from SIS
+[[redirects]]
+    from = "/sis/*"
+    to = "https://stolaf.edu/sis/:splat"
+    status = 200
+    [[redirects.headers]]
+        X-From = "Gobbldygook"
+
+# set headers for the app
+[[headers]]
+    for = "/*"
+    [[headers.values]]
+        X-Frame-Options = "DENY"
+        X-XSS-Protection = "1; mode=block"

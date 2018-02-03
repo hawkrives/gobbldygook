@@ -27,82 +27,18 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
 
-const entries = {
-    bfr: 'buffer',
-    hanson: './modules/hanson-format',
-    common: [
-        'classnames',
-        'debug',
-        'delay',
-        'listify',
-        'ord',
-        'p-props',
-        'p-series',
-        'p-settle',
-        'plur',
-        'redux',
-        'redux-promise',
-        'redux-thunk',
-        'redux-undo',
-        'serialize-error',
-        'stabilize',
-        'whatwg-fetch',
-    ],
-    react: ['react', 'react-dom', 'react-router', 'history'],
-    reactCommon: [
-        'react-modal',
-        'react-redux',
-        'react-side-effect',
-        'dnd-core',
-        'react-dnd',
-        'react-dnd-html5-backend',
-    ],
-    yaml: ['js-yaml'],
-    idb: ['treo', 'idb-range', 'idb-request'],
-    cm: ['codemirror'],
-    html: ['htmlparser2', 'css-select'],
-}
-
-// We have to manually list these so they are loaded in the correct order.
-const bundleNames = [
-    'reactCommon',
-    'react',
-    'common',
-    'yaml',
-    'cm',
-    'html',
-    'idb',
-    'hanson',
-    'bfr',
-]
-
-const allBundleNames = Object.keys(entries)
-const missingNames = allBundleNames.filter(name => !bundleNames.includes(name))
-const extraNames = bundleNames.filter(name => !allBundleNames.includes(name))
-if (missingNames.length) {
-    throw new Error(`'bundleNames' is missing ${missingNames.join(', ')}`)
-} else if (extraNames.length) {
-    throw new Error(
-        `'bundleNames' has too many names! ${extraNames.join(', ')}`
-    )
-}
-
 function config() {
     const isProduction = process.env.NODE_ENV === 'production'
     const isDevelopment = !isProduction
 
     let publicPath = '/'
     if (isProduction) {
-        // We use "homepage" field to infer "public path" at which the app is served.
-        // Webpack needs to know it to put the right <script> hrefs into HTML even in
-        // single-page apps that may serve index.html for nested URLs like /todos/42.
-        // We can't use a relative path in HTML because we don't want to load something
-        // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
-        if (process.env.CONTEXT && process.env.CONTEXT !== 'production') {
-            publicPath = process.env.DEPLOY_PRIME_URL
+        if (process.env.CONTEXT === 'production') {
+            publicPath = process.env.URL
         } else {
-            publicPath = pkg.homepage ? url.parse(pkg.homepage).pathname : '/'
+            publicPath = process.env.DEPLOY_PRIME_URL || ''
         }
+
         if (!publicPath.endsWith('/')) {
             // If we don't do this, file assets will get incorrect paths.
             publicPath += '/'
@@ -116,7 +52,9 @@ function config() {
         stats.children = false
     }
 
-    const entry = Object.assign({}, {main: ['./modules/web/index.js']}, entries)
+    const entry = {
+        main: ['./modules/web/index.js'],
+    }
 
     if (isDevelopment) {
         // add dev server and hotloading clientside code
@@ -174,43 +112,38 @@ function config() {
         // Generates an index.html for us.
         new HtmlPlugin(
             context => `
-            <!DOCTYPE html>
-            <html lang="en-US">
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Gobbldygook</title>
+                <!DOCTYPE html>
+                <html lang="en-US">
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Gobbldygook</title>
 
-            <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
+                <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-            ${
-                isProduction
-                    ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
-                    : ''
-            }
-            ${
-                isProduction
-                    ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
-                    : ''
-            }
+                ${
+                    isProduction
+                        ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
+                        : ''
+                }
+                ${
+                    isProduction
+                        ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
+                        : ''
+                }
 
-            ${
-                context.css
-                    ? `<link rel="stylesheet" href="${publicPath}${
-                          context.css
-                      }">`
-                    : ''
-            }
+                ${
+                    context.css
+                        ? `<link rel="stylesheet" href="${publicPath}${
+                              context.css
+                          }">`
+                        : ''
+                }
 
-            <body><main id="gobbldygook"></main></body>
+                <body><main id="gobbldygook"></main></body>
 
-            <script src="${publicPath}${context.manifest}"></script>
-            ${Object.keys(entries)
-                .map(k => `${publicPath}${context[k]}`)
-                .map(path => `<script src="${path}"></script>`)
-                .join('\n')}
-            <script src="${publicPath}${context.main}"></script>
-            </html>
-        `
+                <script src="${publicPath}${context.main}"></script>
+                </html>
+            `
         ),
 
         // Ignore the "full" schema in js-yaml's module, because it brings in esprima
@@ -238,9 +171,9 @@ function config() {
         // Extract the common libraries into a single file so that the chunks
         // don't need to individually bundle them.
         new CommonsChunkPlugin({
-            names: [...bundleNames, 'manifest'],
-            filename: '[name].[hash].js',
-            minChunks: Infinity,
+            name: 'commons',
+            filename: '[name].js',
+            children: true,
         }),
 
         // Watcher doesn't work well if you mistype casing in a path so we use
@@ -301,13 +234,6 @@ function config() {
     const babelLoader = {
         loader: 'babel-loader',
         options: {cacheDirectory: !isCI},
-    }
-    const babelForNodeModules = {
-        loader: 'babel-loader',
-        options: {
-            cacheDirectory: !isCI,
-            plugins: ['transform-es2015-modules-commonjs'],
-        },
     }
     const urlLoader = {loader: 'url-loader', options: {limit: 10000}}
     const cssLoader = isProduction
