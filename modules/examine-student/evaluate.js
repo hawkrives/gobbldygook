@@ -8,20 +8,16 @@ import type {
     FulfillmentsObject,
 } from './types'
 
-export function evaluate(
-    {
-        courses = [],
-        overrides = {},
-        fulfilled = {},
-    }: {
-        courses: Course[],
-        overrides: OverridesObject,
-        fulfilled: FulfillmentsObject,
-    },
-    area: AreaOfStudy
-) {
+type Input = {
+    courses: Course[],
+    overrides: OverridesObject,
+    fulfilled: FulfillmentsObject,
+}
+
+export function evaluate(student: Input, area: AreaOfStudy) {
     assertKeys(area, 'name', 'result', 'type', 'revision')
     const {name, type} = area
+    const {courses = [], overrides = {}, fulfilled = {}} = student
     return compute(area, {
         path: [type, name],
         courses,

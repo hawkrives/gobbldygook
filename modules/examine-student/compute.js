@@ -8,6 +8,7 @@ import hasOverride from './has-override'
 import isRequirementName from './is-requirement-name'
 import mapValues from 'lodash/mapValues'
 import type {
+    AreaOfStudy,
     Requirement,
     Course,
     OverridesObject,
@@ -17,7 +18,7 @@ import type {
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.
 export default function compute(
-    outerReq: Requirement,
+    outerReq: Requirement | AreaOfStudy,
     {
         path,
         courses = [],

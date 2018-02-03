@@ -40,13 +40,9 @@ function wildcard(lhs) {
  * @returns {boolean} - if the course matched
  */
 export default function compareCourseToCourse(
-    query: CourseExpression | Course,
-    other: CourseExpression | Course
-) {
-    // TODO: Remove the need to cast as `any` here
-    query = (query: any).$course || query
-    other = (other: any).$course || other
-
+    query: Course,
+    other: Course
+): boolean {
     // If the query is more specific than the one being compared to, and
     // things don't match, return false.
     // But, if the query is *less* specific than the other course, only check

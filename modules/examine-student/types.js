@@ -70,6 +70,7 @@ type BaseExpression = {
     _matched?: Array<Course>,
     _result?: boolean,
     _checked?: boolean,
+    _counted?: number,
 }
 
 // type NotExpression = BaseExpression & {$type: 'not', $not: Expression[]}
@@ -152,6 +153,7 @@ type BaseModifierExpression = {
     _matched?: Array<Course>,
     _result?: boolean,
     _checked?: boolean,
+    _counted?: number,
     $type: 'modifier',
     $count: Counter,
     $what: ModifierWhatEnum,
