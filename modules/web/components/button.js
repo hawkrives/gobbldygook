@@ -2,9 +2,6 @@
 import * as React from 'react'
 import Link from 'react-router/lib/Link'
 import styled from 'styled-components'
-import * as c from '../styles/colors'
-import * as m from '../styles/mixins'
-import * as v from '../styles/variables'
 
 const BaseButton = styled.button`
     cursor: pointer;
@@ -23,7 +20,7 @@ const BaseButton = styled.button`
     border: solid 1px transparent;
 
     transition: all 0.2s ease-out;
-    border-radius: ${v.baseBorderRadius};
+    border-radius: ${props => props.theme.baseBorderRadius};
     line-height: normal;
 
     text-align: center;
@@ -40,23 +37,25 @@ const BaseButton = styled.button`
 `
 
 const RaisedButton = BaseButton.extend`
-    ${m.materialShadow} background-color: ${c.white};
+    ${props => props.theme.materialShadow};
+    background-color: ${props => props.theme.white};
 
     &:hover {
-        background-color: ${c.white};
+        background-color: ${props => props.theme.white};
     }
     &:focus {
-        background-color: ${c.blue50};
-        border-color: ${c.blue300};
+        background-color: ${props => props.theme.blue50};
+        border-color: ${props => props.theme.blue300};
     }
 
     &:active {
-        ${m.materialShadow} background-color: ${c.white};
+        ${props => props.theme.materialShadow};
+        background-color: ${props => props.theme.white};
     }
 
     &[disabled] {
         cursor: default;
-        color: ${c.gray500};
+        color: ${props => props.theme.gray500};
     }
 `
 
@@ -64,18 +63,18 @@ const FlatButton = BaseButton.extend`
     background-color: transparent;
 
     &:hover {
-        background-color: ${c.gray100};
-        border-color: ${c.gray400};
+        background-color: ${props => props.theme.gray100};
+        border-color: ${props => props.theme.gray400};
     }
 
     &:focus {
-        background-color: ${c.blue50};
-        border-color: ${c.blue300};
+        background-color: ${props => props.theme.blue50};
+        border-color: ${props => props.theme.blue300};
     }
 
     &[disabled] {
         cursor: default;
-        color: ${c.disabledForegroundLight};
+        color: ${props => props.theme.disabledForegroundLight};
 
         &:hover,
         &:focus,
@@ -87,11 +86,11 @@ const FlatButton = BaseButton.extend`
 `
 
 const FlatLinkButton = FlatButton.withComponent(Link).extend`
-    ${m.linkUndecorated}
+    ${props => props.theme.linkUndecorated}
 `
 
 const RaisedLinkButton = RaisedButton.withComponent(Link).extend`
-    ${m.linkUndecorated}
+    ${props => props.theme.linkUndecorated}
 `
 
 type Props = {
