@@ -205,7 +205,7 @@
     "graceful-fs": "4.1.11",
     "jest": "22.1.4",
     "jest-enzyme": "4.1.1",
-    "jest-matcher-utils": "22.1.0",
+    "jest-matcher-utils": "22.2.0",
     "json-loader": "0.5.7",
     "junk": "2.1.0",
     "mkdirp": "0.5.1",
