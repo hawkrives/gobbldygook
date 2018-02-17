@@ -211,7 +211,7 @@
     "mkdirp": "0.5.1",
     "node-fetch": "2.0.0-alpha.7",
     "node-sass": "4.7.2",
-    "nomnom": "1.8.1",
+    "nomnom": "2.0.0",
     "pegjs": "0.10.0",
     "pify": "3.0.0",
     "prettier": "1.10.2",
