@@ -228,7 +228,7 @@
     "url-loader": "0.6.2",
     "webpack": "3.10.0",
     "webpack-dev-server": "2.11.1",
-    "worker-loader": "1.1.0"
+    "worker-loader": "1.1.1"
   },
   "resolutions": {
     "css-select/domutils": "^1.5.1",
