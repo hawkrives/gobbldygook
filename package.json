@@ -220,7 +220,7 @@
     "react-test-renderer": "16.2.0",
     "redux-freeze": "0.1.5",
     "redux-logger": "3.0.6",
-    "sass-loader": "6.0.6",
+    "sass-loader": "6.0.7",
     "sparkly": "3.1.2",
     "style-loader": "0.20.1",
     "text-table": "0.2.0",
