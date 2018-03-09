@@ -109,7 +109,7 @@
     "brwsr": "1.0.1",
     "classnames": "2.2.5",
     "codemirror": "5.34.0",
-    "css-select": "1.2.0",
+    "css-select": "2.0.0",
     "debug": "3.1.0",
     "dedent": "0.7.0",
     "delay": "2.0.0",
