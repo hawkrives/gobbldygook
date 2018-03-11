@@ -210,7 +210,7 @@
     "junk": "2.1.0",
     "mkdirp": "0.5.1",
     "node-fetch": "2.0.0-alpha.7",
-    "node-sass": "4.7.2",
+    "node-sass": "4.8.0",
     "nomnom": "1.8.1",
     "pegjs": "0.10.0",
     "pify": "3.0.0",
