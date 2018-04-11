@@ -49,20 +49,22 @@ type PropTypes = {
 }
 
 export default function CourseList(props: PropTypes) {
-    const courseObjects = props.schedule.courses.map(
-        (course, i) =>
-            course.error ? (
-                <Missing clbid={course.clbid} error={course.error} />
-            ) : (
-                <Course
-                    index={i}
-                    course={course}
-                    conflicts={props.conflicts}
-                    scheduleId={props.schedule.id}
-                    studentId={props.studentId}
-                />
-            )
-    )
+    const courseObjects = props.schedule.hasOwnProperty('courses')
+        ? props.schedule.courses.map(
+              (course, i) =>
+                  course.error ? (
+                      <Missing clbid={course.clbid} error={course.error} />
+                  ) : (
+                      <Course
+                          index={i}
+                          course={course}
+                          conflicts={props.conflicts}
+                          scheduleId={props.schedule.id}
+                          studentId={props.studentId}
+                      />
+                  )
+          )
+        : []
 
     const usedCredits = Math.floor(props.creditCount)
     const emptySlots = range(usedCredits, props.availableCredits)
