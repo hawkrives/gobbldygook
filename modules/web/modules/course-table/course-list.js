@@ -49,7 +49,7 @@ type PropTypes = {
 }
 
 export default function CourseList(props: PropTypes) {
-    let courseObjects = props.schedule.hasOwnProperty('courses')
+    const courseObjects = props.schedule.hasOwnProperty('courses')
         ? props.schedule.courses.map(
               (course, i) =>
                   course.error ? (
