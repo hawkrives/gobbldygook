@@ -19,30 +19,6 @@
         "options": {
           "useTabs": true
         }
-      },
-      {
-        "files": "modules/web/styles/normalize.scss",
-        "options": {
-          "requirePragma": true
-        }
-      },
-      {
-        "files": "*.md",
-        "options": {
-          "requirePragma": true
-        }
-      },
-      {
-        "files": "flow-typed/**/*.js",
-        "options": {
-          "requirePragma": true
-        }
-      },
-      {
-        "files": "package.json",
-        "options": {
-          "requirePragma": true
-        }
       }
     ]
   },
