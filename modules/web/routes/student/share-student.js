@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
 import * as theme from '../../theme'
-import Button from '../../components/button'
-import Icon from '../../components/icon'
-import Toolbar from '../../components/toolbar'
+import {FlatButton} from '../../components/button'
+import {InlineIcon} from '../../components/icon'
+import {Toolbar} from '../../components/toolbar'
 import Modal from '../../components/modal'
 import List from '../../components/list'
 import withRouter from 'react-router/lib/withRouter'
@@ -25,7 +25,7 @@ const ShareModal = styled(Modal)`
 
 const WindowTools = styled(Toolbar)``
 
-const CloseModal = styled(Button)``
+const CloseModal = styled(FlatButton)``
 
 type PropTypes = {
     params: {
@@ -49,7 +49,7 @@ export function ShareSheet(props: PropTypes) {
         <ShareModal onClose={boundCloseModal} contentLabel="Share">
             <WindowTools>
                 <CloseModal onClick={boundCloseModal}>
-                    <Icon>{close}</Icon>
+                    <InlineIcon>{close}</InlineIcon>
                 </CloseModal>
             </WindowTools>
 

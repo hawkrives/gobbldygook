@@ -8,9 +8,9 @@ import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 import {filterAreaList} from '../../../object-student/filter-area-list'
 import type {AreaOfStudyTypeEnum} from '../../../examine-student/types'
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
 import List from '../../components/list'
-import Toolbar from '../../components/toolbar'
+import {Toolbar} from '../../components/toolbar'
 import styled from 'styled-components'
 import * as theme from '../../theme'
 
@@ -48,7 +48,7 @@ const AreaListingRevision = styled.span`
     font-size: 0.8em;
 `
 
-const ToggleAreaButton = styled(Button)`
+const ToggleAreaButton = FlatButton.extend`
     padding: 0.25em 1em;
 `
 
@@ -99,10 +99,7 @@ function AreaPicker(props: AreaPickerProps) {
                 <AreaListingTitle>{area.name}</AreaListingTitle>
                 <AreaListingRevision>{area.revision}</AreaListingRevision>
             </AreaListing>
-            <ToggleAreaButton
-                type="flat"
-                onClick={ev => props.onAddArea(area, ev)}
-            >
+            <ToggleAreaButton onClick={ev => props.onAddArea(area, ev)}>
                 Add
             </ToggleAreaButton>
         </AreaChoice>

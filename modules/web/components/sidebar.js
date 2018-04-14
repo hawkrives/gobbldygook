@@ -62,10 +62,7 @@ function Sidebar(props: PropTypes) {
                 <ToolbarButton link to="/" title="Students">
                     <BlockIcon>{iosPeopleOutline}</BlockIcon>
                 </ToolbarButton>
-                <ToolbarButton
-                    to={`/s/${studentId}/search`}
-                    title="Search"
-                >
+                <ToolbarButton to={`/s/${studentId}/search`} title="Search">
                     <BlockIcon>{iosSearch}</BlockIcon>
                 </ToolbarButton>
 
@@ -76,18 +73,14 @@ function Sidebar(props: PropTypes) {
                     onClick={() => undo(studentId)}
                     disabled={!canUndo}
                 >
-                    <BlockIcon>
-                        {!canUndo ? iosUndoOutline : iosUndo}
-                    </BlockIcon>
+                    <BlockIcon>{!canUndo ? iosUndoOutline : iosUndo}</BlockIcon>
                 </ToolbarButton>
                 <ToolbarButton
                     title="Redo"
                     onClick={() => redo(studentId)}
                     disabled={!canRedo}
                 >
-                    <BlockIcon>
-                        {!canRedo ? iosRedoOutline : iosRedo}
-                    </BlockIcon>
+                    <BlockIcon>{!canRedo ? iosRedoOutline : iosRedo}</BlockIcon>
                 </ToolbarButton>
 
                 <Separator type="spacer" />

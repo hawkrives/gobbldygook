@@ -1,11 +1,11 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 import {Controlled as CodeMirror} from 'react-codemirror2'
 import 'codemirror/mode/yaml/yaml'
-import Toolbar from '../../components/toolbar'
-import Button from '../../components/button'
+import {Toolbar} from '../../components/toolbar'
+import {FlatButton, FlatLinkButton} from '../../components/button'
 import Icon from '../../components/icon'
 import Separator from '../../components/separator'
 
@@ -20,31 +20,38 @@ const TopToolbar = styled(Toolbar)`
     margin-bottom: 0.5em;
 `
 
-export default function AreaEditor(props) {
+type Props = {
+    onChange: (ev: any) => any,
+    onFocusChange: (ev: any) => any,
+    onSave: (ev: any) => any,
+    value: string,
+}
+
+export default function AreaEditor(props: Props) {
     return (
         <div>
             <TopToolbar>
-                <Button link to="/areas">
+                <FlatLinkButton to="/areas">
                     <Icon>{iosArrowLeft}</Icon> Back
-                </Button>
+                </FlatLinkButton>
 
                 <Separator type="flex-spacer" />
 
-                <Button onClick={props.onSave}>
+                <FlatButton onClick={props.onSave}>
                     <Icon>{iosDownloadOutline}</Icon> Save
-                </Button>
-                <Button>
+                </FlatButton>
+                <FlatButton>
                     <Icon>{iosReload}</Icon> Revert
-                </Button>
+                </FlatButton>
 
                 <Separator type="flex-spacer" />
 
-                <Button>
+                <FlatButton>
                     <Icon>{iosDownloadOutline}</Icon> Download
-                </Button>
-                <Button>
+                </FlatButton>
+                <FlatButton>
                     <Icon>{iosUploadOutline}</Icon> Submit
-                </Button>
+                </FlatButton>
             </TopToolbar>
 
             <CodeMirror
@@ -58,11 +65,4 @@ export default function AreaEditor(props) {
             />
         </div>
     )
-}
-
-AreaEditor.propTypes = {
-    onChange: PropTypes.func.isRequired,
-    onFocusChange: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired,
 }

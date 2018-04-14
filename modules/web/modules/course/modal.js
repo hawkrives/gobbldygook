@@ -4,8 +4,8 @@ import noop from 'lodash/noop'
 import styled from 'styled-components'
 import Modal from '../../components/modal'
 import Separator from '../../components/separator'
-import Toolbar from '../../components/toolbar'
-import Button from '../../components/button'
+import {Toolbar} from '../../components/toolbar'
+import {FlatButton, RaisedButton} from '../../components/button'
 import SemesterSelector from './semester-selector'
 import ExpandedCourse from './expanded'
 import {bindActionCreators} from 'redux'
@@ -45,7 +45,7 @@ const BottomToolbar = styled.div`
     align-items: center;
 `
 
-const RemoveCourseButton = styled(Button)`
+const RemoveCourseButton = FlatButton.extend`
     color: ${theme.red500};
     padding-left: 0.5em;
     padding-right: 0.5em;
@@ -109,9 +109,9 @@ function ModalCourse(props: {
         <ContainerModal onClose={onClose} contentLabel="Course">
             <Toolbar>
                 <Separator type="flex-spacer" flex={3} />
-                <Button type="raised" onClick={onClose}>
+                <RaisedButton onClick={onClose}>
                     Close
-                </Button>
+                </RaisedButton>
             </Toolbar>
 
             <Course course={course} />
