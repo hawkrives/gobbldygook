@@ -86,10 +86,6 @@ function config() {
         hot: true,
     }
 
-    const node = {
-        process: false,
-    }
-
     const plugins = [
         // clean out the build folder between builds
         new CleanWebpackPlugin([outputFolder]),
@@ -258,7 +254,6 @@ function config() {
         entry,
         output,
         devServer,
-        node,
         plugins,
         module,
     }
