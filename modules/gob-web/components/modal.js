@@ -3,6 +3,8 @@ import React from 'react'
 import cx from 'classnames'
 import ReactModal from 'react-modal'
 
+ReactModal.setAppElement('#gobbldygook')
+
 import './modal.scss'
 
 type ModalProps = {
