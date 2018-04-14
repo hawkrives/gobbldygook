@@ -35,6 +35,7 @@
     from = "/sis/*"
     to = "https://www.stolaf.edu/sis/:splat"
     status = 200
+    force = true
     [[redirects.headers]]
         X-From = "Gobbldygook"
 
