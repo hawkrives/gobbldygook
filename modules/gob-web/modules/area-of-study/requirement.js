@@ -1,7 +1,7 @@
 // @flow
 import React, {Component} from 'react'
 
-import isRequirementName from '../../../examine-student/is-requirement-name'
+import {isRequirementName} from '@gob/examine-student'
 
 import Icon from '../../components/icon'
 import {iosBoltOutline, iosBolt} from '../../icons/ionicons'

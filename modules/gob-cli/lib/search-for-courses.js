@@ -18,7 +18,7 @@ const path = require('path')
 const {
     quacksLikeDeptNum,
     splitDeptNum,
-} = require('../../school-st-olaf-college')
+} = require('@gob/school-st-olaf-college')
 
 const pify = require('pify')
 const fs = pify(require('graceful-fs'))

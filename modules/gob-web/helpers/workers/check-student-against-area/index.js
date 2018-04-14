@@ -3,7 +3,7 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import debug from 'debug'
 
-import {evaluate} from '../../../../examine-student/evaluate'
+import {evaluate} from '@gob/examine-student'
 import {getActiveStudentCourses} from '../../get-active-student-courses'
 import {alterCourse} from '../../alter-course-for-evaluation'
 const log = debug('worker:check-student:worker')

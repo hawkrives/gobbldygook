@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-require('./../../cli/lib/init')
+require('@gob/cli/lib/init')
 require('./parse-query.js').cli()

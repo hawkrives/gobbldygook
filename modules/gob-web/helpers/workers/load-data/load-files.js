@@ -2,7 +2,7 @@
 
 import startsWith from 'lodash/startsWith'
 import series from 'p-series'
-import {status, json} from '../../../../lib/fetch-helpers'
+import {status, json} from '@gob/lib'
 import debug from 'debug'
 import {refreshCourses, refreshAreas, Notification} from './lib-dispatch'
 import needsUpdate from './needs-update'

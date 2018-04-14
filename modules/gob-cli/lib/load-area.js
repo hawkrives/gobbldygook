@@ -1,7 +1,7 @@
 'use strict'
 const pify = require('pify')
 const yaml = require('js-yaml')
-const {enhanceHanson: enhance} = require('../../hanson-format')
+const {enhanceHanson: enhance} = require('@gob/hanson-format')
 
 const map = require('lodash/map')
 const filter = require('lodash/filter')

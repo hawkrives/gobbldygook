@@ -19,10 +19,10 @@ import values from 'lodash/values'
 
 import AreaOfStudyGroup from './area-of-study-group'
 import Button from '../../components/button'
-const {
+import {
     sortStudiesByType,
-} = require('../../../object-student/sort-studies-by-type')
-const {areaTypeConstants} = require('../../../object-student/area-types')
+} from '@gob/object-student/sort-studies-by-type'
+import {areaTypeConstants} from '@gob/object-student/area-types'
 
 type AreaOfStudy = Object
 type Student = Object

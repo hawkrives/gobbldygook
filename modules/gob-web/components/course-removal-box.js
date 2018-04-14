@@ -5,7 +5,7 @@ import debug from 'debug'
 import styled, {css} from 'styled-components'
 const log = debug('web:courses')
 import * as theme from '../theme'
-import {IDENT_COURSE} from '../../object-student'
+import {IDENT_COURSE} from '@gob/object-student'
 import {BlockIcon} from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
 

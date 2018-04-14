@@ -1,14 +1,14 @@
 // @flow
 import db from './db'
-import {enhanceHanson} from '../../hanson-format'
+import {enhanceHanson} from '@gob/hanson-format'
 import some from 'lodash/some'
 import maxBy from 'lodash/maxBy'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import yaml from 'js-yaml'
 import debug from 'debug'
-import pluralizeArea from '../../examine-student/pluralize-area'
-import {status, text} from '../../lib/fetch-helpers'
+import {pluralizeArea} from '@gob/examine-student'
+import {status, text} from '@gob/lib'
 const log = debug('worker:load-area')
 
 function resolveArea(areas, query) {

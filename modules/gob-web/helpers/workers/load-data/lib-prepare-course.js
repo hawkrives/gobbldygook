@@ -2,11 +2,8 @@
 
 import flatMap from 'lodash/flatMap'
 import uniq from 'lodash/uniq'
-import {
-    buildDeptString,
-    buildDeptNum,
-} from '../../../../school-st-olaf-college/deptnums'
-import {splitParagraph} from '../../../../lib/split-paragraph'
+import {buildDeptString, buildDeptNum, } from '@gob/school-st-olaf-college'
+import {splitParagraph} from '@gob/lib'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 
 export default function prepareCourse(course: any) {

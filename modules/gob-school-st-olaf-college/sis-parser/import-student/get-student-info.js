@@ -1,6 +1,6 @@
 import props from 'p-props'
 import flatten from 'lodash/flatten'
-import {AuthError, NetworkError} from '../../../lib'
+import {AuthError, NetworkError} from '@gob/lib'
 import {fetchHtml} from './lib'
 import {extractTermList} from './term-list'
 import {collectAllCourses} from './courses'

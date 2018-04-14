@@ -1,14 +1,14 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import {interpose} from '../../lib'
+import {interpose} from '@gob/lib'
 import brwsr from 'brwsr'
 
 import {
     installOperaExtension,
     installChromeExtension,
     installFirefoxExtension,
-} from '../../web/helpers/extension-helpers'
+} from '../helpers/extension-helpers'
 
 const Button = styled.button`
     display: inline-block;

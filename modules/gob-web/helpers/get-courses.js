@@ -2,7 +2,7 @@
 import db from './db'
 import omit from 'lodash/omit'
 import padStart from 'lodash/padStart'
-import {status, json} from '../../lib/fetch-helpers'
+import {status, json} from '@gob/lib'
 
 const baseUrl = 'https://stodevx.github.io/course-data'
 const networkCache = Object.create(null)

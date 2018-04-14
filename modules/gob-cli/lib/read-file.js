@@ -1,6 +1,6 @@
 'use strict'
 require('whatwg-fetch')
-const {status, json, text} = require('../../lib/fetch-helpers')
+const {status, json, text} = require('@gob/lib/fetch-helpers')
 
 const startsWith = require('lodash/startsWith')
 const yaml = require('js-yaml')

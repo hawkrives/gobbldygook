@@ -6,9 +6,8 @@ import flatMap from 'lodash/flatMap'
 import oxford from 'listify'
 import {BulletedList, ListItem} from '../../components/list'
 import CourseTitle from './course-title'
-import {semesterName} from '../../../school-st-olaf-college/course-info'
-import {buildDeptNum} from '../../../school-st-olaf-college/deptnums'
-import {to12HourTime} from '../../../lib'
+import {semesterName, buildDeptNum} from '@gob/school-st-olaf-college'
+import {to12HourTime} from '@gob/lib'
 
 const Heading = styled.h2`
     font-weight: 500;

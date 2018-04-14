@@ -4,7 +4,7 @@ import uniq from 'lodash/uniq'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
-import {findMissingNumber} from '../../lib/find-missing-number'
+import {findMissingNumber} from '@gob/lib'
 
 type Schedule = {
     id: any,

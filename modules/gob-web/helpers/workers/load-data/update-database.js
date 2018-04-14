@@ -2,7 +2,7 @@
 
 import series from 'p-series'
 import debug from 'debug'
-import {status, text} from '../../../../lib/fetch-helpers'
+import {status, text} from '@gob/lib'
 
 import parseData from './parse-data'
 import cleanPriorData from './clean-prior-data'

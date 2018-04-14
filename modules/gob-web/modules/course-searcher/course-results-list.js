@@ -5,12 +5,12 @@ import {DraggableCourse} from '../course'
 import debug from 'debug'
 const log = debug('web:react')
 
-import {compareProps} from '../../../lib'
+import {compareProps} from '@gob/lib'
 import {
     toPrettyTerm,
     expandYear,
     semesterName,
-} from '../../../school-st-olaf-college/course-info'
+} from '@gob/school-st-olaf-college'
 
 const GROUP_BY_TO_TITLE = {
     'Day of Week': days => days,

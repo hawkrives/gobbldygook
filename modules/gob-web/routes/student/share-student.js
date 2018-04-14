@@ -11,7 +11,7 @@ import {close} from '../../icons/ionicons'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 
-import {encodeStudent} from '../../../object-student'
+import {encodeStudent} from '@gob/object-student'
 
 const ShareModal = styled(Modal)`
     ${theme.card};

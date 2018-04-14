@@ -1,6 +1,6 @@
 // @flow
 
-import {normalizeDepartment} from '../../hanson-format/convert-department'
+import {normalizeDepartment} from '@gob/hanson-format'
 
 /**
  * Builds a department string from a course.

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import {findWordForProgress} from '../../lib'
+import {findWordForProgress} from '@gob/lib'
 import * as theme from '../theme'
 
 const colorMap = {

@@ -4,11 +4,11 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
 import DocumentTitle from 'react-document-title'
-import {isCurrentSemester} from '../../../object-student/is-current-semester'
-import {semesterName} from '../../../school-st-olaf-college/course-info'
+import {isCurrentSemester} from '@gob/object-student'
+import {semesterName} from '@gob/school-st-olaf-college'
 import debug from 'debug'
-const log = debug('web:react')
 import styled from 'styled-components'
+const log = debug('web:react')
 
 const DetailText = styled.pre`
     background-color: white;

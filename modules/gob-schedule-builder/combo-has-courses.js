@@ -1,5 +1,5 @@
 import takeWhile from 'lodash/takeWhile'
-import {queryCourses} from '../search-queries'
+import {queryCourses} from '@gob/search-queries'
 
 export function comboHasCourses(courses, combinationOfClasses) {
     const these = takeWhile(

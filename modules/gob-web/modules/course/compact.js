@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import * as theme from '../../theme'
 import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
-import {buildDeptNum} from '../../../school-st-olaf-college/deptnums'
+import {buildDeptNum} from '@gob/school-st-olaf-college'
 import CourseWarnings from './warnings'
 
 export const Container = styled.article`

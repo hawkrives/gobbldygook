@@ -8,10 +8,10 @@ import {FlatButton} from '../../components/button'
 import Icon from '../../components/icon'
 import Requirement from './requirement'
 import ProgressBar from '../../components/progress-bar'
-import {compareProps} from '../../../lib'
+import {compareProps} from '@gob/lib'
 import {close, chevronUp, chevronDown} from '../../icons/ionicons'
 import has from 'lodash/has'
-import pathToOverride from '../../../examine-student/path-to-override'
+import {pathToOverride} from '@gob/examine-student'
 import {
     setOverride,
     removeOverride,

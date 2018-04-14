@@ -2,7 +2,7 @@
 
 const stdin = require('get-stdin')
 const yaml = require('js-yaml')
-const enhanceHanson = require('../hanson-format/index').enhanceHanson
+const {enhanceHanson} = require('@gob/hanson-format')
 
 function compileArea(data) {
     let obj = yaml.safeLoad(data)

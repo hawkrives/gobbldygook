@@ -7,7 +7,7 @@ import groupBy from 'lodash/groupBy'
 import {
     semesterName,
     expandYear,
-} from '../../../school-st-olaf-college/course-info'
+} from '@gob/school-st-olaf-college'
 
 function findSemesterList(student: ?Object) {
     if (!student) {

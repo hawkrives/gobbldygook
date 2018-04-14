@@ -4,7 +4,7 @@
 import debug from 'debug'
 import round from 'lodash/round'
 import present from 'present'
-import {stringifyError} from '../../../lib/stringify-error'
+import {stringifyError} from '@gob/lib'
 import checkStudentAgainstArea from './check-student-against-area'
 const log = debug('worker:check-student:listener')
 

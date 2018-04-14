@@ -9,7 +9,7 @@ import {AvatarLetter} from '../../components/avatar-letter'
 import ContentEditable from '../../components/content-editable'
 
 import {getActiveStudentCourses} from '../../helpers/get-active-student-courses'
-import {countCredits} from '../../../examine-student/count-credits'
+import {countCredits} from '@gob/examine-student'
 
 import './student-summary.scss'
 

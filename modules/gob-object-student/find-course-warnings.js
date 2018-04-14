@@ -7,7 +7,7 @@ import zip from 'lodash/zip'
 import ordinal from 'ord'
 import oxford from 'listify'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
-import {expandYear, semesterName} from '../school-st-olaf-college/course-info'
+import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 
 export function checkForInvalidYear(course, scheduleYear) {
     if (course.semester === 9 || course.semester === undefined) {

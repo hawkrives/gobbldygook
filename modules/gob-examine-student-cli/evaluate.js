@@ -1,10 +1,8 @@
-import {evaluate} from '../examine-student/evaluate'
 import nomnom from 'nomnom'
 import fs from 'graceful-fs'
-import {default as compute} from '../examine-student/compute'
-import loadArea from '../cli/lib/load-area'
+import {isRequirementName, humanizeOperator, evaluate} from '@gob/examine-student'
+import loadArea from '@gob/cli/lib/load-area'
 import yaml from 'js-yaml'
-import {isRequirementName, humanizeOperator} from '../examine-student'
 import get from 'lodash/get'
 import toPairs from 'lodash/toPairs'
 import map from 'lodash/map'
@@ -270,7 +268,7 @@ const checkAgainstArea = ({courses, overrides}, args) => areaData => {
     let path = []
     if (args.path) {
         path = [areaData.type, areaData.name].concat(args.path.split('.'))
-        result = compute(get(areaData, args.path), {
+        result = evaluate(get(areaData, args.path), {
             path,
             courses,
             overrides,

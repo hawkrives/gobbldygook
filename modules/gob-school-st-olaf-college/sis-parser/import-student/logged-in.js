@@ -1,4 +1,4 @@
-import {AuthError} from '../../../lib'
+import {AuthError} from '@gob/lib'
 import {extractStudentIds} from './student-ids'
 import {COURSES_URL} from './urls'
 import {fetchHtml, getText} from './lib'

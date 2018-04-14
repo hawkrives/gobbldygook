@@ -4,7 +4,7 @@ import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import max from 'lodash/max'
 import includes from 'lodash/includes'
-import {findMissingNumber} from '../../lib/find-missing-number'
+import {findMissingNumber} from '@gob/lib'
 
 type Schedule = {
     id: any,
