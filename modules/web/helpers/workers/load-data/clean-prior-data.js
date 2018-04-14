@@ -46,7 +46,7 @@ export default async function cleanPriorData(
     }
 
     return series([
-        db.store(type).batch(operations),
-        db.store(getCacheStoreName(type)).del(path),
+        () => db.store(type).batch(operations),
+        () => db.store(getCacheStoreName(type)).del(path),
     ])
 }
