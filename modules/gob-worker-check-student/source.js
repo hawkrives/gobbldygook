@@ -4,8 +4,8 @@ import filter from 'lodash/filter'
 import debug from 'debug'
 
 import {evaluate} from '@gob/examine-student'
-import {getActiveStudentCourses} from '../../get-active-student-courses'
-import {alterCourse} from '../../alter-course-for-evaluation'
+import {getActiveCourses} from '@gob/object-student'
+import {alterForEvaluation as alterCourse} from '@gob/courses'
 const log = debug('worker:check-student:worker')
 
 function tryEvaluate(student, area) {
@@ -18,7 +18,7 @@ function tryEvaluate(student, area) {
 }
 
 function doWork(student: any, area: any) {
-    student.courses = map(getActiveStudentCourses(student), alterCourse)
+    student.courses = map(getActiveCourses(student), alterCourse)
 
     let details = tryEvaluate(student, area._area)
     if (details._error) {

@@ -5,7 +5,7 @@ import debug from 'debug'
 import round from 'lodash/round'
 import present from 'present'
 import {stringifyError} from '@gob/lib'
-import checkStudentAgainstArea from './check-student-against-area'
+import checkStudentAgainstArea from './source'
 const log = debug('worker:check-student:listener')
 
 if (
