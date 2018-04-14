@@ -3,13 +3,10 @@ import treo, {Database} from 'treo'
 import Promise from 'es6-promise'
 treo.Promise = Promise
 
-import debug from 'debug'
-const log = debug('web:database')
+import queryTreoDatabase from '@gob/treo-plugin-query'
+import batchGet from '@gob/treo-plugin-batch-get'
 
-import queryTreoDatabase from '../helpers/treo-plugins/query-treo-database'
-import batchGet from '../helpers/treo-plugins/treo-batch-get'
-
-import schema from './db-schema'
+import schema from './schema'
 
 const db = new Database('gobbldygook', schema)
     .use(queryTreoDatabase())
@@ -20,15 +17,15 @@ export default db
 if (typeof window !== 'undefined') {
     window.deleteDatabase = () => {
         const DBDeleteRequest = window.indexedDB.deleteDatabase('gobbldygook')
-        log('Commencing database deletion')
-        DBDeleteRequest.onerror = () => log('Error deleting database.')
-        DBDeleteRequest.onsuccess = () => log('Database deleted successfully')
+        //log('Commencing database deletion')
+        DBDeleteRequest.onerror = () => console.error('Error deleting database.')
+        DBDeleteRequest.onsuccess = () => console.info('Database deleted successfully')
     }
 
     window.eraseStorage = () => {
-        log('Commencing storage erasure')
+        //log('Commencing storage erasure')
         window.localStorage.clear()
-        log('Storage erased')
+        //log('Storage erased')
     }
 
     window.eraseDatabase = () => {
@@ -36,5 +33,5 @@ if (typeof window !== 'undefined') {
         window.eraseStorage()
     }
 
-    window.database = db
+    window.__database = db
 }
