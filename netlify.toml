@@ -33,7 +33,7 @@
 # allow requesting data from SIS
 [[redirects]]
     from = "/sis/*"
-    to = "https://stolaf.edu/sis/:splat"
+    to = "https://www.stolaf.edu/sis/:splat"
     status = 200
     [[redirects.headers]]
         X-From = "Gobbldygook"
