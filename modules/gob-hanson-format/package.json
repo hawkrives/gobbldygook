@@ -1,6 +1,12 @@
 {
   "name": "@gob/hanson-format",
-  "version": "1.0.0",
+  "version": "3.0.0-rc.2",
   "main": "index.js",
-  "license": "MIT"
+  "repository": "hawkrives/gobbldygook",
+  "author": "Hawken MacKay Rives",
+  "license": "MIT",
+  "dependencies": {
+  	"@gob/examine-student": "^3.0.0-rc.2",
+  	"lodash": "4.17.5"
+  }
 }

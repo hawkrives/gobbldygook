@@ -1,6 +1,17 @@
 {
   "name": "@gob/school-st-olaf-college",
-  "version": "1.0.0",
+  "version": "3.0.0-rc.2",
   "main": "index.js",
-  "license": "MIT"
+  "repository": "hawkrives/gobbldygook",
+  "author": "Hawken MacKay Rives",
+  "license": "MIT",
+  "dependencies": {
+  	"@gob/object-student": "^3.0.0-rc.2",
+  	"@gob/lib": "^3.0.0-rc.2",
+  	"css-select": "2.0.0",
+  	"htmlparser2": "3.9.2",
+  	"lodash": "4.17.5",
+  	"p-props": "1.1.0",
+  	"uuid": "3.2.1"
+  }
 }
