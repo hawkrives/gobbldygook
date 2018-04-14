@@ -5,8 +5,14 @@
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
+  "scripts": {
+    "build": "pegjs --allowed-start-rules Result,Filter < ./parse-hanson-string.pegjs | babel-stdin | prettier $npm_package_config_prettier --stdin > ./parse-hanson-string.js"
+  },
   "dependencies": {
   	"@gob/examine-student": "^3.0.0-rc.2",
   	"lodash": "4.17.5"
+  },
+  "devDependencies": {
+    "pegjs": "0.10.0"
   }
 }

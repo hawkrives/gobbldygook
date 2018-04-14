@@ -108,7 +108,6 @@
     "flow-remove-types": "1.2.3",
     "jest": "22.4.3",
     "jest-matcher-utils": "22.4.3",
-    "pegjs": "0.10.0",
     "prettier": "1.12.0",
     "pretty-quick": "1.4.1"
   }
