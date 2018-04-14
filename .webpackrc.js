@@ -39,7 +39,7 @@ function config() {
     }
 
     const entry = {
-        main: ['./modules/web/index.js'],
+        main: ['./modules/gob-web/index.js'],
     }
 
     if (isDevelopment) {

@@ -58,7 +58,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config .webpackrc.js --bail --progress",
     "build-dev": "webpack --config .webpackrc.js --bail --progress --devtool=source-map",
-    "build-peg": "pegjs --allowed-start-rules Result,Filter < modules/hanson-format/parse-hanson-string.pegjs | babel-stdin | prettier $npm_package_config_prettier --stdin > modules/hanson-format/parse-hanson-string.js",
+    "build-peg": "pegjs --allowed-start-rules Result,Filter < modules/gob-hanson-format/parse-hanson-string.pegjs | babel-stdin | prettier $npm_package_config_prettier --stdin > modules/gob-hanson-format/parse-hanson-string.js",
     "bugsnag": "curl -d 'apiKey=7e393deddaeb885f5b140b4320ecef6b' -d 'repository=https://github.com/hawkrives/gobbldygook' -d 'revision=$(git rev-parse --verify HEAD)' 'https://notify.bugsnag.com/deploy'",
     "count": "echo $(fd -e scss | wc -l) files && echo $(fd -e scss | xargs wc -l | gsort | tail -n1) lines",
     "cover": "jest --coverage && open coverage/index.html",
@@ -72,7 +72,7 @@
     "stats": "cross-env NODE_ENV=production npm run stats-dev",
     "stats-dev": "webpack --config .webpackrc.js --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
     "test": "jest",
-    "test-students": "./modules/cli/test-student test/example-students",
+    "test-students": "./modules/gob-cli/test-student test/example-students",
     "watch": "webpack --watch --config .webpackrc.js --bail --progress --devtool=source-map"
   },
   "devDependencies": {
