@@ -47,13 +47,16 @@ type Props = {
     removeCourse: (string, number) => any, // studentId is embedded in the passed function
 }
 function CourseRemovalBox(props: Props) {
+    // we have to return an actual <div> here for ReactDnD
     return props.connectDropTarget(
-        <Box isOver={props.isOver} canDrop={props.canDrop}>
-            <Icon type="block" style={{fontSize: '3em', textAlign: 'center'}}>
-                {iosTrashOutline}
-            </Icon>
-            Drop a course here to remove it.
-        </Box>
+        <div>
+            <Box isOver={props.isOver} canDrop={props.canDrop}>
+                <Icon type="block" style={{fontSize: '3em', textAlign: 'center'}}>
+                    {iosTrashOutline}
+                </Icon>
+                Drop a course here to remove it.
+            </Box>
+        </div>
     )
 }
 
