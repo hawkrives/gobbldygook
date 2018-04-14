@@ -161,7 +161,7 @@ function Semester(props) {
 
             {schedule ? (
                 <CourseList
-                    courses={courses}
+                    courses={courses || []}
                     creditCount={currentCredits}
                     availableCredits={recommendedCredits}
                     studentId={studentId}

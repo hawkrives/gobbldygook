@@ -41,7 +41,8 @@ const Empty = styled(EmptyCourseSlot)`
     ${courseStyles};
 `
 
-type PropTypes = {
+type Props = {
+    courses: Array<Object>,
     availableCredits: number,
     conflicts: Object[],
     creditCount: number,
@@ -49,8 +50,8 @@ type PropTypes = {
     studentId: string,
 }
 
-export default function CourseList(props: PropTypes) {
-    const courseObjects = props.schedule.courses.map(
+export default function CourseList(props: Props) {
+    const courseObjects = props.courses.map(
         (course, i) =>
             course.error ? (
                 <Missing clbid={course.clbid} error={course.error} />
