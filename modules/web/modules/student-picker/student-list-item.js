@@ -46,8 +46,8 @@ const DeleteButton = styled(Button)`
 
     &:hover {
         color: white;
-        border-color: $red-900;
-        background-color: $red-500;
+        border-color: ${theme.red900};
+        background-color: ${theme.red500};
     }
 `
 

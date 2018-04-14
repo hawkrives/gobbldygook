@@ -82,9 +82,9 @@ const Filter = styled.input`
     margin-left: 1em; /* only for the search button */
 
     &:focus {
-        color: $blue-900;
-        border-color: $blue-500;
-        background-color: $blue-50;
+        color: ${theme.blue900};
+        border-color: ${theme.blue500};
+        background-color: ${theme.blue50};
         outline: none;
     }
 `
