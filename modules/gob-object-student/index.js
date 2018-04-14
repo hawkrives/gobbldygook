@@ -4,6 +4,8 @@ export {encodeStudent, prepareStudentForSave} from './encode-student'
 
 export {filterAreaList} from './filter-area-list'
 
+export {getActiveCourses} from './get-active-courses'
+
 export {
     findWarnings,
     checkForInvalidYear,
