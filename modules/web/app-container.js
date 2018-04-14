@@ -4,9 +4,8 @@ import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
 import * as React from 'react'
 import {DragDropContext} from 'react-dnd'
-import {ThemeProvider, injectGlobal} from 'styled-components'
+import {injectGlobal} from 'styled-components'
 import StudentPicker from './modules/student-picker'
-import * as theme from './theme'
 import * as v from './theme/variables'
 
 injectGlobal`
@@ -61,12 +60,10 @@ export class App extends React.Component<Props> {
         let {content, overlay} = this.props
         return (
             <DocumentTitle title="Gobbldygook">
-                <ThemeProvider theme={theme}>
-                    <div id="gateway-wrapper">
-                        <div id="content-wrapper">{content}</div>
-                        {overlay}
-                    </div>
-                </ThemeProvider>
+                <div id="gateway-wrapper">
+                    <div id="content-wrapper">{content}</div>
+                    {overlay}
+                </div>
             </DocumentTitle>
         )
     }
