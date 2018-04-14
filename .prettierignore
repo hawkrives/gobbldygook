@@ -1,0 +1,4 @@
+modules/web/styles/normalize.scss
+*.md
+*.json
+flow-typed/
