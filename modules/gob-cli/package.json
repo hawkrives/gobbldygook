@@ -8,19 +8,19 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "dependencies": {
-  	"@gob/hanson-format": "^3.0.0-rc.2",
-  	"@gob/lib": "^3.0.0-rc.2",
-  	"appdirs": "1.1.0",
-  	"babel-register": "6.26.0",
-  	"glob": "7.1.2",
-  	"graceful-fs": "4.1.11",
-  	"junk": "2.1.0",
-  	"js-yaml": "3.11.0",
-  	"lodash": "4.17.5",
-  	"mkdirp": "0.5.1",
-  	"nomnom": "1.8.1",
-  	"pify": "3.0.0",
-  	"text-table": "0.2.0",
-  	"whatwg-fetch": "2.0.4"
+    "@gob/hanson-format": "^3.0.0-rc.2",
+    "@gob/lib": "^3.0.0-rc.2",
+    "appdirs": "1.1.0",
+    "babel-register": "6.26.0",
+    "glob": "7.1.2",
+    "graceful-fs": "4.1.11",
+    "js-yaml": "3.11.0",
+    "junk": "2.1.0",
+    "lodash": "4.17.5",
+    "mkdirp": "0.5.1",
+    "nomnom": "1.8.1",
+    "pify": "3.0.0",
+    "text-table": "0.2.0",
+    "whatwg-fetch": "2.0.4"
   }
 }

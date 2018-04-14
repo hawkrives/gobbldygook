@@ -6,10 +6,10 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "dependencies": {
-  	"@gob/search-queries": "^3.0.0-rc.2",
-  	"@gob/cli": "^3.0.0-rc.2",
-  	"js-yaml": "3.11.0",
-  	"nomnom": "1.8.1",
-  	"stabilize": "1.0.0"
+    "@gob/cli": "^3.0.0-rc.2",
+    "@gob/search-queries": "^3.0.0-rc.2",
+    "js-yaml": "3.11.0",
+    "nomnom": "1.8.1",
+    "stabilize": "1.0.0"
   }
 }
