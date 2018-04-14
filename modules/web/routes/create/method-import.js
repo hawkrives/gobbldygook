@@ -124,8 +124,8 @@ class SISImportScreen extends React.Component {
                     {checkingLogin
                         ? 'Checking login…'
                         : loggedIn
-                          ? "Great! You're logged in."
-                          : 'Not logged in. Please log in to the SIS in another tab.'}
+                            ? "Great! You're logged in."
+                            : 'Not logged in. Please log in to the SIS in another tab.'}
                 </p>
 
                 {error ? (

@@ -1,9 +1,10 @@
 // @flow
 
 import {css} from 'styled-components'
+import * as vars from './variables'
 
 export const contentBlockSpacing = css`
-    padding-top: ${props => props.theme.pageEdgePadding};
+    padding-top: ${vars.pageEdgePadding};
     padding-bottom: 15vh;
     overflow-y: scroll;
 `
@@ -15,7 +16,7 @@ export const materialShadow = `
 
 export const baseCard = css`
     background-color: white;
-    border-radius: ${props => props.theme.baseBorderRadius};
+    border-radius: ${vars.baseBorderRadius};
 `
 
 export const card = css`
@@ -28,7 +29,7 @@ export const cardContent = `
 `
 
 export const cardActions = css`
-    border-top: ${props => props.theme.materialDivider};
+    border-top: ${vars.materialDivider};
     padding: 1em;
 `
 

@@ -1,7 +1,6 @@
 // @flow
-'use strict'
 
-const {buildDeptString} = require('./build-dept')
+import {buildDeptString} from './build-dept'
 
 /**
  * Builds a deptnum string from a course.
@@ -10,7 +9,7 @@ const {buildDeptString} = require('./build-dept')
  * @param {Boolean} includeSection - whether or not to include the section in the result
  * @returns {String} - the deptnum string
  */
-function buildDeptNum(
+export function buildDeptNum(
     {
         departments,
         number,
@@ -33,5 +32,3 @@ function buildDeptNum(
 
     return deptnumString
 }
-
-module.exports.buildDeptNum = buildDeptNum

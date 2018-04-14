@@ -1,31 +1,40 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
-
+import styled from 'styled-components'
 import map from 'lodash/map'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {removeNotification} from './redux/actions'
-
+import type {Notification as Notif} from './types'
 import Notification from './notification'
 
-import './notifications.scss'
+const NotificationList = styled.ul`
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
 
-export const Notifications = ({notifications, removeNotification}) => (
-    <ul className="notification-list">
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 10;
+`
+
+type Props = {
+    notifications: {[key: string]: Notif},
+    removeNotification: (id: string) => any,
+}
+
+export const Notifications = ({notifications, removeNotification}: Props) => (
+    <NotificationList>
         {map(notifications, (n, i) => (
             <Notification
-                {...n}
+                notification={n}
                 key={i}
                 onClose={() => removeNotification(i)}
             />
         ))}
-    </ul>
+    </NotificationList>
 )
-
-Notifications.propTypes = {
-    notifications: PropTypes.object.isRequired,
-    removeNotification: PropTypes.func.isRequired,
-}
 
 const selectState = state => ({
     notifications: state.notifications,

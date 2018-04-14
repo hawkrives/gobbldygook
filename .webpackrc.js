@@ -29,16 +29,7 @@ const outputFolder = __dirname + '/build/'
 function config() {
     const isProduction = process.env.NODE_ENV === 'production'
     const isDevelopment = !isProduction
-
-    let publicPath = '/'
-    if (isProduction) {
-        publicPath = process.env.URL || process.env.DEPLOY_PRIME_URL || '/'
-
-        if (!publicPath.endsWith('/')) {
-            // If we don't do this, file assets will get incorrect paths.
-            publicPath += '/'
-        }
-    }
+    const publicPath = '/'
 
     const devtool = isProduction ? 'source-map' : 'eval'
 
@@ -97,7 +88,6 @@ function config() {
 
     const node = {
         process: false,
-        Buffer: false,
     }
 
     const plugins = [
@@ -105,8 +95,16 @@ function config() {
         new CleanWebpackPlugin([outputFolder]),
 
         // Generates an index.html for us.
-        new HtmlPlugin(
-            context => `
+        new HtmlPlugin(context => {
+            let cssPath = context.css ? `${publicPath}${context.css}` : null
+            let bugsnag = isProduction
+                ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
+                : ''
+            let polyfills = isProduction
+                ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
+                : ''
+
+            return `
                 <!DOCTYPE html>
                 <html lang="en-US">
                 <meta charset="UTF-8">
@@ -115,31 +113,15 @@ function config() {
 
                 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-                ${
-                    isProduction
-                        ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
-                        : ''
-                }
-                ${
-                    isProduction
-                        ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
-                        : ''
-                }
+                ${bugsnag}
+                ${polyfills}
+                ${cssPath ? `<link rel="stylesheet" href="${cssPath}">` : ''}
 
-                ${
-                    context.css
-                        ? `<link rel="stylesheet" href="${publicPath}${
-                              context.css
-                          }">`
-                        : ''
-                }
-
-                <body><main id="gobbldygook"></main></body>
-
+                <main id="gobbldygook"></main>
                 <script src="${publicPath}${context.main}"></script>
                 </html>
             `
-        ),
+        }),
 
         // Ignore the "full" schema in js-yaml's module, because it brings in esprima
         // to support the !!js/function type. We don't use and have no need for it, so

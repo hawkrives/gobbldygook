@@ -89,7 +89,8 @@ export function slurpIntoDatabase(
     notification.start(files.length)
 
     // Load them into the database
-    const runUpdate = file => updateDatabase(type, baseUrl, notification, file)
+    const runUpdate = file => () =>
+        updateDatabase(type, baseUrl, notification, file)
     return series(files.map(runUpdate))
 }
 

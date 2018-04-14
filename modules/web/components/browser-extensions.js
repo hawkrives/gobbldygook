@@ -10,7 +10,7 @@ import {
     installFirefoxExtension,
 } from '../../web/helpers/extension-helpers'
 
-const Button = styled`
+const Button = styled.button`
     display: inline-block;
 `
 

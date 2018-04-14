@@ -17,10 +17,7 @@ export function getStudentData(student, {areas, courses}) {
         schedules: promisedSchedules,
         fulfilled: promisedFulfillments,
     })
-        .then(data => ({
-            ...student,
-            ...data,
-        }))
+        .then(data => ({...student, ...data}))
         .catch(err => {
             throw err
         })

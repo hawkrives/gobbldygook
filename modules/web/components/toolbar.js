@@ -1,35 +1,26 @@
 // @flow
-import React from 'react'
 import styled from 'styled-components'
-import Button from './button'
-import Icon from './icon'
+import {FlatButton} from './button'
+import {InlineIcon} from './icon'
 
-const BaseToolbar = styled.div`
+export const Toolbar = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: stretch;
 
-    & .icon {
+    ${InlineIcon} {
         font-size: 1.5em;
     }
 `
 
-const Toolbar = (props: any) => (
-    <BaseToolbar className={`toolbar ${props.className || ''}`}>
-        {props.children}
-    </BaseToolbar>
-)
-
-export default Toolbar
-
-export const ToolbarButton = styled(Button)`
+export const ToolbarButton = FlatButton.extend`
     flex: 1 0 auto;
     padding-left: 0.25em;
     padding-right: 0.25em;
     font-size: 1rem;
 `
 
-export const ToolbarIcon = styled(Icon)`
+export const ToolbarIcon = InlineIcon.extend`
     flex: 1 0 auto;
     padding-left: 0.25em;
     padding-right: 0.25em;

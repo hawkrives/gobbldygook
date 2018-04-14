@@ -1,13 +1,4 @@
-'use strict'
-const {expandDepartment, normalizeDepartment} = require('./convert-department')
-const {enhanceHanson} = require('./enhance-hanson')
-const {makeAreaSlug} = require('./make-area-slug')
-const {parse} = require('./parse-hanson-string')
-
-module.exports = {
-    expandDepartment,
-    normalizeDepartment,
-    enhanceHanson,
-    makeAreaSlug,
-    parse,
-}
+export {expandDepartment, normalizeDepartment} from './convert-department'
+export {enhanceHanson} from './enhance-hanson'
+export {makeAreaSlug} from './make-area-slug'
+export {parse} from './parse-hanson-string'

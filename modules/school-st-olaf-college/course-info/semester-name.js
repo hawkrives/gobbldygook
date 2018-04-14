@@ -1,7 +1,6 @@
 // @flow
-'use strict'
 
-const has = require('lodash/has')
+import has from 'lodash/has'
 
 const SEMESTERS = {
     '0': 'Abroad',
@@ -14,7 +13,7 @@ const SEMESTERS = {
 }
 
 // Takes a semester number and returns the associated semester string.
-function semesterName(semester: string | number): string {
+export function semesterName(semester: string | number): string {
     if (typeof semester === 'number') {
         semester = String(semester)
     }
@@ -22,5 +21,3 @@ function semesterName(semester: string | number): string {
         ? SEMESTERS[semester]
         : `Unknown (${semester})`
 }
-
-module.exports.semesterName = semesterName

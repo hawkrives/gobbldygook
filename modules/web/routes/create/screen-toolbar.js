@@ -1,22 +1,23 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
+import {RaisedButton} from '../../components/button'
+import {Toolbar} from '../../components/toolbar'
 
-import Button from '../../components/button'
-import Toolbar from '../../components/toolbar'
+type Props = {
+    onBack: (ev: any) => any,
+    onNext: (ev: any) => any,
+}
 
-export default function ScreenToolbar({onNext, onBack}) {
+export default function ScreenToolbar({onNext, onBack}: Props) {
     return (
         <Toolbar>
-            <Button type="raised" disabled={!onBack} onClick={onBack}>
+            <RaisedButton disabled={!onBack} onClick={onBack}>
                 Back
-            </Button>
-            <Button type="raised" disabled={!onNext} onClick={onNext}>
+            </RaisedButton>
+            <RaisedButton disabled={!onNext} onClick={onNext}>
                 Next
-            </Button>
+            </RaisedButton>
         </Toolbar>
     )
-}
-ScreenToolbar.propTypes = {
-    onBack: PropTypes.func,
-    onNext: PropTypes.func,
 }

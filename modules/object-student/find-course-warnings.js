@@ -1,20 +1,15 @@
-'use strict'
-const map = require('lodash/map')
-const flatten = require('lodash/flatten')
-const compact = require('lodash/compact')
-const some = require('lodash/some')
-const zip = require('lodash/zip')
+import map from 'lodash/map'
+import flatten from 'lodash/flatten'
+import compact from 'lodash/compact'
+import some from 'lodash/some'
+import zip from 'lodash/zip'
 
-const ordinal = require('ord')
-const oxford = require('listify')
-const {findScheduleTimeConflicts} = require('sto-sis-time-parser')
-const {
-    expandYear,
-    semesterName,
-} = require('../school-st-olaf-college/course-info')
+import ordinal from 'ord'
+import oxford from 'listify'
+import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
+import {expandYear, semesterName} from '../school-st-olaf-college/course-info'
 
-module.exports.checkForInvalidYear = checkForInvalidYear
-function checkForInvalidYear(course, scheduleYear) {
+export function checkForInvalidYear(course, scheduleYear) {
     if (course.semester === 9 || course.semester === undefined) {
         return null
     }
@@ -33,8 +28,7 @@ function checkForInvalidYear(course, scheduleYear) {
     return null
 }
 
-module.exports.checkForInvalidSemester = checkForInvalidSemester
-function checkForInvalidSemester(course, scheduleSemester) {
+export function checkForInvalidSemester(course, scheduleSemester) {
     if (course.semester === undefined) {
         return null
     }
@@ -51,8 +45,7 @@ function checkForInvalidSemester(course, scheduleSemester) {
     return null
 }
 
-module.exports.checkForTimeConflicts = checkForTimeConflicts
-function checkForTimeConflicts(courses) {
+export function checkForTimeConflicts(courses) {
     let conflicts = findScheduleTimeConflicts(courses)
 
     conflicts = map(conflicts, conflictSet => {
@@ -81,8 +74,7 @@ function checkForTimeConflicts(courses) {
     return conflicts
 }
 
-module.exports.findWarnings = findWarnings
-function findWarnings(courses, schedule) {
+export function findWarnings(courses, schedule) {
     let warningsOfInvalidity = map(courses, course => {
         let invalidYear = checkForInvalidYear(course, schedule.year)
         let invalidSemester = checkForInvalidSemester(course, schedule.semester)

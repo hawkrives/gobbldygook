@@ -1,7 +1,6 @@
 // @flow
-'use strict'
 
-function stringifyError(
+export function stringifyError(
     err: any,
     filter?: Array<any> | ((key: any, value: any) => any),
     space?: string | number
@@ -12,5 +11,3 @@ function stringifyError(
     })
     return JSON.stringify(plainObject, filter, space)
 }
-
-module.exports.stringifyError = stringifyError

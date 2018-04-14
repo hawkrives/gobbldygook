@@ -2,9 +2,10 @@
 import React from 'react'
 import FakeCourse from './fake-course'
 import styled from 'styled-components'
+import * as theme from '../../theme'
 
 const Course = styled(FakeCourse)`
-    color: ${props => props.theme.gray500};
+    color: ${theme.gray500};
     user-select: none;
 
     * {

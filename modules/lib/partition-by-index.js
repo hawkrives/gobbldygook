@@ -1,8 +1,8 @@
 // @flow
-'use strict'
-const reduce = require('lodash/reduce')
 
-function partitionByIndex<T>(arr: T[]): [T[], T[]] {
+import reduce from 'lodash/reduce'
+
+export function partitionByIndex<T>(arr: T[]): [T[], T[]] {
     return reduce(
         arr,
         (acc, val, idx) => {
@@ -13,5 +13,3 @@ function partitionByIndex<T>(arr: T[]): [T[], T[]] {
         [[], []]
     )
 }
-
-module.exports.partitionByIndex = partitionByIndex

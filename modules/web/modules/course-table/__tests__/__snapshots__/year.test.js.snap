@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Year can add a semester 1`] = `
-<styled.div>
-  <styled.header>
-    <styled.h1>
+<year__Container>
+  <year__Header>
+    <year__TitleText>
       2016—2017
-    </styled.h1>
+    </year__TitleText>
     <span>
-      <Styled(Button)
+      <year__TitleButton
         onClick={[Function]}
         title="Add Semester"
         type="flat"
@@ -15,28 +15,28 @@ exports[`Year can add a semester 1`] = `
         Add ‘
         Fall
         ’
-      </Styled(Button)>
-      <Styled(Styled(Button))
+      </year__TitleButton>
+      <year__RemoveYearButton
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Styled(Styled(Button))>
+      </year__RemoveYearButton>
     </span>
-  </styled.header>
-  <styled.div />
-</styled.div>
+  </year__Header>
+  <year__SemesterList />
+</year__Container>
 `;
 
 exports[`Year can add a semester 2`] = `
-<styled.div>
-  <styled.header>
-    <styled.h1>
+<year__Container>
+  <year__Header>
+    <year__TitleText>
       2016—2017
-    </styled.h1>
+    </year__TitleText>
     <span>
-      <Styled(Button)
+      <year__TitleButton
         onClick={[Function]}
         title="Add Semester"
         type="flat"
@@ -44,28 +44,28 @@ exports[`Year can add a semester 2`] = `
         Add ‘
         Fall
         ’
-      </Styled(Button)>
-      <Styled(Styled(Button))
+      </year__TitleButton>
+      <year__RemoveYearButton
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Styled(Styled(Button))>
+      </year__RemoveYearButton>
     </span>
-  </styled.header>
-  <styled.div />
-</styled.div>
+  </year__Header>
+  <year__SemesterList />
+</year__Container>
 `;
 
 exports[`Year can remove a semester 1`] = `
-<styled.div>
-  <styled.header>
-    <styled.h1>
+<year__Container>
+  <year__Header>
+    <year__TitleText>
       2016—2017
-    </styled.h1>
+    </year__TitleText>
     <span>
-      <Styled(Button)
+      <year__TitleButton
         onClick={[Function]}
         title="Add Semester"
         type="flat"
@@ -73,28 +73,28 @@ exports[`Year can remove a semester 1`] = `
         Add ‘
         Fall
         ’
-      </Styled(Button)>
-      <Styled(Styled(Button))
+      </year__TitleButton>
+      <year__RemoveYearButton
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Styled(Styled(Button))>
+      </year__RemoveYearButton>
     </span>
-  </styled.header>
-  <styled.div />
-</styled.div>
+  </year__Header>
+  <year__SemesterList />
+</year__Container>
 `;
 
 exports[`Year can remove a semester 2`] = `
-<styled.div>
-  <styled.header>
-    <styled.h1>
+<year__Container>
+  <year__Header>
+    <year__TitleText>
       2016—2017
-    </styled.h1>
+    </year__TitleText>
     <span>
-      <Styled(Button)
+      <year__TitleButton
         onClick={[Function]}
         title="Add Semester"
         type="flat"
@@ -102,35 +102,35 @@ exports[`Year can remove a semester 2`] = `
         Add ‘
         Fall
         ’
-      </Styled(Button)>
-      <Styled(Styled(Button))
+      </year__TitleButton>
+      <year__RemoveYearButton
         onClick={[Function]}
         title="Remove the year 2016—2017"
         type="flat"
       >
         Remove Year
-      </Styled(Styled(Button))>
+      </year__RemoveYearButton>
     </span>
-  </styled.header>
-  <styled.div />
-</styled.div>
+  </year__Header>
+  <year__SemesterList />
+</year__Container>
 `;
 
 exports[`Year renders shallowly 1`] = `
 <div
-  className="sc-ksYbfQ gNgWYm"
+  className="year__Container-jrlgyY jBcoS"
 >
   <header
-    className="sc-hmzhuo dSCbhF"
+    className="year__Header-hJUXLR gLMUwJ"
   >
     <h1
-      className="sc-frDJqD bBADex"
+      className="year__TitleText-gubaPC kbiaR"
     >
       2016—2017
     </h1>
     <span>
       <button
-        className="sc-kvZOFW kfMkbr sc-htpNat fDMkYA"
+        className="year__TitleButton-iceypU btWOsu button__BaseButton-dVUXkm bqhNoR"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -143,7 +143,7 @@ exports[`Year renders shallowly 1`] = `
         ’
       </button>
       <button
-        className="sc-hqyNC gMHiyL sc-kvZOFW kfMkbr sc-htpNat fDMkYA"
+        className="year__RemoveYearButton-irTWOs jraVKV year__TitleButton-iceypU btWOsu button__BaseButton-dVUXkm bqhNoR"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -156,7 +156,7 @@ exports[`Year renders shallowly 1`] = `
     </span>
   </header>
   <div
-    className="sc-jbKcbu jxnyiB"
+    className="year__SemesterList-gyQlFP cibOCg"
   />
 </div>
 `;

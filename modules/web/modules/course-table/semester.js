@@ -7,7 +7,7 @@ import {countCredits} from '../../../examine-student/count-credits'
 import {IDENT_COURSE} from '../../../object-student/item-types'
 import {DropTarget} from 'react-dnd'
 import includes from 'lodash/includes'
-
+import * as theme from '../../theme'
 import Button from '../../components/button'
 import Icon from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
@@ -20,20 +20,20 @@ import CourseList from './course-list'
 import styled from 'styled-components'
 
 const Container = styled.div`
-    ${props => props.theme.card};
+    ${theme.card};
     flex: 1 0;
     min-width: 16em;
-    margin: ${props => props.theme.semesterSpacing};
+    margin: ${theme.semesterSpacing};
 
     &.can-drop {
         cursor: copy;
-        box-shadow: 0 0 4px ${props => props.theme.gray500};
+        box-shadow: 0 0 4px ${theme.gray500};
         z-index: 10;
     }
 `
 
 const TitleButton = styled(Button)`
-    ${props => props.theme.semesterPadding};
+    ${theme.semesterPadding};
     min-height: 0;
     font-size: 0.9em;
 
@@ -48,14 +48,14 @@ const TitleButton = styled(Button)`
 
 const RemoveSemesterButton = styled(TitleButton)`
     &:hover {
-        color: ${props => props.theme.red500};
-        border-color: ${props => props.theme.red500};
-        background-color: ${props => props.theme.red50};
+        color: ${theme.red500};
+        border-color: ${theme.red500};
+        background-color: ${theme.red50};
     }
 `
 
 const Header = styled.header`
-    border-bottom: ${props => props.theme.materialDivider};
+    border-bottom: ${theme.materialDivider};
 
     font-size: 0.85em;
 
@@ -65,7 +65,7 @@ const Header = styled.header`
     font-feature-settings: 'smcp';
     border-top-right-radius: 2px;
     border-top-left-radius: 2px;
-    color: ${props => props.theme.gray500};
+    color: ${theme.gray500};
 
     overflow: hidden;
 `
@@ -84,11 +84,11 @@ const InfoItem = styled(InlineListItem)`
 `
 
 const Title = styled(Link)`
-    ${props => props.theme.linkUndecorated};
+    ${theme.linkUndecorated};
     flex: 1;
     display: flex;
     flex-direction: column;
-    ${props => props.theme.semesterPadding};
+    ${theme.semesterPadding};
 
     &:hover {
         text-decoration: underline;
@@ -96,7 +96,7 @@ const Title = styled(Link)`
 `
 
 const TitleText = styled.h1`
-    ${props => props.theme.headingNeutral};
+    ${theme.headingNeutral};
     display: inline-block;
     color: black;
 `
@@ -161,7 +161,7 @@ function Semester(props) {
 
             {schedule ? (
                 <CourseList
-                    courses={courses}
+                    courses={courses || []}
                     creditCount={currentCredits}
                     availableCredits={recommendedCredits}
                     studentId={studentId}

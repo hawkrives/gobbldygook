@@ -1,8 +1,6 @@
-'use strict'
-const {selectOne, selectAll} = require('css-select')
+import {selectOne, selectAll} from 'css-select'
 
-module.exports.extractTermList = extractTermList
-function extractTermList(dom) {
+export function extractTermList(dom) {
     const termSelector = selectOne('[name=searchyearterm]', dom)
     if (termSelector === null) {
         return []

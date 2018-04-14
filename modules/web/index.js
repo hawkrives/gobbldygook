@@ -2,6 +2,7 @@
 
 // Include fetch
 import 'whatwg-fetch'
+import './styles/normalize.scss'
 
 import debug from 'debug'
 const log = debug('web')

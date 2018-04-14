@@ -2,6 +2,7 @@
 import * as React from 'react'
 import Link from 'react-router/lib/Link'
 import styled from 'styled-components'
+import * as theme from '../theme'
 
 const BaseButton = styled.button`
     cursor: pointer;
@@ -20,7 +21,7 @@ const BaseButton = styled.button`
     border: solid 1px transparent;
 
     transition: all 0.2s ease-out;
-    border-radius: ${props => props.theme.baseBorderRadius};
+    border-radius: ${theme.baseBorderRadius};
     line-height: normal;
 
     text-align: center;
@@ -36,45 +37,45 @@ const BaseButton = styled.button`
     -webkit-tap-highlight-color: transparent;
 `
 
-const RaisedButton = BaseButton.extend`
-    ${props => props.theme.materialShadow};
-    background-color: ${props => props.theme.white};
+export const RaisedButton = BaseButton.extend`
+    ${theme.materialShadow};
+    background-color: ${theme.white};
 
     &:hover {
-        background-color: ${props => props.theme.white};
+        background-color: ${theme.white};
     }
     &:focus {
-        background-color: ${props => props.theme.blue50};
-        border-color: ${props => props.theme.blue300};
+        background-color: ${theme.blue50};
+        border-color: ${theme.blue300};
     }
 
     &:active {
-        ${props => props.theme.materialShadow};
-        background-color: ${props => props.theme.white};
+        ${theme.materialShadow};
+        background-color: ${theme.white};
     }
 
     &[disabled] {
         cursor: default;
-        color: ${props => props.theme.gray500};
+        color: ${theme.gray500};
     }
 `
 
-const FlatButton = BaseButton.extend`
+export const FlatButton = BaseButton.extend`
     background-color: transparent;
 
     &:hover {
-        background-color: ${props => props.theme.gray100};
-        border-color: ${props => props.theme.gray400};
+        background-color: ${theme.gray100};
+        border-color: ${theme.gray400};
     }
 
     &:focus {
-        background-color: ${props => props.theme.blue50};
-        border-color: ${props => props.theme.blue300};
+        background-color: ${theme.blue50};
+        border-color: ${theme.blue300};
     }
 
     &[disabled] {
         cursor: default;
-        color: ${props => props.theme.disabledForegroundLight};
+        color: ${theme.disabledForegroundLight};
 
         &:hover,
         &:focus,
@@ -85,12 +86,12 @@ const FlatButton = BaseButton.extend`
     }
 `
 
-const FlatLinkButton = FlatButton.withComponent(Link).extend`
-    ${props => props.theme.linkUndecorated}
+export const FlatLinkButton = FlatButton.withComponent(Link).extend`
+    ${theme.linkUndecorated}
 `
 
-const RaisedLinkButton = RaisedButton.withComponent(Link).extend`
-    ${props => props.theme.linkUndecorated}
+export const RaisedLinkButton = RaisedButton.withComponent(Link).extend`
+    ${theme.linkUndecorated}
 `
 
 type Props = {
@@ -105,7 +106,7 @@ type Props = {
     type: 'flat' | 'raised',
 }
 
-class Button extends React.Component<Props> {
+export default class Button extends React.Component<Props> {
     static defaultProps = {
         type: 'flat',
     }
@@ -123,8 +124,12 @@ class Button extends React.Component<Props> {
         } = this.props
 
         const Tag = link
-            ? type === 'flat' ? FlatLinkButton : RaisedLinkButton
-            : type === 'flat' ? FlatButton : RaisedButton
+            ? type === 'flat'
+                ? FlatLinkButton
+                : RaisedLinkButton
+            : type === 'flat'
+                ? FlatButton
+                : RaisedButton
 
         return (
             <Tag
@@ -141,5 +146,3 @@ class Button extends React.Component<Props> {
         )
     }
 }
-
-export default Button

@@ -7,7 +7,7 @@ import Icon from '../../components/icon'
 import {iosBoltOutline, iosBolt} from '../../icons/ionicons'
 import Filter from './expression--filter'
 import Expression from './expression'
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
 import ResultIndicator from './result-indicator'
 
 import './requirement.scss'
@@ -17,7 +17,8 @@ type RequirementInfo = {
     description?: string,
     filter?: Object,
     message?: string,
-    name?: string,
+    result?: Object,
+    overridden?: boolean,
     [key: string]: RequirementInfo,
 }
 
@@ -25,11 +26,10 @@ type Props = {
     onAddOverride: (string[], Event) => any,
     onRemoveOverride: (string[], Event) => any,
     onToggleOverride: (string[], Event) => any,
-    overridden?: boolean,
     path: string[],
-    result?: Object,
     topLevel?: boolean,
-    info: RequirementInfo,
+    info: ?RequirementInfo,
+    name?: string,
 }
 
 type RequirementProps = Props & {
@@ -39,59 +39,58 @@ type RequirementProps = Props & {
 
 function Requirement(props: RequirementProps) {
     const {topLevel = false} = props
-    const childKeys = Object.keys(props).filter(isRequirementName)
+    let info = props.info || {}
 
-    const wasEvaluated = props.result && props.result._checked
+    const childKeys = Object.keys(info).filter(isRequirementName)
+    console.log(props, props.name)
+    // console.log(info)
+
+    const wasEvaluated = info.result && info.result._checked
     const computationClassName = wasEvaluated
-        ? props.info.computed ? 'result-success' : 'result-failure'
+        ? info.computed
+            ? 'result-success'
+            : 'result-failure'
         : ''
-    const status = <ResultIndicator result={props.info.computed} />
+    const status = <ResultIndicator result={info.computed} />
 
-    const extraClasses = [props.overridden ? 'overridden' : '']
+    const extraClasses = [info.overridden ? 'overridden' : '']
 
-    const result = props.result && (
+    const result = info.result && (
         <div className="result">
-            <Expression expr={props.result} ctx={props} />
+            <Expression expr={info.result} ctx={info} />
         </div>
     )
 
-    const message = props.info.message && (
-        <p className="message">{props.info.message}</p>
-    )
-    const description = props.info.description && (
-        <p className="description">{props.info.description}</p>
+    const message = info.message && <p className="message">{info.message}</p>
+    const description = info.description && (
+        <p className="description">{info.description}</p>
     )
 
-    const filterEl = props.info.filter && (
+    const filterEl = info.filter && (
         <div className="filter">
-            Filter: <Filter expr={props.info.filter} ctx={props} />
+            Filter: <Filter expr={info.filter} ctx={info} />
         </div>
     )
 
     const title = !topLevel && (
-        <h2
-            className="heading"
-            title={props.info.name}
-            onClick={props.onToggleOpen}
-        >
+        <h2 className="heading" title={info.name} onClick={props.onToggleOpen}>
             <span className="title">
                 {' '}
-                {props.info.name}
+                {props.name}
                 <span className="status">{status}</span>
             </span>
             <span className="manual-override">
                 <span className="overridden-msg">
-                    {props.overridden ? '(Overridden) ' : ''}
+                    {info.overridden ? '(Overridden) ' : ''}
                 </span>
-                <Button
+                <FlatButton
                     title={`${
-                        props.overridden ? 'Remove' : 'Apply'
+                        info.overridden ? 'Remove' : 'Apply'
                     } a manual override to this requirement`}
                     onClick={ev => props.onToggleOverride(props.path, ev)}
-                    type="flat"
                 >
-                    <Icon>{props.overridden ? iosBolt : iosBoltOutline}</Icon>
-                </Button>
+                    <Icon>{info.overridden ? iosBolt : iosBoltOutline}</Icon>
+                </FlatButton>
             </span>
         </h2>
     )
@@ -100,7 +99,7 @@ function Requirement(props: RequirementProps) {
         <ExpandableRequirement
             key={key}
             name={key}
-            info={props.info[key]}
+            info={((info[key]: any): RequirementInfo)}
             path={props.path.concat(key)}
             onAddOverride={props.onAddOverride}
             onToggleOverride={props.onToggleOverride}
@@ -108,21 +107,17 @@ function Requirement(props: RequirementProps) {
         />
     ))
 
-    const overrideButtons = props.info.message &&
-        !props.result && (
+    const overrideButtons = info.message &&
+        !info.result && (
             <span className="required-override-buttons button-group">
-                <Button
+                <FlatButton
                     onClick={ev => props.onRemoveOverride(props.path, ev)}
-                    type="flat"
                 >
                     Not yet…
-                </Button>
-                <Button
-                    onClick={ev => props.onAddOverride(props.path, ev)}
-                    type="flat"
-                >
+                </FlatButton>
+                <FlatButton onClick={ev => props.onAddOverride(props.path, ev)}>
                     Done!
-                </Button>
+                </FlatButton>
             </span>
         )
 

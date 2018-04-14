@@ -7,9 +7,10 @@ import fuzzysearch from 'fuzzysearch'
 import styled from 'styled-components'
 import List from '../../components/list'
 import StudentListItem from './student-list-item'
+import * as theme from '../../theme'
 
 const ListOfStudents = styled(List)`
-    ${props => props.theme.card};
+    ${theme.card};
     max-width: 35em;
     width: 100%;
     margin: 0 auto;

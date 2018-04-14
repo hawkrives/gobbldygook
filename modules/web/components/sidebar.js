@@ -2,8 +2,8 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import Icon from './icon'
-import Toolbar, {ToolbarButton} from './toolbar'
+import {BlockIcon} from './icon'
+import {Toolbar, ToolbarButton} from './toolbar'
 import Separator from './separator'
 import CourseRemovalBox from './course-removal-box'
 import {undo, redo} from '../redux/students/actions/undo'
@@ -17,7 +17,7 @@ import {
     iosPeopleOutline,
     iosUploadOutline,
 } from '../icons/ionicons'
-
+import * as theme from '../theme'
 import styled from 'styled-components'
 
 type StudentType = Object
@@ -40,13 +40,13 @@ const StudentButtonsToolbar = styled(Toolbar)`
 `
 
 const SidebarElement = styled.aside`
-    ${props => props.theme.contentBlockSpacing};
+    ${theme.contentBlockSpacing};
     flex: 1;
 
     @media all and (min-width: 35em) {
         max-width: 280px;
-        padding-left: ${props => props.theme.pageEdgePadding};
-        padding-right: calc(${props => props.theme.pageEdgePadding} * (2/3));
+        padding-left: ${theme.pageEdgePadding};
+        padding-right: calc(${theme.pageEdgePadding} * (2 / 3));
     }
 `
 
@@ -60,14 +60,10 @@ function Sidebar(props: PropTypes) {
         <SidebarElement>
             <StudentButtonsToolbar>
                 <ToolbarButton link to="/" title="Students">
-                    <Icon type="block">{iosPeopleOutline}</Icon>
+                    <BlockIcon>{iosPeopleOutline}</BlockIcon>
                 </ToolbarButton>
-                <ToolbarButton
-                    link
-                    to={`/s/${studentId}/search`}
-                    title="Search"
-                >
-                    <Icon type="block">{iosSearch}</Icon>
+                <ToolbarButton to={`/s/${studentId}/search`} title="Search">
+                    <BlockIcon>{iosSearch}</BlockIcon>
                 </ToolbarButton>
 
                 <Separator type="spacer" />
@@ -77,24 +73,20 @@ function Sidebar(props: PropTypes) {
                     onClick={() => undo(studentId)}
                     disabled={!canUndo}
                 >
-                    <Icon type="block">
-                        {!canUndo ? iosUndoOutline : iosUndo}
-                    </Icon>
+                    <BlockIcon>{!canUndo ? iosUndoOutline : iosUndo}</BlockIcon>
                 </ToolbarButton>
                 <ToolbarButton
                     title="Redo"
                     onClick={() => redo(studentId)}
                     disabled={!canRedo}
                 >
-                    <Icon type="block">
-                        {!canRedo ? iosRedoOutline : iosRedo}
-                    </Icon>
+                    <BlockIcon>{!canRedo ? iosRedoOutline : iosRedo}</BlockIcon>
                 </ToolbarButton>
 
                 <Separator type="spacer" />
 
-                <ToolbarButton link to={`/s/${studentId}/share`} title="Share">
-                    <Icon type="block">{iosUploadOutline}</Icon>
+                <ToolbarButton to={`/s/${studentId}/share`} title="Share">
+                    <BlockIcon>{iosUploadOutline}</BlockIcon>
                 </ToolbarButton>
             </StudentButtonsToolbar>
 

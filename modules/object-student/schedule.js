@@ -1,10 +1,9 @@
-'use strict'
-const isString = require('lodash/isString')
-const uuid = require('uuid/v4')
+import isString from 'lodash/isString'
+import uuid from 'uuid/v4'
 
-const {randomChar} = require('../lib/random-char')
+import {randomChar} from '../lib/random-char'
 
-function Schedule(data = {}) {
+export function Schedule(data = {}) {
     const baseSchedule = {
         id: uuid(),
         active: false,
@@ -35,5 +34,3 @@ function Schedule(data = {}) {
 
     return schedule
 }
-
-module.exports.Schedule = Schedule
