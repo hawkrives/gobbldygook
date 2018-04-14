@@ -1,7 +1,7 @@
 [build]
     command = "npm run netlify"
     # the directory to publish (relative to root of your repo)
-    publish = "build/"
+    publish = "modules/gob-web/build/"
     [build.environment]
         NODE_VERSION = "8"
         YARN_VERSION = "1.5.1"
