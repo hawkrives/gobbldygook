@@ -8,8 +8,8 @@
   "dependencies": {
     "@gob/hanson-format": "^3.0.0-rc.2",
     "@gob/lib": "^3.0.0-rc.2",
-    "debug": "3.1.0",
-    "lodash": "4.17.5",
-    "stabilize": "1.0.0"
+    "debug": "^3.1.0",
+    "lodash": "^4.17.5",
+    "stabilize": "^1.0.0"
   }
 }
