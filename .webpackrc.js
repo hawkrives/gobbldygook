@@ -29,16 +29,7 @@ const outputFolder = __dirname + '/build/'
 function config() {
     const isProduction = process.env.NODE_ENV === 'production'
     const isDevelopment = !isProduction
-
-    let publicPath = '/'
-    if (isProduction) {
-        publicPath = process.env.DEPLOY_PRIME_URL || process.env.URL || '/'
-
-        if (!publicPath.endsWith('/')) {
-            // If we don't do this, file assets will get incorrect paths.
-            publicPath += '/'
-        }
-    }
+    const publicPath = '/'
 
     const devtool = isProduction ? 'source-map' : 'eval'
 
