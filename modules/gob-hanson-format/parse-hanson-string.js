@@ -177,11 +177,7 @@ function peg$parse(input, options) {
         peg$c20 = 'of',
         peg$c21 = peg$literalExpectation('of', false),
         peg$c22 = function peg$c22(count, course) {
-            return {
-                $type: 'occurrence',
-                $count: count,
-                $course: course.$course,
-            }
+            return {$type: 'occurrence', $count: count, $course: course.$course}
         },
         peg$c23 = '{',
         peg$c24 = peg$literalExpectation('{', false),
