@@ -123,8 +123,12 @@ class Button extends React.Component<Props> {
         } = this.props
 
         const Tag = link
-            ? type === 'flat' ? FlatLinkButton : RaisedLinkButton
-            : type === 'flat' ? FlatButton : RaisedButton
+            ? type === 'flat'
+                ? FlatLinkButton
+                : RaisedLinkButton
+            : type === 'flat'
+                ? FlatButton
+                : RaisedButton
 
         return (
             <Tag

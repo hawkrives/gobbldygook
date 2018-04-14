@@ -46,7 +46,7 @@ const SidebarElement = styled.aside`
     @media all and (min-width: 35em) {
         max-width: 280px;
         padding-left: ${props => props.theme.pageEdgePadding};
-        padding-right: calc(${props => props.theme.pageEdgePadding} * (2/3));
+        padding-right: calc(${props => props.theme.pageEdgePadding} * (2 / 3));
     }
 `
 

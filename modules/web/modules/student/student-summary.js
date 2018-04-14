@@ -244,7 +244,9 @@ export class DegreeSummary extends React.PureComponent<DegreeSummaryProps> {
                 You are planning on{' '}
                 {dCount > 0 ? `${dEmph}${dList} ${dWord}` : `no ${dWord}`}
                 {mCount || cCount || eCount
-                    ? mCount && (cCount || eCount) ? ', ' : ' and '
+                    ? mCount && (cCount || eCount)
+                        ? ', '
+                        : ' and '
                     : ''}
                 {mCount ? `${mEmph}${mWord} in ${mList}` : ''}
                 {mCount && cCount ? ', and ' : ''}

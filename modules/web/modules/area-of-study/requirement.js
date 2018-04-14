@@ -43,7 +43,9 @@ function Requirement(props: RequirementProps) {
 
     const wasEvaluated = props.result && props.result._checked
     const computationClassName = wasEvaluated
-        ? props.info.computed ? 'result-success' : 'result-failure'
+        ? props.info.computed
+            ? 'result-success'
+            : 'result-failure'
         : ''
     const status = <ResultIndicator result={props.info.computed} />
 
