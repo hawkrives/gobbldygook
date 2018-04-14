@@ -1,4 +1,6 @@
 {
+  "name": "gobbldygook",
+  "version": "3.0.0-rc.2",
   "private": true,
   "workspaces": [
     "modules/*"
