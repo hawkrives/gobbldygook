@@ -1,5 +1,5 @@
 // @flow
-import db from './db'
+import db from '@gob/web-database'
 import {enhanceHanson} from '@gob/hanson-format'
 import some from 'lodash/some'
 import maxBy from 'lodash/maxBy'
