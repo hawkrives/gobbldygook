@@ -53,8 +53,6 @@
       "text-summary"
     ],
     "globals": {
-      "DEVELOPMENT": false,
-      "PRODUCTION": false,
       "TESTING": true,
       "VERSION": "3.0.0-test"
     },
