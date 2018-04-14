@@ -17,7 +17,17 @@
 
 # respond to all requests with the SPA
 [[redirects]]
-    from = "/*"
+    from = "/s/*"
+    to = "/index.html"
+    status = 200
+
+[[redirects]]
+    from = "/create/*"
+    to = "/index.html"
+    status = 200
+
+[[redirects]]
+    from = "/search/*"
     to = "/index.html"
     status = 200
 
