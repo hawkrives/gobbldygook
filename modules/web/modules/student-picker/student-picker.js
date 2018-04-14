@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import size from 'lodash/size'
-
+import * as theme from '../../theme'
 import {
     androidSearch,
     funnel,
@@ -75,7 +75,7 @@ const MakeStudentButton = styled(Button)`
 `
 
 const Filter = styled.input`
-    ${props => props.theme.card} flex: 3 0 auto;
+    ${theme.card} flex: 3 0 auto;
     align-self: center;
     padding: 0.25em 0.5em;
     margin-right: 1em;

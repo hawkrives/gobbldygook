@@ -9,6 +9,7 @@ import {
     iosCalendarOutline,
     alertCircled,
 } from '../../icons/ionicons'
+import * as theme from '../../theme'
 
 const WarningList = styled(PlainList)`
     font-size: 0.85em;
@@ -24,7 +25,7 @@ const WarningItem = styled(ListItem)`
     padding: 0.125em 0.35em;
     margin-bottom: 0.1em;
     border-radius: 0.25em;
-    background-color: ${props => props.theme.amber200};
+    background-color: ${theme.amber200};
 `
 
 const WarningIcon = styled(Icon)`
@@ -34,7 +35,7 @@ const WarningIcon = styled(Icon)`
 
 const WarningMessage = styled.span`
     flex: 1;
-    ${props => props.theme.truncate};
+    ${theme.truncate};
 `
 
 const icons = {

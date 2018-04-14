@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-
+import * as theme from '../../theme'
 import Button from '../../components/button'
 import Icon from '../../components/icon'
 import Toolbar from '../../components/toolbar'
@@ -14,7 +14,7 @@ import {connect} from 'react-redux'
 import {encodeStudent} from '../../../object-student'
 
 const ShareModal = styled(Modal)`
-    ${props => props.theme.card};
+    ${theme.card};
     flex-flow: column;
     padding: 1em 2em;
 

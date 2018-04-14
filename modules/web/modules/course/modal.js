@@ -15,9 +15,10 @@ import {
     moveCourse,
     removeCourse,
 } from '../../redux/students/actions/courses'
+import * as theme from '../../theme'
 
 const ContainerModal = styled(Modal)`
-    ${props => props.theme.baseCard};
+    ${theme.baseCard};
     display: flex;
     flex-flow: column;
     max-width: 45em;
@@ -35,7 +36,7 @@ const VerticalSegment = `
 
 const BottomToolbar = styled.div`
     ${VerticalSegment};
-    border-top: ${props => props.theme.materialDivider};
+    border-top: ${theme.materialDivider};
     margin-top: 0.5em;
     padding-top: 0.5em;
     display: flex;
@@ -45,17 +46,17 @@ const BottomToolbar = styled.div`
 `
 
 const RemoveCourseButton = styled(Button)`
-    color: ${props => props.theme.red500};
+    color: ${theme.red500};
     padding-left: 0.5em;
     padding-right: 0.5em;
     font-size: 0.85em;
     &:hover {
-        background-color: ${props => props.theme.red50};
-        border-color: ${props => props.theme.red500};
+        background-color: ${theme.red50};
+        border-color: ${theme.red500};
     }
 
     &[disabled] {
-        color: ${props => props.theme.gray500};
+        color: ${theme.gray500};
     }
     &[disabled]:hover {
         background-color: transparent;

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {expandYear} from '../../../school-st-olaf-college/course-info'
-
+import * as theme from '../../theme'
 import {findFirstAvailableYear} from '../../helpers/find-first-available-year'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
@@ -23,7 +23,7 @@ const AddYearButton = styled(Button)`
 
     // 4px is the semester edge padding
     // 7.5px is the internal semester padding
-    margin: 0 4px ${props => props.theme.pageEdgePadding};
+    margin: 0 4px ${theme.pageEdgePadding};
     padding-left: 7.5px;
 
     &[disabled] {

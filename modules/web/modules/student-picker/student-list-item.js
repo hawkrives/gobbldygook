@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import Button from '../../components/button'
 import Icon from '../../components/icon'
 import {iosTrashOutline, iosArrowForward} from '../../icons/ionicons'
+import * as theme from '../../theme'
 
 const Container = styled.li`
     display: flex;
@@ -16,18 +17,18 @@ const Container = styled.li`
     align-items: stretch;
 
     & + & {
-        border-top: ${props => props.theme.materialDivider};
+        border-top: ${theme.materialDivider};
     }
 
     border-left: solid 3px transparent;
     &.loading {
-        border-left-color: ${props => props.theme.blue300};
+        border-left-color: ${theme.blue300};
     }
     &.can-graduate {
-        border-left-color: ${props => props.theme.green300};
+        border-left-color: ${theme.green300};
     }
     &.cannot-graduate {
-        border-left-color: ${props => props.theme.red300};
+        border-left-color: ${theme.red300};
     }
 `
 
@@ -81,10 +82,10 @@ const StudentInfo = styled.span`
 `
 
 const ListItemLink = styled(Link)`
-    ${props => props.theme.linkUndecorated};
+    ${theme.linkUndecorated};
     background-color: white;
     &.is-selected {
-        background-color: ${props => props.theme.blue50};
+        background-color: ${theme.blue50};
     }
 
     flex: 1;
@@ -101,8 +102,8 @@ const ListItemLink = styled(Link)`
     &:hover,
     &:focus {
         outline: none;
-        background-color: ${props => props.theme.blue50};
-        border-color: ${props => props.theme.blue};
+        background-color: ${theme.blue50};
+        border-color: ${theme.blue};
     }
 `
 

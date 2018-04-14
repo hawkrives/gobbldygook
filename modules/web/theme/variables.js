@@ -31,10 +31,10 @@ export const sidebarWidth = '270px'
 export const semesterSpacing = '4px'
 
 export const semesterTopPadding = css`
-    ${props => props.theme.blockEdgePadding};
+    ${blockEdgePadding};
 `
 export const semesterSidePadding = css`
-    calc(${props => props.theme.blockEdgePadding} * 1.5)
+    calc(${blockEdgePadding} * 1.5);
 `
 
 export const semesterPadding = css`

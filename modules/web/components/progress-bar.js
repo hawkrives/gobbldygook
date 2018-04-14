@@ -2,30 +2,32 @@
 import React from 'react'
 import styled from 'styled-components'
 import {findWordForProgress} from '../../lib'
+import * as theme from '../theme'
 
 const colorMap = {
-    hundred: theme => theme.green300,
-    ninety: theme => theme.orange300,
-    eighty: theme => theme.orange300,
-    seventy: theme => theme.orange300,
-    sixty: theme => theme.yellow700,
-    fifty: theme => theme.yellow600,
-    forty: theme => theme.yellow600,
-    thirty: theme => theme.amber500,
-    twenty: theme => theme.red300,
-    ten: theme => theme.red300,
-    'under-ten': theme => theme.red300,
+    hundred: theme.green300,
+    ninety: theme.orange300,
+    eighty: theme.orange300,
+    seventy: theme.orange300,
+    sixty: theme.yellow700,
+    fifty: theme.yellow600,
+    forty: theme.yellow600,
+    thirty: theme.amber500,
+    twenty: theme.red300,
+    ten: theme.red300,
+    'under-ten': theme.red300,
 }
 
 const Bar = styled.div`
     border: 1px solid currentColor;
-    border-radius: ${props => props.theme.baseBorderRadius};
+    border-radius: ${theme.baseBorderRadius};
     background-color: white;
+    width: 100%;
 
     color: ${props =>
         props.colorful && colorMap[props.percent]
-            ? colorMap[props.percent](props.theme)
-            : props.theme.gray300};
+            ? colorMap[props.percent]
+            : theme.gray300};
 `
 
 const BarTrack = styled.div`
@@ -54,7 +56,7 @@ export default function ProgressBar(props: Props) {
 
     return (
         <Bar className={className} percent={progressWord} colorful={colorful}>
-            <BarTrack style={{height: '100%', width: '100%'}}>
+            <BarTrack>
                 <BarFill style={{width: `${width}%`}} />
             </BarTrack>
         </Bar>

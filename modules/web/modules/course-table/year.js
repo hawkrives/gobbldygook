@@ -12,11 +12,11 @@ import {
     expandYear,
     semesterName,
 } from '../../../school-st-olaf-college/course-info'
-
+import * as theme from '../../theme'
 import styled from 'styled-components'
 
 const Container = styled.div`
-    margin-bottom: ${props => props.theme.pageEdgePadding};
+    margin-bottom: ${theme.pageEdgePadding};
 `
 
 const row = `
@@ -25,7 +25,7 @@ const row = `
 `
 
 const Header = styled.header`
-    ${props => props.theme.noSelect};
+    ${theme.noSelect};
     margin: 0;
 
     display: flex;
@@ -41,7 +41,7 @@ const Header = styled.header`
 `
 
 const TitleText = styled.h1`
-    ${props => props.theme.headingNeutral};
+    ${theme.headingNeutral};
     white-space: nowrap;
     flex: 1;
 
@@ -61,7 +61,7 @@ const TitleButton = styled(Button)`
     font-feature-settings: 'smcp';
     font-weight: 400;
 
-    color: ${props => props.theme.gray500};
+    color: ${theme.gray500};
 
     & + & {
         margin-left: 0.1em;
@@ -70,9 +70,9 @@ const TitleButton = styled(Button)`
 
 const RemoveYearButton = styled(TitleButton)`
     &:hover {
-        color: ${props => props.theme.red500};
-        background-color: ${props => props.theme.red50};
-        border: solid 1px ${props => props.theme.red500};
+        color: ${theme.red500};
+        background-color: ${theme.red50};
+        border: solid 1px ${theme.red500};
     }
 `
 

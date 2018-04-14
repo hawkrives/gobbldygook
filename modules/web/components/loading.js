@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import styled, {keyframes} from 'styled-components'
+import * as theme from '../theme'
 
 const Wrapper = styled.figure`
     display: flex;
@@ -75,16 +76,16 @@ const Spinner = styled.div`
 const Message = styled.figcaption`
     font-weight: 300;
     margin-top: 1em;
-    color: ${props => props.theme.gray};
+    color: ${theme.gray};
 
     &.info {
-        color: ${props => props.theme.green};
+        color: ${theme.green};
     }
     &.warning {
-        color: ${props => props.theme.orange};
+        color: ${theme.orange};
     }
     &.error {
-        color: ${props => props.theme.red};
+        color: ${theme.red};
     }
 `
 

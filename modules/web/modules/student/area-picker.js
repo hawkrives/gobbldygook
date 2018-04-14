@@ -12,14 +12,15 @@ import Button from '../../components/button'
 import List from '../../components/list'
 import Toolbar from '../../components/toolbar'
 import styled from 'styled-components'
+import * as theme from '../../theme'
 
 const AddAreaBlock = styled.div`
-    padding: ${({theme}) => theme.areaEdgePadding};
-    border-top: ${({theme}) => theme.materialDivider};
+    padding: ${theme.areaEdgePadding};
+    border-top: ${theme.materialDivider};
 `
 
 const AddAreaToolbar = styled(Toolbar)`
-    margin-bottom: ${({theme}) => theme.areaEdgePadding};
+    margin-bottom: ${theme.areaEdgePadding};
 `
 
 const AreaChoice = styled.li`
@@ -53,13 +54,13 @@ const ToggleAreaButton = styled(Button)`
 
 const AddAreaFilter = styled.input`
     flex: 1;
-    border: solid 1px ${({theme}) => theme.gray300};
+    border: solid 1px ${theme.gray300};
     padding: 0.25em;
     margin-bottom: 0.5em;
 
     &:focus {
-        background-color: ${({theme}) => theme.blue50};
-        border-color: ${({theme}) => theme.blue500};
+        background-color: ${theme.blue50};
+        border-color: ${theme.blue500};
         outline: 0;
     }
 `

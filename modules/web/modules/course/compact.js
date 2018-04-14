@@ -3,7 +3,7 @@ import React from 'react'
 import map from 'lodash/map'
 import noop from 'lodash/noop'
 import styled from 'styled-components'
-
+import * as theme from '../../theme'
 import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {buildDeptNum} from '../../../school-st-olaf-college/deptnums'
@@ -14,7 +14,7 @@ export const Container = styled.article`
 
     &:hover {
         cursor: pointer;
-        background-color: ${props => props.theme.gray100};
+        background-color: ${theme.gray100};
     }
 
     &.is-dragging {

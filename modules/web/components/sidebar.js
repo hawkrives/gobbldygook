@@ -17,7 +17,7 @@ import {
     iosPeopleOutline,
     iosUploadOutline,
 } from '../icons/ionicons'
-
+import * as theme from '../theme'
 import styled from 'styled-components'
 
 type StudentType = Object
@@ -40,13 +40,13 @@ const StudentButtonsToolbar = styled(Toolbar)`
 `
 
 const SidebarElement = styled.aside`
-    ${props => props.theme.contentBlockSpacing};
+    ${theme.contentBlockSpacing};
     flex: 1;
 
     @media all and (min-width: 35em) {
         max-width: 280px;
-        padding-left: ${props => props.theme.pageEdgePadding};
-        padding-right: calc(${props => props.theme.pageEdgePadding} * (2 / 3));
+        padding-left: ${theme.pageEdgePadding};
+        padding-right: calc(${theme.pageEdgePadding} * (2 / 3));
     }
 `
 
