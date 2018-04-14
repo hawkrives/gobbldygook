@@ -1,9 +1,9 @@
 /* eslint-env jest */
 // @flow
 
-jest.mock('../../../db')
+jest.mock('@gob/web-database')
 
-import db from '../../../db'
+import db from '@gob/web-database'
 import cleanPriorData, {
     getPriorCourses,
     getPriorAreas,

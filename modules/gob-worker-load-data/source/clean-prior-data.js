@@ -1,11 +1,11 @@
 // @flow
 
+import db from '@gob/web-database'
 import range from 'idb-range'
 import fromPairs from 'lodash/fromPairs'
 import map from 'lodash/map'
 import series from 'p-series'
 import debug from 'debug'
-import db from '../../db'
 import getCacheStoreName from './get-cache-store-name'
 import type {InfoFileTypeEnum} from './types'
 const log = debug('worker:load-data:clean-prior-data')

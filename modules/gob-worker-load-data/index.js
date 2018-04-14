@@ -3,7 +3,7 @@
 import 'whatwg-fetch'
 import serializeError from 'serialize-error'
 import debug from 'debug'
-import loadFiles from './load-data/load-files'
+import loadFiles from './source/load-files'
 const log = debug('worker:load-data:listener')
 
 function checkIdbInWorkerSupport() {

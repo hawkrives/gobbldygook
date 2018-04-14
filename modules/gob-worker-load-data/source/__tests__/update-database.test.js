@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-jest.mock('../../../db')
+jest.mock('@gob/web-database')
 jest.mock('../lib-dispatch', () => {
     const NotificationMock = jest.fn(() => ({
         start: jest.fn(),
@@ -27,7 +27,7 @@ global.fetch = jest.fn(() => {
     throw new Error('you must pick either goodFetch or badFetch')
 })
 
-import db from '../../../db'
+import db from '@gob/web-database'
 import cleanPriorData from '../clean-prior-data'
 import * as dispatch from '../lib-dispatch'
 import storeData from '../store-data'
