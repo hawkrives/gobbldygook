@@ -21,6 +21,7 @@
     "@gob/schedule-builder": "^3.0.0-rc.2",
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
     "@gob/search-queries": "^3.0.0-rc.2",
+    "@gob/webpack-plugin-html": "^1.0.0",
     "babel-runtime": "6.26.0",
     "brwsr": "1.0.1",
     "classnames": "2.2.5",

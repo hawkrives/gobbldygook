@@ -16,7 +16,7 @@ const {
 } = webpack
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlPlugin = require('./scripts/webpack/html-plugin')
+const HtmlPlugin = require('@gob/webpack-plugin-html')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
