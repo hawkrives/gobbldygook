@@ -1,6 +1,5 @@
 // @flow
-'use strict'
-const forEach = require('lodash/forEach')
+import forEach from 'lodash/forEach'
 
 const shortDepartmentAbbreviationsToFullDepartmentAbbreviations = {
     AR: 'ART',
@@ -211,6 +210,7 @@ const geReqsMapping = {
     ethics: 'EIN',
 }
 
+// eslint-disable-next-line no-unused-vars
 const courseTypesMapping = {
     L: 'Lab',
     D: 'Discussion',
@@ -228,8 +228,7 @@ const toDepartmentAbbreviations = Object.assign(
 )
 const toDepartmentNames = Object.assign({}, departmentAbbreviationsToNames)
 
-module.exports.expandDepartment = expandDepartment
-function expandDepartment(dept: string) {
+export function expandDepartment(dept: string) {
     dept = dept.toUpperCase()
     if (!(dept in toDepartmentNames)) {
         throw new TypeError(
@@ -239,8 +238,7 @@ function expandDepartment(dept: string) {
     return toDepartmentNames[dept]
 }
 
-module.exports.normalizeDepartment = normalizeDepartment
-function normalizeDepartment(dept: string) {
+export function normalizeDepartment(dept: string) {
     dept = dept.toUpperCase()
     if (!(dept in toDepartmentAbbreviations)) {
         return dept

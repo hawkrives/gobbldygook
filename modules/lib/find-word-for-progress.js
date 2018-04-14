@@ -1,7 +1,6 @@
 // @flow
-'use strict'
 
-function findWordForProgress(
+export function findWordForProgress(
     maxProgress: number,
     currentProgress: number
 ): string {
@@ -33,5 +32,3 @@ function findWordForProgress(
 
     return 'zero'
 }
-
-module.exports.findWordForProgress = findWordForProgress

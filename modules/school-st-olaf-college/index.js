@@ -1,37 +1,17 @@
-'use strict'
+export {expandYear, semesterName, toPrettyTerm} from './course-info'
 
-const {expandYear, semesterName, toPrettyTerm} = require('./course-info')
-
-const {
+export {
     buildDeptString,
     buildDeptNum,
     deptNumRegex,
     quacksLikeDeptNum,
     splitDeptNum,
-} = require('./deptnums')
+} from './deptnums'
 
-const {
+export {
     convertStudent,
     getStudentInfo,
     checkIfLoggedIn,
     ExtensionNotLoadedError,
     ExtensionTooOldError,
-} = require('./sis-parser')
-
-module.exports = {
-    expandYear,
-    semesterName,
-    toPrettyTerm,
-
-    buildDeptString,
-    buildDeptNum,
-    deptNumRegex,
-    quacksLikeDeptNum,
-    splitDeptNum,
-
-    convertStudent,
-    getStudentInfo,
-    checkIfLoggedIn,
-    ExtensionNotLoadedError,
-    ExtensionTooOldError,
-}
+} from './sis-parser'

@@ -1,10 +1,8 @@
-'use strict'
-const stringify = require('stabilize')
-const omit = require('lodash/omit')
-const mapValues = require('lodash/mapValues')
+import stringify from 'stabilize'
+import omit from 'lodash/omit'
+import mapValues from 'lodash/mapValues'
 
-module.exports.prepareStudentForSave = prepareStudentForSave
-function prepareStudentForSave(student) {
+export function prepareStudentForSave(student) {
     student = Object.assign({}, student)
     student = omit(student, ['areas', 'canGraduate', 'fulfilled'])
     student.schedules = mapValues(student.schedules, s =>
@@ -13,7 +11,6 @@ function prepareStudentForSave(student) {
     return student
 }
 
-module.exports.encodeStudent = encodeStudent
-function encodeStudent(student) {
+export function encodeStudent(student) {
     return encodeURIComponent(stringify(prepareStudentForSave(student)))
 }

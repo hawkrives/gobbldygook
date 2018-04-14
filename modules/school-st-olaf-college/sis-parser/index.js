@@ -1,19 +1,8 @@
-'use strict'
+export {convertStudent} from './convert-imported-student'
 
-const {convertStudent} = require('./convert-imported-student')
-
-const {
+export {
     getStudentInfo,
     checkIfLoggedIn,
     ExtensionNotLoadedError,
     ExtensionTooOldError,
-} = require('./import-student')
-
-module.exports = {
-    convertStudent,
-
-    getStudentInfo,
-    checkIfLoggedIn,
-    ExtensionNotLoadedError,
-    ExtensionTooOldError,
-}
+} from './import-student'

@@ -1,10 +1,10 @@
 // @flow
-'use strict'
-const reduce = require('lodash/reduce')
-const zip = require('lodash/zip')
-const has = require('lodash/has')
 
-function zipToObjectWithArrays<T>(
+import reduce from 'lodash/reduce'
+import zip from 'lodash/zip'
+import has from 'lodash/has'
+
+export function zipToObjectWithArrays<T>(
     keys: string[],
     vals: T[]
 ): {[key: string]: Array<T>} {
@@ -24,5 +24,3 @@ function zipToObjectWithArrays<T>(
         {}
     )
 }
-
-module.exports.zipToObjectWithArrays = zipToObjectWithArrays

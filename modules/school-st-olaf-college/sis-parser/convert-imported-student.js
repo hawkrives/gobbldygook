@@ -1,15 +1,13 @@
-'use strict'
-const {Student, Schedule} = require('../../object-student')
-const groupBy = require('lodash/groupBy')
-const map = require('lodash/map')
-const forEach = require('lodash/forEach')
-const uniq = require('lodash/uniq')
-const fromPairs = require('lodash/fromPairs')
-const filter = require('lodash/filter')
-const uuid = require('uuid/v4')
+import {Student, Schedule} from '../../object-student'
+import groupBy from 'lodash/groupBy'
+import map from 'lodash/map'
+import forEach from 'lodash/forEach'
+import uniq from 'lodash/uniq'
+import fromPairs from 'lodash/fromPairs'
+import filter from 'lodash/filter'
+import uuid from 'uuid/v4'
 
-module.exports.convertStudent = convertStudent
-function convertStudent({courses, degrees}, getCourse) {
+export function convertStudent({courses, degrees}, getCourse) {
     return Promise.all([
         processSchedules(courses, getCourse),
         processDegrees(degrees),
@@ -25,8 +23,7 @@ function convertStudent({courses, degrees}, getCourse) {
     })
 }
 
-module.exports.processSchedules = processSchedules
-function processSchedules(courses, getCourse) {
+export function processSchedules(courses, getCourse) {
     return Promise.all(
         map(courses, course => {
             return getCourse(course).then(resolvedCourse => {
@@ -60,8 +57,7 @@ function processSchedules(courses, getCourse) {
     })
 }
 
-module.exports.processDegrees = processDegrees
-function processDegrees(degrees) {
+export function processDegrees(degrees) {
     let singularData = resolveSingularDataPoints(degrees)
     let studies = []
 
@@ -89,8 +85,7 @@ function processDegrees(degrees) {
     return Object.assign({}, singularData, {studies})
 }
 
-module.exports.resolveSingularDataPoints = resolveSingularDataPoints
-function resolveSingularDataPoints(degrees) {
+export function resolveSingularDataPoints(degrees) {
     let thereShouldOnlyBeOne = {
         names: map(degrees, d => d.name),
         advisors: map(degrees, d => d.advisor),

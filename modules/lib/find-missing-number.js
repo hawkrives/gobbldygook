@@ -1,7 +1,6 @@
 // @flow
-'use strict'
 
-function findMissingNumber(arr: number[]): ?number {
+export function findMissingNumber(arr: number[]): ?number {
     if (arr.length === 0) {
         return null
     }
@@ -20,5 +19,3 @@ function findMissingNumber(arr: number[]): ?number {
 
     return null
 }
-
-module.exports.findMissingNumber = findMissingNumber

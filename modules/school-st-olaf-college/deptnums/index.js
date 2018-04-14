@@ -1,7 +1,6 @@
-'use strict'
-
-module.exports.buildDeptString = require('./build-dept').buildDeptString
-module.exports.buildDeptNum = require('./build-dept-num').buildDeptNum
-module.exports.deptNumRegex = require('./dept-num-regex').deptNumRegex
-module.exports.quacksLikeDeptNum = require('./quacks-like-dept-num').quacksLikeDeptNum
-module.exports.splitDeptNum = require('./split-dept-num').splitDeptNum
+// @flow
+export {buildDeptString} from './build-dept'
+export {buildDeptNum} from './build-dept-num'
+export {deptNumRegex} from './dept-num-regex'
+export {quacksLikeDeptNum} from './quacks-like-dept-num'
+export {splitDeptNum} from './split-dept-num'

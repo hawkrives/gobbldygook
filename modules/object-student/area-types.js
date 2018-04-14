@@ -1,9 +1,8 @@
 // @flow
-'use strict'
 
 import type {AreaOfStudyTypeEnum} from '../examine-student/types'
 
-const areaTypeConstants: {
+export const areaTypeConstants: {
     [key: string]: AreaOfStudyTypeEnum,
 } = {
     DEGREE: 'degree',
@@ -12,5 +11,3 @@ const areaTypeConstants: {
     EMPHASIS: 'emphasis',
     ID: 'interdisciplinary',
 }
-
-module.exports.areaTypeConstants = areaTypeConstants

@@ -1,12 +1,11 @@
-'use strict'
-const props = require('p-props')
-const flatten = require('lodash/flatten')
-const {AuthError, NetworkError} = require('../../../lib')
-const {fetchHtml} = require('./lib')
-const {extractTermList} = require('./term-list')
-const {collectAllCourses} = require('./courses')
-const {getGraduationInformation} = require('./graduation-info')
-const {COURSES_URL, DEGREE_AUDIT_URL} = require('./urls')
+import props from 'p-props'
+import flatten from 'lodash/flatten'
+import {AuthError, NetworkError} from '../../../lib'
+import {fetchHtml} from './lib'
+import {extractTermList} from './term-list'
+import {collectAllCourses} from './courses'
+import {getGraduationInformation} from './graduation-info'
+import {COURSES_URL, DEGREE_AUDIT_URL} from './urls'
 
 function loadPages(studentId) {
     return props({
@@ -32,8 +31,7 @@ function flattenData({coursesByTerm, studentInfo}) {
     }
 }
 
-module.exports.getStudentInfo = getStudentInfo
-function getStudentInfo(studentId) {
+export function getStudentInfo(studentId) {
     if (!navigator.onLine) {
         return Promise.reject(new NetworkError('The network is offline.'))
     }

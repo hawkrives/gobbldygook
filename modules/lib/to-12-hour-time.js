@@ -1,6 +1,6 @@
 // @flow
-'use strict'
-const padStart = require('lodash/padStart')
+
+import padStart from 'lodash/padStart'
 
 function split24HourTime(time) {
     time = padStart(time, 4, '0')
@@ -10,7 +10,7 @@ function split24HourTime(time) {
     }
 }
 
-function to12HourTime(time: string): string {
+export function to12HourTime(time: string): string {
     const {hour, minute} = split24HourTime(time)
     const paddedMinute = padStart(String(minute), 2, '0')
 
@@ -19,5 +19,3 @@ function to12HourTime(time: string): string {
 
     return `${fullHour}:${paddedMinute}${meridian}`
 }
-
-module.exports.to12HourTime = to12HourTime

@@ -1,33 +1,31 @@
-'use strict'
+export {areaTypeConstants} from './area-types'
 
-const {areaTypeConstants} = require('./area-types')
+export {encodeStudent, prepareStudentForSave} from './encode-student'
 
-const {encodeStudent, prepareStudentForSave} = require('./encode-student')
+export {filterAreaList} from './filter-area-list'
 
-const {filterAreaList} = require('./filter-area-list')
-
-const {
+export {
     findWarnings,
     checkForInvalidYear,
     checkForInvalidSemester,
     checkForTimeConflicts,
-} = require('./find-course-warnings')
+} from './find-course-warnings'
 
-const {isCurrentSemester} = require('./is-current-semester')
+export {isCurrentSemester} from './is-current-semester'
 
-const {
+export {
     IDENT_COURSE,
     IDENT_AREA,
     IDENT_YEAR,
     IDENT_SEMESTER,
     IDENT_SCHEDULE,
-} = require('./item-types')
+} from './item-types'
 
-const {Schedule} = require('./schedule')
+export {Schedule} from './schedule'
 
-const {sortStudiesByType} = require('./sort-studies-by-type')
+export {sortStudiesByType} from './sort-studies-by-type'
 
-const {
+export {
     Student,
     changeStudentName,
     changeStudentAdvisor,
@@ -50,51 +48,8 @@ const {
     reorderScheduleInStudent,
     renameScheduleInStudent,
     reorderCourseInSchedule,
-} = require('./student')
+} from './student'
 
-const {validateSchedule} = require('./validate-schedule')
+export {validateSchedule} from './validate-schedule'
 
-const {validateSchedules} = require('./validate-schedules')
-
-module.exports = {
-    areaTypeConstants,
-    encodeStudent,
-    prepareStudentForSave,
-    filterAreaList,
-    findWarnings,
-    checkForInvalidYear,
-    checkForInvalidSemester,
-    checkForTimeConflicts,
-    isCurrentSemester,
-    Schedule,
-    sortStudiesByType,
-    IDENT_COURSE,
-    IDENT_AREA,
-    IDENT_YEAR,
-    IDENT_SEMESTER,
-    IDENT_SCHEDULE,
-    validateSchedule,
-    validateSchedules,
-    Student,
-    changeStudentName,
-    changeStudentAdvisor,
-    changeStudentCreditsNeeded,
-    changeStudentMatriculation,
-    changeStudentGraduation,
-    changeStudentSetting,
-    addScheduleToStudent,
-    destroyScheduleFromStudent,
-    addCourseToSchedule,
-    removeCourseFromSchedule,
-    moveCourseToSchedule,
-    addAreaToStudent,
-    removeAreaFromStudent,
-    setOverrideOnStudent,
-    removeOverrideFromStudent,
-    addFabricationToStudent,
-    removeFabricationFromStudent,
-    moveScheduleInStudent,
-    reorderScheduleInStudent,
-    renameScheduleInStudent,
-    reorderCourseInSchedule,
-}
+export {validateSchedules} from './validate-schedules'

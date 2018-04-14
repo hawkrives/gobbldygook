@@ -1,5 +1,4 @@
 // @flow
-'use strict'
 
-module.exports.AuthError = class AuthError extends Error {}
-module.exports.NetworkError = class NetworkError extends Error {}
+export class AuthError extends Error {}
+export class NetworkError extends Error {}
