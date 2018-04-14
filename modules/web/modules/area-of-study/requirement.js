@@ -42,8 +42,6 @@ function Requirement(props: RequirementProps) {
     let info = props.info || {}
 
     const childKeys = Object.keys(info).filter(isRequirementName)
-    console.log(props, props.name)
-    // console.log(info)
 
     const wasEvaluated = info.result && info.result._checked
     const computationClassName = wasEvaluated
