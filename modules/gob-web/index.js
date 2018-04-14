@@ -16,7 +16,7 @@ import startAnalytics from './analytics'
 startAnalytics()
 
 // Kick off data loading
-import loadData from './helpers/load-data'
+import loadData from './helpers/worker-load-data'
 loadData().catch(err => console.error(err))
 
 // Kick off the GUI

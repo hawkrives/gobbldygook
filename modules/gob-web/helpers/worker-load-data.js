@@ -1,18 +1,19 @@
-const uniqueId = require('lodash/uniqueId')
+import uniqueId from 'lodash/uniqueId'
 import {status, text} from '@gob/lib'
 import debug from 'debug'
-const log = debug('worker:load-data')
-
 import * as notificationActions from '../modules/notifications/redux/actions'
 import * as courseActions from '../redux/courses/actions'
 import * as areaActions from '../redux/areas/actions'
+import LoadDataWorker from '@gob/worker-load-data'
+
+const log = debug('worker:load-data')
+
 const actions = {
     notifications: notificationActions,
     courses: courseActions,
     areas: areaActions,
 }
 
-import LoadDataWorker from './workers/load-data.worker.js'
 const worker = new LoadDataWorker()
 
 worker.onerror = msg => log('[main] received error from load-data worker:', msg)

@@ -1,8 +1,9 @@
 import uniqueId from 'lodash/uniqueId'
 import debug from 'debug'
+import CheckStudentWorker from '@gob/worker-check-student'
+
 const log = debug('worker:check-student:main')
 
-import CheckStudentWorker from './workers/check-student-against-area.worker'
 const worker = new CheckStudentWorker()
 
 worker.onerror = msg => log('received error from check-student worker:', msg)
