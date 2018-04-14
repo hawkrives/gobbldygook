@@ -22,7 +22,7 @@
   },
   "jest": {
     "setupFiles": [
-      "./config/mocha-harness.js"
+      "./config/test-harness.js"
     ],
     "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
     "collectCoverageFrom": [
