@@ -60,7 +60,7 @@
     },
     "resetModules": true,
     "moduleNameMapper": {
-      "^.+\\.scss$": "<rootDir>/config/flow/css.js.flow"
+      "^.+\\.s?css$": "<rootDir>/config/flow/css.js.flow"
     },
     "testPathIgnorePatterns": [
       "\\.support.js$",
