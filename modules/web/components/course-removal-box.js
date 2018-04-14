@@ -4,7 +4,7 @@ import {DropTarget} from 'react-dnd'
 import debug from 'debug'
 import styled, {css} from 'styled-components'
 const log = debug('web:courses')
-
+import * as theme from '../theme'
 import {IDENT_COURSE} from '../../object-student'
 
 import Icon from './icon'
@@ -12,13 +12,13 @@ import {iosTrashOutline} from '../icons/ionicons'
 
 const Box = styled.div`
     padding: 5em 1em;
-    color: $gray-500;
+    color: ${theme.gray500};
     background-color: white;
     border-radius: 5px;
 
     position: fixed;
-    top: $page-edge-padding * 2;
-    left: $page-edge-padding * 2;
+    top: calc(${theme.pageEdgePadding} * 2);
+    left: calc(${theme.pageEdgePadding} * 2);
     max-width: 240px;
 
     display: none;
@@ -29,14 +29,14 @@ const Box = styled.div`
         css`
             color: black;
             display: flex;
-            z-index: $z-sidebar + 1;
+            z-index: ${theme.zSidebar + 1};
         `};
     ${props =>
         props.isOver &&
         css`
-            box-shadow: 0 0 10px $red-900;
-            color: $red-900;
-            background-color: $red-50;
+            box-shadow: 0 0 10px ${theme.red900};
+            color: ${theme.red900};
+            background-color: ${theme.red50};
         `};
 `
 
@@ -48,17 +48,12 @@ type Props = {
 }
 function CourseRemovalBox(props: Props) {
     return props.connectDropTarget(
-        <div>
-            <Box isOver={props.isOver} canDrop={props.canDrop}>
-                <Icon
-                    type="block"
-                    style={{fontSize: '3em', textAlign: 'center'}}
-                >
-                    {iosTrashOutline}
-                </Icon>
-                Drop a course here to remove it.
-            </Box>
-        </div>
+        <Box isOver={props.isOver} canDrop={props.canDrop}>
+            <Icon type="block" style={{fontSize: '3em', textAlign: 'center'}}>
+                {iosTrashOutline}
+            </Icon>
+            Drop a course here to remove it.
+        </Box>
     )
 }
 
