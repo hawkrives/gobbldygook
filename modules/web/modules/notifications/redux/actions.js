@@ -1,3 +1,4 @@
+// @flow
 import debug from 'debug'
 import delay from 'delay'
 const log = debug('web:redux:notifications')
@@ -10,7 +11,7 @@ import {
     REMOVE_NOTIFICATION,
 } from './constants'
 
-export function removeNotification(id, delayBy = 0) {
+export function removeNotification(id: string, delayBy: number = 0) {
     if (delayBy) {
         return {
             type: REMOVE_NOTIFICATION,
@@ -20,11 +21,14 @@ export function removeNotification(id, delayBy = 0) {
     return {type: REMOVE_NOTIFICATION, payload: {id}}
 }
 
-export function logMessage(id, message) {
+export function logMessage(id: string, message: string) {
     return {type: LOG_MESSAGE, payload: {id, message}}
 }
 
-export function logError({id, error}, ...args) {
+export function logError(
+    {id, error}: {id: string, error: string},
+    ...args: any[]
+) {
     log(error, ...args)
     // istanbul ignore if
     if (global.Bugsnag) global.Bugsnag.notifyException(error)
@@ -32,9 +36,13 @@ export function logError({id, error}, ...args) {
 }
 
 export function startProgress(
-    id,
-    message = '',
-    {value = 0, max = 1, showButton = false} = {}
+    id: string,
+    message: string = '',
+    {
+        value = 0,
+        max = 1,
+        showButton = false,
+    }: {value: number, max: number, showButton?: boolean} = {}
 ) {
     return {
         type: START_PROGRESS,
@@ -42,6 +50,6 @@ export function startProgress(
     }
 }
 
-export function incrementProgress(id, by = 1) {
+export function incrementProgress(id: string, by: number = 1) {
     return {type: INCREMENT_PROGRESS, payload: {id, by}}
 }
