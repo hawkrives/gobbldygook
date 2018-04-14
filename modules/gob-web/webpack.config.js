@@ -56,7 +56,7 @@ function config() {
         publicPath: publicPath,
 
         // extract-text-plugin uses [contenthash], and webpack uses [hash].
-        filename: isDevelopment ? 'app.js' : `${pkg.name}.[hash].js`,
+        filename: isDevelopment ? 'app.js' : 'app.[hash].js',
         chunkFilename: 'chunk.[name].[chunkhash].js',
 
         // Add /*filename*/ comments to generated require()s in the output.
@@ -187,7 +187,7 @@ function config() {
             new ExtractTextPlugin({
                 filename: isDevelopment
                     ? 'app.css'
-                    : `${pkg.name}.[contenthash].css`,
+                    : 'app.[contenthash].css',
                 allChunks: true,
             })
         )
