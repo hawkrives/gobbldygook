@@ -39,7 +39,7 @@ function config() {
     }
 
     const entry = {
-        main: ['./modules/gob-web/index.js'],
+        main: ['./index.js'],
     }
 
     if (isDevelopment) {
@@ -171,7 +171,7 @@ function config() {
         new NamedModulesPlugin(),
 
         // copy files – into the webpack {output} directory
-        new CopyWebpackPlugin([{from: 'modules/gob-web/static/*', flatten: true}]),
+        new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
     ]
 
     if (isProduction) {
