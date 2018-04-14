@@ -16,7 +16,7 @@ jest.mock('../clean-prior-data', () => jest.fn())
 jest.mock('../store-data', () => jest.fn())
 jest.mock('../parse-data', () => jest.fn())
 jest.mock('../cache-item-hash', () => jest.fn())
-jest.mock('../../../../../lib/fetch-helpers', () => {
+jest.mock('@gob/lib/fetch-helpers', () => {
     return {status: x => x, text: x => x}
 })
 

@@ -17,7 +17,7 @@ jest.mock('../lib-dispatch', () => {
 jest.mock('../needs-update', () => jest.fn(() => Promise.resolve()))
 jest.mock('../update-database', () => jest.fn(() => Promise.resolve()))
 jest.mock('../remove-duplicate-areas', () => jest.fn(() => Promise.resolve()))
-jest.mock('../../../../../lib/fetch-helpers', () => {
+jest.mock('@gob/lib/fetch-helpers', () => {
     return {status: x => x, text: x => x}
 })
 
