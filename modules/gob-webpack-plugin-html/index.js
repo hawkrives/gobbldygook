@@ -36,15 +36,14 @@ HJSPlugin.prototype.apply = function(compiler) {
 // Oddly enough we have to pass in the compiler here
 // it's changed from when it was stored on `this` previously
 HJSPlugin.prototype.addAssets = function(compiler, data) {
-	const dataType = typeof data
 	let pages
 	// if it's a string, we assume it's an html string for the index file
-	if (dataType === 'string') {
+	if (typeof data === 'string') {
 		pages = {
 			[this.filename]: data,
 		}
 	}
-	else if (dataType === 'object') {
+	else if (typeof data === 'object') {
 		pages = data
 	}
 	else {
