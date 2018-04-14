@@ -62,6 +62,7 @@
     "react-redux": "5.0.7",
     "react-router": "3.2.0",
     "react-select": "1.2.1",
+    "react-spinkit": "3.0.0",
     "redux": "3.7.2",
     "redux-promise": "0.5.3",
     "redux-thunk": "2.2.0",
