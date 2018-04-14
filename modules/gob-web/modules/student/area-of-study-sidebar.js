@@ -19,9 +19,7 @@ import values from 'lodash/values'
 
 import AreaOfStudyGroup from './area-of-study-group'
 import Button from '../../components/button'
-import {
-    sortStudiesByType,
-} from '@gob/object-student/sort-studies-by-type'
+import {sortStudiesByType} from '@gob/object-student/sort-studies-by-type'
 import {areaTypeConstants} from '@gob/object-student/area-types'
 
 type AreaOfStudy = Object

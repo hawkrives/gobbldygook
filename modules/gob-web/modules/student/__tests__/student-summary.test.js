@@ -7,7 +7,7 @@ import {
     Header,
     StudentSummary,
 } from '../student-summary'
-import {Student} from '../../../../../modules/object-student/student'
+import {Student} from '@gob/object-student'
 import {shallow} from 'enzyme'
 
 const mockStudent = () =>

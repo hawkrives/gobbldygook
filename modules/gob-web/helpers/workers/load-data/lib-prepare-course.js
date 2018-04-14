@@ -2,7 +2,7 @@
 
 import flatMap from 'lodash/flatMap'
 import uniq from 'lodash/uniq'
-import {buildDeptString, buildDeptNum, } from '@gob/school-st-olaf-college'
+import {buildDeptString, buildDeptNum} from '@gob/school-st-olaf-college'
 import {splitParagraph} from '@gob/lib'
 import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 

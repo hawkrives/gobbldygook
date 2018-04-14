@@ -9,8 +9,8 @@ import {
     ExtensionTooOldError,
     convertStudent,
     semesterName,
-} from '../../../school-st-olaf-college'
-import {BrowserExtensionsComponent} from '../../components/browser-extensions'
+} from '@gob/school-st-olaf-college'
+// import {BrowserExtensionsComponent} from '../../components/browser-extensions'
 import {getCourse} from '../../helpers/get-courses'
 import {StudentSummary} from '../../modules/student/student-summary'
 import map from 'lodash/map'
@@ -20,9 +20,9 @@ import {RadioGroup, Radio} from 'react-radio-group'
 import {initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
-import './method-import.scss'
 import debug from 'debug'
 const log = debug('web:react')
+import './method-import.scss'
 
 global.stolaf = {
     getStudentInfo,

@@ -4,10 +4,7 @@ import React from 'react'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
-import {
-    semesterName,
-    expandYear,
-} from '@gob/school-st-olaf-college'
+import {semesterName, expandYear} from '@gob/school-st-olaf-college'
 
 function findSemesterList(student: ?Object) {
     if (!student) {

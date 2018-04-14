@@ -22,7 +22,7 @@ import {
     addCourseToSchedule,
     removeCourseFromSchedule,
     reorderCourseInSchedule,
-} from '../../../../object-student/student'
+} from '@gob/object-student'
 
 import {
     LOAD_STUDENT,

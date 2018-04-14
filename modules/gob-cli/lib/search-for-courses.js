@@ -15,10 +15,7 @@ const {checkForStaleData} = require('./update-local-data-cache')
 
 const path = require('path')
 
-const {
-    quacksLikeDeptNum,
-    splitDeptNum,
-} = require('@gob/school-st-olaf-college')
+const {quacksLikeDeptNum, splitDeptNum} = require('@gob/school-st-olaf-college')
 
 const pify = require('pify')
 const fs = pify(require('graceful-fs'))

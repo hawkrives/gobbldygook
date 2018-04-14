@@ -10,7 +10,7 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import 'react-select/dist/react-select.css'
 import {initStudent} from '../../redux/students/actions/init-student'
-import {filterAreaList} from '../../../object-student'
+import {filterAreaList} from '@gob/object-student'
 
 import './method-manual.scss'
 

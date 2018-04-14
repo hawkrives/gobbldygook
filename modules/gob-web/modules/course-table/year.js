@@ -8,10 +8,7 @@ import Button from '../../components/button'
 import Semester from './semester-container'
 
 import {findFirstAvailableSemester} from '../../helpers/find-first-available-semester'
-import {
-    expandYear,
-    semesterName,
-} from '../../../school-st-olaf-college/course-info'
+import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 import * as theme from '../../theme'
 import styled from 'styled-components'
 

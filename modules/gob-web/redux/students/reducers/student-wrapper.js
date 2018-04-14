@@ -9,7 +9,7 @@ import {
     LOAD_STUDENT,
 } from '../constants'
 
-import studentReducer from './student'
+import reducer from './student'
 
 const initialState = {
     isChecking: false,
@@ -30,7 +30,7 @@ export default function studentWrapperReducer(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                data: studentReducer({...state.data, present: payload}, action),
+                data: reducer({...state.data, present: payload}, action),
             }
         }
 
@@ -40,7 +40,7 @@ export default function studentWrapperReducer(state = initialState, action) {
         case GET_STUDENT_DATA: {
             return {
                 ...state,
-                data: studentReducer({...state.data, present: payload}, action),
+                data: reducer({...state.data, present: payload}, action),
                 isFetching: false,
             }
         }
@@ -51,7 +51,7 @@ export default function studentWrapperReducer(state = initialState, action) {
         case CHECK_GRADUATABILITY: {
             return {
                 ...state,
-                data: studentReducer({...state.data, present: payload}, action),
+                data: reducer({...state.data, present: payload}, action),
                 isChecking: false,
             }
         }
@@ -62,7 +62,7 @@ export default function studentWrapperReducer(state = initialState, action) {
         case VALIDATE_SCHEDULES: {
             return {
                 ...state,
-                data: studentReducer({...state.data, present: payload}, action),
+                data: reducer({...state.data, present: payload}, action),
                 isValdiating: false,
             }
         }
@@ -70,7 +70,7 @@ export default function studentWrapperReducer(state = initialState, action) {
         default: {
             return {
                 ...state,
-                data: studentReducer(state.data, action),
+                data: reducer(state.data, action),
             }
         }
     }

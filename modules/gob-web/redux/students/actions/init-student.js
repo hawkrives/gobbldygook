@@ -2,11 +2,7 @@ import forEach from 'lodash/forEach'
 import range from 'lodash/range'
 import size from 'lodash/size'
 
-import {
-    Student,
-    Schedule,
-    addScheduleToStudent,
-} from '../../../../object-student'
+import {Student, Schedule, addScheduleToStudent} from '@gob/object-student'
 
 import {INIT_STUDENT} from '../constants'
 

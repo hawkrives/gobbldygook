@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {expandYear} from '../../../school-st-olaf-college/course-info'
+import {expandYear} from '@gob/school-st-olaf-college'
 import * as theme from '../../theme'
 import {findFirstAvailableYear} from '../../helpers/find-first-available-year'
 import map from 'lodash/map'

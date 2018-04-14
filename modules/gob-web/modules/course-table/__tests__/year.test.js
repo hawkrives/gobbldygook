@@ -1,6 +1,6 @@
 import React from 'react'
 import Year from '../year'
-import {Student} from '../../../../../modules/object-student/student'
+import {Student} from '@gob/object-student'
 import renderer from 'react-test-renderer'
 import {shallow} from 'enzyme'
 

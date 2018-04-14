@@ -1,8 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {compareProps} from '../../../lib'
 import CourseSearcher from './course-searcher'
 
 import {
@@ -13,7 +12,7 @@ import {
     setPartialQuery,
 } from './redux/actions'
 
-export class CourseSearcherContainer extends React.Component {
+export class CourseSearcherContainer extends React.PureComponent {
     static propTypes = {
         closeSearcher: PropTypes.func.isRequired,
         groupResults: PropTypes.func.isRequired, // redux
@@ -35,13 +34,6 @@ export class CourseSearcherContainer extends React.Component {
         studentId: PropTypes.string,
         submitQuery: PropTypes.func.isRequired, // redux
         updateQuery: PropTypes.func.isRequired, // redux
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return (
-            compareProps(this.props, nextProps) ||
-            compareProps(this.state !== nextState)
-        )
     }
 
     handleQuerySubmit = () => {

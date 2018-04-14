@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {DragSource} from 'react-dnd'
 import cx from 'classnames'
-import {IDENT_COURSE} from '../../../object-student/item-types'
+import {IDENT_COURSE} from '@gob/object-student'
 import CourseWithModal from './with-modal'
 
 type PropTypes = {

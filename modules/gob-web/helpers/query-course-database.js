@@ -1,5 +1,5 @@
 import db from './db'
-import {buildQueryFromString} from '../../search-queries'
+import {buildQueryFromString} from '@gob/search-queries'
 import compact from 'lodash/compact'
 import filter from 'lodash/filter'
 import map from 'lodash/map'

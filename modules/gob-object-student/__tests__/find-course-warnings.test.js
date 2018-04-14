@@ -1,9 +1,9 @@
-import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
+// import {convertTimeStringsToOfferings} from 'sto-sis-time-parser'
 import {
     checkForInvalidYear,
     checkForInvalidSemester,
-    checkForTimeConflicts,
-    findWarnings,
+    // checkForTimeConflicts,
+    // findWarnings,
 } from '../find-course-warnings'
 
 describe('checkForInvalidYear', () => {

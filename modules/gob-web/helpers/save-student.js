@@ -1,7 +1,7 @@
 import union from 'lodash/union'
 import reject from 'lodash/reject'
 import stringify from 'stabilize'
-import {prepareStudentForSave} from '../../object-student'
+import {prepareStudentForSave} from '@gob/object-student'
 import debug from 'debug'
 const log = debug('web:save-student')
 

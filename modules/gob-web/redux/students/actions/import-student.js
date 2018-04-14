@@ -1,4 +1,4 @@
-import {Student} from '../../../../object-student'
+import {Student} from '@gob/object-student'
 
 import {IMPORT_STUDENT} from '../constants'
 

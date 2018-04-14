@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
-import {isCurrentSemester} from '../../../object-student/is-current-semester'
+import {isCurrentSemester} from '@gob/object-student'
 
 import Loading from '../../components/loading'
 import {destroySchedules} from '../../redux/students/actions/schedules'

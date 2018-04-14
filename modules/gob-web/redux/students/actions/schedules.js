@@ -1,4 +1,4 @@
-import {Schedule} from '../../../../object-student'
+import {Schedule} from '@gob/object-student'
 
 import {
     ADD_SCHEDULE,

@@ -1,6 +1,10 @@
 import nomnom from 'nomnom'
 import fs from 'graceful-fs'
-import {isRequirementName, humanizeOperator, evaluate} from '@gob/examine-student'
+import {
+    isRequirementName,
+    humanizeOperator,
+    evaluate,
+} from '@gob/examine-student'
 import loadArea from '@gob/cli/lib/load-area'
 import yaml from 'js-yaml'
 import get from 'lodash/get'
