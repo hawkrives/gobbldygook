@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components'
-import {FlatButton} from './button'
+import {FlatLinkButton} from './button'
 import {InlineIcon} from './icon'
 
 export const Toolbar = styled.div`
@@ -13,7 +13,7 @@ export const Toolbar = styled.div`
     }
 `
 
-export const ToolbarButton = FlatButton.extend`
+export const ToolbarButton = FlatLinkButton.extend`
     flex: 1 0 auto;
     padding-left: 0.25em;
     padding-right: 0.25em;

@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../../components/button'
+import {RaisedLinkButton} from '../../components/button'
 
 export default function WelcomeScreen() {
     return (
@@ -24,24 +24,22 @@ export default function WelcomeScreen() {
                 </p>
             </section>
             <section className="choices">
-                <Button link type="raised" to="/create/sis">
+                <RaisedLinkButton to="/create/sis">
                     Import from the SIS
-                </Button>
-                <Button
+                </RaisedLinkButton>
+                <RaisedLinkButton
                     disabled
-                    link
-                    type="raised"
                     to="/create/drive"
                     onClick={ev => ev.preventDefault()}
                 >
                     Link to Google Drive
-                </Button>
-                <Button link type="raised" to="/create/upload">
+                </RaisedLinkButton>
+                <RaisedLinkButton to="/create/upload">
                     Upload a File
-                </Button>
-                <Button link type="raised" to="/create/manual">
+                </RaisedLinkButton>
+                <RaisedLinkButton to="/create/manual">
                     Create Manually
-                </Button>
+                </RaisedLinkButton>
             </section>
         </div>
     )

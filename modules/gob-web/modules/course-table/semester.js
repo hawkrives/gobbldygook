@@ -8,7 +8,7 @@ import {IDENT_COURSE} from '@gob/object-student'
 import {DropTarget} from 'react-dnd'
 import includes from 'lodash/includes'
 import * as theme from '../../theme'
-import Button from '../../components/button'
+import {FlatLinkButton} from '../../components/button'
 import Icon from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
 import {close, search} from '../../icons/ionicons'
@@ -32,7 +32,7 @@ const Container = styled.div`
     }
 `
 
-const TitleButton = styled(Button)`
+const TitleButton = FlatLinkButton.extend`
     ${theme.semesterPadding};
     min-height: 0;
     font-size: 0.9em;
@@ -46,7 +46,7 @@ const TitleButton = styled(Button)`
     }
 `
 
-const RemoveSemesterButton = styled(TitleButton)`
+const RemoveSemesterButton = TitleButton.extend`
     &:hover {
         color: ${theme.red500};
         border-color: ${theme.red500};
@@ -70,11 +70,11 @@ const Header = styled.header`
     overflow: hidden;
 `
 
-const InfoList = styled(InlineList)`
+const InfoList = InlineList.extend`
     font-size: 0.8em;
 `
 
-const InfoItem = styled(InlineListItem)`
+const InfoItem = InlineListItem.extend`
     font-feature-settings: 'onum';
 
     & + &::before {
@@ -144,7 +144,6 @@ function Semester(props) {
                 </Title>
 
                 <TitleButton
-                    link
                     to={`/s/${studentId}/search/${year}/${semester}`}
                     title="Search for courses"
                 >

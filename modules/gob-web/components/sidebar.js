@@ -59,7 +59,7 @@ function Sidebar(props: PropTypes) {
     return (
         <SidebarElement>
             <StudentButtonsToolbar>
-                <ToolbarButton link to="/" title="Students">
+                <ToolbarButton to="/" title="Students">
                     <BlockIcon>{iosPeopleOutline}</BlockIcon>
                 </ToolbarButton>
                 <ToolbarButton to={`/s/${studentId}/search`} title="Search">
