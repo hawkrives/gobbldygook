@@ -97,7 +97,6 @@ function config() {
 
     const node = {
         process: false,
-        Buffer: false,
     }
 
     const plugins = [
