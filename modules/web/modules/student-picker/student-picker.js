@@ -9,25 +9,25 @@ import {
     androidMenu,
     androidAdd,
 } from '../../icons/ionicons'
-import Toolbar from '../../components/toolbar'
-import Button from '../../components/button'
-import Icon from '../../components/icon'
+import {Toolbar} from '../../components/toolbar'
+import {FlatLinkButton, RaisedLinkButton} from '../../components/button'
+import {BlockIcon} from '../../components/icon'
 import StudentList from './student-list'
 import styled from 'styled-components'
 
-const StudentListToolbar = styled(Toolbar)`
+const StudentListToolbar = Toolbar.extend`
     width: 100%;
     justify-content: center;
 `
 
-const StudentListButton = styled(Button)`
+const StudentListButton = FlatLinkButton.extend`
     padding-left: 0.5em !important;
     padding-right: 0.5em !important;
     margin: 0 0.125em;
     flex-direction: column;
     flex: 0 1 auto !important;
 
-    & .icon {
+    ${BlockIcon} {
         font-size: 1.5em;
         margin-bottom: 0.25em;
     }
@@ -69,13 +69,14 @@ const AppTitle = styled.header`
     }
 `
 
-const MakeStudentButton = styled(Button)`
+const MakeStudentButton = RaisedLinkButton.extend`
     max-width: 10em;
     margin: 0 auto;
 `
 
-const Filter = styled.input`
-    ${theme.card} flex: 3 0 auto;
+const FilterBox = styled.input`
+    ${theme.card};
+    flex: 3 0 auto;
     align-self: center;
     padding: 0.25em 0.5em;
     margin-right: 1em;
@@ -134,12 +135,12 @@ export default function StudentPicker(props: PropTypes) {
 
             <StudentListToolbarWrapper>
                 <StudentListToolbar>
-                    <StudentListButton link to="search/">
-                        <Icon>{androidSearch}</Icon>
+                    <StudentListButton to="search/">
+                        <BlockIcon>{androidSearch}</BlockIcon>
                         Courses
                     </StudentListButton>
 
-                    <Filter
+                    <FilterBox
                         type="search"
                         placeholder="Filter students"
                         value={filterText}
@@ -147,22 +148,22 @@ export default function StudentPicker(props: PropTypes) {
                     />
 
                     <StudentListButton onClick={onSortChange}>
-                        <Icon>{funnel}</Icon>
+                        <BlockIcon>{funnel}</BlockIcon>
                         Sort
                     </StudentListButton>
 
                     <StudentListButton disabled onClick={onGroupChange}>
-                        <Icon>{androidApps}</Icon>
+                        <BlockIcon>{androidApps}</BlockIcon>
                         Group
                     </StudentListButton>
 
                     <StudentListButton onClick={onToggleEditing}>
-                        <Icon>{androidMenu}</Icon>
+                        <BlockIcon>{androidMenu}</BlockIcon>
                         Edit
                     </StudentListButton>
 
-                    <StudentListButton link to="create/">
-                        <Icon>{androidAdd}</Icon>
+                    <StudentListButton to="create/">
+                        <BlockIcon>{androidAdd}</BlockIcon>
                         New
                     </StudentListButton>
                 </StudentListToolbar>
@@ -187,7 +188,7 @@ export default function StudentPicker(props: PropTypes) {
                     students={students}
                 />
             ) : (
-                <MakeStudentButton link type="raised" to="/create">
+                <MakeStudentButton to="/create">
                     Add a Student
                 </MakeStudentButton>
             )}

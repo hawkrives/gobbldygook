@@ -14,20 +14,13 @@
 		"transform-class-properties",
 		"transform-object-rest-spread",
 		"transform-react-display-name",
+		"babel-plugin-styled-components",
 		["transform-runtime", {"polyfill": false}]
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		// "lodash",
 	],
 	"env": {
-		"production": {
-			// "presets": ["babili"],
-			"plugins": [
-				"transform-react-constant-elements",
-				"transform-react-inline-elements",
-				"transform-inline-environment-variables"
-			]
-		},
 		"test": {
 			"presets": [
 				["env", {

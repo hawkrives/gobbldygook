@@ -37,7 +37,7 @@ const BaseButton = styled.button`
     -webkit-tap-highlight-color: transparent;
 `
 
-const RaisedButton = styled(BaseButton)`
+export const RaisedButton = BaseButton.extend`
     ${theme.materialShadow};
     background-color: ${theme.white};
 
@@ -60,7 +60,7 @@ const RaisedButton = styled(BaseButton)`
     }
 `
 
-const FlatButton = styled(BaseButton)`
+export const FlatButton = BaseButton.extend`
     background-color: transparent;
 
     &:hover {
@@ -86,11 +86,11 @@ const FlatButton = styled(BaseButton)`
     }
 `
 
-const FlatLinkButton = FlatButton.withComponent(Link).extend`
+export const FlatLinkButton = FlatButton.withComponent(Link).extend`
     ${theme.linkUndecorated}
 `
 
-const RaisedLinkButton = RaisedButton.withComponent(Link).extend`
+export const RaisedLinkButton = RaisedButton.withComponent(Link).extend`
     ${theme.linkUndecorated}
 `
 
@@ -106,7 +106,7 @@ type Props = {
     type: 'flat' | 'raised',
 }
 
-class Button extends React.Component<Props> {
+export default class Button extends React.Component<Props> {
     static defaultProps = {
         type: 'flat',
     }
@@ -146,5 +146,3 @@ class Button extends React.Component<Props> {
         )
     }
 }
-
-export default Button

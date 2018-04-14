@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
 import cx from 'classnames'
 import Autosize from 'react-input-autosize'
 import Select from 'react-select'
@@ -221,14 +221,14 @@ class ManualCreationScreen extends React.Component {
                 </div>
 
                 <div className="actions">
-                    <Button
+                    <FlatButton
                         disabled={
                             Boolean(this.state.error) || this.state.submitted
                         }
                         onClick={this.onCreateStudent}
                     >
                         {!this.state.error ? "Let's go!" : 'Hmm…'}
-                    </Button>
+                    </FlatButton>
                 </div>
             </div>
         )
