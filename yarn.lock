@@ -1767,9 +1767,13 @@ component-emitter@^1.2.0, component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
 
-component-type@*, component-type@1.1.0, component-type@^1.1.0, component-type@^1.2.1:
+component-type@*, component-type@^1.1.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-type/-/component-type-1.2.1.tgz#8a47901700238e4fc32269771230226f24b415a9"
+
+component-type@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/component-type/-/component-type-1.1.0.tgz#95b666aad53e5c8d1f2be135c45b5d499197c0c5"
 
 compressible@~2.0.11:
   version "2.0.12"
@@ -2390,7 +2394,14 @@ domhandler@^2.3.0:
   dependencies:
     domelementtype "1"
 
-domutils@1.5.1, domutils@^1.5.1, domutils@^1.7.0:
+domutils@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.5.1.tgz#dcd8488a26f563d61079e48c9f7b7e32373682cf"
+  dependencies:
+    dom-serializer "0"
+    domelementtype "1"
+
+domutils@^1.5.1, domutils@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
   dependencies:
@@ -5246,10 +5257,6 @@ negotiator@0.6.1:
 neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
-
-node-fetch@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
 
 node-fetch@^1.0.1:
   version "1.7.3"

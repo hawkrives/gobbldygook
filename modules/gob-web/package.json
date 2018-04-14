@@ -68,6 +68,7 @@
     "whatwg-fetch": "2.0.4"
   },
   "devDependencies": {
+    "babel-loader": "7.1.4",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.3.2",
     "clean-webpack-plugin": "0.1.19",
@@ -101,9 +102,5 @@
     "webpack": "3.10.0",
     "webpack-dev-server": "2.11.1",
     "worker-loader": "1.1.1"
-  },
-  "resolutions": {
-    "enzyme/cheerio/css-select/domutils": "^1.5.1",
-    "treo/idb-schema/component-type": "^1.2.1"
   }
 }
