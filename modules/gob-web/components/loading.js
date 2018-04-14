@@ -35,7 +35,7 @@ type LoadingProps = {
 export default function Loading({className, children}: LoadingProps) {
     return (
         <Wrapper>
-            <Spinner name="wave" color={theme.gray600} fadeIn="quarter" />
+            <Spinner name="wave" color={theme.gray600} fadeIn="none" />
             <Message className={className}>{children}</Message>
         </Wrapper>
     )
