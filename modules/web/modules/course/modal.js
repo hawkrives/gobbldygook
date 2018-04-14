@@ -109,9 +109,7 @@ function ModalCourse(props: {
         <ContainerModal onClose={onClose} contentLabel="Course">
             <Toolbar>
                 <Separator type="flex-spacer" flex={3} />
-                <RaisedButton onClick={onClose}>
-                    Close
-                </RaisedButton>
+                <RaisedButton onClick={onClose}>Close</RaisedButton>
             </Toolbar>
 
             <Course course={course} />
