@@ -3,7 +3,9 @@ import React from 'react'
 import cx from 'classnames'
 import ReactModal from 'react-modal'
 
-ReactModal.setAppElement('#gobbldygook')
+if (!global.TESTING) {
+    ReactModal.setAppElement('#gobbldygook')
+}
 
 import './modal.scss'
 
