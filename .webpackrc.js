@@ -126,8 +126,7 @@ function config() {
                 ${polyfills}
                 ${cssPath ? `<link rel="stylesheet" href="${cssPath}">` : ''}
 
-                <body><main id="gobbldygook"></main></body>
-
+                <main id="gobbldygook"></main>
                 <script src="${publicPath}${context.main}"></script>
                 </html>
             `
