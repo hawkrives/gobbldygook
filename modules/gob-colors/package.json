@@ -1,0 +1,9 @@
+{
+  "name": "@gob/colors",
+  "version": "3.0.0-rc.2",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+  	"polished": "^1.9.2"
+  }
+}
