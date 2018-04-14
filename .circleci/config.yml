@@ -7,7 +7,7 @@ x-config:
     paths: [~/.cache/yarn]
   - &restore-cache-yarn
     key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
-  
+
 workflows:
   version: 2
   build:
@@ -69,7 +69,7 @@ jobs:
       - restore_cache: *restore-cache-yarn
       - run: yarn install
       - save_cache: *save-cache-yarn
-      - run: yarn run prettier
+      - run: yarn run pretty
       - run: git diff .*.js modules/
 
   eslint:
