@@ -181,7 +181,6 @@ function config() {
 
         // copy files – into the webpack {output} directory
         new CopyWebpackPlugin([{from: 'modules/web/static/*', flatten: true}]),
-        new CopyWebpackPlugin([{from: './netlify.toml'}]),
     ]
 
     if (isProduction) {
