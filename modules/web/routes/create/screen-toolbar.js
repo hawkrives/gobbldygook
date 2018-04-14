@@ -1,8 +1,6 @@
 // @flow
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import {RaisedButton} from '../../components/button'
 import {Toolbar} from '../../components/toolbar'
 

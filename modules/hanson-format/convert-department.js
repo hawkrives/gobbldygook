@@ -173,6 +173,7 @@ forEach(
     }
 )
 
+// eslint-disable-next-line no-unused-vars
 const geReqsMapping = {
     'history of western culture': 'HWC',
     'historical studies in western culture': 'HWC',
