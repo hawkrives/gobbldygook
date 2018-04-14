@@ -1,0 +1,16 @@
+{
+  "name": "@gob/search-queries",
+  "version": "3.0.0-rc.2",
+  "main": "index.js",
+  "repository": "hawkrives/gobbldygook",
+  "author": "Hawken MacKay Rives",
+  "license": "MIT",
+  "dependencies": {
+    "@gob/lib": "^3.0.0-rc.2",
+    "@gob/school-st-olaf-college": "^3.0.0-rc.2",
+    "css-select": "2.0.0",
+    "lodash": "4.17.5",
+    "p-props": "1.1.0",
+    "uuid": "3.2.1"
+  }
+}

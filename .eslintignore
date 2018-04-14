@@ -1,4 +1,4 @@
 node_modules/
 *.min.js
-modules/hanson-format/parse-hanson-string.js
+modules/gob-hanson-format/parse-hanson-string.js
 !.webpackrc.js

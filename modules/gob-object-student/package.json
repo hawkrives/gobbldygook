@@ -1,0 +1,19 @@
+{
+  "name": "@gob/object-student",
+  "version": "3.0.0-rc.2",
+  "main": "index.js",
+  "repository": "hawkrives/gobbldygook",
+  "author": "Hawken MacKay Rives",
+  "license": "MIT",
+  "dependencies": {
+    "@gob/hanson-format": "^3.0.0-rc.2",
+    "@gob/lib": "^3.0.0-rc.2",
+    "debug": "3.1.0",
+    "listify": "1.0.0",
+    "lodash": "4.17.5",
+    "ord": "0.1.1",
+    "stabilize": "1.0.0",
+    "sto-sis-time-parser": "2.3.3",
+    "uuid": "3.2.1"
+  }
+}

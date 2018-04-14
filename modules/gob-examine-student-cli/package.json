@@ -1,0 +1,19 @@
+{
+  "name": "@gob/examine-student-cli",
+  "version": "3.0.0-rc.2",
+  "main": "index.js",
+  "repository": "hawkrives/gobbldygook",
+  "author": "Hawken MacKay Rives",
+  "license": "MIT",
+  "dependencies": {
+    "@gob/cli": "^3.0.0-rc.2",
+    "@gob/examine-student": "^3.0.0-rc.2",
+    "chalk": "2.3.2",
+    "graceful-fs": "4.1.11",
+    "js-yaml": "3.11.0",
+    "lodash": "4.17.5",
+    "nomnom": "1.8.1",
+    "pify": "3.0.0",
+    "plur": "3.0.0"
+  }
+}

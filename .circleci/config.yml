@@ -70,7 +70,7 @@ jobs:
       - run: yarn install
       - save_cache: *save-cache-yarn
       - run: yarn run pretty
-      - run: git diff .*.js modules/
+      - run: git diff modules/
 
   eslint:
     docker: [{image: 'circleci/node:8'}]
