@@ -1,7 +1,7 @@
 /* global opr:false */
 const id = '227069'
 
-export function installOperaExtension() {
+export function installExtension() {
     if (typeof opr === 'undefined') {
         return Promise.reject('The `opr` global does not exist')
     }

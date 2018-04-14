@@ -1,7 +1,7 @@
 /* global InstallTrigger:false */
-const url = '/gobbldygook/gobbldygook_sis_integration-1.0.0-fx+an.xpi'
+const url = '/gobbldygook_sis_integration-1.0.0-fx+an.xpi'
 
-export function installFirefoxExtension() {
+export function installExtension() {
     if (typeof InstallTrigger === 'undefined') {
         return Promise.reject('The `InstallTrigger` global does not exist')
     }

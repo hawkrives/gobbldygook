@@ -2,7 +2,7 @@
 const url =
     'https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld'
 
-export function installChromeExtension() {
+export function installExtension() {
     if (typeof chrome === 'undefined') {
         return Promise.reject(new Error('The `chrome` global does not exist'))
     }

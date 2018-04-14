@@ -4,11 +4,9 @@ import styled from 'styled-components'
 import {interpose} from '@gob/lib'
 import brwsr from 'brwsr'
 
-import {
-    installOperaExtension,
-    installChromeExtension,
-    installFirefoxExtension,
-} from '../helpers/extension-helpers'
+import {installExtension as installChrome} from './chrome'
+import {installExtension as installFirefox} from './firefox'
+import {installExtension as installOpera} from './opera'
 
 const Button = styled.button`
     display: inline-block;
@@ -22,7 +20,7 @@ type ButtonProps = {
 
 function BrowserButton({onClick, browserName, disabled}: ButtonProps) {
     return (
-        <Button type="button" disabled={disabled} onClick={onClick}>
+        <Button disabled={disabled} onClick={onClick}>
             {browserName}
         </Button>
     )
@@ -35,27 +33,26 @@ type Props = {
 type State = {
     installError: ?Error,
     installAttempted: boolean,
-    extensionInstalled: boolean,
 }
 
 export class BrowserExtensionsComponent extends React.Component<Props, State> {
     state = {
         installAttempted: false,
         installError: null,
-        extensionInstalled: false,
     }
 
     checkExtensionStatus = () => {
         if (global.gobbldygook_extension >= '1.0.0') {
-            this.setState({extensionInstalled: true})
+            return true
         }
+        return false
     }
 
     installChromeExtension = (ev: SyntheticEvent<>) => {
         ev.preventDefault()
         ev.stopPropagation()
 
-        installChromeExtension()
+        installChrome()
             .then(this.installSuccess)
             .catch(this.installFailure)
     }
@@ -64,7 +61,7 @@ export class BrowserExtensionsComponent extends React.Component<Props, State> {
         ev.preventDefault()
         ev.stopPropagation()
 
-        installFirefoxExtension()
+        installFirefox()
             .then(this.installSuccess)
             .catch(this.installFailure)
     }
@@ -73,7 +70,7 @@ export class BrowserExtensionsComponent extends React.Component<Props, State> {
         ev.preventDefault()
         ev.stopPropagation()
 
-        installOperaExtension()
+        installOpera()
             .then(this.installSuccess)
             .catch(this.installFailure)
     }
