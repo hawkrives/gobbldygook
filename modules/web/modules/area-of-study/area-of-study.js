@@ -4,7 +4,7 @@ import cx from 'classnames'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
 import Icon from '../../components/icon'
 import Requirement from './requirement'
 import ProgressBar from '../../components/progress-bar'
@@ -141,12 +141,12 @@ class AreaOfStudyContainer extends Component<Props, State> {
                     </h1>
                     <span className="icons">
                         {props.showCloseButton && (
-                            <Button
+                            <FlatButton
                                 className="area--remove-button"
                                 onClick={this.startRemovalConfirmation}
                             >
                                 <Icon>{close}</Icon>
-                            </Button>
+                            </FlatButton>
                         )}
                         <Icon className="area--open-indicator">
                             {isOpen ? chevronUp : chevronDown}
@@ -168,17 +168,17 @@ class AreaOfStudyContainer extends Component<Props, State> {
                     Remove <strong>{name}</strong>?
                 </p>
                 <span className="button-group">
-                    <Button
+                    <FlatButton
                         className="area--actually-remove-area"
                         onClick={ev =>
                             props.onRemoveArea({name, type, revision}, ev)
                         }
                     >
                         Remove
-                    </Button>
-                    <Button onClick={this.endRemovalConfirmation}>
+                    </FlatButton>
+                    <FlatButton onClick={this.endRemovalConfirmation}>
                         Cancel
-                    </Button>
+                    </FlatButton>
                 </span>
             </div>
         )
