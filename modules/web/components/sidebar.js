@@ -2,8 +2,8 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import Icon from './icon'
-import Toolbar, {ToolbarButton} from './toolbar'
+import {BlockIcon} from './icon'
+import {Toolbar, ToolbarButton} from './toolbar'
 import Separator from './separator'
 import CourseRemovalBox from './course-removal-box'
 import {undo, redo} from '../redux/students/actions/undo'
@@ -60,14 +60,13 @@ function Sidebar(props: PropTypes) {
         <SidebarElement>
             <StudentButtonsToolbar>
                 <ToolbarButton link to="/" title="Students">
-                    <Icon type="block">{iosPeopleOutline}</Icon>
+                    <BlockIcon>{iosPeopleOutline}</BlockIcon>
                 </ToolbarButton>
                 <ToolbarButton
-                    link
                     to={`/s/${studentId}/search`}
                     title="Search"
                 >
-                    <Icon type="block">{iosSearch}</Icon>
+                    <BlockIcon>{iosSearch}</BlockIcon>
                 </ToolbarButton>
 
                 <Separator type="spacer" />
@@ -77,24 +76,24 @@ function Sidebar(props: PropTypes) {
                     onClick={() => undo(studentId)}
                     disabled={!canUndo}
                 >
-                    <Icon type="block">
+                    <BlockIcon>
                         {!canUndo ? iosUndoOutline : iosUndo}
-                    </Icon>
+                    </BlockIcon>
                 </ToolbarButton>
                 <ToolbarButton
                     title="Redo"
                     onClick={() => redo(studentId)}
                     disabled={!canRedo}
                 >
-                    <Icon type="block">
+                    <BlockIcon>
                         {!canRedo ? iosRedoOutline : iosRedo}
-                    </Icon>
+                    </BlockIcon>
                 </ToolbarButton>
 
                 <Separator type="spacer" />
 
-                <ToolbarButton link to={`/s/${studentId}/share`} title="Share">
-                    <Icon type="block">{iosUploadOutline}</Icon>
+                <ToolbarButton to={`/s/${studentId}/share`} title="Share">
+                    <BlockIcon>{iosUploadOutline}</BlockIcon>
                 </ToolbarButton>
             </StudentButtonsToolbar>
 
