@@ -171,7 +171,7 @@ function config() {
         new NamedModulesPlugin(),
 
         // copy files – into the webpack {output} directory
-        new CopyWebpackPlugin([{from: 'modules/web/static/*', flatten: true}]),
+        new CopyWebpackPlugin([{from: 'modules/gob-web/static/*', flatten: true}]),
     ]
 
     if (isProduction) {
