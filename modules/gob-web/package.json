@@ -11,7 +11,7 @@
     "build-dev": "webpack --bail --progress --devtool=source-map",
     "start": "webpack-dev-server --progress",
     "stats": "cross-env NODE_ENV=production npm run stats-dev",
-    "stats-dev": "webpack --config .webpackrc.js --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'"
+    "stats-dev": "webpack --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'"
   },
   "dependencies": {
     "@gob/colors": "^3.0.0-rc.2",
