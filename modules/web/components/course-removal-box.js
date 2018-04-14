@@ -6,8 +6,7 @@ import styled, {css} from 'styled-components'
 const log = debug('web:courses')
 import * as theme from '../theme'
 import {IDENT_COURSE} from '../../object-student'
-
-import Icon from './icon'
+import {BlockIcon} from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
 
 const Box = styled.div`
@@ -51,9 +50,9 @@ function CourseRemovalBox(props: Props) {
     return props.connectDropTarget(
         <div>
             <Box isOver={props.isOver} canDrop={props.canDrop}>
-                <Icon type="block" style={{fontSize: '3em', textAlign: 'center'}}>
+                <BlockIcon style={{fontSize: '3em', textAlign: 'center'}}>
                     {iosTrashOutline}
-                </Icon>
+                </BlockIcon>
                 Drop a course here to remove it.
             </Box>
         </div>
