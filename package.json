@@ -36,10 +36,6 @@
     ]
   },
   "jest": {
-    "setupFiles": [
-      "./config/test-harness.js"
-    ],
-    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
     "collectCoverageFrom": [
       "modules/**/*.js"
     ],
@@ -60,6 +56,10 @@
     "moduleNameMapper": {
       "^.+\\.s?css$": "<rootDir>/config/flow/css.js.flow"
     },
+    "setupFiles": [
+      "./config/test-harness.js"
+    ],
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
     "testPathIgnorePatterns": [
       "\\.support.js$",
       "__support__"
