@@ -14,13 +14,13 @@ import {connect} from 'react-redux'
 import {encodeStudent} from '@gob/object-student'
 
 const ShareModal = styled(Modal)`
-    ${theme.card};
-    flex-flow: column;
-    padding: 1em 2em;
+	${theme.card};
+	flex-flow: column;
+	padding: 1em 2em;
 
-    & a {
-        cursor: pointer;
-    }
+	& a {
+		cursor: pointer;
+	}
 `
 
 const WindowTools = styled(Toolbar)``
@@ -28,51 +28,51 @@ const WindowTools = styled(Toolbar)``
 const CloseModal = styled(FlatButton)``
 
 type PropTypes = {
-    params: {
-        studentId: string,
-    },
-    router: Object,
-    student?: Object,
+	params: {
+		studentId: string,
+	},
+	router: Object,
+	student?: Object,
 }
 
 export function ShareSheet(props: PropTypes) {
-    let {student = {}} = props
+	let {student = {}} = props
 
-    const boundCloseModal = () =>
-        props.router.push(`/s/${props.params.studentId}/`)
+	const boundCloseModal = () =>
+		props.router.push(`/s/${props.params.studentId}/`)
 
-    const encodedStudentUrl = `data:text/json;charset=utf-8,${encodeStudent(
-        student
-    )}`
+	const encodedStudentUrl = `data:text/json;charset=utf-8,${encodeStudent(
+		student,
+	)}`
 
-    return (
-        <ShareModal onClose={boundCloseModal} contentLabel="Share">
-            <WindowTools>
-                <CloseModal onClick={boundCloseModal}>
-                    <InlineIcon>{close}</InlineIcon>
-                </CloseModal>
-            </WindowTools>
+	return (
+		<ShareModal onClose={boundCloseModal} contentLabel="Share">
+			<WindowTools>
+				<CloseModal onClick={boundCloseModal}>
+					<InlineIcon>{close}</InlineIcon>
+				</CloseModal>
+			</WindowTools>
 
-            <div>
-                Share "{student.name}" via:
-                <List type="bullet">
-                    <li>Google Drive (not implemented)</li>
-                    <li>
-                        <a
-                            download={`${student.name}.gbstudent`}
-                            href={encodedStudentUrl}
-                        >
-                            Download file
-                        </a>
-                    </li>
-                </List>
-            </div>
-        </ShareModal>
-    )
+			<div>
+				Share "{student.name}" via:
+				<List type="bullet">
+					<li>Google Drive (not implemented)</li>
+					<li>
+						<a
+							download={`${student.name}.gbstudent`}
+							href={encodedStudentUrl}
+						>
+							Download file
+						</a>
+					</li>
+				</List>
+			</div>
+		</ShareModal>
+	)
 }
 
 const mapState = (state, ownProps): {student: Object} => {
-    return {student: state.students[ownProps.params.studentId].data.present}
+	return {student: state.students[ownProps.params.studentId].data.present}
 }
 
 export default connect(mapState)(withRouter(ShareSheet))

@@ -1,21 +1,21 @@
 // @flow
 
 export function findMissingNumber(arr: number[]): ?number {
-    if (arr.length === 0) {
-        return null
-    }
+	if (arr.length === 0) {
+		return null
+	}
 
-    if (arr.length === 1) {
-        return null
-    }
+	if (arr.length === 1) {
+		return null
+	}
 
-    let last = arr[0]
-    for (const val of arr) {
-        if (val > last + 1) {
-            return last + 1
-        }
-        last = val
-    }
+	let last = arr[0]
+	for (const val of arr) {
+		if (val > last + 1) {
+			return last + 1
+		}
+		last = val
+	}
 
-    return null
+	return null
 }

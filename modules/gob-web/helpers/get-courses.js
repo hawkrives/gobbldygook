@@ -7,38 +7,38 @@ import {status, json} from '@gob/lib'
 const baseUrl = 'https://stodevx.github.io/course-data'
 const networkCache = Object.create(null)
 export function getCourseFromNetwork(clbid: number) {
-    if (clbid in networkCache) {
-        return networkCache[clbid]
-    }
+	if (clbid in networkCache) {
+		return networkCache[clbid]
+	}
 
-    const id = padStart(clbid.toString(), 10, '0')
-    const dir = (Math.floor(clbid / 1000) * 1000).toString()
+	const id = padStart(clbid.toString(), 10, '0')
+	const dir = (Math.floor(clbid / 1000) * 1000).toString()
 
-    const path = `${baseUrl}/courses/${dir}/${id}.json`
+	const path = `${baseUrl}/courses/${dir}/${id}.json`
 
-    networkCache[clbid] = fetch(path)
-        .then(status)
-        .then(json)
+	networkCache[clbid] = fetch(path)
+		.then(status)
+		.then(json)
 
-    return networkCache[clbid]
+	return networkCache[clbid]
 }
 
 const courseCache = Object.create(null)
 export function getCourseFromDatabase(clbid: number) {
-    if (clbid in courseCache) {
-        return courseCache[clbid]
-    }
+	if (clbid in courseCache) {
+		return courseCache[clbid]
+	}
 
-    courseCache[clbid] = db
-        .store('courses')
-        .index('clbid')
-        .get(clbid)
-        .then(course => omit(course, ['profWords', 'words', 'sourcePath']))
+	courseCache[clbid] = db
+		.store('courses')
+		.index('clbid')
+		.get(clbid)
+		.then(course => omit(course, ['profWords', 'words', 'sourcePath']))
 
-    return courseCache[clbid].then(course => {
-        delete courseCache[clbid]
-        return course
-    })
+	return courseCache[clbid].then(course => {
+		delete courseCache[clbid]
+		return course
+	})
 }
 
 // Gets a course from the database.
@@ -48,21 +48,21 @@ export function getCourseFromDatabase(clbid: number) {
 // @returns {Promise} - TreoDatabasePromise
 // @fulfill {Object} - the course object, potentially with an embedded error message.
 export function getCourse(
-    {clbid, term}: {clbid: number, term: number},
-    fabrications: any = {}
+	{clbid, term}: {clbid: number, term: number},
+	fabrications: any = {},
 ) {
-    if (clbid in fabrications) {
-        return fabrications[clbid]
-    }
+	if (clbid in fabrications) {
+		return fabrications[clbid]
+	}
 
-    let getCourseFrom = getCourseFromDatabase
-    if (global.useNetworkOnly) {
-        getCourseFrom = getCourseFromNetwork
-    }
+	let getCourseFrom = getCourseFromDatabase
+	if (global.useNetworkOnly) {
+		getCourseFrom = getCourseFromNetwork
+	}
 
-    return getCourseFrom(clbid)
-        .then(
-            course => course || {clbid, term, error: `Could not find ${clbid}`}
-        )
-        .catch(error => ({clbid, term, error: error.message}))
+	return getCourseFrom(clbid)
+		.then(
+			course => course || {clbid, term, error: `Could not find ${clbid}`},
+		)
+		.catch(error => ({clbid, term, error: error.message}))
 }

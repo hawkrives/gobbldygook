@@ -16,51 +16,51 @@ const Base = `
 `
 
 const Title = styled.h1`
-    ${Base};
-    font-feature-settings: 'onum';
+	${Base};
+	font-feature-settings: 'onum';
 `
 
 const Subtitle = styled.h2`
-    ${Base};
-    font-size: 0.75em;
+	${Base};
+	font-size: 0.75em;
 `
 
 const independentRegex = /^I[RS]/
 
 type CourseTitleProps = {
-    className?: string,
-    name: string,
-    title?: string,
-    type?: string,
+	className?: string,
+	name: string,
+	title?: string,
+	type?: string,
 }
 
 export default function CourseTitle({
-    name,
-    title,
-    type,
-    className,
+	name,
+	title,
+	type,
+	className,
 }: CourseTitleProps) {
-    const isIndependent = independentRegex.test(name)
-    let courseName = title || name
-    let subtitle = undefined
+	const isIndependent = independentRegex.test(name)
+	let courseName = title || name
+	let subtitle = undefined
 
-    if (isIndependent) {
-        courseName = name
-        if (courseName.length > 3) {
-            courseName = courseName.substring(3)
-        }
-    } else if (type === 'Topic') {
-        courseName = `${name.replace(/top.*: */gi, '')}`
-        subtitle = title
-    } else if (type === 'Seminar') {
-        courseName = title
-        subtitle = name
-    }
+	if (isIndependent) {
+		courseName = name
+		if (courseName.length > 3) {
+			courseName = courseName.substring(3)
+		}
+	} else if (type === 'Topic') {
+		courseName = `${name.replace(/top.*: */gi, '')}`
+		subtitle = title
+	} else if (type === 'Seminar') {
+		courseName = title
+		subtitle = name
+	}
 
-    return (
-        <div className={className}>
-            <Title>{courseName}</Title>
-            {subtitle && subtitle.length && <Subtitle>{subtitle}</Subtitle>}
-        </div>
-    )
+	return (
+		<div className={className}>
+			<Title>{courseName}</Title>
+			{subtitle && subtitle.length && <Subtitle>{subtitle}</Subtitle>}
+		</div>
+	)
 }

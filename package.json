@@ -21,19 +21,12 @@
     "test-students": "./modules/gob-cli/test-student test/example-students"
   },
   "prettier": {
-    "trailingComma": "es5",
+    "trailingComma": "all",
     "tabWidth": 4,
+    "useTabs": true,
     "singleQuote": true,
     "semi": false,
-    "bracketSpacing": false,
-    "overrides": [
-      {
-        "files": "*.scss",
-        "options": {
-          "useTabs": true
-        }
-      }
-    ]
+    "bracketSpacing": false
   },
   "jest": {
     "collectCoverageFrom": [

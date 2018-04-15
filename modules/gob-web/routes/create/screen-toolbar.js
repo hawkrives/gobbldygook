@@ -5,19 +5,19 @@ import {RaisedButton} from '../../components/button'
 import {Toolbar} from '../../components/toolbar'
 
 type Props = {
-    onBack: (ev: any) => any,
-    onNext: (ev: any) => any,
+	onBack: (ev: any) => any,
+	onNext: (ev: any) => any,
 }
 
 export default function ScreenToolbar({onNext, onBack}: Props) {
-    return (
-        <Toolbar>
-            <RaisedButton disabled={!onBack} onClick={onBack}>
-                Back
-            </RaisedButton>
-            <RaisedButton disabled={!onNext} onClick={onNext}>
-                Next
-            </RaisedButton>
-        </Toolbar>
-    )
+	return (
+		<Toolbar>
+			<RaisedButton disabled={!onBack} onClick={onBack}>
+				Back
+			</RaisedButton>
+			<RaisedButton disabled={!onNext} onClick={onNext}>
+				Next
+			</RaisedButton>
+		</Toolbar>
+	)
 }

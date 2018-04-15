@@ -15,62 +15,62 @@ type BasicCourse = Object
 type BasicArea = {type: string}
 
 export function storeCourses(path: string, data: BasicCourse[]) {
-    coursesLog(path)
+	coursesLog(path)
 
-    let coursesToStore = map(data, course => ({
-        ...course,
-        ...prepareCourse(course),
-        sourcePath: path,
-    }))
+	let coursesToStore = map(data, course => ({
+		...course,
+		...prepareCourse(course),
+		sourcePath: path,
+	}))
 
-    const start = present()
+	const start = present()
 
-    const onSuccess = () => {
-        const time = round(present() - start, 2)
-        coursesLog(`Stored ${coursesToStore.length} courses in ${time}ms.`)
-    }
+	const onSuccess = () => {
+		const time = round(present() - start, 2)
+		coursesLog(`Stored ${coursesToStore.length} courses in ${time}ms.`)
+	}
 
-    // istanbul ignore next
-    const onFailure = err => {
-        const db = err.target.db.name
-        const errorName = err.target.error.name
+	// istanbul ignore next
+	const onFailure = err => {
+		const db = err.target.db.name
+		const errorName = err.target.error.name
 
-        // istanbul ignore else
-        if (errorName === 'QuotaExceededError') {
-            quotaExceededError(db)
-        }
+		// istanbul ignore else
+		if (errorName === 'QuotaExceededError') {
+			quotaExceededError(db)
+		}
 
-        throw err
-    }
+		throw err
+	}
 
-    return db
-        .store('courses')
-        .batch(coursesToStore)
-        .then(onSuccess, onFailure)
+	return db
+		.store('courses')
+		.batch(coursesToStore)
+		.then(onSuccess, onFailure)
 }
 
 export function storeArea(path: string, data: BasicArea) {
-    areasLog(path)
+	areasLog(path)
 
-    const area = {
-        ...data,
-        type: data.type.toLowerCase(),
-        sourcePath: path,
-        dateAdded: new Date(),
-    }
+	const area = {
+		...data,
+		type: data.type.toLowerCase(),
+		sourcePath: path,
+		dateAdded: new Date(),
+	}
 
-    return db.store('areas').put(area)
+	return db.store('areas').put(area)
 }
 
 export default function storeData(
-    path: string,
-    type: InfoFileTypeEnum,
-    data: any
+	path: string,
+	type: InfoFileTypeEnum,
+	data: any,
 ) {
-    // istanbul ignore else
-    if (type === 'courses') {
-        return storeCourses(path, data)
-    } else if (type === 'areas') {
-        return storeArea(path, data)
-    }
+	// istanbul ignore else
+	if (type === 'courses') {
+		return storeCourses(path, data)
+	} else if (type === 'areas') {
+		return storeArea(path, data)
+	}
 }

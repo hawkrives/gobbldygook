@@ -3,9 +3,9 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
 import {
-    changeName,
-    changeMatriculation,
-    changeGraduation,
+	changeName,
+	changeMatriculation,
+	changeGraduation,
 } from '../../redux/students/actions/change'
 
 import {StudentSummary} from './student-summary'
@@ -13,50 +13,50 @@ import {StudentSummary} from './student-summary'
 type Student = Object
 
 class WrappedStudentSummary extends React.PureComponent {
-    props: {
-        changeGraduation: (string, number) => any,
-        changeMatriculation: (string, number) => any,
-        changeName: (string, string) => any,
-        student: Student,
-    }
+	props: {
+		changeGraduation: (string, number) => any,
+		changeMatriculation: (string, number) => any,
+		changeName: (string, string) => any,
+		student: Student,
+	}
 
-    handleChangeGraduation = (value: string) => {
-        const newGraduation = parseInt(value) || 0
-        this.props.changeGraduation(this.props.student.id, newGraduation)
-    }
+	handleChangeGraduation = (value: string) => {
+		const newGraduation = parseInt(value) || 0
+		this.props.changeGraduation(this.props.student.id, newGraduation)
+	}
 
-    handleChangeMatriculation = (value: string) => {
-        const newMatriculation = parseInt(value) || 0
-        this.props.changeMatriculation(this.props.student.id, newMatriculation)
-    }
+	handleChangeMatriculation = (value: string) => {
+		const newMatriculation = parseInt(value) || 0
+		this.props.changeMatriculation(this.props.student.id, newMatriculation)
+	}
 
-    handleChangeName = (value: string) => {
-        this.props.changeName(this.props.student.id, value)
-    }
+	handleChangeName = (value: string) => {
+		this.props.changeName(this.props.student.id, value)
+	}
 
-    render() {
-        return (
-            <StudentSummary
-                onChangeGraduation={this.handleChangeGraduation}
-                onChangeMatriculation={this.handleChangeMatriculation}
-                onChangeName={this.handleChangeName}
-                student={this.props.student}
-            />
-        )
-    }
+	render() {
+		return (
+			<StudentSummary
+				onChangeGraduation={this.handleChangeGraduation}
+				onChangeMatriculation={this.handleChangeMatriculation}
+				onChangeName={this.handleChangeName}
+				student={this.props.student}
+			/>
+		)
+	}
 }
 
 const mapDispatch = dispatch =>
-    bindActionCreators(
-        {
-            changeName,
-            changeMatriculation,
-            changeGraduation,
-        },
-        dispatch
-    )
+	bindActionCreators(
+		{
+			changeName,
+			changeMatriculation,
+			changeGraduation,
+		},
+		dispatch,
+	)
 
 // $FlowFixMe
 export const ConnectedStudentSummary = connect(null, mapDispatch)(
-    WrappedStudentSummary
+	WrappedStudentSummary,
 )

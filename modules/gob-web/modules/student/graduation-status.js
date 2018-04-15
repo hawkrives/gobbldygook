@@ -9,23 +9,23 @@ import './graduation-status.scss'
 type Student = Object
 
 type Props = {
-    student: Student,
+	student: Student,
 }
 
 export default class GraduationStatusContainer extends React.PureComponent<
-    Props
+	Props,
 > {
-    render() {
-        const student = this.props.student
-        if (!student) {
-            return null
-        }
+	render() {
+		const student = this.props.student
+		if (!student) {
+			return null
+		}
 
-        return (
-            <section className="graduation-status">
-                <ConnectedStudentSummary student={student} />
-                <AreaOfStudySidebar student={student} />
-            </section>
-        )
-    }
+		return (
+			<section className="graduation-status">
+				<ConnectedStudentSummary student={student} />
+				<AreaOfStudySidebar student={student} />
+			</section>
+		)
+	}
 }

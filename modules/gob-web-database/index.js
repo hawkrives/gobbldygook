@@ -9,4 +9,4 @@ import batchGet from '@gob/treo-plugin-batch-get'
 import defaultSchema from './schema'
 
 export const createDatabase = (name = 'gobbldygook', schema = defaultSchema) =>
-    new Database(name, schema).use(queryTreoDatabase()).use(batchGet())
+	new Database(name, schema).use(queryTreoDatabase()).use(batchGet())

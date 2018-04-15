@@ -10,58 +10,58 @@ import StudentListItem from './student-list-item'
 import * as theme from '../../theme'
 
 const ListOfStudents = styled(List)`
-    ${theme.card};
-    max-width: 35em;
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
+	${theme.card};
+	max-width: 35em;
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
 `
 
 export default function StudentList(props) {
-    const {isEditing, destroyStudent, students} = props
+	const {isEditing, destroyStudent, students} = props
 
-    let {
-        filter: filterText,
-        sortBy: sortByKey,
-        // groupBy: groupByKey,
-    } = props
+	let {
+		filter: filterText,
+		sortBy: sortByKey,
+		// groupBy: groupByKey,
+	} = props
 
-    filterText = filterText.toLowerCase()
+	filterText = filterText.toLowerCase()
 
-    const studentObjects = map(
-        sortBy(
-            filter(students, s =>
-                fuzzysearch(
-                    filterText,
-                    (s.data.present.name || '').toLowerCase()
-                )
-            ),
-            s => s.data.present[sortByKey]
-        ),
-        (student, i) => (
-            <StudentListItem
-                key={student.data.present.id || i}
-                student={student}
-                destroyStudent={destroyStudent}
-                isEditing={isEditing}
-            />
-        )
-    )
+	const studentObjects = map(
+		sortBy(
+			filter(students, s =>
+				fuzzysearch(
+					filterText,
+					(s.data.present.name || '').toLowerCase(),
+				),
+			),
+			s => s.data.present[sortByKey],
+		),
+		(student, i) => (
+			<StudentListItem
+				key={student.data.present.id || i}
+				student={student}
+				destroyStudent={destroyStudent}
+				isEditing={isEditing}
+			/>
+		),
+	)
 
-    return <ListOfStudents type="plain">{studentObjects}</ListOfStudents>
+	return <ListOfStudents type="plain">{studentObjects}</ListOfStudents>
 }
 
 StudentList.propTypes = {
-    destroyStudent: PropTypes.func.isRequired,
-    filter: PropTypes.string.isRequired,
-    groupBy: PropTypes.string.isRequired,
-    isEditing: PropTypes.bool.isRequired,
-    sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate'])
-        .isRequired,
-    students: PropTypes.object.isRequired,
+	destroyStudent: PropTypes.func.isRequired,
+	filter: PropTypes.string.isRequired,
+	groupBy: PropTypes.string.isRequired,
+	isEditing: PropTypes.bool.isRequired,
+	sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate'])
+		.isRequired,
+	students: PropTypes.object.isRequired,
 }
 
 StudentList.defaultProps = {
-    filter: '',
-    students: {},
+	filter: '',
+	students: {},
 }

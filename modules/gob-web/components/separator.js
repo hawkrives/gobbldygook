@@ -11,35 +11,35 @@ const Rule = styled.hr`
 `
 
 const LineRule = Rule.extend`
-    border-width: 1px;
+	border-width: 1px;
 `
 
 const SpacerRule = Rule.extend`
-    padding: 0 0.5em;
+	padding: 0 0.5em;
 `
 
 const FlexSpacerRule = Rule.extend`
-    flex: ${props => props.flex};
+	flex: ${props => props.flex};
 `
 
 type Props = {
-    className?: string,
-    flex?: number,
-    style?: Object,
-    type?: 'spacer' | 'line' | 'flex-spacer',
+	className?: string,
+	flex?: number,
+	style?: Object,
+	type?: 'spacer' | 'line' | 'flex-spacer',
 }
 
 export default function Separator(props: Props) {
-    const {className, flex = 1, style, type = 'spacer'} = props
+	const {className, flex = 1, style, type = 'spacer'} = props
 
-    let ChosenRule = Rule
-    if (type === 'line') {
-        ChosenRule = LineRule
-    } else if (type === 'spacer') {
-        ChosenRule = SpacerRule
-    } else if (type === 'flex-spacer') {
-        ChosenRule = FlexSpacerRule
-    }
+	let ChosenRule = Rule
+	if (type === 'line') {
+		ChosenRule = LineRule
+	} else if (type === 'spacer') {
+		ChosenRule = SpacerRule
+	} else if (type === 'flex-spacer') {
+		ChosenRule = FlexSpacerRule
+	}
 
-    return <ChosenRule flex={flex} className={className} style={style} />
+	return <ChosenRule flex={flex} className={className} style={style} />
 }

@@ -10,16 +10,16 @@ import {buildDeptNum} from '@gob/school-st-olaf-college'
 import CourseWarnings from './warnings'
 
 export const Container = styled.article`
-    display: block;
+	display: block;
 
-    &:hover {
-        cursor: pointer;
-        background-color: ${theme.gray100};
-    }
+	&:hover {
+		cursor: pointer;
+		background-color: ${theme.gray100};
+	}
 
-    &.is-dragging {
-        opacity: 0.5;
-    }
+	&.is-dragging {
+		opacity: 0.5;
+	}
 `
 
 const Row = `
@@ -28,78 +28,78 @@ const Row = `
 `
 
 export const Title = styled(CourseTitle)`
-    ${Row};
+	${Row};
 `
 
 export const SummaryRow = styled.div`
-    ${Row};
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    font-size: 0.75em;
+	${Row};
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 0.75em;
 
-    & > * + *:not(:empty)::before {
-        margin: 0 0.2em;
-        content: '·';
-    }
+	& > * + *:not(:empty)::before {
+		margin: 0 0.2em;
+		content: '·';
+	}
 `
 
 const GeReqItem = styled(InlineListItem)`
-    & + &::before {
-        margin: 0 0.2em;
-        content: '+';
-    }
+	& + &::before {
+		margin: 0 0.2em;
+		content: '+';
+	}
 `
 
 const Identifier = styled.span`
-    font-feature-settings: 'tnum';
+	font-feature-settings: 'tnum';
 `
 
 const Type = styled.span``
 const Prereqs = styled.span``
 
 export type Props = {
-    className?: string,
-    conflicts?: any[],
-    course: Object,
-    index?: number,
-    onClick?: Event => any,
+	className?: string,
+	conflicts?: any[],
+	course: Object,
+	index?: number,
+	onClick?: Event => any,
 }
 
 export default class CompactCourse extends React.PureComponent<Props> {
-    render() {
-        const {course, conflicts = [], index, onClick = noop} = this.props
+	render() {
+		const {course, conflicts = [], index, onClick = noop} = this.props
 
-        return (
-            <Container className={this.props.className} onClick={onClick}>
-                <CourseWarnings warnings={conflicts[index || 0]} />
+		return (
+			<Container className={this.props.className} onClick={onClick}>
+				<CourseWarnings warnings={conflicts[index || 0]} />
 
-                <Title
-                    title={course.title}
-                    name={course.name}
-                    type={course.type}
-                />
+				<Title
+					title={course.title}
+					name={course.name}
+					type={course.type}
+				/>
 
-                <SummaryRow>
-                    <Identifier>{buildDeptNum(course, true)}</Identifier>
-                    {course.type !== 'Research' && <Type>{course.type}</Type>}
-                    {course.gereqs && (
-                        <InlineList>
-                            {map(course.gereqs, ge => (
-                                <GeReqItem key={ge}>{ge}</GeReqItem>
-                            ))}
-                        </InlineList>
-                    )}
-                    {course.prerequisites && (
-                        <Prereqs title={course.prerequisites}>Prereq</Prereqs>
-                    )}
-                </SummaryRow>
-                <SummaryRow>
-                    {map(course.times, timestring => (
-                        <span key={timestring}>{timestring}</span>
-                    ))}
-                </SummaryRow>
-            </Container>
-        )
-    }
+				<SummaryRow>
+					<Identifier>{buildDeptNum(course, true)}</Identifier>
+					{course.type !== 'Research' && <Type>{course.type}</Type>}
+					{course.gereqs && (
+						<InlineList>
+							{map(course.gereqs, ge => (
+								<GeReqItem key={ge}>{ge}</GeReqItem>
+							))}
+						</InlineList>
+					)}
+					{course.prerequisites && (
+						<Prereqs title={course.prerequisites}>Prereq</Prereqs>
+					)}
+				</SummaryRow>
+				<SummaryRow>
+					{map(course.times, timestring => (
+						<span key={timestring}>{timestring}</span>
+					))}
+				</SummaryRow>
+			</Container>
+		)
+	}
 }

@@ -11,68 +11,68 @@ import styled from 'styled-components'
 const log = debug('web:react')
 
 const DetailText = styled.pre`
-    background-color: white;
-    margin: 0;
+	background-color: white;
+	margin: 0;
 `
 
 type RouterProps = {
-    location: {
-        pathname: string,
-        search: string,
-    },
-    params: {
-        year: number,
-        semester: number,
-    },
+	location: {
+		pathname: string,
+		search: string,
+	},
+	params: {
+		year: number,
+		semester: number,
+	},
 }
 
 type ReactProps = {
-    className?: string,
-    student: {
-        data: {
-            past: Object,
-            present: Object,
-            future: Object,
-        },
-    },
+	className?: string,
+	student: {
+		data: {
+			past: Object,
+			present: Object,
+			future: Object,
+		},
+	},
 }
 
 type Props = RouterProps & ReactProps
 
 type State = {
-    year: ?number,
-    semester: ?number,
-    schedules: Array<Object>,
+	year: ?number,
+	semester: ?number,
+	schedules: Array<Object>,
 }
 
 export default class SemesterDetail extends React.Component<Props, State> {
-    state = {
-        year: null,
-        semester: null,
-        schedules: [],
-    }
+	state = {
+		year: null,
+		semester: null,
+		schedules: [],
+	}
 
-    render() {
-        log('SemesterDetail#render')
-        const {year, semester} = this.props.params
-        const student = this.props.student.data.present
+	render() {
+		log('SemesterDetail#render')
+		const {year, semester} = this.props.params
+		const student = this.props.student.data.present
 
-        const schedules = map(
-            filter(student.schedules, isCurrentSemester(year, semester)),
-            sched => omit(sched, 'courses')
-        )
+		const schedules = map(
+			filter(student.schedules, isCurrentSemester(year, semester)),
+			sched => omit(sched, 'courses'),
+		)
 
-        const sem = semesterName(semester)
-        const title = `${sem} ${year} • ${student.name} | Gobbldygook`
+		const sem = semesterName(semester)
+		const title = `${sem} ${year} • ${student.name} | Gobbldygook`
 
-        return (
-            <DocumentTitle title={title}>
-                <DetailText>
-                    {this.props.location.pathname}
-                    {'\n'}
-                    {JSON.stringify(schedules, null, 2)}
-                </DetailText>
-            </DocumentTitle>
-        )
-    }
+		return (
+			<DocumentTitle title={title}>
+				<DetailText>
+					{this.props.location.pathname}
+					{'\n'}
+					{JSON.stringify(schedules, null, 2)}
+				</DetailText>
+			</DocumentTitle>
+		)
+	}
 }

@@ -7,15 +7,15 @@ import {REFRESH_COURSES} from '../constants'
 // import {getCoursesFromSchedules} from '../../../helpers/get-courses'
 
 export function refreshCourses(): {type: string} {
-    return {type: REFRESH_COURSES}
+	return {type: REFRESH_COURSES}
 }
 
 export function loadCourses() {
-    throw new Error('This function does not work.')
-    // return (dispatch, getState) => {
-    // 	let {students, courses} = getState()
-    // 	let schedules = flatten(map(students, student => values(student.data.present.schedules)))
-    // 	let action = { type: LOAD_COURSES, payload: getCoursesFromSchedules(schedules, courses) }
-    // 	return dispatch(action)
-    // }
+	throw new Error('This function does not work.')
+	// return (dispatch, getState) => {
+	// 	let {students, courses} = getState()
+	// 	let schedules = flatten(map(students, student => values(student.data.present.schedules)))
+	// 	let action = { type: LOAD_COURSES, payload: getCoursesFromSchedules(schedules, courses) }
+	// 	return dispatch(action)
+	// }
 }

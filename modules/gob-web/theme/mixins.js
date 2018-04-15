@@ -4,9 +4,9 @@ import {css} from 'styled-components'
 import * as vars from './variables'
 
 export const contentBlockSpacing = css`
-    padding-top: ${vars.pageEdgePadding};
-    padding-bottom: 15vh;
-    overflow-y: scroll;
+	padding-top: ${vars.pageEdgePadding};
+	padding-bottom: 15vh;
+	overflow-y: scroll;
 `
 
 export const materialShadow = `
@@ -15,13 +15,13 @@ export const materialShadow = `
 `
 
 export const baseCard = css`
-    background-color: white;
-    border-radius: ${vars.baseBorderRadius};
+	background-color: white;
+	border-radius: ${vars.baseBorderRadius};
 `
 
 export const card = css`
-    ${materialShadow};
-    ${baseCard};
+	${materialShadow};
+	${baseCard};
 `
 
 export const cardContent = `
@@ -29,8 +29,8 @@ export const cardContent = `
 `
 
 export const cardActions = css`
-    border-top: ${vars.materialDivider};
-    padding: 1em;
+	border-top: ${vars.materialDivider};
+	padding: 1em;
 `
 
 export const headingNeutral = `
