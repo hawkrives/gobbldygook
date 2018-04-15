@@ -3,7 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 
-let extensionsToRemove = ['.woff', '.woff2', '.map']
+let extensionsToRemove = ['.woff', '.woff2', '.map', '.worker.js']
 let base = __dirname + '/../modules/gob-web/build'
 
 let files = () => fs.readdirSync(base)
