@@ -29,7 +29,7 @@ global.fetch = jest.fn(() => {
     throw new Error('you must pick either goodFetch or badFetch')
 })
 
-import db from '@gob/web-database'
+import {db} from '../db'
 import * as dispatch from '../lib-dispatch'
 import needsUpdate from '../needs-update'
 import updateDatabase from '../update-database'

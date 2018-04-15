@@ -3,7 +3,7 @@
 
 jest.mock('@gob/web-database')
 
-import db from '@gob/web-database'
+import {db} from '../db'
 import needsUpdate from '../needs-update'
 
 beforeEach(async () => {

@@ -1,6 +1,8 @@
 /* eslint-env jest */
 // @flow
 
+import treo from 'treo'
+
 // Use fake-indexeddb if real IndexedDB is not available (Node.js), but use real IndexedDB when possible (browser)
 if (typeof global.indexedDB === 'undefined') {
     global.indexedDB = require('fake-indexeddb')
@@ -10,10 +12,10 @@ if (typeof global.indexedDB === 'undefined') {
 }
 
 // $FlowFixMe
-const {default: db} = require.requireActual('../index')
+const {createDatabase} = require.requireActual('../index')
 
-db.__clear = function clearDatabase() {
-    return Promise.all(db.stores.map(s => db.store(s).clear()))
+treo.Database.prototype.__clear = function clearDatabase() {
+    return Promise.all(this.stores.map(s => this.store(s).clear()))
 }
 
-export default db
+export {createDatabase}

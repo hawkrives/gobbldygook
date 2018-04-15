@@ -1,5 +1,5 @@
 // @flow
-import db from '@gob/web-database'
+import {db} from '../../../helpers/db'
 import loadArea from '../../../helpers/load-area'
 
 import {

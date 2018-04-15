@@ -1,13 +1,12 @@
 // @flow
 
+import {db} from './db'
 import groupBy from 'lodash/groupBy'
 import filter from 'lodash/filter'
 import forEach from 'lodash/forEach'
 import fromPairs from 'lodash/fromPairs'
 import sortBy from 'lodash/sortBy'
 import map from 'lodash/map'
-
-import db from '@gob/web-database'
 
 type AreaOfStudy = {
     name: string,

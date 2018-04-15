@@ -1,4 +1,4 @@
-import db from '@gob/web-database'
+import {db} from './db'
 import {buildQueryFromString} from '@gob/search-queries'
 import compact from 'lodash/compact'
 import filter from 'lodash/filter'

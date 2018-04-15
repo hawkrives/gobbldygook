@@ -3,7 +3,7 @@
 
 jest.mock('@gob/web-database')
 
-import db from '@gob/web-database'
+import {db} from '../db'
 import storeData, {storeArea, storeCourses} from '../store-data'
 
 import {mockArea} from './area.support'

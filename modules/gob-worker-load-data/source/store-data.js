@@ -6,7 +6,7 @@ import present from 'present'
 import debug from 'debug'
 import prepareCourse from './lib-prepare-course'
 import {quotaExceededError} from './lib-dispatch'
-import db from '@gob/web-database'
+import {db} from './db'
 import type {InfoFileTypeEnum} from './types'
 const coursesLog = debug('worker:load-data:store-data:courses')
 const areasLog = debug('worker:load-data:store-data:areas')

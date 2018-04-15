@@ -1,6 +1,6 @@
 // @flow
 
-import db from '@gob/web-database'
+import {db} from './db'
 import debug from 'debug'
 import getCacheStoreName from './get-cache-store-name'
 import type {InfoFileTypeEnum} from './types'

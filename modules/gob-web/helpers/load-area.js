@@ -1,5 +1,5 @@
 // @flow
-import db from '@gob/web-database'
+import {db} from './db'
 import {enhanceHanson} from '@gob/hanson-format'
 import some from 'lodash/some'
 import maxBy from 'lodash/maxBy'
@@ -32,7 +32,6 @@ type AreaQueryType = {
     source: string,
     isCustom: string,
 }
-;[]
 
 const baseUrl = 'https://hawkrives.github.io/gobbldygook-area-data'
 const networkCache = Object.create(null)
