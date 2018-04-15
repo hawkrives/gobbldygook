@@ -185,9 +185,7 @@ function config() {
         )
         plugins.push(
             new ExtractTextPlugin({
-                filename: isDevelopment
-                    ? 'app.css'
-                    : 'app.[contenthash].css',
+                filename: isDevelopment ? 'app.css' : 'app.[contenthash].css',
                 allChunks: true,
             })
         )

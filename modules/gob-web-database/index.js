@@ -18,8 +18,10 @@ if (typeof window !== 'undefined') {
     window.deleteDatabase = () => {
         const DBDeleteRequest = window.indexedDB.deleteDatabase('gobbldygook')
         //log('Commencing database deletion')
-        DBDeleteRequest.onerror = () => console.error('Error deleting database.')
-        DBDeleteRequest.onsuccess = () => console.info('Database deleted successfully')
+        DBDeleteRequest.onerror = () =>
+            console.error('Error deleting database.')
+        DBDeleteRequest.onsuccess = () =>
+            console.info('Database deleted successfully')
     }
 
     window.eraseStorage = () => {
